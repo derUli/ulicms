@@ -251,6 +251,5 @@ background-color:black;
 <script src="codemirror/mode/css/css.js" type="text/javascript"></script>
 <title>UliCMS | Administrationsbereich</title>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="ckfinder/ckfinder.js"></script>
 </head>
 <body>

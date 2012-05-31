@@ -45,8 +45,12 @@ else if(empty($_GET["edit"])){
 		case "php":
 		echo "application/x-httpd-php";
 		break;
+		break;
 		case "css":
 		echo "text/css";
+		break;
+		case "txt":
+		echo "application/x-httpd-php";
 		break;
 		}
 		?>",
