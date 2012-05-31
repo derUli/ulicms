@@ -299,13 +299,13 @@ function news(){
 	$query=mysql_query("SELECT * FROM ".tbname("news")." WHERE active=1 ORDER BY date DESC LIMIT $max",$connection);
 	while($row=mysql_fetch_object($query)){
 		$out=$news_template;
-		$row->content = replaceShortcodesWithModules($row->content);
+		$content = replaceShortcodesWithModules($row->content);
 		$query2=mysql_query("SELECT * FROM ".tbname("admins")." WHERE id=".$row->autor);
 		$result2=mysql_fetch_object($query2);
 		$out=str_replace("{datum}",date(getconfig("date_format"),$row->date),$out);
 		$out=str_replace("{titel}",$row->title,$out);
 		$out=str_replace("{id}",$row->id,$out);
-		$out=str_replace("{text}",$row->content,$out);
+		$out=str_replace("{text}",$content,$out);
 		$out=str_replace("{autor}",$result2->firstname." ".$result2->lastname,$out);
 		echo $out;
 	}

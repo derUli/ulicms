@@ -46,7 +46,7 @@ function kontaktformular_render(){
 		if(@mail(env("email"),$betreff,$mailtext,$headers)){
 			return "<p class='contactform-success'>Vielen Dank für Ihre Email.<br/>Wir werden diese schnellstmöglich beantworten.</p>";
 		}else{
-			return "<p class='contactform-error'>Aufgrund technischer Probleme konnte Ihre Email nicht abgeschickt werden. Bitte wenden Sie sich direkt an uns.</p>";
+			return "<p class='contactform-error'>Aufgrund technischer Probleme konnte Ihre Email nicht abgeschickt werden.<br/>Bitte wenden Sie sich direkt an uns.</p>";
 		}
 
 
