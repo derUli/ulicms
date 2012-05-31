@@ -9,8 +9,7 @@ require_once "api.php";
 
 
 
-session_start();
-$_COOKIE[session_name()] = session_id();
+
 
 
 
