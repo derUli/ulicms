@@ -1,20 +1,20 @@
 ﻿<?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=50){
 
-$query=mysql_query("SELECT * FROM ".tbname("settings")." ORDER BY name",$connection);
-$settings=Array();
-while($row=mysql_fetch_object($query)){
+	$query=mysql_query("SELECT * FROM ".tbname("settings")." ORDER BY name",$connection);
+	$settings=Array();
+	while($row=mysql_fetch_object($query)){
+		
+		$settings[$row->name]=$row->value;
 
-$settings[$row->name]=$row->value;
+	}
 
-}
+	$query2 = mysql_query("SELECT * FROM ".tbname("content"). " ORDER BY systemname");
+	$pages = Array();
 
-$query2 = mysql_query("SELECT * FROM ".tbname("content"). " ORDER BY systemname");
-$pages = Array();
-
-while($row = mysql_fetch_object($query2)){
-array_push($pages, $row->systemname);
-}
+	while($row = mysql_fetch_object($query2)){
+		array_push($pages, $row->systemname);
+	}
 ?>
 
 <h2>Einstellungen</h2>
@@ -115,9 +115,9 @@ Facebook nutzen, die Kommentare moderieren k&ouml;nnen">Facebook-ID:</strong></t
 <td><input type="text" name="facebook_id" value="<?php echo $settings["facebook_id"];?>" size="35">
 </tr>
 <tr>
-<td><strong data-tooltip="Der Disqus-Identifier wird ben&ouml;tigt, damit Sie Sie 
+<td><strong data-tooltip="Der Disqus-Shortname wird ben&ouml;tigt, damit Sie Sie 
 die Kommentarfunktion von disqus verwenden k&ouml;nnen.
-Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Identifier:</strong></td>
+Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</strong></td>
 <td><input type="text" name="disqus_id" value="<?php echo $settings["disqus_id"];?>" size="35">
 </tr>
 <tr>
@@ -133,7 +133,7 @@ Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Identifier:</
 <?php 
 }
 else{
-noperms();
+	noperms();
 }
 
 ?>

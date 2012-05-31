@@ -19,64 +19,67 @@ echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' a
 }
 
 
+
+
+
 function year(){
-echo date("Y");
+	echo date("Y");
 }
 
 function homepage_owner(){
-print_env("homepage_owner");
+	print_env("homepage_owner");
 }
 
 
 function comments(){
-$status=check_status();
-if($status != "200 OK"){
-return;
-}
+	$status=check_status();
+	if($status != "200 OK"){
+		return;
+	}
 
-$connection=MYSQL_CONNECTION;
-
-
-$ipage=mysql_real_escape_string($_GET["seite"]);
-$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'", $connection);
-$dataset = mysql_fetch_array($query);
+	$connection=MYSQL_CONNECTION;
 
 
-if($dataset["systemname"]=="impressum" || $dataset["systemname"] == "kontakt"){
-return;
-}
-
-if(getconfig("comment_mode") == "off"){
-return true;
-}
-
-$mode = getconfig("comment_mode");
+	$ipage=mysql_real_escape_string($_GET["seite"]);
+	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'", $connection);
+	$dataset = mysql_fetch_array($query);
 
 
-echo "<div class='ulicms_comments'>";
-if($dataset["comments_enabled"] == 0){
-if(!getconfig("hide_comments_are_closed")){
-echo "<h2>Kommentare</h2>";
-echo "<p>Kommentare sind deaktiviert</p>";
-}
-}
-else if($mode == "facebook"){
-require_once "comments/facebook.php";
-}
-else if($mode == "off"){
-echo "<h2>Kommentare</h2>";
-echo "<p>Kommentare sind deaktiviert</p>";
-}
-else if($mode == "disqus" && getconfig("disqus_id") != ""){
-require_once "comments/disqus.php";
-}
-else{
-echo "<p>Interner Fehler.<br/><br/>Eventuell ist die ID f&uuml;r das Kommentarsystem nicht richtig gesetzt?</p>";
-}
+	if($dataset["systemname"]=="impressum" || $dataset["systemname"] == "kontakt"){
+		return;
+	}
+	
+	if(getconfig("comment_mode") == "off"){
+		return true;
+	}
 
-echo "</div>";
+	$mode = getconfig("comment_mode");
 
-}
+
+	echo "<div class='ulicms_comments'>";
+		if($dataset["comments_enabled"] == 0){
+			if(!getconfig("hide_comments_are_closed")){
+			echo "<h2>Kommentare</h2>";
+			echo "<p>Kommentare sind deaktiviert</p>";
+			}
+		}
+		else if($mode == "facebook"){
+			require_once "comments/facebook.php";
+		}
+		else if($mode == "off"){
+			echo "<h2>Kommentare</h2>";
+			echo "<p>Kommentare sind deaktiviert</p>";
+		}
+		else if($mode == "disqus" && getconfig("disqus_id") != ""){
+			require_once "comments/disqus.php";
+		}
+		else{
+			echo "<p>Interner Fehler.<br/><br/>Eventuell ist die ID f&uuml;r das Kommentarsystem nicht richtig gesetzt?</p>";
+		}
+
+		echo "</div>";
+
+		}
 
 
 
@@ -131,6 +134,8 @@ return false;
 
 while($row=mysql_fetch_object($query)){
 
+$row->content = replaceShortcodesWithModules($row->content);
+
 echo $row->content;
 
 //ModulsystemNoch nicht implementiert
@@ -146,7 +151,7 @@ if(is_file($modulepath)){
 include $modulepath;
 
 }else{
-echo "<p>Modul ".$row->module."konnte nicht geladen werden</p>";
+	echo "<p class="ulicms_error">Modul ".$row->module."konnte nicht geladen werden</p>";
 }
 
 }
@@ -341,8 +346,7 @@ function content(){
 		return false;
 	}
 
-	mysql_query("UPDATE ".tbname("content")." SET views = views + 1 WHERE systemname='".$_GET["seite"]."'")or die(mysql_error());
-	
+	mysql_query("UPDATE ".tbname("content")." SET views = views + 1 WHERE systemname='".$_GET["seite"]."'");
 	return import($_GET["seite"]);
 	
 }
@@ -356,7 +360,7 @@ function check_status(){
 	}
 	
 	$connection=MYSQL_CONNECTION;
-	$test=mysql_query("SELECT * FROM `".tbname("content")."` WHERE systemname='".mysql_real_escape_string($_GET["seite"])."'",$connection);
+	$test=mysql_query("SELECT * FROM `".tbname("content")."` WHERE systemname='".mysql_real_escape_string($_GET["seite"])."'");
 	
 	if(mysql_num_rows($test)==0){
 		return "404 Not Found";

@@ -2,20 +2,97 @@
 
 // get a config variable
 function getconfig($key){
-$connection=MYSQL_CONNECTION;
-$ikey=mysql_real_escape_string($ikey);
-$query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'",$connection);
-if(mysql_num_rows($query)>0){
-while($row=mysql_fetch_object($query)){
-return $row->value;
+	$connection=MYSQL_CONNECTION;
+	$ikey=mysql_real_escape_string($ikey);
+	$query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'",$connection);
+	if(mysql_num_rows($query)>0){
+		while($row=mysql_fetch_object($query)){
+		return $row->value;
+		}
+	}
+	else{
+		return false;
+	}
 }
+
+function getModulePath($module){
+	// Frontend Directory
+	if(is_file("cms-config.php")){
+		$module_folder = "modules/";
+	}
+	// Backend Directory
+	else{
+		$module_folder = "../modules/";
+	}
+	$available_modules = Array();
+	return $module_folder.$module."/";
 }
-else{
-return false;
-}
+
+function getModuleMainFilePath($module){
+	return getModulePath($module).
+		$module."_main.php";
+		
 }
 
 
+
+function getAllModules(){
+	// Frontend Directory
+	if(is_file("cms-config.php")){
+		$module_folder = "modules/";
+	}
+	// Backend Directory
+	else{
+		$module_folder = "../modules/";
+	}
+	$available_modules = Array();
+	$directory_content = scandir($module_folder);
+	for($i=0;$i<count($directory_content);$i++){
+		$module_init_file=$module_folder.$directory_content[$i]."/".
+		$directory_content[$i]."_main.php";
+		
+		if($directory_content[$i]!=".." and $directory_content[$i]!="."){
+			if(is_file($module_init_file)){
+				array_push($available_modules, $directory_content[$i]);
+			}
+		}
+	}
+	return $available_modules;
+	
+}
+
+
+// replace Shortcodes with modules
+function replaceShortcodesWithModules($string){
+	$allModules = getAllModules();
+	for($i=0;$i<count($allModules);$i++){
+		$thisModule = $allModules[$i];
+		$stringToReplace = '[module="'.$thisModule.'"]';
+		
+		$module_mainfile_path = getModuleMainFilePath($thisModule);
+		
+		if(is_file($module_mainfile_path)){
+			require_once $module_mainfile_path;
+			if(function_exists($thisModule."_render")){
+				$html_output = call_user_func($thisModule."_render");
+			}
+			else{
+				$html_output = "<p class='ulicms_error'>Das Modul ".$thisModule.
+				" konnte nicht geladen werden.</p>";
+			}
+			
+		}
+		else{
+				$html_output = "<p class='ulicms_error'>Das Modul ".$thisModule.
+				" konnte nicht geladen werden.</p>";
+		}
+		
+		$string = str_replace($string, $stringToReplace, $html_output);
+	}
+	return $string;
+}
+
+// Get systemnames of all pages
 function getAllSystemNames(){
 	$query = mysql_query("SELECT * FROM `".tbname("content")."`");
 	$returnvalues = Array();
