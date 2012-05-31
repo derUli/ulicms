@@ -260,7 +260,7 @@ mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (11, 'max_news', '10'),
 (12, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
 (13, 'meta_description', 'Eine kurzer Beschreibungstext'),
-(14, 'frontpage', 'hallo_welt');");
+(14, 'frontpage', '');");
                                 
                    
                                                  

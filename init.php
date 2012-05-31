@@ -9,7 +9,8 @@ require_once "api.php";
 
 
 
-
+session_start();
+$_COOKIE[session_name()] = session_id();
 
 
 
@@ -23,8 +24,8 @@ require_once "api.php";
 
 
 function noperms(){
-echo "<p>Sie haben nicht die Berechtigung, um auf diese Seite zugreifen zu dürfen.<br/>Bitte loggen Sie sich als <u>admin</u> ein oder fragen Sie den Administrator der Webseite.</p>";
-return false;
+	echo "<p>Sie haben nicht die Berechtigung, um auf diese Seite zugreifen zu dürfen.<br/>Bitte loggen Sie sich als <u>admin</u> ein oder fragen Sie den Administrator der Webseite.</p>";
+	return false;
 }
 
 function startsWith($haystack,$needle,$case=true) {

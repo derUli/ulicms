@@ -1,5 +1,4 @@
 <?php
-
 require_once "init.php";
 global $connection;
 require_once "templating.php";
