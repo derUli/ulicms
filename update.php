@@ -6,6 +6,7 @@ require_once "init.php";
 $config = new config();
 $prefix = $config->mysql_prefix;
 
+// Nothing to do
 
 header("Location: admin/");
 
