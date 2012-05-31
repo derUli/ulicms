@@ -28,11 +28,13 @@ function kontaktformular_render(){
 		$fehler = "Das Spamschutz-Feld bitte leer lassen.";
 	}
 	
-	if($fehler==false){
+	
+	
+	if($fehler===false){
 		$headers="From: ".$_POST['emailadresse']."\nReply-To: ".$_POST['emailadresse']."\nContent-Type: text/plain; charset=UTF-8";
-		$betreff="Kontaktformular (".env("homepage_title").")";
+		$betreff="Kontaktformular (".getconfig("homepage_title").")";
 		$mailtext="--------------------------------------------------------\n".
-		"Kontaktformular (".env("homepage_title").")\n".
+		"Kontaktformular (".getconfig("homepage_title").")\n".
 		"--------------------------------------------------------\n".
 		"Vorname:      ".$_POST["vorname"]."\n".
 		"Nachname:     ".$_POST["nachname"]."\n".
@@ -42,8 +44,8 @@ function kontaktformular_render(){
 		"-----------------------------\n".
 		"Nachricht:\n\n".$_POST["nachricht"];
 	
-
-		if(@mail(env("email"),$betreff,$mailtext,$headers)){
+		
+		if(@mail(getconfig("email"),$betreff,$mailtext,$headers)){
 			return "<p class='contactform-success'>Vielen Dank für Ihre Email.<br/>Wir werden diese schnellstmöglich beantworten.</p>";
 		}else{
 			return "<p class='contactform-error'>Aufgrund technischer Probleme konnte Ihre Email nicht abgeschickt werden.<br/>Bitte wenden Sie sich direkt an uns.</p>";
@@ -57,7 +59,7 @@ function kontaktformular_render(){
 	
 	
 	}
-else{
+	else{
 
 
 	return '<form action="'.htmlspecialchars($_SERVER['REQUEST_URI']).'" method="post">
@@ -123,8 +125,6 @@ else{
 ';
 
 }
-
-
 
 	
 }
