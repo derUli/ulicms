@@ -65,9 +65,10 @@ function getAllModules(){
 // replace Shortcodes with modules
 function replaceShortcodesWithModules($string){
 	$allModules = getAllModules();
-	for($i=0;$i<count($allModules);$i++){
+	for($i=0;$i<=count($allModules);$i++){
 		$thisModule = $allModules[$i];
-		$stringToReplace = '[module="'.$thisModule.'"]';
+		$stringToReplace1 = '[module="'.$thisModule.'"]';
+		$stringToReplace2 = '[module=&quot;'.$thisModule.'&quot;]';
 		
 		$module_mainfile_path = getModuleMainFilePath($thisModule);
 		
@@ -87,7 +88,9 @@ function replaceShortcodesWithModules($string){
 				" konnte nicht geladen werden.</p>";
 		}
 		
-		$string = str_replace($string, $stringToReplace, $html_output);
+		$string = str_replace($stringToReplace1, $html_output, $string);
+		$string = str_replace($stringToReplace2, $html_output, $string);
+
 	}
 	return $string;
 }

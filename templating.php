@@ -1,18 +1,16 @@
 <?php
 
-$showed_banners = array();
-
-//displays a random unique banner from the database
 function random_banner(){
-$connection=MYSQL_CONNECTION;
-$query=mysql_query("SELECT * FROM ".tbname("banner")." ORDER BY RAND() LIMIT 1");
-if(mysql_num_rows($query)>0){
-while($row=mysql_fetch_object($query)){
-$title=$row->name;
-$link_url=$row->link_url;
-$image_url=$row->image_url;
-echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' alt='$title' border=0></a>";
-}
+	$connection=MYSQL_CONNECTION;
+	$query=mysql_query("SELECT * FROM ".tbname("banner")." ORDER BY RAND() LIMIT 1");
+	if(mysql_num_rows($query)>0){
+		while($row=mysql_fetch_object($query)){
+
+			$title=$row->name;
+			$link_url=$row->link_url;
+			$image_url=$row->image_url;
+			echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' alt='$title' border=0></a>";
+	}
 
 }
 
@@ -117,47 +115,25 @@ function title($ipage=null){
 
 //import and print a page();
 function import($ipage){
-$connection=MYSQL_CONNECTION;
-$ipage=mysql_real_escape_string($ipage);
-if($ipage==""){
-$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE active=1 ORDER BY id LIMIT 1",$connection);
+	$connection=MYSQL_CONNECTION;
+	$ipage=mysql_real_escape_string($ipage);
+	if($ipage==""){
+		$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE active=1 ORDER BY id LIMIT 1",$connection);
+	
+	}
+	else{
+		$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage' AND active=1",$connection);
+	}
 
-}
-else{
-$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage' AND active=1",$connection);
-}
+	if(mysql_num_rows($query)==0){
+		return false;
+	}else{
 
-if(mysql_num_rows($query)==0){
-return false;
-}else
-{
-
-while($row=mysql_fetch_object($query)){
-
-$row->content = replaceShortcodesWithModules($row->content);
-
-echo $row->content;
-
-//ModulsystemNoch nicht implementiert
-/*if($row->module == "content"){
-echo $row->content;
-}
-else if($row->module == "news"){
-news();
-}
-else{
-$modulepath = "templates/".$row->module.".php";
-if(is_file($modulepath)){
-include $modulepath;
-
-}else{
-	echo "<p class="ulicms_error">Modul ".$row->module."konnte nicht geladen werden</p>";
-}
-
-}
-*/
-
-return true;
+	while($row=mysql_fetch_object($query)){
+	
+		$row->content = replaceShortcodesWithModules($row->content);
+		echo $row->content;
+		return true;
 }
 
 }
@@ -323,6 +299,7 @@ function news(){
 	$query=mysql_query("SELECT * FROM ".tbname("news")." WHERE active=1 ORDER BY date DESC LIMIT $max",$connection);
 	while($row=mysql_fetch_object($query)){
 		$out=$news_template;
+		$row->content = replaceShortcodesWithModules($row->content);
 		$query2=mysql_query("SELECT * FROM ".tbname("admins")." WHERE id=".$row->autor);
 		$result2=mysql_fetch_object($query2);
 		$out=str_replace("{datum}",date(getconfig("date_format"),$row->date),$out);
