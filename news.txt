@@ -1,0 +1,5 @@
+* CKEditor auf 3.6.3 aktualisiert
+* KCFinder auf Version 2.51 gebracht
+* Unterstützung von Untermenüpunkten
+* Stylesheet im Browser bearbeiten
+* Seitenliste um die Punkte Eltern, aktiviert und Kommentare erweitert

@@ -1,0 +1,10 @@
+* Modulsystem
+* Code refakturieren
+* Mehrsprachigkeit (Deutsch, Englisch)
+* interne Kommentarfunktion implementieren
+* Eigene 404 und 403 Fehlerseite
+* Galerien
+* Mehr als zwei Menüebenen
+* API erweitern
+* Registrierung für Gäste
+* Interner Bereich für Gäste
