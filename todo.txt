@@ -1,4 +1,3 @@
-* Modulsystem
 * Code refakturieren
 * Mehrsprachigkeit (Deutsch, Englisch)
 * interne Kommentarfunktion implementieren
@@ -8,3 +7,5 @@
 * API erweitern
 * Registrierung für Gäste
 * Interner Bereich für Gäste
+* Kontaktformular als Modul implementieren
+* Konfiguration für Module in den Adminbereich

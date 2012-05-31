@@ -25,7 +25,7 @@ if(!isset($_POST["step"])){
 <li>templates/news.txt</li>
 <li>templates/comments.php</li>
 <li>templates/maintenance.php</li>
-<li>content/</li>
+<li>templates/style.css</li>
 </ol>
 </p>
 <p></p>
@@ -313,10 +313,6 @@ NULL ,  'items_in_rss_feed',  '10')");
 
 
 
-mysql_query('INSERT INTO `'.$prefix.'content` (`id`, `notinfeed`, `systemname`, `title`, `content`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`) VALUES
-(16, 0, \'hallo_welt\', \'Hallo Welt\', \'<p>\r\n	Wenn Sie das Lesen k&ouml;nnen, war Ihre UliCMS Installation erfolgreich.<br />\r\n	Am Besten, Sie loggen sich in den Administrationsbereich ein und beginnen nun mit der Erstellung Ihrer Internetseite.</p>\r\n<p>\r\n	&nbsp;</p>\r\n\', 1, 1337975057, 1337975159, 1, 0, 0, 5, 1, \'\', \'top\', 0),
-(5, 1, \'impressum\', \'Impressum\', \'<p>\r\n	<b>Verantwortlich f&uuml;r diese Seite ist:</b><br />\r\n	Max Mustermann<br />\r\n	<br />\r\n	<b>Anschrift:</b><br />\r\n	Musterstrasse 1<br />\r\n	42877 Musterhausen<br />\r\n	Deutschland</p>\r\n<p>\r\n	<strong>Email:</strong> <a href="mailto:max@muster.de">max@muster.de</a></p>\r\n<p>\r\n	<strong>Telefonnummer: </strong>0123456789</p>\r\n<p>\r\n	&nbsp;</p>\r\n\', 1, 1296347129, 1337975251, 0, 0, 0, 10, 0, \'\', \'down\', 10),
-(6, 1, \'kontakt\', \'Kontaktformular\', \'<form action="mail.php" method="post">\r\n	<table border="0" cellpadding="1" cellspacing="1" style="width: 641px; height: 479px;">\r\n		<tbody>\r\n			<tr>\r\n				<td>\r\n					<strong>Ihr Vorname: </strong></td>\r\n				<td>\r\n					<input name="vorname" size="40" type="text" /></td>\r\n			</tr>\r\n			<tr>\r\n				<td>\r\n					<strong>Ihr Nachname:</strong></td>\r\n				<td>\r\n					<input name="nachname" size="40" type="text" /></td>\r\n			</tr>\r\n			<tr>\r\n				<td>\r\n					<strong>Ihre Emailadresse</strong>:</td>\r\n				<td>\r\n					<input name="emailadresse" size="40" type="text" /></td>\r\n			</tr>\r\n			<tr>\r\n				<td>\r\n					<strong>Ihr Betreff:</strong></td>\r\n				<td>\r\n					<input name="betreff" size="40" type="text" /></td>\r\n			</tr>\r\n			<tr>\r\n				<td>\r\n					<strong>Ihre Nachricht:</strong></td>\r\n				<td>\r\n					<p>\r\n						<textarea cols="60" name="nachricht" rows="20"></textarea></p>\r\n					<p>\r\n						&nbsp;</p>\r\n				</td>\r\n			</tr>\r\n			<tr>\r\n				<td>\r\n					<strong>Formular:</strong></td>\r\n				<td>\r\n					<input type="reset" value="Zurücksetzen" />&nbsp;&nbsp; <input type="submit" value="Jetzt absenden" /> <input name="absenden" type="hidden" value="absenden" /></td>\r\n			</tr>\r\n			<tr>\r\n				<td>\r\n					&nbsp;</td>\r\n				<td>\r\n					&nbsp;</td>\r\n			</tr>\r\n		</tbody>\r\n	</table>\r\n</form>\r\n<p>\r\n	&nbsp;</p>\r\n\', 1, 1296347750, 1337972920, 0, 0, 0, 0, 0, \'\', \'down\', 30);');
 
 mysql_query("UPDATE `".$prefix."content` SET parent='-'");
 
