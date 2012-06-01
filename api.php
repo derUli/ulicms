@@ -72,7 +72,7 @@ function replaceShortcodesWithModules($string){
 		
 		$module_mainfile_path = getModuleMainFilePath($thisModule);
 		
-		if(is_file($module_mainfile_path) and strstr($string, $stringToReplace1) and strstr($string, $stringToReplace2)){
+		if(is_file($module_mainfile_path) and (strstr($string, $stringToReplace1) or strstr($string, $stringToReplace2))){
 			require_once $module_mainfile_path;
 			if(function_exists($thisModule."_render")){
 				$html_output = call_user_func($thisModule."_render");
