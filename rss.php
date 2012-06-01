@@ -22,42 +22,40 @@ $itemcount = 10;
 }
 $items=mysql_query("SELECT * FROM ".tbname("content")." WHERE active=1 AND notinfeed = FALSE ORDER BY lastmodified DESC LIMIT $itemcount",$connection);
 while($row=mysql_fetch_object($items)){
-echo "<item>\n";
-echo "<title><![CDATA[".$row->title."]]></title>\n";
-$tmp=explode("\n",$row->content);
-$tmp2="";
-
-if(env("rss_item_count")){
-$rss_item_count = env("rss_item_count");
-}
-else{
-$rss_item_count = 10;
-}
-
-
+  echo "<item>\n";
+  echo "<title><![CDATA[".$row->title."]]></title>\n";
+  $tmp=explode("\n",$row->content);
+  $tmp2="";
+  
+  if(env("rss_item_count")){
+    $rss_item_count = env("rss_item_count");
+  }
+  else{
+    $rss_item_count = 10;
+  }
 
 
-for($i=0;$i<$rss_item_count;$i++){
-if(isset($tmp[$i])){
-$tmp2.=trim(strip_tags($tmp[$i]))."\n";
-}
-}
-$tmp2=trim($tmp2);
 
 
-$dir=dirname($_SERVER["SCRIPT_NAME"]);
-
-
-if(endsWith($dir,"/")==false){
-$dir.="/";
+  for($i=0;$i<$rss_item_count;$i++){
+    if(isset($tmp[$i])){
+       $tmp2.=trim(strip_tags($tmp[$i]))."\n";
+    }
 }
 
-echo "<description><![CDATA[".$tmp2."]]></description>\n";
-echo "<link>"."http://".$_SERVER["HTTP_HOST"].$dir.
-"?seite=".$row->systemname."</link>\n";
-echo "<pubDate>".date("r",$row->lastmodified)."</pubDate>\n";
+  $tmp2=trim($tmp2);
+  $dir=dirname($_SERVER["SCRIPT_NAME"]);
+  
+  if(endsWith($dir,"/")==false){
+    $dir.="/";
+  }
 
-echo "</item>\n";
+  echo "<description><![CDATA[".$tmp2."]]></description>\n";
+  echo "<link>"."http://".$_SERVER["HTTP_HOST"].$dir.
+  "?seite=".$row->systemname."</link>\n";
+  echo "<pubDate>".date("r",$row->lastmodified)."</pubDate>\n";
+
+  echo "</item>\n";
 }
 ?>
 </channel>
