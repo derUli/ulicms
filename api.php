@@ -128,14 +128,14 @@ function file_extension($filename) {
 
 //Set a configuration Variable;
 function setconfig($key, $value){
-$query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
+  $query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
 
-if(mysql_num_rows($query)>0){
+  if(mysql_num_rows($query)>0){
 
-mysql_query("UPDATE ".tbname("settings")." SET value='$value' WHERE name='$key'");
-}else{
-mysql_query("INSERT INTO ".tbname("setings"). " (name, value) VALUES('$key', '$value')");
-}
+    mysql_query("UPDATE ".tbname("settings")." SET value='$value' WHERE name='$key'");
+  }else{
+    mysql_query("INSERT INTO ".tbname("setings"). " (name, value) VALUES('$key', '$value')");
+  }
 
 }
 
@@ -144,15 +144,15 @@ mysql_query("INSERT INTO ".tbname("setings"). " (name, value) VALUES('$key', '$v
 
 
 function tbname($name){
-require_once "cms-config.php";
-$config=new config();
-return $config->mysql_prefix.$name;
+  require_once "cms-config.php";
+  $config=new config();
+  return $config->mysql_prefix.$name;
 }
 
 //returns version number of UliCMS Core
 function cms_version(){
-require_once "version.php";
-return $version;
+  require_once "version.php";
+  return $version;
 }
 
 
