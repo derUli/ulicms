@@ -40,6 +40,10 @@ require_once "inc/add_news.php";
 else if($_GET["action"]=="edit_news"){
 require_once "inc/edit_news.php";
 }
+else if($_GET["action"]=="contents"){
+require_once "inc/contents.php";
+}
+
 else if($_GET["action"]=="pages"){
 require_once "inc/pages.php";
 }
@@ -82,6 +86,8 @@ require_once "inc/key_edit.php";
 
 else if($_GET["action"]=="templates"){
 require_once "inc/templates.php";
+}else if($_GET["action"] == "media"){
+require_once "inc/media.php";
 }
 else if($_GET["action"]=="images" ||$_GET["action"]=="files" ||$_GET["action"]=="flash"){
 require_once "inc/filemanager.php";

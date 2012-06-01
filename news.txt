@@ -1,9 +1,1 @@
-* Modulsystem implementiert
-Module können über folgenden Code in die Seiten eingebunden werden:
-[module="name_des_moduls"]
-
-Für Module gibt es den Ordner "modules"
-Der Ordner muss wie das Modul heißen.
-Daran muss die Datei namemeinesmoduls_main.php enthalten sein.
-In dieser PHP-Datei muss die Funktion namemeinesmoduls_render() sein.
-Diese Funktion muss als Rückgabewert den HTML-Code haben.
+* Sessions werden auch im Frontend automatisch gestartet.

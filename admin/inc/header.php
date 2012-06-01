@@ -152,7 +152,7 @@ background-image:url(gfx/bg.jpg);
 background-repeat:none;
 background-attachment:fixed;
 font-family:arial;
-font-size:11pt;
+font-size:12pt;
 
 }
 
