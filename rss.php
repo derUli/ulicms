@@ -11,12 +11,12 @@ echo "http://".$_SERVER["HTTP_HOST"].dirname($_SERVER["SCRIPT_NAME"]);
 ?></link>
 <description>RSS Feed von <?php print_env("homepage_title");?></description>
 <language><?php print_env("language");?></language>
-<?php if(!env("hide_meta_generator")){
+<?php if(!getconfig("hide_meta_generator")){
 ?>
 <generator>UliCMS Release <?php echo cms_version();?></generator>
 <?php 
 }
-$itemcount = env("items_in_rss_feed");
+$itemcount = getconfig("items_in_rss_feed");
 if($itemcount == ""){
 $itemcount = 10;
 }
@@ -27,8 +27,8 @@ while($row=mysql_fetch_object($items)){
   $tmp=explode("\n",$row->content);
   $tmp2="";
   
-  if(env("rss_item_count")){
-    $rss_item_count = env("rss_item_count");
+  if(getconfig("rss_item_count")){
+    $rss_item_count = getconfig("rss_item_count");
   }
   else{
     $rss_item_count = 10;
