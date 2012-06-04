@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 if($_GET["action"]=="save_settings"&&isset($_POST["save_settings"])){
 setconfig("homepage_title", mysql_real_escape_string($_POST["homepage_title"]));
 setconfig("homepage_owner", mysql_real_escape_string($_POST["homepage_owner"]));
@@ -175,24 +175,17 @@ exit();
 if($_POST["add_admin"]=="add_admin" && $_SESSION["group"]>=50){
 
 $username=mysql_real_escape_string($_POST["admin_username"]);
-
 $lastname=mysql_real_escape_string($_POST["admin_lastname"]);
-
 $firstname=mysql_real_escape_string($_POST["admin_firstname"]);
-
 $email=mysql_real_escape_string($_POST["admin_email"]);
-
 $password=mysql_real_escape_string($_POST["admin_password"]);
-
 $query=mysql_query("INSERT INTO ".tbname("admins")." 
 (username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','$password',10)",$connection);
-
 $message="Hallo $firstname,\n\n".
-"Ein Administrator hat auf ".$_SERVER["SERVER_NAME"]." f�r dich ein neues Benutzerkonto angelegt.\n\n".
+"Ein Administrator hat auf ".$_SERVER["SERVER_NAME"]." für dich ein neues Benutzerkonto angelegt.\n\n".
 "Die Zugangsdaten lauten:\n\n".
 "Benutzername: $username\n".
 "Passwort: $password\n";
-
 $header="From: ".env("email")."\n".
 "Content-type: text/plain; charset=utf-8";
 
@@ -218,8 +211,8 @@ if($_POST["edit_page"]=="edit_page" && $_SESSION["group"]>=30){
 	$menu = mysql_real_escape_string($_POST["menu"]);
 	$position = (int)$_POST["position"];
 	$parent = mysql_real_escape_string($_POST["parent"]);
-
-	mysql_query("UPDATE ".tbname("content")." SET title='$page_title', parent='$parent', content='$page_content', active=$activated, lastmodified=".time().", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position WHERE systemname='$system_title'",$connection);
+	$user = $_SESSION["login_id"];
+	mysql_query("UPDATE ".tbname("content")." SET title='$page_title', parent='$parent', content='$page_content', active=$activated, lastmodified=".time().", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user WHERE systemname='$system_title'",$connection);
 
 
 header("Location: index.php?action=pages");

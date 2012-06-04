@@ -202,10 +202,6 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."news` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;");
 
-mysql_query("INSERT INTO `".$prefix."news` (`id`, `title`, `content`, `date`, `active`, `autor`) VALUES 
-(NULL, 'Neue Homepage Online', '<p>Ab heute sind wir mit neuer Homepage online.</p>\r\n', ".time().", 1, 1);");
-
-
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

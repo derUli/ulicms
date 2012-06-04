@@ -10,7 +10,7 @@ $admins_query = mysql_query("SELECT * FROM ".tbname("admins"));
 $admins = Array();
 
 while($row = mysql_fetch_object($admins_query)){
-$admins[$row->id] = $row->username;
+	$admins[$row->id] = $row->username;
 }
 
 ?>
