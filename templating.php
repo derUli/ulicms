@@ -57,7 +57,6 @@ function comments(){
 	echo "<div class='ulicms_comments'>";
 		if($dataset["comments_enabled"] == 0){
 			if(!getconfig("hide_comments_are_closed")){
-			echo "<h2>Kommentare</h2>";
 			echo "<p>Kommentare sind deaktiviert</p>";
 			}
 		}
@@ -65,7 +64,6 @@ function comments(){
 			require_once "comments/facebook.php";
 		}
 		else if($mode == "off"){
-			echo "<h2>Kommentare</h2>";
 			echo "<p>Kommentare sind deaktiviert</p>";
 		}
 		else if($mode == "disqus" && getconfig("disqus_id") != ""){
