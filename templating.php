@@ -140,29 +140,29 @@ function import($ipage){
 
 
 function motto(){
-print_env("motto");
+  print_env("motto");
 }
 
 
 function get_requested_pagename(){
-$value = mysql_real_escape_string($_GET["seite"]);
-if($value == ""){
-$value = getconfig("frontpage");
-}
-return $value;
+  $value = mysql_real_escape_string($_GET["seite"]);
+  if($value == ""){
+    $value = getconfig("frontpage");
+  }
+  return $value;
 }
 
 function is_frontpage(){
-return get_requested_pagename() === getconfig("frontpage");
+  return get_requested_pagename() === getconfig("frontpage");
 }
 
 
 function is_404(){
-return(check_status("404 Not Found"));
+  return(check_status("404 Not Found"));
 }
 
 function is_403(){
-return(check_status("404 Forbidden"));
+  return(check_status("404 Forbidden"));
 }
 
 function menu($name){
