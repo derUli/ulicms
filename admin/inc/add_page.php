@@ -2,7 +2,7 @@
 if($_SESSION["group"]>=30){
 
 ?>
-<form name="newpageform"action="index.php?action=pages" method="post">
+<form name="newpageform" action="index.php?action=pages" method="post">
 <input type="hidden" name="add_page" value="add_page">
 <strong data-tooltip="Dieser Name wird für die Adresse benötigt.
 Er ist später nicht mehr änderbar.

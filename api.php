@@ -131,10 +131,11 @@ function setconfig($key, $value){
   $query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
 
   if(mysql_num_rows($query)>0){
-
+	
     mysql_query("UPDATE ".tbname("settings")." SET value='$value' WHERE name='$key'");
   }else{
-    mysql_query("INSERT INTO ".tbname("setings"). " (name, value) VALUES('$key', '$value')");
+  
+    mysql_query("INSERT INTO ".tbname("settings"). " (name, value) VALUES('$key', '$value')")or die(mysql_error());
   }
 
 }
