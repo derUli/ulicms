@@ -10,8 +10,10 @@
 <h1><?php homepage_title()?></h1>
 <span><?php motto()?></span>
 </div>
-<div class="menu">
+<div class="navcontainer">
+<div class="menu" id="navi">
 <?php menu("top");?>
+</div>
 </div>
 <div class="container">
 <div class="content">

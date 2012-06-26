@@ -17,15 +17,14 @@ border-width:2px;
 -webkit-border-radius: 10px;
 -moz-border-radius: 10px;
 border-radius: 10px;
-margin-top:0px;
 margin-left:0px;
 margin-right:0px;
-padding-top:5px;
-padding-bottom:10px;
+margin-bottom:15px;
+padding-top:10px;
+padding-bottom:0px;
 text-align:center;
 width:750px;
 height:200px;
-
 }
 
 
@@ -68,8 +67,7 @@ border-width:1px;
 -moz-border-radius: 10px;
 border-radius: 10px;
 background-color:#91bdbc;
-margin-top:10px;
-margin-bottom:10px;
+
 }
 
 .menu ul {
@@ -100,7 +98,6 @@ color:#045200;
 text-decoration:underline;
 font-size:14pt;
 font-weight:bold;
-
 }
 
 .news{
@@ -120,6 +117,7 @@ padding-right:30px;
 margin-left:1%;
 float:right;
 width:20%;
+margin-top:60px;
 }
 
 
@@ -138,6 +136,7 @@ padding-top:10px;
 padding-bottom:20px;
 padding-right:30px;
 width:60%;
+margin-top:60px;
 }
 
 
@@ -159,6 +158,43 @@ font-family:Balloon;
 .container{
 float:left;
 width: 100%;
-margin-bottom:30px;
+margin-bottom:20px;
+margin-top:5px;
 }
 
+#navi {
+position:absolute;
+width:97%;
+
+}
+
+
+#navi, #navi ul {
+    list-style-type:none;
+    margin:0px;
+    padding-top:5px;
+    padding-bottom:13px;
+   
+
+}
+
+#navi li {
+    width:128px;
+    float:left;
+}
+
+#navi li ul {
+    display:none;
+}
+
+#navi li:hover ul {
+    display:block;
+    margin-left:-20px;
+
+}
+
+#navcontainer{
+height:16px;
+position:relative;
+
+}
