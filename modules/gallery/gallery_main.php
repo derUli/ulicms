@@ -1,6 +1,7 @@
 <?php 
+// Image Gallery Plugin 0.1 for UliCMS 4.3
 
-
+// Main Function
 function gallery_render(){
 	$gallery_image_folder = "content/files/gallery/";
 	
@@ -14,6 +15,8 @@ function gallery_render(){
 	
 }
 
+
+// Output Single image
 function output_single($gallery_image_folder, $id){
 			$description_filename = $gallery_image_folder.$id.".txt";
 			if(is_file($description_filename)){
@@ -30,6 +33,8 @@ function output_single($gallery_image_folder, $id){
 	}
 
 
+	
+// Output All Images
 function output_all($gallery_image_folder){
 	if(getconfig("image_gallery_images_per_row") === false){
 		setconfig("image_gallery_images_per_row", '3');
@@ -99,7 +104,7 @@ function output_all($gallery_image_folder){
 }
 
 
-// Generate Thumbnails
+// Generate Thumbnails in Standard and Small Size
 function generateThumbnails($gallery_image_folder){
 	if(!file_exists($gallery_image_folder)){
 		mkdir($gallery_image_folder, 0777, true);
@@ -112,7 +117,7 @@ function generateThumbnails($gallery_image_folder){
 		
 		$exploded_filename = explode(".", $filename);
 		if(count($exploded_filename)>1)
-
+			
 			if($exploded_filename[1] == "jpg"){
 				
 				$thumbnail_filename = $gallery_image_folder.$exploded_filename[0].".thumb.jpg";
@@ -187,7 +192,7 @@ function generateBigImages($gallery_image_folder){
 
 
 
-
+// Resize image
 function resize_image($file, $target, $w, $h, $crop=FALSE) {
     list($width, $height) = getimagesize($file);
     $r = $width / $height;
