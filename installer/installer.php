@@ -43,7 +43,7 @@ if(!isset($_POST["step"])){
 <table border=1>
 <tr>
 <td>Servername:</td>
-<td><input name="servername"type="text" value="localhost"></td>
+<td><input name="servername" type="text" value="localhost"></td>
 </tr>
 <tr>
 <td>Loginname:</td>
@@ -80,7 +80,7 @@ echo "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werd
 @$select=mysql_select_db($_POST["datenbank"]);
 
 if($select==false){
-echo "<p>Die Datenbank \"".htmlspecialchars($_POST["datenbank"])."\" Konnte nicht geöffnet werden.<br/>Eventuell müssen Sie die Datenbank vorher anlegen.</p>";
+echo "<p>Die Datenbank \"".htmlspecialchars($_POST["datenbank"])."\" konnte nicht geöffnet werden.<br/>Eventuell müssen Sie die Datenbank vorher anlegen.</p>";
 }else{
 $_SESSION["mysql"]=array();
 $_SESSION["mysql"]["server"]=$_POST["servername"];
@@ -136,7 +136,7 @@ $_SESSION["mysql"]["prefix"]=$_POST["prefix"];
 </tr>
 <tr>
 <td>Ihr Passwort:</td>
-<td><input name="passwort" type="text" value=""></td>
+<td><input name="passwort" type="password" value=""></td>
 </tr>
 </table>
 <p><input type="submit" value="Installation starten"></p>
@@ -338,12 +338,37 @@ var $mysql_prefix="'.$_SESSION["mysql"]["prefix"].'";
 ?>');
 fclose($handle);
 
+$message = "Hallo $zusammen!\n".
+"Auf ".$_SERVER["SERVER_NAME"]. " wurde UliCMS erfolgreich installiert\n\n".
+"Die Zugangsdaten lauten:\n".
+"Benutzername: admin\n".
+"Passwort: $passwort\n\n".
+"Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängst.";
+
+
+
+$success = @mail($email,
+"UliCMS Installation auf ".$_SERVER["SERVER_NAME"],
+$message, "From: $email\nContent-Type: text/plain; charset=UTF-8"
+);
+
 session_destroy();
+
+
+
 
 ?>
 <h2>Installation beendet</h2>
-<p>Die Installation von UliCMS wurde erfolgreich beendet.<br/>Bitte löschen Sie nun aus Sicherheitsgründen den Ordner "installer" vom Server. Sie können sich nun <a href="../admin/">hier</a> einloggen. Der Benutzername lautet <i>admin</i>.<br/></p>
+<p>Die Installation von UliCMS wurde erfolgreich beendet.<br/>Bitte löschen Sie nun aus Sicherheitsgründen den Ordner "installer" vom Server. Sie können sich nun <a href="../admin/">hier</a> einloggen. Der Benutzername lautet <i>admin</i>.<br/><br/>
+<?php if($success){?>
+<span style="color:green;">Die Zugangsdaten wurden Ihnen per Mail geschickt.
+</span>
 
+<?php } else{?>
+<span style="color:red;">Die Zugangsdaten konnten Ihnen wegen einem technischen Problem nicht per E-Mail geschickt werden.</span>
+<?php }?>
+<br/>
+</p>
 
 <?php }
 
