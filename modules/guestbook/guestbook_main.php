@@ -81,7 +81,7 @@ function guestbook_render(){
 					$_POST["gb_mail"]));
 					$gb_homepage = mysql_real_escape_string(htmlspecialchars(
 					$_POST["gb_homepage"]));
-    				$gb_content = mysql_real_escape_string(htmlspecialchars($_POST["gb_content"]));
+    				$gb_content = mysql_real_escape_string(nl2br(htmlspecialchars($_POST["gb_content"])));
 					$date = date("Y-m-d H:i:s");
 					$sql = "INSERT INTO ".tbname("guestbook_entries")." (name, ort, email, date, homepage, content)
 					VALUES ('$gb_name', '$gb_city', '$gb_mail', '$date', '$gb_homepage', '$gb_content');";		
@@ -135,8 +135,15 @@ function guestbook_list(){
 	
 	while($row=mysql_fetch_object($entries_query)){
 		$html_output .= "
-		<a href=\"".$row->homepage."\">Homepage von ".$row->name."</a>
-		<br/><br/>
+		";
+		
+		if(!empty($row->homepage)){
+			$html_output.="<a href=\"".$row->homepage."\">Homepage von ".$row->name."</a>
+			<br/><br/>";
+		}
+		
+		$html_output.="
+		
 		<small>".$row->date."</small>
 		<br/><br/>
 		".$row->content.
