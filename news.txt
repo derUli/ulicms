@@ -3,3 +3,4 @@
 * Standard Theme hat jetzt ein Drop Down Menü
   Seiten und News sowie Dateiverwaltung jetzt unter den
   Menüpunkten "Inhalte" und "Medien" zusammengefasst
+* Installer verschickt Email mit Zugangsdaten.
