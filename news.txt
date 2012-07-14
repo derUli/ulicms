@@ -4,3 +4,4 @@
 * Seiten und News sowie Dateiverwaltung jetzt unter den
   Menüpunkten "Inhalte" und "Medien" zusammengefasst
 * Installer verschickt Email mit Zugangsdaten.
+* Das Passwort wird bei der Installation jetzt als Sternchen angezeigt.

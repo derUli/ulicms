@@ -27,16 +27,23 @@ function endsWith($haystack,$needle,$case=true) {
 
 global $connection,$config;
 $config=new config();
+
+if($config->mysql_server == "" or $config->mysql_user == ""){
+  header("Location: installer/");
+}
+
 @$connection=mysql_connect($config->mysql_server,$config->mysql_user, $config->mysql_password);
 if($connection==false){
 	die("Fehler: Die Verbindung zum MySQL Server konnte nicht hergestellt werden.");
 }
 
 
+
+
 define("MYSQL_CONNECTION",$connection);
 $select=mysql_select_db($config->mysql_database);
 if(!$select){
-	die("Fehler: Die Datenbank ".$config->mysql_database." existiert nicht.");
+	die("Fehler: Die Datenbank ".$config->mysql_database." existiert nicht.\n");
 }
 
 

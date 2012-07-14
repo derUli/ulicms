@@ -225,6 +225,13 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;");
 
 
+mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
+created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent)
+VALUES (0, 'willkommen', 'Willkommen', 
+'<p>Herzlichen Glückwunsch!<br/>
+UliCMS wurde erfolgreich auf dieser Website installiert.</p>', 1, ".time().",
+1, 1, 0, 0, '', 'top', 0, '-')
+");
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -256,7 +263,7 @@ mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (11, 'max_news', '10'),
 (12, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
 (13, 'meta_description', 'Eine kurzer Beschreibungstext'),
-(14, 'frontpage', '');");
+(14, 'frontpage', 'willkommen');");
                                 
                    
                                                  
@@ -343,7 +350,7 @@ $message = "Hallo $zusammen!\n".
 "Die Zugangsdaten lauten:\n".
 "Benutzername: admin\n".
 "Passwort: $passwort\n\n".
-"Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängst.";
+"Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen.";
 
 
 

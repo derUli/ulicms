@@ -1,4 +1,4 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=50){
 
 	$query=mysql_query("SELECT * FROM ".tbname("settings")." ORDER BY name",$connection);
@@ -59,7 +59,8 @@ echo "<option value='".$pages[$i]."' selected='selected'>".$pages[$i]."</option>
 echo "<option value='".$pages[$i]."'>".$pages[$i]."</option>";
 }
 
-} ?>
+}
+?>
 </select>
 
 
