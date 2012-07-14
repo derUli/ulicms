@@ -1,6 +1,6 @@
 * Sessions werden auch im Frontend automatisch gestartet.
 * Tippfehler in setconfig() Funktion korrigiert
 * Standard Theme hat jetzt ein Drop Down Menü
-  Seiten und News sowie Dateiverwaltung jetzt unter den
+* Seiten und News sowie Dateiverwaltung jetzt unter den
   Menüpunkten "Inhalte" und "Medien" zusammengefasst
 * Installer verschickt Email mit Zugangsdaten.

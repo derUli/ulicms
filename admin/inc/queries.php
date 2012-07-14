@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 if($_GET["action"]=="save_settings"&&isset($_POST["save_settings"])){
 setconfig("homepage_title", mysql_real_escape_string($_POST["homepage_title"]));
 setconfig("homepage_owner", mysql_real_escape_string($_POST["homepage_owner"]));
