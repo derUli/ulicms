@@ -195,7 +195,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
-  `content` text NOT NULL,
+  `content` longtext NOT NULL,
   `date` bigint(20) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `autor` int(11) NOT NULL,
@@ -208,7 +208,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   `notinfeed` tinyint(1) NOT NULL,
   `systemname` varchar(300) NOT NULL,
   `title` varchar(600) NOT NULL,
-  `content` text NOT NULL,
+  `content` longtext NOT NULL,
   `active` tinyint(1) NOT NULL,
   `created` bigint(20) NOT NULL,
   `lastmodified` bigint(20) NOT NULL,
