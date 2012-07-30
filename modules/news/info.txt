@@ -1,0 +1,3 @@
+Mit diesem Modul kann man die News auf einer bestimmten Seite einfügen.
+Dazu einfach folgenden Code in die Seite einfügen:
+[module="news"]
