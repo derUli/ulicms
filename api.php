@@ -157,7 +157,7 @@ function cms_version(){
 }
 
 
-
+require_once "users_api.php";
 require_once "legacy.php";
 
 
