@@ -200,7 +200,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."news` (
   `active` tinyint(1) NOT NULL,
   `autor` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;");
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;");
 
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
@@ -232,6 +232,14 @@ VALUES (0, 'willkommen', 'Willkommen',
 UliCMS wurde erfolgreich auf dieser Website installiert.</p>', 1, ".time().",
 1, 1, 0, 0, '', 'top', 0, '-')
 ");
+
+mysql_query("ALTER TABLE `".$prefix."content` ADD `valid_from` DATE NOT NULL AFTER `parent` ,
+ADD `valid_to` DATE AFTER `valid_from` ,
+ADD `access` VARCHAR( 100 ) AFTER `valid_to`");
+
+mysql_query("UPDATE ".$prefix."content SET valid_from = NOW(), access = 'all'");
+
+
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

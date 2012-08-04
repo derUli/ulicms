@@ -115,12 +115,12 @@ function title($ipage=null){
 function import($ipage){
 	$connection=MYSQL_CONNECTION;
 	$ipage=mysql_real_escape_string($ipage);
-	if($ipage==""){
-		$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE active=1 ORDER BY id LIMIT 1",$connection);
+	if($ipage==""){                                                          
+		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
 	
 	}
 	else{
-		$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage' AND active=1",$connection);
+		$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
 	}
 
 	if(mysql_num_rows($query)==0){
@@ -261,11 +261,11 @@ function autor(){
 	$connection=MYSQL_CONNECTION;
 	$seite=$_GET["seite"];
 	if(empty($seite)){
-		$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE active=1 ORDER BY id LIMIT 1",$connection);
+		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
 		$result=mysql_fetch_object($query);
 		$seite=$result->systemname;
 	}
-	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE active=1 AND systemname='".mysql_real_escape_string($seite)."'",$connection);
+	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='".mysql_real_escape_string($seite)."'",$connection);
 	if(mysql_num_rows($query)<1){
 		return;
 	}
@@ -280,9 +280,11 @@ function autor(){
 	}
 	$datum=date(getconfig("date_format"),$result["created"]);
 	$out=getconfig("autor_text");
-	$out=str_replace("Vorname",$result2["firstname"],$out);
-	$out=str_replace("Nachname",$result2["lastname"],$out);
-	$out=str_replace("Datum",$result2["datum"],$out);
+	$out=str_replace("Vorname", $result2["firstname"],$out);
+	$out=str_replace("Nachname", $result2["lastname"],$out);       
+	$out=str_replace("Username", $result2["username"],$out);
+	$out=str_replace("Datum", $result2["datum"],$out);
+	if(!is_403() or $_SESSION["group"]>=20){}
 	echo $out;
 }
 
@@ -294,7 +296,7 @@ function news(){
 	}
 	$news_template=file_get_contents("templates/news.txt");
 	
-	$query=mysql_query("SELECT * FROM ".tbname("news")." WHERE active=1 ORDER BY date DESC LIMIT $max",$connection);
+	$query=mysql_query("SELECT * FROM ".tbname("news")." ORDER BY date DESC LIMIT $max",$connection);
 	while($row=mysql_fetch_object($query)){
 		$out=$news_template;
 		$content = replaceShortcodesWithModules($row->content);
@@ -341,7 +343,7 @@ function check_status(){
 		return "404 Not Found";
 	}else{
 		$test_array=mysql_fetch_array($test);
-		if($test_array["active"]==1){
+		if($test_array["active"]==1 or $_SESSION["group"] >= 20){
 			if($test_array["redirection"]!=""){
 				header("Location: ".$test_array["redirection"]);
 				exit();

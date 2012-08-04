@@ -1,4 +1,4 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=50){
 
 $query=mysql_query("SELECT * FROM ".tbname("admins")." ORDER BY id",$connection);

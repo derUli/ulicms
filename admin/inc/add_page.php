@@ -31,7 +31,7 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
               
 <br/><br/>
 
-<strong data-tooltip="Wenn das eine Unterseite werden sollte.">Eltern:</strong><br/>
+<strong data-tooltip="Wenn das eine Unterseite werden sollte.">Übergeordnete Seite:</strong><br/>
 <select name="parent" size=1>
 <option selected="selected" value="-">-</option>
 <?php foreach(getAllSystemNames() as $systemname){?>
