@@ -1,19 +1,19 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=30){
 
 ?>
 <form name="newpageform" action="index.php?action=pages" method="post">
 <input type="hidden" name="add_page" value="add_page">
 <strong data-tooltip="Dieser Name wird für die Adresse benötigt.
-Er ist später nicht mehr änderbar.
-Bitte Umlaute und Sonderzeichen vermeiden!">Systemname:</strong><br/>
+Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong><br/>
 <input type="text" style="width:300px;" name="system_title" value="">
 <br/><br/>
 
 <strong data-tooltip="Der Titel der Seite">Seitentitel:</strong><br/>
 <input type="text" style="width:300px;" name="page_title" value="" onkeyup="systemname_vorschlagen(this.value)">
 <br/><br/>
-<strong data-tooltip="Diese Seite soll auf eine andere URL weiterleiten. Komplette URL: mit http:// am Anfang!">Weiterleitung:</strong><br/>
+<strong data-tooltip="Soll diese Seite keinen eigenen Inhalt enthalten sondern stattdessen auf eine Externe Seite verlinken, tragen Sie die hier die URL ein.
+Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
 <input type="text" style="width:300px;" name="redirection" value="">
 <br/><br/>
 
@@ -79,7 +79,7 @@ document.newpageform.system_title.value=systemname
 
 <br/><br/>
 
-<strong data-tooltip="Soll diese Seite im RSS-Feed aufgenommen werden?">In RSS-Feed aufnehmen:</strong><br/>
+<strong data-tooltip="Wählen Sie diese Option aus bei zeitkritischen Inhalten, wie Aktuelles, Pressemitteilungen und bei Inhalten die sich häufig ändern.">In RSS-Feed aufnehmen:</strong><br/>
 <select name="notinfeed" size=1>
 <option value="0">Ja</option>
 <option value="1">Nein</option>

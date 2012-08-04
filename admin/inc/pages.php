@@ -1,4 +1,4 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
 
 if($_SESSION["group"]>=30){
 
@@ -68,9 +68,9 @@ echo "<td>Geschlossen</td>";
 }
 
 echo "<td><a href=\"../?seite=".$row->systemname."\" target=\"_blank\"><img src=\"gfx/preview.gif\">Anzeigen</a></td>";
-echo "<td>".'<a href="index.php?action=pages_edit&page='.$row->systemname.'"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
+echo "<td>".'<a href="index.php?action=pages_edit&page='.$row->id.'"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
 if($_SESSION["group"]>=40){
-echo "<td>".'<a href="index.php?action=pages_delete&page='.$row->systemname.'" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif">  Löschen</a></td>';
+echo "<td>".'<a href="index.php?action=pages_delete&page='.$row->id.'" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif">  Löschen</a></td>';
 }else{
 echo "<td><img src=\"gfx/delete.gif\"> Löschen</td>";
 }

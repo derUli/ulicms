@@ -1,20 +1,28 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=30){
 $page=mysql_real_escape_string($_GET["page"]);
-$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$page'");
+$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE id='$page'");
 while($row=mysql_fetch_object($query)){
 ?>
 
 <form action="index.php?action=pages" method="post">
 <input type="hidden" name="edit_page" value="edit_page">
-<input type="hidden" name="page_" value="<?php echo $row->systemname;?>">
+
+
+<input type="hidden" name="page_id" value="<?php echo $row->id?>">
+
+<strong data-tooltip="Dieser Name wird für die Adresse benötigt.
+Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong><br/>
+<input type="text" style="width:300px;" name="page_" value="<?php echo $row->systemname?>">
+<br/><br/>
 <strong data-tooltip="Hier können Sie den Titel der Seite ändern">Seitentitel:</strong><br/>
 <input type="text" style="width:300px;" name="page_title" value='<?php 
 echo htmlspecialchars($row->title);
 
 ?>'>
 <br/><br/>
-<strong data-tooltip="Diese Seite soll auf eine andere URL weiterleiten. Komplette URL: mit http:// am Anfang!">Weiterleitung</strong><br/>
+<strong data-tooltip="Soll diese Seite keinen eigenen Inhalt enthalten sondern stattdessen auf eine Externe Seite verlinken, tragen Sie die hier die URL ein.
+Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
 <input type="text" style="width:300px;" name="redirection" value="<?php echo $row->redirection;?>">
 
 <br/><br/>

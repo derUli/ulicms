@@ -21,7 +21,7 @@ if($_GET["action"]=="save_settings"&&isset($_POST["save_settings"])){
 
 if($_GET["action"]=="pages_delete" && $_SESSION["group"]>=40){
   $page=mysql_real_escape_string($_GET["page"]);
-  $query=mysql_query("DELETE FROM ".tbname("content")." WHERE systemname='$page'",$connection);
+  $query=mysql_query("DELETE FROM ".tbname("content")." WHERE id='$page'",$connection);
   header("Location: index.php?action=pages");
 exit();
 }
@@ -212,12 +212,14 @@ if($_POST["edit_page"]=="edit_page" && $_SESSION["group"]>=30){
 	$menu = mysql_real_escape_string($_POST["menu"]);
 	$position = (int)$_POST["position"];
 	$parent = mysql_real_escape_string($_POST["parent"]);
-	$user = $_SESSION["login_id"];
-	mysql_query("UPDATE ".tbname("content")." SET title='$page_title', parent='$parent', content='$page_content', active=$activated, lastmodified=".time().", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user WHERE systemname='$system_title'",$connection);
+	$user = $_SESSION["login_id"];     
+  $id = intval($_POST["page_id"]);
+  
+  	mysql_query("UPDATE ".tbname("content")." SET systemname = '$system_title' , title='$page_title', parent='$parent', content='$page_content', active=$activated, lastmodified=".time().", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user WHERE id=$id",$connection);
 
 
-header("Location: index.php?action=pages");
-exit();
+  header("Location: index.php?action=pages");
+  exit();
 
 }
 

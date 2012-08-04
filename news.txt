@@ -1,2 +1,4 @@
 * Registrierungsfunktion für Gäste implementiert
 * begonnen eine API für die Userverwaltung zu erstellen
+* Passwörter werden jetzt verschlüsselt in der Datenbank gespeichert
+* Systemnamen sind jetzt änderbar
