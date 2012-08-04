@@ -21,7 +21,7 @@
 <br><br>
 
 <?php 
-if(getconfig("visitors_can_register")=="on"){
+if(getconfig("visitors_can_register")=="on" or getconfig("visitors_can_register")=="1" or getconfig("visitors_can_register")== true){
 ?><a href="?register=register">Registrieren</a>
 <?php
 }
