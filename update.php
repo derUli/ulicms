@@ -21,6 +21,11 @@ ADD `access` VARCHAR( 100 ) NOT NULL AFTER `valid_to`");
 
 mysql_query("UPDATE ".$prefix."content SET valid_from = NOW(), access = 'all'");
 
+mysql_query("INSERT INTO `".$prefix."news` (`id`, `title`, `content`, `date`, `active`, `autor`) VALUES (NULL, 'UliCMS 4.5 Entwicklerversion', '<p>Das hier ist die aktuelle Entwicklerversion von UliCMS 4.5.<br/>
+Beachtet Sie bitte, dass diese Software noch nicht 100-prozentig fertig ist und noch Fehler enthalten kann.</p>
+<p>Lesen Sie bitte die news.txt und update.php um Informationen über diese Version zu bekommen.</p>', '1344084710', '1', '1');");
+
+
 header("Location: admin/");
 
 

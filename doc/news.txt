@@ -1,5 +1,5 @@
 * Registrierungsfunktion für Gäste implementiert
 * begonnen eine API für die Userverwaltung zu erstellen
 * Passwörter werden jetzt verschlüsselt in der Datenbank gespeichert
-* Systemnamen sind jetzt änderbar
+* Systemnamen/Permalinks sind jetzt änderbar
 * Vorschau für deaktivierte Seiten wird jetzt angezeigt wenn der Benutzer als Redakteur oder Admin eingeloggt ist

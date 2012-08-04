@@ -1,4 +1,4 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=50){
 
 $admin=intval($_GET["admin"]);
@@ -19,7 +19,7 @@ while($row=mysql_fetch_object($query)){
 <input type="text" style="width:300px;" name="admin_firstname" value="<?php echo $row->firstname;?>"><br/><br/>
 <strong>Email:</strong><br/>
 <input type="text" style="width:300px;" name="admin_email" value="<?php echo $row->email;?>"><br/><br/>
-<strong data-tooltip="Das Passwort des Administrators... Es wird bei der Eingabe im Klartext anzeigt.">Passwort:</strong><br/>
+<strong data-tooltip="Das Passwort des Administrators als MD5-Hash (Einweg-Verschlüsselung)...">Passwort:</strong><br/>
 <input type="text" style="width:300px;" name="admin_password" value="<?php echo $row->password;?>"><br/><br/>
 <strong data-tooltip="Was darf der Benutzer? Weitere Informationen dazu finden Sie in der Online-hilfe.">Benutzergruppe:</strong><br/>
 <select name="admin_rechte" size=1>
