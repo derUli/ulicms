@@ -7,7 +7,7 @@ if(isset($_GET["destroy"])){
 
 if(isset($_POST["login"])){
 	$user=mysql_real_escape_string($_POST["user"]);
-	$password=mysql_real_escape_string($_POST["password"]);
+	$password=md5($_POST["password"]);
 	$query=mysql_query("SELECT * FROM ".tbname("admins")." WHERE username='$user' AND password='$password'",$connection);
 	if(mysql_num_rows($query)>0){
 		$data=mysql_fetch_array($query);

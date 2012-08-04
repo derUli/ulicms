@@ -181,7 +181,7 @@ $passwort=mysql_real_escape_string($_POST["passwort"]);
 
 
 mysql_query("INSERT INTO `".$prefix."admins` (`id`, `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
-(1, 'admin', '".$nachname."', '".$vorname."', '".$email."', '".$passwort."',50);");
+(1, 'admin', '".$nachname."', '".$vorname."', '".$email."', '".md5($passwort)."',50);");
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -214,7 +214,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   `lastmodified` bigint(20) NOT NULL,
   `autor` int(11) NOT NULL,
   `category` int(11) NOT NULL,
-  `lastchangeby` int(11) NOT NULL,
+  `lastchangeby` int(11) NOT NULL,                 
   `views` int(11) NOT NULL,
   `comments_enabled` tinyint(1) NOT NULL,
   `redirection` varchar(2083) NOT NULL,
@@ -263,7 +263,8 @@ mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (11, 'max_news', '10'),
 (12, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
 (13, 'meta_description', 'Eine kurzer Beschreibungstext'),
-(14, 'frontpage', 'willkommen');");
+(14, 'visitors_can_register', 'on'),
+(15, 'frontpage', 'willkommen');");
                                 
                    
                                                  

@@ -18,4 +18,13 @@
 </tr>
 </table>
 </form>
+<br><br>
+
+<?php 
+if(getconfig("visitors_can_register")=="on"){
+?><a href="?register=register">Registrieren</a>
+<?php
+}
+?>
+<br>
 </div>

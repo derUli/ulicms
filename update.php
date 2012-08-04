@@ -8,6 +8,11 @@ $prefix = $config->mysql_prefix;
 
 // Nothing to do
 
+setconfig("visitors_can_register", "on");
+
+mysql_query("UPDATE ".$prefix."admins SET password = MD5(password)");
+
 header("Location: admin/");
+
 
 ?>

@@ -166,7 +166,7 @@ color:#2D4DFF;
 
 #login{
 background-color:#2DB2FF;
-height:200px;
+height:220px;
 width:350px;
 border:1px blue solid;
 padding-left:20px;
@@ -249,7 +249,7 @@ background-color:black;
 <link rel="stylesheet" href="codemirror/mode/clike/clike.css" type="text/css">
 <link rel="stylesheet" href="codemirror/mode/css/css.css" type="text/css">
 <script src="codemirror/mode/css/css.js" type="text/javascript"></script>
-<title>UliCMS | Administrationsbereich</title>
+<title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 </head>
 <body>

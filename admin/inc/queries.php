@@ -180,7 +180,7 @@ $firstname=mysql_real_escape_string($_POST["admin_firstname"]);
 $email=mysql_real_escape_string($_POST["admin_email"]);
 $password=mysql_real_escape_string($_POST["admin_password"]);
 $query=mysql_query("INSERT INTO ".tbname("admins")." 
-(username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','$password',10)",$connection);
+(username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','".md5($password)."',10)",$connection);
 $message="Hallo $firstname,\n\n".
 "Ein Administrator hat auf ".$_SERVER["SERVER_NAME"]." für dich ein neues Benutzerkonto angelegt.\n\n".
 "Die Zugangsdaten lauten:\n\n".
@@ -233,7 +233,7 @@ $firstname=mysql_real_escape_string($_POST["admin_firstname"]);
 $email=mysql_real_escape_string($_POST["admin_email"]);
 $password=mysql_real_escape_string($_POST["admin_password"]);
 $rechte=mysql_real_escape_string($_POST["admin_rechte"]);
-$query=mysql_query("UPDATE ".tbname("admins")." SET username='$username', `group`=$rechte, firstname='$firstname', lastname='$lastname', email='$email', password='$password' WHERE id=$id",$connection);
+$query=mysql_query("UPDATE ".tbname("admins")." SET username='$username', `group`=$rechte, firstname='$firstname', lastname='$lastname', email='$email', password='".$password."' WHERE id=$id",$connection);
 
 
 header("Location: index.php?action=admins");

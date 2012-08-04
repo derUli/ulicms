@@ -22,7 +22,12 @@ if(isset($_SESSION["ulicms_login"]))
 
 require_once "inc/header.php";
 if(!$eingeloggt){
-	require_once "inc/loginform.php";
+  if(isset($_GET["register"])){
+    require_once "inc/registerform.php";
+  }
+	else{
+    require_once "inc/loginform.php";
+  }
 }else{
 	require_once "inc/adminmenu.php";
 
