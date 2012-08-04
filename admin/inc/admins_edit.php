@@ -20,7 +20,8 @@ while($row=mysql_fetch_object($query)){
 <strong>Email:</strong><br/>
 <input type="text" style="width:300px;" name="admin_email" value="<?php echo $row->email;?>"><br/><br/>
 <strong data-tooltip="Das Passwort des Administrators als MD5-Hash (Einweg-Verschlüsselung)...">Passwort:</strong><br/>
-<input type="text" style="width:300px;" name="admin_password" value="<?php echo $row->password;?>"><br/><br/>
+<input type="text" style="width:300px;" name="admin_password" value="<?php echo $row->password;?>"><br/>
+<a href="http://www.md5hash.de/index.php" target="_blank">MD5-Hash Generator</a><br/><br/>
 <strong data-tooltip="Was darf der Benutzer? Weitere Informationen dazu finden Sie in der Online-hilfe.">Benutzergruppe:</strong><br/>
 <select name="admin_rechte" size=1>
 <option value="50" <?php if($row->group==50) echo "selected";?>>Admin</option>
