@@ -1,27 +1,28 @@
 <?php 
 if($_GET["action"]=="save_settings"&&isset($_POST["save_settings"])){
-setconfig("homepage_title", mysql_real_escape_string($_POST["homepage_title"]));
-setconfig("homepage_owner", mysql_real_escape_string($_POST["homepage_owner"]));
-setconfig("motto", mysql_real_escape_string($_POST["homepage_motto"]));
-setconfig("meta_keywords", mysql_real_escape_string($_POST["meta_keywords"]));
-setconfig("meta_description", mysql_real_escape_string($_POST["meta_description"]));
-setconfig("language", mysql_real_escape_string($_POST["language"]));
-setconfig("maintenance_mode", intval(isset($_POST["maintenance_mode"])));
-setconfig("email", mysql_real_escape_string($_POST["email"]));
-setconfig("max_news", (int)$_POST["max_news"]);
-setconfig("frontpage", mysql_real_escape_string($_POST["frontpage"]));
-setconfig("comment_mode", mysql_real_escape_string($_POST["comment_mode"]));
-setconfig("disqus_id", mysql_real_escape_string($_POST["disqus_id"]));
-setconfig("facebook_id", mysql_real_escape_string($_POST["facebook_id"]));
-setconfig("items_in_rss_feed", intval($_POST["items_in_rss_feed"]));
-header("Location: index.php?action=settings_simple");
-exit();
+  setconfig("homepage_title", mysql_real_escape_string($_POST["homepage_title"]));
+  setconfig("homepage_owner", mysql_real_escape_string($_POST["homepage_owner"]));
+  setconfig("motto", mysql_real_escape_string($_POST["homepage_motto"]));
+  setconfig("meta_keywords", mysql_real_escape_string($_POST["meta_keywords"]));
+  setconfig("meta_description", mysql_real_escape_string($_POST["meta_description"]));
+  setconfig("language", mysql_real_escape_string($_POST["language"]));
+  setconfig("visitors_can_register", intval(isset($_POST["visitors_can_register"])));
+  setconfig("maintenance_mode", intval(isset($_POST["maintenance_mode"])));
+  setconfig("email", mysql_real_escape_string($_POST["email"]));
+  setconfig("max_news", (int)$_POST["max_news"]);
+  setconfig("frontpage", mysql_real_escape_string($_POST["frontpage"]));
+  setconfig("comment_mode", mysql_real_escape_string($_POST["comment_mode"]));
+  setconfig("disqus_id", mysql_real_escape_string($_POST["disqus_id"]));
+  setconfig("facebook_id", mysql_real_escape_string($_POST["facebook_id"]));
+  setconfig("items_in_rss_feed", intval($_POST["items_in_rss_feed"]));
+  header("Location: index.php?action=settings_simple");
+  exit();
 }
 
 if($_GET["action"]=="pages_delete" && $_SESSION["group"]>=40){
-$page=mysql_real_escape_string($_GET["page"]);
-$query=mysql_query("DELETE FROM ".tbname("content")." WHERE systemname='$page'",$connection);
-header("Location: index.php?action=pages");
+  $page=mysql_real_escape_string($_GET["page"]);
+  $query=mysql_query("DELETE FROM ".tbname("content")." WHERE systemname='$page'",$connection);
+  header("Location: index.php?action=pages");
 exit();
 }
 

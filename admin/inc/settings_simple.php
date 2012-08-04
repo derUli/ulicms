@@ -83,6 +83,20 @@ echo " checked";
 ></strong></td>
 </tr>
 <tr>
+<td><strong data-tooltip="Dann können sich Gäste ein Benutzerkonto anlegen.">Gäste dürfen sich registrieren:</strong></td>
+<td><strong><input type="checkbox" name="visitors_can_register" <?php
+if(strtolower($settings["visitors_can_register"]=="on")||
+$settings["visitors_can_register"]=="1"||
+strtolower($settings["visitors_can_register"])=="true"){
+echo " checked";
+
+
+}
+
+?>
+></strong></td>
+</tr>
+<tr>
 <td></td>
 <td><strong data-tooltip="Zusätzliche Informationen die für Optimierung des Suchmaschinen-Rankings dienen...">Meta-Daten für Suchmaschinen:</strong></td>
 </tr>

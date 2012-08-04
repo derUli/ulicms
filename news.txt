@@ -1,7 +1,2 @@
-* Sessions werden auch im Frontend automatisch gestartet.
-* Tippfehler in setconfig() Funktion korrigiert
-* Standard Theme hat jetzt ein Drop Down Menü
-* Seiten und News sowie Dateiverwaltung jetzt unter den
-  Menüpunkten "Inhalte" und "Medien" zusammengefasst
-* Installer verschickt Email mit Zugangsdaten.
-* Das Passwort wird bei der Installation jetzt als Sternchen angezeigt.
+* Registrierungsfunktion für Gäste implementiert
+* begonnen eine API für die Userverwaltung zu erstellen
