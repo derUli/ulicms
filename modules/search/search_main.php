@@ -7,7 +7,7 @@ function search_render(){
 	
 	$html_output .= "<form class='search-form' action='./' method='get'>
 	<input type='hidden' name='seite' value='".get_requested_pagename()."'>
-	Suchbegriff: <input type='text' name='q' value=''> <input type='submit'>
+	Suchbegriff: <input type='text' name='q' value=''> <input type='submit' value='Suchen'>
 	</form>
 	";
 	
