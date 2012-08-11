@@ -67,7 +67,16 @@ document.newpageform.system_title.value=systemname
 <option value="1">aktiviert</option>
 <option value="0">deaktiviert</option>
 </select>
+<br/>
+<br/>
 
+
+<strong data-tooltip="Für welche Benutzergruppen soll diese Seite sichtbar sein?">Sichtbar für:</strong><br/>
+<select name="access" size=4 multiple>
+<option value="all" selected>Alle</option>
+<option value="registered">Registrierte Benutzer</option>
+<option value="admin">Admin</option>
+</select>
 
 
 <br/><br/>
