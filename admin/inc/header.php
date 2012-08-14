@@ -166,11 +166,11 @@ color:#2D4DFF;
 
 #login{
 background-color:#2DB2FF;
-height:220px;
 width:350px;
 border:1px blue solid;
 padding-left:20px;
 padding-right:20px;
+padding-bottom:20px;
 }
 
 #menu{
