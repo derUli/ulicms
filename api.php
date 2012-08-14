@@ -97,7 +97,7 @@ function replaceShortcodesWithModules($string){
 
 // Get systemnames of all pages
 function getAllSystemNames(){
-	$query = mysql_query("SELECT * FROM `".tbname("content")."`");
+	$query = mysql_query("SELECT * FROM `".tbname("content")."` ORDER BY systemname");
 	$returnvalues = Array();
 	while($row = mysql_fetch_object($query)){
 		array_push($returnvalues, $row->systemname);

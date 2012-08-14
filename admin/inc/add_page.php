@@ -27,7 +27,7 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 </select><br/> <br/>
 
 <strong data-tooltip="Die Position dieser Seite im Menü">Position:</strong><br/>
-<input type="text" name="position" value="<?php echo $row->position;?>">
+<input type="text" name="position" value="0">
               
 <br/><br/>
 
