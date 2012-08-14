@@ -12,6 +12,10 @@ if(isset($_POST["register_user"])){
     else if(user_exists($_POST["admin_username"])){
       echo "<p style='color:red;'>Dieser Benutzername ist leider schon vergeben. </p>";
     }
+	else if($_POST["admin_password"] != $_POST["admin_password_repeat"]){
+		echo "<p style='color:red;'>Die Wiederholung stimmt nicht mit dem Passwort überein.</p>";
+	}
+	
     else{
       adduser($_POST["admin_username"],
       $_POST["admin_lastname"],
@@ -38,6 +42,9 @@ if(isset($_POST["register_user"])){
 <input type="text" style="width:300px;" name="admin_email" value=""><br/><br/>
 <strong data-tooltip="Das Passwort des neuen Benutzers. Es wird Ihnen nach der Registrierung per E-Mail zugeschickt">Passwort:</strong><br/>
 <input type="password" style="width:300px;" name="admin_password" value=""><br/><br/>
+
+<strong>Passwort wiederholen:</strong><br/>
+<input type="password" style="width:300px;" name="admin_password_repeat" value=""><br/><br/>
 
 <br/>
 
