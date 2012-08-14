@@ -5,7 +5,7 @@ function guestbook_render(){
 
 		if(empty($_GET["action"])){
 			$action = "list";			
-			}		
+			}
 		else{
 			$action = $_GET["action"];
 			}
@@ -13,6 +13,16 @@ function guestbook_render(){
 			switch($action){
 			case "list":
 				$html_output = guestbook_list();
+			break;
+			case "delete":
+
+			if($_SESSION["group"] >= 40 and isset($_GET["delete"])){
+			
+				$delete = $_GET["delete"];
+				$delete = intval($delete);
+				mysql_query("DELETE FROM `".tbname("guestbook_entries")."` WHERE id = ".$delete);
+				$html_output = guestbook_list();
+			}
 			break;
 			case "add":
 			// validating guestbook entry				
@@ -99,13 +109,13 @@ function guestbook_render(){
 			break;
 			}
 			
-		$html_output.="<br/<br/><center><small>Powered by Guestbook Module for UliCMS</small></center>";
+		$html_output.="<br/<br/><br/><center><small>Powered by Guestbook Module for UliCMS</small></center>";
 		
 		return $html_output;
 }
 
 function guestbook_get_add_entry_link(){
-		return "<a href=\""."?seite=".get_requested_pagename()."&action=add"."\">Eintrag hinzufügen</a>";	
+		return "<a href=\""."?seite=".get_requested_pagename()."&action=add"."\">Eintrag hinzufügen</a><hr/>";	
 	}
 	
 	
@@ -128,26 +138,43 @@ function guestbook_list(){
 		}
 		
 	$html_output .= guestbook_get_add_entry_link();
-	$html_output .= "
-	<br/><br/>
-	<br/>";
+	$html_output .= "";
 	$entries_query = mysql_query("SELECT * FROM ".tbname("guestbook_entries")." ORDER by date DESC LIMIT $limit");
 	
 	while($row=mysql_fetch_object($entries_query)){
-		$html_output .= "
-		";
+
 		
 		if(!empty($row->homepage)){
-			$html_output.="<a href=\"".$row->homepage."\">Homepage von ".$row->name."</a>
-			<br/><br/>";
+			$html_output.="<a href=\"".$row->homepage."\">Homepage von ".$row->name."</a>";
+			
+			$html_output.= "<br/><br/>";
 		}
+		
+
+		
 		
 		$html_output.="
 		
-		<small>".$row->date."</small>
+		<small>".$row->date."</small>";
+		if($_SESSION["group"] >= 40){
+			$html_output.=' &nbsp;&nbsp;[<a href="?seite='.get_requested_pagename().
+			"&action=delete&delete=".
+			$row->id.'" onclick="return confirm(\'Diesen Eintrag löschen?\');">Löschen</a>]';
+			
+		}
+		
+		$html_output.="
 		<br/><br/>
 		".$row->content.
-		"<br/><br/><em>von ".$row->name." aus ".$row->ort."</em><hr/><br/>";
+		"<br/><br/><em>von ".$row->name." aus ".$row->ort;
+		
+		
+		if($_SESSION["group"] >= 30){
+			$html_output.= " (<a href='mailto:".$row->email."'>".$row->email."</a>)";
+		}
+		
+		$html_output .= "</em>";
+		$html_output .=  "<br/><br/><hr/>";
 		
 		$last = $row->id;
 		
@@ -157,7 +184,7 @@ function guestbook_list(){
 	if($limit < $last){
 			$new_limit = $limit + 10;
 			
-			$html_output .= "<a href='?seite=".get_requested_pagename()."&action=list&limit=$new_limit#gb_more'>"."Mehr</a>";
+			$html_output .= "<br/>br/><a href='?seite=".get_requested_pagename()."&action=list&limit=$new_limit#gb_more'>"."Mehr</a>";
 		}
 	
 	

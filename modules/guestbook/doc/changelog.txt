@@ -1,5 +1,8 @@
 Gästebuch für UliCMS Changelog
 
+0.0.3
+- Redakteure können die E-Mail Adressen einsehen und Beiträge löschen
+
 0.0.2
 
 - Umwandlung von Zeilenumbrüchen in <br/>-Tags hinzugefügt
