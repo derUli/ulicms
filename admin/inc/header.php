@@ -235,6 +235,7 @@ background-color:black;
 
 </style>
 
+<script type="text/javascript" src="md5.js"></script>
 <link rel="icon" href="gfx/favicon.ico" type="image/x-icon"> 
 <link rel="shortcut icon" href="gfx/favicon.ico" type="image/x-icon">
 
