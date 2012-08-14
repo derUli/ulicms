@@ -1,7 +1,7 @@
 <?php
 require_once "init.php";
 
-// Update Script von Version 4.3 auf Version 4.4
+// Update Script von Version 4.4 auf Version 4.5
 
 $config = new config();
 $prefix = $config->mysql_prefix;
