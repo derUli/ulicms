@@ -264,11 +264,12 @@ function autor(){
 		$query = mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
 		$result = mysql_fetch_object($query);
 		$seite = $result->systemname;
-		
-		if(check_status() != "200 OK"){
+	}
+	
+	if(check_status() != "200 OK"){
 			return;
 		}
-	}
+		
 	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='".mysql_real_escape_string($seite)."'",$connection);
 	if(mysql_num_rows($query)<1){
 		return;
