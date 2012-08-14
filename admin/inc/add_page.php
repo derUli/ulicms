@@ -72,7 +72,7 @@ document.newpageform.system_title.value=systemname
 
 
 <strong data-tooltip="Für welche Benutzergruppen soll diese Seite sichtbar sein?">Sichtbar für:</strong><br/>
-<select name="access" size=4 multiple>
+<select name="access[]" size=4 multiple>
 <option value="all" selected>Alle</option>
 <option value="registered">Registrierte Benutzer</option>
 <option value="admin">Admin</option>

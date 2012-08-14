@@ -62,7 +62,7 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 
 <strong data-tooltip="Für welche Benutzergruppen soll diese Seite sichtbar sein?">Sichtbar für:</strong><br/>
 <?php $access = explode(",", $row->access);?>
-<select name="access" size=4 multiple>
+<select name="access[]" size=4 multiple>
 <option value="all"<?php if(in_array("all", $access)) echo " selected"?>>Alle</option>
 <option value="registered"<?php if(in_array("registered", $access)) echo " selected"?>>Registrierte Benutzer</option>
 <option value="admin"<?php if(in_array("admin", $access)) echo " selected"?>>Admin</option>
