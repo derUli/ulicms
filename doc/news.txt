@@ -3,3 +3,5 @@
 * Passwörter werden jetzt verschlüsselt in der Datenbank gespeichert
 * Systemnamen/Permalinks sind jetzt änderbar
 * Vorschau für deaktivierte Seiten wird jetzt angezeigt wenn der Benutzer als Redakteur oder Admin eingeloggt ist
+* neues Feature: Seite nur für registrierte Nutzer zugänglich machen
+* Einige kleinere Verbesserungen

@@ -5,5 +5,4 @@
 * Galerien
 * Mehr als zwei Menüebenen
 * API erweitern
-* Interner Bereich für Gäste
 * Konfiguration für Module in den Adminbereich
