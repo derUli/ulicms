@@ -1,6 +1,6 @@
 <?php 
 if(getconfig("visitors_can_register")=="off")
-die("Diese Funktion ist deaktiviert");
+	die("Diese Funktion ist deaktiviert");
 
 $errors = false;
 if(isset($_POST["register_user"])){
@@ -36,8 +36,8 @@ if(isset($_POST["register_user"])){
 <input type="text" style="width:300px;" name="admin_firstname" value=""><br/><br/>
 <strong>Email:</strong><br/>
 <input type="text" style="width:300px;" name="admin_email" value=""><br/><br/>
-<strong data-tooltip="Das Passwort des neuen Benutzers. Es wird bei der Eingabe im Klartext angezeigt...">Passwort:</strong><br/>
-<input type="text" style="width:300px;" name="admin_password" value=""><br/><br/>
+<strong data-tooltip="Das Passwort des neuen Benutzers. Es wird Ihnen nach der Registrierung per E-Mail zugeschickt">Passwort:</strong><br/>
+<input type="password" style="width:300px;" name="admin_password" value=""><br/><br/>
 
 <br/>
 
