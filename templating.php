@@ -90,7 +90,7 @@ function title($ipage=null){
 		echo "Seite nicht gefunden";
 		return false;
 	}else if($status=="403 Forbidden"){
-		echo "Seite ist deaktiviert";
+		echo "Zugriff verweigert";
 	return false;
 	}
 	
@@ -261,9 +261,13 @@ function autor(){
 	$connection=MYSQL_CONNECTION;
 	$seite=$_GET["seite"];
 	if(empty($seite)){
-		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
-		$result=mysql_fetch_object($query);
-		$seite=$result->systemname;
+		$query = mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
+		$result = mysql_fetch_object($query);
+		$seite = $result->systemname;
+		
+		if(check_status() != "200 OK"){
+			return;
+		}
 	}
 	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='".mysql_real_escape_string($seite)."'",$connection);
 	if(mysql_num_rows($query)<1){
@@ -319,9 +323,10 @@ function content(){
 		echo "Die von Ihnen gew&uuml;nschte Seite existiert nicht.";
 		return false;
 	}else if($status=="403 Forbidden"){
-		echo "Die von Ihnen gew&uuml;nschte Seite ist deaktiviert.";
+		echo "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.";
 		return false;
 	}
+	
 
 	mysql_query("UPDATE ".tbname("content")." SET views = views + 1 WHERE systemname='".$_GET["seite"]."'");
 	return import($_GET["seite"]);
@@ -343,15 +348,42 @@ function check_status(){
 		return "404 Not Found";
 	}else{
 		$test_array=mysql_fetch_array($test);
+		
+		// Prüfe, ob der Nutzer die Berechtigung zum Zugriff auf die Seite hat.	
 		if($test_array["active"]==1 or $_SESSION["group"] >= 20){
+		
+			$access = explode(",",$test_array["access"]);
+			
+			$permitted = false;
+			
+			if(in_array("all", $access)){
+				$permitted = true;
+			}
+			if(in_array("admin", $access) and $_SESSION["group"] >= 50){
+				$permitted = true;
+			}
+			
+			if(in_array("registered", $access) and $_SESSION["group"] >= 10){
+				$permitted = true;
+			}
+		
+			if($permitted){
+		
 			if($test_array["redirection"]!=""){
 				header("Location: ".$test_array["redirection"]);
 				exit();
 			}
 			return "200 OK";
-		}else{
+			
+			}
+			else{
+				return "403 Forbidden";
+			}
+		}
+		else{
 			return "403 Forbidden";
 		}
+		
 	}
 
 }
