@@ -48,5 +48,5 @@ if(isset($_POST["register_user"])){
 
 <br/>
 
-<input type="submit" value="Datensatz hinzufügen">
+<input type="submit" value="Registrieren">
 </form>
