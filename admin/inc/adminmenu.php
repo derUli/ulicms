@@ -9,6 +9,11 @@
 <a href="index.php?action=admins">Administratoren</a> | 
 <a href="index.php?action=templates">Templates</a> | 
 <a href="index.php?action=settings_simple">Einstellungen</a> | 
+<?php 
+if(is_file("../update.php")){
+?>
+	<a href="index.php?action=system_update" style="color:red !important; font-size:1.3em;">Update</a> | 
+<?php }?>
 <a href="index.php?action=info">Info</a> | 
 <a href="index.php?destroy" onclick="return confirm('ausloggen?')">Logout</a>
 </div>
