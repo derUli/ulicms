@@ -23,27 +23,27 @@ if($_SESSION["group"]>=50){
 <table border=1>
 <tr>
 <td><strong data-tooltip="Der Name dieser Webpräsenz.">Titel der Homepage:</strong></td>
-<td><strong><input type="text" name="homepage_title" size=35 value="<?php echo $settings["homepage_title"];?>"></strong></td>
+<td><strong><input type="text" name="homepage_title" style="width:400px" value="<?php echo $settings["homepage_title"];?>"></strong></td>
 </tr>
 <tr>
 <td><strong data-tooltip="Eine kurze Beschreibung oder ein Slogan um was es auf dieser Webpräsenz geht.">Motto der Homepage:</strong></td>
-<td><strong><input type="text" name="homepage_motto" size=35 value="<?php echo $settings["motto"];?>"></strong></td>
+<td><strong><input type="text" name="homepage_motto" style="width:400px" value="<?php echo $settings["motto"];?>"></strong></td>
 </tr>
 <tr>
 <td><strong data-tooltip="Der Name des Inhabers dieser Webpräsenz...">Inhaber der Homepage:</strong></td>
-<td><strong><input type="text" name="homepage_owner" size=35 value="<?php echo $settings["homepage_owner"];?>"></strong></td>
+<td><strong><input type="text" name="homepage_owner" style="width:400px" value="<?php echo $settings["homepage_owner"];?>"></strong></td>
 </tr>
 <tr>
 <td><strong data-tooltip="An diese Adresse werden Emails über das Kontaktformular versandt...">Emailadresse des Inhabers:</strong></td>
-<td><strong><input type="text" name="email" size=35 value="<?php echo $settings["email"];?>"></strong></td>
+<td><strong><input type="text" name="email" style="width:400px" value="<?php echo $settings["email"];?>"></strong></td>
 </tr>
 <tr>
 <td><strong data-tooltip="Wie viele News sollen angezeigt werden?">Die letzten X News anzeigen:</strong></td>
-<td><strong><input type="text" name="max_news" size=35 value="<?php echo $settings["max_news"];?>"></strong></td>
+<td><strong><input type="text" name="max_news" style="width:400px" value="<?php echo $settings["max_news"];?>"></strong></td>
 </tr>
 <tr>
 <td><strong data-tooltip="Wie viele Einträge sollen im RSS-Feed angezeigt werden?">Anzahl der Einträge im RSS-Feed</strong></td>
-<td><input type="text" name="items_in_rss_feed" size=35 value="<?php echo $settings["items_in_rss_feed"];?>"></td>
+<td><input type="text" name="items_in_rss_feed" style="width:400px" value="<?php echo $settings["items_in_rss_feed"];?>"></td>
 </tr>
 <tr>
 <td>
@@ -51,7 +51,7 @@ if($_SESSION["group"]>=50){
 </td>
 <td>
 
-<select name="frontpage" size=1 style="width:100%;">
+<select name="frontpage" size=1 style="width:400px">
 <?php for($i=0;$i<count($pages);$i++){
 if($pages[$i] == $settings["frontpage"]){
 echo "<option value='".$pages[$i]."' selected='selected'>".$pages[$i]."</option>";
@@ -68,7 +68,7 @@ echo "<option value='".$pages[$i]."'>".$pages[$i]."</option>";
 </tr>
 <tr>
 <td><strong><a href="http://www.i18nguy.com/unicode/language-identifiers.html" target="_blank">Sprachcode</a></td>
-<td><strong><input type="text" name="language" size=35 value="<?php echo $settings["language"];?>"></strong></td>
+<td><strong><input type="text" name="language" style="width:400px" value="<?php echo $settings["language"];?>"></strong></td>
 </tr>
 <tr>
 <td><strong data-tooltip="Wenn Sie grundlegende Änderungen an Ihrer Webpräsenz vornehmen möchten, können Sie Ihre Seite solange für Besucher sperren und stattdessen eine Wartungsmeldung anzeigen. Diese können Sie in der Template maintenance.php anpassen.">Wartungsmodus aktiviert:</strong></td>
@@ -102,11 +102,11 @@ echo " checked";
 </tr>
 <tr>
 <td><strong data-tooltip="Stichwörter, die den Inhalt dieser Website beschreiben...">Keywords:</strong></td>
-<td><input type="text" name="meta_keywords" value="<?php echo $settings["meta_keywords"];?>" size="35">
+<td><input type="text" name="meta_keywords" value="<?php echo $settings["meta_keywords"];?>" style="width:400px">
 </tr>
 <tr>
 <td><strong data-tooltip="Eine kurze Beschreibung der Website....">Beschreibung:</strong></td>
-<td><input type="text" name="meta_description" value="<?php echo $settings["meta_description"];?>" size="35">
+<td><input type="text" name="meta_description" value="<?php echo $settings["meta_description"];?>" style="width:400px">
 </tr>
 <tr>
 <td></td>
@@ -127,13 +127,13 @@ UliCMS verf&uuml;gt &uuml;ber direkte Schnittstellen zu Facebook und Disqus">Kom
 <tr>
 <td><strong data-tooltip="Die Facebook-ID wird ben&ouml;tigt, damit Sie wenn Sie wenn Sie die Kommentarfunktion von
 Facebook nutzen, die Kommentare moderieren k&ouml;nnen">Facebook-ID:</strong></td>
-<td><input type="text" name="facebook_id" value="<?php echo $settings["facebook_id"];?>" size="35">
+<td><input type="text" name="facebook_id" value="<?php echo $settings["facebook_id"];?>" style="width:400px">
 </tr>
 <tr>
 <td><strong data-tooltip="Der Disqus-Shortname wird ben&ouml;tigt, damit Sie Sie 
 die Kommentarfunktion von disqus verwenden k&ouml;nnen.
 Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</strong></td>
-<td><input type="text" name="disqus_id" value="<?php echo $settings["disqus_id"];?>" size="35">
+<td><input type="text" name="disqus_id" value="<?php echo $settings["disqus_id"];?>" style="width:400px">
 </tr>
 <tr>
 <td>
