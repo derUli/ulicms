@@ -5,3 +5,7 @@
 * Vorschau für deaktivierte Seiten wird jetzt angezeigt wenn der Benutzer als Redakteur oder Admin eingeloggt ist
 * neues Feature: Seite nur für registrierte Nutzer zugänglich machen
 * Einige kleinere Verbesserungen
+* Update jetzt auch per Backend möglich
+  Patch per FTP-Hochladen.
+  Nun wird im Adminmenü der neue Menüpunkt "Update" angezeigt.
+  Draufklicken und den Anweisungen folgen.
