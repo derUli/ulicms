@@ -205,7 +205,7 @@ color:#000000;
 padding:10px 10px 10px 10px;
 margin-top:20px;
 border:1px blue solid;
-width:97%;
+width:98%;
 }
 
 

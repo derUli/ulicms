@@ -12,10 +12,10 @@ if($_SESSION["group"]>=30){
 <table border=1>
 <tr style="font-weight:bold;">
 <td style="width:40px;">--></td>
-<td>Systemname</td>
+<td>Permalink</td>
 <td>Menü</td>
 <td>Position</td>
-<td>Eltern</td>
+<td>Übergeordnet</td>
 <td>Aktiviert</td>
 <td>Kommentare</td>
 <td><span data-tooltip="Die Seite auf der Webpräsenz öffnen">Anzeigen</span></td>
