@@ -137,7 +137,7 @@ Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</s
 </tr>
 <tr>
 <td>
-<td><input type="reset" value="Zurücksetzen" onclick="return confirm('Wirklich zurücksetzen?<br/>Alle Änderungen gehen verloren.')" style="width:45%;"> <input type="submit" value="OK" style="width:45%;"></td>
+<td><input type="reset" value="Zurücksetzen" onclick="return confirm('Wirklich zurücksetzen?\nAlle Änderungen gehen verloren.')" style="width:45%;"> <input type="submit" value="OK" style="width:45%;"></td>
 </tr>
 </table>
 <input type="hidden" name="save_settings" value="save_settings">
