@@ -197,7 +197,7 @@ function intramail_post_outbox(){
     $message = explode("\n", $row->message);
     for($i=0;$i<count($message);$i++){
            $message[$i] = trim($message[$i]);
-         if(strlen($message[$i])>1){
+         if(strlen($message[$i])>0){
            $message[$i] = "> ". $message[$i];
            }
 
