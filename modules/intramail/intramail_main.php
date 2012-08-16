@@ -236,7 +236,7 @@ function intramail_new_mail($mail_to = '', $subject = '', $message = ''){
      "\" eine Nachricht geschickt:\n\n".
      strip_tags(str_replace("\\r\\n", "\n", $message))."\n\n".
      "Unter folgendem Link kannst du dich anmelden und die Mail beantworten:\n".
-     "http://".$_SERVER["HOST_NAME"];
+     "http://".$_SERVER["SERVER_NAME"];
      
 
      
