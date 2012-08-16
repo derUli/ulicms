@@ -257,10 +257,6 @@ VALUES (1, 'login', 'Anmelden',
 
 
 
-mysql_query("INSERT INTO `".$prefix."news` (`id`, `title`, `content`, `date`, `active`, `autor`) VALUES (NULL, 'UliCMS 4.5 Entwicklerversion', '<p>Das hier ist die aktuelle Entwicklerversion von UliCMS 4.5.<br/>
-Beachten Sie bitte, dass diese Software noch nicht 100-prozentig fertig ist und noch Fehler enthalten kann.</p>
-<p>Lesen Sie bitte die news.txt und update.php um Informationen über diese Version zu bekommen.</p>', '1344084710', '1', '1');");
-
 
 mysql_query("ALTER TABLE `".$prefix."content` ADD `valid_from` DATE NOT NULL AFTER `parent` ,
 ADD `valid_to` DATE AFTER `valid_from` ,
