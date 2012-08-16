@@ -1,25 +1,18 @@
 <?php
 require_once "init.php";
 
-// Update Script von Version 4.4 auf Version 4.5
+// Update Script von Version 4.5 auf Version 2012 R1
 
-$config = new config();
-$prefix = $config->mysql_prefix;
+//Create deleted_at row, for recycle bin
+mysql_query("ALTER TABLE `".$prefix."content` ADD `deleted_at` BIGINT NULL AFTER `access`"); 
 
-// Konfigurationsvariable setzen
-setconfig("visitors_can_register", "on");
-
-// Änderungen an der Datenbank durchführen
-mysql_query("UPDATE ".$prefix."admins SET password = MD5(password)");
-mysql_query("ALTER TABLE `".$prefix."content` CHANGE `content` `content` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ");
-mysql_query("ALTER TABLE `".$prefix."news` CHANGE `content` `content` LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL ");
-
-
-mysql_query("ALTER TABLE `".$prefix."content` ADD `valid_from` DATE NOT NULL AFTER `parent` ,
-ADD `valid_to` DATE NOT NULL AFTER `valid_from` ,
-ADD `access` VARCHAR( 100 ) NOT NULL AFTER `valid_to`");
-
-mysql_query("UPDATE ".$prefix."content SET valid_from = NOW(), access = 'all'");
+mysql_query("CREATE TABLE `".$prefix."backend_menu_structure` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`action` VARCHAR( 100 ) NOT NULL ,
+`label` VARCHAR( 100 ) NOT NULL ,
+`position` INT NOT NULL
+) ENGINE = MYISAM ;
+");
 
 @chmod("update.php", 0777);
 

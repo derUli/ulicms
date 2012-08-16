@@ -225,6 +225,10 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;");
 
 
+mysql_query("ALTER TABLE `".$prefix."content` ADD `deleted_at` BIGINT NULL AFTER `access`"); 
+
+
+
 mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
 created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
 VALUES (0, 'willkommen', 'Willkommen', 
@@ -348,6 +352,14 @@ NULL ,  'items_in_rss_feed',  '10')");
 
 
 
+
+mysql_query("CREATE TABLE `".$prefix."backend_menu_structure` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`action` VARCHAR( 100 ) NOT NULL ,
+`label` VARCHAR( 100 ) NOT NULL ,
+`position` INT NOT NULL
+) ENGINE = MYISAM ;
+");
 
 
 

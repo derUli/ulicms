@@ -76,6 +76,9 @@ else if($_GET["action"] == "admin_new"){
 else if($_GET["action"] == "admin_edit"){
 	require_once "inc/admins_edit.php";
 }
+else if($_GET["action"] == "settings_categories"){
+  require_once "inc/settings_categories.php";
+}
 else if($_GET["action"] == "settings"){
 	require_once "inc/settings.php";
 }

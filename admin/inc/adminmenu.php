@@ -5,10 +5,10 @@
 
 <a href="index.php?action=contents">Inhalte</a> | 
 <a href="index.php?action=media">Medien</a> |
-<a href="index.php?action=admins">Administratoren</a> | 
+<a href="index.php?action=admins">Benutzer</a> | 
 <a href="index.php?action=templates">Templates</a> |        
 <a href="index.php?action=modules">Module</a> | 
-<a href="index.php?action=settings_simple">Einstellungen</a> | 
+<a href="index.php?action=settings_categories">Einstellungen</a> | 
 <?php 
 if(is_file("../update.php") and $_SESSION["group"] >= 40){
 ?>
