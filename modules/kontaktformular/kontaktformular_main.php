@@ -1,5 +1,14 @@
 <?php
 function kontaktformular_render(){
+
+// check for Spam Protection Variable
+if(!getconfig("contact_form_refused_spam_mails")){
+  setconfig("contact_form_refused_spam_mails", 0);
+}
+
+
+
+
 	$fehler=false;
 	if(isset($_POST["absenden"])){
 		
@@ -26,6 +35,8 @@ function kontaktformular_render(){
 	//Spamschutz
 	if($_POST["email"]!=""){
 		$fehler = "Das Spamschutz-Feld bitte leer lassen.";
+		setconfig("contact_form_refused_spam_mails",
+    getconfig("contact_form_refused_spam_mails")+1);
 	}
 	
 	if($fehler==false){
@@ -61,8 +72,13 @@ function kontaktformular_render(){
 	}
 else{
 
+$spam_counter = ""; 
+if($_SESSION["group"]>=20){
+   $spam_counter = "<p class='ulicms_success'>Bisher <strong>".getconfig("contact_form_refused_spam_mails")."</strong> Spam Mails 
+   blockiert</p><hr/>";
+}
 
-	return '<form action="'.htmlspecialchars($_SERVER['REQUEST_URI']).'" method="post">
+	return $spam_counter.'<form action="'.htmlspecialchars($_SERVER['REQUEST_URI']).'" method="post">
 	<table border="0" cellpadding="1" cellspacing="1" style="height: 479px; width: 100%; ">
 		<tbody>
 			<tr>
