@@ -82,7 +82,7 @@ function intramail_view_message(){
    <td>'.nl2br($row->message).'</td>
    </tr>'.
    '<tr>
-   <td></td>
+   <td><br/></td>
    <td>'.
     "<a href='?seite=".get_requested_pagename()."&box=reply&message=".$row->id.
       "'>"."Antworten"."</a>"
