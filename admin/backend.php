@@ -97,6 +97,9 @@ else if($_GET["action"] == "templates"){
 else if($_GET["action"] == "images" || $_GET["action"] == "files" || $_GET["action"] == "flash"){
 	require_once "inc/filemanager.php";
 }
+else if($_GET["action"] == "modules"){
+  require_once "inc/modules.php";
+}
 
 else if($_GET["action"] == "info" ){
 	require_once "inc/info.php";
