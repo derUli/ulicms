@@ -2,6 +2,17 @@
 // this class contains functions for managing user accounts
 
 
+function getUsers(){
+  $query = mysql_query("SELECT * FROM ".tbname("admins")." ORDER by username");
+  $users = Array();
+  while($row = mysql_fetch_object($query)){
+    array_push($users, $row->username);
+  }
+  
+  return $users;
+}
+
+
 function adduser($username, $lastname, $firstname, $email, $password, $group){
   $username = mysql_real_escape_string($username);
   $lastname = mysql_real_escape_string($lastname);
