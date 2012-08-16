@@ -226,6 +226,8 @@ function intramail_new_mail($mail_to = '', $subject = '', $message = ''){
     $message = strip_tags($_POST["message"], getconfig("allowed_html"));
     $message = mysql_real_escape_string($message);
     
+    $message = str_replace("\\r\\n", "\n", $message);
+    
     mysql_query("INSERT INTO  `".tbname("messages")."` (mail_from, mail_to, subject,
     message, date, `read`) 
     VALUES ('$mail_from', '$mail_to', '$subject', '$message', $date, 0)");
