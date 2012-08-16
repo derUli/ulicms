@@ -12,3 +12,4 @@
 * JavaScript MD5-Hashing zum Userdaten Formular hinzugefügt
 * Gästebuch auf Version 0.0.3 gebracht
 * getAllSystemNames() sortiert nun die Rückgabewerte automatisch
+* Menüpunkt für Module hinzugefügt
