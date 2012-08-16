@@ -28,34 +28,52 @@ exit();
 
 
 if(!empty($_POST["save_template"])&&!empty($_POST["code"])&&$_SESSION["group"]>=40){
-$save="../templates/".basename($_POST["save_template"]);
+  $save="../templates/".basename($_POST["save_template"]);
 if(is_file($save)&&is_writable($save)){
-$handle=fopen($save,"w");
-fwrite($handle,$_POST["code"]);
-fclose($handle);
-header("Location: index.php?action=templates&save=true");
-exit();
+  $handle=fopen($save,"w");
+  fwrite($handle,$_POST["code"]);
+  fclose($handle);
+  header("Location: index.php?action=templates&save=true");
+  exit();
 }else{
 
 header("Location: index.php?action=templates&save=false");
-exit();
+  exit();
 }
 
 }
 
 
 if($_GET["action"]=="key_delete" && $_SESSION["group"]>=40){
-$key=intval($_GET["key"]);
-$query=mysql_query("DELETE FROM ".tbname("settings")." WHERE id='$key'",$connection);
-header("Location: index.php?action=settings");
-exit();
+  $key=intval($_GET["key"]);
+  $query=mysql_query("DELETE FROM ".tbname("settings")." WHERE id='$key'",$connection);
+  header("Location: index.php?action=settings");
+  exit();
+}
+
+if(isset($_POST["add_menu_item"]) and $_SESSION["group"]>=40){
+   $query = mysql_query("SELECT position FROM ".
+   tbname("backend_menu_structure")." ORDER BY position DESC LIMIT 1")or die(mysql_error());
+   if(mysql_num_rows($query)>0){
+    $fetched_assoc = mysql_fetch_object($fetched_assoc);
+    $position = $fetched_assoc["position"];
+   }else{
+    $position = 1;
+   }
+   
+   $action = mysql_real_escape_string($_POST["action"]);   
+   $label = mysql_real_escape_string($_POST["label"]);
+   
+   mysql_query("INSERT INTO ".tbname("backend_menu_structure").
+   "(action, label, position) 
+   VALUES('$action', '$label', $position)");
 }
 
 if($_GET["action"]=="banner_delete" && $_SESSION["group"]>=40){
-$banner=intval($_GET["banner"]);
-$query=mysql_query("DELETE FROM ".tbname("banner")." WHERE id='$banner'",$connection);
-header("Location: index.php?action=banner");
-exit();
+  $banner=intval($_GET["banner"]);
+  $query=mysql_query("DELETE FROM ".tbname("banner")." WHERE id='$banner'",$connection);
+  header("Location: index.php?action=banner");
+  exit();
 }
 
 
