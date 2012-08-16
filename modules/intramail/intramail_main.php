@@ -255,7 +255,7 @@ function intramail_new_mail($mail_to = '', $subject = '', $message = ''){
     Bitte warten! Sie werden weitergeleitet</p>
     
     <script type='text/javascript'>
-    //setTimeout('location.replace(\'?seite=".get_requested_pagename()."&box=inbox\')', 2000);
+    setTimeout('location.replace(\'?seite=".get_requested_pagename()."&box=inbox\')', 2000);
     </script>
     ";
     
