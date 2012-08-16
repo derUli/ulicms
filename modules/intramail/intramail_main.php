@@ -251,7 +251,7 @@ function intramail_new_mail($mail_to = '', $subject = '', $message = ''){
   
    $receiver_mail = getUserByName($mail_to);
    $receiver_mail = $receiver_mail["email"];
-   mail($receiver_mail["email"],
+   mail($receiver_mail,
    
    "Eine neue Nachricht von ".$mail_from,
    $notification_mail, $header);
