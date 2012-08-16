@@ -38,10 +38,18 @@ function intramail_generate_page(){
 
 function intramail_new_mail(){
   if(isset($_POST["submit"]) and
-  !empty($_POST["subject"]) and
-  !empty($_POST["message"]) and 
-  in_array($_POST["mail_from"])
-  and in_array($_POST["mail_to"] , getUsers())){
+  !empty($_POST["subject"])  and
+  !empty($_POST["message"])  and
+  in_array($_POST["mail_to"] , getUsers())){
+  
+    $date = time();
+    $mail_from = $_SESSION["ulicms_login"];
+    $mail_to = mysql_real_escape_string($_POST["mail_to"]);
+    $subject = htmlspecialchars($_POST["subject"]);
+    $subject = mysql_real_escape_string($subject);
+    $message = strip_tags($_POST["subject"], getconfig("allowed_html"));
+    $message = mysql_real_escape_string($message);
+      
     echo "<p>Mail wurde Erfolgreich versand!<br/><br/>
     Bitte warten! Sie werden weitergeleitet</p>
     
@@ -58,8 +66,7 @@ function intramail_new_mail(){
   
   ';
   
-  echo '<input type="hidden" name="mail_from" value="'.$_SESSION["ulicms_login"].'">';
-  
+ 
   $users = getUsers();
   
   echo '<strong>Empfänger:</strong><br/><select name="mail_to">';
@@ -81,8 +88,14 @@ function intramail_new_mail(){
   
   echo '<br/><br/>';
   
+  
+  
   echo '<textarea name="message" cols=50 rows=15></textarea>';
    
+  echo '
+  <br/><br/><strong>Folgende HTML-Codes sind erlaubt:</strong><br/>
+  '.htmlspecialchars(getconfig("allowed_html")); 
+
    
   
   echo '<br/><br/>'; 

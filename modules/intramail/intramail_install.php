@@ -15,6 +15,11 @@ function intramail_install(){
 ) ENGINE = MYISAM ;
 ");
   
-  }
+  mysql_query("ALTER TABLE `".tbname("messages").
+  "` ADD `read` BOOL NOT NULL AFTER `date` ");
+  
+}
+  
+  
     
 ?>
