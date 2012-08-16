@@ -89,8 +89,10 @@ function intramail_view_message(){
    . 
    '</td>'.
    '</table>';
-   
-   mysql_query("UPDATE `".tbname("messages")."` SET `read` = 1 WHERE id = $message_id");
+ 
+      if($_GET["read"] == 1){
+     mysql_query("UPDATE `".tbname("messages")."` SET `read` = 1 WHERE id = $message_id");
+   }
    
   }
 
@@ -138,7 +140,7 @@ function intramail_post_inbox(){
       }
       echo
       "<a href='?seite=".get_requested_pagename()."&box=inbox&message=".$row->id.
-      "'>".$row->subject."</a>"." [".date(getconfig("date_format"), $row->date).
+      "&read=1'>".$row->subject."</a>"." [".date(getconfig("date_format"), $row->date).
       "] "."[<a href='?seite=".get_requested_pagename().
       "&box=inbox&delete=".$row->id."' onclick='return confirm(\"Diese Mail wirklich löschen?\")'>X</a>"."]".
       "</li>";
@@ -247,8 +249,10 @@ function intramail_new_mail($mail_to = '', $subject = '', $message = ''){
   $header = "From: ".getconfig("email")."\n".
   "Content-type: text/plain; charset=utf-8";
   
-
-   mail($_SESSION["email"],
+   $receiver_mail = getUserByName($mail_to);
+   $receiver_mail = $receiver_mail["email"];
+   mail($receiver_mail["email"],
+   
    "Eine neue Nachricht von ".$mail_from,
    $notification_mail, $header);
 
@@ -257,7 +261,7 @@ function intramail_new_mail($mail_to = '', $subject = '', $message = ''){
     Bitte warten! Sie werden weitergeleitet</p>
     
     <script type='text/javascript'>
-    setTimeout('location.replace(\'?seite=".get_requested_pagename()."&box=inbox\')', 2000);
+    setTimeout('location.replace(\'?seite=".get_requested_pagename()."&box=inbox\')', 4000);
     </script>
     ";
     

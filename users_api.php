@@ -12,6 +12,16 @@ function getUsers(){
   return $users;
 }
 
+function getUserByName($name){
+  $query = mysql_query("SELECT * FROM ".tbname("admins"). " WHERE username='".
+  mysql_real_escape_string($name)."'");
+  if(mysql_num_rows($query)>0){
+    return mysql_fetch_assoc($query);
+  }else{
+    return false;
+  }
+}
+
 
 function adduser($username, $lastname, $firstname, $email, $password, $group){
   $username = mysql_real_escape_string($username);

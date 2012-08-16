@@ -13,3 +13,4 @@
 * Gästebuch auf Version 0.0.3 gebracht
 * getAllSystemNames() sortiert nun die Rückgabewerte automatisch
 * Menüpunkt für Module hinzugefügt
+* Added IntraMail Module
