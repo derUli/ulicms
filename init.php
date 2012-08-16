@@ -12,13 +12,15 @@ if(file_exists("cms-config.php")){
 else if(file_exists("../cms-config.php")){
   require_once "../cms-config.php";
 }
-else if(file_exists("backend.php")){
+else if(file_exists("backend.php") and is_dir("../installer")){
   header("Location: ../installer/");
   exit();
 }
-else{
+else if(is_dir("installer")){
    header("Location: installer/");
    exit();
+}else{
+  die("Can't include cms-config.php. Starting installer failed, too.");
 }
 require_once "api.php";
 
