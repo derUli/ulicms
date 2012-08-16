@@ -226,19 +226,35 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
 
 
 mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
-created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent)
+created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
 VALUES (0, 'willkommen', 'Willkommen', 
 '<p>Herzlichen Glückwunsch!<br/>
 UliCMS wurde erfolgreich auf dieser Website installiert.</p>', 1, ".time().",
-1, 1, 0, 0, '', 'top', 0, '-')
-");
+1, 1, 0, 0, '', 'top', 0, '-', ".time().")");
 
 mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
-created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent)
+created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
+VALUES (1, 'gaestebuch', 'Gästebuch', 
+'[module=\"guestbook\"]', 1, ".time().",
+1, 1, 0, 0, '', 'top', 500, '-', ".time().")");    
+
+mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
+created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
+VALUES (1, 'kontakt', 'Kontakt', 
+'[module=\"kontaktformular\"]', 1, ".time().",
+1, 1, 0, 0, '', 'down', 10, '-', ".time().")");    
+
+
+
+mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
+created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
 VALUES (1, 'login', 'Anmelden', 
 '', 1, ".time().",
-1, 1, 0, 0, 'admin/', 'down', 0, '-')
-");
+1, 1, 0, 0, 'admin/', 'down', 20, '-', ".time().")");    
+
+
+
+
 
 
 mysql_query("INSERT INTO `".$prefix."news` (`id`, `title`, `content`, `date`, `active`, `autor`) VALUES (NULL, 'UliCMS 4.5 Entwicklerversion', '<p>Das hier ist die aktuelle Entwicklerversion von UliCMS 4.5.<br/>
