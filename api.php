@@ -36,6 +36,17 @@ function getModuleMainFilePath($module){
 
 
 
+function convertLineEndingsToLF($s) {
+    // Normalize line endings using Global
+    // Convert all line-endings to UNIX format
+    $s = str_replace(CRLF, LF, $s);
+    $s = str_replace(CR, LF, $s);
+    // Don't allow out-of-control blank lines
+    $s = preg_replace("/\n{2,}/", LF . LF, $s);
+    return $s;
+}
+
+
 function getAllModules(){
 	// Frontend Directory
 	if(is_file("cms-config.php")){

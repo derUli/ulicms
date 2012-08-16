@@ -229,12 +229,33 @@ function intramail_new_mail($mail_to = '', $subject = '', $message = ''){
     mysql_query("INSERT INTO  `".tbname("messages")."` (mail_from, mail_to, subject,
     message, date, `read`) 
     VALUES ('$mail_from', '$mail_to', '$subject', '$message', $date, 0)");
+    
+     $notification_mail="Hallo ".$mail_to.",\n\n".
+     "Der Nutzer \"".$mail_from.
+     "\" hat dir auf der Website \"".getconfig("homepage_title").
+     "\" eine Nachricht geschickt:\n\n".
+     strip_tags(str_replace("\\r\\n", "\n", $message))."\n\n".
+     "Unter folgendem Link kannst du dich anmelden und die Mail beantworten:\n".
+     "http://".$_SERVER["HOST_NAME"];
+     
+
+     
+     
+     
+  $header = "From: ".getconfig("email")."\n".
+  "Content-type: text/plain; charset=utf-8";
+  
+
+   mail($_SESSION["email"],
+   "Eine neue Nachricht von ".$mail_from,
+   $notification_mail, $header);
+
       
     echo "<p>Mail wurde Erfolgreich versand!<br/><br/>
     Bitte warten! Sie werden weitergeleitet</p>
     
     <script type='text/javascript'>
-    setTimeout('location.replace(\'?seite=".get_requested_pagename()."&box=inbox\')', 2000);
+    //setTimeout('location.replace(\'?seite=".get_requested_pagename()."&box=inbox\')', 2000);
     </script>
     ";
     

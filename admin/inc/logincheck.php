@@ -13,7 +13,8 @@ if(isset($_POST["login"])){
 		$data=mysql_fetch_array($query);
 		$_SESSION["ulicms_login"]=$data["username"];
 		$_SESSION["lastname"]=$data["lastname"];
-		$_SESSION["firstname"]=$data["firstname"];
+		$_SESSION["firstname"]=$data["firstname"];     
+		$_SESSION["email"]=$data["email"];
 		$_SESSION["login_id"]=$data["id"];
 		$_SESSION["group"]=$data["group"];
 

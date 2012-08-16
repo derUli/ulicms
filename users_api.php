@@ -28,7 +28,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group){
   "Die Zugangsdaten lauten:\n\n".
   "Benutzername: $username\n".
   "Passwort: $password\n";
-  $header="From: ".env("email")."\n".
+  $header="From: ".getconfig("email")."\n".
   "Content-type: text/plain; charset=utf-8";
 
   @mail($email, "Dein Benutzer-Account bei ".$_SERVER["SERVER_NAME"], $message,     $header);

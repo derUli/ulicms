@@ -26,6 +26,13 @@ require_once "api.php";
 
 
 
+// define Constants
+define('CR', "\r");          // carriage return; Mac
+define('LF', "\n");          // line feed; Unix
+define('CRLF', "\r\n");      // carriage return and line feed; Windows
+define('BR', '<br />' . LF); // HTML Break
+
+
 function noperms(){
 	echo "<p>Sie haben nicht die Berechtigung, um auf diese Seite zugreifen zu dürfen.<br/>Bitte loggen Sie sich als <u>admin</u> ein oder fragen Sie den Administrator der Webseite.</p>";
 	return false;
