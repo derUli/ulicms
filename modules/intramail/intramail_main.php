@@ -81,7 +81,22 @@ function intramail_view_message(){
 
 }
 
+function intramail_delete_mail($delete){
+  mysql_query("DELETE FROM `".tbname("messages").
+  "` WHERE id = $delete and (mail_from='".
+  $_SESSION["ulicms_login"]."' or mail_to = '".$_SESSION["ulicms_login"]."')"); 
+}
+
 function intramail_post_inbox(){
+
+  
+  // Delete Mails
+  if(isset($_GET["delete"])){
+     $delete = intval($_GET["delete"]);
+     intramail_delete_mail($delete);
+  }
+  
+  
   // get all unread messages
   $new_mails_query = mysql_query("SELECT * FROM `".tbname("messages")."` WHERE mail_to='".$_SESSION["ulicms_login"]."' AND `read`=0");
   $new_mails_count = mysql_num_rows($new_mails_query);
@@ -106,7 +121,9 @@ function intramail_post_inbox(){
       echo "<li>".
       "<a href='?seite=".get_requested_pagename()."&box=inbox&message=".$row->id.
       "'>".$row->subject."</a>"." [".date(getconfig("date_format"), $row->date).
-      "]"."</li>";
+      "] "."[<a href='?seite=".get_requested_pagename().
+      "&box=inbox&delete=".$row->id."' onclick='return confirm(\"Diese Mail wirklich löschen?\")'>X</a>"."]".
+      "</li>";
     }
     echo "</ol>";
   
