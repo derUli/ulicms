@@ -25,17 +25,23 @@ function intramail_render(){
 
 function intramail_generate_page(){
   	echo '<a href="?seite='.get_requested_pagename().'&box=inbox">Eingang</a> | 
-    <a href="?seite='.get_requested_pagename().'&box=outbox">Gesendet</a> | 
+    <a href="?seite='.get_requested_pagename().'&box=outbox">Ausgang</a> | 
     <a href="?seite='.get_requested_pagename().'&box=new">Mail verfassen</a>
     ';
     switch($_GET["box"]){
     case "new":
       intramail_new_mail();
     break;
+    case "reply":
+      intramail_reply();
+    break;
     case 'inbox':
     default:
       intramail_post_inbox();
     break;
+    break;
+    case 'outbox':
+      intramail_post_outbox();
     break;
     
     }
@@ -75,7 +81,16 @@ function intramail_view_message(){
    </td>
    <td>'.nl2br($row->message).'</td>
    </tr>'.
+   '<tr>
+   <td></td>
+   <td>'.
+    "<a href='?seite=".get_requested_pagename()."&box=reply&message=".$row->id.
+      "'>"."Antworten"."</a>"
+   . 
+   '</td>'.
    '</table>';
+   
+   mysql_query("UPDATE `".tbname("messages")."` SET `read` = 1 WHERE id = $message_id");
    
   }
 
@@ -89,7 +104,6 @@ function intramail_delete_mail($delete){
 
 function intramail_post_inbox(){
 
-  
   // Delete Mails
   if(isset($_GET["delete"])){
      $delete = intval($_GET["delete"]);
@@ -98,7 +112,7 @@ function intramail_post_inbox(){
   
   
   // get all unread messages
-  $new_mails_query = mysql_query("SELECT * FROM `".tbname("messages")."` WHERE mail_to='".$_SESSION["ulicms_login"]."' AND `read`=0");
+  $new_mails_query = mysql_query("SELECT * FROM `".tbname("messages")."` WHERE mail_to='".$_SESSION["ulicms_login"]."' AND `read` = 0");
   $new_mails_count = mysql_num_rows($new_mails_query);
   if(isset($_GET["message"])){
      intramail_view_message();
@@ -114,11 +128,15 @@ function intramail_post_inbox(){
 
   }
   
-  $all_mails = mysql_query("SELECT * FROM `".tbname("messages")."` WHERE mail_to='".$_SESSION["ulicms_login"]."' AND `read`=0 ORDER by date DESC");
+  $all_mails = mysql_query("SELECT * FROM `".tbname("messages")."` WHERE mail_to='".$_SESSION["ulicms_login"]."' ORDER by date DESC");
   if(mysql_num_rows($all_mails)>0){
     echo "<ol>";
     while($row = mysql_fetch_object($all_mails)){
-      echo "<li>".
+      echo "<li>";
+      if(!$row->read){
+        echo "<strong style='color:red;'>Neu</strong> ";
+      }
+      echo
       "<a href='?seite=".get_requested_pagename()."&box=inbox&message=".$row->id.
       "'>".$row->subject."</a>"." [".date(getconfig("date_format"), $row->date).
       "] "."[<a href='?seite=".get_requested_pagename().
@@ -134,7 +152,67 @@ function intramail_post_inbox(){
   }
 
 
-function intramail_new_mail(){
+
+
+function intramail_post_outbox(){
+
+  
+  $all_mails = mysql_query("SELECT * FROM `".tbname("messages")."` WHERE mail_from='".$_SESSION["ulicms_login"]."' AND `read` = 0 ORDER by date DESC");
+  
+  if(mysql_num_rows($all_mails)>0){
+    echo "<ol>";
+    while($row = mysql_fetch_object($all_mails)){
+      echo "<li>";
+      if(!$row->read){
+        echo "<strong style='color:red;'>Neu</strong> ";
+      }
+      echo
+      "<a href='?seite=".get_requested_pagename()."&box=inbox&message=".$row->id.
+      "'>".$row->subject."</a>"." [".date(getconfig("date_format"), $row->date).
+      "] ".
+      "</li>";
+    }
+    echo "</ol>";
+  
+  
+  }
+  
+                    
+  }
+
+
+  function intramail_reply(){
+      $message_id = intval($_GET["message"]);
+
+  $message_query = mysql_query("SELECT * FROM `".tbname("messages").
+  "` WHERE id = $message_id and (mail_from='".
+  $_SESSION["ulicms_login"]."' or mail_to = '".$_SESSION["ulicms_login"]."') LIMIT 1");
+  
+  while($row = mysql_fetch_object($message_query)){
+    $new_subject = $row->subject;
+    if(!StartsWith($row->subject,"RE: ")){
+      $new_subject = "RE: ". $row->subject;
+    }
+    
+    $message = explode("\n", $row->message);
+    for($i=0;$i<count($message);$i++){
+           $message[$i] = trim($message[$i]);
+         if(strlen($message[$i])>1){
+           $message[$i] = "> ". $message[$i];
+           }
+
+    }
+    $new_message =join("\n", $message);
+    
+    intramail_new_mail($mail_to = $row->mail_from, $subject = $new_subject, $message = $new_message );
+  }
+
+
+
+  }
+
+
+function intramail_new_mail($mail_to = '', $subject = '', $message = ''){
   if(isset($_POST["submit"]) and
   !empty($_POST["subject"])  and
   !empty($_POST["message"])  and
@@ -176,8 +254,15 @@ function intramail_new_mail(){
   
   
   for($i=0; $i<count($users); $i++){
-    
-      echo "<option value='".$users[$i]."'>".$users[$i]."</option>";
+     
+     
+        echo "<option value='".$users[$i]."'"; 
+        
+        if(isset($mail_to) and $users[$i ] == $mail_to){
+            echo " selected";
+        }
+        echo ">".$users[$i]."</option>";
+        
       
       
   }
@@ -186,13 +271,15 @@ function intramail_new_mail(){
   
   echo '<br/><br/>';
   
-  echo '<strong>Betreff:</strong><br/><input type="text" name="subject" value="" maxlength=78 size=40>';  
+  echo '<strong>Betreff:</strong><br/><input type="text" name="subject" value="'.
+  $subject.'" maxlength=78 size=40>';  
   
   echo '<br/><br/>';
   
   
   
-  echo '<textarea name="message" cols=50 rows=15></textarea>';
+  echo '<textarea name="message" cols=50 rows=15>'.
+  htmlspecialchars($message).'</textarea>';
    
   echo '
   <br/><br/><strong>Folgende HTML-Codes sind erlaubt:</strong><br/>
