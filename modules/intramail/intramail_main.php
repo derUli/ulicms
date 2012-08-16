@@ -42,10 +42,53 @@ function intramail_generate_page(){
 }
 
 
+function intramail_view_message(){
+  $message_id = intval($_GET["message"]);
+
+  $message_query = mysql_query("SELECT * FROM `".tbname("messages").
+  "` WHERE id = $message_id and (mail_from='".
+  $_SESSION["ulicms_login"]."' or mail_to = '".$_SESSION["ulicms_login"]."') LIMIT 1");
+  
+  while($row = mysql_fetch_object($message_query)){
+   echo '<table style="border:0px;">
+   <tr>
+   <td><strong>Von:</strong></td>
+   <td>'.$row->mail_from.'</td>
+   </tr>'. 
+   '<tr>
+   <td><strong>An:</strong></td>
+   <td>'.$row->mail_to.'</td>
+   </tr>'
+   . 
+   '<tr>
+   <td><strong>Betreff:</strong></td>
+   <td>'.$row->subject.'</td>
+   </tr>'. 
+   '<tr>
+   <td><strong>Datum:</strong></td>
+   <td>'.date(getconfig("date_format"), $row->date).'</td>
+   </tr>
+   '.
+   '<tr>
+   <td>
+   <br/><br/> 
+   </td>
+   <td>'.nl2br($row->message).'</td>
+   </tr>'.
+   '</table>';
+   
+  }
+
+}
+
 function intramail_post_inbox(){
   // get all unread messages
   $new_mails_query = mysql_query("SELECT * FROM `".tbname("messages")."` WHERE mail_to='".$_SESSION["ulicms_login"]."' AND `read`=0");
   $new_mails_count = mysql_num_rows($new_mails_query);
+  if(isset($_GET["message"])){
+     intramail_view_message();
+     return;
+  }
   
   // Output new mails count
   if($new_mails_count == 1){
@@ -60,7 +103,10 @@ function intramail_post_inbox(){
   if(mysql_num_rows($all_mails)>0){
     echo "<ol>";
     while($row = mysql_fetch_object($all_mails)){
-      echo "<li>".$row->subject." [".date(getconfig("date_format"), $row->date)."]"."</li>";
+      echo "<li>".
+      "<a href='?seite=".get_requested_pagename()."&box=inbox&message=".$row->id.
+      "'>".$row->subject."</a>"." [".date(getconfig("date_format"), $row->date).
+      "]"."</li>";
     }
     echo "</ol>";
   
