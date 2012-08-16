@@ -4,7 +4,22 @@
    eintragen sondern in die functions.php
 */
 require_once "workaround.php";
-require_once "cms-config.php";
+                           
+// if config exists require_config else redirect to installer
+if(file_exists("cms-config.php")){
+  require_once "cms-config.php";
+}
+else if(file_exists("../cms-config.php")){
+  require_once "../cms-config.php";
+}
+else if(file_exists("backend.php")){
+  header("Location: ../installer/");
+  exit();
+}
+else{
+   header("Location: installer/");
+   exit();
+}
 require_once "api.php";
 
 
@@ -25,7 +40,7 @@ function endsWith($haystack,$needle,$case=true) {
 }
 
 
-global $connection,$config;
+global $connection,$config;           
 $config=new config();
 
 if($config->mysql_server == "" or $config->mysql_user == ""){
@@ -46,7 +61,7 @@ if(!$select){
 	die("Fehler: Die Datenbank ".$config->mysql_database." existiert nicht.\n");
 }
 
-
+                           
 @include "functions.php";
 
 ?>
