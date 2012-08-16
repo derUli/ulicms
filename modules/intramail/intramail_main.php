@@ -30,10 +30,45 @@ function intramail_generate_page(){
     ';
     switch($_GET["box"]){
     case "new":
-    intramail_new_mail();
+      intramail_new_mail();
     break;
+    case 'inbox':
+    default:
+      intramail_post_inbox();
+    break;
+    break;
+    
     }
 }
+
+
+function intramail_post_inbox(){
+  // get all unread messages
+  $new_mails_query = mysql_query("SELECT * FROM `".tbname("messages")."` WHERE mail_to='".$_SESSION["ulicms_login"]."' AND `read`=0");
+  $new_mails_count = mysql_num_rows($new_mails_query);
+  
+  // Output new mails count
+  if($new_mails_count == 1){
+     echo "<p style='color:red;font-size:1.3em;'>Sie haben eine neue Nachricht.</p>";
+  }
+  else if($new_mails_count>1){
+    echo "<p style='color:red;font-size:1.3em;'>Sie haben <strong>$new_mails_count</strong> neue Nachrichten.</p>";
+
+  }
+  
+  $all_mails = mysql_query("SELECT * FROM `".tbname("messages")."` WHERE mail_to='".$_SESSION["ulicms_login"]."' AND `read`=0 ORDER by date DESC");
+  if(mysql_num_rows($all_mails)>0){
+    echo "<ol>";
+    while($row = mysql_fetch_object($all_mails)){
+      echo "<li>".$row->subject." [".date(getconfig("date_format"), $row->date)."]"."</li>";
+    }
+    echo "</ol>";
+  
+  
+  }
+  
+  
+  }
 
 
 function intramail_new_mail(){
@@ -47,8 +82,12 @@ function intramail_new_mail(){
     $mail_to = mysql_real_escape_string($_POST["mail_to"]);
     $subject = htmlspecialchars($_POST["subject"]);
     $subject = mysql_real_escape_string($subject);
-    $message = strip_tags($_POST["subject"], getconfig("allowed_html"));
+    $message = strip_tags($_POST["message"], getconfig("allowed_html"));
     $message = mysql_real_escape_string($message);
+    
+    mysql_query("INSERT INTO  `".tbname("messages")."` (mail_from, mail_to, subject,
+    message, date, `read`) 
+    VALUES ('$mail_from', '$mail_to', '$subject', '$message', $date, 0)");
       
     echo "<p>Mail wurde Erfolgreich versand!<br/><br/>
     Bitte warten! Sie werden weitergeleitet</p>
