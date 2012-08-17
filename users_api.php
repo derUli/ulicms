@@ -34,7 +34,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group){
   $query=mysql_query("INSERT INTO ".tbname("admins")." 
 (username,lastname, firstname, email, password, `group`) VALUES('$username',' $lastname','$firstname','$email','".md5($password)."',$group)");
   $message="Hallo $firstname,\n\n".
-  "Ein Administrator hat auf ".$_SERVER["SERVER_NAME"]." für dich ein neues Benutzerkonto angelegt.\n\n".
+  "Ein Administrator hat auf http://".$_SERVER["SERVER_NAME"]." für dich ein neues Benutzerkonto angelegt.\n\n".
   "Die Zugangsdaten lauten:\n\n".
   "Benutzername: $username\n".
   "Passwort: $password\n";
