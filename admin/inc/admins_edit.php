@@ -34,6 +34,9 @@ Avatar hochladen:<br/>
 <input type="text" style="width:300px;" name="admin_password" value="<?php echo $row->password;?>"> <input type="button" value="Passwort verschlüsseln" onclick="document.userdata_form.admin_password.value = MD5 (document.userdata_form.admin_password.value)"><br/>
 <?php if($_SESSION["group"] >=50){
 ?>
+<br>
+<strong data-tooltip="Was darf der Benutzer? Weitere Informationen dazu finden Sie in der Online-hilfe.">Benutzergruppe:</strong><br/>
+
 <select name="admin_rechte" size=1>
 <option value="50" <?php if($row->group==50) echo "selected";?>>Admin</option>
 <option value="40" <?php if($row->group==40) echo "selected";?>>Redakteur</option>
@@ -41,6 +44,7 @@ Avatar hochladen:<br/>
 <option value="20" <?php if($row->group==20) echo "selected";?>>Mitarbeiter</option>
 <option value="10" <?php if($row->group==10) echo "selected";?>>Gast</option>
 </select>
+<br>
 <?php }else{?>
 <input type="hidden" name="admin_rechte" value="<?php echo $row->group?>">
 <?php }?>
