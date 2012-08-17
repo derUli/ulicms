@@ -224,8 +224,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;");
 
-mysql_query("ALTER TABLE `".$prefix."content` ADD `meta_description` TEXT NOT NULL AFTER `access` ,
-ADD `meta_keywords` TEXT NOT NULL AFTER `meta_description` ");
+
 
 
 
@@ -275,6 +274,9 @@ VALUES (1, 'login', 'Anmelden',
 mysql_query("ALTER TABLE `".$prefix."content` ADD `valid_from` DATE NOT NULL AFTER `parent` ,
 ADD `valid_to` DATE AFTER `valid_from` ,
 ADD `access` VARCHAR( 100 ) AFTER `valid_to`");
+
+mysql_query("ALTER TABLE `".$prefix."content` ADD `meta_description` TEXT NOT NULL AFTER `access` ,
+ADD `meta_keywords` TEXT NOT NULL AFTER `meta_description` ");
 
 mysql_query("UPDATE ".$prefix."content SET valid_from = NOW(), access = 'all'");
 
