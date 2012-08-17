@@ -352,12 +352,66 @@ if($_POST["edit_page"]=="edit_page" && $_SESSION["group"]>=30){
 
 
 
+// Resize image
+function resize_image($file, $target, $w, $h, $crop=FALSE) {
+    list($width, $height) = getimagesize($file);
+    $r = $width / $height;
+    if ($crop) {
+        if ($width > $height) {
+            $width = ceil($width-($width*($r-$w/$h)));
+        } else {
+            $height = ceil($height-($height*($r-$w/$h)));
+        }
+        $newwidth = $w;
+        $newheight = $h;
+    } else {
+        if ($w/$h > $r) {
+            $newwidth = $h*$r;
+            $newheight = $h;
+        } else {
+            $newheight = $w/$r;
+            $newwidth = $w;
+        }
+    }
+	
+    $src = imagecreatefromjpeg($file);
+    $dst = imagecreatetruecolor($newwidth, $newheight);
+	
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+	imagejpeg($dst, $target, 100);
+  
+}
+
+
 
 
 if($_POST["edit_admin"]=="edit_admin" && $_SESSION["group"]>=50
 or ($_POST["edit_admin"]=="edit_admin" and $_SESSION["group"]>=10 and $_POST["id"] == $_SESSION["login_id"])){
 
 $id = intval($_POST["id"]);
+$upload_errors = false;
+if(isset($_FILES['avatar_upload'])){
+if(!file_exists("../content/avatars")){ 
+  @mkdir("../content/avatars");
+  
+}
+
+  $avatar_upload = $_FILES['avatar_upload'];
+  $type = $avatar_upload['type'];
+  $filename = $avatar_upload['name'];
+  $extension = file_extension($filename); 
+  $hash = md5(file_get_contents($avatar_upload['tmp_name']));
+  if($type == "image/jpeg" or 
+   $type == "image/jpg" or
+   $type == "image/png" or
+   $type == "image/gif"){
+   
+   $new_filename =  "../content/avatars/". $hash.".".$extension;
+   $db_avatar_filename = $hash.".".$extension;
+      resize_image($avatar_upload['tmp_name'], $new_filename ,
+      125, 125, $crop=FALSE); 
+   }
+}
 
 $username = mysql_real_escape_string($_POST["admin_username"]);
 $lastname = mysql_real_escape_string($_POST["admin_lastname"]);
@@ -372,7 +426,7 @@ $about_me = mysql_real_escape_string($_POST["about_me"]);
 mysql_query("UPDATE ".tbname("admins")." SET username='$username', `group`= $rechte, firstname='$firstname',
 lastname='$lastname', email='$email', password='".$password."',
 `icq_id`='$icq_id',  skype_id = '$skype_id',
-about_me = '$about_me' WHERE id=$id",$connection);
+about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id",$connection);
 
 
 if($_SESSION["group"]>=10 and $_POST["id"] == $_SESSION["login_id"]){

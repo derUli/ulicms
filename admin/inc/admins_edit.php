@@ -9,12 +9,20 @@ $query=mysql_query("SELECT * FROM ".tbname("admins")." WHERE id='$admin'");
 while($row=mysql_fetch_object($query)){
 ?>
 
-<form action="index.php?action=admins" name="userdata_form" method="post">
+<form action="index.php?action=admins" name="userdata_form" method="post" enctype="multipart/form-data">
 <input type="hidden" name="edit_admin" value="edit_admin">
 <input type="hidden" name="id" value="<?php echo $row->id;?>">
 <strong data-tooltip="Dieser Name wird zur Anmeldung benötigt. Er ist nicht änderbar.">Benutzername:</strong><br/>
 <input type="text" style="width:300px;" name="admin_username" value="<?php echo $row->username;?>" readonly="readonly">
 <br/><br/>
+<?php if(file_exists("../content/avatars/".$row->avatar_file)){?>
+<img src='../content/avatars/<?php echo $row->avatar_file?>' alt="Avatarbild">
+<?php
+}
+?>
+Avatar hochladen:<br/>
+<input type="file" name="avatar_upload"><br>
+<br/>
 <strong>Nachname:</strong><br/>
 <input type="text" style="width:300px;" name="admin_lastname" value="<?php echo $row->lastname;?>">
 <br/><br/>
