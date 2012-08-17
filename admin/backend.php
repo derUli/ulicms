@@ -118,6 +118,9 @@ else if($_GET["action"] == "info" ){
 else if($_GET["action"]  == "system_update"){
 	require_once "inc/system_update.php";
 }
+else if($_GET["action"]  == "motd"){
+	require_once "inc/motd.php";
+}
 
 }
 

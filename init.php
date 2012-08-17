@@ -26,6 +26,9 @@ require_once "api.php";
 
 
 
+  
+  
+
 // define Constants
 define('CR', "\r");          // carriage return; Mac
 define('LF', "\n");          // line feed; Unix
@@ -69,6 +72,13 @@ $select=mysql_select_db($config->mysql_database);
 if(!$select){
 	die("Fehler: Die Datenbank ".$config->mysql_database." existiert nicht.\n");
 }
+
+// check four allowed_html config var
+// if not exists create with default value 
+if(!getconfig("allowed_html")){
+    setconfig("allowed_html", "<i><b><strong><em><ul><li><ol><a>");
+  }
+
 
                            
 @include "functions.php";

@@ -1,4 +1,4 @@
-﻿<?php {
+<?php {
 if(defined("_SECURITY")){
 $pages_count=mysql_num_rows(mysql_query("SELECT * FROM ".tbname("content")));
 $news_count=mysql_num_rows(mysql_query("SELECT * FROM ".tbname("news")));
@@ -17,6 +17,22 @@ while($row = mysql_fetch_object($admins_query)){
 <p>Hallo <?php echo $_SESSION["firstname"]." ".$_SESSION["lastname"];?>!</p>
 
 <p>Diese Website hat <?php echo $pages_count?> Seiten und <?php echo $news_count?> News.</p>
+
+<?php $motd = getconfig("motd");
+if($motd or strlen($motd)>10){
+$motd = nl2br($motd);
+?>
+<br>
+<br>
+<h2>Nachricht des Tages</h2>
+<div class="motd">
+<?php echo $motd;?>
+</div>
+<br>
+<br>
+<?php
+}
+?>
 <p>Die meistgelesenen Artikel sind:
 <table cellpadding="2" border=0>
 <tr style="font-weight:bold;">

@@ -17,6 +17,7 @@ function getconfig($key){
 
 
 
+
 function getModulePath($module){
 	// Frontend Directory
 	if(is_file("cms-config.php")){

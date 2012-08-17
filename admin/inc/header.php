@@ -12,6 +12,16 @@ color:red;
 text-decoration:none;
 }
 
+
+.motd{
+  overflow-x:no-scroll;  
+  overflow-y:scroll;
+  width:300px;
+  height:160px;
+  border:1px black solid;
+  padding:10px 20px 10px 20px;
+}
+
 *[data-tooltip]
         {
         cursor:help;

@@ -1,1 +1,2 @@
 * Menüband im Backend kann jetzt angepasst werden.
+* Man kann eine Message Of The Day (MOTD) definieren, die dann allen eingeloggten Benutzern angezeigt wird.
