@@ -20,7 +20,11 @@ if (file_exists($logo_path) and is_file($logo_path)){
 </td>
 <tr>
 <td width=480><strong>Neues Logo hochladen</strong></td>
-<td><input name="logo_upload_file" type="file" accept="image/*">
+<td><input name="logo_upload_file" type="file" accept="image/gif,image/png">
+<br/>
+Akzeptiert werden PNG und GIF
+<br/>                             
+<br/>
 </td>
 </table>
 <div align="center">

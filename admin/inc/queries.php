@@ -391,12 +391,31 @@ function resize_image($file, $target, $w, $h, $crop=FALSE) {
             $newwidth = $w;
         }
     }
-	
-    $src = imagecreatefromjpeg($file);
+    
+
+	  if($extension == "jpg"){
+      $src = imagecreatefromjpeg($file);
+    }
+    else if($extension == "png"){
+      $src = imagecreatefrompng($file);
+    }
+    else if($extension == "gif"){
+      $src = imagecreatefromgif($file);
+    }
     $dst = imagecreatetruecolor($newwidth, $newheight);
 	
     imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-	imagejpeg($dst, $target, 100);
+	
+     
+  
+  
+   if($extension == "png"){   
+      imagesavealpha($dst, true);
+      imagepng($dst, $target, 6);
+    }
+    else if($extension == "gif"){
+      imagegif($dst, $target, 100);
+    }
   
 }
 
@@ -418,16 +437,16 @@ function resize_image($file, $target, $w, $h, $crop=FALSE) {
   $extension = file_extension($filename); 
  
   
-  if($type == "image/jpeg" or 
-   $type == "image/jpg" or
-   $type == "image/png" or
-   $type == "image/gif"){
+  if($type == "image/jpeg" or
+   $type == "image/gif" or
+   $type == "image/png"){        
    
   $hash = md5(file_get_contents($logo_upload['tmp_name']));
    $new_filename =  "../content/images/". $hash.".".$extension;
    $logo_upload_filename = $hash.".".$extension;
-   resize_image($logo_upload['tmp_name'], $new_filename ,
-   500, 100, $crop=FALSE); 
+   
+   move_uploaded_file($logo_upload['tmp_name'], $new_filename);
+  
    setconfig("logo_image", $logo_upload_filename);
    }
   
@@ -454,15 +473,14 @@ if(!file_exists("../content/avatars")){
   $filename = $avatar_upload['name'];
   $extension = file_extension($filename); 
   $hash = md5(file_get_contents($avatar_upload['tmp_name']));
-  if($type == "image/jpeg" or 
-   $type == "image/jpg" or
-   $type == "image/png" or
-   $type == "image/gif"){
+  if($type == "image/jpeg" or $type == "image/jpg"){
+  
    
-   $new_filename =  "../content/avatars/". $hash.".".$extension;
+   $new_filename =  "../content/avatars/". $hash.".".$extension;     
    $db_avatar_filename = $hash.".".$extension;
       resize_image($avatar_upload['tmp_name'], $new_filename ,
       125, 125, $crop=FALSE); 
+      
    }
 }
 
