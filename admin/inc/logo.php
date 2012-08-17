@@ -1,7 +1,11 @@
 <?php if(defined("_SECURITY")){
 
 if($_SESSION["group"]>=40){
-?>
+?>     
+<?php if($_GET["error"] == "to_big"){ ?> 
+<p style="color:red; font-size:1.2em">Die von Ihnen hochgeladene Grafik ist zu groß.</p>
+<?php
+}?>
 <p>Laden Sie ein beliebiges Logo hoch, welches im Head Bereich Ihrer Homepage angezeigt wird.<br>
 Sie können das Logo in den Grundeinstellungen deaktivieren.<br>
 Das Bild darf maximal 500 x 100 Pixel haben.
@@ -18,12 +22,9 @@ if (file_exists($logo_path) and is_file($logo_path)){
 
 }?>
 </td>
-<tr>
+<tr>             
 <td width=480><strong>Neues Logo hochladen</strong></td>
-<td><input name="logo_upload_file" type="file" accept="image/gif,image/png">
-<br/>
-Akzeptiert werden PNG und GIF
-<br/>                             
+<td><input name="logo_upload_file" type="file">
 <br/>
 </td>
 </table>

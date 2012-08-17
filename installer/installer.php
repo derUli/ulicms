@@ -304,7 +304,7 @@ mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (12, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
 (13, 'meta_description', 'Eine kurzer Beschreibungstext'),
 (14, 'logo_disabled', 'no'),
-(15, 'logo_image', '66e6110849056654f68fea11559c90b0.gif'),    
+(15, 'logo_image', '0b27dc99b9875f306287bb3965c57304.png'),    
 (16, 'motd', ''),
 (17, 'visitors_can_register', 'on'),
 (18, 'frontpage', 'willkommen');");

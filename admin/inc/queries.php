@@ -438,6 +438,7 @@ function resize_image($file, $target, $w, $h, $crop=FALSE) {
  
   
   if($type == "image/jpeg" or
+  $type == "image/jpg" or
    $type == "image/gif" or
    $type == "image/png"){        
    
@@ -446,8 +447,15 @@ function resize_image($file, $target, $w, $h, $crop=FALSE) {
    $logo_upload_filename = $hash.".".$extension;
    
    move_uploaded_file($logo_upload['tmp_name'], $new_filename);
-  
-   setconfig("logo_image", $logo_upload_filename);
+   $image_size = getimagesize($new_filename);
+   if($image_size[0]<=500 and $image_size[1]<=100){
+    setconfig("logo_image", $logo_upload_filename);
+    
+   }else{
+    header("Location: index.php?action=logo_upload&error=to_big");
+    exit();
+   }
+   
    }
   
   
