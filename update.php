@@ -1,6 +1,11 @@
 <?php
 require_once "init.php";
 
+
+$config = new config();
+$prefix = $config->mysql_prefix;
+
+
 // Update Script von Version 4.5 auf 4.6
 
 //Create deleted_at row, for recycle bin
@@ -15,6 +20,7 @@ mysql_query("CREATE TABLE `".$prefix."backend_menu_structure` (
 `position` INT NOT NULL
 ) ENGINE = MYISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 ");
+
 
 // Create Database Structure
 mysql_query("INSERT INTO `".$prefix."backend_menu_structure` (`id`, `action`, `label`, `position`) VALUES
