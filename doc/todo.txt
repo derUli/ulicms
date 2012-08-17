@@ -7,3 +7,5 @@
 * API erweitern
 * Login fürs Frontend
 * Papierkorb
+* Vorlagen
+* Meta Description und Keywords für jede Seite

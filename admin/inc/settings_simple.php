@@ -54,9 +54,9 @@ if($_SESSION["group"]>=50){
 <select name="frontpage" size=1 style="width:400px">
 <?php for($i=0;$i<count($pages);$i++){
 if($pages[$i] == $settings["frontpage"]){
-echo "<option value='".$pages[$i]."' selected='selected'>".$pages[$i]."</option>";
+  echo "<option value='".$pages[$i]."' selected='selected'>".$pages[$i]."</option>";
 }else{
-echo "<option value='".$pages[$i]."'>".$pages[$i]."</option>";
+  echo "<option value='".$pages[$i]."'>".$pages[$i]."</option>";
 }
 
 }
@@ -118,6 +118,7 @@ echo " checked";
 UliCMS verf&uuml;gt &uuml;ber direkte Schnittstellen zu Facebook und Disqus">Kommentarsystem</td>
 <td>
 <select name="comment_mode" size=1 style="width:100%;">
+<option value="intern" <?php if($settings["comment_mode"] == "intern"){echo 'selected';}?>>Intern</option>
 <option value="facebook" <?php if($settings["comment_mode"] == "facebook"){echo 'selected';}?>>Facebook Comments</option>
 <option value="disqus" <?php if($settings["comment_mode"] == "disqus"){echo 'selected';}?>>Disqus</option>
 <option value="off" <?php if($settings["comment_mode"] == "off"){echo 'selected';}?>>Aus</option>
