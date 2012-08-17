@@ -1,9 +1,5 @@
-Durchführen eines Updates von UliCMS 4.4 auf UliCMS 4.5 Development Version
-1. Alle Dateien außer cms-config.php, templates und functions.php auf den Server hochladen und überschreiben.
-2. http://www.meinedomain.de/pfad/zur/update.php im Browser aufrufen.
-3. Fertig.
+1. Dateien per FTP hochladen.
+2. update.php die Rechte 0777 geben
+3. http://www.meinedomain.de/update.php aufrufen
 
-Sollten Sie sich nach dem Update nicht mehr einloggen können, öffnen Sie die Datenbanktabelle prefix_admins und ändern in der Spalte "password" das Passwort in ein neues um.
-Das Passwort wird als MD5 Hashwert gespeichert.
-Den können Sie z.B. hier generieren:
-http://www.md5hash.de/
+Das wars schon!
