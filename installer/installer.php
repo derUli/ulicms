@@ -375,6 +375,10 @@ mysql_query("INSERT INTO `".$prefix."backend_menu_structure` (`id`, `action`, `l
 
 
 
+mysql_query("ALTER TABLE `".$prefix."admins` ADD `skype_id` VARCHAR( 32 ) NOT NULL AFTER `group` ,
+ADD `icq_id` VARCHAR( 20 ) NOT NULL AFTER `skype_id` ,
+ADD `avatar_file` VARCHAR( 40 ) NOT NULL AFTER `icq_id` ,
+ADD `about_me` TEXT NOT NULL AFTER `avatar_file`");
 
 
 

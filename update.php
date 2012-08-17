@@ -6,6 +6,8 @@ require_once "init.php";
 //Create deleted_at row, for recycle bin
 mysql_query("ALTER TABLE `".$prefix."content` ADD `deleted_at` BIGINT NULL AFTER `access`"); 
 
+
+// Add Backend Menu Structure Database Table
 mysql_query("CREATE TABLE `".$prefix."backend_menu_structure` (
 `id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
 `action` VARCHAR( 100 ) NOT NULL ,
@@ -14,6 +16,7 @@ mysql_query("CREATE TABLE `".$prefix."backend_menu_structure` (
 ) ENGINE = MYISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 ");
 
+// Create Database Structure
 mysql_query("INSERT INTO `".$prefix."backend_menu_structure` (`id`, `action`, `label`, `position`) VALUES
 (15, 'media', 'Medien', 3),
 (14, 'home', 'Willkommen', 1),
@@ -25,6 +28,11 @@ mysql_query("INSERT INTO `".$prefix."backend_menu_structure` (`id`, `action`, `l
 (20, 'settings_categories', 'Einstellungen', 8),
 (21, 'modules', 'Module', 6),
 (22, 'admins', 'Benutzer', 4);");
+
+mysql_query("ALTER TABLE `".$prefix."admins` ADD `skype_id` VARCHAR( 32 ) NOT NULL AFTER `group` ,
+ADD `icq_id` VARCHAR( 20 ) NOT NULL AFTER `skype_id` ,
+ADD `avatar_file` VARCHAR( 40 ) NOT NULL AFTER `icq_id` ,
+ADD `about_me` TEXT NOT NULL AFTER `avatar_file`");
 
 @chmod("update.php", 0777);
 

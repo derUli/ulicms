@@ -12,3 +12,4 @@
 * Sessions (einstellbares Timeout, wer ist online? usw...)
 * Benutzerprofile
 * Passwort vergessen
+* News System erweitern
