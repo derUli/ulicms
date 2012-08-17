@@ -10,3 +10,4 @@
 * Vorlagen
 * Meta Description und Keywords für jede Seite
 * Formular Manager
+* Sessions (einstellbares Timeout, wer ist online? usw...)
