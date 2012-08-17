@@ -416,12 +416,14 @@ function resize_image($file, $target, $w, $h, $crop=FALSE) {
   $type =  $logo_upload['type'];
   $filename =  $logo_upload['name'];
   $extension = file_extension($filename); 
-  $hash = md5(file_get_contents($logo_upload['tmp_name']));
+ 
+  
   if($type == "image/jpeg" or 
    $type == "image/jpg" or
    $type == "image/png" or
    $type == "image/gif"){
-                  
+   
+  $hash = md5(file_get_contents($logo_upload['tmp_name']));
    $new_filename =  "../content/images/". $hash.".".$extension;
    $logo_upload_filename = $hash.".".$extension;
    resize_image($logo_upload['tmp_name'], $new_filename ,

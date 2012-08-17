@@ -12,7 +12,7 @@ Das Bild darf maximal 500 x 100 Pixel haben.
 <td><strong>Ihr Logo</strong></td>
 <td><?php
 
-$logo_path = "content/images/".getconfig("logo_image");
+$logo_path = "../content/images/".getconfig("logo_image");
 if (file_exists($logo_path) and is_file($logo_path)){
   echo '<img class="website_logo" src="'.$logo_path.'" alt="'.getconfig("homepage_title").'"/>';
 
@@ -20,8 +20,7 @@ if (file_exists($logo_path) and is_file($logo_path)){
 </td>
 <tr>
 <td width=480><strong>Neues Logo hochladen</strong></td>
-<td><input type="hidden" name="max_file_size" value="1000">
-<input name="logo_upload_file" type="file" accept="image/*">
+<td><input name="logo_upload_file" type="file" accept="image/*">
 </td>
 </table>
 <div align="center">
