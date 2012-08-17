@@ -2,7 +2,6 @@
 * Mehrsprachigkeit (Deutsch, Englisch)
 * interne Kommentarfunktion implementieren
 * Eigene 404 und 403 Fehlerseite
-* Galerien
 * Mehr als zwei Menüebenen
 * API erweitern
 * Login fürs Frontend
@@ -11,3 +10,5 @@
 * Meta Description und Keywords für jede Seite
 * Formular Manager
 * Sessions (einstellbares Timeout, wer ist online? usw...)
+* Benutzerprofile
+* Passwort vergessen
