@@ -4,7 +4,6 @@
 * Eigene 404 und 403 Fehlerseite
 * Mehr als zwei Menüebenen
 * API erweitern
-* Login fürs Frontend
 * Papierkorb
 * Vorlagen
 * Meta Description und Keywords für jede Seite
