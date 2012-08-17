@@ -1,20 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-<title><?php homepage_title()?> | <?php title()?></title>
+<head>                                
 <?php base_metas()?>
-<link rel="stylesheet" type="text/css" href="templates/style.css"/>
+<link rel="stylesheet" href="templates/style.css" type="text/css" />
+<title><?php title()?></title>
 </head>
+
 <body>
-<div class="header">
-<h1><?php homepage_title()?></h1>
-<span><?php motto()?></span>
-</div>
-<div class="navcontainer">
-<div class="menu" id="navi">
-<?php menu("top");?>
-</div>
-</div>
-<div class="container">
-<div class="content">
-<h2><?php title()?></h2>    
+<!-- wrap starts here -->
+<div id="wrap">
+
+	<div id="header"><div id="header-content">	
+		
+		<h1 id="logo"><a href="?seite=<?php echo getconfig("frontpage")?>" title=""><?php homepage_title()?></a></h1>	
+		<h2 id="slogan"><?php motto()?></h2>		
+		
+		<!-- Menu Tabs -->
+		<?php menu("top")?>
+			                              
+	
+	</div></div>
+	
+	<div class="headerphoto"></div>
+				
+	<!-- content-wrap starts here -->
+	<div id="content-wrap"><div id="content">		
+		
+		<div id="sidebar" >
+		
+	
+
+			<div class="sidebox">	
+			
+				<h1 class="clear">Sidebar Menü</h1>
+				<?php menu("right")?>
+				
+			</div>	
+			
+		
+			
+			<div class="sidebox">	
+			
+				<h1>Neuigkeiten</h1>
+				<div style="padding:10px;">
+				<?php news()?>
+				</div>
+					
+			</div>		
+			
+		
+					
+		</div>	
+	
+		<div id="main">		
+		
+			<div class="post">
+			<h1><?php title()?></h1>

@@ -157,6 +157,11 @@ function is_frontpage(){
 }
 
 
+
+function is_200(){
+  return(check_status("200 OK"));
+}
+
 function is_404(){
   return(check_status("404 Not Found"));
 }

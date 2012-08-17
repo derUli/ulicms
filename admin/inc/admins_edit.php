@@ -17,6 +17,7 @@ while($row=mysql_fetch_object($query)){
 <br/><br/>
 <?php if(file_exists("../content/avatars/".$row->avatar_file)){?>
 <img src='../content/avatars/<?php echo $row->avatar_file?>' alt="Avatarbild">
+<br/>
 <?php
 }
 ?>

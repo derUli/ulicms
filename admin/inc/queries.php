@@ -19,6 +19,13 @@ if($_GET["action"]=="save_settings"&&isset($_POST["save_settings"])){
   exit();
 }
 
+
+if($_GET["action"]=="view_website" or $_GET["action"] == "frontpage"){
+	header("Location: ../");
+	exit();
+}
+
+
 if($_GET["action"]=="pages_delete" && $_SESSION["group"]>=40){
   $page=mysql_real_escape_string($_GET["page"]);
   $query=mysql_query("DELETE FROM ".tbname("content")." WHERE id='$page'",$connection);

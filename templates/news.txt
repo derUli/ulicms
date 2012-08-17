@@ -7,8 +7,6 @@
 </div>
 <div class="news_text">
 {text}
-
-<i>{autor}</i>
 </div>
 </div>
 <br/>

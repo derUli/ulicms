@@ -1,7 +1,7 @@
 <?php
 require_once "init.php";
 
-// Update Script von Version 4.5 auf Version 2012 R1
+// Update Script von Version 4.5 auf 4.6
 
 //Create deleted_at row, for recycle bin
 mysql_query("ALTER TABLE `".$prefix."content` ADD `deleted_at` BIGINT NULL AFTER `access`"); 

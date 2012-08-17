@@ -234,7 +234,13 @@ created, lastchangeby, autor, views, comments_enabled, redirection, menu, positi
 VALUES (0, 'willkommen', 'Willkommen', 
 '<p>Herzlichen Glückwunsch!<br/>
 UliCMS wurde erfolgreich auf dieser Website installiert.</p>', 1, ".time().",
-1, 1, 0, 0, '', 'top', 0, '-', ".time().")");
+1, 1, 0, 0, '', 'top', 10, '-', ".time().")");
+
+mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
+created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
+VALUES (1, 'benutzer', 'Benutzer', 
+'[module=\"profiles\"]', 1, ".time().",
+1, 1, 0, 0, '', 'right', 10, '-', ".time().")");    
 
 mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
 created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)

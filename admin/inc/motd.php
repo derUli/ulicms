@@ -24,6 +24,8 @@ getconfig("allowed_html"))?></p>
 
 <?php
 
+}else{
+  noperms();
 }
 
 
