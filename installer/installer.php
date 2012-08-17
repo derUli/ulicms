@@ -228,7 +228,6 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
 
 
 
-mysql_query("ALTER TABLE `".$prefix."content` ADD `deleted_at` BIGINT NULL AFTER `access`"); 
 
 
 
@@ -274,6 +273,9 @@ VALUES (1, 'login', 'Anmelden',
 mysql_query("ALTER TABLE `".$prefix."content` ADD `valid_from` DATE NOT NULL AFTER `parent` ,
 ADD `valid_to` DATE AFTER `valid_from` ,
 ADD `access` VARCHAR( 100 ) AFTER `valid_to`");
+
+mysql_query("ALTER TABLE `".$prefix."content` ADD `deleted_at` BIGINT NULL AFTER `access`"); 
+
 
 mysql_query("ALTER TABLE `".$prefix."content` ADD `meta_description` TEXT NOT NULL AFTER `access` ,
 ADD `meta_keywords` TEXT NOT NULL AFTER `meta_description` ");
