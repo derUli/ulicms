@@ -23,13 +23,11 @@ while($row = mysql_fetch_object($admins_query)){
 if($motd or strlen($motd)>10){
 $motd = nl2br($motd);
 ?>
-<br>
-<br>
+
 <h2>Nachricht des Tages</h2>
 <div class="motd">
 <?php echo $motd;?>
 </div>
-<br>
 <br>
 <?php
 }
