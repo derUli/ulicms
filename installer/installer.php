@@ -358,8 +358,23 @@ mysql_query("CREATE TABLE `".$prefix."backend_menu_structure` (
 `action` VARCHAR( 100 ) NOT NULL ,
 `label` VARCHAR( 100 ) NOT NULL ,
 `position` INT NOT NULL
-) ENGINE = MYISAM ;
+) ENGINE = MYISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 ");
+
+mysql_query("INSERT INTO `".$prefix."backend_menu_structure` (`id`, `action`, `label`, `position`) VALUES
+(15, 'media', 'Medien', 3),
+(14, 'home', 'Willkommen', 1),
+(12, 'destroy', 'Logout', 10),
+(24, 'system_update', 'Update', 7),
+(23, 'contents', 'Inhalte', 2),
+(18, 'templates', 'Templates', 5),
+(19, 'info', 'Info', 9),
+(20, 'settings_categories', 'Einstellungen', 8),
+(21, 'modules', 'Module', 6),
+(22, 'admins', 'Benutzer', 4);");
+
+
+
 
 
 
