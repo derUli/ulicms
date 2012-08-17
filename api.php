@@ -15,6 +15,8 @@ function getconfig($key){
 	}
 }
 
+
+
 function getModulePath($module){
 	// Frontend Directory
 	if(is_file("cms-config.php")){
@@ -116,6 +118,19 @@ function getAllSystemNames(){
 	$returnvalues = Array();
 	while($row = mysql_fetch_object($query)){
 		array_push($returnvalues, $row->systemname);
+}
+
+return $returnvalues;
+
+}
+
+
+// get all menu items
+function getAllMenuItems(){
+	$query = mysql_query("SELECT * FROM `".tbname("backend_menu_structure")."` ORDER BY position ASC");
+	$returnvalues = Array();
+	while($row = mysql_fetch_assoc($query)){
+		array_push($returnvalues, $row);
 }
 
 return $returnvalues;

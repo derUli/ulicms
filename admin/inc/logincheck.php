@@ -1,5 +1,5 @@
 <?php
-if(isset($_GET["destroy"])){
+if(isset($_GET["destroy"]) or $_GET["action"]=="destroy"){
 	session_destroy();
 	header("Location: index.php");
 	exit();

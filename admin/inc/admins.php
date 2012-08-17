@@ -1,10 +1,10 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=50){
 
 $query=mysql_query("SELECT * FROM ".tbname("admins")." ORDER BY id",$connection);
 if(mysql_num_rows($query)){
 ?>
-<h2>Administratoren</h2>
+<h2>Benutzer</h2>
 <p>Hier können Sie die Administratoren Ihrer Homepage verwalten und die Passwörter ändern.
 <br/><br/>
 <a href="index.php?action=admin_new">Administrator anlegen</a>

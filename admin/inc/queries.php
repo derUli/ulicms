@@ -27,6 +27,7 @@ exit();
 }
 
 
+
 if(!empty($_POST["save_template"])&&!empty($_POST["code"])&&$_SESSION["group"]>=40){
   $save="../templates/".basename($_POST["save_template"]);
 if(is_file($save)&&is_writable($save)){
