@@ -14,7 +14,8 @@ while($row = mysql_fetch_object($admins_query)){
 }
 
 ?>
-<p>Hallo <?php echo $_SESSION["firstname"]." ".$_SESSION["lastname"];?>!</p>
+<p>Hallo <?php echo $_SESSION["firstname"]." ".$_SESSION["lastname"];?>! [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
+</p>
 
 <p>Diese Website hat <?php echo $pages_count?> Seiten und <?php echo $news_count?> News.</p>
 
@@ -77,8 +78,8 @@ echo $autorName;
 
 </p>
 
-<br>
-<br><br>
+
+
 
 <?php
 }

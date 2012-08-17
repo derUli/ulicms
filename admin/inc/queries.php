@@ -354,20 +354,34 @@ if($_POST["edit_page"]=="edit_page" && $_SESSION["group"]>=30){
 
 
 
-if($_POST["edit_admin"]=="edit_admin" && $_SESSION["group"]>=50){
+if($_POST["edit_admin"]=="edit_admin" && $_SESSION["group"]>=50
+or ($_POST["edit_admin"]=="edit_admin" and $_SESSION["group"]>=10 and $_POST["id"] == $_SESSION["login_id"])){
 
-$id=intval($_POST["id"]);
-$username=mysql_real_escape_string($_POST["admin_username"]);
-$lastname=mysql_real_escape_string($_POST["admin_lastname"]);
-$firstname=mysql_real_escape_string($_POST["admin_firstname"]);
-$email=mysql_real_escape_string($_POST["admin_email"]);
-$password=mysql_real_escape_string($_POST["admin_password"]);
-$rechte=mysql_real_escape_string($_POST["admin_rechte"]);
-$query=mysql_query("UPDATE ".tbname("admins")." SET username='$username', `group`=$rechte, firstname='$firstname', lastname='$lastname', email='$email', password='".$password."' WHERE id=$id",$connection);
+$id = intval($_POST["id"]);
+
+$username = mysql_real_escape_string($_POST["admin_username"]);
+$lastname = mysql_real_escape_string($_POST["admin_lastname"]);
+$firstname = mysql_real_escape_string($_POST["admin_firstname"]);
+$email = mysql_real_escape_string($_POST["admin_email"]);
+$password = mysql_real_escape_string($_POST["admin_password"]);
+$rechte = mysql_real_escape_string($_POST["admin_rechte"]);
+$icq_id = mysql_real_escape_string($_POST["icq_id"]);        
+$icq_id = mysql_real_escape_string($_POST["icq_id"]);  
+$skype_id = mysql_real_escape_string($_POST["skype_id"]);     
+$about_me = mysql_real_escape_string($_POST["about_me"]);  
+mysql_query("UPDATE ".tbname("admins")." SET username='$username', `group`= $rechte, firstname='$firstname',
+lastname='$lastname', email='$email', password='".$password."',
+`icq_id`='$icq_id',  skype_id = '$skype_id',
+about_me = '$about_me' WHERE id=$id",$connection);
 
 
-header("Location: index.php?action=admins");
-exit();
+if($_SESSION["group"]>=10 and $_POST["id"] == $_SESSION["login_id"]){
+   header("Location: index.php");
+   exit();
+}else{
+  header("Location: index.php?action=admins");
+  exit();
+}
 
 }
 

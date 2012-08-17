@@ -122,6 +122,10 @@ else if($_GET["action"]  == "motd"){
 	require_once "inc/motd.php";
 }
 
+else if($_GET["action"]  == "edit_profile"){
+	require_once "inc/edit_profile.php";
+}
+
 }
 
 require_once "inc/footer.php";

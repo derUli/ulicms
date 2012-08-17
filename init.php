@@ -79,6 +79,7 @@ if(!getconfig("allowed_html")){
     setconfig("allowed_html", "<i><b><strong><em><ul><li><ol><a>");
   }
 
+// If no MOTD is set then set default motd
 
                            
 @include "functions.php";
