@@ -405,7 +405,7 @@ if($_POST["edit_admin"]=="edit_admin" && $_SESSION["group"]>=50
 or ($_POST["edit_admin"]=="edit_admin" and $_SESSION["group"]>=10 and $_POST["id"] == $_SESSION["login_id"])){
 
 $id = intval($_POST["id"]);
-if(isset($_FILES['avatar_upload'])){
+if(!empty($_FILES['avatar_upload']['name'])){
 if(!file_exists("../content/avatars")){ 
   @mkdir("../content/avatars");
   @chmod("../content/avatars", 0777);
