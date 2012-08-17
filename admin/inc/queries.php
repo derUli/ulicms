@@ -51,12 +51,14 @@ if($_GET["action"]=="key_delete" && $_SESSION["group"]>=40){
   exit();
 }
 
-if(isset($_POST["add_menu_item"]) and $_SESSION["group"]>=40){
+
+
+if(isset($_POST["add_menu_item"]) and $_SESSION["group"]>=50){
    $query = mysql_query("SELECT position FROM ".
-   tbname("backend_menu_structure")." ORDER BY position DESC LIMIT 1")or die(mysql_error());
+   tbname("backend_menu_structure")." ORDER BY position DESC LIMIT 1");
    if(mysql_num_rows($query)>0){
-    $fetched_assoc = mysql_fetch_object($fetched_assoc);
-    $position = $fetched_assoc["position"];
+    $fetched_assoc = mysql_fetch_assoc($query);
+    $position = $fetched_assoc["position"] + 1;
    }else{
     $position = 1;
    }
@@ -68,6 +70,108 @@ if(isset($_POST["add_menu_item"]) and $_SESSION["group"]>=40){
    "(action, label, position) 
    VALUES('$action', '$label', $position)");
 }
+
+
+if($_GET["action"] == "customize_menu" and
+isset($_GET["delete"]) and
+$_SESSION["group"]>=50){
+  $delete = intval($_GET["delete"]);
+  mysql_query("DELETE FROM ".tbname("backend_menu_structure").
+  " WHERE position = $delete");
+  mysql_query("UPDATE ".tbname("backend_menu_structure").
+  " SET position = position - 1 WHERE position > $delete ");  
+}
+
+
+// Move Menu Item Up
+if($_GET["action"] == "customize_menu" and isset($_GET["up"])
+and $_SESSION["group"]>=50){                          
+  $current_position = intval($_GET["up"]);                  
+  if($current_position != 1){
+  
+        mysql_query("UPDATE ".
+    tbname("backend_menu_structure")." SET position = -1".
+    " WHERE position = $current_position");  
+    
+          mysql_query("UPDATE ".
+    tbname("backend_menu_structure")." SET position = -2".
+    " WHERE position = $current_position - 1");  
+  
+  
+  
+      mysql_query("UPDATE ".
+    tbname("backend_menu_structure")." SET position = $current_position - 1".
+    " WHERE position = -1");  
+    
+    
+    mysql_query("UPDATE ".
+    tbname("backend_menu_structure")." SET position = $current_position".
+    " WHERE position = -2"); 
+    
+     
+
+                                            
+  
+  } 
+   
+}
+
+
+
+// Move Menu Item Down
+if($_GET["action"] == "customize_menu" and isset($_GET["down"])
+and $_SESSION["group"]>=50){
+  $current_position = intval($_GET["down"]);
+  
+      $query = mysql_query("SELECT position FROM ".
+   tbname("backend_menu_structure")." ORDER BY position DESC LIMIT 1");
+   if(mysql_num_rows($query)>0){
+    $fetched_assoc = mysql_fetch_assoc($query);
+    $last_position = $fetched_assoc["position"];
+   }else{
+    $last_position = 1;
+   }
+  
+  
+  
+  if($current_position != $last_position){
+  
+
+  
+  
+        mysql_query("UPDATE ".
+    tbname("backend_menu_structure")." SET position = -1".
+    " WHERE position = $current_position");  
+    
+          mysql_query("UPDATE ".
+    tbname("backend_menu_structure")." SET position = -2".
+    " WHERE position = $current_position + 1");  
+  
+  
+  
+      mysql_query("UPDATE ".
+    tbname("backend_menu_structure")." SET position = $current_position + 1".
+    " WHERE position = -1");  
+    
+    
+    mysql_query("UPDATE ".
+    tbname("backend_menu_structure")." SET position = $current_position".
+    " WHERE position = -2"); 
+    
+     
+
+                                            
+  
+  } 
+   
+}
+
+
+
+
+
+
+
 
 if($_GET["action"]=="banner_delete" && $_SESSION["group"]>=40){
   $banner=intval($_GET["banner"]);

@@ -1,16 +1,1 @@
-* Registrierungsfunktion für Gäste implementiert
-* begonnen eine API für die Userverwaltung zu erstellen
-* Passwörter werden jetzt verschlüsselt in der Datenbank gespeichert
-* Systemnamen/Permalinks sind jetzt änderbar
-* Vorschau für deaktivierte Seiten wird jetzt angezeigt wenn der Benutzer als Redakteur oder Admin eingeloggt ist
-* neues Feature: Seite nur für registrierte Nutzer zugänglich machen
-* Einige kleinere Verbesserungen
-* Update jetzt auch per Backend möglich
-  Patch per FTP-Hochladen.
-  Nun wird im Adminmenü der neue Menüpunkt "Update" angezeigt.
-  Draufklicken und den Anweisungen folgen.
-* JavaScript MD5-Hashing zum Userdaten Formular hinzugefügt
-* Gästebuch auf Version 0.0.3 gebracht
-* getAllSystemNames() sortiert nun die Rückgabewerte automatisch
-* Menüpunkt für Module hinzugefügt
-* Added IntraMail Module
+* Menüband im Backend kann jetzt angepasst werden.
