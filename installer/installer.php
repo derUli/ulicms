@@ -238,17 +238,6 @@ VALUES (0, 'willkommen', 'Willkommen',
 UliCMS wurde erfolgreich auf dieser Website installiert.</p>', 1, ".time().",
 1, 1, 0, 0, '', 'top', 10, '-', ".time().")");
 
-mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
-created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
-VALUES (1, 'benutzer', 'Benutzer', 
-'[module=\"profiles\"]', 1, ".time().",
-1, 1, 0, 0, '', 'right', 10, '-', ".time().")");    
-
-mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
-created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
-VALUES (1, 'gaestebuch', 'Gästebuch', 
-'[module=\"guestbook\"]', 1, ".time().",
-1, 1, 0, 0, '', 'top', 500, '-', ".time().")");    
 
 mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
 created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
@@ -314,8 +303,11 @@ mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (11, 'max_news', '10'),
 (12, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
 (13, 'meta_description', 'Eine kurzer Beschreibungstext'),
-(14, 'visitors_can_register', 'on'),
-(15, 'frontpage', 'willkommen');");
+(14, 'logo_disabled', 'no'),
+(15, 'logo_image', ''),    
+(16, 'motd', ''),
+(17, 'visitors_can_register', 'on'),
+(18, 'frontpage', 'willkommen');");
                                 
                    
                                                  
