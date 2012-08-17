@@ -34,6 +34,15 @@ if($_SESSION["group"]>=50){
 <td><strong><input type="text" name="homepage_owner" style="width:400px" value="<?php echo $settings["homepage_owner"];?>"></strong></td>
 </tr>
 <tr>
+<td><strong>Logo ausblenden:</strong></strong></td>
+<td>
+<select name="logo_disabled" style="width:400px" size=1>
+<option <?php if (getconfig("logo_disabled")=="yes") echo 'selected '?> value="yes">Ja</option>
+<option <?php if (getconfig("logo_disabled")!="yes") echo 'selected '?> value="no">Nein</option>
+</select>
+</td>
+</tr>
+<tr>
 <td><strong data-tooltip="An diese Adresse werden Emails über das Kontaktformular versandt...">Emailadresse des Inhabers:</strong></td>
 <td><strong><input type="text" name="email" style="width:400px" value="<?php echo $settings["email"];?>"></strong></td>
 </tr>
@@ -138,7 +147,7 @@ Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</s
 </tr>
 <tr>
 <td>
-<td><input type="reset" value="Zurücksetzen" onclick="return confirm('Wirklich zurücksetzen?\nAlle Änderungen gehen verloren.')" style="width:45%;"> <input type="submit" value="OK" style="width:45%;"></td>
+<td align="center"><input type="submit" value="OK" style="width:45%;"></td>
 </tr>
 </table>
 <input type="hidden" name="save_settings" value="save_settings">

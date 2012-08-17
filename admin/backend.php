@@ -126,6 +126,11 @@ else if($_GET["action"]  == "edit_profile"){
 	require_once "inc/edit_profile.php";
 }
 
+else if($_GET["action"]  == "logo_upload"){
+	require_once "inc/logo.php";
+}
+
+
 }
 
 require_once "inc/footer.php";

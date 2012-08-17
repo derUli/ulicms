@@ -22,7 +22,7 @@ while($row=mysql_fetch_object($query)){
 }
 ?>
 Avatar hochladen:<br/>
-<input type="file" name="avatar_upload"><br>
+<input type="file" name="avatar_upload" accept="image/*"><br>
 <br/>
 <strong>Nachname:</strong><br/>
 <input type="text" style="width:300px;" name="admin_lastname" value="<?php echo $row->lastname;?>">

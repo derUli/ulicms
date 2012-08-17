@@ -14,7 +14,9 @@ if($_GET["action"]=="save_settings"&&isset($_POST["save_settings"])){
   setconfig("comment_mode", mysql_real_escape_string($_POST["comment_mode"]));
   setconfig("disqus_id", mysql_real_escape_string($_POST["disqus_id"]));
   setconfig("facebook_id", mysql_real_escape_string($_POST["facebook_id"]));
+  setconfig("items_in_rss_feed", intval($_POST["items_in_rss_feed"]));      
   setconfig("items_in_rss_feed", intval($_POST["items_in_rss_feed"]));
+  setconfig("logo_disabled", mysql_real_escape_string($_POST["logo_disabled"]));
   header("Location: index.php?action=settings_simple");
   exit();
 }
@@ -398,6 +400,39 @@ function resize_image($file, $target, $w, $h, $crop=FALSE) {
   
 }
 
+
+
+// Logo Upload
+  if(!empty($_FILES['logo_upload_file']['name'])
+  and $_SESSION["group"] >= 40){
+    if(!file_exists("../content/images")){ 
+      @mkdir("../content/images");
+      @chmod("../content/images", 0777);
+  
+  }
+ 
+ 
+  $logo_upload = $_FILES['logo_upload_file'];
+  $type =  $logo_upload['type'];
+  $filename =  $logo_upload['name'];
+  $extension = file_extension($filename); 
+  $hash = md5(file_get_contents($logo_upload['tmp_name']));
+  if($type == "image/jpeg" or 
+   $type == "image/jpg" or
+   $type == "image/png" or
+   $type == "image/gif"){
+                  
+   $new_filename =  "../content/images/". $hash.".".$extension;
+   $logo_upload_filename = $hash.".".$extension;
+   resize_image($logo_upload['tmp_name'], $new_filename ,
+   500, 100, $crop=FALSE); 
+   setconfig("logo_image", $logo_upload_filename);
+   }
+  
+  
+  
+  
+}
 
 
 

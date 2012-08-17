@@ -8,11 +8,11 @@ $menu_items = mysql_query("SELECT * FROM ".tbname("backend_menu_structure")." OR
 <form action="index.php?action=customize_menu" method="post">
 <table border=0>
 <tr>
-<td>Beschriftung: </td>
+<td><strong>Beschriftung:</strong> </td>
 <td><input type="text" name="label" maxlength=100 size=40></td>
 </tr>
 <tr>
-<td style="width:100px;">Action: </td>
+<td style="width:100px;"><strong>Action:</strong> </td>
 <td><input type="text" name="action" maxlength=100 size=40></td>
 </tr>
 <tr>
@@ -28,9 +28,9 @@ $menu_items = mysql_query("SELECT * FROM ".tbname("backend_menu_structure")." OR
 <?php if(mysql_num_rows($menu_items)>0){?>
 <table border=1 style="width:800px;"> 
 <tr>
-<td>Position</td>
-<td>Beschriftung</td>
-<td>Action</td>
+<td><strong>Position</strong></td>
+<td><strong>Beschriftung</strong></td>
+<td><strong>Action</td>
 <td></td>
 <td></td>  
 <td>

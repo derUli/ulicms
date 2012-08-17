@@ -17,6 +17,22 @@ function random_banner(){
 }
 
 
+function logo(){
+  if(!getconfig("logo_image")){
+    setconfig("logo_image", "");
+  }
+  if(!getconfig("logo_disabled")){
+    setconfig("logo_disabled", "no");
+  }
+  
+  $logo_path = "content/images/".getconfig("logo_image");
+  
+  if(getconfig("logo_disabled") == "no" and file_exists($logo_path)){
+    echo '<img class="website_logo" src="'.$logo_path.'" alt="'.getconfig("homepage_title").'"/>';
+  }
+  
+}
+
 
 
 

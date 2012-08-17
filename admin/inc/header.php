@@ -13,6 +13,8 @@ text-decoration:none;
 }
 
 
+
+
 .motd{
   overflow-x:no-scroll;  
   overflow-y:scroll;
@@ -219,6 +221,13 @@ width:98%;
 }
 
 
+
+
+input[type=button], input[type=submit]{
+background-color:#aaa;
+color:#fff;
+width:200px;
+border:6px solid #ddd; }
 
 .startbutton,.startbutton:visited {
 display:block;
