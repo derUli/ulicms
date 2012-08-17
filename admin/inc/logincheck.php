@@ -17,8 +17,11 @@ if(isset($_POST["login"])){
 		$_SESSION["email"]=$data["email"];
 		$_SESSION["login_id"]=$data["id"];
 		$_SESSION["group"]=$data["group"];
-
-		header("Location: index.php");
+    if(isset($_REQUEST["go"])){
+      header("Location: ".$_REQUEST["go"]);
+    }else{
+		  header("Location: index.php");
+		  }
 		exit();
 	}
 

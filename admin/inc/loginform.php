@@ -3,6 +3,10 @@
 <h3>Bitte authentifizieren Sie sich:</h3>
 <form action="index.php" method="post">
 <input type="hidden" name="login" value="login">
+<?php if(!empty($_REQUEST["go"])){?>
+<input type="hidden" name="go" value='<?php 
+echo htmlspecialchars($_REQUEST["go"])?>'>
+<?php } ?>
 <table style="border:0px;">
 <tr>
 <td width="100px"><strong><strong>Benutzername:</strong></td>
@@ -22,7 +26,11 @@
 
 <?php 
 if(getconfig("visitors_can_register")=="on" or getconfig("visitors_can_register")=="1" or getconfig("visitors_can_register")== true){
-?><a href="?register=register">Registrieren</a>
+?><a href="?register=register&<?php
+if(!empty($_REQUEST["go"])){
+echo "go=".htmlspecialchars($_REQUEST["go"]);
+}
+?>">Registrieren</a>
 <?php
 }
 ?>

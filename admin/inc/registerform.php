@@ -22,7 +22,12 @@ if(isset($_POST["register_user"])){
       $_POST["admin_firstname"],
       $_POST["admin_email"], $_POST["admin_password"], 10);
       echo "<p style='color:green;'>Registrierung erfolgreich!</p>";
-      echo "<p><a href='index.php'>Hier gehts weiter</a></p>";
+      if(!empty($_REQUEST["go"])){
+        $go = htmlspecialchars($_REQUEST["go"]);
+      }else{
+        $go = "index.php";
+        }
+      echo "<p><a href='$go'>Hier gehts weiter</a></p>";
     }
 }
 
@@ -30,6 +35,10 @@ if(isset($_POST["register_user"])){
 <h1>Registrierung</h1>
 <form action="index.php?register=register" method="post">
 <input type="hidden" name="register_user" value="add_admin">
+<?php if(!empty($_REQUEST["go"])){?>
+<input type="hidden" name="go" value='<?php 
+echo htmlspecialchars($_REQUEST["go"])?>'>
+<?php } ?>
 <strong data-tooltip="Dieser Name wird zur Anmeldung im Administrationsbereich benötigt...">Benutzername:</strong><br/>
 <input type="text" style="width:300px;" name="admin_username" value="">
 <br/><br/>

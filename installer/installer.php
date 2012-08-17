@@ -254,7 +254,7 @@ mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, con
 created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
 VALUES (1, 'login', 'Anmelden', 
 '', 1, ".time().",
-1, 1, 0, 0, 'admin/', 'down', 20, '-', ".time().")");    
+1, 1, 0, 0, 'admin/?go=../index.php', 'down', 20, '-', ".time().")");    
 
 
 
