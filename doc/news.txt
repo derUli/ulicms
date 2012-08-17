@@ -1,3 +1,4 @@
 * Menüband im Backend kann jetzt angepasst werden.
 * Man kann eine Message Of The Day (MOTD) definieren, die dann allen eingeloggten Benutzern angezeigt wird.
 * Benutzerprofile: Vor und Nachname, Über Mich, ICQ, Skype, Avatar, Passwort ändern
+* Meta Description und Meta Keywords für jede Seite einstellbar

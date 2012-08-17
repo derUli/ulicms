@@ -212,9 +212,16 @@ if($_POST["add_page"]=="add_page"){
 	$parent = mysql_real_escape_string($_POST["parent"]);
 	$access = implode(",", $_POST["access"]);
 	$access = mysql_real_escape_string($access);
+	$meta_description = mysql_real_escape_string($_POST["meta_description"]); 
+	$meta_keywords = mysql_real_escape_string($_POST["meta_keywords"]);
 	
 	mysql_query("INSERT INTO ".tbname("content").
-	" (systemname,title,content,parent, active,created,lastmodified,autor,comments_enabled,notinfeed,redirection,menu,position, access) VALUES('$system_title','$page_title','$page_content','$parent', $activated,".time().", ".time().",".$_SESSION["login_id"].", ".$comments_enabled .",$notinfeed, '$redirection', '$menu', $position, '".$access."')",$connection)or die(mysql_error());
+	" (systemname,title,content,parent, active,created,lastmodified,autor,
+  comments_enabled,notinfeed,redirection,menu,position, access, meta_description, meta_keywords) 
+  VALUES('$system_title','$page_title','$page_content','$parent', $activated,".time().", ".time().
+  ",".$_SESSION["login_id"].
+  ", ".$comments_enabled .
+  ",$notinfeed, '$redirection', '$menu', $position, '".$access."', '$meta_description', '$meta_keywords')",$connection)or die(mysql_error());
 
 
 header("Location: index.php?action=pages");
@@ -345,11 +352,13 @@ if($_POST["edit_page"]=="edit_page" && $_SESSION["group"]>=30){
 	$position = (int)$_POST["position"];
 	$parent = mysql_real_escape_string($_POST["parent"]);
 	$user = $_SESSION["login_id"];     
-    $id = intval($_POST["page_id"]);
+  $id = intval($_POST["page_id"]);
 	$access = implode(",", $_POST["access"]);
 	$access = mysql_real_escape_string($access);
+	$meta_description = mysql_real_escape_string($_POST["meta_description"]); 
+	$meta_keywords = mysql_real_escape_string($_POST["meta_keywords"]);
   
-  	mysql_query("UPDATE ".tbname("content")." SET systemname = '$system_title' , title='$page_title', parent='$parent', content='$page_content', active=$activated, lastmodified=".time().", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, access = '$access' WHERE id=$id",$connection);
+  	mysql_query("UPDATE ".tbname("content")." SET systemname = '$system_title' , title='$page_title', parent='$parent', content='$page_content', active=$activated, lastmodified=".time().", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords' WHERE id=$id",$connection);
 
 
   header("Location: index.php?action=pages");

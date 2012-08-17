@@ -80,6 +80,17 @@ document.newpageform.system_title.value=systemname
 
 
 <br/><br/>
+
+<strong data-tooltip="Eine kurze Beschrebung dieser Seite für Suchmaschinen">Meta Description:</strong><br/>
+<input type="text" style="width:300px;" name="meta_description" value=''>
+<br/><br/>
+
+<strong data-tooltip="Stichworte dieser Seite für Suchmaschinen
+Mit Komma getrennt">Meta Keywords:</strong><br/>
+<input type="text" style="width:300px;" name="meta_keywords" value=''>
+ 
+<br/><br/>
+
 <strong data-tooltip="Sollen Kommentare aktiviert sein?">Kommentare:</strong><br/>
 <select name="comments_enabled" size=1>
 <option value="1">aktiviert</option>

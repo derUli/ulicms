@@ -72,7 +72,18 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 
 <br/><br/>
 
+<strong data-tooltip="Eine kurze Beschrebung dieser Seite für Suchmaschinen">Meta Description:</strong><br/>
+<input type="text" style="width:300px;" name="meta_description" value='<?php 
+echo htmlspecialchars($row->meta_description); ?>'>
 
+<br/><br/>
+
+<strong data-tooltip="Stichworte dieser Seite für Suchmaschinen
+Mit Komma getrennt">Meta Keywords:</strong><br/>
+<input type="text" style="width:300px;" name="meta_keywords" value='<?php 
+echo htmlspecialchars($row->meta_keywords); ?>'>
+ 
+<br/><br/>
 <strong data-tooltip="Sollen Kommentare aktiviert sein?">Kommentare:</strong><br/>
 <select name="comments_enabled" size=1>
 <option value="1" <?php if($row->comments_enabled == 1){echo "selected";}?>>aktiviert</option>
@@ -101,7 +112,7 @@ var editor = CKEDITOR.replace( 'page_content',
 <noscript>
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
 </noscript>
-<br/><br/>
+
 </form>
 <?php 
 break;
