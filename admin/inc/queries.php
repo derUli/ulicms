@@ -396,13 +396,13 @@ if($_POST["edit_admin"]=="edit_admin" && $_SESSION["group"]>=50
 or ($_POST["edit_admin"]=="edit_admin" and $_SESSION["group"]>=10 and $_POST["id"] == $_SESSION["login_id"])){
 
 $id = intval($_POST["id"]);
-$upload_errors = false;
 if(isset($_FILES['avatar_upload'])){
 if(!file_exists("../content/avatars")){ 
   @mkdir("../content/avatars");
+  @chmod("../content/avatars", 0777);
   
 }
-
+ 
   $avatar_upload = $_FILES['avatar_upload'];
   $type = $avatar_upload['type'];
   $filename = $avatar_upload['name'];
@@ -418,6 +418,10 @@ if(!file_exists("../content/avatars")){
       resize_image($avatar_upload['tmp_name'], $new_filename ,
       125, 125, $crop=FALSE); 
    }
+}
+
+if($db_avatar_filename == "content/avatars/"){
+  $db_avatar_filename = "";
 }
 
 $username = mysql_real_escape_string($_POST["admin_username"]);

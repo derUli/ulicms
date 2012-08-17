@@ -15,7 +15,7 @@ while($row=mysql_fetch_object($query)){
 <strong data-tooltip="Dieser Name wird zur Anmeldung benötigt. Er ist nicht änderbar.">Benutzername:</strong><br/>
 <input type="text" style="width:300px;" name="admin_username" value="<?php echo $row->username;?>" readonly="readonly">
 <br/><br/>
-<?php if(file_exists("../content/avatars/".$row->avatar_file)){?>
+<?php if(file_exists("../content/avatars/".$row->avatar_file) and !empty($row->avatar_file)){?>
 <img src='../content/avatars/<?php echo $row->avatar_file?>' alt="Avatarbild">
 <br/>
 <?php
