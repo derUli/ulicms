@@ -1,33 +1,26 @@
-<br/><br/>
-<?php random_banner()?>
-<br/><br/><br/>
+<br><br>
+<p><?php random_banner()?></p>
+<br>
 <?php comments()?>
-
-	</div></div>
-
-<!-- footer starts here -->	
-<div id="footer"><div id="footer-content">
-	
-		<div class="col float-left space-sep">
-			<?php menu("down")?>
-		</div>
-		
-		
-	
-
-
-            <p>                               
-			&copy; copyright <?php year()?> by <?php homepage_owner()?> | <a href="http://www.bluewebtemplates.com/" title="Website Templates">website templates</a> by <a href="http://www.styleshout.com/">styleshout</a> <br />
-
-			</p>
-		</div>
-	
-</div></div>
-<!-- footer ends here -->
-	
-<!-- wrap ends here -->
 </div>
 </div>
+<div class="news">
+<?php news()?>
+</div>
+<div style="clear:both;">
+</div>
+<hr>
 
+<div class="navbar_down">
+<?php menu("down")?>
+</div>
+<div class="clear">
+</div>
+
+
+<div class="copyright">
+<p><?php random_banner()?></p>
+<p>&copy; <?php year()?> by  <?php homepage_owner()?></p>
+</div>
 </body>
 </html>

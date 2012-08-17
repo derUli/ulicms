@@ -223,7 +223,7 @@ if($_POST["add_page"]=="add_page"){
   VALUES('$system_title','$page_title','$page_content','$parent', $activated,".time().", ".time().
   ",".$_SESSION["login_id"].
   ", ".$comments_enabled .
-  ",$notinfeed, '$redirection', '$menu', $position, '".$access."', '$meta_description', '$meta_keywords')",$connection)or die(mysql_error());
+  ",$notinfeed, '$redirection', '$menu', $position, '".$access."', '$meta_description', '$meta_keywords')",$connection);
 
 
 header("Location: index.php?action=pages");
@@ -393,29 +393,16 @@ function resize_image($file, $target, $w, $h, $crop=FALSE) {
     }
     
 
-	  if($extension == "jpg"){
-      $src = imagecreatefromjpeg($file);
-    }
-    else if($extension == "png"){
-      $src = imagecreatefrompng($file);
-    }
-    else if($extension == "gif"){
-      $src = imagecreatefromgif($file);
-    }
+    $src = imagecreatefromjpeg($file);
+    
     $dst = imagecreatetruecolor($newwidth, $newheight);
 	
     imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 	
      
+
+      imagejpeg($dst, $target, 100);
   
-  
-   if($extension == "png"){   
-      imagesavealpha($dst, true);
-      imagepng($dst, $target, 6);
-    }
-    else if($extension == "gif"){
-      imagegif($dst, $target, 100);
-    }
   
 }
 
@@ -466,7 +453,8 @@ function resize_image($file, $target, $w, $h, $crop=FALSE) {
 
 
 if($_POST["edit_admin"]=="edit_admin" && $_SESSION["group"]>=50
-or ($_POST["edit_admin"]=="edit_admin" and $_SESSION["group"]>=10 and $_POST["id"] == $_SESSION["login_id"])){
+or ($_POST["edit_admin"]=="edit_admin" and $_SESSION["group"]>=10
+and $_POST["id"] == $_SESSION["login_id"])){
 
 $id = intval($_POST["id"]);
 if(!empty($_FILES['avatar_upload']['name'])){
@@ -481,20 +469,22 @@ if(!file_exists("../content/avatars")){
   $filename = $avatar_upload['name'];
   $extension = file_extension($filename); 
   $hash = md5(file_get_contents($avatar_upload['tmp_name']));
+  
   if($type == "image/jpeg" or $type == "image/jpg"){
   
+   $new_filename =  "../content/avatars/".$hash.".jpg";
    
-   $new_filename =  "../content/avatars/". $hash.".".$extension;     
-   $db_avatar_filename = $hash.".".$extension;
-      resize_image($avatar_upload['tmp_name'], $new_filename ,
-      125, 125, $crop=FALSE); 
-      
+   $db_avatar_filename = $hash.".jpg";
+   resize_image($avatar_upload['tmp_name'], $new_filename ,
+   125, 125, $crop=FALSE); 
+   
    }
 }
 
 if($db_avatar_filename == "content/avatars/"){
   $db_avatar_filename = "";
 }
+
 
 $username = mysql_real_escape_string($_POST["admin_username"]);
 $lastname = mysql_real_escape_string($_POST["admin_lastname"]);
@@ -510,7 +500,7 @@ mysql_query("UPDATE ".tbname("admins")." SET username='$username', `group`= $rec
 lastname='$lastname', email='$email', password='".$password."',
 `icq_id`='$icq_id',  skype_id = '$skype_id',
 about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id",$connection);
-
+  
 
 if($_SESSION["group"]>=10 and $_POST["id"] == $_SESSION["login_id"]){
    header("Location: index.php");

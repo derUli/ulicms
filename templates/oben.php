@@ -1,58 +1,178 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>                                
+<head>
+<title><?php homepage_title()?> | <?php title()?></title>
 <?php base_metas()?>
-<link rel="stylesheet" href="templates/style.css" type="text/css" />
-<title><?php title()?></title>
+<style type="text/css">
+body{
+background-color:rgb(255,255,255);
+text-center;
+margin:0px;
+}
+
+
+.header span{
+font-family:arial;
+font-size:9pt;
+}
+
+html{
+overflow-x:hidden;
+overflow-y:scroll;
+}
+
+.header{
+background-color:rgb(50, 109, 248);
+color:rgb(255, 255, 255);
+float:left;
+width:100%;
+padding-left:30px;
+padding-right:30px;
+padding-bottom:20px;
+margin:0px;
+height:100px;
+}
+
+.header .logo{
+float:left;
+margin-right:30px;
+text-align:center;
+font-family:'Times New Roman',Times,serif;
+}
+
+.header .navbar_top{
+float:left;
+margin-left:5%;
+margin-right:1%;
+margin-top:30px;
+font-family:verdana;
+font-size:9pt;
+}
+
+.header .navbar_top ul{
+display:inline;
+list-style-type:none;
+display:inline;
+}
+
+.menu_bottom ul{
+display:inline;
+list-style-type:none;
+}
+
+
+a{
+color:rgb(0, 128, 255);
+text-decoration:none;
+}
+
+a:visited{
+color:rgb(0, 106, 157);
+text-decoration:none;
+}
+
+a:hover{
+color:rgb(255, 128, 0);
+text-decoration:none;
+}
+
+.header .navbar_top ul li{
+float:left;
+margin-right:20px;
+}
+
+.navbar_down ul li{
+float:left;
+margin-right:20px;
+}
+
+.header .navbar_top ul li a, .header .navbar_top ul li a:visited{
+color:white;
+text-decoration:none;
+}
+
+.header .navbar_top ul li a:hover{
+font-style:italic;
+}
+
+
+.clear{
+clear:both;
+}
+
+.content{
+padding:20px;
+float:left;
+width:60%;
+font-family:arial;
+font-size:11pt;
+}
+
+
+.news{
+margin-top:20px;
+margin-bottom:20px;
+float:right;
+width:20%;
+font-family:arial;
+font-size:9pt;
+}
+
+h1,h2,h3,h4,h5,h6{
+font-family:Balloon
+}
+
+.navbar_down{
+margin:auto;
+margin-left:10px;
+margin-right:10px
+}
+
+div.navbar_top, div.navbar_down{
+color:rgb(255, 128, 0);
+}
+
+
+.navbar_down ul li a, .navbar_down ul li a:visited{
+color:rgb(0, 128, 192);
+font-weight:normal;
+text-decoration:none;
+}
+
+.navbar_down ul li a:hover{
+color:rgb(0, 128, 192);
+font-weight:bold;
+text-decoration:none;
+}
+
+
+
+.content h1,.content h2,.content h3,.content h4,.content h5,.content h6{
+color:rgb(52, 106, 250);
+font-family:arial;
+}
+
+.copyright{
+text-align:center;
+margin:20px;
+color:rgb(52, 106, 250);
+}
+
+</style>
 </head>
-
 <body>
-<!-- wrap starts here -->
-<div id="wrap">
-
-	<div id="header"><div id="header-content">	
-		
-		<h1 id="logo"><a href="?seite=<?php echo getconfig("frontpage")?>" title=""><?php homepage_title()?></a></h1>	
-		<h2 id="slogan"><?php motto()?></h2>		
-		
-		<!-- Menu Tabs -->
-		<?php menu("top")?>
-			                              
-	
-	</div></div>
-	
-	<div class="headerphoto"></div>
-				
-	<!-- content-wrap starts here -->
-	<div id="content-wrap"><div id="content">		
-		
-		<div id="sidebar" >
-		
-	
-
-			<div class="sidebox">	
-			
-				<h1 class="clear">Sidebar Menü</h1>
-				<?php menu("right")?>
-				
-			</div>	
-			
-		
-			
-			<div class="sidebox">	
-			
-				<h1>Neuigkeiten</h1>
-				<div style="padding:10px;">
-				<?php news()?>
-				</div>
-					
-			</div>		
-			
-		
-					
-		</div>	
-	
-		<div id="main">		
-		
-			<div class="post">
-			<h1><?php title()?></h1>
+<div class="header">
+<div class="logo">
+<h1><?php homepage_title()?></h1>
+<span><?php motto()?></span>
+</div>
+<div class="navbar_top">
+<?php menu("top")?>
+</div>
+</div>
+<div class="clear"></div>
+<div class="container">
+<div class="content">
+<h2><?php title()?></h2>
+<em style="font-size:0.8em"><?php autor()?></em>
+<hr>
