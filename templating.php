@@ -84,6 +84,64 @@ function homepage_title(){
 }
 
 
+
+	$status=check_status();
+
+
+
+
+
+function meta_keywords($ipage=null){
+	$status=check_status();	
+	$connection=MYSQL_CONNECTION;
+	$ipage=mysql_real_escape_string($_GET["seite"]);
+	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
+	if($ipage==""){
+		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
+	}
+	if(mysql_num_rows($query)>0){
+		while($row=mysql_fetch_object($query)){
+		  if(!empty($row->meta_keywords)){
+			 return $row->meta_keywords;
+			}
+		}
+
+
+	}
+	
+	
+	return false;
+}
+
+
+
+function meta_description($ipage=null){
+	$status=check_status();	
+	$connection=MYSQL_CONNECTION;
+	$ipage=mysql_real_escape_string($_GET["seite"]);
+	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
+	if($ipage==""){
+		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
+	}
+	if(mysql_num_rows($query)>0){
+		while($row=mysql_fetch_object($query)){
+		  if(!empty($row->meta_description)){
+			 return $row->meta_description;
+			}
+		}
+
+
+	}
+	
+	
+	return false;
+}
+
+
+
+
+
+
 function title($ipage=null){
 	$status=check_status();
 	if($status=="404 Not Found"){
@@ -92,7 +150,7 @@ function title($ipage=null){
 	}else if($status=="403 Forbidden"){
 		echo "Zugriff verweigert";
 	return false;
-	}
+  }
 	
 	$connection=MYSQL_CONNECTION;
 	$ipage=mysql_real_escape_string($_GET["seite"]);
@@ -109,6 +167,7 @@ function title($ipage=null){
 
 	}
 }
+
 
 
 //import and print a page();
@@ -240,8 +299,10 @@ function base_metas(){
 	echo "\r\n";
 	}
 	
-	
-	$keywords=getconfig("meta_keywords");
+	$keywords = meta_keywords();
+	if(!$keywords){
+	 $keywords = getconfig("meta_keywords");
+	}
 	if($keywords!=""&&$keywords!=false){
 		
 		if(!getconfig("hide_meta_keywords")){
@@ -249,8 +310,10 @@ function base_metas(){
 			echo "\r\n";
 		}
 	}
-	
-	$description=getconfig("meta_description");
+	$description = meta_description();
+  if(!$description){
+    $description = getconfig("meta_description");
+	}
 	if($description!="" && $description!=false){
 		if(!getconfig("hide_meta_description")){
 			echo '<meta name="description" content="'.$description.'"/>';
@@ -259,6 +322,10 @@ function base_metas(){
 	}
 
 }
+
+
+
+
 
 
 

@@ -152,11 +152,11 @@ $_SESSION["mysql"]["prefix"]=$_POST["prefix"];
 
 
 
-$connection=mysql_connect($_SESSION["mysql"]["server"],$_SESSION["mysql"]["loginname"],$_SESSION["mysql"]["passwort"]);
+$connection = mysql_connect($_SESSION["mysql"]["server"],$_SESSION["mysql"]["loginname"],$_SESSION["mysql"]["passwort"]);
 
 mysql_select_db($_SESSION["mysql"]["datenbank"]);
 
-$prefix=mysql_real_escape_string($_SESSION["mysql"]["prefix"]);
+$prefix = mysql_real_escape_string($_SESSION["mysql"]["prefix"]);
 
 mysql_query("SET NAMES 'utf-8'");
 
@@ -223,6 +223,10 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   `parent` varchar(300) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;");
+
+mysql_query("ALTER TABLE `".$prefix."content` ADD `meta_description` TEXT NOT NULL AFTER `access` ,
+ADD `meta_keywords` TEXT NOT NULL AFTER `meta_description` ");
+
 
 
 mysql_query("ALTER TABLE `".$prefix."content` ADD `deleted_at` BIGINT NULL AFTER `access`"); 
