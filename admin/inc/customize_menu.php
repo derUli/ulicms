@@ -26,7 +26,7 @@ $menu_items = mysql_query("SELECT * FROM ".tbname("backend_menu_structure")." OR
 <hr>
 <br>
 <?php if(mysql_num_rows($menu_items)>0){?>
-<table border=1 style="width:500px;"> 
+<table border=1 style="width:800px;"> 
 <tr>
 <td>Position</td>
 <td>Beschriftung</td>
