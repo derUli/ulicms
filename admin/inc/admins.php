@@ -7,7 +7,7 @@ if(mysql_num_rows($query)){
 <h2>Benutzer</h2>
 <p>Hier können Sie die Administratoren Ihrer Homepage verwalten und die Passwörter ändern.
 <br/><br/>
-<a href="index.php?action=admin_new">Administrator anlegen</a>
+<a href="index.php?action=admin_new">Benutzer anlegen</a>
 <br/>
 </p>
 <table border=1>

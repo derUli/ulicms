@@ -20,7 +20,6 @@ CKEDITOR.editorConfig = function( config )
  
 config.toolbar_cms =
 [
-    ['Source','-','Save','Preview',''],
     ['Cut','Copy','Paste','PasteText','PasteFromWord','-','SpellChecker', 'Scayt'],
     ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
     ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField'],

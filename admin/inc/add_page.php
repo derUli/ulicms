@@ -117,10 +117,14 @@ var editor = CKEDITOR.replace( 'page_content',
 					});
 					
 </script>
+
 <noscript>
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
+
 </noscript>
 <br/><br/>
+
+<input type="submit" value="Speichern">
 </form>
 
 <?php

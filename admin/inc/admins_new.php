@@ -22,7 +22,7 @@ if(mysql_num_rows($query)){
 <br/>
 
 <br/><br/>
-<input type="submit" value="Datensatz hinzufügen">
+<input type="submit" value="Benutzer anlegen">
 </form>
 
 <?php 

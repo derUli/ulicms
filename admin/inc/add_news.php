@@ -16,21 +16,21 @@ if($_SESSION["group"]>=20){
 <strong data-tooltip="Das Veröffentlichungsdatum der neu angelegten News">Aktuelles Datum:</strong><br/>
 <?php echo date(env("date_format"),time())?>
 <br/><br/>
-<textarea name="news_content" id="news_content" style="display:none;"></textarea>
+<textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
 <script type="text/javascript">
-document.getElementById("news_content").style.display="block";
-var editor = CKEDITOR.replace( 'news_content',
+var editor = CKEDITOR.replace( 'page_content',
 					{
 						skin : 'kama'
 					});
-					
-
 
 </script>
 <noscript>
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
+
 </noscript>
-<input type="hidden" name="add_news" value="add_news">
+<br/><br/>
+<input type="submit" value="Speichern">
+
 </form>
 
 

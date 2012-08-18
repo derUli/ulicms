@@ -100,9 +100,8 @@ echo htmlspecialchars($row->meta_keywords); ?>'>
 
 <br/><br/>
 
-<textarea name="page_content" id="page_content" style="display:none;"><?php echo htmlspecialchars($row->content);?></textarea>
+<textarea name="page_content" id="page_content" cols=60 rows=20><?php echo htmlspecialchars($row->content);?></textarea>
 <script type="text/javascript">
-document.getElementById("page_content").style.display="block";
 var editor = CKEDITOR.replace( 'page_content',
 					{
 						skin : 'kama'
@@ -111,8 +110,11 @@ var editor = CKEDITOR.replace( 'page_content',
 </script>
 <noscript>
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
-</noscript>
 
+</noscript>
+<br/><br/>
+
+<input type="submit" value="Speichern">
 </form>
 <?php 
 break;

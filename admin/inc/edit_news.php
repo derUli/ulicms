@@ -1,4 +1,4 @@
-﻿<?php if(defined("_SECURITY")){?>
+<?php if(defined("_SECURITY")){?>
 
 <?php
   $news_id=intval($_GET["news"]);
@@ -23,19 +23,20 @@ if($_SESSION["group"]>=20){
 <?php echo date(env("date_format"),time())?>
 <br/><br/>
 <textarea name="news_content" id="news_content" style="display:none;"><?php echo $result->content;?></textarea>
+<textarea name="page_content" id="page_content" cols=60 rows=20><?php echo htmlspecialchars($row->content);?></textarea>
 <script type="text/javascript">
-document.getElementById("news_content").style.display="block";
-var editor = CKEDITOR.replace( 'news_content',
+var editor = CKEDITOR.replace( 'page_content',
 					{
 						skin : 'kama'
 					});
-
 
 </script>
 <noscript>
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
 </noscript>
-<input type="hidden" name="edit_news" value="<?php echo $result->id;?>">
+<br/><br/>
+<input type="submit" value="Speichern">
+
 </form>
 
 
