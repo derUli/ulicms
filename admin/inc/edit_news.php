@@ -23,6 +23,7 @@ if($_SESSION["group"]>=20){
 <strong data-tooltip="Beim ändern einer News wird das aktuelle Datum gesetzt.">Aktuelles Datum:</strong><br/>
 <?php echo date(env("date_format"),time())?>
 <br/><br/>
+<div align="center">
 <textarea name="news_content" id="news_content" cols=60 rows=20><?php echo htmlspecialchars($result->content);?></textarea>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( 'news_content',
@@ -36,6 +37,7 @@ var editor = CKEDITOR.replace( 'news_content',
 </noscript>
 <br/><br/>
 <input type="submit" value="Speichern">
+</div>
 
 </form>
 

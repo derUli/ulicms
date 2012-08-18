@@ -17,6 +17,7 @@ if($_SESSION["group"]>=20){
 <strong data-tooltip="Das Veröffentlichungsdatum der neu angelegten News">Aktuelles Datum:</strong><br/>
 <?php echo date(env("date_format"),time())?>
 <br/><br/>
+<div align="center">
 <textarea name="news_content" id="news_content" cols=60 rows=20></textarea>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( 'news_content',
@@ -28,10 +29,10 @@ var editor = CKEDITOR.replace( 'news_content',
 <noscript>
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
 
-</noscript>
+</noscript>     
 <br/><br/>
 <input type="submit" value="Speichern">
-
+</div>
 </form>
 
 

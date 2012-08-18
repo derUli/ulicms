@@ -107,7 +107,7 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 
 
 <br/><br/>
-
+<div align="center">
 <textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
 <script type="text/javascript">
 document.getElementById("page_content").style.display="block";
@@ -125,6 +125,7 @@ var editor = CKEDITOR.replace( 'page_content',
 <br/><br/>
 
 <input type="submit" value="Speichern">
+</div>
 </form>
 
 <?php
