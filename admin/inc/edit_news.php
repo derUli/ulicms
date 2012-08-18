@@ -11,6 +11,7 @@ if($_SESSION["group"]>=20){
 
 ?>
 <form action="index.php?action=news" method="post">
+<input type="hidden" name="edit_news" value="<?php echo $result->id;?>">
 <strong data-tooltip="Der Titel dieser News...">Titel der News:</strong><br/>
 <input type="text" name="title" value="<?php echo htmlspecialchars($result->title)?>" style="width:300px;" >
 <br/><br/>
@@ -22,10 +23,9 @@ if($_SESSION["group"]>=20){
 <strong data-tooltip="Beim ändern einer News wird das aktuelle Datum gesetzt.">Aktuelles Datum:</strong><br/>
 <?php echo date(env("date_format"),time())?>
 <br/><br/>
-<textarea name="news_content" id="news_content" style="display:none;"><?php echo $result->content;?></textarea>
-<textarea name="page_content" id="page_content" cols=60 rows=20><?php echo htmlspecialchars($row->content);?></textarea>
+<textarea name="news_content" id="news_content" cols=60 rows=20><?php echo htmlspecialchars($result->content);?></textarea>
 <script type="text/javascript">
-var editor = CKEDITOR.replace( 'page_content',
+var editor = CKEDITOR.replace( 'news_content',
 					{
 						skin : 'kama'
 					});
