@@ -67,7 +67,7 @@ Avatar hochladen:<br/>
 <br/>
 <strong>Über Mich:</strong><br/>
 <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row->about_me)?></textarea>
-<br/>
+<br/> <br/>
 <input type="submit" value="OK">
 </form>
 
