@@ -17,7 +17,7 @@ if(!isset($_POST["step"])){
 <h2>Willkommen</h2>
 <p>Willkommen zur Installation von UliCMS.</p>
 <p>Folgen Sie den Anweisungen um das CMS auf Ihrem Server zu installieren.</p>
-<p>Setzen Sie bitte vorher die Dateirechte der folgenden Dateien auf 0755:<br/>
+<p>Setzen Sie bitte vorher die Dateirechte der folgenden Dateien auf 0777:<br/>
 <ol>
 <li>cms-config.php</li>
 <li>templates/oben.php</li>
