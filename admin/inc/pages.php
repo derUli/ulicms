@@ -12,18 +12,22 @@ if($_SESSION["group"]>=30){
 <table border=1>
 <tr style="font-weight:bold;">
 <td style="width:40px;">--></td>
-<td>Permalink</td>
-<td>Menü</td>
-<td>Position</td>
-<td>Übergeordnet</td>
-<td>Aktiviert</td>
-<td>Kommentare</td>
+<td><a href="?action=pages&order=systemname">Permalink</a></td>
+<td><a href="?action=pages&order=menu">Menü</a></td>
+<td><a href="?action=pages&order=position"">Position</a></td>
+<td><a href="?action=pages&order=parent">Übergeordnet</a</td>
+<td><a href="?action=pages&order=active">Aktiviert</a></td>
+<td><a href="?action=pages&order=comments_enabled">Kommentare</a></td>
 <td><span data-tooltip="Die Seite auf der Webpräsenz öffnen">Anzeigen</span></td>
 <td>Bearbeiten</td>
 <td>Löschen</td>
 </tr>
 <?php 
-$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY menu,position, systemname ASC",$connection);
+$order = basename($_GET["order"]);
+if(empty($order)){
+  $order = "menu";
+}
+$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY $order,position, systemname ASC",$connection);
 if(mysql_num_rows($query)>0){
 while($row=mysql_fetch_object($query)){
 ?>
