@@ -225,7 +225,6 @@ if($_POST["add_page"]=="add_page"){
   ", ".$comments_enabled .
   ",$notinfeed, '$redirection', '$menu', $position, '".$access."', '$meta_description', '$meta_keywords')",$connection);
 
-  echo 'test';
   header("Location: index.php?action=pages");
   exit();
 
