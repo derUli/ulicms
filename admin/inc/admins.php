@@ -1,7 +1,12 @@
 <?php if(defined("_SECURITY")){
-if($_SESSION["group"]>=50){
-
-$query=mysql_query("SELECT * FROM ".tbname("admins")." ORDER BY id",$connection);
+if($_SESSION["group"]>=50){                             
+if(empty($_GET["order"])){
+  $order = "username";
+}
+else{
+  $order = basename($_GET["order"]);
+}
+$query = mysql_query("SELECT * FROM ".tbname("admins")." ORDER BY $order",$connection);
 if(mysql_num_rows($query)){
 ?>
 <h2>Benutzer</h2>
@@ -12,20 +17,20 @@ if(mysql_num_rows($query)){
 </p>
 <table border=1>
 <tr style="font-weight:bold;">
-<td style="width:40px;">--></td>
-<td><span data-tooltip="Der Benutzername dient zur Anmeldung im Adminbereich...">Benutzername</span></td>
-<td>Nachname</td>
-<td>Vorname</td>
-<td>Email</td>
+<td style="width:40px;"><a href="index.php?action=admins&order=id">ID</a></td>
+<td><span data-tooltip="Der Benutzername dient zur Anmeldung im Adminbereich..."><a href="index.php?action=admins&order=username">Benutzername</a></span></td>
+<td><a href="index.php?action=admins&order=lastname">Nachname</a></td>
+<td><a href="index.php?action=admins&order=firstname">Vorname</a></td>
+<td><a href="index.php?action=admins&order=email">Email</a></td>
 <td>Bearbeiten</td>
-<td><span data-tooltip="Wenn ein Administrator gelöscht wird, bleiben seine Beiträge erhalten, verlieren allerdings seinen Namen als Autor.">Löschen</span></td>
+<td><span data-tooltip="Wenn ein Benutzer gelöscht wird, bleiben seine Beiträge erhalten, verlieren allerdings seinen Namen als Autor.">Löschen</span></td>
 </tr>
 <?php 
 while($row=mysql_fetch_object($query)){
 ?>
 <?php 
 echo '<tr>';
-echo "<td style=\"width:40px;\">--></td>";
+echo "<td style=\"width:40px;\">".$row->id."</td>";
 echo "<td>".htmlspecialchars($row->username)."</td>";
 echo "<td>".htmlspecialchars($row->lastname)."</td>";
 echo "<td>".htmlspecialchars($row->firstname)."</td>";
