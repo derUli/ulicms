@@ -14,8 +14,8 @@ if($_SESSION["group"]>=30){
 <td style="width:40px;">--></td>
 <td><a href="?action=pages&order=systemname">Permalink</a></td>
 <td><a href="?action=pages&order=menu">Menü</a></td>
-<td><a href="?action=pages&order=position"">Position</a></td>
-<td><a href="?action=pages&order=parent">Übergeordnet</a</td>
+<td><a href="?action=pages&order=position">Position</a></td>
+<td><a href="?action=pages&order=parent">Übergeordnet</a></td>
 <td><a href="?action=pages&order=active">Aktiviert</a></td>
 <td><a href="?action=pages&order=comments_enabled">Kommentare</a></td>
 <td><span data-tooltip="Die Seite auf der Webpräsenz öffnen">Anzeigen</span></td>
