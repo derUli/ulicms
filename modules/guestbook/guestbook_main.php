@@ -198,9 +198,9 @@ function guestbook_list(){
 function check_installation(){
 	$test = mysql_query("SELECT * FROM ".tbname("guestbook_entries"));
 	if(!$test){
-	require_once getModulePath("guestbook")."guestbook_install.php";
-	guestbook_install();		
-		}	
-	}
+  	require_once getModulePath("guestbook")."guestbook_install.php";
+  	guestbook_install();		
+	}	
+}
 
 ?>
