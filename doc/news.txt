@@ -3,3 +3,4 @@
 * Benutzerprofile: Vor und Nachname, Über Mich, ICQ, Skype, Avatar, Passwort ändern
 * Meta Description und Meta Keywords für jede Seite einstellbar* Logos hochladen
 * Anderes Design
+* Seiten und Benutzer Auflistung jetzt sortierbar.
