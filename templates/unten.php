@@ -4,9 +4,6 @@
 <?php comments()?>
 </div>
 </div>
-<div class="news">
-<?php news()?>
-</div>
 <div style="clear:both;">
 </div>
 <hr>

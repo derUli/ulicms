@@ -98,20 +98,11 @@ clear:both;
 .content{
 padding:20px;
 float:left;
-width:60%;
 font-family:arial;
 font-size:11pt;
 }
 
 
-.news{
-margin-top:20px;
-margin-bottom:20px;
-float:right;
-width:20%;
-font-family:arial;
-font-size:9pt;
-}
 
 h1,h2,h3,h4,h5,h6{
 font-family:Balloon;
