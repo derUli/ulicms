@@ -55,6 +55,7 @@ list-style-type:none;
 }
 
 
+
 a{
 color:rgb(0, 128, 255);
 text-decoration:none;
@@ -127,6 +128,10 @@ color:rgb(255, 128, 0);
 }
 
 
+.navbar_down ul li a{
+margin-right:10px;
+}
+
 .navbar_down ul li a, .navbar_down ul li a:visited{
 color:rgb(0, 128, 192);
 font-weight:normal;
@@ -144,7 +149,7 @@ margin-top:0px;
 }        
 
 
-.content h1,.content h2,.content h3,.content h4,.content h5,.content h6{
+.content h1,.content h2,.content h3,.content h4,.content h5, .content h6{
 color:rgb(52, 106, 250);
 font-family:arial;
 }
