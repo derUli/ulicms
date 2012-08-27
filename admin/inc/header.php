@@ -163,7 +163,6 @@ text-decoration:none;
 
 body{
 background-color:#7FA5FF;
-background-image:url(gfx/bg.jpg);
 background-repeat:none;
 background-attachment:fixed;
 font-family:arial;
@@ -190,7 +189,6 @@ padding-bottom:20px;
 
 #menu{
 background-color:#C4DBFF;
-background-image:url(gfx/bg2.jpg);
 background-repeat:none;
 background-attachment:fixed;
 height:40px;
@@ -258,6 +256,16 @@ background-color:black;
 </style>
 
 <script type="text/javascript" src="md5.js"></script>
+<style type="text/css" media="screen">
+#menu{
+background-image:url(gfx/bg2.jpg);
+}
+
+body{
+background-image:url(gfx/bg.jpg);
+}
+
+</style>
 <link rel="icon" href="gfx/favicon.ico" type="image/x-icon"> 
 <link rel="shortcut icon" href="gfx/favicon.ico" type="image/x-icon">
 
