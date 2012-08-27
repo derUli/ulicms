@@ -5,4 +5,7 @@
 <br>
 <a href="index.php?action=motd">MOTD</a>
 <br>
-<a href="index.php?action=logo_upload">Logo</a></p>
+<a href="index.php?action=logo_upload">Logo</a>
+<br>
+<a href="index.php?action=configure_design">Design anpassen</a></p>
+</p>
