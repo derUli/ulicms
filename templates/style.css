@@ -1,7 +1,6 @@
 body{
-background-color:rgb(255,255,255);
 text-center;
-margin:0px;
+margin:auto;
 }
 
 
@@ -16,16 +15,16 @@ overflow-y:scroll;
 }
 
 .header{
-background-color:rgb(50, 109, 248);
 color:rgb(255, 255, 255);
 float:left;
-width:100%;
 padding-left:30px;
 padding-right:30px;
 padding-bottom:20px;
 margin:0px;
-height:140px;
+width:100%;
 }
+
+
 
 .header .logo{
 float:left;
@@ -41,6 +40,7 @@ margin-right:0%;
 margin-top:30px;
 font-family:verdana;
 font-size:9pt;
+overflow-x:auto;
 }
 
 .header .navbar_top ul{

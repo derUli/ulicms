@@ -3,7 +3,34 @@
 <head>
 <title><?php homepage_title()?> | <?php title()?></title>
 <?php base_metas()?>
-<link rel="stylesheet" type="text/css" href="templates/style.css"/>
+<link rel="stylesheet" media="screen" type="text/css" href="templates/style.css"/>
+<?php 
+if(!getconfig("header-background-color")){
+   setconfig("header-background-color", "rgb(50, 109, 248)");
+}
+
+if(!getconfig("body-background-color")){
+   setconfig("body-background-color", "rgb(255,255,255)");
+}
+
+
+if(!getconfig("body-text-color")){
+   setconfig("body-text-color", "rgb(0,0,0)");
+}
+
+
+?>
+<style type="text/css" media="all">
+.header{
+background-color:<?php echo getconfig("header-background-color")?>;
+}
+
+body{
+background-color:<?php echo getconfig("body-background-color")?>;
+color:<?php echo getconfig("body-text-color");?>
+}
+
+</style>
 </head>
 <body>
 <div class="header">
