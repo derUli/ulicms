@@ -7,5 +7,5 @@
 <br>
 <a href="index.php?action=logo_upload">Logo</a>
 <br>
-<a href="index.php?action=configure_design">Design anpassen</a></p>
+<a href="index.php?action=languages">Sprachen</a></p>
 </p>

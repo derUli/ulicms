@@ -202,27 +202,33 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."news` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;");
 
-
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `notinfeed` tinyint(1) NOT NULL,
   `systemname` varchar(300) NOT NULL,
   `title` varchar(600) NOT NULL,
   `content` longtext NOT NULL,
+  `language` varchar(6) NOT NULL,
   `active` tinyint(1) NOT NULL,
   `created` bigint(20) NOT NULL,
   `lastmodified` bigint(20) NOT NULL,
   `autor` int(11) NOT NULL,
   `category` int(11) NOT NULL,
-  `lastchangeby` int(11) NOT NULL,                 
+  `lastchangeby` int(11) NOT NULL,
   `views` int(11) NOT NULL,
   `comments_enabled` tinyint(1) NOT NULL,
   `redirection` varchar(2083) NOT NULL,
   `menu` varchar(10) NOT NULL,
   `position` int(11) NOT NULL,
   `parent` varchar(300) NOT NULL,
+  `valid_from` date NOT NULL,
+  `valid_to` date DEFAULT NULL,
+  `access` varchar(100) DEFAULT NULL,
+  `meta_description` text NOT NULL,
+  `meta_keywords` text NOT NULL,
+  `deleted_at` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;");
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;");
 
 
 
