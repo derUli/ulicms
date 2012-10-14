@@ -390,6 +390,13 @@ ADD `about_me` TEXT NOT NULL AFTER `avatar_file`");
 
 mysql_query("UPDATE `".$prefix."content` SET parent='-'");
 
+mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."languages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `language_code` varchar(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
+
 
 @chmod("../cms-config.php", 0777);
 

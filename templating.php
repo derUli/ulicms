@@ -261,6 +261,7 @@ function menu($name){
 
 	echo "</a>\n";
 	
+	
 	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND parent='".$row->systemname."' ORDER by position");
 		if(mysql_num_rows($query2)>0){
 			echo "  <ul class='sub_menu'>\n";
