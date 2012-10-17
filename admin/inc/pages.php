@@ -8,6 +8,28 @@ if($_SESSION["group"]>=30){
 <p>Hier können Sie die einzelnen Seiten Ihrer Homepage bearbeiten oder löschen.</p>
 <br/>
 <p><a href="index.php?action=pages_new">Seite verfassen</a><br/><br/></p>
+<br/><br/>
+<script type="text/javascript">
+function filter_by_language(element){
+   var index = element.selectedIndex
+   if(element.options[index].value != ""){
+     location.replace("index.php?action=pages&filter_language=" + element.options[index].value)
+   }
+}
+</script>
+
+Nach Sprache filtern: 
+<select name="filter_language" onchange="filter_by_language(this)">
+<option value="">Bitte auswählen</option>
+
+<?php 
+$languages = getAllLanguages();
+for($i=0; $i++; $i<count($languages)){
+echo "<option value='".$languages[$i]."'>".$languages[$i]."</option>";
+
+}?>
+</select>
+<br/><br/>
 
 <table border=1>
 <tr style="font-weight:bold;">
@@ -43,7 +65,7 @@ if(!empty($filter_language)){
    $filter_sql = "";
 }
 
-$query=mysql_query("SELECT * FROM ".tbname("content")." ".$filter_sql."ORDER BY $order,position, systemname ASC",$connection);
+$query = mysql_query("SELECT * FROM ".tbname("content")." ".$filter_sql."ORDER BY $order,position, systemname ASC");
 if(mysql_num_rows($query)>0){
    while($row=mysql_fetch_object($query)){
 ?>
