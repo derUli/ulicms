@@ -36,9 +36,16 @@ if(empty($filter_language)){
 if(empty($order)){
   $order = "menu";
 }
-$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY $order,position, systemname ASC",$connection);
+
+if(!empty($filter_language)){  
+   $filter_sql = "WHERE language = '".$filter_language."' ";
+}else{
+   $filter_sql = "";
+}
+
+$query=mysql_query("SELECT * FROM ".tbname("content")." ".$filter_sql."ORDER BY $order,position, systemname ASC",$connection);
 if(mysql_num_rows($query)>0){
-while($row=mysql_fetch_object($query)){
+   while($row=mysql_fetch_object($query)){
 ?>
 <?php 
 echo '<tr>';
