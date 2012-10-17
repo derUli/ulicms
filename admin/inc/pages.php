@@ -24,6 +24,15 @@ if($_SESSION["group"]>=30){
 </tr>
 <?php 
 $order = basename($_GET["order"]);
+$filter_language = basename($_GET["filter_language"]);
+if(empty($filter_language)){
+   $filter_language = getconfig("default_language");
+   if(!$filter_language){
+     $filter_language = "";
+   }
+}
+
+
 if(empty($order)){
   $order = "menu";
 }
