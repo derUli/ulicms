@@ -126,6 +126,19 @@ return $returnvalues;
 }
 
 
+// Sprachcodes abfragen und als Array zurück geben
+function getAllLanguages(){
+	$query = mysql_query("SELECT * FROM `".tbname("languages")."` ORDER BY language_code");
+	$returnvalues = Array();
+	while($row = mysql_fetch_object($query)){
+		array_push($returnvalues, $row->language_code);
+        }
+
+        return $returnvalues;
+
+
+       }
+
 // get all menu items
 function getAllMenuItems(){
 	$query = mysql_query("SELECT * FROM `".tbname("backend_menu_structure")."` ORDER BY position ASC");
