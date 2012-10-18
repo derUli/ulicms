@@ -61,6 +61,20 @@ if($_GET["action"]=="key_delete" && $_SESSION["group"]>=40){
   exit();
 }
 
+if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $_SESSION["group"]>=50){
+  mysql_query("DELETE FROM ".tbname("languages"). " WHERE id = ".intval($_GET["delete"]));
+}
+
+
+if(isset($_POST["add_language"]) and $_SESSION["group"]>=50){
+   if(!empty($_POST["name"]) and !empty($_POST["language_code"])){
+      $name = mysql_real_escape_string($_POST["name"]);   
+      $language_code = mysql_real_escape_string($_POST["language_code"]);
+      mysql_query("INSERT INTO ".tbname("languages").
+      "(name, language_code)
+      VALUES('$name', '$language_code')");   
+   }
+}
 
 
 if(isset($_POST["add_menu_item"]) and $_SESSION["group"]>=50){

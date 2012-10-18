@@ -129,6 +129,10 @@ else if($_GET["action"]  == "edit_profile"){
 else if($_GET["action"]  == "logo_upload"){
 	require_once "inc/logo.php";
 }
+else if($_GET["action"]  == "languages"){
+	require_once "inc/languages.php";
+}
+
 else if($_GET["action"] == "configure_design"){
 	require_once "inc/configure_design.php";
 }
