@@ -21,11 +21,21 @@ function filter_by_language(element){
 Nach Sprache filtern: 
 <select name="filter_language" onchange="filter_by_language(this)">
 <option value="">Bitte auswählen</option>
-
 <?php 
+if(!empty($_GET["filter_language"])){
+   $_SESSION["filter_language"] = $_GET["filter_language"];
+}else{
+   
+}
+
 $languages = getAllLanguages();
-for($i=0; $i++; $i<count($languages)){
-echo "<option value='".$languages[$i]."'>".$languages[$i]."</option>";
+for($j=0; $j<count($languages); $j++ ){
+   if($languages[$j] == $_SESSION["filter_language"]){
+      echo "<option value='".$languages[$j]."' selected>".$languages[$j]."</option>";
+   }else{
+      echo "<option value='".$languages[$j]."'>".$languages[$j]."</option>";
+   }
+
 
 }?>
 </select>
@@ -47,11 +57,14 @@ echo "<option value='".$languages[$i]."'>".$languages[$i]."</option>";
 <?php 
 $order = basename($_GET["order"]);
 $filter_language = basename($_GET["filter_language"]);
+
 if(empty($filter_language)){
-   $filter_language = getconfig("default_language");
-   if(!$filter_language){
+  if(!empty($_SESSION["filter_language"])){
+     $filter_language = $_SESSION["filter_language"];
+  }
+  else{
      $filter_language = "";
-   }
+  }
 }
 
 
