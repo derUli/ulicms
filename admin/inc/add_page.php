@@ -16,6 +16,34 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
 Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
 <input type="text" style="width:300px;" name="redirection" value="">
 <br/><br/>
+<strong data-tooltip="In welcher Sprache ist diese Seite verfasst?">Sprache:</strong>
+<br/>
+<select name="language">
+<?php 
+$languages = getAllLanguages();
+if(!empty($_SESSION["filter_language"])){
+   $default_language = $_SESSION["filter_language"];
+   
+}
+else{
+   $default_language = getconfig("default_language");
+}
+
+
+for($j=0; $j<count($languages); $j++ ){ 
+ if($languages[$j] === $default_language ){
+      echo "<option value='".$languages[$j]."' selected>".$languages[$j]."</option>";
+  }else{
+      echo "<option value='".$languages[$j]."'>".$languages[$j]."</option>";
+   }
+
+
+}
+?>
+</select>
+<br/>
+
+<br/><br/>
 
 <strong data-tooltip="In welchem Menü soll diese Seite angezeigt werden?">Menü:</strong><br/>
 <select name="menu" size=1>

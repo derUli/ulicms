@@ -132,7 +132,7 @@ function getAllLanguages(){
 	$returnvalues = Array();
 	while($row = mysql_fetch_object($query)){
 		array_push($returnvalues, $row->language_code);
-        }
+  }
         return $returnvalues;
 
 

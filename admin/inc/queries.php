@@ -230,14 +230,18 @@ if($_POST["add_page"]=="add_page"){
 	$access = mysql_real_escape_string($access);
 	$meta_description = mysql_real_escape_string($_POST["meta_description"]); 
 	$meta_keywords = mysql_real_escape_string($_POST["meta_keywords"]);
+	$language = mysql_real_escape_string($_POST["language"]);
 	
 	mysql_query("INSERT INTO ".tbname("content").
 	" (systemname,title,content,parent, active,created,lastmodified,autor,
-  comments_enabled,notinfeed,redirection,menu,position, access, meta_description, meta_keywords) 
+  comments_enabled,notinfeed,redirection,menu,position, 
+  access, meta_description, meta_keywords, language) 
   VALUES('$system_title','$page_title','$page_content','$parent', $activated,".time().", ".time().
   ",".$_SESSION["login_id"].
   ", ".$comments_enabled .
-  ",$notinfeed, '$redirection', '$menu', $position, '".$access."', '$meta_description', '$meta_keywords')",$connection);
+  ",$notinfeed, '$redirection', '$menu', $position, '".$access."', 
+  '$meta_description', '$meta_keywords',
+  '$language')");
 
   header("Location: index.php?action=pages");
   exit();
