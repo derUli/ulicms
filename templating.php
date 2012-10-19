@@ -246,7 +246,8 @@ function is_403(){
 }
 
 function menu($name){
-	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND active = 1 AND parent='-' ORDER by position");
+        $language = $_SESSION["language"];
+	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND language = '$language' AND active = 1 AND parent='-' ORDER by position");
 	echo "<ul class='menu_".$name."'>\n";
 	while($row = mysql_fetch_object($query)){
 	echo "  <li>" ;
@@ -262,7 +263,7 @@ function menu($name){
 	echo "</a>\n";
 	
 	
-	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND parent='".$row->systemname."' ORDER by position");
+	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = ' $language' AND parent='".$row->systemname."' ORDER by position");
 		if(mysql_num_rows($query2)>0){
 			echo "  <ul class='sub_menu'>\n";
 			while($row2 = mysql_fetch_object($query2)){
@@ -378,8 +379,9 @@ function autor(){
 	$out=str_replace("Nachname", $result2["lastname"],$out);       
 	$out=str_replace("Username", $result2["username"],$out);
 	$out=str_replace("Datum", $result2["datum"],$out);
-	if(!is_403() or $_SESSION["group"]>=20){}
-	echo $out;
+	if(!is_403() or $_SESSION["group"]>=20){
+	   echo $out;
+	}
 }
 
 function news(){
