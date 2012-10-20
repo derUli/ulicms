@@ -370,7 +370,7 @@ mysql_query("CREATE TABLE `".$prefix."backend_menu_structure` (
 `action` VARCHAR( 100 ) NOT NULL ,
 `label` VARCHAR( 100 ) NOT NULL ,
 `position` INT NOT NULL
-) ENGINE = MYISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE = MYISAM  DEFAULT CHARSET=urf8 AUTO_INCREMENT=25 ;
 ");
 
 mysql_query("INSERT INTO `".$prefix."backend_menu_structure` (`id`, `action`, `label`, `position`) VALUES
@@ -401,7 +401,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."languages` (
   `name` varchar(50) NOT NULL,
   `language_code` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 
 @chmod("../cms-config.php", 0777);
