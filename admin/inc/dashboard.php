@@ -13,6 +13,9 @@ if(defined("_SECURITY")){
 	 $admins[$row->id] = $row->username;
   }
 
+ 
+  $users_online = mysql_query("SELECT * FROM ".tbname("admins")." WHERE NOW() - last_action > (60 * 10) and last_action <> 0");
+  
 ?>
 <p>Hallo <?php echo $_SESSION["firstname"]." ".$_SESSION["lastname"];?>! [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
 </p>
@@ -66,6 +69,12 @@ $motd = nl2br($motd);
 
 </table>
 <br>
+<h2>Jetzt online sind:</h2>
+<ul>
+<?php while($row = mysql_fetch_object($users_online)){?>
+<li><?php echo $row->username?></li>
+<?php }?>
+</ul>
 
 <p>Die meistgelesenen Artikel sind:
 <table cellpadding="2" border=0>
