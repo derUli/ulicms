@@ -13,28 +13,58 @@ if(!getconfig("contact_form_refused_spam_mails")){
 	if(isset($_POST["absenden"])){
 		
 		if(empty($_POST["vorname"])){
-			$fehler="Bitte geben Sie Ihren Vornamen ein.";
+			if($_SESSION["language"] == "de"){
+			   $fehler = "Bitte geben Sie Ihren Vornamen ein.";
+			}
+			else{
+			   $fehler = "Please enter your first name.";
+			}
 		}
 
 		if(empty($_POST["nachname"])){
-			$fehler="Bitte geben Sie Ihren Nachnamen ein.";
+	     	if($_SESSION["language"] == "de"){
+			    $fehler = "Bitte geben Sie Ihren Nachnamen ein.";
+			}
+			else{
+				$fehler = "Please enter your first name";
+			}
 		}
 	
 		if(empty($_POST["emailadresse"])){
-			$fehler="Bitte geben Sie Ihren Emailadresse ein, da wir Ihre Mail sonst nicht beantworten können.";
+	     	if($_SESSION["language"] == "de"){
+				$fehler = "Bitte geben Sie Ihren Emailadresse ein, da wir Ihre Mail sonst nicht beantworten können.";}
+			else{
+				$fehler = "please enter your mail adress, because if you do it not, we can't answer your request.";
+			}
 		}
 	
 		if(empty($_POST["betreff"])){
-			$fehler="Bitte geben Sie einen Betreff ein.";
+	     	if($_SESSION["language"] == "de"){
+			    $fehler = "Bitte geben Sie einen Betreff ein.";
+			}
+			else{
+				$fehler = "Please enter a subject.";
+			}
 		}
 
 	if(empty($_POST["nachricht"])){
-		$fehler="Sie haben keine Nachricht eingegeben.";
+		if($_SESSION["language"] == "de"){
+			$fehler = "Sie haben keine Nachricht eingegeben.";
+		}
+		else{
+			$fehler = "Please enter a message.";
+	}
+	
 	}
 
 	//Spamschutz
 	if($_POST["email"]!=""){
-		$fehler = "Das Spamschutz-Feld bitte leer lassen.";
+		if($_SESSION["language"] == "de"){
+			$fehler = "Das Spamschutz-Feld bitte leer lassen.";
+		}
+		else{
+			$fehler = "Please don't fill the spam-protection field.";
+		}
 		setconfig("contact_form_refused_spam_mails",
     getconfig("contact_form_refused_spam_mails")+1);
 	}
@@ -57,9 +87,18 @@ if(!getconfig("contact_form_refused_spam_mails")){
 	
 
 		if(@mail(getconfig("email"),$betreff,$mailtext,$headers)){
-			return "<p class='contactform-success'>Vielen Dank für Ihre Email.<br/>Wir werden diese schnellstmöglich beantworten.</p>";
+			if($_SESSION["language"] == "de"){
+				return "<p class='contactform-success'>Vielen Dank für Ihre Email.<br/>Wir werden diese schnellstmöglich beantworten.</p>";
+			}
+			else{
+				return "<p class='contactform-success'>Thank you for your message.<br/>We will answer it, as fast as possible.</p>";
+			}
+		
 		}else{
-			return "<p class='contactform-error'>Aufgrund technischer Probleme konnte Ihre Email nicht abgeschickt werden.<br/>Bitte wenden Sie sich direkt an uns.</p>";
+			
+				return "<p class='contactform-error'>Aufgrund technischer Probleme konnte Ihre Email nicht abgeschickt werden.<br/>Bitte wenden Sie sich direkt an uns.</p>";
+			
+			
 		}
 
 
@@ -78,42 +117,64 @@ if($_SESSION["group"]>=20){
    blockiert</p><hr/>";
 }
 
+
+if($_SESSION["language"] == "de"){
+	$translation_firstname = "Vorname";
+	$translation_lastname = "Nachname";
+	$translation_emailadress = "Emailadresse";
+	$translation_subject = "Ihr Betreff";
+	$translation_spam_protection = "Spamschutz bitte leer lassen";
+	$translation_your_message = "Ihre Nachricht";
+	$translation_reset = "Zurücksetzen";
+	$translation_submit = "Absenden";
+}else{
+	$translation_firstname = "firstname";
+	$translation_lastname = "lastname";
+	$translation_emailadress = "e-Mail Adress";
+	$translation_subject = "Your Subject";
+	$translation_spam_protection = "Spam protection, let this empty";
+	$translation_your_message = "Your message";
+	$translation_reset = "Reset";
+	$translation_submit = "Submit";
+}
+
+
 	return $spam_counter.'<form action="'.htmlspecialchars($_SERVER['REQUEST_URI']).'" method="post">
 	<table border="0" cellpadding="1" cellspacing="1" style="height: 479px; width: 100%; ">
 		<tbody>
 			<tr>
 				<td>
-					<strong>Ihr Vorname: </strong></td>
+					<strong>'.$translation_firstname.': </strong></td>
 				<td>
 					<input name="vorname" size="40" type="text" /></td>
 			</tr>
 			<tr>
 				<td>
-					<strong>Ihr Nachname:</strong></td>
+					<strong>'.$translation_lastname.':</strong></td>
 				<td>
 					<input name="nachname" size="40" type="text" /></td>
 			</tr>
 			<tr>
 				<td>
-					<strong>Ihre Emailadresse</strong>:</td>
+					<strong>'.$translation_emailadress.':</strong>:</td>
 				<td>
 					<input name="emailadresse" size="40" type="text" /></td>
 			</tr>
 			<tr>
 				<td>
-					<strong>Ihr Betreff:</strong></td>
+					<strong>'.$translation_subject.':</strong></td>
 				<td>
 					<input name="betreff" size="40" type="text" /></td>
 			</tr>
 			<tr>
 				<td>
-					<strong>Spamschutz bitte leer lassen:</strong></td>
+					<strong>'.$translation_spam_protection.':</strong></td>
 				<td>
 					<input name="email" size="40" type="text" /></td>
 			</tr>
 			<tr>
 				<td>
-					<strong>Ihre Nachricht:</strong></td>
+					<strong>'.$translation_your_message.':</strong></td>
 				<td>
 					<p>
 						<textarea cols="60" name="nachricht" rows="20"></textarea></p>
@@ -125,7 +186,7 @@ if($_SESSION["group"]>=20){
 				<td>
 					<strong>Formular:</strong></td>
 				<td>
-					<input type="reset" value="Zurücksetzen" />&nbsp;&nbsp; <input type="submit" value="Jetzt absenden" /> <input name="absenden" type="hidden" value="absenden" /></td>
+					<input type="reset" value="'.$translation_reset.'" />&nbsp;&nbsp; <input type="submit" value="'.$translation_submit.'" /> <input name="absenden" type="hidden" value="absenden" /></td>
 			</tr>
 			<tr>
 				<td>
