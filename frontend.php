@@ -8,9 +8,15 @@ require_once "templating.php";
 session_start();
 $_COOKIE[session_name()] = session_id();
 
+if(!empty($_GET["language"])){
+   $_SESSION["language"] = basename($_GET["language"]);
+}
+
 if(!isset($_SESSION["language"])){
    $_SESSION["language"] = getconfig("default_language");
 }
+
+
 
 header("Content-Language: ".getconfig("language"));
 header("Content-Type: text/html; charset=UTF-8");
