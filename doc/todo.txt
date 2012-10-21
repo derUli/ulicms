@@ -9,4 +9,4 @@
 * Formular Manager
 * Sessions (einstellbares Timeout, wer ist online? usw...)
 * Passwort vergessen
-* News System erweitern
+* News System erweitern (Mehrsprachigkeit, Kommentarfunktion, Vorschautext, usw...)
