@@ -65,6 +65,10 @@ if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $_SESSION["gro
   mysql_query("DELETE FROM ".tbname("languages"). " WHERE id = ".intval($_GET["delete"]));
 }
 
+if($_GET["action"] == "languages" and !empty($_GET["default"]) and $_SESSION["group"]>=50){
+  setconfig("default_language", $_GET["default"]);
+}
+
 
 if(isset($_POST["add_language"]) and $_SESSION["group"]>=50){
    if(!empty($_POST["name"]) and !empty($_POST["language_code"])){
