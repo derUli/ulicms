@@ -14,7 +14,7 @@ if(defined("_SECURITY")){
   }
 
  
-  $users_online = mysql_query("SELECT * FROM ".tbname("admins")." WHERE last_action > ".(time() - 120)." ORDER BY username");
+  $users_online = mysql_query("SELECT * FROM ".tbname("admins")." WHERE last_action > ".(time() - 300)." ORDER BY username");
   
 ?>
 <p>Hallo <?php echo $_SESSION["firstname"]." ".$_SESSION["lastname"];?>! [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
