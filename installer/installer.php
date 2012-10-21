@@ -313,7 +313,8 @@ mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (15, 'logo_image', '0b27dc99b9875f306287bb3965c57304.png'),    
 (16, 'motd', ''),
 (17, 'visitors_can_register', 'on'),
-(18, 'frontpage', 'willkommen');");
+(18, 'frontpage', 'willkommen'),
+(19, 'default_language', 'de');");
                                 
                    
                                                  
@@ -401,7 +402,13 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."languages` (
   `name` varchar(50) NOT NULL,
   `language_code` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;");
+
+
+mysql_query("INSERT INTO `".$prefix."languages` (`id`, `name`, `language_code`) VALUES
+(1, 'Deutsch', 'de'),
+(2, 'Englisch', 'en'),
+(3, 'Französisch', 'fr');");
 
 
 @chmod("../cms-config.php", 0777);
