@@ -21,7 +21,31 @@ padding-left:30px;
 padding-right:30px;
 padding-bottom:20px;
 margin:0px;
-width:100%;
+width:94.5%;
+}
+
+#language_box{
+margin-left:-14px;
+}
+
+#language_box ul{
+list-style-type:none;
+
+}
+
+#language_box ul li{
+float:left;
+margin-right:50px;
+}
+
+#language_box ul li a, #language_box ul li a:visited{
+color:black;
+font-weight:bold;
+}
+
+#language_box ul li a:hover{
+color:blue;
+font-weight:bold;
 }
 
 
@@ -97,6 +121,7 @@ clear:both;
 
 .content{
 padding:20px;
+width:98%;
 float:left;
 font-family:arial;
 font-size:11pt;

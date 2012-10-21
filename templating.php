@@ -1,5 +1,15 @@
 <?php
 
+function language_selection(){
+	$query=mysql_query("SELECT * FROM ".tbname("languages")." ORDER by name");
+	echo "<ul class='language_selection'>";
+	while($row = mysql_fetch_object($query)){
+	    echo "<li>"."<a href='?language=".$row->language_code."'>".$row->name."</a></li>";
+	}
+		echo "</ul>";
+
+}
+
 function random_banner(){
 	$connection=MYSQL_CONNECTION;
 	$query=mysql_query("SELECT * FROM ".tbname("banner")." ORDER BY RAND() LIMIT 1");

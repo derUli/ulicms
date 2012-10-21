@@ -54,7 +54,11 @@ else{
 </div>
 <div class="clear"></div>
 <div class="container">
+<div id="language_box"><?php language_selection()?>
+</div>
 <div class="content">
+
+<br/>
 <h2><?php title()?></h2>
 <em style="font-size:0.8em"><?php autor()?></em>
 <hr>
