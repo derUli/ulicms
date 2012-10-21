@@ -3,16 +3,23 @@
 <head>
 <style type="text/css">
 a,a:visited,a:active{
-color:blue;
+color:#000000;
 text-decoration:none;
+font-weight:bold;
+font-size:1.1em;
 }
 
 a:hover{
 color:red;
 text-decoration:none;
+font-weight:bold;
+font-size:1.1em;
 }
 
 
+strong{
+color:#d25400;
+}
 
 
 
@@ -167,16 +174,15 @@ background-repeat:none;
 background-attachment:fixed;
 font-family:arial;
 font-size:12pt;
+color:#5b5c5b;
 
 }
 
-h2{
-color:#6A26FF;
+h1, h2, h3, h4, h5, h6{
+color:#d25400;
 }
 
-h3{
-color:#2D4DFF;
-}
+
 
 #login{
 background-color:#5aae85;
