@@ -203,6 +203,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."news` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;");
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
+  
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `notinfeed` tinyint(1) NOT NULL,
   `systemname` varchar(300) NOT NULL,
@@ -228,7 +229,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   `meta_keywords` text NOT NULL,
   `deleted_at` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;");
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;");
 
 
 
@@ -237,27 +238,11 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
 
 
 
-mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
-created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
-VALUES (0, 'willkommen', 'Willkommen', 
-'<p>Herzlichen Glückwunsch!<br/>
-UliCMS wurde erfolgreich auf dieser Website installiert.</p>', 1, ".time().",
-1, 1, 0, 0, '', 'top', 10, '-', ".time().")");
-
-
-mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
-created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
-VALUES (1, 'kontakt', 'Kontakt', 
-'[module=\"kontaktformular\"]', 1, ".time().",
-1, 1, 0, 0, '', 'down', 10, '-', ".time().")");    
-
-
-
-mysql_query("INSERT INTO `".$prefix."content` (notinfeed, systemname, title, content, active,
-created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
-VALUES (1, 'login', 'Anmelden', 
-'', 1, ".time().",
-1, 1, 0, 0, 'admin/?go=../index.php', 'down', 20, '-', ".time().")");    
+mysql_query("INSERT INTO `".$prefix."content` (`id`, `notinfeed`, `systemname`, `title`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
+(5, 0, 'was_gibts_neues', 'Was gibts neues?', '<h3>\r\n	Mehrsprachigkeit</h3>\r\n<p>\r\n	Sie k&ouml;nnen nun mehrsprachige Internetseiten mit UliCMS erstellen.</p>\r\n<p>\r\n	Dabei gibt es f&uuml;r die Website f&uuml;r jede Sprache eine getrennte Men&uuml;-Verwaltung.<br />\r\n	Beim anlegen einer Seite kann man die Sprache der Seite ausw&auml;hlen.</p>\r\n<p>\r\n	Nach der Installation sind die Sprachen Deutsch, Englisch und Franz&ouml;sisch voreingestellt.<br />\r\n	Weitere Sprachen k&ouml;nnen in den Einstellungen angelegt werden.</p>\r\n<p>\r\n	Au&szlig;erdem wurde das Kontaktformular-Modul in englisch &uuml;bersetzt.</p>\r\n<h3>\r\n	Men&uuml;band anpassen</h3>\r\n<p>\r\n	Nun kann man im Backend die Punkte in der Men&uuml;leiste nach seinen W&uuml;nschen anpassen.</p>\r\n<h3>\r\n	Message Of The Day</h3>\r\n<p>\r\n	Die Message Of The Day kann vom Administrator der Internetseite festgelegt werden.<br />\r\n	Diese Nachricht wird dann allen Benutzern im Dashboard des Adminbereichs angezeigt.</p>\r\n<h3>\r\n	Benutzerprofile</h3>\r\n<p>\r\n	Jeder Benutzer kann sein eigenes Profil mit Profilbild, Biographie, ICQ und Skype und weiteren Daten einrichten.</p>\r\n<h3>\r\n	Suchmaschinen-Optimierung</h3>\r\n<p>\r\n	Man kann f&uuml;r jede einzelne Seite Meta-Daten wie Keywords und Description angeben</p>\r\n<h3>\r\n	Logos</h3>\r\n<p>\r\n	Es kann ein Firmenlogo als Grafik hochgeladen werden.<br />\r\n	Wie dieses genutzt wird, h&auml;ngt vom verwendeten Design ab.</p>\r\n<h3>\r\n	Sortierbare Listen</h3>\r\n<p>\r\n	Die Seiten und Benutzer Listen sind jetzt sortierbar.</p>\r\n', 'de', 1, 1350820817, 1350822436, 1, 0, 1, 8, 1, '', 'top', 20, '-', '0000-00-00', NULL, 'all', '', '', NULL),
+(4, 1, 'willkommen', 'Willkommen', '<p>\r\n	Wenn Sie das hier lesen k&ouml;nnen, dann haben Sie UliCMS erfolgreich installiert.</p>\r\n', 'de', 1, 1350820620, 1350820926, 1, 0, 1, 9, 1, '', 'top', 10, '-', '0000-00-00', NULL, 'all', '', '', NULL),
+(6, 1, 'kontakt', 'Kontakt', '<p>\r\n	[module=&quot;kontaktformular&quot;]</p>\r\n', 'de', 1, 1350820903, 1350820903, 1, 0, 0, 1, 1, '', 'down', 10, '-', '0000-00-00', NULL, 'all', '', '', NULL),
+(7, 0, 'login', 'Login', '', 'de', 1, 1350822475, 1350822475, 1, 0, 0, 0, 1, 'admin/?go=../index.php', 'down', 20, '-', '0000-00-00', NULL, 'all', '', '', NULL);");
 
 
 
@@ -265,17 +250,10 @@ VALUES (1, 'login', 'Anmelden',
 
 
 
-mysql_query("ALTER TABLE `".$prefix."content` ADD `valid_from` DATE NOT NULL AFTER `parent` ,
-ADD `valid_to` DATE AFTER `valid_from` ,
-ADD `access` VARCHAR( 100 ) AFTER `valid_to`");
-
-mysql_query("ALTER TABLE `".$prefix."content` ADD `deleted_at` BIGINT NULL AFTER `access`"); 
 
 
-mysql_query("ALTER TABLE `".$prefix."content` ADD `meta_description` TEXT NOT NULL AFTER `access` ,
-ADD `meta_keywords` TEXT NOT NULL AFTER `meta_description` ");
 
-mysql_query("UPDATE ".$prefix."content SET valid_from = NOW(), access = 'all'");
+
 
 
 
@@ -402,13 +380,11 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."languages` (
   `name` varchar(50) NOT NULL,
   `language_code` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;");
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;");
 
 
 mysql_query("INSERT INTO `".$prefix."languages` (`id`, `name`, `language_code`) VALUES
-(1, 'Deutsch', 'de'),
-(2, 'Englisch', 'en'),
-(3, 'Französisch', 'fr');");
+(1, 'Deutsch', 'de');");
 
 
 @chmod("../cms-config.php", 0777);
