@@ -7,3 +7,4 @@
 * Seiten und Benutzer Auflistung jetzt sortierbar.
 * Mehrsprachigkeit der Seiten hinzugefügt
 * Kontaktformular auf Englisch übersetzt
+* eine Art "App Store" für Module und Designs einrichten
