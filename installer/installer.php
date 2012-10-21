@@ -168,6 +168,11 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."admins` (
   `email` varchar(800) NOT NULL,
   `password` varchar(500) NOT NULL,
   `group` int(11) NOT NULL,
+  `skype_id` varchar(32) NOT NULL,
+  `icq_id` varchar(20) NOT NULL,
+  `avatar_file` varchar(40) NOT NULL,
+  `about_me` text NOT NULL,
+  `last_action` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;");
 
@@ -365,11 +370,6 @@ mysql_query("INSERT INTO `".$prefix."backend_menu_structure` (`id`, `action`, `l
 (22, 'admins', 'Benutzer', 4);");
 
 
-
-mysql_query("ALTER TABLE `".$prefix."admins` ADD `skype_id` VARCHAR( 32 ) NOT NULL AFTER `group` ,
-ADD `icq_id` VARCHAR( 20 ) NOT NULL AFTER `skype_id` ,
-ADD `avatar_file` VARCHAR( 40 ) NOT NULL AFTER `icq_id` ,
-ADD `about_me` TEXT NOT NULL AFTER `avatar_file`");
 
 
 

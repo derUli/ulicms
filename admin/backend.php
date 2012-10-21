@@ -16,6 +16,7 @@ header("Content-Type: text/html; charset=UTF-8");
 if(isset($_SESSION["ulicms_login"]))
 {
   $eingeloggt=$_SESSION["ulicms_login"];
+  mysql_query("UPDATE ".tbname("admins")." SET last_action = ".time()." WHERE id = ".$_SESSION["login_id"]);
 }else{
   $eingeloggt=false;
 }
