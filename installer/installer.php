@@ -371,7 +371,7 @@ mysql_query("CREATE TABLE `".$prefix."backend_menu_structure` (
 `action` VARCHAR( 100 ) NOT NULL ,
 `label` VARCHAR( 100 ) NOT NULL ,
 `position` INT NOT NULL
-) ENGINE = MYISAM  DEFAULT CHARSET=urf8 AUTO_INCREMENT=25 ;
+) ENGINE = MYISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 ");
 
 mysql_query("INSERT INTO `".$prefix."backend_menu_structure` (`id`, `action`, `label`, `position`) VALUES
