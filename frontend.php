@@ -17,8 +17,6 @@ if(!isset($_SESSION["language"])){
 }
 
 
-
-header("Content-Language: ".getconfig("language"));
 header("Content-Type: text/html; charset=UTF-8");
 
 

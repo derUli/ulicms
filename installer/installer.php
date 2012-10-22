@@ -267,7 +267,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
   `name` varchar(300) NOT NULL,
   `value` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=40 ;");
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;");
 
 
 
@@ -283,21 +283,20 @@ mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (2, 'maintenance_mode', '0'),
 (3, 'redirection', ''),
 (4, 'disable_cache', 'off'),
-(5, 'language', 'de-DE'),
-(6, 'homepage_owner', '$zusammen'),
-(7, 'email', '$email'),
-(8, 'motto', '$motto'),
-(9, 'date_format', 'd.m.Y H:i:s'),
-(10, 'autor_text', 'Diese Seite wurde verfasst von Vorname Nachname'),
-(11, 'max_news', '10'),
-(12, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
-(13, 'meta_description', 'Eine kurzer Beschreibungstext'),
-(14, 'logo_disabled', 'no'),
-(15, 'logo_image', '0b27dc99b9875f306287bb3965c57304.png'),    
-(16, 'motd', ''),
-(17, 'visitors_can_register', 'on'),
-(18, 'frontpage', 'willkommen'),
-(19, 'default_language', 'de');");
+(5, 'homepage_owner', '$zusammen'),
+(6, 'email', '$email'),
+(7, 'motto', '$motto'),
+(8, 'date_format', 'd.m.Y H:i:s'),
+(9, 'autor_text', 'Diese Seite wurde verfasst von Vorname Nachname'),
+(10, 'max_news', '10'),
+(11, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
+(12, 'meta_description', 'Eine kurzer Beschreibungstext'),
+(13, 'logo_disabled', 'no'),
+(14, 'logo_image', '0b27dc99b9875f306287bb3965c57304.png'),    
+(15, 'motd', ''),
+(16, 'visitors_can_register', 'on'),
+(17, 'frontpage', 'willkommen'),
+(18, 'default_language', 'de');");
                                 
                    
                                                  

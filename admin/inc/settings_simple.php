@@ -76,10 +76,6 @@ if($pages[$i] == $settings["frontpage"]){
 </td>
 </tr>
 <tr>
-<td><strong><a href="http://www.i18nguy.com/unicode/language-identifiers.html" target="_blank">Sprachcode</a></td>
-<td><strong><input type="text" name="language" style="width:400px" value="<?php echo $settings["language"];?>"></strong></td>
-</tr>
-<tr>
 <td><strong data-tooltip="Wenn Sie grundlegende Änderungen an Ihrer Webpräsenz vornehmen möchten, können Sie Ihre Seite solange für Besucher sperren und stattdessen eine Wartungsmeldung anzeigen. Diese können Sie in der Template maintenance.php anpassen.">Wartungsmodus aktiviert:</strong></td>
 <td><strong><input type="checkbox" name="maintenance_mode" <?php
 if(strtolower($settings["maintenance_mode"]=="on")||$settings["maintenance_mode"]=="1"||strtolower($settings["maintenance_mode"])=="true"){
