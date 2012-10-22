@@ -56,6 +56,7 @@ else{
 <div class="container">
 <div id="language_box"><?php language_selection()?>
 </div>
+<br/>
+<hr>
 <div class="content">
 <h2><?php title()?></h2>
-<hr>
