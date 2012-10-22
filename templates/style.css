@@ -25,7 +25,7 @@ width:95.5%;
 }
 
 #language_box{
-margin-left:-14px;
+margin-left:-18px;
 }
 
 #language_box ul{
@@ -35,7 +35,7 @@ list-style-type:none;
 
 #language_box ul li{
 float:left;
-margin-right:50px;
+margin-right:20px;
 }
 
 #language_box ul li a, #language_box ul li a:visited{
@@ -121,8 +121,10 @@ clear:both;
 }
 
 .content{
-padding:20px;
-width:98%;
+margin-left:20px;
+margin-right:20px;
+
+
 float:left;
 font-family:arial;
 font-size:11pt;
