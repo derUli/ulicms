@@ -72,7 +72,7 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 
 <br/><br/>
 
-<strong data-tooltip="Eine kurze Beschrebung dieser Seite für Suchmaschinen">Meta Description:</strong><br/>
+<strong data-tooltip="Eine kurze Beschreibung dieser Seite für Suchmaschinen">Meta Description:</strong><br/>
 <input type="text" style="width:300px;" name="meta_description" value='<?php 
 echo htmlspecialchars($row->meta_description); ?>'>
 
