@@ -31,17 +31,31 @@ function guestbook_render(){
 				$errors = false;
 			if(empty($_POST["gb_name"])){
 				$errors = true;
-				$html_output .= "<p class='ulicms-error'>Bitte geben Sie einen Namen ein.</p>";
+				if($_SESSION["language"] == "de"){
+					$html_output .= "<p class='ulicms-error'>Bitte geben Sie einen Namen ein.</p>";
+				}
+				else{
+					$html_output .= "<p class='ulicms-error'>Please enter your name.</p>";
+				}
 				}
 			if(empty($_POST["gb_city"])){
 				$errors = true;
-				$html_output .= "<p class='ulicms-error'>Bitte geben Sie einen Ort ein.</p>";
+				if($_SESSION["language"] == "de"){
+					$html_output .= "<p class='ulicms-error'>Bitte geben Sie einen Ort ein.</p>";
+				}else{
+					echo "<p class='ulicms-error'>Please enter a City.</p>";
+			}
 				}
 				
 			
 			if(empty($_POST["gb_mail"])){
 				$errors = true;
-				$html_output .= "<p class='ulicms-error'>Bitte geben Sie ihre Emailadresse ein.</p>";
+				if($_SESSION["language"] == "de"){
+					$html_output .= "<p class='ulicms-error'>Bitte geben Sie ihre Emailadresse ein.</p>";
+				}
+				else{
+					$html_output .= "<p class='ulicms-error'>Please enter your mail adress.</p>";
+				}
 				}
 				
 			
@@ -52,7 +66,12 @@ function guestbook_render(){
 					
 				if(endsWith($_POST["gb_homepage"], ".ru") or endsWith($_POST["gb_homepage"], ".info")){
 					$errors = true;
-			    	$html_output .= "<p class='ulicms-error'>Ihre Homepage hat eine unerlaubte Endung.</p>";
+					if($_SESSION["language"] == "de"){
+			    	   $html_output .= "<p class='ulicms-error'>Ihre Homepage hat eine unerlaubte Endung.</p>";
+					}else{
+						$html_output .= "<p class='ulicms-error'>Your homepage has an ending that is not allowed.</p>";
+					}
+					
 					}					
 				}
 				
@@ -60,7 +79,12 @@ function guestbook_render(){
 			
 			if(empty($_POST["gb_content"])){
 				$errors = true;
-				$html_output .= "<p class='ulicms-error'>Bitte geben Sie eine Nachricht ein.</p>";
+				if($_SESSION["language"] == "de"){
+					$html_output .= "<p class='ulicms-error'>Bitte geben Sie eine Nachricht ein.</p>";
+				}
+				else{
+					$html_output .= "<p class='ulicms-error'>Please enter a message.</p>";
+				}
 				}			
 				
 			$badwords = file_get_contents(getModulePath("guestbook")."badwords.txt");
@@ -69,16 +93,23 @@ function guestbook_render(){
 			for($i=0;$i<count($badwords);$i++){
 				
 				if(strpos($_POST["gb_content"], $badwords[$i]) !== false){
-					$html_output .= "<p class='ulicms-error'>Sie haben ein nicht erlaubtes Wort in Ihrer Nachricht verwendet.</p>";
+					if($_SESSION["language"] == "de"){
+						$html_output .= "<p class='ulicms-error'>Sie haben ein nicht erlaubtes Wort in Ihrer Nachricht verwendet.</p>";
+					}
+					else{
+						$html_output .= "<p class='ulicms-error'>You have used a bad word in your message.</p>";
+					}
 					break;
 					}				
 				}
 				
 			if($_POST["gb_spam_protection"] != "11"){
 				$errors = true;
-				$html_output .= "<p class='ulicms-error'>Sie haben die Rechenaufgabe nicht richtig gelöst.<br/>
-				Sollten Sie unter Dyskalkulie leiden, nehmen Sie bitte einen Taschenrechner zur Hand.				
-				</p>";
+				if($_SESSION["language"] == "de"){
+					$html_output .= "<p class='ulicms-error'>Sie haben die Rechenaufgabe nicht richtig gelöst.</p>";
+				}else{
+					$html_output .= "<p class='ulicms-error'>The result of the spam protection question is invalid.</p>";
+				}
 				}
 				
 				
@@ -115,13 +146,24 @@ function guestbook_render(){
 }
 
 function guestbook_get_add_entry_link(){
-		return "<a href=\""."?seite=".get_requested_pagename()."&action=add"."\">Eintrag hinzufügen</a><hr/>";	
+		if($_SESSION["language"] == "de"){
+			return "<a href=\""."?seite=".get_requested_pagename()."&action=add"."\">Eintrag hinzufügen</a><hr/>";	
+		}
+		else{
+			return "<a href=\""."?seite=".get_requested_pagename()."&action=add"."\">Add Entry</a><hr/>";	
+		}
 	}
 	
 	
 	
 function get_add_entry_form(){
-		$add_entry_form_template = file_get_contents(getModulePath("guestbook")."templates/add_entry_from.tpl");
+		if($_SESSION["language"] == "de"){
+		$add_entry_form_template = file_get_contents(getModulePath("guestbook")
+		."templates/add_entry_from_german.tpl");
+		}else{
+			$add_entry_form_template = file_get_contents(getModulePath("guestbook")
+		."templates/add_entry_from_english.tpl");
+		}
 		$add_entry_form_template = str_replace("{form_action_url}",
 		"?seite=".get_requested_pagename()."&action=add", $add_entry_form_template);		
 		return $add_entry_form_template;		
