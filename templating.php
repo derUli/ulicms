@@ -394,6 +394,7 @@ function autor(){
 	}
 }
 
+/*
 function news(){
 	$connection=MYSQL_CONNECTION;
 	$max=(int)getconfig("max_news");
@@ -416,6 +417,8 @@ function news(){
 		echo $out;
 	}
 }
+
+*/
 
 
 
