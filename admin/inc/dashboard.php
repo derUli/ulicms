@@ -1,7 +1,7 @@
 <?php {
 if(defined("_SECURITY")){
   $pages_count=mysql_num_rows(mysql_query("SELECT * FROM ".tbname("content")));
-  $news_count=mysql_num_rows(mysql_query("SELECT * FROM ".tbname("news")));
+
   $topPages=mysql_query("SELECT * FROM ".tbname("content")." WHERE notinfeed = 0 AND systemname <> \"kontakt\" ORDER BY views DESC LIMIT 5");
   $lastModfiedPages = mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname <> \"kontakt\" ORDER BY lastmodified DESC LIMIT 5");
 
@@ -43,7 +43,6 @@ $motd = nl2br($motd);
 <tr>
 
 <td>Anzahl der News</td>
-<td><?php echo $news_count?></td> 
 </tr>
 <tr>
 <td>Registrierte Benutzer</td>
