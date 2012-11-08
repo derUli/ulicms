@@ -197,7 +197,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;");
 
 
-mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."news` (
+/* mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(200) NOT NULL,
   `content` longtext NOT NULL,
@@ -206,6 +206,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."news` (
   `autor` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;");
+*/
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   
@@ -400,7 +401,7 @@ mysql_query("INSERT INTO `".$prefix."languages` (`id`, `name`, `language_code`) 
 
 @chmod("../templates/oben.php", 0777);
 @chmod("../templates/unten.php", 0777);
-@chmod("../templates/news.txt", 0777);
+//@chmod("../templates/news.txt", 0777);
 @chmod("../templates/maintenance.php", 0777);
 
 

@@ -18,7 +18,7 @@ else if(empty($_GET["edit"])){
 <strong>Bitte wählen Sie ein Template aus:</strong><br/>
 <p><a href="index.php?action=templates&edit=oben.php">Oben</a></p>
 <p><a href="index.php?action=templates&edit=unten.php">Unten</a></p>
-<p><a href="index.php?action=templates&edit=news.txt">News</a></p>
+<!-- <p><a href="index.php?action=templates&edit=news.txt">News</a></p> !-->
 <p><a href="index.php?action=templates&edit=maintenance.php">Wartungsmodus</a></p>
 <hr/>
 <p><a href="index.php?action=templates&edit=style.css">Stylesheet</a></p>
