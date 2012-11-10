@@ -262,9 +262,11 @@ function menu($name){
 	while($row = mysql_fetch_object($query)){
 	echo "  <li>" ;
 	if(get_requested_pagename() != $row->systemname){
-		echo "<a href='?seite=".$row->systemname."' target='".$row->target."'>";
+		echo "<a href='?seite=".$row->systemname."' target='".
+		$row->target."'>";
 	}else{
-		echo "<a class='menu_active_link' href='?seite=".$row->systemname."' target='".$row->target."'>";
+		echo "<a class='menu_active_link' href='?seite=".$row->systemname.
+		"' target='".$row->target."'>";
 	}
 
 
@@ -279,9 +281,11 @@ function menu($name){
 			while($row2 = mysql_fetch_object($query2)){
 				echo "      <li>";
 				if(get_requested_pagename() != $row2->systemname){ 
-					echo "<a href='?seite=".$row2->systemname."' target='".$row->target."'>";
+					echo "<a href='?seite=".$row2->systemname."' target='".
+					$row->target."'>";
 				}else{
-					echo "<a class='menu_active_link' href='?seite=".$row2->systemname."' target='".$row->target."'>";
+					echo "<a class='menu_active_link' href='?seite=".$row2->systemname."' target='".
+					$row->target."'>";
 				}
 				echo $row2->title;
 				echo '</a>';
