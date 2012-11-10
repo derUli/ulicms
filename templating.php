@@ -402,7 +402,7 @@ function menu($name){
 										
 									
 								
-				echo "</li>\n";
+				echo "\n";
 			}
 			echo "  </ul></li>\n";
 		}else{
