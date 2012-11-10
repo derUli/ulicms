@@ -208,12 +208,15 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;");
 */
 
+
+
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `notinfeed` tinyint(1) NOT NULL,
   `systemname` varchar(300) NOT NULL,
   `title` varchar(600) NOT NULL,
+  `target` varchar(600) DEFAULT '_self',
   `content` longtext NOT NULL,
   `language` varchar(6) NOT NULL,
   `active` tinyint(1) NOT NULL,
