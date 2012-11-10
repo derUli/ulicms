@@ -4,7 +4,7 @@ function language_selection(){
 	$query=mysql_query("SELECT * FROM ".tbname("languages")." ORDER by name");
 	echo "<ul class='language_selection'>";
 	while($row = mysql_fetch_object($query)){
-	    echo "<li>"."<a href='?seite=".get_requested_pagename()."&language=".$row->language_code."'>".$row->name."</a></li>";
+	    echo "<li>"."<a href='?seite=".get_requested_pagename()."&amp;language=".$row->language_code."'>".$row->name."</a></li>";
 	}
 		echo "</ul>";
 
