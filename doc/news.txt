@@ -7,3 +7,4 @@
 * Seiten und Benutzer Auflistung jetzt sortierbar
 * Mehrsprachigkeit der Seiten hinzugefügt
 * Kontaktformular auf Englisch übersetzt
+* Man kann jetzt bei einer Seite ein Link-Target angeben
