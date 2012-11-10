@@ -336,18 +336,18 @@ function menu($name){
 				
 				
 				
-				
-				$query4 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = ' $language' AND parent='".$row3->systemname."' ORDER by position");
+				// Unterebene 3
+				$query4 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent='".$row3->systemname."' ORDER by position");
 		if(mysql_num_rows($query4)>0){
 			echo "  <ul class='sub_menu'>\n";
 			while($row4 = mysql_fetch_object($query4)){
 				echo "<li>";
 				if(get_requested_pagename() != $row4->systemname){ 
 					echo "<a href='?seite=".$row4->systemname."' target='".
-					$row->target."'>";
+					$row4->target."'>";
 				}else{
 					echo "<a class='menu_active_link' href='?seite=".$row4->systemname."' target='".
-					$row->target."'>";
+					$row4->target."'>";
 				}
 				echo $row4->title;
 				echo '</a>';
