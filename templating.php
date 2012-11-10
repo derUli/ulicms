@@ -274,8 +274,8 @@ function menu($name){
 
 	echo "</a>\n";
 	
-	
-	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = ' $language' AND parent='".$row->systemname."' ORDER by position");
+	// Unterebene 1
+	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent='".$row->systemname."' ORDER by position");
 		if(mysql_num_rows($query2)>0){
 			echo "  <ul class='sub_menu'>\n";
 			while($row2 = mysql_fetch_object($query2)){
@@ -289,6 +289,85 @@ function menu($name){
 				}
 				echo $row2->title;
 				echo '</a>';
+				
+				
+				// Unterebene 2
+				$query3 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent='".$row2->systemname."' ORDER by position");
+		if(mysql_num_rows($query3)>0){
+			echo "  <ul class='sub_menu'>\n";
+			while($row3 = mysql_fetch_object($query3)){
+				echo "      <li>";
+				if(get_requested_pagename() != $row3->systemname){ 
+					echo "<a href='?seite=".$row3->systemname."' target='".
+					$row3->target."'>";
+				}else{
+					echo "<a class='menu_active_link' href='?seite=".$row3->systemname."' target='".
+					$row3->target."'>";
+				}
+				echo $row3->title;
+				echo '</a>';
+				
+				
+
+				
+
+	
+		
+			
+				
+					
+						
+							
+								
+									
+										
+											
+												
+													
+														
+															
+																
+																	
+																		
+																			
+																				
+																					
+																						
+																							
+																								
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+																														
+																															
+																																	
+				
+				echo "</li>\n";
+			}
+			echo "  </ul></li>\n";
+		}else{
+		echo "</li>\n";
+		}
+				
 				echo "</li>\n";
 			}
 			echo "  </ul></li>\n";
@@ -296,6 +375,26 @@ function menu($name){
 		echo "</li>\n";
 		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
 
 echo "</ul>\n";
 
