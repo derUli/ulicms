@@ -354,12 +354,7 @@ function menu($name){
 				echo "</li>\n";
 			}
 			echo "  </ul></li>\n";
-		}else{
 		}
-				
-				
-
-				
 
 	
 		
@@ -401,8 +396,7 @@ function menu($name){
 										
 										
 									
-								
-				echo "\n";
+
 			}
 			echo "  </ul></li>\n";
 		}else{
