@@ -69,7 +69,18 @@ for($j=0; $j<count($languages); $j++ ){
 <?php
 	}
 ?>
-</select><br/> <br/>
+</select>
+
+<br/><br/>
+
+<strong data-tooltip="In welchem Fenster soll diese Seite geöffnet werden?">Öffnen in</strong><br/>
+<select name="target" size=1>
+<option selected="selected" value="_self">In diesem Fenster</option>
+<option selected="selected" value="_blank">In neuem Fenster</option>
+</select>
+
+
+<br/> <br/>
 
 <script type="text/javascript">
 function systemname_vorschlagen(txt){
