@@ -46,10 +46,12 @@ if($_SESSION["group"]>=50){
 <td><strong data-tooltip="An diese Adresse werden Emails über das Kontaktformular versandt...">Emailadresse des Inhabers:</strong></td>
 <td><strong><input type="text" name="email" style="width:400px" value="<?php echo $settings["email"];?>"></strong></td>
 </tr>
+<!--
 <tr>
 <td><strong data-tooltip="Wie viele News sollen angezeigt werden?">Die letzten X News anzeigen:</strong></td>
 <td><strong><input type="text" name="max_news" style="width:400px" value="<?php echo $settings["max_news"];?>"></strong></td>
 </tr>
+-->
 <tr>
 <td><strong data-tooltip="Wie viele Einträge sollen im RSS-Feed angezeigt werden?">Anzahl der Einträge im RSS-Feed</strong></td>
 <td><input type="text" name="items_in_rss_feed" style="width:400px" value="<?php echo $settings["items_in_rss_feed"];?>"></td>
