@@ -41,8 +41,6 @@ $motd = nl2br($motd);
 <td><?php echo $pages_count?></td>
 </tr>
 <tr>
-
-<td>Anzahl der News</td>
 </tr>
 <tr>
 <td>Registrierte Benutzer</td>
