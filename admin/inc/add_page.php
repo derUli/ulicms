@@ -75,8 +75,8 @@ for($j=0; $j<count($languages); $j++ ){
 
 <strong data-tooltip="In welchem Fenster soll diese Seite geöffnet werden?">Öffnen in</strong><br/>
 <select name="target" size=1>
-<option selected="selected" value="_self">In diesem Fenster</option>
-<option selected="selected" value="_blank">In neuem Fenster</option>
+<option value="_self">In diesem Fenster</option>
+<option value="_blank">In neuem Fenster</option>
 </select>
 
 

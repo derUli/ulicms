@@ -52,6 +52,14 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 </select>
 <br/><br/>
 
+<strong data-tooltip="In welchem Fenster soll diese Seite geöffnet werden?">Öffnen in</strong><br/>
+<select name="target" size=1>
+<option <?php if($row->target == "_self"){ echo 'selected="selected" ';}?>value="_self">In diesem Fenster</option>
+<option <?php if($row->target == "_blank"){ echo 'selected="selected" ';} ?>value="_blank">In neuem Fenster</option>
+</select>
+
+<br/><br/>
+
 <strong data-tooltip="Soll die Seite für die Öffentlichkeit sichtbar sein?">aktiviert:</strong><br/>
 <select name="activated" size=1>
 <option value="1" <?php if($row->active==1){echo "selected";}?>>aktiviert</option>
