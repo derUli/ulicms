@@ -6,10 +6,13 @@ function blog_render(){
      blog_check_installation();
 
 
-    if(isset($_GET["single"])){
-    
-       return blog_single(intval($_GET["single"]));
+    if(!empty($_GET["single"])){
+       require_once getModulePath("blog")."blog_single.php";
+       return blog_single(mysql_real_escape_string($_GET["single"]));
     }
+    else if(!empty($_GET["blog_admin"])){
+        
+    } 
     else{
        require_once getModulePath("blog")."blog_list.php";
        return blog_list();
