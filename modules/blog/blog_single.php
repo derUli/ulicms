@@ -11,7 +11,7 @@ function blog_single($seo_shortname){
        $html.= "<hr class='blog_hr'/>";
        $html.= "<sub>".
        date(getconfig("date_format"), $post->datum).
-       "</sub><br/><br/>";
+       "</sub><br/>";
        $html.= "<div class='blog_post_content'>".$post->content_full."</div>";
 
        return $html;
