@@ -2,7 +2,7 @@
 function blog_list(){
 
 
-   $posts_per_page = 5;
+   $posts_per_page = 2;
    
    $html = "";
    
@@ -34,7 +34,9 @@ function blog_list(){
 
     $count_query = mysql_query("SELECT * FROM `".
     tbname("blog")."` WHERE language='".
-    $_SESSION["language"]."'");
+    $_SESSION["language"]."' ORDER by id ASC");
+    $first_post = mysql_fetch_object($count_query);
+    $oldest_post_id = $first_post->id;
     $total_entries = mysql_num_rows($count_query);
 
     $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE language='".$_SESSION["language"]."' ORDER by id DESC LIMIT $limit1, $limit2");
@@ -54,13 +56,16 @@ function blog_list(){
           date(getconfig("date_format"), $post->datum)." - Autor: ". $user["username"].
           "</strong></sub><br/><br/>";
           $html.= "<div class='blog_post_content'>".$post->content_preview."</div>";
+          
+          
+          $last_post_id = $post->id;
        }
 
 
    $html.= "<br/><div class='page_older_newer'>";
    
    
-    if($limit1 > 0){
+    if($limit3 > -1){
                      
                    
           
@@ -75,16 +80,17 @@ function blog_list(){
      
    }   
    
-   if($limit3 > 0){
+   if($limit3 > -1){
        $html.= "</a>";
    }
    
    $html .= "&nbsp;&nbsp;";
    
    
-  
-      $html.= "<a href='?seite=".get_requested_pagename()."&amp;limit=".$limit2."'>";
    
+  if($last_post_id != $oldest_post_id){
+      $html.= "<a href='?seite=".get_requested_pagename()."&amp;limit=".$limit2."'>";
+   }
    
    if($_SESSION["language"] == "de"){
       $html .= "Ältere";
@@ -95,8 +101,9 @@ function blog_list(){
    }   
    
   
-   
+   if($last_post_id != $oldest_post_id){
      $html.= "</a>";
+   }
   
    
    
