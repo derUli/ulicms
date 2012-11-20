@@ -45,6 +45,22 @@ function blog_add_form(){
     $html_output .= "</td>";
     $html_output .= "</tr>";
     
+    
+    
+    $html_output .= "<tr>";
+    $html_output .= "<td>";
+    $html_output .= "<strong>Blogeintrag aktiviert:</strong>";
+    $html_output .= "</td>";
+    $html_output .= "<td>";
+    $html_output .= "
+    <select name='entry_enabled'>
+    <option value='1'>Ja</option>
+    <option value='0'>Nein</option>
+    ";
+    $html_output .= "</td>";
+    $html_output .= "</tr>";   
+    
+    
     $html_output .= "<tr>";
     $html_output .= "<td>";
     $html_output .= "<strong>Kommentare aktiviert:</strong>";
