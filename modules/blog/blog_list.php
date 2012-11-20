@@ -13,7 +13,7 @@ function blog_list(){
    if($_SESSION["group"] >= 20){
    $html .= "<p><a href='?seite=".
    get_requested_pagename().
-   "&blog_admin=add'>Blogeintrag anlegen</a><hr/></p>";
+   "&blog_admin=add'>Blogeintrag anlegen</a></p>";
    }
 
 
@@ -42,7 +42,7 @@ function blog_list(){
     $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE language='".$_SESSION["language"]."' ORDER by id DESC LIMIT $limit1, $limit2");
 
 
-    $html = "";
+    $html.= "";
     
     if(mysql_num_rows($query) > 0){
           while($post = mysql_fetch_object($query)){
@@ -116,7 +116,7 @@ function blog_list(){
 $html = "<p class='ulicms_error'>";
 
 if($_SESSION["language"] == "de"){
-   $html .= "Es sind keine weiteren Blogeinträge vorhanden";
+   $html .= "Es sind keine weiteren Blogeinträge vorhanden.";
    
 }else{
 

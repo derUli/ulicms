@@ -11,7 +11,10 @@ function blog_render(){
        return blog_single(mysql_real_escape_string($_GET["single"]));
     }
     else if(!empty($_GET["blog_admin"])){
-        
+        if($_GET["blog_admin"] == "add"){
+           require_once getModulePath("blog")."blog_add.php";  
+           return blog_add_form(); 
+        }
     } 
     else{
        require_once getModulePath("blog")."blog_list.php";

@@ -22,6 +22,15 @@ function getUserByName($name){
   }
 }
 
+function getUserById($id){
+  $query = mysql_query("SELECT * FROM ".tbname("admins"). " WHERE id = ".intval($id));
+  if(mysql_num_rows($query)>0){
+    return mysql_fetch_assoc($query);
+  }else{
+    return false;
+  }
+}
+
 
 function adduser($username, $lastname, $firstname, $email, $password, $group){
   $username = mysql_real_escape_string($username);
