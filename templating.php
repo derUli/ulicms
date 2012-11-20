@@ -486,6 +486,10 @@ function base_metas(){
 		}
 	}
 
+
+
+echo "<script type=\"text/javascript\" src=\"admin/ckeditor/ckeditor.js\"></script>\r\n";
+
 }
 
 

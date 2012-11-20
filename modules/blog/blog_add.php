@@ -74,16 +74,91 @@ function blog_add_form(){
     $html_output .= "</td>";
     $html_output .= "</tr>";    
     
+   
+    $html_output .= "<tr>";
+    $html_output .= "<td></td>";
+    $html_output .= "<td align='center'><strong>Inhalt:</strong></td>";
+    $html_output .= "</tr>";
+    
+    
+
+    $html_output .= "<tr>";
+    $html_output .= "<td></td>";
+        
+    $html_output .= "<td>";    
+    
+    $html_output .= '<textarea name="content_full" id="content_full" cols=60 rows=20></textarea>
+<script type="text/javascript">
+var editor = CKEDITOR.replace( \'content_full\',
+					{
+						skin : \'kama\'
+					});
+					
+</script>
+
+<noscript>
+<p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
+
+</noscript>';
+
+
+    $html_output .= "</td>";    
+    $html_output .= "</tr>";
+
+
+
+
+
+
+    $html_output .= "<tr>";
+    $html_output .= "<td></td>";
+    $html_output .= "<td align='center'><strong>Vorschau:</strong></td>";
+    $html_output .= "</tr>";
+
+
+
+  $html_output .= "<tr>";
+    $html_output .= "<td></td>";
+        
+    $html_output .= "<td>";    
+    
+    $html_output .= '<textarea name="content_preview" id="content_preview" cols=60 rows=20></textarea>
+<script type="text/javascript">
+var editor = CKEDITOR.replace( \'content_preview\',
+					{
+						skin : \'kama\'
+					});
+					
+</script>
+
+<noscript>
+<p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
+
+</noscript>';
+
+
+    $html_output .= "</td>";    
+    
+    $html_output .= "</tr>";
+
+
+
+
     $html_output .= "<tr>";
     $html_output .= "<td>";
     $html_output .= "</td>";
-    $html_output .= "<td>";
-    $html_output .= "<br/><input type='submit' value='Speichern'>";
+    $html_output .= "<td align='center' style='padding-top:50px;'>";
+    $html_output .= "<input type='submit' value='Speichern'>";
     $html_output .= "</td>";
     $html_output .= "</tr>";
     
     
-    
+
+
+
+
+
+
 
     
     $html_output .= "</table>";
@@ -93,8 +168,20 @@ function blog_add_form(){
     $html_output .= "
     <style type='text/css'>
     .blog_admin_table tr td{
-    height:50px;
-    }</style>";
+    height:50px; }
+    
+
+    .blog_admin_table input[type=button], .blog_admin_table input[type=submit]{
+    background-color:white;
+    color:black;
+    width:200px;
+    font-size:16pt;
+    font-weight:bold;
+    border:3px solid blue; }
+
+
+        
+    </style>";
     
     
     return $html_output;
