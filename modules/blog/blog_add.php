@@ -4,10 +4,10 @@ function blog_add_form(){
     $all_languages = getAllLanguages();
     $html_output .= "<form action='?seite=".get_requested_pagename()."&blog_admin=submit' method='post' style=''>";
     
-    $html_output .= "<table class='blog_admin_table' style='width:90%;border:0px;'7>";
+    $html_output .= "<table class='blog_admin_table'>";
     
     $html_output .= "<tr>";
-    $html_output .= "<td>";
+    $html_output .= "<td style='width:220px;'>";
     $html_output .= "<strong>Titel dieser News:</strong>";
     $html_output .= "</td>";
     $html_output .= "<td>";
@@ -29,7 +29,7 @@ function blog_add_form(){
     
     $html_output .= "<tr>";
     $html_output .= "<td>";
-    $html_output .= "<strong>Sprache des Blogeintrags:</strong>";
+    $html_output .= "<strong>Sprache des Blogeintrags: </strong>";
     $html_output .= "</td>";
     
     $html_output .= "<td>";
@@ -85,7 +85,7 @@ function blog_add_form(){
     $html_output .= "<tr>";
     $html_output .= "<td></td>";
         
-    $html_output .= "<td>";    
+    $html_output .= "<td align='center'>";    
     
     $html_output .= '<textarea name="content_full" id="content_full" cols=60 rows=20></textarea>
 <script type="text/javascript">
@@ -112,17 +112,17 @@ var editor = CKEDITOR.replace( \'content_full\',
 
     $html_output .= "<tr>";
     $html_output .= "<td></td>";
-    $html_output .= "<td align='center'><strong>Vorschau:</strong></td>";
+    $html_output .= "<td align='center' style='width:98%;'><strong>Vorschau:</strong></td>";
     $html_output .= "</tr>";
 
 
 
-  $html_output .= "<tr>";
+    $html_output .= "<tr>";
     $html_output .= "<td></td>";
         
-    $html_output .= "<td>";    
+    $html_output .= "<td style='width:98%;' align='center'>";    
     
-    $html_output .= '<textarea name="content_preview" id="content_preview" cols=60 rows=20></textarea>
+    $html_output .= '<textarea name="content_preview" id="content_preview" cols=80 rows=20></textarea>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( \'content_preview\',
 					{
@@ -168,7 +168,8 @@ var editor = CKEDITOR.replace( \'content_preview\',
     $html_output .= "
     <style type='text/css'>
     .blog_admin_table tr td{
-    height:50px; }
+    height:50px; 
+    }
     
 
     .blog_admin_table input[type=button], .blog_admin_table input[type=submit]{
@@ -178,7 +179,13 @@ var editor = CKEDITOR.replace( \'content_preview\',
     font-size:16pt;
     font-weight:bold;
     border:3px solid blue; }
+    
+    .blog_admin_table{
+      border:0px;    
+    }
 
+
+   
 
         
     </style>";

@@ -7,8 +7,8 @@ CKEDITOR.editorConfig = function( config )
 {
 	// Define changes to default configuration here. For example:
 	 config.language = 'de';
-	 config.height="400px"
-	 config.width="900px"
+	 config.height="500px"
+	 config.width="800px"
 	 config.toolbar = 'cms';
 	 
    config.filebrowserBrowseUrl = 'kcfinder/browse.php?type=files';
