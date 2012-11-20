@@ -30,12 +30,35 @@ function blog_add_form(){
     
     $html_output .= "<tr>";
     $html_output .= "<td>";
+    $html_output .= "<strong>Sprache des Blogeintrags:</strong>";
+    $html_output .= "</td>";
+    
+    $html_output .= "<td>";
+    $html_output .= "<select name='language'>";
+    for($i=0; $i<count($all_languages); $i++){
+       $this_language = $all_languages[0];
+       $html_output .= "<option value='$this_language'>$this_language</option>";
+           
+    }
+
+    $html_output .= "</select>";
+    
+    $html_output .= "</td>";
+    $html_output .= "</tr>";
+    
+    
+    
+    $html_output .= "<tr>";
+    $html_output .= "<td>";
     $html_output .= "</td>";
     $html_output .= "<td>";
     $html_output .= "<br/><input type='submit' value='Speichern'>";
     $html_output .= "</td>";
     $html_output .= "</tr>";
     
+    
+    
+
     
     $html_output .= "</table>";
     
