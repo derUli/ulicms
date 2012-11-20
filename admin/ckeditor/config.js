@@ -7,7 +7,7 @@ CKEDITOR.editorConfig = function( config )
 {
 	// Define changes to default configuration here. For example:
 	 config.language = 'de';
-	 config.height="500px"
+	 config.height="400px"
 	 config.width="800px"
 	 config.toolbar = 'cms';
 	 
