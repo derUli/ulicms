@@ -39,7 +39,13 @@ function blog_list(){
     $oldest_post_id = $first_post->id;
     $total_entries = mysql_num_rows($count_query);
 
-    $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE language='".$_SESSION["language"]."' ORDER by id DESC LIMIT $limit1, $limit2");
+
+    if($_SESSION["group"] >= 20){
+       $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE language='".$_SESSION["language"]."' ORDER by id DESC LIMIT $limit1, $limit2");
+    }
+    else{
+       $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE language='".$_SESSION["language"]."' AND entry_enabled = 1 ORDER by id DESC LIMIT $limit1, $limit2");
+    }
 
 
     $html.= "";
