@@ -10,13 +10,28 @@ CKEDITOR.editorConfig = function( config )
 	 config.height="400px"
 	 config.width="800px"
 	 config.toolbar = 'cms';
+
+
+
+   if(window.location.href.indexOf("admin/") != -1){
 	 
-   config.filebrowserBrowseUrl = 'kcfinder/browse.php?type=files';
-   config.filebrowserImageBrowseUrl = 'kcfinder/browse.php?type=images';
-   config.filebrowserFlashBrowseUrl = 'kcfinder/browse.php?type=flash';
-   config.filebrowserUploadUrl = 'kcfinder/upload.php?type=files';
-   config.filebrowserImageUploadUrl = 'kcfinder/upload.php?type=images';
-   config.filebrowserFlashUploadUrl = 'kcfinder/upload.php?type=flash';
+     config.filebrowserBrowseUrl = 'kcfinder/browse.php?type=files';
+     config.filebrowserImageBrowseUrl = 'kcfinder/browse.php?type=images';
+     config.filebrowserFlashBrowseUrl = 'kcfinder/browse.php?type=flash';
+     config.filebrowserUploadUrl = 'kcfinder/upload.php?type=files';
+     config.filebrowserImageUploadUrl = 'kcfinder/upload.php?type=images';
+     config.filebrowserFlashUploadUrl = 'kcfinder/upload.php?type=flash';
+   } else{
+
+     config.filebrowserBrowseUrl = 'admin/kcfinder/browse.php?type=files';
+     config.filebrowserImageBrowseUrl = 'admin/kcfinder/browse.php?type=images';
+     config.filebrowserFlashBrowseUrl = 'admin/kcfinder/browse.php?type=flash';
+     config.filebrowserUploadUrl = 'admin/kcfinder/upload.php?type=files';
+     config.filebrowserImageUploadUrl = 'admin/kcfinder/upload.php?type=images';
+     config.filebrowserFlashUploadUrl = 'admin/kcfinder/upload.php?type=flash';
+   }
+
+
  
 config.toolbar_cms =
 [
