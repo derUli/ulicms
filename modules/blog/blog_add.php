@@ -35,7 +35,7 @@ function blog_add_form(){
     $html_output .= "<td>";
     $html_output .= "<select name='language'>";
     for($i=0; $i<count($all_languages); $i++){
-       $this_language = $all_languages[0];
+       $this_language = $all_languages[$i];
        $html_output .= "<option value='$this_language'>$this_language</option>";
            
     }
