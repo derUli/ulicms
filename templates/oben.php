@@ -58,6 +58,5 @@ else{
 </div>
 <br/>
 <hr>
-<br/>
 <div class="content">
 
