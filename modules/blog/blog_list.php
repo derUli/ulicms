@@ -13,7 +13,7 @@ function blog_list(){
    if($_SESSION["group"] >= 20){
    $html .= "<p><a href='?seite=".
    get_requested_pagename().
-   "&blog_admin=add'>Blogeintrag anlegen</a></p>";
+   "&blog_admin=add'>Blogeintrag anlegen</a></p><br/>";
    }
 
 
