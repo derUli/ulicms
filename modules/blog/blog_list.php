@@ -65,13 +65,16 @@ function blog_list(){
           
 		  $html.= "<br/>";
 		  
-		  if(($_SESSION["group"] >= 20 and $_SESSION["login_id"] == $post->author)
+		 if(($_SESSION["group"] >= 20 and $_SESSION["login_id"] == $post->author)
 		  or ($_SESSION["group"] >= 40)){
+		   $html .= "<a href='?seite=".get_requested_pagename()."&blog_admin=edit_post&id=".$post->id."'>[Bearbeiten]</a> ";
+		 
            $html .= "<a href='?seite=".get_requested_pagename()."&blog_admin=delete_post&id=".$post->id."' onclick='return confirm(\"Diesen Post wirklich löschen?\")'>[Löschen]</a>";
 		  }else if($_SESSION["group"] >= 20){
-		   $html .= "<div class='disabled_link'>[Löschen]</div>";
+		   $html .= "
+		   <div class='disabled_link'>[Bearbeiten]</div>
+		   <div class='disabled_link'>[Löschen]</div>";
 		  }
-		  
 		 
           
           $last_post_id = $post->id;

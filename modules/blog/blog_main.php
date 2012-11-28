@@ -15,6 +15,10 @@ function blog_render(){
            require_once getModulePath("blog")."blog_add.php";  
            return blog_add_form(); 
         }
+		else if($_GET["blog_admin"] == "edit_post"){
+           require_once getModulePath("blog")."blog_edit.php";  
+           return blog_edit_form(intval($_GET["id"])); 
+        }
         else if($_GET["blog_admin"] == "submit"){
            return blog_submit();  
                  
