@@ -88,6 +88,11 @@ function blog_display_comments($post_id){
 	     $html .= $comment->name;
 	   
 	     $html .= "</a>";
+	     
+	     if($_SESSION["group"] >= 40){
+               $html .= " <a href='?seite=".get_requested_pagename()."&blog_admin=delete_comment&id=".$comment->id."' onclick='return confirm(\"Diesen Kommentar wirklich löschen?\")'>[Löschen]</a>";	     
+	     }
+	     
 	     $html .= "<br/>";
 	     $html .= "<br/>";
 	       if($_SESSION["language"] == "de"){

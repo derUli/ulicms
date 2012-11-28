@@ -29,6 +29,9 @@ function blog_render(){
 		else if($_GET["blog_admin"] == "delete_post"){
 		   require_once getModulePath("blog")."blog_remove.php";  
 		   returnblog_remove_post(intval($_GET["id"]));
+		}else if($_GET["blog_admin"] == "delete_comment"){
+		   require_once getModulePath("blog")."blog_remove.php";  
+		   return blog_remove_comment(intval($_GET["id"]));
 		}
     } 
 	
