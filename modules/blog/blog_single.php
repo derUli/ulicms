@@ -14,7 +14,7 @@ function blog_single($seo_shortname){
        
        if($_SESSION["group"] >= 20 or $post->entry_enabled){
        
-       $html.= "<h2 class='blog_headline'>".$post->title."</h2>";
+       $html.= "<h1 class='blog_headline'>".$post->title."</h1>";
        $html.= "<hr class='blog_hr'/>";
        $html.= "<sub><strong>".
        date(getconfig("date_format"), $post->datum)." - Autor: ". $user["username"].
