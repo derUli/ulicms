@@ -59,4 +59,4 @@ else{
 <br/>
 <hr>
 <div class="content">
-<h2><?php title()?></h2>
+
