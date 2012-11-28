@@ -115,7 +115,7 @@ function post_comments(){
    
    
    
-   if(!isset($_SESSION["homepage"])){
+   if(!isset($_SESSION["url"])){
 	$_SESSION["url"] = "http://";
    }
    
@@ -134,6 +134,7 @@ function post_comments(){
      $_SESSION["name"] = $name;
      $_SESSION["url"] = $url;
      $_SESSION["email"] = $email;
+     
      if(!empty($name) and !empty($email) and !empty($comment)){
       
       
