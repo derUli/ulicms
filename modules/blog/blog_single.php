@@ -90,7 +90,7 @@ function comment_form($post_id){
      $html .= "</table>";
 
      $html .= "<br/><textarea name='comment' rows=15 cols=60></textarea>";
-     
+     $html .= "<input type='text' name='phone' value='' style='visbility:hidden;'>";
      $html .= "<input type='hidden' name='post_comment_to' value='".$post_id."'>";
      $html .= "<br/><br/><input type='submit' value='".$submit."'>";
      $html .= "</form>";
@@ -98,6 +98,34 @@ function comment_form($post_id){
      return $html;
 }
 
+
+function post_comments(){
+   if(isset($_POST["post_comment_to"])){
+      $name = mysql_real_escape_string(htmlspecialchars($_POST["name"]));
+      $url = mysql_real_escape_string(htmlspecialchars($_POST["url"]));
+      $email = mysql_real_escape_string(htmlspecialchars(
+      $_POST["email"]));
+      $date = time();
+      $comment = mysql_real_escape_string($_POST["comment"]);
+     
+      if(!empty($name) and !empty($email) and !empty($comment)){
+	mysql_query("INSERT INTO `".tbname("blog_comments").
+	"`");
+	
+	return true;
+      } else{
+        return false;      
+      }
+      
+      // Spam Protection
+      // ein für echte Menschen unsichtbares Textfeld
+      // Die meisten Spambots füllen alle Felder aus
+      // dieses Feld wird darauf geprüft, ob es nicht leer ist
+      if(!empty($_POST["phone"])){
+	die("Die motherfucking spammers!");
+      }
+   }
+}
 
 function blog_display_comments($post_id){
     $html = "";
