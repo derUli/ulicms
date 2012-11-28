@@ -12,6 +12,19 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".tbname("blog")."` (
   `content_full` longtext NOT NULL,
   `content_preview` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;");
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+
+mysql_query("CREATE TABLE IF NOT EXISTS `".tbname("blog_comments")."` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(38) NOT NULL,
+`email` varchar(255) NOT NULL,
+`url` varchar(255) NOT NULL,
+`comment` text NOT NULL,
+`date` BIGINT NOT NULL,
+`post_id` int(11) NOT NULL,
+PRIMARY KEY (`id`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;");
+
 }
 ?>
