@@ -17,7 +17,8 @@ function blog_edit_form($post_id){
     $html_output .= "<strong>Titel dieser News:</strong>";
     $html_output .= "</td>";
     $html_output .= "<td>";
-    $html_output .= "<input name='title' type='text' maxlength=200 size=70>";
+    $html_output .= "<input name='title' type='text' maxlength=200 size=70 value='".
+	htmlspecialchars($post->title)."'>";
     $html_output .= "</td>";
     $html_output .= "</tr>";
     
@@ -29,7 +30,8 @@ function blog_edit_form($post_id){
     $html_output .= "http://".$_SERVER["SERVER_NAME"].
     "/pfad/zu/ulicms/".
     "?seite=".get_requested_pagename().
-    "&single=<input style='font-weight:bold;background-color:rgb(240, 240, 240);border:0px;' name='seo_shortname' type='text' maxlength=200 size=50>";
+    "&single=<input style='font-weight:bold;background-color:rgb(240, 240, 240);border:0px;' name='seo_shortname' type='text' maxlength=200 size=50 value='".
+	htmlspecialchars($post->seo_shortname)."'>";
     $html_output .= "</td>";
     $html_output .= "</tr>";
     
@@ -42,8 +44,12 @@ function blog_edit_form($post_id){
     $html_output .= "<select name='language'>";
     for($i=0; $i<count($all_languages); $i++){
        $this_language = $all_languages[$i];
+	   if($post->language == $this_language){
+	      $html_output .= "<option value='$this_language' selected>$this_language</option>";
+	   } else
+	   {
        $html_output .= "<option value='$this_language'>$this_language</option>";
-           
+       }    
     }
 
     $html_output .= "</select>";
@@ -58,11 +64,21 @@ function blog_edit_form($post_id){
     $html_output .= "<strong>Blogeintrag aktiviert:</strong>";
     $html_output .= "</td>";
     $html_output .= "<td>";
-    $html_output .= "
+	
+	if($post->entry_enabled){
+       $html_output .= "
     <select name='entry_enabled'>
-    <option value='1'>Ja</option>
+    <option value='1' selected>Ja</option>
     <option value='0'>Nein</option>
     ";
+	}else{
+	       $html_output .= "
+    <select name='entry_enabled'>
+    <option value='1'>Ja</option>
+    <option value='0' selected>Nein</option>
+    ";
+	
+	}
     $html_output .= "</td>";
     $html_output .= "</tr>";   
     
@@ -72,11 +88,21 @@ function blog_edit_form($post_id){
     $html_output .= "<strong>Kommentare aktiviert:</strong>";
     $html_output .= "</td>";
     $html_output .= "<td>";
+	
+	if($post->comments_enabled){
     $html_output .= "
     <select name='comments_enabled'>
-    <option value='1'>Ja</option>
+    <option value='1' selected>Ja</option>
     <option value='0'>Nein</option>
     ";
+	}
+	else{
+	   $html_output .= "
+    <select name='comments_enabled'>
+    <option value='1'>Ja</option>
+    <option value='0' selected>Nein</option>
+    ";
+	}
     $html_output .= "</td>";
     $html_output .= "</tr>";    
     
@@ -93,7 +119,8 @@ function blog_edit_form($post_id){
         
     $html_output .= "<td align='center'>";    
     
-    $html_output .= '<textarea name="content_full" id="content_full" cols=60 rows=20></textarea>
+    $html_output .= '<textarea name="content_full" id="content_full" cols=60 rows=20>'.
+	htmlspecialchars($post->content_full).'</textarea>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( \'content_full\',
 					{
@@ -128,7 +155,9 @@ var editor = CKEDITOR.replace( \'content_full\',
         
     $html_output .= "<td style='width:98%;' align='center'>";    
     
-    $html_output .= '<textarea name="content_preview" id="content_preview" cols=80 rows=20></textarea>
+    $html_output .= '<textarea name="content_preview" id="content_preview" cols=80 rows=20>'.
+	htmlspecialchars($post->content_preview)
+	.'</textarea>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( \'content_preview\',
 					{
