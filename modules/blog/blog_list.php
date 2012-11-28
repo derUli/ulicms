@@ -56,7 +56,7 @@ function blog_list(){
           
           
           
-          $html.= "<h2 class='blog_headline'><a href='?seite=".get_requested_pagename()."&amp;single=".$post->seo_shortname."'>".$post->title."</a></h2>";
+          $html.= "<h1 class='blog_headline'><a href='?seite=".get_requested_pagename()."&amp;single=".$post->seo_shortname."'>".$post->title."</a></h1>";
           $html.= "<hr class='blog_hr'/>";
           $html.= "<sub><strong>".
           date(getconfig("date_format"), $post->datum)." - Autor: ". $user["username"].
