@@ -59,6 +59,45 @@ function blog_single($seo_shortname){
 
 }
 
+function comment_form($post_id){
+     $html = "<br/>";
+     $html .= "<form action=".$_SERVER['REQUEST_URI']."' method='post'>";
+     if($_SESSION["language"] == "de"){
+        $submit = "Kommentar veröffentlichen";
+     }else{
+        $submit = "Submit Comment";
+     }
+     
+
+     $html .= "<table border=0>
+     <tr>
+     <td><strong>Name: *</strong>&nbsp;&nbsp;</td><td><input name='name' size=50 maxlength=255 type='text' value=''>
+     </td>
+     </tr>";
+     
+     
+     $html .= "<tr>
+     <td><strong>Homepage:</strong>&nbsp;&nbsp;</td><td><input size=50 maxlength=255 name='url' type='text' value='http://'>
+     </td>
+     </tr>";
+     
+       $html .= "<tr>
+     <td><strong>Email: *</strong>&nbsp;&nbsp;</td><td><input size=50 maxlength=255 name='email' type='text' value=''>
+     </td>
+     </tr>";
+     
+     
+     $html .= "</table>";
+
+     $html .= "<br/><textarea name='comment' rows=15 cols=60></textarea>";
+     
+     $html .= "<input type='hidden' name='post_comment_to' value='".$post_id."'>";
+     $html .= "<br/><br/><input type='submit' value='".$submit."'>";
+     $html .= "</form>";
+     
+     return $html;
+}
+
 
 function blog_display_comments($post_id){
     $html = "";
@@ -66,6 +105,7 @@ function blog_display_comments($post_id){
     
     $html .= "<div class='comments'>";
     $html .= "<h2>Kommentare</h2>";
+    $html .= comment_form($post_id);
     
     if(mysql_num_rows($query) > 0){
         if($SESSION["language"] == "de"){
