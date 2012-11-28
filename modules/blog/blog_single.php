@@ -104,6 +104,7 @@ function post_comments(){
       if(isset($_SESSION["login_id"])){
 	$user = getUserById($_SESSION["login_id"]);        
 	$_SESSION["name"] = $user["username"];
+	$_SESSION["email"] = $user["email"];
 	
       }
         
