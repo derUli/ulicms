@@ -68,13 +68,48 @@ function blog_display_comments($post_id){
     $html .= "<h2>Kommentare</h2>";
     
     if(mysql_num_rows($query) > 0){
-        
-	$html.="<p>Es sind bisher ".mysql_num_rows($query).
-	"zu diesem Artikel vorhanden.</p>";
+        if($SESSION["language"] == "de"){
+	  $html.="<p>Es sind bisher ".mysql_num_rows($query).
+	" zu diesem Artikel vorhanden.</p>";
+	} else{
+	  $html.="<p>There are ".mysql_num_rows($query). " Comments
+	 until now.</p>";
+	}
+	
+	$html.="<hr/>";
     
 	while($comment = mysql_fetch_object($query)){
 	   $html.="<div class='a_comment'>
-	   <a name='comment".$comment->id."'></a>Kommentar Nr. ".$comment->id."</div>";
+	   <a href='#comment".$comment->id."' name='comment".$comment->id."'>";
+	     $html .= "#".$comment->id;
+	     
+	 
+	     $html .= " ";
+	     $html .= $comment->name;
+	   
+	     $html .= "</a>";
+	     $html .= "<br/>";
+	     $html .= "<br/>";
+	       if($_SESSION["language"] == "de"){
+	       $html .= "<strong>Datum:</strong>";
+	       
+	     } else{
+               $html .= "<strong>Date:</strong>";
+	     }
+	     
+	     $html.= " ";
+	     $html .= date(getconfig("date_format"),
+	     $comment->date);
+	     $html .= "<br/>";
+	     $html .= "<strong>Homepage:</strong> "."<a href='".$comment->url."'>".$comment->url."</a>";
+	     $html .= "<br/><br/>";
+	     $html .= nl2br(htmlspecialchars($comment->comment));
+	     
+	     $html .= "<br/><br/>";
+	     
+	     
+	   
+	   $html .= "</div>";
 	}
 
    
