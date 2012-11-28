@@ -197,7 +197,7 @@ var editor = CKEDITOR.replace( \'content_preview\',
 
     
     $html_output .= "</table>";
-    $html_output .="<input type='hidden' name='id' value='".$post->id."'";
+    $html_output .="<input type='hidden' name='id' value='".$post->id."'>";
     $html_output .= "</form>";
     
     $html_output .= "

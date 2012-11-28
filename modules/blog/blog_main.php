@@ -51,12 +51,12 @@ function blog_update(){
   $seo_shortname = mysql_real_escape_string($_POST["seo_shortname"]);
 
   if(empty($title) or empty($seo_shortname)){
-     /* $html_output .= "<script type='text/javascript'>
+      $html_output .= "<script type='text/javascript'>
      history.back()     
      </script>";
      return $html_output;
 	 
-	 */
+	 
 
   }
   
@@ -70,7 +70,7 @@ function blog_update(){
   $author = $_SESSION["login_id"];
   
   $id = intval($_POST["id"]);
-  
+ 
   // Rechte prüfen
   if($_SESSION["group"] >= 20)  {
      $insert_query = "UPDATE `".tbname("blog")."` SET title = '$title',
@@ -79,13 +79,13 @@ function blog_update(){
 	 content_preview = '$content_preview' WHERE id = $id
 	 ";
   $html_output .= $insert_query;
-  echo $insert_query;
-  mysql_query($insert_query)or die(mysql_error());
+  mysql_query($insert_query);
   $html_output .= "<script type='text/javascript'>
   location.replace('?seite=".get_requested_pagename().
   "&single=".$seo_shortname. "');
   </script>
   ";
+  
   
   }
   
