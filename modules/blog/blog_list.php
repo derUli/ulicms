@@ -119,7 +119,7 @@ function blog_list(){
    return $html;
 
 }else{
-$html = "<p class='ulicms_error'>";
+$html .= "<p class='ulicms_error'>";
 
 if($_SESSION["language"] == "de"){
    $html .= "Es sind keine weiteren Blogeinträge vorhanden.";
