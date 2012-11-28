@@ -37,7 +37,7 @@ function blog_single($seo_shortname){
        
        
        if($post->comments_enabled){
-         $html .= "<br/><br/>".
+         $html .= "".
          blog_display_comments($post->id);       
        }
 	   
@@ -160,6 +160,7 @@ function blog_display_comments($post_id){
     }
     
     
+   
     $query = mysql_query("SELECT * FROM `".tbname("blog_comments")."` WHERE post_id = $post_id");
     
     $html .= "<div class='comments'>";
@@ -172,6 +173,9 @@ function blog_display_comments($post_id){
     $html .= comment_form($post_id);
     
     if(mysql_num_rows($query) > 0){
+    
+     $count = 0;    
+    
         if($SESSION["language"] == "de"){
 	  $html.="<p>Es sind bisher ".mysql_num_rows($query).
 	" zu diesem Artikel vorhanden.</p>";
@@ -183,13 +187,14 @@ function blog_display_comments($post_id){
 	$html.="<hr/>";
     
 	while($comment = mysql_fetch_object($query)){
+	$count++;
+	
 	   $html.="<div class='a_comment'>
 	   <a href='#comment".$comment->id."' name='comment".$comment->id."'>";
-	     $html .= "#".$comment->id;
+	     $html .= "#".$count;
 	     
 	 
-	     $html .= " ";
-	     $html .= $comment->name;
+	    
 	   
 	     $html .= "</a>";
 	     
@@ -199,12 +204,23 @@ function blog_display_comments($post_id){
 	     
 	     $html .= "<br/>";
 	     $html .= "<br/>";
+	      $html .= "<strong>Name: </strong>";
+	     $html .= $comment->name;
+	     $html .= "<br/>";
+	     
+	      if($_SESSION["group"] >= 20){
+               	$html .= "<strong>Email: </strong>" . $comment->email."<br/>";
+	     }
+	     
 	       if($_SESSION["language"] == "de"){
 	       $html .= "<strong>Datum:</strong>";
 	       
 	     } else{
                $html .= "<strong>Date:</strong>";
 	     }
+	     
+	    
+	     
 	     
 	     $html.= " ";
 	     $html .= date(getconfig("date_format"),
@@ -216,6 +232,9 @@ function blog_display_comments($post_id){
 	     
 	     $html .= "<br/><br/>";
 	     
+	     if($count != mysql_num_rows($query)){
+               $html .= "<hr/>";
+	     }
 	     
 	   
 	   $html .= "</div>";
