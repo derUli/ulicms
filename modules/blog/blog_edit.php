@@ -8,7 +8,7 @@ function blog_edit_form($post_id){
 	
     $html_output = "";
     $all_languages = getAllLanguages();
-    $html_output .= "<form action='?seite=".get_requested_pagename()."&blog_admin=submit' method='post' style=''>";
+    $html_output .= "<form action='?seite=".get_requested_pagename()."&blog_admin=update' method='post' style=''>";
     
     $html_output .= "<table class='blog_admin_table'>";
     
@@ -197,7 +197,7 @@ var editor = CKEDITOR.replace( \'content_preview\',
 
     
     $html_output .= "</table>";
-    
+    $html_output .="<input type='hidden' name='id' value='".$post->id."'";
     $html_output .= "</form>";
     
     $html_output .= "
