@@ -70,7 +70,7 @@ function blog_list(){
 		    $html .= "<br/><a href='?seite=".get_requested_pagename()."&amp;single=".$post->seo_shortname."'>read more...</a>
 			";
 		  }
-		  $html.= "<br/>";
+		  $html.= "<br/><br/>";
 		  
 		 if(($_SESSION["group"] >= 20 and $_SESSION["login_id"] == $post->author)
 		  or ($_SESSION["group"] >= 40)){
