@@ -62,7 +62,14 @@ function blog_list(){
           date(getconfig("date_format"), $post->datum)." - Autor: ". $user["username"].
           "</strong></sub><br/><br/>";
           $html.= "<div class='blog_post_content'>".$post->content_preview."</div>";
-          
+		  
+		  if($_SESSION["language"] == "de"){
+		     $html .= "<br/><a href='?seite=".get_requested_pagename()."&amp;single=".$post->seo_shortname."'>weiterlesen...</a>
+			 <br/>";
+          }else{
+		    $html .= "<br/><a href='?seite=".get_requested_pagename()."&amp;single=".$post->seo_shortname."'>read more...</a>
+			 <br/>";
+		  }
 		  $html.= "<br/>";
 		  
 		 if(($_SESSION["group"] >= 20 and $_SESSION["login_id"] == $post->author)
