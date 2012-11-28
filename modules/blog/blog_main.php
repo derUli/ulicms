@@ -78,7 +78,6 @@ function blog_update(){
 	 entry_enabled = $entry_enabled, language = '$language', content_full = '$content_full',
 	 content_preview = '$content_preview' WHERE id = $id
 	 ";
-  $html_output .= $insert_query;
   mysql_query($insert_query);
   $html_output .= "<script type='text/javascript'>
   location.replace('?seite=".get_requested_pagename().
@@ -128,7 +127,6 @@ function blog_submit(){
   content_full, content_preview) VALUES ($date, '$title', 
   '$seo_shortname', $comments_enabled, '$language', $entry_enabled,
   $author, '$content_full', '$content_preview')";
-  $html_output .= $insert_query;
   mysql_query($insert_query);
   $html_output .= "<script type='text/javascript'>
   location.replace('?seite=".get_requested_pagename().
