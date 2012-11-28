@@ -104,12 +104,20 @@ function post_comments(){
       if(isset($_SESSION["login_id"])){
 	$user = getUserById($_SESSION["login_id"]);        
 	$_SESSION["name"] = $user["username"];
+	 
 	$_SESSION["email"] = $user["email"];
-	
+   
       }
+      
+      
         
    }
    
+   
+   
+   if(!isset($_SESSION["homepage"])){
+	$_SESSION["url"] = "http://";
+   }
    
  
    
@@ -176,7 +184,7 @@ function blog_display_comments($post_id){
     
      $count = 0;    
     
-        if($SESSION["language"] == "de"){
+        if($_SESSION["language"] == "de"){
 	  $html.="<p>Es sind bisher ".mysql_num_rows($query).
 	" zu diesem Artikel vorhanden.</p>";
 	} else{
