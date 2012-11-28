@@ -60,7 +60,7 @@ function blog_single($seo_shortname){
 }
 
 function comment_form($post_id){
-     $html = "<br/>";
+     $html = "";
      $html .= "<form action=".$_SERVER['REQUEST_URI']."' method='post'>";
      if($_SESSION["language"] == "de"){
         $submit = "Kommentar veröffentlichen";
@@ -104,7 +104,12 @@ function blog_display_comments($post_id){
     $query = mysql_query("SELECT * FROM `".tbname("blog_comments")."` WHERE post_id = $post_id");
     
     $html .= "<div class='comments'>";
-    $html .= "<h2>Kommentare</h2>";
+    if($_SESSION["language"] == "de"){
+      $html .= "<h2>Kommentare</h2>";
+    }
+    else{
+      $html .= "<h2>Comments</h2>";
+    }
     $html .= comment_form($post_id);
     
     if(mysql_num_rows($query) > 0){
