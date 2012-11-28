@@ -186,7 +186,7 @@ function blog_display_comments($post_id){
     
         if($_SESSION["language"] == "de"){
 	  $html.="<p>Es sind bisher ".mysql_num_rows($query).
-	" zu diesem Artikel vorhanden.</p>";
+	" Kommentare zu diesem Artikel vorhanden.</p>";
 	} else{
 	  $html.="<p>There are ".mysql_num_rows($query). " Comments
 	 until now.</p>";
