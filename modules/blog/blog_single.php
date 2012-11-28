@@ -61,7 +61,7 @@ function blog_single($seo_shortname){
 
 function comment_form($post_id){
      $html = "";
-     $html .= "<form action=".$_SERVER['REQUEST_URI']."' method='post'>";
+     $html .= "<form action='".$_SERVER['REQUEST_URI']."' method='post'>";
      if($_SESSION["language"] == "de"){
         $submit = "Kommentar veröffentlichen";
      }else{
@@ -90,7 +90,7 @@ function comment_form($post_id){
      $html .= "</table>";
 
      $html .= "<br/><textarea name='comment' rows=15 cols=60></textarea>";
-     $html .= "<input type='text' name='phone' value='' style='visbility:hidden;'>";
+     $html .= "<input type='text' name='phone' value='' style='visibility:hidden;'>";
      $html .= "<input type='hidden' name='post_comment_to' value='".$post_id."'>";
      $html .= "<br/><br/><input type='submit' value='".$submit."'>";
      $html .= "</form>";
@@ -101,6 +101,7 @@ function comment_form($post_id){
 
 function post_comments(){
    if(isset($_POST["post_comment_to"])){
+      $post_id = intval($_POST["post_comment_to"]);
       $name = mysql_real_escape_string(htmlspecialchars($_POST["name"]));
       $url = mysql_real_escape_string(htmlspecialchars($_POST["url"]));
       $email = mysql_real_escape_string(htmlspecialchars(
@@ -109,8 +110,9 @@ function post_comments(){
       $comment = mysql_real_escape_string($_POST["comment"]);
      
       if(!empty($name) and !empty($email) and !empty($comment)){
-	mysql_query("INSERT INTO `".tbname("blog_comments").
-	"`");
+	mysql_query("INSERT INTO `".tbname("blog_comments"). "` 
+	(name, url, email, date, comment, post_id)
+	VALUES ( '$name', '$url', '$email', $date, '$comment', $post_id);")or die(mysql_error());
 	
 	return true;
       } else{
@@ -128,7 +130,17 @@ function post_comments(){
 }
 
 function blog_display_comments($post_id){
+    
     $html = "";
+
+        if(post_comments($post->id)){
+	$html .= "<script type='text/javascript'>
+	location.replace(location.href);
+	</script>";
+    }
+
+    
+    
     $query = mysql_query("SELECT * FROM `".tbname("blog_comments")."` WHERE post_id = $post_id");
     
     $html .= "<div class='comments'>";
