@@ -71,18 +71,18 @@ function comment_form($post_id){
 
      $html .= "<table border=0>
      <tr>
-     <td><strong>Name: *</strong>&nbsp;&nbsp;</td><td><input name='name' size=50 maxlength=255 type='text' value=''>
+     <td><strong>Name: *</strong>&nbsp;&nbsp;</td><td><input name='name' size=50 maxlength=255 type='text' value='".$_SESSION["name"]."'>
      </td>
      </tr>";
      
      
      $html .= "<tr>
-     <td><strong>Homepage:</strong>&nbsp;&nbsp;</td><td><input size=50 maxlength=255 name='url' type='text' value='http://'>
+     <td><strong>Homepage:</strong>&nbsp;&nbsp;</td><td><input size=50 maxlength=255 name='url' type='text' value='".$_SESSION["url"]."'>
      </td>
      </tr>";
      
        $html .= "<tr>
-     <td><strong>Email: *</strong>&nbsp;&nbsp;</td><td><input size=50 maxlength=255 name='email' type='text' value=''>
+     <td><strong>Email: *</strong>&nbsp;&nbsp;</td><td><input size=50 maxlength=255 name='email' type='text' value='".$_SESSION["email"]."'>
      </td>
      </tr>";
      
@@ -100,6 +100,19 @@ function comment_form($post_id){
 
 
 function post_comments(){
+   if(!isset($_SESSION["name"])){
+      if(isset($_SESSION["login_id"])){
+	$user = getUserById($_SESSION["login_id"]);        
+	$_SESSION["name"] = $user["username"];
+	
+      }
+        
+   }
+   
+   
+ 
+   
+
    if(isset($_POST["post_comment_to"])){
       $post_id = intval($_POST["post_comment_to"]);
       $name = mysql_real_escape_string(htmlspecialchars($_POST["name"]));
@@ -109,7 +122,13 @@ function post_comments(){
       $date = time();
       $comment = mysql_real_escape_string($_POST["comment"]);
      
-      if(!empty($name) and !empty($email) and !empty($comment)){
+     $_SESSION["name"] = $name;
+     $_SESSION["url"] = $url;
+     $_SESSION["email"] = $email;
+     if(!empty($name) and !empty($email) and !empty($comment)){
+      
+      
+      
 	mysql_query("INSERT INTO `".tbname("blog_comments"). "` 
 	(name, url, email, date, comment, post_id)
 	VALUES ( '$name', '$url', '$email', $date, '$comment', $post_id);")or die(mysql_error());
@@ -138,7 +157,6 @@ function blog_display_comments($post_id){
 	location.replace(location.href);
 	</script>";
     }
-
     
     
     $query = mysql_query("SELECT * FROM `".tbname("blog_comments")."` WHERE post_id = $post_id");
