@@ -23,15 +23,15 @@ if($_SESSION["group"]>=50){
 <table border=1>
 <tr>
 <td><strong data-tooltip="Der Name dieser Webpräsenz.">Titel der Homepage:</strong></td>
-<td><strong><input type="text" name="homepage_title" style="width:400px" value="<?php echo $settings["homepage_title"];?>"></strong></td>
+<td><input type="text" name="homepage_title" style="width:400px" value="<?php echo $settings["homepage_title"];?>"></td>
 </tr>
 <tr>
 <td><strong data-tooltip="Eine kurze Beschreibung oder ein Slogan um was es auf dieser Webpräsenz geht.">Motto der Homepage:</strong></td>
-<td><strong><input type="text" name="homepage_motto" style="width:400px" value="<?php echo $settings["motto"];?>"></strong></td>
+<td><input type="text" name="homepage_motto" style="width:400px" value="<?php echo $settings["motto"];?>"></td>
 </tr>
 <tr>
 <td><strong data-tooltip="Der Name des Inhabers dieser Webpräsenz...">Inhaber der Homepage:</strong></td>
-<td><strong><input type="text" name="homepage_owner" style="width:400px" value="<?php echo $settings["homepage_owner"];?>"></strong></td>
+<td><input type="text" name="homepage_owner" style="width:400px" value="<?php echo $settings["homepage_owner"];?>"></td>
 </tr>
 <tr>
 <td><strong>Logo ausblenden:</strong></strong></td>
@@ -44,12 +44,12 @@ if($_SESSION["group"]>=50){
 </tr>
 <tr>
 <td><strong data-tooltip="An diese Adresse werden Emails über das Kontaktformular versandt...">Emailadresse des Inhabers:</strong></td>
-<td><strong><input type="text" name="email" style="width:400px" value="<?php echo $settings["email"];?>"></strong></td>
+<td><input type="text" name="email" style="width:400px" value="<?php echo $settings["email"];?>"></td>
 </tr>
 <!--
 <tr>
 <td><strong data-tooltip="Wie viele News sollen angezeigt werden?">Die letzten X News anzeigen:</strong></td>
-<td><strong><input type="text" name="max_news" style="width:400px" value="<?php echo $settings["max_news"];?>"></strong></td>
+<td><input type="text" name="max_news" style="width:400px" value="<?php echo $settings["max_news"];?>"></td>
 </tr>
 -->
 <tr>
@@ -79,7 +79,7 @@ if($pages[$i] == $settings["frontpage"]){
 </tr>
 <tr>
 <td><strong data-tooltip="Wenn Sie grundlegende Änderungen an Ihrer Webpräsenz vornehmen möchten, können Sie Ihre Seite solange für Besucher sperren und stattdessen eine Wartungsmeldung anzeigen. Diese können Sie in der Template maintenance.php anpassen.">Wartungsmodus aktiviert:</strong></td>
-<td><strong><input type="checkbox" name="maintenance_mode" <?php
+<td><input type="checkbox" name="maintenance_mode" <?php
 if(strtolower($settings["maintenance_mode"]=="on")||$settings["maintenance_mode"]=="1"||strtolower($settings["maintenance_mode"])=="true"){
 echo " checked";
 
@@ -101,7 +101,7 @@ echo " checked";
 }
 
 ?>
-></strong></td>
+></td>
 </tr>
 <tr>
 <td></td>
