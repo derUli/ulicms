@@ -1,4 +1,5 @@
 <?php 
+<?php 
 function guestbook_render(){	
 		check_installation();	
 		
@@ -140,7 +141,7 @@ function guestbook_render(){
 			break;
 			}
 			
-		$html_output.="<br/<br/><br/><center><small>Powered by Guestbook Module for UliCMS</small></center>";
+		$html_output.="<br/><br/><br/><center><small>Powered by Guestbook Module for UliCMS</small></center>";
 		
 		return $html_output;
 }
