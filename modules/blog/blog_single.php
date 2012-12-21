@@ -61,7 +61,7 @@ function blog_single($seo_shortname){
 
 function comment_form($post_id){
      $html = "";
-     $html .= "<form action='".$_SERVER['REQUEST_URI']."' method='post'>";
+     $html .= "<form name='form' action='".$_SERVER['REQUEST_URI']."' method='post'>";
      if($_SESSION["language"] == "de"){
         $submit = "Kommentar veröffentlichen";
      }else{
@@ -90,7 +90,11 @@ function comment_form($post_id){
      $html .= "</table>";
 
      $html .= "<br/><textarea name='comment' rows=15 cols=60></textarea>";
-     $html .= "<input type='text' name='phone' value='' style='visibility:hidden;'>";
+     $html .= "<input type='text' name='phone' value=''>";
+	 $html .= "<script type='text/javascript'>
+	document.form.phone.style.display = \"none\";
+	 </script>
+	 ";
      $html .= "<input type='hidden' name='post_comment_to' value='".$post_id."'>";
      $html .= "<br/><br/><input type='submit' value='".$submit."'>";
      $html .= "</form>";
