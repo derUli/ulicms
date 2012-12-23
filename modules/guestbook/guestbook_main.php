@@ -1,5 +1,4 @@
 <?php 
-<?php 
 function guestbook_render(){	
 		check_installation();	
 		
@@ -104,12 +103,12 @@ function guestbook_render(){
 					}				
 				}
 				
-			if($_POST["gb_spam_protection"] != "11"){
+			if($_POST["phone"] != ""){
 				$errors = true;
 				if($_SESSION["language"] == "de"){
-					$html_output .= "<p class='ulicms-error'>Sie haben die Rechenaufgabe nicht richtig gelöst.</p>";
+					$html_output .= "<p class='ulicms-error'>Spamschutz-Feld bitte leer lassen.</p>";
 				}else{
-					$html_output .= "<p class='ulicms-error'>The result of the spam protection question is invalid.</p>";
+					$html_output .= "<p class='ulicms-error'>Please let the field for spam protection empty</p>";
 				}
 				}
 				

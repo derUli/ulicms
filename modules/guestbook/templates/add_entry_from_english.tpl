@@ -26,7 +26,7 @@
 </tr>
 <tr>
 <td>Spam Protection:</td>
-<td>Result of 7+4? <input type="text" name="gb_spam_protection" value="" maxlength=10 size=10></td>
+<td>Don't fill this field! <input type="text" name="phone" value=""></td>
 </tr>
 
 <tr>

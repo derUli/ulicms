@@ -26,7 +26,7 @@
 </tr>
 <tr>
 <td>Spamschutz:</td>
-<td>wie viel sind 7+4? <input type="text" name="gb_spam_protection" value="" maxlength=10 size=10></td>
+<td>Dieses Feld leer lassen! <input type="text" name="phone" value=""></td>
 </tr>
 
 <tr>
