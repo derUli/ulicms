@@ -7,7 +7,7 @@ require_once "workaround.php";
         
 		
 // Falls keine Zeitzone in der php.ini gesetzt sein sollte
-// Zeitzone auf UTC gesetzt
+// wird die Zeitzone auf UTC gesetzt.
 if(!ini_get("date.timezone")){
 	date_default_timezone_set("UTC");
 }
