@@ -4,7 +4,15 @@
    eintragen sondern in die functions.php
 */
 require_once "workaround.php";
-                           
+        
+		
+// Falls keine Zeitzone in der php.ini gesetzt sein sollte
+// Zeitzone auf UTC gesetzt
+if(!ini_get("date.timezone")){
+	date_default_timezone_set("UTC");
+}
+
+		
 // if config exists require_config else redirect to installer
 if(file_exists("cms-config.php")){
   require_once "cms-config.php";
@@ -25,11 +33,8 @@ else if(is_dir("installer")){
 require_once "api.php";
 
 
-// Falls keine Zeitzone in der php.ini gesetzt sein sollte
-// Zeitzone auf Europe/Berlin setzen (UTC+1)
-if(!ini_get("date.timezone")){
-	date_default_timezone_set("Europe/Berlin");
-}
+
+
 
 
   
