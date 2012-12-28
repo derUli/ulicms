@@ -25,6 +25,12 @@ else if(is_dir("installer")){
 require_once "api.php";
 
 
+// Falls keine Zeitzone in der php.ini gesetzt sein sollte
+// Zeitzone auf Europe/Berlin setzen (UTC+1)
+if(!ini_get("date.timezone")){
+	date_default_timezone_set("Europe/Berlin");
+}
+
 
   
   
