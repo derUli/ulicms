@@ -446,10 +446,6 @@ function base_metas(){
 		$dir.="/";
 	}
 
-	if(!getconfig("hide_rss_link")){
-		echo '<link href="'."http://".$_SERVER["HTTP_HOST"].$dir.'?rss=rss" rel="alternate" type="application/rss+xml" title="RSS 2.0" />';
-		echo "\r\n";
-	}
 
 	if(!getconfig("hide_meta_generator")){
 		echo '<meta name="generator" content="UliCMS Release '.cms_version()
