@@ -35,7 +35,7 @@ else if(empty($_GET["edit"])){
 		$template_content=file_get_contents($template_file);
 ?>
 <form action="index.php?action=templates" method="post">
-<textarea id="code" name="code" cols=80 rows=20><?php echo htmlspecialchars($template_content);?></textarea>
+<textarea id="code" name="code" cols=80 rows=30><?php echo htmlspecialchars($template_content);?></textarea>
  <script type="text/javascript">
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
