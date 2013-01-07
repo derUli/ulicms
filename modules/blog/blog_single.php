@@ -238,8 +238,10 @@ function blog_display_comments($post_id){
 	     $html.= " ";
 	     $html .= date(getconfig("date_format"),
 	     $comment->date);
-	     $html .= "<br/>";
-	     $html .= "<strong>Homepage:</strong> "."<a href='".$comment->url."'>".$comment->url."</a>";
+	     if($comment->url != "http://" and $comment->url != ""){
+        	     $html .= "<br/>";
+	             $html .= "<strong>Homepage:</strong> "."<a href='".$comment->url."'>".$comment->url."</a>";
+	     }
 	     $html .= "<br/><br/>";
 	     $html .= nl2br(htmlspecialchars($comment->comment));
 	     
