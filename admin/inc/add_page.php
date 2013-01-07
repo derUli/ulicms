@@ -138,14 +138,6 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 
 <br/><br/>
 
-<strong data-tooltip="Wählen Sie diese Option aus bei zeitkritischen Inhalten, wie Aktuelles, Pressemitteilungen und bei Inhalten die sich häufig ändern.">In RSS-Feed aufnehmen:</strong><br/>
-<select name="notinfeed" size=1>
-<option value="0">Ja</option>
-<option value="1">Nein</option>
-</select>
-
-
-<br/><br/>
 <div align="center">
 <textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
 <script type="text/javascript">

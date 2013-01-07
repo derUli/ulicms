@@ -97,15 +97,6 @@ echo htmlspecialchars($row->meta_keywords); ?>'>
 <option value="1" <?php if($row->comments_enabled == 1){echo "selected";}?>>aktiviert</option>
 <option value="0" <?php if($row->comments_enabled == 0){echo "selected";}?>>deaktiviert</option>
 </select>
-
-<br/><br/>
-
-<strong data-tooltip="Soll diese Seite im RSS-Feed aufgenommen werden?">In RSS-Feed aufnehmen:</strong><br/>
-<select name="notinfeed" size=1>
-<option value="0" <?php if($row->notinfeed==0){echo "selected";}?>>Ja</option>
-<option value="1" <?php if($row->notinfeed==1){echo "selected";}?>>Nein</option>
-</select>
-
 <br/><br/>
 <div align="center">
 <textarea name="page_content" id="page_content" cols=60 rows=20><?php echo htmlspecialchars($row->content);?></textarea>

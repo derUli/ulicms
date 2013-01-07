@@ -14,8 +14,6 @@ if($_GET["action"]=="save_settings"&&isset($_POST["save_settings"])){
   setconfig("comment_mode", mysql_real_escape_string($_POST["comment_mode"]));
   setconfig("disqus_id", mysql_real_escape_string($_POST["disqus_id"]));
   setconfig("facebook_id", mysql_real_escape_string($_POST["facebook_id"]));
-  setconfig("items_in_rss_feed", intval($_POST["items_in_rss_feed"]));      
-  setconfig("items_in_rss_feed", intval($_POST["items_in_rss_feed"]));
   setconfig("logo_disabled", mysql_real_escape_string($_POST["logo_disabled"]));
   header("Location: index.php?action=settings_simple");
   exit();
@@ -225,7 +223,7 @@ if($_POST["add_page"]=="add_page"){
 	$activated = intval($_POST["activated"]);
 	$page_content = mysql_real_escape_string($_POST["page_content"]);
 	$comments_enabled = (int)$_POST["comments_enabled"];
-	$notinfeed = (int)$_POST["notinfeed"];
+	$notinfeed = 0;
 	$redirection = mysql_real_escape_string($_POST["redirection"]);
 	$menu = mysql_real_escape_string($_POST["menu"]);
 	$position = (int)$_POST["position"];
@@ -371,7 +369,7 @@ if($_POST["edit_page"]=="edit_page" && $_SESSION["group"]>=30){
 	$page_content = mysql_real_escape_string($_POST["page_content"]);
 	$comments_enabled = (int) $_POST["comments_enabled"];
 	$redirection = mysql_real_escape_string($_POST["redirection"]);
-	$notinfeed = (int)$_POST["notinfeed"];
+	$notinfeed = 0;
 	$menu = mysql_real_escape_string($_POST["menu"]);
 	$position = (int)$_POST["position"];
 	$parent = mysql_real_escape_string($_POST["parent"]);
