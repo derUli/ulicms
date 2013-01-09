@@ -201,7 +201,7 @@ function sitemap_menu($name){
 
 
 
-
+        $html_output .="</ul>";
 
 
 
