@@ -90,6 +90,11 @@ if(!getconfig("allowed_html")){
   }
 
 
+// Falls nicht gesetzt, robots auf Standardwert setzen
+if(!getconfig("robots")){
+setconfig("robots", "index,follow");
+}
+
 // Prüfen ob Zeitzone gesetzt ist
 
 $timezone = getconfig("timezone");

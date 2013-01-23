@@ -158,6 +158,23 @@ for($i=0; $i < count($timezones); $i++){
 </td>
 </tr>
 <tr>
+<td><strong>Suchmaschinen:</strong></td>
+<td>
+<select name="robots" size=1>
+<?php
+if(getconfig("robots") == "noindex,nofollow"){?>
+   
+   <option value="index,follow">Suchmaschinen dürfen die Website durchsuchen</option>
+   <option value="noindex,nofollow" selected>Suchmaschinen werden ausgesperrt</option>
+   
+<?php } else {?>
+   <option value="index,follow" selected>Suchmaschinen dürfen die Website durchsuchen</option>
+   <option value="noindex,nofollow">Suchmaschinen werden ausgesperrt</option>
+<?php }?>
+</select>
+</td>
+</tr>
+<tr>
 <td>
 <td align="center"><input type="submit" value="OK" style="width:45%;"></td>
 </tr>

@@ -447,6 +447,12 @@ function base_metas(){
 	}
 
 
+	if(getconfig("robots")){
+	   echo '<meta name="robots" content="'.getconfig("robots").'">';
+	   echo "\r\n";
+	}
+
+
 	if(!getconfig("hide_meta_generator")){
 		echo '<meta name="generator" content="UliCMS Release '.cms_version()
 		.'" />';
@@ -456,8 +462,9 @@ function base_metas(){
 	
 	if(!empty($facebook_id)){
 		echo '<meta property="fb:admins" content="'.$facebook_id.'"/>';
+	        echo "\r\n";
 	}
-	echo "\r\n";
+	
 	}
 	
 	$keywords = meta_keywords();
