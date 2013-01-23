@@ -3,7 +3,7 @@
 // Diese werden automatisch beim Aufruf des CMS gesetzt
 // Daher nichts zu tun
 
-unlink("update.php");
+@unlink("update.php");
 
 header("Location: admin/");
 
