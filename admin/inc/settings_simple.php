@@ -134,6 +134,30 @@ Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</s
 <td><input type="text" name="disqus_id" value="<?php echo $settings["disqus_id"];?>" style="width:400px">
 </tr>
 <tr>
+<td><strong>Zeitzone:</strong></td>
+<td>
+<select name="timezone" size=1>
+<?php 
+$timezones = file("inc/timezones.txt");
+
+$current_timezone = getconfig("timezone");
+$current_timezone = trim($current_timezone);
+sort($timezones);
+for($i=0; $i < count($timezones); $i++){
+
+    $thisTimezone = $timezones[$i];
+    $thisTimezone = trim($thisTimezone);
+  if($thisTimezone === $current_timezone){
+    echo '<option value="'.$thisTimezone.'" selected>'.$thisTimezone.'</option>';
+  } else{
+    echo '<option value="'.$thisTimezone.'">'.$thisTimezone.'</option>';
+  }
+}
+?>
+</select>
+</td>
+</tr>
+<tr>
 <td>
 <td align="center"><input type="submit" value="OK" style="width:45%;"></td>
 </tr>

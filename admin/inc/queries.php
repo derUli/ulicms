@@ -15,6 +15,7 @@ if($_GET["action"]=="save_settings"&&isset($_POST["save_settings"])){
   setconfig("disqus_id", mysql_real_escape_string($_POST["disqus_id"]));
   setconfig("facebook_id", mysql_real_escape_string($_POST["facebook_id"]));
   setconfig("logo_disabled", mysql_real_escape_string($_POST["logo_disabled"]));
+  setconfig("timezone", mysql_real_escape_string($_POST["timezone"]));
   header("Location: index.php?action=settings_simple");
   exit();
 }
