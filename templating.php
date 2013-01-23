@@ -448,7 +448,7 @@ function base_metas(){
 
 
 	if(getconfig("robots")){
-	   echo '<meta name="robots" content="'.getconfig("robots").'">';
+	   echo '<meta name="robots" content="'.getconfig("robots").'"/>';
 	   echo "\r\n";
 	}
 
