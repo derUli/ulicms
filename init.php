@@ -8,9 +8,8 @@ require_once "workaround.php";
 		
 // Falls keine Zeitzone in der php.ini gesetzt sein sollte
 // wird die Zeitzone auf UTC gesetzt.
-if(!ini_get("date.timezone")){
-	date_default_timezone_set("UTC");
-}
+
+
 
 		
 // if config exists require_config else redirect to installer
@@ -89,6 +88,18 @@ if(!$select){
 if(!getconfig("allowed_html")){
     setconfig("allowed_html", "<i><b><strong><em><ul><li><ol><a>");
   }
+
+
+// Prüfen ob Zeitzone gesetzt ist
+
+$timezone = getconfig("timezone");
+
+// Wenn nicht, Zeitzone auf Standardwert setzen
+if(!$timezone){
+   setconfig("timezone", "Europe/Berlin");
+}
+	date_default_timezone_set(getconfig("timezone"));
+
 
                            
 @include "functions.php";
