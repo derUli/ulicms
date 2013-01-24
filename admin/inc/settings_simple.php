@@ -136,7 +136,7 @@ Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</s
 <tr>
 <td><strong>Zeitzone:</strong></td>
 <td>
-<select name="timezone" size=1>
+<select name="timezone" size=1 style="width:100%;">
 <?php 
 $timezones = file("inc/timezones.txt");
 
@@ -160,7 +160,7 @@ for($i=0; $i < count($timezones); $i++){
 <tr>
 <td><strong>Suchmaschinen:</strong></td>
 <td>
-<select name="robots" size=1>
+<select name="robots" size=1 style="width:100%;">
 <?php
 if(getconfig("robots") == "noindex,nofollow"){?>
    
