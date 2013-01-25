@@ -240,7 +240,7 @@ function blog_display_comments($post_id){
 	     $comment->date);
 	     if($comment->url != "http://" and $comment->url != ""){
         	     $html .= "<br/>";
-	             $html .= "<strong>Homepage:</strong> "."<a href='".$comment->url."'>".$comment->url."</a>";
+	             $html .= "<strong>Homepage:</strong> "."<a href='".$comment->url."' target='_blank' rel='nofollow'>".$comment->url."</a>";
 	     }
 	     $html .= "<br/><br/>";
 	     $html .= nl2br(htmlspecialchars($comment->comment));

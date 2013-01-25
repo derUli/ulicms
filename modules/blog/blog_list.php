@@ -11,9 +11,9 @@ function blog_list(){
    // Anlegen eines neuen Blogbeitrag angezeigt
    
    if($_SESSION["group"] >= 20){
-   $html .= "<p><a href='?seite=".
-   get_requested_pagename().
-   "&blog_admin=add'>Blogeintrag anlegen</a></p><br/>";
+      $html .= "<p><a href='?seite=".
+      get_requested_pagename().
+      "&blog_admin=add'>Blogeintrag anlegen</a></p><br/>";
    }
 
 

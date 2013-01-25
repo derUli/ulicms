@@ -67,7 +67,7 @@ function guestbook_render(){
 				if(endsWith($_POST["gb_homepage"], ".ru") or endsWith($_POST["gb_homepage"], ".info")){
 					$errors = true;
 					if($_SESSION["language"] == "de"){
-			    	   $html_output .= "<p class='ulicms-error'>Ihre Homepage hat eine unerlaubte Endung.</p>";
+			    	          $html_output .= "<p class='ulicms-error'>Ihre Homepage hat eine unerlaubte Endung.</p>";
 					}else{
 						$html_output .= "<p class='ulicms-error'>Your homepage has an ending that is not allowed.</p>";
 					}
@@ -187,7 +187,7 @@ function guestbook_list(){
 
 		
 		if(!empty($row->homepage)){
-			$html_output.="<a href=\"".$row->homepage."\">Homepage von ".$row->name."</a>";
+			$html_output.="<a href=\"".$row->homepage."\" target=\"_blank\" rel=\"nofollow\">Homepage von ".$row->name."</a>";
 			
 			$html_output.= "<br/><br/>";
 		}
