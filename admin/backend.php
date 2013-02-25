@@ -86,6 +86,9 @@ else if($_GET["action"] == "settings"){
 else if($_GET["action"] == "settings_simple"){
 	require_once "inc/settings_simple.php";
 }
+else if($_GET["action"] == "spam_filter"){
+	require_once "inc/spamfilter_settings.php";
+}
 else if($_GET["action"] == "customize_menu"){
   require_once "inc/customize_menu.php";
 }

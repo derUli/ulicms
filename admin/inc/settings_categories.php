@@ -3,6 +3,8 @@
 <br>
 <a href="index.php?action=customize_menu">Menüband anpassen</a>
 <br>
+<a href="index.php?action=spam_filter">Spamfilter</a>
+<br>
 <a href="index.php?action=motd">MOTD</a>
 <br>
 <a href="index.php?action=logo_upload">Logo</a>
