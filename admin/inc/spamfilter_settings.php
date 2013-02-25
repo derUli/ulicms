@@ -6,6 +6,15 @@ echo " checked";
 }?> value="yes"> Spamfilter aktivieren
 <br/>
 <br/>
+Benutzer aus folgenden Ländern dürfen kommentieren:<br/>
+<input type="text" name="country_whitelist" value="<?php echo htmlspecialchars(getconfig("country_whitelist"));?>">
+<br/>
+<br/>
+Benutzer aus folgenden Ländern dürfen nicht kommentieren:<br/>
+<input type="text" name="country_blacklist" value="<?php echo htmlspecialchars(getconfig("country_blacklist"));?>">
+<br/>
+<br/>
+
 <input type="submit" name="submit_spamfilter_settings" value="Einstellungen Speichern"/>
 </form>
 

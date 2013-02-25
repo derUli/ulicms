@@ -43,8 +43,18 @@ if($_GET["action"] == "spam_filter" and
      setconfig("spamfilter_enabled", "yes");
    }
    else{
-   
      setconfig("spamfilter_enabled", "no"); 
+   }
+   
+   if(isset($_POST["country_blacklist"])){
+     setconfig("country_blacklist", 
+     $_POST["country_blacklist"]);
+   }
+   
+   
+   if(isset($_POST["country_whitelist"])){
+     setconfig("country_whitelist", 
+     $_POST["country_whitelist"]);
    }
 
 }
