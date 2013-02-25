@@ -10,6 +10,6 @@ setconfig("country_whitelist", "de,ch,at");
 //@unlink("update.php");
 
 header("Location: admin/");
-
+exit();
 
 ?>

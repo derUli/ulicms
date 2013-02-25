@@ -1,4 +1,5 @@
 <h1>Spamfilter</h1>
+<br/>
 <?php if($_SESSION["group"] >= 40){?>
 <form name="?action=spam_filter" method="post">
 <input type="checkbox" name="spamfilter_enabled"<?php if(getconfig("spamfilter_enabled") == "yes"){
