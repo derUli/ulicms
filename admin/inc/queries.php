@@ -30,9 +30,23 @@ if($_GET["action"]=="view_website" or $_GET["action"] == "frontpage"){
 
 if($_GET["action"]=="pages_delete" && $_SESSION["group"]>=40){
   $page=mysql_real_escape_string($_GET["page"]);
-  $query=mysql_query("DELETE FROM ".tbname("content")." WHERE id='$page'",$connection);
+  $query=mysql_query("DELETE FROM ".tbname("content")." WHERE id='$page'");
   header("Location: index.php?action=pages");
 exit();
+}
+
+if($_GET["action"] == "spam_filter" and
+    isset($_POST["submit_spamfilter_settings"])){
+    
+
+   if($_POST["spamfilter_enabled"] == "yes"){
+     setconfig("spamfilter_enabled", "yes");
+   }
+   else{
+   
+     setconfig("spamfilter_enabled", "no"); 
+   }
+
 }
 
 
