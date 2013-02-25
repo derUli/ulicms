@@ -3,7 +3,27 @@
 <form name="?action=spam_filter" method="post">
 <input type="checkbox" name="spamfilter_enabled"<?php if(getconfig("spamfilter_enabled") == "yes"){
 echo " checked";
-}?> value="yes"> Spamfilter aktivieren
+}?> value="yes" onChange="spamFilterEnabledcheckboxChanged(this.checked)"> Spamfilter aktivieren
+<script type="text/javascript">
+function spamFilterEnabledcheckboxChanged(checked){
+    div = document.getElementById("country_filter_settings");
+    if(checked){
+    
+    div.style.display = "block";
+      
+    }
+    else{
+
+    div.style.display = "none";    
+    }
+}
+</script>
+
+<div id="country_filter_settings"<?php
+if(getconfig("spamfilter_enabled") != "yes"){
+  echo " style='display:none;'";
+}
+?>>
 <br/>
 <br/>
 Benutzer aus folgenden Ländern dürfen kommentieren:<br/>
@@ -12,6 +32,7 @@ Benutzer aus folgenden Ländern dürfen kommentieren:<br/>
 <br/>
 Benutzer aus folgenden Ländern dürfen nicht kommentieren:<br/>
 <input type="text" name="country_blacklist" value="<?php echo htmlspecialchars(getconfig("country_blacklist"));?>">
+</div>
 <br/>
 <br/>
 
