@@ -1,4 +1,7 @@
 <?php 
+
+include "antispam-features.php";
+
 function guestbook_render(){	
 		check_installation();	
 		
