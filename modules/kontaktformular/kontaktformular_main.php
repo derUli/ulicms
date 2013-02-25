@@ -58,7 +58,10 @@ if(!getconfig("contact_form_refused_spam_mails")){
 	}
 
 	//Spamschutz
-	if($_POST["email"]!=""){
+        if(getconfig("spamfilter_enabled") == "yes"){	
+	
+	   // Spamschutz per Honeypot
+	   if($_POST["email"]!=""){
 		if($_SESSION["language"] == "de"){
 			$fehler = "Das Spamschutz-Feld bitte leer lassen.";
 		}
@@ -68,6 +71,13 @@ if(!getconfig("contact_form_refused_spam_mails")){
 		setconfig("contact_form_refused_spam_mails",
     getconfig("contact_form_refused_spam_mails")+1);
 	}
+	
+	// Filter nach Land
+	
+	
+	
+	
+}	
 	
 	if($fehler==false){
 		$_POST["nachricht"] = preg_replace('/\r\n|\r/', "\n", $_POST["nachricht"]);
