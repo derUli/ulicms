@@ -103,13 +103,29 @@ function guestbook_render(){
 					}				
 				}
 				
-			if($_POST["phone"] != ""){
+			if($_POST["phone"] != "" and 
+			getconfig("spamfilter_enabled") == "yes"){
 				$errors = true;
 				if($_SESSION["language"] == "de"){
+				        
 					$html_output .= "<p class='ulicms-error'>Spamschutz-Feld bitte leer lassen.</p>";
 				}else{
 					$html_output .= "<p class='ulicms-error'>Please let the field for spam protection empty</p>";
 				}
+				}
+				
+				if (getconfig("spamfilter_enabled") == "yes" and 
+				    isCountryBlocked()){
+                                    $errors = true;
+                                    if($_SESSION["language"] == "de"){
+				       $html_output .= "<p class='ulicms-error'>Besucher aus Ihrem Land dürfen nicht kommentieren. Wenn Sie das für einen Fehler halten, wenden Sie sich bitte an den Administrator dieser Website.</p>";
+				         
+				    } else{
+				      $html_output .= "<p class='ulicms-error'>Visitors from your country can't comment
+				       on this website.<br/>If you believe, this is an error, please contact the webmaster.</p>";
+				         
+				    }
+                                    				
 				}
 				
 				

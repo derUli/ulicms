@@ -1,4 +1,15 @@
 <?php 
+if(file_exists("antispam-features.php")){
+   include "antispam-features.php";
+}else{
+
+   function isCountryBlocked(){
+     return false;   
+   }
+
+}
+
+
 
 function blog_single($seo_shortname){
     
@@ -151,6 +162,8 @@ function post_comments(){
       } else{
         return false;      
       }
+      // wenn Spamfilter aktiviert ist
+      if(getconfig("spamfilter_enabled") == "yes"){
       
       // Spam Protection
       // ein für echte Menschen unsichtbares Textfeld
@@ -159,17 +172,37 @@ function post_comments(){
       if(!empty($_POST["phone"])){
 	die("Die motherfucking spammers!");
       }
+      
+            
+      
+      }
    }
 }
 
 function blog_display_comments($post_id){
     
-    $html = "";
+        $html = "";
+        
+        
+    
+        if(isCountryBlocked() and
+           getconfig("spamfilter_enabled") == "yes"){
+           if($_SESSION["language"] == "de"){
+             $html.= "<p class='ulicms_error'>
+           Benutzer aus Ihrem Land werden vom Spamfilter blockiert.<br/> Wenn Sie denken, dass das ein Fehler ist, 
+           wenden Sie sich bitte an den Administrator dieser Internetseite</p>";
+           }
+           else{
+            $html.= "<p class='ulicms_error'>Users from your Country are blocked by the spamfilter. If you believe, this is an error, please contact the administrator.</p>";
+           }
+        }else{
 
         if(post_comments($post->id)){
-	$html .= "<script type='text/javascript'>
-	location.replace(location.href);
-	</script>";
+	    $html .= "<script type='text/javascript'>
+	    location.replace(location.href);
+	    </script>";
+	
+	}
     }
     
     
