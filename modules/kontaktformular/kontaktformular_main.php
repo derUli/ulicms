@@ -80,7 +80,16 @@ if(!getconfig("contact_form_refused_spam_mails")){
 	// Filter nach Land
 	if(function_exists("isCountryBlocked")){
             if(isCountryBlocked()){
+            
+            if(!$fehler){
+		setconfig("contact_form_refused_spam_mails",
+		getconfig("contact_form_refused_spam_mails")+1);            
+            }
+            
             if($_SESSION["language"] == "de"){
+            
+
+            
 	      $fehler = "Sie dürfen diesen Formular leider nicht nutzen, da ihr Land im Spamfilter gesperrt ist. Falls Sie denken, dass dies ein Fehler sein sollte, benachrichtigen Sie bitte den Administrator dieser Internetseite";
 	      }
 	      else{
