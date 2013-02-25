@@ -190,7 +190,7 @@ function blog_display_comments($post_id){
            if($_SESSION["language"] == "de"){
              $html.= "<p class='ulicms_error'>
            Benutzer aus Ihrem Land werden vom Spamfilter blockiert.<br/> Wenn Sie denken, dass das ein Fehler ist, 
-           wenden Sie sich bitte an den Administrator dieser Internetseite</p>";
+           wenden Sie sich bitte an den Administrator dieser Internetseite.</p>";
            }
            else{
             $html.= "<p class='ulicms_error'>Users from your Country are blocked by the spamfilter. If you believe, this is an error, please contact the administrator.</p>";
