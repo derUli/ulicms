@@ -1,0 +1,42 @@
+"Zusammenfassung"
+Mit der Revision 3 wurden die Optionen zur Bekämpfung von Formularspam um
+einige Punkte erweitert
+
+* Sie finden nun unter Einstellungen > Spamfilter verschiedene
+Einstellungsmöglichkeiten, für die Bekämpfung von Spam.
+
+
+UliCMS bietet verschiedene Möglichkeiten zur Bekämpfung von Spam:
+
+"Honeypot"
+Das ist die Basismethode zur Bekämpfung von Formular-Spam in UliCMS.
+Es wird ein leeres Formularfeld mit einem für Spambots verlockenden Namen wie z.B. "phone" erstellt.
+Dieses Feld ist für Spambots sichtbar, aber 
+nicht für die echten Besucher.
+Die meisten Spambots werden nun in das Feld "phone" eine Telefonnummer eintragen, 
+da meistens so programmiert sind, dass sie alle Felder ausfüllen.
+Wenn das unsichtbare Feld nicht leer ist, handelt es sich definitiv um Spam.
+
+"Ländersperre"
+Häufig kommt lästiger Formular-Spam aus Ländern wie z.B. Russland, Indien oder China.
+Wenn Sie eine Website betreiben, die sich ausschließlich an deutsche (oder englischsprachige)
+Besucher richtet, kann man mit hoher Wahrscheinlichkeit ausschließen,
+dass diese Website beispielsweise von Chinesen kommentiert wird.
+Die Herkunft eines Besuchers wird per Hostname ermittelt.
+Die zu sperrenden Länder müssen also Domainendungen mit Komma getrennt und
+ohne Punkte eingegeben werden.
+
+
+"Warum keine Captchas?"
+Captchas sind nicht barrierefrei.
+Ich habe mich bewusst gegen Captcha-Grafiken entschieden, da diese, sofern Sie wirklich
+effektiv gegen Spambots schützen, selbst für echte Menschen kaum noch 
+lesbar sind.
+
+
+Hier ist eine Liste, der Länder aus denen der meiste Spam kommt. (Siehe: http://www.itespresso.de/2012/04/24/indien-erobert-unruhmlichen-spitzenplatz-als-haufigste-spam-quelle/)
+cn, br, ru, ua, kr, in, pl, vn, tw, pe, it
+
+Wichtig:
+Sperren Sie ein Land im Spamfilter nur, wenn Sie sich sicher sind,
+dass Ihre Website niemals von einem Menschen aus diesem Land kommentiert werden wird.
