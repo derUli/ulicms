@@ -1,5 +1,0 @@
-1. Dateien per FTP hochladen.
-2. update.php die Rechte 0777 geben
-3. http://www.meinedomain.de/update.php aufrufen
-
-Das wars schon!

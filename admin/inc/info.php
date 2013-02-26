@@ -5,7 +5,7 @@
 <br/>
 
 <p>
-<a href="http://www.deruli.de" target="_blank">UliCMS</a> &copy; 2010 - 2012 by Ulrich Schmidt, <br/>
+<a href="http://www.deruli.de" target="_blank">UliCMS</a> &copy; 2010 - 2013 by Ulrich Schmidt, <br/>
 <a href="http://www.ckeditor.com" target="_blank">CKEditor</a> &copy; 2003 - 2012 by CKSource<br/>
 <a href="http://kcfinder.sunhater.com/" target="_blank">KCFinder</a> Copyright 2010 - 2012 KCFinder Project   <br/ >
 

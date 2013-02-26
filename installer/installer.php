@@ -425,6 +425,6 @@ session_destroy();
 
 }
 ?>
-<p>&copy; 2011 - 2012 by <a href="http://www.ulicms.de" target="_blank">ulicms.de</a></p>
+<p>&copy; 2011 - 2013 by <a href="http://www.ulicms.de" target="_blank">ulicms.de</a></p>
 </body>
 </html>
