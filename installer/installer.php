@@ -277,7 +277,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
   `name` varchar(300) NOT NULL,
   `value` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;");
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 
 
@@ -298,64 +298,28 @@ mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (7, 'motto', '$motto'),
 (8, 'date_format', 'd.m.Y H:i:s'),
 (9, 'autor_text', 'Diese Seite wurde verfasst von Vorname Nachname'),
-(10, 'max_news', '10'),
+(10, 'robots', 'index,follow'),
 (11, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
 (12, 'meta_description', 'Eine kurzer Beschreibungstext'),
 (13, 'logo_disabled', 'no'),
 (14, 'logo_image', '0b27dc99b9875f306287bb3965c57304.png'),    
-(15, 'motd', ''),
-(16, 'visitors_can_register', 'on'),
+(15, 'motd', '<p>Willkommen bei <strong>UliCMS</strong>!<br/>
+Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_blank\">www.ulicms.de</a>.</p>'),
+(16, 'visitors_can_register', 'off'),
 (17, 'frontpage', 'willkommen'),
-(18, 'default_language', 'de');");
+(18, 'contact_form_refused_spam_mails', '0'),
+(19, 'default_language', 'de'),
+(20, 'country_blacklist', ''),
+(21, 'country_whitelist', ''),
+(22, 'spamfilter_enabled', 'no'),
+(23, 'comment_mode', 'off'),
+(24, 'facebook_id', ''),
+(25, 'disqus_id', ''),
+(26, 'timezone', 'Europe/Berlin')
+;");
                                 
                    
                                                  
-mysql_query("INSERT INTO  `".$prefix."settings`(
-`id` ,
-`name` ,
-`value`
-)
-VALUES (
-NULL ,  'comment_mode',  'off'
-);
-");
-
-
-
-mysql_query("INSERT INTO  `".$prefix."settings`(
-`id` ,
-`name` ,
-`value`
-)
-VALUES (
-NULL ,  'facebook_id',  ''
-);
-");
-
-mysql_query("INSERT INTO  `".$prefix."settings`(
-`id` ,
-`name` ,
-`value`
-)
-VALUES (
-NULL ,  'disqus_id',  ''
-);
-");
-
-
-
-
-
-
-mysql_query("INSERT INTO  `".$prefix."settings` (
-`id` ,
-`name` ,
-`value`
-)
-VALUES (
-NULL ,  'items_in_rss_feed',  '10')");
-
-
 
 
 mysql_query("CREATE TABLE `".$prefix."backend_menu_structure` (
