@@ -27,11 +27,11 @@ if(getconfig("spamfilter_enabled") != "yes"){
 ?>>
 <br/>
 <br/>
-Benutzer aus folgenden Ländern dürfen kommentieren:<br/>
+Besucher aus folgenden Ländern dürfen kommentieren:<br/>
 <input type="text" name="country_whitelist" value="<?php echo htmlspecialchars(getconfig("country_whitelist"));?>">
 <br/>
 <br/>
-Benutzer aus folgenden Ländern dürfen nicht kommentieren:<br/>
+Besucher aus folgenden Ländern dürfen nicht kommentieren:<br/>
 <input type="text" name="country_blacklist" value="<?php echo htmlspecialchars(getconfig("country_blacklist"));?>">
 </div>
 <br/>
