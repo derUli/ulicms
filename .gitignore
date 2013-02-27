@@ -1,0 +1,14 @@
+phpmyadmin/
+forbidden/
+xampp/
+content/files
+content/flash
+content/avatars
+apache_pb.gif
+apache_pb.png
+apache_pb2.gif
+apache_pb2.png
+apache_pb2_ani.gif
+favicon.ico
+index.html
+restricted/
