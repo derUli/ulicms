@@ -77,11 +77,27 @@ if($connection==false){
 
 
 
-define("MYSQL_CONNECTION",$connection);
-$select=mysql_select_db($config->mysql_database);
+
+
+define("MYSQL_CONNECTION", $connection);
+$select = mysql_select_db($config->mysql_database);
 if(!$select){
 	die("Fehler: Die Datenbank ".$config->mysql_database." existiert nicht.\n");
 }
+
+
+// Abfragen, ob ein error_reporting Wert gesetzt ist
+// Ansonsten error_reporting auf einen Standardwert setzen
+$error_reporting = getconfig("error_reporting");
+
+
+if(!$error_reporting){
+   $error_reporting = E_ALL ^ E_NOTICE ^ E_STRICT;
+   setconfig("error_reporting", "".$error_reporting);
+}
+
+error_reporting($error_reporting);
+
 
 // check four allowed_html config var
 // if not exists create with default value 

@@ -4,7 +4,7 @@
 function getconfig($key){
 	$connection=MYSQL_CONNECTION;
 	$ikey=mysql_real_escape_string($ikey);
-	$query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'",$connection);
+	$query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
 		return $row->value;
