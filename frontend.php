@@ -29,7 +29,7 @@ if(strtolower(getconfig("disable_cache"))=="on"||strtolower(getconfig("disable_c
 }
 
 
-$status=check_status();
+$status = check_status();
 
 
 if($_GET["rss"]=="rss"){
@@ -51,12 +51,24 @@ if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("mainte
 
 
 
+
 header("HTTP/1.0 ".$status);
+
+
+
+$cached_page_path = buildCacheFilePath($page);
+	
+if(file_exists($cached_page_path)){
+   $cached_content = file_get_contents($cached_page_path);
+   if($cached_content){
+      die($cached_content);
+   }
+}
+	
+
 
 require_once "templates/oben.php";
 content();
 require_once "templates/unten.php";
 
-mysql_close(MYSQL_CONNECTION);
-exit();
 ?>

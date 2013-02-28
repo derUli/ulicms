@@ -17,6 +17,10 @@ function getconfig($key){
 
 
 
+function buildCacheFilePath($page){
+   return "content/cache/".$page.".html";
+}
+
 
 function getModulePath($module){
 	// Frontend Directory

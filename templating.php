@@ -568,10 +568,10 @@ function news(){
 
 function content(){
 	$status=check_status();
-	if($status=="404 Not Found"){
+	if($status == "404 Not Found"){
 		echo "Die von Ihnen gew&uuml;nschte Seite existiert nicht.";
 		return false;
-	}else if($status=="403 Forbidden"){
+	}else if($status == "403 Forbidden"){
 		echo "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.";
 		return false;
 	}
@@ -590,10 +590,18 @@ function check_status(){
 		$_GET["seite"] = getconfig("frontpage");
 	}
 	
+        $page = $_GET["seite"];
+        $cached_page_path = buildCacheFilePath($page);
+	
+	if(file_exists($cached_page_path)){
+           return "304 Not Modified";
+	}
+	
+	
 	$connection=MYSQL_CONNECTION;
 	$test=mysql_query("SELECT * FROM `".tbname("content")."` WHERE systemname='".mysql_real_escape_string($_GET["seite"])."'");
 	
-	if(mysql_num_rows($test)==0){
+	if(mysql_num_rows($test) == 0){
 		return "404 Not Found";
 	}else{
 		$test_array=mysql_fetch_array($test);
