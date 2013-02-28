@@ -101,11 +101,12 @@ if($error_reporting === false){
    setconfig("error_reporting", $error_reporting);
 }
 
-
 error_reporting($error_reporting);
 
 $cache_period = getconfig("cache_period");
 
+// Prüfen ob Cache Gültigkeitsdauer gesetzt ist.
+// Ansonsten auf Standardwert setzen
 if($cache_period === false){
   setconfig("cache_period", ONE_DAY_IN_SECONDS);
   define("CACHE_PERIOD", ONE_DAY_IN_SECONDS);

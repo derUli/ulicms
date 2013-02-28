@@ -57,7 +57,7 @@ $cached_page_path = buildCacheFilePath($_GET["seite"]);
 if(file_exists($cached_page_path) and !getconfig("cache_disabled")
    and getenv('REQUEST_METHOD') == "GET"){
    $cached_content = file_get_contents($cached_page_path);
-   $last_modified = getlastmod($cached_page_path);
+   $last_modified = filemtime($cached_page_path);
    
    if($cached_content and $last_modified < time() - CACHE_PERIOD){
       die($cached_content);
