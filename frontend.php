@@ -51,7 +51,7 @@ if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("mainte
 
 header("HTTP/1.0 ".$status);
 
-$cached_page_path = buildCacheFilePath($_GET["seite"]);
+$cached_page_path = buildCacheFilePath($_SERVER['REQUEST_URI']);
 
 
 if(file_exists($cached_page_path) and !getconfig("cache_disabled")

@@ -17,8 +17,8 @@ function getconfig($key){
 
 
 
-function buildCacheFilePath($page){
-   return "content/cache/".$page.".html";
+function buildCacheFilePath($request_uri){
+   return "content/cache/".md5($request_uri).".html";
 }
 
 
