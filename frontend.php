@@ -69,7 +69,7 @@ if(!getconfig("cache_disabled" and getenv('REQUEST_METHOD') == "GET")
    ob_start();
 }
 else if(file_exists($cached_page_path)){
-    $last_modified = getlastmod($cached_page_path);
+    $last_modified = filemtime($cached_page_path);
     if($last_modified < time() - CACHE_PERIOD){
       ob_start();
    }
