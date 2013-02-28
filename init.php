@@ -35,6 +35,9 @@ require_once "api.php";
 
 
 
+if(!file_exists("content/cache")){
+   @mkdir("content/cache", 0777);
+}
 
   
   
