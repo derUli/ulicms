@@ -594,7 +594,10 @@ function check_status(){
         $cached_page_path = buildCacheFilePath($page);
 	
 	if(file_exists($cached_page_path)){
-           return "304 Not Modified";
+           $last_modified = filemtime($cached_page_path);
+           if(time() - $last_modified < CACHE_PERIOD){  
+              return "304 Not Modified";
+           }
 	}
 	
 	
