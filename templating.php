@@ -457,6 +457,8 @@ function base_metas(){
 		echo '<meta name="generator" content="UliCMS Release '.cms_version()
 		.'" />';
 		echo "\r\n";
+		
+		
 
 	$facebook_id = getconfig("facebook_id");
 	
@@ -466,6 +468,10 @@ function base_metas(){
 	}
 	
 	}
+	
+	echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
+	echo "\r\n";
+	
 	
 	$keywords = meta_keywords();
 	if(!$keywords){

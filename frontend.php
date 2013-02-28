@@ -17,7 +17,6 @@ if(!isset($_SESSION["language"])){
 }
 
 
-header("Content-Type: text/html; charset=UTF-8");
 
 
 if(strtolower(getconfig("disable_cache"))=="on"||strtolower(getconfig("disable_cache"))=="true"||getconfig("disable_cache")=="1"){
