@@ -2,10 +2,13 @@
 // Require config and init-script
 require_once "cms-config.php";
 require_once "init.php";
-setconfig("spamfilter_enabled", "yes");
-setconfig("country_blacklist", "");
-setconfig("country_whitelist", "");
 
+
+
+$cache_dir = "content/cache";
+if(!is_dir($cache_dir)){
+   mkdir($cache_dir, 0777);
+}
 
 //@unlink("update.php");
 
