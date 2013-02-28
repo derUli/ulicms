@@ -1,4 +1,4 @@
-<br><br>
+<br/>
 <p><?php random_banner()?></p>
 <br>
 <?php comments()?>
