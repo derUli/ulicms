@@ -28,6 +28,11 @@ if($_GET["action"]=="view_website" or $_GET["action"] == "frontpage"){
 }
 
 
+if(isset($_GET["clear_cache"])){
+   SureRemoveDir("../content/cache", false);
+}
+
+
 if($_GET["action"]=="pages_delete" && $_SESSION["group"]>=40){
   $page=mysql_real_escape_string($_GET["page"]);
   $query=mysql_query("DELETE FROM ".tbname("content")." WHERE id='$page'");
