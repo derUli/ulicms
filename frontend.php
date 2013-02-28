@@ -67,7 +67,7 @@ if(file_exists($cached_page_path) and !getconfig("cache_disabled")
 }
 	
 
-if(!getconfig("cache_disabled") 
+if(!getconfig("cache_disabled" and getenv('REQUEST_METHOD') == "GET") 
    and !file_exists($cached_page_path)){
    
    ob_start();
@@ -80,7 +80,8 @@ require_once "templates/unten.php";
 
 $hasModul = containsModule($_GET["seite"]);
 
-if(!getconfig("cache_disabled") and !$hasModul){
+if(!getconfig("cache_disabled") and !$hasModul and
+   getenv('REQUEST_METHOD') == "GET"){
    $generated_html = ob_get_clean();
    $handle = fopen($cached_page_path, "wb");
    fwrite($handle, $generated_html);
