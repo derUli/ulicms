@@ -182,18 +182,56 @@ function setconfig($key, $value){
     mysql_query("UPDATE ".tbname("settings")." SET value='$value' WHERE name='$key'");
   }else{
   
-    mysql_query("INSERT INTO ".tbname("settings"). " (name, value) VALUES('$key', '$value')")or die(mysql_error());
+    mysql_query("INSERT INTO ".tbname("settings"). " (name, value) VALUES('$key', '$value')");
   }
+
+}
+
+
+function is__writable($path)
+{
+
+    if ($path{strlen($path)-1}=='/')
+        
+        return is__writable($path.uniqid(mt_rand()).'.tmp');
+    
+    elseif (file_exists($path) && preg_match('/\.tmp/', $path))
+    {
+        
+        if (!($f = @fopen($path, 'w+')))
+            return false;
+        fclose($f);
+        unlink($path);
+        return true;
+
+    }
+    else
+        
+        return 0; // Or return error - invalid path...
 
 }
 
 
 
 
+// Check if site contains a module
+function containsModule($page){
+   $query = mysql_query("SELECT * FROM ".tbname("content"). " WHERE systemname = '".
+   mysql_real_escape_string($page)."'");
+   $dataset = mysql_fetch_assoc($query);
+   $content = $dataset["content"];
+   $content = str_replace("&quot;", "\"", $content);
+   
+   return preg_match("/\[module=\".+\"\]/", 
+   $content);
+   
+}
+
+
 
 function tbname($name){
   require_once "cms-config.php";
-  $config=new config();
+  $config = new config();
   return $config->mysql_prefix.$name;
 }
 

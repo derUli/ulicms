@@ -56,9 +56,9 @@ header("HTTP/1.0 ".$status);
 
 
 
-$cached_page_path = buildCacheFilePath($page);
-	
-if(file_exists($cached_page_path)){
+$cached_page_path = buildCacheFilePath($_GET["seite"]);
+
+if(file_exists($cached_page_path) and !getconfig("cache_disabled")){
    $cached_content = file_get_contents($cached_page_path);
    if($cached_content){
       die($cached_content);
@@ -66,9 +66,31 @@ if(file_exists($cached_page_path)){
 }
 	
 
+if(!getconfig("cache_disabled") 
+   and !file_exists($cached_page_path)){
+   
+   ob_start();
+      
+}
 
 require_once "templates/oben.php";
 content();
 require_once "templates/unten.php";
+
+$hasModul = containsModule($_GET["seite"]);
+
+if(!getconfig("cache_disabled") and !$hasModul){
+   $generated_html = ob_get_clean();
+   $handle = fopen($cached_page_path, "wb");
+   fwrite($handle, $generated_html);
+   fclose($handle);
+
+   
+   echo $generated_html;
+   
+   
+}
+
+
 
 ?>
