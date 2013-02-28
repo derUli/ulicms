@@ -50,28 +50,29 @@ if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("mainte
 }
 
 
-
-
 header("HTTP/1.0 ".$status);
-
-
 
 $cached_page_path = buildCacheFilePath($_GET["seite"]);
 
 if(file_exists($cached_page_path) and !getconfig("cache_disabled")
    and getenv('REQUEST_METHOD') == "GET"){
    $cached_content = file_get_contents($cached_page_path);
-   if($cached_content){
+   $last_modified = getlastmod($cached_page_path);
+   
+   if($cached_content and $last_modified < time() - CACHE_PERIOD){
       die($cached_content);
    }
 }
-	
 
 if(!getconfig("cache_disabled" and getenv('REQUEST_METHOD') == "GET") 
    and !file_exists($cached_page_path)){
-   
    ob_start();
-      
+}
+else if(file_exists($cached_page_path)){
+    $last_modified = getlastmod($cached_page_path);
+    if($last_modified < time() - CACHE_PERIOD){
+      ob_start();
+   }
 }
 
 require_once "templates/oben.php";

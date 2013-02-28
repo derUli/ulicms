@@ -48,6 +48,8 @@ define('LF', "\n");          // line feed; Unix
 define('CRLF', "\r\n");      // carriage return and line feed; Windows
 define('BR', '<br />' . LF); // HTML Break
 
+define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
+
 
 function noperms(){
 	echo "<p>Sie haben nicht die Berechtigung, um auf diese Seite zugreifen zu dürfen.<br/>Bitte loggen Sie sich als <u>admin</u> ein oder fragen Sie den Administrator der Webseite.</p>";
@@ -99,7 +101,19 @@ if($error_reporting === false){
    setconfig("error_reporting", $error_reporting);
 }
 
+
 error_reporting($error_reporting);
+
+$cache_period = getconfig("cache_period");
+
+if($cache_period === false){
+  setconfig("cache_period", ONE_DAY_IN_SECONDS);
+  define("CACHE_PERIOD", ONE_DAY_IN_SECONDS);
+} else{
+  define("CACHE_PERIOD", $cache_period);
+}
+
+
 
 
 // check four allowed_html config var
