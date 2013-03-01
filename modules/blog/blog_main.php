@@ -73,12 +73,19 @@ function blog_update(){
   $author = $_SESSION["login_id"];
   
   $id = intval($_POST["id"]);
+
+  $datum = strtotime($_POST["datum"]);
+
+  if($datum === false){
+    $datum = "datum";
+  }
  
   // Rechte prüfen
   if($_SESSION["group"] >= 20)  {
      $insert_query = "UPDATE `".tbname("blog")."` SET title = '$title',
 	 seo_shortname = '$seo_shortname', comments_enabled = $comments_enabled,
 	 entry_enabled = $entry_enabled, language = '$language', content_full = '$content_full',
+	 datum = $datum,
 	 content_preview = '$content_preview' WHERE id = $id
 	 ";
   mysql_query($insert_query);

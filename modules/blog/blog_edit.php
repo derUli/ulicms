@@ -105,6 +105,17 @@ function blog_edit_form($post_id){
 	}
     $html_output .= "</td>";
     $html_output .= "</tr>";    
+   
+    $html_output .= "<tr>";
+    $html_output .= "<td>";
+    $html_output .= "<strong>Datum:</strong>";
+    $html_output .= "</td>";   
+    
+    $html_output .= "<td>";
+    $html_output .= "<strong><input name=\"datum\" type=\"datetime-local\" value=\"".date("Y-m-d\TH:i:s", $post->datum)."\"></strong>";
+    $html_output .= "</td>";   
+      
+    $html_output .= "</tr>";
     
    
     $html_output .= "<tr>";
