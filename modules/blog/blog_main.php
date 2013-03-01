@@ -126,18 +126,25 @@ function blog_submit(){
   
   $content_full = mysql_real_escape_string($_POST["content_full"]);
   $content_preview = mysql_real_escape_string($_POST["content_preview"]);
-  $date = time();
+
   $author = $_SESSION["login_id"];
+  $datum = strtotime($_POST["datum"]);
+  
+  if($datum === false){
+     $datum = time();  
+  }
   
   // Rechte prüfen
   if($_SESSION["group"] >= 20)  {
      $insert_query = "INSERT INTO `".tbname("blog")."` (datum, ".
      "title, seo_shortname, comments_enabled, language, 
   entry_enabled, author, 
-  content_full, content_preview) VALUES ($date, '$title', 
+  content_full, content_preview) VALUES ($datum, '$title', 
   '$seo_shortname', $comments_enabled, '$language', $entry_enabled,
   $author, '$content_full', '$content_preview')";
+  
   mysql_query($insert_query);
+  
   $html_output .= "<script type='text/javascript'>
   location.replace('?seite=".get_requested_pagename().
   "&single=".$seo_shortname. "');

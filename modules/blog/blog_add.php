@@ -74,7 +74,18 @@ function blog_add_form(){
     $html_output .= "</td>";
     $html_output .= "</tr>";    
     
-   
+        $html_output .= "<tr>";
+    $html_output .= "<td>";
+    $html_output .= "<strong>Datum:</strong>";
+    $html_output .= "</td>";   
+    
+    $html_output .= "<td>";
+    $html_output .= "<strong><input name=\"datum\" type=\"datetime-local\" value=\"".date("Y-m-d\TH:i:s")."\" step=any></strong>";
+    $html_output .= "</td>";   
+      
+    $html_output .= "</tr>";
+    
+    
     $html_output .= "<tr>";
     $html_output .= "<td></td>";
     $html_output .= "<td align='center'><strong>Inhalt:</strong></td>";
