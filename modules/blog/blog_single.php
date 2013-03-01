@@ -101,11 +101,7 @@ function comment_form($post_id){
      $html .= "</table>";
 
      $html .= "<br/><textarea name='comment' rows=15 cols=60></textarea>";
-     $html .= "<input type='text' name='phone' value=''>";
-	 $html .= "<script type='text/javascript'>
-	document.form.phone.style.display = \"none\";
-	 </script>
-	 ";
+     $html .= "<input type='text' name='phone' class='antispam_honeypot' value=''>";
      $html .= "<input type='hidden' name='post_comment_to' value='".$post_id."'>";
      $html .= "<br/><br/><input type='submit' value='".$submit."'>";
      $html .= "</form>";

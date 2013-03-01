@@ -499,6 +499,8 @@ function base_metas(){
 
 echo "<script type=\"text/javascript\" src=\"admin/ckeditor/ckeditor.js\"></script>\r\n";
 
+echo '<link rel="stylesheet" type="text/css" href="core.css"/>';
+echo "\r\n";
 }
 
 
