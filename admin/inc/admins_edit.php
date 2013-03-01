@@ -42,11 +42,12 @@ Avatar hochladen:<br/>
 <strong data-tooltip="Was darf der Benutzer? Weitere Informationen dazu finden Sie in der Online-hilfe.">Benutzergruppe:</strong><br/>
 
 <select name="admin_rechte" size=1>
-<option value="50" <?php if($row->group==50) echo "selected";?>>Admin</option>
-<option value="40" <?php if($row->group==40) echo "selected";?>>Redakteur</option>
-<option value="30" <?php if($row->group==30) echo "selected";?>>Autor</option>
-<option value="20" <?php if($row->group==20) echo "selected";?>>Mitarbeiter</option>
-<option value="10" <?php if($row->group==10) echo "selected";?>>Gast</option>
+<option value="50" <?php if($row->group == 50) echo "selected";?>>Admin</option>
+<option value="40" <?php if($row->group == 40) echo "selected";?>>Redakteur</option>
+<option value="30" <?php if($row->group == 30) echo "selected";?>>Autor</option>
+<option value="20" <?php if($row->group == 20) echo "selected";?>>Mitarbeiter</option>
+<option value="10" <?php if($row->group == 10) echo "selected";?>>Gast</option>
+<option value="0" <?php if($row->group == 0) echo "selected";?>>Gesperrter Nutzer</option>
 </select>
 <br>
 <?php }else{?>

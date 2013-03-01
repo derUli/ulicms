@@ -10,7 +10,7 @@ if(isset($_GET["destroy"]) or $_GET["action"]=="destroy"){
 if(isset($_POST["login"])){
 	$user=mysql_real_escape_string($_POST["user"]);
 	$password=md5($_POST["password"]);
-	$query=mysql_query("SELECT * FROM ".tbname("admins")." WHERE username='$user' AND password='$password'",$connection);
+	$query=mysql_query("SELECT * FROM ".tbname("admins")." WHERE username='$user' AND password='$password' AND group > 0",$connection);
 	if(mysql_num_rows($query)>0){
 		$data=mysql_fetch_array($query);
 		$_SESSION["ulicms_login"]=$data["username"];
