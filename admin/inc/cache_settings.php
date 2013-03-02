@@ -1,7 +1,7 @@
+<h1>Cache</h1>
 <?php 
 if($_SESSION["group"] >= 20){
 ?>
-<h1>Cache</h1>
 <?php 
 if(isset($_GET["clear_cache"])){?>
 <p style="color:green;">Der Cache wurde erfolgreich geleert.</p>
@@ -33,4 +33,9 @@ Mit einem beliebigen Wert anlegen.</p>
 löschen.</p>
 <?php }?>
 
-<?php } ?>
+<?php }else{
+
+echo "<p>Zugriff verweigert!</p>";
+}
+
+?>
