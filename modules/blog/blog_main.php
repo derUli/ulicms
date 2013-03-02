@@ -162,9 +162,15 @@ return $html_output;
 function blog_check_installation(){
 	$test = mysql_query("SELECT * FROM ".tbname("blog"));
 	if(!$test){
-  	require_once getModulePath("blog")."blog_install.php";
-  	blog_do_install();		
-	}	
+  	   require_once getModulePath("blog")."blog_install.php";
+  	   blog_do_install();		
+	}else{
+	  $fetch = mysql_fetch_assoc($test);
+	  if(!isset($fetch["views"])){
+	     mysql_query("ALTER TABLE `".tbname("blog")."` ADD views int DEFAULT 0");
+	  }
+	}
+	
 }
 
 
