@@ -11,7 +11,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".tbname("blog")."` (
   `author` int(11) NOT NULL,
   `content_full` longtext NOT NULL,
   `content_preview` longtext NOT NULL,
-  `views` int NOT NULL,
+  `views` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
