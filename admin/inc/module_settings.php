@@ -37,7 +37,15 @@ else{
 $admin_func = $module."_admin";
 
 if(function_exists($admin_func)){
-   call_user_func($admin_func);
+   if(MODULE_ACCESS_PERMITTED){
+      call_user_func($admin_func);
+	  }
+   else{
+      echo "<p>Zugriff verweigert</p>";
+   }
+} else {
+  echo "<p>Keine Einstellungsmöglichkeiten vorhanden.</p>";
+
 }
 
 }
