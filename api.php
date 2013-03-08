@@ -17,7 +17,7 @@ function getconfig($key){
 
 
 function getModuleAdminSelfPath(){
-    return htmlspecialchars($_SERVER["REQUEST_URI"]);
+    return $_SERVER["REQUEST_URI"];
 }
 
 
