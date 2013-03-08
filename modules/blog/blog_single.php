@@ -117,7 +117,7 @@ function comment_form($post_id){
 
 
 function send_comment_via_email($article_title, $article_url, $name, $txt){
-    $subject = "Neuer Kommentar zum Artikel \""."\"";
+    $subject = "Neuer Kommentar zum Artikel \"".$article_title."\"";
 	
 	$message = "$name hat einem neuen Kommentar zum Artikel \"$article_title\" geschrieben.\n\n".
 	"Kommentar:\n".$txt."\n\n".
