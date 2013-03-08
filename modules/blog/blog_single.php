@@ -159,7 +159,6 @@ function post_comments(){
       $_SESSION["name"] = $name;
       $_SESSION["url"] = $url;
       $_SESSION["email"] = $email;
-     
 	 
 	  // wenn Spamfilter aktiviert ist
       if(getconfig("spamfilter_enabled") == "yes"){
@@ -177,7 +176,7 @@ function post_comments(){
 	 
 	 
       if(!empty($name) and !empty($email) and !empty($comment)){
-	  mysql_query("INSERT INTO `".tbname("blog_comments"). "` 
+	     mysql_query("INSERT INTO `".tbname("blog_comments"). "` 
 	(name, url, email, date, comment, post_id)
 	VALUES ( '$name', '$url', '$email', $date, '$comment', $post_id);");
 	$comment_id = mysql_insert_id();
@@ -203,11 +202,7 @@ function post_comments(){
 }
 
 function blog_display_comments($post_id){
-    
         $html = "";
-        
-        
-    
         if(isCountryBlocked() and
            getconfig("spamfilter_enabled") == "yes"){
            if($_SESSION["language"] == "de"){
