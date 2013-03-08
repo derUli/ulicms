@@ -16,7 +16,10 @@
 // you are using session configuration.
 // See http://kcfinder.sunhater.com/install for setting descriptions
 
-session_start();
+
+if(!isset($_SESSION)){
+   session_start();
+}
 
 
 $_CONFIG = array(
@@ -107,7 +110,7 @@ $_CONFIG = array(
 
 
 if($_SESSION["group"]>=30){
-$_CONFIG["disabled"]=false;
+   $_CONFIG["disabled"] = false;
 }
 
 
