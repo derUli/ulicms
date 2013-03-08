@@ -1,5 +1,5 @@
 <?php 
-define("MODULE_ADMIN_HEADLINE", "Einstellungen des Blogmoduls");
+define("MODULE_ADMIN_HEADLINE", "Einstellungen der einfachen Bildergalerie");
 
 $required_permission = getconfig("blog_required_permission");
 
