@@ -9,11 +9,14 @@ if($required_permission === false){
 
 define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
 
+if(isset($_POST["submit"])){
 
-if($_POST["blog_send_comments_via_email"] == "yes"){
-   setconfig("blog_send_comments_via_email", "yes");
-} else{
-   setconfig("blog_send_comments_via_email", "no");
+   if($_POST["blog_send_comments_via_email"] == "yes"){
+      setconfig("blog_send_comments_via_email", "yes");
+   } else{
+      setconfig("blog_send_comments_via_email", "no");
+}
+
 }
 
 // Konfiguration checken
@@ -30,7 +33,7 @@ echo " checked";
 <br/>
 <br/>
 
-<input type="submit" value="Einstellungen speichern"/>
+<input type="submit" name="submit" value="Einstellungen speichern"/>
 </form>
 <?php
 }
