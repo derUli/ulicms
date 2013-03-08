@@ -48,6 +48,11 @@ function getModulePath($module){
 	return $module_folder.$module."/";
 }
 
+function getModuleAdminFilePath($module){
+	return getModulePath($module).
+		$module."_admin.php";		
+}
+
 function getModuleMainFilePath($module){
 	return getModulePath($module).
 		$module."_main.php";

@@ -75,10 +75,9 @@ if($config->mysql_server == "" or $config->mysql_user == ""){
 }
 
 @$connection=mysql_connect($config->mysql_server,$config->mysql_user, $config->mysql_password);
-if($connection==false){
+if($connection === false){
 	die("Fehler: Die Verbindung zum MySQL Server konnte nicht hergestellt werden.");
 }
-
 
 
 

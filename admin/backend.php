@@ -143,6 +143,9 @@ else if($_GET["action"] == "configure_design"){
 else if($_GET["action"] == "cache"){
        require_once "inc/cache_settings.php";
 }
+else if($_GET["action"] == "module_settings"){
+       require_once "inc/module_settings.php";
+}
 
 
 }
