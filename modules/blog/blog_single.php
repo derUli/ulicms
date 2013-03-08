@@ -117,22 +117,15 @@ function comment_form($post_id){
 
 
 function send_comment_via_email($article_title, $article_url, $name, $txt){
-    $subject = "Neuer Kommentar zum Artikel \"".$article_title."\"";
-	
+    $subject = "Neuer Kommentar zum Artikel \"".$article_title."\"";	
 	$message = "$name hat einem neuen Kommentar zum Artikel \"$article_title\" geschrieben.\n\n".
 	"Kommentar:\n".$txt."\n\n".
 	"Klicke hier, um den Kommentar aufzurufen:\n".
 	$article_url;
-	
 	$header = "From: ".getconfig("email")."\n".
 	"Content-type: text/plain; charset=utf-8";
-
     @mail(getconfig("email"), 
 	$subject, $message, $header);
-
-	
-
-
 }
 
 function post_comments(){
@@ -163,16 +156,12 @@ function post_comments(){
       $date = time();
       $comment = mysql_real_escape_string($_POST["comment"]);
      
-     $_SESSION["name"] = $name;
-     $_SESSION["url"] = $url;
-     $_SESSION["email"] = $email;
+      $_SESSION["name"] = $name;
+      $_SESSION["url"] = $url;
+      $_SESSION["email"] = $email;
      
-     if(!empty($name) and !empty($email) and !empty($comment)){
-      
-      
-
-      
-	mysql_query("INSERT INTO `".tbname("blog_comments"). "` 
+      if(!empty($name) and !empty($email) and !empty($comment)){
+	  mysql_query("INSERT INTO `".tbname("blog_comments"). "` 
 	(name, url, email, date, comment, post_id)
 	VALUES ( '$name', '$url', '$email', $date, '$comment', $post_id);");
 	$comment_id = mysql_insert_id();
