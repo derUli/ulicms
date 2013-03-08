@@ -160,6 +160,22 @@ function post_comments(){
       $_SESSION["url"] = $url;
       $_SESSION["email"] = $email;
      
+	 
+	  // wenn Spamfilter aktiviert ist
+      if(getconfig("spamfilter_enabled") == "yes"){
+      
+      // Spam Protection
+      // ein für echte Menschen unsichtbares Textfeld
+      // Die meisten Spambots füllen alle Felder aus
+      // dieses Feld wird darauf geprüft, ob es nicht leer ist
+      if(!empty($_POST["phone"])){
+	     echo("Die motherfucking spammers!");
+		 return false;
+      }
+      
+      }
+	 
+	 
       if(!empty($name) and !empty($email) and !empty($comment)){
 	  mysql_query("INSERT INTO `".tbname("blog_comments"). "` 
 	(name, url, email, date, comment, post_id)
@@ -182,20 +198,7 @@ function post_comments(){
       } else{
         return false;      
       }
-      // wenn Spamfilter aktiviert ist
-      if(getconfig("spamfilter_enabled") == "yes"){
-      
-      // Spam Protection
-      // ein für echte Menschen unsichtbares Textfeld
-      // Die meisten Spambots füllen alle Felder aus
-      // dieses Feld wird darauf geprüft, ob es nicht leer ist
-      if(!empty($_POST["phone"])){
-	     die("Die motherfucking spammers!");
-      }
-      
-            
-      
-      }
+
    }
 }
 
