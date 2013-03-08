@@ -107,7 +107,7 @@ function comment_form($post_id){
      $html .= "</table>";
 
      $html .= "<br/><textarea name='comment' rows=15 cols=60></textarea>";
-     $html .= "<input type='text' name='phone' class='antispam_honeypot' value=''>";
+     $html .= "<input type='text' name='phone' class='antispamspam_honeypot' value=''>";
      $html .= "<input type='hidden' name='post_comment_to' value='".$post_id."'>";
      $html .= "<br/><br/><input type='submit' value='".$submit."'>";
      $html .= "</form>";
@@ -116,18 +116,33 @@ function comment_form($post_id){
 }
 
 
+function send_comment_via_email($article_title, $article_url, $name, $txt){
+    $subject = "Neuer Kommentar zum Artikel \""."\"";
+	
+	$message = "$name hat einem neuen Kommentar zum Artikel \"$article_title\" geschrieben.\n\n".
+	"Kommentar:\n".$txt."\n\n".
+	"Klicke hier, um den Kommentar aufzurufen:\n".
+	$article_url;
+	
+	$header = "From: ".getconfig("email")."\n".
+	"Content-type: text/plain; charset=utf-8";
+
+    @mail(getconfig("email"), 
+	$subject, $message, $header);
+
+	
+
+
+}
+
 function post_comments(){
    if(!isset($_SESSION["name"])){
       if(isset($_SESSION["login_id"])){
-	$user = getUserById($_SESSION["login_id"]);        
-	$_SESSION["name"] = $user["username"];
-	 
-	$_SESSION["email"] = $user["email"];
-   
-      }
-      
-      
-        
+	    $user = getUserById($_SESSION["login_id"]);        
+	    $_SESSION["name"] = $user["username"];
+	    $_SESSION["email"] = $user["email"];
+	}
+  
    }
    
    
@@ -155,10 +170,24 @@ function post_comments(){
      if(!empty($name) and !empty($email) and !empty($comment)){
       
       
+
       
 	mysql_query("INSERT INTO `".tbname("blog_comments"). "` 
 	(name, url, email, date, comment, post_id)
-	VALUES ( '$name', '$url', '$email', $date, '$comment', $post_id);")or die(mysql_error());
+	VALUES ( '$name', '$url', '$email', $date, '$comment', $post_id);");
+	$comment_id = mysql_insert_id();
+	
+	if(getconfig("blog_send_comments_via_email") == "yes"){
+		$query = mysql_query("SELECT * FROM ".tbname("blog"). " WHERE id = $post_id");
+	    $post = mysql_fetch_object($query);
+		$article_url = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https://' : 'http://';
+		$article_url .= $_SERVER['HTTP_HOST'].
+		getModuleAdminSelfPath().
+		"#comment".$comment_id;
+	    send_comment_via_email($post->title, 
+		$article_url, $name, $comment);
+	  
+	}
 	
 	return true;
       } else{
@@ -172,7 +201,7 @@ function post_comments(){
       // Die meisten Spambots füllen alle Felder aus
       // dieses Feld wird darauf geprüft, ob es nicht leer ist
       if(!empty($_POST["phone"])){
-	die("Die motherfucking spammers!");
+	     die("Die motherfucking spammers!");
       }
       
             
@@ -200,7 +229,7 @@ function blog_display_comments($post_id){
         }else{
 
         if(post_comments($post->id)){
-	    $html .= "<script type='text/javascript'>
+	       $html .= "<script type='text/javascript'>
 	    location.replace(location.href);
 	    </script>";
 	

@@ -50,7 +50,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group){
   $header="From: ".getconfig("email")."\n".
   "Content-type: text/plain; charset=utf-8";
 
-  @mail($email, "Dein Benutzer-Account bei ".$_SERVER["SERVER_NAME"], $message,     $header);
+  @mail($email, "Dein Benutzer-Account bei ".$_SERVER["SERVER_NAME"], $message, $header);
 }
 
 function user_exists($name){
