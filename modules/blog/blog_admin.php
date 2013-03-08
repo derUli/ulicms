@@ -26,7 +26,7 @@ function blog_admin(){
 <input type="checkbox" name="blog_send_comments_via_email" value="yes"
 <?php if(getconfig("blog_send_comments_via_email") == "yes"){
 echo " checked";
-}?>/> über neue Kommentare per E-Mail benachrichtigen
+}?>/> Über neue Kommentare per E-Mail benachrichtigen
 <br/>
 <br/>
 
