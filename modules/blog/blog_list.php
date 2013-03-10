@@ -34,7 +34,7 @@ function blog_list(){
 
     $count_query = mysql_query("SELECT * FROM `".
     tbname("blog")."` WHERE language='".
-    $_SESSION["language"]."' ORDER by id ASC");
+    $_SESSION["language"]."' ORDER by datum ASC");
     $first_post = mysql_fetch_object($count_query);
     $oldest_post_id = $first_post->id;
     $total_entries = mysql_num_rows($count_query);
