@@ -1,5 +1,4 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
 if (get_magic_quotes_gpc()) unfck_gpc();
 
  function unfck($v) {
