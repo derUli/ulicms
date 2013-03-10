@@ -4,7 +4,7 @@ define("MODULE_ADMIN_HEADLINE", "Einstellungen des Blogmoduls");
 $required_permission = getconfig("blog_required_permission");
 
 if($required_permission === false){
-   $required_permission = 20;
+   $required_permission = 50;
 }
 
 define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
