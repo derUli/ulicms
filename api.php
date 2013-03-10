@@ -3,7 +3,7 @@
 // get a config variable
 function getconfig($key){
 	$connection=MYSQL_CONNECTION;
-	$ikey=mysql_real_escape_string($ikey);
+	$ikey=mysql_real_escape_string($key);
 	$query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
