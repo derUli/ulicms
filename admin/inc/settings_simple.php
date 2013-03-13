@@ -181,8 +181,6 @@ if(getconfig("robots") == "noindex,nofollow"){?>
 </table>
 <input type="hidden" name="save_settings" value="save_settings">
 </form>
-<br/>
-<a href="index.php?action=settings">Expertenmodus</a>
 
 <?php 
 }

@@ -11,5 +11,7 @@
 <br/>
 <a href="index.php?action=logo_upload">Logo</a>
 <br/>
-<a href="index.php?action=languages">Sprachen</a></p>
+<a href="index.php?action=languages">Sprachen</a>
+<br/>
+<a href="index.php?action=settings">Expertenmodus</a>
 </p>
