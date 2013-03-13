@@ -604,13 +604,13 @@ function check_status(){
 	if(file_exists($cached_page_path)){
            $last_modified = filemtime($cached_page_path);
            if(time() - $last_modified < CACHE_PERIOD){  
-              return "304 Not Modified";
+              return "200 OK";
            }
 	}
 	
 	
 	$connection=MYSQL_CONNECTION;
-	$test=mysql_query("SELECT * FROM `".tbname("content")."` WHERE systemname='".mysql_real_escape_string($_GET["seite"])."'");
+	$test = mysql_query("SELECT * FROM `".tbname("content")."` WHERE systemname='".mysql_real_escape_string($_GET["seite"])."'");
 	
 	if(mysql_num_rows($test) == 0){
 		return "404 Not Found";
