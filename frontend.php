@@ -27,15 +27,19 @@ if($_GET["rss"]=="rss"){
 
 
 if(getconfig("redirection")!=""&&getconfig("redirection")!=false){
-  header("Location: ".env("redirection"));
+  header("Location: ".getconfig("redirection"));
   exit();
 }
+
+
 
 
 if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("maintenance_mode"))=="true"||getconfig("maintenance_mode")=="1"){
   require_once "templates/maintenance.php";
   die();
 }
+
+
 
 
 header("HTTP/1.0 ".$status);

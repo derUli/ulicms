@@ -5,11 +5,9 @@
 */
 require_once "workaround.php";
         
-		
+	
 // Falls keine Zeitzone in der php.ini gesetzt sein sollte
 // wird die Zeitzone auf UTC gesetzt.
-
-
 
 		
 // if config exists require_config else redirect to installer
@@ -138,6 +136,14 @@ if(!$timezone){
 }
 	date_default_timezone_set(getconfig("timezone"));
 
+
+$enforce_https = getconfig("enforce_https");
+
+if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
+{
+    header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+    exit();
+}
 
                            
 @include "functions.php";
