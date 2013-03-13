@@ -296,7 +296,7 @@ mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (5, 'homepage_owner', '$zusammen'),
 (6, 'email', '$email'),
 (7, 'motto', '$motto'),
-(8, 'date_format', 'd.m.Y H:i:s'),
+(8, 'date_format', 'd.m.Y H:i'),
 (9, 'autor_text', 'Diese Seite wurde verfasst von Vorname Nachname'),
 (10, 'robots', 'index,follow'),
 (11, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
