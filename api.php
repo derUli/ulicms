@@ -139,6 +139,24 @@ function replaceShortcodesWithModules($string){
 	return $string;
 }
 
+
+function getSystemNamesAsJSONString(){
+  $permalinks = getAllSystemNames();
+  $json_code = "[";
+  for($i=0; $i < count($permalinks); $i++){
+     $link = $permalinks[$i];
+     $json_code .= "['$link','?seite=$link']";
+     if($i != count($permalinks) - 1){
+        $json_code .= ",";
+     }
+  }
+  
+  
+  $json_code .= "]";
+
+  return $json_code;
+}
+
 // Get systemnames of all pages
 function getAllSystemNames(){
 	$query = mysql_query("SELECT * FROM `".tbname("content")."` ORDER BY systemname");

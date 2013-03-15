@@ -31,6 +31,7 @@ CKEDITOR.editorConfig = function( config )
      config.filebrowserFlashUploadUrl = 'admin/kcfinder/upload.php?type=flash';
    }
 
+   
 
  
 config.toolbar_cms =
