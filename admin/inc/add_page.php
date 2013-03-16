@@ -4,9 +4,6 @@ if($_SESSION["group"]>=30){
 ?>
 <form name="newpageform" action="index.php?action=pages" method="post">
 
-<input type='hidden' id='pageListJSON' value="<?php echo  htmlspecialchars(getSystemNamesAsJSONString())?>">
-
-
 <strong data-tooltip="Dieser Name wird für die Adresse benötigt.
 Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong><br/>
 <input type="text" style="width:300px;" name="system_title" value="">
