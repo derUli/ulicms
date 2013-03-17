@@ -9,6 +9,9 @@ if($required_permission === false){
 
 define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
 
+include getModulePath("newsletter")."newsletter_install.php";
+newsletter_check_install();
+
 
 function newsletter_admin(){
 
