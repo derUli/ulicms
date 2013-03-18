@@ -3,6 +3,31 @@
 include getModulePath("newsletter")."newsletter_install.php";
 newsletter_check_install();
 
+
+function cancel_newsletter($mail){
+
+   $mail = mysql_real_escape_string($mail);
+   if($_SESSION["language"] == "de"){
+     $translation_newsletter_canceled = "Ihre E-Mail Adresse wurde aus der Liste entfernt.";
+     $translation_email_not_subscribed = "Diese E-Mail Adresse befindet sich nicht in der Liste";
+     }
+     
+   else{
+     $translation_newsletter_canceled = "Your mail adress was removed from the list";
+     $translation_email_not_subscribed = "This mail adress is not in the list.";
+   }
+   
+   
+   if(!checkIfSubscribed($mail)){
+        return "<p>$translation_email_not_subscribed</p>";
+   }
+   
+   mysql_query("DELETE FROM ".tbname("newsletter_subscribers"). " WHERE email = '$mail'");
+   
+   
+   return "<p>$translation_newsletter_canceled</p>";
+}
+
 function subscribe_newsletter($mail){
 
    $html_output = "";
@@ -10,6 +35,11 @@ function subscribe_newsletter($mail){
    if($_SESSION["language"] == "de"){
       $translation_thank_you_for_subscribing = "Danke für das Abonnieren des Newsletters";
       $translation_already_subscribed = "Sie haben den Newsletter bereits abonniert!";
+   }
+   
+   else{
+     $translation_thank_you_for_subscribing = "Thank you for subscribing";
+      $translation_already_subscribed = "You've Subscribed the newsletter.";
    }
 
    $subscribe_date = time();
@@ -80,9 +110,12 @@ function newsletter_render(){
    
    if(!empty($_GET["newsletter_email_adress"]) and 
    !empty($_GET["newsletter_subscribe"])){
-     $subcribe = $_GET["newsletter_subscribe"];
-      if($subcribe == "yes"){
+     $subscribe = $_GET["newsletter_subscribe"];
+      if($subscribe == "yes"){
         return subscribe_newsletter($_GET["newsletter_email_adress"]);
+      }
+      else if($subscribe == "no"){
+        return cancel_newsletter($_GET["newsletter_email_adress"]);
       }
    
    }
@@ -126,7 +159,7 @@ function newsletter_render(){
    
    }
    
-  else if(!$subscribed){
+  else{
   
       $html_output .= "<input type=\"radio\" name=\"newsletter_subscribe\" value=\"yes\"> $translation_subscribe_newsletter<br/>";
       $html_output .= "<input type=\"radio\" name=\"newsletter_subscribe\" checked value=\"no\"> $translation_cancel_newsletter";
