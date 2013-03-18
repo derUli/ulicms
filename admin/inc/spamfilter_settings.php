@@ -27,10 +27,16 @@ if(getconfig("spamfilter_enabled") != "yes"){
 ?>>
 <br/>
 <br/>
-Besucher aus folgenden Ländern dürfen kommentieren:<br/>
-<input type="text" name="country_whitelist" value="<?php echo htmlspecialchars(getconfig("country_whitelist"));?>">
-<br/>
-<br/>
+Schwarze Liste:<br/>
+<textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php 
+echo htmlspecialchars(implode(
+explode("||", getconfig("spamfilter_words_blacklist")),
+"\n"
+));
+?></textarea>
+
+<br/><br/>
+
 Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren:<br/>
 <input type="text" name="country_blacklist" value="<?php echo htmlspecialchars(getconfig("country_blacklist"));?>">
 </div>

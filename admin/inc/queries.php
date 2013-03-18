@@ -57,9 +57,11 @@ if($_GET["action"] == "spam_filter" and
    }
    
    
-   if(isset($_POST["country_whitelist"])){
-     setconfig("country_whitelist", 
-     $_POST["country_whitelist"]);
+   
+   
+   if(isset($_POST["spamfilter_words_blacklist"])){
+     setconfig("spamfilter_words_blacklist", 
+     str_replace("\r\n", "||", $_POST["spamfilter_words_blacklist"]));
    }
 
 }
