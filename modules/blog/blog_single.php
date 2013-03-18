@@ -252,7 +252,7 @@ function blog_display_comments($post_id){
          stringcontainsbadwords($_POST["comment"]))){
           if($_SESSION["language"] == "de"){
              $html.= "<p class='ulicms_error'>".
-             "Ihr Kommentar enthält nicht erlaubte Wörter</p>";
+             "Ihr Kommentar enthält nicht erlaubte Wörter.</p>";
              }
           else{
              $html.= "<p class='ulicms_error'>".

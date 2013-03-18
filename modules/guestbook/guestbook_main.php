@@ -139,7 +139,7 @@ function guestbook_render(){
           if($_SESSION["language"] == "de"){
              $errors = true;
              $html_output.= "<p class='ulicms_error'>".
-             "Ihr Kommentar enthält nicht erlaubte Wörter</p>";
+             "Ihr Eintrag enthält nicht erlaubte Wörter.</p>";
              }
           else{
              $html_output.= "<p class='ulicms_error'>".
