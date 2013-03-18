@@ -174,6 +174,12 @@ function post_comments(){
 		 return false;
       }
       
+      
+      if(stringcontainsbadwords($_POST["name"]) or
+         stringcontainsbadwords($_POST["comment"])){
+         return false;   
+      }
+      
       }
 	 
 	 
@@ -203,10 +209,35 @@ function post_comments(){
    }
 }
 
+
+function stringcontainsbadwords($str){
+   $words_blacklist = getconfig("spamfilter_words_blacklist");
+   $str = strtolower($str);
+        
+       if( $words_blacklist !== false){  
+          $words_blacklist = explode("||", $words_blacklist);
+       }     
+       else{
+          return false;       
+       }
+       
+      for($i=0; $i < count($words_blacklist); $i++){
+         $word = strtolower($words_blacklist[$i]);
+         if(strpos($str, $word) !== false)
+            return true;
+      }
+
+
+    return false;
+}
+
 function blog_display_comments($post_id){
         $html = "";
-        if(isCountryBlocked() and
-           getconfig("spamfilter_enabled") == "yes"){
+      
+       
+       $spamfilter_enabled = getconfig("spamfilter_enabled") == "yes";
+        
+        if(isCountryBlocked() and $spamfilter_enabled){
            if($_SESSION["language"] == "de"){
              $html.= "<p class='ulicms_error'>
            Benutzer aus Ihrem Land werden vom Spamfilter blockiert.<br/> Wenn Sie denken, dass das ein Fehler ist, 
@@ -215,7 +246,24 @@ function blog_display_comments($post_id){
            else{
             $html.= "<p class='ulicms_error'>Users from your Country are blocked by the spamfilter. If you believe, this is an error, please contact the administrator.</p>";
            }
-        }else{
+        }   
+        
+        else if($spamfilter_enabled and (stringcontainsbadwords($_POST["name"]) or
+         stringcontainsbadwords($_POST["comment"]))){
+          if($_SESSION["language"] == "de"){
+             $html.= "<p class='ulicms_error'>".
+             "Ihr Kommentar enthält nicht erlaubte Wörter</p>";
+             }
+          else{
+             $html.= "<p class='ulicms_error'>".
+             "Your comment contains not allowed words.</p>";
+             }
+          }
+             
+      
+        
+        
+        else{
 
         if(post_comments($post->id)){
 	       $html .= "<script type='text/javascript'>
