@@ -76,7 +76,7 @@ function newsletter_render(){
       $userdata = getUserById($_SESSION["login_id"]);
       $email = $userdata["email"];
    }
-   newsletter_check_install();
+   
    
    if(!empty($_GET["newsletter_email_adress"]) and 
    !empty($_GET["newsletter_subscribe"])){
@@ -106,14 +106,33 @@ function newsletter_render(){
    }
    
    $html_output .= "$translation_your_mail_adress: <input name=\"newsletter_email_adress\" type=\"email\" value=\"$email\">";
+   $html_output .= "<br/><br/>";
    }
    
-   $html_output .= "<br/><br/>";
-   $html_output .= "<input type=\"radio\" name=\"newsletter_subscribe\" value=\"yes\"> $translation_subscribe_newsletter<br/>";
-   $html_output .= "<input type=\"radio\" name=\"newsletter_subscribe\" value=\"no\"> $translation_cancel_newsletter";
    
    
    
+   if($email and !empty($email)){
+     $subscribed = checkIfSubscribed($email);
+   }
+   else{
+     $subscribed = false;   
+   }
+   
+   
+   if($subscribed or empty($email)){
+      $html_output .= "<input type=\"radio\" name=\"newsletter_subscribe\" checked value=\"yes\"> $translation_subscribe_newsletter<br/>";
+      $html_output .= "<input type=\"radio\" name=\"newsletter_subscribe\" value=\"no\"> $translation_cancel_newsletter";
+   
+   }
+   
+  else if(!$subscribed){
+  
+      $html_output .= "<input type=\"radio\" name=\"newsletter_subscribe\" value=\"yes\"> $translation_subscribe_newsletter<br/>";
+      $html_output .= "<input type=\"radio\" name=\"newsletter_subscribe\" checked value=\"no\"> $translation_cancel_newsletter";
+      
+          
+  }
    
    $html_output .= "<br/><br/><input type=\"submit\" value=\"$translation_submit\">";
    
