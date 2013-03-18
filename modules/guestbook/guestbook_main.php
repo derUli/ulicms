@@ -2,6 +2,31 @@
 
 include "antispam-features.php";
 
+if(!function_exists("stringcontainsbadwords")){
+function stringcontainsbadwords($str){
+   $words_blacklist = getconfig("spamfilter_words_blacklist");
+   $str = strtolower($str);
+        
+       if( $words_blacklist !== false){  
+          $words_blacklist = explode("||", $words_blacklist);
+       }     
+       else{
+          return false;       
+       }
+       
+      for($i=0; $i < count($words_blacklist); $i++){
+         $word = strtolower($words_blacklist[$i]);
+         if(strpos($str, $word) !== false)
+            return true;
+      }
+
+
+    return false;
+}
+
+}
+
+
 function guestbook_render(){	
 		check_installation();	
 		
@@ -106,8 +131,23 @@ function guestbook_render(){
 					}				
 				}
 				
-			if($_POST["phone"] != "" and 
-			getconfig("spamfilter_enabled") == "yes"){
+				
+		        $spamfilter_enabled = getconfig("spamfilter_enabled") == "yes";
+				
+		if($spamfilter_enabled and (stringcontainsbadwords($_POST["gb_name"]) or
+         stringcontainsbadwords($_POST["gb_content"]))){
+          if($_SESSION["language"] == "de"){
+             $errors = true;
+             $html_output.= "<p class='ulicms_error'>".
+             "Ihr Kommentar enthält nicht erlaubte Wörter</p>";
+             }
+          else{
+             $html_output.= "<p class='ulicms_error'>".
+             "Your comment contains not allowed words.</p>";
+             }
+          }
+				
+			if($_POST["phone"] != "" and $spamfilter_enabled){
 				$errors = true;
 				if($_SESSION["language"] == "de"){
 				        
