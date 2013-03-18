@@ -308,15 +308,14 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (16, 'frontpage', 'willkommen'),
 (17, 'contact_form_refused_spam_mails', '0'),
 (18, 'default_language', 'de'),
-(19, 'country_blacklist', ''),
-(20, 'country_whitelist', ''),
-(21, 'spamfilter_enabled', 'no'),
-(22, 'comment_mode', 'off'),
-(23, 'facebook_id', ''),
-(24, 'disqus_id', ''),
-(25, 'spamfilter_words_blacklist', 
+(19, 'country_blacklist', 'ru, cn, in'),
+(20, 'spamfilter_enabled', 'yes'),
+(21, 'comment_mode', 'off'),
+(22, 'facebook_id', ''),
+(23, 'disqus_id', ''),
+(24, 'spamfilter_words_blacklist', 
 'Casino||Euro Dice||Bingo||Cialis||Viagra||Penis||Enlargement||Drugstore'),
-(26, 'timezone', 'Europe/Berlin');");
+(25, 'timezone', 'Europe/Berlin');");
                                 
                    
                                                  
