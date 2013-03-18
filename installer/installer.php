@@ -314,7 +314,9 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (22, 'comment_mode', 'off'),
 (23, 'facebook_id', ''),
 (24, 'disqus_id', ''),
-(25, 'timezone', 'Europe/Berlin');");
+(25, 'spamfilter_words_blacklist', 
+'Casino||Euro Dice||Bingo||Cialis||Viagra||Penis||Enlargement||Drugstore'),
+(26, 'timezone', 'Europe/Berlin');");
                                 
                    
                                                  

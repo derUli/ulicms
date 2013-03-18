@@ -3,12 +3,9 @@
 require_once "cms-config.php";
 require_once "init.php";
 
+setconfig("spamfilter_words_blacklist", 
+"Casino;Euro Dice;Bingo;Cialis;Viagra;Penis;Enlargement;Drugstore");
 
-
-$cache_dir = "content/cache";
-if(!is_dir($cache_dir)){
-   mkdir($cache_dir, 0777);
-}
 
 //@unlink("update.php");
 
