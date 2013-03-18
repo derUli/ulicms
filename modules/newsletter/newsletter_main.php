@@ -35,11 +35,13 @@ function subscribe_newsletter($mail){
    if($_SESSION["language"] == "de"){
       $translation_thank_you_for_subscribing = "Danke für das Abonnieren des Newsletters";
       $translation_already_subscribed = "Sie haben den Newsletter bereits abonniert!";
+      $translation_email_adress_invalid = "Diese E-Mail Adresse ist ungültig.";
    }
    
    else{
      $translation_thank_you_for_subscribing = "Thank you for subscribing";
       $translation_already_subscribed = "You've Subscribed the newsletter.";
+      $translation_email_adress_invalid = "This mail adress is invalid.";
    }
 
    $subscribe_date = time();
@@ -59,10 +61,15 @@ function subscribe_newsletter($mail){
        
       $html_output .= "<p>$translation_thank_you_for_subscribing</p>";
        }      
+ 
       
+      } else{
       
-      
+        $html_output .= "<p>".
+        $translation_email_adress_invalid.
+        "</p>";
       }
+      
       
       return $html_output;
 }
@@ -78,8 +85,8 @@ function checkIfSubscribed($mail){
 
 function check_email_address($email) {
   $at_array = explode("@", $email);
-  $dot_array = explode("@", $email);
-  return count($at_array) == 2 and count($dot_array) >= 1;
+  $dot_array = explode(".", $email);
+  return count($at_array) == 2 and count($dot_array) >= 2;
 }
 
 
