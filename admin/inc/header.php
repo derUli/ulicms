@@ -16,6 +16,14 @@ font-weight:bold;
 font-size:1.1em;
 }
 
+.cke a, .cke a:active, .cke a:hover{
+color:black !important;
+text-decoration:none !important;
+font-weight:normal !important;
+border:none !important;
+font-size:1.0em;
+}
+
 
 strong{
 color:#d25400;
@@ -214,6 +222,12 @@ empty-cells:show;
 table-layout:auto;
 }
 
+iframe img{
+border:0px;
+
+}
+
+
 img{
 border:0px;
 }
@@ -280,11 +294,10 @@ background-image:url(gfx/bg.jpg);
 <link rel="stylesheet" type="text/css" href="codemirror/lib/codemirror.css">
 <script src="codemirror/lib/codemirror.js" type="text/javascript"></script>
 <script src="codemirror/mode/php/php.js" type="text/javascript"></script>
-<link rel="stylesheet" href="codemirror/mode/php/php.css" type="text/css">
 <script src="codemirror/mode/xml/xml.js" type="text/javascript"></script>
 <link rel="stylesheet" href="codemirror/mode/xml/xml.css" type="text/css">
 <script src="codemirror/mode/javascript/javascript.js" type="text/javascript"></script>
-<link rel="stylesheet" href="codemirror/mode/xml/javascript.css" type="text/css">
+<link rel="stylesheet" href="codemirror/mode/javascript/javascript.css" type="text/css">
 <script src="codemirror/mode/clike/clike.js"></script>
 <link rel="stylesheet" href="codemirror/mode/clike/clike.css" type="text/css">
 <link rel="stylesheet" href="codemirror/mode/css/css.css" type="text/css">
