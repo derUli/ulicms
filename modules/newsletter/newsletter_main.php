@@ -33,7 +33,7 @@ function subscribe_newsletter($mail){
    $html_output = "";
 
    if($_SESSION["language"] == "de"){
-      $translation_thank_you_for_subscribing = "Danke für das Abonnieren des Newsletters";
+      $translation_thank_you_for_subscribing = "Danke für das Abonnieren des Newsletters.";
       $translation_already_subscribed = "Sie haben den Newsletter bereits abonniert!";
       $translation_email_adress_invalid = "Diese E-Mail Adresse ist ungültig.";
    }
@@ -160,7 +160,7 @@ function newsletter_render(){
    }
    
    
-   if($subscribed or empty($email)){
+   if(!$subscribed or empty($email)){
       $html_output .= "<input type=\"radio\" name=\"newsletter_subscribe\" checked value=\"yes\"> $translation_subscribe_newsletter<br/>";
       $html_output .= "<input type=\"radio\" name=\"newsletter_subscribe\" value=\"no\"> $translation_cancel_newsletter";
    
