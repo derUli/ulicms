@@ -26,6 +26,7 @@ function buildCacheFilePath($request_uri){
    if(!$language){
      $language = getconfig("default_language");
    }
+   
    $unique_identifier = $request_uri.$language;
    
    return "content/cache/".md5($unique_identifier).".html";

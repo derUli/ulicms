@@ -5,7 +5,7 @@ var $mysql_server="localhost";
 var $mysql_user="root";
 var $mysql_password="";
 var $mysql_database="ulicms";
-var $mysql_prefix="test2_";
+var $mysql_prefix="2014_";
 
 }
 ?>
