@@ -22,7 +22,13 @@ function getModuleAdminSelfPath(){
 
 
 function buildCacheFilePath($request_uri){
-   return "content/cache/".md5($request_uri).".html";
+   $language = $_SESSION["language"];
+   if(!$language){
+     $language = getconfig("default_language");
+   }
+   $unique_identifier = $request_uri.$language;
+   
+   return "content/cache/".md5($unique_identifier).".html";
 }
 
 
