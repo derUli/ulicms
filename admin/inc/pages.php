@@ -75,7 +75,14 @@ echo " selected";
 <td><a href="?action=pages&order=comments_enabled">Kommentare</a></td>
 <td><span data-tooltip="Die Seite auf der Webpräsenz öffnen">Anzeigen</span></td>
 <td>Bearbeiten</td>
-<td>Löschen</td>
+
+<td><?php 
+if($_SESSION["filter_status"] == "trash")
+   echo "Wiederherstellen";
+else 
+   echo "Löschen";
+
+?></td>
 </tr>
 <?php 
 $order = basename($_GET["order"]);
@@ -168,7 +175,16 @@ echo "<td>Geschlossen</td>";
 echo "<td><a href=\"../?seite=".$row->systemname."\" target=\"_blank\"><img src=\"gfx/preview.gif\">Anzeigen</a></td>";
 echo "<td>".'<a href="index.php?action=pages_edit&page='.$row->id.'"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
 if($_SESSION["group"]>=40){
-echo "<td>".'<a href="index.php?action=pages_delete&page='.$row->id.'" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif">  Löschen</a></td>';
+   
+ if($_SESSION["filter_status"] == "trash"){ 
+    echo "<td>".'<a href="index.php?action=undelete_page&page='.$row->id.'";"> <img src="gfx/undelete.png"> Wiederherstellen</a></td>';
+ }
+ else
+ {
+   echo "<td>".'<a href="index.php?action=pages_delete&page='.$row->id.'" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif">  Löschen</a></td>';
+   
+   
+ }
 }else{
 echo "<td><img src=\"gfx/delete.gif\"> Löschen</td>";
 }
