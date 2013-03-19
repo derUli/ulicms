@@ -201,11 +201,11 @@ function import($ipage){
 	$connection=MYSQL_CONNECTION;
 	$ipage=mysql_real_escape_string($ipage);
 	if($ipage==""){                                                          
-		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
+		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
 	
 	}
 	else{
-		$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
+		$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'");
 	}
 
 	if(mysql_num_rows($query)==0){

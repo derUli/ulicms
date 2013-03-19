@@ -145,6 +145,8 @@ if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
     exit();
 }
 
+include 'cron.php';
+
                            
 @include "functions.php";
 
