@@ -34,8 +34,9 @@ if(isset($_GET["clear_cache"])){
 
 
 if($_GET["action"]=="pages_delete" && $_SESSION["group"]>=40){
-  $page=mysql_real_escape_string($_GET["page"]);
-  $query=mysql_query("DELETE FROM ".tbname("content")." WHERE id='$page'");
+  $page = mysql_real_escape_string($_GET["page"]);
+  mysql_query("UPDATE ".tbname("content"). " SET `deleted_at` = ".time().
+  " WHERE id=$page");
   header("Location: index.php?action=pages");
 exit();
 }

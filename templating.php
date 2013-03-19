@@ -257,7 +257,7 @@ function is_403(){
 
 function menu($name){
         $language = $_SESSION["language"];
-	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND language = '$language' AND active = 1 AND parent='-' ORDER by position");
+	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent='-' ORDER by position");
 	echo "<ul class='menu_".$name."'>\n";
 	while($row = mysql_fetch_object($query)){
 	echo "  <li>" ;
@@ -275,7 +275,7 @@ function menu($name){
 	echo "</a>\n";
 	
 	// Unterebene 1
-	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent='".$row->systemname."' ORDER by position");
+	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND `deleted_at` IS NULL AND parent='".$row->systemname."' ORDER by position");
 		if(mysql_num_rows($query2)>0){
 			echo "<ul class='sub_menu'>\n";
 			while($row2 = mysql_fetch_object($query2)){
@@ -308,7 +308,7 @@ function menu($name){
 				
 				
 				// Unterebene 2
-				$query3 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent='".$row2->systemname."' ORDER by position");
+				$query3 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent='".$row2->systemname."' AND `deleted_at` IS NULL ORDER by position");
 		if(mysql_num_rows($query3)>0){
 			echo "  <ul class='sub_menu'>\n";
 			while($row3 = mysql_fetch_object($query3)){
@@ -337,7 +337,7 @@ function menu($name){
 				
 				
 				// Unterebene 3
-				$query4 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent='".$row3->systemname."' ORDER by position");
+				$query4 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent='".$row3->systemname."' ORDER by position");
 		if(mysql_num_rows($query4)>0){
 			echo "  <ul class='sub_menu'>\n";
 			while($row4 = mysql_fetch_object($query4)){
@@ -546,32 +546,6 @@ function autor(){
 	}
 }
 
-/*
-function news(){
-	$connection=MYSQL_CONNECTION;
-	$max=(int)getconfig("max_news");
-	if($max==false || is_nan($max)){
-		$max=5;
-	}
-	$news_template=file_get_contents("templates/news.txt");
-	
-	$query=mysql_query("SELECT * FROM ".tbname("news")." ORDER BY date DESC LIMIT $max",$connection);
-	while($row=mysql_fetch_object($query)){
-		$out=$news_template;
-		$content = replaceShortcodesWithModules($row->content);
-		$query2=mysql_query("SELECT * FROM ".tbname("admins")." WHERE id=".$row->autor);
-		$result2=mysql_fetch_object($query2);
-		$out=str_replace("{datum}",date(getconfig("date_format"),$row->date),$out);
-		$out=str_replace("{titel}",$row->title,$out);
-		$out=str_replace("{id}",$row->id,$out);
-		$out=str_replace("{text}",$content,$out);
-		$out=str_replace("{autor}",$result2->firstname." ".$result2->lastname,$out);
-		echo $out;
-	}
-}
-
-*/
-
 
 
 function content(){
@@ -640,6 +614,9 @@ function check_status(){
 			if($test_array["redirection"]!=""){
 				header("Location: ".$test_array["redirection"]);
 				exit();
+			}
+			if($test_array["deleted_at"] != null){
+                          return "404 Not Found";
 			}
 			return "200 OK";
 			
