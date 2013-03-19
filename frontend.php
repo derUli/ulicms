@@ -40,9 +40,8 @@ if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("mainte
 }
 
 
-
-
 header("HTTP/1.0 ".$status);
+header("Content-Type: text/html; charset=utf-8");
 
 $cached_page_path = buildCacheFilePath($_SERVER['REQUEST_URI']);
 
@@ -68,6 +67,7 @@ else if(file_exists($cached_page_path)){
       ob_start();
    }
 }
+
 
 require_once "templates/oben.php";
 content();
