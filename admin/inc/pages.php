@@ -16,6 +16,15 @@ function filter_by_language(element){
      location.replace("index.php?action=pages&filter_language=" + element.options[index].value)
    }
 }
+
+function filter_by_status(element){
+   var index = element.selectedIndex
+   if(element.options[index].value != ""){
+     location.replace("index.php?action=pages&filter_status=" + element.options[index].value)
+   }
+}
+
+
 </script>
 
 Nach Sprache filtern: 
@@ -24,8 +33,11 @@ Nach Sprache filtern:
 <?php 
 if(!empty($_GET["filter_language"])){
    $_SESSION["filter_language"] = $_GET["filter_language"];
-}else{
-   
+}
+
+
+if(!empty($_GET["filter_status"])){
+   $_SESSION["filter_status"] = $_GET["filter_status"];
 }
 
 $languages = getAllLanguages();
@@ -38,6 +50,17 @@ for($j=0; $j<count($languages); $j++ ){
 
 
 }?>
+</select>
+&nbsp;&nbsp;
+Status: <select name="filter_status" onchange="filter_by_status(this)">
+<option value="Standard" <?php 
+if($_SESSION["filter_status"] == "standard"){
+echo " selected";
+}?>>Standard</option>
+<option value="trash" <?php 
+if($_SESSION["filter_status"] == "trash"){
+echo " selected";
+}?>>Papierkorb</option>
 </select>
 <br/><br/>
 
@@ -57,6 +80,7 @@ for($j=0; $j<count($languages); $j++ ){
 <?php 
 $order = basename($_GET["order"]);
 $filter_language = basename($_GET["filter_language"]);
+$filter_status = basename($_GET["filter_status"]);
 
 if(empty($filter_language)){
   if(!empty($_SESSION["filter_language"])){
@@ -66,6 +90,17 @@ if(empty($filter_language)){
      $filter_language = "";
   }
 }
+
+ 
+    if($_SESSION["filter_status"] == "trash"){
+      $filter_status = "`deleted_at` IS NOT NULL";
+    }
+    else{
+      $filter_status = "`deleted_at` IS NULL";    
+    }
+    
+
+
 
 
 if(empty($order)){
@@ -78,7 +113,15 @@ if(!empty($filter_language)){
    $filter_sql = "";
 }
 
-$query = mysql_query("SELECT * FROM ".tbname("content")." ".$filter_sql."ORDER BY $order,position, systemname ASC");
+if(strlen($filter_sql) > 2)
+   $filter_sql.= " AND ";
+   
+$filter_sql .= $filter_status." ";
+
+
+
+
+$query = mysql_query("SELECT * FROM ".tbname("content")." ".$filter_sql."ORDER BY $order,position, systemname ASC") or die(mysql_error());
 if(mysql_num_rows($query)>0){
    while($row=mysql_fetch_object($query)){
 ?>
