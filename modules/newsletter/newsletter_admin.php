@@ -24,7 +24,7 @@ function newsletter_admin(){
 <?php
 if($_GET["newsletter_action"] == "show_subscribers"){
    $query = mysql_query("SELECT * FROM ".tbname("newsletter_subscribers"). " ORDER by email");
-   echo "<p>Dieser Newsletter wurde ".mysql_num_rows($query). "x abonniert";
+   echo "<p>Dieser Newsletter wurde ".mysql_num_rows($query). "x abonniert.";
    if(mysql_num_rows($query) > 0){
      
      echo "<table border=1>";
