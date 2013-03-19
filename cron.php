@@ -13,6 +13,7 @@ mysql_query("DELETE FROM ".tbname("content")." WHERE ".time()." -  `deleted_at` 
 
 // Cronjobs der Module
 $modules = getAllModules();
+
 for($i=0; $i < count($modules); $i++){
   $currentModule = $modules[$i];
   $cronjob_file = getModulePath($currentModule).$currentModule."_cron.php";
