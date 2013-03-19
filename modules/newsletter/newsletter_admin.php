@@ -4,7 +4,7 @@ define("MODULE_ADMIN_HEADLINE", "Newsletter versenden");
 $required_permission = getconfig("newsletter_required_permission");
 
 if($required_permission === false){
-   $required_permission = 20;
+   $required_permission = 40;
 }
 
 define("MODULE_ADMIN_REQUIRED_PERMISSION", $required_permission);
@@ -19,7 +19,8 @@ function newsletter_admin(){
 
 ?>
 <a href="<?php echo getModuleAdminSelfPath()?>&newsletter_action=send_newsletter">Newsletter senden</a> | 
-<a href="<?php echo getModuleAdminSelfPath()?>&newsletter_action=show_subscribers">Abonnenten anzeigen</a>
+<a href="<?php echo getModuleAdminSelfPath()?>&newsletter_action=show_subscribers">Abonnenten anzeigen</a> | 
+<a href="<?php echo getModuleAdminSelfPath()?>&newsletter_action=edit_template">Vorlage bearbeiten</a>
 <br/>
 <?php
 if($_GET["newsletter_action"] == "show_subscribers"){
