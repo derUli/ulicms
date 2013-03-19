@@ -12,6 +12,9 @@ function newsletter_do_install(){
   `email` varchar(255) NOT NULL,
   `subscribe_date` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1;");
+  
+  setconfig("newsletter_template_title", "Titel");
+  setconfig("newsletter_template_content", "<p>Fügen Sie hier Ihren Text ein.</p>");
 
 }
 
