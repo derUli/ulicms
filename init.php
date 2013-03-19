@@ -1,7 +1,5 @@
 <?php
-/* Diese Datei initalisiert die Datenbankverbindung
-   Bitte ab Release 3.0.1 zusätzliche Funktionen nicht mehr direkt in die init.php
-   eintragen sondern in die functions.php
+/* Diese Datei initalisiert das System
 */
 require_once "workaround.php";
         
@@ -147,7 +145,5 @@ if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
 
 include 'cron.php';
 
-                           
-@include "functions.php";
 
 ?>
