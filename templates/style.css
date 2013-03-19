@@ -106,7 +106,7 @@ float:left;
 margin-right:20px;
 }
 
-.navbar_down ul li{
+.navbar_bottom ul li{
 float:left;
 margin-right:20px;
 }
@@ -149,13 +149,13 @@ background-color:rgb(230, 230, 230);
 padding:5px;
 }
 
-.navbar_down{
+.navbar_bottom{
 margin:auto;
 margin-left:10px;
 margin-right:10px
 }
 
-div.navbar_top, div.navbar_down{
+div.navbar_top, div.navbar_bottom{
 color:rgb(255, 128, 0);
 }
 
@@ -167,17 +167,17 @@ font-size:13pt;
 font-family: Courier, "Courier New", monospace;
 }
 
-.navbar_down ul li a{
+.navbar_bottom ul li a{
 margin-right:10px;
 }
 
-.navbar_down ul li a, .navbar_down ul li a:visited{
+.navbar_bottom ul li a, .navbar_bottom ul li a:visited{
 color:rgb(0, 128, 192);
 font-weight:normal;
 text-decoration:none;
 }     
 
-.navbar_down ul li a:hover{
+.navbar_bottom ul li a:hover{
 color:rgb(0, 128, 192);
 font-weight:bold;
 text-decoration:none;

@@ -91,7 +91,7 @@ switch($row->menu){
 case "top":
 echo "<td>Oben</td>";
 break;
-case "down":
+case "bottom":
 echo "<td>Unten</td>";
 break;
 case "left":

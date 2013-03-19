@@ -8,8 +8,8 @@
 </div>
 <hr>
 
-<div class="navbar_down">
-<?php menu("down")?>
+<div class="navbar_bottom">
+<?php menu("bottom")?>
 </div>
 <div class="clear">
 </div>

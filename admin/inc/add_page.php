@@ -48,7 +48,7 @@ for($j=0; $j<count($languages); $j++ ){
 <strong data-tooltip="In welchem Menü soll diese Seite angezeigt werden?">Menü:</strong><br/>
 <select name="menu" size=1>
 <option value="top">Oben</option>
-<option value="down">Unten</option>
+<option value="bottom">Unten</option>
 <option value="left">Links</option>
 <option value="right">Rechts</option>
 <option value="none">Nicht im Menü</option>
