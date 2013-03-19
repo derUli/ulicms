@@ -33,12 +33,21 @@ if(isset($_GET["clear_cache"])){
 }
 
 
-if($_GET["action"]=="pages_delete" && $_SESSION["group"]>=40){
-  $page = mysql_real_escape_string($_GET["page"]);
+if($_GET["action"] == "undelete_page" && $_SESSION["group"]>=40){
+  $page = intval($_GET["page"]);
+  mysql_query("UPDATE ".tbname("content"). " SET `deleted_at` = NULL".
+  " WHERE id=$page");
+  header("Location: index.php?action=pages");
+  exit();
+
+}
+
+if($_GET["action"] == "pages_delete" && $_SESSION["group"]>=40){
+  $page = intval($_GET["page"]);
   mysql_query("UPDATE ".tbname("content"). " SET `deleted_at` = ".time().
   " WHERE id=$page");
   header("Location: index.php?action=pages");
-exit();
+  exit();
 }
 
 if($_GET["action"] == "spam_filter" and

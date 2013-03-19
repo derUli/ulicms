@@ -122,6 +122,8 @@ if(!empty($filter_language)){
 
 if(strlen($filter_sql) > 2)
    $filter_sql.= " AND ";
+else
+   $filter_sql.= " WHERE ";
    
 $filter_sql .= $filter_status." ";
 
