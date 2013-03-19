@@ -72,15 +72,14 @@ echo " selected";
 <td><a href="?action=pages&order=position">Position</a></td>
 <td><a href="?action=pages&order=parent">Übergeordnet</a></td>
 <td><a href="?action=pages&order=active">Aktiviert</a></td>
-<td><a href="?action=pages&order=comments_enabled">Kommentare</a></td>
-<td><span data-tooltip="Die Seite auf der Webpräsenz öffnen">Anzeigen</span></td>
-<td>Bearbeiten</td>
+<td><span data-tooltip="Die Seite auf der Webpräsenz öffnen">&nbsp;</span></td>
+<td>&nbsp;</td>
 
 <td><?php 
 if($_SESSION["filter_status"] == "trash")
-   echo "Wiederherstellen";
+   echo "&nbsp;";
 else 
-   echo "Löschen";
+   echo "&nbsp;";
 
 ?></td>
 </tr>
@@ -167,12 +166,7 @@ else{
 echo "<td>Nein</td>";
 }
 
-if($row->comments_enabled){
-echo "<td>Offen</td>";
-}
-else{
-echo "<td>Geschlossen</td>";
-}
+
 
 echo "<td><a href=\"../?seite=".$row->systemname."\" target=\"_blank\"><img src=\"gfx/preview.gif\">Anzeigen</a></td>";
 echo "<td>".'<a href="index.php?action=pages_edit&page='.$row->id.'"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
