@@ -94,6 +94,13 @@ header("Location: index.php?action=templates&save=false");
 
 }
 
+if($_SESSION["group"] >= 40 and 
+$_GET["action"] == "empty_trash"){
+   mysql_query("DELETE FROM ".tbname("content")." WHERE deleted_at IS NOT NULL");
+   header("Location: index.php?action=pages");
+   exit();
+}
+
 
 if($_GET["action"]=="key_delete" && $_SESSION["group"]>=40){
   $key=intval($_GET["key"]);

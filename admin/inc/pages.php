@@ -62,6 +62,17 @@ if($_SESSION["filter_status"] == "trash"){
 echo " selected";
 }?>>Papierkorb</option>
 </select>
+
+<?php 
+if($_SESSION["filter_status"] == "trash" and 
+$_SESSION["group"] >= 40){
+?>
+
+&nbsp;&nbsp;
+<a href="index.php?action=empty_trash" onclick="return confirm('Papierkorb leeren?');">Papierkorb leeren</a>
+<?php }
+?>
+
 <br/><br/>
 
 <table border=1>
@@ -130,7 +141,7 @@ $filter_sql .= $filter_status." ";
 
 
 $query = mysql_query("SELECT * FROM ".tbname("content")." ".$filter_sql."ORDER BY $order,position, systemname ASC") or die(mysql_error());
-if(mysql_num_rows($query)>0){
+if(mysql_num_rows($query) > 0){
    while($row=mysql_fetch_object($query)){
 ?>
 <?php 
