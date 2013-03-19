@@ -196,20 +196,6 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;");
 
-
-/* mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."news` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(200) NOT NULL,
-  `content` longtext NOT NULL,
-  `date` bigint(20) NOT NULL,
-  `active` tinyint(1) NOT NULL,
-  `autor` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;");
-*/
-
-
-
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   
   `id` int(11) NOT NULL AUTO_INCREMENT,
