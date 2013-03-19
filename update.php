@@ -9,6 +9,8 @@ mysql_query("UPDATE ".tbname("content"). " SET menu='bottom' WHERE menu='down'")
 setconfig("spamfilter_words_blacklist", 
 "Casino||Euro Dice||Bingo||Cialis||Viagra||Penis||Enlargement||Drugstore");
 
+setconfig("empty_trash_days", 30);
+
 
 //@unlink("update.php");
 
