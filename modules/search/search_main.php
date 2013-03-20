@@ -37,12 +37,13 @@ function search_render(){
 		$search_sql_query = 'SELECT * FROM '.tbname("content").' WHERE content LIKE "%'.$search_request.'%" 
 		OR title LIKE "'.$search_request_unencoded.'" OR systemname LIKE "'.$search_request_unencoded.'"';
 		*/
+		
+		// New Serach Query using MySQL-Fulltext
 		$search_sql_query = "SELECT systemname, title FROM ".tbname("content").
 		" WHERE MATCH (systemname, title, content, meta_description, meta_keywords) ".
 		"AGAINST ('".$search_request_unencoded."') ".
 		"";
-		
-		$results = mysql_query($search_sql_query);
+		$results = mysql_query($search_sql_query)or die(mysql_error());
 		$result_count = mysql_num_rows($results);
 		$html_output.= "<p class='search-results'><strong>$result_count</strong> Suchergebnisse gefunden</p>";
 		if($result_count>0){

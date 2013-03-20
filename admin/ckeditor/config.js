@@ -54,3 +54,5 @@ config.toolbar_cms =
 
 	 config.uiColor = '#6b94ac';
 };
+
+CKEDITOR.config.entities_latin = false;
