@@ -11,9 +11,15 @@ function search_render(){
         
 	$html_output = "";
 	
+	if(!empty($_GET["q"])){
+          $search_subject = htmlspecialchars($_GET["q"]);
+	} else{
+	  $search_subject = "";
+	}
+	
 	$html_output .= "<form class='search-form' action='./' method='get'>
 	<input type='hidden' name='seite' value='".get_requested_pagename()."'>
-	Suchbegriff: <input type='text' name='q' value=''> <input type='submit' value='Suchen'>
+	Suchbegriff: <input type='text' name='q' value='".$search_subject."'> <input type='submit' value='Suchen'>
 	</form>
 	";
 	
