@@ -20,7 +20,6 @@ else if(empty($_GET["edit"])){
 <p><a href="index.php?action=templates&edit=unten.php">Unten</a></p>
 <!-- <p><a href="index.php?action=templates&edit=news.txt">News</a></p> !-->
 <p><a href="index.php?action=templates&edit=maintenance.php">Wartungsmodus</a></p>
-<hr/>
 <p><a href="index.php?action=templates&edit=style.css">Stylesheet</a></p>
 
 <?php }else if (!empty($_GET["edit"])){
