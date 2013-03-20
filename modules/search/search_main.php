@@ -1,8 +1,14 @@
 <?php 
 // UliCMS Suchfunktions-Modul
-// Version 0.2
+// Version 0.3
+// Neu: Jetzt indizierte Volltextsuche
+
 
 function search_render(){
+        // check if database has fulltext
+        include getModulePath("search")."search_install.php";
+        search_check_install();
+        
 	$html_output = "";
 	
 	$html_output .= "<form class='search-form' action='./' method='get'>
@@ -26,8 +32,16 @@ function search_render(){
 		$search_request = mysql_real_escape_string($search_request);
 		$search_request_unencoded = mysql_real_escape_string($search_request_unencoded);
 
+
+                /* Old query without fulltext
 		$search_sql_query = 'SELECT * FROM '.tbname("content").' WHERE content LIKE "%'.$search_request.'%" 
 		OR title LIKE "'.$search_request_unencoded.'" OR systemname LIKE "'.$search_request_unencoded.'"';
+		*/
+		$search_sql_query = "SELECT systemname, title FROM ".tbname("content").
+		" WHERE MATCH (systemname, title, content, meta_description, meta_keywords) ".
+		"AGAINST ('".$search_request_unencoded."') ".
+		"";
+		
 		$results = mysql_query($search_sql_query);
 		$result_count = mysql_num_rows($results);
 		$html_output.= "<p class='search-results'><strong>$result_count</strong> Suchergebnisse gefunden</p>";

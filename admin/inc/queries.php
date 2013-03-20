@@ -111,6 +111,8 @@ if($_GET["action"]=="key_delete" && $_SESSION["group"]>=40){
 
 if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $_SESSION["group"]>=50){
   mysql_query("DELETE FROM ".tbname("languages"). " WHERE id = ".intval($_GET["delete"]));
+  
+  
 }
 
 if($_GET["action"] == "languages" and !empty($_GET["default"]) and $_SESSION["group"]>=50){
