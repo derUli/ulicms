@@ -43,7 +43,7 @@ function search_render(){
 		" WHERE MATCH (systemname, title, content, meta_description, meta_keywords) ".
 		"AGAINST ('".$search_request_unencoded."') ".
 		"";
-		$results = mysql_query($search_sql_query)or die(mysql_error());
+		$results = mysql_query($search_sql_query);
 		$result_count = mysql_num_rows($results);
 		$html_output.= "<p class='search-results'><strong>$result_count</strong> Suchergebnisse gefunden</p>";
 		if($result_count>0){
