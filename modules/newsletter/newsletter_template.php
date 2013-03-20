@@ -1,4 +1,21 @@
 <?php 
+
+
+if(defined(MODULE_ADMIN_REQUIRED_PERMISSION)){
+  if($_SESSION["group"] < MODULE_ADMIN_REQUIRED_PERMISSION){
+    die("Fuck you!");
+  }
+
+}
+
+if(isset($_POST["submit"])){
+  setconfig("newsletter_template_title", 
+  $_POST["template_title"]);
+  setconfig("newsletter_template_content", 
+  $_POST["template_content"]);
+  
+}
+
 define("NEWSLETTER_TEMPLATE_TITLE", getconfig("newsletter_template_title"));
 define("NEWSLETTER_TEMPLATE_CONTENT", getconfig("newsletter_template_content"));
 
