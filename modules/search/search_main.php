@@ -12,7 +12,8 @@ function search_render(){
 	$html_output = "";
 	
 	if(!empty($_GET["q"])){
-          $search_subject = htmlspecialchars($_GET["q"]);
+          $search_subject = htmlspecialchars($_GET["q"], 
+          ENT_QUOTES);
 	} else{
 	  $search_subject = "";
 	}
