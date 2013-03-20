@@ -48,6 +48,10 @@ if($_GET["newsletter_action"] == "show_subscribers"){
    
    
    }
+} 
+else if($_GET["newsletter_action"] == "edit_template"){
+    include getModulePath("newsletter")."newsletter_template.php";
+
 }
 }
  
