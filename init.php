@@ -92,7 +92,7 @@ $error_reporting = getconfig("error_reporting");
 
 
 if($error_reporting === false){
-   $error_reporting = 30711;
+   $error_reporting = E_ALL ^ E_NOTICE ^ E_STRICT;
    setconfig("error_reporting", $error_reporting);
 }
 
