@@ -1,5 +1,5 @@
 <?php
-define("MODULE_ADMIN_HEADLINE", "Automatisches Sicherung der MySQL-Datenbank");
+define("MODULE_ADMIN_HEADLINE", "Automatische Sicherung der MySQL-Datenbank");
 
 $required_permission = getconfig("mysql_backup_required_permission");
 
