@@ -77,7 +77,7 @@ else if($difference >= $backup_interval){
    "Bitte prüfen Sie, ob der Ordner backup/ existiert und dieser für den Webserver beschreibbar ist (chmod 0755 oder höher).\n".
    "Der Safe Mode von PHP darf nicht aktiviert sein.\n".
    "Außerdem muss der PHP-User die Funktion shell_exec() ausführen dürfen.\n\n".
-   "-------------------------------------------------\n".
+   "___________\n".
    "Diese Mail wurde automatisch versandt vom mysql_backup Modul.";
    
    $headers = "From: $email_adress\n".
