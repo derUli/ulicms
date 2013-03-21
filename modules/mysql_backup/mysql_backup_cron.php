@@ -39,6 +39,7 @@ $backup_file = path_to_backup_dir()."dump-" . date('d.m.Y');
 
 
 $allowed = func_enabled("shell_exec");
+$allowed = $allowed["s"] === 1 && !ini_get('safe_mode');
 
 
 $tmpfile = path_to_backup_dir().uniqid();
@@ -51,7 +52,7 @@ if($writable){
 
 
 
-if($difference >= $backup_interval and $allowed["s"] === 1 and $writable){
+if($difference >= $backup_interval and $allowed and $writable){
    // set last backup time to current
 
    @ignore_user_abort(1); // run script in background 
@@ -74,6 +75,7 @@ else if($difference >= $backup_interval){
    $text = "Das automatische Backup der MySQL Datenbank auf ".$_SERVER["SERVER_NAME"].
    " am ".date("d.m.Y"). " ist fehlgeschlagen.\n".
    "Bitte prüfen Sie, ob der Ordner backup/ existiert und dieser für den Webserver beschreibbar ist (chmod 0755 oder höher).\n".
+   "Der Safe Mode von PHP darf nicht aktiviert sein.\n".
    "Außerdem muss der PHP-User die Funktion shell_exec() ausführen dürfen.\n\n".
    "-------------------------------------------------\n".
    "Diese Mail wurde automatisch versandt vom mysql_backup Modul.";
