@@ -20,7 +20,7 @@ function mysql_backup_check_install(){
    else 
    {
    $mod = substr(decoct(fileperms($path_to_backup_dir)), 2);
-   if($mod < 755){
+   if(intval($mod) < 755){
       @chmod($path_to_backup_dir, 0777);
    }
    
