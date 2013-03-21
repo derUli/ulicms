@@ -51,9 +51,34 @@ if($difference >= $backup_interval and $allowed["s"] and $writable){
    exec("gzip ".$backup_file. ".sql");
    setconfig("mysql_backup_last_time", time());
 
-} else {
-// Administrator per E-Mail benachrichtigen
+} 
+ // Backup schlägt fehl.
+else if($difference >= $backup_interval){
+   
+   
+   setconfig("mysql_backup_last_time", time());
+   
+   // Administrator per E-Mail benachrichtigen
+   $email_adress = getconfig("email");
+   $subject = "Automatisches MySQL-Backup fehlgeschlagen";
+   $text = "Das automatische Backup der MySQL Datenbank auf ".$_SERVER["SERVER_NAME"].
+   " am ".date("d.m.Y"). " ist fehlgeschlagen.\n".
+   "Bitte prüfen Sie, ob der Ordner backup/ existiert und dieser für den Webserver beschreibbar ist (chmod 0755 oder höher).\n".
+   "Außerdem muss der PHP-User die Funktion exec() ausführen dürfen.\n\n".
+   "-------------------------------------------------\n".
+   "Diese Mail wurde automatisch versandt vom mysql_backup Modul.";
+   
+   $headers = "From: $$email_adress\n".
+   "Content-type: text/plain; charset=UTF-8\n".
+   "X-Mailer: PHP/".phpversion();
+   
+   @mail($email_adress, $subject, $text, $email_adress);
+   
+
 }
+
+
+
 
 error_reporting(getconfig("error_reporting"));
 
