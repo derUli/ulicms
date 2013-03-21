@@ -39,7 +39,6 @@ $backup_file = path_to_backup_dir()."dump-" . date('Ymd_g_i');
 $allowed = func_enabled("exec");
 $writable = fileperms(path_to_backup_dir()) >= 0755;
 
-
 if($difference >= $backup_interval and $allowed["s"] and $writable){
    // set last backup time to current
 

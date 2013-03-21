@@ -1,8 +1,6 @@
 <?php 
 
 function mysql_backup_check_install(){
-
-
   if(getconfig("mysql_backup_every_days") === false){
      // Standardeinstellung, Backup alle 7 Tage
      $mysql_Backup_every_days_default = 7;
@@ -26,8 +24,7 @@ function mysql_backup_check_install(){
       $htaccess_file = $path_to_backup_dir.".htaccess";
       if(!file_exists($htaccess_file)){
          $handle = fopen( $htaccess_file, "w");
-         fwrite($handle, "Order deny, allow\n".
-                         "Deny from all");
+         fwrite($handle, "Deny from all");
          fclose($handle);
                                           
       }
