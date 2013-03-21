@@ -10,7 +10,7 @@ $query = mysql_query("SELECT * FROM ".tbname("admins")." ORDER BY $order",$conne
 if(mysql_num_rows($query)){
 ?>
 <h2>Benutzer</h2>
-<p>Hier können Sie die Administratoren Ihrer Homepage verwalten und die Passwörter ändern.
+<p>Hier können Sie die Benutzer Ihrer Homepage verwalten und die Passwörter ändern.
 <br/><br/>
 <a href="index.php?action=admin_new">Benutzer anlegen</a>
 <br/>
