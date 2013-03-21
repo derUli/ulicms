@@ -18,7 +18,12 @@ function mysql_backup_check_install(){
       @mkdir($path_to_backup_dir, 0777);
       
    }
- 
+
+   if(file_exists($path_to_backup_dir) and fileperms($path_to_backup_dir) < 0755){
+   @chmod($path_to_backup_dir, 0777);
+       
+   }
+   
    
    if(file_exists($path_to_backup_dir) and fileperms($path_to_backup_dir) >= 0755){
       $htaccess_file = $path_to_backup_dir.".htaccess";
