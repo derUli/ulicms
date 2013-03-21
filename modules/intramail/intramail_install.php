@@ -12,7 +12,7 @@ function intramail_install(){
 `subject` VARCHAR( 78 ) NOT NULL ,
 `message` LONGTEXT NOT NULL ,
 `date` BIGINT NOT NULL
-) ENGINE = MYISAM ;
+) ENGINE = MYISAM DEFAULT CHARSET=utf8;
 ");
   
   mysql_query("ALTER TABLE `".tbname("messages").
