@@ -1,5 +1,5 @@
 <?php 
-define("MODULE_ADMIN_HEADLINE", "Newsletter versenden");
+define("MODULE_ADMIN_HEADLINE", "Newsletter");
 
 $required_permission = getconfig("newsletter_required_permission");
 
