@@ -43,7 +43,7 @@ $allowed = $allowed["s"] === 1 && !ini_get('safe_mode');
 
 
 $tmpfile = path_to_backup_dir().uniqid();
-$writable = file_put_contents($tmpfile, 
+$writable = @file_put_contents($tmpfile, 
 "test") !== false;
 
 if($writable){

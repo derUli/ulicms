@@ -29,7 +29,7 @@ function mysql_backup_check_install(){
 
    
    $tmpfile = path_to_backup_dir().uniqid();
-   $writable = file_put_contents($tmpfile, 
+   $writable = @file_put_contents($tmpfile, 
 "test") !== false;
 
    if($writable)
