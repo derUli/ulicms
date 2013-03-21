@@ -260,9 +260,18 @@ function containsModule($page){
    
 }
 
+
 // Ist der User eingeloggt
 function is_logged_in(){
    return isset($_SESSION["group"]);
+}
+
+// Hat der Nutzer die notwendige Berechtigung
+function has_permissions($mod){
+   if(!isset($_SESSION["group"]))
+      return false;
+   
+   return $_SESSION["group"] >= $mod;
 }
 
 // Alias für is_logged_in
