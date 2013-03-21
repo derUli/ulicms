@@ -260,8 +260,17 @@ function containsModule($page){
    
 }
 
+// Ist der User eingeloggt
+function is_logged_in(){
+   return isset($_SESSION["group"]);
+}
 
+// Alias für is_logged_in
+function logged_in(){
+   return is_logged_in();
+}
 
+// Tabellenname zusammensetzen
 function tbname($name){
   require_once "cms-config.php";
   $config = new config();
