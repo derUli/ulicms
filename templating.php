@@ -510,8 +510,8 @@ echo "\r\n";
 
 
 function autor(){
-	$connection=MYSQL_CONNECTION;
-	$seite=$_GET["seite"];
+	$connection = MYSQL_CONNECTION;
+	$seite = $_GET["seite"];
 	if(empty($seite)){
 		$query = mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
 		$result = mysql_fetch_object($query);

@@ -205,6 +205,13 @@ function file_extension($filename) {
 	return end(explode(".", $filename));
 }
 
+// Remove an configuration variable
+function deleteconfig($key){
+   $key = mysql_real_escape_string($key);
+   mysql_query("DELETE FROM ".tbname("settings").
+               " WHERE name='$key'");
+   return mysql_affected_rows() > 0;
+}
 
 //Set a configuration Variable;
 function setconfig($key, $value){

@@ -103,8 +103,7 @@ $_GET["action"] == "empty_trash"){
 
 
 if($_GET["action"]=="key_delete" && $_SESSION["group"]>=40){
-  $key=intval($_GET["key"]);
-  $query=mysql_query("DELETE FROM ".tbname("settings")." WHERE id='$key'",$connection);
+  deleteconfig($_GET["key"]);
   header("Location: index.php?action=settings");
   exit();
 }
