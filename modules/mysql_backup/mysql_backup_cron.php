@@ -58,8 +58,8 @@ if($difference >= $backup_interval and $allowed["s"] === 1 and $writable){
    @set_time_limit(0); // run script forever 
    
    // Save Dump
-   echo shell_exec("mysqldump -u $mysql_user -p$mysql_password --add-drop-table $mysql_database > $backup_file.sql");
-   echo shell_exec("gzip ".$backup_file. ".sql");
+   shell_exec("mysqldump -u $mysql_user -p$mysql_password --add-drop-table $mysql_database > $backup_file.sql");
+   shell_exec("gzip ".$backup_file. ".sql");
    setconfig("mysql_backup_last_time", time());
 
 } 
