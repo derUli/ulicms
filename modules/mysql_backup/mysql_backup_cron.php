@@ -38,20 +38,28 @@ $mysql_database = $config->mysql_database;
 $backup_file = path_to_backup_dir()."dump-" . date('Ymd_g_i'); 
 
 
-$allowed = func_enabled("exec");
-//$writable = substr(decoct(fileperms($path_to_backup_dir)), 2) >= 755;
+$allowed = func_enabled("shell_exec");
 
-$writable = is__writable($path_to_backup_dir."test.tmp");
 
-if($difference >= $backup_interval and $allowed["s"] and $writable){
+$tmpfile = path_to_backup_dir().uniqid();
+$writable = file_put_contents($tmpfile, 
+"test") !== false;
+
+if($writable){
+   @unlink($tmpfile);
+}
+
+
+
+if($difference >= $backup_interval and $allowed["s"] === 1 and $writable){
    // set last backup time to current
 
    @ignore_user_abort(1); // run script in background 
    @set_time_limit(0); // run script forever 
    
    // Save Dump
-   exec("mysqldump -u $mysql_user -p$mysql_password --add-drop-table $mysql_database > $backup_file.sql");
-   exec("gzip ".$backup_file. ".sql");
+   echo shell_exec("mysqldump -u $mysql_user -p$mysql_password --add-drop-table $mysql_database > $backup_file.sql");
+   echo shell_exec("gzip ".$backup_file. ".sql");
    setconfig("mysql_backup_last_time", time());
 
 } 
@@ -66,7 +74,7 @@ else if($difference >= $backup_interval){
    $text = "Das automatische Backup der MySQL Datenbank auf ".$_SERVER["SERVER_NAME"].
    " am ".date("d.m.Y"). " ist fehlgeschlagen.\n".
    "Bitte prüfen Sie, ob der Ordner backup/ existiert und dieser für den Webserver beschreibbar ist (chmod 0755 oder höher).\n".
-   "Außerdem muss der PHP-User die Funktion exec() ausführen dürfen.\n\n".
+   "Außerdem muss der PHP-User die Funktion shell_exec() ausführen dürfen.\n\n".
    "-------------------------------------------------\n".
    "Diese Mail wurde automatisch versandt vom mysql_backup Modul.";
    
