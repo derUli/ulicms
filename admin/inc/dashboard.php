@@ -73,7 +73,7 @@ $motd = nl2br($motd);
 <?php }?>
 </ul>
 
-<p>Die meistgelesenen Artikel sind:
+<p>Die meistgelesenen Seiten sind:
 <table cellpadding="2" border=0>
 <tr style="font-weight:bold;">
 <td>Titel</td>
