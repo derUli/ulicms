@@ -1,8 +1,10 @@
 <?php 
-include getModulePath("mysql_backup")."mysql_backup_install.php";
-mysql_backup_check_install();
 
 error_reporting(E_ALL ^ E_NOTICE ^ E_STRICT);
+
+include_once getModulePath("mysql_backup")."mysql_backup_install.php";
+mysql_backup_check_install();
+
 
 if(!function_exists("func_enabled")){
   function func_enabled($func) {
@@ -37,7 +39,9 @@ $backup_file = path_to_backup_dir()."dump-" . date('Ymd_g_i');
 
 
 $allowed = func_enabled("exec");
-$writable = fileperms(path_to_backup_dir()) >= 0755;
+//$writable = substr(decoct(fileperms($path_to_backup_dir)), 2) >= 755;
+
+$writable = is__writable($path_to_backup_dir."test.tmp");
 
 if($difference >= $backup_interval and $allowed["s"] and $writable){
    // set last backup time to current
@@ -66,11 +70,11 @@ else if($difference >= $backup_interval){
    "-------------------------------------------------\n".
    "Diese Mail wurde automatisch versandt vom mysql_backup Modul.";
    
-   $headers = "From: $$email_adress\n".
+   $headers = "From: $email_adress\n".
    "Content-type: text/plain; charset=UTF-8\n".
    "X-Mailer: PHP/".phpversion();
    
-   @mail($email_adress, $subject, $text, $email_adress);
+   @mail($email_adress, $subject, $text, $headers);
    
 
 }
