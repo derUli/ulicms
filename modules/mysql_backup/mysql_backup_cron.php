@@ -35,7 +35,7 @@ $config = new config();
 $mysql_user = $config->mysql_user;
 $mysql_password = $config->mysql_password;
 $mysql_database = $config->mysql_database;
-$backup_file = path_to_backup_dir()."dump-" . date('d.m.Y'); 
+$backup_file = path_to_backup_dir()."dump-" . date('Y-m-d'); 
 
 
 $allowed = func_enabled("shell_exec");
