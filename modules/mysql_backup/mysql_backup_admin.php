@@ -27,6 +27,7 @@ if(isset($_POST["mysql_backup_every_days"])){
 if(isset($_POST["backup_now"])){
    setconfig("mysql_backup_last_time", 0);
    include_once getModulePath("mysql_backup").'mysql_backup_cron.php';
+   setconfig("mysql_backup_last_time", time());
    echo "<span style='color:green;'>".
    "Die Sicherung wurde durchgeführt!".
    "</span>".

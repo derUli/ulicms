@@ -66,7 +66,6 @@ if($difference >= $backup_interval and $allowed and $writable){
 } 
  // Backup schlägt fehl.
 else if($difference >= $backup_interval){
-   
    setconfig("mysql_backup_last_time", time());
    
    // Administrator per E-Mail benachrichtigen
