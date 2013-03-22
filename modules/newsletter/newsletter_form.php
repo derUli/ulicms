@@ -49,7 +49,7 @@ if(isset($_POST["submit"])){
    if($send_to == "ALL")
       $subscribers = getSubscribers();
    else
-      $subscribers = $send_to;
+      $subscribers = array($send_to);
    $_SESSION["newsletter_data"]["newsletter_receivers"] = $subscribers;
    $_SESSION["newsletter_data"]["newsletter_remaining"] = count($subscribers);
    
