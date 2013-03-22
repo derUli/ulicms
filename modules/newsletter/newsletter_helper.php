@@ -107,10 +107,12 @@ function send_loop(){
         }
         
         
+    } else {
+      echo "<p>Nichts zu tun.</p>";
     }
 
 
-} // Funktion zu
+} 
 
 
 ?>
