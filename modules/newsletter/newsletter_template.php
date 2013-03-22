@@ -18,7 +18,6 @@ if(isset($_POST["submit"])){
   unset($_SESSION["newsletter_data"]);
   
   if(strlen(getconfig("newsletter_template_content")) < strlen($unencoded)){
-     echo "change";
      mysql_query("alter table ".tbname("settings")." change value value TEXT;");
      setconfig("newsletter_template_content", 
   mysql_real_escape_string($_POST["template_content"]));
