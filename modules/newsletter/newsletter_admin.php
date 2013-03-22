@@ -53,6 +53,10 @@ else if($_GET["newsletter_action"] == "edit_template"){
     include getModulePath("newsletter")."newsletter_template.php";
 
 }
+else if($_GET["newsletter_action"] == "send_newsletter"){
+   include getModulePath("newsletter")."newsletter_form.php";
+
+}
 }
  
 ?>
