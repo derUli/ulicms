@@ -48,6 +48,6 @@ echo $email;
 <input name="send_to" type="radio" value="ALL"> An alle Abonnenten
 </p>
 <p>
-<input type="submit" name="submit" value="Newsletter abschicken">
+<input type="submit" name="submit" value="Newsletter vorbereiten">
 </p>
 </form>

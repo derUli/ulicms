@@ -14,6 +14,17 @@ define("DATE_FORMAT", getconfig("date_format"));
 include getModulePath("newsletter")."newsletter_install.php";
 newsletter_check_install();
 
+if(!isset($_SESSION["newsletter_data"])){
+   $_SESSION["newsletter_data"] = array(
+   "newsletter_receivers"    => array(),
+   "newsletter_remaining" => 0,
+   "newsletter_text" => "",
+   "newsletter_subject" => ""
+   );
+}
+
+
+
 
 function newsletter_admin(){
 
