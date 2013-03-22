@@ -82,6 +82,10 @@ else if($_GET["newsletter_action"] == "prepare_newsletter"){
    include getModulePath("newsletter")."newsletter_form.php";
 
 }
+else if($_GET["newsletter_action"] == "send_it"){
+   include getModulePath("newsletter")."send_it.php";
+
+}
 }
  
 ?>

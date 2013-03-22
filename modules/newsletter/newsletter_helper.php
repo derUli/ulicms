@@ -56,4 +56,48 @@ function send_html_mail($mail_from, $mail_to,
 }
 
 
+function send_loop(){
+    define("ADMIN_EMAIL", getconfig("email"));
+    
+    if($_SESSION["newsletter_data"]["newsletter_remaining"] > 0){
+        for($i=0; $i < count($_SESSION["newsletter_data"]["newsletter_receivers"]); $i++){
+           
+           if(!empty($_SESSION["newsletter_data"]["newsletter_receivers"][$i])){
+              $sent = send_html_mail(ADMIN_EMAIL, 
+                   $_SESSION["newsletter_data"]["newsletter_receivers"][$i],
+                   $_SESSION["newsletter_data"]["newsletter_title"],
+                   $_SESSION["newsletter_data"]["newsletter_text"]);
+                   
+              echo "Newsletter an ".
+                 $_SESSION["newsletter_data"]["newsletter_receivers"][$i]." senden ";
+                   
+                   
+                   
+              if($sent){
+                 $_SESSION["newsletter_data"]["newsletter_remaining"]--;
+                 $_SESSION["newsletter_data"]["newsletter_receivers"][$i] = 0;
+                 echo '<span style="color:green">[Erfolgreich]</span>';
+              } else {
+                 echo '<span style="color:red">[Fehlgeschlagen]</span>';              
+              }
+           }
+           
+         
+        
+        
+           if($_SESSION["newsletter_data"]["newsletter_remaining"] < 1) 
+              echo "<br/>Fertig.";
+              return;       
+           
+       
+        }
+        
+        echo "<br/>";
+        
+    }
+
+
+}
+
+
 ?>
