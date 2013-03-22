@@ -146,7 +146,9 @@ $session_timeout = 60 * getconfig("session_timeout");
 if(isset($_SESSION["session_begin"])){
    if(time() - $_SESSION["session_begin"] > $session_timeout)
    {
-    session_destroy();   
+    session_destroy();
+    header("Location: ./");
+    exit();
    }
    else{
       $_SESSION["session_begin"] = time();
