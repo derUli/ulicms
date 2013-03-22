@@ -7,6 +7,10 @@ if($required_permission === false){
    $required_permission = 40;
 }
 
+
+define("NEWSLETTER_TEMPLATE_TITLE", getconfig("newsletter_template_title"));
+define("NEWSLETTER_TEMPLATE_CONTENT", getconfig("newsletter_template_content"));
+
 define("MODULE_ADMIN_REQUIRED_PERMISSION", $required_permission);
 
 define("DATE_FORMAT", getconfig("date_format"));
@@ -14,12 +18,16 @@ define("DATE_FORMAT", getconfig("date_format"));
 include getModulePath("newsletter")."newsletter_install.php";
 newsletter_check_install();
 
+
+include getModulePath("newsletter")."newsletter_helper.php";
+
+
 if(!isset($_SESSION["newsletter_data"])){
    $_SESSION["newsletter_data"] = array(
    "newsletter_receivers"    => array(),
    "newsletter_remaining" => 0,
-   "newsletter_text" => "",
-   "newsletter_subject" => ""
+   "newsletter_text" => NEWSLETTER_TEMPLATE_CONTENT,
+   "newsletter_subject" => NEWSLETTER_TEMPLATE_TITLE
    );
 }
 

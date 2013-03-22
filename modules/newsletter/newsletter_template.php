@@ -19,6 +19,8 @@ if(isset($_POST["submit"])){
 define("NEWSLETTER_TEMPLATE_TITLE", getconfig("newsletter_template_title"));
 define("NEWSLETTER_TEMPLATE_CONTENT", getconfig("newsletter_template_content"));
 
+unset($_SESSION["newsletter_data"]);
+
 ?>
 
 <h3>Vorlage</h3>

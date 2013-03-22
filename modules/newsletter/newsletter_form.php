@@ -8,21 +8,52 @@ if(defined(MODULE_ADMIN_REQUIRED_PERMISSION)){
 }
 
 
-define("NEWSLETTER_TEMPLATE_TITLE", getconfig("newsletter_template_title"));
-define("NEWSLETTER_TEMPLATE_CONTENT", getconfig("newsletter_template_content"));
+if(isset($_POST["submit"])){
+   $_SESSION["newsletter_data"]["newsletter_text"] =
+   $_POST["newsletter_text"];
+   
+   $servername = $_SERVER["SERVER_NAME"];
+   
+   if($_SERVER['HTTPS'])
+     $url = "https://";
+   else
+     $url = "http://";
+     
+   $url .= $servername;
+   
+   // Replace Relative URLs
+   $_SESSION["newsletter_data"]["newsletter_text"] = 
+   str_replace("<a href=\"/", "<a href=\"$url/", 
+   $_SESSION["newsletter_data"]["newsletter_text"]);
+   
+   $_SESSION["newsletter_data"]["newsletter_text"] = 
+   str_replace("<a href='/", "<a href='$url/", 
+   $_SESSION["newsletter_data"]["newsletter_text"]);
+   
+   $_SESSION["newsletter_data"]["newsletter_text"] = 
+   str_replace(" src=\"/", " src=\"$url/", 
+   $_SESSION["newsletter_data"]["newsletter_text"]);
+   
+ 
+   
+   $_SESSION["newsletter_data"]["newsletter_title"] =
+   $_POST["newsletter_title"];
+   
+}
+
 
 $user = getUserById($_SESSION["login_id"]);
 $email = $user["email"];
 
 ?>
-<h3>Newsletter senden</h3>
+<h3>Newsletter vorbereiten</h3>
 <form method="post" action="<?php echo getModuleAdminSelfPath()?>">
-<p><strong>Titel: </strong><input type="text" maxlength=78 size=78 name="newsletter_title" value="<?php echo htmlspecialchars(NEWSLETTER_TEMPLATE_TITLE)?>"></p>
+<p><strong>Titel: </strong><input type="text" maxlength=78 size=78 name="newsletter_title" value="<?php echo htmlspecialchars($_SESSION["newsletter_data"]["newsletter_title"])?>"></p>
 
 
 <p>
 <textarea id="newsletter_text" name="newsletter_text" cols=60 rows=16><?php 
-echo htmlspecialchars(NEWSLETTER_TEMPLATE_CONTENT);
+echo htmlspecialchars($_SESSION["newsletter_data"]["newsletter_text"]);
 ?></textarea></p>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( 'newsletter_text',
