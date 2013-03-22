@@ -8,19 +8,21 @@ if(defined(MODULE_ADMIN_REQUIRED_PERMISSION)){
 }
 
 if(isset($_POST["submit"])){
+  $unencoded = $_POST["template_content"];
+  
   setconfig("newsletter_template_title", 
   mysql_real_escape_string($_POST["template_title"]));
   setconfig("newsletter_template_content", 
   mysql_real_escape_string($_POST["template_content"]));
   unset($_SESSION["newsletter_data"]);
-  die($_POST["template_content"]);
-  echo '<script type="text/javascript">
-        window.onload= function(){
-          url = window.location.href.toString();
-          window.location.replace(url);
-
-        }
-        </script>';
+  
+  if(strlen(getconfig("newsletter_template_content")) < strlen($unencoded)){
+     echo "change";
+     mysql_query("alter table ".tbname("settings")." change value value TEXT;");
+     setconfig("newsletter_template_content", 
+  mysql_real_escape_string($_POST["template_content"]));
+       
+  }
   
 }
 
