@@ -141,6 +141,7 @@ if(!getconfig("session_timeout")){
 
 $session_timeout = 60 * getconfig("session_timeout");
 
+
 // Session abgelaufen
 if(isset($_SESSION["session_begin"])){
    if(time() - $_SESSION["session_begin"] > $session_timeout)
@@ -148,7 +149,7 @@ if(isset($_SESSION["session_begin"])){
     session_destroy();   
    }
    else{
-      $_SESSION["session_begin"] = time() + $session_timeout;
+      $_SESSION["session_begin"] = time();
    
    }
 }
