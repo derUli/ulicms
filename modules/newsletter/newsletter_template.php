@@ -9,10 +9,18 @@ if(defined(MODULE_ADMIN_REQUIRED_PERMISSION)){
 
 if(isset($_POST["submit"])){
   setconfig("newsletter_template_title", 
-  $_POST["template_title"]);
+  mysql_real_escape_string($_POST["template_title"]));
   setconfig("newsletter_template_content", 
-  $_POST["template_content"]);
+  mysql_real_escape_string($_POST["template_content"]));
   unset($_SESSION["newsletter_data"]);
+  die($_POST["template_content"]);
+  echo '<script type="text/javascript">
+        window.onload= function(){
+          url = window.location.href.toString();
+          window.location.replace(url);
+
+        }
+        </script>';
   
 }
 
@@ -30,7 +38,7 @@ define("NEWSLETTER_TEMPLATE_CONTENT", getconfig("newsletter_template_content"));
 
 
 <p>
-<textarea id="template_content"name="template_content" cols=60 rows=16><?php 
+<textarea id="template_content" name="template_content" cols=60 rows=16><?php 
 echo htmlspecialchars(NEWSLETTER_TEMPLATE_CONTENT);
 ?></textarea></p>
 <script type="text/javascript">

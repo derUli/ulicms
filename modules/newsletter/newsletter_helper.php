@@ -25,6 +25,9 @@ if(!function_exists("send_html_mail")){
 
 function send_html_mail($mail_from, $mail_to, 
                    $subject, $text){
+   $newsletter_id = getconfig("newsletter_id");
+   $subject = str_replace("%newsletter_id%", $newsletter_id, $subject);
+                      
    $html = "<html>
     <head>
         <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">
@@ -36,6 +39,7 @@ function send_html_mail($mail_from, $mail_to,
 </html>";
 
    $html = str_replace("\r\n", "\n", $html);
+   $html = str_replace("%newsletter_id%", $newsletter_id, $html);
 
 
    $header  = "MIME-Version: 1.0\n";
@@ -92,6 +96,9 @@ function send_loop(){
         if($_SESSION["newsletter_data"]["newsletter_remaining"] < 1) {
               echo "Fertig.";
               flush();
+              // increment newsletter_id
+              setconfig("newsletter_id", 
+              getconfig("newsletter_id") + 1);              
               return;       
         }
            

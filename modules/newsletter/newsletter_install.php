@@ -20,6 +20,7 @@ function newsletter_do_install(){
   
   setconfig("newsletter_template_title", "Titel");
   setconfig("newsletter_template_content", "<p>Fügen Sie hier Ihren Text ein.</p>");
+  setconfig("newsletter_id", "1");
 
 }
 
