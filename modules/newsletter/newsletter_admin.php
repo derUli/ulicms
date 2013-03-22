@@ -29,9 +29,10 @@ if(!isset($_SESSION["newsletter_data"])){
 function newsletter_admin(){
 
 ?>
-<a href="<?php echo getModuleAdminSelfPath()?>&newsletter_action=send_newsletter">Newsletter senden</a> | 
+<a href="<?php echo getModuleAdminSelfPath()?>&newsletter_action=prepare_newsletter">Newsletter vorbereiten</a> | 
 <a href="<?php echo getModuleAdminSelfPath()?>&newsletter_action=show_subscribers">Abonnenten anzeigen</a> | 
-<a href="<?php echo getModuleAdminSelfPath()?>&newsletter_action=edit_template">Vorlage bearbeiten</a>
+<a href="<?php echo getModuleAdminSelfPath()?>&newsletter_action=edit_template">Vorlage bearbeiten</a> | 
+<a href="<?php echo getModuleAdminSelfPath()?>&newsletter_action=send_it">Versand durchführen bearbeiten</a>
 <br/>
 <?php
 if($_GET["newsletter_action"] == "show_subscribers"){
@@ -64,7 +65,7 @@ else if($_GET["newsletter_action"] == "edit_template"){
     include getModulePath("newsletter")."newsletter_template.php";
 
 }
-else if($_GET["newsletter_action"] == "send_newsletter"){
+else if($_GET["newsletter_action"] == "prepare_newsletter"){
    include getModulePath("newsletter")."newsletter_form.php";
 
 }
