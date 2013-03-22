@@ -60,7 +60,7 @@ function send_loop(){
     define("ADMIN_EMAIL", getconfig("email"));
     
     if($_SESSION["newsletter_data"]["newsletter_remaining"] > 0){
-        for($i=0; $i < count($_SESSION["newsletter_data"]["newsletter_receivers"]); $i++){
+        for($i=0; $i < $_SESSION["newsletter_data"]["newsletter_receivers"]; $i++){
            
            if(!empty($_SESSION["newsletter_data"]["newsletter_receivers"][$i])){
               $sent = send_html_mail(ADMIN_EMAIL, 
@@ -71,28 +71,34 @@ function send_loop(){
               echo "Newsletter an ".
                  $_SESSION["newsletter_data"]["newsletter_receivers"][$i]." senden ";
                    
-                   
+             
+              flush();      
                    
               if($sent){
                  $_SESSION["newsletter_data"]["newsletter_remaining"]--;
-                 $_SESSION["newsletter_data"]["newsletter_receivers"][$i] = 0;
+                 $_SESSION["newsletter_data"]["newsletter_receivers"][$i] = "";
+                 
                  echo '<span style="color:green">[Erfolgreich]</span>';
+                 flush();            
               } else {
-                 echo '<span style="color:red">[Fehlgeschlagen]</span>';              
+                 echo '<span style="color:red">[Fehlgeschlagen]</span>';  
+                 flush();            
               }
            }
            
          
+        echo "<br/>";
         
         
-           if($_SESSION["newsletter_data"]["newsletter_remaining"] < 1) 
-              echo "<br/>Fertig.";
+           if($_SESSION["newsletter_data"]["newsletter_remaining"] < 1) {
+              echo "Fertig.";
+              flush();
               return;       
+              }
            
        
         }
         
-        echo "<br/>";
         
     }
 
