@@ -67,6 +67,7 @@ window.location.replace(url);
 
 }
 </script>
+
 <?php }?>
 <form method="post" action="<?php echo getModuleAdminSelfPath()?>">
 <p><strong>Titel: </strong><input type="text" maxlength=78 size=78 name="newsletter_title" value="<?php echo htmlspecialchars($_SESSION["newsletter_data"]["newsletter_title"])?>"></p>

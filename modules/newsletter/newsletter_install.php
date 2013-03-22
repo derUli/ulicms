@@ -4,6 +4,9 @@ function newsletter_check_install(){
    if(!$query){
       newsletter_do_install();   
    }
+
+      
+   
 }
 
 function newsletter_do_install(){

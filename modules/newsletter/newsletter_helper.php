@@ -46,7 +46,7 @@ function send_html_mail($mail_from, $mail_to,
    // $header .= "Cc: $cc\n";  // falls an CC gesendet werden soll
    $header .= "X-Mailer: PHP ". phpversion();
  
-   return mail($subject, $betreff, $html, $header);
+   return mail($mail_to, $subject, $html, $header);
 
       
    
@@ -89,12 +89,12 @@ function send_loop(){
          
         echo "<br/>";
         
-        
-           if($_SESSION["newsletter_data"]["newsletter_remaining"] < 1) {
+        if($_SESSION["newsletter_data"]["newsletter_remaining"] < 1) {
               echo "Fertig.";
               flush();
               return;       
-              }
+        }
+           
            
        
         }
@@ -103,7 +103,7 @@ function send_loop(){
     }
 
 
-}
+} // Funktion zu
 
 
 ?>
