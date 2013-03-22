@@ -34,6 +34,11 @@ if(isset($_POST["submit"])){
    str_replace(" src=\"/", " src=\"$url/", 
    $_SESSION["newsletter_data"]["newsletter_text"]);
    
+   $_SESSION["newsletter_data"]["newsletter_text"] = 
+   str_replace(" href=\"?seite=", 
+   " href=\"$url/?seite=",
+   $_SESSION["newsletter_data"]["newsletter_text"]);
+   
  
    
    $_SESSION["newsletter_data"]["newsletter_title"] =
@@ -61,11 +66,8 @@ $email = $user["email"];
 if(isset($_POST["submit"])){
 ?>
 <script type="text/javascript">
-window.onload= function(){
-url = window.location.href.toString().
+url = window.location.href.toString()
 window.location.replace(url);
-
-}
 </script>
 
 <?php }?>

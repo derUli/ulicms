@@ -12,6 +12,7 @@ if(isset($_POST["submit"])){
   
   setconfig("newsletter_template_title", 
   mysql_real_escape_string($_POST["template_title"]));
+  
   setconfig("newsletter_template_content", 
   mysql_real_escape_string($_POST["template_content"]));
   unset($_SESSION["newsletter_data"]);
@@ -23,6 +24,12 @@ if(isset($_POST["submit"])){
   mysql_real_escape_string($_POST["template_content"]));
        
   }
+  
+  
+  echo "<script type=\"text/javascript\">
+  url = window.location.href.toString()
+  window.location.replace(url);
+  </script>";
   
 }
 
