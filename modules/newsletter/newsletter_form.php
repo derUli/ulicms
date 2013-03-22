@@ -96,7 +96,6 @@ if($email != getconfig("email")){
 
 echo $email;
 ?>"> Testmail an <?php echo $email;?><br/>
-}
 <?php } ?>
 
 <input name="send_to" type="radio" value="ALL"> An alle Abonnenten
