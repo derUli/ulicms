@@ -1,4 +1,6 @@
 <?php 
+define("NEWSLETTER_MODULE_VERSION", "0.0.1");
+
 function newsletter_check_install(){
    $query = mysql_query("SELECT * FROM ".tbname("newsletter_subscribers"));
    if(!$query){

@@ -86,6 +86,12 @@ else if($_GET["newsletter_action"] == "send_it"){
    include getModulePath("newsletter")."send_it.php";
 
 }
+else{
+   echo "<br/>";
+   echo "<p>(C) 2013 by Ulrich Schmidt<br/>";
+   echo "Version ".NEWSLETTER_MODULE_VERSION."</p>";
+
+}
 }
  
 ?>

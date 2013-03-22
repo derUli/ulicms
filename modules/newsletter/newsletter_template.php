@@ -1,6 +1,5 @@
 <?php 
 
-
 if(defined(MODULE_ADMIN_REQUIRED_PERMISSION)){
   if($_SESSION["group"] < MODULE_ADMIN_REQUIRED_PERMISSION){
     die("Fuck you!");
