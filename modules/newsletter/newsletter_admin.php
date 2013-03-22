@@ -42,8 +42,8 @@ function newsletter_admin(){
 <a href="index.php?action=module_settings&module=newsletter&newsletter_action=edit_template">Vorlage bearbeiten</a> | 
 <a href="index.php?action=module_settings&module=newsletter&newsletter_action=send_it">Versand durchführen<?php 
 if($_SESSION["newsletter_data"]["newsletter_remaining"] > 0){
-   echo " ".$_SESSION["newsletter_data"]["newsletter_remaining"].
-        " in Warteschlange";
+   echo " [".$_SESSION["newsletter_data"]["newsletter_remaining"].
+        " in Warteschlange]";
 }
 ?></a>
 <br/>
