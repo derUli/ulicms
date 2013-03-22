@@ -134,6 +134,25 @@ if(!$timezone){
 }
 	date_default_timezone_set(getconfig("timezone"));
 
+if(!getconfig("session_timeout")){
+    setconfig("session_timeout", 60);
+}
+
+
+$session_timeout = 60 * getconfig("session_timeout");
+
+// Session abgelaufen
+if(isset($_SESSION["session_begin"])){
+   if(time() - $_SESSION["session_begin"] > $session_timeout)
+   {
+   session_destroy();   
+   }
+   else{
+   $_SESSION["session_end"] = time() + $session_timeout;
+   
+   }
+}
+
 
 $enforce_https = getconfig("enforce_https");
 
@@ -142,6 +161,7 @@ if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
     header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
     exit();
 }
+
 
 include 'cron.php';
 

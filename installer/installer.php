@@ -302,7 +302,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (24, 'spamfilter_words_blacklist', 
 'Casino||Euro Dice||Bingo||Cialis||Viagra||Penis||Enlargement||Drugstore'),
 (25, 'empty_trash_days', '30'),
-(26, 'timezone', 'Europe/Berlin');");
+(26, 'timezone', 'Europe/Berlin'),
+(27, 'session_timeout', '60');");
                                 
                    
                                                  
