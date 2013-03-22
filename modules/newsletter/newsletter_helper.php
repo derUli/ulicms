@@ -64,7 +64,8 @@ function send_loop(){
     define("ADMIN_EMAIL", getconfig("email"));
     
     if($_SESSION["newsletter_data"]["newsletter_remaining"] > 0){
-        for($i=0; $i < $_SESSION["newsletter_data"]["newsletter_receivers"]; $i++){
+        
+        for($i=0; $i <= $_SESSION["newsletter_data"]["newsletter_receivers"]; $i++){
            
            if(!empty($_SESSION["newsletter_data"]["newsletter_receivers"][$i])){
               $sent = send_html_mail(ADMIN_EMAIL, 

@@ -50,7 +50,6 @@ if(isset($_POST["submit"])){
       $subscribers = getSubscribers();
    else
       $subscribers = $send_to;
-      
    $_SESSION["newsletter_data"]["newsletter_receivers"] = $subscribers;
    $_SESSION["newsletter_data"]["newsletter_remaining"] = count($subscribers);
    
