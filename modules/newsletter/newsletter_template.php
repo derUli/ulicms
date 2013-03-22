@@ -13,13 +13,15 @@ if(isset($_POST["submit"])){
   $_POST["template_title"]);
   setconfig("newsletter_template_content", 
   $_POST["template_content"]);
+  unset($_SESSION["newsletter_data"]);
   
 }
 
 define("NEWSLETTER_TEMPLATE_TITLE", getconfig("newsletter_template_title"));
 define("NEWSLETTER_TEMPLATE_CONTENT", getconfig("newsletter_template_content"));
 
-unset($_SESSION["newsletter_data"]);
+
+
 
 ?>
 

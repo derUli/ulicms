@@ -39,6 +39,10 @@ if(isset($_POST["submit"])){
    $_SESSION["newsletter_data"]["newsletter_title"] =
    $_POST["newsletter_title"];
    
+   $subscribers = getSubscribers();
+   $_SESSION["newsletter_data"]["newsletter_receivers"] = $subscribers;
+   $_SESSION["newsletter_data"]["newsletter_remaining"] = count($subscribers);
+   
 }
 
 
