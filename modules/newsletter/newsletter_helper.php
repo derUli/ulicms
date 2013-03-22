@@ -46,7 +46,7 @@ function send_html_mail($mail_from, $mail_to,
    // $header .= "Cc: $cc\n";  // falls an CC gesendet werden soll
    $header .= "X-Mailer: PHP ". phpversion();
  
-   return mail($subject, $betreff, $mailtext, $header);
+   return mail($subject, $betreff, $html, $header);
 
       
    

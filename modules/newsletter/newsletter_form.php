@@ -1,9 +1,9 @@
 <?php 
 
 if(defined(MODULE_ADMIN_REQUIRED_PERMISSION)){
-  if($_SESSION["group"] < MODULE_ADMIN_REQUIRED_PERMISSION){
+  if($_SESSION["group"] < MODULE_ADMIN_REQUIRED_PERMISSION)
     die("Fuck you!");
-  }
+
 
 }
 
@@ -57,6 +57,17 @@ $email = $user["email"];
 
 ?>
 <h3>Newsletter vorbereiten</h3>
+<?php 
+if(isset($_POST["submit"])){
+?>
+<script type="text/javascript">
+window.onload= function(){
+url = window.location.href.toString().
+window.location.replace(url);
+
+}
+</script>
+<?php }?>
 <form method="post" action="<?php echo getModuleAdminSelfPath()?>">
 <p><strong>Titel: </strong><input type="text" maxlength=78 size=78 name="newsletter_title" value="<?php echo htmlspecialchars($_SESSION["newsletter_data"]["newsletter_title"])?>"></p>
 
