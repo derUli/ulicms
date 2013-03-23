@@ -13,8 +13,9 @@ if(file_exists("antispam-features.php")){
 
 function blog_single($seo_shortname){
     
-    $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE seo_shortname='$seo_shortname'");
-     
+     $autor_and_date = getconfig("blog_autor_and_date_text");
+   
+     $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE seo_shortname='$seo_shortname'");
      
     // set views + 1
     if($_SESSION["group"] < 20){
@@ -33,9 +34,27 @@ function blog_single($seo_shortname){
        
        $html.= "<h1 class='blog_headline'>".$post->title."</h1>";
        $html.= "<hr class='blog_hr'/>";
-       $html.= "<sub><strong>".
-       date(getconfig("date_format"), $post->datum)." - Autor: ". $user["username"].
-       "</strong></sub><br/><br/>";
+       
+        $date_and_autor_string = $autor_and_date;
+          
+          $date_and_autor_string = str_replace("%date%",
+          date(getconfig("date_format"), $post->datum),
+          $date_and_autor_string);
+          
+          $date_and_autor_string = str_replace("%username%",
+          $user["username"],
+          $date_and_autor_string);
+        
+          $date_and_autor_string = str_replace("%firstname%",
+          $user["firstname"],
+          $date_and_autor_string);
+          $date_and_autor_string = str_replace("%lastname%",
+          $user["lastname"],
+          $date_and_autor_string);
+          
+          $html .= $date_and_autor_string;
+       
+       $html.= "<br/><br/>";
        $html.= "<div class='blog_post_content'>".$post->content_full."</div>";
 
 	   $html .= "<br/>";

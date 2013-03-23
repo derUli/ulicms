@@ -2,7 +2,24 @@
 function blog_list(){
 
 
-   $posts_per_page = 5;
+   $posts_per_page = getconfig("blog_posts_per_page");
+   
+   if($posts_per_page === false){
+      setconfig("blog_posts_per_page", "5");
+      $posts_per_page = 5;
+   }
+   
+   $autor_and_date = getconfig("blog_autor_and_date_text");
+   
+   if($autor_and_date === false){
+      setconfig("blog_autor_and_date_text", "<sub><strong>".
+      "%date% - Autor: %username%".
+      "</strong></sub>");
+      $autor_and_date = getconfig("blog_autor_and_date_text");
+   }
+   
+
+   
    
    $html = "";
    
@@ -58,9 +75,26 @@ function blog_list(){
           
           $html.= "<h2 class='blog_headline'><a href='?seite=".get_requested_pagename()."&amp;single=".$post->seo_shortname."'>".$post->title."</a></h2>";
           $html.= "<hr class='blog_hr'/>";
-          $html.= "<sub><strong>".
-          date(getconfig("date_format"), $post->datum)." - Autor: ". $user["username"].
-          "</strong></sub><br/><br/>";
+          
+          $date_and_autor_string = $autor_and_date;
+          
+          $date_and_autor_string = str_replace("%date%",
+          date(getconfig("date_format"), $post->datum),
+          $date_and_autor_string);
+          
+          $date_and_autor_string = str_replace("%username%",
+          $user["username"],
+          $date_and_autor_string);
+        
+          $date_and_autor_string = str_replace("%firstname%",
+          $user["firstname"],
+          $date_and_autor_string);
+          $date_and_autor_string = str_replace("%lastname%",
+          $user["lastname"],
+          $date_and_autor_string);
+          
+          $html .= $date_and_autor_string.
+          "<br/><br/>";
           $html.= "<div class='blog_post_content'>".$post->content_preview."</div>";
 		  
 		  if($_SESSION["language"] == "de"){
