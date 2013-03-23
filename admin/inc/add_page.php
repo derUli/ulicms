@@ -61,9 +61,9 @@ for($j=0; $j<count($languages); $j++ ){
 
 <strong data-tooltip="Wenn das eine Unterseite werden sollte.">Übergeordnete Seite:</strong><br/>
 <select name="parent" size=1>
-<option selected="selected" value="-">-</option>
+<option selected="selected" value="NULL">-</option>
 <?php foreach(getAllSystemNames() as $systemname){?>
-	<option value="<?php echo $systemname;?>">
+	<option value="<?php echo getPageIDBySystemname($systemname);?>">
 	<?php echo $systemname;?>
 	</option>
 <?php

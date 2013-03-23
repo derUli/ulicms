@@ -168,7 +168,7 @@ break;
 }
 
 echo "<td>".$row->position."</td>";
-echo "<td>".$row->parent."</td>";
+echo "<td>".getPageSystemnameByID($row->parent)."</td>";
 
 if($row->active){
 echo "<td>Ja</td>";

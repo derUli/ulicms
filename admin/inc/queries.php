@@ -423,7 +423,12 @@ if($_POST["edit_page"]=="edit_page" && $_SESSION["group"]>=30){
 	$notinfeed = 0;
 	$menu = mysql_real_escape_string($_POST["menu"]);
 	$position = (int)$_POST["position"];
-	$parent = mysql_real_escape_string($_POST["parent"]);
+	
+	$parent = "NULL";
+	if($_POST["parent"] != "NULL"){
+          $parent = intval($_POST["parent"]);
+	}
+	
 	$user = $_SESSION["login_id"];     
   $id = intval($_POST["page_id"]);
 	$access = implode(",", $_POST["access"]);
@@ -432,7 +437,7 @@ if($_POST["edit_page"]=="edit_page" && $_SESSION["group"]>=30){
 	$meta_description = mysql_real_escape_string($_POST["meta_description"]); 
 	$meta_keywords = mysql_real_escape_string($_POST["meta_keywords"]);
   
-  	mysql_query("UPDATE ".tbname("content")." SET systemname = '$system_title' , title='$page_title', parent='$parent', content='$page_content', active=$activated, lastmodified=".time().", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target' WHERE id=$id");
+  	mysql_query("UPDATE ".tbname("content")." SET systemname = '$system_title' , title='$page_title', parent=$parent, content='$page_content', active=$activated, lastmodified=".time().", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target' WHERE id=$id");
 
 
   header("Location: index.php?action=pages");

@@ -42,9 +42,9 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 <br/><br/>
 <strong data-tooltip="Wenn das eine Unterseite werden sollte.">Übergeordnete Seite:</strong><br/>
 <select name="parent" size=1>
-<option value="-">-</option>
+<option value="NULL">-</option>
 <?php foreach(getAllSystemNames() as $systemname){?>
-	<option value="<?php echo $systemname;?>" <?php if($systemname === $row->parent){
+	<option value="<?php echo getPageIDBySystemname($systemname);?>"<?php if(getPageIDBySystemname($systemname) == $row->parent){
 	echo " selected='selected'";}?>><?php echo $systemname;?></option>
 <?php
 	}
