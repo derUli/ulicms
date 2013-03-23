@@ -28,8 +28,33 @@ if(file_exists($tpl_unten_filename) and is_writable($tpl_unten_filename)){
    
 }
 
+mysql_query("alter table ".tbname("content")." change `parent` `parent_old` varchar (300);");
+mysql_query("ALTER TABLE ".tbname("content")." ADD parent int(11);");
+
+$query = mysql_query("SELECT id, systemname, parent_old FROM ".tbname("content"));
+
+while($row=mysql_fetch_object($query)){
+   
+   if($row->parent_old == "-"){
+      
+      mysql_query("UPDATE ".tbname("content"). " set parent = NULL where id=".$row->id);
+   } else {
+     $query2 = mysql_query("SELECT id FROM ".tbname("content")." WHERE systemname='".mysql_real_escape_string($row->parent_old)."'");
+     
+
+     
+     $results = mysql_fetch_object($query2);
+      
+     mysql_query("UPDATE ".tbname("content"). " set parent=".$results->id." where id=".$row->id);
+     
+     }
+
+}
+
 
 //@unlink("update.php");
+
+die();
 
 header("Location: admin/");
 exit();
