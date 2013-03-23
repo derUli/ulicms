@@ -257,7 +257,7 @@ function is_403(){
 
 function menu($name){
         $language = $_SESSION["language"];
-	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent='-' ORDER by position");
+	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent is null ORDER by position");
 	echo "<ul class='menu_".$name."'>\n";
 	while($row = mysql_fetch_object($query)){
 	echo "  <li>" ;
@@ -275,10 +275,13 @@ function menu($name){
 	echo "</a>\n";
 	
 	// Unterebene 1
-	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND `deleted_at` IS NULL AND parent='".$row->systemname."' ORDER by position");
+
+	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND `deleted_at` IS NULL AND parent=".$row->id." ORDER by position");
+	
 		if(mysql_num_rows($query2)>0){
 			echo "<ul class='sub_menu'>\n";
 			while($row2 = mysql_fetch_object($query2)){
+			
 				echo "      <li>";
 				if(get_requested_pagename() != $row2->systemname){ 
 					echo "<a href='?seite=".$row2->systemname."' target='".
@@ -308,7 +311,7 @@ function menu($name){
 				
 				
 				// Unterebene 2
-				$query3 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent='".$row2->systemname."' AND `deleted_at` IS NULL ORDER by position");
+				$query3 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent=".$row2->id." AND `deleted_at` IS NULL ORDER by position");
 		if(mysql_num_rows($query3)>0){
 			echo "  <ul class='sub_menu'>\n";
 			while($row3 = mysql_fetch_object($query3)){
@@ -337,7 +340,7 @@ function menu($name){
 				
 				
 				// Unterebene 3
-				$query4 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent='".$row3->systemname."' ORDER by position");
+				$query4 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent=".$row3->id." ORDER by position");
 		if(mysql_num_rows($query4)>0){
 			echo "  <ul class='sub_menu'>\n";
 			while($row4 = mysql_fetch_object($query4)){

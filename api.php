@@ -150,9 +150,33 @@ function replaceShortcodesWithModules($string){
 	return $string;
 }
 
+
+// get page id by systemname
+function getPageIDBySystemname($systemname){
+	$query = mysql_query("SELECT systemname, id FROM `".tbname("content")."` where systemname='".mysql_real_escape_string($systemname)."'");
+	if(mysql_num_rows($query ) > 0){
+	   $row = mysql_fetch_object($query);
+	   return $row->id;
+	} else {
+	return null;
+	}
+}
+
+
+// get PageSystemnameByID
+function getPageSystemnameByID($id){
+	$query = mysql_query("SELECT systemname, id FROM `".tbname("content")."` where id=".intval($id));
+	if(mysql_num_rows($query ) > 0){
+	   $row = mysql_fetch_object($query);
+	   return $row->systemname;
+	} else {
+	return "-";
+	}
+}
+
 // Get systemnames of all pages
 function getAllSystemNames(){
-	$query = mysql_query("SELECT * FROM `".tbname("content")."` ORDER BY systemname");
+	$query = mysql_query("SELECT systemname,id FROM `".tbname("content")."` ORDER BY systemname");
 	$returnvalues = Array();
 	while($row = mysql_fetch_object($query)){
 		array_push($returnvalues, $row->systemname);
