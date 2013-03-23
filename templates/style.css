@@ -186,6 +186,7 @@ ul.menu_top ul {
    position: absolute;
     width: 100%;
   left: -999em; /** verstecken */ 
+
 } 
 
 /** ULs ab Level 3 */ 
@@ -196,6 +197,7 @@ ul.menu_top ul ul {
 /** Kind UL von gehoverten LIs */ 
 .navbar_top li:hover > ul { 
   left: auto; 
+margin-left:-40px;
 } 
 
 /** Kind UL von gehoverten LIs ab Level 2 */ 
@@ -212,7 +214,6 @@ ul.menu_top ul ul {
 .navbar_top li li { 
 float: none; 
 background-color:red;
-
 list-style-type:none;
 } 
 
@@ -230,7 +231,7 @@ list-style-type:none;
 
 /** As ab Level 3 */ 
 .navbar_top li li li a { 
-  background: #ccc; 
+  background: #ddd; 
   float: left; 
 } 
 
