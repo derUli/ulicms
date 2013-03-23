@@ -29,13 +29,10 @@ width:95.5%;
 margin-left:-18px;
 padding-top:0.5px;
 padding-bottom:4px;
-
-
 }
 
 #language_box ul{
 list-style-type:none;
-
 }
 
 #language_box ul li{
@@ -63,21 +60,7 @@ text-align:center;
 font-family:'Times New Roman',Times,serif;
 }
 
-.header .navbar_top{
-float:left;
-margin-left:5px;
-margin-right:0%;
-margin-top:30px;
-font-family:verdana;
-font-size:11pt;
-overflow-x:auto;
-}
 
-.header .navbar_top ul{
-display:inline;
-list-style-type:none;
-display:inline;
-}
 
 .menu_bottom ul{
 display:inline;
@@ -101,25 +84,12 @@ color:rgb(255, 128, 0);
 text-decoration:none;
 }
 
-.header .navbar_top ul li{
-float:left;
-margin-right:20px;
-}
 
 .navbar_bottom ul li{
 float:left;
 margin-right:20px;
 }
 
-
-.header .navbar_top ul li a, .header .navbar_top ul li a:visited{
-color:white;
-text-decoration:none;
-}
-
-.header .navbar_top ul li a:hover{
-font-style:italic;
-}
 
 
 .clear{
@@ -153,10 +123,6 @@ padding:5px;
 margin:auto;
 margin-left:10px;
 margin-right:10px
-}
-
-div.navbar_top, div.navbar_bottom{
-color:rgb(255, 128, 0);
 }
 
 
@@ -198,3 +164,77 @@ text-align:center;
 margin:20px;
 color:rgb(52, 106, 250);
 }
+
+
+
+/* Menü Top*/
+
+/** alle ULs */ 
+ul.menu_top { 
+  margin: 0; 
+  padding: 0; 
+  list-style: none; 
+} 
+
+ul.menu_top > li{
+    position: relative;
+
+}
+
+/** ULs ab Level 2 */ 
+ul.menu_top ul { 
+   position: absolute;
+    width: 100%;
+  left: -999em; /** verstecken */ 
+} 
+
+/** ULs ab Level 3 */ 
+ul.menu_top ul ul { 
+  top: 0; 
+} 
+
+/** Kind UL von gehoverten LIs */ 
+.navbar_top li:hover > ul { 
+  left: auto; 
+} 
+
+/** Kind UL von gehoverten LIs ab Level 2 */ 
+.navbar_top li li:hover > ul { 
+  left: 100%; 
+} 
+
+/** alle LIs */ 
+.navbar_top li { 
+  float: left; 
+} 
+
+/** alle LIs ab Level 2 */ 
+.navbar_top li li { 
+float: none; 
+background-color:red;
+
+list-style-type:none;
+} 
+
+/** alle As */ 
+.navbar_top a { 
+  display: block; 
+  padding: .5em 1em; 
+  background: #bbb; 
+} 
+
+/** As ab Level 2 */ 
+.navbar_top li li a { 
+  background: #ccc; 
+} 
+
+/** As ab Level 3 */ 
+.navbar_top li li li a { 
+  background: #ccc; 
+  float: left; 
+} 
+
+/** As ab Level 4 */ 
+.navbar_top li li li li a { 
+  background: #eee; 
+} 
