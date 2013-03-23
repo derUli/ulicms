@@ -271,7 +271,6 @@ function menu($name){
 
 
 	echo $row->title;
-
 	echo "</a>\n";
 	
 	// Unterebene 1
