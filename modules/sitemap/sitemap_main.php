@@ -11,7 +11,7 @@ function sitemap_render(){
 
 function sitemap_menu($name){
 	$html_output = "";
-	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND active = 1 AND `deleted_at` IS NULL AND parent='-' ORDER by position");
+	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND active = 1 AND `deleted_at` IS NULL AND parent IS NULL ORDER by position");
 	
 	if(mysql_num_rows($query)<1){
 	return "";
@@ -40,7 +40,7 @@ function sitemap_menu($name){
 	
 	
 	$language = $_SESSION["language"];
-	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent='-' ORDER by position");
+	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent IS NULL ORDER by position");
 	$html_output.= "<ul>\n";
 	while($row = mysql_fetch_object($query)){
 	$html_output.="  <li>" ;
@@ -58,7 +58,7 @@ function sitemap_menu($name){
 	$html_output.="</a>\n";
 	
 	// Unterebene 1
-	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent='".$row->systemname."' ORDER by position");
+	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent=".$row->id." ORDER by position");
 		if(mysql_num_rows($query2)>0){
 			$html_output.="<ul>\n";
 			while($row2 = mysql_fetch_object($query2)){
@@ -91,7 +91,7 @@ function sitemap_menu($name){
 				
 				
 				// Unterebene 2
-				$query3 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent='".$row2->systemname."' ORDER by position");
+				$query3 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent=".$row2->id." ORDER by position");
 		if(mysql_num_rows($query3)>0){
 			$html_output.="  <ul>\n";
 			while($row3 = mysql_fetch_object($query3)){
@@ -120,7 +120,7 @@ function sitemap_menu($name){
 				
 				
 				// Unterebene 3
-				$query4 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent='".$row3->systemname."' ORDER by position");
+				$query4 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent=".$row3->id." ORDER by position");
 		if(mysql_num_rows($query4)>0){
 			$html_output.="  <ul>\n";
 			while($row4 = mysql_fetch_object($query4)){
