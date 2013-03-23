@@ -36,25 +36,16 @@ $query = mysql_query("SELECT id, systemname, parent_old FROM ".tbname("content")
 while($row=mysql_fetch_object($query)){
    
    if($row->parent_old == "-"){
-      
       mysql_query("UPDATE ".tbname("content"). " set parent = NULL where id=".$row->id);
    } else {
      $query2 = mysql_query("SELECT id FROM ".tbname("content")." WHERE systemname='".mysql_real_escape_string($row->parent_old)."'");
-     
-
-     
      $results = mysql_fetch_object($query2);
-      
      mysql_query("UPDATE ".tbname("content"). " set parent=".$results->id." where id=".$row->id);
-     
      }
-
 }
 
 
 //@unlink("update.php");
-
-die();
 
 header("Location: admin/");
 exit();
