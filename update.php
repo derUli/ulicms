@@ -39,8 +39,14 @@ while($row=mysql_fetch_object($query)){
       mysql_query("UPDATE ".tbname("content"). " set parent = NULL where id=".$row->id);
    } else {
      $query2 = mysql_query("SELECT id FROM ".tbname("content")." WHERE systemname='".mysql_real_escape_string($row->parent_old)."'");
-     $results = mysql_fetch_object($query2);
-     mysql_query("UPDATE ".tbname("content"). " set parent=".$results->id." where id=".$row->id);
+     
+     if(mysql_num_rows($query2) > 0){
+        $results = mysql_fetch_object($query2);
+        mysql_query("UPDATE ".tbname("content"). " set parent=".$results->id." where id=".$row->id);
+     } else {
+        mysql_query("UPDATE ".tbname("content"). " set parent = NULL where id=".$row->id);
+     }
+     
      }
 }
 

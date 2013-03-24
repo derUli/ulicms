@@ -242,7 +242,7 @@ function is_frontpage(){
 
 
 function is_200(){
-  returncheck_status() == "200 OK";
+  return check_status() == "200 OK";
 }
 
 function is_404(){
