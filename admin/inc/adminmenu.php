@@ -28,13 +28,13 @@ if(defined("_SECURITY")){
     <a href="?action=media">Medien</a>
     <ul>
       <li>
-        <a href="?action=media">Medien</a>
-      </li>
-      <li>
         <a href="?action=images">Bilder</a>
       </li>
       <li>
         <a href="?action=flash">Flash</a>
+      </li>
+      <li>
+        <a href="?action=files">Dateien</a>
       </li>
     </ul>
   </li>

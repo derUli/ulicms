@@ -31,7 +31,7 @@ else if(empty($_GET["edit"])){
 		if(!is_writable($template_file)&&file_exists($template_file)){
 			echo "<p>Die gewählte Template konnte nicht geöffnet werden. Wenn Sie der Inhaber dieser Seite sind, probieren Sie die Datei-Rechte auf dem FTP-Server auf 0777 zu setzen. Wenn nicht, wenden Sie sich bitte an Ihren Administrator.</p>";
 		}else{
-		$template_content=file_get_contents($template_file);
+		$template_content = file_get_contents($template_file);
 ?>
 <form action="index.php?action=templates" method="post">
 <style type="text/css">
