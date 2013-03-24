@@ -206,7 +206,7 @@ background-color:#C4DBFF;
 background-repeat:none;
 background-attachment:fixed;
 height:40px;
-width:800px;
+width:70%;
 border:1px blue solid;
 padding-left:20px;
 padding-right:20px;
@@ -274,6 +274,7 @@ background-color:black;
 
 
 </style>
+<meta name="viewport" content="width=1280"/>
 
 <script type="text/javascript" src="md5.js"></script>
 <style type="text/css" media="screen">
