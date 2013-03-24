@@ -32,6 +32,7 @@ else if(empty($_GET["edit"])){
 			echo "<p>Die gewählte Template konnte nicht geöffnet werden. Wenn Sie der Inhaber dieser Seite sind, probieren Sie die Datei-Rechte auf dem FTP-Server auf 0777 zu setzen. Wenn nicht, wenden Sie sich bitte an Ihren Administrator.</p>";
 		}else{
 		$template_content = file_get_contents($template_file);
+
 ?>
 <form action="index.php?action=templates" method="post">
 <style type="text/css">
@@ -45,7 +46,8 @@ else if(empty($_GET["edit"])){
   overflow-x: auto;
 }
 </style>
-<textarea id="code" name="code" cols=80 rows=20><?php echo htmlspecialchars($template_content);?></textarea>
+<textarea id="code" name="code" cols=80 rows=20><?php
+  echo htmlspecialchars($template_content);?></textarea>
  <script type="text/javascript">
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
