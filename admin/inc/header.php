@@ -6,7 +6,6 @@ a,a:visited,a:active{
 color:#000000;
 text-decoration:none;
 font-weight:bold;
-
 font-size:1.0em;
 }
 
@@ -17,7 +16,7 @@ font-weight:bold;
 font-size:1.0em;
 }
 
-.menu a,.menu a:visited,a:active{
+.menu a,.menu a:visited,.menu a:active{
 color:#000000;
 text-decoration:none;
 font-weight:bold;
