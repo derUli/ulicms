@@ -44,8 +44,6 @@ function logo(){
 }
 
 
-
-
 function year(){
 	echo date("Y");
 }
@@ -104,18 +102,11 @@ function comments(){
 		}
 
 
-
 function homepage_title(){
 	print_env("homepage_title");
 }
 
-
-
-	$status=check_status();
-
-
-
-
+	$status = check_status();
 
 function meta_keywords($ipage=null){
 	$status=check_status();	
@@ -161,11 +152,6 @@ function meta_description($ipage=null){
 	return false;
 }
 
-
-
-
-
-
 function title($ipage=null){
 	$status=check_status();
 	if($status=="404 Not Found"){
@@ -187,12 +173,8 @@ function title($ipage=null){
 			echo $row->title;
 			return true;
 		}
-
-
 	}
 }
-
-
 
 //import and print a page();
 function import($ipage){
@@ -239,8 +221,6 @@ function is_frontpage(){
   return get_requested_pagename() === getconfig("frontpage");
 }
 
-
-
 function is_200(){
   return check_status() == "200 OK";
 }
@@ -266,8 +246,7 @@ function menu($name){
 		echo "<a class='menu_active_link' href='?seite=".$row->systemname.
 		"' target='".$row->target."'>";
 	}
-
-
+	
 	echo $row->title;
 	echo "</a>\n";
 	
@@ -290,23 +269,6 @@ function menu($name){
 				echo $row2->title;
 				echo '</a>';
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				// Unterebene 2
 				$query3 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent=".$row2->id." AND `deleted_at` IS NULL ORDER by position");
 		if(mysql_num_rows($query3)>0){
@@ -322,19 +284,6 @@ function menu($name){
 				}
 				echo $row3->title;
 				echo '</a>';
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				
 				// Unterebene 3
 				$query4 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent=".$row3->id." ORDER by position");
@@ -355,47 +304,6 @@ function menu($name){
 			}
 			echo "  </ul></li>\n";
 		}
-
-	
-		
-			
-				
-					
-						
-							
-								
-									
-										
-											
-												
-													
-														
-															
-																
-																	
-																		
-																			
-																				
-																					
-																						
-																							
-																								
-										
-										
-										
-										
-										
-										
-										
-										
-										
-										
-										
-										
-										
-										
-										
-									
 
 			}
 			echo "  </ul></li>\n";
@@ -557,8 +465,8 @@ function content(){
 	}else if($status == "403 Forbidden"){
 	        if(file_exists("templates/403.php"))
 	           include "templates/403.php";
-                else
-                   echo "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.";
+          else
+              echo "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.";
 		return false;
 	}
 
