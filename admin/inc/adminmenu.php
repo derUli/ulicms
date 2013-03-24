@@ -1,5 +1,11 @@
-<?php if(defined("_SECURITY")){
-$menu_items = getAllMenuItems();
+<?php 
+if(defined("_SECURITY")){
+   $modules = getAllModules();
+   $modules_with_admin_page = Array();
+   for($i=0; $i < count($modules); $i++){
+    if(file_exists(getModuleAdminFilePath($modules[$i])))
+       array_push($modules_with_admin_page, $modules[$i]);
+}
 ?>
 <h2>UliCMS <a href="../">[<?php echo getconfig("homepage_title")?>]</a></h2>
 <div class="navbar_top">
@@ -49,6 +55,17 @@ $menu_items = getAllMenuItems();
       </li>
     </ul>
   </li>
+  <li><a href="?action=modules">Module</a>
+  <?php if(count($modules_with_admin_page) > 0){?>
+  <ul>
+    <?php for($n=0; $n < count($modules_with_admin_page); $n++){
+    ?>
+    <li><a href="?action=module_settings&module=<?php echo $modules_with_admin_page[$n]?>"><?php echo $modules_with_admin_page[$n]?></a></li>
+    <?php
+    }
+    ?>
+  </ul>
+  <?php } ?>
 </ul>
 </div>
 <div class="clear"></div>
