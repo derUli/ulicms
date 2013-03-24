@@ -6,14 +6,14 @@ a,a:visited,a:active{
 color:#000000;
 text-decoration:none;
 font-weight:bold;
-font-size:1.1em;
+font-size:0.8em;
 }
 
 a:hover{
 color:red;
 text-decoration:none;
 font-weight:bold;
-font-size:1.1em;
+font-size:0.8em;
 }
 
 .cke a, .cke a:active, .cke a:hover{
@@ -342,6 +342,7 @@ list-style-type:none;
 .navbar_top li li li a { 
   background: #ddd; 
   float: none;
+  margin-left:-3px;
 } 
 
 /** As ab Level 4 */ 

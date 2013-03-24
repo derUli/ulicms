@@ -69,13 +69,24 @@ if(defined("_SECURITY")){
   <li><a href="?action=system_update">Update</a></li>
    <li><a href="?action=settings_categories">Einstellungen</a>
     <ul><li><a href="?action=settings_simple">Grundeinstellungen</a></li>
-    <ul><li><a href="?action=spam_filter">Spamfilter</a></li>
-    <ul><li><a href="?action=cache">Cache</a></li>
-    <ul><li><a href="?action=motd">MOTD</a></li>
-    <ul><li><a href="?action=logo">Logo</a></li>
-    <ul><li><a href="?action=languages">Sprachen</a></li>
-    <ul><li><a href="?action=settings">Experteneinstellungen</a></li>
-
+    <li><a href="?action=spam_filter">Spamfilter</a></li>
+    <li><a href="?action=cache">Cache</a>
+     <ul>
+     <li><a href="?action=cache&clear_cache=yes">Cache leeren</a></li>
+     </ul>    
+    </li>
+    <li><a href="?action=motd">MOTD</a></li>
+    <li><a href="?action=logo">Logo</a></li>
+    <li><a href="?action=languages">Sprachen</a></li>
+    <li><a href="?action=settings">Experteneinstellungen</a></li>
+    </ul>
+    <li><a href="?action=info">Info</a>
+    <ul> 
+     <li><a href="http://www.ulicms.de/" target="_blank">UliCMS Portal</a></li>
+     <li><a href="license.html" target="_blank">Lizenz</a></li>
+     <li><a href="http://www.ulicms.de/?seite=kontakt" target="_blank">Feedback</a></li>
+    </ul>
+    <li><a href="?action=destroy">Logout</a></li>
 </ul>
 </div>
 <div class="clear"></div>
