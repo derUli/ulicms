@@ -184,7 +184,6 @@ ul.menu_top > li{
 /** ULs ab Level 2 */ 
 ul.menu_top ul { 
    position: absolute;
-    width: 100%;
   left: -999em; /** verstecken */ 
 
 } 
