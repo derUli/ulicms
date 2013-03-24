@@ -58,10 +58,10 @@ function blog_list(){
 
 
     if($_SESSION["group"] >= 20){
-       $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE language='".$_SESSION["language"]."' ORDER by datum DESC LIMIT $limit1, $limit2");
+       $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE language='".$_SESSION["language"]."' ORDER by datum DESC LIMIT $limit1, ".($posts_per_page - 1));
     }
     else{
-       $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE language='".$_SESSION["language"]."' AND entry_enabled = 1 ORDER by datum DESC LIMIT $limit1, $limit2");
+       $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE language='".$_SESSION["language"]."' AND entry_enabled = 1 ORDER by datum DESC LIMIT $limit1, ".($posts_per_page - 1));
     }
 
 
