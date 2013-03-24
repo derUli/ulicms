@@ -64,8 +64,18 @@ if(defined("_SECURITY")){
     <?php
     }
     ?>
-  </ul>
+   </ul>
   <?php } ?>
+  <li><a href="?action=system_update">Update</a></li>
+   <li><a href="?action=settings_categories">Einstellungen</a>
+    <ul><li><a href="?action=settings_simple">Grundeinstellungen</a></li>
+    <ul><li><a href="?action=spam_filter">Spamfilter</a></li>
+    <ul><li><a href="?action=cache">Cache</a></li>
+    <ul><li><a href="?action=motd">MOTD</a></li>
+    <ul><li><a href="?action=logo">Logo</a></li>
+    <ul><li><a href="?action=languages">Sprachen</a></li>
+    <ul><li><a href="?action=settings">Experteneinstellungen</a></li>
+
 </ul>
 </div>
 <div class="clear"></div>
