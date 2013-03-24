@@ -134,6 +134,7 @@ if(!$timezone){
 }
 	date_default_timezone_set(getconfig("timezone"));
 
+// Set locale
 if(getconfig("locale") === false){
    setconfig("locale", 'de_DE');
 }
