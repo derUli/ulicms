@@ -6,14 +6,28 @@ a,a:visited,a:active{
 color:#000000;
 text-decoration:none;
 font-weight:bold;
-font-size:1.1em;
+font-size:1.0em;
 }
 
 a:hover{
 color:red;
 text-decoration:none;
 font-weight:bold;
-font-size:1.1em;
+font-size:1.0em;
+}
+
+.menu a,.menu a:visited,a:active{
+color:#000000;
+text-decoration:none;
+font-weight:bold;
+font-size:0.8em;
+}
+
+.menu a:hover{
+color:red;
+text-decoration:none;
+font-weight:bold;
+font-size:0.8em;
 }
 
 .cke a, .cke a:active, .cke a:hover{
@@ -300,7 +314,7 @@ ul.menu ul {
 
 /** ULs ab Level 3 */ 
 ul.menu ul ul { 
-  top: 0; 
+  top: 50px; 
 } 
 
 /** Kind UL von gehoverten LIs */ 
@@ -342,6 +356,7 @@ list-style-type:none;
 .navbar_top li li li a { 
   background: #ddd; 
   float: none;
+  margin-left:-3px;
 } 
 
 /** As ab Level 4 */ 
