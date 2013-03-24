@@ -134,6 +134,13 @@ if(!$timezone){
 }
 	date_default_timezone_set(getconfig("timezone"));
 
+if(getconfig("locale") === false){
+   setconfig("locale", 'de_DE');
+}
+
+$locale = getconfig("locale");
+@setlocale (LC_ALL, $locale);
+
 if(!getconfig("session_timeout")){
     setconfig("session_timeout", 60);
 }
