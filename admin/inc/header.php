@@ -201,7 +201,8 @@ padding-right:20px;
 padding-bottom:20px;
 }
 
-#menu{
+/*
+.menu{
 background-color:#C4DBFF;
 background-repeat:none;
 background-attachment:fixed;
@@ -215,6 +216,7 @@ font-family:arial;
 font-size:9pt;
 font-weight:bold;
 }
+*/
 
 
 table{
@@ -272,15 +274,92 @@ color:white;
 background-color:black;
 }
 
+.clear{
+clear:both;
+}
+
+/** alle ULs */ 
+ul.menu { 
+  margin: 0; 
+  padding: 0; 
+  list-style: none; 
+} 
+
+ul.menu > li{
+    position: relative;
+
+}
+
+
+/** ULs ab Level 2 */ 
+ul.menu ul { 
+   position: absolute;
+    left: -999em; /** verstecken */ 
+
+} 
+
+/** ULs ab Level 3 */ 
+ul.menu ul ul { 
+  top: 0; 
+} 
+
+/** Kind UL von gehoverten LIs */ 
+.navbar_top li:hover > ul { 
+  left: auto; 
+margin-left:-37px;
+} 
+
+/** Kind UL von gehoverten LIs ab Level 2 */ 
+.navbar_top li li:hover > ul { 
+  left: 100%; 
+} 
+
+/** alle LIs */ 
+.navbar_top li { 
+  float: left; 
+} 
+
+/** alle LIs ab Level 2 */ 
+.navbar_top li li { 
+float: none; 
+background-color:red;
+list-style-type:none;
+} 
+
+/** alle As */ 
+.navbar_top a { 
+  display: block; 
+  padding: .5em 1em; 
+  background: #bbb; 
+} 
+
+/** As ab Level 2 */ 
+.navbar_top li li a { 
+  background: #ccc; 
+} 
+
+/** As ab Level 3 */ 
+.navbar_top li li li a { 
+  background: #ddd; 
+  float: none;
+} 
+
+/** As ab Level 4 */ 
+.navbar_top li li li li a { 
+  background: #eee; 
+} 
+
+
 
 </style>
 <meta name="viewport" content="width=1280"/>
 
 <script type="text/javascript" src="md5.js"></script>
 <style type="text/css" media="screen">
-#menu{
+/*.menu{
 background-image:url(gfx/bg2.jpg);
 }
+*/
 
 body{
 background-image:url(gfx/bg.jpg);
