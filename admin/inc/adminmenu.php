@@ -20,7 +20,7 @@ if(defined("_SECURITY")){
         <a href='?action=pages'>Seiten</a>
       </li>
       <li>
-        <a href='?seite=sitemap'>Werbebanner</a>
+        <a href='?action=banner'>Werbebanner</a>
       </li>
     </ul>
   </li>
