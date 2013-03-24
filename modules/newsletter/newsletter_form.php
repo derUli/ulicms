@@ -43,6 +43,9 @@ if(isset($_POST["submit"])){
    
    $_SESSION["newsletter_data"]["newsletter_title"] =
    $_POST["newsletter_title"];
+   
+   
+
     
    $send_to = $_POST["send_to"];
    

@@ -26,7 +26,13 @@ if(!function_exists("send_html_mail")){
 function send_html_mail($mail_from, $mail_to, 
                    $subject, $text){
    $newsletter_id = getconfig("newsletter_id");
+   $date = date(getconfig("date_format"));
    $subject = str_replace("%newsletter_id%", $newsletter_id, $subject);
+   
+   $subject = str_replace("%year%", strftime("%Y"), $subject);
+   $subject = str_replace("%month%", 
+                          utf8_encode(strftime("%B")), $subject);
+   $subject = str_replace("%date%", $date, $subject);
                       
    $html = "<html>
     <head>
@@ -41,6 +47,12 @@ function send_html_mail($mail_from, $mail_to,
    $html = str_replace("\r\n", "\n", $html);
    $html = str_replace("%newsletter_id%", $newsletter_id, $html);
 
+
+   $html = str_replace("%year%", strftime("%Y"), $html);
+   $html = str_replace("%month%", 
+                       utf8_encode(strftime("%B")), 
+                       $html);  
+   $html = str_replace("%date%", $date, $html);
 
    $header  = "MIME-Version: 1.0\n";
    $header .= "Content-type: text/html; charset=utf-8\n";
