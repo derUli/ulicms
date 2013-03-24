@@ -548,25 +548,25 @@ function autor(){
 	}
 }
 
-
-
 function content(){
 	$status=check_status();
 	if($status == "404 Not Found"){
-		echo "Die von Ihnen gew&uuml;nschte Seite existiert nicht.";
+	        if(file_exists("templates/404.php"))
+	           include "templates/404.php";
+	        else
+		   echo "Die von Ihnen gew&uuml;nschte Seite existiert nicht.";
 		return false;
 	}else if($status == "403 Forbidden"){
-		echo "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.";
+	        if(file_exists("templates/403.php"))
+	           include "templates/403.php";
+		else
+		   echo "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.";
 		return false;
 	}
-	
 
 	mysql_query("UPDATE ".tbname("content")." SET views = views + 1 WHERE systemname='".$_GET["seite"]."'");
 	return import($_GET["seite"]);
-	
 }
-
-
 
 
 function check_status(){
@@ -583,11 +583,8 @@ function check_status(){
               return "200 OK";
            }
 	}
-	
-	
 	$connection=MYSQL_CONNECTION;
 	$test = mysql_query("SELECT * FROM `".tbname("content")."` WHERE systemname='".mysql_real_escape_string($_GET["seite"])."'");
-	
 	if(mysql_num_rows($test) == 0){
 		return "404 Not Found";
 	}else{
@@ -629,10 +626,8 @@ function check_status(){
 		}
 		else{
 			return "403 Forbidden";
-		}
-		
+		}	
 	}
-
 }
 
 ?>
