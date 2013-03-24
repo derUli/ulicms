@@ -139,8 +139,6 @@ function meta_keywords($ipage=null){
 	return false;
 }
 
-
-
 function meta_description($ipage=null){
 	$status=check_status();	
 	$connection=MYSQL_CONNECTION;
@@ -244,15 +242,15 @@ function is_frontpage(){
 
 
 function is_200(){
-  return(check_status("200 OK"));
+  returncheck_status() == "200 OK";
 }
 
 function is_404(){
-  return(check_status("404 Not Found"));
+  return check_status() == "404 Not Found";
 }
 
 function is_403(){
-  return(check_status("404 Forbidden"));
+  return check_status() == "403 Forbidden";
 }
 
 function menu($name){
@@ -551,16 +549,16 @@ function autor(){
 function content(){
 	$status=check_status();
 	if($status == "404 Not Found"){
-	        if(file_exists("templates/404.php"))
-	           include "templates/404.php";
-	        else
-		   echo "Die von Ihnen gew&uuml;nschte Seite existiert nicht.";
+                if(file_exists("templates/404.php"))
+                   include "templates/404.php";
+                else
+                   echo "Die von Ihnen gew&uuml;nschte Seite existiert nicht.";
 		return false;
 	}else if($status == "403 Forbidden"){
 	        if(file_exists("templates/403.php"))
 	           include "templates/403.php";
-		else
-		   echo "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.";
+                else
+                   echo "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.";
 		return false;
 	}
 
