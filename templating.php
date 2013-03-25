@@ -452,7 +452,8 @@ function check_status(){
               return "200 OK";
            }
 	}
-	$connection=MYSQL_CONNECTION;
+	
+	$connection = MYSQL_CONNECTION;
 	$test = mysql_query("SELECT * FROM `".tbname("content")."` WHERE systemname='".mysql_real_escape_string($_GET["seite"])."'");
 	if(mysql_num_rows($test) == 0){
 		return "404 Not Found";
