@@ -54,17 +54,17 @@ if(defined("_SECURITY")){
         <a href="?action=templates&edit=style.css">CSS</a>
       </li>
       <?php 
-      if(file_exists("../403.php")){
+      if(file_exists("../templates/403.php")){
       ?>
-        <li><a href="index.php?action=templates&edit=403.php">403 Fehlerseite</a></li>
+        <li><a href="index.php?action=templates&edit=403.php">403</a></li>
      <?php 
      }
      ?>
 
      <?php 
-         if(file_exists("../404.php")){
+         if(file_exists("../templates/404.php")){
      ?>
-      <li><a href="index.php?action=templates&edit=404.php">404 Fehlerseite</a></li>
+      <li><a href="index.php?action=templates&edit=404.php">404</a></li>
      <?php 
      }
      ?>
