@@ -266,7 +266,7 @@ exit();
 }
 
 
-if($_POST["add_page"]=="add_page"){
+if($_POST["add_page"] == "add_page"){
 	if($_POST["system_title"]!=""){
 	
 	$system_title = mysql_real_escape_string($_POST["system_title"]);
@@ -278,7 +278,11 @@ if($_POST["add_page"]=="add_page"){
 	$redirection = mysql_real_escape_string($_POST["redirection"]);
 	$menu = mysql_real_escape_string($_POST["menu"]);
 	$position = (int)$_POST["position"];
-	$parent = mysql_real_escape_string($_POST["parent"]);
+	
+	if($_POST["parent"] == "NULL")
+           $parent = "NULL";
+	else
+	   $parent = mysql_real_escape_string($_POST["parent"]);
 	$access = implode(",", $_POST["access"]);
 	$access = mysql_real_escape_string($access);
 	$target = mysql_real_escape_string($_POST["target"]);
@@ -290,7 +294,7 @@ if($_POST["add_page"]=="add_page"){
 	" (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position, 
   access, meta_description, meta_keywords, language, target) 
-  VALUES('$system_title','$page_title','$page_content','$parent', $activated,".time().", ".time().
+  VALUES('$system_title','$page_title','$page_content',$parent, $activated,".time().", ".time().
   ",".$_SESSION["login_id"].
   ", ".$comments_enabled .
   ",$notinfeed, '$redirection', '$menu', $position, '".$access."', 
