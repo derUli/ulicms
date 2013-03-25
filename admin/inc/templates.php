@@ -22,6 +22,23 @@ else if(empty($_GET["edit"])){
 <p><a href="index.php?action=templates&edit=maintenance.php">Wartungsmodus</a></p>
 <p><a href="index.php?action=templates&edit=style.css">Stylesheet</a></p>
 
+<?php 
+if(file_exists("../403.php")){
+?>
+<p><a href="index.php?action=templates&edit=403.php">403 Fehlerseite</a></p>
+<?php 
+}
+?>
+
+<?php 
+if(file_exists("../404.php")){
+?>
+<p><a href="index.php?action=templates&edit=404.php">404 Fehlerseite</a></p>
+<?php 
+}
+?>
+
+
 <?php }else if (!empty($_GET["edit"])){
 	$edit=basename($_GET["edit"]);
 	$template_file="../templates/$edit";
