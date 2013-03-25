@@ -43,6 +43,10 @@ if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("mainte
 header("HTTP/1.0 ".$status);
 header("Content-Type: text/html; charset=utf-8");
 
+if(file_exists("templates/functions.php")){
+   include "templates/functions.php";
+}
+
 $cached_page_path = buildCacheFilePath($_SERVER['REQUEST_URI']);
 
 

@@ -38,6 +38,14 @@ if(file_exists("../templates/404.php")){
 }
 ?>
 
+ <?php 
+         if(file_exists("../templates/functions.php")){
+     ?>
+      <p><a href="index.php?action=templates&edit=functions.php">Functions</a></p>
+     <?php 
+     }
+     ?>
+
 
 <?php }else if (!empty($_GET["edit"])){
 	$edit=basename($_GET["edit"]);

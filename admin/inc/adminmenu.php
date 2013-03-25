@@ -70,6 +70,15 @@ if(defined("_SECURITY")){
      <?php 
      }
      ?>
+     
+      <?php 
+         if(file_exists("../templates/functions.php")){
+     ?>
+      <li><a href="index.php?action=templates&edit=functions.php">Functions</a></li>
+     <?php 
+     }
+     ?>
+     
     </ul>
   </li>
   <li><a href="?action=modules">Module</a>
