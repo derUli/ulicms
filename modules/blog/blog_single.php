@@ -175,6 +175,7 @@ function post_comments(){
       $email = mysql_real_escape_string(htmlspecialchars(
       $_POST["email"]));
       $date = time();
+      $comment_unescaped = $_POST["comment"];
       $comment = mysql_real_escape_string($_POST["comment"]);
      
       $_SESSION["name"] = $name;
@@ -216,7 +217,7 @@ function post_comments(){
 		getModuleAdminSelfPath().
 		"#comment".$comment_id;
 	    send_comment_via_email($post->title, 
-		$article_url, $name, $comment);
+		$article_url, $name, $comment_unescaped);
 	  
 	}
 	
