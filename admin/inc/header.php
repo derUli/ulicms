@@ -189,7 +189,7 @@ ul.menu ul ul {
 /** Kind UL von gehoverten LIs */ 
 .navbar_top li:hover > ul { 
   left: auto; 
-margin-left:-37px;
+margin-left:-40px;
 } 
 
 /** Kind UL von gehoverten LIs ab Level 2 */ 
