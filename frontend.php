@@ -72,9 +72,28 @@ else if(file_exists($cached_page_path)){
    }
 }
 
+$modules = getAllModules();
 
 require_once "templates/oben.php";
+
+for($i=0; $i < count($modules); $i++){
+  $before_content_file = getModulePath($modules[$i]).
+  $modules[$i]."_before_content.php";
+  if(file_exists($before_content_file))
+     include $before_content_file;
+
+}
+
 content();
+
+for($i=0; $i < count($modules); $i++){
+  $after_content_file = getModulePath($modules[$i]).
+  $modules[$i]."_after_content.php";
+  if(file_exists($after_content_file))
+     include $after_content_file;
+
+}
+
 require_once "templates/unten.php";
 
 $hasModul = containsModule($_GET["seite"]);

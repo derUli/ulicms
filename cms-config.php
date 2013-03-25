@@ -4,8 +4,8 @@ class config{
 var $mysql_server="localhost";
 var $mysql_user="root";
 var $mysql_password="";
-var $mysql_database="r5";
-var $mysql_prefix="r5_";
+var $mysql_database="ulicms";
+var $mysql_prefix="ulicms_";
 
 }
 ?>
