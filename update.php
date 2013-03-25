@@ -21,7 +21,7 @@ if(file_exists($tpl_unten_filename) and is_writable($tpl_unten_filename)){
    'menu("bottom")' , $template_unten);
    $template_unten = str_replace("menu('down')", 
    "menu('bottom')" , $template_unten);
-   §template_unten = str_replace("comments()", "", $template_unten);
+   $template_unten = str_replace("comments()", "", $template_unten);
    
    $handle = fopen($tpl_unten_filename, "w");
    fwrite($handle, $template_unten);
