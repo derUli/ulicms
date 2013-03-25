@@ -152,6 +152,9 @@ else if($_GET["action"] == "module_settings"){
 
 require_once "inc/footer.php";
 
+
+@include 'cron.php';
+
 mysql_close($connection);
 exit();
 ?>

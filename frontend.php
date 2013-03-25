@@ -109,5 +109,6 @@ if(!getconfig("cache_disabled") and !$hasModul and
 }
 
 
+@include 'cron.php';
 
 ?>

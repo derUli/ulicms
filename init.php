@@ -174,7 +174,5 @@ if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
 }
 
 
-include 'cron.php';
-
 
 ?>
