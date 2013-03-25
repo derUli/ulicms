@@ -405,10 +405,19 @@ function base_metas(){
 
 
 
-echo "<script type=\"text/javascript\" src=\"admin/ckeditor/ckeditor.js\"></script>\r\n";
 
 echo '<link rel="stylesheet" type="text/css" href="core.css"/>';
 echo "\r\n";
+
+$modules = getAllModules();
+for($i=0; $i < count($modules); $i++){
+   $module_head_file = getModulePath($modules[$i]).
+   $modules[$i]."_head.php";
+   if(file_exists($module_head_file)){
+     @include $module_head_file;
+   }
+}
+
 }
 
 
