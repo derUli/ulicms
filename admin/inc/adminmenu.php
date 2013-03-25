@@ -12,6 +12,8 @@ if(defined("_SECURITY")){
 <ul class="menu">
   <li>
     <a href='?action=home'>Willkommen</a>
+    <ul>
+    <li><a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a></li></ul>
   </li>
   <li>
     <a href='?action=contents'>Inhalte</a>
