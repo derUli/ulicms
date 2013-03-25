@@ -96,7 +96,7 @@ function blog_single($seo_shortname){
 }
 
 function comment_form($post_id){
-     $html = "";
+     $html = "<div class=\"comment_form\">";
      $html .= "<form name='form' action='".$_SERVER['REQUEST_URI']."' method='post'>";
      if($_SESSION["language"] == "de"){
         $submit = "Kommentar veröffentlichen";
@@ -128,8 +128,8 @@ function comment_form($post_id){
      $html .= "<br/><textarea name='comment' rows=15 cols=60></textarea>";
      $html .= "<input type='text' name='phone' class='antispam_honeypot' value=''>";
      $html .= "<input type='hidden' name='post_comment_to' value='".$post_id."'>";
-     $html .= "<br/><br/><input type='submit' value='".$submit."'>";
-     $html .= "</form>";
+     $html .= "<br/><br/><div class=\"ulicms_publish_comment\"><input type='submit' value='".$submit."'></div>";
+     $html .= "</form></div>";
      
      return $html;
 }
