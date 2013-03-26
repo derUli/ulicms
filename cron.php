@@ -5,7 +5,6 @@ $empty_trash_days = getconfig("empty_trash_days");
 if($empty_trash_days === false)
    $empty_trash_days = 30;
 
-
 // Papierkorb für Seiten Cronjob
 $empty_trash_timestamp = $empty_trash_days * (60 * 60 * 24);
 mysql_query("DELETE FROM ".tbname("content")." WHERE ".time()." -  `deleted_at` > $empty_trash_timestamp")or die(mysql_error());

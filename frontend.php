@@ -56,7 +56,9 @@ if(file_exists($cached_page_path) and !getconfig("cache_disabled")
    $last_modified = filemtime($cached_page_path);
     
     if($cached_content and (time() - $last_modified < CACHE_PERIOD)){
-      die($cached_content);
+      echo $cached_content;
+      @include 'cron.php';
+      die();
       
    }
 }
@@ -96,6 +98,8 @@ for($i=0; $i < count($modules); $i++){
 
 require_once "templates/unten.php";
 
+
+
 $hasModul = containsModule($_GET["seite"]);
 
 if(!getconfig("cache_disabled") and !$hasModul and
@@ -104,11 +108,10 @@ if(!getconfig("cache_disabled") and !$hasModul and
    $handle = fopen($cached_page_path, "wb");
    fwrite($handle, $generated_html);
    fclose($handle);
-   die($generated_html);
+   echo($generated_html);
+   @include 'cron.php';
+   die();
      
 }
-
-
-@include 'cron.php';
 
 ?>
