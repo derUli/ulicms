@@ -137,7 +137,7 @@ $html.= "<br/>";
                      
                    
           
-   $html.= "<a href='?seite=".get_requested_pagename()."&amp;limit=".($limit3 - 1)."'>";
+   $html.= "<a href='?seite=".get_requested_pagename()."&amp;limit=".($limit3)."'>";
    } 
    
    if($_SESSION["language"] == "de"){
