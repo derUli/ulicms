@@ -57,6 +57,9 @@ function blog_list(){
     $total_entries = mysql_num_rows($count_query);
 
 
+    if($limit1 < 0)
+       $limit1 = 0;
+
     if($_SESSION["group"] >= 20){
        $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE language='".$_SESSION["language"]."' ORDER by datum DESC LIMIT $limit1, ".($posts_per_page));
     }
