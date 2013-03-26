@@ -99,7 +99,6 @@ for($i=0; $i < count($modules); $i++){
 require_once "templates/unten.php";
 
 
-
 $hasModul = containsModule($_GET["seite"]);
 
 if(!getconfig("cache_disabled") and !$hasModul and
@@ -112,6 +111,9 @@ if(!getconfig("cache_disabled") and !$hasModul and
    @include 'cron.php';
    die();
      
+} else {
+   @include 'cron.php';
+   die();
 }
 
 ?>
