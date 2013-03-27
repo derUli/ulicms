@@ -28,4 +28,5 @@ CKEDITOR.editorConfig = function( config ) {
    }
    config.entities_latin = false;
    config.uiColor = '#6b94ac';
+   config.removePlugins = "newpage,templates,preview,print";
 };
