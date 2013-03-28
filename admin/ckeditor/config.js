@@ -4,10 +4,9 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	// Define changes to default configuration here. For example:
-	 config.language = 'de';
-	 config.height = "500px";
-	 //config.width = "700px";
+   config.language = 'de';
+   config.width = "800px";
+   config.height = "400px";
 	 
    if(window.location.href.indexOf("admin/") != -1)
    {
