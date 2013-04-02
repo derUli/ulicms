@@ -96,6 +96,8 @@ function blog_list(){
           $user["lastname"],
           $date_and_autor_string);
           
+          $date_and_autor_string = str_replace("%views%", $post->views, $date_and_autor_string);
+          
           $html .= $date_and_autor_string.
           "<br/><br/>";
           $html.= "<div class='blog_post_content'>".$post->content_preview."</div>";
