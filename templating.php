@@ -433,7 +433,9 @@ function content(){
 		return false;
 	}
 
-	mysql_query("UPDATE ".tbname("content")." SET views = views + 1 WHERE systemname='".$_GET["seite"]."'");
+
+        if(!is_logged_in())
+           mysql_query("UPDATE ".tbname("content")." SET views = views + 1 WHERE systemname='".$_GET["seite"]."'");
 	return import($_GET["seite"]);
 }
 

@@ -17,11 +17,11 @@ function blog_single($seo_shortname){
    
      $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE seo_shortname='$seo_shortname'");
      
-    // set views + 1
-    if($_SESSION["group"] < 20){
+     // count views is user not logged in
+     if(!is_logged_in())
        mysql_query("UPDATE `".tbname("blog")."` SET views = views + 1
        WHERE seo_shortname='$seo_shortname'");
-    }
+    
 
 
     if(mysql_num_rows($query) > 0){
