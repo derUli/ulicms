@@ -137,9 +137,13 @@ function comment_form($post_id){
 
 function send_comment_via_email($article_title, $article_url, $name, $txt){
     $txt = str_replace("\\r\\n", "\n", $txt);
-
+    
+    $article_title = utf8_encode($article_title);
+    $name = utf8_encode($name);
+    $article_url = utf8_encode($article_url);
+    
     $subject = "Neuer Kommentar zum Artikel \"".$article_title."\"";	
-	$message = "$name hat einen neuen Kommentar zum Artikel \"$article_title\" geschrieben.\n\n".
+    $message = "$name hat einen neuen Kommentar zum Artikel \"$article_title\" geschrieben.\n\n".
 	"Kommentar:\n".$txt."\n\n".
 	"Klicke hier, um den Kommentar aufzurufen:\n".
 	$article_url;
