@@ -4,7 +4,7 @@ function language_selection(){
 	$query=mysql_query("SELECT * FROM ".tbname("languages")." ORDER by name");
 	echo "<ul class='language_selection'>";
 	while($row = mysql_fetch_object($query)){
-	    echo "<li>"."<a href='?seite=".get_requested_pagename()."&amp;language=".$row->language_code."'>".$row->name."</a></li>";
+	    echo "<li>"."<a href='".get_requested_pagename().".html?language=".$row->language_code."'>".$row->name."</a></li>";
 	}
 		echo "</ul>";
 
@@ -194,11 +194,11 @@ function menu($name){
 	while($row = mysql_fetch_object($query)){
 	echo "  <li>" ;
 	if(get_requested_pagename() != $row->systemname){
-		echo "<a href='?seite=".$row->systemname."' target='".
+		echo "<a href='".$row->systemname.".html' target='".
 		$row->target."'>";
 	}else{
-		echo "<a class='menu_active_link' href='?seite=".$row->systemname.
-		"' target='".$row->target."'>";
+		echo "<a class='menu_active_link' href='".$row->systemname.
+		".html' target='".$row->target."'>";
 	}
 	
 	echo $row->title;
@@ -214,10 +214,10 @@ function menu($name){
 			
 				echo "      <li>";
 				if(get_requested_pagename() != $row2->systemname){ 
-					echo "<a href='?seite=".$row2->systemname."' target='".
+					echo "<a href='".$row2->systemname.".html' target='".
 					$row->target."'>";
 				}else{
-					echo "<a class='menu_active_link' href='?seite=".$row2->systemname."' target='".
+					echo "<a class='menu_active_link' href='".$row2->systemname.".html' target='".
 					$row->target."'>";
 				}
 				echo $row2->title;
@@ -230,10 +230,10 @@ function menu($name){
 			while($row3 = mysql_fetch_object($query3)){
 				echo "      <li>";
 				if(get_requested_pagename() != $row3->systemname){ 
-					echo "<a href='?seite=".$row3->systemname."' target='".
+					echo "<a href='".$row3->systemname.".html' target='".
 					$row3->target."'>";
 				}else{
-					echo "<a class='menu_active_link' href='?seite=".$row3->systemname."' target='".
+					echo "<a class='menu_active_link' href='".$row3->systemname.".html' target='".
 					$row3->target."'>";
 				}
 				echo $row3->title;
@@ -246,10 +246,10 @@ function menu($name){
 			while($row4 = mysql_fetch_object($query4)){
 				echo "<li>";
 				if(get_requested_pagename() != $row4->systemname){ 
-					echo "<a href='?seite=".$row4->systemname."' target='".
+					echo "<a href='".$row4->systemname.".html' target='".
 					$row4->target."'>";
 				}else{
-					echo "<a class='menu_active_link' href='?seite=".$row4->systemname."' target='".
+					echo "<a class='menu_active_link' href='".$row4->systemname.".html' target='".
 					$row4->target."'>";
 				}
 				echo $row4->title;
