@@ -128,11 +128,8 @@ function newsletter_render(){
    }
    
    
-   $html_output.= "<form class=\"newsletter_form\" action=\"./\" method=\"get\">";
-   
-   
-   $html_output.='<input type="hidden" name="seite" value="'.get_requested_pagename().'">';
-   
+   $html_output.= "<form class=\"newsletter_form\" action=\"".get_requested_pagename().".html\" method=\"get\">";
+      
    if($email){
      $html_output .= "<input name=\"newsletter_email_adress\" type=\"hidden\" value=\"$email\">";
    }
