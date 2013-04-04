@@ -45,11 +45,11 @@ function sitemap_menu($name){
 	while($row = mysql_fetch_object($query)){
 	$html_output.="  <li>" ;
 	if(get_requested_pagename() != $row->systemname){
-		$html_output.="<a href='?seite=".$row->systemname."' target='".
+		$html_output.="<a href='".$row->systemname.".html' target='".
 		$row->target."'>";
 	}else{
-		$html_output.="<a href='?seite=".$row->systemname.
-		"' target='".$row->target."'>";
+		$html_output.="<a href='".$row->systemname.
+		".html' target='".$row->target."'>";
 	}
 
 
@@ -64,10 +64,10 @@ function sitemap_menu($name){
 			while($row2 = mysql_fetch_object($query2)){
 				$html_output.="      <li>";
 				if(get_requested_pagename() != $row2->systemname){ 
-					$html_output.="<a href='?seite=".$row2->systemname."' target='".
+					$html_output.="<a href='".$row2->systemname.".html' target='".
 					$row->target."'>";
 				}else{
-					$html_output.="<a href='?seite=".$row2->systemname."' target='".
+					$html_output.="<a href='".$row2->systemname.".html' target='".
 					$row->target."'>";
 				}
 				$html_output.=$row2->title;
@@ -97,10 +97,10 @@ function sitemap_menu($name){
 			while($row3 = mysql_fetch_object($query3)){
 				$html_output.="      <li>";
 				if(get_requested_pagename() != $row3->systemname){ 
-					$html_output.="<a href='?seite=".$row3->systemname."' target='".
+					$html_output.="<a href='".$row3->systemname.".html' target='".
 					$row3->target."'>";
 				}else{
-					$html_output.="<a href='?seite=".$row3->systemname."' target='".
+					$html_output.="<a href='".$row3->systemname.".html' target='".
 					$row3->target."'>";
 				}
 				$html_output.=$row3->title;
@@ -126,10 +126,10 @@ function sitemap_menu($name){
 			while($row4 = mysql_fetch_object($query4)){
 				$html_output.="<li>";
 				if(get_requested_pagename() != $row4->systemname){ 
-					$html_output.="<a href='?seite=".$row4->systemname."' target='".
+					$html_output.="<a href='".$row4->systemname.".html' target='".
 					$row4->target."'>";
 				}else{
-					$html_output.="<a href='?seite=".$row4->systemname."' target='".
+					$html_output.="<a href='".$row4->systemname.".html' target='".
 					$row4->target."'>";
 				}
 				$html_output.=$row4->title;
