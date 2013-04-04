@@ -90,8 +90,8 @@ function blog_update(){
 	 ";
   mysql_query($insert_query);
   $html_output .= "<script type='text/javascript'>
-  location.replace('?seite=".get_requested_pagename().
-  "&single=".$seo_shortname. "');
+  location.replace('".get_requested_pagename().
+  ".html?single=".$seo_shortname. "');
   </script>
   ";
   
@@ -146,8 +146,8 @@ function blog_submit(){
   mysql_query($insert_query);
   
   $html_output .= "<script type='text/javascript'>
-  location.replace('?seite=".get_requested_pagename().
-  "&single=".$seo_shortname. "');
+  location.replace('".get_requested_pagename().
+  ".html?single=".$seo_shortname. "');
   </script>
   ";
   

@@ -63,9 +63,9 @@ function blog_single($seo_shortname){
 	   
 	    if(($_SESSION["group"] >= 20 and $_SESSION["login_id"] == $post->author)
 		  or ($_SESSION["group"] >= 40)){
-		   $html .= "<a href='?seite=".get_requested_pagename()."&blog_admin=edit_post&id=".$post->id."'>[Bearbeiten]</a> ";
+		   $html .= "<a href='".get_requested_pagename().".html?blog_admin=edit_post&id=".$post->id."'>[Bearbeiten]</a> ";
 		 
-           $html .= "<a href='?seite=".get_requested_pagename()."&blog_admin=delete_post&id=".$post->id."' onclick='return confirm(\"Diesen Post wirklich löschen?\")'>[Löschen]</a>";
+           $html .= "<a href='".get_requested_pagename().".html?blog_admin=delete_post&id=".$post->id."' onclick='return confirm(\"Diesen Post wirklich löschen?\")'>[Löschen]</a>";
 		  }else if($_SESSION["group"] >= 20){
 		   $html .= "
 		   <div class='disabled_link'>[Bearbeiten]</div>
@@ -339,7 +339,7 @@ function blog_display_comments($post_id){
 	     $html .= "</a>";
 	     
 	     if($_SESSION["group"] >= 40){
-               $html .= " <a href='?seite=".get_requested_pagename()."&blog_admin=delete_comment&id=".$comment->id."' onclick='return confirm(\"Diesen Kommentar wirklich löschen?\")'>[Löschen]</a>";	     
+               $html .= " <a href='".get_requested_pagename().".html?blog_admin=delete_comment&id=".$comment->id."' onclick='return confirm(\"Diesen Kommentar wirklich löschen?\")'>[Löschen]</a>";	     
 	     }
 	     
 	     $html .= "<br/>";

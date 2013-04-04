@@ -8,7 +8,7 @@ function blog_edit_form($post_id){
 	
     $html_output = "";
     $all_languages = getAllLanguages();
-    $html_output .= "<form action='?seite=".get_requested_pagename()."&blog_admin=update' method='post' style=''>";
+    $html_output .= "<form action='".get_requested_pagename().".html?blog_admin=update' method='post' style=''>";
     
     $html_output .= "<table class='blog_admin_table'>";
     
