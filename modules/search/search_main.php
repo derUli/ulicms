@@ -18,8 +18,8 @@ function search_render(){
 	  $search_subject = "";
 	}
 	
-	$html_output .= "<form class='search-form' action='./' method='get'>
-	<input type='hidden' name='seite' value='".get_requested_pagename()."'>
+	$html_output .= "<form class='search-form' action='".get_requested_pagename().".html' method='get'>
+
 	Suchbegriff: <input type='text' name='q' value='".$search_subject."'> <input type='submit' value='Suchen'>
 	</form>
 	";
@@ -58,7 +58,7 @@ function search_render(){
 		$html_output.="<hr/>
 		<ul class='result-list'>";
 		while($row = mysql_fetch_assoc($results)){
-			$html_output.= "<li><a href='?seite=".$row["systemname"]."'>".$row["title"]."</a></li>";
+			$html_output.= "<li><a href='".$row["systemname"].".html'>".$row["title"]."</a></li>";
 			
 		}
 		$html_output .= "</ul>";
