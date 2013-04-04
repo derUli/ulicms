@@ -179,7 +179,7 @@ echo "<td>Nein</td>";
 
 
 
-echo "<td><a href=\"../?seite=".$row->systemname."\" target=\"_blank\"><img src=\"gfx/preview.gif\">Anzeigen</a></td>";
+echo "<td><a href=\"../".$row->systemname.".html\" target=\"_blank\"><img src=\"gfx/preview.gif\">Anzeigen</a></td>";
 echo "<td>".'<a href="index.php?action=pages_edit&page='.$row->id.'"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
 if($_SESSION["group"]>=40){
    
