@@ -24,9 +24,9 @@ function intramail_render(){
 
 
 function intramail_generate_page(){
-  	echo '<a href="?seite='.get_requested_pagename().'&box=inbox">Eingang</a> | 
-    <a href="?seite='.get_requested_pagename().'&box=outbox">Ausgang</a> | 
-    <a href="?seite='.get_requested_pagename().'&box=new">Mail verfassen</a>
+  	echo '<a href="'.get_requested_pagename().'.html?box=inbox">Eingang</a> | 
+    <a href="'.get_requested_pagename().'.html?box=outbox">Ausgang</a> | 
+    <a href="'.get_requested_pagename().'.html?box=new">Mail verfassen</a>
     ';
     switch($_GET["box"]){
     case "new":
@@ -84,7 +84,7 @@ function intramail_view_message(){
    '<tr>
    <td><br/></td>
    <td>'.
-    "<a href='?seite=".get_requested_pagename()."&box=reply&message=".$row->id.
+    "<a href='".get_requested_pagename().".html?box=reply&message=".$row->id.
       "'>"."Antworten"."</a>"
    . 
    '</td>'.
@@ -139,10 +139,10 @@ function intramail_post_inbox(){
         echo "<strong style='color:red;'>Neu</strong> ";
       }
       echo
-      "<a href='?seite=".get_requested_pagename()."&box=inbox&message=".$row->id.
+      "<a href='".get_requested_pagename().".html?box=inbox&message=".$row->id.
       "&read=1'>".$row->subject."</a>"." [".date(getconfig("date_format"), $row->date).
-      "] "."[<a href='?seite=".get_requested_pagename().
-      "&box=inbox&delete=".$row->id."' onclick='return confirm(\"Diese Mail wirklich löschen?\")'>X</a>"."]".
+      "] "."[<a href='".get_requested_pagename().
+      ".html?box=inbox&delete=".$row->id."' onclick='return confirm(\"Diese Mail wirklich löschen?\")'>X</a>"."]".
       "</li>";
     }
     echo "</ol>";
@@ -169,7 +169,7 @@ function intramail_post_outbox(){
         echo "<strong style='color:red;'>Neu</strong> ";
       }
       echo
-      "<a href='?seite=".get_requested_pagename()."&box=inbox&message=".$row->id.
+      "<a href='".get_requested_pagename().".html?box=inbox&message=".$row->id.
       "'>".$row->subject."</a>"." [".date(getconfig("date_format"), $row->date).
       "] ".
       "</li>";
@@ -261,7 +261,7 @@ function intramail_new_mail($mail_to = '', $subject = '', $message = ''){
     Bitte warten! Sie werden weitergeleitet</p>
     
     <script type='text/javascript'>
-    setTimeout('location.replace(\'?seite=".get_requested_pagename()."&box=inbox\')', 4000);
+    setTimeout('location.replace(\'".get_requested_pagename().".html?box=inbox\')', 4000);
     </script>
     ";
     
@@ -269,7 +269,7 @@ function intramail_new_mail($mail_to = '', $subject = '', $message = ''){
   }
   
   
-  echo '<form method="post" action="?seite='.get_requested_pagename().'&box=new">
+  echo '<form method="post" action="'.get_requested_pagename().'.html?box=new">
   
   ';
   
