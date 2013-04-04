@@ -1,5 +1,5 @@
 <?php 
-// Image Gallery Plugin 0.1 for UliCMS 4.3
+// Image Gallery Plugin 0.2 for UliCMS 2014 R2
 
 // Main Function
 function gallery_render(){
@@ -27,7 +27,7 @@ function output_single($gallery_image_folder, $id){
 					fclose($fhandle);
 					$description_content = "";
 				}
-	$html_output.="<p align='center'><a href='?seite=".get_requested_pagename()."'>"."<img style='border:0px' src='".$gallery_image_folder.$id.".standard.jpg' alt='".$description_content."'/></a>
+	$html_output.="<p align='center'><a href='".get_requested_pagename().".html'>"."<img style='border:0px' src='".$gallery_image_folder.$id.".standard.jpg' alt='".$description_content."'/></a>
 	<br/>".nl2br($description_content)."</p>";
 	return $html_output;
 	}
@@ -73,7 +73,7 @@ function output_all($gallery_image_folder){
 				$description_filename = $gallery_image_folder.$exploded_filename[0].".txt";
 				$path_to_original_image = $gallery_image_folder.$filename;
 			
-				$big_url = "?seite=".get_requested_pagename()."&"."img_id=".$exploded_filename[0];
+				$big_url = "".get_requested_pagename().".html?"."img_id=".$exploded_filename[0];
 				$html_output.="<a href='$big_url'>";
 				$html_output.="<img src='".$thumbnail_filename."' style='margin-right:20px;border:0px;'";
 				if(is_file($description_filename)){
