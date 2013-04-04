@@ -198,10 +198,10 @@ function guestbook_render(){
 
 function guestbook_get_add_entry_link(){
 		if($_SESSION["language"] == "de"){
-			return "<a href=\""."?seite=".get_requested_pagename()."&action=add"."\">Eintrag hinzufügen</a><hr/>";	
+			return "<a href=\""."".get_requested_pagename().".html?action=add"."\">Eintrag hinzufügen</a><hr/>";	
 		}
 		else{
-			return "<a href=\""."?seite=".get_requested_pagename()."&action=add"."\">Add Entry</a><hr/>";	
+			return "<a href=\""."".get_requested_pagename().".html?action=add"."\">Add Entry</a><hr/>";	
 		}
 	}
 	
@@ -216,7 +216,7 @@ function get_add_entry_form(){
 		."templates/add_entry_from_english.tpl");
 		}
 		$add_entry_form_template = str_replace("{form_action_url}",
-		"?seite=".get_requested_pagename()."&action=add", $add_entry_form_template);		
+		"".get_requested_pagename().".html?action=add", $add_entry_form_template);		
 		return $add_entry_form_template;		
 }
 
@@ -250,8 +250,8 @@ function guestbook_list(){
 		
 		<small>".$row->date."</small>";
 		if($_SESSION["group"] >= 40){
-			$html_output.=' &nbsp;&nbsp;[<a href="?seite='.get_requested_pagename().
-			"&action=delete&delete=".
+			$html_output.=' &nbsp;&nbsp;[<a href="'.get_requested_pagename().
+			".html?action=delete&delete=".
 			$row->id.'" onclick="return confirm(\'Diesen Eintrag löschen?\');">Löschen</a>]';
 			
 		}
@@ -277,7 +277,7 @@ function guestbook_list(){
 	if($limit < $last){
 			$new_limit = $limit + 10;
 			
-			$html_output .= "<br/>br/><a href='?seite=".get_requested_pagename()."&action=list&limit=$new_limit#gb_more'>"."Mehr</a>";
+			$html_output .= "<br/>br/><a href='".get_requested_pagename().".html?action=list&limit=$new_limit#gb_more'>"."Mehr</a>";
 		}
 	
 	
