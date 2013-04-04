@@ -119,7 +119,7 @@ function profile_list(){
   echo "<ol>";
   for($i=0; $i<count($users); $i++){
      $data = getUserByName($users[$i]);
-     echo "<li>".'<a href="?seite='.get_requested_pagename()."&profile=".$data["username"].'">'.$data["username"]."</a></li>";
+     echo "<li>".'<a href="'.get_requested_pagename().".html?profile=".$data["username"].'">'.$data["username"]."</a></li>";
   }
 }
 		
