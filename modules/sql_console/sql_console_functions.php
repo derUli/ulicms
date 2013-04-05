@@ -220,7 +220,7 @@ function sqlQueryFromString($sql_query){
    
    echo "<p>".mysql_affected_rows(). " rows affected"."</p>";
    
-   
+      if($query !== false and $query !== true){
       $fields_num = mysql_num_fields($query);
      if($fields_num){
      echo "<table border='1' width='98%'><tr>";
@@ -248,6 +248,8 @@ while($row = mysql_fetch_row($query))
 
 echo "</table>
 <br/>";
+
+}
 
 }
 
