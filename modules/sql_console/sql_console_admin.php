@@ -12,14 +12,19 @@ define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
 // Konfiguration checken
 $send_comments_via_email = getconfig("blog_send_comments_via_email") == "yes";
 
+// Session-Variable initialisieren
+if(!isset($_SESSION["sql_code"]))
+   $_SESSION["sql_code"] = "";
+
 function sql_console_admin(){
 include getModulePath("sql_console")."sql_console_functions.php";
 
 include getModulePath("sql_console")."sql_console_styles.php";
-
 if(!empty($_POST["sql_code"])){
   sqlQueryFromString($_POST["sql_code"]);
+  $_SESSION["sql_code"] = $_POST["sql_code"];
 }
+
 
 include getModulePath("sql_console")."sql_console_form.php";
 }

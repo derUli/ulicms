@@ -197,42 +197,50 @@ function display_error(){
 
 
 
-function sqlQueryFromFile($dbms_schema){
-
-$sql_query = @fread(@fopen($dbms_schema, 'r'), @filesize($dbms_schema));
-if(!$sql_query){
-  echo "Can't open SQL-File";
-  return false;
-}
-$sql_query = remove_remarks($sql_query);
-$sql_query = split_sql_file($sql_query, ';');
-
-$i=1;
-
-$query = mysql_query($sql);
-if(!$query){
-  display_error();
-  return false;
-}
-
-return true;
-
-}
 
 
 function sqlQueryFromString($sql_query){
 
-
   $sql_query = remove_remarks($sql_query);
   $sql_query = split_sql_file($sql_query, ';');
 
-  $i=1;
-
-  for($i=0; $i < count ($sql_query); $i++){
-      $query = mysql_query($sql_query[$i]);
+    foreach($sql_query as $sql){
+      $query = false;
+      $query = mysql_query($sql);
+      
   if(!$query){
     display_error();
     return false;
+   }
+   
+   echo "<p>".mysql_affected_rows(). " rows affected"."</p>";
+   
+   
+      $fields_num = mysql_num_fields($query);
+     if($fields_num){
+     echo "<table border='1' width='98%'><tr>";
+     // printing table headers
+    for($i=0; $i<$fields_num; $i++)
+    { 
+      $field = mysql_fetch_field($query);
+      echo "<td>{$field->name}</td>";
+    }
+echo "</tr>\n";
+// printing table rows
+while($row = mysql_fetch_row($query))
+{
+    echo "<tr>";
+
+    // $row is array... foreach( .. ) puts every element
+    // of $row to $cell variable
+    foreach($row as $cell)
+        echo "<td>$cell</td>";
+
+    echo "</tr>\n";
+}
+
+echo "</table>";
+
 }
 
 }
