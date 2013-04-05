@@ -36,7 +36,8 @@ set_time_limit ( 0 );
 //
 function remove_comments(&$output)
 {
-   $lines = explode("\n", $output);
+   $lines = explode("
+", $output);
    $output = "";
 
    // try to keep mem. use down
@@ -52,7 +53,8 @@ function remove_comments(&$output)
 
       if( !$in_comment )
       {
-         $output .= $lines[$i] . "\n";
+         $output .= $lines[$i] . "
+";
       }
 
       if( preg_match("/\*\/$/", preg_quote($lines[$i])) )
@@ -70,7 +72,8 @@ function remove_comments(&$output)
 //
 function remove_remarks($sql)
 {
-   $lines = explode("\n", $sql);
+   $lines = explode("
+", $sql);
 
    // try to keep mem. use down
    $sql = "";
@@ -84,11 +87,13 @@ function remove_remarks($sql)
       {
          if (isset($lines[$i][0]) && $lines[$i][0] != "#")
          {
-            $output .= $lines[$i] . "\n";
+            $output .= $lines[$i] . "
+";
          }
          else
          {
-            $output .= "\n";
+            $output .= "
+";
          }
          // Trading a bit of speed for lower mem. use here.
          $lines[$i] = "";
@@ -223,9 +228,10 @@ function sqlQueryFromString($sql_query){
     for($i=0; $i<$fields_num; $i++)
     { 
       $field = mysql_fetch_field($query);
-      echo "<td>{$field->name}</td>";
+      echo "<td style=\"font-weight:bold;\">{$field->name}</td>";
     }
-echo "</tr>\n";
+echo "</tr>
+";
 // printing table rows
 while($row = mysql_fetch_row($query))
 {
@@ -236,7 +242,8 @@ while($row = mysql_fetch_row($query))
     foreach($row as $cell)
         echo "<td>$cell</td>";
 
-    echo "</tr>\n";
+    echo "</tr>
+";
 }
 
 echo "</table>
