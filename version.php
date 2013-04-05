@@ -1,3 +1,3 @@
 <?php 
-$version="2014R2 Beta";
+$version="2014R2";
 ?>
