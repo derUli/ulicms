@@ -14,7 +14,13 @@ $send_comments_via_email = getconfig("blog_send_comments_via_email") == "yes";
 
 function sql_console_admin(){
 include getModulePath("sql_console")."sql_console_functions.php";
+
 include getModulePath("sql_console")."sql_console_styles.php";
+
+if(!empty($_POST["sql_code"])){
+  sqlQueryFromString($_POST["sql_code"]);
+}
+
 include getModulePath("sql_console")."sql_console_form.php";
 }
 

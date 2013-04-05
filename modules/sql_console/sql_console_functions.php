@@ -208,17 +208,33 @@ $sql_query = remove_remarks($sql_query);
 $sql_query = split_sql_file($sql_query, ';');
 
 $i=1;
-foreach($sql_query as $sql){
-echo $i++;
-echo "
-";
-
-}
 
 $query = mysql_query($sql);
 if(!$query){
   display_error();
   return false;
+}
+
+return true;
+
+}
+
+
+function sqlQueryFromString($sql_query){
+
+
+  $sql_query = remove_remarks($sql_query);
+  $sql_query = split_sql_file($sql_query, ';');
+
+  $i=1;
+
+  for($i=0; $i < count ($sql_query); $i++){
+      $query = mysql_query($sql_query[$i]);
+  if(!$query){
+    display_error();
+    return false;
+}
+
 }
 
 return true;
