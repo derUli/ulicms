@@ -239,7 +239,8 @@ while($row = mysql_fetch_row($query))
     echo "</tr>\n";
 }
 
-echo "</table>";
+echo "</table>
+<br/>";
 
 }
 

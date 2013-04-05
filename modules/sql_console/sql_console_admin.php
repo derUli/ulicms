@@ -20,7 +20,7 @@ function sql_console_admin(){
 include getModulePath("sql_console")."sql_console_functions.php";
 
 include getModulePath("sql_console")."sql_console_styles.php";
-if(!empty($_POST["sql_code"])){
+if(isset($_POST["sql_code"])){
   sqlQueryFromString($_POST["sql_code"]);
   $_SESSION["sql_code"] = $_POST["sql_code"];
 }
