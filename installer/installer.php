@@ -68,22 +68,22 @@ if(!isset($_POST["step"])){
 ?>
 <h2>MySQL-Logindaten</h2>
 <?php
-@$connection=mysql_connect($_POST["servername"],$_POST["loginname"],$_POST["passwort"]);
+@$connection=mysql_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
 if($connection==false){
-echo "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werden.<br/>Dies kann z.B. an einem falschen Passwort liegen. Wenn Sie sich sicher sind, dass das Passwort richtig ist, prüfen Sie ob der MySQL-Datenbankserver läuft oder eventuell abgestürzt ist.";
+  echo "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werden.<br/>Dies kann z.B. an einem falschen Passwort liegen. Wenn Sie sich sicher sind, dass das Passwort richtig ist, prüfen Sie ob der MySQL-Datenbankserver läuft oder eventuell abgestürzt ist.";
 }else{
 
 @$select=mysql_select_db($_POST["datenbank"]);
 
 if($select==false){
-echo "<p>Die Datenbank \"".htmlspecialchars($_POST["datenbank"])."\" konnte nicht geöffnet werden.<br/>Eventuell müssen Sie die Datenbank vorher anlegen.</p>";
+   echo "<p>Die Datenbank \"".htmlspecialchars($_POST["datenbank"])."\" konnte nicht geöffnet werden.<br/>Eventuell müssen Sie die Datenbank vorher anlegen.</p>";
 }else{
-$_SESSION["mysql"]=array();
-$_SESSION["mysql"]["server"]=$_POST["servername"];
-$_SESSION["mysql"]["loginname"]=$_POST["loginname"];
-$_SESSION["mysql"]["passwort"]=$_POST["passwort"];
-$_SESSION["mysql"]["datenbank"]=$_POST["datenbank"];
-$_SESSION["mysql"]["prefix"]=$_POST["prefix"];
+   $_SESSION["mysql"]=array();
+   $_SESSION["mysql"]["server"]=$_POST["servername"];
+   $_SESSION["mysql"]["loginname"]=$_POST["loginname"];
+   $_SESSION["mysql"]["passwort"]=$_POST["passwort"];
+   $_SESSION["mysql"]["datenbank"]=$_POST["datenbank"];
+   $_SESSION["mysql"]["prefix"]=$_POST["prefix"];
 ?>
 <p>Die Verbindung mit dem Datenbankserver wurde erfolgreich hergestellt.</p>
 
