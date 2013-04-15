@@ -68,7 +68,7 @@ if(!isset($_POST["step"])){
 ?>
 <h2>MySQL-Logindaten</h2>
 <?php
-@$connection=mysql_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
+@$connection = mysql_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
 if($connection==false){
   echo "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werden.<br/>Dies kann z.B. an einem falschen Passwort liegen. Wenn Sie sich sicher sind, dass das Passwort richtig ist, prüfen Sie ob der MySQL-Datenbankserver läuft oder eventuell abgestürzt ist.";
 }else{
@@ -148,7 +148,7 @@ if($select==false){
 
 
 
-$connection = mysql_connect($_SESSION["mysql"]["server"],$_SESSION["mysql"]["loginname"],$_SESSION["mysql"]["passwort"]);
+$connection = mysql_connect($_SESSION["mysql"]["server"], $_SESSION["mysql"]["loginname"], $_SESSION["mysql"]["passwort"]);
 
 mysql_select_db($_SESSION["mysql"]["datenbank"]);
 
