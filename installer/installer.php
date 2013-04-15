@@ -79,11 +79,11 @@ if($select==false){
    echo "<p>Die Datenbank \"".htmlspecialchars($_POST["datenbank"])."\" konnte nicht geöffnet werden.<br/>Eventuell müssen Sie die Datenbank vorher anlegen.</p>";
 }else{
    $_SESSION["mysql"]=array();
-   $_SESSION["mysql"]["server"]=$_POST["servername"];
-   $_SESSION["mysql"]["loginname"]=$_POST["loginname"];
-   $_SESSION["mysql"]["passwort"]=$_POST["passwort"];
-   $_SESSION["mysql"]["datenbank"]=$_POST["datenbank"];
-   $_SESSION["mysql"]["prefix"]=$_POST["prefix"];
+   $_SESSION["mysql"]["server"] = $_POST["servername"];
+   $_SESSION["mysql"]["loginname"] = $_POST["loginname"];
+   $_SESSION["mysql"]["passwort"] = $_POST["passwort"];
+   $_SESSION["mysql"]["datenbank"] = $_POST["datenbank"];
+   $_SESSION["mysql"]["prefix"] = $_POST["prefix"];
 ?>
 <p>Die Verbindung mit dem Datenbankserver wurde erfolgreich hergestellt.</p>
 
