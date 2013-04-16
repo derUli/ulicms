@@ -27,10 +27,8 @@ function blog_edit_form($post_id){
     $html_output .= "<strong>SEO-URL:</strong>";
     $html_output .= "</td>";
     $html_output .= "<td>";
-    $html_output .= "http://".$_SERVER["SERVER_NAME"].
-    "/pfad/zu/ulicms/".
-    "?seite=".get_requested_pagename().
-    "&single=<input style='font-weight:bold;background-color:rgb(240, 240, 240);border:0px;' name='seo_shortname' type='text' maxlength=200 size=50 value='".
+    $html_output .= "http://".$_SERVER["SERVER_NAME"]."".dirname($_SERVER['REQUEST_URI'])."/".get_requested_pagename().".html".
+    "?single=<input style='font-weight:bold;background-color:rgb(240, 240, 240);border:0px;' name='seo_shortname' type='text' maxlength=200 size=50 value='".
 	htmlspecialchars($post->seo_shortname)."'>";
     $html_output .= "</td>";
     $html_output .= "</tr>";
