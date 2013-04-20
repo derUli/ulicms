@@ -1,5 +1,6 @@
-body{
+﻿body{
 margin:auto;
+font-family:arial;
 }
 
 
@@ -11,6 +12,10 @@ font-size:10pt;
 html{
 overflow-x:hidden;
 overflow-y:scroll;
+}
+
+.blog_pagination_older{
+float:right;
 }
 
 .header{

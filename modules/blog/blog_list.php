@@ -135,6 +135,8 @@ $html.= "<br/>";
    $html.= "<br/><div class='page_older_newer'>";
    
    
+   $html .= "<span class='blog_pagination_newer'>";
+   
     if($limit3 > -1){
                      
                    
@@ -154,7 +156,11 @@ $html.= "<br/>";
        $html.= "</a>";
    }
    
-   $html .= "&nbsp;&nbsp;";
+   $html.= "</span>";
+   
+   $html .= "";
+   
+   $html .= "<span class='blog_pagination_older'>";
    
    
    
@@ -176,6 +182,7 @@ $html.= "<br/>";
    }
   
    
+   $html.= "</span>";
    
    
    $html.= "</div>";
@@ -194,7 +201,6 @@ if($_SESSION["language"] == "de"){
 }
 
 
-$html.= "</p>";
 
 return $html;
 

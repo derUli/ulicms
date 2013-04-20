@@ -133,7 +133,7 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 <strong data-tooltip="Sollen Kommentare aktiviert sein?">Kommentare:</strong><br/>
 <select name="comments_enabled" size=1>
 <option value="1">aktiviert</option>
-<option value="0">deaktiviert</option>
+<option value="0" selected="selected">deaktiviert</option>
 </select>
 
 <br/><br/>
