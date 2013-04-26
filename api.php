@@ -7,7 +7,7 @@ function getconfig($key){
 	$query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
-		return $row->value;
+		   return $row->value;
 		}
 	}
 	else{

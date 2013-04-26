@@ -39,7 +39,7 @@ while($row = mysql_fetch_object($query)){
   echo "<description>".htmlspecialchars($row->content_preview)."</description>\n";
 }
 
-echo "</channel>";
+echo "</channel>\n";
 echo "</rss>";
 
 ?>
