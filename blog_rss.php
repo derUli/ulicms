@@ -6,6 +6,7 @@ if($blog_feed_max_items === false)
    setconfig("blog_feed_max_items", 10);
    $blog_feed_max_items = 10;
 
+$seite = basename($_GET["s"]);
 
 function rootDirectory() {
  $pageURL = 'http';
@@ -14,7 +15,11 @@ function rootDirectory() {
  $dirname = dirname($_SERVER["REQUEST_URI"]);
  $dirname = str_replace("\\", "/", $dirname);
  $dirname = trim($dirname, "/");
- $dirname = "/".$dirname."/";
+ if($dirname != ""){
+    $dirname = "/".$dirname."/";
+ } else {
+   $dirname = "/";
+ }
  if ($_SERVER["SERVER_PORT"] != "80") {
   $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$dirname;
  } else {
@@ -32,11 +37,22 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 echo "\n";
 echo '<rss version="2.0">';
 echo "\n";
+
 echo "<channel>";
+
+echo "<title>".getconfig("homepage_title")."</title>\n";
+echo "<link>".rootDirectory()."</link>\n";
+echo "<description>".getconfig("motto")."</description>\n";
+
+
+
 while($row = mysql_fetch_object($query)){
+  echo "<item>\n";
   echo "<title>".$row->title."</title>\n";
-  echo "<link>".rootDirectory().$row->seo_shortname.".html</link>\n";
+  echo "<link>".rootDirectory().$seite.".html?single=".$row->seo_shortname."</link>\n";
   echo "<description>".htmlspecialchars($row->content_preview)."</description>\n";
+  
+  echo "</item>\n";
 }
 
 echo "</channel>\n";
