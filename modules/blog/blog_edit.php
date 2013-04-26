@@ -18,7 +18,7 @@ function blog_edit_form($post_id){
     $html_output .= "</td>";
     $html_output .= "<td>";
     $html_output .= "<input name='title' type='text' maxlength=200 size=70 value='".
-	htmlspecialchars($post->title)."'>";
+	htmlspecialchars($post->title, ENT_QUOTES)."'>";
     $html_output .= "</td>";
     $html_output .= "</tr>";
     
