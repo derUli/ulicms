@@ -8,6 +8,12 @@ if($blog_feed_max_items === false)
 
 $seite = basename($_GET["s"]);
 
+if(!empty($_GET["lang"]))
+   $lang = basename($_GET["lang"]);
+else
+   $lang = getconfig("default_language");
+
+
 function rootDirectory() {
  $pageURL = 'http';
  if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
@@ -29,7 +35,7 @@ function rootDirectory() {
 }
 
 
-$query = mysql_query("SELECT seo_shortname, content_preview, title FROM ".tbname("blog"). " WHERE entry_enabled = 1 ORDER by datum DESC LIMIT $blog_feed_max_items");
+$query = mysql_query("SELECT seo_shortname, content_preview, title FROM ".tbname("blog"). " WHERE entry_enabled = 1 AND language='$lang' ORDER by datum DESC LIMIT $blog_feed_max_items");
 
 header("Content-Type: text/xml; charset=UTF-8");
 
