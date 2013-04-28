@@ -2,9 +2,10 @@
 require_once "init.php";
 
 $blog_feed_max_items = getconfig("blog_feed_max_items");
-if($blog_feed_max_items === false)
+if($blog_feed_max_items === false){
    setconfig("blog_feed_max_items", 10);
    $blog_feed_max_items = 10;
+}
 
 $seite = basename($_GET["s"]);
 
