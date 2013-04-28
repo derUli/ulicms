@@ -96,7 +96,7 @@ while($row = mysql_fetch_object($query)){
   echo "<link>".$link."</link>\n";
   echo "<description>".htmlspecialchars($description)."</description>\n";
   echo "<pubDate>".date("r", $row->datum)."</pubDate>\n"; 
-  echo "<guid isPermaLink=\"false\">".$row->seo_shortname."</guid>";
+  echo "<guid isPermaLink=\"false\">".$row->seo_shortname."</guid>\n";
   echo "</item>\n";
 }
 
