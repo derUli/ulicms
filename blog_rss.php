@@ -65,7 +65,7 @@ while($row = mysql_fetch_object($query)){
   echo "<link>".rootDirectory().$seite.".html?single=".$row->seo_shortname."</link>\n";
   echo "<description>".htmlspecialchars($row->content_preview)."</description>\n";
   echo "<pubDate>".date("r", $row->datum)."</pubDate>\n"; 
-  echo "<guid isPermaLink=\"false\">".$row->id."</guid>";
+  echo "<guid isPermaLink=\"true\">".rootDirectory().$seite.".html?single=".$row->seo_shortname."</guid>";
   echo "</item>\n";
 }
 
