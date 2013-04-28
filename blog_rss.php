@@ -48,6 +48,12 @@ echo "<channel>";
 echo "<title>".getconfig("homepage_title")."</title>\n";
 echo "<link>".rootDirectory()."</link>\n";
 echo "<description>".getconfig("motto")."</description>\n";
+
+if(!getconfig("hide_meta_generator")){
+   $generator = "UliCMS Release ".cms_version();
+   echo "<generator>".$generator."</generator>";
+}
+
 echo "<pubDate>".date("r")."</pubDate>\n"; 
 
 
