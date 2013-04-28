@@ -35,7 +35,7 @@ function rootDirectory() {
 }
 
 
-$query = mysql_query("SELECT datum, seo_shortname, content_preview, title FROM ".tbname("blog"). " WHERE entry_enabled = 1 AND language='$lang' ORDER by datum DESC LIMIT $blog_feed_max_items");
+$query = mysql_query("SELECT id, datum, seo_shortname, content_preview, title FROM ".tbname("blog"). " WHERE entry_enabled = 1 AND language='$lang' ORDER by datum DESC LIMIT $blog_feed_max_items");
 
 header("Content-Type: text/xml; charset=UTF-8");
 
@@ -65,6 +65,7 @@ while($row = mysql_fetch_object($query)){
   echo "<link>".rootDirectory().$seite.".html?single=".$row->seo_shortname."</link>\n";
   echo "<description>".htmlspecialchars($row->content_preview)."</description>\n";
   echo "<pubDate>".date("r", $row->datum)."</pubDate>\n"; 
+  echo "<guid isPermaLink=\"false\">".$row->id."</guid>";
   echo "</item>\n";
 }
 
