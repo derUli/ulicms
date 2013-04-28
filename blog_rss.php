@@ -45,10 +45,11 @@ echo '<rss version="2.0">';
 echo "\n";
 
 echo "<channel>";
-
 echo "<title>".getconfig("homepage_title")."</title>\n";
 echo "<link>".rootDirectory()."</link>\n";
 echo "<description>".getconfig("motto")."</description>\n";
+echo "<pubDate>".date("r")."</pubDate>\n"; 
+
 
 
 
@@ -57,7 +58,7 @@ while($row = mysql_fetch_object($query)){
   echo "<title>".$row->title."</title>\n";
   echo "<link>".rootDirectory().$seite.".html?single=".$row->seo_shortname."</link>\n";
   echo "<description>".htmlspecialchars($row->content_preview)."</description>\n";
- echo "<pubDate>".date("r", $row->datum)."</pubDate>\n"; 
+  echo "<pubDate>".date("r", $row->datum)."</pubDate>\n"; 
   echo "</item>\n";
 }
 
