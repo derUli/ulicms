@@ -287,7 +287,7 @@ function containsModule($page, $module = false){
    $content = str_replace("&quot;", "\"", $content);
    
    if($module)  
-      return preg_match("/\[module=\"".$module."\"\]/", 
+      return preg_match("/\[module=\"".preg_quote($module)."\"\]/", 
       $content);
    else
       return preg_match("/\[module=\".+\"\]/", 
