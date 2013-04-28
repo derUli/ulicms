@@ -90,13 +90,12 @@ while($row = mysql_fetch_object($query)){
    $description);
 
   echo "<item>\n";
-  echo "<title>".$row->tite."</title>\n";
+  echo "<title>".$row->title."</title>\n";
   
   $link = rootDirectory().$seite.".html?single=".$row->seo_shortname;
   echo "<link>".$link."</link>\n";
   echo "<description>".htmlspecialchars($description)."</description>\n";
   echo "<pubDate>".date("r", $row->datum)."</pubDate>\n"; 
-  echo "<guid isPermaLink=\"false\">".$row->seo_shortname."</guid>\n";
   echo "</item>\n";
 }
 
