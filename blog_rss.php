@@ -51,7 +51,7 @@ echo "<description>".getconfig("motto")."</description>\n";
 
 if(!getconfig("hide_meta_generator")){
    $generator = "UliCMS Release ".cms_version();
-   echo "<generator>".$generator."</generator>";
+   echo "<generator>".$generator."</generator>\n";
 }
 
 echo "<pubDate>".date("r")."</pubDate>\n"; 
