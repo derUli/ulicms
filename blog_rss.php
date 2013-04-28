@@ -60,12 +60,43 @@ echo "<pubDate>".date("r")."</pubDate>\n";
 
 
 while($row = mysql_fetch_object($query)){
+
+  $servername = $_SERVER["SERVER_NAME"];
+   
+   if($_SERVER['HTTPS'])
+     $url = "https://";
+   else
+     $url = "http://";
+     
+   $url .= $servername;
+
+   $description = $row->content_preview;
+   // Replace Relative URLs
+   $description = 
+   str_replace("<a href=\"/", "<a href=\"$url/", 
+   $description);
+   
+   $description = 
+   str_replace("<a href='/", "<a href='$url/", 
+   $description);
+   
+   $description = 
+   str_replace(" src=\"/", " src=\"$url/", 
+   $description);
+   
+   $description = 
+   str_replace(" href=\"?seite=", 
+   " href=\"$url/?seite=",
+   $description);
+
   echo "<item>\n";
-  echo "<title>".$row->title."</title>\n";
-  echo "<link>".rootDirectory().$seite.".html?single=".$row->seo_shortname."</link>\n";
-  echo "<description>".htmlspecialchars($row->content_preview)."</description>\n";
+  echo "<title>".$row->tite."</title>\n";
+  
+  $link = rootDirectory().$seite.".html?single=".$row->seo_shortname;
+  echo "<link>".$link."</link>\n";
+  echo "<description>".htmlspecialchars($description)."</description>\n";
   echo "<pubDate>".date("r", $row->datum)."</pubDate>\n"; 
-  echo "<guid isPermaLink=\"true\">".rootDirectory().$seite.".html?single=".$row->seo_shortname."</guid>";
+  echo "<guid isPermaLink=\"false\">".$row->seo_shortname."</guid>\n";
   echo "</item>\n";
 }
 
