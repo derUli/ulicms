@@ -279,15 +279,19 @@ function is__writable($path)
 
 
 // Check if site contains a module
-function containsModule($page){
+function containsModule($page, $module = false){
    $query = mysql_query("SELECT * FROM ".tbname("content"). " WHERE systemname = '".
    mysql_real_escape_string($page)."'");
    $dataset = mysql_fetch_assoc($query);
    $content = $dataset["content"];
    $content = str_replace("&quot;", "\"", $content);
    
-   return preg_match("/\[module=\".+\"\]/", 
-   $content);
+   if($module)  
+      return preg_match("/\[module=\"".$module."\"\]/", 
+      $content);
+   else
+      return preg_match("/\[module=\".+\"\]/", 
+      $content);
    
 }
 
