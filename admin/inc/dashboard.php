@@ -20,6 +20,16 @@ if(defined("_SECURITY")){
 <p>Hallo <?php echo $_SESSION["firstname"]." ".$_SESSION["lastname"];?>! [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
 </p>
 
+<?php 
+$updateInfo = checkForUpdates();
+
+if($updateInfo and is_admin()){
+?>
+<h2>Update Verfügbar</h2>
+<?php echo strip_tags($updateInfo,
+                                            "<p><a><strong><b><u><em><i><span><img>");?>
+<?php }?>
+
 
 <?php $motd = getconfig("motd");
 if($motd or strlen($motd)>10){

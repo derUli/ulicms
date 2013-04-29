@@ -16,6 +16,16 @@ function getconfig($key){
 }
 
 
+function checkForUpdates(){
+  $info = @file_get_contents(UPDATE_CHECK_URL);
+  
+  if(!$info or trim($info) === "")
+     return false;  
+  else
+     return $info;
+
+}
+
 function getModuleAdminSelfPath(){
     $self_path = $_SERVER["REQUEST_URI"];
     $self_path = str_replace('"', '', $self_path);
@@ -327,6 +337,10 @@ function cms_version(){
   return $version;
 }
 
+
+function is_admin(){
+   return has_permissions(50);
+}
 
 require_once "users_api.php";
 require_once "legacy.php";

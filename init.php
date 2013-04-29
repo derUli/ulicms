@@ -184,5 +184,9 @@ for($i=0; $i < count($modules); $i++){
    }
 }
 
+include_once "version.php";
+
+define("UPDATE_CHECK_URL", "http://www.ulicms.de/updatecheck.php?v=".urlencode($version));
+
 
 ?>
