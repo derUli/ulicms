@@ -114,7 +114,5 @@ function autocorrect_common_typos($text){
 
    return $text;
 
-
-
 }
 ?>
