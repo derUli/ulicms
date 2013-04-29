@@ -158,7 +158,7 @@ var editor = CKEDITOR.replace( \'content_preview\',
     $html_output .= "</td>";
     $html_output .= "<td align='center'>";
     
-    $html_output .= "<input type='checkbox' name='spellcheck' value='spellcheck' checked/>Häufige Rechtschreibfehler korrigieren";
+    $html_output .= "<input type='checkbox' name='spellcheck' value='spellcheck' checked/> Häufige Rechtschreibfehler korrigieren";
     $html_output .= "</td>";
     $html_output .= "</tr>";
     
