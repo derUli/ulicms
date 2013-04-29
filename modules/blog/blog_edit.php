@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 function blog_edit_form($post_id){
     $query = mysql_query("SELECT * FROM `".tbname("blog")."` WHERE id = $post_id");
 	if(mysql_num_rows($query) == 0){
@@ -140,7 +140,7 @@ var editor = CKEDITOR.replace( \'content_full\',
 </script>
 
 <noscript>
-<p style="color:red;">Der Editor ben�tigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
+<p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
 
 </noscript>';
 
@@ -177,7 +177,7 @@ var editor = CKEDITOR.replace( \'content_preview\',
 </script>
 
 <noscript>
-<p style="color:red;">Der Editor ben�tigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
+<p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
 
 </noscript>';
 
@@ -186,7 +186,14 @@ var editor = CKEDITOR.replace( \'content_preview\',
     
     $html_output .= "</tr>";
 
-
+    $html_output .= "<tr>";
+    $html_output .= "<td>";
+    $html_output .= "</td>";
+    $html_output .= "<td align='center'>";
+    
+    $html_output .= "<input type='checkbox' name='spellcheck' value='spellcheck' checked/>Häufige Rechtschreibfehler korrigieren";
+    $html_output .= "</td>";
+    $html_output .= "</tr>";
 
 
     $html_output .= "<tr>";

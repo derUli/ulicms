@@ -48,27 +48,47 @@ function blog_render(){
 
 function blog_update(){
 
-  $html_output = "";
+   include_once "spellcheck.php";
 
-  $title = mysql_real_escape_string($_POST["title"]);
+  $html_output = "";
+  
+  $doSpellCheck = isset($_POST["spellcheck"]);
+
+  $title = $_POST["title"];
+  if($doSpellCheck)
+      $title = autocorrect_common_typos($title);
+  
+  $title = mysql_real_escape_string($title);
+  
   $seo_shortname = mysql_real_escape_string($_POST["seo_shortname"]);
 
   if(empty($title) or empty($seo_shortname)){
-      $html_output .= "<script type='text/javascript'>
+     $html_output .= "<script type='text/javascript'>
      history.back()     
      </script>";
      return $html_output;
-	 
-	 
+
 
   }
   
   $language = mysql_real_escape_string($_POST["language"]);
   $comments_enabled = mysql_real_escape_string($_POST["comments_enabled"]);
   $entry_enabled = mysql_real_escape_string($_POST["entry_enabled"]);
+
+  $content_full = $_POST["content_full"];
+  $content_preview = $_POST["content_preview"];
   
-  $content_full = mysql_real_escape_string($_POST["content_full"]);
-  $content_preview = mysql_real_escape_string($_POST["content_preview"]);
+  if($doSpellCheck){
+     $content_full = autocorrect_common_typos($content_full);
+     $content_preview = autocorrect_common_typos($content_preview);
+     
+  }
+  
+  
+  $content_full = mysql_real_escape_string($content_full);
+  $content_preview = mysql_real_escape_string($content_preview);
+  
+  
   $date = time();
   $author = $_SESSION["login_id"];
   
@@ -106,9 +126,18 @@ return $html_output;
 
 function blog_submit(){
 
-  $html_output = "";
+  include_once "spellcheck.php";
 
-  $title = mysql_real_escape_string($_POST["title"]);
+  $html_output = "";
+  
+  $doSpellCheck = isset($_POST["spellcheck"]);
+
+  $title = $_POST["title"];
+  if($doSpellCheck)
+      $title = autocorrect_common_typos($title);
+  
+  $title = mysql_real_escape_string($title);
+  
   $seo_shortname = mysql_real_escape_string($_POST["seo_shortname"]);
 
   if(empty($title) or empty($seo_shortname)){
@@ -123,9 +152,18 @@ function blog_submit(){
   $language = mysql_real_escape_string($_POST["language"]);
   $comments_enabled = mysql_real_escape_string($_POST["comments_enabled"]);
   $entry_enabled = mysql_real_escape_string($_POST["entry_enabled"]);
+
+  $content_full = $_POST["content_full"];
+  $content_preview = $_POST["content_preview"];
+  if($doSpellCheck){
+     $content_full = autocorrect_common_typos($content_full);
+     $content_preview = autocorrect_common_typos($content_preview);
+     
+  }
   
-  $content_full = mysql_real_escape_string($_POST["content_full"]);
-  $content_preview = mysql_real_escape_string($_POST["content_preview"]);
+  
+  $content_full = mysql_real_escape_string($content_full);
+  $content_preview = mysql_real_escape_string($content_preview);
 
   $author = $_SESSION["login_id"];
   $datum = strtotime($_POST["datum"]);
