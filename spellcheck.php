@@ -31,7 +31,8 @@ function autocorrect_common_typos($text){
    $text = str_ireplace("einzelnd", "einzeln", $text);
    $text = str_ireplace("Entgeld", "Entgelt", $text);
    $text = str_ireplace("entgültig", "endgültig", $text);
-   $text = str_ireplace("Extase", "Ekstase", $text);$text = str_ireplace("fröhnen", "frönen", $text);
+   $text = str_ireplace("Extase", "Ekstase", $text);
+   $text = str_ireplace("fröhnen", "frönen", $text);
    $text = str_ireplace("Gallerie", "Galerie", $text);
    $text = str_ireplace("Gallionsfigur", "Galionsfigur", $text);
    $text = str_ireplace("Gebahren", "Gebaren", $text);
@@ -112,7 +113,7 @@ function autocorrect_common_typos($text){
    $text = str_ireplace("Wiedersacher", "Widersacher", $text);
 
 
-return $text;
+   return $text;
 
 
 
