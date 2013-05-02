@@ -12,6 +12,11 @@ if(!$pkg_src){?>
 <p><strong>Fehler:</strong> <br/>
 pkg_src wurde nicht definiert!</p>
 <?php } else {
+include_once "../version.php";
+$version = new ulicms_version();
+$internalVersion = implode(".", $version->getInternalVersion());
+$pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
+
 $packageListURL = $pkg_src."list.txt";
 $packageList = @file($packageListURL);
 sort($packageList);

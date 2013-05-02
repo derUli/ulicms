@@ -21,9 +21,13 @@ Bitte aktualisieren Sie die Serversoftware auf PHP Version 5.3.0 oder neuer.
 }
 
 else {
+
+include_once "../version.php";
+$version = new ulicms_version();
+$internalVersion = implode(".", $version->getInternalVersion());
+$pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
+
 $packageArchiveFolder = $pkg_src."archives/";
-
-
 $packagesToInstall = explode(",", $_REQUEST["packages"]);
 
 
