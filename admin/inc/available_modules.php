@@ -33,7 +33,7 @@ for($i=0; $i<count($packageList); $i++){
   if(!$pkgDescription or strlen($pkgDescription) < 1)
      echo "Keine Beschreibung verfügbar.";
   else
-     echo nl2br($pkgDescripiton);
+     echo nl2br($pkgDescription);
   
   
   echo "</p>";
