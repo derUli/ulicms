@@ -27,7 +27,7 @@ for($i=0; $i<count($packageList); $i++){
   $pkg = $packageList[$i];
   $pkgDescriptionURL = $pkg_src."descriptions/".$pkg.".txt";
   
-  echo "<p><strong>".$pkg."</strong><br/>";
+  echo "<p><strong>".$pkg."</strong> <a href=\"?action=install_modules&amp;packages=$pkg\"> [installieren]</a><br/>";
   
   $pkgDescription = @file_get_contents($pkgDescriptionURL);
   

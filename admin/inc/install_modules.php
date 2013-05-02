@@ -51,9 +51,22 @@ for($i=0; $i<count($packagesToInstall); $i++){
        }
        
        $tmpFile = $tmpdir.$packagesToInstall[$i].".tar.gz";
+       
+       // write downloaded tarball to file       
        $handle = fopen($tmpFile, "wb");
        $fwrite($handle, $pkgContent);
        fclose($handle);
+       
+       if(file_exists($tmpFile)){
+          
+          try{
+            $phar = new PharData($tmpFile);
+            $phar->extractTo("../", null, true);
+            echo "<p style='color:green;'>Installation erfolgreich ($packagesToInstall[$i])"."</p>";
+          } catch (Exception $e) {
+            echo "<p style='color:red;'>Entpacken der Datei fehlgeschlagen ($packagesToInstall[$i])"."</p>";
+          }
+       }
        
      
      }
