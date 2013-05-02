@@ -72,7 +72,7 @@ for($i=0; $i<count($packagesToInstall); $i++){
             echo "<p style='color:red;'>Entpacken der Datei fehlgeschlagen ($packagesToInstall[$i])"."</p>";
           }
        }
-       
+       flush();
      
      }
      

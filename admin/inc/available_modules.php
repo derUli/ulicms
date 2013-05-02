@@ -45,6 +45,7 @@ for($i=0; $i<count($packageList); $i++){
   
   
   echo "</p>";
+  flush();
 
 }
 
