@@ -1,3 +1,8 @@
+<?php 
+if(is_admin()){
+?>
+<p><a href="?action=available_modules">[Module installieren]</a></p> 
+<?php } ?>
 <strong>Installierte Module:</strong>
 <p>Hier finden Sie eine Auflistung der installierten Module.<br/>
 <br/>

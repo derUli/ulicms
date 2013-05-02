@@ -110,6 +110,9 @@ else if($_GET["action"] == "images" || $_GET["action"] == "files" || $_GET["acti
 else if($_GET["action"] == "modules"){
   require_once "inc/modules.php";
 }
+else if($_GET["action"] == "available_modules"){
+  require_once "inc/available_modules.php";
+}
 
 else if($_GET["action"] == "info" ){
 	require_once "inc/info.php";
