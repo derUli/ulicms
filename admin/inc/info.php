@@ -1,7 +1,9 @@
 ﻿<?php if(defined("_SECURITY")){
+include_once "../version.php";
+$version = new ulicms_version();
 ?>
 <h4>UliCMS</h4>
-<small>Release <?php echo $version;?></small>
+<small>Release <?php echo $version->getVersion();?> (<?php echo implode(".", $version->getInternalVersion());?>)</small>
 <br/>
 
 <p>

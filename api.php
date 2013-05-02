@@ -334,7 +334,8 @@ function tbname($name){
 //returns version number of UliCMS Core
 function cms_version(){
   require_once "version.php";
-  return $version;
+  $v = new ulicms_version();
+  return $v->getVersion();
 }
 
 
