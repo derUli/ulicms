@@ -3,7 +3,7 @@ include_once "../version.php";
 $version = new ulicms_version();
 ?>
 <h4>UliCMS</h4>
-<small>Release <?php echo $version->getVersion();?> (<?php echo implode(".", $version->getInternalVersion());?>)</small>
+<small>Release <?php echo $version->getVersion();?> (v<?php echo implode(".", $version->getInternalVersion());?>)</small>
 <br/>
 
 <p>
