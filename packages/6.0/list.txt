@@ -14,3 +14,4 @@ search-0.3.0
 sitemap-6.0.0
 theme-nightvision-6.0.0
 socialbuttons-0.0.1
+theme-default-6.0.0
