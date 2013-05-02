@@ -12,4 +12,5 @@ phpinfo-0.0.1
 profiles-0.0.1
 search-0.3.0
 sitemap-6.0.0
+theme-nightvision-6.0.0
 socialbuttons-0.0.1
