@@ -34,7 +34,7 @@ for($i=0; $i<count($packageList); $i++){
   $pkg = trim($packageList[$i]);
   $pkgDescriptionURL = $pkg_src."descriptions/".$pkg.".txt";
   
-  echo "<p><strong>".$pkg."</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('$pkg installieren?\\nBestehende Dateien werden überschrieben');\"> [installieren]</a><br/>";
+  echo "<p><strong>".$pkg."</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('$pkg installieren?\\nBestehende Dateien werden überschrieben.');\"> [installieren]</a><br/>";
   
   $pkgDescription = @file_get_contents($pkgDescriptionURL);
   
