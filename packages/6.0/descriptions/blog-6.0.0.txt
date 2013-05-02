@@ -1,0 +1,1 @@
+Eine Blog- und News-Funktion mit Kommentarfunktion und RSS-Feed

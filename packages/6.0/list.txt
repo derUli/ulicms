@@ -2,3 +2,4 @@ guestbook-0.0.4
 sql_console-0.0.1
 newsletter-0.0.1
 mysql_backup-0.0.1
+blog-6.0.0
