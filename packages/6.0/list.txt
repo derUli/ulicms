@@ -7,3 +7,6 @@ mysql_backup-0.0.1
 blog-6.0.0
 intramail-0.0.1
 kontaktformular-6.0.0
+lorem_ipsum-0.0.1
+phpinfo-0.0.1
+profiles-0.0.1
