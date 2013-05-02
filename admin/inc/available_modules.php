@@ -14,6 +14,7 @@ pkg_src wurde nicht definiert!</p>
 <?php } else {
 $packageListURL = $pkg_src."list.txt";
 $packageList = @file($packageListURL);
+sort($packageList);
 
 if(!$packageList or count($packageList) === 0){
 ?>

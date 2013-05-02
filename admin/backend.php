@@ -113,6 +113,9 @@ else if($_GET["action"] == "modules"){
 else if($_GET["action"] == "available_modules"){
   require_once "inc/available_modules.php";
 }
+else if($_GET["action"] == "install_modules"){
+  require_once "inc/install_modules.php";
+}
 
 else if($_GET["action"] == "info" ){
 	require_once "inc/info.php";
