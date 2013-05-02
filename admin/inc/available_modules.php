@@ -19,7 +19,9 @@ $pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
 
 $packageListURL = $pkg_src."list.txt";
 $packageList = @file($packageListURL);
-sort($packageList);
+
+if($packageList)
+   sort($packageList);
 
 if(!$packageList or count($packageList) === 0){
 ?>
