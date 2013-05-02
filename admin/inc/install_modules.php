@@ -62,6 +62,7 @@ for($i=0; $i<count($packagesToInstall); $i++){
           try{
             $phar = new PharData($tmpFile);
             $phar->extractTo("../", null, true);
+            @unlink($tmpFile);
             echo "<p style='color:green;'>Installation erfolgreich ($packagesToInstall[$i])"."</p>";
           } catch (Exception $e) {
             echo "<p style='color:red;'>Entpacken der Datei fehlgeschlagen ($packagesToInstall[$i])"."</p>";
