@@ -10,3 +10,4 @@ kontaktformular-6.0.0
 lorem_ipsum-0.0.1
 phpinfo-0.0.1
 profiles-0.0.1
+search-0.3.0
