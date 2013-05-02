@@ -191,7 +191,5 @@ $version = new ulicms_version();
 define("UPDATE_CHECK_URL", "http://www.ulicms.de/updatecheck.php?v=".
 urlencode(
 implode(".", $version->getInternalVersion())));
-die(UPDATE_CHECK_URL);
-
 
 ?>
