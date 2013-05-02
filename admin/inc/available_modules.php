@@ -31,7 +31,7 @@ Keine Pakete verfügbar oder Paketquelle nicht erreichbar.</p>
 <?php
 } else {
 for($i=0; $i<count($packageList); $i++){
-  $pkg = $packageList[$i];
+  $pkg = trim($packageList[$i]);
   $pkgDescriptionURL = $pkg_src."descriptions/".$pkg.".txt";
   
   echo "<p><strong>".$pkg."</strong> <a href=\"?action=install_modules&amp;packages=$pkg\"> [installieren]</a><br/>";
