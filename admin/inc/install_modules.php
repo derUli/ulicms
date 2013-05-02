@@ -58,7 +58,7 @@ for($i=0; $i<count($packagesToInstall); $i++){
        
        // write downloaded tarball to file       
        $handle = fopen($tmpFile, "wb");
-       $fwrite($handle, $pkgContent);
+       fwrite($handle, $pkgContent);
        fclose($handle);
        
        if(file_exists($tmpFile)){
