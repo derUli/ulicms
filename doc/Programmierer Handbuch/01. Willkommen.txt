@@ -1,5 +1,6 @@
 01 - Willkommen
-========================
+________________________________
+
 
 UliCMS ist über Modulen mit beliebigen Funktionalitäten erweiterbar.
 Es lassen sich außerdem eigene Designs erstellen oder existierende Designs modifizieren.
