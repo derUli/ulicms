@@ -29,6 +29,9 @@ $pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
 $packageArchiveFolder = $pkg_src."archives/";
 $packagesToInstall = explode(",", $_REQUEST["packages"]);
 
+$post_install_script = "../post-install.php";
+if(file_exists($post_install_script))
+   unlink($post_install_script);
 
 if(count($packagesToInstall) === 0 or empty($_REQUEST["packages"])){
 ?>
@@ -63,9 +66,18 @@ for($i=0; $i<count($packagesToInstall); $i++){
        if(file_exists($tmpFile)){
           
           try{
+            // Paket entpacken
+           
             $phar = new PharData($tmpFile);
             $phar->extractTo("../", null, true);
             @unlink($tmpFile);
+            
+            // post_install_script ausführen und anschließend 
+            // entfernen, sofern vorhanden;
+            if(file_exists($post_install_script)){
+               include_once $post_install_script;
+               unlink($post_install_script);
+            }
             echo "<p style='color:green;'>Installation erfolgreich ($packagesToInstall[$i])"."</p>";
           } catch (Exception $e) {
             echo "<p style='color:red;'>Entpacken der Datei fehlgeschlagen ($packagesToInstall[$i])"."</p>";
