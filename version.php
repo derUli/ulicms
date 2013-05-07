@@ -2,8 +2,8 @@
 class ulicms_version{
 
    function ulicms_version(){
-      $this->version = "2014R3";
-      $this->internalVersion = Array(6, 0);
+      $this->version = "2014R4";
+      $this->internalVersion = Array(6, 1);
    }
    
    
