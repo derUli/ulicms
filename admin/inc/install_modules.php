@@ -1,9 +1,8 @@
 <?php if(!is_admin()){?>
 <p>Zugriff verweigert</p>
 <?php } else {
-
 $pkg_src = getconfig("pkg_src");
-
+@set_time_limit(0);
 ?>
 
 <h1>Pakete installieren</h1>
