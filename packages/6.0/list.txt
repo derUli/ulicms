@@ -4,7 +4,7 @@ facebook_feed-0.0.1
 newsletter-0.0.1
 gallery-0.2.0
 mysql_backup-0.0.1
-blog-6.0.0
+blog-6.0.1
 intramail-0.0.1
 kontaktformular-6.0.0
 lorem_ipsum-0.0.1

@@ -7,6 +7,8 @@
 <br/>
 <a href="index.php?action=motd">MOTD</a>
 <br/>
+<a href="index.php?action=design">Design</a>
+<br/>
 <a href="index.php?action=logo_upload">Logo</a>
 <br/>
 <a href="index.php?action=languages">Sprachen</a>
