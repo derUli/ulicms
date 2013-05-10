@@ -143,9 +143,6 @@ else if($_GET["action"]  == "languages"){
 	require_once "inc/languages.php";
 }
 
-else if($_GET["action"] == "configure_design"){
-	require_once "inc/configure_design.php";
-}
 else if($_GET["action"] == "cache"){
        require_once "inc/cache_settings.php";
 }
