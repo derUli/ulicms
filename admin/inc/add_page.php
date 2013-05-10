@@ -144,8 +144,38 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 var editor = CKEDITOR.replace( 'page_content',
 					{
 						skin : 'kama'
-					});
-					
+					});                                         
+
+editor.on("instanceReady", function()
+{
+	this.document.on("keyup", CKCHANGED);
+	this.document.on("paste", CKCHANGED);
+}
+);
+function CKCHANGED() { 
+	formchanged = 1;
+}					
+			
+var formchanged = 0;
+var submitted = 0;
+ 
+$(document).ready(function() {
+	$('form').each(function(i,n){
+		$('input', n).change(function(){formchanged = 1});
+		$('textarea', n).change(function(){formchanged = 1});
+		$('select', n).change(function(){formchanged = 1}); 
+		$(n).submit(function(){submitted=1});
+	});
+});
+ 
+window.onbeforeunload = confirmExit;
+function confirmExit()
+{
+	if(formchanged == 1 && submitted == 0)
+		return "Wenn Sie diese Seite verlassen gehen nicht gespeicherte Änderungen verloren.";
+	else 
+		return;
+}			
 </script>
 
 <noscript>

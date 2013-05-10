@@ -250,6 +250,7 @@ background-image:url(gfx/bg.jpg);
 }
 
 </style>
+<script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="jscolor/jscolor.js"></script>
 
 <link rel="icon" href="gfx/favicon.ico" type="image/x-icon"> 
