@@ -1,16 +1,15 @@
 
-    html, body { height:100%;  padding:0; margin:0;}
-    #root-container { height:100%; border-collapse:collapse;  }
+html, body { padding:0; margin:0;}
 
-html{
-}
 
 
 #footer{
 clear:both;
 padding-top:10px;
-margin-bottom:5px;
+margin-bottom:15px;
 padding-left:5px;
+margin-top:30px;
+height:30px;
 }
 
 #header{
@@ -30,10 +29,8 @@ margin-top:-2px;
 }
 
 #footer ul.menu_bottom li{
-float:left;
+float:right;
 margin-right:10px;
-position:relative;
-bottom:0px;
 }
 
 #header h1, #header h2, #header img{
@@ -61,7 +58,7 @@ font-decoration:none;
 
 .blog_pagination_older{
 float:right;
-padding-right:5px;
+padding-right:10px;
 }
 
 
@@ -98,25 +95,21 @@ list-style-type:square;
 }
 
 div#content{
-margin-right:0px;
+
 font-size:1.1em;
 width:65%;
 margin-left:34%;
 border-left:#d5d5d5 solid 1px;
 padding-left:10px;
-
 }
 
 
 
 
 
-div#footer p{
-color:blue;
-
-position:relative;
-bottom:0px;
-display:block;
+#footer #copyright{
+width:50%;
+float:left;
 }
 
 blockquote {
@@ -129,6 +122,7 @@ padding: 0.25em 40px;
 line-height: 1.45;
 position: relative;
 color: #383838;
+
 }
 
 blockquote:before {
