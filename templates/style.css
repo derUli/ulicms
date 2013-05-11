@@ -2,7 +2,6 @@
 html, body { padding:0; margin:0;}
 
 
-
 #footer{
 clear:both;
 padding-top:10px;
@@ -40,6 +39,11 @@ padding-left:20px;
 #menu-left-container{
 padding-left:15px;
 width:30%;
+line-height:1.3em;
+float:left;
+padding-right:5px;
+min-height:500px;
+margin-right:10px;
 }
 
 
@@ -82,20 +86,17 @@ float:left;
 margin-right:30px;
 }
 
-#menu-left-container{
-line-height:1.3em;
-float:left;
-padding-right:5px;
-min-height:500px;
-margin-right:10px;
-}
 
 #menu-left-container ul{
 list-style-type:square;
+margin-top:0px;
+}
+
+#menu-left-container ul li{
+margin-top:2px;
 }
 
 div#content{
-
 font-size:1.1em;
 width:65%;
 margin-left:34%;
