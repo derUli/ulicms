@@ -6,7 +6,7 @@ deleteconfig("body-background-color");
 setconfig("body-background-color", "#ffffff");
 
 deleteconfig("body-text-color");
-setconfig("body-text-color", "#3a3939");
+setconfig("body-text-color", "#4b4b4b");
 
 deleteconfig("header-background-color");
 setconfig("header-background-color", "#00000");

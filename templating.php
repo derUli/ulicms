@@ -188,8 +188,8 @@ function is_403(){
 }
 
 function menu($name){
-        $language = $_SESSION["language"];
-	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu ='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent is null ORDER by position");
+    $language = $_SESSION["language"];
+	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent IS NULL ORDER by position");
 	echo "<ul class='menu_".$name."'>\n";
 	while($row = mysql_fetch_object($query)){
 	echo "  <li>" ;
