@@ -4,7 +4,6 @@ padding:0px;
 }
 
 html{
-width:100%;
 }
 
 
@@ -18,6 +17,7 @@ padding-left:5px;
 #header{
 background-color:black;
 color:white;
+padding-top:20px;
 }
 
 
@@ -28,6 +28,9 @@ list-style-type:none;
 display:block;
 margin-right:10px;
 margin-top:-2px;
+position:fixed;
+bottom:10px;
+right:0px;
 }
 
 #footer ul.menu_bottom li{
@@ -35,12 +38,12 @@ float:left;
 margin-right:10px;
 }
 
-#header h1, #header h2{
-padding-left:5px;
+#header h1, #header h2, #header img{
+padding-left:20px;
 }
 
 #menu-left-container{
-padding-left:5px;
+padding-left:15px;
 }
 
 
@@ -55,6 +58,12 @@ color:#000000;
 font-decoration:none;
 }
 
+
+
+.blog_pagination_older{
+float:right;
+padding-right:5px;
+}
 
 
 img{
@@ -83,7 +92,6 @@ line-height:1.3em;
 float:left;
 border-right:black solid 1px;
 padding-right:5px;
-width:30%;
 min-height:500px;
 margin-right:10px;
 }
@@ -92,15 +100,22 @@ margin-right:10px;
 list-style-type:square;
 }
 
-#content{
-width:70%;
+div#content{
+margin-right:0px;
 font-size:1.1em;
 }
 
-#footer{
+div#footer{
 border-top:1px solid black;
+
 }
 
+div#footer p{
+color:blue;
+display:block;
+position:fixed;
+bottom:10px;
+}
 
 blockquote {
 font-family: Georgia, serif;
