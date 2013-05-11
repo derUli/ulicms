@@ -111,6 +111,7 @@ padding-left:10px;
 #footer #copyright{
 width:50%;
 float:left;
+padding-left:15px;
 }
 
 blockquote {
@@ -123,7 +124,6 @@ padding: 0.25em 40px;
 line-height: 1.45;
 position: relative;
 color: #383838;
-
 }
 
 blockquote:before {
