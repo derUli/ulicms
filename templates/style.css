@@ -8,6 +8,10 @@ width:100%;
 }
 
 
+#root-container{
+
+}
+
 
 #header{
 background-color:black;
@@ -39,7 +43,36 @@ img{
 border:0px:
 }
 
+#header hr{
+color:red;
+}
+
+ul.language_selection{
+display:block;
+margin-bottom:50px;
+list-style-type:none;
+}
+
+ul.language_selection li{
+float:left;
+margin-right:30px;
+}
+
 #menu-left-container{
 line-height:1.3em;
 float:left;
+border-right:black solid 1px;
+padding-right:5px;
+width:30%;
+min-height:500px;
+margin-right:10px;
+}
+
+#menu-left-container ul{
+list-style-type:square;
+}
+
+#content{
+width:70%;
+font-size:1.1em;
 }

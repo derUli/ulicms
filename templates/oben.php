@@ -38,7 +38,9 @@ if(getconfig("motto")){
 ?>
 <hr/>
 </div>
+<?php language_selection();?>
 <div id="menu-left-container">
 <?php menu("left")?>
 
 </div>
+<div id="content">
