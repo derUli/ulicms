@@ -1,62 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<title><?php homepage_title()?> | <?php title()?></title>
+<title><?php title()?></title>
 <?php base_metas()?>
-<link rel="stylesheet" media="screen" type="text/css" href="templates/style.css"/>
-<?php 
-if(!getconfig("header-background-color")){
-   setconfig("header-background-color", "rgb(35, 148, 96)");
+<link rel="stylesheet" type="text/css" href="templates/style.css"/>
+<style type="text/css">
+body{
+color:<?php echo getconfig("body-text-color");?>;
+background-color:<?php echo getconfig("body-background-color")?>;
+font-family:<?php echo getconfig("default-font")?>;
 }
 
-if(!getconfig("body-background-color")){
-   setconfig("body-background-color", "rgb(255,255,255)");
-}
-
-
-if(!getconfig("body-text-color")){
-   setconfig("body-text-color", "rgb(0,0,0)");
-}
-
-
-?>
-<style type="text/css" media="all">
-.header{
+#header{
 background-color:<?php echo getconfig("header-background-color")?>;
 }
-
-body{
-background-color:<?php echo getconfig("body-background-color")?>;
-color:<?php echo getconfig("body-text-color");?>
-}
-
 </style>
 </head>
 <body>
-<div class="header">
-<div class="logo">
-<?php
-if(getconfig("logo_disabled")=="no")
-{
-  logo();
-?>
-<br/>  
-<?php
+<div id="root-container">
+<div id="header">
+<?php 
+if(getconfig("logo_disabled") == "no"){
+   logo();
 }
-else{
-?><h1><?php homepage_title()?></h1>
-<?php }?>
-<span><?php motto()?></span>
-</div>
-<div class="navbar_top">
-<?php menu("top")?>
-</div>
-</div>
-<div class="clear"></div>
-<div class="container">
-<div id="language_box"><?php language_selection()?>
-</div>
-<br/>
-<hr>
-<div class="content">
+else
+{
+   echo "<h1>";
+   homepage_title();
+   echo "</h1>";
+}
 
+if(getconfig("motto")){
+  echo "<h2>";
+  motto();
+  echo "</h2>";
+}
+?>
+<hr/>
+</div>
