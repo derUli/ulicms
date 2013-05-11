@@ -15,3 +15,9 @@ setconfig("header-background-color", "#00000");
 deleteconfig("default-font");
 setconfig("default-font", 'font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif');
 ?>
+<p><strong>Theme-Variablen:</strong><br/>
+body-background-color<br/>
+body-text-color<br/>
+header-background-color<br/>
+default-font</p>
+<p>Diese können über den Expertenmodus der Einstellungen geändert werden</p>
