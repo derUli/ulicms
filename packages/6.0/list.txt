@@ -17,4 +17,3 @@ socialbuttons-0.0.1
 theme-dogs-6.0.0
 theme-effe-6.0.0
 theme-default-6.0.0
-theme-blaues-netz-6.0.0
