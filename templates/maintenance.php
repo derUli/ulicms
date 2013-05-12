@@ -4,17 +4,6 @@
 <title><?php homepage_title()?> | <?php title()?></title>
 <?php base_metas()?>
 <link rel="stylesheet" type="text/css" href="templates/style.css"/>
-<style type="text/css">
-body{
-color:<?php echo getconfig("body-text-color");?>;
-background-color:<?php echo getconfig("body-background-color")?>;
-font-family:<?php echo getconfig("default-font")?>;
-}
-
-#header{
-background-color:<?php echo getconfig("header-background-color")?>;
-}
-</style>
 </head>
 <body>
 <div class="header">
