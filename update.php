@@ -3,7 +3,9 @@
 require_once "cms-config.php";
 require_once "init.php";
 
+$db_schema_version = getconfig("db_schema_version");
 
+if(!$db_schema_version){
 mysql_query("UPDATE ".tbname("content"). " SET menu='bottom' WHERE menu='down'");
 
 setconfig("spamfilter_words_blacklist", 
@@ -53,6 +55,10 @@ while($row=mysql_fetch_object($query)){
 
 // Version des Datenbank-Schemas setzen
 setconfig("db_schema_version", "6.0");
+
+} else if ($db_schema_version === "6.0"){
+  setconfig("db_schema_version", "6.1");
+}
 
 
 //@unlink("update.php");
