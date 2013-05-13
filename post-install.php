@@ -13,6 +13,7 @@ if(!getconfig("facebook_app_secret"))
 }
 
 if(!getconfig("base_blog_page"))
-setconfig("base_blog_page", "http://".$_SERVER["SERVER_NAME"]."/blog.html")
+setconfig("base_blog_page", "http://".$_SERVER["SERVER_NAME"]."/blog.html");
 
+mysql_query("ALTER TABLE ".tbname("blog")." ADD COLUMN posted_to_facebook BOOL DEFAULT 0")or print("<p>".mysql_error()."</p>");
 ?>

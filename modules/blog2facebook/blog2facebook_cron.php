@@ -14,7 +14,7 @@ $facebook = new Facebook(array(
 
 $fbuser = $facebook->getUser();
 
-$blog_entries_to_post = mysql_query("SELECT * FROM ".tbname("blog")." WHERE posted_to_facebook = 0 AND active = 1 ORDER by datum");
+$blog_entries_to_post = mysql_query("SELECT * FROM ".tbname("blog")." WHERE posted_to_facebook = 0 AND entry_enabled = 1 ORDER by datum")or die(mysql_error());
 
-echo mysql_num_rows($blog_entries_to_post);
+
 ?>
