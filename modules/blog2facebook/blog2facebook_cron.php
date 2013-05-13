@@ -1,6 +1,6 @@
 <?php
 include_once(getModulePath("blog2facebook")."inc/facebook.php"); //include facebook SDK
- 
+
 $appId = getconfig("facebook_app_id"); //Facebook App ID
 $appSecret = getconfig("facebook_app_secret"); ; // Facebook App Secret
 $userPageId = getconfig("facebook_user_page_id"); // User Page ID
@@ -25,11 +25,12 @@ if($required_permission === false){
    $required_permission = 50;
 }
 
-if(containsModule(get_requested_pagename(), "blog") and isset($_POST) and has_permissions($required_permission)){
+
+if(containsModule(get_requested_pagename(), "blog") and has_permissions($required_permission)){
 while($row = mysql_fetch_assoc($blog_entries_to_post)){
-  $post_url = '/'.$userPageId.'/feed';
   $stripped_preview = strip_tags($row["content_preview"]);
-  echo $stripped_preview;
+  
+  $blogpost_url = $base_blog_page."?single=".$row["seo_shortname"];
 
   
   //HTTP POST request to PAGE_ID/feed with the publish_stream
@@ -38,35 +39,21 @@ while($row = mysql_fetch_assoc($blog_entries_to_post)){
 		/*
 		// posts message on page feed
 		$msg_body = array(
-			'message' => $userMessage,
-			'name' => 'Message Posted from Saaraan.com!',
-			'caption' => "Nice stuff",
-			'link' => 'http://www.saaraan.com/assets/ajax-post-on-page-wall',
-			'description' => 'Demo php script posting message on this facebook page.',
-			'picture' => 'http://www.saaraan.com/templates/saaraan/images/logo.png'
-			'actions' => array(
-								array(
-									'name' => 'Saaraan',
-									'link' => 'http://www.saaraan.com'
-								)
-							)
+			'message' => $stripped_preview,
+			'name' => $row["title"],
+			'caption' => $stripped_preview,
+			'link' => $blogpost_url,
+			'description' => $stripped_preview
 		);
 		*/
 	
-		//posts message on page statues 
-		$msg_body = array(
-		'message' => $userMessage,
-		);
-	
+
 	if ($fbuser) {
 	  try {
 			$postResult = $facebook->api($post_url, 'post', $msg_body );
 		} catch (FacebookApiException $e) {
 		echo $e->getMessage();
 	  }
-	}else{
-	 $loginUrl = $facebook->getLoginUrl(array('redirect_uri'=>$_SERVER["REQUEST_URI"],'scope'=>$fbPermissions));
-	 header('Location: ' . $loginUrl);
 	}
 
 }
