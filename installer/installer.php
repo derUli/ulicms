@@ -22,7 +22,7 @@ $version = new ulicms_version();
 
 if($version->getDevelopmentVersion()){
 ?>
-<p style="color:red;">Das hier ist eine Development Version von UliCMS.<br/>
+<p style="color:red;">Das hier ist eine Vorab-Version von UliCMS.<br/>
 Das bedeutet, diese Version ist noch nicht 100-prozentig fertig und dient nur der Vorschau auf ein neues Release.<br/>
 Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 </p>
