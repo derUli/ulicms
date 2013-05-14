@@ -70,7 +70,7 @@ if(!isset($_POST["step"])){
 <?php
 @$connection = mysql_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
 if($connection==false){
-  echo "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werden.<br/>Dies kann z.B. an einem falschen Passwort liegen. Wenn Sie sich sicher sind, dass das Passwort richtig ist, prüfen Sie ob der MySQL-Datenbankserver läuft oder eventuell abgestürzt ist.";
+  echo "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werden.<br/>Dies kann z.B. an einem falschen Passwort liegen. Wenn Sie sich sicher sind, dass das Passwort richtig ist, prüfen Sie ob der MySQL-Datenbankserver läuft und erreichbar ist.";
 }else{
 
 @$select=mysql_select_db($_POST["datenbank"]);
