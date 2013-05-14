@@ -111,6 +111,7 @@ if(defined("_SECURITY")){
     <li><a href="?action=info">Info</a>
     <ul> 
      <li><a href="http://www.ulicms.de/" target="_blank">UliCMS Portal</a></li>
+     <li><a href="http://ulicms.de/?seite=community" target="_blank">Community</a></li>
      <li><a href="license.html" target="_blank">Lizenz</a></li>
      <li><a href="http://www.ulicms.de/?seite=kontakt" target="_blank">Feedback</a></li>
     </ul>
