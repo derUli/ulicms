@@ -18,3 +18,4 @@ theme-dogs-6.0.0
 theme-effe-6.0.0
 theme-default-6.0.0
 theme-responsive-1.0.0
+jquery-1.9.1
