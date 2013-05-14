@@ -6,11 +6,11 @@ header("Content-Type: text/html; charset=UTF-8");
 <!DOCTYPE html>
 <head>
 <title>UliCMS Installation</title>
-<style type="text/css">
-</style>
+<link rel="stylesheet" type="text/css" href="media/style.css"/>
 </head>
 <body>
-<h1>UliCMS [Installation]</h1>
+<p><img src="media/logo.png" alt="UliCMS" title="UliCMS"><strong style="margin-left:30px; float:right; font-size:18pt; font-family:impact;">Installation</strong></p>
+<hr/>
 <?php 
 if(!isset($_POST["step"])){                
 ?>
