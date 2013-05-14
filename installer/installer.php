@@ -16,6 +16,19 @@ if(!isset($_POST["step"])){
 ?>
 <h2>Willkommen</h2>
 <p>Willkommen zur Installation von UliCMS.</p>
+<?php 
+include "../version.php";
+$version = new ulicms_version();
+
+if($version->getDevelopmentVersion()){
+?>
+<p style="color:red;">Das hier ist eine Development Version von UliCMS.<br/>
+Das bedeutet, diese Version ist noch nicht 100-prozentig fertig und dient nur der Vorschau auf ein neues Release.<br/>
+Setzen Sie diese Version bitte nicht produktiv ein!<br/>
+</p>
+<?php
+}
+?>
 <p>Folgen Sie den Anweisungen um das CMS auf Ihrem Server zu installieren.</p>
 <p>Setzen Sie bitte vorher die Dateirechte der folgenden Dateien auf 0755 oder 0777:<br/>
 <ol>
@@ -356,6 +369,6 @@ session_destroy();
 }
 ?>
 <hr style="margin-top:30px;"/>
-<p>&copy; 2011 - 2013 by <a href="http://www.ulicms.de" target="_blank">ulicms.de</a></p>
+<p style="color:#6f6f6f; font-size:small;">&copy; 2011 - 2013 by <a href="http://www.ulicms.de" target="_blank">ulicms.de</a></p>
 </body>
 </html>
