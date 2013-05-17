@@ -167,7 +167,7 @@ mysql_select_db($_SESSION["mysql"]["datenbank"]);
 
 $prefix = mysql_real_escape_string($_SESSION["mysql"]["prefix"]);
 
-mysql_query("SET NAMES 'utf-8'");
+mysql_query("SET NAMES 'utf8'")or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -183,7 +183,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."admins` (
   `about_me` text NOT NULL,
   `last_action` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;");
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysql_error());;
 
 
 $vorname=mysql_real_escape_string($_POST["firstname"]);
@@ -195,7 +195,7 @@ $passwort=mysql_real_escape_string($_POST["passwort"]);
 
 
 mysql_query("INSERT INTO `".$prefix."admins` (`id`, `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
-(1, 'admin', '".$nachname."', '".$vorname."', '".$email."', '".md5($passwort)."',50);");
+(1, 'admin', '".$nachname."', '".$vorname."', '".$email."', '".md5($passwort)."',50);")or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -203,7 +203,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
   `link_url` text NOT NULL,
   `image_url` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   
@@ -238,14 +238,14 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
 
 mysql_query("INSERT INTO `".$prefix."content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
 (1, 0, 'willkommen', 'Willkommen', '_self', '<p>Willkommen auf einer neuen Website die mit UliCMS betrieben wird.</p>\r\n', 'de', 1, 1364242679, 1364242833, 1, 0, 1, 19, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL),
-(2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 0, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;");
+(2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 0, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;")or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
 
 
 
@@ -287,21 +287,21 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (26, 'timezone', 'Europe/Berlin'),
 (27, 'db_schema_version', '6.0'),
 (28, 'pkg_src', 'http://www.ulicms.de/packages/{version}/'),
-(29, 'session_timeout', '60');");
+(29, 'session_timeout', '60');")or die(mysql_error());
 
-mysql_query("UPDATE `".$prefix."content` SET parent=NULL");
+mysql_query("UPDATE `".$prefix."content` SET parent=NULL")or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `language_code` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;");
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;")or die(mysql_error());
 
 
 mysql_query("INSERT INTO `".$prefix."languages` (`id`, `name`, `language_code`) VALUES
 (1, 'Deutsch', 'de'), 
-(2, 'English', 'en');");
+(2, 'English', 'en');")or die(mysql_error());
 
 
 @chmod("../cms-config.php", 0777);
