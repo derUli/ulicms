@@ -54,12 +54,9 @@ while($row=mysql_fetch_object($query)){
 }
 
 // Version des Datenbank-Schemas setzen
-setconfig("db_schema_version", "6.0");
+setconfig("db_schema_version", "6.1");
 
-} else if ($db_schema_version === "6.0"){
-  setconfig("db_schema_version", "6.1");
 }
-
 
 //@unlink("update.php");
 

@@ -171,11 +171,11 @@ mysql_query("SET NAMES 'utf-8'");
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(500) NOT NULL,
-  `lastname` varchar(500) NOT NULL,
-  `firstname` varchar(500) NOT NULL,
-  `email` varchar(800) NOT NULL,
-  `password` varchar(500) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `group` int(11) NOT NULL,
   `skype_id` varchar(32) NOT NULL,
   `icq_id` varchar(20) NOT NULL,
@@ -209,9 +209,9 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `notinfeed` tinyint(1) NOT NULL,
-  `systemname` varchar(300) NOT NULL,
-  `title` varchar(600) NOT NULL,
-  `target` varchar(600) DEFAULT '_self',
+  `systemname` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `target` varchar(255) DEFAULT '_self',
   `content` longtext NOT NULL,
   `language` varchar(6) NOT NULL,
   `active` tinyint(1) NOT NULL,
@@ -222,7 +222,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   `lastchangeby` int(11) NOT NULL,
   `views` int(11) NOT NULL,
   `comments_enabled` tinyint(1) NOT NULL,
-  `redirection` varchar(2083) NOT NULL,
+  `redirection` varchar(255) NOT NULL,
   `menu` varchar(10) NOT NULL,
   `position` int(11) NOT NULL,
   `parent` int(11) DEFAULT NULL,
@@ -242,8 +242,8 @@ mysql_query("INSERT INTO `".$prefix."content` (`id`, `notinfeed`, `systemname`, 
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(300) NOT NULL,
-  `value` varchar(500) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
