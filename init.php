@@ -89,13 +89,6 @@ if(!$select){
 // Abfragen, ob ein error_reporting Wert gesetzt ist
 // Ansonsten error_reporting auf einen Standardwert setzen
 $error_reporting = getconfig("error_reporting");
-
-
-if($error_reporting === false){
-   $error_reporting = E_ALL ^ E_NOTICE ^ E_STRICT;
-   setconfig("error_reporting", $error_reporting);
-}
-
 error_reporting($error_reporting);
 
 $cache_period = getconfig("cache_period");

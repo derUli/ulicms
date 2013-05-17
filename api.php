@@ -236,7 +236,9 @@ function the_url(){
 
 
 function file_extension($filename) {
-	return end(explode(".", $filename));
+        $ext = explode(".", $filename);
+	$ext = end($ext);
+	return $ext;
 }
 
 // Remove an configuration variable
