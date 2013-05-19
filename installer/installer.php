@@ -243,7 +243,7 @@ mysql_query("INSERT INTO `".$prefix."content` (`id`, `notinfeed`, `systemname`, 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
+  `value` mediumtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
 
