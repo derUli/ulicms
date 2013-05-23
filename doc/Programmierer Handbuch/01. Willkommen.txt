@@ -1,8 +1,0 @@
-01 - Willkommen
-________________________________
-
-
-UliCMS ist über Modulen mit beliebigen Funktionalitäten erweiterbar.
-Es lassen sich außerdem eigene Designs erstellen oder existierende Designs modifizieren.
-
-Das hier ist eine Einführung in die Entwicklung von Erweiterungen für UliCMS. Voraussetzung sind grundlegende PHP- und HTML-Kenntnisse.
