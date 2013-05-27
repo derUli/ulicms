@@ -19,3 +19,4 @@ theme-effe-6.0.0
 theme-default-6.0.0
 theme-responsive-1.0.1
 jquery-1.9.1
+fullcalendar-0.0.1
