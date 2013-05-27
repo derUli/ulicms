@@ -13,7 +13,7 @@ function fullcalendar_list(){
   $query = mysql_query("SELECT * FROM `".tbname("events"). "` ORDER by `start` DESC");
   
   if(mysql_num_rows($query) == 0){
-    echo "<table style=\"outline:2px solid #d4d4d4; background-color:#f0f0f0;width:100%;\">";
+    echo "<table style=\"outline:2px solid #d4d4d4; background-color:#f0f0f0;width:96%; margin:auto;\">";
     echo "<tr style=\"outline:2px solid #b1b1b1; background-color:#f0f0f0;font-weight:bold;\">";
     echo "<td>";
     echo "Start";
