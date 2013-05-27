@@ -35,7 +35,7 @@ function fullcalendar_list(){
      echo "<td>".date("d.m.Y", $row->start)."</strong><td>";
      echo "<td>".date("d.m.Y", $row->end)."</strong><td>";
      echo "<td>".htmlspecialchars($row->title)."</strong><td>";
-     echo "<td><a href=\"#\">Bearbeiten</a></td>";
+     echo "<td><a href=\"?action=module_settings&module=fullcalendar&calendar_action=edit&id=".$row->id."\">Bearbeiten</a></td>";
      echo "<td><a href=\"?action=module_settings&module=fullcalendar&calendar_action=delete&id=".$row->id."\" onclick=\"return confirm('Diesen Termin wirklich löschen?');\">Löschen</a></td>";
      echo "</tr>";
   }
@@ -56,6 +56,44 @@ if($action == "delete"){
   $id = intval($_GET["id"]);
   mysql_query("DELETE FROM `".tbname(events)."` WHERE id = $id");
   unset($action);
+}
+if(isset($_POST["save"])){
+
+     $title = mysql_real_escape_string(trim($_POST["title"]));
+     $url = mysql_real_escape_string(trim($_POST["url"]));
+     
+     $start = ltrim($_POST["start"], "0");
+     $end = ltrim($_POST["end"], 0);
+     
+     $start = explode(".", $start);
+     $end = explode(".", $end);
+     if(count($start) === 3 ){
+
+        $start = mktime(0, 0, 0, $start[1], $start[0], $start[3]);
+     } else {
+        $start = time();     
+     }
+        
+     if(count($end) === 3 ){
+        $end = mktime(0, 0, 0, $end[1], $end[0], $end[3]);
+     } else {
+        $end = time();     
+     }
+     
+
+
+     $id = intval($_POST["id"]);
+     
+     if($id == 0){
+        mysql_query("INSERT INTO `".tbname("events")."` (title, url, start, end) VALUES ('$title', '$url', $start, $end)")or die(mysql_error());
+     
+     } else {
+       mysql_query("UPDATE `".tbname("events")."` SET title='$title', url='$url', start='$start', end='$end' WHERE id=$id");
+     }
+      
+     
+     
+  
 }
 ?>
 <?php if(!isset($action)){?>

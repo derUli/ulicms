@@ -1,8 +1,8 @@
 <?php 
 if(has_permissions(MODULE_ADMIN_REQUIRED_PERMISSION)){
 
-if(isset($_REQUEST["event_id"])){
-  $event_id = intval($_REQUEST["event_id"]);
+if(isset($_REQUEST["id"])){
+  $event_id = intval($_REQUEST["id"]);
   $query = mysql_query("SELECT * FROM `".tbname("events")."` WHERE id = $event_id");
   $result = mysql_fetch_object($query);
   $startzeit = date("d.m.Y", $result->start);
@@ -11,10 +11,10 @@ if(isset($_REQUEST["event_id"])){
   $url = $result->url;
 }
 else {
-  $startzeit = date("d.m.Y");
-  $endzeit = date("d.m.Y");
+  $startzeit = date("D.m.Y");
+  $endzeit = date("D.m.Y");
   $title = "Neuer Termin";
-  $url = "http://";
+  $url = "";
 }
 
 ?>
@@ -36,7 +36,7 @@ width:80px;
 </tr>
 <tr>
 <td>Ende:</td>
-<td><input type="text" name="ende" value="<?php echo $endzeit;?>"></td>
+<td><input type="text" name="end" value="<?php echo $endzeit;?>"></td>
 </tr>
 <tr>
 <td>Titel:</td>
@@ -45,16 +45,18 @@ width:80px;
 <tr>
 <td>URL:</td>
 <td><input type="url" name="url" value="<?php echo $url;?>"></td>
-</tr<?php if(isset($event_id)){?>
-<input type="hidden" name="id" value="<?php echo $event_id;?>">
-<?php 
-}
-?>
+</tr>
 </tr>
 <tr>
 <td>
 </td>
-<td align="center"><input type="submit" name="save" value="Eintragen"/></td>
+<td align="center">
+<?php if(isset($event_id)){?>
+<input type="hidden" name="id" value="<?php echo $event_id;?>">
+<?php 
+}
+?>
+<input type="submit" name="save" value="Eintragen"/></td>
 </tr>
 </table>
 
