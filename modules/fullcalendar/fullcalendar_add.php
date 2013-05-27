@@ -11,8 +11,8 @@ if(isset($_REQUEST["id"])){
   $url = $result->url;
 }
 else {
-  $startzeit = date("D.m.Y");
-  $endzeit = date("D.m.Y");
+  $startzeit = date("d.m.Y");
+  $endzeit = date("d.m.Y");
   $title = "Neuer Termin";
   $url = "";
 }

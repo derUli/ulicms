@@ -62,22 +62,26 @@ if(isset($_POST["save"])){
      $title = mysql_real_escape_string(trim($_POST["title"]));
      $url = mysql_real_escape_string(trim($_POST["url"]));
      
-     $start = ltrim($_POST["start"], "0");
-     $end = ltrim($_POST["end"], 0);
+     $start = $_POST["start"];
+     $end = $_POST["end"];
      
      $start = explode(".", $start);
      $end = explode(".", $end);
+     
      if(count($start) === 3 ){
-
-        $start = mktime(0, 0, 0, $start[1], $start[0], $start[3]);
+        $start[1] = ltrim($start[1], "0");
+        $start[0] = ltrim($start[0], "0");
+        $start = mktime(0, 0, 0, $start[1], $start[0], $start[2]);
      } else {
         $start = time();     
      }
         
      if(count($end) === 3 ){
-        $end = mktime(0, 0, 0, $end[1], $end[0], $end[3]);
+        $end[1] = ltrim($end[1], "0");
+        $end[0] = ltrim($end[0], "0");
+        $end = mktime(0, 0, 0, $end[1], $end[0], $end[2]);
      } else {
-        $end = time();     
+        $end = $start;     
      }
      
 
