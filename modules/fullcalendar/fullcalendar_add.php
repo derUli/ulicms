@@ -17,6 +17,9 @@ else {
   $url = "";
 }
 
+$title = htmlspecialchars($title);
+$url = htmlspecialchars($url);
+
 ?>
 <style type="text/css">
 form input[type="text"],
