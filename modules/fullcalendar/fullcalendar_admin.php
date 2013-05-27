@@ -12,7 +12,7 @@ define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
 function fullcalendar_list(){
   $query = mysql_query("SELECT * FROM `".tbname("events"). "` ORDER by `start` DESC");
   
-  if(mysql_num_rows($query) == 0){
+  if(mysql_num_rows($query) > 0){
     echo "<table style=\"outline:4px solid #d4d4d4; background-color:#f0f0f0;width:96%; margin:auto;\">";
     echo "<tr style=\"background-color:#f0f0f0;font-weight:bold;\">";
     echo "<td>";
