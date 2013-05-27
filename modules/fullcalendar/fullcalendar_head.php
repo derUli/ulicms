@@ -14,7 +14,7 @@ $scriptPath = getModulePath("fullcalendar")."script/";
 		
 			editable: true,
 			
-			events: "<?php echo $scriptPath;?>/demos/json-events.php",
+			events: "json-events.php",
 			
 			eventDrop: function(event, delta) {
 				alert(event.title + ' was moved ' + delta + ' days\n' +

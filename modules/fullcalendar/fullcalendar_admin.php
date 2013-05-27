@@ -101,7 +101,7 @@ if(isset($_POST["save"])){
 }
 ?>
 <?php if(!isset($action)){?>
-<a href="<?php echo getModuleAdminSelfPath()?>&calendar_action=add">Termin eintragen</a>
+<a href="?action=module_settings&module=fullcalendar&calendar_action=add">Termin eintragen</a>
 <br/><br/>
 <?php fullcalendar_list();?>
 
