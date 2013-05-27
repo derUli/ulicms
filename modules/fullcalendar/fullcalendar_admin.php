@@ -9,13 +9,53 @@ if($required_permission === false){
 
 define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
 
+function fullcalendar_list(){
+  $query = mysql_query("SELECT * FROM `".tbname("events"). "` ORDER by `start` DESC");
+  
+  if(mysql_num_rows($query) == 0){
+    echo "<table style=\"outline:2px solid #d4d4d4; background-color:#f0f0f0;width:100%;\">";
+    echo "<tr style=\"outline:2px solid #b1b1b1; background-color:#f0f0f0;font-weight:bold;\">";
+    echo "<td>";
+    echo "Start";
+    echo "</td>";
+    echo "<td>";
+    echo "Ende";
+    echo "</td>";
+    echo "<td>";
+    echo "Titel";
+    echo "</td>";
+    echo "<td></td>";
+    echo "<td></td>";
+    echo "</tr>";
+ 
+  
+  while($row = mysql_fetch_object($query)){
+     echo "<tr>";
+     echo "<td>".date("d.m.Y", $row->start)."</strong><td>";
+     echo "<td>".date("d.m.Y", $row->ende)."</strong><td>";
+     echo "<td>".htmlspecialchars($row->title)."</strong><td>";
+     echo "<td><a href=\"#\">Bearbeiten</a></td>";
+     echo "<td><a href=\"#\">Löschen</a></td>";
+     echo "</tr>";
+  }
+  
+  
+  echo "</table>";
+  
+   }
+  
+}
+
 function fullcalendar_admin(){
 
 if(isset($_GET["calendar_action"]))
    $action = $_GET["calendar_action"];
 ?>
 <?php if(!isset($action)){?>
-<a href="<?php echo getModuleAdminSelfPath()?>">Termin eintragen</a>
+<a href="<?php echo getModuleAdminSelfPath()?>&calendar_action=add">Termin eintragen</a>
+<br/><br/>
+<?php fullcalendar_list();?>
+
 <?php }?>
 <?php
 }
