@@ -9,6 +9,7 @@ if($required_permission === false){
 
 define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
 
+
 function fullcalendar_list(){
   $query = mysql_query("SELECT * FROM `".tbname("events"). "` ORDER by `start` DESC");
   
@@ -56,8 +57,14 @@ if(isset($_GET["calendar_action"]))
 <br/><br/>
 <?php fullcalendar_list();?>
 
-<?php }?>
-<?php
+<?php } 
+
+else if($action == "add" or $action == "edit"){
+   include getModulePath("fullcalendar")."fullcalendar_add.php";
+   
+}
+
+
 }
  
 ?>
