@@ -33,10 +33,10 @@ function fullcalendar_list(){
   while($row = mysql_fetch_object($query)){
      echo "<tr>";
      echo "<td>".date("d.m.Y", $row->start)."</strong><td>";
-     echo "<td>".date("d.m.Y", $row->ende)."</strong><td>";
+     echo "<td>".date("d.m.Y", $row->end)."</strong><td>";
      echo "<td>".htmlspecialchars($row->title)."</strong><td>";
      echo "<td><a href=\"#\">Bearbeiten</a></td>";
-     echo "<td><a href=\"#\">Löschen</a></td>";
+     echo "<td><a href=\"?action=module_settings&module=fullcalendar&calendar_action=delete&id=".$row->id."\" onclick=\"return confirm('Diesen Termin wirklich löschen?');\">Löschen</a></td>";
      echo "</tr>";
   }
   
@@ -51,6 +51,12 @@ function fullcalendar_admin(){
 
 if(isset($_GET["calendar_action"]))
    $action = $_GET["calendar_action"];
+   
+if($action == "delete"){
+  $id = intval($_GET["id"]);
+  mysql_query("DELETE FROM `".tbname(events)."` WHERE id = $id");
+  unset($action);
+}
 ?>
 <?php if(!isset($action)){?>
 <a href="<?php echo getModuleAdminSelfPath()?>&calendar_action=add">Termin eintragen</a>

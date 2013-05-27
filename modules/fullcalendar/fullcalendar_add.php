@@ -6,7 +6,7 @@ if(isset($_REQUEST["event_id"])){
   $query = mysql_query("SELECT * FROM `".tbname("events")."` WHERE id = $event_id");
   $result = mysql_fetch_object($query);
   $startzeit = date("d.m.Y", $result->start);
-  $endzeit = date("d.m.Y", $result->ende);
+  $endzeit = date("d.m.Y", $result->end);
   $title = $result->title;
   $url = $result->url;
 }
