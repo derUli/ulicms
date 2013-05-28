@@ -23,4 +23,4 @@ jquery-1.7.2
 fullcalendar-0.0.1
 lightbox_gallery-0.0.1
 disable_rightclick-0.0.1
-schnee-0.0.1
+schnee-1.2.0
