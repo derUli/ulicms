@@ -10,7 +10,7 @@ require_once "workaround.php";
 		
 // if config exists require_config else redirect to installer
 if(file_exists("cms-config.php")){
-  require_once "cms-config.php";
+  require_once "cms-config.php";  
 }
 else if(file_exists("../cms-config.php")){
   require_once "../cms-config.php";
@@ -27,6 +27,15 @@ else if(is_dir("installer")){
 }
 require_once "api.php";
 
+
+
+  if(file_exists("installer/installer.php")or file_exists("../installer/installer.php")){
+     header("Content-type: text/html; charset=utf8");
+     die("<p>Bitte löschen Sie den Ordner \"installer\" vom Server.<br/>
+     Das CMS kann erst betrieben werden, nach dem der Installer gelöscht wurde.
+     Dies ist ein Sicherheitsmerkmal von UliCMS.</p>");
+     exit();
+  }
 
 
 
