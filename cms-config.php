@@ -8,4 +8,3 @@ var $mysql_database="ulicms";
 var $mysql_prefix="hahaha_";
 
 }
-?>

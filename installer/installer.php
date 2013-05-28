@@ -326,7 +326,7 @@ var $mysql_database="'.$_SESSION["mysql"]["datenbank"].'";
 var $mysql_prefix="'.$_SESSION["mysql"]["prefix"].'";
 
 }
-?>');
+');
 fclose($handle);
 
 $message = "Hallo $zusammen!\n".
