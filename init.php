@@ -29,7 +29,7 @@ require_once "api.php";
 
 
 
-  if(file_exists("installer/installer.php")or file_exists("../installer/installer.php")){
+  if(file_exists("installer/installer.php") or file_exists("../installer/installer.php")){
      header("Content-type: text/html; charset=utf8");
      die("<p>Bitte löschen Sie den Ordner \"installer\" vom Server.<br/>
      Das CMS kann erst betrieben werden, nach dem der Installer gelöscht wurde.
