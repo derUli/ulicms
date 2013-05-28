@@ -21,3 +21,4 @@ theme-responsive-1.0.1
 jquery-1.9.1
 jquery-1.7.2
 fullcalendar-0.0.1
+lightbox_gallery-0.0.1
