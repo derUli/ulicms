@@ -60,6 +60,36 @@ function SureRemoveDir($dir, $DeleteMe) {
     }
 }
 
+
+/*
+  Generate path to Page
+  Argumente
+  String $page (Systemname)
+  Rückgabewert String im Format
+  ../seite.html
+  bzw.
+  seite.html;
+*/
+
+
+function buildSEOUrl($page = false){
+   if($page === false)
+      $page = get_requested_pagename();
+
+   
+   $seo_url = "";
+   
+   if(is_file("backend.php"))
+      $seo_url .= "../";
+      
+
+   $seo_url .= $page;
+   $seo_url .= ".html";
+   
+   return $seo_url;
+
+}
+
 function getModulePath($module){
 	// Frontend Directory
 	if(is_file("cms-config.php")){
