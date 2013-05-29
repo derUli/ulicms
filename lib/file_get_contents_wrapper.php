@@ -2,6 +2,7 @@
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt
 function file_get_contents_curl($url) {
+
 	$ch = curl_init();
 	
 	curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -29,6 +30,7 @@ function is_url($url){
   return false;
   
 }
+
 
 // Wrapper um file_get_contents
 // Falls allow_url_fopen deaktiviert ist,

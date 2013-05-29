@@ -3,6 +3,8 @@
 <?php } else {
 $pkg_src = getconfig("pkg_src");
 @set_time_limit(0);
+
+include "../lib/file_get_contents_wrapper.php";
 ?>
 
 <h1>Pakete installieren</h1>
@@ -45,7 +47,7 @@ for($i=0; $i<count($packagesToInstall); $i++){
   if(!empty($packagesToInstall[$i])){
      $pkgURL = $packageArchiveFolder.basename($packagesToInstall[$i]).
      ".tar.gz";
-     $pkgContent = @file_get_contents($pkgURL);
+     $pkgContent = @file_get_contents_wrapper($pkgURL);
      
      // Wenn Paket nicht runtergeladen werden konnte
      if(!$pkgContent or strlen($pkgContent) < 1){
