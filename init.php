@@ -1,8 +1,6 @@
 <?php
 /* Diese Datei initalisiert das System
-*/
-require_once "workaround.php";
-        
+*/      
 	
 // Falls keine Zeitzone in der php.ini gesetzt sein sollte
 // wird die Zeitzone auf UTC gesetzt.
