@@ -37,15 +37,14 @@ function is_url($url){
 // wird CURL alls Fallback genutzt, falls vorhanden.
 // Ansonsten wird false zurückgegeben.
 function file_get_contents_wrapper($url){
-   if(ini_get("allow_url_fopen")){
+   if(ini_get("allow_url_fopen") or !is_url($url)){
      return file_get_contents($url);
    } else {
      if(function_exists("curl_init") and is_url($url)){
        return file_get_contents_curl($url);
-     }
-     else
-     {
-        return false;    
-     }
+     } 
+
    }
+   
+   return false;
 }
