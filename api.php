@@ -15,9 +15,11 @@ function getconfig($key){
 	}
 }
 
-
+// Auf automatische aktualisieren prüfen.
+// Rückgabewert: ein String oder False
 function checkForUpdates(){
-  $info = @file_get_contents(UPDATE_CHECK_URL);
+  include_once "../lib/file_get_contents_wrapper.php";
+  $info = @file_get_contents_Wrapper(UPDATE_CHECK_URL);
   
   if(!$info or trim($info) === "")
      return false;  

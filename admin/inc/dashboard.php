@@ -1,6 +1,6 @@
 <?php {
 if(defined("_SECURITY")){
-  $pages_count=mysql_num_rows(mysql_query("SELECT * FROM ".tbname("content")));
+  $pages_count = mysql_num_rows(mysql_query("SELECT * FROM ".tbname("content")));
 
   $topPages=mysql_query("SELECT * FROM ".tbname("content")." WHERE notinfeed = 0 AND systemname <> \"kontakt\" ORDER BY views DESC LIMIT 5");
   $lastModfiedPages = mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname <> \"kontakt\" ORDER BY lastmodified DESC LIMIT 5");
