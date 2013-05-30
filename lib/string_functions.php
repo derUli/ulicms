@@ -25,6 +25,8 @@ function getExcerpt($str, $startPos=0, $maxLength=100) {
 // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
 function keywordsFromString($text) {
   $return = array();
+
+  $text = str_replace("&quot;", "", $text );
   
   // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
   $text = str_replace(array("\n", ".", ",", "!", "?", "&nbsp;", "/", "-"), " ", $text);
