@@ -272,7 +272,7 @@ if($_POST["add_page"] == "add_page"){
 	$system_title = mysql_real_escape_string($_POST["system_title"]);
 	$page_title = mysql_real_escape_string($_POST["page_title"]);
 	$activated = intval($_POST["activated"]);
-	$page_content = mysql_real_escape_string($_POST["page_content"]);
+	$page_content = $_POST["page_content"];
 	$comments_enabled = (int)$_POST["comments_enabled"];
 	$notinfeed = 0;
 	$redirection = mysql_real_escape_string($_POST["redirection"]);
@@ -333,26 +333,27 @@ if($_POST["add_page"] == "add_page"){
               $currentWordCount = 0;
               $maxi = count($words);
               $i = 0;
-              $meta_keywords = "";
+              $meta_keywords = Array();
               if(count($words) > 0){
                  foreach ($words as $key => $value) {
                    $i++;
                    $key = trim($key);
                    if(!empty($key) and $currentWordCount < $maxWords){
                       $currentWordCount++;
-                      $meta_keywords .= $key; 
+                      array_push($meta_keywords, $key);
                    }
-             if(!empty($key) and $i < $maxi and $currentWordCount < $maxWords)
-                $meta_keywords .= ", ";
-          }
+            
 	      
 	      
    }
 	
-	
+      $meta_keywords = implode(", ", $meta_keywords);
+   
+}   
+   
    }
    
-   
+   $page_content = mysql_real_escape_String($page_content);
    $meta_keywords = mysql_real_escape_string($meta_keywords);
 	
 	$language = mysql_real_escape_string($_POST["language"]);
