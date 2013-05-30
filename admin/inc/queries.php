@@ -288,6 +288,47 @@ if($_POST["add_page"] == "add_page"){
 	$target = mysql_real_escape_string($_POST["target"]);
 	$meta_description = mysql_real_escape_string($_POST["meta_description"]); 
 	$meta_keywords = mysql_real_escape_string($_POST["meta_keywords"]);
+
+	// Wenn keine Meta Keywords gesetzt sind selbst ermitteln
+	if(empty($meta_keywords) and
+	   !getconfig("disable_auto_generate_meta_keywords")){
+	   
+	      include_once "../lib/string_functions.php";
+	      $stripped_content = trim($page_content);
+	      $stripped_content = str_replace("\\r\\n", "\r\n", $stripped_content);
+	      $stripped_content = strip_tags($stripped_content);
+	      $words = keywordsFromString($stripped_content);
+       
+	                   
+              $maxWords = 10;
+                 
+              $i = 0;
+              
+              $meta_keywords = "";
+              
+              if(count($words) > 0){
+                 foreach ($words as $key => $value) {
+                    $key = trim($key);            
+                    if(!empty($key) and $i <= $maxWords){
+                    
+                       $i++;
+                       $meta_keywords .= $key; 
+                       }
+                    
+                    if(!empty($key) and $i < $maxWords)
+                       $meta_keywords .= ", ";
+                 
+      
+                 }
+	      
+	      
+	}
+	
+	
+	$meta_keywords = mysql_real_escape_string($meta_keywords);
+	
+	}
+	
 	$language = mysql_real_escape_string($_POST["language"]);
 	
 	mysql_query("INSERT INTO ".tbname("content").
