@@ -130,7 +130,6 @@ function title($ipage=null){
 	}
 }
 
-//import and print a page();
 function import($ipage){
 	$connection=MYSQL_CONNECTION;
 	$ipage=mysql_real_escape_string($ipage);
@@ -147,7 +146,7 @@ function import($ipage){
 	}else{
 
 	while($row=mysql_fetch_object($query)){
-	
+	        $row->content = apply_content_filters($row->content);
 		$row->content = replaceShortcodesWithModules($row->content);
 		echo $row->content;
 		return true;
@@ -155,6 +154,25 @@ function import($ipage){
 
 }
 
+}
+
+function apply_content_filters($content){
+  $modules = getAllModules();
+  for($i=0; $i < count($modules); $i++){
+    $module_content_filter_file = getModulePath($modules[$i]).
+    $modules[$i]."_content_filter.php";
+    if(file_exists($module_content_filter_file)){
+       @include $module_content_filter_file;
+     
+       if(function_exists($modules[$i]."_content_filter")){
+            $content = call_user_func($modules[$i]."_content_filter", 
+                                      $content);
+       }
+     
+    }
+  }
+  
+  return $content;
 }
 
 
@@ -367,9 +385,8 @@ $modules = getAllModules();
 for($i=0; $i < count($modules); $i++){
    $module_head_file = getModulePath($modules[$i]).
    $modules[$i]."_head.php";
-   if(file_exists($module_head_file)){
+   if(file_exists($module_head_file))
      @include $module_head_file;
-   }
 }
 
 }
