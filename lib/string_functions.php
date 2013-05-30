@@ -34,8 +34,8 @@ function keywordsFromString($text) {
  
  
   // Artikel usw... entfernen
-  $ignoreWords = array("der ", "die ", "dass ", "das ", "ein ", "dieser ", "man ", "und ", "sich ", "im ", "wenn ", "den ", "muss ", "von ",
-  "eine ", "ist ", "auf ", "zum ", "es ", "it ", "the ", "to ", "is ", "in ", "and ", "as ", "on ", "a ", "an ", "you ", "be ", "are ");  
+  $ignoreWords = array(" der ", " die ", " dass ", " das ", " ein ", " dieser ", " man ", " und ", " sich ", " im ", " wenn ", " den ", " muss ", " von ",
+  " eine ", " ist ", " auf ", " zum ", " es ", " it ", " the ", " to ", " is ", " in ", " and ", " as ", " on ", " a ", " an ", " you ", " be ");  
   
   $text = str_ireplace($ignoreWords, "", $text);
   
