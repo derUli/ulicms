@@ -124,6 +124,7 @@ function title($ipage=null){
 	}
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
+		        $row->title =  apply_filter($row->title, "title");
 			echo $row->title;
 			return true;
 		}
@@ -146,7 +147,7 @@ function import($ipage){
 	}else{
 
 	while($row=mysql_fetch_object($query)){
-	        $row->content = apply_content_filters($row->content);
+	        $row->content = apply_filter($row->content, "content");
 		$row->content = replaceShortcodesWithModules($row->content);
 		echo $row->content;
 		return true;
@@ -156,17 +157,17 @@ function import($ipage){
 
 }
 
-function apply_content_filters($content){
+function apply_filter($text, $type){
   $modules = getAllModules();
   for($i=0; $i < count($modules); $i++){
     $module_content_filter_file = getModulePath($modules[$i]).
-    $modules[$i]."_content_filter.php";
+    $modules[$i]."_".$type."_filter.php";
     if(file_exists($module_content_filter_file)){
        @include $module_content_filter_file;
      
-       if(function_exists($modules[$i]."_content_filter")){
-            $content = call_user_func($modules[$i]."_content_filter", 
-                                      $content);
+       if(function_exists($modules[$i]."_".$type."_filter")){
+            $content = call_user_func($modules[$i]."_".$type."_filter", 
+                                      $text);
        }
      
     }
@@ -360,6 +361,7 @@ function base_metas(){
 	if($keywords!=""&&$keywords!=false){
 		
 		if(!getconfig("hide_meta_keywords")){
+	                $keywords = apply_filter($keywords, "keywords");
 			echo '<meta name="keywords" content="'.$keywords.'"/>';
 			echo "\r\n";
 		}
@@ -367,8 +369,9 @@ function base_metas(){
 	$description = meta_description();
   if(!$description){
     $description = getconfig("meta_description");
-	}
+  }
 	if($description!="" && $description!=false){
+	        $description = apply_filter($description, "meta_description");
 		if(!getconfig("hide_meta_description")){
 			echo '<meta name="description" content="'.$description.'"/>';
 			echo "\r\n";
@@ -410,7 +413,7 @@ function autor(){
 			return;
 		}
 		
-	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='".mysql_real_escape_string($seite)."'",$connection);
+	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='".mysql_real_escape_string($seite)."'",$connection);
 	if(mysql_num_rows($query)<1){
 		return;
 	}
@@ -423,12 +426,12 @@ function autor(){
 	if(mysql_num_rows($query2)==0){
 		return;
 	}
-	$datum=date(getconfig("date_format"),$result["created"]);
-	$out=getconfig("autor_text");
-	$out=str_replace("Vorname", $result2["firstname"],$out);
-	$out=str_replace("Nachname", $result2["lastname"],$out);       
-	$out=str_replace("Username", $result2["username"],$out);
-	$out=str_replace("Datum", $result2["datum"],$out);
+	$datum = date(getconfig("date_format"),$result["created"]);
+	$out = getconfig("autor_text");
+	$out = str_replace("Vorname", $result2["firstname"],$out);
+	$out = str_replace("Nachname", $result2["lastname"],$out);       
+	$out = str_replace("Username", $result2["username"],$out);
+	$out = str_replace("Datum", $result2["datum"],$out);
 	if(!is_403() or $_SESSION["group"]>=20){
 	   echo $out;
 	}
