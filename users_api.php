@@ -59,4 +59,48 @@ function user_exists($name){
   " WHERE username = '".mysql_real_escape_string($name)."'");
   return mysql_num_rows($query) > 0;
 }
+
+function register_session($user, $redirect = true){
+
+    $_SESSION["ulicms_login"] = $user["username"];
+    $_SESSION["lastname"] = $user["lastname"];
+    $_SESSION["firstname"] = $user["firstname"];     
+    $_SESSION["email"] = $user["email"];
+    $_SESSION["login_id"] = $user["id"];
+    $_SESSION["group"] = $user["group"];
+    $_SESSION["session_begin"] = time();              
+              
+    if(!$redirect)
+        return;
+        
+     if(isset($_REQUEST["go"]))
+        header("Location: ".$_REQUEST["go"]);
+     else
+        header("Location: index.php");
+     
+     return;
+                  
+                 
+}
+
+
+function validate_login($user, $password){
+        include_once "../lib/encryption.php";
+	$user = mysql_real_escape_string($user);
+	$user = getUserByName($user);
+
+	if($user){
+	   if($user["old_encryption"])
+              $password = md5($password);
+           else
+	      $password = hash_password($password);
+	      	   
+	   if($user["password"] == $password and
+	      $user["group"] > 0){
+              return $user;
+          }
+     }
+     return false;
+}
+
 ?>
