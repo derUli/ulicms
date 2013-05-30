@@ -22,24 +22,17 @@ function getExcerpt($str, $startPos=0, $maxLength=100) {
 	return $excerpt;
 }
 
+function isEmpty($str){
+   return trim($str);
+}
+
 // Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
 // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
 function keywordsFromString($text) {
-  $return = array();
-
-  $text = str_replace("&quot;", "", $text );
+ $return = array();
   
   // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
-  $text = str_ireplace(array("\n", ".", "(", ")",
-  "[", "]", "!", "?", "&ndash;", "&dash;", "&nbsp;", "/", "-"), " ", $text);
- 
- 
- 
-  // Artikel usw... entfernen
-  $ignoreWords = array(" der ", " die ", " dass ", " das ", " ein ", " dieser ", " man ", " und ", " sich ", " im ", " wenn ", " den ", " muss ", " von ",
-  " eine ", " ist ", " auf ", " zum ", " es ", " it ", " the ", " to ", " is ", " in ", " and ", " as ", " on ", " a ", " an ", " you ", " be ");  
-  
-  $text = str_ireplace($ignoreWords, " ", $text);
+  $text = str_replace(array("\n", ".", ","), " ", $text);
   
   // text an Leerzeichen zerlegen
   $array = explode(" ", $text);
