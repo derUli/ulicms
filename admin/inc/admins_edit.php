@@ -5,8 +5,8 @@ if($_SESSION["group"]>=50 or
 
 $admin=intval($_GET["admin"]);
 
-$query=mysql_query("SELECT * FROM ".tbname("admins")." WHERE id='$admin'");
-while($row=mysql_fetch_object($query)){
+$query = mysql_query("SELECT * FROM ".tbname("admins")." WHERE id='$admin'");
+while($row = mysql_fetch_object($query)){
 ?>
 
 <form action="index.php?action=admins" name="userdata_form" method="post" enctype="multipart/form-data">
@@ -35,7 +35,7 @@ Avatar hochladen:<br/>
 <strong>Email:</strong><br/>
 <input type="text" style="width:300px;" name="admin_email" value="<?php echo $row->email;?>"><br/><br/>
 <strong>neues Passwort:</strong><br/>
-<input type="text" style="width:300px;" name="admin_password" value="<?php echo $row->password;?>"> <input type="button" value="Passwort verschlüsseln" onclick="document.userdata_form.admin_password.value = MD5 (document.userdata_form.admin_password.value)"><br/>
+<input type="text" style="width:300px;" name="admin_password" value=""> <br/>
 <?php if($_SESSION["group"] >=50){
 ?>
 <br>

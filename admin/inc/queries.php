@@ -1,5 +1,5 @@
 <?php 
-if($_GET["action"]=="save_settings"&&isset($_POST["save_settings"])){
+if($_GET["action"]=="save_settings" && isset($_POST["save_settings"])){
   setconfig("homepage_title", mysql_real_escape_string($_POST["homepage_title"]));
   setconfig("homepage_owner", mysql_real_escape_string($_POST["homepage_owner"]));
   setconfig("motto", mysql_real_escape_string($_POST["homepage_motto"]));
@@ -391,14 +391,14 @@ exit();
 
 if($_POST["add_admin"]=="add_admin" && $_SESSION["group"]>=50){
 
-$username=mysql_real_escape_string($_POST["admin_username"]);
-$lastname=mysql_real_escape_string($_POST["admin_lastname"]);
-$firstname=mysql_real_escape_string($_POST["admin_firstname"]);
-$email=mysql_real_escape_string($_POST["admin_email"]);
-$password=mysql_real_escape_string($_POST["admin_password"]);
-$query=mysql_query("INSERT INTO ".tbname("admins")." 
+$username = mysql_real_escape_string($_POST["admin_username"]);
+$lastname = mysql_real_escape_string($_POST["admin_lastname"]);
+$firstname = mysql_real_escape_string($_POST["admin_firstname"]);
+$email = mysql_real_escape_string($_POST["admin_email"]);
+$password = mysql_real_escape_string($_POST["admin_password"]);
+mysql_query("INSERT INTO ".tbname("admins")." 
 (username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','".md5($password)."',10)",$connection);
-$message="Hallo $firstname,\n\n".
+$message = "Hallo $firstname,\n\n".
 "Ein Administrator hat auf ".$_SERVER["SERVER_NAME"]." für dich ein neues Benutzerkonto angelegt.\n\n".
 "Die Zugangsdaten lauten:\n\n".
 "Benutzername: $username\n".
@@ -573,14 +573,17 @@ $firstname = mysql_real_escape_string($_POST["admin_firstname"]);
 $email = mysql_real_escape_string($_POST["admin_email"]);
 $password = mysql_real_escape_string($_POST["admin_password"]);
 $rechte = mysql_real_escape_string($_POST["admin_rechte"]);
-$icq_id = mysql_real_escape_string($_POST["icq_id"]);        
-$icq_id = mysql_real_escape_string($_POST["icq_id"]);  
+$icq_id = mysql_real_escape_string($_POST["icq_id"]);     
 $skype_id = mysql_real_escape_string($_POST["skype_id"]);     
 $about_me = mysql_real_escape_string($_POST["about_me"]);  
-mysql_query("UPDATE ".tbname("admins")." SET username='$username', `group`= $rechte, firstname='$firstname',
-lastname='$lastname', email='$email', password='".$password."',
-`icq_id`='$icq_id',  skype_id = '$skype_id',
+mysql_query("UPDATE ".tbname("admins")." SET username = '$username', `group`= $rechte, firstname='$firstname',
+lastname='$lastname', email='$email', 
+`icq_id`='$icq_id', skype_id = '$skype_id',
 about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id",$connection);
+
+if(!empty($password))
+   changePassword($password, $id);
+
   
 
 if($_SESSION["group"]>=10 and $_POST["id"] == $_SESSION["login_id"]){

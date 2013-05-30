@@ -12,6 +12,12 @@ function getUsers(){
   return $users;
 }
 
+function changePassword($password, $id){
+   include_once "../lib/encryption.php";
+   $newPassword = hash_password($password);
+   return mysql_query("UPDATE ".tbname("admins")." SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
+}
+
 function getUserByName($name){
   $query = mysql_query("SELECT * FROM ".tbname("admins"). " WHERE username='".
   mysql_real_escape_string($name)."'");
