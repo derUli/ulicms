@@ -29,8 +29,15 @@ function keywordsFromString($text) {
   $text = str_replace("&quot;", "", $text );
   
   // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
-  $text = str_replace(array("\n", ".", ",", "!", "?", "&nbsp;", "/", "-"), " ", $text);
+  $text = str_ireplace(array("\n", ".", ",", "!", "?", "&nbsp;", "/", "-"), " ", $text);
  
+ 
+ 
+  // Artikel usw... entfernen
+  $ignoreWords = array("der ", "die ", "dass ", "das ", "ein ", "dieser ", "man ", "und ", "sich ", "im ", "wenn ", "den ", "muss ", "von ",
+  "eine ", "ist ", "auf ", "zum ", "es ", "it ", "the ", "to ", "is ", "in ", "and ", "as ", "on ", "a ", "an ", "you ", "be ", "are ");  
+  
+  $text = str_ireplace($ignoreWords, "", $text);
   
   // text an Leerzeichen zerlegen
   $array = explode(" ", $text);
