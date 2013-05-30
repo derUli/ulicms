@@ -195,7 +195,7 @@ $passwort=mysql_real_escape_string($_POST["passwort"]);
 
 $encrypted_passwort = sha1($salt.$passwort);
 
-mysql_query("INSERT INTO `".$prefix."admins` (`id`, `old_encryption` `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
+mysql_query("INSERT INTO `".$prefix."admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
 (1, 0, 'admin', '".$nachname."', '".$vorname."', '".$email."', '".$encrypted_passwort."',50);")or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
@@ -281,10 +281,11 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (24, 'spamfilter_words_blacklist', 
 'Casino||Euro Dice||Bingo||Cialis||Viagra||Penis||Enlargement||Drugstore'),
 (25, 'empty_trash_days', '30'),
-(26, 'timezone', 'Europe/Berlin'),
-(27, 'db_schema_version', '6.0'),
-(28, 'pkg_src', 'http://www.ulicms.de/packages/{version}/'),
-(29, 'session_timeout', '60');")or die(mysql_error());
+(26, 'password_salt', '$salt'),
+(27, 'timezone', 'Europe/Berlin'),
+(28, 'db_schema_version', '6.0'),
+(29, 'pkg_src', 'http://www.ulicms.de/packages/{version}/'),
+(30, 'session_timeout', '60');")or die(mysql_error());
 
 mysql_query("UPDATE `".$prefix."content` SET parent=NULL")or die(mysql_error());
 
