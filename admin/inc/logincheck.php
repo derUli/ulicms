@@ -12,22 +12,22 @@ if(isset($_POST["login"])){
 	$user = mysql_real_escape_string($_POST["user"]);
 	$user = getUserByName($user);
 	
+	var_dump($user);
 	if($user){
 	   if($user["old_encryption"])
               $password = md5($_POST["password"]);
            else
 	      $password = hash_password($_POST["password"]);
-	   
-	   
+	      	   
 	   if($user["password"] == $password and
 	      $user["group"] > 0){
               $data=mysql_fetch_array($query);
-              $_SESSION["ulicms_login"]=$data["username"];
-              $_SESSION["lastname"]=$data["lastname"];
-              $_SESSION["firstname"]=$data["firstname"];     
-              $_SESSION["email"]=$data["email"];
-              $_SESSION["login_id"]=$data["id"];
-              $_SESSION["group"]=$data["group"];
+              $_SESSION["ulicms_login"] = $user["username"];
+              $_SESSION["lastname"] = $user["lastname"];
+              $_SESSION["firstname"] = $user["firstname"];     
+              $_SESSION["email"] = $user["email"];
+              $_SESSION["login_id"] = $user["id"];
+              $_SESSION["group"] = $user["group"];
               $_SESSION["session_begin"] = time();
               
               if(isset($_REQUEST["go"]))
@@ -37,13 +37,8 @@ if(isset($_POST["login"])){
 		exit();
           }
       
-}
+     }
 	
-	}
-	
-	$query = mysql_query("SELECT * FROM ".tbname("admins")." WHERE username='$user' AND password='$password' AND `group` > 0");
-	if(mysql_num_rows($query)>0){
-		
 
 }
 
