@@ -159,7 +159,7 @@ if($select==false){
 
 <?php if($_POST["step"]=="4"){
 
-
+$salt = uniqid();
 
 $connection = mysql_connect($_SESSION["mysql"]["server"], $_SESSION["mysql"]["loginname"], $_SESSION["mysql"]["passwort"]);
 
@@ -177,6 +177,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."admins` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `group` int(11) NOT NULL,
+  `old_encryption` boolean NOT NULL DEFAULT 0,
   `skype_id` varchar(32) NOT NULL,
   `icq_id` varchar(20) NOT NULL,
   `avatar_file` varchar(40) NOT NULL,
@@ -192,10 +193,10 @@ $zusammen=mysql_real_escape_string("$vorname $nachname");
 $email=mysql_real_escape_string($_POST["email"]);
 $passwort=mysql_real_escape_string($_POST["passwort"]);
 
+$encrypted_passwort = sha1($salt.$passwort);
 
-
-mysql_query("INSERT INTO `".$prefix."admins` (`id`, `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
-(1, 'admin', '".$nachname."', '".$vorname."', '".$email."', '".md5($passwort)."',50);")or die(mysql_error());
+mysql_query("INSERT INTO `".$prefix."admins` (`id`, `old_encryption` `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
+(1, 0, 'admin', '".$nachname."', '".$vorname."', '".$email."', '".$encrypted_passwort."',50);")or die(mysql_error());
 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -251,10 +252,6 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
 
 $homepage_title=mysql_real_escape_string($_POST["homepage_title"]);
 $motto=mysql_real_escape_string($_POST["motto"]);
-
-
-
-
 
 mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (1, 'homepage_title', '$homepage_title'),

@@ -94,7 +94,9 @@ if(!$select){
 
 
 $error_reporting = getconfig("error_reporting");
-error_reporting($error_reporting);
+
+if($error_reporting !== false)
+   error_reporting($error_reporting);
 
 
 $cache_period = getconfig("cache_period");

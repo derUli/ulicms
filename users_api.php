@@ -32,6 +32,7 @@ function getUserById($id){
 }
 
 
+
 function adduser($username, $lastname, $firstname, $email, $password, $group){
   $username = mysql_real_escape_string($username);
   $lastname = mysql_real_escape_string($lastname);

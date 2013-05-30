@@ -56,6 +56,16 @@ while($row=mysql_fetch_object($query)){
 // Version des Datenbank-Schemas setzen
 setconfig("db_schema_version", "6.1");
 
+} else if($db_schema_verrsion === "6.1"){
+
+  // Verbesserung der Systemsicherheit
+  // Das Verschlüsselungsverfahren wurde von ungesalzenen MD5
+  // auf gesalzenes SHA1 umgestellt
+  mysql_query("ALTER TABLE ".tbname("admins")." ADD `old_encryption` Boolean Default 0;") or die(mysql_error());
+  mysql_query("UPDATE ".tbname("admins"). " SET `old_encryption` = 1");
+  
+  setconfig("db_schema_version", "6.2");
+  
 }
 
 //@unlink("update.php");
