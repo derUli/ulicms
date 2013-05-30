@@ -268,7 +268,7 @@ exit();
 
 if($_POST["add_page"] == "add_page"){
 	if($_POST["system_title"]!=""){
-	
+
 	$system_title = mysql_real_escape_string($_POST["system_title"]);
 	$page_title = mysql_real_escape_string($_POST["page_title"]);
 	$activated = intval($_POST["activated"]);
@@ -286,48 +286,74 @@ if($_POST["add_page"] == "add_page"){
 	$access = implode(",", $_POST["access"]);
 	$access = mysql_real_escape_string($access);
 	$target = mysql_real_escape_string($_POST["target"]);
-	$meta_description = mysql_real_escape_string($_POST["meta_description"]); 
-	$meta_keywords = mysql_real_escape_string($_POST["meta_keywords"]);
+	$meta_description = $_POST["meta_description"]; 
+	$meta_keywords = $_POST["meta_keywords"];
+
+        if(empty($meta_description) and 
+        !getconfig("disable_auto_generate_meta_tags")){
+           include_once "../lib/string_functions.php";
+           $maxlength_chars = 160;
+           
+           $shortContent = strip_tags($page_content);
+           
+           // Leerzeichen und Zeilenumbrüche entfernen
+           $shortContent = trim($shortContent);
+           $shortContent = preg_replace("#[ ]*[\r\n\v]+#", "\r\n", $shortContent); 
+           $shortContent = preg_replace("#[ \t]+#", " ", $shortContent);
+           $shortContent = str_replace("\r\n", " ", $shortContent);
+           $shortContent = str_replace("\n", " ", $shortContent);
+           $shortContent = str_replace("\r", " ", $shortContent);
+           $shortContent = trim($shortContent);
+           $shortstring = $shortContent;
+           $word_count = str_word_count($shortstring);
+           
+           while(strlen($shortstring) > 160){
+              $shortstring = getExcerpt($shortContent, 0, $word_count);
+              $word_count -= 1;
+           }
+        
+           
+        $meta_description = $shortstring;
+        
+        }
+
+        $meta_description = mysql_real_escape_string($meta_description);
+
 
 	// Wenn keine Meta Keywords gesetzt sind selbst ermitteln
 	if(empty($meta_keywords) and
-	   !getconfig("disable_auto_generate_meta_keywords")){
+	   !getconfig("disable_auto_generate_meta_tags")){
 	   
 	      include_once "../lib/string_functions.php";
 	      $stripped_content = trim($page_content);
 	      $stripped_content = str_replace("\\r\\n", "\r\n", $stripped_content);
 	      $stripped_content = strip_tags($stripped_content);
 	      $words = keywordsFromString($stripped_content);
-       
-	                   
               $maxWords = 10;
-                 
+              $currentWordCount = 0;
+              $maxi = count($words);
               $i = 0;
-              
               $meta_keywords = "";
-              
               if(count($words) > 0){
                  foreach ($words as $key => $value) {
-                    $key = trim($key);            
-                    if(!empty($key) and $i <= $maxWords){
-                    
-                       $i++;
-                       $meta_keywords .= $key; 
-                       }
-                    
-                    if(!empty($key) and $i <= $maxWords)
-                       $meta_keywords .= ", ";
-                 
-      
-                 }
+                   $i++;
+                   $key = trim($key);
+                   if(!empty($key) and $currentWordCount < $maxWords){
+                      $currentWordCount++;
+                      $meta_keywords .= $key; 
+                   }
+             if(!empty($key) and $i < $maxi and $currentWordCount < $maxWords)
+                $meta_keywords .= ", ";
+          }
 	      
 	      
-	}
+   }
 	
 	
-	$meta_keywords = mysql_real_escape_string($meta_keywords);
-	
-	}
+   }
+   
+   
+   $meta_keywords = mysql_real_escape_string($meta_keywords);
 	
 	$language = mysql_real_escape_string($_POST["language"]);
 	
