@@ -26,6 +26,10 @@ function isEmpty($str){
    return trim($str);
 }
 
+function decodeHTMLEntities($str){
+ return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
+}
+
 // Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
 // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
 function keywordsFromString($text) {
@@ -50,10 +54,13 @@ function keywordsFromString($text) {
       $return[$word]++;
     }
   }
-    // nach häufigkeit sortieren
-    arsort($return);
+  
+    
+  $return = array_filter($return, "decodeHTMLEntities");
+  // nach häufigkeit sortieren
+  arsort($return);
 
-  // array zurückgeben
+    // array zurückgeben
   return $return;
 }
 
