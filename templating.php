@@ -67,9 +67,7 @@ function meta_keywords($ipage=null){
 	$connection=MYSQL_CONNECTION;
 	$ipage=mysql_real_escape_string($_GET["seite"]);
 	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
-	if($ipage==""){
-		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
-	}
+
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
 		  if(!empty($row->meta_keywords)){
@@ -81,7 +79,7 @@ function meta_keywords($ipage=null){
 	}
 	
 	
-	return false;
+	return getconfig("meta_keywords");
 }
 
 function meta_description($ipage=null){
@@ -103,7 +101,7 @@ function meta_description($ipage=null){
 	}
 	
 	
-	return false;
+	return getconfig("meta_description");
 }
 
 function title($ipage=null){
@@ -166,14 +164,14 @@ function apply_filter($text, $type){
        @include $module_content_filter_file;
      
        if(function_exists($modules[$i]."_".$type."_filter")){
-            $content = call_user_func($modules[$i]."_".$type."_filter", 
+            $text = call_user_func($modules[$i]."_".$type."_filter", 
                                       $text);
        }
      
     }
   }
   
-  return $content;
+  return $text;
 }
 
 
@@ -361,7 +359,7 @@ function base_metas(){
 	if($keywords!=""&&$keywords!=false){
 		
 		if(!getconfig("hide_meta_keywords")){
-	                $keywords = apply_filter($keywords, "keywords");
+	                $keywords = apply_filter($keywords, "meta_keywords");
 			echo '<meta name="keywords" content="'.$keywords.'"/>';
 			echo "\r\n";
 		}
