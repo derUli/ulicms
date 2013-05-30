@@ -9,6 +9,7 @@
  * @return String excerpt
  */
 function getExcerpt($str, $startPos=0, $maxLength=100) {
+        $str = str_replace("&nbsp;", " ", $str);
 	if(strlen($str) > $maxLength) {
 		$excerpt   = substr($str, $startPos, $maxLength-3);
 		$lastSpace = strrpos($excerpt, ' ');
