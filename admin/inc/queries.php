@@ -315,7 +315,7 @@ if($_POST["add_page"] == "add_page"){
                        $meta_keywords .= $key; 
                        }
                     
-                    if(!empty($key) and $i < $maxWords)
+                    if(!empty($key) and $i <= $maxWords)
                        $meta_keywords .= ", ";
                  
       
