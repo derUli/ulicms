@@ -390,14 +390,14 @@ exit();
 
 
 if($_POST["add_admin"]=="add_admin" && $_SESSION["group"]>=50){
-
+include "../lib/encryption.php";
 $username = mysql_real_escape_string($_POST["admin_username"]);
 $lastname = mysql_real_escape_string($_POST["admin_lastname"]);
 $firstname = mysql_real_escape_string($_POST["admin_firstname"]);
 $email = mysql_real_escape_string($_POST["admin_email"]);
 $password = mysql_real_escape_string($_POST["admin_password"]);
 mysql_query("INSERT INTO ".tbname("admins")." 
-(username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','".md5($password)."',10)",$connection);
+(username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','".hash_password($password)."',10)",$connection);
 $message = "Hallo $firstname,\n\n".
 "Ein Administrator hat auf ".$_SERVER["SERVER_NAME"]." für dich ein neues Benutzerkonto angelegt.\n\n".
 "Die Zugangsdaten lauten:\n\n".
