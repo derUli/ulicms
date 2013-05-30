@@ -27,7 +27,7 @@ function keywordsFromString($text) {
   $return = array();
   
   // Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
-  $text = str_replace(array("\n", ".", ",", "!", "?", "&nbsp;"), " ", $text);
+  $text = str_replace(array("\n", ".", ",", "!", "?", "&nbsp;", "/", "-"), " ", $text);
  
   
   // text an Leerzeichen zerlegen
