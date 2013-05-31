@@ -3,8 +3,7 @@
 <head>
 <meta name="viewport" content="width=1280"/>
 
-<link rel="stylesheet" type="text/css" media="all" href="css/admin.css"/>
-<link rel="stylesheet" type="text/css" media="handheld" href="css/mobile.css"/>
+<link rel="stylesheet" type="text/css" href="css/admin.css"/>
 
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>
