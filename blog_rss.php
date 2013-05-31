@@ -36,7 +36,7 @@ function rootDirectory() {
 }
 
 
-$query = mysql_query("SELECT id, datum, seo_shortname, content_preview, title FROM ".tbname("blog"). " WHERE entry_enabled = 1 AND language='$lang' ORDER by datum DESC LIMIT $blog_feed_max_items");
+$query = db_query("SELECT id, datum, seo_shortname, content_preview, title FROM ".tbname("blog"). " WHERE entry_enabled = 1 AND language='$lang' ORDER by datum DESC LIMIT $blog_feed_max_items");
 
 header("Content-Type: text/xml; charset=UTF-8");
 

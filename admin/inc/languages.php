@@ -2,7 +2,7 @@
 <?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=50){
 
-$languages = mysql_query("SELECT * FROM ".tbname("languages")." ORDER BY language_code ASC");
+$languages = db_query("SELECT * FROM ".tbname("languages")." ORDER BY language_code ASC");
 
 ?>
 <form action="index.php?action=languages" method="post">

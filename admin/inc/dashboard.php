@@ -1,11 +1,11 @@
 <?php {
 if(defined("_SECURITY")){
-  $pages_count = mysql_num_rows(mysql_query("SELECT * FROM ".tbname("content")));
+  $pages_count = mysql_num_rows(db_query("SELECT * FROM ".tbname("content")));
 
-  $topPages=mysql_query("SELECT * FROM ".tbname("content")." WHERE notinfeed = 0 AND systemname <> \"kontakt\" ORDER BY views DESC LIMIT 5");
-  $lastModfiedPages = mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname <> \"kontakt\" ORDER BY lastmodified DESC LIMIT 5");
+  $topPages=db_query("SELECT * FROM ".tbname("content")." WHERE notinfeed = 0 AND systemname <> \"kontakt\" ORDER BY views DESC LIMIT 5");
+  $lastModfiedPages = db_query("SELECT * FROM ".tbname("content")." WHERE systemname <> \"kontakt\" ORDER BY lastmodified DESC LIMIT 5");
 
-  $admins_query = mysql_query("SELECT * FROM ".tbname("admins"));
+  $admins_query = db_query("SELECT * FROM ".tbname("admins"));
 
   $admins = Array();
 
@@ -14,7 +14,7 @@ if(defined("_SECURITY")){
   }
 
  
-  $users_online = mysql_query("SELECT * FROM ".tbname("admins")." WHERE last_action > ".(time() - 300)." ORDER BY username");
+  $users_online = db_query("SELECT * FROM ".tbname("admins")." WHERE last_action > ".(time() - 300)." ORDER BY username");
   
 ?>
 <p>Hallo <?php echo $_SESSION["firstname"]." ".$_SESSION["lastname"];?>! [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
@@ -65,7 +65,7 @@ $motd = nl2br($motd);
 </tr>
 <?php
 }?>
-<?php $test = mysql_query("SELECT * FROM ".tbname("guestbook_entries"));
+<?php $test = db_query("SELECT * FROM ".tbname("guestbook_entries"));
 	if($test){
 ?>
 <tr>

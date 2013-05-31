@@ -35,7 +35,7 @@ if(isset($_GET["clear_cache"])){
 
 if($_GET["action"] == "undelete_page" && $_SESSION["group"]>=40){
   $page = intval($_GET["page"]);
-  mysql_query("UPDATE ".tbname("content"). " SET `deleted_at` = NULL".
+  db_query("UPDATE ".tbname("content"). " SET `deleted_at` = NULL".
   " WHERE id=$page");
   header("Location: index.php?action=pages");
   exit();
@@ -44,7 +44,7 @@ if($_GET["action"] == "undelete_page" && $_SESSION["group"]>=40){
 
 if($_GET["action"] == "pages_delete" && $_SESSION["group"]>=40){
   $page = intval($_GET["page"]);
-  mysql_query("UPDATE ".tbname("content"). " SET `deleted_at` = ".time().
+  db_query("UPDATE ".tbname("content"). " SET `deleted_at` = ".time().
   " WHERE id=$page");
   header("Location: index.php?action=pages");
   exit();
@@ -96,7 +96,7 @@ header("Location: index.php?action=templates&save=false");
 
 if($_SESSION["group"] >= 40 and 
 $_GET["action"] == "empty_trash"){
-   mysql_query("DELETE FROM ".tbname("content")." WHERE deleted_at IS NOT NULL");
+   db_query("DELETE FROM ".tbname("content")." WHERE deleted_at IS NOT NULL");
    header("Location: index.php?action=pages");
    exit();
 }
@@ -109,7 +109,7 @@ if($_GET["action"]=="key_delete" && $_SESSION["group"]>=40){
 }
 
 if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $_SESSION["group"]>=50){
-  mysql_query("DELETE FROM ".tbname("languages"). " WHERE id = ".intval($_GET["delete"]));
+  db_query("DELETE FROM ".tbname("languages"). " WHERE id = ".intval($_GET["delete"]));
   
   
 }
@@ -123,7 +123,7 @@ if(isset($_POST["add_language"]) and $_SESSION["group"]>=50){
    if(!empty($_POST["name"]) and !empty($_POST["language_code"])){
       $name = mysql_real_escape_string($_POST["name"]);   
       $language_code = mysql_real_escape_string($_POST["language_code"]);
-      mysql_query("INSERT INTO ".tbname("languages").
+      db_query("INSERT INTO ".tbname("languages").
       "(name, language_code)
       VALUES('$name', '$language_code')");   
    }
@@ -131,7 +131,7 @@ if(isset($_POST["add_language"]) and $_SESSION["group"]>=50){
 
 
 if(isset($_POST["add_menu_item"]) and $_SESSION["group"]>=50){
-   $query = mysql_query("SELECT position FROM ".
+   $query = db_query("SELECT position FROM ".
    tbname("backend_menu_structure")." ORDER BY position DESC LIMIT 1");
    if(mysql_num_rows($query)>0){
     $fetched_assoc = mysql_fetch_assoc($query);
@@ -143,7 +143,7 @@ if(isset($_POST["add_menu_item"]) and $_SESSION["group"]>=50){
    $action = mysql_real_escape_string($_POST["action"]);   
    $label = mysql_real_escape_string($_POST["label"]);
    
-   mysql_query("INSERT INTO ".tbname("backend_menu_structure").
+   db_query("INSERT INTO ".tbname("backend_menu_structure").
    "(action, label, position) 
    VALUES('$action', '$label', $position)");
 }
@@ -153,9 +153,9 @@ if($_GET["action"] == "customize_menu" and
 isset($_GET["delete"]) and
 $_SESSION["group"]>=50){
   $delete = intval($_GET["delete"]);
-  mysql_query("DELETE FROM ".tbname("backend_menu_structure").
+  db_query("DELETE FROM ".tbname("backend_menu_structure").
   " WHERE position = $delete");
-  mysql_query("UPDATE ".tbname("backend_menu_structure").
+  db_query("UPDATE ".tbname("backend_menu_structure").
   " SET position = position - 1 WHERE position > $delete ");  
 }
 
@@ -166,22 +166,22 @@ and $_SESSION["group"]>=50){
   $current_position = intval($_GET["up"]);                  
   if($current_position != 1){
   
-        mysql_query("UPDATE ".
+        db_query("UPDATE ".
     tbname("backend_menu_structure")." SET position = -1".
     " WHERE position = $current_position");  
     
-          mysql_query("UPDATE ".
+          db_query("UPDATE ".
     tbname("backend_menu_structure")." SET position = -2".
     " WHERE position = $current_position - 1");  
   
   
   
-      mysql_query("UPDATE ".
+      db_query("UPDATE ".
     tbname("backend_menu_structure")." SET position = $current_position - 1".
     " WHERE position = -1");  
     
     
-    mysql_query("UPDATE ".
+    db_query("UPDATE ".
     tbname("backend_menu_structure")." SET position = $current_position".
     " WHERE position = -2"); 
     
@@ -200,7 +200,7 @@ if($_GET["action"] == "customize_menu" and isset($_GET["down"])
 and $_SESSION["group"]>=50){
   $current_position = intval($_GET["down"]);
   
-      $query = mysql_query("SELECT position FROM ".
+      $query = db_query("SELECT position FROM ".
    tbname("backend_menu_structure")." ORDER BY position DESC LIMIT 1");
    if(mysql_num_rows($query)>0){
     $fetched_assoc = mysql_fetch_assoc($query);
@@ -216,22 +216,22 @@ and $_SESSION["group"]>=50){
 
   
   
-        mysql_query("UPDATE ".
+        db_query("UPDATE ".
     tbname("backend_menu_structure")." SET position = -1".
     " WHERE position = $current_position");  
     
-          mysql_query("UPDATE ".
+          db_query("UPDATE ".
     tbname("backend_menu_structure")." SET position = -2".
     " WHERE position = $current_position + 1");  
   
   
   
-      mysql_query("UPDATE ".
+      db_query("UPDATE ".
     tbname("backend_menu_structure")." SET position = $current_position + 1".
     " WHERE position = -1");  
     
     
-    mysql_query("UPDATE ".
+    db_query("UPDATE ".
     tbname("backend_menu_structure")." SET position = $current_position".
     " WHERE position = -2"); 
     
@@ -252,7 +252,7 @@ and $_SESSION["group"]>=50){
 
 if($_GET["action"]=="banner_delete" && $_SESSION["group"]>=40){
   $banner=intval($_GET["banner"]);
-  $query=mysql_query("DELETE FROM ".tbname("banner")." WHERE id='$banner'",$connection);
+  $query=db_query("DELETE FROM ".tbname("banner")." WHERE id='$banner'",$connection);
   header("Location: index.php?action=banner");
   exit();
 }
@@ -260,7 +260,7 @@ if($_GET["action"]=="banner_delete" && $_SESSION["group"]>=40){
 
 if($_GET["action"]=="admin_delete" && $_SESSION["group"]>=40){
 $admin=intval($_GET["admin"]);
-$query=mysql_query("DELETE FROM ".tbname("admins")." WHERE id='$admin'",$connection);
+$query=db_query("DELETE FROM ".tbname("admins")." WHERE id='$admin'",$connection);
 header("Location: index.php?action=admins");
 exit();
 }
@@ -358,7 +358,7 @@ if($_POST["add_page"] == "add_page"){
 	
 	$language = mysql_real_escape_string($_POST["language"]);
 	
-	mysql_query("INSERT INTO ".tbname("content").
+	db_query("INSERT INTO ".tbname("content").
 	" (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position, 
   access, meta_description, meta_keywords, language, target) 
@@ -384,7 +384,7 @@ $activated=intval($_POST["activated"]);
 $content=mysql_real_escape_string($_POST["news_content"]);
 $date=time();
 $autor=$_SESSION["login_id"];
-$query=mysql_query("INSERT INTO ".tbname("news")." 
+$query=db_query("INSERT INTO ".tbname("news")." 
 (title,content,active, autor,date) VALUES('$title','$content',$activated,$autor,$date)",$connection);
 
 
@@ -404,7 +404,7 @@ $activated=intval($_POST["activated"]);
 $content=mysql_real_escape_string($_POST["news_content"]);
 $date=time();
 $autor=$_SESSION["login_id"];
-$query=mysql_query("UPDATE ".tbname("news")." SET title='$title',content='$content',date=$date,active=$activated WHERE id=$id",$connection);
+$query=db_query("UPDATE ".tbname("news")." SET title='$title',content='$content',date=$date,active=$activated WHERE id=$id",$connection);
 
 
 header("Location: index.php?action=news");
@@ -417,7 +417,7 @@ exit();
 
 if($_GET["delete_news"]=="delete_news" && $_SESSION["group"]>=40){
 $news = intval($_GET["news"]);
-$query = mysql_query("DELETE FROM ".tbname("news")." WHERE id='$news'",$connection);
+$query = db_query("DELETE FROM ".tbname("news")." WHERE id='$news'",$connection);
 header("Location: index.php?action=news");
 exit();
 }
@@ -429,7 +429,7 @@ $name = mysql_real_escape_string($_POST["banner_name"]);
 $image_url = mysql_real_escape_string($_POST["image_url"]);
 $link_url = mysql_real_escape_string($_POST["link_url"]);
 
-$query = mysql_query("INSERT INTO ".tbname("banner")." 
+$query = db_query("INSERT INTO ".tbname("banner")." 
 (name,link_url,image_url) VALUES('$name','$link_url','$image_url')",$connection);
 
 header("Location: index.php?action=banner");
@@ -442,7 +442,7 @@ if($_POST["add_key"]=="add_key" && $_SESSION["group"]>=40){
 $name = mysql_real_escape_string($_POST["name"]);
 $value = mysql_real_escape_string($_POST["value"]);
 
-$query = mysql_query("INSERT INTO ".tbname("settings")." 
+$query = db_query("INSERT INTO ".tbname("settings")." 
 (name,value) VALUES('$name','$value')",$connection);
 
 header("Location: index.php?action=settings");
@@ -464,7 +464,7 @@ $lastname = mysql_real_escape_string($_POST["admin_lastname"]);
 $firstname = mysql_real_escape_string($_POST["admin_firstname"]);
 $email = mysql_real_escape_string($_POST["admin_email"]);
 $password = mysql_real_escape_string($_POST["admin_password"]);
-mysql_query("INSERT INTO ".tbname("admins")." 
+db_query("INSERT INTO ".tbname("admins")." 
 (username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','".hash_password($password)."',10)",$connection);
 $message = "Hallo $firstname,\n\n".
 "Ein Administrator hat auf ".$_SERVER["SERVER_NAME"]." für dich ein neues Benutzerkonto angelegt.\n\n".
@@ -509,7 +509,7 @@ if($_POST["edit_page"]=="edit_page" && $_SESSION["group"]>=30){
 	$meta_description = mysql_real_escape_string($_POST["meta_description"]); 
 	$meta_keywords = mysql_real_escape_string($_POST["meta_keywords"]);
   
-  	mysql_query("UPDATE ".tbname("content")." SET systemname = '$system_title' , title='$page_title', parent=$parent, content='$page_content', active=$activated, lastmodified=".time().", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target' WHERE id=$id");
+  	db_query("UPDATE ".tbname("content")." SET systemname = '$system_title' , title='$page_title', parent=$parent, content='$page_content', active=$activated, lastmodified=".time().", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target' WHERE id=$id");
 
 
   header("Location: index.php?action=pages");
@@ -644,7 +644,7 @@ $rechte = mysql_real_escape_string($_POST["admin_rechte"]);
 $icq_id = mysql_real_escape_string($_POST["icq_id"]);     
 $skype_id = mysql_real_escape_string($_POST["skype_id"]);     
 $about_me = mysql_real_escape_string($_POST["about_me"]);  
-mysql_query("UPDATE ".tbname("admins")." SET username = '$username', `group`= $rechte, firstname='$firstname',
+db_query("UPDATE ".tbname("admins")." SET username = '$username', `group`= $rechte, firstname='$firstname',
 lastname='$lastname', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
 about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id",$connection);
@@ -672,7 +672,7 @@ $image_url=mysql_real_escape_string($_POST["image_url"]);
 $link_url=mysql_real_escape_string($_POST["link_url"]);
 $id=intval($_POST["id"]);
 
-$query=mysql_query("UPDATE ".tbname("banner")." 
+$query=db_query("UPDATE ".tbname("banner")." 
 SET name='$name',link_url='$link_url',image_url='$image_url' WHERE id=$id");
 
 
@@ -686,7 +686,7 @@ $name=mysql_real_escape_string($_POST["name"]);
 $value=mysql_real_escape_string($_POST["value"]);
 $id=intval($_POST["id"]);
 
-$query=mysql_query("UPDATE ".tbname("settings")." 
+$query=db_query("UPDATE ".tbname("settings")." 
 SET name='$name',value='$value' WHERE id=$id");
 
 

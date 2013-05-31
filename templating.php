@@ -1,7 +1,7 @@
 <?php
 
 function language_selection(){
-	$query=mysql_query("SELECT * FROM ".tbname("languages")." ORDER by name");
+	$query=db_query("SELECT * FROM ".tbname("languages")." ORDER by name");
 	echo "<ul class='language_selection'>";
 	while($row = mysql_fetch_object($query)){
 	    echo "<li>"."<a href='".get_requested_pagename().".html?language=".$row->language_code."'>".$row->name."</a></li>";
@@ -12,7 +12,7 @@ function language_selection(){
 
 function random_banner(){
 	$connection=MYSQL_CONNECTION;
-	$query=mysql_query("SELECT * FROM ".tbname("banner")." ORDER BY RAND() LIMIT 1");
+	$query=db_query("SELECT * FROM ".tbname("banner")." ORDER BY RAND() LIMIT 1");
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
 
@@ -66,7 +66,7 @@ function meta_keywords($ipage=null){
 	$status=check_status();	
 	$connection=MYSQL_CONNECTION;
 	$ipage=mysql_real_escape_string($_GET["seite"]);
-	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
+	$query=db_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
 
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
@@ -86,9 +86,9 @@ function meta_description($ipage=null){
 	$status=check_status();	
 	$connection=MYSQL_CONNECTION;
 	$ipage=mysql_real_escape_string($_GET["seite"]);
-	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
+	$query=db_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
 	if($ipage==""){
-		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
+		$query=db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
 	}
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
@@ -116,9 +116,9 @@ function title($ipage=null){
 	
 	$connection=MYSQL_CONNECTION;
 	$ipage=mysql_real_escape_string($_GET["seite"]);
-	$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
+	$query=db_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
 	if($ipage==""){
-		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
+		$query=db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
 	}
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
@@ -133,11 +133,11 @@ function import($ipage){
 	$connection=MYSQL_CONNECTION;
 	$ipage=mysql_real_escape_string($ipage);
 	if($ipage==""){                                                          
-		$query=mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
+		$query=db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
 	
 	}
 	else{
-		$query=mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'");
+		$query=db_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'");
 	}
 
 	if(mysql_num_rows($query)==0){
@@ -206,7 +206,7 @@ function is_403(){
 
 function menu($name){
     $language = $_SESSION["language"];
-	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent IS NULL ORDER by position");
+	$query = db_query("SELECT * FROM ".tbname("content")." WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent IS NULL ORDER by position");
 	echo "<ul class='menu_".$name."'>\n";
 	while($row = mysql_fetch_object($query)){
 	echo "  <li>" ;
@@ -223,7 +223,7 @@ function menu($name){
 	
 	// Unterebene 1
 
-	$query2 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND `deleted_at` IS NULL AND parent=".$row->id." ORDER by position");
+	$query2 = db_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND `deleted_at` IS NULL AND parent=".$row->id." ORDER by position");
 	
 		if(mysql_num_rows($query2)>0){
 			echo "<ul class='sub_menu'>\n";
@@ -241,7 +241,7 @@ function menu($name){
 				echo '</a>';
 				
 				// Unterebene 2
-				$query3 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent=".$row2->id." AND `deleted_at` IS NULL ORDER by position");
+				$query3 = db_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND language = '$language' AND parent=".$row2->id." AND `deleted_at` IS NULL ORDER by position");
 		if(mysql_num_rows($query3)>0){
 			echo "  <ul class='sub_menu'>\n";
 			while($row3 = mysql_fetch_object($query3)){
@@ -257,7 +257,7 @@ function menu($name){
 				echo '</a>';
 				
 				// Unterebene 3
-				$query4 = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent=".$row3->id." ORDER by position");
+				$query4 = db_query("SELECT * FROM ".tbname("content")." WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent=".$row3->id." ORDER by position");
 		if(mysql_num_rows($query4)>0){
 			echo "  <ul class='sub_menu'>\n";
 			while($row4 = mysql_fetch_object($query4)){
@@ -402,7 +402,7 @@ function autor(){
 	$connection = MYSQL_CONNECTION;
 	$seite = $_GET["seite"];
 	if(empty($seite)){
-		$query = mysql_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
+		$query = db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
 		$result = mysql_fetch_object($query);
 		$seite = $result->systemname;
 	}
@@ -411,7 +411,7 @@ function autor(){
 			return;
 		}
 		
-	$query = mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='".mysql_real_escape_string($seite)."'",$connection);
+	$query = db_query("SELECT * FROM ".tbname("content")." WHERE systemname='".mysql_real_escape_string($seite)."'",$connection);
 	if(mysql_num_rows($query)<1){
 		return;
 	}
@@ -419,7 +419,7 @@ function autor(){
 	if($result["systemname"]=="kontakt"||$result["systemname"]=="impressum"||StartsWith($result["systemname"],"menu_")){
 		return;
 	}
-	$query2=mysql_query("SELECT * FROM ".tbname("admins")." WHERE id=".$result["autor"],$connection);
+	$query2=db_query("SELECT * FROM ".tbname("admins")." WHERE id=".$result["autor"],$connection);
 	$result2=mysql_fetch_array($query2);
 	if(mysql_num_rows($query2)==0){
 		return;
@@ -453,7 +453,7 @@ function content(){
 
 
         if(!is_logged_in())
-           mysql_query("UPDATE ".tbname("content")." SET views = views + 1 WHERE systemname='".$_GET["seite"]."'");
+           db_query("UPDATE ".tbname("content")." SET views = views + 1 WHERE systemname='".$_GET["seite"]."'");
 	return import($_GET["seite"]);
 }
 
@@ -474,7 +474,7 @@ function check_status(){
 	}
 	
 	$connection = MYSQL_CONNECTION;
-	$test = mysql_query("SELECT * FROM `".tbname("content")."` WHERE systemname='".mysql_real_escape_string($_GET["seite"])."'");
+	$test = db_query("SELECT * FROM `".tbname("content")."` WHERE systemname='".mysql_real_escape_string($_GET["seite"])."'");
 	if(mysql_num_rows($test) == 0){
 		return "404 Not Found";
 	}else{

@@ -1,7 +1,7 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=50){
 $key=intval($_GET["key"]);
-$query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE id='$key'");
+$query=db_query("SELECT * FROM ".tbname("settings")." WHERE id='$key'");
 while($row=mysql_fetch_object($query)){
 ?>
 

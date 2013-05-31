@@ -140,7 +140,7 @@ $filter_sql .= $filter_status." ";
 
 
 
-$query = mysql_query("SELECT * FROM ".tbname("content")." ".$filter_sql."ORDER BY $order,position, systemname ASC") or die(mysql_error());
+$query = db_query("SELECT * FROM ".tbname("content")." ".$filter_sql."ORDER BY $order,position, systemname ASC") or die(mysql_error());
 if(mysql_num_rows($query) > 0){
    while($row=mysql_fetch_object($query)){
 ?>

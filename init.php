@@ -4,7 +4,7 @@
 	
 // Workaround für Magic Quotes und Register Globals
 include "lib/workaround.php";
-	
+
 
 
 // if config exists require_config else redirect to installer
@@ -24,6 +24,10 @@ else if(is_dir("installer")){
 }else{
   die("Can't include cms-config.php. Starting installer failed, too.");
 }
+
+
+include_once "lib/db_functions.php";
+
 require_once "api.php";
 
 
@@ -43,7 +47,6 @@ if(!file_exists("content/cache")){
    @mkdir("content/cache", 0777);
 }
 
-  
   
 
 // define Constants

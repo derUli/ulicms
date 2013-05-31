@@ -1,7 +1,7 @@
 <?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=50){
 
-	$query=mysql_query("SELECT * FROM ".tbname("settings")." ORDER BY name",$connection);
+	$query=db_query("SELECT * FROM ".tbname("settings")." ORDER BY name",$connection);
 	$settings=Array();
 	while($row=mysql_fetch_object($query)){
 		
@@ -9,7 +9,7 @@ if($_SESSION["group"]>=50){
 
 	}
 
-	$query2 = mysql_query("SELECT * FROM ".tbname("content"). " ORDER BY systemname");
+	$query2 = db_query("SELECT * FROM ".tbname("content"). " ORDER BY systemname");
 	$pages = Array();
 
 	while($row = mysql_fetch_object($query2)){

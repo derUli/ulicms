@@ -3,7 +3,7 @@
 
 
 function getUsers(){
-  $query = mysql_query("SELECT * FROM ".tbname("admins")." ORDER by username");
+  $query = db_query("SELECT * FROM ".tbname("admins")." ORDER by username");
   $users = Array();
   while($row = mysql_fetch_object($query)){
     array_push($users, $row->username);
@@ -15,11 +15,11 @@ function getUsers(){
 function changePassword($password, $id){
    include_once "../lib/encryption.php";
    $newPassword = hash_password($password);
-   return mysql_query("UPDATE ".tbname("admins")." SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
+   return db_query("UPDATE ".tbname("admins")." SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
 }
 
 function getUserByName($name){
-  $query = mysql_query("SELECT * FROM ".tbname("admins"). " WHERE username='".
+  $query = db_query("SELECT * FROM ".tbname("admins"). " WHERE username='".
   mysql_real_escape_string($name)."'");
   if(mysql_num_rows($query)>0){
     return mysql_fetch_assoc($query);
@@ -29,7 +29,7 @@ function getUserByName($name){
 }
 
 function getUserById($id){
-  $query = mysql_query("SELECT * FROM ".tbname("admins"). " WHERE id = ".intval($id));
+  $query = db_query("SELECT * FROM ".tbname("admins"). " WHERE id = ".intval($id));
   if(mysql_num_rows($query)>0){
     return mysql_fetch_assoc($query);
   }else{
@@ -47,7 +47,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group){
   $password = mysql_real_escape_string($password);
   $group = intval($group);
 
-  $query=mysql_query("INSERT INTO ".tbname("admins")." 
+  $query=db_query("INSERT INTO ".tbname("admins")." 
 (username,lastname, firstname, email, password, `group`) VALUES('$username',' $lastname','$firstname','$email','".md5($password)."',$group)");
   $message="Hallo $firstname,\n\n".
   "Ein Administrator hat auf http://".$_SERVER["SERVER_NAME"]." für dich ein neues Benutzerkonto angelegt.\n\n".
@@ -61,7 +61,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group){
 }
 
 function user_exists($name){
-  $query = mysql_query("SELECT * FROM ".tbname("admins").
+  $query = db_query("SELECT * FROM ".tbname("admins").
   " WHERE username = '".mysql_real_escape_string($name)."'");
   return mysql_num_rows($query) > 0;
 }

@@ -5,7 +5,7 @@ function env($key){
 
   $connection=MYSQL_CONNECTION;
   $key=mysql_real_escape_string($key);
-  $query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'",$connection);
+  $query=db_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'",$connection);
   if(mysql_num_rows($query)>0){
     while($row=mysql_fetch_object($query)){
     return $row->value;

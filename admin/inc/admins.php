@@ -6,7 +6,7 @@ if(empty($_GET["order"])){
 else{
   $order = basename($_GET["order"]);
 }
-$query = mysql_query("SELECT * FROM ".tbname("admins")." ORDER BY $order",$connection);
+$query = db_query("SELECT * FROM ".tbname("admins")." ORDER BY $order",$connection);
 if(mysql_num_rows($query)){
 ?>
 <h2>Benutzer</h2>

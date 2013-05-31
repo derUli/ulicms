@@ -5,7 +5,7 @@ if($_SESSION["group"]>=50 or
 
 $admin=intval($_GET["admin"]);
 
-$query = mysql_query("SELECT * FROM ".tbname("admins")." WHERE id='$admin'");
+$query = db_query("SELECT * FROM ".tbname("admins")." WHERE id='$admin'");
 while($row = mysql_fetch_object($query)){
 ?>
 

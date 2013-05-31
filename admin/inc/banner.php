@@ -1,4 +1,4 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=40){
 ?>
 
@@ -17,7 +17,7 @@ if($_SESSION["group"]>=40){
 <td>Löschen</td>
 </tr>
 <?php 
-$query=mysql_query("SELECT * FROM ".tbname("banner")." ORDER BY id",$connection);
+$query=db_query("SELECT * FROM ".tbname("banner")." ORDER BY id",$connection);
 if(mysql_num_rows($query)>0){
 while($row=mysql_fetch_object($query)){
 ?>

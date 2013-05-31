@@ -4,7 +4,7 @@
 function getconfig($key){
 	$connection=MYSQL_CONNECTION;
 	$ikey=mysql_real_escape_string($key);
-	$query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
+	$query=db_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
 		   return $row->value;
@@ -200,7 +200,7 @@ function replaceShortcodesWithModules($string){
 
 // get page id by systemname
 function getPageIDBySystemname($systemname){
-	$query = mysql_query("SELECT systemname, id FROM `".tbname("content")."` where systemname='".mysql_real_escape_string($systemname)."'");
+	$query = db_query("SELECT systemname, id FROM `".tbname("content")."` where systemname='".mysql_real_escape_string($systemname)."'");
 	if(mysql_num_rows($query ) > 0){
 	   $row = mysql_fetch_object($query);
 	   return $row->id;
@@ -212,7 +212,7 @@ function getPageIDBySystemname($systemname){
 
 // get PageSystemnameByID
 function getPageSystemnameByID($id){
-	$query = mysql_query("SELECT systemname, id FROM `".tbname("content")."` where id=".intval($id));
+	$query = db_query("SELECT systemname, id FROM `".tbname("content")."` where id=".intval($id));
 	if(mysql_num_rows($query ) > 0){
 	   $row = mysql_fetch_object($query);
 	   return $row->systemname;
@@ -223,7 +223,7 @@ function getPageSystemnameByID($id){
 
 // Get systemnames of all pages
 function getAllSystemNames(){
-	$query = mysql_query("SELECT systemname,id FROM `".tbname("content")."` WHERE `deleted_at`IS NULL ORDER BY systemname");
+	$query = db_query("SELECT systemname,id FROM `".tbname("content")."` WHERE `deleted_at`IS NULL ORDER BY systemname");
 	$returnvalues = Array();
 	while($row = mysql_fetch_object($query)){
 		array_push($returnvalues, $row->systemname);
@@ -236,7 +236,7 @@ return $returnvalues;
 
 // Sprachcodes abfragen und als Array zurück geben
 function getAllLanguages(){
-	$query = mysql_query("SELECT * FROM `".tbname("languages")."` ORDER BY language_code");
+	$query = db_query("SELECT * FROM `".tbname("languages")."` ORDER BY language_code");
 	$returnvalues = Array();
 	while($row = mysql_fetch_object($query)){
 		array_push($returnvalues, $row->language_code);
@@ -248,7 +248,7 @@ function getAllLanguages(){
 
 // get all menu items
 function getAllMenuItems(){
-	$query = mysql_query("SELECT * FROM `".tbname("backend_menu_structure")."` ORDER BY position ASC");
+	$query = db_query("SELECT * FROM `".tbname("backend_menu_structure")."` ORDER BY position ASC");
 	$returnvalues = Array();
 	while($row = mysql_fetch_assoc($query)){
 		array_push($returnvalues, $row);
@@ -281,21 +281,21 @@ function file_extension($filename) {
 // Remove an configuration variable
 function deleteconfig($key){
    $key = mysql_real_escape_string($key);
-   mysql_query("DELETE FROM ".tbname("settings").
+   db_query("DELETE FROM ".tbname("settings").
                " WHERE name='$key'");
    return mysql_affected_rows() > 0;
 }
 
 //Set a configuration Variable;
 function setconfig($key, $value){
-  $query=mysql_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
+  $query=db_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
 
   if(mysql_num_rows($query)>0){
 	
-    mysql_query("UPDATE ".tbname("settings")." SET value='$value' WHERE name='$key'");
+    db_query("UPDATE ".tbname("settings")." SET value='$value' WHERE name='$key'");
   }else{
   
-    mysql_query("INSERT INTO ".tbname("settings"). " (name, value) VALUES('$key', '$value')");
+    db_query("INSERT INTO ".tbname("settings"). " (name, value) VALUES('$key', '$value')");
   }
 
 }
@@ -329,7 +329,7 @@ function is__writable($path)
 
 // Check if site contains a module
 function containsModule($page, $module = false){
-   $query = mysql_query("SELECT * FROM ".tbname("content"). " WHERE systemname = '".
+   $query = db_query("SELECT * FROM ".tbname("content"). " WHERE systemname = '".
    mysql_real_escape_string($page)."'");
    $dataset = mysql_fetch_assoc($query);
    $content = $dataset["content"];
