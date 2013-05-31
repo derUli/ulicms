@@ -1,4 +1,5 @@
 <?php 
+define("LOG_TIME_FORMAT", "H:i:s");
 function log_db_query($query){
    // Das DB Logging kann man deaktivieren, durch anlegen der Konfigurationsvariable disable_query_log in der cms_config.php;
    
@@ -26,6 +27,7 @@ function log_db_query($query){
    }
    
    @$date = date("Y-m-d");
+   @$time = date(LOG_TIME_FORMAT);
    $logfile = $logdir.$date.".log";
    $query = trim($query);
    
@@ -33,6 +35,7 @@ function log_db_query($query){
    $query = preg_replace('~\r\n?~', "\r\n", $query);
    
    $handle = fopen($logfile, "a");
+   fwrite($handle, $time."\t");
    fwrite($handle, $query);
    fwrite($handle, "\r\n");
    
