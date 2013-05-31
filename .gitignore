@@ -15,3 +15,5 @@ restricted/
 content/cache
 fokus/
 backup/
+content/log
+!content/log/.htaccess
