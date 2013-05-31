@@ -358,11 +358,17 @@ function uninstall_module($name){
    // Nur Admins können Module löschen
    if(!is_admin())
       return false;   
+      
 
+
+   $name = basename($name);
    $name = trim($name);
+
+  
+  if($name == "." or $name == ".." or empty($name))
+     return false;  
    
-   if(empty($name))
-      return false;
+
    
    $moduleDir = getModulePath($name);
    // Modul-Ordner entfernen
