@@ -364,7 +364,9 @@ function uninstall_module($name){
    $name = basename($name);
    $name = trim($name);
 
-  
+  // Verhindern, dass der Modulordner oder gar das ganze
+  // CMS gelöscht wird
+ 
   if($name == "." or $name == ".." or empty($name))
      return false;  
    
