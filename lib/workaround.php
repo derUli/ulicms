@@ -1,8 +1,7 @@
 <?php
 
-/* Magic Quotes Workaround
-
-   Siehe http://php.net/manual/de/security.magicquotes.php /*
+// Magic Quotes Workaround
+// Siehe http://php.net/manual/de/security.magicquotes.php /*
 
 if(function_exists("get_magic_quotes_gpc"))
 {
