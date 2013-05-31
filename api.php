@@ -15,6 +15,12 @@ function getconfig($key){
 	}
 }
 
+// sind wir gerade im Adminordner?
+function is_admin_dir(){
+   return basename(getcwd()) === "admin";
+
+}
+
 // Auf automatische aktualisieren prüfen.
 // Rückgabewert: ein String oder False
 function checkForUpdates(){

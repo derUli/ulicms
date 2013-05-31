@@ -4,7 +4,9 @@
 	
 // Workaround für Magic Quotes und Register Globals
 include "lib/workaround.php";
-		
+	
+
+
 // if config exists require_config else redirect to installer
 if(file_exists("cms-config.php")){
   require_once "cms-config.php";  
