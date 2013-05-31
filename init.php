@@ -2,9 +2,8 @@
 /* Diese Datei initalisiert das System
 */      
 	
-// Falls keine Zeitzone in der php.ini gesetzt sein sollte
-// wird die Zeitzone auf UTC gesetzt.
-
+// Workaround für Magic Quotes und Register Globals
+include "lib/workaround.php";
 		
 // if config exists require_config else redirect to installer
 if(file_exists("cms-config.php")){
