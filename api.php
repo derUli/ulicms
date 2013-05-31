@@ -1,6 +1,5 @@
 <?php
 
-
 // get a config variable
 function getconfig($key){
 	$connection=MYSQL_CONNECTION;
@@ -420,6 +419,3 @@ function is_admin(){
 
 require_once "users_api.php";
 require_once "legacy.php";
-
-
-?>

@@ -1,8 +1,6 @@
 <?php 
 if(is_admin()){
 
-
-
 // Modul deinstallieren
 if(isset($_GET["remove"])){
    $remove = basename($_GET["remove"]);
