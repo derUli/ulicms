@@ -359,11 +359,12 @@ function uninstall_module($name){
    if(!is_admin())
       return false;   
 
+   $name = trim($name);
    $name = basename($name);
    $name = trim($name);
 
   // Verhindern, dass der Modulordner oder gar das ganze
-  // CMS gelöscht wird
+  // CMS gelöscht werden kann
  
   if($name == "." or $name == ".." or empty($name))
      return false;  
