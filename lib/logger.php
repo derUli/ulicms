@@ -4,7 +4,7 @@ function log_db_query($query){
    
    include_once "cms-config.php";
    $config = new config();
-   if(!isset($config->log_querys))
+   if(!isset($config->query_logging))
       return false;
    
    $logdir = "";
