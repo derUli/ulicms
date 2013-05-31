@@ -1,5 +1,6 @@
 <?php
 
+
 // get a config variable
 function getconfig($key){
 	$connection=MYSQL_CONNECTION;
@@ -118,6 +119,12 @@ function getModuleAdminFilePath($module){
 function getModuleMainFilePath($module){
 	return getModulePath($module).
 		$module."_main.php";
+		
+}
+
+function getModuleUninstallScriptPath($module){
+	return getModulePath($module).
+		$module."_uninstall.php";
 		
 }
 
@@ -342,6 +349,35 @@ function containsModule($page, $module = false){
       return preg_match("/\[module=\".+\"\]/", 
       $content);
    
+}
+
+// API-Aufruf zur Deinstallation eines Moduls
+// Ruft uninstall Script auf, falls vorhanden
+// Löscht anschließend den Ordner modules/$name
+
+function uninstall_module($name){
+   // Nur Admins können Module löschen
+   if(!is_admin())
+      return false;   
+
+   $name = trim($name);
+   
+   if(empty($name))
+      return false;
+   
+   $moduleDir = getModulePath($name);
+   // Modul-Ordner entfernen
+   if(is_dir($moduleDir)){
+      $uninstall_script = getModuleUninstallScriptPath($name);
+      // Uninstall Script ausführen, sofern vorhanden
+      if(is_file($uninstall_script))
+          include $uninstall_script;
+          
+         sureRemoveDir($moduleDir, true);
+         return !is_dir($moduleDir);
+      
+      
+   }
 }
 
 
