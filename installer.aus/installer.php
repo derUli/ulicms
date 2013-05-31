@@ -35,6 +35,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <li>cms-config.php</li>
 <li>templates/ (inklusive Inhalt und Unterordner)</li>
 <li>content/ (inklusive Inhalt und Unterordner)</li>
+<li>modules/ (inklusive Inhalt und Unterordner)</li>
 </ol>
 </p>
 <p></p>
