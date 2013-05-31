@@ -5,6 +5,7 @@ newsletter-0.0.1
 gallery-0.2.0
 mysql_backup-0.0.1
 blog-6.0.2
+comments-6.0.0
 blog_seo-0.0.1
 intramail-0.0.1
 kontaktformular-6.0.0
