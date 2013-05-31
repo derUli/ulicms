@@ -6,5 +6,7 @@ var $mysql_user="root";
 var $mysql_password="";
 var $mysql_database="ulicms";
 var $mysql_prefix="hui_";
+var $query_logging=true;
+
 
 }
