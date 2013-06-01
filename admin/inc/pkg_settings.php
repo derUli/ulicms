@@ -2,6 +2,12 @@
 if(!is_admin){
 echo "<p class='ulicms_error'>Zugriff verweigert</p>";
 } else {
+
+// Wenn Formular abgesendet wurde, Wert Speichern
+if(isset($_REQUEST["pkg_src"])){
+   setconfig("pkg_src", $_REQUEST["pkg_src"]);
+}
+
 $default_pkg_src = "http://www.ulicms.de/packages/{version}/";
 
 $version = new ulicms_version();
@@ -13,6 +19,7 @@ $local_pkg_dir_value = "../packages/{version}/";
 $pkg_src = getconfig("pkg_src");
 
 $is_other_src = $pkg_src !== $default_pkg_src and $pkg_src !== $local_pkg_dir or $pkg_src !== $local_pkg_dir_value;
+
 
 include_once "../lib/file_get_contents_wrapper.php";
 ?>

@@ -104,6 +104,7 @@ if(defined("_SECURITY")){
      </ul>    
     </li>
     <li><a href="?action=motd">MOTD</a></li>
+    <li><a href="?action=pkg_settings">Paketquelle</a></li>
     <li><a href="?action=logo_upload">Logo</a></li>
     <li><a href="?action=languages">Sprachen</a></li>
     <li><a href="?action=settings">Experteneinstellungen</a></li>
