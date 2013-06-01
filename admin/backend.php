@@ -150,14 +150,13 @@ else if($_GET["action"] == "module_settings"){
        require_once "inc/module_settings.php";
 }
 
-
+else if($_GET["action"] == "pkg_settings"){
+       require_once "inc/pkg_settings.php";
+}
 }
 
 require_once "inc/footer.php";
-
-
 @include '../cron.php';
-
 mysql_close($connection);
 exit();
 ?>
