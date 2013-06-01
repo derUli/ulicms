@@ -2,7 +2,6 @@
 // die Funktionalität von file_get_contents
 // mit dem Curl-Modul umgesetzt
 function file_get_contents_curl($url) {
-
 	$ch = curl_init();
 	
 	curl_setopt($ch, CURLOPT_HEADER, 0);
@@ -17,7 +16,6 @@ function file_get_contents_curl($url) {
 	}
 	
 	curl_close($ch);
-	
 	return $data;
 }
 
