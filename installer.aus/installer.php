@@ -168,9 +168,9 @@ mysql_select_db($_SESSION["mysql"]["datenbank"]);
 
 $prefix = mysql_real_escape_string($_SESSION["mysql"]["prefix"]);
 
-db_query("SET NAMES 'utf8'")or die(mysql_error());
+mysql_query("SET NAMES 'utf8'")or die(mysql_error());
 
-db_query("CREATE TABLE IF NOT EXISTS `".$prefix."admins` (
+mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -196,10 +196,10 @@ $passwort=mysql_real_escape_string($_POST["passwort"]);
 
 $encrypted_passwort = sha1($salt.$passwort);
 
-db_query("INSERT INTO `".$prefix."admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
+mysql_query("INSERT INTO `".$prefix."admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
 (1, 0, 'admin', '".$nachname."', '".$vorname."', '".$email."', '".$encrypted_passwort."',50);")or die(mysql_error());
 
-db_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
+mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `link_url` text NOT NULL,
@@ -207,7 +207,7 @@ db_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
 
-db_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
+mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `notinfeed` tinyint(1) NOT NULL,
@@ -238,11 +238,11 @@ db_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
 
 
-db_query("INSERT INTO `".$prefix."content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
+mysql_query("INSERT INTO `".$prefix."content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
 (1, 0, 'willkommen', 'Willkommen', '_self', '<p>Willkommen auf einer neuen Website die mit UliCMS betrieben wird.</p>\r\n', 'de', 1, 1364242679, 1364242833, 1, 0, 1, 19, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL),
 (2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 0, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;")or die(mysql_error());
 
-db_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
+mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `value` mediumtext NOT NULL,
@@ -254,7 +254,7 @@ db_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
 $homepage_title=mysql_real_escape_string($_POST["homepage_title"]);
 $motto=mysql_real_escape_string($_POST["motto"]);
 
-db_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
+mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (1, 'homepage_title', '$homepage_title'),
 (2, 'maintenance_mode', '0'),
 (3, 'redirection', ''),
@@ -288,9 +288,9 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (29, 'pkg_src', 'http://www.ulicms.de/packages/{version}/'),
 (30, 'session_timeout', '60');")or die(mysql_error());
 
-db_query("UPDATE `".$prefix."content` SET parent=NULL")or die(mysql_error());
+mysql_query("UPDATE `".$prefix."content` SET parent=NULL")or die(mysql_error());
 
-db_query("CREATE TABLE IF NOT EXISTS `".$prefix."languages` (
+mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `language_code` varchar(6) NOT NULL,
@@ -298,7 +298,7 @@ db_query("CREATE TABLE IF NOT EXISTS `".$prefix."languages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;")or die(mysql_error());
 
 
-db_query("INSERT INTO `".$prefix."languages` (`id`, `name`, `language_code`) VALUES
+mysql_query("INSERT INTO `".$prefix."languages` (`id`, `name`, `language_code`) VALUES
 (1, 'Deutsch', 'de'), 
 (2, 'English', 'en');")or die(mysql_error());
 
