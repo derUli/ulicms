@@ -5,10 +5,14 @@ echo "<p class='ulicms_error'>Zugriff verweigert</p>";
 
 // Wenn Formular abgesendet wurde, Wert Speichern
 if(isset($_REQUEST["pkg_src"])){
-   $new_pkg_src = $_REQUEST["pkg_src"];
+   $new_pkg_src = trim($_REQUEST["pkg_src"]);
    if(!endsWith($new_pkg_src, "/"))
       $new_pkg_src .= "/";
-   setconfig("pkg_src", $new_pkg_src);
+      
+   if($new_pkg_src == "/")
+      deleteconfig("pkg_src");
+   else
+      setconfig("pkg_src", $new_pkg_src);
 }
 
 $default_pkg_src = "http://www.ulicms.de/packages/{version}/";
