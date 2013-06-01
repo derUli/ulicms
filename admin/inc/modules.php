@@ -39,15 +39,16 @@ if(count($modules)>0){
         echo "<div style=\"float:right\">";
 	
 	if($module_has_admin_page){
-	   echo " <a style=\"font-size:0.8em;\" href=\"?action=module_settings&module=".$modules[$i]."\">";
-	   echo " [Einstellungen]";
+	   echo "<a style=\"font-size:0.8em;\" href=\"?action=module_settings&module=".$modules[$i]."\">";
+	   echo "[Einstellungen]";
 	   echo "</a>";
 	}
 	
+     if(is_admin()){
 	echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=".$modules[$i]."\" onclick=\"return confirm('Möchten Sie das Modul ".$modules[$i]." wirklich deinstallieren?')\">";
-	   echo " [Entfernen]";
-	   echo "</a>";
-	   
+        echo " [Entfernen]";
+        echo "</a>";
+     }   
 	   
         echo "</div>";
 	
