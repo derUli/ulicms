@@ -29,9 +29,6 @@ if(file_exists($tpl_unten_filename) and is_writable($tpl_unten_filename)){
    fwrite($handle, $template_unten);
    fclose($handle);
    
-   // Dieses Script so lange aufrufen, bis er bei der aktuelle Version angelangt ist
-   header("Location: update.php");
-   exit();
 }
 
 db_query("alter table ".tbname("content")." change `parent` `parent_old` varchar (300);");
@@ -54,9 +51,6 @@ while($row=mysql_fetch_object($query)){
      }
      
      }
-     // Dieses Script so lange aufrufen, bis er bei der aktuelle Version angelangt ist
-     header("Location: update.php");
-     exit();
 }
 
 // Version des Datenbank-Schemas setzen
@@ -71,10 +65,10 @@ setconfig("db_schema_version", "6.1");
   db_query("UPDATE ".tbname("admins"). " SET `old_encryption` = 1");
   
   setconfig("db_schema_version", "6.2");
-  @unlink("update.php");
+  
 }
 
-
+//@unlink("update.php");
 
 header("Location: admin/");
 exit();
