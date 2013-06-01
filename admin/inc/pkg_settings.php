@@ -18,7 +18,7 @@ $local_pkg_dir = "../packages/$version/";
 $local_pkg_dir_value = "../packages/{version}/";
 $pkg_src = getconfig("pkg_src");
 
-$is_other_src = $pkg_src !== $default_pkg_src and $pkg_src !== $local_pkg_dir or $pkg_src !== $local_pkg_dir_value;
+$is_other = ($pkg_src !== $default_pkg_src and $pkg_src !== $local_pkg_dir or $pkg_src !== $local_pkg_dir_value);
 
 
 include_once "../lib/file_get_contents_wrapper.php";
