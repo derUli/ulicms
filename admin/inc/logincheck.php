@@ -1,6 +1,5 @@
 <?php
 if(isset($_GET["destroy"]) or $_GET["action"]=="destroy"){
-	
 	db_query("UPDATE ".tbname("admins")." SET last_action = 0 WHERE id = ".$_SESSION["login_id"]);
 	session_destroy();
 	header("Location: index.php");
