@@ -18,10 +18,8 @@ function log_db_query($query){
    if(is_admin_dir())
        $logdir .= "../";
        
-   
    $logdir .= "content/log/db/";
 
-   
    if(!is_dir($logdir)){
       @mkdir($logdir, 077, true);
       if(!is_dir($logdir))
