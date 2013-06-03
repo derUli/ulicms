@@ -252,17 +252,7 @@ function getAllLanguages(){
 
        }
 
-// get all menu items
-function getAllMenuItems(){
-	$query = db_query("SELECT * FROM `".tbname("backend_menu_structure")."` ORDER BY position ASC");
-	$returnvalues = Array();
-	while($row = mysql_fetch_assoc($query)){
-		array_push($returnvalues, $row);
-}
 
-return $returnvalues;
-
-}
 
 
 //get URL to UliCMS
