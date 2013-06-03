@@ -49,7 +49,7 @@ function year(){
 }
 
 function homepage_owner(){
-	print_env("homepage_owner");
+	echo getconfig("homepage_owner");
 }
 
 
@@ -57,10 +57,12 @@ function homepage_owner(){
 
 
 function homepage_title(){
-	print_env("homepage_title");
+	echo getconfig("homepage_title");
 }
 
-	$status = check_status();
+
+
+$status = check_status();
 
 function meta_keywords($ipage=null){
 	$status=check_status();	
