@@ -505,13 +505,13 @@ function check_status(){
 				exit();
 			}
 			if($test_array["deleted_at"] != null){
-                          return "404 Not Found";
+                           return "404 Not Found";
 			}
-			return "200 OK";
+                        return "200 OK";
 			
 			}
 			else{
-				return "403 Forbidden";
+			    return "403 Forbidden";
 			}
 		}
 		else{

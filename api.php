@@ -26,7 +26,7 @@ function is_admin_dir(){
 function checkForUpdates(){
   include_once "../lib/file_get_contents_wrapper.php";
   $info = @file_get_contents_Wrapper(UPDATE_CHECK_URL);
-  
+ 
   if(!$info or trim($info) === "")
      return false;  
   else
