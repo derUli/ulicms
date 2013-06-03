@@ -4,14 +4,12 @@ function isCountryBlocked(){
 
 	$country_blacklist = getconfig("country_blacklist");
 	$country_whitelist = getconfig("country_whitelist");
-
 	
 	$country_blacklist = str_replace(" ", "", $country_blacklist);
 	$country_whitelist = str_replace(" ", "", $country_whitelist);
 	
         $country_blacklist = strtolower($country_blacklist);	
         $country_whitelist = strtolower($country_whitelist);        
-
 	
 	$country_blacklist = explode(",", $country_blacklist);
 	$country_whitelist = explode(",", $country_whitelist);
@@ -40,7 +38,6 @@ function isCountryBlocked(){
              return true;         
           }
           
-     
 	}
 	
 	
