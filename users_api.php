@@ -44,11 +44,11 @@ function adduser($username, $lastname, $firstname, $email, $password, $group){
   $lastname = mysql_real_escape_string($lastname);
   $firstname = mysql_real_escape_string($firstname);
   $email = mysql_real_escape_string($email);
-  $password = mysql_real_escape_string($password);
+  $password = $password;
   $group = intval($group);
 
-  $query=db_query("INSERT INTO ".tbname("admins")." 
-(username,lastname, firstname, email, password, `group`) VALUES('$username',' $lastname','$firstname','$email','".md5($password)."',$group)");
+db_query("INSERT INTO ".tbname("admins")." 
+(username,lastname, firstname, email, password, `group`) VALUES('$username',' $lastname','$firstname','$email','".hash_password($password)."',$group)");
   $message="Hallo $firstname,\n\n".
   "Ein Administrator hat auf http://".$_SERVER["SERVER_NAME"]." für dich ein neues Benutzerkonto angelegt.\n\n".
   "Die Zugangsdaten lauten:\n\n".
