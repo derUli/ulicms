@@ -285,28 +285,7 @@ function menu($name){
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
 echo "</ul>\n";
-
 }
 
 
@@ -314,7 +293,7 @@ echo "</ul>\n";
 
 function base_metas(){
 	
-	$dir=dirname($_SERVER["SCRIPT_NAME"]);
+	$dir = dirname($_SERVER["SCRIPT_NAME"]);
 	$dir = str_replace("\\","/", $dir);
 	
 	if(endsWith($dir,"/")==false){
@@ -364,7 +343,7 @@ function base_metas(){
   if(!$description){
     $description = getconfig("meta_description");
   }
-	if($description!="" && $description!=false){
+	if($description!="" && $description != false){
 	        $description = apply_filter($description, "meta_description");
 		if(!getconfig("hide_meta_description")){
 			echo '<meta name="description" content="'.$description.'"/>';
