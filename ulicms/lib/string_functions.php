@@ -23,7 +23,7 @@ function getExcerpt($str, $startPos=0, $maxLength=100) {
 }
 
 function isEmpty($str){
-   return trim($str);
+   return empty(trim($str));
 }
 
 function decodeHTMLEntities($str){
