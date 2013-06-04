@@ -37,9 +37,16 @@ function is_url($url){
 function file_get_contents_wrapper($url){
    if(ini_get("allow_url_fopen") or !is_url($url)){
    $config = new config();
-   if(!isset($config->proxy))
+   $proxy = getconfig("proxy");
+   if(!$proxy){
+      if(isset($config->proxy))
+         $proxy = $config->proxy;
+   }
+      
+   if(!isset($proxy))
      return file_get_contents($url);
    else
+   echo $config->proxy;
      return file_get_contents_proxy($url, $config->proxy);
    } else {
      if(function_exists("curl_init") and is_url($url)){
