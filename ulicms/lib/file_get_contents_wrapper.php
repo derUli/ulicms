@@ -36,7 +36,11 @@ function is_url($url){
 // Ansonsten wird false zurückgegeben.
 function file_get_contents_wrapper($url){
    if(ini_get("allow_url_fopen") or !is_url($url)){
+   $config = new config();
+   if(!isset($config->proxy))
      return file_get_contents($url);
+   else
+     return file_get_contents_proxy($url, $config->proxy);
    } else {
      if(function_exists("curl_init") and is_url($url)){
        return file_get_contents_curl($url);
@@ -45,4 +49,19 @@ function file_get_contents_wrapper($url){
    }
    
    return false;
+}
+
+// file_get_contents durch Proxy
+function file_get_contents_proxy($url,$proxy){
+
+    // Create context stream
+    $context_array = array('http'=>array('proxy'=>$proxy,'request_fulluri'=>true));
+    $context = stream_context_create($context_array);
+
+    // Use context stream with file_get_contents
+    $data = file_get_contents($url,false,$context);
+
+    // Return data via proxy
+    return $data;
+
 }
