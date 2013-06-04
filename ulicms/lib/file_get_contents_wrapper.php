@@ -43,11 +43,10 @@ function file_get_contents_wrapper($url){
          $proxy = $config->proxy;
    }
       
-   if(!isset($proxy))
+   if(!$proxy)
      return file_get_contents($url);
    else
-   echo $config->proxy;
-     return file_get_contents_proxy($url, $config->proxy);
+     return file_get_contents_proxy($url, $proxy);
    } else {
      if(function_exists("curl_init") and is_url($url)){
        return file_get_contents_curl($url);
