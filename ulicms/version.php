@@ -24,4 +24,3 @@ class ulicms_version{
 
 
 }
-?>
