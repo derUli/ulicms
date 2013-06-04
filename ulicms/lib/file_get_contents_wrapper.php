@@ -66,7 +66,7 @@ function file_get_contents_proxy($url,$proxy){
     $context = stream_context_create($context_array);
 
     // Use context stream with file_get_contents
-    $data = file_get_contents($url,false,$context);
+    $data = file_get_contents($url, false, $context);
 
     // Return data via proxy
     return $data;
