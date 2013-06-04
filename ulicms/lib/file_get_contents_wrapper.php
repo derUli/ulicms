@@ -55,7 +55,8 @@ function file_get_contents_wrapper($url){
 function file_get_contents_proxy($url,$proxy){
 
     // Create context stream
-    $context_array = array('http'=>array('proxy'=>$proxy,'request_fulluri'=>true));
+    $context_array = array('http'=>array('proxy'=>$proxy, 
+    'request_fulluri'=>true));
     $context = stream_context_create($context_array);
 
     // Use context stream with file_get_contents
