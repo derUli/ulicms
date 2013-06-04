@@ -53,9 +53,6 @@ function homepage_owner(){
 }
 
 
-
-
-
 function homepage_title(){
 	echo getconfig("homepage_title");
 }
@@ -76,10 +73,7 @@ function meta_keywords($ipage=null){
 			 return $row->meta_keywords;
 			}
 		}
-
-
 	}
-	
 	
 	return getconfig("meta_keywords");
 }
