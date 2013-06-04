@@ -38,5 +38,6 @@ function log_db_query($query){
    fwrite($handle, $time."\t");
    fwrite($handle, $query);
    fwrite($handle, "\r\n");
+   return true;
    
 }
