@@ -6,7 +6,7 @@ require_once "init.php";
 $db_schema_version = getconfig("db_schema_version");
 
 if($db_schema_version === "6.2"){
-   die("Das Update wurde bereits installiert");
+   die("Das Update wurde bereits installiert!");
 }
 
 mysql_query("UPDATE ".tbname("content"). " SET menu='bottom' WHERE menu='down'");

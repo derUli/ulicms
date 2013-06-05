@@ -284,7 +284,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (25, 'empty_trash_days', '30'),
 (26, 'password_salt', '$salt'),
 (27, 'timezone', 'Europe/Berlin'),
-(28, 'db_schema_version', '6.0'),
+(28, 'db_schema_version', '6.2'),
 (29, 'pkg_src', 'http://www.ulicms.de/packages/{version}/'),
 (30, 'session_timeout', '60');")or die(mysql_error());
 
