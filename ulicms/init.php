@@ -122,8 +122,7 @@ $proxy = getconfig("proxy");
 if($proxy and function_exists("stream_context_set_default")){
    $context_array = array('http'=>array('proxy'=>$proxy, 
    'request_fulluri'=>true));
-   $context = stream_context_create($context_array);
-    stream_context_set_default($context);
+    stream_context_set_default($context_array);
    }
   
    
