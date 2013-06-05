@@ -117,7 +117,6 @@ if($cache_period === false){
 // Proxy für file_get_contents
 // Für den Fall, dass der Server sich hinter einem Proxy befindet
 // z.B. in größeren Unternehmen
-$config = new config();
 $proxy = getconfig("proxy");
 if($proxy and function_exists("stream_context_set_default")){
    $context_array = array('http'=>array('proxy'=>$proxy, 
