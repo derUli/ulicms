@@ -114,6 +114,20 @@ if($cache_period === false){
   define("CACHE_PERIOD", $cache_period);
 }
 
+// Proxy für file_get_contents
+// Für den Fall, dass der Server sich hinter einem Proxy befindet
+// z.B. in größeren Unternehmen
+$config = new config();
+$proxy = getconfig("proxy");
+if($proxy and function_exists("stream_context_set_default")){
+   $context_array = array('http'=>array('proxy'=>$proxy, 
+   'request_fulluri'=>true));
+   $context = stream_context_create($context_array);
+    stream_context_set_default($context);
+   }
+  
+   
+
 
 
 
@@ -150,6 +164,8 @@ $locale = getconfig("locale");
 if(!getconfig("session_timeout")){
     setconfig("session_timeout", 60);
 }
+
+
 
 
 $session_timeout = 60 * getconfig("session_timeout");
