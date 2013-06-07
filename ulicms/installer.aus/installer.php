@@ -332,7 +332,7 @@ var $mysql_prefix="'.$_SESSION["mysql"]["prefix"].'";
 
 
 if(!is_writable("../cms-config.php")){
-   echo "<p>Die Konfigurationsdatei konnte wegen fehlenden Berechtigungen nicht erzeugt werden. Bitte erstellen Sie die Datei cms-config.php mit einem Texteditor und fügen Sie den Code aus der Textbox ein.</p>".
+   echo "<p>Die Konfigurationsdatei konnte wegen fehlenden Berechtigungen nicht erzeugt werden. Bitte bearbeiten Sie die Datei cms-config.php mit einem Texteditor und fügen Sie den Code aus der Textbox ein.</p>".
    "<p><textarea cols=50 rows=10>".htmlspecialchars($config_string)."</textarea></p>";
 }else {
   $handle = fopen("../cms-config.php","w");
