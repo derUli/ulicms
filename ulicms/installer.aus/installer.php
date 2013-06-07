@@ -30,7 +30,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 }
 ?>
 <p>Folgen Sie den Anweisungen um das CMS auf Ihrem Server zu installieren.</p>
-<p>Setzen Sie bitte vorher die Dateirechte der folgenden Dateien auf 0755 oder 0777:<br/>
+<p>Setzen Sie bitte vorher die Dateirechte der folgenden Dateien auf 0755.<br/>
 <ol>
 <li>cms-config.php</li>
 <li>templates/ (inklusive Inhalt und Unterordner)</li>
@@ -38,7 +38,11 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <li>modules/ (inklusive Inhalt und Unterordner)</li>
 </ol>
 </p>
-<p></p>
+<br/>
+<h2>So müssen die Berechtigungen gesetzt sein</h2>
+<p><img src="media/chmod_02.png" alt="FTP Rechtevergabe" title="FTP Rechtevergabe" border=1/></p>
+<br/>
+<br/>
 <form action="index.php" method="post">
 <input type="hidden" name="step" value="1">
 <input type="submit" value="Weiter">
@@ -159,6 +163,8 @@ if($select==false){
 ?>
 
 <?php if($_POST["step"]=="4"){
+
+
 
 $salt = uniqid();
 
@@ -313,9 +319,7 @@ mysql_query("INSERT INTO `".$prefix."languages` (`id`, `name`, `language_code`) 
 //@chmod("../templates/news.txt", 0777);
 @chmod("../templates/maintenance.php", 0777);
 
-
-$handle=fopen("../cms-config.php","w");
-fwrite($handle,'<?php 
+$config_string = '<?php 
 class config{
 
 var $mysql_server="'.$_SESSION["mysql"]["server"].'";
@@ -324,9 +328,17 @@ var $mysql_password="'.$_SESSION["mysql"]["passwort"].'";
 var $mysql_database="'.$_SESSION["mysql"]["datenbank"].'";
 var $mysql_prefix="'.$_SESSION["mysql"]["prefix"].'";
 
+}';
+
+
+if(!is_writable("../cms-config.php")){
+   echo "<p>Die Konfigurationsdatei konnte wegen fehlenden Berechtigungen nicht erzeugt werden. Bitte erstellen Sie die Datei cms-config.php mit einem Texteditor und fügen Sie den Code aus der Textbox ein.</p>".
+   "<p><textarea cols=50 rows=10>".htmlspecialchars($config_string)."</textarea></p>";
+}else {
+  $handle = fopen("../cms-config.php","w");
+  fwrite($handle, $config_string);
+  fclose($handle);
 }
-');
-fclose($handle);
 
 $message = "Hallo $zusammen!\n".
 "Auf ".$_SERVER["SERVER_NAME"]. " wurde UliCMS erfolgreich installiert\n\n".
