@@ -39,7 +39,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 </ol>
 </p>
 <br/>
-<h2>So müssen die Berechtigungen gesetzt sein</h2>
+<h3>So müssen die Berechtigungen gesetzt sein</h3>
 <p><img src="media/chmod_02.png" alt="FTP Rechtevergabe" title="FTP Rechtevergabe" border=1/></p>
 <br/>
 <br/>
