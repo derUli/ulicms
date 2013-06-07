@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /* Diese Datei initalisiert das System
 */      
 	
@@ -44,8 +44,13 @@ require_once "api.php";
 
 
 if(!file_exists("content/cache")){
-   @mkdir("content/cache", 0777);
+   @mkdir("content/cache", 0777, true);
 }
+
+if(!file_exists("modules/")){
+   @mkdir("modules/", 0777, true);
+}
+
 
   
 
