@@ -22,6 +22,3 @@ function print_env($ikey){
     echo $value;
   }
 }
-
-
-?>

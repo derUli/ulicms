@@ -494,5 +494,3 @@ function check_status(){
 		}	
 	}
 }
-
-?>
