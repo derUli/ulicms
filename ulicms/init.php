@@ -27,20 +27,7 @@ else if(is_dir("installer")){
 
 
 include_once "lib/db_functions.php";
-
 require_once "api.php";
-
-
-
-  if(file_exists("installer/installer.php") or file_exists("../installer/installer.php")){
-     header("Content-Type: text/html; charset=utf-8");
-     die("<p>Bitte löschen Sie den Ordner \"installer\" vom Server.<br/>
-     Das CMS kann erst betrieben werden, nach dem der Installer gelöscht wurde.
-     Dies ist ein Sicherheitsmerkmal von UliCMS.</p>");
-     exit();
-  }
-
-
 
 
 if(!file_exists("content/cache")){
@@ -84,12 +71,21 @@ $config=new config();
 
 if($config->mysql_server == "" or $config->mysql_user == ""){
   header("Location: installer/");
+  exit();
 }
 
 @$connection=mysql_connect($config->mysql_server,$config->mysql_user, $config->mysql_password);
 if($connection === false){
 	die("Fehler: Die Verbindung zum MySQL Server konnte nicht hergestellt werden.");
 }
+
+  if(file_exists("installer/installer.php") or file_exists("../installer/installer.php")){
+     header("Content-Type: text/html; charset=utf-8");
+     die("<p>Bitte löschen Sie den Ordner \"installer\" vom Server.<br/>
+     Das CMS kann erst betrieben werden, nach dem der Installer gelöscht wurde.
+     Dies ist ein Sicherheitsmerkmal von UliCMS.</p>");
+     exit();
+  }
 
 
 
