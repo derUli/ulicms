@@ -1,2 +1,1 @@
-Kodiert alle E-Mail Adressen im Frontend zum Schutz
-vor Spam-Mails.
+Kodiert alle E-Mail Adressen im Frontend zum Schutz vor Spam-Mails.
