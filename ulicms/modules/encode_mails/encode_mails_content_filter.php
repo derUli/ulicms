@@ -14,7 +14,7 @@ function SpamBlockEmail($string) {
   return $string;
 }
 
-// E-Mails kodieren um E-Mail Crawler von Spammern daran zu hindern, die E-Mail Adressen zu indizieren
+// E-Mails kodieren um dumme E-Mail Crawler von Spammern daran zu hindern, die E-Mail Adressen zu indizieren
 function encode_mails_content_filter($txt){
    $txt = SpamBlockEmail($txt);
 
