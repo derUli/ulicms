@@ -1,5 +1,4 @@
 <?php 
-
 function ascii_encode($string) {
   $encoded = '';
   for ($i=0; $i < strlen($string); $i++) {
@@ -15,7 +14,7 @@ function SpamBlockEmail($string) {
   return $string;
 }
 
-
+// E-Mails kodieren um E-Mail Crawler von Spammern daran zu hindern, die E-Mail Adressen zu indizieren
 function encode_mails_content_filter($txt){
    $txt = SpamBlockEmail($txt);
 
