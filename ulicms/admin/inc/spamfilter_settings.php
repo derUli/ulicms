@@ -7,15 +7,13 @@ echo " checked";
 }?> value="yes" onChange="spamFilterEnabledcheckboxChanged(this.checked)"> Spamfilter aktivieren
 <script type="text/javascript">
 function spamFilterEnabledcheckboxChanged(checked){
-    div = document.getElementById("country_filter_settings");
     if(checked){
-    
-    div.style.display = "block";
+       $('#country_filter_settings').slideDown()
       
     }
-    else{
-
-    div.style.display = "none";    
+    else
+    {
+       $('#country_filter_settings').slideUp()  
     }
 }
 </script>
