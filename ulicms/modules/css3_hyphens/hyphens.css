@@ -1,0 +1,9 @@
+/* CSS 3 Silbentrennung */
+body{
+  -moz-hyphens: auto;
+  -o-hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -hyphens: auto; 
+  hyphens: auto;
+}
