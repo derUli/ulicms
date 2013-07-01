@@ -10,12 +10,12 @@ if(isset($_GET["remove"])){
       " wurde erfolgreich deinstalliert.</p>";
    else
       echo "<p style=\"color:red;\">".htmlspecialchars($remove ).
-      " konnte nicht deinstalliert werden.<br/>Bitte löschen Sie das Modul manuell vom Server</p>";
+      " konnte nicht deinstalliert werden.<br/>Bitte löschen Sie das Modul manuell vom Server.</p>";
    
    
 }
 ?>
-<p><a href="?action=available_modules">[Module installieren]</a></p> 
+<p><a href="?action=available_modules">[Paket installieren]</a></p> 
 <?php } ?>
 <strong>Installierte Module:</strong>
 <p>Hier finden Sie eine Auflistung der installierten Module.<br/>
