@@ -1,2 +1,0 @@
-Druckversionen sind erreichbar unter
-/name_der_seite.html?print
