@@ -30,7 +30,7 @@ Schwarze Liste:<br/>
 echo htmlspecialchars(implode(
 explode("||", getconfig("spamfilter_words_blacklist")),
 "\n"
-));
+),  ENT_QUOTES, "UTF-8");
 ?></textarea>
 
 <br/><br/>

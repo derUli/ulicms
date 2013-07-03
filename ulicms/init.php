@@ -74,10 +74,12 @@ if($config->mysql_server == "" or $config->mysql_user == ""){
   exit();
 }
 
-@$connection=mysql_connect($config->mysql_server,$config->mysql_user, $config->mysql_password);
+@$connection = mysql_connect($config->mysql_server,$config->mysql_user, $config->mysql_password);
 if($connection === false){
 	die("Fehler: Die Verbindung zum MySQL Server konnte nicht hergestellt werden.");
 }
+
+mysql_query("SET NAMES 'utf8'");
 
   if(file_exists("installer/installer.php") or file_exists("../installer/installer.php")){
      header("Content-Type: text/html; charset=utf-8");

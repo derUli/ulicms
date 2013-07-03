@@ -251,7 +251,7 @@ mysql_query("INSERT INTO `".$prefix."content` (`id`, `notinfeed`, `systemname`, 
 mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `value` mediumtext NOT NULL,
+  `value` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
 
@@ -4193,7 +4193,8 @@ zyvox
 赌场
 通販";
 
-$badwords = str_replace("\n", "||", $badwords);
+$badwords = str_replace("\r\n", "||", $badwords);
+
 
 mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (1, 'homepage_title', '$homepage_title'),
