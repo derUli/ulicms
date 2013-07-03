@@ -1,0 +1,1 @@
+Begrüßt den Besucher der Website beim ersten Besuch mit der Nachricht des Tages (MOTD)

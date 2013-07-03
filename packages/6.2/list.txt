@@ -30,3 +30,4 @@ encode_mails-0.0.1
 css3_hyphens-0.0.1
 print_version-0.0.1
 hide_meta_generator-0.0.1
+motd_frontend-0.0.1.
