@@ -1,0 +1,2 @@
+Entfernt den meta generator Tag aus dem HTML-Code um zu verstecken, 
+dass die Website von UliCMS generiert wurde.
