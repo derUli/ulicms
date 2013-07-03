@@ -1,5 +1,5 @@
 <?php 
-if(!is_admin){
+if(!is_admin()){
 echo "<p class='ulicms_error'>Zugriff verweigert</p>";
 } else {
 
