@@ -22,7 +22,16 @@ function is_admin_dir(){
 }
 
 // Returns the language code of the current language
-function getCurrentLanguage(){
+// If $current is true returns language of the current page
+// else it returns $_SESSION["language"];
+function getCurrentLanguage($current = true){
+   if($current){
+      $query = mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='".get_requested_pagename()."'");
+      $fetch = mysql_fetch_object($query);
+      return $fetch->language;
+      }
+      
+
    if(isset($_SESSION["language"]))
       return basename($_SESSION["language"]);
    else 
