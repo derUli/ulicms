@@ -21,6 +21,14 @@ function is_admin_dir(){
 
 }
 
+// Returns the language code of the current language
+function getCurrentLanguage(){
+   if(isset($_SESSION["language"]))
+      return basename($_SESSION["language"]);
+   else 
+      return basename(getconfig("default_language"));
+}
+
 // Auf automatische aktualisieren prüfen.
 // Rückgabewert: ein String oder False
 function checkForUpdates(){

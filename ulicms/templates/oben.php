@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="<?php echo getCurrentLanguage();?>">
 <head>
 <title><?php homepage_title()?> | <?php title()?></title>
 <?php base_metas()?>
