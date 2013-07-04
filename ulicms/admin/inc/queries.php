@@ -79,7 +79,7 @@ if($_GET["action"] == "spam_filter" and
 
 
 if(!empty($_POST["save_template"])&&!empty($_POST["code"])&&$_SESSION["group"]>=40){
-  $save="../templates/".basename($_POST["save_template"]);
+  $save=getTemplateDirPath($theme).basename($_POST["save_template"]);
 if(is_file($save)&&is_writable($save)){
   $handle=fopen($save,"w");
   fwrite($handle,$_POST["code"]);

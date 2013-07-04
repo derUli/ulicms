@@ -32,10 +32,10 @@ if(getconfig("redirection")!=""&&getconfig("redirection")!=false){
 }
 
 
-
+$theme = getconfig("theme");
 
 if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("maintenance_mode"))=="true"||getconfig("maintenance_mode")=="1"){
-  require_once "templates/maintenance.php";
+  require_once getTemplateDirPath($theme)."maintenance.php";
   die();
 }
 
@@ -43,8 +43,8 @@ if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("mainte
 header("HTTP/1.0 ".$status);
 header("Content-Type: text/html; charset=utf-8");
 
-if(file_exists("templates/functions.php")){
-   include "templates/functions.php";
+if(file_exists(getTemplateDirPath($theme)."functions.php")){
+   include getTemplateDirPath($theme)."functions.php";
 }
 
 $cached_page_path = buildCacheFilePath($_SERVER['REQUEST_URI']);
@@ -76,7 +76,7 @@ else if(file_exists($cached_page_path)){
 
 $modules = getAllModules();
 
-require_once "templates/oben.php";
+require_once getTemplateDirPath($theme)."oben.php";
 
 for($i=0; $i < count($modules); $i++){
   $before_content_file = getModulePath($modules[$i]).
@@ -96,7 +96,7 @@ for($i=0; $i < count($modules); $i++){
 
 }
 
-require_once "templates/unten.php";
+require_once getTemplateDirPath($theme)."/unten.php";
 
 
 $hasModul = containsModule($_GET["seite"]);

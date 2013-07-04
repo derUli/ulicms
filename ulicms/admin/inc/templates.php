@@ -1,6 +1,9 @@
 ﻿<?php if(defined("_SECURITY")){
 if($_SESSION["group"]>=50){
+
+$theme = getconfig("theme");
 ?>
+
 
 <h2>Templates</h2>
 <?php
@@ -23,7 +26,7 @@ else if(empty($_GET["edit"])){
 <p><a href="index.php?action=templates&edit=style.css">Stylesheet</a></p>
 
 <?php 
-if(file_exists("../templates/403.php")){
+if(file_exists(getTemplateDirPath($theme)."403.php")){
 ?>
 <p><a href="index.php?action=templates&edit=403.php">403 Fehlerseite</a></p>
 <?php 
@@ -39,7 +42,7 @@ if(file_exists("../templates/404.php")){
 ?>
 
  <?php 
-         if(file_exists("../templates/functions.php")){
+         if(file_exists(getTemplateDirPath($theme)."functions.php")){
      ?>
       <p><a href="index.php?action=templates&edit=functions.php">Functions</a></p>
      <?php 
@@ -49,7 +52,7 @@ if(file_exists("../templates/404.php")){
 
 <?php }else if (!empty($_GET["edit"])){
 	$edit=basename($_GET["edit"]);
-	$template_file="../templates/$edit";
+	$template_file=getTemplateDirPath($theme).$edit;
 
 	if(is_file($template_file)){
 

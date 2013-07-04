@@ -82,7 +82,6 @@ function getTemplateDirPath($sub = "default"){
    else
       $templateDir = "templates/";
       
-   if($sub !== "default")
       $templateDir = $templateDir.$sub."/";
       
    return $templateDir;
