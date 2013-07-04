@@ -29,7 +29,7 @@ function getCurrentLanguage($current = true){
       $query = mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='".get_requested_pagename()."'");
       $fetch = mysql_fetch_object($query);
       return $fetch->language;
-      }
+}
       
 
    if(isset($_SESSION["language"]))
