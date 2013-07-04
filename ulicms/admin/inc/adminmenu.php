@@ -97,6 +97,7 @@ if(defined("_SECURITY")){
   <?php }?>
    <li><a href="?action=settings_categories">Einstellungen</a>
     <ul><li><a href="?action=settings_simple">Grundeinstellungen</a></li>
+    <li><a href="?action=design">Design</a></li>
     <li><a href="?action=spam_filter">Spamfilter</a></li>
     <li><a href="?action=cache">Cache</a>
      <ul>

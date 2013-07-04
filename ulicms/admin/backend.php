@@ -152,6 +152,8 @@ else if($_GET["action"] == "module_settings"){
 
 else if($_GET["action"] == "pkg_settings"){
        require_once "inc/pkg_settings.php";
+}else if($_GET["action"] == "design"){
+       require_once "inc/design.php";
 }
 }
 

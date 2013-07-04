@@ -55,7 +55,7 @@ function checkForUpdates(){
 }
 
 
-function getThemeList(){
+function getThemesList(){
    $themes = Array();
    if(is_admin_dir())
       $templateDir = "../templates/";

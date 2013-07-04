@@ -1,5 +1,6 @@
 <h1>Einstellungen</h1>
 <p><a href="index.php?action=settings_simple">Grundeinstellungen</a>
+<br/><a href="index.php?action=design">Design</a>
 <br/>
 <a href="index.php?action=spam_filter">Spamfilter</a>
 <br/>
