@@ -3,8 +3,8 @@
 // get a config variable
 function getconfig($key){
 	$connection=MYSQL_CONNECTION;
-	$ikey=mysql_real_escape_string($key);
-	$query=db_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
+	$ikey = mysql_real_escape_string($key);
+	$query = db_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
 		   return $row->value;
@@ -54,6 +54,9 @@ function checkForUpdates(){
 
 }
 
+function getThemeList(){
+   return getThemesList();
+}
 
 function getThemesList(){
    $themes = Array();
@@ -72,6 +75,8 @@ function getThemesList(){
           
        }
    }
+   
+   sort($themes);
    
    return $themes;
 }
