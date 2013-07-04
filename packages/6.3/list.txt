@@ -16,9 +16,9 @@ search-0.3.0
 sitemap-6.0.0
 theme-nightvision-6.0.0
 socialbuttons-0.0.1
-theme-dogs-6.0.0
-theme-effe-6.0.0
-theme-default-6.0.1
+theme-dogs-6.0.1
+theme-effe-6.0.1
+theme-default-6.0.2
 theme-responsive-1.0.1
 jquery-1.9.1
 jquery-1.7.2
