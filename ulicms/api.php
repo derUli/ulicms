@@ -27,8 +27,11 @@ function is_admin_dir(){
 function getCurrentLanguage($current = true){
    if($current){
       $query = mysql_query("SELECT * FROM ".tbname("content")." WHERE systemname='".get_requested_pagename()."'");
-      $fetch = mysql_fetch_object($query);
-      return $fetch->language;
+      
+      if(mysql_num_rows($query) > 0){
+        $fetch = mysql_fetch_object($query);      
+        return $fetch->language;
+      }
 }
       
 
