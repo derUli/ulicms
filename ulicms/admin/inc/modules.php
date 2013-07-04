@@ -4,7 +4,9 @@ if(is_admin()){
 // Modul deinstallieren
 if(isset($_GET["remove"])){
    $remove = basename($_GET["remove"]);
-   $uninstalled = uninstall_module($remove );
+   
+   $type = $_GET["type"];
+   $uninstalled = uninstall_module($remove, $type);
    if($uninstalled)
       echo "<p style=\"color:green;\">".htmlspecialchars($remove).
       " wurde erfolgreich deinstalliert.</p>";
@@ -45,7 +47,7 @@ if(count($modules)>0){
 	}
 	
      if(is_admin()){
-	echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=".$modules[$i]."\" onclick=\"return confirm('Möchten Sie das Modul ".$modules[$i]." wirklich deinstallieren?')\">";
+	echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=".$modules[$i]."&type=module\" onclick=\"return confirm('Möchten Sie das Modul ".$modules[$i]." wirklich deinstallieren?')\">";
         echo " [Entfernen]";
         echo "</a>";
      }   
@@ -60,3 +62,50 @@ if(count($modules)>0){
 ?>
 
 <hr/>
+
+
+<p><strong>Installierte Themes:</strong></p>
+<p>Hier finden Sie eine Auflistung der installierten Themes.</p>
+
+<?php 
+$themes = getThemeList();
+$ctheme = getconfig("theme");
+if(count($themes)>0){
+  echo "<ol>";
+  for($i=0; $i<count($themes); $i++){
+    echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\"><strong>";
+	
+
+	echo $themes[$i];
+	echo "</strong>";
+	
+       
+	
+
+      echo "<div style=\"float:right\">";
+      
+     if(is_admin() and $themes[$i] != $ctheme ){
+	echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=".$themes[$i]."&type=theme\" onclick=\"return confirm('Möchten Sie das Theme ".$themes[$i]." wirklich deinstallieren?')\">";
+
+
+        echo " [Entfernen]";
+        echo "</a>";
+        
+     } else {
+     
+     echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert('Das Theme kann nicht gelöscht werden, da es gerade aktiv ist.')\">";
+
+        echo " [Entfernen]";
+        echo "</a>";
+     
+     }
+	   
+	   
+        echo "</div>";
+	
+	"</li>";
+  }
+  echo "</ol>";
+  
+  }
+?>

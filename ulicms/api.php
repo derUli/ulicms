@@ -412,7 +412,7 @@ function containsModule($page, $module = false){
 // Ruft uninstall Script auf, falls vorhanden
 // Löscht anschließend den Ordner modules/$name
 
-function uninstall_module($name){
+function uninstall_module($name, $type="module"){
    // Nur Admins können Module löschen
    if(!is_admin())
       return false;   
@@ -427,17 +427,28 @@ function uninstall_module($name){
   if($name == "." or $name == ".." or empty($name))
      return false;  
 
-   $moduleDir = getModulePath($name);
-   // Modul-Ordner entfernen
-   if(is_dir($moduleDir)){
-      $uninstall_script = getModuleUninstallScriptPath($name);
-      // Uninstall Script ausführen, sofern vorhanden
-      if(is_file($uninstall_script))
+  if($type === "module"){
+     $moduleDir = getModulePath($name);
+     // Modul-Ordner entfernen 
+     if(is_dir($moduleDir)){
+        $uninstall_script = getModuleUninstallScriptPath($name);
+        // Uninstall Script ausführen, sofern vorhanden
+        if(is_file($uninstall_script))
           include $uninstall_script;
           
-         sureRemoveDir($moduleDir, true);
-         return !is_dir($moduleDir);
-   }
+           sureRemoveDir($moduleDir, true);
+           return !is_dir($moduleDir);
+     }
+  } else if($type === "theme"){
+     $cTheme = getconfig("theme");
+     $allThemes = getThemeList();
+     if(in_array($name, $allThemes) and $cTheme !== $name){
+        $theme_path = getTemplateDirPath($name);
+        sureRemoveDir($theme_path, true);
+        return !is_dir($theme_path); 
+     }
+     
+  }
 }
 
 
