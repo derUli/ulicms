@@ -86,7 +86,7 @@ if(defined("_SECURITY")){
      
     </ul>
   </li>
-  <li><a href="?action=modules">Paketverwaltung</a>
+  <li><a href="?action=modules">Module</a>
   <?php if(count($modules_with_admin_page) > 0){?>
   <ul>
     <?php for($n=0; $n < count($modules_with_admin_page); $n++){
