@@ -27,15 +27,16 @@ $allThemes = getThemesList();
 <select style="width:250px;" name="theme" size=1>
 <?php foreach($allThemes as $th){?>
 <option value="<?php echo $th;?>"<?php 
-if($c === $theme)
+if($th === $theme)
    echo " selected"?>><?php echo $th;?></option>";
 <?php }?>
 </select>
 </td>
 </tr>
 </table>
-
+<p>
 <input type="submit" value="Einstellungen speichern"/>
+</p>
 
 </form>
 <?php } ?>
