@@ -104,6 +104,13 @@ $error_reporting = getconfig("error_reporting");
 
 if($error_reporting !== false)
    error_reporting($error_reporting);
+   
+
+$memory_limit = getconfig("memory_limit");
+
+if($memory_limit !== false)
+   @ini_set('memory_limit', $memory_limit);
+
 
 
 $cache_period = getconfig("cache_period");
