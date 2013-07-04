@@ -1,0 +1,2 @@
+Ein Modul das "Glückskekse" ausgibt.
+Dabei handelt es sich für gewöhnlich um kurze Sinnsprüche, Zitate, Witze oder Tipps.

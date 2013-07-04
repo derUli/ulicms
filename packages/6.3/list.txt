@@ -36,3 +36,4 @@ timthumb-2.8.11
 compress_html-0.0.1
 compress_images-0.0.1beta
 senseless_superbunt-0.0.1
+fortune-0.0.1
