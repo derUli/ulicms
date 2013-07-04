@@ -1,5 +1,0 @@
-Nach der Installation bitte folgende Zeile in der Datei admin/ckeditor/config.js hinzufügen
-
-config.protectedSource.push(/<\?[\s\S]*?\?>/g); // PHP Code
-
-Dadurch wird verhindert, dass der CKEditor den PHP-Code in der Seite umwandelt.
