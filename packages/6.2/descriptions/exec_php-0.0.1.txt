@@ -1,0 +1,4 @@
+PHP Code in Seiten ausführen. 
+Bitte beachten Sie die Datei liesmich.txt im Modulordner.
+Sie sollten diese Erweiterung nur installieren, wenn nur vertrauenswürdige
+Menschen Zugang zur Seitenverwaltung haben.
