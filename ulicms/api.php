@@ -54,13 +54,35 @@ function checkForUpdates(){
 
 }
 
-function getTemplateDirPath($sub = false){
+
+function getThemeList(){
+   $themes = Array();
    if(is_admin_dir())
       $templateDir = "../templates/";
    else
       $templateDir = "templates/";
       
-   if($sub)
+   $folders = scanDir($templateDir);
+   for($i=0; $i < count($folders); $i++){
+     $f = $templateDir.($folders[$i])."/";
+     if(is_dir($f)){
+       if(is_file($f."oben.php") and is_file($f."unten.php")
+          and is_file($f."style.css"))
+          array_push($themes, $folders[$i]);
+          
+       }
+   }
+   
+   return $themes;
+}
+
+function getTemplateDirPath($sub = "default"){
+   if(is_admin_dir())
+      $templateDir = "../templates/";
+   else
+      $templateDir = "templates/";
+      
+   if($sub !== "default")
       $templateDir = $templateDir.$sub."/";
       
    return $templateDir;
