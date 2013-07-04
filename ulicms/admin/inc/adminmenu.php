@@ -5,7 +5,12 @@ if(defined("_SECURITY")){
    for($i=0; $i < count($modules); $i++){
     if(file_exists(getModuleAdminFilePath($modules[$i])))
        array_push($modules_with_admin_page, $modules[$i]);
-}
+   }
+   
+   
+   $theme = getconfig("theme");
+   $theme_dir = getTemplateDirPath($theme);
+
 ?>
 <h2>UliCMS <a href="../">[<?php echo getconfig("homepage_title")?>]</a></h2>
 <div class="navbar_top">
@@ -56,7 +61,7 @@ if(defined("_SECURITY")){
         <a href="?action=templates&edit=style.css">CSS</a>
       </li>
       <?php 
-      if(file_exists("../templates/403.php")){
+      if(file_exists($theme_dir."403.php")){
       ?>
         <li><a href="index.php?action=templates&edit=403.php">403</a></li>
      <?php 
@@ -64,7 +69,7 @@ if(defined("_SECURITY")){
      ?>
 
      <?php 
-         if(file_exists("../templates/404.php")){
+         if(file_exists($theme_dir."404.php")){
      ?>
       <li><a href="index.php?action=templates&edit=404.php">404</a></li>
      <?php 
@@ -72,7 +77,7 @@ if(defined("_SECURITY")){
      ?>
      
       <?php 
-         if(file_exists("../templates/functions.php")){
+         if(file_exists($theme_dir ."functions.php")){
      ?>
       <li><a href="index.php?action=templates&edit=functions.php">Functions</a></li>
      <?php 
