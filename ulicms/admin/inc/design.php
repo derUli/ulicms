@@ -10,6 +10,7 @@ if($_REQUEST["theme"] !== $theme ){
    $themes = getThemesList();
    if(in_array($_REQUEST["theme"], $themes)){
       setconfig("theme", $_REQUEST["theme"]);  
+      $theme = $_REQUEST["theme"];
    }
 }
 
@@ -25,7 +26,9 @@ $allThemes = getThemesList();
 <td>
 <select style="width:250px;" name="theme" size=1>
 <?php foreach($allThemes as $th){?>
-<option value="<?php echo $th;?>"<?php if($c === $theme) echo " selected"?>><?php echo $th;?></option>";
+<option value="<?php echo $th;?>"<?php 
+if($c === $theme)
+   echo " selected"?>><?php echo $th;?></option>";
 <?php }?>
 </select>
 </td>
