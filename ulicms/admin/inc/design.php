@@ -22,7 +22,7 @@ $allThemes = getThemesList();
 <form action="index.php?action=design" method="post">
 <table style="width:100%;">
 <tr>
-<td style="width:100px;"><strong>Design:</strong></td>
+<td style="width:100px;"><strong>Theme:</strong></td>
 <td>
 <select style="width:250px;" name="theme" size=1>
 <?php foreach($allThemes as $th){?>
