@@ -17,7 +17,7 @@ if(isset($_GET["remove"])){
    
 }
 ?>
-<p><a href="?action=available_modules">[Paket installieren]</a></p> 
+<p style="margin-bottom:30px;"><a href="?action=available_modules">[Paket installieren]</a></p> 
 <?php } ?>
 <strong>Installierte Module:</strong>
 <p>Hier finden Sie eine Auflistung der installierten Module.<br/>
@@ -28,7 +28,7 @@ um diesen Modul einzubetten</p>
 <?php 
 $modules = getAllModules();
 if(count($modules)>0){
-  echo "<ol>";
+  echo "<ol style=\"margin-bottom:30px;\">";
   for($i=0; $i<count($modules); $i++){
     echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\"><strong>";
 	
@@ -60,8 +60,6 @@ if(count($modules)>0){
   
   }
 ?>
-
-<hr/>
 
 
 <p><strong>Installierte Themes:</strong></p>
