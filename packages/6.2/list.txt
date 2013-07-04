@@ -33,3 +33,4 @@ hide_meta_generator-0.0.1
 motd_frontend-0.0.1
 exec_php-0.0.1
 fortune-0.0.1
+strip_tags-0.0.1
