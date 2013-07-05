@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /* Diese Datei initalisiert das System
 */      
 	

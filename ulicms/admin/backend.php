@@ -11,8 +11,6 @@ require_once "inc/queries.php";
 define("_SECURITY", true);
 
 
-header("Content-Type: text/html; charset=UTF-8");
-
 if(isset($_SESSION["ulicms_login"]))
 {
   $eingeloggt=$_SESSION["ulicms_login"];
@@ -20,6 +18,8 @@ if(isset($_SESSION["ulicms_login"]))
 }else{
   $eingeloggt=false;
 }
+
+header("Content-Type: text/html; charset=UTF-8");
 
 require_once "inc/header.php";
 if(!$eingeloggt){

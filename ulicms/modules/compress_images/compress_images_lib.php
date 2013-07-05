@@ -6,8 +6,17 @@ function compress_image($source_url, $destination_url, $quality) {
 	elseif ($info['mime'] == 'image/gif') $image = imagecreatefromgif($source_url);
 	elseif ($info['mime'] == 'image/png') $image = imagecreatefrompng($source_url);
  
+        imagealphablending( $image, false );
+        imagesavealpha( $image, true );
+ 
 	//save file
-	imagejpeg($image, $destination_url, $quality);
+	if($info['mime'] == 'image/jpeg'))
+           imagejpeg($image, $destination_url, $quality);
+        else if($info['mime'] == 'image/gif'))
+           imagegif($image, $destination_url);
+        else if($info['mime'] == 'image/png'))
+           imagepng($image, $destination_url, 9);
+	
  
 	//return destination file
 	return $destination_url;
