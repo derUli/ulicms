@@ -378,6 +378,8 @@ body{
 zoom:".$zoom."%;
 font-family:".getconfig("default-font").";
 font-size:".getconfig("font-size")."pt;
+background-color:".getconfig("body-background-color").";
+color:".getconfig("body-text-color").";
 }
 </style>";
 
