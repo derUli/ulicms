@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="<?php echo getCurrentLanguage();?>">
 <head>
-<title><?php homepage_title()?> | <?php title()?></title>
 <?php base_metas()?>
 <link rel="stylesheet" media="screen" type="text/css" href="<?php echo getTemplateDirPath("default");?>style.css"/>
 <?php 

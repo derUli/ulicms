@@ -45,6 +45,9 @@ if(getconfig("body-text-color")
    setconfig("body-text-color", $_REQUEST["body-text-color"]);
 }
 
+if(getconfig("title_format") != $_REQUEST["title_format"])
+  setconfig("title_format", $_REQUEST["title_format"]);
+
 if(getconfig("body-background-color")
  != $_REQUEST["body-background-color"]){
    setconfig("body-background-color", $_REQUEST["body-background-color"]);
@@ -54,7 +57,6 @@ if(getconfig("body-background-color")
 } // if submit zu
 
 $allThemes = getThemesList();
-
 $fonts = Array();
 $fonts["Times New Roman"] = "Times, Times New Roman, serif";
 $fonts["Georgia"] = "Georgia";
@@ -73,22 +75,36 @@ $fonts["Courier New"] = "'Courier New', Courier";
 $fonts["Lucida Console"] = "'Lucida Console'";
 $fonts["fantasy"] = "fantasy";
 $fonts["cursive"] = "cursive";
-
 ksort($fonts);
 
 
+
+
 $default_font = getconfig("default-font");
+$title_format = htmlspecialchars(getconfig("title_format"), ENT_QUOTES, "UTF-8");
 $zoom = intval(getconfig("zoom"));
 $font_size = intval(getconfig("font-size"));
 
 ?>
+<style type="text/css">
+input[type="text"], select,
+input.color{
+width:200px;
+}
+</style>
 <h1>Design</h1>
 <form action="index.php?action=design" method="post">
 <table style="width:100%;">
 <tr>
-<td style="width:300px;"><strong>Theme:</strong></td>
+<td style="width:300px;">
+<strong>Title</strong>
+</td>
+<td><input type="text" name="title_format" value="<?php echo $title_format;?>"></td>
+</tr>
+<tr>
+<td><strong>Theme:</strong></td>
 <td>
-<select style="width:250px;" name="theme" size=1>
+<select name="theme" size=1>
 <?php foreach($allThemes as $th){?>
 <option value="<?php echo $th;?>"<?php 
 if($th === $theme)

@@ -4235,7 +4235,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (34, 'header-background-color', '#e8912a'),
 (35, 'body-background-color', '#fffff'),
 (36, 'body-text-color', '#00000'),
-(37, 'session_timeout', '60');")or die(mysql_error());
+(37, 'title_format', '%homepage_title% > %title%'),
+(38, 'session_timeout', '60');")or die(mysql_error());
 
 mysql_query("UPDATE `".$prefix."content` SET parent=NULL")or die(mysql_error());
 

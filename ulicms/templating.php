@@ -61,11 +61,14 @@ function homepage_title(){
 
 $status = check_status();
 
+
+
+
 function meta_keywords($ipage=null){
 	$status=check_status();	
 	$connection=MYSQL_CONNECTION;
 	$ipage=mysql_real_escape_string($_GET["seite"]);
-	$query=db_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
+	$query=db_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'");
 
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
@@ -98,6 +101,29 @@ function meta_description($ipage=null){
 	
 	
 	return getconfig("meta_description");
+}
+
+
+function get_title($ipage=null){
+	$status=check_status();
+	if($status=="404 Not Found"){
+		return "Seite nicht gefunden";
+	}else if($status=="403 Forbidden"){
+		return "Zugriff verweigert";
+  }
+	
+	$connection=MYSQL_CONNECTION;
+	$ipage = mysql_real_escape_string($_GET["seite"]);
+	$query=db_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
+	if($ipage==""){
+		$query=db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
+	}
+	if(mysql_num_rows($query)>0){
+		while($row=mysql_fetch_object($query)){
+		        $row->title =  apply_filter($row->title, "title");
+			return $row->title;
+		}
+	}
 }
 
 function title($ipage=null){
@@ -292,6 +318,21 @@ echo "</ul>\n";
 
 
 function base_metas(){
+	
+        $title_format = getconfig("title_format");
+        if($title_format){
+           $title = $title_format;
+           $title = str_ireplace("%homepage_title%", 
+           getconfig("homepage_title"), $title);
+           
+           $title = str_ireplace("%title%", 
+           get_title(), $title);
+           
+           $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8");
+           
+           echo "<title>".$title."</title>\r\n";
+           
+        }
 	
 	$dir = dirname($_SERVER["SCRIPT_NAME"]);
 	$dir = str_replace("\\","/", $dir);
