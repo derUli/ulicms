@@ -16,7 +16,7 @@ if(isset($_POST["submit"])){
    @set_time_limit(0);
    @ini_set('max_execution_time', 0);
 
-   $quality = getconfig("quality");
+   $quality = getconfig("image_quality");
    if(!$quality)
      $quality = 70;
    
