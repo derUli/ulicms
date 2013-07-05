@@ -34,6 +34,14 @@ if(getconfig("font-size") != $_REQUEST["font-size"]){
    setconfig("font-size", intval($_REQUEST["font-size"]));
 }
 
+
+
+if(getconfig("header-background-color")
+ != $_REQUEST["header-background-color"]){
+   setconfig("header-background-color", "#".$_REQUEST["header-background-color"]);
+}
+
+
 } // if submit zu
 
 $allThemes = getThemesList();
@@ -69,7 +77,7 @@ $font_size = intval(getconfig("font-size"));
 <form action="index.php?action=design" method="post">
 <table style="width:100%;">
 <tr>
-<td style="width:100px;"><strong>Theme:</strong></td>
+<td style="width:300px;"><strong>Theme:</strong></td>
 <td>
 <select style="width:250px;" name="theme" size=1>
 <?php foreach($allThemes as $th){?>
@@ -136,7 +144,17 @@ if($i === $font_size or ($i === 12 and $font_size === 0))
 </select>
 </td>
 </tr>
+<tr>
+<td>
+<strong>Kopfzeile Hintergrundfarbe:</strong>
+</td>
+<td>
+<input name="header-background-color" class="color {hash:true,caps:trus}" value="<?php echo getconfig("header-background-color");?>">
+</td>
+</tr>
 </table>
+
+	<script type="text/javascript" src="scripts/jscolor.js"></script>
 <p>
 <input type="submit" name="submit" value="Einstellungen speichern"/>
 </p>
