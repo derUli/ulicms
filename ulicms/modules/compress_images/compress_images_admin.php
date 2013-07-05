@@ -20,22 +20,26 @@ if(isset($_POST["submit"])){
    if(!$quality)
      $quality = 70;
    
-   $image_dir = "../content/images";
+   $image_dir = "../content/images/";
    
    if(is_dir($image_dir)){
       $files = find_all_files($image_dir);
-      for($i=0; $i < count($files); $i++);
+      for($i=0; $i < count($files); $i++){
         $f = $files[$i];
         $ext = pathinfo($f, PATHINFO_EXTENSION);
         $ext = strtolower($ext);
+        echo $ext;
         if($ext === "jpg" or $ext === "jpeg" or $ext === "png" or $ext === "gif"){
            echo "Komprimiere ".basename($f)."... ";
            flush();
            compress_image($f, $f, $quality);
-           echo "<span stylr='color:green'>[fertig]</span>";
+           echo "<span style='color:green'>[fertig]</span>";
            flush();
         }
 
+   }
+   
+   
    }
 }
 
