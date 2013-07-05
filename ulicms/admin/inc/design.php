@@ -27,7 +27,11 @@ if($_REQUEST["default-font"] != getconfig("default-font")){
    
    
 if(getconfig("zoom") != $_REQUEST["zoom"]){
-setconfig("zoom", intval($_REQUEST["zoom"]));
+   setconfig("zoom", intval($_REQUEST["zoom"]));
+}
+
+if(getconfig("font-size") != $_REQUEST["font-size"]){
+   setconfig("font-size", intval($_REQUEST["font-size"]));
 }
 
 } // if submit zu
@@ -58,6 +62,7 @@ ksort($fonts);
 
 $default_font = getconfig("default-font");
 $zoom = intval(getconfig("zoom"));
+$font_size = intval(getconfig("font-size"));
 
 ?>
 <h1>Design</h1>
@@ -109,9 +114,24 @@ foreach($fonts as $key => $value){
 for($i=10; $i <= 200; $i+=10){
 ?>
 <option<?php 
-if($i === $zoom or ($i === 100 and $zoom === false))
+if($i === $zoom or ($i === 100 and $zoom === 0))
   echo " selected";
 ?> value="<?php echo $i;?>"><?php echo $i;?> %</option>
+<?php }?>
+</select>
+</td>
+</tr>
+<tr>
+<td><strong>Schriftgröße:</strong>
+<td>
+<select name="font-size">
+<?php 
+for($i=8; $i <= 96; $i+=1){
+?>
+<option<?php 
+if($i === $font_size or ($i === 12 and $font_size === 0))
+  echo " selected";
+?> value="<?php echo $i;?>"><?php echo $i;?>pt</option>
 <?php }?>
 </select>
 </td>

@@ -376,6 +376,8 @@ echo "
 <style type=\"text/css\">
 body{
 zoom:".$zoom."%;
+font-family:".getconfig("default-font").";
+font-size:".getconfig("font-size")."pt;
 }
 </style>";
 

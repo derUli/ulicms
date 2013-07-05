@@ -15,7 +15,8 @@ if($db_schema_version === "6.3")
   header("Location: admin/");
   exit();
 
-
+setconfig("zoom", "100");
+setconfig("font-size", "12");
 
 
 
