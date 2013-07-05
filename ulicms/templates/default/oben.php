@@ -22,12 +22,13 @@ if(!getconfig("body-text-color")){
 ?>
 <style type="text/css" media="all">
 .header{
-background-color:<?php echo getconfig("header-background-color")?>;
+background-color:<?php echo getconfig("header-background-color");?>;
 }
 
 body{
-background-color:<?php echo getconfig("body-background-color")?>;
-color:<?php echo getconfig("body-text-color");?>
+background-color:<?php echo getconfig("body-background-color");?>;
+color:<?php echo getconfig("body-text-color");?>;
+font-family:<?php echo getconfig("default-font");?>;
 }
 
 </style>
