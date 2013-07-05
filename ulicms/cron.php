@@ -21,4 +21,36 @@ for($i=0; $i < count($modules); $i++){
 }
 
 
+
+?>
+<?php
+error_reporting(E_ALL);
+$version = new ulicms_version();
+
+$developmentVersion = "";
+
+if($version->getDevelopmentVersion())
+  $developmentVersion = " Entwickler-Version";
+
+// Start Call Home //
+$cfg_script = "UliCMS ".$version->getVersion().
+" (v".
+join(".", $version->getInternalVersion()).$developmentVersion.")";
+$cfg_url    = "http://www.ulicms.de/chs/api.php";
+
+
+$urlfrom     = $_SERVER['HTTP_HOST'];
+$folderfrom  = str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME'])."/");
+$var_url     = $urlfrom.$folderfrom;
+
+$chs0     = $cfg_script."#".$var_url;
+$chs      = base64_encode($chs0);
+
+if(!function_exists('file_get_contents_wrapper')){
+   include_once "lib/file_get_contents_wrapper.php";
+}
+@file_get_contents_wrapper("$cfg_url?chs=$chs");
+exit();
+
+
 ?>
