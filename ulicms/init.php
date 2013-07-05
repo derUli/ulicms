@@ -29,18 +29,6 @@ else if(is_dir("installer")){
 include_once "lib/db_functions.php";
 require_once "api.php";
 
-
-if(!file_exists("content/cache")){
-   @mkdir("content/cache", 0777, true);
-}
-
-if(!file_exists("modules/")){
-   @mkdir("modules/", 0777, true);
-}
-
-
-  
-
 // define Constants
 define('CR', "\r");          // carriage return; Mac
 define('LF', "\n");          // line feed; Unix

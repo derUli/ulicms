@@ -4253,10 +4253,24 @@ mysql_query("INSERT INTO `".$prefix."languages` (`id`, `name`, `language_code`) 
 (2, 'English', 'en');")or die(mysql_error());
 
 
+
+
 @chmod("../cms-config.php", 0777);
 
 @mkdir("../content");
 @chmod("../content", 0777);
+
+if(!file_exists("../content/cache")){
+   @mkdir("content/cache", 0777, true);
+}
+
+if(!file_exists("../modules/")){
+   @mkdir("modules/", 0777, true);
+}
+
+
+
+
 
 @chmod("../templates/oben.php", 0777);
 @chmod("../templates/unten.php", 0777);
