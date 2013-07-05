@@ -44,11 +44,11 @@ header("HTTP/1.0 ".$status);
 header("Content-Type: text/html; charset=utf-8");
 
 if(count(getThemeList()) === 0)
-  die("Keine Themes vorhande");
+  die("Keine Themes vorhanden!");
 
 
 if(!is_dir(getTemplateDirPath($theme)))
-  die("Das aktivierte Theme existiert nicht");
+  die("Das aktivierte Theme existiert nicht!");
 
 
 
