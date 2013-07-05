@@ -8,7 +8,7 @@ $db_schema_version = getconfig("db_schema_version");
 if($db_schema_version === "6.3")
    die("Das Update wurde bereits installiert!");
 
-
+  setconfig("theme", "default");
   setconfig("db_schema_version", "6.3");
   @unlink("update.php");
   
