@@ -45,8 +45,10 @@ if(!is_file("init.php") and !is_dir("libs"))
   exit();
 
 $folderfrom  = str_replace("\\", "/",
-dirname($_SERVER['SCRIPT_NAME'])."/");
+dirname($_SERVER['SCRIPT_NAME']));
 
+if(!endsWith($folderfrom, "/"))
+   $folderfrom .= "/";
 
 $var_url     = $urlfrom.$folderfrom;
 
