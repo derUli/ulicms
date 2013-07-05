@@ -43,6 +43,14 @@ if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("mainte
 header("HTTP/1.0 ".$status);
 header("Content-Type: text/html; charset=utf-8");
 
+if(count(getThemeList()) === 0)
+  die("Keine Themes vorhande");
+
+
+if(!is_dir(getTemplateDirPath($theme)))
+  die("Das aktivierte Theme existiert nicht");
+
+
 
 if(file_exists(getTemplateDirPath($theme)."functions.php")){
    include getTemplateDirPath($theme)."functions.php";
