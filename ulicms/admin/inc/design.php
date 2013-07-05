@@ -2,7 +2,6 @@
 if(!is_admin()){
 echo "<p class='ulicms_error'>Zugriff verweigert</p>";
 } else {
-
 $theme = getconfig("theme");
 
 if(isset($_REQUEST["submit"])){
@@ -38,17 +37,17 @@ if(getconfig("font-size") != $_REQUEST["font-size"]){
 
 if(getconfig("header-background-color")
  != $_REQUEST["header-background-color"]){
-   setconfig("header-background-color", "#".$_REQUEST["header-background-color"]);
+   setconfig("header-background-color", $_REQUEST["header-background-color"]);
 }
 
 if(getconfig("body-text-color")
  != $_REQUEST["body-text-color"]){
-   setconfig("body-text-color", "#".$_REQUEST["body-text-color"]);
+   setconfig("body-text-color", $_REQUEST["body-text-color"]);
 }
 
 if(getconfig("body-background-color")
  != $_REQUEST["body-background-color"]){
-   setconfig("body-background-color", "#".$_REQUEST["body-background-color"]);
+   setconfig("body-background-color", $_REQUEST["body-background-color"]);
 }
 
 
