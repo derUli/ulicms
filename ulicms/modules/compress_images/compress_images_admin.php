@@ -23,7 +23,7 @@ if(isset($_POST["submit"])){
    $image_dir = "../content/images";
    
    if(is_dir($image_dir)){
-      $files = find_all_files($dir);
+      $files = find_all_files($image_dir);
       for($i=0; $i < count($files); $i++);
         $f = $files[$i];
         $ext = pathinfo($f, PATHINFO_EXTENSION);

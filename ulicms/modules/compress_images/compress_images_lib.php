@@ -10,11 +10,11 @@ function compress_image($source_url, $destination_url, $quality) {
         imagesavealpha( $image, true );
  
 	//save file
-	if($info['mime'] == 'image/jpeg'))
+	if($info['mime'] == 'image/jpeg')
            imagejpeg($image, $destination_url, $quality);
-        else if($info['mime'] == 'image/gif'))
+        else if($info['mime'] == 'image/gif')
            imagegif($image, $destination_url);
-        else if($info['mime'] == 'image/png'))
+        else if($info['mime'] == 'image/png')
            imagepng($image, $destination_url, 9);
 	
  
