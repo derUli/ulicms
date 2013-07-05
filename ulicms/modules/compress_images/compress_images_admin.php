@@ -10,6 +10,7 @@ if($required_permission === false){
 define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
 
 include_once getModulePath("compress_images")."compress_images_lib.php";
+include_once "../lib/formatter.php";
 
 if(isset($_POST["submit"])){
    // Max Execution Time auf Endlos
@@ -32,7 +33,29 @@ if(isset($_POST["submit"])){
            echo "<p style=\"width:100%;\">";
            echo "Komprimiere ".basename($f)."... ";
            fcflush();
-           compress_image($f, $f, $quality);
+           
+           $fCompressedFile = str_replace("\\", "/", dirname($f))."/.".basename($f)."-compressed";
+           
+           if(!file_exists($fCompressedFile)){
+              $filesize_old = filesize($f);
+              compress_image($f, $f, $quality);
+              $filesize_new = filesize($f);
+              @$handle = fopen($fCompressedFile, "w");
+              @fwrite($handle, "Alte größe: ".formatSizeUnits($filesize_old));
+              @fwrite($handle, "\r\n");
+              @fwrite($handle, "Neue größe: ".formatSizeUnits($filesize_new));
+              @fwrite($handle, "\r\n");
+              
+          
+              $ratio = round($filesize_new / ($filesize_old / 100), 2);
+             
+              @fwrite($handle, "Ratio: ".$ratio." % (".formatSizeUnits($filesize_new).")");
+              
+              
+              @fclose($handle);
+              
+           }
+           
            echo "<span style='float:right; color:green'>[fertig]</span>";
            fcflush();
            echo "</p>";
