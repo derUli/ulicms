@@ -43,11 +43,24 @@ if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("mainte
 header("HTTP/1.0 ".$status);
 header("Content-Type: text/html; charset=utf-8");
 
+
 if(file_exists(getTemplateDirPath($theme)."functions.php")){
    include getTemplateDirPath($theme)."functions.php";
 }
 
 $cached_page_path = buildCacheFilePath($_SERVER['REQUEST_URI']);
+
+
+$modules = getAllModules();
+
+
+for($i=0; $i < count($modules); $i++){
+  $before_html_file = getModulePath($modules[$i]).
+  $modules[$i]."_before_html.php";
+  if(file_exists($before_html_file))
+     include $before_html_file;
+
+}
 
 
 if(file_exists($cached_page_path) and !getconfig("cache_disabled")
@@ -74,7 +87,6 @@ else if(file_exists($cached_page_path)){
    }
 }
 
-$modules = getAllModules();
 
 require_once getTemplateDirPath($theme)."oben.php";
 
@@ -98,8 +110,14 @@ for($i=0; $i < count($modules); $i++){
 
 require_once getTemplateDirPath($theme)."/unten.php";
 
+for($i=0; $i < count($modules); $i++){
+  $after_html_file = getModulePath($modules[$i]).
+  $modules[$i]."_after_html.php";
+  if(file_exists($after_html_file))
+     include $after_html_file;
 
-$hasModul = containsModule($_GET["seite"]);
+}
+
 
 if(!getconfig("cache_disabled") and !$hasModul and
    getenv('REQUEST_METHOD') == "GET"){
