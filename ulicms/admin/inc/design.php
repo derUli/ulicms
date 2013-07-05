@@ -41,6 +41,16 @@ if(getconfig("header-background-color")
    setconfig("header-background-color", "#".$_REQUEST["header-background-color"]);
 }
 
+if(getconfig("body-text-color")
+ != $_REQUEST["body-text-color"]){
+   setconfig("body-text-color", "#".$_REQUEST["body-text-color"]);
+}
+
+if(getconfig("body-background-color")
+ != $_REQUEST["body-background-color"]){
+   setconfig("body-background-color", "#".$_REQUEST["body-background-color"]);
+}
+
 
 } // if submit zu
 
@@ -149,7 +159,23 @@ if($i === $font_size or ($i === 12 and $font_size === 0))
 <strong>Kopfzeile Hintergrundfarbe:</strong>
 </td>
 <td>
-<input name="header-background-color" class="color {hash:true,caps:trus}" value="<?php echo getconfig("header-background-color");?>">
+<input name="header-background-color" class="color {hash:true,caps:true}" value="<?php echo getconfig("header-background-color");?>">
+</td>
+</tr>
+<tr>
+<td>
+<strong>Schriftfarbe:</strong>
+</td>
+<td>
+<input name="body-text-color" class="color {hash:true,caps:true}" value="<?php echo getconfig("body-text-color");?>">
+</td>
+</tr></tr>
+<tr>
+<td>
+<strong>Hintergrundfarbe:</strong>
+</td>
+<td>
+<input name="body-background-color" class="color {hash:true,caps:true}" value="<?php echo getconfig("body-background-color");?>">
 </td>
 </tr>
 </table>
