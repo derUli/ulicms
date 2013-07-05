@@ -31,10 +31,10 @@ if(isset($_POST["submit"])){
         if($ext === "jpg" or $ext === "jpeg" or $ext === "png" or $ext === "gif"){
            echo "<p style=\"width:100%;\">";
            echo "Komprimiere ".basename($f)."... ";
-           flush();
+           fcflush();
            compress_image($f, $f, $quality);
            echo "<span style='float:right; color:green'>[fertig]</span>";
-           flush();
+           fcflush();
            echo "</p>";
         }
 

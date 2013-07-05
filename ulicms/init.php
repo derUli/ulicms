@@ -87,7 +87,7 @@ mysql_query("SET NAMES 'utf8'");
      Das CMS kann erst betrieben werden, nach dem der Installer gelöscht wurde.
      Dies ist ein Sicherheitsmerkmal von UliCMS.</p>");
      exit();
-  }
+}
 
 
 
@@ -111,6 +111,13 @@ $memory_limit = getconfig("memory_limit");
 if($memory_limit !== false)
    @ini_set('memory_limit', $memory_limit);
 
+if(getconfig("zlib.output_compression"))
+   @ini_set("zlib.output_compression", 1);
+else
+   @ini_set("zlib.output_compression", 0);
+
+
+@ob_implicit_flush(1);
 
 
 $cache_period = getconfig("cache_period");

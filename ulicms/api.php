@@ -211,6 +211,30 @@ function find_all_files($dir)
     return $result; 
 } 
 
+/** 
+* Output buffer flusher
+* Forces a flush of the output buffer to screen useful for displaying long loading lists eg: bulk emailers on screen 
+* Stops the end user seeing loads of just plain old white and thinking the browser has crashed on long loading pages.
+*/
+function fcflush()
+  {
+  static $output_handler = null;
+  if ($output_handler === null) {
+      $output_handler = @ini_get('output_handler');
+ }
+      if ($output_handler == 'ob_gzhandler') {
+      // forcing a flush with this is very bad
+      return;
+      }
+   flush();
+   if (function_exists('ob_flush') AND function_exists('ob_get_length') AND ob_get_length() !== false) {
+   ob_flush();
+   } else if (function_exists('ob_end_flush') AND function_exists('ob_start') AND function_exists('ob_get_length') AND ob_get_length() !== FALSE) {
+   @ob_end_flush();
+   @ob_start();
+   }
+}
+
 function convertLineEndingsToLF($s) {
     // Normalize line endings using Global
     // Convert all line-endings to UNIX format
