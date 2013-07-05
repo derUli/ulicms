@@ -39,8 +39,10 @@ if(isset($_POST["submit"])){
               echo "Komprimiere ".basename($f)."... ";
               fcflush();
               
+              clearstatcache();
               $filesize_old = filesize($f);
               compress_image($f, $f, $quality);
+              clearstatcache();
               $filesize_new = filesize($f);
               @$handle = fopen($fCompressedFile, "w");
               @fwrite($handle, "Alte größe: ".formatSizeUnits($filesize_old));
