@@ -58,8 +58,8 @@ if(file_exists(getTemplateDirPath($theme)."functions.php")){
 
 $cached_page_path = buildCacheFilePath($_SERVER['REQUEST_URI']);
 
-
 $modules = getAllModules();
+$hasModul = containsModule(get_requested_pagename());
 
 
 for($i=0; $i < count($modules); $i++){
