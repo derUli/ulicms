@@ -1,5 +1,6 @@
 ﻿body{
-margin:auto;
+margin:0;
+padding:0;
 }
 
 
@@ -60,6 +61,7 @@ float:left;
 margin-right:30px;
 margin-left:-20px;
 text-align:center;
+padding-top:5px;
 }
 
 

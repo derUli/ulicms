@@ -20,17 +20,10 @@ if(!getconfig("body-text-color")){
 
 
 ?>
-<style type="text/css" media="all">
+<style type="text/css">
 .header{
 background-color:<?php echo getconfig("header-background-color");?>;
 }
-
-body{
-background-color:<?php echo getconfig("body-background-color");?>;
-color:<?php echo getconfig("body-text-color");?>;
-font-family:<?php echo getconfig("default-font");?>;
-}
-
 </style>
 </head>
 <body>
@@ -60,4 +53,3 @@ else{
 <br/>
 <hr>
 <div class="content">
-
