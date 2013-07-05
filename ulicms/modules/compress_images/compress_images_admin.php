@@ -30,13 +30,15 @@ if(isset($_POST["submit"])){
         $ext = pathinfo($f, PATHINFO_EXTENSION);
         $ext = strtolower($ext);
         if($ext === "jpg" or $ext === "jpeg" or $ext === "png" or $ext === "gif"){
-           echo "<p style=\"width:100%;\">";
-           echo "Komprimiere ".basename($f)."... ";
-           fcflush();
+     
            
            $fCompressedFile = str_replace("\\", "/", dirname($f))."/.".basename($f)."-compressed";
            
            if(!file_exists($fCompressedFile)){
+              echo "<p style=\"width:100%;\">";
+              echo "Komprimiere ".basename($f)."... ";
+              fcflush();
+              
               $filesize_old = filesize($f);
               compress_image($f, $f, $quality);
               $filesize_new = filesize($f);
@@ -49,16 +51,23 @@ if(isset($_POST["submit"])){
           
               $ratio = round($filesize_new / ($filesize_old / 100), 2);
              
-              @fwrite($handle, "Ratio: ".$ratio." % (".formatSizeUnits($filesize_new).")");
+              $ratio_str = "Ratio: ".$ratio." % (".formatSizeUnits($filesize_old - $filesize_new).")";
               
+              echo $ratio_str;
+
+              fcflush();
               
+              @fwrite($handle, $ratio_str);
+ 
               @fclose($handle);
+              
+             echo "<span style='float:right; color:green'>[fertig]</span>";
+             fcflush();
+             echo "</p>";
               
            }
            
-           echo "<span style='float:right; color:green'>[fertig]</span>";
-           fcflush();
-           echo "</p>";
+         
         }
 
    }
