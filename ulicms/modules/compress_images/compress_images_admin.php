@@ -28,13 +28,14 @@ if(isset($_POST["submit"])){
         $f = $files[$i];
         $ext = pathinfo($f, PATHINFO_EXTENSION);
         $ext = strtolower($ext);
-        echo $ext;
         if($ext === "jpg" or $ext === "jpeg" or $ext === "png" or $ext === "gif"){
+           echo "<p style=\"width:100%;\">";
            echo "Komprimiere ".basename($f)."... ";
            flush();
            compress_image($f, $f, $quality);
-           echo "<p> style='color:green'>[fertig]</p>";
+           echo "<span style='float:right; color:green'>[fertig]</span>";
            flush();
+           echo "</p>";
         }
 
    }
