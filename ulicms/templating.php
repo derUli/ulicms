@@ -365,6 +365,20 @@ for($i=0; $i < count($modules); $i++){
      @include $module_head_file;
 }
 
+$zoom = getconfig("zoom");
+if($zoom === false){
+  setconfig("zoom", 100);
+  $zoom = 100;
+}
+  
+
+echo "
+<style type=\"text/css\">
+body{
+zoom:".$zoom."%;
+}
+</style>";
+
 }
 
 

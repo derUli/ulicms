@@ -26,6 +26,10 @@ if($_REQUEST["default-font"] != getconfig("default-font")){
    }
    
    
+if(getconfig("zoom") != $_REQUEST["zoom"]){
+setconfig("zoom", intval($_REQUEST["zoom"]));
+}
+
 } // if submit zu
 
 $allThemes = getThemesList();
@@ -53,6 +57,7 @@ ksort($fonts);
 
 
 $default_font = getconfig("default-font");
+$zoom = intval(getconfig("zoom"));
 
 ?>
 <h1>Design</h1>
@@ -65,13 +70,14 @@ $default_font = getconfig("default-font");
 <?php foreach($allThemes as $th){?>
 <option value="<?php echo $th;?>"<?php 
 if($th === $theme)
-   echo " selected"?>><?php echo $th;?></option>";
+   echo " selected"
+   ?>><?php echo $th;?></option>";
 <?php }?>
 </select>
 </td>
 </tr>
 <tr>
-<td><strong>Schriftart</strong></td>
+<td><strong>Schriftart:</strong></td>
 <td>
 <select name="default-font" size=1>
 <?php 
@@ -89,7 +95,24 @@ foreach($fonts as $key => $value){
     
     $i++;
 }
+
+
 ?>
+</select>
+</td>
+</tr>
+<tr>
+<td><strong>Zoom:</strong>
+<td>
+<select name="zoom">
+<?php 
+for($i=10; $i <= 200; $i+=10){
+?>
+<option<?php 
+if($i === $zoom or ($i === 100 and $zoom === false))
+  echo " selected";
+?> value="<?php echo $i;?>"><?php echo $i;?> %</option>
+<?php }?>
 </select>
 </td>
 </tr>
