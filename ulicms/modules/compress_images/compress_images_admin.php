@@ -33,12 +33,11 @@ if(isset($_POST["submit"])){
            echo "Komprimiere ".basename($f)."... ";
            flush();
            compress_image($f, $f, $quality);
-           echo "<span style='color:green'>[fertig]</span>";
+           echo "<p> style='color:green'>[fertig]</p>";
            flush();
         }
 
    }
-   
    
    }
 }

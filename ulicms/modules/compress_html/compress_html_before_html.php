@@ -2,9 +2,14 @@
 
     function compress_html($compress)
     {
-        $i = array('/>[^S ]+/s','/[^S ]+</s','/(s)+/s');
-        $ii = array('>','<','1');
-        return preg_replace($i, $ii, $compress);
+        $i = array('/\s\s+/');
+        $compress = preg_replace($i, " ", $compress);
+        $ii = array('\r\n');
+        $compress = preg_replace($ii, "", $compress);
+        $iii = array('\n');
+        $compress = preg_replace($iii, "", $compress);
+        
+        return $compress;
     }
     
     
