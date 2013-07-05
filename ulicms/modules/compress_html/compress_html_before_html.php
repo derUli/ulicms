@@ -4,10 +4,8 @@
     {
         $i = array('/\s\s+/');
         $compress = preg_replace($i, " ", $compress);
-        $ii = array('\r\n');
-        $compress = preg_replace($ii, "", $compress);
-        $iii = array('\n');
-        $compress = preg_replace($iii, "", $compress);
+        $compress = str_replace("\r\n", "", $compress);
+        $compress = str_replace("\n", "", $compress);
         
         return $compress;
     }
