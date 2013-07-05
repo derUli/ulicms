@@ -18,8 +18,8 @@ function getconfig($key){
 // sind wir gerade im Adminordner?
 function is_admin_dir(){
    return basename(getcwd()) === "admin";
-
 }
+
 
 // Returns the language code of the current language
 // If $current is true returns language of the current page
@@ -196,6 +196,20 @@ function getModuleUninstallScriptPath($module){
 }
 
 
+function find_all_files($dir) 
+{ 
+    $root = scandir($dir); 
+    foreach($root as $value) 
+    { 
+        if($value === '.' || $value === '..') {continue;} 
+        if(is_file("$dir/$value")) {$result[]="$dir/$value";continue;} 
+        foreach(find_all_files("$dir/$value") as $value) 
+        { 
+            $result[]=$value; 
+        } 
+    } 
+    return $result; 
+} 
 
 function convertLineEndingsToLF($s) {
     // Normalize line endings using Global
