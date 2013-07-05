@@ -40,7 +40,14 @@ $cfg_url    = "http://www.ulicms.de/chs/api.php";
 
 
 $urlfrom     = $_SERVER['HTTP_HOST'];
-$folderfrom  = str_replace("\\", "/", dirname($_SERVER['SCRIPT_NAME'])."/");
+
+if(!is_file("init.php") and !is_dir("libs"))
+  exit();
+
+$folderfrom  = str_replace("\\", "/",
+dirname($_SERVER['SCRIPT_NAME'])."/");
+
+
 $var_url     = $urlfrom.$folderfrom;
 
 $chs0     = $cfg_script."#".$var_url;
