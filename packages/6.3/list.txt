@@ -34,3 +34,4 @@ motd_frontend-0.0.1
 exec_php-0.0.1
 theme-zwanzigdreizehn-0.0.1
 timthumb-2.8.11
+compress_html-0.0.1

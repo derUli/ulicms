@@ -1,0 +1,1 @@
+Entfernt Zeilenumbrüche und überflüssige Leerzeichen aus der HTML-Ausgabe um die Ladezeiten zu verringern
