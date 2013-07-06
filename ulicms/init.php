@@ -140,7 +140,8 @@ if($proxy and function_exists("stream_context_set_default")){
 // check four allowed_html config var
 // if not exists create with default value 
 if(!getconfig("allowed_html")){
-    setconfig("allowed_html", "<i><b><strong><em><ul><li><ol><a><span>");
+    setconfig("allowed_html",
+     "<i><u><b><strong><em><ul><li><ol><a><span>");
   }
 
 
