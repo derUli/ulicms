@@ -177,38 +177,16 @@ opacity:.85;
 }
 
 
-input[type="text"], 
-input[type="password"], textarea
-{
-    font-size: 13px;
-    margin-bottom: 5px;
-    display: block;
-    padding: 4px;
-    border: solid 1px #73ba25;
-    width: 300px;
-}
-
-input{
-outline: none
-}
 
 input, textarea, select{
-    border: solid 1px #73ba25;
-}
-
-input, textarea, select{
-
-    border:#102c07 !important;
+    border: solid 1px #90d099;
+    outline:none
 }
 
 
-input[type="text"]:focus, textarea:focus{
-    border:#102c07 !important;
-}
 
-input, select, button, textarea{
+input:hover, textarea:hover, select:hover{
 outline:none;
-
 }
 
 input, select, button, textarea{
