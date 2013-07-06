@@ -24,9 +24,9 @@ while($row=mysql_fetch_object($query)){
 echo '<tr>';
 echo "<td style=\"width:40px;\">--></td>";
 echo "<td>".htmlspecialchars($row->name)."</td>";
-echo "<td>".htmlspecialchars($row->value)."</td>";
-echo "<td>".'<a href="index.php?action=key_edit&key='.$row->id.'"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
-echo "<td>".'<a href="index.php?action=key_delete&key='.
+echo "<td style=\"word-break:break-all;\">".wordwrap(htmlspecialchars($row->value), $cut = true)."</td>";
+echo "<td style=\"text-align:center\">".'<a href="index.php?action=key_edit&key='.$row->id.'"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
+echo "<td style=\"text-align:center;\">".'<a href="index.php?action=key_delete&key='.
 htmlspecialchars($row->name, 
           ENT_QUOTES).'" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif"> Löschen</a></td>';
 echo '</tr>';
