@@ -83,6 +83,10 @@ padding-right:20px;
 padding-bottom:20px;
 }
 
+#login table{
+background-color:transparent;
+}
+
 /*
 .menu{
 background-color:#105507;
