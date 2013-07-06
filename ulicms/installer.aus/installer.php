@@ -4194,6 +4194,7 @@ zyvox
 通販";
 
 $badwords = str_replace("\r\n", "||", $badwords);
+$badwords = str_replace("\n", "||", $badwords);
 
 
 mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
