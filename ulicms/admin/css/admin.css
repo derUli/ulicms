@@ -177,7 +177,8 @@ opacity:.85;
 }
 
 
-input[type="text"], textarea
+input[type="text"], 
+input[type="password"], textarea
 {
     font-size: 13px;
     margin-bottom: 5px;
