@@ -72,7 +72,23 @@ h1, h2, h3, h4, h5, h6{
 color:#1f7306;
 }
 
-
+hr{
+    height: 30px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px 0 0 0;
+    border-radius: 20px;
+}
+hr:before { /* Not really supposed to work, but does */
+    display: block;
+    content: "";
+    height: 30px;
+    margin-top: -31px;    
+    border-style: solid;
+    border-color: black;
+    border-width: 0 0 1px 0;
+    border-radius: 20px;
+}
 
 #login{
 background-color:#5aae85;
@@ -107,7 +123,7 @@ font-weight:bold;
 
 
 table{
-background:#f9f9f9 none repeat scroll 0 0;
+background:#e5e5e5 none repeat scroll 0 0;
 border:1px solid #AAAAAA;
 border-collapse:collapse;
 empty-cells:show;
