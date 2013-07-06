@@ -6,7 +6,7 @@ font-size:1.0em;
 }
 
 a:hover{
-color:#1f7306;
+color:#1a5009;
 text-decoration:none;
 font-weight:bold;
 font-size:1.0em;
@@ -20,7 +20,7 @@ font-size:0.8em;
 }
 
 .menu a:hover{
-color:#1f7306;
+color:#1a5009;
 text-decoration:none;
 font-weight:bold;
 font-size:0.8em;
@@ -65,11 +65,12 @@ background-repeat:none;
 background-attachment:fixed;
 font-family:times;
 font-size:13pt;
+color:#2c2c2c;
 
 }
 
 h1, h2, h3, h4, h5, h6{
-color:#1f7306;
+color:#1a5009;
 }
 
 hr{
@@ -93,6 +94,7 @@ hr:before { /* Not really supposed to work, but does */
 p#footer{
 margin-top:-25px;
 text-align:center;
+color:#5f5f5f;
 }
 
 #login{
@@ -147,7 +149,7 @@ border:0px;
 
 #pbody{
 background-color:#ededed;
-color:#000000;
+color:#2c2c2c;
 padding:15px;
 margin-top:20px;
 border:1px blue solid;
@@ -234,7 +236,7 @@ margin-left:-40px;
 /** alle LIs ab Level 2 */ 
 .navbar_top li li { 
 float: none; 
-background-color:#1f7306;
+background-color:#1a5009;
 list-style-type:none;
 } 
 
