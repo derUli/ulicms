@@ -4230,7 +4230,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (29, 'pkg_src', 'http://www.ulicms.de/packages/{version}/'),
 (30, 'theme', 'default'),
 (31, 'zoom', '100'),
-(32, 'default-font', 'arial'),
+(32, 'default-font', 'Arial, \'Helvetica Neue\', Helvetica, sans-serif'),
 (33, 'font-size', '12pt'),
 (34, 'header-background-color', '#E8912A'),
 (35, 'body-background-color', '#FFFFFF'),
