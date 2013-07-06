@@ -3,8 +3,13 @@ background-color:#73ba25;
 background-repeat:none;
 background-attachment:fixed;
 font-family:arial;
-font-size:12pt;
+font-size:13pt;
 color:#2c2c2c;
+}
+
+p{
+width:100%;
+
 }
 
 
