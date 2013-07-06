@@ -70,8 +70,10 @@ if($_GET["action"] == "spam_filter" and
    
    
    if(isset($_POST["spamfilter_words_blacklist"])){
-     setconfig("spamfilter_words_blacklist", 
-     str_replace("\r\n", "||", $_POST["spamfilter_words_blacklist"]));
+     $blacklist = $_POST["spamfilter_words_blacklist"];
+     $blacklist = str_replace("\r\n", "||", $blacklist);
+     $blacklist = str_replace("\n", "||", $blacklist);
+     setconfig("spamfilter_words_blacklist", $blacklist);
    }
 
 }
