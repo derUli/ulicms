@@ -159,11 +159,31 @@ width:97%;
 
 
 
-input[type=button], input[type=submit]{
-background-color:#aaa;
-color:#fff;
-width:200px;
-border:6px solid #ddd; }
+input[type=button], input[type=submit], button{
+display:block;  
+background: url(../gfx/simple_button.png) repeat-x;  
+width: 200px;  
+padding:10px 0;  
+text-align:center;  
+border:1px solid #608925;  
+font-weight:bold;  
+text-transform:uppercase;  
+border-radius: 5px;  
+-moz-border-radius: 5px;  
+-webkit-border-radius: 5px;  
+color:#FFF;  
+text-decoration: none;  
+opacity:.85;  
+}
+
+input[type=button]:hover, input[type=submit]:hover, button:hover{
+border-color:#49671d; 
+}
+
+input[type=button]:hover, input[type=submit]:hover, button:hover{
+background-position:  0 -200px;  
+padding:11px 0 9px;   
+}
 
 .startbutton,.startbutton:visited {
 display:block;
