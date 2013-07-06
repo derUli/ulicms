@@ -21,7 +21,7 @@ if($_REQUEST["default-font"] != getconfig("default-font")){
    else
       $font = $_REQUEST["default-font"];
       
-      $font = mysql_real_escape_string($font);
+   $font = mysql_real_escape_string($font);
 
    setconfig("default-font", $font);
    }
