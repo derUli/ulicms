@@ -20,6 +20,7 @@ if(!function_exists('getFontFamilys')){
      $fonts["cursive"] = "cursive";
      $fonts["Calibri"] = "Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif";
      $fonts["Brush Script MT"] = "'Brush Script MT',Phyllis,'Lucida Handwriting',cursive";
+     $fonts["Zapf Chancery"] = "'Zapf Chancery', cursive";
      
      // Hier bei Bedarf weitere Fonts einfügen
      // $fonts["Meine Font 1"] = "myfont1";
