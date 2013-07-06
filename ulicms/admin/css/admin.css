@@ -1,3 +1,13 @@
+body{
+background-color:#73ba25;
+background-repeat:none;
+background-attachment:fixed;
+font-family:arial;
+font-size:12pt;
+color:#2c2c2c;
+}
+
+
 a,a:visited,a:active{
 color:#000000;
 text-decoration:none;
@@ -57,17 +67,6 @@ padding:3px;
   padding:10px 20px 10px 20px;
 }
 
-
-
-body{
-background-color:#73ba25;
-background-repeat:none;
-background-attachment:fixed;
-font-family:times;
-font-size:13pt;
-color:#2c2c2c;
-
-}
 
 h1, h2, h3, h4, h5, h6{
 color:#1a5009;
@@ -215,7 +214,6 @@ background-color:#fff;
 width:450px;
 padding:7px;
 font-size:14px;
-font-family:Verdana, Arial, sans-serif;
 font-weight:bold;
 text-decoration:none;
 text-align:left;

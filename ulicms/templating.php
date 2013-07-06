@@ -412,7 +412,7 @@ if($zoom === false){
   $zoom = 100;
 }
   
-
+if(!getconfig("disable_custom_layout_options")){
 echo "
 <style type=\"text/css\">
 body{
@@ -423,6 +423,8 @@ background-color:".getconfig("body-background-color").";
 color:".getconfig("body-text-color").";
 }
 </style>";
+}
+
 
 }
 
