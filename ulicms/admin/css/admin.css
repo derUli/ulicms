@@ -159,7 +159,7 @@ width:97%;
 
 
 
-input[type=button], input[type=submit], button{
+input[type="button"], input[type="submit"], button{
 display:block;  
 background: url(../gfx/simple_button.png) repeat-x;  
 width: 200px;  
@@ -175,6 +175,50 @@ color:#FFF;
 text-decoration: none;  
 opacity:.85;  
 }
+
+
+input[type="text"], textarea
+{
+    font-size: 13px;
+    margin-bottom: 5px;
+    display: block;
+    padding: 4px;
+    border: solid 1px #73ba25;
+    width: 300px;
+}
+
+input{
+outline: none
+}
+
+input, textarea, select{
+    border: solid 1px #73ba25;
+}
+
+input, textarea, select{
+
+    border:#102c07 !important;
+}
+
+
+input[type="text"]:focus, textarea:focus{
+    border:#102c07 !important;
+}
+
+input, select, button, textarea{
+outline:none;
+
+}
+
+input, select, button, textarea{
+background-color:#ddffd3;
+}
+
+
+input:focus, select:focus, button:focus, textarea:focus{
+background-color:#c9ffb9;
+}
+
 
 input[type=button]:hover, input[type=submit]:hover, button:hover{
 border-color:#49671d; 
