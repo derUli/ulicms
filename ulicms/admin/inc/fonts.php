@@ -19,6 +19,7 @@ if(!function_exists('getFontFamilys')){
      $fonts["Lucida Console"] = "'Lucida Console'";
      $fonts["fantasy"] = "fantasy";
      $fonts["cursive"] = "cursive";
+     $fonts["Calibri"] = "calibri";
      
      // Hier bei Bedarf weitere Fonts einfügen
      // $fonts["Meine Font 1"] = "myfont1";
@@ -27,7 +28,7 @@ if(!function_exists('getFontFamilys')){
      
      // Weitere Fonts Ende
      
-     ksort($fonts);
+     uksort($fonts, "strnatcasecmp");
      
      return $fonts;
   }
