@@ -393,8 +393,6 @@ function deleteconfig($key){
 function setconfig($key, $value){
   $query=db_query("SELECT * FROM ".tbname("settings")." WHERE name='$key'");
   
-  $value = mysql_real_escape_string(stripslashes($value));
-
   if(mysql_num_rows($query)>0){
     db_query("UPDATE ".tbname("settings")." SET value='$value' WHERE name='$key'");
   }else{
