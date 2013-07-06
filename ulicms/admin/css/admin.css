@@ -6,7 +6,7 @@ font-size:1.0em;
 }
 
 a:hover{
-color:red;
+color:#1f7306;
 text-decoration:none;
 font-weight:bold;
 font-size:1.0em;
@@ -20,7 +20,7 @@ font-size:0.8em;
 }
 
 .menu a:hover{
-color:red;
+color:#1f7306;
 text-decoration:none;
 font-weight:bold;
 font-size:0.8em;
@@ -234,7 +234,7 @@ margin-left:-40px;
 /** alle LIs ab Level 2 */ 
 .navbar_top li li { 
 float: none; 
-background-color:red;
+background-color:#1f7306;
 list-style-type:none;
 } 
 
