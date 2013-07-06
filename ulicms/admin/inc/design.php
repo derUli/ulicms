@@ -10,7 +10,7 @@ if(isset($_REQUEST["submit"])){
   if($_REQUEST["theme"] !== $theme ){ // if theme auf
     $themes = getThemesList();
     if(in_array($_REQUEST["theme"], $themes)){ // if in_array theme auf
-      setconfig("theme", $_REQUEST["theme"]);  
+      setconfig("theme", mysql_real_escape_string($_REQUEST["theme"]));  
       $theme = $_REQUEST["theme"];
     } // if in_array theme zu
 } // if theme zu
@@ -39,20 +39,23 @@ if(getconfig("font-size") != $_REQUEST["font-size"]){
 
 if(getconfig("header-background-color")
  != $_REQUEST["header-background-color"]){
-   setconfig("header-background-color", $_REQUEST["header-background-color"]);
+   setconfig("header-background-color", mysql_real_escape_string($_REQUEST["header-background-color"]));
 }
 
 if(getconfig("body-text-color")
  != $_REQUEST["body-text-color"]){
-   setconfig("body-text-color", $_REQUEST["body-text-color"]);
+   setconfig("body-text-color", 
+   mysql_real_escape_string($_REQUEST["body-text-color"]));
 }
 
 if(getconfig("title_format") != $_REQUEST["title_format"])
-  setconfig("title_format", $_REQUEST["title_format"]);
+  setconfig("title_format", 
+  mysql_real_escape_string($_REQUEST["title_format"]));
 
 if(getconfig("body-background-color")
  != $_REQUEST["body-background-color"]){
-   setconfig("body-background-color", $_REQUEST["body-background-color"]);
+   setconfig("body-background-color", 
+   mysql_real_escape_string($_REQUEST["body-background-color"]));
 }
 
 
