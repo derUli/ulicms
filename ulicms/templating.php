@@ -167,8 +167,10 @@ function import($ipage){
 	}else{
 
 	while($row=mysql_fetch_object($query)){
-	        $row->content = apply_filter($row->content, "content");
 		$row->content = replaceShortcodesWithModules($row->content);
+		
+	        $row->content = apply_filter($row->content, "content");
+	        
 		echo $row->content;
 		return true;
 }
