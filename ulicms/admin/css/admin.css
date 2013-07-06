@@ -60,16 +60,16 @@ padding:3px;
 
 
 body{
-background-color:rgb(35, 148, 96);
+background-color:#73ba25;
 background-repeat:none;
 background-attachment:fixed;
-font-family:arial;
-font-size:12pt;
+font-family:times;
+font-size:13pt;
 
 }
 
 h1, h2, h3, h4, h5, h6{
-color:#d25400;
+color:#1f7306;
 }
 
 
@@ -85,7 +85,7 @@ padding-bottom:20px;
 
 /*
 .menu{
-background-color:#C4DBFF;
+background-color:#105507;
 background-repeat:none;
 background-attachment:fixed;
 height:40px;
@@ -101,8 +101,13 @@ font-weight:bold;
 */
 
 
+
 table{
+background:#f9f9f9 none repeat scroll 0 0;
+border:1px solid #AAAAAA;
+border-collapse:collapse;
 empty-cells:show;
+margin:1em 1em 1em 0;
 }
 
 iframe img{
@@ -116,7 +121,7 @@ border:0px;
 }
 
 #pbody{
-background-color:#ffffff;
+background-color:#ededed;
 color:#000000;
 padding:10px 10px 10px 10px;
 margin-top:20px;
@@ -169,7 +174,7 @@ ul.menu {
 
 ul.menu > li{
     position: relative;
-
+    background:#d1d8d0;
 }
 
 
@@ -212,17 +217,17 @@ list-style-type:none;
 .navbar_top a { 
   display: block; 
   padding: .5em 1em; 
-  background: #bbb; 
+  background: #b1b8b0; 
 } 
 
 /** As ab Level 2 */ 
 .navbar_top li li a { 
-  background: #ccc; 
+  background: #d1d8d0; 
 } 
 
 /** As ab Level 3 */ 
 .navbar_top li li li a { 
-  background: #ddd; 
+  background: #d1d8d0; 
   float: none;
   margin-left:-3px;
 } 
