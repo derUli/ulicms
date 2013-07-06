@@ -128,8 +128,9 @@ foreach($fonts as $key => $value){
     
   if(!in_array($default_font, $fonts) and $i === $font_amount)
     $selected = "selected";
-     
+    echo '<optgroup style="font-family:'.$value.'; font-size:1.2em;">';
     echo "<option value=\"$value\" $selected>$key</option>";
+    echo '</optgroup>';
     
     $i++;
 }

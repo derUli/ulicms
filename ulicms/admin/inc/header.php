@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<meta name="viewport" content="width=1280"/>
+<meta name="viewport" content="width=1024"/>
 
 <link rel="stylesheet" type="text/css" href="css/admin.css"/>
 
