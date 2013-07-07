@@ -11,7 +11,9 @@
 <script type="text/javascript" src="scripts/jeditable.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>
 <script type="text/javascript" src="scripts/jquery.form.min.js"></script>
+<?php if(is_logged_in()){?>
 <script type="text/javascript" src="scripts/notification.js"></script>
+<?php }?>
 <script type="text/javascript" src="scripts/audio.js"></script>
 <script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
 <link rel="stylesheet" href="scripts/vallenato/vallenato.css" type="text/css">
