@@ -17,15 +17,19 @@ function showChangedOnlineStatus(name, online){
   } else{
      $("#message").html("<span style='color:red'>" + name + " ist offline</span>");  
   }
-  $("#message").fadeIn(500, function(e){
+  $("#message").fadeIn(100, function(e){
   
+    if(online)
+      play_sound("sounds/online.mp3");
+    else
+      play_sound("sounds/offline.mp3");
   setTimeout(function(){
-  $("#message").fadeOut(500, function(e){
+  $("#message").fadeOut(100, function(e){
   $("#message").html("");
   $("#message").show();
   });
   
-  }, 3 * 1000)
+  }, 5 * 1000)
     
   }
   );
