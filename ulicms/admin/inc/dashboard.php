@@ -86,7 +86,9 @@ $motd = nl2br($motd);
 <?php }?>
 </ul>
 
-<p>Die meistgelesenen Seiten sind:
+</div>
+<h2 class="accordion-header">Top-Seiten</h2>
+<div class="accordion-content">
 <table cellpadding="2" border=0>
 <tr style="font-weight:bold;">
 <td>Titel</td>
