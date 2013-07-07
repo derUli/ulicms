@@ -62,7 +62,7 @@ if(file_exists("../templates/404.php")){
 		$template_content = file_get_contents($template_file);
 
 ?>
-<form action="index.php?action=templates" method="post">
+<form id="templateForm" action="index.php?action=templates" method="post">
 <style type="text/css">
 .CodeMirror {
   border: 1px solid #eee;
@@ -101,11 +101,31 @@ if(file_exists("../templates/404.php")){
         tabMode: "shift"
       });
     </script>
-    <br/><br/>
+  
     <input type="hidden" name="save_template" value="<?php echo htmlspecialchars($edit);?>">
+    <div style="text-align:center">
+    <div class="inPageMessage">
+<div id="message_page_edit" class="inPageMessage"></div>
+<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
+</div>
     <input type="submit" value="Änderungen Speichern">
+    </div>
 </form>
+<script type="text/javascript">
+$("#templateForm").ajaxForm({beforeSubmit: function(e){
+  $("#message_page_edit").html("");
+  $("#message_page_edit").hide();
+  $(".loading").show();
+  }, 
+  success:function(e){
+  $(".loading").hide();  
+  $("#message_page_edit").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
+  $("#message_page_edit").show();
+  }
+  
+}); 
 
+</script>
 <?php
 
 
