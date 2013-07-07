@@ -11,6 +11,8 @@
 <script type="text/javascript">
 $(window).load(function(){
 
+$("div#loadpkg").slideDown();
+
 $.get("index.php?ajax_cmd=available_modules", function(result){
    $("div#loadpkg").slideUp();
    $("div#pkglist").html(result);

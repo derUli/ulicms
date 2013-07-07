@@ -11,6 +11,10 @@ div#pkglist{
 display:none;
 }
 
+div#loadpkg{
+display:none;
+}
+
 p{
 width:100%;
 }
