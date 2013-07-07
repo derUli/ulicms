@@ -6,6 +6,7 @@
 <link rel="stylesheet" type="text/css" href="css/admin.css"/>
 
 <script type="text/javascript" src="scripts/php.js/strip_tags.js"></script>
+<script type="text/javascript" src="scripts/php.js/htmlspecialchars.js"></script>
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jeditable.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>

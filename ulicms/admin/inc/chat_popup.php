@@ -16,9 +16,26 @@ $("#chatMessage").keyup(function(event){
     if(event.keyCode == 13){
         var message = $("#chatMessage").val();
         $("#chatMessage").val("")
-        alert(message);
+        addMessageToLog("<?php echo $_SESSION["ulicms_login"];?>", message);
     }
+    
+    event.preventDefault();
+    event.stopPropagation();
 });
+
+$(".Popup form").submit(function(event){
+
+    event.preventDefault();
+    event.stopPropagation();
+});
+
+function addMessageToLog(from, message){
+  var message = htmlspecialchars(message, 'ENT_QUOTES');
+  var html_string = "<p><strong>" + from + ":</strong> " + message + "</p>";
+$("#chatLog").append(html_string)
+}
+
+
 
 function openChat(name){
     $("#chatTarget").html(name);
