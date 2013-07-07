@@ -81,7 +81,7 @@ width:200px;
 }
 </style>
 <h1>Design</h1>
-<form action="index.php?action=design" method="post">
+<form id="designForm" action="index.php?action=design" method="post">
 <table style="width:100%;">
 <tr>
 <td style="width:300px;">
@@ -190,4 +190,18 @@ if($i === $font_size or ($i === 12 and $font_size === 0))
 </p>
 
 </form>
+<script type="text/javascript">
+$("#designForm").ajaxForm({beforeSubmit: function(e){
+  $("#message").html("");
+  $("#loading").show();
+  }, 
+  success:function(e){
+  $("#loading").hide();  
+  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+  }
+  
+
+}); 
+
+</script>
 <?php } ?>
