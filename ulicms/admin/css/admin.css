@@ -11,6 +11,16 @@ p{
 width:100%;
 }
 
+#chatMessage{
+width:100%;
+}
+
+#chatLog{
+width:350px;
+overflow-y:scroll;
+height:200px;
+}
+
 .editable input{
 font-size:1.0em;
 outline:none;
@@ -319,7 +329,6 @@ list-style-type:none;
     margin-left: -250px;
     position: fixed;
     top: 10px;
-    width: 500px;
     z-index: 3;
     box-shadow: 0 0 10px #222;
     padding: 10px;

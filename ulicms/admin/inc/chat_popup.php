@@ -1,13 +1,27 @@
  <div class="Popup">
-            <h1>Popupcontent</h1>
-            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr.</p>
-            <a href="#" class="closePopup">close</a>
+            <h2>Chat mit <span id="chatTarget"></h2>
+            <form action="#">
+            <div id="chatLog"></div>
+            <input id="chatMessage" value="" type="text">
+            </form>
+            
+            <a href="#" class="closePopup">Schließen</a>
         </div>
         <div id="overlay" class="closePopup"></div>
 
 
 <script type="text/javascript">
+
+$("#chatMessage").keyup(function(event){
+    if(event.keyCode == 13){
+        var message = $("#chatMessage").val();
+        $("#chatMessage").val("")
+        alert(message);
+    }
+});
+
 function openChat(name){
+    $("#chatTarget").html(name);
     $('.Popup').fadeIn("slow");
     $('#overlay').fadeIn("slow");
     return false;
