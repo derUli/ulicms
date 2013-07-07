@@ -152,6 +152,8 @@ $('#clear_cache')
                
        },
        error: function(evt){
+       
+          $("#loading").hide();
           alert("AJAX Error");
        },
        dataType: "html"
