@@ -12,7 +12,14 @@ if(defined("_SECURITY")){
    $theme_dir = getTemplateDirPath($theme);
 
 ?>
-<h2>UliCMS <a href="../">[<?php echo getconfig("homepage_title")?>]</a></h2>
+<div style="float:left"><h2>UliCMS <a href="../">[<?php echo getconfig("homepage_title")?>]</a></h2></div>
+
+
+<div style="margin-right:10px;margin-top:30px;float:right">
+<img id="loading" src="gfx/loading.gif" alt="Bitte warten..." style="display:none;">
+</div>
+<div id="message" style="margin-top:30px;text-align:center;margin-right:10px;float:right;"></div>
+<div class="clear"></div>
 <div class="navbar_top">
 <ul class="menu">
   <li>
@@ -106,7 +113,7 @@ if(defined("_SECURITY")){
     <li><a href="?action=spam_filter">Spamfilter</a></li>
     <li><a href="?action=cache">Cache</a>
      <ul>
-     <li><a href="?action=cache&clear_cache=yes">Cache leeren</a></li>
+     <li><a id="clear_cache" href="?action=cache&clear_cache=yes">Cache leeren</a></li>
      </ul>    
     </li>
     <li><a href="?action=motd">MOTD</a></li>
@@ -124,7 +131,39 @@ if(defined("_SECURITY")){
     </ul>
     <li><a href="?action=destroy">Logout</a></li>
 </ul>
+<script type="text/javascript">
+$.ajax({
+  url: "test.html",
+  context: document.body
+}).done(function() {
+  $(this).addClass("done");
+});
+
+$('#clear_cache')
+   .click(function (event) {
+       $("#message").html("")
+       $("#loading").show();
+       
+       $.ajax({
+       url: "index.php?action=cache&clear_cache=yes",
+       success: function(evt){
+       $("#loading").hide();
+       $("#message").html("<span style=\"color:green\">Cache wurde geleert!</span>");
+               
+       },
+       error: function(evt){
+          alert("AJAX Error");
+       },
+       dataType: "html"
+});
+
+       
+       event.preventDefault();
+       event.stopPropagation();
+});
+</script>
 </div>
+
 <div class="clear"></div>
 <div id="pbody">
 <?php 
