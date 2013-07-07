@@ -15,8 +15,21 @@
 $("#chatMessage").keyup(function(event){
     if(event.keyCode == 13){
         var message = $("#chatMessage").val();
+        if(message.length < 3){
+           alert("Ihre Nachricht ist zu kurz.\nDiese muss mindestens 3 Zeichen enthalten.");
+           return;
+        }
         $("#chatMessage").val("")
         addMessageToLog("<?php echo $_SESSION["ulicms_login"];?>", message);
+        var data = {"ajax_cmd": "sendChatMessage", 
+        "to" : $("#chatTarget").html(),
+        "from" : '<?php echo $_SESSION["ulicms_login"];?>',
+        "message" : 'message'
+        }
+        $.post('index.php', data, function(response) {
+         alert(response);
+    });
+
     }
     
     event.preventDefault();
@@ -44,7 +57,7 @@ function openChat(name){
     return false;
 }
 
-$('.closePopup').live("click", function() {
+$('.closePopup').click(function() {
     $(".Popup").fadeOut("slow");
     $("#overlay").fadeOut("slow");
     return false;
