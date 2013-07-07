@@ -19,7 +19,7 @@ if($_SESSION["group"]>=50){
 
 <h2>Einstellungen</h2>
 <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
-<form action="index.php?action=save_settings" method="post">
+<form id="settings_simple" action="index.php?action=save_settings" method="post">
 <table border=1>
 <tr>
 <td><strong data-tooltip="Der Name dieser Webpräsenz.">Titel der Homepage:</strong></td>
@@ -181,6 +181,22 @@ if(getconfig("robots") == "noindex,nofollow"){?>
 </table>
 <input type="hidden" name="save_settings" value="save_settings">
 </form>
+<script type="text/javascript">
+$("#settings_simple").ajaxForm({beforeSubmit: function(e){
+  $("#message").html("");
+  $("#loading").show();
+  }, 
+  success:function(e){
+  $("#loading").hide();  
+  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+  }
+  
+
+}); 
+
+</script>
+
+
 
 <?php 
 }
