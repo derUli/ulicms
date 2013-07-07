@@ -34,7 +34,7 @@ $is_other = ($pkg_src !== $default_pkg_src and $pkg_src !== $local_pkg_dir and $
 include_once "../lib/file_get_contents_wrapper.php";
 ?>
 <h1>Paketquelle</h1>
-<form action="index.php?action=pkg_settings" method="post">
+<form id="pkg_settings" action="index.php?action=pkg_settings" method="post">
 <input type="radio" name="radioButtonSRC"<?php if($pkg_src === $default_pkg_src) echo " checked";?> onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $default_pkg_src?>');"> Offizielle Paketquelle [www.ulicms.de]<br>
 
 <input type="radio" name="radioButtonSRC" <?php if($pkg_src === $local_pkg_dir or $pkg_src === $local_pkg_dir_value) echo " checked";?>  onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $local_pkg_dir_value?>');"> Aus dem Dateisystem<br>
@@ -52,6 +52,21 @@ else
 
 <br/>
 <input type="submit" value="Einstellungen speichern"/>
-
 </form>
+
+<script type="text/javascript">
+$("#pkg_settings").ajaxForm({beforeSubmit: function(e){
+  $("#message").html("");
+  $("#loading").show();
+  }, 
+  success:function(e){
+  $("#loading").hide();  
+  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+  }
+  
+
+}); 
+
+</script>
+
 <?php } ?>

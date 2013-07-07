@@ -1,7 +1,7 @@
 <h1>Spamfilter</h1>
 
 <?php if($_SESSION["group"] >= 40){?>
-<form name="?action=spam_filter" method="post">
+<form id="spamfilter_settings" name="?action=spam_filter" method="post">
 <input type="checkbox" name="spamfilter_enabled"<?php if(getconfig("spamfilter_enabled") == "yes"){
 echo " checked";
 }?> value="yes" onChange="spamFilterEnabledcheckboxChanged(this.checked)"> Spamfilter aktivieren
@@ -43,6 +43,21 @@ Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren:<br/
 
 <input type="submit" name="submit_spamfilter_settings" value="Einstellungen Speichern"/>
 </form>
+
+<script type="text/javascript">
+$("#spamfilter_settings").ajaxForm({beforeSubmit: function(e){
+  $("#message").html("");
+  $("#loading").show();
+  }, 
+  success:function(e){
+  $("#loading").hide();  
+  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+  }
+  
+
+}); 
+
+</script>
 
 <?php 
 }

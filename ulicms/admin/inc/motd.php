@@ -14,7 +14,7 @@ if(isset($_POST["motd"])){
 ?>
 <p>Die Message Of the Day wurde geändert.</p>
 <?php }?>
-<form action="index.php?action=motd" method="post">
+<form id="motd_form" action="index.php?action=motd" method="post">
 <textarea name="motd" cols=60 rows=15><?php echo htmlspecialchars(getconfig("motd"));?></textarea>
 <br>
 <br>
@@ -24,7 +24,20 @@ if(isset($_POST["motd"])){
 getconfig("allowed_html"))?></p>
 </form>
 </div>
+<script type="text/javascript">
+$("#motd_form").ajaxForm({beforeSubmit: function(e){
+  $("#message").html("");
+  $("#loading").show();
+  }, 
+  success:function(e){
+  $("#loading").hide();  
+  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+  }
+  
 
+}); 
+
+</script>
 
 <?php
 
