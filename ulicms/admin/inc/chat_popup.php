@@ -1,3 +1,6 @@
+<?php if(!defined("_SECURITY"))
+die();
+?>
  <div class="Popup">
             <h2>Chat mit <span id="chatTarget"></h2>
             <form action="#">
