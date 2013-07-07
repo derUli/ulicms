@@ -3,6 +3,9 @@
 <?php } else {
 ?>
 <h1>Verfügbare Pakete</h1>
+<noscript>
+<p>Bitte aktivieren Sie Javascript!</p>
+</noscript>
 <div id="loadpkg">
 <img style="margin-right:15px;float:left;" src="gfx/loading.gif" alt="Bitte warten..."> <div style="padding-top:3px;">Daten warten geladen...</div>
 </div>
