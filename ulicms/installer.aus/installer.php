@@ -4254,6 +4254,15 @@ mysql_query("INSERT INTO `".$prefix."languages` (`id`, `name`, `language_code`) 
 (2, 'English', 'en');")or die(mysql_error());
 
 
+mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."chat_messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from` varchar(255) NOT NULL,
+  `to` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `date` bigint(20) NOT NULL,
+  `read` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;")or die(mysql_error());
 
 
 @chmod("../cms-config.php", 0777);
