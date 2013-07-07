@@ -5,10 +5,12 @@
 
 <link rel="stylesheet" type="text/css" href="css/admin.css"/>
 
+<script type="text/javascript" src="scripts/php.js/strip_tags.js"></script>
 <script type="text/javascript" src="scripts/jquery.js"></script>
 <script type="text/javascript" src="scripts/jeditable.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>
 <script type="text/javascript" src="scripts/jquery.form.min.js"></script>
+<script type="text/javascript" src="scripts/notification.js"></script>
 <script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
 <link rel="stylesheet" href="scripts/vallenato/vallenato.css" type="text/css">
 <link rel="icon" href="gfx/favicon.ico" type="image/x-icon"> 
