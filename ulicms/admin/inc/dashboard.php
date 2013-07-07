@@ -81,7 +81,7 @@ $motd = nl2br($motd);
 <h2 class="accordion-header">Jetzt online sind</h2>
 <div class="accordion-content">
 <ul id="users_online">
-<?php include_once "inc/users_online.php";?>
+<?php include_once "inc/users_online_dashboard.php";?>
 </ul>
 </div>
 <h2 class="accordion-header">Top-Seiten</h2>
@@ -135,11 +135,16 @@ echo $autorName;
 </div>
 
 
+<?php 
+include "inc/chat_popup.php";
+?>
+
+
 <script type="text/javascript">
 function update_users_online(){
     $.ajax({
         type: "POST",
-        url: "index.php?ajax_cmd=users_online",
+        url: "index.php?ajax_cmd=users_online_dashboard",
         async: true,
         success : function(e){
           if($('#users_online').html() != e){
