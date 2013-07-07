@@ -1,80 +1,20 @@
 <?php if(!is_admin()){?>
 <p>Zugriff verweigert</p>
 <?php } else {
-$pkg_src = getconfig("pkg_src");
-@set_time_limit(0);
-
-include "../lib/file_get_contents_wrapper.php";
 ?>
-
 <h1>Verfügbare Pakete</h1>
-<?php 
-if(!$pkg_src){?>
-<p><strong>Fehler:</strong> <br/>
-pkg_src wurde nicht definiert!</p>
-<?php } else {
-include_once "../version.php";
-$version = new ulicms_version();
-$internalVersion = implode(".", $version->getInternalVersion());
-$pkg_src = str_replace("{version}", $internalVersion, $pkg_src);
+<div id="pkglist">
+<img style="margin-right:15px;float:left;" src="gfx/loading.gif" alt="Bitte warten..."> <div style="padding-top:3px;">Daten warten geladen...</div>
+</div>
 
-$packageListURL = $pkg_src."list.txt";
+<script type="text/javascript">
+$(window).load(function(){
 
-$packageList = @file_get_contents_wrapper($packageListURL);
+$.get("index.php?ajax_cmd=available_modules", function(result){
+   $("div#pkglist").html(result);
+});
 
-if($packageList){
-   $packageList = strtr($packageList, array(
-    "\r\n" => PHP_EOL,
-    "\r" => PHP_EOL,
-    "\n" => PHP_EOL,
-    ));    
-   $packageList = explode(PHP_EOL, $packageList);
-}
+});
+</script>
 
-
-if($packageList){
-   sort($packageList);
-   $packageList = array_filter($packageList, 'strlen');
-}
-
-
-
-if(!$packageList or count($packageList) === 0){
-?>
-<p><strong>Fehler:</strong> <br/>
-Keine Pakete verfügbar oder Paketquelle nicht erreichbar.</p>
-
-<?php
-} else {
-for($i=0; $i<count($packageList); $i++){
-  $pkg = trim($packageList[$i]);
-  
-  if(!empty($pkg)) {
-  $pkgDescriptionURL = $pkg_src."descriptions/".$pkg.".txt";
-  
-  echo "<p><strong>".$pkg."</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('$pkg installieren?\\nBestehende Dateien werden überschrieben.');\"> [installieren]</a><br/>";
-  
-  $pkgDescription = @file_get_contents_wrapper($pkgDescriptionURL);
-  
-  if(!$pkgDescription or strlen($pkgDescription) < 1)
-     echo "Keine Beschreibung verfügbar.";
-  else
-     echo nl2br($pkgDescription);
-  
-  
-  echo "</p>";
-  flush();
-  
-  }
-
-}
-
-}
-
-?>
-
-
-<?php 
-}
-
-}?>
+<?php }?>

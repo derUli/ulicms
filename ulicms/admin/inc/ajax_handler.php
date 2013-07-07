@@ -20,6 +20,9 @@ switch($ajax_cmd){
 case "users_online":
    include "inc/users_online.php";
 break;
+case "available_modules":
+   include_once "inc/ajax_available_modules.php";
+break;
 case "users_online_dashboard":
    include "inc/users_online_dashboard.php";
 break;
