@@ -148,7 +148,7 @@ $('#clear_cache')
        url: "index.php?action=cache&clear_cache=yes",
        success: function(evt){
        $("#loading").hide();
-       $("#message").html("<span style=\"color:green\">Cache wurde geleert!</span>");
+       $("#message").html("<span style=\"color:green\">Der Cache wurde geleert!</span>");
                
        },
        error: function(evt){
