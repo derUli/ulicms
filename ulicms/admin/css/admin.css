@@ -11,6 +11,19 @@ p{
 width:100%;
 }
 
+#message_page_edit{
+display:none;
+}
+
+.inPageMessage{
+margin-top:20px; 
+height:60px;
+}
+
+.loading{
+display:none;
+}
+
 #chatMessage{
 width:100%;
 }

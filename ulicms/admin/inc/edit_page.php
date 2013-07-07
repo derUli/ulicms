@@ -141,7 +141,10 @@ function confirmExit()
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
 
 </noscript>
-<br/><br/>
+<div class="inPageMessage">
+<div id="message_page_edit" class="inPageMessage"></div>
+<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
+</div>
 
 <input type="submit" value="Speichern">
 </div>
@@ -149,17 +152,20 @@ function confirmExit()
 
 <script type="text/javascript">
 $("#pageform").ajaxForm({beforeSubmit: function(e){
-  $("#message").html("");
-  $("#loading").show();
+  $("#message_page_edit").html("");
+  $("#message_page_edit").hide();
+  $(".loading").show();
   }, 
   success:function(e){
-  $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
+  $(".loading").hide();  
+  $("#message_page_edit").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
+  $("#message_page_edit").show();
   }
   
 }); 
 
 </script>
+
 
 
 <?php 

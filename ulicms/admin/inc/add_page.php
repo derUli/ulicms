@@ -182,26 +182,12 @@ function confirmExit()
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
 
 </noscript>
-<br/><br/>
 <input type="hidden" name="add_page" value="add_page">
 
 <input type="submit" value="Speichern">
 </div>
 </form>
 
-<script type="text/javascript">
-$("#pageform").ajaxForm({beforeSubmit: function(e){
-  $("#message").html("");
-  $("#loading").show();
-  }, 
-  success:function(e){
-  $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
-  }
-  
-}); 
-
-</script>
 
 <?php
 }
