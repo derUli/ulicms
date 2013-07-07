@@ -36,15 +36,17 @@ if($motd or strlen($motd)>10){
 $motd = nl2br($motd);
 ?>
 
-<h2>Nachricht des Tages</h2>
-<div class="motd">
+<div id="accordion-container"> 
+
+<h2 class="accordion-header">Nachricht des Tages</h2>
+<div class="accordion-content">
 <?php echo $motd;?>
 </div>
-<br>
 <?php
 }
 ?>
-<h2>Statistiken:</h2>      
+<h2 class="accordion-header">Statistiken</h2>      
+<div class="accordion-content">
 <table border=1>    
 <tr>
 <td>Anzahl der Seiten</td>
@@ -75,8 +77,9 @@ $motd = nl2br($motd);
 <?php }?>
 
 </table>
-<br>
-<h2>Jetzt online sind:</h2>
+</div>
+<h2 class="accordion-header">Jetzt online sind</h2>
+<div class="accordion-content">
 <ul>
 <?php while($row = mysql_fetch_object($users_online)){?>
 <li><?php echo $row->username?></li>
@@ -97,8 +100,10 @@ $motd = nl2br($motd);
 </tr>
 </table>
 </p>
-<br>
-<p><strong>Letzte Änderungen:</strong></p>
+</div>
+
+<h2 class="accordion-header">Letzte Änderungen:</h2>
+<div class="accordion-content">
 <table cellpadding="2" style="width: 70%; border:0px;">
 <tr style="font-weight:bold;">
 <td>Titel</td>
@@ -124,9 +129,11 @@ echo $autorName;
 <?php }?>
 </tr>
 </table>
+</div>
+</div>
 
 </p>
-
+</div>
 
 
 
