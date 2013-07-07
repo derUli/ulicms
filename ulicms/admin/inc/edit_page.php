@@ -151,6 +151,7 @@ function confirmExit()
 </div>
 </form>
 
+<!-- Das bleibt solange auskommentiert bis ich herausgefunden habe, warum das mit Speichern per AJAX nicht immer klappt
 <script type="text/javascript">
 $("#pageform").ajaxForm({beforeSubmit: function(e){
   $("#message_page_edit").html("");
@@ -166,6 +167,7 @@ $("#pageform").ajaxForm({beforeSubmit: function(e){
 }); 
 
 </script>
+-->
 
 
 
