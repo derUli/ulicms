@@ -183,8 +183,6 @@ if($i === $font_size or ($i === 12 and $font_size === 0))
 </td>
 </tr>
 </table>
-
-	<script type="text/javascript" src="scripts/jscolor.js"></script>
 <p>
 <input type="submit" name="submit" value="Einstellungen speichern"/>
 </p>
