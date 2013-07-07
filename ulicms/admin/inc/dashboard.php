@@ -102,7 +102,7 @@ $motd = nl2br($motd);
 </p>
 </div>
 
-<h2 class="accordion-header">Letzte Änderungen:</h2>
+<h2 class="accordion-header">Letzte Änderungen</h2>
 <div class="accordion-content">
 <table cellpadding="2" style="width: 70%; border:0px;">
 <tr style="font-weight:bold;">
