@@ -80,12 +80,9 @@ $motd = nl2br($motd);
 </div>
 <h2 class="accordion-header">Jetzt online sind</h2>
 <div class="accordion-content">
-<ul>
-<?php while($row = mysql_fetch_object($users_online)){?>
-<li><?php echo $row->username?></li>
-<?php }?>
+<ul id="users_online">
+<?php include_once "inc/users_online.php";?>
 </ul>
-
 </div>
 <h2 class="accordion-header">Top-Seiten</h2>
 <div class="accordion-content">
@@ -138,6 +135,24 @@ echo $autorName;
 </div>
 
 
+<script type="text/javascript">
+function update_users_online(){
+    $.ajax({
+        type: "POST",
+        url: "index.php?ajax_cmd=users_online",
+        async: true,
+        success : function(e){
+          if($('#users_online').html() != e){
+              $('#users_online').html(e);
+              setTimeout("update_users_online();", 10 * 1000);
+          }
+        }
+    });
+    
+}
+
+update_users_online();
+</script>
 
 <?php
 }

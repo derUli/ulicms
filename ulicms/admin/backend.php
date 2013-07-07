@@ -21,6 +21,12 @@ if(isset($_SESSION["ulicms_login"]))
 
 header("Content-Type: text/html; charset=UTF-8");
 
+if(isset($_REQUEST["ajax_cmd"])){
+  include_once "inc/ajax_handler.php";
+  exit();
+}
+
+
 require_once "inc/header.php";
 if(!$eingeloggt){
   if(isset($_GET["register"])){
