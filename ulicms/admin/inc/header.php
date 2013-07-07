@@ -9,6 +9,8 @@
 <script type="text/javascript" src="scripts/jeditable.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>
 
+<script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
+<link rel="stylesheet" href="scripts/vallenato/vallenato.css" type="text/css">
 <link rel="icon" href="gfx/favicon.ico" type="image/x-icon"> 
 <link rel="shortcut icon" href="gfx/favicon.ico" type="image/x-icon">
 
