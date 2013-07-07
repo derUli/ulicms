@@ -2,7 +2,7 @@
 if($_SESSION["group"]>=30){
 
 ?>
-<form name="newpageform" action="index.php?action=pages" method="post">
+<form id="pageform" name="newpageform" action="index.php?action=pages" method="post">
 
 <strong data-tooltip="Dieser Name wird für die Adresse benötigt.
 Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong><br/>
@@ -188,6 +188,20 @@ function confirmExit()
 <input type="submit" value="Speichern">
 </div>
 </form>
+
+<script type="text/javascript">
+$("#pageform").ajaxForm({beforeSubmit: function(e){
+  $("#message").html("");
+  $("#loading").show();
+  }, 
+  success:function(e){
+  $("#loading").hide();  
+  $("#message").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
+  }
+  
+}); 
+
+</script>
 
 <?php
 }

@@ -6,7 +6,7 @@ if($_SESSION["group"]>=30){
 
 ?>
 
-<form action="index.php?action=pages" method="post">
+<form id="pageform" action="index.php?action=pages" method="post">
 <input type="hidden" name="edit_page" value="edit_page">
 
 
@@ -146,6 +146,22 @@ function confirmExit()
 <input type="submit" value="Speichern">
 </div>
 </form>
+
+<script type="text/javascript">
+$("#pageform").ajaxForm({beforeSubmit: function(e){
+  $("#message").html("");
+  $("#loading").show();
+  }, 
+  success:function(e){
+  $("#loading").hide();  
+  $("#message").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
+  }
+  
+}); 
+
+</script>
+
+
 <?php 
 break;
 }
