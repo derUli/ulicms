@@ -117,7 +117,7 @@ $("#templateForm").ajaxForm({beforeSubmit: function(e){
   }, 
   success:function(e){
   $(".loading").hide();  
-  $("#message_page_edit").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
+  $("#message_page_edit").html("<span style=\"color:green;\">Das Template wurde gespeichert</span>");
   $("#message_page_edit").show();
   }
   
