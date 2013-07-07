@@ -129,15 +129,19 @@ echo $autorName;
 </tr>
 </table>
 </div>
-</div>
+<?php
+$modules = getAllModules();
+for($i=0; $i < count($modules); $i++){
+   $accordion_layout_file = getModulePath($modules[$i]).
+   $modules[$i]."_accordion_layout.php";
+   if(file_exists($accordion_layout_file))
+     @include $accordion_layout_file;
+}
 
-</p>
-</div>
-
-
-<?php 
-include "inc/chat_popup.php";
 ?>
+
+</div>
+</div>
 
 
 <script type="text/javascript">
