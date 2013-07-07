@@ -5,7 +5,9 @@ if($_SESSION["group"]>=50){
 	$settings=Array();
 	while($row=mysql_fetch_object($query)){
 		
-		$settings[$row->name]=$row->value;
+		$settings[$row->name] = $row->value;
+		$settings[$row->name] = htmlspecialchars($settings[$row->name],
+		ENT_QUOTES, "UTF-8");
 
 	}
 
