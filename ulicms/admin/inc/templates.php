@@ -103,13 +103,11 @@ if(file_exists("../templates/404.php")){
     </script>
   
     <input type="hidden" name="save_template" value="<?php echo htmlspecialchars($edit);?>">
-    <div style="text-align:center">
     <div class="inPageMessage">
 <div id="message_page_edit" class="inPageMessage"></div>
 <img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
 </div>
     <input type="submit" value="Änderungen Speichern">
-    </div>
 </form>
 <script type="text/javascript">
 $("#templateForm").ajaxForm({beforeSubmit: function(e){
