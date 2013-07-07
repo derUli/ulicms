@@ -132,12 +132,6 @@ if(defined("_SECURITY")){
     <li><a href="?action=destroy">Logout</a></li>
 </ul>
 <script type="text/javascript">
-$.ajax({
-  url: "test.html",
-  context: document.body
-}).done(function() {
-  $(this).addClass("done");
-});
 
 $('#clear_cache')
    .click(function (event) {
