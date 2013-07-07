@@ -180,8 +180,9 @@ function confirmExit()
 
 <noscript>
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
-
 </noscript>
+<div class="inPageMessage">
+</div>
 <input type="hidden" name="add_page" value="add_page">
 
 <input type="submit" value="Speichern">

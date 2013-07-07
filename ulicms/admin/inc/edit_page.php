@@ -99,6 +99,7 @@ echo htmlspecialchars($row->meta_keywords); ?>'>
 </select>
 <br/><br/>
 <div align="center">
+<a id="bottom" name="bottom">
 <textarea name="page_content" id="page_content" cols=60 rows=20><?php echo htmlspecialchars($row->content);?></textarea>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( 'page_content',

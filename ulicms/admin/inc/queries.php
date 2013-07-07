@@ -372,7 +372,7 @@ if($_POST["add_page"] == "add_page"){
   '$meta_description', '$meta_keywords',
   '$language', '$target')");
 
-  header("Location: index.php?action=pages");
+  header("Location: index.php?action=pages_edit&page=".mysql_insert_id()."#bottom");
   exit();
 
 }
