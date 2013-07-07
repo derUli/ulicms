@@ -26,7 +26,6 @@ background-color:<?php echo getconfig("header-background-color");?>;
 </style>
 </head>
 <body>
-Bla Blubb
 <div class="header">
 <div class="logo">
 <?php
