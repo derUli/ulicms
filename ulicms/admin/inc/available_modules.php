@@ -7,7 +7,7 @@
 <p>Bitte aktivieren Sie Javascript!</p>
 </noscript>
 <div id="loadpkg">
-<img style="margin-right:15px;float:left;" src="gfx/loading.gif" alt="Bitte warten..."> <div style="padding-top:3px;">Daten warten geladen...</div>
+<img style="margin-right:15px;float:left;" src="gfx/loading.gif" alt="Bitte warten..."> <div style="padding-top:3px;">Daten werden geladen...</div>
 </div>
 <div id="pkglist"></div>
 
