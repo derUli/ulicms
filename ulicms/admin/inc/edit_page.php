@@ -151,13 +151,18 @@ function confirmExit()
 </div>
 </form>
 
-<!-- Das bleibt solange auskommentiert bis ich herausgefunden habe, warum das mit Speichern per AJAX nicht immer klappt
 <script type="text/javascript">
 $("#pageform").ajaxForm({beforeSubmit: function(e){
   $("#message_page_edit").html("");
   $("#message_page_edit").hide();
   $(".loading").show();
-  }, 
+  }, beforeSerialize:function($Form, options){
+        /* Before serialize */
+        for ( instance in CKEDITOR.instances ) {
+            CKEDITOR.instances[instance].updateElement();
+        }
+        return true; 
+    },
   success:function(e){
   $(".loading").hide();  
   $("#message_page_edit").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
@@ -167,7 +172,6 @@ $("#pageform").ajaxForm({beforeSubmit: function(e){
 }); 
 
 </script>
--->
 
 
 
