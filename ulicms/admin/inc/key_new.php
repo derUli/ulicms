@@ -8,7 +8,7 @@ if($_SESSION["group"]>=50){
 <input type="text" style="width:300px;" name="name" value="">
 <br/><br/>
 <strong>Wert:</strong><br/>
-<input type="text" style="width:300px;" name="value" value="">
+<textarea style="width:300px; height:150px;" style="width:300px;" name="value"></textarea>
 
 <br/><br/>
 <input type="submit" value="Datensatz hinzufügen">
