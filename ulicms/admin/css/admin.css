@@ -11,6 +11,12 @@ p{
 width:100%;
 }
 
+.editable input{
+font-size:1.0em;
+outline:none;
+border:0px;
+}
+
 
 
 a,a:visited,a:active{
