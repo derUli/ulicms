@@ -16,7 +16,6 @@ add_hook($cron);
 
 ?>
 <?php
-error_reporting(E_ALL);
 $version = new ulicms_version();
 
 $developmentVersion = "";
