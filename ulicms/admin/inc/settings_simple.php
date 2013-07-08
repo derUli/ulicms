@@ -176,6 +176,7 @@ if(getconfig("robots") == "noindex,nofollow"){?>
 </select>
 </td>
 </tr>
+<?php add_hook("settings_simple");?>
 <tr>
 <td>
 <td align="center"><input type="submit" value="OK" style="width:45%;"></td>

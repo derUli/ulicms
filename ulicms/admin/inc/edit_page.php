@@ -97,6 +97,7 @@ echo htmlspecialchars($row->meta_keywords); ?>'>
 <option value="1" <?php if($row->comments_enabled == 1){echo "selected";}?>>aktiviert</option>
 <option value="0" <?php if($row->comments_enabled == 0){echo "selected";}?>>deaktiviert</option>
 </select>
+<?php add_hook("page_option");?>
 <br/><br/>
 <div align="center">
 <a id="bottom" name="bottom">

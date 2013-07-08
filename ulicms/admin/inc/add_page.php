@@ -135,7 +135,7 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 <option value="1">aktiviert</option>
 <option value="0" selected="selected">deaktiviert</option>
 </select>
-
+<?php add_hook("page_option");?>
 <br/><br/>
 
 <div align="center">
