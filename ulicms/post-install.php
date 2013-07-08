@@ -8,5 +8,5 @@ if(!is_file(getModulePath("rss2blog")."etc/"."sources.txt")){
 
 setconfig("rss2blog_bot_user_id", "1");
 
-db_query("ALTER TABLE `".tbname("blog")."` ADD `src_link`;")
+db_query("ALTER TABLE `".tbname("blog")."` ADD TEXT `src_link` TEXT;")
 ?>
