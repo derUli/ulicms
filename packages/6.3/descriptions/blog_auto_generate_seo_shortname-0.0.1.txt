@@ -1,0 +1,2 @@
+Generiert den seo_shortname automatisch aus dem Titel des Blogeintrags
+wenn dieser leer sein sollte
