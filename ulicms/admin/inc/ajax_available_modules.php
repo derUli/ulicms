@@ -1,6 +1,8 @@
 <?php if(!is_admin()){?>
 <p>Zugriff verweigert</p>
-<?php } 
+<?php 
+dir();
+} 
 
 $pkg_src = getconfig("pkg_src");
 @set_time_limit(0);
