@@ -107,12 +107,6 @@ width:98%;
 float:left;
 }
 
-
-
-h1,h2,h3,h4,h5,h6{
-font-family:Balloon;
-}
-
 .blog_post_content{
 border-style:dotted;
 border-width:1px;
@@ -131,8 +125,6 @@ margin-right:10px
 h2.blog_headline{
 margin-top:4px;
 color:rgb(0, 100, 100) !important;
-font-size:13pt;
-font-family: Courier, "Courier New", monospace;
 }
 
 .navbar_bottom ul li a{
