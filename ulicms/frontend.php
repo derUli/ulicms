@@ -72,7 +72,9 @@ if(file_exists($cached_page_path) and !getconfig("cache_disabled")
     
     if($cached_content and (time() - $last_modified < CACHE_PERIOD)){
       echo $cached_content;
+      add_hook("before_cron");
       @include 'cron.php';
+      add_hook("after_cron");
       die();
       
    }
