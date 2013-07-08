@@ -129,17 +129,7 @@ echo $autorName;
 </tr>
 </table>
 </div>
-<?php
-$modules = getAllModules();
-for($i=0; $i < count($modules); $i++){
-   $accordion_layout_file = getModulePath($modules[$i]).
-   $modules[$i]."_accordion_layout.php";
-   if(file_exists($accordion_layout_file))
-     @include $accordion_layout_file;
-}
-
-?>
-
+<?php add_hook("accordion_layout"); ?>
 </div>
 </div>
 

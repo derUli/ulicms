@@ -20,6 +20,19 @@ function is_admin_dir(){
    return basename(getcwd()) === "admin";
 }
 
+function add_hook($name){
+  $modules = getAllModules();
+     for($i=0; $i < count($modules); $i++){
+       $admin_menu_item = getModulePath($modules[$i]).
+       $modules[$i]."_".$name.".php";
+      if(file_exists($admin_menu_item))
+        @include $admin_menu_item;
+        return true;
+      }
+      
+      return false;
+}
+
 
 // Returns the language code of the current language
 // If $current is true returns language of the current page
