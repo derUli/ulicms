@@ -38,5 +38,6 @@ $(document).ready(function() {
 <script src="codemirror/mode/css/css.js" type="text/javascript"></script>
 <title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<?php add_hook("admin_head");?>
 </head>
 <body>
