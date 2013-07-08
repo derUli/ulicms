@@ -41,3 +41,4 @@ strip_tags-0.0.1
 blog_comments_dashboard-0.0.1
 blog-6.1.0
 fullcalendar_dashboard-0.0.1
+limit_login_attempts-0.0.1
