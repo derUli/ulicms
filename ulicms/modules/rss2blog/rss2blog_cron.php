@@ -117,15 +117,17 @@ for($i=0; $i <= count($srclist); $i++){
                
                $article["description"] .= "<p class=\"src_link_p\"><a href=\"".real_htmlspecialchars($link)."\" class=\"src_link\">$src_text</a></p>";
                $description = mysql_real_escape_string($article["description"]);
+               
+               $link = mysql_real_escape_string($link);
                $pubDate = rsstotime($article["pubDate"]);
-               $query = db_query("SELECT * FROM ".tbname("blog"). " WHERE `src_link` = '".$link)."'";
+               $query = db_query("SELECT * FROM ".tbname("blog"). " WHERE `src_link` = '".$link."'");
                
                
                $link = mysql_real_escape_string($link);
                
                $seo_shortname = cleanString($title)."-".uniqid();
  
-               if(mysql_num_rows($query) == 0) {
+               if(mysql_num_rows($query) === 0) {
                
                
                $insert_query = "INSERT INTO `".tbname("blog")."` (datum, ".
