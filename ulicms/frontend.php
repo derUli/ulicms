@@ -22,12 +22,6 @@ if(!isset($_SESSION["language"])){
 $status = check_status();
 
 
-if($_GET["rss"]=="rss"){
-  require_once "rss.php";
-  exit();
-}
-
-
 if(getconfig("redirection")!=""&&getconfig("redirection")!=false){
   add_hook("before_global_redirection");
   header("Location: ".getconfig("redirection"));
