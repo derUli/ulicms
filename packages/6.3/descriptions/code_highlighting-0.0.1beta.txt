@@ -1,0 +1,4 @@
+Syntax Hervorhebung für PHP Code.
+Laden Sie einfach Ihren Quellcode als Textdatei hoch und fügen Sie folgenden Code in eine Seite ein:
+[code src="meinscript.txt"]
+Für die Formatierung wird die PHP Funktion highlight_file() genutzt.
