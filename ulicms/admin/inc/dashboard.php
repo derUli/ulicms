@@ -134,31 +134,6 @@ echo $autorName;
 </div>
 
 <script type="text/javascript">
-$(function() {
-    $('#accordion-container').children('[data-header]').hide().each(function() {
-        $(this).before('<h2 class="accordion-header">' + $(this).data('header') + '</h2>');
-    }).prev().each(function(i) {
-        $(this).on("click", function() {
-            if ($(this).next().is(':hidden')) {
-                $(this).addClass('active').next().slideDown();
-                createCookie('expanded' + i, null, 7); // Create a cookie named 'expanded-N' (N are: 0,1,2,3,...)
-            } else {
-                $(this).removeClass('active').next().slideUp();
-                eraseCookie('expanded' + i);
-            }
-        });
-        // If the cookie named 'expanded-N' successfully read...
-        if (readCookie('expanded' + i)) {
-            // Slide down the saved panel session
-            $(this).addClass('active').next().slideDown();
-        }
-    });
-
-});
-</script>
-
-
-<script type="text/javascript">
 function update_users_online(){
     $.ajax({
         type: "POST",
