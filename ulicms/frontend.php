@@ -8,6 +8,8 @@ require_once "templating.php";
 session_start();
 $_COOKIE[session_name()] = session_id();
 
+add_hook("after_session_start");
+
 if(!empty($_GET["language"])){
    $_SESSION["language"] = basename($_GET["language"]);
 }
@@ -27,6 +29,7 @@ if($_GET["rss"]=="rss"){
 
 
 if(getconfig("redirection")!=""&&getconfig("redirection")!=false){
+  add_hook("before_global_redirection");
   header("Location: ".getconfig("redirection"));
   exit();
 }

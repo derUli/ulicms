@@ -1,8 +1,10 @@
 <?php 
+require_once "../init.php";
+
 session_start();
 setcookie(session_name(),session_id());
+add_hook("after_session_start");
 
-require_once "../init.php";
 require_once "../version.php";
 require_once "inc/logincheck.php";
 require_once "inc/queries.php";
