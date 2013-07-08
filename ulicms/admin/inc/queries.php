@@ -1,4 +1,8 @@
 <?php 
+
+
+add_hook("query");
+
 if($_GET["action"]=="save_settings" && isset($_POST["save_settings"])){
   setconfig("homepage_title", mysql_real_escape_string($_POST["homepage_title"]));
   setconfig("homepage_owner", mysql_real_escape_string($_POST["homepage_owner"]));
@@ -20,6 +24,8 @@ if($_GET["action"]=="save_settings" && isset($_POST["save_settings"])){
   header("Location: index.php?action=settings_simple");
   exit();
 }
+
+
 
 
 if($_GET["action"]=="view_website" or $_GET["action"] == "frontpage"){
