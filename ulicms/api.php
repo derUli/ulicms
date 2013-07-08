@@ -22,9 +22,9 @@ function is_admin_dir(){
 
 function add_hook($name){
   $modules = getAllModules();
-  for($i=0; $i < count($modules); $i++){
-      $file = getModulePath($modules[$i]).
-      $modules[$i]."_".$name.".php";
+  for($hook_i=0; $hook_i < count($modules); $hook_i++){
+      $file = getModulePath($modules[$hook_i]).
+      $modules[$hook_i]."_".$name.".php";
       if(file_exists( $file)){
         @include $file;
         }

@@ -6,4 +6,5 @@ var $mysql_user="root";
 var $mysql_password="";
 var $mysql_database="ulicms";
 var $mysql_prefix="troll_";
+var $query_logging=true;
 }

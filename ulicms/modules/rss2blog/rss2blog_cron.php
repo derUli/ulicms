@@ -1,4 +1,5 @@
 <?php 
+flush();
 
 if(is_admin_dir())
    die();
@@ -87,7 +88,7 @@ if(!class_exists("lastRSS")){
   
 @ini_set('max_execution_time', 0);
 @set_time_limit(0);
-// ignore_user_abort(true);
+@ignore_user_abort(true);
   
 $srclist = file_get_contents($srclist);
 $srclist = str_replace("\r\n", "\n", $srclist);
@@ -99,7 +100,7 @@ for($i = 0; $i < count($srclist); $i++){
         $rss->cache_dir = 'content/cache';        
         $cache_time = getconfig("rss2blog_cache_time");
         if(!$cache_time)
-           $cache_time = 60 * 60 * 2;
+           $cache_time = 60 * 60 * 3;
         $rss->cache_time = $cache_time;
       
         $rssdata = $rss->get($currentLine);
@@ -112,6 +113,7 @@ for($i = 0; $i < count($srclist); $i++){
                $title = mysql_real_escape_string($article["title"]);
                $link = $article["link"];
                $article["description"] = html_entity_decode($article["description"], ENT_QUOTES, "UTF-8");
+               $article["description"] = preg_replace('~//<!\[CDATA\[\s*|\s*//\]\]>~', '', $article["description"]);
                $src_text = $rss2blog_src_link_format;
                $src_text = str_ireplace("%title%", $page_title, $src_text);
                
