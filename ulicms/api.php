@@ -22,12 +22,13 @@ function is_admin_dir(){
 
 function add_hook($name){
   $modules = getAllModules();
-     for($i=0; $i < count($modules); $i++){
-       $admin_menu_item = getModulePath($modules[$i]).
-       $modules[$i]."_".$name.".php";
-      if(file_exists($admin_menu_item))
-        @include $admin_menu_item;
+  for($i=0; $i < count($modules); $i++){
+      $file = getModulePath($modules[$i]).
+      $modules[$i]."_".$name.".php";
+      if(file_exists( $file)){
+        @include $file;
         return true;
+        }
       }
       
       return false;
