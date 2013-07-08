@@ -39,3 +39,4 @@ senseless_superbunt-0.0.1
 fortune-0.0.1
 strip_tags-0.0.1
 blog_comments_dashboard-0.0.1
+blog-6.1.0
