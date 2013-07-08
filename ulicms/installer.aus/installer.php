@@ -4196,6 +4196,8 @@ zyvox
 $badwords = str_replace("\r\n", "||", $badwords);
 $badwords = str_replace("\n", "||", $badwords);
 
+$badwords = mysql_real_escape_string($badwords);
+
 
 mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
 (1, 'homepage_title', '$homepage_title'),
