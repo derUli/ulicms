@@ -193,7 +193,7 @@ function apply_filter($text, $type){
        }
      
     }
-  }
+  
   
   return $text;
 }
@@ -400,13 +400,7 @@ function base_metas(){
 echo '<link rel="stylesheet" type="text/css" href="core.css"/>';
 echo "\r\n";
 
-$modules = getAllModules();
-for($i=0; $i < count($modules); $i++){
-   $module_head_file = getModulePath($modules[$i]).
-   $modules[$i]."_head.php";
-   if(file_exists($module_head_file))
-     @include $module_head_file;
-}
+add_hook("head");
 
 $zoom = getconfig("zoom");
 if($zoom === false){
