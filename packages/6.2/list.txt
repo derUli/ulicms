@@ -34,3 +34,4 @@ motd_frontend-0.0.1
 exec_php-0.0.1
 fortune-0.0.1
 strip_tags-0.0.1
+blog-6.1.0
