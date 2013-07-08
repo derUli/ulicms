@@ -27,11 +27,9 @@ function add_hook($name){
       $modules[$i]."_".$name.".php";
       if(file_exists( $file)){
         @include $file;
-        return true;
         }
       }
       
-      return false;
 }
 
 
