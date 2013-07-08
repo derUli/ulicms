@@ -9,8 +9,13 @@ if(isset($_GET["destroy"]) or $_GET["action"]=="destroy"){
 
 if(isset($_POST["login"])){
    $sessionData = validate_login($_POST["user"], $_POST["password"]);
-   if($sessionData)
+   if($sessionData){
+      add_hook("login_ok");
       register_session($sessionData, true);
+   }
+   else{
+      add_hook("login_failed");
+   }
 }
 
 ?>
