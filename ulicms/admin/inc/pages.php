@@ -77,7 +77,7 @@ $_SESSION["group"] >= 40){
 
 <table border=1>
 <tr style="font-weight:bold;">
-<td style="width:40px;">--></td>
+<td style="width:40px;"></td>
 <td><a href="?action=pages&order=systemname">Permalink</a></td>
 <td><a href="?action=pages&order=menu">Menü</a></td>
 <td><a href="?action=pages&order=position">Position</a></td>
@@ -146,7 +146,7 @@ if(mysql_num_rows($query) > 0){
 ?>
 <?php 
 echo '<tr>';
-echo "<td style=\"width:40px;\">--></td>";
+echo "<td style=\"width:40px;\">--&gt;</td>";
 echo "<td>".$row->systemname."</td>";
 
 switch($row->menu){
