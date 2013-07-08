@@ -38,3 +38,4 @@ compress_images-0.0.1beta
 senseless_superbunt-0.0.1
 fortune-0.0.1
 strip_tags-0.0.1
+limit_login_attempts-0.0.1beta
