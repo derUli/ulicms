@@ -6,5 +6,7 @@ if(!is_file(getModulePath("rss2blog")."etc/"."sources.txt")){
   "# Hier die URLs zu den RSS-Quellen eintragen.\r\n");
 }
 
+setconfig("rss2blog_bot_user_id", "1");
+
 db_query("ALTER TABLE `".tbname("blog")."` ADD `src_link`;")
 ?>
