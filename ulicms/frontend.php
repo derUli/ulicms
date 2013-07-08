@@ -62,13 +62,7 @@ $modules = getAllModules();
 $hasModul = containsModule(get_requested_pagename());
 
 
-for($i=0; $i < count($modules); $i++){
-  $before_html_file = getModulePath($modules[$i]).
-  $modules[$i]."_before_html.php";
-  if(file_exists($before_html_file))
-     include $before_html_file;
-
-}
+add_hook("before_html");
 
 
 if(file_exists($cached_page_path) and !getconfig("cache_disabled")
@@ -98,33 +92,16 @@ else if(file_exists($cached_page_path)){
 
 require_once getTemplateDirPath($theme)."oben.php";
 
-for($i=0; $i < count($modules); $i++){
-  $before_content_file = getModulePath($modules[$i]).
-  $modules[$i]."_before_content.php";
-  if(file_exists($before_content_file))
-     include $before_content_file;
 
-}
+add_hook("before_content");
 
 content();
 
-for($i=0; $i < count($modules); $i++){
-  $after_content_file = getModulePath($modules[$i]).
-  $modules[$i]."_after_content.php";
-  if(file_exists($after_content_file))
-     include $after_content_file;
-
-}
+add_hook("after_content");
 
 require_once getTemplateDirPath($theme)."/unten.php";
 
-for($i=0; $i < count($modules); $i++){
-  $after_html_file = getModulePath($modules[$i]).
-  $modules[$i]."_after_html.php";
-  if(file_exists($after_html_file))
-     include $after_html_file;
-
-}
+add_hook("after_html");
 
 
 if(!getconfig("cache_disabled") and !$hasModul and
@@ -134,12 +111,17 @@ if(!getconfig("cache_disabled") and !$hasModul and
    fwrite($handle, $generated_html);
    fclose($handle);
    echo($generated_html);
+   
+   add_hook("before_cron");
    @include 'cron.php';
    die();
+   add_hook("after_cron");
      
 } else {
+   add_hook("before_cron");
    @include 'cron.php';
    die();
+   add_hook("after_cron");
 }
 
 ?>

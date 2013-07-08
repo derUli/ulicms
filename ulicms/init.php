@@ -203,14 +203,7 @@ if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
 
 
 
-$modules = getAllModules();
-for($i=0; $i < count($modules); $i++){
-   $init_file = getModulePath($modules[$i]).
-   $modules[$i]."_init.php";
-   if(file_exists($init_file)){
-     @include $init_file;
-   }
-}
+add_hook("init.php");
 
 include_once "version.php";
 
