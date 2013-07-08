@@ -7,5 +7,3 @@ ulicms/content/log
 !ulicms/content/log/.htaccess
 ulicms/templates
 !ulicms/templates/default
-ulicms/modules
-!ulicms/modules/fortune
