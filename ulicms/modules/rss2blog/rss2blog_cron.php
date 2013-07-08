@@ -1,5 +1,8 @@
 <?php 
 
+if(is_admin_dir())
+   die();
+
 @include_once "lib/string_functions.php";
 
 $bot_user_id = getconfig("rss2blog_bot_user_id");
@@ -102,7 +105,6 @@ for($i = 0; $i < count($srclist); $i++){
         $rssdata = $rss->get($currentLine);
          if($rssdata){
          $page_title = $rssdata["title"];
-         echo $page_title;
             $items = $rssdata["items"];
             for($a=0; $a < count($items); $a++){
  
