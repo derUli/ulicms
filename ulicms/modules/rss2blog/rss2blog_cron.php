@@ -83,7 +83,7 @@ set_time_limit(0);
 $srclist = file_get_contents($srclist);
 $srclist = str_replace("\r\n", "\n", $srclist);
 $srclist = explode("\n", $srclist);
-for($i=0; $i < count($srclist); $i++){
+for($i=0; $i <= count($srclist); $i++){
 
   $currentLine = trim($srclist[$i]);
   if(!startsWith($currentLine, "#")){
