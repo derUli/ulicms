@@ -17,6 +17,7 @@ $(document).ready(function() {
 <script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>
 <script type="text/javascript" src="scripts/jquery.form.min.js"></script>
 <?php if(is_logged_in()){?>
+<script type="text/javascript" src="scripts/cookie.js"></script>
 <script type="text/javascript" src="scripts/notification.js"></script>
 <?php }?>
 <script type="text/javascript" src="scripts/audio.js"></script>
