@@ -107,6 +107,7 @@ for($i=0; $i < count($srclist); $i++){
             $items = $rssdata["items"];
 
             for($a=0; $a < count($items); $a++){
+            echo $a."<br/>";
                
                $article = $items[$a];
                $title = mysql_real_escape_string($article["title"]);
