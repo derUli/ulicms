@@ -89,8 +89,7 @@ if(!class_exists("lastRSS")){
 $srclist = file_get_contents($srclist);
 $srclist = str_replace("\r\n", "\n", $srclist);
 $srclist = explode("\n", $srclist);
-for($i=0; $i < count($srclist); $i++){
-
+for($i = 0; $i < count($srclist); $i++){
   $currentLine = trim($srclist[$i]);
   if(!startsWith($currentLine, "#") and !empty($currentLine)){
         $rss = new lastRSS();
@@ -103,12 +102,10 @@ for($i=0; $i < count($srclist); $i++){
         $rssdata = $rss->get($currentLine);
          if($rssdata){
          $page_title = $rssdata["title"];
-         
+         echo $page_title;
             $items = $rssdata["items"];
-
             for($a=0; $a < count($items); $a++){
-            echo $a."<br/>";
-               
+ 
                $article = $items[$a];
                $title = mysql_real_escape_string($article["title"]);
                $link = $article["link"];
@@ -121,7 +118,7 @@ for($i=0; $i < count($srclist); $i++){
                
                $link = mysql_real_escape_string($link);
                $pubDate = rsstotime($article["pubDate"]);
-               $query = db_query("SELECT * FROM ".tbname("blog"). " WHERE `src_link` = '".$link."'");
+               $query = db_query("SELECT * FROM ".tbname("blog"). " WHERE `src_link` = '".$link."' LIMIT 1");
                               
                $seo_shortname = cleanString($title)."-".uniqid();
  
