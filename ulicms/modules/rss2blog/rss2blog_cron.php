@@ -1,11 +1,17 @@
 <?php 
 
+@include_once "lib/string_functions.php";
 
 $bot_user_id = getconfig("rss2blog_bot_user_id");
 
-if(!$bot_user_id){
+if(!$bot_user_id)
    $bot_user_id = 1;
-}
+
+$rss2blog_src_link_format = getconfig("rss2blog_src_link_format");
+
+if(!$rss2blog_src_link_format)
+  $rss2blog_src_link_format = "Quelle: %title%";
+
 
 if(!function_exists("rsstotime")){
 
@@ -94,18 +100,28 @@ for($i=0; $i <= count($srclist); $i++){
            $cache_time = 60 * 60 * 2;
         
         $rss->cache_time = $cache_time;
+               
         
         $rssdata = $rss->get($currentLine);
          if($rssdata){
+            $page_title = $rssdata["title"];
+         
             $items = $rssdata["items"];
             for($i=0; $i < count($items); $i++){
                $article = $items[$i];
                $title = mysql_real_escape_string($article["title"]);
-               $link = mysql_real_escape_string($article["link"]);
+               $link = $article["link"];
                $article["description"] = html_entity_decode($article["description"], ENT_QUOTES, "UTF-8");
+               $src_text = $rss2blog_src_link_format;
+               $src_text = str_ireplace("%title%", $page_title, $src_text);
+               
+               $article["description"] .= "<p class=\"src_link_p\"><a href=\"".real_htmlspecialchars($link)."\" class=\"src_link\">$src_text</a></p>";
                $description = mysql_real_escape_string($article["description"]);
                $pubDate = rsstotime($article["pubDate"]);
                $query = db_query("SELECT * FROM ".tbname("blog"). " WHERE `src_link` = '".$link)."'";
+               
+               
+               $link = mysql_real_escape_string($link);
                
                $seo_shortname = cleanString($title)."-".uniqid();
  
