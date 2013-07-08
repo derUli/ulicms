@@ -129,6 +129,16 @@ if(defined("_SECURITY")){
      <li><a href="license.html" target="_blank">Lizenz</a></li>
      <li><a href="http://www.ulicms.de/?seite=kontakt" target="_blank">Feedback</a></li>
     </ul>
+    <?php
+    $modules = getAllModules();
+       for($i=0; $i < count($modules); $i++){
+       $admin_menu_item = getModulePath($modules[$i]).
+       $modules[$i]."_admin_menu_item.php";
+      if(file_exists($admin_menu_item))
+        @include $admin_menu_item;
+}
+
+?>
     <li><a href="?action=destroy">Logout</a></li>
 </ul>
 <script type="text/javascript">
