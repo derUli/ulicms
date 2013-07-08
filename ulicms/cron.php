@@ -11,7 +11,7 @@ db_query("DELETE FROM ".tbname("content")." WHERE ".time()." -  `deleted_at` > $
 
 
 // Cronjobs der Module
-add_hook($cron);
+add_hook("cron");
 
 
 ?>
