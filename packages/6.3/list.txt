@@ -43,3 +43,4 @@ blog-6.1.0
 fullcalendar_dashboard-0.0.1
 limit_login_attempts-0.0.1
 limit_login_attempts_dashboard-0.0.1
+rss2blog-0.0.1
