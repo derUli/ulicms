@@ -17,3 +17,7 @@ fokus/
 backup/
 content/log
 !content/log/.htaccess
+template/*
+!templates/default
+modules/*
+!modules/fortune
