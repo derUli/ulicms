@@ -82,33 +82,33 @@ if(!class_exists("lastRSS")){
    @include_once getModulePath("rss2blog")."lib/lastRSS.php";
 }
   
-ini_set('max_execution_time', 0);
-set_time_limit(0);
+@ini_set('max_execution_time', 0);
+@set_time_limit(0);
 // ignore_user_abort(true);
   
 $srclist = file_get_contents($srclist);
 $srclist = str_replace("\r\n", "\n", $srclist);
 $srclist = explode("\n", $srclist);
-for($i=0; $i <= count($srclist); $i++){
+for($i=0; $i < count($srclist); $i++){
 
   $currentLine = trim($srclist[$i]);
-  if(!startsWith($currentLine, "#")){
+  if(!startsWith($currentLine, "#") and !empty($currentLine)){
         $rss = new lastRSS();
         $rss->cache_dir = 'content/cache';        
         $cache_time = getconfig("rss2blog_cache_time");
         if(!$cache_time)
            $cache_time = 60 * 60 * 2;
-        
         $rss->cache_time = $cache_time;
-               
-        
+      
         $rssdata = $rss->get($currentLine);
          if($rssdata){
-            $page_title = $rssdata["title"];
+         $page_title = $rssdata["title"];
          
             $items = $rssdata["items"];
-            for($i=0; $i < count($items); $i++){
-               $article = $items[$i];
+
+            for($a=0; $a < count($items); $a++){
+               
+               $article = $items[$a];
                $title = mysql_real_escape_string($article["title"]);
                $link = $article["link"];
                $article["description"] = html_entity_decode($article["description"], ENT_QUOTES, "UTF-8");
@@ -121,10 +121,7 @@ for($i=0; $i <= count($srclist); $i++){
                $link = mysql_real_escape_string($link);
                $pubDate = rsstotime($article["pubDate"]);
                $query = db_query("SELECT * FROM ".tbname("blog"). " WHERE `src_link` = '".$link."'");
-               
-               
-               $link = mysql_real_escape_string($link);
-               
+                              
                $seo_shortname = cleanString($title)."-".uniqid();
  
                if(mysql_num_rows($query) === 0) {
@@ -137,12 +134,12 @@ for($i=0; $i <= count($srclist); $i++){
                 '$seo_shortname', 1, 'de', 1,
                 $bot_user_id, '$description', '$description', '$link')";
   
-                 db_query($insert_query)or die(mysql_error());
+                 db_query($insert_query);
   
                                
                }
                 
-                                              
+                               
                
             }
       }
