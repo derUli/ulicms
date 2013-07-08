@@ -32,7 +32,9 @@ if(isset($_POST["register_user"])){
 }
 
 ?>
+<?php add_hook("before_register_form_title");?>
 <h1>Registrierung</h1>
+<?php add_hook("before_register_form");?>
 <form action="index.php?register=register" method="post">
 <input type="hidden" name="register_user" value="add_admin">
 <?php if(!empty($_REQUEST["go"])){?>
@@ -54,8 +56,10 @@ echo htmlspecialchars($_REQUEST["go"])?>'>
 
 <strong>Passwort wiederholen:</strong><br/>
 <input type="password" style="width:300px;" name="admin_password_repeat" value=""><br/><br/>
-
+<?php add_hook("register_form_field");?>
 <br/>
 
 <input type="submit" value="Registrieren">
 </form>
+
+<?php add_hook("after_register_form");?>
