@@ -198,6 +198,8 @@ function apply_filter($text, $type){
   return $text;
 }
 
+}
+
 
 function motto(){
   print_env("motto");
