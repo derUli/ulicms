@@ -1,4 +1,5 @@
 <?php 
+flush();
 
 $empty_trash_days = getconfig("empty_trash_days");
 
