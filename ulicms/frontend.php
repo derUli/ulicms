@@ -98,7 +98,7 @@ add_hook("before_content");
 content();
 add_hook("after_content");
 
-require_once getTemplateDirPath($theme)."/unten.php";
+require_once getTemplateDirPath($theme)."unten.php";
 
 add_hook("after_html");
 
