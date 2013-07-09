@@ -1,5 +1,5 @@
 <?php 
-function blog_generate_systemname_render(){
+function blog_auto_generate_seo_shortname_render(){
   $mainFile = getModuleMainFilePath("blog");
   if(file_exists($mainFile)){
      include $mainFile;
