@@ -169,8 +169,6 @@ function blog_add_form(){
     
     $html_output .="<script type=\"text/javascript\">
     
-    if(typeof jQuery != \"undefined\"){
-    
     
 var editor1 = CKEDITOR.replace( 'content_full',
 					{
@@ -181,7 +179,9 @@ var editor1 = CKEDITOR.replace( 'content_full',
 var editor2 = CKEDITOR.replace( 'content_preview',
 					{
 						skin : 'kama'
-					});               
+					});  
+					
+    if(typeof jQuery != \"undefined\"){            
 editor1.on(\"instanceReady\", function()
 {
 	this.document.on(\"keyup\", CKCHANGED);
