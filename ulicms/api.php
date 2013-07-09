@@ -25,7 +25,7 @@ function add_hook($name){
   for($hook_i=0; $hook_i < count($modules); $hook_i++){
       $file = getModulePath($modules[$hook_i]).
       $modules[$hook_i]."_".$name.".php";
-      if(file_exists( $file)){
+      if(file_exists($file)){
         @include $file;
         }
       }
