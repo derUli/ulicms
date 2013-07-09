@@ -1,0 +1,2 @@
+Zeigt die Anzahl der Blogeinträge, die Anzahl der Blogkommentare und die fünf 
+beliebtesten Blogeinträge an.
