@@ -3,7 +3,6 @@ require_once "init.php";
 global $connection;
 require_once "templating.php";
 
-
 // initialize session
 session_start();
 $_COOKIE[session_name()] = session_id();
