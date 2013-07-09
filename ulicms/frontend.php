@@ -113,14 +113,14 @@ if(!getconfig("cache_disabled") and !$hasModul and
    
    add_hook("before_cron");
    @include 'cron.php';
-   die();
    add_hook("after_cron");
+   die();
      
 } else {
    add_hook("before_cron");
    @include 'cron.php';
-   die();
    add_hook("after_cron");
+   die();
 }
 
 ?>
