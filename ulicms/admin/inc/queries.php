@@ -22,7 +22,7 @@ if($_GET["action"]=="save_settings" && isset($_POST["save_settings"])){
   setconfig("timezone", mysql_real_escape_string($_POST["timezone"]));
   setconfig("robots", mysql_real_escape_string($_POST["robots"]));
   
-  if(!isset($_POST["disable_html_validation"]))
+  if($_POST["disable_html_validation"] == "enabled")
      deleteconfig("disable_html_validation");
   else
      setconfig("disable_html_validation", "disable");

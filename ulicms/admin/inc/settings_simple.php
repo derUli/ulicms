@@ -108,11 +108,16 @@ echo " checked";
 <td><input type="text" name="meta_description" value="<?php echo $settings["meta_description"];?>" style="width:400px">
 </tr>
 <tr>
+<td></td>
+<td><strong>Technisches:</strong></td>
+</strong>
+</tr>
+<tr>
 <td><strong>W3C Validierungsfehler automatisch korrigieren</strong></td>
 <td><input type="checkbox" name="disable_html_validation" <?php 
 if(!isset($settings["disable_html_validation"])) 
 echo " checked";
-?>>
+?> value="enabled">
 </tr>
 <tr>
 <td></td>
