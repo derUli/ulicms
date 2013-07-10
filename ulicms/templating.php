@@ -419,7 +419,7 @@ function base_metas(){
 	
 	        $description = apply_filter($description, "meta_description");
 	        
-                $$description = htmlentities($$description, ENT_QUOTES, "UTF-8");
+                $description = htmlentities($description, ENT_QUOTES, "UTF-8");
 		if(!getconfig("hide_meta_description")){
 			echo '<meta name="description" content="'.$description.'"/>';
 			echo "\r\n";
