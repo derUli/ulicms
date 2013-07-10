@@ -1,4 +1,4 @@
-<?php {
+v<?php {
 if(defined("_SECURITY")){
   $pages_count = mysql_num_rows(db_query("SELECT * FROM ".tbname("content")));
 
@@ -53,8 +53,6 @@ $motd = nl2br($motd);
 <td><?php echo $pages_count?></td>
 </tr>
 <tr>
-</tr>
-<tr>
 <td>Registrierte Benutzer</td>
 <td><?php echo count(getUsers())?></td>
 </tr>
@@ -77,7 +75,6 @@ $motd = nl2br($motd);
 <?php }?>
 
 </table>
-</div>
 <h2 class="accordion-header">Jetzt online sind</h2>
 <div class="accordion-content">
 <ul id="users_online">
@@ -125,8 +122,9 @@ $autorName = $admins[$row->autor];
 
 echo $autorName;
 ?></td>
-<?php }?>
+
 </tr>
+<?php }?>
 </table>
 </div>
 <?php add_hook("accordion_layout"); ?>
