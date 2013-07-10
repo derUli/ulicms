@@ -203,7 +203,7 @@ function apply_filter($text, $type){
 
 
 function motto(){
-  print_env("motto");
+  echo getconfig("motto");
 }
 
 
