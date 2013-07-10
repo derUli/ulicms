@@ -18,10 +18,12 @@ function cleanString($string, $separator = '-'){
 
 }
 
-
+  if(!function_exists("real_htmlspecialchars")){
 function real_htmlspecialchars($string)
 {
     return htmlspecialchars($string, ENT_QUOTES, "UTF-8");
+}
+
 }
 
 /**

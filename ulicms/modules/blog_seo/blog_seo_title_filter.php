@@ -12,7 +12,6 @@ function blog_seo_title_filter($txt){
       $title = $result["title"];
    }
  
-     
 
    if(!containsModule(get_requested_pagename(), "blog") or !$single or !$title)
       return $txt;

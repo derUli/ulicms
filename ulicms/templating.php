@@ -116,7 +116,7 @@ function get_title($ipage=null){
 	$ipage = mysql_real_escape_string($_GET["seite"]);
 	$query=db_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
 	if($ipage==""){
-		$query=db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
+		$query = db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
 	}
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
@@ -185,8 +185,7 @@ function apply_filter($text, $type){
     $module_content_filter_file = getModulePath($modules[$i]).
     $modules[$i]."_".$type."_filter.php";
     if(file_exists($module_content_filter_file)){
-       @include $module_content_filter_file;
-     
+       include $module_content_filter_file;
        if(function_exists($modules[$i]."_".$type."_filter")){
             $text = call_user_func($modules[$i]."_".$type."_filter", 
                                       $text);
@@ -195,8 +194,10 @@ function apply_filter($text, $type){
     }
   
   
+  }
+  
   return $text;
-}
+
 
 }
 
@@ -326,15 +327,9 @@ function base_metas(){
         $title_format = getconfig("title_format");
         if($title_format){
            $title = $title_format;
-
            $title = str_ireplace("%homepage_title%", 
            getconfig("homepage_title"), $title);
-           
-           $real_title = get_title();
-           $real_title = apply_filter($real_title, "title");
-
-           $title = str_ireplace("%title%", $real_title
-          , $title);
+           $title = str_ireplace("%title%",   get_title(), $title);
            
            $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8");
            
