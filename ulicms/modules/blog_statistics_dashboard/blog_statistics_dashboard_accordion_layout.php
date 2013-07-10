@@ -15,18 +15,17 @@ $query = mysql_query("SELECT * FROM ".tbname("blog"). " ORDER by `views` DESC LI
 
 
 ?>
-</div>
 
 <h2 class="accordion-header">Blog Statistiken</h2>
 <div class="accordion-content">
 <table style="400px;">
 <tr>
-<td><strong>Anzahl der Blogposts:</td>
+<td style="width:200px;"><strong>Anzahl der Blogposts:</td>
 <td style="text-align:right;"><?php echo intval($blog_post_count);?>
 </tr>
 <tr>
 <td><strong>Anzahl der Kommentare:</td>
-<td style="text-align:right;"><?php echo intval($comment_count);?>
+<td style="text-align:right;"><?php echo intval($comment_count);?></td>
 </tr>
 </table>
 </div>
@@ -37,8 +36,8 @@ echo "<p>Es sind noch keine Blogartikel vorhanden.</p>";
 } else ?>
 <table>
 <tr>
-<td><strong>Titel</strong>
-<td>Views</strong>
+<td><strong>Titel</strong></td>
+<td><strong>Views</strong></td>
 </tr>
 <?php 
 while($row = mysql_fetch_object($query)){
@@ -46,9 +45,11 @@ while($row = mysql_fetch_object($query)){
 <tr>
 <td><?php echo htmlspecialchars($row->title, ENT_QUOTES, "UTF-8");?></td>
 <td style="text-align:right; padding-left:10px;"><?php echo $row->views;?></td>
+</tr>
 <?php
 }
 ?>
+
 </table>
 
 </div>

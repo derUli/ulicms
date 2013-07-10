@@ -73,8 +73,8 @@ $motd = nl2br($motd);
 <td><?php echo mysql_num_rows($test)?></td>
 </tr>
 <?php }?>
-
 </table>
+</div>
 <h2 class="accordion-header">Jetzt online sind</h2>
 <div class="accordion-content">
 <ul id="users_online">
