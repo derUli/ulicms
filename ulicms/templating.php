@@ -186,10 +186,7 @@ function correctHTMLValidationErrors($txt){
     }
     
     // Ersetze & durch &amp;
-    $txt = html_entity_decode($txt, ENT_QUOTES, "UTF-8");
-    $txt = str_replace("&gt;", ">", $txt);
-    $txt = str_replace("&lt;", "<", $txt);
-    $txt = str_replace("&", "&amp;", $txt);
+    $txt = preg_replace('/[&](?![A-Za-z]+[;])/', "&amp;", $txt);
     
     // replaced deprecated HTML-Tags
     $txt = str_ireplace("<center>", "<div style=\"text-align:center\">", $txt);
