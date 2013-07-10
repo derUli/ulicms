@@ -195,6 +195,12 @@ function correctHTMLValidationErrors($txt){
     $txt = str_ireplace("</strike>", "</del>", $txt);
     $txt = str_ireplace("<s>", "<del>", $txt);
     $txt = str_ireplace("</s>", "</del>", $txt);
+    $txt = str_ireplace("<tt>", "<code>", $txt);
+    $txt = str_ireplace("</tt>", "</code>", $txt);
+    $txt = str_ireplace("<dir>", "<ul>", $txt);
+    $txt = str_ireplace("</dir>", "</ul>", $txt);
+    $txt = str_ireplace("<acronym>", "<abbr>", $txt);
+    $txt = str_ireplace("</acronym>", "</abbr>", $txt);
     
     return $txt;
 }
@@ -205,7 +211,7 @@ function apply_filter($text, $type){
     $module_content_filter_file = getModulePath($modules[$i]).
     $modules[$i]."_".$type."_filter.php";
     if(file_exists($module_content_filter_file)){
-       include $module_content_filter_file;
+       include_once $module_content_filter_file;
        if(function_exists($modules[$i]."_".$type."_filter")){
             $text = call_user_func($modules[$i]."_".$type."_filter", 
                                       $text);
