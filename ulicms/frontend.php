@@ -28,6 +28,8 @@ if(getconfig("redirection")!=""&&getconfig("redirection")!=false){
 }
 
 
+@include_once "lib/string_functions.php";
+
 $theme = getconfig("theme");
 
 if(strtolower(getconfig("maintenance_mode"))=="on"||strtolower(getconfig("maintenance_mode"))=="true"||getconfig("maintenance_mode")=="1"){

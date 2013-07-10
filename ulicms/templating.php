@@ -116,7 +116,7 @@ function get_title($ipage=null){
 	$ipage = mysql_real_escape_string($_GET["seite"]);
 	$query=db_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
 	if($ipage==""){
-		$query=db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
+		$query=db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
 	}
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
@@ -170,7 +170,9 @@ function import($ipage){
 		$row->content = replaceShortcodesWithModules($row->content);
 		
 	        $row->content = apply_filter($row->content, "content");
-	        
+	        // & durch &amp; ersetzen, damit der W3C Validator nicht meckert.
+	        $row->content = preg_replace( "/&(?!amp;)/", "&amp;",  $row->content);
+
 		echo $row->content;
 		return true;
 }
