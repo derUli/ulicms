@@ -168,8 +168,8 @@ function import($ipage){
 
 	while($row=mysql_fetch_object($query)){
 		$row->content = replaceShortcodesWithModules($row->content);
-		
 	        $row->content = apply_filter($row->content, "content");
+                $row->content = correctHTMLValidationErrors($row->content);
 
 		echo $row->content;
 		return true;
@@ -177,6 +177,21 @@ function import($ipage){
 
 }
 
+}
+
+// Todo: nicht W3-konformen HTML-Code korrigieren
+function correctHTMLValidationErrors($txt){
+    if(getconfig("disable_html_validation")){
+       return $txt;
+    }
+    
+    // Ersetze & durch &amp;
+    $txt = html_entity_decode($txt, ENT_QUOTES, "UTF-8");
+    $txt = str_replace("&gt;", ">", $txt);
+    $txt = str_replace("&lt;", "<", $txt);
+    $txt = str_replace("&", "&amp;", $txt);
+    
+    return $txt;
 }
 
 function apply_filter($text, $type){
@@ -245,7 +260,7 @@ function menu($name){
 		".html' target='".$row->target."'>";
 	}
 	
-	echo $row->title;
+	echo htmlentities($row->title, ENT_QUOTES, "UTF-8");
 	echo "</a>\n";
 	
 	// Unterebene 1
@@ -264,7 +279,7 @@ function menu($name){
 					echo "<a class='menu_active_link' href='".$row2->systemname.".html' target='".
 					$row->target."'>";
 				}
-				echo $row2->title;
+	                        echo htmlentities($row2->title, ENT_QUOTES, "UTF-8");
 				echo '</a>';
 				
 				// Unterebene 2
@@ -280,7 +295,7 @@ function menu($name){
 					echo "<a class='menu_active_link' href='".$row3->systemname.".html' target='".
 					$row3->target."'>";
 				}
-				echo $row3->title;
+				echo htmlentities($row3->title, ENT_QUOTES, "UTF-8");
 				echo '</a>';
 				
 				// Unterebene 3
@@ -296,7 +311,7 @@ function menu($name){
 					echo "<a class='menu_active_link' href='".$row4->systemname.".html' target='".
 					$row4->target."'>";
 				}
-				echo $row4->title;
+				echo htmlentities($row4->title, ENT_QUOTES, "UTF-8");
 				echo '</a>';
 				echo "</li>\n";
 			}
