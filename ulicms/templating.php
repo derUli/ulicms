@@ -326,17 +326,19 @@ function base_metas(){
         $title_format = getconfig("title_format");
         if($title_format){
            $title = $title_format;
+
            $title = str_ireplace("%homepage_title%", 
            getconfig("homepage_title"), $title);
            
-           $title = str_ireplace("%title%", 
-           get_title(), $title);
+           $real_title = get_title();
+           $real_title = apply_filter($real_title, "title");
+
+           $title = str_ireplace("%title%", $real_title
+          , $title);
            
            $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8");
            
-           echo "<title>";
-           title();
-           echo "</title>\r\n";
+           echo "<title>".$title."</title>\r\n";
            
         }
 	
