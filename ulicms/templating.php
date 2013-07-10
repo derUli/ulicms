@@ -331,7 +331,7 @@ function base_metas(){
            getconfig("homepage_title"), $title);
            $title = str_ireplace("%title%",   get_title(), $title);
            
-           $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8");
+           $title = htmlentities($title, ENT_QUOTES, "UTF-8");
            
            echo "<title>".$title."</title>\r\n";
            
@@ -376,9 +376,12 @@ function base_metas(){
 	 $keywords = getconfig("meta_keywords");
 	}
 	if($keywords!=""&&$keywords!=false){
+	
 		
 		if(!getconfig("hide_meta_keywords")){
 	                $keywords = apply_filter($keywords, "meta_keywords");
+                        $keywords = htmlentities($keywords, ENT_QUOTES, "UTF-8");
+                        
 			echo '<meta name="keywords" content="'.$keywords.'"/>';
 			echo "\r\n";
 		}
@@ -388,7 +391,10 @@ function base_metas(){
     $description = getconfig("meta_description");
   }
 	if($description!="" && $description != false){
+	
 	        $description = apply_filter($description, "meta_description");
+	        
+                $$description = htmlentities($$description, ENT_QUOTES, "UTF-8");
 		if(!getconfig("hide_meta_description")){
 			echo '<meta name="description" content="'.$description.'"/>';
 			echo "\r\n";
