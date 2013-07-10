@@ -1,5 +1,6 @@
 <?php
 
+if(!function_exists("getExcerpt")){
 
   if(!function_exists("cleanString")){
 function cleanString($string, $separator = '-'){
@@ -16,6 +17,7 @@ function cleanString($string, $separator = '-'){
 	return $string;
 }
 
+
 }
 
   if(!function_exists("real_htmlspecialchars")){
@@ -25,6 +27,8 @@ function real_htmlspecialchars($string)
 }
 
 }
+
+
 
 /**
  * Get excerpt from string
@@ -89,6 +93,8 @@ function keywordsFromString($text) {
 
     // array zurückgeben
   return $return;
+}
+
 }
 
 ?>
