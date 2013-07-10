@@ -46,3 +46,4 @@ limit_login_attempts_dashboard-0.0.1
 code_highlighting-0.0.1beta
 blog_statistics_dashboard-0.0.1beta
 rss2blog-0.0.1
+blog_auto_generate_seo_shortname-0.0.1
