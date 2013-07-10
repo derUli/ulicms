@@ -21,6 +21,12 @@ if($_GET["action"]=="save_settings" && isset($_POST["save_settings"])){
   setconfig("logo_disabled", mysql_real_escape_string($_POST["logo_disabled"]));
   setconfig("timezone", mysql_real_escape_string($_POST["timezone"]));
   setconfig("robots", mysql_real_escape_string($_POST["robots"]));
+  
+  if(!isset($_POST["disable_html_validation"]))
+     deleteconfig("disable_html_validation");
+  else
+     setconfig("disable_html_validation", "disable");
+  
   header("Location: index.php?action=settings_simple");
   exit();
 }

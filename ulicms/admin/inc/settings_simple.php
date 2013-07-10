@@ -32,6 +32,13 @@ if($_SESSION["group"]>=50){
 <td><input type="text" name="homepage_motto" style="width:400px" value="<?php echo $settings["motto"];?>"></td>
 </tr>
 <tr>
+<td><strong>W3C Validierungsfehler automatisch korrigieren</strong></td>
+<td><input type="checkbox" name="disable_html_validation" <?php 
+if(!isset($settings["disable_html_validation"])) 
+echo " checked";
+?>>
+</tr>
+<tr>
 <td><strong data-tooltip="Der Name des Inhabers dieser Webpräsenz...">Inhaber der Homepage:</strong></td>
 <td><input type="text" name="homepage_owner" style="width:400px" value="<?php echo $settings["homepage_owner"];?>"></td>
 </tr>
