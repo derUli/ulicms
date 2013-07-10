@@ -73,6 +73,8 @@ function meta_keywords($ipage=null){
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
 		  if(!empty($row->meta_keywords)){
+		     // & durch &amp; ersetzen, damit der W3C Validator nicht meckert.
+	        $row->meta_keywords = preg_replace( "/&(?!amp;)/", "&amp;",  $row->meta_keywords);
 			 return $row->meta_keywords;
 			}
 		}
@@ -92,6 +94,8 @@ function meta_description($ipage=null){
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
 		  if(!empty($row->meta_description)){
+		  // & durch &amp; ersetzen, damit der W3C Validator nicht meckert.
+	        $row->meta_description = preg_replace( "/&(?!amp;)/", "&amp;",  $row->meta_description);
 			 return $row->meta_description;
 			}
 		}
@@ -116,11 +120,14 @@ function get_title($ipage=null){
 	$ipage = mysql_real_escape_string($_GET["seite"]);
 	$query=db_query("SELECT * FROM ".tbname("content")." WHERE systemname='$ipage'",$connection);
 	if($ipage==""){
-		$query=db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1",$connection);
+		$query=db_query("SELECT * FROM ".tbname("content")." ORDER BY id LIMIT 1");
 	}
 	if(mysql_num_rows($query)>0){
 		while($row=mysql_fetch_object($query)){
 		        $row->title =  apply_filter($row->title, "title");
+		        $row->title = real_htmlspecialchars($row->title);
+		        // & durch &amp; ersetzen, damit der W3C Validator nicht meckert.
+	        $row->title = preg_replace( "/&(?!amp;)/", "&amp;",  $row->title);
 			return $row->title;
 		}
 	}
@@ -170,7 +177,10 @@ function import($ipage){
 		$row->content = replaceShortcodesWithModules($row->content);
 		
 	        $row->content = apply_filter($row->content, "content");
-	        
+	       
+	        // & durch &amp; ersetzen, damit der W3C Validator nicht meckert.
+	        $row->content = preg_replace( "/&(?!amp;)/", "&amp;",  $row->content);
+
 		echo $row->content;
 		return true;
 }
