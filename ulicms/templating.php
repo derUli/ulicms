@@ -396,7 +396,6 @@ function base_metas(){
 		if(!getconfig("hide_meta_keywords")){
 	                $keywords = apply_filter($keywords, "meta_keywords");
                         $keywords = htmlentities($keywords, ENT_QUOTES, "UTF-8");
-                        
 			echo '<meta name="keywords" content="'.$keywords.'"/>';
 			echo "\r\n";
 		}
