@@ -170,8 +170,6 @@ function import($ipage){
 		$row->content = replaceShortcodesWithModules($row->content);
 		
 	        $row->content = apply_filter($row->content, "content");
-	        // & durch &amp; ersetzen, damit der W3C Validator nicht meckert.
-	        $row->content = preg_replace( "/&(?!amp;)/", "&amp;",  $row->content);
 
 		echo $row->content;
 		return true;
@@ -336,7 +334,9 @@ function base_metas(){
            
            $title = htmlspecialchars($title, ENT_QUOTES, "UTF-8");
            
-           echo "<title>".$title."</title>\r\n";
+           echo "<title>";
+           title();
+           echo "</title>\r\n";
            
         }
 	
