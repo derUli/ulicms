@@ -191,6 +191,14 @@ function correctHTMLValidationErrors($txt){
     $txt = str_replace("&lt;", "<", $txt);
     $txt = str_replace("&", "&amp;", $txt);
     
+    // replaced deprecated HTML-Tags
+    $txt = str_ireplace("<center>", "<div style=\"text-align:center\">", $txt);
+    $txt = str_ireplace("</center>", "</div>", $txt);
+    $txt = str_ireplace("<strike>", "<del>", $txt);
+    $txt = str_ireplace("</strike>", "</del>", $txt);
+    $txt = str_ireplace("<s>", "<del>", $txt);
+    $txt = str_ireplace("</s>", "</del>", $txt);
+    
     return $txt;
 }
 
