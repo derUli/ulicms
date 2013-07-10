@@ -90,7 +90,7 @@ $motd = nl2br($motd);
 </tr>
 <?php while($row = mysql_fetch_object($topPages) ){?>
 <tr>
-<td><a href="../<?php echo $row->systemname;?>.html" target="_blank"><?php echo $row->title;?></a></td>
+<td><a href="../<?php echo $row->systemname;?>.html" target="_blank"><?php echo htmlspecialchars($row->title, ENT_QUOTES, "UTF-8");?></a></td>
 <td align="right"><?php echo $row->views;?></td>
 <?php }?>
 </tr>
@@ -109,7 +109,7 @@ $motd = nl2br($motd);
 
 <?php while($row = mysql_fetch_object($lastModfiedPages) ){?>
 <tr>
-<td><a href="../<?php echo $row->systemname;?>.html" target="_blank"><?php echo $row->title;?></a></td>
+<td><a href="../<?php echo $row->systemname;?>.html" target="_blank"><?php echo htmlspecialchars($row->title, ENT_QUOTES, "UTF-8");?></a></td>
 
 <td><?php echo date(env("date_format"), $row->lastmodified)?></td>
 <td>

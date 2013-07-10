@@ -43,8 +43,8 @@ echo "<p>Es sind noch keine Blogartikel vorhanden.</p>";
 while($row = mysql_fetch_object($query)){
 ?>
 <tr>
-<td><?php echo htmlspecialchars($row->title, ENT_QUOTES, "UTF-8");?></td>
-<td style="text-align:right; padding-left:10px;"><?php echo $row->views;?></td>
+<td style="padding-right:50px;"><?php echo htmlspecialchars($row->title, ENT_QUOTES, "UTF-8");?></td>
+<td style="text-align:right;"><?php echo $row->views;?></td>
 </tr>
 <?php
 }
