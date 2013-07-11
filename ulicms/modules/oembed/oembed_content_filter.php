@@ -5,12 +5,12 @@ function oembed_content_filter($content){
    
    $args = array();   
    
-   $oembed_width = getconfig($oembed_width);
+   $oembed_width = getconfig("oembed_width");
    if($oembed_width )
       $args["width"] = $oembed_width;
       
    
-   $oembed_height = getconfig($oembed_height);
+   $oembed_height = getconfig("oembed_height");
    if($oembed_height )
       $args["height"] = $oembed_height;
    
