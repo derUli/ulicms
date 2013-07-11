@@ -15,10 +15,11 @@ function oembed_content_filter($content){
       $args["height"] = $oembed_height;
    
    preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $content, $links);
+   
+   var_dump($links);
    for($t=0; $t < count($links); $t++){
-        $html = $oembed->getHTML($links[$t][0], $args);
-
-        $content = str_replace($links[$t][0], $html, $content);
+        $html = $oembed->getHTML($links[0][$t], $args);
+        $content = str_ireplace($links[0][$t], $html, $content);
    }
    
    return $content;
