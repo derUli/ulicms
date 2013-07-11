@@ -500,16 +500,17 @@ function autor(){
 }
 
 function content(){
-	$status=check_status();
+        $theme = getconfig("theme");
+	$status = check_status();
 	if($status == "404 Not Found"){
-                if(file_exists("templates/404.php"))
-                   include "templates/404.php";
+                if(file_exists(getTemplateDirPath($theme)."404.php"))
+                   include getTemplateDirPath($theme)."404.php";
                 else
                    echo "Die von Ihnen gew&uuml;nschte Seite existiert nicht.";
 		return false;
 	}else if($status == "403 Forbidden"){
-	        if(file_exists("templates/403.php"))
-	           include "templates/403.php";
+	        if(file_exists(getTemplateDirPath($theme)."403.php"))
+	           include getTemplateDirPath($theme)."403.php";
           else
               echo "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.";
 		return false;
