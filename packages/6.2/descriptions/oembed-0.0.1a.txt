@@ -1,0 +1,3 @@
+Inhalte über oEmbed einbinden
+Einfach eine YouTube, Flickr, Vimeo oder viddler URL in die Seite einfügen und
+diese wird automatisch durch den entsprechenden Embed-Code ersetzt
