@@ -5,7 +5,8 @@ function oembed_content_filter($content){
    preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $content, $links);
    for($t=0; $t < count($links); $t++){
         $html = $oembed->getHTML($links[$t][0], array('width' => 300));
-        $content = str_replace($links[$i][0], $html, $content);
+
+        $content = str_replace($links[$t][0], $html, $content);
    }
    
    return $content;
