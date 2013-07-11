@@ -48,3 +48,4 @@ blog_statistics_dashboard-0.0.1beta
 rss2blog-0.0.1
 blog_auto_generate_seo_shortname-0.0.1
 blog2twitter-0.0.1a
+oembed-0.0.1a

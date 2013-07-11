@@ -11,12 +11,12 @@ function oembed_content_filter($content){
       
    
    $oembed_height = getconfig("oembed_height");
-   if($oembed_height )
+   if($oembed_height)
       $args["height"] = $oembed_height;
       
    $oembed_maxwidth = getconfig("oembed_maxwidth");
    
-   if($oembed_maxwidth )
+   if($oembed_maxwidth)
       $args["maxwidth"] = $oembed_maxwidth;
       
    
@@ -28,7 +28,7 @@ function oembed_content_filter($content){
    
    for($t=0; $t < count($links); $t++){
         $html = $oembed->getHTML($links[0][$t], $args);
-        $content = str_ireplace($links[0][$t], $html, $content);
+        $content = str_replace($links[0][$t], $html, $content);
    }
    
    return $content;
