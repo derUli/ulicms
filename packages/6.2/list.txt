@@ -38,3 +38,4 @@ blog-6.1.0
 rss2blog-0.0.1
 blog_disable_comments_permanently-0.0.1
 blog_auto_generate_seo_shortname-0.0.1
+blog2twitter-0.0.1a
