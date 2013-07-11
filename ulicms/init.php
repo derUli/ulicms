@@ -202,8 +202,9 @@ if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
 }
 
 
-
+add_hook("before_init");
 add_hook("init");
+add_hook("after_init");
 
 include_once "version.php";
 
