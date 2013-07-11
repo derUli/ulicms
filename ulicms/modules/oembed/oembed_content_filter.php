@@ -13,8 +13,18 @@ function oembed_content_filter($content){
    $oembed_height = getconfig("oembed_height");
    if($oembed_height )
       $args["height"] = $oembed_height;
+      
+   $oembed_maxwidth = getconfig("oembed_maxwidth");
    
-   preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', $content, $links);
+   if($oembed_maxwidth )
+      $args["maxwidth"] = $oembed_maxwidth;
+      
+   
+   $oembed_maxheight = getconfig("oembed_maxheight");
+   if($oembed_maxheight )
+      $args["maxheight"] = $oembed_maxheight;
+   
+   preg_match_all('#\bhttps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))#', strip_tags($content), $links);
    
    var_dump($links);
    for($t=0; $t < count($links); $t++){
