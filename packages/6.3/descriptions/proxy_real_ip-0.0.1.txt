@@ -1,0 +1,3 @@
+Dieses Plugin sorgt dafür, dass wenn ein Besucher sich hinter 
+einem transparenten Proxy befindet, die IP des Proxys in $_SERVER["REMOTE_ADDR"]
+durch die echte IP des Besuchers ersetzt wird.
