@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 /*
 Plugin Name: Proxy Real IP
 Plugin URI: http://wordpress.org/extend/plugins/proxy-real-ip/
@@ -60,3 +61,9 @@ if (!isset($_SERVER['HTTPS'])) {
 if ( ! empty( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) {
     $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
 }
+=======
+if(isset($_SERVER['HTTP_X_FORWARDED_FOR'])){
+   $_SERVER["REMOTE_ADDR"] = $_SERVER['HTTP_X_FORWARDED_FOR'];
+   unset($_SERVER['HTTP_X_FORWARDED_FOR']);
+} 
+>>>>>>> efb38284e077dafd648fd0602bc306dff3757e31
