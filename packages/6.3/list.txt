@@ -50,3 +50,4 @@ blog_auto_generate_seo_shortname-0.0.1
 blog2twitter-0.0.1a
 oembed-0.0.1a
 block_yasni-0.0.1
+proxy_real_ip-0.0.1
