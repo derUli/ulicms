@@ -45,7 +45,7 @@ if(!empty($_POST["title"]) and isset($_POST["seo_shortname"])){
      $accessToken = getconfig("blog2twitter_access_token");
      $accessTokenSecret = getconfig("blog2twitter_access_token_secret");
      
-     $post = $link;
+     $post = $title." ".$link;
      if($consumerKey !== false && $consumerSecret !== false && 
        $accessToken !== false &&  $accessTokenSecret !== false){
        
