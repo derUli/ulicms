@@ -46,14 +46,12 @@ if(!empty($_POST["title"]) and isset($_POST["seo_shortname"])){
      $accessTokenSecret = getconfig("blog2twitter_access_token_secret");
      
      $post = $link;
-          
      if($consumerKey !== false && $consumerSecret !== false && 
        $accessToken !== false &&  $accessTokenSecret !== false){
        $twitter = new Twitter($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
        $status = $twitter->send($post);
       
        setconfig("blog2twitter_status", $status ? 'Funktioniert!' : '<strong>Fehler beim übertragen!</strong>\nEventuell Zugangsdaten inkorrekt?');
-
       } else {
         setconfig("blog2twitter_status", "<strong>Fehlende Zugangsdaten.</strong>\nMehr Informationen siehe liesmich.txt im Modulordner.");
       }

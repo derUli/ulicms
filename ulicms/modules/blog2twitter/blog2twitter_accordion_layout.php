@@ -1,7 +1,7 @@
 <?php 
 $status = getconfig("blog2twitter_status");
 
-if($status !== false) {
+if($status !== false and is_admin()) {
 ?>
 
 <h2 class="accordion-header">blog2twitter Status</h2>
