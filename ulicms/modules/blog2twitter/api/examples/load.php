@@ -1,6 +1,6 @@
 <?php
 
-require_once '../twitter.class.php';
+require_once '../src/twitter.class.php';
 
 // enables caching (path must exists and must be writable!)
 // Twitter::$cacheDir = dirname(__FILE__) . '/temp';
@@ -9,7 +9,7 @@ require_once '../twitter.class.php';
 // ENTER HERE YOUR CREDENTIALS (see readme.txt)
 $twitter = new Twitter($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
 
-$channel = $twitter->load(Twitter::ME_AND_FRIENDS);
+$statuses = $twitter->load(Twitter::ME_AND_FRIENDS);
 
 ?>
 <!doctype html>
@@ -17,10 +17,10 @@ $channel = $twitter->load(Twitter::ME_AND_FRIENDS);
 <title>Twitter timeline demo</title>
 
 <ul>
-<?php foreach ($channel->status as $status): ?>
+<?php foreach ($statuses as $status): ?>
 	<li><a href="http://twitter.com/<?php echo $status->user->screen_name ?>"><img src="<?php echo htmlspecialchars($status->user->profile_image_url) ?>">
 		<?php echo htmlspecialchars($status->user->name) ?></a>:
-		<?php echo Twitter::clickable($status->text) ?>
+		<?php echo Twitter::clickable($status) ?>
 		<small>at <?php echo date("j.n.Y H:i", strtotime($status->created_at)) ?></small>
 	</li>
 <?php endforeach ?>
