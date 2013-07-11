@@ -229,7 +229,7 @@ function apply_filter($text, $type){
 
 
 function motto(){
-  echo getconfig("motto");
+  echo htmlspecialchars(getconfig("motto"), ENT_QUOTES, "UTF-8");
 }
 
 
