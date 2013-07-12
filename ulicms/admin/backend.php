@@ -13,6 +13,8 @@ require_once "inc/queries.php";
 define("_SECURITY", true);
 
 
+
+
 if(isset($_SESSION["ulicms_login"]))
     {
      $eingeloggt = $_SESSION["ulicms_login"];
@@ -23,10 +25,12 @@ if(isset($_SESSION["ulicms_login"]))
 
 header("Content-Type: text/html; charset=UTF-8");
 
+
 if(isset($_REQUEST["ajax_cmd"])){
      include_once "inc/ajax_handler.php";
      exit();
-     }
+}
+
 
 
 require_once "inc/header.php";
