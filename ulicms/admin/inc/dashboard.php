@@ -1,5 +1,5 @@
 <?php
-     if(defined("_SECURITY")){
+     if(defined("_SECURITY") and logged_in()){
          $pages_count = mysql_num_rows(db_query("SELECT * FROM " . tbname("content")));
         
          $topPages = db_query("SELECT * FROM " . tbname("content") . " WHERE notinfeed = 0 AND systemname <> \"kontakt\" ORDER BY views DESC LIMIT 5");
@@ -169,6 +169,5 @@ update_users_online();
 
 <?php
          }
-    
-     }
+
 ?>
