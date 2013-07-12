@@ -148,25 +148,6 @@
 </div>
 </div>
 
-<script type="text/javascript">
-function update_users_online(){
-    $.ajax({
-        type: "POST",
-        url: "index.php?ajax_cmd=users_online_dashboard",
-        async: true,
-        success : function(e){
-          if($('#users_online').html() != e){
-              $('#users_online').html(e);
-              setTimeout("update_users_online();", 10 * 1000);
-          }
-        }
-    });
-    
-}
-
-update_users_online();
-</script>
-
 <?php
      }
 
