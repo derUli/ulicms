@@ -26,6 +26,7 @@ function link_checker_admin(){
 <a href="index.php?action=module_settings&module=link_checker&show=404">Nicht gefunden</a> | 
 <a href="index.php?action=module_settings&module=link_checker&show=redirection">Umleitungen</a></p>
 <?php
+   flush();
    $query = mysql_query("SELECT content FROM ".tbname("content"));
    $hasLinks = false;
    while($row = mysql_fetch_object($query)){
@@ -58,7 +59,10 @@ function link_checker_admin(){
               }
               
       
+        flush();
     }
+    
+
     
     }
     
@@ -67,7 +71,7 @@ function link_checker_admin(){
 }
 
     if(!$hasLinks){
-       echo "<p>Keine Links vorhanden</p>";
+       echo "<p>Keine Links vorhanden.</p>";
     }
 
 }
