@@ -77,7 +77,7 @@ function checkForNewUsersOnline(){
                   old_onlineList = new_onlineList;
               
               }
-              setTimeout("checkForNewUsersOnline();", 30 * 1000);
+              setTimeout("checkForNewUsersOnline();", 20 * 1000);
          
         }
     });
