@@ -125,7 +125,7 @@ abstract class Twitter_OAuthSignatureMethod
  * where the Signature Base String is the text and the key is the concatenated values (each first
  * encoded per Parameter Encoding) of the Consumer Secret and Token Secret, separated by an '&'
  * character (ASCII code 38) even if empty.
- *             - Chapter 9.2 ("HMAC-SHA1")
+ *              - Chapter 9.2 ("HMAC-SHA1")
  */
 class Twitter_OAuthSignatureMethod_HMAC_SHA1 extends Twitter_OAuthSignatureMethod
 {
@@ -152,7 +152,7 @@ class Twitter_OAuthSignatureMethod_HMAC_SHA1 extends Twitter_OAuthSignatureMetho
 /**
  * The PLAINTEXT method does not provide any security protection and SHOULD only be used
  * over a secure channel such as HTTPS. It does not use the Signature Base String.
- *             - Chapter 9.4 ("PLAINTEXT")
+ *              - Chapter 9.4 ("PLAINTEXT")
  */
 class Twitter_OAuthSignatureMethod_PLAINTEXT extends Twitter_OAuthSignatureMethod
 {
@@ -164,7 +164,7 @@ class Twitter_OAuthSignatureMethod_PLAINTEXT extends Twitter_OAuthSignatureMetho
      * oauth_signature is set to the concatenated encoded values of the Consumer Secret and
      * Token Secret, separated by a '&' character (ASCII code 38), even if either secret is
      * empty. The result MUST be encoded again.
-     *             - Chapter 9.4.1 ("Generating Signatures")
+     *              - Chapter 9.4.1 ("Generating Signatures")
      * 
      * Please note that the second encoding MUST NOT happen in the SignatureMethod, as
      * OAuthRequest handles this!
@@ -189,7 +189,7 @@ class Twitter_OAuthSignatureMethod_PLAINTEXT extends Twitter_OAuthSignatureMetho
  * EMSA-PKCS1-v1_5. It is assumed that the Consumer has provided its RSA public key in a
  * verified way to the Service Provider, in a manner which is beyond the scope of this
  * specification.
- *             - Chapter 9.3 ("RSA-SHA1")
+ *              - Chapter 9.3 ("RSA-SHA1")
  */
 abstract class Twitter_OAuthSignatureMethod_RSA_SHA1 extends Twitter_OAuthSignatureMethod
 {
