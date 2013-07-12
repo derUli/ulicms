@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import os, sys
+import os, sys, subprocess
 
 def absoluteFilePaths(directory):
    for dirpath,_,filenames in os.walk(directory):
@@ -12,6 +12,10 @@ rootdir = os.path.join(os.getcwd(), "ulicms")
 allFiles = absoluteFilePaths(rootdir)
 for path in allFiles:
     if os.path.splitext(path)[1] == ".php":
-       os.system("phpCB-1.0.1-linux/phpCB " + path + " > " + path)
+        output = subprocess.Popen(["phpCB-1.0.1-linux/phpCB", path], stdout=subprocess.PIPE).communicate()[0]
+        handle = open(path, "wb")
+        handle.write(output)
+        handle.close()
+
        
            

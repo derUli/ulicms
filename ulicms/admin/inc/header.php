@@ -16,10 +16,12 @@ $(document).ready(function() {
 <script type="text/javascript" src="scripts/jeditable.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>
 <script type="text/javascript" src="scripts/jquery.form.min.js"></script>
-<?php if(is_logged_in()){?>
+<?php if(is_logged_in()){
+     ?>
 <script type="text/javascript" src="scripts/cookie.js"></script>
 <script type="text/javascript" src="scripts/notification.js"></script>
-<?php }?>
+<?php }
+?>
 <script type="text/javascript" src="scripts/audio.js"></script>
 <script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
 <link rel="stylesheet" href="scripts/vallenato/vallenato.css" type="text/css">
@@ -39,6 +41,7 @@ $(document).ready(function() {
 <script src="codemirror/mode/css/css.js" type="text/javascript"></script>
 <title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-<?php add_hook("admin_head");?>
+<?php add_hook("admin_head");
+?>
 </head>
 <body>

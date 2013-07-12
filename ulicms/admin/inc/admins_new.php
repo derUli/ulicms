@@ -1,9 +1,9 @@
 <?php if(defined("_SECURITY")){
-if($_SESSION["group"]>=50){
-
-$query=db_query("SELECT * FROM ".tbname("admins")." ORDER BY id",$connection);
-if(mysql_num_rows($query)){
-?>
+     if($_SESSION["group"] >= 50){
+        
+         $query = db_query("SELECT * FROM " . tbname("admins") . " ORDER BY id", $connection);
+         if(mysql_num_rows($query)){
+             ?>
 <form action="index.php?action=admins" method="post">
 <input type="hidden" name="add_admin" value="add_admin">
 <strong data-tooltip="Dieser Name wird zur Anmeldung im Administrationsbereich benötigt...">Benutzername:</strong><br/>
@@ -25,20 +25,22 @@ if(mysql_num_rows($query)){
 <input type="submit" value="Benutzer anlegen">
 </form>
 
-<?php 
+<?php
+            
+            
+             }
+        else{
+             noperms();
+             }
+        
+         ?>
 
 
-}
-else{
-noperms();
-}
 
+
+<?php }
+     ?>
+
+
+<?php }
 ?>
-
-
-
-
-<?php }?>
-
-
-<?php }?>

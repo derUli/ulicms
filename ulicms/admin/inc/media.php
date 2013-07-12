@@ -1,5 +1,5 @@
 ﻿<?php if(defined("_SECURITY")){
-?>
+     ?>
 
 <h2>Medien</h2>
 <strong>Bitte wählen Sie einen Dateityp aus:</strong><br/>
@@ -12,4 +12,5 @@
 
 
 
-<?php }?>
+<?php }
+?>

@@ -16,7 +16,8 @@
 
 <div class="copyright">
 <p><?php random_banner()?></p>
-<p>&copy; <?php year()?> by  <?php homepage_owner()?> | Powered by UliCMS <?php echo cms_version();?></p>
+<p>&copy; <?php year()?> by  <?php homepage_owner()?> | Powered by UliCMS <?php echo cms_version();
+?></p>
 </div>
 </body>
 </html>

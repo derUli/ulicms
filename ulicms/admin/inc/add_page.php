@@ -1,7 +1,7 @@
 <?php if(defined("_SECURITY")){
-if($_SESSION["group"]>=30){
-
-?>
+     if($_SESSION["group"] >= 30){
+        
+         ?>
 <form id="pageform" name="newpageform" action="index.php?action=pages" method="post">
 
 <strong data-tooltip="Dieser Name wird für die Adresse benötigt.
@@ -19,27 +19,27 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 <strong data-tooltip="In welcher Sprache ist diese Seite verfasst?">Sprache:</strong>
 <br/>
 <select name="language">
-<?php 
-$languages = getAllLanguages();
-if(!empty($_SESSION["filter_language"])){
-   $default_language = $_SESSION["filter_language"];
-   
-}
-else{
-   $default_language = getconfig("default_language");
-}
-
-
-for($j=0; $j<count($languages); $j++ ){ 
- if($languages[$j] === $default_language ){
-      echo "<option value='".$languages[$j]."' selected>".$languages[$j]."</option>";
-  }else{
-      echo "<option value='".$languages[$j]."'>".$languages[$j]."</option>";
-   }
-
-
-}
-?>
+<?php
+         $languages = getAllLanguages();
+         if(!empty($_SESSION["filter_language"])){
+             $default_language = $_SESSION["filter_language"];
+            
+             }
+        else{
+             $default_language = getconfig("default_language");
+             }
+        
+        
+         for($j = 0; $j < count($languages); $j++){
+             if($languages[$j] === $default_language){
+                 echo "<option value='" . $languages[$j] . "' selected>" . $languages[$j] . "</option>";
+                 }else{
+                 echo "<option value='" . $languages[$j] . "'>" . $languages[$j] . "</option>";
+                 }
+            
+            
+             }
+         ?>
 </select>
 <br/>
 
@@ -62,13 +62,16 @@ for($j=0; $j<count($languages); $j++ ){
 <strong data-tooltip="Wenn das eine Unterseite werden sollte.">Übergeordnete Seite:</strong><br/>
 <select name="parent" size=1>
 <option selected="selected" value="NULL">-</option>
-<?php foreach(getAllSystemNames() as $systemname){?>
-	<option value="<?php echo getPageIDBySystemname($systemname);?>">
-	<?php echo $systemname;?>
+<?php foreach(getAllSystemNames() as $systemname){
+             ?>
+	<option value="<?php echo getPageIDBySystemname($systemname);
+             ?>">
+	<?php echo $systemname;
+             ?>
 	</option>
 <?php
-	}
-?>
+             }
+         ?>
 </select>
 
 <br/><br/>
@@ -135,7 +138,8 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 <option value="1">aktiviert</option>
 <option value="0" selected="selected">deaktiviert</option>
 </select>
-<?php add_hook("page_option");?>
+<?php add_hook("page_option");
+         ?>
 <br/><br/>
 
 <div align="center">
@@ -191,10 +195,11 @@ function confirmExit()
 
 
 <?php
-}
-else{
-  noperms();
-}
-?>
+         }
+    else{
+         noperms();
+         }
+     ?>
 
-<?php }?>
+<?php }
+?>

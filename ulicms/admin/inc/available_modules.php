@@ -1,7 +1,8 @@
-<?php if(!is_admin()){?>
+<?php if(!is_admin()){
+     ?>
 <p>Zugriff verweigert</p>
-<?php } else {
-?>
+<?php }else{
+     ?>
 <h1>Verfügbare Pakete</h1>
 <noscript>
 <p>Bitte aktivieren Sie Javascript!</p>
@@ -25,4 +26,5 @@ $.get("index.php?ajax_cmd=available_modules", function(result){
 });
 </script>
 
-<?php }?>
+<?php }
+?>

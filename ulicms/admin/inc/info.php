@@ -1,9 +1,11 @@
 ﻿<?php if(defined("_SECURITY")){
-include_once "../version.php";
-$version = new ulicms_version();
-?>
+     include_once "../version.php";
+     $version = new ulicms_version();
+     ?>
 <h4>UliCMS</h4>
-<small>Release <?php echo $version->getVersion();?> (v<?php echo implode(".", $version->getInternalVersion());?>)</small>
+<small>Release <?php echo $version -> getVersion();
+     ?> (v<?php echo implode(".", $version -> getInternalVersion());
+     ?>)</small>
 <br/>
 
 <p>
@@ -22,4 +24,5 @@ $version = new ulicms_version();
 <input type="button" value="Feedback" onclick='location.replace("http://www.ulicms.de/?seite=kontakt");'>
 <br/>
 
-<?php }?>
+<?php }
+?>

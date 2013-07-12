@@ -1,6 +1,6 @@
 ﻿<?php if(defined("_SECURITY")){
-if($_SESSION["group"]>=40){
-?>
+     if($_SESSION["group"] >= 40){
+         ?>
 
 <form action="index.php?action=banner" method="post">
 <input type="hidden" name="add_banner" value="add_banner">
@@ -18,16 +18,17 @@ if($_SESSION["group"]>=40){
 <br/><br/>
 <input type="submit" value="Datensatz hinzufügen">
 </form>
-<?php 
+<?php
+        
+         }
+    else{
+         noperms();
+         }
+    
+     ?>
 
-}
-else{
-noperms();
-}
 
+
+
+<?php }
 ?>
-
-
-
-
-<?php }?>

@@ -1,6 +1,6 @@
-<?php 
+<?php
 session_start();
-setcookie(session_name(),session_id());
+setcookie(session_name(), session_id());
 header("Content-Type: text/html; charset=UTF-8");
 ?>
 <!DOCTYPE html>
@@ -11,24 +11,24 @@ header("Content-Type: text/html; charset=UTF-8");
 <body>
 <p><img src="media/logo.png" alt="UliCMS" title="UliCMS"><strong style="margin-left:30px; float:right; font-size:18pt; font-family:impact;">Installation</strong></p>
 <hr/>
-<?php 
-if(!isset($_POST["step"])){                
-?>
+<?php
+if(!isset($_POST["step"])){
+     ?>
 <h2>Willkommen</h2>
 <p>Willkommen zur Installation von UliCMS.</p>
-<?php 
-include "../version.php";
-$version = new ulicms_version();
-
-if($version->getDevelopmentVersion()){
-?>
+<?php
+     include "../version.php";
+     $version = new ulicms_version();
+    
+     if($version -> getDevelopmentVersion()){
+         ?>
 <p style="color:red;">Das hier ist eine Vorab-Version von UliCMS.<br/>
 Das bedeutet, diese Version ist noch nicht 100-prozentig fertig und dient nur der Vorschau auf ein neues Release.<br/>
 Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 </p>
 <?php
-}
-?>
+         }
+     ?>
 <p>Folgen Sie den Anweisungen um das CMS auf Ihrem Server zu installieren.</p>
 <p>Setzen Sie bitte vorher die Dateirechte der folgenden Dateien auf 0755.<br/>
 <ol>
@@ -47,10 +47,11 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <input type="hidden" name="step" value="1">
 <input type="submit" value="Weiter">
 </form>
-<?php 
-}else{
-?>
-<?php if($_POST["step"]=="1"){?>
+<?php
+     }else{
+     ?>
+<?php if($_POST["step"] == "1"){
+         ?>
 <h2>MySQL-Logindaten</h2>
 <p>Bitte tragen Sie in das untere Formular die Logindaten für den MySQL-Server ein. Diese bekommen Sie von Ihrem Provider.</p>
 <form action="index.php" method="post">
@@ -80,29 +81,30 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <input type="hidden" name="step" value="2">
 </form>
 
-<?php }?>
-<?php if($_POST["step"]=="2"){
-
-?>
+<?php }
+     ?>
+<?php if($_POST["step"] == "2"){
+        
+         ?>
 <h2>MySQL-Logindaten</h2>
 <?php
-@$connection = mysql_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
-if($connection==false){
-  echo "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werden.<br/>Dies kann z.B. an einem falschen Passwort liegen. Wenn Sie sich sicher sind, dass das Passwort richtig ist, prüfen Sie ob der MySQL-Datenbankserver läuft und erreichbar ist.";
-}else{
-
-@$select=mysql_select_db($_POST["datenbank"]);
-
-if($select==false){
-   echo "<p>Die Datenbank \"".htmlspecialchars($_POST["datenbank"])."\" konnte nicht geöffnet werden.<br/>Eventuell müssen Sie die Datenbank vorher anlegen.</p>";
-}else{
-   $_SESSION["mysql"]=array();
-   $_SESSION["mysql"]["server"] = $_POST["servername"];
-   $_SESSION["mysql"]["loginname"] = $_POST["loginname"];
-   $_SESSION["mysql"]["passwort"] = $_POST["passwort"];
-   $_SESSION["mysql"]["datenbank"] = $_POST["datenbank"];
-   $_SESSION["mysql"]["prefix"] = $_POST["prefix"];
-?>
+         @$connection = mysql_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
+         if($connection == false){
+             echo "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werden.<br/>Dies kann z.B. an einem falschen Passwort liegen. Wenn Sie sich sicher sind, dass das Passwort richtig ist, prüfen Sie ob der MySQL-Datenbankserver läuft und erreichbar ist.";
+             }else{
+            
+             @$select = mysql_select_db($_POST["datenbank"]);
+            
+             if($select == false){
+                 echo "<p>Die Datenbank \"" . htmlspecialchars($_POST["datenbank"]) . "\" konnte nicht geöffnet werden.<br/>Eventuell müssen Sie die Datenbank vorher anlegen.</p>";
+                 }else{
+                 $_SESSION["mysql"] = array();
+                 $_SESSION["mysql"]["server"] = $_POST["servername"];
+                 $_SESSION["mysql"]["loginname"] = $_POST["loginname"];
+                 $_SESSION["mysql"]["passwort"] = $_POST["passwort"];
+                 $_SESSION["mysql"]["datenbank"] = $_POST["datenbank"];
+                 $_SESSION["mysql"]["prefix"] = $_POST["prefix"];
+                 ?>
 <p>Die Verbindung mit dem Datenbankserver wurde erfolgreich hergestellt.</p>
 
 <form action="index.php" method="post">
@@ -110,21 +112,21 @@ if($select==false){
 <input type="submit" value="Weiter">
 </form>
 
-<?php 
-
-}
-
-}
-?>
+<?php
+                
+                 }
+            
+             }
+         ?>
 
 
 
 <?php
-}
-?>
+         }
+     ?>
 
-<?php if($_POST["step"]=="3"){
-?>
+<?php if($_POST["step"] == "3"){
+         ?>
 <h2>Homepage-Einstellungen</h2>
 <form action="index.php" method="post">
 <table border=1>
@@ -159,24 +161,24 @@ if($select==false){
 
 
 <?php
-}
-?>
+         }
+     ?>
 
-<?php if($_POST["step"]=="4"){
-
-
-
-$salt = uniqid();
-
-$connection = mysql_connect($_SESSION["mysql"]["server"], $_SESSION["mysql"]["loginname"], $_SESSION["mysql"]["passwort"]);
-
-mysql_select_db($_SESSION["mysql"]["datenbank"]);
-
-$prefix = mysql_real_escape_string($_SESSION["mysql"]["prefix"]);
-
-mysql_query("SET NAMES 'utf8'")or die(mysql_error());
-
-mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."admins` (
+<?php if($_POST["step"] == "4"){
+        
+        
+        
+         $salt = uniqid();
+        
+         $connection = mysql_connect($_SESSION["mysql"]["server"], $_SESSION["mysql"]["loginname"], $_SESSION["mysql"]["passwort"]);
+        
+         mysql_select_db($_SESSION["mysql"]["datenbank"]);
+        
+         $prefix = mysql_real_escape_string($_SESSION["mysql"]["prefix"]);
+        
+         mysql_query("SET NAMES 'utf8'")or die(mysql_error());
+        
+         mysql_query("CREATE TABLE IF NOT EXISTS `" . $prefix . "admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -192,28 +194,28 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."admins` (
   `last_action` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysql_error());;
-
-
-$vorname=mysql_real_escape_string($_POST["firstname"]);
-$nachname=mysql_real_escape_string($_POST["lastname"]);
-$zusammen=mysql_real_escape_string("$vorname $nachname");
-$email=mysql_real_escape_string($_POST["email"]);
-$passwort=mysql_real_escape_string($_POST["passwort"]);
-
-$encrypted_passwort = sha1($salt.$passwort);
-
-mysql_query("INSERT INTO `".$prefix."admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
-(1, 0, 'admin', '".$nachname."', '".$vorname."', '".$email."', '".$encrypted_passwort."',50);")or die(mysql_error());
-
-mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."banner` (
+        
+        
+         $vorname = mysql_real_escape_string($_POST["firstname"]);
+         $nachname = mysql_real_escape_string($_POST["lastname"]);
+         $zusammen = mysql_real_escape_string("$vorname $nachname");
+         $email = mysql_real_escape_string($_POST["email"]);
+         $passwort = mysql_real_escape_string($_POST["passwort"]);
+        
+         $encrypted_passwort = sha1($salt . $passwort);
+        
+         mysql_query("INSERT INTO `" . $prefix . "admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
+(1, 0, 'admin', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50);")or die(mysql_error());
+        
+         mysql_query("CREATE TABLE IF NOT EXISTS `" . $prefix . "banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `link_url` text NOT NULL,
   `image_url` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
-
-mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
+        
+         mysql_query("CREATE TABLE IF NOT EXISTS `" . $prefix . "content` (
   
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `notinfeed` tinyint(1) NOT NULL,
@@ -242,26 +244,26 @@ mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."content` (
   `deleted_at` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
-
-
-mysql_query("INSERT INTO `".$prefix."content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
+        
+        
+         mysql_query("INSERT INTO `" . $prefix . "content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
 (1, 0, 'willkommen', 'Willkommen', '_self', '<p>Willkommen auf einer neuen Website die mit UliCMS betrieben wird.</p>\r\n', 'de', 1, 1364242679, 1364242833, 1, 0, 1, 19, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL),
 (2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 0, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;")or die(mysql_error());
-
-mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."settings` (
+        
+         mysql_query("CREATE TABLE IF NOT EXISTS `" . $prefix . "settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `value` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
-
-
-
-$homepage_title=mysql_real_escape_string($_POST["homepage_title"]);
-$motto=mysql_real_escape_string($_POST["motto"]);
-
-// Badword-Blacklist von https://gist.github.com/splorp/1385930
-$badwords = "_coupon_
+        
+        
+        
+         $homepage_title = mysql_real_escape_string($_POST["homepage_title"]);
+         $motto = mysql_real_escape_string($_POST["motto"]);
+        
+         // Badword-Blacklist von https://gist.github.com/splorp/1385930
+        $badwords = "_coupon_
 _html
 _marketing_
 _profitable_
@@ -4192,14 +4194,14 @@ zyvox
 財布
 赌场
 通販";
-
-$badwords = str_replace("\r\n", "||", $badwords);
-$badwords = str_replace("\n", "||", $badwords);
-
-$badwords = mysql_real_escape_string($badwords);
-
-
-mysql_query("INSERT INTO `".$prefix."settings` (`id`, `name`, `value`) VALUES
+        
+         $badwords = str_replace("\r\n", "||", $badwords);
+         $badwords = str_replace("\n", "||", $badwords);
+        
+         $badwords = mysql_real_escape_string($badwords);
+        
+        
+         mysql_query("INSERT INTO `" . $prefix . "settings` (`id`, `name`, `value`) VALUES
 (1, 'homepage_title', '$homepage_title'),
 (2, 'maintenance_mode', '0'),
 (3, 'redirection', ''),
@@ -4240,116 +4242,119 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (36, 'body-text-color', '#000000'),
 (37, 'title_format', '%homepage_title% > %title%'),
 (38, 'session_timeout', '60');")or die(mysql_error());
-
-mysql_query("UPDATE `".$prefix."content` SET parent=NULL")or die(mysql_error());
-
-mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."languages` (
+        
+         mysql_query("UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysql_error());
+        
+         mysql_query("CREATE TABLE IF NOT EXISTS `" . $prefix . "languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `language_code` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;")or die(mysql_error());
-
-
-mysql_query("INSERT INTO `".$prefix."languages` (`id`, `name`, `language_code`) VALUES
+        
+        
+         mysql_query("INSERT INTO `" . $prefix . "languages` (`id`, `name`, `language_code`) VALUES
 (1, 'Deutsch', 'de'), 
 (2, 'English', 'en');")or die(mysql_error());
-
-
-/**
-mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."chat_messages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `from` varchar(255) NOT NULL,
-  `to` varchar(255) NOT NULL,
-  `message` text NOT NULL,
-  `date` bigint(20) NOT NULL,
-  `read` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;")or die(mysql_error());
-**/
-
-
-@chmod("../cms-config.php", 0777);
-
-@mkdir("../content");
-@chmod("../content", 0777);
-
-if(!file_exists("../content/cache")){
-   @mkdir("content/cache", 0777, true);
-}
-
-if(!file_exists("../modules/")){
-   @mkdir("modules/", 0777, true);
-}
-
-
-
-
-
-@chmod("../templates/oben.php", 0777);
-@chmod("../templates/unten.php", 0777);
-//@chmod("../templates/news.txt", 0777);
-@chmod("../templates/maintenance.php", 0777);
-
-$config_string = '<?php 
+        
+        
+        /**
+         * mysql_query("CREATE TABLE IF NOT EXISTS `".$prefix."chat_messages` (
+         * `id` int(11) NOT NULL AUTO_INCREMENT,
+         * `from` varchar(255) NOT NULL,
+         * `to` varchar(255) NOT NULL,
+         * `message` text NOT NULL,
+         * `date` bigint(20) NOT NULL,
+         * `read` tinyint(1) NOT NULL,
+         * PRIMARY KEY (`id`)
+         * ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;")or die(mysql_error());
+         */
+        
+        
+         @chmod("../cms-config.php", 0777);
+        
+         @mkdir("../content");
+         @chmod("../content", 0777);
+        
+         if(!file_exists("../content/cache")){
+             @mkdir("content/cache", 0777, true);
+             }
+        
+         if(!file_exists("../modules/")){
+             @mkdir("modules/", 0777, true);
+             }
+        
+        
+        
+        
+        
+         @chmod("../templates/oben.php", 0777);
+         @chmod("../templates/unten.php", 0777);
+         //  @chmod ("../templates/news.txt", 0777);
+        @chmod("../templates/maintenance.php", 0777);
+        
+         $config_string = '<?php 
 class config{
 
-var $mysql_server="'.$_SESSION["mysql"]["server"].'";
-var $mysql_user="'.$_SESSION["mysql"]["loginname"].'";
-var $mysql_password="'.$_SESSION["mysql"]["passwort"].'";
-var $mysql_database="'.$_SESSION["mysql"]["datenbank"].'";
-var $mysql_prefix="'.$_SESSION["mysql"]["prefix"].'";
+var $mysql_server="' . $_SESSION["mysql"]["server"] . '";
+var $mysql_user="' . $_SESSION["mysql"]["loginname"] . '";
+var $mysql_password="' . $_SESSION["mysql"]["passwort"] . '";
+var $mysql_database="' . $_SESSION["mysql"]["datenbank"] . '";
+var $mysql_prefix="' . $_SESSION["mysql"]["prefix"] . '";
 
 }';
-
-
-if(!is_writable("../cms-config.php")){
-   echo "<p>Die Konfigurationsdatei konnte wegen fehlenden Berechtigungen nicht erzeugt werden. Bitte bearbeiten Sie die Datei cms-config.php mit einem Texteditor und fügen Sie den Code aus der Textbox ein.</p>".
-   "<p><textarea cols=50 rows=10>".htmlspecialchars($config_string)."</textarea></p>";
-}else {
-  $handle = fopen("../cms-config.php","w");
-  fwrite($handle, $config_string);
-  fclose($handle);
-}
-
-$message = "Hallo $zusammen!\n".
-"Auf ".$_SERVER["SERVER_NAME"]. " wurde UliCMS erfolgreich installiert\n\n".
-"Die Zugangsdaten lauten:\n".
-"Benutzername: admin\n".
-"Passwort: $passwort\n\n".
-"Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen.";
-
-
-
-$success = @mail($email,
-"UliCMS Installation auf ".$_SERVER["SERVER_NAME"],
-$message, "From: $email\nContent-Type: text/plain; charset=UTF-8"
-);
-
-session_destroy();
-
-
-
-
-?>
+        
+        
+         if(!is_writable("../cms-config.php")){
+             echo "<p>Die Konfigurationsdatei konnte wegen fehlenden Berechtigungen nicht erzeugt werden. Bitte bearbeiten Sie die Datei cms-config.php mit einem Texteditor und fügen Sie den Code aus der Textbox ein.</p>" .
+             "<p><textarea cols=50 rows=10>" . htmlspecialchars($config_string) . "</textarea></p>";
+             }else{
+             $handle = fopen("../cms-config.php", "w");
+             fwrite($handle, $config_string);
+             fclose($handle);
+             }
+        
+         $message = "Hallo $zusammen!\n" .
+         "Auf " . $_SERVER["SERVER_NAME"] . " wurde UliCMS erfolgreich installiert\n\n" .
+         "Die Zugangsdaten lauten:\n" .
+         "Benutzername: admin\n" .
+         "Passwort: $passwort\n\n" .
+         "Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen.";
+        
+        
+        
+         $success = @mail($email,
+             "UliCMS Installation auf " . $_SERVER["SERVER_NAME"],
+             $message, "From: $email\nContent-Type: text/plain; charset=UTF-8"
+            );
+        
+         session_destroy();
+        
+        
+        
+        
+         ?>
 <h2>Installation beendet</h2>
 <p>Die Installation von UliCMS wurde erfolgreich beendet.<br/>Bitte löschen Sie nun aus Sicherheitsgründen den Ordner "installer" vom Server. Sie können sich nun <a href="../admin/">hier</a> einloggen. Der Benutzername lautet <i>admin</i>.<br/><br/>
-<?php if($success){?>
+<?php if($success){
+             ?>
 <span style="color:green;">Die Zugangsdaten wurden Ihnen per Mail geschickt.
 </span>
 
-<?php } else{?>
+<?php }else{
+             ?>
 <span style="color:red;">Die Zugangsdaten konnten Ihnen wegen einem technischen Problem nicht per E-Mail geschickt werden.</span>
-<?php }?>
+<?php }
+         ?>
 <br/>
 </p>
 
 <?php }
-
-?>
+    
+     ?>
 <?php
-
-}
+    
+     }
 ?>
 <hr style="margin-top:30px;"/>
 <p style="color:#6f6f6f; font-size:small;">&copy; 2011 - 2013 by <a href="http://www.ulicms.de" target="_blank">ulicms.de</a></p>

@@ -1,6 +1,6 @@
 ﻿<?php if(defined("_SECURITY")){
-if($_SESSION["group"]>=50){
-?>
+     if($_SESSION["group"] >= 50){
+         ?>
 
 <form action="index.php?action=settings" method="post">
 <input type="hidden" name="add_key" value="add_key">
@@ -14,15 +14,16 @@ if($_SESSION["group"]>=50){
 <input type="submit" value="Datensatz hinzufügen">
 </form>
 
-<?php 
-}
-else{
-noperms();
-}
+<?php
+         }
+    else{
+         noperms();
+         }
+    
+     ?>
 
+
+
+
+<?php }
 ?>
-
-
-
-
-<?php }?>

@@ -1,10 +1,10 @@
 <h2>Sprachen verwalten</h2>
 <?php if(defined("_SECURITY")){
-if($_SESSION["group"]>=50){
-
-$languages = db_query("SELECT * FROM ".tbname("languages")." ORDER BY language_code ASC");
-
-?>
+     if($_SESSION["group"] >= 50){
+        
+         $languages = db_query("SELECT * FROM " . tbname("languages") . " ORDER BY language_code ASC");
+        
+         ?>
 <form action="index.php?action=languages" method="post">
 <table border=0>
 <tr>
@@ -25,7 +25,8 @@ $languages = db_query("SELECT * FROM ".tbname("languages")." ORDER BY language_c
 <br>
 <hr>
 <br>
-<?php if(mysql_num_rows($languages)>0){?>
+<?php if(mysql_num_rows($languages) > 0){
+             ?>
 <table border=1 style="width:800px;"> 
 <tr>
 <td><strong>Kürzel</strong></td>
@@ -34,54 +35,63 @@ $languages = db_query("SELECT * FROM ".tbname("languages")." ORDER BY language_c
 <td></td>
 </tr>
 <?php
-while($row = mysql_fetch_object($languages)){?>
+             while($row = mysql_fetch_object($languages)){
+                 ?>
 <tr>
 <td>
-<?php echo htmlspecialchars($row->language_code)?>
+<?php echo htmlspecialchars($row -> language_code)?>
 </td>
-<td><?php echo htmlspecialchars($row->name);?></td>
+<td><?php echo htmlspecialchars($row -> name);
+                 ?></td>
 
 <td align="center" style="font-weight:bold;">
-<?php 
-if($row->language_code === getconfig("default_language")){
-echo "<span style='color:green !important;'>Ja</span>";
-}else{
-?>
-<a onclick="return confirm('Möchten Sie <?php echo $row->name;?> als Standard festlegen?')" href="index.php?action=languages&default=<?php echo $row->language_code?>">
+<?php
+                 if($row -> language_code === getconfig("default_language")){
+                     echo "<span style='color:green !important;'>Ja</span>";
+                     }else{
+                     ?>
+<a onclick="return confirm('Möchten Sie <?php echo $row -> name;
+                     ?> als Standard festlegen?')" href="index.php?action=languages&default=<?php echo $row -> language_code?>">
 <span style="color:red !important;">Nein</span></a>
 <?php
-}?>
+                     }
+                 ?>
 </td>
 
 <td align="center">
-<?php if($row->language_code == getconfig("default_language")){?>
+<?php if($row -> language_code == getconfig("default_language")){
+                     ?>
 <a onclick="javascript:alert('Die Standardsprache kann nicht gelöscht werden!')" href="#">
 <img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a>
 </a>
 <?php
-}else{
-?>
-<a onclick="return confirm('Möchten Sie die Sprache <?php echo $row->name;?> wirklich löschen?')" href="index.php?action=languages&delete=<?php echo $row->id?>">
+                     }else{
+                     ?>
+<a onclick="return confirm('Möchten Sie die Sprache <?php echo $row -> name;
+                     ?> wirklich löschen?')" href="index.php?action=languages&delete=<?php echo $row -> id?>">
 <img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a>
 </a>
-<?php }?>
+<?php }
+                 ?>
 </td>
 
 
 
-<?php }?>
+<?php }
+             ?>
 </table>
 <?php
-}
-?>
+             }
+         ?>
 
 
 
 <?php
-}
-else{
-  noperms();
-}
-?>
+         }
+    else{
+         noperms();
+         }
+     ?>
 
-<?php }?>
+<?php }
+?>

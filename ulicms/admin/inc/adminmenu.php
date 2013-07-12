@@ -1,17 +1,17 @@
-<?php 
+<?php
 if(defined("_SECURITY")){
-   $modules = getAllModules();
-   $modules_with_admin_page = Array();
-   for($i=0; $i < count($modules); $i++){
-    if(file_exists(getModuleAdminFilePath($modules[$i])))
-       array_push($modules_with_admin_page, $modules[$i]);
-   }
-   
-   
-   $theme = getconfig("theme");
-   $theme_dir = getTemplateDirPath($theme);
-
-?>
+     $modules = getAllModules();
+     $modules_with_admin_page = Array();
+     for($i = 0; $i < count($modules); $i++){
+         if(file_exists(getModuleAdminFilePath($modules[$i])))
+             array_push($modules_with_admin_page, $modules[$i]);
+         }
+    
+    
+     $theme = getconfig("theme");
+     $theme_dir = getTemplateDirPath($theme);
+    
+     ?>
 <div style="float:left"><h2>UliCMS <a href="../">[<?php echo getconfig("homepage_title")?>]</a></h2></div>
 
 
@@ -67,46 +67,50 @@ if(defined("_SECURITY")){
       </li><li>
         <a href="?action=templates&edit=style.css">CSS</a>
       </li>
-      <?php 
-      if(file_exists($theme_dir."403.php")){
-      ?>
+      <?php
+     if(file_exists($theme_dir . "403.php")){
+         ?>
         <li><a href="index.php?action=templates&edit=403.php">403</a></li>
-     <?php 
-     }
+     <?php
+         }
      ?>
 
-     <?php 
-         if(file_exists($theme_dir."404.php")){
-     ?>
+     <?php
+     if(file_exists($theme_dir . "404.php")){
+         ?>
       <li><a href="index.php?action=templates&edit=404.php">404</a></li>
-     <?php 
-     }
+     <?php
+         }
      ?>
      
-      <?php 
-         if(file_exists($theme_dir ."functions.php")){
-     ?>
+      <?php
+     if(file_exists($theme_dir . "functions.php")){
+         ?>
       <li><a href="index.php?action=templates&edit=functions.php">Functions</a></li>
-     <?php 
-     }
+     <?php
+         }
      ?>
      
     </ul>
   </li>
   <li><a href="?action=modules">Module</a>
-  <?php if(count($modules_with_admin_page) > 0){?>
+  <?php if(count($modules_with_admin_page) > 0){
+         ?>
   <ul>
-    <?php for($n=0; $n < count($modules_with_admin_page); $n++){
-    ?>
+    <?php for($n = 0; $n < count($modules_with_admin_page); $n++){
+             ?>
     <li><a href="?action=module_settings&module=<?php echo $modules_with_admin_page[$n]?>"><?php echo $modules_with_admin_page[$n]?></a></li>
     <?php
-    }
-    ?>
+             }
+         ?>
    </ul>
-  <?php } ?>
-  <?php if(file_exists("../update.php")){ ?>
+  <?php }
+     ?>
+  <?php if(file_exists("../update.php")){
+         ?>
   <li><a href="?action=system_update">Update</a></li>
-  <?php }?>
+  <?php }
+     ?>
    <li><a href="?action=settings_categories">Einstellungen</a>
     <ul><li><a href="?action=settings_simple">Grundeinstellungen</a></li>
     <li><a href="?action=design">Design</a></li>
@@ -129,7 +133,8 @@ if(defined("_SECURITY")){
      <li><a href="license.html" target="_blank">Lizenz</a></li>
      <li><a href="http://www.ulicms.de/?seite=kontakt" target="_blank">Feedback</a></li>
     </ul>
-    <?php add_hook("admin_menu_item"); ?>
+    <?php add_hook("admin_menu_item");
+     ?>
     <li><a href="?action=destroy">Logout</a></li>
 </ul>
 <script type="text/javascript">
@@ -163,6 +168,6 @@ $('#clear_cache')
 
 <div class="clear"></div>
 <div id="pbody">
-<?php 
-}
+<?php
+     }
 ?>

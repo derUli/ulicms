@@ -9,16 +9,17 @@
 <div class="header">
 <div class="logo">
 <?php
-if(getconfig("logo_disabled")=="no")
-{
-  logo();
-?>
+if(getconfig("logo_disabled") == "no")
+    {
+     logo();
+     ?>
 <br/>  
 <?php
-}
+     }
 else{
-?><h1><?php homepage_title()?></h1>
-<?php }?>
+     ?><h1><?php homepage_title()?></h1>
+<?php }
+?>
 <span><?php motto()?></span>
 </div>
 <div class="navbar_top">
