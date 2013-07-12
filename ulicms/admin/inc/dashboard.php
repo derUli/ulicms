@@ -157,7 +157,7 @@ function update_users_online(){
         success : function(e){
           if($('#users_online').html() != e){
               $('#users_online').html(e);
-              setTimeout("update_users_online();", 30 * 1000);
+              setTimeout("update_users_online();", 10 * 1000);
           }
         }
     });
