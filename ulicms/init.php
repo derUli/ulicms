@@ -6,8 +6,6 @@
 // Workaround für Magic Quotes und Register Globals
 include "lib/workaround.php";
 
-
-
 // if config exists require_config else redirect to installer
 if(file_exists("cms-config.php")){
      require_once "cms-config.php";
@@ -35,18 +33,6 @@ define('CR', "\r"); // carriage return; Mac
 define('LF', "\n"); // line feed; Unix
 define('CRLF', "\r\n"); // carriage return and line feed; Windows
 define('BR', '<br />' . LF); // HTML Break
-
-
-
-
-
-
-
-
-
-
-
-
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
 
