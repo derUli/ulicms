@@ -1,12 +1,18 @@
 <?php
-
+error_reporting(E_ALL);
 // Bei jedem Aufruf muss remote_user und remote_password
 // gesetzt sein (GET/POST Parameter)
 if(isset($_REQUEST["remote_user"]) and isset($_REQUEST["remote_password"])){
+     include_once "lib/encryption.php";
      $sessionData = validate_login($_REQUEST["remote_user"], $_REQUEST["remote_password"]);
-     if($sessionData){
-         define("REMOTE_API_AUTHENTIFICATION_OK", "OK");
+     if($sessionData !== false){
+         define("REMOTE_API_AUTHENTIFICATION_OK", true);
+    } else{
+       define("REMOTE_API_AUTHENTIFICATION_OK", false);
     }
+} else {
+
+       define("REMOTE_API_AUTHENTIFICATION_OK", false);
 }
 
 
@@ -18,7 +24,7 @@ if(isset($_REQUEST["remote_user"])){
 
 
 // Wenn die Zugangsdaten korrekt sind
-if(defined("REMOTE_API_AUTHENTIFICATION_OK") and isset($_REQUEST["remote_user"])){
+if(REMOTE_API_AUTHENTIFICATION_OK and isset($_REQUEST["remote_user"])){
      // remote_api Hook aufrufen
      // Ein Beispiel für die remote_api Hook findet sich in der Datei json_remote_api_remote_api.php
     add_hook("remote_api");
@@ -31,8 +37,9 @@ if(defined("REMOTE_API_AUTHENTIFICATION_OK") and isset($_REQUEST["remote_user"])
      $result = array("error" => "no_such_call");
      die(json_encode($result));
     
-    } else if(!defined("REMOTE_API_AUTHENTIFICATION_OK") and isset($_REQUEST["remote_user"])){
+    } else if(REMOTE_API_AUTHENTIFICATION_OK and isset($_REQUEST["remote_user"])){
      // Ansonsten Fehlermeldung
-    $result = array("error" => "login_invalid");
-     die(json_encode($result));
+
+      $result = array("error" => "login_invalid");
+      die(json_encode($result));
     }
