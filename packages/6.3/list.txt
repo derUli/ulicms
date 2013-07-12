@@ -52,3 +52,4 @@ oembed-0.0.1a
 block_yasni-0.0.1
 proxy_real_ip-0.0.1
 link_checker-0.0.1
+twitter_for_php-3.1

@@ -1,1 +1,1 @@
-Blogeinträge auf Twitter posten
+Blogeinträge auf Twitter posten (benötigt twitter_for_php)
