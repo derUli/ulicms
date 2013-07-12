@@ -54,3 +54,4 @@ proxy_real_ip-0.0.1
 link_checker-0.0.1
 twitter_for_php-3.1
 phpword-0.6.3beta
+barrel-roll-1.0.0

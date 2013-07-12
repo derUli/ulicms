@@ -1,0 +1,4 @@
+Der von Google Bekannte Barrel-Roll Effekt.
+Wenn man in das Suchfeld "Do A Barrel Roll" eingibt,
+dreht sich die Seite mit den Ergebnissen einmal um 360°.
+Benötigt jquery und search
