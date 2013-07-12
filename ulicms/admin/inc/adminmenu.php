@@ -93,7 +93,7 @@ if(defined("_SECURITY")){
      
     </ul>
   </li>
-  <li><a href="?action=modules">Module</a>
+  <li><a href="?action=modules">Pakete</a>
   <?php if(count($modules_with_admin_page) > 0){
          ?>
   <ul>
