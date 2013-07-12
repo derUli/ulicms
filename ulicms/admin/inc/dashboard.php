@@ -1,4 +1,4 @@
-<?php{
+<?php
      if(defined("_SECURITY")){
          $pages_count = mysql_num_rows(db_query("SELECT * FROM " . tbname("content")));
         
