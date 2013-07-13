@@ -6,11 +6,16 @@ function blog_prev_next_render(){
       
       $html = "";
       
+      
+      
    $single = mysql_real_escape_string($_GET["single"]);
+   
+   if(empty($single))
+      return "";
+   
    $query = mysql_query("SELECT datum FROM ".tbname("blog"). " WHERE seo_shortname='".$single."'");
    $thisQuery = mysql_fetch_object($query);
    
-
    
    $html .= "<div class=\"blogArticlePrevNext\">";
    
