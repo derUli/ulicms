@@ -3,6 +3,9 @@ margin:0;
 padding:0;
 }
 
+span.blog_article_next{
+float:right;
+}
 
 .header span{
 font-size:10pt;
