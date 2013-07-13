@@ -16,10 +16,17 @@ function blog_prev_next_render(){
    $query = mysql_query("SELECT datum FROM ".tbname("blog"). " WHERE seo_shortname='".$single."'");
    $thisQuery = mysql_fetch_object($query);
    
+         $prevQuery = mysql_query("SELECT title, seo_shortname FROM ".tbname("blog"). " WHERE datum < ".$thisQuery->datum. " ORDER by datum DESC LIMIT 1");
+   
+   
+            $nextQuery = mysql_query("SELECT title, seo_shortname FROM ".tbname("blog"). " WHERE datum > ".$thisQuery->datum. " ORDER by datum ASC LIMIT 1");
+            
+   if(mysql_num_rows($prevQuery) == 0 and mysql_num_rows($nextQuery) == 0)
+      return "";
    
    $html .= "<div class=\"blogArticlePrevNext\">";
    
-      $prevQuery = mysql_query("SELECT title, seo_shortname FROM ".tbname("blog"). " WHERE datum < ".$thisQuery->datum. " ORDER by datum DESC LIMIT 1");
+
    
    if(mysql_num_rows($prevQuery) > 0){
      $html .= "<span class=\"blog_article_prev\">";
@@ -28,7 +35,7 @@ function blog_prev_next_render(){
      $html .="</span>";
    }
    
-         $nextQuery = mysql_query("SELECT title, seo_shortname FROM ".tbname("blog"). " WHERE datum > ".$thisQuery->datum. " ORDER by datum ASC LIMIT 1");
+
    
    if(mysql_num_rows($nextQuery) > 0){
      $html .= "<span class=\"blog_article_next\">";
