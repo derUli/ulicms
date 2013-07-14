@@ -474,7 +474,7 @@ if($_POST["add_key"] == "add_key" && $_SESSION["group"] >= 40){
 
 
 if($_POST["add_admin"] == "add_admin" && $_SESSION["group"] >= 50){
-     include "../lib/encryption.php";
+     include_once "../lib/encryption.php";
      $username = mysql_real_escape_string($_POST["admin_username"]);
      $lastname = mysql_real_escape_string($_POST["admin_lastname"]);
      $firstname = mysql_real_escape_string($_POST["admin_firstname"]);
