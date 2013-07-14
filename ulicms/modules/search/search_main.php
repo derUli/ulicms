@@ -31,22 +31,33 @@ function search_render(){
 	$html_output .= "<form class='search-form' action='".get_requested_pagename().".html' method='get'>
 	<div class=\"search_subject\">Suchbegriff: <input type='text' name='q' value='".$search_subject."'> <input type='submit' value='Suchen'></div>";
 	
-	$html_output .= '<br/><div class="content-type">';
-	$html_output .= "<div><strong>Bereich:</strong><br/><p><input type='radio' value='pages' name='type' ";
+	$html_output .= '<br/><div class="search-content-type">';
+	$html_output .= "<strong>Bereich:</strong><br/><input type='radio' value='pages' name='type' ";
 	if($type == "pages"){
 	   $html_output .= " checked";
 	}
-	$html_output .= "> Seiten</p>";
+	$html_output .= "> Seiten<br/>";
 	
 	
 	if(in_array("blog", getAllModules())){
 	
-	$html_output .= "<p><input type='radio' value='blog' name='type' ";
+	$html_output .= "<input type='radio' value='blog' name='type' ";
 	
 	if($type == "blog"){
 	   $html_output .= " checked";
 	}
-	$html_output .= "> Blog</p>";
+	$html_output .= "> Blog<br/>";
+	
+	/** In der nächsten Version soll man dann auch Kommentare dursuchen können
+	
+	$html_output .= "<input type='radio' value='comments' name='type' ";
+	
+	if($type == "commments"){
+	   $html_output .= " checked";
+	}
+	$html_output .= "> Kommentare<br/>";
+	
+	**/
 	
 	}
 	
@@ -115,7 +126,7 @@ function search_render(){
 		
 		
 		
-		}
+		} 
 	}
 	return $html_output;
 }
