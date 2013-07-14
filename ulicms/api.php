@@ -33,6 +33,16 @@ function add_hook($name){
      }
 
 
+
+	 
+	 
+// Check for Secure HTTP Connection (SSL)
+function is_ssl(){
+    return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
+    || $_SERVER['SERVER_PORT'] == 443);
+}
+
+
 // Returns the language code of the current language
 // If $current is true returns language of the current page
 // else it returns $_SESSION["language"];
