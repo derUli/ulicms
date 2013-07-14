@@ -18,9 +18,11 @@ function search_render(){
          case "blog":
              $type = "blog";
              break;
-			 
-		case "event":
-             $type = "event";
+         case "comments":
+             $type = "comments";
+             break;
+		case "events":
+             $type = "events";
              break;
          case "pages": default:
              $type = "pages";
@@ -51,24 +53,22 @@ function search_render(){
              }
          $html_output .= "> Blog<br/>";
         
-        /**
-         * * In der nächsten Version soll man dann auch Kommentare dursuchen können
-         * 
-         * $html_output .= "<input type='radio' value='comments' name='type' ";
-         * 
-         * if($type == "commments"){
-         * $html_output .= " checked";
-         * }
-         * $html_output .= "> Kommentare<br/>";
-         */
+     
+         $html_output .= "<input type='radio' value='comments' name='type' ";
+        
+         if($type == "commments"){
+            $html_output .= " checked";
+         }
+         $html_output .= "> Kommentare<br/>";
+         
         
          }
 		 
 		 if(in_array("fullcalendar", getAllModules())){
         
-         $html_output .= "<input type='radio' value='event' name='type' ";
+         $html_output .= "<input type='radio' value='events' name='type' ";
         
-         if($type == "event"){
+         if($type == "events"){
              $html_output .= " checked";
              }
          $html_output .= "> Veranstaltungen<br/>";
@@ -140,7 +140,38 @@ function search_render(){
             
             
             
-             } else if($type == "event"){
+             } else if($type == "comments"){
+            
+             $blog_page = getconfig("blog_page");
+             if(!$blog_page)
+                 $blog_page = "blog";
+            
+             $search_sql_query = "SELECT * FROM " . tbname("blog_comments") .
+             " WHERE MATCH (comment, name, url) " .
+             "AGAINST ('" . $search_request_unencoded . "')";
+             $results = db_query($search_sql_query);
+             $result_count = mysql_num_rows($results);
+             $html_output .= "<p class='search-results'><strong>$result_count</strong> Suchergebnisse gefunden</p>";
+             if($result_count > 0){
+                
+                 $html_output .= "<hr/>
+		<ul class='result-list'>";
+                 while($row = mysql_fetch_assoc($results)){
+				     $query2 = mysql_query("SELECT * FROM ".tbname("blog")." WHERE id=".$row["post_id"]);
+					 if(mysql_num_rows($query2) > 0){
+				     $row2 = mysql_fetch_assoc($query2);
+                     $html_output .= "<li><a href='" . $blog_page . ".html?single=" . htmlspecialchars($row2["seo_shortname"], ENT_QUOTES, "UTF-8") ."#comment".$row["id"]."'>" ."Kommentar #".$row["id"]." von \"".htmlspecialchars($row["name"], ENT_QUOTES, "UTF-8")." zu ".htmlspecialchars($row2["title"], ENT_QUOTES, "UTF-8").
+                     "\""."</a></li>";
+                    
+					
+					  }
+                     }
+                 $html_output .= "</ul>";
+                 }
+            
+            
+            
+             } else if($type == "events"){
             
              $search_sql_query = "SELECT * FROM " . tbname("events") .
              " WHERE MATCH (title, url) " .
