@@ -18,6 +18,10 @@ function search_render(){
          case "blog":
              $type = "blog";
              break;
+			 
+		case "event":
+             $type = "event";
+             break;
          case "pages": default:
              $type = "pages";
              break;
@@ -136,13 +140,12 @@ function search_render(){
             
             
             
-             }else if($type == "event"){
-            
+             } else if($type == "event"){
             
              $search_sql_query = "SELECT title, url FROM " . tbname("events") .
              " WHERE MATCH (title, url) " .
-             "AGAINST ('" . $search_request_unencoded . "') AND `start` > ".(time() - 60 * 60 * 23)." ORDER by `start` DESC" .
-             "";
+             "AGAINST ('" . $search_request_unencoded . "') AND `start` > ".(time() - 60 * 60 * 23)." ORDER by `start` ASC";
+
              $results = db_query($search_sql_query);
              $result_count = mysql_num_rows($results);
              $html_output .= "<p class='search-results'><strong>$result_count</strong> Suchergebnisse gefunden</p>";
