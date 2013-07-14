@@ -36,17 +36,18 @@ function search_render(){
 	if($type == "pages"){
 	   $html_output .= " checked";
 	}
-	$html_output .= "> Seiten</div>";
+	$html_output .= ">Seiten</div>";
 	
-	$html_output .= "<div><input type='radio' value='blog' name='type' ";
+	
+	$html_output .= "<input type='radio' value='blog' name='type' ";
+	
 	if($type == "blog"){
 	   $html_output .= " checked";
 	}
-	$html_output .= "> Blog</div>";
+	$html_output .= ">Blog";
 	
-	$html_output .= "</div>";
 
-	$html_output .= "</form>";
+	$html_output .= "</div></form>";
 	
 	if(!empty($_GET["q"])){
 		$search_request = $_GET["q"];
