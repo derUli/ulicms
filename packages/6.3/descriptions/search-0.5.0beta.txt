@@ -1,6 +1,7 @@
 Suchfunktion mit Vollindex.
-Diese neue Version kann jetzt auch Blogeinträge durchsuchen, 
-sofern das blog-Modul installiert ist.
+Diese neue Version kann jetzt auch Blogeinträge, Kommentare und
+Veranstaltungen durchsuchen, 
+sofern das blog-Modul bzw. fullcalendar installiert ist.
 Die Konfigurationsvariable blog_page muss gesetzt werden, 
 damit die Suchergebnisse auch zum richtigen Link führen.
 
