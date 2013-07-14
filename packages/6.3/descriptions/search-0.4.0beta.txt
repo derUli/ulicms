@@ -4,7 +4,7 @@ sofern das blog-Modul installiert ist.
 Die Konfigurationsvariable blog_page muss gesetzt werden, 
 damit die Suchergebnisse auch zum richtigen Link führen.
 
-<strong>Hinweis:</strong>
+<u>Hinweis:</u>
 Bitte prüfen Sie vor der Installation dieses Pakets, 
 ob die entsprechenden Datenbanktabellen die Engine "MyISAM" verwenden.
 Sonst wird die Volltextsuche nicht funktionieren.
