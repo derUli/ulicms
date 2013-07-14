@@ -1,5 +1,5 @@
-<?php 
+<?php
 function phpword_render(){
-   return "";
-}
+     return "";
+    }
 ?>

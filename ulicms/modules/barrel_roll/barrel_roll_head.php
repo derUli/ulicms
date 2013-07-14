@@ -1,11 +1,11 @@
 <?php
 $modules = getAllModules();
 if(in_array("jquery", $modules) and isset($_GET["q"])){
-$q = $_GET["q"];
-$q = trim($q);
-$q = strtolower($q);
-if($q == "do a barrel roll"){
-  ?>
+    $q = $_GET["q"];
+    $q = trim($q);
+    $q = strtolower($q);
+    if($q == "do a barrel roll"){
+         ?>
 <style type="text/css">
 .barrel_roll {
     -webkit-transition: -webkit-transform 4s ease;
@@ -30,7 +30,7 @@ window.onload = function(){
 
 
 </script>
-<?php 
-}
-}
+<?php
+        }
+    }
 ?>

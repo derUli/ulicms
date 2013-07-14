@@ -1,5 +1,5 @@
-<?php 
+<?php
 function jquery_render(){
-   return "";
-}
+     return "";
+    }
 ?>

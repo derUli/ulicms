@@ -2,7 +2,7 @@
 ?>
 <?php while($row = mysql_fetch_object($users_online)){
      ?>
-<li><?php echo $row->username;
+<li><?php echo $row -> username;
      ?></li>
 <?php }
 ?>

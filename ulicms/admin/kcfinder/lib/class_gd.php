@@ -108,10 +108,10 @@ class gd{
     
     /**
      * * Parameter $image can be:
-     *              1. An instance of this class (copy instance).
-     *              2. A GD resource.
-     *              3. An array with two elements. First - width, second - height. Create a blank image.
-     *              4. A filename string. Get image form file.
+     *               1. An instance of this class (copy instance).
+     *               2. A GD resource.
+     *               3. An array with two elements. First - width, second - height. Create a blank image.
+     *               4. A filename string. Get image form file.
      * The non-required parameter $bigger_size is the bigger dimension (width or height) the image
      * will be resized to. The other dimension (height or width) will be calculated autamaticaly
      * 

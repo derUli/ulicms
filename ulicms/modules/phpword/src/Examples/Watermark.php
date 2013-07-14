@@ -5,17 +5,17 @@ require_once '../PHPWord.php';
 $PHPWord = new PHPWord();
 
 // New portrait section
-$section = $PHPWord->createSection();
+$section = $PHPWord -> createSection();
 
 // Create header
-$header = $section->createHeader();
+$header = $section -> createHeader();
 
 // Add a watermark to the header
-$header->addWatermark('_earth.jpg', array('marginTop'=>200, 'marginLeft'=>55));
+$header -> addWatermark('_earth.jpg', array('marginTop' => 200, 'marginLeft' => 55));
 
-$section->addText('The header reference to the current section includes a watermark image.');
+$section -> addText('The header reference to the current section includes a watermark image.');
 
 // Save File
-$objWriter = PHPWord_IOFactory::createWriter($PHPWord, 'Word2007');
-$objWriter->save('Watermark.docx');
+$objWriter = PHPWord_IOFactory :: createWriter($PHPWord, 'Word2007');
+$objWriter -> save('Watermark.docx');
 ?>

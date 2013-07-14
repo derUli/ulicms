@@ -11,7 +11,7 @@
     
      while($row = mysql_fetch_object($admins_query)){
          $admins[$row -> id] = $row -> username;
-     }
+         }
     
     
      $users_online = db_query("SELECT * FROM " . tbname("admins") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
