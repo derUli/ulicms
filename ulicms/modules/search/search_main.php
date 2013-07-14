@@ -159,7 +159,7 @@ function search_render(){
 				     if(!empty($row["url"])){
                         $html_output .= "<li><a href='".htmlspecialchars($row["url"], ENT_QUOTES, "UTF-8") . "'>".$dateString." ".htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8") . "</a></li>";
                      } else {
-					    $html_output .= "<li>". htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8") ."</li>";
+					    $html_output .= "<li>".$dateString." ".htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8") ."</li>";
                     
 					 }
                      }
