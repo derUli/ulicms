@@ -1,5 +1,0 @@
-Folgende Config-Variablen müssen gesetzt, um das Plugin in Betrieb zu nehmen:
-blog2twitter_consumer_key
-blog2twitter_consumer_secret
-blog2twitter_access_token
-blog2twitter_access_token_secret

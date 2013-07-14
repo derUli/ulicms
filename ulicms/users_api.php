@@ -1,4 +1,6 @@
 <?php
+include_once dirname(__file__)."/lib/encryption.php";
+
 // this class contains functions for managing user accounts
 function getUsers(){
      $query = db_query("SELECT * FROM " . tbname("admins") . " ORDER by username");
