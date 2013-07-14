@@ -32,19 +32,23 @@ function search_render(){
 	<div class=\"search_subject\">Suchbegriff: <input type='text' name='q' value='".$search_subject."'> <input type='submit' value='Suchen'></div>";
 	
 	$html_output .= '<br/><div class="content-type">';
-	$html_output .= "<div><strong>Bereich:</strong><br/><input type='radio' value='pages' name='type' ";
+	$html_output .= "<div><strong>Bereich:</strong><br/><p><input type='radio' value='pages' name='type' ";
 	if($type == "pages"){
 	   $html_output .= " checked";
 	}
-	$html_output .= ">Seiten</div>";
+	$html_output .= "> Seiten</p>";
 	
 	
-	$html_output .= "<input type='radio' value='blog' name='type' ";
+	if(in_array("blog", getAllModules())){
+	
+	$html_output .= "<p><input type='radio' value='blog' name='type' ";
 	
 	if($type == "blog"){
 	   $html_output .= " checked";
 	}
-	$html_output .= ">Blog";
+	$html_output .= "> Blog</p>";
+	
+	}
 	
 
 	$html_output .= "</div></form>";
@@ -92,8 +96,8 @@ function search_render(){
 		   $blog_page = "blog";
 		
 			$search_sql_query = "SELECT seo_shortname, title FROM ".tbname("blog").
-		" WHERE MATCH (seo_shortname, title, blog_full, blog_preview) ".
-		"AGAINST ('".$search_request_unencoded."') ".
+		" WHERE MATCH (seo_shortname, title, content_full, content_preview) ".
+		"AGAINST ('".$search_request_unencoded."') ORDER by datum DESC".
 		"";
 		$results = db_query($search_sql_query);
 		$result_count = mysql_num_rows($results);
@@ -103,7 +107,7 @@ function search_render(){
 		$html_output.="<hr/>
 		<ul class='result-list'>";
 		while($row = mysql_fetch_assoc($results)){
-			$html_output.= "<li><a href='".$blog_page .".html?single=".htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8")."'>".htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8")."</a></li>";
+			$html_output.= "<li><a href='".$blog_page .".html?single=".htmlspecialchars($row["seo_shortname"], ENT_QUOTES, "UTF-8")."'>".htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8")."</a></li>";
 			
 		}
 		$html_output .= "</ul>";
