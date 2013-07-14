@@ -90,7 +90,7 @@ if(count($themes) > 0){
              echo " [Entfernen]";
              echo "</a>";
             
-             }else{
+             } else if(is_admin()){
             
              echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert('Das Theme kann nicht gelöscht werden, da es gerade aktiv ist.')\">";
             
