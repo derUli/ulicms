@@ -142,7 +142,7 @@ function search_render(){
             
              } else if($type == "event"){
             
-             $search_sql_query = "SELECT title, url FROM " . tbname("events") .
+             $search_sql_query = "SELECT * FROM " . tbname("events") .
              " WHERE MATCH (title, url) " .
              "AGAINST ('" . $search_request_unencoded . "') AND `start` > ".(time() - 60 * 60 * 23)." ORDER by `start` ASC";
 
@@ -155,7 +155,6 @@ function search_render(){
 		<ul class='result-list'>";
                  while($row = mysql_fetch_assoc($results)){
 				     $dateString = date("d.m.Y", $row["start"]);
-					 
 					 if($row["start"] != $row["end"]){
 					    $dateString .= " - ".date("d.m.Y", $row["end"]);
 					 }
