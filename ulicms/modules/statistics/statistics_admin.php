@@ -83,7 +83,8 @@ function statistics_admin(){
 </td>
 </tr>
 </table>
-
+<br/>
+<hr/>
 <?php 
 for($i = date("Y"); $i >= $firstYear ; $i--){
   echo "<h2>".$i."</h2>";
