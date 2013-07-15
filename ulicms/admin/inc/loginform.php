@@ -20,7 +20,7 @@
 </tr>
 <tr>
 <td></td>
-<td><input type="submit" value="Login"></td>
+<td style="padding-top:10px; text-align:center;"><input style="width:100%;" type="submit" value="Login"></td>
 </tr>
 </table>
 </form>
