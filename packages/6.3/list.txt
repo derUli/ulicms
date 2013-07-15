@@ -1,8 +1,8 @@
 barrel-roll-1.0.0
 block_yasni-0.0.1
-blog2twitter-0.0.1a
 blog-6.0.2
 blog-6.1.0
+blog2twitter-0.0.1a
 blog_auto_generate_seo_shortname-0.0.1
 blog_comments_dashboard-0.0.1
 blog_prev_next-0.0.1
@@ -44,10 +44,12 @@ proxy_real_ip-0.0.1
 rss2blog-0.0.1
 schnee-1.2.0r2
 search-0.3.0
+search-0.5.0beta
 senseless_superbunt-0.0.1
 sitemap-6.0.0
 socialbuttons-0.0.1
 sql_console-0.0.1
+statistics-0.0.1beta
 strip_tags-0.0.1
 theme-default-6.0.2
 theme-dogs-6.0.1
@@ -56,5 +58,3 @@ theme-responsive-1.0.1
 theme-zwanzigdreizehn-0.0.1
 timthumb-2.8.11
 twitter_for_php-3.1
-search-0.5.0beta
-statistics-0.0.1beta
