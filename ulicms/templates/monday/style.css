@@ -186,8 +186,7 @@ input[type="submit"]:active{
 
 }
 
-
-input[type="text"]{
+input[type="text"], textarea, input[type="password"]{
     color:#525050;
     padding: 5px;   
     border: 1px solid #DDDDDD;
@@ -208,11 +207,13 @@ input[type="text"]{
     box-shadow: 0 0 2px #DDDDDD;
 
 }
-input[type="text"]:hover
+
+
+input:hover, textarea:hover
 {
     border:1px solid #cccccc;
 }
-input[type="text"]:focus
+input:focus, textarea:focus
 {
     box-shadow:0 0 2px #FFFE00;
 }
