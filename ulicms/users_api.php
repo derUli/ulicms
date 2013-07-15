@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__file__)."/lib/encryption.php";
+include_once dirname(__file__) . "/lib/encryption.php";
 
 // this class contains functions for managing user accounts
 function getUsers(){

@@ -29,7 +29,7 @@ header("Content-Type: text/html; charset=UTF-8");
 if(isset($_REQUEST["ajax_cmd"])){
      include_once "inc/ajax_handler.php";
      exit();
-    }
+     }
 
 
 

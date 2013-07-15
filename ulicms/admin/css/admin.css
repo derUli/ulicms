@@ -201,7 +201,6 @@ width:97%;
 
 
 input[type="button"], input[type="submit"], button{
-display:block;  
 background: url(../gfx/simple_button.png) repeat-x;   
 padding:10px 0;  
 text-align:center;  
