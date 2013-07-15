@@ -11,7 +11,7 @@ function delete_page($id = false, $systemname = false){
          }
     
      return false;
-    }
+     }
 
 function add_page($system_title, $page_title, $page_content, $position, $activated = 1,
      $comments_enabled = 0, $redirection = "", $menu = "top",
@@ -57,6 +57,6 @@ function add_page($system_title, $page_title, $page_content, $position, $activat
   '$meta_description', '$meta_keywords',
   '$language', '$target')") !== false;
     
-    }
+     }
 
 ?>

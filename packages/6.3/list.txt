@@ -45,6 +45,7 @@ rss2blog-0.0.1
 schnee-1.2.0r2
 search-0.3.0
 search-0.5.0beta
+search_subjects-0.0.1
 senseless_superbunt-0.0.1
 sitemap-6.0.0
 socialbuttons-0.0.1

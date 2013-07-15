@@ -40,7 +40,7 @@ function add_hook($name){
 function is_ssl(){
      return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off'
          || $_SERVER['SERVER_PORT'] == 443);
-    }
+     }
 
 
 // Returns the language code of the current language
