@@ -16,7 +16,7 @@ function delete_page($id = false, $systemname = false){
 function add_page($system_title, $page_title, $page_content, $position, $activated = 1, 
                   $comments_enabled  = 0, $redirection = "", $menu = "oben.php", 
 		          $parent = "NULL", $language = "de", $access = array("all"), 
-				  $target = "_self"){
+				  $target = "_self", $meta_keywords = "", $meta_keywords = ""){
          $system_title = mysql_real_escape_string($system_title);
          $page_title = mysql_real_escape_string($page_title);
          $page_content = $page_content;
@@ -33,10 +33,7 @@ function add_page($system_title, $page_title, $page_content, $position, $activat
          $access = mysql_real_escape_string($access);
          $target = mysql_real_escape_string($target);
         
-         $page_content = mysql_real_escape_String($page_content);
-         $meta_keywords = "";
-         $meta_description = "";
-        
+         $page_content = mysql_real_escape_String($page_content);        
          $language = mysql_real_escape_string($language);
 		 
 		 if(!isset($_SESSION["login_id"])){
@@ -54,7 +51,7 @@ function add_page($system_title, $page_title, $page_content, $position, $activat
              ", " . $comments_enabled .
              ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "', 
   '$meta_description', '$meta_keywords',
-  '$language', '$target')");
+  '$language', '$target')") !== false;
 
 }
   
