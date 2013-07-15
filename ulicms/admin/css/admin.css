@@ -202,7 +202,7 @@ width:97%;
 
 input[type="button"], input[type="submit"], button{
 background: url(../gfx/simple_button.png) repeat-x;   
-padding:10px 0;  
+padding:5px;  
 text-align:center;  
 border:1px solid #608925;  
 font-weight:bold;  
@@ -244,7 +244,7 @@ border-color:#49671d;
 
 input[type=button]:hover, input[type=submit]:hover, button:hover{
 background-position:  0 -200px;  
-padding:11px 0 9px;   
+padding:5px;   
 }
 
 .startbutton,.startbutton:visited {
