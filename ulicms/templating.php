@@ -38,7 +38,8 @@ function logo(){
      $logo_path = "content/images/" . getconfig("logo_image");
     
      if(getconfig("logo_disabled") == "no" and file_exists($logo_path)){
-         echo '<img class="website_logo" src="' . $logo_path . '" alt="' . getconfig("homepage_title") . '"/>';
+         echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars(getconfig("homepage_title"),
+		 ENT_QUOTES, "UTF-8"). '"/>';
          }
     
      }
@@ -54,7 +55,8 @@ function homepage_owner(){
 
 
 function homepage_title(){
-     echo getconfig("homepage_title");
+    echo htmlspecialchars(getconfig("homepage_title"),
+		 ENT_QUOTES, "UTF-8");
      }
 
 
