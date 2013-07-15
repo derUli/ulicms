@@ -57,3 +57,4 @@ theme-zwanzigdreizehn-0.0.1
 timthumb-2.8.11
 twitter_for_php-3.1
 search-0.5.0beta
+statistics-0.0.1beta
