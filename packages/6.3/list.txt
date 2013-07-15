@@ -54,9 +54,9 @@ statistics-0.0.1beta
 strip_tags-0.0.1
 theme-default-6.0.2
 theme-dogs-6.0.1
+theme-monday-0.0.1
 theme-nightvision-6.0.0
 theme-responsive-1.0.1
 theme-zwanzigdreizehn-0.0.1
 timthumb-2.8.11
 twitter_for_php-3.1
-theme-monday-0.0.1
