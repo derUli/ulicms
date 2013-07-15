@@ -1,18 +1,10 @@
 <?php
-
-db_query("ALTER TABLE " . tbname("content") . " ADD fulltext(systemname, title, content, meta_description, meta_keywords)");
-
-if(in_array("blog", getAllModules())){
-     db_query("ALTER TABLE " . tbname("blog") . " ENGINE=MyISAM;");
-     db_query("ALTER TABLE " . tbname("blog") . " ADD fulltext(seo_shortname, title, content_full, content_preview)");
-     db_query("ALTER TABLE " . tbname("blog_comments") . " ENGINE=MyISAM;");
-     db_query("ALTER TABLE " . tbname("blog_comments") . " ADD fulltext(name, url, comment)");
-
-	 }
-
-if(in_array("fullcalendar", getAllModules())){
-     db_query("ALTER TABLE " . tbname("events") . " ENGINE=MyISAM;");
-     db_query("ALTER TABLE " . tbname("events") . " ADD fulltext(title, url)");
-}
+db_query("CREATE TABLE IF NOT EXISTS `".tbname("statistics")."` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hash` varchar(60) NOT NULL,
+  `date` bigint(20) NOT NULL,
+  `views` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 ?>
