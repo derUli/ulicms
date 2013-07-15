@@ -29,6 +29,7 @@ float:right;
 
 .menu_bottom a, .menu_bottom a:visited{
 color:black;
+transition: color .2s ease-out;
 }
 
 .menu_bottom a:hover{
@@ -60,7 +61,7 @@ padding-right:5px;
 
 div#searchFormHeader{
 position:absolute;
-right:5px;
+right:20px;
 bottom:15px;
 }
 
@@ -132,7 +133,7 @@ margin-right:50px;
 font-size:1.1em;
 }
 
-.menu_top a , .menu_top a:visited{
+.menu_top a, .menu_top a:visited{
 color: black;
 transition: color .2s ease-out;
 }
