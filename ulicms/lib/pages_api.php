@@ -29,6 +29,7 @@ function add_page($system_title, $page_title, $page_content, $position, $activat
              $parent = "NULL";
          else
              $parent = mysql_real_escape_string($parent);
+			 
          $access = implode(",", $access);
          $access = mysql_real_escape_string($access);
          $target = mysql_real_escape_string($target);
