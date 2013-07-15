@@ -30,25 +30,15 @@ window.onload = function(){
 <?php
 if(!getconfig("header-background-color")){
      setconfig("header-background-color", "rgb(35, 148, 96)");
-     }
-
-if(!getconfig("body-background-color")){
-     setconfig("body-background-color", "rgb(255,255,255)");
-     }
-
-
-if(!getconfig("body-text-color")){
-     setconfig("body-text-color", "rgb(0,0,0)");
-     }
-
-
+}
 ?>
 <style type="text/css">
-.header{
+#header{
 background-color:<?php echo getconfig("header-background-color");
 ?>;
 }
 </style>
+<meta name="viewport" content="width=1024"/>
 </head>
 <body>
 

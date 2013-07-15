@@ -1,14 +1,59 @@
 body{
 margin:0;
 padding:0;
+background-image:url("background.png");
 }
+
+.footer{
+margin-left:70px;
+margin-right:70px;
+margin-top:-45px;
+color:#919191;
+margin-bottom:20px;
+}
+
+h1, h2, h3, h4, h5, h6{
+text-transform:uppercase;
+color:#5c5c5c;
+}
+
+
+.footer span#owner{
+color:#0d6115;
+}
+
+.footer #copyright{
+float:right;
+}
+
+
+.menu_bottom a, .menu_bottom a:visited{
+color:black;
+}
+
+.menu_bottom a:hover{
+color:orange;
+}
+
+.menu_bottom {
+list-style: none;
+display: inline;
+font-size:1.1em;
+text-transform:uppercase;
+}
+
+.menu_bottom  li{
+float:left;
+margin-right:50px;
+}
+
 
 .menu_top{
 text-transform: uppercase;
 margin:0;
 border-bottom: solid 1px #f3f3f3;
-padding-bottom:5px;
-padding-left:10px;
+padding-bottom:10px;
+padding-left:20px;
 padding-top:5px;
 padding-right:5px;
 }
@@ -16,7 +61,7 @@ padding-right:5px;
 div#searchFormHeader{
 position:absolute;
 right:5px;
-bottom:5px;
+bottom:15px;
 }
 
 #header{
@@ -34,8 +79,9 @@ background-color:#fdfdfd;
 }
 
 #rootContainer #logo{
-margin-bottom:15px;
-padding-left:10px;
+margin-bottom:10px;
+padding-left:20px;
+padding-top:20px;
 }
 
 .menu_top li{
@@ -45,25 +91,88 @@ margin: 0;
 margin-right:50px;
 }
 
-.menu_top a{
-color: #990000;
-transition: color .2s ease-out, background 0.5s ease-in;
+.menu_top a , .menu_top a:visited{
+color: black;
+font-size:1.1em;
+transition: color .2s ease-out;
 }
 
 
 .menu_top a:hover{
-color: #FFFFFF;
-background-color: #336699;
+color: #FFFFFF !important;
 text-shadow: none;
 }
 
 a,a:visited{
-color:blue;
+color:#35ac40;
 text-decoration:none;
 }
 
 a:hover{
-color:orange;
+color:#086110;
 text-decoration:none;
 }
 
+.menu_active_link{
+color:#982525 !important;
+}
+
+input[type="button"], input[type="submit"], button{
+    color:#525050;
+    padding: 4px;   
+    border: 1px solid #DDDDDD;
+	/*Applying CSS3 gradient*/
+    background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);    
+    background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF), color-stop(5%, #EEEEEE) to(#FFFFFF));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#FFFFFF');
+    
+    /*Applying CSS 3radius*/   
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    /*Applying CSS3 box shadow*/
+    -moz-box-shadow: 0 0 2px #DDDDDD;
+    -webkit-box-shadow: 0 0 2px #DDDDDD;
+    box-shadow: 0 0 2px #DDDDDD;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover, button:hover{
+    border:1px solid #cccccc;
+}
+
+input[type="submit"]:active{
+    border:1px solid #cccccc;
+
+}
+
+
+input[type="text"]{
+    color:#525050;
+    padding: 5px;   
+    border: 1px solid #DDDDDD;
+    
+    /*Applying CSS3 gradient*/
+    background: -moz-linear-gradient(center top , #FFFFFF,  #EEEEEE 1px, #FFFFFF 20px);    
+    background: -webkit-gradient(linear, left top, left 20, from(#FFFFFF), color-stop(5%, #EEEEEE) to(#FFFFFF));
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FBFBFB', endColorstr='#FFFFFF');
+    
+    /*Applying CSS 3radius*/   
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    /*Applying CSS3 box shadow*/
+    -moz-box-shadow: 0 0 2px #DDDDDD;
+    -webkit-box-shadow: 0 0 2px #DDDDDD;
+    box-shadow: 0 0 2px #DDDDDD;
+
+}
+input[type="text"]:hover
+{
+    border:1px solid #cccccc;
+}
+input[type="text"]:focus
+{
+    box-shadow:0 0 2px #FFFE00;
+}
