@@ -7,7 +7,7 @@ background-image:url("background.png");
 .footer{
 margin-left:70px;
 margin-right:70px;
-margin-top:-45px;
+margin-top:-40px;
 color:#919191;
 margin-bottom:20px;
 }
@@ -89,11 +89,12 @@ list-style: none;
 display: inline;
 margin: 0;
 margin-right:50px;
+font-size:1.1em;
 }
 
 .menu_top a , .menu_top a:visited{
 color: black;
-font-size:1.1em;
+
 transition: color .2s ease-out;
 }
 
