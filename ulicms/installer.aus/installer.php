@@ -4277,11 +4277,11 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
          @chmod("../content", 0777);
         
          if(!file_exists("../content/cache")){
-             @mkdir("content/cache", 0777, true);
+             @mkdir("../content/cache", 0777, true);
              }
         
          if(!file_exists("../modules/")){
-             @mkdir("modules/", 0777, true);
+             @mkdir("../modules/", 0777, true);
              }
         
         
