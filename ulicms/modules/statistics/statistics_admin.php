@@ -18,7 +18,7 @@ function statistics_admin(){
 	 }
   }
 
-  $data = db_query("SELECT * FROM ".tbname("statistics"));
+  $data = db_query("SELECT * FROM ".tbname("statistics"). " ORDER by date ASC");
 
   $visitor_total = mysql_num_rows($data);
 
@@ -28,18 +28,19 @@ function statistics_admin(){
   $heute = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
   $morgen = mktime(0, 0, 0, date("m"), date("d")+1, date("Y"));
 
-  $j = date('Y');
-  $m = date('m');
-  $d = date('d');
-  $monatserster = mktime(0,0,0,$m,1,$j);
-  $monatsletzter = mktime(0,0,0,$m+1,0,$j);
-
   $visitors_today = 0;
   $visitors_yesterday = 0;
   $visitors_month = 0;
-
+  
+  $firstYear = false;
+  $firstMonth = false;
+  
   while($row = mysql_fetch_object($data)){
      $views_total += $row->views;
+	 if(!$firstYear){
+	    $firstYear = date("Y", $row->date);
+	 }
+	 
      if($row->date >= $heute and $row->date < $morgen){
         $visitors_today += 1;
      }
@@ -51,6 +52,7 @@ function statistics_admin(){
      if($row->date >= monatserster and $row->date < $monatsletzter){
        $visitors_month  += 1;
       }
+	 
   }
 
 
@@ -74,11 +76,6 @@ function statistics_admin(){
 <strong>Besucher gestern:</strong></td>
 <td style="text-align:right;"><?php echo intval($visitors_yesterday);?>
 </td>
-</tr><tr>
-<td style="width:200px;">
-<strong>Besucher im <?php echo strftime("%B", $monatserster);?>:</strong></td>
-<td style="text-align:right;"><?php echo intval($visitors_yesterday);?>
-</td>
 </tr>
 <td style="width:200px;">
 <strong>Views gesamt:</strong></td>
@@ -86,6 +83,34 @@ function statistics_admin(){
 </td>
 </tr>
 </table>
+
+<?php 
+for($i = date("Y"); $i >= $firstYear ; $i--){
+  echo "<h2>".$i."</h2>";
+  echo "<table>
+<tr>
+<td style=\"width:200px;\"><strong>Monat</strong></td>
+<td><strong>Besucher</strong></td>
+</tr>";
+  $j = $i;
+  for($m=1; $m <= 12; $m++) {
+    $d = date('d');
+    $monatserster = mktime(0,0,0,$m,1,$j);
+    $monatsletzter = mktime(0,0,0,$m+1,0,$j);
+    $data = db_query("SELECT * FROM ".tbname("statistics"). " WHERE date >= $monatserster
+	and date < $monatsletzter ORDER by date ASC");
+	if(mysql_num_rows($data) > 0){
+	  echo "<tr>";
+	  echo "<td>".strftime("%B", $monatserster)."</td>";
+	  echo "<td style=\"text-align:right\">".mysql_num_rows($data)."</td>";
+	  echo "</tr>";
+	}
+  
+  }
+  echo "</table>";
+  }
+?>
+
 <?php
 
 }
