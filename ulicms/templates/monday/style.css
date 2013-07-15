@@ -68,8 +68,48 @@ bottom:15px;
 position:relative;
 }
 
+
+code {
+font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, 'Everson Mono', 'Lucida Console', 'Andale Mono', 'Nimbus Mono L', 'Liberation Mono', FreeMono, 'Osaka Monospaced', Courier, 'New Courier', monospace;
+}
+
+
+blockquote {
+font-family: Georgia, serif;
+font-size: 18px;
+font-style: italic;
+width: 500px;
+margin: 0.25em 0;
+padding: 0.25em 40px;
+line-height: 1.45;
+position: relative;
+color: #383838;
+}
+
+blockquote:before {
+display: block;
+content: "\201C";
+font-size: 80px;
+position: absolute;
+left: -20px;
+top: -20px;
+color: #7a7a7a;
+}
+blockquote cite {
+color: #999999;
+font-size: 14px;
+display: block;
+margin-top: 5px;
+}
+ 
+blockquote cite:before {
+content: "\2014 \2009";
+}
+
 div#content{
-padding:10px;
+padding-left:20px;
+padding-bottom:0px;
+min-height:200px;
 }
 
 #rootContainer{
@@ -94,7 +134,6 @@ font-size:1.1em;
 
 .menu_top a , .menu_top a:visited{
 color: black;
-
 transition: color .2s ease-out;
 }
 
