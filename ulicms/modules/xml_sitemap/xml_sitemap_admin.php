@@ -34,18 +34,33 @@ define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
 
 function generate_sitemap(){
 
+   @set_time_limit(0);
+   @ini_set('max_execution_time', 0);
+
    $xml_string = '<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ';
 
-  $query_pages = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 ORDER by lastmodified");
+  $query_pages = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 ORDER by lastmodified DESC");
   while($row = mysql_fetch_object($query_pages)){
      $xml_string .= "<url>\r\n";
      $xml_string .= "\t<loc>".getBaseURL().$row->systemname.".html"."</loc>\r\n";
 	 $xml_string .= "\t<lastmod>".date("Y-m-d", $row->lastmodified)."</lastmod>\r\n";
      $xml_string .= "</url>\r\n\r\n";
+	 
+	 if(containsModule($row->content, "blog")){
+	      $query_pages = mysql_query("SELECT * FROM ".tbname("blog")." WHERE entry_enabled = 1 ORDER by datum DESC");
+          while($row2= mysql_fetch_object($query_pages)){
+              $xml_string .= "<url>\r\n";
+              $xml_string .= "\t<loc>".getBaseURL().$row->systemname.".html?single=".$row2->seo_shortname."</loc>\r\n";
+	          $xml_string .= "\t<lastmod>".date("Y-m-d", $row2->datum)."</lastmod>\r\n";
+              $xml_string .= "</url>\r\n\r\n";
+  }
+	 }
   }
 
+
+  
 
   $xml_string .= "</urlset>";
   $xml_string = str_replace("\r\n", "\n", $xml_string);
@@ -59,7 +74,7 @@ function generate_sitemap(){
      fwrite($handle, $xml_string);
 	 fclose($handle);
 	 
-	 echo "<a href=\"../sitemap.xml\">sitemap.xml</a> wurde generiert";
+	 echo "<p><a href=\"../sitemap.xml\">sitemap.xml</a> wurde generiert</p>";
   } else {
   echo "<p>sitemap.xml konnte nicht erzeugt werden.Bitte legen Sie die Datei manuell an und fügen Sie folgenden Code ein.</p>";
   echo "<textarea cols=70 rows=20>";

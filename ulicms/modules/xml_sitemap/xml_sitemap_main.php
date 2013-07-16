@@ -4,7 +4,7 @@ function xml_sitemap_render(){
       return "<a href\"sitemap.xml\">XML Sitemap</a>";
    }
    else {
-      return "sitemap.xml wurde noch nicht generiert";
+      return "sitemap.xml wurde noch nicht generiert.";
    }
 }
 ?>
