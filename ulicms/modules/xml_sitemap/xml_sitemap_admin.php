@@ -7,6 +7,9 @@ if($required_permission === false){
    $required_permission = 40;
 }
 
+function xmlspecialchars($text) {
+   return str_replace('&#039;', '&apos;', htmlspecialchars($text, ENT_QUOTES));
+}
 
 function getBaseURL() {
  $pageURL = 'http';
@@ -44,7 +47,7 @@ function generate_sitemap(){
   $query_pages = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 ORDER by lastmodified DESC");
   while($row = mysql_fetch_object($query_pages)){
      $xml_string .= "<url>\r\n";
-     $xml_string .= "\t<loc>".getBaseURL().$row->systemname.".html"."</loc>\r\n";
+     $xml_string .= "\t<loc>".xmlspecialchars(getBaseURL().$row->systemname.".html")."</loc>\r\n";
 	 $xml_string .= "\t<lastmod>".date("Y-m-d", $row->lastmodified)."</lastmod>\r\n";
      $xml_string .= "</url>\r\n\r\n";
 	 
@@ -52,7 +55,7 @@ function generate_sitemap(){
 	      $query_blog = mysql_query("SELECT * FROM ".tbname("blog")." WHERE entry_enabled = 1 ORDER by datum DESC");
           while($row2 = mysql_fetch_object($query_blog)){
               $xml_string .= "<url>\r\n";
-              $xml_string .= "\t<loc>".getBaseURL().$row->systemname.".html?single=".$row2->seo_shortname."</loc>\r\n";
+              $xml_string .= "\t<loc>".xmlspecialchars(getBaseURL().$row->systemname.".html?single=".$row2->seo_shortname)."</loc>\r\n";
 	          $xml_string .= "\t<lastmod>".date("Y-m-d", $row2->datum)."</lastmod>\r\n";
               $xml_string .= "</url>\r\n\r\n";
   }
