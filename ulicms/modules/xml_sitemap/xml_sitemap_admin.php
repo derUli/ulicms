@@ -77,7 +77,7 @@ function generate_sitemap(){
      fwrite($handle, $xml_string);
 	 fclose($handle);
 	 
-	 echo "<p><a href=\"../sitemap.xml\">sitemap.xml</a> wurde generiert</p>";
+	 echo "<p><a href=\"../sitemap.xml\" target=\"_blank\">sitemap.xml</a> wurde generiert</p>";
   } else {
   echo "<p>sitemap.xml konnte nicht erzeugt werden.Bitte legen Sie die Datei manuell an und fügen Sie folgenden Code ein.</p>";
   echo "<textarea cols=70 rows=20>";
