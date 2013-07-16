@@ -10,7 +10,7 @@ if($required_permission === false){
 
 function getBaseURL() {
  $pageURL = 'http';
- if ($_SERVER["HTTPS"] == "on") {$pageURL .= "https";}
+ if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
  $pageURL .= "://";
  $dirname = str_replace("admin", "", dirname($_SERVER["REQUEST_URI"]));
  $dirname = str_replace("\\", "/", $dirname);
@@ -48,9 +48,9 @@ function generate_sitemap(){
 	 $xml_string .= "\t<lastmod>".date("Y-m-d", $row->lastmodified)."</lastmod>\r\n";
      $xml_string .= "</url>\r\n\r\n";
 	 
-	 if(containsModule($row->content, "blog")){
-	      $query_pages = mysql_query("SELECT * FROM ".tbname("blog")." WHERE entry_enabled = 1 ORDER by datum DESC");
-          while($row2= mysql_fetch_object($query_pages)){
+	 if(containsModule($row->systemname, "blog")){
+	      $query_blog = mysql_query("SELECT * FROM ".tbname("blog")." WHERE entry_enabled = 1 ORDER by datum DESC");
+          while($row2 = mysql_fetch_object($query_blog)){
               $xml_string .= "<url>\r\n";
               $xml_string .= "\t<loc>".getBaseURL().$row->systemname.".html?single=".$row2->seo_shortname."</loc>\r\n";
 	          $xml_string .= "\t<lastmod>".date("Y-m-d", $row2->datum)."</lastmod>\r\n";
@@ -69,7 +69,7 @@ function generate_sitemap(){
   
   $xml_file = "../sitemap.xml";
   
-  $handle = fopen($xml_file, "w");
+  $handle = @fopen($xml_file, "w");
   if($handle){
      fwrite($handle, $xml_string);
 	 fclose($handle);
