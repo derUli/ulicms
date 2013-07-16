@@ -31,21 +31,19 @@ function getBaseURL() {
 
 define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
 
-if(isset($_POST["submit"]) and has_permissions(40)){
+
+function generate_sitemap(){
+
    $xml_string = '<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ';
 
   $query_pages = mysql_query("SELECT * FROM ".tbname("content")." WHERE active = 1 ORDER by lastmodified");
   while($row = mysql_fetch_object($query_pages)){
-     $xml_string .= "<url>
-	 ";
-     $xml_string .= "<loc>".getBaseURL().$row->systemname.".html"."</loc>
-	 ";
-	 $xml_string .= "<lastmod>".date("Y-m-d", $row->lastmodified)."</lastmod>
-	 ";
-     $xml_string .= "</url>
-	 ";
+     $xml_string .= "<url>\r\n";
+     $xml_string .= "\t<loc>".getBaseURL().$row->systemname.".html"."</loc>\r\n";
+	 $xml_string .= "\t<lastmod>".date("Y-m-d", $row->lastmodified)."</lastmod>\r\n";
+     $xml_string .= "</url>\r\n\r\n";
   }
 
 
@@ -53,13 +51,34 @@ if(isset($_POST["submit"]) and has_permissions(40)){
   $xml_string = str_replace("\r\n", "\n", $xml_string);
   $xml_string = str_replace("\r", "\n", $xml_string);
   $xml_string = str_replace("\n", "\r\n", $xml_string);
-  echo nl2br(htmlspecialchars($xml_string));
+  
+  $xml_file = "../sitemap.xml";
+  
+  $handle = fopen($xml_file, "w");
+  if($handle){
+     fwrite($handle, $xml_string);
+	 fclose($handle);
+	 
+	 echo "<a href=\"../sitemap.xml\">sitemap.xml</a> wurde generiert";
+  } else {
+  echo "<p>sitemap.xml konnte nicht erzeugt werden.Bitte legen Sie die Datei manuell an und fügen Sie folgenden Code ein.</p>";
+  echo "<textarea cols=70 rows=20>";
+  echo htmlspecialchars($xml_string);
+  echo "</textarea><br/><br/>";
+  }
 }
+
 
 // Konfiguration checken
 $send_comments_via_email = getconfig("blog_send_comments_via_email") == "yes";
 
 function xml_sitemap_admin(){
+
+if(isset($_POST["submit"]))
+   generate_sitemap()
+   
+
+
 ?>
 
 <form action="<?php echo getModuleAdminSelfPath()?>" method="post">

@@ -94,8 +94,7 @@ color:#d25400;
 
 code {
 font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, 'Everson Mono', 'Lucida Console', 'Andale Mono', 'Nimbus Mono L', 'Liberation Mono', FreeMono, 'Osaka Monospaced', Courier, 'New Courier', monospace;
-border:dotted black 1px;
-padding:3px;
+font-size:0.8em;
 }
 
 
