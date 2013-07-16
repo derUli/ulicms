@@ -10,6 +10,13 @@ function language_selection(){
     
      }
 
+	 
+// Gibt "Diese Seite läuft mit UliCMS" aus
+function poweredByUliCMS(){
+   echo "<p class=\"powered-by-ulicms\">Diese Seite läuft mit "
+   ."<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS</a></p>";
+}
+
 function random_banner(){
      $connection = MYSQL_CONNECTION;
      $query = db_query("SELECT * FROM " . tbname("banner") . " ORDER BY RAND() LIMIT 1");
