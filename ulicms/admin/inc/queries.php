@@ -41,8 +41,10 @@ if($_GET["action"] == "view_website" or $_GET["action"] == "frontpage"){
 
 
 if(isset($_GET["clear_cache"])){
+     add_hook("before_clear_cache");
      SureRemoveDir("../content/cache", false);
-     }
+     add_hook("after_clear_cache");
+}
 
 
 if($_GET["action"] == "undelete_page" && $_SESSION["group"] >= 40){
