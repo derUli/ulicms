@@ -8,6 +8,7 @@ blog_comments_dashboard-0.0.1
 blog_prev_next-0.0.1
 blog_seo-0.0.2
 blog_statistics_dashboard-0.0.1beta
+break_frames-0.0.1
 code_highlighting-0.0.1beta
 comments-6.0.0
 compress_html-0.0.1
