@@ -17,6 +17,7 @@ function poweredByUliCMS(){
    ."<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS</a></p>";
 }
 
+// Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner(){
      $connection = MYSQL_CONNECTION;
      $query = db_query("SELECT * FROM " . tbname("banner") . " ORDER BY RAND() LIMIT 1");
