@@ -379,9 +379,10 @@ function base_metas(){
          $dir .= "/";
          }
     
-    
-     if(getconfig("robots")){
-         echo '<meta name="robots" content="' . getconfig("robots") . '"/>';
+	 $robots = getconfig("robots");
+     if($robots){
+	     $robots = apply_filter($robots, "meta_robots");
+         echo '<meta name="robots" content="' .$robots.'"/>';
          echo "\r\n";
          }
     
