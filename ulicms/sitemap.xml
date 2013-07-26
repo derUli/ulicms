@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>http://localhost/ulicms/ulicms/kontakt.html</loc>
+	<lastmod>2013-07-15</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/ulicms/suche.html</loc>
+	<lastmod>2013-07-15</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/ulicms/test.html</loc>
+	<lastmod>2013-07-15</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/ulicms/lorem_ipsum.html</loc>
+	<lastmod>2013-07-15</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/ulicms/welcome.html</loc>
+	<lastmod>2013-03-25</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/ulicms/willkommen.html</loc>
+	<lastmod>2013-03-25</lastmod>
+</url>
+
+</urlset>
