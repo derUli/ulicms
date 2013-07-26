@@ -107,7 +107,7 @@ function comment_form($post_id){
      }
      
 
-     $html .= "<table border=0>
+     $html .= "<table style=\"border:0px;\">
      <tr>
      <td><strong>Name: *</strong>&nbsp;&nbsp;</td><td><input name='name' size=50 maxlength=255 type='text' value='".$_SESSION["name"]."'>
      </td>

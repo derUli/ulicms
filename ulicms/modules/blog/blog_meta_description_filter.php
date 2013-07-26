@@ -37,11 +37,15 @@ function blog_meta_description_filter($txt){
 
    $word_count = str_word_count($shortstring);
 
+   
+
+   
    while(strlen($shortstring) > $maxlength_chars){
       $shortstring = getExcerpt($content_preview, 0, $word_count);
       $word_count -= 1;
    }
-
+      $shortstring = str_replace("\"", "'", $shortstring);
+   $shortstring = str_replace("&quot;", "'", $shortstring);
    return $shortstring;
    
 }
