@@ -4,6 +4,7 @@ blog:
 + Kategorien
 + Tags
 + Caching für den Blog
++ Mehr Einstellungen über GUI änderbar
 
-- Dynamisches einhängen von blog_prex_next per Hook
-- blog_uninstall.php hinzufügen, blog_rss.php entfernen
+/ Dynamisches einhängen von blog_prex_next per Hook
+/ blog_uninstall.php hinzufügen, blog_rss.php entfernen
