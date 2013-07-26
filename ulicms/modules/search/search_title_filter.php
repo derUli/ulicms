@@ -6,5 +6,5 @@ function search_title_filter($title){
     else{
          return $title;
          }
-    }
+     }
 ?>

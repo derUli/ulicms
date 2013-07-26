@@ -10,12 +10,12 @@ function language_selection(){
     
      }
 
-	 
+
 // Gibt "Diese Seite läuft mit UliCMS" aus
 function poweredByUliCMS(){
-   echo "<p class=\"powered-by-ulicms\">Diese Seite läuft mit "
-   ."<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS</a></p>";
-}
+     echo "<p class=\"powered-by-ulicms\">Diese Seite läuft mit "
+     . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS</a></p>";
+    }
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner(){
@@ -47,7 +47,7 @@ function logo(){
     
      if(getconfig("logo_disabled") == "no" and file_exists($logo_path)){
          echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars(getconfig("homepage_title"),
-		 ENT_QUOTES, "UTF-8"). '"/>';
+             ENT_QUOTES, "UTF-8") . '"/>';
          }
     
      }
@@ -63,8 +63,8 @@ function homepage_owner(){
 
 
 function homepage_title(){
-    echo htmlspecialchars(getconfig("homepage_title"),
-		 ENT_QUOTES, "UTF-8");
+     echo htmlspecialchars(getconfig("homepage_title"),
+         ENT_QUOTES, "UTF-8");
      }
 
 
@@ -379,10 +379,10 @@ function base_metas(){
          $dir .= "/";
          }
     
-	 $robots = getconfig("robots");
+     $robots = getconfig("robots");
      if($robots){
-	     $robots = apply_filter($robots, "meta_robots");
-         echo '<meta name="robots" content="' .$robots.'"/>';
+         $robots = apply_filter($robots, "meta_robots");
+         echo '<meta name="robots" content="' . $robots . '"/>';
          echo "\r\n";
          }
     

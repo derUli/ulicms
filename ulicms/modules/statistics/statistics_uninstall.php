@@ -1,3 +1,3 @@
-<?php 
-db_query("DROP TABLE `".tbname("statistics")."`");
+<?php
+db_query("DROP TABLE `" . tbname("statistics") . "`");
 ?>

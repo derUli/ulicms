@@ -2,7 +2,6 @@
 // UliCMS Suchfunktions-Modul
 // Version 0.3
 // Neu: Jetzt indizierte Volltextsuche
-
 function search_render(){
      $html_output = "";
     
@@ -17,11 +16,11 @@ function search_render(){
          switch($_GET["type"]){
          case "blog":
              $type = "blog";
-         break;
+             break;
          case "comments":
              $type = "comments";
-         break;
-		case "events":
+             break;
+         case "events":
              $type = "events";
              break;
          case "pages": default:
@@ -53,18 +52,18 @@ function search_render(){
              }
          $html_output .= "> Blog<br/>";
         
-     
+        
          $html_output .= "<input type='radio' value='comments' name='type' ";
         
          if($type == "comments"){
-            $html_output .= " checked";
-         }
+             $html_output .= " checked";
+             }
          $html_output .= "> Kommentare<br/>";
-         
+        
         
          }
-		 
-		 if(in_array("fullcalendar", getAllModules())){
+    
+     if(in_array("fullcalendar", getAllModules())){
         
          $html_output .= "<input type='radio' value='events' name='type' ";
         
@@ -72,8 +71,8 @@ function search_render(){
              $html_output .= " checked";
              }
          $html_output .= "> Veranstaltungen<br/>";
-		 
-		 }
+        
+         }
     
     
      $html_output .= "</div></form>";
@@ -114,7 +113,7 @@ function search_render(){
                  }
             
             
-             } else if($type == "blog"){
+             }else if($type == "blog"){
             
              $blog_page = getconfig("blog_page");
              if(!$blog_page)
@@ -140,7 +139,7 @@ function search_render(){
             
             
             
-             } else if($type == "comments"){
+             }else if($type == "comments"){
             
              $blog_page = getconfig("blog_page");
              if(!$blog_page)
@@ -157,26 +156,26 @@ function search_render(){
                  $html_output .= "<hr/>
 		<ol class='result-list'>";
                  while($row = mysql_fetch_assoc($results)){
-				     $query2 = mysql_query("SELECT * FROM ".tbname("blog")." WHERE id=".$row["post_id"]);
-					 if(mysql_num_rows($query2) > 0){
-				     $row2 = mysql_fetch_assoc($query2);
-                     $html_output .= "<li><a href='" . $blog_page . ".html?single=" . htmlspecialchars($row2["seo_shortname"], ENT_QUOTES, "UTF-8") ."#comment".$row["id"]."'>" ."Kommentar #".$row["id"]." von ".htmlspecialchars($row["name"], ENT_QUOTES, "UTF-8")." zu \"".htmlspecialchars($row2["title"], ENT_QUOTES, "UTF-8").
-                     "\""."</a></li>";
-                    
-					
-					  }
+                     $query2 = mysql_query("SELECT * FROM " . tbname("blog") . " WHERE id=" . $row["post_id"]);
+                     if(mysql_num_rows($query2) > 0){
+                         $row2 = mysql_fetch_assoc($query2);
+                         $html_output .= "<li><a href='" . $blog_page . ".html?single=" . htmlspecialchars($row2["seo_shortname"], ENT_QUOTES, "UTF-8") . "#comment" . $row["id"] . "'>" . "Kommentar #" . $row["id"] . " von " . htmlspecialchars($row["name"], ENT_QUOTES, "UTF-8") . " zu \"" . htmlspecialchars($row2["title"], ENT_QUOTES, "UTF-8") .
+                         "\"" . "</a></li>";
+                        
+                        
+                         }
                      }
                  $html_output .= "</ol>";
                  }
             
             
             
-             } else if($type == "events"){
+             }else if($type == "events"){
             
              $search_sql_query = "SELECT * FROM " . tbname("events") .
              " WHERE MATCH (title, url) " .
-             "AGAINST ('" . $search_request_unencoded . "') AND `start` > ".(time() - 60 * 60 * 23)." ORDER by `start` ASC";
-
+             "AGAINST ('" . $search_request_unencoded . "') AND `start` > " . (time() - 60 * 60 * 23) . " ORDER by `start` ASC";
+            
              $results = db_query($search_sql_query);
              $result_count = mysql_num_rows($results);
              $html_output .= "<p class='search-results'><strong>$result_count</strong> Suchergebnisse gefunden</p>";
@@ -185,16 +184,16 @@ function search_render(){
                  $html_output .= "<hr/>
 		<ol class='result-list'>";
                  while($row = mysql_fetch_assoc($results)){
-				     $dateString = date("d.m.Y", $row["start"]);
-					 if($row["start"] != $row["end"]){
-					    $dateString .= " - ".date("d.m.Y", $row["end"]);
-					 }
-				     if(!empty($row["url"])){
-                        $html_output .= "<li><a href='".htmlspecialchars($row["url"], ENT_QUOTES, "UTF-8") . "'>".$dateString." ".htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8") . "</a></li>";
-                     } else {
-					    $html_output .= "<li>".$dateString." ".htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8") ."</li>";
-                    
-					 }
+                     $dateString = date("d.m.Y", $row["start"]);
+                     if($row["start"] != $row["end"]){
+                         $dateString .= " - " . date("d.m.Y", $row["end"]);
+                         }
+                     if(!empty($row["url"])){
+                         $html_output .= "<li><a href='" . htmlspecialchars($row["url"], ENT_QUOTES, "UTF-8") . "'>" . $dateString . " " . htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8") . "</a></li>";
+                         }else{
+                         $html_output .= "<li>" . $dateString . " " . htmlspecialchars($row["title"], ENT_QUOTES, "UTF-8") . "</li>";
+                        
+                         }
                      }
                  $html_output .= "</ol>";
                  }
@@ -204,5 +203,5 @@ function search_render(){
              }
          }
      return $html_output;
-    }
+     }
 ?>
