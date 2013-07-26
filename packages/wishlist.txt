@@ -1,0 +1,7 @@
+blog:
+- Dynamisches einhängen von blog_prex_next per Hook
+- Kommentarfunktion nur für registrierte Benutzer (Optional)
+- RSS-Feed für Kommentare
+- Kategorien
+- Tags
+- blog_uninstall.php hinzufügen, blog_rss.php entfernen
