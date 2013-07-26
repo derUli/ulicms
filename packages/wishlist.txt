@@ -5,6 +5,7 @@ blog:
 + Tags
 + Caching für den Blog
 + Mehr Einstellungen über GUI änderbar
-
++ blog_seo in blog integrieren
 / Dynamisches einhängen von blog_prex_next per Hook
 / blog_uninstall.php hinzufügen, blog_rss.php entfernen
+/ Last Modified Header
