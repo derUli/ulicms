@@ -1,6 +1,5 @@
 Änderungen in Version 6.2.0 Beta (28. Juni 2013)
-+ blog_auto_generate_seo_shortname in blog integriert
-+ blog_seo in blog integrieren
++ blog_auto_generate_seo_shortname integriert
++ blog_seo integriert
 + Dynamisches einhängen von blog_prex_next per Hook
-+ blog_uninstall.php hinzufügen, blog_rss.php entfernen
-+ Last Modified Header
++ Last Modified Header wird gesendet
