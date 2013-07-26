@@ -41,8 +41,7 @@ if($blog_feed_max_items === false){
 <?php if(getconfig("blog_send_comments_via_email") == "yes"){
 echo " checked";
 }?>/> Über neue Kommentare per E-Mail benachrichtigen</p>
-<p><input type="number" name="blog_feed_max_items" size=3 maxlength=3 min="5" max="100" value="<?php echo $blog_feed_max_items;?>"/> maximale Anzahl der Einträge im Newsfeed
-</p>
+<p>maximale Anzahl der Einträge im Newsfeed <input type="number" name="blog_feed_max_items" size=3 maxlength=3 min="5" max="100" value="<?php echo $blog_feed_max_items;?>"/></p>
 
 <p><input type="submit" name="submit" value="Einstellungen speichern"/></p>
 </form>
