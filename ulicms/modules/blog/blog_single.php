@@ -32,7 +32,7 @@ function blog_single($seo_shortname){
         
          if($_SESSION["group"] >= 20 or $post -> entry_enabled){
             
-             $html .= "<h1 class='blog_headline'><a name='headline' href='#headline'>" . $post -> title . "</a></h1>";
+             $html .= "<h1 class='blog_headline'>" . $post -> title . "</h1>";
              $html .= "<hr class='blog_hr'/>";
             
              $date_and_autor_string = $autor_and_date;
