@@ -37,7 +37,7 @@ pkg_src wurde nicht definiert!</p>
     
     
      if($packageList){
-         sort($packageList);
+         natcasesort($packageList);
          $packageList = array_filter($packageList, 'strlen');
          }
     

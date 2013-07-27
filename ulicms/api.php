@@ -88,6 +88,7 @@ function getThemesList(){
          $templateDir = "templates/";
     
      $folders = scanDir($templateDir);
+	 natcasesort($folders);
      for($i = 0; $i < count($folders); $i++){
          $f = $templateDir . ($folders[$i]) . "/";
          if(is_dir($f)){
@@ -98,7 +99,7 @@ function getThemesList(){
              }
          }
     
-     sort($themes);
+     natcasesort($themes);
     
      return $themes;
      }
@@ -306,7 +307,8 @@ function getAllModules(){
     
      $available_modules = Array();
      $directory_content = scandir($module_folder);
-     sort($directory_content);
+
+     natcasesort($directory_content);
      for($i = 0;$i < count($directory_content);$i++){
          $module_init_file = $module_folder . $directory_content[$i] . "/" .
          $directory_content[$i] . "_main.php";
@@ -318,6 +320,7 @@ function getAllModules(){
                  }
              }
          }
+     natcasesort($available_modules);
      return $available_modules;
     
      }
