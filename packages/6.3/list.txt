@@ -41,6 +41,7 @@ phpword-0.6.3beta
 print_version-0.0.1
 profiles-0.0.1
 proxy_real_ip-0.0.1
+rel_nofollow-0.0.1beta
 rss2blog-0.0.1
 schnee-1.2.0r2
 search-0.3.0

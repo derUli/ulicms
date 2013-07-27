@@ -1,0 +1,1 @@
+Fügt rel="nofollow" zu externen Links hinzu
