@@ -1,6 +1,7 @@
 barrel-roll-1.0.0
 block_yasni-0.0.1
 blog-6.1.0
+blog-6.2.0beta
 blog2twitter-0.0.1a
 blog_auto_generate_seo_shortname-0.0.1
 blog_comments_dashboard-0.0.1
