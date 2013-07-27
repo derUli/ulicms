@@ -410,14 +410,26 @@ function getAllLanguages(){
 
 // get URL to UliCMS
 function the_url(){
-    
-     $path = getcwd();
-     if(!is_file("cms-config.php")){
-         chdir("..");
+  $pageURL = 'http';
+     if ($_SERVER["HTTPS"] == "on"){
+        $pageURL .= "s";
+    }
+     $pageURL .= "://";
+     $dirname = dirname($_SERVER["REQUEST_URI"]);
+     $dirname = str_replace("\\", "/", $dirname);
+	 $dirname = str_replace("admin", "", $dirname);
+     $dirname = trim($dirname, "/");
+     if($dirname != ""){
+         $dirname = "/" . $dirname . "/";
+         }else{
+         $dirname = "/";
          }
-     return "http://" . $_SERVER["HTTP_HOST"] . dirname($_SERVER["SCRIPT_NAME"]);
-     chdir($path);
-    
+     if ($_SERVER["SERVER_PORT"] != "80"){
+         $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $dirname;
+         }else{
+         $pageURL .= $_SERVER["SERVER_NAME"] . $dirname;
+         }
+     return $pageURL;
      }
 
 
