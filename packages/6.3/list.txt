@@ -36,6 +36,7 @@ motd_frontend-0.0.1
 mysql_backup-0.0.1
 newsletter-0.0.1
 oembed-0.0.1a
+PHPMailer-5.2.6
 phpinfo-0.0.1
 phpword-0.6.3beta
 print_version-0.0.1
