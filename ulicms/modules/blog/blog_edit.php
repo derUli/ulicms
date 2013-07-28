@@ -287,9 +287,9 @@ function confirmExit()
         
         
          return $html_output;
-        }
+         }
     
-    }
+     }
 
 
 ?>

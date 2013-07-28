@@ -7,5 +7,5 @@ function rss2blog_seo_render(){
          }
     
      return "<p class=\"ulicms_error\">$mainFile fehlt!</p>";
-    }
+     }
 ?>

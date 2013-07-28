@@ -49,5 +49,5 @@ function blog_prev_next_render(){
     
      return $html;
     
-    }
+     }
 ?>

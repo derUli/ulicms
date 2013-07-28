@@ -15,7 +15,7 @@ function language_selection(){
 function poweredByUliCMS(){
      echo "<p class=\"powered-by-ulicms\">Diese Seite läuft mit "
      . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS</a></p>";
-    }
+     }
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner(){

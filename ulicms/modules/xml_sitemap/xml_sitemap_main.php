@@ -6,5 +6,5 @@ function xml_sitemap_render(){
     else{
          return "sitemap.xml wurde noch nicht generiert.";
          }
-    }
+     }
 ?>

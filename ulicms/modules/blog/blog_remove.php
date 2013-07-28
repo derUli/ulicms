@@ -6,7 +6,7 @@ function blog_remove_post($post_id){
          }else{
          return "<p>Zugriff verweigert!</p>";
          }
-    }
+     }
 
 
 function blog_remove_comment($post_id){
@@ -18,5 +18,5 @@ function blog_remove_comment($post_id){
          }else{
          return "<p>Zugriff verweigert</p>";
          }
-    }
+     }
 ?>

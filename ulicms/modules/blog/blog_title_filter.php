@@ -17,5 +17,5 @@ function blog_title_filter($txt){
     
      return $title;
     
-    }
+     }
 ?>

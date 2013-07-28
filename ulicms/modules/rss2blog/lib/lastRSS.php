@@ -145,13 +145,13 @@ class lastRSS{
              // if document codepage is specified, use it
             if ($result['encoding'] != '')
             {
-                $this -> rsscp = $result['encoding'];
-            } // This is used in my_preg_match()
+                 $this -> rsscp = $result['encoding'];
+                 } // This is used in my_preg_match()
              // otherwise use the default codepage
             else
                 {
-                $this -> rsscp = $this -> default_cp;
-            } // This is used in my_preg_match()
+                 $this -> rsscp = $this -> default_cp;
+                 } // This is used in my_preg_match()
             
              // Parse CHANNEL info
             preg_match("'<channel.*?>(.*?)</channel>'si", $rss_content, $out_channel);
@@ -215,10 +215,10 @@ class lastRSS{
              $result['items_count'] = $i;
              return $result;
              }
-        else { // Error in opening return False
-                return False;
+        else{ // Error in opening return False
+             return False;
              }
          }
-    }
+     }
 
 ?>

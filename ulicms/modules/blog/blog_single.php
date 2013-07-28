@@ -1,13 +1,13 @@
 ﻿<?php
 if(file_exists("antispam-features.php")){
      include "antispam-features.php";
-    }else{
+     }else{
     
      function isCountryBlocked(){
          return false;
          }
     
-    }
+     }
 
 
 
@@ -95,7 +95,7 @@ function blog_single($seo_shortname){
         
          }
     
-    }
+     }
 
 function comment_form($post_id){
      $html = "<div class=\"comment_form\">";
@@ -134,7 +134,7 @@ function comment_form($post_id){
      $html .= "</form></div>";
     
      return $html;
-    }
+     }
 
 
 function send_comment_via_email($article_title, $article_url, $name, $txt){
@@ -149,7 +149,7 @@ function send_comment_via_email($article_title, $article_url, $name, $txt){
      "Content-type: text/plain; charset=utf-8";
      @mail(getconfig("email"),
          $subject, $message, $header);
-    }
+     }
 
 function post_comments(){
      if(!isset($_SESSION["name"])){
@@ -229,7 +229,7 @@ function post_comments(){
              }
         
          }
-    }
+     }
 
 
 function stringcontainsbadwords($str){
@@ -251,7 +251,7 @@ function stringcontainsbadwords($str){
     
     
      return false;
-    }
+     }
 
 function blog_display_comments($post_id){
      $html = "";
@@ -391,6 +391,6 @@ function blog_display_comments($post_id){
     
      $html .= "</div>";
     
-    return $html;
-    }
+     return $html;
+     }
 ?>

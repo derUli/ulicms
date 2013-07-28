@@ -5,7 +5,7 @@ $required_permission = getconfig("statistics_required_permission");
 
 if($required_permission === false){
      $required_permission = 20;
-    }
+     }
 
 define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
 
@@ -58,40 +58,40 @@ function statistics_admin(){
     
     
     
-    ?>
+     ?>
 <table>
 <tr>
 <td style="width:200px;">
 <strong>Besucher gesamt</strong></td>
 <td style="text-align:right;"><?php echo intval($visitor_total);
-    ?>
+     ?>
 </td>
 </tr>
 <tr>
 <td style="width:200px;">
 <strong>Besucher heute</strong></td>
 <td style="text-align:right;"><?php echo intval($visitors_today);
-    ?>
+     ?>
 </td>
 </tr><tr>
 <td style="width:200px;">
 <strong>Besucher gestern</strong></td>
 <td style="text-align:right;"><?php echo intval($visitors_yesterday);
-    ?>
+     ?>
 </td>
 </tr>
 <td style="width:200px;">
 <strong>Aufrufe gesamt</strong></td>
 <td style="text-align:right;"><?php echo intval($views_total);
-    ?>
+     ?>
 </td>
 </tr>
 </table>
 <br/>
 <hr/>
 <?php
-    if($views_total > 0){
-        for($i = date("Y"); $i >= $firstYear ; $i--){
+     if($views_total > 0){
+         for($i = date("Y"); $i >= $firstYear ; $i--){
              echo "<h2>" . $i . "</h2>";
              echo "<table>
 <tr>
@@ -117,11 +117,11 @@ function statistics_admin(){
              }
         
         
-        }
-    ?>
+         }
+     ?>
 
 <?php
     
-    }
+     }
 
 ?>

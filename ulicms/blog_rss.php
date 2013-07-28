@@ -5,7 +5,7 @@ $blog_feed_max_items = getconfig("blog_feed_max_items");
 if($blog_feed_max_items === false){
      setconfig("blog_feed_max_items", 10);
      $blog_feed_max_items = 10;
-    }
+     }
 
 $seite = basename($_GET["s"]);
 
@@ -18,8 +18,8 @@ else
 function rootDirectory(){
      $pageURL = 'http';
      if ($_SERVER["HTTPS"] == "on"){
-        $pageURL .= "s";
-    }
+         $pageURL .= "s";
+         }
      $pageURL .= "://";
      $dirname = dirname($_SERVER["REQUEST_URI"]);
      $dirname = str_replace("\\", "/", $dirname);
@@ -35,7 +35,7 @@ function rootDirectory(){
          $pageURL .= $_SERVER["SERVER_NAME"] . $dirname;
          }
      return $pageURL;
-    }
+     }
 
 
 $query = db_query("SELECT id, datum, seo_shortname, content_preview, title FROM " . tbname("blog") . " WHERE entry_enabled = 1 AND language='$lang' ORDER by datum DESC LIMIT $blog_feed_max_items");
@@ -55,7 +55,7 @@ echo "<description>" . getconfig("motto") . "</description>\n";
 if(!getconfig("hide_meta_generator")){
      $generator = "UliCMS Release " . cms_version();
      echo "<generator>" . $generator . "</generator>\n";
-    }
+     }
 
 echo "<pubDate>" . date("r") . "</pubDate>\n";
 
@@ -101,7 +101,7 @@ while($row = mysql_fetch_object($query)){
      echo "<pubDate>" . date("r", $row -> datum) . "</pubDate>\n";
      echo "<guid isPermaLink=\"false\">" . $row -> seo_shortname . "</guid>\n";
      echo "</item>\n";
-    }
+     }
 
 echo "</channel>\n";
 echo "</rss>";

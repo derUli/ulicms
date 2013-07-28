@@ -5,17 +5,17 @@ $required_permission = getconfig("xml_sitemap_required_permission");
 
 if($required_permission === false){
      $required_permission = 40;
-    }
+     }
 
 function xmlspecialchars($text){
      return str_replace('&#039;', '&apos;', htmlspecialchars($text, ENT_QUOTES));
-    }
+     }
 
 function getBaseURL(){
      $pageURL = 'http';
      if ($_SERVER["HTTPS"] == "on"){
-        $pageURL .= "s";
-    }
+         $pageURL .= "s";
+         }
      $pageURL .= "://";
      $dirname = str_replace("admin", "", dirname($_SERVER["REQUEST_URI"]));
      $dirname = str_replace("\\", "/", $dirname);
@@ -31,7 +31,7 @@ function getBaseURL(){
          $pageURL .= $_SERVER["SERVER_NAME"] . $dirname;
          }
      return $pageURL;
-    }
+     }
 
 
 define(MODULE_ADMIN_REQUIRED_PERMISSION, $required_permission);
@@ -86,7 +86,7 @@ function generate_sitemap(){
          echo htmlspecialchars($xml_string);
          echo "</textarea><br/><br/>";
          }
-    }
+     }
 
 
 // Konfiguration checken
@@ -94,17 +94,17 @@ $send_comments_via_email = getconfig("blog_send_comments_via_email") == "yes";
 
 function xml_sitemap_admin(){
     
-    if(isset($_POST["submit"]))
+     if(isset($_POST["submit"]))
          generate_sitemap()
         
         
         
-        ?>
+         ?>
 
 <form action="<?php echo getModuleAdminSelfPath()?>" method="post">
 <input type="submit" name="submit" value="Sitemap generieren"/>
 </form>
 <?php
-        }
+         }
     
-    ?>
+     ?>

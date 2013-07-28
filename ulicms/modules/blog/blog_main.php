@@ -41,7 +41,7 @@ function blog_render(){
          return blog_list();
          }
     
-    }
+     }
 
 
 
@@ -119,8 +119,8 @@ function blog_update(){
          }
     
     
-    return $html_output;
-    }
+     return $html_output;
+     }
 
 
 
@@ -192,8 +192,8 @@ function blog_submit(){
          }
     
     
-    return $html_output;
-    }
+     return $html_output;
+     }
 
 
 
@@ -209,7 +209,7 @@ function blog_check_installation(){
              }
          }
     
-    }
+     }
 
 
 

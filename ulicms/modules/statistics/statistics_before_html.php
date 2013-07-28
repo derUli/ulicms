@@ -1,7 +1,7 @@
 <?php
 if(!function_exists("crawlerDetect")){
     
-    function crawlerDetect()
+     function crawlerDetect()
     {
          if (isset($_SERVER['HTTP_USER_AGENT']) && preg_match('/bot|crawl|slurp|spider/i', $_SERVER['HTTP_USER_AGENT'])){
              return TRUE;
@@ -9,10 +9,10 @@ if(!function_exists("crawlerDetect")){
         else{
              return FALSE;
              }
-        }
+         }
     
     
-    }
+     }
 
 if(!logged_in() and !is_admin_dir() and !crawlerDetect()){
     
@@ -30,6 +30,6 @@ if(!logged_in() and !is_admin_dir() and !crawlerDetect()){
      " . time() . ", 1)");
          }
     
-    }
+     }
 
 ?>

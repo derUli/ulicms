@@ -1,5 +1,5 @@
-<?php 
+<?php
 function PHPMailer_render(){
-   return "";
-}
+     return "";
+    }
 ?>

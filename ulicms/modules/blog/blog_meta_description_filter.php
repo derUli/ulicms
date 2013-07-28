@@ -47,5 +47,5 @@ function blog_meta_description_filter($txt){
      $shortstring = str_replace("&quot;", "'", $shortstring);
      return $shortstring;
     
-    }
+     }
 ?>

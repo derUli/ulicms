@@ -2,14 +2,14 @@
 
 if(file_exists("antispam-features.php")){
      include "antispam-features.php";
-    }
+     }
 
 function kontaktformular_render(){
     
-    // check for Spam Protection Variable
+     // check for Spam Protection Variable
     if(!getconfig("contact_form_refused_spam_mails")){
          setconfig("contact_form_refused_spam_mails", 0);
-        }
+         }
     
     
     
@@ -38,7 +38,7 @@ function kontaktformular_render(){
          if(empty($_POST["emailadresse"])){
              if($_SESSION["language"] == "de"){
                  $fehler = "Bitte geben Sie Ihren Emailadresse ein, da wir Ihre Mail sonst nicht beantworten können.";
-            }
+                 }
             else{
                  $fehler = "please enter your mail adress, because if you do it not, we can't answer your request.";
                  }
@@ -133,7 +133,7 @@ function kontaktformular_render(){
             
             
             
-            }
+             }
         
          if($fehler == false){
              $_POST["nachricht"] = preg_replace('/\r\n|\r/', "\n", $_POST["nachricht"]);
@@ -177,14 +177,14 @@ function kontaktformular_render(){
          }
     else{
         
-        $spam_counter = "";
-        if($_SESSION["group"] >= 20){
+         $spam_counter = "";
+         if($_SESSION["group"] >= 20){
              $spam_counter = "<p class='ulicms_success'>Bisher <strong>" . getconfig("contact_form_refused_spam_mails") . "</strong> Spam Mails 
    blockiert</p><hr/>";
-            }
+             }
         
         
-        if($_SESSION["language"] == "de"){
+         if($_SESSION["language"] == "de"){
              $translation_firstname = "Vorname";
              $translation_lastname = "Nachname";
              $translation_emailadress = "Emailadresse";
@@ -193,7 +193,7 @@ function kontaktformular_render(){
              $translation_your_message = "Ihre Nachricht";
              $translation_reset = "Zurücksetzen";
              $translation_submit = "Absenden";
-            }else{
+             }else{
              $translation_firstname = "firstname";
              $translation_lastname = "lastname";
              $translation_emailadress = "e-Mail Adress";
@@ -202,7 +202,7 @@ function kontaktformular_render(){
              $translation_your_message = "Your message";
              $translation_reset = "Reset";
              $translation_submit = "Submit";
-            }
+             }
         
         
          return $spam_counter . '<form action="' . htmlspecialchars($_SERVER['REQUEST_URI']) . '" method="post">
@@ -267,17 +267,17 @@ function kontaktformular_render(){
 	&nbsp;</p>
 ';
         
-        }
+         }
     
     
     
     
-    }
+     }
 
 
 
 if(!function_exists("stringcontainsbadwords")){
-    function stringcontainsbadwords($str){
+     function stringcontainsbadwords($str){
          $words_blacklist = getconfig("spamfilter_words_blacklist");
          $str = strtolower($str);
         
@@ -296,9 +296,9 @@ if(!function_exists("stringcontainsbadwords")){
         
         
          return false;
-        }
+         }
     
-    }
+     }
 
 
 ?>

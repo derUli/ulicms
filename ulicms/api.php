@@ -88,7 +88,7 @@ function getThemesList(){
          $templateDir = "templates/";
     
      $folders = scanDir($templateDir);
-	 natcasesort($folders);
+     natcasesort($folders);
      for($i = 0; $i < count($folders); $i++){
          $f = $templateDir . ($folders[$i]) . "/";
          if(is_dir($f)){
@@ -307,7 +307,7 @@ function getAllModules(){
     
      $available_modules = Array();
      $directory_content = scandir($module_folder);
-
+    
      natcasesort($directory_content);
      for($i = 0;$i < count($directory_content);$i++){
          $module_init_file = $module_folder . $directory_content[$i] . "/" .
@@ -413,14 +413,14 @@ function getAllLanguages(){
 
 // get URL to UliCMS
 function the_url(){
-  $pageURL = 'http';
+     $pageURL = 'http';
      if ($_SERVER["HTTPS"] == "on"){
-        $pageURL .= "s";
-    }
+         $pageURL .= "s";
+         }
      $pageURL .= "://";
      $dirname = dirname($_SERVER["REQUEST_URI"]);
      $dirname = str_replace("\\", "/", $dirname);
-	 $dirname = str_replace("admin", "", $dirname);
+     $dirname = str_replace("admin", "", $dirname);
      $dirname = trim($dirname, "/");
      if($dirname != ""){
          $dirname = "/" . $dirname . "/";

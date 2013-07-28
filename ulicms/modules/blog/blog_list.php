@@ -129,7 +129,7 @@ function blog_list(){
             
              $last_post_id = $post -> id;
              }
-        $html .= "<br/>";
+         $html .= "<br/>";
         
          $html .= "<br/><div class='page_older_newer'>";
         
@@ -188,24 +188,24 @@ function blog_list(){
         
          return $html;
         
-        }else{
-        $html .= "<p class='ulicms_error'>";
+         }else{
+         $html .= "<p class='ulicms_error'>";
         
-        if($_SESSION["language"] == "de"){
+         if($_SESSION["language"] == "de"){
              $html .= "Es sind keine weiteren Blogeinträge vorhanden.";
             
-            }else{
+             }else{
             
              $html .= "There are no other blog-entries available!";
-            }
+             }
         
         
         
-        return $html;
+         return $html;
         
-        }
+         }
     
     
     
-    }
+     }
 ?>
