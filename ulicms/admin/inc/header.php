@@ -20,6 +20,8 @@ $(document).ready(function() {
      ?>
 <script type="text/javascript" src="scripts/cookie.js"></script>
 <script type="text/javascript" src="scripts/notification.js"></script>
+<script type="text/javascript" src="scripts/jquery-shiftclick.js"></script>
+<script type="text/javascript" src="scripts/shift_checkbox.js"></script>
 <?php }
 ?>
 <script type="text/javascript" src="scripts/audio.js"></script>

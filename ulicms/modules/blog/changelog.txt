@@ -1,5 +1,0 @@
-Änderungen in Version 6.2.0 Beta (28. Juni 2013)
-+ blog_auto_generate_seo_shortname integriert
-+ blog_seo integriert
-+ Dynamisches einhängen von blog_prex_next per Hook
-+ Last Modified Header wird gesendet
