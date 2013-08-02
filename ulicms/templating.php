@@ -468,9 +468,9 @@ color:" . getconfig("body-text-color") . ";
 
 
 
-
-
-
+function head(){
+  base_metas();
+}
 
 function autor(){
      $connection = MYSQL_CONNECTION;
