@@ -11,7 +11,7 @@ function getRandomFortune(){
      $fileContent = file_get_contents($file);
      $fileContent = trim($fileContent);
      $fileContent = utf8_encode($fileContent);
-	 $fileContent = str_replace("\r\n", "\n", $fileContent);
+     $fileContent = str_replace("\r\n", "\n", $fileContent);
      $fortunes = explode("%\n", $fileContent);
      $text = array_rand($fortunes, 1);
      $text = $fortunes[$text];

@@ -11,6 +11,32 @@ function language_selection(){
      }
 
 
+function body_classes(){
+     $str = "";
+     if(is_frontpage()){
+         $str .= "home ";
+         }
+    
+     if(is_404()){
+         $str .= "error404 ";
+         }
+    
+     if(is_403()){
+         $str .= "error403 ";
+         }
+    
+     if(is_404() or is_403()){
+         $str .= "errorPage ";
+         }
+    
+     if(containsModule(get_requested_pagename())){
+         $str .= "containsModule ";
+         }
+    
+     echo $str;
+     }
+
+
 // Gibt "Diese Seite läuft mit UliCMS" aus
 function poweredByUliCMS(){
      echo "<p class=\"powered-by-ulicms\">Diese Seite läuft mit "
@@ -469,8 +495,8 @@ color:" . getconfig("body-text-color") . ";
 
 
 function head(){
-  base_metas();
-}
+     base_metas();
+    }
 
 function autor(){
      $connection = MYSQL_CONNECTION;
