@@ -15,23 +15,25 @@ function body_classes(){
      $str = "";
      if(is_frontpage()){
          $str .= "home ";
-         }
+     }
     
      if(is_404()){
          $str .= "error404 ";
-         }
+     }
     
      if(is_403()){
          $str .= "error403 ";
-         }
+     }
     
      if(is_404() or is_403()){
          $str .= "errorPage ";
-         }
+     } else{
+         $str .= "page ";
+     }
     
      if(containsModule(get_requested_pagename())){
          $str .= "containsModule ";
-         }
+     }
     
      echo $str;
      }
