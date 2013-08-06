@@ -151,7 +151,7 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
                  echo '<tr>';
                  echo "<td style=\"width:40px;\">--&gt;</td>";
                  echo "<td>" . $row -> systemname . "</td>";
-                 echo $row->menu;
+                 echo "<td>".$row->menu."</td>";
                 
                  echo "<td>" . $row -> position . "</td>";
                  echo "<td>" . getPageSystemnameByID($row -> parent) . "</td>";

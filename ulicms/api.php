@@ -493,6 +493,14 @@ function is__writable($path)
 
 function getAllMenus(){
    $menus = Array("left", "top", "right", "bottom", "none");
+   $additional_menus = getconfig("additional_menus");
+   
+   if($additional_menus){
+     $additional_menus = explode(";", $additional_menus );
+     foreach($additional_menus as $m){
+       array_push($menus, $m);
+     }
+   }
    return $menus;
 }
 
