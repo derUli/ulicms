@@ -30,26 +30,18 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 <br/><br/>
 <strong data-tooltip="In welchem Menü soll diese Seite angezeigt werden?">Menü</strong><br/>
 <select name="menu" size=1>
-<option <?php if($row -> menu == "top"){
+<?php 
+foreach(getAllMenus() as $menu){
+?>
+<option <?php if($row->menu == $menu){
                  echo 'selected="selected" ';
                  }
-             ?>value="top">Oben</option>
-<option <?php if($row -> menu == "bottom"){
-                 echo 'selected="selected" ';
-                 }
-             ?> value="bottom">Unten</option>
-<option <?php if($row -> menu == "left"){
-                 echo 'selected="selected" ';
-                 }
-             ?> value="left">Links</option>
-<option <?php if($row -> menu == "right"){
-                 echo 'selected="selected" ';
-                 }
-             ?> value="right">Rechts</option>
-<option <?php if($row -> menu == "none"){
-                 echo 'selected="selected" ';
-                 }
-             ?> value="none">Nicht im Menü</option>
+                 ?>
+                 value="<?php echo $menu?>"><?php echo $menu;?></option>
+<?php
+
+}
+?>
 </select><br/><br/>
 
 <strong data-tooltip="Die Position dieser Seite im Menü">Position:</strong><br/>

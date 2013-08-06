@@ -151,24 +151,7 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
                  echo '<tr>';
                  echo "<td style=\"width:40px;\">--&gt;</td>";
                  echo "<td>" . $row -> systemname . "</td>";
-                
-                 switch($row -> menu){
-                 case "top":
-                     echo "<td>Oben</td>";
-                     break;
-                 case "bottom":
-                     echo "<td>Unten</td>";
-                     break;
-                 case "left":
-                     echo "<td>Links</td>";
-                     break;
-                 case "right":
-                     echo "<td>Rechts</td>";
-                     break;
-                 default:
-                     echo "<td>Nicht im Menü</td>";
-                     break;
-                     }
+                 echo $row->menu;
                 
                  echo "<td>" . $row -> position . "</td>";
                  echo "<td>" . getPageSystemnameByID($row -> parent) . "</td>";

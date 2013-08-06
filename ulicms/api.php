@@ -491,6 +491,11 @@ function is__writable($path)
 
 
 
+function getAllMenus(){
+   $menus = Array("left", "top", "right", "bottom", "none");
+   return $menus;
+}
+
 // Check if site contains a module
 function containsModule($page, $module = false){
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname = '" .

@@ -47,11 +47,14 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 
 <strong data-tooltip="In welchem Menü soll diese Seite angezeigt werden?">Menü:</strong><br/>
 <select name="menu" size=1>
-<option value="top">Oben</option>
-<option value="bottom">Unten</option>
-<option value="left">Links</option>
-<option value="right">Rechts</option>
-<option value="none">Nicht im Menü</option>
+<?php 
+foreach(getAllMenus() as $menu){
+?>
+<option value="<?php echo $menu?>"><?php echo $menu;?></option>
+<?php
+
+}
+?>
 </select><br/> <br/>
 
 <strong data-tooltip="Die Position dieser Seite im Menü">Position:</strong><br/>

@@ -36,7 +36,7 @@ function body_classes(){
          }
     
      echo $str;
-    }
+     }
 
 
 // Gibt "Diese Seite läuft mit UliCMS" aus
