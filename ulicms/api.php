@@ -490,7 +490,9 @@ function is__writable($path)
 
 
 
-
+// Gibt die Identifier aller Menüs zurück.
+// Zusätzliche Navigationsmenüs können definiert werden,
+// durch setzen von additional_menus
 function getAllMenus(){
    $menus = Array("left", "top", "right", "bottom", "none");
    $additional_menus = getconfig("additional_menus");
