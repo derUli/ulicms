@@ -5,3 +5,4 @@ ulicms/content/cache
 ulicms/backup
 ulicms/content/log
 !ulicms/content/log/.htaccess
+ulicms/cms-config.php
