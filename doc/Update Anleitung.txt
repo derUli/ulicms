@@ -1,6 +1,0 @@
-Um dieses Update installieren zu können muss vorher auf der Website UliCMS 2013 in Revision 4 oder Revision 5 laufen.
-
-1. Ein Backup der Dateien und der Datenbank erstellen
-2. Dateien aus dem Ordner "ulicms" per FTP hochladen und existierende Dateien überschreiben.
-3. Die Datei update.php beschreibbar machen (Rechte 0755 oder 0777)
-4. http://[ihredomain.de]/update.php aufrufen
