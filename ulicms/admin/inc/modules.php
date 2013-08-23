@@ -55,7 +55,7 @@ if(count($modules) > 0){
         
          echo "</div>";
         
-         echo "<br/><input type='text' value='[module=\"" . $modules[$i] . "\"]'><br/><br/></li>";
+         echo "<br/><input type='text' value='[module=\"" . $modules[$i] . "\"]' readonly='readonly' onclick='this.focus(); this.select()'><br/><br/></li>";
          }
      echo "</ol>";
     
