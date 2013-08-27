@@ -7,5 +7,3 @@ if (!-f $request_filename){
 if ($rule_0 = "1"){
 	rewrite ^/(.*).html$ /./?seite=$1 ;
 }
-location ~ /\.(js|css|html|jpg|png|gif|php)$ {
-}
