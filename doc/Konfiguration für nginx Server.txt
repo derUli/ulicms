@@ -1,0 +1,11 @@
+# Konfiguration für nginx Server
+# für Suchmaschinenfreundliche URLs
+
+if (!-f $request_filename){
+	set $rule_0 1;
+}
+if ($rule_0 = "1"){
+	rewrite ^/(.*).html$ /./?seite=$1 ;
+}
+location ~ /\.(js|css|html|jpg|png|gif|php)$ {
+}
