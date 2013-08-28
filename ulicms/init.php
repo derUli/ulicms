@@ -109,10 +109,6 @@ else
 
 @ob_implicit_flush(1);
 
-for ($i = 0; $i < ob_get_level(); $i++){
-     ob_end_flush();
-     }
- @ob_implicit_flush(1);
 
 
 $cache_period = getconfig("cache_period");
