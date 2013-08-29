@@ -124,8 +124,8 @@ if(defined("_SECURITY")){
     <li><a href="?action=pkg_settings">Paketquelle</a></li>
     <li><a href="?action=logo_upload">Logo</a></li>
     <li><a href="?action=languages">Sprachen</a></li>
-    <li><a href="?action=other_settings">Sonstiges</a></li>
     <li><a href="?action=settings">Experteneinstellungen</a></li>
+    <li><a href="?action=other_settings">Sonstiges</a></li>
     </ul>
     <li><a href="?action=info">Info</a>
     <ul> 

@@ -14,7 +14,7 @@
 <br/>
 <a href="index.php?action=languages">Sprachen</a>
 <br/>
-<a href="?action=other_settings">Sonstiges</a>
-<br/>
 <a href="index.php?action=settings">Experteneinstellungen</a>
+<br/>
+<a href="?action=other_settings">Sonstiges</a>
 </p>
