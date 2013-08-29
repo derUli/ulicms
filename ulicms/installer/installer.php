@@ -4241,7 +4241,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (36, 'body-text-color', '#000000'),
 (37, 'disable_html_validation', 'disable'),
 (38, 'title_format', '%homepage_title% > %title%'),
-(39, 'session_timeout', '60');")or die(mysql_error());
+(39, 'mailer', 'php-mail'),
+(40, 'session_timeout', '60');")or die(mysql_error());
         
          mysql_query("UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysql_error());
         

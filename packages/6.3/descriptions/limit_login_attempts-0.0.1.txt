@@ -1,3 +1,0 @@
-Nach einer bestimmten Anzahl von fehlgeschlagenen Loginversuchen wird
-der Zugang für diese IP für einen festlegbaren Zeitraum gesperrt.
-Dieses Paket eignet sich zum Beispiel als Schutz vor Brute-Force Angriffen.

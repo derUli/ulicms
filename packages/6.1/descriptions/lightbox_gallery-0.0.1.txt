@@ -1,1 +1,0 @@
-Eine auf Lightbox 2 basierende Bildergalerie (benötigt jquery-1.7.2)

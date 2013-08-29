@@ -1,1 +1,0 @@
-Ein auf das jQuery Plugin "FullCalendar" basierender Kalender für UliCMS

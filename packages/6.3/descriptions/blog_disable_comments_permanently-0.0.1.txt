@@ -1,1 +1,0 @@
-Die Kommentarfunktion im Blog dauerhaft global deaktivieren.

@@ -1,1 +1,0 @@
-Entfernt alle HTML-Tags außer die in <u>allowed_tags</u> erlaubten aus der Content-Ausgabe

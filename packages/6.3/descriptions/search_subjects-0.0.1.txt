@@ -1,1 +1,0 @@
-Speichert die Suchbegriffe in der Datenbank und zeigt die 10 häufigsten Suchbegriffe an

@@ -11,6 +11,21 @@ div#pkglist{
 display:none;
 }
 
+div.label{
+float:left;
+font-weight:bold;
+width:300px;
+display:block;
+}
+
+div.spacer{
+height:20px;
+}
+
+div.inputWrapper{
+display:block;
+}
+
 div#loadpkg{
 display:none;
 }

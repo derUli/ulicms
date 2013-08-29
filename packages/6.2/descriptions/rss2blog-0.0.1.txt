@@ -1,2 +1,0 @@
-Mit rss2blog kann man aus einem oder mehreren
-RSS-Feeds automatisch Inhalte in das Blog-Modul importieren

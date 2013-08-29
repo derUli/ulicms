@@ -1,1 +1,0 @@
-Verhindert, dass Seiten in Framesets eingebunden werden können

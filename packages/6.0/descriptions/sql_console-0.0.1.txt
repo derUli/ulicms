@@ -1,2 +1,0 @@
-Damit kann man Datenbankabfragen ausführen und bekommt
-die Rückgabe als Tabelle dargestellt

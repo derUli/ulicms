@@ -1,1 +1,0 @@
-Benutzerprofile im Frontend anzeigen

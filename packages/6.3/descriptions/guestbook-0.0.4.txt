@@ -1,2 +1,0 @@
-Ein Gästebuch mit Spamschutz.
-Ein Administrator kann die Einträge auch löschen.

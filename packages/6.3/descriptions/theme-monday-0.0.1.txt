@@ -1,2 +1,0 @@
-Ein Theme mit Suchfeld, anpassbarem Header, Menüs oben/unten mit 
-CSS-Transition bei Hover, Formularfelder mit CSS3 Formatierung
