@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=1024"/>
-
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <link rel="stylesheet" type="text/css" href="css/admin.css"/>
 
 <script type="text/javascript" src="scripts/php.js/strip_tags.js"></script>
