@@ -24,8 +24,8 @@ if(!is_admin()){
      $version = $version -> getInternalVersion();
      $version = implode(".", $version);
     
-     $local_pkg_dir = "../packages/$version/";
-     $local_pkg_dir_value = "../packages/{version}/";
+     $local_pkg_dir = "../packages/";
+     $local_pkg_dir_value = "../packages/";
      $pkg_src = getconfig("pkg_src");
     
      $is_other = ($pkg_src !== $default_pkg_src and $pkg_src !== $local_pkg_dir and $pkg_src !== $local_pkg_dir_value);
