@@ -1,8 +1,6 @@
 body{
 background-color:#73ba25;
-background-repeat:none;
-background-attachment:fixed;
-font-family:arial;
+font-family: "wf_SegoeUI","Tahoma","Verdana","Arial","sans-serif";
 font-size:13pt;
 color:#2c2c2c;
 }
