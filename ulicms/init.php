@@ -2,6 +2,17 @@
 /**
  * Diese Datei initalisiert das System
  */
+ 
+function exception_handler($exception) {
+  echo "Nicht aufgefangene Exception: " , $exception->getMessage(), "\n";
+  if(!defined("EXCEPTION_OCCURRED")){
+     define("EXCEPTION_OCCURRED", true);
+  }
+}
+
+set_exception_handler('exception_handler');
+
+
 
 error_reporting(E_ALL ^ E_NOTICE);
 

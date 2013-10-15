@@ -147,7 +147,10 @@ add_hook("after_html");
 if(!getconfig("cache_disabled") and !$hasModul and
          getenv('REQUEST_METHOD') == "GET" and $cache_type === "cache_lite"){
           $data = ob_get_clean();
-          $Cache_Lite->save($data, $id);
+          
+          if(!defined("EXCEPTION_OCCURRED")){
+             $Cache_Lite->save($data, $id);
+          }
           echo $data;
           
           add_hook("before_cron");
@@ -164,9 +167,12 @@ if(!getconfig("cache_disabled") and !$hasModul and
 if(!getconfig("cache_disabled") and !$hasModul and
          getenv('REQUEST_METHOD') == "GET" and $cache_type === "file"){
      $generated_html = ob_get_clean();
-     $handle = fopen($cached_page_path, "wb");
-     fwrite($handle, $generated_html);
-     fclose($handle);
+     
+     if(!defined("EXCEPTION_OCCURRED")){
+       $handle = fopen($cached_page_path, "wb");
+       fwrite($handle, $generated_html);
+       fclose($handle);
+     }
      echo($generated_html);
     
      add_hook("before_cron");
