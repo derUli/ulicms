@@ -1,4 +1,6 @@
 <?php
+@include_once "Cache/Lite.php";
+
 if(!is_admin()){
      echo "<p class='ulicms_error'>Zugriff verweigert</p>";
 }else{
@@ -34,7 +36,7 @@ $menus = getAllMenus();
 <div class="label">Cache-Speicher:</div>
 <div class="inputWrapper"><select name="cache_type" size=1>
 <option value="file"<?php if($cache_type == "file" or !$cache_type){ echo " selected"; }?>>Datei</option>
-<option value="cache_lite"<?php if($cache_type == "cache_lite"){ echo " selected"; }?>>Cache_Lite</option>
+<option value="cache_lite"<?php if($cache_type == "cache_lite"){ echo " selected"; }?>>Cache_Lite <?php if(!class_exists("Cache_Lite")) echo " (nicht verfügbar)"?></option>
 </select>
 </div>
 <h2>Menüeinträge verschieben</h2>
