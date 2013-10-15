@@ -10,6 +10,10 @@ if(isset($_POST["submit"])){
      setconfig("mailer", mysql_real_escape_string($_POST["mailer"]));
   }
   
+    if(isset($_POST["cache_period"])){  
+       setconfig("cache_period", intval($_POST["cache_period"]) * 60);
+    }
+  
     if(isset($_POST["cache_type"])){
      setconfig("cache_type", mysql_real_escape_string($_POST["cache_type"]));
   }
@@ -28,6 +32,7 @@ if(isset($_POST["submit"])){
 $mailer = getconfig("mailer");
 $cache_type = getconfig("cache_type");
 $cache_enabled = !getconfig("cache_disabled");
+$cache_period = round(getconfig("cache_period") / 60);
 
 $menus = getAllMenus();
 
@@ -48,7 +53,10 @@ $menus = getAllMenus();
 </div>
 
 <div class="label">Cache aktiviert</div>
-<div class="inputWrapper"><input type="checkbox" name="cache_enabled" value="cache_enabled" <?php if($cache_enabled) echo " checked=\"checked\""?>></div>
+<div class="inputWrapper"><input type="checkbox" name="cache_enabled" value="cache_enabled" <?php if($cache_enabled) echo " checked=\"checked\"";?>></div>
+
+<div class="label">Cache Gültigkeitsdauer</div>
+<div class="inputWrapper"><input type="number" name="cache_period" min=1 max=20160 value="<?php echo $cache_period;?>"> Minuten</div>
 
 <h2>Menüeinträge verschieben</h2>
 <p>Verschiebe alle Menüeinträge von <select name="move_from" size="1">
