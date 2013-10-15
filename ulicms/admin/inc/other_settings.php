@@ -14,6 +14,12 @@ if(isset($_POST["submit"])){
      setconfig("cache_type", mysql_real_escape_string($_POST["cache_type"]));
   }
   
+  if(isset($_POST["cache_enabled"]))
+     deleteconfig("cache_disabled");
+  else
+     setconfig("cache_disabled", "disabled");
+
+  
   if($_POST["move_from"] != "-" and $_POST["move_to"] != "-" ){
      db_query("UPDATE ".tbname("content"). " SET menu='".mysql_real_escape_string($_POST["move_to"])."' WHERE menu='".mysql_real_escape_string($_POST["move_from"])."'");
   }
@@ -21,6 +27,7 @@ if(isset($_POST["submit"])){
 
 $mailer = getconfig("mailer");
 $cache_type = getconfig("cache_type");
+$cache_enabled = !getconfig("cache_disabled");
 
 $menus = getAllMenus();
 
@@ -33,12 +40,16 @@ $menus = getAllMenus();
 </select>
 </div>
 
-<div class="label">Cache-Speicher:</div>
+<div class="label">Cache-Speicher</div>
 <div class="inputWrapper"><select name="cache_type" size=1>
 <option value="file"<?php if($cache_type === "file" or !$cache_type){ echo " selected"; }?>>Datei</option>
 <option value="cache_lite"<?php if($cache_type === "cache_lite"){ echo " selected"; }?>>Cache_Lite <?php if(!class_exists("Cache_Lite")) echo " (nicht verfügbar)"?></option>
 </select>
 </div>
+
+<div class="label">Cache aktiviert</div>
+<div class="inputWrapper"><input type="checkbox" name="cache_enabled" value="cache_enabled" <?php if($cache_enabled) echo " checked=\"checked\""?>></div>
+
 <h2>Menüeinträge verschieben</h2>
 <p>Verschiebe alle Menüeinträge von <select name="move_from" size="1">
                                     <option value="-" selected>-</option>
