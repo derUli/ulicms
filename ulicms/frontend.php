@@ -44,11 +44,11 @@ header("HTTP/1.0 " . $status);
 header("Content-Type: text/html; charset=utf-8");
 
 if(count(getThemeList()) === 0)
-     die("Keine Themes vorhanden!");
+     throw new Exception("Keine Themes vorhanden!");
 
 
 if(!is_dir(getTemplateDirPath($theme)))
-     die("Das aktivierte Theme existiert nicht!");
+     throw new Exception("Das aktivierte Theme existiert nicht!");
 
 
 
@@ -120,7 +120,7 @@ if(!getconfig("cache_disabled") and !$hasModul and
 );
 
 if(!class_exists("Cache_Lite")){
-   die("Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um.");
+   throw new Exception("Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um.");
 }
 $Cache_Lite = new Cache_Lite($options);
 

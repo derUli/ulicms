@@ -4,7 +4,7 @@
  */
  
 function exception_handler($exception) {
-  echo "Nicht aufgefangene Exception: " , $exception->getMessage(), "\n";
+  echo $exception->getMessage(), "\n";
   if(!defined("EXCEPTION_OCCURRED")){
      define("EXCEPTION_OCCURRED", true);
   }
@@ -34,7 +34,7 @@ else if(is_dir("installer")){
      header("Location: installer/");
      exit();
      }else{
-     die("Can't include cms-config.php. Starting installer failed, too.");
+      throw new Exception("Can't include cms-config.php. Starting installer failed, too.");
      }
 
 
@@ -79,14 +79,14 @@ if($config -> mysql_server == "" or $config -> mysql_user == ""){
 
 @$connection = mysql_connect($config -> mysql_server, $config -> mysql_user, $config -> mysql_password);
 if($connection === false){
-     die("Fehler: Die Verbindung zum MySQL Server konnte nicht hergestellt werden.");
+      throw new Exception("Fehler: Die Verbindung zum MySQL Server konnte nicht hergestellt werden.");
      }
 
 mysql_query("SET NAMES 'utf8'");
 
  if(file_exists("installer/installer.php") or file_exists("../installer/installer.php")){
      header("Content-Type: text/html; charset=utf-8");
-     die("<p>Bitte löschen Sie den Ordner \"installer\" vom Server.<br/>
+     throw new Exception("<p>Bitte löschen Sie den Ordner \"installer\" vom Server.<br/>
      Das CMS kann erst betrieben werden, nach dem der Installer gelöscht wurde.
      Dies ist ein Sicherheitsmerkmal von UliCMS.</p>");
      exit();
@@ -99,7 +99,7 @@ mysql_query("SET NAMES 'utf8'");
 define("MYSQL_CONNECTION", $connection);
 $select = mysql_select_db($config -> mysql_database);
 if(!$select){
-     die("Fehler: Die Datenbank " . $config -> mysql_database . " existiert nicht.\n");
+     throw new Exception("Fehler: Die Datenbank " . $config -> mysql_database . " existiert nicht.\n");
      }
 
 
