@@ -34,7 +34,10 @@ $theme = getconfig("theme");
 
 if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("maintenance_mode")) == "true" || getconfig("maintenance_mode") == "1"){
      add_hook("before_maintenance_message");
-     require_once getTemplateDirPath($theme) . "maintenance.php";
+     if(file_exists(getTemplateDirPath($theme) . "maintenance.php"))
+        require_once getTemplateDirPath($theme) . "maintenance.php";
+     else
+        throw new Exception("Diese Internetseite steht derzeit unter Wartungsarbeiten.");
      add_hook("after_maintenance_message");
      die();
      }
