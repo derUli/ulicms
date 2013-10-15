@@ -3,6 +3,8 @@
  * Diese Datei initalisiert das System
  */
 
+error_reporting(E_ALL ^ E_NOTICE);
+
 // Workaround für Magic Quotes und Register Globals
 include "lib/workaround.php";
 
