@@ -44,6 +44,7 @@ $menus = getAllMenus();
 <option value="php-mail"<?php if($mailer == "php-mail"){ echo " selected"; }?>>PHP Mail</option>
 </select>
 </div>
+<div class="seperator"></div>
 
 <div class="label">Cache-Speicher</div>
 <div class="inputWrapper"><select name="cache_type" size=1>
@@ -54,10 +55,10 @@ $menus = getAllMenus();
 
 <div class="label">Cache aktiviert</div>
 <div class="inputWrapper"><input type="checkbox" name="cache_enabled" value="cache_enabled" <?php if($cache_enabled) echo " checked=\"checked\"";?>></div>
-
 <div class="label">Cache Gültigkeitsdauer</div>
 <div class="inputWrapper"><input type="number" name="cache_period" min=1 max=20160 value="<?php echo $cache_period;?>"> Minuten</div>
 
+<div class="seperator"></div>
 <h2>Menüeinträge verschieben</h2>
 <p>Verschiebe alle Menüeinträge von <select name="move_from" size="1">
                                     <option value="-" selected>-</option>

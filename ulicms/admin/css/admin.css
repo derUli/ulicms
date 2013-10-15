@@ -379,3 +379,12 @@ list-style-type:none;
     z-index: 2;   
     top: 0px; 
 }
+
+
+.seperator{
+background-color:#E4E4E4;
+height:5px;
+width:100%;
+margin-top:7px;
+margin-bottom:7px;
+}
