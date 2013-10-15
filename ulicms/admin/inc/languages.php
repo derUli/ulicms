@@ -23,7 +23,7 @@
 </table>
 </form>
 <br>
-<hr>
+<div class="seperator"></div>
 <br>
 <?php if(mysql_num_rows($languages) > 0){
              ?>
