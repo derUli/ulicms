@@ -42,7 +42,18 @@ if($_GET["action"] == "view_website" or $_GET["action"] == "frontpage"){
 
 if(isset($_GET["clear_cache"])){
      add_hook("before_clear_cache");
-     SureRemoveDir("../content/cache", false);
+     $cache_type = getconfig("cache_type");
+     // Es gibt zwei verschiedene Cache Modi
+     // Cache_Lite und File
+     
+     // Cache_Lite leeren
+     if($cache_type === "cache_lite" and class_exists("Cache_Lite")){
+        $Cache_Lite = new Cache_Lite($options);
+        $Cache_Lite->clean();
+     } else {
+        // File leeren
+        SureRemoveDir("../content/cache", false);
+     }
      add_hook("after_clear_cache");
      }
 

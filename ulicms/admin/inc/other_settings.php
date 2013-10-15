@@ -8,21 +8,33 @@ if(isset($_POST["submit"])){
      setconfig("mailer", mysql_real_escape_string($_POST["mailer"]));
   }
   
+    if(isset($_POST["cache_type"])){
+     setconfig("cache_type", mysql_real_escape_string($_POST["cache_type"]));
+  }
+  
   if($_POST["move_from"] != "-" and $_POST["move_to"] != "-" ){
      db_query("UPDATE ".tbname("content"). " SET menu='".mysql_real_escape_string($_POST["move_to"])."' WHERE menu='".mysql_real_escape_string($_POST["move_from"])."'");
   }
 }
 
 $mailer = getconfig("mailer");
+$cache_type = getconfig("cache_type");
 
 $menus = getAllMenus();
 
 ?>
 <h1>Sonstiges</h1>
 <form id="other_settings" action="index.php?action=other_settings" method="post">
-<div class="label">Mailer:</div>
+<div class="label">Mailer</div>
 <div class="inputWrapper"><select name="mailer" size=1>
 <option value="php-mail"<?php if($mailer == "php-mail"){ echo " selected"; }?>>PHP Mail</option>
+</select>
+</div>
+
+<div class="label">Cache-Speicher:</div>
+<div class="inputWrapper"><select name="cache_type" size=1>
+<option value="file"<?php if($cache_type == "file" or !$cache_type){ echo " selected"; }?>>Datei</option>
+<option value="cache_lite"<?php if($cache_type == "cache_lite"){ echo " selected"; }?>>Cache_Lite</option>
 </select>
 </div>
 <h2>Menüeinträge verschieben</h2>
