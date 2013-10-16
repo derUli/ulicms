@@ -60,6 +60,7 @@ $menus = getAllMenus();
 
 
 <div class="seperator"></div>
+
 <h2>Menüeinträge verschieben</h2>
 <p>Verschiebe alle Menüeinträge von <select name="move_from" size="1">
                                     <option value="-" selected>-</option>
@@ -77,7 +78,11 @@ $menus = getAllMenus();
                                     }?>
                                     </select> 
                                     </p>
-<div class="spacer"></div>
+<div class="seperator"></div>
+
+<p><a href="index.php?action=settings">Experteneinstellungen</a></p>
+
+
 <input name="submit" type="submit" value="Einstellungen speichern"/>
 </form>
 
