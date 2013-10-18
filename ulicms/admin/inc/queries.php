@@ -4,6 +4,8 @@
 add_hook("query");
 
 if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
+setconfig("registered_user_default_level", intval($_POST["registered_user_default_level"]));
+     
      setconfig("homepage_title", mysql_real_escape_string($_POST["homepage_title"]));
      setconfig("homepage_owner", mysql_real_escape_string($_POST["homepage_owner"]));
      setconfig("motto", mysql_real_escape_string($_POST["homepage_motto"]));
@@ -491,10 +493,13 @@ if($_POST["add_admin"] == "add_admin" && $_SESSION["group"] >= 50){
      $username = mysql_real_escape_string($_POST["admin_username"]);
      $lastname = mysql_real_escape_string($_POST["admin_lastname"]);
      $firstname = mysql_real_escape_string($_POST["admin_firstname"]);
+     $group = getconfig("registered_user_default_level");
+     if($group === false)
+        $group = 10;
      $email = mysql_real_escape_string($_POST["admin_email"]);
      $password = mysql_real_escape_string($_POST["admin_password"]);
      db_query("INSERT INTO " . tbname("admins") . " 
-(username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','" . hash_password($password) . "',10)", $connection);
+(username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','" . hash_password($password) . "', $group)", $connection);
      $message = "Hallo $firstname,\n\n" .
      "Ein Administrator hat auf " . $_SERVER["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" .
      "Die Zugangsdaten lauten:\n\n" .
