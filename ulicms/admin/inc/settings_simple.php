@@ -103,7 +103,7 @@
 <td><strong>Standard-Gruppe für neue Nutzer:</strong>
 </td>
 <td>
-<select name="registered_user_default_level" size=1>
+<select name="registered_user_default_level" size=1 style="width:100%;">
 <option value="50" <?php if($settings["registered_user_default_level"] == 50) echo "selected";
                  ?>>Admin</option>
 <option value="40" <?php if($settings["registered_user_default_level"] == 40) echo "selected";
