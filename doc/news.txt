@@ -2,3 +2,8 @@
 
 [*] Neu: Alle Einträge aus Menü X nach Menü Y verschieben
 [*] Enhancement: Konstante ULICMS_ROOT hinzugefügt
+[*] Cache: Man kann zwischen Cache_Lite und File als Caching-Methode wählen.
+[*] Cache auch per GUI einstellbar.
+[*] Experteneinstellungen nun unter Sonstiges
+[*] Speichern per Strg+S (optional)
+[*] Option hinzugefügt "Standard-Gruppe für neue Nutzer"
