@@ -84,6 +84,12 @@ Avatar hochladen:<br/>
 <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
 <br/> <br/>
 <input type="submit" value="OK">
+<?php 
+if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+?>
+<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+</script>
+<?php }?>
 </form>
 
 <?php

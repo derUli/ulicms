@@ -110,6 +110,13 @@
 <img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
 </div>
     <input type="submit" value="Änderungen Speichern">
+    
+<?php 
+if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+?>
+<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+</script>
+<?php }?>
 </form>
 <script type="text/javascript">
 $("#templateForm").ajaxForm({beforeSubmit: function(e){

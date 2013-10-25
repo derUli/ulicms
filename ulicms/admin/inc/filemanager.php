@@ -3,7 +3,7 @@
          ?>
 
 <h2>Dateimanager</h2>
-<iframe src="kcfinder/browse.php?type=<?php echo $_GET["action"];
+<iframe src="kcfinder/browse.php?type=<?php echo basename($_GET["action"]);
          ?>&lang=de" style="border:0px;width:80%; height:500px;">
 </iframe>
 

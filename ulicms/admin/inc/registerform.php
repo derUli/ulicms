@@ -69,6 +69,12 @@ if(isset($_POST["register_user"])){
 ?>
 <br/>
 
+<?php 
+if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+?>
+<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+</script>
+<?php }?>
 <input type="submit" value="Registrieren">
 </form>
 

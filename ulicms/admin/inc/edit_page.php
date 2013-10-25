@@ -6,12 +6,7 @@
             
              ?>
              
-<?php 
-if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php }?>
+
 
 </form>
 
@@ -196,6 +191,13 @@ function confirmExit()
 
 <input type="submit" value="Speichern">
 </div>
+
+<?php 
+if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+?>
+<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+</script>
+<?php }?>
 </form>
 
 <script type="text/javascript">

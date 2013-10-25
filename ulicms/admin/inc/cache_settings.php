@@ -27,6 +27,12 @@ Mit einem beliebigen Wert anlegen.</p>
 <input type="hidden" name="clear_cache" value="yes"/>
 <input type="submit" value="Cache leeren"/>
 
+<?php 
+if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+?>
+<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+</script>
+<?php }?>
 </form>
 
 <?php }else{

@@ -241,6 +241,13 @@ Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</s
 </tr>
 </table>
 <input type="hidden" name="save_settings" value="save_settings">
+
+<?php 
+if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+?>
+<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+</script>
+<?php }?>
 </form>
 <script type="text/javascript">
 $("#settings_simple").ajaxForm({beforeSubmit: function(e){
