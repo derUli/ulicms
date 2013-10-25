@@ -3,6 +3,7 @@
 setconfig("mailer", "php-mail");
 setconfig("cache_type", "file");
 setconfig("registered_user_default_level", "10");
+setconfig("override_shortcuts", "on")
 
 // Das Script versucht sich selbst zu löschen
 @unlink("update.php");

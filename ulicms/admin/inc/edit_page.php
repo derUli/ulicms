@@ -5,6 +5,15 @@
          while($row = mysql_fetch_object($query)){
             
              ?>
+             
+<?php 
+if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+?>
+<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+</script>
+<?php }?>
+
+</form>
 
 <form id="pageform" action="index.php?action=pages" method="post">
 <input type="hidden" name="edit_page" value="edit_page">
