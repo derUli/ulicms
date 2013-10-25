@@ -62,7 +62,7 @@ $menus = getAllMenus();
 <option value="cache_lite"<?php if($cache_type === "cache_lite"){ echo " selected"; }?>>Cache_Lite <?php if(!class_exists("Cache_Lite")) echo " (nicht verfügbar)"?></option>
 </select>
 </div>
-
+<br/><br/>
 <div class="label">Shortcuts ersetzen</div>
 <div class="inputWrapper">
 <select name="override_shortcuts" size=1>
@@ -71,7 +71,7 @@ $menus = getAllMenus();
 <option value="backend" <?php if($override_shortcuts == "backend") echo " selected=\"selected\""?>>Nur im Backend</option>
 <option value="on" <?php if($override_shortcuts == "on") echo " selected=\"selected\""?>>Im Frontend und Backend</option>
 </select>
-<br/>
+
 <p>Standard-Tastenkombinationen des Browsers werden ersetzt, so dass Sie z.B. durch Drücken von Strg+S ebenfalls speichern können</p
 </div>
 
