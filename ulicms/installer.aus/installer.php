@@ -4244,7 +4244,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (39, 'mailer', 'php-mail'),
 (40, 'cache_type', 'file'),
 (41, 'registered_user_default_level', '10'),
-(42, 'session_timeout', '60');")or die(mysql_error());
+(42, 'override_shortcuts', 'backend'),
+(43, 'session_timeout', '60');")or die(mysql_error());
         
          mysql_query("UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysql_error());
         
