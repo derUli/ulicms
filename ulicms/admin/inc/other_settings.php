@@ -62,7 +62,9 @@ $menus = getAllMenus();
 <option value="cache_lite"<?php if($cache_type === "cache_lite"){ echo " selected"; }?>>Cache_Lite <?php if(!class_exists("Cache_Lite")) echo " (nicht verfügbar)"?></option>
 </select>
 </div>
-<br/><br/>
+
+<div class="seperator"></div>
+
 <div class="label">Shortcuts ersetzen</div>
 <div class="inputWrapper">
 <select name="override_shortcuts" size=1>

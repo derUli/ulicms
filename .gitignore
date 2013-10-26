@@ -6,3 +6,4 @@ ulicms/backup
 ulicms/content/log
 !ulicms/content/log/.htaccess
 cms-config.php
+ulicms/packages
