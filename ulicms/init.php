@@ -12,8 +12,6 @@ function exception_handler($exception) {
 
 set_exception_handler('exception_handler');
 
-
-
 error_reporting(E_ALL ^ E_NOTICE);
 
 // Workaround für Magic Quotes und Register Globals
@@ -91,9 +89,6 @@ mysql_query("SET NAMES 'utf8'");
      Dies ist ein Sicherheitsmerkmal von UliCMS.</p>");
      exit();
      }
-
-
-
 
 
 define("MYSQL_CONNECTION", $connection);
