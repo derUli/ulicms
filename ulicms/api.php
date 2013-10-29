@@ -15,6 +15,26 @@ function getconfig($key){
          }
      }
 
+ function clearCache(){
+     add_hook("before_clear_cache");
+     $cache_type = getconfig("cache_type");
+     // Es gibt zwei verschiedene Cache Modi
+     // Cache_Lite und File
+     
+     // Cache_Lite leeren
+     if($cache_type === "cache_lite" and class_exists("Cache_Lite")){
+        $Cache_Lite = new Cache_Lite($options);
+        $Cache_Lite->clean();
+     } else {
+        // File leeren
+        if(is_admin_dir())
+           SureRemoveDir("../content/cache", false);
+        else
+           SureRemoveDir("content/cache", false);
+     }
+     add_hook("after_clear_cache");
+  }
+
 // sind wir gerade im Adminordner?
 function is_admin_dir(){
      return basename(getcwd()) === "admin";
@@ -293,6 +313,10 @@ function convertLineEndingsToLF($s){
      return $s;
      }
 
+
+function isModuleInstalled($name){
+  return in_array($name, getAllModules());
+}
 
 function getAllModules(){
      // Frontend Directory

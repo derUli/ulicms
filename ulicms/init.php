@@ -12,8 +12,6 @@ function exception_handler($exception) {
 
 set_exception_handler('exception_handler');
 
-
-
 error_reporting(E_ALL ^ E_NOTICE);
 
 // Workaround für Magic Quotes und Register Globals
@@ -93,9 +91,6 @@ mysql_query("SET NAMES 'utf8'");
      }
 
 
-
-
-
 define("MYSQL_CONNECTION", $connection);
 $select = mysql_select_db($config -> mysql_database);
 if(!$select){
@@ -113,16 +108,6 @@ $memory_limit = getconfig("memory_limit");
 
 if($memory_limit !== false)
      @ini_set('memory_limit', $memory_limit);
-
-if(getconfig("zlib.output_compression"))
-     @ini_set("zlib.output_compression", 1);
-else
-     @ini_set("zlib.output_compression", 0);
-
-
-@ob_implicit_flush(1);
-
-
 
 $cache_period = getconfig("cache_period");
 
