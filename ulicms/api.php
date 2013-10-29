@@ -1,5 +1,15 @@
 <?php
 
+
+function getOnlineUsers(){
+   $users_online = db_query("SELECT * FROM " . tbname("admins") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
+   $users = array();
+   while($row = mysql_fetch_object($users_online)){
+      array_push($users, $row -> username);
+   }
+   return $users;
+}
+
 // get a config variable
 function getconfig($key){
      $connection = MYSQL_CONNECTION;

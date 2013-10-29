@@ -8,4 +8,4 @@
 [*] Speichern per Strg+S (optional)
 [*] Option hinzugefügt "Standard-Gruppe für neue Nutzer"
 [*] Neue API-Funktionen hinzugefügt:
-    isModuleInstalled, clearCache
+    isModuleInstalled, clearCache, getOnlineUsers
