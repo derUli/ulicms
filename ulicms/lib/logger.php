@@ -24,7 +24,7 @@ function log_db_query($query){
      $logdir .= "content/log/db/";
     
      if(!is_dir($logdir)){
-         @mkdir($logdir, 077, true);
+         @mkdir($logdir, 0755, true);
          if(!is_dir($logdir))
              return false;
          }
