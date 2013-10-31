@@ -34,6 +34,7 @@ $theme = getconfig("theme");
 
 if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("maintenance_mode")) == "true" || getconfig("maintenance_mode") == "1"){
      add_hook("before_maintenance_message");
+     
      if(file_exists(getTemplateDirPath($theme) . "maintenance.php"))
         require_once getTemplateDirPath($theme) . "maintenance.php";
      else
