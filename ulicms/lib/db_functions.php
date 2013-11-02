@@ -85,6 +85,7 @@ define("DB_TYPE_FLOAT", 2);
 define("DB_TYPE_STRING", 3);
 define("DB_TYPE_BOOL", 4);
 
+
 // Abstraktion für Escapen von Werten
 function db_escape($value, $type = null){
     if(is_null($type)){
