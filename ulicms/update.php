@@ -1,4 +1,5 @@
 <?php 
+include_once "init.php";
 // neue Config-Variablen anlegen
 setconfig("mailer", "php-mail");
 setconfig("cache_type", "file");
