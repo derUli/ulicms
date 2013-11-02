@@ -113,7 +113,7 @@ if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") ==
 </script>
 <?php }?>
 </form>
-
+</div>
 <script type="text/javascript">
 $("#other_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");
@@ -128,5 +128,4 @@ $("#other_settings").ajaxForm({beforeSubmit: function(e){
 }); 
 
 </script>
-
 <?php } ?> 
