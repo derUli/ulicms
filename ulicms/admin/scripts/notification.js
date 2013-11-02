@@ -29,7 +29,7 @@ function showChangedOnlineStatus(name, online){
   $("#message").show();
   });
   
-  }, 6 * 1000)
+  }, 8 * 1000)
     
   }
   );
