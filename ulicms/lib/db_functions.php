@@ -11,6 +11,10 @@ function db_query($query){
 
 }
 
+function db_num_rows($query){
+   return mysql_num_rows($query);
+}
+
 function db_last_error(){
    return mysql_error();
 }
