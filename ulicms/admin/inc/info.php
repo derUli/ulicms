@@ -50,7 +50,39 @@ echo $info["GD Version"];
 ?>
 </td>
 </tr>
+<?php } else {?>
+<tr>
+<td style="width:200px;">
+<strong>libgd Version: </strong></td>
+<td>
+<span style="color:red">libgd ist nicht installiert!<br/>Wahrscheinlich werden Sie keine Bilder hochladen können.</span>
+</td>
+</tr>
 <?php }?>
+<?php if(function_exists("apache_get_version")){?>
+<tr>
+<td style="width:200px;">
+<strong>Apache Server Version: </strong></td>
+<td>
+<?php
+echo apache_get_version();
+?>
+</td>
+</tr>
+<?php 
+} else {
+?>
+<tr>
+<td style="width:200px;">
+<strong>Webserver Software: </strong></td>
+<td>
+<?php
+echo $_SERVER["SERVER_SOFTWARE"];
+?>
+</td>
+</tr>
+
+<?php } ?>
 </table>
 
 <br/>
