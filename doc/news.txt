@@ -7,5 +7,9 @@
 [*] Experteneinstellungen nun unter Sonstiges
 [*] Speichern per Strg+S (optional)
 [*] Option hinzugefügt "Standard-Gruppe für neue Nutzer"
+[*] Implementation einer Datenbankabstraktion begonnen.
+    Alle mysql_ Funktionen wurden durch db_ Wrapper-Funktionen die sich in der Datei "db_functions.php" befinden ersetzt.
+	Eine für PostgreSQL und SQLite Datenbanken angepasste "db_functions.php" ist geplant.
+	Es ist außerdem geplant, den Installer soweit anzupassen, dass man die zu nutzende Datenbanksoftware auswählen kann.
 [*] Neue API-Funktionen hinzugefügt:
-    isModuleInstalled, clearCache, getOnlineUsers
+    isModuleInstalled, clearCache, getOnlineUsers und weitere

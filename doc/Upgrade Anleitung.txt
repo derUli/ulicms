@@ -3,7 +3,8 @@ Mit diesem Paket können Sie eine UliCMS 2014R8 (Version 6.4) auf UliCMS2014R9 (V
 Dazu führen Sie bitte die folgenden Schritte durch
 1. Datenbank und FTP-Server der Website sichern.
 2. Inhalt des Ordners "ulicms" in das Wurzelverzeichnis des CMS hochladen und bereits existierende Dateien ersetzen lassen.
-3. Die Datei "update.php" auf dem FTP-Server beschreibar machen (chmod 0755 oder 0777)
-4. In den Administrationsbereich als Admin-user einloggen und darüber das Update-Skript ausführen lassen
-5. Falls die Datei "update.php" nicht automatisch gelöscht werden konnte, diese Datei manuell löschen
-6. Inkompatible Pakete über die Paketverwaltung aktualisieren
+3. Die Datei "cms-config.php" öffnen und alle Variablen die mit mysql_ anfangen so umbennen dass diese stattdessen mit db_ anfangen.
+4. Die Datei "update.php" auf dem FTP-Server beschreibar machen (chmod 0755 oder 0777)
+5. In den Administrationsbereich als Admin-user einloggen und darüber das Update-Skript ausführen lassen
+6. Falls die Datei "update.php" nicht automatisch gelöscht werden konnte, diese Datei manuell löschen
+7. Inkompatible Pakete über die Paketverwaltung aktualisieren
