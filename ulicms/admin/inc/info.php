@@ -30,7 +30,15 @@ echo phpversion();
 ?>
 </td>
 </tr>
-
+<tr>
+<td style="width:200px;">
+<strong>User-Agent: </strong></td>
+<td>
+<?php
+echo $_SERVER["HTTP_USER_AGENT"];
+?>
+</td>
+</tr>
 <tr>
 <td style="width:200px;">
 <strong>MySQL-Version: </strong></td>
@@ -50,20 +58,6 @@ if(function_exists("gd_info")){
 <?php
 $info = gd_info();
 echo $info["GD Version"];
-?>
-</td>
-</tr>
-<?php 
-
-}
-if(defined("PHP_OS")){
-?>
-<tr>
-<td style="width:200px;">
-<strong>Server Betriebssystem: </strong></td>
-<td>
-<?php
-echo PHP_OS;
 ?>
 </td>
 </tr>
@@ -100,17 +94,17 @@ echo $_SERVER["SERVER_SOFTWARE"];
 </tr>
 
 <?php } ?>
-
 <tr>
 <td style="width:200px;">
-<strong>User-Agent: </strong></td>
+<strong>Server Betriebssystem: </strong></td>
 <td>
 <?php
-echo $_SERVER["HTTP_USER_AGENT"];
+echo php_uname("a");
 ?>
 </td>
 </tr>
 </table>
+
 <?php 
 if(function_exists("apache_get_modules")){
 $modules = apache_get_modules();
