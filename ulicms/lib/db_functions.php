@@ -18,6 +18,10 @@ function db_fetch_array($result){
    return mysql_fetch_array($result);
 }
 
+function db_fetch_field($result){
+   return mysql_fetch_field($result);
+}
+
 function db_fetch_assoc($result){
    return mysql_fetch_assoc($result);
 }
@@ -37,6 +41,14 @@ function db_connect($server, $user, $password){
 // Datenbank auswählen
 function db_select($schema){
    return mysql_select_db($schema);
+}
+
+function db_num_fields($result){
+   return mysql_num_fields($result);
+}
+
+function db_affected_rows(){
+   return mysql_affected_rows();
 }
 
 function schema_select($schema){
