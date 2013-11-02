@@ -143,9 +143,9 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
         
         
         
-         $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(mysql_error());
-         if(mysql_num_rows($query) > 0){
-             while($row = mysql_fetch_object($query)){
+         $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(db_error());
+         if(db_num_rows($query) > 0){
+             while($row = db_fetch_object($query)){
                  ?>
 <?php
                  echo '<tr>';

@@ -2,7 +2,7 @@
      if($_SESSION["group"] >= 50){
          $key = intval($_GET["key"]);
          $query = db_query("SELECT * FROM " . tbname("settings") . " WHERE id='$key'");
-         while($row = mysql_fetch_object($query)){
+         while($row = db_fetch_object($query)){
              ?>
 
 <form action="index.php?action=settings" method="post">

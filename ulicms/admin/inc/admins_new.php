@@ -2,7 +2,7 @@
      if($_SESSION["group"] >= 50){
         
          $query = db_query("SELECT * FROM " . tbname("admins") . " ORDER BY id", $connection);
-         if(mysql_num_rows($query)){
+         if(db_num_rows($query)){
              ?>
 <form action="index.php?action=admins" method="post">
 <input type="hidden" name="add_admin" value="add_admin">

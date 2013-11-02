@@ -19,7 +19,7 @@ function db_fetch_array($result){
 }
 
 function db_fetch_assoc($result){
-   return db_fetch_assoc($result);
+   return mysql_fetch_assoc($result);
 }
 
 function db_close(){
@@ -28,7 +28,11 @@ function db_close(){
 
 // Connect with database server
 function db_connect($server, $user, $password){
-   return mysql_connect($server, $user, $password);
+   $result = mysql_connect($server, $user, $password);
+   if(!$result)
+      return false;
+    db_query("SET NAMES 'utf8'");
+    return $result;
 }
 // Datenbank auswählen
 function db_select($schema){
@@ -40,16 +44,16 @@ function schema_select($schema){
 }
 
 function db_select_db($schema){
-  return db_select_db($schema);
+  return schema_select($schema);
 }
 
 
 function db_fetch_object($result){
-   return db_fetch_object($result);
+   return mysql_fetch_object($result);
 }
 
 function db_fetch_row($result){
-   return db_fetch_row($result);
+   return mysql_fetch_row($result);
 }
 
 function db_num_rows($result){
@@ -58,6 +62,10 @@ function db_num_rows($result){
 
 function db_last_error(){
    return mysql_error();
+}
+
+function db_real_escape_string($value){
+   return mysql_real_escape_string($value);
 }
 
 // Abstraktion für Escapen von Werten

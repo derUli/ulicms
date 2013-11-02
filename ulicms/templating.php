@@ -3,7 +3,7 @@
 function language_selection(){
      $query = db_query("SELECT * FROM " . tbname("languages") . " ORDER by name");
      echo "<ul class='language_selection'>";
-     while($row = mysql_fetch_object($query)){
+     while($row = db_fetch_object($query)){
          echo "<li>" . "<a href='" . get_requested_pagename() . ".html?language=" . $row -> language_code . "'>" . $row -> name . "</a></li>";
          }
      echo "</ul>";
@@ -49,8 +49,8 @@ function poweredByUliCMS(){
 function random_banner(){
      $connection = MYSQL_CONNECTION;
      $query = db_query("SELECT * FROM " . tbname("banner") . " ORDER BY RAND() LIMIT 1");
-     if(mysql_num_rows($query) > 0){
-         while($row = mysql_fetch_object($query)){
+     if(db_num_rows($query) > 0){
+         while($row = db_fetch_object($query)){
             
              $title = $row -> name;
              $link_url = $row -> link_url;
@@ -105,11 +105,11 @@ $status = check_status();
 function meta_keywords($ipage = null){
      $status = check_status();
      $connection = MYSQL_CONNECTION;
-     $ipage = mysql_real_escape_string($_GET["seite"]);
+     $ipage = db_real_escape_string($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'");
     
-     if(mysql_num_rows($query) > 0){
-         while($row = mysql_fetch_object($query)){
+     if(db_num_rows($query) > 0){
+         while($row = db_fetch_object($query)){
              if(!empty($row -> meta_keywords)){
                  return $row -> meta_keywords;
                  }
@@ -122,13 +122,13 @@ function meta_keywords($ipage = null){
 function meta_description($ipage = null){
      $status = check_status();
      $connection = MYSQL_CONNECTION;
-     $ipage = mysql_real_escape_string($_GET["seite"]);
+     $ipage = db_real_escape_string($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1", $connection);
          }
-     if(mysql_num_rows($query) > 0){
-         while($row = mysql_fetch_object($query)){
+     if(db_num_rows($query) > 0){
+         while($row = db_fetch_object($query)){
              if(!empty($row -> meta_description)){
                  return $row -> meta_description;
                  }
@@ -151,13 +151,13 @@ function get_title($ipage = null){
          }
     
      $connection = MYSQL_CONNECTION;
-     $ipage = mysql_real_escape_string($_GET["seite"]);
+     $ipage = db_real_escape_string($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1");
          }
-     if(mysql_num_rows($query) > 0){
-         while($row = mysql_fetch_object($query)){
+     if(db_num_rows($query) > 0){
+         while($row = db_fetch_object($query)){
              $row -> title = apply_filter($row -> title, "title");
              return $row -> title;
              }
@@ -175,13 +175,13 @@ function title($ipage = null){
          }
     
      $connection = MYSQL_CONNECTION;
-     $ipage = mysql_real_escape_string($_GET["seite"]);
+     $ipage = db_real_escape_string($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1", $connection);
          }
-     if(mysql_num_rows($query) > 0){
-         while($row = mysql_fetch_object($query)){
+     if(db_num_rows($query) > 0){
+         while($row = db_fetch_object($query)){
              $row -> title = apply_filter($row -> title, "title");
              echo $row -> title;
              return true;
@@ -191,7 +191,7 @@ function title($ipage = null){
 
 function import($ipage){
      $connection = MYSQL_CONNECTION;
-     $ipage = mysql_real_escape_string($ipage);
+     $ipage = db_real_escape_string($ipage);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1");
         
@@ -200,11 +200,11 @@ function import($ipage){
          $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'");
          }
     
-     if(mysql_num_rows($query) == 0){
+     if(db_num_rows($query) == 0){
          return false;
          }else{
         
-         while($row = mysql_fetch_object($query)){
+         while($row = db_fetch_object($query)){
              $row -> content = replaceShortcodesWithModules($row -> content);
              $row -> content = apply_filter($row -> content, "content");
              $row -> content = correctHTMLValidationErrors($row -> content);
@@ -272,7 +272,7 @@ function motto(){
 
 
 function get_requested_pagename(){
-     $value = mysql_real_escape_string($_GET["seite"]);
+     $value = db_real_escape_string($_GET["seite"]);
      if($value == ""){
          $value = getconfig("frontpage");
          }
@@ -299,7 +299,7 @@ function menu($name){
      $language = $_SESSION["language"];
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent IS NULL ORDER by position");
      echo "<ul class='menu_" . $name . "'>\n";
-     while($row = mysql_fetch_object($query)){
+     while($row = db_fetch_object($query)){
          echo "  <li>" ;
          if(get_requested_pagename() != $row -> systemname){
              echo "<a href='" . $row -> systemname . ".html' target='" .
@@ -315,9 +315,9 @@ function menu($name){
          // Unterebene 1
         $query2 = db_query("SELECT * FROM " . tbname("content") . " WHERE active = 1 AND language = '$language' AND `deleted_at` IS NULL AND parent=" . $row -> id . " ORDER by position");
         
-         if(mysql_num_rows($query2) > 0){
+         if(db_num_rows($query2) > 0){
              echo "<ul class='sub_menu'>\n";
-             while($row2 = mysql_fetch_object($query2)){
+             while($row2 = db_fetch_object($query2)){
                 
                  echo "      <li>";
                  if(get_requested_pagename() != $row2 -> systemname){
@@ -332,9 +332,9 @@ function menu($name){
                 
                  // Unterebene 2
                 $query3 = db_query("SELECT * FROM " . tbname("content") . " WHERE active = 1 AND language = '$language' AND parent=" . $row2 -> id . " AND `deleted_at` IS NULL ORDER by position");
-                 if(mysql_num_rows($query3) > 0){
+                 if(db_num_rows($query3) > 0){
                      echo "  <ul class='sub_menu'>\n";
-                     while($row3 = mysql_fetch_object($query3)){
+                     while($row3 = db_fetch_object($query3)){
                          echo "      <li>";
                          if(get_requested_pagename() != $row3 -> systemname){
                              echo "<a href='" . $row3 -> systemname . ".html' target='" .
@@ -348,9 +348,9 @@ function menu($name){
                         
                          // Unterebene 3
                         $query4 = db_query("SELECT * FROM " . tbname("content") . " WHERE active = 1 AND `deleted_at` IS NULL AND language = '$language' AND parent=" . $row3 -> id . " ORDER by position");
-                         if(mysql_num_rows($query4) > 0){
+                         if(db_num_rows($query4) > 0){
                              echo "  <ul class='sub_menu'>\n";
-                             while($row4 = mysql_fetch_object($query4)){
+                             while($row4 = db_fetch_object($query4)){
                                  echo "<li>";
                                  if(get_requested_pagename() != $row4 -> systemname){
                                      echo "<a href='" . $row4 -> systemname . ".html' target='" .
@@ -505,7 +505,7 @@ function autor(){
      $seite = $_GET["seite"];
      if(empty($seite)){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1");
-         $result = mysql_fetch_object($query);
+         $result = db_fetch_object($query);
          $seite = $result -> systemname;
          }
     
@@ -513,17 +513,17 @@ function autor(){
          return;
          }
     
-     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . mysql_real_escape_string($seite) . "'", $connection);
-     if(mysql_num_rows($query) < 1){
+     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_real_escape_string($seite) . "'", $connection);
+     if(db_num_rows($query) < 1){
          return;
          }
-     $result = mysql_fetch_array($query);
+     $result = db_fetch_array($query);
      if($result["systemname"] == "kontakt" || $result["systemname"] == "impressum" || StartsWith($result["systemname"], "menu_")){
          return;
          }
      $query2 = db_query("SELECT * FROM " . tbname("admins") . " WHERE id=" . $result["autor"], $connection);
-     $result2 = mysql_fetch_array($query2);
-     if(mysql_num_rows($query2) == 0){
+     $result2 = db_fetch_array($query2);
+     if(db_num_rows($query2) == 0){
          return;
          }
      $datum = date(getconfig("date_format"), $result["created"]);
@@ -577,11 +577,11 @@ function check_status(){
          }
     
      $connection = MYSQL_CONNECTION;
-     $test = db_query("SELECT * FROM `" . tbname("content") . "` WHERE systemname='" . mysql_real_escape_string($_GET["seite"]) . "'");
-     if(mysql_num_rows($test) == 0){
+     $test = db_query("SELECT * FROM `" . tbname("content") . "` WHERE systemname='" . db_real_escape_string($_GET["seite"]) . "'");
+     if(db_num_rows($test) == 0){
          return "404 Not Found";
          }else{
-         $test_array = mysql_fetch_array($test);
+         $test_array = db_fetch_array($test);
         
          // Prüfe, ob der Nutzer die Berechtigung zum Zugriff auf die Seite hat.
         if($test_array["active"] == 1 or $_SESSION["group"] >= 20){

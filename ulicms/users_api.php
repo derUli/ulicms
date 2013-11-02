@@ -5,7 +5,7 @@ include_once dirname(__file__) . "/lib/encryption.php";
 function getUsers(){
      $query = db_query("SELECT * FROM " . tbname("admins") . " ORDER by username");
      $users = Array();
-     while($row = mysql_fetch_object($query)){
+     while($row = db_fetch_object($query)){
          array_push($users, $row -> username);
          }
     
@@ -20,9 +20,9 @@ function changePassword($password, $id){
 
 function getUserByName($name){
      $query = db_query("SELECT * FROM " . tbname("admins") . " WHERE username='" .
-         mysql_real_escape_string($name) . "'");
-     if(mysql_num_rows($query) > 0){
-         return mysql_fetch_assoc($query);
+         db_real_escape_string($name) . "'");
+     if(db_num_rows($query) > 0){
+         return db_fetch_assoc($query);
          }else{
          return false;
          }
@@ -30,8 +30,8 @@ function getUserByName($name){
 
 function getUserById($id){
      $query = db_query("SELECT * FROM " . tbname("admins") . " WHERE id = " . intval($id));
-     if(mysql_num_rows($query) > 0){
-         return mysql_fetch_assoc($query);
+     if(db_num_rows($query) > 0){
+         return db_fetch_assoc($query);
          }else{
          return false;
          }
@@ -40,10 +40,10 @@ function getUserById($id){
 
 
 function adduser($username, $lastname, $firstname, $email, $password, $group){
-     $username = mysql_real_escape_string($username);
-     $lastname = mysql_real_escape_string($lastname);
-     $firstname = mysql_real_escape_string($firstname);
-     $email = mysql_real_escape_string($email);
+     $username = db_real_escape_string($username);
+     $lastname = db_real_escape_string($lastname);
+     $firstname = db_real_escape_string($firstname);
+     $email = db_real_escape_string($email);
      $password = $password;
      $group = intval($group);
     
@@ -62,8 +62,8 @@ function adduser($username, $lastname, $firstname, $email, $password, $group){
 
 function user_exists($name){
      $query = db_query("SELECT * FROM " . tbname("admins") .
-         " WHERE username = '" . mysql_real_escape_string($name) . "'");
-     return mysql_num_rows($query) > 0;
+         " WHERE username = '" . db_real_escape_string($name) . "'");
+     return db_num_rows($query) > 0;
      }
 
 function register_session($user, $redirect = true){
@@ -92,7 +92,7 @@ function register_session($user, $redirect = true){
 
 function validate_login($user, $password){
      include_once "../lib/encryption.php";
-     $user = mysql_real_escape_string($user);
+     $user = db_real_escape_string($user);
      $user = getUserByName($user);
     
      if($user){

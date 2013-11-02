@@ -7,7 +7,7 @@ if(!is_admin()){
 
 if(isset($_POST["submit"])){
   if(isset($_POST["mailer"])){
-     setconfig("mailer", mysql_real_escape_string($_POST["mailer"]));
+     setconfig("mailer", db_real_escape_string($_POST["mailer"]));
   }
   
     if(isset($_POST["cache_period"])){  
@@ -15,11 +15,11 @@ if(isset($_POST["submit"])){
     }
   
     if(isset($_POST["cache_type"])){
-     setconfig("cache_type", mysql_real_escape_string($_POST["cache_type"]));
+     setconfig("cache_type", db_real_escape_string($_POST["cache_type"]));
   }
   
   if(isset($_POST["override_shortcuts"])){
-     setconfig("override_shortcuts", mysql_real_escape_string($_POST["override_shortcuts"]));
+     setconfig("override_shortcuts", db_real_escape_string($_POST["override_shortcuts"]));
        
   }
   
@@ -30,7 +30,7 @@ if(isset($_POST["submit"])){
 
   
   if($_POST["move_from"] != "-" and $_POST["move_to"] != "-" ){
-     db_query("UPDATE ".tbname("content"). " SET menu='".mysql_real_escape_string($_POST["move_to"])."' WHERE menu='".mysql_real_escape_string($_POST["move_from"])."'");
+     db_query("UPDATE ".tbname("content"). " SET menu='".db_real_escape_string($_POST["move_to"])."' WHERE menu='".db_real_escape_string($_POST["move_from"])."'");
   }
 }
 

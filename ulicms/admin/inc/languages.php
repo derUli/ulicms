@@ -25,7 +25,7 @@
 <br>
 <div class="seperator"></div>
 <br>
-<?php if(mysql_num_rows($languages) > 0){
+<?php if(db_num_rows($languages) > 0){
              ?>
 <table border=1 style="width:800px;"> 
 <tr>
@@ -35,7 +35,7 @@
 <td></td>
 </tr>
 <?php
-             while($row = mysql_fetch_object($languages)){
+             while($row = db_fetch_object($languages)){
                  ?>
 <tr>
 <td>

@@ -18,8 +18,8 @@
 </tr>
 <?php
          $query = db_query("SELECT * FROM " . tbname("banner") . " ORDER BY id", $connection);
-         if(mysql_num_rows($query) > 0){
-             while($row = mysql_fetch_object($query)){
+         if(db_num_rows($query) > 0){
+             while($row = db_fetch_object($query)){
                  ?>
 <?php
                  echo '<tr>';

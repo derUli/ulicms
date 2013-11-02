@@ -3,12 +3,12 @@
 function sendChatMessage(){
      if(!empty($_REQUEST["to"]) and !empty($_REQUEST["message"]) and
              isset($_SESSION["ulicms_login"])){
-         $to = mysql_real_escape_string($_REQUEST["to"]);
-         $message = mysql_real_escape_string($_REQUEST["message"]);
-         $from = mysql_real_escape_string($_SESSION["ulicms_login"]);
+         $to = db_real_escape_string($_REQUEST["to"]);
+         $message = db_real_escape_string($_REQUEST["message"]);
+         $from = db_real_escape_string($_SESSION["ulicms_login"]);
          $time = time();
         
-         mysql_query("INSERT INTO " . tbname("chat_messages") . " (`from`, `to`, message, date, `read`) VALUES('$from', '$to', '$message', $time, 0)");
+         db_query("INSERT INTO " . tbname("chat_messages") . " (`from`, `to`, message, date, `read`) VALUES('$from', '$to', '$message', $time, 0)");
          }else{
          return;
          }

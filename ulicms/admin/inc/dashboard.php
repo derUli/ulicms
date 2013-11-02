@@ -1,6 +1,6 @@
 <?php
  if(defined("_SECURITY") and logged_in()){
-     $pages_count = mysql_num_rows(db_query("SELECT * FROM " . tbname("content")));
+     $pages_count = db_num_rows(db_query("SELECT * FROM " . tbname("content")));
     
      $topPages = db_query("SELECT * FROM " . tbname("content") . " WHERE notinfeed = 0 AND systemname <> \"kontakt\" ORDER BY views DESC LIMIT 5");
      $lastModfiedPages = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname <> \"kontakt\" ORDER BY lastmodified DESC LIMIT 5");
@@ -9,7 +9,7 @@
     
      $admins = Array();
     
-     while($row = mysql_fetch_object($admins_query)){
+     while($row = db_fetch_object($admins_query)){
          $admins[$row -> id] = $row -> username;
          }
     
@@ -75,7 +75,7 @@
          ?>
 <tr>
 <td>Gästebucheinträge</td>
-<td><?php echo mysql_num_rows($test)?></td>
+<td><?php echo db_num_rows($test)?></td>
 </tr>
 <?php }
      ?>
@@ -95,7 +95,7 @@
 <td>Titel</td>
 <td>Views</td>
 </tr>
-<?php while($row = mysql_fetch_object($topPages)){
+<?php while($row = db_fetch_object($topPages)){
          ?>
 <tr>
 <td><a href="../<?php echo $row -> systemname;
@@ -119,7 +119,7 @@
 <td>Durchgeführt von</td>
 </tr>
 
-<?php while($row = mysql_fetch_object($lastModfiedPages)){
+<?php while($row = db_fetch_object($lastModfiedPages)){
          ?>
 <tr>
 <td><a href="../<?php echo $row -> systemname;

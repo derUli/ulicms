@@ -3,7 +3,7 @@
         
          $query = db_query("SELECT * FROM " . tbname("settings") . " ORDER BY name", $connection);
          $settings = Array();
-         while($row = mysql_fetch_object($query)){
+         while($row = db_fetch_object($query)){
             
              $settings[$row -> name] = $row -> value;
              $settings[$row -> name] = htmlspecialchars($settings[$row -> name],
@@ -14,7 +14,7 @@
          $query2 = db_query("SELECT * FROM " . tbname("content") . " ORDER BY systemname");
          $pages = Array();
         
-         while($row = mysql_fetch_object($query2)){
+         while($row = db_fetch_object($query2)){
              array_push($pages, $row -> systemname);
              }
          ?>

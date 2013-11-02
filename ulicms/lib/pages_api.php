@@ -1,13 +1,13 @@
 <?php
 function delete_page($id = false, $systemname = false){
      if($id){
-         mysql_query("DELETE FROM " . tbname("content") . " WHERE id=$id");
-         return mysql_affected_rows() > 0;
+         db_query("DELETE FROM " . tbname("content") . " WHERE id=$id");
+         return db_affected_rows() > 0;
          }
     
      if($systemname){
-         mysql_query("DELETE FROM " . tbname("content") . " WHERE systemname='$systemname'");
-         return mysql_affected_rows() > 0;
+         db_query("DELETE FROM " . tbname("content") . " WHERE systemname='$systemname'");
+         return db_affected_rows() > 0;
          }
     
      return false;
@@ -17,28 +17,28 @@ function add_page($system_title, $page_title, $page_content, $position, $activat
      $comments_enabled = 0, $redirection = "", $menu = "top",
      $parent = "NULL", $language = "de", $access = array("all"),
      $target = "_self", $meta_keywords = "", $meta_description = ""){
-     $system_title = mysql_real_escape_string($system_title);
-     $page_title = mysql_real_escape_string($page_title);
+     $system_title = db_real_escape_string($system_title);
+     $page_title = db_real_escape_string($page_title);
      $page_content = $page_content;
      $notinfeed = 0;
-     $redirection = mysql_real_escape_string($redirection);
-     $menu = mysql_real_escape_string($menu);
+     $redirection = db_real_escape_string($redirection);
+     $menu = db_real_escape_string($menu);
      $position = $position;
     
      if($parent == "NULL")
          $parent = "NULL";
      else
-         $parent = mysql_real_escape_string($parent);
+         $parent = db_real_escape_string($parent);
     
      $access = implode(",", $access);
-     $access = mysql_real_escape_string($access);
-     $target = mysql_real_escape_string($target);
+     $access = db_real_escape_string($access);
+     $target = db_real_escape_string($target);
     
-     $page_content = mysql_real_escape_String($page_content);
-     $language = mysql_real_escape_string($language);
+     $page_content = db_real_escape_String($page_content);
+     $language = db_real_escape_string($language);
     
-     $meta_keywords = mysql_real_escape_String($meta_keywords);
-     $meta_description = mysql_real_escape_String($meta_description);
+     $meta_keywords = db_real_escape_String($meta_keywords);
+     $meta_description = db_real_escape_String($meta_description);
     
      if(!isset($_SESSION["login_id"])){
          $session_id = 1;

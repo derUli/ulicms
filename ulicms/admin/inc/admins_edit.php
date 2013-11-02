@@ -6,7 +6,7 @@
          $admin = intval($_GET["admin"]);
         
          $query = db_query("SELECT * FROM " . tbname("admins") . " WHERE id='$admin'");
-         while($row = mysql_fetch_object($query)){
+         while($row = db_fetch_object($query)){
              ?>
 
 <form action="index.php?action=admins" name="userdata_form" method="post" enctype="multipart/form-data">

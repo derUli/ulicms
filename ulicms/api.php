@@ -4,7 +4,7 @@
 function getOnlineUsers(){
    $users_online = db_query("SELECT * FROM " . tbname("admins") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
    $users = array();
-   while($row = mysql_fetch_object($users_online)){
+   while($row = db_fetch_object($users_online)){
       array_push($users, $row -> username);
    }
    return $users;
@@ -13,10 +13,10 @@ function getOnlineUsers(){
 // get a config variable
 function getconfig($key){
      $connection = MYSQL_CONNECTION;
-     $ikey = mysql_real_escape_string($key);
+     $ikey = db_real_escape_string($key);
      $query = db_query("SELECT * FROM " . tbname("settings") . " WHERE name='$key'");
-     if(mysql_num_rows($query) > 0){
-         while($row = mysql_fetch_object($query)){
+     if(db_num_rows($query) > 0){
+         while($row = db_fetch_object($query)){
              return $row -> value;
              }
          }
@@ -78,10 +78,10 @@ function is_ssl(){
 // else it returns $_SESSION["language"];
 function getCurrentLanguage($current = true){
      if($current){
-         $query = mysql_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . get_requested_pagename() . "'");
+         $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . get_requested_pagename() . "'");
         
-         if(mysql_num_rows($query) > 0){
-             $fetch = mysql_fetch_object($query);
+         if(db_num_rows($query) > 0){
+             $fetch = db_fetch_object($query);
              return $fetch -> language;
              }
          }
@@ -396,9 +396,9 @@ function replaceShortcodesWithModules($string){
 
 // get page id by systemname
 function getPageIDBySystemname($systemname){
-     $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where systemname='" . mysql_real_escape_string($systemname) . "'");
-     if(mysql_num_rows($query) > 0){
-         $row = mysql_fetch_object($query);
+     $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where systemname='" . db_real_escape_string($systemname) . "'");
+     if(db_num_rows($query) > 0){
+         $row = db_fetch_object($query);
          return $row -> id;
          }else{
          return null;
@@ -409,8 +409,8 @@ function getPageIDBySystemname($systemname){
 // get PageSystemnameByID
 function getPageSystemnameByID($id){
      $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where id=" . intval($id));
-     if(mysql_num_rows($query) > 0){
-         $row = mysql_fetch_object($query);
+     if(db_num_rows($query) > 0){
+         $row = db_fetch_object($query);
          return $row -> systemname;
          }else{
          return "-";
@@ -421,7 +421,7 @@ function getPageSystemnameByID($id){
 function getAllSystemNames(){
      $query = db_query("SELECT systemname,id FROM `" . tbname("content") . "` WHERE `deleted_at`IS NULL ORDER BY systemname");
      $returnvalues = Array();
-     while($row = mysql_fetch_object($query)){
+     while($row = db_fetch_object($query)){
          array_push($returnvalues, $row -> systemname);
          }
     
@@ -434,7 +434,7 @@ function getAllSystemNames(){
 function getAllLanguages(){
      $query = db_query("SELECT * FROM `" . tbname("languages") . "` ORDER BY language_code");
      $returnvalues = Array();
-     while($row = mysql_fetch_object($query)){
+     while($row = db_fetch_object($query)){
          array_push($returnvalues, $row -> language_code);
          }
      return $returnvalues;
@@ -478,17 +478,17 @@ function file_extension($filename){
 
 // Remove an configuration variable
 function deleteconfig($key){
-     $key = mysql_real_escape_string($key);
+     $key = db_real_escape_string($key);
      db_query("DELETE FROM " . tbname("settings") .
          " WHERE name='$key'");
-     return mysql_affected_rows() > 0;
+     return db_affected_rows() > 0;
      }
 
 // Set a configuration Variable;
 function setconfig($key, $value){
      $query = db_query("SELECT * FROM " . tbname("settings") . " WHERE name='$key'");
     
-     if(mysql_num_rows($query) > 0){
+     if(db_num_rows($query) > 0){
          db_query("UPDATE " . tbname("settings") . " SET value='$value' WHERE name='$key'");
          }else{
         
@@ -543,8 +543,8 @@ function getAllMenus(){
 // Check if site contains a module
 function containsModule($page, $module = false){
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname = '" .
-         mysql_real_escape_string($page) . "'");
-     $dataset = mysql_fetch_assoc($query);
+         db_real_escape_string($page) . "'");
+     $dataset = db_fetch_assoc($query);
      $content = $dataset["content"];
      $content = str_replace("&quot;", "\"", $content);
     
@@ -621,7 +621,7 @@ function logged_in(){
 function tbname($name){
      require_once "cms-config.php";
      $config = new config();
-     return $config -> mysql_prefix . $name;
+     return $config -> db_prefix . $name;
      }
 
 // returns version number of UliCMS Core

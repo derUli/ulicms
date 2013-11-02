@@ -3,7 +3,7 @@ if(defined("_SECURITY")){
      if($_SESSION["group"] >= 50){
         
          $query = db_query("SELECT * FROM " . tbname("settings") . " ORDER BY name", $connection);
-         if(mysql_num_rows($query) > 0){
+         if(db_num_rows($query) > 0){
              ?>
 <br/>
 <a href="index.php?action=key_new">Datensatz hinzufügen</a>
@@ -18,7 +18,7 @@ if(defined("_SECURITY")){
 <td>Löschen</td>
 </tr>
 <?php
-             while($row = mysql_fetch_object($query)){
+             while($row = db_fetch_object($query)){
                  ?>
 <?php
                  echo '<tr>';

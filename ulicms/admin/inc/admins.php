@@ -7,7 +7,7 @@
              $order = basename($_GET["order"]);
              }
          $query = db_query("SELECT * FROM " . tbname("admins") . " ORDER BY $order", $connection);
-         if(mysql_num_rows($query)){
+         if(db_num_rows($query)){
              ?>
 <h2>Benutzer</h2>
 <p>Hier können Sie die Benutzer Ihrer Homepage verwalten und die Passwörter ändern.
@@ -26,7 +26,7 @@
 <td><span data-tooltip="Wenn ein Benutzer gelöscht wird, bleiben seine Beiträge erhalten, verlieren allerdings seinen Namen als Autor.">Löschen</span></td>
 </tr>
 <?php
-             while($row = mysql_fetch_object($query)){
+             while($row = db_fetch_object($query)){
                  ?>
 <?php
                  echo '<tr>';

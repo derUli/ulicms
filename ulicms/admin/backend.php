@@ -174,6 +174,6 @@ if(!$eingeloggt){
 
 require_once "inc/footer.php";
 @include '../cron.php';
-mysql_close($connection);
+db_close($connection);
 exit();
 ?>

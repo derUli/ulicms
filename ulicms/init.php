@@ -3,6 +3,8 @@
  * Diese Datei initalisiert das System
  */
  
+
+ 
 function exception_handler($exception) {
   echo $exception->getMessage(), "\n";
   if(!defined("EXCEPTION_OCCURRED")){
@@ -70,17 +72,17 @@ function endsWith($haystack, $needle, $case = true){
 global $connection, $config;
 $config = new config();
 
-if($config -> mysql_server == "" or $config -> mysql_user == ""){
+if($config -> db_server == "" or $config -> db_user == ""){
      header("Location: installer/");
      exit();
      }
 
-@$connection = mysql_connect($config -> mysql_server, $config -> mysql_user, $config -> mysql_password);
+@$connection = db_connect($config -> db_server, $config -> db_user, $config -> db_password);
 if($connection === false){
-      throw new Exception("Fehler: Die Verbindung zum MySQL Server konnte nicht hergestellt werden.");
+      throw new Exception("Fehler: Die Verbindung zum Datenbank Server konnte nicht hergestellt werden.");
      }
-
-mysql_query("SET NAMES 'utf8'");
+	 
+	 
 
  if(file_exists("installer/installer.php") or file_exists("../installer/installer.php")){
      header("Content-Type: text/html; charset=utf-8");
@@ -90,11 +92,12 @@ mysql_query("SET NAMES 'utf8'");
      exit();
      }
 
-
 define("MYSQL_CONNECTION", $connection);
-$select = mysql_select_db($config -> mysql_database);
+$select = schema_select($config -> db_database);
+
+
 if(!$select){
-     throw new Exception("Fehler: Die Datenbank " . $config -> mysql_database . " existiert nicht.\n");
+     throw new Exception("Fehler: Die Datenbank " . $config -> db_database . " existiert nicht.\n");
      }
 
 

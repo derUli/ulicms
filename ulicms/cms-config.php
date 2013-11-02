@@ -1,10 +1,10 @@
 <?php 
 class config{
 
-var $mysql_server="localhost";
-var $mysql_user="root";
-var $mysql_password="";
-var $mysql_database="test";
-var $mysql_prefix="ulicms_";
+var $db_server="localhost";
+var $db_user="root";
+var $db_password="";
+var $db_database="test";
+var $db_prefix="ulicms_";
 
 }
