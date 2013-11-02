@@ -3,7 +3,11 @@
  * Diese Datei initalisiert das System
  */
  
+// UliCMS verweigert den Betrieb mit aktivierten Register Globals
+if ( ini_get('register_globals') === '1' ) {
 
+  die('SECURITY WARNING: "Register Globals" feature is enabled! UliCMS refuses to run with enabled "Register Globals"!');
+}
  
 function exception_handler($exception) {
   echo $exception->getMessage(), "\n";
@@ -39,6 +43,8 @@ else if(is_dir("installer")){
 // else use default error_reporting from php.ini
 if(defined("ULICMS_DEBUG")){
    error_reporting(E_ALL ^ E_NOTICE);
+} else {
+   error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED ^ E_STRICT);
 }
 	 
 include_once "lib/db_functions.php";
