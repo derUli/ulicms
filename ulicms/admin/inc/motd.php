@@ -7,7 +7,7 @@
          if(isset($_POST["motd"])){
             
              $motd = strip_tags($_POST["motd"], getconfig("allowed_html"));
-             $motd = db_real_escape_string($motd);
+             $motd = db_escape($motd);
              setconfig("motd", $motd);
              }
         

@@ -13,7 +13,7 @@ function getOnlineUsers(){
 // get a config variable
 function getconfig($key){
      $connection = MYSQL_CONNECTION;
-     $ikey = db_real_escape_string($key);
+     $ikey = db_escape($key);
      $query = db_query("SELECT * FROM " . tbname("settings") . " WHERE name='$key'");
      if(db_num_rows($query) > 0){
          while($row = db_fetch_object($query)){
@@ -396,7 +396,7 @@ function replaceShortcodesWithModules($string){
 
 // get page id by systemname
 function getPageIDBySystemname($systemname){
-     $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where systemname='" . db_real_escape_string($systemname) . "'");
+     $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where systemname='" . db_escape($systemname) . "'");
      if(db_num_rows($query) > 0){
          $row = db_fetch_object($query);
          return $row -> id;
@@ -478,7 +478,7 @@ function file_extension($filename){
 
 // Remove an configuration variable
 function deleteconfig($key){
-     $key = db_real_escape_string($key);
+     $key = db_escape($key);
      db_query("DELETE FROM " . tbname("settings") .
          " WHERE name='$key'");
      return db_affected_rows() > 0;
@@ -543,7 +543,7 @@ function getAllMenus(){
 // Check if site contains a module
 function containsModule($page, $module = false){
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname = '" .
-         db_real_escape_string($page) . "'");
+         db_escape($page) . "'");
      $dataset = db_fetch_assoc($query);
      $content = $dataset["content"];
      $content = str_replace("&quot;", "\"", $content);

@@ -17,25 +17,25 @@ function add_page($system_title, $page_title, $page_content, $position, $activat
      $comments_enabled = 0, $redirection = "", $menu = "top",
      $parent = "NULL", $language = "de", $access = array("all"),
      $target = "_self", $meta_keywords = "", $meta_description = ""){
-     $system_title = db_real_escape_string($system_title);
-     $page_title = db_real_escape_string($page_title);
+     $system_title = db_escape($system_title);
+     $page_title = db_escape($page_title);
      $page_content = $page_content;
      $notinfeed = 0;
-     $redirection = db_real_escape_string($redirection);
-     $menu = db_real_escape_string($menu);
+     $redirection = db_escape($redirection);
+     $menu = db_escape($menu);
      $position = $position;
     
      if($parent == "NULL")
          $parent = "NULL";
      else
-         $parent = db_real_escape_string($parent);
+         $parent = db_escape($parent);
     
      $access = implode(",", $access);
-     $access = db_real_escape_string($access);
-     $target = db_real_escape_string($target);
+     $access = db_escape($access);
+     $target = db_escape($target);
     
      $page_content = db_real_escape_String($page_content);
-     $language = db_real_escape_string($language);
+     $language = db_escape($language);
     
      $meta_keywords = db_real_escape_String($meta_keywords);
      $meta_description = db_real_escape_String($meta_description);

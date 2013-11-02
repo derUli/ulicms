@@ -1,6 +1,6 @@
 <?php if(defined("_SECURITY")){
      if($_SESSION["group"] >= 40){
-         $banner = db_real_escape_string($_GET["banner"]);
+         $banner = db_escape($_GET["banner"]);
          $query = db_query("SELECT * FROM " . tbname("banner") . " WHERE id='$banner'");
          while($row = db_fetch_object($query)){
              ?>

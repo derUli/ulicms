@@ -13,7 +13,7 @@ if(!is_admin()){
              deleteconfig("pkg_src");
              }
         else{
-             $new_pkg_src = db_real_escape_string($new_pkg_src);
+             $new_pkg_src = db_escape($new_pkg_src);
              setconfig("pkg_src", $new_pkg_src);
              }
          }

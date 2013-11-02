@@ -3,9 +3,9 @@
 function sendChatMessage(){
      if(!empty($_REQUEST["to"]) and !empty($_REQUEST["message"]) and
              isset($_SESSION["ulicms_login"])){
-         $to = db_real_escape_string($_REQUEST["to"]);
-         $message = db_real_escape_string($_REQUEST["message"]);
-         $from = db_real_escape_string($_SESSION["ulicms_login"]);
+         $to = db_escape($_REQUEST["to"]);
+         $message = db_escape($_REQUEST["message"]);
+         $from = db_escape($_SESSION["ulicms_login"]);
          $time = time();
         
          db_query("INSERT INTO " . tbname("chat_messages") . " (`from`, `to`, message, date, `read`) VALUES('$from', '$to', '$message', $time, 0)");

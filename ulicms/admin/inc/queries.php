@@ -6,23 +6,23 @@ add_hook("query");
 if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
 setconfig("registered_user_default_level", intval($_POST["registered_user_default_level"]));
      
-     setconfig("homepage_title", db_real_escape_string($_POST["homepage_title"]));
-     setconfig("homepage_owner", db_real_escape_string($_POST["homepage_owner"]));
-     setconfig("motto", db_real_escape_string($_POST["homepage_motto"]));
-     setconfig("meta_keywords", db_real_escape_string($_POST["meta_keywords"]));
-     setconfig("meta_description", db_real_escape_string($_POST["meta_description"]));
-     setconfig("language", db_real_escape_string($_POST["language"]));
+     setconfig("homepage_title", db_escape($_POST["homepage_title"]));
+     setconfig("homepage_owner", db_escape($_POST["homepage_owner"]));
+     setconfig("motto", db_escape($_POST["homepage_motto"]));
+     setconfig("meta_keywords", db_escape($_POST["meta_keywords"]));
+     setconfig("meta_description", db_escape($_POST["meta_description"]));
+     setconfig("language", db_escape($_POST["language"]));
      setconfig("visitors_can_register", intval(isset($_POST["visitors_can_register"])));
      setconfig("maintenance_mode", intval(isset($_POST["maintenance_mode"])));
-     setconfig("email", db_real_escape_string($_POST["email"]));
+     setconfig("email", db_escape($_POST["email"]));
      setconfig("max_news", (int)$_POST["max_news"]);
-     setconfig("frontpage", db_real_escape_string($_POST["frontpage"]));
-     setconfig("comment_mode", db_real_escape_string($_POST["comment_mode"]));
-     setconfig("disqus_id", db_real_escape_string($_POST["disqus_id"]));
-     setconfig("facebook_id", db_real_escape_string($_POST["facebook_id"]));
-     setconfig("logo_disabled", db_real_escape_string($_POST["logo_disabled"]));
-     setconfig("timezone", db_real_escape_string($_POST["timezone"]));
-     setconfig("robots", db_real_escape_string($_POST["robots"]));
+     setconfig("frontpage", db_escape($_POST["frontpage"]));
+     setconfig("comment_mode", db_escape($_POST["comment_mode"]));
+     setconfig("disqus_id", db_escape($_POST["disqus_id"]));
+     setconfig("facebook_id", db_escape($_POST["facebook_id"]));
+     setconfig("logo_disabled", db_escape($_POST["logo_disabled"]));
+     setconfig("timezone", db_escape($_POST["timezone"]));
+     setconfig("robots", db_escape($_POST["robots"]));
     
      if($_POST["disable_html_validation"] == "enabled")
          deleteconfig("disable_html_validation");
@@ -138,8 +138,8 @@ if($_GET["action"] == "languages" and !empty($_GET["default"]) and $_SESSION["gr
 
 if(isset($_POST["add_language"]) and $_SESSION["group"] >= 50){
      if(!empty($_POST["name"]) and !empty($_POST["language_code"])){
-         $name = db_real_escape_string($_POST["name"]);
-         $language_code = db_real_escape_string($_POST["language_code"]);
+         $name = db_escape($_POST["name"]);
+         $language_code = db_escape($_POST["language_code"]);
          db_query("INSERT INTO " . tbname("languages") .
              "(name, language_code)
       VALUES('$name', '$language_code')");
@@ -157,8 +157,8 @@ if(isset($_POST["add_menu_item"]) and $_SESSION["group"] >= 50){
          $position = 1;
          }
     
-     $action = db_real_escape_string($_POST["action"]);
-     $label = db_real_escape_string($_POST["label"]);
+     $action = db_escape($_POST["action"]);
+     $label = db_escape($_POST["label"]);
     
      db_query("INSERT INTO " . tbname("backend_menu_structure") .
          "(action, label, position) 
@@ -286,23 +286,23 @@ if($_GET["action"] == "admin_delete" && $_SESSION["group"] >= 40){
 if($_POST["add_page"] == "add_page"){
      if($_POST["system_title"] != ""){
         
-         $system_title = db_real_escape_string($_POST["system_title"]);
-         $page_title = db_real_escape_string($_POST["page_title"]);
+         $system_title = db_escape($_POST["system_title"]);
+         $page_title = db_escape($_POST["page_title"]);
          $activated = intval($_POST["activated"]);
          $page_content = $_POST["page_content"];
          $comments_enabled = (int)$_POST["comments_enabled"];
          $notinfeed = 0;
-         $redirection = db_real_escape_string($_POST["redirection"]);
-         $menu = db_real_escape_string($_POST["menu"]);
+         $redirection = db_escape($_POST["redirection"]);
+         $menu = db_escape($_POST["menu"]);
          $position = (int)$_POST["position"];
         
          if($_POST["parent"] == "NULL")
              $parent = "NULL";
          else
-             $parent = db_real_escape_string($_POST["parent"]);
+             $parent = db_escape($_POST["parent"]);
          $access = implode(",", $_POST["access"]);
-         $access = db_real_escape_string($access);
-         $target = db_real_escape_string($_POST["target"]);
+         $access = db_escape($access);
+         $target = db_escape($_POST["target"]);
          $meta_description = $_POST["meta_description"];
          $meta_keywords = $_POST["meta_keywords"];
         
@@ -334,7 +334,7 @@ if($_POST["add_page"] == "add_page"){
             
              }
         
-         $meta_description = db_real_escape_string($meta_description);
+         $meta_description = db_escape($meta_description);
         
         
          // Wenn keine Meta Keywords gesetzt sind selbst ermitteln
@@ -371,9 +371,9 @@ if($_POST["add_page"] == "add_page"){
              }
         
          $page_content = db_real_escape_String($page_content);
-         $meta_keywords = db_real_escape_string($meta_keywords);
+         $meta_keywords = db_escape($meta_keywords);
         
-         $language = db_real_escape_string($_POST["language"]);
+         $language = db_escape($_POST["language"]);
         
          db_query("INSERT INTO " . tbname("content") .
              " (systemname,title,content,parent, active,created,lastmodified,autor,
@@ -397,9 +397,9 @@ if($_POST["add_page"] == "add_page"){
 
 
 if($_POST["add_news"] == "add_news" && $_SESSION["group"] >= 20){
-     $title = db_real_escape_string($_POST["title"]);
+     $title = db_escape($_POST["title"]);
      $activated = intval($_POST["activated"]);
-     $content = db_real_escape_string($_POST["news_content"]);
+     $content = db_escape($_POST["news_content"]);
      $date = time();
      $autor = $_SESSION["login_id"];
      $query = db_query("INSERT INTO " . tbname("news") . " 
@@ -417,9 +417,9 @@ if($_POST["add_news"] == "add_news" && $_SESSION["group"] >= 20){
 if(isset($_POST["edit_news"]) && $_SESSION["group"] >= 20){
      $id = intval($_POST["edit_news"]);
     
-     $title = db_real_escape_string($_POST["title"]);
+     $title = db_escape($_POST["title"]);
      $activated = intval($_POST["activated"]);
-     $content = db_real_escape_string($_POST["news_content"]);
+     $content = db_escape($_POST["news_content"]);
      $date = time();
      $autor = $_SESSION["login_id"];
      $query = db_query("UPDATE " . tbname("news") . " SET title='$title',content='$content',date=$date,active=$activated WHERE id=$id", $connection);
@@ -443,9 +443,9 @@ if($_GET["delete_news"] == "delete_news" && $_SESSION["group"] >= 40){
 
 if($_POST["add_banner"] == "add_banner" && $_SESSION["group"] >= 40){
     
-     $name = db_real_escape_string($_POST["banner_name"]);
-     $image_url = db_real_escape_string($_POST["image_url"]);
-     $link_url = db_real_escape_string($_POST["link_url"]);
+     $name = db_escape($_POST["banner_name"]);
+     $image_url = db_escape($_POST["image_url"]);
+     $link_url = db_escape($_POST["link_url"]);
     
      $query = db_query("INSERT INTO " . tbname("banner") . " 
 (name,link_url,image_url) VALUES('$name','$link_url','$image_url')", $connection);
@@ -457,8 +457,8 @@ if($_POST["add_banner"] == "add_banner" && $_SESSION["group"] >= 40){
 
 if($_POST["add_key"] == "add_key" && $_SESSION["group"] >= 40){
     
-     $name = db_real_escape_string($_POST["name"]);
-     $value = db_real_escape_string($_POST["value"]);
+     $name = db_escape($_POST["name"]);
+     $value = db_escape($_POST["value"]);
     
      $query = db_query("INSERT INTO " . tbname("settings") . " 
 (name,value) VALUES('$name','$value')", $connection);
@@ -477,14 +477,14 @@ if($_POST["add_key"] == "add_key" && $_SESSION["group"] >= 40){
 
 if($_POST["add_admin"] == "add_admin" && $_SESSION["group"] >= 50){
      include_once "../lib/encryption.php";
-     $username = db_real_escape_string($_POST["admin_username"]);
-     $lastname = db_real_escape_string($_POST["admin_lastname"]);
-     $firstname = db_real_escape_string($_POST["admin_firstname"]);
+     $username = db_escape($_POST["admin_username"]);
+     $lastname = db_escape($_POST["admin_lastname"]);
+     $firstname = db_escape($_POST["admin_firstname"]);
      $group = getconfig("registered_user_default_level");
      if($group === false)
         $group = 10;
-     $email = db_real_escape_string($_POST["admin_email"]);
-     $password = db_real_escape_string($_POST["admin_password"]);
+     $email = db_escape($_POST["admin_email"]);
+     $password = db_escape($_POST["admin_password"]);
      db_query("INSERT INTO " . tbname("admins") . " 
 (username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','" . hash_password($password) . "', $group)", $connection);
      $message = "Hallo $firstname,\n\n" .
@@ -507,14 +507,14 @@ if($_POST["add_admin"] == "add_admin" && $_SESSION["group"] >= 50){
 
 
 if($_POST["edit_page"] == "edit_page" && $_SESSION["group"] >= 30){
-     $system_title = db_real_escape_string($_POST["page_"]);
-     $page_title = db_real_escape_string($_POST["page_title"]);
+     $system_title = db_escape($_POST["page_"]);
+     $page_title = db_escape($_POST["page_title"]);
      $activated = intval($_POST["activated"]);
-     $page_content = db_real_escape_string($_POST["page_content"]);
+     $page_content = db_escape($_POST["page_content"]);
      $comments_enabled = (int) $_POST["comments_enabled"];
-     $redirection = db_real_escape_string($_POST["redirection"]);
+     $redirection = db_escape($_POST["redirection"]);
      $notinfeed = 0;
-     $menu = db_real_escape_string($_POST["menu"]);
+     $menu = db_escape($_POST["menu"]);
      $position = (int)$_POST["position"];
     
      $parent = "NULL";
@@ -525,10 +525,10 @@ if($_POST["edit_page"] == "edit_page" && $_SESSION["group"] >= 30){
      $user = $_SESSION["login_id"];
      $id = intval($_POST["page_id"]);
      $access = implode(",", $_POST["access"]);
-     $access = db_real_escape_string($access);
-     $target = db_real_escape_string($_POST["target"]);
-     $meta_description = db_real_escape_string($_POST["meta_description"]);
-     $meta_keywords = db_real_escape_string($_POST["meta_keywords"]);
+     $access = db_escape($access);
+     $target = db_escape($_POST["target"]);
+     $meta_description = db_escape($_POST["meta_description"]);
+     $meta_keywords = db_escape($_POST["meta_keywords"]);
     
      db_query("UPDATE " . tbname("content") . " SET systemname = '$system_title' , title='$page_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target' WHERE id=$id");
     
@@ -656,15 +656,15 @@ if($_POST["edit_admin"] == "edit_admin" && $_SESSION["group"] >= 50
          }
     
     
-     $username = db_real_escape_string($_POST["admin_username"]);
-     $lastname = db_real_escape_string($_POST["admin_lastname"]);
-     $firstname = db_real_escape_string($_POST["admin_firstname"]);
-     $email = db_real_escape_string($_POST["admin_email"]);
-     $password = db_real_escape_string($_POST["admin_password"]);
-     $rechte = db_real_escape_string($_POST["admin_rechte"]);
-     $icq_id = db_real_escape_string($_POST["icq_id"]);
-     $skype_id = db_real_escape_string($_POST["skype_id"]);
-     $about_me = db_real_escape_string($_POST["about_me"]);
+     $username = db_escape($_POST["admin_username"]);
+     $lastname = db_escape($_POST["admin_lastname"]);
+     $firstname = db_escape($_POST["admin_firstname"]);
+     $email = db_escape($_POST["admin_email"]);
+     $password = db_escape($_POST["admin_password"]);
+     $rechte = db_escape($_POST["admin_rechte"]);
+     $icq_id = db_escape($_POST["icq_id"]);
+     $skype_id = db_escape($_POST["skype_id"]);
+     $about_me = db_escape($_POST["about_me"]);
      db_query("UPDATE " . tbname("admins") . " SET username = '$username', `group`= $rechte, firstname='$firstname',
 lastname='$lastname', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
@@ -686,9 +686,9 @@ about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id", $conn
 
 
 if($_POST["edit_banner"] == "edit_banner" && $_SESSION["group"] >= 40){
-     $name = db_real_escape_string($_POST["banner_name"]);
-     $image_url = db_real_escape_string($_POST["image_url"]);
-     $link_url = db_real_escape_string($_POST["link_url"]);
+     $name = db_escape($_POST["banner_name"]);
+     $image_url = db_escape($_POST["image_url"]);
+     $link_url = db_escape($_POST["link_url"]);
      $id = intval($_POST["id"]);
     
      $query = db_query("UPDATE " . tbname("banner") . " 
@@ -701,8 +701,8 @@ SET name='$name',link_url='$link_url',image_url='$image_url' WHERE id=$id");
      }
 
 if($_POST["edit_key"] == "edit_key" && $_SESSION["group"] >= 50){
-     $name = db_real_escape_string($_POST["name"]);
-     $value = db_real_escape_string($_POST["value"]);
+     $name = db_escape($_POST["name"]);
+     $value = db_escape($_POST["value"]);
      $id = intval($_POST["id"]);
     
      $query = db_query("UPDATE " . tbname("settings") . " 

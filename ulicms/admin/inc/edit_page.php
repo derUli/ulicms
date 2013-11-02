@@ -1,6 +1,6 @@
 <?php if(defined("_SECURITY")){
      if($_SESSION["group"] >= 30){
-         $page = db_real_escape_string($_GET["page"]);
+         $page = db_escape($_GET["page"]);
          $query = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
          while($row = db_fetch_object($query)){
             

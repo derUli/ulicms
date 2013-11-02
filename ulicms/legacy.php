@@ -4,7 +4,7 @@
 function env($key){
     
      $connection = MYSQL_CONNECTION;
-     $key = db_real_escape_string($key);
+     $key = db_escape($key);
      $query = db_query("SELECT * FROM " . tbname("settings") . " WHERE name='$key'", $connection);
      if(db_num_rows($query) > 0){
          while($row = db_fetch_object($query)){

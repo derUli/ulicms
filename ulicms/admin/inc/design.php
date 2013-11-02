@@ -10,7 +10,7 @@ if(!is_admin()){
         if($_REQUEST["theme"] !== $theme){ // if theme auf
              $themes = getThemesList();
              if(in_array($_REQUEST["theme"], $themes)){ // if in_array theme auf
-                 setconfig("theme", db_real_escape_string($_REQUEST["theme"]));
+                 setconfig("theme", db_escape($_REQUEST["theme"]));
                  $theme = $_REQUEST["theme"];
                  } // if in_array theme zu
              } // if theme zu
@@ -21,7 +21,7 @@ if(!is_admin()){
              else
                  $font = $_REQUEST["default-font"];
             
-             $font = db_real_escape_string($font);
+             $font = db_escape($font);
             
              setconfig("default-font", $font);
              }
@@ -39,23 +39,23 @@ if(!is_admin()){
         
          if(getconfig("header-background-color")
                  != $_REQUEST["header-background-color"]){
-             setconfig("header-background-color", db_real_escape_string($_REQUEST["header-background-color"]));
+             setconfig("header-background-color", db_escape($_REQUEST["header-background-color"]));
              }
         
          if(getconfig("body-text-color")
                  != $_REQUEST["body-text-color"]){
              setconfig("body-text-color",
-                 db_real_escape_string($_REQUEST["body-text-color"]));
+                 db_escape($_REQUEST["body-text-color"]));
              }
         
          if(getconfig("title_format") != $_REQUEST["title_format"])
              setconfig("title_format",
-                 db_real_escape_string($_REQUEST["title_format"]));
+                 db_escape($_REQUEST["title_format"]));
         
          if(getconfig("body-background-color")
                  != $_REQUEST["body-background-color"]){
              setconfig("body-background-color",
-                 db_real_escape_string($_REQUEST["body-background-color"]));
+                 db_escape($_REQUEST["body-background-color"]));
              }
         
         

@@ -20,7 +20,7 @@ function changePassword($password, $id){
 
 function getUserByName($name){
      $query = db_query("SELECT * FROM " . tbname("admins") . " WHERE username='" .
-         db_real_escape_string($name) . "'");
+         db_escape($name) . "'");
      if(db_num_rows($query) > 0){
          return db_fetch_assoc($query);
          }else{
@@ -40,10 +40,10 @@ function getUserById($id){
 
 
 function adduser($username, $lastname, $firstname, $email, $password, $group){
-     $username = db_real_escape_string($username);
-     $lastname = db_real_escape_string($lastname);
-     $firstname = db_real_escape_string($firstname);
-     $email = db_real_escape_string($email);
+     $username = db_escape($username);
+     $lastname = db_escape($lastname);
+     $firstname = db_escape($firstname);
+     $email = db_escape($email);
      $password = $password;
      $group = intval($group);
     
@@ -62,7 +62,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group){
 
 function user_exists($name){
      $query = db_query("SELECT * FROM " . tbname("admins") .
-         " WHERE username = '" . db_real_escape_string($name) . "'");
+         " WHERE username = '" . db_escape($name) . "'");
      return db_num_rows($query) > 0;
      }
 
@@ -92,7 +92,7 @@ function register_session($user, $redirect = true){
 
 function validate_login($user, $password){
      include_once "../lib/encryption.php";
-     $user = db_real_escape_string($user);
+     $user = db_escape($user);
      $user = getUserByName($user);
     
      if($user){

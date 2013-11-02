@@ -105,7 +105,7 @@ $status = check_status();
 function meta_keywords($ipage = null){
      $status = check_status();
      $connection = MYSQL_CONNECTION;
-     $ipage = db_real_escape_string($_GET["seite"]);
+     $ipage = db_escape($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'");
     
      if(db_num_rows($query) > 0){
@@ -122,7 +122,7 @@ function meta_keywords($ipage = null){
 function meta_description($ipage = null){
      $status = check_status();
      $connection = MYSQL_CONNECTION;
-     $ipage = db_real_escape_string($_GET["seite"]);
+     $ipage = db_escape($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1", $connection);
@@ -151,7 +151,7 @@ function get_title($ipage = null){
          }
     
      $connection = MYSQL_CONNECTION;
-     $ipage = db_real_escape_string($_GET["seite"]);
+     $ipage = db_escape($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1");
@@ -175,7 +175,7 @@ function title($ipage = null){
          }
     
      $connection = MYSQL_CONNECTION;
-     $ipage = db_real_escape_string($_GET["seite"]);
+     $ipage = db_escape($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1", $connection);
@@ -191,7 +191,7 @@ function title($ipage = null){
 
 function import($ipage){
      $connection = MYSQL_CONNECTION;
-     $ipage = db_real_escape_string($ipage);
+     $ipage = db_escape($ipage);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1");
         
@@ -272,7 +272,7 @@ function motto(){
 
 
 function get_requested_pagename(){
-     $value = db_real_escape_string($_GET["seite"]);
+     $value = db_escape($_GET["seite"]);
      if($value == ""){
          $value = getconfig("frontpage");
          }
@@ -513,7 +513,7 @@ function autor(){
          return;
          }
     
-     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_real_escape_string($seite) . "'", $connection);
+     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_escape($seite) . "'", $connection);
      if(db_num_rows($query) < 1){
          return;
          }
@@ -577,7 +577,7 @@ function check_status(){
          }
     
      $connection = MYSQL_CONNECTION;
-     $test = db_query("SELECT * FROM `" . tbname("content") . "` WHERE systemname='" . db_real_escape_string($_GET["seite"]) . "'");
+     $test = db_query("SELECT * FROM `" . tbname("content") . "` WHERE systemname='" . db_escape($_GET["seite"]) . "'");
      if(db_num_rows($test) == 0){
          return "404 Not Found";
          }else{
