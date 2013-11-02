@@ -4286,11 +4286,12 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
          $config_string = '<?php 
 class config{
 
-var $mysql_server="' . $_SESSION["mysql"]["server"] . '";
-var $mysql_user="' . $_SESSION["mysql"]["loginname"] . '";
-var $mysql_password="' . $_SESSION["mysql"]["passwort"] . '";
-var $mysql_database="' . $_SESSION["mysql"]["datenbank"] . '";
-var $mysql_prefix="' . $_SESSION["mysql"]["prefix"] . '";
+var $db_server="' . $_SESSION["mysql"]["server"] . '";
+var $db_user="' . $_SESSION["mysql"]["loginname"] . '";
+var $db_password="' . $_SESSION["mysql"]["passwort"] . '";
+var $db_database="' . $_SESSION["mysql"]["datenbank"] . '";
+var $db_prefix="' . $_SESSION["mysql"]["prefix"] . '";
+var $db_type="mysql";
 
 }';
         
