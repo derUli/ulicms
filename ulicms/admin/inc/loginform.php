@@ -24,17 +24,16 @@
 </tr>
 </table>
 </form>
-<br><br>
 
 <?php
-if(getconfig("visitors_can_register") == "on" or getconfig("visitors_can_register") == "1" or getconfig("visitors_can_register") == true){
+if(getconfig("visitors_can_register") === "on" or getconfig("visitors_can_register") === "1"){
+
      ?><a href="?register=register&<?php
      if(!empty($_REQUEST["go"])){
-         echo "go=" . htmlspecialchars($_REQUEST["go"]);
+         echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
          }
      ?>">Registrieren</a>
 <?php
      }
 ?>
-<br>
 </div>
