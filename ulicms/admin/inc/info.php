@@ -18,6 +18,8 @@
 <a href="http://codemirror.net/" target="_blank">CodeMirror</a> &copy; 2012 by Marijn Haverbeke</p>
 </p>
 <br/>
+<?php if(is_admin()){?>
+<h2>Technische Informationen</h2>
 <table>
 <tr>
 <td style="width:200px;">
@@ -33,7 +35,7 @@ echo phpversion();
 <strong>MySQL-Version: </strong></td>
 <td>
 <?php
-echo phpversion();
+echo mysql_get_server_info();
 ?>
 </td>
 </tr>
@@ -50,7 +52,7 @@ echo $info["GD Version"];
 ?>
 </td>
 </tr>
-<?php } else {?>
+<?php } else { ?>
 <tr>
 <td style="width:200px;">
 <strong>libgd Version: </strong></td>
@@ -84,9 +86,28 @@ echo $_SERVER["SERVER_SOFTWARE"];
 
 <?php } ?>
 </table>
+<?php 
+if(function_exists("apache_get_modules")){
+$modules = apache_get_modules();
+?>
+<h2>Installierte Apache Module</h2>
+<?php if(count($modules) > 0 ){?>
+<ol>
+<?php for($i = 0; $i < count($modules); $i++){?>
+<li><?php echo $modules[$i];?></li>
+<?php }?>
+<?php ?>
+</ol>
+<?php } else { ?>
+<p>Es sind keine Apache Module installiert.</p>
+<?php 
+}
 
-<br/>
-<br/>
+}?>
+
+<?php }
+
+?><br/>
 
 <input type="button" value="UliCMS Portal" onclick='window.open("http://www.ulicms.de");'/>
 

@@ -44,3 +44,8 @@ function file_get_contents_wrapper($url){
      }
 
 
+
+function url_exists($url) {
+     if(@file_get_contents($url, FALSE, NULL, 0, 0) === false) return false;
+     return true;
+    } 
