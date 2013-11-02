@@ -14,8 +14,6 @@ function exception_handler($exception) {
 
 set_exception_handler('exception_handler');
 
-error_reporting(E_ALL ^ E_NOTICE);
-
 // Workaround für Magic Quotes und Register Globals
 include "lib/workaround.php";
 
@@ -37,7 +35,12 @@ else if(is_dir("installer")){
       throw new Exception("Can't include cms-config.php. Starting installer failed, too.");
      }
 
-
+// IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
+// else use default error_reporting from php.ini
+if(defined("ULICMS_DEBUG")){
+   error_reporting(E_ALL ^ E_NOTICE);
+}
+	 
 include_once "lib/db_functions.php";
 require_once "api.php";
 
@@ -99,12 +102,6 @@ $select = schema_select($config -> db_database);
 if(!$select){
      throw new Exception("Fehler: Die Datenbank " . $config -> db_database . " existiert nicht.\n");
      }
-
-
-$error_reporting = getconfig("error_reporting");
-
-if($error_reporting !== false)
-     error_reporting($error_reporting);
 
 
 $memory_limit = getconfig("memory_limit");
