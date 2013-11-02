@@ -80,8 +80,15 @@ function db_real_escape_string($value){
    return mysql_real_escape_string($value);
 }
 
+define("DB_TYPE_INT", 1);
+define("DB_TYPE_FLOAT", 2);
+define("DB_TYPE_STRING", 3);
+define("DB_TYPE_BOOL", 4);
+
 // Abstraktion für Escapen von Werten
-function db_escape($value){
+function db_escape($value, $type = null){
+    if(is_null($type)){
+
 	if(is_float($value)){
       return floatval($value);
 	}
@@ -95,6 +102,23 @@ function db_escape($value){
 	  return mysql_real_escape_string($value);
 	  }
 
+	  
+	  } else {
+	  if($type === DB_TYPE_INT) {
+	     return intval($value);
+	  } else if($type === DB_TYPE_FLOAT) {
+	     return floatval($value);
+	  } else if($type === DB_TYPE_STRING) {
+	     return mysql_real_escape_string($value);
+	  } else if($type === DB_TYPE_BOOL) {
+	     return intval($value);
+	  } else {
+	     return $value;
+	  } 
+	  
+	  
+	  }
+	  
 }
 
 ?>
