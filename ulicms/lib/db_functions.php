@@ -6,7 +6,8 @@ function db_query($query){
      else
          include_once "lib/logger.php";
      log_db_query($query);
-     return mysql_query($query);
+	 global $db_connection;
+     return mysqli_query($db_connection, $query);
     
 
 }
@@ -15,43 +16,49 @@ function db_query($query){
 // Fetch Row in diversen Datentypen
 
 function db_fetch_array($result){
-   return mysql_fetch_array($result);
+   return mysqli_fetch_array($result);
 }
 
 function db_fetch_field($result){
-   return mysql_fetch_field($result);
+   return mysqli_fetch_field($result);
 }
 
 function db_fetch_assoc($result){
-   return mysql_fetch_assoc($result);
+   return mysqli_fetch_assoc($result);
 }
 
 function db_close(){
-   mysql_close();
+   global $db_connection;
+   mysqli_close($db_connection);
 }
 
 // Connect with database server
 function db_connect($server, $user, $password){
-   $result = mysql_connect($server, $user, $password);
-   if(!$result)
+   global $db_connection;
+   $db_connection = mysqli_connect($server, $user, $password);
+   if(!$db_connection)
       return false;
     db_query("SET NAMES 'utf8'");
-    return $result;
+    return $db_connection;
 }
 // Datenbank auswählen
 function db_select($schema){
-   return mysql_select_db($schema);
+   global $db_connection;
+   return mysqli_select_db($db_connection, $schema);
 }
 
 function db_num_fields($result){
-   return mysql_num_fields($result);
+   global $db_connection; 
+   return mysqli_field_count($db_connection);
 }
 
 function db_affected_rows(){
-   return mysql_affected_rows();
+   global $db_connection;
+   return mysqli_affected_rows($db_connection);
 }
 
 function schema_select($schema){
+   global $db_connection;
   return db_select($schema);
 }
 
@@ -61,23 +68,29 @@ function db_select_db($schema){
 
 
 function db_fetch_object($result){
-   return mysql_fetch_object($result);
+   return mysqli_fetch_object($result);
 }
 
 function db_fetch_row($result){
-   return mysql_fetch_row($result);
+   return mysqli_fetch_row($result);
 }
 
 function db_num_rows($result){
-   return mysql_num_rows($result);
+   return mysqli_num_rows($result);
 }
 
 function db_last_error(){
-   return mysql_error();
+   global $db_connection;
+   return mysqli_error($db_connection);
+}
+
+function db_error(){
+  return db_last_error();
 }
 
 function db_real_escape_string($value){
-   return mysql_real_escape_string($value);
+   global $db_connection ;
+   return mysqli_real_escape_string($db_connection, $value);
 }
 
 define("DB_TYPE_INT", 1);
@@ -88,6 +101,7 @@ define("DB_TYPE_BOOL", 4);
 
 // Abstraktion für Escapen von Werten
 function db_escape($value, $type = null){
+   global $db_connection ;
     if(is_null($type)){
 
 	if(is_float($value)){
@@ -100,7 +114,7 @@ function db_escape($value, $type = null){
 	  return (int) $value;
 	}
 	else{
-	  return mysql_real_escape_string($value);
+	  return mysqli_real_escape_string($db_connection, $value);
 	  }
 
 	  
@@ -110,7 +124,7 @@ function db_escape($value, $type = null){
 	  } else if($type === DB_TYPE_FLOAT) {
 	     return floatval($value);
 	  } else if($type === DB_TYPE_STRING) {
-	     return mysql_real_escape_string($value);
+	     return mysqli_real_escape_string($db_connection, $value);
 	  } else if($type === DB_TYPE_BOOL) {
 	     return intval($value);
 	  } else {

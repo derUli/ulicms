@@ -101,7 +101,6 @@ if($connection === false){
      exit();
      }
 
-define("MYSQL_CONNECTION", $connection);
 $select = schema_select($config -> db_database);
 
 

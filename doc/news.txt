@@ -11,5 +11,15 @@
     Alle mysql_ Funktionen wurden durch db_ Wrapper-Funktionen die sich in der Datei "db_functions.php" befinden ersetzt.
 	Eine für PostgreSQL und SQLite Datenbanken angepasste "db_functions.php" ist geplant.
 	Es ist außerdem geplant, den Installer soweit anzupassen, dass man die zu nutzende Datenbanksoftware auswählen kann.
+[*] Die Datenbank wird nun über mysqli_ angesprochen, da die alten mysql_ Schnittstelle in PHP 5.5
+    als Deprecated (veraltet) gekennzeichnet ist. 
+    Achtung! Diese Änderung hat zur Folge, dass Pakete, die noch die alte API nutzen, nicht mehr funktionieren können.
+	Bitte installieren Sie Pakete nur aus der offiziellen Paketquelle oder erstellen Sie mit ulicms-pkg eine Paketquelle, die mit dieser Version des CMS kompatibel ist.
+[*] Die mysql_ Variablen in der Datei "cms-config.php" müssen bei einem Upgrade durch db_ ersetzt werden.
+    z.B. mysql_password ersetzen durch db_password.
+[*] Folge Konfigurationsvariable wurde hinzugefügt:
+    $db_type
+	Bei einem Upgrade des Systems muss folgende Zeile unter den MySQL-Zugangsdaten in der cms-config hinzugefügt werden:
+	var $db_type="mysql";
 [*] Neue API-Funktionen hinzugefügt:
     isModuleInstalled, clearCache, getOnlineUsers und weitere
