@@ -88,12 +88,12 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
          ?>
 <h2>MySQL-Logindaten</h2>
 <?php
-         @$connection = mysql_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
+         @$connection = mysqli_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
          if($connection == false){
              echo "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werden.<br/>Dies kann z.B. an einem falschen Passwort liegen. Wenn Sie sich sicher sind, dass das Passwort richtig ist, prüfen Sie ob der MySQL-Datenbankserver läuft und erreichbar ist.";
              }else{
             
-             @$select = mysql_select_db($_POST["datenbank"]);
+             @$select = mysqli_select_db($connection, $_POST["datenbank"]);
             
              if($select == false){
                  echo "<p>Die Datenbank \"" . htmlspecialchars($_POST["datenbank"]) . "\" konnte nicht geöffnet werden.<br/>Eventuell müssen Sie die Datenbank vorher anlegen.</p>";
@@ -170,15 +170,15 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
         
          $salt = uniqid();
         
-         $connection = mysql_connect($_SESSION["mysql"]["server"], $_SESSION["mysql"]["loginname"], $_SESSION["mysql"]["passwort"]);
+         $connection = mysqli_connect($_SESSION["mysql"]["server"], $_SESSION["mysql"]["loginname"], $_SESSION["mysql"]["passwort"]);
         
-         mysql_select_db($_SESSION["mysql"]["datenbank"]);
+         mysqli_select_db($connection, $_SESSION["mysql"]["datenbank"]);
         
-         $prefix = mysql_real_escape_string($_SESSION["mysql"]["prefix"]);
+         $prefix = mysqli_real_escape_string($connection, $_SESSION["mysql"]["prefix"]);
         
-         mysql_query("SET NAMES 'utf8'")or die(mysql_error());
+         mysqli_query($connection, "SET NAMES 'utf8'")or die(mysqli_error($connection));
         
-         mysql_query("CREATE TABLE IF NOT EXISTS `" . $prefix . "admins` (
+         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "admins` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -193,29 +193,29 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `about_me` text NOT NULL,
   `last_action` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysql_error());;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysqli_error($connection));;
         
         
-         $vorname = mysql_real_escape_string($_POST["firstname"]);
-         $nachname = mysql_real_escape_string($_POST["lastname"]);
-         $zusammen = mysql_real_escape_string("$vorname $nachname");
-         $email = mysql_real_escape_string($_POST["email"]);
-         $passwort = mysql_real_escape_string($_POST["passwort"]);
+         $vorname = mysqli_real_escape_string($connection, $_POST["firstname"]);
+         $nachname = mysqli_real_escape_string($connection, $_POST["lastname"]);
+         $zusammen = mysqli_real_escape_string($connection, "$vorname $nachname");
+         $email = mysqli_real_escape_string($connection, $_POST["email"]);
+         $passwort = mysqli_real_escape_string($connection, $_POST["passwort"]);
         
          $encrypted_passwort = sha1($salt . $passwort);
         
-         mysql_query("INSERT INTO `" . $prefix . "admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
-(1, 0, 'admin', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50);")or die(mysql_error());
+         mysqli_query($connection, "INSERT INTO `" . $prefix . "admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
+(1, 0, 'admin', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50);")or die(mysqli_error($connection));
         
-         mysql_query("CREATE TABLE IF NOT EXISTS `" . $prefix . "banner` (
+         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `link_url` text NOT NULL,
   `image_url` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
-         mysql_query("CREATE TABLE IF NOT EXISTS `" . $prefix . "content` (
+         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "content` (
   
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `notinfeed` tinyint(1) NOT NULL,
@@ -243,24 +243,24 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `meta_keywords` text NOT NULL,
   `deleted_at` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
         
-         mysql_query("INSERT INTO `" . $prefix . "content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
+         mysqli_query($connection, "INSERT INTO `" . $prefix . "content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
 (1, 0, 'willkommen', 'Willkommen', '_self', '<p>Willkommen auf einer neuen Website die mit UliCMS betrieben wird.</p>\r\n', 'de', 1, 1364242679, 1364242833, 1, 0, 1, 19, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL),
-(2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 0, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;")or die(mysql_error());
+(2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 0, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;")or die(mysqli_error($connection));
         
-         mysql_query("CREATE TABLE IF NOT EXISTS `" . $prefix . "settings` (
+         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `value` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysql_error());
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
         
         
-         $homepage_title = mysql_real_escape_string($_POST["homepage_title"]);
-         $motto = mysql_real_escape_string($_POST["motto"]);
+         $homepage_title = mysqli_real_escape_string($connection, $_POST["homepage_title"]);
+         $motto = mysqli_real_escape_string($connection, $_POST["motto"]);
         
          // Badword-Blacklist von https://gist.github.com/splorp/1385930
         $badwords = "_coupon_
@@ -4197,10 +4197,10 @@ zyvox
          $badwords = str_replace("\r\n", "||", $badwords);
          $badwords = str_replace("\n", "||", $badwords);
         
-         $badwords = mysql_real_escape_string($badwords);
+         $badwords = mysqli_real_escape_string($connection, $badwords);
         
         
-         mysql_query("INSERT INTO `" . $prefix . "settings` (`id`, `name`, `value`) VALUES
+         mysqli_query($connection, "INSERT INTO `" . $prefix . "settings` (`id`, `name`, `value`) VALUES
 (1, 'homepage_title', '$homepage_title'),
 (2, 'maintenance_mode', '0'),
 (3, 'redirection', ''),
@@ -4230,7 +4230,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (25, 'empty_trash_days', '30'),
 (26, 'password_salt', '$salt'),
 (27, 'timezone', 'Europe/Berlin'),
-(28, 'mysql_schema_version', '6.3'),
+(28, 'mysqli_schema_version', '6.3'),
 (29, 'pkg_src', 'http://www.ulicms.de/packages/{version}/'),
 (30, 'theme', 'default'),
 (31, 'zoom', '100'),
@@ -4245,21 +4245,21 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (40, 'cache_type', 'file'),
 (41, 'registered_user_default_level', '10'),
 (42, 'override_shortcuts', 'backend'),
-(43, 'session_timeout', '60');")or die(mysql_error());
+(43, 'session_timeout', '60');")or die(mysqli_error($connection));
         
-         mysql_query("UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysql_error());
+         mysqli_query($connection, "UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysqli_error($connection));
         
-         mysql_query("CREATE TABLE IF NOT EXISTS `" . $prefix . "languages` (
+         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `language_code` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;")or die(mysql_error());
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;")or die(mysqli_error($connection));
         
         
-         mysql_query("INSERT INTO `" . $prefix . "languages` (`id`, `name`, `language_code`) VALUES
+         mysqli_query($connection, "INSERT INTO `" . $prefix . "languages` (`id`, `name`, `language_code`) VALUES
 (1, 'Deutsch', 'de'), 
-(2, 'English', 'en');")or die(mysql_error());
+(2, 'English', 'en');")or die(mysqli_error($connection));
         
          @chmod("../cms-config.php", 0777);
         
