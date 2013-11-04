@@ -45,15 +45,16 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <?php 
 if (!function_exists('gd_info')) {
 ?>
-<p style="color:red;">php5-gd ist nicht installiert. Ohne php5-gd lässt sich UliCMS zwar installieren, jedoch wird der Dateimanager und die Verarbeitung von Grafikdateien nicht funktionieren.</p>
-
+<hr/>
+<p style="color:red;"><strong>php5-gd</strong> ist nicht installiert.<br/>Ohne <strong>php5-gd</strong> lässt sich UliCMS zwar installieren,<br/>jedoch wird der Dateimanager und die Verarbeitung von Grafikdateien nicht funktionieren.</p>
+<hr/>
 <?php } ?>
-<br/>
+
 
 <?php 
 if (!function_exists('mysqli_connect')) {
 ?>
-<p style="color:red;">php5-mysql ist nicht installiert. Ohne php5-mysql lässt sich UliCMS nicht installieren, da dieses PHP-Modul für die Kommunikation mit dem Datenbankserver benötigt wird.</p>
+<p style="color:red;"><strong>php5-mysql</strong> ist nicht installiert.<br/>Ohne <strong>php5-mysql</strong> lässt sich UliCMS nicht installieren,<br/>da dieses PHP-Modul für die Kommunikation mit<br/>dem Datenbankserver benötigt wird.</p>
 
 <?php } else {?>
 
