@@ -44,7 +44,7 @@ else if(is_dir("installer")){
 if(defined("ULICMS_DEBUG")){
    error_reporting(E_ALL ^ E_NOTICE);
 } else {
-   error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED ^ E_STRICT);
+   error_reporting(0);
 }
 	 
 include_once "lib/db_functions.php";
