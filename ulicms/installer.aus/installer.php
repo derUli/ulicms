@@ -47,6 +47,13 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <input type="hidden" name="step" value="1">
 <input type="submit" value="Weiter">
 </form>
+<br/>
+<?php 
+if (!function_exists('gd_info')) {
+?>
+<p style="color:red;">php5-gd ist nicht installiert. Ohne php5-gd lässt sich UliCMS zwar installieren, jedoch wird der Dateimanager und die Verarbeitung von Grafikdateien nicht funktionieren.</p>
+
+<?php } ?>
 <?php
      }else{
      ?>
