@@ -222,7 +222,8 @@ text-transform:uppercase;
 border-radius: 5px;  
 -moz-border-radius: 5px;  
 -webkit-border-radius: 5px;  
-color:#FFF;  
+
+color:black;
 text-decoration: none;  
 opacity:.85;  
 }
@@ -232,6 +233,7 @@ opacity:.85;
 input, textarea, select{
     border: solid 1px #90d099;
     outline:none
+    color:black;
 }
 
 

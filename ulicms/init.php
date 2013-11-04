@@ -5,7 +5,6 @@
  
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if ( ini_get('register_globals') === '1' ) {
-
   die('SECURITY WARNING: "Register Globals" feature is enabled! UliCMS refuses to run with enabled "Register Globals"!');
 }
  
