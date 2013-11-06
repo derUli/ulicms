@@ -41,7 +41,10 @@ else if(is_dir("installer")){
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else use default error_reporting from php.ini
 if(defined("ULICMS_DEBUG")){
-   error_reporting(E_ALL ^ E_NOTICE);
+   if(ULICMS_DEBUG)
+      error_reporting(E_ALL ^ E_NOTICE);
+   else
+      error_reporting(0);
 } else {
    error_reporting(0);
 }
