@@ -34,9 +34,10 @@
 		}
     
 	}
-	
+
 	if(!function_exists("getExcerpt")){
 	
+
     /**
      * Get excerpt from string
      * 
@@ -58,6 +59,8 @@
         
          return $excerpt;
          }
+         
+              }
     
      function isEmpty($str){
          $str = trim($str);
@@ -68,6 +71,9 @@
          return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
          }
     
+    
+    
+   
      // Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
     // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
     function keywordsFromString($text){
@@ -102,6 +108,6 @@
         return $return;
          }
     
-     }
+
 
 ?>

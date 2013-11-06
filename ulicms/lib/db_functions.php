@@ -12,6 +12,16 @@ function db_query($query){
 
 }
 
+function db_last_insert_id(){
+   global $db_connection;
+   return mysqli_insert_id($db_connection);
+   
+}
+
+function db_insert_id(){
+   return db_last_insert_id();
+   }
+
 
 // Fetch Row in diversen Datentypen
 
