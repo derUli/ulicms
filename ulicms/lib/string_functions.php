@@ -30,7 +30,7 @@
 	if(!function_exists("make_links_clickable")){
 	// Links klickbar machen	 
 		function make_links_clickable($text){
-			return preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $text);
+			return preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1" rel="nofollow" target="_blank">$1</a>', $text);
 		}
     
 	}
@@ -62,17 +62,24 @@
          
               }
     
+    if(!function_exists("isEmpty")){
      function isEmpty($str){
          $str = trim($str);
          return empty($str);
          }
-    
-     function decodeHTMLEntities($str){
-         return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
+         
          }
     
     
+     if(!function_exists("decodeHTMLEntities")){
+     function decodeHTMLEntities($str){
+         return html_entity_decode($str, ENT_COMPAT, 'UTF-8');
+         }
+         
+         }
     
+    
+    if(!function_exists("keywordsFromString")){
    
      // Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
     // z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
@@ -108,6 +115,6 @@
         return $return;
          }
     
-
+}
 
 ?>
