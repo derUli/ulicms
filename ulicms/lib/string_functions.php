@@ -16,6 +16,7 @@ if(!function_exists("getExcerpt")){
             
              return $string;
              }
+			
         
         
          }
@@ -28,8 +29,14 @@ if(!function_exists("getExcerpt")){
         
          }
     
+
+	if(!function_exists("make_links_clickable")){
+	// Links klickbar machen	 
+		function make_links_clickable($text){
+			return preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1">$1</a>', $text);
+		}
     
-    
+	}
     /**
      * Get excerpt from string
      * 

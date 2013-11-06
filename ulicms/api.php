@@ -25,6 +25,33 @@ function getconfig($key){
          }
      }
 
+if(!function_exists("get_host")){
+function get_host() {
+    if ($host = $_SERVER['HTTP_X_FORWARDED_HOST'])
+    {
+        $elements = explode(',', $host);
+
+        $host = trim(end($elements));
+    }
+    else
+    {
+        if (!$host = $_SERVER['HTTP_HOST'])
+        {
+            if (!$host = $_SERVER['SERVER_NAME'])
+            {
+                $host = !empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : '';
+            }
+        }
+    }
+
+    // Remove port number from host
+    $host = preg_replace('/:\d+$/', '', $host);
+
+    return trim($host);
+}
+
+}
+
  function clearCache(){
      add_hook("before_clear_cache");
      $cache_type = getconfig("cache_type");
