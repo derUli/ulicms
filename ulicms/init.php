@@ -95,9 +95,11 @@ if($connection === false){
       throw new Exception("Fehler: Die Verbindung zum Datenbank Server konnte nicht hergestellt werden.");
      }
 	 
+
+$path_to_installer = dirname(__file__). DIRECTORY_SEPERATOR. "installer" . DIRECTORY_SEPERATOR ."installer.php";	 
 	 
 
- if(file_exists("installer/installer.php") or file_exists("../installer/installer.php")){
+ if(file_exists($path_to_installer)){
      header("Content-Type: text/html; charset=utf-8");
      throw new Exception("<p>Bitte löschen Sie den Ordner \"installer\" vom Server.<br/>
      Das CMS kann erst betrieben werden, nach dem der Installer gelöscht wurde.
