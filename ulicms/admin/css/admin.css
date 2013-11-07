@@ -232,13 +232,11 @@ opacity:.85;
 
 input, textarea, select{
     border: solid 1px #90d099;
-    outline:none
+    outline:none;
     color:black;
 }
 
-select option{
-color:black;
-}
+
 
 input:hover, textarea:hover, select:hover{
 outline:none;
