@@ -5,6 +5,8 @@ class packageManager{
     $this->package_source = getconfig("pkg_src");
  }
  
+
+ 
 public function getInstalledModules(){
      $module_folder = ULICMS_ROOT.DIRECTORY_SEPERATOR."modules".DIRECTORY_SEPERATOR;
     
@@ -27,6 +29,28 @@ public function getInstalledModules(){
      natcasesort($available_modules);
      return $available_modules;
 } 
+
+public function getInstalledThemes(){
+    $themes = Array();
+    $templateDir = ULICMS_ROOT.DIRECTORY_SEPERATOR."templates".DIRECTORY_SEPERATOR;
+    
+     $folders = scanDir($templateDir);
+     natcasesort($folders);
+     for($i = 0; $i < count($folders); $i++){
+         $f = $templateDir . ($folders[$i]) . "/";
+         if(is_dir($f)){
+             if(is_file($f . "oben.php") and is_file($f . "unten.php")
+                     and is_file($f . "style.css"))
+                 array_push($themes, $folders[$i]);
+            
+             }
+         }
+    
+     natcasesort($themes);
+    
+     return $themes;
+
+}
  
 public function getInstalledPackages($type = 'modules'){
  

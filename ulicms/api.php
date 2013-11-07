@@ -138,27 +138,8 @@ function getThemeList(){
      }
 
 function getThemesList(){
-     $themes = Array();
-     if(is_admin_dir())
-         $templateDir = "../templates/";
-     else
-         $templateDir = "templates/";
-    
-     $folders = scanDir($templateDir);
-     natcasesort($folders);
-     for($i = 0; $i < count($folders); $i++){
-         $f = $templateDir . ($folders[$i]) . "/";
-         if(is_dir($f)){
-             if(is_file($f . "oben.php") and is_file($f . "unten.php")
-                     and is_file($f . "style.css"))
-                 array_push($themes, $folders[$i]);
-            
-             }
-         }
-    
-     natcasesort($themes);
-    
-     return $themes;
+        $pkg = new packageManager();
+        return $pkg->getInstalledPackages('themes');
      }
 
  // Make title url safe
