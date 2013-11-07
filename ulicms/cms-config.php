@@ -1,5 +1,5 @@
 <?php 
-class config{
+class config extends baseConfig{
 
 var $db_server="localhost";
 var $db_user="root";

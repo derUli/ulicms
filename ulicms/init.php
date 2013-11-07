@@ -7,6 +7,11 @@
 if ( ini_get('register_globals') === '1' ) {
   die('SECURITY WARNING: "Register Globals" feature is enabled! UliCMS refuses to run with enabled "Register Globals"!');
 }
+
+define("DIRECTORY_SEPERATOR", "/");
+
+include_once dirname(__file__). DIRECTORY_SEPERATOR ."classes" . DIRECTORY_SEPERATOR .
+"base_config.php";
  
 function exception_handler($exception) {
   echo $exception->getMessage(), "\n";
