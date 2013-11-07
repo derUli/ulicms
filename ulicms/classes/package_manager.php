@@ -1,11 +1,20 @@
 <?php
 class packageManager{
      private $package_source;
-     function __construct(){
-         $this -> package_source = getconfig("pkg_src");
+    public function __construct(){
+         $cfg = new config();
+         $this -> package_source = $cfg->getVar("pkg_src");
+         $this -> package_source = $this->replacePlaceHolders($this -> package_source );
          }
     
-    
+    private function replacePlaceHolders($url){
+       $cfg = new config();
+       $version = new ulicms_version();
+       $internalVersion = $version->getInternalVersion();
+       $internalVersion = implode(".", $internalVersion);
+       $url = str_replace("{version}", $internalVersion, $url);
+        return $url;
+    }
     
     public function getInstalledModules(){
          $module_folder = ULICMS_ROOT . DIRECTORY_SEPERATOR . "modules" . DIRECTORY_SEPERATOR;

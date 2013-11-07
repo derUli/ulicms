@@ -51,6 +51,8 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEP
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "helper" . DIRECTORY_SEPERATOR . "string_helper.php";
 
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "version.php";
+
 
 function exception_handler($exception){
  echo $exception -> getMessage(), "\n";
@@ -231,7 +233,6 @@ add_hook("before_init");
 add_hook("init");
 add_hook("after_init");
 
-include_once dirname(__file__) . DIRECTORY_SEPERATOR . "version.php";
 
 $version = new ulicms_version();
 
