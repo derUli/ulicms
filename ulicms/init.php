@@ -3,15 +3,29 @@
  * Diese Datei initalisiert das System
  */
  
+ // root directory of UliCMS 
+define("ULICMS_ROOT", dirname(__file__));
+
+ 
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if ( ini_get('register_globals') === '1' ) {
   die('SECURITY WARNING: "Register Globals" feature is enabled! UliCMS refuses to run with enabled "Register Globals"!');
 }
 
-define("DIRECTORY_SEPERATOR", "/");
+
+$os = PHP_OS;
+switch($os)
+{
+    case "Linux": define("DIRECTORY_SEPERATOR", "/"); break;
+    case "Windows": define("DIRECTORY_SEPERATOR", "\\"); break;
+    default: define("DIRECTORY_SEPERATOR", "/"); break;
+}
 
 include_once dirname(__file__). DIRECTORY_SEPERATOR ."classes" . DIRECTORY_SEPERATOR .
 "base_config.php";
+
+include_once dirname(__file__). DIRECTORY_SEPERATOR ."classes" . DIRECTORY_SEPERATOR .
+"package_manager.php";
  
 function exception_handler($exception) {
   echo $exception->getMessage(), "\n";

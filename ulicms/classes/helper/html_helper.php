@@ -2,7 +2,7 @@
 class html_helper{
 
 
- public function htmlRemoveTagByName($html, $tag){
+ public static function htmlRemoveTagByName($html, $tag){
     
      $doc = new DOMDocument();
      // load the HTML string we want to strip

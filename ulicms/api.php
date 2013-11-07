@@ -266,15 +266,10 @@ function buildSEOUrl($page = false){
 
 function getModulePath($module){
      // Frontend Directory
-    if(is_file("cms-config.php")){
-         $module_folder = "modules/";
-         }
-     // Backend Directory
-    else{
-         $module_folder = "../modules/";
-         }
+     $module_folder = ULICMS_ROOT.DIRECTORY_SEPERATOR."modules".DIRECTORY_SEPERATOR;
+
      $available_modules = Array();
-     return $module_folder . $module . "/";
+     return $module_folder . $module . DIRECTORY_SEPERATOR;
      }
 
 function getModuleAdminFilePath($module){
@@ -356,35 +351,9 @@ function isModuleInstalled($name){
 }
 
 function getAllModules(){
-     // Frontend Directory
-    if(is_file("cms-config.php")){
-         $module_folder = "modules/";
-         }
-     // Backend Directory
-    else{
-         $module_folder = "../modules/";
-         }
-    
-    
-     $available_modules = Array();
-     $directory_content = scandir($module_folder);
-    
-     natcasesort($directory_content);
-     for($i = 0;$i < count($directory_content);$i++){
-         $module_init_file = $module_folder . $directory_content[$i] . "/" .
-         $directory_content[$i] . "_main.php";
-        
-        
-         if($directory_content[$i] != ".." and $directory_content[$i] != "."){
-             if(is_file($module_init_file)){
-                 array_push($available_modules, $directory_content[$i]);
-                 }
-             }
-         }
-     natcasesort($available_modules);
-     return $available_modules;
-    
-     }
+    $pkg = new packageManager();
+    return $pkg->getInstalledPackages('modules');
+ }
 
 
 // replace Shortcodes with modules
