@@ -23,3 +23,6 @@
 	var $db_type="mysql";
 [*] Neue API-Funktionen hinzugefügt:
     isModuleInstalled, clearCache, getOnlineUsers und weitere
+    
+[*] Diverse Funktionalitäten in Helper-Klassen ausgelagert, 
+    Aus Kompatiblitätsgründen bleiben die Prozeduralen API-Funktionen erhalten.
