@@ -236,7 +236,9 @@ input, textarea, select{
     color:black;
 }
 
-
+select option{
+color:black;
+}
 
 input:hover, textarea:hover, select:hover{
 outline:none;

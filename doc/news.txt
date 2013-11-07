@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2014R9 =====
+﻿===== Neues in UliCMS 2014R9 =====
 
 [*] Neu: Alle Einträge aus Menü X nach Menü Y verschieben
 [*] Enhancement: Konstante ULICMS_ROOT hinzugefügt
