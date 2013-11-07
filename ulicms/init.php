@@ -131,28 +131,12 @@ if($cache_period === false){
      define("CACHE_PERIOD", $cache_period);
      }
 
-// Proxy für file_get_contents
-// Für den Fall, dass der Server sich hinter einem Proxy befindet
-// z.B. in größeren Unternehmen
-$proxy = getconfig("proxy");
-if($proxy and function_exists("stream_context_set_default")){
-     $context_array = array('http' => array('proxy' => $proxy,
-             'request_fulluri' => true));
-     stream_context_set_default($context_array);
-     }
-
-
-
-
-
-
 // check four allowed_html config var
 // if not exists create with default value
 if(!getconfig("allowed_html")){
      setconfig("allowed_html",
          "<i><u><b><strong><em><ul><li><ol><a><span>");
      }
-
 
 // Falls nicht gesetzt, robots auf Standardwert setzen
 if(!getconfig("robots")){
@@ -180,11 +164,7 @@ if(!getconfig("session_timeout")){
      setconfig("session_timeout", 60);
      }
 
-
-
-
 $session_timeout = 60 * getconfig("session_timeout");
-
 
 // Session abgelaufen
 if(isset($_SESSION["session_begin"])){
@@ -200,7 +180,6 @@ if(isset($_SESSION["session_begin"])){
          }
      }
 
-
 $enforce_https = getconfig("enforce_https");
 
 if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
@@ -214,7 +193,7 @@ add_hook("before_init");
 add_hook("init");
 add_hook("after_init");
 
-include_once "version.php";
+include_once dirname(__file__).DIRECTORY_SEPERATOR."version.php";
 
 $version = new ulicms_version();
 
