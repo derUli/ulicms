@@ -1,6 +1,7 @@
 <?php
+class antispamHelper{
 // checking if this Country is blocked by spamfilter
-function isCountryBlocked(){
+public static function isCountryBlocked(){
     
      $country_blacklist = getconfig("country_blacklist");
      $country_whitelist = getconfig("country_whitelist");
@@ -45,7 +46,7 @@ function isCountryBlocked(){
     
      }
      
-function trackbackSpamCheck($url) 
+public static function trackbackSpamCheck($url) 
 { 
     // trackback prinzipiell als spam definieren 
     $spam=TRUE; 
@@ -134,3 +135,5 @@ function trackbackSpamCheck($url)
     return $spam; 
 }      
      
+
+}

@@ -38,6 +38,9 @@ include_once dirname(__file__). DIRECTORY_SEPERATOR ."classes" . DIRECTORY_SEPER
 
 include_once dirname(__file__). DIRECTORY_SEPERATOR ."classes" . DIRECTORY_SEPERATOR .
 "helper".DIRECTORY_SEPERATOR."number_format_helper.php";
+
+include_once dirname(__file__). DIRECTORY_SEPERATOR ."classes" . DIRECTORY_SEPERATOR .
+"helper".DIRECTORY_SEPERATOR."antispam_helper.php";
  
 function exception_handler($exception) {
   echo $exception->getMessage(), "\n";
