@@ -151,54 +151,54 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
                  echo '<tr>';
                  echo "<td style=\"width:40px;\">--&gt;</td>";
                  echo "<td>" . $row -> systemname . "</td>";
-                 echo "<td>".$row->menu."</td>";
+                 echo "<td>" . $row -> menu . "</td>";
                 
                  echo "<td>" . $row -> position . "</td>";
                  echo "<td>" . getPageSystemnameByID($row -> parent) . "</td>";
                 
                  if($row -> active){
-                 echo "<td>Ja</td>";
-                 }
-            else{
-                 echo "<td>Nein</td>";
-                 }
-            
-            
-            
-             echo "<td><a href=\"../" . $row -> systemname . ".html\" target=\"_blank\"><img src=\"gfx/preview.gif\">Anzeigen</a></td>";
-             echo "<td>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
-             if($_SESSION["group"] >= 40){
+                     echo "<td>Ja</td>";
+                     }
+                else{
+                     echo "<td>Nein</td>";
+                     }
                 
-                 if($_SESSION["filter_status"] == "trash"){
-                     echo "<td>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img src="gfx/undelete.png"> Wiederherstellen</a></td>';
-                     }
-                else
-                    {
-                     echo "<td>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif">  Löschen</a></td>';
+                
+                
+                 echo "<td><a href=\"../" . $row -> systemname . ".html\" target=\"_blank\"><img src=\"gfx/preview.gif\">Anzeigen</a></td>";
+                 echo "<td>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
+                 if($_SESSION["group"] >= 40){
                     
-                    
+                     if($_SESSION["filter_status"] == "trash"){
+                         echo "<td>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img src="gfx/undelete.png"> Wiederherstellen</a></td>';
+                         }
+                    else
+                        {
+                         echo "<td>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif">  Löschen</a></td>';
+                        
+                        
+                         }
+                     }else{
+                     echo "<td><img src=\"gfx/delete.gif\"> Löschen</td>";
                      }
-                 }else{
-                 echo "<td><img src=\"gfx/delete.gif\"> Löschen</td>";
+                 echo '</tr>';
+                
                  }
-             echo '</tr>';
-            
+             ?>
+<?php
              }
          ?>
-<?php
-         }
-     ?>
 </table>
 
 
 <br/>
 
 <?php
-     }else{
-     noperms();
-     }
-
-?>
+         }else{
+         noperms();
+         }
+    
+    ?>
 
 <?php }
 ?>

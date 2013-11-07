@@ -27,7 +27,7 @@
 
 <?php
 if(getconfig("visitors_can_register") === "on" or getconfig("visitors_can_register") === "1"){
-
+    
      ?><a href="?register=register&<?php
      if(!empty($_REQUEST["go"])){
          echo "go=" . real_htmlspecialchars($_REQUEST["go"]);

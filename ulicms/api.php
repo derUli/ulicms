@@ -2,13 +2,13 @@
 
 
 function getOnlineUsers(){
-   $users_online = db_query("SELECT * FROM " . tbname("admins") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
-   $users = array();
-   while($row = db_fetch_object($users_online)){
-      array_push($users, $row -> username);
-   }
-   return $users;
-}
+     $users_online = db_query("SELECT * FROM " . tbname("admins") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
+     $users = array();
+     while($row = db_fetch_object($users_online)){
+         array_push($users, $row -> username);
+         }
+     return $users;
+    }
 
 // get a config variable
 function getconfig($key){
@@ -26,51 +26,50 @@ function getconfig($key){
      }
 
 if(!function_exists("get_host")){
-function get_host() {
-    if ($host = $_SERVER['HTTP_X_FORWARDED_HOST'])
-    {
-        $elements = explode(',', $host);
-
-        $host = trim(end($elements));
-    }
-    else
-    {
-        if (!$host = $_SERVER['HTTP_HOST'])
+    function get_host(){
+         if ($host = $_SERVER['HTTP_X_FORWARDED_HOST'])
         {
-            if (!$host = $_SERVER['SERVER_NAME'])
+             $elements = explode(',', $host);
+            
+             $host = trim(end($elements));
+             }
+        else
             {
-                $host = !empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : '';
-            }
+             if (!$host = $_SERVER['HTTP_HOST'])
+            {
+                 if (!$host = $_SERVER['SERVER_NAME'])
+                {
+                     $host = !empty($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : '';
+                     }
+                 }
+             }
+        
+         // Remove port number from host
+        $host = preg_replace('/:\d+$/', '', $host);
+        
+         return trim($host);
         }
+    
     }
-
-    // Remove port number from host
-    $host = preg_replace('/:\d+$/', '', $host);
-
-    return trim($host);
-}
-
-}
 
  function clearCache(){
      add_hook("before_clear_cache");
      $cache_type = getconfig("cache_type");
      // Es gibt zwei verschiedene Cache Modi
-     // Cache_Lite und File
-     
-     // Cache_Lite leeren
-     if($cache_type === "cache_lite" and class_exists("Cache_Lite")){
-        $Cache_Lite = new Cache_Lite($options);
-        $Cache_Lite->clean();
-     } else {
-        // File leeren
+    // Cache_Lite und File
+    // Cache_Lite leeren
+    if($cache_type === "cache_lite" and class_exists("Cache_Lite")){
+         $Cache_Lite = new Cache_Lite($options);
+         $Cache_Lite -> clean();
+         }else{
+         // File leeren
         if(is_admin_dir())
-           SureRemoveDir("../content/cache", false);
-        else
-           SureRemoveDir("content/cache", false);
-     }
+             SureRemoveDir("../content/cache", false);
+         else
+             SureRemoveDir("content/cache", false);
+         }
      add_hook("after_clear_cache");
-  }
+     }
 
 // sind wir gerade im Adminordner?
 function is_admin_dir(){
@@ -138,8 +137,8 @@ function getThemeList(){
      }
 
 function getThemesList(){
-        $pkg = new packageManager();
-        return $pkg->getInstalledPackages('themes');
+     $pkg = new packageManager();
+     return $pkg -> getInstalledPackages('themes');
      }
 
  // Make title url safe
@@ -247,8 +246,8 @@ function buildSEOUrl($page = false){
 
 function getModulePath($module){
      // Frontend Directory
-     $module_folder = ULICMS_ROOT.DIRECTORY_SEPERATOR."modules".DIRECTORY_SEPERATOR;
-
+    $module_folder = ULICMS_ROOT . DIRECTORY_SEPERATOR . "modules" . DIRECTORY_SEPERATOR;
+    
      $available_modules = Array();
      return $module_folder . $module . DIRECTORY_SEPERATOR;
      }
@@ -328,13 +327,13 @@ function convertLineEndingsToLF($s){
 
 
 function isModuleInstalled($name){
-  return in_array($name, getAllModules());
-}
+     return in_array($name, getAllModules());
+    }
 
 function getAllModules(){
-    $pkg = new packageManager();
-    return $pkg->getInstalledPackages('modules');
- }
+     $pkg = new packageManager();
+     return $pkg -> getInstalledPackages('modules');
+     }
 
 
 // replace Shortcodes with modules
@@ -505,17 +504,17 @@ function is__writable($path)
 // Zusätzliche Navigationsmenüs können definiert werden,
 // durch setzen von additional_menus
 function getAllMenus(){
-   $menus = Array("left", "top", "right", "bottom", "none");
-   $additional_menus = getconfig("additional_menus");
-   
-   if($additional_menus){
-     $additional_menus = explode(";", $additional_menus );
-     foreach($additional_menus as $m){
-       array_push($menus, $m);
-     }
-   }
-   return $menus;
-}
+     $menus = Array("left", "top", "right", "bottom", "none");
+     $additional_menus = getconfig("additional_menus");
+    
+     if($additional_menus){
+         $additional_menus = explode(";", $additional_menus);
+         foreach($additional_menus as $m){
+             array_push($menus, $m);
+             }
+         }
+     return $menus;
+    }
 
 // Check if site contains a module
 function containsModule($page, $module = false){

@@ -57,12 +57,13 @@ if(!is_admin()){
 <br/>
 <input type="submit" value="Einstellungen speichern"/>
 
-<?php 
-if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-?>
+<?php
+    if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+        ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
-<?php }?>
+<?php }
+    ?>
 </form>
 
 <script type="text/javascript">

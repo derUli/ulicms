@@ -4,8 +4,8 @@
 add_hook("query");
 
 if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
-setconfig("registered_user_default_level", intval($_POST["registered_user_default_level"]));
-     
+    setconfig("registered_user_default_level", intval($_POST["registered_user_default_level"]));
+    
      setconfig("homepage_title", db_escape($_POST["homepage_title"]));
      setconfig("homepage_owner", db_escape($_POST["homepage_owner"]));
      setconfig("motto", db_escape($_POST["homepage_motto"]));
@@ -482,7 +482,7 @@ if($_POST["add_admin"] == "add_admin" && $_SESSION["group"] >= 50){
      $firstname = db_escape($_POST["admin_firstname"]);
      $group = getconfig("registered_user_default_level");
      if($group === false)
-        $group = 10;
+         $group = 10;
      $email = db_escape($_POST["admin_email"]);
      $password = db_escape($_POST["admin_password"]);
      db_query("INSERT INTO " . tbname("admins") . " 

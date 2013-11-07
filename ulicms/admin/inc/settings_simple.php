@@ -105,17 +105,17 @@
 <td>
 <select name="registered_user_default_level" size=1 style="width:100%;">
 <option value="50" <?php if($settings["registered_user_default_level"] == 50) echo "selected";
-                 ?>>Admin</option>
+             ?>>Admin</option>
 <option value="40" <?php if($settings["registered_user_default_level"] == 40) echo "selected";
-                 ?>>Redakteur</option>
+             ?>>Redakteur</option>
 <option value="30" <?php if($settings["registered_user_default_level"] == 30) echo "selected";
-                 ?>>Autor</option>
+             ?>>Autor</option>
 <option value="20" <?php if($settings["registered_user_default_level"] == 20) echo "selected";
-                 ?>>Mitarbeiter</option>
+             ?>>Mitarbeiter</option>
 <option value="10" <?php if($settings["registered_user_default_level"] == 10 or $settings["registered_user_default_level"] === false) echo "selected";
-                 ?>>Gast</option>
+             ?>>Gast</option>
 <option value="0" <?php if($settings["registered_user_default_level"] == 0) echo "selected";
-                 ?>>Gesperrter Nutzer</option>
+             ?>>Gesperrter Nutzer</option>
 </select>
 
 </td>
@@ -242,12 +242,13 @@ Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</s
 </table>
 <input type="hidden" name="save_settings" value="save_settings">
 
-<?php 
-if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-?>
+<?php
+            if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+                ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
-<?php }?>
+<?php }
+            ?>
 </form>
 <script type="text/javascript">
 $("#settings_simple").ajaxForm({beforeSubmit: function(e){

@@ -42,21 +42,23 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <h3>So müssen die Berechtigungen gesetzt sein</h3>
 <p><img src="media/chmod_02.png" alt="FTP Rechtevergabe" title="FTP Rechtevergabe" border=1/></p>
 <br/>
-<?php 
-if (!function_exists('gd_info')) {
-?>
+<?php
+    if (!function_exists('gd_info')){
+        ?>
 <hr/>
 <p style="color:red;"><strong>php5-gd</strong> ist nicht installiert.<br/>Ohne <strong>php5-gd</strong> lässt sich UliCMS zwar installieren,<br/>jedoch wird der Dateimanager und die Verarbeitung von Grafikdateien nicht funktionieren.</p>
 <hr/>
-<?php } ?>
+<?php }
+    ?>
 
 
-<?php 
-if (!function_exists('mysqli_connect')) {
-?>
+<?php
+    if (!function_exists('mysqli_connect')){
+        ?>
 <p style="color:red;"><strong>php5-mysql</strong> ist nicht installiert.<br/>Ohne <strong>php5-mysql</strong> lässt sich UliCMS nicht installieren,<br/>da dieses PHP-Modul für die Kommunikation mit<br/>dem Datenbankserver benötigt wird.</p>
 
-<?php } else {?>
+<?php }else{
+        ?>
 
 <form action="index.php" method="post">
 <input type="hidden" name="step" value="1">
@@ -64,7 +66,8 @@ if (!function_exists('mysqli_connect')) {
 </form>
 <br/>
 
-<?php }?>
+<?php }
+    ?>
 <?php
      }else{
      ?>
@@ -280,7 +283,7 @@ if (!function_exists('mysqli_connect')) {
          $homepage_title = mysqli_real_escape_string($connection, $_POST["homepage_title"]);
          $motto = mysqli_real_escape_string($connection, $_POST["motto"]);
         
-$badwords = "viagra
+        $badwords = "viagra
 vicodin
 cialis
 xanax

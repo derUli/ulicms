@@ -24,12 +24,13 @@
 <p><strong>Erlaubte HTML-Tags:</strong><br/>
 <?php echo htmlspecialchars(
         getconfig("allowed_html"))?></p>
-<?php 
-if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-?>
+<?php
+    if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+        ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
-<?php }?>
+<?php }
+    ?>
 </form>
 </div>
 <script type="text/javascript">

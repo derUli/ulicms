@@ -201,12 +201,13 @@ width:200px;
 <input type="submit" name="submit" value="Einstellungen speichern"/>
 </p>
 
-<?php 
-if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-?>
+<?php
+    if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+        ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
-<?php }?>
+<?php }
+    ?>
 </form>
 <script type="text/javascript">
 $("#designForm").ajaxForm({beforeSubmit: function(e){

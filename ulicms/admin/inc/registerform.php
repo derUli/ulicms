@@ -19,12 +19,12 @@ if(isset($_POST["register_user"])){
     else{
          $registered_user_default_level = getconfig("registered_user_default_level");
          if($registered_user_default_level === false){
-            $registered_user_default_level = 10;
-         }
+             $registered_user_default_level = 10;
+             }
          adduser($_POST["admin_username"],
              $_POST["admin_lastname"],
              $_POST["admin_firstname"],
-             $_POST["admin_email"], $_POST["admin_password"], 
+             $_POST["admin_email"], $_POST["admin_password"],
              $registered_user_default_level);
          echo "<p style='color:green;'>Registrierung erfolgreich!</p>";
          if(!empty($_REQUEST["go"])){
@@ -69,12 +69,13 @@ if(isset($_POST["register_user"])){
 ?>
 <br/>
 
-<?php 
+<?php
 if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-?>
+    ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
-<?php }?>
+<?php }
+?>
 <input type="submit" value="Registrieren">
 </form>
 
