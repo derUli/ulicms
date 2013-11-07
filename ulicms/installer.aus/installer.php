@@ -381,7 +381,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
         @chmod("../templates/maintenance.php", 0777);
         
          $config_string = '<?php 
-class config{
+class config extends baseConfig{
 
 var $db_server="' . $_SESSION["mysql"]["server"] . '";
 var $db_user="' . $_SESSION["mysql"]["loginname"] . '";
