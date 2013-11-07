@@ -23,19 +23,16 @@ function exception_handler($exception) {
 set_exception_handler('exception_handler');
 
 // Workaround für Magic Quotes und Register Globals
-include "lib/workaround.php";
+include_once dirname(__file__). DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."workaround.php";
 
 // if config exists require_config else redirect to installer
-if(file_exists("cms-config.php")){
-     require_once "cms-config.php";
+
+$path_to_config = dirname(__file__). DIRECTORY_SEPERATOR. "cms-config.php";
+
+if(file_exists($path_to_config)){
+     require_once $path_to_config;
      }
-else if(file_exists("../cms-config.php")){
-     require_once "../cms-config.php";
-     }
-else if(file_exists("backend.php") and is_dir("../installer")){
-     header("Location: ../installer/");
-     exit();
-     }
+
 else if(is_dir("installer")){
      header("Location: installer/");
      exit();
