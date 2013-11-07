@@ -51,8 +51,8 @@ if(defined("ULICMS_DEBUG")){
    error_reporting(0);
 }
 	 
-include_once "lib/db_functions.php";
-require_once "api.php";
+include_once dirname(__file__). DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."db_functions.php";
+require_once dirname(__file__). DIRECTORY_SEPERATOR."api.php";
 
 // define Constants
 define('CR', "\r"); // carriage return; Mac
