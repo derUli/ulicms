@@ -31,6 +31,9 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEP
 "package_manager.php";
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
+"acl.php";
+
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "logger.php";
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .

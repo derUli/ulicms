@@ -213,9 +213,19 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `avatar_file` varchar(40) NOT NULL,
   `about_me` text NOT NULL,
   `last_action` bigint(20) NOT NULL,
+  `group_id` int(11) NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysqli_error($connection));;
-        
+
+$create_table_groups_sql = "CREATE TABLE IF NOT EXISTS `".$prefix."groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `permissions` mediumtext NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
+
+mysqli_query($create_table_groups_sql)or die(mysqli_error());
         
          $vorname = mysqli_real_escape_string($connection, $_POST["firstname"]);
          $nachname = mysqli_real_escape_string($connection, $_POST["lastname"]);
