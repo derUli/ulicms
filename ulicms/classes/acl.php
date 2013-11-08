@@ -60,7 +60,25 @@ public function createGroup($name, $permissions = null){
    // Gebe die letzte Insert-ID zurück, damit man gleich mit der erzeugten Gruppe arbeiten kann.
    return db_last_insert_id();
    
+   
 }
+
+public function updateGroup($id, $name, $permissions = null){
+   if(is_null($permissions))
+      $permission_data = $this->getDefaultACL();
+   else
+      $permissionData = json_encode($permissions);
+   
+   $sql = "UPDATE `".tbname("groups")."` SET name='".db_escape($name)."', permissions='".db_escape($permissions)."' WHERE id=".$id;
+   
+   // Führe Query aus
+   db_query($sql);
+   
+   // Gebe die letzte Insert-ID zurück, damit man gleich mit der erzeugten Gruppe arbeiten kann.
+   return $id;
+   
+}
+
 
 public function getPermissionQueryResult($id = null){
    if($id)
