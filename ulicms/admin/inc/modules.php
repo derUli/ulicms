@@ -1,5 +1,9 @@
 <?php
 $acl = new ACL();
+if(!$acl->hasPermission("list_packages")){
+  noperms();
+} else {
+
 if($acl->hasPermission("remove_packages")){
     
      // Modul deinstallieren
@@ -113,5 +117,8 @@ if(count($themes) > 0){
          }
      echo "</ol>";
     
+     }
+     
+     
      }
 ?>
