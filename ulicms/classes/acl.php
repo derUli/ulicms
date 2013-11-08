@@ -52,7 +52,7 @@ public function createGroup($name, $permissions = null){
       $permissionData = json_encode($permissions);
    
    $sql = "INSERT INTO `".tbname("groups")."` (`name`, `permissions`) ".
-   "VALUES('".db_escape($name)."','".db_escape($permissions)."')";
+   "VALUES('".db_escape($name)."','".db_escape($permissionData)."')";
    
    // Führe Query aus
    db_query($sql);

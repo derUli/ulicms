@@ -9,7 +9,7 @@ div#pkglist{
 display:none;
 }
 
-table th td{
+table tr th{
 font-weight:bold;
 }
 
