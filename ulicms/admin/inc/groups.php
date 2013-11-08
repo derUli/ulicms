@@ -15,8 +15,11 @@ if(isset($_POST["add_group"])){
    $acl = new ACL();
    $all_permissions = $acl->getDefaultACL(false, true);
    
-   foreach($_POST["user_permissons"] as $permission_name){
-      $all_permissions[$permission_name] = true;
+   if(count($_POST["user_permissons"]) > 0){
+      foreach($_POST["user_permissons"] as $permission_name){
+        $all_permissions[$permission_name] = true;
+   }
+   
    }
    
    $name = trim($_POST["name"]);
@@ -37,9 +40,12 @@ $removed = true;
    $all_permissions = $acl->getDefaultACL(false, true);
    $id = $_POST["id"];
    
-   foreach($_POST["user_permissons"] as $permission_name){
-      $all_permissions[$permission_name] = true;
+   if(count($_POST["user_permissons"]) > 0){
+      foreach($_POST["user_permissons"] as $permission_name){
+         $all_permissions[$permission_name] = true;
    } 
+   
+   }
    
    $name = trim($_POST["name"]);
    $all_permissions = json_encode($all_permissions);
