@@ -45,6 +45,23 @@ public function hasPermission($name){
    return $permissionData[$name];
 }
 
+public function createGroup($name, $permissions = null){
+   if(is_null($permissions))
+      $permission_data = $this->getDefaultACLAsJSON();
+   else
+      $permissionData = json_encode($permissions);
+   
+   $sql = "INSERT INTO `".tbname("groups")."` (`name`, `permissions`) ".
+   "VALUES('".db_escape($name)."','".db_escape($permissions)."')";
+   
+   // Führe Query aus
+   db_query($sql);
+   
+   // Gebe die letzte Insert-ID zurück, damit man gleich mit der erzeugten Gruppe arbeiten kann.
+   return db_last_insert_id();
+   
+}
+
 public function getPermissionQueryResult($id = null){
    if($id)
       $group_id = $id;
@@ -57,7 +74,7 @@ public function getPermissionQueryResult($id = null){
    $sqlString = "SELECT * FROM `".tbname("groups")."` WHERE id=".$group_id;
    $query = db_query($sqlString);
    
-    if(mysql_num_rows($query) == 0)
+    if(db_num_rows($query) == 0)
       return null;
       
       
@@ -84,6 +101,7 @@ public function getDefaultACLAsJSON($admin = false){
    
    // Benutzer
    $acl_data["user"] = null;
+   $acl_data["groups"] = null;
    
    // Templates
    $acl_data["templates"] = null;
