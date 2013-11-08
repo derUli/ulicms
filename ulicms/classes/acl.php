@@ -83,6 +83,16 @@ public function getPermissionQueryResult($id = null){
    return $result;
 }
 
+public function getAllGroups($order = 'id DESC'){
+   $sql = "SELECT * FROM `".tbname("groups")."` ORDER by ".$order;
+   $query = db_query($sql);
+   $list = array();
+      while($assoc = mysql_fetch_assoc($query)){
+      $list[$assoc["id"]] = $assoc["name"];
+   }
+   return $list;
+}
+
 public function getDefaultACLAsJSON($admin = false){
    $acl_data = Array();
     

@@ -9,6 +9,10 @@ div#pkglist{
 display:none;
 }
 
+table th td{
+font-weight:bold;
+}
+
 div.label{
 float:left;
 font-weight:bold;
