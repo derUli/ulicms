@@ -1,5 +1,6 @@
-<?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 40){
+<?php 
+$acl = new ACL();
+if($acl->hasPermission("motd")){
          ?>
 <div align="center">
 <h2>Message Of The Day</h2>
@@ -9,12 +10,12 @@
              $motd = strip_tags($_POST["motd"], getconfig("allowed_html"));
              $motd = db_escape($motd);
              setconfig("motd", $motd);
-             }
+             
         
-         ?>
+?>
 <p>Die Message Of the Day wurde geändert.</p>
-<?php }
-     ?>
+<?php } ?>
+
 <form id="motd_form" action="index.php?action=motd" method="post">
 <textarea name="motd" cols=60 rows=15><?php echo htmlspecialchars(getconfig("motd"));
      ?></textarea>

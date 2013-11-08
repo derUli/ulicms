@@ -135,28 +135,51 @@ if(defined("_SECURITY")){
      
       </li>
          <?php }?>
-  <?php if(file_exists("../update.php")){
+  <?php if(file_exists(ULICMS_ROOT.DIRECTORY_SEPERATOR."update.php") and ($acl->hasPermission("update_system") or is_admin())){
          ?>
          
         
   <li><a href="?action=system_update">Update</a></li>
   <?php }
      ?>
+    <?php if($acl->hasPermission("settings_simple") or $acl->hasPermission("design") or $acl->hasPermission("spam_filter") or $acl->hasPermission("cache") or $acl->hasPermission("motd") or $acl->hasPermission("pkg_settings") or $acl->hasPermission("logo") or $acl->hasPermission("languages") or $acl->hasPermission("other")){?>
    <li><a href="?action=settings_categories">Einstellungen</a>
-    <ul><li><a href="?action=settings_simple">Grundeinstellungen</a></li>
+   
+    <ul>
+     <?php if($acl->hasPermission("settings_simple")){?>
+    <li><a href="?action=settings_simple">Grundeinstellungen</a></li>
+    <?php } ?>
+     <?php if($acl->hasPermission("design")){?>
     <li><a href="?action=design">Design</a></li>
+     <?php } ?>
+     <?php if($acl->hasPermission("spam_filter")){?>
     <li><a href="?action=spam_filter">Spamfilter</a></li>
+     <?php } ?>
+     <?php if($acl->hasPermission("cache")){?>
     <li><a href="?action=cache">Cache</a>
      <ul>
      <li><a id="clear_cache" href="?action=cache&clear_cache=yes">Cache leeren</a></li>
      </ul>    
-    </li>
+    </li>  <?php } ?>
+     <?php if($acl->hasPermission("motd")){?>
     <li><a href="?action=motd">MOTD</a></li>
+    <?php }?>
+     <?php if($acl->hasPermission("pkg_settings")){?>
     <li><a href="?action=pkg_settings">Paketquelle</a></li>
+    <?php }?>
+     <?php if($acl->hasPermission("logo")){?>
     <li><a href="?action=logo_upload">Logo</a></li>
+    <?php }?>
+     <?php if($acl->hasPermission("languages")){?>
     <li><a href="?action=languages">Sprachen</a></li>
+    <?php } ?>
+    
+     <?php if($acl->hasPermission("other")){?>
     <li><a href="?action=other_settings">Sonstiges</a></li>
+    <?php } ?>
     </ul>
+    <?php } ?>
+    <?php if($acl->hasPermission("info")){ ?>
     <li><a href="?action=info">Info</a>
     <ul> 
      <li><a href="http://www.ulicms.de/" target="_blank">UliCMS Portal</a></li>
@@ -166,6 +189,7 @@ if(defined("_SECURITY")){
     </ul>
     <?php add_hook("admin_menu_item");
      ?>
+     <?php }?>
     <li><a href="?action=destroy">Logout</a></li>
 </ul>
 <script type="text/javascript">

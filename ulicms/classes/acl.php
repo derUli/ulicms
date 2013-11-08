@@ -170,6 +170,8 @@ public function getDefaultACLAsJSON($admin = false, $plain = false){
    $acl_data["other"] = null;
    $acl_data["expert_settings"] = null;
    
+   $acl_data["info"] = null;
+   
    // Hook für das Erstellen eigener ACL Objekte
    // Temporäres globales Array zum hinzufügen eigener Objekte
    global $acl_array;

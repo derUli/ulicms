@@ -1,6 +1,6 @@
 <h1>Spamfilter</h1>
 
-<?php if($_SESSION["group"] >= 40){
+<?php if($acl->hasPermission("spam_filter")){
      ?>
 <form id="spamfilter_settings" name="?action=spam_filter" method="post">
 <input type="checkbox" name="spamfilter_enabled"<?php if(getconfig("spamfilter_enabled") == "yes"){

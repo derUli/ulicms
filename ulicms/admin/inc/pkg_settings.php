@@ -1,6 +1,7 @@
 <?php
-if(!is_admin()){
-     echo "<p class='ulicms_error'>Zugriff verweigert</p>";
+$acl = new ACL();
+if(!$acl->hasPermission("pkg_settings")){
+    noperms();
      }else{
     
      // Wenn Formular abgesendet wurde, Wert Speichern

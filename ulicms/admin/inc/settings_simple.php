@@ -1,5 +1,6 @@
 <?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 50){
+$acl = new ACL();
+     if($acl->hasPermission("settings_simple")){
         
          $query = db_query("SELECT * FROM " . tbname("settings") . " ORDER BY name", $connection);
          $settings = Array();
