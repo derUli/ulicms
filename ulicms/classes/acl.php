@@ -47,7 +47,7 @@ public function hasPermission($name){
 
 public function createGroup($name, $permissions = null){
    if(is_null($permissions))
-      $permission_data = $this->getDefaultACLAsJSON();
+      $permission_data = $this->getDefaultACL();
    else
       $permissionData = json_encode($permissions);
    
@@ -87,13 +87,14 @@ public function getAllGroups($order = 'id DESC'){
    $sql = "SELECT * FROM `".tbname("groups")."` ORDER by ".$order;
    $query = db_query($sql);
    $list = array();
-      while($assoc = mysql_fetch_assoc($query)){
+      while($assoc = db_fetch_assoc($query)){
       $list[$assoc["id"]] = $assoc["name"];
    }
    return $list;
 }
 
-public function getDefaultACLAsJSON($admin = false){
+
+public function getDefaultACLAsJSON($admin = false, $plain = false){
    $acl_data = Array();
     
     
@@ -153,8 +154,15 @@ public function getDefaultACLAsJSON($admin = false){
       foreach ($acl_data as $key => $value){
           $acl_data[$key] = $default_value;
       }
+    if($plain)
+       return $acl_data;
    $json = json_encode($acl_data);
    return $json;
+}
+
+
+public function getDefaultACL($admin = false, $plain = false){
+   return $this->getDefaultACLAsJSON($admin, $plain);
 }
 
 }
