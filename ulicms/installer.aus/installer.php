@@ -2,6 +2,7 @@
 session_start();
 setcookie(session_name(), session_id());
 header("Content-Type: text/html; charset=UTF-8");
+error_reporting (E_ALL ^ E_NOTICE);
 ?>
 <!DOCTYPE html>
 <head>
@@ -215,7 +216,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `last_action` bigint(20) NOT NULL,
   `group_id` int(11) NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysqli_error($connection));;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysqli_error($connection));
 
 $create_table_groups_sql = "CREATE TABLE IF NOT EXISTS `".$prefix."groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -225,7 +226,7 @@ $create_table_groups_sql = "CREATE TABLE IF NOT EXISTS `".$prefix."groups` (
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
 
-mysqli_query($create_table_groups_sql)or die(mysqli_error());
+mysqli_query($connection, $create_table_groups_sql)or die(mysqli_error($connection));
         
          $vorname = mysqli_real_escape_string($connection, $_POST["firstname"]);
          $nachname = mysqli_real_escape_string($connection, $_POST["lastname"]);

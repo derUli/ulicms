@@ -171,7 +171,7 @@ public function getDefaultACLAsJSON($admin = false, $plain = false){
    
    // Hook für das Erstellen eigener ACL Objekte
    // Temporäres globales Array zum hinzufügen eigener Objekte
-   global $tmp_acl;
+   global $acl_array;
    $acl_array = $acl_data;
    add_hook("custom_acl");
    $acl_data = $acl_array;

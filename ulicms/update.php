@@ -24,7 +24,7 @@ db_query($add_column_group_id);
 setconfig("db_schema_version", "6.7");
 
 // Das Script versucht sich selbst zu löschen
-//@unlink("update.php");
+@unlink("update.php");
 
 // Zurück ins Backend
 header ("Location: admin/");
