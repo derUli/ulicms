@@ -13,7 +13,7 @@ public function setPermission($name, $value, $group_id){
    if(is_null($json) or strlen($json) < 2)
       return false;
       
-   $permissionData = json_decode($json);
+   $permissionData = json_decode($json, true);
    
    $permissionData[$name] = $value;
    
@@ -26,21 +26,23 @@ public function setPermission($name, $value, $group_id){
 public function hasPermission($name){
 
    $result = $this->getPermissionQueryResult();
-   
    if(!$result)
       return false;
+    
+   
    
    // JSON holen
    $json = $result["permissions"];
    if(is_null($json) or strlen($json) < 2)
       return false;
       
-   $permissionData = json_decode($json);
+   $permissionData = json_decode($json, true);
    if(!isset($permissionData[$name]))
       return false;
       
    if(is_null($permissionData[$name]))
       return false;
+      
       
    return $permissionData[$name];
 }
@@ -105,10 +107,9 @@ public function getPermissionQueryResult($id = null){
    
    $sqlString = "SELECT * FROM `".tbname("groups")."` WHERE id=".$group_id;
    $query = db_query($sqlString);
-   
+
     if(db_num_rows($query) == 0)
       return null;
-      
       
    $result = db_fetch_assoc($query);
    

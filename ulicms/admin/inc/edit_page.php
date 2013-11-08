@@ -1,5 +1,6 @@
 <?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 30){
+$acl = new ACL();
+     if($acl->hasPermission("pages")){
          $page = db_escape($_GET["page"]);
          $query = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
          while($row = db_fetch_object($query)){

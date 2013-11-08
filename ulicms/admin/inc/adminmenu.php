@@ -10,6 +10,7 @@ if(defined("_SECURITY")){
     
      $theme = getconfig("theme");
      $theme_dir = getTemplateDirPath($theme);
+     $acl = new ACL();
     
      ?>
 <div style="float:left"><h2>UliCMS <a href="../">[<?php echo getconfig("homepage_title")?>]</a></h2></div>
@@ -27,31 +28,48 @@ if(defined("_SECURITY")){
     <ul>
     <li><a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a></li></ul>
   </li>
-  <li>
+  <?php if($acl->hasPermission("banners") or  $acl->hasPermission("pages")){?>
+ <li>
     <a href='?action=contents'>Inhalte</a>
     <ul>
+     <?php if($acl->hasPermission("pages")){?>
       <li>
         <a href='?action=pages'>Seiten</a>
       </li>
+      <?php }?>
+      
+     <?php if($acl->hasPermission("banners")){?>
       <li>
         <a href='?action=banner'>Werbebanner</a>
       </li>
+      
+      <?php }?>
     </ul>
+   
   </li>
-  <li>
-    <a href="?action=media">Medien</a>
+  <?php } ?>
+  <?php if($acl->hasPermission("files") or $acl->hasPermission("images") or $acl->hasPermission("flash")){?>
+    <li><a href="?action=media">Medien</a>
     <ul>
+    <?php if($acl->hasPermission("images")) {?>
       <li>
         <a href="?action=images">Bilder</a>
       </li>
+      <?php }?>
+      <?php if($acl->hasPermission("flash")) {?> 
       <li>
         <a href="?action=flash">Flash</a>
       </li>
+      <?php }?>
+      <?php if($acl->hasPermission("files")) {?>
       <li>
         <a href="?action=files">Dateien</a>
       </li>
+      <?php }?>
     </ul>
   </li>
+  
+      <?php }?>
   <li><a href="?action=admins">Benutzer</a></li>
   <li><a href="?action=groups">Gruppen</a></li>
   <li>

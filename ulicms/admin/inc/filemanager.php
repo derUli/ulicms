@@ -1,5 +1,5 @@
 ﻿<?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 30){
+     if($acl->hasPermission($_GET["action"])){
          ?>
 
 <h2>Dateimanager</h2>

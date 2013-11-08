@@ -1,6 +1,7 @@
 <?php if(defined("_SECURITY")){
+$acl = new ACL();
     
-     if($_SESSION["group"] >= 30){
+     if($acl->hasPermission("pages")){
         
         
          ?>

@@ -1,5 +1,6 @@
 <?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 30){
+$acl = new ACL();
+     if($acl->hasPermission("pages")){
         
          ?>
 <form id="pageform" name="newpageform" action="index.php?action=pages" method="post">

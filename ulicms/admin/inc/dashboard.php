@@ -1,3 +1,9 @@
+<?php 
+$acl = new ACL();
+
+if($acl->hasPermission("dashboard")){
+?>
+
 <?php
  if(defined("_SECURITY") and logged_in()){
      $pages_count = db_num_rows(db_query("SELECT * FROM " . tbname("content")));
@@ -152,3 +158,9 @@
      }
 
 ?>
+
+<?php } else {
+noperms();
+}
+?>
+

@@ -2,7 +2,7 @@
 
 // Todo neue ACL-Abfrage nutzen
 if(!has_permissions("50")){
-   echo "<p>Zugriff verweigert</p>";
+   noperms();
 } else {
 include_once "../lib/string_functions.php";
 

@@ -1,5 +1,6 @@
 <?php
 
+$acl = new ACL();
 
 add_hook("query");
 
@@ -47,7 +48,7 @@ if(isset($_GET["clear_cache"])){
      }
 
 
-if($_GET["action"] == "undelete_page" && $_SESSION["group"] >= 40){
+if($_GET["action"] == "undelete_page" && $acl->hasPermission("pages")){
      $page = intval($_GET["page"]);
      db_query("UPDATE " . tbname("content") . " SET `deleted_at` = NULL" .
          " WHERE id=$page");
@@ -56,7 +57,7 @@ if($_GET["action"] == "undelete_page" && $_SESSION["group"] >= 40){
     
      }
 
-if($_GET["action"] == "pages_delete" && $_SESSION["group"] >= 40){
+if($_GET["action"] == "pages_delete" && $acl->hasPermission("pages")){
      $page = intval($_GET["page"]);
      db_query("UPDATE " . tbname("content") . " SET `deleted_at` = " . time() .
          " WHERE id=$page");
@@ -267,7 +268,7 @@ if($_GET["action"] == "customize_menu" and isset($_GET["down"])
 
 
 
-if($_GET["action"] == "banner_delete" && $_SESSION["group"] >= 40){
+if($_GET["action"] == "banner_delete" && $acl->hasPermission("banner")){
      $banner = intval($_GET["banner"]);
      $query = db_query("DELETE FROM " . tbname("banner") . " WHERE id='$banner'", $connection);
      header("Location: index.php?action=banner");
@@ -283,7 +284,7 @@ if($_GET["action"] == "admin_delete" && $_SESSION["group"] >= 40){
      }
 
 
-if($_POST["add_page"] == "add_page"){
+if($_POST["add_page"] == "add_page" && $acl->hasPermission("pages")){
      if($_POST["system_title"] != ""){
         
          $system_title = db_escape($_POST["system_title"]);
@@ -394,54 +395,7 @@ if($_POST["add_page"] == "add_page"){
     
      }
 
-
-
-if($_POST["add_news"] == "add_news" && $_SESSION["group"] >= 20){
-     $title = db_escape($_POST["title"]);
-     $activated = intval($_POST["activated"]);
-     $content = db_escape($_POST["news_content"]);
-     $date = time();
-     $autor = $_SESSION["login_id"];
-     $query = db_query("INSERT INTO " . tbname("news") . " 
-(title,content,active, autor,date) VALUES('$title','$content',$activated,$autor,$date)", $connection);
-    
-    
-     header("Location: index.php?action=news");
-     exit();
-    
-    
-     }
-
-
-
-if(isset($_POST["edit_news"]) && $_SESSION["group"] >= 20){
-     $id = intval($_POST["edit_news"]);
-    
-     $title = db_escape($_POST["title"]);
-     $activated = intval($_POST["activated"]);
-     $content = db_escape($_POST["news_content"]);
-     $date = time();
-     $autor = $_SESSION["login_id"];
-     $query = db_query("UPDATE " . tbname("news") . " SET title='$title',content='$content',date=$date,active=$activated WHERE id=$id", $connection);
-    
-    
-     header("Location: index.php?action=news");
-     exit();
-    
-    
-     }
-
-
-
-if($_GET["delete_news"] == "delete_news" && $_SESSION["group"] >= 40){
-     $news = intval($_GET["news"]);
-     $query = db_query("DELETE FROM " . tbname("news") . " WHERE id='$news'", $connection);
-     header("Location: index.php?action=news");
-     exit();
-     }
-
-
-if($_POST["add_banner"] == "add_banner" && $_SESSION["group"] >= 40){
+if($_POST["add_banner"] == "add_banner" && $acl->hasPermission("banner")){
     
      $name = db_escape($_POST["banner_name"]);
      $image_url = db_escape($_POST["image_url"]);
@@ -506,7 +460,7 @@ if($_POST["add_admin"] == "add_admin" && $_SESSION["group"] >= 50){
 
 
 
-if($_POST["edit_page"] == "edit_page" && $_SESSION["group"] >= 30){
+if($_POST["edit_page"] == "edit_page" && $acl->hasPermission("pages")){
      $system_title = db_escape($_POST["page_"]);
      $page_title = db_escape($_POST["page_title"]);
      $activated = intval($_POST["activated"]);
@@ -691,7 +645,7 @@ about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");
 
 
 
-if($_POST["edit_banner"] == "edit_banner" && $_SESSION["group"] >= 40){
+if($_POST["edit_banner"] == "edit_banner" && $acl->hasPermission("banner")){
      $name = db_escape($_POST["banner_name"]);
      $image_url = db_escape($_POST["image_url"]);
      $link_url = db_escape($_POST["link_url"]);
