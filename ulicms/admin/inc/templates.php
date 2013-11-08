@@ -1,5 +1,6 @@
 ﻿<?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 50){
+$acl = new ACL();
+     if($acl->hasPermission("templates")){
         
          $theme = getconfig("theme");
          ?>

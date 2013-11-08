@@ -1,5 +1,6 @@
 <?php
-if(is_admin()){
+$acl = new ACL();
+if($acl->hasPermission("remove_packages")){
     
      // Modul deinstallieren
     if(isset($_GET["remove"])){
@@ -16,10 +17,16 @@ if(is_admin()){
         
         
          }
+         
+         }
+     ?>
+     <?php
+     if($acl->hasPermission("install_packages")){
      ?>
 <p style="margin-bottom:30px;"><a href="?action=available_modules">[Paket installieren]</a></p> 
-<?php }
-?>
+<?php } ?>
+
+
 <strong>Installierte Module:</strong>
 <p>Hier finden Sie eine Auflistung der installierten Module.<br/>
 <br/>
@@ -47,7 +54,7 @@ if(count($modules) > 0){
              echo "</a>";
              }
         
-         if(is_admin()){
+         if($acl->hasPermission("remove_packages")){
              echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $modules[$i] . "&type=module\" onclick=\"return confirm('Möchten Sie das Modul " . $modules[$i] . " wirklich deinstallieren?')\">";
              echo " [Entfernen]";
              echo "</a>";

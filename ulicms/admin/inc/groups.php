@@ -1,7 +1,8 @@
 <?php 
+$acl = new ACL();
 
 // Todo neue ACL-Abfrage nutzen
-if(!has_permissions("50")){
+if(!is_admin and !$acl->hasPermission("groups")){
    noperms();
 } else {
 include_once "../lib/string_functions.php";

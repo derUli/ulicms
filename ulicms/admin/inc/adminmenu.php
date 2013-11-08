@@ -70,8 +70,12 @@ if(defined("_SECURITY")){
   </li>
   
       <?php }?>
-  <li><a href="?action=admins">Benutzer</a></li>
+  <?php if($acl->hasPermission("users")){?><li><a href="?action=admins">Benutzer</a></li>
+  <?php } ?>
+  <?php if(is_admin() or $acl->hasPermission("groups")){?>
   <li><a href="?action=groups">Gruppen</a></li>
+  <?php } ?>
+  <?php if($acl->hasPermission("templates")){?>
   <li>
     <a href="?action=templates">Templates</a>
     <ul>
@@ -112,6 +116,9 @@ if(defined("_SECURITY")){
      
     </ul>
   </li>
+  
+  <?php } ?>
+  <?php if($acl->hasPermission("list_packages")){?>
   <li><a href="?action=modules">Pakete</a>
   <?php if(count($modules_with_admin_page) > 0){
          ?>
@@ -125,8 +132,13 @@ if(defined("_SECURITY")){
    </ul>
   <?php }
      ?>
+     
+      </li>
+         <?php }?>
   <?php if(file_exists("../update.php")){
          ?>
+         
+        
   <li><a href="?action=system_update">Update</a></li>
   <?php }
      ?>
