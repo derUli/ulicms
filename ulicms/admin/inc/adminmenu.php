@@ -52,11 +52,8 @@ if(defined("_SECURITY")){
       </li>
     </ul>
   </li>
-  <li><a href="?action=admins">Benutzer</a>
-  <ul>
+  <li><a href="?action=admins">Benutzer</a></li>
   <li><a href="?action=groups">Gruppen</a></li>
-  </ul>  
-  </li>
   <li>
     <a href="?action=templates">Templates</a>
     <ul>
