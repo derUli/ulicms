@@ -83,6 +83,9 @@ if(!$eingeloggt){
     else if($_GET["action"] == "admins"){
          require_once "inc/admins.php";
          }
+    else if($_GET["action"] == "groups"){
+         require_once "inc/groups.php";
+         }
     else if($_GET["action"] == "admin_new"){
          require_once "inc/admins_new.php";
          }
