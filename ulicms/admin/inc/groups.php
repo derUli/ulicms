@@ -26,7 +26,7 @@ if(isset($_POST["add_group"])){
 }
 
 } else if(isset($_GET["delete"])){
-$id = intval($_POST["delete"]);
+$id = intval($_GET["delete"]);
 $acl = new ACL();
 $acl->deleteGroup($id);
 $removed = true;
