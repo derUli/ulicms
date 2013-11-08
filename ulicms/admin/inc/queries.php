@@ -662,13 +662,19 @@ if($_POST["edit_admin"] == "edit_admin" && $_SESSION["group"] >= 50
      $email = db_escape($_POST["admin_email"]);
      $password = db_escape($_POST["admin_password"]);
      $rechte = db_escape($_POST["admin_rechte"]);
+     $group_id = $_POST["group_id"];
+     if($group_id == "-")
+        $group_id = "NULL";
+     else
+        $group_id = intval($group_id);
+        
      $icq_id = db_escape($_POST["icq_id"]);
      $skype_id = db_escape($_POST["skype_id"]);
      $about_me = db_escape($_POST["about_me"]);
-     db_query("UPDATE " . tbname("admins") . " SET username = '$username', `group`= $rechte, firstname='$firstname',
+     db_query("UPDATE " . tbname("admins") . " SET username = '$username', `group`= $rechte, `group_id` = ".$group_id.", firstname='$firstname',
 lastname='$lastname', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
-about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id", $connection);
+about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");
     
      if(!empty($password))
          changePassword($password, $id);

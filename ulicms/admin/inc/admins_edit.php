@@ -1,4 +1,5 @@
 <?php if(defined("_SECURITY")){
+include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
     
      if($_SESSION["group"] >= 50 or
          ($_SESSION["group"] >= 10 and $_GET["admin"] == $_SESSION["login_id"])){
@@ -43,9 +44,28 @@ Avatar hochladen:<br/>
 <strong>neues Passwort:</strong><br/>
 <input type="text" style="width:300px;" name="admin_password" value=""> <br/>
 <?php if($_SESSION["group"] >= 50){
-                 ?>
+$acl = new ACL();
+$allGroups = $acl->getAllGroups();
+asort($allGroups);
+?>
 <br>
-<strong data-tooltip="Was darf der Benutzer? Weitere Informationen dazu finden Sie in der Online-hilfe.">Benutzergruppe:</strong><br/>
+<strong>ACL-Gruppe:</strong>
+<br/>
+<select name="group_id">
+<option value="-" <?php if($row -> group_id === null){ echo "selected"; }?>>[Keine]</option>
+<?php foreach($allGroups as $key => $value){?>
+<option value="<?php echo $key;?>" <?php 
+if(intval($row -> group_id) == $key)
+{ echo "selected"; 
+
+}
+?>><?php echo  real_htmlspecialchars($value)?></option>
+<?php }?>
+</select>
+
+<br/>
+<br/>
+<strong>Benutzergruppe:</strong><br/>
 
 <select name="admin_rechte" size=1>
 <option value="50" <?php if($row -> group == 50) echo "selected";
