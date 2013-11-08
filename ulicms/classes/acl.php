@@ -186,8 +186,11 @@ public function getDefaultACLAsJSON($admin = false, $plain = false){
       foreach ($acl_data as $key => $value){
           $acl_data[$key] = $default_value;
       }
+      
+    ksort($acl_data);
     if($plain)
        return $acl_data;
+
    $json = json_encode($acl_data);
    return $json;
 }
