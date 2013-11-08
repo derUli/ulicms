@@ -5,15 +5,33 @@ if(!defined("ULICMS_ROOT"))
 $acl = new ACL();
 $groups = $acl->getAllGroups();
 
-ksort($groups);
+
+if(isset($_REQUEST["sort"])){
+   $_SESSION["grp_sort"] = $_REQUEST["sort"];
+}
+
+if($_SESSION["grp_sort"] == "id"){
+   if($_SESSION["sortDirection"] == "asc")
+      ksort($groups);
+   else if($_SESSION["sortDirection"] == "asc")
+      krsort($groups);
+}
+else if($_SESSION["grp_sort"] == "name"){
+   if($_SESSION["sortDirection"] == "asc")
+      asort($groups);
+   else
+      arsort($groups);
+} else{
+ ksort($groups); 
+}
 
 ?>
 <p><a href="?action=groups&add=add">Neue Gruppe anlegen</a></p>
 <?php if(count($groups) > 0){ ?>
 <table>
 <tr>
-<td style="min-width:100px;"><strong>ID</strong></td>
-<td style="min-width:200px;"><strong>Name</strong></td>
+<td style="min-width:100px;"><a href="?action=groups&sort=id&sort_direction=change"><strong>ID</strong></a></td>
+<td style="min-width:200px;"><a href="?action=groups&sort=name&sort_direction=change"><strong>Name</strong></a></td>
 <td></td>
 <td></td>
 </tr>

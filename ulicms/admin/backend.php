@@ -8,6 +8,7 @@ add_hook("after_session_start");
 require_once "../version.php";
 require_once "inc/logincheck.php";
 require_once "inc/queries.php";
+@include_once "inc/sort_direction.php";
 
 
 define("_SECURITY", true);
