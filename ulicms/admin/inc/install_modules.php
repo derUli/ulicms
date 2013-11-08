@@ -1,4 +1,6 @@
-<?php if(!is_admin()){
+<?php 
+$acl = new ACL();
+if(!$acl->hasPermission("install_packages")){
      ?>
 <p>Zugriff verweigert</p>
 <?php }else{
