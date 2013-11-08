@@ -68,6 +68,45 @@ public function getPermissionQueryResult($id = null){
 
 public function getDefaultACLAsJSON($admin = false){
    $acl_data = Array();
+    
+    
+   // Willkommen
+   $acl_data["dashboard"] = null;
+   
+   // Inhalte
+   $acl_data["pages"] = null;
+   $acl_data["banners"] = null;
+   
+   // Medien
+   $acl_data["images"] = null;
+   $acl_data["files"] = null;
+   $acl_data["flash"] = null;
+   
+   // Benutzer
+   $acl_data["user"] = null;
+   
+   // Templates
+   $acl_data["templates"] = null;
+   
+   // Package Manager
+   $acl_data["list_packages"] = null;
+   $acl_data["install_packages"] = null;
+   $acl_data["remove_packages"] = null;
+   
+   // Updates durchführen
+   $acl_data["update_system"] = null;
+   
+   // Einstellungen
+   $acl_data["settings_simple"] = null;
+   $acl_data["design"] = null;
+   $acl_data["spam_filter"] = null;
+   $acl_data["cache"] = null;
+   $acl_data["motd"] = null;
+   $acl_data["pkg_settings"] = null;
+   $acl_data["languages"] = null;
+   $acl_data["logo"] = null;
+   $acl_data["other"] = null;
+   $acl_data["expert_settings"] = null;
    
    // Hook für das Erstellen eigener ACL Objekte
    // Temporäres globales Array zum hinzufügen eigener Objekte
@@ -76,18 +115,18 @@ public function getDefaultACLAsJSON($admin = false){
    add_hook("custom_acl");
    $acl_data = $acl_array;
    unset($acl_array);
-   
-   // Admin has all rights
-   if($admin){
+
+      // Admin has all rights
+   if($admin)
+      $default_value = true;
+   else
+      $default_value = false;
+  
       foreach ($acl_data as $key => $value){
-          $acl_data[$key] = true;
-      } 
-   } else {
-      foreach ($acl_data as $key => $value){
-          $acl_data[$key] = false;
-      } 
-   }
-   return $acl_data;
+          $acl_data[$key] = $default_value;
+      }
+   $json = json_encode($acl_data);
+   return $json;
 }
 
 }
