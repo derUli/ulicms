@@ -1,7 +1,7 @@
 <?php if(defined("_SECURITY")){
 include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
     
-     if($_SESSION["group"] >= 50 or
+     if($acl->hasPermission("group") or is_admin() or
          ($_SESSION["group"] >= 10 and $_GET["admin"] == $_SESSION["login_id"])){
         
          $admin = intval($_GET["admin"]);

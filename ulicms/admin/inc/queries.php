@@ -276,7 +276,7 @@ if($_GET["action"] == "banner_delete" && $acl->hasPermission("banner")){
      }
 
 
-if($_GET["action"] == "admin_delete" && $_SESSION["group"] >= 40){
+if($_GET["action"] == "admin_delete" && (is_admin() or $acl->hasPermission("users"))){
      $admin = intval($_GET["admin"]);
      $query = db_query("DELETE FROM " . tbname("admins") . " WHERE id='$admin'", $connection);
      header("Location: index.php?action=admins");
@@ -421,15 +421,7 @@ if($_POST["add_key"] == "add_key" && $_SESSION["group"] >= 40){
      exit();
      }
 
-
-
-
-
-
-
-
-
-if($_POST["add_admin"] == "add_admin" && $_SESSION["group"] >= 50){
+if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl->hasPermission("users"))){
      include_once "../lib/encryption.php";
      $username = db_escape($_POST["admin_username"]);
      $lastname = db_escape($_POST["admin_lastname"]);
@@ -576,7 +568,7 @@ if(!empty($_FILES['logo_upload_file']['name'])
 
 
 
-if($_POST["edit_admin"] == "edit_admin" && $_SESSION["group"] >= 50
+if($_POST["edit_admin"] == "edit_admin" && (is_admin() or $acl->hasPermission("users"))
      or ($_POST["edit_admin"] == "edit_admin" and $_SESSION["group"] >= 10
          and $_POST["id"] == $_SESSION["login_id"])){
     

@@ -1,5 +1,5 @@
 <?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 50){
+     if(is_admin() or $acl->hasPermission("users")){
         
          $query = db_query("SELECT * FROM " . tbname("admins") . " ORDER BY id", $connection);
          if(db_num_rows($query)){

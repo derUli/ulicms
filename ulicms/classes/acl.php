@@ -144,7 +144,7 @@ public function getDefaultACLAsJSON($admin = false, $plain = false){
    $acl_data["flash"] = null;
    
    // Benutzer
-   $acl_data["user"] = null;
+   $acl_data["users"] = null;
    $acl_data["groups"] = null;
    
    // Templates

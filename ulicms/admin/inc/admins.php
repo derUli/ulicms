@@ -1,5 +1,6 @@
 <?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 50){
+$acl = new ACL();
+     if(is_admin() or $acl->hasPermission("users")){
          if(empty($_GET["order"])){
              $order = "username";
              }
