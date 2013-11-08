@@ -73,7 +73,14 @@ function register_session($user, $redirect = true){
      $_SESSION["firstname"] = $user["firstname"];
      $_SESSION["email"] = $user["email"];
      $_SESSION["login_id"] = $user["id"];
+     // Soll durch group_id und eine ACL ersetzt werden
      $_SESSION["group"] = $user["group"];
+     
+     // Group ID
+     $_SESSION["group_id"] = $user["group_id"];
+     if(is_null($_SESSION["group_id"]))
+        $_SESSION["group_id"] = 0;
+     
      $_SESSION["session_begin"] = time();
     
      if(!$redirect)
