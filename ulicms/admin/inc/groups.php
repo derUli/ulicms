@@ -8,6 +8,7 @@ include_once "../lib/string_functions.php";
 
 $modified = false;
 $created = false;
+$removed = false;
 
 if(isset($_POST["add_group"])){
    $acl = new ACL();
@@ -24,14 +25,20 @@ if(isset($_POST["add_group"])){
      $name = real_htmlspecialchars($name);
 }
 
-} else if(isset($_POST["edit_group"])){
+} else if(isset($_GET["delete"])){
+$id = intval($_POST["delete"]);
+$acl = new ACL();
+$acl->deleteGroup($id);
+$removed = true;
+
+}else if(isset($_POST["edit_group"])){
    $acl = new ACL();
    $all_permissions = $acl->getDefaultACL(false, true);
    $id = $_POST["id"];
    
    foreach($_POST["user_permissons"] as $permission_name){
       $all_permissions[$permission_name] = true;
-   }
+   } 
    
    $name = trim($_POST["name"]);
    $all_permissions = json_encode($all_permissions);
@@ -46,7 +53,16 @@ if(isset($_POST["add_group"])){
 <?php if($created){?>
 <p style='color:green;'>Die Gruppe "<?php echo $name;?>" wurde erfolgreich angelegt.</p>
 <?php }?>
-<?php if(!isset($_GET["add"]) and !isset($_GET["edit"]) and !isset($_GET["delete"])){
+
+<?php if($modified){?>
+<p style='color:green;'>Die Gruppe "<?php echo $name;?>" wurde erfolgreich bearbeitet.</p>
+<?php }?>
+
+<?php if($removed){?>
+<p style='color:green;'>Die Gruppe wurde erfolgreich gelöscht</p>
+<?php }?>
+
+<?php if(!isset($_GET["add"]) and !isset($_GET["edit"])){
 
   include "inc/group_list.php";
 } else if(isset($_GET["add"])){

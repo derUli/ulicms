@@ -79,6 +79,20 @@ public function updateGroup($id, $name, $permissions = null){
    
 }
 
+public function deleteGroup($id, $move_users_to = null){
+  $id = intval($id);
+  $deleteGroupSQL = "DELETE FROM `".tbname("groups")."` WHERE id=".$id;
+  db_query($deleteGroupSQL);
+  
+  if(is_null($move_users_to))
+     $updateUsers = "UPDATE ".tbname("admins")." SET `group_id`=NULL where `group_id`=$id";
+  else
+       $updateUsers = "UPDATE ".tbname("admins")." SET `group_id`=".$move_users_to." where `group_id`=$id";
+  
+  db_query($updateUsers);
+  
+}
+
 
 public function getPermissionQueryResult($id = null){
    if($id)
