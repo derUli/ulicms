@@ -246,7 +246,7 @@ mysqli_query($connection, $insert_group_query);
          $encrypted_passwort = sha1($salt . $passwort);
         
          mysqli_query($connection, "INSERT INTO `" . $prefix . "admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`, `group_id`) VALUES
-(1, 0, 'admin', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50, 1);")or die(mysqli_error($connection));
+(1, 0, '".$admin_user."', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50, 1);")or die(mysqli_error($connection));
         
          mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
