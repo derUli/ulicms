@@ -43,8 +43,10 @@ Avatar hochladen:<br/>
              ?>"><br/><br/>
 <strong>neues Passwort:</strong><br/>
 <input type="text" style="width:300px;" name="admin_password" value=""> <br/>
-<?php if($_SESSION["group"] >= 50){
+<?php 
 $acl = new ACL();
+if($acl->hasPermission("users") >= 50){
+
 $allGroups = $acl->getAllGroups();
 asort($allGroups);
 ?>
@@ -85,6 +87,12 @@ if(intval($row -> group_id) == $key)
 <?php }else{
                  ?>
 <input type="hidden" name="admin_rechte" value="<?php echo $row -> group?>">
+
+<input type="hidden" name="group_id" value=<?php if(!$_SESSION["group_id"])
+   echo "-";
+else
+   echo $_SESSION["group_id"];
+?>">
 <?php }
              ?>
 <br/>
