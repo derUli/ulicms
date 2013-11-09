@@ -12,7 +12,6 @@ function getOnlineUsers(){
 
 // get a config variable
 function getconfig($key){
-     $connection = MYSQL_CONNECTION;
      $ikey = db_escape($key);
      $query = db_query("SELECT * FROM " . tbname("settings") . " WHERE name='$key'");
      if(db_num_rows($query) > 0){

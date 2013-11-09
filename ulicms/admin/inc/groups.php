@@ -1,9 +1,9 @@
 <?php 
 $acl = new ACL();
-
 // Todo neue ACL-Abfrage nutzen
-if(!is_admin and !$acl->hasPermission("groups")){
+if(!is_admin() and !$acl->hasPermission("groups")){
    noperms();
+   
 } else {
 include_once "../lib/string_functions.php";
 
@@ -36,10 +36,12 @@ $acl->deleteGroup($id);
 $removed = true;
 
 }else if(isset($_POST["edit_group"])){
+
    $acl = new ACL();
    $all_permissions = $acl->getDefaultACL(false, true);
-   $id = $_POST["id"];
    
+   $id = $_POST["id"];
+      
    if(count($_POST["user_permissons"]) > 0){
       foreach($_POST["user_permissons"] as $permission_name){
          $all_permissions[$permission_name] = true;
@@ -66,7 +68,7 @@ $removed = true;
 <?php }?>
 
 <?php if($removed){?>
-<p style='color:green;'>Die Gruppe wurde erfolgreich gelöscht</p>
+<p style='color:green;'>Die Gruppe wurde erfolgreich gelöscht.</p>
 <?php }?>
 
 <?php if(!isset($_GET["add"]) and !isset($_GET["edit"])){
