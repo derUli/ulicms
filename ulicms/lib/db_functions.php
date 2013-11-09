@@ -11,6 +11,10 @@ function db_query($query){
     
     
     }
+    
+function db_name_escape($name){
+   return "`".db_escape($name)."`";
+}
 
 function db_last_insert_id(){
      global $db_connection;
