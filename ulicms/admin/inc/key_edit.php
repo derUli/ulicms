@@ -1,5 +1,8 @@
-<?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 50){
+<?php
+$acl = new ACL();
+
+if(defined("_SECURITY")){
+     if($acl->hasPermission("expert_settings")){
          $key = intval($_GET["key"]);
          $query = db_query("SELECT * FROM " . tbname("settings") . " WHERE id='$key'");
          while($row = db_fetch_object($query)){

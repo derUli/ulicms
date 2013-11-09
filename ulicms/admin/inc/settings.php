@@ -1,6 +1,7 @@
 <?php
+$acl = new ACL();
 if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 50){
+     if($acl->hasPermission("expert_settings")){
         
          $query = db_query("SELECT * FROM " . tbname("settings") . " ORDER BY name", $connection);
          if(db_num_rows($query) > 0){
