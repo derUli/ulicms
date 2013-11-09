@@ -2,7 +2,7 @@
 include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
     
      if($acl->hasPermission("group") or is_admin() or
-         ($_SESSION["group"] >= 10 and $_GET["admin"] == $_SESSION["login_id"])){
+         ($_GET["admin"] == $_SESSION["login_id"])){
         
          $admin = intval($_GET["admin"]);
         
@@ -45,7 +45,7 @@ Avatar hochladen:<br/>
 <input type="text" style="width:300px;" name="admin_password" value=""> <br/>
 <?php 
 $acl = new ACL();
-if($acl->hasPermission("users") >= 50){
+if($acl->hasPermission("users")){
 
 $allGroups = $acl->getAllGroups();
 asort($allGroups);
