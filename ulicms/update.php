@@ -24,8 +24,8 @@ $insert_group_query = 'INSERT INTO `'.tbname("groups").'` (`id`, `name`, `permis
 
 
 
-db_query($create_table_groups_sql);
-db_query($add_column_group_id);
+db_query($create_table_groups_sql)or die(db_error());
+db_query($add_column_group_id)or die(db_error());
 
 $set_group_id = "UPDATE ".tbname("admins"). " SET `group_id`=1 WHERE `group_id` = NULL";
 
