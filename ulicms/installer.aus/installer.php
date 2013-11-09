@@ -173,6 +173,10 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <td><input name="email" type="text" value="max@muster.de"></td>
 </tr>
 <tr>
+<td>Name des Administrator-Accounts:</td>
+<td><input name="admin_user" type="text" value="admin"></td>
+</tr>
+<tr>
 <td>Ihr Passwort:</td>
 <td><input name="passwort" type="password" value=""></td>
 </tr>
@@ -191,10 +195,9 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
         
         
          $salt = uniqid();
-        
          $connection = mysqli_connect($_SESSION["mysql"]["server"], $_SESSION["mysql"]["loginname"], $_SESSION["mysql"]["passwort"]);
-        
          mysqli_select_db($connection, $_SESSION["mysql"]["datenbank"]);
+        
         
          $prefix = mysqli_real_escape_string($connection, $_SESSION["mysql"]["prefix"]);
         
@@ -239,7 +242,7 @@ mysqli_query($connection, $insert_group_query);
          $zusammen = mysqli_real_escape_string($connection, "$vorname $nachname");
          $email = mysqli_real_escape_string($connection, $_POST["email"]);
          $passwort = mysqli_real_escape_string($connection, $_POST["passwort"]);
-        
+         $admin_user = mysqli_real_escape_string($connection, $_POST["admin_user"]);
          $encrypted_passwort = sha1($salt . $passwort);
         
          mysqli_query($connection, "INSERT INTO `" . $prefix . "admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`, `group_id`) VALUES
