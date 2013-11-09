@@ -7,8 +7,7 @@ $acl = new ACL();
 $all_permissions = $acl->getPermissionQueryResult($id);
 $groupName = real_htmlspecialchars($all_permissions["name"]);
 $all_permissions_all = $acl->getDefaultACL(false, true);
-$all_permissions = json_decode($all_permissions["permissions"]);
-$all_permissions = (array) $all_permissions;
+$all_permissions = json_decode($all_permissions["permissions"], true);
       foreach($all_permissions_all as $name => $value){
             if(!isset($all_permissions[$name]))
                $all_permissions[$name] = $value; 
