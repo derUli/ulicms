@@ -154,6 +154,8 @@ public function getDefaultACLAsJSON($admin = false, $plain = false){
    $acl_data["list_packages"] = null;
    $acl_data["install_packages"] = null;
    $acl_data["remove_packages"] = null;
+   $acl_data["module_settings"] = null;
+   
    
    // Updates durchführen
    $acl_data["update_system"] = null;

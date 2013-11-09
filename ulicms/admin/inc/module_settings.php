@@ -1,6 +1,6 @@
 <?php
-if(!isset($_SESSION["group"])){
-     die("Nicht erlaubter Zugriff");
+if(!defined("ULICMS_ROOT")){
+     die("Schlechter Hacker!");
      }
 
 $module = basename($_GET["module"]);
@@ -22,17 +22,17 @@ if(!file_exists($admin_file_path)){
          echo "<h1>$capitalized_module_name  Einstellungen</h1>";
          }
     
+     $acl = new ACL();    
+    
      if(defined("MODULE_ADMIN_REQUIRED_PERMISSION")){
-         if($_SESSION["group"] >= MODULE_ADMIN_REQUIRED_PERMISSION){
+         if($acl->hasPermission(MODULE_ADMIN_REQUIRED_PERMISSION) and $acl->hasPermission("module_settings")){
              define("MODULE_ACCESS_PERMITTED", true);
              }
         else{
              define("MODULE_ACCESS_PERMITTED", false);
              }
          }
-    else{
-         define("MODULE_ACCESS_PERMITTED", true);
-         }
+
     
      $admin_func = $module . "_admin";
     
