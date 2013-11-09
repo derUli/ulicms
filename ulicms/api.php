@@ -608,7 +608,7 @@ function cms_version(){
 
 
 function is_admin(){
-     return has_permissions(50);
+     return $_SESSION["group_id"] == 1;
      }
 
 require_once "users_api.php";
