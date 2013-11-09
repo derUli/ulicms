@@ -16,10 +16,9 @@
 // IMPORTANT!!! Do not remove uncommented settings in this file even if
 // you are using session configuration.
 // See http://kcfinder.sunhater.com/install for setting descriptions
-if(!isset($_SESSION)){
-     session_start();
-     }
 
+if(!isset($_SESSION))
+   @session_start();
 
 $_CONFIG = array(
     
@@ -104,8 +103,11 @@ $_CONFIG = array(
     // '_sessionPath' => "/my/path",
     );
 
+include_once "../../init.php";
 
-if($_SESSION["group"] >= 30){
+$acl = new acl();
+
+if($acl->hasPermission($_REQUEST["type"])){
      $_CONFIG["disabled"] = false;
      }
 

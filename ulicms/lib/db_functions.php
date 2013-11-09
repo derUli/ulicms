@@ -1,10 +1,8 @@
 <?php
 // Abstraktion für Ausführen von SQL Strings
 function db_query($query){
-     if(is_admin_dir())
-         include_once "../lib/logger.php";
-     else
-         include_once "lib/logger.php";
+         include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."logger.php";
+
      log_db_query($query);
      global $db_connection;
      return mysqli_query($db_connection, $query);
@@ -52,6 +50,7 @@ function db_connect($server, $user, $password){
      if(!$db_connection)
          return false;
      db_query("SET NAMES 'utf8'");
+     
      return $db_connection;
     }
 // Datenbank auswählen

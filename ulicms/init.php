@@ -56,7 +56,6 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEP
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "version.php";
 
-
 function exception_handler($exception){
  echo $exception -> getMessage(), "\n";
  if(!defined("EXCEPTION_OCCURRED")){
@@ -79,7 +78,7 @@ if(file_exists($path_to_config)){
 else if(is_dir("installer")){
  header("Location: installer/");
  exit();
- }else{
+ } else {
  throw new Exception("Can't include cms-config.php. Starting installer failed, too.");
  }
 
@@ -132,8 +131,11 @@ if($config -> db_server == "" or $config -> db_user == ""){
  header("Location: installer/");
  exit();
  }
+ 
+ 
 
 @$connection = db_connect($config -> db_server, $config -> db_user, $config -> db_password);
+
 if($connection === false){
  throw new Exception("Fehler: Die Verbindung zum Datenbank Server konnte nicht hergestellt werden.");
  }
