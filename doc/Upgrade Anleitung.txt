@@ -1,4 +1,4 @@
-﻿Mit diesem Paket können Sie eine UliCMS 2014R8 (Version 6.4) auf UliCMS2014R9 (Version 6.7) upgraden.
+Mit diesem Paket können Sie eine UliCMS 2014R8 (Version 6.4) auf UliCMS2014R9 (Version 6.7) upgraden.
 
 Dazu führen Sie bitte die folgenden Schritte durch:
 1. Datenbank und FTP-Server der Website sichern.
