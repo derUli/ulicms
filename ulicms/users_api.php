@@ -39,16 +39,23 @@ function getUserById($id){
 
 
 
-function adduser($username, $lastname, $firstname, $email, $password, $group){
+function adduser($username, $lastname, $firstname, $email, $password, $group, $sendMessage = true, $acl_group = null){
      $username = db_escape($username);
      $lastname = db_escape($lastname);
      $firstname = db_escape($firstname);
      $email = db_escape($email);
      $password = $password;
+     // legacy group
      $group = intval($group);
+     // Default ACL Group     
+     if(!$acl_group)
+        $acl_group = getconfig("default_acl_group");
+        
+     if(is_null($acl_group))
+        $acl_group = "NULL";     
     
      db_query("INSERT INTO " . tbname("admins") . " 
-(username,lastname, firstname, email, password, `group`) VALUES('$username',' $lastname','$firstname','$email','" . hash_password($password) . "',$group)");
+(username,lastname, firstname, email, password, `group`, `group_id`) VALUES('$username',' $lastname','$firstname','$email','" . hash_password($password) . "',$group, $acl_group)");
      $message = "Hallo $firstname,\n\n" .
      "Ein Administrator hat auf http://" . $_SERVER["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" .
      "Die Zugangsdaten lauten:\n\n" .
@@ -56,8 +63,10 @@ function adduser($username, $lastname, $firstname, $email, $password, $group){
      "Passwort: $password\n";
      $header = "From: " . getconfig("email") . "\n" .
      "Content-type: text/plain; charset=utf-8";
-    
-     @mail($email, "Dein Benutzer-Account bei " . $_SERVER["SERVER_NAME"], $message, $header);
+     
+     if($sendMessage){
+       @mail($email, "Dein Benutzer-Account bei " . $_SERVER["SERVER_NAME"], $message, $header);
+     }
      }
 
 function user_exists($name){

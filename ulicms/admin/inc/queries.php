@@ -430,18 +430,8 @@ if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl->hasPermission("use
      if($group === false)
          $group = 10;
      $email = db_escape($_POST["admin_email"]);
-     $password = db_escape($_POST["admin_password"]);
-     db_query("INSERT INTO " . tbname("admins") . " 
-(username,lastname, firstname, email, password, `group`) VALUES('$username','$lastname','$firstname','$email','" . hash_password($password) . "', $group)", $connection);
-     $message = "Hallo $firstname,\n\n" .
-     "Ein Administrator hat auf " . $_SERVER["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" .
-     "Die Zugangsdaten lauten:\n\n" .
-     "Benutzername: $username\n" .
-     "Passwort: $password\n";
-     $header = "From: " . env("email") . "\n" .
-     "Content-type: text/plain; charset=utf-8";
-    
-     @mail($email, "Dein Benutzer-Account bei " . $_SERVER["SERVER_NAME"], $message, $header);
+     
+     adduser($username, $lastname, $firstname, $email, $password, $group, true);
     
      header("Location: index.php?action=admins");
      exit();

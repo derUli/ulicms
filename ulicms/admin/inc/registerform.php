@@ -25,7 +25,7 @@ if(isset($_POST["register_user"])){
              $_POST["admin_lastname"],
              $_POST["admin_firstname"],
              $_POST["admin_email"], $_POST["admin_password"],
-             $registered_user_default_level);
+             $registered_user_default_level, false);
          echo "<p style='color:green;'>Registrierung erfolgreich!</p>";
          if(!empty($_REQUEST["go"])){
              $go = htmlspecialchars($_REQUEST["go"]);
