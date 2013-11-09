@@ -5,25 +5,17 @@ if(!defined("ULICMS_ROOT"))
 $id = intval($_REQUEST["edit"]);
 $acl = new ACL();
 $all_permissions = $acl->getPermissionQueryResult($id);
+$name = real_htmlspecialchars($all_permissions["name"]);
 $all_permissions_all = $acl->getDefaultACL(false, true);
-   
+$all_permissions = json_decode($all_permissions["permissions"]);
+$all_permissions = (array) $all_permissions;
       foreach($all_permissions_all as $name => $value){
-        
             if(!isset($all_permissions[$name]))
                $all_permissions[$name] = $value; 
    }
    
-   unset($all_permissions["id"]);
-   unset($all_permissions["name"]);
-   unset($all_permissions["permissions"]);
-   
+
    ksort($all_permissions);
-   
-
-$name = real_htmlspecialchars($all_permissions["name"]);
-
-
-
 
 if($all_permissions){
 
