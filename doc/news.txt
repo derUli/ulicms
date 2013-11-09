@@ -30,3 +30,4 @@
     Aus Kompatiblitätsgründen bleibt das alte
     Hierarische Rechtesystem behalten. 
     Es soll aber in kommenden Releases entfernt werden.
+[*] Bei der Installation kann man den Namen des Adminaccounts ändern.
