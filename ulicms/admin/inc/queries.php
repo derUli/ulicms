@@ -608,11 +608,17 @@ if($_POST["edit_admin"] == "edit_admin" && (is_admin() or $acl->hasPermission("u
      $email = db_escape($_POST["admin_email"]);
      $password = db_escape($_POST["admin_password"]);
      $rechte = db_escape($_POST["admin_rechte"]);
-     $group_id = $_POST["group_id"];
+     
+     if(isset($_POST["group_id"])){
+        $group_id = $_POST["group_id"];
      if($group_id == "-")
         $group_id = "NULL";
      else
         $group_id = intval($group_id);
+        
+     } else {
+        $group_id = $_SESSION["group_id"];
+     }
         
      $icq_id = db_escape($_POST["icq_id"]);
      $skype_id = db_escape($_POST["skype_id"]);
