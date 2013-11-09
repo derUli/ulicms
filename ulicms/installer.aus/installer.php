@@ -428,7 +428,7 @@ var $db_type="mysql";
          $message = "Hallo $zusammen!\n" .
          "Auf " . $_SERVER["SERVER_NAME"] . " wurde UliCMS erfolgreich installiert\n\n" .
          "Die Zugangsdaten lauten:\n" .
-         "Benutzername: admin\n" .
+         "Benutzername: ".$admin_user."\n" .
          "Passwort: $passwort\n\n" .
          "Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen.";
         
@@ -446,7 +446,7 @@ var $db_type="mysql";
         
          ?>
 <h2>Installation beendet</h2>
-<p>Die Installation von UliCMS wurde erfolgreich beendet.<br/>Bitte löschen Sie nun aus Sicherheitsgründen den Ordner "installer" vom Server. Sie können sich nun <a href="../admin/">hier</a> einloggen. Der Benutzername lautet <i>admin</i>.<br/><br/>
+<p>Die Installation von UliCMS wurde erfolgreich beendet.<br/>Bitte löschen Sie nun aus Sicherheitsgründen den Ordner "installer" vom Server. Sie können sich nun <a href="../admin/">hier</a> mit Ihrem vorhin angegebenen Benutzernamen und Passwort einloggen.<br/><br/>
 <?php if($success){
              ?>
 <span style="color:green;">Die Zugangsdaten wurden Ihnen per Mail geschickt.
