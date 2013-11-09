@@ -17,6 +17,7 @@ $all_permissions_all = $acl->getDefaultACL(false, true);
    unset($all_permissions["name"]);
    unset($all_permissions["permissions"]);
    
+   ksort($all_permissions);
    
 
 $name = real_htmlspecialchars($all_permissions["name"]);
