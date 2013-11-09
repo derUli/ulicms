@@ -5,18 +5,26 @@ if(!defined("ULICMS_ROOT"))
 $id = intval($_REQUEST["edit"]);
 $acl = new ACL();
 $all_permissions = $acl->getPermissionQueryResult($id);
+$all_permissions_all = $acl->getDefaultACL(false, true);
+   
+      foreach($all_permissions_all as $name => $value){
+        
+            if(!isset($all_permissions[$name]))
+               $all_permissions[$name] = $value; 
+   }
+   
+   unset($all_permissions["id"]);
+   unset($all_permissions["name"]);
+   unset($all_permissions["permissions"]);
+   
+   
 
 $name = real_htmlspecialchars($all_permissions["name"]);
 
-$all_permissions = $all_permissions["permissions"];
 
-if(is_null($all_permissions) or empty($all_permissions)){
-   $all_permissions = $acl->getDefaultACL(false, false);
-}
+
 
 if($all_permissions){
-
-$all_permissions = json_decode($all_permissions);
 
 ?>
 <form action="?action=groups" method="post">
