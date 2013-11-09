@@ -228,6 +228,12 @@ $create_table_groups_sql = "CREATE TABLE IF NOT EXISTS `".$prefix."groups` (
 
 mysqli_query($connection, $create_table_groups_sql)or die(mysqli_error($connection));
         
+$insert_group_query = 'INSERT INTO `'.$prefix.'groups` (`id`, `name`, `permissions`) VALUES
+(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"flash":true,"groups":true,"images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"templates":true,"update_system":true,"users":true}\')';
+
+mysqli_query($connection, $insert_group_query);
+
+        
          $vorname = mysqli_real_escape_string($connection, $_POST["firstname"]);
          $nachname = mysqli_real_escape_string($connection, $_POST["lastname"]);
          $zusammen = mysqli_real_escape_string($connection, "$vorname $nachname");
@@ -236,8 +242,8 @@ mysqli_query($connection, $create_table_groups_sql)or die(mysqli_error($connecti
         
          $encrypted_passwort = sha1($salt . $passwort);
         
-         mysqli_query($connection, "INSERT INTO `" . $prefix . "admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`) VALUES
-(1, 0, 'admin', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50);")or die(mysqli_error($connection));
+         mysqli_query($connection, "INSERT INTO `" . $prefix . "admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`, `group_id`) VALUES
+(1, 0, 'admin', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50, 1);")or die(mysqli_error($connection));
         
          mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
