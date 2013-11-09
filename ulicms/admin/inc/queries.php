@@ -95,7 +95,7 @@ if($_GET["action"] == "spam_filter" and
 
 
 
-if(!empty($_POST["save_template"]) && !empty($_POST["code"]) && $_SESSION["group"] >= 40){
+if(!empty($_POST["save_template"]) and !empty($_POST["code"]) && $acl->hasPermission("templates")){
      $theme = getconfig("theme");
      $save = getTemplateDirPath($theme) . basename($_POST["save_template"]);
      if(is_file($save) && is_writable($save)){
@@ -112,32 +112,31 @@ if(!empty($_POST["save_template"]) && !empty($_POST["code"]) && $_SESSION["group
     
      }
 
-if($_SESSION["group"] >= 40 and
-     $_GET["action"] == "empty_trash"){
+if($_GET["action"] == "empty_trash"){
      db_query("DELETE FROM " . tbname("content") . " WHERE deleted_at IS NOT NULL");
      header("Location: index.php?action=pages");
      exit();
      }
 
 
-if($_GET["action"] == "key_delete" && $_SESSION["group"] >= 40){
+if($_GET["action"] == "key_delete" and $acl->hasPermission("expert_settings")){
      deleteconfig($_GET["key"]);
      header("Location: index.php?action=settings");
      exit();
      }
 
-if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $_SESSION["group"] >= 50){
+if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $acl->hasPermission("languages")){
      db_query("DELETE FROM " . tbname("languages") . " WHERE id = " . intval($_GET["delete"]));
     
     
      }
 
-if($_GET["action"] == "languages" and !empty($_GET["default"]) and $_SESSION["group"] >= 50){
+if($_GET["action"] == "languages" and !empty($_GET["default"]) and $acl->hasPermission("languages")){
      setconfig("default_language", $_GET["default"]);
      }
 
 
-if(isset($_POST["add_language"]) and $_SESSION["group"] >= 50){
+if(isset($_POST["add_language"]) and $acl->hasPermission("languages")){
      if(!empty($_POST["name"]) and !empty($_POST["language_code"])){
          $name = db_escape($_POST["name"]);
          $language_code = db_escape($_POST["language_code"]);
@@ -146,127 +145,6 @@ if(isset($_POST["add_language"]) and $_SESSION["group"] >= 50){
       VALUES('$name', '$language_code')");
          }
      }
-
-
-if(isset($_POST["add_menu_item"]) and $_SESSION["group"] >= 50){
-     $query = db_query("SELECT position FROM " .
-         tbname("backend_menu_structure") . " ORDER BY position DESC LIMIT 1");
-     if(db_num_rows($query) > 0){
-         $fetched_assoc = db_fetch_assoc($query);
-         $position = $fetched_assoc["position"] + 1;
-         }else{
-         $position = 1;
-         }
-    
-     $action = db_escape($_POST["action"]);
-     $label = db_escape($_POST["label"]);
-    
-     db_query("INSERT INTO " . tbname("backend_menu_structure") .
-         "(action, label, position) 
-   VALUES('$action', '$label', $position)");
-     }
-
-
-if($_GET["action"] == "customize_menu" and
-     isset($_GET["delete"]) and
-         $_SESSION["group"] >= 50){
-     $delete = intval($_GET["delete"]);
-     db_query("DELETE FROM " . tbname("backend_menu_structure") .
-         " WHERE position = $delete");
-     db_query("UPDATE " . tbname("backend_menu_structure") .
-         " SET position = position - 1 WHERE position > $delete ");
-     }
-
-
-// Move Menu Item Up
-if($_GET["action"] == "customize_menu" and isset($_GET["up"])
-         and $_SESSION["group"] >= 50){
-     $current_position = intval($_GET["up"]);
-     if($current_position != 1){
-        
-         db_query("UPDATE " .
-             tbname("backend_menu_structure") . " SET position = -1" .
-             " WHERE position = $current_position");
-        
-         db_query("UPDATE " .
-             tbname("backend_menu_structure") . " SET position = -2" .
-             " WHERE position = $current_position - 1");
-        
-        
-        
-         db_query("UPDATE " .
-             tbname("backend_menu_structure") . " SET position = $current_position - 1" .
-             " WHERE position = -1");
-        
-        
-         db_query("UPDATE " .
-             tbname("backend_menu_structure") . " SET position = $current_position" .
-             " WHERE position = -2");
-        
-        
-        
-        
-        
-         }
-    
-     }
-
-
-
-// Move Menu Item Down
-if($_GET["action"] == "customize_menu" and isset($_GET["down"])
-         and $_SESSION["group"] >= 50){
-     $current_position = intval($_GET["down"]);
-    
-     $query = db_query("SELECT position FROM " .
-         tbname("backend_menu_structure") . " ORDER BY position DESC LIMIT 1");
-     if(db_num_rows($query) > 0){
-         $fetched_assoc = db_fetch_assoc($query);
-         $last_position = $fetched_assoc["position"];
-         }else{
-         $last_position = 1;
-         }
-    
-    
-    
-     if($current_position != $last_position){
-        
-        
-        
-        
-         db_query("UPDATE " .
-             tbname("backend_menu_structure") . " SET position = -1" .
-             " WHERE position = $current_position");
-        
-         db_query("UPDATE " .
-             tbname("backend_menu_structure") . " SET position = -2" .
-             " WHERE position = $current_position + 1");
-        
-        
-        
-         db_query("UPDATE " .
-             tbname("backend_menu_structure") . " SET position = $current_position + 1" .
-             " WHERE position = -1");
-        
-        
-         db_query("UPDATE " .
-             tbname("backend_menu_structure") . " SET position = $current_position" .
-             " WHERE position = -2");
-        
-        
-        
-        
-        
-         }
-    
-     }
-
-
-
-
-
-
-
 
 if($_GET["action"] == "banner_delete" && $acl->hasPermission("banner")){
      $banner = intval($_GET["banner"]);
@@ -409,7 +287,7 @@ if($_POST["add_banner"] == "add_banner" && $acl->hasPermission("banner")){
      }
 
 
-if($_POST["add_key"] == "add_key" && $_SESSION["group"] >= 40){
+if($_POST["add_key"] == "add_key" and $acl->hasPermission("expert_settings")){
     
      $name = db_escape($_POST["name"]);
      $value = db_escape($_POST["value"]);
@@ -516,7 +394,7 @@ function resize_image($file, $target, $w, $h, $crop = FALSE){
 
 // Logo Upload
 if(!empty($_FILES['logo_upload_file']['name'])
-         and $_SESSION["group"] >= 40){
+         and $acl->hasPermission("logo")){
      if(!file_exists("../content/images")){
          @mkdir("../content/images");
          @chmod("../content/images", 0777);
@@ -631,8 +509,6 @@ about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");
     
      }
 
-
-
 if($_POST["edit_banner"] == "edit_banner" && $acl->hasPermission("banner")){
      $name = db_escape($_POST["banner_name"]);
      $image_url = db_escape($_POST["image_url"]);
@@ -648,7 +524,7 @@ SET name='$name',link_url='$link_url',image_url='$image_url' WHERE id=$id");
     
      }
 
-if($_POST["edit_key"] == "edit_key" && $_SESSION["group"] >= 50){
+if($_POST["edit_key"] == "edit_key" && $acl->hasPermission("expert_settings")){
      $name = db_escape($_POST["name"]);
      $value = db_escape($_POST["value"]);
      $id = intval($_POST["id"]);
