@@ -1,19 +1,27 @@
-Mit diesem Paket können Sie eine UliCMS 2014R8 (Version 6.4) auf UliCMS2014R9 (Version 6.5) upgraden.
+ï»¿Mit diesem Paket kÃ¶nnen Sie eine UliCMS 2014R8 (Version 6.4) auf UliCMS2014R9 (Version 6.7) upgraden.
 
-Dazu führen Sie bitte die folgenden Schritte durch:
+Dazu fÃ¼hren Sie bitte die folgenden Schritte durch:
 1. Datenbank und FTP-Server der Website sichern.
 
 2. Inhalt des Ordners "ulicms" in das Wurzelverzeichnis des CMS hochladen und bereits existierende Dateien ersetzen lassen.
 
-3. Die Datei "cms-config.php" öffnen und alle Variablen die mit mysql_ anfangen so umbennen dass diese stattdessen mit db_ anfangen.
+3. Die Datei "cms-config.php" Ã¶ffnen und alle Variablen die mit mysql_ anfangen so umbennen dass diese stattdessen mit db_ anfangen.
 
 4. In der Datei "cms-config.php" die zweite Zeile so modifizieren, dass dort folgendes steht:
 class config extends baseConfig{
 
 5. Die Datei "update.php" auf dem FTP-Server beschreibar machen (chmod 0755 oder 0777)
 
-6. In den Administrationsbereich als Admin-user einloggen und darüber das Update-Skript ausführen lassen
+6. Die Datei "update.php" Ã¼ber den Browser aufrufen
 
-7. Falls die Datei "update.php" nicht automatisch gelöscht werden konnte, diese Datei manuell löschen
+7. Als Administrator ins System einloggen 
 
-8. Inkompatible Pakete über die Paketverwaltung aktualisieren
+8. Unter "Gruppen" eine Gruppe "Administrator" anlegen und dieser die entsprechenden Berechtigungen geben.
+
+9. Unter "Willkommen" > "Profil bearbeiten" Ihrem Benutzerkonto die im vorherigen Schritt angelegte ACL-Gruppe zuweisen.
+
+10. Ab- und wieder Anmelden.
+
+11. Inkompatible Pakete Ã¼ber die Paketverwaltung aktualisieren
+
+12. Fertig
