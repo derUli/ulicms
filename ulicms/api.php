@@ -576,7 +576,7 @@ function uninstall_module($name, $type = "module"){
 
 // Ist der User eingeloggt
 function is_logged_in(){
-     return isset($_SESSION["group"]);
+     return isset($_SESSION["logged_in"]);
      }
 
 // Hat der Nutzer die notwendige Berechtigung

@@ -87,6 +87,8 @@ function register_session($user, $redirect = true){
      
      // Group ID
      $_SESSION["group_id"] = $user["group_id"];
+     
+     $_SESSION["logged_in"] = true;
      if(is_null($_SESSION["group_id"]))
         $_SESSION["group_id"] = 0;
      
