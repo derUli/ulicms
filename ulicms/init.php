@@ -4,7 +4,8 @@
  */
 
  // root directory of UliCMS
-define("ULICMS_ROOT", dirname(__file__));
+if(!defined("ULICMS_ROOT"))
+   define("ULICMS_ROOT", dirname(__file__));
 
 
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
