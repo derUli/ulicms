@@ -1,6 +1,7 @@
-﻿<?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 40){
-         ?>
+<?php if(defined("_SECURITY")){
+$acl = new ACL();
+if($acl->hasPermission("banners")){
+?>
 
 <form action="index.php?action=banner" method="post">
 <input type="hidden" name="add_banner" value="add_banner">

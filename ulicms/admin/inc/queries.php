@@ -146,7 +146,7 @@ if(isset($_POST["add_language"]) and $acl->hasPermission("languages")){
          }
      }
 
-if($_GET["action"] == "banner_delete" && $acl->hasPermission("banner")){
+if($_GET["action"] == "banner_delete" && $acl->hasPermission("banners")){
      $banner = intval($_GET["banner"]);
      $query = db_query("DELETE FROM " . tbname("banner") . " WHERE id='$banner'", $connection);
      header("Location: index.php?action=banner");
@@ -273,7 +273,7 @@ if($_POST["add_page"] == "add_page" && $acl->hasPermission("pages")){
     
      }
 
-if($_POST["add_banner"] == "add_banner" && $acl->hasPermission("banner")){
+if($_POST["add_banner"] == "add_banner" && $acl->hasPermission("banners")){
     
      $name = db_escape($_POST["banner_name"]);
      $image_url = db_escape($_POST["image_url"]);
@@ -509,7 +509,7 @@ about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");
     
      }
 
-if($_POST["edit_banner"] == "edit_banner" && $acl->hasPermission("banner")){
+if($_POST["edit_banner"] == "edit_banner" && $acl->hasPermission("banners")){
      $name = db_escape($_POST["banner_name"]);
      $image_url = db_escape($_POST["image_url"]);
      $link_url = db_escape($_POST["link_url"]);

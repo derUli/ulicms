@@ -1,6 +1,7 @@
 <?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 40){
-         ?>
+$acl = new ACL();
+if($acl->hasPermission("banners")){
+?>
 
 
 <h2>Werbebanner</h2>
