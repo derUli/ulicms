@@ -1,7 +1,7 @@
 <?php if(defined("_SECURITY")){
-$acl = new ACL();
-if($acl->hasPermission("banners")){
-?>
+    $acl = new ACL();
+    if($acl -> hasPermission("banners")){
+        ?>
 
 <form action="index.php?action=banner" method="post">
 <input type="hidden" name="add_banner" value="add_banner">
@@ -19,12 +19,12 @@ if($acl->hasPermission("banners")){
 <br/><br/>
 <input type="submit" value="Datensatz hinzufügen">
 <?php
-        if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-            ?>
+         if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+             ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-        ?>
+         ?>
 </form>
 <?php
         

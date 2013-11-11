@@ -46,13 +46,13 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
      $email = db_escape($email);
      $password = $password;
      // legacy group
-     $group = intval($group);
-     // Default ACL Group     
-     if(!$acl_group)
-        $acl_group = getconfig("default_acl_group");
-        
+    $group = intval($group);
+     // Default ACL Group
+    if(!$acl_group)
+         $acl_group = getconfig("default_acl_group");
+    
      if(is_null($acl_group))
-        $acl_group = "NULL";     
+         $acl_group = "NULL";
     
      db_query("INSERT INTO " . tbname("admins") . " 
 (username,lastname, firstname, email, password, `group`, `group_id`) VALUES('$username',' $lastname','$firstname','$email','" . hash_password($password) . "',$group, $acl_group)");
@@ -63,10 +63,10 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
      "Passwort: $password\n";
      $header = "From: " . getconfig("email") . "\n" .
      "Content-type: text/plain; charset=utf-8";
-     
+    
      if($sendMessage){
-       @mail($email, "Dein Benutzer-Account bei " . $_SERVER["SERVER_NAME"], $message, $header);
-     }
+         @mail($email, "Dein Benutzer-Account bei " . $_SERVER["SERVER_NAME"], $message, $header);
+         }
      }
 
 function user_exists($name){
@@ -83,15 +83,15 @@ function register_session($user, $redirect = true){
      $_SESSION["email"] = $user["email"];
      $_SESSION["login_id"] = $user["id"];
      // Soll durch group_id und eine ACL ersetzt werden
-     $_SESSION["group"] = $user["group"];
-     
+    $_SESSION["group"] = $user["group"];
+    
      // Group ID
-     $_SESSION["group_id"] = $user["group_id"];
-     
+    $_SESSION["group_id"] = $user["group_id"];
+    
      $_SESSION["logged_in"] = true;
      if(is_null($_SESSION["group_id"]))
-        $_SESSION["group_id"] = 0;
-     
+         $_SESSION["group_id"] = 0;
+    
      $_SESSION["session_begin"] = time();
     
      if(!$redirect)

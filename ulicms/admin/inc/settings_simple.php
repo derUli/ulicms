@@ -1,6 +1,6 @@
 <?php if(defined("_SECURITY")){
-$acl = new ACL();
-     if($acl->hasPermission("settings_simple")){
+    $acl = new ACL();
+     if($acl -> hasPermission("settings_simple")){
         
          $query = db_query("SELECT * FROM " . tbname("settings") . " ORDER BY name", $connection);
          $settings = Array();
@@ -244,12 +244,12 @@ Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</s
 <input type="hidden" name="save_settings" value="save_settings">
 
 <?php
-            if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-                ?>
+             if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+                 ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-            ?>
+             ?>
 </form>
 <script type="text/javascript">
 $("#settings_simple").ajaxForm({beforeSubmit: function(e){

@@ -1,8 +1,8 @@
-<?php 
+<?php
 if(defined("_SECURITY")){
-   $acl = new ACL();
-   if(is_admin() or $acl->hasPermission("update_system")){
-?>
+     $acl = new ACL();
+     if(is_admin() or $acl -> hasPermission("update_system")){
+        ?>
 
 <?php if(file_exists("../update.php")){
              ?>

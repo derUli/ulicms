@@ -1,6 +1,6 @@
 <?php if(defined("_SECURITY")){
-$acl = new ACL();
-if($acl->hasPermission("banners")){
+    $acl = new ACL();
+    if($acl -> hasPermission("banners")){
          $banner = db_escape($_GET["banner"]);
          $query = db_query("SELECT * FROM " . tbname("banner") . " WHERE id='$banner'");
          while($row = db_fetch_object($query)){
@@ -33,12 +33,12 @@ if($acl->hasPermission("banners")){
 <br/><br/>
 <input type="submit" value="OK">
 <?php
-            if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-                ?>
+             if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+                 ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-            ?>
+             ?>
 </form>
 
 <?php

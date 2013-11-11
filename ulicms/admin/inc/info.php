@@ -2,14 +2,14 @@
      include_once "../version.php";
      $version = new ulicms_version();
      $acl = new ACL();
-     if(!$acl->hasPermission("info")){
-        noperms();     
-     } else {
-     ?>
+     if(!$acl -> hasPermission("info")){
+         noperms();
+         }else{
+         ?>
 <h4>UliCMS</h4>
 <small>Release <?php echo $version -> getVersion();
-     ?> (v<?php echo implode(".", $version -> getInternalVersion());
-     ?>)</small>
+         ?> (v<?php echo implode(".", $version -> getInternalVersion());
+         ?>)</small>
 <br/>
 
 <p>
@@ -32,6 +32,6 @@
 
 
 <?php }
-
-}
+    
+    }
 ?>

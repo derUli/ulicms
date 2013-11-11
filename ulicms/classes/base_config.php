@@ -8,4 +8,4 @@ class baseConfig{
          return setconfig(db_escape($var), db_escape($value));
          }
     
-    }
+     }

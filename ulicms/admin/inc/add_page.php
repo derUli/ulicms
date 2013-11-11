@@ -1,6 +1,6 @@
 <?php if(defined("_SECURITY")){
-$acl = new ACL();
-     if($acl->hasPermission("pages")){
+    $acl = new ACL();
+     if($acl -> hasPermission("pages")){
         
          ?>
 <form id="pageform" name="newpageform" action="index.php?action=pages" method="post">
@@ -49,14 +49,14 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 <strong data-tooltip="In welchem Menü soll diese Seite angezeigt werden?">Menü:</strong><br/>
 <select name="menu" size=1>
 <?php
-        foreach(getAllMenus() as $menu){
-            ?>
+         foreach(getAllMenus() as $menu){
+             ?>
 <option value="<?php echo $menu?>"><?php echo $menu;
-            ?></option>
+             ?></option>
 <?php
             
-            }
-        ?>
+             }
+         ?>
 </select><br/> <br/>
 
 <strong data-tooltip="Die Position dieser Seite im Menü">Position:</strong><br/>
@@ -197,12 +197,12 @@ function confirmExit()
 <input type="submit" value="Speichern">
 </div>
 <?php
-        if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-            ?>
+         if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+             ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-        ?>
+         ?>
 
 </form>
 

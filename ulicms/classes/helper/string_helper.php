@@ -101,4 +101,4 @@ class stringHelper{
         return $return;
          }
     
-    }
+     }

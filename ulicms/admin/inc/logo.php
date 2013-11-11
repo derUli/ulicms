@@ -36,12 +36,12 @@ Das Bild darf maximal 500 x 100 Pixel haben.
 </div>
 
 <?php
-        if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-            ?>
+         if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+             ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-        ?>
+         ?>
 </form>
 
 <?php

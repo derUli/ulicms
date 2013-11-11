@@ -44,22 +44,22 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <p><img src="media/chmod_02.png" alt="FTP Rechtevergabe" title="FTP Rechtevergabe" border=1/></p>
 <br/>
 <?php
-    if (!function_exists('gd_info')){
-        ?>
+     if (!function_exists('gd_info')){
+         ?>
 <hr/>
 <p style="color:red;"><strong>php5-gd</strong> ist nicht installiert.<br/>Ohne <strong>php5-gd</strong> lässt sich UliCMS zwar installieren,<br/>jedoch wird der Dateimanager und die Verarbeitung von Grafikdateien nicht funktionieren.</p>
 <hr/>
 <?php }
-    ?>
+     ?>
 
 
 <?php
-    if (!function_exists('mysqli_connect')){
-        ?>
+     if (!function_exists('mysqli_connect')){
+         ?>
 <p style="color:red;"><strong>php5-mysql</strong> ist nicht installiert.<br/>Ohne <strong>php5-mysql</strong> lässt sich UliCMS nicht installieren,<br/>da dieses PHP-Modul für die Kommunikation mit<br/>dem Datenbankserver benötigt wird.</p>
 
 <?php }else{
-        ?>
+         ?>
 
 <form action="index.php" method="post">
 <input type="hidden" name="step" value="1">
@@ -68,7 +68,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <br/>
 
 <?php }
-    ?>
+     ?>
 <?php
      }else{
      ?>
@@ -220,22 +220,22 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `group_id` int(11) NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysqli_error($connection));
-
-$create_table_groups_sql = "CREATE TABLE IF NOT EXISTS `".$prefix."groups` (
+        
+        $create_table_groups_sql = "CREATE TABLE IF NOT EXISTS `" . $prefix . "groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `permissions` mediumtext NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
-
-mysqli_query($connection, $create_table_groups_sql)or die(mysqli_error($connection));
         
-$insert_group_query = 'INSERT INTO `'.$prefix.'groups` (`id`, `name`, `permissions`) VALUES
+        mysqli_query($connection, $create_table_groups_sql)or die(mysqli_error($connection));
+        
+        $insert_group_query = 'INSERT INTO `' . $prefix . 'groups` (`id`, `name`, `permissions`) VALUES
 (1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"flash":true,"groups":true,"images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"templates":true,"update_system":true,"users":true}\')';
-
-mysqli_query($connection, $insert_group_query);
-
+        
+        mysqli_query($connection, $insert_group_query);
+        
         
          $vorname = mysqli_real_escape_string($connection, $_POST["firstname"]);
          $nachname = mysqli_real_escape_string($connection, $_POST["lastname"]);
@@ -246,7 +246,7 @@ mysqli_query($connection, $insert_group_query);
          $encrypted_passwort = sha1($salt . $passwort);
         
          mysqli_query($connection, "INSERT INTO `" . $prefix . "admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`, `group_id`) VALUES
-(1, 0, '".$admin_user."', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50, 1);")or die(mysqli_error($connection));
+(1, 0, '" . $admin_user . "', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50, 1);")or die(mysqli_error($connection));
         
          mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -303,7 +303,7 @@ mysqli_query($connection, $insert_group_query);
          $homepage_title = mysqli_real_escape_string($connection, $_POST["homepage_title"]);
          $motto = mysqli_real_escape_string($connection, $_POST["motto"]);
         
-        $badwords = "viagra
+         $badwords = "viagra
 vicodin
 cialis
 xanax
@@ -428,7 +428,7 @@ var $db_type="mysql";
          $message = "Hallo $zusammen!\n" .
          "Auf " . $_SERVER["SERVER_NAME"] . " wurde UliCMS erfolgreich installiert\n\n" .
          "Die Zugangsdaten lauten:\n" .
-         "Benutzername: ".$admin_user."\n" .
+         "Benutzername: " . $admin_user . "\n" .
          "Passwort: $passwort\n\n" .
          "Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen.";
         

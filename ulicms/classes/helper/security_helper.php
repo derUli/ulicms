@@ -1,6 +1,6 @@
 <?php
 class securityHelper{
-    // Hash Salt + Passwort with SHA1
+     // Hash Salt + Passwort with SHA1
     public static function hash_password($password){
          $salt = getconfig("password_salt");
         
@@ -14,4 +14,4 @@ class securityHelper{
          return sha1($salt . $password);
          }
     
-    }
+     }

@@ -1,5 +1,5 @@
 <?php if(defined("_SECURITY")){
-     if(is_admin() or $acl->hasPermission("users")){
+     if(is_admin() or $acl -> hasPermission("users")){
         
          $query = db_query("SELECT * FROM " . tbname("admins") . " ORDER BY id", $connection);
          if(db_num_rows($query)){
@@ -24,12 +24,12 @@
 <br/><br/>
 <input type="submit" value="Benutzer anlegen">
 <?php
-            if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-                ?>
+             if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+                 ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-            ?>
+             ?>
 </form>
 
 <?php

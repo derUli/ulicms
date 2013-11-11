@@ -1,60 +1,60 @@
-<?php 
+<?php
 $acl = new ACL();
 
-if($acl->hasPermission("dashboard")){
-?>
+if($acl -> hasPermission("dashboard")){
+    ?>
 
 <?php
- if(defined("_SECURITY") and logged_in()){
-     $pages_count = db_num_rows(db_query("SELECT * FROM " . tbname("content")));
-    
-     $topPages = db_query("SELECT * FROM " . tbname("content") . " WHERE notinfeed = 0 AND systemname <> \"kontakt\" ORDER BY views DESC LIMIT 5");
-     $lastModfiedPages = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname <> \"kontakt\" ORDER BY lastmodified DESC LIMIT 5");
-    
-     $admins_query = db_query("SELECT * FROM " . tbname("admins"));
-    
-     $admins = Array();
-    
-     while($row = db_fetch_object($admins_query)){
-         $admins[$row -> id] = $row -> username;
-         }
-    
-    
-     $users_online = db_query("SELECT * FROM " . tbname("admins") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
-    
-     ?>
+     if(defined("_SECURITY") and logged_in()){
+         $pages_count = db_num_rows(db_query("SELECT * FROM " . tbname("content")));
+        
+         $topPages = db_query("SELECT * FROM " . tbname("content") . " WHERE notinfeed = 0 AND systemname <> \"kontakt\" ORDER BY views DESC LIMIT 5");
+         $lastModfiedPages = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname <> \"kontakt\" ORDER BY lastmodified DESC LIMIT 5");
+        
+         $admins_query = db_query("SELECT * FROM " . tbname("admins"));
+        
+         $admins = Array();
+        
+         while($row = db_fetch_object($admins_query)){
+             $admins[$row -> id] = $row -> username;
+             }
+        
+        
+         $users_online = db_query("SELECT * FROM " . tbname("admins") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
+        
+         ?>
 <p>Hallo <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"];
-     ?>! [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
+         ?>! [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
 </p>
 
 <?php
-     $updateInfo = checkForUpdates();
-    
-     if($updateInfo and is_admin()){
-         ?>
+         $updateInfo = checkForUpdates();
+        
+         if($updateInfo and is_admin()){
+             ?>
 <h2>Update Verfügbar</h2>
 <?php echo strip_tags($updateInfo,
-             "<p><a><strong><b><u><em><i><span><img>");
-         ?>
+                 "<p><a><strong><b><u><em><i><span><img>");
+             ?>
 <?php }
-     ?>
+         ?>
 
 
 <?php $motd = getconfig("motd");
-     if($motd or strlen($motd) > 10){
-         $motd = nl2br($motd);
-         ?>
+         if($motd or strlen($motd) > 10){
+             $motd = nl2br($motd);
+             ?>
 
 <div id="accordion-container"> 
 
 <h2 class="accordion-header">Nachricht des Tages</h2>
 <div class="accordion-content">
 <?php echo $motd;
-         ?>
+             ?>
 </div>
 <?php
-         }
-     ?>
+             }
+         ?>
 <h2 class="accordion-header">Statistiken</h2>      
 <div class="accordion-content">
 <table border=1>    
@@ -68,30 +68,30 @@ if($acl->hasPermission("dashboard")){
 </tr>
 
 <?php if(getconfig("contact_form_refused_spam_mails") !== false){
-         ?>
+             ?>
 <tr>
 <td>Blockierte Spam-Mails</td>
 <td><?php echo getconfig("contact_form_refused_spam_mails")?></td>
 </tr>
 <?php
-         }
-     ?>
-<?php $test = db_query("SELECT * FROM " . tbname("guestbook_entries"));
-     if($test){
+             }
          ?>
+<?php $test = db_query("SELECT * FROM " . tbname("guestbook_entries"));
+         if($test){
+             ?>
 <tr>
 <td>Gästebucheinträge</td>
 <td><?php echo db_num_rows($test)?></td>
 </tr>
 <?php }
-     ?>
+         ?>
 </table>
 </div>
 <h2 class="accordion-header">Jetzt online sind</h2>
 <div class="accordion-content">
 <ul id="users_online">
 <?php include_once "inc/users_online_dashboard.php";
-     ?>
+         ?>
 </ul>
 </div>
 <h2 class="accordion-header">Top-Seiten</h2>
@@ -102,15 +102,15 @@ if($acl->hasPermission("dashboard")){
 <td>Views</td>
 </tr>
 <?php while($row = db_fetch_object($topPages)){
-         ?>
+             ?>
 <tr>
 <td><a href="../<?php echo $row -> systemname;
-         ?>.html" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
-         ?></a></td>
+             ?>.html" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
+             ?></a></td>
 <td align="right"><?php echo $row -> views;
-         ?></td>
+             ?></td>
 <?php }
-     ?>
+         ?>
 </tr>
 </table>
 </p>
@@ -126,41 +126,41 @@ if($acl->hasPermission("dashboard")){
 </tr>
 
 <?php while($row = db_fetch_object($lastModfiedPages)){
-         ?>
+             ?>
 <tr>
 <td><a href="../<?php echo $row -> systemname;
-         ?>.html" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
-         ?></a></td>
+             ?>.html" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
+             ?></a></td>
 
 <td><?php echo date(env("date_format"), $row -> lastmodified)?></td>
 <td>
 <?php
-         $autorName = $admins[$row -> lastchangeby];
-         if(!empty($autorName)){
-             }else{
-             $autorName = $admins[$row -> autor];
-             }
-        
-         echo $autorName;
-         ?></td>
+             $autorName = $admins[$row -> lastchangeby];
+             if(!empty($autorName)){
+                 }else{
+                 $autorName = $admins[$row -> autor];
+                 }
+            
+             echo $autorName;
+             ?></td>
 
 </tr>
 <?php }
-     ?>
+         ?>
 </table>
 </div>
 <?php add_hook("accordion_layout");
-     ?>
+         ?>
 </div>
 </div>
 
 <?php
-     }
+         }
+    
+    ?>
 
-?>
-
-<?php } else {
-noperms();
-}
+<?php }else{
+    noperms();
+    }
 ?>
 

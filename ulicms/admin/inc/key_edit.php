@@ -2,7 +2,7 @@
 $acl = new ACL();
 
 if(defined("_SECURITY")){
-     if($acl->hasPermission("expert_settings")){
+     if($acl -> hasPermission("expert_settings")){
          $key = intval($_GET["key"]);
          $query = db_query("SELECT * FROM " . tbname("settings") . " WHERE id='$key'");
          while($row = db_fetch_object($query)){
@@ -25,12 +25,12 @@ if(defined("_SECURITY")){
 <input type="submit" value="OK">
 
 <?php
-            if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-                ?>
+             if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+                 ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-            ?>
+             ?>
 </form>
 
 

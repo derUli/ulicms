@@ -8,7 +8,7 @@ function getOnlineUsers(){
          array_push($users, $row -> username);
          }
      return $users;
-    }
+     }
 
 // get a config variable
 function getconfig($key){
@@ -25,7 +25,7 @@ function getconfig($key){
      }
 
 if(!function_exists("get_host")){
-    function get_host(){
+     function get_host(){
          if ($host = $_SERVER['HTTP_X_FORWARDED_HOST'])
         {
              $elements = explode(',', $host);
@@ -47,9 +47,9 @@ if(!function_exists("get_host")){
         $host = preg_replace('/:\d+$/', '', $host);
         
          return trim($host);
-        }
+         }
     
-    }
+     }
 
  function clearCache(){
      add_hook("before_clear_cache");
@@ -327,7 +327,7 @@ function convertLineEndingsToLF($s){
 
 function isModuleInstalled($name){
      return in_array($name, getAllModules());
-    }
+     }
 
 function getAllModules(){
      $pkg = new packageManager();
@@ -513,7 +513,7 @@ function getAllMenus(){
              }
          }
      return $menus;
-    }
+     }
 
 // Check if site contains a module
 function containsModule($page, $module = false){

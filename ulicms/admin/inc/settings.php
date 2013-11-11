@@ -1,7 +1,7 @@
 <?php
 $acl = new ACL();
 if(defined("_SECURITY")){
-     if($acl->hasPermission("expert_settings")){
+     if($acl -> hasPermission("expert_settings")){
         
          $query = db_query("SELECT * FROM " . tbname("settings") . " ORDER BY name", $connection);
          if(db_num_rows($query) > 0){

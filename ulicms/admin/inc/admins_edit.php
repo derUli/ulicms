@@ -1,9 +1,9 @@
 <?php if(defined("_SECURITY")){
-include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
-$acl = new ACL();
+    include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
+    $acl = new ACL();
     
-     if($acl->hasPermission("group") or is_admin() or
-         ($_GET["admin"] == $_SESSION["login_id"])){
+     if($acl -> hasPermission("group") or is_admin() or
+             ($_GET["admin"] == $_SESSION["login_id"])){
         
          $admin = intval($_GET["admin"]);
         
@@ -17,7 +17,9 @@ $acl = new ACL();
              ?>">
 <strong data-tooltip="Dieser Name wird zur Anmeldung benötigt. Er ist nicht änderbar.">Benutzername:</strong><br/>
 <input type="text" style="width:300px;" name="admin_username" value="<?php echo $row -> username;
-             ?>" <?php if(!$acl->hasPermission("users")){?>readonly="readonly"<?php }?>>
+             ?>" <?php if(!$acl -> hasPermission("users")){
+                ?>readonly="readonly"<?php }
+            ?>>
 <br/><br/>
 <?php if(file_exists("../content/avatars/" . $row -> avatar_file) and !empty($row -> avatar_file)){
                  ?>
@@ -44,26 +46,33 @@ Avatar hochladen:<br/>
              ?>"><br/><br/>
 <strong>neues Passwort:</strong><br/>
 <input type="text" style="width:300px;" name="admin_password" value=""> <br/>
-<?php 
-$acl = new ACL();
-if($acl->hasPermission("users")){
-
-$allGroups = $acl->getAllGroups();
-asort($allGroups);
-?>
+<?php
+            $acl = new ACL();
+            if($acl -> hasPermission("users")){
+                
+                $allGroups = $acl -> getAllGroups();
+                asort($allGroups);
+                ?>
 <br>
 <strong>ACL-Gruppe:</strong>
 <br/>
 <select name="group_id">
-<option value="-" <?php if($row -> group_id === null){ echo "selected"; }?>>[Keine]</option>
-<?php foreach($allGroups as $key => $value){?>
-<option value="<?php echo $key;?>" <?php 
-if(intval($row -> group_id) == $key)
-{ echo "selected"; 
-
-}
-?>><?php echo  real_htmlspecialchars($value)?></option>
-<?php }?>
+<option value="-" <?php if($row -> group_id === null){
+                    echo "selected";
+                }
+                ?>>[Keine]</option>
+<?php foreach($allGroups as $key => $value){
+                    ?>
+<option value="<?php echo $key;
+                    ?>" <?php
+                    if(intval($row -> group_id) == $key)
+                        {
+                        echo "selected";
+                        
+                        }
+                    ?>><?php echo real_htmlspecialchars($value)?></option>
+<?php }
+                ?>
 </select>
 
 <br/>
@@ -90,10 +99,10 @@ if(intval($row -> group_id) == $key)
 <input type="hidden" name="admin_rechte" value="<?php echo $row -> group?>">
 
 <input type="hidden" name="group_id" value=<?php if(!$_SESSION["group_id"])
-   echo "-";
-else
-   echo $_SESSION["group_id"];
-?>">
+                     echo "-";
+                else
+                     echo $_SESSION["group_id"];
+                ?>">
 <?php }
              ?>
 <br/>
@@ -114,12 +123,12 @@ else
 <br/> <br/>
 <input type="submit" value="OK">
 <?php
-            if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-                ?>
+             if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+                 ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-            ?>
+             ?>
 </form>
 
 <?php

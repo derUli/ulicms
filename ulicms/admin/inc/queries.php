@@ -5,7 +5,7 @@ $acl = new ACL();
 add_hook("query");
 
 if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
-    setconfig("registered_user_default_level", intval($_POST["registered_user_default_level"]));
+     setconfig("registered_user_default_level", intval($_POST["registered_user_default_level"]));
     
      setconfig("homepage_title", db_escape($_POST["homepage_title"]));
      setconfig("homepage_owner", db_escape($_POST["homepage_owner"]));
@@ -48,7 +48,7 @@ if(isset($_GET["clear_cache"])){
      }
 
 
-if($_GET["action"] == "undelete_page" && $acl->hasPermission("pages")){
+if($_GET["action"] == "undelete_page" && $acl -> hasPermission("pages")){
      $page = intval($_GET["page"]);
      db_query("UPDATE " . tbname("content") . " SET `deleted_at` = NULL" .
          " WHERE id=$page");
@@ -57,7 +57,7 @@ if($_GET["action"] == "undelete_page" && $acl->hasPermission("pages")){
     
      }
 
-if($_GET["action"] == "pages_delete" && $acl->hasPermission("pages")){
+if($_GET["action"] == "pages_delete" && $acl -> hasPermission("pages")){
      $page = intval($_GET["page"]);
      db_query("UPDATE " . tbname("content") . " SET `deleted_at` = " . time() .
          " WHERE id=$page");
@@ -95,7 +95,7 @@ if($_GET["action"] == "spam_filter" and
 
 
 
-if(!empty($_POST["save_template"]) and !empty($_POST["code"]) && $acl->hasPermission("templates")){
+if(!empty($_POST["save_template"]) and !empty($_POST["code"]) && $acl -> hasPermission("templates")){
      $theme = getconfig("theme");
      $save = getTemplateDirPath($theme) . basename($_POST["save_template"]);
      if(is_file($save) && is_writable($save)){
@@ -119,24 +119,24 @@ if($_GET["action"] == "empty_trash"){
      }
 
 
-if($_GET["action"] == "key_delete" and $acl->hasPermission("expert_settings")){
+if($_GET["action"] == "key_delete" and $acl -> hasPermission("expert_settings")){
      deleteconfig($_GET["key"]);
      header("Location: index.php?action=settings");
      exit();
      }
 
-if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $acl->hasPermission("languages")){
+if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $acl -> hasPermission("languages")){
      db_query("DELETE FROM " . tbname("languages") . " WHERE id = " . intval($_GET["delete"]));
     
     
      }
 
-if($_GET["action"] == "languages" and !empty($_GET["default"]) and $acl->hasPermission("languages")){
+if($_GET["action"] == "languages" and !empty($_GET["default"]) and $acl -> hasPermission("languages")){
      setconfig("default_language", $_GET["default"]);
      }
 
 
-if(isset($_POST["add_language"]) and $acl->hasPermission("languages")){
+if(isset($_POST["add_language"]) and $acl -> hasPermission("languages")){
      if(!empty($_POST["name"]) and !empty($_POST["language_code"])){
          $name = db_escape($_POST["name"]);
          $language_code = db_escape($_POST["language_code"]);
@@ -146,7 +146,7 @@ if(isset($_POST["add_language"]) and $acl->hasPermission("languages")){
          }
      }
 
-if($_GET["action"] == "banner_delete" && $acl->hasPermission("banners")){
+if($_GET["action"] == "banner_delete" && $acl -> hasPermission("banners")){
      $banner = intval($_GET["banner"]);
      $query = db_query("DELETE FROM " . tbname("banner") . " WHERE id='$banner'", $connection);
      header("Location: index.php?action=banner");
@@ -154,7 +154,7 @@ if($_GET["action"] == "banner_delete" && $acl->hasPermission("banners")){
      }
 
 
-if($_GET["action"] == "admin_delete" && (is_admin() or $acl->hasPermission("users"))){
+if($_GET["action"] == "admin_delete" && (is_admin() or $acl -> hasPermission("users"))){
      $admin = intval($_GET["admin"]);
      $query = db_query("DELETE FROM " . tbname("admins") . " WHERE id='$admin'", $connection);
      header("Location: index.php?action=admins");
@@ -162,7 +162,7 @@ if($_GET["action"] == "admin_delete" && (is_admin() or $acl->hasPermission("user
      }
 
 
-if($_POST["add_page"] == "add_page" && $acl->hasPermission("pages")){
+if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
      if($_POST["system_title"] != ""){
         
          $system_title = db_escape($_POST["system_title"]);
@@ -273,7 +273,7 @@ if($_POST["add_page"] == "add_page" && $acl->hasPermission("pages")){
     
      }
 
-if($_POST["add_banner"] == "add_banner" && $acl->hasPermission("banners")){
+if($_POST["add_banner"] == "add_banner" && $acl -> hasPermission("banners")){
     
      $name = db_escape($_POST["banner_name"]);
      $image_url = db_escape($_POST["image_url"]);
@@ -287,7 +287,7 @@ if($_POST["add_banner"] == "add_banner" && $acl->hasPermission("banners")){
      }
 
 
-if($_POST["add_key"] == "add_key" and $acl->hasPermission("expert_settings")){
+if($_POST["add_key"] == "add_key" and $acl -> hasPermission("expert_settings")){
     
      $name = db_escape($_POST["name"]);
      $value = db_escape($_POST["value"]);
@@ -299,7 +299,7 @@ if($_POST["add_key"] == "add_key" and $acl->hasPermission("expert_settings")){
      exit();
      }
 
-if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl->hasPermission("users"))){
+if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl -> hasPermission("users"))){
      include_once "../lib/encryption.php";
      $username = db_escape($_POST["admin_username"]);
      $lastname = db_escape($_POST["admin_lastname"]);
@@ -308,7 +308,7 @@ if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl->hasPermission("use
      if($group === false)
          $group = 10;
      $email = db_escape($_POST["admin_email"]);
-     
+    
      adduser($username, $lastname, $firstname, $email, $password, $group, true);
     
      header("Location: index.php?action=admins");
@@ -320,7 +320,7 @@ if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl->hasPermission("use
 
 
 
-if($_POST["edit_page"] == "edit_page" && $acl->hasPermission("pages")){
+if($_POST["edit_page"] == "edit_page" && $acl -> hasPermission("pages")){
      $system_title = db_escape($_POST["page_"]);
      $page_title = db_escape($_POST["page_title"]);
      $activated = intval($_POST["activated"]);
@@ -394,7 +394,7 @@ function resize_image($file, $target, $w, $h, $crop = FALSE){
 
 // Logo Upload
 if(!empty($_FILES['logo_upload_file']['name'])
-         and $acl->hasPermission("logo")){
+         and $acl -> hasPermission("logo")){
      if(!file_exists("../content/images")){
          @mkdir("../content/images");
          @chmod("../content/images", 0777);
@@ -436,9 +436,9 @@ if(!empty($_FILES['logo_upload_file']['name'])
 
 
 
-if($_POST["edit_admin"] == "edit_admin" && (is_admin() or $acl->hasPermission("users"))
-     or ($_POST["edit_admin"] == "edit_admin" and $_SESSION["group"] >= 10
-         and $_POST["id"] == $_SESSION["login_id"])){
+if($_POST["edit_admin"] == "edit_admin" && (is_admin() or $acl -> hasPermission("users"))
+         or ($_POST["edit_admin"] == "edit_admin" and $_SESSION["group"] >= 10
+             and $_POST["id"] == $_SESSION["login_id"])){
     
      $id = intval($_POST["id"]);
      if(!empty($_FILES['avatar_upload']['name'])){
@@ -476,22 +476,22 @@ if($_POST["edit_admin"] == "edit_admin" && (is_admin() or $acl->hasPermission("u
      $email = db_escape($_POST["admin_email"]);
      $password = db_escape($_POST["admin_password"]);
      $rechte = db_escape($_POST["admin_rechte"]);
-     
+    
      if(isset($_POST["group_id"])){
-        $group_id = $_POST["group_id"];
-     if($group_id == "-")
-        $group_id = "NULL";
-     else
-        $group_id = intval($group_id);
+         $group_id = $_POST["group_id"];
+         if($group_id == "-")
+             $group_id = "NULL";
+         else
+             $group_id = intval($group_id);
         
-     } else {
-        $group_id = $_SESSION["group_id"];
-     }
-        
+         }else{
+         $group_id = $_SESSION["group_id"];
+         }
+    
      $icq_id = db_escape($_POST["icq_id"]);
      $skype_id = db_escape($_POST["skype_id"]);
      $about_me = db_escape($_POST["about_me"]);
-     db_query("UPDATE " . tbname("admins") . " SET username = '$username', `group`= $rechte, `group_id` = ".$group_id.", firstname='$firstname',
+     db_query("UPDATE " . tbname("admins") . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", firstname='$firstname',
 lastname='$lastname', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
 about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");
@@ -509,7 +509,7 @@ about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");
     
      }
 
-if($_POST["edit_banner"] == "edit_banner" && $acl->hasPermission("banners")){
+if($_POST["edit_banner"] == "edit_banner" && $acl -> hasPermission("banners")){
      $name = db_escape($_POST["banner_name"]);
      $image_url = db_escape($_POST["image_url"]);
      $link_url = db_escape($_POST["link_url"]);
@@ -524,7 +524,7 @@ SET name='$name',link_url='$link_url',image_url='$image_url' WHERE id=$id");
     
      }
 
-if($_POST["edit_key"] == "edit_key" && $acl->hasPermission("expert_settings")){
+if($_POST["edit_key"] == "edit_key" && $acl -> hasPermission("expert_settings")){
      $name = db_escape($_POST["name"]);
      $value = db_escape($_POST["value"]);
      $id = intval($_POST["id"]);

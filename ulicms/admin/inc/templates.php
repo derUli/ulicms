@@ -1,6 +1,6 @@
 ﻿<?php if(defined("_SECURITY")){
-$acl = new ACL();
-     if($acl->hasPermission("templates")){
+    $acl = new ACL();
+     if($acl -> hasPermission("templates")){
         
          $theme = getconfig("theme");
          ?>
@@ -113,12 +113,12 @@ $acl = new ACL();
     <input type="submit" value="Änderungen Speichern">
     
 <?php
-                    if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-                    ?>
+                     if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+                     ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-                ?>
+                 ?>
 </form>
 <script type="text/javascript">
 $("#templateForm").ajaxForm({beforeSubmit: function(e){

@@ -16,9 +16,8 @@
 // IMPORTANT!!! Do not remove uncommented settings in this file even if
 // you are using session configuration.
 // See http://kcfinder.sunhater.com/install for setting descriptions
-
 if(!isset($_SESSION))
-   @session_start();
+     @session_start();
 
 $_CONFIG = array(
     
@@ -109,7 +108,7 @@ $acl = new acl();
 
 
 
-if($acl->hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash")){
+if($acl -> hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash")){
      $_CONFIG["disabled"] = false;
      }
 

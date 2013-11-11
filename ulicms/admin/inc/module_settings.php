@@ -22,17 +22,17 @@ if(!file_exists($admin_file_path)){
          echo "<h1>$capitalized_module_name  Einstellungen</h1>";
          }
     
-     $acl = new ACL();    
+     $acl = new ACL();
     
      if(defined("MODULE_ADMIN_REQUIRED_PERMISSION")){
-         if($acl->hasPermission(MODULE_ADMIN_REQUIRED_PERMISSION) and $acl->hasPermission("module_settings")){
+         if($acl -> hasPermission(MODULE_ADMIN_REQUIRED_PERMISSION) and $acl -> hasPermission("module_settings")){
              define("MODULE_ACCESS_PERMITTED", true);
              }
         else{
              define("MODULE_ACCESS_PERMITTED", false);
              }
          }
-
+    
     
      $admin_func = $module . "_admin";
     
@@ -52,7 +52,7 @@ if(!file_exists($admin_file_path)){
 ?>
 <?php
 if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-    ?>
+     ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }

@@ -1,6 +1,6 @@
 <h1>Spamfilter</h1>
 
-<?php if($acl->hasPermission("spam_filter")){
+<?php if($acl -> hasPermission("spam_filter")){
      ?>
 <form id="spamfilter_settings" name="?action=spam_filter" method="post">
 <input type="checkbox" name="spamfilter_enabled"<?php if(getconfig("spamfilter_enabled") == "yes"){
@@ -46,12 +46,12 @@ Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren:<br/
 
 <input type="submit" name="submit_spamfilter_settings" value="Einstellungen Speichern"/>
 <?php
-    if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-        ?>
+     if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+         ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-    ?>
+     ?>
 </form>
 
 <script type="text/javascript">

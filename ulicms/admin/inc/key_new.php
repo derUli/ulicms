@@ -1,6 +1,6 @@
 ﻿<?php if(defined("_SECURITY")){
-$acl = new ACL();
-     if($acl->hasPermission("expert_settings")){
+    $acl = new ACL();
+     if($acl -> hasPermission("expert_settings")){
          ?>
 
 <form action="index.php?action=settings" method="post">
@@ -14,12 +14,12 @@ $acl = new ACL();
 <br/><br/>
 <input type="submit" value="Datensatz hinzufügen">
 <?php
-        if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-            ?>
+         if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+             ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-        ?>
+         ?>
 </form>
 
 <?php

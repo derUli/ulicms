@@ -1,7 +1,7 @@
 <?php if(defined("_SECURITY")){
-$acl = new ACL();
-if($acl->hasPermission("banners")){
-?>
+    $acl = new ACL();
+    if($acl -> hasPermission("banners")){
+        ?>
 
 
 <h2>Werbebanner</h2>

@@ -1,22 +1,22 @@
 <?php
 class packageManager{
      private $package_source;
-    public function __construct(){
+     public function __construct(){
          $cfg = new config();
-         $this -> package_source = $cfg->getVar("pkg_src");
-         $this -> package_source = $this->replacePlaceHolders($this -> package_source );
+         $this -> package_source = $cfg -> getVar("pkg_src");
+         $this -> package_source = $this -> replacePlaceHolders($this -> package_source);
          }
     
-    private function replacePlaceHolders($url){
-       $cfg = new config();
-       $version = new ulicms_version();
-       $internalVersion = $version->getInternalVersion();
-       $internalVersion = implode(".", $internalVersion);
-       $url = str_replace("{version}", $internalVersion, $url);
-        return $url;
-    }
+     private function replacePlaceHolders($url){
+         $cfg = new config();
+         $version = new ulicms_version();
+         $internalVersion = $version -> getInternalVersion();
+         $internalVersion = implode(".", $internalVersion);
+         $url = str_replace("{version}", $internalVersion, $url);
+         return $url;
+         }
     
-    public function getInstalledModules(){
+     public function getInstalledModules(){
          $module_folder = ULICMS_ROOT . DIRECTORY_SEPERATOR . "modules" . DIRECTORY_SEPERATOR;
         
         
@@ -37,9 +37,9 @@ class packageManager{
              }
          natcasesort($available_modules);
          return $available_modules;
-        }
+         }
     
-    public function getInstalledThemes(){
+     public function getInstalledThemes(){
          $themes = Array();
          $templateDir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "templates" . DIRECTORY_SEPERATOR;
         
@@ -59,9 +59,9 @@ class packageManager{
         
          return $themes;
         
-        }
+         }
     
-    public function getInstalledPackages($type = 'modules'){
+     public function getInstalledPackages($type = 'modules'){
         
          if($type === 'modules'){
              return $this -> getInstalledModules();
@@ -74,11 +74,11 @@ class packageManager{
         
          }
     
-    public function getPackageSource(){
+     public function getPackageSource(){
          return $this -> package_source;
          }
     
-    public function setPackageSource($url){
+     public function setPackageSource($url){
          $this -> package_source = $url;
          }
-    }
+     }

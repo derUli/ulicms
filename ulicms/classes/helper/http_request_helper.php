@@ -5,4 +5,4 @@ class httpRequestHelper{
              || $_SERVER['SERVER_PORT'] == 443);
          }
     
-    }
+     }

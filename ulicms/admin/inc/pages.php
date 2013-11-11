@@ -1,7 +1,7 @@
 <?php if(defined("_SECURITY")){
-$acl = new ACL();
+    $acl = new ACL();
     
-     if($acl->hasPermission("pages")){
+     if($acl -> hasPermission("pages")){
         
         
          ?>
@@ -199,7 +199,7 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
          noperms();
          }
     
-    ?>
+     ?>
 
 <?php }
 ?>

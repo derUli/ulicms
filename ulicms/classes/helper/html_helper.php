@@ -24,4 +24,4 @@ class html_helper{
          return $no_script_html_string;
         
          }
-    }
+     }

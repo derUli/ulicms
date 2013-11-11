@@ -132,5 +132,5 @@ function trackbackSpamCheck($url)
     
      // spam status zurueckgeben
     return $spam;
-    }
+     }
  

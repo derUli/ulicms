@@ -78,8 +78,8 @@ switch($c){
  case "file": default:
      $cache_type = "file";
      break;
-    break;
-    }
+     break;
+     }
 
 if(file_exists($cached_page_path) and !getconfig("cache_disabled")
          and getenv('REQUEST_METHOD') == "GET" and

@@ -1,6 +1,6 @@
 <?php if(defined("_SECURITY")){
-$acl = new ACL();
-     if(is_admin() or $acl->hasPermission("users")){
+    $acl = new ACL();
+     if(is_admin() or $acl -> hasPermission("users")){
          if(empty($_GET["order"])){
              $order = "username";
              }

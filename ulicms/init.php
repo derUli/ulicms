@@ -5,25 +5,25 @@
 
  // root directory of UliCMS
 if(!defined("ULICMS_ROOT"))
-   define("ULICMS_ROOT", dirname(__file__));
+     define("ULICMS_ROOT", dirname(__file__));
 
 
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if (ini_get('register_globals') === '1'){
      die('SECURITY WARNING: "Register Globals" feature is enabled! UliCMS refuses to run with enabled "Register Globals"!');
-    }
+     }
 
 
 $os = PHP_OS;
 switch($os)
 {
  case "Linux": define("DIRECTORY_SEPERATOR", "/");
-    break;
+     break;
  case "Windows": define("DIRECTORY_SEPERATOR", "\\");
-    break;
+     break;
  default: define("DIRECTORY_SEPERATOR", "/");
-    break;
-    }
+     break;
+     }
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "base_config.php";
@@ -79,7 +79,7 @@ if(file_exists($path_to_config)){
 else if(is_dir("installer")){
  header("Location: installer/");
  exit();
- } else {
+ }else{
  throw new Exception("Can't include cms-config.php. Starting installer failed, too.");
  }
 
@@ -132,8 +132,8 @@ if($config -> db_server == "" or $config -> db_user == ""){
  header("Location: installer/");
  exit();
  }
- 
- 
+
+
 
 @$connection = db_connect($config -> db_server, $config -> db_user, $config -> db_password);
 
