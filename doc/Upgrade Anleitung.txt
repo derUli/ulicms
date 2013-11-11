@@ -16,12 +16,8 @@ class config extends baseConfig{
 
 7. Als Administrator ins System einloggen 
 
-8. Unter "Gruppen" eine Gruppe "Administrator" anlegen und dieser die entsprechenden Berechtigungen geben.
+8. Ab- und wieder Anmelden.
 
-9. Unter "Willkommen" > "Profil bearbeiten" Ihrem Benutzerkonto die im vorherigen Schritt angelegte ACL-Gruppe zuweisen.
+9. Inkompatible Pakete über die Paketverwaltung aktualisieren
 
-10. Ab- und wieder Anmelden.
-
-11. Inkompatible Pakete über die Paketverwaltung aktualisieren
-
-12. Fertig
+10. Fertig
