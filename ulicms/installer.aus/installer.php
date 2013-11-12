@@ -263,6 +263,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `systemname` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
   `target` varchar(255) DEFAULT '_self',
+  `category` int(11) DEFAULT '1',
   `content` longtext NOT NULL,
   `language` varchar(6) NOT NULL,
   `active` tinyint(1) NOT NULL,
