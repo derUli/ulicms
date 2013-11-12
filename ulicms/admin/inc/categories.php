@@ -50,8 +50,14 @@ if(count($categories) > 0 and !isset($_GET["add"]) and !isset($_GET["edit"])){
 <tr>
 <td><?php echo $category["id"];?></td>
 <td><?php echo real_htmlspecialchars($category["name"]);?></td>
-<td><a href="?action=categories&del=<?php echo $category["id"];?>"><img src="gfx/edit.gif" alt="Bearbeiten" title="Bearbeiten"></td>
-<td><a href="?action=categories&edit=<?php echo $category["id"];?>" onclick="return confirm('Wirklich Löschen?')"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
+<td><a href="?action=categories&edit=<?php echo $category["id"];?>"><img src="gfx/edit.gif" alt="Bearbeiten" title="Bearbeiten"></td>
+<?php if($category["id"] != 1){?>
+
+<td><a href="?action=categories&del=<?php echo $category["id"];?>" onclick="return confirm('Wirklich Löschen?')"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
+
+<?php } else {?>
+<td><a href="#" onclick="alert('Die erste Kategorie kann nicht gelöscht werden')"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
+<?php } ?>
 </tr>
 <?php }?>
 </table>

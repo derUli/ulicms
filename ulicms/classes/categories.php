@@ -3,8 +3,8 @@ class categories
 {
 
   public static function updateCategory($id, $name){
-     $sql = "UPDATE ".tbname("categories")." SET name='".db_escape($name)."' WHERE id=".$idM
-     return db_error($sql);
+     $sql = "UPDATE ".tbname("categories")." SET name='".db_escape($name)."' WHERE id=".$id;
+     return db_query($sql);
   }
 
   public static function addCategory($name = null){
@@ -25,7 +25,8 @@ class categories
        $sqlString = "SELECT * FROM ".tbname("categories")." WHERE id=".$id;
        $result = db_query($sqlString);
        if(db_num_rows($result) > 0){
-          $row = db_fetch_row($result)
+          $row = db_fetch_assoc($result);
+ 
           return $row["name"];
           }
           
