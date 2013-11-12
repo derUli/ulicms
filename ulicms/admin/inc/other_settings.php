@@ -115,7 +115,7 @@ if(!is_admin()){
 <div class="seperator"></div>
 
 <p><a href="index.php?action=settings">Experteneinstellungen</a></p>
-
+<br/>
 
 <input name="submit" type="submit" value="Einstellungen speichern"/>
 
