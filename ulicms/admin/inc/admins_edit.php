@@ -54,7 +54,7 @@ Avatar hochladen:<br/>
                 asort($allGroups);
                 ?>
 <br>
-<strong>ACL-Gruppe:</strong>
+<strong>Benutzergruppe:</strong>
 <br/>
 <select name="group_id">
 <option value="-" <?php if($row -> group_id === null){
