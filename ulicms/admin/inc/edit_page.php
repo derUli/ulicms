@@ -36,7 +36,8 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 <br/><br/>
 
 <strong>Kategorie</strong><br/>
-<?php echo categories::getHTMLSelect($row["category"])?>
+<?php 
+echo categories::getHTMLSelect($row->category);?>
 
 <br/><br/>
 
