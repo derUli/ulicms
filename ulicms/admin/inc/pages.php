@@ -25,13 +25,6 @@ function filter_by_status(element){
    }
 }
 
-function filter_by_category(element){
-   var index = element.selectedIndex
-   if(element.options[index].value != ""){
-     location.replace("index.php?action=pages&filter_category=" + element.options[index].value)
-   }
-}
-
 $(window).load(function(){
    $('#category').on('change', function (e) {
    var valueSelected = $('#category').val();
@@ -50,14 +43,20 @@ Nach Sprache filtern:
          if(!empty($_GET["filter_language"])){
              $_SESSION["filter_language"] = $_GET["filter_language"];
              }
-         
-         if(!isset($_SESSION["filter_category"])){
+             
+             
+        if(!isset($_SESSION["filter_category"])){
              $_SESSION["filter_category"]  = 0;
          }
              
+             
          if(isset($_GET["filter_category"])){
             $_SESSION["filter_category"] = intval($_GET["filter_category"]);
+            
          }
+         
+
+
         
         
          if(!empty($_GET["filter_status"])){
@@ -91,7 +90,8 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
 </select>
 &nbsp; &nbsp;
 Kategorie: 
-<?php pages::getHTMLSelect($_SESSION["filter_category"], true)?>
+<?php 
+echo categories::getHTMLSelect($_SESSION["filter_category"], true);?>
 
 <?php
          if($_SESSION["filter_status"] == "trash" and $acl -> hasPermission("pages")){

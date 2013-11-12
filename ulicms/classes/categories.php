@@ -19,13 +19,13 @@ class categories
       $lst = self::getAllCategories("name");
       $html = "<select name='category' id='category' size='1'>";
       if($allowNull){
-         if($default = 0)
-           $html .= "<option value='' selected='selected' selected='selected'>[Alle]</option>";
+         if($default == 0)
+           $html .= "<option value='0' selected='selected' >[Alle]</option>";
          else
-           $html .= "<option value='' selected='selected'>[Alle]</option>";
+           $html .= "<option value='0'>[Alle]</option>";
       }
       foreach($lst as $cat){
-        if($cat["id"] == "default")
+        if($cat["id"] == $default)
            $html .= "<option value='".$cat["id"]."' selected='selected'>".db_escape($cat["name"])."</option>";
         else
            $html .= "<option value='".$cat["id"]."'>".db_escape($cat["name"])."</option>";
