@@ -170,6 +170,7 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
          $activated = intval($_POST["activated"]);
          $page_content = $_POST["page_content"];
          $comments_enabled = (int)$_POST["comments_enabled"];
+         $category = intval($_POST["category"]);
          $notinfeed = 0;
          $redirection = db_escape($_POST["redirection"]);
          $menu = db_escape($_POST["menu"]);
@@ -257,13 +258,13 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
          db_query("INSERT INTO " . tbname("content") .
              " (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position, 
-  access, meta_description, meta_keywords, language, target) 
+  access, meta_description, meta_keywords, language, target, category) 
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time() . ", " . time() .
              "," . $_SESSION["login_id"] .
              ", " . $comments_enabled .
              ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "', 
   '$meta_description', '$meta_keywords',
-  '$language', '$target')");
+  '$language', '$target', '$category')");
         
          // header("Location: index.php?action=pages_edit&page=".db_insert_id()."#bottom");
         header("Location: index.php?action=pages");
@@ -326,6 +327,7 @@ if($_POST["edit_page"] == "edit_page" && $acl -> hasPermission("pages")){
      $activated = intval($_POST["activated"]);
      $page_content = db_escape($_POST["page_content"]);
      $comments_enabled = (int) $_POST["comments_enabled"];
+     $category = intval($_POST["category"]);
      $redirection = db_escape($_POST["redirection"]);
      $notinfeed = 0;
      $menu = db_escape($_POST["menu"]);
@@ -344,7 +346,7 @@ if($_POST["edit_page"] == "edit_page" && $acl -> hasPermission("pages")){
      $meta_description = db_escape($_POST["meta_description"]);
      $meta_keywords = db_escape($_POST["meta_keywords"]);
     
-     db_query("UPDATE " . tbname("content") . " SET systemname = '$system_title' , title='$page_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target' WHERE id=$id");
+     db_query("UPDATE " . tbname("content") . " SET systemname = '$system_title' , title='$page_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category' WHERE id=$id");
     
     
      header("Location: index.php?action=pages");
