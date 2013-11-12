@@ -43,8 +43,8 @@ if(count($categories) > 0 and !isset($_GET["add"]) and !isset($_GET["edit"])){
 <tr>
 <td><?php echo $category["id"];?></td>
 <td><?php echo real_htmlspecialchars($category["name"]);?></td>
-<td>[Bearbeiten]</td>
-<td>[Löschen]</td>
+<td><img src="gfx/edit.gif" alt="Bearbeiten" title="Bearbeiten"></td>
+<td><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></td>
 </tr>
 <?php }?>
 </table>
