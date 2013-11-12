@@ -245,10 +245,15 @@ function buildSEOUrl($page = false){
 
 function getModulePath($module){
      // Frontend Directory
-    $module_folder = ULICMS_ROOT . DIRECTORY_SEPERATOR . "modules" . DIRECTORY_SEPERATOR;
-    
+    if(is_file("cms-config.php")){
+         $module_folder = "modules/";
+         }
+     // Backend Directory
+    else{
+         $module_folder = "../modules/";
+         }
      $available_modules = Array();
-     return $module_folder . $module . DIRECTORY_SEPERATOR;
+     return $module_folder . $module . "/";
      }
 
 function getModuleAdminFilePath($module){
