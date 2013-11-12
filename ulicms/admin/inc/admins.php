@@ -1,4 +1,5 @@
 <?php if(defined("_SECURITY")){
+include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
     $acl = new ACL();
      if(is_admin() or $acl -> hasPermission("users")){
          if(empty($_GET["order"])){
@@ -23,19 +24,23 @@
 <td><a href="index.php?action=admins&order=lastname">Nachname</a></td>
 <td><a href="index.php?action=admins&order=firstname">Vorname</a></td>
 <td><a href="index.php?action=admins&order=email">Email</a></td>
+<td><a href="index.php?action=admins&order=group_id">Kategorie</a></td>
 <td>Bearbeiten</td>
 <td><span data-tooltip="Wenn ein Benutzer gelöscht wird, bleiben seine Beiträge erhalten, verlieren allerdings seinen Namen als Autor.">Löschen</span></td>
 </tr>
 <?php
              while($row = db_fetch_object($query)){
+                 $group = $acl->getPermissionQueryResult($row->group_id);
+                 $group = $group["name"];
                  ?>
 <?php
                  echo '<tr>';
                  echo "<td style=\"width:40px;\">" . $row -> id . "</td>";
-                 echo "<td>" . htmlspecialchars($row -> username) . "</td>";
-                 echo "<td>" . htmlspecialchars($row -> lastname) . "</td>";
-                 echo "<td>" . htmlspecialchars($row -> firstname) . "</td>";
-                 echo "<td>" . htmlspecialchars($row -> email) . "</td>";
+                 echo "<td>" . real_htmlspecialchars($row -> username) . "</td>";
+                 echo "<td>" . real_htmlspecialchars($row -> lastname) . "</td>";
+                 echo "<td>" . real_htmlspecialchars($row -> firstname) . "</td>";
+                 echo "<td>" . real_htmlspecialchars($row -> email) . "</td>";
+                 echo "<td>". real_htmlspecialchars($group)."</td>";
                  echo "<td>" . '<a href="index.php?action=admin_edit&admin=' . $row -> id . '"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
                 
                  if($row -> id == 1 || $row -> id == $_SESSION["login_id"]){

@@ -31,3 +31,4 @@
     Hierarische Rechtesystem behalten. 
     Es soll aber in kommenden Releases entfernt werden.
 [*] Bei der Installation kann man den Namen des Adminaccounts ändern.
+[*] Kategorien können hinzugefügt werden. Inhalte können in Kategorien einsortiert werden, um die Verwaltung der Inhalte übersichtlicher zu machen.
