@@ -32,7 +32,14 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 <input type="text" style="width:300px;" name="redirection" value="<?php echo $row -> redirection;
              ?>">
 
+
 <br/><br/>
+
+<strong>Kategorie</strong><br/>
+<?php echo categories::getHTMLSelect($row["category_id"])?>
+
+<br/><br/>
+
 <strong data-tooltip="In welchem Menü soll diese Seite angezeigt werden?">Menü</strong><br/>
 <select name="menu" size=1>
 <?php

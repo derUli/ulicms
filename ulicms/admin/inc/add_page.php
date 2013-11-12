@@ -42,8 +42,10 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
              }
          ?>
 </select>
-<br/>
+<br/><br/>
 
+<strong>Kategorie</strong><br/>
+<?php echo categories::getHTMLSelect()?>
 <br/><br/>
 
 <strong data-tooltip="In welchem Menü soll diese Seite angezeigt werden?">Menü:</strong><br/>
