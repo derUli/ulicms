@@ -40,7 +40,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 if(!isset($_GET["add"]) and !isset($_GET["edit"])){ 
 ?>
 
-<h1>Kategorien</h1>
+<h2>Kategorien</h2>
 <p>Hier können Sie Kategorien anlegen, in die Sie dann Ihre Inhalte einsortieren können.</p>
 
 <p><a href="?action=categories&add">Kategorie Anlegen</a></p>
