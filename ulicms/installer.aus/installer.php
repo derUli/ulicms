@@ -380,7 +380,18 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
          mysqli_query($connection, "INSERT INTO `" . $prefix . "languages` (`id`, `name`, `language_code`) VALUES
 (1, 'Deutsch', 'de'), 
 (2, 'English', 'en');")or die(mysqli_error($connection));
-        
+
+
+$sql_categories_table = "CREATE TABLE ".$prefix."categories (
+          id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+          name VARCHAR(100)
+          )";
+        mysqli_query($connection, $sql_categories_table);
+
+$insert_categories_general = "INSERT INTO ".$prefix."categories (name) VALUES('Allgemein')";
+
+mysqli_query($connection, $insert_categories_general);
+
          @chmod("../cms-config.php", 0777);
         
          @mkdir("../content");
