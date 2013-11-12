@@ -7,9 +7,8 @@
          ?>
 <h2>Seiten</h2>
 <p>Hier können Sie die einzelnen Seiten Ihrer Homepage bearbeiten oder löschen.</p>
-<br/>
-<p><a href="index.php?action=pages_new">Seite verfassen</a><br/><br/></p>
-<br/><br/>
+<p><a href="index.php?action=pages_new">Seite verfassen</a></p>
+
 <script type="text/javascript">
 function filter_by_language(element){
    var index = element.selectedIndex
@@ -102,7 +101,7 @@ echo categories::getHTMLSelect($_SESSION["filter_category"], true);?>
 <?php }
          ?>
 
-<br/><br/>
+<br/>
 
 <table border=1>
 <tr style="font-weight:bold;">
