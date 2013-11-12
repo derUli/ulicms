@@ -1,6 +1,5 @@
 <?php
 $acl = new ACL();
-// Todo neue ACL-Abfrage nutzen
 if(!is_admin() and !$acl -> hasPermission("groups")){
      noperms();
     

@@ -29,6 +29,9 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEP
 "base_config.php";
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
+"categories.php";
+
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "package_manager.php";
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
