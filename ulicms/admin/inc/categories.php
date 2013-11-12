@@ -43,8 +43,8 @@ if(count($categories) > 0 and !isset($_GET["add"]) and !isset($_GET["edit"])){
 <tr>
 <td><?php echo $category["id"];?></td>
 <td><?php echo real_htmlspecialchars($category["name"]);?></td>
-<td><img src="gfx/edit.gif" alt="Bearbeiten" title="Bearbeiten"></td>
-<td><a href="?action=categories&del=<?php echo $category["id"];?>"><img src="gfx/delete.gif" alt="Löschen" title="Löschen" onclick="return confirm('Wirklich Löschen?')"></a></td>
+<td><a href="?action=categories&del=<?php echo $category["id"];?>"><img src="gfx/edit.gif" alt="Bearbeiten" title="Bearbeiten"></td>
+<td><a href="?action=categories&edit=<?php echo $category["id"];?>" onclick="return confirm('Wirklich Löschen?')"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
 </tr>
 <?php }?>
 </table>
@@ -55,6 +55,13 @@ if(count($categories) > 0 and !isset($_GET["add"]) and !isset($_GET["edit"])){
 <p><input type="submit" name="create" value="Anlegen"></p>
 </form>
 
-<?php }?>
+<?php } else if(isset($_GET["edit"])){?>
+<h2>Kategorie anlegen</h2>
+<form action="?action=categories" method="post">
+<input type="hidden" name="id" value="<?php echo intval($_GET["edit"])?>">
+<p>Name: <input type="text" name="name" value="<?php echo categories::getCategoryById(intval($_GET["edit"]));?>">
+<p><input type="submit" name="update" value="Speichern"></p>
+</form>
 
+<?php } ?>
 <?php } ?>
