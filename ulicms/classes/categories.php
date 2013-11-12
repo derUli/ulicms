@@ -36,9 +36,17 @@ class categories
   }
   
   public static function deleteCategory($id){
-     $sqlString = "DELETE FROM ".tbname("categories").
+     $sqlDeleteString = "DELETE FROM ".tbname("categories").
      " WHERE id = ".$id;
-     return db_query($sqlString);
+     db_query($sqlDeleteString);
+     
+     $sqlMoveCategoryContentString = "UPDATE ".tbname("content")." SET category=1 WHERE category = ".$id;
+     db_query($sqlMoveCategoryContentString);
+     
+     
+     $sqlMoveCategoryBannerString = "UPDATE ".tbname("banner")." SET category=1 WHERE category = ".$id;
+     db_query($sqlMoveCategoryBannerString);
+     
   }
   
   public static function getCategoryById($id){
