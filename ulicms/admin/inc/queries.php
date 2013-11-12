@@ -515,7 +515,7 @@ if($_POST["edit_banner"] == "edit_banner" && $acl -> hasPermission("banners")){
      $name = db_escape($_POST["banner_name"]);
      $image_url = db_escape($_POST["image_url"]);
      $link_url = db_escape($_POST["link_url"]);
-     $category = intval($_POST["category_id"]);
+     $category = intval($_POST["category"]);
      $id = intval($_POST["id"]);
     
      $query = db_query("UPDATE " . tbname("banner") . " 
