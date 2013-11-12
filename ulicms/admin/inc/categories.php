@@ -4,7 +4,7 @@ if(!is_admin() and !$acl -> hasPermission("groups")){
      noperms();
     
     }else{
-    include_once "../lib/string_functions.php";
+    include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
     
     
     $categories = categories::getAllCategories();
