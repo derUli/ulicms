@@ -51,7 +51,7 @@ Nach Sprache filtern:
              $_SESSION["filter_language"] = $_GET["filter_language"];
              }
          
-         if(!isset($_SESSION["filter_category"] )){
+         if(!isset($_SESSION["filter_category"])){
              $_SESSION["filter_category"]  = 0;
          }
              
@@ -89,6 +89,9 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
              }
          ?>>Papierkorb</option>
 </select>
+&nbsp; &nbsp;
+Kategorie: 
+<?php pages::getHTMLSelect($_SESSION["filter_category"], true)?>
 
 <?php
          if($_SESSION["filter_status"] == "trash" and $acl -> hasPermission("pages")){
@@ -158,17 +161,7 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
                           
          if($_SESSION["filter_category"] != 0){
              $filter_sql .= "AND category=".intval($_SESSION["filter_category"])." ";
-         }
-        
-         if(strlen($filter_sql) > 2)
-             $filter_sql .= " AND ";
-         else
-             $filter_sql .= " WHERE ";
-        
-         $filter_sql .= $filter_status . " ";
-        
-        
-        
+         }        
         
          $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(db_error());
          if(db_num_rows($query) > 0){
