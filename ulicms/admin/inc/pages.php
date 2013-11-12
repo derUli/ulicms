@@ -25,6 +25,22 @@ function filter_by_status(element){
    }
 }
 
+function filter_by_category(element){
+   var index = element.selectedIndex
+   if(element.options[index].value != ""){
+     location.replace("index.php?action=pages&filter_category=" + element.options[index].value)
+   }
+}
+
+$(window).load(function(){
+   $('#category').on('change', function (e) {
+    var optionSelected = $("option:selected", this);
+    var valueSelected = this.value;
+     location.replace("index.php?action=pages&filter_category=" + valueSelected)
+   
+   });
+
+});
 
 </script>
 
@@ -35,6 +51,14 @@ Nach Sprache filtern:
          if(!empty($_GET["filter_language"])){
              $_SESSION["filter_language"] = $_GET["filter_language"];
              }
+         
+         if(!isset($_SESSION["filter_category"] )){
+             $_SESSION["filter_category"]  = 0;
+         }
+             
+         if(isset($_GET["filter_category"])){
+            $_SESSION["filter_category"] = intval($_GET["filter_category"]);
+         }
         
         
          if(!empty($_GET["filter_status"])){
@@ -68,8 +92,7 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
 </select>
 
 <?php
-         if($_SESSION["filter_status"] == "trash" and
-             $_SESSION["group"] >= 40){
+         if($_SESSION["filter_status"] == "trash" and $acl -> hasPermission("pages")){
              ?>
 
 &nbsp;&nbsp;
@@ -131,8 +154,12 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
          if(!empty($filter_language)){
              $filter_sql = "WHERE language = '" . $filter_language . "' ";
              }else{
-             $filter_sql = "";
+             $filter_sql = "WHERE 1=1 ";
              }
+                          
+         if($_SESSION["filter_category"] != 0){
+             $filter_sql .= "AND category=".intval($_SESSION["filter_category"])." ";
+         }
         
          if(strlen($filter_sql) > 2)
              $filter_sql .= " AND ";

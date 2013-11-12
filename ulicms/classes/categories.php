@@ -15,9 +15,15 @@ class categories
     return db_insert_id();
   }
   
-  public static function getHTMLSelect($default = 1){
+  public static function getHTMLSelect($default = 1, $allowNull = false){
       $lst = self::getAllCategories("name");
-      $html = "<select name='category' size='1'>";
+      $html = "<select name='category' id='category' size='1'>";
+      if($allowNull){
+         if($default = 0)
+           $html .= "<option value='' selected='selected' selected='selected'>[Alle]</option>";
+         else
+           $html .= "<option value='' selected='selected'>[Alle]</option>";
+      }
       foreach($lst as $cat){
         if($cat["id"] == "default")
            $html .= "<option value='".$cat["id"]."' selected='selected'>".db_escape($cat["name"])."</option>";
