@@ -34,8 +34,7 @@ function filter_by_category(element){
 
 $(window).load(function(){
    $('#category').on('change', function (e) {
-    var optionSelected = $("option:selected", this);
-    var valueSelected = this.value;
+   var valueSelected = $('#category').val();
      location.replace("index.php?action=pages&filter_category=" + valueSelected)
    
    });
