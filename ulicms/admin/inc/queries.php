@@ -438,8 +438,8 @@ if(!empty($_FILES['logo_upload_file']['name'])
 
 
 
-if($_POST["edit_admin"] == "edit_admin" && (is_admin() or $acl -> hasPermission("users"))
-         or ($_POST["edit_admin"] == "edit_admin" and $_SESSION["group"] >= 10
+if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
+         or ($_POST["edit_admin"] == "edit_admin" and logged_in()
              and $_POST["id"] == $_SESSION["login_id"])){
     
      $id = intval($_POST["id"]);
@@ -501,7 +501,7 @@ about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");
      if(!empty($password))
          changePassword($password, $id);
     
-     if($_SESSION["group"] >= 10 and $_POST["id"] == $_SESSION["login_id"]){
+     if(!$acl->hasPermission("users")){
          header("Location: index.php");
          exit();
          }else{
