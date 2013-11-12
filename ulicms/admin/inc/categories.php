@@ -66,7 +66,7 @@ if(count($categories) > 0 and !isset($_GET["add"]) and !isset($_GET["edit"])){
 <td><a href="?action=categories&del=<?php echo $category["id"];?>" onclick="return confirm('Wirklich Löschen?')"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
 
 <?php } else {?>
-<td><a href="#" onclick="alert('Die erste Kategorie kann nicht gelöscht werden')"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
+<td><a href="#" onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
 <?php } ?>
 </tr>
 <?php }?>
