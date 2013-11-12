@@ -119,8 +119,7 @@ function validate_login($user, $password){
          else
              $password = hash_password($password);
         
-         if($user["password"] == $password and
-             $user["group"] > 0){
+         if($user["password"] == $password){
              return $user;
              }
          }
