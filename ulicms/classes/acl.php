@@ -136,13 +136,13 @@ class ACL{
         
          // Inhalte
         $acl_data["pages"] = null;
-         $acl_data["banners"] = null;
-         $acl_data["categories"] = null;
+        $acl_data["banners"] = null;
+        $acl_data["categories"] = null;
         
          // Medien
         $acl_data["images"] = null;
-         $acl_data["files"] = null;
-         $acl_data["flash"] = null;
+        $acl_data["files"] = null;
+        $acl_data["flash"] = null;
         
          // Benutzer
         $acl_data["users"] = null;

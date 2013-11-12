@@ -4,9 +4,15 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
      noperms();
     
     }else{
+    
+    if(isset($_GET["del"])){
+       $del = intval($_GET["del"]);
+       if($del != 1){
+         categories::deleteCategory($del);
+       }
+    }
+    
     include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
-    
-    
     $categories = categories::getAllCategories();
     
     

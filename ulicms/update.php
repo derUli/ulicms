@@ -26,13 +26,13 @@ $set_group_id = "UPDATE " . tbname("admins") . " SET `group_id`=1 WHERE `group_i
 db_query($insert_group_query)or die(db_error());
 db_query($set_group_id)or die(db_error());
 
-$sql_categories_table = "CREATE TABLE IF NOT EXISTS ".db_name_escape("categories")." (
+$sql_categories_table = "CREATE TABLE IF NOT EXISTS ".tbname("categories")." (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           name VARCHAR(100)
           )";
 db_query($sql_categories_table) or die(db_error());
 
-$insert_categories_general = "INSERT INTO ".db_name_escape("categories")." (name) VALUES('Allgemein')";
+$insert_categories_general = "INSERT INTO ".tbname("categories")." (name) VALUES('Allgemein')";
 db_query($insert_categories_general) or die(db_error());
 
 setconfig("db_schema_version", "6.8");
