@@ -137,6 +137,7 @@ class ACL{
          // Inhalte
         $acl_data["pages"] = null;
          $acl_data["banners"] = null;
+         $acl_data["categories"] = null;
         
          // Medien
         $acl_data["images"] = null;

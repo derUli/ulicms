@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL();
-if(!is_admin() and !$acl -> hasPermission("groups")){
+if(!is_admin() and !$acl -> hasPermission("categories")){
      noperms();
     
     }else{
