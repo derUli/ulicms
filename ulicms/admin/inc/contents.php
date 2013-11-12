@@ -16,9 +16,16 @@ if($acl -> hasPermission("pages") or $acl -> hasPermission("banners")){
     ?>
 <?php if($acl -> hasPermission("banners")){
         ?>
-<a href="index.php?action=banner">Werbebanner</a></p>
+<a href="index.php?action=banner">Werbebanner</a><br/>
 <?php }
     ?>
+    
+ 
+<?php if($acl -> hasPermission("categories")){ ?>
+
+<a href="index.php?action=categories">Kategorien</a><br/>
+<?php }?>
+</p>
 <?php add_hook("content_type_list_entry");
      ?>
 

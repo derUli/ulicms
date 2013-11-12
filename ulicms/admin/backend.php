@@ -50,21 +50,15 @@ if(!$eingeloggt){
      if($_GET["action"] == "" || $_GET["action"] == "home"){
          require_once "inc/dashboard.php";
          }
-    else if($_GET["action"] == "news"){
-         require_once "inc/news.php";
-         }
-    else if($_GET["action"] == "add_news"){
-         require_once "inc/add_news.php";
-         }
-    else if($_GET["action"] == "edit_news"){
-         require_once "inc/edit_news.php";
-         }
     else if($_GET["action"] == "contents"){
          require_once "inc/contents.php";
          }
     
     else if($_GET["action"] == "pages"){
          require_once "inc/pages.php";
+         }
+    else if($_GET["action"] == "categories"){
+       require_once "inc/categories.php";
          }
     else if($_GET["action"] == "pages_edit"){
          require_once "inc/edit_page.php";

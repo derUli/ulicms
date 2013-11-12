@@ -7,19 +7,18 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
     
     if(isset($_GET["del"])){
        $del = intval($_GET["del"]);
-       if($del != 1){
+       if($del != 1)
          categories::deleteCategory($del);
-       }
     }
     
     include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
     $categories = categories::getAllCategories();
-}
+
 
 ?>
-
+<p><a href="?action=categories&add">Kategorie Anlegen</a></p>
 <?php 
-if(count($categories) > 0){
+if(count($categories) > 0 and !isset($_GET["add"]) and !isset($_GET["edit"])){
 ?>
 <table>
 <tr>
@@ -38,3 +37,5 @@ if(count($categories) > 0){
 <?php }?>
 </table>
 <?php }?>
+
+<?php } ?>
