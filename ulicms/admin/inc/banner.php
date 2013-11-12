@@ -1,13 +1,45 @@
 <?php if(defined("_SECURITY")){
     $acl = new ACL();
     if($acl -> hasPermission("banners")){
-        ?>
+    
+    if(!isset($_SESSION["filter_category"]))
+             $_SESSION["filter_category"] = 0;
 
+             
+             
+         if(isset($_GET["filter_category"]))
+            $_SESSION["filter_category"] = intval($_GET["filter_category"]);
+
+
+$sql = "SELECT * FROM " . tbname("banner")." ";
+if($_SESSION["filter_category"] == 0)
+   $sql .= "WHERE 1=1 ";
+else
+   $sql .= "WHERE category=".$_SESSION["filter_category"]." ";
+   
+$sql.= "ORDER BY id";
+$query = db_query($sql);
+    
+?>
+<script type="text/javascript">
+$(window).load(function(){
+   $('#category').on('change', function (e) {
+   var valueSelected = $('#category').val();
+     location.replace("index.php?action=banner&filter_category=" + valueSelected)
+   
+   });
+
+});
+</script>
 
 <h2>Werbebanner</h2>
 <p>Hier können Sie die Werbebanner für Ihre Internetseite verwalten.
 <br/><br/>
 <a href="index.php?action=banner_new">Banner hinzufügen</a><br/>
+</p>
+<p>Kategorie: 
+<?php 
+echo categories::getHTMLSelect($_SESSION["filter_category"], true);?>
 </p>
 <table border=1>
 
@@ -18,7 +50,7 @@
 <td>Löschen</td>
 </tr>
 <?php
-         $query = db_query("SELECT * FROM " . tbname("banner") . " ORDER BY id", $connection);
+
          if(db_num_rows($query) > 0){
              while($row = db_fetch_object($query)){
                  ?>
