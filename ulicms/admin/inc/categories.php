@@ -76,7 +76,7 @@ if(count($categories) > 0 and !isset($_GET["add"]) and !isset($_GET["edit"])){
 </form>
 
 <?php } else if(isset($_GET["edit"])){?>
-<h2>Kategorie anlegen</h2>
+<h2>Kategorie bearbeiten</h2>
 <form action="?action=categories" method="post">
 <input type="hidden" name="id" value="<?php echo intval($_GET["edit"])?>">
 <p>Name: <input type="text" name="name" value="<?php echo categories::getCategoryById(intval($_GET["edit"]));?>">
