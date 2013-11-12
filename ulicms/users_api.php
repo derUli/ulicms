@@ -55,7 +55,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
          $acl_group = "NULL";
     
      db_query("INSERT INTO " . tbname("admins") . " 
-(username,lastname, firstname, email, password, `group`, `group_id`) VALUES('$username',' $lastname','$firstname','$email','" . hash_password($password) . "',$group, $acl_group)");
+(username,lastname, firstname, email, password, `group`, `group_id`) VALUES('$username', '$lastname','$firstname','$email','" . hash_password($password) . "',$group, $acl_group)");
      $message = "Hallo $firstname,\n\n" .
      "Ein Administrator hat auf http://" . $_SERVER["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" .
      "Die Zugangsdaten lauten:\n\n" .
