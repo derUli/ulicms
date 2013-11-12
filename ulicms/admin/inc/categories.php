@@ -14,11 +14,6 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
     
     include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
     $categories = categories::getAllCategories();
-    
-    
-    
-    
-    
 }
 
 ?>
