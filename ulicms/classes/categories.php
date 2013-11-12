@@ -15,6 +15,20 @@ class categories
     return db_insert_id();
   }
   
+  public static function getHTMLSelect($default = 1){
+      $lst = self::getAllCategories("name");
+      $html = "<select name='category' size='1'>";
+      foreach($lst as $cat){
+        if($cat["id"] == "default")
+           $html .= "<option value='".$cat["id"]."' selected='selected'>".db_escape($cat["name"])."</option>";
+        else
+           $html .= "<option value='".$cat["id"]."'>".db_escape($cat["name"])."</option>";
+      }
+      
+      $html .="</select>";
+      return $html;
+  }
+  
   public static function deleteCategory($id){
      $sqlString = "DELETE FROM ".tbname("categories").
      " WHERE id = ".$id;
