@@ -161,6 +161,8 @@ echo categories::getHTMLSelect($_SESSION["filter_category"], true);?>
          if($_SESSION["filter_category"] != 0){
              $filter_sql .= "AND category=".intval($_SESSION["filter_category"])." ";
          }        
+         
+         $filter_sql .= "AND ".$filter_status." ";
         
          $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(db_error());
          if(db_num_rows($query) > 0){
