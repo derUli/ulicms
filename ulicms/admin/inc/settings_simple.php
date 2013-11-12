@@ -101,28 +101,6 @@
 ></td>
 </tr>
 <tr>
-<td><strong>Standard-Gruppe für neue Nutzer:</strong>
-</td>
-<td>
-<select name="registered_user_default_level" size=1 style="width:100%;">
-<option value="50" <?php if($settings["registered_user_default_level"] == 50) echo "selected";
-             ?>>Admin</option>
-<option value="40" <?php if($settings["registered_user_default_level"] == 40) echo "selected";
-             ?>>Redakteur</option>
-<option value="30" <?php if($settings["registered_user_default_level"] == 30) echo "selected";
-             ?>>Autor</option>
-<option value="20" <?php if($settings["registered_user_default_level"] == 20) echo "selected";
-             ?>>Mitarbeiter</option>
-<option value="10" <?php if($settings["registered_user_default_level"] == 10 or $settings["registered_user_default_level"] === false) echo "selected";
-             ?>>Gast</option>
-<option value="0" <?php if($settings["registered_user_default_level"] == 0) echo "selected";
-             ?>>Gesperrter Nutzer</option>
-</select>
-
-</td>
-</tr>
-
-<tr>
 <td></td>
 <td><strong data-tooltip="Zusätzliche Informationen die für Optimierung des Suchmaschinen-Rankings dienen...">Meta-Daten für Suchmaschinen:</strong></td>
 </tr>

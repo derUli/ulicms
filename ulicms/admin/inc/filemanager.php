@@ -1,4 +1,5 @@
 ﻿<?php if(defined("_SECURITY")){
+$acl = new ACL();
      if($acl -> hasPermission($_GET["action"])){
          ?>
 

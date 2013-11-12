@@ -1,6 +1,7 @@
 <h1>Cache</h1>
 <?php
-if($_SESSION["group"] >= 20){
+$acl = new ACL();
+if($acl->hasPermission("cache")){
      ?>
 <?php
      if(isset($_GET["clear_cache"])){
@@ -46,8 +47,7 @@ löschen.</p>
      ?>
 
 <?php }else{
-    
-     echo "<p>Zugriff verweigert!</p>";
+     noperms();
      }
 
 ?>
