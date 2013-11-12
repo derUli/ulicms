@@ -232,7 +232,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
         mysqli_query($connection, $create_table_groups_sql)or die(mysqli_error($connection));
         
         $insert_group_query = 'INSERT INTO `' . $prefix . 'groups` (`id`, `name`, `permissions`) VALUES
-(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"flash":true,"groups":true,"images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"templates":true,"update_system":true,"users":true}\')';
+(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"flash":true,"groups":true, "categories" : true, "images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"templates":true,"update_system":true,"users":true}\')';
         
         mysqli_query($connection, $insert_group_query);
         
@@ -270,7 +270,6 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `created` bigint(20) NOT NULL,
   `lastmodified` bigint(20) NOT NULL,
   `autor` int(11) NOT NULL,
-  `category` int(11) NOT NULL,
   `lastchangeby` int(11) NOT NULL,
   `views` int(11) NOT NULL,
   `comments_enabled` tinyint(1) NOT NULL,
@@ -289,7 +288,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
         
         
          mysqli_query($connection, "INSERT INTO `" . $prefix . "content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
-(1, 0, 'willkommen', 'Willkommen', '_self', '<p>Willkommen auf einer neuen Website die mit UliCMS betrieben wird.</p>\r\n', 'de', 1, 1364242679, 1364242833, 1, 0, 1, 19, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL),
+(1, 0, 'willkommen', 'Willkommen', '_self', '<p>Willkommen auf einer neuen Website die mit UliCMS betrieben wird.</p>\r\n', 'de', 1, 1364242679, 1364242833, 1, 1, 1, 19, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL),
 (2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 0, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;")or die(mysqli_error($connection));
         
          mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "settings` (
