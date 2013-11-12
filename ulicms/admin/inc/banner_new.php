@@ -13,10 +13,15 @@
 <br/><br/>
 <strong data-tooltip="Wohin soll der Banner verlinken?">Link-URL:</strong><br/>
 <input type="text" style="width:300px;" name="link_url" value="">
+<br/>
 
 <br/>
 
-<br/><br/>
+<strong>Kategorie:</strong><br/>
+<?php echo categories::getHTMLSelect()?>
+
+<br/>
+<br/>
 <input type="submit" value="Datensatz hinzufügen">
 <?php
          if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){

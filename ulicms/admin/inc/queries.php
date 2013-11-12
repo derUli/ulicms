@@ -1,7 +1,6 @@
 <?php
 
 $acl = new ACL();
-
 add_hook("query");
 
 if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
@@ -279,9 +278,10 @@ if($_POST["add_banner"] == "add_banner" && $acl -> hasPermission("banners")){
      $name = db_escape($_POST["banner_name"]);
      $image_url = db_escape($_POST["image_url"]);
      $link_url = db_escape($_POST["link_url"]);
+     $category = intval($_POST["category"]);
     
      $query = db_query("INSERT INTO " . tbname("banner") . " 
-(name,link_url,image_url) VALUES('$name','$link_url','$image_url')", $connection);
+(name,link_url,image_url, category) VALUES('$name','$link_url','$image_url', '$category')", $connection);
     
      header("Location: index.php?action=banner");
      exit();
@@ -515,10 +515,11 @@ if($_POST["edit_banner"] == "edit_banner" && $acl -> hasPermission("banners")){
      $name = db_escape($_POST["banner_name"]);
      $image_url = db_escape($_POST["image_url"]);
      $link_url = db_escape($_POST["link_url"]);
+     $category = intval($_POST["category_id"]);
      $id = intval($_POST["id"]);
     
      $query = db_query("UPDATE " . tbname("banner") . " 
-SET name='$name',link_url='$link_url',image_url='$image_url' WHERE id=$id");
+SET name='$name', link_url='$link_url', image_url='$image_url', category='$category' WHERE id=$id");
     
     
      header("Location: index.php?action=banner");

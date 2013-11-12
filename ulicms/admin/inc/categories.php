@@ -27,11 +27,18 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
     }
     
     include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
-    $categories = categories::getAllCategories();
+    if(isset($_GET["order"]))
+       $order = basename($_GET["order"]);    
+    else
+       $order = "id";
+    
+    $categories = categories::getAllCategories($order);
 
 ?>
 
-<?php if(!isset($_GET["add"]) and !isset($_GET["edit"])){ ?>
+<?php 
+if(!isset($_GET["add"]) and !isset($_GET["edit"])){ 
+?>
 
 <p><a href="?action=categories&add">Kategorie Anlegen</a></p>
 <?php }?>
@@ -41,8 +48,8 @@ if(count($categories) > 0 and !isset($_GET["add"]) and !isset($_GET["edit"])){
 ?>
 <table>
 <tr>
-<td><strong>ID</strong></td>
-<td><strong>Name</strong></td>
+<td style="min-width:100px;"><a href="?action=categories&order=id"><strong>ID</strong></a></td>
+<td style="min-width:200px;"><a href="?action=categories&order=name"><strong>Name</strong></a></td>
 <td></td>
 <td></td>
 </tr>
