@@ -11,6 +11,13 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
           categories::addCategory($_REQUEST["name"]);
           }
     }
+    
+        // Create
+    if(isset($_REQUEST["update"])){
+       if(!empty($_REQUEST["name"]) and !empty($_REQUEST["id"])){
+          categories::updateCategory(intval($_REQUEST["id"]), $_REQUEST["name"]);
+          }
+    }
 
     // Delete
     if(isset($_GET["del"])){

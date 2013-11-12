@@ -1,6 +1,12 @@
 <?php
 class categories
 {
+
+  public static function updateCategory($id, $name){
+     $sql = "UPDATE ".tbname("categories")." SET name='".db_escape($name)."' WHERE id=".$idM
+     return db_error($sql);
+  }
+
   public static function addCategory($name = null){
    if(is_null($name) or empty($name))
       return null;
