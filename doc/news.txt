@@ -13,8 +13,9 @@
 	Es ist außerdem geplant, den Installer soweit anzupassen, dass man die zu nutzende Datenbanksoftware auswählen kann.
 [*] Die Datenbank wird nun über mysqli_ angesprochen, da die alten mysql_ Schnittstelle in PHP 5.5
     als Deprecated (veraltet) gekennzeichnet ist. 
-    Achtung! Diese Änderung hat zur Folge, dass Pakete, die noch die alte API nutzen, nicht mehr funktionieren können.
-	Bitte installieren Sie Pakete nur aus der offiziellen Paketquelle oder erstellen Sie mit ulicms-pkg eine Paketquelle, die mit dieser Version des CMS kompatibel ist.
+    Achtung! Diese Änderung hat zur Folge, dass Pakete, die noch die alte API nutzen, 
+    nicht mehr funktionieren können.
+    Bitte installieren Sie Pakete nur aus der offiziellen Paketquelle oder erstellen Sie mit ulicms-pkg eine Paketquelle, die mit dieser Version des CMS kompatibel ist.
 [*] Die mysql_ Variablen in der Datei "cms-config.php" müssen bei einem Upgrade durch db_ ersetzt werden.
     z.B. mysql_password ersetzen durch db_password.
 [*] Folge Konfigurationsvariable wurde hinzugefügt:
@@ -23,7 +24,6 @@
 	var $db_type="mysql";
 [*] Neue API-Funktionen hinzugefügt:
     isModuleInstalled, clearCache, getOnlineUsers und weitere
-    
 [*] Diverse Funktionalitäten in Helper-Klassen ausgelagert, 
     Aus Kompatiblitätsgründen bleiben die Prozeduralen API-Funktionen erhalten.
 [*] Access Control List hinzugefügt.
@@ -31,4 +31,5 @@
     Hierarische Rechtesystem behalten. 
     Es soll aber in kommenden Releases entfernt werden.
 [*] Bei der Installation kann man den Namen des Adminaccounts ändern.
-[*] Kategorien können hinzugefügt werden. Inhalte können in Kategorien einsortiert werden, um die Verwaltung der Inhalte übersichtlicher zu machen.
+[*] Kategorien können hinzugefügt werden. Inhalte können in Kategorien einsortiert werden,
+    um die Verwaltung der Inhalte übersichtlicher zu machen.
