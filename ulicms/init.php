@@ -90,9 +90,9 @@ else if(is_dir("installer")){
 // else use default error_reporting from php.ini
 if(defined("ULICMS_DEBUG")){
  if(ULICMS_DEBUG)
- error_reporting(E_ALL ^ E_NOTICE);
+   error_reporting(E_ALL ^ E_NOTICE);
  else
- error_reporting(0);
+   error_reporting(0);
 }else{
  error_reporting(0);
 }
