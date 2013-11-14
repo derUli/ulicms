@@ -10,7 +10,7 @@ function hash_password($password){
          $salt = $newSalt;
          }
     
-     return sha1($salt . $password);
+     return hash("sha512", $salt . $password);
      }
 
 ?>
