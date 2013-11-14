@@ -1,11 +1,11 @@
 <?php 
 class config extends baseConfig{
 
-var $db_server="";
-var $db_user="";
-var $db_password="";
-var $db_database="";
-var $db_prefix="";
+var $db_server="localhost";
+var $db_user="root";
+var $db_password="password";
+var $db_database="test";
+var $db_prefix="trjtzjntzjuzrfvd_";
 var $db_type="mysql";
 
 }

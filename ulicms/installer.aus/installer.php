@@ -1,8 +1,9 @@
 <?php
 session_start();
 setcookie(session_name(), session_id());
-header("Content-Type: text/html; charset=UTF-8");
 error_reporting (E_ALL ^ E_NOTICE);
+header("Content-Type: text/html; charset=UTF-8");
+include_once "../lib/workaround.php";
 ?>
 <!DOCTYPE html>
 <head>
@@ -350,7 +351,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (24, 'spamfilter_words_blacklist', 
 '$badwords'),
 (25, 'empty_trash_days', '30'),
-(26, 'password_salt', '2'),
+(26, 'password_salt', '$salt'),
 (27, 'timezone', 'Europe/Berlin'),
 (28, 'db_schema_version', '6.7'),
 (29, 'pkg_src', 'http://www.ulicms.de/packages/{version}/'),
