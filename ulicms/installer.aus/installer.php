@@ -241,9 +241,10 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
          $nachname = mysqli_real_escape_string($connection, $_POST["lastname"]);
          $zusammen = mysqli_real_escape_string($connection, "$vorname $nachname");
          $email = mysqli_real_escape_string($connection, $_POST["email"]);
-         $passwort = mysqli_real_escape_string($connection, $_POST["passwort"]);
+         $passwort = $_POST["passwort"];
          $admin_user = mysqli_real_escape_string($connection, $_POST["admin_user"]);
          $encrypted_passwort = hash("sha512", $salt . $passwort);
+         $encrypted_passwort = mysqli_real_escape_string($connection, $encrypted_passwort);
         
          mysqli_query($connection, "INSERT INTO `" . $prefix . "admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`, `group_id`) VALUES
 (1, 0, '" . $admin_user . "', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50, 1);")or die(mysqli_error($connection));
