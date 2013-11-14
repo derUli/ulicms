@@ -305,6 +305,7 @@ if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl -> hasPermission("u
      $lastname = db_escape($_POST["admin_lastname"]);
      $firstname = db_escape($_POST["admin_firstname"]);
      $group = getconfig("registered_user_default_level");
+     $password = $_POST["admin_password"];
      if($group === false)
          $group = 10;
      $email = db_escape($_POST["admin_email"]);
