@@ -5,7 +5,6 @@ add_hook("query");
 
 if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
      setconfig("registered_user_default_level", intval($_POST["registered_user_default_level"]));
-    
      setconfig("homepage_title", db_escape($_POST["homepage_title"]));
      setconfig("homepage_owner", db_escape($_POST["homepage_owner"]));
      setconfig("motto", db_escape($_POST["homepage_motto"]));
@@ -476,7 +475,7 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
      $lastname = db_escape($_POST["admin_lastname"]);
      $firstname = db_escape($_POST["admin_firstname"]);
      $email = db_escape($_POST["admin_email"]);
-     $password = db_escape($_POST["admin_password"]);
+     $password = $_POST["admin_password"];
      $rechte = db_escape($_POST["admin_rechte"]);
     
      if(isset($_POST["group_id"])){
