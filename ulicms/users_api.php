@@ -110,7 +110,6 @@ function register_session($user, $redirect = true){
 
 function validate_login($user, $password){
      include_once "../lib/encryption.php";
-     $user = db_escape($user);
      $user = getUserByName($user);
     
      if($user){
