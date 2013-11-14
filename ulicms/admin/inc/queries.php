@@ -300,7 +300,6 @@ if($_POST["add_key"] == "add_key" and $acl -> hasPermission("expert_settings")){
      }
 
 if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl -> hasPermission("users"))){
-     include_once "../lib/encryption.php";
      $username = $_POST["admin_username"];
      $lastname = $_POST["admin_lastname"];
      $firstname = $_POST["admin_firstname"];
