@@ -468,9 +468,7 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
     
      if($db_avatar_filename == "content/avatars/"){
          $db_avatar_filename = "";
-         }
-    
-    
+         }    
      $username = db_escape($_POST["admin_username"]);
      $lastname = db_escape($_POST["admin_lastname"]);
      $firstname = db_escape($_POST["admin_firstname"]);
