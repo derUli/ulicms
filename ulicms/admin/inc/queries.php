@@ -301,14 +301,12 @@ if($_POST["add_key"] == "add_key" and $acl -> hasPermission("expert_settings")){
 
 if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl -> hasPermission("users"))){
      include_once "../lib/encryption.php";
-     $username = db_escape($_POST["admin_username"]);
-     $lastname = db_escape($_POST["admin_lastname"]);
-     $firstname = db_escape($_POST["admin_firstname"]);
-     $group = getconfig("registered_user_default_level");
+     $username = $_POST["admin_username"];
+     $lastname = $_POST["admin_lastname"];
+     $firstname = $_POST["admin_firstname"];
+     $group = 40;
      $password = $_POST["admin_password"];
-     if($group === false)
-         $group = 10;
-     $email = db_escape($_POST["admin_email"]);
+     $email = $_POST["admin_email"];
     
      adduser($username, $lastname, $firstname, $email, $password, $group, true);
     

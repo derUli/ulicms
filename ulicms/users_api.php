@@ -50,12 +50,13 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
      // Default ACL Group
     if(!$acl_group)
          $acl_group = getconfig("default_acl_group");
+         if(!$acl_group) 
+            $acl_group = "NULL";
     
      if(is_null($acl_group))
          $acl_group = "NULL";
-    
      db_query("INSERT INTO " . tbname("admins") . " 
-(username,lastname, firstname, email, password, `group`, `group_id`) VALUES('$username', '$lastname','$firstname','$email','" . db_escape(hash_password($password)) . "',$group, $acl_group)");
+(username,lastname, firstname, email, password, `group`, `group_id`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape(hash_password($password)) . "',$group, ".$acl_group.")")or die(db_error());
      $message = "Hallo $firstname,\n\n" .
      "Ein Administrator hat auf http://" . $_SERVER["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" .
      "Die Zugangsdaten lauten:\n\n" .
