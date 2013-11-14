@@ -349,7 +349,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (24, 'spamfilter_words_blacklist', 
 '$badwords'),
 (25, 'empty_trash_days', '30'),
-(26, 'password_salt', '$salt'),
+(26, 'password_salt', '2'),
 (27, 'timezone', 'Europe/Berlin'),
 (28, 'db_schema_version', '6.7'),
 (29, 'pkg_src', 'http://www.ulicms.de/packages/{version}/'),
