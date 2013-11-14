@@ -486,7 +486,7 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
              $group_id = intval($group_id);
         
          }else{
-         $group_id = $_SESSION["group_id"];
+            $group_id = $_SESSION["group_id"];
          }
     
      $icq_id = db_escape($_POST["icq_id"]);

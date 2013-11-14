@@ -15,7 +15,6 @@ function getUsers(){
 function changePassword($password, $id){
      include_once "../lib/encryption.php";
      $newPassword = hash_password($password);
-	 $newPassword = db_escape($newPassword);
      return db_query("UPDATE " . tbname("admins") . " SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
      }
 
