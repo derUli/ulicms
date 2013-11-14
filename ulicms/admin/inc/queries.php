@@ -307,8 +307,9 @@ if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl -> hasPermission("u
      $group = 40;
      $password = $_POST["admin_password"];
      $email = $_POST["admin_email"];
+     $sendMail = isset($_POST["send_mail"]);
     
-     adduser($username, $lastname, $firstname, $email, $password, $group, true);
+     adduser($username, $lastname, $firstname, $email, $password, $group, $sendMail);
     
      header("Location: index.php?action=admins");
      exit();
