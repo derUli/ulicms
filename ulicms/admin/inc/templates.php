@@ -1,4 +1,4 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
     $acl = new ACL();
      if($acl -> hasPermission("templates")){
         
