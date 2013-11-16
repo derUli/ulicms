@@ -1,4 +1,4 @@
-﻿<?php if(defined("_SECURITY")){
+<?php if(defined("_SECURITY")){
      include_once "../version.php";
      $version = new ulicms_version();
      $acl = new ACL();
