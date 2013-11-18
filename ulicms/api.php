@@ -197,7 +197,7 @@ function buildCacheFilePath($request_uri){
     
      $unique_identifier = $request_uri . $language;
     
-     return "content/cache/" . md5($unique_identifier) . ".html";
+     return "content/cache/" . md5($unique_identifier) . ".tmp";
      }
 
 
