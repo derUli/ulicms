@@ -99,6 +99,18 @@ function db_last_error(){
 function db_error(){
      return db_last_error();
      }
+	 
+function db_get_tables()
+{     
+  global $db_connection ;
+  $tableList = array();
+  $res = mysqli_query($db_connection,"SHOW TABLES");
+  while($cRow = mysqli_fetch_array($res))
+  {
+    $tableList[] = $cRow[0];
+  }
+  return $tableList;
+}
 
 function db_real_escape_string($value){
      global $db_connection ;
