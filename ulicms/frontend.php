@@ -43,9 +43,21 @@ if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("ma
      die();
      }
 
+if(isset($_GET["format"]) and !empty($_GET["format"])){
+   $format = trim($_GET["format"]);
+} else {
+   $format = "html";
+}
+
 
 header("HTTP/1.0 " . $status);
-header("Content-Type: text/html; charset=utf-8");
+
+if($format == "html"){
+   header("Content-Type: text/html; charset=utf-8");
+} else if($format == "pdf"){
+   $pdf = new PDFCreator();
+   $pdf->output();
+}
 
 if(count(getThemeList()) === 0)
      throw new Exception("Keine Themes vorhanden!");

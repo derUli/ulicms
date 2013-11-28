@@ -1,0 +1,117 @@
+
+/**************************************************/
+/*                                   Body and Wrapper                             */
+/**************************************************/
+
+body {
+margin: 0;
+padding: 0;
+}
+
+#wrapper {
+margin: 0 auto;
+width: 800px;
+padding: 0;
+text-align: left;
+}
+
+/**************************************************/
+/*                                       Top Piece                                        */
+/**************************************************/
+
+#top {
+background: url(images/bgtop.png) top center no-repeat; 
+width: 800px;
+height: 78px;
+}
+
+/**************************************************/
+/*                                       Content                                             
+another wrapper that holds all the content                              */
+/**************************************************/
+
+#content {
+background: url(images/bgmiddle.png) center repeat-y; 
+width: 766px;
+height: 100%;
+padding: 0px 17px 0px 17px;
+}
+
+/**************************************************/
+/*                               All the content                                        */
+/**************************************************/
+
+#header {
+background: url(images/header.png) top center no-repeat; 
+width: 746px;
+height: 106px;
+margin: 0px 0px 10px 0px;
+padding: 60px 0px 0px 20px;
+color: white;
+font-size: 50px;
+text-align: ;
+}
+/*                    Menu                   */
+#menu {
+width: 200px;
+height: 100%;
+margin-left: 10px;
+float: left;
+text-align: left;
+}
+
+#menu li a {
+height: 37px;
+voice-family: "\"}\""; 
+voice-family: inherit;
+height: 29px;
+text-decoration: none;
+text-align: left;
+}	
+	
+#menu li a:link, #menu li a:visited {
+color: navy;
+display: block;
+background:  url(images/off.png) top center no-repeat;
+padding: 8px 0 0 10px;
+height: 29px;
+text-align: left;
+}
+	
+#menu li a:hover {
+color: blue;
+background:  url(images/on.png) top center no-repeat;
+padding: 8px 0 0 10px;
+height: 29px;
+text-align: left;
+}	
+
+ul {
+list-style: none;
+margin: 0;
+padding: 0;
+text-align: left;
+}
+
+#stuff {
+background:  url(images/texttop.png) top left no-repeat;
+width: 520px;
+margin: 0px 0px 0px 220px;
+padding-top: 55px;
+border: 2px navy;
+}
+
+img {
+border: none;
+} 
+
+/**************************************************/
+/*                                       Bottom                                             */
+/**************************************************/
+
+#bottom {
+background: url(images/bgbottom.png) bottom center no-repeat; 
+width: 800px;
+height: 50px;
+}
+

@@ -9,3 +9,5 @@ var $db_prefix="trjtzjntzjuzrfvd_";
 var $db_type="mysql";
 
 }
+
+define("ULICMS_DEBUG", true);
