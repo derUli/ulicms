@@ -61,6 +61,9 @@ if($format == "html"){
    $csv = new CSVCreator();
    $csv->output();
    }
+else{
+   $format = "html";
+}
 
 if(count(getThemeList()) === 0)
      throw new Exception("Keine Themes vorhanden!");

@@ -71,6 +71,7 @@ $this->httpHeader();
       
       $data[] = array("Title", "Content", "Meta Description", "Meta Keywords", "Author");
       $data = array();
+      $this->content = str_replace("\n\n", "", $this->content);
       $data[] = array($this->title, $this->content, meta_description(), meta_keywords(), $author);
       
       $csv_string = getCSV($data[0]);

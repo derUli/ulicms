@@ -14,6 +14,11 @@ class PDFCreator{
      
    }
    
+    private function httpHeader(){
+    header("Content-type: application/pdf; charset=UTF-8");
+    header('Content-Disposition: attachment; filename="'.get_requested_pagename().'.pdf"'); 
+    }
+   
    public function output(){     
       $hasModul = containsModule(get_requested_pagename());
 
@@ -25,23 +30,22 @@ class PDFCreator{
       if(file_exists($this->cached_file)){
          $last_modified = filemtime($this->cached_file);  
           if(time() - $last_modified < CACHE_PERIOD){
-          header("Content-type: application/pdf");
-          readfile($this->cached_file);
+          $this->httpHeader();
           exit();
           }    else {
         @unlink($this->cached_file);
       } 
-      
-      
+
       } 
       }
-
+      
+      
 
       $mpdf = new mPDF(getCurrentLanguage(true), 'A4');
       $mpdf->WriteHTML($this->content);
       $mpdf->Output($this->cached_file);
       
-      header("Content-type: application/pdf");
+      $this->httpHeader();
       readfile($this->cached_file);
       exit();
    }
