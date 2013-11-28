@@ -1,6 +1,23 @@
 <?php
 
 
+function getCacheType(){
+$c = getconfig("cache_type");
+switch($c){
+ case "cache_lite":
+     @include "Cache/Lite.php";
+     $cache_type = "cache_lite";
+    
+     break;
+ case "file": default:
+     $cache_type = "file";
+     break;
+     break;
+     }
+     
+   return $cache_type;
+}
+
 function getOnlineUsers(){
      $users_online = db_query("SELECT * FROM " . tbname("admins") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
      $users = array();
@@ -294,6 +311,25 @@ function find_all_files($dir)
          }
      return $result;
      }
+
+/**
+ *  outputCSV creates a line of CSV and outputs it to browser    
+ */
+function outputCSV($array) {
+    $fp = fopen('php://output', 'w'); // this file actual writes to php output
+    fputcsv($fp, $array);
+    fclose($fp);
+}
+ 
+/**
+ *  getCSV creates a line of CSV and returns it. 
+ */
+function getCSV($array) {
+    ob_start(); // buffer the output ...
+    outputCSV($array);
+    return ob_get_clean(); // ... then return it as a string!
+}
+
 
 /**
  * Output buffer flusher

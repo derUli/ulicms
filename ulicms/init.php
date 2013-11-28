@@ -72,7 +72,7 @@ set_exception_handler('exception_handler');
 // Workaround für Magic Quotes und Register Globals
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "workaround.php";
 
-include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "pdf_creator.php";
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "pdf_creator.php";include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "csv_creator.php";
 
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__file__) . DIRECTORY_SEPERATOR . "cms-config.php";

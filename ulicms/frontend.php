@@ -57,7 +57,10 @@ if($format == "html"){
 } else if($format == "pdf"){
    $pdf = new PDFCreator();
    $pdf->output();
-}
+} else if($format == "csv"){
+   $csv = new CSVCreator();
+   $csv->output();
+   }
 
 if(count(getThemeList()) === 0)
      throw new Exception("Keine Themes vorhanden!");
