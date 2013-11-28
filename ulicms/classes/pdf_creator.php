@@ -16,7 +16,7 @@ class PDFCreator{
    
     private function httpHeader(){
     header("Content-type: application/pdf; charset=UTF-8");
-    header('Content-Disposition: attachment; filename="'.get_requested_pagename().'.pdf"'); 
+
     }
    
    public function output(){     

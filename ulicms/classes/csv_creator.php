@@ -15,7 +15,6 @@ class CSVCreator{
    
    private function httpHeader(){
     header("Content-type: text/csv; charset=UTF-8");
-    header('Content-Disposition: attachment; filename="'.get_requested_pagename().'.csv"'); 
    
    }
    

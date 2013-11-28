@@ -1,9 +1,7 @@
-# Konfiguration für nginx Server
-# für Suchmaschinenfreundliche URLs
+# nginx configuration
 
-if (!-f $request_filename){
-	set $rule_0 1;
-}
-if ($rule_0 = "1"){
-	rewrite ^/(.*).html$ /./?seite=$1 ;
+location / {
+  if (!-e $request_filename){
+    rewrite ^/(.*).(html|pdf|csv|txt)$ /?seite=$1&format=$2;
+  }
 }
