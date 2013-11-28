@@ -35,4 +35,4 @@
     um die Verwaltung der Inhalte übersichtlicher zu machen.
 [*] Passwörter werden jetzt als SHA-512 statt wie vorher als SHA-1 gehasht.
 [*] Beim anlegen eines Users ist der Versand der Zugangsdaten optional
-[*] Ausgabe von Inhalten auch als PDF und als CSV möglich.
+[*] Ausgabe von Inhalten auch als PDF, TXT und als CSV möglich.
