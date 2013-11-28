@@ -8,9 +8,7 @@ class CSVCreator{
      $this->title = get_title();
      ob_start();  
      content();
-     $this->content = ob_get_clean();
-
-     
+     $this->content = ob_get_clean();    
    }
    
    private function httpHeader(){
@@ -70,6 +68,8 @@ $this->httpHeader();
       
       $data = array();
       $data[] = array("Title", "Content", "Meta Description", "Meta Keywords", "Author");
+      $this->content = str_replace("\r\n", "\n", $this->content);
+      $this->content = str_replace("\r", "\n", $this->content);
       $this->content = str_replace("\n", " ", $this->content);
       $data[] = array($this->title, $this->content, meta_description(), meta_keywords(), $author);
       
