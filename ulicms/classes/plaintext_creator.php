@@ -1,12 +1,15 @@
 <?php 
-class CSVCreator{
+class PlainTextCreator{
    var $target_file = null;
    var $content = null;
    var $title = null;
    public function __construct(){
-     $this->cached_file = buildCacheFilePath($_SESSION["REQUEST_URI"].".csv");
-     $this->title = get_title();
+     $this->cached_file = buildCacheFilePath($_SESSION["REQUEST_URI"].".txt");
+     
      ob_start();  
+     echo get_title();
+     echo "\r\n";
+     echo "\r\n";
      content();
      $this->content = ob_get_clean();
 
@@ -14,7 +17,7 @@ class CSVCreator{
    }
    
    private function httpHeader(){
-    header("Content-type: text/csv; charset=UTF-8");
+    header("Content-type: text/plain; charset=UTF-8");
    
    }
    
@@ -68,30 +71,31 @@ $this->httpHeader();
       autor();
       $author = ob_get_clean();
       
-      $data = array();
       $data[] = array("Title", "Content", "Meta Description", "Meta Keywords", "Author");
-      $this->content = str_replace("\n\n", "", $this->content);
-      $data[] = array($this->title, $this->content, meta_description(), meta_keywords(), $author);
+      $data = array();
+      $this->content = strip_tags($this->content);
+      $this->content = str_replace("\r\n", "\n", $this->content);
+      $this->content = str_replace("\r", "\n", $this->content);
+      $this->content = str_replace("\n", "\r\n", $this->content);
       
-      $csv_string = getCSV($data[0]);
-      $csv_string .= getCSV($data[1]);
+      
       
        if(!getconfig("cache_disabled")
          and getenv('REQUEST_METHOD') == "GET" and 
          !$hasModul){   
          if(getCacheType() == "file"){
             $handle = fopen($this->cached_file, "w");
-            fwrite($handle, $csv_string);
+            fwrite($handle, $this->content);
             fclose($handle);
             }
          else if(getCacheType() == "cache_lite"){
-            $Cache_Lite -> save($csv_string, $id);
+            $Cache_Lite -> save($this->content, $id);
          }
          }
      
       
       $this->httpHeader();
-      echo $csv_string;
+      echo $this->content;
       exit();
    }
 }

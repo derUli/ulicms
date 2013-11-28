@@ -61,6 +61,11 @@ if($format == "html"){
    $csv = new CSVCreator();
    $csv->output();
    }
+else if($format == "txt"){
+   $plain = new PlainTextCreator();
+   $plain->output();
+
+}
 else{
    $format = "html";
 }

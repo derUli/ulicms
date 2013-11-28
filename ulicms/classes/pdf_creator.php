@@ -6,7 +6,7 @@ class PDFCreator{
    var $language = null;
    var $paper_format = "A4";
    public function __construct(){
-     $this->cached_file = buildCacheFilePath($_SESSION["REQUEST_URI"]);
+     $this->cached_file = buildCacheFilePath($_SESSION["REQUEST_URI"].".pdf");
      ob_start();    
      echo "<h1>".get_title()."</h1>";
      content();
