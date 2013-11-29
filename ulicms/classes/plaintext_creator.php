@@ -4,7 +4,7 @@ class PlainTextCreator{
    var $content = null;
    var $title = null;
    public function __construct(){
-     $this->cached_file = buildCacheFilePath($_SESSION["REQUEST_URI"].".txt");
+     $this->cached_file = buildCacheFilePath($_SERVER["REQUEST_URI"]);
      
      ob_start();  
      echo get_title();

@@ -4,7 +4,7 @@ class CSVCreator{
    var $content = null;
    var $title = null;
    public function __construct(){
-     $this->cached_file = buildCacheFilePath($_SESSION["REQUEST_URI"].".csv");
+     $this->cached_file = buildCacheFilePath($_SERVER["REQUEST_URI"]);
      $this->title = get_title();
      ob_start();  
      content();
