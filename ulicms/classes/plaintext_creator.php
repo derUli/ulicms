@@ -73,6 +73,8 @@ $this->httpHeader();
       
       $data[] = array("Title", "Content", "Meta Description", "Meta Keywords", "Author");
       $data = array();
+      $this->content = str_replace("<br/>", "\r\n", $this->content);
+      $this->content = str_replace("<br>", "\r\n", $this->content);
       $this->content = strip_tags($this->content);
       $this->content = str_replace("\r\n", "\n", $this->content);
       $this->content = str_replace("\r", "\n", $this->content);
