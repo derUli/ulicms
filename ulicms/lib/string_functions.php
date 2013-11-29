@@ -44,8 +44,8 @@
 }
 
 
-  if(!function_exists("normalizeLN")){{
-    function normalizeLN($txt, $style = "\r\n")  {
+  if(!function_exists("normalizeLN")){
+    function normalizeLN($txt, $style = "\r\n"){
         $txt = str_replace("\r\n", "\n", $txt);
         $txt = str_replace("\r", "\n", $txt);
         $txt = str_replace("\n", $style, $txt);

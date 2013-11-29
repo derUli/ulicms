@@ -10,4 +10,5 @@ var $db_type="mysql";
 
 }
 
+error_reporting(E_ALL);
 define("ULICMS_DEBUG", true);
