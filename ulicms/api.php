@@ -633,6 +633,8 @@ function logged_in(){
      return is_logged_in();
      }
 
+
+
 // Tabellenname zusammensetzen
 function tbname($name){
      require_once "cms-config.php";

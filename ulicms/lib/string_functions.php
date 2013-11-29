@@ -17,7 +17,7 @@
     
     
      }
-     if(!function_exists("unhtmlspecialchars"))
+     if(!function_exists("unhtmlspecialchars")){
      function unhtmlspecialchars( $string )
 {
   $string = str_replace ( '&amp;', '&', $string );
@@ -25,13 +25,17 @@
   $string = str_replace ( '&quot;', '"', $string );
   $string = str_replace ( '&lt;', '<', $string );
   $string = str_replace ( '&gt;', '>', $string );
-  $string = str_replace ( '&uuml;', '�', $string );
-  $string = str_replace ( '&Uuml;', '�', $string );
-  $string = str_replace ( '&auml;', '�', $string );
-  $string = str_replace ( '&Auml;', '�', $string );
-  $string = str_replace ( '&ouml;', '�', $string );
-  $string = str_replace ( '&Ouml;', '�', $string );    
-  retur
+  $string = str_replace ( '&uuml;', 'ü', $string );
+  $string = str_replace ( '&Uuml;', 'Ü', $string );
+  $string = str_replace ( '&auml;', 'ä', $string );
+  $string = str_replace ( '&Auml;', 'Ä', $string );
+  $string = str_replace ( '&ouml;', 'ö', $string );
+  $string = str_replace ( '&Ouml;', 'Ö', $string );    
+  $string = str_replace ( '&nbsp;', ' ', $string );    
+  return $string;
+  }
+  
+  }
 
  if(!function_exists("real_htmlspecialchars")){
      function real_htmlspecialchars($string)
