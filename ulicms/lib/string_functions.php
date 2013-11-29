@@ -43,6 +43,17 @@
 }
 }
 
+
+  if(!function_exists("normalizeLN")){{
+    function normalizeLN($txt, $style = "\r\n")  {
+        $txt = str_replace("\r\n", "\n", $txt);
+        $txt = str_replace("\r", "\n", $txt);
+        $txt = str_replace("\n", $style, $txt);
+        return $txt;
+    }
+  }
+
+
  if(!function_exists("real_htmlspecialchars")){
      function real_htmlspecialchars($string)
     {
