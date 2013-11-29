@@ -36,6 +36,12 @@
   }
   
   }
+  
+  if(!function_exists("br2nlr")){
+  function br2nlr($html){
+    return preg_replace('#<br\s*/?>#i', "\r\n", $html);
+}
+}
 
  if(!function_exists("real_htmlspecialchars")){
      function real_htmlspecialchars($string)
