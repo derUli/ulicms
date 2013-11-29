@@ -1,7 +1,7 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.*).(html|pdf|csv|txt)$ ./?seite=$1&format=$2 [QSA]
+RewriteRule ^(.*).(html|pdf|csv|txt|json)$ ./?seite=$1&format=$2 [QSA]
 </IFModule>
 
 <IfModule mod_deflate.c>

@@ -2,6 +2,6 @@
 
 location / {
   if (!-e $request_filename){
-    rewrite ^/(.*).(html|pdf|csv|txt)$ /?seite=$1&format=$2;
+    rewrite ^/(.*).(html|pdf|csv|txt|json)$ /?seite=$1&format=$2;
   }
 }

@@ -60,6 +60,9 @@ if($format == "html"){
 } else if($format == "csv"){
    $csv = new CSVCreator();
    $csv->output();
+   } else if($format == "json"){
+   $json = new JSONCreator();
+   $json->output();
    }
 else if($format == "txt"){
    $plain = new PlainTextCreator();

@@ -74,6 +74,7 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERAT
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "pdf_creator.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "csv_creator.php";
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "json_creator.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "plaintext_creator.php";
 
 // if config exists require_config else redirect to installer
