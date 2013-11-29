@@ -17,6 +17,21 @@
     
     
      }
+     if(!function_exists("unhtmlspecialchars"))
+     function unhtmlspecialchars( $string )
+{
+  $string = str_replace ( '&amp;', '&', $string );
+  $string = str_replace ( '&#039;', '\'', $string );
+  $string = str_replace ( '&quot;', '"', $string );
+  $string = str_replace ( '&lt;', '<', $string );
+  $string = str_replace ( '&gt;', '>', $string );
+  $string = str_replace ( '&uuml;', '�', $string );
+  $string = str_replace ( '&Uuml;', '�', $string );
+  $string = str_replace ( '&auml;', '�', $string );
+  $string = str_replace ( '&Auml;', '�', $string );
+  $string = str_replace ( '&ouml;', '�', $string );
+  $string = str_replace ( '&Ouml;', '�', $string );    
+  retur
 
  if(!function_exists("real_htmlspecialchars")){
      function real_htmlspecialchars($string)
