@@ -211,6 +211,9 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
              $meta_description = $shortstring;
             
              }
+             
+             
+         $meta_description = unhtmlspecialchars($meta_description);
         
          $meta_description = db_escape($meta_description);
         
@@ -249,6 +252,7 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
              }
         
          $page_content = db_real_escape_String($page_content);
+         $meta_keywords = unhtmlspecialchars($meta_keywords);
          $meta_keywords = db_escape($meta_keywords);
         
          $language = db_escape($_POST["language"]);
