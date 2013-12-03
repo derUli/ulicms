@@ -4,7 +4,7 @@ function language_selection(){
      $query = db_query("SELECT * FROM " . tbname("languages") . " ORDER by name");
      echo "<ul class='language_selection'>";
      while($row = db_fetch_object($query)){
-         echo "<li>" . "<a href='" . get_requested_pagename() . ".html?language=" . $row -> language_code . "'>" . $row -> name . "</a></li>";
+         echo "<li>" . "<a href='" .buildSEOUrl(get_requested_pagename())."?language=" . $row -> language_code . "'>" . $row -> name . "</a></li>";
          }
      echo "</ul>";
     
@@ -302,11 +302,10 @@ function menu($name){
      while($row = db_fetch_object($query)){
          echo "  <li>" ;
          if(get_requested_pagename() != $row -> systemname){
-             echo "<a href='" . $row -> systemname . ".html' target='" .
+             echo "<a href='" . buildSEOUrl($row -> systemname)."' target='" .
              $row -> target . "'>";
              }else{
-             echo "<a class='menu_active_link' href='" . $row -> systemname .
-             ".html' target='" . $row -> target . "'>";
+             echo "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname)."' target='" . $row -> target . "'>";
              }
         
          echo htmlentities($row -> title, ENT_QUOTES, "UTF-8");
@@ -321,10 +320,10 @@ function menu($name){
                 
                  echo "      <li>";
                  if(get_requested_pagename() != $row2 -> systemname){
-                     echo "<a href='" . $row2 -> systemname . ".html' target='" .
+                     echo "<a href='" . buildSEOUrl($row2 -> systemname)."' target='" .
                      $row -> target . "'>";
                      }else{
-                     echo "<a class='menu_active_link' href='" . $row2 -> systemname . ".html' target='" .
+                     echo "<a class='menu_active_link' href='". buildSEOUrl($row2 -> systemname)."' target='" .
                      $row -> target . "'>";
                      }
                  echo htmlentities($row2 -> title, ENT_QUOTES, "UTF-8");
@@ -337,10 +336,10 @@ function menu($name){
                      while($row3 = db_fetch_object($query3)){
                          echo "      <li>";
                          if(get_requested_pagename() != $row3 -> systemname){
-                             echo "<a href='" . $row3 -> systemname . ".html' target='" .
+                             echo "<a href='" . buildSEOUrl($row3 -> systemname)."' target='" .
                              $row3 -> target . "'>";
                              }else{
-                             echo "<a class='menu_active_link' href='" . $row3 -> systemname . ".html' target='" .
+                             echo "<a class='menu_active_link' href='" . buildSEOUrl($row3 -> systemname)."' target='" .
                              $row3 -> target . "'>";
                              }
                          echo htmlentities($row3 -> title, ENT_QUOTES, "UTF-8");
@@ -353,10 +352,10 @@ function menu($name){
                              while($row4 = db_fetch_object($query4)){
                                  echo "<li>";
                                  if(get_requested_pagename() != $row4 -> systemname){
-                                     echo "<a href='" . $row4 -> systemname . ".html' target='" .
+                                     echo buildSEOUrl($row4 -> systemname)."' target='" .
                                      $row4 -> target . "'>";
                                      }else{
-                                     echo "<a class='menu_active_link' href='" . $row4 -> systemname . ".html' target='" .
+                                     echo "<a class='menu_active_link' href='".buildSEOUrl($row4 -> systemname)."' target='" .
                                      $row4 -> target . "'>";
                                      }
                                  echo htmlentities($row4 -> title, ENT_QUOTES, "UTF-8");
