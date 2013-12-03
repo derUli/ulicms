@@ -40,6 +40,30 @@ function getconfig($key){
          return false;
          }
      }
+     
+     
+     function rootDirectory(){
+     $pageURL = 'http';
+     if ($_SERVER["HTTPS"] == "on"){
+         $pageURL .= "s";
+         }
+     $pageURL .= "://";
+     $dirname = dirname($_SERVER["REQUEST_URI"]);
+     $dirname = str_replace("\\", "/", $dirname);
+     $dirname = trim($dirname, "/");
+     if($dirname != ""){
+         $dirname = "/" . $dirname . "/";
+         }else{
+         $dirname = "/";
+         }
+     if ($_SERVER["SERVER_PORT"] != "80"){
+         $pageURL .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $dirname;
+         }else{
+         $pageURL .= $_SERVER["SERVER_NAME"] . $dirname;
+         }
+     return $pageURL;
+     }
+
 
 if(!function_exists("get_host")){
      function get_host(){
