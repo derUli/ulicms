@@ -4,11 +4,27 @@ if(!defined("ULICMS_ROOT"))
 
 $acl = new ACL();
 
-if($acl -> hasPermission("pages") or $acl -> hasPermission("banners")){
+if($acl -> hasPermission("pages") or 
+$acl -> hasPermission("banners") or $acl -> hasPermission("news")
+or $acl -> hasPermission("comments")){
     ?>
 
 <h2>Inhalte</h2>
 <p><strong>Bitte wählen Sie einen Inhaltstyp aus:</strong><br/>
+<?php if($acl -> hasPermission("news")){
+            ?>
+  
+        <a href='?action=news'>News</a><br/>
+     
+      <?php }
+        ?>
+<?php if($acl -> hasPermission("comments")){
+            ?>
+      
+        <a href='?action=comments'>Kommentare</a><br/>
+     
+      <?php }?>
+
 <?php if($acl -> hasPermission("pages")){
         ?>
 <a href="index.php?action=pages">Seiten</a><br/>

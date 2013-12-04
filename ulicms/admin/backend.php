@@ -56,6 +56,12 @@ if(!$eingeloggt){
     
     else if($_GET["action"] == "pages"){
          require_once "inc/pages.php";
+         }   
+    else if($_GET["action"] == "news"){
+         require_once "inc/news.php";
+         }
+    else if($_GET["action"] == "comments"){
+         require_once "inc/comments.php";
          }
     else if($_GET["action"] == "categories"){
        require_once "inc/categories.php";
