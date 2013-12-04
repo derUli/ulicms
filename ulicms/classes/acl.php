@@ -135,8 +135,6 @@ class ACL{
         $acl_data["dashboard"] = null;
         
          // Inhalte
-        $acl_data["news"] = null;
-        $acl_data["comments"] = null;
         $acl_data["pages"] = null;
         $acl_data["banners"] = null;
         $acl_data["categories"] = null;

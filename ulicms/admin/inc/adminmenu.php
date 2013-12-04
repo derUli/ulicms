@@ -28,27 +28,12 @@ if(defined("_SECURITY")){
     <ul>
     <li><a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a></li></ul>
   </li>
-  <?php if($acl -> hasPermission("banners") or $acl -> hasPermission("pages") or $acl -> hasPermission("categories") 
-  or $acl -> hasPermission("news") or $acl -> hasPermission("comments")){
+  <?php if($acl -> hasPermission("banners") or $acl -> hasPermission("pages") or $acl -> hasPermission("categories")){
         ?>
  <li>
     <a href='?action=contents'>Inhalte</a>
     <ul>
-    <?php if($acl -> hasPermission("news")){
-            ?>
-      <li>
-        <a href='?action=news'>News</a>
-      </li>
-      <?php }
-        ?>
-<?php if($acl -> hasPermission("comments")){
-            ?>
-      <li>
-        <a href='?action=comments'>Kommentare</a>
-      </li>
-      <?php }
-        ?>
-          <?php if($acl -> hasPermission("pages")){
+     <?php if($acl -> hasPermission("pages")){
             ?>
       <li>
         <a href='?action=pages'>Seiten</a>
