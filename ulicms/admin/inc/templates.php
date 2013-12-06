@@ -35,7 +35,7 @@
              ?>
 
 <?php
-             if(file_exists("../templates/404.php")){
+             if(file_exists(getTemplateDirPath($theme) . "404.php")){
                  ?>
 <p><a href="index.php?action=templates&edit=404.php">404 Fehlerseite</a></p>
 <?php
