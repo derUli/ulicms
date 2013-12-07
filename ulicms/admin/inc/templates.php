@@ -21,7 +21,13 @@
 <p>Hier können Sie das Aussehen Ihrer Website durch Templates anpassen. Bitte vorsichtig beim Bearbeiten sein, wegen des enthaltenen PHP-Codes. Am Besten sollte diese Aufgabe von einem Profi übernommen werden.</p>
 <strong>Bitte wählen Sie ein Template aus:</strong><br/>
 <p><a href="index.php?action=templates&edit=oben.php">Oben</a></p>
+<?php if(file_exists(getTemplateDirPath($theme) . "oben_mobile.php")){ ?>
+<p><a href="index.php?action=templates&edit=oben_mobile.php">Oben (Mobile)</a></p>
+<?php } ?>
 <p><a href="index.php?action=templates&edit=unten.php">Unten</a></p>
+<?php if(file_exists(getTemplateDirPath($theme) . "unten_mobile.php")){ ?>
+<p><a href="index.php?action=templates&edit=unten_mobile.php">Unten (Mobile)</a></p>
+<?php } ?>
 <!-- <p><a href="index.php?action=templates&edit=news.txt">News</a></p> !-->
 <p><a href="index.php?action=templates&edit=maintenance.php">Wartungsmodus</a></p>
 <p><a href="index.php?action=templates&edit=style.css">Stylesheet</a></p>
