@@ -107,17 +107,9 @@ if(defined("_SECURITY")){
       <li>
         <a href="?action=templates&edit=oben.php">Oben</a>
       </li>
-      <?php if(file_exists(getTemplateDirPath($theme) . "oben_mobile.php")){ ?>
-<li><a href="index.php?action=templates&edit=oben_mobile.php">Oben (Mobile)</a>
-</li>
-<?php } ?>
       <li>
         <a href="?action=templates&edit=unten.php">Unten</a>
       </li>
-            <?php if(file_exists(getTemplateDirPath($theme) . "unten_mobile.php")){ ?>
-<li><a href="index.php?action=templates&edit=unten_mobile.php">Unten (Mobile)</a>
-</li>
-<?php } ?>
       <li>
         <a href="?action=templates&edit=maintenance.php">Wartungsseite</a>
       </li><li>

@@ -34,8 +34,8 @@ $theme = getconfig("theme");
 
 if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("maintenance_mode")) == "true" || getconfig("maintenance_mode") == "1"){
      add_hook("before_maintenance_message");
-
-     if(file_exists(getTemplateDirPath($theme) . "maintenance.php") )
+    
+     if(file_exists(getTemplateDirPath($theme) . "maintenance.php"))
          require_once getTemplateDirPath($theme) . "maintenance.php";
      else
          throw new Exception("Diese Website ist zurzeit im Wartungsmodus.<br />Bitte später wiederkommen.");
@@ -164,24 +164,14 @@ if ($data = $Cache_Lite -> get($id)){
 
 }
 
-$mobile_template = getTemplateDirPath($theme) . "oben_mobile.php";
-
-if(is_mobile() and file_exists($mobile_template))
-   require_once $mobile_template;
-else
-   require_once getTemplateDirPath($theme) . "oben.php";
+require_once getTemplateDirPath($theme) . "oben.php";
 
 
 add_hook("before_content");
 content();
 add_hook("after_content");
 
-$mobile_template = getTemplateDirPath($theme) . "unten_mobile.php";
-
-if(is_mobile() and file_exists($mobile_template))
-   require_once $mobile_template;
-else
-   require_once getTemplateDirPath($theme) . "unten.php";
+require_once getTemplateDirPath($theme) . "unten.php";
 
 add_hook("after_html");
 
