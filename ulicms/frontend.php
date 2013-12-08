@@ -49,6 +49,7 @@ if(isset($_GET["format"]) and !empty($_GET["format"])){
    $format = "html";
 }
 
+add_hook("before_http_header");
 
 header("HTTP/1.0 " . $status);
 
@@ -73,6 +74,9 @@ else{
    $format = "html";
 }
 
+
+add_hook("after_http_header");
+
 if(count(getThemeList()) === 0)
      throw new Exception("Keine Themes vorhanden!");
 
@@ -85,9 +89,10 @@ if(!is_dir(getTemplateDirPath($theme)))
 if(file_exists(getTemplateDirPath($theme) . "functions.php")){
      include getTemplateDirPath($theme) . "functions.php";
      }
+     
+     
 
 $cached_page_path = buildCacheFilePath($_SERVER['REQUEST_URI']);
-
 $modules = getAllModules();
 $hasModul = containsModule(get_requested_pagename());
 
