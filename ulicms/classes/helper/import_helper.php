@@ -32,7 +32,8 @@ static function importJSON($target, $json, $doUpdate = true){
           } 
           
           if($insert and count($fields) > 0 and count($values) > 0){
-             $sql = "INSERT INTO ".$target;
+             $sql = "INSERT INTO ".$target . " (". join(" ",$fields).") VALUES (";
+             $sql .=")";
           }
           
       }
