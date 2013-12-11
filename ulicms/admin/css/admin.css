@@ -5,6 +5,10 @@ font-size:12pt;
 color:#2c2c2c;
 }
 
+.ulicms_error{
+color:red;
+}
+
 div#pkglist{
 display:none;
 }

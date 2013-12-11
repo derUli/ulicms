@@ -1,6 +1,6 @@
 <?php if(defined("_SECURITY")){
-    
-     if($_SESSION["group"] >= 40){
+$acl = new ACL();    
+     if($acl->hasPermission("logo")){
          ?>     
 <?php if($_GET["error"] == "to_big"){
              ?> 

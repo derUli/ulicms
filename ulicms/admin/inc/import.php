@@ -1,9 +1,12 @@
 <?php
 if(!defined("ULICMS_ROOT"))
    die("Schlechter Hacker!");
+   
+   include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
 
 $acl = new ACL();
 $table = null;
+$errors = array();
 
 if(!$acl->hasPermission("import")){
    noperms();
@@ -13,7 +16,7 @@ if(!$acl->hasPermission("import")){
 
   $tables = db_get_tables();
   
-  if(isset($_POST["table"]) and isset($_FILES['file'])){
+  if(isset($_POST["table"]) and is_uploaded_file($_FILES['file']['tmp_name'])){
     $table = db_escape($_POST["table"]);
     $json = ExportHelper::table2JSON($table);
     $do_update = isset($_POST["do_update"]);
@@ -23,6 +26,7 @@ if(!$acl->hasPermission("import")){
     if($valid){
     $importer = new ImportHelper();
      $importer->importJSON($table, $data, $do_update);
+     $errors = $importer->getErrors();
     }
     
   }
@@ -30,6 +34,13 @@ if(!$acl->hasPermission("import")){
   
 ?>
   <h1>JSON Import</h1>
+  <?php if(count($errors) > 0){
+   foreach($errors as $e){
+   ?>
+   <p class="ulicms_error"><?php real_htmlspecialchars($e[0]);?></p>
+   <?php
+   }
+  }?>
   <?php if($valid === false){
   ?>
   <p class="ulicms_error">Diese Datei ist nicht im JSON Format</p>
@@ -43,7 +54,7 @@ if(!$acl->hasPermission("import")){
   </select>
   </p>
   <p><input type="file" name="file"></p>
-  <p><input type="checkbox" name="do_update" <?php if($do_update){ echo "checked"; } ?>><label for="do_update">Update durchführen</label></p>
+  <p><input id="do_update" type="checkbox" name="do_update" <?php if($do_update){ echo "checked"; } ?>><label for="do_update">Update durchführen</label></p>
   <input type="submit" name="submit" value="Export">
   </form>
   
