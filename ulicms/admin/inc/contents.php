@@ -25,6 +25,12 @@ if($acl -> hasPermission("pages") or $acl -> hasPermission("banners")){
 
 <a href="index.php?action=categories">Kategorien</a><br/>
 <?php }?>
+
+<?php if($acl -> hasPermission("export")){ ?>
+
+<a href="index.php?action=export">Export</a><br/>
+<?php }?>
+
 </p>
 <?php add_hook("content_type_list_entry");
      ?>

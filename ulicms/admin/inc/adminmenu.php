@@ -54,6 +54,12 @@ if(defined("_SECURITY")){
               <a href='?action=categories'>Kategorien</a>
             </li>
       <?php } ?>
+      
+         <?php if($acl -> hasPermission("export")){ ?>
+            <li> 
+              <a href='?action=export'>Export</a>
+            </li>
+      <?php } ?>
         
     </ul>
    
