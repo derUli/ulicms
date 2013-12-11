@@ -47,7 +47,6 @@ function poweredByUliCMS(){
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner(){
-     $connection = MYSQL_CONNECTION;
      $query = db_query("SELECT * FROM " . tbname("banner") . " ORDER BY RAND() LIMIT 1");
      if(db_num_rows($query) > 0){
          while($row = db_fetch_object($query)){
@@ -104,7 +103,6 @@ $status = check_status();
 
 function meta_keywords($ipage = null){
      $status = check_status();
-     $connection = MYSQL_CONNECTION;
      $ipage = db_escape($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'");
     
@@ -121,7 +119,6 @@ function meta_keywords($ipage = null){
 
 function meta_description($ipage = null){
      $status = check_status();
-     $connection = MYSQL_CONNECTION;
      $ipage = db_escape($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
      if($ipage == ""){
@@ -150,7 +147,6 @@ function get_title($ipage = null){
          return "Zugriff verweigert";
          }
     
-     $connection = MYSQL_CONNECTION;
      $ipage = db_escape($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
      if($ipage == ""){
@@ -174,7 +170,6 @@ function title($ipage = null){
          return false;
          }
     
-     $connection = MYSQL_CONNECTION;
      $ipage = db_escape($_GET["seite"]);
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
      if($ipage == ""){
@@ -190,7 +185,6 @@ function title($ipage = null){
      }
 
 function import($ipage){
-     $connection = MYSQL_CONNECTION;
      $ipage = db_escape($ipage);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1");
@@ -500,7 +494,6 @@ function head(){
      }
 
 function autor(){
-     $connection = MYSQL_CONNECTION;
      $seite = $_GET["seite"];
      if(empty($seite)){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1");
@@ -575,7 +568,6 @@ function check_status(){
              }
          }
     
-     $connection = MYSQL_CONNECTION;
      $test = db_query("SELECT * FROM `" . tbname("content") . "` WHERE systemname='" . db_escape($_GET["seite"]) . "'");
      if(db_num_rows($test) == 0){
          return "404 Not Found";
