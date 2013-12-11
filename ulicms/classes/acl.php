@@ -174,6 +174,7 @@ class ACL{
          $acl_data["expert_settings"] = null;
          
          $acl_data["export"] = null;
+         $acl_data["import"] = null;
         
          $acl_data["info"] = null;
         
