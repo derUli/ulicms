@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 2014R9 =====
+﻿===== Neues in UliCMS 7 =====
 
 [*] Neu: Alle Einträge aus Menü X nach Menü Y verschieben
 [*] Enhancement: Konstante ULICMS_ROOT hinzugefügt
@@ -36,3 +36,5 @@
 [*] Passwörter werden jetzt als SHA-512 statt wie vorher als SHA-1 gehasht.
 [*] Beim anlegen eines Users ist der Versand der Zugangsdaten optional
 [*] Ausgabe von Inhalten auch als PDF, TXT, JSON und als CSV möglich.
+[*] Import & Export von einzelnen Datenbanktabellen im JSON-Format möglich. 
+Beim Import kann optional auch ein Update bereits existierender Daten erfolgen. Hierbei werden nur die Spalten, die in der importierten Datei enthalten sind, modifiziert7
