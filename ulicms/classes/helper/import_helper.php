@@ -30,7 +30,7 @@ public function importJSON($target, $json, $doUpdate = true){
            if(mysql_num_rows($query) > 0){
            if($key != "id" and $id > 0 and $doUpdate){
               
-              db_query("UPDATE ".$target." SET `".$key."` = '".db_escape($value)."' WHERE id = $id")or die(db_error());
+              db_query("UPDATE ".$target." SET `".$key."` = '".db_escape($value)."' WHERE id = $id")or logerror(db_error());
               } 
             } else {
             
@@ -51,6 +51,7 @@ public function importJSON($target, $json, $doUpdate = true){
                   }
              }
              $sql .=")";
+             db_query($sql)or logerror(db_error());
           }
           
       }
