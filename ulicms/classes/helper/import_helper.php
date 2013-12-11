@@ -3,6 +3,9 @@ class ImportHelper{
 static function importJSON($target, $json, $doUpdate = true){
       $data = json_decode($json);
       for($i=0; $i < count($data); $i++){
+          $fields = array();
+          $values = array();
+          $insert = false;
           $ds = $data[$i];
           if($ds["id"]){
              $id = intval($ds["id"]);
@@ -11,14 +14,25 @@ static function importJSON($target, $json, $doUpdate = true){
           }
           
               $query = db_query("SELECT * FROM ".$target. " WHERE id=".$id);
-              if(mysql_num_rows($query) > 0){
+             
           foreach($row as $key=>$value){
+           if(mysql_num_rows($query) > 0){
            if($key != "id" and $id > 0 and $doUpdate){
               
-              db_query("UPDATE ".$target." SET `".$key."` = '".db_escape($value)."' WHERE id = $id");
-              }
-            }
+              db_query("UPDATE ".$target." SET `".$key."` = '".db_escape($value)."' WHERE id = $id")or die(db_error());
+              } 
+            } else {
+            
+            $fields[] = $key;
+            $values[] = $value;
+            $insert = true;
+            
+          }
           
+          } 
+          
+          if($insert and count($fields) > 0 and count($values) > 0){
+             $sql = "INSERT INTO ".$target;
           }
           
       }
