@@ -33,7 +33,7 @@ if(!$acl->hasPermission("export")){
   <p>Exportiere Tabelle:<br/>
   <select name="table" size="1">
   <?php foreach($tables as $name){?>
-  <option value="<?php echo $name;?>"><?php echo $name;?></option>
+  <option value="<?php echo $name;?>" <?php if($table == $name){ echo " selected=\"selected\"";}?>><?php echo $name;?></option>
   <?php }?>
   </select>
   </p>
