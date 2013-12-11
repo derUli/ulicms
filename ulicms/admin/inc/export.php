@@ -37,7 +37,7 @@ if(!$acl->hasPermission("export")){
   <?php }?>
   </select>
   </p>
-  <input type="submit" name="submit" value="Export">
+  <input type="submit" name="submit" value="Exportieren">
   </form>
   
   <?php

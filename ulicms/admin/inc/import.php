@@ -55,7 +55,7 @@ if(!$acl->hasPermission("import")){
   </p>
   <p><input type="file" name="file"></p>
   <p><input id="do_update" type="checkbox" name="do_update" <?php if($do_update){ echo "checked"; } ?>><label for="do_update">Update durchführen</label></p>
-  <input type="submit" name="submit" value="Export">
+  <input type="submit" name="submit" value="Importieren">
   </form>
   
   <?php

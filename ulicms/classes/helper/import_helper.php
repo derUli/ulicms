@@ -26,6 +26,7 @@ set_time_limit(0);
           $fields = array();
           $values = array();
           $insert = false;
+          $sql = "";
           $ds = $data[$i];
           if($ds["id"]){
              $id = intval($ds["id"]);
