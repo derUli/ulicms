@@ -1,6 +1,6 @@
 <?php
 class ImportHelper{
-static function importJSON($target, $json){
+static function importJSON($target, $json, $doUpdate = true){
       $data = json_decode($json);
       for($i=0; $i < count($data); $i++){
           $ds = $data[$i];
@@ -10,10 +10,11 @@ static function importJSON($target, $json){
              $id = 0;
           }
           
-          foreach($row as $key=>$value){
-           if($key != "id" and $id > 0){
               $query = db_query("SELECT * FROM ".$target. " WHERE id=".$id);
               if(mysql_num_rows($query) > 0){
+          foreach($row as $key=>$value){
+           if($key != "id" and $id > 0 and $doUpdate){
+              
               db_query("UPDATE ".$target." SET `".$key."` = '".db_escape($value)."' WHERE id = $id");
               }
             }
