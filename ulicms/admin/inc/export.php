@@ -9,18 +9,19 @@ $table = null;
 if(!$acl->hasPermission("export")){
    noperms();
 } else {
+
+  $tables = db_get_tables();
   
   if(isset($_POST["table"])){
     $table = db_escape($_POST["table"]);
     $json = ExportHelper::table2JSON($table);
     $filename = basename($table)."-".time().".json";
     $url = "../content/tmp/".$filename;
-    $handle = fopen(ULICMS_TMP.$filename);
+    $handle = fopen(ULICMS_TMP.$filename, "w");
     fwrite($handle, $json);
     fclose($handle);
   }
 
-  $tables = db_get_tables();
   
 ?>
   <h1>JSON Export</h1>

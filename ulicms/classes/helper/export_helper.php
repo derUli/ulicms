@@ -4,8 +4,6 @@ static function table2JSON($name){
     
     $sql = "SELECT * FROM ".$name;
      
-     foreach($sql_query as $sql){
-         $query = false;
          $query = db_query($sql);
         
          if(!$query){
@@ -29,7 +27,7 @@ static function table2JSON($name){
                     
                      // $row is array... foreach( .. ) puts every element
                     // of $row to $cell variable
-                    foreach($d as $name=>$value){
+                    foreach($row as $name=>$value){
                         $dr[$name] = $value;
                          
                          }
@@ -43,7 +41,7 @@ static function table2JSON($name){
             
              }
         
-         }
+         
     
      return json_encode($data);
     
