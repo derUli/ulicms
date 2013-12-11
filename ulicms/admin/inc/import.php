@@ -20,6 +20,10 @@ if(!$acl->hasPermission("import")){
     $filename = $_FILES['file']['tmp_name'];
     $data = file_get_contents($filename);
     $valid = !is_null(@json_decode($data));
+    if($valid){
+    $importer = new ImportHelper();
+     $importer->importJSON($table, $data, $do_update)
+    }
     
   }
 
