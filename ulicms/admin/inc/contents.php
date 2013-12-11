@@ -4,7 +4,7 @@ if(!defined("ULICMS_ROOT"))
 
 $acl = new ACL();
 
-if($acl -> hasPermission("pages") or $acl -> hasPermission("banners")){
+if($acl -> hasPermission("pages") or $acl -> hasPermission("banners") or $acl -> hasPermission("categories") or $acl -> hasPermission("export")){
     ?>
 
 <h2>Inhalte</h2>
@@ -25,6 +25,13 @@ if($acl -> hasPermission("pages") or $acl -> hasPermission("banners")){
 
 <a href="index.php?action=categories">Kategorien</a><br/>
 <?php }?>
+
+<?php 
+if($acl -> hasPermission("export") or $acl -> hasPermission("import")){ ?>
+
+<p><strong>Daten Import/Export:</strong><br/>
+<?php } ?>
+
 
 <?php if($acl -> hasPermission("export")){ ?>
 
