@@ -32,6 +32,10 @@ if($acl -> hasPermission("export") or $acl -> hasPermission("import")){ ?>
 <p><strong>Daten Import/Export:</strong><br/>
 <?php } ?>
 
+<?php if($acl -> hasPermission("import")){ ?>
+
+<a href="index.php?action=import">Import</a><br/>
+<?php }?>
 
 <?php if($acl -> hasPermission("export")){ ?>
 

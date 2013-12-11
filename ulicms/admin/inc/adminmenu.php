@@ -55,6 +55,12 @@ if(defined("_SECURITY")){
             </li>
       <?php } ?>
       
+       <?php if($acl -> hasPermission("import")){ ?>
+            <li> 
+              <a href='?action=import'>Import</a>
+            </li>
+      <?php } ?>
+      
          <?php if($acl -> hasPermission("export")){ ?>
             <li> 
               <a href='?action=export'>Export</a>
