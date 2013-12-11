@@ -1,9 +1,10 @@
 <?php
 class ImportHelper{
 
-var $errors = array();
+var $errors = null;
 
 public function __construct(){
+ $this->errors[] = array();
 
 }
 
