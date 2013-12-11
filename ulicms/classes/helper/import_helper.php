@@ -8,7 +8,10 @@ public function __construct(){
 
 }
 
-private function logerror($txt){
+private function logerror($txt, $id=null){
+   if(!is_null($id)){
+      $txt = strval($id).": ".$txt;
+   }
    $this->errors[] = $txt;
 }
 
@@ -31,7 +34,7 @@ public function importJSON($target, $json, $doUpdate = true){
            if(mysql_num_rows($query) > 0){
            if($key != "id" and $id > 0 and $doUpdate){
               
-              db_query("UPDATE ".$target." SET `".$key."` = '".db_escape($value)."' WHERE id = $id")or logerror(db_error());
+              db_query("UPDATE ".$target." SET `".$key."` = '".db_escape($value)."' WHERE id = $id")or $this->logerror(db_error(), $id);
               } 
             } else {
             
@@ -52,7 +55,7 @@ public function importJSON($target, $json, $doUpdate = true){
                   }
              }
              $sql .=")";
-             db_query($sql)or logerror(db_error());
+             db_query($sql)or $this->logerror(db_error());
           }
           
       }
