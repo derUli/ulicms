@@ -22,7 +22,7 @@ if(!$acl->hasPermission("import")){
     $valid = !is_null(@json_decode($data));
     if($valid){
     $importer = new ImportHelper();
-     $importer->importJSON($table, $data, $do_update)
+     $importer->importJSON($table, $data, $do_update);
     }
     
   }
