@@ -1,8 +1,14 @@
 <?php
 class ImportHelper{
 
+var $errors = array();
+
 public function __construct(){
 
+}
+
+private function logerror($txt){
+   $this->errors[] = $txt;
 }
 
 public function importJSON($target, $json, $doUpdate = true){
