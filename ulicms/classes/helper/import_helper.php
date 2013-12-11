@@ -1,7 +1,11 @@
 <?php
 class ImportHelper{
 
-static function importJSON($target, $json, $doUpdate = true){
+public function __construct(){
+
+}
+
+public function importJSON($target, $json, $doUpdate = true){
       $data = json_decode($json);
       for($i=0; $i < count($data); $i++){
           $fields = array();
@@ -37,7 +41,7 @@ static function importJSON($target, $json, $doUpdate = true){
              for($m=0; $m< count($values); $m++){
                   $sql .= "'".db_escape($values[$m])."'";
                   if($m != count($values) - 1){
-                    $sql .= ","
+                    $sql .= ",";
                   }
              }
              $sql .=")";
