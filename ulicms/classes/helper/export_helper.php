@@ -45,7 +45,7 @@ static function table2JSON($name){
         
          }
     
-     return $data;;
+     return json_encode($data);
     
      }
      

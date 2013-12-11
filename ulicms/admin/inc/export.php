@@ -3,14 +3,31 @@ if(!defined("ULICMS_ROOT"))
    die("Schlechter Hacker!");
 
 $acl = new ACL();
+$url = null;
+$table = null;
 
 if(!$acl->hasPermission("export")){
    noperms();
 } else {
+  
+  if(isset($_POST["table"])){
+    $table = db_escape($_POST["table"]);
+    $json = ExportHelper::table2JSON($table);
+    $filename = basename($table)."-".time().".json";
+    $url = "../content/tmp/".$filename;
+    $handle = fopen(ULICMS_TMP.$filename);
+    fwrite($handle, $json);
+    fclose($handle);
+  }
 
   $tables = db_get_tables();
+  
 ?>
   <h1>JSON Export</h1>
+  <?php if(!is_null($url) and !is_null($table)){
+     echo "<p><a href=\"".$url."\" target=\"blank\">Export der Tabelle ".$table." im JSON-Format runterladen</a></p>";
+  }
+  ?>
   <form action="?action=export" method="post">
   <p>Exportiere Tabelle:<br/>
   <select name="table" size="1">

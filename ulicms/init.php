@@ -6,6 +6,8 @@
  // root directory of UliCMS
 if(!defined("ULICMS_ROOT"))
      define("ULICMS_ROOT", dirname(__file__));
+     
+
 
 
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
@@ -24,6 +26,9 @@ switch($os)
  default: define("DIRECTORY_SEPERATOR", "/");
      break;
      }
+     
+if(!defined("ULICMS_TMP"))
+     define("ULICMS_TMP", dirname(__file__) . DIRECTORY_SEPERATOR . "content".DIRECTORY_SEPERATOR."tmp".DIRECTORY_SEPERATOR);
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "base_config.php";
