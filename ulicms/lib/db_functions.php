@@ -109,6 +109,8 @@ function db_get_tables()
   {
     $tableList[] = $cRow[0];
   }
+  
+  sort($tableList);
   return $tableList;
 }
 

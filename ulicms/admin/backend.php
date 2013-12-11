@@ -152,6 +152,9 @@ if(!$eingeloggt){
     else if($_GET["action"] == "languages"){
          require_once "inc/languages.php";
          }
+    else if($_GET["action"] == "export"){
+         require_once "inc/export.php";
+         }
     
     else if($_GET["action"] == "cache"){
          require_once "inc/cache_settings.php";
