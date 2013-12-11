@@ -1,5 +1,6 @@
 <?php
 class ImportHelper{
+
 static function importJSON($target, $json, $doUpdate = true){
       $data = json_decode($json);
       for($i=0; $i < count($data); $i++){
@@ -33,6 +34,12 @@ static function importJSON($target, $json, $doUpdate = true){
           
           if($insert and count($fields) > 0 and count($values) > 0){
              $sql = "INSERT INTO ".$target . " (". join(" ",$fields).") VALUES (";
+             for($m=0; $m< count($values); $m++){
+                  $sql .= "'".db_escape($values[$m])."'";
+                  if($m != count($values) - 1){
+                    $sql .= ","
+                  }
+             }
              $sql .=")";
           }
           
