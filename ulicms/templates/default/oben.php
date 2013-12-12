@@ -29,7 +29,6 @@ background-color:<?php echo getconfig("header-background-color");
 </style>
 </head>
 <body>
-<?php admin_bar();?>
 <div class="header">
 <div class="logo">
 <?php

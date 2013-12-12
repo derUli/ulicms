@@ -7,15 +7,7 @@ require_once "templating.php";
 session_start();
 $_COOKIE[session_name()] = session_id();
 
-
-
 add_hook("after_session_start");
-
-if(isset($_REQUEST["destroy_session"])){
-  add_hook("after_session_destroy");
-  @session_destroy();
-  add_hook("before_session_destroy");
-}
 
 if(!empty($_GET["language"])){
      $_SESSION["language"] = basename($_GET["language"]);
