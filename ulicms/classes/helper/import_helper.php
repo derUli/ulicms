@@ -4,7 +4,7 @@ class ImportHelper{
 var $errors = null;
 
 public function __construct(){
- $this->errors[] = array();
+ $this->errors = array();
 
 }
 

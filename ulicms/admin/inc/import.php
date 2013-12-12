@@ -40,10 +40,13 @@ if(!$acl->hasPermission("import")){
    <p class="ulicms_error"><?php real_htmlspecialchars($e[0]);?></p>
    <?php
    }
-  }?>
+  } else if($valid === true){?>
+ 
+  <p class="green">Import in Tabelle <?php real_htmlspecialchars($table);?> erfolgreich!</p>
+  <?php }?>
   <?php if($valid === false){
   ?>
-  <p class="ulicms_error">Diese Datei ist nicht im JSON Format</p>
+  <p class="ulicms_error">Diese Datei ist nicht im JSON Format!</p>
    <?php }?>
   <form action="?action=import" method="post" enctype="multipart/form-data">
   <p>Importiere in Tabelle:<br/>
