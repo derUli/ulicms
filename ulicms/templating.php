@@ -267,11 +267,30 @@ function motto(){
 
 function get_requested_pagename(){
      $value = db_escape($_GET["seite"]);
-     if($value == ""){
+     if($value == "")
          $value = getconfig("frontpage");
-         }
+
      return $value;
      }
+
+function admin_bar(){
+$acl = new ACL();
+if(getconfig("disable_admin_bar"))
+   return;
+   
+if($acl->hasPermission("pages")){
+$css_file = ULICMS_ROOT.DIRECTORY_SEPERATOR."admin_bar.css";
+                       if(file_exists($css_file)){
+     echo '<style type="text/css">
+     ';
+     echo file_get_contents($css_file);
+     echo '
+</style>     
+     ';
+     include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."adminbar.php";
+     }
+         }
+}
 
 function is_frontpage(){
      return get_requested_pagename() === getconfig("frontpage");
