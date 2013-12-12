@@ -23,6 +23,10 @@ if(isset($_SESSION["ulicms_login"]))
      }else{
      $eingeloggt = false;
      }
+     
+if($_GET["action"] == "export" and isset($_POST["table"])){
+         require_once "inc/export-data.php";
+}
 
 header("Content-Type: text/html; charset=UTF-8");
 
@@ -31,6 +35,8 @@ if(isset($_REQUEST["ajax_cmd"])){
      include_once "inc/ajax_handler.php";
      exit();
      }
+
+
 
 
 
