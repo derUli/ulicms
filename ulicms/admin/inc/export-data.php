@@ -1,4 +1,5 @@
 <?php
+$acl = new ACL();
 if(!$acl->hasPermission("export")){
    header("HTTP/1.0 403 Forbidden");
    die();
