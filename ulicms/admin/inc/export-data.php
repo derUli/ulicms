@@ -1,6 +1,6 @@
 <?php
 if(!$acl->hasPermission("export")){
-   header("403 Forbidden");
+   header("HTTP/1.0 403 Forbidden");
    die();
 } else {
 
@@ -9,7 +9,6 @@ if(!$acl->hasPermission("export")){
     $table = db_escape($_POST["table"]);
     $json = ExportHelper::table2JSON($table);
     $filename = basename($table)."-".time().".json";
-   
     header("Content-Type: application/json; charset=UTF-8");
     header('Content-Disposition: attachment; filename="'.$filename.'"');
     echo $json;
