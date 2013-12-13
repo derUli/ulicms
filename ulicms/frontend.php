@@ -151,7 +151,7 @@ else if(file_exists($cached_page_path)){
  }
  }
 
- $id = md5($_SERVER['REQUEST_URI']);
+ $id = md5($_SERVER['REQUEST_URI'].$_SESSION["language"]);
 
 if(!getconfig("cache_disabled") and !$hasModul and
  getenv('REQUEST_METHOD') == "GET" and $cache_type === "cache_lite"){
