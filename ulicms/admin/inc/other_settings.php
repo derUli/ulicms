@@ -21,6 +21,7 @@ if(!is_admin()){
              }
              
           if(isset($_POST["domain_to_language"])){
+             $domain_to_language = $_POST["domain_to_language"];
              $domain_to_language = str_replace("\r\n", "\n", $domain_to_language);
              $domain_to_language = trim($domain_to_language);
              setconfig("domain_to_language", db_escape($domain_to_language));

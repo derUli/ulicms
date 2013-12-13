@@ -9,12 +9,12 @@ if(!empty($domainMapping)){
       $line = trim($domainMapping[$i]);
       if(!empty($line)){
          $line = explode("=>", $line);
+         
          if(count($line) > 1){
             $line[0] = trim($line[0]);
             $line[1] = trim($line[0]);
             
             if(!empty($line[0]) and !empty($line[1]) ){
-               
                
                if($line[1] == $language){
                       return $line[0];
