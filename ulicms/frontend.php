@@ -16,6 +16,10 @@ if(!empty($_GET["language"])){
 if(!isset($_SESSION["language"])){
      $_SESSION["language"] = getconfig("default_language");
      }
+     
+setLanguageByDomain();
+
+
 
 
 $status = check_status();

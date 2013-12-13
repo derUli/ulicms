@@ -1,5 +1,71 @@
 <?php
 
+function getDomainByLanguage($language){
+$domainMapping = getconfig("domain_to_language");
+
+if(!empty($domainMapping)){
+   $domainMapping = explode("\n", $domainMapping);
+   for($i=0; $i < count($domainMapping); $i++){
+      $line = trim($domainMapping[$i]);
+      if(!empty($line)){
+         $line = explode("=>", $line);
+         if(count($line) > 1){
+            $line[0] = trim($line[0]);
+            $line[1] = trim($line[0]);
+            
+            if(!empty($line[0]) and !empty($line[1]) ){
+               
+               
+               if($line[1] == $language){
+                      return $line[0];
+               
+               }
+               
+            
+            }
+         }
+      }
+   }
+
+
+}
+  return null;
+}
+
+function setLanguageByDomain(){
+$domainMapping = getconfig("domain_to_language");
+
+if(!empty($domainMapping)){
+   $domainMapping = explode("\n", $domainMapping);
+   for($i=0; $i < count($domainMapping); $i++){
+      $line = trim($domainMapping[$i]);
+      if(!empty($line)){
+         $line = explode("=>", $line);
+         if(count($line) > 1){
+            $line[0] = trim($line[0]);
+            $line[1] = trim($line[0]);
+            
+            if(!empty($line[0]) and !empty($line[1]) ){
+               $domain = $_SERVER["HTTP_HOST"];
+               
+               if($line[0] == $domain and in_array($line[1], getAllLanguages())){
+                      $_SESSION["language"] = $line[1];
+                      
+                      return true;
+               
+               }
+               
+            
+            }
+         }
+      }
+   }
+
+
+}
+  return false;
+}
+
 
 function getCacheType(){
 $c = getconfig("cache_type");

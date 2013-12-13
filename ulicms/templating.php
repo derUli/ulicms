@@ -4,6 +4,10 @@ function language_selection(){
      $query = db_query("SELECT * FROM " . tbname("languages") . " ORDER by name");
      echo "<ul class='language_selection'>";
      while($row = db_fetch_object($query)){
+         $domain =  getDomainByLanguage( $row -> language_code);
+         if($domain) 
+         echo "<li>" . "<a href='http://". $domain . "'>" . $row -> name . "</a></li>";
+         else 
          echo "<li>" . "<a href='" .buildSEOUrl(get_requested_pagename())."?language=" . $row -> language_code . "'>" . $row -> name . "</a></li>";
          }
      echo "</ul>";
