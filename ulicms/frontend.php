@@ -156,7 +156,8 @@ else if(file_exists($cached_page_path)){
 if(!getconfig("cache_disabled") and !$hasModul and
  getenv('REQUEST_METHOD') == "GET" and $cache_type === "cache_lite"){
  $options = array(
-'lifeTime' => getconfig("cache_period")
+'lifeTime' => getconfig("cache_period"),
+'cacheDir' => ULICMS_ROOT.DIRECTORY_SEPERATOR."content".DIRECTORY_SEPERATOR."tmp"
 );
 
 if(!class_exists("Cache_Lite")){

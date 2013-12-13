@@ -6,7 +6,7 @@
  // root directory of UliCMS
 if(!defined("ULICMS_ROOT"))
      define("ULICMS_ROOT", dirname(__file__));
-     
+
 
 
 
@@ -26,6 +26,10 @@ switch($os)
  default: define("DIRECTORY_SEPERATOR", "/");
      break;
      }
+     
+$classes_dir = ULICMS_ROOT.DIRECTORY_SEPERATOR."classes";
+
+@set_include_path(get_include_path() . PATH_SEPARATOR . $classes_dir);
      
 if(!defined("ULICMS_TMP"))
      define("ULICMS_TMP", dirname(__file__) . DIRECTORY_SEPERATOR . "content".DIRECTORY_SEPERATOR."tmp".DIRECTORY_SEPERATOR);
@@ -144,6 +148,18 @@ function endsWith($haystack, $needle, $case = true){
  return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
  }
  return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
+ }
+ 
+ function is_in_include_path($find){
+    $paths = explode(PATH_SEPARATOR, get_include_path());
+    $found = false;
+    foreach($paths as $p) {
+       $fullname = $p.DIRECTORY_SEPARATOR.$find;
+       if(is_file($fullname)) {
+          $found = $fullname;
+          break;
+      }
+    }
  }
 
 
