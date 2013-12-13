@@ -368,7 +368,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (40, 'cache_type', 'file'),
 (41, 'registered_user_default_level', '10'),
 (42, 'override_shortcuts', 'backend'),
-(43, 'session_timeout', '60');")or die(mysqli_error($connection));
+(43, 'domain_to_language', ''),
+(44, 'session_timeout', '60');")or die(mysqli_error($connection));
         
          mysqli_query($connection, "UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysqli_error($connection));
         
