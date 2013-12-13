@@ -1,6 +1,8 @@
 <?php
 @include_once "Cache/Lite.php";
 
+include_once ULICMS_ROOT.DIRECTORY_SEPERATOR."lib".DIRECTORY_SEPERATOR."string_functions.php";
+
 if(!is_admin()){
      echo "<p class='ulicms_error'>Zugriff verweigert</p>";
      }else{
@@ -16,6 +18,12 @@ if(!is_admin()){
         
          if(isset($_POST["cache_type"])){
              setconfig("cache_type", db_escape($_POST["cache_type"]));
+             }
+             
+          if(isset($_POST["domain_to_language"])){
+             $domain_to_language = str_replace("\r\n", "\n", $domain_to_language);
+             $domain_to_language = trim($domain_to_language);
+             setconfig("domain_to_language", db_escape($domain_to_language));
              }
         
          if(isset($_POST["override_shortcuts"])){
@@ -113,6 +121,19 @@ if(!is_admin()){
                                     </select> 
                                     </p>
 <div class="seperator"></div>
+
+<h2>Domain2Language-Mapping</h2>
+<p>Hier können Sie Domains auf Sprachen mappen.
+</p>
+<p>
+Die Zuweisungen müssen in folgendem Format erfolgen:<br/>
+www.meinefirma.de=>de<br/>
+www.meinefirma.co.uk=>en</p>
+www.meinefirma.fr=>fr<br/>
+
+<textarea name="domain_to_language" rows="10" cols="40">
+<?php echo real_htmlspecialchars(getconfig("domain_to_language"));?>
+</textarea>
 
 <p><a href="index.php?action=settings">Experteneinstellungen</a></p>
 <br/>
