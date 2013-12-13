@@ -128,12 +128,16 @@ if(!is_admin()){
 <p>
 Die Zuweisungen müssen in folgendem Format erfolgen:<br/>
 www.meinefirma.de=>de<br/>
-www.meinefirma.co.uk=>en</p>
-www.meinefirma.fr=>fr<br/>
+www.meinefirma.co.uk=>en<br/>
+www.meinefirma.fr=>fr
+</p>
 
-<textarea name="domain_to_language" rows="10" cols="40">
+<p><textarea name="domain_to_language" rows="10" cols="40">
 <?php echo real_htmlspecialchars(getconfig("domain_to_language"));?>
 </textarea>
+</p>
+<div class="seperator"></div>
+
 
 <p><a href="index.php?action=settings">Experteneinstellungen</a></p>
 <br/>
