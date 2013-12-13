@@ -27,9 +27,6 @@
 [*] Diverse Funktionalitäten in Helper-Klassen ausgelagert, 
     Aus Kompatiblitätsgründen bleiben die Prozeduralen API-Funktionen erhalten.
 [*] Access Control List hinzugefügt.
-    Aus Kompatiblitätsgründen bleibt das alte
-    Hierarische Rechtesystem behalten. 
-    Es soll aber in kommenden Releases entfernt werden.
 [*] Bei der Installation kann man den Namen des Adminaccounts ändern.
 [*] Kategorien können hinzugefügt werden. Inhalte können in Kategorien einsortiert werden,
     um die Verwaltung der Inhalte übersichtlicher zu machen.
