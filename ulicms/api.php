@@ -12,8 +12,7 @@ if(!empty($domainMapping)){
          
          if(count($line) > 1){
             $line[0] = trim($line[0]);
-            $line[1] = trim($line[0]);
-            
+            $line[1] = trim($line[1]);
             if(!empty($line[0]) and !empty($line[1]) ){
                
                if($line[1] == $language){
@@ -43,7 +42,7 @@ if(!empty($domainMapping)){
          $line = explode("=>", $line);
          if(count($line) > 1){
             $line[0] = trim($line[0]);
-            $line[1] = trim($line[0]);
+            $line[1] = trim($line[1]);
             
             if(!empty($line[0]) and !empty($line[1]) ){
                $domain = $_SERVER["HTTP_HOST"];
