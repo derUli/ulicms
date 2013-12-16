@@ -575,9 +575,6 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
      
      $current_page = get_page();
      $string = str_replace('[category]', get_category(), $string);
-     
-     
-
      }
      
      $allModules = getAllModules();
