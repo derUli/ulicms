@@ -79,6 +79,7 @@ $this->httpHeader();
       $this->content = str_replace("\r", "\n", $this->content);
       $this->content = str_replace("\n", "\r\n", $this->content);
       $this->content = unhtmlspecialchars($this->content);
+      $this->content = preg_replace_callback('/&#([0-9a-fx]+);/mi', 'replace_num_entity', $this->content);
       
       
       
