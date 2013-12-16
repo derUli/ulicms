@@ -556,7 +556,17 @@ function getAllModules(){
 
 
 // replace Shortcodes with modules
-function replaceShortcodesWithModules($string){
+function replaceShortcodesWithModules($string, $replaceOther = true){
+    if($replaceOther){
+     $string = str_replace('[title]', get_title(), $string);
+     
+     ob_start();
+     logo();
+     $string = str_replace('[logo]', ob_get_clean(), $string);
+     
+
+     }
+     
      $allModules = getAllModules();
      for($i = 0;$i <= count($allModules);$i++){
          $thisModule = $allModules[$i];
@@ -583,6 +593,8 @@ function replaceShortcodesWithModules($string){
         
          $string = str_replace($stringToReplace1, $html_output, $string);
          $string = str_replace($stringToReplace2, $html_output, $string);
+         
+         $string = str_replace('[title]', get_title(), $string);
         
          }
      return $string;
