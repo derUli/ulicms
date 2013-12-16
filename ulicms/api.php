@@ -572,7 +572,6 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
      motto();
      $string = str_replace('[slogan]', ob_get_clean(), $string);
      
-     
      $current_page = get_page();
      $string = str_replace('[category]', get_category(), $string);
      }
