@@ -35,5 +35,4 @@
 [*] Ausgabe von Inhalten auch als PDF, TXT, JSON und als CSV möglich.
 [*] Import & Export von einzelnen Datenbanktabellen im JSON-Format möglich. 
 Beim Import kann optional auch ein Update bereits existierender Daten erfolgen. Hierbei werden nur die Spalten, die in der importierten Datei enthalten sind, modifiziert
-[*] UliCMS funktioniert auch, wenn PHP ohne JSON-Unterstützung kompiliert wurde.
 [*] Cache_Lite und PEAR mitgeliefert
