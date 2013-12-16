@@ -62,6 +62,12 @@
     
      }
 
+if(!function_exists("multi_explode")){
+ function multi_explode($delimiters,$string) {
+    return explode($delimiters[0],strtr($string,array_combine(array_slice($delimiters,1),array_fill(0,count($delimiters)-1,array_shift($delimiters)))));
+}
+
+}
 
  if(!function_exists("make_links_clickable")){
      // Links klickbar machen
