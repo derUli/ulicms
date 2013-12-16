@@ -14,6 +14,15 @@ function language_selection(){
     
      }
 
+function get_category(){
+  $current_page = get_page();
+  return categories::getCategoryById($current_page["category"]);
+}
+
+
+function category(){
+  echo get_category();
+}
 
 function body_classes(){
      $str = "";
@@ -532,6 +541,20 @@ function autor(){
          echo $out;
          }
      }
+
+
+function get_page($systemname = ""){
+     if(empty($systemname)){
+         $systemname = $_GET["seite"];
+         }
+       
+       if(empty($systemname))
+         $systemname = getconfig("frontpage");
+
+         
+       $query = db_query("SELECT * FROM ".tbname("content"). " WHERE systemname='".db_escape($systemname)."'");
+       return db_fetch_assoc($query);
+}
 
 function content(){
      $theme = getconfig("theme");

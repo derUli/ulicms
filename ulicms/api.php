@@ -564,6 +564,19 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
      logo();
      $string = str_replace('[logo]', ob_get_clean(), $string);
      
+     ob_start();
+     motto();
+     $string = str_replace('[motto]', ob_get_clean(), $string);
+     
+     ob_start();
+     motto();
+     $string = str_replace('[slogan]', ob_get_clean(), $string);
+     
+     
+     $current_page = get_page();
+     $string = str_replace('[category]', get_category(), $string);
+     
+     
 
      }
      
