@@ -37,6 +37,8 @@ if(!defined("ULICMS_TMP"))
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "base_config.php";
 
+include_once dirname(__file__).DIRECTORY_SEPERATOR."antispam-features.php";
+
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "categories.php";
 

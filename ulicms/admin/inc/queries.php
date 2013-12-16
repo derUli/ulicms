@@ -89,6 +89,13 @@ if($_GET["action"] == "spam_filter" and
          setconfig("spamfilter_words_blacklist", $blacklist);
          }
     
+    
+    if(isset($_POST["disallow_chinese_chars"]))
+       setconfig("disallow_chinese_chars", "disallow");
+    else
+       deleteconfig("disallow_chinese_chars");
+    
+    
      }
 
 
