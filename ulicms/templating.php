@@ -111,9 +111,6 @@ function homepage_title(){
 
 $status = check_status();
 
-
-
-
 function meta_keywords($ipage = null){
      $status = check_status();
      $ipage = db_escape($_GET["seite"]);
