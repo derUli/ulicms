@@ -284,3 +284,8 @@ $version = new ulicms_version();
 define("UPDATE_CHECK_URL", "http://www.ulicms.de/updatecheck.php?v=" .
  urlencode(
 implode(".", $version -> getInternalVersion())));
+
+if(!getconfig("session_name"))
+   setconfig("session_name", uniqid()."_SESSION");
+
+session_name(getconfig("session_name"));
