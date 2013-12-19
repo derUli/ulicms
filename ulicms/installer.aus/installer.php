@@ -431,7 +431,7 @@ var $db_type="mysql";
 }';
         
         
-         if(!is_writable("../cms-config.php")){
+         if(!is_writable("../")){
              echo "<p>Die Konfigurationsdatei konnte wegen fehlenden Berechtigungen nicht erzeugt werden. Bitte bearbeiten Sie die Datei cms-config.php mit einem Texteditor und fügen Sie den Code aus der Textbox ein.</p>" .
              "<p><textarea cols=50 rows=10>" . htmlspecialchars($config_string) . "</textarea></p>";
              }else{
