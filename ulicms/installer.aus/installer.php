@@ -228,7 +228,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `permissions` mediumtext NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
         
         mysqli_query($connection, $create_table_groups_sql)or die(mysqli_error($connection));
         
@@ -389,7 +389,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 $sql_categories_table = "CREATE TABLE ".$prefix."categories (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           name VARCHAR(100)
-          )";
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
         mysqli_query($connection, $sql_categories_table);
 
 $insert_categories_general = "INSERT INTO ".$prefix."categories (name) VALUES('Allgemein')";
@@ -431,7 +431,7 @@ var $db_type="mysql";
 }';
         
         
-         if(!is_writable("../cms-config.php")){
+         if(!is_writable("../")){
              echo "<p>Die Konfigurationsdatei konnte wegen fehlenden Berechtigungen nicht erzeugt werden. Bitte bearbeiten Sie die Datei cms-config.php mit einem Texteditor und fügen Sie den Code aus der Textbox ein.</p>" .
              "<p><textarea cols=50 rows=10>" . htmlspecialchars($config_string) . "</textarea></p>";
              }else{
