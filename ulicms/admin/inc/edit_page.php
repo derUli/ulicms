@@ -35,6 +35,30 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 
 <br/><br/>
 
+<strong data-tooltip="In welcher Sprache ist diese Seite verfasst?">Sprache:</strong>
+<br/>
+<select name="language">
+<?php
+         $languages = getAllLanguages();
+         
+               $page_language = $row->language;
+         
+       
+        
+         for($j = 0; $j < count($languages); $j++){
+             if($languages[$j] === $page_language){
+                 echo "<option value='" . $languages[$j] . "' selected>" . $languages[$j] . "</option>";
+                 }else{
+                 echo "<option value='" . $languages[$j] . "'>" . $languages[$j] . "</option>";
+                 }
+            
+            
+             }
+         ?>
+</select>
+
+<br/><br/>
+
 <strong>Kategorie:</strong><br/>
 <?php 
 echo categories::getHTMLSelect($row->category);?>
