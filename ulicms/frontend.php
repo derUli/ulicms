@@ -174,6 +174,16 @@ if ($data = $Cache_Lite -> get($id)){
 
 }
 
+$html_file = page_has_html_file(get_requested_pagename());
+
+if($html_file){
+  if(file_exists($html_file))
+     echo file_get_contents($html_file);
+   else
+     echo "404 Not Found";
+
+} else {
+
 require_once getTemplateDirPath($theme) . "oben.php";
 
 
@@ -182,6 +192,9 @@ content();
 add_hook("after_content");
 
 require_once getTemplateDirPath($theme) . "unten.php";
+
+}
+
 
 add_hook("after_html");
 

@@ -286,6 +286,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `meta_description` text NOT NULL,
   `meta_keywords` text NOT NULL,
   `deleted_at` bigint(20) DEFAULT NULL,
+  `html_file`, varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         

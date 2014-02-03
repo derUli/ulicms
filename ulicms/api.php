@@ -773,6 +773,15 @@ function containsModule($page, $module = false){
     
      }
 
+    function page_has_html_file($page){
+         $query = db_query("SELECT html_file` FROM " . tbname("content") . " WHERE systemname = '" .
+         db_escape($page) . "'");
+         $dataset = db_fetch_assoc($query);
+         return $dataset["html_file"];
+
+
+    }
+
 // API-Aufruf zur Deinstallation eines Moduls
 // Ruft uninstall Script auf, falls vorhanden
 // Löscht anschließend den Ordner modules/$name
