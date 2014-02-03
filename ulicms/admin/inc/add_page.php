@@ -17,6 +17,11 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
 Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
 <input type="text" style="width:300px;" name="redirection" value="">
 <br/><br/>
+<strong>HTML-Datei als Inhalt:</strong>
+<input type="text" style="width:300px;" name="html_file" value="">
+<br/><br/>
+
+
 <strong data-tooltip="In welcher Sprache ist diese Seite verfasst?">Sprache:</strong>
 <br/>
 <select name="language">

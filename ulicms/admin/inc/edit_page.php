@@ -35,6 +35,11 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 
 <br/><br/>
 
+<strong>HTML-Datei als Inhalt:</strong>
+<input type="text" style="width:300px;" name="html_file" value="<?php echo $row -> html_file;
+             ?>">
+<br/><br/>
+
 <strong data-tooltip="In welcher Sprache ist diese Seite verfasst?">Sprache:</strong>
 <br/>
 <select name="language">
