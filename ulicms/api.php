@@ -777,6 +777,9 @@ function containsModule($page, $module = false){
          $query = db_query("SELECT html_file` FROM " . tbname("content") . " WHERE systemname = '" .
          db_escape($page) . "'");
          $dataset = db_fetch_assoc($query);
+         if(empty($dataset["html_file"]) or is_null($dataset["html_file"]))
+            return null;
+        
          return $dataset["html_file"];
 
 
