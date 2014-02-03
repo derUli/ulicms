@@ -27,19 +27,6 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
             
              ?>'>
 <br/><br/>
-<strong data-tooltip="Soll diese Seite keinen eigenen Inhalt enthalten sondern stattdessen auf eine Externe Seite verlinken, tragen Sie die hier die URL ein.
-Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
-<input type="text" style="width:300px;" name="redirection" value="<?php echo $row -> redirection;
-             ?>">
-
-
-<br/><br/>
-
-<strong>HTML-Datei als Inhalt:</strong>
-<br/>
-<input type="text" style="width:300px;" name="html_file" value="<?php echo $row -> html_file;
-             ?>">
-<br/><br/>
 
 <strong data-tooltip="In welcher Sprache ist diese Seite verfasst?">Sprache:</strong>
 <br/>
@@ -110,20 +97,6 @@ echo categories::getHTMLSelect($row->category);?>
 </select>
 <br/><br/>
 
-<strong data-tooltip="In welchem Fenster soll diese Seite geöffnet werden?">Öffnen in</strong><br/>
-<select name="target" size=1>
-<option <?php if($row -> target == "_self"){
-                 echo 'selected="selected" ';
-                 }
-             ?>value="_self">In diesem Fenster</option>
-<option <?php if($row -> target == "_blank"){
-                 echo 'selected="selected" ';
-                 }
-             ?>value="_blank">In neuem Fenster</option>
-</select>
-
-<br/><br/>
-
 <strong data-tooltip="Soll die Seite für die Öffentlichkeit sichtbar sein?">aktiviert:</strong><br/>
 <select name="activated" size=1>
 <option value="1" <?php if($row -> active == 1){
@@ -138,6 +111,28 @@ echo categories::getHTMLSelect($row->category);?>
 <br/>
 
 <br/>
+
+                     
+                     
+                     <p><a href="javascript:$('#extra_options').slideToggle();">Experteneinstellungen &gt;&gt;</a></p>
+<div id="extra_options">
+
+<strong data-tooltip="Soll diese Seite keinen eigenen Inhalt enthalten sondern stattdessen auf eine Externe Seite verlinken, tragen Sie die hier die URL ein.
+Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
+<input type="text" style="width:300px;" name="redirection" value="<?php echo $row -> redirection;
+             ?>">
+
+
+<br/><br/>
+
+<strong>HTML-Datei als Inhalt:</strong>
+<br/>
+<input type="text" style="width:300px;" name="html_file" value="<?php echo $row -> html_file;
+             ?>">
+<br/><br/>
+
+
+
 
 <strong data-tooltip="Für welche Benutzergruppen soll diese Seite sichtbar sein?">Sichtbar für:</strong><br/>
 <?php $access = explode(",", $row -> access);
@@ -176,9 +171,27 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
                          }
                      ?>>deaktiviert</option>
 </select>
-<?php add_hook("page_option");
-                     ?>
+
 <br/><br/>
+
+<strong data-tooltip="In welchem Fenster soll diese Seite geöffnet werden?">Öffnen in</strong><br/>
+<select name="target" size=1>
+<option <?php if($row -> target == "_self"){
+                 echo 'selected="selected" ';
+                 }
+             ?>value="_self">In diesem Fenster</option>
+<option <?php if($row -> target == "_blank"){
+                 echo 'selected="selected" ';
+                 }
+             ?>value="_blank">In neuem Fenster</option>
+</select>
+
+
+</div>
+
+<?php add_hook("page_option"); ?>
+
+
 <div align="center">
 <a id="bottom" name="bottom">
 <textarea name="page_content" id="page_content" cols=60 rows=20><?php echo htmlspecialchars($row -> content);
@@ -203,6 +216,7 @@ var formchanged = 0;
 var submitted = 0;
  
 $(document).ready(function() {
+        $('#extra_options').hide();
 	$('form').each(function(i,n){
 		$('input', n).change(function(){formchanged = 1});
 		$('textarea', n).change(function(){formchanged = 1});
