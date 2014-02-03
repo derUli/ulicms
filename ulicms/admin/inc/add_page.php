@@ -18,6 +18,7 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
 <input type="text" style="width:300px;" name="redirection" value="">
 <br/><br/>
 <strong>HTML-Datei als Inhalt:</strong>
+<br/>
 <input type="text" style="width:300px;" name="html_file" value="">
 <br/><br/>
 
