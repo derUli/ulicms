@@ -774,7 +774,7 @@ function containsModule($page, $module = false){
      }
 
     function page_has_html_file($page){
-         $query = db_query("SELECT html_file` FROM " . tbname("content") . " WHERE systemname = '" .
+         $query = db_query("SELECT `html_file` FROM " . tbname("content") . " WHERE systemname = '" .
          db_escape($page) . "'");
          $dataset = db_fetch_assoc($query);
  
@@ -784,8 +784,9 @@ function containsModule($page, $module = false){
            if(empty($html_file) or is_null($html_file))
              return null;
 
-          if(!endsWith($html_file, ".html") && !endsWith($html_file, ".htm") )
+          if(!endsWith($html_file, ".html") && !endsWith($html_file, ".htm") ){
                $html_file = $html_file . ".html";
+         }
          
          return $html_file;
 

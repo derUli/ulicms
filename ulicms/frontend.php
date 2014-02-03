@@ -182,6 +182,8 @@ if($html_file){
    else
      echo "404 Not Found";
 
+
+die();
 } else {
 
 require_once getTemplateDirPath($theme) . "oben.php";
