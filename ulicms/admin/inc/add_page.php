@@ -155,6 +155,13 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
          ?>
 <br/><br/>
 
+<p><a href="javascript:$('#extra_options').slideToggle();">Experteneinstellungen &gt;&gt;</a></p>
+<div id="extra_options">
+Experteneinstellungen
+</div>
+
+<br/><br/>
+
 <div align="center">
 <textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
 <script type="text/javascript">
@@ -162,6 +169,8 @@ var editor = CKEDITOR.replace( 'page_content',
 					{
 						skin : 'kama'
 					});                                         
+
+
 
 editor.on("instanceReady", function()
 {
@@ -177,6 +186,7 @@ var formchanged = 0;
 var submitted = 0;
  
 $(document).ready(function() {
+$("#extra_options").hide();
 	$('form').each(function(i,n){
 		$('input', n).change(function(){formchanged = 1});
 		$('textarea', n).change(function(){formchanged = 1});
