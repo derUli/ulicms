@@ -777,10 +777,17 @@ function containsModule($page, $module = false){
          $query = db_query("SELECT html_file` FROM " . tbname("content") . " WHERE systemname = '" .
          db_escape($page) . "'");
          $dataset = db_fetch_assoc($query);
-         if(empty($dataset["html_file"]) or is_null($dataset["html_file"]))
-            return null;
+ 
         
-         return $dataset["html_file"];
+          $html_file = $dataset["html_file"];
+
+           if(empty($html_file) or is_null($html_file))
+             return null;
+
+          if(!endsWith($html_file, ".html") && !endsWith($html_file, ".htm") )
+               $html_file = $html_file . ".html";
+         
+         return $html_file;
 
 
     }
