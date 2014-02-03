@@ -783,6 +783,8 @@ function containsModule($page, $module = false){
 
            if(empty($html_file) or is_null($html_file))
              return null;
+             
+         $html_file = dirname(__file__). "/content/files/" . $html_file;
 
           if(!endsWith($html_file, ".html") && !endsWith($html_file, ".htm") ){
                $html_file = $html_file . ".html";

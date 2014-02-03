@@ -180,10 +180,8 @@ if($html_file){
   if(file_exists($html_file))
      echo file_get_contents($html_file);
    else
-     echo "404 Not Found";
+     echo "File Not Found";
 
-
-die();
 } else {
 
 require_once getTemplateDirPath($theme) . "oben.php";
