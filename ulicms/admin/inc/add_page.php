@@ -13,15 +13,6 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
 <strong data-tooltip="Der Titel der Seite">Seitentitel:</strong><br/>
 <input type="text" style="width:300px;" name="page_title" value="" onkeyup="systemname_vorschlagen(this.value)">
 <br/><br/>
-<strong data-tooltip="Soll diese Seite keinen eigenen Inhalt enthalten sondern stattdessen auf eine Externe Seite verlinken, tragen Sie die hier die URL ein.
-Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
-<input type="text" style="width:300px;" name="redirection" value="">
-<br/><br/>
-<strong>HTML-Datei als Inhalt:</strong>
-<br/>
-<input type="text" style="width:300px;" name="html_file" value="">
-<br/><br/>
-
 
 <strong data-tooltip="In welcher Sprache ist diese Seite verfasst?">Sprache:</strong>
 <br/>
@@ -87,14 +78,6 @@ Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google
          ?>
 </select>
 
-<br/><br/>
-
-<strong data-tooltip="In welchem Fenster soll diese Seite geöffnet werden?">Öffnen in</strong><br/>
-<select name="target" size=1>
-<option value="_self">In diesem Fenster</option>
-<option value="_blank">In neuem Fenster</option>
-</select>
-
 
 <br/> <br/>
 
@@ -122,10 +105,21 @@ document.newpageform.system_title.value=systemname
 <option value="1">aktiviert</option>
 <option value="0">deaktiviert</option>
 </select>
-<br/>
-<br/>
 
 
+
+
+
+<p><a href="javascript:$('#extra_options').slideToggle();">Experteneinstellungen &gt;&gt;</a></p>
+<div id="extra_options">
+<strong data-tooltip="Soll diese Seite keinen eigenen Inhalt enthalten sondern stattdessen auf eine Externe Seite verlinken, tragen Sie die hier die URL ein.
+Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
+<input type="text" style="width:300px;" name="redirection" value="">
+<br/><br/>
+<strong>HTML-Datei als Inhalt:</strong>
+<br/>
+<input type="text" style="width:300px;" name="html_file" value="">
+<br/><br/>
 <strong data-tooltip="Für welche Benutzergruppen soll diese Seite sichtbar sein?">Sichtbar für:</strong><br/>
 <select name="access[]" size=4 multiple>
 <option value="all" selected>Alle</option>
@@ -151,16 +145,23 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 <option value="1">aktiviert</option>
 <option value="0" selected="selected">deaktiviert</option>
 </select>
-<?php add_hook("page_option");
-         ?>
+
 <br/><br/>
 
-<p><a href="javascript:$('#extra_options').slideToggle();">Experteneinstellungen &gt;&gt;</a></p>
-<div id="extra_options">
-Experteneinstellungen
+<strong data-tooltip="In welchem Fenster soll diese Seite geöffnet werden?">Öffnen in</strong><br/>
+<select name="target" size=1>
+<option value="_self">In diesem Fenster</option>
+<option value="_blank">In neuem Fenster</option>
+</select>
+
+
 </div>
 
 <br/><br/>
+
+
+<?php add_hook("page_option");
+         ?>
 
 <div align="center">
 <textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
