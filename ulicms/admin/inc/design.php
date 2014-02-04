@@ -120,7 +120,7 @@ width:200px;
 <option value="green"<?php
          if($backend_style === "green")
              echo " selected"
-             ?>>Grün</option>"
+             ?>>Grün</option>
 </select>
 
     </td>
