@@ -260,8 +260,11 @@ background-color:#c9ffb9;
 }
 
 
+
 input[type=button]:hover, input[type=submit]:hover, button:hover{
 border-color:#49671d; 
+
+
 }
 
 input[type=button]:hover, input[type=submit]:hover, button:hover{
@@ -397,4 +400,9 @@ height:20px;
 width:100%;
 margin-top:15px;
 margin-bottom:15px;
+}
+
+input[type="submit"]:focus, input[type="button"]:focus, button:focus{
+background-color:#62a718;
+color:white;
 }
