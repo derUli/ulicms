@@ -26,16 +26,16 @@ if($all_permissions){
     ?>"></p>
 <p><strong>Berechtigungen:</strong></p>
 <fieldset>
-<p><input type="checkbox" class="checkall"> Alles auswählen</p>
+<p><input id="checkall" type="checkbox" class="checkall"> <label for="checkall">Alles auswählen</label></p>
 <p>
 <?php foreach($all_permissions As $key => $value){
         ?>
-<input type="checkbox" name="user_permissons[]" value="<?php echo $key;
+<input type="checkbox" id="<?php echo $key;?>" name="user_permissons[]" value="<?php echo $key;
         ?>" <?php if($value){
             echo "checked='checked'";
             }
-        ?>> <?php echo $key;
-        ?><br/>
+        ?>> <label for="<?php echo $key;?>"><?php echo $key;
+        ?></label><br/>
 <?php }
     ?>
 </p>
