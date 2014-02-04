@@ -254,13 +254,13 @@ outline:none;
 }
 
 input, select, button, textarea{
-background-color:white;
+background-color:GhostWhite;
 color:black;
 }
 
 
 input:focus, select:focus, button:focus, textarea:focus{
-background-color:DimGray ;
+background-color:yellow;
 color:black;
 }
 
