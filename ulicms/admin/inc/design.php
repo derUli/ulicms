@@ -34,6 +34,10 @@ if(!is_admin()){
          if(getconfig("font-size") != $_REQUEST["font-size"]){
              setconfig("font-size", intval($_REQUEST["font-size"]));
              }
+
+             $backend_style = getconfig("backend_style");
+             if(!$backend_style)
+                $backend_style = "green";
         
         
         
@@ -106,6 +110,20 @@ width:200px;
      ?>
 </select>
 </td>
+</tr>
+<tr>
+    <td>
+        <strong>Backend Farbschema:</strong>
+    </td>
+    <td>
+<select name="backend_style" size=1>
+<option value="green"<?php
+         if($backend_style === "green")
+             echo " selected"
+             ?>>Grün</option>";
+</select>
+
+    </td>
 </tr>
 <tr>
 <td><strong>Schriftart:</strong></td>

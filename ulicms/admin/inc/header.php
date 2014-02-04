@@ -6,7 +6,7 @@
 <?php 
 $style = getconfig("backend_style");
 if(!$style)
-   $style = "admin";
+   $style = "green";
 
 $style = basename($style);
 
