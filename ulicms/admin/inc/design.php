@@ -36,7 +36,7 @@ if(!is_admin()){
              }
 
            
-        setconfig("backend_style", db_escape("backend_style"))
+        setconfig("backend_style", db_escape("backend_style"));
         
         
          if(getconfig("header-background-color")
