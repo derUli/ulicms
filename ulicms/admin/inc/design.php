@@ -35,10 +35,8 @@ if(!is_admin()){
              setconfig("font-size", intval($_REQUEST["font-size"]));
              }
 
-             $backend_style = getconfig("backend_style");
-             if(!$backend_style)
-                $backend_style = "green";
-        
+           
+        setconfig("backend_style", db_escape("backend_style"))
         
         
          if(getconfig("header-background-color")
@@ -69,7 +67,9 @@ if(!is_admin()){
      include_once "inc/fonts.php";
      $fonts = getFontFamilys();
     
-    
+      $backend_style = getconfig("backend_style");
+             if(!$backend_style)
+                $backend_style = "green";
     
     
      $default_font = getconfig("default-font");
