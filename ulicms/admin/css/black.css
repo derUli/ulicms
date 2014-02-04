@@ -83,7 +83,7 @@ font-size:1.0em;
 }
 
 a:hover{
-color:yellow;
+color:DimGray ;
 text-decoration:none;
 font-weight:bold;
 font-size:1.0em;
@@ -97,7 +97,7 @@ font-size:0.8em;
 }
 
 .menu a:hover{
-color:#ffe400;
+color:yellow;
 text-decoration:none;
 font-weight:bold;
 font-size:0.8em;
@@ -260,7 +260,7 @@ color:black;
 
 
 input:focus, select:focus, button:focus, textarea:focus{
-background-color:yellow;
+background-color:DimGray ;
 color:black;
 }
 
