@@ -95,7 +95,7 @@ width:200px;
      ?>"></td>
 </tr>
 <tr>
-<td><strong>Theme:</strong></td>
+<td><strong>Frontend Design:</strong></td>
 <td>
 <select name="theme" size=1>
 <?php foreach($allThemes as $th){
@@ -113,7 +113,7 @@ width:200px;
 </tr>
 <tr>
     <td>
-        <strong>Backend Farbschema:</strong>
+        <strong>Backend Design:</strong>
     </td>
     <td>
 <select name="backend_style" size=1>
