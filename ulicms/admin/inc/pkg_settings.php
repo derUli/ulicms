@@ -36,15 +36,16 @@ if(!$acl -> hasPermission("pkg_settings")){
      ?>
 <h1>Paketquelle</h1>
 <form id="pkg_settings" action="index.php?action=pkg_settings" method="post">
-<input type="radio" name="radioButtonSRC"<?php if($pkg_src === $default_pkg_src) echo " checked";
-     ?> onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $default_pkg_src?>');"> Offizielle Paketquelle [www.ulicms.de]<br>
+    <fieldset>
+<input type="radio" id="pkgsrc1" name="radioButtonSRC"<?php if($pkg_src === $default_pkg_src) echo " checked";
+     ?> onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $default_pkg_src?>');"> <label for="pkgsrc1">Offizielle Paketquelle [www.ulicms.de]</label><br>
 
-<input type="radio" name="radioButtonSRC" <?php if($pkg_src === $local_pkg_dir or $pkg_src === $local_pkg_dir_value) echo " checked";
-     ?>  onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $local_pkg_dir_value?>');"> Aus dem Dateisystem<br>
+<input type="radio" id="pkgsrc2" name="radioButtonSRC" <?php if($pkg_src === $local_pkg_dir or $pkg_src === $local_pkg_dir_value) echo " checked";
+     ?>  onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $local_pkg_dir_value?>');"> <label for="pkgsrc2">Aus dem Dateisystem</label><br>
 
 
-<input type="radio" name="radioButtonSRC" <?php if($is_other) echo " checked";
-     ?> onclick="$('#sonstigePaketQuelle').slideDown();"> Andere Paketquelle [URL]<br>
+<input type="radio" id="pkgsrc3" name="radioButtonSRC" <?php if($is_other) echo " checked";
+     ?> onclick="$('#sonstigePaketQuelle').slideDown();"> <label for="pkgsrc3">Andere Paketquelle [URL]</label><br>
 <div id="sonstigePaketQuelle" <?php
      if($is_other)
          echo 'style="display:block"';
@@ -65,6 +66,7 @@ if(!$acl -> hasPermission("pkg_settings")){
 </script>
 <?php }
      ?>
+ </fieldset>
 </form>
 
 <script type="text/javascript">

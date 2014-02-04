@@ -111,7 +111,7 @@ document.newpageform.system_title.value=systemname
 
 
 <p><a href="javascript:$('#extra_options').slideToggle();">Experteneinstellungen &gt;&gt;</a></p>
-<div id="extra_options">
+<fieldset id="extra_options">
 <strong data-tooltip="Soll diese Seite keinen eigenen Inhalt enthalten sondern stattdessen auf eine Externe Seite verlinken, tragen Sie die hier die URL ein.
 Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
 <input type="text" style="width:300px;" name="redirection" value="">
@@ -155,7 +155,7 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 </select>
 
 
-</div>
+</fieldset>
 
 <br/><br/>
 
