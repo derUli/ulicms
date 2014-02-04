@@ -31,12 +31,12 @@ if(!is_admin()){
              setconfig("zoom", intval($_REQUEST["zoom"]));
              }
         
-         if(getconfig("font-size") != $_REQUEST["font-size"]){
+         if(getconfig("font-size") != ç){
              setconfig("font-size", intval($_REQUEST["font-size"]));
              }
 
            
-        setconfig("backend_style", db_escape("backend_style"));
+        setconfig("backend_style", db_escape($_REQUEST["backend_style"]);
         
         
          if(getconfig("header-background-color")
