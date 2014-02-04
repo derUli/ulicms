@@ -121,6 +121,10 @@ width:200px;
          if($backend_style === "green")
              echo " selected"
              ?>>Grün</option>
+<option value="black"<?php
+         if($backend_style === "black")
+             echo " selected"
+             ?>>Schwarz</option>
 </select>
 
     </td>
