@@ -259,19 +259,16 @@ color:black;
 }
 
 
-input:focus, select:focus, button:focus, textarea:focus{
+input:focus, select:focus, textarea:focus{
 background-color:#fdfdfd;
 color:black;
 }
 
 
-input[type=button]:hover, input[type=submit]:hover, button:hover{
-border-color:#49671d; 
-}
 
-input[type=button]:hover, input[type=submit]:hover, button:hover{
-background-position:  0 -200px;  
-padding:5px;   
+input[type=button]:focus, input[type=submit]:focus, button:focus{
+background-color:yellow;
+color:black;
 }
 
 .startbutton,.startbutton:visited {
