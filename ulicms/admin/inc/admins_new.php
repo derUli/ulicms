@@ -18,7 +18,7 @@
 <input type="text" style="width:300px;" name="admin_email" value=""><br/><br/>
 <strong data-tooltip="Das Passwort des neuen Administrators. Es wird bei der Eingabe im Klartext angezeigt...">Passwort:</strong><br/>
 <input type="text" style="width:300px;" name="admin_password" value=""><br/><br/>
-<input type="checkbox" name="send_mail" value="sendmail"> <label for="send_mail">Die Zugangsdaten per E-Mail senden</label>
+<input type="checkbox" id="send_mail" name="send_mail" value="sendmail"> <label for="send_mail">Die Zugangsdaten per E-Mail senden</label>
 <br/>
 <br/>
 <input type="submit" value="Benutzer anlegen">
