@@ -163,9 +163,8 @@ color:#5f5f5f;
 }
 
 #login{
-background-color:#5aae85;
 width:350px;
-border:1px blue solid;
+border:1px solid yellow;
 padding-left:20px;
 padding-right:20px;
 padding-bottom:20px;
