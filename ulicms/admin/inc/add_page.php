@@ -110,7 +110,7 @@ document.newpageform.system_title.value=systemname
 
 
 
-<p><a href="javascript:$('#extra_options').slideToggle();">Experteneinstellungen &gt;&gt;</a></p>
+<p><a href="javascript:$('#extra_options').slideToggle();">Zusätzliche Optionen &gt;&gt;</a></p>
 <fieldset id="extra_options">
 <strong data-tooltip="Soll diese Seite keinen eigenen Inhalt enthalten sondern stattdessen auf eine Externe Seite verlinken, tragen Sie die hier die URL ein.
 Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
