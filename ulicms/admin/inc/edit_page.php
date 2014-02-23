@@ -195,7 +195,7 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 <?php add_hook("page_option"); ?>
 
 
-<div align="center">
+<div>
 <a id="bottom" name="bottom">
 <textarea name="page_content" id="page_content" cols=60 rows=20><?php echo htmlspecialchars($row -> content);
                      ?></textarea>

@@ -163,7 +163,7 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 <?php add_hook("page_option");
          ?>
 
-<div align="center">
+<div>
 <textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( 'page_content',
