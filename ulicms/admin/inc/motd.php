@@ -2,7 +2,7 @@
 $acl = new ACL();
 if($acl -> hasPermission("motd")){
      ?>
-<div align="center">
+<div>
 <h2>Message Of The Day</h2>
 <?php
      if(isset($_POST["motd"])){

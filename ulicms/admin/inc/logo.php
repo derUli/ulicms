@@ -30,10 +30,13 @@ Das Bild darf maximal 500 x 100 Pixel haben.
 <td><input name="logo_upload_file" type="file">
 <br/>
 </td>
-</table>
-<div align="center">
+<tr>
+<td>
+</td>
+<td style="text-align:center">
 <input type="submit" value="Hochladen">
-</div>
+</td>
+</table>
 
 <?php
          if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
