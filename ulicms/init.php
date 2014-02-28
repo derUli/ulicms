@@ -215,7 +215,7 @@ for($i = 0; $i < count($required_tables); $i++){
    if(!headers_sent())
       header("Content-Type: text/html; charset=UTF-8");
       
-    throw new Exception("Fehler: Die benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
+    throw new Exception("Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
     exit();
    }
 }
