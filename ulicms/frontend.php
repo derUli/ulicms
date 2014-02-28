@@ -2,14 +2,8 @@
 require_once "init.php";
 global $connection;
 
-if(!empty($_GET["language"])){
-     $_SESSION["language"] = basename($_GET["language"]);
-     }
 
-if(!isset($_SESSION["language"])){
-     $_SESSION["language"] = getconfig("default_language");
-     }
-     
+
 
 require_once "templating.php";
 
@@ -21,10 +15,20 @@ $_COOKIE[session_name()] = session_id();
 
 add_hook("after_session_start");
 
+setLanguageByDomain();
+
+if(!empty($_GET["language"])){
+     $_SESSION["language"] = basename($_GET["language"]);
+     }
+
+if(!isset($_SESSION["language"])){
+     $_SESSION["language"] = getconfig("default_language");
+     }
+     
+
 
 
      
-setLanguageByDomain();
 
 
 
