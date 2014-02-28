@@ -424,6 +424,9 @@ function SureRemoveDir($dir, $DeleteMe){
 function buildSEOUrl($page = false){
      if($page === false)
          $page = get_requested_pagename();
+         
+     if($page === get_frontpage())
+        return "./";
     
     
      $seo_url = "";
