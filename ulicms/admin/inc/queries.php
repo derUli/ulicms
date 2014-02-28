@@ -15,7 +15,6 @@ if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
      setconfig("maintenance_mode", intval(isset($_POST["maintenance_mode"])));
      setconfig("email", db_escape($_POST["email"]));
      setconfig("max_news", (int)$_POST["max_news"]);
-     setconfig("frontpage", db_escape($_POST["frontpage"]));
      setconfig("comment_mode", db_escape($_POST["comment_mode"]));
      setconfig("disqus_id", db_escape($_POST["disqus_id"]));
      setconfig("facebook_id", db_escape($_POST["facebook_id"]));

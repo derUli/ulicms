@@ -13,7 +13,6 @@
              }
         
 
-         $pages = getAllSystemNames()
          ?>
 
 <h2>Grundeinstellungen</h2>
@@ -55,17 +54,8 @@
 </td>
 <td>
 
-<select name="frontpage" size=1 style="width:400px">
-<?php for($i = 0;$i < count($pages);$i++){
-                 if($pages[$i] == $settings["frontpage"]){
-                     echo "<option value='" . $pages[$i] . "' selected='selected'>" . $pages[$i] . "</option>";
-                     }else{
-                     echo "<option value='" . $pages[$i] . "'>" . $pages[$i] . "</option>";
-                     }
-                
-                 }
-             ?>
-</select>
+<a href="index.php?action=frontpage_settings">
+Startseite festlegen</a>
 
 
 </td>
