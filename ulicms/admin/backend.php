@@ -174,6 +174,10 @@ if(!$eingeloggt){
     else if($_GET["action"] == "other_settings"){
          require_once "inc/other_settings.php";
          }
+         
+    else if($_GET["action"] == "frontpage_settings"){
+         require_once "inc/frontpage.php";
+         }
     
     else if($_GET["action"] == "pkg_settings"){
          require_once "inc/pkg_settings.php";

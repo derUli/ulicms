@@ -12,12 +12,8 @@
             
              }
         
-         $query2 = db_query("SELECT * FROM " . tbname("content") . " ORDER BY systemname");
-         $pages = Array();
-        
-         while($row = db_fetch_object($query2)){
-             array_push($pages, $row -> systemname);
-             }
+
+         $pages = getAllSystemNames()
          ?>
 
 <h2>Grundeinstellungen</h2>
