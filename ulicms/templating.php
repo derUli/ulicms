@@ -273,18 +273,33 @@ function apply_filter($text, $type){
 function motto(){
      echo htmlspecialchars(getconfig("motto"), ENT_QUOTES, "UTF-8");
      }
+     
+     
+function get_frontpage(){
+  if(isset($_SESSION["language"])){
+     $frontpage = getconfig("frontpage_" . $_SESSION["language"]);
+     if($frontpage){
+        return $frontpage;
+     }
+        
+  }
+  
+  
+  return getconfig("frontpage");
+  
+}
 
 
 function get_requested_pagename(){
      $value = db_escape($_GET["seite"]);
      if($value == ""){
-         $value = getconfig("frontpage");
+         $value = get_frontpage();
          }
      return $value;
      }
 
 function is_frontpage(){
-     return get_requested_pagename() === getconfig("frontpage");
+     return get_requested_pagename() === get_frontpage();
      }
 
 function is_200(){
@@ -546,7 +561,7 @@ function get_page($systemname = ""){
          }
        
        if(empty($systemname))
-         $systemname = getconfig("frontpage");
+         $systemname = get_frontpage();
 
          
        $query = db_query("SELECT * FROM ".tbname("content"). " WHERE systemname='".db_escape($systemname)."'");
@@ -579,7 +594,7 @@ function content(){
 
 function check_status(){
      if($_GET["seite"] == ""){
-         $_GET["seite"] = getconfig("frontpage");
+         $_GET["seite"] = get_frontpage();
          }
     
      $page = $_GET["seite"];
