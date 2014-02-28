@@ -179,7 +179,7 @@ if($config -> db_server == "" or $config -> db_user == ""){
 if($connection === false){
  throw new Exception("Fehler: Die Verbindung zum Datenbank Server konnte nicht hergestellt werden.");
  }
-
+ 
 
 $path_to_installer = dirname(__file__) . DIRECTORY_SEPERATOR . "installer" . DIRECTORY_SEPERATOR . "installer.php";
 
@@ -198,6 +198,28 @@ $select = schema_select($config -> db_database);
 if(!$select){
  throw new Exception("Fehler: Die Datenbank " . $config -> db_database . " existiert nicht.\n");
  }
+
+
+$existing_tables = db_get_tables();
+$required_tables = array(tbname("admins"), 
+                         tbname("banner"),
+                         tbname("categories"),
+                         tbname("content"),
+                         tbname("groups"),
+                         tbname("languages"),
+                         tbname("settings"));
+                         
+for($i = 0; $i < count($required_tables); $i++){
+   $table = $required_tables[$i];
+   if(!in_array($table, $existing_tables)){
+   if(!headers_sent())
+      header("Content-Type: text/html; charset=UTF-8");
+      
+    throw new Exception("Fehler: Die benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
+    exit();
+   }
+}
+
 
 
 $memory_limit = getconfig("memory_limit");
