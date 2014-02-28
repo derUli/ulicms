@@ -8,7 +8,7 @@ function language_selection(){
          if($domain) 
          echo "<li>" . "<a href='http://". $domain . "'>" . $row -> name . "</a></li>";
          else 
-         echo "<li>" . "<a href='" .buildSEOUrl(get_requested_pagename())."?language=" . $row -> language_code . "'>" . $row -> name . "</a></li>";
+         echo "<li>" . "<a href='./?language=" . $row -> language_code . "'>" . $row -> name . "</a></li>";
          }
      echo "</ul>";
     
@@ -276,13 +276,17 @@ function motto(){
      
      
 function get_frontpage(){
+  setLanguageByDomain();
+
   if(isset($_SESSION["language"])){
      $frontpage = getconfig("frontpage_" . $_SESSION["language"]);
+     
      if($frontpage){
         return $frontpage;
      }
         
   }
+  
   
   
   return getconfig("frontpage");
