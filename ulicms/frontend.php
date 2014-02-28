@@ -5,8 +5,6 @@ global $connection;
 
 
 
-require_once "templating.php";
-
 add_hook("before_session_start");
 
 // initialize session
@@ -27,6 +25,7 @@ if(!isset($_SESSION["language"])){
      
 
 
+require_once "templating.php";
 
      
 
