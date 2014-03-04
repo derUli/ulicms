@@ -1,5 +1,6 @@
 <?php
 $acl = new ACL();
+$pkg = new packageManager();
 if(!$acl -> hasPermission("install_packages")){
      ?>
 <p>Zugriff verweigert</p>
@@ -70,29 +71,20 @@ Nichts zu tun.</p>
                          fclose($handle);
                         
                          if(file_exists($tmpFile)){
-                            
-                             try{
-                                 // Paket entpacken
-                                $phar = new PharData($tmpFile);
-                                 $phar -> extractTo("../", null, true);
-                                 @unlink($tmpFile);
-                                
-                                 // post_install_script ausführen und anschließend
-                                // entfernen, sofern vorhanden;
-                                if(file_exists($post_install_script)){
-                                     include_once $post_install_script;
-                                     unlink($post_install_script);
-                                     }
-                                 echo "<p style='color:green;'>Installation erfolgreich ($packagesToInstall[$i])" . "</p>";
-                                 }
-                             catch (Exception $e){
-                                 echo "<p style='color:red;'>Entpacken der Datei fehlgeschlagen ($packagesToInstall[$i])" . "</p>";
-                                 }
-                             }
-                         flush();
-                        
+                         // Paket installieren
+                         if($pkg->installPackage($tmpFile)){
+                            echo "<p style='color:green;'>Installation erfolgreich ($packagesToInstall[$i])" . "</p>";                         
+                         } else {
+                            echo "<p style='color:red;'>Entpacken der Datei fehlgeschlagen ($packagesToInstall[$i])" . "</p>";
                          }
+                         
+                         }
+                         @unlink($tmpFile);
+
+
+                                
                     
+                    }
                      }
                 
                 
