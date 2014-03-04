@@ -27,7 +27,7 @@ if(!$acl -> hasPermission("list_packages")){
      <?php
      if($acl -> hasPermission("install_packages")){
          ?>
-<p style="margin-bottom:30px;"><a href="?action=available_modules">[Paket installieren]</a></p> 
+<p style="margin-bottom:30px;"><a href="?action=install_method">[Paket installieren]</a></p> 
 <?php }
     ?>
 

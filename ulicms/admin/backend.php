@@ -168,6 +168,12 @@ if(!$eingeloggt){
     else if($_GET["action"] == "cache"){
          require_once "inc/cache_settings.php";
          }
+    else if($_GET["action"] == "install_method"){
+         require_once "inc/install_method.php";
+         }
+    else if($_GET["action"] == "upload_package"){
+         require_once "inc/upload_package.php";
+         }
     else if($_GET["action"] == "module_settings"){
          require_once "inc/module_settings.php";
          }
