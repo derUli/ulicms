@@ -239,7 +239,11 @@ if($('#smtp_auth').prop('checked')){
 });
 </script>
 <script type="text/javascript">
-
+<?php 
+if($email_mode == "pear_mail"){
+?>
+$('#smtp_settings').show();
+<?php }?>
 
 $('#email_mode').change(function(){
 if($('#email_mode').val() == "pear_mail"){
