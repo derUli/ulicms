@@ -372,7 +372,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (43, 'domain_to_language', ''),
 (44, 'frontpage_de', 'willkommen'),
 (45, 'frontpage_en', 'welcome'),
-(46, 'session_timeout', '60');")or die(mysqli_error($connection));
+(46, 'mail_mode', 'internal'),
+(47, 'session_timeout', '60');")or die(mysqli_error($connection));
         
          mysqli_query($connection, "UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysqli_error($connection));
         
