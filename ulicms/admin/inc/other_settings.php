@@ -233,7 +233,7 @@ if($smtp_auth)
 </div>
 
 <div class="label">Passwort</div>
-<div class="inputWrapper"><input type="text" name="smtp_password" value="<?php echo real_htmlspecialchars($smtp_password);?>"</div>
+<div class="inputWrapper"><input type="password" name="smtp_password" value="<?php echo real_htmlspecialchars($smtp_password);?>"</div>
 </div>
 
 </div>
