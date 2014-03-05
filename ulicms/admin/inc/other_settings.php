@@ -165,7 +165,8 @@ www.meinefirma.fr=>fr
 </p>
 <div class="seperator"></div>
 <h2>Email-Versand:</h2>
-Modus:<br/>
+<div class="label">Modus:</div>
+<div class="inputWrapper">
 <select id='email_mode' name="email_mode" size="1">
 <option value="internal"<?php 
 if($email_mode == "internal")
@@ -176,11 +177,27 @@ if($email_mode == "pear_mail")
 echo ' checked="checked"';
     ?>>>PEAR Mail</option>
 </select>
+</div>
 <br/>
 <div class="smtp_settings" style="display:none">
     <h3>SMTP Einstellungen</h3>
+<div class="label">Hostname</div>
+<div class="inputWrapper"><input type="text" name="smtp_host" value="<?php echo real_htmlspecialchars($smtp_host);?>"</div>
 </div>
 
+
+<div class="label">Port</div>
+<div class="inputWrapper"><input type="text" name="smtp_port" value="<?php echo real_htmlspecialchars($smtp_port);?>"</div>
+</div>
+
+
+<div class="label">User</div>
+<div class="inputWrapper"><input type="text" name="smtp_user" value="<?php echo real_htmlspecialchars($smtp_user);?>"</div>
+</div>
+
+<div class="label">Passwort</div>
+<div class="inputWrapper"><input type="text" name="smtp_password" value="<?php echo real_htmlspecialchars($smtp_password);?>"</div>
+</div>
 <script type="text/javascript">
 <?
 if($email_mode == "pear_mail"){
