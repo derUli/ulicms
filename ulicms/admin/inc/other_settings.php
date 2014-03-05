@@ -54,6 +54,27 @@ if(!is_admin()){
      $override_shortcuts = getconfig("override_shortcuts");
      $email_mode = getconfig("email_mode");
      $menus = getAllMenus();
+
+    $smtp_host = getconfig("smtp_host");
+    if(!$smtp_host) 
+        $smtp_host = "127.0.0.1";
+
+    $smtp_port = getconfig("smtp_port");
+    if(!$smtp_port) 
+        $smtp_port = "25";
+
+
+    $smtp_user = getconfig("smtp_user");
+    if(!$smtp_user) 
+        $smtp_user = null;
+
+    $smtp_password = getconfig("smtp_password");
+    if(!$smtp_password) 
+        $smtp_password = null;
+
+    $smtp_auth = getconfig("smtp_auth");
+
+
     
      ?>
 <h1>Sonstiges</h1>
