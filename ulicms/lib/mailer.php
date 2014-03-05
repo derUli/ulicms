@@ -21,7 +21,16 @@ function pear_mail($to,$subject,$message,$headers="") {
         return $header_array;
     }
 
-    $mailer = Mail::factory('smtp',array('host'=>'127.0.0.1','port'=>'25'));
+    $smtp_host = getconfig("smtp_host");
+    if(!$smtp_host) 
+        $smtp_host = "127.0.0.1";
+
+    $smtp_port = getconfig("smtp_port");
+    if(!$smtp_port) 
+        $smtp_port = "25";
+
+
+    $mailer = Mail::factory('smtp',array('host'=>$smtp_host,'port'=>$smtp_port));
     $header_list = split_headers($headers);
     $header_list['Subject'] = $subject;
     return $mailer->send($to,$header_list,$message);
