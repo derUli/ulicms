@@ -42,6 +42,12 @@ if(!is_admin()){
              deleteconfig("cache_disabled");
          else
              setconfig("cache_disabled", "disabled");
+
+
+         if(isset($_POST["smtp_auth"]))
+            setconfig("smtp_auth", "auth");
+         else
+            deleteconfig("smtp_auth");
         
         
          if($_POST["move_from"] != "-" and $_POST["move_to"] != "-"){
