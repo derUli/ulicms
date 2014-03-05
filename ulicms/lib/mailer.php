@@ -1,5 +1,5 @@
 <?php
-if(!@nclude_once("Mail.php") and !defined("NO_PEAR_MAIL")){
+if(!@include_once("Mail.php") and !defined("NO_PEAR_MAIL")){
     define("NO_PEAR_MAIL", true);
 }
 
