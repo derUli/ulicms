@@ -222,7 +222,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysqli_error($connection));
         
-        $create_table_groups_sql = "CREATE TABLE IF NOT EXISTS `" . $prefix . "groups` (
+         $create_table_groups_sql = "CREATE TABLE IF NOT EXISTS `" . $prefix . "groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `permissions` mediumtext NOT NULL,
@@ -230,12 +230,12 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
         
-        mysqli_query($connection, $create_table_groups_sql)or die(mysqli_error($connection));
+         mysqli_query($connection, $create_table_groups_sql)or die(mysqli_error($connection));
         
-        $insert_group_query = 'INSERT INTO `' . $prefix . 'groups` (`id`, `name`, `permissions`) VALUES
+         $insert_group_query = 'INSERT INTO `' . $prefix . 'groups` (`id`, `name`, `permissions`) VALUES
 (1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"flash":true,"groups":true, "categories" : true, "images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"templates":true,"update_system":true,"users":true,"export":true, "import" : true}\')';
         
-        mysqli_query($connection, $insert_group_query);
+         mysqli_query($connection, $insert_group_query);
         
         
          $vorname = mysqli_real_escape_string($connection, $_POST["firstname"]);
@@ -387,18 +387,18 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
          mysqli_query($connection, "INSERT INTO `" . $prefix . "languages` (`id`, `name`, `language_code`) VALUES
 (1, 'Deutsch', 'de'), 
 (2, 'English', 'en');")or die(mysqli_error($connection));
-
-
-$sql_categories_table = "CREATE TABLE ".$prefix."categories (
+        
+        
+        $sql_categories_table = "CREATE TABLE " . $prefix . "categories (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           name VARCHAR(100)
           ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
-        mysqli_query($connection, $sql_categories_table);
-
-$insert_categories_general = "INSERT INTO ".$prefix."categories (name) VALUES('Allgemein')";
-
-mysqli_query($connection, $insert_categories_general);
-
+         mysqli_query($connection, $sql_categories_table);
+        
+        $insert_categories_general = "INSERT INTO " . $prefix . "categories (name) VALUES('Allgemein')";
+        
+        mysqli_query($connection, $insert_categories_general);
+        
          @chmod("../cms-config.php", 0777);
         
          @mkdir("../content");

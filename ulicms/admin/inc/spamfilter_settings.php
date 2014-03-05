@@ -43,9 +43,9 @@ Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren:<br/
 </div>
 <br/>
 <br/>
-<input type="checkbox" name="disallow_chinese_chars" id="disallow_chinese_chars" <?php 
-if(getconfig("disallow_chinese_chars")) echo " checked=\"checked\"";
-?>> <label for="disallow_chinese_chars">Chinesische Schriftzeichen verbieten</label>
+<input type="checkbox" name="disallow_chinese_chars" id="disallow_chinese_chars" <?php
+    if(getconfig("disallow_chinese_chars")) echo " checked=\"checked\"";
+    ?>> <label for="disallow_chinese_chars">Chinesische Schriftzeichen verbieten</label>
 
 <br/><br/>
 

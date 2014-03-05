@@ -22,12 +22,12 @@ if(!empty($_GET["language"])){
 if(!isset($_SESSION["language"])){
      $_SESSION["language"] = getconfig("default_language");
      }
-     
+
 
 
 require_once "templating.php";
 
-     
+
 
 
 
@@ -57,35 +57,35 @@ if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("ma
      }
 
 if(isset($_GET["format"]) and !empty($_GET["format"])){
-   $format = trim($_GET["format"]);
-} else {
-   $format = "html";
-}
+     $format = trim($_GET["format"]);
+    }else{
+     $format = "html";
+    }
 
 add_hook("before_http_header");
 
 header("HTTP/1.0 " . $status);
 
 if($format == "html"){
-   header("Content-Type: text/html; charset=utf-8");
-} else if($format == "pdf"){
-   $pdf = new PDFCreator();
-   $pdf->output();
-} else if($format == "csv"){
-   $csv = new CSVCreator();
-   $csv->output();
-   } else if($format == "json"){
-   $json = new JSONCreator();
-   $json->output();
-   }
+     header("Content-Type: text/html; charset=utf-8");
+    }else if($format == "pdf"){
+     $pdf = new PDFCreator();
+     $pdf -> output();
+    }else if($format == "csv"){
+     $csv = new CSVCreator();
+     $csv -> output();
+     }else if($format == "json"){
+     $json = new JSONCreator();
+     $json -> output();
+     }
 else if($format == "txt"){
-   $plain = new PlainTextCreator();
-   $plain->output();
-
-}
+     $plain = new PlainTextCreator();
+     $plain -> output();
+    
+    }
 else{
-   $format = "html";
-}
+     $format = "html";
+    }
 
 
 add_hook("after_http_header");
@@ -102,8 +102,8 @@ if(!is_dir(getTemplateDirPath($theme)))
 if(file_exists(getTemplateDirPath($theme) . "functions.php")){
      include getTemplateDirPath($theme) . "functions.php";
      }
-     
-     
+
+
 
 $cached_page_path = buildCacheFilePath($_SERVER['REQUEST_URI']);
 $modules = getAllModules();
@@ -160,7 +160,7 @@ else if(file_exists($cached_page_path)){
  }
  }
 
- $id = md5($_SERVER['REQUEST_URI'].$_SESSION["language"]);
+ $id = md5($_SERVER['REQUEST_URI'] . $_SESSION["language"]);
 
 if(!getconfig("cache_disabled") and !$hasModul and
  getenv('REQUEST_METHOD') == "GET" and $cache_type === "cache_lite"){
@@ -186,12 +186,12 @@ if ($data = $Cache_Lite -> get($id)){
 $html_file = page_has_html_file(get_requested_pagename());
 
 if($html_file){
-  if(file_exists($html_file))
-     echo file_get_contents($html_file);
-   else
-     echo "File Not Found";
+ if(file_exists($html_file))
+ echo file_get_contents($html_file);
+ else
+ echo "File Not Found";
 
-} else {
+}else{
 
 require_once getTemplateDirPath($theme) . "oben.php";
 

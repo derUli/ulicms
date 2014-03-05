@@ -14,11 +14,12 @@ $all_permissions = $acl -> getDefaultACL(true, true);
 <p><input id="checkall" type="checkbox" class="checkall"> <label for="checkall">Alles auswählen</label></p>
 <p>
 <?php foreach($all_permissions As $key => $value){
-    ?>
+     ?>
 <input type="checkbox" id="<?php echo $key;
-    ?>" name="user_permissons[]" value="<?php echo $key;
-    ?>"> <label for="<?php echo $key;
-    ?>"><?php echo $key;?></label>
+     ?>" name="user_permissons[]" value="<?php echo $key;
+     ?>"> <label for="<?php echo $key;
+     ?>"><?php echo $key;
+    ?></label>
    <br/>
 <?php }
 ?>

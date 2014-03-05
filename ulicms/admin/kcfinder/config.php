@@ -102,7 +102,7 @@ $_CONFIG = array(
     // '_sessionPath' => "/my/path",
     );
 
-include_once "../../init.php";
+@include_once "../../init.php";
 
 $acl = new acl();
 

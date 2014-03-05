@@ -1,42 +1,42 @@
 
 <?php if(defined("_SECURITY")){
-    $acl = new ACL();
+     $acl = new ACL();
      if($acl -> hasPermission("settings_simple")){
-     
-     
-     $languages = getAllLanguages();
-     
-     if(isset($_POST["submit"])){
-        for($i = 0; $i < count($languages); $i++){
         
-           $lang = $languages[$i];
-           if(isset($_POST["frontpage_". $lang])){
-              $page = db_escape($_POST["frontpage_". $lang]);
-              setconfig("frontpage_".$lang, $page);
-              if($lang == getconfig("default_language")){
-                 setconfig("frontpage", $page);
-              }
-           }
-        }
-     }
-     
-     
-     
-     $frontpages = array();
-     
-     for($i = 0; $i < count($languages); $i++){
-        $lang = $languages[$i];
-        $frontpages[$lang] = getconfig("frontpage_". $lang);
         
-        if(!$frontpages[$lang])
-           $frontpages[$lang] = getconfig($frontpage);
+         $languages = getAllLanguages();
         
-     
-     }
-     
-     $pages = getAllSystemNames();
-
-?>
+         if(isset($_POST["submit"])){
+             for($i = 0; $i < count($languages); $i++){
+                
+                 $lang = $languages[$i];
+                 if(isset($_POST["frontpage_" . $lang])){
+                     $page = db_escape($_POST["frontpage_" . $lang]);
+                     setconfig("frontpage_" . $lang, $page);
+                     if($lang == getconfig("default_language")){
+                         setconfig("frontpage", $page);
+                         }
+                     }
+                 }
+             }
+        
+        
+        
+         $frontpages = array();
+        
+         for($i = 0; $i < count($languages); $i++){
+             $lang = $languages[$i];
+             $frontpages[$lang] = getconfig("frontpage_" . $lang);
+            
+             if(!$frontpages[$lang])
+                 $frontpages[$lang] = getconfig($frontpage);
+            
+            
+             }
+        
+         $pages = getAllSystemNames();
+        
+        ?>
 <h1>Startseite</h1>
 <form action="index.php?action=frontpage_settings" id="frontpage_settings" method="post">
 <table border=0>
@@ -44,14 +44,16 @@
 <td style="min-width:100px;"><strong>Sprache</strong></td>
 <td><strong>Startseite</strong></td>
 </tr>
-<?php  
-for($n = 0; $n < count($languages); $n++){
-    $lang = $languages[$n];
-?>
+<?php
+        for($n = 0; $n < count($languages); $n++){
+             $lang = $languages[$n];
+            ?>
 <tr>
-<td><?php echo $lang;?></td>
+<td><?php echo $lang;
+            ?></td>
 <td>
-<select name="frontpage_<?php echo $lang;?>" size=1 style="width:400px">
+<select name="frontpage_<?php echo $lang;
+            ?>" size=1 style="width:400px">
 <?php for($i = 0; $i < count($pages);$i++){
                  if($pages[$i] == $frontpages[$lang]){
                      echo "<option value='" . $pages[$i] . "' selected='selected'>" . $pages[$i] . "</option>";
@@ -64,7 +66,8 @@ for($n = 0; $n < count($languages); $n++){
 </select>
 
 </td>
-<?php }?>
+<?php }
+        ?>
 <tr>
 <td>
 </td>
@@ -89,9 +92,9 @@ $("#frontpage_settings").ajaxForm({beforeSubmit: function(e){
 
 </script>
 
-<?php } else{
-noperms();
-}
-
-}
+<?php }else{
+        noperms();
+        }
+    
+    }
 ?>

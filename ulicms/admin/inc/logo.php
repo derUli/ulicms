@@ -1,6 +1,6 @@
 <?php if(defined("_SECURITY")){
-$acl = new ACL();    
-     if($acl->hasPermission("logo")){
+    $acl = new ACL();
+     if($acl -> hasPermission("logo")){
          ?>     
 <?php if($_GET["error"] == "to_big"){
              ?> 

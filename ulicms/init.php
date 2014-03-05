@@ -26,18 +26,18 @@ switch($os)
  default: define("DIRECTORY_SEPERATOR", "/");
      break;
      }
-     
-$classes_dir = ULICMS_ROOT.DIRECTORY_SEPERATOR."classes";
+
+$classes_dir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "classes";
 
 @set_include_path(get_include_path() . PATH_SEPARATOR . $classes_dir);
-     
+
 if(!defined("ULICMS_TMP"))
-     define("ULICMS_TMP", dirname(__file__) . DIRECTORY_SEPERATOR . "content".DIRECTORY_SEPERATOR."tmp".DIRECTORY_SEPERATOR);
+     define("ULICMS_TMP", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR);
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "base_config.php";
 
-include_once dirname(__file__).DIRECTORY_SEPERATOR."antispam-features.php";
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "antispam-features.php";
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "categories.php";
@@ -114,9 +114,9 @@ else if(is_dir("installer")){
 // else use default error_reporting from php.ini
 if(defined("ULICMS_DEBUG")){
  if(ULICMS_DEBUG)
-   error_reporting(E_ALL ^ E_NOTICE);
+ error_reporting(E_ALL ^ E_NOTICE);
  else
-   error_reporting(0);
+ error_reporting(0);
 }else{
  error_reporting(0);
 }
@@ -151,17 +151,17 @@ function endsWith($haystack, $needle, $case = true){
  }
  return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
  }
- 
+
  function is_in_include_path($find){
-    $paths = explode(PATH_SEPARATOR, get_include_path());
-    $found = false;
-    foreach($paths as $p) {
-       $fullname = $p.DIRECTORY_SEPARATOR.$find;
-       if(is_file($fullname)) {
-          $found = $fullname;
-          break;
-      }
-    }
+ $paths = explode(PATH_SEPARATOR, get_include_path());
+ $found = false;
+ foreach($paths as $p){
+ $fullname = $p . DIRECTORY_SEPARATOR . $find;
+ if(is_file($fullname)){
+     $found = $fullname;
+     break;
+     }
+ }
  }
 
 
@@ -180,7 +180,7 @@ if($config -> db_server == "" or $config -> db_user == ""){
 if($connection === false){
  throw new Exception("Fehler: Die Verbindung zum Datenbank Server konnte nicht hergestellt werden.");
  }
- 
+
 
 $path_to_installer = dirname(__file__) . DIRECTORY_SEPERATOR . "installer" . DIRECTORY_SEPERATOR . "installer.php";
 
@@ -202,23 +202,23 @@ if(!$select){
 
 
 $existing_tables = db_get_tables();
-$required_tables = array(tbname("admins"), 
-                         tbname("banner"),
-                         tbname("categories"),
-                         tbname("content"),
-                         tbname("groups"),
-                         tbname("languages"),
-                         tbname("settings"));
-                         
+$required_tables = array(tbname("admins"),
+ tbname("banner"),
+ tbname("categories"),
+ tbname("content"),
+ tbname("groups"),
+ tbname("languages"),
+ tbname("settings"));
+
 for($i = 0; $i < count($required_tables); $i++){
-   $table = $required_tables[$i];
-   if(!in_array($table, $existing_tables)){
-   if(!headers_sent())
-      header("Content-Type: text/html; charset=UTF-8");
-      
-    throw new Exception("Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
-    exit();
-   }
+ $table = $required_tables[$i];
+ if(!in_array($table, $existing_tables)){
+ if(!headers_sent())
+     header("Content-Type: text/html; charset=UTF-8");
+
+ throw new Exception("Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
+ exit();
+ }
 }
 
 
@@ -309,6 +309,6 @@ define("UPDATE_CHECK_URL", "http://www.ulicms.de/updatecheck.php?v=" .
 implode(".", $version -> getInternalVersion())));
 
 if(!getconfig("session_name"))
-   setconfig("session_name", uniqid()."_SESSION");
+ setconfig("session_name", uniqid() . "_SESSION");
 
 session_name(getconfig("session_name"));

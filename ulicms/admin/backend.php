@@ -23,10 +23,10 @@ if(isset($_SESSION["ulicms_login"]))
      }else{
      $eingeloggt = false;
      }
-     
+
 if($_GET["action"] == "export" and isset($_POST["table"])){
-         require_once "inc/export-data.php";
-}
+     require_once "inc/export-data.php";
+    }
 
 header("Content-Type: text/html; charset=UTF-8");
 
@@ -64,7 +64,7 @@ if(!$eingeloggt){
          require_once "inc/pages.php";
          }
     else if($_GET["action"] == "categories"){
-       require_once "inc/categories.php";
+         require_once "inc/categories.php";
          }
     else if($_GET["action"] == "pages_edit"){
          require_once "inc/edit_page.php";
@@ -158,7 +158,7 @@ if(!$eingeloggt){
     else if($_GET["action"] == "languages"){
          require_once "inc/languages.php";
          }
-            else if($_GET["action"] == "import"){
+    else if($_GET["action"] == "import"){
          require_once "inc/import.php";
          }
     else if($_GET["action"] == "export"){
@@ -180,7 +180,7 @@ if(!$eingeloggt){
     else if($_GET["action"] == "other_settings"){
          require_once "inc/other_settings.php";
          }
-         
+    
     else if($_GET["action"] == "frontpage_settings"){
          require_once "inc/frontpage.php";
          }

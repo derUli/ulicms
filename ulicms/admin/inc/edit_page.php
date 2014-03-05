@@ -1,5 +1,5 @@
 <?php if(defined("_SECURITY")){
-    $acl = new ACL();
+     $acl = new ACL();
      if($acl -> hasPermission("pages")){
          $page = db_escape($_GET["page"]);
          $query = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
@@ -32,29 +32,30 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
 <br/>
 <select name="language">
 <?php
-         $languages = getAllLanguages();
-         
-               $page_language = $row->language;
-         
-       
-        
-         for($j = 0; $j < count($languages); $j++){
-             if($languages[$j] === $page_language){
-                 echo "<option value='" . $languages[$j] . "' selected>" . $languages[$j] . "</option>";
-                 }else{
-                 echo "<option value='" . $languages[$j] . "'>" . $languages[$j] . "</option>";
+             $languages = getAllLanguages();
+            
+             $page_language = $row -> language;
+            
+            
+            
+             for($j = 0; $j < count($languages); $j++){
+                 if($languages[$j] === $page_language){
+                     echo "<option value='" . $languages[$j] . "' selected>" . $languages[$j] . "</option>";
+                     }else{
+                     echo "<option value='" . $languages[$j] . "'>" . $languages[$j] . "</option>";
+                     }
+                
+                
                  }
-            
-            
-             }
-         ?>
+             ?>
 </select>
 
 <br/><br/>
 
 <strong>Kategorie:</strong><br/>
-<?php 
-echo categories::getHTMLSelect($row->category);?>
+<?php
+            echo categories :: getHTMLSelect($row -> category);
+            ?>
 
 <br/><br/>
 
@@ -177,13 +178,13 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 <strong data-tooltip="In welchem Fenster soll diese Seite geöffnet werden?">Öffnen in</strong><br/>
 <select name="target" size=1>
 <option <?php if($row -> target == "_self"){
-                 echo 'selected="selected" ';
-                 }
-             ?>value="_self">In diesem Fenster</option>
+                         echo 'selected="selected" ';
+                         }
+                     ?>value="_self">In diesem Fenster</option>
 <option <?php if($row -> target == "_blank"){
-                 echo 'selected="selected" ';
-                 }
-             ?>value="_blank">In neuem Fenster</option>
+                         echo 'selected="selected" ';
+                         }
+                     ?>value="_blank">In neuem Fenster</option>
 </select>
 
 
@@ -192,7 +193,8 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 
 <br/><br/>
 
-<?php add_hook("page_option"); ?>
+<?php add_hook("page_option");
+                    ?>
 
 
 <div>

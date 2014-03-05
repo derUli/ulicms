@@ -89,10 +89,10 @@ if($_GET["action"] == "spam_filter" and
          }
     
     
-    if(isset($_POST["disallow_chinese_chars"]))
-       setconfig("disallow_chinese_chars", "disallow");
-    else
-       deleteconfig("disallow_chinese_chars");
+     if(isset($_POST["disallow_chinese_chars"]))
+         setconfig("disallow_chinese_chars", "disallow");
+     else
+         deleteconfig("disallow_chinese_chars");
     
     
      }
@@ -218,8 +218,8 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
              $meta_description = $shortstring;
             
              }
-             
-             
+        
+        
          $meta_description = unhtmlspecialchars($meta_description);
         
          $meta_description = db_escape($meta_description);
@@ -480,7 +480,7 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
     
      if($db_avatar_filename == "content/avatars/"){
          $db_avatar_filename = "";
-         }    
+         }
      $username = db_escape($_POST["admin_username"]);
      $lastname = db_escape($_POST["admin_lastname"]);
      $firstname = db_escape($_POST["admin_firstname"]);
@@ -496,7 +496,7 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
              $group_id = intval($group_id);
         
          }else{
-            $group_id = $_SESSION["group_id"];
+         $group_id = $_SESSION["group_id"];
          }
     
      $icq_id = db_escape($_POST["icq_id"]);
@@ -510,7 +510,7 @@ about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");
      if(!empty($password))
          changePassword($password, $id);
     
-     if(!$acl->hasPermission("users")){
+     if(!$acl -> hasPermission("users")){
          header("Location: index.php");
          exit();
          }else{

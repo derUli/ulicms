@@ -1,7 +1,7 @@
 <h1>Cache</h1>
 <?php
 $acl = new ACL();
-if($acl->hasPermission("cache")){
+if($acl -> hasPermission("cache")){
      ?>
 <?php
      if(isset($_GET["clear_cache"])){

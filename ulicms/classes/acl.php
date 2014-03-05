@@ -1,7 +1,7 @@
 <?php
 class ACL{
     
-    public function setPermission($name, $value, $group_id){
+     public function setPermission($name, $value, $group_id){
         
          $result = $this -> getPermissionQueryResult();
         
@@ -21,9 +21,9 @@ class ACL{
         
          $updateSQLString = "UPDATE `" . tbname("groups") . "` SET `permissions`='" . db_escape($newJSON) . "' WHERE id=" . $group_id;
         
-        }
+         }
     
-    public function hasPermission($name){
+     public function hasPermission($name){
         
          $result = $this -> getPermissionQueryResult();
          if(!$result)
@@ -45,9 +45,9 @@ class ACL{
         
         
          return $permissionData[$name];
-        }
+         }
     
-    public function createGroup($name, $permissions = null){
+     public function createGroup($name, $permissions = null){
          if(is_null($permissions))
              $permission_data = $this -> getDefaultACL();
          else
@@ -63,9 +63,9 @@ class ACL{
         return db_last_insert_id();
         
         
-        }
+         }
     
-    public function updateGroup($id, $name, $permissions = null){
+     public function updateGroup($id, $name, $permissions = null){
          if(is_null($permissions))
              $permission_data = $this -> getDefaultACL();
          else
@@ -79,9 +79,9 @@ class ACL{
          // Gebe die letzte Insert-ID zurück, damit man gleich mit der erzeugten Gruppe arbeiten kann.
         return $id;
         
-        }
+         }
     
-    public function deleteGroup($id, $move_users_to = null){
+     public function deleteGroup($id, $move_users_to = null){
          $id = intval($id);
          $deleteGroupSQL = "DELETE FROM `" . tbname("groups") . "` WHERE id=" . $id;
          db_query($deleteGroupSQL);
@@ -93,10 +93,10 @@ class ACL{
         
          db_query($updateUsers);
         
-        }
+         }
     
     
-    public function getPermissionQueryResult($id = null){
+     public function getPermissionQueryResult($id = null){
          if($id)
              $group_id = $id;
          else
@@ -114,9 +114,9 @@ class ACL{
          $result = db_fetch_assoc($query);
         
          return $result;
-        }
+         }
     
-    public function getAllGroups($order = 'id DESC'){
+     public function getAllGroups($order = 'id DESC'){
          $sql = "SELECT * FROM `" . tbname("groups") . "` ORDER by " . $order;
          $query = db_query($sql);
          $list = array();
@@ -124,10 +124,10 @@ class ACL{
              $list[$assoc["id"]] = $assoc["name"];
              }
          return $list;
-        }
+         }
     
     
-    public function getDefaultACLAsJSON($admin = false, $plain = false){
+     public function getDefaultACLAsJSON($admin = false, $plain = false){
          $acl_data = Array();
         
         
@@ -136,13 +136,13 @@ class ACL{
         
          // Inhalte
         $acl_data["pages"] = null;
-        $acl_data["banners"] = null;
-        $acl_data["categories"] = null;
+         $acl_data["banners"] = null;
+         $acl_data["categories"] = null;
         
          // Medien
         $acl_data["images"] = null;
-        $acl_data["files"] = null;
-        $acl_data["flash"] = null;
+         $acl_data["files"] = null;
+         $acl_data["flash"] = null;
         
          // Benutzer
         $acl_data["users"] = null;
@@ -172,7 +172,7 @@ class ACL{
          $acl_data["logo"] = null;
          $acl_data["other"] = null;
          $acl_data["expert_settings"] = null;
-         
+        
          $acl_data["export"] = null;
          $acl_data["import"] = null;
         
@@ -202,11 +202,11 @@ class ACL{
         
          $json = json_encode($acl_data);
          return $json;
-        }
+         }
     
     
-    public function getDefaultACL($admin = false, $plain = false){
+     public function getDefaultACL($admin = false, $plain = false){
          return $this -> getDefaultACLAsJSON($admin, $plain);
-        }
+         }
     
-    }
+     }

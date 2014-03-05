@@ -2,7 +2,7 @@
 $acl = new ACL();
 
 if($acl -> hasPermission("dashboard")){
-    ?>
+     ?>
 
 <?php
      if(defined("_SECURITY") and logged_in()){
@@ -157,10 +157,10 @@ if($acl -> hasPermission("dashboard")){
 <?php
          }
     
-    ?>
+     ?>
 
 <?php }else{
-    noperms();
-    }
+     noperms();
+     }
 ?>
 

@@ -1,5 +1,5 @@
 <?php if(defined("_SECURITY")){
-    $acl = new ACL();
+     $acl = new ACL();
      if($acl -> hasPermission("settings_simple")){
         
          $query = db_query("SELECT * FROM " . tbname("settings") . " ORDER BY name", $connection);
@@ -12,7 +12,7 @@
             
              }
         
-
+        
          ?>
 
 <h2>Grundeinstellungen</h2>

@@ -3,15 +3,16 @@
 <head>
 <meta name="viewport" content="width=1024"/>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-<?php 
+<?php
 $style = getconfig("backend_style");
 if(!$style)
-   $style = "green";
+     $style = "green";
 
 $style = basename($style);
 
 ?>
-<link rel="stylesheet" type="text/css" href="css/<?php echo $style;?>.css"/>
+<link rel="stylesheet" type="text/css" href="css/<?php echo $style;
+?>.css"/>
 
 <script type="text/javascript" src="scripts/php.js/strip_tags.js"></script>
 <script type="text/javascript" src="scripts/php.js/htmlspecialchars.js"></script>

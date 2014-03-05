@@ -12,7 +12,7 @@ function db_query($query){
 
 function db_name_escape($name){
      return "`" . db_escape($name) . "`";
-    }
+     }
 
 function db_last_insert_id(){
      global $db_connection;
@@ -99,20 +99,20 @@ function db_last_error(){
 function db_error(){
      return db_last_error();
      }
-	 
+
 function db_get_tables()
-{     
-  global $db_connection ;
-  $tableList = array();
-  $res = mysqli_query($db_connection,"SHOW TABLES");
-  while($cRow = mysqli_fetch_array($res))
-  {
-    $tableList[] = $cRow[0];
-  }
-  
-  sort($tableList);
-  return $tableList;
-}
+{
+     global $db_connection ;
+     $tableList = array();
+     $res = mysqli_query($db_connection, "SHOW TABLES");
+     while($cRow = mysqli_fetch_array($res))
+    {
+         $tableList[] = $cRow[0];
+         }
+    
+     sort($tableList);
+     return $tableList;
+    }
 
 function db_real_escape_string($value){
      global $db_connection ;

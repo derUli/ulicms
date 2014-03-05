@@ -1,26 +1,26 @@
 <?php if(defined("_SECURITY")){
-    $acl = new ACL();
-    if($acl -> hasPermission("banners")){
-    
-    if(!isset($_SESSION["filter_category"]))
+     $acl = new ACL();
+     if($acl -> hasPermission("banners")){
+        
+         if(!isset($_SESSION["filter_category"]))
              $_SESSION["filter_category"] = 0;
-
-             
-             
+        
+        
+        
          if(isset($_GET["filter_category"]))
-            $_SESSION["filter_category"] = intval($_GET["filter_category"]);
-
-
-$sql = "SELECT * FROM " . tbname("banner")." ";
-if($_SESSION["filter_category"] == 0)
-   $sql .= "WHERE 1=1 ";
-else
-   $sql .= "WHERE category=".$_SESSION["filter_category"]." ";
-   
-$sql.= "ORDER BY id";
-$query = db_query($sql);
-    
-?>
+             $_SESSION["filter_category"] = intval($_GET["filter_category"]);
+        
+        
+        $sql = "SELECT * FROM " . tbname("banner") . " ";
+        if($_SESSION["filter_category"] == 0)
+             $sql .= "WHERE 1=1 ";
+        else
+             $sql .= "WHERE category=" . $_SESSION["filter_category"] . " ";
+        
+        $sql .= "ORDER BY id";
+        $query = db_query($sql);
+        
+        ?>
 <script type="text/javascript">
 $(window).load(function(){
    $('#category').on('change', function (e) {
@@ -38,8 +38,9 @@ $(window).load(function(){
 <a href="index.php?action=banner_new">Banner hinzufügen</a><br/>
 </p>
 <p>Kategorie: 
-<?php 
-echo categories::getHTMLSelect($_SESSION["filter_category"], true);?>
+<?php
+        echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
+        ?>
 </p>
 <table border=1>
 
@@ -50,7 +51,7 @@ echo categories::getHTMLSelect($_SESSION["filter_category"], true);?>
 <td>Löschen</td>
 </tr>
 <?php
-
+        
          if(db_num_rows($query) > 0){
              while($row = db_fetch_object($query)){
                  ?>

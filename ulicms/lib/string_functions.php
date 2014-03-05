@@ -17,41 +17,41 @@
     
     
      }
-     if(!function_exists("unhtmlspecialchars")){
-     function unhtmlspecialchars( $string )
-{
-  $string = str_replace ( '&amp;', '&', $string );
-  $string = str_replace ( '&#039;', '\'', $string );
-  $string = str_replace ( '&quot;', '"', $string );
-  $string = str_replace ( '&lt;', '<', $string );
-  $string = str_replace ( '&gt;', '>', $string );
-  $string = str_replace ( '&uuml;', 'ü', $string );
-  $string = str_replace ( '&Uuml;', 'Ü', $string );
-  $string = str_replace ( '&auml;', 'ä', $string );
-  $string = str_replace ( '&Auml;', 'Ä', $string );
-  $string = str_replace ( '&ouml;', 'ö', $string );
-  $string = str_replace ( '&Ouml;', 'Ö', $string );    
-  $string = str_replace ( '&nbsp;', ' ', $string );    
-  return $string;
-  }
-  
-  }
-  
-  if(!function_exists("br2nlr")){
-  function br2nlr($html){
-    return preg_replace('#<br\s*/?>#i', "\r\n", $html);
-}
-}
+ if(!function_exists("unhtmlspecialchars")){
+     function unhtmlspecialchars($string)
+    {
+         $string = str_replace ('&amp;', '&', $string);
+         $string = str_replace ('&#039;', '\'', $string);
+         $string = str_replace ('&quot;', '"', $string);
+         $string = str_replace ('&lt;', '<', $string);
+         $string = str_replace ('&gt;', '>', $string);
+         $string = str_replace ('&uuml;', 'ü', $string);
+         $string = str_replace ('&Uuml;', 'Ü', $string);
+         $string = str_replace ('&auml;', 'ä', $string);
+         $string = str_replace ('&Auml;', 'Ä', $string);
+         $string = str_replace ('&ouml;', 'ö', $string);
+         $string = str_replace ('&Ouml;', 'Ö', $string);
+         $string = str_replace ('&nbsp;', ' ', $string);
+         return $string;
+         }
+    
+     }
 
-
-  if(!function_exists("normalizeLN")){
-    function normalizeLN($txt, $style = "\r\n"){
-        $txt = str_replace("\r\n", "\n", $txt);
-        $txt = str_replace("\r", "\n", $txt);
-        $txt = str_replace("\n", $style, $txt);
-        return $txt;
+ if(!function_exists("br2nlr")){
+     function br2nlr($html){
+         return preg_replace('#<br\s*/?>#i', "\r\n", $html);
+        }
     }
-  }
+
+
+ if(!function_exists("normalizeLN")){
+     function normalizeLN($txt, $style = "\r\n"){
+         $txt = str_replace("\r\n", "\n", $txt);
+         $txt = str_replace("\r", "\n", $txt);
+         $txt = str_replace("\n", $style, $txt);
+         return $txt;
+         }
+     }
 
 
  if(!function_exists("real_htmlspecialchars")){
@@ -63,11 +63,11 @@
      }
 
 if(!function_exists("multi_explode")){
- function multi_explode($delimiters,$string) {
-    return explode($delimiters[0],strtr($string,array_combine(array_slice($delimiters,1),array_fill(0,count($delimiters)-1,array_shift($delimiters)))));
-}
-
-}
+     function multi_explode($delimiters, $string){
+         return explode($delimiters[0], strtr($string, array_combine(array_slice($delimiters, 1), array_fill(0, count($delimiters)-1, array_shift($delimiters)))));
+        }
+    
+    }
 
  if(!function_exists("make_links_clickable")){
      // Links klickbar machen

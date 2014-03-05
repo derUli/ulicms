@@ -34,9 +34,9 @@ if(!is_admin()){
          if(getconfig("font-size") != ç){
              setconfig("font-size", intval($_REQUEST["font-size"]));
              }
-
-           
-        setconfig("backend_style", db_escape($_REQUEST["backend_style"]));
+        
+        
+         setconfig("backend_style", db_escape($_REQUEST["backend_style"]));
         
         
          if(getconfig("header-background-color")
@@ -67,9 +67,9 @@ if(!is_admin()){
      include_once "inc/fonts.php";
      $fonts = getFontFamilys();
     
-      $backend_style = getconfig("backend_style");
-             if(!$backend_style)
-                $backend_style = "green";
+     $backend_style = getconfig("backend_style");
+     if(!$backend_style)
+         $backend_style = "green";
     
     
      $default_font = getconfig("default-font");
@@ -118,9 +118,9 @@ width:200px;
     <td>
 <select name="backend_style" size=1>
 <option value="green"<?php
-         if($backend_style === "green")
-             echo " selected"
-             ?>>Grün</option>
+     if($backend_style === "green")
+         echo " selected"
+         ?>>Grün</option>
 <option value="black"<?php
          if($backend_style === "black")
              echo " selected"
@@ -134,24 +134,24 @@ width:200px;
 <td>
 <select name="default-font" size=1>
 <?php
-     $font_amount = count($fonts);
-     $i = 1;
-     foreach($fonts as $key => $value){
-         $selected = "";
-         if($default_font === $value)
-             $selected = "selected";
+             $font_amount = count($fonts);
+         $i = 1;
+         foreach($fonts as $key => $value){
+             $selected = "";
+             if($default_font === $value)
+                 $selected = "selected";
+            
+             if(!in_array($default_font, $fonts) and $i === $font_amount)
+                 $selected = "selected";
+             echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
+             echo "<option value=\"$value\" $selected>$key</option>";
+             echo '</optgroup>';
+            
+             $i++;
+             }
         
-         if(!in_array($default_font, $fonts) and $i === $font_amount)
-             $selected = "selected";
-         echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
-         echo "<option value=\"$value\" $selected>$key</option>";
-         echo '</optgroup>';
         
-         $i++;
-         }
-    
-    
-     ?>
+         ?>
 </select>
 </td>
 </tr>
@@ -160,16 +160,16 @@ width:200px;
 <td>
 <select name="zoom">
 <?php
-     for($i = 10; $i <= 200; $i += 10){
-         ?>
+         for($i = 10; $i <= 200; $i += 10){
+             ?>
 <option<?php
-         if($i === $zoom or ($i === 100 and $zoom === 0))
-             echo " selected";
-         ?> value="<?php echo $i;
-         ?>"><?php echo $i;
-         ?> %</option>
+             if($i === $zoom or ($i === 100 and $zoom === 0))
+                 echo " selected";
+             ?> value="<?php echo $i;
+             ?>"><?php echo $i;
+             ?> %</option>
 <?php }
-     ?>
+         ?>
 </select>
 </td>
 </tr>
@@ -178,16 +178,16 @@ width:200px;
 <td>
 <select name="font-size">
 <?php
-     for($i = 8; $i <= 96; $i += 1){
-         ?>
+         for($i = 8; $i <= 96; $i += 1){
+             ?>
 <option<?php
-         if($i === $font_size or ($i === 12 and $font_size === 0))
-             echo " selected";
-         ?> value="<?php echo $i;
-         ?>"><?php echo $i;
-         ?>pt</option>
+             if($i === $font_size or ($i === 12 and $font_size === 0))
+                 echo " selected";
+             ?> value="<?php echo $i;
+             ?>"><?php echo $i;
+             ?>pt</option>
 <?php }
-     ?>
+         ?>
 </select>
 </td>
 </tr>
@@ -197,7 +197,7 @@ width:200px;
 </td>
 <td>
 <input name="header-background-color" class="color {hash:true,caps:true}" value="<?php echo getconfig("header-background-color");
-     ?>">
+         ?>">
 </td>
 </tr>
 <tr>
@@ -206,7 +206,7 @@ width:200px;
 </td>
 <td>
 <input name="body-text-color" class="color {hash:true,caps:true}" value="<?php echo getconfig("body-text-color");
-     ?>">
+         ?>">
 </td>
 </tr></tr>
 <tr>
@@ -215,7 +215,7 @@ width:200px;
 </td>
 <td>
 <input name="body-background-color" class="color {hash:true,caps:true}" value="<?php echo getconfig("body-background-color");
-     ?>">
+         ?>">
 </td>
 </tr>
 </table>
@@ -224,12 +224,12 @@ width:200px;
 </p>
 
 <?php
-     if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-         ?>
+         if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+             ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-     ?>
+         ?>
 </form>
 <script type="text/javascript">
 $("#designForm").ajaxForm({beforeSubmit: function(e){
@@ -246,4 +246,4 @@ $("#designForm").ajaxForm({beforeSubmit: function(e){
 
 </script>
 <?php }
-?>
+    ?>

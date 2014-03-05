@@ -71,20 +71,20 @@ Nichts zu tun.</p>
                          fclose($handle);
                         
                          if(file_exists($tmpFile)){
-                         // Paket installieren
-                         if($pkg->installPackage($tmpFile)){
-                            echo "<p style='color:green;'>Installation erfolgreich ($packagesToInstall[$i])" . "</p>";                         
-                         } else {
-                            echo "<p style='color:red;'>Entpacken der Datei fehlgeschlagen ($packagesToInstall[$i])" . "</p>";
-                         }
-                         
-                         }
+                             // Paket installieren
+                            if($pkg -> installPackage($tmpFile)){
+                                 echo "<p style='color:green;'>Installation erfolgreich ($packagesToInstall[$i])" . "</p>";
+                                 }else{
+                                 echo "<p style='color:red;'>Entpacken der Datei fehlgeschlagen ($packagesToInstall[$i])" . "</p>";
+                                 }
+                            
+                             }
                          @unlink($tmpFile);
-
-
-                                
-                    
-                    }
+                        
+                        
+                        
+                        
+                         }
                      }
                 
                 

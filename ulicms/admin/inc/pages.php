@@ -1,5 +1,5 @@
 <?php if(defined("_SECURITY")){
-    $acl = new ACL();
+     $acl = new ACL();
     
      if($acl -> hasPermission("pages")){
         
@@ -42,20 +42,20 @@ Nach Sprache filtern:
          if(!empty($_GET["filter_language"])){
              $_SESSION["filter_language"] = $_GET["filter_language"];
              }
-             
-             
-        if(!isset($_SESSION["filter_category"])){
-             $_SESSION["filter_category"]  = 0;
-         }
-             
-             
+        
+        
+         if(!isset($_SESSION["filter_category"])){
+             $_SESSION["filter_category"] = 0;
+             }
+        
+        
          if(isset($_GET["filter_category"])){
-            $_SESSION["filter_category"] = intval($_GET["filter_category"]);
+             $_SESSION["filter_category"] = intval($_GET["filter_category"]);
             
-         }
-         
-
-
+             }
+        
+        
+        
         
         
          if(!empty($_GET["filter_status"])){
@@ -89,8 +89,9 @@ Status: <select name="filter_status" onchange="filter_by_status(this)">
 </select>
 &nbsp; &nbsp;
 Kategorie: 
-<?php 
-echo categories::getHTMLSelect($_SESSION["filter_category"], true);?>
+<?php
+        echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
+        ?>
 
 <?php
          if($_SESSION["filter_status"] == "trash" and $acl -> hasPermission("pages")){
@@ -157,12 +158,12 @@ echo categories::getHTMLSelect($_SESSION["filter_category"], true);?>
              }else{
              $filter_sql = "WHERE 1=1 ";
              }
-                          
+        
          if($_SESSION["filter_category"] != 0){
-             $filter_sql .= "AND category=".intval($_SESSION["filter_category"])." ";
-         }        
-         
-         $filter_sql .= "AND ".$filter_status." ";
+             $filter_sql .= "AND category=" . intval($_SESSION["filter_category"]) . " ";
+             }
+        
+         $filter_sql .= "AND " . $filter_status . " ";
         
          $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(db_error());
          if(db_num_rows($query) > 0){

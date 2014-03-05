@@ -18,26 +18,28 @@ $all_permissions = json_decode($all_permissions["permissions"], true);
 
 if($all_permissions){
     
-    ?>
+     ?>
 <form action="?action=groups" method="post">
 <input type="hidden" name="id" value="<?php echo $id;
-    ?>">
+     ?>">
 <p><strong>Name</strong> <input type="text" name="name" value="<?php echo $groupName;
-    ?>"></p>
+     ?>"></p>
 <p><strong>Berechtigungen:</strong></p>
 <fieldset>
 <p><input id="checkall" type="checkbox" class="checkall"> <label for="checkall">Alles auswählen</label></p>
 <p>
 <?php foreach($all_permissions As $key => $value){
-        ?>
-<input type="checkbox" id="<?php echo $key;?>" name="user_permissons[]" value="<?php echo $key;
-        ?>" <?php if($value){
-            echo "checked='checked'";
-            }
-        ?>> <label for="<?php echo $key;?>"><?php echo $key;
-        ?></label><br/>
+         ?>
+<input type="checkbox" id="<?php echo $key;
+        ?>" name="user_permissons[]" value="<?php echo $key;
+         ?>" <?php if($value){
+             echo "checked='checked'";
+             }
+         ?>> <label for="<?php echo $key;
+        ?>"><?php echo $key;
+         ?></label><br/>
 <?php }
-    ?>
+     ?>
 </p>
 </fieldset>
 <br/>
@@ -63,7 +65,7 @@ $(function () {
 <?php }
 
 else{
-    ?>
+     ?>
 <p style="color:red">Diese Gruppe ist nicht vorhanden.</p>
 <?php
-    }
+     }

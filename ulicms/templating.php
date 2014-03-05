@@ -4,25 +4,25 @@ function language_selection(){
      $query = db_query("SELECT * FROM " . tbname("languages") . " ORDER by name");
      echo "<ul class='language_selection'>";
      while($row = db_fetch_object($query)){
-         $domain =  getDomainByLanguage( $row -> language_code);
-         if($domain) 
-         echo "<li>" . "<a href='http://". $domain . "'>" . $row -> name . "</a></li>";
-         else 
-         echo "<li>" . "<a href='./?language=" . $row -> language_code . "'>" . $row -> name . "</a></li>";
+         $domain = getDomainByLanguage($row -> language_code);
+         if($domain)
+             echo "<li>" . "<a href='http://" . $domain . "'>" . $row -> name . "</a></li>";
+         else
+             echo "<li>" . "<a href='./?language=" . $row -> language_code . "'>" . $row -> name . "</a></li>";
          }
      echo "</ul>";
     
      }
 
 function get_category(){
-  $current_page = get_page();
-  return categories::getCategoryById($current_page["category"]);
-}
+     $current_page = get_page();
+     return categories :: getCategoryById($current_page["category"]);
+    }
 
 
 function category(){
-  echo get_category();
-}
+     echo get_category();
+    }
 
 function body_classes(){
      $str = "";
@@ -273,25 +273,25 @@ function apply_filter($text, $type){
 function motto(){
      echo htmlspecialchars(getconfig("motto"), ENT_QUOTES, "UTF-8");
      }
-     
-     
-function get_frontpage(){
-  setLanguageByDomain();
 
-  if(isset($_SESSION["language"])){
-     $frontpage = getconfig("frontpage_" . $_SESSION["language"]);
-     
-     if($frontpage){
-        return $frontpage;
-     }
+
+function get_frontpage(){
+     setLanguageByDomain();
+    
+     if(isset($_SESSION["language"])){
+         $frontpage = getconfig("frontpage_" . $_SESSION["language"]);
         
-  }
-  
-  
-  
-  return getconfig("frontpage");
-  
-}
+         if($frontpage){
+             return $frontpage;
+             }
+        
+         }
+    
+    
+    
+     return getconfig("frontpage");
+    
+    }
 
 
 function get_requested_pagename(){
@@ -325,10 +325,10 @@ function menu($name){
      while($row = db_fetch_object($query)){
          echo "  <li>" ;
          if(get_requested_pagename() != $row -> systemname){
-             echo "<a href='" . buildSEOUrl($row -> systemname)."' target='" .
+             echo "<a href='" . buildSEOUrl($row -> systemname) . "' target='" .
              $row -> target . "'>";
              }else{
-             echo "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname)."' target='" . $row -> target . "'>";
+             echo "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname) . "' target='" . $row -> target . "'>";
              }
         
          echo htmlentities($row -> title, ENT_QUOTES, "UTF-8");
@@ -343,10 +343,10 @@ function menu($name){
                 
                  echo "      <li>";
                  if(get_requested_pagename() != $row2 -> systemname){
-                     echo "<a href='" . buildSEOUrl($row2 -> systemname)."' target='" .
+                     echo "<a href='" . buildSEOUrl($row2 -> systemname) . "' target='" .
                      $row -> target . "'>";
                      }else{
-                     echo "<a class='menu_active_link' href='". buildSEOUrl($row2 -> systemname)."' target='" .
+                     echo "<a class='menu_active_link' href='" . buildSEOUrl($row2 -> systemname) . "' target='" .
                      $row -> target . "'>";
                      }
                  echo htmlentities($row2 -> title, ENT_QUOTES, "UTF-8");
@@ -359,10 +359,10 @@ function menu($name){
                      while($row3 = db_fetch_object($query3)){
                          echo "      <li>";
                          if(get_requested_pagename() != $row3 -> systemname){
-                             echo "<a href='" . buildSEOUrl($row3 -> systemname)."' target='" .
+                             echo "<a href='" . buildSEOUrl($row3 -> systemname) . "' target='" .
                              $row3 -> target . "'>";
                              }else{
-                             echo "<a class='menu_active_link' href='" . buildSEOUrl($row3 -> systemname)."' target='" .
+                             echo "<a class='menu_active_link' href='" . buildSEOUrl($row3 -> systemname) . "' target='" .
                              $row3 -> target . "'>";
                              }
                          echo htmlentities($row3 -> title, ENT_QUOTES, "UTF-8");
@@ -375,10 +375,10 @@ function menu($name){
                              while($row4 = db_fetch_object($query4)){
                                  echo "<li>";
                                  if(get_requested_pagename() != $row4 -> systemname){
-                                     echo buildSEOUrl($row4 -> systemname)."' target='" .
+                                     echo buildSEOUrl($row4 -> systemname) . "' target='" .
                                      $row4 -> target . "'>";
                                      }else{
-                                     echo "<a class='menu_active_link' href='".buildSEOUrl($row4 -> systemname)."' target='" .
+                                     echo "<a class='menu_active_link' href='" . buildSEOUrl($row4 -> systemname) . "' target='" .
                                      $row4 -> target . "'>";
                                      }
                                  echo htmlentities($row4 -> title, ENT_QUOTES, "UTF-8");
@@ -563,14 +563,14 @@ function get_page($systemname = ""){
      if(empty($systemname)){
          $systemname = $_GET["seite"];
          }
-       
-       if(empty($systemname))
+    
+     if(empty($systemname))
          $systemname = get_frontpage();
-
-         
-       $query = db_query("SELECT * FROM ".tbname("content"). " WHERE systemname='".db_escape($systemname)."'");
-       return db_fetch_assoc($query);
-}
+    
+    
+     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_escape($systemname) . "'");
+     return db_fetch_assoc($query);
+    }
 
 function content(){
      $theme = getconfig("theme");

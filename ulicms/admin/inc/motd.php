@@ -12,10 +12,10 @@ if($acl -> hasPermission("motd")){
          setconfig("motd", $motd);
         
         
-        ?>
+         ?>
 <p>Die Message Of the Day wurde geändert.</p>
 <?php }
-    ?>
+     ?>
 
 <form id="motd_form" action="index.php?action=motd" method="post">
 <textarea name="motd" cols=60 rows=15><?php echo htmlspecialchars(getconfig("motd"));

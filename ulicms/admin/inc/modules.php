@@ -2,9 +2,9 @@
 $acl = new ACL();
 if(!$acl -> hasPermission("list_packages")){
      noperms();
-    }else{
+     }else{
     
-    if($acl -> hasPermission("remove_packages")){
+     if($acl -> hasPermission("remove_packages")){
         
          // Modul deinstallieren
         if(isset($_GET["remove"])){
@@ -29,7 +29,7 @@ if(!$acl -> hasPermission("list_packages")){
          ?>
 <p style="margin-bottom:30px;"><a href="?action=install_method">[Paket installieren]</a></p> 
 <?php }
-    ?>
+     ?>
 
 
 <strong>Installierte Module:</strong>
@@ -39,8 +39,8 @@ Darunter befindet sich der Code, den Sie in eine Seite einfügen müssen,
 um diesen Modul einzubetten</p>
 
 <?php
-    $modules = getAllModules();
-    if(count($modules) > 0){
+     $modules = getAllModules();
+     if(count($modules) > 0){
          echo "<ol style=\"margin-bottom:30px;\">";
          for($i = 0; $i < count($modules); $i++){
              echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\"><strong>";
@@ -72,16 +72,16 @@ um diesen Modul einzubetten</p>
          echo "</ol>";
         
          }
-    ?>
+     ?>
 
 
 <p><strong>Installierte Themes:</strong></p>
 <p>Hier finden Sie eine Auflistung der installierten Themes.</p>
 
 <?php
-    $themes = getThemeList();
-    $ctheme = getconfig("theme");
-    if(count($themes) > 0){
+     $themes = getThemeList();
+     $ctheme = getconfig("theme");
+     if(count($themes) > 0){
          echo "<ol>";
          for($i = 0; $i < count($themes); $i++){
              echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\"><strong>";

@@ -1,5 +1,5 @@
 <?php if(defined("_SECURITY")){
-    $acl = new ACL();
+     $acl = new ACL();
      if($acl -> hasPermission("pages")){
         
          ?>
@@ -42,7 +42,7 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
 <br/><br/>
 
 <strong>Kategorie</strong><br/>
-<?php echo categories::getHTMLSelect()?>
+<?php echo categories :: getHTMLSelect()?>
 <br/><br/>
 
 <strong data-tooltip="In welchem Menü soll diese Seite angezeigt werden?">Menü:</strong><br/>

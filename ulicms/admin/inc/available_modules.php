@@ -1,7 +1,7 @@
 <?php
 if(!$acl -> hasPermission("install_packages")){
-    noperms();
-    }else{
+     noperms();
+     }else{
      ?>
 <h1>Verfügbare Pakete</h1>
 <noscript>

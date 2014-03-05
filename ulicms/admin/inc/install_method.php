@@ -1,9 +1,9 @@
 <?php
 $acl = new ACL();
 if(!$acl -> hasPermission("install_packages")){
-   noperms();
-} else {
-?>
+     noperms();
+    }else{
+    ?>
 <h1>Paket installieren</h1>
 <p>
 <a href="?action=upload_package">Datei hochladen</a>

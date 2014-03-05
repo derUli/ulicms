@@ -1,6 +1,6 @@
 <?php if(defined("_SECURITY")){
-    $acl = new ACL();
-    if($acl -> hasPermission("banners")){
+     $acl = new ACL();
+     if($acl -> hasPermission("banners")){
          $banner = db_escape($_GET["banner"]);
          $query = db_query("SELECT * FROM " . tbname("banner") . " WHERE id='$banner'");
          while($row = db_fetch_object($query)){
@@ -32,8 +32,9 @@
 <br/>
 
 <strong>Kategorie:</strong><br/>
-<?php 
-echo categories::getHTMLSelect($row->category);?>
+<?php
+            echo categories :: getHTMLSelect($row -> category);
+            ?>
 
 <br/><br/>
 <input type="submit" value="OK">
