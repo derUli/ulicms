@@ -30,7 +30,29 @@ function pear_mail($to,$subject,$message,$headers="") {
         $smtp_port = "25";
 
 
-    $mailer = Mail::factory('smtp',array('host'=>$smtp_host,'port'=>$smtp_port));
+    $smtp_user = getconfig("smtp_user");
+    if(!$smtp_user) 
+        $smtp_user = null;
+
+    $smtp_password = getconfig("smtp_password");
+    if(!$smtp_password) 
+        $smtp_password = null;
+
+
+    if(!$smtp_user or !$smtp_password){
+    $mailer = Mail::factory('smtp',array('host'=>$smtp_host,
+        'port'=>$smtp_port));
+} else {
+   // require_authentification
+
+    $mailer = Mail::factory('smtp',array('host'=>$smtp_host,
+        'port'=>$smtp_port,
+        'auth' => true,
+        'username' => $smtp_user,
+        'password' => $smtp_password));
+}
+
+
     $header_list = split_headers($headers);
     $header_list['Subject'] = $subject;
     return $mailer->send($to,$header_list,$message);
