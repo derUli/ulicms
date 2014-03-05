@@ -34,7 +34,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <p>Folgen Sie den Anweisungen um das CMS auf Ihrem Server zu installieren.</p>
 <p>Setzen Sie bitte vorher die Dateirechte der folgenden Dateien auf 0755.<br/>
 <ol>
-<li>cms-config.php</li>
+<li>Das Hauptverzeichnis des CMS (Ohne die Unterordner)</li>
 <li>templates/ (inklusive Inhalt und Unterordner)</li>
 <li>content/ (inklusive Inhalt und Unterordner)</li>
 <li>modules/ (inklusive Inhalt und Unterordner)</li>
