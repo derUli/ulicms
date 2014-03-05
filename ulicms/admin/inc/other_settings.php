@@ -194,10 +194,12 @@ www.meinefirma.fr=>fr
 if($email_mode == "internal")
 echo ' selected="selected"';
     ?>>PHP</option>
+<?php if(!defined(""NO_PEAR_MAIL"")) {?>
 <option value="pear_mail"<?php 
 if($email_mode == "pear_mail")
 echo ' selected="selected"';
     ?>>>PEAR Mail</option>
+    <?php }?>
 </select>
 </div>
 <br/>
