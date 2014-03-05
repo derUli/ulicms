@@ -216,7 +216,7 @@ echo ' selected="selected"';
     Authentifizierung benötigt
 </div>
 <div class="inputWrapper">
-<input type="checkbox" name="smtp_auth" <?php 
+<input type="checkbox" id="smtp_auth" name="smtp_auth" <?php 
 if($smtp_auth)
     echo ' checked="checked"'?> value="auth">
 </div>
@@ -234,15 +234,15 @@ if($smtp_auth)
 </div>
 <script type="text/javascript">
 <?php 
-if($smtp_auth)
+if($smtp_auth){
 ?>
 
 $('#smtp_auth_div').show();
 
 <?php } ?>
 
-$('#smtp-auth').change(function(){
-if($('#smtp-auth').attr('checked','checked')){
+$('#smtp_auth').change(function(){
+if($('#smtp_auth').attr('checked','checked')){
    $('#smtp_auth_div').slideDown();
 
 } else {
