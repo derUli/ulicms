@@ -145,7 +145,7 @@ www.meinefirma.fr=>fr
 <div class="seperator"></div>
 <h2>Email-Versand:</h2>
 Modus:<br/>
-<select name="email_mode">
+<select id='email_mode' name="email_mode" size="1">
 <option value="internal"<?php 
 if($email_mode == "internal")
 echo ' checked="checked"';
@@ -155,6 +155,32 @@ if($email_mode == "pear_mail")
 echo ' checked="checked"';
     ?>>>PEAR Mail</option>
 </select>
+<br/>
+<div class="smtp_settings" style="display:none">
+    <h3>SMTP Einstellungen</h3>
+</div>
+
+<script type="text/javascript">
+<?
+if($email_mode == "pear_mail"){
+?>
+$('#smtp_settings').slideDown();
+
+<?php } ?>
+
+$('#email_mode').change(function(){
+if($('#email_mode').val() == "pear_mail"){
+   $('#smtp_settings').slideDown();
+
+} else {
+   $('#smtp_settings').slideUp();
+
+}
+
+});
+
+</script>
+
 <div class="seperator"></div>
 
 <p><a href="index.php?action=settings">Experteneinstellungen</a></p>

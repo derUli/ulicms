@@ -3,11 +3,6 @@ if(!@nclude_once("Mail.php") and !defined("NO_PEAR_MAIL")){
     define("NO_PEAR_MAIL", true);
 }
 
-function pear_mail($to,$subject,$message,$headers="") {
-     if(defined("NO_PEAR_MAIL")){  
-       return false;
-
-    }
     function split_headers( $headers )
     {
         $header_array = array();
@@ -19,6 +14,14 @@ function pear_mail($to,$subject,$message,$headers="") {
             }
         }
         return $header_array;
+    }
+
+
+
+function pear_mail($to,$subject,$message,$headers="") {
+     if(defined("NO_PEAR_MAIL")){  
+       return false;
+
     }
 
     $smtp_host = getconfig("smtp_host");
@@ -39,7 +42,7 @@ function pear_mail($to,$subject,$message,$headers="") {
         $smtp_password = null;
 
 
-    if(!$smtp_user or !$smtp_password){
+    if(!getconfig("smtp_auth")){
     $mailer = Mail::factory('smtp',array('host'=>$smtp_host,
         'port'=>$smtp_port));
 } else {
