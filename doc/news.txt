@@ -2,7 +2,8 @@
 
 + Alternatives Backend Design in Schwarz
 + Optische Verbesserungen der Adminoberfläche
-+ API ergänzt
++ API erweitert
 + Startseite je Sprache
 + Hinterlegen einer HTML-Datei für eine Seite
 + Prüfung auf Ingegrität der Datenbank hinzugefügt
++ Man kann nun zwischen Zwei Methoden zum Mailversand wählen (PHP Mail, und PEAR MAIL über SMTP)
