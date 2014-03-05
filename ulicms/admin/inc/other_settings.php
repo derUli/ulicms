@@ -19,6 +19,10 @@ if(!is_admin()){
          if(isset($_POST["cache_type"])){
              setconfig("cache_type", db_escape($_POST["cache_type"]));
              }
+        
+         if(isset($_POST["mail_mode"])){
+             setconfig("mail_mode", db_escape($_POST["mail_mode"]));
+             }
              
           if(isset($_POST["domain_to_language"])){
              $domain_to_language = $_POST["domain_to_language"];
@@ -48,6 +52,7 @@ if(!is_admin()){
      $cache_enabled = !getconfig("cache_disabled");
      $cache_period = round(getconfig("cache_period") / 60);
      $override_shortcuts = getconfig("override_shortcuts");
+     $email_mode = getconfig("email_mode");
      $menus = getAllMenus();
     
      ?>
@@ -138,7 +143,19 @@ www.meinefirma.fr=>fr
 </textarea>
 </p>
 <div class="seperator"></div>
-
+<h2>Email-Versand:</h2>
+Modus:<br/>
+<select name="email_mode">
+<option value="internal"<?php 
+if($email_mode == "internal")
+echo ' checked="checked"';
+    ?>>PHP</option>
+<option value="pear_mail"<?php 
+if($email_mode == "pear_mail")
+echo ' checked="checked"';
+    ?>>>PEAR Mail</option>
+</select>
+<div class="seperator"></div>
 
 <p><a href="index.php?action=settings">Experteneinstellungen</a></p>
 <br/>

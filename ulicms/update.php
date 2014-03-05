@@ -15,6 +15,8 @@ for($p=0; $p < count($languages); $p++){
    setconfig("frontpage_".$lang, $old_frontpage);
 }
 
+setconfig("email_mode", "internal");
+
 // unlink("update.php");
 header("Location: admin/");
 ?>
