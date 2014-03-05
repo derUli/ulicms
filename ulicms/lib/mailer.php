@@ -1,5 +1,7 @@
 <?php
-if(!@include_once("Mail.php") and !defined("NO_PEAR_MAIL")){
+@include_once("Mail.php");
+
+if(!class_exists("Mail")){
     define("NO_PEAR_MAIL", true);
 }
 
