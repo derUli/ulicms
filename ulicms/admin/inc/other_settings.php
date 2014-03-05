@@ -191,7 +191,7 @@ echo ' selected="selected"';
 </div>
 
 <div class="label">
-    Authentifierzung benötigt
+    Authentifizierung benötigt
 </div>
 <div class="inputWrapper">
 <input type="checkbox" name="smtp_auth" <?php 
