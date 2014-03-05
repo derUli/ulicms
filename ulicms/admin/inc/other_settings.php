@@ -141,9 +141,8 @@ if(!is_admin()){
 <option value="backend" <?php if($override_shortcuts == "backend") echo " selected=\"selected\""?>>Nur im Backend</option>
 <option value="on" <?php if($override_shortcuts == "on") echo " selected=\"selected\""?>>Im Frontend und Backend</option>
 </select>
-
-<p>Standard-Tastenkombinationen des Browsers werden ersetzt, so dass Sie z.B. durch Drücken von Strg+S ebenfalls speichern können</p
 </div>
+<p>Standard-Tastenkombinationen des Browsers werden ersetzt, so dass Sie z.B. durch Drücken von Strg+S ebenfalls speichern können</p>
 
 
 
@@ -194,7 +193,7 @@ www.meinefirma.fr=>fr
 if($email_mode == "internal")
 echo ' selected="selected"';
     ?>>PHP</option>
-<?php if(!defined("NO_PEAR_MAIL")) {?>
+<?php if(defined("NO_PEAR_MAIL")) {?>
 <option value="pear_mail"<?php 
 if($email_mode == "pear_mail")
 echo ' selected="selected"';
@@ -203,7 +202,7 @@ echo ' selected="selected"';
 </select>
 </div>
 <br/>
-<div class="smtp_settings" style="display:none">
+<div class="smtp_settings" id="smtp_settings" style="display:none">
     <h3>SMTP Einstellungen</h3>
 <div class="label">Hostname</div>
 <div class="inputWrapper"><input type="text" name="smtp_host" value="<?php echo real_htmlspecialchars($smtp_host);?>"</div>
@@ -234,6 +233,7 @@ if($smtp_auth)
 </div>
 
 </div>
+</div>
 <script type="text/javascript">
 <?php 
 if($smtp_auth){
@@ -242,11 +242,9 @@ if($smtp_auth){
 $('#smtp_auth_div').show();
 
 <?php } ?>
-
 $('#smtp_auth').change(function(){
-if($('#smtp_auth').attr('checked','checked')){
+if($('#smtp_auth').prop('checked')){
    $('#smtp_auth_div').slideDown();
-
 } else {
    $('#smtp_auth_div').slideUp();
 
