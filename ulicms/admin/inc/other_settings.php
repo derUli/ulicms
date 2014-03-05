@@ -198,7 +198,7 @@ echo ' selected="selected"';
 <option value="pear_mail"<?php 
 if($email_mode == "pear_mail")
 echo ' selected="selected"';
-    ?>>>PEAR Mail</option>
+    ?>>PEAR Mail</option>
     <?php }?>
 </select>
 </div>
