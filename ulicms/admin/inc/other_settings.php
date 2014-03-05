@@ -221,6 +221,8 @@ if($smtp_auth)
     echo ' checked="checked"'?> value="auth">
 </div>
 
+
+<div id="smtp_auth_div" style="display:none">
 <div class="label">User</div>
 <div class="inputWrapper"><input type="text" name="smtp_user" value="<?php echo real_htmlspecialchars($smtp_user);?>"</div>
 </div>
@@ -228,11 +230,33 @@ if($smtp_auth)
 <div class="label">Passwort</div>
 <div class="inputWrapper"><input type="text" name="smtp_password" value="<?php echo real_htmlspecialchars($smtp_password);?>"</div>
 </div>
+
+</div>
+<script type="text/javascript">
+<?php 
+if($smtp_auth)
+?>
+
+$('#smtp_auth_div').show();
+
+<?php } ?>
+
+$('#smtp-auth').change(function(){
+if($('#smtp-auth').attr('checked','checked')){
+   $('#smtp_auth_div').slideDown();
+
+} else {
+   $('#smtp_auth_div').slideUp();
+
+}
+
+});
+</script>
 <script type="text/javascript">
 <?
 if($email_mode == "pear_mail"){
 ?>
-$('#smtp_settings').slideDown();
+$('#smtp_settings').show();
 
 <?php } ?>
 
