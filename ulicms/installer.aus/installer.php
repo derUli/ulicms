@@ -365,15 +365,14 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (36, 'body-text-color', '#000000'),
 (37, 'disable_html_validation', 'disable'),
 (38, 'title_format', '%homepage_title% > %title%'),
-(39, 'mailer', 'php-mail'),
-(40, 'cache_type', 'file'),
-(41, 'registered_user_default_level', '10'),
-(42, 'override_shortcuts', 'backend'),
-(43, 'domain_to_language', ''),
-(44, 'frontpage_de', 'willkommen'),
-(45, 'frontpage_en', 'welcome'),
-(46, 'mail_mode', 'internal'),
-(47, 'session_timeout', '60');")or die(mysqli_error($connection));
+(39, 'cache_type', 'file'),
+(40, 'registered_user_default_level', '10'),
+(41, 'override_shortcuts', 'backend'),
+(42, 'domain_to_language', ''),
+(43, 'frontpage_de', 'willkommen'),
+(44, 'frontpage_en', 'welcome'),
+(45, 'mail_mode', 'internal'),
+(46, 'session_timeout', '60');")or die(mysqli_error($connection));
         
          mysqli_query($connection, "UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysqli_error($connection));
         

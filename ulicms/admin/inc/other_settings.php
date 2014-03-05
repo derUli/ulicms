@@ -8,10 +8,6 @@ if(!is_admin()){
      }else{
     
      if(isset($_POST["submit"])){
-         if(isset($_POST["mailer"])){
-             setconfig("mailer", db_escape($_POST["mailer"]));
-             }
-        
          if(isset($_POST["cache_period"])){
              setconfig("cache_period", intval($_POST["cache_period"]) * 60);
              }
@@ -73,7 +69,6 @@ if(!is_admin()){
              }
          }
     
-     $mailer = getconfig("mailer");
      $cache_type = getconfig("cache_type");
      $cache_enabled = !getconfig("cache_disabled");
      $cache_period = round(getconfig("cache_period") / 60);
@@ -105,14 +100,7 @@ if(!is_admin()){
      ?>
 <h1>Sonstiges</h1>
 <form id="other_settings" action="index.php?action=other_settings" method="post">
-<div class="label">Mailer</div>
-<div class="inputWrapper"><select name="mailer" size=1>
-<option value="php-mail"<?php if($mailer == "php-mail"){
-         echo " selected";
-         }
-     ?>>PHP Mail</option>
-</select>
-</div>
+    <h2>Cache</h2>
 <div class="seperator"></div>
 
 <div class="label">Cache aktiviert</div>
