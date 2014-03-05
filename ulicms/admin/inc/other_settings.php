@@ -55,7 +55,7 @@ if(!is_admin()){
 
 
          if(isset($_POST["smtp_host"]))
-            setconfig("smtp_host", db_escape($_POST["stmp_host"]));
+            setconfig("smtp_host", db_escape($_POST["smtp_host"]));
 
          if(isset($_POST["smtp_port"]))
             setconfig("smtp_port", intval($_POST["smtp_port"]));
