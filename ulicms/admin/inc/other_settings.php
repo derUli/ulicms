@@ -18,9 +18,9 @@ if(!is_admin()){
              setconfig("cache_type", db_escape($_POST["cache_type"]));
              }
         
-         if(isset($_POST["email_mode"])){
+         if(isset($_POST["email_mode"]))
              setconfig("email_mode", db_escape($_POST["email_mode"]));
-             }
+
              
           if(isset($_POST["domain_to_language"])){
              $domain_to_language = $_POST["domain_to_language"];
@@ -29,10 +29,9 @@ if(!is_admin()){
              setconfig("domain_to_language", db_escape($domain_to_language));
              }
         
-         if(isset($_POST["override_shortcuts"])){
+         if(isset($_POST["override_shortcuts"]))
              setconfig("override_shortcuts", db_escape($_POST["override_shortcuts"]));
-            
-             }
+
         
          if(isset($_POST["cache_enabled"]))
              deleteconfig("cache_disabled");
@@ -45,9 +44,6 @@ if(!is_admin()){
          else
             deleteconfig("smtp_auth");
 
-
-         if(isset($_POST["mail_mode"]))
-            setconfig("mail_mode", db_escape($_POST["mail_mode"]));
 
 
          if(isset($_POST["smtp_host"]))
@@ -100,7 +96,6 @@ if(!is_admin()){
      ?>
 <form id="other_settings" action="index.php?action=other_settings" method="post">
     <h2>Cache</h2>
-<div class="seperator"></div>
 
 <div class="label">Cache aktiviert</div>
 <div class="inputWrapper"><input type="checkbox" name="cache_enabled" value="cache_enabled" <?php if($cache_enabled) echo " checked=\"checked\"";
@@ -244,12 +239,7 @@ if($('#smtp_auth').prop('checked')){
 });
 </script>
 <script type="text/javascript">
-<?
-if($email_mode == "pear_mail"){
-?>
-$('#smtp_settings').show();
 
-<?php } ?>
 
 $('#email_mode').change(function(){
 if($('#email_mode').val() == "pear_mail"){
