@@ -99,8 +99,7 @@ Phasellus feugiat, lectus ac aliquam molestie, leo lacus tincidunt turpis, vel a
 </tbody></table>
 ';
 
-//==============================================================
-
+// ==============================================================
 $loremH = "<h4>Lectus facilisis</h4>
 <p>Sed auctor viverra diam. In lacinia lectus.</p>
 <p>Praesent tincidunt massa in dolor. Morbi viverra leo quis ipsum.&nbsp;In vitae velit. In aliquam nulla nec mi. Sed accumsan, justo id congue fringilla, diam mauris volutpat ligula, sed aliquet elit diam at felis. Quisque et velit sed eros convallis posuere.</p>
@@ -111,7 +110,7 @@ $loremH = "<h4>Lectus facilisis</h4>
 <div style=\"background-color:#DDDDBB; text-align:center; padding:3px; border:1px solid #880000;  \">Proin aliquet lorem id felis. Curabitur vel libero at mauris nonummy tincidunt. Donec imperdiet. Vestibulum sem sem, lacinia vel, molestie et, laoreet eget, urna. Curabitur viverra faucibus pede. Morbi lobortis. Donec dapibus. Donec tempus. Ut arcu enim, rhoncus ac, venenatis eu, porttitor mollis, dui. Sed vitae risus. In elementum sem placerat dui. Nam tristique eros in nisl. Nulla cursus sapien non quam porta porttitor. Quisque dictum ipsum ornare tortor. Fusce ornare tempus enim. </div><p>Maecenas arcu justo, malesuada eu, dapibus ac, adipiscing vitae, turpis. Fusce mollis. Aliquam egestas. In purus dolor, facilisis at, fermentum nec, molestie et, metus. Vestibulum feugiat, orci at imperdiet tincidunt, mauris erat facilisis urna, sagittis ultricies dui nisl et lectus. Sed lacinia, lectus vitae dictum sodales, elit ipsum ultrices orci, non euismod arcu diam non metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In suscipit turpis vitae odio. Integer convallis dui at metus. Fusce magna. Sed sed lectus vitae enim tempor cursus. Cras eu erat vel libero sodales congue. Sed erat est, interdum nec, elementum eleifend, pretium at, nibh. Praesent massa diam, adipiscing id, mollis sed, posuere et, urna. Quisque ut leo. Aliquam interdum hendrerit tortor. Vestibulum elit. Vestibulum et arcu at diam mattis commodo. Nam ipsum sem, ultricies at, rutrum sit amet, posuere nec, velit. Sed molestie mollis dui. </p>
 ";
 
-//==============================================================
+// ==============================================================
 $header = '
 <table width="100%" style="border-bottom: 1px solid #000000; vertical-align: bottom; font-family: serif; font-size: 9pt; color: #000088;"><tr>
 <td width="33%">Left header p <span style="font-size:14pt;">{PAGENO}</span></td>
@@ -131,70 +130,68 @@ $headerE = '<div align="center" style="background-color: #f0f2ff;background: tra
 $footer = '<div align="center" style="background-color: #f0f2ff;background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;border-radius: 4mm;font-size:18pt;font-weight:bold;font-style:italic;">{DATE j-m-Y} &raquo; {PAGENO} &raquo; My document<br />My document<br />See <a href="http://mpdf1.com/manual/index.php">documentation manual</a><br />My document</div>';
 $footerE = '<div align="center" style="background-color: #f0f2ff;background: transparent url(\'bg.jpg\') repeat scroll right bottom;border-radius: 4mm;font-size:18pt;font-weight:bold;font-style:italic;">Even page footer - {PAGENO} -<br />My document<br />My document<br />My document</div>';
 
-//==============================================================
-//==============================================================
-//==============================================================
-
+// ==============================================================
+// ==============================================================
+// ==============================================================
 include("../mpdf.php");
 
 
-$mpdf=new mPDF('c','A4','','',42,15,57,57,20,17); 
+$mpdf = new mPDF('c', 'A4', '', '', 42, 15, 57, 57, 20, 17);
 
-$mpdf->displayDefaultOrientation = true;
+$mpdf -> displayDefaultOrientation = true;
 
-$mpdf->forcePortraitHeaders = true;
-$mpdf->forcePortraitMargins = true;
+$mpdf -> forcePortraitHeaders = true;
+$mpdf -> forcePortraitMargins = true;
 
-$mpdf->SetDisplayMode('fullpage','two');
+$mpdf -> SetDisplayMode('fullpage', 'two');
 
-$mpdf->mirrorMargins = 1;
+$mpdf -> mirrorMargins = 1;
 
 $stylesheet = file_get_contents('mpdfstyletables.css');
-$mpdf->WriteHTML($stylesheet,1);
+$mpdf -> WriteHTML($stylesheet, 1);
 
-$mpdf->SetHTMLHeader($header);
-$mpdf->SetHTMLHeader($headerE,'E');
-$mpdf->SetHTMLFooter($footer);
-$mpdf->SetHTMLFooter($footerE,'E');
+$mpdf -> SetHTMLHeader($header);
+$mpdf -> SetHTMLHeader($headerE, 'E');
+$mpdf -> SetHTMLFooter($footer);
+$mpdf -> SetHTMLFooter($footerE, 'E');
 
-$mpdf->WriteHTML($html);
+$mpdf -> WriteHTML($html);
 
-$mpdf->AddPage('L');
+$mpdf -> AddPage('L');
 
-$mpdf->WriteHTML($htmlL);
-$mpdf->WriteHTML($htmlL);
+$mpdf -> WriteHTML($htmlL);
+$mpdf -> WriteHTML($htmlL);
 
 // Columns
-$mpdf->AddPage('L');
-$mpdf->SetColumns(3,'J');
-$mpdf->WriteHTML($loremH);
+$mpdf -> AddPage('L');
+$mpdf -> SetColumns(3, 'J');
+$mpdf -> WriteHTML($loremH);
 
-$mpdf->SetColumns(0);
-$mpdf->WriteHTML('<hr />');
+$mpdf -> SetColumns(0);
+$mpdf -> WriteHTML('<hr />');
 
 
-$mpdf->SetColumns(2,'J');
-$mpdf->WriteHTML($loremH);
-$mpdf->WriteHTML('<hr />');
-$mpdf->SetColumns(0);
+$mpdf -> SetColumns(2, 'J');
+$mpdf -> WriteHTML($loremH);
+$mpdf -> WriteHTML('<hr />');
+$mpdf -> SetColumns(0);
 
-$mpdf->AddPage('L');
+$mpdf -> AddPage('L');
 
-$mpdf->WriteHTML($htmlL);
-$mpdf->WriteHTML($htmlL);
+$mpdf -> WriteHTML($htmlL);
+$mpdf -> WriteHTML($htmlL);
 
-$mpdf->AddPage();
+$mpdf -> AddPage();
 
-$mpdf->WriteHTML($html);
-$mpdf->WriteHTML($html);
+$mpdf -> WriteHTML($html);
+$mpdf -> WriteHTML($html);
 
-$mpdf->WriteHTML($html);
+$mpdf -> WriteHTML($html);
 
-$mpdf->Output();
+$mpdf -> Output();
 exit;
-//==============================================================
-//==============================================================
-//==============================================================
-
+// ==============================================================
+// ==============================================================
+// ==============================================================
 
 ?>

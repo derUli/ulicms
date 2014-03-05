@@ -1,14 +1,13 @@
 <?php
 
-ini_set("memory_limit","64M");
+ini_set("memory_limit", "64M");
 
 include("../mpdf.php");
 
-$mpdf=new mPDF(''); 
+$mpdf = new mPDF('');
 
 
-//==============================================================
-
+// ==============================================================
 $html = '
 <style>
 .gradient {
@@ -497,33 +496,35 @@ If the width settings within the table cause conflicts, it will override some of
 
 ';
 
-//==============================================================
-if ($_REQUEST['html']) { echo $html; exit; }
-if ($_REQUEST['source']) { 
-	$file = __FILE__;
-	header("Content-Type: text/plain");
-	header("Content-Length: ". filesize($file));
-	header("Content-Disposition: attachment; filename='".$file."'");
-	readfile($file);
-	exit; 
+// ==============================================================
+if ($_REQUEST['html']){
+    echo $html;
+    exit;
 }
+if ($_REQUEST['source']){
+     $file = __FILE__;
+     header("Content-Type: text/plain");
+     header("Content-Length: " . filesize($file));
+     header("Content-Disposition: attachment; filename='" . $file . "'");
+     readfile($file);
+     exit;
+    }
 
-//==============================================================
-$mpdf->useActiveForms = true;
+// ==============================================================
+$mpdf -> useActiveForms = true;
 
-$mpdf->bookmarkStyles = array(
-	0 => array('color'=> array(0,64,128), 'style'=>'B'),
-	1 => array('color'=> array(128,0,0), 'style'=>''),
-	2 => array('color'=> array(0,128,0), 'style'=>'I'),
-);
+$mpdf -> bookmarkStyles = array(
+    0 => array('color' => array(0, 64, 128), 'style' => 'B'),
+     1 => array('color' => array(128, 0, 0), 'style' => ''),
+     2 => array('color' => array(0, 128, 0), 'style' => 'I'),
+    );
 
-$mpdf->useKerning=true;	// set this to improve appearance of Circular text
-				// must be set before the font is first loaded
-
-$mpdf->WriteHTML($html);
+$mpdf -> useKerning = true; // set this to improve appearance of Circular text
+ // must be set before the font is first loaded
+$mpdf -> WriteHTML($html);
 
 // JAVASCRIPT FOR WHOLE DOCUMENT
-$mpdf->SetJS('
+$mpdf -> SetJS('
 function TwoPages() {
 	this.layout="TwoColumnRight";
 	this.zoomType = zoomtype.fitW;
@@ -535,13 +536,13 @@ function OnePage() {
 ');
 
 // OUTPUT
-$mpdf->Output(); exit;
+$mpdf -> Output();
+exit;
 
 
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
-
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
 
 ?>

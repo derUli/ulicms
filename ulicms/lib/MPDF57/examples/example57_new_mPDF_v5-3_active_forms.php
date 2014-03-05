@@ -3,10 +3,9 @@
 
 include("../mpdf.php");
 
-$mpdf=new mPDF(''); 
+$mpdf = new mPDF('');
 
-//==============================================================
-
+// ==============================================================
 $html = '
 <style>
 textarea {
@@ -170,48 +169,51 @@ this.getField(\'inputfield\').value = \'T\u00f6rkylempij\u00e4\';
 ';
 
 
-//==============================================================
-if ($_REQUEST['html']) { echo $html; exit; }
-if ($_REQUEST['source']) { 
-	$file = __FILE__;
-	header("Content-Type: text/plain");
-	header("Content-Length: ". filesize($file));
-	header("Content-Disposition: attachment; filename='".$file."'");
-	readfile($file);
-	exit; 
+// ==============================================================
+if ($_REQUEST['html']){
+    echo $html;
+    exit;
 }
+if ($_REQUEST['source']){
+     $file = __FILE__;
+     header("Content-Type: text/plain");
+     header("Content-Length: " . filesize($file));
+     header("Content-Disposition: attachment; filename='" . $file . "'");
+     readfile($file);
+     exit;
+    }
 
-//==============================================================
-$mpdf->useActiveForms = true;
+// ==============================================================
+$mpdf -> useActiveForms = true;
 
-/*
-// Try playing around with these (these are also in config.php)
-$mpdf->formUseZapD = false;
-$mpdf->formSubmitNoValueFields = true;
+/**
+ * // Try playing around with these (these are also in config.php)
+ * $mpdf->formUseZapD = false;
+ * $mpdf->formSubmitNoValueFields = true;
+ * 
+ * $mpdf->formExportType = 'xfdf'; // 'html' or 'xfdf'
+ * $mpdf->formSelectDefaultOption = true;	// for Select drop down box; if no option is explicitly maked as selected,
+ * // this determines whether to select 1st option (as per browser)
+ * // - affects whether "required" attribute is relevant
+ * $mpdf->form_border_color = '0.0 0.820 0.0'; 
+ * $mpdf->form_background_color = '0.941 0.941 0.941';
+ * $mpdf->form_border_width = '1';
+ * $mpdf->form_border_style = 'S';
+ * 
+ * $mpdf->form_radio_color = '0.0 0.820 0.0'; 
+ * $mpdf->form_radio_background_color = '0.941 0.5 0.5';
+ * 
+ * $mpdf->form_button_border_color = '0.0 0.820 0.0'; 
+ * $mpdf->form_button_background_color = '0.941 0.941 0.941';
+ * $mpdf->form_button_border_width = '1';
+ * $mpdf->form_button_border_style = 'S';
+ */
 
-$mpdf->formExportType = 'xfdf'; // 'html' or 'xfdf'
-$mpdf->formSelectDefaultOption = true;	// for Select drop down box; if no option is explicitly maked as selected,
-							// this determines whether to select 1st option (as per browser)
-							// - affects whether "required" attribute is relevant
-$mpdf->form_border_color = '0.0 0.820 0.0'; 
-$mpdf->form_background_color = '0.941 0.941 0.941';
-$mpdf->form_border_width = '1';
-$mpdf->form_border_style = 'S';
+$mpdf -> WriteHTML($html);
 
-$mpdf->form_radio_color = '0.0 0.820 0.0'; 
-$mpdf->form_radio_background_color = '0.941 0.5 0.5';
- 
-$mpdf->form_button_border_color = '0.0 0.820 0.0'; 
-$mpdf->form_button_background_color = '0.941 0.941 0.941';
-$mpdf->form_button_border_width = '1';
-$mpdf->form_button_border_style = 'S';
-*/
-
-$mpdf->WriteHTML($html);
-
-//==============================================================
+// ==============================================================
 // JAVASCRIPT FOR WHOLE DOCUMENT
-$mpdf->SetJS('
+$mpdf -> SetJS('
 var dialogTitle = "Enter details";
 var defaultAnswer = "";
 var reply = app.response("This is javascript set to run when the document opens. Enter value for first field", dialogTitle, defaultAnswer);
@@ -219,15 +221,15 @@ if (reply != null) {
 this.getField("inputfield").value = reply;
 }
 ');
-//==============================================================
+// ==============================================================
 // OUTPUT
-$mpdf->Output(); exit;
+$mpdf -> Output();
+exit;
 
 
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
-
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
 
 ?>
