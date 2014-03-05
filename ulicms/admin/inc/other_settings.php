@@ -170,11 +170,11 @@ www.meinefirma.fr=>fr
 <select id='email_mode' name="email_mode" size="1">
 <option value="internal"<?php 
 if($email_mode == "internal")
-echo ' checked="checked"';
+echo ' selected="selected"';
     ?>>PHP</option>
 <option value="pear_mail"<?php 
 if($email_mode == "pear_mail")
-echo ' checked="checked"';
+echo ' selected="selected"';
     ?>>>PEAR Mail</option>
 </select>
 </div>
@@ -190,6 +190,14 @@ echo ' checked="checked"';
 <div class="inputWrapper"><input type="text" name="smtp_port" value="<?php echo real_htmlspecialchars($smtp_port);?>"</div>
 </div>
 
+<div class="label">
+    Authentifierzung benötigt
+</div>
+<div class="inputWrapper">
+<input type="checkbox" name="smtp_auth" <?php 
+if($smtp_auth)
+    echo ' checked="checked"'?> value="auth">
+</div>
 
 <div class="label">User</div>
 <div class="inputWrapper"><input type="text" name="smtp_user" value="<?php echo real_htmlspecialchars($smtp_user);?>"</div>
