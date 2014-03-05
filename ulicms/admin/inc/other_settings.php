@@ -98,7 +98,6 @@ if(!is_admin()){
 
     
      ?>
-<h1>Sonstiges</h1>
 <form id="other_settings" action="index.php?action=other_settings" method="post">
     <h2>Cache</h2>
 <div class="seperator"></div>
