@@ -22,8 +22,8 @@ if(!is_admin()){
              setconfig("cache_type", db_escape($_POST["cache_type"]));
              }
         
-         if(isset($_POST["mail_mode"])){
-             setconfig("mail_mode", db_escape($_POST["mail_mode"]));
+         if(isset($_POST["email_mode"])){
+             setconfig("email_mode", db_escape($_POST["email_mode"]));
              }
              
           if(isset($_POST["domain_to_language"])){
@@ -48,6 +48,10 @@ if(!is_admin()){
             setconfig("smtp_auth", "auth");
          else
             deleteconfig("smtp_auth");
+
+
+         if(isset($_POST["mail_mode"]))
+            setconfig("mail_mode", db_escape($_POST["mail_mode"]));
 
 
          if(isset($_POST["smtp_host"]))
@@ -193,7 +197,7 @@ www.meinefirma.fr=>fr
 if($email_mode == "internal")
 echo ' selected="selected"';
     ?>>PHP</option>
-<?php if(defined("NO_PEAR_MAIL")) {?>
+<?php if(!defined("NO_PEAR_MAIL")) {?>
 <option value="pear_mail"<?php 
 if($email_mode == "pear_mail")
 echo ' selected="selected"';
