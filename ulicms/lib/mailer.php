@@ -67,11 +67,10 @@ function ulicms_mail($to,$subject,$message,$headers=""){
     if(!$mode)
        $mode = "internal";
 
-
     if($mode == "pear_mail")
-       return pear_mail($to,$subject,$message);
+       return pear_mail($to,$subject,$message, $headers);
     else
-       return mail($to,$subject,$message);
+       return mail($to,$subject,$message, $headers);
 
 
 
