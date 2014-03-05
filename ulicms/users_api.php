@@ -66,7 +66,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
      "Content-type: text/plain; charset=utf-8";
     
      if($sendMessage){
-         @mail($email, "Dein Benutzer-Account bei " . $_SERVER["SERVER_NAME"], $message, $header);
+         @ulicms_mail($email, "Dein Benutzer-Account bei " . $_SERVER["SERVER_NAME"], $message, $header);
          }
      }
 
