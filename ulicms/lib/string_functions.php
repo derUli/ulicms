@@ -18,7 +18,7 @@
     
      }
 
-if(!function_exists("sanitize"){
+if(!function_exists("sanitize")){
 function sanitize(&$array)
 {
     foreach($array as &$data)
