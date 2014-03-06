@@ -17,6 +17,20 @@
     
     
      }
+
+if(!function_exists("sanitize"){
+function sanitize(&$array)
+{
+    foreach($array as &$data)
+    {
+        $data = str_ireplace(array("\r", "\n", "%0a", "%0d"), '', stripslashes($data));
+    }
+}
+
+}
+
+
+
  if(!function_exists("unhtmlspecialchars")){
      function unhtmlspecialchars($string)
     {
