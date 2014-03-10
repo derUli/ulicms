@@ -12,6 +12,7 @@ if(isset($_POST["login"])){
      if($sessionData){
          add_hook("login_ok");
          register_session($sessionData, true);
+         
          }
     else{
          add_hook("login_failed");

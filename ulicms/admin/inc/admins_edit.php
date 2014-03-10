@@ -96,7 +96,6 @@ Avatar hochladen:<br/>
 <br/>
 
 
-
 <strong>ICQ:</strong>   <br/>
 <input type="text" name="icq_id" value="<?php echo $row -> icq_id?>">
 
@@ -104,10 +103,20 @@ Avatar hochladen:<br/>
 <strong>Skype:</strong>   <br/>
 <input type="text" name="skype_id" value="<?php echo $row -> skype_id?>">
 
-<br/>   
+<br/><br/>
+<input type="checkbox" name="notify_on_login" <?php
+if($row -> notify_on_login){
+echo "checked='checked'";
+}?>><strong> Benachrichtige mich per E-Mail,<br/>
+wenn sich jemand mit meinem Benutzerkonto<br/>anmeldet</strong>
 <br/>
+<br/>
+
 <strong>Über Mich:</strong><br/>
 <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
+
+
+
 <br/> <br/>
 <input type="submit" value="OK">
 <?php

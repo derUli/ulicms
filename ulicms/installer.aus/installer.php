@@ -219,6 +219,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `about_me` text NOT NULL,
   `last_action` bigint(20) NOT NULL,
   `group_id` int(11) NULL,
+  `notify_on_login` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysqli_error($connection));
         

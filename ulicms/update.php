@@ -5,7 +5,9 @@ db_query("ALTER TABLE " . tbname("content") . " ADD COLUMN `html_file` VARCHAR(2
 
 setconfig("backend_style", "green");
 
-setconfig("db_schema", "7.1");
+db_query("ALTER TABLE  `". tbname("admins") ."` ADD  `notify_on_login` BOOLEAN NOT NULL DEFAULT FALSE AFTER  `group_id` ;");
+
+setconfig("db_schema", "7.2");
 
 $languages = getAllLanguages();
 $old_frontpage = getconfig("frontpage");

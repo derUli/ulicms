@@ -487,6 +487,8 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
      $email = db_escape($_POST["admin_email"]);
      $password = $_POST["admin_password"];
      $rechte = db_escape($_POST["admin_rechte"]);
+     
+     $notify_on_login = intval(isset($_POST["notify_on_login"]));
     
      if(isset($_POST["group_id"])){
          $group_id = $_POST["group_id"];
@@ -503,7 +505,7 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
      $skype_id = db_escape($_POST["skype_id"]);
      $about_me = db_escape($_POST["about_me"]);
      db_query("UPDATE " . tbname("admins") . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", firstname='$firstname',
-lastname='$lastname', email='$email', 
+lastname='$lastname', notify_on_login='$notify_on_login', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
 about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");
     
