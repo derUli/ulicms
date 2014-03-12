@@ -198,7 +198,7 @@ class uploader{
          switch ($this -> cms){
          case "drupal": break;
          default:
-             # session_start();
+             // session_start();
             break;
              }
         

@@ -2,8 +2,23 @@
 require_once "../init.php";
 
 session_start();
+
+$acl = new acl();
+
+if($acl -> hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash")){
+ $_CONFIG["disabled"] = false;
+
+$_SESSION['KCFINDER'] = array(); 
+$_SESSION['KCFINDER']['disabled'] = false; 
+}
+
+
 setcookie(session_name(), session_id());
 add_hook("after_session_start");
+
+
+
+
 
 require_once "../version.php";
 require_once "inc/logincheck.php";
