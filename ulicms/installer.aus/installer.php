@@ -221,7 +221,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `group_id` int(11) NULL,
   `notify_on_login` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysqli_error($connection));
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysqli_error($connection));
         
          $create_table_groups_sql = "CREATE TABLE IF NOT EXISTS `" . $prefix . "groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -258,7 +258,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `image_url` text NOT NULL,
   `category` int(11) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
          mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "content` (
   
@@ -289,7 +289,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `deleted_at` bigint(20) DEFAULT NULL,
   `html_file` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
         
          mysqli_query($connection, "INSERT INTO `" . $prefix . "content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
@@ -301,7 +301,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `name` varchar(255) NOT NULL,
   `value` longtext NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
         
         
