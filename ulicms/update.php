@@ -18,7 +18,7 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("custom_fields_data")."` (
   `field_id` int(11) NOT NULL,
   `content` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 setconfig("db_schema", "7.2");
 

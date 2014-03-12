@@ -172,7 +172,7 @@ class ACL{
          $acl_data["logo"] = null;
          $acl_data["other"] = null;
          $acl_data["expert_settings"] = null;
-         $acl_data["manage_custom_fields"] = null;
+         $acl_data["custom_fields"] = null;
         
          $acl_data["export"] = null;
          $acl_data["import"] = null;
