@@ -25,11 +25,7 @@ require_once "inc/logincheck.php";
 require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 
-
 define("_SECURITY", true);
-
-
-
 
 if(isset($_SESSION["ulicms_login"]))
     {
@@ -50,10 +46,6 @@ if(isset($_REQUEST["ajax_cmd"])){
      include_once "inc/ajax_handler.php";
      exit();
      }
-
-
-
-
 
 require_once "inc/header.php";
 if(!$eingeloggt){
