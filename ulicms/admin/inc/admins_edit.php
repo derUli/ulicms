@@ -104,11 +104,11 @@ Avatar hochladen:<br/>
 <input type="text" name="skype_id" value="<?php echo $row -> skype_id?>">
 
 <br/><br/>
-<input type="checkbox" name="notify_on_login" <?php
+<input type="checkbox" id="notify_on_login" name="notify_on_login" <?php
 if($row -> notify_on_login){
 echo "checked='checked'";
-}?>><strong> Benachrichtige mich per E-Mail,<br/>
-wenn sich jemand mit meinem Benutzerkonto<br/>anmeldet</strong>
+}?>><strong> <label for="notify_on_login">Benachrichtige mich per E-Mail,<br/>
+wenn sich jemand mit meinem Benutzerkonto<br/>anmeldet</label></strong>
 <br/>
 <br/>
 
