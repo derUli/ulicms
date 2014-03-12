@@ -33,6 +33,15 @@ $classes_dir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "classes";
 
 if(!defined("ULICMS_TMP"))
      define("ULICMS_TMP", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR);
+     
+     if(!file_existS(ULICMS_TMP))
+         mkdir(ULICMS_TMP);
+         
+if(!defined("ULICMS_CACHE"))         
+     define("ULICMS_CACHE", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "cache" . DIRECTORY_SEPERATOR);
+     
+   if(!file_existS(ULICMS_CACHE))
+       mkdir(ULICMS_CACHE);
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "base_config.php";
