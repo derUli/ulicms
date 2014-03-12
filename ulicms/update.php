@@ -7,7 +7,7 @@ setconfig("backend_style", "green");
 
 db_query("ALTER TABLE  `". tbname("admins") ."` ADD  `notify_on_login` BOOLEAN NOT NULL DEFAULT FALSE AFTER  `group_id` ;");
 
-setconfig("db_schema", "7.2");
+setconfig("db_schema", "7.1");
 
 $languages = getAllLanguages();
 $old_frontpage = getconfig("frontpage");
