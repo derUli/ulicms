@@ -17,10 +17,6 @@
 // you are using session configuration.
 // See http://kcfinder.sunhater.com/install for setting descriptions
 
-
-
-
-
 $_CONFIG = array(
     '_sessionVar' => &$_SESSION['KCFINDER'], 
     '_sessionLifetime' => 1440, 
