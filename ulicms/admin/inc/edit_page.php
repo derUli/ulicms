@@ -115,7 +115,7 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
 
                      
                      
-                     <p><a href="javascript:$('#extra_options').slideToggle();">Zusätzliche Optionen &gt;&gt;</a></p>
+                     <p><a name="toggle_options" href="#toggle_options" onclick="$('#extra_options').slideToggle();">Zusätzliche Optionen &gt;&gt;</a></p>
 <fieldset id="extra_options">
 
 <strong data-tooltip="Soll diese Seite keinen eigenen Inhalt enthalten sondern stattdessen auf eine Externe Seite verlinken, tragen Sie die hier die URL ein.
