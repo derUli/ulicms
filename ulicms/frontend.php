@@ -3,12 +3,10 @@ require_once "init.php";
 global $connection;
 
 
-
-
 add_hook("before_session_start");
 
 // initialize session
-session_start();
+@session_start();
 $_COOKIE[session_name()] = session_id();
 
 add_hook("after_session_start");

@@ -38,3 +38,13 @@ if(function_exists("get_magic_quotes_gpc"))
          }
      }
 unregister_globals();
+
+
+// Zur Sicherheit alle Get und Request Parameter zum String casten, damit man keine Arrays in der URL eingeben kann.
+foreach($_GET as $key => $value){
+  $_GET[$key] = "$value";
+}
+
+foreach($_REQUEST as $key => $value){
+  $_REQUEST[$key] = "$value";
+}
