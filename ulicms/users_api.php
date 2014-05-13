@@ -1,5 +1,5 @@
 <?php
-include_once dirname(__file__) . "/lib/encryption.php";
+include_once ULICMS_ROOT . "/lib/encryption.php";
 
 // this class contains functions for managing user accounts
 function getUsers(){
@@ -13,7 +13,7 @@ function getUsers(){
      }
 
 function changePassword($password, $id){
-     include_once "../lib/encryption.php";
+     include_once ULICMS_ROOT."lib/encryption.php";
      $newPassword = hash_password($password);
      return db_query("UPDATE " . tbname("admins") . " SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
      }
@@ -117,7 +117,7 @@ function register_session($user, $redirect = true){
 
 
 function validate_login($user, $password){
-     include_once "../lib/encryption.php";
+     include_once ULICMS_ROOT."/lib/encryption.php";
      $user = getUserByName($user);
     
      if($user){
