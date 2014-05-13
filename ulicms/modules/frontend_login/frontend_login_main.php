@@ -1,7 +1,8 @@
 <?php 
 function frontend_login_render(){
-  if(!logged_in()){
+
   $html = "";
+  if(!logged_in()){
   if(isset($_POST["login"]) and !validate_login($_POST["user"], $_POST["password"])){
 
  $html .= "<p class=\"ulicms_error\">Die Zugangsdaten sind fehlerhaft. Bitte probieren Sie es erneut.</p>";
