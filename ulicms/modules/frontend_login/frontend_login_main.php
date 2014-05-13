@@ -25,11 +25,14 @@ function frontend_login_render(){
 </tr>
 </table>
 </form>';
-  return $html;
 
+  $html = apply_filter($html, "frontend_login_form");
 }
 else{
-return "Hallo ".$_SESSION["ulicms_login"]."!";
+  $html = "Hallo ".$_SESSION["ulicms_login"]."!";
+  $html = apply_filter($html, "frontend_login_welcome");
 }
+
+  return $html;
 }
 ?>
