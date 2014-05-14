@@ -18,5 +18,3 @@ if(isset($_POST["login"])){
          add_hook("login_failed");
          }
      }
-
-?>
