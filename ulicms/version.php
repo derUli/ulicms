@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 class ulicms_version{
     
      function ulicms_version(){
