@@ -33,7 +33,7 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
              echo htmlspecialchars($row -> alternate_title);
             
              ?>"><br/>
-<small>Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll.
+<small>Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll.</small>
 <br/><br/>
 
 <strong>Sprache:</strong>
