@@ -177,7 +177,7 @@ function get_title($ipage = null){
      }
 
 function title($ipage = null){
-     echo get_title($ipage);
+     echo stringHelper :: real_htmlspecialchars(get_title($ipage));
 }
 
 function import($ipage){
