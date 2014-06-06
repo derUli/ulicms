@@ -266,6 +266,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `notinfeed` tinyint(1) NOT NULL,
   `systemname` varchar(255) NOT NULL,
   `title` varchar(255) NOT NULL,
+  `alternate_title` VARCHAR(255) DEFAULT NULL,
   `target` varchar(255) DEFAULT '_self',
   `category` int(11) DEFAULT '1',
   `content` longtext NOT NULL,
