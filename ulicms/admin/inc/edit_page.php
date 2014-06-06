@@ -28,7 +28,7 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
              ?>'>
 <br/><br/>
 
-<strong data-tooltip="Der Titel der Seite">Alternativer Title:</strong><br/>
+<strong data-tooltip="Der Titel der Seite">Alternativer Titel:</strong><br/>
 <input type="text" style="width:300px;" name="alternate_title" value="<?php
              echo htmlspecialchars($row -> alternate_title);
             
