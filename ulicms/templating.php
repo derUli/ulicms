@@ -164,8 +164,14 @@ function get_title($ipage = null){
          }
      if(db_num_rows($query) > 0){
          while($row = db_fetch_object($query)){
-             $row -> title = apply_filter($row -> title, "title");
-             return $row -> title;
+             if(isset($row->alternate_title) and !empty($row->alternate_title)){
+                $title = $row -> alternate_title;
+             } else {
+               $title = $row -> title;
+             }
+
+                $title = apply_filter($title, "title");
+             return $title;
              }
          }
      }
