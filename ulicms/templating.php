@@ -177,28 +177,8 @@ function get_title($ipage = null){
      }
 
 function title($ipage = null){
-     $status = check_status();
-     if($status == "404 Not Found"){
-         echo "Seite nicht gefunden";
-         return false;
-         }else if($status == "403 Forbidden"){
-         echo "Zugriff verweigert";
-         return false;
-         }
-    
-     $ipage = db_escape($_GET["seite"]);
-     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
-     if($ipage == ""){
-         $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1", $connection);
-         }
-     if(db_num_rows($query) > 0){
-         while($row = db_fetch_object($query)){
-             $row -> title = apply_filter($row -> title, "title");
-             echo $row -> title;
-             return true;
-             }
-         }
-     }
+     echo get_title($ipage);
+}
 
 function import($ipage){
      $ipage = db_escape($ipage);
