@@ -149,7 +149,7 @@ function meta_description($ipage = null){
      }
 
 
-function get_title($ipage = null){
+function get_title($ipage = null, $headline = false){
      $status = check_status();
      if($status == "404 Not Found"){
          return "Seite nicht gefunden";
@@ -164,7 +164,7 @@ function get_title($ipage = null){
          }
      if(db_num_rows($query) > 0){
          while($row = db_fetch_object($query)){
-             if(isset($row->alternate_title) and !empty($row->alternate_title)){
+             if($headline and isset($row->alternate_title) and !empty($row->alternate_title)){
                 $title = $row -> alternate_title;
              } else {
                $title = $row -> title;
@@ -179,6 +179,16 @@ function get_title($ipage = null){
 function title($ipage = null){
      echo stringHelper :: real_htmlspecialchars(get_title($ipage));
 }
+
+function get_headline($ipage = null){
+     return get_title($ipage, true);
+}
+
+function headline($ipage = null){
+     echo stringHelper :: real_htmlspecialchars(get_headline($ipage));
+}
+
+
 
 function import($ipage){
      $ipage = db_escape($ipage);
