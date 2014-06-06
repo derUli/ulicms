@@ -28,7 +28,15 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
              ?>'>
 <br/><br/>
 
-<strong data-tooltip="In welcher Sprache ist diese Seite verfasst?">Sprache:</strong>
+<strong data-tooltip="Der Titel der Seite">Alternativer Title:</strong><br/>
+<input type="text" style="width:300px;" name="alternate_title" value="<?php
+             echo htmlspecialchars($row -> alternate_title);
+            
+             ?>"><br/>
+<small>Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll.
+<br/><br/>
+
+<strong>Sprache:</strong>
 <br/>
 <select name="language">
 <?php

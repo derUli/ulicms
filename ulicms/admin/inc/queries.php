@@ -171,6 +171,7 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
         
          $system_title = db_escape($_POST["system_title"]);
          $page_title = db_escape($_POST["page_title"]);
+         $alternate_title = db_escape($_POST["alternate_title"]);
          $activated = intval($_POST["activated"]);
          $page_content = $_POST["page_content"];
          $comments_enabled = (int)$_POST["comments_enabled"];
@@ -199,7 +200,7 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
              $shortContent = strip_tags($page_content);
             
              // Leerzeichen und Zeilenumbrüche entfernen
-            $shortContent = trim($shortContent);
+             $shortContent = trim($shortContent);
              $shortContent = preg_replace("#[ ]*[\r\n\v]+#", "\r\n", $shortContent);
              $shortContent = preg_replace("#[ \t]+#", " ", $shortContent);
              $shortContent = str_replace("\r\n", " ", $shortContent);
@@ -267,13 +268,13 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
          db_query("INSERT INTO " . tbname("content") .
              " (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position, 
-  access, meta_description, meta_keywords, language, target, category, `html_file`) 
+  access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`) 
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time() . ", " . time() .
              "," . $_SESSION["login_id"] .
              ", " . $comments_enabled .
              ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "', 
   '$meta_description', '$meta_keywords',
-  '$language', '$target', '$category', '$html_file')");
+  '$language', '$target', '$category', '$html_file', '$alternate_title')");
         
          // header("Location: index.php?action=pages_edit&page=".db_insert_id()."#bottom");
         header("Location: index.php?action=pages");
@@ -342,6 +343,8 @@ if($_POST["edit_page"] == "edit_page" && $acl -> hasPermission("pages")){
      $menu = db_escape($_POST["menu"]);
      $position = (int)$_POST["position"];
      $html_file = db_escape($_POST["html_file"]);
+
+     $alternate_title = db_escape($_POST["alternate_title"]);
     
      $parent = "NULL";
      if($_POST["parent"] != "NULL"){
@@ -357,7 +360,7 @@ if($_POST["edit_page"] == "edit_page" && $acl -> hasPermission("pages")){
      $meta_keywords = db_escape($_POST["meta_keywords"]);
      $language = db_escape($_POST["language"]);
     
-     db_query("UPDATE " . tbname("content") . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category' WHERE id=$id");
+     db_query("UPDATE " . tbname("content") . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category' WHERE id=$id");
     
     
      header("Location: index.php?action=pages");

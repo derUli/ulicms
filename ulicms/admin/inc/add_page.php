@@ -5,13 +5,17 @@
          ?>
 <form id="pageform" name="newpageform" action="index.php?action=pages" method="post">
 
-<strong data-tooltip="Dieser Name wird für die Adresse benötigt.
-Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong><br/>
+<strong>Permalink:</strong><br/>
 <input type="text" style="width:300px;" name="system_title" value="">
 <br/><br/>
 
 <strong data-tooltip="Der Titel der Seite">Seitentitel:</strong><br/>
 <input type="text" style="width:300px;" name="page_title" value="" onkeyup="systemname_vorschlagen(this.value)">
+<br/><br/>
+
+<strong data-tooltip="Der Titel der Seite">Alternativer Title:</strong><br/>
+<input type="text" style="width:300px;" name="alternate_title" value=""><br/>
+<small>Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll.
 <br/><br/>
 
 <strong data-tooltip="In welcher Sprache ist diese Seite verfasst?">Sprache:</strong>
