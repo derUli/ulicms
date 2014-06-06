@@ -13,7 +13,7 @@
 <input type="text" style="width:300px;" name="page_title" value="" onkeyup="systemname_vorschlagen(this.value)">
 <br/><br/>
 
-<strong data-tooltip="Der Titel der Seite">Alternativer Title:</strong><br/>
+<strong data-tooltip="Der Titel der Seite">Alternativer Titel:</strong><br/>
 <input type="text" style="width:300px;" name="alternate_title" value=""><br/>
 <small>Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll.</small>
 <br/><br/>
