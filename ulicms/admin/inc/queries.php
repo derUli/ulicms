@@ -274,7 +274,7 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
              ", " . $comments_enabled .
              ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "', 
   '$meta_description', '$meta_keywords',
-  '$language', '$target', '$category', '$html_file', '$alternate_title')");
+  '$language', '$target', '$category', '$html_file', '$alternate_title')")or die(db_error());
         
          // header("Location: index.php?action=pages_edit&page=".db_insert_id()."#bottom");
         header("Location: index.php?action=pages");
