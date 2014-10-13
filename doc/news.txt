@@ -1,3 +1,4 @@
 ﻿===== Neues in UliCMS 7.2.1 ====
 + CKEditor auf Version 4.4.5 aktualisiert
 + Editor nun auch auf Android aktiviert
++ Editor wächst mit Größe
