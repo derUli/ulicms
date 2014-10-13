@@ -16,11 +16,10 @@
 // IMPORTANT!!! Do not remove uncommented settings in this file even if
 // you are using session configuration.
 // See http://kcfinder.sunhater.com/install for setting descriptions
-
 $_CONFIG = array(
-    '_sessionVar' => &$_SESSION['KCFINDER'], 
-    '_sessionLifetime' => 1440, 
-    'disabled' => true,
+    '_sessionVar' => & $_SESSION['KCFINDER'],
+     '_sessionLifetime' => 1440,
+     'disabled' => true,
      'denyZipDownload' => false,
      'denyUpdateCheck' => false,
      'denyExtensionRename' => false,
@@ -107,9 +106,9 @@ include_once "../../init.php";
 session_start();
 
 $acl = new ACL();
-if(($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash") and $acl->hasPermission($_REQUEST["type"])){
-$_CONFIG["disabled"] = false;
-
-}
+if(($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash") and $acl -> hasPermission($_REQUEST["type"])){
+    $_CONFIG["disabled"] = false;
+    
+    }
 
 ?>
