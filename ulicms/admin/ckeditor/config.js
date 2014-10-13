@@ -1,12 +1,10 @@
 /**
- * @license Copyright (c) 2003-2013, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.html or http://ckeditor.com/license
+ * @license Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+ * For licensing, see LICENSE.md or http://ckeditor.com/license
  */
 
 CKEDITOR.editorConfig = function( config ) {
    config.language = 'de';
-   config.width = "800px";
-   config.height = "400px";
 	 
    if(window.location.href.indexOf("admin/") != -1)
    {
@@ -26,6 +24,8 @@ CKEDITOR.editorConfig = function( config ) {
      config.filebrowserFlashUploadUrl = 'admin/kcfinder/upload.php?type=flash';
    }
    config.entities_latin = false;
-   config.uiColor = '#6b94ac';
-   config.removePlugins = "newpage,templates,preview,print,save";
+   config.extraPlugins = 'autogrow';
+
+   config.uiColor = '#d1d8d0';
+   config.removePlugins = "newpage,templates,preview,print,save,language";
 };

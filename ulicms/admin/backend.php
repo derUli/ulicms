@@ -6,11 +6,11 @@ require_once "../init.php";
 $acl = new acl();
 
 if($acl -> hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash")){
- $_CONFIG["disabled"] = false;
-
-$_SESSION['KCFINDER'] = array(); 
-$_SESSION['KCFINDER']['disabled'] = false; 
-}
+     $_CONFIG["disabled"] = false;
+    
+    $_SESSION['KCFINDER'] = array();
+    $_SESSION['KCFINDER']['disabled'] = false;
+    }
 
 
 setcookie(session_name(), session_id());
@@ -37,7 +37,7 @@ if(isset($_SESSION["ulicms_login"]))
 
 if($_GET["action"] == "export" and isset($_POST["table"])){
      require_once "inc/export-data.php";
-    }
+     }
 
 header("Content-Type: text/html; charset=UTF-8");
 

@@ -212,7 +212,7 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( 'page_content',
 					{
-						skin : 'kama'
+						skin : 'moono'
 					});                                         
 
 editor.on("instanceReady", function()
