@@ -1,9 +1,3 @@
-﻿===== Neues in UliCMS 7.1 ﻿===== 
-
-+ Alternatives Backend Design in Schwarz
-+ Optische Verbesserungen der Adminoberfläche
-+ API erweitert
-+ Startseite je Sprache
-+ Hinterlegen einer HTML-Datei für eine Seite
-+ Prüfung auf Ingegrität der Datenbank hinzugefügt
-+ Man kann nun zwischen Zwei Methoden zum Mailversand wählen (PHP Mail, und PEAR MAIL über SMTP)
+﻿===== Neues in UliCMS 7.2.1 ====
++ CKEditor auf Version 4.4.5 aktualisiert
++ Editor nun auch auf Android aktiviert
