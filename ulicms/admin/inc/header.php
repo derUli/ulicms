@@ -52,6 +52,10 @@ $(document).ready(function() {
 <script src="codemirror/mode/css/css.js" type="text/javascript"></script>
 <title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    // Aktiviere den CKEditor auch in nicht unterstützten Umgebungen (z.B. Android)
+    CKEDITOR.env.isCompatible = true;
+</script>
 <?php add_hook("admin_head");
 ?>
 </head>
