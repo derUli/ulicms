@@ -7,16 +7,32 @@
              ?>
 
 <form action="index.php?action=banner" method="post">
-<h4>Vorschau</h4>
-<p><a href="<?php echo $row -> link_url;
+<h4>Vorschau</h4><p>
+<?php if($row->type == "gif"){?>
+<a href="<?php echo $row -> link_url;
              ?>" target="_blank"><img src="<?php echo $row -> image_url;
              ?>" title="<?php echo $row -> name;
              ?>" alt="<?php echo $row -> name;
              ?>" border=0></a></p>
+             
+             <?php }else {
+             echo $row->html;
+                             }?>
+                             </p>
+                             
+                             
 <input type="hidden" name="edit_banner" value="edit_banner">
 <input type="hidden" name="id" value="<?php echo $row -> id;
              ?>">
-<strong data-tooltip="Dieser Text erscheint, wenn man mit der Maus über den Banner fährt...">Bannertext:</strong><br/>
+<p><input type="radio" <?php 
+if($row->type == "gif") {
+echo 'checked="checked"';
+
+}
+;?> id="radio_gif" name="type" value="gif" onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label for="radio_gif">GIF-Banner</label></p>
+<fieldset id="type_gif" style="<?php if($row->type != "gif") echo "display:none";?>">
+
+<strong>Bannertext:</strong><br/>
 <input type="text" style="width:300px;" name="banner_name" value="<?php echo $row -> name;
              ?>">
 <br/><br/>
@@ -27,7 +43,17 @@
 <strong data-tooltip="Wohin soll der Banner verlinken?">Link-URL:</strong><br/>
 <input type="text" style="width:300px;" name="link_url" value="<?php echo $row -> link_url;
              ?>">
+             </fieldset>
+<br/>
+<input type="radio" <?php 
+if($row->type == "html") {
+echo 'checked="checked"';
 
+}
+;?> id="radio_html" name="type" value="html" onclick="$('#type_html').slideDown();$('#type_gif').slideUp();"><label for="radio_html">HTML</label></p>
+<fieldset id="type_html" style="<?php if($row->type != "html") echo "display:none";?>">
+<textarea name="html" cols=40 rows=10><?php echo htmlspecialchars($row->html);?></textarea>
+</fieldset>
 <br/>
 <br/>
 
