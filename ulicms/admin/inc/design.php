@@ -140,12 +140,10 @@ width:200px;
      if($ckeditor_skin === "moono")
          echo " selected"
          ?>>Moono</option>
-         <!--
 <option value="kama"<?php
          if($ckeditor_skin === "kama")
              echo " selected"
              ?>>Kama</option>
-             -->
 </select>
 
     </td>
