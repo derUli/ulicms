@@ -27,14 +27,14 @@ if(!is_admin()){
              }
         
         
-         if(getconfig("zoom") != $_REQUEST["zoom"]){
              setconfig("zoom", intval($_REQUEST["zoom"]));
-             }
+     
         
-         if(getconfig("font-size") != ç){
              setconfig("font-size", intval($_REQUEST["font-size"]));
-             }
+  
         
+        
+        setconfig("ckeditor_style", db_escape($_REQUEST["ckeditor_style"]));
         
          setconfig("backend_style", db_escape($_REQUEST["backend_style"]));
         
@@ -76,6 +76,7 @@ if(!is_admin()){
      $title_format = htmlspecialchars(getconfig("title_format"), ENT_QUOTES, "UTF-8");
      $zoom = intval(getconfig("zoom"));
      $font_size = intval(getconfig("font-size"));
+     $ckeditor_style = getconfig("ckeditor_style");
     
      ?>
 <style type="text/css">
@@ -125,6 +126,24 @@ width:200px;
          if($backend_style === "black")
              echo " selected"
              ?>>Schwarz</option>
+</select>
+
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>Editor Skin:</strong>
+    </td>
+    <td>
+<select name="backend_style" size=1>
+<option value="moono"<?php
+     if($ckeditor_style === "moono")
+         echo " selected"
+         ?>>Moono</option>
+<option value="kama"<?php
+         if($ckeditor_style === "kama")
+             echo " selected"
+             ?>>Kama</option>
 </select>
 
     </td>
