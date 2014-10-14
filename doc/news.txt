@@ -2,3 +2,4 @@
 + CKEditor auf Version 4.4.5 aktualisiert
 + Editor nun auch auf Android aktiviert
 + Editor wächst mit Größe
++ Nun auch Einbindung von Bannern über HTML-Code möglich
