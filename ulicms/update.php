@@ -1,7 +1,7 @@
 <?php
 include_once "init.php";
 
-$sql = "ALTER TABLE `" . tbname("banner"). "` ADD `alternate_title` VARCHAR(255) DEFAULT 'gif'";
+$sql = "ALTER TABLE `" . tbname("banner"). "` ADD `type` VARCHAR(255) DEFAULT 'gif'";
 db_query($sql);
 
 $sql = "ALTER TABLE `" . tbname("banner"). "` ADD `html` TEXT DEFAULT ''";
