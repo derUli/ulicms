@@ -12,5 +12,5 @@ setconfig("db_schema", "7.2.1");
 // unlink("update.php");
 header("Location: admin/");
 
-setconfig("ckeditor_skin", "moono");
+setconfig("ckeditor_skin", "kama");
 ?>
