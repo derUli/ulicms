@@ -3,7 +3,9 @@
      if($acl -> hasPermission("banners")){
          ?>
 
-<form action="index.php?action=banner" method="post">
+<form action="index.php?action=banner" method="post"> 
+<p><input type="radio" checked="checked" id="radio_gif" name="type" value="gif" onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label for="radio_gif">GIF-Banner</label></p>
+<fieldset id="type_gif">
 <input type="hidden" name="add_banner" value="add_banner">
 <strong data-tooltip="Dieser Text erscheint, wenn man mit der Maus über den Banner fährt...">Bannertext:</strong><br/>
 <input type="text" style="width:300px;" name="banner_name" value="">
@@ -14,7 +16,13 @@
 <strong data-tooltip="Wohin soll der Banner verlinken?">Link-URL:</strong><br/>
 <input type="text" style="width:300px;" name="link_url" value="">
 <br/>
+</fieldset>
 
+<p><input type="radio" id="radio_html" name="type" value="html" onclick="$('#type_html').slideDown();$('#type_gif').slideUp();"><label for="radio_html">HTML</label></p>
+
+<fieldset id="type_html" style="display:none">
+<textarea name="html" rows=10 cols=40></textarea>
+</fieldset>
 <br/>
 
 <strong>Kategorie:</strong><br/>

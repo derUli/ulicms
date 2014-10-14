@@ -290,9 +290,12 @@ if($_POST["add_banner"] == "add_banner" && $acl -> hasPermission("banners")){
      $image_url = db_escape($_POST["image_url"]);
      $link_url = db_escape($_POST["link_url"]);
      $category = intval($_POST["category"]);
+     $type = db_escape($_POST["type"]);
+     $html = db_escape($_POST["html"]);
+
     
      $query = db_query("INSERT INTO " . tbname("banner") . " 
-(name,link_url,image_url, category) VALUES('$name','$link_url','$image_url', '$category')", $connection);
+(name,link_url,image_url, category, `type`, html) VALUES('$name','$link_url','$image_url', '$category', '$type', '$html')", $connection);
     
      header("Location: index.php?action=banner");
      exit();
