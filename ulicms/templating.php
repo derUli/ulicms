@@ -63,11 +63,22 @@ function random_banner(){
      $query = db_query("SELECT * FROM " . tbname("banner") . " ORDER BY RAND() LIMIT 1");
      if(db_num_rows($query) > 0){
          while($row = db_fetch_object($query)){
-            
-             $title = $row -> name;
-             $link_url = $row -> link_url;
-             $image_url = $row -> image_url;
-             echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' alt='$title' border=0></a>";
+             $type = "gif";
+             if(isset($row->type)){
+                if(!empty($row->type)){
+                   $type = $row->type;
+
+                }
+
+             }
+             if($type == "gif"){
+               $title = $row -> name;
+               $link_url = $row -> link_url;
+               $image_url = $row -> image_url;
+               echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' alt='$title' border=0></a>";
+         } else if($type == "html"){
+             // Todo print out HTML-Banner
+         }
              }
         
          }
