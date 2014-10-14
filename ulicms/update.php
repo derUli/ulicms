@@ -1,11 +1,13 @@
 <?php
 include_once "init.php";
 
-$sql = "ALTER TABLE `" . tbname("content"). "` ADD `alternate_title` VARCHAR(255) DEFAULT ''";
+$sql = "ALTER TABLE `" . tbname("banner"). "` ADD `alternate_title` VARCHAR(255) DEFAULT 'gif'";
 db_query($sql);
 
+$sql = "ALTER TABLE `" . tbname("banner"). "` ADD `html` TEXT DEFAULT ''";
+db_query($sql);
 
-setconfig("db_schema", "7.2");
+setconfig("db_schema", "7.2.1");
 
 // unlink("update.php");
 header("Location: admin/");
