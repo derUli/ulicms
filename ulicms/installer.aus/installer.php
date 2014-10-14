@@ -257,6 +257,8 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `link_url` text NOT NULL,
   `image_url` text NOT NULL,
   `category` int(11) DEFAULT '1',
+  `type` varchar(255) DEFAULT 'gif',
+  `html` text DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
