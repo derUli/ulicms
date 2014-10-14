@@ -77,7 +77,7 @@ function random_banner(){
                $image_url = $row -> image_url;
                echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' alt='$title' border=0></a>";
          } else if($type == "html"){
-             // Todo print out HTML-Banner
+             echo $row->html;
          }
              }
         
