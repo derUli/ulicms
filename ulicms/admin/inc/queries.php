@@ -534,9 +534,12 @@ if($_POST["edit_banner"] == "edit_banner" && $acl -> hasPermission("banners")){
      $link_url = db_escape($_POST["link_url"]);
      $category = intval($_POST["category"]);
      $id = intval($_POST["id"]);
+     
+     $type = db_escape($_POST["type"]);
+     $html = db_escape($_POST["html"]);
     
      $query = db_query("UPDATE " . tbname("banner") . " 
-SET name='$name', link_url='$link_url', image_url='$image_url', category='$category' WHERE id=$id");
+SET name='$name', link_url='$link_url', image_url='$image_url', category='$category', type='$type', html='$html' WHERE id=$id");
     
     
      header("Location: index.php?action=banner");
