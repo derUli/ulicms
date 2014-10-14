@@ -58,7 +58,11 @@ $(window).load(function(){
 <?php
                  echo '<tr>';
                  echo "<td style=\"width:40px;\">--></td>";
+                 if($row->type == "gif"){
                  echo '<td><a href="' . $row -> link_url . '" target="_blank"><img src="' . $row -> image_url . '" title="' . $row -> name . '" alt="' . $row -> name . '" border=0></a></td>';
+                 } else {
+                 echo '<td>'.$row->html.'</td>';
+                 }
                  echo "<td>" . '<a href="index.php?action=banner_edit&banner=' . $row -> id . '"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
                  echo "<td>" . '<a href="index.php?action=banner_delete&banner=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif"> Löschen</a></td>';
                  echo '</tr>';
