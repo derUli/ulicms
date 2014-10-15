@@ -25,7 +25,7 @@ ON UPDATE CASCADE ON DELETE CASCADE;";
  db_query($constraint4);
 
 
-         $constraint5 = "ALTER TABLE `" . tbname("content") ."` ADD FOREIGN KEY (`language`) REFERENCES `".tbanme("languages"). "`(`language_code`) 
+         $constraint5 = "ALTER TABLE `" . tbname("content") ."` ADD FOREIGN KEY (`language`) REFERENCES `".tbname("languages"). "`(`language_code`) 
 ON UPDATE CASCADE ON DELETE CASCADE;";
  db_query($constraint5);
 
