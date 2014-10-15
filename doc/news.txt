@@ -3,3 +3,6 @@
 + Editor nun auch auf Android aktiviert
 + Editor wächst mit Größe
 + Nun auch Einbindung von Bannern über HTML-Code möglich
++ Datenbankstruktur verbessert
+  - Tabelle 'admins' in 'users' umbenannt
+  - Nutzung von Fremdschlüsseln
