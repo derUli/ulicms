@@ -36,10 +36,11 @@ $constraint4 = "ALTER TABLE `" . tbname("content") ."` ADD FOREIGN KEY (`autor`)
 ON DELETE SET NULL";
  db_query($constraint4);
 
-
+/*
 $constraint5 = "ALTER TABLE `" . tbname("content") ."` ADD FOREIGN KEY (`language`) REFERENCES `".tbname("languages"). "`(`language_code`) 
 ON DELETE SET NULL";
  db_query($constraint5);
+*/
 
 setconfig("db_schema", "7.2.1");
 setconfig("ckeditor_skin", "moono");
