@@ -276,7 +276,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
   `active` tinyint(1) NOT NULL,
   `created` bigint(20) NOT NULL,
   `lastmodified` bigint(20) NOT NULL,
-  `autor` int(11) NOT NULL,
+  `autor` int(11) NULL,
   `lastchangeby` int(11) NOT NULL,
   `views` int(11) NOT NULL,
   `comments_enabled` tinyint(1) NOT NULL,
@@ -415,7 +415,28 @@ $sql = "ALTER TABLE `".$prefix."languages` ADD UNIQUE(`language_code`)";
 
  mysqli_query($connection, $sql);
 
+         $constraint1 = "ALTER TABLE `" . $prefix . "admins` ADD FOREIGN KEY (`group_id`) REFERENCES `".$prefix."groups`(`id`) 
+ON DELETE SET NULL";
+ mysqli_query($connection, $constraint1);
+         $constraint2 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`category`) REFERENCES `".$prefix."categories`(`id`) 
+ON DELETE SET NULL";
+ mysqli_query($connection, $constraint2);
 
+
+         $constraint3 = "ALTER TABLE `" . $prefix . "banner` ADD FOREIGN KEY (`category`) REFERENCES `".$prefix."categories`(`id`) 
+ON DELETE SET NULL";
+ mysqli_query($connection, $constraint3);
+
+
+         $constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `".$prefix."admins`(`id`) 
+ON DELETE SET NULL";
+ mysqli_query($connection, $constraint4);
+
+/*
+         $constraint5 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`) 
+ON DELETE SET NULL";
+ mysqli_query($connection, $constraint5);
+ */
         
         
          @chmod("../cms-config.php", 0777);
