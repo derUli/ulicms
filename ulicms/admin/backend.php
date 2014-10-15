@@ -30,7 +30,7 @@ define("_SECURITY", true);
 if(isset($_SESSION["ulicms_login"]))
     {
      $eingeloggt = $_SESSION["ulicms_login"];
-     db_query("UPDATE " . tbname("admins") . " SET last_action = " . time() . " WHERE id = " . $_SESSION["login_id"]);
+     db_query("UPDATE " . tbname("users") . " SET last_action = " . time() . " WHERE id = " . $_SESSION["login_id"]);
      }else{
      $eingeloggt = false;
      }

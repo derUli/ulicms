@@ -7,7 +7,7 @@
         
          $admin = intval($_GET["admin"]);
         
-         $query = db_query("SELECT * FROM " . tbname("admins") . " WHERE id='$admin'");
+         $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$admin'");
          while($row = db_fetch_object($query)){
              ?>
 

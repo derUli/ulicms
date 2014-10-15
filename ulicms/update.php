@@ -1,6 +1,9 @@
 <?php
 include_once "init.php";
 
+$sql = "RENAME TABLE `".tbname("admins")."` TO `".tbname("users")."`;"
+db_quey($sql);
+
 $sql = "ALTER TABLE `" . tbname("banner"). "` ADD `type` VARCHAR(255) DEFAULT 'gif'";
 db_query($sql);
 
@@ -18,7 +21,7 @@ $sql = "ALTER TABLE `".tbname("content")."` MODIFY `language`  varchar(6) NULL;"
 db_query($sql);
 
 
-$constraint1 = "ALTER TABLE `" .  tbname("admins")."` ADD FOREIGN KEY (`group_id`) REFERENCES `".tbname("groups"). "`(`id`) 
+$constraint1 = "ALTER TABLE `" .  tbname("users")."` ADD FOREIGN KEY (`group_id`) REFERENCES `".tbname("groups"). "`(`id`) 
 ON DELETE SET NULL";
  db_query($constraint1);
  
@@ -32,7 +35,7 @@ ON DELETE SET NULL";
  db_query($constraint3);
 
 
-$constraint4 = "ALTER TABLE `" . tbname("content") ."` ADD FOREIGN KEY (`autor`) REFERENCES `".tbname("admins") . "`(`id`) 
+$constraint4 = "ALTER TABLE `" . tbname("content") ."` ADD FOREIGN KEY (`autor`) REFERENCES `".tbname("users") . "`(`id`) 
 ON DELETE SET NULL";
  db_query($constraint4);
 
