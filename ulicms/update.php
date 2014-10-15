@@ -1,7 +1,8 @@
 <?php
+define("SKIP_TABLE_CHECK", true);
 include_once "init.php";
 
-$sql = "RENAME TABLE `".tbname("admins")."` TO `".tbname("users")."`;"
+$sql = "RENAME TABLE `".tbname("admins")."` TO `".tbname("users")."`;";
 db_quey($sql);
 
 $sql = "ALTER TABLE `" . tbname("banner"). "` ADD `type` VARCHAR(255) DEFAULT 'gif'";
@@ -13,11 +14,11 @@ db_query($sql);
 $sql = "ALTER TABLE `".tbname("languages")."` ADD UNIQUE(`language_code`)";
 db_query($sql);
 
-$sql = "ALTER TABLE `".tbname("content")."` MODIFY `autor` INT(11) NULL;");
+$sql = "ALTER TABLE `".tbname("content")."` MODIFY `autor` INT(11) NULL;";
 db_query($sql);
 
 
-$sql = "ALTER TABLE `".tbname("content")."` MODIFY `language`  varchar(6) NULL;");
+$sql = "ALTER TABLE `".tbname("content")."` MODIFY `language`  varchar(6) NULL;";
 db_query($sql);
 
 
