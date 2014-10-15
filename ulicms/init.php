@@ -209,7 +209,7 @@ if(!$select){
  throw new Exception("Fehler: Die Datenbank " . $config -> db_database . " existiert nicht.\n");
  }
 
-
+if(!defined("SKIP_TABLE_CHECK")){
 $existing_tables = db_get_tables();
 $required_tables = array(tbname("users"),
  tbname("banner"),
@@ -230,6 +230,8 @@ for($i = 0; $i < count($required_tables); $i++){
  }
 }
 
+
+}
 
 
 $memory_limit = getconfig("memory_limit");
