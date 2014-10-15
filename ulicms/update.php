@@ -7,6 +7,9 @@ db_query($sql);
 $sql = "ALTER TABLE `" . tbname("banner"). "` ADD `html` TEXT DEFAULT ''";
 db_query($sql);
 
+$sql = "ALTER TABLE `".tbname("languages")."` ADD UNIQUE(`language_code`)";
+db_query($sql);
+
 // Todo make language_code unique
 
          $constraint1 = "ALTER TABLE `" .  tbname("admins")."` ADD FOREIGN KEY (`group_id`) REFERENCES `".tbname("groups"). "`(`id`) 

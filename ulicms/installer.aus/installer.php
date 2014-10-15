@@ -410,7 +410,10 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
         mysqli_query($connection, $insert_categories_general);
 
 
-// Todo make language_code unique
+
+$sql = "ALTER TABLE `".$prefix."languages` ADD UNIQUE(`language_code`)";
+
+ mysqli_query($connection, $sql);
 
          $constraint1 = "ALTER TABLE `" . $prefix . "admins` ADD FOREIGN KEY (`group_id`) REFERENCES `".$prefix."groups`(`id`) 
 ON UPDATE CASCADE ON DELETE CASCADE;";
