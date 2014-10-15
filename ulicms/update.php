@@ -9,25 +9,25 @@ db_query($sql);
 
          $constraint1 = "ALTER TABLE `" .  tbname("admins")."` ADD FOREIGN KEY (`group_id`) REFERENCES `".tbname("groups"). "`(`id`) 
 ON UPDATE CASCADE ON DELETE CASCADE;";
- db_query($connection, $constraint1);
+ db_query($constraint1);
          $constraint2 = "ALTER TABLE `" . tbname("content") ."` ADD FOREIGN KEY (`category`) REFERENCES `".tbname("categories") . "`(`id`) 
 ON UPDATE CASCADE ON DELETE CASCADE;";
- db_query($connection, $constraint2);
+ db_query($constraint2);
 
 
          $constraint3 = "ALTER TABLE `" . tbname("banner") ."` ADD FOREIGN KEY (`category`) REFERENCES `".tbname("categories"). "`(`id`) 
 ON UPDATE CASCADE ON DELETE CASCADE;";
- db_query($connection, $constraint3);
+ db_query($constraint3);
 
 
          $constraint4 = "ALTER TABLE `" . tbname("content") ."` ADD FOREIGN KEY (`autor`) REFERENCES `".tbname("admins") . "`(`id`) 
 ON UPDATE CASCADE ON DELETE CASCADE;";
- db_query($connection, $constraint4);
+ db_query($constraint4);
 
 
          $constraint5 = "ALTER TABLE `" . tbname("content") ."` ADD FOREIGN KEY (`language`) REFERENCES `".tbanme("languages"). "`(`language_code`) 
 ON UPDATE CASCADE ON DELETE CASCADE;";
- db_query($connection, $constraint5);
+ db_query($constraint5);
 
 setconfig("db_schema", "7.2.1");
 
