@@ -3,7 +3,7 @@ define("SKIP_TABLE_CHECK", true);
 include_once "init.php";
 
 $sql = "RENAME TABLE `".tbname("admins")."` TO `".tbname("users")."`;";
-db_quey($sql);
+db_query($sql);
 
 $sql = "ALTER TABLE `" . tbname("banner"). "` ADD `type` VARCHAR(255) DEFAULT 'gif'";
 db_query($sql);
