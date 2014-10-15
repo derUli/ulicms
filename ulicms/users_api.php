@@ -3,7 +3,7 @@ include_once ULICMS_ROOT . "/lib/encryption.php";
 
 // this class contains functions for managing user accounts
 function getUsers(){
-     $query = db_query("SELECT * FROM " . tbname("admins") . " ORDER by username");
+     $query = db_query("SELECT * FROM " . tbname("users") . " ORDER by username");
      $users = Array();
      while($row = db_fetch_object($query)){
          array_push($users, $row -> username);
@@ -15,11 +15,11 @@ function getUsers(){
 function changePassword($password, $id){
      include_once ULICMS_ROOT."lib/encryption.php";
      $newPassword = hash_password($password);
-     return db_query("UPDATE " . tbname("admins") . " SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
+     return db_query("UPDATE " . tbname("users") . " SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
      }
 
 function getUserByName($name){
-     $query = db_query("SELECT * FROM " . tbname("admins") . " WHERE username='" .
+     $query = db_query("SELECT * FROM " . tbname("users") . " WHERE username='" .
          db_escape($name) . "'");
      if(db_num_rows($query) > 0){
          return db_fetch_assoc($query);
@@ -29,7 +29,7 @@ function getUserByName($name){
      }
 
 function getUserById($id){
-     $query = db_query("SELECT * FROM " . tbname("admins") . " WHERE id = " . intval($id));
+     $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id = " . intval($id));
      if(db_num_rows($query) > 0){
          return db_fetch_assoc($query);
          }else{
@@ -55,7 +55,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
     
      if(is_null($acl_group))
          $acl_group = "NULL";
-     db_query("INSERT INTO " . tbname("admins") . " 
+     db_query("INSERT INTO " . tbname("users") . " 
 (username,lastname, firstname, email, password, `group`, `group_id`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape(hash_password($password)) . "',$group, " . $acl_group . ")")or die(db_error());
      $message = "Hallo $firstname,\n\n" .
      "Ein Administrator hat auf http://" . $_SERVER["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" .
@@ -71,7 +71,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
      }
 
 function user_exists($name){
-     $query = db_query("SELECT * FROM " . tbname("admins") .
+     $query = db_query("SELECT * FROM " . tbname("users") .
          " WHERE username = '" . db_escape($name) . "'");
      return db_num_rows($query) > 0;
      }

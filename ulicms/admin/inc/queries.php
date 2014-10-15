@@ -160,7 +160,7 @@ if($_GET["action"] == "banner_delete" && $acl -> hasPermission("banners")){
 
 if($_GET["action"] == "admin_delete" && (is_admin() or $acl -> hasPermission("users"))){
      $admin = intval($_GET["admin"]);
-     $query = db_query("DELETE FROM " . tbname("admins") . " WHERE id='$admin'", $connection);
+     $query = db_query("DELETE FROM " . tbname("users") . " WHERE id='$admin'", $connection);
      header("Location: index.php?action=admins");
      exit();
      }
@@ -510,7 +510,7 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
      $icq_id = db_escape($_POST["icq_id"]);
      $skype_id = db_escape($_POST["skype_id"]);
      $about_me = db_escape($_POST["about_me"]);
-     db_query("UPDATE " . tbname("admins") . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", firstname='$firstname',
+     db_query("UPDATE " . tbname("users") . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
 about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");

@@ -549,7 +549,7 @@ function autor(){
      if($result["systemname"] == "kontakt" || $result["systemname"] == "impressum" || StartsWith($result["systemname"], "menu_")){
          return;
          }
-     $query2 = db_query("SELECT * FROM " . tbname("admins") . " WHERE id=" . $result["autor"], $connection);
+     $query2 = db_query("SELECT * FROM " . tbname("users") . " WHERE id=" . $result["autor"], $connection);
      $result2 = db_fetch_array($query2);
      if(db_num_rows($query2) == 0){
          return;

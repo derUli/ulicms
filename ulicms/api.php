@@ -84,7 +84,7 @@ function getCacheType(){
     }
 
 function getOnlineUsers(){
-     $users_online = db_query("SELECT * FROM " . tbname("admins") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
+     $users_online = db_query("SELECT * FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
      $users = array();
      while($row = db_fetch_object($users_online)){
          array_push($users, $row -> username);

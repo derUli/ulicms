@@ -8,7 +8,7 @@
         else{
              $order = basename($_GET["order"]);
              }
-         $query = db_query("SELECT * FROM " . tbname("admins") . " ORDER BY $order", $connection);
+         $query = db_query("SELECT * FROM " . tbname("users") . " ORDER BY $order", $connection);
          if(db_num_rows($query)){
              ?>
 <h2>Benutzer</h2>

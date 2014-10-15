@@ -87,9 +87,9 @@ class ACL{
          db_query($deleteGroupSQL);
         
          if(is_null($move_users_to))
-             $updateUsers = "UPDATE " . tbname("admins") . " SET `group_id`=NULL where `group_id`=$id";
+             $updateUsers = "UPDATE " . tbname("users") . " SET `group_id`=NULL where `group_id`=$id";
          else
-             $updateUsers = "UPDATE " . tbname("admins") . " SET `group_id`=" . $move_users_to . " where `group_id`=$id";
+             $updateUsers = "UPDATE " . tbname("users") . " SET `group_id`=" . $move_users_to . " where `group_id`=$id";
         
          db_query($updateUsers);
         

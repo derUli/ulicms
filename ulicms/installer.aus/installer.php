@@ -204,7 +204,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
         
          mysqli_query($connection, "SET NAMES 'utf8'")or die(mysqli_error($connection));
         
-         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "admins` (
+         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
@@ -248,7 +248,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
          $encrypted_passwort = hash("sha512", $salt . $passwort);
          $encrypted_passwort = mysqli_real_escape_string($connection, $encrypted_passwort);
         
-         mysqli_query($connection, "INSERT INTO `" . $prefix . "admins` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`, `group_id`) VALUES
+         mysqli_query($connection, "INSERT INTO `" . $prefix . "users` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`, `group_id`) VALUES
 (1, 0, '" . $admin_user . "', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50, 1);")or die(mysqli_error($connection));
         
          mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "banner` (
@@ -415,7 +415,7 @@ $sql = "ALTER TABLE `".$prefix."languages` ADD UNIQUE(`language_code`)";
 
  mysqli_query($connection, $sql);
 
-         $constraint1 = "ALTER TABLE `" . $prefix . "admins` ADD FOREIGN KEY (`group_id`) REFERENCES `".$prefix."groups`(`id`) 
+         $constraint1 = "ALTER TABLE `" . $prefix . "users` ADD FOREIGN KEY (`group_id`) REFERENCES `".$prefix."groups`(`id`) 
 ON DELETE SET NULL";
  mysqli_query($connection, $constraint1);
          $constraint2 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`category`) REFERENCES `".$prefix."categories`(`id`) 
@@ -428,7 +428,7 @@ ON DELETE SET NULL";
  mysqli_query($connection, $constraint3);
 
 
-         $constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `".$prefix."admins`(`id`) 
+         $constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `".$prefix."users`(`id`) 
 ON DELETE SET NULL";
  mysqli_query($connection, $constraint4);
 

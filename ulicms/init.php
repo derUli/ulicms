@@ -211,7 +211,7 @@ if(!$select){
 
 
 $existing_tables = db_get_tables();
-$required_tables = array(tbname("admins"),
+$required_tables = array(tbname("users"),
  tbname("banner"),
  tbname("categories"),
  tbname("content"),
