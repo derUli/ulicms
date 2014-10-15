@@ -404,8 +404,10 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
           name VARCHAR(100)
           ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
          mysqli_query($connection, $sql_categories_table);
+
         
         $insert_categories_general = "INSERT INTO " . $prefix . "categories (name) VALUES('Allgemein')";
+        mysqli_query($connection, $insert_categories_general);
 
 
          $constraint1 = "ALTER TABLE `" . $prefix . "admins` ADD FOREIGN KEY (`group_id`) REFERENCES `".$prefix."groups`(`id`) 
@@ -430,7 +432,6 @@ ON UPDATE CASCADE ON DELETE CASCADE;";
 ON UPDATE CASCADE ON DELETE CASCADE;";
  mysqli_query($connection, $constraint5);
         
-        mysqli_query($connection, $insert_categories_general);
         
          @chmod("../cms-config.php", 0777);
         
