@@ -395,7 +395,9 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
          mysqli_query($connection, "INSERT INTO `" . $prefix . "languages` (`id`, `name`, `language_code`) VALUES
 (1, 'Deutsch', 'de'), 
 (2, 'English', 'en');")or die(mysqli_error($connection));
-        
+
+
+
         
         $sql_categories_table = "CREATE TABLE " . $prefix . "categories (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -404,6 +406,29 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
          mysqli_query($connection, $sql_categories_table);
         
         $insert_categories_general = "INSERT INTO " . $prefix . "categories (name) VALUES('Allgemein')";
+
+
+         $constraint1 = "ALTER TABLE `" . $prefix . "admins` ADD FOREIGN KEY (`group_id`) REFERENCES `".$prefix."groups`(`id`) 
+ON UPDATE CASCADE ON DELETE CASCADE;";
+ mysqli_query($connection, $constraint1);
+         $constraint2 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`category`) REFERENCES `".$prefix."categories`(`id`) 
+ON UPDATE CASCADE ON DELETE CASCADE;";
+ mysqli_query($connection, $constraint2);
+
+
+         $constraint3 = "ALTER TABLE `" . $prefix . "banner` ADD FOREIGN KEY (`category`) REFERENCES `".$prefix."categories`(`id`) 
+ON UPDATE CASCADE ON DELETE CASCADE;";
+ mysqli_query($connection, $constraint3);
+
+
+         $constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `".$prefix."admins`(`id`) 
+ON UPDATE CASCADE ON DELETE CASCADE;";
+ mysqli_query($connection, $constraint4);
+
+
+         $constraint5 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`) 
+ON UPDATE CASCADE ON DELETE CASCADE;";
+ mysqli_query($connection, $constraint5);
         
         mysqli_query($connection, $insert_categories_general);
         
