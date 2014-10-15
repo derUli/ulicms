@@ -415,28 +415,7 @@ $sql = "ALTER TABLE `".$prefix."languages` ADD UNIQUE(`language_code`)";
 
  mysqli_query($connection, $sql);
 
-         $constraint1 = "ALTER TABLE `" . $prefix . "admins` ADD FOREIGN KEY (`group_id`) REFERENCES `".$prefix."groups`(`id`) 
-;";
- mysqli_query($connection, $constraint1);
-         $constraint2 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`category`) REFERENCES `".$prefix."categories`(`id`) 
-;";
- mysqli_query($connection, $constraint2);
 
-
-         $constraint3 = "ALTER TABLE `" . $prefix . "banner` ADD FOREIGN KEY (`category`) REFERENCES `".$prefix."categories`(`id`) 
-;";
- mysqli_query($connection, $constraint3);
-
-
-         $constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `".$prefix."admins`(`id`) 
-;";
- mysqli_query($connection, $constraint4);
-
-/*
-         $constraint5 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`) 
-;";
- mysqli_query($connection, $constraint5);
- */
         
         
          @chmod("../cms-config.php", 0777);
