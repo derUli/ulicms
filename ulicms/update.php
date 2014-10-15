@@ -7,6 +7,8 @@ db_query($sql);
 $sql = "ALTER TABLE `" . tbname("banner"). "` ADD `html` TEXT DEFAULT ''";
 db_query($sql);
 
+// Todo make language_code unique
+
          $constraint1 = "ALTER TABLE `" .  tbname("admins")."` ADD FOREIGN KEY (`group_id`) REFERENCES `".tbname("groups"). "`(`id`) 
 ON UPDATE CASCADE ON DELETE CASCADE;";
  db_query($constraint1);
