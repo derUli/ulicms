@@ -432,10 +432,11 @@ ON UPDATE CASCADE ON DELETE CASCADE;";
 ON UPDATE CASCADE ON DELETE CASCADE;";
  mysqli_query($connection, $constraint4);
 
-
+/*
          $constraint5 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`) 
 ON UPDATE CASCADE ON DELETE CASCADE;";
  mysqli_query($connection, $constraint5);
+ */
         
         
          @chmod("../cms-config.php", 0777);
