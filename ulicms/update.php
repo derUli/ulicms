@@ -49,7 +49,7 @@ ON DELETE SET NULL";
 setconfig("db_schema", "7.2.1");
 setconfig("ckeditor_skin", "moono");
 
-// unlink("update.php");
+unlink("update.php");
 header("Location: admin/");
-
+exit();
 ?>
