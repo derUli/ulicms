@@ -6,3 +6,4 @@
 + Datenbankstruktur verbessert
   - Tabelle 'admins' in 'users' umbenannt
   - Nutzung von Fremdschlüsseln
++ Es können Links zu lokalen Seiten eingefügt werden
