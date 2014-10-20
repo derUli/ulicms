@@ -24,8 +24,9 @@ CKEDITOR.editorConfig = function( config ) {
      config.filebrowserFlashUploadUrl = 'admin/kcfinder/upload.php?type=flash';
    }
    config.entities_latin = false;
-   config.extraPlugins = 'autogrow';
 
    config.uiColor = '#d1d8d0';
-   config.removePlugins = "newpage,templates,preview,print,save,language";
+   config.removePlugins = "link,newpage,templates,preview,print,save,language";
+  
+     config.extraPlugins = 'autogrow,adv_link';
 };
