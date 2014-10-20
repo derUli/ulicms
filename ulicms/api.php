@@ -656,7 +656,22 @@ function getAllPagesWithTitle(){
  while($row = db_fetch_object($query)){
      $a = Array($row->title, $row->systemname . ".html");
          array_push($returnvalues, $a);
+         if(containsModule($row->systemname, "blog")){
+         
+         $sql = "select title, seo_shortname from ".tbname("blog"). " ORDER by datum DESC";
+         $query_blog = db_query($sql);
+         while($row_blog = db_fetch_object($query_blog)){
+             $title = $row->title . " ->". $row_blog -> title;
+             $url = $row->systemname . ".html" . "?single=".$row_blog -> seo_shortname; 
+             $b = Array($url, $title);
+             array_push($returnvalues, $b);
+         }
+                     
+         
+         }
      }
+     
+ 
 
  return $returnvalues;
 
