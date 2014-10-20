@@ -661,9 +661,9 @@ function getAllPagesWithTitle(){
          $sql = "select title, seo_shortname from ".tbname("blog"). " ORDER by datum DESC";
          $query_blog = db_query($sql);
          while($row_blog = db_fetch_object($query_blog)){
-             $title = $row->title . " ->". $row_blog -> title;
+             $title = $row->title . " -> ". $row_blog -> title;
              $url = $row->systemname . ".html" . "?single=".$row_blog -> seo_shortname; 
-             $b = Array($url, $title);
+             $b = Array($title, $url);
              array_push($returnvalues, $b);
          }
                      
