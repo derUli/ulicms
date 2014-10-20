@@ -30,6 +30,17 @@ function getDomainByLanguage($language){
         }
      return null;
     }
+    
+    
+// encodeURIComponent() is needed when working with accents
+// If not used, generate a JS error in CKEDITOR link plugin
+function encodeURIComponent( $str ){
+
+	$revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
+	return strtr(rawurlencode($str), $revert);
+
+}
+
 
 function setLanguageByDomain(){
     $domainMapping = getconfig("domain_to_language");
@@ -635,6 +646,23 @@ function getPageSystemnameByID($id){
      return "-";
      }
  }
+
+
+
+// Get systemnames of all pages
+function getAllPagesWithTitle(){
+ $query = db_query("SELECT systemname, id, title FROM `" . tbname("content") . "` WHERE `deleted_at`IS NULL ORDER BY systemname");
+ $returnvalues = Array();
+ while($row = db_fetch_object($query)){
+     $a = Array($row->title, $row->systemname . ".html");
+         array_push($returnvalues, $a);
+     }
+
+ return $returnvalues;
+
+ }
+
+
 
 // Get systemnames of all pages
 function getAllSystemNames(){
