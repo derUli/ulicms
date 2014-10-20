@@ -372,9 +372,11 @@ CKEDITOR.dialog.add( 'link', function( editor ) {
 						onLoad : function(element) {
 						var url = "";
 						if(window.location.href.indexOf("admin/") == -1){
-						url += "admin/";
+						   url += "admin/";
 						}
 						    url += "inc/getlinksforeditor.php";
+							
+
 							
 					        var element_id = '#' + this.getInputElement().$.id;
 					        // ajax call indpired from http://stackoverflow.com/questions/5293920/ckeditor-dynamic-select-in-a-dialog
