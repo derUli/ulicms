@@ -1,4 +1,13 @@
 <?php
+function formatTime($Sekundenzahl) 
+{ 
+  $Sekundenzahl = abs($Sekundenzahl); // Ganzzahlwert bilden 
+
+  return sprintf("%d Tage %02d:%02d:%02d Stunden", 
+                $Sekundenzahl/60/60/24,($Sekundenzahl/60/60)%24,($Sekundenzahl/60)%60,$Sekundenzahl%60); 
+} 
+
+
 # Snippet from PHP Share: http://www.phpshare.org
 function formatSizeUnits($bytes)
 {
