@@ -1,5 +1,6 @@
 <?php
 $acl = new ACL();
+include_once ULICMS_ROOT."/lib/formatter.php";
 
 if($acl -> hasPermission("dashboard")){
      ?>
@@ -58,6 +59,17 @@ if($acl -> hasPermission("dashboard")){
 <h2 class="accordion-header">Statistiken</h2>      
 <div class="accordion-content">
 <table border=1>    
+<?php 
+$installed_at = getconfig("installed_at");
+if($installed_at){
+$time = time() - $installed_at;
+$formatted = formatTime($time);
+?>
+<tr>
+<td>Alter dieser Website:</td>
+<td><?php echo $formatted;?></td>
+</tr>
+<?php }?>
 <tr>
 <td>Anzahl der Seiten</td>
 <td><?php echo $pages_count?></td>

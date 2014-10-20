@@ -2,6 +2,8 @@
 session_start();
 setcookie(session_name(), session_id());
 error_reporting (E_ALL ^ E_NOTICE);
+
+date_default_timezone_set("Europe/Berlin");
 header("Content-Type: text/html; charset=UTF-8");
 include_once "../lib/workaround.php";
 ?>
@@ -377,7 +379,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (44, 'frontpage_en', 'welcome'),
 (45, 'email_mode', 'internal'),
 (46, 'ckeditor_skin', 'moono'),
-(47, 'session_timeout', '60');")or die(mysqli_error($connection));
+(47, 'installed_at', '".time()."'),
+(48, 'session_timeout', '60');")or die(mysqli_error($connection));
         
          mysqli_query($connection, "UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysqli_error($connection));
         
