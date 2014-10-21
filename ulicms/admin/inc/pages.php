@@ -172,7 +172,7 @@ Kategorie:
 <?php
                  echo '<tr>';
                  echo "<td style=\"width:40px;\">--&gt;</td>";
-                 echo "<td>" . $row -> systemname . "</td>";
+                 echo "<td>" . htmlspecialchars($row -> title) . "</td>";
                  echo "<td>" . $row -> menu . "</td>";
                 
                  echo "<td>" . $row -> position . "</td>";
