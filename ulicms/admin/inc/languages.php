@@ -1,6 +1,8 @@
 <h2>Sprachen verwalten</h2>
 <?php if(defined("_SECURITY")){
-     if($_SESSION["group"] >= 50){
+    
+     $acl = new ACL();
+     if($acl -> hasPermission("languages")){
         
          $languages = db_query("SELECT * FROM " . tbname("languages") . " ORDER BY language_code ASC");
         
