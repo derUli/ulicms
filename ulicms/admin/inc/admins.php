@@ -24,7 +24,7 @@
 <td><a href="index.php?action=admins&order=lastname">Nachname</a></td>
 <td><a href="index.php?action=admins&order=firstname">Vorname</a></td>
 <td><a href="index.php?action=admins&order=email">Email</a></td>
-<td><a href="index.php?action=admins&order=group_id">Kategorie</a></td>
+<td><a href="index.php?action=admins&order=group_id">Gruppe</a></td>
 <td>Bearbeiten</td>
 <td><span data-tooltip="Wenn ein Benutzer gelöscht wird, bleiben seine Beiträge erhalten, verlieren allerdings seinen Namen als Autor.">Löschen</span></td>
 </tr>
