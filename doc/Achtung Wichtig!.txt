@@ -1,0 +1,8 @@
+Sichern Sie bitte vor der Installation des Updates Ihre MySQL Datenbank und die Dateien auf Ihrem FTP-Server!
+
+In UliCMS 7.2.1 werden größere Änderungen an der Datenbank vorgenommen.
+Unter anderem wurde die Tabelle "admins" in "users" umbenannt.
+Nach dem hochladen und ersetzen der Dateien können Sie sich deshalb nicht mehr einloggen.
+Rufen Sie dann bitte das Script update.php in Ihrem Browser auf (die URL dafür kann z.B. http://www.meinedomain.de/update.php lauten).
+Dieses Script nimmt die notwendigen Anpassungen an der Datenbank vor.
+Anschließend können Sie das System wieder normal nutzen.
