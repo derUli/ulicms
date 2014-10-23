@@ -499,7 +499,6 @@ function base_metas(){
      echo '<link rel="stylesheet" type="text/css" href="core.css"/>';
      echo "\r\n";
     
-     add_hook("head");
     
      $zoom = getconfig("zoom");
      if($zoom === false){
@@ -521,6 +520,9 @@ color:" . getconfig("body-text-color") . ";
          }
     
     
+     add_hook("head");
+
+     
      }
 
 
