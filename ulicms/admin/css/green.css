@@ -147,9 +147,7 @@ color:#5f5f5f;
 #login{
 background-color:#5aae85;
 width:350px;
-padding-left:20px;
-padding-right:20px;
-padding-bottom:20px;
+padding:20px;
 }
 
 #login table{
