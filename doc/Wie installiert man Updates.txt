@@ -1,4 +1,6 @@
-Module und Themes:
+Hier finden Sie Informationen darüber, wie Sie Updates für UliCMS oder Erweiterungsmodule installieren können.
+
+Module und Themes
 Es wird nicht automatisch auf verfügbare Updates der installierten Pakete geprüft.
 Im Falle eines kritischen Updates, wie z.B. der Behebung einer Sicherheitslücke, informiere ich Sie auf dem UliCMS Portal darüber.
 Sie sollten deshalb in regelmäßigen Abständen danach schauen.
@@ -6,11 +8,11 @@ Installierte Pakete können aktualisiert werden, in dem die neue Version über d
 Dies kann entweder aus einer Paketquelle oder per Upload eines UliCMS Pakets geschehen.
 Bestehende Dateien werden dabei ersetzt, so dass manuelle Anpassungen am Code verloren gehen.
 
-UliCMS Kernsystem:
+UliCMS Kernsystem
 UliCMS prüft seit Version 7.0 ob neue Updates verfügbar sind, und informiert Sie gegebenfalls im Dashboard darüber.
-Upgrade-Pakete werden gegebenfalls als Download angeboten.
+Upgrade-Pakete werden als manueller Download angeboten.
 Diese müssen entpackt und per FTP hochgeladen werden.
-Bestehende Dateien müssen dabei ersetzt.
+Bestehende Dateien müssen ersetzt werden.
 Sofern vorhanden, müssen Sie der Datei update.php auf dem FTP-Server volle Berechtigungen geben.
 Anschließend müssen Sie diese in Ihrem Browser aufrufen (z.B. http://domain.de/update.php). 
 Das Script nimmt die notwendige Änderungen an der Datenbank vor und
