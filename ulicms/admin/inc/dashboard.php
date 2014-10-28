@@ -28,17 +28,7 @@ if($acl -> hasPermission("dashboard")){
          ?>! [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
 </p>
 
-<?php
-         $updateInfo = checkForUpdates();
-        
-         if($updateInfo and is_admin()){
-             ?>
-<h2>Update Verfügbar</h2>
-<?php echo strip_tags($updateInfo,
-                 "<p><a><strong><b><u><em><i><span><img>");
-             ?>
-<?php }
-         ?>
+
 
 
 <?php $motd = getconfig("motd");
@@ -55,6 +45,19 @@ if($acl -> hasPermission("dashboard")){
 </div>
 <?php
              }
+         ?>
+<?php
+         $updateInfo = checkForUpdates();
+        
+         if($updateInfo and is_admin()){
+             ?>
+<h2 class="accordion-header">Update verfügbar</h2>
+<div class="accordion-content">
+<?php echo strip_tags($updateInfo,
+                 "<p><a><strong><b><u><em><i><span><img>");
+             ?>
+             </div>
+<?php }
          ?>
 <h2 class="accordion-header">Statistiken</h2>      
 <div class="accordion-content">
@@ -175,4 +178,3 @@ $formatted = formatTime($time);
      noperms();
      }
 ?>
-
