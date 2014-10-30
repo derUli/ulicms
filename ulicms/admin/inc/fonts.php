@@ -1,6 +1,7 @@
 <?php
 if(!function_exists('getFontFamilys')){
      function getFontFamilys(){
+        global $fonts;
          $fonts = Array();
          $fonts["Times New Roman"] = "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif";
          $fonts["Georgia"] = "Georgia, Times, 'Times New Roman', serif";
@@ -22,6 +23,8 @@ if(!function_exists('getFontFamilys')){
          $fonts["Brush Script MT"] = "'Brush Script MT',Phyllis,'Lucida Handwriting',cursive";
          $fonts["Zapf Chancery"] = "'Zapf Chancery', cursive";
          $fonts["Calibri"] = "Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif";
+
+         add_hook("custom_fonts");
         
          // Hier bei Bedarf weitere Fonts einfügen
         // $fonts["Meine Font 1"] = "myfont1";
