@@ -7,3 +7,6 @@
   - Nutzung von Fremdschlüsseln
 + Es können Links zu lokalen Seiten eingefügt werden
 + API Funktion ulicms_redirect hinzugefügt
++ Optionen hinzugefügt
+  - Gebe "generator" Meta-Tag aus
+  - Design Optionen aktiviert
