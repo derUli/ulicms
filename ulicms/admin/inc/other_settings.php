@@ -45,6 +45,11 @@ if(!is_admin()){
              deleteconfig("smtp_auth");
         
         
+         if(isset($_POST["show_meta_generator"])){
+            deleteconfig("hide_meta_generator");
+         } else {
+            setconfig("hide_meta_generator", "hide");
+         }
         
          if(isset($_POST["smtp_host"]))
              setconfig("smtp_host", db_escape($_POST["smtp_host"]));
@@ -71,6 +76,8 @@ if(!is_admin()){
      $override_shortcuts = getconfig("override_shortcuts");
      $email_mode = getconfig("email_mode");
      $menus = getAllMenus();
+     
+     $hide_meta_generator = getconfig("hide_meta_generator");
     
      $smtp_host = getconfig("smtp_host");
      if(!$smtp_host)
@@ -171,6 +178,13 @@ www.meinefirma.fr=>fr
                     ?>
 </textarea>
 </p>
+<div class="seperator"></div>
+<h2>Zusätzliche Meta-Tags</h2>
+<div class="label"><label for="show_meta_generator">Gebe "generator" Meta-Tag aus</div>
+<div class="inputWrapper">
+<input type="checkbox" name="show_meta_generator" <?php if(!$hide_meta_generator){ echo "checked ";}?>
+</div>
+
 <div class="seperator"></div>
 <h2>Email-Versand:</h2>
 <div class="label">Modus:</div>
