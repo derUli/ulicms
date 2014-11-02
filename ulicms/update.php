@@ -46,10 +46,13 @@ ON DELETE SET NULL";
  db_query($constraint5);
 */
 
+$add_menu_title = "ALTER TABLE `".tbname("content")."` ADD COLUMN `menu_image` varchar(255) NULL";
+db_query($add_menu_title);
+
 setconfig("db_schema", "7.2.1");
 setconfig("ckeditor_skin", "moono");
 
-unlink("update.php");
+// unlink("update.php");
 header("Location: admin/");
 exit();
 ?>
