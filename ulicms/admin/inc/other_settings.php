@@ -180,9 +180,9 @@ www.meinefirma.fr=>fr
 </p>
 <div class="seperator"></div>
 <h2>Zusätzliche Meta-Tags</h2>
-<div class="label"><label for="show_meta_generator">Gebe "generator" Meta-Tag aus</div>
+<div class="label"><label for="show_meta_generator">Gebe "generator" Meta-Tag aus</label></div>
 <div class="inputWrapper">
-<input type="checkbox" name="show_meta_generator" <?php if(!$hide_meta_generator){ echo "checked ";}?>
+<input type="checkbox" name="show_meta_generator" <?php if(!$hide_meta_generator){ echo "checked ";}?>>
 </div>
 
 <div class="seperator"></div>
