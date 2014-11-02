@@ -5,6 +5,12 @@ if(!is_admin()){
      $theme = getconfig("theme");
     
      if(isset($_REQUEST["submit"])){
+     
+     if(!isset($_REQUEST["disable_custom_layout_options"])){
+        setconfig("disable_custom_layout_options", "disable");
+     } else {
+        deleteconfig("disable_custom_layout_options");
+     }
         
          // Wenn Formular abgesendet wurde, Wert Speichern
         if($_REQUEST["theme"] !== $theme){ // if theme auf
@@ -89,8 +95,15 @@ width:200px;
 <form id="designForm" action="index.php?action=design" method="post">
 <table style="width:100%;">
 <tr>
+<td><strong>Design Optionen aktiviert</strong></td>
+<td><input type="checkbox" name="disable_custom_layout_options" <?php if(!getconfig("disable_custom_layout_options")){
+echo " checked";
+}?>>
+</td>
+</tr>
+<tr>
 <td style="width:300px;">
-<strong>Title</strong>
+<strong>Titel</strong>
 </td>
 <td><input type="text" name="title_format" value="<?php echo $title_format;
      ?>"></td>
