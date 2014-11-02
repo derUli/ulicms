@@ -101,8 +101,13 @@ if(!is_admin()){
     
     
      ?>
+     
+
 <form id="other_settings" action="index.php?action=other_settings" method="post">
-    <h2>Cache</h2>
+<div id="accordion-container"> 
+    <h2 class="accordion-header">Cache</h2>
+    
+    <div class="accordion-content">
 
 <div class="label">Cache aktiviert</div>
 <div class="inputWrapper"><input type="checkbox" name="cache_enabled" value="cache_enabled" <?php if($cache_enabled) echo " checked=\"checked\"";
@@ -124,8 +129,12 @@ if(!is_admin()){
 </select>
 </div>
 
-<div class="seperator"></div>
+</div>
 
+
+<h2 class="accordion-header">Shortcuts</h2>
+    
+    <div class="accordion-content">
 <div class="label">Shortcuts ersetzen</div>
 <div class="inputWrapper">
 <select name="override_shortcuts" size=1>
@@ -136,13 +145,16 @@ if(!is_admin()){
 </select>
 </div>
 <p>Standard-Tastenkombinationen des Browsers werden ersetzt, so dass Sie z.B. durch Drücken von Strg+S ebenfalls speichern können</p>
+</div>
 
 
 
 
-<div class="seperator"></div>
 
-<h2>Menüeinträge verschieben</h2>
+<h2 class="accordion-header">Menüeinträge verschieben</h2>
+
+
+    <div class="accordion-content">
 <p>Verschiebe alle Menüeinträge von <select name="move_from" size="1">
                                     <option value="-" selected>-</option>
                                     <?php foreach ($menus as $menu){
@@ -161,9 +173,12 @@ if(!is_admin()){
                      ?>
                                     </select> 
                                     </p>
-<div class="seperator"></div>
+</div>
 
-<h2>Domain2Language-Mapping</h2>
+<h2 class="accordion-header">Domain2Language-Mapping</h2>
+
+    <div class="accordion-content">
+    
 <p>Hier können Sie Domains auf Sprachen mappen.
 </p>
 <p>
@@ -178,15 +193,22 @@ www.meinefirma.fr=>fr
                     ?>
 </textarea>
 </p>
-<div class="seperator"></div>
-<h2>Zusätzliche Meta-Tags</h2>
+</div>
+
+<h2 class="accordion-header">Zusätzliche Meta-Tags</h2>
+
+<div class="accordion-content">
+   
 <div class="label"><label for="show_meta_generator">Gebe "generator" Meta-Tag aus</label></div>
 <div class="inputWrapper">
 <input type="checkbox" name="show_meta_generator" <?php if(!$hide_meta_generator){ echo "checked ";}?>>
 </div>
+</div>
 
-<div class="seperator"></div>
-<h2>Email-Versand:</h2>
+<h2 class="accordion-header">Email-Versand</h2>
+
+
+    <div class="accordion-content">
 <div class="label">Modus:</div>
 <div class="inputWrapper">
 <select id='email_mode' name="email_mode" size="1">
@@ -241,6 +263,8 @@ www.meinefirma.fr=>fr
 
 </div>
 </div>
+
+</div>
 <script type="text/javascript">
 <?php
                     if($smtp_auth){
@@ -281,11 +305,14 @@ if($('#email_mode').val() == "pear_mail"){
 
 </script>
 
-<div class="seperator"></div>
 
-<p><a href="index.php?action=settings">Experteneinstellungen</a></p>
+
+    <h2 class="accordion-header">Experteneinstellungen</h2>
+    
+    <div class="accordion-content">
+<p><a href="index.php?action=settings">Anzeigen</a></p>
+</div>
 <br/>
-
 <input name="submit" type="submit" value="Einstellungen speichern"/>
 
 <?php
