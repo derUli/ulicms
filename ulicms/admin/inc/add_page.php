@@ -120,6 +120,26 @@ document.newpageform.system_title.value=systemname
 Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
 <input type="text" style="width:300px;" name="redirection" value="">
 <br/><br/>
+<strong>Menüpunkt als Grafik</strong><br/>
+
+<script type="text/javascript">
+function openMenuImageSelectWindow(field) {
+    window.KCFinder = {
+        callBack: function(url) {
+            field.value = url;
+            window.KCFinder = null;
+        }
+    };
+    window.open('kcfinder/browse.php?type=images&dir=files/public&lang=de', 'menu_image',
+        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+        'resizable=1, scrollbars=0, width=800, height=600'
+    );
+}
+</script>
+<input type="text" id="menu_image" name="menu_image" readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+    value="" style="width:300px;cursor:pointer" /> <a href="#" onclick="$('#menu_image').val('');return false;">Leeren</a>
+    
+<br/><br/>
 <strong>HTML-Datei als Inhalt:</strong>
 <br/>
 <input type="text" style="width:300px;" name="html_file" value="">
