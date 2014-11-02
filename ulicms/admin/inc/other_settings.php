@@ -312,6 +312,7 @@ if($('#email_mode').val() == "pear_mail"){
     <div class="accordion-content">
 <p><a href="index.php?action=settings">Anzeigen</a></p>
 </div>
+</div>
 <br/>
 <input name="submit" type="submit" value="Einstellungen speichern"/>
 
