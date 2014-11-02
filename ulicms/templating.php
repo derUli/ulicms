@@ -337,8 +337,10 @@ function menu($name){
              }else{
              echo "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname) . "' target='" . $row -> target . "'>";
              }
-        
-         echo htmlentities($row -> title, ENT_QUOTES, "UTF-8");
+        if(!is_null($row->menu_image) and !empty($row->menu_image)){
+          echo '<img src="'.$row->menu_image.'" alt="'.htmlentities($row -> title, ENT_QUOTES, "UTF-8").'"/>';
+        } else {
+         echo htmlentities($row -> title, ENT_QUOTES, "UTF-8"); }
          echo "</a>\n";
         
          // Unterebene 1
@@ -356,8 +358,14 @@ function menu($name){
                      echo "<a class='menu_active_link' href='" . buildSEOUrl($row2 -> systemname) . "' target='" .
                      $row -> target . "'>";
                      }
+                     
+                             if(!is_null($row2->menu_image) and !empty($row2->menu_image)){
+          echo '<img src="'.$row2->menu_image.'" alt="'.htmlentities($row2 -> title, ENT_QUOTES, "UTF-8").'"/>';
+        } else {
                  echo htmlentities($row2 -> title, ENT_QUOTES, "UTF-8");
                  echo '</a>';
+                 
+                 }
                 
                  // Unterebene 2
                 $query3 = db_query("SELECT * FROM " . tbname("content") . " WHERE active = 1 AND language = '$language' AND parent=" . $row2 -> id . " AND `deleted_at` IS NULL ORDER by position");
@@ -372,7 +380,12 @@ function menu($name){
                              echo "<a class='menu_active_link' href='" . buildSEOUrl($row3 -> systemname) . "' target='" .
                              $row3 -> target . "'>";
                              }
+                             
+                                     if(!is_null($row3->menu_image) and !empty($row3->menu_image)){
+          echo '<img src="'.$row3->menu_image.'" alt="'.htmlentities($row3 -> title, ENT_QUOTES, "UTF-8").'"/>';
+        } else {
                          echo htmlentities($row3 -> title, ENT_QUOTES, "UTF-8");
+                         }
                          echo '</a>';
                         
                          // Unterebene 3
@@ -388,7 +401,11 @@ function menu($name){
                                      echo "<a class='menu_active_link' href='" . buildSEOUrl($row4 -> systemname) . "' target='" .
                                      $row4 -> target . "'>";
                                      }
+                                             if(!is_null($row4->menu_image) and !empty($row4->menu_image)){
+          echo '<img src="'.$row4->menu_image.'" alt="'.htmlentities($row4 -> title, ENT_QUOTES, "UTF-8").'"/>';
+        } else {
                                  echo htmlentities($row4 -> title, ENT_QUOTES, "UTF-8");
+                                 }
                                  echo '</a>';
                                  echo "</li>\n";
                                  }
