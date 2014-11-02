@@ -11,3 +11,4 @@
   - Gebe "generator" Meta-Tag aus
   - Design Optionen aktiviert
 + Sonstige Einstellungen nun in Accordion-Layout
++ Menüpunkte können optional als Grafik angezeigt werden
