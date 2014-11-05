@@ -503,18 +503,26 @@ function SureRemoveDir($dir, $DeleteMe){
  * seite.html;
  */
 
-function buildSEOUrl($page = false){
+function buildSEOUrl($page = false, $redirection = null){
  if($page === false)
      $page = get_requested_pagename();
+     
+     
+  if(startsWith($redirection, "#")){
+       return $redirection;
+     }
 
  if($page === get_frontpage())
      return "./";
+     
 
 
  $seo_url = "";
 
  if(is_file("backend.php"))
      $seo_url .= "../";
+     
+
 
 
  $seo_url .= $page;

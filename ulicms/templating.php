@@ -332,10 +332,10 @@ function menu($name){
      while($row = db_fetch_object($query)){
          echo "  <li>" ;
          if(get_requested_pagename() != $row -> systemname){
-             echo "<a href='" . buildSEOUrl($row -> systemname) . "' target='" .
+             echo "<a href='" . buildSEOUrl($row -> systemname, $row->redirection) . "' target='" .
              $row -> target . "'>";
              }else{
-             echo "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname) . "' target='" . $row -> target . "'>";
+             echo "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row->redirection) . "' target='" . $row -> target . "'>";
              }
         if(!is_null($row->menu_image) and !empty($row->menu_image)){
           echo '<img src="'.$row->menu_image.'" alt="'.htmlentities($row -> title, ENT_QUOTES, "UTF-8").'"/>';
@@ -352,10 +352,10 @@ function menu($name){
                 
                  echo "      <li>";
                  if(get_requested_pagename() != $row2 -> systemname){
-                     echo "<a href='" . buildSEOUrl($row2 -> systemname) . "' target='" .
+                     echo "<a href='" . buildSEOUrl($row2 -> systemname,  $row2->redirection) . "' target='" .
                      $row -> target . "'>";
                      }else{
-                     echo "<a class='menu_active_link' href='" . buildSEOUrl($row2 -> systemname) . "' target='" .
+                     echo "<a class='menu_active_link' href='" . buildSEOUrl($row2 -> systemname,  $row2->redirection) . "' target='" .
                      $row -> target . "'>";
                      }
                      
@@ -374,10 +374,10 @@ function menu($name){
                      while($row3 = db_fetch_object($query3)){
                          echo "      <li>";
                          if(get_requested_pagename() != $row3 -> systemname){
-                             echo "<a href='" . buildSEOUrl($row3 -> systemname) . "' target='" .
+                             echo "<a href='" . buildSEOUrl($row3 -> systemname,  $row3->redirection) . "' target='" .
                              $row3 -> target . "'>";
                              }else{
-                             echo "<a class='menu_active_link' href='" . buildSEOUrl($row3 -> systemname) . "' target='" .
+                             echo "<a class='menu_active_link' href='" . buildSEOUrl($row3 -> systemname, $row3->redirection) . "' target='" .
                              $row3 -> target . "'>";
                              }
                              
@@ -395,10 +395,10 @@ function menu($name){
                              while($row4 = db_fetch_object($query4)){
                                  echo "<li>";
                                  if(get_requested_pagename() != $row4 -> systemname){
-                                     echo buildSEOUrl($row4 -> systemname) . "' target='" .
+                                     echo buildSEOUrl($row4 -> systemname,  $row4->redirection) . "' target='" .
                                      $row4 -> target . "'>";
                                      }else{
-                                     echo "<a class='menu_active_link' href='" . buildSEOUrl($row4 -> systemname) . "' target='" .
+                                     echo "<a class='menu_active_link' href='" . buildSEOUrl($row4 -> systemname,  $row4->redirection) . "' target='" .
                                      $row4 -> target . "'>";
                                      }
                                              if(!is_null($row4->menu_image) and !empty($row4->menu_image)){
