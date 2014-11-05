@@ -323,3 +323,6 @@ if(!getconfig("session_name"))
  setconfig("session_name", uniqid() . "_SESSION");
 
 session_name(getconfig("session_name"));
+
+
+@include_once "lib/string_functions.php";

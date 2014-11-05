@@ -39,7 +39,6 @@ if(getconfig("redirection") != "" && getconfig("redirection") != false){
      }
 
 
-@include_once "lib/string_functions.php";
 
 $theme = getconfig("theme");
 
