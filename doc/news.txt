@@ -12,3 +12,5 @@
   - Design Optionen aktiviert
 + Sonstige Einstellungen nun in Accordion-Layout
 + Menüpunkte können optional als Grafik angezeigt werden
++ Für die Erstellung eines Drop-Down Menüs können nun Anker-URLs als externe URL angegeben werden.
+  - Zuvor führte dies zu einer endlosn HTTP-Weiterleitung.
