@@ -362,7 +362,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (26, 'password_salt', '$salt'),
 (27, 'timezone', 'Europe/Berlin'),
 (28, 'db_schema_version', '7.2'),
-(29, 'pkg_src', 'http://www.ulicms.de/packages/{version}/'),
+(29, 'pkg_src', 'http://packages.ulicms.de/{version}/'),
 (30, 'theme', 'default'),
 (31, 'zoom', '100'),
 (32, 'default-font', 'Arial, \'Helvetica Neue\', Helvetica, sans-serif'),
