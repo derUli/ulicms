@@ -19,7 +19,7 @@ if(!$acl -> hasPermission("pkg_settings")){
              }
          }
     
-     $default_pkg_src = "http://www.ulicms.de/packages/{version}/";
+     $default_pkg_src = "http://packages.ulicms.de/{version}/";
     
      $version = new ulicms_version();
      $version = $version -> getInternalVersion();
