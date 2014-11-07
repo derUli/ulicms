@@ -6,15 +6,15 @@
          noperms();
          }else{
          ?>
-<h4>UliCMS</h4>
-<small>Release <?php echo $version -> getVersion();
+<p><img src="gfx/logo.png" alt="UliCMS"/></p>
+<strong>Release <?php echo $version -> getVersion();
          ?> (v<?php echo implode(".", $version -> getInternalVersion());
-         ?>)</small>
+         ?>)</strong>
 <br/>
 
 <p>
 <a href="http://www.deruli.de" target="_blank">UliCMS</a> &copy; 2010 - 2014 by Ulrich Schmidt<br/>
-<a href="http://www.ckeditor.com" target="_blank">CKEditor</a> &copy; 2003 - 2013 by CKSource<br/>
+<a href="http://www.ckeditor.com" target="_blank">CKEditor</a> &copy; 2003 - 2014 by CKSource<br/>
 <a href="http://kcfinder.sunhater.com/" target="_blank">KCFinder</a> Copyright 2010 - 2012 KCFinder Project   <br/ >
 <a href="http://jquery.org" target="_blank">jQuery</a> (c) 2005, 2012 jQuery Foundation, Inc.
 <br/>
