@@ -11,9 +11,15 @@ if(defined("_SECURITY")){
      $theme = getconfig("theme");
      $theme_dir = getTemplateDirPath($theme);
      $acl = new ACL();
-    
+    $logo_file = ULICMS_ROOT."/content/images/backend_logo.png";
+    if(file_exists($logo_file)){
+       $logo_src = "../content/images/backend_logo.png";
+    } else {
+       $logo_src = "gfx/logo.png"; 
+    }
      ?>
-<div style="float:left"><h2>UliCMS <a href="../">[<?php echo getconfig("homepage_title")?>]</a></h2></div>
+<div><img src="<?php echo $logo_src;?>" alt="UliCMS"/>
+<a href="../" style="float:right;display:block;margin-left:10px; margin-right:15px">[<?php echo getconfig("homepage_title")?>]</a></div>
 
 
 <div style="margin-right:10px;margin-top:30px;float:right">
