@@ -126,8 +126,8 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
                      <p><a name="toggle_options" href="#toggle_options" onclick="$('#extra_options').slideToggle();">Zusätzliche Optionen &gt;&gt;</a></p>
 <fieldset id="extra_options">
 
-<strong data-tooltip="Soll diese Seite keinen eigenen Inhalt enthalten sondern stattdessen auf eine Externe Seite verlinken, tragen Sie die hier die URL ein.
-Wenn Sie z.B. http://www.google.de eintragen, verweist der Menüpunkt zur Google Startseite">Externer Link:</strong><br/>
+
+<strong>Weiterleitung auf externen Link:</strong><br/>
 <input type="text" style="width:300px;" name="redirection" value="<?php echo $row -> redirection;
              ?>">
 
