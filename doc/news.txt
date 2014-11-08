@@ -6,7 +6,11 @@
   - Tabelle 'admins' in 'users' umbenannt
   - Nutzung von Fremdschlüsseln
 + Es können Links zu lokalen Seiten eingefügt werden
-+ API Funktion ulicms_redirect hinzugefügt
++ API Funktionen hinzugefügt
+  - ulicms_redirect
+  - getPageTitleByID
+  - getStatusCodeByNumber
+  
 + Optionen hinzugefügt
   - Gebe "generator" Meta-Tag aus
   - Design Optionen aktiviert
@@ -14,3 +18,4 @@
 + Menüpunkte können optional als Grafik angezeigt werden
 + Für die Erstellung eines Drop-Down Menüs können nun Anker-URLs als externe URL angegeben werden.
   - Zuvor führte dies zu einer endlosn HTTP-Weiterleitung.
++ Neues UliCMS Logo
