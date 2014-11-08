@@ -176,7 +176,7 @@ Kategorie:
                  echo "<td>" . $row -> menu . "</td>";
                 
                  echo "<td>" . $row -> position . "</td>";
-                 echo "<td>" . getPageSystemnameByID($row -> parent) . "</td>";
+                 echo "<td>" . getPageTitleByID($row -> parent) . "</td>";
                 
                  if($row -> active){
                      echo "<td>Ja</td>";
