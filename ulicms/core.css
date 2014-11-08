@@ -8,3 +8,21 @@ left:-8000px;
 color:red;
 }
 
+
+span.blog_article_next{
+float:right;
+}
+
+
+img{
+/* Keine Rahmen um verlinkte Bilder*/
+border:0px;
+/* Responsive Bilder */
+  max-width: 100%;
+  height: auto;
+}
+
+body {
+    margin:0;
+    padding:0;
+    }
