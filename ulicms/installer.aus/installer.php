@@ -45,12 +45,11 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 <br/>
 <h3>So müssen die Berechtigungen gesetzt sein</h3>
 <p><img src="media/chmod_02.png" alt="FTP Rechtevergabe" title="FTP Rechtevergabe" border=1/></p>
-<br/>
 <?php
      if (!function_exists('gd_info')){
          ?>
 <hr/>
-<p style="color:red;"><strong>php5-gd</strong> ist nicht installiert.<br/>Ohne <strong>php5-gd</strong> lässt sich UliCMS zwar installieren,<br/>jedoch wird der Dateimanager und die Verarbeitung von Grafikdateien nicht funktionieren.</p>
+<p style="color:red;"><strong>php5-gd</strong> ist nicht installiert.<br/>Ohne <strong>php5-gd</strong> lässt sich UliCMS zwar installieren,<br/>Bitte installieren Sie dieses PHP-Modul und versuchen Sie es erneut.</p>
 <hr/>
 <?php }
      ?>
@@ -58,10 +57,22 @@ Setzen Sie diese Version bitte nicht produktiv ein!<br/>
 
 <?php
      if (!function_exists('mysqli_connect')){
+     $error = true;
          ?>
-<p style="color:red;"><strong>php5-mysql</strong> ist nicht installiert.<br/>Ohne <strong>php5-mysql</strong> lässt sich UliCMS nicht installieren,<br/>da dieses PHP-Modul für die Kommunikation mit<br/>dem Datenbankserver benötigt wird.</p>
+<p style="color:red;"><strong>php5-mysql</strong> ist nicht installiert.<br/>Bitte installieren Sie dieses PHP-Modul und versuchen Sie es erneut.</p>
 
-<?php }else{
+<?php 
+
+}
+if(!function_exists("json_encode")){
+$error = true;
+?>
+
+<p style="color:red;"><strong>php5-json</strong> ist nicht installiert.<br/>Bitte installieren Sie zuerst php5-json und versuchen Sie es dann erneut.</p>
+
+<?php } 
+
+if(!isset($error)){
          ?>
 
 <form action="index.php" method="post">
