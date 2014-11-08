@@ -715,12 +715,21 @@ function getPageIDBySystemname($systemname){
  }
 
 
-// get PageSystemnameByID
 function getPageSystemnameByID($id){
  $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where id=" . intval($id));
  if(db_num_rows($query) > 0){
      $row = db_fetch_object($query);
      return $row -> systemname;
+     }else{
+     return "-";
+     }
+ }
+ 
+function getPageTitleByID($id){
+ $query = db_query("SELECT title, id FROM `" . tbname("content") . "` where id=" . intval($id));
+ if(db_num_rows($query) > 0){
+     $row = db_fetch_object($query);
+     return $row -> title;
      }else{
      return "-";
      }
