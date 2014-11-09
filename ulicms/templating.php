@@ -113,10 +113,18 @@ function homepage_owner(){
      }
 
 
-function homepage_title(){
-     echo htmlspecialchars(getconfig("homepage_title"),
+function get_homepage_title(){
+     $homepage_title = getconfig("homepage_title_".$_SESSION["language"]);
+     if(!$homepage_title){
+         $homepage_title = getconfig("homepage_title");
+     }
+      return htmlspecialchars($homepage_title,
          ENT_QUOTES, "UTF-8");
      }
+     
+function homepage_title(){
+   return get_homepage_title();
+}
 
 
 
@@ -278,8 +286,15 @@ function apply_filter($text, $type){
 
 
 function get_motto(){
-     return htmlspecialchars(getconfig("motto"), ENT_QUOTES, "UTF-8");
-     }
+  // Existiert ein Motto für diese Sprache? z.B. motto_en
+  $motto = getconfig("motto_".$_SESSION["language"]);
+
+  // Ansonsten Standard Motto
+  if(!$motto){
+     $motto = getconfig("motto");
+  }
+  return htmlspecialchars($motto, ENT_QUOTES, "UTF-8");
+}
      
      
 function motto(){
@@ -442,7 +457,7 @@ function base_metas(){
      if($title_format){
          $title = $title_format;
          $title = str_ireplace("%homepage_title%",
-             getconfig("homepage_title"), $title);
+             get_homepage_title(), $title);
          $title = str_ireplace("%title%", get_title(), $title);
         
          $title = htmlentities($title, ENT_QUOTES, "UTF-8");
