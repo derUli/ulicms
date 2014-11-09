@@ -29,7 +29,7 @@
              $frontpages[$lang] = getconfig("frontpage_" . $lang);
             
              if(!$frontpages[$lang])
-                 $frontpages[$lang] = getconfig($frontpage);
+                 $frontpages[$lang] = getconfig("frontpage");
             
             
              }
