@@ -204,11 +204,11 @@ function headline($ipage = null){
 function import($ipage){
      $ipage = db_escape($ipage);
      if($ipage == ""){
-         $query = db_query("SELECT content FROM " . tbname("content") . " ORDER BY id LIMIT 1");
+         $query = db_query("SELECT content FROM " . tbname("content") . " WHERE language='".db_escape($_SESSION["language"])."' ORDER BY id LIMIT 1");
         
          }
     else{
-         $query = db_query("SELECT content FROM " . tbname("content") . " WHERE systemname='$ipage'");
+         $query = db_query("SELECT content FROM " . tbname("content") . " WHERE systemname='$ipage' AND language='".db_escape($_SESSION["language"])."'");
          }
     
      if(db_num_rows($query) == 0){
