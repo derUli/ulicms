@@ -141,7 +141,7 @@ function meta_keywords($ipage = null){
 function meta_description($ipage = null){
      $status = check_status();
      $ipage = db_escape($_GET["seite"]);
-     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
+     $query = db_query("SELECT meta_description FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1", $connection);
          }
@@ -169,7 +169,7 @@ function get_title($ipage = null, $headline = false){
          }
     
      $ipage = db_escape($_GET["seite"]);
-     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
+     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage' AND language='".db_escape($_SESSION["language"])."'", $connection);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1");
          }
@@ -204,11 +204,11 @@ function headline($ipage = null){
 function import($ipage){
      $ipage = db_escape($ipage);
      if($ipage == ""){
-         $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1");
+         $query = db_query("SELECT content FROM " . tbname("content") . " ORDER BY id LIMIT 1");
         
          }
     else{
-         $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'");
+         $query = db_query("SELECT content FROM " . tbname("content") . " WHERE systemname='$ipage'");
          }
     
      if(db_num_rows($query) == 0){
@@ -547,8 +547,12 @@ color:" . getconfig("body-text-color") . ";
 function head(){
      base_metas();
      }
-
+     
 function autor(){
+   echo get_autor();
+}
+
+function get_autor(){
      $seite = $_GET["seite"];
      if(empty($seite)){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1");
@@ -580,7 +584,7 @@ function autor(){
      $out = str_replace("Username", $result2["username"], $out);
      $out = str_replace("Datum", $result2["datum"], $out);
      if(!is_403() or $_SESSION["group"] >= 20){
-         echo $out;
+         return $out;
          }
      }
 
