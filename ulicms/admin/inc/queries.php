@@ -5,11 +5,7 @@ add_hook("query");
 
 if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
      setconfig("registered_user_default_level", intval($_POST["registered_user_default_level"]));
-     setconfig("homepage_title", db_escape($_POST["homepage_title"]));
      setconfig("homepage_owner", db_escape($_POST["homepage_owner"]));
-     setconfig("motto", db_escape($_POST["homepage_motto"]));
-     setconfig("meta_keywords", db_escape($_POST["meta_keywords"]));
-     setconfig("meta_description", db_escape($_POST["meta_description"]));
      setconfig("language", db_escape($_POST["language"]));
      setconfig("visitors_can_register", intval(isset($_POST["visitors_can_register"])));
      setconfig("maintenance_mode", intval(isset($_POST["maintenance_mode"])));
