@@ -24,9 +24,8 @@
 <td><a href="index.php?action=homepage_title">Titel der Homepage festlegen</a></td>
 </tr>
 <tr>
-<td><strong data-tooltip="Eine kurze Beschreibung oder ein Slogan um was es auf dieser Webpräsenz geht.">Motto der Homepage:</strong></td>
-<td><input type="text" name="homepage_motto" style="width:400px" value="<?php echo $settings["motto"];
-         ?>"></td>
+<td><strong>Motto der Homepage:</strong></td>
+<td><a href="index.php?action=motto">Motto der Homepage festlegen</a></td>
 </tr>
 <tr>
 <td><strong data-tooltip="Der Name des Inhabers dieser Webpräsenz...">Inhaber der Homepage:</strong></td>

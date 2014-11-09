@@ -112,6 +112,9 @@ if(!$eingeloggt){
     else if($_GET["action"] == "homepage_title"){
          require_once "inc/homepage_title.php";
          }
+    else if($_GET["action"] == "motto"){
+         require_once "inc/motto.php";
+         }
     else if($_GET["action"] == "spam_filter"){
          require_once "inc/spamfilter_settings.php";
          }
