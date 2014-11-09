@@ -15,3 +15,4 @@
 + Für die Erstellung eines Drop-Down Menüs können nun Anker-URLs als externe URL angegeben werden.
   - Zuvor führte dies zu einer endlosn HTTP-Weiterleitung.
 + Neues UliCMS Logo
++ Startseitenauswahl in den Einstellungen nun nach Sprache gefiltert
