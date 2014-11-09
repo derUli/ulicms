@@ -10,11 +10,11 @@
              for($i = 0; $i < count($languages); $i++){
                 
                  $lang = $languages[$i];
-                 if(isset($_POST["homepage_title_" . $lang])){
-                     $page = db_escape($_POST["homepage_title_" . $lang]);
-                     setconfig("homepage_title_" . $lang, $page);
+                 if(isset($_POST["motto_" . $lang])){
+                     $page = db_escape($_POST["motto_" . $lang]);
+                     setconfig("motto_" . $lang, $page);
                      if($lang == getconfig("default_language")){
-                         setconfig("homepage_title", $page);
+                         setconfig("motto", $page);
                          }
                      }
                  }
@@ -22,26 +22,26 @@
         
         
         
-         $homepage_titles = array();
+         $mottos = array();
         
          for($i = 0; $i < count($languages); $i++){
              $lang = $languages[$i];
-             $homepage_titles[$lang] = getconfig("homepage_title_" . $lang);
+             $mottos[$lang] = getconfig("motto_" . $lang);
             
-             if(!$homepage_titles[$lang])
-                 $homepage_titles[$lang] = getconfig("homepage_title");
+             if(!$mottos[$lang])
+                 $mottos[$lang] = getconfig("motto");
             
             
              }
         
         
         ?>
-<h1>Titel der Homepage</h1>
-<form action="index.php?action=homepage_title" id="homepage_title_settings" method="post">
+<h1>Motto</h1>
+<form action="index.php?action=motto" id="motto" method="post">
 <table border=0>
 <tr>
 <td style="min-width:100px;"><strong>Sprache</strong></td>
-<td><strong>Titel</strong></td>
+<td><strong>Motto</strong></td>
 </tr>
 <?php
         for($n = 0; $n < count($languages); $n++){
@@ -51,8 +51,8 @@
 <td><?php echo $lang;
             ?></td>
 <td>
-<input name="homepage_title_<?php echo $lang;
-            ?>" style="width:400px" value="<?php echo stringHelper::real_htmlspecialchars($homepage_titles[$lang]);?>">
+<input name="motto_<?php echo $lang;
+            ?>" style="width:400px" value="<?php echo stringHelper::real_htmlspecialchars($mottos[$lang]);?>">
 </td>
 <?php }
         ?>
@@ -66,7 +66,7 @@
 </form>
 
 <script type="text/javascript">
-$("#homepage_title_settings").ajaxForm({beforeSubmit: function(e){
+$("#motto_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");
   $("#loading").show();
   }, 
