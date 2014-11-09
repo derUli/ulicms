@@ -621,7 +621,7 @@ function content(){
     
     
      if(!is_logged_in())
-         db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE systemname='" . $_GET["seite"] . "'");
+         db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE systemname='" . $_GET["seite"] . "' AND language='".db_escape($_SESSION["language"])."'");
      return import($_GET["seite"]);
      }
 
