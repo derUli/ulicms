@@ -18,5 +18,6 @@
 + Mehrsprachigkeit verbessert
   - sprachspezifischer homepage_title möglich
   - sprachspezifisches motto möglich
+  - Meta Beschreibung & Keywords je Sprache
   - Startseitenauswahl in den Einstellungen nun nach Sprache gefiltert
   - Es können Seiten mit dem gleichen Systemnamen in verschiedenen Sprachen existieren.
