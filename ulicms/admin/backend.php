@@ -109,6 +109,9 @@ if(!$eingeloggt){
     else if($_GET["action"] == "settings_simple"){
          require_once "inc/settings_simple.php";
          }
+    else if($_GET["action"] == "homepage_title"){
+         require_once "inc/homepage_title.php";
+         }
     else if($_GET["action"] == "spam_filter"){
          require_once "inc/spamfilter_settings.php";
          }
