@@ -115,6 +115,12 @@ if(!$eingeloggt){
     else if($_GET["action"] == "motto"){
          require_once "inc/motto.php";
          }
+    else if($_GET["action"] == "meta_description"){
+         require_once "inc/meta_description.php";
+         }
+    else if($_GET["action"] == "meta_keywords"){
+         require_once "inc/meta_keywords.php";
+         }
     else if($_GET["action"] == "spam_filter"){
          require_once "inc/spamfilter_settings.php";
          }
