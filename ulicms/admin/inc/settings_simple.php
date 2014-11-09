@@ -89,14 +89,17 @@ Startseite festlegen</a>
 <td><strong data-tooltip="Zusätzliche Informationen die für Optimierung des Suchmaschinen-Rankings dienen...">Meta-Daten für Suchmaschinen:</strong></td>
 </tr>
 <tr>
-<td><strong data-tooltip="Stichwörter, die den Inhalt dieser Website beschreiben...">Keywords:</strong></td>
-<td><input type="text" name="meta_keywords" value="<?php echo $settings["meta_keywords"];
-             ?>" style="width:400px">
+<td><strong data-tooltip="Eine kurze Beschreibung der Website....">Beschreibung:</strong></td>
+<td>
+<a href="index.php?action=meta_description">Beschreibung festlegen</a>
+</td>
 </tr>
 <tr>
-<td><strong data-tooltip="Eine kurze Beschreibung der Website....">Beschreibung:</strong></td>
-<td><input type="text" name="meta_description" value="<?php echo $settings["meta_description"];
-             ?>" style="width:400px">
+<td><strong data-tooltip="Stichwörter, die den Inhalt dieser Website beschreiben...">Keywords:</strong></td>
+<td>
+
+<a href="index.php?action=meta_keywords">Keywords festlegen</a>
+</td>
 </tr>
 <tr>
 <td></td>
