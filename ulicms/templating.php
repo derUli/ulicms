@@ -133,7 +133,7 @@ $status = check_status();
 function meta_keywords($ipage = null){
      $status = check_status();
      $ipage = db_escape($_GET["seite"]);
-     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage'");
+     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='$ipage' AND language='".db_escape($_SESSION["language"])."'");
     
      if(db_num_rows($query) > 0){
          while($row = db_fetch_object($query)){
@@ -153,7 +153,7 @@ function meta_keywords($ipage = null){
 function meta_description($ipage = null){
      $status = check_status();
      $ipage = db_escape($_GET["seite"]);
-     $query = db_query("SELECT meta_description FROM " . tbname("content") . " WHERE systemname='$ipage'", $connection);
+     $query = db_query("SELECT meta_description FROM " . tbname("content") . " WHERE systemname='$ipage' AND language='".db_escape($_SESSION["language"])."'", $connection);
      if($ipage == ""){
          $query = db_query("SELECT * FROM " . tbname("content") . " ORDER BY id LIMIT 1", $connection);
          }
@@ -592,7 +592,7 @@ function get_autor(){
          return;
          }
     
-     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_escape($seite) . "'", $connection);
+     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_escape($seite) . "' AND language='".db_escape($_SESSION["language"])."'", $connection);
      if(db_num_rows($query) < 1){
          return;
          }
@@ -626,8 +626,13 @@ function get_page($systemname = ""){
          $systemname = get_frontpage();
     
     
-     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_escape($systemname) . "'");
-     return db_fetch_assoc($query);
+     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_escape($systemname) . "' AND language='".db_escape($_SESSION["language"])."'");
+     if(db_num_rows($query) > 0){
+        return db_fetch_assoc($query);
+     }
+     else {
+        return null;
+     }
     }
 
 function content(){
@@ -669,11 +674,11 @@ function check_status(){
              }
          }
     
-     $test = db_query("SELECT * FROM `" . tbname("content") . "` WHERE systemname='" . db_escape($_GET["seite"]) . "'");
-     if(db_num_rows($test) == 0){
+     $test = get_page($_GET["seite"]);
+     if(is_null($test)){
          return "404 Not Found";
          }else{
-         $test_array = db_fetch_array($test);
+         $test_array = $test;
         
          // Prüfe, ob der Nutzer die Berechtigung zum Zugriff auf die Seite hat.
         if($test_array["active"] == 1 or $_SESSION["group"] >= 20){
