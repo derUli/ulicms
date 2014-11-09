@@ -768,8 +768,15 @@ function getAllPagesWithTitle(){
 
 
 // Get systemnames of all pages
-function getAllSystemNames(){
- $query = db_query("SELECT systemname,id FROM `" . tbname("content") . "` WHERE `deleted_at`IS NULL ORDER BY systemname");
+function getAllSystemNames($lang = null){
+if(!$lang){
+   $query = db_query("SELECT systemname,id FROM `" . tbname("content") .
+    "` WHERE `deleted_at` IS NULL ORDER BY systemname");
+ } else {
+ 
+   $query = db_query("SELECT systemname,id FROM `" . tbname("content") .
+    "` WHERE `deleted_at` IS NULL AND language ='".db_escape($lang)."' ORDER BY systemname");
+ }
  $returnvalues = Array();
  while($row = db_fetch_object($query)){
      array_push($returnvalues, $row -> systemname);
