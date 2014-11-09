@@ -13,7 +13,7 @@ include_once "../lib/workaround.php";
 <link rel="stylesheet" type="text/css" href="media/style.css"/>
 </head>
 <body>
-<p><img src="media/logo.png" alt="UliCMS" title="UliCMS"><strong style="margin-left:30px; float:right; font-size:18pt; font-family:impact;">Installation</strong></p>
+<p><img src="../admin/gfx/logo.png" alt="UliCMS" title="UliCMS"><strong style="margin-left:30px; float:right; font-size:18pt; font-family:impact;">Installation</strong></p>
 <hr/>
 <?php
 if(!isset($_POST["step"])){
@@ -355,7 +355,7 @@ pills";
 (10, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
 (11, 'meta_description', 'Eine kurzer Beschreibungstext'),
 (12, 'logo_disabled', 'no'),
-(13, 'logo_image', '0b27dc99b9875f306287bb3965c57304.png'),    
+(13, 'logo_image', '67cc042b9ee9eb28cdc81ae7d7420d8a.png'),    
 (14, 'motd', '<p>Willkommen bei <strong>UliCMS</strong>!<br/>
 Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_blank\">www.ulicms.de</a>.</p>'),
 (15, 'visitors_can_register', 'off'),
