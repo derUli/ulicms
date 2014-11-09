@@ -277,9 +277,14 @@ function apply_filter($text, $type){
      }
 
 
-function motto(){
-     echo htmlspecialchars(getconfig("motto"), ENT_QUOTES, "UTF-8");
+function get_motto(){
+     return htmlspecialchars(getconfig("motto"), ENT_QUOTES, "UTF-8");
      }
+     
+     
+function motto(){
+   echo get_motto();
+}
 
 
 function get_frontpage(){

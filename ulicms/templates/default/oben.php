@@ -56,3 +56,4 @@ else{
 <br/>
 <hr>
 <div class="content">
+<?php autor();?>

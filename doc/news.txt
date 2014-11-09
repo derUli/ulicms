@@ -6,11 +6,7 @@
   - Tabelle 'admins' in 'users' umbenannt
   - Nutzung von Fremdschlüsseln
 + Es können Links zu lokalen Seiten eingefügt werden
-+ API Funktionen hinzugefügt
-  - ulicms_redirect
-  - getPageTitleByID
-  - getStatusCodeByNumber
-  
++ diverse API Funktionen hinzugefügt
 + Optionen hinzugefügt
   - Gebe "generator" Meta-Tag aus
   - Design Optionen aktiviert
