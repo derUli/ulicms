@@ -13,7 +13,7 @@ include_once "../lib/workaround.php";
 <link rel="stylesheet" type="text/css" href="media/style.css"/>
 </head>
 <body>
-<p><img src="../admin/gfx/logo.png" alt="UliCMS" title="UliCMS"><strong style="margin-left:30px; float:right; font-size:18pt; font-family:impact;">Installation</strong></p>
+<p><img src="../admin/gfx/logo.png" alt="UliCMS" title="UliCMS"><strong style="margin-left:30px; float:right; font-size:18pt;">Installation</strong></p>
 <hr/>
 <?php
 if(!isset($_POST["step"])){
