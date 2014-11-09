@@ -34,7 +34,6 @@
             
              }
         
-         $pages = getAllSystemNames();
         
         ?>
 <h1>Startseite</h1>
@@ -54,7 +53,11 @@
 <td>
 <select name="frontpage_<?php echo $lang;
             ?>" size=1 style="width:400px">
-<?php for($i = 0; $i < count($pages);$i++){
+<?php
+
+         $pages = getAllSystemNames($lang);
+ 
+   for($i = 0; $i < count($pages);$i++){
                  if($pages[$i] == $frontpages[$lang]){
                      echo "<option value='" . $pages[$i] . "' selected='selected'>" . $pages[$i] . "</option>";
                      }else{
