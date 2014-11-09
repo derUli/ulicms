@@ -142,8 +142,12 @@ function meta_keywords($ipage = null){
                  }
              }
          }
+        $meta_keywords = getconfig("meta_keywords_".$_SESSION["language"]);
+    if(!$meta_keywords){
+       $meta_keywords = getconfig("meta_keywords");
+    }
     
-     return getconfig("meta_keywords");
+     return $meta_keywords;
      }
 
 function meta_description($ipage = null){
@@ -163,8 +167,12 @@ function meta_description($ipage = null){
         
          }
     
+    $meta_description = getconfig("meta_description_".$_SESSION["language"]);
+    if(!$meta_description){
+       $meta_description = getconfig("meta_description");
+    }
     
-     return getconfig("meta_description");
+     return $meta_description;
      }
 
 
