@@ -269,3 +269,11 @@ define("TRANSLATION_FULL_NAME", "Volle Bezeichnung");
 define("TRANSLATION_ADD_LANGUAGE", "Sprache hinzufügen");
 define("TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE", "Die Standardsprache kann nicht gelöscht werden.");
 define("TRANSLATION_DELETE_LANGUAGE_REALLY", "Möchten Sie die Sprache %name% wirklich löschen?");
+
+// Sonstige Einstellungen
+define("TRANSLATION_SHORTCUTS", "Tastenkombinationen");
+define("TRANSLATION_MOVE_MENU_ITEMS", "Menüeinträge verschieben");
+define("TRANSLATION_DOMAIN2LANGUAGE_MAPPING", "Domain2Language Mapping");
+define("TRANSLATION_ADDITIONAL_META_TAGS", "Zusätzliche Metatags");
+define("TRANSLATION_EMAIL_DELIVERY", "E-Mail Versand");
+define("TRANSLATION_EXPERT_SETTINGS", "Experteneinstellungen");
