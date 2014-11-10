@@ -225,6 +225,7 @@ define("TRANSLATION_BACKGROUNDCOLOR", "Background color");
 define("TRANSLATION_TITLE_FORMAT", "Page title format");
 
 // Spamfilter Einstellungen
+define("TRANSLATION_ENABLED", "Spamfilter enabled");
 define("TRANSLATION_BLACKLIST", "Black list");
 define("TRANSLATION_SPAM_COUNTRIES", "Users from the following countries may <strong>not</strong> write comments.");
 define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Disallow chinese chars");

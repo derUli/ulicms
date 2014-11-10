@@ -6,7 +6,7 @@
 <input type="checkbox" id="spamfilter_enabled" name="spamfilter_enabled"<?php if(getconfig("spamfilter_enabled") == "yes"){
          echo " checked";
          }
-     ?> value="yes" onChange="spamFilterEnabledcheckboxChanged(this.checked)"> <label for="spamfilter_enabled">Spamfilter aktivieren</label>
+     ?> value="yes" onChange="spamFilterEnabledcheckboxChanged(this.checked)"> <label for="spamfilter_enabled"><?php echo TRANSLATION_ENABLED;?></label>
 <script type="text/javascript">
 function spamFilterEnabledcheckboxChanged(checked){
     if(checked){
@@ -40,12 +40,12 @@ function spamFilterEnabledcheckboxChanged(checked){
 <?php echo TRANSLATION_SPAM_COUNTRIES;?><br/>
 <input type="text" name="country_blacklist" value="<?php echo htmlspecialchars(getconfig("country_blacklist"));
      ?>">
-</div>
-<br/>
+<br/><br/>
 <input type="checkbox" name="disallow_chinese_chars" id="disallow_chinese_chars" <?php
     if(getconfig("disallow_chinese_chars")) echo " checked=\"checked\"";
     ?>> <label for="disallow_chinese_chars"><?php echo TRANSLATION_DISALLOW_CHINESE_CHARS;?></label>
 
+</div>
 <br/><br/>
 
 <input type="submit" name="submit_spamfilter_settings" value="<?php echo TRANSLATION_SAVE_CHANGES;?>"/>
