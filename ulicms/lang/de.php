@@ -94,3 +94,7 @@ wenn sich jemand mit meinem Benutzerkonto<br/>
 anmeldet");
 
 define("TRANSLATION_ABOUT_ME", "Über Mich");
+
+// Inhalte
+define("TRANSLATION_SELECT_CONTENT_TYPE", "Bitte wählen Sie einen Inhaltstyp aus");
+define("TRANSLATION_IMPORT_EXPORT", "Daten Import/Export");
