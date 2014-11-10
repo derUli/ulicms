@@ -107,3 +107,7 @@ define("TRANSLATION_NAME", "Name");
 define("TRANSLATION_CREATE", "Anlegen");
 define("TRANSLATION_SAVE", "Speichern");
 define("TRANSLATION_CATEGORIES_INFOTEXT", "Hier können Sie Kategorien anlegen, in die Sie dann Ihre Inhalte einsortieren können.");
+
+// Banner
+define("TRANSLATION_ADD_ADVERTISEMENT", "Banner hinzufügen");
+define("TRANSLATION_ADVERTISEMENT_INFOTEXT", "Hier können Sie die Werbebanner für Ihre Internetseite verwalten.");

@@ -32,10 +32,11 @@ $(window).load(function(){
 });
 </script>
 
-<h2>Werbebanner</h2>
-<p>Hier können Sie die Werbebanner für Ihre Internetseite verwalten.
+<h2><?php echo TRANSLATION_ADVERTISEMENTS;?></h2>
+<p>
+<?php echo TRANSLATION_ADVERTISEMENT_INFOTEXT;?>
 <br/><br/>
-<a href="index.php?action=banner_new">Banner hinzufügen</a><br/>
+<a href="index.php?action=banner_new"><?php echo TRANSLATION_ADD_ADVERTISEMENT;?></a><br/>
 </p>
 <p>Kategorie: 
 <?php
