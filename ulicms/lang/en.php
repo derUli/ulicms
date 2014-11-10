@@ -98,85 +98,84 @@ define("TRANSLATION_SELECT_CONTENT_TYPE", "Please select a content type");
 define("TRANSLATION_IMPORT_EXPORT", "Data Import and Export");
 
 // Kategorien
-define("TRANSLATION_CREATE_CATEGORY", "Kategorie anlegen");
-define("TRANSLATION_EDIT_CATEGORY", "Kategorie bearbeiten");
+define("TRANSLATION_CREATE_CATEGORY", "Create category");
+define("TRANSLATION_EDIT_CATEGORY", "Edit category");
 define("TRANSLATION_ID", "ID");
 define("TRANSLATION_NAME", "Name");
-define("TRANSLATION_CREATE", "Anlegen");
-define("TRANSLATION_SAVE", "Speichern");
-define("TRANSLATION_CATEGORIES_INFOTEXT", "Hier können Sie Kategorien anlegen, in die Sie dann Ihre Inhalte einsortieren können.");
+define("TRANSLATION_CREATE", "Create");
+define("TRANSLATION_SAVE", "Save");
+define("TRANSLATION_CATEGORIES_INFOTEXT", "You can create categories and you can categorize your content in categories.");
 
 // Generell
-define("TRANSLATION_DELETE", "Löschen");
-define("TRANSLATION_EDIT", "Bearbeiten");
-define("TRANSLATION_ASK_FOR_DELETE", "Wirklich löschen?");
-define("TRANSLATION_SAVE_CHANGES", "Änderungen speichern");
-define("TRANSLATION_CATEGORY", "Kategorie");
-define("TRANSLATION_PLEASE_SELECT", "Bitte auswählen");
-define("TRANSLATION_RECYCLE_BIN", "Papierkorb");
+define("TRANSLATION_DELETE", "Delete");
+define("TRANSLATION_EDIT", "Edit");
+define("TRANSLATION_ASK_FOR_DELETE", "Really delete this?");
+define("TRANSLATION_SAVE_CHANGES", "Save Changes");
+define("TRANSLATION_CATEGORY", "Category");
+define("TRANSLATION_PLEASE_SELECT", "Please select");
+define("TRANSLATION_RECYCLE_BIN", "Recycle bin");
 define("TRANSLATION_STANDARD", "Standard");
-define("TRANSLATION_EVERY", "Alle");
-define("TRANSLATION_NO_PERMISSIONS", "Sie haben nicht die Berechtigung, um auf diese Seite zugreifen zu dürfen.<br/>Bitte kontaktieren Sie den Administrator dieser Internetseite, damit er Ihnen die benötigten Rechte gibt.");
+define("TRANSLATION_EVERY", "Everything");
+define("TRANSLATION_NO_PERMISSIONS", "Access denied.");
 
-define("TRANSLATION_YES", "Ja");
-define("TRANSLATION_NO", "Nein");
+define("TRANSLATION_YES", "Yes");
+define("TRANSLATION_NO", "No");
 
 // Banner
-define("TRANSLATION_ADD_ADVERTISEMENT", "Banner hinzufügen");
-define("TRANSLATION_CANT_DELETE_ADMIN", "Der Admin kann nicht gelöscht werden.");
-define("TRANSLATION_ADVERTISEMENT_INFOTEXT", "Hier können Sie die Werbebanner für Ihre Internetseite verwalten.");
+define("TRANSLATION_ADD_ADVERTISEMENT", "Create banner");
+define("TRANSLATION_CANT_DELETE_ADMIN", "Can't delete admin user");
+define("TRANSLATION_ADVERTISEMENT_INFOTEXT", "Here you can manage advertisements.");
 define("TRANSLATION_GIF_BANNER", "GIF Banner");
 define("TRANSLATION_HTML_BANNER", "HTML Banner");
-define("TRANSLATION_BANNERTEXT", "Bannertext");
-define("TRANSLATION_IMAGE_URL", "Bild-URL");
-define("TRANSLATION_LINK_URL", "Link-URL");
+define("TRANSLATION_BANNERTEXT", "Banner text");
+define("TRANSLATION_IMAGE_URL", "Image URL");
+define("TRANSLATION_LINK_URL", "Link URL");
 define("TRANSLATION_HTML", "HTML");
-define("TRANSLATION_ADD_BANNER", "Banner hinzufügen");
-define("TRANSLATION_PREVIEW", "Vorschau");
+define("TRANSLATION_ADD_BANNER", "Add Banner");
+define("TRANSLATION_PREVIEW", "Preview");
 
 // Benutzer
-define("TRANSLATION_USERS_INFOTEXT", "Hier können Sie die Benutzer Ihrer Homepage verwalten und die Passwörter ändern.");
-define("TRANSLATION_CREATE_USER", "Benutzer anlegen");
-define("TRANSLATION_GROUP", "Gruppe");
-define("TRANSLATION_PASSWORD", "Passwort");
-define("TRANSLATION_SEND_LOGINDATA_BY_MAIL", "Die Zugangsdaten per E-Mail senden.");
+define("TRANSLATION_USERS_INFOTEXT", "You can create, edit and delete users here.");
+define("TRANSLATION_CREATE_USER", "Create user");
+define("TRANSLATION_GROUP", "Group");
+define("TRANSLATION_PASSWORD", "Password");
+define("TRANSLATION_SEND_LOGINDATA_BY_MAIL", "Send login data by mail");
 
 // Seitenverwaltung
-define("TRANSLATION_PAGES_INFOTEXT", "Hier können Sie die einzelnen Seiten Ihrer Homepage bearbeiten oder löschen.");
-define("TRANSLATION_CREATE_PAGE", "Seite verfassen");
-define("TRANSLATION_FILTER_BY_LANGUAGE", "Nach Sprache filtern");
+define("TRANSLATION_PAGES_INFOTEXT", "You can create, edit and delete your pages here.");
+define("TRANSLATION_CREATE_PAGE", "Create page");
+define("TRANSLATION_FILTER_BY_LANGUAGE", "Filter by language");
 define("TRANSLATION_STATUS", "Status");
-define("TRANSLATION_RECOVER", "Wiederherstellen");
+define("TRANSLATION_RECOVER", "Recover");
 define("TRANSLATION_PERMALINK", "Permalink");
-define("TRANSLATION_MENU", "Menü");
+define("TRANSLATION_MENU", "Menu");
 define("TRANSLATION_POSITION", "Position");
-define("TRANSLATION_PARENT", "Übergeordnete Seite");
-define("TRANSLATION_ACTIVATED", "Aktiv");
-define("TRANSLATION_DEACTIVATED", "Deaktiv");
-define("TRANSLATION_VIEW", "Anzeigen");
-define("TRANSLATION_PAGE_TITLE", "Seitentitel");
-define("TRANSLATION_ALTERNATE_TITLE", "Alternative Übeschrift");
-define("TRANSLATION_LANGUAGE", "Sprache");
-define("TRANSLATION_PAGE_TITLE", "Seitentitel");
+define("TRANSLATION_PARENT", "Parent");
+define("TRANSLATION_ACTIVATED", "Enabled");
+define("TRANSLATION_DEACTIVATED", "Disabled");
+define("TRANSLATION_VIEW", "View");
+define("TRANSLATION_PAGE_TITLE", "Page title");
+define("TRANSLATION_ALTERNATE_TITLE", "Alternate title");
+define("TRANSLATION_LANGUAGE", "Language");
 
 // Zusätzliche Optionen
-define("TRANSLATION_EXTERNAL_REDIRECT", "Weiterleitung auf externen Link");
-define("TRANSLATION_ADDITIONAL_SETTINGS", "Zusätzliche Optionen &gt;&gt;");
-define("TRANSLATION_MENU_IMAGE", "Menüpunkt als Grafik");
-define("TRANSLATION_HTML_FILE", "HTML-Datei als Inhalt");
+define("TRANSLATION_EXTERNAL_REDIRECT", "external redirect");
+define("TRANSLATION_ADDITIONAL_SETTINGS", "additional options &gt;&gt;");
+define("TRANSLATION_MENU_IMAGE", "menu entry as image");
+define("TRANSLATION_HTML_FILE", "html file as content");
 define("TRANSLATION_META_DESCRIPTION", "Meta Description");
 define("TRANSLATION_META_KEYWORDS", "Meta Keywords");
-define("TRANSLATION_COMMENTS", "Kommentare");
-define("TRANSLATION_OPEN_IN", "Öffnen in");
-define("TRANSLATION_CLEAR", "Leeren");
-define("TRANSLATION_VISIBLE_FOR", "Sichtbar für");
+define("TRANSLATION_COMMENTS", "Comments");
+define("TRANSLATION_OPEN_IN", "Target");
+define("TRANSLATION_CLEAR", "clear");
+define("TRANSLATION_VISIBLE_FOR", "visible for");
 
 // Gruppen
-define("TRANSLATION_CREATE_GROUP", "Gruppe erstellen");
-define("TRANSLATION_MAKE_GROUP_DEFAULT", "Die Gruppe %name% zum Standard für neue User machen?");
+define("TRANSLATION_CREATE_GROUP", "Create group");
+define("TRANSLATION_MAKE_GROUP_DEFAULT", "Make group %name% default for new users?");
 
 // Medien
-define("ULICMS_PLEASE_SELECT_FILETYPE", "Bitte wählen Sie einen Dateityp aus");
+define("ULICMS_PLEASE_SELECT_FILETYPE", "Plese select a file type");
 
 // Vorlagen
 define("ULICMS_TEMPLATE_INFO_TEXT", "Hier können Sie das Aussehen Ihrer Website durch Templates anpassen. Bitte vorsichtig beim Bearbeiten sein, wegen des enthaltenen PHP-Codes. Am Besten sollte diese Aufgabe von einem Profi übernommen werden.");
