@@ -342,3 +342,5 @@ define("TRANSLATION_FILE", "File");
 
 define("TRANSLATION_PERMISSIONS", "Permissions");
 define("TRANSLATION_SELECT_ALL", "Select All");
+
+define("TRANSLATION_FORMAT_TIME", "%d Days %02d:%02d:%02d Hours");
