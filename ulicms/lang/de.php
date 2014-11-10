@@ -191,3 +191,23 @@ define("TRANSLATION_INSTALLED_MODULES", "Installierte Module");
 define("TRANSLATION_INSTALLED_MODULES_INFO", "Hier finden Sie eine Auflistung der installierten Module.");
 define("TRANSLATION_INSTALLED_DESIGNS", "Installierte Designs");
 define("TRANSLATION_INSTALLED_DESIGNS_INFO", "Hier finden Sie eine Auflistung der installierten Designs.");
+
+// Grundeinstellungen 
+define("TRANSLATION_HOMEPAGE_TITLE", "Titel der Website");
+define("TRANSLATION_MOTTO", "Motto der Homepage");
+define("TRANSLATION_HOMEPAGE_OWNER", "Inhaber der Website");
+define("TRANSLATION_HIDE_LOGO", "Logo ausblenden");
+define("TRANSLATION_OWNER_MAILADRESS", "E-Mail Adresse des Administrators");
+define("TRANSLATION_FRONTPAGE", "Startseite");
+define("TRANSLATION_MAINTENANCE_MODE_ENABLED", "Wartungsmododus aktiviert");
+define("TRANSLATION_GUEST_CAN_REGISTER", "Gäste dürfen sich registrieren");
+define("TRANSLATION_DESCRIPTION", "Beschreibung");
+define("TRANSLATION_KEYWORDS", "Keywords");
+define("TRANSLATION_METADATA", "Meta-Daten");
+define("TRANSLATION_FIX_W3C_VALIDATION_ERRORS", "W3C Validierungsfehler automatisch korrigieren");
+define("TRANSLATION_TECHNICAL_STUFF", "Technisches");
+define("TRANSLATION_COMMENTING_SYSTEM", "Kommentarsystem");
+define("TRANSLATION_FACEBOOK_ID", "Facebook ID:");
+define("TRANSLATION_DISQUS_SHORTNAME", "Disqus Shortname");
+define("TRANSLATION_TIMEZONE", "Zeitzone");
+define("TRANSLATION_SEARCH_ENGINES", "Suchmaschinen");
