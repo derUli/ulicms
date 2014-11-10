@@ -178,56 +178,56 @@ define("TRANSLATION_MAKE_GROUP_DEFAULT", "Make group %name% default for new user
 define("ULICMS_PLEASE_SELECT_FILETYPE", "Plese select a file type");
 
 // Vorlagen
-define("ULICMS_TEMPLATE_INFO_TEXT", "Hier können Sie das Aussehen Ihrer Website durch Templates anpassen. Bitte vorsichtig beim Bearbeiten sein, wegen des enthaltenen PHP-Codes. Am Besten sollte diese Aufgabe von einem Profi übernommen werden.");
-define("TRANSLATION_PLEASE_SELECT_TEMPLATE", "Bitte wählen Sie ein Template aus:");
-define("TRANSLATION_CHANGES_WAS_SAVED", "Die Änderungen wurden gespeichert.");
+define("ULICMS_TEMPLATE_INFO_TEXT", "You can edit your website templates here. Please be careful, cause of the contained PHP code.");
+define("TRANSLATION_PLEASE_SELECT_TEMPLATE", "please select a template");
+define("TRANSLATION_CHANGES_WAS_SAVED", "Changes was saved.");
 
-define("TRANSLATION_INSTALL_PACKAGE", "Paket installieren");
-define("TRANSLATION_INSTALLED_MODULES", "Installierte Module");
-define("TRANSLATION_INSTALLED_MODULES_INFO", "Hier finden Sie eine Auflistung der installierten Module.");
-define("TRANSLATION_INSTALLED_DESIGNS", "Installierte Designs");
-define("TRANSLATION_INSTALLED_DESIGNS_INFO", "Hier finden Sie eine Auflistung der installierten Designs.");
+define("TRANSLATION_INSTALL_PACKAGE", "Install package");
+define("TRANSLATION_INSTALLED_MODULES", "Installed modules");
+define("TRANSLATION_INSTALLED_MODULES_INFO", "This is a list of the installed modules.");
+define("TRANSLATION_INSTALLED_DESIGNS", "Installed designs");
+define("TRANSLATION_INSTALLED_DESIGNS_INFO", "This is a list of all installed designs.");
 
 // Grundeinstellungen 
-define("TRANSLATION_HOMEPAGE_TITLE", "Titel der Website");
-define("TRANSLATION_MOTTO", "Motto der Homepage");
-define("TRANSLATION_HOMEPAGE_OWNER", "Inhaber der Website");
-define("TRANSLATION_HIDE_LOGO", "Logo ausblenden");
-define("TRANSLATION_OWNER_MAILADRESS", "E-Mail Adresse des Administrators");
-define("TRANSLATION_FRONTPAGE", "Startseite");
-define("TRANSLATION_MAINTENANCE_MODE_ENABLED", "Wartungsmododus aktiviert");
-define("TRANSLATION_GUEST_MAY_REGISTER", "Gäste dürfen sich registrieren");
-define("TRANSLATION_DESCRIPTION", "Beschreibung");
+define("TRANSLATION_HOMEPAGE_TITLE", "Site Title");
+define("TRANSLATION_MOTTO", "Site Slogan");
+define("TRANSLATION_HOMEPAGE_OWNER", "Site owner");
+define("TRANSLATION_HIDE_LOGO", "hide Logo");
+define("TRANSLATION_OWNER_MAILADRESS", "E-Mail Adress of Site Admin");
+define("TRANSLATION_FRONTPAGE", "Frontpage");
+define("TRANSLATION_MAINTENANCE_MODE_ENABLED", "Maintenance mode enabled");
+define("TRANSLATION_GUEST_MAY_REGISTER", "Guests can register");
+define("TRANSLATION_DESCRIPTION", "Description");
 define("TRANSLATION_KEYWORDS", "Keywords");
-define("TRANSLATION_METADATA", "Meta-Daten");
-define("TRANSLATION_FIX_W3C_VALIDATION_ERRORS", "W3C Validierungsfehler automatisch korrigieren");
-define("TRANSLATION_TECHNICAL_STUFF", "Technisches");
-define("TRANSLATION_COMMENTING_SYSTEM", "Kommentarsystem");
+define("TRANSLATION_METADATA", "Meta Data");
+define("TRANSLATION_FIX_W3C_VALIDATION_ERRORS", "fix W3C validation errors automatically");
+define("TRANSLATION_TECHNICAL_STUFF", "technical stuff");
+define("TRANSLATION_COMMENTING_SYSTEM", "Commenting system");
 define("TRANSLATION_FACEBOOK_ID", "Facebook ID");
 define("TRANSLATION_DISQUS_SHORTNAME", "Disqus Shortname");
-define("TRANSLATION_TIMEZONE", "Zeitzone");
-define("TRANSLATION_SEARCH_ENGINES", "Suchmaschinen");
+define("TRANSLATION_TIMEZONE", "Timezone");
+define("TRANSLATION_SEARCH_ENGINES", "Search engines");
 
-define("TRANSLATION_SEARCH_ENGINES_INDEX", "Suchmaschinen dürfen die Website durchsuchen");
-define("TRANSLATION_SEARCH_ENGINES_NOINDEX", "Suchmaschinen werden ausgesperrt");
+define("TRANSLATION_SEARCH_ENGINES_INDEX", "Search engines may index");
+define("TRANSLATION_SEARCH_ENGINES_NOINDEX", "search engines may not index");
 
 // Design
-define("TRANSLATION_DESIGN_OPTIONS_ENABLED", "Design Optionen aktiviert");
+define("TRANSLATION_DESIGN_OPTIONS_ENABLED", "Design Options enabled");
 define("TRANSLATION_FRONTEND_DESIGN", "Frontend Design");
 define("TRANSLATION_BACKEND_DESIGN", "Backend Design");
 define("TRANSLATION_EDITOR_SKIN", "Editor Skin");
-define("TRANSLATION_FONT_FAMILY", "Schriftart");
+define("TRANSLATION_FONT_FAMILY", "Font Family");
 define("TRANSLATION_ZOOM", "Zoom");
-define("TRANSLATION_FONT_SIZE", "Schriftgröße");
-define("TRANSLATION_HEADER_BACKGROUNDCOLOR", "Kopfzeile Hintergrundfarbe");
-define("TRANSLATION_FONT_COLOR", "Schriftfarbe");
-define("TRANSLATION_BACKGROUNDCOLOR", "Hintergrundfarbe");
-define("TRANSLATION_TITLE_FORMAT", "Seitentitel Format");
+define("TRANSLATION_FONT_SIZE", "Font Size");
+define("TRANSLATION_HEADER_BACKGROUNDCOLOR", "Header background color");
+define("TRANSLATION_FONT_COLOR", "Font Color");
+define("TRANSLATION_BACKGROUNDCOLOR", "Background color");
+define("TRANSLATION_TITLE_FORMAT", "Page title format");
 
 // Spamfilter Einstellungen
-define("TRANSLATION_BLACKLIST", "Schwarze Liste");
-define("TRANSLATION_SPAM_COUNTRIES", "Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren");
-define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Chinesische Schriftzeichen verbieten");
+define("TRANSLATION_BLACKLIST", "Black list");
+define("TRANSLATION_SPAM_COUNTRIES", "Users from the following countries may <strong>not</strong> write comments.");
+define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Disallow chinese chars");
 
 // Cache
 define("TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern, 
@@ -243,45 +243,45 @@ define("TRANSLATION_CACHE_TEXT3", "<p>Wenn Änderungen an der Website vorgenomme
 define("TRANSLATION_CACHE_WAS_CLEARED", "Der Cache wurde erfolgreich geleert.");
 
 // MOTD
-define("TRANSLATION_ALLOWED_HTML_TAGS", "Erlaubte HTML-Tags");
-define("TRANSLATION_MOTD_WAS_CHANGED", "Die Message Of the Day wurde geändert.");
+define("TRANSLATION_ALLOWED_HTML_TAGS", "allowed HTML-Tags");
+define("TRANSLATION_MOTD_WAS_CHANGED", "The message of the day was changed");
 
 // Logo
-define("TRANSLATION_YOUR_LOGO", "Ihr Logo");
-define("TRANSLATION_UPLOAD_NEW_LOGO", "Neues Logo hochladen");
-define("TRANSLATION_UPLOAD", "Hochladen");
+define("TRANSLATION_YOUR_LOGO", "Your Logo");
+define("TRANSLATION_UPLOAD_NEW_LOGO", "Upload new logo");
+define("TRANSLATION_UPLOAD", "Upload");
 define("TRANSLATION_LOGO_INFOTEXT", "Laden Sie ein beliebiges Logo hoch, welches im Head Bereich Ihrer Homepage angezeigt wird.<br/>
 Sie können das Logo in den Grundeinstellungen deaktivieren.<br/>
 Das Bild darf maximal 500 x 100 Pixel haben.");
-define("TRANSLATION_UPLOADED_IMAGE_TO_BIG", "Die von Ihnen hochgeladene Grafik ist zu groß.");
+define("TRANSLATION_UPLOADED_IMAGE_TO_BIG", "Your uploaded image was to big.");
 
 // Paketquelle
-define("TRANSLATION_OFFICIAL_PACKAGE_SOURCE", "Offizielle Paketquelle [packages.ulicms.de]");
-define("TRANSLATION_FROM_FILESYSTEM", "Aus dem Dateisystem");
-define("TRANSLATION_OTHER_PACKAGE_SOURCE", "Andere Paketquelle [URL]");
+define("TRANSLATION_OFFICIAL_PACKAGE_SOURCE", "official package source [packages.ulicms.de]");
+define("TRANSLATION_FROM_FILESYSTEM", "from filesystem");
+define("TRANSLATION_OTHER_PACKAGE_SOURCE", "Other package source [URL]");
 
 // Sprachen verwalten
-define("TRANSLATION_SHORTCODE", "Kürzel");
-define("TRANSLATION_FULL_NAME", "Volle Bezeichnung");
-define("TRANSLATION_ADD_LANGUAGE", "Sprache hinzufügen");
-define("TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE", "Die Standardsprache kann nicht gelöscht werden.");
-define("TRANSLATION_DELETE_LANGUAGE_REALLY", "Möchten Sie die Sprache %name% wirklich löschen?");
+define("TRANSLATION_SHORTCODE", "Shortcode");
+define("TRANSLATION_FULL_NAME", "Full name");
+define("TRANSLATION_ADD_LANGUAGE", "Add Language");
+define("TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE", "You can't delete the default language");
+define("TRANSLATION_DELETE_LANGUAGE_REALLY", "Do you really want to delete %name% language?");
 
 // Sonstige Einstellungen
-define("TRANSLATION_SHORTCUTS", "Tastenkombinationen");
-define("TRANSLATION_MOVE_MENU_ITEMS", "Menüeinträge verschieben");
+define("TRANSLATION_SHORTCUTS", "Shortcuts");
+define("TRANSLATION_MOVE_MENU_ITEMS", "Move menu entries");
 define("TRANSLATION_DOMAIN2LANGUAGE_MAPPING", "Domain2Language Mapping");
-define("TRANSLATION_ADDITIONAL_META_TAGS", "Zusätzliche Metatags");
-define("TRANSLATION_EMAIL_DELIVERY", "E-Mail Versand");
-define("TRANSLATION_EXPERT_SETTINGS", "Experteneinstellungen");
-define("TRANSLATION_CACHE_ENABLED", "Cache aktiviert");
-define("TRANSLATION_CACHE_VALIDATION_DURATION", "Cache Gültigkeitsdauer");
+define("TRANSLATION_ADDITIONAL_META_TAGS", "Additional Metatags");
+define("TRANSLATION_EMAIL_DELIVERY", "E-Mail Delivery");
+define("TRANSLATION_EXPERT_SETTINGS", "Expert Settings");
+define("TRANSLATION_CACHE_ENABLED", "Cache enabled");
+define("TRANSLATION_CACHE_VALIDATION_DURATION", "Cache validation duration");
 define("TRANSLATION_CACHE_ENGINE", "Caching Engine");
-define("TRANSLATION_REPLACE_SHORTCUTS", "Shortcuts ersetzen");
+define("TRANSLATION_REPLACE_SHORTCUTS", "Replace shortcuts");
 define("TRANSLATION_REPLACE_SHORTCUTS_INFO", "Standard-Tastenkombinationen des Browsers werden ersetzt, so dass Sie z.B. durch Drücken von Strg+S ebenfalls speichern können.");
 
-define("TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM", "Verschiebe alle Menüeinträge von");
-define("TRANSLATION_MOVE_ALL_MENU_ITEMS_TO", "nach");
+define("TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM", "Move all menu entries from ");
+define("TRANSLATION_MOVE_ALL_MENU_ITEMS_TO", "to");
 
 define("TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO", "<p>Hier können Sie Domains auf Sprachen mappen.</p>
 <p>
@@ -291,41 +291,41 @@ www.meinefirma.co.uk=>en<br/>
 www.meinefirma.fr=>fr
 </p>");
 define("TRANSLATION_SHOW_META_GENERATOR", "Gebe \"generator\" Meta-Tag aus");
-define("TRANSLATION_SMTP_SETTINGS", "SMTP Einstellungen");
+define("TRANSLATION_SMTP_SETTINGS", "SMTP Settings");
 define("TRANSLATION_HOSTNAME", "Hostname");
 define("TRANSLATION_PORT", "Port");
-define("TRANSLATION_AUTHENTIFACTION_REQUIRED", "Authentifizierung benötigt");
+define("TRANSLATION_AUTHENTIFACTION_REQUIRED", "Authentification required");
 define("TRANSLATION_USER", "User");
-define("TRANSLATION_PASSWORD", "Passwort");
+define("TRANSLATION_PASSWORD", "Password");
 
 // Update
 define("TRANSLATION_UPDATE_INFORMATION_TEXT", "Hier können Sie Ihr CMS Updaten, nachdem Sie alle Patch Dateien auf den Server geladen haben. Mehr Informationen über aktuelle Updates erhalten Sie auf www.ulicms.de");
-define("TRANSLATION_RUN_UPDATE", "Update durchführen");
+define("TRANSLATION_RUN_UPDATE", "Run update");
 define("TRANSLATION_UPDATE_NOTICE", "<span style=\"color:red\"><strong>Achtung!!!</strong> Bitte direkt nach der Durchführung des Updates die Datei <strong>update.php</strong> vom Server löschen, falls das nicht automatisch geschehen sollte.</span>
 ");
 
 // Login
-define("TRANSLATION_PLEASE_AUTHENTIFICATE", "Bitte authentifizieren Sie sich:");
+define("TRANSLATION_PLEASE_AUTHENTIFICATE", "please authentificate");
 define("TRANSLATION_LOGIN", "Login");
 
 // Paket installieren
-define("TRANSLATION_UPLOAD_FILE", "Datei hochladen");
-define("TRANSLATION_FROM_THE_PACKAGE_SOURCE", "Aus der Paketquelle");
-define("TRANSLATION_UPLOAD_PACKAGE", "Paket hochladen");
-define("TRANSLATION_LOADING_DATA", "Daten werden geladen.");
-define("TRANSLATION_AVAILABLE_PACKAGES", "Verfügbare Pakete");
-define("TRANSLATION_INSTALL", "Installieren");
-define("TRANSLATION_ERROR", "Fehler");
-define("TRANSLATION_PKGSRC_NOT_DEFINED", "pkg_src wurde nicht definiert!");
-define("TRANSLATION_NO_PACKAGES_AVAILABLE", "Keine Pakete verfügbar oder Paketquelle nicht erreichbar.");
-define("TRANSLATION_ASK_FOR_INSTALL_PACKAGE", "%pkg% installieren?\\nBestehende Dateien werden überschrieben.");
-define("TRANSLATION_NO_DESCRIPTION_AVAILABLE", "Keine Beschreibung verfügbar.");
+define("TRANSLATION_UPLOAD_FILE", "upload file");
+define("TRANSLATION_FROM_THE_PACKAGE_SOURCE", "from package source");
+define("TRANSLATION_UPLOAD_PACKAGE", "upload package");
+define("TRANSLATION_LOADING_DATA", "loading data...");
+define("TRANSLATION_AVAILABLE_PACKAGES", "available packages");
+define("TRANSLATION_INSTALL", "Install");
+define("TRANSLATION_ERROR", "Error");
+define("TRANSLATION_PKGSRC_NOT_DEFINED", "pkg_src is not defined.");
+define("TRANSLATION_NO_PACKAGES_AVAILABLE", "No packages available or package source not reachable");
+define("TRANSLATION_ASK_FOR_INSTALL_PACKAGE", "Install %pkg%?\\nExisting data will be overwritten.");
+define("TRANSLATION_NO_DESCRIPTION_AVAILABLE", "No description available");
 define("TRANSLATION_PHARDATA_NOT_AVAILABLE", "Eine für das Entpacken der Pakete benötigte PHP-Funktion ist nicht verfügbar.<br/>
 Bitte aktualisieren Sie die Serversoftware auf PHP Version 5.3.0 oder neuer.");
-define("TRANSLATION_NOTHING_TO_DO", "Nichts zu tun.");
-define("TRANSLATION_DOWNLOAD_FAILED", "Download fehlgeschlagen (%pkg%)");
-define("TRANSLATION_INSTALLATION_SUCCESSFULL", "Installation erfolgreich (%pkg%)");
-define("TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED", "Entpacken der Datei fehlgeschlagen (%pkg%)");
-define("TRANSLATION_PACKAGE_SUCCESSFULL_UPLOADED", "Das Paket \"%file%\" wurde erfolgreich installiert.");
-define("TRANSLATION_INSALLATION_FAILED", "Das Paket \"%file%\" konnte nicht installiert werden.");
-define("TRANSLATION_UPLOAD_FAILED", "Dateiupload fehlgeschlagen!");
+define("TRANSLATION_NOTHING_TO_DO", "Nothing to do");
+define("TRANSLATION_DOWNLOAD_FAILED", "Download failed (%pkg%)");
+define("TRANSLATION_INSTALLATION_SUCCESSFULL", "Installation successfull (%pkg%)");
+define("TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED", "Extracting file failed. (%pkg%)");
+define("TRANSLATION_PACKAGE_SUCCESSFULL_UPLOADED", "The package \"%file%\" was successfully installed.");
+define("TRANSLATION_INSALLATION_FAILED", "The package \"%file%\" could not be installed.");
+define("TRANSLATION_UPLOAD_FAILED", "File Upload failed!");
