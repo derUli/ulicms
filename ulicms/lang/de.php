@@ -177,3 +177,11 @@ define("TRANSLATION_VISIBLE_FOR", "Sichtbar für");
 // Gruppen
 define("TRANSLATION_CREATE_GROUP", "Gruppe erstellen");
 define("TRANSLATION_MAKE_GROUP_DEFAULT", "Die Gruppe %name% zum Standard für neue User machen?");
+
+// Medien
+define("ULICMS_PLEASE_SELECT_FILETYPE", "Bitte wählen Sie einen Dateityp aus");
+
+// Vorlagen
+define("ULICMS_TEMPLATE_INFO_TEXT", "Hier können Sie das Aussehen Ihrer Website durch Templates anpassen. Bitte vorsichtig beim Bearbeiten sein, wegen des enthaltenen PHP-Codes. Am Besten sollte diese Aufgabe von einem Profi übernommen werden.");
+define("TRANSLATION_PLEASE_SELECT_TEMPLATE", "Bitte wählen Sie ein Template aus:");
+define("TRANSLATION_CHANGES_WAS_SAVED", "Die Änderungen wurden gespeichert.");
