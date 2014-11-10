@@ -257,3 +257,8 @@ define("TRANSLATION_LOGO_INFOTEXT", "Laden Sie ein beliebiges Logo hoch, welches
 Sie können das Logo in den Grundeinstellungen deaktivieren.<br/>
 Das Bild darf maximal 500 x 100 Pixel haben.");
 define("TRANSLATION_UPLOADED_IMAGE_TO_BIG", "Die von Ihnen hochgeladene Grafik ist zu groß.");
+
+// Paketquelle
+define("TRANSLATION_OFFICIAL_PACKAGE_SOURCE", "Offizielle Paketquelle [packages.ulicms.de]");
+define("TRANSLATION_FROM_FILESYSTEM", "Aus dem Dateisystem");
+define("TRANSLATION_OTHER_PACKAGE_SOURCE", "Andere Paketquelle [URL]");
