@@ -136,7 +136,7 @@ function openMenuImageSelectWindow(field) {
 }
 </script>
 <input type="text" id="menu_image" name="menu_image" readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-    value="" style="width:300px;cursor:pointer" /> <a href="#" onclick="$('#menu_image').val('');return false;">Leeren</a>
+    value="" style="width:300px;cursor:pointer" /> <a href="#" onclick="$('#menu_image').val('');return false;"><?php echo TRANSLATION_CLEAR;?></a>
     
 <br/><br/>
 <strong><?php echo TRANSLATION_HTML_FILE;?></strong>
