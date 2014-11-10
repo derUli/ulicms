@@ -330,3 +330,6 @@ define("TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED", "Entpacken der Datei fehlgesc
 define("TRANSLATION_PACKAGE_SUCCESSFULL_UPLOADED", "Das Paket \"%file%\" wurde erfolgreich installiert.");
 define("TRANSLATION_INSALLATION_FAILED", "Das Paket \"%file%\" konnte nicht installiert werden.");
 define("TRANSLATION_UPLOAD_FAILED", "Dateiupload fehlgeschlagen!");
+
+// Info
+define("TRANSLATION_LICENSE", "Lizenz");

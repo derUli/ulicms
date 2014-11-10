@@ -24,7 +24,7 @@
 
 <input type="button" value="UliCMS Portal" onclick='window.open("http://www.ulicms.de");'/>
 
-<input type="button" value="Lizenz" onclick='window.open("license.html");'/>
+<input type="button" value="<?php echo TRANSLATION_LICENSE;?>" onclick='window.open("license.html");'/>
 
 <input type="button" value="Feedback" onclick='location.replace("http://www.ulicms.de/?seite=kontakt");'>
 <br/>
