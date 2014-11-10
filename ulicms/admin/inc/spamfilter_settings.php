@@ -1,4 +1,4 @@
-<h1>Spamfilter</h1>
+<h1><?php echo TRANSLATION_SPAMFILTER;?></h1>
 
 <?php if($acl -> hasPermission("spam_filter")){
      ?>
@@ -27,7 +27,7 @@ function spamFilterEnabledcheckboxChanged(checked){
      ?>>
 <br/>
 <br/>
-Schwarze Liste:<br/>
+<?php echo TRANSLATION_BLACKLIST;?><br/>
 <textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php
      echo htmlspecialchars(implode(
             explode("||", getconfig("spamfilter_words_blacklist")),
@@ -37,19 +37,18 @@ Schwarze Liste:<br/>
 
 <br/><br/>
 
-Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren:<br/>
+<?php echo TRANSLATION_SPAM_COUNTRIES;?><br/>
 <input type="text" name="country_blacklist" value="<?php echo htmlspecialchars(getconfig("country_blacklist"));
      ?>">
 </div>
 <br/>
-<br/>
 <input type="checkbox" name="disallow_chinese_chars" id="disallow_chinese_chars" <?php
     if(getconfig("disallow_chinese_chars")) echo " checked=\"checked\"";
-    ?>> <label for="disallow_chinese_chars">Chinesische Schriftzeichen verbieten</label>
+    ?>> <label for="disallow_chinese_chars"><?php echo TRANSLATION_DISALLOW_CHINESE_CHARS;?></label>
 
 <br/><br/>
 
-<input type="submit" name="submit_spamfilter_settings" value="Einstellungen Speichern"/>
+<input type="submit" name="submit_spamfilter_settings" value="<?php echo TRANSLATION_SAVE_CHANGES;?>"/>
 <?php
      if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
          ?>
@@ -66,7 +65,7 @@ $("#spamfilter_settings").ajaxForm({beforeSubmit: function(e){
   }, 
   success:function(e){
   $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+  $("#message").html("<span style=\"color:green;\"><?php echo TRANSLATION_CHANGES_WAS_SAVED;?></span>");
   }
   
 
@@ -77,5 +76,5 @@ $("#spamfilter_settings").ajaxForm({beforeSubmit: function(e){
 <?php
      }
 else{
-     echo "<p>Zugriff verweigert!</p>";
+     noperms();
      }
