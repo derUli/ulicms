@@ -122,18 +122,18 @@
 
                      
                      
-                     <p><a name="toggle_options" href="#toggle_options" onclick="$('#extra_options').slideToggle();">Zusätzliche Optionen &gt;&gt;</a></p>
+                     <p><a name="toggle_options" href="#toggle_options" onclick="$('#extra_options').slideToggle();"><?php echo TRANSLATION_ADDITIONAL_SETTINGS;?></a></p>
 <fieldset id="extra_options">
 
 
-<strong>Weiterleitung auf externen Link:</strong><br/>
+<strong><?php echo TRANSLATION_EXTERNAL_REDIRECT;?></strong><br/>
 <input type="text" style="width:300px;" name="redirection" value="<?php echo $row -> redirection;
              ?>">
 
 
 <br/><br/>
 
-<strong>Menüpunkt als Grafik</strong><br/>
+<strong><?php echo TRANSLATION_MENU_IMAGE;?></strong><br/>
 
 <script type="text/javascript">
 function openMenuImageSelectWindow(field) {
@@ -150,11 +150,11 @@ function openMenuImageSelectWindow(field) {
 }
 </script>
 <input type="text" id="menu_image" name="menu_image" readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-    value="<?php echo $row->menu_image;?>" style="width:300px;cursor:pointer" /> <a href="#" onclick="$('#menu_image').val('');return false;">Leeren</a>
+    value="<?php echo $row->menu_image;?>" style="width:300px;cursor:pointer" /> <a href="#" onclick="$('#menu_image').val('');return false;"><?php echo TRANSLATION_CLEAR;?></a>
     
 <br/><br/>
 
-<strong>HTML-Datei als Inhalt:</strong>
+<strong><?php echo TRANSLATION_HTML_FILE;?></strong>
 <br/>
 <input type="text" style="width:300px;" name="html_file" value="<?php echo $row -> html_file;
              ?>">
@@ -163,7 +163,7 @@ function openMenuImageSelectWindow(field) {
 
 
 
-<strong data-tooltip="Für welche Benutzergruppen soll diese Seite sichtbar sein?">Sichtbar für:</strong><br/>
+<strong><?php echo TRANSLATION_VISIBLE_FOR;?></strong><br/>
 <?php $access = explode(",", $row -> access);
              ?>
 <select name="access[]" size=4 multiple>
@@ -175,21 +175,20 @@ function openMenuImageSelectWindow(field) {
 
 <br/><br/>
 
-<strong data-tooltip="Eine kurze Beschreibung dieser Seite für Suchmaschinen">Meta Description:</strong><br/>
+<strong><?php echo TRANSLATION_META_DESCRIPTION;?></strong><br/>
 <input type="text" style="width:300px;" name="meta_description" value='<?php
                          echo htmlspecialchars($row -> meta_description);
                      ?>'>
 
 <br/><br/>
 
-<strong data-tooltip="Stichworte dieser Seite für Suchmaschinen
-Mit Komma getrennt">Meta Keywords:</strong><br/>
+<strong><?php echo TRANSLATION_META_KEYWORDS;?></strong><br/>
 <input type="text" style="width:300px;" name="meta_keywords" value='<?php
                      echo htmlspecialchars($row -> meta_keywords);
                      ?>'>
  
 <br/><br/>
-<strong data-tooltip="Sollen Kommentare aktiviert sein?">Kommentare:</strong><br/>
+<strong><?php echo TRANSLATION_COMMENTS;?></strong><br/>
 <select name="comments_enabled" size=1>
 <option value="1" <?php if($row -> comments_enabled == 1){
                          echo "selected";
@@ -203,7 +202,7 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 
 <br/><br/>
 
-<strong data-tooltip="In welchem Fenster soll diese Seite geöffnet werden?">Öffnen in</strong><br/>
+<strong><?php echo TRANSLATION_OPEN_IN;?></strong><br/>
 <select name="target" size=1>
 <option <?php if($row -> target == "_self"){
                          echo 'selected="selected" ';
