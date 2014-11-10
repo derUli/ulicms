@@ -7,7 +7,7 @@ $acl = new ACL();
 if($acl -> hasPermission("pages") or $acl -> hasPermission("banners") or $acl -> hasPermission("categories") or $acl -> hasPermission("export")){
      ?>
 
-<h2>Inhalte</h2>
+<h2><?php echo TRANSLATION_CONTENTS;?></h2>
 <p><strong><?php echo TRANSLATION_SELECT_CONTENT_TYPE;?></strong><br/>
 <?php if($acl -> hasPermission("pages")){
          ?>
