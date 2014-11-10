@@ -20,7 +20,7 @@ class categories
          $html = "<select name='category' id='category' size='1'>";
          if($allowNull){
              if($default == 0)
-                 $html .= "<option value='0' selected='selected' >[Alle]</option>";
+                 $html .= "<option value='0' selected='selected' >[".TRANSLATION_EVERY."]</option>";
              else
                  $html .= "<option value='0'>[Alle]</option>";
              }
