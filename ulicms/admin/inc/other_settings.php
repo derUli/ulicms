@@ -114,7 +114,7 @@ if(!is_admin()){
      ?>></div>
 <div class="label"><?php echo TRANSLATION_CACHE_VALIDATION_DURATION;?></div>
 <div class="inputWrapper"><input type="number" name="cache_period" min=1 max=20160 value="<?php echo $cache_period;
-     ?>"> Minuten</div>
+     ?>"> <?php echo TRANSLATION_MINUTES;?></div>
 
 <div class="label"><?php echo TRANSLATION_CACHE_ENGINE;?></div>
 <div class="inputWrapper"><select name="cache_type" size=1>

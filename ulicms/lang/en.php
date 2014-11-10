@@ -333,3 +333,6 @@ define("TRANSLATION_UPLOAD_FAILED", "File Upload failed!");
 
 // Info
 define("TRANSLATION_LICENSE", "License");
+
+// Weiter Übersetzungen
+define("TRANSLATION_MINUTES", "Minutes");
