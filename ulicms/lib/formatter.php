@@ -3,7 +3,7 @@ function formatTime($Sekundenzahl)
 { 
   $Sekundenzahl = abs($Sekundenzahl); // Ganzzahlwert bilden 
 
-  return sprintf("%d Tage %02d:%02d:%02d Stunden", 
+  return sprintf(TRANSLATION_FORMAT_TIME, 
                 $Sekundenzahl/60/60/24,($Sekundenzahl/60/60)%24,($Sekundenzahl/60)%60,$Sekundenzahl%60); 
 } 
 

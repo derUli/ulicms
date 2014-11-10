@@ -341,3 +341,4 @@ define("TRANSLATION_MINUTES", "Minuten");
 define("TRANSLATION_FILE", "Datei");
 define("TRANSLATION_PERMISSIONS", "Berechtigungen");
 define("TRANSLATION_SELECT_ALL", "Alles auswählen");
+define("TRANSLATION_FORMAT_TIME", "%d Tage %02d:%02d:%02d Stunden");
