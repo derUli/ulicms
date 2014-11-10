@@ -158,7 +158,6 @@ define("TRANSLATION_VIEW", "Anzeigen");
 define("TRANSLATION_PAGE_TITLE", "Seitentitel");
 define("TRANSLATION_ALTERNATE_TITLE", "Alternative Übeschrift");
 define("TRANSLATION_LANGUAGE", "Sprache");
-define("TRANSLATION_PAGE_TITLE", "Seitentitel");
 
 // Zusätzliche Optionen
 define("TRANSLATION_EXTERNAL_REDIRECT", "Weiterleitung auf externen Link");
