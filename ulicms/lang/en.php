@@ -284,9 +284,9 @@ define("TRANSLATION_REPLACE_SHORTCUTS_INFO", "Standard-Tastenkombinationen des B
 define("TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM", "Move all menu entries from ");
 define("TRANSLATION_MOVE_ALL_MENU_ITEMS_TO", "to");
 
-define("TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO", "<p>Hier können Sie Domains auf Sprachen mappen.</p>
+define("TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO", "<p>You can map domains to languages.</p>
 <p>
-Die Zuweisungen müssen in folgendem Format erfolgen:<br/>
+The mappings must be in the following format:<br/>
 www.meinefirma.de=>de<br/>
 www.meinefirma.co.uk=>en<br/>
 www.meinefirma.fr=>fr
