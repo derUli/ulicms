@@ -38,7 +38,7 @@ $(window).load(function(){
 <br/><br/>
 <a href="index.php?action=banner_new"><?php echo TRANSLATION_ADD_ADVERTISEMENT;?></a><br/>
 </p>
-<p>Kategorie: 
+<p><?php echo TRANSLATION_CATEGORY;?> 
 <?php
         echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
         ?>
@@ -47,9 +47,9 @@ $(window).load(function(){
 
 <tr style="font-weight:bold;">
 <td style="width:40px;">--></td>
-<td>Banner</td>
-<td>Bearbeiten</td>
-<td>Löschen</td>
+<td><?php echo TRANSLATION_ADVERTISEMENTS;?></td>
+<td><?php echo TRANSLATION_EDIT;?></td>
+<td><?php echo TRANSLATION_DELETE;?></td>
 </tr>
 <?php
         
