@@ -1,5 +1,19 @@
 <?php
 
+function getLanguageFilePath($lang = "de"){
+   return ULICMS_ROOT."/lang/".$lang.".php";
+}
+
+function getSystemLanguage(){
+   if(isset($_SESSION["system_language"])){
+      return $_SESSION["system_language"];
+   } else if(getconfig("system_language")){
+     return getconfig("system_language");
+   }
+      
+   return "de";
+   }
+
 
 function getStatusCodeByNumber($nr){
     $http_codes = array(
