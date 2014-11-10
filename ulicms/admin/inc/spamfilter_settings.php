@@ -26,7 +26,6 @@ function spamFilterEnabledcheckboxChanged(checked){
          }
      ?>>
 <br/>
-<br/>
 <?php echo TRANSLATION_BLACKLIST;?><br/>
 <textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php
      echo htmlspecialchars(implode(
