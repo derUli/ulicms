@@ -314,3 +314,12 @@ define("TRANSLATION_LOGIN", "Login");
 // Paket installieren
 define("TRANSLATION_UPLOAD_FILE", "Datei hochladen");
 define("TRANSLATION_FROM_THE_PACKAGE_SOURCE", "Aus der Paketquelle");
+define("TRANSLATION_UPLOAD_PACKAGE", "Paket hochladen");
+define("TRANSLATION_LOADING_DATA", "Daten werden geladen.");
+define("TRANSLATION_AVAILABLE_PACKAGES", "Verfügbare Pakete");
+define("TRANSLATION_INSTALL", "Installieren");
+define("TRANSLATION_ERROR", "Fehler");
+define("TRANSLATION_PKGSRC_NOT_DEFINED", "pkg_src wurde nicht definiert!");
+define("TRANSLATION_NO_PACKAGES_AVAILABLE", "Keine Pakete verfügbar oder Paketquelle nicht erreichbar.");
+define("TRANSLATION_ASK_FOR_INSTALL_PACKAGE", "%pkg% installieren?\\nBestehende Dateien werden überschrieben.");
+define("TRANSLATION_NO_DESCRIPTION_AVAILABLE", "Keine Beschreibung verfügbar.");

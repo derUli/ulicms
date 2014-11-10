@@ -1,8 +1,7 @@
 <?php if(!is_admin()){
+noperms();
      ?>
-<p>Zugriff verweigert</p>
 <?php
-     dir();
      }
 
 $pkg_src = getconfig("pkg_src");
@@ -14,8 +13,9 @@ include "../lib/file_get_contents_wrapper.php";
 <?php
 if(!$pkg_src){
      ?>
-<p><strong>Fehler:</strong> <br/>
-pkg_src wurde nicht definiert!</p>
+<p><strong><?php echo TRANSLATION_ERROR;?></strong> <br/>
+<?php echo TRANSLATION_PKGSRC_NOT_DEFINED;?>
+</p>
 <?php }else{
      include_once "../version.php";
      $version = new ulicms_version();
@@ -45,8 +45,8 @@ pkg_src wurde nicht definiert!</p>
     
      if(!$packageList or count($packageList) === 0){
          ?>
-<p><strong>Fehler:</strong> <br/>
-Keine Pakete verfügbar oder Paketquelle nicht erreichbar.</p>
+<p><strong><?php echo TRANSLATION_ERROR;?></strong> <br/>
+<?php echo TRANSLATION_NO_PACKAGES_AVAILABLE;?></p>
 
 <?php
          }else{
@@ -56,12 +56,12 @@ Keine Pakete verfügbar oder Paketquelle nicht erreichbar.</p>
              if(!empty($pkg)){
                  $pkgDescriptionURL = $pkg_src . "descriptions/" . $pkg . ".txt";
                 
-                 echo "<p><strong>" . $pkg . "</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('$pkg installieren?\\nBestehende Dateien werden überschrieben.');\"> [installieren]</a><br/>";
+                 echo "<p><strong>" . $pkg . "</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('".str_ireplace("%pkg%", $pkg, TRANSLATION_ASK_FOR_INSTALL_PACKAGE)."');\"> [".TRANSLATION_INSTALL."]</a><br/>";
                 
                  $pkgDescription = @file_get_contents_wrapper($pkgDescriptionURL);
                 
                  if(!$pkgDescription or strlen($pkgDescription) < 1)
-                     echo "Keine Beschreibung verfügbar.";
+                     echo TRANSLATION_NO_DESCRIPTION_AVAILABLE;
                  else
                      echo nl2br($pkgDescription);
                 
