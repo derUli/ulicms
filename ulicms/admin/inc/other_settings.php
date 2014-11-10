@@ -121,7 +121,7 @@ if(!is_admin()){
 <option value="file"<?php if($cache_type === "file" or !$cache_type){
          echo " selected";
          }
-     ?>>Datei</option>
+     ?>><?php echo TRANSLATION_FILE;?></option>
 <option value="cache_lite"<?php if($cache_type === "cache_lite"){
          echo " selected";
          }
