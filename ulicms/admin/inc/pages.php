@@ -189,20 +189,18 @@ $(window).load(function(){
                 
                  echo "<td><a href=\"../" . $row -> systemname . ".html\" target=\"_blank\"><img src=\"gfx/preview.gif\">Anzeigen</a></td>";
                  echo "<td>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
-                 if($_SESSION["group"] >= 40){
+           
                     
                      if($_SESSION["filter_status"] == "trash"){
-                         echo "<td>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img src="gfx/undelete.png"> Wiederherstellen</a></td>';
+                         echo "<td>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img src="gfx/undelete.png"> '.TRANSLATION_RECOVER.'</a></td>';
                          }
                     else
                         {
-                         echo "<td>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif">  Löschen</a></td>';
+                         echo "<td>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif"> '.TRANSLATION_DELETE.'</a></td>';
                         
                         
                          }
-                     }else{
-                     echo "<td><img src=\"gfx/delete.gif\"> Löschen</td>";
-                     }
+                    
                  echo '</tr>';
                 
                  }
