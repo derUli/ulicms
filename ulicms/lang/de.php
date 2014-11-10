@@ -152,8 +152,20 @@ define("TRANSLATION_MENU", "Menü");
 define("TRANSLATION_POSITION", "Position");
 define("TRANSLATION_PARENT", "Übergeordnete Seite");
 define("TRANSLATION_ACTIVATED", "Aktiv");
+define("TRANSLATION_DEACTIVATED", "Deaktiv");
 define("TRANSLATION_VIEW", "Anzeigen");
 define("TRANSLATION_PAGE_TITLE", "Seitentitel");
 define("TRANSLATION_ALTERNATE_TITLE", "Alternative Übeschrift");
 define("TRANSLATION_LANGUAGE", "Sprache");
 define("TRANSLATION_PAGE_TITLE", "Seitentitel");
+
+// Zusätzliche Optionen
+define("TRANSLATION_EXTERNAL_REDIRECT", "Weiterleitung auf externen Link");
+define("TRANSLATION_ADDITIONAL_SETTINGS", "Zusätzliche Optionen &gt;&gt;");
+define("TRANSLATION_MENU_IMAGE", "Menüpunkt als Grafik");
+define("TRANSLATION_HTML_FILE", "HTML-Datei als Inhalt");
+define("TRANSLATION_META_DESCRIPTION", "Meta Description");
+define("TRANSLATION_META_KEYWORDS", "Meta Keywords");
+define("TRANSLATION_COMMENTS", "Kommentare");
+define("TRANSLATION_OPEN_IN", "Öffnen in");
+define("TRANSLATION_CLEAR", "Leeren");
