@@ -119,6 +119,13 @@ define("TRANSLATION_CATEGORY", "Kategorie");
 define("TRANSLATION_ADD_ADVERTISEMENT", "Banner hinzufügen");
 define("TRANSLATION_CANT_DELETE_ADMIN", "Der Admin kann nicht gelöscht werden.");
 define("TRANSLATION_ADVERTISEMENT_INFOTEXT", "Hier können Sie die Werbebanner für Ihre Internetseite verwalten.");
+define("TRANSLATION_GIF_BANNER", "GIF Banner");
+define("TRANSLATION_HTML_BANNER", "HTML Banner");
+define("TRANSLATION_BANNERTEXT", "Bannertext");
+define("TRANSLATION_IMAGE_URL", "Bild-URL");
+define("TRANSLATION_LINK_URL", "Link-URL");
+define("TRANSLATION_HTML", "HTML");
+define("TRANSLATION_ADD_BANNER", "Banner hinzufügen");
 
 // Benutzer
 define("TRANSLATION_USERS_INFOTEXT", "Hier können Sie die Benutzer Ihrer Homepage verwalten und die Passwörter ändern.");
