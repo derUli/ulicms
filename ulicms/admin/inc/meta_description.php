@@ -36,7 +36,7 @@
         
         
         ?>
-<h1>Meta Beschreibung</h1>
+<h1><?php echo TRANSLATION_META_DESCRIPTION;?></h1>
 <form action="index.php?action=meta_description" id="meta_description" method="post">
 <table border=0>
 <tr>
