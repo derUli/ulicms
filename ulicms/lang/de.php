@@ -146,3 +146,4 @@ define("TRANSLATION_PAGES_INFOTEXT", "Hier können Sie die einzelnen Seiten Ihre
 define("TRANSLATION_CREATE_PAGE", "Seite verfassen");
 define("TRANSLATION_FILTER_BY_LANGUAGE", "Nach Sprache filtern");
 define("TRANSLATION_STATUS", "Status");
+define("TRANSLATION_RECOVER", "Wiederherstellen");
