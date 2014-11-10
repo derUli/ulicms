@@ -301,7 +301,7 @@ define("TRANSLATION_PASSWORD", "Password");
 // Update
 define("TRANSLATION_UPDATE_INFORMATION_TEXT", "Hier können Sie Ihr CMS Updaten, nachdem Sie alle Patch Dateien auf den Server geladen haben. Mehr Informationen über aktuelle Updates erhalten Sie auf www.ulicms.de");
 define("TRANSLATION_RUN_UPDATE", "Run update");
-define("TRANSLATION_UPDATE_NOTICE", "<span style=\"color:red\"><strong>Achtung!!!</strong> Bitte direkt nach der Durchführung des Updates die Datei <strong>update.php</strong> vom Server löschen, falls das nicht automatisch geschehen sollte.</span>
+define("TRANSLATION_UPDATE_NOTICE", "<span style=\"color:red\"><strong>Attention!!!</strong> Please remove <strong>update.php</strong> after update from server, if that doesn't happend automatically.</span>
 ");
 
 // Login
