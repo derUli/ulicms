@@ -44,7 +44,8 @@ define("TRANSLATION_TEMPLATES", "Vorlagen");
 define("TRANSLATION_TOP", "Oben");
 define("TRANSLATION_BOTTOM", "Unten");
 define("TRANSLATION_MAINTENANCE_PAGE", "Wartungsseite");
-define("TRANSLATION_CSS", "CSS");define("TRANSLATION_ADDITIONAL_FUNCTIONS", "Benutzerdefinierte Funktionen");
+define("TRANSLATION_CSS", "CSS");
+define("TRANSLATION_ADDITIONAL_FUNCTIONS", "Benutzerdefinierte Funktionen");
 
 define("TRANSLATION_PACKAGES", "Pakete");
 define("TRANSLATION_UPDATE", "Update");
@@ -64,3 +65,18 @@ define("TRANSLATION_DESIGN_SETTINGS", "Design");
 
 define("TRANSLATION_INFO", "Info");
 define("TRANSLATION_LOGOUT", "Logout");
+
+// Profil bearbeiten
+define("TRANSLATION_USERNAME", "Benutzername");
+define("TRANSLATION_LASTNAME", "Nachname");
+define("TRANSLATION_FIRSTNAME", "Vorname");
+define("TRANSLATION_EMAIL", "E-Mail");
+define("TRANSLATION_NEW_PASSWORD", "Neues Passwort");
+define("TRANSLATION_USERGROUP", "Benutzergruppe");
+define("TRANSLATION_ICQ", "ICQ");
+define("TRANSLATION_SKYPE", "Skype");
+define("TRANSLATION_NOTIFY_ON_LOGIN", "Benachrichtige mich per E-Mail,<br/>
+wenn sich jemand mit meinem Benutzerkonto<br/>
+anmeldet");
+
+define("TRANSLATION_ABOUT_ME", "Über Mich");
