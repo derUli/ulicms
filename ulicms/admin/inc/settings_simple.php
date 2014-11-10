@@ -15,51 +15,50 @@
         
          ?>
 
-<h2>Grundeinstellungen</h2>
+<h2><?php echo TRANSLATION_GENERAL_SETTINGS;?></h2>
 <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
 <form id="settings_simple" action="index.php?action=save_settings" method="post">
 <table border=1>
 <tr>
-<td><strong>Titel der Homepage:</strong></td>
-<td><a href="index.php?action=homepage_title">Titel der Homepage festlegen</a></td>
+<td><strong><?php echo TRANSLATION_HOMEPAGE_TITLE;?></strong></td>
+<td><a href="index.php?action=homepage_title"><?php echo TRANSLATION_EDIT;?></a></td>
 </tr>
 <tr>
-<td><strong>Motto der Homepage:</strong></td>
-<td><a href="index.php?action=motto">Motto der Homepage festlegen</a></td>
+<td><strong><?php echo TRANSLATION_MOTTO;?></strong></td>
+<td><a href="index.php?action=motto"><?php echo TRANSLATION_EDIT;?></a></td>
 </tr>
 <tr>
-<td><strong data-tooltip="Der Name des Inhabers dieser Webpräsenz...">Inhaber der Homepage:</strong></td>
+<td><strong><?php echo TRANSLATION_HOMEPAGE_OWNER;?></strong></td>
 <td><input type="text" name="homepage_owner" style="width:400px" value="<?php echo $settings["homepage_owner"];
          ?>"></td>
 </tr>
 <tr>
-<td><strong>Logo ausblenden:</strong></strong></td>
+<td><strong><?php echo TRANSLATION_HIDE_LOGO;?></strong></strong></td>
 <td>
 <select name="logo_disabled" style="width:400px" size=1>
-<option <?php if (getconfig("logo_disabled") == "yes") echo 'selected '?> value="yes">Ja</option>
-<option <?php if (getconfig("logo_disabled") != "yes") echo 'selected '?> value="no">Nein</option>
+<option <?php if (getconfig("logo_disabled") == "yes") echo 'selected '?> value="yes"><?php echo TRANSLATION_YES;?></option>
+<option <?php if (getconfig("logo_disabled") != "yes") echo 'selected '?> value="no"><?php echo TRANSLATION_NO;?></option>
 </select>
 </td>
 </tr>
 <tr>
-<td><strong data-tooltip="An diese Adresse werden Emails über das Kontaktformular versandt...">Emailadresse des Inhabers:</strong></td>
+<td><strong><?php echo TRANSLATION_OWNER_MAILADRESS;?></strong></td>
 <td><input type="text" name="email" style="width:400px" value="<?php echo $settings["email"];
              ?>"></td>
 </tr>
 <tr>
 <td>
-<strong data-tooltip="Dies ist die Startseite Ihres Internetauftritts...">Startseite</strong>
+<strong><?php echo TRANSLATION_FRONTPAGE;?></strong>
 </td>
 <td>
 
-<a href="index.php?action=frontpage_settings">
-Startseite festlegen</a>
+<a href="index.php?action=frontpage_settings"><?php echo TRANSLATION_EDIT;?></a>
 
 
 </td>
 </tr>
 <tr>
-<td><strong data-tooltip="Wenn Sie grundlegende Änderungen an Ihrer Webpräsenz vornehmen möchten, können Sie Ihre Seite solange für Besucher sperren und stattdessen eine Wartungsmeldung anzeigen. Diese können Sie in der Template maintenance.php anpassen.">Wartungsmodus aktiviert:</strong></td>
+<td><strong><?php echo TRANSLATION_MAINTENANCE_MODE_ENABLED;?></strong></td>
 <td><input type="checkbox" name="maintenance_mode" <?php
              if(strtolower($settings["maintenance_mode"] == "on") || $settings["maintenance_mode"] == "1" || strtolower($settings["maintenance_mode"]) == "true"){
                  echo " checked";
@@ -71,7 +70,7 @@ Startseite festlegen</a>
 ></strong></td>
 </tr>
 <tr>
-<td><strong data-tooltip="Dann können sich Gäste ein Benutzerkonto anlegen.">Gäste dürfen sich registrieren:</strong></td>
+<td><strong><?php echo TRANSLATION_GUEST_MAY_REGISTER;?></strong></td>
 <td><strong><input type="checkbox" name="visitors_can_register" <?php
              if(strtolower($settings["visitors_can_register"] == "on") ||
                      $settings["visitors_can_register"] == "1" ||
@@ -86,28 +85,28 @@ Startseite festlegen</a>
 </tr>
 <tr>
 <td></td>
-<td><strong data-tooltip="Zusätzliche Informationen die für Optimierung des Suchmaschinen-Rankings dienen...">Meta-Daten für Suchmaschinen:</strong></td>
+<td><strong><?php echo TRANSLATION_METADATA;?></strong></strong></td>
 </tr>
 <tr>
-<td><strong data-tooltip="Eine kurze Beschreibung der Website....">Beschreibung:</strong></td>
+<td><strong><?php echo TRANSLATION_DESCRIPTION;?></strong></td>
 <td>
-<a href="index.php?action=meta_description">Beschreibung festlegen</a>
+<a href="index.php?action=meta_description"><?php echo TRANSLATION_EDIT;?></a>
 </td>
 </tr>
 <tr>
-<td><strong data-tooltip="Stichwörter, die den Inhalt dieser Website beschreiben...">Keywords:</strong></td>
+<td><strong><?php echo TRANSLATION_KEYWORDS;?></strong></td>
 <td>
 
-<a href="index.php?action=meta_keywords">Keywords festlegen</a>
+<a href="index.php?action=meta_keywords"><?php echo TRANSLATION_EDIT;?></a>
 </td>
 </tr>
 <tr>
 <td></td>
-<td><strong>Technisches:</strong></td>
+<td><strong><?php echo TRANSLATION_TECHNICAL_STUFF;?></strong></td>
 </strong>
 </tr>
 <tr>
-<td><strong>W3C Validierungsfehler automatisch korrigieren</strong></td>
+<td><strong><?php echo TRANSLATION_FIX_W3C_VALIDATION_ERRORS;?></strong></td>
 <td><input type="checkbox" name="disable_html_validation" <?php
              if(!isset($settings["disable_html_validation"]))
                  echo " checked";
@@ -115,12 +114,11 @@ Startseite festlegen</a>
 </tr>
 <tr>
 <td></td>
-<td><strong>Kommentare:</strong>
+<td><strong><?php echo TRANSLATION_COMMENTS;?></strong>
 </td>
 </tr>
 <tr>
-<td><strong data-tooltip="Welches Kommentarsystem soll verwendet werden?
-UliCMS verf&uuml;gt &uuml;ber direkte Schnittstellen zu Facebook und Disqus">Kommentarsystem</td>
+<td><strong><?php echo TRANSLATION_COMMENTING_SYSTEM;?></td>
 <td>
 <select name="comment_mode" size=1 style="width:100%;">
 <!-- <option value="intern" <?php if($settings["comment_mode"] == "intern"){
@@ -143,20 +141,17 @@ UliCMS verf&uuml;gt &uuml;ber direkte Schnittstellen zu Facebook und Disqus">Kom
 </td>
 </tr>
 <tr>
-<td><strong data-tooltip="Die Facebook-ID wird ben&ouml;tigt, damit Sie wenn Sie wenn Sie die Kommentarfunktion von
-Facebook nutzen, die Kommentare moderieren k&ouml;nnen">Facebook-ID:</strong></td>
+<td><strong><?php echo TRANSLATION_FACEBOOK_ID;?></strong></td>
 <td><input type="text" name="facebook_id" value="<?php echo $settings["facebook_id"];
              ?>" style="width:400px">
 </tr>
 <tr>
-<td><strong data-tooltip="Der Disqus-Shortname wird ben&ouml;tigt, damit Sie Sie 
-die Kommentarfunktion von disqus verwenden k&ouml;nnen.
-Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</strong></td>
+<td><strong><?php echo TRANSLATION_DISQUS_SHORTNAME;?></strong></td>
 <td><input type="text" name="disqus_id" value="<?php echo $settings["disqus_id"];
              ?>" style="width:400px">
 </tr>
 <tr>
-<td><strong>Zeitzone:</strong></td>
+<td><strong><?php echo TRANSLATION_TIMEZONE;?></strong></td>
 <td>
 <select name="timezone" size=1 style="width:100%;">
 <?php
@@ -180,20 +175,20 @@ Daf&uuml;r ben&ouml;tigen Sie einen Account bei disqus.com">Disqus-Shortname:</s
 </td>
 </tr>
 <tr>
-<td><strong>Suchmaschinen:</strong></td>
+<td><strong><?php echo TRANSLATION_SEARCH_ENGINES;?></strong></td>
 <td>
 <select name="robots" size=1 style="width:100%;">
 <?php
              if(getconfig("robots") == "noindex,nofollow"){
                  ?>
    
-   <option value="index,follow">Suchmaschinen dürfen die Website durchsuchen</option>
-   <option value="noindex,nofollow" selected>Suchmaschinen werden ausgesperrt</option>
+   <option value="index,follow"><?php echo TRANSLATION_SEARCH_ENGINES_INDEX;?></option>
+   <option value="noindex,nofollow" selected><?php echo TRANSLATION_SEARCH_ENGINES_NOINDEX;?></option>
    
 <?php }else{
                  ?>
-   <option value="index,follow" selected>Suchmaschinen dürfen die Website durchsuchen</option>
-   <option value="noindex,nofollow">Suchmaschinen werden ausgesperrt</option>
+   <option value="index,follow" selected><?php echo TRANSLATION_SEARCH_ENGINES_INDEX;?></option>
+   <option value="noindex,nofollow"><?php echo TRANSLATION_SEARCH_ENGINES_NOINDEX;?></option>
 <?php }
              ?>
 </select>
