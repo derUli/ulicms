@@ -17,18 +17,17 @@
 
 <input type="hidden" name="page_id" value="<?php echo $row -> id?>">
 
-<strong data-tooltip="Dieser Name wird für die Adresse benötigt.
-Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong><br/>
-<input type="text" style="width:300px;" name="page_" value="<?php echo $row -> systemname?>">
+<strong><?php echo TRANSLATION_PERMALINK;?></strong><br/>
+<input type="text" style="width:300px;" name="page_" value="<?php echo $row -> systemname;?>">
 <br/><br/>
-<strong data-tooltip="Hier können Sie den Titel der Seite ändern">Seitentitel:</strong><br/>
+<strong><?php echo TRANSLATION_PAGE_TITLE;?></strong><br/>
 <input type="text" style="width:300px;" name="page_title" value='<?php
              echo htmlspecialchars($row -> title);
             
              ?>'>
 <br/><br/>
 
-<strong data-tooltip="Der Titel der Seite">Alternativer Titel:</strong><br/>
+<strong><?php echo TRANSLATION_ALTERNATE_TITLE;?></strong><br/>
 <input type="text" style="width:300px;" name="alternate_title" value="<?php
              echo htmlspecialchars($row -> alternate_title);
             
@@ -36,7 +35,7 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
 <small>Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll.</small>
 <br/><br/>
 
-<strong>Sprache:</strong>
+<strong><?php echo TRANSLATION_LANGUAGE;?></strong>
 <br/>
 <select name="language">
 <?php
@@ -60,14 +59,14 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
 
 <br/><br/>
 
-<strong>Kategorie:</strong><br/>
+<strong><?php echo TRANSLATION_CATEGORY;?></strong><br/>
 <?php
             echo categories :: getHTMLSelect($row -> category);
             ?>
 
 <br/><br/>
 
-<strong data-tooltip="In welchem Menü soll diese Seite angezeigt werden?">Menü</strong><br/>
+<strong><?php echo TRANSLATION_MENU;?></strong><br/>
 <select name="menu" size=1>
 <?php
              foreach(getAllMenus() as $menu){
@@ -84,12 +83,12 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
              ?>
 </select><br/><br/>
 
-<strong data-tooltip="Die Position dieser Seite im Menü">Position:</strong><br/>
+<strong data-tooltip="Die Position dieser Seite im Menü"><?php echo TRANSLATION_POSITION;?></strong><br/>
 <input type="text" name="position" value="<?php echo $row -> position;
              ?>">
               
 <br/><br/>
-<strong data-tooltip="Wenn das eine Unterseite werden sollte.">Übergeordnete Seite:</strong><br/>
+<strong data-tooltip="Wenn das eine Unterseite werden sollte."><?php echo TRANSLATION_PARENT;?></strong><br/>
 <select name="parent" size=1>
 <option value="NULL">-</option>
 <?php foreach(getAllSystemNames() as $systemname){
@@ -106,7 +105,7 @@ Beim Eingeben des Seitentitels wird er automatisch generiert">Permalink:</strong
 </select>
 <br/><br/>
 
-<strong data-tooltip="Soll die Seite für die Öffentlichkeit sichtbar sein?">aktiviert:</strong><br/>
+<strong><?php echo TRANSLATION_ACTIVATED;?></strong><br/>
 <select name="activated" size=1>
 <option value="1" <?php if($row -> active == 1){
                  echo "selected";
@@ -277,7 +276,7 @@ function confirmExit()
 <img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
 </div>
 
-<input type="submit" value="Speichern">
+<input type="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;?>">
 </div>
 
 <?php

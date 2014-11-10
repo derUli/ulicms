@@ -153,3 +153,7 @@ define("TRANSLATION_POSITION", "Position");
 define("TRANSLATION_PARENT", "Übergeordnete Seite");
 define("TRANSLATION_ACTIVATED", "Aktiv");
 define("TRANSLATION_VIEW", "Anzeigen");
+define("TRANSLATION_PAGE_TITLE", "Seitentitel");
+define("TRANSLATION_ALTERNATE_TITLE", "Alternative Übeschrift");
+define("TRANSLATION_LANGUAGE", "Sprache");
+define("TRANSLATION_PAGE_TITLE", "Seitentitel");
