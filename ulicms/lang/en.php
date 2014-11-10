@@ -173,6 +173,7 @@ define("TRANSLATION_VISIBLE_FOR", "visible for");
 // Gruppen
 define("TRANSLATION_CREATE_GROUP", "Create group");
 define("TRANSLATION_MAKE_GROUP_DEFAULT", "Make group %name% default for new users?");
+define("TRANSLATION_GROUP_DELETED", "Die Gruppe wurde erfolgreich gelöscht.");
 
 // Medien
 define("ULICMS_PLEASE_SELECT_FILETYPE", "Plese select a file type");

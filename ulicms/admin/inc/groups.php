@@ -57,7 +57,7 @@ if(!is_admin() and !$acl -> hasPermission("groups")){
              }
          }
      ?>
-<h1>Gruppen</h1>
+<h1><?php echo TRANSLATION_GROUPS;?></h1>
 <?php if($created){
          ?>
 <p style='color:green;'>Die Gruppe "<?php echo $name;
@@ -67,8 +67,7 @@ if(!is_admin() and !$acl -> hasPermission("groups")){
 
 <?php if($modified){
          ?>
-<p style='color:green;'>Die Gruppe "<?php echo $name;
-         ?>" wurde erfolgreich bearbeitet.</p>
+<p style='color:green;'><?php echo TRANSLATION_CHANGES_WAS_SAVED;?></p>
 <?php }
      ?>
 
