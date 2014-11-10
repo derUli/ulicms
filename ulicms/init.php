@@ -143,7 +143,7 @@ define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
 
 function noperms(){
- echo "<p>Sie haben nicht die Berechtigung, um auf diese Seite zugreifen zu dürfen.<br/>Bitte loggen Sie sich als <u>admin</u> ein oder fragen Sie den Administrator der Webseite.</p>";
+ echo "<p>".TRANSLATION_NO_PERMISSIONS."</p>";
  return false;
  }
 
