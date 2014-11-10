@@ -22,7 +22,7 @@ class categories
              if($default == 0)
                  $html .= "<option value='0' selected='selected' >[".TRANSLATION_EVERY."]</option>";
              else
-                 $html .= "<option value='0'>[Alle]</option>";
+                 $html .= "<option value='0'>[".TRANSLATION_EVERY."]</option>";
              }
          foreach($lst as $cat){
              if($cat["id"] == $default)
