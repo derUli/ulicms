@@ -277,3 +277,26 @@ define("TRANSLATION_DOMAIN2LANGUAGE_MAPPING", "Domain2Language Mapping");
 define("TRANSLATION_ADDITIONAL_META_TAGS", "Zusätzliche Metatags");
 define("TRANSLATION_EMAIL_DELIVERY", "E-Mail Versand");
 define("TRANSLATION_EXPERT_SETTINGS", "Experteneinstellungen");
+define("TRANSLATION_CACHE_ENABLED", "Cache aktiviert");
+define("TRANSLATION_CACHE_VALIDATION_DURATION", "Cache Gültigkeitsdauer");
+define("TRANSLATION_CACHE_ENGINE", "Caching Engine");
+define("TRANSLATION_REPLACE_SHORTCUTS", "Shortcuts ersetzen");
+define("TRANSLATION_REPLACE_SHORTCUTS_INFO", "Standard-Tastenkombinationen des Browsers werden ersetzt, so dass Sie z.B. durch Drücken von Strg+S ebenfalls speichern können.");
+
+define("TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM", "Verschiebe alle Menüeinträge von");
+define("TRANSLATION_MOVE_ALL_MENU_ITEMS_TO", "nach");
+
+define("TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO", "<p>Hier können Sie Domains auf Sprachen mappen.</p>
+<p>
+Die Zuweisungen müssen in folgendem Format erfolgen:<br/>
+www.meinefirma.de=>de<br/>
+www.meinefirma.co.uk=>en<br/>
+www.meinefirma.fr=>fr
+</p>");
+define("TRANSLATION_SHOW_META_GENERATOR", "Gebe \"generator\" Meta-Tag aus");
+define("TRANSLATION_SMTP_SETTINGS", "SMTP Einstellungen");
+define("TRANSLATION_HOSTNAME", "Hostname");
+define("TRANSLATION_PORT", "Port");
+define("TRANSLATION_AUTHENTIFACTION_REQUIRED", "Authentifizierung benötigt");
+define("TRANSLATION_USER", "User");
+define("TRANSLATION_PASSWORD", "Passwort");
