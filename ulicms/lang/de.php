@@ -310,3 +310,7 @@ define("TRANSLATION_UPDATE_NOTICE", "<span style=\"color:red\"><strong>Achtung!!
 // Login
 define("TRANSLATION_PLEASE_AUTHENTIFICATE", "Bitte authentifizieren Sie sich:");
 define("TRANSLATION_LOGIN", "Login");
+
+// Paket installieren
+define("TRANSLATION_UPLOAD_FILE", "Datei hochladen");
+define("TRANSLATION_FROM_THE_PACKAGE_SOURCE", "Aus der Paketquelle");
