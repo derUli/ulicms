@@ -33,7 +33,7 @@ else if($_SESSION["grp_sort"] == "name"){
      }
 
 ?>
-<p><a href="?action=groups&add=add">Neue Gruppe anlegen</a></p>
+<p><a href="?action=groups&add=add"><?php echo TRANSLATION_CREATE_GROUP;?></a></p>
 <?php if(count($groups) > 0){
      ?>
 <table>
