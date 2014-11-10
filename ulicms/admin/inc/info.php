@@ -26,7 +26,12 @@
 
 <input type="button" value="<?php echo TRANSLATION_LICENSE;?>" onclick='window.open("license.html");'/>
 
+
+<input type="button" value="Community" onclick='location.replace("http://www.ulicms.de/forum.html");'>
+
 <input type="button" value="Feedback" onclick='location.replace("http://www.ulicms.de/?seite=kontakt");'>
+
+ 
 <br/>
 
 
