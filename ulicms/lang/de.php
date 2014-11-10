@@ -7,8 +7,9 @@ define("TRANSLATION_LAST_CHANGES", "Letzte Änderungen");
 
 define("TRANSLATION_SITE_ONLINE_SINCE", "Alter dieser Website");
 define("TRANSLATION_PAGES_COUNT", "Anzahl der Seiten");
-define("TRANSLATION_USERS_COUNT", "Anzahl der Benutzer");
+define("TRANSLATION_REGISTERED_USERS_COUNT", "Anzahl der Benutzer");
 define("TRANSLATION_BLOCKED_SPAM_MAILS", "Blockierte Spam E-Mails");
+define("TRANSLATION_GUESTBOOK_ENTRIES", "Gästebucheinträge");
 
 define("TRANSLATION_TITLE", "Titel");
 define("TRANSLATION_VIEWS", "Aufrufe");

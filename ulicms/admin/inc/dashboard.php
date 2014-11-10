@@ -24,8 +24,13 @@ if($acl -> hasPermission("dashboard")){
          $users_online = db_query("SELECT * FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
         
          ?>
-<p>Hallo <?php echo $_SESSION["firstname"] . " " . $_SESSION["lastname"];
-         ?>! [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
+<p><?php 
+$str = TRANSLATION_HELLO_NAME;
+$str = str_ireplace("%firstname%", $_SESSION["firstname"], $str);
+$str = str_ireplace("%lastname%", $_SESSION["lastname"], $str);
+echo $str;
+?>
+ [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
 </p>
 
 
@@ -38,7 +43,7 @@ if($acl -> hasPermission("dashboard")){
 
 <div id="accordion-container"> 
 
-<h2 class="accordion-header">Nachricht des Tages</h2>
+<h2 class="accordion-header"><?php echo TRANSLATION_MOTD;?></h2>
 <div class="accordion-content">
 <?php echo $motd;
              ?>
@@ -59,7 +64,7 @@ if($acl -> hasPermission("dashboard")){
              </div>
 <?php }
          ?>
-<h2 class="accordion-header">Statistiken</h2>      
+<h2 class="accordion-header"><?php echo TRANSLATION_STATISTICS;?></h2>      
 <div class="accordion-content">
 <table border=1>    
 <?php 
@@ -69,23 +74,23 @@ $time = time() - $installed_at;
 $formatted = formatTime($time);
 ?>
 <tr>
-<td>Alter dieser Website:</td>
+<td><?php echo TRANSLATION_SITE_ONLINE_SINCE;?></td>
 <td><?php echo $formatted;?></td>
 </tr>
 <?php }?>
 <tr>
-<td>Anzahl der Seiten</td>
+<td><?php echo TRANSLATION_PAGES_COUNT;?></td>
 <td><?php echo $pages_count?></td>
 </tr>
 <tr>
-<td>Registrierte Benutzer</td>
+<td><?php echo TRANSLATION_REGISTERED_USERS_COUNT;?></td>
 <td><?php echo count(getUsers())?></td>
 </tr>
 
 <?php if(getconfig("contact_form_refused_spam_mails") !== false){
              ?>
 <tr>
-<td>Blockierte Spam-Mails</td>
+<td><?php echo TRANSLATION_BLOCKED_SPAM_MAILS;?></td>
 <td><?php echo getconfig("contact_form_refused_spam_mails")?></td>
 </tr>
 <?php
@@ -95,14 +100,14 @@ $formatted = formatTime($time);
          if($test){
              ?>
 <tr>
-<td>Gästebucheinträge</td>
+<td><?php echo TRANSLATION_GUESTBOOK_ENTRIES;?></td>
 <td><?php echo db_num_rows($test)?></td>
 </tr>
 <?php }
          ?>
 </table>
 </div>
-<h2 class="accordion-header">Jetzt online sind</h2>
+<h2 class="accordion-header"><?php echo TRANSLATION_ONLINE_NOW;?></h2>
 <div class="accordion-content">
 <ul id="users_online">
 <?php include_once "inc/users_online_dashboard.php";
