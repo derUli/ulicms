@@ -1,6 +1,6 @@
 <h2>CMS Login</h2>
 <div id="login">
-<h3>Bitte authentifizieren Sie sich:</h3>
+<h3><?php echo TRANSLATION_PLEASE_AUTHENTIFICATE;?></h3>
 <form action="index.php" method="post">
 <input type="hidden" name="login" value="login">
 <?php if(!empty($_REQUEST["go"])){
@@ -11,16 +11,16 @@
 ?>
 <table style="border:0px;">
 <tr>
-<td width="100px"><strong><strong>Benutzername:</strong></td>
+<td width="100px"><strong><strong><?php echo TRANSLATION_USERNAME;?></strong></td>
 <td><input type="text" name="user" value="" style="width:200px;"></td>
 </tr>
 <tr>
-<td width="100px"><strong><strong>Passwort:</strong></td>
+<td width="100px"><strong><strong><?php echo TRANSLATION_PASSWORD;?></strong></td>
 <td><input type="password" name="password" value="" style="width:200px;"></td>
 </tr>
 <tr>
 <td></td>
-<td style="padding-top:10px; text-align:center;"><input style="width:100%;" type="submit" value="Login"></td>
+<td style="padding-top:10px; text-align:center;"><input style="width:100%;" type="submit" value="<?php echo TRANSLATION_LOGIN;?>"></td>
 </tr>
 </table>
 </form>

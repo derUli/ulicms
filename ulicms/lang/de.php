@@ -306,3 +306,7 @@ define("TRANSLATION_UPDATE_INFORMATION_TEXT", "Hier können Sie Ihr CMS Updaten,
 define("TRANSLATION_RUN_UPDATE", "Update durchführen");
 define("TRANSLATION_UPDATE_NOTICE", "<span style=\"color:red\"><strong>Achtung!!!</strong> Bitte direkt nach der Durchführung des Updates die Datei <strong>update.php</strong> vom Server löschen, falls das nicht automatisch geschehen sollte.</span>
 ");
+
+// Login
+define("TRANSLATION_PLEASE_AUTHENTIFICATE", "Bitte authentifizieren Sie sich:");
+define("TRANSLATION_LOGIN", "Login");
