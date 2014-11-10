@@ -15,7 +15,7 @@
 <input type="hidden" name="edit_admin" value="edit_admin">
 <input type="hidden" name="id" value="<?php echo $row -> id;
              ?>">
-<strong data-tooltip="Dieser Name wird zur Anmeldung benötigt. Er ist nicht änderbar.">Benutzername:</strong><br/>
+<strong><?php echo TRANSLATION_USERNAME;?></strong><br/>
 <input type="text" style="width:300px;" name="admin_username" value="<?php echo $row -> username;
              ?>" <?php if(!$acl -> hasPermission("users")){
                  ?>readonly="readonly"<?php }
@@ -28,23 +28,23 @@
 <?php
                  }
              ?>
-Avatar hochladen:<br/>
+<?php echo TRANSLATION_UPLOAD_AVATAR;?><br/>
 <input type="file" name="avatar_upload" accept="image/jpeg"><br>
-<small>Nur JPEG-Grafiken werden akzeptiert</small>
+<small><?php echo TRANSLATION_ONLY_JPEG;?></small>
 
 <br/>                             
 <br/>
-<strong>Nachname:</strong><br/>
+<strong><?php echo TRANSLATION_LASTNAME;?></strong><br/>
 <input type="text" style="width:300px;" name="admin_lastname" value="<?php echo $row -> lastname;
              ?>">
 <br/><br/>
-<strong>Vorname:</strong><br/>
+<strong><?php echo TRANSLATION_FIRSTNAME;?></strong><br/>
 <input type="text" style="width:300px;" name="admin_firstname" value="<?php echo $row -> firstname;
              ?>"><br/><br/>
-<strong>Email:</strong><br/>
+<strong><?php echo TRANSLATION_EMAIL;?></strong><br/>
 <input type="text" style="width:300px;" name="admin_email" value="<?php echo $row -> email;
              ?>"><br/><br/>
-<strong>neues Passwort:</strong><br/>
+<strong><?php echo TRANSLATION_NEW_PASSWORD;?></strong><br/>
 <input type="text" style="width:300px;" name="admin_password" value=""> <br/>
 <?php
              $acl = new ACL();
@@ -54,7 +54,7 @@ Avatar hochladen:<br/>
                  asort($allGroups);
                  ?>
 <br>
-<strong>Benutzergruppe:</strong>
+<strong><?php echo TRANSLATION_USERGROUP;?></strong>
 <br/>
 <select name="group_id">
 <option value="-" <?php if($row -> group_id === null){
@@ -96,23 +96,22 @@ Avatar hochladen:<br/>
 <br/>
 
 
-<strong>ICQ:</strong>   <br/>
+<strong><?php echo TRANSLATION_ICQ;?></strong>   <br/>
 <input type="text" name="icq_id" value="<?php echo $row -> icq_id?>">
 
 <br/><br/>
-<strong>Skype:</strong>   <br/>
+<strong><?php echo TRANSLATION_SKYPE;?></strong>   <br/>
 <input type="text" name="skype_id" value="<?php echo $row -> skype_id?>">
 
 <br/><br/>
 <input type="checkbox" id="notify_on_login" name="notify_on_login" <?php
 if($row -> notify_on_login){
 echo "checked='checked'";
-}?>><strong> <label for="notify_on_login">Benachrichtige mich per E-Mail,<br/>
-wenn sich jemand mit meinem Benutzerkonto<br/>anmeldet</label></strong>
+}?>><strong> <label for="notify_on_login"><?php echo TRANSLATION_NOTIFY_ON_LOGIN;?></label></strong>
 <br/>
 <br/>
 
-<strong>Über Mich:</strong><br/>
+<strong><?php echo TRANSLATION_ABOUT_ME;?></strong><br/>
 <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
 
 

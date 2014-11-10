@@ -68,6 +68,9 @@ define("TRANSLATION_LOGOUT", "Logout");
 
 // Profil bearbeiten
 define("TRANSLATION_USERNAME", "Benutzername");
+define("TRANSLATION_UPLOAD_AVATAR", "Avatar hochladen");
+
+
 define("TRANSLATION_LASTNAME", "Nachname");
 define("TRANSLATION_FIRSTNAME", "Vorname");
 define("TRANSLATION_EMAIL", "E-Mail");
@@ -75,6 +78,7 @@ define("TRANSLATION_NEW_PASSWORD", "Neues Passwort");
 define("TRANSLATION_USERGROUP", "Benutzergruppe");
 define("TRANSLATION_ICQ", "ICQ");
 define("TRANSLATION_SKYPE", "Skype");
+define("TRANSLATION_ONLY_JPEG", "Nur JPEG-Grafiken werden akzeptiert.");
 define("TRANSLATION_NOTIFY_ON_LOGIN", "Benachrichtige mich per E-Mail,<br/>
 wenn sich jemand mit meinem Benutzerkonto<br/>
 anmeldet");
