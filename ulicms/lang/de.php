@@ -124,3 +124,5 @@ define("TRANSLATION_ADVERTISEMENT_INFOTEXT", "Hier können Sie die Werbebanner f
 define("TRANSLATION_USERS_INFOTEXT", "Hier können Sie die Benutzer Ihrer Homepage verwalten und die Passwörter ändern.");
 define("TRANSLATION_CREATE_USER", "Benutzer anlegen");
 define("TRANSLATION_GROUP", "Gruppe");
+define("TRANSLATION_PASSWORD", "Passwort");
+define("TRANSLATION_SEND_LOGINDATA_BY_MAIL", "Die Zugangsdaten per E-Mail senden.");
