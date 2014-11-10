@@ -98,3 +98,12 @@ define("TRANSLATION_ABOUT_ME", "Über Mich");
 // Inhalte
 define("TRANSLATION_SELECT_CONTENT_TYPE", "Bitte wählen Sie einen Inhaltstyp aus");
 define("TRANSLATION_IMPORT_EXPORT", "Daten Import/Export");
+
+// Kategorien
+define("TRANSLATION_CREATE_CATEGORY", "Kategorie anlegen");
+define("TRANSLATION_EDIT_CATEGORY", "Kategorie bearbeiten");
+define("TRANSLATION_ID", "ID");
+define("TRANSLATION_NAME", "Name");
+define("TRANSLATION_CREATE", "Anlegen");
+define("TRANSLATION_SAVE", "Speichern");
+define("TRANSLATION_CATEGORIES_INFOTEXT", "Hier können Sie Kategorien anlegen, in die Sie dann Ihre Inhalte einsortieren können.");

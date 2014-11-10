@@ -40,10 +40,10 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
     if(!isset($_GET["add"]) and !isset($_GET["edit"])){
         ?>
 
-<h2>Kategorien</h2>
-<p>Hier können Sie Kategorien anlegen, in die Sie dann Ihre Inhalte einsortieren können.</p>
+<h2><?php echo TRANSLATION_CATEGORIES;?></h2>
+<p><?php echo TRANSLATION_CATEGORIES_INFOTEXT;?></p>
 
-<p><a href="?action=categories&add">Kategorie Anlegen</a></p>
+<p><a href="?action=categories&add"><?php echo TRANSLATION_CREATE_CATEGORY;?></a></p>
 <?php }
     ?>
 
@@ -52,8 +52,8 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
         ?>
 <table>
 <tr>
-<td style="min-width:100px;"><a href="?action=categories&order=id"><strong>ID</strong></a></td>
-<td style="min-width:200px;"><a href="?action=categories&order=name"><strong>Name</strong></a></td>
+<td style="min-width:100px;"><a href="?action=categories&order=id"><strong><?php echo TRANSLATION_ID;?></strong></a></td>
+<td style="min-width:200px;"><a href="?action=categories&order=name"><strong><?php echo TRANSLATION_NAME;?></strong></a></td>
 <td></td>
 <td></td>
 </tr>
@@ -83,20 +83,20 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 </table>
 <?php }else if(isset($_GET["add"])){
         ?>
-<h2>Kategorie anlegen</h2>
+<h2><?php echo TRANSLATION_CREATE_CATEGORY;?></h2>
 <form action="?action=categories" method="post">
-<p>Name: <input type="text" name="name" value="">
-<p><input type="submit" name="create" value="Anlegen"></p>
+<p><?php echo TRANSLATION_NAME;?> <input type="text" name="name" value="">
+<p><input type="submit" name="create" value="<?php echo TRANSLATION_CREATE;?>"></p>
 </form>
 
 <?php }else if(isset($_GET["edit"])){
         ?>
-<h2>Kategorie bearbeiten</h2>
+<h2><?php echo TRANSLATION_EDIT_CATEGORY;?></h2>
 <form action="?action=categories" method="post">
 <input type="hidden" name="id" value="<?php echo intval($_GET["edit"])?>">
-<p>Name: <input type="text" name="name" value="<?php echo categories :: getCategoryById(intval($_GET["edit"]));
+<p><?php echo TRANSLATION_NAME;?> <input type="text" name="name" value="<?php echo categories :: getCategoryById(intval($_GET["edit"]));
         ?>">
-<p><input type="submit" name="update" value="Speichern"></p>
+<p><input type="submit" name="update" value="<?php echo TRANSLATION_SAVE;?>"></p>
 </form>
 
 <?php }
