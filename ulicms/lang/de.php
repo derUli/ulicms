@@ -329,3 +329,6 @@ define("TRANSLATION_NOTHING_TO_DO", "Nichts zu tun.");
 define("TRANSLATION_DOWNLOAD_FAILED", "Download fehlgeschlagen (%pkg%)");
 define("TRANSLATION_INSTALLATION_SUCCESSFULL", "Installation erfolgreich (%pkg%)");
 define("TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED", "Entpacken der Datei fehlgeschlagen (%pkg%)");
+define("TRANSLATION_PACKAGE_SUCCESSFULL_UPLOADED", "Das Paket \"%file%\" wurde erfolgreich installiert.");
+define("TRANSLATION_INSALLATION_FAILED", "Das Paket \"%file%\" konnte nicht installiert werden.");
+define("TRANSLATION_UPLOAD_FAILED", "Dateiupload fehlgeschlagen!");

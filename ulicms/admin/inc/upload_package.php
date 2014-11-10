@@ -12,14 +12,14 @@ if(!$acl -> hasPermission("install_packages")){
              $pkg = new packageManager();
              if($pkg -> installPackage($file_in_tmp)){
                  @unlink($file_in_tmp);
-                 echo "<p style='color:green'>Das Paket \"" . $_FILES['file']['name'] . "\" wurde erfolgreich installiert.</p>";
+                 echo "<p style='color:green'>".str_ireplace("%file%", $_FILES['file']['name'], TRANSLATION_PACKAGE_SUCCESSFULL_UPLOADED)."</p>";
                 
                  }else{
-                 echo "<p style='color:red'>Das Paket \"" . $_FILES['file']['name'] . "\" konnte nicht installiert werden.</p>";
+                 echo "<p style='color:red'>".str_ireplace("%file%", $_FILES['file']['name'], TRANSLATION_INSALLATION_FAILED)."</p>";
                  }
             
              }else{
-             echo "<p style='color:red'>Dateiupload fehlgeschlagen.</p>";
+             echo "<p style='color:red'>".TRANSLATION_UPLOAD_FAILED."</p>";
              }
         
         }
