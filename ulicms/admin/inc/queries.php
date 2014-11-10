@@ -132,7 +132,8 @@ if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $acl -> hasPer
      }
 
 if($_GET["action"] == "languages" and !empty($_GET["default"]) and $acl -> hasPermission("languages")){
-     setconfig("default_language", $_GET["default"]);
+     setconfig("default_language", db_escape($_GET["default"]));
+     setconfig("system_language",   db_escape($_GET["default"]));
      }
 
 
