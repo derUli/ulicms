@@ -44,9 +44,9 @@
                  echo "<td>" . '<a href="index.php?action=admin_edit&admin=' . $row -> id . '"><img src="gfx/edit.gif"> '.TRANSLATION_EDIT.'</a></td>';
                 
                  if($row -> id == 1 || $row -> id == $_SESSION["login_id"]){
-                     echo "<td><img src=\"gfx/delete.gif\"> <a href=\"#\" onclick=\"alert('Der Admin kann nicht gelöscht werden.')\">".TRANSLATION_DELETE."</a></td>";
+                     echo "<td><img src=\"gfx/delete.gif\"> <a href=\"#\" onclick=\"alert('".TRANSLATION_CANT_DELETE_ADMIN."')\">".TRANSLATION_DELETE."</a></td>";
                      }else{
-                     echo "<td>" . '<a href="index.php?action=admin_delete&admin=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif"> Löschen</a></td>';
+                     echo "<td>" . '<a href="index.php?action=admin_delete&admin=' . $row -> id . '" onclick="return confirm(\''.TRANSLATION_ASK_FOR_DELETE.'\');"><img src="gfx/delete.gif"> Löschen</a></td>';
                      }
                 
                  echo '</tr>';
