@@ -185,3 +185,9 @@ define("ULICMS_PLEASE_SELECT_FILETYPE", "Bitte wählen Sie einen Dateityp aus");
 define("ULICMS_TEMPLATE_INFO_TEXT", "Hier können Sie das Aussehen Ihrer Website durch Templates anpassen. Bitte vorsichtig beim Bearbeiten sein, wegen des enthaltenen PHP-Codes. Am Besten sollte diese Aufgabe von einem Profi übernommen werden.");
 define("TRANSLATION_PLEASE_SELECT_TEMPLATE", "Bitte wählen Sie ein Template aus:");
 define("TRANSLATION_CHANGES_WAS_SAVED", "Die Änderungen wurden gespeichert.");
+
+define("TRANSLATION_INSTALL_PACKAGE", "Paket installieren");
+define("TRANSLATION_INSTALLED_MODULES", "Installierte Module");
+define("TRANSLATION_INSTALLED_MODULES_INFO", "Hier finden Sie eine Auflistung der installierten Module.");
+define("TRANSLATION_INSTALLED_DESIGNS", "Installierte Designs");
+define("TRANSLATION_INSTALLED_DESIGNS_INFO", "Hier finden Sie eine Auflistung der installierten Designs.");
