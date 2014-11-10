@@ -113,6 +113,7 @@ define("TRANSLATION_CATEGORIES_INFOTEXT", "Hier können Sie Kategorien anlegen, 
 define("TRANSLATION_DELETE", "Löschen");
 define("TRANSLATION_EDIT", "Bearbeiten");
 define("TRANSLATION_ASK_FOR_DELETE", "Wirklich löschen?");
+define("TRANSLATION_SAVE_CHANGES", "Änderungen speichern");
 define("TRANSLATION_CATEGORY", "Kategorie");
 
 // Banner
@@ -126,6 +127,7 @@ define("TRANSLATION_IMAGE_URL", "Bild-URL");
 define("TRANSLATION_LINK_URL", "Link-URL");
 define("TRANSLATION_HTML", "HTML");
 define("TRANSLATION_ADD_BANNER", "Banner hinzufügen");
+define("TRANSLATION_PREVIEW", "Vorschau");
 
 // Benutzer
 define("TRANSLATION_USERS_INFOTEXT", "Hier können Sie die Benutzer Ihrer Homepage verwalten und die Passwörter ändern.");

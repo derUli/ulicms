@@ -23,7 +23,6 @@
 <fieldset id="type_html" style="display:none">
 <textarea name="html" rows=10 cols=40></textarea>
 </fieldset>
-<br/>
 
 <strong><?php echo TRANSLATION_CATEGORY;?></strong><br/>
 <?php echo categories :: getHTMLSelect()?>
