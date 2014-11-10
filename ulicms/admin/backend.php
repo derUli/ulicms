@@ -1,8 +1,7 @@
 <?php
 require_once "../init.php";
 
-$syslang = getSystemLanguage();
-include getLanguageFilePath($syslang);
+
 
 
 @session_start();
@@ -26,6 +25,9 @@ add_hook("after_session_start");
 
 require_once "../version.php";
 require_once "inc/logincheck.php";
+
+$syslang = getSystemLanguage();
+include getLanguageFilePath($syslang);
 require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 
