@@ -20,11 +20,11 @@
 <table border=1>
 <tr style="font-weight:bold;">
 <td style="width:40px;"><a href="index.php?action=admins&order=id">ID</a></td>
-<td><span data-tooltip="Der Benutzername dient zur Anmeldung im Adminbereich..."><a href="index.php?action=admins&order=username">Benutzername</a></span></td>
-<td><a href="index.php?action=admins&order=lastname">Nachname</a></td>
-<td><a href="index.php?action=admins&order=firstname">Vorname</a></td>
-<td><a href="index.php?action=admins&order=email">Email</a></td>
-<td><a href="index.php?action=admins&order=group_id">Gruppe</a></td>
+<td><span><a href="index.php?action=admins&order=username"><?php echo TRANSLATION_USERNAME;?></a></span></td>
+<td><a href="index.php?action=admins&order=lastname"><?php echo TRANSLATION_LASTNAME;?></a></td>
+<td><a href="index.php?action=admins&order=firstname"><?php echo TRANSLATION_FIRSTNAME;?></a></td>
+<td><a href="index.php?action=admins&order=email"><?php echo TRANSLATION_EMAIL;?></a></td>
+<td><a href="index.php?action=admins&order=group_id"><?php echo TRANSLATION_GROUP;?></a></td>
 <td><?php echo TRANSLATION_EDIT;?></td>
 <td><span><?php echo TRANSLATION_DELETE;?></span></td>
 </tr>
@@ -44,7 +44,7 @@
                  echo "<td>" . '<a href="index.php?action=admin_edit&admin=' . $row -> id . '"><img src="gfx/edit.gif"> '.TRANSLATION_EDIT.'</a></td>';
                 
                  if($row -> id == 1 || $row -> id == $_SESSION["login_id"]){
-                     echo "<td><img src=\"gfx/delete.gif\"> <a href=\"#\" onclick=\"alert('Der Admin kann nicht gelöscht werden')\">".TRANSLATION_DELETE."</a></td>";
+                     echo "<td><img src=\"gfx/delete.gif\"> <a href=\"#\" onclick=\"alert('Der Admin kann nicht gelöscht werden.')\">".TRANSLATION_DELETE."</a></td>";
                      }else{
                      echo "<td>" . '<a href="index.php?action=admin_delete&admin=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif"> Löschen</a></td>';
                      }
