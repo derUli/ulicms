@@ -107,21 +107,16 @@ $(window).load(function(){
 <table border=1>
 <tr style="font-weight:bold;">
 <td style="width:40px;"></td>
-<td><a href="?action=pages&order=systemname">Permalink</a></td>
-<td><a href="?action=pages&order=menu">Menü</a></td>
-<td><a href="?action=pages&order=position">Position</a></td>
-<td><a href="?action=pages&order=parent">Übergeordnet</a></td>
-<td><a href="?action=pages&order=active">Aktiviert</a></td>
-<td><span data-tooltip="Die Seite auf der Webpräsenz öffnen">&nbsp;</span></td>
-<td>&nbsp;</td>
+<td><a href="?action=pages&order=systemname"><?php echo TRANSLATION_PERMALINK;?></a></td>
+<td><a href="?action=pages&order=menu"><?php echo TRANSLATION_MENU;?></a></td>
+<td><a href="?action=pages&order=position"><?php echo TRANSLATION_POSITION;?></a></td>
+<td><a href="?action=pages&order=parent"><?php echo TRANSLATION_PARENT;?></a></td>
+<td><a href="?action=pages&order=active"><?php echo TRANSLATION_VIEW;?></a></td>
+<td><a href="?action=pages&order=active"><?php echo TRANSLATION_ACTIVATED;?></a></td>
+<td><?php echo TRANSLATION_EDIT;?></td>
+<td><?php echo TRANSLATION_DELETE;?></td>
 
-<td><?php
-         if($_SESSION["filter_status"] == "trash")
-             echo "&nbsp;";
-         else
-             echo "&nbsp;";
-        
-         ?></td>
+
 </tr>
 <?php
          $order = basename($_GET["order"]);
