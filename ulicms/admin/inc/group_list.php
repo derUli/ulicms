@@ -38,9 +38,9 @@ else if($_SESSION["grp_sort"] == "name"){
      ?>
 <table>
 <tr>
-<td style="min-width:100px;"><a href="?action=groups&sort=id&sort_direction=change"><strong>ID</strong></a></td>
-<td style="min-width:200px;"><a href="?action=groups&sort=name&sort_direction=change"><strong>Name</strong></a></td>
-<td><strong>Standard</strong></td>
+<td style="min-width:100px;"><a href="?action=groups&sort=id&sort_direction=change"><strong><?php echo TRANSLATION_ID;?></strong></a></td>
+<td style="min-width:200px;"><a href="?action=groups&sort=name&sort_direction=change"><strong><?php echo TRANSLATION_NAME;?></strong></a></td>
+<td><strong><?php echo TRANSLATION_STANDARD;?></strong></td>
 <td></td>
 <td></td>
 </tr>
@@ -59,15 +59,14 @@ else if($_SESSION["grp_sort"] == "name"){
 <?php }else{
              ?>
 <a href="?action=groups&standard=<?php echo $id;
-             ?>"<span style="color:red; font-weight:bold;" onclick='return confirm("Die Gruppe \"<?php echo $name;
-             ?>\" zum Standard für neue User machen?")'>Nein</a>
+             ?>"<span style="color:red; font-weight:bold;" onclick='return confirm("<?php echo str_ireplace("%name%", $name, TRANSLATION_MAKE_GROUP_DEFAULT);?>")'>Nein</a>
 <?php }
          ?>
 </td>
 <td><a href="?action=groups&edit=<?php echo $id;
          ?>"><img src="gfx/edit.gif" alt="Bearbeiten" title="Bearbeiten"></a></td>
 <td><a href="?action=groups&delete=<?php echo $id;
-         ?>" onclick="return confirm('Wirklich löschen?');"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
+         ?>" onclick="return confirm('<?php echo TRANSLATION_ASK_FOR_DELETE;?>');"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
 </tr>
 
 
