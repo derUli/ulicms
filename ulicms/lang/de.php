@@ -248,3 +248,12 @@ define("TRANSLATION_CACHE_WAS_CLEARED", "Der Cache wurde erfolgreich geleert.");
 // MOTD
 define("TRANSLATION_ALLOWED_HTML_TAGS", "Erlaubte HTML-Tags");
 define("TRANSLATION_MOTD_WAS_CHANGED", "Die Message Of the Day wurde geändert.");
+
+// Logo
+define("TRANSLATION_YOUR_LOGO", "Ihr Logo");
+define("TRANSLATION_UPLOAD_NEW_LOGO", "Neues Logo hochladen");
+define("TRANSLATION_UPLOAD", "Hochladen");
+define("TRANSLATION_LOGO_INFOTEXT", "Laden Sie ein beliebiges Logo hoch, welches im Head Bereich Ihrer Homepage angezeigt wird.<br/>
+Sie können das Logo in den Grundeinstellungen deaktivieren.<br/>
+Das Bild darf maximal 500 x 100 Pixel haben.");
+define("TRANSLATION_UPLOADED_IMAGE_TO_BIG", "Die von Ihnen hochgeladene Grafik ist zu groß.");
