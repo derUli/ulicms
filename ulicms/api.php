@@ -7,12 +7,18 @@ function getLanguageFilePath($lang = "de", $component = null){
 
 function getSystemLanguage(){
    if(isset($_SESSION["system_language"])){
-      return $_SESSION["system_language"];
+      $lang =  $_SESSION["system_language"];
    } else if(getconfig("system_language")){
-     return getconfig("system_language");
+     $lang = getconfig("system_language");
+   } else{
+     $lang = "de";   
+   }
+   
+   if(!file_exists(getLanguageFilePath($lang))){ 
+     $lang = "de";    
    }
       
-   return "de";
+   return $lang;
    }
 
 
