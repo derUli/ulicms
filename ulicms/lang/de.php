@@ -40,11 +40,11 @@ define("TRANSLATION_USERS", "Benutzer");
 
 define("TRANSLATION_GROUPS", "Gruppen");
 
-define("TRANSLATION_TEMPLATES", "Templates");
+define("TRANSLATION_TEMPLATES", "Vorlagen");
 define("TRANSLATION_TOP", "Oben");
 define("TRANSLATION_BOTTOM", "Unten");
 define("TRANSLATION_MAINTENANCE_PAGE", "Wartungsseite");
-define("TRANSLATION_CSS", "CSS");
+define("TRANSLATION_CSS", "CSS");define("TRANSLATION_ADDITIONAL_FUNCTIONS", "Benutzerdefinierte Funktionen");
 
 define("TRANSLATION_PACKAGES", "Pakete");
 define("TRANSLATION_UPDATE", "Update");
@@ -61,3 +61,6 @@ define("TRANSLATION_LOGO", "Logo");
 define("TRANSLATION_LANGUAGES", "Sprachen");
 define("TRANSLATION_OTHER", "Sonstiges");
 define("TRANSLATION_DESIGN_SETTINGS", "Design");
+
+define("TRANSLATION_INFO", "Info");
+define("TRANSLATION_LOGOUT", "Logout");
