@@ -207,7 +207,7 @@ define("TRANSLATION_METADATA", "Meta-Daten");
 define("TRANSLATION_FIX_W3C_VALIDATION_ERRORS", "W3C Validierungsfehler automatisch korrigieren");
 define("TRANSLATION_TECHNICAL_STUFF", "Technisches");
 define("TRANSLATION_COMMENTING_SYSTEM", "Kommentarsystem");
-define("TRANSLATION_FACEBOOK_ID", "Facebook ID:");
+define("TRANSLATION_FACEBOOK_ID", "Facebook ID");
 define("TRANSLATION_DISQUS_SHORTNAME", "Disqus Shortname");
 define("TRANSLATION_TIMEZONE", "Zeitzone");
 define("TRANSLATION_SEARCH_ENGINES", "Suchmaschinen");
