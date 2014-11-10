@@ -337,3 +337,4 @@ define("TRANSLATION_LICENSE", "Lizenz");
 
 // Weiter Übersetzungen
 define("TRANSLATION_MINUTES", "Minuten");
+define("TRANSLATION_FILE", "Datei");
