@@ -5,9 +5,23 @@ function getLanguageFilePath($lang = "de", $component = null){
    return ULICMS_ROOT."/lang/".$lang.".php";
 }
 
+function getAvailableBackendLanguages(){
+   $langdir = ULICMS_ROOT."/lang/";
+   $list = scandir($langdir);
+   sort($list);
+   $retval = array();
+   for($i=0; $i < count($list); $i++){
+   if(endsWith($list[$i], ".php")){
+      array_push($retval, basename($list[$i], ".php"));
+      }
+   }
+   
+   return $retval;
+}
+
 function getSystemLanguage(){
    if(isset($_SESSION["system_language"])){
-      $lang =  $_SESSION["system_language"];
+      $lang = $_SESSION["system_language"];
    } else if(getconfig("system_language")){
      $lang = getconfig("system_language");
    } else{
