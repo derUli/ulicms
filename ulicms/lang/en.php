@@ -34,7 +34,7 @@ define("TRANSLATION_HELLO_NAME", "Hallo %firstname% %lastname%!");
 // Admin Menü Navigation
 define("TRANSLATION_WELCOME", "Welcome");
 
-define("TRANSLATION_CONTENTS", "Contens");
+define("TRANSLATION_CONTENTS", "Contents");
 define("TRANSLATION_PAGES", "Pages");
 define("TRANSLATION_ADVERTISEMENTS", "Advertisements");
 define("TRANSLATION_CATEGORIES", "Categories");
