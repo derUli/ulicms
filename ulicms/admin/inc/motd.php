@@ -3,7 +3,7 @@ $acl = new ACL();
 if($acl -> hasPermission("motd")){
      ?>
 <div>
-<h2<?php echo TRANSLATION_MOTD;?></h2>
+<h2><?php echo TRANSLATION_MOTD;?></h2>
 <?php
      if(isset($_POST["motd"])){
         
