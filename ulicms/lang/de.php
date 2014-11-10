@@ -9,7 +9,6 @@ Wenn Sie Übersetzungen beisteuern möchten, kontaktieren Sie bitte den Entwickl
 Beiträge zum Projekt werden gerne gesehen.
 */
 
-
 // Dashboard (Willkommen)
 define("TRANSLATION_MOTD", "Nachricht des Tages");
 define("TRANSLATION_STATISTICS", "Statistiken");
@@ -214,3 +213,16 @@ define("TRANSLATION_SEARCH_ENGINES", "Suchmaschinen");
 
 define("TRANSLATION_SEARCH_ENGINES_INDEX", "Suchmaschinen dürfen die Website durchsuchen");
 define("TRANSLATION_SEARCH_ENGINES_NOINDEX", "Suchmaschinen werden ausgesperrt");
+
+// Design
+define("TRANSLATION_DESIGN_OPTIONS_ENABLED", "Design Optionen aktiviert");
+define("TRANSLATION_FRONTEND_DESIGN", "Frontend Design");
+define("TRANSLATION_BACKEND_DESIGN", "Backend Design");
+define("TRANSLATION_EDITOR_SKIN", "Editor Skin");
+define("TRANSLATION_FONT_FAMILY", "Schriftart");
+define("TRANSLATION_ZOOM", "Zoom");
+define("TRANSLATION_FONT_SIZE", "Schriftgröße");
+define("TRANSLATION_HEADER_BACKGROUNDCOLOR", "Kopfzeile Hintergrundfarbe");
+define("TRANSLATION_FONT_COLOR", "Schriftfarbe");
+define("TRANSLATION_BACKGROUNDCOLOR", "Hintergrundfarbe");
+define("TRANSLATION_TITLE_FORMAT", "Seitentitel Format");

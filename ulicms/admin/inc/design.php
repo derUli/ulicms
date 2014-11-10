@@ -91,11 +91,11 @@ input.color{
 width:200px;
 }
 </style>
-<h1>Design</h1>
+<h1><?php echo TRANSLATION_DESIGN;?></h1>
 <form id="designForm" action="index.php?action=design" method="post">
 <table style="width:100%;">
 <tr>
-<td><strong>Design Optionen aktiviert</strong></td>
+<td><strong><?php echo TRANSLATION_DESIGN_OPTIONS_ENABLED;?></strong></td>
 <td><input type="checkbox" name="disable_custom_layout_options" <?php if(!getconfig("disable_custom_layout_options")){
 echo " checked";
 }?>>
@@ -103,13 +103,13 @@ echo " checked";
 </tr>
 <tr>
 <td style="width:300px;">
-<strong>Titel</strong>
+<strong><?php echo TRANSLATION_TITLE_FORMAT;?></strong>
 </td>
 <td><input type="text" name="title_format" value="<?php echo $title_format;
      ?>"></td>
 </tr>
 <tr>
-<td><strong>Frontend Design:</strong></td>
+<td><strong><?php echo TRANSLATION_FRONTEND_DESIGN;?></strong></td>
 <td>
 <select name="theme" size=1>
 <?php foreach($allThemes as $th){
@@ -127,7 +127,7 @@ echo " checked";
 </tr>
 <tr>
     <td>
-        <strong>Backend Design:</strong>
+        <strong><?php echo TRANSLATION_BACKEND_DESIGN;?></strong>
     </td>
     <td>
 <select name="backend_style" size=1>
@@ -145,7 +145,7 @@ echo " checked";
 </tr>
 <tr>
     <td>
-        <strong>Editor Skin:</strong>
+        <strong><?php echo TRANSLATION_EDITOR_SKIN;?></strong>
     </td>
     <td>
 <select name="ckeditor_skin" size=1>
@@ -162,7 +162,7 @@ echo " checked";
     </td>
 </tr>
 <tr>
-<td><strong>Schriftart:</strong></td>
+<td><strong><?php echo TRANSLATION_FONT_FAMILY;?></strong></td>
 <td>
 <select name="default-font" size=1>
 <?php
@@ -188,7 +188,7 @@ echo " checked";
 </td>
 </tr>
 <tr>
-<td><strong>Zoom:</strong>
+<td><strong><?php echo TRANSLATION_ZOOM;?></strong>
 <td>
 <select name="zoom">
 <?php
@@ -206,7 +206,7 @@ echo " checked";
 </td>
 </tr>
 <tr>
-<td><strong>Schriftgröße:</strong>
+<td><strong><?php echo TRANSLATION_FONT_SIZE;?></strong>
 <td>
 <select name="font-size">
 <?php
@@ -225,7 +225,7 @@ echo " checked";
 </tr>
 <tr>
 <td>
-<strong>Kopfzeile Hintergrundfarbe:</strong>
+<strong><?php echo TRANSLATION_BACKGROUNDCOLOR;?></strong>
 </td>
 <td>
 <input name="header-background-color" class="color {hash:true,caps:true}" value="<?php echo getconfig("header-background-color");
@@ -234,7 +234,7 @@ echo " checked";
 </tr>
 <tr>
 <td>
-<strong>Schriftfarbe:</strong>
+<strong><?php echo TRANSLATION_FONT_COLOR;?></strong>
 </td>
 <td>
 <input name="body-text-color" class="color {hash:true,caps:true}" value="<?php echo getconfig("body-text-color");
@@ -243,7 +243,7 @@ echo " checked";
 </tr></tr>
 <tr>
 <td>
-<strong>Hintergrundfarbe:</strong>
+<strong><?php echo TRANSLATION_BACKGROUNDCOLOR;?></strong>
 </td>
 <td>
 <input name="body-background-color" class="color {hash:true,caps:true}" value="<?php echo getconfig("body-background-color");
@@ -252,7 +252,7 @@ echo " checked";
 </tr>
 </table>
 <p>
-<input type="submit" name="submit" value="Einstellungen speichern"/>
+<input type="submit" name="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;?>"/>
 </p>
 
 <?php
@@ -270,7 +270,7 @@ $("#designForm").ajaxForm({beforeSubmit: function(e){
   }, 
   success:function(e){
   $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+  $("#message").html("<span style=\"color:green;\"><?php echo TRANSLATION_CHANGES_WAS_SAVED;?></span>");
   }
   
 
