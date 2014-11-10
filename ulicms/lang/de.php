@@ -108,6 +108,12 @@ define("TRANSLATION_CREATE", "Anlegen");
 define("TRANSLATION_SAVE", "Speichern");
 define("TRANSLATION_CATEGORIES_INFOTEXT", "Hier können Sie Kategorien anlegen, in die Sie dann Ihre Inhalte einsortieren können.");
 
+// Generell
+define("TRANSLATION_DELETE", "Löschen");
+define("TRANSLATION_EDIT", "Bearbeiten");
+define("TRANSLATION_ASK_FOR_DELETE", "Wirklich löschen?");
+define("TRANSLATION_CATEGORY", "Kategorie");
+
 // Banner
 define("TRANSLATION_ADD_ADVERTISEMENT", "Banner hinzufügen");
 define("TRANSLATION_ADVERTISEMENT_INFOTEXT", "Hier können Sie die Werbebanner für Ihre Internetseite verwalten.");
