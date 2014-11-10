@@ -13,7 +13,7 @@ if($acl -> hasPermission("motd")){
         
         
          ?>
-<p>Die Message Of the Day wurde geändert.</p>
+<p><?php echo TRANSLATION_MOTD_WAS_CHANGED;?></p>
 <?php }
      ?>
 
@@ -22,8 +22,8 @@ if($acl -> hasPermission("motd")){
      ?></textarea>
 <br>
 <br>
-<input type="submit" name="motd_submit" value="MOTD Ändern">
-<p><strong>Erlaubte HTML-Tags:</strong><br/>
+<input type="submit" name="motd_submit" value="<?php echo TRANSLATION_SAVE_CHANGES;?>">
+<p><strong><?php echo TRANSLATION_ALLOWED_HTML_TAGS;?></strong><br/>
 <?php echo htmlspecialchars(
         getconfig("allowed_html"))?></p>
 <?php

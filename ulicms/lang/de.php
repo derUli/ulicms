@@ -244,3 +244,7 @@ define("TRANSLATION_CACHE_TEXT2", "
 Mit einem beliebigen Wert anlegen.</p>");
 define("TRANSLATION_CACHE_TEXT3", "<p>Wenn Änderungen an der Website vorgenommen wurden sind, ist es erforderlich, den Cache zu leeren, damit die Änderungen auch auf der Website angezeigt werden.</p>");
 define("TRANSLATION_CACHE_WAS_CLEARED", "Der Cache wurde erfolgreich geleert.");
+
+// MOTD
+define("TRANSLATION_ALLOWED_HTML_TAGS", "Erlaubte HTML-Tags");
+define("TRANSLATION_MOTD_WAS_CHANGED", "Die Message Of the Day wurde geändert.");
