@@ -26,10 +26,10 @@ if(!$acl -> hasPermission("install_packages")){
     
     
     ?>
-<h1>Pakete hochladen</h1>
+<h1><?php echo TRANSLATION_UPLOAD_PACKAGE;?></h1>
 <form action="?action=upload_package" enctype="multipart/form-data" method="post">
 <input type="file" name="file"><br/><br/>
-<input type="submit" value="Paket installieren">
+<input type="submit" value="<?php echo TRANSLATION_INSTALL_PACKAGE;?>">
 </form>
 
 
