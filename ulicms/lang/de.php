@@ -119,6 +119,7 @@ define("TRANSLATION_PLEASE_SELECT", "Bitte auswählen");
 define("TRANSLATION_RECYCLE_BIN", "Papierkorb");
 define("TRANSLATION_STANDARD", "Standard");
 define("TRANSLATION_EVERY", "Alle");
+define("TRANSLATION_NO_PERMISSIONS", "Sie haben nicht die Berechtigung, um auf diese Seite zugreifen zu dürfen.<br/>Bitte kontaktieren Sie den Administrator dieser Internetseite, damit er Ihnen die benötigten Rechte gibt.");
 
 // Banner
 define("TRANSLATION_ADD_ADVERTISEMENT", "Banner hinzufügen");
