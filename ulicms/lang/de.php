@@ -323,3 +323,9 @@ define("TRANSLATION_PKGSRC_NOT_DEFINED", "pkg_src wurde nicht definiert!");
 define("TRANSLATION_NO_PACKAGES_AVAILABLE", "Keine Pakete verfügbar oder Paketquelle nicht erreichbar.");
 define("TRANSLATION_ASK_FOR_INSTALL_PACKAGE", "%pkg% installieren?\\nBestehende Dateien werden überschrieben.");
 define("TRANSLATION_NO_DESCRIPTION_AVAILABLE", "Keine Beschreibung verfügbar.");
+define("TRANSLATION_PHARDATA_NOT_AVAILABLE", "Eine für das Entpacken der Pakete benötigte PHP-Funktion ist nicht verfügbar.<br/>
+Bitte aktualisieren Sie die Serversoftware auf PHP Version 5.3.0 oder neuer.");
+define("TRANSLATION_NOTHING_TO_DO", "Nichts zu tun.");
+define("TRANSLATION_DOWNLOAD_FAILED", "Download fehlgeschlagen (%pkg%)");
+define("TRANSLATION_INSTALLATION_SUCCESSFULL", "Installation erfolgreich (%pkg%)");
+define("TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED", "Entpacken der Datei fehlgeschlagen (%pkg%)");

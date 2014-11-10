@@ -15,13 +15,12 @@ if(!$acl -> hasPermission("install_packages")){
 <?php
      if(!$pkg_src){
          ?>
-<p><strong>Fehler:</strong> <br/>
-pkg_src wurde nicht definiert!</p>
+<p><strong><?php echo TRANSLATION_ERROR;?></strong> <br/>
+<?php echo TRANSLATION_PKGSRC_NOT_DEFINED;?></p>
 <?php }else if(!class_exists("PharData")){
          ?>
-<p><strong>Fehler:</strong> <br/>
-Eine für das Entpacken der Pakete benötigte PHP-Funktion ist nicht verfügbar.<br/>
-Bitte aktualisieren Sie die Serversoftware auf PHP Version 5.3.0 oder neuer.
+<p><strong><?php echo TRANSLATION_ERROR;?></strong> <br/>
+<?php echo TRANSLATION_PHARDATA_NOT_AVAILABLE;?>
 </p>
 <?php
          }
@@ -42,8 +41,9 @@ Bitte aktualisieren Sie die Serversoftware auf PHP Version 5.3.0 oder neuer.
         
          if(count($packagesToInstall) === 0 or empty($_REQUEST["packages"])){
              ?>
-<p><strong>Fehler:</strong> <br/>
-Nichts zu tun.</p>
+<p><strong><?php echo TRANSLATION_ERROR;?>/strong> <br/>
+<?php echo TRANSLATION_NOTHING_TO_DO;?>
+</p>
 
 <?php
              }else{
@@ -56,7 +56,7 @@ Nichts zu tun.</p>
                     
                      // Wenn Paket nicht runtergeladen werden konnte
                     if(!$pkgContent or strlen($pkgContent) < 1){
-                         echo "<p style='color:red;'>Download fehlgeschlagen ($packagesToInstall[$i])" . "</p>";
+                         echo "<p style='color:red;'>".str_ireplace("%pkg%", $packagesToInstall[$i], TRANSLATION_DOWNLOAD_FAILED)."</p>";
                          }else{
                          $tmpdir = "../content/tmp/";
                          if(!is_dir($tmpdir)){
@@ -73,9 +73,9 @@ Nichts zu tun.</p>
                          if(file_exists($tmpFile)){
                              // Paket installieren
                             if($pkg -> installPackage($tmpFile)){
-                                 echo "<p style='color:green;'>Installation erfolgreich ($packagesToInstall[$i])" . "</p>";
+                                 echo "<p style='color:green;'>".str_ireplace("%pkg%", $packagesToInstall[$i], TRANSLATION_INSTALLATION_SUCCESSFULL)."</p>";
                                  }else{
-                                 echo "<p style='color:red;'>Entpacken der Datei fehlgeschlagen ($packagesToInstall[$i])" . "</p>";
+                                 echo "<p style='color:red;'>".str_ireplace("%pkg%", $packagesToInstall[$i], TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED). "</p>";
                                  }
                             
                              }
