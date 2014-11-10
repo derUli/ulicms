@@ -30,7 +30,7 @@ $str = str_ireplace("%firstname%", $_SESSION["firstname"], $str);
 $str = str_ireplace("%lastname%", $_SESSION["lastname"], $str);
 echo $str;
 ?>
- [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>">Profil bearbeiten</a>]
+ [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>"><?php echo TRANSLATION_EDIT_PROFILE;?></a>]
 </p>
 
 
