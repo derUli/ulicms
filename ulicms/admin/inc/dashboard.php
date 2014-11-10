@@ -114,12 +114,12 @@ $formatted = formatTime($time);
          ?>
 </ul>
 </div>
-<h2 class="accordion-header">Top-Seiten</h2>
+<h2 class="accordion-header"><?php echo TRANSLATION_TOP_PAGES;?></h2>
 <div class="accordion-content">
 <table cellpadding="2" border=0>
 <tr style="font-weight:bold;">
-<td>Titel</td>
-<td>Views</td>
+<td><?php echo TRANSLATION_TITLE;?></td>
+<td><?php echo TRANSLATION_VIEWS;?></td>
 </tr>
 <?php while($row = db_fetch_object($topPages)){
              ?>
@@ -136,13 +136,13 @@ $formatted = formatTime($time);
 </p>
 </div>
 
-<h2 class="accordion-header">Letzte Änderungen</h2>
+<h2 class="accordion-header"><?php echo TRANSLATION_LAST_CHANGES;?></h2>
 <div class="accordion-content">
 <table cellpadding="2" style="width: 70%; border:0px;">
 <tr style="font-weight:bold;">
-<td>Titel</td>
-<td>Datum</td>
-<td>Durchgeführt von</td>
+<td><?php echo TRANSLATION_TITLE;?></td>
+<td><?php echo TRANSLATION_DATE;?></td>
+<td><?php echo TRANSLATION_DONE_BY;?></td>
 </tr>
 
 <?php while($row = db_fetch_object($lastModfiedPages)){
