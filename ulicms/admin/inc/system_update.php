@@ -6,12 +6,12 @@ if(defined("_SECURITY")){
 
 <?php if(file_exists("../update.php")){
              ?>
-	<p><a href="../update.php">Update durchführen</a></p>
-	<span style="color:red"><strong>Achtung!!!</strong> Bitte direkt nach der Durchführung des Updates die Datei <strong>update.php</strong> vom Server löschen, falls das nicht automatisch geschehen sollte.</span>
+	<p><a href="../update.php"><?php echo TRANSLATION_RUN_UPDATE;?></a></p>
+	<?php echo TRANSLATION_UPDATE_NOTICE;?>
 <?php
              }else{
              ?>
-Hier können Sie Ihr CMS Updaten, nachdem Sie alle Patch Dateien auf den Server geladen haben. Mehr Informationen über aktuelle Updates erhalten Sie auf www.ulicms.de
+<?php echo TRANSLATION_UPDATE_INFORMATION_TEXT;?>
 	<p>
 
 <?php }
