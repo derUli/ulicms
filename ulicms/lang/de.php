@@ -231,3 +231,16 @@ define("TRANSLATION_TITLE_FORMAT", "Seitentitel Format");
 define("TRANSLATION_BLACKLIST", "Schwarze Liste");
 define("TRANSLATION_SPAM_COUNTRIES", "Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren");
 define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Chinesische Schriftzeichen verbieten");
+
+// Cache
+define("TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern, 
+bietet das UliCMS eine Cache-Funktion.<br/>
+Statische Seiten, die keine Module enthalten, werden einmalig generiert und dann im cache-Ordner zwischengespeichert.
+Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, die Inhalte aus den gespeicherten HTML-Dateien geladen.</p>
+");
+define("TRANSLATION_CACHE_TEXT2", "
+<p>Sie können den Cache deaktivieren, in dem Sie in den Einstellungen im Expertenmodus die Konfigurationsvariable<br/>
+<code>cache_disabled</code><br/>
+Mit einem beliebigen Wert anlegen.</p>");
+define("TRANSLATION_CACHE_TEXT3", "<p>Wenn Änderungen an der Website vorgenommen wurden sind, ist es erforderlich, den Cache zu leeren, damit die Änderungen auch auf der Website angezeigt werden.</p>");
+define("TRANSLATION_CACHE_WAS_CLEARED", "Der Cache wurde erfolgreich geleert.");
