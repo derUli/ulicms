@@ -262,3 +262,10 @@ define("TRANSLATION_UPLOADED_IMAGE_TO_BIG", "Die von Ihnen hochgeladene Grafik i
 define("TRANSLATION_OFFICIAL_PACKAGE_SOURCE", "Offizielle Paketquelle [packages.ulicms.de]");
 define("TRANSLATION_FROM_FILESYSTEM", "Aus dem Dateisystem");
 define("TRANSLATION_OTHER_PACKAGE_SOURCE", "Andere Paketquelle [URL]");
+
+// Sprachen verwalten
+define("TRANSLATION_SHORTCODE", "Kürzel");
+define("TRANSLATION_FULL_NAME", "Volle Bezeichnung");
+define("TRANSLATION_ADD_LANGUAGE", "Sprache hinzufügen");
+define("TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE", "Die Standardsprache kann nicht gelöscht werden.");
+define("TRANSLATION_DELETE_LANGUAGE_REALLY", "Möchten Sie die Sprache %name% wirklich löschen?");
