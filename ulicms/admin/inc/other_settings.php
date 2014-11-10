@@ -105,7 +105,7 @@ if(!is_admin()){
 
 <form id="other_settings" action="index.php?action=other_settings" method="post">
 <div id="accordion-container"> 
-    <h2 class="accordion-header">Cache</h2>
+    <h2 class="accordion-header"><?php echo TRANSLATION_CACHE;?></h2>
     
     <div class="accordion-content">
 
@@ -132,7 +132,7 @@ if(!is_admin()){
 </div>
 
 
-<h2 class="accordion-header">Shortcuts</h2>
+<h2 class="accordion-header"><?php echo TRANSLATION_SHORTCUTS;?></h2>
     
     <div class="accordion-content">
 <div class="label">Shortcuts ersetzen</div>
@@ -151,7 +151,7 @@ if(!is_admin()){
 
 
 
-<h2 class="accordion-header">Menüeinträge verschieben</h2>
+<h2 class="accordion-header"><?php echo TRANSLATION_MOVE_MENU_ITEMS;?></h2>
 
 
     <div class="accordion-content">
@@ -175,7 +175,7 @@ if(!is_admin()){
                                     </p>
 </div>
 
-<h2 class="accordion-header">Domain2Language-Mapping</h2>
+<h2 class="accordion-header"><?php echo TRANSLATION_DOMAIN2LANGUAGE_MAPPING;?></h2>
 
     <div class="accordion-content">
     
@@ -195,7 +195,7 @@ www.meinefirma.fr=>fr
 </p>
 </div>
 
-<h2 class="accordion-header">Zusätzliche Meta-Tags</h2>
+<h2 class="accordion-header"><?php echo TRANSLATION_ADDITIONAL_META_TAGS;?></h2>
 
 <div class="accordion-content">
    
@@ -205,7 +205,7 @@ www.meinefirma.fr=>fr
 </div>
 </div>
 
-<h2 class="accordion-header">Email-Versand</h2>
+<h2 class="accordion-header"><?php echo TRANSLATION_EMAIL_DELIVERY;?></h2>
 
 
     <div class="accordion-content">
@@ -307,7 +307,7 @@ if($('#email_mode').val() == "pear_mail"){
 
 
 
-    <h2 class="accordion-header">Experteneinstellungen</h2>
+    <h2 class="accordion-header"><?php echo TRANSLATION_EXPERT_SETTINGS;?></h2>
     
     <div class="accordion-content">
 <p><a href="index.php?action=settings">Anzeigen</a></p>
