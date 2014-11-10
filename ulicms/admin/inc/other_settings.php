@@ -109,14 +109,14 @@ if(!is_admin()){
     
     <div class="accordion-content">
 
-<div class="label">Cache aktiviert</div>
+<div class="label"><?php echo TRANSLATION_CACHE_ENABLED;?></div>
 <div class="inputWrapper"><input type="checkbox" name="cache_enabled" value="cache_enabled" <?php if($cache_enabled) echo " checked=\"checked\"";
      ?>></div>
-<div class="label">Cache Gültigkeitsdauer</div>
+<div class="label"><?php echo TRANSLATION_CACHE_VALIDATION_DURATION;?></div>
 <div class="inputWrapper"><input type="number" name="cache_period" min=1 max=20160 value="<?php echo $cache_period;
      ?>"> Minuten</div>
 
-<div class="label">Cache-Speicher</div>
+<div class="label"><?php echo TRANSLATION_CACHE_ENGINE;?></div>
 <div class="inputWrapper"><select name="cache_type" size=1>
 <option value="file"<?php if($cache_type === "file" or !$cache_type){
          echo " selected";
@@ -135,7 +135,7 @@ if(!is_admin()){
 <h2 class="accordion-header"><?php echo TRANSLATION_SHORTCUTS;?></h2>
     
     <div class="accordion-content">
-<div class="label">Shortcuts ersetzen</div>
+<div class="label"><?php echo TRANSLATION_REPLACE_SHORTCUTS;?></div>
 <div class="inputWrapper">
 <select name="override_shortcuts" size=1>
 <option value="off" <?php if($override_shortcuts == "off" or !$override_shortcuts) echo " selected=\"selected\""?>>Aus</option>
@@ -144,7 +144,7 @@ if(!is_admin()){
 <option value="on" <?php if($override_shortcuts == "on") echo " selected=\"selected\""?>>Im Frontend und Backend</option>
 </select>
 </div>
-<p>Standard-Tastenkombinationen des Browsers werden ersetzt, so dass Sie z.B. durch Drücken von Strg+S ebenfalls speichern können</p>
+<p><?php echo TRANSLATION_REPLACE_SHORTCUTS_INFO;?></p>
 </div>
 
 
@@ -155,7 +155,7 @@ if(!is_admin()){
 
 
     <div class="accordion-content">
-<p>Verschiebe alle Menüeinträge von <select name="move_from" size="1">
+<p><?php echo TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM;?>  <select name="move_from" size="1">
                                     <option value="-" selected>-</option>
                                     <?php foreach ($menus as $menu){
                          ?>
@@ -163,7 +163,7 @@ if(!is_admin()){
                                     <?php
                          }
                      ?>
-                                    </select> nach <select name="move_to" size="1">
+                                    </select> <?php echo TRANSLATION_MOVE_ALL_MENU_ITEMS_TO;?> <select name="move_to" size="1">
                                     <option value="-" selected>-</option>
                                     <?php foreach ($menus as $menu){
                          ?>
@@ -179,14 +179,7 @@ if(!is_admin()){
 
     <div class="accordion-content">
     
-<p>Hier können Sie Domains auf Sprachen mappen.
-</p>
-<p>
-Die Zuweisungen müssen in folgendem Format erfolgen:<br/>
-www.meinefirma.de=>de<br/>
-www.meinefirma.co.uk=>en<br/>
-www.meinefirma.fr=>fr
-</p>
+<?php echo TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO;?>
 
 <p><textarea name="domain_to_language" rows="10" cols="40">
 <?php echo real_htmlspecialchars(getconfig("domain_to_language"));
@@ -199,7 +192,7 @@ www.meinefirma.fr=>fr
 
 <div class="accordion-content">
    
-<div class="label"><label for="show_meta_generator">Gebe "generator" Meta-Tag aus</label></div>
+<div class="label"><label for="show_meta_generator"><?php echo TRANSLATION_SHOW_META_GENERATOR;?></label></div>
 <div class="inputWrapper">
 <input type="checkbox" name="show_meta_generator" <?php if(!$hide_meta_generator){ echo "checked ";}?>>
 </div>
@@ -228,20 +221,20 @@ www.meinefirma.fr=>fr
 </div>
 <br/>
 <div class="smtp_settings" id="smtp_settings" style="display:none">
-    <h3>SMTP Einstellungen</h3>
-<div class="label">Hostname</div>
+    <h3><?php echo TRANSLATION_SMTP_SETTINGS;?></h3>
+<div class="label"><?php echo TRANSLATION_HOSTNAME;?></div>
 <div class="inputWrapper"><input type="text" name="smtp_host" value="<?php echo real_htmlspecialchars($smtp_host);
                     ?>"</div>
 </div>
 
 
-<div class="label">Port</div>
+<div class="label"><?php echo TRANSLATION_PORT;?></div>
 <div class="inputWrapper"><input type="text" name="smtp_port" value="<?php echo real_htmlspecialchars($smtp_port);
                     ?>"</div>
 </div>
 
 <div class="label">
-    Authentifizierung benötigt
+<?php echo TRANSLATION_AUTHENTIFACTION_REQUIRED;?>
 </div>
 <div class="inputWrapper">
 <input type="checkbox" id="smtp_auth" name="smtp_auth" <?php
@@ -251,12 +244,12 @@ www.meinefirma.fr=>fr
 
 
 <div id="smtp_auth_div" style="display:none">
-<div class="label">User</div>
+<div class="label"><?php echo TRANSLATION_USER;?></div>
 <div class="inputWrapper"><input type="text" name="smtp_user" value="<?php echo real_htmlspecialchars($smtp_user);
                     ?>"</div>
 </div>
 
-<div class="label">Passwort</div>
+<div class="label"><?php echo TRANSLATION_PASSWORD;?></div>
 <div class="inputWrapper"><input type="password" name="smtp_password" value="<?php echo real_htmlspecialchars($smtp_password);
                     ?>"</div>
 </div>
@@ -310,11 +303,11 @@ if($('#email_mode').val() == "pear_mail"){
     <h2 class="accordion-header"><?php echo TRANSLATION_EXPERT_SETTINGS;?></h2>
     
     <div class="accordion-content">
-<p><a href="index.php?action=settings">Anzeigen</a></p>
+<p><a href="index.php?action=settings"><?php echo TRANSLATION_VIEW;?></a></p>
 </div>
 </div>
 <br/>
-<input name="submit" type="submit" value="Einstellungen speichern"/>
+<input name="submit" type="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;?>"/>
 
 <?php
                      if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
@@ -332,7 +325,7 @@ $("#other_settings").ajaxForm({beforeSubmit: function(e){
   }, 
   success:function(e){
   $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+  $("#message").html("<span style=\"color:green;\"><?php echo TRANSLATION_CHANGES_WAS_SAVED;?></span>");
   }
   
 
