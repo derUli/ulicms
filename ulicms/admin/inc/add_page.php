@@ -5,20 +5,20 @@
          ?>
 <form id="pageform" name="newpageform" action="index.php?action=pages" method="post">
 
-<strong>Permalink:</strong><br/>
+<strong><?php echo TRANSLATION_PERMALINK;?></strong><br/>
 <input type="text" style="width:300px;" name="system_title" value="">
 <br/><br/>
 
-<strong data-tooltip="Der Titel der Seite">Seitentitel:</strong><br/>
+<strong><?php echo TRANSLATION_PAGE_TITLE;?></strong><br/>
 <input type="text" style="width:300px;" name="page_title" value="" onkeyup="systemname_vorschlagen(this.value)">
 <br/><br/>
 
-<strong data-tooltip="Der Titel der Seite">Alternativer Titel:</strong><br/>
+<strong><?php echo TRANSLATION_ALTERNATE_TITLE;?></strong><br/>
 <input type="text" style="width:300px;" name="alternate_title" value=""><br/>
 <small>Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll.</small>
 <br/><br/>
 
-<strong data-tooltip="In welcher Sprache ist diese Seite verfasst?">Sprache:</strong>
+<strong><?php echo TRANSLATION_LANGUAGE;?></strong>
 <br/>
 <select name="language">
 <?php
@@ -45,11 +45,11 @@
 </select>
 <br/><br/>
 
-<strong>Kategorie</strong><br/>
+<strong><?php echo TRANSLATION_CATEGORY;?></strong><br/>
 <?php echo categories :: getHTMLSelect()?>
 <br/><br/>
 
-<strong data-tooltip="In welchem Menü soll diese Seite angezeigt werden?">Menü:</strong><br/>
+<strong><?php echo TRANSLATION_MENU;?></strong><br/>
 <select name="menu" size=1>
 <?php
          foreach(getAllMenus() as $menu){
@@ -62,12 +62,12 @@
          ?>
 </select><br/> <br/>
 
-<strong data-tooltip="Die Position dieser Seite im Menü">Position:</strong><br/>
+<strong><?php echo TRANSLATION_POSITION;?></strong><br/>
 <input type="text" name="position" value="0">
               
 <br/><br/>
 
-<strong data-tooltip="Wenn das eine Unterseite werden sollte.">Übergeordnete Seite:</strong><br/>
+<strong><?php echo TRANSLATION_PARENT;?></strong><br/>
 <select name="parent" size=1>
 <option selected="selected" value="NULL">-</option>
 <?php foreach(getAllSystemNames() as $systemname){
@@ -104,7 +104,7 @@ document.newpageform.system_title.value=systemname
 }
 </script>
 
-<strong data-tooltip="Soll die Seite öffentlich zugänglich sein?">aktiviert:</strong><br/>
+<strong><?php echo TRANSLATION_ACTIVATED;?></strong><br/>
 <select name="activated" size=1>
 <option value="1">aktiviert</option>
 <option value="0">deaktiviert</option>
@@ -116,10 +116,10 @@ document.newpageform.system_title.value=systemname
 
                      <p><a name="toggle_options" href="#toggle_options" onclick="$('#extra_options').slideToggle();">Zusätzliche Optionen &gt;&gt;</a></p>
 <fieldset id="extra_options">
-<strong>Weiterleitung auf externen Link:</strong><br/>
+<strong><?php echo TRANSLATION_EXTERNAL_REDIRECT;?></strong><br/>
 <input type="text" style="width:300px;" name="redirection" value="">
 <br/><br/>
-<strong>Menüpunkt als Grafik</strong><br/>
+<strong><?php echo TRANSLATION_MENU_IMAGE;?></strong><br/>
 
 <script type="text/javascript">
 function openMenuImageSelectWindow(field) {
@@ -139,11 +139,11 @@ function openMenuImageSelectWindow(field) {
     value="" style="width:300px;cursor:pointer" /> <a href="#" onclick="$('#menu_image').val('');return false;">Leeren</a>
     
 <br/><br/>
-<strong>HTML-Datei als Inhalt:</strong>
+<strong><?php echo TRANSLATION_HTML_FILE;?></strong>
 <br/>
 <input type="text" style="width:300px;" name="html_file" value="">
 <br/><br/>
-<strong data-tooltip="Für welche Benutzergruppen soll diese Seite sichtbar sein?">Sichtbar für:</strong><br/>
+<strong><?php echo TRANSLATION_VISIBLE_FOR;?></strong><br/>
 <select name="access[]" size=4 multiple>
 <option value="all" selected>Alle</option>
 <option value="registered">Registrierte Benutzer</option>
@@ -153,17 +153,16 @@ function openMenuImageSelectWindow(field) {
 
 <br/><br/>
 
-<strong data-tooltip="Eine kurze Beschreibung dieser Seite für Suchmaschinen">Meta Description:</strong><br/>
+<strong><?php echo TRANSLATION_META_DESCRIPTION;?></strong><br/>
 <input type="text" style="width:300px;" name="meta_description" value=''>
 <br/><br/>
 
-<strong data-tooltip="Stichworte dieser Seite für Suchmaschinen
-Mit Komma getrennt">Meta Keywords:</strong><br/>
+<strong><?php echo TRANSLATION_META_KEYWORDS;?></strong><br/>
 <input type="text" style="width:300px;" name="meta_keywords" value=''>
  
 <br/><br/>
 
-<strong data-tooltip="Sollen Kommentare aktiviert sein?">Kommentare:</strong><br/>
+<strong><?php echo TRANSLATION_COMMENTS;?></strong><br/>
 <select name="comments_enabled" size=1>
 <option value="1">aktiviert</option>
 <option value="0" selected="selected">deaktiviert</option>
@@ -171,7 +170,7 @@ Mit Komma getrennt">Meta Keywords:</strong><br/>
 
 <br/><br/>
 
-<strong data-tooltip="In welchem Fenster soll diese Seite geöffnet werden?">Öffnen in</strong><br/>
+<strong><?php echo TRANSLATION_OPEN_IN;?></strong><br/>
 <select name="target" size=1>
 <option value="_self">In diesem Fenster</option>
 <option value="_blank">In neuem Fenster</option>
@@ -236,7 +235,7 @@ function confirmExit()
 </div>
 <input type="hidden" name="add_page" value="add_page">
 
-<input type="submit" value="Speichern">
+<input type="submit" value="<?php echo TRANSLATION_SAVE;?>">
 </div>
 <?php
          if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
