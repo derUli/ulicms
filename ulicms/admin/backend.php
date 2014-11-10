@@ -1,6 +1,10 @@
 <?php
 require_once "../init.php";
 
+$syslang = getSystemLanguage();
+include getLanguageFilePath($syslang);
+
+
 @session_start();
 
 $acl = new acl();

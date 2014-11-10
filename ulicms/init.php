@@ -238,6 +238,11 @@ $memory_limit = getconfig("memory_limit");
 
 if($memory_limit !== false)
  @ini_set('memory_limit', $memory_limit);
+ 
+$system_language = getconfig("system_language");
+if(!$system_language){
+   $system_language = "de";
+}
 
 $cache_period = getconfig("cache_period");
 
