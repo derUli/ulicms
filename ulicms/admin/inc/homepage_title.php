@@ -36,7 +36,7 @@
         
         
         ?>
-<h1>Titel der Homepage</h1>
+<h1><?php echo TRANSLATION_HOMEPAGE_TITLE;?></h1>
 <form action="index.php?action=homepage_title" id="homepage_title_settings" method="post">
 <table border=0>
 <tr>

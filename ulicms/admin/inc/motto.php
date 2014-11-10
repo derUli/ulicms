@@ -36,7 +36,7 @@
         
         
         ?>
-<h1>Motto</h1>
+<h1><?php echo TRANSLATION_MOTTO;?></h1>
 <form action="index.php?action=motto" id="motto" method="post">
 <table border=0>
 <tr>

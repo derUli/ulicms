@@ -36,7 +36,7 @@
         
         
         ?>
-<h1>Meta Keywords</h1>
+<h1><?php echo TRANSLATION_META_KEYWORDS;?></h1>
 <form action="index.php?action=meta_keywords" id="meta_keywords" method="post">
 <table border=0>
 <tr>
