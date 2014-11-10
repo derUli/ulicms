@@ -5,9 +5,9 @@
         
         
          ?>
-<h2>Seiten</h2>
-<p>Hier können Sie die einzelnen Seiten Ihrer Homepage bearbeiten oder löschen.</p>
-<p><a href="index.php?action=pages_new">Seite verfassen</a></p>
+<h2><?php echo TRANSLATION_PAGES;?></h2>
+<p><?php echo TRANSLATION_PAGES_INFOTEXT;?></p>
+<p><a href="index.php?action=pages_new"><?php echo TRANSLATION_CREATE_PAGE;?></a></p>
 
 <script type="text/javascript">
 function filter_by_language(element){
@@ -35,9 +35,9 @@ $(window).load(function(){
 
 </script>
 
-Nach Sprache filtern: 
+<?php echo TRANSLATION_FILTER_BY_LANGUAGE;?> 
 <select name="filter_language" onchange="filter_by_language(this)">
-<option value="">Bitte auswählen</option>
+<option value=""><?php echo TRANSLATION_PLEASE_SELECT;?></option>
 <?php
          if(!empty($_GET["filter_language"])){
              $_SESSION["filter_language"] = $_GET["filter_language"];
@@ -75,20 +75,20 @@ Nach Sprache filtern:
          ?>
 </select>
 &nbsp;&nbsp;
-Status: <select name="filter_status" onchange="filter_by_status(this)">
+<?php echo TRANSLATION_STATUS;?> <select name="filter_status" onchange="filter_by_status(this)">
 <option value="Standard" <?php
          if($_SESSION["filter_status"] == "standard"){
              echo " selected";
              }
-         ?>>Standard</option>
+         ?>><?php echo TRANSLATION_STANDARD;?></option>
 <option value="trash" <?php
          if($_SESSION["filter_status"] == "trash"){
              echo " selected";
              }
-         ?>>Papierkorb</option>
+         ?>><?php echo TRANSLATION_RECYCLE_BIN;?></option>
 </select>
 &nbsp; &nbsp;
-Kategorie: 
+<?php echo TRANSLATION_CATEGORY;?> 
 <?php
         echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
         ?>

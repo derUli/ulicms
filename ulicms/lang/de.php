@@ -115,6 +115,10 @@ define("TRANSLATION_EDIT", "Bearbeiten");
 define("TRANSLATION_ASK_FOR_DELETE", "Wirklich löschen?");
 define("TRANSLATION_SAVE_CHANGES", "Änderungen speichern");
 define("TRANSLATION_CATEGORY", "Kategorie");
+define("TRANSLATION_PLEASE_SELECT", "Bitte auswählen");
+define("TRANSLATION_RECYCLE_BIN", "Papierkorb");
+define("TRANSLATION_STANDARD", "Standard");
+define("TRANSLATION_EVERY", "Alle");
 
 // Banner
 define("TRANSLATION_ADD_ADVERTISEMENT", "Banner hinzufügen");
@@ -135,3 +139,9 @@ define("TRANSLATION_CREATE_USER", "Benutzer anlegen");
 define("TRANSLATION_GROUP", "Gruppe");
 define("TRANSLATION_PASSWORD", "Passwort");
 define("TRANSLATION_SEND_LOGINDATA_BY_MAIL", "Die Zugangsdaten per E-Mail senden.");
+
+// Seitenverwaltung
+define("TRANSLATION_PAGES_INFOTEXT", "Hier können Sie die einzelnen Seiten Ihrer Homepage bearbeiten oder löschen.");
+define("TRANSLATION_CREATE_PAGE", "Seite verfassen");
+define("TRANSLATION_FILTER_BY_LANGUAGE", "Nach Sprache filtern");
+define("TRANSLATION_STATUS", "Status");
