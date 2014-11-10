@@ -121,6 +121,9 @@ define("TRANSLATION_STANDARD", "Standard");
 define("TRANSLATION_EVERY", "Alle");
 define("TRANSLATION_NO_PERMISSIONS", "Sie haben nicht die Berechtigung, um auf diese Seite zugreifen zu dürfen.<br/>Bitte kontaktieren Sie den Administrator dieser Internetseite, damit er Ihnen die benötigten Rechte gibt.");
 
+define("TRANSLATION_YES", "Ja");
+define("TRANSLATION_NO", "Nein");
+
 // Banner
 define("TRANSLATION_ADD_ADVERTISEMENT", "Banner hinzufügen");
 define("TRANSLATION_CANT_DELETE_ADMIN", "Der Admin kann nicht gelöscht werden.");
@@ -170,3 +173,7 @@ define("TRANSLATION_COMMENTS", "Kommentare");
 define("TRANSLATION_OPEN_IN", "Öffnen in");
 define("TRANSLATION_CLEAR", "Leeren");
 define("TRANSLATION_VISIBLE_FOR", "Sichtbar für");
+
+// Gruppen
+define("TRANSLATION_CREATE_GROUP", "Gruppe erstellen");
+define("TRANSLATION_MAKE_GROUP_DEFAULT", "Die Gruppe %name% zum Standard für neue User machen?");
