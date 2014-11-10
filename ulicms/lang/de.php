@@ -15,3 +15,6 @@ define("TRANSLATION_VIEWS", "Aufrufe");
 
 define("TRANSLATION_DATE", "Datum");
 define("TRANSLATION_DONE_BY", "Durchgeführt von");
+
+define("TRANSLATION_EDIT_PROFILE", "Profil bearbeiten");
+define("TRANSLATION_HELLO_NAME", "Hallo %firstname% %lastname%!");
