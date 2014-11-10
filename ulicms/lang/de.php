@@ -169,3 +169,4 @@ define("TRANSLATION_META_KEYWORDS", "Meta Keywords");
 define("TRANSLATION_COMMENTS", "Kommentare");
 define("TRANSLATION_OPEN_IN", "Öffnen in");
 define("TRANSLATION_CLEAR", "Leeren");
+define("TRANSLATION_VISIBLE_FOR", "Sichtbar für");
