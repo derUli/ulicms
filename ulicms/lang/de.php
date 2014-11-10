@@ -62,7 +62,7 @@ define("TRANSLATION_PACKAGES", "Pakete");
 define("TRANSLATION_UPDATE", "Update");
 
 define("TRANSLATION_SETTINGS", "Einstellungen");
-define("TRANSLATION_GENERAL_SETTINGS", "Grundinstellungen");
+define("TRANSLATION_GENERAL_SETTINGS", "Grundeinstellungen");
 define("TRANSLATION_DESIGN", "Design");
 define("TRANSLATION_SPAMFILTER", "Spamfilter");
 define("TRANSLATION_MOTD", "MOTD");
