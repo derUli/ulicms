@@ -1,4 +1,4 @@
-<h2>Sprachen verwalten</h2>
+<h2><?php echo TRANSLATION_LANGUAGES;?></h2>
 <?php if(defined("_SECURITY")){
     
      $acl = new ACL();
@@ -10,16 +10,16 @@
 <form action="index.php?action=languages" method="post">
 <table border=0>
 <tr>
-<td><strong>Kürzel:</strong> </td>
+<td><strong><?php echo TRANSLATION_SHORTCODE;?></strong> </td>
 <td><input type="text" name="language_code" maxlength=6 size=6></td>
 </tr>
 <tr>
-<td style="width:100px;"><strong>Volle Bezeichnung:</strong> </td>
+<td style="width:100px;"><strong><?php echo TRANSLATION_FULL_NAME;?></strong> </td>
 <td><input type="text" name="name" maxlength=100 size=40></td>
 </tr>
 <tr>
 <td></td>
-<td><input type="submit" name="add_language" value="Sprache hinzufügen"></td>
+<td><input type="submit" name="add_language" value="<?php echo TRANSLATION_ADD_LANGUAGE;?>"></td>
 </tr>  
 
 </table>
@@ -31,9 +31,9 @@
              ?>
 <table border=1 style="width:800px;"> 
 <tr>
-<td><strong>Kürzel</strong></td>
-<td><strong>Volle Bezeichnung</strong></td>
-<td align="center"><strong>Standard</strong></td>
+<td><strong><?php echo TRANSLATION_SHORTCODE;?></strong></td>
+<td><strong><?php echo TRANSLATION_FULL_NAME;?></strong></td>
+<td align="center"><strong><?php echo TRANSLATION_STANDARD;?></strong></td>
 <td></td>
 </tr>
 <?php
@@ -49,12 +49,12 @@
 <td align="center" style="font-weight:bold;">
 <?php
                  if($row -> language_code === getconfig("default_language")){
-                     echo "<span style='color:green !important;'>Ja</span>";
+                     echo "<span style='color:green !important;'>".TRANSLATION_YES."</span>";
                      }else{
                      ?>
-<a onclick="return confirm('Möchten Sie <?php echo $row -> name;
-                     ?> als Standard festlegen?')" href="index.php?action=languages&default=<?php echo $row -> language_code?>">
-<span style="color:red !important;">Nein</span></a>
+<a onclick="return confirm('<?php 
+echo str_ireplace("%name%", $row->name, TRANSLATION_DELETE_LANGUAGE_REALLY);?>')" href="index.php?action=languages&default=<?php echo $row -> language_code?>">
+<span style="color:red !important;"><?php echo TRANSLATION_NO;?></span></a>
 <?php
                      }
                  ?>
@@ -63,7 +63,7 @@
 <td align="center">
 <?php if($row -> language_code == getconfig("default_language")){
                      ?>
-<a onclick="javascript:alert('Die Standardsprache kann nicht gelöscht werden!')" href="#">
+<a onclick="javascript:alert('<?php echo TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE;?>')" href="#">
 <img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a>
 </a>
 <?php
