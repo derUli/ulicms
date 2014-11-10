@@ -329,3 +329,7 @@ define("TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED", "Extracting file failed. (%pk
 define("TRANSLATION_PACKAGE_SUCCESSFULL_UPLOADED", "The package \"%file%\" was successfully installed.");
 define("TRANSLATION_INSALLATION_FAILED", "The package \"%file%\" could not be installed.");
 define("TRANSLATION_UPLOAD_FAILED", "File Upload failed!");
+
+
+// Info
+define("TRANSLATION_LICENSE", "License");
