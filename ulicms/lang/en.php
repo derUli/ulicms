@@ -339,3 +339,6 @@ define("TRANSLATION_LICENSE", "License");
 define("TRANSLATION_MINUTES", "Minutes");
 
 define("TRANSLATION_FILE", "File");
+
+define("TRANSLATION_PERMISSIONS", "Permissions");
+define("TRANSLATION_SELECT_ALL", "Select All");
