@@ -1,6 +1,7 @@
 <?php
 
-function getLanguageFilePath($lang = "de"){
+function getLanguageFilePath($lang = "de", $component = null){
+   // Todo Module Language Files
    return ULICMS_ROOT."/lang/".$lang.".php";
 }
 
