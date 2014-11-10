@@ -118,3 +118,7 @@ define("TRANSLATION_CATEGORY", "Kategorie");
 // Banner
 define("TRANSLATION_ADD_ADVERTISEMENT", "Banner hinzufügen");
 define("TRANSLATION_ADVERTISEMENT_INFOTEXT", "Hier können Sie die Werbebanner für Ihre Internetseite verwalten.");
+
+// Benutzer
+define("TRANSLATION_USERS_INFOTEXT", "Hier können Sie die Benutzer Ihrer Homepage verwalten und die Passwörter ändern.");
+define("TRANSLATION_CREATE_USER", "Benutzer anlegen");
