@@ -6,7 +6,7 @@
 <input type="checkbox" id="spamfilter_enabled" name="spamfilter_enabled"<?php if(getconfig("spamfilter_enabled") == "yes"){
          echo " checked";
          }
-     ?> value="yes" onChange="spamFilterEnabledcheckboxChanged(this.checked)"> <label for="spamfilter_enabled"><?php echo TRANSLATION_ENABLED;?></label>
+     ?> value="yes" onChange="spamFilterEnabledcheckboxChanged(this.checked)"> <label for="spamfilter_enabled"><?php echo TRANSLATION_SPAMFILTER_ENABLED;?></label>
 <script type="text/javascript">
 function spamFilterEnabledcheckboxChanged(checked){
     if(checked){
