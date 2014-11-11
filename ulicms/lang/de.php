@@ -227,7 +227,7 @@ define("TRANSLATION_BACKGROUNDCOLOR", "Hintergrundfarbe");
 define("TRANSLATION_TITLE_FORMAT", "Seitentitel Format");
 
 // Spamfilter Einstellungen
-define("TRANSLATION_ENABLED", "Spamfilter aktivieren");
+define("TRANSLATION_SPAMFILTER_ENABLED", "Spamfilter aktivieren");
 define("TRANSLATION_BLACKLIST", "Schwarze Liste");
 define("TRANSLATION_SPAM_COUNTRIES", "Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren");
 define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Chinesische Schriftzeichen verbieten");
@@ -342,3 +342,6 @@ define("TRANSLATION_FILE", "Datei");
 define("TRANSLATION_PERMISSIONS", "Berechtigungen");
 define("TRANSLATION_SELECT_ALL", "Alles auswählen");
 define("TRANSLATION_FORMAT_TIME", "%d Tage %02d:%02d:%02d Stunden");
+
+define("TRANSLATION_ENABLED", "Aktiviert");
+define("TRANSLATION_DISABLED", "Deaktiviert");

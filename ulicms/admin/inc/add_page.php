@@ -106,8 +106,8 @@ document.newpageform.system_title.value=systemname
 
 <strong><?php echo TRANSLATION_ACTIVATED;?></strong><br/>
 <select name="activated" size=1>
-<option value="1">aktiviert</option>
-<option value="0">deaktiviert</option>
+<option value="1"><?php echo TRANSLATION_ENABLED;?></option>
+<option value="0"><?php echo TRANSLATION_DISABLED;?></option>
 </select>
 
 <br/><br/>
@@ -164,8 +164,8 @@ function openMenuImageSelectWindow(field) {
 
 <strong><?php echo TRANSLATION_COMMENTS;?></strong><br/>
 <select name="comments_enabled" size=1>
-<option value="1">aktiviert</option>
-<option value="0" selected="selected">deaktiviert</option>
+<option value="1"><?php echo TRANSLATION_ENABLED;?></option>
+<option value="0" selected="selected"><?php echo TRANSLATION_DISABLED;?></option>
 </select>
 
 <br/><br/>

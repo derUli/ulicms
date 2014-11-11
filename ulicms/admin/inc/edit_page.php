@@ -110,11 +110,11 @@
 <option value="1" <?php if($row -> active == 1){
                  echo "selected";
                  }
-             ?>>aktiviert</option>
+             ?>><?php echo TRANSLATION_ENABLED;?></option>
 <option value="0" <?php if($row -> active == 0){
                  echo "selected";
                  }
-             ?>>deaktiviert</option>
+             ?>><?php echo TRANSLATION_DISABLES;?></option>
 </select>
 <br/>
 
@@ -193,11 +193,11 @@ function openMenuImageSelectWindow(field) {
 <option value="1" <?php if($row -> comments_enabled == 1){
                          echo "selected";
                          }
-                     ?>>aktiviert</option>
+                     ?>><?php echo TRANSLATION_ENABLED;?></option>
 <option value="0" <?php if($row -> comments_enabled == 0){
                          echo "selected";
                          }
-                     ?>>deaktiviert</option>
+                     ?>><?php echo TRANSLATION_DISABLED;?></option>
 </select>
 
 <br/><br/>
