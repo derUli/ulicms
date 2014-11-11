@@ -65,9 +65,9 @@ $(window).load(function(){
          $languages = getAllLanguages();
          for($j = 0; $j < count($languages); $j++){
              if($languages[$j] == $_SESSION["filter_language"]){
-                 echo "<option value='" . $languages[$j] . "' selected>" . $languages[$j] . "</option>";
+                 echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
                  }else{
-                 echo "<option value='" . $languages[$j] . "'>" . $languages[$j] . "</option>";
+                 echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
                  }
             
             
