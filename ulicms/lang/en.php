@@ -345,6 +345,6 @@ define("TRANSLATION_SELECT_ALL", "Select All");
 
 define("TRANSLATION_FORMAT_TIME", "%d Days %02d:%02d:%02d Hours");
 
-
 define("TRANSLATION_ENABLED", "Enabled");
 define("TRANSLATION_DISABLED", "Disabled");
+define("TRANSLATION_OFF", "Off");

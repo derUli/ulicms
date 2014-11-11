@@ -136,7 +136,7 @@
 <option value="off" <?php if($settings["comment_mode"] == "off"){
                  echo 'selected';
                  }
-             ?>>Aus</option>
+             ?>><?php echo TRANSLATION_OFF;?></option>
 </select>
 </td>
 </tr>
