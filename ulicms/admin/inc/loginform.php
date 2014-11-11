@@ -26,14 +26,14 @@ if(isset($_SESSION["language"]) and in_array($_SESSION["language"], $languages))
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_LANGUAGE;?></strong></td>
-<td><select name="system_language">
+<td><select name="system_language" style="width:200px;">
 <?php 
 for($i=0; $i < count($languages); $i++){
  if( $default_language == $languages[$i]){
 
-echo '<option value="'.$languages[$i].'" selected>'.$languages[$i].'</option>';
+echo '<option value="'.$languages[$i].'" selected>'.getLanguageNameByCode($languages[$i]).'</option>';
 } else {
-echo '<option value="'.$languages[$i].'">'.$languages[$i].'</option>';
+echo '<option value="'.$languages[$i].'">'.getLanguageNameByCode($languages[$i]).'</option>';
 }
 }
 ?>
