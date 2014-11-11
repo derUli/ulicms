@@ -346,3 +346,6 @@ define("TRANSLATION_FORMAT_TIME", "%d Tage %02d:%02d:%02d Stunden");
 define("TRANSLATION_ENABLED", "Aktiviert");
 define("TRANSLATION_DISABLED", "Deaktiviert");
 define("TRANSLATION_OFF", "Aus");
+
+define("TRANSLATION_GREEN", "Grün");
+define("TRANSLATION_BLACK", "Schwarz");

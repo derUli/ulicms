@@ -134,11 +134,11 @@ echo " checked";
 <option value="green"<?php
      if($backend_style === "green")
          echo " selected"
-         ?>>Grün</option>
+         ?>><?php echo TRANSLATION_GREEN;?></option>
 <option value="black"<?php
          if($backend_style === "black")
              echo " selected"
-             ?>>Schwarz</option>
+             ?>><?php echo TRANSLATION_BLACK;?></option>
 </select>
 
     </td>
