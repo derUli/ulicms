@@ -5,6 +5,17 @@ function getLanguageFilePath($lang = "de", $component = null){
    return ULICMS_ROOT."/lang/".$lang.".php";
 }
 
+function getLanguageNameByCode($code){
+   $query = db_query("SELECT name FROM `".tbname("languages"). "` WHERE language_code = '".db_escape($code)."'");
+   $retval = null;
+   if(db_num_rows($query) > 0){
+      $result = db_fetch_object($query);
+      $retval = $result->name;
+      }
+      
+      return $retval;
+}
+
 function getAvailableBackendLanguages(){
    $langdir = ULICMS_ROOT."/lang/";
    $list = scandir($langdir);
