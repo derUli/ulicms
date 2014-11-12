@@ -5,6 +5,21 @@ function getLanguageFilePath($lang = "de", $component = null){
    return ULICMS_ROOT."/lang/".$lang.".php";
 }
 
+function getModuleName($module){
+   $name_file = getModulePath($module) .
+ $module . "_name.php";
+ if(!file_exists($name_file)){
+    return $module;
+ }
+ include_once $name_file;
+ $name_function = $module."_name";
+ if(function_exists($name_function)){
+    return call_user_func($name_function);
+ } else{
+   return $module;
+ }
+}
+
 function getLanguageNameByCode($code){
    $query = db_query("SELECT name FROM `".tbname("languages"). "` WHERE language_code = '".db_escape($code)."'");
    $retval = $code;
