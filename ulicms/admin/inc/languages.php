@@ -64,7 +64,7 @@ echo str_ireplace("%name%", $row->name, TRANSLATION_DELETE_LANGUAGE_REALLY);?>')
 <?php if($row -> language_code == getconfig("default_language")){
                      ?>
 <a onclick="javascript:alert('<?php echo TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE;?>')" href="#">
-<img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a>
+<img src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;?>" title="<?php echo TRANSLATION_DELETE;?>"></a>
 </a>
 <?php
                      }else{
