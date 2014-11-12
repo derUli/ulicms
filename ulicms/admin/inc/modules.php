@@ -45,7 +45,7 @@ if(!$acl -> hasPermission("list_packages")){
              $module_has_admin_page = file_exists(getModuleAdminFilePath($modules[$i]));
             
             
-             echo $modules[$i];
+             echo getModuleName($modules[$i]);
              echo "</strong>";
             
              echo "<div style=\"float:right\">";
