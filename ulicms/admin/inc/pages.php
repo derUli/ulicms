@@ -182,16 +182,16 @@ $(window).load(function(){
                 
                 
                 
-                 echo "<td><a href=\"../" . $row -> systemname . ".html\" target=\"_blank\"><img src=\"gfx/preview.gif\">Anzeigen</a></td>";
-                 echo "<td>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img src="gfx/edit.gif"> Bearbeiten</a></td>';
+                 echo "<td style='text-align:center'><a href=\"../" . $row -> systemname . ".html\" target=\"_blank\"><img src=\"gfx/preview.gif\" alt=\"".TRANSLATION_VIEW."\" title=\"".TRANSLATION_VIEW."\"></a></td>";
+                 echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img src="gfx/edit.gif" alt="'.TRANSLATION_EDIT.'" title="'.TRANSLATION_EDIT.'"></a></td>';
            
                     
                      if($_SESSION["filter_status"] == "trash"){
-                         echo "<td>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img src="gfx/undelete.png"> '.TRANSLATION_RECOVER.'</a></td>';
+                         echo "<td style='text-align:center'>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img src="gfx/undelete.png" alt="'.TRANSLATION_RECOVER.'" title="'.TRANSLATION_RECOVER.'"></a></td>';
                          }
                     else
                         {
-                         echo "<td>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif"> '.TRANSLATION_DELETE.'</a></td>';
+                         echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" alt="'.TRANSLATION_DELETE.'" title="'.TRANSLATION_DELETE.'"></a></td>';
                         
                         
                          }
