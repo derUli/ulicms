@@ -73,7 +73,7 @@ if(!$acl -> hasPermission("import")){
         echo "checked";
     }
     ?>><label for="do_update"><?php echo TRANSLATION_DO_IMPORT;?></label></p>
-  <input type="submit" name="submit" value="Importieren">
+  <input type="submit" name="submit" value="<?php echo TRANSLATION_DO_IMPORT;?>">
   </form>
   
   <?php
