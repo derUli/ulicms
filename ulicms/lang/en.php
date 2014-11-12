@@ -366,3 +366,7 @@ define("TRANSLATION_TARGET_BLANK", "In a new window");
 define("TRANSLATION_JSON_IMPORT", "JSON Import");
 define("TRANSLATION_IMPORT_INTO_TABLE", "Import into table");
 define("TRANSLATION_DO_IMPORT", "Run Import");
+
+define("TRANSLATION_IMPORT_INTO_TABLE_SUCCESSFULL", "Import into table %tabelle% was successfull!");
+
+define("TRANSLATION_NOT_A_JSON_FILE", "This is not a JSON file!");
