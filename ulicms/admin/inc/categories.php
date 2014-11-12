@@ -64,17 +64,17 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
             ?></td>
 <td><?php echo real_htmlspecialchars($category["name"]);
             ?></td>
-<td><a href="?action=categories&edit=<?php echo $category["id"];
-            ?>"><img src="gfx/edit.gif" alt="Bearbeiten" title="Bearbeiten"></td>
+<td style="text-align:center;"><a href="?action=categories&edit=<?php echo $category["id"];
+            ?>"><img src="gfx/edit.gif" alt="<?php echo TRANSLATION_EDIT;?>" title="<?php echo TRANSLATION_EDIT;?>"></td>
 <?php if($category["id"] != 1){
                 ?>
 
-<td><a href="?action=categories&del=<?php echo $category["id"];
-                ?>" onclick="return confirm('Wirklich Löschen?')"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
+<td style="text-align:center;"><a href="?action=categories&del=<?php echo $category["id"];
+                ?>" onclick="return confirm('Wirklich Löschen?')"><img src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;?>" title="<?php echo TRANSLATION_DELETE;?>"></a></td>
 
 <?php }else{
                 ?>
-<td><a href="#" onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a></td>
+<td style="text-align:center;"><a href="#" onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;?>" title="<?php echo TRANSLATION_DELETE;?>"></a></td>
 <?php }
             ?>
 </tr>
