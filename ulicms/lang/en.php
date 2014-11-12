@@ -361,3 +361,8 @@ define("TRANSLATION_ADMINS", "Only Admins");
 
 define("TRANSLATION_TARGET_SELF", "In this window");
 define("TRANSLATION_TARGET_BLANK", "In a new window");
+
+// Import
+define("TRANSLATION_JSON_IMPORT", "JSON Import");
+define("TRANSLATION_IMPORT_INTO_TABLE", "Import into table");
+define("TRANSLATION_DO_IMPORT", "Run Import");
