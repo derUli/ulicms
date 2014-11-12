@@ -15,7 +15,7 @@
 
 <strong><?php echo TRANSLATION_ALTERNATE_TITLE;?></strong><br/>
 <input type="text" style="width:300px;" name="alternate_title" value=""><br/>
-<small>Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll.</small>
+<small><?php echo TRANSLATION_ALTERNATE_TITLE_INFO;?></small>
 <br/><br/>
 
 <strong><?php echo TRANSLATION_LANGUAGE;?></strong>
