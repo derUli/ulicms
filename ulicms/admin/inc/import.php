@@ -33,7 +33,7 @@ if(!$acl -> hasPermission("import")){
     
     
     ?>
-  <h1>JSON Import</h1>
+  <h1><?php echo TRANSLATION_JSON_IMPORT;?></h1>
   <?php if(count($errors) > 0){
          foreach($errors as $e){
              ?>
@@ -54,7 +54,7 @@ if(!$acl -> hasPermission("import")){
    <?php }
     ?>
   <form action="?action=import" method="post" enctype="multipart/form-data">
-  <p>Importiere in Tabelle:<br/>
+  <p><?php echo TRANSLATION_IMPORT_INTO_TABLE;?><br/>
   <select name="table" size="1">
   <?php foreach($tables as $name){
         ?>
@@ -72,7 +72,7 @@ if(!$acl -> hasPermission("import")){
   <p><input id="do_update" type="checkbox" name="do_update" <?php if($do_update){
         echo "checked";
     }
-    ?>><label for="do_update">Update durchführen</label></p>
+    ?>><label for="do_update"><?php echo TRANSLATION_DO_IMPORT;?></label></p>
   <input type="submit" name="submit" value="Importieren">
   </form>
   
