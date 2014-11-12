@@ -44,13 +44,13 @@ if(!$acl -> hasPermission("import")){
          }else if($valid === true){
         ?>
  
-  <p class="green">Import in Tabelle <?php real_htmlspecialchars($table);
-        ?> erfolgreich!</p>
+  <p class="green"><?php echo str_ireplace("%table%", real_htmlspecialchars($table), TRANSLATION_IMPORT_INTO_TABLE_SUCCESSFULL);;
+        ?> </p>
   <?php }
     ?>
   <?php if($valid === false){
          ?>
-  <p class="ulicms_error">Diese Datei ist nicht im JSON Format!</p>
+  <p class="ulicms_error"><?php echo TRANSLATION_NOT_A_JSON_FILE;?></p>
    <?php }
     ?>
   <form action="?action=import" method="post" enctype="multipart/form-data">
