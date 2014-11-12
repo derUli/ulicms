@@ -156,6 +156,7 @@ define("TRANSLATION_DEACTIVATED", "Disabled");
 define("TRANSLATION_VIEW", "View");
 define("TRANSLATION_PAGE_TITLE", "Page title");
 define("TRANSLATION_ALTERNATE_TITLE", "Alternate title");
+define("TRANSLATION_ALTERNATE_TITLE_INFO", "If the headline should not be the page title.");
 define("TRANSLATION_LANGUAGE", "Language");
 
 // Zusätzliche Optionen

@@ -32,7 +32,8 @@
              echo htmlspecialchars($row -> alternate_title);
             
              ?>"><br/>
-<small>Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll.</small>
+
+<small><?php echo TRANSLATION_ALTERNATE_TITLE_INFO;?></small>
 <br/><br/>
 
 <strong><?php echo TRANSLATION_LANGUAGE;?></strong>
@@ -169,7 +170,7 @@ function openMenuImageSelectWindow(field) {
 <select name="access[]" size=4 multiple>
 <option value="all"<?php if(in_array("all", $access)) echo " selected"?>><?php echo TRANSLATION_EVERYONE;?></option>
 <option value="registered"<?php if(in_array("registered", $access)) echo " selected"?>><?php echo TRANSLATION_REGISTERED_USERS;?></option>
-<option value="admin"<?php if(in_array("admin", $access)) echo " selected"?>><?php echo TRANSLATION_REGISTERED_ADMINS;?></option>
+<option value="admin"<?php if(in_array("admin", $access)) echo " selected"?>><?php echo TRANSLATION_ADMINS;?></option>
 </select>
 
 
