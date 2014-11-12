@@ -41,12 +41,12 @@
                  echo "<td>" . real_htmlspecialchars($row -> firstname) . "</td>";
                  echo "<td>" . real_htmlspecialchars($row -> email) . "</td>";
                  echo "<td>" . real_htmlspecialchars($group) . "</td>";
-                 echo "<td>" . '<a href="index.php?action=admin_edit&admin=' . $row -> id . '"><img src="gfx/edit.gif"> '.TRANSLATION_EDIT.'</a></td>';
+                 echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row -> id . '"><img src="gfx/edit.gif" alt="'.TRANSLATION_EDIT.'" title="'.TRANSLATION_EDIT.'"></a></td>';
                 
-                 if($row -> id == 1 || $row -> id == $_SESSION["login_id"]){
-                     echo "<td><img src=\"gfx/delete.gif\"> <a href=\"#\" onclick=\"alert('".TRANSLATION_CANT_DELETE_ADMIN."')\">".TRANSLATION_DELETE."</a></td>";
+                 if($row -> id == $_SESSION["login_id"]){
+                     echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('".TRANSLATION_CANT_DELETE_ADMIN."')\"><img src=\"gfx/delete.gif\" alt=\"".TRANSLATION_DELETE."\" title=\"".TRANSLATION_EDIT."\"></a></td>";
                      }else{
-                     echo "<td>" . '<a href="index.php?action=admin_delete&admin=' . $row -> id . '" onclick="return confirm(\''.TRANSLATION_ASK_FOR_DELETE.'\');"><img src="gfx/delete.gif"> Löschen</a></td>';
+                     echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_delete&admin=' . $row -> id . '" onclick="return confirm(\''.TRANSLATION_ASK_FOR_DELETE.'\');"><img src="gfx/delete.gif"></a></td>';
                      }
                 
                  echo '</tr>';
