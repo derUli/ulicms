@@ -172,7 +172,7 @@ if(defined("_SECURITY")){
     <?php for($n = 0; $n < count($modules_with_admin_page); $n++){
                 
                  ?>
-    <li><a href="?action=module_settings&module=<?php echo $modules_with_admin_page[$n]?>"><?php echo $modules_with_admin_page[$n]?></a></li>
+    <li><a href="?action=module_settings&module=<?php echo $modules_with_admin_page[$n]?>"><?php echo getModuleName($modules_with_admin_page[$n])?></a></li>
     <?php
                  }
              ?>
