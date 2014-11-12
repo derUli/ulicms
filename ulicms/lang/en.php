@@ -292,7 +292,7 @@ www.meinefirma.de=>de<br/>
 www.meinefirma.co.uk=>en<br/>
 www.meinefirma.fr=>fr
 </p>");
-define("TRANSLATION_SHOW_META_GENERATOR", "Prinz \"generator\" Metatag");
+define("TRANSLATION_SHOW_META_GENERATOR", "Print \"generator\" Metatag");
 define("TRANSLATION_SMTP_SETTINGS", "SMTP Settings");
 define("TRANSLATION_HOSTNAME", "Hostname");
 define("TRANSLATION_PORT", "Port");
