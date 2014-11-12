@@ -14,9 +14,9 @@ if(!$acl -> hasPermission("export")){
      $tables = db_get_tables();
     
     ?>
-  <h1>JSON Export</h1>
+  <h1><?php echo TRANSLATION_JSON_EXPORT;?></h1>
   <form action="?action=export" method="post">
-  <p>Exportiere Tabelle:<br/>
+  <p><?php echo TRANSLATION_EXPORT_INTO_TABLE;?><br/>
   <select name="table" size="1">
   <?php foreach($tables as $name){
         ?>
@@ -30,7 +30,7 @@ if(!$acl -> hasPermission("export")){
     ?>
   </select>
   </p>
-  <input type="submit" name="submit" value="Exportieren">
+  <input type="submit" name="submit" value="<?php echo TRANSLATION_DO_EXPORT;?>">
   </form>
   
   <?php
