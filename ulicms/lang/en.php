@@ -370,3 +370,8 @@ define("TRANSLATION_DO_IMPORT", "Run Import");
 define("TRANSLATION_IMPORT_INTO_TABLE_SUCCESSFULL", "Import into table %tabelle% was successfull!");
 
 define("TRANSLATION_NOT_A_JSON_FILE", "This is not a JSON file!");
+
+// Export
+define("TRANSLATION_JSON_EXPORT", "JSON Export");
+define("TRANSLATION_EXPORT_INTO_TABLE", "Export table");
+define("TRANSLATION_DO_EXPORT", "Run Export");
