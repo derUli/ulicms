@@ -123,7 +123,7 @@ define("TRANSLATION_NO", "No");
 
 // Banner
 define("TRANSLATION_ADD_ADVERTISEMENT", "Create banner");
-define("TRANSLATION_CANT_DELETE_ADMIN", "Can't delete admin user");
+define("TRANSLATION_CANT_DELETE_ADMIN", "Can\'t delete admin user");
 define("TRANSLATION_ADVERTISEMENT_INFOTEXT", "Here you can manage advertisements.");
 define("TRANSLATION_GIF_BANNER", "GIF Banner");
 define("TRANSLATION_HTML_BANNER", "HTML Banner");
