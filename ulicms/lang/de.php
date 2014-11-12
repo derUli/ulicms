@@ -349,3 +349,10 @@ define("TRANSLATION_OFF", "Aus");
 
 define("TRANSLATION_GREEN", "Grün");
 define("TRANSLATION_BLACK", "Schwarz");
+
+define("TRANSLATION_EVERYONE", "Jeder");
+define("TRANSLATION_REGISTERED_USERS", "Registrierte Benutzer");
+define("TRANSLATION_ADMINS", "Admin");
+
+define("TRANSLATION_TARGET_SELF", "In diesem Fenster");
+define("TRANSLATION_TARGET_BLANK", "In einem neuen Fenster");

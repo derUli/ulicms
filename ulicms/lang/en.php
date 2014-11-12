@@ -352,3 +352,11 @@ define("TRANSLATION_OFF", "Off");
 
 define("TRANSLATION_GREEN", "Green");
 define("TRANSLATION_BLACK", "Black");
+
+
+define("TRANSLATION_EVERYONE", "Everyone");
+define("TRANSLATION_REGISTERED_USERS", "Only registered users");
+define("TRANSLATION_ADMINS", "Only Admins");
+
+define("TRANSLATION_TARGET_SELF", "In this window");
+define("TRANSLATION_TARGET_BLANK", "In a new window");

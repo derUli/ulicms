@@ -167,9 +167,9 @@ function openMenuImageSelectWindow(field) {
 <?php $access = explode(",", $row -> access);
              ?>
 <select name="access[]" size=4 multiple>
-<option value="all"<?php if(in_array("all", $access)) echo " selected"?>>Alle</option>
-<option value="registered"<?php if(in_array("registered", $access)) echo " selected"?>>Registrierte Benutzer</option>
-<option value="admin"<?php if(in_array("admin", $access)) echo " selected"?>>Admin</option>
+<option value="all"<?php if(in_array("all", $access)) echo " selected"?>><?php echo TRANSLATION_EVERYONE;?></option>
+<option value="registered"<?php if(in_array("registered", $access)) echo " selected"?>><?php echo TRANSLATION_REGISTERED_USERS;?></option>
+<option value="admin"<?php if(in_array("admin", $access)) echo " selected"?>><?php echo TRANSLATION_REGISTERED_ADMINS;?></option>
 </select>
 
 
@@ -207,11 +207,11 @@ function openMenuImageSelectWindow(field) {
 <option <?php if($row -> target == "_self"){
                          echo 'selected="selected" ';
                          }
-                     ?>value="_self">In diesem Fenster</option>
+                     ?>value="_self"><?php echo TRANSLATION_TARGET_SELF;?></option>
 <option <?php if($row -> target == "_blank"){
                          echo 'selected="selected" ';
                          }
-                     ?>value="_blank">In neuem Fenster</option>
+                     ?>value="_blank"><?php echo TRANSLATION_TARGET_BLANK;?></option>
 </select>
 
 

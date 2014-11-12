@@ -145,9 +145,9 @@ function openMenuImageSelectWindow(field) {
 <br/><br/>
 <strong><?php echo TRANSLATION_VISIBLE_FOR;?></strong><br/>
 <select name="access[]" size=4 multiple>
-<option value="all" selected>Alle</option>
-<option value="registered">Registrierte Benutzer</option>
-<option value="admin">Admin</option>
+<option value="all" selected><?php echo TRANSLATION_EVERYONE;?></option>
+<option value="registered"><?php echo TRANSLATION_REGISTERED_USERS;?></option>
+<option value="admin"><?php echo TRANSLATION_ADMINS;?></option>
 </select>
 
 
@@ -172,8 +172,8 @@ function openMenuImageSelectWindow(field) {
 
 <strong><?php echo TRANSLATION_OPEN_IN;?></strong><br/>
 <select name="target" size=1>
-<option value="_self">In diesem Fenster</option>
-<option value="_blank">In neuem Fenster</option>
+<option value="_self"><?php echo TRANSLATION_TARGET_SELF;?></option>
+<option value="_blank"><?php echo TRANSLATION_TARGET_BLANK;?></option>
 </select>
 
 
