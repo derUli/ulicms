@@ -280,7 +280,7 @@ define("TRANSLATION_CACHE_ENABLED", "Cache enabled");
 define("TRANSLATION_CACHE_VALIDATION_DURATION", "Cache validation duration");
 define("TRANSLATION_CACHE_ENGINE", "Caching Engine");
 define("TRANSLATION_REPLACE_SHORTCUTS", "Replace shortcuts");
-define("TRANSLATION_REPLACE_SHORTCUTS_INFO", "Standard-Tastenkombinationen des Browsers werden ersetzt, so dass Sie z.B. durch Drücken von Strg+S ebenfalls speichern können.");
+define("TRANSLATION_REPLACE_SHORTCUTS_INFO", "Default shortcuts of your browser will be replace. So you can save a page by pressing ctrl + s for example.");
 
 define("TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM", "Move all menu entries from ");
 define("TRANSLATION_MOVE_ALL_MENU_ITEMS_TO", "to");
