@@ -381,3 +381,8 @@ define("TRANSLATION_DO_EXPORT", "Run Export");
 define("TRANSLATION_ONLY_IN_BACKEND", "Only at Backend");
 define("TRANSLATION_ONLY_IN_FRONTEND", "Only at Frontend");
 define("TRANSLATION_BOOTH_BACKEND_AND_FRONTEND", "Booth Backend and Frontend");
+
+
+define("TRANSLATION_CREATE_OPTION", "Create configuration variable");
+define("TRANSLATION_OPTION", "Variable");
+define("TRANSLATION_VALUE", "Value");
