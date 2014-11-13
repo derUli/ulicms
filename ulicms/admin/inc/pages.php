@@ -111,8 +111,8 @@ $(window).load(function(){
 <td><a href="?action=pages&order=menu"><?php echo TRANSLATION_MENU;?></a></td>
 <td><a href="?action=pages&order=position"><?php echo TRANSLATION_POSITION;?></a></td>
 <td><a href="?action=pages&order=parent"><?php echo TRANSLATION_PARENT;?></a></td>
-<td><a href="?action=pages&order=active"><?php echo TRANSLATION_VIEW;?></a></td>
 <td><a href="?action=pages&order=active"><?php echo TRANSLATION_ACTIVATED;?></a></td>
+<td><a href="?action=pages&order=active"><?php echo TRANSLATION_VIEW;?></a></td>
 <td><?php echo TRANSLATION_EDIT;?></td>
 <td><?php echo TRANSLATION_DELETE;?></td>
 
