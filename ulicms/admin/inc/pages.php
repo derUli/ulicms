@@ -181,8 +181,12 @@ $(window).load(function(){
                      }
                 
                 
-                
+                if(startsWith($row->redirection, "#")){
+                echo "<td style='text-align:center'></td>";
+                } else {
                  echo "<td style='text-align:center'><a href=\"../" . $row -> systemname . ".html\" target=\"_blank\"><img src=\"gfx/preview.gif\" alt=\"".TRANSLATION_VIEW."\" title=\"".TRANSLATION_VIEW."\"></a></td>";
+                 
+                 }
                  echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img src="gfx/edit.gif" alt="'.TRANSLATION_EDIT.'" title="'.TRANSLATION_EDIT.'"></a></td>';
            
                     

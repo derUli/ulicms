@@ -115,7 +115,7 @@
 <option value="0" <?php if($row -> active == 0){
                  echo "selected";
                  }
-             ?>><?php echo TRANSLATION_DISABLES;?></option>
+             ?>><?php echo TRANSLATION_DISABLED;?></option>
 </select>
 <br/>
 
