@@ -138,10 +138,10 @@ if(!is_admin()){
 <div class="label"><?php echo TRANSLATION_REPLACE_SHORTCUTS;?></div>
 <div class="inputWrapper">
 <select name="override_shortcuts" size=1>
-<option value="off" <?php if($override_shortcuts == "off" or !$override_shortcuts) echo " selected=\"selected\""?>>Aus</option>
-<option value="frontend" <?php if($override_shortcuts == "frontend") echo " selected=\"selected\""?>>Nur im Frontend</option>
-<option value="backend" <?php if($override_shortcuts == "backend") echo " selected=\"selected\""?>>Nur im Backend</option>
-<option value="on" <?php if($override_shortcuts == "on") echo " selected=\"selected\""?>>Im Frontend und Backend</option>
+<option value="off" <?php if($override_shortcuts == "off" or !$override_shortcuts) echo " selected=\"selected\""?>><?php echo TRANSLATION_OFF;?></option>
+<option value="frontend" <?php if($override_shortcuts == "frontend") echo " selected=\"selected\""?>><?php echo TRANSLATION_ONLY_IN_FRONTEND;?></option>
+<option value="backend" <?php if($override_shortcuts == "backend") echo " selected=\"selected\""?>><?php echo TRANSLATION_ONLY_IN_BACKEND;?></option>
+<option value="on" <?php if($override_shortcuts == "on") echo " selected=\"selected\""?>><?php echo TRANSLATION_BOOTH_BACKEND_AND_FRONTEND;?></option>
 </select>
 </div>
 <p><?php echo TRANSLATION_REPLACE_SHORTCUTS_INFO;?></p>
