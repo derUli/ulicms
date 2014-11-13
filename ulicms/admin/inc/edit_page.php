@@ -92,10 +92,10 @@
 <strong data-tooltip="Wenn das eine Unterseite werden sollte."><?php echo TRANSLATION_PARENT;?></strong><br/>
 <select name="parent" size=1>
 <option value="NULL">-</option>
-<?php foreach(getAllSystemNames() as $systemname){
+<?php foreach(getAllSystemNames($page_language) as $systemname){
                  ?>
 	<option value="<?php echo getPageIDBySystemname($systemname);
-                 ?>"<?php if(getPageIDBySystemname($systemname) == $row -> parent){
+                 ?>"<?php if(getPageIDBySystemname($systemname, $page_language) == $row -> parent){
                      echo " selected='selected'";
                      }
                  ?>><?php echo $systemname;

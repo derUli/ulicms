@@ -765,8 +765,15 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
 
 
 // get page id by systemname
-function getPageIDBySystemname($systemname){
- $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where systemname='" . db_escape($systemname) . "'");
+function getPageIDBySystemname($systemname, $lang = null){
+  if($lang){
+
+     $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where systemname='" . db_escape($systemname) . "'  AND language='".db_escape($lang)."'");
+
+  } else {
+  
+    $query = db_query("SELECT systemname, id FROM `" . tbname("content") . "` where systemname='" . db_escape($systemname) . "'");
+  }
  if(db_num_rows($query) > 0){
      $row = db_fetch_object($query);
      return $row -> id;
