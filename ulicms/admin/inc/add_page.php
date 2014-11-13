@@ -72,7 +72,7 @@
 <option selected="selected" value="NULL">-</option>
 <?php foreach(getAllSystemNames() as $systemname){
              ?>
-	<option value="<?php echo getPageIDBySystemname($systemname, $default_language);
+	<option value="<?php echo getPageIDBySystemname($systemname);
              ?>">
 	<?php echo $systemname;
              ?>
