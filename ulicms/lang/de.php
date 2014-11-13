@@ -369,3 +369,8 @@ define("TRANSLATION_NOT_A_JSON_FILE", "Diese Datei ist nicht im JSON Format!");
 define("TRANSLATION_JSON_EXPORT", "JSON Export");
 define("TRANSLATION_EXPORT_INTO_TABLE", "Exportiere Tabelle");
 define("TRANSLATION_DO_EXPORT", "Exportieren");
+
+// Shortcuts
+define("TRANSLATION_ONLY_IN_BACKEND", "Nur im Backend");
+define("TRANSLATION_ONLY_IN_FRONTEND", "Nur im Frontend");
+define("TRANSLATION_BOOTH_BACKEND_AND_FRONTEND", "Im Backend und im Frontend");
