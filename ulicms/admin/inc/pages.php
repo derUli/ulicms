@@ -174,10 +174,10 @@ $(window).load(function(){
                  echo "<td>" . getPageTitleByID($row -> parent) . "</td>";
                 
                  if($row -> active){
-                     echo "<td>Ja</td>";
+                     echo "<td>".TRANSLATION_YES."</td>";
                      }
                 else{
-                     echo "<td>Nein</td>";
+                     echo "<td>".TRANSLATION_NO."</td>";
                      }
                 
                 
