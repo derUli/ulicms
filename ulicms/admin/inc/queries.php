@@ -290,10 +290,12 @@ if($_POST["add_banner"] == "add_banner" && $acl -> hasPermission("banners")){
      $category = intval($_POST["category"]);
      $type = db_escape($_POST["type"]);
      $html = db_escape($_POST["html"]);
+     $language = db_escape($_POST["language"]);
 
     
      $query = db_query("INSERT INTO " . tbname("banner") . " 
-(name,link_url,image_url, category, `type`, html) VALUES('$name','$link_url','$image_url', '$category', '$type', '$html')", $connection);
+(name,link_url,image_url, category, `type`, html, `language`) VALUES('$name','$link_url','$image_url', '$category', '$type', '$html',
+'$language')", $connection);
     
      header("Location: index.php?action=banner");
      exit();
@@ -536,9 +538,10 @@ if($_POST["edit_banner"] == "edit_banner" && $acl -> hasPermission("banners")){
      
      $type = db_escape($_POST["type"]);
      $html = db_escape($_POST["html"]);
+     $language = db_escape($_POST["language"]);
     
      $query = db_query("UPDATE " . tbname("banner") . " 
-SET name='$name', link_url='$link_url', image_url='$image_url', category='$category', type='$type', html='$html' WHERE id=$id");
+SET name='$name', link_url='$link_url', image_url='$image_url', category='$category', type='$type', html='$html', language='$language' WHERE id=$id");
     
     
      header("Location: index.php?action=banner");

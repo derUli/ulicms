@@ -48,6 +48,7 @@ $(window).load(function(){
 <tr style="font-weight:bold;">
 <td style="width:40px;">--></td>
 <td><?php echo TRANSLATION_ADVERTISEMENTS;?></td>
+<td><?php echo TRANSLATION_LANGUAGE;?></td>
 <td><?php echo TRANSLATION_EDIT;?></td>
 <td><?php echo TRANSLATION_DELETE;?></td>
 </tr>
@@ -62,7 +63,12 @@ $(window).load(function(){
                  if($row->type == "gif"){
                  echo '<td><a href="' . $row -> link_url . '" target="_blank"><img src="' . $row -> image_url . '" title="' . $row -> name . '" alt="' . $row -> name . '" border=0></a></td>';
                  } else {
-                 echo '<td>'.$row->html.'</td>';
+                 echo '<td>'.htmlspecialchars($row->html).'</td>';
+                 }
+                 if($row->language == "all"){
+                    echo '<td>Alle</td>';
+                 } else {
+                    echo '<td>'.getLanguageNameByCode($row->language)."</td>";
                  }
                  echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $row -> id . '"><img src="gfx/edit.gif" alt="'.TRANSLATION_EDIT.'" title="'.TRANSLATION_EDIT.'"></a></td>';
                  echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_delete&banner=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" title="'.TRANSLATION_DELETE.'"></a></td>';

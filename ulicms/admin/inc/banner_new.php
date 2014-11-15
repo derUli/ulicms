@@ -24,6 +24,20 @@
 <textarea name="html" rows=10 cols=40></textarea>
 </fieldset>
 
+<strong><?php echo TRANSLATION_LANGUAGE;?></strong><br/>
+<select name="language">
+<?php
+     $languages = getAllLanguages();
+     echo "<option value='all'>" . TRANSLATION_EVERY . "</option>";
+     for($j = 0; $j < count($languages); $j++){
+         echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
+     }
+             ?>
+</select>
+
+<br/>
+<br/>
+
 <strong><?php echo TRANSLATION_CATEGORY;?></strong><br/>
 <?php echo categories :: getHTMLSelect()?>
 
