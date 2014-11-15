@@ -76,8 +76,8 @@
 <option selected="selected" value="NULL">-</option>
 <?php foreach($pages as $key=>$page){
              ?>
-	<option value="<?php echo $page["title"]; ?>">
-	<?php echo $page["systemname"];?> (ID: <?php echo $page["id"]; ?>)
+	<option value="<?php echo $page["id"]; ?>">
+	<?php echo $page["title"];?> (ID: <?php echo $page["id"]; ?>)
 	</option>
 <?php
              }
