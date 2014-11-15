@@ -57,7 +57,7 @@
                  }
                  
                  
-                 $pages = getAllPages($page_language, "title");
+                 $pages = getAllPages($page_language, "title", false);
              ?>
 </select>
 
