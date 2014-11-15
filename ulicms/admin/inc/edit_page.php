@@ -55,6 +55,9 @@
                 
                 
                  }
+                 
+                 
+                 $pages = getAllPages($page_language, "title");
              ?>
 </select>
 
@@ -84,22 +87,22 @@
              ?>
 </select><br/><br/>
 
-<strong data-tooltip="Die Position dieser Seite im Menü"><?php echo TRANSLATION_POSITION;?></strong><br/>
+<strong><?php echo TRANSLATION_POSITION;?></strong><br/>
 <input type="text" name="position" value="<?php echo $row -> position;
              ?>">
               
 <br/><br/>
-<strong data-tooltip="Wenn das eine Unterseite werden sollte."><?php echo TRANSLATION_PARENT;?></strong><br/>
+<strong><?php echo TRANSLATION_PARENT;?></strong><br/>
 <select name="parent" size=1>
 <option value="NULL">-</option>
-<?php foreach(getAllSystemNames() as $systemname){
+<?php foreach($pages as $key=>$page){
                  ?>
-	<option value="<?php echo getPageIDBySystemname($systemname);
-                 ?>"<?php if(getPageIDBySystemname($systemname) == $row -> parent){
+	<option value="<?php echo $page["id"];
+                 ?>"<?php if($page["id"] == $row -> parent){
                      echo " selected='selected'";
                      }
-                 ?>><?php echo $systemname;
-                 ?></option>
+                 ?>><?php echo $page["title"];
+                 ?> (ID: <?php echo $page["id"]; ?>)</option>
 <?php
                  }
              ?>

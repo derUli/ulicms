@@ -826,7 +826,25 @@ function getAllPagesWithTitle(){
 
  }
 
+// Get all pages
+function getAllPages($lang = null, $order = "systemname"){
+if(!$lang){
+   $query = db_query("SELECT * FROM `" . tbname("content") .
+    "` WHERE `deleted_at` IS NULL ORDER BY $order");
+ } else {
+ 
+   $query = db_query("SELECT * FROM `" . tbname("content") .
+    "` WHERE `deleted_at` IS NULL AND language ='".db_escape($lang)."' ORDER BY $order");
+ }
+ $returnvalues = Array();
+ while($row = db_fetch_assoc($query)){
+     array_push($returnvalues, $row);
+      
+     }
 
+ return $returnvalues;
+
+ }
 
 // Get systemnames of all pages
 function getAllSystemNames($lang = null){

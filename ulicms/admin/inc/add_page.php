@@ -1,6 +1,7 @@
 <?php if(defined("_SECURITY")){
      $acl = new ACL();
      if($acl -> hasPermission("pages")){
+     
         
          ?>
 <form id="pageform" name="newpageform" action="index.php?action=pages" method="post">
@@ -41,6 +42,9 @@
             
             
              }
+             
+             
+     $pages = getAllPages($default_language, "title");
          ?>
 </select>
 <br/><br/>
@@ -70,12 +74,10 @@
 <strong><?php echo TRANSLATION_PARENT;?></strong><br/>
 <select name="parent" size=1>
 <option selected="selected" value="NULL">-</option>
-<?php foreach(getAllSystemNames() as $systemname){
+<?php foreach($pages as $key=>$page){
              ?>
-	<option value="<?php echo getPageIDBySystemname($systemname);
-             ?>">
-	<?php echo $systemname;
-             ?>
+	<option value="<?php echo $page["title"]; ?>">
+	<?php echo $page["systemname"];?> (ID: <?php echo $page["id"]; ?>)
 	</option>
 <?php
              }
