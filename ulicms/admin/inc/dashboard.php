@@ -9,8 +9,8 @@ if($acl -> hasPermission("dashboard")){
      if(defined("_SECURITY") and logged_in()){
          $pages_count = db_num_rows(db_query("SELECT * FROM " . tbname("content")));
         
-         $topPages = db_query("SELECT * FROM " . tbname("content") . " WHERE notinfeed = 0 AND systemname <> \"kontakt\" ORDER BY views DESC LIMIT 5");
-         $lastModfiedPages = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname <> \"kontakt\" ORDER BY lastmodified DESC LIMIT 5");
+         $topPages = db_query("SELECT * FROM " . tbname("content") . " WHERE notinfeed = 0 AND redirection NOT LIKE '#%' ORDER BY views DESC LIMIT 5");
+         $lastModfiedPages = db_query("SELECT * FROM " . tbname("content") . " WHERE redirection NOT LIKE '#%' ORDER BY lastmodified DESC LIMIT 5");
         
          $admins_query = db_query("SELECT * FROM " . tbname("users"));
         
