@@ -270,6 +270,8 @@ define("TRANSLATION_FULL_NAME", "Volle Bezeichnung");
 define("TRANSLATION_ADD_LANGUAGE", "Sprache hinzufügen");
 define("TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE", "Die Standardsprache kann nicht gelöscht werden.");
 define("TRANSLATION_DELETE_LANGUAGE_REALLY", "Möchten Sie die Sprache %name% wirklich löschen?");
+define("TRANSLATION_REALLY_MAKE_DEFAULT_LANGUAGE", "Möchten Sie %name% zur Standardsprache machen?");
+
 
 // Sonstige Einstellungen
 define("TRANSLATION_SHORTCUTS", "Tastenkombinationen");

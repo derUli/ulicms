@@ -53,7 +53,7 @@
                      }else{
                      ?>
 <a onclick="return confirm('<?php 
-echo str_ireplace("%name%", $row->name, TRANSLATION_DELETE_LANGUAGE_REALLY);?>')" href="index.php?action=languages&default=<?php echo $row -> language_code?>">
+echo str_ireplace("%name%", $row->name, TRANSLATION_REALLY_MAKE_DEFAULT_LANGUAGE);?>')" href="index.php?action=languages&default=<?php echo $row -> language_code?>">
 <span style="color:red !important;"><?php echo TRANSLATION_NO;?></span></a>
 <?php
                      }
@@ -69,8 +69,8 @@ echo str_ireplace("%name%", $row->name, TRANSLATION_DELETE_LANGUAGE_REALLY);?>')
 <?php
                      }else{
                      ?>
-<a onclick="return confirm('Möchten Sie die Sprache <?php echo $row -> name;
-                     ?> wirklich löschen?')" href="index.php?action=languages&delete=<?php echo $row -> id?>">
+<a onclick="return confirm('<?php 
+echo str_ireplace("%name%", $row->name, TRANSLATION_DELETE_LANGUAGE_REALLY);?>')" href="index.php?action=languages&delete=<?php echo $row -> id?>">
 <img src="gfx/delete.gif" alt="Löschen" title="Löschen"></a>
 </a>
 <?php }
