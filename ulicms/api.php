@@ -827,7 +827,7 @@ function getAllPagesWithTitle(){
  }
 
 // Get all pages
-function getAllPages($lang = null, $order = "systemname"){
+function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = true){
 if(!$lang){
    $query = db_query("SELECT * FROM `" . tbname("content") .
     "` WHERE `deleted_at` IS NULL ORDER BY $order");
@@ -838,7 +838,9 @@ if(!$lang){
  }
  $returnvalues = Array();
  while($row = db_fetch_assoc($query)){
+    if(!($exclude_hash_links and startsWith($row["redirection"], "#"))){
      array_push($returnvalues, $row);
+     }
       
      }
 

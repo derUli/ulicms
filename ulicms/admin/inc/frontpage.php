@@ -55,13 +55,13 @@
             ?>" size=1 style="width:400px">
 <?php
 
-         $pages = getAllSystemNames($lang);
+         $pages = getAllPages($lang, "title", true);
  
    for($i = 0; $i < count($pages);$i++){
                  if($pages[$i] == $frontpages[$lang]){
-                     echo "<option value='" . $pages[$i] . "' selected='selected'>" . $pages[$i] . "</option>";
+                     echo "<option value='" . $pages[$i]["id"] . "' selected='selected'>" . $pages[$i]["title"] . " (ID: " . $pages[$i]["id"].")</option>";
                      }else{
-                     echo "<option value='" . $pages[$i] . "'>" . $pages[$i] . "</option>";
+                     echo "<option value='" . $pages[$i]["id"] . "'>" . $pages[$i]["title"] . " (ID: " . $pages[$i]["id"].")</option>";
                      }
                 
                  }
