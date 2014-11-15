@@ -60,7 +60,7 @@ function poweredByUliCMS(){
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner(){
-     $query = db_query("SELECT * FROM " . tbname("banner") . " ORDER BY RAND() LIMIT 1");
+     $query = db_query("SELECT * FROM " . tbname("banner") . " WHERE language='all' OR language='".db_escape($_SESSION["language"])."'ORDER BY RAND() LIMIT 1");
      if(db_num_rows($query) > 0){
          while($row = db_fetch_object($query)){
              $type = "gif";

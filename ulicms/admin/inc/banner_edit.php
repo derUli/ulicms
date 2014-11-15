@@ -55,6 +55,39 @@ echo 'checked="checked"';
 <textarea name="html" cols=40 rows=10><?php echo htmlspecialchars($row->html);?></textarea>
 </fieldset>
 
+<br/> <br/>
+
+
+<strong><?php echo TRANSLATION_LANGUAGE;?></strong><br/>
+<select name="language">
+<?php
+             $languages = getAllLanguages();
+            
+             $page_language = $row -> language;
+            
+            if($page_language === "all"){
+               echo "<option value='all' selected='selected'>" . TRANSLATION_EVERY . "</option>";
+            } else {
+               echo "<option value='all'>" . TRANSLATION_EVERY . "</option>";
+            }
+            
+             for($j = 0; $j < count($languages); $j++){
+                 if($languages[$j] === $page_language){
+                     echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
+                     }else{
+                     echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
+                     }
+                
+                
+                 }
+                 
+                 
+                 $pages = getAllPages($page_language, "title");
+             ?>
+</select>
+
+<br/><br/>
+
 
 <strong><?php echo TRANSLATION_CATEGORY;?></strong><br/>
 <?php

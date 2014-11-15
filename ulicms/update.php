@@ -49,6 +49,9 @@ ON DELETE SET NULL";
 $add_menu_title = "ALTER TABLE `".tbname("content")."` ADD COLUMN `menu_image` varchar(255) NULL";
 db_query($add_menu_title);
 
+$banner_add_language = "ALTER TABLE  `".tbname("banner")."` ADD  `language` VARCHAR( 255 ) NULL DEFAULT  'all';";
+db_query($banner_add_language);
+
 setconfig("db_schema", "7.2.1");
 setconfig("ckeditor_skin", "moono");
 
