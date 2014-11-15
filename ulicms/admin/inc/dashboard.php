@@ -122,10 +122,17 @@ $formatted = formatTime($time);
 <td><?php echo TRANSLATION_VIEWS;?></td>
 </tr>
 <?php while($row = db_fetch_object($topPages)){
+
+
+ $domain = getDomainByLanguage($row->language);
+                 if(!$domain){
+                    $url = "../".$row -> systemname . ".html";
+                    } else {
+                  $url = "http://".$domain."/". $row -> systemname . ".html";
+                 }
              ?>
 <tr>
-<td><a href="../<?php echo $row -> systemname;
-             ?>.html" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
+<td><a href="<?php echo $url;?>" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
              ?></a></td>
 <td align="right"><?php echo $row -> views;
              ?></td>
@@ -146,10 +153,18 @@ $formatted = formatTime($time);
 </tr>
 
 <?php while($row = db_fetch_object($lastModfiedPages)){
+
+
+ $domain = getDomainByLanguage($row->language);
+                 if(!$domain){
+                    $url = "../".$row -> systemname . ".html";
+                    } else {
+                  $url = "http://".$domain."/". $row -> systemname . ".html";
+                 }
+                 
              ?>
 <tr>
-<td><a href="../<?php echo $row -> systemname;
-             ?>.html" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
+<td><a href="<?php echo $url;?>" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
              ?></a></td>
 
 <td><?php echo date(env("date_format"), $row -> lastmodified)?></td>
