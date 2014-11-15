@@ -22,3 +22,4 @@
   - Startseitenauswahl in den Einstellungen nun nach Sprache gefiltert
   - Es können Seiten mit dem gleichen Systemnamen in verschiedenen Sprachen existieren.
   - Backend kann nun per Sprachdatei lokalisiert werden
+  - Sprache zu Werbebanner System hinzugefügt
