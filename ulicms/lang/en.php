@@ -266,8 +266,11 @@ define("TRANSLATION_OTHER_PACKAGE_SOURCE", "Other package source [URL]");
 define("TRANSLATION_SHORTCODE", "Shortcode");
 define("TRANSLATION_FULL_NAME", "Full name");
 define("TRANSLATION_ADD_LANGUAGE", "Add Language");
-define("TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE", "You can't delete the default language");
+define("TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE", "You can\'t delete the default language.");
 define("TRANSLATION_DELETE_LANGUAGE_REALLY", "Do you really want to delete %name% language?");
+define("TRANSLATION_REALLY_MAKE_DEFAULT_LANGUAGE", "Really make %name% to the default language?");
+
+
 
 // Sonstige Einstellungen
 define("TRANSLATION_SHORTCUTS", "Shortcuts");
