@@ -114,7 +114,7 @@ define("TRANSLATION_SAVE_CHANGES", "Save Changes");
 define("TRANSLATION_CATEGORY", "Category");
 define("TRANSLATION_PLEASE_SELECT", "Please select");
 define("TRANSLATION_RECYCLE_BIN", "Recycle bin");
-define("TRANSLATION_STANDARD", "Standard");
+define("TRANSLATION_STANDARD", "Default");
 define("TRANSLATION_EVERY", "Everything");
 define("TRANSLATION_NO_PERMISSIONS", "Access denied.");
 
