@@ -55,7 +55,7 @@ echo 'checked="checked"';
 <textarea name="html" cols=40 rows=10><?php echo htmlspecialchars($row->html);?></textarea>
 </fieldset>
 
-<br/> <br/>
+<br/> 
 
 
 <strong><?php echo TRANSLATION_LANGUAGE;?></strong><br/>
