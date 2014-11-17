@@ -44,3 +44,11 @@ define("TRANSLATION_INSTALLATION_FINISHED", "Installation beendet");
 define("TRANSLATION_FIRST_LOGIN_HELP", 'Die Installation von UliCMS wurde erfolgreich beendet.<br/>Bitte löschen Sie nun aus Sicherheitsgründen den Ordner "installer" vom Server. Sie können sich nun <a href="../admin/">hier</a> mit Ihrem vorhin angegebenen Benutzernamen und Passwort einloggen.');
 define("TRANSLATION_LOGIN_DATA_SENT_BY_MAIL", "Die Zugangsdaten wurden Ihnen per Mail geschickt.");
 define("TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL", "Die Zugangsdaten konnten Ihnen wegen einem technischen Problem nicht per E-Mail geschickt werden.");
+define("TRANSLATION_MAIL_MESSAGE_TITLE", "UliCMS Installation auf %domain%");
+
+define("TRANSLATION_MAIL_MESSAGE_TEXT", "Hallo %person_name%!\n" .
+         "Auf %domain% wurde UliCMS erfolgreich installiert\n\n" .
+         "Die Zugangsdaten lauten:\n" .
+         "Benutzername: %username%\n" .
+         "Passwort: %password%\n\n" .
+         "Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen.");

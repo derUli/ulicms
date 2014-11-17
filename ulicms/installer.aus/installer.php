@@ -503,18 +503,17 @@ var $db_type="mysql";
              fclose($handle);
              }
         
-         $message = "Hallo $zusammen!\n" .
-         "Auf " . $_SERVER["SERVER_NAME"] . " wurde UliCMS erfolgreich installiert\n\n" .
-         "Die Zugangsdaten lauten:\n" .
-         "Benutzername: " . $admin_user . "\n" .
-         "Passwort: $passwort\n\n" .
-         "Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen.";
+         $message = 
         
+        $title = str_ireplace("%domain%", $_SERVER["HTTP_HOST"], TRANSLATION_MAIL_MESSAGE_TITLE);
         
-        
+        $content = TRANSLATION_MAIL_MESSAGE_TEXT;
+        $content = str_ireplace("%domain%", $_SERVER["HTTP_HOST"], $content);
+        $content = str_ireplace("%person_name%", $zusammen, $content);
+        $content = str_ireplace("%username%", $admin_user, $content);
+        $content = str_ireplace("%password%", $passwort, $content);
          $success = @mail($email,
-             "UliCMS Installation auf " . $_SERVER["SERVER_NAME"],
-             $message, "From: $email\nContent-Type: text/plain; charset=UTF-8"
+             $title , $content, "From: $email\nContent-Type: text/plain; charset=UTF-8"
             );
         
          session_destroy();
