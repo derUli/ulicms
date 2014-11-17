@@ -3,13 +3,29 @@ session_start();
 setcookie(session_name(), session_id());
 error_reporting (E_ALL ^ E_NOTICE);
 
+if(!isset($_SESSION["language"])){
+   $_SESSION["language"] = "de";
+}
+
+if(isset($_GET["language"])){
+   $_SESSION["language"] = basename($_GET["language"]);
+}
+
+$file = "lang/".$_SESSION["language"].".php";
+
+if(!file_exists($file)){
+   $file = "lang/de.php";
+}
+
+include_once $file;
+
 date_default_timezone_set("Europe/Berlin");
 header("Content-Type: text/html; charset=UTF-8");
 include_once "../lib/workaround.php";
 ?>
 <!DOCTYPE html>
 <head>
-<title>UliCMS Installation</title>
+<title><?php echo TRANSLATION_TITLE;?></title>
 <link rel="stylesheet" type="text/css" href="media/style.css"/>
 </head>
 <body>
@@ -18,33 +34,23 @@ include_once "../lib/workaround.php";
 <?php
 if(!isset($_POST["step"])){
      ?>
-<h2>Willkommen</h2>
-<p>Willkommen zur Installation von UliCMS.</p>
+<h2><?php echo TRANSLATION_WELCOME;?></h2>
+<p><?php echo TRANSLATION_WELCOME2;?></p>
 <?php
      include "../version.php";
      $version = new ulicms_version();
     
      if($version -> getDevelopmentVersion()){
          ?>
-<p style="color:red;">Das hier ist eine Vorab-Version von UliCMS.<br/>
-Das bedeutet, diese Version ist noch nicht 100-prozentig fertig und dient nur der Vorschau auf ein neues Release.<br/>
-Setzen Sie diese Version bitte nicht produktiv ein!<br/>
+<p style="color:red;"><?php echo TRANSLATION_BETA_VERSION;?>
 </p>
 <?php
          }
      ?>
-<p>Folgen Sie den Anweisungen um das CMS auf Ihrem Server zu installieren.</p>
-<p>Setzen Sie bitte vorher die Dateirechte der folgenden Dateien auf 0755.<br/>
-<ol>
-<li>Das Hauptverzeichnis des CMS (Ohne die Unterordner)</li>
-<li>templates/ (inklusive Inhalt und Unterordner)</li>
-<li>content/ (inklusive Inhalt und Unterordner)</li>
-<li>modules/ (inklusive Inhalt und Unterordner)</li>
-</ol>
-</p>
-<br/>
-<h3>So müssen die Berechtigungen gesetzt sein</h3>
-<p><img src="media/chmod_02.png" alt="FTP Rechtevergabe" title="FTP Rechtevergabe" border=1/></p>
+<p><?php echo TRANSLATION_FOLLOW_INSTRUCTIONS;?></p>
+<?php echo TRANSLATION_CHMOD;?>
+<h3><?php echo TRANSLATION_PERMISSION;?></h3>
+<p><img src="media/chmod_02.png" alt="<?php echo TRANSLATION_PERMISSIONS2;?>" title="<?php echo TRANSLATION_PERMISSIONS2;?>" border=1/></p>
 <?php
      if (!function_exists('gd_info')){
          ?>
