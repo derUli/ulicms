@@ -168,39 +168,39 @@ if(!isset($error)){
 
 <?php if($_POST["step"] == "3"){
          ?>
-<h2>Homepage-Einstellungen</h2>
+<h2><?php echo TRANSLATION_HOMEPAGE_SETTINGS;?></h2>
 <form action="index.php" method="post">
 <table border=1>
 <tr>
-<td>Titel der Homepage:</td>
+<td><?php echo TRANSLATION_HOMEPAGE_TITLE;?></td>
 <td><input name="homepage_title" type="text" value="Meine Homepage"></td>
 </tr>
 <tr>
-<td>Motto:</td>
+<td><?php echo TRANSLATION_SITE_SLOGAN;?></td>
 <td><input name="motto" type="text" value="Dies und Das"></td>
 </tr>
 <tr>
-<td>Ihr Vorname:</td>
+<td><?php echo TRANSLATION_YOUR_FIRSTNAME;?></td>
 <td><input name="firstname" type="text" value="Max"></td>
 </tr>
 <tr>
-<td>Ihr Nachname:</td>
+<td><?php echo TRANSLATION_YOUR_LASTNAME;?></td>
 <td><input name="lastname" type="text" value="Mustermann"></td>
 </tr>
 <tr>
-<td>Ihre Emailadresse:</td>
+<td><?php echo TRANSLATION_YOUR_EMAIL_ADRESS;?></td>
 <td><input name="email" type="text" value="max@muster.de"></td>
 </tr>
 <tr>
-<td>Name des Administrator-Accounts:</td>
+<td><?php echo TRANSLATION_ADMIN_NAME;?></td>
 <td><input name="admin_user" type="text" value="admin"></td>
 </tr>
 <tr>
-<td>Ihr Passwort:</td>
+<td><?php echo TRANSLATION_ADMIN_PASSWORD;?></td>
 <td><input name="passwort" type="password" value=""></td>
 </tr>
 </table>
-<p><input type="submit" value="Installation starten"></p>
+<p><input type="submit" value="<?php echo TRANSLATION_DO_INSTALL;?>"></p>
 <input type="hidden" name="step" value="4">
 </form>
 
@@ -523,16 +523,16 @@ var $db_type="mysql";
         
         
          ?>
-<h2>Installation beendet</h2>
-<p>Die Installation von UliCMS wurde erfolgreich beendet.<br/>Bitte löschen Sie nun aus Sicherheitsgründen den Ordner "installer" vom Server. Sie können sich nun <a href="../admin/">hier</a> mit Ihrem vorhin angegebenen Benutzernamen und Passwort einloggen.<br/><br/>
+<h2><?php echo TRANSLATION_INSTALLATION_FINISHED;?></h2>
+<p><?php echo TRANSLATION_FIRST_LOGIN_HELP;?><br/><br/>
 <?php if($success){
              ?>
-<span style="color:green;">Die Zugangsdaten wurden Ihnen per Mail geschickt.
+<span style="color:green;"><?php echo TRANSLATION_LOGIN_DATA_SENT_BY_MAIL;?>
 </span>
 
 <?php }else{
              ?>
-<span style="color:red;">Die Zugangsdaten konnten Ihnen wegen einem technischen Problem nicht per E-Mail geschickt werden.</span>
+<span style="color:red;"><?php echo TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL;?></span>
 <?php }
          ?>
 <br/>
