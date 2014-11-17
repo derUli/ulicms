@@ -55,7 +55,7 @@ if(!isset($_POST["step"])){
      if (!function_exists('gd_info')){
          ?>
 <hr/>
-<p style="color:red;"><strong>php5-gd</strong> ist nicht installiert.<br/>Ohne <strong>php5-gd</strong> lässt sich UliCMS zwar installieren,<br/>Bitte installieren Sie dieses PHP-Modul und versuchen Sie es erneut.</p>
+<p style="color:red;"><?php echo TRANSLATION_GD_MISSING;?></p>
 <hr/>
 <?php }
      ?>
@@ -65,7 +65,7 @@ if(!isset($_POST["step"])){
      if (!function_exists('mysqli_connect')){
      $error = true;
          ?>
-<p style="color:red;"><strong>php5-mysql</strong> ist nicht installiert.<br/>Bitte installieren Sie dieses PHP-Modul und versuchen Sie es erneut.</p>
+<p style="color:red;"><?php echo TRANSLATION_MYSQLI_MISSING;?></p>
 
 <?php 
 
@@ -74,7 +74,7 @@ if(!function_exists("json_encode")){
 $error = true;
 ?>
 
-<p style="color:red;"><strong>php5-json</strong> ist nicht installiert.<br/>Bitte installieren Sie zuerst php5-json und versuchen Sie es dann erneut.</p>
+<p style="color:red;"><?php echo TRANSLATION_JSON_MISSING;?></p>
 
 <?php } 
 
@@ -83,7 +83,7 @@ if(!isset($error)){
 
 <form action="index.php" method="post">
 <input type="hidden" name="step" value="1">
-<input type="submit" value="Weiter">
+<input type="submit" value="<?php echo TRANSLATION_NEXT;?>">
 </form>
 <br/>
 
@@ -94,32 +94,31 @@ if(!isset($error)){
      ?>
 <?php if($_POST["step"] == "1"){
          ?>
-<h2>MySQL-Logindaten</h2>
-<p>Bitte tragen Sie in das untere Formular die Logindaten für den MySQL-Server ein. Diese bekommen Sie von Ihrem Provider.</p>
+<h2><?php echo TRANSLATION_MYSQL_LOGIN;?></h2>
+<p><?php echo TRANSLATION_MYSQL_LOGIN_HELP;?></p>
 <form action="index.php" method="post">
 <table border=1>
 <tr>
-<td>Servername:</td>
+<td><?php echo TRANSLATION_SERVERNAME;?></td>
 <td><input name="servername" type="text" value="localhost"></td>
 </tr>
 <tr>
-<td>Loginname:</td>
+<td><?php echo TRANSLATION_LOGINNAME;?></td>
 <td><input name="loginname"type="text" value=""></td>
 </tr>
 <tr>
-<td>Passwort:</td>
+<td><?php echo TRANSLATION_PASSWORD;?></td>
 <td><input name="passwort" type="password" value=""></td>
 </tr>
 <tr>
-<td>Datenbank:</td>
+<td><?php echo TRANSLATION_DATABASE_NAME;?></td>
 <td><input name="datenbank" type="text" value=""></td>
 </tr>
-<tr>
-<td>Prefix:</td>
+<td><?php echo TRANSLATION_PREFIX;?></td>
 <td><input name="prefix" type="text" value="ulicms_"></td>
 </tr>
 </table>
-<p><input type="submit" value="Weiter"></p>
+<p><input type="submit" value="<?php echo TRANSLATION_NEXT;?>"></p>
 <input type="hidden" name="step" value="2">
 </form>
 
@@ -128,17 +127,17 @@ if(!isset($error)){
 <?php if($_POST["step"] == "2"){
         
          ?>
-<h2>MySQL-Logindaten</h2>
+<h2><?php echo TRANSLATION_MYSQL_LOGIN;?></h2>
 <?php
          @$connection = mysqli_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
          if($connection == false){
-             echo "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werden.<br/>Dies kann z.B. an einem falschen Passwort liegen. Wenn Sie sich sicher sind, dass das Passwort richtig ist, prüfen Sie ob der MySQL-Datenbankserver läuft und erreichbar ist.";
+             echo TRANSLATION_DB_CONNECTION_FAILED;
              }else{
             
              @$select = mysqli_select_db($connection, $_POST["datenbank"]);
             
              if($select == false){
-                 echo "<p>Die Datenbank \"" . htmlspecialchars($_POST["datenbank"]) . "\" konnte nicht geöffnet werden.<br/>Eventuell müssen Sie die Datenbank vorher anlegen.</p>";
+                 echo TRANSLATION_CANT_OPEN_SCHEMA;
                  }else{
                  $_SESSION["mysql"] = array();
                  $_SESSION["mysql"]["server"] = $_POST["servername"];
@@ -147,7 +146,7 @@ if(!isset($error)){
                  $_SESSION["mysql"]["datenbank"] = $_POST["datenbank"];
                  $_SESSION["mysql"]["prefix"] = $_POST["prefix"];
                  ?>
-<p>Die Verbindung mit dem Datenbankserver wurde erfolgreich hergestellt.</p>
+<p><?php echo TRANSLATION_SUCCESSFULL_DB_CONNECT;?></p>
 
 <form action="index.php" method="post">
 <input type="hidden" name="step" value="3">
