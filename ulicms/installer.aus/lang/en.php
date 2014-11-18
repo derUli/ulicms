@@ -40,7 +40,7 @@ define("TRANSLATION_ADMIN_NAME", "Name of Admin Account");
 define("TRANSLATION_ADMIN_PASSWORD", "Password of Admin Account");
 define("TRANSLATION_DO_INSTALL", "Install");
 define("TRANSLATION_INSTALLATION_FINISHED", "Installation finished.");
-define("TRANSLATION_FIRST_LOGIN_HELP", 'The Installation of UliCMS is finished.<br/>Please delete "installer" director for security reasons. Then you can login <a href="../admin/">here</a>.');
+define("TRANSLATION_FIRST_LOGIN_HELP", 'The Installation of UliCMS is finished.<br/>Please delete "installer" directory for security reasons. Then you can login <a href="../admin/">here</a>.');
 define("TRANSLATION_LOGIN_DATA_SENT_BY_MAIL", "The Login informations was sent by mail");
 define("TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL", "Can't send login informations due to non working mail() Function.");
 define("TRANSLATION_MAIL_MESSAGE_TITLE", "UliCMS Installation at %domain%");
