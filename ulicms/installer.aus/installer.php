@@ -35,7 +35,7 @@ include_once "../lib/workaround.php";
 if(!isset($_REQUEST["step"])){
      ?>
    <form action="index.php" method="get">
-<p><strong>Sprache auswählen/ Select a language</strong><br/>
+<p><strong>Sprache auswählen / Select a language</strong><br/>
 
 <select name="language" onchange="window.location.replace('?language=' + this.value)">
 <option value="de" <?php if($_SESSION["language"] == "de") echo "selected";?>">Deutsch</option>
