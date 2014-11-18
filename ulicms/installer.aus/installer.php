@@ -32,8 +32,23 @@ include_once "../lib/workaround.php";
 <p><img src="../admin/gfx/logo.png" alt="UliCMS" title="UliCMS"><strong style="margin-left:30px; float:right; font-size:18pt;">Installation</strong></p>
 <hr/>
 <?php
-if(!isset($_POST["step"])){
+if(!isset($_REQUEST["step"])){
      ?>
+   <form action="index.php" method="get">
+<p><strong>Sprache auswählen/ Select a language</strong><br/>
+
+<select name="language" onchange="window.location.replace('?language=' + this.value)">
+<option value="de" <?php if($_SESSION["language"] == "de") echo "selected";?>">Deutsch</option>
+<option value="en" <?php if($_SESSION["language"] == "en") echo "selected";?>>English</option>
+</select>
+</p>
+<p>
+<input type="hidden" name="step" value="00">
+<input type="submit" value="<?php echo TRANSLATION_NEXT;?>">
+
+</p>
+</form>
+<?php } else if($_REQUEST["step"] == "0"){?>
 <h2><?php echo TRANSLATION_WELCOME;?></h2>
 <p><?php echo TRANSLATION_WELCOME2;?></p>
 <?php
@@ -92,7 +107,7 @@ if(!isset($error)){
 <?php
      }else{
      ?>
-<?php if($_POST["step"] == "1"){
+<?php if($_REQUEST["step"] == "1"){
          ?>
 <h2><?php echo TRANSLATION_MYSQL_LOGIN;?></h2>
 <p><?php echo TRANSLATION_MYSQL_LOGIN_HELP;?></p>
@@ -124,7 +139,7 @@ if(!isset($error)){
 
 <?php }
      ?>
-<?php if($_POST["step"] == "2"){
+<?php if($_REQUEST["step"] == "2"){
         
          ?>
 <h2><?php echo TRANSLATION_MYSQL_LOGIN;?></h2>
@@ -166,7 +181,7 @@ if(!isset($error)){
          }
      ?>
 
-<?php if($_POST["step"] == "3"){
+<?php if($_REQUEST["step"] == "3"){
          ?>
 <h2><?php echo TRANSLATION_HOMEPAGE_SETTINGS;?></h2>
 <form action="index.php" method="post">
@@ -209,7 +224,7 @@ if(!isset($error)){
          }
      ?>
 
-<?php if($_POST["step"] == "4"){
+<?php if($_REQUEST["step"] == "4"){
         
         
         
