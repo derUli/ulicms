@@ -800,7 +800,7 @@ function getPageTitleByID($id){
 
 // Get systemnames of all pages
 function getAllPagesWithTitle(){
- $query = db_query("SELECT systemname, id, title FROM `" . tbname("content") . "` WHERE `deleted_at`IS NULL ORDER BY systemname");
+ $query = db_query("SELECT systemname, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY systemname");
  $returnvalues = Array();
  while($row = db_fetch_object($query)){
      $a = Array($row->title, $row->systemname . ".html");
