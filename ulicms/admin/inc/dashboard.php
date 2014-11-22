@@ -51,10 +51,11 @@ echo $str;
 <?php
              }
          ?>
-<?php
+<?php        
+         if($acl -> hasPermission("system_update")){
          $updateInfo = checkForUpdates();
-        
-         if($updateInfo and $acl -> hasPermission("system_update")){
+         
+         if($updateInfo){
              ?>
 <h2 class="accordion-header">Update verfügbar</h2>
 <div class="accordion-content">
@@ -62,8 +63,11 @@ echo $str;
                  "<p><a><strong><b><u><em><i><span><img>");
              ?>
              </div>
-<?php }
-         ?>
+<?php
+ }
+
+}
+?>
 <h2 class="accordion-header"><?php echo TRANSLATION_STATISTICS;?></h2>      
 <div class="accordion-content">
 <table border=1>    
