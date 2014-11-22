@@ -57,7 +57,7 @@ echo $str;
          
          if($updateInfo){
              ?>
-<h2 class="accordion-header">Update verfügbar</h2>
+<h2 class="accordion-header"><?php echo TRANSLATION_UPDATE_AVAILABLE;?></h2>
 <div class="accordion-content">
 <?php echo strip_tags($updateInfo,
                  "<p><a><strong><b><u><em><i><span><img>");

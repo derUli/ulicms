@@ -381,3 +381,5 @@ define("TRANSLATION_BOOTH_BACKEND_AND_FRONTEND", "Im Backend und im Frontend");
 define("TRANSLATION_CREATE_OPTION", "Konfigurationsvariable erstellen");
 define("TRANSLATION_OPTION", "Option");
 define("TRANSLATION_VALUE", "Wert");
+
+define("TRANSLATION_UPDATE_AVAILABLE", "Update verfügbar");
