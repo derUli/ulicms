@@ -54,7 +54,7 @@ echo $str;
 <?php
          $updateInfo = checkForUpdates();
         
-         if($updateInfo and is_admin()){
+         if($updateInfo and $acl -> hasPermission("system_update")){
              ?>
 <h2 class="accordion-header">Update verfügbar</h2>
 <div class="accordion-content">
