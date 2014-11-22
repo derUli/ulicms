@@ -52,7 +52,7 @@ echo $str;
              }
          ?>
 <?php        
-         if($acl -> hasPermission("system_update")){
+         if($acl -> hasPermission("update_system")){
          $updateInfo = checkForUpdates();
          
          if($updateInfo){
