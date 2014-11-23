@@ -413,7 +413,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (46, 'email_mode', 'internal'),
 (47, 'ckeditor_skin', 'moono'),
 (48, 'installed_at', '".time()."'),
-(49, 'session_timeout', '60');")or die(mysqli_error($connection));
+(49, 'cache_disabled', 'disabled'),
+(50, 'session_timeout', '60');")or die(mysqli_error($connection));
         
          mysqli_query($connection, "UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysqli_error($connection));
         
