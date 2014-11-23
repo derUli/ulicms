@@ -22,7 +22,7 @@ $version = new ulicms_version();
 $developmentVersion = "";
 
 if($version -> getDevelopmentVersion())
-     $developmentVersion = " Entwickler-Version";
+     $developmentVersion = " Vorabversion";
 
 // Start Call Home //
 $cfg_script = "UliCMS " . $version -> getVersion() .
