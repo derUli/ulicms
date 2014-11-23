@@ -24,3 +24,4 @@
   - Backend kann nun per Sprachdatei lokalisiert werden
   - Backend in Englisch übersetzt
   - Sprache zu Werbebanner System hinzugefügt
++ Cache in der Standardkonfiguration deaktiviert
