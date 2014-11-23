@@ -44,6 +44,11 @@ $theme = getconfig("theme");
 
 if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("maintenance_mode")) == "true" || getconfig("maintenance_mode") == "1"){
      add_hook("before_maintenance_message");
+     
+     // Sende HTTP Status 503 und Retry-After im Wartungsmodus
+     header('HTTP/1.0 503 Service Temporarily Unavailable');
+     header('Status: 503 Service Temporarily Unavailable');
+     header('Retry-After: 60');
     
      if(file_exists(getTemplateDirPath($theme) . "maintenance.php"))
          require_once getTemplateDirPath($theme) . "maintenance.php";
