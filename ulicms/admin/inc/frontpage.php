@@ -58,10 +58,10 @@
          $pages = getAllPages($lang, "title", true);
  
    for($i = 0; $i < count($pages);$i++){
-                 if($pages[$i] == $frontpages[$lang]){
-                     echo "<option value='" . $pages[$i]["id"] . "' selected='selected'>" . $pages[$i]["title"] . " (ID: " . $pages[$i]["id"].")</option>";
+                 if($pages[$i]["systemname"] == $frontpages[$lang]){
+                     echo "<option value='" . $pages[$i]["systemname"] . "' selected='selected'>" . $pages[$i]["title"] . " (ID: " . $pages[$i]["id"].")</option>";
                      }else{
-                     echo "<option value='" . $pages[$i]["id"] . "'>" . $pages[$i]["title"] . " (ID: " . $pages[$i]["id"].")</option>";
+                     echo "<option value='" . $pages[$i]["systemname"] . "'>" . $pages[$i]["title"] . " (ID: " . $pages[$i]["id"].")</option>";
                      }
                 
                  }
