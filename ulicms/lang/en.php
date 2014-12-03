@@ -392,3 +392,5 @@ define("TRANSLATION_VALUE", "Value");
 
 
 define("TRANSLATION_UPDATE_AVAILABLE", "Update available");
+
+define("TRANSLATION_CUSTOM_DATA_JSON", "User defined values (JSON)");
