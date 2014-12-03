@@ -52,6 +52,10 @@ db_query($add_menu_title);
 $banner_add_language = "ALTER TABLE  `".tbname("banner")."` ADD  `language` VARCHAR( 255 ) NULL DEFAULT  'all';";
 db_query($banner_add_language);
 
+
+$add_custom_data = "ALTER TABLE `".tbname("content")."` ADD COLUMN `custom_data` varchar(255) NULL DEFAULT '{}'";
+db_query($add_custom_data);
+
 setconfig("db_schema", "7.2.1");
 setconfig("ckeditor_skin", "moono");
 
