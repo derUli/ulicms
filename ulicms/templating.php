@@ -14,6 +14,13 @@ if(!$page)
  return null;
 }
 
+function set_custom_data($page = null){
+if(!$page)
+  $page = get_requested_pagename();
+  
+  throw new Exception('Not implemented yet.');
+}
+
 
 function language_selection(){
      $query = db_query("SELECT * FROM " . tbname("languages") . " ORDER by name");
