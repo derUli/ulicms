@@ -1,5 +1,20 @@
 <?php
 
+function get_custom_data($page = null){
+if(!$page)
+  $page = get_requested_pagename();
+  
+  $sql = "SELECT `custom_data` FROM " . tbname("content") . " WHERE systemname='".db_escape($page)."'  AND language='".db_escape($_SESSION["language"])."'";
+ $query = db_query($sql);
+ if(db_num_rows($query) > 0){
+   $result = db_fetch_object($query);
+   return json_decode($result->custom_data, true);
+ }
+ 
+ return null;
+}
+
+
 function language_selection(){
      $query = db_query("SELECT * FROM " . tbname("languages") . " ORDER by name");
      echo "<ul class='language_selection'>";
