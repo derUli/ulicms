@@ -25,3 +25,6 @@
   - Backend in Englisch übersetzt
   - Sprache zu Werbebanner System hinzugefügt
 + Cache in der Standardkonfiguration deaktiviert
++ Benutzerdefinierte Werte, diese müssen vom Benutzer als JSON String eingegeben werden.
+  + Funktion get_custom_data zum Abfragen dieser Werte.
+    
