@@ -217,7 +217,10 @@ function openMenuImageSelectWindow(field) {
                          }
                      ?>value="_blank"><?php echo TRANSLATION_TARGET_BLANK;?></option>
 </select>
+<br/><br/>
 
+<strong><?php echo TRANSLATION_CUSTOM_DATA_JSON;?></strong><br/>
+<textarea name="custom_data" style="width:100%; height:200px;" cols=80 rows=><?php echo htmlspecialchars($row->custom_data);?></textarea>
 
 </fieldset>
 

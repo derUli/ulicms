@@ -460,6 +460,7 @@ ON DELETE SET NULL";
  mysqli_query($connection, $constraint2);
 
 
+
          $constraint3 = "ALTER TABLE `" . $prefix . "banner` ADD FOREIGN KEY (`category`) REFERENCES `".$prefix."categories`(`id`) 
 ON DELETE SET NULL";
  mysqli_query($connection, $constraint3);
@@ -468,6 +469,10 @@ ON DELETE SET NULL";
          $constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `".$prefix."users`(`id`) 
 ON DELETE SET NULL";
  mysqli_query($connection, $constraint4);
+ 
+$add_custom_data = "ALTER TABLE `".$prefix."content` ADD COLUMN `custom_data` varchar(255) NULL DEFAULT '{}'";
+db_query($add_custom_data);
+
 
 /*
          $constraint5 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`) 
