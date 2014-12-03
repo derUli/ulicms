@@ -383,3 +383,5 @@ define("TRANSLATION_OPTION", "Option");
 define("TRANSLATION_VALUE", "Wert");
 
 define("TRANSLATION_UPDATE_AVAILABLE", "Update verfügbar");
+
+define("TRANSLATION_CUSTOM_DATA_JSON", "Benutzerdefinierte Werte (JSON)");
