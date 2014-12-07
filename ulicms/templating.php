@@ -30,8 +30,6 @@ if(!$page)
   $json = json_encode($data);
   
   return db_query("UPDATE ".tbname("content")." SET custom_data = '".db_escape($json)."' WHERE systemname='".db_escape($page)."'");
-  
-  throw new Exception('Not implemented yet.');
 }
 
 function language_selection(){
