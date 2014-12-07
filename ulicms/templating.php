@@ -15,7 +15,33 @@ if(!$page)
 }
 
 
+function delete_custom_data($var = null, $page = null){
+if(!$page)
+  $page = get_requested_pagename();
 
+  $data = get_custom_data($page);
+  
+    if(is_null($data))
+       $data = array();
+     
+     // Wenn $var gesetzt ist, nur $var aus custom_data löschen
+     if($var){
+        if(isset($data[$var])){
+           unset($data[$var]);
+        }         
+     } 
+     // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
+     else {
+     
+       $data = array();
+       
+     }
+     
+     
+  $json = json_encode($data);
+  
+  return db_query("UPDATE ".tbname("content")." SET custom_data = '".db_escape($json)."' WHERE systemname='".db_escape($page)."'");
+}
 function set_custom_data($var, $value, $page = null){
 
 if(!$page)
