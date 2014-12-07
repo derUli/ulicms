@@ -14,13 +14,25 @@ if(!$page)
  return null;
 }
 
-function set_custom_data($page = null){
+
+
+function set_custom_data($var, $value, $page = null){
+
 if(!$page)
   $page = get_requested_pagename();
+
+  $data = get_custom_data($page);
+  if(is_null($data))
+     $data = array();
+     
+  $data[$var] = $value;
+  
+  $json = json_encode($data);
+  
+  return db_query("UPDATE ".tbname("content")." SET custom_data = '".db_escape($json)."' WHERE systemname='".db_escape($page)."'");
   
   throw new Exception('Not implemented yet.');
 }
-
 
 function language_selection(){
      $query = db_query("SELECT * FROM " . tbname("languages") . " ORDER by name");
