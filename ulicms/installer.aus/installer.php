@@ -471,8 +471,7 @@ ON DELETE SET NULL";
  mysqli_query($connection, $constraint4);
  
 $add_custom_data = "ALTER TABLE `".$prefix."content` ADD COLUMN `custom_data` varchar(255) NULL DEFAULT '{}'";
-db_query($add_custom_data);
-
+mysqli_query($connection, $add_custom_data);
 
 /*
          $constraint5 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`) 
