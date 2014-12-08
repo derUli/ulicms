@@ -10,7 +10,7 @@ function db_query($query){
     
      }
      
-     
+// Using SQL Prepared statements
 function db_prepared_query($sql,$typeDef = FALSE,$params = FALSE){ 
   global $db_connection;
   if($stmt = mysqli_prepare($db_connection,$sql)){ 
