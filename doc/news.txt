@@ -28,3 +28,4 @@
 + Benutzerdefinierte Werte, diese müssen vom Benutzer als JSON String eingegeben werden.
   + Funktion get_custom_data zum Abfragen dieser Werte.
   + Funktion set_custom_data zum setzen eines Custom Data Werts
++ Funktion db_prepared_query zur Datenbank API hinzugefügt
