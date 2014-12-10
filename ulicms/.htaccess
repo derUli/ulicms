@@ -1,5 +1,9 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
+RewriteCond %{HTTP_HOST} ^(.*)$ [NC]
+RewriteCond %{HTTP_HOST} !^(.*)\.(.*)\. [NC]
+RewriteCond %{HTTPS}s ^on(s)|
+RewriteRule ^ HTTP%1://www.%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*).(html|pdf|csv|txt|json)$ ./?seite=$1&format=$2 [QSA]
 </IFModule>
