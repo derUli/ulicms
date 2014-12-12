@@ -29,3 +29,4 @@
   + Funktion get_custom_data zum Abfragen dieser Werte.
   + Funktion set_custom_data zum setzen eines Custom Data Werts
 + Funktion db_prepared_query für Prepared SQL Statements zur Datenbank API hinzugefügt
++ Neuen Font Stack "Segoe" zur Auswahl der Schriftart in den Designeinstellungen hinzugefügt
