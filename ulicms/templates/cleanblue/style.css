@@ -37,16 +37,36 @@ background-color:#4296ff;
 background-image:url(header-bg.jpg);
 background-attachment:fixed;
 background-size: 100% 100%;
-height:150px;
+min-height:150px;
 width:100%;
 position:relative;
 }
 
 header section#logo{
-position:absolute;
-top:40px;
-left: 30px;
+margin-top:30px;
+margin-left:30px;
 float:left;
+}
+
+code{
+font-size:0.7em;
+word-wrap: break-word;       /* Internet Explorer 5.5+ */
+font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, 
+'Everson Mono', 'Lucida Console', 'Andale Mono', 'Nimbus Mono L',
+'Liberation Mono', FreeMono, 'Osaka Monospaced', Courier, 'New Courier', monospace;
+}
+
+
+header section#logo a, header section#logo a:hover, header section#logo a:visited{
+color:#2767dc;
+}
+
+header section#logo a:hover{
+text-decoration:none;
+}
+
+header section#logo{
+font-size:3.0em;
 }
 
 header nav{
