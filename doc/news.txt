@@ -32,3 +32,4 @@
   + Funktion delete_custom_data zum löschen von Custom Data Werten
 + Funktion db_prepared_query für Prepared SQL Statements zur Datenbank API hinzugefügt
 + Neuen Font Stack "Segoe" zur Auswahl der Schriftart in den Designeinstellungen hinzugefügt
++ JSON Import entfernt, da diese Funktionalität scheinbar defekt ist
