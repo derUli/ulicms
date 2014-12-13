@@ -66,6 +66,10 @@ text-decoration:none;
 color:white;
 }
 
+header nav{
+font-weight:bold;
+}
+
 header nav ul li a:hover{
 color:white;
 text-decoration:underline;

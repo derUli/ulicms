@@ -26,7 +26,7 @@ if(getconfig("logo_disabled") == "no")
 <?php
      }
 else{
-     ?><strong><?php homepage_title()?></strong>
+     ?><strong><?php homepage_title();?></strong>
 <?php }
 ?>
 </a>
