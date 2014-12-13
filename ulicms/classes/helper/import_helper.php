@@ -17,6 +17,7 @@ class ImportHelper{
              $txt = strval($id) . ": " . $txt;
              }
          $this -> errors[] = $txt;
+         echo "<div class='ulicms_error'>".htmlspecialchars($txt)."</div>";
         }
     
     public function importJSON($target, $json, $doUpdate = true){
@@ -61,6 +62,8 @@ class ImportHelper{
                          }
                      }
                  $sql .= ")";
+                 echo '<code>'.htmlspecialchars($sql)."</code>";
+                 echo "<hr/>";
                  db_query($sql)or $this -> logerror(db_error());
                  }
             
