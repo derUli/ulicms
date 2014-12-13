@@ -16,6 +16,25 @@ p{
 margin:0px;
 }
 
+main p, ol, ul, blockquote, pre, code {
+  line-height: 18px;
+  margin-bottom 18px;
+  /* 1.5em provides good vertical spacing ( = 150% of the font-size) */
+  line-height: 1.5em;
+  margin-bottom: 1.5em;
+
+}
+
+h1 {
+  font-size: 2em;
+  line-height: 0.75em;
+}
+
+h2 {
+  font-size: .7em;
+  line-height: 2.14em;
+}
+
 a{
 color:black;
 text-decoration:none;
@@ -39,13 +58,13 @@ background-attachment:fixed;
 background-size: 100% 100%;
 min-height:150px;
 width:100%;
-position:relative;
 }
 
 header section#logo{
 margin-top:30px;
 margin-left:30px;
 float:left;
+max-width:400px;
 }
 
 code{
@@ -67,18 +86,21 @@ text-decoration:none;
 
 header section#logo{
 font-size:2.0em;
+max-width:40%;
 }
 
 header nav{
 float:right;
 margin-right:20px;
 margin-top:20px;
+max-width:50%;
 }
 
 header nav ul{
 float:right;
 margin-right:20px;
 list-style-type:none;
+
 }
 
 header nav ul li a{
@@ -119,7 +141,7 @@ border:0px;
 }
 
 div#root-container{
-width:80%;
+width:80%;;
 margin:auto;
 }
 
@@ -127,6 +149,10 @@ main{
 background-color:#f3f3f3;
 display:block;
 padding:10px 30px 30px 30px;
+}
+
+main p{
+m
 }
 
 footer{
