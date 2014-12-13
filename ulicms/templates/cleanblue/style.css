@@ -3,6 +3,9 @@ margin:0;
 padding:0;
 background-color:#cbcbcb;
 background-image:url(body-bg.jpg);
+background-attachment:fixed;
+background-repeat:none;
+background-size:100%;
 }
 
 span.blog_article_next, span.blog_pagination_older{
