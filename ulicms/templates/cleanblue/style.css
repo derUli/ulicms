@@ -8,6 +8,10 @@ background-repeat:none;
 background-size:100%;
 }
 
+html{
+overflow-y:scroll;
+}
+
 span.blog_article_next, span.blog_pagination_older{
 float:right;
 }
