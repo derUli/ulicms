@@ -8,7 +8,7 @@ if(!function_exists('getFontFamilys')){
          $fonts["Sans Serif"] = "sans-serif";
          $fonts["Arial"] = "Arial, 'Helvetica Neue', Helvetica, sans-serif";
          $fonts["Comic Sans MS"] = "Comic Sans MS";
-         $fonts["Helvetica"] = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+         $fonts["Helvetica"] = "Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;";
          $fonts["Tahoma"] = "Tahoma, Verdana, Segoe, sans-serif";
          $fonts["Verdana"] = "Verdana, Geneva, sans-serif";
          $fonts["Trebuchet MS"] = "'Trebuchet MS'";
