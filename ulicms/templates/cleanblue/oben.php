@@ -16,6 +16,7 @@ background-color:<?php echo getconfig("header-background-color");
 <div id="root-container">
 <header>
 <section id="logo">
+<a href="./">
 <?php
 if(getconfig("logo_disabled") == "no")
     {
@@ -28,6 +29,7 @@ else{
      ?><strong><?php homepage_title()?></strong>
 <?php }
 ?>
+</a>
 </section>
 <nav><?php menu("top");?></nav>
 </header>

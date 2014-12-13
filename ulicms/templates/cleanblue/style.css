@@ -13,6 +13,22 @@ p{
 margin:0px;
 }
 
+a{
+color:black;
+text-decoration:none;
+}
+
+
+a:hover{
+color:black;
+text-decoration:underline;
+}
+
+a:visited{
+color:black;
+text-decoration:none;
+}
+
 header{
 background-color:#4296ff;
 background-image:url(header-bg.jpg);
@@ -47,6 +63,16 @@ text-decoration:none;
 color:white;
 }
 
+header nav ul li a:hover{
+color:white;
+text-decoration:underline;
+}
+
+header nav ul li a:visited{
+text-decoration:none;
+color:white;
+}
+
 header nav ul li{
 float:left;
 margin-right:20px;
@@ -74,4 +100,13 @@ main{
 background-color:#f3f3f3;
 display:block;
 padding:10px 30px 30px 30px;
+}
+
+footer{
+text-align:center;
+margin-top:10px;
+}
+
+footer .powered-by-ulicms{
+display:inline;
 }
