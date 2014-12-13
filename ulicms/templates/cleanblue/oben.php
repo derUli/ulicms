@@ -37,7 +37,7 @@ else{
 <main>
 <?php if(!containsModule()){
 ?>
-<h1><?php title();?></h1>
+<h1><?php headline();?></h1>
 <?php
 }
 ?>
