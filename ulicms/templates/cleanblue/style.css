@@ -153,6 +153,9 @@ main{
 background-color:#f3f3f3;
 display:block;
 padding:10px 30px 30px 30px;
+border-style:solid;
+border-width:1px;
+border-color:#dcdcdc;
 }
 
 main p{
