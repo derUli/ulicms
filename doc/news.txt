@@ -34,3 +34,4 @@
 + Neuen Font Stack "Segoe" zur Auswahl der Schriftart in den Designeinstellungen hinzugefügt
 + JSON Import entfernt, da diese Funktionalität scheinbar defekt ist
 + Advertising-Klausel zur Lizenz hinzugefügt. Bei Werbung für Produkte auf Basis von UliCMS muss künftig ein Hinweis, dass das Produkt Software von UliCMS / Ulrich Schmidt enthält erfolgen.
++ Neues Standard Design "cleanblue"
