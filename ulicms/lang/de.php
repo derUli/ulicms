@@ -364,7 +364,7 @@ define("TRANSLATION_TARGET_BLANK", "In einem neuen Fenster");
 define("TRANSLATION_JSON_IMPORT", "JSON Import");
 define("TRANSLATION_IMPORT_INTO_TABLE", "Importe in Tabelle");
 define("TRANSLATION_DO_IMPORT", "Importieren");
-define("TRANSLATION_IMPORT_INTO_TABLE_SUCCESSFULL", "Import in Tabelle %tabelle% erfolgreich!");
+define("TRANSLATION_IMPORT_INTO_TABLE_SUCCESSFULL", "Import in Tabelle %table% erfolgreich!");
 define("TRANSLATION_NOT_A_JSON_FILE", "Diese Datei ist nicht im JSON Format!");
 
 // Export
@@ -385,3 +385,4 @@ define("TRANSLATION_VALUE", "Wert");
 define("TRANSLATION_UPDATE_AVAILABLE", "Update verfügbar");
 
 define("TRANSLATION_CUSTOM_DATA_JSON", "Benutzerdefinierte Werte (JSON)");
+define("TRANSLATION_DO_UPDATE", "Update durchführen");

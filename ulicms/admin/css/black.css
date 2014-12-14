@@ -1,6 +1,6 @@
 body{
 background-color:white;
-font-family: "wf_SegoeUI","Tahoma","Verdana","Arial","sans-serif";
+font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
 font-size:12pt;
 color:black;
 }
@@ -117,10 +117,14 @@ color:black;
 }
 
 
-code {
-font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, 'Everson Mono', 'Lucida Console', 'Andale Mono', 'Nimbus Mono L', 'Liberation Mono', FreeMono, 'Osaka Monospaced', Courier, 'New Courier', monospace;
-font-size:0.8em;
+code{
+font-size:0.7em;
+word-wrap: break-all;       /* Internet Explorer 5.5+ */
+font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, 
+'Everson Mono', 'Lucida Console', 'Andale Mono', 'Nimbus Mono L',
+'Liberation Mono', FreeMono, 'Osaka Monospaced', Courier, 'New Courier', monospace;
 }
+
 
 
 

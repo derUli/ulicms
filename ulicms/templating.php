@@ -177,7 +177,7 @@ function get_homepage_title(){
      }
      
 function homepage_title(){
-   return get_homepage_title();
+   echo get_homepage_title();
 }
 
 

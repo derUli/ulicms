@@ -59,7 +59,7 @@ db_query($add_custom_data);
 setconfig("db_schema", "7.2.1");
 setconfig("ckeditor_skin", "moono");
 
-// unlink("update.php");
+@unlink("update.php");
 header("Location: admin/");
 exit();
 ?>

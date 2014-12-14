@@ -60,9 +60,10 @@ if(defined("_SECURITY")){
       
        <?php if($acl -> hasPermission("import")){
             ?>
+            <!--
             <li> 
               <a href='?action=import'><?php echo TRANSLATION_IMPORT;?></a>
-            </li>
+            </li> -->
       <?php }
         ?>
       

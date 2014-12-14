@@ -292,6 +292,7 @@ if(!isset($error)){
   `category` int(11) DEFAULT '1',
   `type` varchar(255) DEFAULT 'gif',
   `html` text DEFAULT '',
+  `language` VARCHAR( 255 ) NULL DEFAULT  'all',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
@@ -395,7 +396,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (28, 'timezone', 'Europe/Berlin'),
 (29, 'db_schema_version', '7.2'),
 (30, 'pkg_src', 'http://packages.ulicms.de/{version}/'),
-(31, 'theme', 'default'),
+(31, 'theme', 'cleanblue'),
 (32, 'zoom', '100'),
 (33, 'default-font', 'Arial, \'Helvetica Neue\', Helvetica, sans-serif'),
 (34, 'font-size', '12pt'),

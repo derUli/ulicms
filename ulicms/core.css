@@ -9,7 +9,7 @@ color:red;
 }
 
 
-span.blog_article_next{
+span.blog_article_next, span.blog_pagination_older{
 float:right;
 }
 

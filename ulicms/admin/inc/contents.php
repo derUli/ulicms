@@ -38,8 +38,10 @@ if($acl -> hasPermission("pages") or $acl -> hasPermission("banners") or $acl ->
 
 <?php if($acl -> hasPermission("import")){
         ?>
-
+<!--
 <a href="index.php?action=import"><?php echo TRANSLATION_IMPORT;?></a><br/>
+
+-->
 <?php }
     ?>
 

@@ -8,7 +8,7 @@ if(!function_exists('getFontFamilys')){
          $fonts["Sans Serif"] = "sans-serif";
          $fonts["Arial"] = "Arial, 'Helvetica Neue', Helvetica, sans-serif";
          $fonts["Comic Sans MS"] = "Comic Sans MS";
-         $fonts["Helvetica"] = "'Helvetica Neue', Helvetica, Arial, sans-serif";
+         $fonts["Helvetica"] = "Helvetica, Arial, 'lucida grande',tahoma,verdana,arial,sans-serif;";
          $fonts["Tahoma"] = "Tahoma, Verdana, Segoe, sans-serif";
          $fonts["Verdana"] = "Verdana, Geneva, sans-serif";
          $fonts["Trebuchet MS"] = "'Trebuchet MS'";
@@ -23,7 +23,7 @@ if(!function_exists('getFontFamilys')){
          $fonts["Brush Script MT"] = "'Brush Script MT',Phyllis,'Lucida Handwriting',cursive";
          $fonts["Zapf Chancery"] = "'Zapf Chancery', cursive";
          $fonts["Calibri"] = "Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif";
-
+         $fonts["Segoe"] = "'wf_SegoeUI', 'Segoe UI', 'Segoe','Segoe WP', 'Tahoma', 'Verdana', 'Arial', 'sans-serif'";
          add_hook("custom_fonts");
         
          // Hier bei Bedarf weitere Fonts einfügen
