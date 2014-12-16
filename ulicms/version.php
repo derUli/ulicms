@@ -7,8 +7,7 @@ class ulicms_version{
          $this -> developmentVersion = false;
          
          }
-    
-    
+
      // Gibt den Namen der UliCMS Version zurück (z.B. 2013R2)
     function getVersion(){
          return $this -> version;

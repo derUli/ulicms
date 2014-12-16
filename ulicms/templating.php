@@ -544,7 +544,10 @@ function base_metas(){
     
     
      if(!getconfig("hide_meta_generator")){
-         echo '<meta name="generator" content="UliCMS Release ' . cms_version()
+
+         $v = new ulicms_version();
+
+         echo '<meta name="generator" content="UliCMS ' . $v -> getVersion()." Release ".implode(".", $v -> getInternalVersion())
          . '" />';
          echo "\r\n";
         
