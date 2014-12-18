@@ -67,6 +67,9 @@ function ulicms_mail($to, $subject, $message, $headers = ""){
      $mode = getconfig("email_mode");
      if(!$mode)
          $mode = "internal";
+
+     // Damit Umlaute auch im Betreff korrekt dargestellt werden, diese mit UTF-8 kodieren
+     $subject= "=?utf-8?b?".base64_encode($subject)."?=";
     
      if($mode == "pear_mail")
          return pear_mail($to, $subject, $message, $headers);
