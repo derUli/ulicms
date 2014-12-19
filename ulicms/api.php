@@ -979,7 +979,10 @@ function getAllMenus(){
  }
 
 // Check if site contains a module
-function containsModule($page, $module = false){
+function containsModule($page = null, $module = false){
+if(is_null($page))
+   $page = get_requested_pagename();
+   
  $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname = '" .
      db_escape($page) . "'");
  $dataset = db_fetch_assoc($query);
