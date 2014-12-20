@@ -544,15 +544,10 @@ function base_metas(){
     
     
      if(!getconfig("hide_meta_generator")){
-
-         $v = new ulicms_version();
-
          echo '<meta name="generator" content="UliCMS ' . cms_version()
          . '" />';
          echo "\r\n";
-        
-        
-        
+         
          $facebook_id = getconfig("facebook_id");
         
          if(!empty($facebook_id)){
