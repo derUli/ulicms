@@ -7,9 +7,8 @@
          }else{
          ?>
 <p><img src="gfx/logo.png" alt="UliCMS"/></p>
-<strong><?php echo $version -> getVersion();
-         ?> Release <?php echo implode(".", $version -> getInternalVersion());
-         ?></strong>
+<strong>Release <?php echo implode(".", $version -> getInternalVersion());
+         ?> "<?php echo $version -> getVersion(); ?>"</strong>
 <br/>
 
 <p>

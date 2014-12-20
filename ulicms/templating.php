@@ -109,7 +109,7 @@ function body_classes(){
 // Gibt "Diese Seite läuft mit UliCMS" aus
 function poweredByUliCMS(){
      echo "<p class=\"powered-by-ulicms\">Diese Seite läuft mit "
-     . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS</a></p>";
+     . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS ".cms_version()."</a></p>";
      }
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
@@ -544,15 +544,10 @@ function base_metas(){
     
     
      if(!getconfig("hide_meta_generator")){
-
-         $v = new ulicms_version();
-
-         echo '<meta name="generator" content="UliCMS ' . $v -> getVersion()." Release ".implode(".", $v -> getInternalVersion())
-         . '" />';
+         echo '<meta name="generator" content="UliCMS ' . cms_version()
+         . '"/>';
          echo "\r\n";
-        
-        
-        
+         
          $facebook_id = getconfig("facebook_id");
         
          if(!empty($facebook_id)){
