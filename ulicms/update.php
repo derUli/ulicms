@@ -21,6 +21,11 @@ db_query($sql);
 $sql = "ALTER TABLE `".tbname("content")."` MODIFY `language`  varchar(6) NULL;";
 db_query($sql);
 
+global $db_connection;
+
+// Da InnoDB erst ab MySQL 5.6 Foreign Keys und Fulltext unterstützt
+// Foreign Keys nur setzen, wenn MySQL Server Version >= 5.6
+if(mysqli_get_server_version($db_connection) >= 50600){
 
 $constraint1 = "ALTER TABLE `" .  tbname("users")."` ADD FOREIGN KEY (`group_id`) REFERENCES `".tbname("groups"). "`(`id`) 
 ON DELETE SET NULL";
@@ -45,6 +50,9 @@ $constraint5 = "ALTER TABLE `" . tbname("content") ."` ADD FOREIGN KEY (`languag
 ON DELETE SET NULL";
  db_query($constraint5);
 */
+
+
+}
 
 $add_menu_title = "ALTER TABLE `".tbname("content")."` ADD COLUMN `menu_image` varchar(255) NULL";
 db_query($add_menu_title);
