@@ -16,7 +16,7 @@ if($version == "7.1.2" or $version == "7.1.3"){
 
 if($version == "7.2.0"){
    die("<p>Ein Update auf UliCMS 7.2.1 ist verfügbar.<br/>
-   <a href=\"http://www.ulicms.de/content/files/Releases/Upgrades/ulicms-upgrade-7.2.0-auf-7.2.1-biscayne.tar.gz\">Download</a></p>");
+   <a href=\"http://www.ulicms.de/content/files/Releases/Upgrades/ulicms-upgrade-7.2.0-auf-7.2.1-biscayne.zip\">Download</a></p>");
 
 }
 
