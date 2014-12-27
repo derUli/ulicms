@@ -394,7 +394,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (26, 'empty_trash_days', '30'),
 (27, 'password_salt', '$salt'),
 (28, 'timezone', 'Europe/Berlin'),
-(29, 'db_schema_version', '7.2'),
+(29, 'db_schema_version', '7.2.1'),
 (30, 'pkg_src', 'http://packages.ulicms.de/{version}/'),
 (31, 'theme', 'cleanblue'),
 (32, 'zoom', '100'),
@@ -452,6 +452,10 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 $sql = "ALTER TABLE `".$prefix."languages` ADD UNIQUE(`language_code`)";
 
  mysqli_query($connection, $sql);
+ 
+// Da InnoDB erst ab MySQL 5.6 Foreign Keys und Fulltext unterstützt
+// Foreign Keys nur setzen, wenn MySQL Server Version >= 5.6
+if(mysqli_get_server_version($connection) >= 50600){
 
          $constraint1 = "ALTER TABLE `" . $prefix . "users` ADD FOREIGN KEY (`group_id`) REFERENCES `".$prefix."groups`(`id`) 
 ON DELETE SET NULL";
@@ -481,7 +485,7 @@ ON DELETE SET NULL";
  mysqli_query($connection, $constraint5);
  */
         
-        
+        }
          @chmod("../cms-config.php", 0777);
         
          @mkdir("../content");
