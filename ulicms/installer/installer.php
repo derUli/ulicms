@@ -129,6 +129,7 @@ if(!isset($error)){
 <td><?php echo TRANSLATION_DATABASE_NAME;?></td>
 <td><input name="datenbank" type="text" value=""></td>
 </tr>
+<tr>
 <td><?php echo TRANSLATION_PREFIX;?></td>
 <td><input name="prefix" type="text" value="ulicms_"></td>
 </tr>
