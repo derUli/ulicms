@@ -14,7 +14,7 @@ add_hook("after_session_start");
 setLanguageByDomain();
 
 if(!empty($_GET["language"])){
-     $_SESSION["language"] = basename($_GET["language"]);
+     $_SESSION["language"] = db_escape($_GET["language"]);
      }
 
 if(!isset($_SESSION["language"])){
