@@ -237,6 +237,9 @@ if(!isset($error)){
          $prefix = mysqli_real_escape_string($connection, $_SESSION["mysql"]["prefix"]);
         
          mysqli_query($connection, "SET NAMES 'utf8'")or die(mysqli_error($connection));
+         
+         // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
+         mysqli_query($connection, "SET SESSION sql_mode = '';");
         
          mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

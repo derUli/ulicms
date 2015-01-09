@@ -119,6 +119,8 @@ function db_connect($server, $user, $password){
      if(!$db_connection)
          return false;
      db_query("SET NAMES 'utf8'");
+         // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
+     db_query("SET SESSION sql_mode = '';");
     
      return $db_connection;
      }
