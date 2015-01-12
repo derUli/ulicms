@@ -107,7 +107,7 @@ $(window).load(function(){
 <table border=1>
 <tr style="font-weight:bold;">
 <td style="width:40px;"></td>
-<td><a href="?action=pages&order=systemname"><?php echo TRANSLATION_TITLE;?></a></td>
+<td><a href="?action=pages&order=title"><?php echo TRANSLATION_TITLE;?></a></td>
 <td><a href="?action=pages&order=menu"><?php echo TRANSLATION_MENU;?></a></td>
 <td><a href="?action=pages&order=position"><?php echo TRANSLATION_POSITION;?></a></td>
 <td><a href="?action=pages&order=parent"><?php echo TRANSLATION_PARENT;?></a></td>
