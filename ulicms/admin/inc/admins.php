@@ -5,9 +5,14 @@
          if(empty($_GET["order"])){
              $order = "username";
              }
-        else{
+        else if(in_array($_GET["order"], array("id", "firstname", "lastname",
+        "email", "group_id"))){
              $order = basename($_GET["order"]);
              }
+         else {
+         
+             $order = "username";
+         }
          $query = db_query("SELECT * FROM " . tbname("users") . " ORDER BY $order", $connection);
          if(db_num_rows($query)){
              ?>
