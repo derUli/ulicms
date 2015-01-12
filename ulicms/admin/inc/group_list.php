@@ -13,7 +13,7 @@ $groups = $acl -> getAllGroups();
 $default_acl_group = intval(getconfig("default_acl_group"));
 
 
-if(isset($_REQUEST["sort"])){
+if(isset($_REQUEST["sort"]) and in_array($_REQUEST["sort"], array("id", "name"))){
      $_SESSION["grp_sort"] = $_REQUEST["sort"];
      }
 
