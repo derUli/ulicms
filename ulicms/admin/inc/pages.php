@@ -113,7 +113,6 @@ $(window).load(function(){
 <td><a href="?action=pages&order=parent"><?php echo TRANSLATION_PARENT;?></a></td>
 <td><a href="?action=pages&order=active"><?php echo TRANSLATION_ACTIVATED;?></a></td>
 <td><?php echo TRANSLATION_VIEW;?></td>
-<td><?php echo TRANSLATION_VIEW;?></td>
 <td><?php echo TRANSLATION_EDIT;?></td>
 <td><?php echo TRANSLATION_DELETE;?></td>
 
