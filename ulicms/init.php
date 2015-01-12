@@ -33,15 +33,15 @@ $classes_dir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "classes";
 
 if(!defined("ULICMS_TMP"))
      define("ULICMS_TMP", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR);
-     
-     if(!file_existS(ULICMS_TMP))
-         mkdir(ULICMS_TMP);
-         
-if(!defined("ULICMS_CACHE"))         
+
+ if(!file_existS(ULICMS_TMP))
+     mkdir(ULICMS_TMP);
+
+if(!defined("ULICMS_CACHE"))
      define("ULICMS_CACHE", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "cache" . DIRECTORY_SEPERATOR);
-     
-   if(!file_existS(ULICMS_CACHE))
-       mkdir(ULICMS_CACHE);
+
+ if(!file_existS(ULICMS_CACHE))
+     mkdir(ULICMS_CACHE);
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "base_config.php";
@@ -143,7 +143,7 @@ define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
 
 function noperms(){
- echo "<p>".TRANSLATION_NO_PERMISSIONS."</p>";
+ echo "<p>" . TRANSLATION_NO_PERMISSIONS . "</p>";
  return false;
  }
 
@@ -222,12 +222,12 @@ $required_tables = array(tbname("users"),
 for($i = 0; $i < count($required_tables); $i++){
  $table = $required_tables[$i];
  if(!in_array($table, $existing_tables)){
- if(!headers_sent())
-     header("Content-Type: text/html; charset=UTF-8");
-
- throw new Exception("Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
- exit();
- }
+     if(!headers_sent())
+         header("Content-Type: text/html; charset=UTF-8");
+    
+     throw new Exception("Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
+     exit();
+     }
 }
 
 
@@ -238,7 +238,7 @@ $memory_limit = getconfig("memory_limit");
 
 if($memory_limit !== false)
  @ini_set('memory_limit', $memory_limit);
- 
+
 $cache_period = getconfig("cache_period");
 
 // Prüfen ob Cache Gültigkeitsdauer gesetzt ist.

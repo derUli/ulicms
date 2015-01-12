@@ -31,9 +31,9 @@ require_once 'System.php';
 $GLOBALS['_PEAR_Config_instance'] = null;
 if (!defined('PEAR_INSTALL_DIR') || !PEAR_INSTALL_DIR){
      $PEAR_INSTALL_DIR = PHP_LIBDIR . DIRECTORY_SEPARATOR . 'pear';
-    }else{
+     }else{
      $PEAR_INSTALL_DIR = PEAR_INSTALL_DIR;
-    }
+     }
 
 // Below we define constants with default values for all configuration
 // parameters except username/password.  All of them can have their
@@ -44,53 +44,53 @@ if (!defined('PEAR_INSTALL_DIR') || !PEAR_INSTALL_DIR){
 // the "pear" or the "pecl" command
 if (!defined('PEAR_RUNTYPE')){
      define('PEAR_RUNTYPE', 'pear');
-    }
+     }
 
 if (PEAR_RUNTYPE == 'pear'){
      define('PEAR_CONFIG_DEFAULT_CHANNEL', 'pear.php.net');
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_CHANNEL', 'pecl.php.net');
-    }
+     }
 
 if (getenv('PHP_PEAR_SYSCONF_DIR')){
      define('PEAR_CONFIG_SYSCONFDIR', getenv('PHP_PEAR_SYSCONF_DIR'));
-    }elseif (getenv('SystemRoot')){
+     }elseif (getenv('SystemRoot')){
      define('PEAR_CONFIG_SYSCONFDIR', getenv('SystemRoot'));
-    }else{
+     }else{
      define('PEAR_CONFIG_SYSCONFDIR', PHP_SYSCONFDIR);
-    }
+     }
 
 // Default for master_server
 if (getenv('PHP_PEAR_MASTER_SERVER')){
      define('PEAR_CONFIG_DEFAULT_MASTER_SERVER', getenv('PHP_PEAR_MASTER_SERVER'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_MASTER_SERVER', 'pear.php.net');
-    }
+     }
 
 // Default for http_proxy
 if (getenv('PHP_PEAR_HTTP_PROXY')){
      define('PEAR_CONFIG_DEFAULT_HTTP_PROXY', getenv('PHP_PEAR_HTTP_PROXY'));
-    }elseif (getenv('http_proxy')){
+     }elseif (getenv('http_proxy')){
      define('PEAR_CONFIG_DEFAULT_HTTP_PROXY', getenv('http_proxy'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_HTTP_PROXY', '');
-    }
+     }
 
 // Default for php_dir
 if (getenv('PHP_PEAR_INSTALL_DIR')){
      define('PEAR_CONFIG_DEFAULT_PHP_DIR', getenv('PHP_PEAR_INSTALL_DIR'));
-    }else{
+     }else{
      if (@file_exists($PEAR_INSTALL_DIR) && is_dir($PEAR_INSTALL_DIR)){
          define('PEAR_CONFIG_DEFAULT_PHP_DIR', $PEAR_INSTALL_DIR);
          }else{
          define('PEAR_CONFIG_DEFAULT_PHP_DIR', $PEAR_INSTALL_DIR);
          }
-    }
+     }
 
 // Default for ext_dir
 if (getenv('PHP_PEAR_EXTENSION_DIR')){
      define('PEAR_CONFIG_DEFAULT_EXT_DIR', getenv('PHP_PEAR_EXTENSION_DIR'));
-    }else{
+     }else{
      if (ini_get('extension_dir')){
          define('PEAR_CONFIG_DEFAULT_EXT_DIR', ini_get('extension_dir'));
          }elseif (defined('PEAR_EXTENSION_DIR') &&
@@ -101,141 +101,141 @@ if (getenv('PHP_PEAR_EXTENSION_DIR')){
          }else{
          define('PEAR_CONFIG_DEFAULT_EXT_DIR', '.');
          }
-    }
+     }
 
 // Default for doc_dir
 if (getenv('PHP_PEAR_DOC_DIR')){
      define('PEAR_CONFIG_DEFAULT_DOC_DIR', getenv('PHP_PEAR_DOC_DIR'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_DOC_DIR',
          $PEAR_INSTALL_DIR . DIRECTORY_SEPARATOR . 'docs');
-    }
+     }
 
 // Default for bin_dir
 if (getenv('PHP_PEAR_BIN_DIR')){
      define('PEAR_CONFIG_DEFAULT_BIN_DIR', getenv('PHP_PEAR_BIN_DIR'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_BIN_DIR', PHP_BINDIR);
-    }
+     }
 
 // Default for data_dir
 if (getenv('PHP_PEAR_DATA_DIR')){
      define('PEAR_CONFIG_DEFAULT_DATA_DIR', getenv('PHP_PEAR_DATA_DIR'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_DATA_DIR',
          $PEAR_INSTALL_DIR . DIRECTORY_SEPARATOR . 'data');
-    }
+     }
 
 // Default for cfg_dir
 if (getenv('PHP_PEAR_CFG_DIR')){
      define('PEAR_CONFIG_DEFAULT_CFG_DIR', getenv('PHP_PEAR_CFG_DIR'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_CFG_DIR',
          $PEAR_INSTALL_DIR . DIRECTORY_SEPARATOR . 'cfg');
-    }
+     }
 
 // Default for www_dir
 if (getenv('PHP_PEAR_WWW_DIR')){
      define('PEAR_CONFIG_DEFAULT_WWW_DIR', getenv('PHP_PEAR_WWW_DIR'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_WWW_DIR',
          $PEAR_INSTALL_DIR . DIRECTORY_SEPARATOR . 'www');
-    }
+     }
 
 // Default for test_dir
 if (getenv('PHP_PEAR_TEST_DIR')){
      define('PEAR_CONFIG_DEFAULT_TEST_DIR', getenv('PHP_PEAR_TEST_DIR'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_TEST_DIR',
          $PEAR_INSTALL_DIR . DIRECTORY_SEPARATOR . 'tests');
-    }
+     }
 
 // Default for temp_dir
 if (getenv('PHP_PEAR_TEMP_DIR')){
      define('PEAR_CONFIG_DEFAULT_TEMP_DIR', getenv('PHP_PEAR_TEMP_DIR'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_TEMP_DIR',
          System :: tmpdir() . DIRECTORY_SEPARATOR . 'pear' .
          DIRECTORY_SEPARATOR . 'temp');
-    }
+     }
 
 // Default for cache_dir
 if (getenv('PHP_PEAR_CACHE_DIR')){
      define('PEAR_CONFIG_DEFAULT_CACHE_DIR', getenv('PHP_PEAR_CACHE_DIR'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_CACHE_DIR',
          System :: tmpdir() . DIRECTORY_SEPARATOR . 'pear' .
          DIRECTORY_SEPARATOR . 'cache');
-    }
+     }
 
 // Default for download_dir
 if (getenv('PHP_PEAR_DOWNLOAD_DIR')){
      define('PEAR_CONFIG_DEFAULT_DOWNLOAD_DIR', getenv('PHP_PEAR_DOWNLOAD_DIR'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_DOWNLOAD_DIR',
          System :: tmpdir() . DIRECTORY_SEPARATOR . 'pear' .
          DIRECTORY_SEPARATOR . 'download');
-    }
+     }
 
 // Default for php_bin
 if (getenv('PHP_PEAR_PHP_BIN')){
      define('PEAR_CONFIG_DEFAULT_PHP_BIN', getenv('PHP_PEAR_PHP_BIN'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_PHP_BIN', PEAR_CONFIG_DEFAULT_BIN_DIR .
          DIRECTORY_SEPARATOR . 'php' . (OS_WINDOWS ? '.exe' : ''));
-    }
+     }
 
 // Default for verbose
 if (getenv('PHP_PEAR_VERBOSE')){
      define('PEAR_CONFIG_DEFAULT_VERBOSE', getenv('PHP_PEAR_VERBOSE'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_VERBOSE', 1);
-    }
+     }
 
 // Default for preferred_state
 if (getenv('PHP_PEAR_PREFERRED_STATE')){
      define('PEAR_CONFIG_DEFAULT_PREFERRED_STATE', getenv('PHP_PEAR_PREFERRED_STATE'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_PREFERRED_STATE', 'stable');
-    }
+     }
 
 // Default for umask
 if (getenv('PHP_PEAR_UMASK')){
      define('PEAR_CONFIG_DEFAULT_UMASK', getenv('PHP_PEAR_UMASK'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_UMASK', decoct(umask()));
-    }
+     }
 
 // Default for cache_ttl
 if (getenv('PHP_PEAR_CACHE_TTL')){
      define('PEAR_CONFIG_DEFAULT_CACHE_TTL', getenv('PHP_PEAR_CACHE_TTL'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_CACHE_TTL', 3600);
-    }
+     }
 
 // Default for sig_type
 if (getenv('PHP_PEAR_SIG_TYPE')){
      define('PEAR_CONFIG_DEFAULT_SIG_TYPE', getenv('PHP_PEAR_SIG_TYPE'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_SIG_TYPE', 'gpg');
-    }
+     }
 
 // Default for sig_bin
 if (getenv('PHP_PEAR_SIG_BIN')){
      define('PEAR_CONFIG_DEFAULT_SIG_BIN', getenv('PHP_PEAR_SIG_BIN'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_SIG_BIN',
          System :: which(
             'gpg', OS_WINDOWS ? 'c:\gnupg\gpg.exe' : '/usr/local/bin/gpg'));
-    }
+     }
 
 // Default for sig_keydir
 if (getenv('PHP_PEAR_SIG_KEYDIR')){
      define('PEAR_CONFIG_DEFAULT_SIG_KEYDIR', getenv('PHP_PEAR_SIG_KEYDIR'));
-    }else{
+     }else{
      define('PEAR_CONFIG_DEFAULT_SIG_KEYDIR',
          PEAR_CONFIG_SYSCONFDIR . DIRECTORY_SEPARATOR . 'pearkeys');
-    }
+     }
 
 /**
  * This is a class for storing configuration data, keeping track of
@@ -592,8 +592,8 @@ class PEAR_Config extends PEAR
      * @param string $ file to read user-defined options from
      * @param string $ file to read system-wide defaults from
      * @param bool $ determines whether a registry object "follows"
-     *                the value of php_dir (is automatically created
-     *                and moved when php_dir is changed)
+     *                 the value of php_dir (is automatically created
+     *                 and moved when php_dir is changed)
      * @param bool $ if true, fails if configuration files cannot be loaded
      * @access public 
      * @see PEAR_Config::singleton
@@ -729,7 +729,7 @@ class PEAR_Config extends PEAR
      * file.
      * 
      * @param string $ file to read from, if NULL or not specified, the
-     *                last-used file for the same layer (second param) is used
+     *                 last-used file for the same layer (second param) is used
      * @param string $ config layer to insert data into ('user' or 'system')
      * @return bool TRUE on success or a PEAR error on failure
      */
@@ -963,7 +963,7 @@ class PEAR_Config extends PEAR
      * 
      * @param string $ |null file to read from, or null for default
      * @param string $ config layer to insert data into ('user' or
-     *                'system')
+     *                 'system')
      * @param string $ |null data to write to config file or null for internal data [DEPRECATED]
      * @return bool TRUE on success or a PEAR error on failure
      */
@@ -1776,7 +1776,7 @@ class PEAR_Config extends PEAR
  * 
  * @param string $ config key
  * @return array enumerated array of set values, or NULL if the
- *                config key is unknown or not a set
+ *                 config key is unknown or not a set
  * @access public 
  */
  function getSetValues($key)
@@ -1888,8 +1888,8 @@ class PEAR_Config extends PEAR
  * @param boolean $ return the defining channel
  * @return string |array the config layer, or an empty string if not found.
  * 
- *          if $returnchannel, the return is an array array('layer' => layername,
- *          'channel' => channelname), or an empty string if not found
+ *           if $returnchannel, the return is an array array('layer' => layername,
+ *           'channel' => channelname), or an empty string if not found
  * @access public 
  */
  function definedBy($key, $returnchannel = false)
@@ -2066,7 +2066,7 @@ class PEAR_Config extends PEAR
 /**
  * 
  * @param string $ |false installation directory to prepend to all _dir variables, or false to
- *                      disable
+ *                       disable
  */
  function setInstallRoot($root)
 {

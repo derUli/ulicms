@@ -152,7 +152,7 @@ class PEAR_Command_Common extends PEAR
              $larg = $sarg = '';
              if (isset($info['arg'])){
                  if ($info['arg']{
-                        0} == '('){
+                         0} == '('){
                      $larg = '==';
                      $sarg = '::';
                      $arg = substr($info['arg'], 1, -1);
@@ -176,8 +176,8 @@ class PEAR_Command_Common extends PEAR
      * 
      * @param string $command The command
      * @return mixed A fail string if the command does not have help or
-     *                a two elements array containing [0]=>help string,
-     *                [1]=> help string for the accepted cmd args
+     *                 a two elements array containing [0]=>help string,
+     *                 [1]=> help string for the accepted cmd args
      */
      function getHelp($command)
     {
@@ -275,4 +275,4 @@ class PEAR_Command_Common extends PEAR
         
          return $this -> $func($command, $options, $params);
          }
-    }
+     }

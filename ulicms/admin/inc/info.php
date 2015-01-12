@@ -8,7 +8,8 @@
          ?>
 <p><img src="gfx/logo.png" alt="UliCMS"/></p>
 <strong>Release <?php echo implode(".", $version -> getInternalVersion());
-         ?> "<?php echo $version -> getVersion(); ?>"</strong>
+         ?> "<?php echo $version -> getVersion();
+        ?>"</strong>
 <br/>
 
 <p>
@@ -23,7 +24,8 @@
 
 <input type="button" value="UliCMS Portal" onclick='window.open("http://www.ulicms.de");'/>
 
-<input type="button" value="<?php echo TRANSLATION_LICENSE;?>" onclick='window.open("license.html");'/>
+<input type="button" value="<?php echo TRANSLATION_LICENSE;
+        ?>" onclick='window.open("license.html");'/>
 
 
 <input type="button" value="Community" onclick='location.replace("http://www.ulicms.de/forum.html");'>

@@ -7,9 +7,9 @@ function GetLangOpts($llcc, $adobeCJK){
          $country = substr(strtoupper($llcc), 3, 2);
          }
     else{
-        $lang = strtolower($llcc);
-        $country = '';
-    }
+         $lang = strtolower($llcc);
+         $country = '';
+         }
      $unifonts = "";
      $coreSuitable = false;
     
@@ -33,7 +33,7 @@ function GetLangOpts($llcc, $adobeCJK){
          // Edit this value to define how mPDF behaves when using new mPDF('-x')
         // If set to TRUE, mPDF will use Adobe core fonts only when it recognises the languages above
         $coreSuitable = true;
-        break;
+         break;
     
     
     
@@ -41,27 +41,27 @@ function GetLangOpts($llcc, $adobeCJK){
     CASE "he":
      CASE "yi":
          $unifonts = "dejavusans,dejavusansB,dejavusansI,dejavusansBI";
-        break;
+         break;
     
      // Arabic
     CASE "ar":
          $unifonts = "xbriyaz,xbriyazB,xbriyazI,xbriyazBI,xbzar,xbzarB,xbzarI,xbzarBI";
-        break;
+         break;
      CASE "fa":
          $unifonts = "xbriyaz,xbriyazB,xbriyazI,xbriyazBI,xbzar,xbzarB,xbzarI,xbzarBI";
-        break;
+         break;
      CASE "ps":
          $unifonts = "xbriyaz,xbriyazB,xbriyazI,xbriyazBI,xbzar,xbzarB,xbzarI,xbzarBI";
-        break;
+         break;
      CASE "ur":
          $unifonts = "xbriyaz,xbriyazB,xbriyazI,xbriyazBI,xbzar,xbzarB,xbzarI,xbzarBI";
-        break;
+         break;
     
      // Sindhi (can be Arabic or Devanagari)
     CASE "sd":
          if ($country == "IN"){
-            $unifonts = "ind_hi_1_001";
-        }
+             $unifonts = "ind_hi_1_001";
+             }
          // else if ($country == "PK") { $unifonts = ""; }
         // else { $unifonts = ""; }
         break;
@@ -70,49 +70,49 @@ function GetLangOpts($llcc, $adobeCJK){
      // INDIC
     // Assamese
     CASE "as": $unifonts = "ind_bn_1_001";
-        break;
+         break;
      // Bengali
     CASE "bn": $unifonts = "ind_bn_1_001";
-        break;
+         break;
      // Gujarati
     CASE "gu": $unifonts = "ind_gu_1_001";
-        break;
+         break;
      // Hindi (Devanagari)
     CASE "hi": $unifonts = "ind_hi_1_001";
-        break;
+         break;
      // Kannada
     CASE "kn": $unifonts = "ind_kn_1_001";
-        break;
+         break;
      // Kashmiri
     CASE "ks": $unifonts = "ind_hi_1_001";
-        break;
+         break;
      // Malayalam
     CASE "ml": $unifonts = "ind_ml_1_001";
-        break;
+         break;
      // Nepali (Devanagari)
     CASE "ne": $unifonts = "ind_hi_1_001";
-        break;
+         break;
      // Oriya
     CASE "or": $unifonts = "ind_or_1_001";
-        break;
+         break;
      // Punjabi (Gurmukhi)
     CASE "pa": $unifonts = "ind_pa_1_001";
-        break;
+         break;
      // Tamil
     CASE "ta": $unifonts = "ind_ta_1_001";
-        break;
+         break;
      // Telegu
     CASE "te": $unifonts = "ind_te_1_001";
-        break;
+         break;
     
      // THAI
     CASE "th": $unifonts = "garuda,garudaB,garudaI,garudaBI,norasi,norasiB,norasiI,norasiBI";
-        break;
+         break;
     
      // VIETNAMESE
     CASE "vi":
          $unifonts = "dejavusanscondensed,dejavusanscondensedB,dejavusanscondensedI,dejavusanscondensedBI,dejavusans,dejavusansB,dejavusansI,dejavusansBI";
-        break;
+         break;
     
      // CJK Langauges
     CASE "ja":
@@ -122,7 +122,7 @@ function GetLangOpts($llcc, $adobeCJK){
         /**
          * Uncomment these lines if CJK fonts available
          */
-        // else {
+         // else {
         // $unifonts = "sun-exta,sun-extb,hannoma,hannomb";
         // }
         break;
@@ -134,7 +134,7 @@ function GetLangOpts($llcc, $adobeCJK){
         /**
          * Uncomment these lines if CJK fonts available
          */
-        // else {
+         // else {
         // $unifonts = "unbatang_0613";
         // }
         break;
@@ -147,7 +147,7 @@ function GetLangOpts($llcc, $adobeCJK){
             /**
              * Uncomment these lines if CJK fonts available
              */
-            // else {
+             // else {
             // $unifonts = "sun-exta,sun-extb,hannoma,hannomb";
             // }
         }
@@ -158,7 +158,7 @@ function GetLangOpts($llcc, $adobeCJK){
             /**
              * Uncomment these lines if CJK fonts available
              */
-            // else {
+             // else {
             // $unifonts = "sun-exta,sun-extb,hannoma,hannomb";
             // }
         }
@@ -169,7 +169,7 @@ function GetLangOpts($llcc, $adobeCJK){
             /**
              * Uncomment these lines if CJK fonts available
              */
-            // else {
+             // else {
             // $unifonts = "sun-exta,sun-extb,hannoma,hannomb";
             // }
         }

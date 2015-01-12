@@ -121,16 +121,16 @@ class Services_JSON
      * 
      * @param int $use object behavior flags; combine with boolean-OR
      * 
-     *                            possible values:
-     *                            - SERVICES_JSON_LOOSE_TYPE:  loose typing.
-     *                                    "{...}" syntax creates associative arrays
-     *                                    instead of objects in decode().
-     *                            - SERVICES_JSON_SUPPRESS_ERRORS:  error suppression.
-     *                                    Values which can't be encoded (e.g. resources)
-     *                                    appear as NULL instead of throwing errors.
-     *                                    By default, a deeply-nested resource will
-     *                                    bubble up with an error, so all return values
-     *                                    from encode() should be checked with isError()
+     *                             possible values:
+     *                             - SERVICES_JSON_LOOSE_TYPE:  loose typing.
+     *                                     "{...}" syntax creates associative arrays
+     *                                     instead of objects in decode().
+     *                             - SERVICES_JSON_SUPPRESS_ERRORS:  error suppression.
+     *                                     Values which can't be encoded (e.g. resources)
+     *                                     appear as NULL instead of throwing errors.
+     *                                     By default, a deeply-nested resource will
+     *                                     bubble up with an error, so all return values
+     *                                     from encode() should be checked with isError()
      */
      function Services_JSON($use = 0)
     {
@@ -229,9 +229,9 @@ class Services_JSON
      * encodes an arbitrary variable into JSON format
      * 
      * @param mixed $var any number, boolean, string, array, or object to be encoded.
-     *                            see argument 1 to Services_JSON() above for array-parsing behavior.
-     *                            if var is a strng, note that encode() always expects it
-     *                            to be in ASCII or UTF-8 format!
+     *                             see argument 1 to Services_JSON() above for array-parsing behavior.
+     *                             if var is a strng, note that encode() always expects it
+     *                             to be in ASCII or UTF-8 format!
      * @return mixed JSON string representation of input var or an error if a problem occurs
      * @access public 
      */
@@ -473,10 +473,10 @@ class Services_JSON
      * 
      * @param string $str JSON-formatted string
      * @return mixed number, boolean, string, array, or object
-     *                    corresponding to given JSON input string.
-     *                    See argument 1 to Services_JSON() above for object-output behavior.
-     *                    Note that decode() always returns strings
-     *                    in ASCII or UTF-8 format!
+     *                     corresponding to given JSON input string.
+     *                     See argument 1 to Services_JSON() above for object-output behavior.
+     *                     Note that decode() always returns strings
+     *                     in ASCII or UTF-8 format!
      * @access public 
      */
      function decode($str)
@@ -688,7 +688,7 @@ class Services_JSON
                          // found a quote, and we are not inside a string
                         array_push($stk, array('what' => SERVICES_JSON_IN_STR, 'where' => $c, 'delim' => $chrs{$c}));
                          // print("Found start of string at {$c}\n");
-                        }elseif (($chrs{$c} == $top['delim']) &&
+                    }elseif (($chrs{$c} == $top['delim']) &&
                              ($top['what'] == SERVICES_JSON_IN_STR) &&
                              ((strlen(substr($chrs, 0, $c)) - strlen(rtrim(substr($chrs, 0, $c), '\\'))) % 2 != 1)){
                          // found a quote, we're in a string, and it's not escaped
@@ -696,31 +696,31 @@ class Services_JSON
                         // odd number of backslashes at the end of the string so far
                         array_pop($stk);
                          // print("Found end of string at {$c}: ".substr($chrs, $top['where'], (1 + 1 + $c - $top['where']))."\n");
-                        }elseif (($chrs{$c} == '[') &&
+                    }elseif (($chrs{$c} == '[') &&
                              in_array($top['what'], array(SERVICES_JSON_SLICE, SERVICES_JSON_IN_ARR, SERVICES_JSON_IN_OBJ))){
                          // found a left-bracket, and we are in an array, object, or slice
                         array_push($stk, array('what' => SERVICES_JSON_IN_ARR, 'where' => $c, 'delim' => false));
                          // print("Found start of array at {$c}\n");
-                        }elseif (($chrs{$c} == ']') && ($top['what'] == SERVICES_JSON_IN_ARR)){
+                    }elseif (($chrs{$c} == ']') && ($top['what'] == SERVICES_JSON_IN_ARR)){
                          // found a right-bracket, and we're in an array
                         array_pop($stk);
                          // print("Found end of array at {$c}: ".substr($chrs, $top['where'], (1 + $c - $top['where']))."\n");
-                        }elseif (($chrs{$c} == '{') &&
+                    }elseif (($chrs{$c} == '{') &&
                              in_array($top['what'], array(SERVICES_JSON_SLICE, SERVICES_JSON_IN_ARR, SERVICES_JSON_IN_OBJ))){
                          // found a left-brace, and we are in an array, object, or slice
                         array_push($stk, array('what' => SERVICES_JSON_IN_OBJ, 'where' => $c, 'delim' => false));
                          // print("Found start of object at {$c}\n");
-                        }elseif (($chrs{$c} == '}') && ($top['what'] == SERVICES_JSON_IN_OBJ)){
+                    }elseif (($chrs{$c} == '}') && ($top['what'] == SERVICES_JSON_IN_OBJ)){
                          // found a right-brace, and we're in an object
                         array_pop($stk);
                          // print("Found end of object at {$c}: ".substr($chrs, $top['where'], (1 + $c - $top['where']))."\n");
-                        }elseif (($substr_chrs_c_2 == '/*') &&
+                    }elseif (($substr_chrs_c_2 == '/*') &&
                              in_array($top['what'], array(SERVICES_JSON_SLICE, SERVICES_JSON_IN_ARR, SERVICES_JSON_IN_OBJ))){
                          // found a comment start, and we are in an array, object, or slice
                         array_push($stk, array('what' => SERVICES_JSON_IN_CMT, 'where' => $c, 'delim' => false));
                          $c++;
                          // print("Found start of comment at {$c}\n");
-                        }elseif (($substr_chrs_c_2 == '*/') && ($top['what'] == SERVICES_JSON_IN_CMT)){
+                    }elseif (($substr_chrs_c_2 == '*/') && ($top['what'] == SERVICES_JSON_IN_CMT)){
                          // found a comment end, and we're in one now
                         array_pop($stk);
                          $c++;
@@ -729,7 +729,7 @@ class Services_JSON
                          $chrs = substr_replace($chrs, ' ', $i, 1);
                         
                          // print("Found end of comment at {$c}: ".substr($chrs, $top['where'], (1 + $c - $top['where']))."\n");
-                        }
+                    }
                     
                      }
                 
@@ -760,7 +760,7 @@ class Services_JSON
         
          return false;
          }
-    }
+     }
 
 if (class_exists('PEAR_Error')){
     
@@ -773,7 +773,7 @@ if (class_exists('PEAR_Error')){
              }
          }
     
-    }else{
+     }else{
     
     /**
      * 
@@ -788,6 +788,6 @@ if (class_exists('PEAR_Error')){
              }
          }
     
-    }
+     }
 
 ?>

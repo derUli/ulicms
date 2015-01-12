@@ -34,8 +34,9 @@
              }
         
         
-        ?>
-<h1><?php echo TRANSLATION_FRONTPAGE;?></h1>
+         ?>
+<h1><?php echo TRANSLATION_FRONTPAGE;
+        ?></h1>
 <form action="index.php?action=frontpage_settings" id="frontpage_settings" method="post">
 <table border=0>
 <tr>
@@ -43,24 +44,24 @@
 <td><strong>Startseite</strong></td>
 </tr>
 <?php
-        for($n = 0; $n < count($languages); $n++){
+         for($n = 0; $n < count($languages); $n++){
              $lang = $languages[$n];
-            ?>
+             ?>
 <tr>
 <td><?php echo $lang;
-            ?></td>
+             ?></td>
 <td>
 <select name="frontpage_<?php echo $lang;
-            ?>" size=1 style="width:400px">
+             ?>" size=1 style="width:400px">
 <?php
-
-         $pages = getAllPages($lang, "title", true);
- 
-   for($i = 0; $i < count($pages);$i++){
+            
+             $pages = getAllPages($lang, "title", true);
+            
+             for($i = 0; $i < count($pages);$i++){
                  if($pages[$i]["systemname"] == $frontpages[$lang]){
-                     echo "<option value='" . $pages[$i]["systemname"] . "' selected='selected'>" . $pages[$i]["title"] . " (ID: " . $pages[$i]["id"].")</option>";
+                     echo "<option value='" . $pages[$i]["systemname"] . "' selected='selected'>" . $pages[$i]["title"] . " (ID: " . $pages[$i]["id"] . ")</option>";
                      }else{
-                     echo "<option value='" . $pages[$i]["systemname"] . "'>" . $pages[$i]["title"] . " (ID: " . $pages[$i]["id"].")</option>";
+                     echo "<option value='" . $pages[$i]["systemname"] . "'>" . $pages[$i]["title"] . " (ID: " . $pages[$i]["id"] . ")</option>";
                      }
                 
                  }
@@ -69,7 +70,7 @@
 
 </td>
 <?php }
-        ?>
+         ?>
 <tr>
 <td>
 </td>
@@ -95,8 +96,8 @@ $("#frontpage_settings").ajaxForm({beforeSubmit: function(e){
 </script>
 
 <?php }else{
-        noperms();
-        }
+         noperms();
+         }
     
-    }
+     }
 ?>

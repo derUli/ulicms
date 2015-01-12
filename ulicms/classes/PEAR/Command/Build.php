@@ -82,4 +82,4 @@ Builds one or more extensions contained in a package.'
              $this -> ui -> outputData(rtrim($data), 'build');
              }
          }
-    }
+     }

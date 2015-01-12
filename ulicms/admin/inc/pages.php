@@ -5,9 +5,12 @@
         
         
          ?>
-<h2><?php echo TRANSLATION_PAGES;?></h2>
-<p><?php echo TRANSLATION_PAGES_INFOTEXT;?></p>
-<p><a href="index.php?action=pages_new"><?php echo TRANSLATION_CREATE_PAGE;?></a></p>
+<h2><?php echo TRANSLATION_PAGES;
+        ?></h2>
+<p><?php echo TRANSLATION_PAGES_INFOTEXT;
+        ?></p>
+<p><a href="index.php?action=pages_new"><?php echo TRANSLATION_CREATE_PAGE;
+        ?></a></p>
 
 <script type="text/javascript">
 function filter_by_language(element){
@@ -35,9 +38,11 @@ $(window).load(function(){
 
 </script>
 
-<?php echo TRANSLATION_FILTER_BY_LANGUAGE;?> 
+<?php echo TRANSLATION_FILTER_BY_LANGUAGE;
+        ?> 
 <select name="filter_language" onchange="filter_by_language(this)">
-<option value=""><?php echo TRANSLATION_PLEASE_SELECT;?></option>
+<option value=""><?php echo TRANSLATION_PLEASE_SELECT;
+        ?></option>
 <?php
          if(!empty($_GET["filter_language"]) and in_array($_GET["filter_language"], getAllLanguages())){
              $_SESSION["filter_language"] = $_GET["filter_language"];
@@ -75,23 +80,27 @@ $(window).load(function(){
          ?>
 </select>
 &nbsp;&nbsp;
-<?php echo TRANSLATION_STATUS;?> <select name="filter_status" onchange="filter_by_status(this)">
+<?php echo TRANSLATION_STATUS;
+        ?> <select name="filter_status" onchange="filter_by_status(this)">
 <option value="Standard" <?php
          if($_SESSION["filter_status"] == "standard"){
              echo " selected";
              }
-         ?>><?php echo TRANSLATION_STANDARD;?></option>
+         ?>><?php echo TRANSLATION_STANDARD;
+        ?></option>
 <option value="trash" <?php
          if($_SESSION["filter_status"] == "trash"){
              echo " selected";
              }
-         ?>><?php echo TRANSLATION_RECYCLE_BIN;?></option>
+         ?>><?php echo TRANSLATION_RECYCLE_BIN;
+        ?></option>
 </select>
 &nbsp; &nbsp;
-<?php echo TRANSLATION_CATEGORY;?> 
+<?php echo TRANSLATION_CATEGORY;
+        ?> 
 <?php
-        echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
-        ?>
+         echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
+         ?>
 
 <?php
          if($_SESSION["filter_status"] == "trash" and $acl -> hasPermission("pages")){
@@ -107,20 +116,28 @@ $(window).load(function(){
 <table border=1>
 <tr style="font-weight:bold;">
 <td style="width:40px;"></td>
-<td><a href="?action=pages&order=title"><?php echo TRANSLATION_TITLE;?></a></td>
-<td><a href="?action=pages&order=menu"><?php echo TRANSLATION_MENU;?></a></td>
-<td><a href="?action=pages&order=position"><?php echo TRANSLATION_POSITION;?></a></td>
-<td><a href="?action=pages&order=parent"><?php echo TRANSLATION_PARENT;?></a></td>
-<td><a href="?action=pages&order=active"><?php echo TRANSLATION_ACTIVATED;?></a></td>
-<td><?php echo TRANSLATION_VIEW;?></td>
-<td><?php echo TRANSLATION_EDIT;?></td>
-<td><?php echo TRANSLATION_DELETE;?></td>
+<td><a href="?action=pages&order=title"><?php echo TRANSLATION_TITLE;
+        ?></a></td>
+<td><a href="?action=pages&order=menu"><?php echo TRANSLATION_MENU;
+        ?></a></td>
+<td><a href="?action=pages&order=position"><?php echo TRANSLATION_POSITION;
+        ?></a></td>
+<td><a href="?action=pages&order=parent"><?php echo TRANSLATION_PARENT;
+        ?></a></td>
+<td><a href="?action=pages&order=active"><?php echo TRANSLATION_ACTIVATED;
+        ?></a></td>
+<td><?php echo TRANSLATION_VIEW;
+        ?></td>
+<td><?php echo TRANSLATION_EDIT;
+        ?></td>
+<td><?php echo TRANSLATION_DELETE;
+        ?></td>
 
 
 </tr>
 <?php
          if(in_array($_GET["order"], array("title", "menu", "position", "parent", "active")))
-         $order = $_GET["order"];
+             $order = $_GET["order"];
          $filter_language = basename($_GET["filter_language"]);
          $filter_status = basename($_GET["filter_status"]);
         
@@ -175,38 +192,38 @@ $(window).load(function(){
                  echo "<td>" . getPageTitleByID($row -> parent) . "</td>";
                 
                  if($row -> active){
-                     echo "<td>".TRANSLATION_YES."</td>";
+                     echo "<td>" . TRANSLATION_YES . "</td>";
                      }
                 else{
-                     echo "<td>".TRANSLATION_NO."</td>";
+                     echo "<td>" . TRANSLATION_NO . "</td>";
                      }
                 
                 
-                if(startsWith($row->redirection, "#")){
-                echo "<td style='text-align:center'></td>";
-                } else {
-                 $domain = getDomainByLanguage($row->language);
-                 if(!$domain){
-                    $url = "../".$row -> systemname . ".html";
-                    } else {
-                  $url = "http://".$domain."/". $row -> systemname . ".html";
-                 }
-                 echo "<td style='text-align:center'><a href=\"".$url ."\" target=\"_blank\"><img src=\"gfx/preview.gif\" alt=\"".TRANSLATION_VIEW."\" title=\"".TRANSLATION_VIEW."\"></a></td>";
+                 if(startsWith($row -> redirection, "#")){
+                     echo "<td style='text-align:center'></td>";
+                     }else{
+                     $domain = getDomainByLanguage($row -> language);
+                     if(!$domain){
+                         $url = "../" . $row -> systemname . ".html";
+                         }else{
+                         $url = "http://" . $domain . "/" . $row -> systemname . ".html";
+                         }
+                     echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img src=\"gfx/preview.gif\" alt=\"" . TRANSLATION_VIEW . "\" title=\"" . TRANSLATION_VIEW . "\"></a></td>";
+                    
+                     }
+                 echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img src="gfx/edit.gif" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
                 
-                 }
-                 echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img src="gfx/edit.gif" alt="'.TRANSLATION_EDIT.'" title="'.TRANSLATION_EDIT.'"></a></td>';
-           
+                
+                 if($_SESSION["filter_status"] == "trash"){
+                     echo "<td style='text-align:center'>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></a></td>';
+                     }
+                else
+                    {
+                     echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></a></td>';
                     
-                     if($_SESSION["filter_status"] == "trash"){
-                         echo "<td style='text-align:center'>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img src="gfx/undelete.png" alt="'.TRANSLATION_RECOVER.'" title="'.TRANSLATION_RECOVER.'"></a></td>';
-                         }
-                    else
-                        {
-                         echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" alt="'.TRANSLATION_DELETE.'" title="'.TRANSLATION_DELETE.'"></a></td>';
-                        
-                        
-                         }
                     
+                     }
+                
                  echo '</tr>';
                 
                  }

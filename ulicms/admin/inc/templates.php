@@ -6,7 +6,8 @@
          ?>
 
 
-<h2><?php echo TRANSLATION_TEMPLATES;?></h2>
+<h2><?php echo TRANSLATION_TEMPLATES;
+        ?></h2>
 <?php
         
          if(!empty($_GET["save"])){
@@ -19,12 +20,18 @@
         else if(empty($_GET["edit"])){
              ?>
 
-<p><?php echo ULICMS_TEMPLATE_INFO_TEXT;?></p>
-<strong><?php echo TRANSLATION_PLEASE_SELECT_TEMPLATE;?></strong><br/>
-<p><a href="index.php?action=templates&edit=oben.php"><?php echo TRANSLATION_TOP;?></a></p>
-<p><a href="index.php?action=templates&edit=unten.php"><?php echo TRANSLATION_BOTTOM;?></a></p>
-<p><a href="index.php?action=templates&edit=maintenance.php"><?php echo TRANSLATION_MAINTENANCE_PAGE;?></a></p>
-<p><a href="index.php?action=templates&edit=style.css"><?php echo TRANSLATION_CSS;?></a></p>
+<p><?php echo ULICMS_TEMPLATE_INFO_TEXT;
+            ?></p>
+<strong><?php echo TRANSLATION_PLEASE_SELECT_TEMPLATE;
+            ?></strong><br/>
+<p><a href="index.php?action=templates&edit=oben.php"><?php echo TRANSLATION_TOP;
+            ?></a></p>
+<p><a href="index.php?action=templates&edit=unten.php"><?php echo TRANSLATION_BOTTOM;
+            ?></a></p>
+<p><a href="index.php?action=templates&edit=maintenance.php"><?php echo TRANSLATION_MAINTENANCE_PAGE;
+            ?></a></p>
+<p><a href="index.php?action=templates&edit=style.css"><?php echo TRANSLATION_CSS;
+            ?></a></p>
 
 <?php
              if(file_exists(getTemplateDirPath($theme) . "403.php")){
@@ -110,7 +117,8 @@
 <div id="message_page_edit" class="inPageMessage"></div>
 <img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
 </div>
-    <input type="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;?>">
+    <input type="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;
+                    ?>">
     
 <?php
                      if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
@@ -128,7 +136,8 @@ $("#templateForm").ajaxForm({beforeSubmit: function(e){
   }, 
   success:function(e){
   $(".loading").hide();  
-  $("#message_page_edit").html("<span style=\"color:green;\"><?php echo TRANSLATION_CHANGES_WAS_SAVED;?></span>");
+  $("#message_page_edit").html("<span style=\"color:green;\"><?php echo TRANSLATION_CHANGES_WAS_SAVED;
+                ?></span>");
   $("#message_page_edit").show();
   }
   

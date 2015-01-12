@@ -4,18 +4,18 @@ setcookie(session_name(), session_id());
 error_reporting (E_ALL ^ E_NOTICE);
 
 if(!isset($_SESSION["language"])){
-   $_SESSION["language"] = "de";
-}
+     $_SESSION["language"] = "de";
+    }
 
 if(isset($_GET["language"])){
-   $_SESSION["language"] = basename($_GET["language"]);
-}
+     $_SESSION["language"] = basename($_GET["language"]);
+    }
 
-$file = "lang/".$_SESSION["language"].".php";
+$file = "lang/" . $_SESSION["language"] . ".php";
 
 if(!file_exists($file)){
-   $file = "lang/de.php";
-}
+     $file = "lang/de.php";
+    }
 
 include_once $file;
 
@@ -25,7 +25,8 @@ include_once "../lib/workaround.php";
 ?>
 <!DOCTYPE html>
 <head>
-<title><?php echo TRANSLATION_TITLE;?></title>
+<title><?php echo TRANSLATION_TITLE;
+?></title>
 <link rel="stylesheet" type="text/css" href="media/style.css"/>
 </head>
 <body>
@@ -38,39 +39,52 @@ if(!isset($_REQUEST["step"])){
 <p><strong>Sprache auswählen / Select a language</strong><br/>
 
 <select name="language" onchange="window.location.replace('?language=' + this.value)">
-<option value="de" <?php if($_SESSION["language"] == "de") echo "selected";?>">Deutsch</option>
-<option value="en" <?php if($_SESSION["language"] == "en") echo "selected";?>>English</option>
+<option value="de" <?php if($_SESSION["language"] == "de") echo "selected";
+    ?>">Deutsch</option>
+<option value="en" <?php if($_SESSION["language"] == "en") echo "selected";
+    ?>>English</option>
 </select>
 </p>
 <p>
 <input type="hidden" name="step" value="00">
-<input type="submit" value="<?php echo TRANSLATION_NEXT;?>">
+<input type="submit" value="<?php echo TRANSLATION_NEXT;
+    ?>">
 
 </p>
 </form>
-<?php } else if($_REQUEST["step"] == "0"){?>
-<h2><?php echo TRANSLATION_WELCOME;?></h2>
-<p><?php echo TRANSLATION_WELCOME2;?></p>
+<?php }else if($_REQUEST["step"] == "0"){
+    ?>
+<h2><?php echo TRANSLATION_WELCOME;
+    ?></h2>
+<p><?php echo TRANSLATION_WELCOME2;
+    ?></p>
 <?php
      include "../version.php";
      $version = new ulicms_version();
     
      if($version -> getDevelopmentVersion()){
          ?>
-<p style="color:red;"><?php echo TRANSLATION_BETA_VERSION;?>
+<p style="color:red;"><?php echo TRANSLATION_BETA_VERSION;
+        ?>
 </p>
 <?php
          }
      ?>
-<p><?php echo TRANSLATION_FOLLOW_INSTRUCTIONS;?></p>
-<?php echo TRANSLATION_CHMOD;?>
-<h3><?php echo TRANSLATION_PERMISSION;?></h3>
-<p><img src="media/chmod_02.png" alt="<?php echo TRANSLATION_PERMISSIONS2;?>" title="<?php echo TRANSLATION_PERMISSIONS2;?>" border=1/></p>
+<p><?php echo TRANSLATION_FOLLOW_INSTRUCTIONS;
+    ?></p>
+<?php echo TRANSLATION_CHMOD;
+    ?>
+<h3><?php echo TRANSLATION_PERMISSION;
+    ?></h3>
+<p><img src="media/chmod_02.png" alt="<?php echo TRANSLATION_PERMISSIONS2;
+    ?>" title="<?php echo TRANSLATION_PERMISSIONS2;
+    ?>" border=1/></p>
 <?php
      if (!function_exists('gd_info')){
          ?>
 <hr/>
-<p style="color:red;"><?php echo TRANSLATION_GD_MISSING;?></p>
+<p style="color:red;"><?php echo TRANSLATION_GD_MISSING;
+        ?></p>
 <hr/>
 <?php }
      ?>
@@ -78,27 +92,30 @@ if(!isset($_REQUEST["step"])){
 
 <?php
      if (!function_exists('mysqli_connect')){
-     $error = true;
+         $error = true;
          ?>
-<p style="color:red;"><?php echo TRANSLATION_MYSQLI_MISSING;?></p>
+<p style="color:red;"><?php echo TRANSLATION_MYSQLI_MISSING;
+        ?></p>
 
-<?php 
+<?php
+        
+        }
+    if(!function_exists("json_encode")){
+        $error = true;
+        ?>
 
-}
-if(!function_exists("json_encode")){
-$error = true;
-?>
+<p style="color:red;"><?php echo TRANSLATION_JSON_MISSING;
+        ?></p>
 
-<p style="color:red;"><?php echo TRANSLATION_JSON_MISSING;?></p>
-
-<?php } 
-
-if(!isset($error)){
+<?php }
+    
+    if(!isset($error)){
          ?>
 
 <form action="index.php" method="post">
 <input type="hidden" name="step" value="1">
-<input type="submit" value="<?php echo TRANSLATION_NEXT;?>">
+<input type="submit" value="<?php echo TRANSLATION_NEXT;
+        ?>">
 </form>
 <br/>
 
@@ -109,32 +126,40 @@ if(!isset($error)){
      ?>
 <?php if($_REQUEST["step"] == "1"){
          ?>
-<h2><?php echo TRANSLATION_MYSQL_LOGIN;?></h2>
-<p><?php echo TRANSLATION_MYSQL_LOGIN_HELP;?></p>
+<h2><?php echo TRANSLATION_MYSQL_LOGIN;
+        ?></h2>
+<p><?php echo TRANSLATION_MYSQL_LOGIN_HELP;
+        ?></p>
 <form action="index.php" method="post">
 <table border=1>
 <tr>
-<td><?php echo TRANSLATION_SERVERNAME;?></td>
+<td><?php echo TRANSLATION_SERVERNAME;
+        ?></td>
 <td><input name="servername" type="text" value="localhost"></td>
 </tr>
 <tr>
-<td><?php echo TRANSLATION_LOGINNAME;?></td>
+<td><?php echo TRANSLATION_LOGINNAME;
+        ?></td>
 <td><input name="loginname"type="text" value=""></td>
 </tr>
 <tr>
-<td><?php echo TRANSLATION_PASSWORD;?></td>
+<td><?php echo TRANSLATION_PASSWORD;
+        ?></td>
 <td><input name="passwort" type="password" value=""></td>
 </tr>
 <tr>
-<td><?php echo TRANSLATION_DATABASE_NAME;?></td>
+<td><?php echo TRANSLATION_DATABASE_NAME;
+        ?></td>
 <td><input name="datenbank" type="text" value=""></td>
 </tr>
 <tr>
-<td><?php echo TRANSLATION_PREFIX;?></td>
+<td><?php echo TRANSLATION_PREFIX;
+        ?></td>
 <td><input name="prefix" type="text" value="ulicms_"></td>
 </tr>
 </table>
-<p><input type="submit" value="<?php echo TRANSLATION_NEXT;?>"></p>
+<p><input type="submit" value="<?php echo TRANSLATION_NEXT;
+        ?>"></p>
 <input type="hidden" name="step" value="2">
 </form>
 
@@ -143,7 +168,8 @@ if(!isset($error)){
 <?php if($_REQUEST["step"] == "2"){
         
          ?>
-<h2><?php echo TRANSLATION_MYSQL_LOGIN;?></h2>
+<h2><?php echo TRANSLATION_MYSQL_LOGIN;
+        ?></h2>
 <?php
          @$connection = mysqli_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
          if($connection == false){
@@ -162,11 +188,13 @@ if(!isset($error)){
                  $_SESSION["mysql"]["datenbank"] = $_POST["datenbank"];
                  $_SESSION["mysql"]["prefix"] = $_POST["prefix"];
                  ?>
-<p><?php echo TRANSLATION_SUCCESSFULL_DB_CONNECT;?></p>
+<p><?php echo TRANSLATION_SUCCESSFULL_DB_CONNECT;
+                ?></p>
 
 <form action="index.php" method="post">
 <input type="hidden" name="step" value="3">
-<input type="submit" value="<?php echo TRANSLATION_NEXT;?>">
+<input type="submit" value="<?php echo TRANSLATION_NEXT;
+                ?>">
 </form>
 
 <?php
@@ -184,39 +212,48 @@ if(!isset($error)){
 
 <?php if($_REQUEST["step"] == "3"){
          ?>
-<h2><?php echo TRANSLATION_HOMEPAGE_SETTINGS;?></h2>
+<h2><?php echo TRANSLATION_HOMEPAGE_SETTINGS;
+        ?></h2>
 <form action="index.php" method="post">
 <table border=1>
 <tr>
-<td><?php echo TRANSLATION_HOMEPAGE_TITLE;?></td>
+<td><?php echo TRANSLATION_HOMEPAGE_TITLE;
+        ?></td>
 <td><input name="homepage_title" type="text" value="Meine Homepage"></td>
 </tr>
 <tr>
-<td><?php echo TRANSLATION_SITE_SLOGAN;?></td>
+<td><?php echo TRANSLATION_SITE_SLOGAN;
+        ?></td>
 <td><input name="motto" type="text" value="Dies und Das"></td>
 </tr>
 <tr>
-<td><?php echo TRANSLATION_YOUR_FIRSTNAME;?></td>
+<td><?php echo TRANSLATION_YOUR_FIRSTNAME;
+        ?></td>
 <td><input name="firstname" type="text" value="Max"></td>
 </tr>
 <tr>
-<td><?php echo TRANSLATION_YOUR_LASTNAME;?></td>
+<td><?php echo TRANSLATION_YOUR_LASTNAME;
+        ?></td>
 <td><input name="lastname" type="text" value="Mustermann"></td>
 </tr>
 <tr>
-<td><?php echo TRANSLATION_YOUR_EMAIL_ADRESS;?></td>
+<td><?php echo TRANSLATION_YOUR_EMAIL_ADRESS;
+        ?></td>
 <td><input name="email" type="text" value="max@muster.de"></td>
 </tr>
 <tr>
-<td><?php echo TRANSLATION_ADMIN_NAME;?></td>
+<td><?php echo TRANSLATION_ADMIN_NAME;
+        ?></td>
 <td><input name="admin_user" type="text" value="admin"></td>
 </tr>
 <tr>
-<td><?php echo TRANSLATION_ADMIN_PASSWORD;?></td>
+<td><?php echo TRANSLATION_ADMIN_PASSWORD;
+        ?></td>
 <td><input name="passwort" type="password" value=""></td>
 </tr>
 </table>
-<p><input type="submit" value="<?php echo TRANSLATION_DO_INSTALL;?>"></p>
+<p><input type="submit" value="<?php echo TRANSLATION_DO_INSTALL;
+        ?>"></p>
 <input type="hidden" name="step" value="4">
 </form>
 
@@ -237,9 +274,9 @@ if(!isset($error)){
          $prefix = mysqli_real_escape_string($connection, $_SESSION["mysql"]["prefix"]);
         
          mysqli_query($connection, "SET NAMES 'utf8'")or die(mysqli_error($connection));
-         
+        
          // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
-         mysqli_query($connection, "SET SESSION sql_mode = '';");
+        mysqli_query($connection, "SET SESSION sql_mode = '';");
         
          mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -386,8 +423,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (15, 'visitors_can_register', 'off'),
 (16, 'frontpage', 'willkommen'),
 (17, 'contact_form_refused_spam_mails', '0'),
-(18, 'default_language', '".$_SESSION["language"]."'),
-(19, 'system_language', '".$_SESSION["language"]."'),
+(18, 'default_language', '" . $_SESSION["language"] . "'),
+(19, 'system_language', '" . $_SESSION["language"] . "'),
 (20, 'country_blacklist', 'ru, cn, in'),
 (21, 'spamfilter_enabled', 'yes'),
 (22, 'comment_mode', 'off'),
@@ -417,7 +454,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (45, 'frontpage_en', 'welcome'),
 (46, 'email_mode', 'internal'),
 (47, 'ckeditor_skin', 'moono'),
-(48, 'installed_at', '".time()."'),
+(48, 'installed_at', '" . time() . "'),
 (49, 'cache_disabled', 'disabled'),
 (50, 'session_timeout', '60');")or die(mysqli_error($connection));
         
@@ -429,67 +466,67 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   `language_code` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;")or die(mysqli_error($connection));
-
         
-
+        
+        
         
         
          mysqli_query($connection, "INSERT INTO `" . $prefix . "languages` (`id`, `name`, `language_code`) VALUES
 (1, 'Deutsch', 'de'), 
 (2, 'English', 'en');")or die(mysqli_error($connection));
-
-
-
         
-        $sql_categories_table = "CREATE TABLE " . $prefix . "categories (
+        
+        
+        
+         $sql_categories_table = "CREATE TABLE " . $prefix . "categories (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           name VARCHAR(100)
           ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
          mysqli_query($connection, $sql_categories_table);
-
         
-        $insert_categories_general = "INSERT INTO " . $prefix . "categories (name) VALUES('Allgemein')";
-        mysqli_query($connection, $insert_categories_general);
-
-
-
-$sql = "ALTER TABLE `".$prefix."languages` ADD UNIQUE(`language_code`)";
-
- mysqli_query($connection, $sql);
- 
-// Da InnoDB erst ab MySQL 5.6 Foreign Keys und Fulltext unterstützt
-// Foreign Keys nur setzen, wenn MySQL Server Version >= 5.6
-if(mysqli_get_server_version($connection) >= 50600){
-
-         $constraint1 = "ALTER TABLE `" . $prefix . "users` ADD FOREIGN KEY (`group_id`) REFERENCES `".$prefix."groups`(`id`) 
-ON DELETE SET NULL";
- mysqli_query($connection, $constraint1);
-         $constraint2 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`category`) REFERENCES `".$prefix."categories`(`id`) 
-ON DELETE SET NULL";
- mysqli_query($connection, $constraint2);
-
-
-
-         $constraint3 = "ALTER TABLE `" . $prefix . "banner` ADD FOREIGN KEY (`category`) REFERENCES `".$prefix."categories`(`id`) 
-ON DELETE SET NULL";
- mysqli_query($connection, $constraint3);
-
-
-         $constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `".$prefix."users`(`id`) 
-ON DELETE SET NULL";
- mysqli_query($connection, $constraint4);
- 
-$add_custom_data = "ALTER TABLE `".$prefix."content` ADD COLUMN `custom_data` varchar(255) NULL DEFAULT '{}'";
-mysqli_query($connection, $add_custom_data);
-
-
-/*
-         $constraint5 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`) 
-ON DELETE SET NULL";
- mysqli_query($connection, $constraint5);
- */
         
-        }
+         $insert_categories_general = "INSERT INTO " . $prefix . "categories (name) VALUES('Allgemein')";
+         mysqli_query($connection, $insert_categories_general);
+        
+        
+        
+        $sql = "ALTER TABLE `" . $prefix . "languages` ADD UNIQUE(`language_code`)";
+        
+         mysqli_query($connection, $sql);
+        
+        // Da InnoDB erst ab MySQL 5.6 Foreign Keys und Fulltext unterstützt
+        // Foreign Keys nur setzen, wenn MySQL Server Version >= 5.6
+        if(mysqli_get_server_version($connection) >= 50600){
+            
+             $constraint1 = "ALTER TABLE `" . $prefix . "users` ADD FOREIGN KEY (`group_id`) REFERENCES `" . $prefix . "groups`(`id`) 
+ON DELETE SET NULL";
+             mysqli_query($connection, $constraint1);
+             $constraint2 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`category`) REFERENCES `" . $prefix . "categories`(`id`) 
+ON DELETE SET NULL";
+             mysqli_query($connection, $constraint2);
+            
+            
+            
+             $constraint3 = "ALTER TABLE `" . $prefix . "banner` ADD FOREIGN KEY (`category`) REFERENCES `" . $prefix . "categories`(`id`) 
+ON DELETE SET NULL";
+             mysqli_query($connection, $constraint3);
+            
+            
+             $constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `" . $prefix . "users`(`id`) 
+ON DELETE SET NULL";
+             mysqli_query($connection, $constraint4);
+            
+            $add_custom_data = "ALTER TABLE `" . $prefix . "content` ADD COLUMN `custom_data` varchar(255) NULL DEFAULT '{}'";
+            mysqli_query($connection, $add_custom_data);
+            
+            
+            /**
+             * $constraint5 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`) 
+             * ON DELETE SET NULL";
+             * mysqli_query($connection, $constraint5);
+             */
+            
+             }
          @chmod("../cms-config.php", 0777);
         
          @mkdir("../content");
@@ -534,15 +571,15 @@ var $db_type="mysql";
              fclose($handle);
              }
         
-         $message = 
+         $message =
         
-        $title = str_ireplace("%domain%", $_SERVER["HTTP_HOST"], TRANSLATION_MAIL_MESSAGE_TITLE);
+         $title = str_ireplace("%domain%", $_SERVER["HTTP_HOST"], TRANSLATION_MAIL_MESSAGE_TITLE);
         
-        $content = TRANSLATION_MAIL_MESSAGE_TEXT;
-        $content = str_ireplace("%domain%", $_SERVER["HTTP_HOST"], $content);
-        $content = str_ireplace("%person_name%", $zusammen, $content);
-        $content = str_ireplace("%username%", $admin_user, $content);
-        $content = str_ireplace("%password%", $passwort, $content);
+         $content = TRANSLATION_MAIL_MESSAGE_TEXT;
+         $content = str_ireplace("%domain%", $_SERVER["HTTP_HOST"], $content);
+         $content = str_ireplace("%person_name%", $zusammen, $content);
+         $content = str_ireplace("%username%", $admin_user, $content);
+         $content = str_ireplace("%password%", $passwort, $content);
          $success = @mail($email,
              $title , $content, "From: $email\nContent-Type: text/plain; charset=UTF-8"
             );
@@ -553,16 +590,20 @@ var $db_type="mysql";
         
         
          ?>
-<h2><?php echo TRANSLATION_INSTALLATION_FINISHED;?></h2>
-<p><?php echo TRANSLATION_FIRST_LOGIN_HELP;?><br/><br/>
+<h2><?php echo TRANSLATION_INSTALLATION_FINISHED;
+        ?></h2>
+<p><?php echo TRANSLATION_FIRST_LOGIN_HELP;
+        ?><br/><br/>
 <?php if($success){
              ?>
-<span style="color:green;"><?php echo TRANSLATION_LOGIN_DATA_SENT_BY_MAIL;?>
+<span style="color:green;"><?php echo TRANSLATION_LOGIN_DATA_SENT_BY_MAIL;
+            ?>
 </span>
 
 <?php }else{
              ?>
-<span style="color:red;"><?php echo TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL;?></span>
+<span style="color:red;"><?php echo TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL;
+            ?></span>
 <?php }
          ?>
 <br/>

@@ -27,13 +27,16 @@ if(!$acl -> hasPermission("list_packages")){
      <?php
      if($acl -> hasPermission("install_packages")){
          ?>
-<p style="margin-bottom:30px;"><a href="?action=install_method">[<?php echo TRANSLATION_INSTALL_PACKAGE;?>]</a></p> 
+<p style="margin-bottom:30px;"><a href="?action=install_method">[<?php echo TRANSLATION_INSTALL_PACKAGE;
+        ?>]</a></p> 
 <?php }
      ?>
 
 
-<strong><?php echo TRANSLATION_INSTALLED_MODULES;?></strong>
-<p><?php echo TRANSLATION_INSTALLED_MODULES_INFO;?></p>
+<strong><?php echo TRANSLATION_INSTALLED_MODULES;
+    ?></strong>
+<p><?php echo TRANSLATION_INSTALLED_MODULES_INFO;
+    ?></p>
 
 <?php
      $modules = getAllModules();
@@ -52,13 +55,13 @@ if(!$acl -> hasPermission("list_packages")){
             
              if($module_has_admin_page){
                  echo "<a style=\"font-size:0.8em;\" href=\"?action=module_settings&module=" . $modules[$i] . "\">";
-                 echo "[".TRANSLATION_SETTINGS."]";
+                 echo "[" . TRANSLATION_SETTINGS . "]";
                  echo "</a>";
                  }
             
              if($acl -> hasPermission("remove_packages")){
                  echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $modules[$i] . "&type=module\" onclick=\"return confirm('Möchten Sie das Modul " . $modules[$i] . " wirklich deinstallieren?')\">";
-                 echo " [".TRANSLATION_DELETE."]";
+                 echo " [" . TRANSLATION_DELETE . "]";
                  echo "</a>";
                  }
             
@@ -72,8 +75,10 @@ if(!$acl -> hasPermission("list_packages")){
      ?>
 
 
-<p><strong><?php echo TRANSLATION_INSTALLED_DESIGNS;?></strong></p>
-<p><?php echo TRANSLATION_INSTALLED_DESIGNS_INFO;?></p>
+<p><strong><?php echo TRANSLATION_INSTALLED_DESIGNS;
+    ?></strong></p>
+<p><?php echo TRANSLATION_INSTALLED_DESIGNS_INFO;
+    ?></p>
 
 <?php
      $themes = getThemeList();
@@ -94,14 +99,14 @@ if(!$acl -> hasPermission("list_packages")){
             
              if(is_admin() and $themes[$i] != $ctheme){
                  echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $themes[$i] . "&type=theme\" onclick=\"return confirm('Möchten Sie das Theme " . $themes[$i] . " wirklich deinstallieren?')\">";
-             
-                echo " [".TRANSLATION_DELETE."]";
+                
+                 echo " [" . TRANSLATION_DELETE . "]";
                  echo "</a>";
                 
                  }else if(is_admin()){
                 
                  echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert('Das Theme kann nicht gelöscht werden, da es gerade aktiv ist.')\">";
-                echo " [".TRANSLATION_DELETE."]";
+                 echo " [" . TRANSLATION_DELETE . "]";
                  echo "</a>";
                 
                  }

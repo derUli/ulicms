@@ -803,11 +803,11 @@ class PEAR_PackageFile_v2_Validator
                      if ($type == 'extension'){
                          $this -> {
                             "_validate{$type}Dep"}
-                        ($package, false, true);
+                         ($package, false, true);
                          }else{
                          $this -> {
                             "_validate{$type}Dep"}
-                        ($package, true);
+                         ($package, true);
                          }
                      }
                  }
@@ -868,7 +868,7 @@ class PEAR_PackageFile_v2_Validator
                                      }
                                  $this -> {
                                     "_validate{$type}Dep"}
-                                ($package, "<$simpledep>");
+                                 ($package, "<$simpledep>");
                                  }
                              }
                          }
@@ -884,7 +884,7 @@ class PEAR_PackageFile_v2_Validator
                              foreach ($iter as $package){
                                  $this -> {
                                     "_validate{$type}Dep"}
-                                ($package);
+                                 ($package);
                                  }
                              }
                          }
@@ -930,7 +930,7 @@ class PEAR_PackageFile_v2_Validator
                                      }
                                  $this -> {
                                     "_validate{$type}Dep"}
-                                ($package, '<group name="' .
+                                 ($package, '<group name="' .
                                      $group['attribs']['name'] . '">');
                                  }
                              }
@@ -1099,9 +1099,9 @@ class PEAR_PackageFile_v2_Validator
             {
                  if (isset($file['attribs']) && isset($file['attribs']['name'])){
                      if ($file['attribs']['name']{
-                            0} == '.' &&
+                             0} == '.' &&
                          $file['attribs']['name']{
-                            1} == '/'){
+                             1} == '/'){
                          // name is something like "./doc/whatever.txt"
                         $this -> _invalidFileName($file['attribs']['name'], $dirname);
                          }
@@ -1966,7 +1966,7 @@ class PEAR_PackageFile_v2_Validator
              case T_CURLY_OPEN:
              case T_DOLLAR_OPEN_CURLY_BRACES:
              case '{': $brace_level++;
-                continue 2;
+                 continue 2;
                  case '}':
                  $brace_level--;
                  if ($current_class_level == $brace_level){
@@ -1979,13 +1979,13 @@ class PEAR_PackageFile_v2_Validator
                      }
                  continue 2;
                  case '[': $bracket_level++;
-                continue 2;
+                 continue 2;
                  case ']': $bracket_level--;
-                continue 2;
+                 continue 2;
                  case '(': $paren_level++;
-                continue 2;
+                 continue 2;
                  case ')': $paren_level--;
-                continue 2;
+                 continue 2;
                  case T_INTERFACE:
                  $interface = true;
                  case T_CLASS:
@@ -2110,10 +2110,10 @@ class PEAR_PackageFile_v2_Validator
      * analyzeSourceCode().  The format of the built array is like
      * this:
      * 
-     *   array(
-     *     'class;MyClass' => 'array('type' => 'class', 'name' => 'MyClass'),
-     *     ...
-     *   )
+     *    array(
+     *      'class;MyClass' => 'array('type' => 'class', 'name' => 'MyClass'),
+     *      ...
+     *    )
      * 
      * @param array $srcinfo array with information about a source file
      * as returned by the analyzeSourceCode() method.
@@ -2174,4 +2174,4 @@ class PEAR_PackageFile_v2_Validator
         
          return $providesret;
          }
-    }
+     }

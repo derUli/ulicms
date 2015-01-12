@@ -42,9 +42,9 @@ unregister_globals();
 
 // Zur Sicherheit alle Get und Request Parameter zum String casten, damit man keine Arrays in der URL eingeben kann.
 foreach($_GET as $key => $value){
-  @$_GET[$key] = strval($value);
-}
+     @$_GET[$key] = strval($value);
+    }
 
 foreach($_REQUEST as $key => $value){
-  @$_REQUEST[$key] = strval($value);
-}
+     @$_REQUEST[$key] = strval($value);
+    }

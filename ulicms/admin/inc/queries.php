@@ -133,7 +133,7 @@ if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $acl -> hasPer
 
 if($_GET["action"] == "languages" and !empty($_GET["default"]) and $acl -> hasPermission("languages")){
      setconfig("default_language", db_escape($_GET["default"]));
-     setconfig("system_language",   db_escape($_GET["default"]));
+     setconfig("system_language", db_escape($_GET["default"]));
      }
 
 
@@ -199,7 +199,7 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
              $shortContent = strip_tags($page_content);
             
              // Leerzeichen und Zeilenumbrüche entfernen
-             $shortContent = trim($shortContent);
+            $shortContent = trim($shortContent);
              $shortContent = preg_replace("#[ ]*[\r\n\v]+#", "\r\n", $shortContent);
              $shortContent = preg_replace("#[ \t]+#", " ", $shortContent);
              $shortContent = str_replace("\r\n", " ", $shortContent);
@@ -292,7 +292,7 @@ if($_POST["add_banner"] == "add_banner" && $acl -> hasPermission("banners")){
      $type = db_escape($_POST["type"]);
      $html = db_escape($_POST["html"]);
      $language = db_escape($_POST["language"]);
-
+    
     
      $query = db_query("INSERT INTO " . tbname("banner") . " 
 (name,link_url,image_url, category, `type`, html, `language`) VALUES('$name','$link_url','$image_url', '$category', '$type', '$html',
@@ -349,7 +349,7 @@ if($_POST["edit_page"] == "edit_page" && $acl -> hasPermission("pages")){
      $html_file = db_escape($_POST["html_file"]);
      $menu_image = db_escape($_POST["menu_image"]);
      $custom_data = db_escape($_POST["custom_data"]);
-
+    
      $alternate_title = db_escape($_POST["alternate_title"]);
     
      $parent = "NULL";
@@ -496,7 +496,7 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
      $email = db_escape($_POST["admin_email"]);
      $password = $_POST["admin_password"];
      $rechte = db_escape($_POST["admin_rechte"]);
-     
+    
      $notify_on_login = intval(isset($_POST["notify_on_login"]));
     
      if(isset($_POST["group_id"])){
@@ -537,7 +537,7 @@ if($_POST["edit_banner"] == "edit_banner" && $acl -> hasPermission("banners")){
      $link_url = db_escape($_POST["link_url"]);
      $category = intval($_POST["category"]);
      $id = intval($_POST["id"]);
-     
+    
      $type = db_escape($_POST["type"]);
      $html = db_escape($_POST["html"]);
      $language = db_escape($_POST["language"]);

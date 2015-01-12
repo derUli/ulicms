@@ -199,4 +199,4 @@ class PEAR_Packager extends PEAR_Common
         
          return $dest_package;
          }
-    }
+     }

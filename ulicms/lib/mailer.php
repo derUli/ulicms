@@ -3,7 +3,7 @@
 
 if(!class_exists("Mail")){
      define("NO_PEAR_MAIL", true);
-    }
+     }
 
  function split_headers($headers)
 {
@@ -47,29 +47,29 @@ function pear_mail($to, $subject, $message, $headers = ""){
      if(!getconfig("smtp_auth")){
          $mailer = Mail :: factory('smtp', array('host' => $smtp_host,
                  'port' => $smtp_port));
-        }else{
+         }else{
          // require_authentification
         $mailer = Mail :: factory('smtp', array('host' => $smtp_host,
                  'port' => $smtp_port,
                  'auth' => true,
                  'username' => $smtp_user,
                  'password' => $smtp_password));
-        }
+         }
     
     
      $header_list = split_headers($headers);
      $header_list['Subject'] = $subject;
      return $mailer -> send($to, $header_list, $message);
-    }
+     }
 
 
 function ulicms_mail($to, $subject, $message, $headers = ""){
      $mode = getconfig("email_mode");
      if(!$mode)
          $mode = "internal";
-
+    
      // Damit Umlaute auch im Betreff korrekt dargestellt werden, diese mit UTF-8 kodieren
-     $subject = "=?UTF-8?B?".base64_encode($subject)."?=";
+    $subject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
     
      if($mode == "pear_mail")
          return pear_mail($to, $subject, $message, $headers);
@@ -78,4 +78,4 @@ function ulicms_mail($to, $subject, $message, $headers = ""){
     
     
     
-    }
+     }

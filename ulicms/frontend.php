@@ -44,9 +44,9 @@ $theme = getconfig("theme");
 
 if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("maintenance_mode")) == "true" || getconfig("maintenance_mode") == "1"){
      add_hook("before_maintenance_message");
-     
+    
      // Sende HTTP Status 503 und Retry-After im Wartungsmodus
-     header('HTTP/1.0 503 Service Temporarily Unavailable');
+    header('HTTP/1.0 503 Service Temporarily Unavailable');
      header('Status: 503 Service Temporarily Unavailable');
      header('Retry-After: 60');
     
@@ -60,9 +60,9 @@ if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("ma
 
 if(isset($_GET["format"]) and !empty($_GET["format"])){
      $format = trim($_GET["format"]);
-    }else{
+     }else{
      $format = "html";
-    }
+     }
 
 add_hook("before_http_header");
 
@@ -70,10 +70,10 @@ header("HTTP/1.0 " . $status);
 
 if($format == "html"){
      header("Content-Type: text/html; charset=utf-8");
-    }else if($format == "pdf"){
+     }else if($format == "pdf"){
      $pdf = new PDFCreator();
      $pdf -> output();
-    }else if($format == "csv"){
+     }else if($format == "csv"){
      $csv = new CSVCreator();
      $csv -> output();
      }else if($format == "json"){
@@ -84,10 +84,10 @@ else if($format == "txt"){
      $plain = new PlainTextCreator();
      $plain -> output();
     
-    }
+     }
 else{
      $format = "html";
-    }
+     }
 
 
 add_hook("after_http_header");

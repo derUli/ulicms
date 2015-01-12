@@ -1,7 +1,7 @@
 <?php
 if(!function_exists('getFontFamilys')){
      function getFontFamilys(){
-        global $fonts;
+         global $fonts;
          $fonts = Array();
          $fonts["Times New Roman"] = "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif";
          $fonts["Georgia"] = "Georgia, Times, 'Times New Roman', serif";

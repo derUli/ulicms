@@ -15,12 +15,16 @@ if(!$acl -> hasPermission("install_packages")){
 <?php
      if(!$pkg_src){
          ?>
-<p><strong><?php echo TRANSLATION_ERROR;?></strong> <br/>
-<?php echo TRANSLATION_PKGSRC_NOT_DEFINED;?></p>
+<p><strong><?php echo TRANSLATION_ERROR;
+        ?></strong> <br/>
+<?php echo TRANSLATION_PKGSRC_NOT_DEFINED;
+        ?></p>
 <?php }else if(!class_exists("PharData")){
          ?>
-<p><strong><?php echo TRANSLATION_ERROR;?></strong> <br/>
-<?php echo TRANSLATION_PHARDATA_NOT_AVAILABLE;?>
+<p><strong><?php echo TRANSLATION_ERROR;
+        ?></strong> <br/>
+<?php echo TRANSLATION_PHARDATA_NOT_AVAILABLE;
+        ?>
 </p>
 <?php
          }
@@ -41,8 +45,10 @@ if(!$acl -> hasPermission("install_packages")){
         
          if(count($packagesToInstall) === 0 or empty($_REQUEST["packages"])){
              ?>
-<p><strong><?php echo TRANSLATION_ERROR;?>/strong> <br/>
-<?php echo TRANSLATION_NOTHING_TO_DO;?>
+<p><strong><?php echo TRANSLATION_ERROR;
+            ?>/strong> <br/>
+<?php echo TRANSLATION_NOTHING_TO_DO;
+            ?>
 </p>
 
 <?php
@@ -56,7 +62,7 @@ if(!$acl -> hasPermission("install_packages")){
                     
                      // Wenn Paket nicht runtergeladen werden konnte
                     if(!$pkgContent or strlen($pkgContent) < 1){
-                         echo "<p style='color:red;'>".str_ireplace("%pkg%", $packagesToInstall[$i], TRANSLATION_DOWNLOAD_FAILED)."</p>";
+                         echo "<p style='color:red;'>" . str_ireplace("%pkg%", $packagesToInstall[$i], TRANSLATION_DOWNLOAD_FAILED) . "</p>";
                          }else{
                          $tmpdir = "../content/tmp/";
                          if(!is_dir($tmpdir)){
@@ -73,9 +79,9 @@ if(!$acl -> hasPermission("install_packages")){
                          if(file_exists($tmpFile)){
                              // Paket installieren
                             if($pkg -> installPackage($tmpFile)){
-                                 echo "<p style='color:green;'>".str_ireplace("%pkg%", $packagesToInstall[$i], TRANSLATION_INSTALLATION_SUCCESSFULL)."</p>";
+                                 echo "<p style='color:green;'>" . str_ireplace("%pkg%", $packagesToInstall[$i], TRANSLATION_INSTALLATION_SUCCESSFULL) . "</p>";
                                  }else{
-                                 echo "<p style='color:red;'>".str_ireplace("%pkg%", $packagesToInstall[$i], TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED). "</p>";
+                                 echo "<p style='color:red;'>" . str_ireplace("%pkg%", $packagesToInstall[$i], TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED) . "</p>";
                                  }
                             
                              }

@@ -166,15 +166,15 @@ class file{
      * defines the template, the filename will be renamed to. Default template
      * is {name}({sufix}){ext}. Examples:
      * 
-     *                          file::getInexistantFilename("/my/directory/myfile.txt");
-     *                          If myfile.txt does not exist - returns the same path to the file
-     *                          otherwise returns "/my/directory/myfile(1).txt"
+     *                           file::getInexistantFilename("/my/directory/myfile.txt");
+     *                           If myfile.txt does not exist - returns the same path to the file
+     *                           otherwise returns "/my/directory/myfile(1).txt"
      * 
-     *                          file::getInexistantFilename("myfile.txt", "/my/directory");
-     *                          returns "myfile.txt" or "myfile(1).txt" or "myfile(2).txt" etc...
+     *                           file::getInexistantFilename("myfile.txt", "/my/directory");
+     *                           returns "myfile.txt" or "myfile(1).txt" or "myfile(2).txt" etc...
      * 
-     *                          file::getInexistantFilename("myfile.txt", "/dir", "{name}[{sufix}]{ext}");
-     *                          returns "myfile.txt" or "myfile[1].txt" or "myfile[2].txt" etc...
+     *                           file::getInexistantFilename("myfile.txt", "/dir", "{name}[{sufix}]{ext}");
+     *                           returns "myfile.txt" or "myfile[1].txt" or "myfile[2].txt" etc...
      * 
      * @param string $filename 
      * @param string $dir 
