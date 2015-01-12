@@ -39,7 +39,7 @@ $(window).load(function(){
 <select name="filter_language" onchange="filter_by_language(this)">
 <option value=""><?php echo TRANSLATION_PLEASE_SELECT;?></option>
 <?php
-         if(!empty($_GET["filter_language"])){
+         if(!empty($_GET["filter_language"]) and in_array($_GET["filter_language"], getAllLanguages())){
              $_SESSION["filter_language"] = $_GET["filter_language"];
              }
         
@@ -58,7 +58,7 @@ $(window).load(function(){
         
         
         
-         if(!empty($_GET["filter_status"])){
+         if(!empty($_GET["filter_status"]) and in_array($_GET["filter_status"], array("Standard", "standard", "trash"))){
              $_SESSION["filter_status"] = $_GET["filter_status"];
              }
         
@@ -112,14 +112,16 @@ $(window).load(function(){
 <td><a href="?action=pages&order=position"><?php echo TRANSLATION_POSITION;?></a></td>
 <td><a href="?action=pages&order=parent"><?php echo TRANSLATION_PARENT;?></a></td>
 <td><a href="?action=pages&order=active"><?php echo TRANSLATION_ACTIVATED;?></a></td>
-<td><a href="?action=pages&order=active"><?php echo TRANSLATION_VIEW;?></a></td>
+<td><?php echo TRANSLATION_VIEW;?></td>
+<td><?php echo TRANSLATION_VIEW;?></td>
 <td><?php echo TRANSLATION_EDIT;?></td>
 <td><?php echo TRANSLATION_DELETE;?></td>
 
 
 </tr>
 <?php
-         $order = basename($_GET["order"]);
+         if(in_array($_GET["order"], array("title", "menu", "position", "parent", "active")))
+         $order = $_GET["order"];
          $filter_language = basename($_GET["filter_language"]);
          $filter_status = basename($_GET["filter_status"]);
         
