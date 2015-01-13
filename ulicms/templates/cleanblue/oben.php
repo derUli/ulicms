@@ -21,17 +21,20 @@ if(getconfig("logo_disabled") == "no")
 <?php
      }
 else{
-     ?><strong><?php homepage_title();?></strong>
+     ?><strong><?php homepage_title();
+    ?></strong>
 <?php }
 ?>
 </a>
 </section>
-<nav><?php menu("top");?></nav>
+<nav><?php menu("top");
+?></nav>
 </header>
 <main>
 <?php if(!containsModule()){
-?>
-<h1><?php headline();?></h1>
+    ?>
+<h1><?php headline();
+    ?></h1>
 <?php
-}
+    }
 ?>
