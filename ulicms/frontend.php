@@ -135,7 +135,10 @@ if(file_exists($cached_page_path) and !getconfig("cache_disabled")
  $cached_content = file_get_contents($cached_page_path);
  $last_modified = filemtime($cached_page_path);
 
-
+// Kein Caching wenn man eingeloggt ist
+if(is_logged_in()){
+   no_cache();
+}
 
  if($cached_content and (time() - $last_modified < CACHE_PERIOD) and !defined("NO_CACHE")){
  echo $cached_content;
