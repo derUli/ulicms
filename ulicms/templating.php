@@ -793,7 +793,8 @@ function check_status(){
          }
 
      $test = get_page($_GET["seite"]);
-     if(!$test){
+     if(!$test or !is_null($test["deleted_at"])){
+        no_cache();
         return "404 Not Found";
      }
      $access = checkAccess($test["access"]);
