@@ -504,7 +504,8 @@ function get_menu($name = "top", $parent = null){
     }
 
     while($row = db_fetch_object($query)){
-
+      $access = explode(",", $row->access);
+      if((in_array("all", $access)) or (in_array("admin", $access) and is_admin()) or (in_array("registered", $access) and is_logged_in())){
       $html.= "  <li>" ;
       if(get_requested_pagename() != $row -> systemname){
         $html.= "<a href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" .
@@ -524,7 +525,7 @@ function get_menu($name = "top", $parent = null){
       $html .= "</li>";
 
      }
-
+}
      $html .= "</ul>";
 
      return $html;
@@ -754,7 +755,7 @@ function check_status(){
      if(is_null($test) or !$test){
          return "404 Not Found";
      } else{
-       $status = "403 Forbidden";
+
      if(in_array("all", $access)){
         return "200 OK";
      } 
@@ -767,7 +768,7 @@ function check_status(){
         no_cache();
         return "200 OK";
      }
-
+     no_cache();
      return "403 Forbidden";
      
      }
