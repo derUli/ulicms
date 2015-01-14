@@ -475,7 +475,7 @@ function is_403(){
      }
 
 
-function get_menu($name = "top", $parent = null){
+function get_menu($name = "top", $parent = null, $recursive = true){
   $html = "";
   $name = db_escape($name);
   $language = $_SESSION["language"];
@@ -519,7 +519,9 @@ function get_menu($name = "top", $parent = null){
       }
       $html.= "</a>\n";
 
-      $html .= get_menu($name, $row->id);
+      if($recursive){
+         $html .= get_menu($name, $row->id);
+      }
       
       $html .= "</li>";
 
@@ -530,8 +532,8 @@ function get_menu($name = "top", $parent = null){
      return $html;
 }
 
-function menu($name = "top", $parent = null){
-    echo get_menu($name, $parent);
+function menu($name = "top", $parent = null, $recursive = true){
+    echo get_menu($name, $parent, $recursive);
 }
 
 
