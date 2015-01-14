@@ -13,6 +13,22 @@ function get_custom_data($page = null){
 
      return null;
     }
+    
+function get_access($page = null){
+    if(!$page)
+         $page = get_requested_pagename();
+
+     $sql = "SELECT `access` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+     $query = db_query($sql);
+     if(db_num_rows($query) > 0){
+         $result = db_fetch_object($query);
+         $access = explode(",", $result->access);
+         return $access;
+         }
+
+     return null;
+    }
+    
 
 function get_theme($page = null){
 
@@ -726,7 +742,7 @@ function check_status(){
      $page = $_GET["seite"];
      $cached_page_path = buildCacheFilePath($page);
 
-     if(file_exists($cached_page_path)){
+     if(file_exists($cached_page_path) and !is_logged_in()){
          $last_modified = filemtime($cached_page_path);
          if(time() - $last_modified < CACHE_PERIOD){
              return "200 OK";
@@ -734,47 +750,25 @@ function check_status(){
          }
 
      $test = get_page($_GET["seite"]);
-     if(is_null($test)){
+     $access = explode(",", $test["access"]);
+     if(is_null($test) or !$test){
          return "404 Not Found";
-         }else{
-         $test_array = $test;
+     } else{
+       $status = "403 Forbidden";
+     if(in_array("all", $access)){
+        return "200 OK";
+     } 
+     
+     if(in_array("admin", $access) and is_admin()){
+        no_cache();
+        return "200 OK";
+     }
+     if(in_array("registered", $access) and is_logged_in()){
+        no_cache();
+        return "200 OK";
+     }
 
-         // Prüfe, ob der Nutzer die Berechtigung zum Zugriff auf die Seite hat.
-        if($test_array["active"] == 1 or is_logged_in()){
-
-             $access = explode(",", $test_array["access"]);
-
-             $permitted = false;
-
-             if(in_array("all", $access)){
-                 $permitted = true;
-                 }
-             if(in_array("admin", $access) and $_SESSION["group"] >= 50){
-                 $permitted = true;
-                 }
-
-             if(in_array("registered", $access) and $_SESSION["group"] >= 10){
-                 $permitted = true;
-                 }
-
-             if($permitted){
-
-                 if($test_array["redirection"] != ""){
-                     header("Location: " . $test_array["redirection"]);
-                     exit();
-                     }
-                 if($test_array["deleted_at"] != null){
-                     return "404 Not Found";
-                     }
-                 return "200 OK";
-
-                 }
-            else{
-                 return "403 Forbidden";
-                 }
-             }
-        else{
-             return "403 Forbidden";
-             }
-         }
+     return "403 Forbidden";
+     
+     }
      }

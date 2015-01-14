@@ -1307,7 +1307,8 @@ foreach ($mobile_agents as $device){
 
 
 function is_admin(){
- return $_SESSION["group_id"] == 1;
+ $acl = new ACL();
+ return $acl->hasPermission("pages") or $acl->hasPermission("banners");
  }
 
 require_once "users_api.php";
