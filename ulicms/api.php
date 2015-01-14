@@ -319,6 +319,16 @@ function get_mime($file){
      }
 
 
+function clearAPCCache(){
+  if(!function_exists("apc_clear_cache")){
+     return false;
+  }
+  apc_clear_cache();
+  apc_clear_cache('user');
+  apc_clear_cache('opcode');
+  return true;
+
+}
  function clearCache(){
      add_hook("before_clear_cache");
      $cache_type = getconfig("cache_type");
@@ -335,8 +345,16 @@ function get_mime($file){
          else
              SureRemoveDir("content/cache", false);
          }
+
+
+    if(function_exists("apc_clear_cache")){
+      clearAPCCache();
+    }
+
+
      add_hook("after_clear_cache");
      }
+
 
 // sind wir gerade im Adminordner?
 function is_admin_dir(){

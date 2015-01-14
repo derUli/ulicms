@@ -3,6 +3,8 @@
 - Zugriffsbeschränkungen für Seiten korrigiert und erweitert
 - no_cache() API Funktion hinzugefügt
 - Kein Caching bei eingeloggten Nutzern.
+- Es wird auch der Alternate PHP Cache (APC) geleert, sofern das 
+entsprechende PHP-Modul installiert ist.
 
 
 ﻿===== Neues in UliCMS 7.2.1 ====
