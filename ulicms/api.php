@@ -710,7 +710,7 @@ function getAllModules(){
 
 
 function no_cache(){
-   if(!defined("NO_CACHE")
+   if(!defined("NO_CACHE"))
       define("NO_CACHE", true);
 }
 

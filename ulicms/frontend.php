@@ -137,7 +137,7 @@ if(file_exists($cached_page_path) and !getconfig("cache_disabled")
 
 
 
- if($cached_content and (time() - $last_modified < CACHE_PERIOD)){
+ if($cached_content and (time() - $last_modified < CACHE_PERIOD) and !defined("NO_CACHE")){
  echo $cached_content;
  add_hook("before_cron");
  @include 'cron.php';
@@ -213,7 +213,7 @@ if(!getconfig("cache_disabled") and !$hasModul and
  getenv('REQUEST_METHOD') == "GET" and $cache_type === "cache_lite"){
  $data = ob_get_clean();
 
- if(!defined("EXCEPTION_OCCURRED")){
+ if(!defined("EXCEPTION_OCCURRED") and !defined("NO_CACHE")){
  $Cache_Lite -> save($data, $id);
  }
  echo $data;
@@ -233,7 +233,7 @@ if(!getconfig("cache_disabled") and !$hasModul and
  getenv('REQUEST_METHOD') == "GET" and $cache_type === "file"){
  $generated_html = ob_get_clean();
 
- if(!defined("EXCEPTION_OCCURRED")){
+ if(!defined("EXCEPTION_OCCURRED") and !defined("NO_CACHE")){
  $handle = fopen($cached_page_path, "wb");
  fwrite($handle, $generated_html);
  fclose($handle);
