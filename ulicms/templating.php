@@ -29,6 +29,24 @@ function get_access($page = null){
      return null;
     }
     
+    
+function get_redirection($page = null){
+    if(!$page)
+         $page = get_requested_pagename();
+
+     $sql = "SELECT `redirection` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+     $query = db_query($sql);
+     if(db_num_rows($query) > 0){
+         $result = db_fetch_object($query);
+         if(!empty($result->redirection) and !is_null($result->redirection)){
+         return $result->redirection;
+         }
+         return null;
+         }
+
+     return null;
+    }
+    
 
 function get_theme($page = null){
 

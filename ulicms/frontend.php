@@ -66,6 +66,12 @@ if(isset($_GET["format"]) and !empty($_GET["format"])){
 
 add_hook("before_http_header");
 
+$redirection = get_redirection();
+
+if($redirection){
+   ulicms_redirect($redirection, 302);
+}
+
 header("HTTP/1.0 " . $status);
 
 if($format == "html"){
