@@ -237,7 +237,7 @@ width:200px;
 </tr>
 <tr>
 <td>
-<strong><?php echo TRANSLATION_BACKGROUNDCOLOR;
+<strong><?php echo TRANSLATION_HEADER_BACKGROUNDCOLOR;
          ?></strong>
 </td>
 <td>
@@ -261,7 +261,7 @@ width:200px;
          ?></strong>
 </td>
 <td>
-<input name="body-background-color" class="color {hash:true,caps:true}" value="<?php echo real_htmspecialchars(getconfig("body-background-color"));
+<input name="body-background-color" class="color {hash:true,caps:true}" value="<?php echo real_htmlspecialchars(getconfig("body-background-color"));
          ?>">
 </td>
 </tr>
