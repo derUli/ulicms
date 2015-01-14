@@ -1,6 +1,6 @@
 ﻿===== Neues in UliCMS 7.2.1 Service Pack 1 ====
 - Alle bisher erschienen Patches für UliCMS 7.2.1 enthalten
-- Zugriffsbeschränkungen für Seiten korrigiert und erweitert
+- Zugriffsbeschränkungen ("Sichtbar für") für Seiten korrigiert und erweitert
 - no_cache() API Funktion hinzugefügt
 - Kein Caching bei eingeloggten Nutzern.
 - Es wird auch der Alternate PHP Cache (APC) geleert, sofern das 
