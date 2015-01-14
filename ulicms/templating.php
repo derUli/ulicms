@@ -504,8 +504,7 @@ function get_menu($name = "top", $parent = null){
     }
 
     while($row = db_fetch_object($query)){
-      $access = explode(",", $row->access);
-      if((in_array("all", $access)) or (in_array("admin", $access) and is_admin()) or (in_array("registered", $access) and is_logged_in())){
+      if(checkAccess($row->access)){
       $html.= "  <li>" ;
       if(get_requested_pagename() != $row -> systemname){
         $html.= "<a href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" .
@@ -733,6 +732,23 @@ function content(){
          db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE systemname='" . $_GET["seite"] . "' AND language='" . db_escape($_SESSION["language"]) . "'");
      return import($_GET["seite"]);
      }
+     
+function checkAccess($access = ""){
+  $access = explode(",", $access);
+  if(in_array("all", $access))
+     return "all";  
+  if(in_array("registered", $access) and is_logged_in()){
+     return "registered";
+   }
+     
+   for($i = 0; $i < count($access); $i++){
+     
+      if(is_numeric($access[$i]) and isset($_SESSION["group_id"]) and $access[$i] == $_SESSION["group_id"]){
+         return $access[$i];      
+      }
+   }
+   return null;
+}
 
 
 function check_status(){
@@ -751,25 +767,17 @@ function check_status(){
          }
 
      $test = get_page($_GET["seite"]);
-     $access = explode(",", $test["access"]);
-     if(is_null($test) or !$test){
-         return "404 Not Found";
-     } else{
-
-     if(in_array("all", $access)){
-        return "200 OK";
-     } 
-     
-     if(in_array("admin", $access) and is_admin()){
-        no_cache();
-        return "200 OK";
+     if(!$test){
+        return "404 Not Found";
      }
-     if(in_array("registered", $access) and is_logged_in()){
-        no_cache();
+     $access = checkAccess($test["access"]);
+     if($access){
+        if($access != "all")
+           no_cache();
         return "200 OK";
      }
      no_cache();
      return "403 Forbidden";
      
      }
-     }
+     

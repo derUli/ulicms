@@ -1,5 +1,6 @@
 <?php if(defined("_SECURITY")){
      $acl = new ACL();
+     $groups = db_query("SELECT id, name from ".tbname("groups"));
      if($acl -> hasPermission("pages")){
         
         
@@ -171,8 +172,11 @@ function openMenuImageSelectWindow(field) {
         ?></option>
 <option value="registered"><?php echo TRANSLATION_REGISTERED_USERS;
         ?></option>
-<option value="admin"><?php echo TRANSLATION_ADMINS;
-        ?></option>
+<?php 
+while($row = db_fetch_object($groups)){
+  echo '<option value="'.$row->id.'">'.real_htmlspecialchars($row->name).'</option>';
+} ?>
+
 </select>
 
 

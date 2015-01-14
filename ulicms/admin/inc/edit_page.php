@@ -3,6 +3,8 @@
      if($acl -> hasPermission("pages")){
          $page = db_escape($_GET["page"]);
          $query = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
+         
+         $groups = db_query("SELECT id, name from ".tbname("groups"));
          while($row = db_fetch_object($query)){
             
              ?>
@@ -196,8 +198,14 @@ function openMenuImageSelectWindow(field) {
             ?></option>
 <option value="registered"<?php if(in_array("registered", $access)) echo " selected"?>><?php echo TRANSLATION_REGISTERED_USERS;
             ?></option>
-<option value="admin"<?php if(in_array("admin", $access)) echo " selected"?>><?php echo TRANSLATION_ADMINS;
-            ?></option>
+<?php 
+while($row2 = db_fetch_object($groups)){
+  if(in_array(strval($row2->id), $access)){
+    echo '<option value="'.$row2->id.'" selected>'.real_htmlspecialchars($row2->name).'</option>';
+  } else {
+  echo '<option value="'.$row2->id.'">'.real_htmlspecialchars($row2->name).'</option>';
+  }
+} ?>
 </select>
 
 
