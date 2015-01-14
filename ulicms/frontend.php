@@ -204,6 +204,9 @@ if($html_file){
 
 }else{
 
+
+@include ULICMS_ROOT . "/powered-by.php";
+
 require_once getTemplateDirPath($theme) . "oben.php";
 
 
