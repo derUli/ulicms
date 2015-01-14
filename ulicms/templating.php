@@ -474,8 +474,31 @@ function is_403(){
      return check_status() == "403 Forbidden";
      }
 
+function get_parents($id = 1, $parents = array()){
 
-function get_menu($name = "top", $parent = null, $recursive = true){
+   while($id != null){
+   $sql = "SELECT parent FROM ".tbname("content"). " WHERE id = ".intval($id). " AND language='".$_SESSION["language"]."'";
+   $query = db_query($sql);
+   if(db_num_rows($query) > 0){
+     $result = db_fetch_object($query);
+
+     $parents[] = $result -> parent;
+     $id = $result -> parent;
+     
+   } else {
+     return $parents;   
+   }
+   
+   }
+   return $parents;   
+}
+
+function get_menu($name = "top", $parent = null, $recursive = true, $collapse_all = true){
+  if(!$collapse_all){
+     $id = get_page_id();
+     $parents = get_parents($id);
+  }
+
   $html = "";
   $name = db_escape($name);
   $language = $_SESSION["language"];
@@ -519,7 +542,7 @@ function get_menu($name = "top", $parent = null, $recursive = true){
       }
       $html.= "</a>\n";
 
-      if($recursive){
+      if((!$collapse_all and in_array($row->parent, $parents)) or $recursive){
          $html .= get_menu($name, $row->id);
       }
       
@@ -532,8 +555,8 @@ function get_menu($name = "top", $parent = null, $recursive = true){
      return $html;
 }
 
-function menu($name = "top", $parent = null, $recursive = true){
-    echo get_menu($name, $parent, $recursive);
+function menu($name = "top", $parent = null, $recursive = true, $collapse_all = true){
+    echo get_menu($name, $parent, $recursive, $collapse_all);
 }
 
 
@@ -693,6 +716,26 @@ function get_autor(){
          }
      }
 
+
+function get_page_id($systemname = ""){
+     if(empty($systemname)){
+         $systemname = $_GET["seite"];
+         }
+
+     if(empty($systemname))
+         $systemname = get_frontpage();
+
+
+     $query = db_query("SELECT id FROM " . tbname("content") . " WHERE systemname='" . db_escape($systemname) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
+     
+     if(db_num_rows($query) > 0){
+        $data = db_fetch_object($query);
+        return $data->id;
+     }
+     return null;
+     
+
+}
 
 function get_page($systemname = ""){
      if(empty($systemname)){
