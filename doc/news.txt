@@ -1,3 +1,10 @@
+﻿===== Neues in UliCMS 7.2.1 Service Pack 1 ====
+- Alle bisher erschienen Patches für UliCMS 7.2.1 enthalten
+- Zugriffsbeschränkungen für Seiten korrigiert und erweitert
+- no_cache() API Funktion hinzugefügt
+- Kein Caching bei eingeloggten Nutzern.
+
+
 ﻿===== Neues in UliCMS 7.2.1 ====
 + CKEditor auf Version 4.4.5 aktualisiert
 + Editor wächst mit Größe
