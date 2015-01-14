@@ -4,6 +4,7 @@ class ulicms_version{
      function ulicms_version(){
          $this -> version = "Biscayne";
          $this -> internalVersion = Array(7, 2, 1);
+         $this-> update = "SP1";
          $this -> developmentVersion = false;
         
          }
@@ -12,6 +13,10 @@ class ulicms_version{
     function getVersion(){
          return $this -> version;
          }
+         
+     function getUpdate(){
+        return $this-> update;
+     }
     
      function getDevelopmentVersion(){
          return $this -> developmentVersion;
