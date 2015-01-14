@@ -499,7 +499,7 @@ function get_menu($name = "top", $parent = null){
       $html .= "<ul class='menu_" . $name . "'>\n";
     } else {
 
-      $html .= "<ul class='sub_menu'" . "'>\n";
+      $html .= "<ul class='sub_menu'>\n";
 
     }
 
