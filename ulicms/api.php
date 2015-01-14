@@ -709,6 +709,11 @@ function getAllModules(){
  }
 
 
+function no_cache(){
+   if(!defined("NO_CACHE")
+      define("NO_CACHE", true);
+}
+
 // replace Shortcodes with modules
 function replaceShortcodesWithModules($string, $replaceOther = true){
  if($replaceOther){
