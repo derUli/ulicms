@@ -119,16 +119,18 @@ else if(is_dir("installer")){
  throw new Exception("Can't include cms-config.php. Starting installer failed, too.");
  }
 
+global $connection, $config;
+$config = new config();
+
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else use default error_reporting from php.ini
-if(defined("ULICMS_DEBUG")){
- if(ULICMS_DEBUG)
+if((defined("ULICMS_DEBUG") and ULICMS_DEBUG) or (isset($config->debug) and $config->debug)){
  error_reporting(E_ALL ^ E_NOTICE);
- else
- error_reporting(0);
+
 }else{
  error_reporting(0);
 }
+
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "db_functions.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "mailer.php";
