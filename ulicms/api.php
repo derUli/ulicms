@@ -1308,8 +1308,14 @@ foreach ($mobile_agents as $device){
 
 function is_admin(){
  $acl = new ACL();
- return $acl->hasPermission("pages") or $acl->hasPermission("banners");
+ $permissions = $acl->getDefaultACLAsJSON(true, true);
+ foreach($permissions as $permission=>$value){
+    if(!$acl->hasPermission($permission)){
+       return false;    
+    }
  }
+ return true;
+}
 
 require_once "users_api.php";
 require_once "legacy.php";
