@@ -76,7 +76,7 @@ function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE){
          }else{
          return $result[0];
          }
-    }
+     }
 
 
 function db_name_escape($name){

@@ -5,17 +5,17 @@ error_reporting (E_ALL ^ E_NOTICE);
 
 if(!isset($_SESSION["language"])){
      $_SESSION["language"] = "de";
-    }
+     }
 
 if(isset($_GET["language"])){
      $_SESSION["language"] = basename($_GET["language"]);
-    }
+     }
 
 $file = "lang/" . $_SESSION["language"] . ".php";
 
 if(!file_exists($file)){
      $file = "lang/de.php";
-    }
+     }
 
 include_once $file;
 
@@ -40,24 +40,24 @@ if(!isset($_REQUEST["step"])){
 
 <select name="language" onchange="window.location.replace('?language=' + this.value)">
 <option value="de" <?php if($_SESSION["language"] == "de") echo "selected";
-    ?>">Deutsch</option>
+     ?>">Deutsch</option>
 <option value="en" <?php if($_SESSION["language"] == "en") echo "selected";
-    ?>>English</option>
+     ?>>English</option>
 </select>
 </p>
 <p>
 <input type="hidden" name="step" value="00">
 <input type="submit" value="<?php echo TRANSLATION_NEXT;
-    ?>">
+     ?>">
 
 </p>
 </form>
 <?php }else if($_REQUEST["step"] == "0"){
-    ?>
+     ?>
 <h2><?php echo TRANSLATION_WELCOME;
-    ?></h2>
+     ?></h2>
 <p><?php echo TRANSLATION_WELCOME2;
-    ?></p>
+     ?></p>
 <?php
      include "../version.php";
      $version = new ulicms_version();
@@ -65,26 +65,26 @@ if(!isset($_REQUEST["step"])){
      if($version -> getDevelopmentVersion()){
          ?>
 <p style="color:red;"><?php echo TRANSLATION_BETA_VERSION;
-        ?>
+         ?>
 </p>
 <?php
          }
      ?>
 <p><?php echo TRANSLATION_FOLLOW_INSTRUCTIONS;
-    ?></p>
+     ?></p>
 <?php echo TRANSLATION_CHMOD;
-    ?>
+     ?>
 <h3><?php echo TRANSLATION_PERMISSION;
-    ?></h3>
+     ?></h3>
 <p><img src="media/chmod_02.png" alt="<?php echo TRANSLATION_PERMISSIONS2;
-    ?>" title="<?php echo TRANSLATION_PERMISSIONS2;
-    ?>" border=1/></p>
+     ?>" title="<?php echo TRANSLATION_PERMISSIONS2;
+     ?>" border=1/></p>
 <?php
      if (!function_exists('gd_info')){
          ?>
 <hr/>
 <p style="color:red;"><?php echo TRANSLATION_GD_MISSING;
-        ?></p>
+         ?></p>
 <hr/>
 <?php }
      ?>
@@ -95,27 +95,27 @@ if(!isset($_REQUEST["step"])){
          $error = true;
          ?>
 <p style="color:red;"><?php echo TRANSLATION_MYSQLI_MISSING;
-        ?></p>
+         ?></p>
 
 <?php
         
-        }
-    if(!function_exists("json_encode")){
-        $error = true;
-        ?>
+         }
+     if(!function_exists("json_encode")){
+         $error = true;
+         ?>
 
 <p style="color:red;"><?php echo TRANSLATION_JSON_MISSING;
-        ?></p>
+         ?></p>
 
 <?php }
     
-    if(!isset($error)){
+     if(!isset($error)){
          ?>
 
 <form action="index.php" method="post">
 <input type="hidden" name="step" value="1">
 <input type="submit" value="<?php echo TRANSLATION_NEXT;
-        ?>">
+         ?>">
 </form>
 <br/>
 
@@ -127,39 +127,39 @@ if(!isset($_REQUEST["step"])){
 <?php if($_REQUEST["step"] == "1"){
          ?>
 <h2><?php echo TRANSLATION_MYSQL_LOGIN;
-        ?></h2>
+         ?></h2>
 <p><?php echo TRANSLATION_MYSQL_LOGIN_HELP;
-        ?></p>
+         ?></p>
 <form action="index.php" method="post">
 <table border=1>
 <tr>
 <td><?php echo TRANSLATION_SERVERNAME;
-        ?></td>
+         ?></td>
 <td><input name="servername" type="text" value="localhost"></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_LOGINNAME;
-        ?></td>
+         ?></td>
 <td><input name="loginname"type="text" value=""></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_PASSWORD;
-        ?></td>
+         ?></td>
 <td><input name="passwort" type="password" value=""></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_DATABASE_NAME;
-        ?></td>
+         ?></td>
 <td><input name="datenbank" type="text" value=""></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_PREFIX;
-        ?></td>
+         ?></td>
 <td><input name="prefix" type="text" value="ulicms_"></td>
 </tr>
 </table>
 <p><input type="submit" value="<?php echo TRANSLATION_NEXT;
-        ?>"></p>
+         ?>"></p>
 <input type="hidden" name="step" value="2">
 </form>
 
@@ -169,7 +169,7 @@ if(!isset($_REQUEST["step"])){
         
          ?>
 <h2><?php echo TRANSLATION_MYSQL_LOGIN;
-        ?></h2>
+         ?></h2>
 <?php
          @$connection = mysqli_connect($_POST["servername"], $_POST["loginname"], $_POST["passwort"]);
          if($connection == false){
@@ -189,12 +189,12 @@ if(!isset($_REQUEST["step"])){
                  $_SESSION["mysql"]["prefix"] = $_POST["prefix"];
                  ?>
 <p><?php echo TRANSLATION_SUCCESSFULL_DB_CONNECT;
-                ?></p>
+                 ?></p>
 
 <form action="index.php" method="post">
 <input type="hidden" name="step" value="3">
 <input type="submit" value="<?php echo TRANSLATION_NEXT;
-                ?>">
+                 ?>">
 </form>
 
 <?php
@@ -213,47 +213,47 @@ if(!isset($_REQUEST["step"])){
 <?php if($_REQUEST["step"] == "3"){
          ?>
 <h2><?php echo TRANSLATION_HOMEPAGE_SETTINGS;
-        ?></h2>
+         ?></h2>
 <form action="index.php" method="post">
 <table border=1>
 <tr>
 <td><?php echo TRANSLATION_HOMEPAGE_TITLE;
-        ?></td>
+         ?></td>
 <td><input name="homepage_title" type="text" value="Meine Homepage"></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_SITE_SLOGAN;
-        ?></td>
+         ?></td>
 <td><input name="motto" type="text" value="Dies und Das"></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_YOUR_FIRSTNAME;
-        ?></td>
+         ?></td>
 <td><input name="firstname" type="text" value="Max"></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_YOUR_LASTNAME;
-        ?></td>
+         ?></td>
 <td><input name="lastname" type="text" value="Mustermann"></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_YOUR_EMAIL_ADRESS;
-        ?></td>
+         ?></td>
 <td><input name="email" type="text" value="max@muster.de"></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_ADMIN_NAME;
-        ?></td>
+         ?></td>
 <td><input name="admin_user" type="text" value="admin"></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_ADMIN_PASSWORD;
-        ?></td>
+         ?></td>
 <td><input name="passwort" type="password" value=""></td>
 </tr>
 </table>
 <p><input type="submit" value="<?php echo TRANSLATION_DO_INSTALL;
-        ?>"></p>
+         ?>"></p>
 <input type="hidden" name="step" value="4">
 </form>
 
@@ -490,11 +490,11 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
         
         
         
-        $sql = "ALTER TABLE `" . $prefix . "languages` ADD UNIQUE(`language_code`)";
+         $sql = "ALTER TABLE `" . $prefix . "languages` ADD UNIQUE(`language_code`)";
         
          mysqli_query($connection, $sql);
         
-        // Da InnoDB erst ab MySQL 5.6 Foreign Keys und Fulltext unterstützt
+         // Da InnoDB erst ab MySQL 5.6 Foreign Keys und Fulltext unterstützt
         // Foreign Keys nur setzen, wenn MySQL Server Version >= 5.6
         if(mysqli_get_server_version($connection) >= 50600){
             
@@ -516,8 +516,8 @@ ON DELETE SET NULL";
 ON DELETE SET NULL";
              mysqli_query($connection, $constraint4);
             
-            $add_custom_data = "ALTER TABLE `" . $prefix . "content` ADD COLUMN `custom_data` varchar(255) NULL DEFAULT '{}'";
-            mysqli_query($connection, $add_custom_data);
+             $add_custom_data = "ALTER TABLE `" . $prefix . "content` ADD COLUMN `custom_data` varchar(255) NULL DEFAULT '{}'";
+             mysqli_query($connection, $add_custom_data);
             
             
             /**
@@ -591,19 +591,19 @@ var $db_type="mysql";
         
          ?>
 <h2><?php echo TRANSLATION_INSTALLATION_FINISHED;
-        ?></h2>
+         ?></h2>
 <p><?php echo TRANSLATION_FIRST_LOGIN_HELP;
-        ?><br/><br/>
+         ?><br/><br/>
 <?php if($success){
              ?>
 <span style="color:green;"><?php echo TRANSLATION_LOGIN_DATA_SENT_BY_MAIL;
-            ?>
+             ?>
 </span>
 
 <?php }else{
              ?>
 <span style="color:red;"><?php echo TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL;
-            ?></span>
+             ?></span>
 <?php }
          ?>
 <br/>

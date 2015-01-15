@@ -16,7 +16,7 @@
 <input type="hidden" name="id" value="<?php echo $row -> id;
              ?>">
 <strong><?php echo TRANSLATION_USERNAME;
-            ?></strong><br/>
+             ?></strong><br/>
 <input type="text" style="width:300px;" name="admin_username" value="<?php echo $row -> username;
              ?>" <?php if(!$acl -> hasPermission("users")){
                  ?>readonly="readonly"<?php }
@@ -30,28 +30,28 @@
                  }
              ?>
 <?php echo TRANSLATION_UPLOAD_AVATAR;
-            ?><br/>
+             ?><br/>
 <input type="file" name="avatar_upload" accept="image/jpeg"><br>
 <small><?php echo TRANSLATION_ONLY_JPEG;
-            ?></small>
+             ?></small>
 
 <br/>                             
 <br/>
 <strong><?php echo TRANSLATION_LASTNAME;
-            ?></strong><br/>
+             ?></strong><br/>
 <input type="text" style="width:300px;" name="admin_lastname" value="<?php echo $row -> lastname;
              ?>">
 <br/><br/>
 <strong><?php echo TRANSLATION_FIRSTNAME;
-            ?></strong><br/>
+             ?></strong><br/>
 <input type="text" style="width:300px;" name="admin_firstname" value="<?php echo $row -> firstname;
              ?>"><br/><br/>
 <strong><?php echo TRANSLATION_EMAIL;
-            ?></strong><br/>
+             ?></strong><br/>
 <input type="text" style="width:300px;" name="admin_email" value="<?php echo $row -> email;
              ?>"><br/><br/>
 <strong><?php echo TRANSLATION_NEW_PASSWORD;
-            ?></strong><br/>
+             ?></strong><br/>
 <input type="text" style="width:300px;" name="admin_password" value=""> <br/>
 <?php
              $acl = new ACL();
@@ -62,7 +62,7 @@
                  ?>
 <br>
 <strong><?php echo TRANSLATION_USERGROUP;
-                ?></strong>
+                 ?></strong>
 <br/>
 <select name="group_id">
 <option value="-" <?php if($row -> group_id === null){
@@ -105,26 +105,26 @@
 
 
 <strong><?php echo TRANSLATION_ICQ;
-            ?></strong>   <br/>
+             ?></strong>   <br/>
 <input type="text" name="icq_id" value="<?php echo $row -> icq_id?>">
 
 <br/><br/>
 <strong><?php echo TRANSLATION_SKYPE;
-            ?></strong>   <br/>
+             ?></strong>   <br/>
 <input type="text" name="skype_id" value="<?php echo $row -> skype_id?>">
 
 <br/><br/>
 <input type="checkbox" id="notify_on_login" name="notify_on_login" <?php
-            if($row -> notify_on_login){
-                echo "checked='checked'";
-                }
-            ?>><strong> <label for="notify_on_login"><?php echo TRANSLATION_NOTIFY_ON_LOGIN;
-            ?></label></strong>
+             if($row -> notify_on_login){
+                 echo "checked='checked'";
+                 }
+             ?>><strong> <label for="notify_on_login"><?php echo TRANSLATION_NOTIFY_ON_LOGIN;
+             ?></label></strong>
 <br/>
 <br/>
 
 <strong><?php echo TRANSLATION_ABOUT_ME;
-            ?></strong><br/>
+             ?></strong><br/>
 <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
 
 

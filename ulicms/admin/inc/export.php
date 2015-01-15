@@ -15,10 +15,10 @@ if(!$acl -> hasPermission("export")){
     
      ?>
   <h1><?php echo TRANSLATION_JSON_EXPORT;
-    ?></h1>
+     ?></h1>
   <form action="?action=export" method="post">
   <p><?php echo TRANSLATION_EXPORT_INTO_TABLE;
-    ?><br/>
+     ?><br/>
   <select name="table" size="1">
   <?php foreach($tables as $name){
          ?>
@@ -33,7 +33,7 @@ if(!$acl -> hasPermission("export")){
   </select>
   </p>
   <input type="submit" name="submit" value="<?php echo TRANSLATION_DO_EXPORT;
-    ?>">
+     ?>">
   </form>
   
   <?php

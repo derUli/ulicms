@@ -7,14 +7,14 @@ if(defined("_SECURITY")){
 <?php if(file_exists("../update.php")){
              ?>
 	<p><a href="../update.php"><?php echo TRANSLATION_RUN_UPDATE;
-            ?></a></p>
+             ?></a></p>
 	<?php echo TRANSLATION_UPDATE_NOTICE;
-            ?>
+             ?>
 <?php
              }else{
              ?>
 <?php echo TRANSLATION_UPDATE_INFORMATION_TEXT;
-            ?>
+             ?>
 	<p>
 
 <?php }

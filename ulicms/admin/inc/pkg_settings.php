@@ -39,16 +39,16 @@ if(!$acl -> hasPermission("pkg_settings")){
     <fieldset>
 <input type="radio" id="pkgsrc1" name="radioButtonSRC"<?php if($pkg_src === $default_pkg_src) echo " checked";
      ?> onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $default_pkg_src?>');"> <label for="pkgsrc1"><?php echo TRANSLATION_OFFICIAL_PACKAGE_SOURCE;
-    ?></label><br>
+     ?></label><br>
 
 <input type="radio" id="pkgsrc2" name="radioButtonSRC" <?php if($pkg_src === $local_pkg_dir or $pkg_src === $local_pkg_dir_value) echo " checked";
      ?>  onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $local_pkg_dir_value?>');"> <label for="pkgsrc2"><?php echo TRANSLATION_FROM_FILESYSTEM;
-    ?></label><br>
+     ?></label><br>
 
 
 <input type="radio" id="pkgsrc3" name="radioButtonSRC" <?php if($is_other) echo " checked";
      ?> onclick="$('#sonstigePaketQuelle').slideDown();"> <label for="pkgsrc3"><?php echo TRANSLATION_OTHER_PACKAGE_SOURCE;
-    ?></label><br>
+     ?></label><br>
 <div id="sonstigePaketQuelle" <?php
      if($is_other)
          echo 'style="display:block"';
@@ -61,7 +61,7 @@ if(!$acl -> hasPermission("pkg_settings")){
 
 <br/>
 <input type="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;
-    ?>"/>
+     ?>"/>
 
 <?php
      if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
@@ -81,7 +81,7 @@ $("#pkg_settings").ajaxForm({beforeSubmit: function(e){
   success:function(e){
   $("#loading").hide();  
   $("#message").html("<span style=\"color:green;\"><?php echo TRANSLATION_CHANGES_WAS_SAVED;
-    ?></span>");
+     ?></span>");
   }
   
 

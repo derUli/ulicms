@@ -16,15 +16,15 @@ if(!$acl -> hasPermission("install_packages")){
      if(!$pkg_src){
          ?>
 <p><strong><?php echo TRANSLATION_ERROR;
-        ?></strong> <br/>
+         ?></strong> <br/>
 <?php echo TRANSLATION_PKGSRC_NOT_DEFINED;
-        ?></p>
+         ?></p>
 <?php }else if(!class_exists("PharData")){
          ?>
 <p><strong><?php echo TRANSLATION_ERROR;
-        ?></strong> <br/>
+         ?></strong> <br/>
 <?php echo TRANSLATION_PHARDATA_NOT_AVAILABLE;
-        ?>
+         ?>
 </p>
 <?php
          }
@@ -46,9 +46,9 @@ if(!$acl -> hasPermission("install_packages")){
          if(count($packagesToInstall) === 0 or empty($_REQUEST["packages"])){
              ?>
 <p><strong><?php echo TRANSLATION_ERROR;
-            ?>/strong> <br/>
+             ?>/strong> <br/>
 <?php echo TRANSLATION_NOTHING_TO_DO;
-            ?>
+             ?>
 </p>
 
 <?php

@@ -8,20 +8,20 @@ if(defined("_SECURITY")){
              ?>
 <br/>
 <a href="index.php?action=key_new"><?php echo TRANSLATION_CREATE_OPTION;
-            ?></a>
+             ?></a>
 <br/><br/>
 
 <table border=1>
 <tr style="font-weight:bold;">
 <td style="width:40px;">--></td>
 <td><?php echo TRANSLATION_OPTION;
-            ?></td>
+             ?></td>
 <td><?php echo TRANSLATION_VALUE;
-            ?></td>
+             ?></td>
 <td><?php echo TRANSLATION_EDIT;
-            ?></td>
+             ?></td>
 <td><?php echo TRANSLATION_DELETE;
-            ?></td>
+             ?></td>
 </tr>
 <?php
              while($row = db_fetch_object($query)){

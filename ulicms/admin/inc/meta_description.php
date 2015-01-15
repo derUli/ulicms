@@ -37,7 +37,7 @@
         
          ?>
 <h1><?php echo TRANSLATION_META_DESCRIPTION;
-        ?></h1>
+         ?></h1>
 <form action="index.php?action=meta_description" id="meta_description" method="post">
 <table border=0>
 <tr>
@@ -54,7 +54,7 @@
 <td>
 <input name="meta_description_<?php echo $lang;
              ?>" style="width:400px" value="<?php echo stringHelper :: real_htmlspecialchars($meta_descriptions[$lang]);
-            ?>">
+             ?>">
 </td>
 <?php }
          ?>

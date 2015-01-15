@@ -16,62 +16,62 @@
          ?>
 
 <h2><?php echo TRANSLATION_GENERAL_SETTINGS;
-        ?></h2>
+         ?></h2>
 <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
 <form id="settings_simple" action="index.php?action=save_settings" method="post">
 <table border=1>
 <tr>
 <td><strong><?php echo TRANSLATION_HOMEPAGE_TITLE;
-        ?></strong></td>
+         ?></strong></td>
 <td><a href="index.php?action=homepage_title"><?php echo TRANSLATION_EDIT;
-        ?></a></td>
+         ?></a></td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_MOTTO;
-        ?></strong></td>
+         ?></strong></td>
 <td><a href="index.php?action=motto"><?php echo TRANSLATION_EDIT;
-        ?></a></td>
+         ?></a></td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_HOMEPAGE_OWNER;
-        ?></strong></td>
+         ?></strong></td>
 <td><input type="text" name="homepage_owner" style="width:400px" value="<?php echo $settings["homepage_owner"];
          ?>"></td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_HIDE_LOGO;
-        ?></strong></strong></td>
+         ?></strong></strong></td>
 <td>
 <select name="logo_disabled" style="width:400px" size=1>
 <option <?php if (getconfig("logo_disabled") == "yes") echo 'selected '?> value="yes"><?php echo TRANSLATION_YES;
-        ?></option>
+         ?></option>
 <option <?php if (getconfig("logo_disabled") != "yes") echo 'selected '?> value="no"><?php echo TRANSLATION_NO;
-        ?></option>
+         ?></option>
 </select>
 </td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_OWNER_MAILADRESS;
-        ?></strong></td>
+         ?></strong></td>
 <td><input type="text" name="email" style="width:400px" value="<?php echo $settings["email"];
          ?>"></td>
 </tr>
 <tr>
 <td>
 <strong><?php echo TRANSLATION_FRONTPAGE;
-        ?></strong>
+         ?></strong>
 </td>
 <td>
 
 <a href="index.php?action=frontpage_settings"><?php echo TRANSLATION_EDIT;
-        ?></a>
+         ?></a>
 
 
 </td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_MAINTENANCE_MODE_ENABLED;
-        ?></strong></td>
+         ?></strong></td>
 <td><input type="checkbox" name="maintenance_mode" <?php
          if(strtolower($settings["maintenance_mode"] == "on") || $settings["maintenance_mode"] == "1" || strtolower($settings["maintenance_mode"]) == "true"){
              echo " checked";
@@ -84,7 +84,7 @@
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_GUEST_MAY_REGISTER;
-        ?></strong></td>
+         ?></strong></td>
 <td><strong><input type="checkbox" name="visitors_can_register" <?php
          if(strtolower($settings["visitors_can_register"] == "on") ||
                  $settings["visitors_can_register"] == "1" ||
@@ -100,34 +100,34 @@
 <tr>
 <td></td>
 <td><strong><?php echo TRANSLATION_METADATA;
-        ?></strong></strong></td>
+         ?></strong></strong></td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_DESCRIPTION;
-        ?></strong></td>
+         ?></strong></td>
 <td>
 <a href="index.php?action=meta_description"><?php echo TRANSLATION_EDIT;
-        ?></a>
+         ?></a>
 </td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_KEYWORDS;
-        ?></strong></td>
+         ?></strong></td>
 <td>
 
 <a href="index.php?action=meta_keywords"><?php echo TRANSLATION_EDIT;
-        ?></a>
+         ?></a>
 </td>
 </tr>
 <tr>
 <td></td>
 <td><strong><?php echo TRANSLATION_TECHNICAL_STUFF;
-        ?></strong></td>
+         ?></strong></td>
 </strong>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_FIX_W3C_VALIDATION_ERRORS;
-        ?></strong></td>
+         ?></strong></td>
 <td><input type="checkbox" name="disable_html_validation" <?php
          if(!isset($settings["disable_html_validation"]))
              echo " checked";
@@ -136,12 +136,12 @@
 <tr>
 <td></td>
 <td><strong><?php echo TRANSLATION_COMMENTS;
-        ?></strong>
+         ?></strong>
 </td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_COMMENTING_SYSTEM;
-        ?></td>
+         ?></td>
 <td>
 <select name="comment_mode" size=1 style="width:100%;">
 <!-- <option value="intern" <?php if($settings["comment_mode"] == "intern"){
@@ -160,25 +160,25 @@
              echo 'selected';
              }
          ?>><?php echo TRANSLATION_OFF;
-        ?></option>
+         ?></option>
 </select>
 </td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_FACEBOOK_ID;
-        ?></strong></td>
+         ?></strong></td>
 <td><input type="text" name="facebook_id" value="<?php echo $settings["facebook_id"];
          ?>" style="width:400px">
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_DISQUS_SHORTNAME;
-        ?></strong></td>
+         ?></strong></td>
 <td><input type="text" name="disqus_id" value="<?php echo $settings["disqus_id"];
          ?>" style="width:400px">
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_TIMEZONE;
-        ?></strong></td>
+         ?></strong></td>
 <td>
 <select name="timezone" size=1 style="width:100%;">
 <?php
@@ -203,7 +203,7 @@
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_SEARCH_ENGINES;
-        ?></strong></td>
+         ?></strong></td>
 <td>
 <select name="robots" size=1 style="width:100%;">
 <?php
@@ -211,16 +211,16 @@
              ?>
    
    <option value="index,follow"><?php echo TRANSLATION_SEARCH_ENGINES_INDEX;
-            ?></option>
+             ?></option>
    <option value="noindex,nofollow" selected><?php echo TRANSLATION_SEARCH_ENGINES_NOINDEX;
-            ?></option>
+             ?></option>
    
 <?php }else{
              ?>
    <option value="index,follow" selected><?php echo TRANSLATION_SEARCH_ENGINES_INDEX;
-            ?></option>
+             ?></option>
    <option value="noindex,nofollow"><?php echo TRANSLATION_SEARCH_ENGINES_NOINDEX;
-            ?></option>
+             ?></option>
 <?php }
          ?>
 </select>

@@ -7,18 +7,18 @@ if($acl -> hasPermission("cache")){
      if(isset($_GET["clear_cache"])){
          ?>
 <p style="color:green;"><?php echo TRANSLATION_CACHE_WAS_CLEARED;
-        ?></p>
+         ?></p>
 <?php }
      ?>
 <?php echo TRANSLATION_CACHE_TEXT1;
-    ?>
+     ?>
 <p><strong>Aktueller Status des Caches:</strong><br/>
 <?php if(!getconfig("cache_disabled")){
          ?>
 <span style="color:green;">aktiv</span></p>
 
 <?php echo TRANSLATION_CACHE_TEXT3;
-        ?>
+         ?>
 
 
 <form post="index.php" method="get">
@@ -39,7 +39,7 @@ if($acl -> hasPermission("cache")){
          ?>
 <span style="color:red;">deaktiviert</span></p>
 <?php echo TRANSLATION_CACHE_TEXT2;
-        ?>
+         ?>
 <?php }
      ?>
 

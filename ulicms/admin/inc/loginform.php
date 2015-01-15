@@ -3,7 +3,7 @@ $languages = getAvailableBackendLanguages();
 $default_language = getSystemLanguage();
 if(isset($_SESSION["language"]) and in_array($_SESSION["language"], $languages)){
      $default_language = $_SESSION["language"];
-    }
+     }
 ?>
 <h2>CMS Login</h2>
 <div id="login">
@@ -36,11 +36,11 @@ if(isset($_SESSION["language"]) and in_array($_SESSION["language"], $languages))
 for($i = 0; $i < count($languages); $i++){
      if($default_language == $languages[$i]){
         
-        echo '<option value="' . $languages[$i] . '" selected>' . getLanguageNameByCode($languages[$i]) . '</option>';
-        }else{
-        echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
-        }
-    }
+         echo '<option value="' . $languages[$i] . '" selected>' . getLanguageNameByCode($languages[$i]) . '</option>';
+         }else{
+         echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
+         }
+     }
 ?>
 </select>
 </td>

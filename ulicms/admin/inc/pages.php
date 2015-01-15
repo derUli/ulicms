@@ -6,11 +6,11 @@
         
          ?>
 <h2><?php echo TRANSLATION_PAGES;
-        ?></h2>
+         ?></h2>
 <p><?php echo TRANSLATION_PAGES_INFOTEXT;
-        ?></p>
+         ?></p>
 <p><a href="index.php?action=pages_new"><?php echo TRANSLATION_CREATE_PAGE;
-        ?></a></p>
+         ?></a></p>
 
 <script type="text/javascript">
 function filter_by_language(element){
@@ -39,10 +39,10 @@ $(window).load(function(){
 </script>
 
 <?php echo TRANSLATION_FILTER_BY_LANGUAGE;
-        ?> 
+         ?> 
 <select name="filter_language" onchange="filter_by_language(this)">
 <option value=""><?php echo TRANSLATION_PLEASE_SELECT;
-        ?></option>
+         ?></option>
 <?php
          if(!empty($_GET["filter_language"]) and in_array($_GET["filter_language"], getAllLanguages())){
              $_SESSION["filter_language"] = $_GET["filter_language"];
@@ -81,23 +81,23 @@ $(window).load(function(){
 </select>
 &nbsp;&nbsp;
 <?php echo TRANSLATION_STATUS;
-        ?> <select name="filter_status" onchange="filter_by_status(this)">
+         ?> <select name="filter_status" onchange="filter_by_status(this)">
 <option value="Standard" <?php
          if($_SESSION["filter_status"] == "standard"){
              echo " selected";
              }
          ?>><?php echo TRANSLATION_STANDARD;
-        ?></option>
+         ?></option>
 <option value="trash" <?php
          if($_SESSION["filter_status"] == "trash"){
              echo " selected";
              }
          ?>><?php echo TRANSLATION_RECYCLE_BIN;
-        ?></option>
+         ?></option>
 </select>
 &nbsp; &nbsp;
 <?php echo TRANSLATION_CATEGORY;
-        ?> 
+         ?> 
 <?php
          echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
          ?>
@@ -117,21 +117,21 @@ $(window).load(function(){
 <tr style="font-weight:bold;">
 <td style="width:40px;"></td>
 <td><a href="?action=pages&order=title"><?php echo TRANSLATION_TITLE;
-        ?></a></td>
+         ?></a></td>
 <td><a href="?action=pages&order=menu"><?php echo TRANSLATION_MENU;
-        ?></a></td>
+         ?></a></td>
 <td><a href="?action=pages&order=position"><?php echo TRANSLATION_POSITION;
-        ?></a></td>
+         ?></a></td>
 <td><a href="?action=pages&order=parent"><?php echo TRANSLATION_PARENT;
-        ?></a></td>
+         ?></a></td>
 <td><a href="?action=pages&order=active"><?php echo TRANSLATION_ACTIVATED;
-        ?></a></td>
+         ?></a></td>
 <td><?php echo TRANSLATION_VIEW;
-        ?></td>
+         ?></td>
 <td><?php echo TRANSLATION_EDIT;
-        ?></td>
+         ?></td>
 <td><?php echo TRANSLATION_DELETE;
-        ?></td>
+         ?></td>
 
 
 </tr>

@@ -93,18 +93,18 @@ if (!defined('PHP_VERSION_ID')){
      }
 if (PHP_VERSION_ID < 50300){
      $mqr = @get_magic_quotes_runtime();
-    }
+     }
 else{
      $mqr = 0;
-    }
+     }
 if ($mqr){
      set_magic_quotes_runtime(0);
-    }
+     }
 
 $l = file('mpdf_source.php');
 if (!count($l)){
      die("ERROR - Could not find mpdf_source.php file in current directory");
-    }
+     }
 $exclflags = array();
 $x = '';
 
@@ -169,7 +169,7 @@ else{
      }
 if (!$check){
      die("ERROR - Could not write to mpdf.php file. Are permissions correctly set?");
-    }
+     }
 echo '<p><b>mPDF file generated successfully!</b></p>';
 echo '<div>mPDF file size ' . number_format((strlen($x) / 1024)) . ' kB</div>';
 

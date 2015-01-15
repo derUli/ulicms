@@ -46,10 +46,10 @@ if (!defined('_MPDF_TEMP_PATH')) define("_MPDF_TEMP_PATH", _MPDF_PATH . 'tmp/');
 
 if (!defined('_MPDF_TTFONTPATH')){
      define('_MPDF_TTFONTPATH', _MPDF_PATH . 'ttfonts/');
-    }
+     }
 if (!defined('_MPDF_TTFONTDATAPATH')){
      define('_MPDF_TTFONTDATAPATH', _MPDF_PATH . 'ttfontdata/');
-    }
+     }
 
 $errorlevel = error_reporting();
 $errorlevel = error_reporting($errorlevel & ~E_NOTICE);
@@ -62,7 +62,7 @@ if(function_exists("date_default_timezone_set")){
      }
 if (!function_exists("mb_strlen")){
      die("Error - mPDF requires mb_string functions. Ensure that PHP is compiled with php_mbstring.dll enabled.");
-    }
+     }
 
 if (!defined('PHP_VERSION_ID')){
      $version = explode('.', PHP_VERSION);
@@ -12988,7 +12988,6 @@ class mPDF
                                                 
                                                 
                                                  // ====================================================
-                                                
                                                 /**
                                                  * -- DIRECTW --
                                                  */
@@ -38796,7 +38795,6 @@ class mPDF
                                                                                             // U+0670; U+0653;
                                                                                             $this -> arabVowels .= "\xd9\xb0\xd9\x93";
                                                                                              // ? should also add - U+615, 616, 617-61A, 653-65E, 6D6-6DC, 6DF-6E4, 6E7, 6E8, 6EA-6ED
-                                                                                            
                                                                                             // ISOLATED FORM :: FINAL :: INITIAL :: MEDIAL
                                                                                             // FB** - FE** = Arabic presentation Forms
                                                                                             // F5** F6** F7** = Private use area used by unAGlyphs in mPDF

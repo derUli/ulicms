@@ -28,15 +28,15 @@ if(!$acl -> hasPermission("list_packages")){
      if($acl -> hasPermission("install_packages")){
          ?>
 <p style="margin-bottom:30px;"><a href="?action=install_method">[<?php echo TRANSLATION_INSTALL_PACKAGE;
-        ?>]</a></p> 
+         ?>]</a></p> 
 <?php }
      ?>
 
 
 <strong><?php echo TRANSLATION_INSTALLED_MODULES;
-    ?></strong>
+     ?></strong>
 <p><?php echo TRANSLATION_INSTALLED_MODULES_INFO;
-    ?></p>
+     ?></p>
 
 <?php
      $modules = getAllModules();
@@ -76,9 +76,9 @@ if(!$acl -> hasPermission("list_packages")){
 
 
 <p><strong><?php echo TRANSLATION_INSTALLED_DESIGNS;
-    ?></strong></p>
+     ?></strong></p>
 <p><?php echo TRANSLATION_INSTALLED_DESIGNS_INFO;
-    ?></p>
+     ?></p>
 
 <?php
      $themes = getThemeList();

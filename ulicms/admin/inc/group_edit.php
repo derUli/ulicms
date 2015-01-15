@@ -23,13 +23,13 @@ if($all_permissions){
 <input type="hidden" name="id" value="<?php echo $id;
      ?>">
 <p><strong><?php echo TRANSLATION_NAME;
-    ?></strong> <input type="text" name="name" value="<?php echo $groupName;
+     ?></strong> <input type="text" name="name" value="<?php echo $groupName;
      ?>"></p>
 <p><strong><?php echo TRANSLATION_PERMISSIONS;
-    ?></strong></p>
+     ?></strong></p>
 <fieldset>
 <p><input id="checkall" type="checkbox" class="checkall"> <label for="checkall"><?php echo TRANSLATION_SELECT_ALL;
-    ?></label></p>
+     ?></label></p>
 <p>
 <?php foreach($all_permissions As $key => $value){
          ?>
@@ -47,7 +47,7 @@ if($all_permissions){
 </fieldset>
 <br/>
 <input type="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;
-    ?>" name="edit_group">
+     ?>" name="edit_group">
 </form>
 
 <script type="text/javascript">

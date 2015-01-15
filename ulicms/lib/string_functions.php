@@ -19,15 +19,15 @@
      }
 
 if(!function_exists("sanitize")){
-    function sanitize(& $array)
+     function sanitize(& $array)
     {
          foreach($array as & $data)
         {
              $data = str_ireplace(array("\r", "\n", "%0a", "%0d"), '', stripslashes($data));
              }
-        }
+         }
     
-    }
+     }
 
 
 

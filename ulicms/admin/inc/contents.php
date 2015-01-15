@@ -8,19 +8,19 @@ if($acl -> hasPermission("pages") or $acl -> hasPermission("banners") or $acl ->
      ?>
 
 <h2><?php echo TRANSLATION_CONTENTS;
-    ?></h2>
+     ?></h2>
 <p><strong><?php echo TRANSLATION_SELECT_CONTENT_TYPE;
-    ?></strong><br/>
+     ?></strong><br/>
 <?php if($acl -> hasPermission("pages")){
          ?>
 <a href="index.php?action=pages"><?php echo TRANSLATION_PAGES;
-        ?></a><br/>
+         ?></a><br/>
 <?php }
      ?>
 <?php if($acl -> hasPermission("banners")){
          ?>
 <a href="index.php?action=banner"><?php echo TRANSLATION_ADVERTISEMENTS;
-        ?></a><br/>
+         ?></a><br/>
 <?php }
      ?>
     
@@ -29,7 +29,7 @@ if($acl -> hasPermission("pages") or $acl -> hasPermission("banners") or $acl ->
          ?>
 
 <a href="index.php?action=categories"><?php echo TRANSLATION_CATEGORIES;
-        ?></a><br/>
+         ?></a><br/>
 <?php }
      ?>
 
@@ -38,7 +38,7 @@ if($acl -> hasPermission("pages") or $acl -> hasPermission("banners") or $acl ->
          ?>
 
 <p><strong><?php echo TRANSLATION_IMPORT_EXPORT;
-        ?></strong><br/>
+         ?></strong><br/>
 <?php }
      ?>
 
@@ -46,7 +46,7 @@ if($acl -> hasPermission("pages") or $acl -> hasPermission("banners") or $acl ->
          ?>
 <!--
 <a href="index.php?action=import"><?php echo TRANSLATION_IMPORT;
-        ?></a><br/>
+         ?></a><br/>
 
 -->
 <?php }
@@ -56,7 +56,7 @@ if($acl -> hasPermission("pages") or $acl -> hasPermission("banners") or $acl ->
          ?>
 
 <a href="index.php?action=export"><?php echo TRANSLATION_EXPORT;
-        ?></a><br/>
+         ?></a><br/>
 <?php }
      ?>
 

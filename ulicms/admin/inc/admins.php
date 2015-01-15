@@ -17,31 +17,31 @@
          if(db_num_rows($query)){
              ?>
 <h2><?php echo TRANSLATION_USERS;
-            ?></h2>
+             ?></h2>
 <p><?php echo TRANSLATION_USERS_INFOTEXT;
-            ?>
+             ?>
 <br/><br/>
 <a href="index.php?action=admin_new"><?php echo TRANSLATION_CREATE_USER;
-            ?></a>
+             ?></a>
 <br/>
 </p>
 <table border=1>
 <tr style="font-weight:bold;">
 <td style="width:40px;"><a href="index.php?action=admins&order=id">ID</a></td>
 <td><span><a href="index.php?action=admins&order=username"><?php echo TRANSLATION_USERNAME;
-            ?></a></span></td>
+             ?></a></span></td>
 <td><a href="index.php?action=admins&order=lastname"><?php echo TRANSLATION_LASTNAME;
-            ?></a></td>
+             ?></a></td>
 <td><a href="index.php?action=admins&order=firstname"><?php echo TRANSLATION_FIRSTNAME;
-            ?></a></td>
+             ?></a></td>
 <td><a href="index.php?action=admins&order=email"><?php echo TRANSLATION_EMAIL;
-            ?></a></td>
+             ?></a></td>
 <td><a href="index.php?action=admins&order=group_id"><?php echo TRANSLATION_GROUP;
-            ?></a></td>
+             ?></a></td>
 <td><?php echo TRANSLATION_EDIT;
-            ?></td>
+             ?></td>
 <td><span><?php echo TRANSLATION_DELETE;
-            ?></span></td>
+             ?></span></td>
 </tr>
 <?php
              while($row = db_fetch_object($query)){

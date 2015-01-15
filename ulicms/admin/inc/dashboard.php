@@ -25,13 +25,13 @@ if($acl -> hasPermission("dashboard")){
         
          ?>
 <p><?php
-        $str = TRANSLATION_HELLO_NAME;
-        $str = str_ireplace("%firstname%", $_SESSION["firstname"], $str);
-        $str = str_ireplace("%lastname%", $_SESSION["lastname"], $str);
-        echo $str;
-        ?>
+         $str = TRANSLATION_HELLO_NAME;
+         $str = str_ireplace("%firstname%", $_SESSION["firstname"], $str);
+         $str = str_ireplace("%lastname%", $_SESSION["lastname"], $str);
+         echo $str;
+         ?>
  [<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>"><?php echo TRANSLATION_EDIT_PROFILE;
-        ?></a>]
+         ?></a>]
 </p>
 
 
@@ -45,7 +45,7 @@ if($acl -> hasPermission("dashboard")){
 <div id="accordion-container"> 
 
 <h2 class="accordion-header"><?php echo TRANSLATION_MOTD;
-            ?></h2>
+             ?></h2>
 <div class="accordion-content">
 <?php echo $motd;
              ?>
@@ -60,7 +60,7 @@ if($acl -> hasPermission("dashboard")){
              if($updateInfo){
                  ?>
 <h2 class="accordion-header"><?php echo TRANSLATION_UPDATE_AVAILABLE;
-                ?></h2>
+                 ?></h2>
 <div class="accordion-content">
 <?php echo strip_tags($updateInfo,
                      "<p><a><strong><b><u><em><i><span><img>");
@@ -69,34 +69,34 @@ if($acl -> hasPermission("dashboard")){
 <?php
                  }
             
-            }
-        ?>
+             }
+         ?>
 <h2 class="accordion-header"><?php echo TRANSLATION_STATISTICS;
-        ?></h2>      
+         ?></h2>      
 <div class="accordion-content">
 <table border=1>    
 <?php
-        $installed_at = getconfig("installed_at");
-        if($installed_at){
-            $time = time() - $installed_at;
-            $formatted = formatTime($time);
-            ?>
+         $installed_at = getconfig("installed_at");
+         if($installed_at){
+             $time = time() - $installed_at;
+             $formatted = formatTime($time);
+             ?>
 <tr>
 <td><?php echo TRANSLATION_SITE_ONLINE_SINCE;
-            ?></td>
+             ?></td>
 <td><?php echo $formatted;
-            ?></td>
+             ?></td>
 </tr>
 <?php }
-        ?>
+         ?>
 <tr>
 <td><?php echo TRANSLATION_PAGES_COUNT;
-        ?></td>
+         ?></td>
 <td><?php echo $pages_count?></td>
 </tr>
 <tr>
 <td><?php echo TRANSLATION_REGISTERED_USERS_COUNT;
-        ?></td>
+         ?></td>
 <td><?php echo count(getUsers())?></td>
 </tr>
 
@@ -104,7 +104,7 @@ if($acl -> hasPermission("dashboard")){
              ?>
 <tr>
 <td><?php echo TRANSLATION_BLOCKED_SPAM_MAILS;
-            ?></td>
+             ?></td>
 <td><?php echo getconfig("contact_form_refused_spam_mails")?></td>
 </tr>
 <?php
@@ -115,7 +115,7 @@ if($acl -> hasPermission("dashboard")){
              ?>
 <tr>
 <td><?php echo TRANSLATION_GUESTBOOK_ENTRIES;
-            ?></td>
+             ?></td>
 <td><?php echo db_num_rows($test)?></td>
 </tr>
 <?php }
@@ -123,7 +123,7 @@ if($acl -> hasPermission("dashboard")){
 </table>
 </div>
 <h2 class="accordion-header"><?php echo TRANSLATION_ONLINE_NOW;
-        ?></h2>
+         ?></h2>
 <div class="accordion-content">
 <ul id="users_online">
 <?php include_once "inc/users_online_dashboard.php";
@@ -131,14 +131,14 @@ if($acl -> hasPermission("dashboard")){
 </ul>
 </div>
 <h2 class="accordion-header"><?php echo TRANSLATION_TOP_PAGES;
-        ?></h2>
+         ?></h2>
 <div class="accordion-content">
 <table cellpadding="2" border=0>
 <tr style="font-weight:bold;">
 <td><?php echo TRANSLATION_TITLE;
-        ?></td>
+         ?></td>
 <td><?php echo TRANSLATION_VIEWS;
-        ?></td>
+         ?></td>
 </tr>
 <?php while($row = db_fetch_object($topPages)){
             
@@ -152,7 +152,7 @@ if($acl -> hasPermission("dashboard")){
              ?>
 <tr>
 <td><a href="<?php echo $url;
-            ?>" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
+             ?>" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
              ?></a></td>
 <td align="right"><?php echo $row -> views;
              ?></td>
@@ -164,16 +164,16 @@ if($acl -> hasPermission("dashboard")){
 </div>
 
 <h2 class="accordion-header"><?php echo TRANSLATION_LAST_CHANGES;
-        ?></h2>
+         ?></h2>
 <div class="accordion-content">
 <table cellpadding="2" style="width: 70%; border:0px;">
 <tr style="font-weight:bold;">
 <td><?php echo TRANSLATION_TITLE;
-        ?></td>
+         ?></td>
 <td><?php echo TRANSLATION_DATE;
-        ?></td>
+         ?></td>
 <td><?php echo TRANSLATION_DONE_BY;
-        ?></td>
+         ?></td>
 </tr>
 
 <?php while($row = db_fetch_object($lastModfiedPages)){
@@ -189,7 +189,7 @@ if($acl -> hasPermission("dashboard")){
              ?>
 <tr>
 <td><a href="<?php echo $url;
-            ?>" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
+             ?>" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
              ?></a></td>
 
 <td><?php echo date(env("date_format"), $row -> lastmodified)?></td>

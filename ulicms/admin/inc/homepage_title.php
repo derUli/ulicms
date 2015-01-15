@@ -37,7 +37,7 @@
         
          ?>
 <h1><?php echo TRANSLATION_HOMEPAGE_TITLE;
-        ?></h1>
+         ?></h1>
 <form action="index.php?action=homepage_title" id="homepage_title_settings" method="post">
 <table border=0>
 <tr>
@@ -54,7 +54,7 @@
 <td>
 <input name="homepage_title_<?php echo $lang;
              ?>" style="width:400px" value="<?php echo stringHelper :: real_htmlspecialchars($homepage_titles[$lang]);
-            ?>">
+             ?>">
 </td>
 <?php }
          ?>

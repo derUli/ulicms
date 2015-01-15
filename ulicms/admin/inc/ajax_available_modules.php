@@ -1,5 +1,5 @@
 <?php if(!is_admin()){
-    noperms();
+     noperms();
      ?>
 <?php
      }
@@ -14,9 +14,9 @@ include "../lib/file_get_contents_wrapper.php";
 if(!$pkg_src){
      ?>
 <p><strong><?php echo TRANSLATION_ERROR;
-    ?></strong> <br/>
+     ?></strong> <br/>
 <?php echo TRANSLATION_PKGSRC_NOT_DEFINED;
-    ?>
+     ?>
 </p>
 <?php }else{
      include_once "../version.php";
@@ -48,9 +48,9 @@ if(!$pkg_src){
      if(!$packageList or count($packageList) === 0){
          ?>
 <p><strong><?php echo TRANSLATION_ERROR;
-        ?></strong> <br/>
+         ?></strong> <br/>
 <?php echo TRANSLATION_NO_PACKAGES_AVAILABLE;
-        ?></p>
+         ?></p>
 
 <?php
          }else{

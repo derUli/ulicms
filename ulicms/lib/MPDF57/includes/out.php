@@ -5,7 +5,7 @@ $path = '../tmp/';
 $tempfilename = $_REQUEST['filename'] . '.pdf';
 if (strstr($tempfilename, '/') || strstr($tempfilename, '\\')){
      die("Filename should not contain \ or / ");
-    }
+     }
 $opname = $_REQUEST['opname'];
 $dest = $_REQUEST['dest'];
  if ($tempfilename && file_exists($path . $tempfilename)){

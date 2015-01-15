@@ -33,16 +33,16 @@ $(window).load(function(){
 </script>
 
 <h2><?php echo TRANSLATION_ADVERTISEMENTS;
-        ?></h2>
+         ?></h2>
 <p>
 <?php echo TRANSLATION_ADVERTISEMENT_INFOTEXT;
-        ?>
+         ?>
 <br/><br/>
 <a href="index.php?action=banner_new"><?php echo TRANSLATION_ADD_ADVERTISEMENT;
-        ?></a><br/>
+         ?></a><br/>
 </p>
 <p><?php echo TRANSLATION_CATEGORY;
-        ?> 
+         ?> 
 <?php
          echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
          ?>
@@ -52,13 +52,13 @@ $(window).load(function(){
 <tr style="font-weight:bold;">
 <td style="width:40px;">--></td>
 <td><?php echo TRANSLATION_ADVERTISEMENTS;
-        ?></td>
+         ?></td>
 <td><?php echo TRANSLATION_LANGUAGE;
-        ?></td>
+         ?></td>
 <td><?php echo TRANSLATION_EDIT;
-        ?></td>
+         ?></td>
 <td><?php echo TRANSLATION_DELETE;
-        ?></td>
+         ?></td>
 </tr>
 <?php
         

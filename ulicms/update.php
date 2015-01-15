@@ -27,21 +27,21 @@ global $db_connection;
 // Foreign Keys nur setzen, wenn MySQL Server Version >= 5.6
 if(mysqli_get_server_version($db_connection) >= 50600){
     
-    $constraint1 = "ALTER TABLE `" . tbname("users") . "` ADD FOREIGN KEY (`group_id`) REFERENCES `" . tbname("groups") . "`(`id`) 
+     $constraint1 = "ALTER TABLE `" . tbname("users") . "` ADD FOREIGN KEY (`group_id`) REFERENCES `" . tbname("groups") . "`(`id`) 
 ON DELETE SET NULL";
      db_query($constraint1);
     
-    $constraint2 = "ALTER TABLE `" . tbname("content") . "` ADD FOREIGN KEY (`category`) REFERENCES `" . tbname("categories") . "`(`id`) 
+     $constraint2 = "ALTER TABLE `" . tbname("content") . "` ADD FOREIGN KEY (`category`) REFERENCES `" . tbname("categories") . "`(`id`) 
 ON DELETE SET NULL";
      db_query($constraint2);
     
     
-    $constraint3 = "ALTER TABLE `" . tbname("banner") . "` ADD FOREIGN KEY (`category`) REFERENCES `" . tbname("categories") . "`(`id`) 
+     $constraint3 = "ALTER TABLE `" . tbname("banner") . "` ADD FOREIGN KEY (`category`) REFERENCES `" . tbname("categories") . "`(`id`) 
 ON DELETE SET NULL";
      db_query($constraint3);
     
     
-    $constraint4 = "ALTER TABLE `" . tbname("content") . "` ADD FOREIGN KEY (`autor`) REFERENCES `" . tbname("users") . "`(`id`) 
+     $constraint4 = "ALTER TABLE `" . tbname("content") . "` ADD FOREIGN KEY (`autor`) REFERENCES `" . tbname("users") . "`(`id`) 
 ON DELETE SET NULL";
      db_query($constraint4);
     
@@ -52,7 +52,7 @@ ON DELETE SET NULL";
      */
     
     
-    }
+     }
 
 $add_menu_title = "ALTER TABLE `" . tbname("content") . "` ADD COLUMN `menu_image` varchar(255) NULL";
 db_query($add_menu_title);

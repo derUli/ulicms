@@ -36,7 +36,7 @@
         
          ?>
 <h1><?php echo TRANSLATION_FRONTPAGE;
-        ?></h1>
+         ?></h1>
 <form action="index.php?action=frontpage_settings" id="frontpage_settings" method="post">
 <table border=0>
 <tr>

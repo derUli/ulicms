@@ -69,8 +69,8 @@ add_hook("before_http_header");
 $redirection = get_redirection();
 
 if($redirection){
-   ulicms_redirect($redirection, 302);
-}
+     ulicms_redirect($redirection, 302);
+    }
 
 header("HTTP/1.0 " . $status);
 
@@ -143,7 +143,7 @@ if(file_exists($cached_page_path) and !getconfig("cache_disabled")
 
 // Kein Caching wenn man eingeloggt ist
 if(is_logged_in()){
-   no_cache();
+ no_cache();
 }
 
  if($cached_content and (time() - $last_modified < CACHE_PERIOD) and !defined("NO_CACHE")){

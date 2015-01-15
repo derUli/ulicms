@@ -5,12 +5,12 @@ if(!$acl -> hasPermission("install_packages")){
      }else{
      ?>
 <h1><?php echo TRANSLATION_INSTALL_PACKAGE;
-    ?></h1>
+     ?></h1>
 <p>
 <a href="?action=upload_package"><?php echo TRANSLATION_UPLOAD_FILE;
-    ?></a>
+     ?></a>
 <br/><a href="?action=available_modules"><?php echo TRANSLATION_FROM_THE_PACKAGE_SOURCE;
-    ?></a>
+     ?></a>
 </p>
 
 <?php }

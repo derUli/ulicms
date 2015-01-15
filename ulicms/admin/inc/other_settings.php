@@ -106,28 +106,28 @@ if(!is_admin()){
 <form id="other_settings" action="index.php?action=other_settings" method="post">
 <div id="accordion-container"> 
     <h2 class="accordion-header"><?php echo TRANSLATION_CACHE;
-    ?></h2>
+     ?></h2>
     
     <div class="accordion-content">
 
 <div class="label"><?php echo TRANSLATION_CACHE_ENABLED;
-    ?></div>
+     ?></div>
 <div class="inputWrapper"><input type="checkbox" name="cache_enabled" value="cache_enabled" <?php if($cache_enabled) echo " checked=\"checked\"";
      ?>></div>
 <div class="label"><?php echo TRANSLATION_CACHE_VALIDATION_DURATION;
-    ?></div>
+     ?></div>
 <div class="inputWrapper"><input type="number" name="cache_period" min=1 max=20160 value="<?php echo $cache_period;
      ?>"> <?php echo TRANSLATION_MINUTES;
-    ?></div>
+     ?></div>
 
 <div class="label"><?php echo TRANSLATION_CACHE_ENGINE;
-    ?></div>
+     ?></div>
 <div class="inputWrapper"><select name="cache_type" size=1>
 <option value="file"<?php if($cache_type === "file" or !$cache_type){
          echo " selected";
          }
      ?>><?php echo TRANSLATION_FILE;
-    ?></option>
+     ?></option>
 <option value="cache_lite"<?php if($cache_type === "cache_lite"){
          echo " selected";
          }
@@ -139,25 +139,25 @@ if(!is_admin()){
 
 
 <h2 class="accordion-header"><?php echo TRANSLATION_SHORTCUTS;
-    ?></h2>
+     ?></h2>
     
     <div class="accordion-content">
 <div class="label"><?php echo TRANSLATION_REPLACE_SHORTCUTS;
-    ?></div>
+     ?></div>
 <div class="inputWrapper">
 <select name="override_shortcuts" size=1>
 <option value="off" <?php if($override_shortcuts == "off" or !$override_shortcuts) echo " selected=\"selected\""?>><?php echo TRANSLATION_OFF;
-    ?></option>
+     ?></option>
 <option value="frontend" <?php if($override_shortcuts == "frontend") echo " selected=\"selected\""?>><?php echo TRANSLATION_ONLY_IN_FRONTEND;
-    ?></option>
+     ?></option>
 <option value="backend" <?php if($override_shortcuts == "backend") echo " selected=\"selected\""?>><?php echo TRANSLATION_ONLY_IN_BACKEND;
-    ?></option>
+     ?></option>
 <option value="on" <?php if($override_shortcuts == "on") echo " selected=\"selected\""?>><?php echo TRANSLATION_BOOTH_BACKEND_AND_FRONTEND;
-    ?></option>
+     ?></option>
 </select>
 </div>
 <p><?php echo TRANSLATION_REPLACE_SHORTCUTS_INFO;
-    ?></p>
+     ?></p>
 </div>
 
 
@@ -165,12 +165,12 @@ if(!is_admin()){
 
 
 <h2 class="accordion-header"><?php echo TRANSLATION_MOVE_MENU_ITEMS;
-    ?></h2>
+     ?></h2>
 
 
     <div class="accordion-content">
 <p><?php echo TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM;
-    ?>  <select name="move_from" size="1">
+     ?>  <select name="move_from" size="1">
                                     <option value="-" selected>-</option>
                                     <?php foreach ($menus as $menu){
          ?>
@@ -179,7 +179,7 @@ if(!is_admin()){
          }
      ?>
                                     </select> <?php echo TRANSLATION_MOVE_ALL_MENU_ITEMS_TO;
-    ?> <select name="move_to" size="1">
+     ?> <select name="move_to" size="1">
                                     <option value="-" selected>-</option>
                                     <?php foreach ($menus as $menu){
          ?>
@@ -192,12 +192,12 @@ if(!is_admin()){
 </div>
 
 <h2 class="accordion-header"><?php echo TRANSLATION_DOMAIN2LANGUAGE_MAPPING;
-    ?></h2>
+     ?></h2>
 
     <div class="accordion-content">
     
 <?php echo TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO;
-    ?>
+     ?>
 
 <p><textarea name="domain_to_language" rows="10" cols="40">
 <?php echo real_htmlspecialchars(getconfig("domain_to_language"));
@@ -207,22 +207,22 @@ if(!is_admin()){
 </div>
 
 <h2 class="accordion-header"><?php echo TRANSLATION_ADDITIONAL_META_TAGS;
-    ?></h2>
+     ?></h2>
 
 <div class="accordion-content">
    
 <div class="label"><label for="show_meta_generator"><?php echo TRANSLATION_SHOW_META_GENERATOR;
-    ?></label></div>
+     ?></label></div>
 <div class="inputWrapper">
 <input type="checkbox" name="show_meta_generator" <?php if(!$hide_meta_generator){
-        echo "checked ";
-    }
-    ?>>
+         echo "checked ";
+         }
+     ?>>
 </div>
 </div>
 
 <h2 class="accordion-header"><?php echo TRANSLATION_EMAIL_DELIVERY;
-    ?></h2>
+     ?></h2>
 
 
     <div class="accordion-content">
@@ -246,23 +246,23 @@ if(!is_admin()){
 <br/>
 <div class="smtp_settings" id="smtp_settings" style="display:none">
     <h3><?php echo TRANSLATION_SMTP_SETTINGS;
-    ?></h3>
+     ?></h3>
 <div class="label"><?php echo TRANSLATION_HOSTNAME;
-    ?></div>
+     ?></div>
 <div class="inputWrapper"><input type="text" name="smtp_host" value="<?php echo real_htmlspecialchars($smtp_host);
      ?>"</div>
 </div>
 
 
 <div class="label"><?php echo TRANSLATION_PORT;
-    ?></div>
+     ?></div>
 <div class="inputWrapper"><input type="text" name="smtp_port" value="<?php echo real_htmlspecialchars($smtp_port);
      ?>"</div>
 </div>
 
 <div class="label">
 <?php echo TRANSLATION_AUTHENTIFACTION_REQUIRED;
-    ?>
+     ?>
 </div>
 <div class="inputWrapper">
 <input type="checkbox" id="smtp_auth" name="smtp_auth" <?php
@@ -273,13 +273,13 @@ if(!is_admin()){
 
 <div id="smtp_auth_div" style="display:none">
 <div class="label"><?php echo TRANSLATION_USER;
-    ?></div>
+     ?></div>
 <div class="inputWrapper"><input type="text" name="smtp_user" value="<?php echo real_htmlspecialchars($smtp_user);
      ?>"</div>
 </div>
 
 <div class="label"><?php echo TRANSLATION_PASSWORD;
-    ?></div>
+     ?></div>
 <div class="inputWrapper"><input type="password" name="smtp_password" value="<?php echo real_htmlspecialchars($smtp_password);
      ?>"</div>
 </div>
@@ -331,16 +331,16 @@ if($('#email_mode').val() == "pear_mail"){
 
 
     <h2 class="accordion-header"><?php echo TRANSLATION_EXPERT_SETTINGS;
-    ?></h2>
+     ?></h2>
     
     <div class="accordion-content">
 <p><a href="index.php?action=settings"><?php echo TRANSLATION_VIEW;
-    ?></a></p>
+     ?></a></p>
 </div>
 </div>
 <br/>
 <input name="submit" type="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;
-    ?>"/>
+     ?>"/>
 
 <?php
      if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
@@ -359,7 +359,7 @@ $("#other_settings").ajaxForm({beforeSubmit: function(e){
   success:function(e){
   $("#loading").hide();  
   $("#message").html("<span style=\"color:green;\"><?php echo TRANSLATION_CHANGES_WAS_SAVED;
-    ?></span>");
+     ?></span>");
   }
   
 

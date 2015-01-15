@@ -3,7 +3,7 @@
 function getLanguageFilePath($lang = "de", $component = null){
      // Todo Module Language Files
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
-    }
+     }
 
 function getModuleName($module){
      $name_file = getModulePath($module) .
@@ -18,7 +18,7 @@ function getModuleName($module){
          }else{
          return $module;
          }
-    }
+     }
 
 function getLanguageNameByCode($code){
      $query = db_query("SELECT name FROM `" . tbname("languages") . "` WHERE language_code = '" . db_escape($code) . "'");
@@ -29,7 +29,7 @@ function getLanguageNameByCode($code){
          }
     
      return $retval;
-    }
+     }
 
 function getAvailableBackendLanguages(){
      $langdir = ULICMS_ROOT . "/lang/";
@@ -43,7 +43,7 @@ function getAvailableBackendLanguages(){
          }
     
      return $retval;
-    }
+     }
 
 function getSystemLanguage(){
      if(isset($_SESSION["system_language"])){
@@ -122,7 +122,7 @@ function getStatusCodeByNumber($nr){
         );
     
      return $nr . " " . $http_codes[$nr];
-    }
+     }
 
 
 function ulicms_redirect($url = "http://www.ulicms.de", $status = 302){
@@ -130,7 +130,7 @@ function ulicms_redirect($url = "http://www.ulicms.de", $status = 302){
      header("Location: " . $url);
      exit();
     
-    }
+     }
 
 function getDomainByLanguage($language){
      $domainMapping = getconfig("domain_to_language");
@@ -171,7 +171,7 @@ function encodeURIComponent($str){
      $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
      return strtr(rawurlencode($str), $revert);
     
-    }
+     }
 
 
 function setLanguageByDomain(){
@@ -320,15 +320,15 @@ function get_mime($file){
 
 
 function clearAPCCache(){
-  if(!function_exists("apc_clear_cache")){
-     return false;
-  }
-  apc_clear_cache();
-  apc_clear_cache('user');
-  apc_clear_cache('opcode');
-  return true;
-
-}
+     if(!function_exists("apc_clear_cache")){
+         return false;
+         }
+     apc_clear_cache();
+     apc_clear_cache('user');
+     apc_clear_cache('opcode');
+     return true;
+    
+    }
  function clearCache(){
      add_hook("before_clear_cache");
      $cache_type = getconfig("cache_type");
@@ -345,13 +345,13 @@ function clearAPCCache(){
          else
              SureRemoveDir("content/cache", false);
          }
-
-
-    if(function_exists("apc_clear_cache")){
-      clearAPCCache();
-    }
-
-
+    
+    
+     if(function_exists("apc_clear_cache")){
+         clearAPCCache();
+         }
+    
+    
      add_hook("after_clear_cache");
      }
 
@@ -728,8 +728,8 @@ function getAllModules(){
 
 
 function no_cache(){
-   if(!defined("NO_CACHE"))
-      define("NO_CACHE", true);
+ if(!defined("NO_CACHE"))
+     define("NO_CACHE", true);
 }
 
 // replace Shortcodes with modules
@@ -982,6 +982,7 @@ else
 
 
 
+
  }
 
 
@@ -1117,7 +1118,7 @@ function tbname($name){
 function cms_version(){
  require_once "version.php";
  $v = new ulicms_version();
- return implode(".", $v -> getInternalVersion()). " ". $v ->getUpdate();
+ return implode(".", $v -> getInternalVersion()) . " " . $v -> getUpdate();
  }
 
 
@@ -1326,12 +1327,12 @@ foreach ($mobile_agents as $device){
 
 function is_admin(){
  $acl = new ACL();
- $permissions = $acl->getDefaultACLAsJSON(true, true);
- foreach($permissions as $permission=>$value){
-    if(!$acl->hasPermission($permission)){
-       return false;    
-    }
- }
+ $permissions = $acl -> getDefaultACLAsJSON(true, true);
+ foreach($permissions as $permission => $value){
+     if(!$acl -> hasPermission($permission)){
+         return false;
+         }
+     }
  return true;
 }
 

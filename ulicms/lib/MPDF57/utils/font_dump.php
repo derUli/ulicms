@@ -16,7 +16,9 @@ $font = 'dejavusanscondensed'; // Use internal mPDF font-name
 
 
 
+
 $showmissing = true; // Show all missing unicode blocks / characters
+
 
 
 
@@ -71,11 +73,10 @@ foreach($unifile AS $line){
 include('UnicodeRanges.php');
 // ==============================================================
 // ==============================================================
-
 $cw = file_get_contents(_MPDF_TTFONTDATAPATH . $font . '.cw.dat');
 if (!$cw){
      die("Error - Must be able to read font metrics file: " . _MPDF_TTFONTDATAPATH . $font . '.cw.dat');
-    }
+     }
 $counter = 0;
 
 
@@ -227,6 +228,7 @@ for ($i = 32; $i < $max; ++$i){
 // ==============================================================
 // ==============================================================
 $mpdf -> WriteHTML($html); // Separate Paragraphs  defined by font
+
 
 
 

@@ -34,7 +34,7 @@ if(!$acl -> hasPermission("import")){
     
      ?>
   <h1><?php echo TRANSLATION_JSON_IMPORT;
-    ?></h1>
+     ?></h1>
   <?php if(count($errors) > 0){
          foreach($errors as $e){
              ?>
@@ -52,12 +52,12 @@ if(!$acl -> hasPermission("import")){
   <?php if($valid === false){
          ?>
   <p class="ulicms_error"><?php echo TRANSLATION_NOT_A_JSON_FILE;
-        ?></p>
+         ?></p>
    <?php }
      ?>
   <form action="?action=import" method="post" enctype="multipart/form-data">
   <p><?php echo TRANSLATION_IMPORT_INTO_TABLE;
-    ?><br/>
+     ?><br/>
   <select name="table" size="1">
   <?php foreach($tables as $name){
          ?>
@@ -76,9 +76,9 @@ if(!$acl -> hasPermission("import")){
          echo "checked";
          }
      ?>><label for="do_update"><?php echo TRANSLATION_DO_UPDATE;
-    ?></label></p>
+     ?></label></p>
   <input type="submit" name="submit" value="<?php echo TRANSLATION_DO_IMPORT;
-    ?>">
+     ?>">
   </form>
   
   <?php
