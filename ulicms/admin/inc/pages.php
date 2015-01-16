@@ -20,6 +20,14 @@ function filter_by_language(element){
    }
 }
 
+
+function filter_by_menu(element){
+   var index = element.selectedIndex
+   if(element.options[index].value != ""){
+     location.replace("index.php?action=pages&filter_menu=" + element.options[index].value)
+   }
+}
+
 function filter_by_status(element){
    var index = element.selectedIndex
    if(element.options[index].value != ""){
@@ -52,6 +60,18 @@ $(window).load(function(){
          if(!isset($_SESSION["filter_category"])){
              $_SESSION["filter_category"] = 0;
              }
+             
+            
+          if(isset($_GET["filter_menu"])){
+            if($_GET["filter_menu"] == "null")
+               $_SESSION["filter_menu"] = null;       
+            else 
+               $_SESSION["filter_menu"] = $_GET["filter_menu"]; 
+          }
+             
+          if(!isset($_SESSION["filter_menu"])){
+             $_SESSION["filter_menu"] = null;
+          }
         
         
          if(isset($_GET["filter_category"])){
@@ -77,7 +97,12 @@ $(window).load(function(){
             
             
              }
+             
+             
+             $menus = getAllMenus();
+             array_unshift($menus, "null");
          ?>
+         
 </select>
 &nbsp;&nbsp;
 <?php echo TRANSLATION_STATUS;
@@ -101,7 +126,26 @@ $(window).load(function(){
 <?php
          echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
          ?>
+         &nbsp; &nbsp;
+         <?php echo TRANSLATION_MENU;?>
+         <select name="filter_menu" onchange="filter_by_menu(this);">
 
+<?php 
+foreach($menus as $menu){
+if($menu == "null")
+   $name = "[".TRANSLATION_EVERY."]";
+else
+   $name = $menu;
+   
+if($menu == $_SESSION["filter_menu"])
+  echo '<option value="'.$menu.'" selected>'.$name."</option>";
+else
+  echo '<option value="'.$menu.'">'.$name."</option>";
+
+}
+
+?>
+         </select>
 <?php
          if($_SESSION["filter_status"] == "trash" and $acl -> hasPermission("pages")){
              ?>
@@ -177,7 +221,13 @@ $(window).load(function(){
              }
         
          $filter_sql .= "AND " . $filter_status . " ";
-        
+         
+         
+         if($_SESSION["filter_menu"] != null){
+            $filter_sql .= "AND menu = '".db_escape($_SESSION["filter_menu"])."' ";
+         }
+         
+                   
          $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(db_error());
          if(db_num_rows($query) > 0){
              while($row = db_fetch_object($query)){
