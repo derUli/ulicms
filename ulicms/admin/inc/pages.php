@@ -235,7 +235,11 @@ else
 <?php
                  echo '<tr>';
                  echo "<td style=\"width:40px;\">--&gt;</td>";
-                 echo "<td>" . htmlspecialchars($row -> title) . "</td>";
+                 echo "<td>" . htmlspecialchars($row -> title);
+                 if(!empty($row->redirection) and !is_null($row->redirection))
+                   echo htmlspecialchars(" --> ").htmlspecialchars($row->redirection);
+                 
+                 echo "</td>";
                  echo "<td>" . $row -> menu . "</td>";
                 
                  echo "<td>" . $row -> position . "</td>";
