@@ -127,7 +127,7 @@ $(window).load(function(){
          echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
          ?>
          &nbsp; &nbsp;
-         <?php echo TRANSLATION_MENU;?>
+         <?php echo TRANSLATION_MENU;?> 
          <select name="filter_menu" onchange="filter_by_menu(this);">
 
 <?php 
