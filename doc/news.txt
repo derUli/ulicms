@@ -6,6 +6,7 @@
 - Es wird auch der Alternate PHP Cache (APC) geleert, sofern das 
 entsprechende PHP-Modul installiert ist.
 - CKEditor auf Version 4.4.6 aktualisiert
+- Falsche Übersetzung von "Header Hintergrundfarbe" in den Designeinstellungen korrigiert
 
 ﻿===== Neues in UliCMS 7.2.1 ====
 + CKEditor auf Version 4.4.5 aktualisiert
