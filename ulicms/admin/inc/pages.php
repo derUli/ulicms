@@ -235,8 +235,15 @@ else
 <?php
                  echo '<tr>';
                  echo "<td style=\"width:40px;\">--&gt;</td>";
-                 echo "<td>" . htmlspecialchars($row -> title);
-                 if(!empty($row->redirection) and !is_null($row->redirection))
+                 echo "<td>";
+                 if(startsWith($row->redirection, "#"))
+                   echo "<strong>";
+                 echo htmlspecialchars($row -> title);
+                 
+                 if(startsWith($row->redirection, "#"))
+                   echo "</strong>";
+                 
+                 if(!empty($row->redirection) and !is_null($row->redirection) and !startsWith($row->redirection, "#"))
                    echo htmlspecialchars(" --> ").htmlspecialchars($row->redirection);
                  
                  echo "</td>";
