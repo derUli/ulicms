@@ -60,6 +60,7 @@ $(window).load(function(){
 <?php
          if(!empty($_GET["filter_language"]) and in_array($_GET["filter_language"], getAllLanguages())){
              $_SESSION["filter_language"] = $_GET["filter_language"];
+               $_SESSION["filter_parent"] = null; 
              }
         
         
