@@ -7,7 +7,7 @@
 entsprechende PHP-Modul installiert ist.
 + CKEditor auf Version 4.4.6 aktualisiert
 + Falsche Übersetzung von "Header Hintergrundfarbe" in den Designeinstellungen korrigiert
-+ Seiten filtern nach Menü nun möglich
++ Seiten filtern nach Menü und übergeordneter Seite nun möglich
 
 ﻿===== Neues in UliCMS 7.2.1 ====
 + CKEditor auf Version 4.4.5 aktualisiert

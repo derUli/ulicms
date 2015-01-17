@@ -2,7 +2,7 @@
      $acl = new ACL();
     
      if($acl -> hasPermission("pages")){
-        
+        $parents = db_query("select a.id as id, a.title as title from ".tbname("content")." a inner join ".tbname("content")." b on a.id = b.parent group by a.title;");
         
          ?>
 <h2><?php echo TRANSLATION_PAGES;
@@ -25,6 +25,13 @@ function filter_by_menu(element){
    var index = element.selectedIndex
    if(element.options[index].value != ""){
      location.replace("index.php?action=pages&filter_menu=" + element.options[index].value)
+   }
+}
+
+function filter_by_parent(element){
+   var index = element.selectedIndex
+   if(element.options[index].value != ""){
+     location.replace("index.php?action=pages&filter_parent=" + element.options[index].value)
    }
 }
 
@@ -67,6 +74,20 @@ $(window).load(function(){
                $_SESSION["filter_menu"] = null;       
             else 
                $_SESSION["filter_menu"] = $_GET["filter_menu"]; 
+          }
+          
+          
+         if(isset($_GET["filter_parent"])){
+            if($_GET["filter_parent"] == "null")
+               $_SESSION["filter_parent"] = null;       
+            else 
+               $_SESSION["filter_parent"] = $_GET["filter_parent"]; 
+          }
+          
+          
+          
+          if(!isset($_SESSION["filter_parent"])){
+             $_SESSION["filter_parent"] = null;
           }
              
           if(!isset($_SESSION["filter_menu"])){
@@ -146,6 +167,24 @@ else
 
 ?>
          </select>
+                  &nbsp; &nbsp;
+         <?php echo TRANSLATION_PARENT;?> 
+         <select name="filter_parent" onchange="filter_by_parent(this);">
+         <option value="null" <?php if("null" == $_SESSION["filter_menu"]) echo "selected";?>>[<?php echo TRANSLATION_EVERY;?>]</option>
+         <?php 
+         
+         while($parent = db_fetch_object($parents)){
+            $parent_id = $parent->id;
+            $title = htmlspecialchars($parent->title);
+            if($parent_id == $_SESSION["filter_parent"])
+  echo '<option value="'.$parent_id.'" selected>'.$title."</option>";
+else
+  echo '<option value="'.$parent_id.'">'.$title."</option>";
+            
+         }?>
+</select>
+
+
 <?php
          if($_SESSION["filter_status"] == "trash" and $acl -> hasPermission("pages")){
              ?>
@@ -226,6 +265,12 @@ else
          if($_SESSION["filter_menu"] != null){
             $filter_sql .= "AND menu = '".db_escape($_SESSION["filter_menu"])."' ";
          }
+         
+                 
+         if($_SESSION["filter_parent"] != null){
+            $filter_sql .= "AND parent = '".intval($_SESSION["filter_parent"])."' ";
+         }
+             
                        
          $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(db_error());
          if(db_num_rows($query) > 0){
