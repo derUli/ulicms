@@ -2,7 +2,7 @@
      $acl = new ACL();
     
      if($acl -> hasPermission("pages")){
-
+        
          ?>
 <h2><?php echo TRANSLATION_PAGES;
          ?></h2>
@@ -60,39 +60,39 @@ $(window).load(function(){
 <?php
          if(!empty($_GET["filter_language"]) and in_array($_GET["filter_language"], getAllLanguages())){
              $_SESSION["filter_language"] = $_GET["filter_language"];
-               $_SESSION["filter_parent"] = null; 
+             $_SESSION["filter_parent"] = null;
              }
         
         
          if(!isset($_SESSION["filter_category"])){
              $_SESSION["filter_category"] = 0;
              }
-             
-            
-          if(isset($_GET["filter_menu"])){
-            if($_GET["filter_menu"] == "null")
-               $_SESSION["filter_menu"] = null;       
-            else 
-               $_SESSION["filter_menu"] = $_GET["filter_menu"]; 
-          }
-          
-          
+        
+        
+         if(isset($_GET["filter_menu"])){
+             if($_GET["filter_menu"] == "null")
+                 $_SESSION["filter_menu"] = null;
+             else
+                 $_SESSION["filter_menu"] = $_GET["filter_menu"];
+             }
+        
+        
          if(isset($_GET["filter_parent"])){
-            if($_GET["filter_parent"] == "null")
-               $_SESSION["filter_parent"] = null;       
-            else 
-               $_SESSION["filter_parent"] = $_GET["filter_parent"]; 
-          }
-          
-          
-          
-          if(!isset($_SESSION["filter_parent"])){
+             if($_GET["filter_parent"] == "null")
+                 $_SESSION["filter_parent"] = null;
+             else
+                 $_SESSION["filter_parent"] = $_GET["filter_parent"];
+             }
+        
+        
+        
+         if(!isset($_SESSION["filter_parent"])){
              $_SESSION["filter_parent"] = null;
-          }
-             
-          if(!isset($_SESSION["filter_menu"])){
+             }
+        
+         if(!isset($_SESSION["filter_menu"])){
              $_SESSION["filter_menu"] = null;
-          }
+             }
         
         
          if(isset($_GET["filter_category"])){
@@ -116,19 +116,19 @@ $(window).load(function(){
                  echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
                  }
              }
-             
-             $menus = getAllMenus();
-             array_unshift($menus, "null");
-             
-            $sql = "select a.id as id, a.title as title from ".tbname("content")." a inner join ".tbname("content")." b on a.id = b.parent ";
         
-        if(in_array($_SESSION["filter_language"], getAllLanguages())){
-           $sql .= "where b.language='".$_SESSION["filter_language"]."' ";   
-        }
+         $menus = getAllMenus();
+         array_unshift($menus, "null");
         
-        $sql.= " group by a.title ";
-        $sql.= " order by a.title";
-        $parents = db_query($sql);
+         $sql = "select a.id as id, a.title as title from " . tbname("content") . " a inner join " . tbname("content") . " b on a.id = b.parent ";
+        
+         if(in_array($_SESSION["filter_language"], getAllLanguages())){
+             $sql .= "where b.language='" . $_SESSION["filter_language"] . "' ";
+             }
+        
+         $sql .= " group by a.title ";
+         $sql .= " order by a.title";
+         $parents = db_query($sql);
          ?>
          
 </select>
@@ -155,41 +155,48 @@ $(window).load(function(){
          echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
          ?>
          &nbsp; &nbsp;
-         <?php echo TRANSLATION_MENU;?> 
+         <?php echo TRANSLATION_MENU;
+        ?> 
          <select name="filter_menu" onchange="filter_by_menu(this);">
 
-<?php 
-foreach($menus as $menu){
-if($menu == "null")
-   $name = "[".TRANSLATION_EVERY."]";
-else
-   $name = $menu;
-   
-if($menu == $_SESSION["filter_menu"])
-  echo '<option value="'.$menu.'" selected>'.$name."</option>";
-else
-  echo '<option value="'.$menu.'">'.$name."</option>";
-
-}
-
-?>
+<?php
+        foreach($menus as $menu){
+            if($menu == "null")
+                 $name = "[" . TRANSLATION_EVERY . "]";
+            else
+                 $name = $menu;
+            
+            if($menu == $_SESSION["filter_menu"])
+                 echo '<option value="' . $menu . '" selected>' . $name . "</option>";
+            else
+                 echo '<option value="' . $menu . '">' . $name . "</option>";
+            
+            }
+        
+        ?>
          </select>
                   &nbsp; &nbsp;
-         <?php echo TRANSLATION_PARENT;?> 
+         <?php echo TRANSLATION_PARENT;
+        ?> 
          <select name="filter_parent" onchange="filter_by_parent(this);">
-         <option value="null" <?php if("null" == $_SESSION["filter_parent"]) echo "selected";?>>[<?php echo TRANSLATION_EVERY;?>]</option>
-            <option value="-" <?php if("-" == $_SESSION["filter_parent"]) echo "selected";?>>[<?php echo TRANSLATION_NONE;?>]</option>
-         <?php 
-         
+         <option value="null" <?php if("null" == $_SESSION["filter_parent"]) echo "selected";
+        ?>>[<?php echo TRANSLATION_EVERY;
+        ?>]</option>
+            <option value="-" <?php if("-" == $_SESSION["filter_parent"]) echo "selected";
+        ?>>[<?php echo TRANSLATION_NONE;
+        ?>]</option>
+         <?php
+        
          while($parent = db_fetch_object($parents)){
-            $parent_id = $parent->id;
-            $title = htmlspecialchars($parent->title);
-            if($parent_id == $_SESSION["filter_parent"])
-  echo '<option value="'.$parent_id.'" selected>'.$title."</option>";
-else
-  echo '<option value="'.$parent_id.'">'.$title."</option>";
+             $parent_id = $parent -> id;
+             $title = htmlspecialchars($parent -> title);
+             if($parent_id == $_SESSION["filter_parent"])
+                 echo '<option value="' . $parent_id . '" selected>' . $title . "</option>";
+            else
+                 echo '<option value="' . $parent_id . '">' . $title . "</option>";
             
-         }?>
+             }
+        ?>
 </select>
 
 
@@ -268,22 +275,22 @@ else
              }
         
          $filter_sql .= "AND " . $filter_status . " ";
-         
-         
+        
+        
          if($_SESSION["filter_menu"] != null){
-            $filter_sql .= "AND menu = '".db_escape($_SESSION["filter_menu"])."' ";
-         }
-         
-                 
+             $filter_sql .= "AND menu = '" . db_escape($_SESSION["filter_menu"]) . "' ";
+             }
+        
+        
          if($_SESSION["filter_parent"] != null){
-         if($_SESSION["filter_parent"] != "-")
-            $filter_sql .= "AND parent = '".intval($_SESSION["filter_parent"])."' ";
-         else 
-           $filter_sql .= "AND parent IS NULL ";
-}
-         
-             
-                       
+             if($_SESSION["filter_parent"] != "-")
+                 $filter_sql .= "AND parent = '" . intval($_SESSION["filter_parent"]) . "' ";
+             else
+                 $filter_sql .= "AND parent IS NULL ";
+            }
+        
+        
+        
          $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(db_error());
          if(db_num_rows($query) > 0){
              while($row = db_fetch_object($query)){
@@ -292,9 +299,9 @@ else
                  echo '<tr>';
                  echo "<td style=\"width:40px;\">--&gt;</td>";
                  echo "<td>" . htmlspecialchars($row -> title);
-                 if(!empty($row->redirection) and !is_null($row->redirection))
-                   echo htmlspecialchars(" --> ").htmlspecialchars($row->redirection);
-                 
+                 if(!empty($row -> redirection) and !is_null($row -> redirection))
+                     echo htmlspecialchars(" --> ") . htmlspecialchars($row -> redirection);
+                
                  echo "</td>";
                  echo "<td>" . $row -> menu . "</td>";
                 

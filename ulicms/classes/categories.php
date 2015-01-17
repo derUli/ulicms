@@ -3,7 +3,7 @@ class categories
 {
     
      public static function updateCategory($id, $name, $description = ''){
-         $sql = "UPDATE " . tbname("categories") . " SET name='" . db_escape($name) . "', description = '".db_escape($description)."' WHERE id=" . $id;
+         $sql = "UPDATE " . tbname("categories") . " SET name='" . db_escape($name) . "', description = '" . db_escape($description) . "' WHERE id=" . $id;
          return db_query($sql);
          }
     
@@ -11,7 +11,7 @@ class categories
          if(is_null($name) or empty($name))
              return null;
          $sqlString = "INSERT INTO " . tbname("categories") . " (name, description) 
-         VALUES('" . db_escape($name) ."', '".db_escape($description)."')";
+         VALUES('" . db_escape($name) . "', '" . db_escape($description) . "')";
          db_query($sqlString);
          return db_insert_id();
          }
@@ -49,7 +49,7 @@ class categories
          db_query($sqlMoveCategoryBannerString);
         
          }
-         
+    
      public static function getCategoryDescriptionById($id){
          $sqlString = "SELECT description FROM " . tbname("categories") . " WHERE id=" . $id;
          $result = db_query($sqlString);

@@ -34,9 +34,9 @@
  * Format:
  * <pre>
  * array(
- *     'package1' => PEAR_ErrorStack object,
- *     'package2' => PEAR_ErrorStack object,
- *     ...
+ *      'package1' => PEAR_ErrorStack object,
+ *      'package2' => PEAR_ErrorStack object,
+ *      ...
  * )
  * </pre>
  * 
@@ -246,7 +246,7 @@ class PEAR_ErrorStack{
      * @param string $package name of the package this error stack represents
      * @param callback $msgCallback callback used for error message generation
      * @param callback $contextCallback callback used for context generation,
-     *                    defaults to {@link getFileLine()}
+     *                     defaults to {@link getFileLine()}
      * @param boolean $throwPEAR_Error 
      */
      function PEAR_ErrorStack($package, $msgCallback = false, $contextCallback = false,
@@ -267,7 +267,7 @@ class PEAR_ErrorStack{
      * @param string $package name of the package this error stack represents
      * @param callback $msgCallback callback used for error message generation
      * @param callback $contextCallback callback used for context generation,
-     *                    defaults to {@link getFileLine()}
+     *                     defaults to {@link getFileLine()}
      * @param boolean $throwPEAR_Error 
      * @param string $stackClass class to instantiate
      * @static 
@@ -490,9 +490,9 @@ class PEAR_ErrorStack{
      * Add an error to the stack
      * 
      * If the message generator exists, it is called with 2 parameters.
-     *     - the current Error Stack object
-     *     - an array that is in the same format as an error.  Available indices
-     *       are 'code', 'package', 'time', 'params', 'level', and 'context'
+     *      - the current Error Stack object
+     *      - an array that is in the same format as an error.  Available indices
+     *        are 'code', 'package', 'time', 'params', 'level', and 'context'
      * 
      * Next, if the error should contain context information, this is
      * handled by the context grabbing method.
@@ -502,26 +502,26 @@ class PEAR_ErrorStack{
      * @param string $level Error level.  This is NOT spell-checked
      * @param array $params associative array of error parameters
      * @param string $msg Error message, or a portion of it if the message
-     *                             is to be generated
+     *                              is to be generated
      * @param array $repackage If this error re-packages an error pushed by
-     *                             another package, place the array returned from
-     *                             {@link pop()} in this parameter
+     *                              another package, place the array returned from
+     *                              {@link pop()} in this parameter
      * @param array $backtrace Protected parameter: use this to pass in the
-     *                             {@link debug_backtrace()} that should be used
-     *                             to find error context
+     *                              {@link debug_backtrace()} that should be used
+     *                              to find error context
      * @return PEAR_Error |array if compatibility mode is on, a PEAR_Error is also
      * thrown.  If a PEAR_Error is returned, the userinfo
      * property is set to the following array:
      * 
      * <code>
      * array(
-     *       'code' => $code,
-     *       'params' => $params,
-     *       'package' => $this->_package,
-     *       'level' => $level,
-     *       'time' => time(),
-     *       'context' => $context,
-     *       'message' => $msg,
+     *        'code' => $code,
+     *        'params' => $params,
+     *        'package' => $this->_package,
+     *        'level' => $level,
+     *        'time' => time(),
+     *        'context' => $context,
+     *        'message' => $msg,
      * //['repackage' => $err] repackaged error array/Exception class
      * );
      * </code>
@@ -628,15 +628,15 @@ class PEAR_ErrorStack{
      * @param string $level Error level.  This is NOT spell-checked
      * @param array $params associative array of error parameters
      * @param string $msg Error message, or a portion of it if the message
-     *                             is to be generated
+     *                              is to be generated
      * @param array $repackage If this error re-packages an error pushed by
-     *                             another package, place the array returned from
-     *                             {@link pop()} in this parameter
+     *                              another package, place the array returned from
+     *                              {@link pop()} in this parameter
      * @param array $backtrace Protected parameter: use this to pass in the
-     *                             {@link debug_backtrace()} that should be used
-     *                             to find error context
+     *                              {@link debug_backtrace()} that should be used
+     *                              to find error context
      * @return PEAR_Error |array if compatibility mode is on, a PEAR_Error is also
-     *                             thrown.  see docs for {@link push()}
+     *                              thrown.  see docs for {@link push()}
      * @static 
      */
      function staticPush($package, $code, $level = 'error', $params = array(),
@@ -812,7 +812,7 @@ class PEAR_ErrorStack{
      * @param string $level Set to a level name in order to retrieve only errors of a particular level
      * @param boolean $merge Set to return a flat array, not organized by package
      * @param array $sortfunc Function used to sort a merged array - default
-     *           sorts by time, and should be good for most cases
+     *            sorts by time, and should be good for most cases
      * @static 
      * @return array 
      */
@@ -863,8 +863,8 @@ class PEAR_ErrorStack{
      * reference the frame that contains the source of the error.
      * 
      * @return array |false either array('file' => file, 'line' => line,
-     *            'function' => function name, 'class' => class name) or
-     *            if this doesn't work, then false
+     *             'function' => function name, 'class' => class name) or
+     *             if this doesn't work, then false
      * @param unused $ 
      * @param integer $ backtrace frame.
      * @param array $ Results of debug_backtrace()

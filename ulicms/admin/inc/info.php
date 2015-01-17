@@ -8,7 +8,7 @@
          ?>
 <p><img src="gfx/logo.png" alt="UliCMS"/></p>
 <strong>Release <?php echo cms_version();
-        ?> "<?php echo $version -> getVersion();
+         ?> "<?php echo $version -> getVersion();
          ?>"</strong>
 <br/>
 

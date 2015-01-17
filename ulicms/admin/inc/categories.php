@@ -2,39 +2,39 @@
 $acl = new ACL();
 if(!is_admin() and !$acl -> hasPermission("categories")){
      noperms();
-
+    
      }else{
-
+    
      // Create
     if(isset($_REQUEST["create"])){
          if(!empty($_REQUEST["name"])){
              categories :: addCategory($_REQUEST["name"], $_REQUEST["description"]);
              }
          }
-
+    
      // Create
     if(isset($_REQUEST["update"])){
          if(!empty($_REQUEST["name"]) and !empty($_REQUEST["id"])){
              categories :: updateCategory(intval($_REQUEST["id"]), $_REQUEST["name"], $_REQUEST["description"]);
              }
          }
-
+    
      // Delete
     if(isset($_GET["del"])){
          $del = intval($_GET["del"]);
          if($del != 1)
              categories :: deleteCategory($del);
          }
-
+    
      include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
      if(isset($_GET["order"]) and in_array($_GET["order"], array("id",
-     "name", "description", "created", "updated")))
+                     "name", "description", "created", "updated")))
          $order = db_escape($_GET["order"]);
      else
          $order = "id";
-
+    
      $categories = categories :: getAllCategories($order);
-
+    
      ?>
 
 <?php
@@ -42,12 +42,12 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
          ?>
 
 <h2><?php echo TRANSLATION_CATEGORIES;
-        ?></h2>
+         ?></h2>
 <p><?php echo TRANSLATION_CATEGORIES_INFOTEXT;
-        ?></p>
+         ?></p>
 
 <p><a href="?action=categories&add"><?php echo TRANSLATION_CREATE_CATEGORY;
-        ?></a></p>
+         ?></a></p>
 <?php }
      ?>
 
@@ -57,11 +57,12 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <table>
 <tr>
 <td style="min-width:50px;"><a href="?action=categories&order=id"><?php echo TRANSLATION_ID;
-        ?></a></td>
+         ?></a></td>
 
 <td style="min-width:200px;"><a href="?action=categories&order=name"><?php echo TRANSLATION_NAME;
+         ?></a></td>
+<td style="min-width:200px;"><a href="?action=categories&order=description"><?php echo TRANSLATION_DESCRIPTION;
         ?></a></td>
-<td style="min-width:200px;"><a href="?action=categories&order=description"><?php echo TRANSLATION_DESCRIPTION;?></a></td>
 <td></td>
 <td></td>
 </tr>
@@ -72,24 +73,25 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
              ?></td>
 <td style="padding-right:20px;"><?php echo real_htmlspecialchars($category["name"]);
              ?></td>
-<td style="padding-right:20px;"><?php echo nl2br(real_htmlspecialchars($category["description"]));?></td>
+<td style="padding-right:20px;"><?php echo nl2br(real_htmlspecialchars($category["description"]));
+            ?></td>
 <td style="text-align:center;"><a href="?action=categories&edit=<?php echo $category["id"];
              ?>"><img src="gfx/edit.gif" alt="<?php echo TRANSLATION_EDIT;
-            ?>" title="<?php echo TRANSLATION_EDIT;
-            ?>"></td>
+             ?>" title="<?php echo TRANSLATION_EDIT;
+             ?>"></td>
 <?php if($category["id"] != 1){
                  ?>
 
 <td style="text-align:center;"><a href="?action=categories&del=<?php echo $category["id"];
                  ?>" onclick="return confirm('Wirklich Löschen?')"><img src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
-                ?>" title="<?php echo TRANSLATION_DELETE;
-                ?>"></a></td>
+                 ?>" title="<?php echo TRANSLATION_DELETE;
+                 ?>"></a></td>
 
 <?php }else{
                  ?>
 <td style="text-align:center;"><a href="#" onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
-                ?>" title="<?php echo TRANSLATION_DELETE;
-                ?>"></a></td>
+                 ?>" title="<?php echo TRANSLATION_DELETE;
+                 ?>"></a></td>
 <?php }
              ?>
 
@@ -100,17 +102,18 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <?php }else if(isset($_GET["add"])){
          ?>
 <h2><?php echo TRANSLATION_CREATE_CATEGORY;
-        ?></h2>
+         ?></h2>
 <form action="?action=categories" method="post">
 <p><?php echo TRANSLATION_NAME;
-        ?> <input type="text" name="name" required="true" value="">
+         ?> <input type="text" name="name" required="true" value="">
         
         </p>
         
-<p><?php echo TRANSLATION_DESCRIPTION; ?><br/>
+<p><?php echo TRANSLATION_DESCRIPTION;
+        ?><br/>
 <textarea cols="50" name="description" rows="5" maxlength="255"></textarea></p>
 <p><input type="submit" name="create" value="<?php echo TRANSLATION_CREATE;
-        ?>"></p>
+         ?>"></p>
         
         
 </form>
@@ -118,18 +121,20 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <?php }else if(isset($_GET["edit"])){
          ?>
 <h2><?php echo TRANSLATION_EDIT_CATEGORY;
-        ?></h2>
+         ?></h2>
 <form action="?action=categories" method="post">
 <input type="hidden" name="id" value="<?php echo intval($_GET["edit"])?>">
 <p><?php echo TRANSLATION_NAME;
-        ?> <input type="text" name="name" required="true" value="<?php echo categories :: getCategoryById(intval($_GET["edit"]));
+         ?> <input type="text" name="name" required="true" value="<?php echo categories :: getCategoryById(intval($_GET["edit"]));
          ?>">
          </p>
          
-<p><?php echo TRANSLATION_DESCRIPTION; ?><br/>
-<textarea cols="50" name="description" rows="5" maxlength="255"><?php echo htmlspecialchars(categories :: getCategoryDescriptionById(intval($_GET["edit"])));?></textarea></p>
+<p><?php echo TRANSLATION_DESCRIPTION;
+        ?><br/>
+<textarea cols="50" name="description" rows="5" maxlength="255"><?php echo htmlspecialchars(categories :: getCategoryDescriptionById(intval($_GET["edit"])));
+        ?></textarea></p>
 <p><input type="submit" name="update" value="<?php echo TRANSLATION_SAVE;
-        ?>"></p>
+         ?>"></p>
 </form>
 
 <?php }

@@ -5,7 +5,7 @@
          $query = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
         
          $allThemes = getThemesList();
-         
+        
          $groups = db_query("SELECT id, name from " . tbname("groups"));
          while($row = db_fetch_object($query)){
             
@@ -182,15 +182,19 @@ function openMenuImageSelectWindow(field) {
    
 <br/><br/>
 
-<strong><?php echo TRANSLATION_DESIGN;?></strong><br/>
+<strong><?php echo TRANSLATION_DESIGN;
+            ?></strong><br/>
 <select name="theme" size=1>
-<option value="">[<?php echo TRANSLATION_STANDARD;?>]</option>
+<option value="">[<?php echo TRANSLATION_STANDARD;
+            ?>]</option>
 <?php foreach($allThemes as $th){
-         ?>
+                 ?>
 <option value="<?php echo $th;
-         ?>" <?php if(!is_null($row->theme) and !empty($row->theme) and $row->theme == $th) echo "selected";?>><?php echo $th;?></option>
+                 ?>" <?php if(!is_null($row -> theme) and !empty($row -> theme) and $row -> theme == $th) echo "selected";
+                ?>><?php echo $th;
+                ?></option>
 <?php }
-     ?>
+             ?>
 </select>
    
 <br/><br/>
@@ -215,14 +219,14 @@ function openMenuImageSelectWindow(field) {
 <option value="registered"<?php if(in_array("registered", $access)) echo " selected"?>><?php echo TRANSLATION_REGISTERED_USERS;
              ?></option>
 <?php
-            while($row2 = db_fetch_object($groups)){
+             while($row2 = db_fetch_object($groups)){
                  if(in_array(strval($row2 -> id), $access)){
                      echo '<option value="' . $row2 -> id . '" selected>' . real_htmlspecialchars($row2 -> name) . '</option>';
                      }else{
                      echo '<option value="' . $row2 -> id . '">' . real_htmlspecialchars($row2 -> name) . '</option>';
                      }
-                }
-            ?>
+                 }
+             ?>
 </select>
 
 
