@@ -2,8 +2,7 @@
      $acl = new ACL();
     
      if($acl -> hasPermission("pages")){
-        $parents = db_query("select a.id as id, a.title as title from ".tbname("content")." a inner join ".tbname("content")." b on a.id = b.parent group by a.title;");
-        
+
          ?>
 <h2><?php echo TRANSLATION_PAGES;
          ?></h2>
@@ -115,13 +114,19 @@ $(window).load(function(){
                  }else{
                  echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
                  }
-            
-            
              }
-             
              
              $menus = getAllMenus();
              array_unshift($menus, "null");
+             
+            $sql = "select a.id as id, a.title as title from ".tbname("content")." a inner join ".tbname("content")." b on a.id = b.parent ";
+        
+        if(in_array($_SESSION["filter_language"], getAllLanguages())){
+           $sql .= "where b.language='".$_SESSION["filter_language"]."' ";   
+        }
+        
+        $sql.= " group by a.title;";
+        $parents = db_query($sql);
          ?>
          
 </select>
