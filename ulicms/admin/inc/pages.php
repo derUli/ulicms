@@ -126,7 +126,8 @@ $(window).load(function(){
            $sql .= "where b.language='".$_SESSION["filter_language"]."' ";   
         }
         
-        $sql.= " group by a.title;";
+        $sql.= " group by a.title ";
+        $sql.= " order by a.title";
         $parents = db_query($sql);
          ?>
          

@@ -388,3 +388,5 @@ define("TRANSLATION_CUSTOM_DATA_JSON", "Benutzerdefinierte Werte (JSON)");
 define("TRANSLATION_DO_UPDATE", "Update durchführen");
 
 define("TRANSLATION_NONE", "Keine");
+
+add_hook("lang_de");
