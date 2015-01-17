@@ -2,7 +2,7 @@
 $acl = new ACL();
 if(!$acl -> hasPermission("list_packages")){
      noperms();
-    }else{
+     }else{
     
      if($acl -> hasPermission("remove_packages")){
         

@@ -62,7 +62,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <td style="min-width:200px;"><a href="?action=categories&order=name"><?php echo TRANSLATION_NAME;
          ?></a></td>
 <td style="min-width:200px;"><a href="?action=categories&order=description"><?php echo TRANSLATION_DESCRIPTION;
-        ?></a></td>
+         ?></a></td>
 <td></td>
 <td></td>
 </tr>
@@ -74,7 +74,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <td style="padding-right:20px;"><?php echo real_htmlspecialchars($category["name"]);
              ?></td>
 <td style="padding-right:20px;"><?php echo nl2br(real_htmlspecialchars($category["description"]));
-            ?></td>
+             ?></td>
 <td style="text-align:center;"><a href="?action=categories&edit=<?php echo $category["id"];
              ?>"><img src="gfx/edit.gif" alt="<?php echo TRANSLATION_EDIT;
              ?>" title="<?php echo TRANSLATION_EDIT;
@@ -110,7 +110,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
         </p>
         
 <p><?php echo TRANSLATION_DESCRIPTION;
-        ?><br/>
+         ?><br/>
 <textarea cols="50" name="description" rows="5" maxlength="255"></textarea></p>
 <p><input type="submit" name="create" value="<?php echo TRANSLATION_CREATE;
          ?>"></p>
@@ -130,9 +130,9 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
          </p>
          
 <p><?php echo TRANSLATION_DESCRIPTION;
-        ?><br/>
+         ?><br/>
 <textarea cols="50" name="description" rows="5" maxlength="255"><?php echo htmlspecialchars(categories :: getCategoryDescriptionById(intval($_GET["edit"])));
-        ?></textarea></p>
+         ?></textarea></p>
 <p><input type="submit" name="update" value="<?php echo TRANSLATION_SAVE;
          ?>"></p>
 </form>

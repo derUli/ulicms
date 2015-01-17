@@ -319,7 +319,7 @@ $version = new ulicms_version();
 
 define("UPDATE_CHECK_URL", "http://www.ulicms.de/updatecheck.php?v=" .
  urlencode(
-implode(".", $version -> getInternalVersion())). "&update=".urlencode($version->getUpdate()));
+implode(".", $version -> getInternalVersion())) . "&update=" . urlencode($version -> getUpdate()));
 
 if(!getconfig("session_name"))
  setconfig("session_name", uniqid() . "_SESSION");

@@ -60,7 +60,7 @@ function get_theme($page = null){
          $query = db_query($sql);
          if($query and db_num_rows($query) > 0){
              $data = db_fetch_object($query);
-             if(isset($data->theme) and !empty($data -> theme) and !is_null($data -> theme)){
+             if(isset($data -> theme) and !empty($data -> theme) and !is_null($data -> theme)){
                  $theme = $data -> theme;
                  }
              }
@@ -68,7 +68,7 @@ function get_theme($page = null){
     
     
      return $theme;
-    }
+     }
 
 function signature(){
      $signature = get_signature();
@@ -504,7 +504,7 @@ function get_menu($name = "top", $parent = null, $recursive = true){
          }else{
          $sql .= " = " . intval($parent) . " ";
         
-        }
+         }
     
      $sql .= " ORDER by position";
      $query = db_query($sql);
@@ -525,15 +525,15 @@ function get_menu($name = "top", $parent = null, $recursive = true){
          if(checkAccess($row -> access)){
              $html .= "  <li>" ;
              if(!empty($row -> alternate_title))
-                $title = $row -> alternate_title;
+                 $title = $row -> alternate_title;
              else
-                $title = $row->title;
+                 $title = $row -> title;
              if(get_requested_pagename() != $row -> systemname){
                  $html .= "<a href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" .
-                 $row -> target . "' title='".htmlentities($title, ENT_QUOTES, "UTF-8") ."'>";
+                 $row -> target . "' title='" . htmlentities($title, ENT_QUOTES, "UTF-8") . "'>";
                  }else{
-      
-                 $html .= "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "' title='".htmlentities($title, ENT_QUOTES, "UTF-8") ."'>";
+                
+                 $html .= "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "' title='" . htmlentities($title, ENT_QUOTES, "UTF-8") . "'>";
                  }
              if(!is_null($row -> menu_image) and !empty($row -> menu_image)){
                  $html .= '<img src="' . $row -> menu_image . '" alt="' . htmlentities($row -> title, ENT_QUOTES, "UTF-8") . '"/>';
@@ -549,15 +549,15 @@ function get_menu($name = "top", $parent = null, $recursive = true){
              $html .= "</li>";
             
              }
-        }
+         }
      $html .= "</ul>";
     
      return $html;
-    }
+     }
 
 function menu($name = "top", $parent = null, $recursive = true){
      echo get_menu($name, $parent, $recursive);
-    }
+     }
 
 
 
@@ -779,7 +779,7 @@ function checkAccess($access = ""){
              }
          }
      return null;
-    }
+     }
 
 
 function check_status(){

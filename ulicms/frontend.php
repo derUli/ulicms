@@ -65,7 +65,7 @@ $redirection = get_redirection();
 
 if($redirection){
      ulicms_redirect($redirection, 302);
-    }
+     }
 
 header("HTTP/1.0 " . $status);
 
@@ -114,8 +114,8 @@ $hasModul = containsModule(get_requested_pagename());
 
 // Kein Caching wenn man eingeloggt ist
 if(is_logged_in()){
- no_cache();
-}
+     no_cache();
+     }
 
 add_hook("before_html");
 

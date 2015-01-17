@@ -42,12 +42,12 @@ class PEAR_REST_13 extends PEAR_REST_10
      * @param string $base The uri to prepend to all REST calls
      * @param array $packageinfo an array of format:
      * <pre>
-     *      array(
-     *       'package' => 'packagename',
-     *       'channel' => 'channelname',
-     *      ['state' => 'alpha' (or valid state),]
-     *      -or-
-     *      ['version' => '1.whatever']
+     *       array(
+     *        'package' => 'packagename',
+     *        'channel' => 'channelname',
+     *       ['state' => 'alpha' (or valid state),]
+     *       -or-
+     *       ['version' => '1.whatever']
      * </pre>
      * @param string $prefstate Current preferred_state config variable value
      * @param bool $installed the installed version of this package to compare against

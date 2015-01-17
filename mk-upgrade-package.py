@@ -32,7 +32,6 @@ def main():
             for line in lines:
                 if "unlink(\"update.php" in line and line.startswith("//"):
                     line = line = line[2:]
-                line = line.strip()
                 print(line)
                 f.write(line)
 try:

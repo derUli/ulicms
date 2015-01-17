@@ -253,23 +253,23 @@ class Cache_Lite
      * 
      * $options is an assoc. Available options are :
      * $options = array(
-     *         'cacheDir' => directory where to put the cache files (string),
-     *         'caching' => enable / disable caching (boolean),
-     *         'lifeTime' => cache lifetime in seconds (int),
-     *         'fileLocking' => enable / disable fileLocking (boolean),
-     *         'writeControl' => enable / disable write control (boolean),
-     *         'readControl' => enable / disable read control (boolean),
-     *         'readControlType' => type of read control 'crc32', 'md5', 'strlen' (string),
-     *         'pearErrorMode' => pear error mode (when raiseError is called) (cf PEAR doc) (int),
-     *         'memoryCaching' => enable / disable memory caching (boolean),
-     *         'onlyMemoryCaching' => enable / disable only memory caching (boolean),
-     *         'memoryCachingLimit' => max nbr of records to store into memory caching (int),
-     *         'fileNameProtection' => enable / disable automatic file name protection (boolean),
-     *         'automaticSerialization' => enable / disable automatic serialization (boolean),
-     *         'automaticCleaningFactor' => distable / tune automatic cleaning process (int),
-     *         'hashedDirectoryLevel' => level of the hashed directory system (int),
-     *         'hashedDirectoryUmask' => umask for hashed directory structure (int),
-     *         'errorHandlingAPIBreak' => API break for better error handling ? (boolean)
+     *          'cacheDir' => directory where to put the cache files (string),
+     *          'caching' => enable / disable caching (boolean),
+     *          'lifeTime' => cache lifetime in seconds (int),
+     *          'fileLocking' => enable / disable fileLocking (boolean),
+     *          'writeControl' => enable / disable write control (boolean),
+     *          'readControl' => enable / disable read control (boolean),
+     *          'readControlType' => type of read control 'crc32', 'md5', 'strlen' (string),
+     *          'pearErrorMode' => pear error mode (when raiseError is called) (cf PEAR doc) (int),
+     *          'memoryCaching' => enable / disable memory caching (boolean),
+     *          'onlyMemoryCaching' => enable / disable only memory caching (boolean),
+     *          'memoryCachingLimit' => max nbr of records to store into memory caching (int),
+     *          'fileNameProtection' => enable / disable automatic file name protection (boolean),
+     *          'automaticSerialization' => enable / disable automatic serialization (boolean),
+     *          'automaticCleaningFactor' => distable / tune automatic cleaning process (int),
+     *          'hashedDirectoryLevel' => level of the hashed directory system (int),
+     *          'hashedDirectoryUmask' => umask for hashed directory structure (int),
+     *          'errorHandlingAPIBreak' => API break for better error handling ? (boolean)
      * );
      * 
      * If sys_get_temp_dir() is available and the 
@@ -445,7 +445,7 @@ class Cache_Lite
      * 
      * @param string $group name of the cache group
      * @param string $mode flush cache mode : 'old', 'ingroup', 'notingroup', 
-     *                                            'callback_myFunction'
+     *                                             'callback_myFunction'
      * @return boolean true if no problem
      * @access public 
      */

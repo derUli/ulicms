@@ -162,15 +162,15 @@ function openMenuImageSelectWindow(field) {
     
 <br/><br/>
 <strong><?php echo TRANSLATION_DESIGN;
-        ?></strong><br/>
+         ?></strong><br/>
 <select name="theme" size=1>
 <option value="">[<?php echo TRANSLATION_STANDARD;
-        ?>]</option>
+         ?>]</option>
 <?php foreach($allThemes as $th){
              ?>
 <option value="<?php echo $th;
              ?>"><?php echo $th;
-            ?></option>
+             ?></option>
 <?php }
          ?>
 </select>

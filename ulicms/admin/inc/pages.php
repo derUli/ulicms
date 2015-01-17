@@ -156,35 +156,35 @@ $(window).load(function(){
          ?>
          &nbsp; &nbsp;
          <?php echo TRANSLATION_MENU;
-        ?> 
+         ?> 
          <select name="filter_menu" onchange="filter_by_menu(this);">
 
 <?php
-        foreach($menus as $menu){
-            if($menu == "null")
+         foreach($menus as $menu){
+             if($menu == "null")
                  $name = "[" . TRANSLATION_EVERY . "]";
-            else
+             else
                  $name = $menu;
             
-            if($menu == $_SESSION["filter_menu"])
+             if($menu == $_SESSION["filter_menu"])
                  echo '<option value="' . $menu . '" selected>' . $name . "</option>";
-            else
+             else
                  echo '<option value="' . $menu . '">' . $name . "</option>";
             
-            }
+             }
         
-        ?>
+         ?>
          </select>
                   &nbsp; &nbsp;
          <?php echo TRANSLATION_PARENT;
-        ?> 
+         ?> 
          <select name="filter_parent" onchange="filter_by_parent(this);">
          <option value="null" <?php if("null" == $_SESSION["filter_parent"]) echo "selected";
-        ?>>[<?php echo TRANSLATION_EVERY;
-        ?>]</option>
+         ?>>[<?php echo TRANSLATION_EVERY;
+         ?>]</option>
             <option value="-" <?php if("-" == $_SESSION["filter_parent"]) echo "selected";
-        ?>>[<?php echo TRANSLATION_NONE;
-        ?>]</option>
+         ?>>[<?php echo TRANSLATION_NONE;
+         ?>]</option>
          <?php
         
          while($parent = db_fetch_object($parents)){
@@ -192,11 +192,11 @@ $(window).load(function(){
              $title = htmlspecialchars($parent -> title);
              if($parent_id == $_SESSION["filter_parent"])
                  echo '<option value="' . $parent_id . '" selected>' . $title . "</option>";
-            else
+             else
                  echo '<option value="' . $parent_id . '">' . $title . "</option>";
             
              }
-        ?>
+         ?>
 </select>
 
 
@@ -287,7 +287,7 @@ $(window).load(function(){
                  $filter_sql .= "AND parent = '" . intval($_SESSION["filter_parent"]) . "' ";
              else
                  $filter_sql .= "AND parent IS NULL ";
-            }
+             }
         
         
         

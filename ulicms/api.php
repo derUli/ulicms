@@ -328,7 +328,7 @@ function clearAPCCache(){
      apc_clear_cache('opcode');
      return true;
     
-    }
+     }
  function clearCache(){
      add_hook("before_clear_cache");
      $cache_type = getconfig("cache_type");
@@ -979,6 +979,8 @@ function is__writable($path)
 else
     
      return 0; // Or return error - invalid path...
+
+
 
 
 
