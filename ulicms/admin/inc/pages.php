@@ -226,8 +226,7 @@ else
          if($_SESSION["filter_menu"] != null){
             $filter_sql .= "AND menu = '".db_escape($_SESSION["filter_menu"])."' ";
          }
-         
-                   
+                       
          $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(db_error());
          if(db_num_rows($query) > 0){
              while($row = db_fetch_object($query)){
@@ -235,15 +234,8 @@ else
 <?php
                  echo '<tr>';
                  echo "<td style=\"width:40px;\">--&gt;</td>";
-                 echo "<td>";
-                 if(startsWith($row->redirection, "#"))
-                   echo "<strong>";
-                 echo htmlspecialchars($row -> title);
-                 
-                 if(startsWith($row->redirection, "#"))
-                   echo "</strong>";
-                 
-                 if(!empty($row->redirection) and !is_null($row->redirection) and !startsWith($row->redirection, "#"))
+                 echo "<td>" . htmlspecialchars($row -> title);
+                 if(!empty($row->redirection) and !is_null($row->redirection))
                    echo htmlspecialchars(" --> ").htmlspecialchars($row->redirection);
                  
                  echo "</td>";
