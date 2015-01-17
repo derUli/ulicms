@@ -4,6 +4,8 @@
          $page = db_escape($_GET["page"]);
          $query = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
         
+         $allThemes = getThemesList();
+         
          $groups = db_query("SELECT id, name from " . tbname("groups"));
          while($row = db_fetch_object($query)){
             
@@ -177,6 +179,20 @@ function openMenuImageSelectWindow(field) {
              ?>" style="width:300px;cursor:pointer" /> <a href="#" onclick="$('#menu_image').val('');return false;"><?php echo TRANSLATION_CLEAR;
              ?></a>
     
+   
+<br/><br/>
+
+<strong><?php echo TRANSLATION_DESIGN;?></strong><br/>
+<select name="theme" size=1>
+<option value="">[<?php echo TRANSLATION_STANDARD;?>]</option>
+<?php foreach($allThemes as $th){
+         ?>
+<option value="<?php echo $th;
+         ?>" <?php if(!is_null($row->theme) and !empty($row->theme) and $row->theme == $th) echo "selected";?>><?php echo $th;?></option>
+<?php }
+     ?>
+</select>
+   
 <br/><br/>
 
 <strong><?php echo TRANSLATION_HTML_FILE;

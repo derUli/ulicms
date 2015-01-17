@@ -3,6 +3,7 @@
      $groups = db_query("SELECT id, name from " . tbname("groups"));
      if($acl -> hasPermission("pages")){
         
+     $allThemes = getThemesList();
         
          ?>
 <form id="pageform" name="newpageform" action="index.php?action=pages" method="post">
@@ -160,6 +161,19 @@ function openMenuImageSelectWindow(field) {
          ?></a>
     
 <br/><br/>
+<strong><?php echo TRANSLATION_DESIGN;?></strong><br/>
+<select name="theme" size=1>
+<option value="">[<?php echo TRANSLATION_STANDARD;?>]</option>
+<?php foreach($allThemes as $th){
+         ?>
+<option value="<?php echo $th;
+         ?>"><?php echo $th;?></option>
+<?php }
+     ?>
+</select>
+
+<br/><br/>
+
 <strong><?php echo TRANSLATION_HTML_FILE;
          ?></strong>
 <br/>
