@@ -2,15 +2,16 @@
 class categories
 {
     
-     public static function updateCategory($id, $name){
-         $sql = "UPDATE " . tbname("categories") . " SET name='" . db_escape($name) . "' WHERE id=" . $id;
+     public static function updateCategory($id, $name, $description = ''){
+         $sql = "UPDATE " . tbname("categories") . " SET name='" . db_escape($name) . "', description = '".db_escape($description)."' WHERE id=" . $id;
          return db_query($sql);
          }
     
-     public static function addCategory($name = null){
+     public static function addCategory($name = null, $description = ""){
          if(is_null($name) or empty($name))
              return null;
-         $sqlString = "INSERT INTO " . tbname("categories") . " (name) VALUES('" . db_escape($name) . "')";
+         $sqlString = "INSERT INTO " . tbname("categories") . " (name, description) 
+         VALUES('" . db_escape($name) ."', '".db_escape($description)."')";
          db_query($sqlString);
          return db_insert_id();
          }
@@ -48,9 +49,22 @@ class categories
          db_query($sqlMoveCategoryBannerString);
         
          }
+         
+     public static function getCategoryDescriptionById($id){
+         $sqlString = "SELECT description FROM " . tbname("categories") . " WHERE id=" . $id;
+         $result = db_query($sqlString);
+         if(db_num_rows($result) > 0){
+             $row = db_fetch_assoc($result);
+            
+             return $row["description"];
+             }
+        
+         return null;
+        
+         }
     
      public static function getCategoryById($id){
-         $sqlString = "SELECT * FROM " . tbname("categories") . " WHERE id=" . $id;
+         $sqlString = "SELECT name FROM " . tbname("categories") . " WHERE id=" . $id;
          $result = db_query($sqlString);
          if(db_num_rows($result) > 0){
              $row = db_fetch_assoc($result);
