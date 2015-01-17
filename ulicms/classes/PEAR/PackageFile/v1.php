@@ -1571,10 +1571,10 @@ class PEAR_PackageFile_v1
      * analyzeSourceCode().  The format of the built array is like
      * this:
      * 
-     *       array(
-     *         'class;MyClass' => 'array('type' => 'class', 'name' => 'MyClass'),
-     *         ...
-     *       )
+     *           array(
+     *             'class;MyClass' => 'array('type' => 'class', 'name' => 'MyClass'),
+     *             ...
+     *           )
      * 
      * @param array $srcinfo array with information about a source file
      * as returned by the analyzeSourceCode() method.
