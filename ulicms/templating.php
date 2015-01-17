@@ -524,11 +524,16 @@ function get_menu($name = "top", $parent = null, $recursive = true){
      while($row = db_fetch_object($query)){
          if(checkAccess($row -> access)){
              $html .= "  <li>" ;
+             if(!empty($row -> alternate_title))
+                $title = $row -> alternate_title;
+             else
+                $title = $row->title;
              if(get_requested_pagename() != $row -> systemname){
                  $html .= "<a href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" .
-                 $row -> target . "'>";
+                 $row -> target . "' title='".htmlentities($title, ENT_QUOTES, "UTF-8") ."'>";
                  }else{
-                 $html .= "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "'>";
+      
+                 $html .= "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "' title='".htmlentities($title, ENT_QUOTES, "UTF-8") ."'>";
                  }
              if(!is_null($row -> menu_image) and !empty($row -> menu_image)){
                  $html .= '<img src="' . $row -> menu_image . '" alt="' . htmlentities($row -> title, ENT_QUOTES, "UTF-8") . '"/>';
