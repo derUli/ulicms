@@ -176,7 +176,8 @@ else
                   &nbsp; &nbsp;
          <?php echo TRANSLATION_PARENT;?> 
          <select name="filter_parent" onchange="filter_by_parent(this);">
-         <option value="null" <?php if("null" == $_SESSION["filter_menu"]) echo "selected";?>>[<?php echo TRANSLATION_EVERY;?>]</option>
+         <option value="null" <?php if("null" == $_SESSION["filter_parent"]) echo "selected";?>>[<?php echo TRANSLATION_EVERY;?>]</option>
+            <option value="-" <?php if("-" == $_SESSION["filter_parent"]) echo "selected";?>>[<?php echo TRANSLATION_NONE;?>]</option>
          <?php 
          
          while($parent = db_fetch_object($parents)){
@@ -274,8 +275,12 @@ else
          
                  
          if($_SESSION["filter_parent"] != null){
+         if($_SESSION["filter_parent"] != "-")
             $filter_sql .= "AND parent = '".intval($_SESSION["filter_parent"])."' ";
-         }
+         else 
+           $filter_sql .= "AND parent IS NULL ";
+}
+         
              
                        
          $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(db_error());
