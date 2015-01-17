@@ -58,9 +58,9 @@ function get_theme($page = null){
      if(is_200()){
          $sql = "SELECT `theme` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
          $query = db_query($sql);
-         if(db_num_rows($query) > 0){
+         if($query and db_num_rows($query) > 0){
              $data = db_fetch_object($query);
-             if(!empty($data -> theme) and !is_null($data -> theme)){
+             if(isset($data->theme) and !empty($data -> theme) and !is_null($data -> theme)){
                  $theme = $data -> theme;
                  }
              }
