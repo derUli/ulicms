@@ -44,11 +44,11 @@
 <br/><br/>
 <strong><?php echo TRANSLATION_FIRSTNAME;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="admin_firstname" value="<?php echo $row -> firstname;
+<input type="text" style="width:300px;" required="true" name="admin_firstname" value="<?php echo $row -> firstname;
              ?>"><br/><br/>
 <strong><?php echo TRANSLATION_EMAIL;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="admin_email" value="<?php echo $row -> email;
+<input type="email" style="width:300px;" name="admin_email" value="<?php echo $row -> email;
              ?>"><br/><br/>
 <strong><?php echo TRANSLATION_NEW_PASSWORD;
              ?></strong><br/>
