@@ -105,7 +105,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
          ?></h2>
 <form action="?action=categories" method="post">
 <p><?php echo TRANSLATION_NAME;
-         ?> <input type="text" name="name" required="true" value="">
+         ?> <input type="text" required="true" name="name" required="true" value="">
         
         </p>
         
