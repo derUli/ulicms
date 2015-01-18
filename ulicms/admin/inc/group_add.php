@@ -9,7 +9,7 @@ $all_permissions = $acl -> getDefaultACL(true, true);
 ?>
 <form action="?action=groups" method="post">
 <p><strong><?php echo TRANSLATION_NAME;
-?></strong> <input type="text" name="name" value=""></p>
+?></strong> <input type="text" required="true" name="name" value=""></p>
 <p><strong><?php echo TRANSLATION_PERMISSIONS;
 ?></strong></p>
 <fieldset>

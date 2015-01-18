@@ -23,7 +23,7 @@ if($all_permissions){
 <input type="hidden" name="id" value="<?php echo $id;
      ?>">
 <p><strong><?php echo TRANSLATION_NAME;
-     ?></strong> <input type="text" name="name" value="<?php echo $groupName;
+     ?></strong> <input type="text"  required="true" name="name" value="<?php echo $groupName;
      ?>"></p>
 <p><strong><?php echo TRANSLATION_PERMISSIONS;
      ?></strong></p>
