@@ -53,7 +53,7 @@
 <tr>
 <td><strong><?php echo TRANSLATION_OWNER_MAILADRESS;
          ?></strong></td>
-<td><input type="text" name="email" style="width:400px" value="<?php echo $settings["email"];
+<td><input type="email" name="email" style="width:400px" value="<?php echo $settings["email"];
          ?>"></td>
 </tr>
 <tr>
