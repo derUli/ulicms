@@ -23,12 +23,12 @@
 
 <strong><?php echo TRANSLATION_PERMALINK;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="page_" value="<?php echo $row -> systemname;
+<input type="text" style="width:300px;" required="true" name="page_" value="<?php echo $row -> systemname;
              ?>">
 <br/><br/>
 <strong><?php echo TRANSLATION_PAGE_TITLE;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="page_title" value='<?php
+<input type="text" style="width:300px;" required="true"  name="page_title" value='<?php
              echo htmlspecialchars($row -> title);
             
              ?>'>
@@ -101,7 +101,7 @@
 
 <strong><?php echo TRANSLATION_POSITION;
              ?></strong><br/>
-<input type="text" name="position" value="<?php echo $row -> position;
+<input type="text" name="position" required="true" value="<?php echo $row -> position;
              ?>">
               
 <br/><br/>

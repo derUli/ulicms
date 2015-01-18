@@ -10,12 +10,12 @@
 
 <strong><?php echo TRANSLATION_PERMALINK;
          ?></strong><br/>
-<input type="text" style="width:300px;" name="system_title" value="">
+<input type="text" style="width:300px;" name="system_title" required="true" value="">
 <br/><br/>
 
 <strong><?php echo TRANSLATION_PAGE_TITLE;
          ?></strong><br/>
-<input type="text" style="width:300px;" name="page_title" value="" onkeyup="systemname_vorschlagen(this.value)">
+<input type="text" required="true" style="width:300px;" name="page_title" value="" onkeyup="systemname_vorschlagen(this.value)">
 <br/><br/>
 
 <strong><?php echo TRANSLATION_ALTERNATE_TITLE;
@@ -77,7 +77,7 @@
 
 <strong><?php echo TRANSLATION_POSITION;
          ?></strong><br/>
-<input type="text" name="position" value="0">
+<input type="text" required="true" name="position" value="0">
               
 <br/><br/>
 
