@@ -93,7 +93,7 @@ class PEAR_PackageFile_Parser_v2 extends PEAR_XMLParser
      * @param string $ file name of the package.xml
      * @param string $ |false name of the archive this package.xml came from, if any
      * @param string $ class name to instantiate and return.  This must be PEAR_PackageFile_v2 or
-     *                         a subclass
+     *                          a subclass
      * @return PEAR_PackageFile_v2 
      */
      function & parse($data, $file, $archive = false, $class = 'PEAR_PackageFile_v2')

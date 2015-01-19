@@ -229,9 +229,9 @@ class PEAR_Installer_Role
      * and see what commands they implement.
      * 
      * @param string $ which directory to look for classes, defaults to
-     *                         the Installer/Roles subdirectory of
-     *                         the directory from where this file (__FILE__) is
-     *                         included.
+     *                          the Installer/Roles subdirectory of
+     *                          the directory from where this file (__FILE__) is
+     *                          included.
      * @return bool TRUE on success, a PEAR error on failure
      * @access public 
      * @static 
