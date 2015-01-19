@@ -124,7 +124,6 @@ function delete_custom_data($var = null, $page = null){
      return db_query("UPDATE " . tbname("content") . " SET custom_data = '" . db_escape($json) . "' WHERE systemname='" . db_escape($page) . "'");
      }
 function set_custom_data($var, $value, $page = null){
-    
      if(!$page)
          $page = get_requested_pagename();
     
