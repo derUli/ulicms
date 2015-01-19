@@ -21,7 +21,9 @@ $font = 'dejavusanscondensed'; // Use internal mPDF font-name
 
 
 
+
 $showmissing = true; // Show all missing unicode blocks / characters
+
 
 
 
@@ -236,6 +238,7 @@ for ($i = 32; $i < $max; ++$i){
 // ==============================================================
 // ==============================================================
 $mpdf -> WriteHTML($html); // Separate Paragraphs  defined by font
+
 
 
 

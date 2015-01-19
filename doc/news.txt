@@ -10,6 +10,7 @@ entsprechende PHP-Modul installiert ist.
 + Seiten filtern nach Menü und übergeordneter Seite nun möglich
 + Theme nun pro Seite festlegbar
 + Kategorien haben nun auch eine Beschreibung
++ HTML5 required Attribut hinzugefügt
 
 ﻿===== Neues in UliCMS 7.2.1 ====
 + CKEditor auf Version 4.4.5 aktualisiert

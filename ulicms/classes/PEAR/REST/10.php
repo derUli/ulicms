@@ -49,12 +49,12 @@ class PEAR_REST_10
      * @param string $base The uri to prepend to all REST calls
      * @param array $packageinfo an array of format:
      * <pre>
-     *           array(
-     *            'package' => 'packagename',
-     *            'channel' => 'channelname',
-     *           ['state' => 'alpha' (or valid state),]
-     *           -or-
-     *           ['version' => '1.whatever']
+     *            array(
+     *             'package' => 'packagename',
+     *             'channel' => 'channelname',
+     *            ['state' => 'alpha' (or valid state),]
+     *            -or-
+     *            ['version' => '1.whatever']
      * </pre>
      * @param string $prefstate Current preferred_state config variable value
      * @param bool $installed the installed version of this package to compare against
@@ -250,11 +250,11 @@ class PEAR_REST_10
      * @param string $base REST base uri
      * @param string $package Package name
      * @param array $release an array of format array('v' => version, 's' => state)
-     *                                describing the release to download
+     *                                 describing the release to download
      * @param array $info list of all releases as defined by allreleases.xml
      * @param bool $ |null $found determines whether the release was found or this is the next
-     *                             best alternative.  If null, then versions were skipped because
-     *                             of PHP dependency
+     *                              best alternative.  If null, then versions were skipped because
+     *                              of PHP dependency
      * @return array |PEAR_Error
      * @access private 
      */
