@@ -1,0 +1,14 @@
+body{
+background-color:white;
+font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
+font-size:12pt;
+color:black;
+}
+
+img{
+border:0px;
+}
+
+.ulicms_error{
+color:red;
+}
