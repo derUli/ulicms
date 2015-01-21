@@ -1,5 +1,5 @@
 #accordion-container {
-	font-size: 13px;
+	font-size:0.8em;
 	background: #ffffff;
 	padding: 5px 10px 10px 10px;
 	border: 1px solid #cccccc;
@@ -15,7 +15,6 @@
 }
 
 .accordion-header {
-	font-size: 16px;
 	background: #ebebeb;
 	margin: 5px 0 0 0;
 	padding: 5px 20px;

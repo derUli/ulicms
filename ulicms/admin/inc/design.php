@@ -42,7 +42,6 @@ if(!is_admin()){
         
          setconfig("ckeditor_skin", db_escape($_REQUEST["ckeditor_skin"]));
         
-         setconfig("backend_style", db_escape($_REQUEST["backend_style"]));
         
         
          if(getconfig("header-background-color")
@@ -73,9 +72,6 @@ if(!is_admin()){
      include_once "inc/fonts.php";
      $fonts = getFontFamilys();
     
-     $backend_style = getconfig("backend_style");
-     if(!$backend_style)
-         $backend_style = "green";
     
     
      $default_font = getconfig("default-font");
@@ -129,27 +125,6 @@ width:200px;
      ?>
 </select>
 </td>
-</tr>
-<tr>
-    <td>
-        <strong><?php echo TRANSLATION_BACKEND_DESIGN;
-     ?></strong>
-    </td>
-    <td>
-<select name="backend_style" size=1>
-<option value="green"<?php
-     if($backend_style === "green")
-         echo " selected"
-         ?>><?php echo TRANSLATION_GREEN;
-     ?></option>
-<option value="black"<?php
-     if($backend_style === "black")
-         echo " selected"
-         ?>><?php echo TRANSLATION_BLACK;
-     ?></option>
-</select>
-
-    </td>
 </tr>
 <tr>
     <td>

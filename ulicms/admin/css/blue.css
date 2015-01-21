@@ -129,7 +129,18 @@ text-align:center;
 
 table{
 margin-top:30px;
+border:outline 1px rgb(230,230,230);
+width:100%;
 }
+
+
+table tr td{
+   padding:5px;
+}
+
+table tr:nth-child(odd)    { background-color:#eee; }
+table tr:nth-child(even)   { background-color:#fff; }
+
 
 .menu ul {
     opacity:0;
