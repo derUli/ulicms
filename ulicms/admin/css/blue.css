@@ -152,9 +152,10 @@ input[type="password"],
 input[type="email"],
 input[type="number"],
 input[type="phone"], 
+input[type="color"],
+input.color,
 select,
-textarea, 
-select{
+textarea{
 background-color:rgb(253, 253, 253);
 width:100%;
 }

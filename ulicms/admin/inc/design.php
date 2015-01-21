@@ -81,12 +81,6 @@ if(!is_admin()){
      $ckeditor_skin = getconfig("ckeditor_skin");
     
      ?>
-<style type="text/css">
-input[type="text"], select,
-input.color{
-width:200px;
-}
-</style>
 <h1><?php echo TRANSLATION_DESIGN;
      ?></h1>
 <form id="designForm" action="index.php?action=design" method="post">
