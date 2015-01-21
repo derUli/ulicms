@@ -1126,7 +1126,7 @@ function tbname($name){
 function cms_version(){
  require_once "version.php";
  $v = new ulicms_version();
- return implode(".", $v -> getInternalVersion()) . " " . $v -> getUpdate();
+ return implode(".", $v -> getInternalVersion());
  }
 
 
