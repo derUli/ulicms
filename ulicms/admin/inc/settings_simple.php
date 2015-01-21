@@ -19,7 +19,7 @@
          ?></h2>
 <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
 <form id="settings_simple" action="index.php?action=save_settings" method="post">
-<table border=1>
+<table>
 <tr>
 <td><strong><?php echo TRANSLATION_HOMEPAGE_TITLE;
          ?></strong></td>
