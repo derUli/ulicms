@@ -205,7 +205,7 @@ $(window).load(function(){
 
 <br/>
 
-<table border=1>
+<table>
 <tr style="font-weight:bold;">
 <td><a href="?action=pages&order=title"><?php echo TRANSLATION_TITLE;
          ?></a></td>
