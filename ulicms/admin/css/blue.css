@@ -153,8 +153,10 @@ input[type="email"],
 input[type="number"],
 input[type="phone"], 
 select,
-textarea{
+textarea, 
+select{
 background-color:rgb(253, 253, 253);
+width:100%;
 }
 
 input, select, table, tr, td{

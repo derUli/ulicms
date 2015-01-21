@@ -35,14 +35,14 @@
 <tr>
 <td><strong><?php echo TRANSLATION_HOMEPAGE_OWNER;
          ?></strong></td>
-<td><input type="text" name="homepage_owner" style="width:400px" value="<?php echo $settings["homepage_owner"];
+<td><input type="text" name="homepage_owner" value="<?php echo $settings["homepage_owner"];
          ?>"></td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_HIDE_LOGO;
          ?></strong></strong></td>
 <td>
-<select name="logo_disabled" style="width:400px" size=1>
+<select name="logo_disabled" size=1>
 <option <?php if (getconfig("logo_disabled") == "yes") echo 'selected '?> value="yes"><?php echo TRANSLATION_YES;
          ?></option>
 <option <?php if (getconfig("logo_disabled") != "yes") echo 'selected '?> value="no"><?php echo TRANSLATION_NO;
@@ -53,7 +53,7 @@
 <tr>
 <td><strong><?php echo TRANSLATION_OWNER_MAILADRESS;
          ?></strong></td>
-<td><input type="email" name="email" style="width:400px" value="<?php echo $settings["email"];
+<td><input type="email" name="email" value="<?php echo $settings["email"];
          ?>"></td>
 </tr>
 <tr>
@@ -143,7 +143,7 @@
 <td><strong><?php echo TRANSLATION_COMMENTING_SYSTEM;
          ?></td>
 <td>
-<select name="comment_mode" size=1 style="width:100%;">
+<select name="comment_mode" size=1>
 <!-- <option value="intern" <?php if($settings["comment_mode"] == "intern"){
              echo 'selected';
              }
@@ -168,19 +168,19 @@
 <td><strong><?php echo TRANSLATION_FACEBOOK_ID;
          ?></strong></td>
 <td><input type="text" name="facebook_id" value="<?php echo $settings["facebook_id"];
-         ?>" style="width:400px">
+         ?>">
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_DISQUS_SHORTNAME;
          ?></strong></td>
 <td><input type="text" name="disqus_id" value="<?php echo $settings["disqus_id"];
-         ?>" style="width:400px">
+         ?>">
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_TIMEZONE;
          ?></strong></td>
 <td>
-<select name="timezone" size=1 style="width:100%;">
+<select name="timezone" size=1>
 <?php
          $timezones = file("inc/timezones.txt");
         
@@ -205,7 +205,7 @@
 <td><strong><?php echo TRANSLATION_SEARCH_ENGINES;
          ?></strong></td>
 <td>
-<select name="robots" size=1 style="width:100%;">
+<select name="robots" size=1>
 <?php
          if(getconfig("robots") == "noindex,nofollow"){
              ?>
@@ -230,7 +230,7 @@
          ?>
 <tr>
 <td>
-<td align="center"><input type="submit" value="OK" style="width:45%;"></td>
+<td align="center"><input type="submit" value="OK" style="width:100%;"></td>
 </tr>
 </table>
 <input type="hidden" name="save_settings" value="save_settings">
