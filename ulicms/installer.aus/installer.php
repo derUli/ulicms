@@ -368,6 +368,7 @@ if(!isset($_REQUEST["step"])){
   `deleted_at` bigint(20) DEFAULT NULL,
   `html_file` varchar(255) DEFAULT NULL,
   `theme` varchar(200) null,
+  `custom_data` varchar(255) NULL DEFAULT '{}',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
@@ -517,10 +518,6 @@ ON DELETE SET NULL";
              $constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `" . $prefix . "users`(`id`) 
 ON DELETE SET NULL";
              mysqli_query($connection, $constraint4);
-            
-             $add_custom_data = "ALTER TABLE `" . $prefix . "content` ADD `custom_data` varchar(255) NULL DEFAULT '{}'";
-             mysqli_query($connection, $add_custom_data);
-            
             
             /**
              * $constraint5 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`) 
