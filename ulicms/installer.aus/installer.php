@@ -367,6 +367,7 @@ if(!isset($_REQUEST["step"])){
   `meta_keywords` text NOT NULL,
   `deleted_at` bigint(20) DEFAULT NULL,
   `html_file` varchar(255) DEFAULT NULL,
+  `theme` varchar(200) null,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
@@ -480,7 +481,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
         
          $sql_categories_table = "CREATE TABLE " . $prefix . "categories (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-          name VARCHAR(100)
+          name VARCHAR(100),
+          `description` TEXT NULL DEFAULT ''
           ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
          mysqli_query($connection, $sql_categories_table);
         
