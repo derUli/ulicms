@@ -43,8 +43,8 @@ class Cache_Lite_File extends Cache_Lite
      * 
      * Comparing to Cache_Lite constructor, there is another option :
      * $options = array(
-     *                     (...) see Cache_Lite constructor
-     *                     'masterFile' => complete path of the file used for controlling the cache lifetime(string)
+     *                      (...) see Cache_Lite constructor
+     *                      'masterFile' => complete path of the file used for controlling the cache lifetime(string)
      * );
      * 
      * @param array $options options

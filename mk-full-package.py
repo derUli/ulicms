@@ -12,7 +12,7 @@ def main():
     source_dir = os.path.dirname(__file__)
 
     ignore = ('.git', "doc-src", "phpCB-1.0.1-linux", "*.py", "*.pyc",
-              "Releases", "cms-config.php", "services", "update.php"
+              "Releases", "cms-config.php", "services", "update.php",
               ".gitignore", "cache")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
