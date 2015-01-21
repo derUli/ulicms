@@ -1,3 +1,0 @@
-Sichern Sie bitte vor der Installation des Updates Ihre MySQL Datenbank und die Dateien auf Ihrem FTP-Server!
-
-Bei der Installation von Service Pack 1 werden Änderungen an der Datenbank vorgenommen.
