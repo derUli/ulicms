@@ -7,6 +7,10 @@ margin:0;
 padding:0;
 }
 
+.CodeMirror{
+margin-bottom:20px;
+}
+
 img{
 border:0px;
 }
@@ -189,6 +193,12 @@ table tr:nth-child(even)   { background-color:#fff; }
     float:none;
     margin:0;
 }
+
+p{
+width:100%;
+line-height:1.5em;
+}
+
 .menu ul a {
     font-weight:normal;
     text-shadow:0 2px 2px rgba(255,255,255, 0.7);
