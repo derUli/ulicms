@@ -55,7 +55,7 @@ if(!$acl -> hasPermission("pkg_settings")){
      else
          echo 'style="display:none"';
      ?>>
-<input style="width:400px" type="text" id="pkg_src" name="pkg_src" value="<?php echo htmlspecialchars($pkg_src);
+<input type="text" id="pkg_src" name="pkg_src" value="<?php echo htmlspecialchars($pkg_src);
      ?>">
 </div>
 

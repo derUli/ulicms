@@ -23,12 +23,12 @@
 
 <strong><?php echo TRANSLATION_PERMALINK;
              ?></strong><br/>
-<input type="text" style="width:300px;" required="true" name="page_" value="<?php echo $row -> systemname;
+<input type="text"  required="true" name="page_" value="<?php echo $row -> systemname;
              ?>">
 <br/><br/>
 <strong><?php echo TRANSLATION_PAGE_TITLE;
              ?></strong><br/>
-<input type="text" style="width:300px;" required="true"  name="page_title" value='<?php
+<input type="text"  required="true"  name="page_title" value='<?php
              echo htmlspecialchars($row -> title);
             
              ?>'>
@@ -36,7 +36,7 @@
 
 <strong><?php echo TRANSLATION_ALTERNATE_TITLE;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="alternate_title" value="<?php
+<input type="text"  name="alternate_title" value="<?php
              echo htmlspecialchars($row -> alternate_title);
             
              ?>"><br/>
@@ -151,7 +151,7 @@
 
 <strong><?php echo TRANSLATION_EXTERNAL_REDIRECT;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="redirection" value="<?php echo $row -> redirection;
+<input type="text"  name="redirection" value="<?php echo $row -> redirection;
              ?>">
 
 
@@ -176,7 +176,7 @@ function openMenuImageSelectWindow(field) {
 </script>
 <input type="text" id="menu_image" name="menu_image" readonly="readonly" onclick="openMenuImageSelectWindow(this)"
     value="<?php echo $row -> menu_image;
-             ?>" style="width:300px;cursor:pointer" /> <a href="#" onclick="$('#menu_image').val('');return false;"><?php echo TRANSLATION_CLEAR;
+             ?>" style="cursor:pointer" /><br/><a href="#" onclick="$('#menu_image').val('');return false;"><?php echo TRANSLATION_CLEAR;
              ?></a>
     
    
@@ -202,7 +202,7 @@ function openMenuImageSelectWindow(field) {
 <strong><?php echo TRANSLATION_HTML_FILE;
              ?></strong>
 <br/>
-<input type="text" style="width:300px;" name="html_file" value="<?php echo $row -> html_file;
+<input type="text"  name="html_file" value="<?php echo $row -> html_file;
              ?>">
 <br/><br/>
 
@@ -234,7 +234,7 @@ function openMenuImageSelectWindow(field) {
 
 <strong><?php echo TRANSLATION_META_DESCRIPTION;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="meta_description" value='<?php
+<input type="text"  name="meta_description" value='<?php
              echo htmlspecialchars($row -> meta_description);
              ?>'>
 
@@ -242,7 +242,7 @@ function openMenuImageSelectWindow(field) {
 
 <strong><?php echo TRANSLATION_META_KEYWORDS;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="meta_keywords" value='<?php
+<input type="text"  name="meta_keywords" value='<?php
              echo htmlspecialchars($row -> meta_keywords);
              ?>'>
  

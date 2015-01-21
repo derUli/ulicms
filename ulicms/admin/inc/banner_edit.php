@@ -40,17 +40,17 @@
 
 <strong><?php echo TRANSLATION_BANNERTEXT;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="banner_name" value="<?php echo $row -> name;
+<input type="text" name="banner_name" value="<?php echo $row -> name;
              ?>">
 <br/><br/>
 <strong><?php echo TRANSLATION_IMAGE_URL;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="image_url" value="<?php echo $row -> image_url;
+<input type="text" name="image_url" value="<?php echo $row -> image_url;
              ?>">
 <br/><br/>
 <strong><?php echo TRANSLATION_LINK_URL;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="link_url" value="<?php echo $row -> link_url;
+<input type="text" name="link_url" value="<?php echo $row -> link_url;
              ?>">
              </fieldset>
 <br/>

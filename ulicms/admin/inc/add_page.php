@@ -10,17 +10,17 @@
 
 <strong><?php echo TRANSLATION_PERMALINK;
          ?></strong><br/>
-<input type="text" style="width:300px;" name="system_title" required="true" value="">
+<input type="text" name="system_title" required="true" value="">
 <br/><br/>
 
 <strong><?php echo TRANSLATION_PAGE_TITLE;
          ?></strong><br/>
-<input type="text" required="true" style="width:300px;" name="page_title" value="" onkeyup="systemname_vorschlagen(this.value)">
+<input type="text" required="true" name="page_title" value="" onkeyup="systemname_vorschlagen(this.value)">
 <br/><br/>
 
 <strong><?php echo TRANSLATION_ALTERNATE_TITLE;
          ?></strong><br/>
-<input type="text" style="width:300px;" name="alternate_title" value=""><br/>
+<input type="text" name="alternate_title" value=""><br/>
 <small><?php echo TRANSLATION_ALTERNATE_TITLE_INFO;
          ?></small>
 <br/><br/>
@@ -137,7 +137,7 @@ document.newpageform.system_title.value=systemname
 <fieldset id="extra_options">
 <strong><?php echo TRANSLATION_EXTERNAL_REDIRECT;
          ?></strong><br/>
-<input type="text" style="width:300px;" name="redirection" value="">
+<input type="text" name="redirection" value="">
 <br/><br/>
 <strong><?php echo TRANSLATION_MENU_IMAGE;
          ?></strong><br/>
@@ -157,7 +157,7 @@ function openMenuImageSelectWindow(field) {
 }
 </script>
 <input type="text" id="menu_image" name="menu_image" readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-    value="" style="width:300px;cursor:pointer" /> <a href="#" onclick="$('#menu_image').val('');return false;"><?php echo TRANSLATION_CLEAR;
+    value="" style="cursor:pointer" /><br/><a href="#" onclick="$('#menu_image').val('');return false;"><?php echo TRANSLATION_CLEAR;
          ?></a>
     
 <br/><br/>
@@ -180,7 +180,7 @@ function openMenuImageSelectWindow(field) {
 <strong><?php echo TRANSLATION_HTML_FILE;
          ?></strong>
 <br/>
-<input type="text" style="width:300px;" name="html_file" value="">
+<input type="text" name="html_file" value="">
 <br/><br/>
 <strong><?php echo TRANSLATION_VISIBLE_FOR;
          ?></strong><br/>
@@ -202,12 +202,12 @@ function openMenuImageSelectWindow(field) {
 
 <strong><?php echo TRANSLATION_META_DESCRIPTION;
          ?></strong><br/>
-<input type="text" style="width:300px;" name="meta_description" value=''>
+<input type="text" name="meta_description" value=''>
 <br/><br/>
 
 <strong><?php echo TRANSLATION_META_KEYWORDS;
          ?></strong><br/>
-<input type="text" style="width:300px;" name="meta_keywords" value=''>
+<input type="text" name="meta_keywords" value=''>
  
 <br/><br/>
 

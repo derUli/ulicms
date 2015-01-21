@@ -132,7 +132,7 @@ $GLOBALS['_PEAR_Common_script_phases'] = array('pre-install', 'post-install', 'p
  * @link http://pear.php.net/package/PEAR
  * @since Class available since Release 1.4.0a1
  * @deprecated This class will disappear, and its components will be spread
- *                         into smaller classes, like the AT&T breakup, as of Release 1.4.0a1
+ *                            into smaller classes, like the AT&T breakup, as of Release 1.4.0a1
  */
 class PEAR_Common extends PEAR
 {
@@ -280,8 +280,8 @@ class PEAR_Common extends PEAR
      * Create and register a temporary directory.
      * 
      * @param string $tmpdir (optional) Directory to use as tmpdir.
-     *                                   Will use system defaults (for example
-     *                                   /tmp or c:\windows\temp) if not specified
+     *                                      Will use system defaults (for example
+     *                                      /tmp or c:\windows\temp) if not specified
      * @return string name of created directory
      * @access public 
      */
@@ -614,11 +614,11 @@ class PEAR_Common extends PEAR
      * Validate XML package definition file.
      * 
      * @param string $info Filename of the package archive or of the
-     *                            package definition file
+     *                               package definition file
      * @param array $errors Array that will contain the errors
      * @param array $warnings Array that will contain the warnings
      * @param string $dir_prefix (optional) directory where source files
-     *                            may be found, or empty if they are not available
+     *                               may be found, or empty if they are not available
      * @access public 
      * @return boolean 
      * @deprecated use the validation of PEAR_PackageFile objects
@@ -658,10 +658,10 @@ class PEAR_Common extends PEAR
      * analyzeSourceCode().  The format of the built array is like
      * this:
      * 
-     *              array(
-     *                'class;MyClass' => 'array('type' => 'class', 'name' => 'MyClass'),
-     *                ...
-     *              )
+     *                 array(
+     *                   'class;MyClass' => 'array('type' => 'class', 'name' => 'MyClass'),
+     *                   ...
+     *                 )
      * 
      * @param array $srcinfo array with information about a source file
      * as returned by the analyzeSourceCode() method.
@@ -782,24 +782,24 @@ class PEAR_Common extends PEAR
      * parameters: the callback type, and parameters.  The implemented
      * callback types are:
      * 
-     *              'setup'       called at the very beginning, parameter is a UI object
-     *                            that should be used for all output
-     *              'message'     the parameter is a string with an informational message
-     *              'saveas'      may be used to save with a different file name, the
-     *                            parameter is the filename that is about to be used.
-     *                            If a 'saveas' callback returns a non-empty string,
-     *                            that file name will be used as the filename instead.
-     *                            Note that $save_dir will not be affected by this, only
-     *                            the basename of the file.
-     *              'start'       download is starting, parameter is number of bytes
-     *                            that are expected, or -1 if unknown
-     *              'bytesread'   parameter is the number of bytes read so far
-     *              'done'        download is complete, parameter is the total number
-     *                            of bytes read
-     *              'connfailed'  if the TCP connection fails, this callback is called
-     *                            with array(host,port,errno,errmsg)
-     *              'writefailed' if writing to disk fails, this callback is called
-     *                            with array(destfile,errmsg)
+     *                 'setup'       called at the very beginning, parameter is a UI object
+     *                               that should be used for all output
+     *                 'message'     the parameter is a string with an informational message
+     *                 'saveas'      may be used to save with a different file name, the
+     *                               parameter is the filename that is about to be used.
+     *                               If a 'saveas' callback returns a non-empty string,
+     *                               that file name will be used as the filename instead.
+     *                               Note that $save_dir will not be affected by this, only
+     *                               the basename of the file.
+     *                 'start'       download is starting, parameter is number of bytes
+     *                               that are expected, or -1 if unknown
+     *                 'bytesread'   parameter is the number of bytes read so far
+     *                 'done'        download is complete, parameter is the total number
+     *                               of bytes read
+     *                 'connfailed'  if the TCP connection fails, this callback is called
+     *                               with array(host,port,errno,errmsg)
+     *                 'writefailed' if writing to disk fails, this callback is called
+     *                               with array(destfile,errmsg)
      * 
      * If an HTTP proxy has been configured (http_proxy PEAR_Config
      * setting), the proxy will be used.
@@ -809,12 +809,12 @@ class PEAR_Common extends PEAR
      * @param object $config PEAR_Config instance
      * @param string $save_dir (optional) directory to save file in
      * @param mixed $callback (optional) function/method to call for status
-     *                                       updates
+     *                                          updates
      * @return string Returns the full path of the downloaded file or a PEAR
-     *                             error on failure.  If the error is caused by
-     *                             socket-related errors, the error object will
-     *                             have the fsockopen error code available through
-     *                             getCode().
+     *                                error on failure.  If the error is caused by
+     *                                socket-related errors, the error object will
+     *                                have the fsockopen error code available through
+     *                                getCode().
      * @access public 
      * @deprecated in favor of PEAR_Downloader::downloadHttp()
      */

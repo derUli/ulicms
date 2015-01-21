@@ -10,14 +10,14 @@
 <input type="hidden" name="add_banner" value="add_banner">
 <strong><?php echo TRANSLATION_BANNERTEXT;
          ?></strong><br/>
-<input type="text" style="width:300px;" name="banner_name" value="">
+<input type="text" name="banner_name" value="">
 <br/><br/>
 <strong>Bild-URL:</strong><br/>
-<input type="text" style="width:300px;" name="image_url" value="">
+<input type="text" name="image_url" value="">
 <br/><br/>
 <strong><?php echo TRANSLATION_LINK_URL;
          ?></strong><br/>
-<input type="text" style="width:300px;" name="link_url" value="">
+<input type="text" name="link_url" value="">
 <br/>
 </fieldset>
 

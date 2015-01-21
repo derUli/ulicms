@@ -49,7 +49,7 @@ class PEAR_Builder extends PEAR_Common
     /**
      * 
      * @var string Used for reporting when it is not possible to pass function
-     *                         via extra parameter, e.g. log, msdevCallback
+     *                            via extra parameter, e.g. log, msdevCallback
      */
      var $current_callback = null;
     
@@ -223,16 +223,16 @@ class PEAR_Builder extends PEAR_Common
      * (TMPDIR/pear-build-USER/PACKAGE-VERSION).
      * 
      * @param string $ |PEAR_PackageFile_v* $descfile path to XML package description file, or
-     *                           a PEAR_PackageFile object
+     *                              a PEAR_PackageFile object
      * @param mixed $callback callback function used to report output,
      * see PEAR_Builder::_runCommand for details
      * @return array an array of associative arrays with built files,
      * format:
      * array( array( 'file' => '/path/to/ext.so',
-     *                           'php_api' => YYYYMMDD,
-     *                           'zend_mod_api' => YYYYMMDD,
-     *                           'zend_ext_api' => YYYYMMDD ),
-     *                    ... )
+     *                              'php_api' => YYYYMMDD,
+     *                              'zend_mod_api' => YYYYMMDD,
+     *                              'zend_ext_api' => YYYYMMDD ),
+     *                       ... )
      * @access public 
      * @see PEAR_Builder::_runCommand
      */

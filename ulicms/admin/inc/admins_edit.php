@@ -17,7 +17,7 @@
              ?>">
 <strong><?php echo TRANSLATION_USERNAME;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="admin_username" value="<?php echo $row -> username;
+<input type="text"  name="admin_username" value="<?php echo $row -> username;
              ?>" <?php if(!$acl -> hasPermission("users")){
                  ?>readonly="readonly"<?php }
              ?>>
@@ -39,20 +39,20 @@
 <br/>
 <strong><?php echo TRANSLATION_LASTNAME;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="admin_lastname" value="<?php echo $row -> lastname;
+<input type="text"  name="admin_lastname" value="<?php echo $row -> lastname;
              ?>">
 <br/><br/>
 <strong><?php echo TRANSLATION_FIRSTNAME;
              ?></strong><br/>
-<input type="text" style="width:300px;" required="true" name="admin_firstname" value="<?php echo $row -> firstname;
+<input type="text"  required="true" name="admin_firstname" value="<?php echo $row -> firstname;
              ?>"><br/><br/>
 <strong><?php echo TRANSLATION_EMAIL;
              ?></strong><br/>
-<input type="email" style="width:300px;" name="admin_email" value="<?php echo $row -> email;
+<input type="email"  name="admin_email" value="<?php echo $row -> email;
              ?>"><br/><br/>
 <strong><?php echo TRANSLATION_NEW_PASSWORD;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="admin_password" value=""> <br/>
+<input type="text"  name="admin_password" value=""> <br/>
 <?php
              $acl = new ACL();
              if($acl -> hasPermission("users")){

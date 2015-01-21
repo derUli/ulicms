@@ -15,12 +15,12 @@ if(defined("_SECURITY")){
 <input type="hidden" name="edit_key" value="edit_key">
 <strong><?php echo TRANSLATION_OPTION;
              ?></strong><br/>
-<input type="text" style="width:300px;" name="name" value="<?php echo htmlspecialchars($row -> name, ENT_QUOTES, "UTF-8");
+<input type="text" name="name" value="<?php echo htmlspecialchars($row -> name, ENT_QUOTES, "UTF-8");
              ?>" readonly="readonly">
 <br/><br/>
 <strong><?php echo TRANSLATION_VALUE;
              ?></strong><br/>
-<textarea style="width:300px; height:150px;" style="width:300px;" name="value"><?php echo htmlspecialchars($row -> value, ENT_QUOTES, "UTF-8");
+<textarea name="value" rows=15 cols=80><?php echo htmlspecialchars($row -> value, ENT_QUOTES, "UTF-8");
              ?></textarea>
 
 <br/><br/>
