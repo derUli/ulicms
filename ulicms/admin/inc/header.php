@@ -25,7 +25,7 @@ $(document).ready(function() {
 <script type="text/javascript" src="scripts/doubletaptogo.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-$(".navbar_top ul li:has(ul)").doubleTapToGo();
+$(".menu li:has(ul)").doubleTapToGo();
 })
 </script>
 <?php }
