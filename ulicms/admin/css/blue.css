@@ -1,7 +1,7 @@
 body{
 background-color:white;
 font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
-font-size:1.3em;
+font-size:1.4em;
 color:#335599;
 margin:0;
 padding:0;
@@ -120,7 +120,7 @@ text-decoration:underline;
 }
 
 div#pbody{
-padding:5px 10px 5px 10px;
+padding:5px 30px 5px 30px;
 }
 
 p#footer{
@@ -128,7 +128,7 @@ text-align:center;
 }
 
 table{
-margin-top:20px;
+margin-top:30px;
 }
 
 .menu ul {
@@ -174,4 +174,9 @@ word-wrap: break-word;       /* Internet Explorer 5.5+ */
 font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, 
 'Everson Mono', 'Lucida Console', 'Andale Mono', 'Nimbus Mono L',
 'Liberation Mono', FreeMono, 'Osaka Monospaced', Courier, 'New Courier', monospace;
+}
+
+
+div#pkglist, div#loadpkg, div#message_page_edit, .loading{
+display:none;
 }
