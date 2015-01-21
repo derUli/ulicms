@@ -2,7 +2,7 @@ body{
 background-color:white;
 font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
 font-size:1.3em;
-color:black;
+color:#335599;
 margin:0;
 padding:0;
 }
@@ -104,11 +104,12 @@ overflow-y:scroll;
 }
 
 div#root-container{
-padding:50px;
+padding:5px 20px 5px 20px;
+border: solid 1px rgb(20, 200, 200);
 }
 
 div#pbody{
-background-color:black;
+padding:5px 25px 5px 25px;
 }
 
 .menu ul {
