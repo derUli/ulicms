@@ -76,7 +76,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <td style="padding-right:20px;"><?php echo nl2br(real_htmlspecialchars($category["description"]));
              ?></td>
 <td style="text-align:center;"><a href="?action=categories&edit=<?php echo $category["id"];
-             ?>"><img src="gfx/edit.gif" alt="<?php echo TRANSLATION_EDIT;
+             ?>"><img src="gfx/edit.png" alt="<?php echo TRANSLATION_EDIT;
              ?>" title="<?php echo TRANSLATION_EDIT;
              ?>"></td>
 <?php if($category["id"] != 1){

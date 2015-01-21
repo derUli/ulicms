@@ -71,7 +71,7 @@ else if($_SESSION["grp_sort"] == "name"){
          ?>
 </td>
 <td><a href="?action=groups&edit=<?php echo $id;
-         ?>"><img src="gfx/edit.gif" alt="<?php echo TRANSLATION_EDIT;
+         ?>"><img src="gfx/edit.png" alt="<?php echo TRANSLATION_EDIT;
          ?>" title="<?php echo TRANSLATION_EDIT;
          ?>"></a></td>
 <td><a href="?action=groups&delete=<?php echo $id;

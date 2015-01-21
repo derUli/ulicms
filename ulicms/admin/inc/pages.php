@@ -325,10 +325,10 @@ $(window).load(function(){
                          }else{
                          $url = "http://" . $domain . "/" . $row -> systemname . ".html";
                          }
-                     echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img src=\"gfx/preview.gif\" alt=\"" . TRANSLATION_VIEW . "\" title=\"" . TRANSLATION_VIEW . "\"></a></td>";
+                     echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img src=\"gfx/preview.png\" alt=\"" . TRANSLATION_VIEW . "\" title=\"" . TRANSLATION_VIEW . "\"></a></td>";
                     
                      }
-                 echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img src="gfx/edit.gif" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+                 echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
                 
                 
                  if($_SESSION["filter_status"] == "trash"){

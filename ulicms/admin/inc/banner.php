@@ -78,7 +78,7 @@ $(window).load(function(){
                      }else{
                      echo '<td>' . getLanguageNameByCode($row -> language) . "</td>";
                      }
-                 echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $row -> id . '"><img src="gfx/edit.gif" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+                 echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $row -> id . '"><img src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
                  echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_delete&banner=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" title="' . TRANSLATION_DELETE . '"></a></td>';
                  echo '</tr>';
                 

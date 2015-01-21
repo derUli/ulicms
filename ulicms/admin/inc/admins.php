@@ -56,7 +56,7 @@
                  echo "<td>" . real_htmlspecialchars($row -> firstname) . "</td>";
                  echo "<td>" . real_htmlspecialchars($row -> email) . "</td>";
                  echo "<td>" . real_htmlspecialchars($group) . "</td>";
-                 echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row -> id . '"><img src="gfx/edit.gif" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+                 echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row -> id . '"><img src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
                 
                  if($row -> id == $_SESSION["login_id"]){
                      echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . TRANSLATION_CANT_DELETE_ADMIN . "')\"><img src=\"gfx/delete.gif\" alt=\"" . TRANSLATION_DELETE . "\" title=\"" . TRANSLATION_EDIT . "\"></a></td>";
