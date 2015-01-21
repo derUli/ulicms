@@ -133,8 +133,6 @@ margin-top:50px;
 }
 
 table{
-margin-top:0px;
-border:outline 1px rgb(230,230,230);
 width:100%;
 }
 
@@ -160,7 +158,7 @@ background-color:rgb(253, 253, 253);
 width:100%;
 }
 
-input, select, table, tr, td{
+input, select, table{
 border:solid 1px  rgb(220,220,220);
 }
 
