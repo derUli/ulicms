@@ -47,7 +47,7 @@ $(window).load(function(){
          echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
          ?>
 </p>
-<table border=1>
+<table>
 
 <tr style="font-weight:bold;">
 <td style="width:40px;">--></td>

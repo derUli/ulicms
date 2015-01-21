@@ -25,7 +25,7 @@
              ?></a>
 <br/>
 </p>
-<table border=1>
+<table>
 <tr style="font-weight:bold;">
 <td style="width:40px;"><a href="index.php?action=admins&order=id">ID</a></td>
 <td><span><a href="index.php?action=admins&order=username"><?php echo TRANSLATION_USERNAME;
