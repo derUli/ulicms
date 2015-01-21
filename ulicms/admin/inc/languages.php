@@ -33,7 +33,7 @@
 <br>
 <?php if(db_num_rows($languages) > 0){
              ?>
-<table border=1 style="width:800px;"> 
+<table> 
 <tr>
 <td><strong><?php echo TRANSLATION_SHORTCODE;
              ?></strong></td>
