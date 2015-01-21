@@ -198,7 +198,7 @@ if(!is_admin()){
                  echo " selected";
              ?> value="<?php echo $i;
              ?>"><?php echo $i;
-             ?>pt</option>
+             ?>px</oion>
 <?php }
          ?>
 </select>
