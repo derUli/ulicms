@@ -1,2 +1,0 @@
-2015Q2 - UliCMS Release 7.2.1 "Biscayne"
-2017   - UliCMS Release 7.2.2 "Starlight"

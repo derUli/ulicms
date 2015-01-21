@@ -559,10 +559,10 @@ function menu($name = "top", $parent = null, $recursive = true){
      }
 
 function get_base_metas(){
-  ob_start();
-  base_metas();
-  return ob_get_clean();
-}
+     ob_start();
+     base_metas();
+     return ob_get_clean();
+    }
 
 function base_metas(){
     
@@ -686,8 +686,8 @@ function head(){
      }
 
 function get_head(){
-   return get_base_metas();
-}
+     return get_base_metas();
+    }
 
 function autor(){
      echo get_autor();
