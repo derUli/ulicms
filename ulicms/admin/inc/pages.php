@@ -53,8 +53,7 @@ $(window).load(function(){
 </script>
 <p>
 <?php echo TRANSLATION_FILTER_BY_LANGUAGE;
-         ?> 
-<select name="filter_language" onchange="filter_by_language(this)">
+         ?><select name="filter_language" onchange="filter_by_language(this)">
 <option value=""><?php echo TRANSLATION_PLEASE_SELECT;
          ?></option>
 <?php
@@ -132,7 +131,6 @@ $(window).load(function(){
          ?>
          
 </select>
-&nbsp;&nbsp;
 <?php echo TRANSLATION_STATUS;
          ?> <select name="filter_status" onchange="filter_by_status(this)">
 <option value="Standard" <?php
@@ -148,15 +146,11 @@ $(window).load(function(){
          ?>><?php echo TRANSLATION_RECYCLE_BIN;
          ?></option>
 </select>
-&nbsp; &nbsp;
 <?php echo TRANSLATION_CATEGORY;
          ?> 
 <?php
          echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
-         ?>
-         &nbsp; &nbsp;
-         <?php echo TRANSLATION_MENU;
-         ?> 
+         ?><?php echo TRANSLATION_MENU;?> 
          <select name="filter_menu" onchange="filter_by_menu(this);">
 
 <?php
@@ -175,7 +169,6 @@ $(window).load(function(){
         
          ?>
          </select>
-                  &nbsp; &nbsp;
          <?php echo TRANSLATION_PARENT;
          ?> 
          <select name="filter_parent" onchange="filter_by_parent(this);">
