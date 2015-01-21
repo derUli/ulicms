@@ -51,7 +51,7 @@ $(window).load(function(){
 });
 
 </script>
-
+<p>
 <?php echo TRANSLATION_FILTER_BY_LANGUAGE;
          ?> 
 <select name="filter_language" onchange="filter_by_language(this)">
@@ -198,7 +198,7 @@ $(window).load(function(){
              }
          ?>
 </select>
-
+</p>
 
 <?php
          if($_SESSION["filter_status"] == "trash" and $acl -> hasPermission("pages")){
