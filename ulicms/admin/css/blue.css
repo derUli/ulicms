@@ -102,6 +102,7 @@ overflow-y:scroll;
 .menu li:hover > ul {
     opacity:1;
     visibility:visible;
+    z-index:5;
 }
 
 div#root-container{
