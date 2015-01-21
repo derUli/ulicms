@@ -1,8 +1,10 @@
 body{
 background-color:white;
 font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
-font-size:12pt;
+font-size:1.3em;
 color:black;
+margin:0;
+padding:0;
 }
 
 img{
@@ -11,4 +13,133 @@ border:0px;
 
 .ulicms_error{
 color:red;
+}
+
+html{
+overflow-y:scroll;
+}
+
+/* main menu styles */
+.menu {
+    display:inline-block;
+    width:100%;
+    min-height:60px;
+    margin:0px auto;
+    padding:0;
+    background:#335599;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -moz-box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .5);
+}
+
+.menu  li {
+    margin:10px;
+    float:left;
+    position:relative;
+    list-style:none;
+}
+.menu  a {
+    font-weight:bold;
+    color:#e7e5e5;
+    text-decoration:none;
+    display:block;
+    padding:8px 20px;
+
+    border-top: 1px transparent solid;
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    text-shadow:0 2px 2px rgba(0,0,0, .7);
+}
+
+/* selected menu element */
+.menu .menu_active_link a, .menu li:hover > a {
+    background:#7788aa;
+    color:#000;
+    border-top:1px solid #f8f8f8;
+
+    box-shadow:0 2px 2px rgba(0,0,0, .7); /*some css3*/
+    -moz-box-shadow:0 2px 2px rgba(0,0,0, .7);
+    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .7);
+    text-shadow:0 2px 2px rgba(255,255,255, 0.7);
+}
+
+/* sublevels */
+.menu  ul li:hover a, .menu li:hover li a {
+    background:none;
+    border:none;
+    color:#000;
+}
+.menu ul li a:hover {
+    background:#335599 url(../images/bg.png);
+    color:#fff;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    text-shadow:0 2px 2px rgba(0,0,0, 0.7);
+}
+
+.menu  ul li:first-child > a {
+    -moz-border-radius-topleft:10px; /*some css3*/
+    -moz-border-radius-topright:10px;
+    -webkit-border-top-left-radius:10px;
+    -webkit-border-top-right-radius:10px;
+}
+.menu  ul li:last-child > a {
+    -moz-border-radius-bottomleft:10px; /*some css3*/
+    -moz-border-radius-bottomright:10px;
+    -webkit-border-bottom-left-radius:10px;
+    -webkit-border-bottom-right-radius:10px;
+}
+
+/* drop down */
+.menu li:hover > ul {
+    opacity:1;
+    visibility:visible;
+}
+
+div#root-container{
+padding:50px;
+}
+
+div#pbody{
+background-color:black;
+}
+
+.menu ul {
+    opacity:0;
+    visibility:hidden;
+    padding:0;
+    position:absolute;
+    background:#aabbcc;
+    border:1px solid #7788aa;
+
+    border-radius:10px; /*some css3*/
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -moz-box-shadow:0 2px 2px rgba(0,0,0, .5);
+    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .5);
+
+    -moz-transition:opacity .25s linear, visibility .1s linear .1s;
+    -webkit-transition:opacity .25s linear, visibility .1s linear .1s;
+    -o-transition:opacity .25s linear, visibility .1s linear .1s;
+    transition:opacity .25s linear, visibility .1s linear .1s;
+}
+.menu ul li {
+    float:none;
+    margin:0;
+}
+.menu ul a {
+    font-weight:normal;
+    text-shadow:0 2px 2px rgba(255,255,255, 0.7);
+}
+.menu ul ul {
+    left:160px;
+    top:0px;
 }
