@@ -74,7 +74,7 @@ if($acl -> hasPermission("dashboard")){
 <h2 class="accordion-header"><?php echo TRANSLATION_STATISTICS;
          ?></h2>      
 <div class="accordion-content">
-<table border=1>    
+<table>    
 <?php
          $installed_at = getconfig("installed_at");
          if($installed_at){
@@ -133,7 +133,7 @@ if($acl -> hasPermission("dashboard")){
 <h2 class="accordion-header"><?php echo TRANSLATION_TOP_PAGES;
          ?></h2>
 <div class="accordion-content">
-<table cellpadding="2" border=0>
+<table cellpadding="2">
 <tr style="font-weight:bold;">
 <td><?php echo TRANSLATION_TITLE;
          ?></td>
@@ -166,7 +166,7 @@ if($acl -> hasPermission("dashboard")){
 <h2 class="accordion-header"><?php echo TRANSLATION_LAST_CHANGES;
          ?></h2>
 <div class="accordion-content">
-<table cellpadding="2" style="width: 70%; border:0px;">
+<table cellpadding="2">
 <tr style="font-weight:bold;">
 <td><?php echo TRANSLATION_TITLE;
          ?></td>
