@@ -150,9 +150,11 @@ input[type="number"],
 input[type="phone"], 
 select,
 textarea{
-border:none;
 background-color:rgb(253, 253, 253);
+}
 
+input, select, table, tr, td{
+border:solid 1px  rgb(220,220,220);
 }
 
 table tr td{
