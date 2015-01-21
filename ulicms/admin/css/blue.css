@@ -31,7 +31,7 @@ overflow-y:scroll;
     margin:0px auto;
     padding:0;
     background:#335599;
-
+    font-size:20px;
     border-radius:10px; /*some css3*/
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
