@@ -213,7 +213,6 @@ $(window).load(function(){
 
 <table border=1>
 <tr style="font-weight:bold;">
-<td style="width:40px;"></td>
 <td><a href="?action=pages&order=title"><?php echo TRANSLATION_TITLE;
          ?></a></td>
 <td><a href="?action=pages&order=menu"><?php echo TRANSLATION_MENU;
@@ -297,7 +296,6 @@ $(window).load(function(){
                  ?>
 <?php
                  echo '<tr>';
-                 echo "<td style=\"width:40px;\">--&gt;</td>";
                  echo "<td>" . htmlspecialchars($row -> title);
                  if(!empty($row -> redirection) and !is_null($row -> redirection))
                      echo htmlspecialchars(" --> ") . htmlspecialchars($row -> redirection);
