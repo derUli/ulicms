@@ -134,6 +134,26 @@ border:outline 1px rgb(230,230,230);
 width:100%;
 }
 
+input[type="button"], 
+input[type="submit"], button{
+background-color: #335599;
+color: white;
+padding: 10px;
+font-size:1.0em;
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="phone"], 
+select,
+textarea{
+border:none;
+background-color:rgb(253, 253, 253);
+
+}
 
 table tr td{
    padding:5px;
