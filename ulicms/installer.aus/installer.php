@@ -518,7 +518,7 @@ ON DELETE SET NULL";
 ON DELETE SET NULL";
              mysqli_query($connection, $constraint4);
             
-             $add_custom_data = "ALTER TABLE `" . $prefix . "content` ADD COLUMN `custom_data` varchar(255) NULL DEFAULT '{}'";
+             $add_custom_data = "ALTER TABLE `" . $prefix . "content` ADD `custom_data` varchar(255) NULL DEFAULT '{}'";
              mysqli_query($connection, $add_custom_data);
             
             
