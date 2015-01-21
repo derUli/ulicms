@@ -214,3 +214,16 @@ font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consol
 div#pkglist, div#loadpkg, div#message_page_edit, .loading{
 display:none;
 }
+
+#login{
+margin:auto;
+width:500px;
+}
+
+#login table, #login table tr, #login table td{
+border:none;
+}
+
+#login tr{
+background-color:white;
+}

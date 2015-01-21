@@ -5,8 +5,8 @@ if(isset($_SESSION["language"]) and in_array($_SESSION["language"], $languages))
      $default_language = $_SESSION["language"];
      }
 ?>
-<h2>CMS Login</h2>
 <div id="login">
+<p><img src="gfx/logo.png" alt="UliCMS" title="UliCMS"/></p>
 <h3><?php echo TRANSLATION_PLEASE_AUTHENTIFICATE;
 ?></h3>
 <form action="index.php" method="post">
@@ -19,19 +19,19 @@ if(isset($_SESSION["language"]) and in_array($_SESSION["language"], $languages))
 ?>
 <table style="border:0px;">
 <tr>
-<td width="100px"><strong><strong><?php echo TRANSLATION_USERNAME;
+<td><strong><strong><?php echo TRANSLATION_USERNAME;
 ?></strong></td>
-<td><input type="text" name="user" value="" style="width:200px;"></td>
+<td><input type="text" name="user" value=""></td>
 </tr>
 <tr>
-<td width="100px"><strong><strong><?php echo TRANSLATION_PASSWORD;
+<td><strong><strong><?php echo TRANSLATION_PASSWORD;
 ?></strong></td>
-<td><input type="password" name="password" value="" style="width:200px;"></td>
+<td><input type="password" name="password" value=""></td>
 </tr>
 <tr>
 <td><strong><?php echo TRANSLATION_LANGUAGE;
 ?></strong></td>
-<td><select name="system_language" style="width:200px;">
+<td><select name="system_language">
 <?php
 for($i = 0; $i < count($languages); $i++){
      if($default_language == $languages[$i]){
@@ -47,7 +47,7 @@ for($i = 0; $i < count($languages); $i++){
 </tr>
 <tr>
 <td></td>
-<td style="padding-top:10px; text-align:center;"><input style="width:100%;" type="submit" value="<?php echo TRANSLATION_LOGIN;
+<td style="padding-top:10px; text-align:center;"><input type="submit" value="<?php echo TRANSLATION_LOGIN;
 ?>"></td>
 </tr>
 
