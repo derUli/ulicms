@@ -1,7 +1,7 @@
 body{
 background-color:white;
 font-family: "wf_SegoeUI","Segoe UI","Segoe","Segoe WP","Tahoma","Verdana","Arial","sans-serif";
-font-size:1.3em;
+font-size: 16px;
 color:rgb(50,50,50);
 margin:0;
 padding:0;
@@ -236,4 +236,11 @@ border:none;
 
 #login tr{
 background-color:white;
+}
+
+@media only screen and (max-width: 1024) {
+body{
+font-size:
+}
+
 }
