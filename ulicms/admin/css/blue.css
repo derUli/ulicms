@@ -228,6 +228,10 @@ div#pkglist, div#loadpkg, div#message_page_edit, .loading{
 display:none;
 }
 
+div.inPageMessage{
+margin-bottom:20px;
+}
+
 #login{
 margin:auto;
 width:500px;
