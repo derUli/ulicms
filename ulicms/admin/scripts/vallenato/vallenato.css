@@ -11,6 +11,7 @@
 	-webkit-box-shadow: 0 5px 15px #cccccc;
 	*/
 	box-shadow: 0 5px 15px #cccccc;
+        width:100%;
 }
 
 .accordion-header {
@@ -30,15 +31,17 @@
 	-moz-border-radius: 5px 5px 0 0;
 	-webkit-border-radius: 5px 5px 0 0;
 	border-radius: 5px 5px 0 0;
-	background: url(images/active-header.gif) #73ba25;
+	background: #335599;
 	background-repeat: no-repeat;
 	background-position: right 50%;
+	color:white;
 }
 
 .active-header:hover {
-	background: url(images/active-header.gif) #73ba25;
+	background: url(images/active-header.gif) #335599;
 	background-repeat: no-repeat;
 	background-position: right 50%;
+	color:white;
 }
 
 .inactive-header {

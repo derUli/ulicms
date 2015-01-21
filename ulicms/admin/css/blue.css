@@ -42,7 +42,7 @@ overflow-y:scroll;
     position:relative;
     list-style:none;
 }
-.menu  a {
+.menu  a, .menu a:visited {
     font-weight:bold;
     color:#e7e5e5;
     text-decoration:none;
@@ -60,6 +60,7 @@ overflow-y:scroll;
 .menu .menu_active_link a, .menu li:hover > a {
     background:#7788aa;
     color:#000;
+    text-decoration:none;
     border-top:1px solid #f8f8f8;
 
     box-shadow:0 2px 2px rgba(0,0,0, .7); /*some css3*/
@@ -105,11 +106,28 @@ overflow-y:scroll;
 
 div#root-container{
 padding:5px 20px 5px 20px;
-border: solid 1px rgb(20, 200, 200);
+}
+
+a, a:visited{
+color:black;
+text-decoration:none;
+}
+
+a:hover{
+color:black;
+text-decoration:underline;
 }
 
 div#pbody{
-padding:5px 25px 5px 25px;
+padding:5px 10px 5px 10px;
+}
+
+p#footer{
+text-align:center;
+}
+
+table{
+margin-top:20px;
 }
 
 .menu ul {
@@ -143,4 +161,16 @@ padding:5px 25px 5px 25px;
 .menu ul ul {
     left:160px;
     top:0px;
+}
+
+code{
+background-color: white;
+display: block;
+padding: 20px;
+border: 1px dotted blue;
+font-size:0.7em;
+word-wrap: break-word;       /* Internet Explorer 5.5+ */
+font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, 
+'Everson Mono', 'Lucida Console', 'Andale Mono', 'Nimbus Mono L',
+'Liberation Mono', FreeMono, 'Osaka Monospaced', Courier, 'New Courier', monospace;
 }
