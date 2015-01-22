@@ -27,7 +27,7 @@ overflow-y:scroll;
 .menu {
     display:inline-block;
     width:100%;
-    min-height:60px;
+    min-height:40px;
     margin:0px auto;
     padding:0;
     background:#335599;
@@ -41,7 +41,7 @@ overflow-y:scroll;
 }
 
 .menu  li {
-    margin:10px;
+    margin:4px;
     float:left;
     position:relative;
     list-style:none;
@@ -110,7 +110,9 @@ overflow-y:scroll;
 }
 
 div#root-container{
-padding:5px 20px 5px 20px;
+padding:0px 10px 5px 0px;
+width:90%;
+margin:auto;
 }
 
 a, a:visited{
@@ -124,7 +126,7 @@ text-decoration:underline;
 }
 
 div#pbody{
-padding:5px 30px 5px 30px;
+padding:10px 30px 5px 30px;
 }
 
 p#footer{
