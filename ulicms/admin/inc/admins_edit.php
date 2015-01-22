@@ -2,7 +2,7 @@
      include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
      $acl = new ACL();
     
-     if(($acl -> hasPermission("group") or is_admin()) or
+     if(($acl -> hasPermission("users") or is_admin()) or
              ($_GET["admin"] == $_SESSION["login_id"])){
         
          $admin = intval($_GET["admin"]);
