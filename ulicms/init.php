@@ -210,6 +210,8 @@ $select = schema_select($config -> db_database);
 if(!$select){
  throw new Exception("Fehler: Die Datenbank " . $config -> db_database . " existiert nicht.\n");
  }
+ 
+
 
 if(!defined("SKIP_TABLE_CHECK")){
 $existing_tables = db_get_tables();

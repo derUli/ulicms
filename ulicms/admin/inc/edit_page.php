@@ -295,7 +295,6 @@ function openMenuImageSelectWindow(field) {
 
 
 <div>
-<a id="bottom" name="bottom">
 <textarea name="page_content" id="page_content" cols=60 rows=20><?php echo htmlspecialchars($row -> content);
              ?></textarea>
 <script type="text/javascript">

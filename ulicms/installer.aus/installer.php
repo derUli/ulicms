@@ -555,7 +555,7 @@ class config extends baseConfig{
   var $db_user = "' . $_SESSION["mysql"]["loginname"] . '";
   var $db_password = "' . $_SESSION["mysql"]["passwort"] . '";
   var $db_database = "' . $_SESSION["mysql"]["datenbank"] . '";
-  var $db_prefix = " ' . $_SESSION["mysql"]["prefix"] . '";
+  var $db_prefix = "' . $_SESSION["mysql"]["prefix"] . '";
   var $db_type = "mysql";
   var $debug = false;
 }';
