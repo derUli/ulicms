@@ -1,4 +1,4 @@
-<?php if(!is_admin()){
+<?php if(!$acl -> hasPermission("install_packages")){
      noperms();
      ?>
 <?php
