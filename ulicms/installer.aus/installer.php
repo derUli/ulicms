@@ -439,7 +439,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (28, 'timezone', 'Europe/Berlin'),
 (29, 'db_schema_version', '7.2.1'),
 (30, 'pkg_src', 'http://packages.ulicms.de/{version}/'),
-(31, 'theme', 'cleanblue'),
+(31, 'theme', ''),
 (32, 'zoom', '100'),
 (33, 'default-font', 'Arial, \'Helvetica Neue\', Helvetica, sans-serif'),
 (34, 'font-size', '16'),
