@@ -154,7 +154,7 @@ if(file_exists($cached_page_path) and !getconfig("cache_disabled")
 
  }
 
-if(!getconfig("cache_disabled" and getenv('REQUEST_METHOD') == "GET")
+if(!getconfig("cache_disabled") and getenv('REQUEST_METHOD') == "GET"
  and !file_exists($cached_page_path) and $cache_type === "file"){
  ob_start();
  }
