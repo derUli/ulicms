@@ -69,10 +69,10 @@ class PEAR_Installer_Role_Common
      * @param string $ file name
      * @return array an array consisting of:
      * 
-     *                     1 the original, pre-baseinstalldir installation directory
-     *                     2 the final installation directory
-     *                     3 the full path to the final location of the file
-     *                     4 the location of the pre-installation file
+     *                      1 the original, pre-baseinstalldir installation directory
+     *                      2 the final installation directory
+     *                      3 the full path to the final location of the file
+     *                      4 the location of the pre-installation file
      */
      function processInstallation($pkg, $atts, $file, $tmp_path, $layer = null)
     {

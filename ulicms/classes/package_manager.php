@@ -48,18 +48,18 @@ class packageManager{
         
          natcasesort($directory_content);
          for($i = 0;$i < count($directory_content);$i++){
-         if(is_dir($module_folder. $directory_content[$i])){
-             $module_init_file = $module_folder . $directory_content[$i] . "/" .
-             $directory_content[$i] . "_main.php";
-            
-            
-             if($directory_content[$i] != ".." and $directory_content[$i] != "."){
-                 if(is_file($module_init_file)){
-                     array_push($available_modules, $directory_content[$i]);
+             if(is_dir($module_folder . $directory_content[$i])){
+                 $module_init_file = $module_folder . $directory_content[$i] . "/" .
+                 $directory_content[$i] . "_main.php";
+                
+                
+                 if($directory_content[$i] != ".." and $directory_content[$i] != "."){
+                     if(is_file($module_init_file)){
+                         array_push($available_modules, $directory_content[$i]);
+                         }
                      }
                  }
-             }
-             
+            
              }
          natcasesort($available_modules);
          return $available_modules;
