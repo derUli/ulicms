@@ -21,7 +21,7 @@ if($version == "7.2.0"){
 }
 
 if($version == "7.2.1"){
-   die("<p>Eine Betaversion von UliCMS 8.0.0 ist zum Testen verfügbar.<br/>
+   die("<p>Eine Beta Version von UliCMS 8.0.0 ist zum Testen verfügbar.<br/>
    <a href=\"http://www.ulicms.de/content/files/Releases/Beta/8.0.0/ulicms-8.0.0-starlight-beta-upgrade.zip\">Download</a></p>");
 }
 
