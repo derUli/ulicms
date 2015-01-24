@@ -3,9 +3,23 @@ import shutil
 import argparse
 import os
 import codecs
+from contextlib import closing
+from zipfile import ZipFile, ZIP_DEFLATED
+
+def zipdir(basedir, archivename):
+    assert os.path.isdir(basedir)
+    with closing(ZipFile(archivename, "w", ZIP_DEFLATED)) as z:
+        for root, dirs, files in os.walk(basedir):
+            #NOTE: ignore empty directories
+            for fn in files:
+                absfn = os.path.join(root, fn)
+                zfn = absfn[len(basedir)+len(os.sep):] #XXX: relative path
+                z.write(absfn, zfn)
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-n", "--no-reformat", help="Don't reformat code before creating patch", action="store_true")
+    parser.add_argument("-z", "--zip", help="Compress with zip", action="store_true")
     parser.add_argument('-t', '--target', action ="store", dest="target", required = True, help="Target directory")
     args = parser.parse_args()
     target = os.path.abspath(args.target)
@@ -27,7 +41,12 @@ def main():
 
     if os.path.exists(installer_aus_folder):
         os.rename(installer_aus_folder, installer_folder)
-        
+    archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
+    if args.zip:
+        print("zipping folder...")
+	zipdir(target, archive_name)
+        print("removing target folder...")
+        shutil.rmtree(target)
 try:
     main()
 except KeyboardInterrupt:
