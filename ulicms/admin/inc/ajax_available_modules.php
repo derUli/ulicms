@@ -1,5 +1,5 @@
-<?php if(!is_admin()){
-noperms();
+<?php if(!$acl -> hasPermission("install_packages")){
+     noperms();
      ?>
 <?php
      }
@@ -13,8 +13,10 @@ include "../lib/file_get_contents_wrapper.php";
 <?php
 if(!$pkg_src){
      ?>
-<p><strong><?php echo TRANSLATION_ERROR;?></strong> <br/>
-<?php echo TRANSLATION_PKGSRC_NOT_DEFINED;?>
+<p><strong><?php echo TRANSLATION_ERROR;
+     ?></strong> <br/>
+<?php echo TRANSLATION_PKGSRC_NOT_DEFINED;
+     ?>
 </p>
 <?php }else{
      include_once "../version.php";
@@ -45,8 +47,10 @@ if(!$pkg_src){
     
      if(!$packageList or count($packageList) === 0){
          ?>
-<p><strong><?php echo TRANSLATION_ERROR;?></strong> <br/>
-<?php echo TRANSLATION_NO_PACKAGES_AVAILABLE;?></p>
+<p><strong><?php echo TRANSLATION_ERROR;
+         ?></strong> <br/>
+<?php echo TRANSLATION_NO_PACKAGES_AVAILABLE;
+         ?></p>
 
 <?php
          }else{
@@ -56,7 +60,7 @@ if(!$pkg_src){
              if(!empty($pkg)){
                  $pkgDescriptionURL = $pkg_src . "descriptions/" . $pkg . ".txt";
                 
-                 echo "<p><strong>" . $pkg . "</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('".str_ireplace("%pkg%", $pkg, TRANSLATION_ASK_FOR_INSTALL_PACKAGE)."');\"> [".TRANSLATION_INSTALL."]</a><br/>";
+                 echo "<p><strong>" . $pkg . "</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('" . str_ireplace("%pkg%", $pkg, TRANSLATION_ASK_FOR_INSTALL_PACKAGE) . "');\"> [" . TRANSLATION_INSTALL . "]</a><br/>";
                 
                  $pkgDescription = @file_get_contents_wrapper($pkgDescriptionURL);
                 

@@ -3,11 +3,11 @@
 class meter{
     
     
-    function __construct(){
+     function __construct(){
         
-        }
+         }
     
-    function makeSVG($tag, $type, $value, $max, $min, $optimum, $low, $high){
+     function makeSVG($tag, $type, $value, $max, $min, $optimum, $low, $high){
          $svg = '';
          if ($tag == 'meter'){
             
@@ -56,14 +56,14 @@ class meter{
                  // VALUE Marker
                 if ($value){
                      if ($min != $low && $value < $low){
-                        $col = 'orange';
-                    }
+                         $col = 'orange';
+                         }
                     else if ($max != $high && $value > $high){
-                        $col = 'orange';
-                    }
+                         $col = 'orange';
+                         }
                     else{
-                        $col = '#008800';
-                    }
+                         $col = '#008800';
+                         }
                      $cx = (($value - $min) / ($max - $min)) * $w;
                      $cy = $h / 2;
                      $rx = $h / 3.5;
@@ -133,36 +133,36 @@ class meter{
                      $barw = (($value - $min) / ($max - $min)) * $w;
                      if ($optimum < $low){
                          if ($value < $low){
-                            $barcol = 'url(#GrGREEN)';
-                        }
+                             $barcol = 'url(#GrGREEN)';
+                             }
                         else if ($value > $high){
-                            $barcol = 'url(#GrRED)';
-                        }
+                             $barcol = 'url(#GrRED)';
+                             }
                         else{
-                            $barcol = 'url(#GrORANGE)';
-                        }
+                             $barcol = 'url(#GrORANGE)';
+                             }
                          }
                     else if ($optimum > $high){
                          if ($value < $low){
-                            $barcol = 'url(#GrRED)';
-                        }
+                             $barcol = 'url(#GrRED)';
+                             }
                         else if ($value > $high){
-                            $barcol = 'url(#GrGREEN)';
-                        }
+                             $barcol = 'url(#GrGREEN)';
+                             }
                         else{
-                            $barcol = 'url(#GrORANGE)';
-                        }
+                             $barcol = 'url(#GrORANGE)';
+                             }
                          }
                     else{
                          if ($value < $low){
-                            $barcol = 'url(#GrORANGE)';
-                        }
+                             $barcol = 'url(#GrORANGE)';
+                             }
                         else if ($value > $high){
-                            $barcol = 'url(#GrORANGE)';
-                        }
+                             $barcol = 'url(#GrORANGE)';
+                             }
                         else{
-                            $barcol = 'url(#GrGREEN)';
-                        }
+                             $barcol = 'url(#GrGREEN)';
+                             }
                          }
                      $svg .= '<rect x="0" y="0" rx="' . ($h * $border_radius) . 'px" ry="' . ($h * $border_radius) . 'px" width="' . $barw . '" height="' . $h . '" fill="' . $barcol . '" stroke="none" />';
                      }
@@ -243,9 +243,9 @@ class meter{
              }
         
          return $svg;
-        }
+         }
     
     
-    } // end of class
+     } // end of class
 
 ?>

@@ -14,7 +14,7 @@ add_hook("after_session_start");
 setLanguageByDomain();
 
 if(!empty($_GET["language"])){
-     $_SESSION["language"] = basename($_GET["language"]);
+     $_SESSION["language"] = db_escape($_GET["language"]);
      }
 
 if(!isset($_SESSION["language"])){
@@ -24,11 +24,6 @@ if(!isset($_SESSION["language"])){
 
 
 require_once "templating.php";
-
-
-
-
-
 $status = check_status();
 
 
@@ -40,13 +35,13 @@ if(getconfig("redirection") != "" && getconfig("redirection") != false){
 
 
 
-$theme = getconfig("theme");
+$theme = get_theme();
 
 if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("maintenance_mode")) == "true" || getconfig("maintenance_mode") == "1"){
      add_hook("before_maintenance_message");
-     
+    
      // Sende HTTP Status 503 und Retry-After im Wartungsmodus
-     header('HTTP/1.0 503 Service Temporarily Unavailable');
+    header('HTTP/1.0 503 Service Temporarily Unavailable');
      header('Status: 503 Service Temporarily Unavailable');
      header('Retry-After: 60');
     
@@ -60,20 +55,26 @@ if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("ma
 
 if(isset($_GET["format"]) and !empty($_GET["format"])){
      $format = trim($_GET["format"]);
-    }else{
+     }else{
      $format = "html";
-    }
+     }
 
 add_hook("before_http_header");
+
+$redirection = get_redirection();
+
+if($redirection){
+     ulicms_redirect($redirection, 302);
+     }
 
 header("HTTP/1.0 " . $status);
 
 if($format == "html"){
      header("Content-Type: text/html; charset=utf-8");
-    }else if($format == "pdf"){
+     }else if($format == "pdf"){
      $pdf = new PDFCreator();
      $pdf -> output();
-    }else if($format == "csv"){
+     }else if($format == "csv"){
      $csv = new CSVCreator();
      $csv -> output();
      }else if($format == "json"){
@@ -84,10 +85,10 @@ else if($format == "txt"){
      $plain = new PlainTextCreator();
      $plain -> output();
     
-    }
+     }
 else{
      $format = "html";
-    }
+     }
 
 
 add_hook("after_http_header");
@@ -111,6 +112,10 @@ $cached_page_path = buildCacheFilePath($_SERVER['REQUEST_URI']);
 $modules = getAllModules();
 $hasModul = containsModule(get_requested_pagename());
 
+// Kein Caching wenn man eingeloggt ist
+if(is_logged_in()){
+     no_cache();
+     }
 
 add_hook("before_html");
 
@@ -135,9 +140,7 @@ if(file_exists($cached_page_path) and !getconfig("cache_disabled")
  $cached_content = file_get_contents($cached_page_path);
  $last_modified = filemtime($cached_page_path);
 
-
-
- if($cached_content and (time() - $last_modified < CACHE_PERIOD)){
+ if($cached_content and (time() - $last_modified < CACHE_PERIOD) and !defined("NO_CACHE")){
  echo $cached_content;
  add_hook("before_cron");
  @include 'cron.php';
@@ -194,10 +197,7 @@ if($html_file){
  echo "File Not Found";
 
 }else{
-
 require_once getTemplateDirPath($theme) . "oben.php";
-
-
 add_hook("before_content");
 content();
 add_hook("after_content");
@@ -213,7 +213,7 @@ if(!getconfig("cache_disabled") and !$hasModul and
  getenv('REQUEST_METHOD') == "GET" and $cache_type === "cache_lite"){
  $data = ob_get_clean();
 
- if(!defined("EXCEPTION_OCCURRED")){
+ if(!defined("EXCEPTION_OCCURRED") and !defined("NO_CACHE")){
  $Cache_Lite -> save($data, $id);
  }
  echo $data;
@@ -233,7 +233,7 @@ if(!getconfig("cache_disabled") and !$hasModul and
  getenv('REQUEST_METHOD') == "GET" and $cache_type === "file"){
  $generated_html = ob_get_clean();
 
- if(!defined("EXCEPTION_OCCURRED")){
+ if(!defined("EXCEPTION_OCCURRED") and !defined("NO_CACHE")){
  $handle = fopen($cached_page_path, "wb");
  fwrite($handle, $generated_html);
  fclose($handle);

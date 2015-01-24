@@ -27,7 +27,7 @@ if($version -> getDevelopmentVersion())
 // Start Call Home //
 $cfg_script = "UliCMS " . $version -> getVersion() .
 " (v" .
-join(".", $version -> getInternalVersion()) . $developmentVersion . ")";
+join(".", $version -> getInternalVersion()) . " " . $version -> getUpdate() . " " . $developmentVersion . ")";
 $cfg_url = "http://www.ulicms.de/chs/api.php";
 
 

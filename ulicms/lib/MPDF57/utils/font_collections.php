@@ -27,20 +27,20 @@ include("../mpdf.php");
 $mpdf = new mPDF('');
 if ($checkdir){
      $ttfdir = $checkdir;
-    }
+     }
 else{
-    $ttfdir = _MPDF_TTFONTPATH;
-}
+     $ttfdir = _MPDF_TTFONTPATH;
+     }
 
 
 
 $mqr = ini_get("magic_quotes_runtime");
 if ($mqr){
-    set_magic_quotes_runtime(0);
-}
+     set_magic_quotes_runtime(0);
+     }
 if (!class_exists('TTFontFile_Analysis', false)){
-    include(_MPDF_PATH . 'classes/ttfontsuni_analysis.php');
-}
+     include(_MPDF_PATH . 'classes/ttfontsuni_analysis.php');
+     }
 $ttf = new TTFontFile_Analysis();
 
 $ff = scandir($ttfdir);
@@ -61,14 +61,14 @@ foreach($ff AS $f){
              $fname = preg_replace('/[ ()]/', '', $fname);
              $style = '';
              if ($bold){
-                $style .= 'Bold';
-            }
+                 $style .= 'Bold';
+                 }
              if ($italic){
-                $style .= 'Italic';
-            }
+                 $style .= 'Italic';
+                 }
              if (!$style){
-                $style = 'Regular';
-            }
+                 $style = 'Regular';
+                 }
             
             
              echo '<div>[' . $i . '] ' . $tfname . ' (' . $fname . ') ' . $style . '</div>';
@@ -76,7 +76,7 @@ foreach($ff AS $f){
              }
          echo '<hr />';
          }
-    }
+     }
 
 
 exit;

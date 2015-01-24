@@ -35,8 +35,9 @@
              }
         
         
-        ?>
-<h1><?php echo TRANSLATION_MOTTO;?></h1>
+         ?>
+<h1><?php echo TRANSLATION_MOTTO;
+         ?></h1>
 <form action="index.php?action=motto" id="motto" method="post">
 <table border=0>
 <tr>
@@ -44,18 +45,19 @@
 <td><strong>Motto</strong></td>
 </tr>
 <?php
-        for($n = 0; $n < count($languages); $n++){
+         for($n = 0; $n < count($languages); $n++){
              $lang = $languages[$n];
-            ?>
+             ?>
 <tr>
 <td><?php echo $lang;
-            ?></td>
+             ?></td>
 <td>
 <input name="motto_<?php echo $lang;
-            ?>" style="width:400px" value="<?php echo stringHelper::real_htmlspecialchars($mottos[$lang]);?>">
+             ?>" style="width:400px" value="<?php echo stringHelper :: real_htmlspecialchars($mottos[$lang]);
+             ?>">
 </td>
 <?php }
-        ?>
+         ?>
 <tr>
 <td>
 </td>
@@ -81,8 +83,8 @@ $("#motto_settings").ajaxForm({beforeSubmit: function(e){
 </script>
 
 <?php }else{
-        noperms();
-        }
+         noperms();
+         }
     
-    }
+     }
 ?>

@@ -221,16 +221,16 @@ class PEAR_Frontend extends PEAR
      * 
      * @param string $command command from which this method was called
      * @param array $prompts associative array. keys are the input field names
-     *                          and values are the description
+     *                                           and values are the description
      * @param array $types array of input field types (text, password,
-     *                          etc.) keys have to be the same like in $prompts
+     *                                           etc.) keys have to be the same like in $prompts
      * @param array $defaults array of default values. again keys have
-     *                          to be the same like in $prompts.  Do not depend
-     *                          on a default value being set.
+     *                                           to be the same like in $prompts.  Do not depend
+     *                                           on a default value being set.
      * @return array input sent by the user
      * @abstract 
      */
      function userDialog($command, $prompts, $types = array(), $defaults = array())
     {
          }
-    }
+     }

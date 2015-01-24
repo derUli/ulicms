@@ -10,7 +10,7 @@ $errors = array();
 
 if(!$acl -> hasPermission("import")){
      noperms();
-    }else{
+     }else{
      $valid = null;
      $do_update = false;
     
@@ -32,48 +32,53 @@ if(!$acl -> hasPermission("import")){
          }
     
     
-    ?>
-  <h1><?php echo TRANSLATION_JSON_IMPORT;?></h1>
+     ?>
+  <h1><?php echo TRANSLATION_JSON_IMPORT;
+     ?></h1>
   <?php if(count($errors) > 0){
          foreach($errors as $e){
              ?>
    <p class="ulicms_error"><?php real_htmlspecialchars($e[0]);
-            ?></p>
+             ?></p>
    <?php
              }
          }else if($valid === true){
-        ?>
+         ?>
  
   <p class="green"><?php echo str_ireplace("%table%", real_htmlspecialchars($table), TRANSLATION_IMPORT_INTO_TABLE_SUCCESSFULL);;
-        ?> </p>
+         ?> </p>
   <?php }
-    ?>
+     ?>
   <?php if($valid === false){
          ?>
-  <p class="ulicms_error"><?php echo TRANSLATION_NOT_A_JSON_FILE;?></p>
+  <p class="ulicms_error"><?php echo TRANSLATION_NOT_A_JSON_FILE;
+         ?></p>
    <?php }
-    ?>
+     ?>
   <form action="?action=import" method="post" enctype="multipart/form-data">
-  <p><?php echo TRANSLATION_IMPORT_INTO_TABLE;?><br/>
+  <p><?php echo TRANSLATION_IMPORT_INTO_TABLE;
+     ?><br/>
   <select name="table" size="1">
   <?php foreach($tables as $name){
-        ?>
+         ?>
   <option value="<?php echo $name;
-        ?>" <?php if($table == $name){
-            echo " selected=\"selected\"";
-        }
-        ?>><?php echo $name;
-        ?></option>
+         ?>" <?php if($table == $name){
+             echo " selected=\"selected\"";
+             }
+         ?>><?php echo $name;
+         ?></option>
   <?php }
-    ?>
+     ?>
   </select>
   </p>
   <p><input type="file" name="file"></p>
   <p><input id="do_update" type="checkbox" name="do_update" <?php if($do_update){
-        echo "checked";
-    }
-    ?>><label for="do_update"><?php echo TRANSLATION_DO_UPDATE;?></label></p>
-  <input type="submit" name="submit" value="<?php echo TRANSLATION_DO_IMPORT;?>">
+         echo "checked";
+         }
+     ?>><label for="do_update"><?php echo TRANSLATION_DO_UPDATE;
+     ?></label></p>
+  <input type="submit" name="submit" value="<?php echo TRANSLATION_DO_IMPORT;
+     ?>">
   </form>
   
   <?php

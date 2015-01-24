@@ -69,7 +69,7 @@ class PEAR_PackageFile
      * @param  $ ?   $debug
      * @param string $ 
      * @tmpdir Optional temporary directory for uncompressing
-     *           files
+     *                            files
      */
      function PEAR_PackageFile(& $config, $debug = false)
     {
@@ -187,9 +187,9 @@ class PEAR_PackageFile
      * @param string $data contents of package.xml file
      * @param int $state package state (one of PEAR_VALIDATE_* constants)
      * @param string $file full path to the package.xml file (and the files
-     *           it references)
+     *                            it references)
      * @param string $archive optional name of the archive that the XML was
-     *           extracted from, if any
+     *                            extracted from, if any
      * @return PEAR_PackageFile_v1 |PEAR_PackageFile_v2
      * @uses parserFactory() to construct a parser to load the package.
      */
@@ -307,7 +307,7 @@ class PEAR_PackageFile
      * @return PEAR_PackageFile_v1 |PEAR_PackageFile_v2
      * @using Archive_Tar to extract the files
      * @using fromPackageFile() to load the package after the package.xml
-     *           file is extracted.
+     *                            file is extracted.
      */
      function & fromTgzFile($file, $state)
     {
@@ -414,10 +414,10 @@ class PEAR_PackageFile
      * @param string $descfile name of package xml file
      * @param int $state package state (one of PEAR_VALIDATE_* constants)
      * @param string $ |false $archive name of the archive this package.xml came
-     *           from, if any
+     *                            from, if any
      * @return PEAR_PackageFile_v1 |PEAR_PackageFile_v2
      * @uses PEAR_PackageFile::fromXmlString to create the oject after the
-     *           XML is loaded from the package.xml file.
+     *                            XML is loaded from the package.xml file.
      */
      function & fromPackageFile($descfile, $state, $archive = false)
     {
@@ -499,4 +499,4 @@ class PEAR_PackageFile
          $info = PEAR :: raiseError("Cannot open '$info' for parsing");
          return $info;
          }
-    }
+     }

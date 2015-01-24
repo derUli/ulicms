@@ -3,7 +3,8 @@ $acl = new ACL();
 if($acl -> hasPermission("motd")){
      ?>
 <div>
-<h2><?php echo TRANSLATION_MOTD;?></h2>
+<h2><?php echo TRANSLATION_MOTD;
+     ?></h2>
 <?php
      if(isset($_POST["motd"])){
         
@@ -13,7 +14,8 @@ if($acl -> hasPermission("motd")){
         
         
          ?>
-<p><?php echo TRANSLATION_MOTD_WAS_CHANGED;?></p>
+<p><?php echo TRANSLATION_MOTD_WAS_CHANGED;
+         ?></p>
 <?php }
      ?>
 
@@ -22,8 +24,10 @@ if($acl -> hasPermission("motd")){
      ?></textarea>
 <br>
 <br>
-<input type="submit" name="motd_submit" value="<?php echo TRANSLATION_SAVE_CHANGES;?>">
-<p><strong><?php echo TRANSLATION_ALLOWED_HTML_TAGS;?></strong><br/>
+<input type="submit" name="motd_submit" value="<?php echo TRANSLATION_SAVE_CHANGES;
+     ?>">
+<p><strong><?php echo TRANSLATION_ALLOWED_HTML_TAGS;
+     ?></strong><br/>
 <?php echo htmlspecialchars(
         getconfig("allowed_html"))?></p>
 <?php

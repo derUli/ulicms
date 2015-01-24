@@ -51,20 +51,20 @@ if(isset($_POST["register_user"])){
 <?php }
 ?>
 <strong data-tooltip="Dieser Name wird zur Anmeldung im Administrationsbereich benötigt...">Benutzername:</strong><br/>
-<input type="text" style="width:300px;" name="admin_username" value="">
+<input type="text" required="true"name="admin_username" value="">
 <br/><br/>
 <strong>Nachname:</strong><br/>
-<input type="text" style="width:300px;" name="admin_lastname" value="">
+<input type="text" required="true"name="admin_lastname" value="">
 <br/><br/>
 <strong>Vorname:</strong><br/>
-<input type="text" style="width:300px;" name="admin_firstname" value=""><br/><br/>
+<input type="text" required="true"name="admin_firstname" value=""><br/><br/>
 <strong>Email:</strong><br/>
-<input type="text" style="width:300px;" name="admin_email" value=""><br/><br/>
+<input type="email" required="true"name="admin_email" value=""><br/><br/>
 <strong data-tooltip="Das Passwort des neuen Benutzers. Es wird Ihnen nach der Registrierung per E-Mail zugeschickt">Passwort:</strong><br/>
-<input type="password" style="width:300px;" name="admin_password" value=""><br/><br/>
+<input type="password" required="true"name="admin_password" value=""><br/><br/>
 
 <strong>Passwort wiederholen:</strong><br/>
-<input type="password" style="width:300px;" name="admin_password_repeat" value=""><br/><br/>
+<input type="password" required="true"name="admin_password_repeat" value=""><br/><br/>
 <?php add_hook("register_form_field");
 ?>
 <br/>

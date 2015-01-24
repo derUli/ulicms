@@ -1,13 +1,13 @@
 <?php
-/* 
-Dies ist die deutsche Sprachdatei von UliCMS.
-Bitte beachten Sie, dass die Implementation von Sprachdateien in UliCMS
-noch nicht fertig gestellt ist. 
-Die Sprachdatei enthält bisher nur einige Übersetzungen, jedoch längst nicht alle.
-Die restlichen Texte müssen im PHP-Code durch Platzhalter ersetzt werden.
-Wenn Sie Übersetzungen beisteuern möchten, kontaktieren Sie bitte den Entwickler des Systems.
-Beiträge zum Projekt werden gerne gesehen.
-*/
+/**
+ * Dies ist die deutsche Sprachdatei von UliCMS.
+ * Bitte beachten Sie, dass die Implementation von Sprachdateien in UliCMS
+ * noch nicht fertig gestellt ist. 
+ * Die Sprachdatei enthält bisher nur einige Übersetzungen, jedoch längst nicht alle.
+ * Die restlichen Texte müssen im PHP-Code durch Platzhalter ersetzt werden.
+ * Wenn Sie Übersetzungen beisteuern möchten, kontaktieren Sie bitte den Entwickler des Systems.
+ * Beiträge zum Projekt werden gerne gesehen.
+ */
 
 // Dashboard (Willkommen)
 define("TRANSLATION_MOTD", "Message of the Day");
@@ -190,7 +190,7 @@ define("TRANSLATION_INSTALLED_MODULES_INFO", "This is a list of the installed mo
 define("TRANSLATION_INSTALLED_DESIGNS", "Installed designs");
 define("TRANSLATION_INSTALLED_DESIGNS_INFO", "This is a list of all installed designs.");
 
-// Grundeinstellungen 
+// Grundeinstellungen
 define("TRANSLATION_HOMEPAGE_TITLE", "Site Title");
 define("TRANSLATION_MOTTO", "Site Slogan");
 define("TRANSLATION_HOMEPAGE_OWNER", "Site owner");
@@ -395,5 +395,7 @@ define("TRANSLATION_UPDATE_AVAILABLE", "Update available");
 
 define("TRANSLATION_CUSTOM_DATA_JSON", "User defined values (JSON)");
 
-
 define("TRANSLATION_DO_UPDATE", "Do Update");
+define("TRANSLATION_NONE", "None");
+
+add_hook("lang_en");

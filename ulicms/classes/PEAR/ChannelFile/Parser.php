@@ -66,4 +66,4 @@ class PEAR_ChannelFile_Parser extends PEAR_XMLParser
          $ret -> setPackagefile($file, $archive);
          return $ret;
          }
-    }
+     }

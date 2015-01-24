@@ -48,15 +48,18 @@ class packageManager{
         
          natcasesort($directory_content);
          for($i = 0;$i < count($directory_content);$i++){
-             $module_init_file = $module_folder . $directory_content[$i] . "/" .
-             $directory_content[$i] . "_main.php";
-            
-            
-             if($directory_content[$i] != ".." and $directory_content[$i] != "."){
-                 if(is_file($module_init_file)){
-                     array_push($available_modules, $directory_content[$i]);
+             if(is_dir($module_folder . $directory_content[$i])){
+                 $module_init_file = $module_folder . $directory_content[$i] . "/" .
+                 $directory_content[$i] . "_main.php";
+                
+                
+                 if($directory_content[$i] != ".." and $directory_content[$i] != "."){
+                     if(is_file($module_init_file)){
+                         array_push($available_modules, $directory_content[$i]);
+                         }
                      }
                  }
+            
              }
          natcasesort($available_modules);
          return $available_modules;
@@ -69,8 +72,8 @@ class packageManager{
          $folders = scanDir($templateDir);
          natcasesort($folders);
          for($i = 0; $i < count($folders); $i++){
-             $f = $templateDir . ($folders[$i]) . "/";
-             if(is_dir($f)){
+             $f = $templateDir . $folders[$i] . "/";
+             if(is_dir($templateDir . $folders[$i])){
                  if(is_file($f . "oben.php") and is_file($f . "unten.php")
                          and is_file($f . "style.css"))
                      array_push($themes, $folders[$i]);

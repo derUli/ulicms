@@ -1455,7 +1455,7 @@ class PEAR_PackageFile_v1
              case T_CURLY_OPEN:
              case T_DOLLAR_OPEN_CURLY_BRACES:
              case '{': $brace_level++;
-                continue 2;
+                 continue 2;
                  case '}':
                  $brace_level--;
                  if ($current_class_level == $brace_level){
@@ -1468,13 +1468,13 @@ class PEAR_PackageFile_v1
                      }
                  continue 2;
                  case '[': $bracket_level++;
-                continue 2;
+                 continue 2;
                  case ']': $bracket_level--;
-                continue 2;
+                 continue 2;
                  case '(': $paren_level++;
-                continue 2;
+                 continue 2;
                  case ')': $paren_level--;
-                continue 2;
+                 continue 2;
                  case T_INTERFACE:
                  $interface = true;
                  case T_CLASS:
@@ -1571,10 +1571,10 @@ class PEAR_PackageFile_v1
      * analyzeSourceCode().  The format of the built array is like
      * this:
      * 
-     *   array(
-     *     'class;MyClass' => 'array('type' => 'class', 'name' => 'MyClass'),
-     *     ...
-     *   )
+     *                    array(
+     *                      'class;MyClass' => 'array('type' => 'class', 'name' => 'MyClass'),
+     *                      ...
+     *                    )
      * 
      * @param array $srcinfo array with information about a source file
      * as returned by the analyzeSourceCode() method.

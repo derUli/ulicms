@@ -181,8 +181,8 @@ class PEAR_DependencyDB
              }
         
          if ($depdb['_version']{
-                0} > $this -> _version{
-                0}
+                 0} > $this -> _version{
+                 0}
             ){
              return PEAR :: raiseError('Dependency database is version ' .
                  $depdb['_version'] . ', and we are version ' .
@@ -383,7 +383,7 @@ class PEAR_DependencyDB
      * Upgraded packages first uninstall, then install
      * 
      * @param PEAR_PackageFile_v1 $ |PEAR_PackageFile_v2|array If an array, then it must have
-     *         indices 'channel' and 'package'
+     *                          indices 'channel' and 'package'
      */
      function uninstallPackage(& $pkg)
     {
@@ -523,13 +523,13 @@ class PEAR_DependencyDB
          if (!(int)flock($this -> _lockFp, $mode)){
              switch ($mode){
              case LOCK_SH: $str = 'shared';
-                break;
+                 break;
              case LOCK_EX: $str = 'exclusive';
-                break;
+                 break;
              case LOCK_UN: $str = 'unlock';
-                break;
+                 break;
              default: $str = 'unknown';
-                break;
+                 break;
                  }
             
              return PEAR :: raiseError("could not acquire $str lock ($this->_lockfile)");
@@ -793,4 +793,4 @@ class PEAR_DependencyDB
                 );
              }
          }
-    }
+     }

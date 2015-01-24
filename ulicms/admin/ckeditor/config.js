@@ -4,8 +4,8 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-   config.language = 'de';
-	 
+   //config.language = 'de';
+   config.ShiftEnterMode = 'p' ;
    if(window.location.href.indexOf("admin/") != -1)
    {
      config.filebrowserBrowseUrl = 'kcfinder/browse.php?type=files';

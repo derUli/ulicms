@@ -64,4 +64,4 @@ class Cache_Lite_Output extends Cache_Lite
          echo($data);
          }
     
-    }
+     }

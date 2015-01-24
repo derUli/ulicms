@@ -674,7 +674,7 @@ configuration.',
              }
         
          if (count($params) !== 2 || (!empty($params[1]) && $params[1]{
-                    0} == '-')){
+                     0} == '-')){
              return $this -> raiseError(
                 'Invalid format, correct is: channel-alias channel alias');
              }
@@ -718,9 +718,9 @@ configuration.',
      * @param string $command command name
      * @param array $options option_name => value
      * @param array $params list of additional parameters.
-     *                $params[0] should contain a string with either:
-     *                - <channel name> or
-     *                - <username>:<password>@<channel name>
+     *                                 $params[0] should contain a string with either:
+     *                                 - <channel name> or
+     *                                 - <username>:<password>@<channel name>
      * @return null |PEAR_Error
      */
      function doDiscover($command, $options, $params)
@@ -876,4 +876,4 @@ configuration.',
          $this -> config -> store();
          return true;
          }
-    }
+     }

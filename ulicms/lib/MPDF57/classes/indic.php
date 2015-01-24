@@ -2,12 +2,12 @@
 
 class indic{
     
-    function indic(){
+     function indic(){
         
-        }
+         }
     
     
-    function substituteIndic($earr, $lang, $font){
+     function substituteIndic($earr, $lang, $font){
          global $voltdata;
         
          if (!isset($voltdata[$font])){
@@ -218,12 +218,11 @@ class indic{
          // ============================
         // MAIN BIT FROM VOLT RULES
         foreach($voltdata[$font] AS $rid => $reps){
-            // echo $rid . ':  ' . $vstr.'<br />';
+             // echo $rid . ':  ' . $vstr.'<br />';
             $vstr = preg_replace('/' . $reps['match'] . '/', $reps['replace'], $vstr);
              }
-        // echo $vstr.'<br />'; exit;
-        
-         // ============================
+         // echo $vstr.'<br />'; exit;
+        // ============================
         // SPECIALS
         // KANNADA
         // <Base> <BelowBase1> [<BelowBase2> ] MatraI -> <Base/MatraI ligature> <Belowbase1> etc
@@ -416,9 +415,9 @@ class indic{
              }
          // ============================
         return $e;
-        }
+         }
     
     
-    }
+     }
 
 ?>

@@ -70,12 +70,12 @@ class PEAR_Task_Unixeol extends PEAR_Task_Common
      * @param string $ file contents
      * @param string $ the eventual final file location (informational only)
      * @return string |false|PEAR_Error false to skip this file, PEAR_Error to fail
-     *          (use $this->throwError), otherwise return the new contents
+     *                           (use $this->throwError), otherwise return the new contents
      */
      function startSession($pkg, $contents, $dest)
     {
          $this -> logger -> log(3, "replacing all line endings with \\n in $dest");
          return preg_replace("/\r\n|\n\r|\r|\n/", "\n", $contents);
          }
-    }
+     }
 ?>

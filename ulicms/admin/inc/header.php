@@ -1,18 +1,9 @@
 <!doctype html>
 <html>
 <head>
-<meta name="viewport" content="width=1024"/>
+<meta name="viewport" content="width=device-width"/>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-<?php
-$style = getconfig("backend_style");
-if(!$style)
-     $style = "green";
-
-$style = basename($style);
-
-?>
-<link rel="stylesheet" type="text/css" href="css/<?php echo $style;
-?>.css"/>
+<link rel="stylesheet" type="text/css" href="css/blue.css"/>
 
 <script type="text/javascript" src="scripts/php.js/strip_tags.js"></script>
 <script type="text/javascript" src="scripts/php.js/htmlspecialchars.js"></script>
@@ -34,7 +25,7 @@ $(document).ready(function() {
 <script type="text/javascript" src="scripts/doubletaptogo.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-$(".navbar_top ul li:has(ul)").doubleTapToGo();
+$(".menu li:has(ul)").doubleTapToGo();
 })
 </script>
 <?php }
@@ -62,3 +53,4 @@ $(".navbar_top ul li:has(ul)").doubleTapToGo();
 ?>
 </head>
 <body>
+<div id="root-container">

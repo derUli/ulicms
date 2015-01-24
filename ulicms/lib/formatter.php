@@ -1,11 +1,12 @@
 <?php
-function formatTime($Sekundenzahl) 
-{ 
-  $Sekundenzahl = abs($Sekundenzahl); // Ganzzahlwert bilden 
-
-  return sprintf(TRANSLATION_FORMAT_TIME, 
-                $Sekundenzahl/60/60/24,($Sekundenzahl/60/60)%24,($Sekundenzahl/60)%60,$Sekundenzahl%60); 
-} 
+function formatTime($Sekundenzahl)
+{
+     $Sekundenzahl = abs($Sekundenzahl); // Ganzzahlwert bilden 
+    
+    
+     return sprintf(TRANSLATION_FORMAT_TIME,
+         $Sekundenzahl / 60 / 60 / 24, ($Sekundenzahl / 60 / 60) % 24, ($Sekundenzahl / 60) % 60, $Sekundenzahl % 60);
+     }
 
 
 # Snippet from PHP Share: http://www.phpshare.org

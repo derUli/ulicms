@@ -53,4 +53,4 @@ class Cache_Lite_NestedOutput extends Cache_Lite_Output
          return $data;
          }
     
-    }
+     }
