@@ -32,12 +32,6 @@ overflow-y:scroll;
     padding:0;
     background:#335599;
     font-size:18px;
-    border-radius:10px; /*some css3*/
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    box-shadow:0 2px 2px rgba(0,0,0, .5);
-    -moz-box-shadow:0 2px 2px rgba(0,0,0, .5);
-    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .5);
 }
 
 .menu  li {
@@ -52,12 +46,7 @@ overflow-y:scroll;
     text-decoration:none;
     display:block;
     padding:8px 20px;
-
     border-top: 1px transparent solid;
-    border-radius:10px; /*some css3*/
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    text-shadow:0 2px 2px rgba(0,0,0, .7);
 }
 
 /* selected menu element */
@@ -67,9 +56,6 @@ overflow-y:scroll;
     text-decoration:none;
     border-top:1px solid #f8f8f8;
 
-    box-shadow:0 2px 2px rgba(0,0,0, .7); /*some css3*/
-    -moz-box-shadow:0 2px 2px rgba(0,0,0, .7);
-    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .7);
     text-shadow:0 2px 2px rgba(255,255,255, 0.7);
 }
 
@@ -82,24 +68,7 @@ overflow-y:scroll;
 .menu ul li a:hover {
     background:#335599 url(../images/bg.png);
     color:#fff;
-
-    border-radius:10px; /*some css3*/
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
     text-shadow:0 2px 2px rgba(0,0,0, 0.7);
-}
-
-.menu  ul li:first-child > a {
-    -moz-border-radius-topleft:10px; /*some css3*/
-    -moz-border-radius-topright:10px;
-    -webkit-border-top-left-radius:10px;
-    -webkit-border-top-right-radius:10px;
-}
-.menu  ul li:last-child > a {
-    -moz-border-radius-bottomleft:10px; /*some css3*/
-    -moz-border-radius-bottomright:10px;
-    -webkit-border-bottom-left-radius:10px;
-    -webkit-border-bottom-right-radius:10px;
 }
 
 /* drop down */
@@ -179,14 +148,6 @@ table tr:nth-child(even)   { background-color:#fff; }
     position:absolute;
     background:#aabbcc;
     border:1px solid #7788aa;
-
-    border-radius:10px; /*some css3*/
-    -moz-border-radius:10px;
-    -webkit-border-radius:10px;
-    box-shadow:0 2px 2px rgba(0,0,0, .5);
-    -moz-box-shadow:0 2px 2px rgba(0,0,0, .5);
-    -webkit-box-shadow:0 2px 2px rgba(0,0,0, .5);
-
     -moz-transition:opacity .25s linear, visibility .1s linear .1s;
     -webkit-transition:opacity .25s linear, visibility .1s linear .1s;
     -o-transition:opacity .25s linear, visibility .1s linear .1s;
