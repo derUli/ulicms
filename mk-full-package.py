@@ -27,10 +27,8 @@ def main():
     source_dir = os.path.dirname(__file__)
 
     ignore = ('.git', "doc-src", "phpCB-1.0.1-linux", "*.py", "*.pyc",
-                       "Releases", "cms-config.php", "content", "services",
-                       ".gitignore", ".htaccess", "installer.aus", "installer",
-              "modules", "templates", "fonts.php", "config.php", "contents.css",
-              "config.js", "comments")
+              "Releases", "cms-config.php", "services", "update.php",
+              ".gitignore", "cache")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     if reformat:
@@ -38,21 +36,11 @@ def main():
         execfile('reformat_code.py')
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
-    update_script = os.path.join(target, "ulicms", "update.php")
+    installer_aus_folder = os.path.join(target, "ulicms", "installer.aus")
+    installer_folder = os.path.join(target, "ulicms", "installer")
 
-    print("preparing update Script")
-    if os.path.exists(update_script):
-        with codecs.open(update_script, 'r+', "utf-8") as f:
-            lines = f.readlines()
-            f.seek(0)
-            f.truncate()
-            for line in lines:
-                if "unlink" in line and line.startswith("//"):
-                    line = line.replace("//", "")
-                    line = line.lstrip()
-                    
-                print(line)
-                f.write(line)
+    if os.path.exists(installer_aus_folder):
+        os.rename(installer_aus_folder, installer_folder)
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
     if args.zip:
         print("zipping folder...")
