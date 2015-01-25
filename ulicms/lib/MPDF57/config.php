@@ -39,16 +39,6 @@ $this -> margBuffer = 2; // Allows an (empty) end of block to extend beyond the 
 
 
 
-
-
-
-
-
-
-
-
-
-
 // PAGE NUMBERING
 $this -> pagenumPrefix;
 $this -> pagenumSuffix;
@@ -89,44 +79,14 @@ $this -> autoFontGroupSize = 2; // 1: individual words are spanned; 2: words+; 3
 $this -> useLang = true; // Default changed in mPDF 4.0
 
 
-
-
-
-
-
-
-
-
-
-
 $this -> useSubstitutions = false; // Substitute missing characters in UTF-8(multibyte) documents - from other fonts
 $this -> falseBoldWeight = 5; // Weight for bold text when using an artificial (outline) bold; value 0 (off) - 10 (rec. max)
-
-
-
-
-
-
-
-
-
-
 
 
 // CONFIGURATION
 $this -> allow_output_buffering = false;
 
 $this -> enableImports = false; // Adding mPDFI functions
-
-
-
-
-
-
-
-
-
-
 
 
 $this -> collapseBlockMargins = true; // Allows top and bottom margins to collapse between block elements
@@ -136,16 +96,6 @@ $this -> progbar_altHTML = ''; // Should include <html> and <body> but NOT end t
  // Can incude <head> and link to stylesheet etc.
 // e.g. '<html><body><p><img src="loading.gif" /> Creating PDF file. Please wait...</p>';
 $this -> dpi = 96; // To interpret "px" pixel values in HTML/CSS (see img_dpi below)
-
-
-
-
-
-
-
-
-
-
 
 
 // Automatically correct for tags where HTML specifies optional end tags e.g. P,LI,DD,TD
@@ -168,16 +118,6 @@ $this -> incrementFPR4 = 50; // i.e. will alter by 1/[50]th of width and try aga
 
 
 
-
-
-
-
-
-
-
-
-
-
 // COLORSPACE
 // 1 - allow GRAYSCALE only [convert CMYK/RGB->gray]
 // 2 - allow RGB / SPOT COLOR / Grayscale [convert CMYK->RGB]
@@ -191,16 +131,6 @@ $this -> PDFXauto = false; // Overrides warnings making changes when possible to
 
 
 
-
-
-
-
-
-
-
-
-
-
 // PDFA1-b Compliant files
 $this -> PDFA = false; // true=Forces compliance with PDFA-1b spec
  // Can use with $this->restrictColorSpace=3 (for a CMYK file)
@@ -209,6 +139,8 @@ $this -> PDFAauto = false; // Overrides warnings making changes when possible to
 $this -> ICCProfile = ''; // Colour profile OutputIntent
  // sRGB_IEC61966-2-1 (=default if blank and PDFA),  or other added .icc profile
 // Must be CMYK for PDFX, or appropriate type for PDFA(RGB or CMYK)
+
+
 // DEBUGGING & DEVELOPERS
 $this -> showStats = false;
 $this -> debug = false;
@@ -219,31 +151,11 @@ $this -> table_error_report_param = ''; // Parameter which can be passed to show
 
 
 
-
-
-
-
-
-
-
-
-
-
 // ANNOTATIONS
 $this -> title2annots = false;
 $this -> annotSize = 0.5; // default mm for Adobe annotations - nominal
 $this -> annotMargin; // default position for Annotations
 $this -> annotOpacity = 0.5; // default opacity for Annotations
-
-
-
-
-
-
-
-
-
-
 
 
 // BOOKMARKS
@@ -266,16 +178,6 @@ $this -> CSSselectMedia = 'print'; // screen, print, or any other CSS @media typ
 
 
 
-
-
-
-
-
-
-
-
-
-
 // PAGE HEADERS & FOOTERS
 $this -> forcePortraitHeaders = false;
 // Values used if simple FOOTER/HEADER given i.e. not array
@@ -292,16 +194,6 @@ $this -> footer_line_spacing = 0.25; // spacing between bottom of header and lin
 $this -> setAutoTopMargin = false;
 $this -> setAutoBottomMargin = false;
 $this -> autoMarginPadding = 2; // distance in mm used as padding if 'stretch' mode is used
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -326,6 +218,7 @@ $this -> use_kwt = false; // "Keep-with-table"
 $this -> iterationCounter = false; // Set to TRUE to use table Head iteration counter
 $this -> splitTableBorderWidth = 0; // Use table border (using this width in mm) when table breaks across pages
  // Recommended to use small value e.g. 0.01
+
 // IMAGES
 $this -> img_dpi = 96; // Default dpi to output images if size not defined
  // See also above "dpi"
@@ -339,29 +232,9 @@ $this -> jSWord = 0.4; // Proportion (/1) of space (when justifying margins) to 
 $this -> jSmaxChar = 2; // Maximum spacing to allocate to character spacing. (0 = no maximum)
 
 
-
-
-
-
-
-
-
-
-
-
 $this -> jSmaxCharLast = 1; // Maximum character spacing allowed (carried over) when finishing a last line
 $this -> jSmaxWordLast = 2; // Maximum word spacing allowed (carried over) when finishing a last line
 $this -> normalLineheight = 1.33; // Value used for line-height when CSS specified as 'normal' (default)
-
-
-
-
-
-
-
-
-
-
 
 
 // Small Caps
@@ -369,30 +242,10 @@ $this -> smCapsScale = 0.75; // Factor of 1 to scale capital letters
 $this -> smCapsStretch = 110; // % to stretch small caps horizontally (i.e. 100 = no stretch)
 
 
-
-
-
-
-
-
-
-
-
-
 // CJK Line-breaking
 $this -> allowCJKorphans = true; // FALSE=always wrap to next line; TRUE=squeeze or overflow
 $this -> allowCJKoverflow = false; // FALSE=squeeze; TRUE=overflow (only some characters, and disabled in tables)
 $this -> CJKforceend = false; // Forces overflowng punctuation to hang outside right margin mPDF 5.6.40
-
-
-
-
-
-
-
-
-
-
 
 
 // HYPHENATION
@@ -414,16 +267,6 @@ $this -> list_indent_first_level = 0; // 1/0 yex/no to indent first level of lis
 $this -> list_number_suffix = '.'; // Content to follow a numbered list marker e.g. '.' gives 1. or IV.; ')' gives 1) or a)
 
 
-
-
-
-
-
-
-
-
-
-
 // ACTIVE FORMS
 $this -> useActiveForms = false;
 
@@ -442,16 +285,6 @@ $this -> watermarkImgAlphaBlend = 'Normal';
 // "Multiply" works well for watermark image on top
 // BORDERS
 $this -> autoPadding = false; // Automatically increases padding in block elements when border-radius set - if required
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -692,21 +525,11 @@ $this -> pdf_version = '1.4';
 $this -> SHYlanguages = array('en', 'de', 'es', 'fi', 'fr', 'it', 'nl', 'pl', 'ru', 'sv'); // existing defined patterns
 
 
-
-
-
-
-
-
-
-
-
-
 $this -> default_lineheight_correction = 1.2; // Value 1 sets lineheight=fontsize height; 
  // Value used if line-height not set by CSS (usuallly is)
 $this -> fontsizes = array('XX-SMALL' => 0.7, 'X-SMALL' => 0.77, 'SMALL' => 0.86, 'MEDIUM' => 1, 'LARGE' => 1.2, 'X-LARGE' => 1.5, 'XX-LARGE' => 2);
 
-// CHARACTER PATTERN MATCHES TO DETECT LANGUAGES
+// CHARACTER PATTERN MATCHES TO DETECT LANGUAGES 
 // pattern used to detect RTL characters -> force RTL
 $this -> pregRTLchars = "\x{0590}-\x{06FF}\x{0700}-\x{083E}\x{FB00}-\x{FDFD}\x{FE70}-\x{FEFF}";
 
@@ -740,32 +563,12 @@ $this -> pregVIETchars = "\x{01A0}\x{01A1}\x{01AF}\x{01B0}\x{1EA0}-\x{1EF1}";
 $this -> pregVIETPluschars = "\x{0000}-\x{003B}\x{003F}-\x{00FF}\x{0300}-\x{036F}\x{0102}\x{0103}\x{0110}\x{0111}\x{0128}\x{0129}\x{0168}\x{0169}\x{1EF1}-\x{1EF9}"; // omits < >
 
 
-
-
-
-
-
-
-
-
-
-
  // Arabic
 $this -> pregARABICchars = "\x{0600}-\x{06FF}\x{0750}-\x{077F}\x{FB50}-\x{FDFD}\x{FE70}-\x{FEFF}";
  // Characters of Urdu, Pashto, Sindhi (but NOT arabic or persian/farsi) [not covered by DejavuSans font]
 $this -> pregNonARABICchars = "\x{0671}-\x{067D}\x{067F}-\x{0685}\x{0687}-\x{0697}\x{0699}-\x{06A8}\x{06AA}-\x{06AE}\x{06B0}-\x{06CB}\x{06CD}-\x{06D3}";
 
  $this -> pregHEBchars = "\x{0590}-\x{05FF}\x{FB00}-\x{FB49}"; // Hebrew
-
-
-
-
-
-
-
-
-
-
 
 
  // INDIC
@@ -781,16 +584,6 @@ $this -> pregHIchars = "\x{0900}-\x{0963}\x{0966}-\x{097F}"; // Devanagari (Hind
  $this -> pregSHchars = "\x{0D80}-\x{0DFF}"; // Sinhala 
 
 
-
-
-
-
-
-
-
-
-
-
  $this -> pregINDextra = "\x{200B}-\x{200D}\x{0964}\x{0965}\x{0020}-\x{0022}\x{0024}-\x{002E}\x{003A}-\x{003F}\x{005B}-\x{0060}\x{007B}-\x{007E}\x{00A0}";
  // 200B-D=Zero-width joiners; 0964,0965=Generic Indic punctuation; NBSP & general punctuation (excludes # and / so can use in autoFont() )
 $this -> allowedCSStags = 'DIV|P|H1|H2|H3|H4|H5|H6|FORM|IMG|A|BODY|TABLE|HR|THEAD|TFOOT|TBODY|TH|TR|TD|UL|OL|LI|PRE|BLOCKQUOTE|ADDRESS|DL|DT|DD';
@@ -798,16 +591,6 @@ $this -> allowedCSStags .= '|ARTICLE|ASIDE|FIGURE|FIGCAPTION|FOOTER|HEADER|HGROU
 $this -> allowedCSStags .= '|SPAN|TT|I|B|BIG|SMALL|EM|STRONG|DFN|CODE|SAMP|KBD|VAR|CITE|ABBR|ACRONYM|STRIKE|S|U|DEL|INS|Q|FONT';
 $this -> allowedCSStags .= '|SELECT|INPUT|TEXTAREA|CAPTION|FIELDSET|LEGEND'; // mPDF 5.4.18
 $this -> allowedCSStags .= '|TEXTCIRCLE|DOTTAB'; // mPDF 5.5.23	// mPDF 5.6.33
-
-
-
-
-
-
-
-
-
-
 
 
 $this -> outerblocktags = array('DIV', 'FORM', 'CENTER', 'DL', 'FIELDSET', 'ARTICLE', 'ASIDE', 'FIGURE', 'FIGCAPTION', 'FOOTER', 'HEADER', 'HGROUP', 'NAV', 'SECTION', 'DETAILS', 'SUMMARY'); // mPDF 5.5.09 // mPDF 5.5.22

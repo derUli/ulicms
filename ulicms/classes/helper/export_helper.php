@@ -1,6 +1,6 @@
 <?php
 class ExportHelper{
-     static function table2JSON($name){
+    static function table2JSON($name){
         
          $sql = "SELECT * FROM " . $name;
         

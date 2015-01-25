@@ -6,11 +6,11 @@ function array_insert(& $array, $value, $offset){
          $array = array_values($array);
          $offset = intval($offset);
          if ($offset < 0 || $offset >= count($array)){
-             array_push($array, $value);
-             }
+            array_push($array, $value);
+        }
         else if ($offset == 0){
-             array_unshift($array, $value);
-             }
+            array_unshift($array, $value);
+        }
         else{
              $temp = array_slice($array, 0, $offset);
              array_push($temp, $value);
@@ -19,15 +19,15 @@ function array_insert(& $array, $value, $offset){
              }
          }
     else{
-         $array = array($value);
-         }
+        $array = array($value);
+    }
      return count($array);
-     }
+    }
 
 function urlencode_part($url){ // mPDF 5.6.02
      if (!preg_match('/^[a-z]+:\/\//i', $url)){
-         return $url;
-         }
+        return $url;
+    }
      $file = $url;
      $query = '';
      if (preg_match('/[?]/', $url)){
@@ -37,7 +37,7 @@ function urlencode_part($url){ // mPDF 5.6.02
          }
      $file = str_replace(array(" ", "!", "$", "&", "'", "(", ")", "*", "+", ",", ";", "="), array("%20", "%21", "%24", "%26", "%27", "%28", "%29", "%2A", "%2B", "%2C", "%3B", "%3D"), $file);
      return $file . $query;
-     }
+    }
 
 
 function _strspn($str1, $str2, $start = null, $length = null){
@@ -51,7 +51,7 @@ function _strspn($str1, $str2, $start = null, $length = null){
     else{
          return strspn($str1, $str2, $start, $length);
          }
-     }
+    }
 
 
 function _strcspn($str1, $str2, $start = null, $length = null){
@@ -65,7 +65,7 @@ function _strcspn($str1, $str2, $start = null, $length = null){
     else{
          return strcspn($str1, $str2, $start, $length);
          }
-     }
+    }
 
 function _fgets (& $h, $force = false){
      $startpos = ftell($h);
@@ -75,7 +75,7 @@ function _fgets (& $h, $force = false){
          fseek($h, $startpos + strlen($s));
          }
      return $s;
-     }
+    }
 
 
 // For PHP4 compatability
@@ -84,34 +84,34 @@ if(!function_exists('str_ireplace')){
          $search = preg_quote($search, "/");
          return preg_replace("/" . $search . "/i", $replace, $subject);
          }
-     }
+    }
 if(!function_exists('htmlspecialchars_decode')){
      function htmlspecialchars_decode ($str){
          return strtr($str, array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
          }
-     }
+    }
 
 function PreparePreText($text, $ff = '//FF//'){
      $text = htmlspecialchars($text);
      if ($ff){
-         $text = str_replace($ff, '</pre><formfeed /><pre>', $text);
-         }
+        $text = str_replace($ff, '</pre><formfeed /><pre>', $text);
+    }
      return ('<pre>' . $text . '</pre>');
-     }
+    }
 
 if(!function_exists('strcode2utf')){
      function strcode2utf($str, $lo = true){
          // converts all the &#nnn; and &#xhhh; in a string to Unicode
         if ($lo){
-             $lo = 1;
-             }else{
-             $lo = 0;
-             }
+            $lo = 1;
+        }else{
+            $lo = 0;
+        }
          $str = preg_replace('/\&\#([0-9]+)\;/me', "code2utf('\\1',{$lo})", $str);
          $str = preg_replace('/\&\#x([0-9a-fA-F]+)\;/me', "codeHex2utf('\\1',{$lo})", $str);
          return $str;
          }
-     }
+    }
 
 if(!function_exists('code2utf')){
      function code2utf($num, $lo = true){
@@ -125,7 +125,7 @@ if(!function_exists('code2utf')){
          if ($num < 2097152) return chr(($num >> 18) + 240) . chr((($num >> 12) & 63) + 128) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
          return '?';
          }
-     }
+    }
 
 
 if(!function_exists('codeHex2utf')){
@@ -134,7 +134,7 @@ if(!function_exists('codeHex2utf')){
          if (($num < 128) && !$lo) return '&#x' . $hex . ';';
          return code2utf($num, $lo);
          }
-     }
+    }
 
 
 ?>

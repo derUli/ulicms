@@ -19,15 +19,15 @@
      }
 
 if(!function_exists("sanitize")){
-     function sanitize(& $array)
+function sanitize(&$array)
+{
+    foreach($array as &$data)
     {
-         foreach($array as & $data)
-        {
-             $data = str_ireplace(array("\r", "\n", "%0a", "%0d"), '', stripslashes($data));
-             }
-         }
-    
-     }
+        $data = str_ireplace(array("\r", "\n", "%0a", "%0d"), '', stripslashes($data));
+    }
+}
+
+}
 
 
 
@@ -54,8 +54,8 @@ if(!function_exists("sanitize")){
  if(!function_exists("br2nlr")){
      function br2nlr($html){
          return preg_replace('#<br\s*/?>#i', "\r\n", $html);
-         }
-     }
+        }
+    }
 
 
  if(!function_exists("normalizeLN")){
@@ -79,9 +79,9 @@ if(!function_exists("sanitize")){
 if(!function_exists("multi_explode")){
      function multi_explode($delimiters, $string){
          return explode($delimiters[0], strtr($string, array_combine(array_slice($delimiters, 1), array_fill(0, count($delimiters)-1, array_shift($delimiters)))));
-         }
+        }
     
-     }
+    }
 
  if(!function_exists("make_links_clickable")){
      // Links klickbar machen

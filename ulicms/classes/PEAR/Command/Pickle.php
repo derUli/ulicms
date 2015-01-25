@@ -418,4 +418,4 @@ generate both package.xml.
          $gen = & $pf -> getDefaultGenerator();
          $gen -> toPackageFile('.');
          }
-     }
+    }

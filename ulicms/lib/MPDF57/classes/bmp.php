@@ -2,14 +2,14 @@
 
 class bmp{
     
-     var $mpdf = null;
+    var $mpdf = null;
     
-     function bmp(& $mpdf){
+    function bmp(& $mpdf){
          $this -> mpdf = $mpdf;
-         }
+        }
     
     
-     function _getBMPimage($data, $file){
+    function _getBMPimage($data, $file){
          $info = array();
          // Adapted from script by Valentin Schmidt
         // http://staff.dasdeck.de/valentin/fpdf/fpdf_bmp/
@@ -40,8 +40,8 @@ class bmp{
         
          if ($this -> mpdf -> restrictColorSpace == 1 || $this -> mpdf -> PDFX || $this -> mpdf -> restrictColorSpace == 3){
              if (($this -> mpdf -> PDFA && !$this -> mpdf -> PDFAauto) || ($this -> mpdf -> PDFX && !$this -> mpdf -> PDFXauto)){
-                 $this -> mpdf -> PDFAXwarnings[] = "Image cannot be converted to suitable colour space for PDFA or PDFX file - " . $file . " - (Image replaced by 'no-image'.)";
-                 }
+                $this -> mpdf -> PDFAXwarnings[] = "Image cannot be converted to suitable colour space for PDFA or PDFX file - " . $file . " - (Image replaced by 'no-image'.)";
+            }
              return array('error' => "BMP Image cannot be converted to suitable colour space - " . $file . " - (Image replaced by 'no-image'.)");
              }
         
@@ -93,8 +93,8 @@ class bmp{
                      for ($x = 0;$x < $width;$x++){
                          $n = (ord($str[$y0 + 2 * $x + 1]) * 256 + ord($str[$y0 + 2 * $x]));
                          $b = ($n & 31) << 3;
-                         $g = ($n & 992) >> 2;
-                         $r = ($n & 31744) >> 7128;
+                        $g = ($n & 992) >> 2;
+                        $r = ($n & 31744) >> 7128;
                          $bmpdata .= chr($r) . chr($g) . chr($b);
                          }
                      }
@@ -104,8 +104,8 @@ class bmp{
                      for ($x = 0;$x < $width;$x++){
                          $n = (ord($str[$y0 + 2 * $x + 1]) * 256 + ord($str[$y0 + 2 * $x]));
                          $b = ($n & 31) << 3;
-                         $g = ($n & 992) >> 2;
-                         $r = ($n & 31744) >> 7;
+                        $g = ($n & 992) >> 2;
+                        $r = ($n & 31744) >> 7;
                          $bmpdata .= chr($r) . chr($g) . chr($b);
                          }
                      }
@@ -146,17 +146,17 @@ class bmp{
      $info['data'] = $bmpdata;
      $info['type'] = 'bmp';
      return $info;
-     }
+    }
 
 function _fourbytes2int_le($s){
      // Read a 4-byte integer from string
     return (ord($s[3]) << 24) + (ord($s[2]) << 16) + (ord($s[1]) << 8) + ord($s[0]);
-     }
+    }
 
 function _twobytes2int_le($s){
      // Read a 2-byte integer from string
     return (ord(substr($s, 1, 1)) << 8) + ord(substr($s, 0, 1));
-     }
+    }
 
 
 # Decoder for RLE8 compression in windows bitmaps
@@ -194,9 +194,9 @@ function rle8_decode ($str, $width){
                  }
              }
          return $out;
-         }
+        }
     
-     # Decoder for RLE4 compression in windows bitmaps
+    # Decoder for RLE4 compression in windows bitmaps
     # see http://msdn.microsoft.com/library/default.asp?url=/library/en-us/gdi/bitmaps_6x0u.asp
     function rle4_decode ($str, $width){
          $w = floor($width / 2) + ($width % 2);
@@ -245,10 +245,10 @@ function rle8_decode ($str, $width){
          for ($i = 0;$i < $cnt;$i++)
          $out .= chr(16 * $pixels[2 * $i] + $pixels[2 * $i + 1]);
          return $out;
-         }
+        }
     
     
     
-     }
+    }
 
 ?>

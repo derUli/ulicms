@@ -31,5 +31,5 @@ class PEAR_Installer_Role_Src extends PEAR_Installer_Role_Common
     {
          $installer -> source_files++;
          }
-     }
+    }
 ?>

@@ -205,14 +205,14 @@ class PEAR_PackageFile_Generator_v1
          $ret = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
          $ret .= "<!DOCTYPE package SYSTEM \"http://pear.php.net/dtd/package-1.0\">\n";
          $ret .= "<package version=\"1.0\" packagerversion=\"1.9.4\">\n" .
-         " <name>$pkginfo[package]</name>";
+        " <name>$pkginfo[package]</name>";
          if (isset($pkginfo['extends'])){
              $ret .= "\n<extends>$pkginfo[extends]</extends>";
              }
          $ret .=
          "\n <summary>" . $this -> _fixXmlEncoding($pkginfo['summary']) . "</summary>\n" .
-         " <description>" . trim($this -> _fixXmlEncoding($pkginfo['description'])) . "\n </description>\n" .
-         " <maintainers>\n";
+        " <description>" . trim($this -> _fixXmlEncoding($pkginfo['description'])) . "\n </description>\n" .
+        " <maintainers>\n";
          foreach ($pkginfo['maintainers'] as $maint){
              $ret .= "  <maintainer>\n";
              foreach ($maint_map as $idx => $elm){
@@ -506,9 +506,9 @@ class PEAR_PackageFile_Generator_v1
      * features like bundles and multiple releases
      * 
      * @param string $ the classname to instantiate and return.  This must be
-     *                          PEAR_PackageFile_v2 or a descendant
+     *                PEAR_PackageFile_v2 or a descendant
      * @param boolean $ if true, only valid, deterministic package.xml 1.0 as defined by the
-     *                           strictest parameters will be converted
+     *                 strictest parameters will be converted
      * @return PEAR_PackageFile_v2 |PEAR_Error
      */
      function & toV2($class = 'PEAR_PackageFile_v2', $strict = false)
@@ -529,9 +529,9 @@ class PEAR_PackageFile_Generator_v1
                  'xmlns:tasks' => 'http://pear.php.net/dtd/tasks-1.0',
                  'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
                  'xsi:schemaLocation' => "http://pear.php.net/dtd/tasks-1.0\n" .
-                 "http://pear.php.net/dtd/tasks-1.0.xsd\n" .
-                 "http://pear.php.net/dtd/package-2.0\n" .
-                 'http://pear.php.net/dtd/package-2.0.xsd',
+                "http://pear.php.net/dtd/tasks-1.0.xsd\n" .
+                "http://pear.php.net/dtd/package-2.0\n" .
+                'http://pear.php.net/dtd/package-2.0.xsd',
                 ),
              'name' => $this -> _packagefile -> getPackage(),
              'channel' => 'pear.php.net',
@@ -857,29 +857,29 @@ class PEAR_PackageFile_Generator_v1
      * 
      * <pre>
      * - if any install-as/platform exist, create a generic release and fill it with
-     *              o <install as=..> tags for <file name=... install-as=...>
-     *              o <install as=..> tags for <file name=... platform=!... install-as=..>
-     *              o <ignore> tags for <file name=... platform=...>
-     *              o <ignore> tags for <file name=... platform=... install-as=..>
+     *    o <install as=..> tags for <file name=... install-as=...>
+     *    o <install as=..> tags for <file name=... platform=!... install-as=..>
+     *    o <ignore> tags for <file name=... platform=...>
+     *    o <ignore> tags for <file name=... platform=... install-as=..>
      * - create a release for each platform encountered and fill with
-     *              o <install as..> tags for <file name=... install-as=...>
-     *              o <install as..> tags for <file name=... platform=this platform install-as=..>
-     *              o <install as..> tags for <file name=... platform=!other platform install-as=..>
-     *              o <ignore> tags for <file name=... platform=!this platform>
-     *              o <ignore> tags for <file name=... platform=other platform>
-     *              o <ignore> tags for <file name=... platform=other platform install-as=..>
-     *              o <ignore> tags for <file name=... platform=!this platform install-as=..>
+     *    o <install as..> tags for <file name=... install-as=...>
+     *    o <install as..> tags for <file name=... platform=this platform install-as=..>
+     *    o <install as..> tags for <file name=... platform=!other platform install-as=..>
+     *    o <ignore> tags for <file name=... platform=!this platform>
+     *    o <ignore> tags for <file name=... platform=other platform>
+     *    o <ignore> tags for <file name=... platform=other platform install-as=..>
+     *    o <ignore> tags for <file name=... platform=!this platform install-as=..>
      * </pre>
      * 
      * It does this by accessing the $package parameter, which contains an array with
      * indices:
      * 
-     *             - platform: mapping of file => OS the file should be installed on
-     *             - install-as: mapping of file => installed name
-     *             - osmap: mapping of OS => list of files that should be installed
-     *               on that OS
-     *             - notosmap: mapping of OS => list of files that should not be
-     *               installed on that OS
+     *   - platform: mapping of file => OS the file should be installed on
+     *   - install-as: mapping of file => installed name
+     *   - osmap: mapping of OS => list of files that should be installed
+     *     on that OS
+     *   - notosmap: mapping of OS => list of files that should not be
+     *     installed on that OS
      * 
      * @param array $ 
      * @param array $ 
@@ -900,14 +900,14 @@ class PEAR_PackageFile_Generator_v1
                  // o <install as=..> tags for <file name=... platform=!... install-as=..>
                 if (isset($package['platform'][$file]) &&
                          $package['platform'][$file]{
-                         0} == '!'){
+                        0} == '!'){
                      $generic[] = $file;
                      continue;
                      }
                  // o <ignore> tags for <file name=... platform=... install-as=..>
                 if (isset($package['platform'][$file]) &&
                          $package['platform'][$file]{
-                         0} != '!'){
+                        0} != '!'){
                      $genericIgnore[] = $file;
                      continue;
                      }
@@ -972,7 +972,7 @@ class PEAR_PackageFile_Generator_v1
                         if (isset($package['platform'][$file]) &&
                                  $package['platform'][$file] != "!$os" &&
                                  $package['platform'][$file]{
-                                 0} == '!'){
+                                0} == '!'){
                              $release[$releaseNum]['filelist']['install'][] =
                              array(
                                 'attribs' => array(
@@ -998,7 +998,7 @@ class PEAR_PackageFile_Generator_v1
                         // <file name=... platform=other platform install-as=..>
                         if (isset($package['platform'][$file]) &&
                                  $package['platform'][$file]{
-                                 0} != '!' &&
+                                0} != '!' &&
                              $package['platform'][$file] != $os){
                              $release[$releaseNum]['filelist']['ignore'][] =
                              array(
@@ -1295,5 +1295,5 @@ class PEAR_PackageFile_Generator_v1
              }
          return $ret;
          }
-     }
+    }
 ?>

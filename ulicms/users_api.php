@@ -13,7 +13,7 @@ function getUsers(){
      }
 
 function changePassword($password, $id){
-     include_once ULICMS_ROOT . "lib/encryption.php";
+     include_once ULICMS_ROOT."lib/encryption.php";
      $newPassword = hash_password($password);
      return db_query("UPDATE " . tbname("users") . " SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
      }
@@ -94,12 +94,12 @@ function register_session($user, $redirect = true){
          $_SESSION["group_id"] = 0;
     
      $_SESSION["session_begin"] = time();
-    
+     
      if($user["notify_on_login"]){
-         $subject = "Login auf \"" . getconfig("homepage_title") . "\" als " . $user["username"];
-         $text = "Von der IP " . $_SERVER["REMOTE_ADDR"] . " hat sich jemand um " . date("r") . " erfolgreich in das Benutzerkonto " . $user["username"] . " auf dem Server " . $_SERVER["HTTP_HOST"] . " eingeloggt.";
-         $headers = "From: " . getconfig("email");
-         ulicms_mail($user["email"], $subject, $text, $headers);
+            $subject = "Login auf \"".getconfig("homepage_title")."\" als ".$user["username"];
+            $text = "Von der IP ". $_SERVER["REMOTE_ADDR"]. " hat sich jemand um ".date("r")." erfolgreich in das Benutzerkonto ".$user["username"]. " auf dem Server ".$_SERVER["HTTP_HOST"]. " eingeloggt.";
+            $headers = "From: ".getconfig("email");
+            ulicms_mail($user["email"], $subject, $text, $headers);
          }
     
      if(!$redirect)
@@ -117,7 +117,7 @@ function register_session($user, $redirect = true){
 
 
 function validate_login($user, $password){
-     include_once ULICMS_ROOT . "/lib/encryption.php";
+     include_once ULICMS_ROOT."/lib/encryption.php";
      $user = getUserByName($user);
     
      if($user){

@@ -1,141 +1,141 @@
 <?php
 
 function getLanguageFilePath($lang = "de", $component = null){
-     // Todo Module Language Files
-    return ULICMS_ROOT . "/lang/" . $lang . ".php";
-     }
+   // Todo Module Language Files
+   return ULICMS_ROOT."/lang/".$lang.".php";
+}
 
 function getModuleName($module){
-     $name_file = getModulePath($module) .
-     $module . "_name.php";
-     if(!file_exists($name_file)){
-         return $module;
-         }
-     include_once $name_file;
-     $name_function = $module . "_name";
-     if(function_exists($name_function)){
-         return call_user_func($name_function);
-         }else{
-         return $module;
-         }
-     }
+   $name_file = getModulePath($module) .
+ $module . "_name.php";
+ if(!file_exists($name_file)){
+    return $module;
+ }
+ include_once $name_file;
+ $name_function = $module."_name";
+ if(function_exists($name_function)){
+    return call_user_func($name_function);
+ } else{
+   return $module;
+ }
+}
 
 function getLanguageNameByCode($code){
-     $query = db_query("SELECT name FROM `" . tbname("languages") . "` WHERE language_code = '" . db_escape($code) . "'");
-     $retval = $code;
-     if(db_num_rows($query) > 0){
-         $result = db_fetch_object($query);
-         $retval = $result -> name;
-         }
-    
-     return $retval;
-     }
+   $query = db_query("SELECT name FROM `".tbname("languages"). "` WHERE language_code = '".db_escape($code)."'");
+   $retval = $code;
+   if(db_num_rows($query) > 0){
+      $result = db_fetch_object($query);
+      $retval = $result->name;
+      }
+      
+      return $retval;
+}
 
 function getAvailableBackendLanguages(){
-     $langdir = ULICMS_ROOT . "/lang/";
-     $list = scandir($langdir);
-     sort($list);
-     $retval = array();
-     for($i = 0; $i < count($list); $i++){
-         if(endsWith($list[$i], ".php")){
-             array_push($retval, basename($list[$i], ".php"));
-             }
-         }
-    
-     return $retval;
-     }
+   $langdir = ULICMS_ROOT."/lang/";
+   $list = scandir($langdir);
+   sort($list);
+   $retval = array();
+   for($i=0; $i < count($list); $i++){
+   if(endsWith($list[$i], ".php")){
+      array_push($retval, basename($list[$i], ".php"));
+      }
+   }
+   
+   return $retval;
+}
 
 function getSystemLanguage(){
-     if(isset($_SESSION["system_language"])){
-         $lang = $_SESSION["system_language"];
-         }else if(getconfig("system_language")){
-         $lang = getconfig("system_language");
-         }else{
-         $lang = "de";
-         }
-    
-     if(!file_exists(getLanguageFilePath($lang))){
-         $lang = "de";
-         }
-    
-     return $lang;
-     }
+   if(isset($_SESSION["system_language"])){
+      $lang = $_SESSION["system_language"];
+   } else if(getconfig("system_language")){
+     $lang = getconfig("system_language");
+   } else{
+     $lang = "de";   
+   }
+   
+   if(!file_exists(getLanguageFilePath($lang))){ 
+     $lang = "de";    
+   }
+      
+   return $lang;
+   }
 
 
 function getStatusCodeByNumber($nr){
-     $http_codes = array(
-        100 => 'Continue',
-         101 => 'Switching Protocols',
-         102 => 'Processing',
-         200 => 'OK',
-         201 => 'Created',
-         202 => 'Accepted',
-         203 => 'Non-Authoritative Information',
-         204 => 'No Content',
-         205 => 'Reset Content',
-         206 => 'Partial Content',
-         207 => 'Multi-Status',
-         300 => 'Multiple Choices',
-         301 => 'Moved Permanently',
-         302 => 'Found',
-         303 => 'See Other',
-         304 => 'Not Modified',
-         305 => 'Use Proxy',
-         306 => 'Switch Proxy',
-         307 => 'Temporary Redirect',
-         400 => 'Bad Request',
-         401 => 'Unauthorized',
-         402 => 'Payment Required',
-         403 => 'Forbidden',
-         404 => 'Not Found',
-         405 => 'Method Not Allowed',
-         406 => 'Not Acceptable',
-         407 => 'Proxy Authentication Required',
-         408 => 'Request Timeout',
-         409 => 'Conflict',
-         410 => 'Gone',
-         411 => 'Length Required',
-         412 => 'Precondition Failed',
-         413 => 'Request Entity Too Large',
-         414 => 'Request-URI Too Long',
-         415 => 'Unsupported Media Type',
-         416 => 'Requested Range Not Satisfiable',
-         417 => 'Expectation Failed',
-         418 => 'I\'m a teapot',
-         422 => 'Unprocessable Entity',
-         423 => 'Locked',
-         424 => 'Failed Dependency',
-         425 => 'Unordered Collection',
-         426 => 'Upgrade Required',
-         449 => 'Retry With',
-         450 => 'Blocked by Windows Parental Controls',
-         500 => 'Internal Server Error',
-         501 => 'Not Implemented',
-         502 => 'Bad Gateway',
-         503 => 'Service Unavailable',
-         504 => 'Gateway Timeout',
-         505 => 'HTTP Version Not Supported',
-         506 => 'Variant Also Negotiates',
-         507 => 'Insufficient Storage',
-         509 => 'Bandwidth Limit Exceeded',
-         510 => 'Not Extended'
-        );
+    $http_codes = array(
+    100 => 'Continue',
+    101 => 'Switching Protocols',
+    102 => 'Processing',
+    200 => 'OK',
+    201 => 'Created',
+    202 => 'Accepted',
+    203 => 'Non-Authoritative Information',
+    204 => 'No Content',
+    205 => 'Reset Content',
+    206 => 'Partial Content',
+    207 => 'Multi-Status',
+    300 => 'Multiple Choices',
+    301 => 'Moved Permanently',
+    302 => 'Found',
+    303 => 'See Other',
+    304 => 'Not Modified',
+    305 => 'Use Proxy',
+    306 => 'Switch Proxy',
+    307 => 'Temporary Redirect',
+    400 => 'Bad Request',
+    401 => 'Unauthorized',
+    402 => 'Payment Required',
+    403 => 'Forbidden',
+    404 => 'Not Found',
+    405 => 'Method Not Allowed',
+    406 => 'Not Acceptable',
+    407 => 'Proxy Authentication Required',
+    408 => 'Request Timeout',
+    409 => 'Conflict',
+    410 => 'Gone',
+    411 => 'Length Required',
+    412 => 'Precondition Failed',
+    413 => 'Request Entity Too Large',
+    414 => 'Request-URI Too Long',
+    415 => 'Unsupported Media Type',
+    416 => 'Requested Range Not Satisfiable',
+    417 => 'Expectation Failed',
+    418 => 'I\'m a teapot',
+    422 => 'Unprocessable Entity',
+    423 => 'Locked',
+    424 => 'Failed Dependency',
+    425 => 'Unordered Collection',
+    426 => 'Upgrade Required',
+    449 => 'Retry With',
+    450 => 'Blocked by Windows Parental Controls',
+    500 => 'Internal Server Error',
+    501 => 'Not Implemented',
+    502 => 'Bad Gateway',
+    503 => 'Service Unavailable',
+    504 => 'Gateway Timeout',
+    505 => 'HTTP Version Not Supported',
+    506 => 'Variant Also Negotiates',
+    507 => 'Insufficient Storage',
+    509 => 'Bandwidth Limit Exceeded',
+    510 => 'Not Extended'
+    );
     
-     return $nr . " " . $http_codes[$nr];
-     }
+    return $nr. " ".$http_codes[$nr];
+}
 
 
 function ulicms_redirect($url = "http://www.ulicms.de", $status = 302){
-     header("HTTP/1.0 " . getStatusCodeByNumber($status));
-     header("Location: " . $url);
-     exit();
-    
-     }
+    header("HTTP/1.0 ".getStatusCodeByNumber($status));
+    header("Location: ".$url);
+    exit();
+
+}
 
 function getDomainByLanguage($language){
-     $domainMapping = getconfig("domain_to_language");
+    $domainMapping = getconfig("domain_to_language");
     
-     if(!empty($domainMapping)){
+    if(!empty($domainMapping)){
          $domainMapping = explode("\n", $domainMapping);
          for($i = 0; $i < count($domainMapping); $i++){
              $line = trim($domainMapping[$i]);
@@ -159,25 +159,25 @@ function getDomainByLanguage($language){
              }
         
         
-         }
+        }
      return null;
-     }
-
-
+    }
+    
+    
 // encodeURIComponent() is needed when working with accents
 // If not used, generate a JS error in CKEDITOR link plugin
-function encodeURIComponent($str){
-    
-     $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
-     return strtr(rawurlencode($str), $revert);
-    
-     }
+function encodeURIComponent( $str ){
+
+	$revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
+	return strtr(rawurlencode($str), $revert);
+
+}
 
 
 function setLanguageByDomain(){
-     $domainMapping = getconfig("domain_to_language");
+    $domainMapping = getconfig("domain_to_language");
     
-     if(!empty($domainMapping)){
+    if(!empty($domainMapping)){
          $domainMapping = explode("\n", $domainMapping);
          for($i = 0; $i < count($domainMapping); $i++){
              $line = trim($domainMapping[$i]);
@@ -204,14 +204,14 @@ function setLanguageByDomain(){
              }
         
         
-         }
+        }
      return false;
-     }
+    }
 
 
 function getCacheType(){
-     $c = getconfig("cache_type");
-     switch($c){
+    $c = getconfig("cache_type");
+    switch($c){
      case "cache_lite":
          @include "Cache/Lite.php";
          $cache_type = "cache_lite";
@@ -224,7 +224,7 @@ function getCacheType(){
          }
     
      return $cache_type;
-     }
+    }
 
 function getOnlineUsers(){
      $users_online = db_query("SELECT * FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
@@ -319,16 +319,6 @@ function get_mime($file){
      }
 
 
-function clearAPCCache(){
-     if(!function_exists("apc_clear_cache")){
-         return false;
-         }
-     apc_clear_cache();
-     apc_clear_cache('user');
-     apc_clear_cache('opcode');
-     return true;
-    
-     }
  function clearCache(){
      add_hook("before_clear_cache");
      $cache_type = getconfig("cache_type");
@@ -345,16 +335,8 @@ function clearAPCCache(){
          else
              SureRemoveDir("content/cache", false);
          }
-    
-    
-     if(function_exists("apc_clear_cache")){
-         clearAPCCache();
-         }
-    
-    
      add_hook("after_clear_cache");
      }
-
 
 // sind wir gerade im Adminordner?
 function is_admin_dir(){
@@ -585,22 +567,22 @@ function SureRemoveDir($dir, $DeleteMe){
 function buildSEOUrl($page = false, $redirection = null){
  if($page === false)
      $page = get_requested_pagename();
-
-
- if(startsWith($redirection, "#")){
-     return $redirection;
+     
+     
+  if(startsWith($redirection, "#")){
+       return $redirection;
      }
 
  if($page === get_frontpage())
      return "./";
-
+     
 
 
  $seo_url = "";
 
  if(is_file("backend.php"))
      $seo_url .= "../";
-
+     
 
 
 
@@ -727,11 +709,6 @@ function getAllModules(){
  }
 
 
-function no_cache(){
- if(!defined("NO_CACHE"))
-     define("NO_CACHE", true);
-}
-
 // replace Shortcodes with modules
 function replaceShortcodesWithModules($string, $replaceOther = true){
  if($replaceOther){
@@ -808,7 +785,7 @@ function getPageSystemnameByID($id){
      return "-";
      }
  }
-
+ 
 function getPageTitleByID($id){
  $query = db_query("SELECT title, id FROM `" . tbname("content") . "` where id=" . intval($id));
  if(db_num_rows($query) > 0){
@@ -826,24 +803,24 @@ function getAllPagesWithTitle(){
  $query = db_query("SELECT systemname, id, title FROM `" . tbname("content") . "` WHERE `deleted_at` IS NULL ORDER BY systemname");
  $returnvalues = Array();
  while($row = db_fetch_object($query)){
-     $a = Array($row -> title, $row -> systemname . ".html");
-     array_push($returnvalues, $a);
-     if(containsModule($row -> systemname, "blog")){
-        
-         $sql = "select title, seo_shortname from " . tbname("blog") . " ORDER by datum DESC";
+     $a = Array($row->title, $row->systemname . ".html");
+         array_push($returnvalues, $a);
+         if(containsModule($row->systemname, "blog")){
+         
+         $sql = "select title, seo_shortname from ".tbname("blog"). " ORDER by datum DESC";
          $query_blog = db_query($sql);
          while($row_blog = db_fetch_object($query_blog)){
-             $title = $row -> title . " -> " . $row_blog -> title;
-             $url = $row -> systemname . ".html" . "?single=" . $row_blog -> seo_shortname;
+             $title = $row->title . " -> ". $row_blog -> title;
+             $url = $row->systemname . ".html" . "?single=".$row_blog -> seo_shortname; 
              $b = Array($title, $url);
              array_push($returnvalues, $b);
-             }
-        
-        
+         }
+                     
+         
          }
      }
-
-
+     
+ 
 
  return $returnvalues;
 
@@ -852,19 +829,19 @@ function getAllPagesWithTitle(){
 // Get all pages
 function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = true){
 if(!$lang){
-     $query = db_query("SELECT * FROM `" . tbname("content") .
-         "` WHERE `deleted_at` IS NULL ORDER BY $order");
-     }else{
-    
-     $query = db_query("SELECT * FROM `" . tbname("content") .
-         "` WHERE `deleted_at` IS NULL AND language ='" . db_escape($lang) . "' ORDER BY $order");
-     }
+   $query = db_query("SELECT * FROM `" . tbname("content") .
+    "` WHERE `deleted_at` IS NULL ORDER BY $order");
+ } else {
+ 
+   $query = db_query("SELECT * FROM `" . tbname("content") .
+    "` WHERE `deleted_at` IS NULL AND language ='".db_escape($lang)."' ORDER BY $order");
+ }
  $returnvalues = Array();
  while($row = db_fetch_assoc($query)){
-     if(!($exclude_hash_links and startsWith($row["redirection"], "#"))){
-         array_push($returnvalues, $row);
-         }
-    
+    if(!($exclude_hash_links and startsWith($row["redirection"], "#"))){
+     array_push($returnvalues, $row);
+     }
+      
      }
 
  return $returnvalues;
@@ -874,13 +851,13 @@ if(!$lang){
 // Get systemnames of all pages
 function getAllSystemNames($lang = null){
 if(!$lang){
-     $query = db_query("SELECT systemname,id FROM `" . tbname("content") .
-         "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY systemname");
-     }else{
-    
-     $query = db_query("SELECT systemname,id FROM `" . tbname("content") .
-         "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='" . db_escape($lang) . "' ORDER BY systemname");
-     }
+   $query = db_query("SELECT systemname,id FROM `" . tbname("content") .
+    "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY systemname");
+ } else {
+ 
+   $query = db_query("SELECT systemname,id FROM `" . tbname("content") .
+    "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='".db_escape($lang)."' ORDER BY systemname");
+ }
  $returnvalues = Array();
  while($row = db_fetch_object($query)){
      array_push($returnvalues, $row -> systemname);
@@ -981,16 +958,6 @@ else
      return 0; // Or return error - invalid path...
 
 
-
-
-
-
-
-
-
-
-
-
  }
 
 
@@ -1014,8 +981,8 @@ function getAllMenus(){
 // Check if site contains a module
 function containsModule($page = null, $module = false){
 if(is_null($page))
-     $page = get_requested_pagename();
-
+   $page = get_requested_pagename();
+   
  $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname = '" .
      db_escape($page) . "'");
  $dataset = db_fetch_assoc($query);
@@ -1142,6 +1109,7 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 // that do not and have included them below.  If you use this function, you
 // should periodically check your list against the WURFL file, available at:
 // http://wurfl.sourceforge.net/
+
 $mobile_agents = Array(
     
     
@@ -1317,32 +1285,25 @@ foreach ($mobile_agents as $device){
  return $is_mobile;
 }
 
- function func_enabled($func){
- $disabled = explode(',', ini_get('disable_functions'));
- foreach ($disabled as $disableFunction){
-     $is_disabled[] = trim($disableFunction);
-     }
- if (in_array($func, $is_disabled)){
-     $it_is_disabled["m"] = $func . '() has been disabled for security reasons in php.ini';
-     $it_is_disabled["s"] = 0;
-     }else{
-     $it_is_disabled["m"] = $func . '() is allow to use';
-     $it_is_disabled["s"] = 1;
-     }
- return $it_is_disabled;
- }
+  function func_enabled($func){
+         $disabled = explode(',', ini_get('disable_functions'));
+         foreach ($disabled as $disableFunction){
+             $is_disabled[] = trim($disableFunction);
+             }
+         if (in_array($func, $is_disabled)){
+             $it_is_disabled["m"] = $func . '() has been disabled for security reasons in php.ini';
+             $it_is_disabled["s"] = 0;
+             }else{
+             $it_is_disabled["m"] = $func . '() is allow to use';
+             $it_is_disabled["s"] = 1;
+             }
+         return $it_is_disabled;
+         }
 
 
 function is_admin(){
- $acl = new ACL();
- $permissions = $acl -> getDefaultACLAsJSON(true, true);
- foreach($permissions as $permission => $value){
-     if(!$acl -> hasPermission($permission)){
-         return false;
-         }
-     }
- return true;
-}
+ return $_SESSION["group_id"] == 1;
+ }
 
 require_once "users_api.php";
 require_once "legacy.php";

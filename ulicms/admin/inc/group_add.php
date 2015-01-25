@@ -8,13 +8,10 @@ $all_permissions = $acl -> getDefaultACL(true, true);
 
 ?>
 <form action="?action=groups" method="post">
-<p><strong><?php echo TRANSLATION_NAME;
-?></strong> <input type="text" required="true" name="name" value=""></p>
-<p><strong><?php echo TRANSLATION_PERMISSIONS;
-?></strong></p>
+<p><strong><?php echo TRANSLATION_NAME;?></strong> <input type="text" name="name" value=""></p>
+<p><strong><?php echo TRANSLATION_PERMISSIONS;?></strong></p>
 <fieldset>
-<p><input id="checkall" type="checkbox" class="checkall"> <label for="checkall"><?php echo TRANSLATION_SELECT_ALL;
-?></label></p>
+<p><input id="checkall" type="checkbox" class="checkall"> <label for="checkall"><?php echo TRANSLATION_SELECT_ALL;?></label></p>
 <p>
 <?php foreach($all_permissions As $key => $value){
      ?>
@@ -22,15 +19,14 @@ $all_permissions = $acl -> getDefaultACL(true, true);
      ?>" name="user_permissons[]" value="<?php echo $key;
      ?>"> <label for="<?php echo $key;
      ?>"><?php echo $key;
-     ?></label>
+    ?></label>
    <br/>
 <?php }
 ?>
 </p>
 </fieldset>
 <br/>
-<input type="submit" value="<?php echo TRANSLATION_CREATE_GROUP;
-?>" name="add_group">
+<input type="submit" value="<?php echo TRANSLATION_CREATE_GROUP;?>" name="add_group">
 </form>
 
 <script type="text/javascript">

@@ -1,19 +1,16 @@
 <?php
 class ulicms_version{
-     function ulicms_version(){
-         $this -> version = "Starlight";
-         $this -> internalVersion = Array(7, 2, 2);
-         $this -> update = "";
-         $this -> developmentVersion = false;
-         }
     
-     // Gibt den Codenamen der UliCMS Version zurück (z.B. 2013R2)
+     function ulicms_version(){
+         $this -> version = "Biscayne";
+         $this -> internalVersion = Array(7, 2, 1);
+         $this -> developmentVersion = false;
+         
+         }
+
+     // Gibt den Namen der UliCMS Version zurück (z.B. 2013R2)
     function getVersion(){
          return $this -> version;
-         }
-    
-     function getUpdate(){
-         return $this -> update;
          }
     
      function getDevelopmentVersion(){

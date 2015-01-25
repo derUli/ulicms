@@ -1,4 +1,4 @@
-<?php
+<?php 
 define("TRANSLATION_TITLE", "UliCMS Installation");
 define("TRANSLATION_WELCOME", "Willkommen");
 define("TRANSLATION_WELCOME2", "Willkommen zur Installation von UliCMS.");
@@ -47,8 +47,8 @@ define("TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL", "Die Zugangsdaten konnten Ihne
 define("TRANSLATION_MAIL_MESSAGE_TITLE", "UliCMS Installation auf %domain%");
 
 define("TRANSLATION_MAIL_MESSAGE_TEXT", "Hallo %person_name%!\n" .
-     "Auf %domain% wurde UliCMS erfolgreich installiert\n\n" .
-     "Die Zugangsdaten lauten:\n" .
-     "Benutzername: %username%\n" .
-     "Passwort: %password%\n\n" .
-     "Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen.");
+         "Auf %domain% wurde UliCMS erfolgreich installiert\n\n" .
+         "Die Zugangsdaten lauten:\n" .
+         "Benutzername: %username%\n" .
+         "Passwort: %password%\n\n" .
+         "Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen.");

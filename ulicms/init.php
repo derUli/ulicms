@@ -33,15 +33,15 @@ $classes_dir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "classes";
 
 if(!defined("ULICMS_TMP"))
      define("ULICMS_TMP", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR);
-
- if(!file_existS(ULICMS_TMP))
-     mkdir(ULICMS_TMP);
-
-if(!defined("ULICMS_CACHE"))
+     
+     if(!file_existS(ULICMS_TMP))
+         mkdir(ULICMS_TMP);
+         
+if(!defined("ULICMS_CACHE"))         
      define("ULICMS_CACHE", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "cache" . DIRECTORY_SEPERATOR);
-
- if(!file_existS(ULICMS_CACHE))
-     mkdir(ULICMS_CACHE);
+     
+   if(!file_existS(ULICMS_CACHE))
+       mkdir(ULICMS_CACHE);
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "base_config.php";
@@ -119,18 +119,16 @@ else if(is_dir("installer")){
  throw new Exception("Can't include cms-config.php. Starting installer failed, too.");
  }
 
-global $connection, $config;
-$config = new config();
-
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else use default error_reporting from php.ini
-if((defined("ULICMS_DEBUG") and ULICMS_DEBUG) or (isset($config -> debug) and $config -> debug)){
+if(defined("ULICMS_DEBUG")){
+ if(ULICMS_DEBUG)
  error_reporting(E_ALL ^ E_NOTICE);
-
+ else
+ error_reporting(0);
 }else{
  error_reporting(0);
 }
-
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "db_functions.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "mailer.php";
@@ -145,7 +143,7 @@ define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
 
 function noperms(){
- echo "<p>" . TRANSLATION_NO_PERMISSIONS . "</p>";
+ echo "<p>".TRANSLATION_NO_PERMISSIONS."</p>";
  return false;
  }
 
@@ -224,12 +222,12 @@ $required_tables = array(tbname("users"),
 for($i = 0; $i < count($required_tables); $i++){
  $table = $required_tables[$i];
  if(!in_array($table, $existing_tables)){
-     if(!headers_sent())
-         header("Content-Type: text/html; charset=UTF-8");
-    
-     throw new Exception("Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
-     exit();
-     }
+ if(!headers_sent())
+     header("Content-Type: text/html; charset=UTF-8");
+
+ throw new Exception("Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
+ exit();
+ }
 }
 
 
@@ -240,7 +238,7 @@ $memory_limit = getconfig("memory_limit");
 
 if($memory_limit !== false)
  @ini_set('memory_limit', $memory_limit);
-
+ 
 $cache_period = getconfig("cache_period");
 
 // Prüfen ob Cache Gültigkeitsdauer gesetzt ist.
@@ -319,7 +317,7 @@ $version = new ulicms_version();
 
 define("UPDATE_CHECK_URL", "http://www.ulicms.de/updatecheck.php?v=" .
  urlencode(
-implode(".", $version -> getInternalVersion())) . "&update=" . urlencode($version -> getUpdate()));
+implode(".", $version -> getInternalVersion())));
 
 if(!getconfig("session_name"))
  setconfig("session_name", uniqid() . "_SESSION");

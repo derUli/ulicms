@@ -1122,4 +1122,4 @@ used for automated conversion or learning the format.
          $this -> ui -> outputData('Wrote new version 2.0 package.xml to "' . $saved . '"');
          return true;
          }
-     }
+    }

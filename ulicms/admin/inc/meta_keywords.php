@@ -35,9 +35,8 @@
              }
         
         
-         ?>
-<h1><?php echo TRANSLATION_META_KEYWORDS;
-         ?></h1>
+        ?>
+<h1><?php echo TRANSLATION_META_KEYWORDS;?></h1>
 <form action="index.php?action=meta_keywords" id="meta_keywords" method="post">
 <table border=0>
 <tr>
@@ -45,19 +44,18 @@
 <td><strong>Meta Keywords</strong></td>
 </tr>
 <?php
-         for($n = 0; $n < count($languages); $n++){
+        for($n = 0; $n < count($languages); $n++){
              $lang = $languages[$n];
-             ?>
+            ?>
 <tr>
 <td><?php echo $lang;
-             ?></td>
+            ?></td>
 <td>
 <input name="meta_keywords_<?php echo $lang;
-             ?>" style="width:400px" value="<?php echo stringHelper :: real_htmlspecialchars($meta_keywordss[$lang]);
-             ?>">
+            ?>" style="width:400px" value="<?php echo stringHelper::real_htmlspecialchars($meta_keywordss[$lang]);?>">
 </td>
 <?php }
-         ?>
+        ?>
 <tr>
 <td>
 </td>
@@ -83,8 +81,8 @@ $("#meta_keywords_settings").ajaxForm({beforeSubmit: function(e){
 </script>
 
 <?php }else{
-         noperms();
-         }
+        noperms();
+        }
     
-     }
+    }
 ?>

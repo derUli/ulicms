@@ -18,6 +18,7 @@ $checkdir = '';
 // ////////////////////////////////
 // ////////////////////////////////
 // ////////////////////////////////
+
 set_time_limit(600);
 ini_set("memory_limit", "256M");
 
@@ -32,20 +33,20 @@ $mpdf -> debug = true;
 $mpdf -> simpleTables = true;
 if ($checkdir){
      $ttfdir = $checkdir;
-     }
+    }
 else{
-     $ttfdir = _MPDF_TTFONTPATH;
-     }
+    $ttfdir = _MPDF_TTFONTPATH;
+}
 
 
 
 $mqr = ini_get("magic_quotes_runtime");
 if ($mqr){
-     set_magic_quotes_runtime(0);
-     }
+    set_magic_quotes_runtime(0);
+}
 if (!class_exists('TTFontFile_Analysis', false)){
-     include(_MPDF_PATH . 'classes/ttfontsuni_analysis.php');
-     }
+    include(_MPDF_PATH . 'classes/ttfontsuni_analysis.php');
+}
 
 // ==============================================================
 $smp = true;
@@ -76,7 +77,7 @@ foreach($unifile AS $line){
          $unichars[hexdec($m[1])] = hexdec($m[1]);
          $rangename = '';
          }
-     }
+    }
 
 // loads array $unicode_ranges
 include('UnicodeRanges.php');
@@ -106,11 +107,11 @@ foreach($ff AS $f){
              // $tempfonttrans[$tfname] = $fname;
             $style = '';
              if ($bold){
-                 $style .= 'B';
-                 }
+                $style .= 'B';
+            }
              if ($italic){
-                 $style .= 'I';
-                 }
+                $style .= 'I';
+            }
              if (!$style){
                  $tempfontdata[$fname]['file'] = $f;
                  if ($isTTC){
@@ -121,7 +122,7 @@ foreach($ff AS $f){
          }
      unset($ttf);
     
-     }
+    }
 
 $fullcovers = array();
 $nearlycovers = array();
@@ -130,6 +131,7 @@ $ningroup = 14;
 $nofgroups = ceil(count($unicode_ranges) / $ningroup);
 
 // ==============================================================
+
 for ($urgp = 0; $urgp < $nofgroups; $urgp++){
     
     
@@ -151,8 +153,8 @@ for ($urgp = 0; $urgp < $nofgroups; $urgp++){
      foreach ($tempfontdata AS $fname => $v){
          $cw = '';
          if (file_exists((_MPDF_TTFONTDATAPATH . $fname . '.cw.dat'))){
-             $cw = file_get_contents(_MPDF_TTFONTDATAPATH . $fname . '.cw.dat');
-             }
+            $cw = file_get_contents(_MPDF_TTFONTDATAPATH . $fname . '.cw.dat');
+        }
         else{
              $mpdf -> fontdata[$fname]['R'] = $tempfontdata[$fname]['file'];
              $mpdf -> AddFont($fname);
@@ -187,11 +189,11 @@ for ($urgp = 0; $urgp < $nofgroups; $urgp++){
                      for ($i = $rangestartdec; $i <= $rangeenddec; $i++){
                          // if (isset($cw[$i])) { $fontinrange++; }
                         if ($mpdf -> _charDefined($cw, $i)){
-                             $fontinrange++;
-                             }
+                            $fontinrange++;
+                        }
                          if (isset($unichars[$i])){
-                             $uniinrange++;
-                             }
+                            $uniinrange++;
+                        }
                          }
                      if ($uniinrange){
                          if ($fontinrange){
@@ -210,25 +212,25 @@ for ($urgp = 0; $urgp < $nofgroups; $urgp++){
                                  $nearlycovers[$urk][] = $fname;
                                  }
                             else if ($pc > 0.75){
-                                 $html .= '<td style="background-color: #00FFAA;">' . $str . '</td>';
-                                 }
+                                $html .= '<td style="background-color: #00FFAA;">' . $str . '</td>';
+                            }
                             else if ($pc > 0.5){
-                                 $html .= '<td style="background-color: #AAAAFF;">' . $str . '</td>';
-                                 }
+                                $html .= '<td style="background-color: #AAAAFF;">' . $str . '</td>';
+                            }
                             else if ($pc > 0.25){
-                                 $html .= '<td style="background-color: #FFFFAA;">' . $str . '</td>';
-                                 }
+                                $html .= '<td style="background-color: #FFFFAA;">' . $str . '</td>';
+                            }
                             else{
-                                 $html .= '<td style="background-color: #FFAAAA;">' . $str . '</td>';
-                                 }
+                                $html .= '<td style="background-color: #FFAAAA;">' . $str . '</td>';
+                            }
                              }
                         else{
-                             $html .= '<td style="background-color: #555555;">(0/0)</td>';
-                             }
+                            $html .= '<td style="background-color: #555555;">(0/0)</td>';
+                        }
                          }
                     else{
-                         $html .= '<td style="background-color: #000000;"></td>';
-                         }
+                        $html .= '<td style="background-color: #000000;"></td>';
+                    }
                      }
                  }
              }
@@ -237,49 +239,49 @@ for ($urgp = 0; $urgp < $nofgroups; $urgp++){
          $html .= '</tr>';
         
          }
-     // ==============================================================
+    // ==============================================================
     $html .= '</table><pagebreak />';
-     }
+    }
 
 $html .= '<h4>Fonts with full coverage of Unicode Ranges</h4>';
 $html .= '<table>';
 // $html .= '<tr><td></td><td></td></tr>';
 foreach($unicode_ranges AS $urk => $ur){
      if ($ur['pua'] || $ur['reserved'] || $ur['control']){
-         continue;
-         }
+        continue;
+    }
      $rangekey = $urk;
      $range = $ur['range'];
      $rangestart = $ur['starthex'];
      $rangeend = $ur['endhex'];
      $ext = $ext2 = '';
      if ($ur['combining']){
-         $ext = 'background-color:#DDDDFF;';
-         $ext2 = '<br /><span style="color:#AA0000">Special positioning required</span>';
-         }
+        $ext = 'background-color:#DDDDFF;';
+        $ext2 = '<br /><span style="color:#AA0000">Special positioning required</span>';
+    }
      if ($ur['vertical']){
-         $ext = 'background-color:#FFDDDD;';
-         $ext2 = '<br /><span style="color:#AA0000">Vertical positioning required</span>';
-         }
+        $ext = 'background-color:#FFDDDD;';
+        $ext2 = '<br /><span style="color:#AA0000">Vertical positioning required</span>';
+    }
      if ($ur['special']){
-         $ext = 'background-color:#FFDDDD;';
-         $ext2 = '<br /><span style="color:#AA0000">Special processing required</span>';
-         }
+        $ext = 'background-color:#FFDDDD;';
+        $ext2 = '<br /><span style="color:#AA0000">Special processing required</span>';
+    }
     
     
      $html .= '<tr><td style="font-family:helvetica;font-size:8pt;font-weight:bold;' . $ext . '">' . strtoupper($range) . ' (U+' . $rangestart . '-U+' . $rangeend . ')' . $ext2 . '</td>';
      $arr = $fullcovers[$urk];
      $narr = $nearlycovers[$urk];
      if (is_array($arr)){
-         $html .= '<td>' . implode(', ', $arr) . '</td></tr>';
-         }
+        $html .= '<td>' . implode(', ', $arr) . '</td></tr>';
+    }
     else if (is_array($narr)){
-         $html .= '<td style="background-color: #AAAAAA;">' . implode(', ', $narr) . ' (>90%)</td></tr>';
-         }
+        $html .= '<td style="background-color: #AAAAAA;">' . implode(', ', $narr) . ' (>90%)</td></tr>';
+    }
     else{
-         $html .= '<td style="background-color: #555555;"> </td></tr>';
-         }
-     }
+        $html .= '<td style="background-color: #555555;"> </td></tr>';
+    }
+    }
 $html .= '</table>';
 
 
@@ -292,4 +294,5 @@ exit;
 // ==============================================================
 // ==============================================================
 // ==============================================================
+
 ?>

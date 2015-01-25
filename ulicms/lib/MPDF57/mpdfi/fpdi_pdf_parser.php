@@ -1,16 +1,22 @@
 <?php
 
 // FPDI - Version 1.2
+
 // Copyright 2004-2007 Setasign - Jan Slabon
+
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
+
 // http://www.apache.org/licenses/LICENSE-2.0
+
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+
 class fpdi_pdf_parser extends pdf_parser{
     
     /**
@@ -62,20 +68,20 @@ class fpdi_pdf_parser extends pdf_parser{
         
          parent :: pdf_parser($filename);
          if ($this -> success == false){
-             return false;
-             }
+            return false;
+        }
         
          // resolve Pages-Dictonary
         $pages = $this -> pdf_resolve_object($this -> c, $this -> root[1][1]['/Pages']);
          if ($this -> success == false){
-             return false;
-             }
+            return false;
+        }
         
          // Read pages
         $this -> read_pages($this -> c, $pages, $this -> pages);
          if ($this -> success == false){
-             return false;
-             }
+            return false;
+        }
         
          // count pages;
         $this -> page_count = count($this -> pages);
@@ -361,6 +367,6 @@ class fpdi_pdf_parser extends pdf_parser{
     
     
     
-     }
+    }
 
 ?>

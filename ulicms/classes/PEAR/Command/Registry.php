@@ -678,7 +678,7 @@ installed package.'
      foreach (array('lead', 'developer', 'contributor', 'helper') as $role){
          $leads = $obj -> {
             "get{$role}s"}
-         ();
+        ();
          if (!$leads){
              continue;
              }

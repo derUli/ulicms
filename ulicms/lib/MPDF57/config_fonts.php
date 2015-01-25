@@ -7,6 +7,7 @@
 // e.g. on Windows: define("_MPDF_SYSTEM_TTFONTS", 'C:/Windows/Fonts/');
 // Leave undefined if not required
 // define("_MPDF_SYSTEM_TTFONTS", '');
+
 // Optionally set font(s) (names as defined below in $this->fontdata) to use for missing characters
 // when using useSubstitutions. Use a font with wide coverage - dejavusanscondensed is a good start
 // only works using subsets (otherwise would add very large file)
@@ -21,6 +22,7 @@ $this -> backupSubsFont = array('dejavusanscondensed');
 // only works using subsets (otherwise would add very large file)
 // Leave undefined or blank if not not required
 // $this->backupSIPFont = 'sun-extb';
+
 /**
  * This array defines translations from font-family in CSS or HTML
  * to the internal font-family name used in mPDF. 

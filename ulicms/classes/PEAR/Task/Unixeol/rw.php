@@ -53,5 +53,5 @@ class PEAR_Task_Unixeol_rw extends PEAR_Task_Unixeol
     {
          return '';
          }
-     }
+    }
 ?>

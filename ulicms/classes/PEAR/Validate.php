@@ -311,7 +311,7 @@ class PEAR_Validate
              if (!$this -> _packagexml -> getExtends()){
                  if ($versioncomponents[0] == '1'){
                      if ($versioncomponents[2]{
-                             0} == '0'){
+                            0} == '0'){
                          if ($versioncomponents[2] == '0'){
                              // version 1.*.0000
                             $this -> _addWarning('version',
@@ -364,7 +364,7 @@ class PEAR_Validate
                      }
                  if ($versioncomponents[0] == $majver){
                      if ($versioncomponents[2]{
-                             0} == '0'){
+                            0} == '0'){
                          if ($versioncomponents[2] == '0'){
                              // version 2.*.0000
                             $this -> _addWarning('version',
@@ -663,4 +663,4 @@ class PEAR_Validate
     {
          return true;
          }
-     }
+    }

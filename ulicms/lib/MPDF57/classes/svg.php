@@ -6,6 +6,7 @@
 // http://rhodopsin.blogspot.com
 // 
 // cette class etendue est open source, toute modification devra cependant etre repertoriée~
+
 // NB UNITS - Works in pixels as main units - converting to PDF units when outputing to PDF string
 // and on returning size
 class SVG{
@@ -55,8 +56,8 @@ class SVG{
                 'fill-rule' => 'nonzero', // mode de remplissage par defaut
                 'stroke' => 'none', // pas de trait par defaut
                 'stroke-linecap' => 'butt', // style de langle par defaut
-                'stroke-linejoin' => 'miter',
-                 'stroke-miterlimit' => 4, // limite de langle par defaut
+                'stroke-linejoin' => 'miter', 
+                'stroke-miterlimit' => 4, // limite de langle par defaut
                 'stroke-opacity' => 1, // trait opaque par defaut
                 'stroke-width' => 1, // mPDF 4.4.011
                 'stroke-dasharray' => 0, // mPDF 4.4.003
@@ -179,17 +180,17 @@ class SVG{
                  }
              }
          if (!$w || $w == -999999){
-             $w = 100;
-             }
+            $w = 100;
+        }
          if (!$h || $h == -999999){
-             $h = 100;
-             }
+            $h = 100;
+        }
          if ($x_offset == 999999){
-             $x_offset = 0;
-             }
+            $x_offset = 0;
+        }
          if ($y_offset == 999999){
-             $y_offset = 0;
-             }
+            $y_offset = 0;
+        }
         
          // mPDF 4.5.010
         // TRANSFORMATIONS
@@ -210,21 +211,21 @@ class SVG{
                     else if ($c == 'translate' && count($vv)){
                          $tm[4] = $vv[0];
                          if (count($vv) == 2){
-                             $t_y = - $vv[1];
-                             }
+                            $t_y = - $vv[1];
+                        }
                         else{
-                             $t_y = 0;
-                             }
+                            $t_y = 0;
+                        }
                          $tm[5] = $t_y;
                          $transformations .= sprintf(' 1 0 0 1 %.3F %.3F cm ', $tm[4] * $this -> kp, $tm[5] * $this -> kp);
                          }
                     else if ($c == 'scale' && count($vv)){
                          if (count($vv) == 2){
-                             $s_y = $vv[1];
-                             }
+                            $s_y = $vv[1];
+                        }
                         else{
-                             $s_y = $vv[0];
-                             }
+                            $s_y = $vv[0];
+                        }
                          $tm[0] = $vv[0];
                          $tm[3] = $s_y;
                          $transformations .= sprintf(' %.3F 0 0 %.3F 0 0 cm ', $tm[0], $tm[3]);
@@ -261,34 +262,34 @@ class SVG{
          // mPDF 5.0.039
         if (isset($gradient_info['units']) && strtolower($gradient_info['units']) == 'userspaceonuse'){
              if ($transformations){
-                 $return .= $transformations;
-                 }
+                $return .= $transformations;
+            }
              }
          // mPDF 5.0.040
         $spread = 'P'; // pad
          if (isset($gradient_info['spread'])){
              if (strtolower($gradient_info['spread']) == 'reflect'){
-                 $spread = 'F';
-                 } // reflect
+                $spread = 'F';
+            } // reflect
              else if (strtolower($gradient_info['spread']) == 'repeat'){
-                 $spread = 'R';
-                 } // repeat
+                $spread = 'R';
+            } // repeat
              }
         
         
          for ($i = 0; $i < (count($gradient_info['color'])); $i++){
              if (stristr($gradient_info['color'][$i]['offset'], '%') !== false){
-                 $gradient_info['color'][$i]['offset'] = ($gradient_info['color'][$i]['offset'] + 0) / 100;
-                 }
+                $gradient_info['color'][$i]['offset'] = ($gradient_info['color'][$i]['offset'] + 0) / 100;
+            }
              if (stristr($gradient_info['color'][($i + 1)]['offset'], '%') !== false){
-                 $gradient_info['color'][($i + 1)]['offset'] = ($gradient_info['color'][($i + 1)]['offset'] + 0) / 100;
-                 }
+                $gradient_info['color'][($i + 1)]['offset'] = ($gradient_info['color'][($i + 1)]['offset'] + 0) / 100;
+            }
              if ($gradient_info['color'][$i]['offset'] < 0){
-                 $gradient_info['color'][$i]['offset'] = 0;
-                 }
+                $gradient_info['color'][$i]['offset'] = 0;
+            }
              if ($gradient_info['color'][$i]['offset'] > 1){
-                 $gradient_info['color'][$i]['offset'] = 1;
-                 }
+                $gradient_info['color'][$i]['offset'] = 1;
+            }
              if ($i > 0){
                  if ($gradient_info['color'][$i]['offset'] < $gradient_info['color'][($i-1)]['offset']){
                      $gradient_info['color'][$i]['offset'] = $gradient_info['color'][($i-1)]['offset'];
@@ -314,55 +315,55 @@ class SVG{
              // mPDF 4.4.003
             if (isset($gradient_info['units']) && strtolower($gradient_info['units']) == 'userspaceonuse'){
                  if (isset($gradient_info['info']['x1'])){
-                     $gradient_info['info']['x1'] = ($gradient_info['info']['x1'] - $x_offset) / $w;
-                     }
+                    $gradient_info['info']['x1'] = ($gradient_info['info']['x1'] - $x_offset) / $w;
+                }
                  if (isset($gradient_info['info']['y1'])){
-                     $gradient_info['info']['y1'] = ($gradient_info['info']['y1'] - $y_offset) / $h;
-                     }
+                    $gradient_info['info']['y1'] = ($gradient_info['info']['y1'] - $y_offset) / $h;
+                }
                  if (isset($gradient_info['info']['x2'])){
-                     $gradient_info['info']['x2'] = ($gradient_info['info']['x2'] - $x_offset) / $w;
-                     }
+                    $gradient_info['info']['x2'] = ($gradient_info['info']['x2'] - $x_offset) / $w;
+                }
                  if (isset($gradient_info['info']['y2'])){
-                     $gradient_info['info']['y2'] = ($gradient_info['info']['y2'] - $y_offset) / $h;
-                     }
+                    $gradient_info['info']['y2'] = ($gradient_info['info']['y2'] - $y_offset) / $h;
+                }
                  }
              if (isset($gradient_info['info']['x1'])){
-                 $x1 = $gradient_info['info']['x1'];
-                 }
+                $x1 = $gradient_info['info']['x1'];
+            }
             else{
-                 $x1 = 0;
-                 }
+                $x1 = 0;
+            }
              if (isset($gradient_info['info']['y1'])){
-                 $y1 = $gradient_info['info']['y1'];
-                 }
+                $y1 = $gradient_info['info']['y1'];
+            }
             else{
-                 $y1 = 0;
-                 }
+                $y1 = 0;
+            }
              if (isset($gradient_info['info']['x2'])){
-                 $x2 = $gradient_info['info']['x2'];
-                 }
+                $x2 = $gradient_info['info']['x2'];
+            }
             else{
-                 $x2 = 1;
-                 }
+                $x2 = 1;
+            }
              if (isset($gradient_info['info']['y2'])){
-                 $y2 = $gradient_info['info']['y2'];
-                 }
+                $y2 = $gradient_info['info']['y2'];
+            }
             else{
-                 $y2 = 0;
-                 }
+                $y2 = 0;
+            }
             
              if (stristr($x1, '%') !== false){
-                 $x1 = ($x1 + 0) / 100;
-                 }
+                $x1 = ($x1 + 0) / 100;
+            }
              if (stristr($x2, '%') !== false){
-                 $x2 = ($x2 + 0) / 100;
-                 }
+                $x2 = ($x2 + 0) / 100;
+            }
              if (stristr($y1, '%') !== false){
-                 $y1 = ($y1 + 0) / 100;
-                 }
+                $y1 = ($y1 + 0) / 100;
+            }
              if (stristr($y2, '%') !== false){
-                 $y2 = ($y2 + 0) / 100;
-                 }
+                $y2 = ($y2 + 0) / 100;
+            }
             
              // mPDF 5.0.042
             $bboxw = $w;
@@ -374,11 +375,11 @@ class SVG{
              if (isset($gradient_info['units']) && strtolower($gradient_info['units']) == 'userspaceonuse'){
                  $angle = rad2deg(atan2(($gradient_info['info']['y2'] - $gradient_info['info']['y1']), ($gradient_info['info']['x2'] - $gradient_info['info']['x1'])));
                  if ($angle < 0){
-                     $angle += 360;
-                     }
+                    $angle += 360;
+                }
                 else if ($angle > 360){
-                     $angle -= 360;
-                     }
+                    $angle -= 360;
+                }
                  if ($angle != 0 && $angle != 360 && $angle != 90 && $angle != 180 && $angle != 270){
                      if ($w >= $h){
                          $y1 *= $h / $w ;
@@ -403,8 +404,8 @@ class SVG{
              // mPDF 5.0.039
             if (isset($gradient_info['units']) && strtolower($gradient_info['units']) == 'objectboundingbox'){
                  if ($transformations){
-                     $return .= $transformations;
-                     }
+                    $return .= $transformations;
+                }
                  }
             
              // mPDF 5.0.020
@@ -447,8 +448,8 @@ class SVG{
                          $res3 = _testIntersect($px1, $py1, $px2, $py2, 0, 0, 1, 0); // $y=0 horiz axis
                          $res4 = _testIntersect($px1, $py1, $px2, $py2, 0, 1, 1, 1); // $y=1 horiz axis
                          if (!$res1 && !$res2 && !$res3 && !$res4){
-                             $inside = false;
-                             }
+                            $inside = false;
+                        }
                          }
                      }
                 
@@ -491,8 +492,8 @@ class SVG{
                          $res3 = _testIntersect($px1, $py1, $px2, $py2, 0, 0, 1, 0); // $y=0 horiz axis
                          $res4 = _testIntersect($px1, $py1, $px2, $py2, 0, 1, 1, 1); // $y=1 horiz axis
                          if (!$res1 && !$res2 && !$res3 && !$res4){
-                             $inside = false;
-                             }
+                            $inside = false;
+                        }
                          }
                      for($i = ($ns-1);$i >= 0;$i--){
                          if (isset($newarr[$i]['offset'])) array_unshift($gradient_info['color'], $newarr[$i]);
@@ -503,8 +504,8 @@ class SVG{
              // mPDF 4.4.007   Gradient STOPs
             $stops = count($gradient_info['color']);
              if ($stops < 2){
-                 return '';
-                 }
+                return '';
+            }
             
              // mPDF 5.0.042
             $range = $gradient_info['color'][count($gradient_info['color'])-1]['offset'] - $gradient_info['color'][0]['offset'];
@@ -523,8 +524,8 @@ class SVG{
                      'opacity' => $gradient_info['color'][$i]['opacity'],
                      'offset' => $offset);
                  if ($gradient_info['color'][$i]['opacity'] < 1){
-                     $trans = true;
-                     }
+                    $trans = true;
+                }
                  }
              $grx1 = $x1 + ($x2 - $x1) * $gradient_info['color'][0]['offset'];
              $gry1 = $y1 + ($y2 - $y1) * $gradient_info['color'][0]['offset'];
@@ -551,92 +552,92 @@ class SVG{
              // mPDF 4.4.003
             if (isset($gradient_info['units']) && strtolower($gradient_info['units']) == 'userspaceonuse'){
                  if ($w > $h){
-                     $h = $w;
-                     }
+                    $h = $w;
+                }
                 else{
-                     $w = $h;
-                     }
+                    $w = $h;
+                }
                  if (isset($gradient_info['info']['x0'])){
-                     $gradient_info['info']['x0'] = ($gradient_info['info']['x0'] - $x_offset) / $w;
-                     }
+                    $gradient_info['info']['x0'] = ($gradient_info['info']['x0'] - $x_offset) / $w;
+                }
                  if (isset($gradient_info['info']['y0'])){
-                     $gradient_info['info']['y0'] = ($gradient_info['info']['y0'] - $y_offset) / $h;
-                     }
+                    $gradient_info['info']['y0'] = ($gradient_info['info']['y0'] - $y_offset) / $h;
+                }
                  if (isset($gradient_info['info']['x1'])){
-                     $gradient_info['info']['x1'] = ($gradient_info['info']['x1'] - $x_offset) / $w;
-                     }
+                    $gradient_info['info']['x1'] = ($gradient_info['info']['x1'] - $x_offset) / $w;
+                }
                  if (isset($gradient_info['info']['y1'])){
-                     $gradient_info['info']['y1'] = ($gradient_info['info']['y1'] - $y_offset) / $h;
-                     }
+                    $gradient_info['info']['y1'] = ($gradient_info['info']['y1'] - $y_offset) / $h;
+                }
                  if (isset($gradient_info['info']['r'])){
-                     $gradient_info['info']['rx'] = $gradient_info['info']['r'] / $w;
-                     }
+                    $gradient_info['info']['rx'] = $gradient_info['info']['r'] / $w;
+                }
                  if (isset($gradient_info['info']['r'])){
-                     $gradient_info['info']['ry'] = $gradient_info['info']['r'] / $h;
-                     }
+                    $gradient_info['info']['ry'] = $gradient_info['info']['r'] / $h;
+                }
                  }
             
              if ($gradient_info['info']['x0'] || $gradient_info['info']['x0'] === 0){
-                 $x0 = $gradient_info['info']['x0'];
-                 }
+                $x0 = $gradient_info['info']['x0'];
+            }
             else{
-                 $x0 = 0.5;
-                 }
+                $x0 = 0.5;
+            }
              if ($gradient_info['info']['y0'] || $gradient_info['info']['y0'] === 0){
-                 $y0 = $gradient_info['info']['y0'];
-                 }
+                $y0 = $gradient_info['info']['y0'];
+            }
             else{
-                 $y0 = 0.5;
-                 }
+                $y0 = 0.5;
+            }
              if ($gradient_info['info']['rx'] || $gradient_info['info']['rx'] === 0){
-                 $rx = $gradient_info['info']['rx'];
-                 }
+                $rx = $gradient_info['info']['rx'];
+            }
             else if ($gradient_info['info']['r'] || $gradient_info['info']['r'] === 0){
-                 $rx = $gradient_info['info']['r'];
-                 }
+                $rx = $gradient_info['info']['r'];
+            }
             else{
-                 $rx = 0.5;
-                 }
+                $rx = 0.5;
+            }
              if ($gradient_info['info']['ry'] || $gradient_info['info']['ry'] === 0){
-                 $ry = $gradient_info['info']['ry'];
-                 }
+                $ry = $gradient_info['info']['ry'];
+            }
             else if ($gradient_info['info']['r'] || $gradient_info['info']['r'] === 0){
-                 $ry = $gradient_info['info']['r'];
-                 }
+                $ry = $gradient_info['info']['r'];
+            }
             else{
-                 $ry = 0.5;
-                 }
+                $ry = 0.5;
+            }
              if ($gradient_info['info']['x1'] || $gradient_info['info']['x1'] === 0){
-                 $x1 = $gradient_info['info']['x1'];
-                 }
+                $x1 = $gradient_info['info']['x1'];
+            }
             else{
-                 $x1 = $x0;
-                 }
+                $x1 = $x0;
+            }
              if ($gradient_info['info']['y1'] || $gradient_info['info']['y1'] === 0){
-                 $y1 = $gradient_info['info']['y1'];
-                 }
+                $y1 = $gradient_info['info']['y1'];
+            }
             else{
-                 $y1 = $y0;
-                 }
+                $y1 = $y0;
+            }
             
              if (stristr($x1, '%') !== false){
-                 $x1 = ($x1 + 0) / 100;
-                 }
+                $x1 = ($x1 + 0) / 100;
+            }
              if (stristr($x0, '%') !== false){
-                 $x0 = ($x0 + 0) / 100;
-                 }
+                $x0 = ($x0 + 0) / 100;
+            }
              if (stristr($y1, '%') !== false){
-                 $y1 = ($y1 + 0) / 100;
-                 }
+                $y1 = ($y1 + 0) / 100;
+            }
              if (stristr($y0, '%') !== false){
-                 $y0 = ($y0 + 0) / 100;
-                 }
+                $y0 = ($y0 + 0) / 100;
+            }
              if (stristr($rx, '%') !== false){
-                 $rx = ($rx + 0) / 100;
-                 }
+                $rx = ($rx + 0) / 100;
+            }
              if (stristr($ry, '%') !== false){
-                 $ry = ($ry + 0) / 100;
-                 }
+                $ry = ($ry + 0) / 100;
+            }
             
              // mPDF 5.0.043
             $bboxw = $w;
@@ -648,11 +649,11 @@ class SVG{
              if (isset($gradient_info['units']) && strtolower($gradient_info['units']) == 'userspaceonuse'){
                  $angle = rad2deg(atan2(($gradient_info['info']['y0'] - $gradient_info['info']['y1']), ($gradient_info['info']['x0'] - $gradient_info['info']['x1'])));
                  if ($angle < 0){
-                     $angle += 360;
-                     }
+                    $angle += 360;
+                }
                 else if ($angle > 360){
-                     $angle -= 360;
-                     }
+                    $angle -= 360;
+                }
                  if ($angle != 0 && $angle != 360 && $angle != 90 && $angle != 180 && $angle != 270){
                      if ($w >= $h){
                          $y1 *= $h / $w ;
@@ -684,14 +685,14 @@ class SVG{
              // mPDF 5.0.039
             if (isset($gradient_info['units']) && strtolower($gradient_info['units']) == 'objectboundingbox'){
                  if ($transformations){
-                     $return .= $transformations;
-                     }
+                    $return .= $transformations;
+                }
                  }
             
              // x1 and y1 (fx, fy) should be inside the circle defined by x0 y0 and r else error in mPDF
             while (pow(($x1 - $x0), 2) + pow(($y1 - $y0), 2) >= pow($r, 2)){
-                 $r += 0.05;
-                 }
+                $r += 0.05;
+            }
             
              // mPDF 5.0.040
             if ($spread == 'R' || $spread == 'F'){ // Repeat  /  Reflect
@@ -723,8 +724,8 @@ class SVG{
                          $pr = $r * $tmp;
                          $res = _testIntersectCircle($px, $py, $pr);
                          if (!$res){
-                             $inside = false;
-                             }
+                            $inside = false;
+                        }
                          }
                      }
                  }
@@ -732,8 +733,8 @@ class SVG{
              // mPDF 4.4.007   Gradient STOPs
             $stops = count($gradient_info['color']);
              if ($stops < 2){
-                 return '';
-                 }
+                return '';
+            }
             
              // mPDF 5.0.043
             $range = $gradient_info['color'][count($gradient_info['color'])-1]['offset'] - $gradient_info['color'][0]['offset'];
@@ -752,8 +753,8 @@ class SVG{
                      'opacity' => $gradient_info['color'][$i]['opacity'],
                      'offset' => $offset);
                  if ($gradient_info['color'][$i]['opacity'] < 1){
-                     $trans = true;
-                     }
+                    $trans = true;
+                }
                  }
              $grx1 = $x1 + ($x0 - $x1) * $gradient_info['color'][0]['offset'];
              $gry1 = $y1 + ($y0 - $y1) * $gradient_info['color'][0]['offset'];
@@ -801,7 +802,7 @@ class SVG{
                  $this -> svg_info['y'] = $vb[1];
                  $this -> svg_info['w'] = $vb[2];
                  $this -> svg_info['h'] = $vb[3];
-                 // return;						// mPDF 5.0.005
+                // return;						// mPDF 5.0.005
             }
              }
         
@@ -809,7 +810,7 @@ class SVG{
          $svg_h = $this -> mpdf_ref -> ConvertSize($attribs['height']); // mm
         
         
-         // /*
+        // /* 
         // mPDF 5.0.005
         if ($this -> svg_info['w']){ // if 'w' set by viewBox
              if ($svg_w){ // if width also set, use these values to determine to set size of "pixel"
@@ -822,17 +823,17 @@ class SVG{
                  }
              return;
              }
-         // */
-        // Added to handle file without height or width specified
+        // */
+         // Added to handle file without height or width specified
         if (!$svg_w && !$svg_h){
-             $svg_w = $svg_h = $this -> mpdf_ref -> blk[$this -> mpdf_ref -> blklvl]['inner_width'] ;
-             } // DEFAULT
+            $svg_w = $svg_h = $this -> mpdf_ref -> blk[$this -> mpdf_ref -> blklvl]['inner_width'] ;
+        } // DEFAULT
          if (!$svg_w){
-             $svg_w = $svg_h;
-             }
+            $svg_w = $svg_h;
+        }
          if (!$svg_h){
-             $svg_h = $svg_w;
-             }
+            $svg_h = $svg_w;
+        }
         
          $this -> svg_info['x'] = 0;
          $this -> svg_info['y'] = 0;
@@ -843,8 +844,8 @@ class SVG{
          }
     
     
-    
-     // check if points are within svg, if not, set to max
+     
+    // check if points are within svg, if not, set to max
     function svg_overflow($x, $y)
     {
          $x2 = $x;
@@ -928,21 +929,21 @@ class SVG{
                     else if ($c == 'translate' && count($vv)){
                          $tm[4] = $vv[0];
                          if (count($vv) == 2){
-                             $t_y = - $vv[1];
-                             }
+                            $t_y = - $vv[1];
+                        }
                         else{
-                             $t_y = 0;
-                             }
+                            $t_y = 0;
+                        }
                          $tm[5] = $t_y;
                          $transformations .= sprintf(' 1 0 0 1 %.3F %.3F cm ', $tm[4] * $this -> kp, $tm[5] * $this -> kp);
                          }
                     else if ($c == 'scale' && count($vv)){
                          if (count($vv) == 2){
-                             $s_y = $vv[1];
-                             }
+                            $s_y = $vv[1];
+                        }
                         else{
-                             $s_y = $vv[0];
-                             }
+                            $s_y = $vv[0];
+                        }
                          $tm[0] = $vv[0];
                          $tm[3] = $s_y;
                          $transformations .= sprintf(' %.3F 0 0 %.3F 0 0 cm ', $tm[0], $tm[3]);
@@ -979,68 +980,68 @@ class SVG{
                  $current_style['fill'] = '#' . str_pad(dechex($m[1]), 2, "0", STR_PAD_LEFT) . str_pad(dechex($m[2]), 2, "0", STR_PAD_LEFT) . str_pad(dechex($m[3]), 2, "0", STR_PAD_LEFT);
                  }
             else{
-                 $tmp = preg_replace("/(.*)fill:\s*([a-z0-9#_()]*|none)(.*)/i", "$2", $critere_style['style']); // mPDF 4.4.003
+                $tmp = preg_replace("/(.*)fill:\s*([a-z0-9#_()]*|none)(.*)/i", "$2", $critere_style['style']); // mPDF 4.4.003
                  if ($tmp != $critere_style['style']){
-                     $current_style['fill'] = $tmp;
-                     }
+                    $current_style['fill'] = $tmp;
+                }
                  }
             
              $tmp = preg_replace("/(.*)fill-opacity:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['fill-opacity'] = $tmp;
-                 }
+                $current_style['fill-opacity'] = $tmp;
+            }
             
              $tmp = preg_replace("/(.*)fill-rule:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['fill-rule'] = $tmp;
-                 }
+                $current_style['fill-rule'] = $tmp;
+            }
             
              if (preg_match('/stroke:\s*rgb\((\d+),\s*(\d+),\s*(\d+)\)/', $critere_style['style'], $m)){
                  $current_style['stroke'] = '#' . str_pad(dechex($m[1]), 2, "0", STR_PAD_LEFT) . str_pad(dechex($m[2]), 2, "0", STR_PAD_LEFT) . str_pad(dechex($m[3]), 2, "0", STR_PAD_LEFT);
                  }
             else{
-                 $tmp = preg_replace("/(.*)stroke:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
+                $tmp = preg_replace("/(.*)stroke:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
                  if ($tmp != $critere_style['style']){
-                     $current_style['stroke'] = $tmp;
-                     }
+                    $current_style['stroke'] = $tmp;
+                }
                  }
             
              $tmp = preg_replace("/(.*)stroke-linecap:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['stroke-linecap'] = $tmp;
-                 }
+                $current_style['stroke-linecap'] = $tmp;
+            }
             
              $tmp = preg_replace("/(.*)stroke-linejoin:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['stroke-linejoin'] = $tmp;
-                 }
+                $current_style['stroke-linejoin'] = $tmp;
+            }
             
              $tmp = preg_replace("/(.*)stroke-miterlimit:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['stroke-miterlimit'] = $tmp;
-                 }
+                $current_style['stroke-miterlimit'] = $tmp;
+            }
             
              $tmp = preg_replace("/(.*)stroke-opacity:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['stroke-opacity'] = $tmp;
-                 }
+                $current_style['stroke-opacity'] = $tmp;
+            }
             
              $tmp = preg_replace("/(.*)stroke-width:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['stroke-width'] = $tmp;
-                 }
+                $current_style['stroke-width'] = $tmp;
+            }
             
              // mPDF 4.4.003
             $tmp = preg_replace("/(.*)stroke-dasharray:\s*([a-z0-9., ]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['stroke-dasharray'] = $tmp;
-                 }
+                $current_style['stroke-dasharray'] = $tmp;
+            }
             
              // mPDF 4.4.003
             $tmp = preg_replace("/(.*)stroke-dashoffset:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['stroke-dashoffset'] = $tmp;
-                 }
+                $current_style['stroke-dashoffset'] = $tmp;
+            }
             
              }
          if(isset($critere_style['fill'])){
@@ -1096,13 +1097,13 @@ class SVG{
         
          }
     
-    
-     // Cette fonction ecrit le style dans le stream svg.
+     
+    // Cette fonction ecrit le style dans le stream svg.
     function svgStyle($critere_style, $attribs, $element){
          $path_style = '';
          if (substr_count($critere_style['fill'], 'url') > 0){
-            
-             // couleur degradé
+             
+            // couleur degradé
             $id_gradient = preg_replace("/url\(#([\w_]*)\)/i", "$1", $critere_style['fill']);
              if ($id_gradient != $critere_style['fill']){
                  if (isset($this -> svg_gradient[$id_gradient])){
@@ -1123,11 +1124,11 @@ class SVG{
                  // mPDF 5.0.051
                 // mPDF 5.3.74
                 if ($col{0} == 5){
-                     $critere_style['fill-opacity'] = ord($col{4} / 100);
-                     } // RGBa
+                    $critere_style['fill-opacity'] = ord($col{4} / 100);
+                } // RGBa
                  if ($col{0} == 6){
-                     $critere_style['fill-opacity'] = ord($col{5} / 100);
-                     } // CMYKa
+                    $critere_style['fill-opacity'] = ord($col{5} / 100);
+                } // CMYKa
                  $path_style .= $this -> mpdf_ref -> SetFColor($col, true) . ' '; // mPDF 5.0.051
                  $style .= 'F';
                  }
@@ -1138,11 +1139,11 @@ class SVG{
                  // mPDF 5.0.051
                 // mPDF 5.3.74
                 if ($col{0} == 5){
-                     $critere_style['fill-opacity'] = ord($col{4} / 100);
-                     } // RGBa
+                    $critere_style['fill-opacity'] = ord($col{4} / 100);
+                } // RGBa
                  if ($col{0} == 6){
-                     $critere_style['fill-opacity'] = ord($col{5} / 100);
-                     } // CMYKa
+                    $critere_style['fill-opacity'] = ord($col{5} / 100);
+                } // CMYKa
                  $path_style .= $this -> mpdf_ref -> SetFColor($col, true) . ' '; // mPDF 5.0.051
                  $style .= 'F';
                  }
@@ -1172,11 +1173,11 @@ class SVG{
                  // mPDF 5.0.051
                 // mPDF 5.3.74
                 if ($col{0} == 5){
-                     $critere_style['stroke-opacity'] = ord($col{4} / 100);
-                     } // RGBa
+                    $critere_style['stroke-opacity'] = ord($col{4} / 100);
+                } // RGBa
                  if ($col{0} == 6){
-                     $critere_style['stroke-opacity'] = ord($col{5} / 100);
-                     } // CMYKa
+                    $critere_style['stroke-opacity'] = ord($col{5} / 100);
+                } // CMYKa
                  $path_style .= $this -> mpdf_ref -> SetDColor($col, true) . ' '; // mPDF 5.0.051
                  $style .= 'D';
                  $lw = $this -> ConvertSVGSizePixels($critere_style['stroke-width']);
@@ -1189,11 +1190,11 @@ class SVG{
                  // mPDF 5.0.051
                 // mPDF 5.3.74
                 if ($col{0} == 5){
-                     $critere_style['stroke-opacity'] = ord($col{4} / 100);
-                     } // RGBa
+                    $critere_style['stroke-opacity'] = ord($col{4} / 100);
+                } // RGBa
                  if ($col{0} == 6){
-                     $critere_style['stroke-opacity'] = ord($col{5} / 100);
-                     } // CMYKa
+                    $critere_style['stroke-opacity'] = ord($col{5} / 100);
+                } // CMYKa
                  $path_style .= $this -> mpdf_ref -> SetDColor($col, true) . ' '; // mPDF 5.0.051
                  $style .= 'D';
                  $lw = $this -> ConvertSVGSizePixels($critere_style['stroke-width']); // mPDF 4.4.003 
@@ -1239,15 +1240,15 @@ class SVG{
                      }
                 else{
                      if (count($d) % 2 == 1){
-                         $d = array_merge($d, $d);
-                         } // 5, 3, 1 => 5,3,1,5,3,1  OR 3 => 3,3
+                        $d = array_merge($d, $d);
+                    } // 5, 3, 1 => 5,3,1,5,3,1  OR 3 => 3,3
                      $arr = '';
                      for($i = 0; $i < count($d); $i += 2){
                          $arr .= sprintf('%.3F %.3F ', $d[$i] * $this -> kp, $d[$i + 1] * $this -> kp);
                          }
                      if (isset($critere_style['stroke-dashoffset'])){
-                         $off = $critere_style['stroke-dashoffset'] + 0;
-                         }
+                        $off = $critere_style['stroke-dashoffset'] + 0;
+                    }
                      $path_style .= sprintf('[%s] %.3F d ', $arr, $off * $this -> kp);
                      }
                  }
@@ -1255,27 +1256,27 @@ class SVG{
         
          // mPDF 4.4.003
         if ($critere_style['fill-rule'] == 'evenodd'){
-             $fr = '*';
-             }
+            $fr = '*';
+        }
         else{
-             $fr = '';
-             }
+            $fr = '';
+        }
         
          // mPDF 4.4.003
         if (isset($critere_style['fill-opacity'])){
              $opacity = 1;
              if ($critere_style['fill-opacity'] == 0){
-                 $opacity = 0;
-                 }
+                $opacity = 0;
+            }
             else if ($critere_style['fill-opacity'] > 1){
-                 $opacity = 1;
-                 }
+                $opacity = 1;
+            }
             else if ($critere_style['fill-opacity'] > 0){
-                 $opacity = $critere_style['fill-opacity'];
-                 }
+                $opacity = $critere_style['fill-opacity'];
+            }
             else if ($critere_style['fill-opacity'] < 0){
-                 $opacity = 0;
-                 }
+                $opacity = 0;
+            }
              $gs = $this -> mpdf_ref -> AddExtGState(array('ca' => $opacity, 'BM' => '/Normal'));
              $this -> mpdf_ref -> extgstates[$gs]['fo'] = true; // mPDF 5.0.039
              $path_style .= sprintf(' /GS%d gs ', $gs);
@@ -1285,17 +1286,17 @@ class SVG{
         if (isset($critere_style['stroke-opacity'])){
              $opacity = 1;
              if ($critere_style['stroke-opacity'] == 0){
-                 $opacity = 0;
-                 }
+                $opacity = 0;
+            }
             else if ($critere_style['stroke-opacity'] > 1){
-                 $opacity = 1;
-                 }
+                $opacity = 1;
+            }
             else if ($critere_style['stroke-opacity'] > 0){
-                 $opacity = $critere_style['stroke-opacity'];
-                 }
+                $opacity = $critere_style['stroke-opacity'];
+            }
             else if ($critere_style['stroke-opacity'] < 0){
-                 $opacity = 0;
-                 }
+                $opacity = 0;
+            }
              $gs = $this -> mpdf_ref -> AddExtGState(array('CA' => $opacity, 'BM' => '/Normal'));
              $this -> mpdf_ref -> extgstates[$gs]['fo'] = true; // mPDF 5.0.039
              $path_style .= sprintf(' /GS%d gs ', $gs);
@@ -1325,8 +1326,8 @@ class SVG{
         
          }
     
-    
-     // fonction retracant les <path />
+     
+    // fonction retracant les <path />
     function svgPath($command, $arguments){
          $path_cmd = '';
          $newsubpath = false; // mPDF 4.4.003
@@ -1727,8 +1728,8 @@ class SVG{
              }
         
          if (!$newsubpath){
-         $this -> subPathInit = false;
-         } // mPDF 4.4.003
+        $this -> subPathInit = false;
+    } // mPDF 4.4.003
      $this -> lastcommand = $command;
      // mPDF 5.0.039
     $this -> pathBBox[0] = $minl;
@@ -1850,7 +1851,7 @@ function Arcto($x1, $y1, $x2, $y2, $rx, $ry, $angle, $largeArcFlag, $sweepFlag){
          $bounds[1][] = $c[5];
          }
      return array($path, $bounds); // mPD 5.0.040
-     }
+    }
 
 
  function CalcVectorAngle($ux, $uy, $vx, $vy){
@@ -1871,11 +1872,11 @@ function ConvertSVGSizePixels($size = 5, $maxsize = 'x'){
     // For text $maxsize = Fontsize
     // Setting e.g. margin % will use maxsize (pagewidth) and em will use fontsize
     if ($maxsize == 'y'){
-         $maxsize = $this -> svg_info['h'];
-         }
+        $maxsize = $this -> svg_info['h'];
+    }
     else if ($maxsize == 'x'){
-         $maxsize = $this -> svg_info['w'];
-         }
+        $maxsize = $this -> svg_info['w'];
+    }
      $maxsize *= (25.4 / $this -> mpdf_ref -> dpi); // convert pixels to mm
      $fontsize = $this -> mpdf_ref -> FontSize;
      // Return as pixels
@@ -1896,13 +1897,13 @@ function ConvertSVGSizePts($size = 5){
      }
 
 
-
+ 
 // fonction retracant les <rect />
 function svgRect($arguments){
     
      if ($arguments['h'] == 0 || $arguments['w'] == 0){
-         return '';
-         } // mPDF 4.4.003
+        return '';
+    } // mPDF 4.4.003
     
      $x = $this -> ConvertSVGSizePixels($arguments['x'], 'x'); // mPDF 4.4.003 
      $y = $this -> ConvertSVGSizePixels($arguments['y'], 'y'); // mPDF 4.4.003 
@@ -1913,18 +1914,18 @@ function svgRect($arguments){
     
     
      if ($rx > $w / 2){
-         $rx = $w / 2;
-         } // mPDF 4.4.003
+        $rx = $w / 2;
+    } // mPDF 4.4.003
      if ($ry > $h / 2){
-         $ry = $h / 2;
-         } // mPDF 4.4.003
+        $ry = $h / 2;
+    } // mPDF 4.4.003
     
      if ($rx > 0 and $ry == 0){
-         $ry = $rx;
-         }
+        $ry = $rx;
+    }
      if ($ry > 0 and $rx == 0){
-         $rx = $ry;
-         }
+        $rx = $ry;
+    }
     
      if ($rx == 0 and $ry == 0){
          // trace un rectangle sans angle arrondit
@@ -1960,14 +1961,14 @@ function svgRect($arguments){
      return $path_cmd;
      }
 
-
+ 
 // fonction retracant les <ellipse /> et <circle />
 // le cercle est tracé grave a 4 bezier cubic, les poitn de controles
 // sont deduis grace a la constante kappa * rayon
 function svgEllipse($arguments){
      if ($arguments['rx'] == 0 || $arguments['ry'] == 0){
-         return '';
-         } // mPDF 4.4.003
+        return '';
+    } // mPDF 4.4.003
     
      $kappa = 4 * (sqrt(2)-1) / 3;
     
@@ -2000,7 +2001,7 @@ function svgEllipse($arguments){
     
      }
 
-
+ 
 // fonction retracant les <polyline /> et les <line />
 function svgPolyline($arguments, $ispolyline = true){
      if ($ispolyline){
@@ -2009,8 +2010,8 @@ function svgPolyline($arguments, $ispolyline = true){
          }
     else{
          if ($arguments[0] == $arguments[2] && $arguments[1] == $arguments[3]){
-             return '';
-             } // mPDF 4.4.003  Zero length line
+            return '';
+        } // mPDF 4.4.003  Zero length line
          $xbase = $this -> ConvertSVGSizePixels($arguments[0], 'x'); // mPDF 4.4.003 
          $ybase = - $this -> ConvertSVGSizePixels($arguments[1], 'y'); // mPDF 4.4.003 
          }
@@ -2032,7 +2033,7 @@ function svgPolyline($arguments, $ispolyline = true){
     
      }
 
-
+ 
 // fonction retracant les <polygone />
 function svgPolygon($arguments){
      $xbase = $arguments[0] ;
@@ -2051,7 +2052,7 @@ function svgPolygon($arguments){
     
      }
 
-
+ 
 // write string to image
 function svgText(){
      // $tmp = count($this->txt_style)-1;
@@ -2077,17 +2078,17 @@ function svgText(){
          $opacity = 1;
          if (isset($current_style['fill-opacity'])){
              if ($current_style['fill-opacity'] == 0){
-                 $opacity = 0;
-                 }
+                $opacity = 0;
+            }
             else if ($current_style['fill-opacity'] > 1){
-                 $opacity = 1;
-                 }
+                $opacity = 1;
+            }
             else if ($current_style['fill-opacity'] > 0){
-                 $opacity = $current_style['fill-opacity'];
-                 }
+                $opacity = $current_style['fill-opacity'];
+            }
             else if ($current_style['fill-opacity'] < 0){
-                 $opacity = 0;
-                 }
+                $opacity = 0;
+            }
              }
          $gs = $this -> mpdf_ref -> AddExtGState(array('ca' => $opacity, 'BM' => '/Normal'));
          $this -> mpdf_ref -> extgstates[$gs]['fo'] = true; // mPDF 5.0.039
@@ -2111,16 +2112,16 @@ function svgText(){
              if ($linewidth > 0){
                  $strokestr .= sprintf('%.3F w 1 J 1 j ', $linewidth * $this -> kp);
                  if ($render == -1){
-                     $render = "1";
-                     } // stroke only
+                    $render = "1";
+                } // stroke only
                  else{
-                     $render = "2";
-                     } // fill and stroke
+                    $render = "2";
+                } // fill and stroke
                  }
              }
          if ($render == -1){
-             return '';
-             }
+            return '';
+        }
         
          $x = $this -> ConvertSVGSizePixels($this -> txt_data[0], 'x'); // mPDF 4.4.003 
          $y = $this -> ConvertSVGSizePixels($this -> txt_data[1], 'y'); // mPDF 4.4.003
@@ -2142,11 +2143,11 @@ function svgText(){
         
          // mPDF 5.0
         if ($this -> mpdf_ref -> usingCoreFont){
-             $txt = mb_convert_encoding($txt, $this -> mpdf_ref -> mb_enc, 'UTF-8');
-             }
+            $txt = mb_convert_encoding($txt, $this -> mpdf_ref -> mb_enc, 'UTF-8');
+        }
          if (preg_match("/([" . $this -> mpdf_ref -> pregRTLchars . "])/u", $txt)){
-             $this -> mpdf_ref -> biDirectional = true;
-             } // mPDF 4.4.003
+            $this -> mpdf_ref -> biDirectional = true;
+        } // mPDF 4.4.003
         
          $this -> mpdf_ref -> magic_reverse_dir($txt, true, 'ltr'); // mPDF 5.0.054
          $this -> mpdf_ref -> ConvertIndic($txt);
@@ -2186,7 +2187,7 @@ function svgText(){
         {
          return ' ';
          }
-     // $path_cmd .= 'h ';	// mPDF 5.0
+    // $path_cmd .= 'h ';	// mPDF 5.0
     return $path_cmd;
      }
 
@@ -2201,87 +2202,87 @@ function svgDefineTxtStyle($critere_style)
              $current_style['fill'] = '#' . str_pad(dechex($m[1]), 2, "0", STR_PAD_LEFT) . str_pad(dechex($m[2]), 2, "0", STR_PAD_LEFT) . str_pad(dechex($m[3]), 2, "0", STR_PAD_LEFT);
              }
         else{
-             $tmp = preg_replace("/(.*)fill:\s*([a-z0-9#_()]*|none)(.*)/i", "$2", $critere_style['style']);
+            $tmp = preg_replace("/(.*)fill:\s*([a-z0-9#_()]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['fill'] = $tmp;
-                 }
+                $current_style['fill'] = $tmp;
+            }
              }
         
          $tmp = preg_replace("/(.*)fill-opacity:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $current_style['fill-opacity'] = $tmp;
-             }
+            $current_style['fill-opacity'] = $tmp;
+        }
         
          $tmp = preg_replace("/(.*)fill-rule:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $current_style['fill-rule'] = $tmp;
-             }
+            $current_style['fill-rule'] = $tmp;
+        }
         
          if (preg_match('/stroke:\s*rgb\((\d+),\s*(\d+),\s*(\d+)\)/', $critere_style['style'], $m)){
              $current_style['stroke'] = '#' . str_pad(dechex($m[1]), 2, "0", STR_PAD_LEFT) . str_pad(dechex($m[2]), 2, "0", STR_PAD_LEFT) . str_pad(dechex($m[3]), 2, "0", STR_PAD_LEFT);
              }
         else{
-             $tmp = preg_replace("/(.*)stroke:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
+            $tmp = preg_replace("/(.*)stroke:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
              if ($tmp != $critere_style['style']){
-                 $current_style['stroke'] = $tmp;
-                 }
+                $current_style['stroke'] = $tmp;
+            }
              }
         
          $tmp = preg_replace("/(.*)stroke-linecap:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $current_style['stroke-linecap'] = $tmp;
-             }
+            $current_style['stroke-linecap'] = $tmp;
+        }
         
          $tmp = preg_replace("/(.*)stroke-linejoin:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $current_style['stroke-linejoin'] = $tmp;
-             }
+            $current_style['stroke-linejoin'] = $tmp;
+        }
         
          $tmp = preg_replace("/(.*)stroke-miterlimit:\s*([a-z0-9#]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $current_style['stroke-miterlimit'] = $tmp;
-             }
+            $current_style['stroke-miterlimit'] = $tmp;
+        }
         
          $tmp = preg_replace("/(.*)stroke-opacity:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $current_style['stroke-opacity'] = $tmp;
-             }
+            $current_style['stroke-opacity'] = $tmp;
+        }
         
          $tmp = preg_replace("/(.*)stroke-width:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $current_style['stroke-width'] = $tmp;
-             }
+            $current_style['stroke-width'] = $tmp;
+        }
         
          $tmp = preg_replace("/(.*)stroke-dasharray:\s*([a-z0-9., ]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $current_style['stroke-dasharray'] = $tmp;
-             }
+            $current_style['stroke-dasharray'] = $tmp;
+        }
         
          $tmp = preg_replace("/(.*)stroke-dashoffset:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $current_style['stroke-dashoffset'] = $tmp;
-             }
+            $current_style['stroke-dashoffset'] = $tmp;
+        }
         
          // mPDF 5.0.039
         $tmp = preg_replace("/(.*)font-family:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $critere_style['font-family'] = $tmp;
-             }
+            $critere_style['font-family'] = $tmp;
+        }
         
          $tmp = preg_replace("/(.*)font-size:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $critere_style['font-size'] = $tmp;
-             }
+            $critere_style['font-size'] = $tmp;
+        }
         
          $tmp = preg_replace("/(.*)font-weight:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $critere_style['font-weight'] = $tmp;
-             }
+            $critere_style['font-weight'] = $tmp;
+        }
         
          $tmp = preg_replace("/(.*)font-style:\s*([a-z0-9.]*|none)(.*)/i", "$2", $critere_style['style']);
          if ($tmp != $critere_style['style']){
-             $critere_style['font-style'] = $tmp;
-             }
+            $critere_style['font-style'] = $tmp;
+        }
         
          }
     
@@ -2357,8 +2358,8 @@ function svgDefineTxtStyle($critere_style)
              $fonttype = preg_replace('/ /', '', $fonttype);
              $v = strtolower(trim($fonttype));
              if (isset($this -> mpdf_ref -> fonttrans[$v]) && $this -> mpdf_ref -> fonttrans[$v]){
-                 $v = $this -> mpdf_ref -> fonttrans[$v];
-                 }
+                $v = $this -> mpdf_ref -> fonttrans[$v];
+            }
              if ((!$this -> mpdf_ref -> usingCoreFont && in_array($v, $this -> mpdf_ref -> available_unifonts)) ||
                      ($this -> mpdf_ref -> usingCoreFont && in_array($v, array('courier', 'times', 'helvetica', 'arial'))) ||
                      in_array($v, array('sjis', 'uhc', 'big5', 'gb'))){
@@ -2374,8 +2375,8 @@ function svgDefineTxtStyle($critere_style)
                  $fonttype = preg_replace('/ /', '', $fonttype);
                  $v = strtolower(trim($fonttype));
                  if (isset($this -> mpdf_ref -> fonttrans[$v]) && $this -> mpdf_ref -> fonttrans[$v]){
-                     $v = $this -> mpdf_ref -> fonttrans[$v];
-                     }
+                    $v = $this -> mpdf_ref -> fonttrans[$v];
+                }
                  if (in_array($v, $this -> mpdf_ref -> sans_fonts) || in_array($v, $this -> mpdf_ref -> serif_fonts) || in_array($v, $this -> mpdf_ref -> mono_fonts)){
                      $current_style['font-family'] = $v;
                      break;
@@ -2390,19 +2391,20 @@ function svgDefineTxtStyle($critere_style)
     
      // add current style to text style array (will remove it later after writing text to svg_string)
     array_push($this -> txt_style, $current_style);
-     }
+    }
 
 
 
-
+ 
 // fonction ajoutant un gradient
 function svgAddGradient($id, $array_gradient){
     
      $this -> svg_gradient[$id] = $array_gradient;
     
      }
-
+ 
 // Ajoute une couleur dans le gradient correspondant
+
 // function ecrivant dans le svgstring
 function svgWriteString($content){
     
@@ -2432,8 +2434,8 @@ function ImageSVG($data){
          // Get links
         preg_match_all('/(<(linearGradient|radialgradient)[^>]*)xlink:href=["\']#(.*?)["\'](.*?)\/>/si', $data, $links);
          if (count($links[0])){
-             $links[5] = array();
-             } // mPDF 4.5.010
+            $links[5] = array();
+        } // mPDF 4.5.010
          // Delete links from data - keeping in $links
         for ($i = 0; $i < count($links[0]); $i++){
              $links[5][$i] = 'tmpLink' . RAND(100000, 9999999); // mPDF 4.5.010
@@ -2462,13 +2464,13 @@ function ImageSVG($data){
     
      $this -> svg_string = '';
     
-    
-     // chargement unique des fonctions
+     
+    // chargement unique des fonctions
     if(!function_exists("xml_svg2pdf_start")){ // mPDF 5.3.76
         
          function xml_svg2pdf_start($parser, $name, $attribs){
-            
-             // definition
+             
+            // definition
             global $svg_class, $last_gradid;
             
              // mPDF 4.4.003
@@ -2506,17 +2508,17 @@ function ImageSVG($data){
                      }
                  // mPDF 5.0.039
                 if ($svg_class -> pathBBox[2] == -1999998){
-                     $svg_class -> pathBBox[2] = 100;
-                     }
+                    $svg_class -> pathBBox[2] = 100;
+                }
                  if ($svg_class -> pathBBox[3] == -1999998){
-                     $svg_class -> pathBBox[3] = 100;
-                     }
+                    $svg_class -> pathBBox[3] = 100;
+                }
                  if ($svg_class -> pathBBox[0] == 999999){
-                     $svg_class -> pathBBox[0] = 0;
-                     }
+                    $svg_class -> pathBBox[0] = 0;
+                }
                  if ($svg_class -> pathBBox[1] == 999999){
-                     $svg_class -> pathBBox[1] = 0;
-                     }
+                    $svg_class -> pathBBox[1] = 0;
+                }
                  $critere_style = $attribs;
                  unset($critere_style['d']);
                  $path_style = $svg_class -> svgDefineStyle($critere_style);
@@ -2524,17 +2526,17 @@ function ImageSVG($data){
             
              case 'rect':
                  if (!isset($attribs['x'])){
-                     $attribs['x'] = 0;
-                     }
+                    $attribs['x'] = 0;
+                }
                  if (!isset($attribs['y'])){
-                     $attribs['y'] = 0;
-                     }
+                    $attribs['y'] = 0;
+                }
                  if (!isset($attribs['rx'])){
-                     $attribs['rx'] = 0;
-                     }
+                    $attribs['rx'] = 0;
+                }
                  if (!isset($attribs['ry'])){
-                     $attribs['ry'] = 0;
-                     }
+                    $attribs['ry'] = 0;
+                }
                  $arguments = array(
                     'x' => $attribs['x'],
                      'y' => $attribs['y'],
@@ -2551,11 +2553,11 @@ function ImageSVG($data){
             
              case 'circle':
                  if (!isset($attribs['cx'])){
-                     $attribs['cx'] = 0;
-                     }
+                    $attribs['cx'] = 0;
+                }
                  if (!isset($attribs['cy'])){
-                     $attribs['cy'] = 0;
-                     }
+                    $attribs['cy'] = 0;
+                }
                  $arguments = array(
                     'cx' => $attribs['cx'],
                      'cy' => $attribs['cy'],
@@ -2570,11 +2572,11 @@ function ImageSVG($data){
             
              case 'ellipse':
                  if (!isset($attribs['cx'])){
-                     $attribs['cx'] = 0;
-                     }
+                    $attribs['cx'] = 0;
+                }
                  if (!isset($attribs['cy'])){
-                     $attribs['cy'] = 0;
-                     }
+                    $attribs['cy'] = 0;
+                }
                  $arguments = array(
                     'cx' => $attribs['cx'],
                      'cy' => $attribs['cy'],
@@ -2761,8 +2763,8 @@ function ImageSVG($data){
                  break;
                  }
             
-            
-             // insertion des path et du style dans le flux de donné general.
+             
+            // insertion des path et du style dans le flux de donné general.
             if (isset($path_cmd) && $path_cmd){ // mPDF 4.4.003
              // mPDF 5.0
             list($prestyle, $poststyle) = $svg_class -> svgStyle($path_style, $attribs, strtolower($name));
@@ -2855,6 +2857,7 @@ else{
 }
 
 // END OF CLASS
+
 // mPDF 5.0.040
 function calc_bezier_bbox($start, $c){
  $P0 = array($start[0], $start[1]);

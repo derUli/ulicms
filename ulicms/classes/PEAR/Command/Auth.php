@@ -78,4 +78,4 @@ password from your user configuration.',
     {
          parent :: PEAR_Command_Channels($ui, $config);
          }
-     }
+    }

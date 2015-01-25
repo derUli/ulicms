@@ -2,15 +2,15 @@
 
 class wmf{
     
-     var $mpdf = null;
-     var $gdiObjectArray;
+    var $mpdf = null;
+    var $gdiObjectArray;
     
-     function wmf(& $mpdf){
+    function wmf(& $mpdf){
          $this -> mpdf = $mpdf;
-         }
+        }
     
     
-     function _getWMFimage($data){
+    function _getWMFimage($data){
          $k = _MPDFK;
         
          $this -> gdiObjectArray = array();
@@ -21,8 +21,8 @@ class wmf{
         $key = unpack('Lmagic', substr($data, 0, 4));
          $p = 18; // WMF header 
          if ($key['magic'] == (int)0x9AC6CDD7){
-             $p += 22;
-             } // Aldus header
+            $p += 22;
+        } // Aldus header
          // define some state variables
         $wo = null; // window origin
          $we = null; // window extent
@@ -33,14 +33,14 @@ class wmf{
          $wmfdata = '';
          while ($p < strlen($data) && !$endRecord){
              $recordInfo = unpack('Lsize/Sfunc', substr($data, $p, 6));
-             $p += 6;
+            $p += 6;
              // size of record given in WORDs (= 2 bytes)
             $size = $recordInfo['size'];
              // func is number of GDI function
             $func = $recordInfo['func'];
              if ($size > 3){
                  $parms = substr($data, $p, 2 * ($size-3));
-                 $p += 2 * ($size-3);
+                $p += 2 * ($size-3);
                  }
              switch ($func){
              case 0x020b: // SetWindowOrg
@@ -97,8 +97,8 @@ class wmf{
                  case 'B':
                      $nullBrush = false;
                      if ($obj['style'] == 1){
-                         $nullBrush = true;
-                         }
+                        $nullBrush = true;
+                    }
                     else{
                          $wmfdata .= $this -> mpdf -> SetFColor($this -> mpdf -> ConvertColor('rgb(' . $obj['r'] . ',' . $obj['g'] . ',' . $obj['b'] . ')'), true) . "\n";
                          }
@@ -135,8 +135,8 @@ class wmf{
                  for ($i = 0; $i < count($dashArray);$i++){
                  $s .= $dashArray[$i] * $k;
                  if ($i != count($dashArray)-1){
-                 $s .= ' ';
-                 }
+                $s .= ' ';
+            }
              }
          $s .= '] 0 d';
          $wmfdata .= $s . "\n";
@@ -153,35 +153,35 @@ $coords = unpack('s' . ($size-3), $parms);
      $py = $coords[2 * $i + 1];
     
      if ($i < $numpoints){
-         $wmfdata .= $this -> _LineTo($px, $py);
-         }
+        $wmfdata .= $this -> _LineTo($px, $py);
+    }
     else{
-         $wmfdata .= $this -> _MoveTo($px, $py);
-         }
+        $wmfdata .= $this -> _MoveTo($px, $py);
+    }
      }
  if ($func == 0x0325){
-     $op = 's';
-     }
+    $op = 's';
+}
 else if ($func == 0x0324){
      if ($nullPen){
          if ($nullBrush){
-             $op = 'n';
-             } // no op
+            $op = 'n';
+        } // no op
          else{
-             $op = 'f';
-             } // fill
+            $op = 'f';
+        } // fill
          }
     else{
          if ($nullBrush){
-             $op = 's';
-             } // stroke
+            $op = 's';
+        } // stroke
          else{
-             $op = 'b';
-             } // stroke and fill
+            $op = 'b';
+        } // stroke and fill
          }
      if ($polyFillMode == 1 && ($op == 'b' || $op == 'f')){
-         $op .= '*';
-         } // use even-odd fill rule
+        $op .= '*';
+    } // use even-odd fill rule
      }
  $wmfdata .= $op . "\n";
  break;
@@ -195,34 +195,34 @@ $coords = unpack('s' . ($size-3), $parms);
          $px = $coords[2 * $i + $adjustment];
          $py = $coords[2 * $i + 1 + $adjustment];
          if ($i == $numpoints){
-             $wmfdata .= $this -> _MoveTo($px, $py);
-             }
+            $wmfdata .= $this -> _MoveTo($px, $py);
+        }
         else{
-             $wmfdata .= $this -> _LineTo($px, $py);
-             }
+            $wmfdata .= $this -> _LineTo($px, $py);
+        }
          }
      $adjustment += $numpoints * 2;
      }
 
  if ($nullPen){
      if ($nullBrush){
-         $op = 'n';
-         } // no op
+        $op = 'n';
+    } // no op
      else{
-         $op = 'f';
-         } // fill
+        $op = 'f';
+    } // fill
      }
 else{
      if ($nullBrush){
-         $op = 's';
-         } // stroke
+        $op = 's';
+    } // stroke
      else{
-         $op = 'b';
-         } // stroke and fill
+        $op = 'b';
+    } // stroke and fill
      }
  if ($polyFillMode == 1 && ($op == 'b' || $op == 'f')){
-     $op .= '*';
-     } // use even-odd fill rule
+    $op .= '*';
+} // use even-odd fill rule
  $wmfdata .= $op . "\n";
  break;
  case 0x0000:

@@ -20,7 +20,7 @@ ob_end_clean();
 if (!defined('PEAR_RUNTYPE')){
      // this is defined in peclcmd.php as 'pecl'
     define('PEAR_RUNTYPE', 'pear');
-     }
+    }
 define('PEAR_IGNORE_BACKTRACE', 1);
 /**
  * 
@@ -29,14 +29,14 @@ define('PEAR_IGNORE_BACKTRACE', 1);
 if ('@include_path@' != '@' . 'include_path' . '@'){
      ini_set('include_path', '@include_path@');
      $raw = false;
-     }else{
+    }else{
      // this is a raw, uninstalled pear, either a cvs checkout, or php distro
     $raw = true;
-     }
+    }
 @ini_set('allow_url_fopen', true);
 if (!ini_get('safe_mode')){
      @set_time_limit(0);
-     }
+    }
 ob_implicit_flush(true);
 @ini_set('track_errors', true);
 @ini_set('html_errors', false);
@@ -60,37 +60,37 @@ $all_commands = PEAR_Command :: getCommands();
 if (!isset($_SERVER['argv']) && !isset($argv) && !isset($HTTP_SERVER_VARS['argv'])){
      echo 'ERROR: either use the CLI php executable, or set register_argc_argv=On in php.ini';
      exit(1);
-     }
+    }
 
 $argv = Console_Getopt :: readPHPArgv();
 // fix CGI sapi oddity - the -- in pear.bat/pear is not removed
 if (php_sapi_name() != 'cli' && isset($argv[1]) && $argv[1] == '--'){
      unset($argv[1]);
      $argv = array_values($argv);
-     }
+    }
 $progname = PEAR_RUNTYPE;
 array_shift($argv);
 $options = Console_Getopt :: getopt2($argv, "c:C:d:D:Gh?sSqu:vV");
 if (PEAR :: isError($options)){
      usage($options);
-     }
+    }
 
 $opts = $options[0];
 
 $fetype = 'CLI';
 if ($progname == 'gpear' || $progname == 'pear-gtk'){
      $fetype = 'Gtk';
-     }else{
+    }else{
      foreach ($opts as $opt){
          if ($opt[0] == 'G'){
              $fetype = 'Gtk';
              }
          }
-     }
+    }
 // Check if Gtk and PHP >= 5.1.0
 if ($fetype == 'Gtk' && version_compare(phpversion(), '5.1.0', '>=')){
      $fetype = 'Gtk2';
-     }
+    }
 
 $pear_user_config = '';
 $pear_system_config = '';
@@ -107,7 +107,7 @@ foreach ($opts as $opt){
          $pear_system_config = $opt[1];
          break;
          }
-     }
+    }
 
 PEAR_Command :: setFrontendType($fetype);
 $ui = & PEAR_Command :: getFrontendObject();
@@ -128,7 +128,7 @@ if (PEAR :: isError($config)){
      $ui -> outputData("ERROR: $_file is not a valid config file or is corrupted.");
      // We stop, we have no idea where we are :)
     exit(1);
-     }
+    }
 
 // this is used in the error handler to retrieve a relative path
 $_PEAR_PHPDIR = $config -> get('php_dir');
@@ -138,7 +138,7 @@ if (ini_get('safe_mode')){
      $ui -> outputData('WARNING: running in safe mode requires that all files created ' .
          'be the same uid as the current script.  PHP reports this script is uid: ' .
          @getmyuid() . ', and current user is: ' . @get_current_user());
-     }
+    }
 
 $verbose = $config -> get("verbose");
 $cmdopts = array();
@@ -177,7 +177,7 @@ if ($raw){
                  }
              }
          }
-     }
+    }
 foreach ($opts as $opt){
      $param = !empty($opt[1]) ? $opt[1] : true;
      switch ($opt[0]){
@@ -232,20 +232,20 @@ foreach ($opts as $opt){
         $cmdopts[$opt[0]] = $param;
          break;
          }
-     }
+    }
 
 if ($store_system_config){
      $config -> store('system');
-     }
+    }
 
 if ($store_user_config){
      $config -> store('user');
-     }
+    }
 
 $command = (isset($options[1][0])) ? $options[1][0] : null;
 if (empty($command) && ($store_user_config || $store_system_config)){
      exit;
-     }
+    }
 
 if ($fetype == 'Gtk' || $fetype == 'Gtk2'){
      if (!$config -> validConfiguration()){
@@ -254,7 +254,7 @@ if ($fetype == 'Gtk' || $fetype == 'Gtk2'){
              'file to one of these locations, or use the -c and -s options to create one');
          }
      Gtk :: main();
-     }else do{
+    }else do{
      if ($command == 'help'){
          usage(null, @$options[1][1]);
          }
@@ -312,7 +312,7 @@ if ($fetype == 'Gtk' || $fetype == 'Gtk2'){
          PEAR :: setErrorHandling(PEAR_ERROR_CALLBACK, array($ui, "displayFatalError"));
          PEAR :: raiseError($ok);
          }
-     } while (false);
+    } while (false);
 
 // {{{ usage()
 function usage($error = null, $helpsubject = null)
@@ -348,7 +348,7 @@ function usage($error = null, $helpsubject = null)
          exit(0);
          }
      exit(1);
-     }
+    }
 
 function cmdHelp($command)
 {
@@ -395,7 +395,7 @@ function cmdHelp($command)
          }
     
      return "Command '$command' is not valid, try '$progname help'";
-     }
+    }
 
 // }}}
 function error_handler($errno, $errmsg, $file, $line, $vars){
@@ -433,7 +433,7 @@ function error_handler($errno, $errmsg, $file, $line, $vars){
          }
      print "\n$prefix: $errmsg in $file on line $line\n";
      return false;
-     }
+    }
 
 
 /**

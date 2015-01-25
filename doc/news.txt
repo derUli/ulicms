@@ -1,17 +1,3 @@
-﻿===== Neues in UliCMS 7.2.1 Service Pack 1 ====
-+ Alle bisher erschienen Patches für UliCMS 7.2.1 enthalten
-+ Zugriffsbeschränkungen ("Sichtbar für") für Seiten korrigiert und erweitert
-+ no_cache() API Funktion hinzugefügt
-+ Kein Caching bei eingeloggten Nutzern.
-+ Es wird auch der Alternate PHP Cache (APC) geleert, sofern das 
-entsprechende PHP-Modul installiert ist.
-+ CKEditor auf Version 4.4.6 aktualisiert
-+ Falsche Übersetzung von "Header Hintergrundfarbe" in den Designeinstellungen korrigiert
-+ Seiten filtern nach Menü und übergeordneter Seite nun möglich
-+ Theme nun pro Seite festlegbar
-+ Kategorien haben nun auch eine Beschreibung
-+ HTML5 required Attribut hinzugefügt
-
 ﻿===== Neues in UliCMS 7.2.1 ====
 + CKEditor auf Version 4.4.5 aktualisiert
 + Editor wächst mit Größe

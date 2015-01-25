@@ -1,22 +1,19 @@
 <?php if(defined("_SECURITY")){
-     $acl = new ACL();
+    $acl = new ACL();
      if($acl -> hasPermission("logo")){
          ?>     
 <?php if($_GET["error"] == "to_big"){
              ?> 
-<p style="color:red; font-size:1.2em"><?php echo TRANSLATION_UPLOADED_IMAGE_TO_BIG;
-             ?></p>
+<p style="color:red; font-size:1.2em"><?php echo TRANSLATION_UPLOADED_IMAGE_TO_BIG;?></p>
 <?php
              }
          ?>
-<p><?php echo TRANSLATION_LOGO_INFOTEXT;
-         ?>
+<p><?php echo TRANSLATION_LOGO_INFOTEXT;?>
 </p>
 <form enctype="multipart/form-data" action="index.php?action=logo_upload" method="post">
 <table border=0 height=250>
 <tr>
-<td><strong><?php echo TRANSLATION_YOUR_LOGO;
-         ?></strong></td>
+<td><strong><?php echo TRANSLATION_YOUR_LOGO;?></strong></td>
 <td><?php
         
          $logo_path = "../content/images/" . getconfig("logo_image");
@@ -27,8 +24,7 @@
          ?>
 </td>
 <tr>             
-<td width=480><strong><?php echo TRANSLATION_UPLOAD_NEW_LOGO;
-         ?></strong></td>
+<td width=480><strong><?php echo TRANSLATION_UPLOAD_NEW_LOGO;?></strong></td>
 <td><input name="logo_upload_file" type="file">
 <br/>
 </td>
@@ -36,8 +32,7 @@
 <td>
 </td>
 <td style="text-align:center">
-<input type="submit" value="<?php echo TRANSLATION_UPLOAD;
-         ?>">
+<input type="submit" value="<?php echo TRANSLATION_UPLOAD;?>">
 </td>
 </table>
 

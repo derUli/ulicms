@@ -7,82 +7,69 @@
              ?>
 
 <form action="index.php?action=banner" method="post">
-<h4><?php echo TRANSLATION_PREVIEW;
-             ?></h4><p>
-<?php if($row -> type == "gif"){
-                 ?>
+<h4><?php echo TRANSLATION_PREVIEW;?></h4><p>
+<?php if($row->type == "gif"){?>
 <a href="<?php echo $row -> link_url;
-                 ?>" target="_blank"><img src="<?php echo $row -> image_url;
-                 ?>" title="<?php echo $row -> name;
-                 ?>" alt="<?php echo $row -> name;
-                 ?>" border=0></a></p>
+             ?>" target="_blank"><img src="<?php echo $row -> image_url;
+             ?>" title="<?php echo $row -> name;
+             ?>" alt="<?php echo $row -> name;
+             ?>" border=0></a></p>
              
-             <?php }else{
-                 echo $row -> html;
-                 }
-             ?>
+             <?php }else {
+             echo $row->html;
+                             }?>
                              </p>
                              
                              
 <input type="hidden" name="edit_banner" value="edit_banner">
 <input type="hidden" name="id" value="<?php echo $row -> id;
              ?>">
-<p><input type="radio" <?php
-             if($row -> type == "gif"){
-                 echo 'checked="checked"';
-                
-                 }
-             ;
-             ?> id="radio_gif" name="type" value="gif" onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label for="radio_gif"><?php echo TRANSLATION_GIF_BANNER;
-             ?></label></p>
-<fieldset id="type_gif" style="<?php if($row -> type != "gif") echo "display:none";
-             ?>">
+<p><input type="radio" <?php 
+if($row->type == "gif") {
+echo 'checked="checked"';
 
-<strong><?php echo TRANSLATION_BANNERTEXT;
-             ?></strong><br/>
+}
+;?> id="radio_gif" name="type" value="gif" onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label for="radio_gif"><?php echo TRANSLATION_GIF_BANNER;?></label></p>
+<fieldset id="type_gif" style="<?php if($row->type != "gif") echo "display:none";?>">
+
+<strong><?php echo TRANSLATION_BANNERTEXT;?></strong><br/>
 <input type="text" style="width:300px;" name="banner_name" value="<?php echo $row -> name;
              ?>">
 <br/><br/>
-<strong><?php echo TRANSLATION_IMAGE_URL;
-             ?></strong><br/>
+<strong><?php echo TRANSLATION_IMAGE_URL;?></strong><br/>
 <input type="text" style="width:300px;" name="image_url" value="<?php echo $row -> image_url;
              ?>">
 <br/><br/>
-<strong><?php echo TRANSLATION_LINK_URL;
-             ?></strong><br/>
+<strong><?php echo TRANSLATION_LINK_URL;?></strong><br/>
 <input type="text" style="width:300px;" name="link_url" value="<?php echo $row -> link_url;
              ?>">
              </fieldset>
 <br/>
-<input type="radio" <?php
-             if($row -> type == "html"){
-                 echo 'checked="checked"';
-                
-                 }
-             ;
-             ?> id="radio_html" name="type" value="html" onclick="$('#type_html').slideDown();$('#type_gif').slideUp();"><label for="radio_html">HTML</label></p>
-<fieldset id="type_html" style="<?php if($row -> type != "html") echo "display:none";
-             ?>">
-<textarea name="html" cols=40 rows=10><?php echo htmlspecialchars($row -> html);
-             ?></textarea>
+<input type="radio" <?php 
+if($row->type == "html") {
+echo 'checked="checked"';
+
+}
+;?> id="radio_html" name="type" value="html" onclick="$('#type_html').slideDown();$('#type_gif').slideUp();"><label for="radio_html">HTML</label></p>
+<fieldset id="type_html" style="<?php if($row->type != "html") echo "display:none";?>">
+<textarea name="html" cols=40 rows=10><?php echo htmlspecialchars($row->html);?></textarea>
 </fieldset>
 
 <br/> 
 
 
-<strong><?php echo TRANSLATION_LANGUAGE;
-             ?></strong><br/>
+<strong><?php echo TRANSLATION_LANGUAGE;?></strong><br/>
 <select name="language">
 <?php
              $languages = getAllLanguages();
             
              $page_language = $row -> language;
             
-             if($page_language === "all"){
-                 echo "<option value='all' selected='selected'>" . TRANSLATION_EVERY . "</option>";
-                 }else{
-                 echo "<option value='all'>" . TRANSLATION_EVERY . "</option>";
-                 }
+            if($page_language === "all"){
+               echo "<option value='all' selected='selected'>" . TRANSLATION_EVERY . "</option>";
+            } else {
+               echo "<option value='all'>" . TRANSLATION_EVERY . "</option>";
+            }
             
              for($j = 0; $j < count($languages); $j++){
                  if($languages[$j] === $page_language){
@@ -93,24 +80,22 @@
                 
                 
                  }
-            
-            
-             $pages = getAllPages($page_language, "title");
+                 
+                 
+                 $pages = getAllPages($page_language, "title");
              ?>
 </select>
 
 <br/><br/>
 
 
-<strong><?php echo TRANSLATION_CATEGORY;
-             ?></strong><br/>
+<strong><?php echo TRANSLATION_CATEGORY;?></strong><br/>
 <?php
-             echo categories :: getHTMLSelect($row -> category);
-             ?>
+            echo categories :: getHTMLSelect($row -> category);
+            ?>
 
 <br/><br/>
-<input type="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;
-             ?>">
+<input type="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;?>">
 <?php
              if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
                  ?>

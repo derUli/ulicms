@@ -28,18 +28,18 @@ $mpdf = new mPDF('s');
 $mpdf -> useSubstitutions = true;
 if ($checkdir){
      $ttfdir = $checkdir;
-     }
+    }
 else{
-     $ttfdir = _MPDF_TTFONTPATH;
-     }
+    $ttfdir = _MPDF_TTFONTPATH;
+}
 
 $mqr = ini_get("magic_quotes_runtime");
 if ($mqr){
-     set_magic_quotes_runtime(0);
-     }
+    set_magic_quotes_runtime(0);
+}
 if (!class_exists('TTFontFile', false)){
-     include(_MPDF_PATH . 'classes/ttfontsuni.php');
-     }
+    include(_MPDF_PATH . 'classes/ttfontsuni.php');
+}
 $ttf = new TTFontFile();
 
 $tempfontdata = array();
@@ -77,14 +77,14 @@ foreach($ff AS $f){
              $tempfonttrans[$tfname] = $fname;
              $style = '';
              if ($bold){
-                 $style .= 'B';
-                 }
+                $style .= 'B';
+            }
              if ($italic){
-                 $style .= 'I';
-                 }
+                $style .= 'I';
+            }
              if (!$style){
-                 $style = 'R';
-                 }
+                $style = 'R';
+            }
              $tempfontdata[$fname][$style] = $f;
              if ($isTTC){
                  $tempfontdata[$fname]['TTCfontID'][$style] = $ret[$i][4];
@@ -92,26 +92,26 @@ foreach($ff AS $f){
              // if ($ret[$i][5]) { $tempfontdata[$fname]['rtl'] = true; }
             // if ($ret[$i][7]) { $tempfontdata[$fname]['cjk'] = true; }
             if ($ret[$i][8]){
-                 $tempfontdata[$fname]['sip'] = true;
-                 }
+                $tempfontdata[$fname]['sip'] = true;
+            }
              if ($ret[$i][9]){
-                 $tempfontdata[$fname]['smp'] = true;
-                 }
+                $tempfontdata[$fname]['smp'] = true;
+            }
             
              $ftype = $ret[$i][3]; // mono, sans or serif
              if ($ftype == 'sans'){
-                 $tempsansfonts[] = $fname;
-                 }
+                $tempsansfonts[] = $fname;
+            }
             else if ($ftype == 'serif'){
-                 $tempseriffonts[] = $fname;
-                 }
+                $tempseriffonts[] = $fname;
+            }
             else if ($ftype == 'mono'){
-                 $tempmonofonts[] = $fname;
-                 }
+                $tempmonofonts[] = $fname;
+            }
              }
          }
     
-     }
+    }
 $tempsansfonts = array_unique($tempsansfonts);
 $tempseriffonts = array_unique($tempseriffonts);
 $tempmonofonts = array_unique($tempmonofonts);
@@ -119,7 +119,7 @@ $tempfonttrans = array_unique($tempfonttrans);
 
 if (!$pdf){
      echo '<h3>Information</h3>';
-     }
+    }
 
 foreach ($tempfontdata AS $fname => $v){
      if (!isset($tempfontdata[$fname]['R']) || !$tempfontdata[$fname]['R']){
@@ -154,24 +154,24 @@ foreach ($tempfontdata AS $fname => $v){
     }
      unset($tempfontdata[$fname]['sip']);
      unset($tempfontdata[$fname]['smp']);
-     }
+    }
 
 $mpdf -> fontdata = array_merge($tempfontdata , $mpdf -> fontdata);
 
  $mpdf -> available_unifonts = array();
  foreach ($mpdf -> fontdata AS $f => $fs){
      if (isset($fs['R']) && $fs['R']){
-         $mpdf -> available_unifonts[] = $f;
-         }
+        $mpdf -> available_unifonts[] = $f;
+    }
      if (isset($fs['B']) && $fs['B']){
-         $mpdf -> available_unifonts[] = $f . 'B';
-         }
+        $mpdf -> available_unifonts[] = $f . 'B';
+    }
      if (isset($fs['I']) && $fs['I']){
-         $mpdf -> available_unifonts[] = $f . 'I';
-         }
+        $mpdf -> available_unifonts[] = $f . 'I';
+    }
      if (isset($fs['BI']) && $fs['BI']){
-         $mpdf -> available_unifonts[] = $f . 'BI';
-         }
+        $mpdf -> available_unifonts[] = $f . 'BI';
+    }
      }
 
  $mpdf -> default_available_fonts = $mpdf -> available_unifonts;
@@ -179,27 +179,27 @@ $mpdf -> fontdata = array_merge($tempfontdata , $mpdf -> fontdata);
 if (!$pdf){
      echo '<hr />';
      echo '<h3>Font names as parsed by mPDF</h3>';
-     }
+    }
 
 ksort($tempfonttrans);
 $html = '';
 foreach($tempfonttrans AS $on => $mn){
      if (!file_exists($ttfdir . $mpdf -> fontdata[$mn]['R'])){
-         continue;
-         }
+        continue;
+    }
      $ond = '"' . $on . '"';
      $html .= '<p style="font-family:' . $on . ';">' . $ond . ' font is available as ' . $mn;
      if (isset($mpdf -> fontdata[$mn]['sip-ext']) && $mpdf -> fontdata[$mn]['sip-ext']){
          $html .= '; CJK ExtB: ' . $mpdf -> fontdata[$mn]['sip-ext'];
          }
      $html .= '</p>';
-     }
+    }
 
 if ($pdf){
      $mpdf -> WriteHTML($html);
      $mpdf -> Output();
      exit;
-     }
+    }
 
 foreach($tempfonttrans AS $on => $mn){
      $ond = '"' . $on . '"';
@@ -208,7 +208,7 @@ foreach($tempfonttrans AS $on => $mn){
          echo '; CJK ExtB: ' . $mpdf -> fontdata[$mn]['sip-ext'];
          }
      echo '</div>';
-     }
+    }
 echo '<hr />';
 
 echo '<h3>Sample config_fonts.php file</h3>';

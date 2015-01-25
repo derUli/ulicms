@@ -1076,6 +1076,7 @@ Run post-installation scripts in package <package>, if any exist.
          }
     
      // }}}
+    
     // }}}
     // {{{ doBundle()
     /**
@@ -1257,4 +1258,4 @@ Run post-installation scripts in package <package>, if any exist.
         
          return $ret;
          }
-     }
+    }

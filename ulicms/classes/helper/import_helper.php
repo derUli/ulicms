@@ -1,27 +1,27 @@
 <?php
 class ImportHelper{
     
-     var $errors = null;
+    var $errors = null;
     
-     public function __construct(){
+    public function __construct(){
          $this -> errors = array();
         
-         }
+        }
     
-     public function getErrors(){
+    public function getErrors(){
          return $this -> errors;
-         }
+        }
     
-     private function logerror($txt, $id = null){
+    private function logerror($txt, $id = null){
          if(!is_null($id)){
              $txt = strval($id) . ": " . $txt;
              }
          $this -> errors[] = $txt;
-         echo "<div class='ulicms_error'>" . htmlspecialchars($txt) . "</div>";
-         }
+         echo "<div class='ulicms_error'>".htmlspecialchars($txt)."</div>";
+        }
     
-     public function importJSON($target, $json, $doUpdate = true){
-         set_time_limit(0);
+    public function importJSON($target, $json, $doUpdate = true){
+        set_time_limit(0);
          $data = json_decode($json, true);
          for($i = 0; $i < count($data); $i++){
              $fields = array();
@@ -62,7 +62,7 @@ class ImportHelper{
                          }
                      }
                  $sql .= ")";
-                 echo '<code>' . htmlspecialchars($sql) . "</code>";
+                 echo '<code>'.htmlspecialchars($sql)."</code>";
                  echo "<hr/>";
                  db_query($sql)or $this -> logerror(db_error());
                  }

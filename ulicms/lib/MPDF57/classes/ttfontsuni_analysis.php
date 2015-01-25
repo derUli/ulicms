@@ -9,8 +9,8 @@ class TTFontFile_Analysis EXTENDS TTFontFile{
          $this -> filename = $file;
          $this -> fh = fopen($file, 'rb');
          if (!$this -> fh){
-             return ('ERROR - Can\'t open file ' . $file);
-             }
+            return ('ERROR - Can\'t open file ' . $file);
+        }
          $this -> _pos = 0;
          $this -> charWidths = '';
          $this -> glyphPos = array();
@@ -167,15 +167,15 @@ class TTFontFile_Analysis EXTENDS TTFontFile{
              return("ERROR - NOT ADDED as Could not find valid font name - " . $file);
          $this -> name = $psName;
          if ($names[1]){
-             $this -> familyName = $names[1];
-             }else{
-             $this -> familyName = $psName;
-             }
+            $this -> familyName = $names[1];
+        }else{
+            $this -> familyName = $psName;
+        }
          if ($names[2]){
-             $this -> styleName = $names[2];
-             }else{
-             $this -> styleName = 'Regular';
-             }
+            $this -> styleName = $names[2];
+        }else{
+            $this -> styleName = 'Regular';
+        }
         
          // /////////////////////////////////
         // head - Font header table
@@ -213,8 +213,8 @@ class TTFontFile_Analysis EXTENDS TTFontFile{
              $panose = fread($this -> fh, 10);
              $this -> panose = array();
              for ($p = 0;$p < strlen($panose);$p++){
-                 $this -> panose[] = ord($panose[$p]);
-                 }
+                $this -> panose[] = ord($panose[$p]);
+            }
              $this -> skip(20);
              $fsSelection = $this -> read_short();
              }
@@ -327,22 +327,22 @@ class TTFontFile_Analysis EXTENDS TTFontFile{
              $this -> skip(6);
              $endCount = array();
              for($i = 0; $i < $segCount; $i++){
-                 $endCount[] = $this -> read_ushort();
-                 }
+                $endCount[] = $this -> read_ushort();
+            }
              $this -> skip(2);
              $startCount = array();
              for($i = 0; $i < $segCount; $i++){
-                 $startCount[] = $this -> read_ushort();
-                 }
+                $startCount[] = $this -> read_ushort();
+            }
              $idDelta = array();
              for($i = 0; $i < $segCount; $i++){
-                 $idDelta[] = $this -> read_short();
-                 }
+                $idDelta[] = $this -> read_short();
+            }
              $idRangeOffset_start = $this -> _pos;
              $idRangeOffset = array();
              for($i = 0; $i < $segCount; $i++){
-                 $idRangeOffset[] = $this -> read_ushort();
-                 }
+                $idRangeOffset[] = $this -> read_ushort();
+            }
             
              for ($n = 0;$n < $segCount;$n++){
                  if (($endCount[$n] > 0x0590 && $endCount[$n] < 0x077F) || ($endCount[$n] > 0xFE70 && $endCount[$n] < 0xFEFF) || ($endCount[$n] > 0xFB50 && $endCount[$n] < 0xFDFF)){
@@ -412,14 +412,14 @@ class TTFontFile_Analysis EXTENDS TTFontFile{
                              // Assign new PUA Unicode between F500 - F7FF
                             $bit = $uni & 0xFF;
                              if ($form == 'I'){
-                                 $bit += 0xF600;
-                                 }
+                                $bit += 0xF600;
+                            }
                             else if ($form == 'M'){
-                                 $bit += 0xF700;
-                                 }
+                                $bit += 0xF700;
+                            }
                             else{
-                                 $bit += 0xF500;
-                                 }
+                                $bit += 0xF500;
+                            }
                              $unAGlyphs .= $gid;
                              $name = 'uni' . strtoupper($m[1]) . '.' . strtolower($m[2]);
                              $unAGlyphs .= ' : ' . $name;
@@ -450,34 +450,34 @@ class TTFontFile_Analysis EXTENDS TTFontFile{
          $italic = false;
          $ftype = '';
          if ($macStyle & (1 << 0)){
-             $bold = true;
-             } // bit 0 bold
+            $bold = true;
+        } // bit 0 bold
          else if ($fsSelection & (1 << 5)){
-             $bold = true;
-             } // 5 	BOLD 	Characters are emboldened
+            $bold = true;
+        } // 5 	BOLD 	Characters are emboldened
         
          if ($macStyle & (1 << 1)){
-             $italic = true;
-             } // bit 1 italic
+            $italic = true;
+        } // bit 1 italic
          else if ($fsSelection & (1 << 0)){
-             $italic = true;
-             } // 0 	ITALIC 	Font contains Italic characters, otherwise they are upright
+            $italic = true;
+        } // 0 	ITALIC 	Font contains Italic characters, otherwise they are upright
          else if ($this -> italicAngle <> 0){
-             $italic = true;
-             }
+            $italic = true;
+        }
         
          if ($isFixedPitch){
-             $ftype = 'mono';
-             }
+            $ftype = 'mono';
+        }
         else if ($sFamily > 0 && $sFamily < 8){
-             $ftype = 'serif';
-             }
+            $ftype = 'serif';
+        }
         else if ($sFamily == 8){
-             $ftype = 'sans';
-             }
+            $ftype = 'sans';
+        }
         else if ($sFamily == 10){
-             $ftype = 'cursive';
-             }
+            $ftype = 'cursive';
+        }
          // Use PANOSE
         if ($panose){
              $bFamilyType = ord($panose[0]);
@@ -485,16 +485,16 @@ class TTFontFile_Analysis EXTENDS TTFontFile{
                  $bSerifStyle = ord($panose[1]);
                  if (!$ftype){
                      if ($bSerifStyle > 1 && $bSerifStyle < 11){
-                         $ftype = 'serif';
-                         }
+                        $ftype = 'serif';
+                    }
                     else if ($bSerifStyle > 10){
-                         $ftype = 'sans';
-                         }
+                        $ftype = 'sans';
+                    }
                      }
                  $bProportion = ord($panose[3]);
                  if ($bProportion == 9 || $bProportion == 1){
-                     $ftype = 'mono';
-                     } // ==1 i.e. No Fit needed for OCR-a and -b
+                    $ftype = 'mono';
+                } // ==1 i.e. No Fit needed for OCR-a and -b
                  }
             else if ($bFamilyType == 3){
                  $ftype = 'cursive';
@@ -508,7 +508,7 @@ class TTFontFile_Analysis EXTENDS TTFontFile{
     
     
     
-     }
+    }
 
 
 ?>

@@ -48,16 +48,16 @@ class PlainTextCreator{
                  $id = md5($_SESSION["REQUEST_URI"]);
                  $options = array(
                     'lifeTime' => getconfig("cache_period"));
-                 if(!class_exists("Cache_Lite")){
+                if(!class_exists("Cache_Lite")){
                      throw new Exception("Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um.");
-                     }
+                    }
                 
-                 $Cache_Lite = new Cache_Lite($options);
+                $Cache_Lite = new Cache_Lite($options);
                 
-                 if ($data = $Cache_Lite -> get($id)){
-                     $this -> httpHeader();
+                if ($data = $Cache_Lite -> get($id)){
+                    $this -> httpHeader();
                      die($data);
-                     }
+                    }
                 
                 
                 
@@ -101,4 +101,4 @@ class PlainTextCreator{
          echo $this -> content;
          exit();
          }
-     }
+    }

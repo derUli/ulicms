@@ -49,4 +49,4 @@ class PDFCreator{
          readfile($this -> cached_file);
          exit();
          }
-     }
+    }
