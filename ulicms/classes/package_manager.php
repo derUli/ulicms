@@ -6,7 +6,16 @@ class packageManager{
          $this -> package_source = $cfg -> getVar("pkg_src");
          $this -> package_source = $this -> replacePlaceHolders($this -> package_source);
          }
-    
+
+      public function splitPackageName($name){
+         $name = str_ireplace(".tar.gz", "", $name);
+         $name = str_ireplace(".zip", "", $name); 
+         $splitted = explode("-", $name);
+         $version = array_pop($splitted);
+         $name = $splitted;
+         return array(join("-", $name), $version);
+
+    }  
     
      public function installPackage($file){
          try{
