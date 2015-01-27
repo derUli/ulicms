@@ -58,3 +58,5 @@ entsprechende PHP-Modul installiert ist.
   - after_delete_language
   - before_set_default_language
   - after_set_default_language
+  - before_create_language
+  - after_create_language

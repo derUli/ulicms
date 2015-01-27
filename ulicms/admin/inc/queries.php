@@ -161,9 +161,11 @@ if(isset($_POST["add_language"]) and $acl -> hasPermission("languages")){
      if(!empty($_POST["name"]) and !empty($_POST["language_code"])){
          $name = db_escape($_POST["name"]);
          $language_code = db_escape($_POST["language_code"]);
+         add_hook("before_create_language");
          db_query("INSERT INTO " . tbname("languages") .
              "(name, language_code)
       VALUES('$name', '$language_code')");
+         add_hook("after_create_language");
          }
      }
 
