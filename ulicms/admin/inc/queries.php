@@ -4,6 +4,7 @@ $acl = new ACL();
 add_hook("query");
 
 if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
+     add_hook("before_safe_simple_settings");
      setconfig("registered_user_default_level", intval($_POST["registered_user_default_level"]));
      setconfig("homepage_owner", db_escape($_POST["homepage_owner"]));
      setconfig("language", db_escape($_POST["language"]));
@@ -23,6 +24,8 @@ if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
      else
          setconfig("disable_html_validation", "disable");
     
+    
+     add_hook("after_safe_simple_settings");
      header("Location: index.php?action=settings_simple");
      exit();
      }
@@ -31,6 +34,7 @@ if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
 
 
 if($_GET["action"] == "view_website" or $_GET["action"] == "frontpage"){
+     add_hook("before_view_website");
      header("Location: ../");
      exit();
      }
@@ -43,8 +47,10 @@ if(isset($_GET["clear_cache"])){
 
 if($_GET["action"] == "undelete_page" && $acl -> hasPermission("pages")){
      $page = intval($_GET["page"]);
+     add_hook("before_undelete_page");
      db_query("UPDATE " . tbname("content") . " SET `deleted_at` = NULL" .
          " WHERE id=$page");
+     add_hook("after_undelete_page");
      header("Location: index.php?action=pages");
      exit();
     
@@ -52,8 +58,10 @@ if($_GET["action"] == "undelete_page" && $acl -> hasPermission("pages")){
 
 if($_GET["action"] == "pages_delete" && $acl -> hasPermission("pages")){
      $page = intval($_GET["page"]);
+          add_hook("before_delete_page");
      db_query("UPDATE " . tbname("content") . " SET `deleted_at` = " . time() .
-         " WHERE id=$page");
+         " WHERE id=$page");     
+         add_hook("after_delete_page");
      header("Location: index.php?action=pages");
      exit();
      }
@@ -61,6 +69,7 @@ if($_GET["action"] == "pages_delete" && $acl -> hasPermission("pages")){
 if($_GET["action"] == "spam_filter" and
      isset($_POST["submit_spamfilter_settings"])){
     
+         add_hook("before_save_spamfilter_settings");
     
      if($_POST["spamfilter_enabled"] == "yes"){
          setconfig("spamfilter_enabled", "yes");
@@ -83,14 +92,12 @@ if($_GET["action"] == "spam_filter" and
          $blacklist = str_replace("\n", "||", $blacklist);
          setconfig("spamfilter_words_blacklist", $blacklist);
          }
-    
-    
+
      if(isset($_POST["disallow_chinese_chars"]))
          setconfig("disallow_chinese_chars", "disallow");
      else
          deleteconfig("disallow_chinese_chars");
-    
-    
+         add_hook("after_save_spamfilter_settings");
      }
 
 
@@ -98,14 +105,20 @@ if($_GET["action"] == "spam_filter" and
 if(!empty($_POST["save_template"]) and !empty($_POST["code"]) && $acl -> hasPermission("templates")){
      $theme = getconfig("theme");
      $save = getTemplateDirPath($theme) . basename($_POST["save_template"]);
+     add_hook("before_save_template");
      if(is_file($save) && is_writable($save)){
          $handle = fopen($save, "w");
          fwrite($handle, $_POST["code"]);
          fclose($handle);
+         
+         add_hook("after_save_template");
+         add_hook("after_save_template_successfull");
          header("Location: index.php?action=templates&save=true");
          exit();
          }else{
         
+         add_hook("after_save_template");
+         add_hook("after_save_template_failed");
          header("Location: index.php?action=templates&save=false");
          exit();
          }
@@ -113,27 +126,34 @@ if(!empty($_POST["save_template"]) and !empty($_POST["code"]) && $acl -> hasPerm
      }
 
 if($_GET["action"] == "empty_trash"){
+     add_hook("before_empty_trash");
      db_query("DELETE FROM " . tbname("content") . " WHERE deleted_at IS NOT NULL");
+     add_hook("after_empty_trash");
      header("Location: index.php?action=pages");
      exit();
      }
 
 
 if($_GET["action"] == "key_delete" and $acl -> hasPermission("expert_settings")){
+     add_hook("before_delete_key");
      deleteconfig($_GET["key"]);
+     add_hook("after_delete_key");
      header("Location: index.php?action=settings");
      exit();
      }
 
 if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $acl -> hasPermission("languages")){
+     add_hook("before_delete_language");
      db_query("DELETE FROM " . tbname("languages") . " WHERE id = " . intval($_GET["delete"]));
-    
-    
+     add_hook("after_delete_language");
+
      }
 
 if($_GET["action"] == "languages" and !empty($_GET["default"]) and $acl -> hasPermission("languages")){
+     add_hook("before_set_default_language");
      setconfig("default_language", db_escape($_GET["default"]));
      setconfig("system_language", db_escape($_GET["default"]));
+     add_hook("after_set_default_language");
      }
 
 
@@ -333,11 +353,7 @@ if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl -> hasPermission("u
      $password = $_POST["admin_password"];
      $email = $_POST["admin_email"];
      $sendMail = isset($_POST["send_mail"]);
-    
-     add_hook("before_create_user");
      adduser($username, $lastname, $firstname, $email, $password, $group, $sendMail);
-    
-     add_hook("after_create_user");
      header("Location: index.php?action=admins");
      exit();
     
@@ -378,9 +394,10 @@ if($_POST["edit_page"] == "edit_page" && $acl -> hasPermission("pages")){
      $meta_description = db_escape($_POST["meta_description"]);
      $meta_keywords = db_escape($_POST["meta_keywords"]);
      $language = db_escape($_POST["language"]);
-    
+     add_hook("before_edit_page");
      db_query("UPDATE " . tbname("content") . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme' WHERE id=$id");
     
+     add_hook("after_edit_page");
     
      header("Location: index.php?action=pages");
      exit();
@@ -452,18 +469,23 @@ if(!empty($_FILES['logo_upload_file']['name'])
          $new_filename = "../content/images/" . $hash . "." . $extension;
          $logo_upload_filename = $hash . "." . $extension;
         
+         add_hook("before_upload_logo");
          move_uploaded_file($logo_upload['tmp_name'], $new_filename);
          $image_size = getimagesize($new_filename);
          if($image_size[0] <= 500 and $image_size[1] <= 100){
              setconfig("logo_image", $logo_upload_filename);
             
+              add_hook("after_upload_logo_successfull");
              }else{
              header("Location: index.php?action=logo_upload&error=to_big");
+             
+              add_hook("after_upload_logo_failed");
              exit();
              }
         
          }
     
+              add_hook("after_upload_logo");
     
     
     
@@ -526,6 +548,7 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
      $icq_id = db_escape($_POST["icq_id"]);
      $skype_id = db_escape($_POST["skype_id"]);
      $about_me = db_escape($_POST["about_me"]);
+     add_hook("before_edit_user");
      db_query("UPDATE " . tbname("users") . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
@@ -534,6 +557,7 @@ about_me = '$about_me', avatar_file = '$db_avatar_filename' WHERE id=$id");
      if(!empty($password))
          changePassword($password, $id);
     
+     add_hook("after_edit_user");;
      if(!$acl -> hasPermission("users")){
          header("Location: index.php");
          exit();
@@ -554,11 +578,11 @@ if($_POST["edit_banner"] == "edit_banner" && $acl -> hasPermission("banners")){
      $type = db_escape($_POST["type"]);
      $html = db_escape($_POST["html"]);
      $language = db_escape($_POST["language"]);
-    
+     add_hook("before_edit_banner");
      $query = db_query("UPDATE " . tbname("banner") . " 
 SET name='$name', link_url='$link_url', image_url='$image_url', category='$category', type='$type', html='$html', language='$language' WHERE id=$id");
     
-    
+     add_hook("after_edit_banner");
      header("Location: index.php?action=banner");
      exit();
     
@@ -568,10 +592,11 @@ if($_POST["edit_key"] == "edit_key" && $acl -> hasPermission("expert_settings"))
      $name = db_escape($_POST["name"]);
      $value = db_escape($_POST["value"]);
      $id = intval($_POST["id"]);
-    
+     add_hook("before_edit_key");
      $query = db_query("UPDATE " . tbname("settings") . " 
 SET name='$name',value='$value' WHERE id=$id");
     
+     add_hook("after_edit_key");
     
      header("Location: index.php?action=settings");
      exit();

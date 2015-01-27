@@ -26,4 +26,35 @@ entsprechende PHP-Modul installiert ist.
   - after_add_key
   - before_create_user
   - after_create_user
-  
+  - before_edit_page
+  - after_edit_page
+  - before_upload_logo
+  - after_upload_logo_successfull
+  - after_upload_logo_successfull
+  - after_upload_logo
+  - before_edit_user
+  - after_edit_user
+  - before_edit_banner
+  - after_edit_banner
+  - before_edit_key
+  - after_edit_key
+  - before_safe_simple_settings
+  - after_safe_simple_settings
+  - before_view_website
+  - before_delete_page
+  - after_delete_page
+  - before_undelete_page
+  - after_undelete_page
+  - before_save_spamfilter_settings
+  - after_save_spamfilter_settings
+  - after_save_template
+  - after_save_template_successfull
+  - after_save_template_failed
+  - before_empty_trash
+  - after_empty_trash
+  - before_delete_key
+  - after_delete_key
+  - before_delete_language
+  - after_delete_language
+  - before_set_default_language
+  - after_set_default_language

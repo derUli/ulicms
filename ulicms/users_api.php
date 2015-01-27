@@ -55,6 +55,10 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
     
      if(is_null($acl_group))
          $acl_group = "NULL";
+         
+     
+     add_hook("before_create_user");
+     
      db_query("INSERT INTO " . tbname("users") . " 
 (username,lastname, firstname, email, password, `group`, `group_id`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape(hash_password($password)) . "',$group, " . $acl_group . ")")or die(db_error());
      $message = "Hallo $firstname,\n\n" .
@@ -68,6 +72,9 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
      if($sendMessage){
          @ulicms_mail($email, "Dein Benutzer-Account bei " . $_SERVER["SERVER_NAME"], $message, $header);
          }
+         
+         
+     add_hook("after_create_user");
      }
 
 function user_exists($name){
