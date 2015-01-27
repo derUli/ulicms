@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 8.0.1 ====
+﻿===== Neues in UliCMS 8.0.0 ====
 + Neues Backend Design
 + Zugriffsbeschränkungen ("Sichtbar für") für Seiten korrigiert und erweitert
 + no_cache() API Funktion hinzugefügt
@@ -13,3 +13,17 @@ entsprechende PHP-Modul installiert ist.
 + HTML5 required Attribut hinzugefügt
 + file_get_contents_wrapper cacht Downloads
 + Noembed Module
++ Neue Hooks:
+  - before_admin_delete
+  - after_admin_delete
+  - before_banner_delete
+  - after_banner_delete
+  - before_create_page
+  - after_create_page
+  - before_create_banner
+  - after_create_banner
+  - before_add_key
+  - after_add_key
+  - before_create_user
+  - after_create_user
+  

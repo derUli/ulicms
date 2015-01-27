@@ -149,15 +149,20 @@ if(isset($_POST["add_language"]) and $acl -> hasPermission("languages")){
 
 if($_GET["action"] == "banner_delete" && $acl -> hasPermission("banners")){
      $banner = intval($_GET["banner"]);
+     
+     add_hook("before_banner_delete");
      $query = db_query("DELETE FROM " . tbname("banner") . " WHERE id='$banner'", $connection);
+     add_hook("after_banner_delete");
      header("Location: index.php?action=banner");
      exit();
      }
 
 
 if($_GET["action"] == "admin_delete" && (is_admin() or $acl -> hasPermission("users"))){
-     $admin = intval($_GET["admin"]);
+     $admin = intval($_GET["admin"]);     
+     add_hook("before_admin_delete");
      $query = db_query("DELETE FROM " . tbname("users") . " WHERE id='$admin'", $connection);
+     add_hook("after_admin_delete");
      header("Location: index.php?action=admins");
      exit();
      }
@@ -265,6 +270,7 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
         
          $language = db_escape($_POST["language"]);
         
+         add_hook("before_create_page");
          db_query("INSERT INTO " . tbname("content") .
              " (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position, 
@@ -276,6 +282,7 @@ if($_POST["add_page"] == "add_page" && $acl -> hasPermission("pages")){
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title', '$menu_image', '$custom_data', '$theme')")or die(db_error());
         
+         add_hook("after_create_page");
          // header("Location: index.php?action=pages_edit&page=".db_insert_id()."#bottom");
         header("Location: index.php?action=pages");
          exit();
@@ -294,11 +301,12 @@ if($_POST["add_banner"] == "add_banner" && $acl -> hasPermission("banners")){
      $html = db_escape($_POST["html"]);
      $language = db_escape($_POST["language"]);
     
-    
+    add_hook("before_create_banner");
      $query = db_query("INSERT INTO " . tbname("banner") . " 
 (name,link_url,image_url, category, `type`, html, `language`) VALUES('$name','$link_url','$image_url', '$category', '$type', '$html',
 '$language')", $connection);
     
+    add_hook("after_create_banner");
      header("Location: index.php?action=banner");
      exit();
      }
@@ -308,10 +316,11 @@ if($_POST["add_key"] == "add_key" and $acl -> hasPermission("expert_settings")){
     
      $name = db_escape($_POST["name"]);
      $value = db_escape($_POST["value"]);
-    
+    add_hook("before_add_key");
      $query = db_query("INSERT INTO " . tbname("settings") . " 
 (name,value) VALUES('$name','$value')", $connection);
     
+    add_hook("after_add_key");
      header("Location: index.php?action=settings");
      exit();
      }
@@ -325,8 +334,10 @@ if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl -> hasPermission("u
      $email = $_POST["admin_email"];
      $sendMail = isset($_POST["send_mail"]);
     
+     add_hook("before_create_user");
      adduser($username, $lastname, $firstname, $email, $password, $group, $sendMail);
     
+     add_hook("after_create_user");
      header("Location: index.php?action=admins");
      exit();
     
