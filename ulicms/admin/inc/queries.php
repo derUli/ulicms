@@ -604,4 +604,3 @@ SET name='$name',value='$value' WHERE id=$id");
      exit();
     
      }
-?>
