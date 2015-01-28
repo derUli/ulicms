@@ -408,7 +408,7 @@ function getCurrentLanguage($current = true){
 // Rückgabewert: ein String oder False
 function checkForUpdates(){
      include_once "../lib/file_get_contents_wrapper.php";
-     $info = @file_get_contents_Wrapper(UPDATE_CHECK_URL);
+     $info = @file_get_contents_Wrapper(UPDATE_CHECK_URL, true);
     
      if(!$info or trim($info) === "")
          return false;
