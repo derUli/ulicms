@@ -34,9 +34,9 @@ def main():
               "config.js", "comments")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
-    os = platform.system()
+    operating_system = platform.system()
     supported_os = ["Windows", "Linux"]
-    if not os in supported_os and reformat:
+    if not operating_system in supported_os and reformat:
         print("Sorry Code refactoring is not supported on your operating system.")
         reformat = False
         
