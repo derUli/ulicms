@@ -3,6 +3,7 @@ import shutil
 import argparse
 import os
 import codecs
+import platform
 from contextlib import closing
 from zipfile import ZipFile, ZIP_DEFLATED
 
@@ -31,6 +32,12 @@ def main():
               ".gitignore", "cache")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
+
+    os = platform.system()
+    supported_os = ["Windows", "Linux"]
+    if not os in supported_os and reformat:
+        print("Sorry Code refactoring is not supported on your operating system.")
+        reformat = False
     if reformat:
         print("Refactoring Code...")
         execfile('reformat_code.py')
@@ -44,7 +51,7 @@ def main():
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
     if args.zip:
         print("zipping folder...")
-	zipdir(target, archive_name)
+        zipdir(target, archive_name)
         print("removing target folder...")
         shutil.rmtree(target)
 try:

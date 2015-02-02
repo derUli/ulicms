@@ -2,6 +2,7 @@
 import shutil
 import argparse
 import os
+import platform
 import codecs
 from contextlib import closing
 from zipfile import ZipFile, ZIP_DEFLATED
@@ -33,6 +34,12 @@ def main():
               "config.js", "comments")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
+    os = platform.system()
+    supported_os = ["Windows", "Linux"]
+    if not os in supported_os and reformat:
+        print("Sorry Code refactoring is not supported on your operating system.")
+        reformat = False
+        
     if reformat:
         print("Refactoring Code...")
         execfile('reformat_code.py')
