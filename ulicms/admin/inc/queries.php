@@ -58,10 +58,10 @@ if($_GET["action"] == "undelete_page" && $acl -> hasPermission("pages")){
 
 if($_GET["action"] == "pages_delete" && $acl -> hasPermission("pages")){
      $page = intval($_GET["page"]);
-          add_hook("before_delete_page");
+     add_hook("before_delete_page");
      db_query("UPDATE " . tbname("content") . " SET `deleted_at` = " . time() .
-         " WHERE id=$page");     
-         add_hook("after_delete_page");
+         " WHERE id=$page");
+     add_hook("after_delete_page");
      header("Location: index.php?action=pages");
      exit();
      }
@@ -69,7 +69,7 @@ if($_GET["action"] == "pages_delete" && $acl -> hasPermission("pages")){
 if($_GET["action"] == "spam_filter" and
      isset($_POST["submit_spamfilter_settings"])){
     
-         add_hook("before_save_spamfilter_settings");
+     add_hook("before_save_spamfilter_settings");
     
      if($_POST["spamfilter_enabled"] == "yes"){
          setconfig("spamfilter_enabled", "yes");
@@ -92,12 +92,12 @@ if($_GET["action"] == "spam_filter" and
          $blacklist = str_replace("\n", "||", $blacklist);
          setconfig("spamfilter_words_blacklist", $blacklist);
          }
-
+    
      if(isset($_POST["disallow_chinese_chars"]))
          setconfig("disallow_chinese_chars", "disallow");
      else
          deleteconfig("disallow_chinese_chars");
-         add_hook("after_save_spamfilter_settings");
+     add_hook("after_save_spamfilter_settings");
      }
 
 
@@ -110,7 +110,7 @@ if(!empty($_POST["save_template"]) and !empty($_POST["code"]) && $acl -> hasPerm
          $handle = fopen($save, "w");
          fwrite($handle, $_POST["code"]);
          fclose($handle);
-         
+        
          add_hook("after_save_template");
          add_hook("after_save_template_successfull");
          header("Location: index.php?action=templates&save=true");
@@ -146,7 +146,7 @@ if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $acl -> hasPer
      add_hook("before_delete_language");
      db_query("DELETE FROM " . tbname("languages") . " WHERE id = " . intval($_GET["delete"]));
      add_hook("after_delete_language");
-
+    
      }
 
 if($_GET["action"] == "languages" and !empty($_GET["default"]) and $acl -> hasPermission("languages")){
@@ -171,7 +171,7 @@ if(isset($_POST["add_language"]) and $acl -> hasPermission("languages")){
 
 if($_GET["action"] == "banner_delete" && $acl -> hasPermission("banners")){
      $banner = intval($_GET["banner"]);
-     
+    
      add_hook("before_banner_delete");
      $query = db_query("DELETE FROM " . tbname("banner") . " WHERE id='$banner'", $connection);
      add_hook("after_banner_delete");
@@ -181,7 +181,7 @@ if($_GET["action"] == "banner_delete" && $acl -> hasPermission("banners")){
 
 
 if($_GET["action"] == "admin_delete" && (is_admin() or $acl -> hasPermission("users"))){
-     $admin = intval($_GET["admin"]);     
+     $admin = intval($_GET["admin"]);
      add_hook("before_admin_delete");
      $query = db_query("DELETE FROM " . tbname("users") . " WHERE id='$admin'", $connection);
      add_hook("after_admin_delete");
@@ -323,12 +323,12 @@ if($_POST["add_banner"] == "add_banner" && $acl -> hasPermission("banners")){
      $html = db_escape($_POST["html"]);
      $language = db_escape($_POST["language"]);
     
-    add_hook("before_create_banner");
+     add_hook("before_create_banner");
      $query = db_query("INSERT INTO " . tbname("banner") . " 
 (name,link_url,image_url, category, `type`, html, `language`) VALUES('$name','$link_url','$image_url', '$category', '$type', '$html',
 '$language')", $connection);
     
-    add_hook("after_create_banner");
+     add_hook("after_create_banner");
      header("Location: index.php?action=banner");
      exit();
      }
@@ -338,11 +338,11 @@ if($_POST["add_key"] == "add_key" and $acl -> hasPermission("expert_settings")){
     
      $name = db_escape($_POST["name"]);
      $value = db_escape($_POST["value"]);
-    add_hook("before_add_key");
+     add_hook("before_add_key");
      $query = db_query("INSERT INTO " . tbname("settings") . " 
 (name,value) VALUES('$name','$value')", $connection);
     
-    add_hook("after_add_key");
+     add_hook("after_add_key");
      header("Location: index.php?action=settings");
      exit();
      }
@@ -477,17 +477,17 @@ if(!empty($_FILES['logo_upload_file']['name'])
          if($image_size[0] <= 500 and $image_size[1] <= 100){
              setconfig("logo_image", $logo_upload_filename);
             
-              add_hook("after_upload_logo_successfull");
+             add_hook("after_upload_logo_successfull");
              }else{
              header("Location: index.php?action=logo_upload&error=to_big");
-             
-              add_hook("after_upload_logo_failed");
+            
+             add_hook("after_upload_logo_failed");
              exit();
              }
         
          }
     
-              add_hook("after_upload_logo");
+     add_hook("after_upload_logo");
     
     
     
