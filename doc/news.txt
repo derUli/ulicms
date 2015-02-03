@@ -5,7 +5,7 @@
 + Kein Caching bei eingeloggten Nutzern.
 + Es wird auch der Alternate PHP Cache (APC) geleert, sofern das 
 entsprechende PHP-Modul installiert ist.
-+ CKEditor auf Version 4.4.6 aktualisiert
++ CKEditor auf Version 4.4.7 aktualisiert
 + Falsche Übersetzung von "Header Hintergrundfarbe" in den Designeinstellungen korrigiert
 + Seiten filtern nach Menü und übergeordneter Seite nun möglich
 + Theme nun pro Seite festlegbar
