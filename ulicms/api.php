@@ -4,6 +4,11 @@ function getLanguageFilePath($lang = "de", $component = null){
      // Todo Module Language Files
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
+     
+function strbool($value)
+{
+    return $value ? 'true' : 'false';
+}
 
 function getModuleName($module){
      $name_file = getModulePath($module) .
@@ -553,7 +558,7 @@ function buildCacheFilePath($request_uri){
      }
 
 
- $unique_identifier = $request_uri . $language. strval(is_mobile());
+ $unique_identifier = $request_uri . $language. strbool(is_mobile());
 
  return "content/cache/" . md5($unique_identifier) . ".tmp";
  }

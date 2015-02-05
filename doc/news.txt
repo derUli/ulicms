@@ -14,6 +14,8 @@ entsprechende PHP-Modul installiert ist.
 + file_get_contents_wrapper cacht Downloads
 + Ein spezielles Design für Mobilgeräte kann eingestellt werden
 + Noembed Module
++ strbool() API Funktion hinzugefügt
++ theme Filter hinzugefügt
 + Neue Hooks:
   - before_admin_delete
   - after_admin_delete
