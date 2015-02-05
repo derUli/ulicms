@@ -66,7 +66,7 @@ function get_theme($page = null){
              }
          }
     
-    
+     $theme = apply_filter($theme, "theme");
      return $theme;
      }
 
