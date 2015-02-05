@@ -3,6 +3,7 @@ if(!is_admin()){
      echo "<p class='ulicms_error'>Zugriff verweigert</p>";
      }else{
      $theme = getconfig("theme");
+     $mobile_theme = getconfig("mobile_theme");
     
      if(isset($_REQUEST["submit"])){
         
@@ -20,7 +21,21 @@ if(!is_admin()){
                  $theme = $_REQUEST["theme"];
                  } // if in_array theme zu
              } // if theme zu
-        
+             
+             
+             
+        // Wenn Formular abgesendet wurde, Wert Speichern
+        if($_REQUEST["mobile_theme"] !== $mobile_theme){ // if mobile_theme auf
+             $themes = getThemesList();
+             
+             if(empty($_REQUEST["mobile_theme"]))
+                deleteconfig("mobile_theme");
+             else if(in_array($_REQUEST["mobile_theme"], $themes)){ // if in_array mobile_theme auf
+                 setconfig("mobile_theme", db_escape($_REQUEST["mobile_theme"]));
+                 $mobile_theme = $_REQUEST["mobile_theme"];
+                 } // if in_array mobile_theme zu
+             } // if mobile_theme zu
+             
          if($_REQUEST["default-font"] != getconfig("default-font")){
              if(!empty($_REQUEST["custom-font"]))
                  $font = $_REQUEST["custom-font"];
@@ -112,6 +127,26 @@ if(!is_admin()){
 <option value="<?php echo $th;
          ?>"<?php
          if($th === $theme)
+             echo " selected"
+             ?>><?php echo $th;
+         ?></option>";
+<?php }
+     ?>
+</select>
+</td>
+</tr>
+
+<tr>
+<td><strong><?php echo TRANSLATION_MOBILE_DESIGN;
+     ?></strong></td>
+<td>
+<select name="mobile_theme" size=1>
+<option value="" <?php if(!$mobile_theme) echo " selected";?>>[<?php echo TRANSLATION_STANDARD;?>]</option>
+<?php foreach($allThemes as $th){
+         ?>
+<option value="<?php echo $th;
+         ?>"<?php
+         if($th === $mobile_theme)
              echo " selected"
              ?>><?php echo $th;
          ?></option>";

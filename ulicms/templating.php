@@ -54,6 +54,11 @@ function get_theme($page = null){
          $page = get_requested_pagename();
     
      $theme = getconfig("theme");
+     
+     $mobile_theme = getconfig("mobile_theme");
+     
+     if($mobile_theme and !empty($mobile_theme) and is_mobile())
+        $theme = $mobile_theme;
     
      if(is_200()){
          $sql = "SELECT `theme` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";

@@ -12,6 +12,7 @@ entsprechende PHP-Modul installiert ist.
 + Kategorien haben nun auch eine Beschreibung
 + HTML5 required Attribut hinzugefügt
 + file_get_contents_wrapper cacht Downloads
++ Ein spezielles Design für Mobilgeräte kann eingestellt werden
 + Noembed Module
 + Neue Hooks:
   - before_admin_delete
