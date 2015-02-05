@@ -4,15 +4,15 @@ function getLanguageFilePath($lang = "de", $component = null){
      // Todo Module Language Files
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
-     
+
 function strbool($value)
 {
-    return $value ? 'true' : 'false';
-}
+     return $value ? 'true' : 'false';
+    }
 
 function getFontSizes(){
-  return array("xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large");
-}
+     return array("xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large");
+    }
 
 function getModuleName($module){
      $name_file = getModulePath($module) .
@@ -562,7 +562,7 @@ function buildCacheFilePath($request_uri){
      }
 
 
- $unique_identifier = $request_uri . $language. strbool(is_mobile());
+ $unique_identifier = $request_uri . $language . strbool(is_mobile());
 
  return "content/cache/" . md5($unique_identifier) . ".tmp";
  }
@@ -989,6 +989,7 @@ function is__writable($path)
 else
     
      return 0; // Or return error - invalid path...
+
 
 
 

@@ -278,7 +278,7 @@ class PEAR_Task_Postinstallscript extends PEAR_Task_Common
      * @param PEAR_PackageFile_v1 $ |PEAR_PackageFile_v2
      * @param string $ file name
      * @return bool |PEAR_Error false to skip this file, PEAR_Error to fail
-     *                             (use $this->throwError)
+     *                              (use $this->throwError)
      */
      function startSession($pkg, $contents)
     {

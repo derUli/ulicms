@@ -21,21 +21,21 @@ if(!is_admin()){
                  $theme = $_REQUEST["theme"];
                  } // if in_array theme zu
              } // if theme zu
-             
-             
-             
-        // Wenn Formular abgesendet wurde, Wert Speichern
+        
+        
+        
+         // Wenn Formular abgesendet wurde, Wert Speichern
         if($_REQUEST["mobile_theme"] !== $mobile_theme){ // if mobile_theme auf
              $themes = getThemesList();
-             
+            
              if(empty($_REQUEST["mobile_theme"]))
-                deleteconfig("mobile_theme");
+                 deleteconfig("mobile_theme");
              else if(in_array($_REQUEST["mobile_theme"], $themes)){ // if in_array mobile_theme auf
                  setconfig("mobile_theme", db_escape($_REQUEST["mobile_theme"]));
                  $mobile_theme = $_REQUEST["mobile_theme"];
                  } // if in_array mobile_theme zu
              } // if mobile_theme zu
-             
+        
          if($_REQUEST["default-font"] != getconfig("default-font")){
              if(!empty($_REQUEST["custom-font"]))
                  $font = $_REQUEST["custom-font"];
@@ -94,7 +94,7 @@ if(!is_admin()){
      $zoom = intval(getconfig("zoom"));
      $font_size = getconfig("font-size");
      $ckeditor_skin = getconfig("ckeditor_skin");
-     
+    
      $font_sizes = getFontSizes();
     
      ?>
@@ -143,7 +143,9 @@ if(!is_admin()){
      ?></strong></td>
 <td>
 <select name="mobile_theme" size=1>
-<option value="" <?php if(!$mobile_theme) echo " selected";?>>[<?php echo TRANSLATION_STANDARD;?>]</option>
+<option value="" <?php if(!$mobile_theme) echo " selected";
+    ?>>[<?php echo TRANSLATION_STANDARD;
+    ?>]</option>
 <?php foreach($allThemes as $th){
          ?>
 <option value="<?php echo $th;
@@ -227,15 +229,16 @@ if(!is_admin()){
          ?></strong>
 <td>
 <select name="font-size">
-<?php 
-foreach($font_sizes as $size){
-   echo '<option value="'.$size.'"';
-   if($font_size == $size)
-      echo " selected";
-   echo ">";
-   echo $size;
-   echo "</option>";
-}?>
+<?php
+        foreach($font_sizes as $size){
+             echo '<option value="' . $size . '"';
+             if($font_size == $size)
+                 echo " selected";
+             echo ">";
+             echo $size;
+             echo "</option>";
+            }
+        ?>
 </select>
 </td>
 </tr>
