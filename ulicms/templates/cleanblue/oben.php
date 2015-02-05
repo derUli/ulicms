@@ -22,7 +22,7 @@ if(getconfig("logo_disabled") == "no")
      }
 else{
      ?><strong><?php homepage_title();
-    ?></strong>
+     ?></strong>
 <?php }
 ?>
 </a>
@@ -32,9 +32,9 @@ else{
 </header>
 <main>
 <?php if(!containsModule()){
-    ?>
+     ?>
 <h1><?php headline();
-    ?></h1>
+     ?></h1>
 <?php
-    }
+     }
 ?>
