@@ -51,7 +51,7 @@ if(!is_admin()){
          setconfig("zoom", intval($_REQUEST["zoom"]));
         
         
-         setconfig("font-size", intval($_REQUEST["font-size"]));
+         setconfig("font-size", db_escape($_REQUEST["font-size"]));
         
         
         
@@ -92,8 +92,10 @@ if(!is_admin()){
      $default_font = getconfig("default-font");
      $title_format = htmlspecialchars(getconfig("title_format"), ENT_QUOTES, "UTF-8");
      $zoom = intval(getconfig("zoom"));
-     $font_size = intval(getconfig("font-size"));
+     $font_size = getconfig("font-size");
      $ckeditor_skin = getconfig("ckeditor_skin");
+     
+     $font_sizes = getFontSizes();
     
      ?>
 <h1><?php echo TRANSLATION_DESIGN;
@@ -225,17 +227,15 @@ if(!is_admin()){
          ?></strong>
 <td>
 <select name="font-size">
-<?php
-         for($i = 8; $i <= 96; $i += 1){
-             ?>
-<option<?php
-             if($i === $font_size or ($i === 12 and $font_size === 0))
-                 echo " selected";
-             ?> value="<?php echo $i;
-             ?>"><?php echo $i;
-             ?>px</oion>
-<?php }
-         ?>
+<?php 
+foreach($font_sizes as $size){
+   echo '<option value="'.$size.'"';
+   if($font_size == $size)
+      echo " selected";
+   echo ">";
+   echo $size;
+   echo "</option>";
+}?>
 </select>
 </td>
 </tr>

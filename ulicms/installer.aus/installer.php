@@ -442,7 +442,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (31, 'theme', 'cleanblue'),
 (32, 'zoom', '100'),
 (33, 'default-font', 'Arial, \'Helvetica Neue\', Helvetica, sans-serif'),
-(34, 'font-size', '16'),
+(34, 'font-size', 'medium'),
 (35, 'header-background-color', '#E8912A'),
 (36, 'body-background-color', '#FFFFFF'),
 (37, 'body-text-color', '#000000'),

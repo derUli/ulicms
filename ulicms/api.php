@@ -10,6 +10,10 @@ function strbool($value)
     return $value ? 'true' : 'false';
 }
 
+function getFontSizes(){
+  return array("xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large");
+}
+
 function getModuleName($module){
      $name_file = getModulePath($module) .
      $module . "_name.php";
