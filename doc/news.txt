@@ -16,6 +16,7 @@ entsprechende PHP-Modul installiert ist.
 + Noembed Module
 + strbool() API Funktion hinzugefügt
 + theme Filter hinzugefügt
++ Schriftgröße nun als keywords ("medium", "large", usw.)
 + Neue Hooks:
   - before_admin_delete
   - after_admin_delete
