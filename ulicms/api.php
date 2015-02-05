@@ -552,7 +552,8 @@ function buildCacheFilePath($request_uri){
      $language = getconfig("default_language");
      }
 
- $unique_identifier = $request_uri . $language;
+
+ $unique_identifier = $request_uri . $language. strval(is_mobile());
 
  return "content/cache/" . md5($unique_identifier) . ".tmp";
  }
