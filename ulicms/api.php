@@ -11,7 +11,7 @@ function strbool($value)
     }
 
 function getFontSizes(){
-     return array("xx-small", "x-small", "small", "medium", "large", "x-large", "xx-large");
+     return array("xx-small", "x-small", "smaller", "small", "medium", "large", "larger", "x-large", "xx-large");
     }
 
 function getModuleName($module){
