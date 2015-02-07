@@ -144,8 +144,8 @@ if(!is_admin()){
 <td>
 <select name="mobile_theme" size=1>
 <option value="" <?php if(!$mobile_theme) echo " selected";
-    ?>>[<?php echo TRANSLATION_STANDARD;
-    ?>]</option>
+     ?>>[<?php echo TRANSLATION_STANDARD;
+     ?>]</option>
 <?php foreach($allThemes as $th){
          ?>
 <option value="<?php echo $th;
@@ -230,15 +230,15 @@ if(!is_admin()){
 <td>
 <select name="font-size">
 <?php
-        foreach($font_sizes as $size){
+         foreach($font_sizes as $size){
              echo '<option value="' . $size . '"';
              if($font_size == $size)
                  echo " selected";
              echo ">";
              echo $size;
              echo "</option>";
-            }
-        ?>
+             }
+         ?>
 </select>
 </td>
 </tr>

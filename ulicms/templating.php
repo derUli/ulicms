@@ -671,7 +671,7 @@ function base_metas(){
 body{
 zoom:" . $zoom . "%;
 font-family:" . getconfig("default-font") . ";
-font-size:" . getconfig("font-size") . "px;
+font-size:" . getconfig("font-size") . ";";
 background-color:" . getconfig("body-background-color") . ";
 color:" . getconfig("body-text-color") . ";
 }

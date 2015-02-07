@@ -182,10 +182,10 @@ class PEAR_RunTest
      * 
      * Turns -d "include_path=/foo/bar" into this:
      * array(
-     *                        'include_path' => array(
-     *                               'operator' => '-d',
-     *                               'value'    => '/foo/bar',
-     *                        )
+     *                          'include_path' => array(
+     *                                 'operator' => '-d',
+     *                                 'value'    => '/foo/bar',
+     *                          )
      * )
      * Works both with quotes and without
      * 
@@ -273,10 +273,10 @@ class PEAR_RunTest
      * @param string $ The filename of the test
      * @param array $ |string INI settings to be applied to the test run
      * @param integer $ Number what the current running test is of the
-     *                                          whole test suite being runned.
+     *                                            whole test suite being runned.
      * @return string |object Returns PASSED, WARNED, FAILED depending on how the
-     *                                            test came out.
-     *                                            PEAR Error when the tester it self fails
+     *                                              test came out.
+     *                                              PEAR Error when the tester it self fails
      */
      function run($file, $ini_settings = array(), $test_number = 1)
     {

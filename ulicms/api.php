@@ -8,11 +8,11 @@ function getLanguageFilePath($lang = "de", $component = null){
 function strbool($value)
 {
      return $value ? 'true' : 'false';
-    }
+     }
 
 function getFontSizes(){
      return array("xx-small", "x-small", "smaller", "small", "medium", "large", "larger", "x-large", "xx-large");
-    }
+     }
 
 function getModuleName($module){
      $name_file = getModulePath($module) .
@@ -989,6 +989,8 @@ function is__writable($path)
 else
     
      return 0; // Or return error - invalid path...
+
+
 
 
 
