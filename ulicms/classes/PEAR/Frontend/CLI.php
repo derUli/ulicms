@@ -258,7 +258,7 @@ class PEAR_Frontend_CLI extends PEAR_Frontend
      * Ask for user input, confirm the answers and continue until the user is satisfied
      * 
      * @param array $ an array of arrays, format array('name' => 'paramname', 'prompt' =>
-     *                                'text to display', 'type' => 'string'[, default => 'default value'])
+     *                                     'text to display', 'type' => 'string'[, default => 'default value'])
      * @return array 
      */
      function confirmDialog($params)

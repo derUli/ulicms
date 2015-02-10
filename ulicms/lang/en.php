@@ -398,4 +398,6 @@ define("TRANSLATION_CUSTOM_DATA_JSON", "User defined values (JSON)");
 define("TRANSLATION_DO_UPDATE", "Do Update");
 define("TRANSLATION_NONE", "None");
 
+define("TRANSLATION_MOBILE_DESIGN", "Design for mobile devices");
+
 add_hook("lang_en");

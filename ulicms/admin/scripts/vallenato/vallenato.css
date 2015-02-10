@@ -1,16 +1,7 @@
 #accordion-container {
-	font-size:0.8em;
 	background: #ffffff;
 	padding: 5px 10px 10px 10px;
 	border: 1px solid #cccccc;
-	/*
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	-moz-box-shadow: 0 5px 15px #cccccc;
-	-webkit-box-shadow: 0 5px 15px #cccccc;
-	*/
-	box-shadow: 0 5px 15px #cccccc;
         width:100%;
 }
 
@@ -21,15 +12,9 @@
 	border: 1px solid #cccccc;
 	cursor: pointer;
 	color: #000000;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
 }
 
 .active-header {
-	-moz-border-radius: 5px 5px 0 0;
-	-webkit-border-radius: 5px 5px 0 0;
-	border-radius: 5px 5px 0 0;
 	background: #335599;
 	background-repeat: no-repeat;
 	background-position: right 50%;
@@ -61,7 +46,4 @@
 	background: #ffffff;
 	border: 1px solid #cccccc;
 	border-top: 0;
-	-moz-border-radius: 0 0 5px 5px;
-	-webkit-border-radius: 0 0 5px 5px;
-	border-radius: 0 0 5px 5px;
 }

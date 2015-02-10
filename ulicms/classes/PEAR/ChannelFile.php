@@ -879,7 +879,7 @@ class PEAR_ChannelFile
      * 
      * @param string $ Protocol type
      * @param string $ Function name (null to return the
-     *                                 first protocol of the type requested)
+     *                                      first protocol of the type requested)
      * @param string $ Mirror name, if any
      * @return array 
      */
@@ -1531,9 +1531,9 @@ class PEAR_ChannelFile
      * Retrieve the object that can be used for custom validation
      * 
      * @param string $ |false the name of the package to validate.  If the package is
-     *                                       the channel validation package, PEAR_Validate is returned
+     *                                            the channel validation package, PEAR_Validate is returned
      * @return PEAR_Validate |false false is returned if the validation package
-     *                           cannot be located
+     *                                cannot be located
      */
      function & getValidationObject($package = false)
     {

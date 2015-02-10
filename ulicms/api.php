@@ -5,6 +5,15 @@ function getLanguageFilePath($lang = "de", $component = null){
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
 
+function strbool($value)
+{
+     return $value ? 'true' : 'false';
+     }
+
+function getFontSizes(){
+     return array("xx-small", "x-small", "smaller", "small", "medium", "large", "larger", "x-large", "xx-large");
+     }
+
 function getModuleName($module){
      $name_file = getModulePath($module) .
      $module . "_name.php";
@@ -408,7 +417,7 @@ function getCurrentLanguage($current = true){
 // Rückgabewert: ein String oder False
 function checkForUpdates(){
      include_once "../lib/file_get_contents_wrapper.php";
-     $info = @file_get_contents_Wrapper(UPDATE_CHECK_URL);
+     $info = @file_get_contents_Wrapper(UPDATE_CHECK_URL, true);
     
      if(!$info or trim($info) === "")
          return false;
@@ -552,7 +561,8 @@ function buildCacheFilePath($request_uri){
      $language = getconfig("default_language");
      }
 
- $unique_identifier = $request_uri . $language;
+
+ $unique_identifier = $request_uri . $language . strbool(is_mobile());
 
  return "content/cache/" . md5($unique_identifier) . ".tmp";
  }
@@ -979,6 +989,11 @@ function is__writable($path)
 else
     
      return 0; // Or return error - invalid path...
+
+
+
+
+
 
 
 

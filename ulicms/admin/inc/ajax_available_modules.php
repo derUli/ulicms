@@ -1,4 +1,6 @@
-<?php if(!$acl -> hasPermission("install_packages")){
+<?php
+$acl = new ACL();
+if(!$acl -> hasPermission("install_packages")){
      noperms();
      ?>
 <?php

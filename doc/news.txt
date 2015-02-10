@@ -5,9 +5,62 @@
 + Kein Caching bei eingeloggten Nutzern.
 + Es wird auch der Alternate PHP Cache (APC) geleert, sofern das 
 entsprechende PHP-Modul installiert ist.
-+ CKEditor auf Version 4.4.6 aktualisiert
++ CKEditor auf Version 4.4.7 aktualisiert
 + Falsche Übersetzung von "Header Hintergrundfarbe" in den Designeinstellungen korrigiert
 + Seiten filtern nach Menü und übergeordneter Seite nun möglich
 + Theme nun pro Seite festlegbar
 + Kategorien haben nun auch eine Beschreibung
 + HTML5 required Attribut hinzugefügt
++ file_get_contents_wrapper cacht Downloads
++ Ein spezielles Design für Mobilgeräte kann eingestellt werden
++ Noembed Module
++ strbool() API Funktion hinzugefügt
++ theme Filter hinzugefügt
++ Schriftgröße nun als keywords ("medium", "large", usw.)
++ Neue Hooks:
+  - before_admin_delete
+  - after_admin_delete
+  - before_banner_delete
+  - after_banner_delete
+  - before_create_page
+  - after_create_page
+  - before_create_banner
+  - after_create_banner
+  - before_add_key
+  - after_add_key
+  - before_create_user
+  - after_create_user
+  - before_edit_page
+  - after_edit_page
+  - before_upload_logo
+  - after_upload_logo_successfull
+  - after_upload_logo_successfull
+  - after_upload_logo
+  - before_edit_user
+  - after_edit_user
+  - before_edit_banner
+  - after_edit_banner
+  - before_edit_key
+  - after_edit_key
+  - before_safe_simple_settings
+  - after_safe_simple_settings
+  - before_view_website
+  - before_delete_page
+  - after_delete_page
+  - before_undelete_page
+  - after_undelete_page
+  - before_save_spamfilter_settings
+  - after_save_spamfilter_settings
+  - after_save_template
+  - after_save_template_successfull
+  - after_save_template_failed
+  - before_empty_trash
+  - after_empty_trash
+  - before_delete_key
+  - after_delete_key
+  - before_delete_language
+  - after_delete_language
+  - before_set_default_language
+  - after_set_default_language
+  - before_create_language
+  - after_create_language

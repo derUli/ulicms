@@ -33,13 +33,25 @@ function is_url($url){
 // Falls allow_url_fopen deaktiviert ist,
 // wird CURL alls Fallback genutzt, falls vorhanden.
 // Ansonsten wird false zurückgegeben.
-function file_get_contents_wrapper($url){
-     if(ini_get("allow_url_fopen") or !is_url($url)){
-         return file_get_contents($url);
-         }else if(function_exists("curl_init") and is_url($url)){
-         return file_get_contents_curl($url);
-         }
+function file_get_contents_wrapper($url, $no_cache = false){
+     $cache_name = md5($url) . "-" . basename($url);
+     $cache_folder = ULICMS_ROOT . "/content/cache";
+     $cache_path = $cache_folder . "/" . $cache_name;
+     if(file_exists($cache_path) && is_url($url) && !$no_cache)
+         return file_get_contents($cache_path);
     
+     if(ini_get("allow_url_fopen") or !is_url($url)){
+         $content = file_get_contents($url);
+         }
+    else if(function_exists("curl_init") and is_url($url)){
+         $content = file_get_contents_curl($url);
+         }
+     if($content){
+         if(is_dir($cache_folder) and is_url($url) and !$no_cache)
+             file_put_contents($cache_path, $content);
+        
+         return $content;
+         }
      return false;
      }
 

@@ -3,6 +3,7 @@ if(!is_admin()){
      echo "<p class='ulicms_error'>Zugriff verweigert</p>";
      }else{
      $theme = getconfig("theme");
+     $mobile_theme = getconfig("mobile_theme");
     
      if(isset($_REQUEST["submit"])){
         
@@ -21,6 +22,20 @@ if(!is_admin()){
                  } // if in_array theme zu
              } // if theme zu
         
+        
+        
+         // Wenn Formular abgesendet wurde, Wert Speichern
+        if($_REQUEST["mobile_theme"] !== $mobile_theme){ // if mobile_theme auf
+             $themes = getThemesList();
+            
+             if(empty($_REQUEST["mobile_theme"]))
+                 deleteconfig("mobile_theme");
+             else if(in_array($_REQUEST["mobile_theme"], $themes)){ // if in_array mobile_theme auf
+                 setconfig("mobile_theme", db_escape($_REQUEST["mobile_theme"]));
+                 $mobile_theme = $_REQUEST["mobile_theme"];
+                 } // if in_array mobile_theme zu
+             } // if mobile_theme zu
+        
          if($_REQUEST["default-font"] != getconfig("default-font")){
              if(!empty($_REQUEST["custom-font"]))
                  $font = $_REQUEST["custom-font"];
@@ -36,7 +51,7 @@ if(!is_admin()){
          setconfig("zoom", intval($_REQUEST["zoom"]));
         
         
-         setconfig("font-size", intval($_REQUEST["font-size"]));
+         setconfig("font-size", db_escape($_REQUEST["font-size"]));
         
         
         
@@ -77,8 +92,10 @@ if(!is_admin()){
      $default_font = getconfig("default-font");
      $title_format = htmlspecialchars(getconfig("title_format"), ENT_QUOTES, "UTF-8");
      $zoom = intval(getconfig("zoom"));
-     $font_size = intval(getconfig("font-size"));
+     $font_size = getconfig("font-size");
      $ckeditor_skin = getconfig("ckeditor_skin");
+    
+     $font_sizes = getFontSizes();
     
      ?>
 <h1><?php echo TRANSLATION_DESIGN;
@@ -112,6 +129,28 @@ if(!is_admin()){
 <option value="<?php echo $th;
          ?>"<?php
          if($th === $theme)
+             echo " selected"
+             ?>><?php echo $th;
+         ?></option>";
+<?php }
+     ?>
+</select>
+</td>
+</tr>
+
+<tr>
+<td><strong><?php echo TRANSLATION_MOBILE_DESIGN;
+     ?></strong></td>
+<td>
+<select name="mobile_theme" size=1>
+<option value="" <?php if(!$mobile_theme) echo " selected";
+     ?>>[<?php echo TRANSLATION_STANDARD;
+     ?>]</option>
+<?php foreach($allThemes as $th){
+         ?>
+<option value="<?php echo $th;
+         ?>"<?php
+         if($th === $mobile_theme)
              echo " selected"
              ?>><?php echo $th;
          ?></option>";
@@ -191,15 +230,14 @@ if(!is_admin()){
 <td>
 <select name="font-size">
 <?php
-         for($i = 8; $i <= 96; $i += 1){
-             ?>
-<option<?php
-             if($i === $font_size or ($i === 12 and $font_size === 0))
+         foreach($font_sizes as $size){
+             echo '<option value="' . $size . '"';
+             if($font_size == $size)
                  echo " selected";
-             ?> value="<?php echo $i;
-             ?>"><?php echo $i;
-             ?>px</oion>
-<?php }
+             echo ">";
+             echo $size;
+             echo "</option>";
+             }
          ?>
 </select>
 </td>

@@ -97,8 +97,8 @@ class PEAR_Registry extends PEAR
     /**
      * * Cache of package information.  Structure:
      * array(
-     *                     'package' => array('id' => ... ),
-     *                     ... )
+     *                          'package' => array('id' => ... ),
+     *                          ... )
      * 
      * @var array 
      */
@@ -147,11 +147,11 @@ class PEAR_Registry extends PEAR
      * 
      * @param string $ (optional) PEAR install directory (for .php files)
      * @param PEAR_ChannelFile $ PEAR_ChannelFile object representing the PEAR channel, if
-     *                          default values are not desired.  Only used the very first time a PEAR
-     *                          repository is initialized
+     *                               default values are not desired.  Only used the very first time a PEAR
+     *                               repository is initialized
      * @param PEAR_ChannelFile $ PEAR_ChannelFile object representing the PECL channel, if
-     *                          default values are not desired.  Only used the very first time a PEAR
-     *                          repository is initialized
+     *                               default values are not desired.  Only used the very first time a PEAR
+     *                               repository is initialized
      * @access public 
      */
      function PEAR_Registry($pear_install_dir = PEAR_INSTALL_DIR, $pear_channel = false,
@@ -819,10 +819,10 @@ class PEAR_Registry extends PEAR
      * Lock the registry.
      * 
      * @param integer $ lock mode, one of LOCK_EX, LOCK_SH or LOCK_UN.
-     *                                  See flock manual for more information.
+     *                                       See flock manual for more information.
      * @return bool TRUE on success, FALSE if locking failed, or a
-     *                                PEAR error if some other error occurs (such as the
-     *                                lock file not being writable).
+     *                                     PEAR error if some other error occurs (such as the
+     *                                     lock file not being writable).
      * @access private 
      */
      function _lock($mode = LOCK_EX)
@@ -1770,7 +1770,7 @@ class PEAR_Registry extends PEAR
      * Add an installed package to the registry
      * 
      * @param string $ |PEAR_PackageFile_v1|PEAR_PackageFile_v2 package name or object
-     *                                 that will be passed to {@link addPackage2()}
+     *                                      that will be passed to {@link addPackage2()}
      * @param array $ package info (parsed by PEAR_Common::infoFrom*() methods)
      * @return bool success of saving
      */
@@ -2081,14 +2081,14 @@ class PEAR_Registry extends PEAR
      * If an array is passed in
      * 
      * @param string $ |array file path, absolute or relative to the pear
-     *                                       install dir
+     *                                            install dir
      * @param string $ |array name of PEAR package or array('package' => name, 'channel' =>
-     *                                       channel) of a package that will be ignored
+     *                                            channel) of a package that will be ignored
      * @param string $ API version - 1.1 will exclude any files belonging to a package
      * @param array $ private recursion variable
      * @return array |false which package and channel the file belongs to, or an empty
-     *                                       string if the file does not belong to an installed package,
-     *                                       or belongs to the second parameter's package
+     *                                            string if the file does not belong to an installed package,
+     *                                            or belongs to the second parameter's package
      */
     function checkFileMap($path, $package = false, $api = '1.0', $attrs = false)
     {
@@ -2188,14 +2188,14 @@ class PEAR_Registry extends PEAR
      * Parse a package name, or validate a parsed package name array
      * 
      * @param string $ |array pass in an array of format
-     *                                       array(
-     *                                        'package' => 'pname',
-     *                                       ['channel' => 'channame',]
-     *                                       ['version' => 'version',]
-     *                                       ['state' => 'state',]
-     *                                       ['group' => 'groupname'])
-     *                                       or a string of format
-     *                                       [channel://][channame/]pname[-version|-state][/group=groupname]
+     *                                            array(
+     *                                             'package' => 'pname',
+     *                                            ['channel' => 'channame',]
+     *                                            ['version' => 'version',]
+     *                                            ['state' => 'state',]
+     *                                            ['group' => 'groupname'])
+     *                                            or a string of format
+     *                                            [channel://][channame/]pname[-version|-state][/group=groupname]
      * @return array |PEAR_Error
      */
     function parsePackageName($param, $defaultchannel = 'pear.php.net')
