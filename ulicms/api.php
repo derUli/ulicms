@@ -638,11 +638,11 @@ function buildSEOUrl($page = false, $redirection = null){
 function getModulePath($module){
  // Frontend Directory
 if(is_file("cms-config.php")){
-     $module_folder = "content/modules/";
+     $module_folder = "modules/";
      }
  // Backend Directory
 else{
-     $module_folder = "../content/modules/";
+     $module_folder = "../modules/";
      }
  $available_modules = Array();
  return $module_folder . $module . "/";

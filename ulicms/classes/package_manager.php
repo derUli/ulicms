@@ -49,7 +49,7 @@ class packageManager{
          }
     
      public function getInstalledModules(){
-         $module_folder = ULICMS_ROOT . DIRECTORY_SEPERATOR . "content".DIRECTORY_SEPERATOR. "modules" . DIRECTORY_SEPERATOR;
+         $module_folder = ULICMS_ROOT . DIRECTORY_SEPERATOR . "modules" . DIRECTORY_SEPERATOR;
         
         
          $available_modules = Array();
