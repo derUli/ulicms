@@ -382,9 +382,23 @@ function add_hook($name){
     
      }
 
+function register_action($name, $file){
 
+     global $actions;
+     $modules = getAllModules();
+     $actions[$name] = $file;
+     return $actions;
+}
 
-
+function remove_action($name){
+     global $actions;
+     $retval = false;
+  if(isset($action[$name])){
+     unset($name);
+     $retval = true;
+  }
+  return $retval;
+}
 
 // Check for Secure HTTP Connection (SSL)
 function is_ssl(){

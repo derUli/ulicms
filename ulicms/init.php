@@ -144,6 +144,9 @@ define('BR', '<br />' . LF); // HTML Break
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
 
+global $actions;
+$actions = array();
+
 function noperms(){
  echo "<p>" . TRANSLATION_NO_PERMISSIONS . "</p>";
  return false;

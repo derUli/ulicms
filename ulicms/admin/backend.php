@@ -65,6 +65,9 @@ if(!$eingeloggt){
      require_once "inc/adminmenu.php";
     
     
+    add_hook("register_actions");    
+    
+    global $actions;
     
      if($_GET["action"] == "" || $_GET["action"] == "home"){
          require_once "inc/dashboard.php";
@@ -212,9 +215,16 @@ if(!$eingeloggt){
     
     else if($_GET["action"] == "pkg_settings"){
          require_once "inc/pkg_settings.php";
-         }else if($_GET["action"] == "design"){
+         }
+    else if($_GET["action"] == "design"){
          require_once "inc/design.php";
          }
+         
+     else if(isset($actions[$_GET["action"]])){
+        include_once $actions[$_GET["action"]];
+     } else {
+         echo "Action not found";
+     }
      }
 
 require_once "inc/footer.php";
