@@ -46,8 +46,8 @@ else if($_SESSION["grp_sort"] == "name"){
      ?></strong></a></th>
 <th><strong><?php echo TRANSLATION_STANDARD;
      ?></strong></th>
-<th></th>
-<th></th>
+<td></td>
+<td></td>
 </tr>
 </thead>
 <tbody>

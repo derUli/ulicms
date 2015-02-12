@@ -218,12 +218,12 @@ $(window).load(function(){
          ?></th>
 <th><?php echo TRANSLATION_ACTIVATED;
          ?></th>
-<th><?php echo TRANSLATION_VIEW;
-         ?></th>
-<th><?php echo TRANSLATION_EDIT;
-         ?></th>
-<th><?php echo TRANSLATION_DELETE;
-         ?></th>
+<td><?php echo TRANSLATION_VIEW;
+         ?></td>
+<td><?php echo TRANSLATION_EDIT;
+         ?></td>
+<td><?php echo TRANSLATION_DELETE;
+         ?></td>
 
 </tr>
 </thead>

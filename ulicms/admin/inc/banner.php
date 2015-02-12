@@ -55,10 +55,10 @@ $(window).load(function(){
          ?></th>
 <th><?php echo TRANSLATION_LANGUAGE;
          ?></th>
-<th><?php echo TRANSLATION_EDIT;
-         ?></th>
-<th><?php echo TRANSLATION_DELETE;
-         ?></th>
+<td><?php echo TRANSLATION_EDIT;
+         ?></td>
+<td><?php echo TRANSLATION_DELETE;
+         ?></td>
 </tr>
 </thead>
 <tbody>

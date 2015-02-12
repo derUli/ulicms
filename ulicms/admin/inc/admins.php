@@ -40,10 +40,10 @@
              ?></a></th>
 <th><a href="index.php?action=admins&order=group_id"><?php echo TRANSLATION_GROUP;
              ?></a></th>
-<th><?php echo TRANSLATION_EDIT;
-             ?></th>
-<th><span><?php echo TRANSLATION_DELETE;
-             ?></span></th>
+<td><?php echo TRANSLATION_EDIT;
+             ?></td>
+<td><span><?php echo TRANSLATION_DELETE;
+             ?></span></td>
 </tr>
 </thead>
 <body>

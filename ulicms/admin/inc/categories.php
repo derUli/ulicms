@@ -65,8 +65,8 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
          ?></a></th>
 <th style="min-width:200px;"><a href="?action=categories&order=description"><?php echo TRANSLATION_DESCRIPTION;
          ?></a></th>
-<th></th>
-<th></th>
+<td></td>
+<td></td>
 </tr>
 <tbody>
 <?php foreach($categories as $category){
