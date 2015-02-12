@@ -13,7 +13,7 @@ add_hook("after_session_start");
 
 setLanguageByDomain();
 
-if(!empty($_GET["language"])){
+if(!empty($_GET["language"]) and in_array($_GET["language"], getAllLanguages())){
      $_SESSION["language"] = db_escape($_GET["language"]);
      }
 
@@ -21,6 +21,9 @@ if(!isset($_SESSION["language"])){
      $_SESSION["language"] = getconfig("default_language");
      }
 
+if(in_array($_SESSION["language"], getAllLanguages())){
+   include getLanguageFilePath($_SESSION["language"]);
+}
 
 
 require_once "templating.php";
