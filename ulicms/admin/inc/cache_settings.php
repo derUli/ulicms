@@ -10,15 +10,13 @@ if($acl -> hasPermission("cache")){
          ?></p>
 <?php }
      ?>
-<?php echo TRANSLATION_CACHE_TEXT1;
-     ?>
+<?php echo TRANSLATION_CACHE_TEXT1;?>
 <p><strong>Aktueller Status des Caches:</strong><br/>
 <?php if(!getconfig("cache_disabled")){
          ?>
 <span style="color:green;">aktiv</span></p>
 
-<?php echo TRANSLATION_CACHE_TEXT3;
-         ?>
+<?php echo TRANSLATION_CACHE_TEXT3;?>
 
 
 <form post="index.php" method="get">
