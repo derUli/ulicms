@@ -205,27 +205,29 @@ $(window).load(function(){
 
 <br/>
 
-<table>
+<table class="tablesorter">
+<thead>
 <tr style="font-weight:bold;">
-<td><a href="?action=pages&order=title"><?php echo TRANSLATION_TITLE;
-         ?></a></td>
-<td><a href="?action=pages&order=menu"><?php echo TRANSLATION_MENU;
-         ?></a></td>
-<td><a href="?action=pages&order=position"><?php echo TRANSLATION_POSITION;
-         ?></a></td>
-<td><a href="?action=pages&order=parent"><?php echo TRANSLATION_PARENT;
-         ?></a></td>
-<td><a href="?action=pages&order=active"><?php echo TRANSLATION_ACTIVATED;
-         ?></a></td>
-<td><?php echo TRANSLATION_VIEW;
-         ?></td>
-<td><?php echo TRANSLATION_EDIT;
-         ?></td>
-<td><?php echo TRANSLATION_DELETE;
-         ?></td>
-
+<th><?php echo TRANSLATION_TITLE;
+         ?></th>
+<th><?php echo TRANSLATION_MENU;
+         ?></th>
+<th><?php echo TRANSLATION_POSITION;
+         ?></th>
+<th><?php echo TRANSLATION_PARENT;
+         ?></th>
+<th><?php echo TRANSLATION_ACTIVATED;
+         ?></th>
+<th><?php echo TRANSLATION_VIEW;
+         ?></th>
+<th><?php echo TRANSLATION_EDIT;
+         ?></th>
+<th><?php echo TRANSLATION_DELETE;
+         ?></th>
 
 </tr>
+</thead>
+<tbody>
 <?php
          if(in_array($_GET["order"], array("title", "menu", "position", "parent", "active")))
              $order = $_GET["order"];
@@ -340,6 +342,7 @@ $(window).load(function(){
 <?php
              }
          ?>
+</tbody>
 </table>
 
 

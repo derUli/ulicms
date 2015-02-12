@@ -2,3 +2,5 @@ API für Module erweitern
 [X] register_action und remove_action, 
    damit kann man eigene Actions zum Backend hinzufügen
 [ ] Funktion add_menu_item -> Hinzufügen zusätzlicher Menüeinträge zu Willkommen, Inhalte, Medien, usw.
+[ ] Integration von jQuery Tablesorter
+[ ] Pagination

@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width"/>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <link rel="stylesheet" type="text/css" href="css/blue.css"/>
-
+<link rel="stylesheet" type="text/css" href="scripts/tablesorter/style.css"/>
 <script type="text/javascript" src="scripts/php.js/strip_tags.js"></script>
 <script type="text/javascript" src="scripts/php.js/htmlspecialchars.js"></script>
 <script type="text/javascript" src="scripts/jquery.js"></script>
@@ -49,6 +49,14 @@ $(".menu li:has(ul)").doubleTapToGo();
 <script src="codemirror/mode/css/css.js" type="text/javascript"></script>
 <title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="scripts/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+     
+        $(".tablesorter").tablesorter(); 
+    } 
+); 
+</script>
 <?php add_hook("admin_head");
 ?>
 </head>
