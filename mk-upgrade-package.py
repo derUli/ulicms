@@ -47,7 +47,6 @@ def main():
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
     update_script = os.path.join(target, "ulicms", "update.php")
 
-
     if os.path.exists(update_script):
         print("preparing update Script")
         with codecs.open(update_script, 'r+', "utf-8") as f:
