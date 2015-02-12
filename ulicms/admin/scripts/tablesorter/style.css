@@ -7,6 +7,11 @@ table.tablesorter {
 	width: 100%;
 	text-align: left;
 }
+
+table.tablesorter thead td{
+	background-color: #e6EEEE;
+}
+
 table.tablesorter thead tr th, table.tablesorter tfoot tr th {
 	background-color: #e6EEEE;
 	border: 1px solid #FFF;
