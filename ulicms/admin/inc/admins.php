@@ -25,24 +25,28 @@
              ?></a>
 <br/>
 </p>
-<table>
+<table class="tablesorter">
+<thead>
+
 <tr style="font-weight:bold;">
-<td style="width:40px;"><a href="index.php?action=admins&order=id">ID</a></td>
-<td><span><a href="index.php?action=admins&order=username"><?php echo TRANSLATION_USERNAME;
-             ?></a></span></td>
-<td><a href="index.php?action=admins&order=lastname"><?php echo TRANSLATION_LASTNAME;
-             ?></a></td>
-<td><a href="index.php?action=admins&order=firstname"><?php echo TRANSLATION_FIRSTNAME;
-             ?></a></td>
-<td><a href="index.php?action=admins&order=email"><?php echo TRANSLATION_EMAIL;
-             ?></a></td>
-<td><a href="index.php?action=admins&order=group_id"><?php echo TRANSLATION_GROUP;
-             ?></a></td>
-<td><?php echo TRANSLATION_EDIT;
-             ?></td>
-<td><span><?php echo TRANSLATION_DELETE;
-             ?></span></td>
+<th style="width:40px;"><a href="index.php?action=admins&order=id">ID</a></th>
+<th><span><a href="index.php?action=admins&order=username"><?php echo TRANSLATION_USERNAME;
+             ?></a></span></th>
+<th><a href="index.php?action=admins&order=lastname"><?php echo TRANSLATION_LASTNAME;
+             ?></a></th>
+<th><a href="index.php?action=admins&order=firstname"><?php echo TRANSLATION_FIRSTNAME;
+             ?></a></th>
+<th><a href="index.php?action=admins&order=email"><?php echo TRANSLATION_EMAIL;
+             ?></a></th>
+<th><a href="index.php?action=admins&order=group_id"><?php echo TRANSLATION_GROUP;
+             ?></a></th>
+<th><?php echo TRANSLATION_EDIT;
+             ?></th>
+<th><span><?php echo TRANSLATION_DELETE;
+             ?></span></th>
 </tr>
+</thead>
+<body>
 <?php
              while($row = db_fetch_object($query)){
                  $group = $acl -> getPermissionQueryResult($row -> group_id);
@@ -70,6 +74,7 @@
             
              }
          ?>
+</tbody>
 </table>
 
 <br/><br/>

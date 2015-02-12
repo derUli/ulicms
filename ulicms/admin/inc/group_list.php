@@ -37,17 +37,20 @@ else if($_SESSION["grp_sort"] == "name"){
 ?></a></p>
 <?php if(count($groups) > 0){
      ?>
-<table>
+<table class="tablesorter">
+<thead>
 <tr>
-<td style="min-width:100px;"><a href="?action=groups&sort=id&sort_direction=change"><strong><?php echo TRANSLATION_ID;
-     ?></strong></a></td>
-<td style="min-width:200px;"><a href="?action=groups&sort=name&sort_direction=change"><strong><?php echo TRANSLATION_NAME;
-     ?></strong></a></td>
-<td><strong><?php echo TRANSLATION_STANDARD;
-     ?></strong></td>
-<td></td>
-<td></td>
+<th style="min-width:100px;"><a href="?action=groups&sort=id&sort_direction=change"><strong><?php echo TRANSLATION_ID;
+     ?></strong></a></th>
+<th style="min-width:200px;"><a href="?action=groups&sort=name&sort_direction=change"><strong><?php echo TRANSLATION_NAME;
+     ?></strong></a></th>
+<th><strong><?php echo TRANSLATION_STANDARD;
+     ?></strong></th>
+<th></th>
+<th></th>
 </tr>
+</thead>
+<tbody>
 
 <?php foreach($groups as $id => $name){
          ?>
@@ -80,7 +83,7 @@ else if($_SESSION["grp_sort"] == "name"){
          ?>" title="<?php echo TRANSLATION_DELETE;
          ?>"></a></td>
 </tr>
-
+</tbody>
 
 
 <?php }
