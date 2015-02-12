@@ -47,8 +47,9 @@ def main():
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
     update_script = os.path.join(target, "ulicms", "update.php")
 
-    print("preparing update Script")
+
     if os.path.exists(update_script):
+        print("preparing update Script")
         with codecs.open(update_script, 'r+', "utf-8") as f:
             lines = f.readlines()
             f.seek(0)
@@ -60,10 +61,12 @@ def main():
                     
                 print(line)
                 f.write(line)
+    else:
+        print("No update.php found")
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
     if args.zip:
         print("zipping folder...")
-	zipdir(target, archive_name)
+        zipdir(target, archive_name)
         print("removing target folder...")
         shutil.rmtree(target)
 try:
