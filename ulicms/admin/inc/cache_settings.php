@@ -24,7 +24,7 @@ if($acl -> hasPermission("cache")){
 <form post="index.php" method="get">
 <input type="hidden" name="action" value="cache"/>
 <input type="hidden" name="clear_cache" value="yes"/>
-<input type="submit" value="Cache leeren"/>
+<input type="submit" value="<?php echo TRANSLATION_CLEAR_CACHE;?>"/>
 
 <?php
          if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
