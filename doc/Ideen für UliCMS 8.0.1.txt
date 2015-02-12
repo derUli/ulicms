@@ -6,3 +6,4 @@ API für Module erweitern
 [ ] Pagination
 [ ] Fehlende Übersetzungen hinzufügen
 [ ] Multisite
+[ ] Alles was vom CMS beschreibbar sein soll, soll nach /content verschoben werden, damit man nur noch auf diesen Ordner Schreibrechte vergeben muss
