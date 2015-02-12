@@ -4,3 +4,4 @@
   Damit kann man eigene Actions zum Backend hinzugefügen
 + Listen im Backend werden über jQuery Tablesorter sortiert, statt per SQL -> dadurch kein Page Reload mehr -> Sortierfunktion schneller
 + Sprachdateien werden auch im Frontend geladen - Dadurch Lokalisierung von Modulen möglich.
++ Fehlende Übersetzungen in den Grundeinstellungen korrigiert
