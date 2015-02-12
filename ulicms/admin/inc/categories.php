@@ -54,18 +54,21 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <?php
      if(count($categories) > 0 and !isset($_GET["add"]) and !isset($_GET["edit"])){
          ?>
-<table>
-<tr>
-<td style="min-width:50px;"><a href="?action=categories&order=id"><?php echo TRANSLATION_ID;
-         ?></a></td>
+<table class="tablesorter">
 
-<td style="min-width:200px;"><a href="?action=categories&order=name"><?php echo TRANSLATION_NAME;
-         ?></a></td>
-<td style="min-width:200px;"><a href="?action=categories&order=description"><?php echo TRANSLATION_DESCRIPTION;
-         ?></a></td>
-<td></td>
-<td></td>
+<thead>
+<tr>
+<th style="min-width:50px;"><a href="?action=categories&order=id"><?php echo TRANSLATION_ID;
+         ?></a></th>
+
+<th style="min-width:200px;"><a href="?action=categories&order=name"><?php echo TRANSLATION_NAME;
+         ?></a></th>
+<th style="min-width:200px;"><a href="?action=categories&order=description"><?php echo TRANSLATION_DESCRIPTION;
+         ?></a></th>
+<th></th>
+<th></th>
 </tr>
+<tbody>
 <?php foreach($categories as $category){
              ?>
 <tr>
@@ -98,6 +101,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 </tr>
 <?php }
          ?>
+</tbody>
 </table>
 <?php }else if(isset($_GET["add"])){
          ?>

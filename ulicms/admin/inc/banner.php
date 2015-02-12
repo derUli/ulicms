@@ -47,19 +47,21 @@ $(window).load(function(){
          echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
          ?>
 </p>
-<table>
-
+<table class="tablesorter">
+<thead>
 <tr style="font-weight:bold;">
-<td style="width:40px;">--></td>
-<td><?php echo TRANSLATION_ADVERTISEMENTS;
-         ?></td>
-<td><?php echo TRANSLATION_LANGUAGE;
-         ?></td>
-<td><?php echo TRANSLATION_EDIT;
-         ?></td>
-<td><?php echo TRANSLATION_DELETE;
-         ?></td>
+<th style="width:40px;">--></th>
+<th><?php echo TRANSLATION_ADVERTISEMENTS;
+         ?></th>
+<th><?php echo TRANSLATION_LANGUAGE;
+         ?></th>
+<th><?php echo TRANSLATION_EDIT;
+         ?></th>
+<th><?php echo TRANSLATION_DELETE;
+         ?></th>
 </tr>
+</thead>
+<tbody>
 <?php
         
          if(db_num_rows($query) > 0){
@@ -86,6 +88,7 @@ $(window).load(function(){
             
              }
          ?>
+ </tbody>
 </table>
 
 <br/><br/>
