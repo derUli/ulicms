@@ -1,5 +1,6 @@
 <?php
 include_once "../../init.php";
+@session_start();
 
 $rss = new DOMDocument();
 $feeds = array();
