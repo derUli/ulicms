@@ -6,5 +6,5 @@
 + Fehlende Übersetzungen in den Grundeinstellungen korrigiert
 + Es wird nun eine Fehlermeldung bei einem fehlgeschlagenen Login angezeigt.
 + Filtern nach "Aktiv" Status nun in der Seitenliste möglich
-+ Newsfeed von www.ulics.de wird eingebunden
++ Newsfeed von www.ulicms.de eingebunden
 + "Cache leeren" nun direkt im "Einstellungen" Menü
