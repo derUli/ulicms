@@ -17,6 +17,9 @@ border:0px;
 
 .ulicms_error{
 color:red;
+background-color:rgb(250, 250, 250);
+border:solid rgb(230,230,230) 1px; 
+padding:10px;
 }
 
 html{
