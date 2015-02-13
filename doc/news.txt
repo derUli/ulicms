@@ -4,7 +4,7 @@
 + Listen im Backend werden über jQuery Tablesorter sortiert, statt per SQL -> dadurch kein Page Reload mehr -> Sortierfunktion schneller
 + Sprachdateien werden auch im Frontend geladen - Dadurch Lokalisierung von Modulen möglich.
 + Fehlende Übersetzungen in den Grundeinstellungen korrigiert
-+ Es Fehlermeldung wird nun bei einem fehlgeschlagenen Login eine entsprechende Fehlermeldung angezeigt.
++ Es wird nun eine Fehlermeldung bei einem fehlgeschlagenen Login eine entsprechende Fehlermeldung angezeigt.
 + Filtern nach "Aktiv" Status nun in der Seitenliste möglich
 + Newsfeed von www.ulics.de wird eingebunden
 + "Cache leeren" nun direkt im "Einstellungen" Menü
