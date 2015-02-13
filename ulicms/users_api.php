@@ -137,6 +137,7 @@ function validate_login($user, $password){
              return $user;
              }
          }
+     $_REQUEST["error"] = TRANSLATION_USER_OR_PASSWORD_INCORRECT;
      return false;
      }
 
