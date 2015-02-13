@@ -148,7 +148,7 @@ global $actions;
 $actions = array();
 
 function noperms(){
- echo "<p>" . TRANSLATION_NO_PERMISSIONS . "</p>";
+ echo "<p class=\"ulicms_error\">" . TRANSLATION_NO_PERMISSIONS . "</p>";
  return false;
  }
 
