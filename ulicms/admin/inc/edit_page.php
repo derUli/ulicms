@@ -108,7 +108,7 @@
 <strong><?php echo TRANSLATION_PARENT;
              ?></strong><br/>
 <select name="parent" size=1>
-<option value="NULL">-</option>
+<option value="NULL">[<?php echo TRANSLATION_NONE;?>]</option>
 <?php foreach($pages as $key => $page){
                  ?>
 	<option value="<?php echo $page["id"];
