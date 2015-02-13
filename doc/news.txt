@@ -8,3 +8,4 @@
 + Es Fehlermeldung wird nun bei einem fehlgeschlagenen Login eine entsprechende Fehlermeldung angezeigt.
 + Filtern nach "Aktiv" Status nun in der Seitenliste möglich
 + Newsfeed von www.ulics.de wird eingebunden
++ "Cache leeren" nun direkt im "Einstellungen" Menü

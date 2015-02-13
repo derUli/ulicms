@@ -240,13 +240,9 @@ if(defined("_SECURITY")){
          ?>
      <?php if($acl -> hasPermission("cache")){
              ?>
-    <li><a href="?action=cache"><?php echo TRANSLATION_CACHE;
-             ?></a></a>
-     <ul>
-     <li><a id="clear_cache" href="?action=cache&clear_cache=yes"><?php echo TRANSLATION_CLEAR_CACHE;
+    <li><a id="clear_cache" href="?action=cache&clear_cache=yes"><?php echo TRANSLATION_CLEAR_CACHE;
              ?></a></li>
-     </ul>    
-    </li>  <?php }
+ <?php }
          ?>
      <?php if($acl -> hasPermission("motd")){
              ?>
