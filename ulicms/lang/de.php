@@ -390,4 +390,8 @@ define("TRANSLATION_DO_UPDATE", "Update durchführen");
 define("TRANSLATION_NONE", "Keine");
 define("TRANSLATION_MOBILE_DESIGN", "Design für Mobilgeräte");
 
+// Login
+
+define("TRANSLATION_USER_OR_PASSWORD_INCORRECT", "Benutzername oder Passwort falsch!");
+
 add_hook("lang_de");
