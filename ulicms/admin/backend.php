@@ -221,7 +221,7 @@ if(!$eingeloggt){
      else if(isset($actions[$_GET["action"]])){
         include_once $actions[$_GET["action"]];
      } else {
-         echo "Action not found";
+         echo TRANSLATION_ACTION_NOT_FOUND;
      }
      }
 
