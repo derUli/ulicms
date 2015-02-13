@@ -27,6 +27,13 @@ function filter_by_menu(element){
    }
 }
 
+function filter_by_active(element){
+   var index = element.selectedIndex
+   if(element.options[index].value != ""){
+     location.replace("index.php?action=pages&filter_active=" + element.options[index].value)
+   }
+}
+
 function filter_by_parent(element){
    var index = element.selectedIndex
    if(element.options[index].value != ""){
@@ -68,6 +75,13 @@ $(window).load(function(){
              }
         
         
+           if(isset($_GET["filter_active"])){
+             if($_GET["filter_active"] === "null")
+                 $_SESSION["filter_active"] = null;
+             else
+                 $_SESSION["filter_active"] = intval($_GET["filter_active"]);
+             }
+        
          if(isset($_GET["filter_menu"])){
              if($_GET["filter_menu"] == "null")
                  $_SESSION["filter_menu"] = null;
@@ -91,6 +105,11 @@ $(window).load(function(){
         
          if(!isset($_SESSION["filter_menu"])){
              $_SESSION["filter_menu"] = null;
+             }
+             
+                     
+         if(!isset($_SESSION["filter_active"])){
+             $_SESSION["filter_active"] = null;
              }
         
         
@@ -170,8 +189,7 @@ $(window).load(function(){
         
          ?>
          </select>
-         <?php echo TRANSLATION_PARENT;
-         ?> 
+         <?php echo TRANSLATION_PARENT; ?> 
          <select name="filter_parent" onchange="filter_by_parent(this);">
          <option value="null" <?php if("null" == $_SESSION["filter_parent"]) echo "selected";
          ?>>[<?php echo TRANSLATION_EVERY;
@@ -192,6 +210,14 @@ $(window).load(function(){
              }
          ?>
 </select>
+<?php echo TRANSLATION_ENABLED; ?> 
+         <select name="filter_active" onchange="filter_by_active(this);">
+         <option value="null" <?php if(null == $_SESSION["filter_active"]) echo "selected";
+         ?>>[<?php echo TRANSLATION_EVERY;
+         ?>]</option>
+         <option value="1" <?php if(1 === $_SESSION["filter_active"]) echo "selected";?>><?php echo TRANSLATION_ENABLED;?></option>
+         <option value="0" <?php if(0 === $_SESSION["filter_active"]) echo "selected";?>><?php echo TRANSLATION_DISABLED;?></option>
+         </select>
 </p>
 
 <?php
@@ -275,6 +301,11 @@ $(window).load(function(){
          if($_SESSION["filter_menu"] != null){
              $filter_sql .= "AND menu = '" . db_escape($_SESSION["filter_menu"]) . "' ";
              }
+             
+             
+          if($_SESSION["filter_active"] !== null){
+             $filter_sql .= "AND active = " . intval($_SESSION["filter_active"]) . " ";
+             }
         
         
          if($_SESSION["filter_parent"] != null){
@@ -283,7 +314,6 @@ $(window).load(function(){
              else
                  $filter_sql .= "AND parent IS NULL ";
              }
-        
         
         
          $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die(db_error());
