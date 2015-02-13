@@ -74,11 +74,11 @@ class PEAR_Autoloader extends PEAR
      * 
      * @param string $method which method to autoload
      * @param string $classname (optional) which class to find the method in.
-     *                                                  If the $method parameter is an array, this
-     *                                                  parameter may be omitted (and will be ignored
-     *                                                  if not), and the $method parameter will be
-     *                                                  treated as an associative array with method
-     *                                                  names as keys and class names as values.
+     *                                                   If the $method parameter is an array, this
+     *                                                   parameter may be omitted (and will be ignored
+     *                                                   if not), and the $method parameter will be
+     *                                                   treated as an associative array with method
+     *                                                   names as keys and class names as values.
      * @return void 
      * @access public 
      */
@@ -172,9 +172,9 @@ class PEAR_Autoloader extends PEAR
      * 
      * @param string $method which method that was called
      * @param string $args An array of the parameters passed in the
-     *                                               original call
+     *                                                original call
      * @return mixed The return value from the aggregated method, or a PEAR
-     *                                       error if the called method was unknown.
+     *                                        error if the called method was unknown.
      */
     function __call($method, $args, & $retval)
     {

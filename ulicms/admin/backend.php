@@ -63,9 +63,9 @@ if(!$eingeloggt){
      require_once "inc/adminmenu.php";
     
     
-    add_hook("register_actions");    
+     add_hook("register_actions");
     
-    global $actions;
+     global $actions;
     
      if($_GET["action"] == "" || $_GET["action"] == "home"){
          require_once "inc/dashboard.php";
@@ -217,12 +217,12 @@ if(!$eingeloggt){
     else if($_GET["action"] == "design"){
          require_once "inc/design.php";
          }
-         
-     else if(isset($actions[$_GET["action"]])){
-        include_once $actions[$_GET["action"]];
-     } else {
+    
+    else if(isset($actions[$_GET["action"]])){
+         include_once $actions[$_GET["action"]];
+         }else{
          echo TRANSLATION_ACTION_NOT_FOUND;
-     }
+         }
      }
 
 require_once "inc/footer.php";

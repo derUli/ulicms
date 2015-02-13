@@ -41,8 +41,10 @@
 <form action="index.php?action=homepage_title" id="homepage_title_settings" method="post">
 <table border=0>
 <tr>
-<td style="min-width:100px;"><strong><?php echo TRANSLATION_LANGUAGE;?></strong></td>
-<td><strong><?php echo TRANSLATION_TITLE;?></strong></td>
+<td style="min-width:100px;"><strong><?php echo TRANSLATION_LANGUAGE;
+        ?></strong></td>
+<td><strong><?php echo TRANSLATION_TITLE;
+        ?></strong></td>
 </tr>
 <?php
          for($n = 0; $n < count($languages); $n++){
@@ -62,7 +64,8 @@
 <td>
 </td>
 <td style="text-align:center">
-<input type="submit" name="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;?>">
+<input type="submit" name="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;
+        ?>">
 </td>
 </table>
 </form>

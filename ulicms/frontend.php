@@ -22,8 +22,8 @@ if(!isset($_SESSION["language"])){
      }
 
 if(in_array($_SESSION["language"], getAllLanguages())){
-   include getLanguageFilePath($_SESSION["language"]);
-}
+     include getLanguageFilePath($_SESSION["language"]);
+    }
 
 
 require_once "templating.php";
@@ -168,7 +168,7 @@ else if(file_exists($cached_page_path)){
  }
  }
 
- $id = md5($_SERVER['REQUEST_URI'] . $_SESSION["language"]. strbool(is_mobile()));
+ $id = md5($_SERVER['REQUEST_URI'] . $_SESSION["language"] . strbool(is_mobile()));
 
 if(!getconfig("cache_disabled") and !$hasModul and
  getenv('REQUEST_METHOD') == "GET" and $cache_type === "cache_lite"){

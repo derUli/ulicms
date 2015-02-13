@@ -10,19 +10,22 @@ if($acl -> hasPermission("cache")){
          ?></p>
 <?php }
      ?>
-<?php echo TRANSLATION_CACHE_TEXT1;?>
+<?php echo TRANSLATION_CACHE_TEXT1;
+    ?>
 <p><strong>Aktueller Status des Caches:</strong><br/>
 <?php if(!getconfig("cache_disabled")){
          ?>
 <span style="color:green;">aktiv</span></p>
 
-<?php echo TRANSLATION_CACHE_TEXT3;?>
+<?php echo TRANSLATION_CACHE_TEXT3;
+        ?>
 
 
 <form post="index.php" method="get">
 <input type="hidden" name="action" value="cache"/>
 <input type="hidden" name="clear_cache" value="yes"/>
-<input type="submit" value="<?php echo TRANSLATION_CLEAR_CACHE;?>"/>
+<input type="submit" value="<?php echo TRANSLATION_CLEAR_CACHE;
+        ?>"/>
 
 <?php
          if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){

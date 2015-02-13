@@ -38,7 +38,7 @@ $GLOBALS['_System_temp_files'] = array();
  * 
  * Example usage:
  * if (!@System::rm('-r file1 dir1')) {
- *                          print "could not delete file1 or dir1";
+ *                           print "could not delete file1 or dir1";
  * }
  * 
  * In case you need to to pass file names with spaces,
@@ -107,19 +107,19 @@ class System
      * Creates a nested array representing the structure of a directory
      * 
      * System::_dirToStruct('dir1', 0) =>
-     *                         Array
-     *                          (
-     *                          [dirs] => Array
-     *                              (
-     *                                  [0] => dir1
-     *                              )
+     *                          Array
+     *                           (
+     *                           [dirs] => Array
+     *                               (
+     *                                   [0] => dir1
+     *                               )
      * 
-     *                          [files] => Array
-     *                              (
-     *                                  [0] => dir1/file2
-     *                                  [1] => dir1/file3
-     *                              )
-     *                          )
+     *                           [files] => Array
+     *                               (
+     *                                   [0] => dir1/file2
+     *                                   [1] => dir1/file3
+     *                               )
+     *                           )
      * 
      * @param string $sPath Name of the directory
      * @param integer $maxinst max. deep of the lookup
@@ -372,18 +372,18 @@ class System
      * the created files when the scripts finish its execution.
      * 
      * Usage:
-     *                         1) $tempfile = System::mktemp("prefix");
-     *                         2) $tempdir  = System::mktemp("-d prefix");
-     *                         3) $tempfile = System::mktemp();
-     *                         4) $tempfile = System::mktemp("-t /var/tmp prefix");
+     *                          1) $tempfile = System::mktemp("prefix");
+     *                          2) $tempdir  = System::mktemp("-d prefix");
+     *                          3) $tempfile = System::mktemp();
+     *                          4) $tempfile = System::mktemp("-t /var/tmp prefix");
      * 
      * prefix -> The string that will be prepended to the temp name
-     *                                 (defaults to "tmp").
+     *                                  (defaults to "tmp").
      * -d     -> A temporary dir will be created instead of a file.
      * -t     -> The target dir where the temporary (file|dir) will be created. If
-     *                                 this param is missing by default the env vars TMP on Windows or
-     *                                 TMPDIR in Unix will be used. If these vars are also missing
-     *                                 c:\windows\temp or /tmp will be used.
+     *                                  this param is missing by default the env vars TMP on Windows or
+     *                                  TMPDIR in Unix will be used. If these vars are also missing
+     *                                  c:\windows\temp or /tmp will be used.
      * 
      * @param string $args The arguments
      * @return mixed the full path of the created (file|dir) or false

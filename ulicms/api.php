@@ -383,22 +383,22 @@ function add_hook($name){
      }
 
 function register_action($name, $file){
-
+    
      global $actions;
      $modules = getAllModules();
      $actions[$name] = $file;
      return $actions;
-}
+    }
 
 function remove_action($name){
      global $actions;
      $retval = false;
-  if(isset($action[$name])){
-     unset($name);
-     $retval = true;
-  }
-  return $retval;
-}
+     if(isset($action[$name])){
+         unset($name);
+         $retval = true;
+         }
+     return $retval;
+    }
 
 // Check for Secure HTTP Connection (SSL)
 function is_ssl(){
@@ -839,7 +839,7 @@ function getPageTitleByID($id){
      $row = db_fetch_object($query);
      return $row -> title;
      }else{
-     return "-";
+     return "[".TRANSLATION_NONE."]";
      }
  }
 
@@ -1003,6 +1003,7 @@ function is__writable($path)
 else
     
      return 0; // Or return error - invalid path...
+
 
 
 
