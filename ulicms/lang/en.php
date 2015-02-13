@@ -400,4 +400,7 @@ define("TRANSLATION_NONE", "None");
 
 define("TRANSLATION_MOBILE_DESIGN", "Design for mobile devices");
 
+// Login
+define("TRANSLATION_USER_OR_PASSWORD_INCORRECT", "Username oder password incorrect!");
+
 add_hook("lang_en");
