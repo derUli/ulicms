@@ -395,4 +395,6 @@ define("TRANSLATION_ACTION_NOT_FOUND", "Die aufgerufene Aktion ist nicht vorhand
 // Login
 define("TRANSLATION_USER_OR_PASSWORD_INCORRECT", "Benutzername oder Passwort falsch!");
 
+define("TRANSLATION_ULICMS_NEWS", "Neuigkeiten zu UliCMS");
+
 add_hook("lang_de");

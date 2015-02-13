@@ -65,12 +65,22 @@ if($acl -> hasPermission("dashboard")){
 <?php echo strip_tags($updateInfo,
                      "<p><a><strong><b><u><em><i><span><img>");
                  ?>
-             </div>
-<?php
-                 }
-            
-             }
-         ?>
+             </div> 
+<?php } ?>
+<h2 class="accordion-header"><?php echo TRANSLATION_ULICMS_NEWS;
+?></h2>
+<div class="accordion-content" id="ulicms-feed">
+<img src="gfx/loading.gif" alt="Feed wird geladen..."/>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+ $('#ulicms-feed').load('inc/ulicms-news.php');
+});
+</script>
+
+<?php }?>
+
+
 <h2 class="accordion-header"><?php echo TRANSLATION_STATISTICS;
          ?></h2>      
 <div class="accordion-content">
