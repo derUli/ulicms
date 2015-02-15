@@ -1,5 +1,5 @@
 <?php
-require_once(ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "MPDF57" . DIRECTORY_SEPERATOR . "mpdf.php");
+require_once(ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "MPDF60" . DIRECTORY_SEPERATOR . "mpdf.php");
 class PDFCreator{
      var $target_file = null;
      var $content = null;
@@ -31,7 +31,8 @@ class PDFCreator{
                  $last_modified = filemtime($this -> cached_file);
                  if(time() - $last_modified < CACHE_PERIOD){
                      $this -> httpHeader();
-                     exit();
+         readfile($this -> cached_file);
+         exit();
                      }else{
                      @unlink($this -> cached_file);
                      }
