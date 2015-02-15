@@ -3,7 +3,7 @@
   Damit kann man eigene Actions zum Backend hinzugefügen
 + Listen im Backend werden über jQuery Tablesorter sortiert, statt per SQL -> dadurch kein Page Reload mehr -> Sortierfunktion schneller
 + Sprachdateien werden auch im Frontend geladen - Dadurch Lokalisierung von Modulen möglich.
-+ Fehlende Übersetzungen in den Grundeinstellungen korrigiert
++ Fehlende Übersetzungen hinzugefügt (Grundeinstellungen, Fehlerseiten, etc.)
 + Es wird nun eine Fehlermeldung bei einem fehlgeschlagenen Login angezeigt.
 + Filtern nach "Aktiv" Status nun in der Seitenliste möglich
 + Newsfeed von www.ulicms.de eingebunden
