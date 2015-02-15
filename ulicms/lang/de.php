@@ -397,4 +397,10 @@ define("TRANSLATION_USER_OR_PASSWORD_INCORRECT", "Benutzername oder Passwort fal
 
 define("TRANSLATION_ULICMS_NEWS", "Neuigkeiten zu UliCMS");
 
+// HTTP Errors
+define("TRANSLATION_PAGE_NOT_FOUND", "Seite nicht gefunden");
+define("TRANSLATION_FORBIDDEN", "Zugriff verweigert");
+define("TRANSLATION_PAGE_NOT_FOUND_CONTENT", "Die von Ihnen gew&uuml;nschte Seite existiert nicht.");
+define("TRANSLATION_FORBIDDEN_COTENT", "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.");
+
 add_hook("lang_de");

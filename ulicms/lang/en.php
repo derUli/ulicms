@@ -406,6 +406,12 @@ define("TRANSLATION_ACTION_NOT_FOUND", "Action not found!");
 define("TRANSLATION_USER_OR_PASSWORD_INCORRECT", "Username oder password incorrect!");
 
 
+// HTTP Errors
+define("TRANSLATION_PAGE_NOT_FOUND", "Page not found");
+define("TRANSLATION_FORBIDDEN", "Forbidden");
+define("TRANSLATION_PAGE_NOT_FOUND_CONTENT", "This page doesn't exist.");
+define("TRANSLATION_FORBIDDEN_COTENT", "You don't have to needed permissions to view this page.");
+
 define("TRANSLATION_ULICMS_NEWS", "News about UliCMS");
 
 add_hook("lang_en");
