@@ -8,3 +8,4 @@
 + Filtern nach "Aktiv" Status nun in der Seitenliste möglich
 + Newsfeed von www.ulicms.de eingebunden
 + "Cache leeren" nun direkt im "Einstellungen" Menü
++ Aktualisierung von mPDF auf mPDF 6.0
