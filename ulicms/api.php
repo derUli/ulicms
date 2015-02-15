@@ -4,6 +4,7 @@ function getLanguageFilePath($lang = "de", $component = null){
      // Todo Module Language Files
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
+     
 
 function strbool($value)
 {
@@ -581,6 +582,25 @@ function buildCacheFilePath($request_uri){
  return "content/cache/" . md5($unique_identifier) . ".tmp";
  }
 
+
+
+function get_translation($name){ 
+       $name = strtoupper($name);
+       foreach (get_defined_constants() as $key=>$value){
+         if(startsWith($key, "TRANSLATION_") and $key = "TRANSLATION_". $name){
+            return $value;         
+         }
+       }
+       return null;
+}
+
+function translation($name){
+   echo get_translation($name);
+}
+
+function translate($name){
+   echo translation($name);
+}
 
 function SureRemoveDir($dir, $DeleteMe){
  if(!$dh = @opendir($dir)) return;

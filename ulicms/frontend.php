@@ -29,7 +29,6 @@ if(in_array($_SESSION["language"], getAllLanguages())){
 require_once "templating.php";
 $status = check_status();
 
-
 if(getconfig("redirection") != "" && getconfig("redirection") != false){
      add_hook("before_global_redirection");
      header("Location: " . getconfig("redirection"));

@@ -404,3 +404,4 @@ define("TRANSLATION_PAGE_NOT_FOUND_CONTENT", "Die von Ihnen gew&uuml;nschte Seit
 define("TRANSLATION_FORBIDDEN_COTENT", "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.");
 
 add_hook("lang_de");
+
