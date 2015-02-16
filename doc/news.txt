@@ -10,3 +10,4 @@
 + "Cache leeren" nun direkt im "Einstellungen" Menü
 + Aktualisierung von mPDF auf mPDF 6.0
 + API Methoden get_translation, translate und translation hinzugefügt
++ wordcount Plugin zu CKEditor hinzugefügt
