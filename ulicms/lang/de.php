@@ -395,14 +395,13 @@ define("TRANSLATION_ACTION_NOT_FOUND", "Die aufgerufene Aktion ist nicht vorhand
 // Login
 define("TRANSLATION_USER_OR_PASSWORD_INCORRECT", "Benutzername oder Passwort falsch!");
 
-define("TRANSLATION_ULICMS_NEWS", "Neuigkeiten zu UliCMS");
-
 // HTTP Errors
 define("TRANSLATION_PAGE_NOT_FOUND", "Seite nicht gefunden");
 define("TRANSLATION_FORBIDDEN", "Zugriff verweigert");
 define("TRANSLATION_PAGE_NOT_FOUND_CONTENT", "Die von Ihnen gew&uuml;nschte Seite existiert nicht.");
 define("TRANSLATION_FORBIDDEN_COTENT", "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.");
 
+define("TRANSLATION_ULICMS_NEWS", "Neuigkeiten zu UliCMS");
 define("TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">Diese Seite läuft mit "
      . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS " . cms_version() . "</a></p>");
 
