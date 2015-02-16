@@ -587,7 +587,7 @@ function buildCacheFilePath($request_uri){
 function get_translation($name){ 
        $name = strtoupper($name);
        foreach (get_defined_constants() as $key=>$value){
-         if(startsWith($key, "TRANSLATION_") and $key = "TRANSLATION_". $name){
+         if(startsWith($key, "TRANSLATION_") and $key == "TRANSLATION_". $name){
             return $value;         
          }
        }
@@ -599,7 +599,7 @@ function translation($name){
 }
 
 function translate($name){
-   echo translation($name);
+   translation($name);
 }
 
 function SureRemoveDir($dir, $DeleteMe){
