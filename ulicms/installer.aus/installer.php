@@ -18,7 +18,7 @@ $file = "lang/" . $_SESSION["language"] . ".php";
 if(!file_exists($file)){
      $file = "lang/de.php";
      }
-     
+
 $required_php_version = version_compare(phpversion(), REQUIRED_PHP_VERSION, ">=");
 
 include_once $file;
@@ -80,17 +80,18 @@ if(!isset($_REQUEST["step"])){
      ?>
 <h3><?php echo TRANSLATION_PERMISSION;
      ?></h3>
-<p><img src="media/chmod_<?php echo htmlspecialchars($_SESSION["language"]);?>.png" alt="<?php echo TRANSLATION_PERMISSIONS2;
+<p><img src="media/chmod_<?php echo htmlspecialchars($_SESSION["language"]);
+    ?>.png" alt="<?php echo TRANSLATION_PERMISSIONS2;
      ?>" title="<?php echo TRANSLATION_PERMISSIONS2;
      ?>" border=1/></p>
      
 <?php if(!$required_php_version){
-?>
+        ?>
 <p style="color:red;"><?php echo TRANSLATION_PHP_VERSION_TOO_LOW;
          ?></p>
 <?php
-}
-?>
+        }
+    ?>
 <?php
      if (!function_exists('gd_info')){
          ?>
@@ -508,8 +509,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
          $sql = "ALTER TABLE `" . $prefix . "languages` ADD UNIQUE(`language_code`)";
         
          mysqli_query($connection, $sql);
-         
-         mysqli_query($connection, "CREATE TABLE `" . $prefix. "packages` IF NOT EXISTS (
+        
+         mysqli_query($connection, "CREATE TABLE `" . $prefix . "packages` IF NOT EXISTS (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `name` varchar(255) NOT NULL,
  `version` varchar(255) DEFAULT NULL,

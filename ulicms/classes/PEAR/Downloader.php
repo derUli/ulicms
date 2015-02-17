@@ -64,11 +64,11 @@ class PEAR_Downloader extends PEAR_Common
      * Options from command-line passed to Install.
      * 
      * Recognized options:<br />
-     *                          - onlyreqdeps   : install all required dependencies as well
-     *                          - alldeps       : install all dependencies, including optional
-     *                          - installroot   : base relative path to install files in
-     *                          - force         : force a download even if warnings would prevent it
-     *                          - nocompress    : download uncompressed tarballs
+     *                           - onlyreqdeps   : install all required dependencies as well
+     *                           - alldeps       : install all dependencies, including optional
+     *                           - installroot   : base relative path to install files in
+     *                           - force         : force a download even if warnings would prevent it
+     *                           - nocompress    : download uncompressed tarballs
      * 
      * @see PEAR_Command_Install
      * @access private 
@@ -83,7 +83,7 @@ class PEAR_Downloader extends PEAR_Common
      * 
      * <code>
      * array('pkg' => 'package_name', 'file' => '/path/to/local/file',
-     *                            'info' => array() // parsed package.xml
+     *                             'info' => array() // parsed package.xml
      * );
      * </code>
      * 
@@ -1525,24 +1525,24 @@ class PEAR_Downloader extends PEAR_Common
      * parameters: the callback type, and parameters.  The implemented
      * callback types are:
      * 
-     *                          'setup'       called at the very beginning, parameter is a UI object
-     *                                        that should be used for all output
-     *                          'message'     the parameter is a string with an informational message
-     *                          'saveas'      may be used to save with a different file name, the
-     *                                        parameter is the filename that is about to be used.
-     *                                        If a 'saveas' callback returns a non-empty string,
-     *                                        that file name will be used as the filename instead.
-     *                                        Note that $save_dir will not be affected by this, only
-     *                                        the basename of the file.
-     *                          'start'       download is starting, parameter is number of bytes
-     *                                        that are expected, or -1 if unknown
-     *                          'bytesread'   parameter is the number of bytes read so far
-     *                          'done'        download is complete, parameter is the total number
-     *                                        of bytes read
-     *                          'connfailed'  if the TCP/SSL connection fails, this callback is called
-     *                                        with array(host,port,errno,errmsg)
-     *                          'writefailed' if writing to disk fails, this callback is called
-     *                                        with array(destfile,errmsg)
+     *                           'setup'       called at the very beginning, parameter is a UI object
+     *                                         that should be used for all output
+     *                           'message'     the parameter is a string with an informational message
+     *                           'saveas'      may be used to save with a different file name, the
+     *                                         parameter is the filename that is about to be used.
+     *                                         If a 'saveas' callback returns a non-empty string,
+     *                                         that file name will be used as the filename instead.
+     *                                         Note that $save_dir will not be affected by this, only
+     *                                         the basename of the file.
+     *                           'start'       download is starting, parameter is number of bytes
+     *                                         that are expected, or -1 if unknown
+     *                           'bytesread'   parameter is the number of bytes read so far
+     *                           'done'        download is complete, parameter is the total number
+     *                                         of bytes read
+     *                           'connfailed'  if the TCP/SSL connection fails, this callback is called
+     *                                         with array(host,port,errno,errmsg)
+     *                           'writefailed' if writing to disk fails, this callback is called
+     *                                         with array(destfile,errmsg)
      * 
      * If an HTTP proxy has been configured (http_proxy PEAR_Config
      * setting), the proxy will be used.
@@ -1552,17 +1552,17 @@ class PEAR_Downloader extends PEAR_Common
      * @param object $config PEAR_Config instance
      * @param string $save_dir directory to save file in
      * @param mixed $callback function/method to call for status
-     *                                                   updates
+     *                                                    updates
      * @param false $ |string|array $lastmodified header values to check against for caching
-     *                                                   use false to return the header values from this download
+     *                                                    use false to return the header values from this download
      * @param false $ |array $accept Accept headers to send
      * @param false $ |string $channel Channel to use for retrieving authentication
      * @return string |array  Returns the full path of the downloaded file or a PEAR
-     *                                               error on failure.  If the error is caused by
-     *                                               socket-related errors, the error object will
-     *                                               have the fsockopen error code available through
-     *                                               getCode().  If caching is requested, then return the header
-     *                                               values.
+     *                                                error on failure.  If the error is caused by
+     *                                                socket-related errors, the error object will
+     *                                                have the fsockopen error code available through
+     *                                                getCode().  If caching is requested, then return the header
+     *                                                values.
      * @access public 
      */
      function downloadHttp($url, & $ui, $save_dir = '.', $callback = null, $lastmodified = null,

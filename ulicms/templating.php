@@ -197,8 +197,8 @@ function body_classes(){
 
 // Gibt "Diese Seite läuft mit UliCMS" aus
 function poweredByUliCMS(){
-   translation("POWERED_BY_ULICMS");
-}
+     translation("POWERED_BY_ULICMS");
+    }
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner(){

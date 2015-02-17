@@ -23,7 +23,7 @@ if(!isset($_SESSION["language"])){
 
 if(in_array($_SESSION["language"], getAllLanguages())){
      include getLanguageFilePath($_SESSION["language"]);
-    }
+     }
 
 
 require_once "templating.php";

@@ -31,7 +31,7 @@
  * - Pretty and informative error messages
  * - Added more context info available (like class, method or cause)
  * - cause can be a PEAR_Exception or an array of mixed
- *                           PEAR_Exceptions/PEAR_ErrorStack warnings
+ *                            PEAR_Exceptions/PEAR_ErrorStack warnings
  * - callbacks for specific exception classes and their children
  * 
  * 2) Ideas:
@@ -61,26 +61,26 @@
  * 5) Usage example
  * 
  * <code>
- *                          require_once 'PEAR/Exception.php';
+ *                           require_once 'PEAR/Exception.php';
  * 
- *                          class Test {
- *                             function foo() {
- *                                 throw new PEAR_Exception('Error Message', ERROR_CODE);
- *                             }
- *                          }
+ *                           class Test {
+ *                              function foo() {
+ *                                  throw new PEAR_Exception('Error Message', ERROR_CODE);
+ *                              }
+ *                           }
  * 
- *                          function myLogger($pear_exception) {
- *                             echo $pear_exception->getMessage();
- *                          }
- *                          // each time a exception is thrown the 'myLogger' will be called
- *                          // (its use is completely optional)
- *                          PEAR_Exception::addObserver('myLogger');
- *                          $test = new Test;
- *                          try {
- *                             $test->foo();
- *                          } catch (PEAR_Exception $e) {
- *                             print $e;
- *                          }
+ *                           function myLogger($pear_exception) {
+ *                              echo $pear_exception->getMessage();
+ *                           }
+ *                           // each time a exception is thrown the 'myLogger' will be called
+ *                           // (its use is completely optional)
+ *                           PEAR_Exception::addObserver('myLogger');
+ *                           $test = new Test;
+ *                           try {
+ *                              $test->foo();
+ *                           } catch (PEAR_Exception $e) {
+ *                              print $e;
+ *                           }
  * </code>
  * 
  * @category pear
@@ -107,14 +107,14 @@ class PEAR_Exception extends Exception
     
     /**
      * Supported signatures:
-     *                          - PEAR_Exception(string $message);
-     *                          - PEAR_Exception(string $message, int $code);
-     *                          - PEAR_Exception(string $message, Exception $cause);
-     *                          - PEAR_Exception(string $message, Exception $cause, int $code);
-     *                          - PEAR_Exception(string $message, PEAR_Error $cause);
-     *                          - PEAR_Exception(string $message, PEAR_Error $cause, int $code);
-     *                          - PEAR_Exception(string $message, array $causes);
-     *                          - PEAR_Exception(string $message, array $causes, int $code);
+     *                           - PEAR_Exception(string $message);
+     *                           - PEAR_Exception(string $message, int $code);
+     *                           - PEAR_Exception(string $message, Exception $cause);
+     *                           - PEAR_Exception(string $message, Exception $cause, int $code);
+     *                           - PEAR_Exception(string $message, PEAR_Error $cause);
+     *                           - PEAR_Exception(string $message, PEAR_Error $cause, int $code);
+     *                           - PEAR_Exception(string $message, array $causes);
+     *                           - PEAR_Exception(string $message, array $causes, int $code);
      * 
      * @param string $ exception message
      * @param int $ |Exception|PEAR_Error|array|null exception cause
@@ -150,11 +150,11 @@ class PEAR_Exception extends Exception
     /**
      * 
      * @param mixed $callback - A valid php callback, see php func is_callable()
-     *                                                 - A PEAR_Exception::OBSERVER_* constant
-     *                                                 - An array(const PEAR_Exception::OBSERVER_*,
-     *                                                   mixed $options)
+     *                                                  - A PEAR_Exception::OBSERVER_* constant
+     *                                                  - An array(const PEAR_Exception::OBSERVER_*,
+     *                                                    mixed $options)
      * @param string $label The name of the observer. Use this if you want
-     *                                                 to remove it later with removeObserver()
+     *                                                  to remove it later with removeObserver()
      */
      public static function addObserver($callback, $label = 'default')
     {

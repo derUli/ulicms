@@ -4,7 +4,7 @@ function getLanguageFilePath($lang = "de", $component = null){
      // Todo Module Language Files
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
-     
+
 
 function strbool($value)
 {
@@ -389,7 +389,7 @@ function register_action($name, $file){
      $modules = getAllModules();
      $actions[$name] = $file;
      return $actions;
-    }
+     }
 
 function remove_action($name){
      global $actions;
@@ -399,7 +399,7 @@ function remove_action($name){
          $retval = true;
          }
      return $retval;
-    }
+     }
 
 // Check for Secure HTTP Connection (SSL)
 function is_ssl(){
@@ -584,22 +584,22 @@ function buildCacheFilePath($request_uri){
 
 
 
-function get_translation($name){ 
-       $name = strtoupper($name);
-       foreach (get_defined_constants() as $key=>$value){
-         if(startsWith($key, "TRANSLATION_") and $key == "TRANSLATION_". $name){
-            return $value;         
+function get_translation($name){
+ $name = strtoupper($name);
+ foreach (get_defined_constants() as $key => $value){
+     if(startsWith($key, "TRANSLATION_") and $key == "TRANSLATION_" . $name){
+         return $value;
          }
-       }
-       return null;
+     }
+ return null;
 }
 
 function translation($name){
-   echo get_translation($name);
+ echo get_translation($name);
 }
 
 function translate($name){
-   translation($name);
+ translation($name);
 }
 
 function SureRemoveDir($dir, $DeleteMe){
@@ -859,7 +859,7 @@ function getPageTitleByID($id){
      $row = db_fetch_object($query);
      return $row -> title;
      }else{
-     return "[".TRANSLATION_NONE."]";
+     return "[" . TRANSLATION_NONE . "]";
      }
  }
 
@@ -1049,6 +1049,7 @@ else
 
 
 
+
  }
 
 
@@ -1114,8 +1115,7 @@ if(is_null($page))
 // API-Aufruf zur Deinstallation eines Moduls
 // Ruft uninstall Script auf, falls vorhanden
 // Löscht anschließend den Ordner modules/$name
-
-// @TODO dies in die PackageManager Klasse verschieben
+//  @TODO dies in die PackageManager Klasse verschieben
 function uninstall_module($name, $type = "module"){
  // Nur Admins können Module löschen
 if(!is_admin())
@@ -1152,9 +1152,8 @@ if($name == "." or $name == ".." or empty($name))
          }
     
      }
-     // @TODO Paket aus der packages Tabelle in der Datenbank entfernen
-     
- }
+ //  @TODO Paket aus der packages Tabelle in der Datenbank entfernen
+}
 
 
 // Ist der User eingeloggt

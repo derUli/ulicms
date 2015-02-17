@@ -54,9 +54,9 @@ for($i = 0; $i < count($languages); $i++){
 </table>
 </form>
 <?php if(isset($_REQUEST["error"]) and !empty($_REQUEST["error"])){
-    ?>
+     ?>
 <p class="ulicms_error"><?php echo htmlspecialchars($_REQUEST["error"]);
-    ?></p>
+     ?></p>
 <?php }
 ?>
 <?php

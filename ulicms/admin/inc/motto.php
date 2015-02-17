@@ -42,9 +42,9 @@
 <table border=0>
 <tr>
 <td style="min-width:100px;"><strong><?php echo TRANSLATION_LANGUAGE;
-        ?></strong></td>
+         ?></strong></td>
 <td><strong><?php echo TRANSLATION_MOTTO;
-        ?></strong></td>
+         ?></strong></td>
 </tr>
 <?php
          for($n = 0; $n < count($languages); $n++){

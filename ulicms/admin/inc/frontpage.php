@@ -41,9 +41,9 @@
 <table border=0>
 <tr>
 <td style="min-width:100px;"><strong><?php echo TRANSLATION_LANGUAGE;
-        ?></strong></td>
+         ?></strong></td>
 <td><strong><?php echo TRANSLATION_FRONTPAGE;
-        ?></strong></td>
+         ?></strong></td>
 </tr>
 <?php
          for($n = 0; $n < count($languages); $n++){
@@ -78,7 +78,7 @@
 </td>
 <td style="text-align:center">
 <input type="submit" name="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;
-        ?>">
+         ?>">
 </td>
 </table>
 </form>
