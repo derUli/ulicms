@@ -1,5 +1,5 @@
 <?php
-
+include_once "init.php";
 db_query("CREATE TABLE `" . tbname("packages") . "` IF NOT EXISTS (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `name` varchar(255) NOT NULL,
