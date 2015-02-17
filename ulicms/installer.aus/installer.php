@@ -509,16 +509,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
          $sql = "ALTER TABLE `" . $prefix . "languages` ADD UNIQUE(`language_code`)";
         
          mysqli_query($connection, $sql);
-        
-         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "packages` (
- `id` int(11) NOT NULL AUTO_INCREMENT,
- `name` varchar(255) NOT NULL,
- `version` varchar(255) DEFAULT NULL,
- `installed_at` bigint(11) NOT NULL,
- `updated_at` bigint(20) NOT NULL,
- PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8");
-        
+                
          // Da InnoDB erst ab MySQL 5.6 Foreign Keys und Fulltext unterstützt
         // Foreign Keys nur setzen, wenn MySQL Server Version >= 5.6
         if(mysqli_get_server_version($connection) >= 50600){
