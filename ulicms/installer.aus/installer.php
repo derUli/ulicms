@@ -46,7 +46,7 @@ if(!isset($_REQUEST["step"])){
 </select>
 </p>
 <p>
-<input type="hidden" name="step" value="00">
+<input type="hidden" name="step" value="0">
 <input type="submit" value="<?php echo TRANSLATION_NEXT;
      ?>">
 
