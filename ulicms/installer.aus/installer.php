@@ -3,6 +3,8 @@ session_start();
 setcookie(session_name(), session_id());
 error_reporting (E_ALL ^ E_NOTICE);
 
+define("REQUIRED_PHP_VERSION", "5.3.0");
+
 if(!isset($_SESSION["language"])){
      $_SESSION["language"] = "de";
      }
@@ -16,6 +18,8 @@ $file = "lang/" . $_SESSION["language"] . ".php";
 if(!file_exists($file)){
      $file = "lang/de.php";
      }
+     
+$required_php_version = version_compare(phpversion(), REQUIRED_PHP_VERSION, ">=");
 
 include_once $file;
 
@@ -79,6 +83,14 @@ if(!isset($_REQUEST["step"])){
 <p><img src="media/chmod_<?php echo htmlspecialchars($_SESSION["language"]);?>.png" alt="<?php echo TRANSLATION_PERMISSIONS2;
      ?>" title="<?php echo TRANSLATION_PERMISSIONS2;
      ?>" border=1/></p>
+     
+<?php if(!$required_php_version){
+?>
+<p style="color:red;"><?php echo TRANSLATION_PHP_VERSION_TOO_LOW;
+         ?></p>
+<?php
+}
+?>
 <?php
      if (!function_exists('gd_info')){
          ?>
