@@ -417,6 +417,6 @@ define("TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">This pag
      . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS " . cms_version() . "</a></p>");
 
 
-define("TRANSLATION_UNDER_MAINTEANCE", "This website is currently under maintenance.<br/>Please visit us again later.");
+define("TRANSLATION_UNDER_MAINTENANCE", "This website is currently under maintenance.<br/>Please visit us again later.");
 
 add_hook("lang_en");
