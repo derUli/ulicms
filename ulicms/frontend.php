@@ -50,7 +50,7 @@ if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("ma
      if(file_exists(getTemplateDirPath($theme) . "maintenance.php"))
          require_once getTemplateDirPath($theme) . "maintenance.php";
      else
-         throw new Exception("Diese Website ist zurzeit im Wartungsmodus.<br />Bitte später wiederkommen.");
+         throw new Exception(get_translation("UNDER_MAINTEANCE"));
      add_hook("after_maintenance_message");
      die();
      }

@@ -404,6 +404,6 @@ define("TRANSLATION_FORBIDDEN_COTENT", "Sie verfügen nicht über die erforderli
 define("TRANSLATION_ULICMS_NEWS", "Neuigkeiten zu UliCMS");
 define("TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">Diese Seite läuft mit "
      . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS " . cms_version() . "</a></p>");
+define("TRANSLATION_UNDER_MAINTEANCE", "Diese Website ist zurzeit im Wartungsmodus.<br />Bitte später wiederkommen.");
 
 add_hook("lang_de");
-
