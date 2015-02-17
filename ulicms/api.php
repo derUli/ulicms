@@ -1152,7 +1152,6 @@ if($name == "." or $name == ".." or empty($name))
          }
     
      }
- //  @TODO Paket aus der packages Tabelle in der Datenbank entfernen
 }
 
 
