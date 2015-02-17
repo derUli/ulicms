@@ -1114,6 +1114,8 @@ if(is_null($page))
 // API-Aufruf zur Deinstallation eines Moduls
 // Ruft uninstall Script auf, falls vorhanden
 // Löscht anschließend den Ordner modules/$name
+
+// @TODO dies in die PackageManager Klasse verschieben
 function uninstall_module($name, $type = "module"){
  // Nur Admins können Module löschen
 if(!is_admin())
@@ -1150,6 +1152,8 @@ if($name == "." or $name == ".." or empty($name))
          }
     
      }
+     // @TODO Paket aus der packages Tabelle in der Datenbank entfernen
+     
  }
 
 

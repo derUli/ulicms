@@ -7,6 +7,22 @@ class packageManager{
          $this -> package_source = $this -> replacePlaceHolders($this -> package_source);
          }
     
+     public function registerPackage($name){
+         $pkginfo = splitPackageName($name);
+         $name = $pkginfo[0];
+         $version = $pkginfo[1];
+         $date = time();
+         
+         $sql = "SELECT count(name) as installed FROM ".tbname("packages")." WHERE name='".db_escape($name)."'";
+         $query = db_query($sql);
+         $result = db_fetch_object($query);
+         // Paket ist bereits in einer älteren Version installiert
+         if($result->installed > 0){
+           $sql = "UPDATE ".tbname("packages")." SET version='".db_escape($version)."', updated_at = ".$date." where name='".db_escape($date)."'";
+         }
+             
+     }
+    
      public function splitPackageName($name){
          $name = str_ireplace(".tar.gz", "", $name);
          $name = str_ireplace(".zip", "", $name);
