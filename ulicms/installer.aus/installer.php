@@ -497,7 +497,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
         
          mysqli_query($connection, $sql);
          
-         mysqli_query("CREATE TABLE `" . $prefix. "packages . "` IF NOT EXISTS (
+         mysqli_query("CREATE TABLE `" . $prefix. "packages` IF NOT EXISTS (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `name` varchar(255) NOT NULL,
  `version` varchar(255) DEFAULT NULL,
