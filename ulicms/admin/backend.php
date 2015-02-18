@@ -15,11 +15,9 @@ if($acl -> hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" o
      $_SESSION['KCFINDER']['disabled'] = false;
      }
 
+$_COOKIE[session_name()] = session_id();
 
-setcookie(session_name(), session_id());
 add_hook("after_session_start");
-
-
 
 $syslang = getSystemLanguage();
 include getLanguageFilePath($syslang);
