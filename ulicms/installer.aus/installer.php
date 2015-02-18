@@ -81,17 +81,17 @@ if(!isset($_REQUEST["step"])){
 <h3><?php echo TRANSLATION_PERMISSION;
      ?></h3>
 <p><img src="media/chmod_<?php echo htmlspecialchars($_SESSION["language"]);
-    ?>.png" alt="<?php echo TRANSLATION_PERMISSIONS2;
+     ?>.png" alt="<?php echo TRANSLATION_PERMISSIONS2;
      ?>" title="<?php echo TRANSLATION_PERMISSIONS2;
      ?>" border=1/></p>
      
 <?php if(!$required_php_version){
-        ?>
+         ?>
 <p style="color:red;"><?php echo TRANSLATION_PHP_VERSION_TOO_LOW;
          ?></p>
 <?php
-        }
-    ?>
+         }
+     ?>
 <?php
      if (!function_exists('gd_info')){
          ?>
@@ -509,7 +509,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
          $sql = "ALTER TABLE `" . $prefix . "languages` ADD UNIQUE(`language_code`)";
         
          mysqli_query($connection, $sql);
-                
+        
          // Da InnoDB erst ab MySQL 5.6 Foreign Keys und Fulltext unterstützt
         // Foreign Keys nur setzen, wenn MySQL Server Version >= 5.6
         if(mysqli_get_server_version($connection) >= 50600){

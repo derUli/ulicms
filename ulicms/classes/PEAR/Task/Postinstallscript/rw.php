@@ -111,9 +111,9 @@ class PEAR_Task_Postinstallscript_rw extends PEAR_Task_Postinstallscript
      * 
      * @param string $id <paramgroup> id as seen by the script
      * @param string $oldgroup <paramgroup> id of the section referenced by
-     *                                                  <conditiontype>
+     *                                                   <conditiontype>
      * @param string $param name of the <param> from the older section referenced
-     *                                               by <contitiontype>
+     *                                                by <contitiontype>
      * @param string $value value to match of the parameter
      * @param string $conditiontype one of '=', '!=', 'preg_match'
      * @param array $ |false $params array of getParam() calls, or false for no params

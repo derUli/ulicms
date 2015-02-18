@@ -17,14 +17,14 @@ if(!function_exists('imagepalettetotruecolor')){
         
          return(true);
          }
-    }
+     }
 
 // mPDF 5.7
 // Replace a section of an array with the elements in reverse
 function array_splice_reverse(& $arr, $offset, $length){
      $tmp = (array_reverse(array_slice($arr, $offset, $length)));
      array_splice($arr, $offset, $length, $tmp);
-    }
+     }
 
 
 function array_insert(& $array, $value, $offset){
@@ -32,11 +32,11 @@ function array_insert(& $array, $value, $offset){
          $array = array_values($array);
          $offset = intval($offset);
          if ($offset < 0 || $offset >= count($array)){
-            array_push($array, $value);
-        }
+             array_push($array, $value);
+             }
         else if ($offset == 0){
-            array_unshift($array, $value);
-        }
+             array_unshift($array, $value);
+             }
         else{
              $temp = array_slice($array, 0, $offset);
              array_push($temp, $value);
@@ -45,10 +45,10 @@ function array_insert(& $array, $value, $offset){
              }
          }
     else{
-        $array = array($value);
-    }
+         $array = array($value);
+         }
      return count($array);
-    }
+     }
 
 // mPDF 5.7.4 URLs
 function urldecode_parts($url){
@@ -62,7 +62,7 @@ function urldecode_parts($url){
      $file = rawurldecode($file);
      $query = urldecode($query);
      return $file . $query;
-    }
+     }
 
 
 function _strspn($str1, $str2, $start = null, $length = null){
@@ -76,7 +76,7 @@ function _strspn($str1, $str2, $start = null, $length = null){
     else{
          return strspn($str1, $str2, $start, $length);
          }
-    }
+     }
 
 
 function _strcspn($str1, $str2, $start = null, $length = null){
@@ -90,7 +90,7 @@ function _strcspn($str1, $str2, $start = null, $length = null){
     else{
          return strcspn($str1, $str2, $start, $length);
          }
-    }
+     }
 
 function _fgets (& $h, $force = false){
      $startpos = ftell($h);
@@ -100,7 +100,7 @@ function _fgets (& $h, $force = false){
          fseek($h, $startpos + strlen($s));
          }
      return $s;
-    }
+     }
 
 
 // For PHP4 compatability
@@ -109,20 +109,20 @@ if(!function_exists('str_ireplace')){
          $search = preg_quote($search, "/");
          return preg_replace("/" . $search . "/i", $replace, $subject);
          }
-    }
+     }
 if(!function_exists('htmlspecialchars_decode')){
      function htmlspecialchars_decode ($str){
          return strtr($str, array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
          }
-    }
+     }
 
 function PreparePreText($text, $ff = '//FF//'){
      $text = htmlspecialchars($text);
      if ($ff){
-        $text = str_replace($ff, '</pre><formfeed /><pre>', $text);
-    }
+         $text = str_replace($ff, '</pre><formfeed /><pre>', $text);
+         }
      return ('<pre>' . $text . '</pre>');
-    }
+     }
 
 if(!function_exists('strcode2utf')){
      function strcode2utf($str, $lo = true){
@@ -138,19 +138,19 @@ if(!function_exists('strcode2utf')){
              }
          return $str;
          }
-    }
+     }
 function code2utf_callback($matches){
      return code2utf($matches[1], 0);
-    }
+     }
 function code2utf_lo_callback($matches){
      return code2utf($matches[1], 1);
-    }
+     }
 function codeHex2utf_callback($matches){
      return codeHex2utf($matches[1], 0);
-    }
+     }
 function codeHex2utf_lo_callback($matches){
      return codeHex2utf($matches[1], 1);
-    }
+     }
 
 
 if(!function_exists('code2utf')){
@@ -165,7 +165,7 @@ if(!function_exists('code2utf')){
          if ($num < 2097152) return chr(($num >> 18) + 240) . chr((($num >> 12) & 63) + 128) . chr((($num >> 6) & 63) + 128) . chr(($num & 63) + 128);
          return '?';
          }
-    }
+     }
 
 
 if(!function_exists('codeHex2utf')){
@@ -174,7 +174,7 @@ if(!function_exists('codeHex2utf')){
          if (($num < 128) && !$lo) return '&#x' . $hex . ';';
          return code2utf($num, $lo);
          }
-    }
+     }
 
 
 ?>

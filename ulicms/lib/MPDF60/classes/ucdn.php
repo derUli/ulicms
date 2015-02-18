@@ -12,112 +12,112 @@
 
 class UCDN{
     
-    const SCRIPT_COMMON = 0;
-    const SCRIPT_LATIN = 1;
-    const SCRIPT_GREEK = 2;
-    const SCRIPT_CYRILLIC = 3;
-    const SCRIPT_ARMENIAN = 4;
-    const SCRIPT_HEBREW = 5;
-    const SCRIPT_ARABIC = 6;
-    const SCRIPT_SYRIAC = 7;
-    const SCRIPT_THAANA = 8;
-    const SCRIPT_DEVANAGARI = 9;
-    const SCRIPT_BENGALI = 10;
-    const SCRIPT_GURMUKHI = 11;
-    const SCRIPT_GUJARATI = 12;
-    const SCRIPT_ORIYA = 13;
-    const SCRIPT_TAMIL = 14;
-    const SCRIPT_TELUGU = 15;
-    const SCRIPT_KANNADA = 16;
-    const SCRIPT_MALAYALAM = 17;
-    const SCRIPT_SINHALA = 18;
-    const SCRIPT_THAI = 19;
-    const SCRIPT_LAO = 20;
-    const SCRIPT_TIBETAN = 21;
-    const SCRIPT_MYANMAR = 22;
-    const SCRIPT_GEORGIAN = 23;
-    const SCRIPT_HANGUL = 24;
-    const SCRIPT_ETHIOPIC = 25;
-    const SCRIPT_CHEROKEE = 26;
-    const SCRIPT_CANADIAN_ABORIGINAL = 27;
-    const SCRIPT_OGHAM = 28;
-    const SCRIPT_RUNIC = 29;
-    const SCRIPT_KHMER = 30;
-    const SCRIPT_MONGOLIAN = 31;
-    const SCRIPT_HIRAGANA = 32;
-    const SCRIPT_KATAKANA = 33;
-    const SCRIPT_BOPOMOFO = 34;
-    const SCRIPT_HAN = 35;
-    const SCRIPT_YI = 36;
-    const SCRIPT_OLD_ITALIC = 37;
-    const SCRIPT_GOTHIC = 38;
-    const SCRIPT_DESERET = 39;
-    const SCRIPT_INHERITED = 40;
-    const SCRIPT_TAGALOG = 41;
-    const SCRIPT_HANUNOO = 42;
-    const SCRIPT_BUHID = 43;
-    const SCRIPT_TAGBANWA = 44;
-    const SCRIPT_LIMBU = 45;
-    const SCRIPT_TAI_LE = 46;
-    const SCRIPT_LINEAR_B = 47;
-    const SCRIPT_UGARITIC = 48;
-    const SCRIPT_SHAVIAN = 49;
-    const SCRIPT_OSMANYA = 50;
-    const SCRIPT_CYPRIOT = 51;
-    const SCRIPT_BRAILLE = 52;
-    const SCRIPT_BUGINESE = 53;
-    const SCRIPT_COPTIC = 54;
-    const SCRIPT_NEW_TAI_LUE = 55;
-    const SCRIPT_GLAGOLITIC = 56;
-    const SCRIPT_TIFINAGH = 57;
-    const SCRIPT_SYLOTI_NAGRI = 58;
-    const SCRIPT_OLD_PERSIAN = 59;
-    const SCRIPT_KHAROSHTHI = 60;
-    const SCRIPT_BALINESE = 61;
-    const SCRIPT_CUNEIFORM = 62;
-    const SCRIPT_PHOENICIAN = 63;
-    const SCRIPT_PHAGS_PA = 64;
-    const SCRIPT_NKO = 65;
-    const SCRIPT_SUNDANESE = 66;
-    const SCRIPT_LEPCHA = 67;
-    const SCRIPT_OL_CHIKI = 68;
-    const SCRIPT_VAI = 69;
-    const SCRIPT_SAURASHTRA = 70;
-    const SCRIPT_KAYAH_LI = 71;
-    const SCRIPT_REJANG = 72;
-    const SCRIPT_LYCIAN = 73;
-    const SCRIPT_CARIAN = 74;
-    const SCRIPT_LYDIAN = 75;
-    const SCRIPT_CHAM = 76;
-    const SCRIPT_TAI_THAM = 77;
-    const SCRIPT_TAI_VIET = 78;
-    const SCRIPT_AVESTAN = 79;
-    const SCRIPT_EGYPTIAN_HIEROGLYPHS = 80;
-    const SCRIPT_SAMARITAN = 81;
-    const SCRIPT_LISU = 82;
-    const SCRIPT_BAMUM = 83;
-    const SCRIPT_JAVANESE = 84;
-    const SCRIPT_MEETEI_MAYEK = 85;
-    const SCRIPT_IMPERIAL_ARAMAIC = 86;
-    const SCRIPT_OLD_SOUTH_ARABIAN = 87;
-    const SCRIPT_INSCRIPTIONAL_PARTHIAN = 88;
-    const SCRIPT_INSCRIPTIONAL_PAHLAVI = 89;
-    const SCRIPT_OLD_TURKIC = 90;
-    const SCRIPT_KAITHI = 91;
-    const SCRIPT_BATAK = 92;
-    const SCRIPT_BRAHMI = 93;
-    const SCRIPT_MANDAIC = 94;
-    const SCRIPT_CHAKMA = 95;
-    const SCRIPT_MEROITIC_CURSIVE = 96;
-    const SCRIPT_MEROITIC_HIEROGLYPHS = 97;
-    const SCRIPT_MIAO = 98;
-    const SCRIPT_SHARADA = 99;
-    const SCRIPT_SORA_SOMPENG = 100;
-    const SCRIPT_TAKRI = 101;
-    const SCRIPT_UNKNOWN = 102;
+     const SCRIPT_COMMON = 0;
+     const SCRIPT_LATIN = 1;
+     const SCRIPT_GREEK = 2;
+     const SCRIPT_CYRILLIC = 3;
+     const SCRIPT_ARMENIAN = 4;
+     const SCRIPT_HEBREW = 5;
+     const SCRIPT_ARABIC = 6;
+     const SCRIPT_SYRIAC = 7;
+     const SCRIPT_THAANA = 8;
+     const SCRIPT_DEVANAGARI = 9;
+     const SCRIPT_BENGALI = 10;
+     const SCRIPT_GURMUKHI = 11;
+     const SCRIPT_GUJARATI = 12;
+     const SCRIPT_ORIYA = 13;
+     const SCRIPT_TAMIL = 14;
+     const SCRIPT_TELUGU = 15;
+     const SCRIPT_KANNADA = 16;
+     const SCRIPT_MALAYALAM = 17;
+     const SCRIPT_SINHALA = 18;
+     const SCRIPT_THAI = 19;
+     const SCRIPT_LAO = 20;
+     const SCRIPT_TIBETAN = 21;
+     const SCRIPT_MYANMAR = 22;
+     const SCRIPT_GEORGIAN = 23;
+     const SCRIPT_HANGUL = 24;
+     const SCRIPT_ETHIOPIC = 25;
+     const SCRIPT_CHEROKEE = 26;
+     const SCRIPT_CANADIAN_ABORIGINAL = 27;
+     const SCRIPT_OGHAM = 28;
+     const SCRIPT_RUNIC = 29;
+     const SCRIPT_KHMER = 30;
+     const SCRIPT_MONGOLIAN = 31;
+     const SCRIPT_HIRAGANA = 32;
+     const SCRIPT_KATAKANA = 33;
+     const SCRIPT_BOPOMOFO = 34;
+     const SCRIPT_HAN = 35;
+     const SCRIPT_YI = 36;
+     const SCRIPT_OLD_ITALIC = 37;
+     const SCRIPT_GOTHIC = 38;
+     const SCRIPT_DESERET = 39;
+     const SCRIPT_INHERITED = 40;
+     const SCRIPT_TAGALOG = 41;
+     const SCRIPT_HANUNOO = 42;
+     const SCRIPT_BUHID = 43;
+     const SCRIPT_TAGBANWA = 44;
+     const SCRIPT_LIMBU = 45;
+     const SCRIPT_TAI_LE = 46;
+     const SCRIPT_LINEAR_B = 47;
+     const SCRIPT_UGARITIC = 48;
+     const SCRIPT_SHAVIAN = 49;
+     const SCRIPT_OSMANYA = 50;
+     const SCRIPT_CYPRIOT = 51;
+     const SCRIPT_BRAILLE = 52;
+     const SCRIPT_BUGINESE = 53;
+     const SCRIPT_COPTIC = 54;
+     const SCRIPT_NEW_TAI_LUE = 55;
+     const SCRIPT_GLAGOLITIC = 56;
+     const SCRIPT_TIFINAGH = 57;
+     const SCRIPT_SYLOTI_NAGRI = 58;
+     const SCRIPT_OLD_PERSIAN = 59;
+     const SCRIPT_KHAROSHTHI = 60;
+     const SCRIPT_BALINESE = 61;
+     const SCRIPT_CUNEIFORM = 62;
+     const SCRIPT_PHOENICIAN = 63;
+     const SCRIPT_PHAGS_PA = 64;
+     const SCRIPT_NKO = 65;
+     const SCRIPT_SUNDANESE = 66;
+     const SCRIPT_LEPCHA = 67;
+     const SCRIPT_OL_CHIKI = 68;
+     const SCRIPT_VAI = 69;
+     const SCRIPT_SAURASHTRA = 70;
+     const SCRIPT_KAYAH_LI = 71;
+     const SCRIPT_REJANG = 72;
+     const SCRIPT_LYCIAN = 73;
+     const SCRIPT_CARIAN = 74;
+     const SCRIPT_LYDIAN = 75;
+     const SCRIPT_CHAM = 76;
+     const SCRIPT_TAI_THAM = 77;
+     const SCRIPT_TAI_VIET = 78;
+     const SCRIPT_AVESTAN = 79;
+     const SCRIPT_EGYPTIAN_HIEROGLYPHS = 80;
+     const SCRIPT_SAMARITAN = 81;
+     const SCRIPT_LISU = 82;
+     const SCRIPT_BAMUM = 83;
+     const SCRIPT_JAVANESE = 84;
+     const SCRIPT_MEETEI_MAYEK = 85;
+     const SCRIPT_IMPERIAL_ARAMAIC = 86;
+     const SCRIPT_OLD_SOUTH_ARABIAN = 87;
+     const SCRIPT_INSCRIPTIONAL_PARTHIAN = 88;
+     const SCRIPT_INSCRIPTIONAL_PAHLAVI = 89;
+     const SCRIPT_OLD_TURKIC = 90;
+     const SCRIPT_KAITHI = 91;
+     const SCRIPT_BATAK = 92;
+     const SCRIPT_BRAHMI = 93;
+     const SCRIPT_MANDAIC = 94;
+     const SCRIPT_CHAKMA = 95;
+     const SCRIPT_MEROITIC_CURSIVE = 96;
+     const SCRIPT_MEROITIC_HIEROGLYPHS = 97;
+     const SCRIPT_MIAO = 98;
+     const SCRIPT_SHARADA = 99;
+     const SCRIPT_SORA_SOMPENG = 100;
+     const SCRIPT_TAKRI = 101;
+     const SCRIPT_UNKNOWN = 102;
     
     
-    public static function get_ucd_record($code){
+     public static function get_ucd_record($code){
          if ($code >= 0x110000)
              $index = 0;
          else{
@@ -128,38 +128,38 @@ class UCDN{
              $index = self :: $index2[$index + $offset];
              }
          return self :: $ucd_records[$index];
-        }
-    public static function get_general_category($code){
+         }
+     public static function get_general_category($code){
          $ucd_record = self :: get_ucd_record($code);
          return $ucd_record[0];
-        }
-    public static function get_combining_class($code){
+         }
+     public static function get_combining_class($code){
          $ucd_record = self :: get_ucd_record($code);
          return $ucd_record[1];
-        }
-    public static function get_bidi_class($code){
+         }
+     public static function get_bidi_class($code){
          $ucd_record = self :: get_ucd_record($code);
          return $ucd_record[2];
-        }
-    public static function get_mirrored($code){
+         }
+     public static function get_mirrored($code){
          $ucd_record = self :: get_ucd_record($code);
          return $ucd_record[3];
-        }
-    public static function get_east_asian_width($code){
+         }
+     public static function get_east_asian_width($code){
          $ucd_record = self :: get_ucd_record($code);
          return $ucd_record[4];
-        }
-    public static function get_normalization_check($code){
+         }
+     public static function get_normalization_check($code){
          $ucd_record = self :: get_ucd_record($code);
          return $ucd_record[5];
-        }
-    public static function get_script($code){
+         }
+     public static function get_script($code){
          $ucd_record = self :: get_ucd_record($code);
          return $ucd_record[6];
-        }
+         }
     
     
-    // mPDF added
+     // mPDF added
     public static $uni_scriptblock = array(
         /**
          * SCRIPT_COMMON
@@ -481,7 +481,7 @@ class UCDN{
         );
     
     
-    public static $ot_languages = array(
+     public static $ot_languages = array(
         'aa' => 'AFR ',/**
          * Afar
          */
@@ -1566,161 +1566,161 @@ class UCDN{
     
     
     
-    // hb-unicode.h
+     // hb-unicode.h
     const UNICODE_GENERAL_CATEGORY_CONTROL = 0;
     /**
      * Cc
      */
-    const UNICODE_GENERAL_CATEGORY_FORMAT = 1;
+     const UNICODE_GENERAL_CATEGORY_FORMAT = 1;
     /**
      * Cf
      */
-    const UNICODE_GENERAL_CATEGORY_UNASSIGNED = 2;
+     const UNICODE_GENERAL_CATEGORY_UNASSIGNED = 2;
     /**
      * Cn
      */
-    const UNICODE_GENERAL_CATEGORY_PRIVATE_USE = 3;
+     const UNICODE_GENERAL_CATEGORY_PRIVATE_USE = 3;
     /**
      * Co
      */
-    const UNICODE_GENERAL_CATEGORY_SURROGATE = 4;
+     const UNICODE_GENERAL_CATEGORY_SURROGATE = 4;
     /**
      * Cs
      */
-    const UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER = 5;
+     const UNICODE_GENERAL_CATEGORY_LOWERCASE_LETTER = 5;
     /**
      * Ll
      */
-    const UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER = 6;
+     const UNICODE_GENERAL_CATEGORY_MODIFIER_LETTER = 6;
     /**
      * Lm
      */
-    const UNICODE_GENERAL_CATEGORY_OTHER_LETTER = 7;
+     const UNICODE_GENERAL_CATEGORY_OTHER_LETTER = 7;
     /**
      * Lo
      */
-    const UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER = 8;
+     const UNICODE_GENERAL_CATEGORY_TITLECASE_LETTER = 8;
     /**
      * Lt
      */
-    const UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER = 9;
+     const UNICODE_GENERAL_CATEGORY_UPPERCASE_LETTER = 9;
     /**
      * Lu
      */
-    const UNICODE_GENERAL_CATEGORY_SPACING_MARK = 10;
+     const UNICODE_GENERAL_CATEGORY_SPACING_MARK = 10;
     /**
      * Mc
      */
-    const UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK = 11;
+     const UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK = 11;
     /**
      * Me
      */
-    const UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK = 12;
+     const UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK = 12;
     /**
      * Mn
      */
-    const UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER = 13;
+     const UNICODE_GENERAL_CATEGORY_DECIMAL_NUMBER = 13;
     /**
      * Nd
      */
-    const UNICODE_GENERAL_CATEGORY_LETTER_NUMBER = 14;
+     const UNICODE_GENERAL_CATEGORY_LETTER_NUMBER = 14;
     /**
      * Nl
      */
-    const UNICODE_GENERAL_CATEGORY_OTHER_NUMBER = 15;
+     const UNICODE_GENERAL_CATEGORY_OTHER_NUMBER = 15;
     /**
      * No
      */
-    const UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION = 16;
+     const UNICODE_GENERAL_CATEGORY_CONNECT_PUNCTUATION = 16;
     /**
      * Pc
      */
-    const UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION = 17;
+     const UNICODE_GENERAL_CATEGORY_DASH_PUNCTUATION = 17;
     /**
      * Pd
      */
-    const UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION = 18;
+     const UNICODE_GENERAL_CATEGORY_CLOSE_PUNCTUATION = 18;
     /**
      * Pe
      */
-    const UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION = 19;
+     const UNICODE_GENERAL_CATEGORY_FINAL_PUNCTUATION = 19;
     /**
      * Pf
      */
-    const UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION = 20;
+     const UNICODE_GENERAL_CATEGORY_INITIAL_PUNCTUATION = 20;
     /**
      * Pi
      */
-    const UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION = 21;
+     const UNICODE_GENERAL_CATEGORY_OTHER_PUNCTUATION = 21;
     /**
      * Po
      */
-    const UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION = 22;
+     const UNICODE_GENERAL_CATEGORY_OPEN_PUNCTUATION = 22;
     /**
      * Ps
      */
-    const UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL = 23;
+     const UNICODE_GENERAL_CATEGORY_CURRENCY_SYMBOL = 23;
     /**
      * Sc
      */
-    const UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL = 24;
+     const UNICODE_GENERAL_CATEGORY_MODIFIER_SYMBOL = 24;
     /**
      * Sk
      */
-    const UNICODE_GENERAL_CATEGORY_MATH_SYMBOL = 25;
+     const UNICODE_GENERAL_CATEGORY_MATH_SYMBOL = 25;
     /**
      * Sm
      */
-    const UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL = 26;
+     const UNICODE_GENERAL_CATEGORY_OTHER_SYMBOL = 26;
     /**
      * So
      */
-    const UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR = 27;
+     const UNICODE_GENERAL_CATEGORY_LINE_SEPARATOR = 27;
     /**
      * Zl
      */
-    const UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR = 28;
+     const UNICODE_GENERAL_CATEGORY_PARAGRAPH_SEPARATOR = 28;
     /**
      * Zp
      */
-    const UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR = 29;
+     const UNICODE_GENERAL_CATEGORY_SPACE_SEPARATOR = 29;
     /**
      * Zs
      */
     
-    function general_category_is_mark($gen_cat){
+     function general_category_is_mark($gen_cat){
          if ($gen_cat == UNICODE_GENERAL_CATEGORY_SPACING_MARK || $gen_cat == UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK ||
              $gen_cat == UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK){
-            return true;
-        }
+             return true;
+             }
          return false;
          // define UNICODE_GENERAL_CATEGORY_IS_MARK(gen_cat)
         // if (FLAG(gen_cat) & (FLAG(UNICODE_GENERAL_CATEGORY_SPACING_MARK) | FLAG(UNICODE_GENERAL_CATEGORY_ENCLOSING_MARK) | FLAG(UNICODE_GENERAL_CATEGORY_NON_SPACING_MARK))) { return true; }
     }
     
     
-    const BIDI_CLASS_L = 0;
-    const BIDI_CLASS_LRE = 1;
-    const BIDI_CLASS_LRO = 2;
-    const BIDI_CLASS_R = 3;
-    const BIDI_CLASS_AL = 4;
-    const BIDI_CLASS_RLE = 5;
-    const BIDI_CLASS_RLO = 6;
-    const BIDI_CLASS_PDF = 7;
-    const BIDI_CLASS_EN = 8;
-    const BIDI_CLASS_ES = 9;
-    const BIDI_CLASS_ET = 10;
-    const BIDI_CLASS_AN = 11;
-    const BIDI_CLASS_CS = 12;
-    const BIDI_CLASS_NSM = 13;
-    const BIDI_CLASS_BN = 14;
-    const BIDI_CLASS_B = 15;
-    const BIDI_CLASS_S = 16;
-    const BIDI_CLASS_WS = 17;
-    const BIDI_CLASS_ON = 18;
+     const BIDI_CLASS_L = 0;
+     const BIDI_CLASS_LRE = 1;
+     const BIDI_CLASS_LRO = 2;
+     const BIDI_CLASS_R = 3;
+     const BIDI_CLASS_AL = 4;
+     const BIDI_CLASS_RLE = 5;
+     const BIDI_CLASS_RLO = 6;
+     const BIDI_CLASS_PDF = 7;
+     const BIDI_CLASS_EN = 8;
+     const BIDI_CLASS_ES = 9;
+     const BIDI_CLASS_ET = 10;
+     const BIDI_CLASS_AN = 11;
+     const BIDI_CLASS_CS = 12;
+     const BIDI_CLASS_NSM = 13;
+     const BIDI_CLASS_BN = 14;
+     const BIDI_CLASS_B = 15;
+     const BIDI_CLASS_S = 16;
+     const BIDI_CLASS_WS = 17;
+     const BIDI_CLASS_ON = 18;
     
     
-    // UNIDATA_VERSION 6.2.0
+     // UNIDATA_VERSION 6.2.0
     /**
      * a list of unique database records
      */
@@ -2439,7 +2439,7 @@ class UCDN{
     /**
      * Mirror unicode characters. Bidirectional Algorithm, at http://www.unicode.org/unicode/reports/tr9/
      */
-    public static $mirror_pairs = array(
+     public static $mirror_pairs = array(
         40 => 41,
          41 => 40,
          60 => 62,
@@ -2810,7 +2810,7 @@ class UCDN{
     /**
      * index tables for the database records
      */
-    private static $index0 = array(
+     private static $index0 = array(
         0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
          21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
          39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 53, 53, 53,
@@ -3060,7 +3060,7 @@ class UCDN{
          74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 74, 131,
         );
     
-    private static $index1 = array(
+     private static $index1 = array(
         0, 1, 0, 2, 3, 4, 5, 6, 7, 8, 8, 9, 10, 11, 11, 12, 13, 0, 0, 0, 14, 15,
          16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 29, 31, 32,
          33, 34, 35, 27, 30, 29, 27, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
@@ -3365,7 +3365,7 @@ class UCDN{
          854, 854, 854, 854, 854, 854, 854, 1119,
         );
     
-    private static $index2 = array(
+     private static $index2 = array(
         1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 2, 4, 3, 1, 1, 1, 1, 1, 1, 3, 3, 3, 2,
          5, 6, 6, 7, 8, 7, 6, 6, 9, 10, 6, 11, 12, 13, 12, 12, 14, 14, 14, 14, 14,
          14, 14, 14, 14, 14, 12, 6, 15, 16, 15, 6, 6, 17, 17, 17, 17, 17, 17, 17,
@@ -3946,6 +3946,6 @@ class UCDN{
          405, 405, 405, 405, 405, 405, 405, 561, 561, 561, 561, 561, 560, 64, 64,
         );
     
-    }
+     }
 
 ?>

@@ -22,15 +22,15 @@ function GetLangOpts($llcc, $adobeCJK, & $fontdata){
      $script = '';
      if (isset($tags[1]) && $tags[1]){
          if (strlen($tags[1]) == 4){
-            $script = strtolower($tags[1]);
-        }
+             $script = strtolower($tags[1]);
+             }
         else{
-            $country = strtolower($tags[1]);
-        }
+             $country = strtolower($tags[1]);
+             }
          }
      if (isset($tags[2]) && $tags[2]){
-        $country = strtolower($tags[2]);
-    }
+         $country = strtolower($tags[2]);
+         }
     
      $unifont = "";
      $coreSuitable = false;
@@ -212,11 +212,9 @@ function GetLangOpts($llcc, $adobeCJK, & $fontdata){
         $unifont = "jomolhari";
          break;
      // CASE "mn":  CASE "mon":	// MONGOLIAN	(Vertical script)
-    
     // CASE "ug":  CASE "uig":	// Uyghur
     // CASE "uz":  CASE "uzb":	// Uzbek
     // CASE "az":  CASE "azb":	// South Azerbaijani
-    
     /**
      * South Asian
      */
@@ -269,14 +267,14 @@ function GetLangOpts($llcc, $adobeCJK, & $fontdata){
      // Sindhi (Arabic or Devanagari)
     CASE "sd": CASE "snd": // Sindhi
         if ($country == "IN"){
-            $unifont = "freeserif";
-        }
+             $unifont = "freeserif";
+             }
         else if ($country == "PK"){
-            $unifont = "lateef";
-        }
+             $unifont = "lateef";
+             }
         else{
-            $unifont = "lateef";
-        }
+             $unifont = "lateef";
+             }
          break;
     
     
@@ -324,7 +322,6 @@ function GetLangOpts($llcc, $adobeCJK, & $fontdata){
     
     
      // CASE "ms":  CASE "msa":	// Malay
-    
     // CASE "ban":	// BALINESE
     // CASE "bya":	// BATAK
     CASE "bug": // BUGINESE
@@ -366,52 +363,52 @@ function GetLangOpts($llcc, $adobeCJK, & $fontdata){
      CASE "zh": CASE "zho": // Chinese
         if ($country == "HK" || $country == "TW"){
              if ($adobeCJK){
-                $unifont = "big5";
-            }
+                 $unifont = "big5";
+                 }
             else{
-                $unifont = "sun-exta";
-            }
+                 $unifont = "sun-exta";
+                 }
              }
         else if ($country == "CN"){
              if ($adobeCJK){
-                $unifont = "gb";
-            }
+                 $unifont = "gb";
+                 }
             else{
-                $unifont = "sun-exta";
-            }
+                 $unifont = "sun-exta";
+                 }
              }
         else{
              if ($adobeCJK){
-                $unifont = "gb";
-            }
+                 $unifont = "gb";
+                 }
             else{
-                $unifont = "sun-exta";
-            }
+                 $unifont = "sun-exta";
+                 }
              }
          break;
      CASE "ko": CASE "kor": // HANGUL Korean
         if ($adobeCJK){
-            $unifont = "uhc";
-        }
+             $unifont = "uhc";
+             }
         else{
-            $unifont = "unbatang";
-        }
+             $unifont = "unbatang";
+             }
          break;
      CASE "ja": CASE "jpn": // Japanese HIRAGANA KATAKANA
         if ($adobeCJK){
-            $unifont = "sjis";
-        }
+             $unifont = "sjis";
+             }
         else{
-            $unifont = "sun-exta";
-        }
+             $unifont = "sun-exta";
+             }
          break;
      CASE "ii": CASE "iii": // Nuosu; Yi
         if ($adobeCJK){
-            $unifont = "gb";
-        }
+             $unifont = "gb";
+             }
         else{
-            $unifont = "sun-exta";
-        }
+             $unifont = "sun-exta";
+             }
          CASE "lis": // LISU
         $unifont = "quivira";
          break;
@@ -500,7 +497,6 @@ function GetLangOpts($llcc, $adobeCJK, & $fontdata){
          // CASE "sarb":	// OLD_SOUTH_ARABIAN
         // CASE "prti":	// INSCRIPTIONAL_PARTHIAN
         // CASE "phli":	// INSCRIPTIONAL_PAHLAVI
-        
         /**
          * Central Asian
          */
@@ -538,11 +534,11 @@ function GetLangOpts($llcc, $adobeCJK, & $fontdata){
          */
          CASE "hans": // HAN (SIMPLIFIED)
             if ($adobeCJK){
-                $unifont = "gb";
-            }
+                 $unifont = "gb";
+                 }
             else{
-                $unifont = "sun-exta";
-            }
+                 $unifont = "sun-exta";
+                 }
              break;
          CASE "bopo": // BOPOMOFO
             $unifont = "sun-exta";
@@ -574,6 +570,6 @@ function GetLangOpts($llcc, $adobeCJK, & $fontdata){
     
     
      return array($coreSuitable , $unifont);
-    }
+     }
 
 ?>

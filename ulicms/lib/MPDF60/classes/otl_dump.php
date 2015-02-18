@@ -27,63 +27,63 @@ if(!function_exists('unicode_hex')){
      function unicode_hex($unicode_dec){
          return (sprintf("%05s", strtoupper(dechex($unicode_dec))));
          }
-    }
+     }
 class OTLdump{
     
-    var $GPOSFeatures; // mPDF 5.7.1
-    var $GPOSLookups; // mPDF 5.7.1
-    var $GPOSScriptLang; // mPDF 5.7.1
-    var $ignoreStrings; // mPDF 5.7.1
-    var $MarkAttachmentType; // mPDF 5.7.1
-    var $MarkGlyphSets; // mPDF 7.5.1
-    var $GlyphClassMarks; // mPDF 5.7.1
-    var $GlyphClassLigatures; // mPDF 5.7.1
-    var $GlyphClassBases; // mPDF 5.7.1
-    var $GlyphClassComponents; // mPDF 5.7.1
-    var $GSUBScriptLang; // mPDF 5.7.1
-    var $rtlPUAstr; // mPDF 5.7.1
-    var $rtlPUAarr; // mPDF 5.7.1
-    var $fontkey; // mPDF 5.7.1
-    var $useOTL; // mPDF 5.7.1
-    var $panose;
-    var $maxUni;
-    var $sFamilyClass;
-    var $sFamilySubClass;
-    var $sipset;
-    var $smpset;
-    var $_pos;
-    var $numTables;
-    var $searchRange;
-    var $entrySelector;
-    var $rangeShift;
-    var $tables;
-    var $otables;
-    var $filename;
-    var $fh;
-    var $glyphPos;
-    var $charToGlyph;
-    var $ascent;
-    var $descent;
-    var $name;
-    var $familyName;
-    var $styleName;
-    var $fullName;
-    var $uniqueFontID;
-    var $unitsPerEm;
-    var $bbox;
-    var $capHeight;
-    var $stemV;
-    var $italicAngle;
-    var $flags;
-    var $underlinePosition;
-    var $underlineThickness;
-    var $charWidths;
-    var $defaultWidth;
-    var $maxStrLenRead;
-    var $numTTCFonts;
-    var $TTCFonts;
-    var $maxUniChar;
-    var $kerninfo;
+     var $GPOSFeatures; // mPDF 5.7.1
+     var $GPOSLookups; // mPDF 5.7.1
+     var $GPOSScriptLang; // mPDF 5.7.1
+     var $ignoreStrings; // mPDF 5.7.1
+     var $MarkAttachmentType; // mPDF 5.7.1
+     var $MarkGlyphSets; // mPDF 7.5.1
+     var $GlyphClassMarks; // mPDF 5.7.1
+     var $GlyphClassLigatures; // mPDF 5.7.1
+     var $GlyphClassBases; // mPDF 5.7.1
+     var $GlyphClassComponents; // mPDF 5.7.1
+     var $GSUBScriptLang; // mPDF 5.7.1
+     var $rtlPUAstr; // mPDF 5.7.1
+     var $rtlPUAarr; // mPDF 5.7.1
+     var $fontkey; // mPDF 5.7.1
+     var $useOTL; // mPDF 5.7.1
+     var $panose;
+     var $maxUni;
+     var $sFamilyClass;
+     var $sFamilySubClass;
+     var $sipset;
+     var $smpset;
+     var $_pos;
+     var $numTables;
+     var $searchRange;
+     var $entrySelector;
+     var $rangeShift;
+     var $tables;
+     var $otables;
+     var $filename;
+     var $fh;
+     var $glyphPos;
+     var $charToGlyph;
+     var $ascent;
+     var $descent;
+     var $name;
+     var $familyName;
+     var $styleName;
+     var $fullName;
+     var $uniqueFontID;
+     var $unitsPerEm;
+     var $bbox;
+     var $capHeight;
+     var $stemV;
+     var $italicAngle;
+     var $flags;
+     var $underlinePosition;
+     var $underlineThickness;
+     var $charWidths;
+     var $defaultWidth;
+     var $maxStrLenRead;
+     var $numTTCFonts;
+     var $TTCFonts;
+     var $maxUniChar;
+     var $kerninfo;
     
      function OTLdump(& $mpdf){
          $this -> mpdf = $mpdf;
@@ -175,13 +175,13 @@ class OTLdump{
          $ylo = $y[1];
          $yhi = $y[0];
          if ($ylo > $xlo){
-            $xlo += 1 << 16;
-            $yhi += 1;
-        }
+             $xlo += 1 << 16;
+             $yhi += 1;
+             }
          $reslo = $xlo - $ylo;
          if ($yhi > $xhi){
-            $xhi += 1 << 16;
-        }
+             $xhi += 1 << 16;
+             }
          $reshi = $xhi - $yhi;
          $reshi = $reshi & 0xFFFF;
          return array($reshi, $reslo);
@@ -189,8 +189,8 @@ class OTLdump{
     
      function calcChecksum($data){
          if (strlen($data) % 4){
-            $data .= str_repeat("\0", (4 - (strlen($data) % 4)));
-        }
+             $data .= str_repeat("\0", (4 - (strlen($data) % 4)));
+             }
          $len = strlen($data);
          $hi = 0x0000;
          $lo = 0x0000;
@@ -306,16 +306,16 @@ class OTLdump{
      function get_chunk($pos, $length){
          fseek($this -> fh, $pos);
          if ($length < 1){
-            return '';
-        }
+             return '';
+             }
          return (fread($this -> fh, $length));
          }
     
      function get_table($tag){
          list($pos, $length) = $this -> get_table_pos($tag);
          if ($length == 0){
-            return '';
-        }
+             return '';
+             }
          fseek($this -> fh, $pos);
          return (fread($this -> fh, $length));
          }
@@ -330,9 +330,9 @@ class OTLdump{
     
     
     
+     // ///////////////////////////////////////////////////////////////////////////////////////
     // ///////////////////////////////////////////////////////////////////////////////////////
-    // ///////////////////////////////////////////////////////////////////////////////////////
-     function extractInfo($debug = false, $BMPonly = false, $kerninfo = false, $useOTL = 0){
+    function extractInfo($debug = false, $BMPonly = false, $kerninfo = false, $useOTL = 0){
          $this -> panose = array();
          $this -> sFamilyClass = 0;
          $this -> sFamilySubClass = 0;
@@ -404,29 +404,29 @@ class OTLdump{
              }
          $this -> name = $psName;
          if ($names[1]){
-            $this -> familyName = $names[1];
-        }else{
-            $this -> familyName = $psName;
-        }
+             $this -> familyName = $names[1];
+             }else{
+             $this -> familyName = $psName;
+             }
          if ($names[2]){
-            $this -> styleName = $names[2];
-        }else{
-            $this -> styleName = 'Regular';
-        }
+             $this -> styleName = $names[2];
+             }else{
+             $this -> styleName = 'Regular';
+             }
          if ($names[4]){
-            $this -> fullName = $names[4];
-        }else{
-            $this -> fullName = $psName;
-        }
+             $this -> fullName = $names[4];
+             }else{
+             $this -> fullName = $psName;
+             }
          if ($names[3]){
-            $this -> uniqueFontID = $names[3];
-        }else{
-            $this -> uniqueFontID = $psName;
-        }
+             $this -> uniqueFontID = $names[3];
+             }else{
+             $this -> uniqueFontID = $psName;
+             }
         
          if ($names[6]){
-            $this -> fullName = $names[6];
-        }
+             $this -> fullName = $names[6];
+             }
         
          // /////////////////////////////////
         // head - Font header table
@@ -498,8 +498,8 @@ class OTLdump{
              $panose = fread($this -> fh, 10);
              $this -> panose = array();
              for ($p = 0;$p < strlen($panose);$p++){
-                $this -> panose[] = ord($panose[$p]);
-            }
+                 $this -> panose[] = ord($panose[$p]);
+                 }
              $this -> skip(26);
              $sTypoAscender = $this -> read_short();
              $sTypoDescender = $this -> read_short();
@@ -687,19 +687,19 @@ class OTLdump{
              for ($gid = 1; $gid < $numGlyphs; $gid++){
                  if (!isset($glyphToChar[$gid])){
                      while(isset($charToGlyph[$bctr])){
-                        $bctr++;
-                    } // Avoid overwriting a glyph already mapped in PUA
+                         $bctr++;
+                         } // Avoid overwriting a glyph already mapped in PUA
                      if (($bctr > 0xF8FF) && ($bctr < 0x2CEB0)){
                          if (!$BMPonly){
                              $bctr = 0x2CEB0; // Use unassigned area 0x2CEB0 to 0x2F7FF (space for 10,000 characters)
                              $this -> sipset = $sipset = true; // forces subsetting; also ensure charwidths are saved
                              while(isset($charToGlyph[$bctr])){
-                                $bctr++;
-                            }
+                                 $bctr++;
+                                 }
                              }
                         else{
-                            die($names[1] . " : WARNING - The font does not have enough space to map all (unmapped) included glyphs into Private Use Area U+E000 - U+F8FF");
-                        }
+                             die($names[1] . " : WARNING - The font does not have enough space to map all (unmapped) included glyphs into Private Use Area U+E000 - U+F8FF");
+                             }
                          }
                      $glyphToChar[$gid][] = $bctr;
                      $charToGlyph[$bctr] = $gid;
@@ -713,8 +713,8 @@ class OTLdump{
          // /////////////////////////////////
         // mPDF 5.7.1	OpenType Layout tables
         $this -> GSUBScriptLang = array();
-        $this -> rtlPUAstr = '';
-        $this -> rtlPUAarr = array();
+         $this -> rtlPUAstr = '';
+         $this -> rtlPUAarr = array();
          if ($useOTL){
              $this -> _getGDEFtables();
              list($this -> GSUBScriptLang, $this -> GSUBFeatures, $this -> GSUBLookups, $this -> rtlPUAstr, $this -> rtlPUAarr) = $this -> _getGSUBtables();
@@ -769,7 +769,7 @@ class OTLdump{
          }
     
     
-    // ///////////////////////////////////////////////////////////////////////////////////////
+     // ///////////////////////////////////////////////////////////////////////////////////////
     function _getGDEFtables(){
          // /////////////////////////////////
         // GDEF - Glyph Definition
@@ -777,8 +777,8 @@ class OTLdump{
         // http://www.microsoft.com/typography/otspec/gdef.htm
         if (isset($this -> tables["GDEF"])){
              if ($this -> mode == 'summary'){
-                $this -> mpdf -> WriteHTML('<h1>GDEF table</h1>');
-            }
+                 $this -> mpdf -> WriteHTML('<h1>GDEF table</h1>');
+                 }
              $gdef_offset = $this -> seek_table("GDEF");
              // ULONG Version of the GDEF table-currently 0x00010000
             $ver_maj = $this -> read_ushort();
@@ -821,8 +821,8 @@ class OTLdump{
                      }
                  }
             else{
-                $this -> GlyphClassBases = '';
-            }
+                 $this -> GlyphClassBases = '';
+                 }
              if (isset($GlyphByClass[2]) && count($GlyphByClass[2]) > 0){
                  $this -> GlyphClassLigatures = $this -> formatClassArr($GlyphByClass[2]);
                  if ($this -> mode == 'summary'){
@@ -838,8 +838,8 @@ class OTLdump{
                      }
                  }
             else{
-                $this -> GlyphClassLigatures = '';
-            }
+                 $this -> GlyphClassLigatures = '';
+                 }
              if (isset($GlyphByClass[3]) && count($GlyphByClass[3]) > 0){
                  $this -> GlyphClassMarks = $this -> formatClassArr($GlyphByClass[3]);
                  if ($this -> mode == 'summary'){
@@ -855,8 +855,8 @@ class OTLdump{
                      }
                  }
             else{
-                $this -> GlyphClassMarks = '';
-            }
+                 $this -> GlyphClassMarks = '';
+                 }
              if (isset($GlyphByClass[4]) && count($GlyphByClass[4]) > 0){
                  $this -> GlyphClassComponents = $this -> formatClassArr($GlyphByClass[4]);
                  if ($this -> mode == 'summary'){
@@ -872,8 +872,8 @@ class OTLdump{
                      }
                  }
             else{
-                $this -> GlyphClassComponents = '';
-            }
+                 $this -> GlyphClassComponents = '';
+                 }
             
              $Marks = $GlyphByClass[3]; // to use for MarkAttachmentType
             
@@ -910,12 +910,11 @@ class OTLdump{
              // Ligature Caret List
             // The Ligature Caret List table (LigCaretList) defines caret positions for all the ligatures in a font.
             // Not required for mDPF
-            
             // MarkAttachmentType
             if ($MarkAttachClassDef_offset){
                  if ($this -> mode == 'summary'){
-                    $this -> mpdf -> WriteHTML('<h1>Mark Attachment Types</h1>');
-                }
+                     $this -> mpdf -> WriteHTML('<h1>Mark Attachment Types</h1>');
+                     }
                  $this -> seek($gdef_offset + $MarkAttachClassDef_offset);
                  $MarkAttachmentTypes = $this -> _getClassDefinitionTable();
                  foreach($MarkAttachmentTypes AS $class => $glyphs){
@@ -925,8 +924,8 @@ class OTLdump{
                          sort($mat, SORT_STRING);
                          }
                     else{
-                        $mat = array();
-                    }
+                         $mat = array();
+                         }
                     
                      $this -> MarkAttachmentType[$class] = $this -> formatClassArr($mat);
                     
@@ -943,15 +942,15 @@ class OTLdump{
                      }
                  }
             else{
-                $this -> MarkAttachmentType = array();
-            }
+                 $this -> MarkAttachmentType = array();
+                 }
             
             
              // MarkGlyphSets only in Version 0x00010002 of GDEF
             if ($ver_min == 2 && $MarkGlyphSetsDef_offset){
                  if ($this -> mode == 'summary'){
-                    $this -> mpdf -> WriteHTML('<h1>Mark Glyph Sets</h1>');
-                }
+                     $this -> mpdf -> WriteHTML('<h1>Mark Glyph Sets</h1>');
+                     }
                  $this -> seek($gdef_offset + $MarkGlyphSetsDef_offset);
                  $MarkSetTableFormat = $this -> read_ushort();
                  $MarkSetCount = $this -> read_ushort();
@@ -976,15 +975,15 @@ class OTLdump{
                      }
                  }
             else{
-                $this -> MarkGlyphSets = array();
-            }
+                 $this -> MarkGlyphSets = array();
+                 }
              }
         else{
-            $this -> mpdf -> WriteHTML('<div>GDEF table not defined</div>');
-        }
+             $this -> mpdf -> WriteHTML('<div>GDEF table not defined</div>');
+             }
         
         
-        // echo $this->GlyphClassMarks ; exit;
+         // echo $this->GlyphClassMarks ; exit;
         // print_r($GlyphClass); exit;
         // print_r($GlyphByClass); exit;
     }
@@ -1060,9 +1059,8 @@ class OTLdump{
                      }
                  $ffeats[$t] = $ls;
                  }
-            // print_r($ffeats); exit;
-            
-             // Get FeatureIndexList
+             // print_r($ffeats); exit;
+            // Get FeatureIndexList
             // LangSys Table - from first listed langsys
             foreach($ffeats AS $st => $scripts){
                  foreach($scripts AS $t => $o){
@@ -1072,8 +1070,8 @@ class OTLdump{
                      $LookUpOrder = $this -> read_ushort(); //==NULL
                      $ReqFeatureIndex = $this -> read_ushort();
                      if ($ReqFeatureIndex != 0xFFFF){
-                        $FeatureIndex[] = $ReqFeatureIndex;
-                    }
+                         $FeatureIndex[] = $ReqFeatureIndex;
+                         }
                      $FeatureCount = $this -> read_ushort();
                      for ($i = 0;$i < $FeatureCount;$i++){
                          $FeatureIndex[] = $this -> read_ushort(); // = index of feature
@@ -1081,9 +1079,8 @@ class OTLdump{
                      $ffeats[$st][$t] = $FeatureIndex;
                      }
                  }
-            // print_r($ffeats); exit;
-            
-             // Feauture List => LookupListIndex es
+             // print_r($ffeats); exit;
+            // Feauture List => LookupListIndex es
             $this -> seek($FeatureList_offset);
              $FeatureCount = $this -> read_ushort();
              $Feature = array();
@@ -1125,14 +1122,14 @@ class OTLdump{
                          $gsub[$st][$t][$ft['tag']] = $ft['LookupListIndex'];
                          }
                      if (!isset($GSUBScriptLang[$st])){
-                        $GSUBScriptLang[$st] = '';
-                    }
+                         $GSUBScriptLang[$st] = '';
+                         }
                      $GSUBScriptLang[$st] .= $t . ' ';
                      }
                  }
             
-            // print_r($gsub); exit;
-             if ($this -> mode == 'summary'){
+             // print_r($gsub); exit;
+            if ($this -> mode == 'summary'){
                  $this -> mpdf -> WriteHTML('<h3>GSUB Scripts &amp; Languages</h3>');
                  $this -> mpdf -> WriteHTML('<div class="glyphs">');
                  $html = '';
@@ -1196,7 +1193,7 @@ class OTLdump{
                 
                  }
             
-            // print_r($GSLookup); exit; 
+             // print_r($GSLookup); exit;
             // =====================================================================================
             // Process Whole LookupList - Get LuCoverage = Lookup coverage just for first glyph
             $this -> GSLuCoverage = array();
@@ -1207,8 +1204,8 @@ class OTLdump{
                      $PosFormat = $this -> read_ushort();
                     
                      if ($GSLookup[$i]['Type'] == 5 && $PosFormat == 3){
-                        $this -> skip(4);
-                    }
+                         $this -> skip(4);
+                         }
                     else if ($GSLookup[$i]['Type'] == 6 && $PosFormat == 3){
                          $BacktrackGlyphCount = $this -> read_ushort();
                          $this -> skip(2 * $BacktrackGlyphCount + 2);
@@ -1221,8 +1218,8 @@ class OTLdump{
                      }
                  }
             
-            // $this->GSLuCoverage and $GSLookup
-             // =====================================================================================
+             // $this->GSLuCoverage and $GSLookup
+            // =====================================================================================
             $s = '<?php
 $GSLuCoverage = ' . var_export($this -> GSLuCoverage , true) . ';
 ?>';
@@ -1242,7 +1239,7 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              // =====================================================================================
             // =====================================================================================
             // =====================================================================================
-            // Now repeats as original to get Substitution rules 
+            // Now repeats as original to get Substitution rules
             // =====================================================================================
             // =====================================================================================
             // =====================================================================================
@@ -1267,8 +1264,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                      $Lookup[$i]['MarkFilteringSet'] = $this -> read_ushort();
                      }
                 else{
-                    $Lookup[$i]['MarkFilteringSet'] = '';
-                }
+                     $Lookup[$i]['MarkFilteringSet'] = '';
+                     }
                 
                  // Lookup Type 7: Extension
                 if ($Lookup[$i]['Type'] == 7){
@@ -1284,7 +1281,7 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                 
                  }
             
-            // print_r($Lookup); exit; 
+             // print_r($Lookup); exit;
             // =====================================================================================
             // Process (1) Whole LookupList
             for ($i = 0;$i < $LookupCount;$i++){
@@ -1436,8 +1433,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                  }
                              }
                         else{
-                            die("GPOS Lookup Type " . $Lookup[$i]['Type'] . ", Format " . $SubstFormat . " not supported (ttfontsuni.php).");
-                        }
+                             die("GPOS Lookup Type " . $Lookup[$i]['Type'] . ", Format " . $SubstFormat . " not supported (ttfontsuni.php).");
+                             }
                          }
                     
                      // LookupType 6: Chaining Contextual Substitution Subtable
@@ -1494,15 +1491,14 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                              }
                          }
                     else{
-                        die("Lookup Type " . $Lookup[$i]['Type'] . " not supported.");
-                    }
+                         die("Lookup Type " . $Lookup[$i]['Type'] . " not supported.");
+                         }
                      }
                  }
-            // print_r($Lookup); exit;
+             // print_r($Lookup); exit;
             
             
-            
-             // =====================================================================================
+            // =====================================================================================
             // Process (2) Whole LookupList
             // Get Coverage tables and prepare preg_replace
             for ($i = 0;$i < $LookupCount;$i++){
@@ -1519,8 +1515,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                              $replace[] = unicode_hex($this -> glyphToChar[$glyphs[$g]][0]);
                              // Flag = Ignore
                             if ($this -> _checkGSUBignore($Lookup[$i]['Flag'], $replace[0], $Lookup[$i]['MarkFilteringSet'])){
-                                continue;
-                            }
+                                 continue;
+                                 }
                              if (isset($Lookup[$i]['Subtable'][$c]['DeltaGlyphID'])){ // Format 1
                                  $substitute[] = unicode_hex($this -> glyphToChar[($glyphs[$g] + $Lookup[$i]['Subtable'][$c]['DeltaGlyphID'])][0]);
                                  }
@@ -1541,11 +1537,11 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                              $replace[] = $glyphs[$g];
                              // Flag = Ignore
                             if ($this -> _checkGSUBignore($Lookup[$i]['Flag'], $replace[0], $Lookup[$i]['MarkFilteringSet'])){
-                                continue;
-                            }
-                            if (!isset($Lookup[$i]['Subtable'][$c]['Sequences'][$g]['SubstituteGlyphID']) || count($Lookup[$i]['Subtable'][$c]['Sequences'][$g]['SubstituteGlyphID']) == 0){
-                                continue;
-                            } // Illegal for GlyphCount to be 0; either error in font, or something has gone wrong - lets carry on for now!
+                                 continue;
+                                 }
+                             if (!isset($Lookup[$i]['Subtable'][$c]['Sequences'][$g]['SubstituteGlyphID']) || count($Lookup[$i]['Subtable'][$c]['Sequences'][$g]['SubstituteGlyphID']) == 0){
+                                 continue;
+                                 } // Illegal for GlyphCount to be 0; either error in font, or something has gone wrong - lets carry on for now!
                              foreach($Lookup[$i]['Subtable'][$c]['Sequences'][$g]['SubstituteGlyphID'] AS $sub){
                                  $substitute[] = unicode_hex($this -> glyphToChar[$sub][0]);
                                  }
@@ -1562,8 +1558,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                              $replace[] = $glyphs[$g];
                              // Flag = Ignore
                             if ($this -> _checkGSUBignore($Lookup[$i]['Flag'], $replace[0], $Lookup[$i]['MarkFilteringSet'])){
-                                continue;
-                            }
+                                 continue;
+                                 }
                             
                              for ($gl = 0;$gl < $Lookup[$i]['Subtable'][$c]['AlternateSets'][$g]['GlyphCount'];$gl++){
                                  $gid = $Lookup[$i]['Subtable'][$c]['AlternateSets'][$g]['SubstituteGlyphID'][$gl];
@@ -1574,10 +1570,10 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                             // $substitute[] = unicode_hex($this->glyphToChar[$gid][0]);
                             $Lookup[$i]['Subtable'][$c]['subs'][] = array('Replace' => $replace, 'substitute' => $substitute);
                              }
-                        if ($i == 166){
+                         if ($i == 166){
                              print_r($Lookup[$i]['Subtable']);
                              exit;
-                            }
+                             }
                          }
                      // LookupType 4: Ligature Substitution Subtable n => 1
                     else if ($Lookup[$i]['Type'] == 4){
@@ -1591,15 +1587,15 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                  $replace[] = $glyphs[$s];
                                  // Flag = Ignore
                                 if ($this -> _checkGSUBignore($Lookup[$i]['Flag'], $replace[0], $Lookup[$i]['MarkFilteringSet'])){
-                                    continue;
-                                }
+                                     continue;
+                                     }
                                  for ($l = 1;$l < $Lookup[$i]['Subtable'][$c]['LigSet'][$s]['Ligature'][$g]['CompCount'];$l++){
                                      $gid = $Lookup[$i]['Subtable'][$c]['LigSet'][$s]['Ligature'][$g]['GlyphID'][$l];
                                      $rpl = unicode_hex($this -> glyphToChar[$gid][0]);
                                      // Flag = Ignore
                                     if ($this -> _checkGSUBignore($Lookup[$i]['Flag'], $rpl, $Lookup[$i]['MarkFilteringSet'])){
-                                        continue 2;
-                                    }
+                                         continue 2;
+                                         }
                                      $replace[] = $rpl;
                                      }
                                  $gid = $Lookup[$i]['Subtable'][$c]['LigSet'][$s]['Ligature'][$g]['LigGlyph'];
@@ -1817,7 +1813,6 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
             // =====================================================================================
             // =====================================================================================
             
-            
             $st = $this -> mpdf -> OTLscript;
              $t = $this -> mpdf -> OTLlang;
              $langsys = $gsub[$st][$t];
@@ -1832,50 +1827,49 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                  }
              ksort($lul); // Order the Lookups in the order they are in the GUSB table, regardless of Feature order
              $this -> _getGSUBarray($Lookup, $lul, $st);
-            // print_r($lul); exit;
+             // print_r($lul); exit;
             
             
-            
-             }
-        // print_r($Lookup); exit;
-         return array($GSUBScriptLang, $gsub, $GSLookup, $rtlPUAstr, $rtlPUAarr);
+            }
+         // print_r($Lookup); exit;
+        return array($GSUBScriptLang, $gsub, $GSLookup, $rtlPUAstr, $rtlPUAarr);
         
          }
-    // /////////////////////////////////////////////////////////////////////////////////////// 
+     // ///////////////////////////////////////////////////////////////////////////////////////
     // GSUB functions
     function _getGSUBarray(& $Lookup, & $lul, $scripttag, $level = 1, $coverage = '', $exB = '', $exL = ''){
          // Process (3) LookupList for specific Script-LangSys
         // Generate preg_replace
         $html = '';
          if ($level == 1){
-            $html .= '<bookmark level="0" content="GSUB features">';
-        }
+             $html .= '<bookmark level="0" content="GSUB features">';
+             }
          foreach($lul AS $i => $tag){
              $html .= '<div class="level' . $level . '">';
              $html .= '<h5 class="level' . $level . '">';
              if ($level == 1){
-                $html .= '<bookmark level="1" content="' . $tag . ' [#' . $i . ']">';
-            }
+                 $html .= '<bookmark level="1" content="' . $tag . ' [#' . $i . ']">';
+                 }
              $html .= 'Lookup #' . $i . ' [tag: <span style="color:#000066;">' . $tag . '</span>]</h5>';
              $ignore = $this -> _getGSUBignoreString($Lookup[$i]['Flag'], $Lookup[$i]['MarkFilteringSet']);
              if ($ignore){
-                $html .= '<div class="ignore">Ignoring: ' . $ignore . '</div> ';
-            }
+                 $html .= '<div class="ignore">Ignoring: ' . $ignore . '</div> ';
+                 }
             
              $Type = $Lookup[$i]['Type'];
              $Flag = $Lookup[$i]['Flag'];
              if (($Flag & 0x0001) == 1){
-                $dir = 'RTL';
-            }
+                 $dir = 'RTL';
+                 }
             else{
-                $dir = 'LTR';
-            }
+                 $dir = 'LTR';
+                 }
             
              for ($c = 0;$c < $Lookup[$i]['SubtableCount'] ;$c++){
                  $html .= '<div class="subtable">Subtable #' . $c;
                  if ($level == 1){
-                    $html .= '<bookmark level="2" content="Subtable #' . $c . '">';
-                }
+                     $html .= '<bookmark level="2" content="Subtable #' . $c . '">';
+                     }
                  $html .= '</div>';
                 
                  $SubstFormat = $Lookup[$i]['Subtable'][$c]['Format'] ;
@@ -1887,25 +1881,25 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                          $inputGlyphs = $Lookup[$i]['Subtable'][$c]['subs'][$s]['Replace'];
                          $substitute = $Lookup[$i]['Subtable'][$c]['subs'][$s]['substitute'][0];
                          if ($level == 2 && strpos($coverage, $inputGlyphs[0]) === false){
-                            continue;
-                        }
+                             continue;
+                             }
                          $html .= '<div class="substitution">';
                          $html .= '<span class="unicode">' . $this -> formatUni($inputGlyphs[0]) . '&nbsp;</span> ';
                          if ($level == 2 && $exB){
-                            $html .= $exB;
-                        }
+                             $html .= $exB;
+                             }
                          $html .= '<span class="unchanged">&nbsp;' . $this -> formatEntity($inputGlyphs[0]) . '</span>';
                          if ($level == 2 && $exL){
-                            $html .= $exL;
-                        }
+                             $html .= $exL;
+                             }
                          $html .= '&nbsp; &raquo; &raquo; &nbsp;';
                          if ($level == 2 && $exB){
-                            $html .= $exB;
-                        }
+                             $html .= $exB;
+                             }
                          $html .= '<span class="changed">&nbsp;' . $this -> formatEntity($substitute) . '</span>';
                          if ($level == 2 && $exL){
-                            $html .= $exL;
-                        }
+                             $html .= $exL;
+                             }
                          $html .= '&nbsp; <span class="unicode">' . $this -> formatUni($substitute) . '</span> ';
                          $html .= '</div>';
                          }
@@ -1917,25 +1911,25 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                          $inputGlyphs = $Lookup[$i]['Subtable'][$c]['subs'][$s]['Replace'];
                          $substitute = $Lookup[$i]['Subtable'][$c]['subs'][$s]['substitute'];
                          if ($level == 2 && strpos($coverage, $inputGlyphs[0]) === false){
-                            continue;
-                        }
+                             continue;
+                             }
                          $html .= '<div class="substitution">';
                          $html .= '<span class="unicode">' . $this -> formatUni($inputGlyphs[0]) . '&nbsp;</span> ';
                          if ($level == 2 && $exB){
-                            $html .= $exB;
-                        }
+                             $html .= $exB;
+                             }
                          $html .= '<span class="unchanged">&nbsp;' . $this -> formatEntity($inputGlyphs[0]) . '</span>';
                          if ($level == 2 && $exL){
-                            $html .= $exL;
-                        }
+                             $html .= $exL;
+                             }
                          $html .= '&nbsp; &raquo; &raquo; &nbsp;';
                          if ($level == 2 && $exB){
-                            $html .= $exB;
-                        }
+                             $html .= $exB;
+                             }
                          $html .= '<span class="changed">&nbsp;' . $this -> formatEntityArr($substitute) . '</span>';
                          if ($level == 2 && $exL){
-                            $html .= $exL;
-                        }
+                             $html .= $exL;
+                             }
                          $html .= '&nbsp; <span class="unicode">' . $this -> formatUniArr($substitute) . '</span> ';
                          $html .= '</div>';
                          }
@@ -1947,25 +1941,25 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                          $inputGlyphs = $Lookup[$i]['Subtable'][$c]['subs'][$s]['Replace'];
                          $substitute = $Lookup[$i]['Subtable'][$c]['subs'][$s]['substitute'][0];
                          if ($level == 2 && strpos($coverage, $inputGlyphs[0]) === false){
-                            continue;
-                        }
+                             continue;
+                             }
                          $html .= '<div class="substitution">';
                          $html .= '<span class="unicode">' . $this -> formatUni($inputGlyphs[0]) . '&nbsp;</span> ';
                          if ($level == 2 && $exB){
-                            $html .= $exB;
-                        }
+                             $html .= $exB;
+                             }
                          $html .= '<span class="unchanged">&nbsp;' . $this -> formatEntity($inputGlyphs[0]) . '</span>';
                          if ($level == 2 && $exL){
-                            $html .= $exL;
-                        }
+                             $html .= $exL;
+                             }
                          $html .= '&nbsp; &raquo; &raquo; &nbsp;';
                          if ($level == 2 && $exB){
-                            $html .= $exB;
-                        }
+                             $html .= $exB;
+                             }
                          $html .= '<span class="changed">&nbsp;' . $this -> formatEntity($substitute) . '</span>';
                          if ($level == 2 && $exL){
-                            $html .= $exL;
-                        }
+                             $html .= $exL;
+                             }
                          $html .= '&nbsp; <span class="unicode">' . $this -> formatUni($substitute) . '</span> ';
                          if (count($Lookup[$i]['Subtable'][$c]['subs'][$s]['substitute']) > 1){
                              for ($alt = 1;$alt < count($Lookup[$i]['Subtable'][$c]['subs'][$s]['substitute']);$alt++){
@@ -1985,25 +1979,25 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                          $inputGlyphs = $Lookup[$i]['Subtable'][$c]['subs'][$s]['Replace'];
                          $substitute = $Lookup[$i]['Subtable'][$c]['subs'][$s]['substitute'][0];
                          if ($level == 2 && strpos($coverage, $inputGlyphs[0]) === false){
-                            continue;
-                        }
+                             continue;
+                             }
                          $html .= '<div class="substitution">';
                          $html .= '<span class="unicode">' . $this -> formatUniArr($inputGlyphs) . '&nbsp;</span> ';
                          if ($level == 2 && $exB){
-                            $html .= $exB;
-                        }
+                             $html .= $exB;
+                             }
                          $html .= '<span class="unchanged">&nbsp;' . $this -> formatEntityArr($inputGlyphs) . '</span>';
                          if ($level == 2 && $exL){
-                            $html .= $exL;
-                        }
+                             $html .= $exL;
+                             }
                          $html .= '&nbsp; &raquo; &raquo; &nbsp;';
                          if ($level == 2 && $exB){
-                            $html .= $exB;
-                        }
+                             $html .= $exB;
+                             }
                          $html .= '<span class="changed">&nbsp;' . $this -> formatEntity($substitute) . '</span>';
                          if ($level == 2 && $exL){
-                            $html .= $exL;
-                        }
+                             $html .= $exL;
+                             }
                          $html .= '&nbsp; <span class="unicode">' . $this -> formatUni($substitute) . '</span> ';
                          $html .= '</div>';
                          }
@@ -2223,7 +2217,7 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                          if (count($subRule['rules'])) $volt[] = $subRule;
                          }
                     
-                    // print_r($Lookup[$i]);
+                     // print_r($Lookup[$i]);
                     // print_r($volt[(count($volt)-1)]); exit;
                 }
                  // LookupType 6: Chaining Contextual Substitution Subtable
@@ -2249,18 +2243,18 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                  $nInput = count($inputGlyphs);
                                 
                                  if ($rule['BacktrackGlyphCount']){
-                                    $backtrackGlyphs = $rule['BacktrackGlyphs'];
-                                }
+                                     $backtrackGlyphs = $rule['BacktrackGlyphs'];
+                                     }
                                 else{
-                                    $backtrackGlyphs = array();
-                                }
+                                     $backtrackGlyphs = array();
+                                     }
                                 
                                  if ($rule['LookaheadGlyphCount']){
-                                    $lookaheadGlyphs = $rule['LookaheadGlyphs'];
-                                }
+                                     $lookaheadGlyphs = $rule['LookaheadGlyphs'];
+                                     }
                                 else{
-                                    $lookaheadGlyphs = array();
-                                }
+                                     $lookaheadGlyphs = array();
+                                     }
                                 
                                 
                                  $exampleB = array();
@@ -2290,8 +2284,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                     $exB = '';
                                      $exL = '';
                                      if (count($exampleB)){
-                                        $exB .= '<span class="backtrack">' . implode('&#x200d;', $exampleB) . '</span>';
-                                    }
+                                         $exB .= '<span class="backtrack">' . implode('&#x200d;', $exampleB) . '</span>';
+                                         }
                                     
                                      if ($seqIndex > 0){
                                          $exB .= '<span class="inputother">';
@@ -2310,8 +2304,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                          }
                                     
                                      if (count($exampleL)){
-                                        $exL .= '<span class="lookahead">' . implode('&#x200d;', $exampleL) . '</span>';
-                                    }
+                                         $exL .= '<span class="lookahead">' . implode('&#x200d;', $exampleL) . '</span>';
+                                         }
                                     
                                      $html .= '<div class="sequenceIndex">Substitution Position: ' . $seqIndex . '</div>';
                                     
@@ -2370,8 +2364,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                          }
                                      }
                                 else{
-                                    $backtrackGlyphs = array();
-                                }
+                                     $backtrackGlyphs = array();
+                                     }
                                 
                                  if ($rule['LookaheadGlyphCount']){
                                      for ($gcl = 0;$gcl < $rule['LookaheadGlyphCount'];$gcl++){
@@ -2380,8 +2374,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                          }
                                      }
                                 else{
-                                    $lookaheadGlyphs = array();
-                                }
+                                     $lookaheadGlyphs = array();
+                                     }
                                 
                                 
                                  $exampleB = array();
@@ -2431,8 +2425,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                     $exB = '';
                                      $exL = '';
                                      if (count($exampleB)){
-                                        $exB .= '<span class="backtrack">' . implode('&#x200d;', $exampleB) . '</span>';
-                                    }
+                                         $exB .= '<span class="backtrack">' . implode('&#x200d;', $exampleB) . '</span>';
+                                         }
                                     
                                      if ($seqIndex > 0){
                                          $exB .= '<span class="inputother">';
@@ -2461,8 +2455,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                          }
                                     
                                      if (count($exampleL)){
-                                        $exL .= '<span class="lookahead">' . implode('&#x200d;', $exampleL) . '</span>';
-                                    }
+                                         $exL .= '<span class="lookahead">' . implode('&#x200d;', $exampleL) . '</span>';
+                                         }
                                     
                                      $html .= '<div class="sequenceIndex">Substitution Position: ' . $seqIndex . '</div>';
                                     
@@ -2480,8 +2474,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                              }
                         
                         
-                        // print_r($Lookup[$i]['Subtable'][$c]); exit;
-                         }
+                         // print_r($Lookup[$i]['Subtable'][$c]); exit;
+                    }
                      // Format 3: Coverage-based Chaining Context Glyph Substitution  p259
                     else if ($SubstFormat == 3){
                          $html .= '<div class="lookuptypesub">Format 3: Coverage-based Chaining Context Glyph Substitution  </div>';
@@ -2494,15 +2488,15 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                              $backtrackGlyphs = $Lookup[$i]['Subtable'][$c]['CoverageBacktrackGlyphs'];
                              }
                         else{
-                            $backtrackGlyphs = array();
-                        }
+                             $backtrackGlyphs = array();
+                             }
                         
                          if ($Lookup[$i]['Subtable'][$c]['LookaheadGlyphCount']){
                              $lookaheadGlyphs = $Lookup[$i]['Subtable'][$c]['CoverageLookaheadGlyphs'];
                              }
                         else{
-                            $lookaheadGlyphs = array();
-                        }
+                             $lookaheadGlyphs = array();
+                             }
                         
                         
                          $exampleB = array();
@@ -2533,8 +2527,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                             $exB = '';
                              $exL = '';
                              if (count($exampleB)){
-                                $exB .= '<span class="backtrack">' . implode('&#x200d;', $exampleB) . '</span>';
-                            }
+                                 $exB .= '<span class="backtrack">' . implode('&#x200d;', $exampleB) . '</span>';
+                                 }
                             
                              if ($seqIndex > 0){
                                  $exB .= '<span class="inputother">';
@@ -2553,8 +2547,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                  }
                             
                              if (count($exampleL)){
-                                $exL .= '<span class="lookahead">' . implode('&#x200d;', $exampleL) . '</span>';
-                            }
+                                 $exL .= '<span class="lookahead">' . implode('&#x200d;', $exampleL) . '</span>';
+                                 }
                             
                              $html .= '<div class="sequenceIndex">Substitution Position: ' . $seqIndex . '</div>';
                             
@@ -2573,12 +2567,12 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              $html .= '</div>';
              }
          if ($level == 1){
-            $this -> mpdf -> WriteHTML($html);
-        }
+             $this -> mpdf -> WriteHTML($html);
+             }
         else{
-            return $html;
-        }
-        // print_r($Lookup); exit;
+             return $html;
+             }
+         // print_r($Lookup); exit;
     }
      // =====================================================================================
     // =====================================================================================
@@ -2587,22 +2581,22 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
          $ignore = false;
          // Flag & 0x0008 = Ignore Marks
         if ((($flag & 0x0008) == 0x0008) && strpos($this -> GlyphClassMarks, $glyph)){
-            $ignore = true;
-        }
+             $ignore = true;
+             }
          if ((($flag & 0x0004) == 0x0004) && strpos($this -> GlyphClassLigatures, $glyph)){
-            $ignore = true;
-        }
+             $ignore = true;
+             }
          if ((($flag & 0x0002) == 0x0002) && strpos($this -> GlyphClassBases, $glyph)){
-            $ignore = true;
-        }
+             $ignore = true;
+             }
          // Flag & 0xFF?? = MarkAttachmentType
         if (($flag & 0xFF00) && strpos($this -> MarkAttachmentType[($flag >> 8)], $glyph)){
-            $ignore = true;
-        }
+             $ignore = true;
+             }
          // Flag & 0x0010 = UseMarkFilteringSet
         if (($flag & 0x0010) && strpos($this -> MarkGlyphSets[$MarkFilteringSet], $glyph)){
-            $ignore = true;
-        }
+             $ignore = true;
+             }
          return $ignore;
          }
     
@@ -2640,8 +2634,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
         if (($flag & 0x0004) == 0x0004){
              $ignoreflag += 4;
              if ($str){
-                $str .= "|";
-            }
+                 $str .= "|";
+                 }
              // $str .= $this->GlyphClassLigatures;
             $str .= "Ligature Glyphs ";
              }
@@ -2649,8 +2643,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
         if (($flag & 0x0002) == 0x0002){
              $ignoreflag += 2;
              if ($str){
-                $str .= "|";
-            }
+                 $str .= "|";
+                 }
              // $str .= $this->GlyphClassBases;
             $str .= "Base Glyphs ";
              }
@@ -2712,14 +2706,14 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
          $str = "";
          for($i = 0;$i < $nInput;$i++){
              if ($i > 0){
-                $str .= $ignore . " ";
-            }
+                 $str .= $ignore . " ";
+                 }
              if ($i >= $seqIndex && $i < ($seqIndex + $mLen)){
-                $str .= "" . $lookupGlyphs[($i - $seqIndex)] . "";
-            }
+                 $str .= "" . $lookupGlyphs[($i - $seqIndex)] . "";
+                 }
             else{
-                $str .= "" . $inputGlyphs[($i)] . "";
-            }
+                 $str .= "" . $inputGlyphs[($i)] . "";
+                 }
              }
          return $str;
          }
@@ -2732,8 +2726,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
         $str = "";
          for($i = 1;$i <= count($inputGlyphs);$i++){
              if ($i > 1){
-                $str .= $ignore . " ";
-            }
+                 $str .= $ignore . " ";
+                 }
              $str .= "" . $inputGlyphs[($i-1)] . "";
              }
          return $str;
@@ -2776,15 +2770,15 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
         // $mLen 	nGlyphs in the secondary Lookup match - if no secondary lookup, should=$nInput
         // $seqIndex	Sequence Index to apply the secondary match
         if ($ignore == "()"){
-            $ign = false;
-        }
+             $ign = false;
+             }
         else{
-            $ign = true;
-        }
+             $ign = true;
+             }
          $str = "";
          if ($nInput == 1){
-            $str = $REPL;
-        }
+             $str = $REPL;
+             }
         else if ($nInput > 1){
              if ($mLen == $nInput){ // whole string replaced
                  $str = $REPL;
@@ -2798,18 +2792,18 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
             else{ // if only part of string replaced:
                  for($x = 1;$x < ($seqIndex + 1);$x++){
                      if ($x == 1){
-                        $str .= '\\' . ($nBsubs + 1);
-                    }
+                         $str .= '\\' . ($nBsubs + 1);
+                         }
                     else{
                          if ($ign){
-                            $str .= '\\' . ($nBsubs + (2 * ($x-1)));
-                        }
+                             $str .= '\\' . ($nBsubs + (2 * ($x-1)));
+                             }
                          $str .= ' \\' . ($nBsubs + 1 + (2 * ($x-1)));
                          }
                      }
                  if ($seqIndex > 0){
-                    $str .= " ";
-                }
+                     $str .= " ";
+                     }
                  $str .= $REPL;
                  if ($ign){
                      for($x = (max(($seqIndex + 1), 2));$x < ($seqIndex + 1 + $mLen);$x++){ // move IGNORES after replacement
@@ -2818,8 +2812,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                      }
                  for($x = ($seqIndex + 1 + $mLen);$x <= $nInput;$x++){
                      if ($ign){
-                        $str .= '\\' . ($nBsubs + (2 * ($x-1)));
-                    }
+                         $str .= '\\' . ($nBsubs + (2 * ($x-1)));
+                         }
                      $str .= ' \\' . ($nBsubs + 1 + (2 * ($x-1)));
                      }
                  }
@@ -2838,11 +2832,11 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              for ($gid = 0;$gid < $CoverageGlyphCount;$gid++){
                  $glyphID = $this -> read_ushort();
                  if ($convert2hex){
-                    $g[] = unicode_hex($this -> glyphToChar[$glyphID][0]);
-                }
+                     $g[] = unicode_hex($this -> glyphToChar[$glyphID][0]);
+                     }
                 else{
-                    $g[] = $glyphID;
-                }
+                     $g[] = $glyphID;
+                     }
                  }
              }
          if ($CoverageFormat == 2){
@@ -2854,11 +2848,11 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                  for ($gid = $start;$gid <= $end;$gid++){
                      $glyphID = $gid;
                      if ($convert2hex){
-                        $g[] = unicode_hex($this -> glyphToChar[$glyphID][0]);
-                    }
+                         $g[] = unicode_hex($this -> glyphToChar[$glyphID][0]);
+                         }
                     else{
-                        $g[] = $glyphID;
-                    }
+                         $g[] = $glyphID;
+                         }
                      }
                  }
              }
@@ -2899,8 +2893,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              }
          $gbc = array();
          foreach($GlyphByClass AS $class => $garr){
-            $gbc[$class] = implode('|', $garr);
-        }
+             $gbc[$class] = implode('|', $garr);
+             }
          return $gbc;
          }
      // ////////////////////////////////////////////////////////////////////////////////
@@ -2958,8 +2952,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                      $LookUpOrder = $this -> read_ushort(); //==NULL
                      $ReqFeatureIndex = $this -> read_ushort();
                      if ($ReqFeatureIndex != 0xFFFF){
-                        $FeatureIndex[] = $ReqFeatureIndex ;
-                    }
+                         $FeatureIndex[] = $ReqFeatureIndex ;
+                         }
                      $FeatureCount = $this -> read_ushort();
                      for ($i = 0;$i < $FeatureCount;$i++){
                          $FeatureIndex[] = $this -> read_ushort(); // = index of feature
@@ -2967,9 +2961,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                      $ffeats[$st][$t] = $FeatureIndex;
                      }
                  }
-            // print_r($ffeats); exit;
-            
-             // Feauture List => LookupListIndex es
+             // print_r($ffeats); exit;
+            // Feauture List => LookupListIndex es
             $this -> seek($FeatureList_offset);
              $FeatureCount = $this -> read_ushort();
              $Feature = array();
@@ -2996,7 +2989,7 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                          }
                      }
                  }
-            // print_r($ffeats); exit; 
+             // print_r($ffeats); exit;
             // =====================================================================================
             $gpos = array();
              $GPOSScriptLang = array();
@@ -3012,8 +3005,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                          $gpos[$st][$t][$ft['tag']] = $ft['LookupListIndex'];
                          }
                      if (!isset($GPOSScriptLang[$st])){
-                        $GPOSScriptLang[$st] = '';
-                    }
+                         $GPOSScriptLang[$st] = '';
+                         }
                      $GPOSScriptLang[$st] .= $t . ' ';
                      }
                  }
@@ -3098,9 +3091,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                  }
              ksort($lul); // Order the Lookups in the order they are in the GUSB table, regardless of Feature order
              $this -> _getGPOSarray($Lookup, $lul, $st);
-            // print_r($lul); exit;
-            
-             return array($GPOSScriptLang, $gpos, $Lookup);
+             // print_r($lul); exit;
+            return array($GPOSScriptLang, $gpos, $Lookup);
             
              } // end if GPOS
          }
@@ -3109,40 +3101,40 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
     // =====================================================================================
     // =====================================================================================
     // =====================================================================================
-    // /////////////////////////////////////////////////////////////////////////////////////// 
+    // ///////////////////////////////////////////////////////////////////////////////////////
     // GPOS functions
     function _getGPOSarray(& $Lookup, $lul, $scripttag, $level = 1, $lcoverage = '', $exB = '', $exL = ''){
          // Process (3) LookupList for specific Script-LangSys
         $html = '';
          if ($level == 1){
-            $html .= '<bookmark level="0" content="GPOS features">';
-        }
+             $html .= '<bookmark level="0" content="GPOS features">';
+             }
          foreach($lul AS $luli => $tag){
              $html .= '<div class="level' . $level . '">';
              $html .= '<h5 class="level' . $level . '">';
              if ($level == 1){
-                $html .= '<bookmark level="1" content="' . $tag . ' [#' . $luli . ']">';
-            }
+                 $html .= '<bookmark level="1" content="' . $tag . ' [#' . $luli . ']">';
+                 }
              $html .= 'Lookup #' . $luli . ' [tag: <span style="color:#000066;">' . $tag . '</span>]</h5>';
              $ignore = $this -> _getGSUBignoreString($Lookup[$luli]['Flag'], $Lookup[$luli]['MarkFilteringSet']);
              if ($ignore){
-                $html .= '<div class="ignore">Ignoring: ' . $ignore . '</div> ';
-            }
+                 $html .= '<div class="ignore">Ignoring: ' . $ignore . '</div> ';
+                 }
             
              $Type = $Lookup[$luli]['Type'];
              $Flag = $Lookup[$luli]['Flag'];
              if (($Flag & 0x0001) == 1){
-                $dir = 'RTL';
-            }
+                 $dir = 'RTL';
+                 }
             else{
-                $dir = 'LTR';
-            }
+                 $dir = 'LTR';
+                 }
             
              for ($c = 0;$c < $Lookup[$luli]['SubtableCount'] ;$c++){
                  $html .= '<div class="subtable">Subtable #' . $c;
                  if ($level == 1){
-                    $html .= '<bookmark level="2" content="Subtable #' . $c . '">';
-                }
+                     $html .= '<bookmark level="2" content="Subtable #' . $c . '">';
+                     }
                  $html .= '</div>';
                 
                  // Lets start
@@ -3167,36 +3159,36 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                          $glyphs = $this -> _getCoverage(); // Array of Hex Glyphs
                          for($g = 0;$g < count($glyphs);$g++){
                              if ($level == 2 && strpos($lcoverage, $glyphs[$g]) === false){
-                                continue;
-                            }
+                                 continue;
+                                 }
                             
                              $html .= '<div class="substitution">';
                              $html .= '<span class="unicode">' . $this -> formatUni($glyphs[$g]) . '&nbsp;</span> ';
                              if ($level == 2 && $exB){
-                                $html .= $exB;
-                            }
+                                 $html .= $exB;
+                                 }
                              $html .= '<span class="unchanged">&nbsp;' . $this -> formatEntity($glyphs[$g]) . '</span>';
                              if ($level == 2 && $exL){
-                                $html .= $exL;
-                            }
+                                 $html .= $exL;
+                                 }
                              $html .= '&nbsp; &raquo; &raquo; &nbsp;';
                              if ($level == 2 && $exB){
-                                $html .= $exB;
-                            }
+                                 $html .= $exB;
+                                 }
                              $html .= '<span class="changed" style="font-feature-settings:\'' . $tag . '\' 1;">&nbsp;' . $this -> formatEntity($glyphs[$g]) . '</span>';
                              if ($level == 2 && $exL){
-                                $html .= $exL;
-                            }
+                                 $html .= $exL;
+                                 }
                              $html .= ' <span class="unicode">';
                              if ($Value['XPlacement']){
-                                $html .= ' Xpl: ' . $Value['XPlacement'] . ';';
-                            }
+                                 $html .= ' Xpl: ' . $Value['XPlacement'] . ';';
+                                 }
                              if ($Value['YPlacement']){
-                                $html .= ' YPl: ' . $Value['YPlacement'] . ';';
-                            }
+                                 $html .= ' YPl: ' . $Value['YPlacement'] . ';';
+                                 }
                              if ($Value['XAdvance']){
-                                $html .= ' Xadv: ' . $Value['XAdvance'];
-                            }
+                                 $html .= ' Xadv: ' . $Value['XAdvance'];
+                                 }
                              $html .= '</span>';
                              $html .= '</div>';
                              }
@@ -3220,37 +3212,37 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                         
                          for($g = 0;$g < count($glyphs);$g++){
                              if ($level == 2 && strpos($lcoverage, $glyphs[$g]) === false){
-                                continue;
-                            }
+                                 continue;
+                                 }
                              $Value = $Values[$g];
                             
                              $html .= '<div class="substitution">';
                              $html .= '<span class="unicode">' . $this -> formatUni($glyphs[$g]) . '&nbsp;</span> ';
                              if ($level == 2 && $exB){
-                                $html .= $exB;
-                            }
+                                 $html .= $exB;
+                                 }
                              $html .= '<span class="unchanged">&nbsp;' . $this -> formatEntity($glyphs[$g]) . '</span>';
                              if ($level == 2 && $exL){
-                                $html .= $exL;
-                            }
+                                 $html .= $exL;
+                                 }
                              $html .= '&nbsp; &raquo; &raquo; &nbsp;';
                              if ($level == 2 && $exB){
-                                $html .= $exB;
-                            }
+                                 $html .= $exB;
+                                 }
                              $html .= '<span class="changed" style="font-feature-settings:\'' . $tag . '\' 1;">&nbsp;' . $this -> formatEntity($glyphs[$g]) . '</span>';
                              if ($level == 2 && $exL){
-                                $html .= $exL;
-                            }
+                                 $html .= $exL;
+                                 }
                              $html .= ' <span class="unicode">';
                              if ($Value['XPlacement']){
-                                $html .= ' Xpl: ' . $Value['XPlacement'] . ';';
-                            }
+                                 $html .= ' Xpl: ' . $Value['XPlacement'] . ';';
+                                 }
                              if ($Value['YPlacement']){
-                                $html .= ' YPl: ' . $Value['YPlacement'] . ';';
-                            }
+                                 $html .= ' YPl: ' . $Value['YPlacement'] . ';';
+                                 }
                              if ($Value['XAdvance']){
-                                $html .= ' Xadv: ' . $Value['XAdvance'];
-                            }
+                                 $html .= ' Xadv: ' . $Value['XAdvance'];
+                                 }
                              $html .= '</span>';
                              $html .= '</div>';
                              }
@@ -3280,13 +3272,13 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                          $glyphs = $this -> _getCoverage(); // Array of Hex Glyphs
                          for($p = 0;$p < $PairSetCount;$p++){
                              if ($level == 2 && strpos($lcoverage, $glyphs[$p]) === false){
-                                continue;
-                            }
+                                 continue;
+                                 }
                              $this -> seek($PairSetOffset[$p]);
                              // First Glyph = $glyphs[$p]
                             // Takes too long e.g. Calibri font - just list kerning pairs with this:
                             $html .= '<div class="glyphs">';
-                            $html .= '<span class="unchanged">&nbsp;' . $this -> formatEntity($glyphs[$p]) . ' </span>';
+                             $html .= '<span class="unchanged">&nbsp;' . $this -> formatEntity($glyphs[$p]) . ' </span>';
                             
                              // PairSet table
                             $PairValueCount = $this -> read_ushort();
@@ -3311,7 +3303,7 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                          }
                                      }
                                 
-                                $html .= ' ' . $this -> formatEntity($SecondGlyph) . ' ';
+                                 $html .= ' ' . $this -> formatEntity($SecondGlyph) . ' ';
                                 
                                 /**
                                  * $html .= '<div class="substitution">';
@@ -3335,7 +3327,7 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                  */
                                 
                                  }
-                            $html .= '</div>';
+                             $html .= '</div>';
                              }
                          }
                      // ===========
@@ -3388,46 +3380,46 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                         
                                         
                                          if (!$Value1['XPlacement'] && !$Value1['YPlacement'] && !$Value1['XAdvance'] && !$Value2['XPlacement'] && !$Value2['YPlacement'] && !$Value2['XAdvance']){
-                                            continue;
-                                        }
+                                             continue;
+                                             }
                                         
                                         
                                          $html .= '<div class="substitution">';
                                          $html .= '<span class="unicode">' . $this -> formatUni($FirstGlyph) . '&nbsp;</span> ';
                                          if ($level == 2 && $exB){
-                                            $html .= $exB;
-                                        }
+                                             $html .= $exB;
+                                             }
                                          $html .= '<span class="unchanged">&nbsp;' . $this -> formatEntity($FirstGlyph) . $this -> formatEntity($SecondGlyph) . '</span>';
                                          if ($level == 2 && $exL){
-                                            $html .= $exL;
-                                        }
+                                             $html .= $exL;
+                                             }
                                          $html .= '&nbsp; &raquo; &raquo; &nbsp;';
                                          if ($level == 2 && $exB){
-                                            $html .= $exB;
-                                        }
+                                             $html .= $exB;
+                                             }
                                          $html .= '<span class="changed" style="font-feature-settings:\'' . $tag . '\' 1;">&nbsp;' . $this -> formatEntity($FirstGlyph) . $this -> formatEntity($SecondGlyph) . '</span>';
                                          if ($level == 2 && $exL){
-                                            $html .= $exL;
-                                        }
+                                             $html .= $exL;
+                                             }
                                          $html .= ' <span class="unicode">';
                                          if ($Value1['XPlacement']){
-                                            $html .= ' Xpl[1]: ' . $Value1['XPlacement'] . ';';
-                                        }
+                                             $html .= ' Xpl[1]: ' . $Value1['XPlacement'] . ';';
+                                             }
                                          if ($Value1['YPlacement']){
-                                            $html .= ' YPl[1]: ' . $Value1['YPlacement'] . ';';
-                                        }
+                                             $html .= ' YPl[1]: ' . $Value1['YPlacement'] . ';';
+                                             }
                                          if ($Value1['XAdvance']){
-                                            $html .= ' Xadv[1]: ' . $Value1['XAdvance'];
-                                        }
+                                             $html .= ' Xadv[1]: ' . $Value1['XAdvance'];
+                                             }
                                          if ($Value2['XPlacement']){
-                                            $html .= ' Xpl[2]: ' . $Value2['XPlacement'] . ';';
-                                        }
+                                             $html .= ' Xpl[2]: ' . $Value2['XPlacement'] . ';';
+                                             }
                                          if ($Value2['YPlacement']){
-                                            $html .= ' YPl[2]: ' . $Value2['YPlacement'] . ';';
-                                        }
+                                             $html .= ' YPl[2]: ' . $Value2['YPlacement'] . ';';
+                                             }
                                          if ($Value2['XAdvance']){
-                                            $html .= ' Xadv[2]: ' . $Value2['XAdvance'];
-                                        }
+                                             $html .= ' Xadv[2]: ' . $Value2['XAdvance'];
+                                             }
                                          $html .= '</span>';
                                          $html .= '</div>';
                                         
@@ -3471,8 +3463,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                      $x = 0;
                                      }
                                 else{
-                                    $x = $x - ($pdfWidth * $this -> mpdf -> fonts[$this -> fontkey]['desc']['unitsPerEm'] / 1000);
-                                }
+                                     $x = $x - ($pdfWidth * $this -> mpdf -> fonts[$this -> fontkey]['desc']['unitsPerEm'] / 1000);
+                                     }
                                  }
                              $html .= " Entry X: " . $x . " Y: " . $y . "; ";
                              }
@@ -3484,8 +3476,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                      $x = 0;
                                      }
                                 else{
-                                    $x = $x - ($pdfWidth * $this -> mpdf -> fonts[$this -> fontkey]['desc']['unitsPerEm'] / 1000);
-                                }
+                                     $x = $x - ($pdfWidth * $this -> mpdf -> fonts[$this -> fontkey]['desc']['unitsPerEm'] / 1000);
+                                     }
                                  }
                              $html .= " Exit X: " . $x . " Y: " . $y . "; ";
                              }
@@ -3513,19 +3505,19 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                      $html .= '<div class="glyphs">Marks: ';
                      for($i = 0;$i < count($MarkGlyphs);$i++){
                          if ($level == 2 && strpos($lcoverage, $MarkGlyphs[$i]) === false){
-                            continue;
-                        }
+                             continue;
+                             }
                         else{
                              if (!$firstMark){
-                                $firstMark = $MarkGlyphs[$i];
-                            }
+                                 $firstMark = $MarkGlyphs[$i];
+                                 }
                              }
                          $html .= ' ' . $this -> formatEntity($MarkGlyphs[$i]) . ' ';
                          }
                      $html .= '</div>';
                      if (!$firstMark){
-                        return;
-                    }
+                         return;
+                         }
                     
                      $html .= '<div class="glyphs">Bases: ';
                      for($j = 0;$j < count($BaseGlyphs);$j++){
@@ -3565,12 +3557,12 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                      $MarkRecord = array();
                      for ($i = 0;$i < count($MarkGlyphs);$i++){
                          if ($level == 2 && strpos($lcoverage, $MarkGlyphs[$i]) === false){
-                            continue;
-                        }
+                             continue;
+                             }
                         else{
                              if (!$firstMark){
-                                $firstMark = $MarkGlyphs[$i];
-                            }
+                                 $firstMark = $MarkGlyphs[$i];
+                                 }
                              }
                          // Get the relevant MarkRecord
                         $MarkRecord[$i] = $this -> _getMarkRecord($MarkArray, $i);
@@ -3579,8 +3571,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                          }
                      $html .= '</span></div>';
                      if (!$firstMark){
-                        return;
-                    }
+                         return;
+                         }
                     
                      $this -> seek($LigatureArray);
                      $LigatureCount = $this -> read_ushort();
@@ -3640,12 +3632,12 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                      $html .= '<div class="glyphs">Marks: <span class="unchanged">';
                      for($i = 0;$i < count($Mark1Glyphs);$i++){
                          if ($level == 2 && strpos($lcoverage, $Mark1Glyphs[$i]) === false){
-                            continue;
-                        }
+                             continue;
+                             }
                         else{
                              if (!$firstMark){
-                                $firstMark = $Mark1Glyphs[$i];
-                            }
+                                 $firstMark = $Mark1Glyphs[$i];
+                                 }
                              }
                          $html .= ' ' . $this -> formatEntity($Mark1Glyphs[$i]) . ' ';
                          }
@@ -3788,8 +3780,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                             $exB = '';
                              $exL = '';
                              if (count($exampleB)){
-                                $exB .= '<span class="backtrack">' . implode('&#x200d;', $exampleB) . '</span>';
-                            }
+                                 $exB .= '<span class="backtrack">' . implode('&#x200d;', $exampleB) . '</span>';
+                                 }
                             
                              if ($seqIndex > 0){
                                  $exB .= '<span class="inputother">';
@@ -3808,8 +3800,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                                  }
                             
                              if (count($exampleL)){
-                                $exL .= '<span class="lookahead">' . implode('&#x200d;', $exampleL) . '</span>';
-                            }
+                                 $exL .= '<span class="lookahead">' . implode('&#x200d;', $exampleL) . '</span>';
+                                 }
                             
                              $html .= '<div class="sequenceIndex">Substitution Position: ' . $seqIndex . '</div>';
                             
@@ -3829,12 +3821,12 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              $html .= '</div>';
              }
          if ($level == 1){
-            $this -> mpdf -> WriteHTML($html);
-        }
+             $this -> mpdf -> WriteHTML($html);
+             }
         else{
-            return $html;
-        }
-        // print_r($Lookup); exit;
+             return $html;
+             }
+         // print_r($Lookup); exit;
     }
      // =====================================================================================
     // =====================================================================================
@@ -3852,43 +3844,43 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
         $vra = array();
          // Horizontal adjustment for placement-in design units
         if (($ValueFormat & 0x0001) == 0x0001){
-            $vra['XPlacement'] = $this -> read_short();
-        }
+             $vra['XPlacement'] = $this -> read_short();
+             }
          // Vertical adjustment for placement-in design units
         if (($ValueFormat & 0x0002) == 0x0002){
-            $vra['YPlacement'] = $this -> read_short();
-        }
+             $vra['YPlacement'] = $this -> read_short();
+             }
          // Horizontal adjustment for advance-in design units (only used for horizontal writing)
         if (($ValueFormat & 0x0004) == 0x0004){
-            $vra['XAdvance'] = $this -> read_short();
-        }
+             $vra['XAdvance'] = $this -> read_short();
+             }
          // Vertical adjustment for advance-in design units (only used for vertical writing)
         if (($ValueFormat & 0x0008) == 0x0008){
-            $this -> read_short();
-        }
+             $this -> read_short();
+             }
          // Offset to Device table for horizontal placement-measured from beginning of PosTable (may be NULL)
         if (($ValueFormat & 0x0010) == 0x0010){
-            $this -> read_ushort();
-        }
+             $this -> read_ushort();
+             }
          // Offset to Device table for vertical placement-measured from beginning of PosTable (may be NULL)
         if (($ValueFormat & 0x0020) == 0x0020){
-            $this -> read_ushort();
-        }
+             $this -> read_ushort();
+             }
          // Offset to Device table for horizontal advance-measured from beginning of PosTable (may be NULL)
         if (($ValueFormat & 0x0040) == 0x0040){
-            $this -> read_ushort();
-        }
+             $this -> read_ushort();
+             }
          // Offset to Device table for vertical advance-measured from beginning of PosTable (may be NULL)
         if (($ValueFormat & 0x0080) == 0x0080){
-            $this -> read_ushort();
-        }
+             $this -> read_ushort();
+             }
          return $vra;
          }
     
      function _getAnchorTable($offset = 0){
          if ($offset){
-            $this -> seek($offset);
-        }
+             $this -> seek($offset);
+             }
          $AnchorFormat = $this -> read_ushort();
          $XCoordinate = $this -> read_short();
          $YCoordinate = $this -> read_short();
@@ -3969,19 +3961,19 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
          $aw = 0;
          $this -> charWidths = str_pad('', 256 * 256 * 2, "\x00");
          if ($this -> maxUniChar > 65536){
-            $this -> charWidths .= str_pad('', 256 * 256 * 2, "\x00");
-        } // Plane 1 SMP
+             $this -> charWidths .= str_pad('', 256 * 256 * 2, "\x00");
+             } // Plane 1 SMP
          if ($this -> maxUniChar > 131072){
-            $this -> charWidths .= str_pad('', 256 * 256 * 2, "\x00");
-        } // Plane 2 SMP
+             $this -> charWidths .= str_pad('', 256 * 256 * 2, "\x00");
+             } // Plane 2 SMP
          $nCharWidths = 0;
          if (($numberOfHMetrics * 4) < $this -> maxStrLenRead){
              $data = $this -> get_chunk($start, ($numberOfHMetrics * 4));
              $arr = unpack("n*", $data);
              }
         else{
-            $this -> seek($start);
-        }
+             $this -> seek($start);
+             }
          for($glyph = 0; $glyph < $numberOfHMetrics; $glyph++){
              if (($numberOfHMetrics * 4) < $this -> maxStrLenRead){
                  $aw = $arr[($glyph * 2) + 1];
@@ -3993,8 +3985,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              if (isset($glyphToChar[$glyph]) || $glyph == 0){
                 
                  if ($aw >= (1 << 15)){
-                    $aw = 0;
-                } // 1.03 Some (arabic) fonts have -ve values for width
+                     $aw = 0;
+                     } // 1.03 Some (arabic) fonts have -ve values for width
                  // although should be unsigned value - comes out as e.g. 65108 (intended -50)
                 if ($glyph == 0){
                      $this -> defaultWidth = $scale * $aw;
@@ -4005,8 +3997,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                     if ($char != 0 && $char != 65535){
                          $w = intval(round($scale * $aw));
                          if ($w == 0){
-                            $w = 65535;
-                        }
+                             $w = 65535;
+                             }
                          if ($char < 196608){
                              $this -> charWidths[$char * 2] = chr($w >> 8);
                              $this -> charWidths[$char * 2 + 1] = chr($w & 0xFF);
@@ -4021,8 +4013,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
          $diff = $numGlyphs - $numberOfHMetrics;
          $w = intval(round($scale * $aw));
          if ($w == 0){
-            $w = 65535;
-        }
+             $w = 65535;
+             }
          for($pos = 0; $pos < $diff; $pos++){
              $glyph = $pos + $numberOfHMetrics;
              if (isset($glyphToChar[$glyph])){
@@ -4096,22 +4088,22 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
          $this -> skip(6);
          $endCount = array();
          for($i = 0; $i < $segCount; $i++){
-            $endCount[] = $this -> read_ushort();
-        }
+             $endCount[] = $this -> read_ushort();
+             }
          $this -> skip(2);
          $startCount = array();
          for($i = 0; $i < $segCount; $i++){
-            $startCount[] = $this -> read_ushort();
-        }
+             $startCount[] = $this -> read_ushort();
+             }
          $idDelta = array();
          for($i = 0; $i < $segCount; $i++){
-            $idDelta[] = $this -> read_short();
-        } // ???? was unsigned short
+             $idDelta[] = $this -> read_short();
+             } // ???? was unsigned short
          $idRangeOffset_start = $this -> _pos;
          $idRangeOffset = array();
          for($i = 0; $i < $segCount; $i++){
-            $idRangeOffset[] = $this -> read_ushort();
-        }
+             $idRangeOffset[] = $this -> read_ushort();
+             }
         
          for ($n = 0;$n < $segCount;$n++){
              $endpoint = ($endCount[$n] + 1);
@@ -4131,27 +4123,27 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                      }
                  $charToGlyph[$unichar] = $glyph;
                  if ($unichar < 196608){
-                    $this -> maxUniChar = max($unichar, $this -> maxUniChar);
-                }
+                     $this -> maxUniChar = max($unichar, $this -> maxUniChar);
+                     }
                  $glyphToChar[$glyph][] = $unichar;
                  }
              }
         
          }
     
-    function formatUni($char){
+     function formatUni($char){
          $x = preg_replace('/^[0]*/', '', $char);
          $x = str_pad($x, 4, '0', STR_PAD_LEFT);
          $d = hexdec($x);
          if (($d > 57343 && $d < 63744) || ($d > 122879 && $d < 126977)){
-            $id = 'M';
-        } // E000 - F8FF, 1E000-1F000
+             $id = 'M';
+             } // E000 - F8FF, 1E000-1F000
          else{
-            $id = 'U';
-        }
+             $id = 'U';
+             }
          return $id . '+' . $x;
-        }
-    function formatEntity($char, $allowjoining = false){
+         }
+     function formatEntity($char, $allowjoining = false){
          $char = preg_replace('/^[0]/', '', $char);
          $x = '&#x' . $char . ';';
          if (strpos($this -> GlyphClassMarks, $char) !== false){
@@ -4160,23 +4152,23 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                  }
              }
          return $x;
-        }
-    function formatUniArr($arr){
+         }
+     function formatUniArr($arr){
          $s = array();
          foreach($arr AS $c){
              $x = preg_replace('/^[0]*/', '', $c);
              $d = hexdec($x);
              if (($d > 57343 && $d < 63744) || ($d > 122879 && $d < 126977)){
-                $id = 'M';
-            } // E000 - F8FF, 1E000-1F000
+                 $id = 'M';
+                 } // E000 - F8FF, 1E000-1F000
              else{
-                $id = 'U';
-            }
+                 $id = 'U';
+                 }
              $s[] = $id . '+' . str_pad($x, 4, '0', STR_PAD_LEFT);
              }
          return implode(', ', $s);
-        }
-    function formatEntityArr($arr){
+         }
+     function formatEntityArr($arr){
          $s = array();
          foreach($arr AS $c){
              $c = preg_replace('/^[0]/', '', $c);
@@ -4187,39 +4179,39 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              $s[] = $x;
              }
          return implode(' ', $s); // ZWNJ? &#x200d;
-        }
-    function formatClassArr($arr){
+         }
+     function formatClassArr($arr){
          $s = array();
          foreach($arr AS $c){
              $x = preg_replace('/^[0]*/', '', $c);
              $d = hexdec($x);
              if (($d > 57343 && $d < 63744) || ($d > 122879 && $d < 126977)){
-                $id = 'M';
-            } // E000 - F8FF, 1E000-1F000
+                 $id = 'M';
+                 } // E000 - F8FF, 1E000-1F000
              else{
-                $id = 'U';
-            }
+                 $id = 'U';
+                 }
              $s[] = $id . '+' . str_pad($x, 4, '0', STR_PAD_LEFT);
              }
          return implode(', ', $s);
-        }
-    function formatUniStr($str){
+         }
+     function formatUniStr($str){
          $s = array();
          $arr = explode('|', $str);
          foreach($arr AS $c){
              $x = preg_replace('/^[0]*/', '', $c);
              $d = hexdec($x);
              if (($d > 57343 && $d < 63744) || ($d > 122879 && $d < 126977)){
-                $id = 'M';
-            } // E000 - F8FF, 1E000-1F000
+                 $id = 'M';
+                 } // E000 - F8FF, 1E000-1F000
              else{
-                $id = 'U';
-            }
+                 $id = 'U';
+                 }
              $s[] = $id . '+' . str_pad($x, 4, '0', STR_PAD_LEFT);
              }
          return implode(', ', $s);
-        }
-    function formatEntityStr($str){
+         }
+     function formatEntityStr($str){
          $s = array();
          $arr = explode('|', $str);
          foreach($arr AS $c){
@@ -4231,8 +4223,8 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              $s[] = $x;
              }
          return implode(' ', $s); // ZWNJ? &#x200d;
-        }
-    function formatEntityFirst($str){
+         }
+     function formatEntityFirst($str){
          $arr = explode('|', $str);
          $char = preg_replace('/^[0]/', '', $arr[0]);
          $x = '&#x' . $char . ';';
@@ -4240,9 +4232,9 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              $x = '&#x25cc;' . $x;
              }
          return $x;
-        }
+         }
     
-    }
+     }
 
 
 ?>

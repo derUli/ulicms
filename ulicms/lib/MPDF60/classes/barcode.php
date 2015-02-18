@@ -25,12 +25,9 @@
 // 
 // See LICENSE.TXT file for more information.
 // ----------------------------------------------------------------------------
-
 // Description : PHP class to creates array representations for
 // common 1D barcodes to be used with TCPDF.
-
 // Author: Nicola Asuni
-
 // (c) Copyright:
 // Nicola Asuni
 // Tecnick.com S.r.l.
@@ -58,11 +55,11 @@ class PDFBarcode{
      public function getChecksum($code, $type){
          $this -> setBarcode($code, $type);
          if (!$this -> barcode_array){
-            return '';
-        }
+             return '';
+             }
         else{
-            return $this -> barcode_array['checkdigit'];
-        }
+             return $this -> barcode_array['checkdigit'];
+             }
          }
     
      public function setBarcode($code, $type, $pr = ''){
@@ -195,8 +192,8 @@ class PDFBarcode{
              case 'C93':{ // CODE 93 - USS-93
                  $arrcode = $this -> barcode_code93($code);
                  if ($arrcode == false){
-                    break;
-                }
+                     break;
+                     }
                  $arrcode['nom-X'] = 0.381; // Nominal value for X-dim (bar width) in mm (2 X min. spec.)
                  $arrcode['nom-H'] = 10; // Nominal value for Height of Full bar in mm (non-spec.)
                  $arrcode['lightmL'] = 10; // LEFT light margin =  x X-dim (spec.)
@@ -206,15 +203,15 @@ class PDFBarcode{
                  }
              case 'CODE11':{ // CODE 11
                  if ($pr > 0){
-                    $this -> print_ratio = $pr;
-                }
+                     $this -> print_ratio = $pr;
+                     }
                 else{
-                    $this -> print_ratio = 3;
-                } // spec: Pr= 1:2.24 - 1:3.5
+                     $this -> print_ratio = 3;
+                     } // spec: Pr= 1:2.24 - 1:3.5
                  $arrcode = $this -> barcode_code11($code);
                  if ($arrcode == false){
-                    break;
-                }
+                     break;
+                     }
                  $arrcode['nom-X'] = 0.381; // Nominal value for X-dim (bar width) in mm (2 X min. spec.)
                  $arrcode['nom-H'] = 10; // Nominal value for Height of Full bar in mm (non-spec.)
                  $arrcode['lightmL'] = 10; // LEFT light margin =  x X-dim (spec.)
@@ -225,14 +222,14 @@ class PDFBarcode{
              case 'MSI': // MSI (Variation of Plessey code)
         case 'MSI+':{ // MSI + CHECKSUM (modulo 11)
                  if (strtoupper($type) == 'MSI'){
-                    $arrcode = $this -> barcode_msi($code, false);
-                }
+                     $arrcode = $this -> barcode_msi($code, false);
+                     }
                  if (strtoupper($type) == 'MSI+'){
-                    $arrcode = $this -> barcode_msi($code, true);
-                }
+                     $arrcode = $this -> barcode_msi($code, true);
+                     }
                  if ($arrcode == false){
-                    break;
-                }
+                     break;
+                     }
                  $arrcode['nom-X'] = 0.381; // Nominal value for X-dim (bar width) in mm (2 X min. spec.)
                  $arrcode['nom-H'] = 10; // Nominal value for Height of Full bar in mm (non-spec.)
                  $arrcode['lightmL'] = 12; // LEFT light margin =  x X-dim (spec.)
@@ -242,17 +239,17 @@ class PDFBarcode{
                  }
              case 'CODABAR':{ // CODABAR
                  if ($pr > 0){
-                    $this -> print_ratio = $pr;
-                }
+                     $this -> print_ratio = $pr;
+                     }
                 else{
-                    $this -> print_ratio = 2.5;
-                } // spec: Pr= 1:2 - 1:3 (>2.2 if X<0.50)
+                     $this -> print_ratio = 2.5;
+                     } // spec: Pr= 1:2 - 1:3 (>2.2 if X<0.50)
                  if (strtoupper($type) == 'CODABAR'){
-                    $arrcode = $this -> barcode_codabar($code);
-                }
+                     $arrcode = $this -> barcode_codabar($code);
+                     }
                  if ($arrcode == false){
-                    break;
-                }
+                     break;
+                     }
                  $arrcode['nom-X'] = 0.381; // Nominal value for X-dim (bar width) in mm (2 X min. spec.)
                  $arrcode['nom-H'] = 10; // Nominal value for Height of Full bar in mm (non-spec.)
                  $arrcode['lightmL'] = 10; // LEFT light margin =  x X-dim (spec.)
@@ -267,26 +264,26 @@ class PDFBarcode{
         case 'EAN128B': // EAN 128 B
         case 'EAN128C':{ // EAN 128 C
                  if (strtoupper($type) == 'C128A'){
-                    $arrcode = $this -> barcode_c128($code, 'A');
-                }
+                     $arrcode = $this -> barcode_c128($code, 'A');
+                     }
                  if (strtoupper($type) == 'C128B'){
-                    $arrcode = $this -> barcode_c128($code, 'B');
-                }
+                     $arrcode = $this -> barcode_c128($code, 'B');
+                     }
                  if (strtoupper($type) == 'C128C'){
-                    $arrcode = $this -> barcode_c128($code, 'C');
-                }
+                     $arrcode = $this -> barcode_c128($code, 'C');
+                     }
                  if (strtoupper($type) == 'EAN128A'){
-                    $arrcode = $this -> barcode_c128($code, 'A', true);
-                }
+                     $arrcode = $this -> barcode_c128($code, 'A', true);
+                     }
                  if (strtoupper($type) == 'EAN128B'){
-                    $arrcode = $this -> barcode_c128($code, 'B', true);
-                }
+                     $arrcode = $this -> barcode_c128($code, 'B', true);
+                     }
                  if (strtoupper($type) == 'EAN128C'){
-                    $arrcode = $this -> barcode_c128($code, 'C', true);
-                }
+                     $arrcode = $this -> barcode_c128($code, 'C', true);
+                     }
                  if ($arrcode == false){
-                    break;
-                }
+                     break;
+                     }
                  $arrcode['nom-X'] = 0.381; // Nominal value for X-dim (bar width) in mm (2 X min. spec.)
                  $arrcode['nom-H'] = 10; // Nominal value for Height of Full bar in mm (non-spec.)
                  $arrcode['lightmL'] = 10; // LEFT light margin =  x X-dim (spec.)
@@ -299,28 +296,28 @@ class PDFBarcode{
         case 'C39E': // CODE 39 EXTENDED
         case 'C39E+':{ // CODE 39 EXTENDED + CHECKSUM
                  if ($pr > 0){
-                    $this -> print_ratio = $pr;
-                }
+                     $this -> print_ratio = $pr;
+                     }
                 else{
-                    $this -> print_ratio = 2.5;
-                } // spec: Pr= 1:2 - 1:3 (>2.2 if X<0.50)
+                     $this -> print_ratio = 2.5;
+                     } // spec: Pr= 1:2 - 1:3 (>2.2 if X<0.50)
                  $code = str_replace(chr(194) . chr(160), ' ', $code); // mPDF 5.3.95  (for utf-8 encoded)
                  $code = str_replace(chr(160), ' ', $code); // mPDF 5.3.95	(for win-1252)
                  if (strtoupper($type) == 'C39'){
-                    $arrcode = $this -> barcode_code39($code, false, false);
-                }
+                     $arrcode = $this -> barcode_code39($code, false, false);
+                     }
                  if (strtoupper($type) == 'C39+'){
-                    $arrcode = $this -> barcode_code39($code, false, true);
-                }
+                     $arrcode = $this -> barcode_code39($code, false, true);
+                     }
                  if (strtoupper($type) == 'C39E'){
-                    $arrcode = $this -> barcode_code39($code, true, false);
-                }
+                     $arrcode = $this -> barcode_code39($code, true, false);
+                     }
                  if (strtoupper($type) == 'C39E+'){
-                    $arrcode = $this -> barcode_code39($code, true, true);
-                }
+                     $arrcode = $this -> barcode_code39($code, true, true);
+                     }
                  if ($arrcode == false){
-                    break;
-                }
+                     break;
+                     }
                  $arrcode['nom-X'] = 0.381; // Nominal value for X-dim (bar width) in mm (2 X min. spec.)
                  $arrcode['nom-H'] = 10; // Nominal value for Height of Full bar in mm (non-spec.)
                  $arrcode['lightmL'] = 10; // LEFT light margin =  x X-dim (spec.)
@@ -331,20 +328,20 @@ class PDFBarcode{
              case 'S25': // Standard 2 of 5
         case 'S25+':{ // Standard 2 of 5 + CHECKSUM
                  if ($pr > 0){
-                    $this -> print_ratio = $pr;
-                }
+                     $this -> print_ratio = $pr;
+                     }
                 else{
-                    $this -> print_ratio = 3;
-                } // spec: Pr=1:3/1:4.5
+                     $this -> print_ratio = 3;
+                     } // spec: Pr=1:3/1:4.5
                  if (strtoupper($type) == 'S25'){
-                    $arrcode = $this -> barcode_s25($code, false);
-                }
+                     $arrcode = $this -> barcode_s25($code, false);
+                     }
                  if (strtoupper($type) == 'S25+'){
-                    $arrcode = $this -> barcode_s25($code, true);
-                }
+                     $arrcode = $this -> barcode_s25($code, true);
+                     }
                  if ($arrcode == false){
-                    break;
-                }
+                     break;
+                     }
                  $arrcode['nom-X'] = 0.381; // Nominal value for X-dim (bar width) in mm (2 X min. spec.)
                  $arrcode['nom-H'] = 10; // Nominal value for Height of Full bar in mm (non-spec.)
                  $arrcode['lightmL'] = 10; // LEFT light margin =  x X-dim (spec.)
@@ -355,20 +352,20 @@ class PDFBarcode{
              case 'I25': // Interleaved 2 of 5
         case 'I25+':{ // Interleaved 2 of 5 + CHECKSUM
                  if ($pr > 0){
-                    $this -> print_ratio = $pr;
-                }
+                     $this -> print_ratio = $pr;
+                     }
                 else{
-                    $this -> print_ratio = 2.5;
-                } // spec: Pr= 1:2 - 1:3 (>2.2 if X<0.50)
+                     $this -> print_ratio = 2.5;
+                     } // spec: Pr= 1:2 - 1:3 (>2.2 if X<0.50)
                  if (strtoupper($type) == 'I25'){
-                    $arrcode = $this -> barcode_i25($code, false);
-                }
+                     $arrcode = $this -> barcode_i25($code, false);
+                     }
                  if (strtoupper($type) == 'I25+'){
-                    $arrcode = $this -> barcode_i25($code, true);
-                }
+                     $arrcode = $this -> barcode_i25($code, true);
+                     }
                  if ($arrcode == false){
-                    break;
-                }
+                     break;
+                     }
                  $arrcode['nom-X'] = 0.381; // Nominal value for X-dim (bar width) in mm (2 X min. spec.)
                  $arrcode['nom-H'] = 10; // Nominal value for Height of Full bar in mm (non-spec.)
                  $arrcode['lightmL'] = 10; // LEFT light margin =  x X-dim (spec.)
@@ -379,20 +376,20 @@ class PDFBarcode{
              case 'I25B': // Interleaved 2 of 5 + Bearer bars
         case 'I25B+':{ // Interleaved 2 of 5 + CHECKSUM + Bearer bars
                  if ($pr > 0){
-                    $this -> print_ratio = $pr;
-                }
+                     $this -> print_ratio = $pr;
+                     }
                 else{
-                    $this -> print_ratio = 2.5;
-                } // spec: Pr= 1:2 - 1:3 (>2.2 if X<0.50)
+                     $this -> print_ratio = 2.5;
+                     } // spec: Pr= 1:2 - 1:3 (>2.2 if X<0.50)
                  if (strtoupper($type) == 'I25B'){
-                    $arrcode = $this -> barcode_i25($code, false);
-                }
+                     $arrcode = $this -> barcode_i25($code, false);
+                     }
                  if (strtoupper($type) == 'I25B+'){
-                    $arrcode = $this -> barcode_i25($code, true);
-                }
+                     $arrcode = $this -> barcode_i25($code, true);
+                     }
                  if ($arrcode == false){
-                    break;
-                }
+                     break;
+                     }
                  $arrcode['nom-X'] = 0.381; // Nominal value for X-dim (bar width) in mm (2 X min. spec.)
                  $arrcode['nom-H'] = 10; // Nominal value for Height of Full bar in mm (non-spec.)
                  $arrcode['lightmL'] = 10; // LEFT light margin =  x X-dim (spec.)
@@ -490,11 +487,11 @@ class PDFBarcode{
                      }
                  $x = $chr[$char][$j];
                  if ($x == 2){
-                    $w = $this -> print_ratio;
-                }
+                     $w = $this -> print_ratio;
+                     }
                 else{
-                    $w = 1;
-                }
+                     $w = 1;
+                     }
                 
                  $bararray['bcode'][$k] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
                  $bararray['maxw'] += $w;
@@ -690,7 +687,7 @@ class PDFBarcode{
                      $t = false; // space
                      }
                  $w = $chr[$char]{
-                    $j};
+                     $j};
                  $bararray['bcode'][$k] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
                  $bararray['maxw'] += $w;
                  ++$k;
@@ -948,11 +945,11 @@ class PDFBarcode{
                      }
                  $x = $seq[$j];
                  if ($x == 2){
-                    $w = $this -> print_ratio;
-                }
+                     $w = $this -> print_ratio;
+                     }
                 else{
-                    $w = 1;
-                }
+                     $w = 1;
+                     }
                 
                  $bararray['bcode'][$k] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
                  $bararray['maxw'] += $w;
@@ -1336,16 +1333,16 @@ class PDFBarcode{
          // calculate check character
         $sum = $startid;
          if ($ean){
-        $code = chr(102) . $code;
-    } // Add FNC 1 - which identifies it as EAN-128
+         $code = chr(102) . $code;
+         } // Add FNC 1 - which identifies it as EAN-128
      $clen = strlen($code);
      for ($i = 0; $i < $clen; ++$i){
          if ($ean && $i == 0){
-            $sum += 102;
-        }
+             $sum += 102;
+             }
         else{
-            $sum += (strpos($keys, $code[$i]) * ($i + 1));
-        }
+             $sum += (strpos($keys, $code[$i]) * ($i + 1));
+             }
          }
      $check = ($sum % 103);
      $checkdigit = $check ;
@@ -1439,36 +1436,36 @@ class PDFBarcode{
              // manufacturer code ends in 000, 100, or 200
             $upce_code = substr($code, 2, 2) . substr($code, 9, 3) . substr($code, 4, 1);
              if ($prod_code > 999){
-                $invalid_upce = true;
-            }
+                 $invalid_upce = true;
+                 }
              }else{
              $tmp = substr($code, 5, 2);
              if ($tmp == '00'){
                  // manufacturer code ends in 00
                 $upce_code = substr($code, 2, 3) . substr($code, 10, 2) . '3';
                  if ($prod_code > 99){
-                    $invalid_upce = true;
-                }
+                     $invalid_upce = true;
+                     }
                  }else{
                  $tmp = substr($code, 6, 1);
                  if ($tmp == '0'){
                      // manufacturer code ends in 0
                     $upce_code = substr($code, 2, 4) . substr($code, 11, 1) . '4';
                      if ($prod_code > 9){
-                        $invalid_upce = true;
-                    }
+                         $invalid_upce = true;
+                         }
                      }else{
                      // manufacturer code does not end in zero
                     $upce_code = substr($code, 2, 5) . substr($code, 11, 1);
                      if ($prod_code > 9){
-                        $invalid_upce = true;
-                    }
+                         $invalid_upce = true;
+                         }
                      }
                  }
              }
          if ($invalid_upce){
-            die("Error - UPC-A cannot produce a valid UPC-E barcode");
-        } // Error generating a UPCE code
+             die("Error - UPC-A cannot produce a valid UPC-E barcode");
+             } // Error generating a UPCE code
          }
      // Convert digits to bars
     $codes = array(
@@ -1941,11 +1938,11 @@ class PDFBarcode{
                  }
              $x = $seq[$j];
              if ($x == 2){
-                $w = $this -> print_ratio;
-            }
+                 $w = $this -> print_ratio;
+                 }
             else{
-                $w = 1;
-            }
+                 $w = 1;
+                 }
              $bararray['bcode'][$k] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
              $bararray['maxw'] += $w;
              ++$k;
@@ -2038,11 +2035,11 @@ class PDFBarcode{
                  }
              $x = $seq[$j];
              if ($x == 2){
-                $w = $this -> print_ratio;
-            }
+                 $w = $this -> print_ratio;
+                 }
             else{
-                $w = 1;
-            }
+                 $w = 1;
+                 }
              $bararray['bcode'][$k] = array('t' => $t, 'w' => $w, 'h' => 1, 'p' => 0);
              $bararray['maxw'] += $w;
              ++$k;

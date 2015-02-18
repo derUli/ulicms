@@ -10,9 +10,9 @@ $feeds["en"] = "http://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en";
 
 if(isset($feeds[$_SESSION["system_language"]])){
      $feed_url = $feeds[$_SESSION["system_language"]];
-    }else{
+     }else{
      $feed_url = $feeds["en"];
-    }
+     }
 
 $rss -> load($feed_url);
 $feed = array();
@@ -24,7 +24,7 @@ foreach ($rss -> getElementsByTagName('item') as $node){
          'date' => $node -> getElementsByTagName('pubDate') -> item(0) -> nodeValue,
         );
      array_push($feed, $item);
-    }
+     }
 
 $limit = 5;
 
@@ -37,6 +37,6 @@ for($x = 0;$x < $limit;$x++){
      echo '<p><strong><a href="' . $link . '" title="' . $title . '">' . $title . '</a></strong><br />';
      echo '<small><em>Posted on ' . $date . '</em></small></p>';
      echo '<p>' . $description . '</p>';
-    }
+     }
 
  

@@ -15,11 +15,14 @@
 $font = 'dejavusanscondensed'; // Use internal mPDF font-name
 
 
+
 $min = 0x0020; // Minimum Unicode value to show
 $max = 0x2FFFF; // Maximum Unicode value to show
 
 
+
 $showmissing = false; // Show all missing unicode blocks / characters
+
 
 
 
@@ -64,18 +67,17 @@ foreach($unifile AS $line){
     else if (preg_match('/^([0-9A-Za-z]{4});/', $line, $m)){
          $unichars[hexdec($m[1])] = hexdec($m[1]);
          }
-    }
+     }
 
 // loads array $unicode_ranges
 include('UnicodeRanges.php');
 // ==============================================================
 // ==============================================================
 
-
 $cw = file_get_contents(_MPDF_TTFONTDATAPATH . $font . '.cw.dat');
 if (!$cw){
-    die("Error - Must be able to read font metrics file: " . _MPDF_TTFONTDATAPATH . $font . '.cw.dat');
-}
+     die("Error - Must be able to read font metrics file: " . _MPDF_TTFONTDATAPATH . $font . '.cw.dat');
+    }
 $counter = 0;
 
 
@@ -83,10 +85,10 @@ include(_MPDF_TTFONTDATAPATH . $font . '.mtx.php');
 
 if ($smp){
      $max = min($max, 131071);
-    }
+     }
 else{
      $max = min($max, 65535);
-    }
+     }
 
 
 $justfinishedblank = false;
@@ -140,9 +142,9 @@ for ($i = $min; $i <= $max; ++$i){
                      $anyvalid = false;
                      for ($j = 0; $j < 16; $j++){
                          if (isset($unichars[$i + $j])){
-                            $anyvalid = true;
-                            break;
-                        }
+                             $anyvalid = true;
+                             break;
+                             }
                          }
                      if ($range && $range == $lastrange){
                          if (!$anyvalid){
@@ -159,7 +161,7 @@ for ($i = $min; $i <= $max; ++$i){
                     else if($range){
                          $html .= '</tr></table><br />';
                          $mpdf -> WriteHTML($html);
-                        $html = '';
+                         $html = '';
                          $html .= '<table cellpadding="2" cellspacing="0" style="font-family:' . $font . ';text-align:center; border-collapse: collapse; ">';
                          $html .= '<tr><td colspan="18" style="font-family:dejavusanscondensed;font-size:8pt;font-weight:bold">' . strtoupper($range) . ' (U+' . $rangestart . '-U+' . $rangeend . ')</td></tr>';
                          $html .= '<tr><td></td>';
@@ -174,8 +176,8 @@ for ($i = $min; $i <= $max; ++$i){
                      }
                  $i += 16;
                  if ($i > $max){
-                    break 2;
-                }
+                     break 2;
+                     }
                  }
              }
          foreach($unicode_ranges AS $urk => $ur){
@@ -191,7 +193,7 @@ for ($i = $min; $i <= $max; ++$i){
          if ($i > 0 && ($i % 16) == 0 && ($range != $lastrange)){
              $html .= '</tr></table><br />';
              $mpdf -> WriteHTML($html);
-            $html = '';
+             $html = '';
              $html .= '<table cellpadding="2" cellspacing="0" style="font-family:' . $font . ';text-align:center; border-collapse: collapse; ">';
              $html .= '<tr><td colspan="18" style="font-family:dejavusanscondensed;font-size:8pt;font-weight:bold">' . strtoupper($range) . ' (U+' . $rangestart . '-U+' . $rangeend . ')</td></tr>';
              $html .= '<tr><td></td>';
@@ -209,52 +211,53 @@ for ($i = $min; $i <= $max; ++$i){
     
      // Add dotted circle to any character (mark) with width=0
     if ($mpdf -> _charDefined($cw, $i) && _getCharWidth($cw, $i) == 0){
-        $html .= '<td>&#x25cc;&#' . $i . ';</td>';
-        $counter++;
-    }
+         $html .= '<td>&#x25cc;&#' . $i . ';</td>';
+         $counter++;
+         }
     else{
          if ($mpdf -> _charDefined($cw, $i)){
-            $html .= '<td>&#' . $i . ';</td>';
-            $counter++;
-        }
+             $html .= '<td>&#' . $i . ';</td>';
+             $counter++;
+             }
         else if (isset($unichars[$i])){
-            $html .= '<td style="background-color: #FFAAAA;"></td>';
-        }
+             $html .= '<td style="background-color: #FFAAAA;"></td>';
+             }
         else{
-            $html .= '<td style="background-color: #555555;"></td>';
-        }
+             $html .= '<td style="background-color: #555555;"></td>';
+             }
          }
      }
 
  if (($i % 16) > 0){
      for ($j = ($i % 16); $j < 16; ++$j){
-        $html .= '<td style="background-color: #555555;"></td>';
-    }
+         $html .= '<td style="background-color: #555555;"></td>';
+         }
      }
  $html .= '</tr></table><br />';
 // ==============================================================
 function _getCharWidth(& $cw, $u, $isdef = true){
      if ($u == 0){
-        $w = false;
-    }
+         $w = false;
+         }
     else{
-        $w = (ord($cw[$u * 2]) << 8) + ord($cw[$u * 2 + 1]);
-    }
+         $w = (ord($cw[$u * 2]) << 8) + ord($cw[$u * 2 + 1]);
+         }
      if ($w == 65535){
-        return 0;
-    }
+         return 0;
+         }
     else if ($w){
-        return $w;
-    }
+         return $w;
+         }
     else if ($isdef){
-        return false;
-    }
+         return false;
+         }
     else{
-        return 0;
-    }
-    }
+         return 0;
+         }
+     }
 // ==============================================================
 $mpdf -> WriteHTML($html); // Separate Paragraphs  defined by font
+
 
 
 $mpdf -> Output();
@@ -264,5 +267,4 @@ exit;
 // ==============================================================
 // ==============================================================
 // ==============================================================
-
 ?>

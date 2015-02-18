@@ -678,6 +678,6 @@ if (!defined('__CLASS_QRCODE__'))
                  }
              }
          }
-    }
+     }
 
 ?>

@@ -3,100 +3,100 @@
 
 class SEA{
     
-    // South East Asian shaper
+     // South East Asian shaper
     // sea_category
     const OT_X = 0;
-    const OT_C = 1;
-    const OT_IV = 2; # Independent Vowel
-    const OT_T = 3; # Tone Marks
-    const OT_H = 4; # Halant
-    const OT_A = 10; # Anusvara
-    const OT_GB = 12; # Generic Base	(OT_DOTTEDCIRCLE in Indic)
-    const OT_CM = 17; # Consonant Medial
-    const OT_MR = 22; # Medial Ra
-    const OT_VAbv = 26;
-    const OT_VBlw = 27;
-    const OT_VPre = 28;
-    const OT_VPst = 29;
-    // ? From Indic categories
+     const OT_C = 1;
+     const OT_IV = 2; # Independent Vowel
+     const OT_T = 3; # Tone Marks
+     const OT_H = 4; # Halant
+     const OT_A = 10; # Anusvara
+     const OT_GB = 12; # Generic Base	(OT_DOTTEDCIRCLE in Indic)
+     const OT_CM = 17; # Consonant Medial
+     const OT_MR = 22; # Medial Ra
+     const OT_VAbv = 26;
+     const OT_VBlw = 27;
+     const OT_VPre = 28;
+     const OT_VPst = 29;
+     // ? From Indic categories
     const OT_ZWNJ = 5;
-    const OT_ZWJ = 6;
-    const OT_M = 7;
-    const OT_SM = 8;
-    const OT_VD = 9;
-    const OT_NBSP = 11;
-    const OT_RS = 13;
-    const OT_Coeng = 14;
-    const OT_Repha = 15;
-    const OT_Ra = 16;
+     const OT_ZWJ = 6;
+     const OT_M = 7;
+     const OT_SM = 8;
+     const OT_VD = 9;
+     const OT_NBSP = 11;
+     const OT_RS = 13;
+     const OT_Coeng = 14;
+     const OT_Repha = 15;
+     const OT_Ra = 16;
     
-    // Based on sea_category used to make string to find syllables
+     // Based on sea_category used to make string to find syllables
     // OT_ to string character (using e.g. OT_C from INDIC) hb-ot-shape-complex-sea-private.hh
     public static $sea_category_char = array(
         'x',
-        'C',
-        'V',
-        'T',
-        'H',
-        'x',
-        'x',
-        'x',
-        'x',
-        'x',
-        'A',
-        'x',
-        'G',
-        'x',
-        'x',
-        'x',
-        'x',
-        'M',
-        'x',
-        'x',
-        'x',
-        'x',
-        'R',
-        'x',
-        'x',
-        'x',
-        'a',
-        'b',
-        'p',
-        't',
+         'C',
+         'V',
+         'T',
+         'H',
+         'x',
+         'x',
+         'x',
+         'x',
+         'x',
+         'A',
+         'x',
+         'G',
+         'x',
+         'x',
+         'x',
+         'x',
+         'M',
+         'x',
+         'x',
+         'x',
+         'x',
+         'R',
+         'x',
+         'x',
+         'x',
+         'a',
+         'b',
+         'p',
+         't',
         );
     
     
     /**
      * Visual positions in a syllable from left to right.
      */
-    // sea_position
+     // sea_position
     const POS_START = 0;
     
-    const POS_RA_TO_BECOME_REPH = 1;
-    const POS_PRE_M = 2;
-    const POS_PRE_C = 3;
+     const POS_RA_TO_BECOME_REPH = 1;
+     const POS_PRE_M = 2;
+     const POS_PRE_C = 3;
     
-    const POS_BASE_C = 4;
-    const POS_AFTER_MAIN = 5;
+     const POS_BASE_C = 4;
+     const POS_AFTER_MAIN = 5;
     
-    const POS_ABOVE_C = 6;
+     const POS_ABOVE_C = 6;
     
-    const POS_BEFORE_SUB = 7;
-    const POS_BELOW_C = 8;
-    const POS_AFTER_SUB = 9;
+     const POS_BEFORE_SUB = 7;
+     const POS_BELOW_C = 8;
+     const POS_AFTER_SUB = 9;
     
-    const POS_BEFORE_POST = 10;
-    const POS_POST_C = 11;
-    const POS_AFTER_POST = 12;
+     const POS_BEFORE_POST = 10;
+     const POS_POST_C = 11;
+     const POS_AFTER_POST = 12;
     
-    const POS_FINAL_C = 13;
-    const POS_SMVD = 14;
+     const POS_FINAL_C = 13;
+     const POS_SMVD = 14;
     
-    const POS_END = 15;
+     const POS_END = 15;
     
     
     
-    public static function set_sea_properties(& $info, $scriptblock){
+     public static function set_sea_properties(& $info, $scriptblock){
          $u = $info['uni'];
          $type = self :: sea_get_categories($u);
          $cat = ($type & 0x7F);
@@ -107,8 +107,8 @@ class SEA{
          */
          // Medial Ra
         if ($u == 0x1A55 || $u == 0xAA34){
-            $cat = self :: OT_MR;
-        }
+             $cat = self :: OT_MR;
+             }
         
         /**
          * Re-assign position.
@@ -116,28 +116,28 @@ class SEA{
          if ($cat == self :: OT_M){ // definitely "OT_M" in HarfBuzz - although this does not seem to have been defined ? should be OT_MR
              switch ($pos){
              case self :: POS_PRE_C: $cat = self :: OT_VPre;
-                break;
+                 break;
              case self :: POS_ABOVE_C: $cat = self :: OT_VAbv;
-                break;
+                 break;
              case self :: POS_BELOW_C: $cat = self :: OT_VBlw;
-                break;
+                 break;
              case self :: POS_POST_C: $cat = self :: OT_VPst;
-                break;
+                 break;
                  }
              }
         
          $info['sea_category'] = $cat;
          $info['sea_position'] = $pos;
-        }
+         }
     
-    // syllable_type
+     // syllable_type
     const CONSONANT_SYLLABLE = 0;
-    const BROKEN_CLUSTER = 1;
-    const NON_SEA_CLUSTER = 2;
+     const BROKEN_CLUSTER = 1;
+     const NON_SEA_CLUSTER = 2;
     
     
     
-    public static function set_syllables(& $o, $s, & $broken_syllables){
+     public static function set_syllables(& $o, $s, & $broken_syllables){
          $ptr = 0;
          $syllable_serial = 1;
          $broken_syllables = false;
@@ -159,19 +159,19 @@ class SEA{
                  }
             
              for ($i = $ptr; $i < $ptr + $syllable_length; $i++){
-                $o[$i]['syllable'] = ($syllable_serial << 4) | $syllable_type;
-            }
+                 $o[$i]['syllable'] = ($syllable_serial << 4) | $syllable_type;
+                 }
              $ptr += $syllable_length ;
              $syllable_serial++;
              if ($syllable_serial == 16) $syllable_serial = 1;
              }
-        }
+         }
     
-    public static function initial_reordering(& $info, $GSUBdata, $broken_syllables, $scriptblock, $dottedcircle){
+     public static function initial_reordering(& $info, $GSUBdata, $broken_syllables, $scriptblock, $dottedcircle){
         
          if ($broken_syllables && $dottedcircle){
-            self :: insert_dotted_circles ($info, $dottedcircle);
-        }
+             self :: insert_dotted_circles ($info, $dottedcircle);
+             }
         
          $count = count($info);
          if (!$count) return;
@@ -185,9 +185,9 @@ class SEA{
                  }
              }
          self :: initial_reordering_syllable($info, $GSUBdata, $scriptblock, $last, $count);
-        }
+         }
     
-    public static function insert_dotted_circles(& $info, $dottedcircle){
+     public static function insert_dotted_circles(& $info, $dottedcircle){
          $idx = 0;
          $last_syllable = 0;
          while ($idx < count($info)){
@@ -201,20 +201,20 @@ class SEA{
             else
                  $idx++;
              }
-        }
+         }
     
     
     
     
-    public static function initial_reordering_syllable (& $info, $GSUBdata, $scriptblock, $start, $end){
+     public static function initial_reordering_syllable (& $info, $GSUBdata, $scriptblock, $start, $end){
         /**
          * broken_cluster: We already inserted dotted-circles, so just call the standalone_cluster.
          */
         
          $syllable_type = ($info[$start]['syllable'] & 0x0F);
          if ($syllable_type == self :: NON_SEA_CLUSTER){
-            return;
-        }
+             return;
+             }
          if ($syllable_type == self :: BROKEN_CLUSTER){
             /**
              * For dotted-circle, this is what Uniscribe does:
@@ -256,9 +256,9 @@ class SEA{
          */
          self :: bubble_sort ($info, $start, $end - $start);
         
-        }
+         }
     
-    public static function final_reordering (& $info, $GSUBdata, $scriptblock){
+     public static function final_reordering (& $info, $GSUBdata, $scriptblock){
          $count = count($info);
          if (!$count) return;
          $last = 0;
@@ -272,19 +272,19 @@ class SEA{
              }
          self :: final_reordering_syllable ($info, $GSUBdata, $scriptblock, $last, $count);
         
-        }
+         }
     
-    public static function final_reordering_syllable (& $info, $GSUBdata, $scriptblock, $start, $end){
+     public static function final_reordering_syllable (& $info, $GSUBdata, $scriptblock, $start, $end){
         /**
          * Nothing to do here at present!
          */
         
-        }
+         }
     
     
     
     
-    public static $sea_table = array(
+     public static $sea_table = array(
         
         /**
          * New Tai Lue  (1980..19DF)
@@ -431,20 +431,20 @@ class SEA{
     
     
     
-    public static function sea_get_categories ($u){
+     public static function sea_get_categories ($u){
          if (0x1980 <= $u && $u <= 0x19DF) return self :: $sea_table[$u - 0x1980]; // offset 0 for New Tai Lue  
          if (0x1A20 <= $u && $u <= 0x1AAF) return self :: $sea_table[$u - 0x1A20 + 96]; // offset for Tai Tham  
          if (0xAA00 <= $u && $u <= 0xAA5F) return self :: $sea_table[$u - 0xAA00 + 96 + 144]; // Cham  
          if ($u == 0x00A0) return 3851; // (ISC_CP | (IMC_x << 8))
          if ($u == 0x25CC) return 3851; // (ISC_CP | (IMC_x << 8))
          return 3840; // (ISC_x | (IMC_x << 8))
-        }
+         }
     
     
-    public static function bubble_sort(& $arr, $start, $len){
+     public static function bubble_sort(& $arr, $start, $len){
          if ($len < 2){
-            return;
-        }
+             return;
+             }
          $k = $start + $len-2;
          while ($k >= $start){
              for ($j = $start; $j <= $k; $j++){
@@ -456,11 +456,11 @@ class SEA{
                  }
              $k--;
              }
-        }
+         }
     
     
     
     
-    } // end Class
+     } // end Class
 
 ?>

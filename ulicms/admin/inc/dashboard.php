@@ -67,9 +67,9 @@ if($acl -> hasPermission("dashboard")){
                  ?>
              </div> 
 <?php }
-            ?>
+             ?>
 <h2 class="accordion-header"><?php echo TRANSLATION_ULICMS_NEWS;
-            ?></h2>
+             ?></h2>
 <div class="accordion-content" id="ulicms-feed">
 <img src="gfx/loading.gif" alt="Feed wird geladen..."/>
 </div>
@@ -80,7 +80,7 @@ $(document).ready(function() {
 </script>
 
 <?php }
-        ?>
+         ?>
 
 
 <h2 class="accordion-header"><?php echo TRANSLATION_STATISTICS;

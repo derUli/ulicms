@@ -6,69 +6,69 @@ class INDIC{
     /**
      * FROM hb-ot-shape-complex-indic-private.hh
      */
-    // indic_category
+     // indic_category
     const OT_X = 0;
-    const OT_C = 1;
-    const OT_V = 2;
-    const OT_N = 3;
-    const OT_H = 4;
-    const OT_ZWNJ = 5;
-    const OT_ZWJ = 6;
-    const OT_M = 7;
+     const OT_C = 1;
+     const OT_V = 2;
+     const OT_N = 3;
+     const OT_H = 4;
+     const OT_ZWNJ = 5;
+     const OT_ZWJ = 6;
+     const OT_M = 7;
     /**
      * Matra or Dependent Vowel
      */
-    const OT_SM = 8;
-    const OT_VD = 9;
-    const OT_A = 10;
-    const OT_NBSP = 11;
-    const OT_DOTTEDCIRCLE = 12;
+     const OT_SM = 8;
+     const OT_VD = 9;
+     const OT_A = 10;
+     const OT_NBSP = 11;
+     const OT_DOTTEDCIRCLE = 12;
     /**
      * Not in the spec, but special in Uniscribe. /Very very/ special!
      */
-    const OT_RS = 13;
+     const OT_RS = 13;
     /**
      * Register Shifter, used in Khmer OT spec
      */
-    const OT_Coeng = 14;
-    const OT_Repha = 15;
-    const OT_Ra = 16;
+     const OT_Coeng = 14;
+     const OT_Repha = 15;
+     const OT_Ra = 16;
     /**
      * Not explicitly listed in the OT spec, but used in the grammar.
      */
-    const OT_CM = 17;
+     const OT_CM = 17;
     
     
-    // Based on indic_category used to make string to find syllables
+     // Based on indic_category used to make string to find syllables
     // OT_ to string character (using e.g. OT_C from INDIC) hb-ot-shape-complex-indic-private.hh
     public static $indic_category_char = array(
         'x',
-        'C',
-        'V',
-        'N',
-        'H',
-        'Z',
-        'J',
-        'M',
-        'S',
-        'v',
-        'A',/**
+         'C',
+         'V',
+         'N',
+         'H',
+         'Z',
+         'J',
+         'M',
+         'S',
+         'v',
+         'A',/**
          * Spec gives Andutta U+0952 as OT_A. However, testing shows that Uniscribe
          * treats U+0951..U+0952 all as OT_VD - see set_indic_properties
          */
-        's',
-        'D',
-        'F',/**
+         's',
+         'D',
+         'F',/**
          * Register shift Khmer only
          */
-        'G',/**
+         'G',/**
          * Khmer only
          */
-        'r',/**
+         'r',/**
          * 0D4E (dot reph) only one in Malayalam
          */
-        'R',
-        'm',/**
+         'R',
+         'm',/**
          * Consonant medial only used in Indic 0A75 in Gurmukhi  (0A00..0A7F)  : also in Lao, Myanmar, Tai Tham, Javanese & Cham
          */
         );
@@ -80,30 +80,30 @@ class INDIC{
     /**
      * FROM hb-ot-shape-complex-indic-private.hh
      */
-    // indic_position
+     // indic_position
     const POS_START = 0;
     
-    const POS_RA_TO_BECOME_REPH = 1;
-    const POS_PRE_M = 2;
-    const POS_PRE_C = 3;
+     const POS_RA_TO_BECOME_REPH = 1;
+     const POS_PRE_M = 2;
+     const POS_PRE_C = 3;
     
-    const POS_BASE_C = 4;
-    const POS_AFTER_MAIN = 5;
+     const POS_BASE_C = 4;
+     const POS_AFTER_MAIN = 5;
     
-    const POS_ABOVE_C = 6;
+     const POS_ABOVE_C = 6;
     
-    const POS_BEFORE_SUB = 7;
-    const POS_BELOW_C = 8;
-    const POS_AFTER_SUB = 9;
+     const POS_BEFORE_SUB = 7;
+     const POS_BELOW_C = 8;
+     const POS_AFTER_SUB = 9;
     
-    const POS_BEFORE_POST = 10;
-    const POS_POST_C = 11;
-    const POS_AFTER_POST = 12;
+     const POS_BEFORE_POST = 10;
+     const POS_POST_C = 11;
+     const POS_AFTER_POST = 12;
     
-    const POS_FINAL_C = 13;
-    const POS_SMVD = 14;
+     const POS_FINAL_C = 13;
+     const POS_SMVD = 14;
     
-    const POS_END = 15;
+     const POS_END = 15;
     
     /**
      * Basic features.
@@ -113,22 +113,22 @@ class INDIC{
      * Must be in the same order as the indic_features array. Ones starting with _ are F_GLOBAL
      * Ones without the _ are only applied where the mask says!
      */
-    const _NUKT = 0;
-    const _AKHN = 1;
-    const RPHF = 2;
-    const _RKRF = 3;
-    const PREF = 4;
-    const BLWF = 5;
-    const HALF = 6;
-    const ABVF = 7;
-    const PSTF = 8;
-    const CFAR = 9; // Khmer only
-    const _VATU = 10;
-    const _CJCT = 11;
-    const INIT = 12;
+     const _NUKT = 0;
+     const _AKHN = 1;
+     const RPHF = 2;
+     const _RKRF = 3;
+     const PREF = 4;
+     const BLWF = 5;
+     const HALF = 6;
+     const ABVF = 7;
+     const PSTF = 8;
+     const CFAR = 9; // Khmer only
+     const _VATU = 10;
+     const _CJCT = 11;
+     const INIT = 12;
     
     
-    public static function set_indic_properties(& $info, $scriptblock){
+     public static function set_indic_properties(& $info, $scriptblock){
          $u = $info['uni'];
          $type = self :: indic_get_categories($u);
          $cat = ($type & 0x7F);
@@ -225,16 +225,16 @@ class INDIC{
         
          $info['indic_category'] = $cat;
          $info['indic_position'] = $pos;
-        }
+         }
     
-    // syllable_type
+     // syllable_type
     const CONSONANT_SYLLABLE = 0;
-    const VOWEL_SYLLABLE = 1;
-    const STANDALONE_CLUSTER = 2;
-    const BROKEN_CLUSTER = 3;
-    const NON_INDIC_CLUSTER = 4;
+     const VOWEL_SYLLABLE = 1;
+     const STANDALONE_CLUSTER = 2;
+     const BROKEN_CLUSTER = 3;
+     const NON_INDIC_CLUSTER = 4;
     
-    public static function set_syllables(& $o, $s, & $broken_syllables){
+     public static function set_syllables(& $o, $s, & $broken_syllables){
          $ptr = 0;
          $syllable_serial = 1;
          $broken_syllables = false;
@@ -289,16 +289,16 @@ class INDIC{
                  }
             
              for ($i = $ptr; $i < $ptr + $syllable_length; $i++){
-                $o[$i]['syllable'] = ($syllable_serial << 4) | $syllable_type;
-            }
+                 $o[$i]['syllable'] = ($syllable_serial << 4) | $syllable_type;
+                 }
              $ptr += $syllable_length ;
              $syllable_serial++;
              if ($syllable_serial == 16) $syllable_serial = 1;
              }
-        }
+         }
     
     
-    public static function set_syllables_sinhala(& $o, $s, & $broken_syllables){
+     public static function set_syllables_sinhala(& $o, $s, & $broken_syllables){
          $ptr = 0;
          $syllable_serial = 1;
          $broken_syllables = false;
@@ -321,15 +321,15 @@ class INDIC{
                  }
             
              for ($i = $ptr; $i < $ptr + $syllable_length; $i++){
-                $o[$i]['syllable'] = ($syllable_serial << 4) | $syllable_type;
-            }
+                 $o[$i]['syllable'] = ($syllable_serial << 4) | $syllable_type;
+                 }
              $ptr += $syllable_length ;
              $syllable_serial++;
              if ($syllable_serial == 16) $syllable_serial = 1;
              }
-        }
+         }
     
-    public static function set_syllables_khmer(& $o, $s, & $broken_syllables){
+     public static function set_syllables_khmer(& $o, $s, & $broken_syllables){
          $ptr = 0;
          $syllable_serial = 1;
          $broken_syllables = false;
@@ -360,21 +360,21 @@ class INDIC{
                  }
             
              for ($i = $ptr; $i < $ptr + $syllable_length; $i++){
-                $o[$i]['syllable'] = ($syllable_serial << 4) | $syllable_type;
-            }
+                 $o[$i]['syllable'] = ($syllable_serial << 4) | $syllable_type;
+                 }
              $ptr += $syllable_length ;
              $syllable_serial++;
              if ($syllable_serial == 16) $syllable_serial = 1;
              }
-        }
+         }
     
-    public static function initial_reordering(& $info, $GSUBdata, $broken_syllables, $indic_config, $scriptblock, $is_old_spec, $dottedcircle){
+     public static function initial_reordering(& $info, $GSUBdata, $broken_syllables, $indic_config, $scriptblock, $is_old_spec, $dottedcircle){
         
          self :: update_consonant_positions ($info, $GSUBdata);
         
          if ($broken_syllables && $dottedcircle){
-            self :: insert_dotted_circles ($info, $dottedcircle);
-        }
+             self :: insert_dotted_circles ($info, $dottedcircle);
+             }
         
          $count = count($info);
          if (!$count) return;
@@ -388,28 +388,28 @@ class INDIC{
                  }
              }
          self :: initial_reordering_syllable($info, $GSUBdata, $indic_config, $scriptblock, $is_old_spec, $last, $count);
-        }
+         }
     
-    public static function update_consonant_positions(& $info, $GSUBdata){
+     public static function update_consonant_positions(& $info, $GSUBdata){
          $count = count($info);
          for ($i = 0; $i < $count; $i++){
              if ($info[$i]['indic_position'] == self :: POS_BASE_C){
                  $c = $info[$i]['uni'];
                  // If would substitute...
                 if (isset($GSUBdata['pref'][$c])){
-                    $info[$i]['indic_position'] = self :: POS_POST_C;
-                }
+                     $info[$i]['indic_position'] = self :: POS_POST_C;
+                     }
                 else if (isset($GSUBdata['blwf'][$c])){
-                    $info[$i]['indic_position'] = self :: POS_BELOW_C;
-                }
+                     $info[$i]['indic_position'] = self :: POS_BELOW_C;
+                     }
                 else if (isset($GSUBdata['pstf'][$c])){
-                    $info[$i]['indic_position'] = self :: POS_POST_C;
-                }
+                     $info[$i]['indic_position'] = self :: POS_POST_C;
+                     }
                  }
              }
-        }
+         }
     
-    public static function insert_dotted_circles(& $info, $dottedcircle){
+     public static function insert_dotted_circles(& $info, $dottedcircle){
          $idx = 0;
          $last_syllable = 0;
          while ($idx < count($info)){
@@ -433,9 +433,9 @@ class INDIC{
          // I am not sue how this code below got in here, since $idx should now be > count($info) and thus invalid.
         // In case I am missing something(!) I'll leave a warning here for now:
         if (isset($info[$idx])){
-            die("This shouldn't happen (in otl.php)");
-            exit;
-        }
+             die("This shouldn't happen (in otl.php)");
+             exit;
+             }
          // In case of final bloken cluster...
         // $syllable = $info[$idx]['syllable'];
         // $syllable_type = ($syllable & 0x0F);
@@ -452,7 +452,7 @@ class INDIC{
      * https://www.microsoft.com/typography/otfntdev/devanot/shaping.aspx
      */
     
-    public static function initial_reordering_syllable (& $info, $GSUBdata, $indic_config, $scriptblock, $is_old_spec, $start, $end){
+     public static function initial_reordering_syllable (& $info, $GSUBdata, $indic_config, $scriptblock, $is_old_spec, $start, $end){
         /**
          * vowel_syllable: We made the vowels look like consonants. So uses the consonant logic!
          */
@@ -465,8 +465,8 @@ class INDIC{
         
          $syllable_type = ($info[$start]['syllable'] & 0x0F);
          if ($syllable_type == self :: NON_INDIC_CLUSTER){
-            return;
-        }
+             return;
+             }
          if ($syllable_type == self :: BROKEN_CLUSTER || $syllable_type == self :: STANDALONE_CLUSTER){
              // if ($uniscribe_bug_compatible) {
             /**
@@ -582,8 +582,8 @@ class INDIC{
                      */
                      if ($start < $i && $info[$i]['indic_category'] == self :: OT_ZWJ && $info[$i - 1]['indic_category'] == self :: OT_H){
                          if (!defined("OMIT_INDIC_FIX_1") || OMIT_INDIC_FIX_1 != 1){
-                            $base = $i;
-                        } // INDIC_FIX_1
+                             $base = $i;
+                             } // INDIC_FIX_1
                          break;
                          }
                      // ZKI8
@@ -722,8 +722,8 @@ class INDIC{
          if ($info[$i]['indic_category'] == self :: OT_H){
              for ($j = $end - 1; $j > $i; $j--){
                  if (self :: is_consonant($info[$j]) || $info[$j]['indic_category'] == self :: OT_H){
-                    break;
-                }
+                     break;
+                     }
                  }
              if ($info[$j]['indic_category'] != self :: OT_H && $j > $i){
                 /**
@@ -986,8 +986,8 @@ class INDIC{
                  // INDIC_FIX_4 = do nothing - carry on //
                 // ZWNJ should block H C from forming blwf post-base - need to unmask backwards beyond first consonant arrived at //
                 if (!self :: is_consonant($info[$j])){
-                    break;
-                }
+                     break;
+                     }
                  }
              $j--;
             
@@ -1211,8 +1211,8 @@ public static function final_reordering_syllable (& $info, $GSUBdata, $indic_con
              $new_reph_pos++;
              }
          if ($new_reph_pos < $end){
-            $skip_to_reph_move = true;
-        }
+             $skip_to_reph_move = true;
+             }
          }
     
     /**
@@ -1300,7 +1300,7 @@ public static function final_reordering_syllable (& $info, $GSUBdata, $indic_con
              * 	of the <pref> feature. (Note that a font may shape a Ra consonant with
              * 	the feature generally but block it in certain contexts.)
              */
-            // ??? Need to TEST if actual substitution has occurred
+             // ??? Need to TEST if actual substitution has occurred
             if ($i + 1 == $end || ($info[$i + 1]['mask'] & self :: FLAG(self :: PREF)) == 0){
                 /**
                  * 2. Try to find a target position the same way as for pre-base matra.
@@ -1496,11 +1496,13 @@ const BASE_POS_LAST = 1;
 const REPH_POS_DEFAULT = 10; // POS_BEFORE_POST,
 
 
+
 const REPH_POS_AFTER_MAIN = 5; // POS_AFTER_MAIN,
 const REPH_POS_BEFORE_SUB = 7; // POS_BEFORE_SUB,
 const REPH_POS_AFTER_SUB = 9; // POS_AFTER_SUB,
 const REPH_POS_BEFORE_POST = 10; // POS_BEFORE_POST,
 const REPH_POS_AFTER_POST = 12; // POS_AFTER_POST
+
 
 
 // reph_mode
@@ -2366,72 +2368,72 @@ public static function decompose_indic($ab){
  * bengali
  */
  case 0x9cb : $sub[0] = 0x9c7;
-    $sub[1] = 0x9be;
-    return $sub;
+     $sub[1] = 0x9be;
+     return $sub;
      case 0x9cc : $sub[0] = 0x9c7;
-    $sub[1] = 0x9d7;
-    return $sub;
+     $sub[1] = 0x9d7;
+     return $sub;
     /**
      * oriya
      */
      case 0xb48 : $sub[0] = 0xb47;
-    $sub[1] = 0xb56;
-    return $sub;
+     $sub[1] = 0xb56;
+     return $sub;
      case 0xb4b : $sub[0] = 0xb47;
-    $sub[1] = 0xb3e;
-    return $sub;
+     $sub[1] = 0xb3e;
+     return $sub;
      case 0xb4c : $sub[0] = 0xb47;
-    $sub[1] = 0xb57;
-    return $sub;
+     $sub[1] = 0xb57;
+     return $sub;
     /**
      * tamil
      */
      case 0xbca : $sub[0] = 0xbc6;
-    $sub[1] = 0xbbe;
-    return $sub;
+     $sub[1] = 0xbbe;
+     return $sub;
      case 0xbcb : $sub[0] = 0xbc7;
-    $sub[1] = 0xbbe;
-    return $sub;
+     $sub[1] = 0xbbe;
+     return $sub;
      case 0xbcc : $sub[0] = 0xbc6;
-    $sub[1] = 0xbd7;
-    return $sub;
+     $sub[1] = 0xbd7;
+     return $sub;
     /**
      * telugu
      */
      case 0xc48 : $sub[0] = 0xc46;
-    $sub[1] = 0xc56;
-    return $sub;
+     $sub[1] = 0xc56;
+     return $sub;
     /**
      * kannada
      */
      case 0xcc0 : $sub[0] = 0xcbf;
-    $sub[1] = 0xcd5;
-    return $sub;
+     $sub[1] = 0xcd5;
+     return $sub;
      case 0xcc7 : $sub[0] = 0xcc6;
-    $sub[1] = 0xcd5;
-    return $sub;
+     $sub[1] = 0xcd5;
+     return $sub;
      case 0xcc8 : $sub[0] = 0xcc6;
-    $sub[1] = 0xcd6;
-    return $sub;
+     $sub[1] = 0xcd6;
+     return $sub;
      case 0xcca : $sub[0] = 0xcc6;
-    $sub[1] = 0xcc2;
-    return $sub;
+     $sub[1] = 0xcc2;
+     return $sub;
      case 0xccb : $sub[0] = 0xcc6;
-    $sub[1] = 0xcc2;
-    $sub[2] = 0xcd5;
-    return $sub;
+     $sub[1] = 0xcc2;
+     $sub[2] = 0xcd5;
+     return $sub;
     /**
      * malayalam
      */
      case 0xd4a : $sub[0] = 0xd46;
-    $sub[1] = 0xd3e;
-    return $sub;
+     $sub[1] = 0xd3e;
+     return $sub;
      case 0xd4b : $sub[0] = 0xd47;
-    $sub[1] = 0xd3e;
-    return $sub;
+     $sub[1] = 0xd3e;
+     return $sub;
      case 0xd4c : $sub[0] = 0xd46;
-    $sub[1] = 0xd57;
-    return $sub;
+     $sub[1] = 0xd57;
+     return $sub;
     /**
      * sinhala
      */
@@ -2439,62 +2441,62 @@ public static function decompose_indic($ab){
     // Can check if character would be substituted by pstf and only decompose if true
     // e.g. if (isset($GSUBdata['pstf'][$ab])) - would need to pass $GSUBdata as parameter to this function
 case 0xdda : $sub[0] = 0xdd9;
-    $sub[1] = 0xdca;
-    return $sub;
+     $sub[1] = 0xdca;
+     return $sub;
      case 0xddc : $sub[0] = 0xdd9;
-    $sub[1] = 0xdcf;
-    return $sub;
+     $sub[1] = 0xdcf;
+     return $sub;
      case 0xddd : $sub[0] = 0xdd9;
-    $sub[1] = 0xdcf;
-    $sub[2] = 0xdca;
-    return $sub;
+     $sub[1] = 0xdcf;
+     $sub[2] = 0xdca;
+     return $sub;
      case 0xdde : $sub[0] = 0xdd9;
-    $sub[1] = 0xddf;
-    return $sub;
+     $sub[1] = 0xddf;
+     return $sub;
     /**
      * khmer
      */
      case 0x17be : $sub[0] = 0x17c1;
-    $sub[1] = 0x17be;
-    return $sub;
+     $sub[1] = 0x17be;
+     return $sub;
      case 0x17bf : $sub[0] = 0x17c1;
-    $sub[1] = 0x17bf;
-    return $sub;
+     $sub[1] = 0x17bf;
+     return $sub;
      case 0x17c0 : $sub[0] = 0x17c1;
-    $sub[1] = 0x17c0;
-    return $sub;
+     $sub[1] = 0x17c0;
+     return $sub;
     
      case 0x17c4 : $sub[0] = 0x17c1;
-    $sub[1] = 0x17c4;
-    return $sub;
+     $sub[1] = 0x17c4;
+     return $sub;
      case 0x17c5 : $sub[0] = 0x17c1;
-    $sub[1] = 0x17c5;
-    return $sub;
+     $sub[1] = 0x17c5;
+     return $sub;
     /**
      * tibetan - included here although does not use Inidc shaper in other ways
      */
      case 0xf73 : $sub[0] = 0xf71;
-    $sub[1] = 0xf72;
-    return $sub;
+     $sub[1] = 0xf72;
+     return $sub;
      case 0xf75 : $sub[0] = 0xf71;
-    $sub[1] = 0xf74;
-    return $sub;
+     $sub[1] = 0xf74;
+     return $sub;
      case 0xf76 : $sub[0] = 0xfb2;
-    $sub[1] = 0xf80;
-    return $sub;
+     $sub[1] = 0xf80;
+     return $sub;
      case 0xf77 : $sub[0] = 0xfb2;
-    $sub[1] = 0xf81;
-    return $sub;
+     $sub[1] = 0xf81;
+     return $sub;
      case 0xf78 : $sub[0] = 0xfb3;
-    $sub[1] = 0xf80;
-    return $sub;
+     $sub[1] = 0xf80;
+     return $sub;
      case 0xf79 : $sub[0] = 0xfb3;
-    $sub[1] = 0xf71;
-    $sub[2] = 0xf80;
-    return $sub;
+     $sub[1] = 0xf71;
+     $sub[2] = 0xf80;
+     return $sub;
      case 0xf81 : $sub[0] = 0xf71;
-    $sub[1] = 0xf80;
-    return $sub;
+     $sub[1] = 0xf80;
+     return $sub;
      }
  return false;
 }
@@ -2505,8 +2507,8 @@ case 0xdda : $sub[0] = 0xdd9;
 
 public static function bubble_sort(& $arr, $start, $len){
  if ($len < 2){
-    return;
-}
+     return;
+    }
  $k = $start + $len-2;
  while ($k >= $start){
      for ($j = $start; $j <= $k; $j++){

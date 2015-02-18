@@ -6,148 +6,148 @@ class MYANMAR{
     /**
      * FROM hb-ot-shape-complex-indic-private.hh
      */
-    // indic_category
+     // indic_category
     const OT_X = 0;
-    const OT_C = 1;
-    const OT_V = 2;
-    const OT_N = 3;
-    const OT_H = 4;
-    const OT_ZWNJ = 5;
-    const OT_ZWJ = 6;
-    const OT_M = 7;
+     const OT_C = 1;
+     const OT_V = 2;
+     const OT_N = 3;
+     const OT_H = 4;
+     const OT_ZWNJ = 5;
+     const OT_ZWJ = 6;
+     const OT_M = 7;
     /**
      * Matra or Dependent Vowel
      */
-    const OT_SM = 8;
-    const OT_VD = 9;
-    const OT_A = 10;
-    const OT_NBSP = 11;
-    const OT_DOTTEDCIRCLE = 12;
+     const OT_SM = 8;
+     const OT_VD = 9;
+     const OT_A = 10;
+     const OT_NBSP = 11;
+     const OT_DOTTEDCIRCLE = 12;
     /**
      * Not in the spec, but special in Uniscribe. /Very very/ special!
      */
-    const OT_RS = 13;
+     const OT_RS = 13;
     /**
      * Register Shifter, used in Khmer OT spec
      */
-    const OT_Coeng = 14;
-    const OT_Repha = 15;
-    const OT_Ra = 16;
+     const OT_Coeng = 14;
+     const OT_Repha = 15;
+     const OT_Ra = 16;
     /**
      * Not explicitly listed in the OT spec, but used in the grammar.
      */
-    const OT_CM = 17;
+     const OT_CM = 17;
     
     /**
      * FROM hb-ot-shape-complex-myanmar.hh
      */
-    // myanmar_category
+     // myanmar_category
     const OT_DB = 3; // same as INDIC::OT_N; /* Dot below */
-    const OT_GB = 12; // same as INDIC::OT_DOTTEDCIRCLE;
+     const OT_GB = 12; // same as INDIC::OT_DOTTEDCIRCLE;
     
     
-    const OT_As = 18;
+     const OT_As = 18;
     /**
      * Asat
      */
-    const OT_D = 19;
+     const OT_D = 19;
     /**
      * Digits except zero
      */
-    const OT_D0 = 20;
+     const OT_D0 = 20;
     /**
      * Digit zero
      */
-    const OT_MH = 21;
+     const OT_MH = 21;
     /**
      * Various consonant medial types
      */
-    const OT_MR = 22;
+     const OT_MR = 22;
     /**
      * Various consonant medial types
      */
-    const OT_MW = 23;
+     const OT_MW = 23;
     /**
      * Various consonant medial types
      */
-    const OT_MY = 24;
+     const OT_MY = 24;
     /**
      * Various consonant medial types
      */
-    const OT_PT = 25;
+     const OT_PT = 25;
     /**
      * Pwo and other tones
      */
-    const OT_VAbv = 26;
-    const OT_VBlw = 27;
-    const OT_VPre = 28;
-    const OT_VPst = 29;
-    const OT_VS = 30;
+     const OT_VAbv = 26;
+     const OT_VBlw = 27;
+     const OT_VPre = 28;
+     const OT_VPst = 29;
+     const OT_VS = 30;
     /**
      * Variation selectors
      */
     
     
-    // Based on myanmar_category used to make string to find syllables
+     // Based on myanmar_category used to make string to find syllables
     // OT_ to string character (using e.g. OT_C from MYANMAR) hb-ot-shape-complex-myanmar-private.hh
     public static $myanmar_category_char = array(
         'x',
-        'C',
-        'V',
-        'N',
-        'H',
-        'Z',
-        'J',
-        'x',
-        'S',
-        'x',
-        'A',
-        'x',
-        'D',
-        'x',
-        'x',
-        'x',
-        'R',
-        'x',
+         'C',
+         'V',
+         'N',
+         'H',
+         'Z',
+         'J',
+         'x',
+         'S',
+         'x',
+         'A',
+         'x',
+         'D',
+         'x',
+         'x',
+         'x',
+         'R',
+         'x',
         
         
-        'a',/**
+         'a',/**
          * As Asat
          */
-        'd',/**
+         'd',/**
          * Digits except zero
          */
-        'o',/**
+         'o',/**
          * Digit zero
          */
-        'k',/**
+         'k',/**
          * Medial types
          */
-        'l',/**
+         'l',/**
          * Medial types
          */
-        'm',/**
+         'm',/**
          * Medial types
          */
-        'n',/**
+         'n',/**
          * Medial types
          */
-        'p',/**
+         'p',/**
          * Pwo and other tones
          */
-        'v',/**
+         'v',/**
          * Vowel aboVe
          */
-        'b',/**
+         'b',/**
          * Vowel Below
          */
-        'e',/**
+         'e',/**
          * Vowel prE
          */
-        't',/**
+         't',/**
          * Vowel posT
          */
-        's',/**
+         's',/**
          * variation Selector
          */
         
@@ -160,34 +160,34 @@ class MYANMAR{
     /**
      * FROM hb-ot-shape-complex-myanmar-private.hh
      */
-    // myanmar_position
+     // myanmar_position
     const POS_START = 0;
     
-    const POS_RA_TO_BECOME_REPH = 1;
-    const POS_PRE_M = 2;
-    const POS_PRE_C = 3;
+     const POS_RA_TO_BECOME_REPH = 1;
+     const POS_PRE_M = 2;
+     const POS_PRE_C = 3;
     
-    const POS_BASE_C = 4;
-    const POS_AFTER_MAIN = 5;
+     const POS_BASE_C = 4;
+     const POS_AFTER_MAIN = 5;
     
-    const POS_ABOVE_C = 6;
+     const POS_ABOVE_C = 6;
     
-    const POS_BEFORE_SUB = 7;
-    const POS_BELOW_C = 8;
-    const POS_AFTER_SUB = 9;
+     const POS_BEFORE_SUB = 7;
+     const POS_BELOW_C = 8;
+     const POS_AFTER_SUB = 9;
     
-    const POS_BEFORE_POST = 10;
-    const POS_POST_C = 11;
-    const POS_AFTER_POST = 12;
+     const POS_BEFORE_POST = 10;
+     const POS_POST_C = 11;
+     const POS_AFTER_POST = 12;
     
-    const POS_FINAL_C = 13;
-    const POS_SMVD = 14;
+     const POS_FINAL_C = 13;
+     const POS_SMVD = 14;
     
-    const POS_END = 15;
+     const POS_END = 15;
     
     
     
-    public static function set_myanmar_properties(& $info){
+     public static function set_myanmar_properties(& $info){
          $u = $info['uni'];
          $type = self :: myanmar_get_categories($u);
          $cat = ($type & 0x7F);
@@ -271,16 +271,16 @@ class MYANMAR{
              $pos = self :: POS_PRE_M;
              break;
          case self :: POS_ABOVE_C: $cat = self :: OT_VAbv;
-            break;
+             break;
          case self :: POS_BELOW_C: $cat = self :: OT_VBlw;
-            break;
+             break;
          case self :: POS_POST_C: $cat = self :: OT_VPst;
-            break;
+             break;
              }
          }
      $info['myanmar_category'] = $cat;
      $info['myanmar_position'] = $pos;
-    }
+     }
 
 // syllable_type
 const CONSONANT_SYLLABLE = 0;
@@ -314,8 +314,8 @@ public static function set_syllables(& $o, $s, & $broken_syllables){
              }
          }
      for ($i = $ptr; $i < $ptr + $syllable_length; $i++){
-        $o[$i]['syllable'] = ($syllable_serial << 4) | $syllable_type;
-    }
+         $o[$i]['syllable'] = ($syllable_serial << 4) | $syllable_type;
+         }
      $ptr += $syllable_length ;
      $syllable_serial++;
      if ($syllable_serial == 16) $syllable_serial = 1;
@@ -326,8 +326,8 @@ public static function set_syllables(& $o, $s, & $broken_syllables){
 
 public static function reordering(& $info, $GSUBdata, $broken_syllables, $dottedcircle){
  if ($broken_syllables && $dottedcircle){
-    self :: insert_dotted_circles ($info, $dottedcircle);
-}
+     self :: insert_dotted_circles ($info, $dottedcircle);
+    }
  $count = count($info);
  if (!$count) return;
  $last = 0;
@@ -382,8 +382,8 @@ public static function reordering_syllable (& $info, $GSUBdata, $start, $end){
 
  $syllable_type = ($info[$start]['syllable'] & 0x0F);
  if ($syllable_type == self :: NON_MYANMAR_CLUSTER){
-    return;
-}
+     return;
+    }
  if ($syllable_type == self :: BROKEN_CLUSTER){
      // if ($uniscribe_bug_compatible) {
     /**
@@ -624,8 +624,8 @@ public static function myanmar_get_categories ($u){
 
 public static function bubble_sort(& $arr, $start, $len){
  if ($len < 2){
-    return;
-}
+     return;
+    }
  $k = $start + $len-2;
  while ($k >= $start){
      for ($j = $start; $j <= $k; $j++){

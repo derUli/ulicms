@@ -190,7 +190,7 @@ $(window).load(function(){
          ?>
          </select>
          <?php echo TRANSLATION_PARENT;
-        ?> 
+         ?> 
          <select name="filter_parent" onchange="filter_by_parent(this);">
          <option value="null" <?php if("null" == $_SESSION["filter_parent"]) echo "selected";
          ?>>[<?php echo TRANSLATION_EVERY;
@@ -212,17 +212,17 @@ $(window).load(function(){
          ?>
 </select>
 <?php echo TRANSLATION_ENABLED;
-        ?> 
+         ?> 
          <select name="filter_active" onchange="filter_by_active(this);">
          <option value="null" <?php if(null == $_SESSION["filter_active"]) echo "selected";
          ?>>[<?php echo TRANSLATION_EVERY;
          ?>]</option>
          <option value="1" <?php if(1 === $_SESSION["filter_active"]) echo "selected";
-        ?>><?php echo TRANSLATION_ENABLED;
-        ?></option>
+         ?>><?php echo TRANSLATION_ENABLED;
+         ?></option>
          <option value="0" <?php if(0 === $_SESSION["filter_active"]) echo "selected";
-        ?>><?php echo TRANSLATION_DISABLED;
-        ?></option>
+         ?>><?php echo TRANSLATION_DISABLED;
+         ?></option>
          </select>
 </p>
 

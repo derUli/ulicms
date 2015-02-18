@@ -85,7 +85,7 @@
          ?></strong><br/>
 <select name="parent" size=1>
 <option selected="selected" value="NULL">[<?php echo TRANSLATION_NONE;
-        ?>]</option>
+         ?>]</option>
 <?php foreach($pages as $key => $page){
              ?>
 	<option value="<?php echo $page["id"];
