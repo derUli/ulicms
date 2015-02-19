@@ -5,6 +5,11 @@ function getLanguageFilePath($lang = "de", $component = null){
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
 
+// returns site protocl
+// http:// or https://
+function site_protocol() {
+    if(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&  $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')  return $protocol = 'https://'; else return $protocol = 'http://';
+}
 
 function strbool($value)
 {
