@@ -27,9 +27,8 @@ if($version -> getDevelopmentVersion())
 // Start Call Home //
 $cfg_script = "UliCMS " . $version -> getVersion() .
 " (v" .
-join(".", $version -> getInternalVersion()) . " " . $version -> getUpdate() . " " . $developmentVersion . ")";
+join(".", $version -> getInternalVersion()) . $developmentVersion . ")";
 $cfg_url = "http://www.ulicms.de/chs/api.php";
-
 
 $urlfrom = $_SERVER['HTTP_HOST'];
 
@@ -42,11 +41,8 @@ $folderfrom = str_replace("\\", "/",
 if(!endsWith($folderfrom, "/"))
      $folderfrom .= "/";
 
-$protocol = "http://";
-if(is_ssl())
-  $protocol = "https://";
   
-$var_url = $protocol.$urlfrom . $folderfrom;
+$var_url = get_site_protocol().$urlfrom . $folderfrom;
 
 $chs0 = $cfg_script . "#" . $var_url;
 $chs = base64_encode($chs0);

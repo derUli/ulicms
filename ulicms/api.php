@@ -7,8 +7,12 @@ function getLanguageFilePath($lang = "de", $component = null){
 
 // returns site protocl
 // http:// or https://
-function site_protocol() {
+function get_site_protocol() {
     if(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&  $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')  return $protocol = 'https://'; else return $protocol = 'http://';
+}
+
+function site_protocol(){
+  echo get_site_protocol();
 }
 
 function strbool($value)
