@@ -42,7 +42,11 @@ $folderfrom = str_replace("\\", "/",
 if(!endsWith($folderfrom, "/"))
      $folderfrom .= "/";
 
-$var_url = $urlfrom . $folderfrom;
+$protocol = "http://";
+if(is_ssl())
+  $protocol = "https://";
+  
+$var_url = $protocol.$urlfrom . $folderfrom;
 
 $chs0 = $cfg_script . "#" . $var_url;
 $chs = base64_encode($chs0);
