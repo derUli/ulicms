@@ -25,7 +25,7 @@ class packageManager{
             
              $post_install_script1 = ULICMS_ROOT . DIRECTORY_SEPARATOR . "post-install.php";
              
-                         $post_install_script2 = ULICMS_TMP . DIRECTORY_SEPARATOR . "post-install.php";
+             $post_install_script2 = ULICMS_TMP . DIRECTORY_SEPARATOR . "post-install.php";
                           
             // post_install_script ausführen und anschließend
             // entfernen, sofern vorhanden;
