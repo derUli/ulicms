@@ -218,12 +218,9 @@ background-color:white;
 
 @media (max-width:1000px){
     .menu {
-        font-size:x-large;
+        font-size:xx-large;
     }
-    .menu li, .menu li ul li{
 
-       margin:14px;
-    }
     
 
     
