@@ -216,46 +216,4 @@ background-color:white;
 }
 
 
-@media (max-width:1000px){
-    .menu {
-        font-size:xx-large;
-    }
 
-    .menu li, .menu li ul li{
-     margin:14px;    
-    }
-    
-input[type="checkbox"],
-input[type="radio"]{
-zoom:2;
-}
-
-#pbody table{
-display:block;
-overflow:auto;
-}
-
-#pbody table thead th.header{
-padding-right:30px !important;
-}
-
-#pbody table thead th{
-white-space: nowrap;
-}
-
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="number"],
-input[type="phone"], 
-input[type="color"],
-input.color,
-select,
-textarea{
-font-size:large;
-}    
-    body{
-      font-size:x-large;    
-    }
-}
