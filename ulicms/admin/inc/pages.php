@@ -336,7 +336,7 @@ $(window).load(function(){
                  echo "<td>" . $row -> menu . "</td>";
                 
                  echo "<td>" . $row -> position . "</td>";
-                 echo "<td>" . getPageTitleByID($row -> parent) . "</td>";
+                 echo "<td>" . htmlspecialchars(getPageTitleByID($row -> parent)) . "</td>";
                 
                  if($row -> active){
                      echo "<td>" . TRANSLATION_YES . "</td>";
