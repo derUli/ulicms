@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width"/>
+<meta name="viewport" content="width=800"/>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <link rel="stylesheet" type="text/css" href="css/blue.css"/>
 <link rel="stylesheet" type="text/css" href="scripts/tablesorter/style.css"/>

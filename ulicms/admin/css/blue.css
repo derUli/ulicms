@@ -214,3 +214,10 @@ border:none;
 #login tr{
 background-color:white;
 }
+
+
+@media (max-width:800px){
+    .menu {
+        font-size:x-large;
+    }
+}
