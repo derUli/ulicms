@@ -5,7 +5,6 @@ if(isset($_SESSION["language"]) and in_array($_SESSION["language"], $languages))
      $default_language = $_SESSION["language"];
      }
 ?>
-<div id="login">
 <p><img src="gfx/logo.png" alt="UliCMS" title="UliCMS"/></p>
 <h3><?php echo TRANSLATION_PLEASE_AUTHENTIFICATE;
 ?></h3>
@@ -69,5 +68,4 @@ if(getconfig("visitors_can_register") === "on" or getconfig("visitors_can_regist
      ?>">Registrieren</a>
 <?php
      }
-?>
-</div>
+?><
