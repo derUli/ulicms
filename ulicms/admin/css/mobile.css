@@ -16,9 +16,22 @@ input[type="radio"]{
 zoom:3;
 }
 
+input[]
+
 #pbody table{
 display:block;
 overflow:auto;
+}
+
+div#root-container{
+width:95%;
+}
+
+
+input[type="button"], 
+input[type="submit"], button{
+padding:20px;
+width:100%;
 }
 
 #pbody table thead th.header{
