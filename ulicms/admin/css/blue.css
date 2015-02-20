@@ -128,8 +128,8 @@ background-color:rgb(253, 253, 253);
 width:100%;
 }
 
-input, select, table{
-border:solid 1px  rgb(220,220,220);
+input, select, table, textarea{
+border: 1px solid #A4A4A4;
 }
 
 table tr td{
