@@ -230,14 +230,16 @@ input[type="radio"]{
 zoom:2;
 }
 
-table{
+#pbody table{
 display:block;
 overflow:auto;
 }
 
-table thead th.header{
+#pbody table thead th.header{
 padding-right:30px !important;
 }
+
+
 
 
 input[type="text"],
