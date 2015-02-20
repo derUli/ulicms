@@ -333,7 +333,7 @@ $(window).load(function(){
                      echo htmlspecialchars(" --> ") . htmlspecialchars($row -> redirection);
                 
                  echo "</td>";
-                 echo "<td>" . $row -> menu . "</td>";
+                 echo "<td>" . htmlspecialchars($row -> menu) . "</td>";
                 
                  echo "<td>" . $row -> position . "</td>";
                  echo "<td>" . htmlspecialchars(getPageTitleByID($row -> parent)) . "</td>";
