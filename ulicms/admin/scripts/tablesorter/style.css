@@ -4,6 +4,7 @@ table.tablesorter {
 	margin:10px 0pt 15px;
 	width: 100%;
 	text-align: left;
+	border:none !important;
 }
 
 table.tablesorter thead td{
