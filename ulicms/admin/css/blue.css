@@ -229,7 +229,28 @@ input[type="checkbox"],
 input[type="radio"]{
 zoom:2;
 }
-    
+
+table{
+display:block;
+overflow:auto;
+}
+
+table thead th.header{
+padding-right:30px !important;
+}
+
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="phone"], 
+input[type="color"],
+input.color,
+select,
+textarea{
+font-size:large;
+}    
     body{
       font-size:x-large;    
     }
