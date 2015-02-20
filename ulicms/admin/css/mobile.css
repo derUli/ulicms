@@ -3,6 +3,7 @@
     }
     
     
+    
     .menu {
         font-size:xx-large;
     }
@@ -16,7 +17,10 @@ input[type="radio"]{
 zoom:3;
 }
 
-input[]
+div#root-container{
+width:85%;
+}
+
 
 #pbody table{
 display:block;
