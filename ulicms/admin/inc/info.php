@@ -16,9 +16,9 @@
 <a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2010 - 2015 by Ulrich Schmidt<br/>
 <a href="http://www.ckeditor.com" target="_blank">CKEditor</a> &copy; 2003 - 2015 by CKSource<br/>
 <a href="http://kcfinder.sunhater.com/" target="_blank">KCFinder</a> Copyright 2010 - 2012 KCFinder Project   <br/ >
-<a href="http://jquery.org" target="_blank">jQuery</a> (c) 2005, 2012 jQuery Foundation, Inc.
+<a href="http://jquery.org" target="_blank">jQuery</a> &copy; 2005, 2012 jQuery Foundation, Inc.
 <br/>
-<a href="http://codemirror.net/" target="_blank">CodeMirror</a> 2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others</p>
+<a href="http://codemirror.net/" target="_blank">CodeMirror</a> &copy; 2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others</p>
 
 <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
 <div>Icon made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed under <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
