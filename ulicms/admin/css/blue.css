@@ -220,4 +220,11 @@ background-color:white;
     .menu {
         font-size:x-large;
     }
+    .menu li{
+       margin:10px;    
+    }
+    
+    #pbody{
+      font-size:large;    
+    }
 }
