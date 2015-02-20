@@ -221,8 +221,9 @@ background-color:white;
         font-size:xx-large;
     }
 
-    
-
+    .menu li, .menu li ul li{
+     margin:14px;    
+    }
     
 input[type="checkbox"],
 input[type="radio"]{
