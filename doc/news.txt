@@ -13,3 +13,4 @@
 + API Methoden get_translation, translate und translation hinzugefügt
 + wordcount Plugin zu CKEditor hinzugefügt
 + API Funktion get_site_protocol hinzugefügt
++ CodeMirror auf Version 4.12.0 aktualisiert
