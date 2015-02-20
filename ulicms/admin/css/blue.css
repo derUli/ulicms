@@ -239,7 +239,9 @@ overflow:auto;
 padding-right:30px !important;
 }
 
-
+#pbody table thead th{
+white-space: nowrap;
+}
 
 
 input[type="text"],
