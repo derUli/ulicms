@@ -68,4 +68,4 @@ if(getconfig("visitors_can_register") === "on" or getconfig("visitors_can_regist
      ?>">Registrieren</a>
 <?php
      }
-?><
+?>
