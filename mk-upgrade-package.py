@@ -45,10 +45,17 @@ def main():
         execfile('reformat_code.py')
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
+
+    # Copy config file from MPDF60 since config.php is excluded
+    print("Copying config.php from MPDF60")
+    mpdf_config_source = os.path.join(source_dir, "ulicms", "lib", "MPDF60", "config.php")
+    mpdf_config_target = os.path.join(target, "ulicms", "lib", "MPDF60", "config.php")
+    shutil.copyfile(mpdf_config_source, mpdf_config_target)
+    
     update_script = os.path.join(target, "ulicms", "update.php")
 
-    print("preparing update Script")
     if os.path.exists(update_script):
+        print("preparing update Script")
         with codecs.open(update_script, 'r+', "utf-8") as f:
             lines = f.readlines()
             f.seek(0)
@@ -60,10 +67,12 @@ def main():
                     
                 print(line)
                 f.write(line)
+    else:
+        print("No update.php found")
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
     if args.zip:
         print("zipping folder...")
-	zipdir(target, archive_name)
+        zipdir(target, archive_name)
         print("removing target folder...")
         shutil.rmtree(target)
 try:
