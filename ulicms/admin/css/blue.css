@@ -216,15 +216,23 @@ background-color:white;
 }
 
 
-@media (max-width:800px){
+@media (max-width:1000px){
     .menu {
         font-size:x-large;
     }
-    .menu li{
-       margin:10px;    
+    .menu li, .menu li ul li{
+
+       margin:14px;
     }
     
-    #pbody{
-      font-size:large;    
+
+    
+input[type="checkbox"],
+input[type="radio"]{
+zoom:2;
+}
+    
+    body{
+      font-size:x-large;    
     }
 }
