@@ -19,10 +19,6 @@ function showChangedOnlineStatus(name, online){
   }
   $("#message").fadeIn(400, function(e){
   
-    if(online)
-      play_sound("sounds/online.mp3");
-    else
-      play_sound("sounds/offline.mp3");
   setTimeout(function(){
   $("#message").fadeOut(400, function(e){
   $("#message").html("");
