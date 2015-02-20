@@ -74,12 +74,12 @@ else if($_SESSION["grp_sort"] == "name"){
          ?>
 </td>
 <td><a href="?action=groups&edit=<?php echo $id;
-         ?>"><img src="gfx/edit.png" alt="<?php echo TRANSLATION_EDIT;
+         ?>"><img class="mobile-big-image" src="gfx/edit.png" alt="<?php echo TRANSLATION_EDIT;
          ?>" title="<?php echo TRANSLATION_EDIT;
          ?>"></a></td>
 <td><a href="?action=groups&delete=<?php echo $id;
          ?>" onclick="return confirm('<?php echo TRANSLATION_ASK_FOR_DELETE;
-         ?>');"><img src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
+         ?>');"><img class="mobile-big-image" src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
          ?>" title="<?php echo TRANSLATION_DELETE;
          ?>"></a></td>
 </tr>
