@@ -232,17 +232,17 @@ function openMenuImageSelectWindow(field) {
 
 <strong><?php echo TRANSLATION_META_DESCRIPTION;
              ?></strong><br/>
-<input type="text"  name="meta_description" value='<?php
+<input type="text"  name="meta_description" value="<?php
              echo htmlspecialchars($row -> meta_description);
-             ?>'>
+             ?>">
 
 <br/><br/>
 
 <strong><?php echo TRANSLATION_META_KEYWORDS;
              ?></strong><br/>
-<input type="text"  name="meta_keywords" value='<?php
+<input type="text"  name="meta_keywords" value="<?php
              echo htmlspecialchars($row -> meta_keywords);
-             ?>'>
+             ?>">
  
 <br/><br/>
 <strong><?php echo TRANSLATION_COMMENTS;
