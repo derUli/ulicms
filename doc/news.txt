@@ -12,4 +12,4 @@
 + Aktualisierung von mPDF auf mPDF 6.0
 + API Methoden get_translation, translate und translation hinzugefügt
 + wordcount Plugin zu CKEditor hinzugefügt
-+ API Funktion site_protocol hinzugefügt
++ API Funktion get_site_protocol hinzugefügt

@@ -29,9 +29,12 @@ width:95%;
 
 
 input[type="button"], 
-input[type="submit"], button{
-padding:20px;
+input[type="submit"], 
+button{
+padding:30px;
 width:100%;
+margin-bottom:30px;
+font-size:larger;
 }
 
 #pbody table thead th.header{
@@ -51,9 +54,15 @@ input[type="phone"],
 input[type="color"],
 input.color,
 select,
-textarea{
+textarea,
+input[type="file"]{
 font-size:x-large;
 }    
+
+
+input[type="file"]{
+width:100%;
+}
 
 a{
 font-size:120% !important;
@@ -67,6 +76,7 @@ p{
 line-height:1.8em !important;
 margin-bottom:1.3em;
 }
+
 
     
 .accordion-header{
