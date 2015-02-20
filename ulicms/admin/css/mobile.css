@@ -1,4 +1,8 @@
-@media (max-width:1000px){
+   body{
+      font-size:x-large;    
+    }
+    
+    
     .menu {
         font-size:xx-large;
     }
@@ -37,7 +41,9 @@ select,
 textarea{
 font-size:x-large;
 }    
-    body{
-      font-size:x-large;    
-    }
+
+    
+.accordion-header{
+padding:30px !important;
+font-size:xx-large !important;
 }
