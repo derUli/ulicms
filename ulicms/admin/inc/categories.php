@@ -92,7 +92,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 
 <?php }else{
                  ?>
-<td style="text-align:center;"><a href="#" onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
+<td style="text-align:center;"><a href="#" onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img class="mobile-big-image" src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
                  ?>" title="<?php echo TRANSLATION_DELETE;
                  ?>"></a></td>
 <?php }
