@@ -28,14 +28,15 @@ $(document).ready(function() {
 <script type="text/javascript" src="scripts/notification.js"></script>
 <script type="text/javascript" src="scripts/jquery-shiftclick.js"></script>
 <script type="text/javascript" src="scripts/shift_checkbox.js"></script>
-<script type="text/javascript" src="scripts/doubletaptogo.js"></script>
+<?php if(is_mobile()){?>
 <script type="text/javascript">
+// Keine Dropdown Menüs auf mobilen Geräten
 $(document).ready(function(){
-$(".menu li:has(ul)").doubleTapToGo();
+$(".menu li ul ").hide();
 })
 </script>
-<?php }
-?>
+<?php } ?>
+<?php } ?>
 <script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
 <link rel="stylesheet" href="scripts/vallenato/vallenato.css" type="text/css">
 <link rel="icon" href="gfx/favicon.ico" type="image/x-icon"> 
