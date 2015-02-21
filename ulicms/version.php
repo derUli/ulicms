@@ -4,7 +4,7 @@ class ulicms_version{
          $this -> version = "White Alpaka";
          $this -> internalVersion = Array(8, 0, 1);
          $this -> update = "";
-         $this -> developmentVersion = true;
+         $this -> developmentVersion = false;
          }
     
      // Gibt den Codenamen der UliCMS Version zurück (z.B. 2013R2)
