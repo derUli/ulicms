@@ -23,6 +23,7 @@ def main():
     parser.add_argument("-z", "--zip", help="Compress with zip", action="store_true")
     parser.add_argument('-t', '--target', action ="store", dest="target", required = True, help="Target directory")
     args = parser.parse_args()
+    target = os.path.expanduser(args.target)
     target = os.path.abspath(args.target)
     reformat = not args.no_reformat
     source_dir = os.path.dirname(__file__)
@@ -31,7 +32,7 @@ def main():
                        "Releases", "cms-config.php", "content", "services",
                        ".gitignore", ".htaccess", "installer.aus", "installer",
               "modules", "templates", "fonts.php", "config.php", "contents.css",
-              "config.js", "comments")
+              "config.js", "comments", "*~")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     operating_system = platform.system()

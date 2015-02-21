@@ -75,7 +75,4 @@ function ulicms_mail($to, $subject, $message, $headers = ""){
          return pear_mail($to, $subject, $message, $headers);
      else
          return mail($to, $subject, $message, $headers);
-    
-    
-    
      }
