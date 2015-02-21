@@ -1,4 +1,6 @@
 <?php
+if(!defined("_SECURITY"))
+   die("No direct access allowed!");
 @session_start();
 
 $rss = new DOMDocument();
@@ -37,7 +39,7 @@ for($x = 0;$x < $limit;$x++){
      $datestr = strftime("%d.%m.%Y, %A", $date);
      $txt = get_translation("posted_on_date");
      $txt = str_replace("%s", $datestr, $txt);
-     echo '<small><em>'.$txt.'</em></small></p>';
+     echo '<small><em>' . $txt . '</em></small></p>';
      echo '<p>' . $description . '</p>';
      }
 
