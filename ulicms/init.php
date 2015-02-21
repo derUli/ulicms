@@ -79,7 +79,7 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEP
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "helper" . DIRECTORY_SEPERATOR . "export_helper.php";
-
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "Mobile_Detect.php";
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "version.php";
 
