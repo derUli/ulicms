@@ -428,12 +428,12 @@ function setLocaleByLanguage(){
   }
   $locale = getconfig($var);
   if($locale){
-    setlocale(LC_ALL, $locale);
+    @setlocale(LC_ALL, $locale);
   }
   else{
     $locale = getconfig("locale");
     if($locale)
-        setlocale(LC_ALL, $locale);
+        @setlocale(LC_ALL, $locale);
   }
   
   return $locale;
