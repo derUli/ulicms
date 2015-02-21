@@ -29,7 +29,7 @@ define("TRANSLATION_DATE", "Date");
 define("TRANSLATION_DONE_BY", "Done by");
 
 define("TRANSLATION_EDIT_PROFILE", "Edit Profile");
-define("TRANSLATION_HELLO_NAME", "Hallo %firstname% %lastname%!");
+define("TRANSLATION_HELLO_NAME", "Hello %firstname% %lastname%!");
 
 // Admin Menü Navigation
 define("TRANSLATION_WELCOME", "Welcome");
