@@ -18,3 +18,4 @@
 + Mobile_Detect Klasse ins System integriert ( http://mobiledetect.net/ )
 + Locales können nun je Sprache gesetzt werden (z.B. locale_en)
 + Dropdownmenü auf mobilen Geräten deaktiviert
++ Nachfrage zu Logout hinzugefügt
