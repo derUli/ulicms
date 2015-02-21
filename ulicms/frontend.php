@@ -21,9 +21,13 @@ if(!isset($_SESSION["language"])){
      $_SESSION["language"] = getconfig("default_language");
      }
 
+
+setLocaleByLanguage();
+
 if(in_array($_SESSION["language"], getAllLanguages())){
      include getLanguageFilePath($_SESSION["language"]);
      }
+
 
 
 require_once "templating.php";

@@ -16,3 +16,4 @@
 + CodeMirror auf Version 4.12.0 aktualisiert
 + Notification Sounds entfernt
 + Mobile_Detect Klasse ins System integriert ( http://mobiledetect.net/ )
++ Locales können nun je Sprache gesetzt werden (z.B. locale_en)

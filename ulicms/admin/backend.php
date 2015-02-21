@@ -21,6 +21,10 @@ add_hook("after_session_start");
 
 $syslang = getSystemLanguage();
 include_once getLanguageFilePath($syslang);
+
+setLocaleByLanguage();
+
+
 require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 

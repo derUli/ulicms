@@ -418,6 +418,27 @@ function is_ssl(){
      }
 
 
+function setLocaleByLanguage(){
+  $locale = null;
+  if(is_admin_dir()){
+     $var = "locale_".db_escape($_SESSION["system_language"]);
+     }
+  else {
+     $var = "locale_".db_escape($_SESSION["language"]);
+  }
+  $locale = getconfig($var);
+  if($locale){
+    setlocale(LC_ALL, $locale);
+  }
+  else{
+    $locale = getconfig("locale");
+    if($locale)
+        setlocale(LC_ALL, $locale);
+  }
+  
+  return $locale;
+}
+
 // Returns the language code of the current language
 // If $current is true returns language of the current page
 // else it returns $_SESSION["language"];
