@@ -15,6 +15,10 @@ img{
 border:0px;
 }
 
+#pbody table thead th.header{
+padding-right:30px !important;
+}
+
 .ulicms_error{
 color:red;
 background-color:rgb(250, 250, 250);
