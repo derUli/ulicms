@@ -161,7 +161,7 @@ $coords = unpack('s' . ($size-3), $parms);
      }
  if ($func == 0x0325){
      $op = 's';
-    }
+     }
 else if ($func == 0x0324){
      if ($nullPen){
          if ($nullBrush){
@@ -222,7 +222,7 @@ else{
      }
  if ($polyFillMode == 1 && ($op == 'b' || $op == 'f')){
      $op .= '*';
-    } // use even-odd fill rule
+     } // use even-odd fill rule
  $wmfdata .= $op . "\n";
  break;
  case 0x0000:

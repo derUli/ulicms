@@ -327,7 +327,7 @@ public static function set_syllables(& $o, $s, & $broken_syllables){
 public static function reordering(& $info, $GSUBdata, $broken_syllables, $dottedcircle){
  if ($broken_syllables && $dottedcircle){
      self :: insert_dotted_circles ($info, $dottedcircle);
-    }
+     }
  $count = count($info);
  if (!$count) return;
  $last = 0;
@@ -383,7 +383,7 @@ public static function reordering_syllable (& $info, $GSUBdata, $start, $end){
  $syllable_type = ($info[$start]['syllable'] & 0x0F);
  if ($syllable_type == self :: NON_MYANMAR_CLUSTER){
      return;
-    }
+     }
  if ($syllable_type == self :: BROKEN_CLUSTER){
      // if ($uniscribe_bug_compatible) {
     /**
@@ -625,7 +625,7 @@ public static function myanmar_get_categories ($u){
 public static function bubble_sort(& $arr, $start, $len){
  if ($len < 2){
      return;
-    }
+     }
  $k = $start + $len-2;
  while ($k >= $start){
      for ($j = $start; $j <= $k; $j++){

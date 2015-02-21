@@ -12,7 +12,7 @@
 // Choice of font is determined by the config_script2lang.php and config_lang2fonts.php files, the same as for mPDF generally.
 if (!defined("_SVG_AUTOFONT")){
      define("_SVG_AUTOFONT", false);
-    }
+     }
 
 // Enable a limited use of classes within SVG <text> elements by setting this to true.
 // This allows recognition of a "class" attribute on a <text> element.
@@ -24,7 +24,7 @@ if (!defined("_SVG_AUTOFONT")){
 // font-family, font-size, font-weight, font-variant, font-style, opacity, text-anchor
 if (!defined("_SVG_CLASSES")){
      define("_SVG_CLASSES", false);
-    }
+     }
 
 
 
@@ -3855,7 +3855,7 @@ function calc_bezier_bbox($start, $c){
  if ($a == 0){
  if ($b == 0){
      continue;
-    }
+     }
  $t = - $c / $b;
  if ($t > 0 && $t < 1){
      $bounds[$i][] = (pow((1 - $t), 3) * $P0[$i] + 3 * pow((1 - $t), 2) * $t * $P1[$i] + 3 * (1 - $t) * pow($t, 2) * $P2[$i] + pow($t, 3) * $P3[$i]);

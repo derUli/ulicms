@@ -1,13 +1,13 @@
 <?php
 function getRandomFortune(){
      if(is_admin_dir())
-        $lang = getSystemLanguage();
+         $lang = getSystemLanguage();
      else
-        $lang = getCurrentLanguage(true);
-     $fortuneDir = getModulePath("fortune") . "cookies/".$lang."/";
+         $lang = getCurrentLanguage(true);
+     $fortuneDir = getModulePath("fortune") . "cookies/" . $lang . "/";
      if(!is_dir($fortuneDir)){
          $fortuneDir = getModulePath("fortune") . "cookies/en/";
-       }
+         }
      $fortuneFiles = scandir($fortuneDir);
      do{
          $file = array_rand($fortuneFiles, 1);

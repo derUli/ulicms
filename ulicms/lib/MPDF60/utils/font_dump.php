@@ -16,12 +16,15 @@ $font = 'dejavusanscondensed'; // Use internal mPDF font-name
 
 
 
+
 $min = 0x0020; // Minimum Unicode value to show
 $max = 0x2FFFF; // Maximum Unicode value to show
 
 
 
+
 $showmissing = false; // Show all missing unicode blocks / characters
+
 
 
 
@@ -73,11 +76,10 @@ foreach($unifile AS $line){
 include('UnicodeRanges.php');
 // ==============================================================
 // ==============================================================
-
 $cw = file_get_contents(_MPDF_TTFONTDATAPATH . $font . '.cw.dat');
 if (!$cw){
      die("Error - Must be able to read font metrics file: " . _MPDF_TTFONTDATAPATH . $font . '.cw.dat');
-    }
+     }
 $counter = 0;
 
 
@@ -257,6 +259,7 @@ function _getCharWidth(& $cw, $u, $isdef = true){
      }
 // ==============================================================
 $mpdf -> WriteHTML($html); // Separate Paragraphs  defined by font
+
 
 
 

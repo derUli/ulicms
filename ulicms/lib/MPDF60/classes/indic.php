@@ -1497,11 +1497,13 @@ const REPH_POS_DEFAULT = 10; // POS_BEFORE_POST,
 
 
 
+
 const REPH_POS_AFTER_MAIN = 5; // POS_AFTER_MAIN,
 const REPH_POS_BEFORE_SUB = 7; // POS_BEFORE_SUB,
 const REPH_POS_AFTER_SUB = 9; // POS_AFTER_SUB,
 const REPH_POS_BEFORE_POST = 10; // POS_BEFORE_POST,
 const REPH_POS_AFTER_POST = 12; // POS_AFTER_POST
+
 
 
 
@@ -2508,7 +2510,7 @@ case 0xdda : $sub[0] = 0xdd9;
 public static function bubble_sort(& $arr, $start, $len){
  if ($len < 2){
      return;
-    }
+     }
  $k = $start + $len-2;
  while ($k >= $start){
      for ($j = $start; $j <= $k; $j++){

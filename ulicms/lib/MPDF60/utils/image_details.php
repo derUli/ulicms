@@ -6,6 +6,7 @@ $fileIsLocal = true; // is the file in the same domain?
 
 
 
+
 // ======================================================================
 $ppUx = 0;
 $type = '';
@@ -46,7 +47,7 @@ echo 'Full File URL: ' . $file . '<br />';
  if (!$data){
      echo 'Could not access image file' . '<br />';
      exit;
-    }
+     }
 
  echo 'Image type determined: ' . strtoupper($type) . '<br />';
 

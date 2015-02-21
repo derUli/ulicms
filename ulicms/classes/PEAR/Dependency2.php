@@ -617,8 +617,8 @@ class PEAR_Dependency2
      * @param boolean $ whether this is a required dependency
      * @param array $ a list of downloaded packages to be installed, if any
      * @param boolean $ if true, then deps on pear.php.net that fail will also check
-     *                                          against pecl.php.net packages to accomodate extensions that have
-     *                                          moved to pecl.php.net from pear.php.net
+     *                                           against pecl.php.net packages to accomodate extensions that have
+     *                                           moved to pecl.php.net from pear.php.net
      */
      function validatePackageDependency($dep, $required, $params, $depv1 = false)
     {
@@ -1164,9 +1164,9 @@ class PEAR_Dependency2
      * As of PEAR 1.4.3, this will only validate
      * 
      * @param array $ |PEAR_Downloader_Package|PEAR_PackageFile_v1|PEAR_PackageFile_v2
-     *                                        $pkg package identifier (either
-     *                                             array('package' => blah, 'channel' => blah) or an array with
-     *                                             index 'info' referencing an object)
+     *                                         $pkg package identifier (either
+     *                                              array('package' => blah, 'channel' => blah) or an array with
+     *                                              index 'info' referencing an object)
      * @param PEAR_Downloader $dl 
      * @param array $params full list of packages to install
      * @return true |PEAR_Error

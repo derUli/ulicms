@@ -786,7 +786,7 @@ class otl{
                     /**
                      * This function implements the shaping logic documented here:
                      * 
-                     *     http://linux.thai.net/~thep/th-otf/shaping.html
+                     *      http://linux.thai.net/~thep/th-otf/shaping.html
                      * 
                      * The first shaping rule listed there is needed even if the font has Thai
                      * OpenType tables. 
@@ -2392,7 +2392,7 @@ else if ($Type == 6){
 
 else{
      die("GSUB Lookup Type " . $Type . " not supported.");
-    }
+     }
 
 }
 
@@ -2582,13 +2582,13 @@ else if ($Type == 4){
         
         /**
          * - If it *is* a mark ligature, we don't allocate a new ligature id, and leave
-         *     the ligature to keep its old ligature id.  This will allow it to attach to
-         *     a base ligature in GPOS.  Eg. if the sequence is: LAM,LAM,SHADDA,FATHA,HEH,
-         *     and LAM,LAM,HEH form a ligature, they will leave SHADDA and FATHA wit a
-         *     ligature id and component value of 2.  Then if SHADDA,FATHA form a ligature
-         *     later, we don't want them to lose their ligature id/component, otherwise
-         *     GPOS will fail to correctly position the mark ligature on top of the
-         *     LAM,LAM,HEH ligature.
+         *      the ligature to keep its old ligature id.  This will allow it to attach to
+         *      a base ligature in GPOS.  Eg. if the sequence is: LAM,LAM,SHADDA,FATHA,HEH,
+         *      and LAM,LAM,HEH form a ligature, they will leave SHADDA and FATHA wit a
+         *      ligature id and component value of 2.  Then if SHADDA,FATHA form a ligature
+         *      later, we don't want them to lose their ligature id/component, otherwise
+         *      GPOS will fail to correctly position the mark ligature on top of the
+         *      LAM,LAM,HEH ligature.
          */
          // So if is_array($firstMarkAssoc) - the new (Mark) ligature should keep this association
         $lastPos = $GlyphPos[(count($GlyphPos)-1)];
@@ -2596,31 +2596,31 @@ else if ($Type == 4){
     else{
         /**
          * - Ligatures cannot be formed across glyphs attached to different components
-         *     of previous ligatures.  Eg. the sequence is LAM,SHADDA,LAM,FATHA,HEH, and
-         *     LAM,LAM,HEH form a ligature, leaving SHADDA,FATHA next to eachother.
-         *     However, it would be wrong to ligate that SHADDA,FATHA sequence.
-         *     There is an exception to this: If a ligature tries ligating with marks that
-         *     belong to it itself, go ahead, assuming that the font designer knows what
-         *     they are doing (otherwise it can break Indic stuff when a matra wants to
-         *     ligate with a conjunct...)
+         *      of previous ligatures.  Eg. the sequence is LAM,SHADDA,LAM,FATHA,HEH, and
+         *      LAM,LAM,HEH form a ligature, leaving SHADDA,FATHA next to eachother.
+         *      However, it would be wrong to ligate that SHADDA,FATHA sequence.
+         *      There is an exception to this: If a ligature tries ligating with marks that
+         *      belong to it itself, go ahead, assuming that the font designer knows what
+         *      they are doing (otherwise it can break Indic stuff when a matra wants to
+         *      ligate with a conjunct...)
          */
         
         /**
          * - If a ligature is formed of components that some of which are also ligatures
-         *     themselves, and those ligature components had marks attached to *their*
-         *     components, we have to attach the marks to the new ligature component
-         *     positions!  Now *that*'s tricky!  And these marks may be following the
-         *     last component of the whole sequence, so we should loop forward looking
-         *     for them and update them.
+         *      themselves, and those ligature components had marks attached to *their*
+         *      components, we have to attach the marks to the new ligature component
+         *      positions!  Now *that*'s tricky!  And these marks may be following the
+         *      last component of the whole sequence, so we should loop forward looking
+         *      for them and update them.
          * 
-         *     Eg. the sequence is LAM,LAM,SHADDA,FATHA,HEH, and the font first forms a
-         *     'calt' ligature of LAM,HEH, leaving the SHADDA and FATHA with a ligature
-         *     id and component == 1.  Now, during 'liga', the LAM and the LAM-HEH ligature
-         *     form a LAM-LAM-HEH ligature.  We need to reassign the SHADDA and FATHA to
-         *     the new ligature with a component value of 2.
+         *      Eg. the sequence is LAM,LAM,SHADDA,FATHA,HEH, and the font first forms a
+         *      'calt' ligature of LAM,HEH, leaving the SHADDA and FATHA with a ligature
+         *      id and component == 1.  Now, during 'liga', the LAM and the LAM-HEH ligature
+         *      form a LAM-LAM-HEH ligature.  We need to reassign the SHADDA and FATHA to
+         *      the new ligature with a component value of 2.
          * 
-         *     This in fact happened to a font...  See:
-         *     https://bugzilla.gnome.org/show_bug.cgi?id=437633
+         *      This in fact happened to a font...  See:
+         *      https://bugzilla.gnome.org/show_bug.cgi?id=437633
          */
         
          $currComp = 0;
@@ -2746,7 +2746,7 @@ else if ($Type == 4){
      }
 else{
      return 0;
-    }
+     }
 }
 
 
@@ -3086,7 +3086,7 @@ else if ($type == 2 && isset($this -> arabGlyphs[$char][0])){ // if <initial> no
      }
 else{
      return array($char, 0);
-    }
+     }
 }
 
 
@@ -3122,7 +3122,7 @@ function SEAlineBreaking(){
  // Load Line-breaking dictionary
 if (!isset($this -> lbdicts[$this -> shaper]) && file_exists(_MPDF_PATH . 'includes/linebrdict' . $this -> shaper . '.dat')){
      $this -> lbdicts[$this -> shaper] = file_get_contents(_MPDF_PATH . 'includes/linebrdict' . $this -> shaper . '.dat');
-    }
+     }
 
  $dict = & $this -> lbdicts[$this -> shaper];
 
@@ -3396,11 +3396,11 @@ function _getXAdvancePos($pos){
 // If the current glyph is not a base (but a mark) then ignore this, and apply to the current position
 if (strpos($this -> GlyphClassMarks, $this -> OTLdata[$pos]['hex']) !== false){
      return $pos;
-    }
+     }
 
  while(isset($this -> OTLdata[$pos + 1]['hex']) && strpos($this -> GlyphClassMarks, $this -> OTLdata[$pos + 1]['hex']) !== false){
      $pos++;
-    }
+     }
  return $pos ;
 }
 
@@ -3410,10 +3410,10 @@ if (strpos($this -> GlyphClassMarks, $this -> OTLdata[$pos]['hex']) !== false){
 function _applyGPOSsubtable($lookupID, $subtable, $ptr, $currGlyph, $currGID, $subtable_offset, $Type, $Flag, $MarkFilteringSet, $LuCoverage, $tag, $level = 0, $is_old_spec){
  if (($Flag & 0x0001) == 1){
      $dir = 'RTL';
-    } // only used for Type 3
+     } // only used for Type 3
  else{
      $dir = 'LTR';
-    }
+     }
  $ignore = $this -> _getGCOMignoreString($Flag, $MarkFilteringSet);
 
  // Lets start
@@ -4361,7 +4361,7 @@ else if ($Type == 8){
 
 else{
      die("GPOS Lookup Type " . $Type . " not supported.");
-    }
+     }
 }
 
  // ////////////////////////////////////////////////////////////////////////////////
@@ -4631,42 +4631,42 @@ $vra = array();
  // Horizontal adjustment for placement - in design units
 if (($ValueFormat & 0x0001) == 0x0001){
      $vra['XPlacement'] = $this -> read_short();
-    }
+     }
  // Vertical adjustment for placement - in design units
 if (($ValueFormat & 0x0002) == 0x0002){
      $vra['YPlacement'] = $this -> read_short();
-    }
+     }
  // Horizontal adjustment for advance - in design units (only used for horizontal writing)
 if (($ValueFormat & 0x0004) == 0x0004){
      $vra['XAdvance'] = $this -> read_short();
-    }
+     }
  // Vertical adjustment for advance - in design units (only used for vertical writing)
 if (($ValueFormat & 0x0008) == 0x0008){
      $this -> read_short();
-    }
+     }
  // Offset to Device table for horizontal placement-measured from beginning of PosTable (may be NULL)
 if (($ValueFormat & 0x0010) == 0x0010){
      $this -> read_ushort();
-    }
+     }
  // Offset to Device table for vertical placement-measured from beginning of PosTable (may be NULL)
 if (($ValueFormat & 0x0020) == 0x0020){
      $this -> read_ushort();
-    }
+     }
  // Offset to Device table for horizontal advance-measured from beginning of PosTable (may be NULL)
 if (($ValueFormat & 0x0040) == 0x0040){
      $this -> read_ushort();
-    }
+     }
  // Offset to Device table for vertical advance-measured from beginning of PosTable (may be NULL)
 if (($ValueFormat & 0x0080) == 0x0080){
      $this -> read_ushort();
-    }
+     }
  return $vra;
  }
 
  function _getAnchorTable($offset = 0){
  if ($offset){
      $this -> seek($offset);
-    }
+     }
  $AnchorFormat = $this -> read_ushort();
  $XCoordinate = $this -> read_short();
  $YCoordinate = $this -> read_short();
@@ -4734,7 +4734,7 @@ if (($flag & 0x0002) == 0x0002){
      }
  if ($str){
      return "((?:(?:" . $str . "))*)";
-    }
+     }
 else return "()";
  }
 
@@ -4743,13 +4743,13 @@ else return "()";
  // Flag & 0x0008 = Ignore Marks - (unless already done with MarkAttachmentType)
 if (($flag & 0x0008 && ($flag & 0xFF00) == 0) && strpos($this -> GlyphClassMarks, $glyph)){
      $ignore = true;
-    }
+     }
  if (($flag & 0x0004) && strpos($this -> GlyphClassLigatures, $glyph)){
      $ignore = true;
-    }
+     }
  if (($flag & 0x0002) && strpos($this -> GlyphClassBases, $glyph)){
      $ignore = true;
-    }
+     }
  // Flag & 0xFF?? = MarkAttachmentType
 if ($flag & 0xFF00){
      // "a lookup must ignore any mark glyphs that are not in the specified mark attachment class"
@@ -4761,7 +4761,7 @@ if ($flag & 0xFF00){
  // Flag & 0x0010 = UseMarkFilteringSet
 if (($flag & 0x0010) && strpos($this -> MarkGlyphSets[$MarkFilteringSet], $glyph)){
      $ignore = true;
-    }
+     }
  return $ignore;
  }
 
@@ -4813,10 +4813,10 @@ function _bidiSort($ta, $str = '', $dir, & $chunkOTLdata, $useGPOS){
  // Set the initial paragraph embedding level
 if ($dir == 'rtl'){
      $pel = 1;
-    }
+     }
 else{
      $pel = 0;
-    }
+     }
 
 
  // X1. Begin by setting the current embedding level to the paragraph embedding level. Set the directional override status to neutral.
@@ -5140,8 +5140,8 @@ for ($i = 0; $i < $numchars; ++$i){
      }
 
 // NB
-// Separate into lines at this point************
- // L1. On each line, reset the embedding level of the following characters to the paragraph embedding level:
+// Separate into lines at this point************ 
+// L1. On each line, reset the embedding level of the following characters to the paragraph embedding level:
 // 1. Segment separators (Tab) 'S',
 // 2. Paragraph separators 'B',
 // 3. Any sequence of whitespace characters 'WS' preceding a segment separator or paragraph separator, and
@@ -5232,7 +5232,7 @@ function _bidiPrepare(& $para, $dir){
 $pel = 0; // paragraph embedding level
  if ($dir == 'rtl'){
      $pel = 1;
-    }
+     }
 
  // X1. Begin by setting the current embedding level to the paragraph embedding level. Set the directional override status to neutral.
 // Current Embedding Level
@@ -5244,6 +5244,7 @@ $dos = -1;
  $strongrtl = false;
  $diid = 0; // direction isolate ID
  $dictr = 0; // direction isolate counter
+
 
 
 
@@ -5469,7 +5470,7 @@ $numchunks = count($para);
      }
  if ($dir != 'rtl' && !$strongrtl && !$controlchars){
      return;
-    }
+     }
 
  $numchunks = count($para);
 
@@ -5871,7 +5872,7 @@ $numchunks = count($content);
      }
  if ($maxlevel == 0){
      return;
-    }
+     }
 
  $numchars = count($bidiData);
 
@@ -5885,10 +5886,10 @@ $numchunks = count($content);
 // Set the initial paragraph embedding level
 if ($blockdir == 'rtl'){
      $pel = 1;
-    }
+     }
 else{
      $pel = 0;
-    }
+     }
 
  for ($i = ($numchars-1); $i > 0; $i--){
      if ($bidiData[$i]['type'] == UCDN :: BIDI_CLASS_WS || (isset($bidiData[$i]['orig_type']) && $bidiData[$i]['orig_type'] == UCDN :: BIDI_CLASS_WS)){
@@ -5979,7 +5980,7 @@ for ($j = $maxlevel; $j > 0; $j--){
 function splitOTLdata(& $cOTLdata, $OTLcutoffpos, $OTLrestartpos = ''){
  if (!$OTLrestartpos){
      $OTLrestartpos = $OTLcutoffpos;
-    }
+     }
  $newOTLdata = array('GPOSinfo' => array(), 'char_data' => array());
  $newOTLdata['group'] = substr($cOTLdata['group'], $OTLrestartpos);
  $cOTLdata['group'] = substr($cOTLdata['group'], 0, $OTLcutoffpos);
@@ -6021,7 +6022,7 @@ function sliceOTLdata($OTLdata, $pos, $len){
 
  if (isset($OTLdata['char_data'])){
      $newOTLdata['char_data'] = array_slice($OTLdata['char_data'], $pos, $len);
-    }
+     }
 
  // Not necessary - easier to debug
 if ($newOTLdata['GPOSinfo']) ksort($newOTLdata['GPOSinfo']);
@@ -6130,7 +6131,7 @@ if ($Left && $nLeft){
 // ////////         GENERAL OTL FUNCTIONS       /////////////////
 // //////////////////////////////////////////////////////////////
 // //////////////////////////////////////////////////////////////
- function glyphToChar($gid){
+function glyphToChar($gid){
  return (ord($this -> glyphIDtoUni[$gid * 3]) << 16) + (ord($this -> glyphIDtoUni[$gid * 3 + 1]) << 8) + ord($this -> glyphIDtoUni[$gid * 3 + 2]);
  }
 
@@ -6331,7 +6332,7 @@ else{
  // If availabletags includes scripttag - choose
 if (isset($ScriptLang[$scripttag])){
      return array($scripttag, false);
-    }
+     }
 
  // If INDIC (or Myanmar) and available tag not includes new version, check if includes old version & choose old version
 if ($shaper){
@@ -6352,15 +6353,15 @@ if ($shaper){
  // choose DFLT if present
 if (isset($ScriptLang['DFLT'])){
      return array('DFLT', false);
-    }
+     }
  // else choose dflt if present
 if (isset($ScriptLang['dflt'])){
      return array('dflt', false);
-    }
+     }
  // else return no scriptTag
 if (isset($ScriptLang['latn'])){
      return array('latn', false);
-    }
+     }
  // else return no scriptTag
 return array('', false);
 
@@ -6375,7 +6376,7 @@ function _getOTLLangTag($ietf, $available){
 // IETF tag = e.g. en-US, und-Arab, sr-Cyrl cf. config_lang2fonts.php
 if ($available == ''){
      return '';
-    }
+     }
  $tags = preg_split('/-/', $ietf);
  $lang = '';
  $country = '';
@@ -6388,17 +6389,17 @@ if ($available == ''){
      }
  if (isset($tags[2]) && $tags[2]){
      $country = strtolower($tags[2]);
-    }
+     }
 
  if ($lang != '' && isset(UCDN :: $ot_languages[$lang])){
      $langsys = UCDN :: $ot_languages[$lang];
-    }
+     }
 else if ($lang != '' && $country != '' && isset(UCDN :: $ot_languages[$lang . '' . $country])){
      $langsys = UCDN :: $ot_languages[$lang . '' . $country];
      }
 else{
      $langsys = "DFLT";
-    }
+     }
  if (strpos($available, $langsys) === false){
      if (strpos($available, "DFLT") !== false){
          return "DFLT";

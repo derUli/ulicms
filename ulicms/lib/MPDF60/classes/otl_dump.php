@@ -1497,7 +1497,6 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
                  }
              // print_r($Lookup); exit;
             
-            
             // =====================================================================================
             // Process (2) Whole LookupList
             // Get Coverage tables and prepare preg_replace
@@ -1812,7 +1811,6 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              // =====================================================================================
             // =====================================================================================
             // =====================================================================================
-            
             $st = $this -> mpdf -> OTLscript;
              $t = $this -> mpdf -> OTLlang;
              $langsys = $gsub[$st][$t];
@@ -1828,7 +1826,6 @@ $MarkAttachmentType = ' . var_export($this -> MarkAttachmentType , true) . ';
              ksort($lul); // Order the Lookups in the order they are in the GUSB table, regardless of Feature order
              $this -> _getGSUBarray($Lookup, $lul, $st);
              // print_r($lul); exit;
-            
             
             }
          // print_r($Lookup); exit;

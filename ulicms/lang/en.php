@@ -413,6 +413,8 @@ define("TRANSLATION_PAGE_NOT_FOUND_CONTENT", "This page doesn't exist.");
 define("TRANSLATION_FORBIDDEN_COTENT", "You don't have the needed permissions to view this page.");
 
 define("TRANSLATION_ULICMS_NEWS", "News about UliCMS");
+define("TRANSLATION_POSTED_ON_DATE", "Posted on %s");
+
 define("TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">This page is powered by "
      . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS " . cms_version() . "</a></p>");
 

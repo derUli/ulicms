@@ -402,8 +402,11 @@ define("TRANSLATION_PAGE_NOT_FOUND_CONTENT", "Die von Ihnen gew&uuml;nschte Seit
 define("TRANSLATION_FORBIDDEN_COTENT", "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.");
 
 define("TRANSLATION_ULICMS_NEWS", "Neuigkeiten zu UliCMS");
+define("TRANSLATION_POSTED_ON_DATE", "Gepostet am %s");
 define("TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">Diese Seite läuft mit "
      . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS " . cms_version() . "</a></p>");
 define("TRANSLATION_UNDER_MAINTENANCE", "Diese Website ist zurzeit im Wartungsmodus.<br />Bitte später wiederkommen.");
+
+
 
 add_hook("lang_de");

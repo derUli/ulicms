@@ -1,5 +1,4 @@
 <?php
-include_once "../../init.php";
 @session_start();
 
 $rss = new DOMDocument();
@@ -33,9 +32,12 @@ for($x = 0;$x < $limit;$x++){
      $title = str_replace(' & ', ' &amp; ', $feed[$x]['title']);
      $link = $feed[$x]['link'];
      $description = $feed[$x]['desc'];
-     $date = date('l F d, Y', strtotime($feed[$x]['date']));
      echo '<p><strong><a href="' . $link . '" title="' . $title . '">' . $title . '</a></strong><br />';
-     echo '<small><em>Posted on ' . $date . '</em></small></p>';
+     $date = strtotime($feed[$x]['date']);
+     $datestr = strftime("%d.%m.%Y, %A", $date);
+     $txt = get_translation("posted_on_date");
+     $txt = str_replace("%s", $datestr, $txt);
+     echo '<small><em>'.$txt.'</em></small></p>';
      echo '<p>' . $description . '</p>';
      }
 

@@ -29,7 +29,8 @@
 <strong><?php echo TRANSLATION_PAGE_TITLE;
              ?></strong><br/>
 <input type="text" required="true" name="page_title" value="<?php
- echo htmlspecialchars($row -> title);?>">
+             echo htmlspecialchars($row -> title);
+            ?>">
 <br/><br/>
 
 <strong><?php echo TRANSLATION_ALTERNATE_TITLE;

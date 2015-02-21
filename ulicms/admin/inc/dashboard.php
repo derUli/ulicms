@@ -75,7 +75,7 @@ if($acl -> hasPermission("dashboard")){
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
- $('#ulicms-feed').load('inc/ulicms-news.php');
+ $('#ulicms-feed').load('?action=ulicms-news');
 });
 </script>
 

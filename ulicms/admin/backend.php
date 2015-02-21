@@ -20,7 +20,7 @@ $_COOKIE[session_name()] = session_id();
 add_hook("after_session_start");
 
 $syslang = getSystemLanguage();
-include getLanguageFilePath($syslang);
+include_once getLanguageFilePath($syslang);
 require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 
@@ -28,6 +28,11 @@ require_once "../version.php";
 require_once "inc/logincheck.php";
 
 define("_SECURITY", true);
+
+if($_GET["action"] == "ulicms-news"){
+         require_once "inc/ulicms-news.php";
+         exit();
+         }    
 
 if(isset($_SESSION["ulicms_login"]))
     {
@@ -71,7 +76,6 @@ if(!$eingeloggt){
     else if($_GET["action"] == "contents"){
          require_once "inc/contents.php";
          }
-    
     else if($_GET["action"] == "pages"){
          require_once "inc/pages.php";
          }

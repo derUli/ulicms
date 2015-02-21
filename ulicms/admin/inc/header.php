@@ -4,11 +4,12 @@
 <meta name="viewport" content="width=1000, user-scalable=no"/>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <link rel="stylesheet" type="text/css" href="css/blue.css"/>
-<?php 
+<?php
 if(is_mobile()){
-?>
+    ?>
 <link rel="stylesheet" type="text/css" href="css/mobile.css"/>
-<?php } ?>
+<?php }
+?>
 <link rel="stylesheet" type="text/css" href="scripts/tablesorter/style.css"/>
 <script type="text/javascript" src="scripts/php.js/strip_tags.js"></script>
 <script type="text/javascript" src="scripts/php.js/htmlspecialchars.js"></script>
