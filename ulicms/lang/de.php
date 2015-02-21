@@ -156,7 +156,7 @@ define("TRANSLATION_ACTIVATED", "Aktiv");
 define("TRANSLATION_DEACTIVATED", "Deaktiv");
 define("TRANSLATION_VIEW", "Anzeigen");
 define("TRANSLATION_PAGE_TITLE", "Seitentitel");
-define("TRANSLATION_ALTERNATE_TITLE", "Alternative Übeschrift");
+define("TRANSLATION_ALTERNATE_TITLE", "Alternative Überschrift");
 define("TRANSLATION_ALTERNATE_TITLE_INFO", "Falls die Überschrift auf der Seite vom Titel im Navigationsmenü abweichen soll. ");
 define("TRANSLATION_LANGUAGE", "Sprache");
 
