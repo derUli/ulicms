@@ -41,8 +41,10 @@
 <form action="index.php?action=meta_keywords" id="meta_keywords" method="post">
 <table border=0>
 <tr>
-<td style="min-width:100px;"><strong>Sprache</strong></td>
-<td><strong>Meta Keywords</strong></td>
+<td style="min-width:100px;"><strong><?php echo TRANSLATION_LANGUAGE;
+         ?></strong></td>
+<td><strong><?php echo TRANSLATION_META_KEYWORDS;
+         ?></strong></td>
 </tr>
 <?php
          for($n = 0; $n < count($languages); $n++){
@@ -62,7 +64,8 @@
 <td>
 </td>
 <td style="text-align:center">
-<input type="submit" name="submit" value="Einstellungen Speichern">
+<input type="submit" name="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;
+         ?>">
 </td>
 </table>
 </form>

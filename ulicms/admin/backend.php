@@ -15,23 +15,28 @@ if($acl -> hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" o
      $_SESSION['KCFINDER']['disabled'] = false;
      }
 
+$_COOKIE[session_name()] = session_id();
 
-setcookie(session_name(), session_id());
 add_hook("after_session_start");
 
+$syslang = getSystemLanguage();
+include_once getLanguageFilePath($syslang);
+
+setLocaleByLanguage();
 
 
-
+require_once "inc/queries.php";
+@include_once "inc/sort_direction.php";
 
 require_once "../version.php";
 require_once "inc/logincheck.php";
 
-$syslang = getSystemLanguage();
-include getLanguageFilePath($syslang);
-require_once "inc/queries.php";
-@include_once "inc/sort_direction.php";
-
 define("_SECURITY", true);
+
+if($_GET["action"] == "ulicms-news"){
+         require_once "inc/ulicms-news.php";
+         exit();
+         }    
 
 if(isset($_SESSION["ulicms_login"]))
     {
@@ -65,6 +70,9 @@ if(!$eingeloggt){
      require_once "inc/adminmenu.php";
     
     
+     add_hook("register_actions");
+    
+     global $actions;
     
      if($_GET["action"] == "" || $_GET["action"] == "home"){
          require_once "inc/dashboard.php";
@@ -72,7 +80,6 @@ if(!$eingeloggt){
     else if($_GET["action"] == "contents"){
          require_once "inc/contents.php";
          }
-    
     else if($_GET["action"] == "pages"){
          require_once "inc/pages.php";
          }
@@ -212,8 +219,15 @@ if(!$eingeloggt){
     
     else if($_GET["action"] == "pkg_settings"){
          require_once "inc/pkg_settings.php";
-         }else if($_GET["action"] == "design"){
+         }
+    else if($_GET["action"] == "design"){
          require_once "inc/design.php";
+         }
+    
+    else if(isset($actions[$_GET["action"]])){
+         include_once $actions[$_GET["action"]];
+         }else{
+         echo TRANSLATION_ACTION_NOT_FOUND;
          }
      }
 

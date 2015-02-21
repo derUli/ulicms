@@ -1,10 +1,16 @@
 <!doctype html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width"/>
+<meta name="viewport" content="width=1000, user-scalable=no"/>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <link rel="stylesheet" type="text/css" href="css/blue.css"/>
-
+<?php
+if(is_mobile()){
+    ?>
+<link rel="stylesheet" type="text/css" href="css/mobile.css"/>
+<?php }
+?>
+<link rel="stylesheet" type="text/css" href="scripts/tablesorter/style.css"/>
 <script type="text/javascript" src="scripts/php.js/strip_tags.js"></script>
 <script type="text/javascript" src="scripts/php.js/htmlspecialchars.js"></script>
 <script type="text/javascript" src="scripts/jquery.js"></script>
@@ -22,15 +28,15 @@ $(document).ready(function() {
 <script type="text/javascript" src="scripts/notification.js"></script>
 <script type="text/javascript" src="scripts/jquery-shiftclick.js"></script>
 <script type="text/javascript" src="scripts/shift_checkbox.js"></script>
-<script type="text/javascript" src="scripts/doubletaptogo.js"></script>
+<?php if(is_mobile()){?>
 <script type="text/javascript">
+// Keine Dropdown Menüs auf mobilen Geräten
 $(document).ready(function(){
-$(".menu li:has(ul)").doubleTapToGo();
+$(".menu li ul ").hide();
 })
 </script>
-<?php }
-?>
-<script type="text/javascript" src="scripts/audio.js"></script>
+<?php } ?>
+<?php } ?>
 <script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
 <link rel="stylesheet" href="scripts/vallenato/vallenato.css" type="text/css">
 <link rel="icon" href="gfx/favicon.ico" type="image/x-icon"> 
@@ -49,6 +55,14 @@ $(".menu li:has(ul)").doubleTapToGo();
 <script src="codemirror/mode/css/css.js" type="text/javascript"></script>
 <title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="scripts/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+     
+        $(".tablesorter").tablesorter(); 
+    } 
+); 
+</script>
 <?php add_hook("admin_head");
 ?>
 </head>

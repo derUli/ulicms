@@ -54,18 +54,21 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <?php
      if(count($categories) > 0 and !isset($_GET["add"]) and !isset($_GET["edit"])){
          ?>
-<table>
-<tr>
-<td style="min-width:50px;"><a href="?action=categories&order=id"><?php echo TRANSLATION_ID;
-         ?></a></td>
+<table class="tablesorter">
 
-<td style="min-width:200px;"><a href="?action=categories&order=name"><?php echo TRANSLATION_NAME;
-         ?></a></td>
-<td style="min-width:200px;"><a href="?action=categories&order=description"><?php echo TRANSLATION_DESCRIPTION;
-         ?></a></td>
+<thead>
+<tr>
+<th style="min-width:50px;"><a href="?action=categories&order=id"><?php echo TRANSLATION_ID;
+         ?></a></th>
+
+<th style="min-width:200px;"><a href="?action=categories&order=name"><?php echo TRANSLATION_NAME;
+         ?></a></th>
+<th style="min-width:200px;"><a href="?action=categories&order=description"><?php echo TRANSLATION_DESCRIPTION;
+         ?></a></th>
 <td></td>
 <td></td>
 </tr>
+<tbody>
 <?php foreach($categories as $category){
              ?>
 <tr>
@@ -76,20 +79,20 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <td style="padding-right:20px;"><?php echo nl2br(real_htmlspecialchars($category["description"]));
              ?></td>
 <td style="text-align:center;"><a href="?action=categories&edit=<?php echo $category["id"];
-             ?>"><img src="gfx/edit.png" alt="<?php echo TRANSLATION_EDIT;
+             ?>"><img src="gfx/edit.png" class="mobile-big-image" alt="<?php echo TRANSLATION_EDIT;
              ?>" title="<?php echo TRANSLATION_EDIT;
              ?>"></td>
 <?php if($category["id"] != 1){
                  ?>
 
 <td style="text-align:center;"><a href="?action=categories&del=<?php echo $category["id"];
-                 ?>" onclick="return confirm('Wirklich Löschen?')"><img src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
+                 ?>" onclick="return confirm('Wirklich Löschen?')"><img class="mobile-big-image" src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
                  ?>" title="<?php echo TRANSLATION_DELETE;
                  ?>"></a></td>
 
 <?php }else{
                  ?>
-<td style="text-align:center;"><a href="#" onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
+<td style="text-align:center;"><a href="#" onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img class="mobile-big-image" src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
                  ?>" title="<?php echo TRANSLATION_DELETE;
                  ?>"></a></td>
 <?php }
@@ -98,6 +101,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 </tr>
 <?php }
          ?>
+</tbody>
 </table>
 <?php }else if(isset($_GET["add"])){
          ?>

@@ -121,16 +121,16 @@ class Services_JSON
      * 
      * @param int $use object behavior flags; combine with boolean-OR
      * 
-     *                                                  possible values:
-     *                                                  - SERVICES_JSON_LOOSE_TYPE:  loose typing.
-     *                                                          "{...}" syntax creates associative arrays
-     *                                                          instead of objects in decode().
-     *                                                  - SERVICES_JSON_SUPPRESS_ERRORS:  error suppression.
-     *                                                          Values which can't be encoded (e.g. resources)
-     *                                                          appear as NULL instead of throwing errors.
-     *                                                          By default, a deeply-nested resource will
-     *                                                          bubble up with an error, so all return values
-     *                                                          from encode() should be checked with isError()
+     *                                                      possible values:
+     *                                                      - SERVICES_JSON_LOOSE_TYPE:  loose typing.
+     *                                                              "{...}" syntax creates associative arrays
+     *                                                              instead of objects in decode().
+     *                                                      - SERVICES_JSON_SUPPRESS_ERRORS:  error suppression.
+     *                                                              Values which can't be encoded (e.g. resources)
+     *                                                              appear as NULL instead of throwing errors.
+     *                                                              By default, a deeply-nested resource will
+     *                                                              bubble up with an error, so all return values
+     *                                                              from encode() should be checked with isError()
      */
      function Services_JSON($use = 0)
     {
@@ -229,9 +229,9 @@ class Services_JSON
      * encodes an arbitrary variable into JSON format
      * 
      * @param mixed $var any number, boolean, string, array, or object to be encoded.
-     *                                                  see argument 1 to Services_JSON() above for array-parsing behavior.
-     *                                                  if var is a strng, note that encode() always expects it
-     *                                                  to be in ASCII or UTF-8 format!
+     *                                                      see argument 1 to Services_JSON() above for array-parsing behavior.
+     *                                                      if var is a strng, note that encode() always expects it
+     *                                                      to be in ASCII or UTF-8 format!
      * @return mixed JSON string representation of input var or an error if a problem occurs
      * @access public 
      */
@@ -473,10 +473,10 @@ class Services_JSON
      * 
      * @param string $str JSON-formatted string
      * @return mixed number, boolean, string, array, or object
-     *                                          corresponding to given JSON input string.
-     *                                          See argument 1 to Services_JSON() above for object-output behavior.
-     *                                          Note that decode() always returns strings
-     *                                          in ASCII or UTF-8 format!
+     *                                              corresponding to given JSON input string.
+     *                                              See argument 1 to Services_JSON() above for object-output behavior.
+     *                                              Note that decode() always returns strings
+     *                                              in ASCII or UTF-8 format!
      * @access public 
      */
      function decode($str)

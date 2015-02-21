@@ -41,8 +41,10 @@
 <form action="index.php?action=motto" id="motto" method="post">
 <table border=0>
 <tr>
-<td style="min-width:100px;"><strong>Sprache</strong></td>
-<td><strong>Motto</strong></td>
+<td style="min-width:100px;"><strong><?php echo TRANSLATION_LANGUAGE;
+         ?></strong></td>
+<td><strong><?php echo TRANSLATION_MOTTO;
+         ?></strong></td>
 </tr>
 <?php
          for($n = 0; $n < count($languages); $n++){

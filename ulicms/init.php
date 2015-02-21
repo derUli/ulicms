@@ -7,14 +7,10 @@
 if(!defined("ULICMS_ROOT"))
      define("ULICMS_ROOT", dirname(__file__));
 
-
-
-
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if (ini_get('register_globals') === '1'){
      die('SECURITY WARNING: "Register Globals" feature is enabled! UliCMS refuses to run with enabled "Register Globals"!');
      }
-
 
 $os = PHP_OS;
 switch($os)
@@ -83,7 +79,7 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEP
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "helper" . DIRECTORY_SEPERATOR . "export_helper.php";
-
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "Mobile_Detect.php";
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "version.php";
 
@@ -144,8 +140,11 @@ define('BR', '<br />' . LF); // HTML Break
 define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 
 
+global $actions;
+$actions = array();
+
 function noperms(){
- echo "<p>" . TRANSLATION_NO_PERMISSIONS . "</p>";
+ echo "<p class=\"ulicms_error\">" . TRANSLATION_NO_PERMISSIONS . "</p>";
  return false;
  }
 

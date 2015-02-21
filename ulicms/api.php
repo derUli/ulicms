@@ -5,6 +5,17 @@ function getLanguageFilePath($lang = "de", $component = null){
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
 
+// returns site protocl
+// http:// or https://
+function get_site_protocol(){
+     if(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') return $protocol = 'https://';
+    else return $protocol = 'http://';
+    }
+
+function site_protocol(){
+     echo get_site_protocol();
+    }
+
 function strbool($value)
 {
      return $value ? 'true' : 'false';
@@ -382,9 +393,23 @@ function add_hook($name){
     
      }
 
+function register_action($name, $file){
+    
+     global $actions;
+     $modules = getAllModules();
+     $actions[$name] = $file;
+     return $actions;
+     }
 
-
-
+function remove_action($name){
+     global $actions;
+     $retval = false;
+     if(isset($action[$name])){
+         unset($name);
+         $retval = true;
+         }
+     return $retval;
+     }
 
 // Check for Secure HTTP Connection (SSL)
 function is_ssl(){
@@ -392,6 +417,27 @@ function is_ssl(){
          || $_SERVER['SERVER_PORT'] == 443);
      }
 
+
+function setLocaleByLanguage(){
+  $locale = null;
+  if(is_admin_dir()){
+     $var = "locale_".db_escape($_SESSION["system_language"]);
+     }
+  else {
+     $var = "locale_".db_escape($_SESSION["language"]);
+  }
+  $locale = getconfig($var);
+  if($locale){
+    setlocale(LC_ALL, $locale);
+  }
+  else{
+    $locale = getconfig("locale");
+    if($locale)
+        setlocale(LC_ALL, $locale);
+  }
+  
+  return $locale;
+}
 
 // Returns the language code of the current language
 // If $current is true returns language of the current page
@@ -567,6 +613,25 @@ function buildCacheFilePath($request_uri){
  return "content/cache/" . md5($unique_identifier) . ".tmp";
  }
 
+
+
+function get_translation($name){
+ $name = strtoupper($name);
+ foreach (get_defined_constants() as $key => $value){
+     if(startsWith($key, "TRANSLATION_") and $key == "TRANSLATION_" . $name){
+         return $value;
+         }
+     }
+ return null;
+}
+
+function translation($name){
+ echo get_translation($name);
+}
+
+function translate($name){
+ translation($name);
+}
 
 function SureRemoveDir($dir, $DeleteMe){
  if(!$dh = @opendir($dir)) return;
@@ -825,7 +890,7 @@ function getPageTitleByID($id){
      $row = db_fetch_object($query);
      return $row -> title;
      }else{
-     return "-";
+     return "[" . TRANSLATION_NONE . "]";
      }
  }
 
@@ -1014,6 +1079,10 @@ else
 
 
 
+
+
+
+
  }
 
 
@@ -1079,6 +1148,7 @@ if(is_null($page))
 // API-Aufruf zur Deinstallation eines Moduls
 // Ruft uninstall Script auf, falls vorhanden
 // Löscht anschließend den Ordner modules/$name
+//  @TODO dies in die PackageManager Klasse verschieben
 function uninstall_module($name, $type = "module"){
  // Nur Admins können Module löschen
 if(!is_admin())
@@ -1115,7 +1185,7 @@ if($name == "." or $name == ".." or empty($name))
          }
     
      }
- }
+}
 
 
 // Ist der User eingeloggt
@@ -1152,192 +1222,11 @@ function cms_version(){
  return implode(".", $v -> getInternalVersion());
  }
 
-
+// 21. Februar 2015
+// Nutzt nun die Klasse Mobile_Detect
 function is_mobile(){
-
- // Get the user agent
-$user_agent = $_SERVER['HTTP_USER_AGENT'];
-
- // Create an array of known mobile user agents
-// This list is from the 21 October 2010 WURFL File.
-// Most mobile devices send a pretty standard string that can be covered by
-// one of these.  I believe I have found all the agents (as of the date above)
-// that do not and have included them below.  If you use this function, you
-// should periodically check your list against the WURFL file, available at:
-// http://wurfl.sourceforge.net/
-$mobile_agents = Array(
-    
-    
-    "240x320",
-     "acer",
-     "acoon",
-     "acs-",
-     "abacho",
-     "ahong",
-     "airness",
-     "alcatel",
-     "amoi",
-     "android",
-     "anywhereyougo.com",
-     "applewebkit/525",
-     "applewebkit/532",
-     "asus",
-     "audio",
-     "au-mic",
-     "avantogo",
-     "becker",
-     "benq",
-     "bilbo",
-     "bird",
-     "blackberry",
-     "blazer",
-     "bleu",
-     "cdm-",
-     "compal",
-     "coolpad",
-     "danger",
-     "dbtel",
-     "dopod",
-     "elaine",
-     "eric",
-     "etouch",
-     "fly " ,
-     "fly_",
-     "fly-",
-     "go.web",
-     "goodaccess",
-     "gradiente",
-     "grundig",
-     "haier",
-     "hedy",
-     "hitachi",
-     "htc",
-     "huawei",
-     "hutchison",
-     "inno",
-     "ipad",
-     "ipaq",
-     "ipod",
-     "jbrowser",
-     "kddi",
-     "kgt",
-     "kwc",
-     "lenovo",
-     "lg ",
-     "lg2",
-     "lg3",
-     "lg4",
-     "lg5",
-     "lg7",
-     "lg8",
-     "lg9",
-     "lg-",
-     "lge-",
-     "lge9",
-     "longcos",
-     "maemo",
-     "mercator",
-     "meridian",
-     "micromax",
-     "midp",
-     "mini",
-     "mitsu",
-     "mmm",
-     "mmp",
-     "mobi",
-     "mot-",
-     "moto",
-     "nec-",
-     "netfront",
-     "newgen",
-     "nexian",
-     "nf-browser",
-     "nintendo",
-     "nitro",
-     "nokia",
-     "nook",
-     "novarra",
-     "obigo",
-     "palm",
-     "panasonic",
-     "pantech",
-     "philips",
-     "phone",
-     "pg-",
-     "playstation",
-     "pocket",
-     "pt-",
-     "qc-",
-     "qtek",
-     "rover",
-     "sagem",
-     "sama",
-     "samu",
-     "sanyo",
-     "samsung",
-     "sch-",
-     "scooter",
-     "sec-",
-     "sendo",
-     "sgh-",
-     "sharp",
-     "siemens",
-     "sie-",
-     "softbank",
-     "sony",
-     "spice",
-     "sprint",
-     "spv",
-     "symbian",
-     "tablet",
-     "talkabout",
-     "tcl-",
-     "teleca",
-     "telit",
-     "tianyu",
-     "tim-",
-     "toshiba",
-     "tsm",
-     "up.browser",
-     "utec",
-     "utstar",
-     "verykool",
-     "virgin",
-     "vk-",
-     "voda",
-     "voxtel",
-     "vx",
-     "wap",
-     "wellco",
-     "wig browser",
-     "wii",
-     "windows ce",
-     "wireless",
-     "xda",
-     "xde",
-     "zte"
-    );
-
- // Pre-set $is_mobile to false.
-$is_mobile = false;
-
- // Cycle through the list in $mobile_agents to see if any of them
-// appear in $user_agent.
-foreach ($mobile_agents as $device){
-    
-     // Check each element in $mobile_agents to see if it appears in
-    // $user_agent.  If it does, set $is_mobile to true.
-    if (stristr($user_agent, $device)){
-        
-         $is_mobile = true;
-        
-         // break out of the foreach, we don't need to test
-        // any more once we get a true value.
-        break;
-         }
-     }
-
- return $is_mobile;
+ $detect = new Mobile_Detect();
+ return $detect -> isMobile();
 }
 
  function func_enabled($func){

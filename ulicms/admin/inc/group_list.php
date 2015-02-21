@@ -37,17 +37,20 @@ else if($_SESSION["grp_sort"] == "name"){
 ?></a></p>
 <?php if(count($groups) > 0){
      ?>
-<table>
+<table class="tablesorter">
+<thead>
 <tr>
-<td style="min-width:100px;"><a href="?action=groups&sort=id&sort_direction=change"><strong><?php echo TRANSLATION_ID;
-     ?></strong></a></td>
-<td style="min-width:200px;"><a href="?action=groups&sort=name&sort_direction=change"><strong><?php echo TRANSLATION_NAME;
-     ?></strong></a></td>
-<td><strong><?php echo TRANSLATION_STANDARD;
-     ?></strong></td>
+<th style="min-width:100px;"><a href="?action=groups&sort=id&sort_direction=change"><strong><?php echo TRANSLATION_ID;
+     ?></strong></a></th>
+<th style="min-width:200px;"><a href="?action=groups&sort=name&sort_direction=change"><strong><?php echo TRANSLATION_NAME;
+     ?></strong></a></th>
+<th><strong><?php echo TRANSLATION_STANDARD;
+     ?></strong></th>
 <td></td>
 <td></td>
 </tr>
+</thead>
+<tbody>
 
 <?php foreach($groups as $id => $name){
          ?>
@@ -71,16 +74,16 @@ else if($_SESSION["grp_sort"] == "name"){
          ?>
 </td>
 <td><a href="?action=groups&edit=<?php echo $id;
-         ?>"><img src="gfx/edit.png" alt="<?php echo TRANSLATION_EDIT;
+         ?>"><img class="mobile-big-image" src="gfx/edit.png" alt="<?php echo TRANSLATION_EDIT;
          ?>" title="<?php echo TRANSLATION_EDIT;
          ?>"></a></td>
 <td><a href="?action=groups&delete=<?php echo $id;
          ?>" onclick="return confirm('<?php echo TRANSLATION_ASK_FOR_DELETE;
-         ?>');"><img src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
+         ?>');"><img class="mobile-big-image" src="gfx/delete.gif" alt="<?php echo TRANSLATION_DELETE;
          ?>" title="<?php echo TRANSLATION_DELETE;
          ?>"></a></td>
 </tr>
-
+</tbody>
 
 
 <?php }

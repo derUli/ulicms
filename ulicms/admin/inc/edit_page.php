@@ -28,10 +28,9 @@
 <br/><br/>
 <strong><?php echo TRANSLATION_PAGE_TITLE;
              ?></strong><br/>
-<input type="text"  required="true"  name="page_title" value='<?php
+<input type="text" required="true" name="page_title" value="<?php
              echo htmlspecialchars($row -> title);
-            
-             ?>'>
+            ?>">
 <br/><br/>
 
 <strong><?php echo TRANSLATION_ALTERNATE_TITLE;
@@ -108,7 +107,8 @@
 <strong><?php echo TRANSLATION_PARENT;
              ?></strong><br/>
 <select name="parent" size=1>
-<option value="NULL">-</option>
+<option value="NULL">[<?php echo TRANSLATION_NONE;
+             ?>]</option>
 <?php foreach($pages as $key => $page){
                  ?>
 	<option value="<?php echo $page["id"];
@@ -234,17 +234,17 @@ function openMenuImageSelectWindow(field) {
 
 <strong><?php echo TRANSLATION_META_DESCRIPTION;
              ?></strong><br/>
-<input type="text"  name="meta_description" value='<?php
+<input type="text"  name="meta_description" value="<?php
              echo htmlspecialchars($row -> meta_description);
-             ?>'>
+             ?>">
 
 <br/><br/>
 
 <strong><?php echo TRANSLATION_META_KEYWORDS;
              ?></strong><br/>
-<input type="text"  name="meta_keywords" value='<?php
+<input type="text"  name="meta_keywords" value="<?php
              echo htmlspecialchars($row -> meta_keywords);
-             ?>'>
+             ?>">
  
 <br/><br/>
 <strong><?php echo TRANSLATION_COMMENTS;

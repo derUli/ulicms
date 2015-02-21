@@ -5,7 +5,6 @@ if(isset($_SESSION["language"]) and in_array($_SESSION["language"], $languages))
      $default_language = $_SESSION["language"];
      }
 ?>
-<div id="login">
 <p><img src="gfx/logo.png" alt="UliCMS" title="UliCMS"/></p>
 <h3><?php echo TRANSLATION_PLEASE_AUTHENTIFICATE;
 ?></h3>
@@ -53,7 +52,12 @@ for($i = 0; $i < count($languages); $i++){
 
 </table>
 </form>
-
+<?php if(isset($_REQUEST["error"]) and !empty($_REQUEST["error"])){
+     ?>
+<p class="ulicms_error"><?php echo htmlspecialchars($_REQUEST["error"]);
+     ?></p>
+<?php }
+?>
 <?php
 if(getconfig("visitors_can_register") === "on" or getconfig("visitors_can_register") === "1"){
     
@@ -65,4 +69,3 @@ if(getconfig("visitors_can_register") === "on" or getconfig("visitors_can_regist
 <?php
      }
 ?>
-</div>

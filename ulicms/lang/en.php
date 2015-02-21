@@ -400,4 +400,25 @@ define("TRANSLATION_NONE", "None");
 
 define("TRANSLATION_MOBILE_DESIGN", "Design for mobile devices");
 
+define("TRANSLATION_ACTION_NOT_FOUND", "Action not found!");
+
+// Login
+define("TRANSLATION_USER_OR_PASSWORD_INCORRECT", "Username oder password incorrect!");
+
+
+// HTTP Errors
+define("TRANSLATION_PAGE_NOT_FOUND", "Page not found");
+define("TRANSLATION_FORBIDDEN", "Forbidden");
+define("TRANSLATION_PAGE_NOT_FOUND_CONTENT", "This page doesn't exist.");
+define("TRANSLATION_FORBIDDEN_COTENT", "You don't have the needed permissions to view this page.");
+
+define("TRANSLATION_ULICMS_NEWS", "News about UliCMS");
+define("TRANSLATION_POSTED_ON_DATE", "Posted on %s");
+
+define("TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">This page is powered by "
+     . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS " . cms_version() . "</a></p>");
+
+
+define("TRANSLATION_UNDER_MAINTENANCE", "This website is currently under maintenance.<br/>Please visit us again later.");
+
 add_hook("lang_en");

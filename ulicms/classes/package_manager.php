@@ -23,13 +23,19 @@ class packageManager{
             $phar = new PharData($file);
              $phar -> extractTo(ULICMS_ROOT, null, true);
             
-             $post_install_script = ULICMS_ROOT . DIRECTORY_SEPARATOR . "post-install.php";
+             $post_install_script1 = ULICMS_ROOT . DIRECTORY_SEPARATOR . "post-install.php";
+            
+             $post_install_script2 = ULICMS_TMP . DIRECTORY_SEPARATOR . "post-install.php";
             
              // post_install_script ausführen und anschließend
             // entfernen, sofern vorhanden;
-            if(file_exists($post_install_script)){
-                 include_once $post_install_script;
-                 unlink($post_install_script);
+            if(file_exists($post_install_script1)){
+                 include_once $post_install_script1;
+                 unlink($post_install_script1);
+                 }
+            else if(file_exists($post_install_script2)){
+                 include_once $post_install_script2;
+                 unlink($post_install_script2);
                  }
              return true;
              }

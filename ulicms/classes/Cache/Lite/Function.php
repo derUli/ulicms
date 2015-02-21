@@ -68,12 +68,12 @@ class Cache_Lite_Function extends Cache_Lite
      * 
      * Comparing to Cache_Lite constructor, there is another option :
      * $options = array(
-     *                            (...) see Cache_Lite constructor
-     *                            'debugCacheLiteFunction' => (bool) debug the caching process,
-     *                            'defaultGroup' => default cache group for function caching (string),
-     *                            'dontCacheWhenTheOutputContainsNOCACHE' => (bool) don't cache when the function output contains "NOCACHE",
-     *                            'dontCacheWhenTheResultIsFalse' => (bool) don't cache when the function result is false,
-     *                            'dontCacheWhenTheResultIsNull' => (bool don't cache when the function result is null
+     *                                (...) see Cache_Lite constructor
+     *                                'debugCacheLiteFunction' => (bool) debug the caching process,
+     *                                'defaultGroup' => default cache group for function caching (string),
+     *                                'dontCacheWhenTheOutputContainsNOCACHE' => (bool) don't cache when the function output contains "NOCACHE",
+     *                                'dontCacheWhenTheResultIsFalse' => (bool) don't cache when the function result is false,
+     *                                'dontCacheWhenTheResultIsNull' => (bool don't cache when the function result is null
      * );
      * 
      * @param array $options options

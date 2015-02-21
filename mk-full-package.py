@@ -23,13 +23,14 @@ def main():
     parser.add_argument("-z", "--zip", help="Compress with zip", action="store_true")
     parser.add_argument('-t', '--target', action ="store", dest="target", required = True, help="Target directory")
     args = parser.parse_args()
+    target = os.path.expanduser(args.target)
     target = os.path.abspath(args.target)
     reformat = not args.no_reformat
     source_dir = os.path.dirname(__file__)
 
     ignore = ('.git', "doc-src", "phpCB-1.0.1-linux", "*.py", "*.pyc",
               "Releases", "cms-config.php", "services", "update.php",
-              ".gitignore", "cache")
+              ".gitignore", "cache", "*~")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
 

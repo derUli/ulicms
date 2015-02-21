@@ -197,8 +197,7 @@ function body_classes(){
 
 // Gibt "Diese Seite läuft mit UliCMS" aus
 function poweredByUliCMS(){
-     echo "<p class=\"powered-by-ulicms\">Diese Seite läuft mit "
-     . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS " . cms_version() . "</a></p>";
+     translation("POWERED_BY_ULICMS");
      }
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
@@ -322,9 +321,9 @@ function meta_description($ipage = null){
 function get_title($ipage = null, $headline = false){
      $status = check_status();
      if($status == "404 Not Found"){
-         return "Seite nicht gefunden";
+         return TRANSLATION_PAGE_NOT_FOUND;
          }else if($status == "403 Forbidden"){
-         return "Zugriff verweigert";
+         return TRANSLATION_FORBIDDEN;
          }
     
      $ipage = db_escape($_GET["seite"]);
@@ -760,13 +759,13 @@ function content(){
          if(file_exists(getTemplateDirPath($theme) . "404.php"))
              include getTemplateDirPath($theme) . "404.php";
          else
-             echo "Die von Ihnen gew&uuml;nschte Seite existiert nicht.";
+             echo TRANSLATION_PAGE_NOT_FOUND_CONTENT;
          return false;
          }else if($status == "403 Forbidden"){
          if(file_exists(getTemplateDirPath($theme) . "403.php"))
              include getTemplateDirPath($theme) . "403.php";
          else
-             echo "Sie verfügen nicht über die erforderlichen Rechte um auf diese Seite zugreifen zu können.";
+             echo TRANSLATION_FORBIDDEN_COTENT;
          return false;
          }
     

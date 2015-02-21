@@ -13,7 +13,7 @@ add_hook("after_session_start");
 
 setLanguageByDomain();
 
-if(!empty($_GET["language"])){
+if(!empty($_GET["language"]) and in_array($_GET["language"], getAllLanguages())){
      $_SESSION["language"] = db_escape($_GET["language"]);
      }
 
@@ -22,10 +22,16 @@ if(!isset($_SESSION["language"])){
      }
 
 
+setLocaleByLanguage();
+
+if(in_array($_SESSION["language"], getAllLanguages())){
+     include getLanguageFilePath($_SESSION["language"]);
+     }
+
+
 
 require_once "templating.php";
 $status = check_status();
-
 
 if(getconfig("redirection") != "" && getconfig("redirection") != false){
      add_hook("before_global_redirection");
@@ -39,16 +45,15 @@ $theme = get_theme();
 
 if(strtolower(getconfig("maintenance_mode")) == "on" || strtolower(getconfig("maintenance_mode")) == "true" || getconfig("maintenance_mode") == "1"){
      add_hook("before_maintenance_message");
-    
      // Sende HTTP Status 503 und Retry-After im Wartungsmodus
     header('HTTP/1.0 503 Service Temporarily Unavailable');
      header('Status: 503 Service Temporarily Unavailable');
      header('Retry-After: 60');
-    
+     header("Content-Type: text/html; charset=utf-8");
      if(file_exists(getTemplateDirPath($theme) . "maintenance.php"))
          require_once getTemplateDirPath($theme) . "maintenance.php";
      else
-         throw new Exception("Diese Website ist zurzeit im Wartungsmodus.<br />Bitte später wiederkommen.");
+         die(get_translation("UNDER_MAINTENANCE"));
      add_hook("after_maintenance_message");
      die();
      }
@@ -165,7 +170,7 @@ else if(file_exists($cached_page_path)){
  }
  }
 
- $id = md5($_SERVER['REQUEST_URI'] . $_SESSION["language"]);
+ $id = md5($_SERVER['REQUEST_URI'] . $_SESSION["language"] . strbool(is_mobile()));
 
 if(!getconfig("cache_disabled") and !$hasModul and
  getenv('REQUEST_METHOD') == "GET" and $cache_type === "cache_lite"){

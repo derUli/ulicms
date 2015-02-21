@@ -28,7 +28,8 @@ if(defined("_SECURITY")){
      ?></a>
     <ul>
     <li><a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>"><?php echo TRANSLATION_EDIT_PROFILE;
-     ?></a></li></ul>
+     ?></a></li>
+     </ul>
   </li>
   <?php if($acl -> hasPermission("banners") or $acl -> hasPermission("pages") or $acl -> hasPermission("categories")){
          ?>
@@ -239,13 +240,9 @@ if(defined("_SECURITY")){
          ?>
      <?php if($acl -> hasPermission("cache")){
              ?>
-    <li><a href="?action=cache"><?php echo TRANSLATION_CACHE;
-             ?></a></a>
-     <ul>
-     <li><a id="clear_cache" href="?action=cache&clear_cache=yes"><?php echo TRANSLATION_CLEAR_CACHE;
+    <li><a id="clear_cache" href="?action=cache&clear_cache=yes"><?php echo TRANSLATION_CLEAR_CACHE;
              ?></a></li>
-     </ul>    
-    </li>  <?php }
+ <?php }
          ?>
      <?php if($acl -> hasPermission("motd")){
              ?>
@@ -296,7 +293,7 @@ if(defined("_SECURITY")){
          ?>
      <?php }
      ?>
-    <li><a href="?action=destroy"><?php echo TRANSLATION_LOGOUT;
+    <li><a href="?action=destroy" onclick="return confirm('<?php translate("logout");?>?')"><?php echo TRANSLATION_LOGOUT;
      ?></a></li>
 </ul>
 <script type="text/javascript">

@@ -57,41 +57,41 @@ $GLOBALS['_PEAR_Command_objects'] = array();
  * How to implement command classes:
  * 
  * - The class must be called PEAR_Command_Nnn, installed in the
- *                          "PEAR/Common" subdir, with a method called getCommands() that
- *                          returns an array of the commands implemented by the class (see
- *                          PEAR/Command/Install.php for an example).
+ *                              "PEAR/Common" subdir, with a method called getCommands() that
+ *                              returns an array of the commands implemented by the class (see
+ *                              PEAR/Command/Install.php for an example).
  * 
  * - The class must implement a run() function that is called with three
- *                          params:
+ *                              params:
  * 
- *                           (string) command name
- *                           (array)  assoc array with options, freely defined by each
- *                                    command, for example:
- *                                    array('force' => true)
- *                           (array)  list of the other parameters
+ *                               (string) command name
+ *                               (array)  assoc array with options, freely defined by each
+ *                                        command, for example:
+ *                                        array('force' => true)
+ *                               (array)  list of the other parameters
  * 
- *                          The run() function returns a PEAR_CommandResponse object.  Use
- *                          these methods to get information:
+ *                              The run() function returns a PEAR_CommandResponse object.  Use
+ *                              these methods to get information:
  * 
- *                           int getStatus()   Returns PEAR_COMMAND_(SUCCESS|FAILURE|PARTIAL)
- *                                             *_PARTIAL means that you need to issue at least
- *                                             one more command to complete the operation
- *                                             (used for example for validation steps).
+ *                               int getStatus()   Returns PEAR_COMMAND_(SUCCESS|FAILURE|PARTIAL)
+ *                                                 *_PARTIAL means that you need to issue at least
+ *                                                 one more command to complete the operation
+ *                                                 (used for example for validation steps).
  * 
- *                           string getMessage()  Returns a message for the user.  Remember,
- *                                                no HTML or other interface-specific markup.
+ *                               string getMessage()  Returns a message for the user.  Remember,
+ *                                                    no HTML or other interface-specific markup.
  * 
- *                          If something unexpected happens, run() returns a PEAR error.
+ *                              If something unexpected happens, run() returns a PEAR error.
  * 
  * - DON'T OUTPUT ANYTHING! Return text for output instead.
  * 
  * - DON'T USE HTML! The text you return will be used from both Gtk,
- *                          web and command-line interfaces, so for now, keep everything to
- *                          plain text.
+ *                              web and command-line interfaces, so for now, keep everything to
+ *                              plain text.
  * 
  * - DON'T USE EXIT OR DIE! Always use pear errors.  From static
- *                          classes do PEAR::raiseError(), from other classes do
- *                          $this->raiseError().
+ *                              classes do PEAR::raiseError(), from other classes do
+ *                              $this->raiseError().
  * 
  * @category pear
  * @package PEAR
@@ -208,12 +208,12 @@ class PEAR_Command
      * and see what commands they implement.
      * 
      * @param bool $ (optional) if FALSE (default), the new list of
-     *                                      commands should replace the current one.  If TRUE,
-     *                                      new entries will be merged with old.
+     *                                          commands should replace the current one.  If TRUE,
+     *                                          new entries will be merged with old.
      * @param string $ (optional) where (what directory) to look for
-     *                                      classes, defaults to the Command subdirectory of
-     *                                      the directory from where this file (__FILE__) is
-     *                                      included.
+     *                                          classes, defaults to the Command subdirectory of
+     *                                          the directory from where this file (__FILE__) is
+     *                                          included.
      * @return bool TRUE on success, a PEAR error on failure
      * @access public 
      * @static 

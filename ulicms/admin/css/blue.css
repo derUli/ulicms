@@ -17,6 +17,9 @@ border:0px;
 
 .ulicms_error{
 color:red;
+background-color:rgb(250, 250, 250);
+border:solid rgb(230,230,230) 1px; 
+padding:10px;
 }
 
 html{
@@ -28,6 +31,7 @@ overflow-y:scroll;
     display:inline-block;
     width:100%;
     min-height:40px;
+    position:relative;
     margin:0px auto;
     padding:0;
     background:#335599;
@@ -64,6 +68,11 @@ overflow-y:scroll;
     background:none;
     border:none;
     color:#000;
+}
+
+.menu ul li > ul{
+position:absolute;
+left:190px;
 }
 .menu ul li a:hover {
     background:#335599 url(../images/bg.png);
@@ -129,15 +138,15 @@ width:100%;
 }
 
 input, select, table, textarea{
-border: 1px solid #A4A4A4;
+border:solid 1px #EDEDED;
 }
 
-table tr td{
+table tr td, table th td{
    padding:5px;
 }
 
-table tr:nth-child(odd)    { background-color:#eee; }
-table tr:nth-child(even)   { background-color:#fff; }
+table tr:nth-child(odd), table th:nth-child(odd)    { background-color:#eee; }
+table tr:nth-child(even), table th:nth-child(odd)   { background-color:#fff; }
 
 
 .menu ul {
@@ -205,3 +214,6 @@ border:none;
 #login tr{
 background-color:white;
 }
+
+
+
