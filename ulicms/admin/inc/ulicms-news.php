@@ -36,7 +36,7 @@ for($x = 0;$x < $limit;$x++){
      $description = $feed[$x]['desc'];
      echo '<p><strong><a href="' . $link . '" title="' . $title . '" target="_blank">' . $title . '</a></strong><br />';
      $date = strtotime($feed[$x]['date']);
-     $datestr = strftime("%d.%m.%Y, %A", $date);
+     $datestr = strftime("%x, %A", $date);
      $txt = get_translation("posted_on_date");
      $txt = str_replace("%s", $datestr, $txt);
      echo '<small><em>' . $txt . '</em></small></p>';
