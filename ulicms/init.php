@@ -275,8 +275,11 @@ if(!$timezone){
  date_default_timezone_set(getconfig("timezone"));
 
 $locale = getconfig("locale");
-if($locale)
-   @setlocale (LC_ALL, $locale);
+if($locale){
+      $locale = splitAndTrim($locale);
+      array_unshift($locale, LC_ALL);
+      @call_user_func_array("setlocale", $locale);
+   }
 
 if(!getconfig("session_timeout")){
  setconfig("session_timeout", 60);

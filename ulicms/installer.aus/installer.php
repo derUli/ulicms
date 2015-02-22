@@ -471,9 +471,9 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (47, 'ckeditor_skin', 'moono'),
 (48, 'installed_at', '" . time() . "'),
 (49, 'cache_disabled', 'disabled'),
-(50, 'locale', 'de_DE.UTF-8'),
-(51, 'locale_de', 'de_DE.UTF-8'),
-(52, 'locale_en', 'en_US.UTF-8'),
+(50, 'locale', 'de_DE.UTF-8; de_DE; deu_deu'),
+(51, 'locale_de', 'de_DE.UTF-8; de_DE; deu_deu'),
+(52, 'locale_en', 'en_US.UTF-8; en_GB.UTF-8; en_US; en_GB; english-uk; eng; uk'),
 (53, 'session_timeout', '60');")or die(mysqli_error($connection));
         
          mysqli_query($connection, "UPDATE `" . $prefix . "content` SET parent=NULL")or die(mysqli_error($connection));

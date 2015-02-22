@@ -418,6 +418,10 @@ function is_ssl(){
      }
 
 
+function splitAndTrim($str){
+  return array_map('trim',explode(";",$str));
+}
+
 function setLocaleByLanguage(){
   $locale = null;
   if(is_admin_dir()){
@@ -428,12 +432,18 @@ function setLocaleByLanguage(){
   }
   $locale = getconfig($var);
   if($locale){
-    @setlocale(LC_ALL, $locale);
+    $locale = splitAndTrim($locale);
+    array_unshift($locale, LC_ALL);
+    @call_user_func_array("setlocale", $locale);
   }
   else{
     $locale = getconfig("locale");
-    if($locale)
-        @setlocale(LC_ALL, $locale);
+    if($locale){
+        
+      $locale = splitAndTrim($locale);
+      array_unshift($locale, LC_ALL);
+      @call_user_func_array("setlocale", $locale);
+     }
   }
   
   return $locale;
