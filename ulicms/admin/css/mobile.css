@@ -22,6 +22,9 @@ width:85%;
 }
 
 
+div#root-container{
+width:95%;
+}
 #pbody table{
 display:block;
 overflow:auto;
