@@ -1,5 +1,5 @@
 ﻿===== Neues in UliCMS 8.0.1 ====
-+ Bedienung von UliCMS auf Mobile Devices wie Smartphones und Tablets optimiert
++ Bedienung von UliCMS auf Mobile Devices wie Smartphones und Tablets optimiert (getestet auf Huawei Ascend Y300 mit Android)
 + API Methoden register_action und remove_action hinzugefügt
   Damit kann man eigene Actions zum Backend hinzugefügen
 + Listen im Backend werden über jQuery Tablesorter sortiert, statt per SQL -> dadurch kein Page Reload mehr -> Sortierfunktion schneller
