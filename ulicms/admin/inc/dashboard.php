@@ -204,7 +204,7 @@ $(document).ready(function() {
              ?>" target="_blank"><?php echo htmlspecialchars($row -> title, ENT_QUOTES, "UTF-8");
              ?></a></td>
 
-<td><?php echo date(env("date_format"), $row -> lastmodified)?></td>
+<td><?php echo strftime("%x %X", $row -> lastmodified)?></td>
 <td>
 <?php
              $autorName = $admins[$row -> lastchangeby];
