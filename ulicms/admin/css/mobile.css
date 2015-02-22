@@ -2,7 +2,9 @@
       font-size:x-large;    
     }
     
-    
+    .menu li ul{
+       display:none !important;    
+    }
     
     .menu {
         font-size:xx-large;
