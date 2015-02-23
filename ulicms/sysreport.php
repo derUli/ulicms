@@ -42,7 +42,7 @@ function generateSysReport(){
   $str .= "</ol>";
   
   $str .= "<h2>UliCMS</h2>";
-  $str .= "Core Version". cms_version();
+  $str .= "Core Version: ". cms_version();
   $str .= "<h3>Installierte Module</h3>";
   $modules = getAllModules();
   
@@ -77,6 +77,16 @@ function generateSysReport(){
   $str .= "<small>generiert durch sysreport 2015-02-23</small>";
   return $str;
 }
-header("Content-Type: text/html; charset = UTF-8");
-
-echo nl2br(generateSysReport());
+header("Content-Type: application/octet-stream; charset = UTF-8");
+header("Content-Disposition: attachment; filename=sysreport.html;")
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+<title>sysreport</title>
+</head>
+<body>
+<?php echo nl2br(generateSysReport());?>
+</body>
+</html>
