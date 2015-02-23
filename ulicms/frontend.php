@@ -34,6 +34,7 @@ if(getconfig("check_for_spamhaus") and checkForSpamhaus()){
    $txt = get_translation("IP_BLOCKED_BY_SPAMHAUS");
 
    $txt = str_replace("%ip", get_ip(), $txt);
+   header("HTTP/1.0 403 Forbidden");
    header("Content-Type: text/html; charset=UTF-8");
    echo $txt;
    exit();
