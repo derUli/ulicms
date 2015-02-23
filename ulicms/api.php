@@ -1058,16 +1058,12 @@ function is__writable($path)
  elseif (file_exists($path) && preg_match('/\.tmp/', $path))
     {
     
-     if (!($f = @fopen($path, 'w+')))
-         return false;
-     fclose($f);
-     unlink($path);
-     return true;
+     return is_writable($path);
     
      }
 else
     
-     return 0; // Or return error - invalid path...
+     return false; // Or return error - invalid path...
 
 
 
