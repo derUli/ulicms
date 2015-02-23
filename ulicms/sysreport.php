@@ -12,7 +12,7 @@ function generateSysReport(){
   $tmp_dir = ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir();
 
   $str .= "upload_tmp_dir: " . $tmp_dir."\n";
-  $allow_url_fopen = ini_get('allow_url_fopen') ? 'Enabled' : 'Disabled';
+  $allow_url_fopen = ini_get('allow_url_fopen') ? 'Aktiviert' : 'Deaktiviert';
   $str .= "allow_url_fopen: ".$allow_url_fopen;
   $str .= "<h3>Module</h3>";
   $extensions = get_loaded_extensions();
@@ -52,7 +52,18 @@ function generateSysReport(){
   }
   $str .= "</ol>";
   
-  $str .= '<h2>$_SERVER</h2>'."";
+  $str .= "<h2>Dateirechte</h2>";
+  $files = array("cms-config.php", "modules/", "templates/", ULICMS_ROOT, "content/", "content/cache/", "content/images/", "content/files/", "content/flash/", "content/tmp/", "upload_tmp_dir");
+  $str .= "<ol>";
+  foreach($files as $file){
+        $wrt = is_writable($file)? 'Beschreibbar' : 'Schreibgeschützt';
+        $str .= "<li>".htmlspecialchars($file)." ".$wrt."</li>";
+        
+  }
+  
+  $str .= "</ol>";
+  
+    $str .= '<h2>$_SERVER</h2>'."";
   foreach($_SERVER as $key => $value){
        $str .= htmlspecialchars($key) . " = " . htmlspecialchars($value) ."\n";
   }
