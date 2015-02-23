@@ -49,6 +49,11 @@ function spamFilterEnabledcheckboxChanged(checked){
      ?>> <label for="disallow_chinese_chars"><?php echo TRANSLATION_DISALLOW_CHINESE_CHARS;
      ?></label>
 
+<br/><br/>
+<input type="checkbox" name="check_for_spamhaus" value="yes" id="check_for_spamhaus" <?php
+     if(getconfig("check_for_spamhaus")) echo " checked=\"checked\"";
+     ?>> <label for="check_for_spamhaus"><?php echo TRANSLATION_CHECK_FOR_SPAMHAUS; ?></label>
+
 </div>
 <br/><br/>
 

@@ -407,6 +407,6 @@ define("TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">Diese Se
      . "<a href=\"http://www.ulicms.de\" target=\"_blnak\">UliCMS " . cms_version() . "</a></p>");
 define("TRANSLATION_UNDER_MAINTENANCE", "Diese Website ist zurzeit im Wartungsmodus.<br />Bitte später wiederkommen.");
 define("TRANSLATION_IP_BLOCKED_BY_SPAMHAUS", "Ihre IP-Adresse %ip befindet sich auf der Blacklist von spamhaus.org. Der Zugriff wurde verweigert.");
-
+define("TRANSLATION_CHECK_FOR_SPAMHAUS", 'Zugriff von IP-Adressen die auf der Blacklist von <a href="https://www.spamhaus.org/" target="_blank">spamhaus.org</a> gelistet sind verweigern.');
 
 add_hook("lang_de");
