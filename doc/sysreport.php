@@ -104,7 +104,7 @@ function generateSysReport(){
   }
   
   $str .= "\n\n";
-  $str .= "<small>generiert durch sysreport 2015-02-23</small>";
+  $str .= "<small>generiert am " . strftime("%x"). " um ". strftime("%X")." durch sysreport 2015-02-23</small>";
   return $str;
 }
 header("Content-Type: application/octet-stream; charset = UTF-8");
