@@ -48,7 +48,7 @@ function generateSysReport(){
   $str .= "Theme:  ". get_theme()."\n";
   $str .= "locale:  ". getconfig("locale")."\n";
   $str .= "locale_de:  ". getconfig("locale_de")."\n";
-  $str .= "locale_en:  ". getconfig("locale_de")."\n";
+  $str .= "locale_en:  ". getconfig("locale_en")."\n";
   $str .= "pkg_src:  ". getconfig("pkg_src")."\n";
   $str .= "db_schema_version:  ". getconfig("db_schema_version");
   $str .= "<h3>Installierte Module</h3>";
