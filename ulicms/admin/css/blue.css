@@ -15,6 +15,10 @@ img{
 border:0px;
 }
 
+#pbody ul li{
+list-style-image:url('../gfx/list.png');
+}
+
 #pbody table thead th.header{
 padding-right:30px !important;
 }
