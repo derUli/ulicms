@@ -5,6 +5,10 @@ function getLanguageFilePath($lang = "de", $component = null){
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
 
+function get_useragent(){
+  return $_SERVER['HTTP_USER_AGENT'];
+}
+
 // returns site protocl
 // http:// or https://
 function get_site_protocol(){
