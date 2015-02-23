@@ -60,6 +60,9 @@ function generateSysReport(){
   foreach($_COOKIE as $key => $value){
        $str .= htmlspecialchars($key) . " = " . htmlspecialchars($value) ."\n";
   }
+  
+  
+  $str .= "<small>generiert durch sysreport 2015-02-23</small>";
   return $str;
 }
 header("Content-Type: text/html; charset = UTF-8");
