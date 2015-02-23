@@ -22,3 +22,4 @@
 + API-Funktion splitAndTrim hinzugefügt
 + API-Funktionen db_get_server_info und db_get_client_info hinzugefügt
 + API-Funktion get_useragent() hinzugefügt
++ API-Funktion get_ip() hinzugefügt
