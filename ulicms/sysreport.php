@@ -12,6 +12,8 @@ function generateSysReport(){
   $tmp_dir = ini_get('upload_tmp_dir') ? ini_get('upload_tmp_dir') : sys_get_temp_dir();
 
   $str .= "upload_tmp_dir: " . $tmp_dir."\n";
+  $allow_url_fopen = ini_get('allow_url_fopen') ? 'Enabled' : 'Disabled';
+  $str .= "allow_url_fopen: ".$allow_url_fopen;
   $str .= "<h3>Module</h3>";
   $extensions = get_loaded_extensions();
   $str .= "<ol>";
