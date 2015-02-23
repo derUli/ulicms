@@ -50,6 +50,16 @@ function generateSysReport(){
     $str .= "<li>".htmlspecialchars($module)."</li>";
   }
   $str .= "</ol>";
+  
+  $str .= '<h2>$_SERVER</h2>'."";
+  foreach($_SERVER as $key => $value){
+       $str .= htmlspecialchars($key) . " = " . htmlspecialchars($value) ."\n";
+  }
+  
+    $str .= '<h2>$_COOKIE</h2>'."";
+  foreach($_COOKIE as $key => $value){
+       $str .= htmlspecialchars($key) . " = " . htmlspecialchars($value) ."\n";
+  }
   return $str;
 }
 header("Content-Type: text/html; charset = UTF-8");
