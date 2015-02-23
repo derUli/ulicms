@@ -53,7 +53,7 @@ function generateSysReport(){
   $str .= "</ol>";
   
   $str .= "<h2>Dateirechte</h2>";
-  $files = array("cms-config.php", "modules/", "templates/", ULICMS_ROOT, "content/", "content/cache/", "content/images/", "content/files/", "content/flash/", "content/tmp/", "upload_tmp_dir");
+  $files = array("cms-config.php", "modules/", "templates/", ULICMS_ROOT, "content/", "content/cache/", "content/images/", "content/files/", "content/flash/", "content/tmp/", $tmp_dir);
   $str .= "<ol>";
   foreach($files as $file){
         $wrt = is_writable($file)? 'Beschreibbar' : 'Schreibgeschützt';
