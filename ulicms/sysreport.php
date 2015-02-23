@@ -52,6 +52,18 @@ function generateSysReport(){
   }
   $str .= "</ol>";
   
+  $str .= "<h3>Installierte Themes</h3>";
+  
+  $themes = getThemeList();
+  
+  $str .= "<ol>";
+  foreach($themes as $theme){
+    $str .= "<li>".htmlspecialchars($theme)."</li>";
+  }
+  $str .= "</ol>";
+  
+  
+  
   $str .= "<h2>Dateirechte</h2>";
   $files = array("cms-config.php", "modules/", "templates/", ULICMS_ROOT, "content/", "content/cache/", "content/images/", "content/files/", "content/flash/", "content/tmp/", $tmp_dir);
   $str .= "<ol>";
