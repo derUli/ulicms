@@ -15,6 +15,11 @@ function db_get_server_info(){
   return mysqli_get_server_info($db_connection);
 }
 
+function db_get_client_info(){
+  global $db_connection;
+  return mysqli_get_client_info($db_connection);
+}
+
 // Using SQL Prepared statements
 function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE){
      global $db_connection;
