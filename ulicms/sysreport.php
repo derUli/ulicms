@@ -39,6 +39,17 @@ function generateSysReport(){
   }
     
   $str .= "</ol>";
+  
+  $str .= "<h2>UliCMS</h2>";
+  $str .= "Core Version". cms_version();
+  $str .= "<h3>Installierte Module</h3>";
+  $modules = getAllModules();
+  
+  $str .= "<ol>";
+  foreach($modules as $module){
+    $str .= "<li>".htmlspecialchars($module)."</li>";
+  }
+  $str .= "</ol>";
   return $str;
 }
 header("Content-Type: text/html; charset = UTF-8");
