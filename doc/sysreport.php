@@ -15,7 +15,7 @@ function generateSysReport(){
   $str .= "upload_tmp_dir: " . $tmp_dir."\n";
   $allow_url_fopen = ini_get('allow_url_fopen') ? 'Aktiviert' : 'Deaktiviert';
   $str .= "allow_url_fopen: ".$allow_url_fopen;
-  $str .= "<h3>Module</h3>";
+  $str .= "<h3>PHP Module</h3>";
   $extensions = get_loaded_extensions();
   natcasesort($extensions);
   $str .= "<ol>";
