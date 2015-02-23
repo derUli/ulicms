@@ -1,5 +1,6 @@
 <?php
 include_once "init.php";
+include_once "templating.php";
 
 @session_start();
 function generateSysReport(){
@@ -96,7 +97,7 @@ function generateSysReport(){
        $str .= htmlspecialchars($key) . " = " . htmlspecialchars($value) ."\n";
   }
   
-  
+  $str .= "\n\n";
   $str .= "<small>generiert durch sysreport 2015-02-23</small>";
   return $str;
 }
