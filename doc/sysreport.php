@@ -17,7 +17,7 @@ function generateSysReport(){
   $str .= "allow_url_fopen: ".$allow_url_fopen;
   $str .= "<h3>Module</h3>";
   $extensions = get_loaded_extensions();
-  sort($extensions);
+  natcasesort($extensions);
   $str .= "<ol>";
   foreach($extensions as $extension)
     $str .= "<li>".htmlspecialchars($extension)."</li>";
