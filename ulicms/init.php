@@ -300,6 +300,7 @@ else{
 
  }
  }
+ 
 
 $enforce_https = getconfig("enforce_https");
 
@@ -313,7 +314,6 @@ if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
 add_hook("before_init");
 add_hook("init");
 add_hook("after_init");
-
 
 $version = new ulicms_version();
 

@@ -420,5 +420,6 @@ define("TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">This pag
 
 
 define("TRANSLATION_UNDER_MAINTENANCE", "This website is currently under maintenance.<br/>Please visit us again later.");
+define("TRANSLATION_IP_BLOCKED_BY_SPAMHAUS", "Your IP-Adresse %ip is listed on spamhaus.org! Access Denied!");
 
 add_hook("lang_en");
