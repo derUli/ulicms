@@ -42,7 +42,13 @@ function generateSysReport(){
   $str .= "</ol>";
   
   $str .= "<h2>UliCMS</h2>";
-  $str .= "Core Version: ". cms_version();
+  $str .= "Core Version: ". cms_version()."\n";
+  $str .= "Theme:  ". get_theme()."\n";
+  $str .= "locale:  ". getconfig("locale")."\n";
+  $str .= "locale_de:  ". getconfig("locale_de")."\n";
+  $str .= "locale_en:  ". getconfig("locale_de")."\n";
+  $str .= "pkg_src:  ". getconfig("pkg_src")."\n";
+  $str .= "db_schema_version:  ". getconfig("db_schema_version");
   $str .= "<h3>Installierte Module</h3>";
   $modules = getAllModules();
   
@@ -80,6 +86,11 @@ function generateSysReport(){
        $str .= htmlspecialchars($key) . " = " . htmlspecialchars($value) ."\n";
   }
   
+      $str .= '<h2>$_SESSION</h2>'."";
+  foreach($_SESSION as $key => $value){
+       $str .= htmlspecialchars($key) . " = " . htmlspecialchars($value) ."\n";
+  }
+  
     $str .= '<h2>$_COOKIE</h2>'."";
   foreach($_COOKIE as $key => $value){
        $str .= htmlspecialchars($key) . " = " . htmlspecialchars($value) ."\n";
@@ -90,7 +101,7 @@ function generateSysReport(){
   return $str;
 }
 header("Content-Type: application/octet-stream; charset = UTF-8");
-header("Content-Disposition: attachment; filename=sysreport.html;")
+header("Content-Disposition: attachment; filename=sysreport-".time().".html;")
 ?>
 <!DOCTYPE html>
 <html>
