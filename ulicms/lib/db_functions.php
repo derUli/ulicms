@@ -117,11 +117,12 @@ function db_fetch_assoc($result){
      return mysqli_fetch_assoc($result);
      }
      
-// @FIXME: $resulttype behandeln
+
 function db_fetch_all($result, $resulttype = MYSQLI_NUM){
      if(function_exists("mysqli_fetch_all"))
-        return mysqli_fetch_all($result);
-        
+        return mysqli_fetch_all($result, $resulttype);
+     
+     // @FIXME: $resulttype in alternativer Implementation von fetch_all behandeln
      $retval = array();
      while($row = db_fetch_assoc($result)){
        $retval[] = $row;     
