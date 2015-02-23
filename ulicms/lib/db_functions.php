@@ -116,7 +116,20 @@ function db_fetch_field($result){
 function db_fetch_assoc($result){
      return mysqli_fetch_assoc($result);
      }
-
+     
+// @FIXME: $resulttype behandeln
+function db_fetch_all($result, $resulttype = MYSQLI_NUM){
+     global $db_connection;
+     if(function_exists("mysqli_fetch_all"))
+        return mysqli_fetch_all($result);
+        
+     $retval = array();
+     while($row = db_fetch_assoc($result)){
+       $retval[] = $row;     
+     }
+          
+     return $retval;
+}
 function db_close(){
      global $db_connection;
      mysqli_close($db_connection);
