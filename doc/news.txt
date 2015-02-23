@@ -20,3 +20,4 @@
 + Dropdownmenü auf mobilen Geräten deaktiviert
 + Nachfrage zu Logout hinzugefügt
 + API-Funktion splitAndTrim hinzugefügt
++ API-Funktion db_get_server_info hinzugefügt

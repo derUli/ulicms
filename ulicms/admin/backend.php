@@ -5,7 +5,6 @@ require_once "../init.php";
 
 
 @session_start();
-
 $acl = new acl();
 
 if($acl -> hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash")){

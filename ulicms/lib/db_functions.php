@@ -9,6 +9,11 @@ function db_query($query){
     
     
      }
+     
+function db_get_server_info(){
+  global $db_connection;
+  return mysqli_get_server_info($db_connection);
+}
 
 // Using SQL Prepared statements
 function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE){
