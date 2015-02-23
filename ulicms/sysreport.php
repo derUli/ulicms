@@ -23,6 +23,7 @@ function generateSysReport(){
   
   $str .= "<h2>Betriebssystem des Servers</h2>";
   $str .= php_uname()."\n";
+  $str .= "umask: " . umask()."\n";
   $str .= "<h2>Client</h2>";
   $str .= "Useragent: " . htmlspecialchars($_SERVER['HTTP_USER_AGENT'])."\n";
   
