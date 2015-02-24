@@ -19,7 +19,7 @@ border:0px;
 list-style-image:url('../gfx/list.png');
 }
 
-#pbody table thead th.header{
+#pbody table.tablesorter thead th.header{
 padding-right:30px !important;
 }
 
