@@ -12,7 +12,7 @@ patch007|Patch für Jahr 2000 Kompatiblität|/downloads/patches/patch003.zip
 Auswahl installierbarer Patches wird als Liste mit Checkboxen angezeigt.
 Patches die man installiert werden anschließend zuerst nach [ULICMS_ROOT]/content/tmp/[uniqid()] entpackt.
 Dann wird der Inhalt des Ordners 
-[ULICMS_ROOT]/content/tmp/[uniqid()]/ulicms
+[ULICMS_ROOT]/content/tmp/[uniqid()]/patch/
 nach 
 [ULICMS_ROOT]/
 kopiert und der Patch wird in der Datenbank registriert
