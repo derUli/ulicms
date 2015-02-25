@@ -6,7 +6,7 @@ include_once "templating.php";
 function generateSysReport(){
   $str .= "<h1 style='text-align:center;'>";
   $str .= "sysreport für ";
-  $str .= "UliCMS ". cms_version();
+  $str .= "UliCMS ". cms_version(). " auf ".htmlspecialchars($_SERVER["HTTP_HOST"]);
   $str .= "</h1>";
   $str .= "\n";
   $str .= "PHP Version ".phpversion()."\n";
@@ -104,7 +104,7 @@ function generateSysReport(){
   }
   
   $str .= "\n\n";
-  $str .= "<small>generiert am " . strftime("%x"). " um ". strftime("%X")." Uhr durch sysreport Version 20150223</small>";
+  $str .= "<small>generiert am " . strftime("%x"). " um ". strftime("%X")." Uhr durch sysreport Version 20150225</small>";
   return $str;
 }
 header("Content-Type: application/octet-stream; charset = UTF-8");
