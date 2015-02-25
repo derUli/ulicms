@@ -19,3 +19,7 @@ kopiert und der Patch wird in der Datenbank registriert
 
 Achtung:
 Dies benötigt volle Schreibrechte auf alle Dateien
+
+____________________
+
+Übersetzung der Erweiterungen in der Paketquelle
