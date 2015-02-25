@@ -23,3 +23,8 @@ Dies benötigt volle Schreibrechte auf alle Dateien
 ____________________
 
 Übersetzung der Erweiterungen in der Paketquelle
+
+
+____________________
+
+Den KCFinder durch einen selbst implementierte Dateimanager ersetzen.
