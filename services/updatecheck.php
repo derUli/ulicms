@@ -31,7 +31,11 @@ if($version == "7.2.1" or $version == "7.2.2"){
 }
 */
 
+if($version == "8.0.0"){
+   die("<p>Ein Upgrade auf UliCMS 8.0.1 ist verfügbar.<br/>
+   <a href=\"http://www.ulicms.de/content/files/Releases/Upgrades/ulicms-upgrade-from-8.0.0-to-8.0.1.zip\">Download</a></p>");
 
+}
 
 
 
