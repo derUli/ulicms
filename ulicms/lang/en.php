@@ -310,7 +310,7 @@ define("TRANSLATION_UPDATE_NOTICE", "<span style=\"color:red\"><strong>Attention
 ");
 
 // Login
-define("TRANSLATION_PLEASE_AUTHENTIFICATE", "please authentificate");
+define("TRANSLATION_PLEASE_AUTHENTICATE", "please authenticate");
 define("TRANSLATION_LOGIN", "Login");
 
 // Paket installieren
