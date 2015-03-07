@@ -38,7 +38,7 @@ if(!defined("ULICMS_ROOT"))
      ?>
 <?php if($acl -> hasPermission("cache")){
          ?>
-<a href="index.php?action=cache"><?php echo TRANSLATION_CACHE;
+<a href="index.php?action=cache&clear_cache=yes"><?php echo TRANSLATION_CLEAR_CACHE;
          ?></a>
 <br/>
 <?php }
