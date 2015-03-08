@@ -3,7 +3,7 @@ Update-Manager für Patch:
 Datenbanktabelle ulicms_patches
 ID, name, description, installed
 
-Statische Liste auf update.ulicms.de/patches.php?installed=patch001;patch002;patch003
+Statische Liste auf update.ulicms.de/patches.php?installed=patch001;patch002;patch003&version=8.0.0
 
 $_GET Parameter "installed" enthält bereits installierte Patches
 patches.php gibt dann eine Textdatei mit einträgen nach dem Schema
