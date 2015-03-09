@@ -409,7 +409,11 @@ define("TRANSLATION_UNDER_MAINTENANCE", "Diese Website ist zurzeit im Wartungsmo
 define("TRANSLATION_IP_BLOCKED_BY_SPAMHAUS", "Ihre IP-Adresse %ip befindet sich auf der Blacklist von spamhaus.org.<br/>Der Zugriff wurde verweigert.");
 define("TRANSLATION_CHECK_FOR_SPAMHAUS", 'Zugriff von IP-Adressen die auf der Blacklist von <a href="https://www.spamhaus.org/" target="_blank">spamhaus.org</a> gelistet sind verweigern.');
 
+// Patches
 define("TRANSLATION_NO_PATCHES_AVAILABLE", "Keine Patches verfügbar");
 define("TRANSLATION_INSTALL_SELECTED_PATCHES", "Ausgewählte Patches installieren");
+define("TRANSLATION_WAS_SUCCESSFULLY_INSTALLED", "wurde erfolgreich installiert");
+define("TRANSLATION_INSTALLATION_OF", "Installation von");
+define("TRANSLATION_IS_FAILED", "ist fehlgeschlagen");
 
 add_hook("lang_de");
