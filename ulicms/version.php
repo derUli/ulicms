@@ -1,7 +1,7 @@
 <?php
 class ulicms_version{
      function ulicms_version(){
-         $this -> version = "White Alpaka";
+         $this -> version = "Purple Sky";
          $this -> internalVersion = Array(8, 0, 2);
          $this -> update = "";
          $this -> developmentVersion = false;
