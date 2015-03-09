@@ -1,5 +1,5 @@
 <?php
-$version = $_REQUEST["version"];
+$version = $_REQUEST["v"];
 $installed_patches = $_REQUEST["installed_patches"];
 
 if(!$version){
@@ -11,7 +11,7 @@ $file = "lists/".basename($version).".txt";
 
 if(!file_exists($file))
    die();
-   
+
 if(!isset($installed_patches) or empty($installed_patches))
    $installed_patches = array();
 else

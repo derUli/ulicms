@@ -130,6 +130,7 @@ if((defined("ULICMS_DEBUG") and ULICMS_DEBUG) or (isset($config -> debug) and $c
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "db_functions.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "mailer.php";
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "file_get_contents_wrapper.php";
 require_once dirname(__file__) . DIRECTORY_SEPERATOR . "api.php";
 
 // define Constants
@@ -227,7 +228,7 @@ for($i = 0; $i < count($required_tables); $i++){
  if(!in_array($table, $existing_tables)){
      if(!headers_sent())
          header("Content-Type: text/html; charset=UTF-8");
-    
+
      throw new Exception("Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
      exit();
      }
@@ -300,7 +301,7 @@ else{
 
  }
  }
- 
+
 
 $enforce_https = getconfig("enforce_https");
 
@@ -320,6 +321,16 @@ $version = new ulicms_version();
 define("UPDATE_CHECK_URL", "http://www.ulicms.de/updatecheck.php?v=" .
  urlencode(
 implode(".", $version -> getInternalVersion())) . "&update=" . urlencode($version -> getUpdate()));
+
+
+$pkg = new PackageManager();
+$installed_patches = $pkg->getInstalledPatchNames();
+$installed_patches = implode(";", $installed_patches);
+
+
+define("PATCH_CHECK_URL", "http://www.ulicms.de/patches/check.php?v=" .
+ urlencode(
+implode(".", $version -> getInternalVersion())) . "&update=" . urlencode($version -> getUpdate())."&installed_patches=".urlencode($installed_patches));
 
 if(!getconfig("session_name"))
  setconfig("session_name", uniqid() . "_SESSION");
