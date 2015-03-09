@@ -29,7 +29,7 @@ class packageManager{
      
      
      public function installPatch($name, $description, $url){
-         $test = getInstalledPatches();
+         $test = $this->getInstalledPatchNames();
          if(in_array($name, $test))
 	   return false;
 	   
@@ -45,8 +45,8 @@ class packageManager{
                  if(file_exists($patch_dir)){
                     recurse_copy($patch_dir, ULICMS_ROOT);
                      $name = db_escape($name);
-	  $description = db_escape($description);
-	  $url = db_escape($url);
+	             $description = db_escape($description);
+	             $url = db_escape($url);
 	  db_query("INSERT INTO ".tbname("installed_patches"). " (name, description, url) VALUES ('$name', '$description', '$url')");  
 	  return true;      
                  }
