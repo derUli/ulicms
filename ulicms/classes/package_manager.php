@@ -28,6 +28,19 @@ class packageManager{
      }
      
      
+     public function installPatch($name, $description, $url){
+         $test = getInstalledPatches();
+         if(in_array($name, $test))
+	   return false;
+	   
+	   // Todo $url runterladen, entpacken und installieren
+	   
+	  $name = db_escape($name);
+	  $description = db_escape($description);
+	  $url = db_escape($url);
+	  db_query("INSERT INTO ".tbname("installed_patches"). " (name, description, url) VALUES ('$name', '$description', '$url')");        
+     }
+     
      public function getInstalledPatches(){
         $query = db_query("SELECT * from ".tbname("installed_patches"));
         $retval = array();
