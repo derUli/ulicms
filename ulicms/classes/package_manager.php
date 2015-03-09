@@ -31,7 +31,7 @@ class packageManager{
      public function installPatch($name, $description, $url){
          $test = $this->getInstalledPatchNames();
          if(in_array($name, $test))
-	          return false;
+	    return false;
 
 	   $tmp_dir = ULICMS_TMP . "/" .uniqid()."/";
      if(!file_exists($tmp_dir))
@@ -41,11 +41,12 @@ class packageManager{
     $download = file_get_contents_wrapper($url, true);
 
     $download_tmp = $tmp_dir."patch.zip";
+
     if(!$download)
        return false;
 
      file_put_contents($download_tmp, $download);
-	   $zip = new ZipArchive;
+     $zip = new ZipArchive;
            if ($zip->open($download_tmp) === TRUE) {
                  $zip->extractTo($tmp_dir);
                  $patch_dir = $tmp_dir."patch";
