@@ -26,6 +26,12 @@ class packageManager{
         }
         return $retval;
      }
+     
+     public function truncateInstalledPatches(){
+         return db_query("TRUNCATE TABLE ".tbname("installed_patches"));
+ 
+     }
+
 
      // @FIXME: Delete temporary files after install a patch
      public function installPatch($name, $description, $url){
