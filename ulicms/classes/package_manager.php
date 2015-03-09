@@ -46,9 +46,6 @@ class packageManager{
 
      file_put_contents($download_tmp, $download);
 	   $zip = new ZipArchive;
-
-	   // @FIXME: open zip from url funktioniert nicht
-
            if ($zip->open($download_tmp) === TRUE) {
 
                  $zip->extractTo($tmp_dir);
