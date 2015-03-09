@@ -16,11 +16,12 @@ $splitted = explode("|", $line);
 $name = $splitted[0];
 $description = $splitted[1];
 $url = $splitted[2];
-?>
+?><p>
 <label>
 <input name="patches[]" type="checkbox" checked="checked" value="<?php echo htmlspecialchars(implode("|", $line));?>"> 
 <strong><?php echo htmlspecialchars($name);?></strong><br/><?php echo htmlspecialchars($description);?>
 </label>
+</p>
 <?php }?>
 <input type="submit" value="<?php translate("install_selected_patches");?>">
 </form>
