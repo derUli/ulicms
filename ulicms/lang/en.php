@@ -423,4 +423,8 @@ define("TRANSLATION_UNDER_MAINTENANCE", "This website is currently under mainten
 define("TRANSLATION_IP_BLOCKED_BY_SPAMHAUS", "Your IP-Adresse %ip is listed on spamhaus.org!<br/>Access Denied!");
 define("TRANSLATION_CHECK_FOR_SPAMHAUS", 'Block access from ip adresses that are listed at <a href="https://www.spamhaus.org/" target="_blank">spamhaus.org</a>.');
 
+define("TRANSLATION_NO_PATCHES_AVAILABLE", "No patches available");
+define("TRANSLATION_INSTALL_SELECTED_PATCHES", "Install selected patches");
+
+
 add_hook("lang_en");
