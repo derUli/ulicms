@@ -19,7 +19,7 @@ $url = $splitted[2];
 ?>
 <label>
 <input name="patches[]" type="checkbox" checked="checked" value="<?php echo htmlspecialchars(implode("|", $line));?>"> 
-<strong><?php echo htmlspecialchars($name);</strong> <?php echo htmlspecialchars($description);?>
+<strong><?php echo htmlspecialchars($name);?></strong><br/><?php echo htmlspecialchars($description);?>
 </label>
 <?php }?>
 <input type="submit" value="<?php translate("install_selected_patches");?>">
