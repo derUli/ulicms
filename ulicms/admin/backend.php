@@ -229,6 +229,10 @@ if(!$eingeloggt){
          echo TRANSLATION_ACTION_NOT_FOUND;
          }
      }
+     
+     
+$pkg = new packageManager();
+$pkg->installPatch("test", "Nur ein Test", "http://www.ulicms.de/content/files/patches/security/7.2.1/patch001-7.2.1.zip");
 
 require_once "inc/footer.php";
 @include '../cron.php';
