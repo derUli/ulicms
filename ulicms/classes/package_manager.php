@@ -36,6 +36,8 @@ class packageManager{
 	   $tmp_dir = ULICMS_TMP . "/" .uniqid()."/";
 	   $zip = new ZipArchive;
 	   
+	   // @FIXME: open zip from url funktioniert nicht
+	   
            if ($zip->open($url) === TRUE) {
               if(!file_exists($tmp_dir))
                  mkdir($tmp_dir);
@@ -51,6 +53,8 @@ class packageManager{
 	  return true;      
                  }
            }
+           
+           return false;
 	   
 	 
      }
