@@ -31,7 +31,7 @@ class packageManager{
      public function installPatch($name, $description, $url){
          $test = $this->getInstalledPatchNames();
          if(in_array($name, $test))
-	   return false;
+	          return false;
 
 	   $tmp_dir = ULICMS_TMP . "/" .uniqid()."/";
      if(!file_exists($tmp_dir))
@@ -60,10 +60,12 @@ class packageManager{
 	             $description = db_escape($description);
 	             $url = db_escape($url);
 	  db_query("INSERT INTO ".tbname("installed_patches"). " (name, description, url) VALUES ('$name', '$description', '$url')");
+    SureRemoveDir($tmp_dir, true);
 	  return true;
                  }
            }
 
+           SureRemoveDir($tmp_dir, true);
            return false;
 
 
