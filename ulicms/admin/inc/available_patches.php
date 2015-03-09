@@ -8,8 +8,10 @@ if(defined("_SECURITY")){
         echo "<p class='ulicms_error'>".get_translation("no_patches_available")."</p>";
      } else {
      ?>
+<form action="index.php?action=install_patches" method="post">
 
-
+<input type="submit" value="<?php translate("install_selected_patches");?>"
+</form>
 <?php
 
 }
