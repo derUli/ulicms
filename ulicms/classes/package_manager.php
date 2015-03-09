@@ -27,18 +27,25 @@ class packageManager{
         return $retval;
      }
      
-     
+     // @FIXME: Delete temporary files after install a patch
      public function installPatch($name, $description, $url){
          $test = $this->getInstalledPatchNames();
          if(in_array($name, $test))
 	   return false;
 	   
 	   $tmp_dir = ULICMS_TMP . "/" .uniqid()."/";
+           
+           $download = file_get_contents_wrapper($url, true);
+
+           $download_tmp = $tmp_dir."patch.zip";
+           if(!$download_tmp)
+              return false;
+           file_put_contents($download_tmp, $url);
 	   $zip = new ZipArchive;
 	   
 	   // @FIXME: open zip from url funktioniert nicht
 	   
-           if ($zip->open($url) === TRUE) {
+           if ($zip->open($download_tmp) === TRUE) {
               if(!file_exists($tmp_dir))
                  mkdir($tmp_dir);
                  $zip->extractTo($tmp_dir);
