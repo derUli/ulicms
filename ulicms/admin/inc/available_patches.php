@@ -9,8 +9,20 @@ if(defined("_SECURITY")){
      } else {
      ?>
 <form action="index.php?action=install_patches" method="post">
-
-<input type="submit" value="<?php translate("install_selected_patches");?>"
+<?php 
+$lines = explode("\n", $patches);
+foreach($lines as $line) {
+$splitted = explode("|", $line);
+$name = $splitted[0];
+$description = $splitted[1];
+$url = $splitted[2];
+?>
+<label>
+<input name="patches[]" type="checkbox" checked="checked" value="<?php echo htmlspecialchars(implode("|", $line));?>"> 
+<strong><?php echo htmlspecialchars($name);</strong> <?php echo htmlspecialchars($description);?>
+</label>
+<?php }?>
+<input type="submit" value="<?php translate("install_selected_patches");?>">
 </form>
 <?php
 
