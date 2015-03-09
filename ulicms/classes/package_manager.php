@@ -47,13 +47,12 @@ class packageManager{
      file_put_contents($download_tmp, $download);
 	   $zip = new ZipArchive;
            if ($zip->open($download_tmp) === TRUE) {
-
                  $zip->extractTo($tmp_dir);
                  $patch_dir = $tmp_dir."patch";
                  $zip->close();
                  if(file_exists($patch_dir)){
                     recurse_copy($patch_dir, ULICMS_ROOT);
-                     $name = db_escape($name);
+               $name = db_escape($name);
 	             $description = db_escape($description);
 	             $url = db_escape($url);
 	  db_query("INSERT INTO ".tbname("installed_patches"). " (name, description, url) VALUES ('$name', '$description', '$url')");
