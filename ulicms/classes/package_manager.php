@@ -16,6 +16,26 @@ class packageManager{
          return array(join("-", $name), $version);
         
          }
+         
+         
+     public function getInstalledPatchNames(){
+        $query = db_query("SELECT name from ".tbname("installed_patches"));
+        $retval = array();
+        while($row = db_fetch_object($query)) {
+              $retval[] = $row->name;    
+        }
+        return $retval;
+     }
+     
+     
+     public function getInstalledPatches(){
+        $query = db_query("SELECT * from ".tbname("installed_patches"));
+        $retval = array();
+        while($row = db_fetch_object($query)) {
+              $retval[$row->name] = $row;    
+        }
+        return $retval;
+     }
     
      public function installPackage($file){
          try{
