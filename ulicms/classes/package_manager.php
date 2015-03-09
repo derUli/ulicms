@@ -33,12 +33,26 @@ class packageManager{
          if(in_array($name, $test))
 	   return false;
 	   
-	   // Todo $url runterladen, entpacken und installieren
+	   $tmp_dir = ULICMS_TMP . "/" .uniqid()."/";
+	   $zip = new ZipArchive;
 	   
-	  $name = db_escape($name);
+           if ($zip->open($url) === TRUE) {
+              if(!file_exists($tmp_dir))
+                 mkdir($tmp_dir);
+                 $zip->extractTo($tmp_dir);
+                 $patch_dir = $tmp_dir."patch";
+                 $zip->close();
+                 if(file_exists($patch_dir)){
+                    recurse_copy($patch_dir, ULICMS_ROOT);
+                     $name = db_escape($name);
 	  $description = db_escape($description);
 	  $url = db_escape($url);
-	  db_query("INSERT INTO ".tbname("installed_patches"). " (name, description, url) VALUES ('$name', '$description', '$url')");        
+	  db_query("INSERT INTO ".tbname("installed_patches"). " (name, description, url) VALUES ('$name', '$description', '$url')");  
+	  return true;      
+                 }
+           }
+	   
+	 
      }
      
      public function getInstalledPatches(){
