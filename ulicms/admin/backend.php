@@ -226,6 +226,12 @@ var_dump($pkg->installPatch("test", "Nur ein Test", "http://www.ulicms.de/conten
     else if($_GET["action"] == "design"){
          require_once "inc/design.php";
          }
+    else if($_GET["action"] == "available_patches"){
+         require_once "inc/available_patches.php";
+         }
+    else if($_GET["action"] == "install_patches.php"){
+         require_once "inc/install_patches.php";
+         }
     
     else if(isset($actions[$_GET["action"]])){
          include_once $actions[$_GET["action"]];

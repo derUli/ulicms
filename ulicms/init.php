@@ -332,7 +332,6 @@ define("PATCH_CHECK_URL", "http://www.ulicms.de/patches/check.php?v=" .
  urlencode(
 implode(".", $version -> getInternalVersion())) . "&installed_patches=".urlencode($installed_patches));
 
- echo PATCH_CHECK_URL;
 
 if(!getconfig("session_name"))
  setconfig("session_name", uniqid() . "_SESSION");
