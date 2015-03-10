@@ -2,7 +2,10 @@
 if(defined("_SECURITY")){
      $acl = new ACL();
      if(is_admin() or $acl -> hasPermission("update_system")){
+?>
 
+
+ <h1><?php translate("install_patches");?></h1>
 $patches = $_POST["patches"];
 $pkg = new PackageManager();
 

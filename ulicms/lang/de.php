@@ -415,5 +415,6 @@ define("TRANSLATION_INSTALL_SELECTED_PATCHES", "Ausgewählte Patches installiere
 define("TRANSLATION_WAS_SUCCESSFULLY_INSTALLED", "wurde erfolgreich installiert");
 define("TRANSLATION_INSTALLATION_OF", "Installation von");
 define("TRANSLATION_IS_FAILED", "ist fehlgeschlagen");
-
+define("TRANSLATION_AVAILABLE_PATCHES", "Verfügbare Patches");
+define("TRANSLATION_INSTALL_PATCHES", "Patches installieren");
 add_hook("lang_de");
