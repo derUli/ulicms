@@ -6,6 +6,8 @@ if(defined("_SECURITY")){
 
 
  <h1><?php translate("install_patches");?></h1>
+ 
+ <?php
 $patches = $_POST["patches"];
 $pkg = new PackageManager();
 
