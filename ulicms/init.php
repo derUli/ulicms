@@ -323,10 +323,13 @@ define("UPDATE_CHECK_URL", "http://www.ulicms.de/updatecheck.php?v=" .
  urlencode(
 implode(".", $version -> getInternalVersion())) . "&update=" . urlencode($version -> getUpdate()));
 
-
-$pkg = new PackageManager();
-$installed_patches = $pkg->getInstalledPatchNames();
-$installed_patches = implode(";", $installed_patches);
+if(in_array(tbname("installed_patches"), $existing_tables)){
+  $pkg = new PackageManager();
+  $installed_patches = $pkg->getInstalledPatchNames();
+  $installed_patches = implode(";", $installed_patches);
+} else{
+   $installed_patches= "";
+}
 
 define("PATCH_CHECK_URL", "http://www.ulicms.de/patches/check.php?v=" .
  urlencode(
