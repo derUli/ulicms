@@ -433,4 +433,6 @@ define("TRANSLATION_IS_FAILED", "is failed!");
 define("TRANSLATION_AVAILABLE_PATCHES", "Available Patches");
 define("TRANSLATION_INSTALL_PATCHES", "Install Patches");
 
+define("TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches are available");
+
 add_hook("lang_en");

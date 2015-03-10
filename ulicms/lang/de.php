@@ -417,4 +417,6 @@ define("TRANSLATION_INSTALLATION_OF", "Installation von");
 define("TRANSLATION_IS_FAILED", "ist fehlgeschlagen");
 define("TRANSLATION_AVAILABLE_PATCHES", "Verfügbare Patches");
 define("TRANSLATION_INSTALL_PATCHES", "Patches installieren");
+define("TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches sind verfügbar");
+
 add_hook("lang_de");

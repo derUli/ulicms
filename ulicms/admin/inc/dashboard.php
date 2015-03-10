@@ -53,6 +53,23 @@ if($acl -> hasPermission("dashboard")){
 <?php
              }
          ?>
+         
+<?php
+         if($acl -> hasPermission("update_system")){
+            $data = file_get_contents_wrapper(PATCH_CHECK_URL, true);
+            $data = trim($data);
+            if(!empty($data)){?>
+            <h2 class="accordion-header"><?php translate("there_are_patches_available");?></h2>
+<div class="accordion-content">
+<a href="?action=available_patches"><strong><?php translate("install_patches");?></strong></a>
+            </div>
+            <?php
+         }
+         }?>
+         
+         
+         
+         
 <?php
          if($acl -> hasPermission("update_system")){
              $updateInfo = checkForUpdates();
