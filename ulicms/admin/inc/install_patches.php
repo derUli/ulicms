@@ -3,6 +3,7 @@ if(defined("_SECURITY")){
      $acl = new ACL();
      if(is_admin() or $acl -> hasPermission("update_system")){
 
+$patches = $_POST["patches"];
 $pkg = new PackageManager();
 
 foreach($patches as $patch){

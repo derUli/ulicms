@@ -73,7 +73,6 @@ if(!$eingeloggt){
      
      
 $pkg = new packageManager();
-var_dump($pkg->installPatch("test", "Nur ein Test", "http://www.ulicms.de/content/files/patches/security/7.2.1/patch001-7.2.1.zip"));
     
      global $actions;
     
@@ -229,7 +228,7 @@ var_dump($pkg->installPatch("test", "Nur ein Test", "http://www.ulicms.de/conten
     else if($_GET["action"] == "available_patches"){
          require_once "inc/available_patches.php";
          }
-    else if($_GET["action"] == "install_patches.php"){
+    else if($_GET["action"] == "install_patches"){
          require_once "inc/install_patches.php";
          }
     
