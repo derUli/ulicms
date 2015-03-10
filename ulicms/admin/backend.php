@@ -70,6 +70,10 @@ if(!$eingeloggt){
     
     
      add_hook("register_actions");
+     
+     
+$pkg = new packageManager();
+var_dump($pkg->installPatch("test", "Nur ein Test", "http://www.ulicms.de/content/files/patches/security/7.2.1/patch001-7.2.1.zip"));
     
      global $actions;
     
@@ -231,8 +235,6 @@ if(!$eingeloggt){
      }
      
      
-$pkg = new packageManager();
-$pkg->installPatch("test", "Nur ein Test", "http://www.ulicms.de/content/files/patches/security/7.2.1/patch001-7.2.1.zip");
 
 require_once "inc/footer.php";
 @include '../cron.php';

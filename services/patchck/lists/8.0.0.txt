@@ -1,3 +1,0 @@
-cache_lite|This patch fixes an issue when caching method is set to Cache_Lite and "Design for mobile devices" is set.|http://en.ulicms.de/content/files/patches/bugfixes/patch003-8.0.0.zip
-mPDF60|mPDF 6.0|http://en.ulicms.de/content/files/patches/bugfixes/patch004-7.2.1-8.0.0.zip
-XSS_page_title|Patch for potential XSS issue in page_title|http://en.ulicms.de/content/files/patches/bugfixes/patch006-8.0.0.zip
