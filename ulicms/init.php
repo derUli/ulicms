@@ -327,7 +327,6 @@ $pkg = new PackageManager();
 $installed_patches = $pkg->getInstalledPatchNames();
 $installed_patches = implode(";", $installed_patches);
 
-
 define("PATCH_CHECK_URL", "http://www.ulicms.de/patches/check.php?v=" .
  urlencode(
 implode(".", $version -> getInternalVersion())) . "&installed_patches=".urlencode($installed_patches));
