@@ -220,6 +220,7 @@ $required_tables = array(tbname("users"),
  tbname("categories"),
  tbname("content"),
  tbname("groups"),
+ tbname("installed_patches"),
  tbname("languages"),
  tbname("settings"));
 

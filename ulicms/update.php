@@ -1,4 +1,5 @@
 <?php
+define("SKIP_TABLE_CHECK", true);
 include_once "init.php";
 
 setconfig("locale_de", "de_DE.UTF-8; de_DE; deu_deu");
