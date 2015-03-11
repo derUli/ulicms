@@ -104,6 +104,7 @@ margin:auto;
 a, a:visited{
 color:rgb(30,30,30);
 text-decoration:none;
+font-weight: 500;
 }
 
 a:hover{
