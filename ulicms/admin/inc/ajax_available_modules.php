@@ -9,7 +9,7 @@ if(!$acl -> hasPermission("install_packages")){
 $pkg_src = getconfig("pkg_src");
 @set_time_limit(0);
 
-include "../lib/file_get_contents_wrapper.php";
+include_once "../lib/file_get_contents_wrapper.php";
 
 ?>
 <?php
