@@ -319,7 +319,7 @@ add_hook("after_init");
 
 $version = new ulicms_version();
 
-define("UPDATE_CHECK_URL", "http://www.ulicms.de/updatecheck.php?v=" .
+define("UPDATE_CHECK_URL", "http://update.ulicms.de/?v=" .
  urlencode(
 implode(".", $version -> getInternalVersion())) . "&update=" . urlencode($version -> getUpdate()));
 
@@ -331,7 +331,7 @@ if(in_array(tbname("installed_patches"), $existing_tables)){
    $installed_patches= "";
 }
 
-define("PATCH_CHECK_URL", "http://www.ulicms.de/patches/check.php?v=" .
+define("PATCH_CHECK_URL", "http://patches.ulicms.de/?v=" .
  urlencode(
 implode(".", $version -> getInternalVersion())) . "&installed_patches=".urlencode($installed_patches));
 
