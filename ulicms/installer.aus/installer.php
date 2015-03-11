@@ -490,6 +490,7 @@ mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."installed_patc
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `url` varchar(255) NOT NULL,
+  `date` DATETIME NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ");

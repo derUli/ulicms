@@ -62,7 +62,7 @@ class packageManager{
                $name = db_escape($name);
 	             $description = db_escape($description);
 	             $url = db_escape($url);
-	  db_query("INSERT INTO ".tbname("installed_patches"). " (name, description, url) VALUES ('$name', '$description', '$url')");
+	  db_query("INSERT INTO ".tbname("installed_patches"). " (name, description, url, date) VALUES ('$name', '$description', '$url', NOW())");
     SureRemoveDir($tmp_dir, true);
 	  return true;
                  }
