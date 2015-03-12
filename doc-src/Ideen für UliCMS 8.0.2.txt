@@ -3,3 +3,6 @@
 [ ] Übersetzung der Erweiterungen in der Paketquelle
 [ ] Den KCFinder durch einen selbst implementierte Dateimanager ersetzen.
 [ ] Hilfetext für Features "Patches installieren" hinzufügen
+[ ] Grafische Menüverwaltung hinzufügen
+    Datenbanktabelle nav_menus
+    Name (Unique) | Description
