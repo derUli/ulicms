@@ -9,6 +9,8 @@
         
          ?>
 <form action="index.php?action=languages" method="post">
+
+<?php csrf_token_html();?>
 <table border=0>
 <tr>
 <td><strong><?php echo TRANSLATION_SHORTCODE;

@@ -39,6 +39,8 @@
 <h1><?php echo TRANSLATION_MOTTO;
          ?></h1>
 <form action="index.php?action=motto" id="motto" method="post">
+
+<?php csrf_token_html();?>
 <table border=0>
 <tr>
 <td style="min-width:100px;"><strong>Sprache</strong></td>

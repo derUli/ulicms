@@ -7,7 +7,7 @@
         
          ?>
 <form id="pageform" name="newpageform" action="index.php?action=pages" method="post">
-
+<?php csrf_token_html();?>
 <strong><?php echo TRANSLATION_PERMALINK;
          ?></strong><br/>
 <input type="text" name="system_title" required="true" value="">

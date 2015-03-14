@@ -20,6 +20,8 @@ if($acl -> hasPermission("motd")){
      ?>
 
 <form id="motd_form" action="index.php?action=motd" method="post">
+
+<?php csrf_token_html();?>
 <textarea name="motd" cols=60 rows=15><?php echo htmlspecialchars(getconfig("motd"));
      ?></textarea>
 <br>

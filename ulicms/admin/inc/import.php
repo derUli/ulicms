@@ -56,6 +56,8 @@ if(!$acl -> hasPermission("import")){
    <?php }
      ?>
   <form action="?action=import" method="post" enctype="multipart/form-data">
+  
+<?php csrf_token_html();?>
   <p><?php echo TRANSLATION_IMPORT_INTO_TABLE;
      ?><br/>
   <select name="table" size="1">
