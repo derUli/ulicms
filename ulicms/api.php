@@ -474,6 +474,28 @@ function getModuleAdminSelfPath(){
      }
 
 
+function check_csrf_token(){
+   if(!isset($_REQUEST["csrf_token"]))
+      return false;
+   return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];
+}
+
+function get_csrf_token_html(){
+   return '<input type="hidden" name="csrf_token" value="'.get_csrf_token().'">';
+}
+
+function csrf_token_html(){
+   echo get_csrf_token_html();
+}
+
+function get_csrf_token(){
+   if(!isset($_SESSION["csrf_token"]))
+      $_SESSION["csrf_token"] = md5(uniqid(rand(), true));
+   return $_SESSION["csrf_token"];
+}
+
+
+
 function replace_num_entity($ord)
 {
      $ord = $ord[1];

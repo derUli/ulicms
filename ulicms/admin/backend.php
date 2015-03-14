@@ -26,6 +26,11 @@ add_hook("after_session_start");
 require_once "../version.php";
 $syslang = getSystemLanguage();
 include getLanguageFilePath($syslang);
+if(logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"] != "module_settings" and !isset($_REQUEST["ajax_cmd"])){
+    if(!check_csrf_token()){
+       die("This is probably a CSRF attack!");
+    }
+}
 require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 
