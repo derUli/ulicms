@@ -43,6 +43,7 @@ if(isset($_POST["register_user"])){
 <?php add_hook("before_register_form");
 ?>
 <form action="index.php?register=register" method="post">
+<?php csrf_token_html();?>
 <input type="hidden" name="register_user" value="add_admin">
 <?php if(!empty($_REQUEST["go"])){
      ?>

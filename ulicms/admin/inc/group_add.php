@@ -8,6 +8,7 @@ $all_permissions = $acl -> getDefaultACL(true, true);
 
 ?>
 <form action="?action=groups" method="post">
+<?php csrf_token_html();?>
 <p><strong><?php echo TRANSLATION_NAME;
 ?></strong> <input type="text" required="true" name="name" value=""></p>
 <p><strong><?php echo TRANSLATION_PERMISSIONS;

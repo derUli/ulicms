@@ -5,6 +5,7 @@
          if(db_num_rows($query)){
              ?>
 <form action="index.php?action=admins" method="post">
+<?php csrf_token_html();?>
 <input type="hidden" name="add_admin" value="add_admin">
 <strong><?php echo TRANSLATION_USERNAME;
              ?></strong><br/>

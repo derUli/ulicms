@@ -108,6 +108,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <h2><?php echo TRANSLATION_CREATE_CATEGORY;
          ?></h2>
 <form action="?action=categories" method="post">
+<?php csrf_token_html();?>
 <p><?php echo TRANSLATION_NAME;
          ?> <input type="text" required="true" name="name" required="true" value="">
         
@@ -127,6 +128,7 @@ if(!is_admin() and !$acl -> hasPermission("categories")){
 <h2><?php echo TRANSLATION_EDIT_CATEGORY;
          ?></h2>
 <form action="?action=categories" method="post">
+<?php csrf_token_html();?>
 <input type="hidden" name="id" value="<?php echo intval($_GET["edit"])?>">
 <p><?php echo TRANSLATION_NAME;
          ?> <input type="text" name="name" required="true" value="<?php echo categories :: getCategoryById(intval($_GET["edit"]));
