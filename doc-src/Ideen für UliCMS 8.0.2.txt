@@ -6,3 +6,4 @@
 [ ] Grafische Menüverwaltung hinzufügen
     Datenbanktabelle nav_menus
     Name (Unique) | Description
+[ ] Anti CSRF Tokens ebenfalls in Module mit Frontend Formularen einbauen
