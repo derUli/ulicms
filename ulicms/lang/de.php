@@ -419,4 +419,7 @@ define("TRANSLATION_AVAILABLE_PATCHES", "Verfügbare Patches");
 define("TRANSLATION_INSTALL_PATCHES", "Patches installieren");
 define("TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches sind verfügbar");
 
+// Hilfetexte
+define("TRANSLATION_PATCHES_HELP", file_get_contents(ULICMS_ROOT."/lang/longtxt/de/patch_install_help.html"));
+
 add_hook("lang_de");
