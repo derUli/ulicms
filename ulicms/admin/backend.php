@@ -81,9 +81,16 @@ $pkg = new packageManager();
     
      global $actions;
     
-     if($_GET["action"] == "" || $_GET["action"] == "home"){
+    if($_GET["action"] == "" || $_GET["action"] == "home"){
          require_once "inc/dashboard.php";
          }
+    else if($_GET["action"] == "help"){
+        switch($_GET["help"]){
+           case "patch_install":
+		translate("PATCH_INSTALL_HELP");
+           break;
+        }
+    }
     else if($_GET["action"] == "contents"){
          require_once "inc/contents.php";
          }

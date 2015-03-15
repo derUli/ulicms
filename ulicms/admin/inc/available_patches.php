@@ -35,6 +35,7 @@ $url = $splitted[2];
 
 ?>
 <input type="submit" value="<?php translate("install_selected_patches");?>">
+<input type="button" value="<?php translate("help");?>" onclick="window.open('?action=help&help=patch_install');">
 </form>
 <?php
 
