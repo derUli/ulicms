@@ -2,6 +2,7 @@ Veröffentlichung von UliCMS 8.0.2 geplant für 2017
 
 [X] Patches können über das backend installiert werden
 [X] jQuery aktualisieren
+[ ] jQuery im Frontend einbinden
 [ ] Übersetzung der Erweiterungen in der Paketquelle
 [ ] Den KCFinder durch einen selbst implementierte Dateimanager ersetzen.
 [X] Hilfetext für Feature "Patches installieren" hinzufügen
