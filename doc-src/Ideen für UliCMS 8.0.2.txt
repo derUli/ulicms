@@ -10,4 +10,4 @@ Veröffentlichung von UliCMS 8.0.2 geplant für 2017
     Datenbanktabelle nav_menus
     Name (Unique) | Description
 [X] Anti-CSRF Schutz
-[ ] Anti CSRF Tokens ebenfalls in Module mit Frontend Formularen einbauen
+[X] Anti CSRF Tokens ebenfalls in Module mit Frontend Formularen einbauen
