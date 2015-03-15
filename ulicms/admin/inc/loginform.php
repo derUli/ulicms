@@ -9,6 +9,7 @@ if(isset($_SESSION["language"]) and in_array($_SESSION["language"], $languages))
 <h3><?php echo TRANSLATION_PLEASE_AUTHENTICATE;
 ?></h3>
 <form action="index.php" method="post">
+<?php csrf_token_html();?>
 <input type="hidden" name="login" value="login">
 <?php if(!empty($_REQUEST["go"])){
      ?>

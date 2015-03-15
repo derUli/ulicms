@@ -4,6 +4,7 @@
 <?php if($acl -> hasPermission("spam_filter")){
      ?>
 <form id="spamfilter_settings" name="?action=spam_filter" method="post">
+<?php csrf_token_html();?>
 <input type="checkbox" id="spamfilter_enabled" name="spamfilter_enabled"<?php if(getconfig("spamfilter_enabled") == "yes"){
          echo " checked";
          }
