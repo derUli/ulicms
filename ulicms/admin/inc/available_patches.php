@@ -15,6 +15,7 @@ if(defined("_SECURITY")){
      } else {
      ?>
 <form action="index.php?action=install_patches" method="post">
+<?php csrf_token_html();?>
 <?php 
 $lines = explode("\n", $patches);
 foreach($lines as $line) {
