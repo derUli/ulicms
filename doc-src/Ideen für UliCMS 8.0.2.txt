@@ -1,3 +1,5 @@
+Veröffentlichung von UliCMS 8.0.2 geplant für 2017
+
 [X] Patches können über das backend installiert werden
 [X] jQuery aktualisieren
 [ ] Übersetzung der Erweiterungen in der Paketquelle
@@ -6,4 +8,5 @@
 [ ] Grafische Menüverwaltung hinzufügen
     Datenbanktabelle nav_menus
     Name (Unique) | Description
+[X] Anti-CSRF Schutz
 [ ] Anti CSRF Tokens ebenfalls in Module mit Frontend Formularen einbauen
