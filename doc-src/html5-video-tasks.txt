@@ -1,0 +1,19 @@
+Bei hochladen eines Videos soll
+[ ] der Ordner content/videos erstellt werden, sofern dieser noch nicht existiert
+[ ] die hochgeladenen Dateien in den Ordner content/videos verschoben werden
+[ ] der Dateiname mit einem Timestamp geprefixt werden
+[ ] Das Video in der Datenbank eingetragen werden, in die Felder mp4_file und ogg_file sollen die relativen Pfade der Videodateien eingetragen werden, z.B. 
+content/videos/1426548302-meinvideo.mp4
+[ ] Es soll eine Listenansicht von den Videos geben ähnlich wie in der Seitenverwaltung
+[ ] Es soll die üblichen Filter geben
+[ ] der Tablesorter soll genutzt werden
+[ ] Es soll möglich sein, Datensätze zu bearbeiten, mp4_file und ogg_file wird als bearbeitbares Textfeld angezeigt
+[ ] Es soll möglich sein, Videos einer Kategorie zuzuweisen
+[ ] Es soll möglich sein Videos zu löschen, die dazugehörigen Dateien werden hierbei auch gelöscht.
+[ ] HTML5 Videos sollen über Embed Tags wie z.B. [video id=123] in eine Seite eingebunden werden können. Diese Codes sollen ähnlich wie bei den Modulen in Textfeldern in der Liste angezeigt werden
+
+<video width="320" height="240" controls>
+  <source src="content/videos/1426548302-meinvideo.mp4" type="video/mp4">
+  <source src="content/videos/1426548302-meinvideo.ogg" type="video/ogg">
+Your browser does not support the video tag.
+</video>
