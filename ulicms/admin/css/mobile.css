@@ -93,3 +93,7 @@ font-size:xx-large !important;
 .CodeMirror{
 font-size: 110%;
 }
+
+.scrollup{
+display:none;
+}

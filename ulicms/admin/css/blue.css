@@ -99,6 +99,7 @@ div#root-container{
 padding:0px 10px 5px 0px;
 width:85%;
 margin:auto;
+position:relative;
 }
 
 a, a:visited{
@@ -224,5 +225,9 @@ border:none;
 background-color:white;
 }
 
-
+.scrollup{
+position:fixed;
+bottom:10px;
+right:10px;
+}
 

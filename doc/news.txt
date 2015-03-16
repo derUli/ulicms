@@ -3,3 +3,4 @@
 + integriertes jQuery auf Version 1.11.1 aktualisiert
 + Anti CSRF Tokens integriert
 + jQuery nun auch im Frontend automatisch integriert. Sofern Sie jQuery als Modul installiert haben, müssen Sie dieses Modul deinstallieren, da jQuery ansonsten doppelt eingebunden wird.
++ Scroll Up Button rechts unten hinzugefügt. Nur auf Desktop PCs.

@@ -48,6 +48,7 @@ $(document).ready(function() {
 <title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="scripts/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="scripts/util.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
      
@@ -60,3 +61,4 @@ $(document).ready(function(){
 </head>
 <body>
 <div id="root-container">
+<a name="top"></a>
