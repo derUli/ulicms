@@ -502,7 +502,18 @@ mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."installed_patc
 (2, 'English', 'en');")or die(mysqli_error($connection));
         
         
-        
+        mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix ."videos` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `mp4_file` varchar(255) DEFAULT NULL,
+  `ogg_file` varchar(255) DEFAULT NULL,
+  `width` int(11) NOT NULL,
+  `height` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `created` bigint(20) NOT NULL,
+  `updated` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
         
          $sql_categories_table = "CREATE TABLE " . $prefix . "categories (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
