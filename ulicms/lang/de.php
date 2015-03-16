@@ -426,5 +426,9 @@ define("TRANSLATION_PATCH_INSTALL_HELP", file_get_contents(ULICMS_ROOT."/lang/lo
 // Videos
 define("TRANSLATION_VIDEOS", "Videos");
 define("TRANSLATION_UPLOAD_VIDEO", "Video hochladen");
+define("TRANSLATION_VIDEO_OGG", "Video im OGG Theora Format (für Firefox)");
+define("TRANSLATION_VIDEO_MP4", "Video im MP4 Format (für sonstige Browser)");
+define("TRANSLATION_WIDTH", "Breite");
+define("TRANSLATION_HEIGHT", "Höhe");
 
 add_hook("lang_de");

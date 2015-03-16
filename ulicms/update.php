@@ -12,7 +12,7 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("installed_patches")."` (
   `url` varchar(255) NOT NULL,
   `date` DATETIME NOT NULL,
    PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;")or die(db_error());
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
 db_query("CREATE TABLE IF NOT EXISTS `".tbname("videos")."` (
 `id` int(11) NOT NULL AUTO_INCREMENT,

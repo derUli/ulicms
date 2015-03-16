@@ -439,4 +439,10 @@ define("TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches are available");
 define("TRANSLATION_HELP", "Help");
 define("TRANSLATION_PATCH_INSTALL_HELP", file_get_contents(ULICMS_ROOT."/lang/longtxt/en/patch_install_help.html"));
 
+// Videos
+define("TRANSLATION_VIDEOS", "Videos");
+define("TRANSLATION_UPLOAD_VIDEO", "Upload a Video");
+define("TRANSLATION_VIDEO_OGG", "Video in OGG Theora file format (for Firefox)");
+define("TRANSLATION_VIDEO_MP4", "Video in MP4 file format (for other browsers)");
+
 add_hook("lang_en");
