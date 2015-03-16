@@ -243,6 +243,9 @@ $pkg = new packageManager();
     else if($_GET["action"] == "install_patches"){
          require_once "inc/install_patches.php";
          }
+    else if($_GET["action"] == "videos"){
+         require_once "inc/videos.php";
+         }
     
     else if(isset($actions[$_GET["action"]])){
          include_once $actions[$_GET["action"]];
