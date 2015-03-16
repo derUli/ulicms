@@ -444,5 +444,7 @@ define("TRANSLATION_VIDEOS", "Videos");
 define("TRANSLATION_UPLOAD_VIDEO", "Upload a Video");
 define("TRANSLATION_VIDEO_OGG", "Video in OGG Theora file format (for Firefox)");
 define("TRANSLATION_VIDEO_MP4", "Video in MP4 file format (for other browsers)");
+define("TRANSLATION_WIDTH", "Breite");
+define("TRANSLATION_HEIGHT", "Höhe");
 
 add_hook("lang_en");
