@@ -246,6 +246,9 @@ $pkg = new packageManager();
     else if($_GET["action"] == "videos"){
          require_once "inc/videos.php";
          }
+    else if($_GET["action"] == "add_video"){
+         require_once "inc/add_video.php";
+         }
     
     else if(isset($actions[$_GET["action"]])){
          include_once $actions[$_GET["action"]];

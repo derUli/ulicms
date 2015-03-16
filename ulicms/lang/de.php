@@ -423,4 +423,8 @@ define("TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches sind verfügbar");
 define("TRANSLATION_HELP", "Hilfe");
 define("TRANSLATION_PATCH_INSTALL_HELP", file_get_contents(ULICMS_ROOT."/lang/longtxt/de/patch_install_help.html"));
 
+// Videos
+define("TRANSLATION_VIDEOS", "Videos");
+define("TRANSLATION_UPLOAD_VIDEO", "Video hochladen");
+
 add_hook("lang_de");
