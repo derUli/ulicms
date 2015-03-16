@@ -143,6 +143,7 @@ class ACL{
         $acl_data["images"] = null;
          $acl_data["files"] = null;
          $acl_data["flash"] = null;
+         $acl_data["videos"] = null;
         
          // Benutzer
         $acl_data["users"] = null;
