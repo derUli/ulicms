@@ -11,3 +11,4 @@ Veröffentlichung von UliCMS 8.0.2 geplant für 2017
     Name (Unique) | Description
 [X] Anti-CSRF Schutz
 [X] Anti CSRF Tokens ebenfalls in Module mit Frontend Formularen einbauen
+[ ] Versionierung
