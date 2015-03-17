@@ -9,9 +9,9 @@ if($acl -> hasPermission("videos")){
 <input type="text" name="name" required="true" value="" maxlength=255/>
 <br/><br/>
 <strong><?php echo translate("video_ogg");?></strong><br/>
-<input name="video_ogg" type="file"><br/><br/>
+<input name="ogg_file" type="file"><br/><br/>
 <strong><?php echo translate("video_mp4");?></strong><br/>
-<input name="video_mp4" type="file"><br/><br/>
+<input name="mp4_file" type="file"><br/><br/>
 <strong><?php translate("width");?></strong><br/>
 <input type="number" name="width" value="1280" step="1">
 
