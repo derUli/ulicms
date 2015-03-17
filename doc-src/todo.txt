@@ -9,3 +9,4 @@ Filter für Videos:
     - Anwender muss Cache leeren
     - Anwender muss alle Module, die Formulare nutzen neu installieren bzw. aktualisieren
     - Anwender muss csrf_tokens zu eigenen Modulen hinzufügen
+    - Anwender muss sich gegebenfalls Rechte für "audio" und "videos" geben
