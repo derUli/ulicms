@@ -485,7 +485,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;")or die(mysqli_error($connection));
         
-mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."installed_patches` (
+        mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "installed_patches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -502,7 +502,7 @@ mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."installed_patc
 (2, 'English', 'en');")or die(mysqli_error($connection));
         
         
-        mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix ."videos` (
+         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "videos` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `mp4_file` varchar(255) DEFAULT NULL,
@@ -514,10 +514,10 @@ mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."installed_patc
   `updated` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
-
-
-
-        mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix ."audio` (
+        
+        
+        
+         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "audio` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `mp3_file` varchar(255) DEFAULT NULL,

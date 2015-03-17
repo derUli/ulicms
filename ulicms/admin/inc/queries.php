@@ -85,11 +85,11 @@ if($_GET["action"] == "spam_filter" and
     
     
     
-         if(isset($_POST["check_for_spamhaus"])){
+     if(isset($_POST["check_for_spamhaus"])){
          setconfig("check_for_spamhaus", "check");
          }
     else{
-        deleteconfig("check_for_spamhaus");
+         deleteconfig("check_for_spamhaus");
          }
     
     

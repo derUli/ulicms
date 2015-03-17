@@ -421,7 +421,7 @@ define("TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches sind verfügbar");
 
 // Hilfetexte
 define("TRANSLATION_HELP", "Hilfe");
-define("TRANSLATION_PATCH_INSTALL_HELP", file_get_contents(ULICMS_ROOT."/lang/longtxt/de/patch_install_help.html"));
+define("TRANSLATION_PATCH_INSTALL_HELP", file_get_contents(ULICMS_ROOT . "/lang/longtxt/de/patch_install_help.html"));
 
 // Videos
 define("TRANSLATION_VIDEOS", "Videos");
@@ -439,7 +439,7 @@ define("TRANSLATION_INSERT_THIS_CODE_INTO_A_PAGE", "Fügen Sie diesen Code in ei
 // Audio
 define("TRANSLATION_AUDIO", "Audio");
 define("TRANSLATION_AUDIO_OGG", "Audio file im OGG Vorbis Format (für Firefox)");
-define("TRANSLATION_MP3_FILE", "MP3 Datei (für andere Browser)");
+define("TRANSLATION_AUDIO_MP3", "MP3 Datei (für andere Browser)");
 define("TRANSLATION_DOWNLOAD_AUDIO_INSTEAD", "Sie können die Audiodatei stattdessen hier herunterladen");
 define("TRANSLATION_UPLOAD_AUDIO", "Audiodatei hochladen");
 

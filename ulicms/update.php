@@ -5,7 +5,7 @@ include_once "init.php";
 setconfig("locale_de", "de_DE.UTF-8; de_DE; deu_deu");
 setconfig("locale_en", "en_US.UTF-8; en_GB.UTF-8; en_US; en_GB; english-uk; eng; uk");
 
-db_query("CREATE TABLE IF NOT EXISTS `".tbname("installed_patches")."` (
+db_query("CREATE TABLE IF NOT EXISTS `" . tbname("installed_patches") . "` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
@@ -14,7 +14,7 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("installed_patches")."` (
    PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
-db_query("CREATE TABLE IF NOT EXISTS `".tbname("videos")."` (
+db_query("CREATE TABLE IF NOT EXISTS `" . tbname("videos") . "` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `mp4_file` varchar(255) DEFAULT NULL,
@@ -28,7 +28,7 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("videos")."` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 
-db_query("CREATE TABLE IF NOT EXISTS `".tbname("audio")."` (
+db_query("CREATE TABLE IF NOT EXISTS `" . tbname("audio") . "` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `mp3_file` varchar(255) DEFAULT NULL,
@@ -42,5 +42,5 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("audio")."` (
 
 setconfig("db_schema_version", "9.0.0");
 
-// @unlink("update.php");
+//  @unlink ("update.php");
 ulicms_redirect("admin/");

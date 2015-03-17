@@ -15,25 +15,25 @@ function get_custom_data($page = null){
      }
 
 function include_jquery(){
-
-$disabled_on_pages = getconfig("jquery_disabled_on");
-if($disabled_on_pages){
- $disabled_on_pages = trim($disabled_on_pages);
-  $disabled_on_pages = explode(";", $disabled_on_pages);
-} else {
-  $disabled_on_pages = array();
-}
-
-
-if(!in_array(get_requested_pagename(), $disabled_on_pages)){
-     ?>
+    
+    $disabled_on_pages = getconfig("jquery_disabled_on");
+    if($disabled_on_pages){
+         $disabled_on_pages = trim($disabled_on_pages);
+         $disabled_on_pages = explode(";", $disabled_on_pages);
+        }else{
+         $disabled_on_pages = array();
+        }
+    
+    
+    if(!in_array(get_requested_pagename(), $disabled_on_pages)){
+         ?>
        
 <script type="text/javascript" src="admin/scripts/jquery.js"></script>
 <?php
-     add_hook("after_jquery_include");
-     }
-
-}
+         add_hook("after_jquery_include");
+         }
+    
+    }
 
 function get_access($page = null){
      if(!$page)
@@ -698,7 +698,7 @@ color:" . getconfig("body-text-color") . ";
 </style>";
          }
     
-    include_jquery();
+     include_jquery();
      add_hook("head");
     
     

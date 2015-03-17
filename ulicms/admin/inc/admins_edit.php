@@ -12,7 +12,8 @@
              ?>
 
 <form action="index.php?action=admins" name="userdata_form" method="post" enctype="multipart/form-data">
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+            ?>
 <input type="hidden" name="edit_admin" value="edit_admin">
 <input type="hidden" name="id" value="<?php echo $row -> id;
              ?>">

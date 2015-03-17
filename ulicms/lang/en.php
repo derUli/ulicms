@@ -437,7 +437,7 @@ define("TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches are available");
 
 // Hilfetexte
 define("TRANSLATION_HELP", "Help");
-define("TRANSLATION_PATCH_INSTALL_HELP", file_get_contents(ULICMS_ROOT."/lang/longtxt/en/patch_install_help.html"));
+define("TRANSLATION_PATCH_INSTALL_HELP", file_get_contents(ULICMS_ROOT . "/lang/longtxt/en/patch_install_help.html"));
 
 // Videos
 define("TRANSLATION_VIDEOS", "Videos");

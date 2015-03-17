@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="css/blue.css"/>
 <?php
 if(is_mobile()){
-    ?>
+     ?>
 <link rel="stylesheet" type="text/css" href="css/mobile.css"/>
 <?php }
 ?>
@@ -28,7 +28,8 @@ $(document).ready(function() {
 <script type="text/javascript" src="scripts/notification.js"></script>
 <script type="text/javascript" src="scripts/jquery-shiftclick.js"></script>
 <script type="text/javascript" src="scripts/shift_checkbox.js"></script>
-<?php } ?>
+<?php }
+?>
 <script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
 <link rel="stylesheet" href="scripts/vallenato/vallenato.css" type="text/css">
 <link rel="icon" href="gfx/favicon.ico" type="image/x-icon"> 

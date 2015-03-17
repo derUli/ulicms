@@ -231,7 +231,7 @@ for($i = 0; $i < count($required_tables); $i++){
  if(!in_array($table, $existing_tables)){
      if(!headers_sent())
          header("Content-Type: text/html; charset=UTF-8");
-
+    
      throw new Exception("Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!");
      exit();
      }
@@ -280,10 +280,10 @@ if(!$timezone){
 
 $locale = getconfig("locale");
 if($locale){
-      $locale = splitAndTrim($locale);
-      array_unshift($locale, LC_ALL);
-      @call_user_func_array("setlocale", $locale);
-   }
+ $locale = splitAndTrim($locale);
+ array_unshift($locale, LC_ALL);
+ @call_user_func_array("setlocale", $locale);
+ }
 
 if(!getconfig("session_timeout")){
  setconfig("session_timeout", 60);
@@ -326,16 +326,16 @@ define("UPDATE_CHECK_URL", "http://update.ulicms.de/?v=" .
 implode(".", $version -> getInternalVersion())) . "&update=" . urlencode($version -> getUpdate()));
 
 if(in_array(tbname("installed_patches"), $existing_tables)){
-  $pkg = new PackageManager();
-  $installed_patches = $pkg->getInstalledPatchNames();
-  $installed_patches = implode(";", $installed_patches);
-} else{
-   $installed_patches= "";
+ $pkg = new PackageManager();
+ $installed_patches = $pkg -> getInstalledPatchNames();
+ $installed_patches = implode(";", $installed_patches);
+}else{
+ $installed_patches = "";
 }
 
 define("PATCH_CHECK_URL", "http://patches.ulicms.de/?v=" .
  urlencode(
-implode(".", $version -> getInternalVersion())) . "&installed_patches=".urlencode($installed_patches));
+implode(".", $version -> getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
 
 
 if(!getconfig("session_name"))

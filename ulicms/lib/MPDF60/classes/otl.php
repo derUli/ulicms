@@ -786,7 +786,7 @@ class otl{
                     /**
                      * This function implements the shaping logic documented here:
                      * 
-                     *      http://linux.thai.net/~thep/th-otf/shaping.html
+                     *       http://linux.thai.net/~thep/th-otf/shaping.html
                      * 
                      * The first shaping rule listed there is needed even if the font has Thai
                      * OpenType tables. 
@@ -2582,13 +2582,13 @@ else if ($Type == 4){
         
         /**
          * - If it *is* a mark ligature, we don't allocate a new ligature id, and leave
-         *      the ligature to keep its old ligature id.  This will allow it to attach to
-         *      a base ligature in GPOS.  Eg. if the sequence is: LAM,LAM,SHADDA,FATHA,HEH,
-         *      and LAM,LAM,HEH form a ligature, they will leave SHADDA and FATHA wit a
-         *      ligature id and component value of 2.  Then if SHADDA,FATHA form a ligature
-         *      later, we don't want them to lose their ligature id/component, otherwise
-         *      GPOS will fail to correctly position the mark ligature on top of the
-         *      LAM,LAM,HEH ligature.
+         *       the ligature to keep its old ligature id.  This will allow it to attach to
+         *       a base ligature in GPOS.  Eg. if the sequence is: LAM,LAM,SHADDA,FATHA,HEH,
+         *       and LAM,LAM,HEH form a ligature, they will leave SHADDA and FATHA wit a
+         *       ligature id and component value of 2.  Then if SHADDA,FATHA form a ligature
+         *       later, we don't want them to lose their ligature id/component, otherwise
+         *       GPOS will fail to correctly position the mark ligature on top of the
+         *       LAM,LAM,HEH ligature.
          */
          // So if is_array($firstMarkAssoc) - the new (Mark) ligature should keep this association
         $lastPos = $GlyphPos[(count($GlyphPos)-1)];
@@ -2596,31 +2596,31 @@ else if ($Type == 4){
     else{
         /**
          * - Ligatures cannot be formed across glyphs attached to different components
-         *      of previous ligatures.  Eg. the sequence is LAM,SHADDA,LAM,FATHA,HEH, and
-         *      LAM,LAM,HEH form a ligature, leaving SHADDA,FATHA next to eachother.
-         *      However, it would be wrong to ligate that SHADDA,FATHA sequence.
-         *      There is an exception to this: If a ligature tries ligating with marks that
-         *      belong to it itself, go ahead, assuming that the font designer knows what
-         *      they are doing (otherwise it can break Indic stuff when a matra wants to
-         *      ligate with a conjunct...)
+         *       of previous ligatures.  Eg. the sequence is LAM,SHADDA,LAM,FATHA,HEH, and
+         *       LAM,LAM,HEH form a ligature, leaving SHADDA,FATHA next to eachother.
+         *       However, it would be wrong to ligate that SHADDA,FATHA sequence.
+         *       There is an exception to this: If a ligature tries ligating with marks that
+         *       belong to it itself, go ahead, assuming that the font designer knows what
+         *       they are doing (otherwise it can break Indic stuff when a matra wants to
+         *       ligate with a conjunct...)
          */
         
         /**
          * - If a ligature is formed of components that some of which are also ligatures
-         *      themselves, and those ligature components had marks attached to *their*
-         *      components, we have to attach the marks to the new ligature component
-         *      positions!  Now *that*'s tricky!  And these marks may be following the
-         *      last component of the whole sequence, so we should loop forward looking
-         *      for them and update them.
+         *       themselves, and those ligature components had marks attached to *their*
+         *       components, we have to attach the marks to the new ligature component
+         *       positions!  Now *that*'s tricky!  And these marks may be following the
+         *       last component of the whole sequence, so we should loop forward looking
+         *       for them and update them.
          * 
-         *      Eg. the sequence is LAM,LAM,SHADDA,FATHA,HEH, and the font first forms a
-         *      'calt' ligature of LAM,HEH, leaving the SHADDA and FATHA with a ligature
-         *      id and component == 1.  Now, during 'liga', the LAM and the LAM-HEH ligature
-         *      form a LAM-LAM-HEH ligature.  We need to reassign the SHADDA and FATHA to
-         *      the new ligature with a component value of 2.
+         *       Eg. the sequence is LAM,LAM,SHADDA,FATHA,HEH, and the font first forms a
+         *       'calt' ligature of LAM,HEH, leaving the SHADDA and FATHA with a ligature
+         *       id and component == 1.  Now, during 'liga', the LAM and the LAM-HEH ligature
+         *       form a LAM-LAM-HEH ligature.  We need to reassign the SHADDA and FATHA to
+         *       the new ligature with a component value of 2.
          * 
-         *      This in fact happened to a font...  See:
-         *      https://bugzilla.gnome.org/show_bug.cgi?id=437633
+         *       This in fact happened to a font...  See:
+         *       https://bugzilla.gnome.org/show_bug.cgi?id=437633
          */
         
          $currComp = 0;
@@ -5140,7 +5140,7 @@ for ($i = 0; $i < $numchars; ++$i){
      }
 
 // NB
-// Separate into lines at this point************ 
+// Separate into lines at this point************
 // L1. On each line, reset the embedding level of the following characters to the paragraph embedding level:
 // 1. Segment separators (Tab) 'S',
 // 2. Paragraph separators 'B',
@@ -5244,6 +5244,7 @@ $dos = -1;
  $strongrtl = false;
  $diid = 0; // direction isolate ID
  $dictr = 0; // direction isolate counter
+
 
 
 

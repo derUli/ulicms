@@ -17,13 +17,16 @@ $font = 'dejavusanscondensed'; // Use internal mPDF font-name
 
 
 
+
 $min = 0x0020; // Minimum Unicode value to show
 $max = 0x2FFFF; // Maximum Unicode value to show
 
 
 
 
+
 $showmissing = false; // Show all missing unicode blocks / characters
+
 
 
 
@@ -259,6 +262,7 @@ function _getCharWidth(& $cw, $u, $isdef = true){
      }
 // ==============================================================
 $mpdf -> WriteHTML($html); // Separate Paragraphs  defined by font
+
 
 
 

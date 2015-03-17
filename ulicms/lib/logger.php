@@ -1,7 +1,7 @@
 <?php
 define("LOG_TIME_FORMAT", "H:i:s");
 function log_db_query($query){
-    include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "cms-config.php";    
+     include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "cms-config.php";
      $config = new config();
      if(!isset($config -> query_logging)){
          return false;

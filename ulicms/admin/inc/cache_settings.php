@@ -22,7 +22,8 @@ if($acl -> hasPermission("cache")){
 
 
 <form post="index.php" method="get">
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+        ?>
 <input type="hidden" name="action" value="cache"/>
 <input type="hidden" name="clear_cache" value="yes"/>
 <input type="submit" value="<?php echo TRANSLATION_CLEAR_CACHE;

@@ -17,7 +17,8 @@ if(!$acl -> hasPermission("export")){
   <h1><?php echo TRANSLATION_JSON_EXPORT;
      ?></h1>
   <form action="?action=export" method="post">
-  <?php csrf_token_html();?>
+  <?php csrf_token_html();
+    ?>
   <p><?php echo TRANSLATION_EXPORT_INTO_TABLE;
      ?><br/>
   <select name="table" size="1">

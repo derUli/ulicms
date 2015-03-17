@@ -21,10 +21,10 @@ add_hook("after_session_start");
 $syslang = getSystemLanguage();
 include_once getLanguageFilePath($syslang);
 if(logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and !isset($_REQUEST["ajax_cmd"])){
-    if(!check_csrf_token()){
-       die("This is probably a CSRF attack!");
+     if(!check_csrf_token()){
+         die("This is probably a CSRF attack!");
+         }
     }
-}
 
 setLocaleByLanguage();
 
@@ -38,9 +38,9 @@ require_once "inc/logincheck.php";
 define("_SECURITY", true);
 
 if($_GET["action"] == "ulicms-news"){
-         require_once "inc/ulicms-news.php";
-         exit();
-         }    
+     require_once "inc/ulicms-news.php";
+     exit();
+     }
 
 if(isset($_SESSION["ulicms_login"]))
     {
@@ -75,22 +75,22 @@ if(!$eingeloggt){
     
     
      add_hook("register_actions");
-     
-     
-$pkg = new packageManager();
+    
+    
+    $pkg = new packageManager();
     
      global $actions;
     
-    if($_GET["action"] == "" || $_GET["action"] == "home"){
+     if($_GET["action"] == "" || $_GET["action"] == "home"){
          require_once "inc/dashboard.php";
          }
     else if($_GET["action"] == "help"){
-        switch($_GET["help"]){
-           case "patch_install":
-		translate("PATCH_INSTALL_HELP");
-           break;
-        }
-    }
+         switch($_GET["help"]){
+         case "patch_install":
+             translate("PATCH_INSTALL_HELP");
+             break;
+             }
+         }
     else if($_GET["action"] == "contents"){
          require_once "inc/contents.php";
          }
@@ -268,8 +268,8 @@ $pkg = new packageManager();
          echo TRANSLATION_ACTION_NOT_FOUND;
          }
      }
-     
-     
+
+
 
 require_once "inc/footer.php";
 @include '../cron.php';

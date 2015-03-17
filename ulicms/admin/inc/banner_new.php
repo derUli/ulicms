@@ -4,7 +4,8 @@
          ?>
 
 <form action="index.php?action=banner" method="post"> 
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+        ?>
 <p><input type="radio" checked="checked" id="radio_gif" name="type" value="gif" onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label for="radio_gif"><?php echo TRANSLATION_GIF_BANNER;
          ?></label></p>
 <fieldset id="type_gif">

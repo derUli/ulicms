@@ -6,58 +6,58 @@ function getLanguageFilePath($lang = "de", $component = null){
      }
 
 function get_useragent(){
-  return $_SERVER['HTTP_USER_AGENT'];
-}
+     return $_SERVER['HTTP_USER_AGENT'];
+    }
 
 
 function check_csrf_token(){
-   if(!isset($_REQUEST["csrf_token"]))
-      return false;
-   return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];
-}
+     if(!isset($_REQUEST["csrf_token"]))
+         return false;
+     return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];
+    }
 
 function get_csrf_token_html(){
-   return '<input type="hidden" name="csrf_token" value="'.get_csrf_token().'">';
-}
+     return '<input type="hidden" name="csrf_token" value="' . get_csrf_token() . '">';
+    }
 
 function csrf_token_html(){
-   echo get_csrf_token_html();
-}
+     echo get_csrf_token_html();
+    }
 
 function get_csrf_token(){
-   if(!isset($_SESSION["csrf_token"]))
-      $_SESSION["csrf_token"] = md5(uniqid(rand(), true));
-   return $_SESSION["csrf_token"];
-}
+     if(!isset($_SESSION["csrf_token"]))
+         $_SESSION["csrf_token"] = md5(uniqid(rand(), true));
+     return $_SESSION["csrf_token"];
+    }
 
 
 // returns site protocl
 // http:// or https://
 function get_site_protocol(){
      if(isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') return $protocol = 'https://';
-    else return $protocol = 'http://';
-    }
+     else return $protocol = 'http://';
+     }
 
 function site_protocol(){
      echo get_site_protocol();
+     }
+
+
+function recurse_copy($src, $dst){
+     $dir = opendir($src);
+     @mkdir($dst);
+     while(false !== ($file = readdir($dir))){
+         if (($file != '.') && ($file != '..')){
+             if (is_dir($src . '/' . $file)){
+                 recurse_copy($src . '/' . $file, $dst . '/' . $file);
+                 }
+            else{
+                 copy($src . '/' . $file, $dst . '/' . $file);
+                 }
+             }
+         }
+     closedir($dir);
     }
-
-
-function recurse_copy($src,$dst) { 
-    $dir = opendir($src); 
-    @mkdir($dst); 
-    while(false !== ( $file = readdir($dir)) ) { 
-        if (( $file != '.' ) && ( $file != '..' )) { 
-            if ( is_dir($src . '/' . $file) ) { 
-                recurse_copy($src . '/' . $file,$dst . '/' . $file); 
-            } 
-            else { 
-                copy($src . '/' . $file,$dst . '/' . $file); 
-            } 
-        } 
-    } 
-    closedir($dir); 
-}
 
 function strbool($value)
 {
@@ -67,55 +67,60 @@ function strbool($value)
 function getFontSizes(){
      return array("xx-small", "x-small", "smaller", "small", "medium", "large", "larger", "x-large", "xx-large");
      }
-     
+
 function get_ip()
 {
-    $proxy_headers = array(
+     $proxy_headers = array(
         'CLIENT_IP',
-        'FORWARDED',
-        'FORWARDED_FOR',
-        'FORWARDED_FOR_IP',
-        'HTTP_CLIENT_IP',
-        'HTTP_FORWARDED',
-        'HTTP_FORWARDED_FOR',
-        'HTTP_FORWARDED_FOR_IP',
-        'HTTP_PC_REMOTE_ADDR',
-        'HTTP_PROXY_CONNECTION',
-        'HTTP_VIA',
-        'HTTP_X_FORWARDED',
-        'HTTP_X_FORWARDED_FOR',
-        'HTTP_X_FORWARDED_FOR_IP',
-        'HTTP_X_IMFORWARDS',
-        'HTTP_XROXY_CONNECTION',
-        'VIA',
-        'X_FORWARDED',
-        'X_FORWARDED_FOR'
-    );
-    $regEx = "/^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/";
-    foreach ($proxy_headers as $proxy_header) {
-        if (isset($_SERVER[$proxy_header])) {
-            /* HEADER ist gesetzt und dies ist eine gültige IP */
-            return $_SERVER[$proxy_header];
-        } else if (stristr(',', $_SERVER[$proxy_header]) !== false) {
-            // Behandle mehrere IPs in einer Anfrage
-            //(z.B.: X-Forwarded-For: client1, proxy1, proxy2)
+         'FORWARDED',
+         'FORWARDED_FOR',
+         'FORWARDED_FOR_IP',
+         'HTTP_CLIENT_IP',
+         'HTTP_FORWARDED',
+         'HTTP_FORWARDED_FOR',
+         'HTTP_FORWARDED_FOR_IP',
+         'HTTP_PC_REMOTE_ADDR',
+         'HTTP_PROXY_CONNECTION',
+         'HTTP_VIA',
+         'HTTP_X_FORWARDED',
+         'HTTP_X_FORWARDED_FOR',
+         'HTTP_X_FORWARDED_FOR_IP',
+         'HTTP_X_IMFORWARDS',
+         'HTTP_XROXY_CONNECTION',
+         'VIA',
+         'X_FORWARDED',
+         'X_FORWARDED_FOR'
+        );
+     $regEx = "/^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/";
+     foreach ($proxy_headers as $proxy_header){
+         if (isset($_SERVER[$proxy_header])){
+            /**
+             * HEADER ist gesetzt und dies ist eine gültige IP
+             */
+             return $_SERVER[$proxy_header];
+             }else if (stristr(',', $_SERVER[$proxy_header]) !== false){
+             // Behandle mehrere IPs in einer Anfrage
+            // (z.B.: X-Forwarded-For: client1, proxy1, proxy2)
             $proxy_header_temp = trim(
                 array_shift(explode(',', $_SERVER[$proxy_header]))
-            ); /* Teile in einzelne IPs, gib die letzte zurück und entferne Leerzeichen */
-
-            // if IPv4 address remove port if exists
+                );
+            /**
+             * Teile in einzelne IPs, gib die letzte zurück und entferne Leerzeichen
+             */
+            
+             // if IPv4 address remove port if exists
             if (preg_match($regEx, $proxy_header_temp)
-                && ($pos_temp = stripos($proxy_header_temp, ':')) !== false
-            ) {
-                $proxy_header_temp = substr($proxy_header_temp, 0, $pos_temp);
-            }
-            return $proxy_header_temp;
-        }
+                     && ($pos_temp = stripos($proxy_header_temp, ':')) !== false
+                    ){
+                 $proxy_header_temp = substr($proxy_header_temp, 0, $pos_temp);
+                 }
+             return $proxy_header_temp;
+             }
+         }
+    
+     return $_SERVER['REMOTE_ADDR'];
     }
 
-    return $_SERVER['REMOTE_ADDR'];
-}
-     
 
 function getModuleName($module){
      $name_file = getModulePath($module) .
@@ -511,35 +516,35 @@ function is_ssl(){
 
 
 function splitAndTrim($str){
-  return array_map('trim',explode(";",$str));
-}
+     return array_map('trim', explode(";", $str));
+    }
 
 function setLocaleByLanguage(){
-  $locale = null;
-  if(is_admin_dir()){
-     $var = "locale_".db_escape($_SESSION["system_language"]);
-     }
-  else {
-     $var = "locale_".db_escape($_SESSION["language"]);
-  }
-  $locale = getconfig($var);
-  if($locale){
-    $locale = splitAndTrim($locale);
-    array_unshift($locale, LC_ALL);
-    @call_user_func_array("setlocale", $locale);
-  }
-  else{
-    $locale = getconfig("locale");
-    if($locale){
-        
-      $locale = splitAndTrim($locale);
-      array_unshift($locale, LC_ALL);
-      @call_user_func_array("setlocale", $locale);
-     }
-  }
-  
-  return $locale;
-}
+     $locale = null;
+     if(is_admin_dir()){
+         $var = "locale_" . db_escape($_SESSION["system_language"]);
+         }
+    else{
+         $var = "locale_" . db_escape($_SESSION["language"]);
+         }
+     $locale = getconfig($var);
+     if($locale){
+         $locale = splitAndTrim($locale);
+         array_unshift($locale, LC_ALL);
+         @call_user_func_array("setlocale", $locale);
+         }
+    else{
+         $locale = getconfig("locale");
+         if($locale){
+            
+             $locale = splitAndTrim($locale);
+             array_unshift($locale, LC_ALL);
+             @call_user_func_array("setlocale", $locale);
+             }
+         }
+    
+     return $locale;
+    }
 
 // Returns the language code of the current language
 // If $current is true returns language of the current page
@@ -910,85 +915,85 @@ function no_cache(){
 }
 
 function replaceAudioTags($txt){
-   // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke
-   $contains = strpos($txt, "[audio id=") !== FALSE;
-   
+ // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke
+$contains = strpos($txt, "[audio id=") !== FALSE;
 
-   if($contains){
-       $query = db_query("select id, ogg_file, mp3_file from ".tbname("audio")." order by id");
-       
-       while($row = db_fetch_object($query)){
-       
-           $code1 = "[audio id=\"".$row->id."\"]";
-           $code2 = "[audio id=$quot;".$row->id."$quot;]";
-           $code3 = "[audio id=".$row->id."]";
-           if(!empty($row->mp3_file))
-              $preferred = $row->mp3_file;
-           else 
-              $preferred = $row->ogg_file;
-           
-           $html = '<audio controls>';
-           if(!empty($row->mp3_file)){
-              $html .= '<source src="content/audio/'.htmlspecialchars($row->mp3_file).'" type="audio/mp3">';
-           }
-              if(!empty($row->ogg_file)){
-              $html .= '<source src="content/audio/'.htmlspecialchars($row->ogg_file).'" type="audio/ogg">';
-           }
-           $html .= TRANSLATION_NO_HTML5;
-           if(!empty($row->mp3_file) or !empty($row->ogg_file)){
-		$html .= '<br/>
-		<a href="content/audio/'.$preferred.'">'.TRANSLATION_DOWNLOAD_AUDIO_INSTEAD.'</a>';
-	}
-       $html .= '</audio>';
-       $txt = str_replace($code1, $html, $txt);
-       $txt = str_replace($code2, $html, $txt);
-       $txt = str_replace($code3, $html, $txt);
-       }
-   }
-   
-   
-    return $txt;
+
+ if($contains){
+     $query = db_query("select id, ogg_file, mp3_file from " . tbname("audio") . " order by id");
+    
+     while($row = db_fetch_object($query)){
+        
+         $code1 = "[audio id=\"" . $row -> id . "\"]";
+         $code2 = "[audio id=$quot;" . $row -> id . "$quot;]";
+         $code3 = "[audio id=" . $row -> id . "]";
+         if(!empty($row -> mp3_file))
+             $preferred = $row -> mp3_file;
+         else
+             $preferred = $row -> ogg_file;
+        
+         $html = '<audio controls>';
+         if(!empty($row -> mp3_file)){
+             $html .= '<source src="content/audio/' . htmlspecialchars($row -> mp3_file) . '" type="audio/mp3">';
+             }
+         if(!empty($row -> ogg_file)){
+             $html .= '<source src="content/audio/' . htmlspecialchars($row -> ogg_file) . '" type="audio/ogg">';
+             }
+         $html .= TRANSLATION_NO_HTML5;
+         if(!empty($row -> mp3_file) or !empty($row -> ogg_file)){
+             $html .= '<br/>
+		<a href="content/audio/' . $preferred . '">' . TRANSLATION_DOWNLOAD_AUDIO_INSTEAD . '</a>';
+             }
+         $html .= '</audio>';
+         $txt = str_replace($code1, $html, $txt);
+         $txt = str_replace($code2, $html, $txt);
+         $txt = str_replace($code3, $html, $txt);
+         }
+     }
+
+
+ return $txt;
 }
 
 function replaceVideoTags($txt){
-   // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke
-   $contains = strpos($txt, "[video id=") !== FALSE;
-   
+ // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke
+$contains = strpos($txt, "[video id=") !== FALSE;
 
-   if($contains){
-       $query = db_query("select id, ogg_file, mp4_file, width, height from ".tbname("videos")." order by id");
-       
-       while($row = db_fetch_object($query)){
-       
-           $code1 = "[video id=\"".$row->id."\"]";
-           $code2 = "[video id=$quot;".$row->id."$quot;]";
-           $code3 = "[video id=".$row->id."]";
-           if(!empty($row->mp4_file))
-              $preferred = $row->mp4_file;
-           else 
-              $preferred = $row->ogg_file;
-           
-           $html = '<video width="'.$row->width.'" height="'.$row->height.'" controls>';
-           if(!empty($row->mp4_file)){
-              $html .= '<source src="content/videos/'.htmlspecialchars($row->mp4_file).'" type="video/mp4">';
-           }
-              if(!empty($row->ogg_file)){
-              $html .= '<source src="content/videos/'.htmlspecialchars($row->ogg_file).'" type="video/ogg">';
-           }
-           $html .= TRANSLATION_NO_HTML5;
-           if(!empty($row->mp4_file) or !empty($row->ogg_file)){
-		$html .= '<br/>
-		<a href="content/videos/'.$preferred.'">'.TRANSLATION_DOWNLOAD_VIDEO_INSTEAD.'</a>';
-	}
-       $html .= '</video>';
-       $txt = str_replace($code1, $html, $txt);
-       $txt = str_replace($code2, $html, $txt);
-       $txt = str_replace($code3, $html, $txt);
-       }
-   }
-   
-   
-    return $txt;
+
+ if($contains){
+     $query = db_query("select id, ogg_file, mp4_file, width, height from " . tbname("videos") . " order by id");
+    
+     while($row = db_fetch_object($query)){
+        
+         $code1 = "[video id=\"" . $row -> id . "\"]";
+         $code2 = "[video id=$quot;" . $row -> id . "$quot;]";
+         $code3 = "[video id=" . $row -> id . "]";
+         if(!empty($row -> mp4_file))
+             $preferred = $row -> mp4_file;
+         else
+             $preferred = $row -> ogg_file;
+        
+         $html = '<video width="' . $row -> width . '" height="' . $row -> height . '" controls>';
+         if(!empty($row -> mp4_file)){
+             $html .= '<source src="content/videos/' . htmlspecialchars($row -> mp4_file) . '" type="video/mp4">';
+             }
+         if(!empty($row -> ogg_file)){
+             $html .= '<source src="content/videos/' . htmlspecialchars($row -> ogg_file) . '" type="video/ogg">';
+             }
+         $html .= TRANSLATION_NO_HTML5;
+         if(!empty($row -> mp4_file) or !empty($row -> ogg_file)){
+             $html .= '<br/>
+		<a href="content/videos/' . $preferred . '">' . TRANSLATION_DOWNLOAD_VIDEO_INSTEAD . '</a>';
+             }
+         $html .= '</video>';
+         $txt = str_replace($code1, $html, $txt);
+         $txt = str_replace($code2, $html, $txt);
+         $txt = str_replace($code3, $html, $txt);
+         }
+     }
+
+
+ return $txt;
 }
 
 // replace Shortcodes with modules
@@ -1011,7 +1016,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
      $current_page = get_page();
      $string = str_replace('[category]', get_category(), $string);
      }
-     
+
 
  $allModules = getAllModules();
  for($i = 0;$i <= count($allModules);$i++){
@@ -1043,11 +1048,11 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
      $string = str_replace('[title]', get_title(), $string);
     
      }
-     
-     
-     
-    $string = replaceVideoTags($string);
-    $string = replaceAudioTags($string);
+
+
+
+ $string = replaceVideoTags($string);
+ $string = replaceAudioTags($string);
  return $string;
  }
 
@@ -1269,6 +1274,7 @@ else
 
 
 
+
  }
 
 
@@ -1442,34 +1448,34 @@ function is_admin(){
  return true;
 }
 
-//This function transforms the php.ini notation for numbers (like '2M') to an integer (2*1024*1024 in this case)  
-function convertPHPSizeToBytes($sSize)  
-{  
-    if ( is_numeric( $sSize) ) {
-       return $sSize;
-    }
-    $sSuffix = substr($sSize, -1);  
-    $iValue = substr($sSize, 0, -1);  
-    switch(strtoupper($sSuffix)){  
-    case 'P':  
-        $iValue *= 1024;  
-    case 'T':  
-        $iValue *= 1024;  
-    case 'G':  
-        $iValue *= 1024;  
-    case 'M':  
-        $iValue *= 1024;  
-    case 'K':  
-        $iValue *= 1024;  
-        break;  
-    }  
-    return $iValue;  
-}  
+// This function transforms the php.ini notation for numbers (like '2M') to an integer (2*1024*1024 in this case)
+function convertPHPSizeToBytes($sSize)
+{
+ if (is_numeric($sSize)){
+     return $sSize;
+     }
+ $sSuffix = substr($sSize, -1);
+ $iValue = substr($sSize, 0, -1);
+ switch(strtoupper($sSuffix)){
+ case 'P':
+     $iValue *= 1024;
+     case 'T':
+     $iValue *= 1024;
+     case 'G':
+     $iValue *= 1024;
+     case 'M':
+     $iValue *= 1024;
+     case 'K':
+     $iValue *= 1024;
+     break;
+     }
+ return $iValue;
+}
 
-function getMaximumFileUploadSize()  
-{  
-    return min(convertPHPSizeToBytes(ini_get('post_max_size')), convertPHPSizeToBytes(ini_get('upload_max_filesize')));  
-}  
+function getMaximumFileUploadSize()
+{
+ return min(convertPHPSizeToBytes(ini_get('post_max_size')), convertPHPSizeToBytes(ini_get('upload_max_filesize')));
+}
 
 require_once "users_api.php";
 require_once "legacy.php";

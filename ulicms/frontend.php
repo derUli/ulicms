@@ -29,20 +29,20 @@ if(in_array($_SESSION["language"], getAllLanguages())){
      }
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    if(!check_csrf_token()){
-       die("This is probably a CSRF attack!");
+     if(!check_csrf_token()){
+         die("This is probably a CSRF attack!");
+         }
     }
-}
 
 if(getconfig("check_for_spamhaus") and checkForSpamhaus()){
-   $txt = get_translation("IP_BLOCKED_BY_SPAMHAUS");
-
-   $txt = str_replace("%ip", get_ip(), $txt);
-   header("HTTP/1.0 403 Forbidden");
-   header("Content-Type: text/html; charset=UTF-8");
-   echo $txt;
-   exit();
-}
+     $txt = get_translation("IP_BLOCKED_BY_SPAMHAUS");
+    
+     $txt = str_replace("%ip", get_ip(), $txt);
+     header("HTTP/1.0 403 Forbidden");
+     header("Content-Type: text/html; charset=UTF-8");
+     echo $txt;
+     exit();
+    }
 require_once "templating.php";
 $status = check_status();
 

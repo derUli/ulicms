@@ -7,8 +7,7 @@ if(!$acl -> hasPermission("install_packages")){
 <?php }else{
      $pkg_src = getconfig("pkg_src");
      @set_time_limit(0);
-    
-     include "../lib/file_get_contents_wrapper.php";
+
      ?>
 
 <h1>Pakete installieren</h1>
