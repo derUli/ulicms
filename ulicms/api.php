@@ -5,6 +5,32 @@ function getLanguageFilePath($lang = "de", $component = null){
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
 
+function get_useragent(){
+  return $_SERVER['HTTP_USER_AGENT'];
+}
+
+
+function check_csrf_token(){
+   if(!isset($_REQUEST["csrf_token"]))
+      return false;
+   return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];
+}
+
+function get_csrf_token_html(){
+   return '<input type="hidden" name="csrf_token" value="'.get_csrf_token().'">';
+}
+
+function csrf_token_html(){
+   echo get_csrf_token_html();
+}
+
+function get_csrf_token(){
+   if(!isset($_SESSION["csrf_token"]))
+      $_SESSION["csrf_token"] = md5(uniqid(rand(), true));
+   return $_SESSION["csrf_token"];
+}
+
+
 // returns site protocl
 // http:// or https://
 function get_site_protocol(){
@@ -16,6 +42,23 @@ function site_protocol(){
      echo get_site_protocol();
     }
 
+
+function recurse_copy($src,$dst) { 
+    $dir = opendir($src); 
+    @mkdir($dst); 
+    while(false !== ( $file = readdir($dir)) ) { 
+        if (( $file != '.' ) && ( $file != '..' )) { 
+            if ( is_dir($src . '/' . $file) ) { 
+                recurse_copy($src . '/' . $file,$dst . '/' . $file); 
+            } 
+            else { 
+                copy($src . '/' . $file,$dst . '/' . $file); 
+            } 
+        } 
+    } 
+    closedir($dir); 
+}
+
 function strbool($value)
 {
      return $value ? 'true' : 'false';
@@ -24,6 +67,55 @@ function strbool($value)
 function getFontSizes(){
      return array("xx-small", "x-small", "smaller", "small", "medium", "large", "larger", "x-large", "xx-large");
      }
+     
+function get_ip()
+{
+    $proxy_headers = array(
+        'CLIENT_IP',
+        'FORWARDED',
+        'FORWARDED_FOR',
+        'FORWARDED_FOR_IP',
+        'HTTP_CLIENT_IP',
+        'HTTP_FORWARDED',
+        'HTTP_FORWARDED_FOR',
+        'HTTP_FORWARDED_FOR_IP',
+        'HTTP_PC_REMOTE_ADDR',
+        'HTTP_PROXY_CONNECTION',
+        'HTTP_VIA',
+        'HTTP_X_FORWARDED',
+        'HTTP_X_FORWARDED_FOR',
+        'HTTP_X_FORWARDED_FOR_IP',
+        'HTTP_X_IMFORWARDS',
+        'HTTP_XROXY_CONNECTION',
+        'VIA',
+        'X_FORWARDED',
+        'X_FORWARDED_FOR'
+    );
+    $regEx = "/^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/";
+    foreach ($proxy_headers as $proxy_header) {
+        if (isset($_SERVER[$proxy_header])) {
+            /* HEADER ist gesetzt und dies ist eine gültige IP */
+            return $_SERVER[$proxy_header];
+        } else if (stristr(',', $_SERVER[$proxy_header]) !== false) {
+            // Behandle mehrere IPs in einer Anfrage
+            //(z.B.: X-Forwarded-For: client1, proxy1, proxy2)
+            $proxy_header_temp = trim(
+                array_shift(explode(',', $_SERVER[$proxy_header]))
+            ); /* Teile in einzelne IPs, gib die letzte zurück und entferne Leerzeichen */
+
+            // if IPv4 address remove port if exists
+            if (preg_match($regEx, $proxy_header_temp)
+                && ($pos_temp = stripos($proxy_header_temp, ':')) !== false
+            ) {
+                $proxy_header_temp = substr($proxy_header_temp, 0, $pos_temp);
+            }
+            return $proxy_header_temp;
+        }
+    }
+
+    return $_SERVER['REMOTE_ADDR'];
+}
+     
 
 function getModuleName($module){
      $name_file = getModulePath($module) .
@@ -418,6 +510,10 @@ function is_ssl(){
      }
 
 
+function splitAndTrim($str){
+  return array_map('trim',explode(";",$str));
+}
+
 function setLocaleByLanguage(){
   $locale = null;
   if(is_admin_dir()){
@@ -428,12 +524,18 @@ function setLocaleByLanguage(){
   }
   $locale = getconfig($var);
   if($locale){
-    setlocale(LC_ALL, $locale);
+    $locale = splitAndTrim($locale);
+    array_unshift($locale, LC_ALL);
+    @call_user_func_array("setlocale", $locale);
   }
   else{
     $locale = getconfig("locale");
-    if($locale)
-        setlocale(LC_ALL, $locale);
+    if($locale){
+        
+      $locale = splitAndTrim($locale);
+      array_unshift($locale, LC_ALL);
+      @call_user_func_array("setlocale", $locale);
+     }
   }
   
   return $locale;
@@ -1044,16 +1146,12 @@ function is__writable($path)
  elseif (file_exists($path) && preg_match('/\.tmp/', $path))
     {
     
-     if (!($f = @fopen($path, 'w+')))
-         return false;
-     fclose($f);
-     unlink($path);
-     return true;
+     return is_writable($path);
     
      }
 else
     
-     return 0; // Or return error - invalid path...
+     return false; // Or return error - invalid path...
 
 
 

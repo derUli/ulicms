@@ -2,7 +2,9 @@
       font-size:x-large;    
     }
     
-    
+    .menu li ul{
+       display:none !important;    
+    }
     
     .menu {
         font-size:xx-large;
@@ -22,6 +24,9 @@ width:85%;
 }
 
 
+div#root-container{
+width:95%;
+}
 #pbody table{
 display:block;
 overflow:auto;
@@ -38,9 +43,7 @@ margin-bottom:30px;
 font-size:larger;
 }
 
-#pbody table thead th.header{
-padding-right:30px !important;
-}
+
 
 #pbody table thead th{
 white-space: nowrap;

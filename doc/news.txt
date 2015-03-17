@@ -1,5 +1,5 @@
 ﻿===== Neues in UliCMS 8.0.1 ====
-+ Bedienung von UliCMS auf Mobile Devices wie Smartphones und Tablets optimiert
++ Bedienung von UliCMS auf Mobile Devices wie Smartphones und Tablets optimiert (getestet auf Huawei Ascend Y300 mit Android)
 + API Methoden register_action und remove_action hinzugefügt
   Damit kann man eigene Actions zum Backend hinzugefügen
 + Listen im Backend werden über jQuery Tablesorter sortiert, statt per SQL -> dadurch kein Page Reload mehr -> Sortierfunktion schneller
@@ -12,10 +12,17 @@
 + Aktualisierung von mPDF auf mPDF 6.0
 + API Methoden get_translation, translate und translation hinzugefügt
 + wordcount Plugin zu CKEditor hinzugefügt
-+ API Funktion get_site_protocol hinzugefügt
++ API Funktion get_site_protocol() hinzugefügt
 + CodeMirror auf Version 4.12.0 aktualisiert
 + Notification Sounds entfernt
 + Mobile_Detect Klasse ins System integriert ( http://mobiledetect.net/ )
 + Locales können nun je Sprache gesetzt werden (z.B. locale_en)
 + Dropdownmenü auf mobilen Geräten deaktiviert
 + Nachfrage zu Logout hinzugefügt
++ API-Funktion splitAndTrim() hinzugefügt
++ API-Funktionen db_get_server_info() und db_get_client_info() hinzugefügt
++ API-Funktion get_useragent() hinzugefügt
++ API-Funktion get_ip() hinzugefügt
++ API-Funktion getUsersOnline() hinzugefügt
++ API-Funktion recurse_copy($src, $dst) hinzugefügt
++ Zugriff auf die Blacklist von spamhaus.org zur Spambekämpfung

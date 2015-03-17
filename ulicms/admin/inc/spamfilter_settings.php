@@ -4,6 +4,7 @@
 <?php if($acl -> hasPermission("spam_filter")){
      ?>
 <form id="spamfilter_settings" name="?action=spam_filter" method="post">
+<?php csrf_token_html();?>
 <input type="checkbox" id="spamfilter_enabled" name="spamfilter_enabled"<?php if(getconfig("spamfilter_enabled") == "yes"){
          echo " checked";
          }
@@ -48,6 +49,11 @@ function spamFilterEnabledcheckboxChanged(checked){
      if(getconfig("disallow_chinese_chars")) echo " checked=\"checked\"";
      ?>> <label for="disallow_chinese_chars"><?php echo TRANSLATION_DISALLOW_CHINESE_CHARS;
      ?></label>
+
+<br/><br/>
+<input type="checkbox" name="check_for_spamhaus" value="yes" id="check_for_spamhaus" <?php
+     if(getconfig("check_for_spamhaus")) echo " checked=\"checked\"";
+     ?>> <label for="check_for_spamhaus"><?php echo TRANSLATION_CHECK_FOR_SPAMHAUS; ?></label>
 
 </div>
 <br/><br/>

@@ -20,17 +20,11 @@ if($version == "7.2.0"){
 
 }
 
-// Der folgende Codeblock sollte aktiv geschaltet werden
-// wenn der Supportzeitraum für UliCMS 7.2.1 ausgelaufen ist.
-// Siehe http://www.ulicms.de/support_zeitraeume.html
-/*
+
 if($version == "7.2.1" or $version == "7.2.2"){
    die("<p>Ein Upgrade auf UliCMS 8.0.0 ist verfügbar.<br/>
    <a href=\"http://www.ulicms.de/content/files/Releases/Upgrades/ulicms-7.2.1-to-8.0.0-starlight-upgrade-package.zip\">Download</a></p>");
 }
-*/
-
-
 
 
 die("");

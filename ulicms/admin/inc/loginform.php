@@ -6,9 +6,10 @@ if(isset($_SESSION["language"]) and in_array($_SESSION["language"], $languages))
      }
 ?>
 <p><img src="gfx/logo.png" alt="UliCMS" title="UliCMS"/></p>
-<h3><?php echo TRANSLATION_PLEASE_AUTHENTIFICATE;
+<h3><?php echo TRANSLATION_PLEASE_AUTHENTICATE;
 ?></h3>
 <form action="index.php" method="post">
+<?php csrf_token_html();?>
 <input type="hidden" name="login" value="login">
 <?php if(!empty($_REQUEST["go"])){
      ?>

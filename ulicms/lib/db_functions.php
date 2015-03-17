@@ -9,6 +9,16 @@ function db_query($query){
     
     
      }
+     
+function db_get_server_info(){
+  global $db_connection;
+  return mysqli_get_server_info($db_connection);
+}
+
+function db_get_client_info(){
+  global $db_connection;
+  return mysqli_get_client_info($db_connection);
+}
 
 // Using SQL Prepared statements
 function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE){
@@ -106,7 +116,20 @@ function db_fetch_field($result){
 function db_fetch_assoc($result){
      return mysqli_fetch_assoc($result);
      }
+     
 
+function db_fetch_all($result, $resulttype = MYSQLI_NUM){
+     if(function_exists("mysqli_fetch_all"))
+        return mysqli_fetch_all($result, $resulttype);
+     
+     // @FIXME: $resulttype in alternativer Implementation von fetch_all behandeln
+     $retval = array();
+     while($row = db_fetch_assoc($result)){
+       $retval[] = $row;     
+     }
+          
+     return $retval;
+}
 function db_close(){
      global $db_connection;
      mysqli_close($db_connection);

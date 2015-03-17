@@ -5,7 +5,6 @@ require_once "../init.php";
 
 
 @session_start();
-
 $acl = new acl();
 
 if($acl -> hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash")){
@@ -21,6 +20,11 @@ add_hook("after_session_start");
 
 $syslang = getSystemLanguage();
 include_once getLanguageFilePath($syslang);
+if(logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"] != "module_settings" and !isset($_REQUEST["ajax_cmd"])){
+    if(!check_csrf_token()){
+       die("This is probably a CSRF attack!");
+    }
+}
 
 setLocaleByLanguage();
 

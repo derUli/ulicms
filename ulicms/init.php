@@ -274,13 +274,12 @@ if(!$timezone){
  }
  date_default_timezone_set(getconfig("timezone"));
 
-// Set locale
-if(getconfig("locale") === false){
- setconfig("locale", 'de_DE');
- }
-
 $locale = getconfig("locale");
-@setlocale (LC_ALL, $locale);
+if($locale){
+      $locale = splitAndTrim($locale);
+      array_unshift($locale, LC_ALL);
+      @call_user_func_array("setlocale", $locale);
+   }
 
 if(!getconfig("session_timeout")){
  setconfig("session_timeout", 60);
@@ -301,6 +300,7 @@ else{
 
  }
  }
+ 
 
 $enforce_https = getconfig("enforce_https");
 
@@ -314,7 +314,6 @@ if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
 add_hook("before_init");
 add_hook("init");
 add_hook("after_init");
-
 
 $version = new ulicms_version();
 

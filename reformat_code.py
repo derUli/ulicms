@@ -1,6 +1,15 @@
 #!/usr/bin/env python
 
-import os, sys, subprocess
+import os, sys, subprocess, platform
+
+
+operating_system = platform.system()
+supported_os = ["Windows", "Linux"]
+    
+if not operating_system in supported_os and reformat:
+   print("Sorry Code refactoring is not supported on your operating system.")
+   sys.exit()
+
 
 def absoluteFilePaths(directory):
    for dirpath,_,filenames in os.walk(directory):
