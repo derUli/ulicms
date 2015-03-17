@@ -454,7 +454,8 @@ define("TRANSLATION_INSERT_THIS_CODE_INTO_A_PAGE", "Insert this code into a page
 
 // Audio
 define("TRANSLATION_AUDIO", "Audio");
-define("TRANSLATION_MP3_FILE", "MP3 File");
+define("TRANSLATION_AUDIO_OGG", "OGG Vorbis File (for Firefox)");
+define("TRANSLATION_AUDIO_MP3", "MP3 File (for other browsers)");
 define("TRANSLATION_DOWNLOAD_AUDIO_INSTEAD", "But you can download the audio file here.");
 define("TRANSLATION_UPLOAD_AUDIO", "Upload a Audio file");
 

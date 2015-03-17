@@ -438,8 +438,10 @@ define("TRANSLATION_INSERT_THIS_CODE_INTO_A_PAGE", "Fügen Sie diesen Code in ei
 
 // Audio
 define("TRANSLATION_AUDIO", "Audio");
-define("TRANSLATION_MP3_FILE", "MP3 Datei");
+define("TRANSLATION_AUDIO_OGG", "Audio file im OGG Vorbis Format (für Firefox)");
+define("TRANSLATION_MP3_FILE", "MP3 Datei (für andere Browser)");
 define("TRANSLATION_DOWNLOAD_AUDIO_INSTEAD", "Sie können die Audiodatei stattdessen hier herunterladen");
 define("TRANSLATION_UPLOAD_AUDIO", "Audiodatei hochladen");
+
 
 add_hook("lang_de");

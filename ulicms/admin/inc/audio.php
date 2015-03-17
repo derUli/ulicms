@@ -1,6 +1,5 @@
 <?php
 $acl = new ACL();
-
 $audio_folder = ULICMS_ROOT ."/content/audio";
 if(!is_dir($audio_folder))
    mkdir($audio_folder);
@@ -27,12 +26,10 @@ else if($acl -> hasPermission("audio") and isset($_REQUEST["update"])){
    $id = intval($_POST["id"]);
    $ogg_file = db_escape(basename($_POST["ogg_file"]));
    $mp3_file = db_escape(basename($_POST["mp3_file"]));
-   $width = intval($_POST["width"]);
-   $height = intval($_POST["height"]);
    $updated = time();
    $category_id = intval($_POST["category"]);
    
-   db_query("UPDATE ".tbname("audio"). " SET name='$name', ogg_file='$ogg_file', mp3_file='$mp3_file', width=$width, height=$height, category_id = $category_id, `updated` = $updated where id = $id")or die(db_error());
+   db_query("UPDATE ".tbname("audio"). " SET name='$name', ogg_file='$ogg_file', mp3_file='$mp3_file', category_id = $category_id, `updated` = $updated where id = $id")or die(db_error());
 }
    
 else if($acl -> hasPermission("audio") and isset($_FILES) and isset($_REQUEST["add"])){
@@ -41,7 +38,7 @@ else if($acl -> hasPermission("audio") and isset($_FILES) and isset($_REQUEST["a
    if(!empty($_FILES['mp3_file']['name'])){
    $mp3_file = time()."-".basename($_FILES['mp3_file']['name']);
    $mp3_type = $_FILES['mp3_file']["type"];
-   $mp3_allowed_mime_type = array("audio/mp3");
+   $mp3_allowed_mime_type = array("audio/mp3", "audio/mpeg3", "audio/x-mpeg-3", "video/mpeg", "video/x-mpeg", "audio/mpeg");
    if(in_array($mp3_type, $mp3_allowed_mime_type)){
       $target = $audio_folder."/".$mp3_file;
       if(move_uploaded_file($_FILES['mp3_file']['tmp_name'], $target)){ 
@@ -55,7 +52,7 @@ else if($acl -> hasPermission("audio") and isset($_FILES) and isset($_REQUEST["a
    if(!empty($_FILES['ogg_file']['name'])){
    $ogg_file = time()."-".$_FILES['ogg_file']['name'];
    $ogg_type = $_FILES['ogg_file']["type"];
-   $ogg_allowed_mime_type = array("audio/ogg", "application/ogg", "audio/ogg");
+   $ogg_allowed_mime_type = array("audio/ogg", "application/ogg");
    if(in_array($ogg_type, $ogg_allowed_mime_type)){
       $target = $audio_folder."/".$ogg_file;
       if(move_uploaded_file($_FILES['ogg_file']['tmp_name'], $target)){ 
@@ -69,13 +66,10 @@ else if($acl -> hasPermission("audio") and isset($_FILES) and isset($_REQUEST["a
    $category_id = intval($_POST["category"]);
    $ogg_file_value = db_escape($ogg_file_value);
    $mp3_file_value = db_escape($mp3_file_value);
-   
-   $width = intval($_POST["width"]);
-   $height = intval($_POST["height"]);
    $timestamp = time();
    
    if(!empty($ogg_file_value) or !empty($mp3_file_value)){
-      db_query("INSERT INTO ".tbname("audio")." (name, ogg_file, mp3_file, width, height, created, category_id, `updated`) VALUES ('$name', '$ogg_file_value', '$mp3_file_value', $width, $height, $timestamp, $category_id, $timestamp);")or die(db_error());
+      db_query("INSERT INTO ".tbname("audio")." (name, ogg_file, mp3_file, created, category_id, `updated`) VALUES ('$name', '$ogg_file_value', '$mp3_file_value', $timestamp, $category_id, $timestamp);")or die(db_error());
    }
    
 }
