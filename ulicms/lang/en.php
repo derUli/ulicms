@@ -452,4 +452,10 @@ define("TRANSLATION_NO_HTML5", "Your browser doesn't support HTML 5.");
 define("TRANSLATION_DOWNLOAD_VIDEO_INSTEAD", "But you can download the video here.");
 define("TRANSLATION_INSERT_THIS_CODE_INTO_A_PAGE", "Insert this code into a page");
 
+// Audio
+define("TRANSLATION_AUDIO", "Audio");
+define("TRANSLATION_MP3_FILE", "MP3 File");
+define("TRANSLATION_DOWNLOAD_AUDIO_INSTEAD", "But you can download the audio file here.");
+define("TRANSLATION_UPLOAD_AUDIO", "Upload a Audio file");
+
 add_hook("lang_en");

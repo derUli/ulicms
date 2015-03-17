@@ -436,4 +436,10 @@ define("TRANSLATION_NO_HTML5", "Ihr Browser unterstützt kein HTML 5.");
 define("TRANSLATION_DOWNLOAD_VIDEO_INSTEAD", "Sie können das Video stattdessen hier herunterladen");
 define("TRANSLATION_INSERT_THIS_CODE_INTO_A_PAGE", "Fügen Sie diesen Code in eine Seite ein");
 
+// Audio
+define("TRANSLATION_AUDIO", "Audio");
+define("TRANSLATION_MP3_FILE", "MP3 Datei");
+define("TRANSLATION_DOWNLOAD_AUDIO_INSTEAD", "Sie können die Audiodatei stattdessen hier herunterladen");
+define("TRANSLATION_UPLOAD_AUDIO", "Audiodatei hochladen");
+
 add_hook("lang_de");

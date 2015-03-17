@@ -252,6 +252,15 @@ $pkg = new packageManager();
     else if($_GET["action"] == "edit_video"){
          require_once "inc/edit_video.php";
          }
+    else if($_GET["action"] == "audio"){
+         require_once "inc/audio.php";
+         }
+    else if($_GET["action"] == "add_audio"){
+         require_once "inc/add_audio.php";
+         }
+    else if($_GET["action"] == "edit_audio"){
+         require_once "inc/edit_audio.php";
+         }
     
     else if(isset($actions[$_GET["action"]])){
          include_once $actions[$_GET["action"]];
