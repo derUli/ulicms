@@ -2,3 +2,4 @@
 Filter für Videos:
 [ ] Video Filter nach Kategorie
 [ ] Audio Manager genauso wie Video Manager implementieren
+[ ] Menüpunkt "Flash" entfernen
