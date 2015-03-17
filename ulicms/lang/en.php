@@ -447,6 +447,6 @@ define("TRANSLATION_VIDEO_MP4", "Video in MP4 file format (for other browsers)")
 define("TRANSLATION_WIDTH", "Width");
 define("TRANSLATION_HEIGHT", "Height");
 define("TRANSLATION_MP4_FILE", "MP4 File");
-define("TRANSLATION_OGG_FILE", "OGG Ogg");
+define("TRANSLATION_OGG_FILE", "OGG File");
 
 add_hook("lang_en");
