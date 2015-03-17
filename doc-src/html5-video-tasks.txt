@@ -1,9 +1,9 @@
 Bei hochladen eines Videos soll
-[ ] der Ordner content/videos erstellt werden, sofern dieser noch nicht existiert
-[ ] die hochgeladenen Dateien in den Ordner content/videos verschoben werden
-[ ] Es dürfen nur Dateien mit video/* Mimetyp akzeptiert werden.
-[ ] der Dateiname mit einem Timestamp geprefixt werden (z.B. 1426548302-meinvideo.mp4)
-[ ] Das Video in der Datenbank eingetragen werden, in die Felder mp4_file und ogg_file sollen die relativen Pfade der Videodateien eingetragen werden, z.B. 
+[X] der Ordner content/videos erstellt werden, sofern dieser noch nicht existiert
+[X] die hochgeladenen Dateien in den Ordner content/videos verschoben werden
+[X] Es dürfen nur Dateien mit video/* Mimetyp akzeptiert werden.
+[X] der Dateiname mit einem Timestamp geprefixt werden (z.B. 1426548302-meinvideo.mp4)
+[X] Das Video in der Datenbank eingetragen werden, in die Felder mp4_file und ogg_file sollen die relativen Pfade der Videodateien eingetragen werden, z.B. 
 content/videos/1426548302-meinvideo.mp4
 [ ] Es soll eine Listenansicht von den Videos geben ähnlich wie in der Seitenverwaltung
 [ ] Es soll die üblichen Filter geben
