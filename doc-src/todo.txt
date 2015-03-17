@@ -1,3 +1,4 @@
 [ ] Einem Video kann eine Kategorie zugewiesen werden
 Filter für Videos:
 [ ] Video Filter nach Kategorie
+[ ] Audio Manager genauso wie Video Manager implementieren
