@@ -28,7 +28,7 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("videos")."` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 
-setconfig("db_schema_version", "8.0.2");
+setconfig("db_schema_version", "9.0.0");
 
 // @unlink("update.php");
 ulicms_redirect("admin/");

@@ -2,7 +2,7 @@
 class ulicms_version{
      function ulicms_version(){
          $this -> version = "Purple Sky";
-         $this -> internalVersion = Array(8, 0, 2);
+         $this -> internalVersion = Array(9, 0, 0);
          $this -> update = "";
          $this -> developmentVersion = false;
          }
