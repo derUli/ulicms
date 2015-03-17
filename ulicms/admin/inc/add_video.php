@@ -3,7 +3,8 @@ $acl = new ACL();
 if($acl -> hasPermission("videos")){
 ?>
 <h1><?php translate("UPLOAD_VIDEO");?></h1>
-<form action="#" onsubmit="alert('Coming soon!'); return false;" method="post" enctype="multipart/form-data">
+<form action="index.php?action=videos" method="post" enctype="multipart/form-data">
+<?php csrf_token_html();?>
 <strong><?php translate("name");?></strong><br/>
 <input type="text" name="name" required="true" value="" maxlength=255/>
 <br/><br/>
@@ -17,7 +18,6 @@ if($acl -> hasPermission("videos")){
 <br/><br/>
 <strong><?php translate("height");?></strong><br/>
 <input type="number" name="height" value="720" step="1">
-
 <br/><br/>
 <input type="submit" value="<?php translate("UPLOAD_VIDEO");?>">
 </form>
