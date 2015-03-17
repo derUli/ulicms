@@ -26,7 +26,7 @@ $result = db_fetch_object($query);
 <strong><?php translate("height");?></strong><br/>
 <input type="number" name="height" value="<?php echo $result->height;?>" step="1">
 <br/><br/>
-<input type="submit" value="<?php translate("UPLOAD_VIDEO");?>">
+<input type="submit" value="<?php translate("SAVE_CHANGES");?>">
 </form>
 <?php 
 
