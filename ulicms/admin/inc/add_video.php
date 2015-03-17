@@ -4,6 +4,7 @@ if($acl -> hasPermission("videos")){
 ?>
 <h1><?php translate("UPLOAD_VIDEO");?></h1>
 <form action="index.php?action=videos" method="post" enctype="multipart/form-data">
+<input type="hidden" name="add" value="add">
 <?php csrf_token_html();?>
 <strong><?php translate("name");?></strong><br/>
 <input type="text" name="name" required="true" value="" maxlength=255/>

@@ -5,8 +5,19 @@ $video_folder = ULICMS_ROOT ."/content/videos";
 if(!is_dir($video_folder))
    mkdir($video_folder);
 
+if($acl -> hasPermission("videos") and isset($_REQUEST["update"])){
+   $name = db_escape($_POST["name"]);
+   $id = intval($_POST["id"]);
+   $ogg_file = db_escape(basename($_POST["ogg_file"]));
+   $mp4_file = db_escape(basename($_POST["mp4_file"]));
+   $width = intval($_POST["width"]);
+   $height = intval($_POST["height"]);
+   $updated = time();
    
-if($acl -> hasPermission("videos") and isset($_FILES)){
+   db_query("UPDATE ".tbname("videos"). " SET name='$name', ogg_file='$ogg_file', mp4_file='$mp4_file', width=$width, height=$height, `updated` = $updated where id = $id")or die(db_error());
+}
+   
+else if($acl -> hasPermission("videos") and isset($_FILES) and isset($_REQUEST["add"])){
    $mp4_file_value = "";
    // MP4
    if(!empty($_FILES['mp4_file']['name'])){
@@ -16,7 +27,7 @@ if($acl -> hasPermission("videos") and isset($_FILES)){
    if(in_array($mp4_type, $mp4_allowed_mime_type)){
       $target = $video_folder."/".$mp4_file;
       if(move_uploaded_file($_FILES['mp4_file']['tmp_name'], $target)){ 
-         $mp4_file_value = "content/videos/".$mp4_file;
+         $mp4_file_value = basename($mp4_file);
       }
    }
    }
@@ -30,7 +41,7 @@ if($acl -> hasPermission("videos") and isset($_FILES)){
    if(in_array($ogg_type, $ogg_allowed_mime_type)){
       $target = $video_folder."/".$ogg_file;
       if(move_uploaded_file($_FILES['ogg_file']['tmp_name'], $target)){ 
-         $ogg_file_value = "content/videos/".$ogg_file;
+         $ogg_file_value = basename($ogg_file);
       }
    }
    
@@ -77,12 +88,13 @@ while($row = db_fetch_object($all_videos)){
 <td><?php echo htmlspecialchars($row->name);?></td>
 <td><?php echo htmlspecialchars(basename($row->ogg_file));?></td>
 <td><?php echo htmlspecialchars(basename($row->mp4_file));?></td>
-<td><a href="#" onclick="alert('Coming soon!'); return false;"><img src="gfx/edit.png"  class="mobile-big-image" alt="<?php translate("edit");?>" title="<?php translate("edit");?>"></a></td>
+<td><a href="index.php?action=edit_video&id=<?php echo $row->id;?>"><img src="gfx/edit.png"  class="mobile-big-image" alt="<?php translate("edit");?>" title="<?php translate("edit");?>"></a></td>
 <td><a href="#" onclick="alert('Coming soon!'); return false;"><img src="gfx/delete.png" class="mobile-big-image" alt="<?php translate("delete");?>" title="<?php translate("delete");?>"></a></td>
 </tr>
 <?php }?>
 </tbody>
 </thead>
+</table>
 
 <?php 
 } 

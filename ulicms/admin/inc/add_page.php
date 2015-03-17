@@ -7,6 +7,7 @@
         
          ?>
 <form id="pageform" name="newpageform" action="index.php?action=pages" method="post">
+<input type="hidden" name="add" value="add">
 <?php csrf_token_html();?>
 <strong><?php echo TRANSLATION_PERMALINK;
          ?></strong><br/>
