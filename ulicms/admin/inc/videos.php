@@ -7,15 +7,16 @@ if(!is_dir($video_folder))
 if($acl -> hasPermission("videos") and isset($_REQUEST["delete"])){
    $query = db_query("select ogg_file, mp4_file from ".tbname("videos"). " where id = ".intval($_REQUEST["delete"]));
    if(db_num_rows($query) > 0 ){
-       $result = db_fetch_object($query);
-       if(!empty($result->ogg_file) and is_file($result->ogg_file)){
-          $filepath = ULICMS_ROOT."/content/videos/".basename($result->ogg_file);
+       $result = db_fetch_object($query); 
+       $filepath = ULICMS_ROOT."/content/videos/".basename($result->ogg_file);
+       if(!empty($result->ogg_file) and is_file($filepath)){
           @unlink($filepath);
        }
-       
-        if(!empty($result->mp4_file) and is_file($result->mp4_file)){
-          $filepath = ULICMS_ROOT."/content/videos/".basename($result->mp4_file);
-          @unlink($mp4_file);
+                
+                  $filepath = ULICMS_ROOT."/content/videos/".basename($result->mp4_file);
+        if(!empty($result->mp4_file) and is_file($filepath)){
+
+          @unlink($filepath);
        }
        
        db_query("DELETE FROM ".tbname("videos"). " where id = ".$_REQUEST["delete"]);
@@ -53,7 +54,6 @@ else if($acl -> hasPermission("videos") and isset($_FILES) and isset($_REQUEST["
    if(!empty($_FILES['ogg_file']['name'])){
    $ogg_file = time()."-".$_FILES['ogg_file']['name'];
    $ogg_type = $_FILES['ogg_file']["type"];
-   var_dump($_FILES['ogg_file']);
    $ogg_allowed_mime_type = array("video/ogg", "application/ogg", "audio/ogg");
    if(in_array($ogg_type, $ogg_allowed_mime_type)){
       $target = $video_folder."/".$ogg_file;
