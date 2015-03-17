@@ -51,14 +51,38 @@ if($acl -> hasPermission("videos") and isset($_FILES)){
 }
 
 
-$all_videos = db_query("SELECT * FROM ".tbname("videos")." ORDER by name, mp4_file, ogg_file");
+$all_videos = db_query("SELECT id, name, mp4_file, ogg_file FROM ".tbname("videos")." ORDER by id");
 
 if($acl -> hasPermission("videos")){
 ?>
 <h1><?php translate("videos");?></h1>
 <p><a href="index.php?action=add_video">[<?php translate("upload_video");?>]</a></p>
-<p>Coming soon!</p>
 
+<table class="tablesorter">
+<thead>
+<tr>
+<th><?php translate("id");?></th>
+<th><?php translate("name");?></th>
+<th><?php translate("ogg_file");?></th>
+<th><?php translate("mp4_file");?></th>
+<td></td>
+<td></td>
+</tr>
+<tbody>
+<?php 
+while($row = db_fetch_object($all_videos)){
+?>
+<tr>
+<td><?php echo $row->id;?></td>
+<td><?php echo htmlspecialchars($row->name);?></td>
+<td><?php echo htmlspecialchars(basename($row->ogg_file));?></td>
+<td><?php echo htmlspecialchars(basename($row->mp4_file));?></td>
+<td><a href="#" onclick="alert('Coming soon!'); return false;"><img src="gfx/edit.png"  class="mobile-big-image" alt="<?php translate("edit");?>" title="<?php translate("edit");?>"></a></td>
+<td><a href="#" onclick="alert('Coming soon!'); return false;"><img src="gfx/delete.png" class="mobile-big-image" alt="<?php translate("delete");?>" title="<?php translate("delete");?>"></a></td>
+</tr>
+<?php }?>
+</tbody>
+</thead>
 
 <?php 
 } 

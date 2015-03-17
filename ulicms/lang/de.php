@@ -430,5 +430,7 @@ define("TRANSLATION_VIDEO_OGG", "Video im OGG Theora Format (für Firefox)");
 define("TRANSLATION_VIDEO_MP4", "Video im MP4 Format (für sonstige Browser)");
 define("TRANSLATION_WIDTH", "Breite");
 define("TRANSLATION_HEIGHT", "Höhe");
+define("TRANSLATION_MP4_FILE", "MP4 Datei");
+define("TRANSLATION_OGG_FILE", "OGG Datei");
 
 add_hook("lang_de");
