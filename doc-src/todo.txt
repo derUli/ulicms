@@ -4,3 +4,8 @@ Filter für Videos:
 [X] Audio Manager genauso wie Video Manager implementieren
 [X] Menüpunkt "Flash" entfernen
 [X] CSRF Tokens auch im Frontend validieren
+[ ] Dokumentation zu Upgrade erstellen
+    - Anwender muss "jquery" deinstallieren
+    - Anwender muss Cache leeren
+    - Anwender muss alle Module, die Formulare nutzen neu installieren bzw. aktualisieren
+    - Anwender muss csrf_tokens zu eigenen Modulen hinzufügen
