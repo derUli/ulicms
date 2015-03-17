@@ -909,6 +909,47 @@ function no_cache(){
      define("NO_CACHE", true);
 }
 
+function replaceAudioTags($txt){
+   // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke
+   $contains = strpos($txt, "[audio id=") !== FALSE;
+   
+
+   if($contains){
+       $query = db_query("select id, ogg_file, mp3_file from ".tbname("audio")." order by id");
+       
+       while($row = db_fetch_object($query)){
+       
+           $code1 = "[audio id=\"".$row->id."\"]";
+           $code2 = "[audio id=$quot;".$row->id."$quot;]";
+           $code3 = "[audio id=".$row->id."]";
+           if(!empty($row->mp3_file))
+              $preferred = $row->mp3_file;
+           else 
+              $preferred = $row->ogg_file;
+           
+           $html = '<audio controls>';
+           if(!empty($row->mp3_file)){
+              $html .= '<source src="content/audio/'.htmlspecialchars($row->mp3_file).'" type="audio/mp3">';
+           }
+              if(!empty($row->ogg_file)){
+              $html .= '<source src="content/audio/'.htmlspecialchars($row->ogg_file).'" type="audio/ogg">';
+           }
+           $html .= TRANSLATION_NO_HTML5;
+           if(!empty($row->mp3_file) or !empty($row->ogg_file)){
+		$html .= '<br/>
+		<a href="content/audio/'.$preferred.'">'.TRANSLATION_DOWNLOAD_AUDIO_INSTEAD.'</a>';
+	}
+       $html .= '</audio>';
+       $txt = str_replace($code1, $html, $txt);
+       $txt = str_replace($code2, $html, $txt);
+       $txt = str_replace($code3, $html, $txt);
+       }
+   }
+   
+   
+    return $txt;
+}
+
 function replaceVideoTags($txt){
    // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke
    $contains = strpos($txt, "[video id=") !== FALSE;
@@ -1006,6 +1047,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
      
      
     $string = replaceVideoTags($string);
+    $string = replaceAudioTags($string);
  return $string;
  }
 
