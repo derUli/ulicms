@@ -33,6 +33,12 @@ if($acl -> hasPermission("images") or $acl -> hasPermission("flash") or $acl -> 
      ?>
 
 
+<?php if($acl -> hasPermission("videos")){
+         ?>
+<a href="index.php?action=videos"><?php echo TRANSLATION_VIDEOS;
+         ?></a><br/>
+<?php }
+     ?>
 
 
 

@@ -118,6 +118,14 @@ if(defined("_SECURITY")){
       </li>
       <?php }
          ?>
+         
+         
+<?php if($acl -> hasPermission("videos")){
+         ?>
+         <li>
+        <a href="?action=videos"><?php echo TRANSLATION_VIDEOS;
+             ?></a></li>
+             <?php } ?>
     </ul>
   </li>
   
