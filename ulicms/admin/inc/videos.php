@@ -41,16 +41,17 @@ if($acl -> hasPermission("videos") and isset($_FILES)){
    $mp4_file_value = db_escape($mp4_file_value);
    
    $width = intval($_POST["width"]);
-   $height = intval($_POST["height"]);#
+   $height = intval($_POST["height"]);
+   $timestamp = time();
    
    if(!empty($ogg_file_value) or !empty($mp4_file_value)){
-      db_query("INSERT INTO ".tbname("videos")." (name, ogg_file, mp4_file, width, height) VALUES ('$name', '$ogg_file_value', '$mp4_file_value', $width, $height);")or die(db_error());
+      db_query("INSERT INTO ".tbname("videos")." (name, ogg_file, mp4_file, width, height, created, `updated`) VALUES ('$name', '$ogg_file_value', '$mp4_file_value', $width, $height, $timestamp, $timestamp);")or die(db_error());
    }
    
 }
 
 
-$all_videos = db_query("SELECT * FROM ".tbname("videos")." ORDER by id");
+$all_videos = db_query("SELECT * FROM ".tbname("videos")." ORDER by name, mp4_file, ogg_file");
 
 if($acl -> hasPermission("videos")){
 ?>
