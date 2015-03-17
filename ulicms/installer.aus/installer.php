@@ -514,6 +514,19 @@ mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."installed_patc
   `updated` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+
+
+        mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix ."audio` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `mp3_file` varchar(255) DEFAULT NULL,
+  `ogg_file` varchar(255) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `created` bigint(20) NOT NULL,
+  `updated` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
         
          $sql_categories_table = "CREATE TABLE " . $prefix . "categories (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

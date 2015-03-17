@@ -28,6 +28,18 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("videos")."` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 
+db_query("CREATE TABLE IF NOT EXISTS `".tbname("audio")."` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `mp3_file` varchar(255) DEFAULT NULL,
+  `ogg_file` varchar(255) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `created` bigint(20) NOT NULL,
+  `updated` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+
 setconfig("db_schema_version", "9.0.0");
 
 // @unlink("update.php");

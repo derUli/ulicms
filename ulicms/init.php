@@ -222,6 +222,7 @@ $required_tables = array(tbname("users"),
  tbname("groups"),
  tbname("installed_patches"),
  tbname("videos"),
+ tbname("audio"),
  tbname("languages"),
  tbname("settings"));
 
