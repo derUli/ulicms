@@ -909,6 +909,47 @@ function no_cache(){
      define("NO_CACHE", true);
 }
 
+function replaceVideoTags($txt){
+   // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke
+   $contains = strpos($txt, "[video id=") !== FALSE;
+   
+
+   if($contains){
+       $query = db_query("select id, ogg_file, mp4_file, width, height from ".tbname("videos")." order by id");
+       
+       while($row = db_fetch_object($query)){
+       
+           $code1 = "[video id=\"".$row->id."\"]";
+           $code2 = "[video id=$quot;".$row->id."$quot;]";
+           $code3 = "[video id=".$row->id."]";
+           if(!empty($row->mp4_file))
+              $preferred = $row->mp4_file;
+           else 
+              $preferred = $row->ogg_file;
+           
+           $html = '<video width="'.$row->width.'" height="'.$row->height.'" controls>';
+           if(!empty($row->mp4_file)){
+              $html .= '<source src="content/videos/'.htmlspecialchars($row->mp4_file).'" type="video/mp4">';
+           }
+              if(!empty($row->ogg_file)){
+              $html .= '<source src="content/videos/'.htmlspecialchars($row->ogg_file).'" type="video/ogg">';
+           }
+           $html .= TRANSLATION_NO_HTML5;
+           if(!empty($row->mp4_file) or !empty($row->ogg_file)){
+		$html .= '<br/>
+		<a href="content/videos/'.$preferred.'">'.TRANSLATION_DOWNLOAD_VIDEO_INSTEAD.'</a>';
+	}
+       $html .= '</video>';
+       $txt = str_replace($code1, $html, $txt);
+       $txt = str_replace($code2, $html, $txt);
+       $txt = str_replace($code3, $html, $txt);
+       }
+   }
+   
+   
+    return $txt;
+}
+
 // replace Shortcodes with modules
 function replaceShortcodesWithModules($string, $replaceOther = true){
  if($replaceOther){
@@ -929,6 +970,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
      $current_page = get_page();
      $string = str_replace('[category]', get_category(), $string);
      }
+     
 
  $allModules = getAllModules();
  for($i = 0;$i <= count($allModules);$i++){
@@ -960,6 +1002,10 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
      $string = str_replace('[title]', get_title(), $string);
     
      }
+     
+     
+     
+    $string = replaceVideoTags($string);
  return $string;
  }
 
