@@ -53,7 +53,8 @@ else if($acl -> hasPermission("videos") and isset($_FILES) and isset($_REQUEST["
    if(!empty($_FILES['ogg_file']['name'])){
    $ogg_file = time()."-".$_FILES['ogg_file']['name'];
    $ogg_type = $_FILES['ogg_file']["type"];
-   $ogg_allowed_mime_type = array("video/ogg", "application/ogg");
+   var_dump($_FILES['ogg_file']);
+   $ogg_allowed_mime_type = array("video/ogg", "application/ogg", "audio/ogg");
    if(in_array($ogg_type, $ogg_allowed_mime_type)){
       $target = $video_folder."/".$ogg_file;
       if(move_uploaded_file($_FILES['ogg_file']['tmp_name'], $target)){ 
