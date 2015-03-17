@@ -1,6 +1,7 @@
 ﻿===== Neues in UliCMS 9.0.0 ====
 + HTML 5 Video Manager hinzugefügt
 + HTML 5 Audio Manager hinzugefügt
++ Flash Dateiverwaltung entfernt
 + Online Updates: Patches können nun direkt aus dem UliCMS Backend installiert werden. Dies setzt vorraus, dass die Berechtigungen so gesetzt sind, dass alle Dateien und Ordner der UliCMS Installation durch PHP beschreibbar sind.
 + integriertes jQuery auf Version 1.11.1 aktualisiert
 + Anti CSRF Tokens integriert
