@@ -1,5 +1,5 @@
 [X] Einem Video kann eine Kategorie zugewiesen werden
 Filter für Videos:
-[ ] Video Filter nach Kategorie
+[X] Video Filter nach Kategorie
 [ ] Audio Manager genauso wie Video Manager implementieren
 [ ] Menüpunkt "Flash" entfernen

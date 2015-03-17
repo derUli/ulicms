@@ -81,11 +81,44 @@ else if($acl -> hasPermission("videos") and isset($_FILES) and isset($_REQUEST["
 }
 
 
-$all_videos = db_query("SELECT id, name, mp4_file, ogg_file FROM ".tbname("videos")." ORDER by id");
+if(!isset($_SESSION["filter_category"])){
+  $_SESSION["filter_category"] = 0;
+  }
+  
+ if(isset($_GET["filter_category"])){
+             $_SESSION["filter_category"] = intval($_GET["filter_category"]);
+            
+             }
+
+$sql = "SELECT id, name, mp4_file, ogg_file FROM ".tbname("videos")." ";
+if($_SESSION["filter_category"] > 0){
+  $sql .= " where category_id = ".$_SESSION["filter_category"]." ";
+}
+$sql .= " ORDER by id";
+
+$all_videos = db_query($sql);
+
 
 if($acl -> hasPermission("videos")){
 ?>
+<script type="text/javascript">
+$(window).load(function(){
+   $('#category').on('change', function (e) {
+   var valueSelected = $('#category').val();
+     location.replace("index.php?action=videos&filter_category=" + valueSelected)
+   
+   });
+
+});
+</script>
 <h1><?php translate("videos");?></h1>
+<?php echo TRANSLATION_CATEGORY;
+         ?> 
+<?php
+         echo categories :: getHTMLSelect($_SESSION["filter_category"], true);
+         ?>
+<br/>
+<br/>
 <p><a href="index.php?action=add_video">[<?php translate("upload_video");?>]</a></p>
 <table class="tablesorter">
 <thead>
