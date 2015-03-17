@@ -432,5 +432,7 @@ define("TRANSLATION_WIDTH", "Breite");
 define("TRANSLATION_HEIGHT", "Höhe");
 define("TRANSLATION_MP4_FILE", "MP4 Datei");
 define("TRANSLATION_OGG_FILE", "OGG Datei");
+define("TRANSLATION_NO_HTML5", "Ihr Browser unterstützt kein HTML 5.");
+define("TRANSLATION_DOWNLOAD_VIDEO_INSTEAD", "Sie können das Video stattdessen hier herunterladen");
 
 add_hook("lang_de");

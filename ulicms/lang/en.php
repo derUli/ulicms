@@ -449,4 +449,8 @@ define("TRANSLATION_HEIGHT", "Height");
 define("TRANSLATION_MP4_FILE", "MP4 File");
 define("TRANSLATION_OGG_FILE", "OGG File");
 
+
+define("TRANSLATION_NO_HTML5", "Your browser doesn't support HTML 5.");
+define("TRANSLATION_DOWNLOAD_VIDEO_INSTEAD", "But you can download the video here.");
+
 add_hook("lang_en");
