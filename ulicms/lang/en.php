@@ -459,4 +459,6 @@ define("TRANSLATION_AUDIO_MP3", "MP3 File (for other browsers)");
 define("TRANSLATION_DOWNLOAD_AUDIO_INSTEAD", "But you can download the audio file here.");
 define("TRANSLATION_UPLOAD_AUDIO", "Upload a Audio file");
 
+define("TRANSLATION_MP3_FILE", "MP3 File");
+
 add_hook("lang_en");
