@@ -3,3 +3,4 @@ Filter für Videos:
 [X] Video Filter nach Kategorie
 [X] Audio Manager genauso wie Video Manager implementieren
 [X] Menüpunkt "Flash" entfernen
+[ ] CSRF Tokens auch im Frontend
