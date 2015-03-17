@@ -5,7 +5,6 @@ $video_folder = ULICMS_ROOT ."/content/videos";
 if(!is_dir($video_folder))
    mkdir($video_folder);
 
-VAR_DUMP($_FILES);
    
 if($acl -> hasPermission("videos") and isset($_FILES)){
    $mp4_file_value = "";
@@ -20,9 +19,7 @@ if($acl -> hasPermission("videos") and isset($_FILES)){
          $mp4_file_value = "content/videos/".$mp4_file;
       }
    }
-   
    }
-   
    
       $ogg_file_value = "";
    // ogg
@@ -45,14 +42,9 @@ if($acl -> hasPermission("videos") and isset($_FILES)){
    
    $width = intval($_POST["width"]);
    $height = intval($_POST["height"]);#
-
-
-   var_dump($mp4_file_value);
    
    if(!empty($ogg_file_value) or !empty($mp4_file_value)){
       db_query("INSERT INTO ".tbname("videos")." (name, ogg_file, mp4_file, width, height) VALUES ('$name', '$ogg_file_value', '$mp4_file_value', $width, $height);")or die(db_error());
-      
-      
    }
    
 }
