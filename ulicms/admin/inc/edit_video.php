@@ -15,6 +15,13 @@ $result = db_fetch_object($query);
 <strong><?php translate("name");?></strong><br/>
 <input type="text" name="name" required="true" value="<?php echo htmlspecialchars($result->name);?>" maxlength=255/>
 <br/><br/>
+<strong><?php echo TRANSLATION_CATEGORY;
+             ?></strong><br/>
+<?php
+             echo categories :: getHTMLSelect($result->category_id);
+             ?>
+
+<br/><br/>
 <strong><?php echo translate("video_ogg");?></strong><br/>
 <input name="ogg_file" type="text" value="<?php echo htmlspecialchars($result->ogg_file);?>"><br/><br/>
 <strong><?php echo translate("ogg_file");?></strong><br/>
@@ -27,7 +34,7 @@ $result = db_fetch_object($query);
 <input type="number" name="height" value="<?php echo $result->height;?>" step="1">
 <br/><br/>
 <strong><?php translate("insert_this_code_into_a_page");?></strong><br/>
-<input type="text" name="code" value="[video id=<?php echo $result->id;?>]" onclick="this.focus();" readonly>
+<input type="text" name="code" value="[video id=<?php echo $result->id;?>]" onclick="this.focus();this.select();" readonly>
 <br/><br/>
 <input type="submit" value="<?php translate("SAVE_CHANGES");?>">
 </form>

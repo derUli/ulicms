@@ -30,8 +30,9 @@ else if($acl -> hasPermission("videos") and isset($_REQUEST["update"])){
    $width = intval($_POST["width"]);
    $height = intval($_POST["height"]);
    $updated = time();
+   $category_id = intval($_POST["category"]);
    
-   db_query("UPDATE ".tbname("videos"). " SET name='$name', ogg_file='$ogg_file', mp4_file='$mp4_file', width=$width, height=$height, `updated` = $updated where id = $id")or die(db_error());
+   db_query("UPDATE ".tbname("videos"). " SET name='$name', ogg_file='$ogg_file', mp4_file='$mp4_file', width=$width, height=$height, category_id = $category_id, `updated` = $updated where id = $id")or die(db_error());
 }
    
 else if($acl -> hasPermission("videos") and isset($_FILES) and isset($_REQUEST["add"])){
@@ -65,6 +66,7 @@ else if($acl -> hasPermission("videos") and isset($_FILES) and isset($_REQUEST["
    }
    
    $name = db_escape($_POST["name"]);
+   $category_id = intval($_POST["category"]);
    $ogg_file_value = db_escape($ogg_file_value);
    $mp4_file_value = db_escape($mp4_file_value);
    
@@ -73,7 +75,7 @@ else if($acl -> hasPermission("videos") and isset($_FILES) and isset($_REQUEST["
    $timestamp = time();
    
    if(!empty($ogg_file_value) or !empty($mp4_file_value)){
-      db_query("INSERT INTO ".tbname("videos")." (name, ogg_file, mp4_file, width, height, created, `updated`) VALUES ('$name', '$ogg_file_value', '$mp4_file_value', $width, $height, $timestamp, $timestamp);")or die(db_error());
+      db_query("INSERT INTO ".tbname("videos")." (name, ogg_file, mp4_file, width, height, created, category_id, `updated`) VALUES ('$name', '$ogg_file_value', '$mp4_file_value', $width, $height, $timestamp, $category_id, $timestamp);")or die(db_error());
    }
    
 }
