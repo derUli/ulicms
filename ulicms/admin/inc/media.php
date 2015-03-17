@@ -4,7 +4,7 @@ if(!defined("ULICMS_ROOT"))
 
 $acl = new ACL();
 
-if($acl -> hasPermission("images") or $acl -> hasPermission("flash") or $acl -> hasPermission("files")){
+if($acl -> hasPermission("images") or $acl -> hasPermission("videos") or $acl -> hasPermission("audio") or $acl -> hasPermission("files")){
     
     
      ?>
@@ -16,12 +16,6 @@ if($acl -> hasPermission("images") or $acl -> hasPermission("flash") or $acl -> 
 <?php if($acl -> hasPermission("images")){
          ?>
 <a href="index.php?action=images"><?php echo TRANSLATION_IMAGES;
-         ?></a><br/>
-<?php }
-     ?>
-<?php if($acl -> hasPermission("flash")){
-         ?>
-<a href="index.php?action=flash"><?php echo TRANSLATION_FLASH;
          ?></a><br/>
 <?php }
      ?>
@@ -37,6 +31,13 @@ if($acl -> hasPermission("images") or $acl -> hasPermission("flash") or $acl -> 
          ?>
 <a href="index.php?action=videos"><?php echo TRANSLATION_VIDEOS;
          ?></a><br/>
+<?php }
+     ?>
+     
+     <?php if($acl -> hasPermission("audio")){
+         ?>
+<a href="index.php?action=audio"><?php echo TRANSLATION_AUDIO;
+         ?></a>
 <?php }
      ?>
 

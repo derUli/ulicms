@@ -89,7 +89,7 @@ if(defined("_SECURITY")){
   </li>
   <?php }
      ?>
-  <?php if($acl -> hasPermission("files") or $acl -> hasPermission("images") or $acl -> hasPermission("flash")){
+  <?php if($acl -> hasPermission("images") or $acl -> hasPermission("videos") or $acl -> hasPermission("audio") or $acl -> hasPermission("files")){
          ?>
     <li><a href="?action=media"><?php echo TRANSLATION_MEDIA;
          ?></a>
@@ -102,14 +102,7 @@ if(defined("_SECURITY")){
       </li>
       <?php }
          ?>
-      <?php if($acl -> hasPermission("flash")){
-             ?> 
-      <li>
-        <a href="?action=flash"><?php echo TRANSLATION_FLASH;
-             ?></a>
-      </li>
-      <?php }
-         ?>
+      
       <?php if($acl -> hasPermission("files")){
              ?>
       <li>
@@ -126,6 +119,14 @@ if(defined("_SECURITY")){
         <a href="?action=videos"><?php echo TRANSLATION_VIDEOS;
              ?></a></li>
              <?php } ?>
+             <?php if($acl -> hasPermission("audio")){
+             ?> 
+      <li>
+        <a href="?action=audio"><?php echo TRANSLATION_AUDIO;
+             ?></a>
+      </li>
+      <?php }
+         ?>
     </ul>
   </li>
   

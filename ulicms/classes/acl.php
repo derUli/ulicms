@@ -142,7 +142,6 @@ class ACL{
          // Medien
         $acl_data["images"] = null;
          $acl_data["files"] = null;
-         $acl_data["flash"] = null;
          $acl_data["videos"] = null;
          $acl_data["audio"] = null;
         
