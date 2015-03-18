@@ -1,0 +1,14 @@
+Wichtiger Hinweis:
+Bitte erstellen Sie eine Sicherung der Dateien und der Datenbank vor dem Upgrade!
+
+Nach dem Hochladen des Upgrade Pakets, bekommen Sie eine Meldung, dass benötigte Datenbanktabellen nicht vorhanden sind.
+Rufen Sie deshalb bitte das Script "update.php" im Browser auf (z.B. www.meinehomepage.de/update.php).
+Das Script erstellt die Datenbanktabellen installed_patches, videos und audio.
+
+Loggen Sie sich nun in das CMS ein und deinstallieren sie "jQuery", sofern es installiert war. jQuery ist nun bereits im CMS enthaltgen.
+
+Leeren Sie den Cache und installieren Sie alle Module, die Formulare enthalten erneut. Sie müssen diese nicht vorher deinstallieren.
+Wenn Sie von einem Modul die Fehlermeldung "This is probably a CSRF attack!" bekommen, ist es noch nicht mit UliCMS 9 kompatibel.
+Kontaktieren Sie gegebenfalls den Entwickler des Moduls oder beheben Sie es selbst, in dem Sie ein Anti CSRF Token in die Formulare über die unter folgendem Link beschrieben Methoden einfügen.
+
+http://en.ulicms.de/aktuelles.html?single=patch-for-cve20152259-csrf-security-issue
