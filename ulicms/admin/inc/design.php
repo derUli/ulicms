@@ -102,7 +102,7 @@ if(!is_admin()){
      ?></h1>
 <form id="designForm" action="index.php?action=design" method="post">
 <?php csrf_token_html();
-    ?>
+     ?>
 <table style="width:100%;">
 <tr>
 <td><strong><?php echo TRANSLATION_DESIGN_OPTIONS_ENABLED;

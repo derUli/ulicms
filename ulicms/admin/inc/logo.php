@@ -14,7 +14,7 @@
 </p>
 <form enctype="multipart/form-data" action="index.php?action=logo_upload" method="post">
 <?php csrf_token_html();
-        ?>
+         ?>
 <table border=0 height=250>
 <tr>
 <td><strong><?php echo TRANSLATION_YOUR_LOGO;

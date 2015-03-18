@@ -39,7 +39,7 @@
          ?></h1>
 <form action="index.php?action=frontpage_settings" id="frontpage_settings" method="post">
 <?php csrf_token_html();
-        ?>
+         ?>
 <table border=0>
 <tr>
 <td style="min-width:100px;"><strong><?php echo TRANSLATION_LANGUAGE;

@@ -8,7 +8,7 @@
 
 <form action="index.php?action=banner" method="post">
 <?php csrf_token_html();
-            ?>
+             ?>
 <h4><?php echo TRANSLATION_PREVIEW;
              ?></h4><p>
 <?php if($row -> type == "gif"){

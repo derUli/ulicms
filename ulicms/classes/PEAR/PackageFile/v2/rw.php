@@ -597,9 +597,9 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2
      * @param string $ Dependent package name
      * @param string $ Dependent package's channel name
      * @param string $ minimum version of specified package that this release is guaranteed to be
-     *                                           compatible with
+     *                                            compatible with
      * @param string $ maximum version of specified package that this release is guaranteed to be
-     *                                           compatible with
+     *                                            compatible with
      * @param string $ versions of specified package that this release is not compatible with
      */
      function addCompatiblePackage($name, $channel, $min, $max, $exclude = false)
@@ -870,7 +870,7 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2
      * @param array $ |false versions to exclude from installation
      * @param string $ extension this package provides, if any
      * @param bool $ if true, tells the installer to ignore the default optional dependency group
-     *                                         when installing this package
+     *                                          when installing this package
      * @param bool $ if true, tells the installer to negate this dependency (conflicts)
      * @return array 
      * @access private 
@@ -927,10 +927,10 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2
      * @param array $ |false optional excluded versions
      * @param string $ extension this package provides, if any
      * @param bool $ if true, tells the installer to ignore the default optional dependency group
-     *                                         when installing this package
+     *                                          when installing this package
      * @return bool false if the dependency group has not been initialized with
-     *                                          {@link addDependencyGroup()}, or a subpackage is added with
-     *                                          a providesextension
+     *                                           {@link addDependencyGroup()}, or a subpackage is added with
+     *                                           a providesextension
      */
      function addGroupPackageDepWithChannel($type, $groupname, $name, $channel, $min = false,
          $max = false, $recommended = false, $exclude = false,
@@ -952,9 +952,9 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2
      * @param string $ package uri
      * @param string $ extension this package provides, if any
      * @param bool $ if true, tells the installer to ignore the default optional dependency group
-     *                                         when installing this package
+     *                                          when installing this package
      * @return bool false if the dependency group has not been initialized with
-     *                                          {@link addDependencyGroup()}
+     *                                           {@link addDependencyGroup()}
      */
      function addGroupPackageDepWithURI($type, $groupname, $name, $uri, $providesextension = false,
          $nodefault = false)
@@ -1043,7 +1043,7 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2
      * @param string $ recommended version
      * @param string $ extension this package provides, if any
      * @param bool $ if true, tells the installer to ignore the default optional dependency group
-     *                                         when installing this package
+     *                                          when installing this package
      * @param array $ |false optional excluded versions
      */
      function addPackageDepWithChannel($type, $name, $channel, $min = false, $max = false,
@@ -1077,7 +1077,7 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2
      * @param string $ uri of the package
      * @param string $ extension this package provides, if any
      * @param bool $ if true, tells the installer to ignore the default optional dependency group
-     *                                         when installing this package
+     *                                          when installing this package
      */
      function addPackageDepWithUri($type, $name, $uri, $providesextension = false,
          $nodefault = false)
@@ -1109,7 +1109,7 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2
      * @param string $ recommended version
      * @param array $ incompatible versions
      * @param bool $ if true, tells the installer to ignore the default optional dependency group
-     *                                         when installing this package
+     *                                          when installing this package
      */
      function addSubpackageDepWithChannel($type, $name, $channel, $min = false, $max = false,
          $recommended = false, $exclude = false,
@@ -1138,7 +1138,7 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2
      * @param string $ package name
      * @param string $ package uri for download
      * @param bool $ if true, tells the installer to ignore the default optional dependency group
-     *                                         when installing this package
+     *                                          when installing this package
      */
      function addSubpackageDepWithUri($type, $name, $uri, $nodefault = false)
     {

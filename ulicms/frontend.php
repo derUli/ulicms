@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
      if(!check_csrf_token()){
          die("This is probably a CSRF attack!");
          }
-    }
+     }
 
 if(getconfig("check_for_spamhaus") and checkForSpamhaus()){
      $txt = get_translation("IP_BLOCKED_BY_SPAMHAUS");
@@ -42,7 +42,7 @@ if(getconfig("check_for_spamhaus") and checkForSpamhaus()){
      header("Content-Type: text/html; charset=UTF-8");
      echo $txt;
      exit();
-    }
+     }
 require_once "templating.php";
 $status = check_status();
 

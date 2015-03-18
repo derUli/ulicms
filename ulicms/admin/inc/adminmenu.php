@@ -119,7 +119,7 @@ if(defined("_SECURITY")){
         <a href="?action=videos"><?php echo TRANSLATION_VIDEOS;
              ?></a></li>
              <?php }
-        ?>
+         ?>
              <?php if($acl -> hasPermission("audio")){
              ?> 
       <li>
@@ -304,7 +304,7 @@ if(defined("_SECURITY")){
      <?php }
      ?>
     <li><a href="?action=destroy" onclick="return confirm('<?php translate("logout");
-    ?>?')"><?php echo TRANSLATION_LOGOUT;
+     ?>?')"><?php echo TRANSLATION_LOGOUT;
      ?></a></li>
 </ul>
 <script type="text/javascript">

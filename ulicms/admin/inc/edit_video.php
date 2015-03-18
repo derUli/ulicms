@@ -2,23 +2,23 @@
 $acl = new ACL();
 if($acl -> hasPermission("videos")){
     
-    $id = intval($_REQUEST["id"]);
-    $query = db_query("SELECT * FROM " . tbname("videos") . " WHERE id = $id");
-    if(db_num_rows($query) > 0){
-        $result = db_fetch_object($query);
-        ?>
+     $id = intval($_REQUEST["id"]);
+     $query = db_query("SELECT * FROM " . tbname("videos") . " WHERE id = $id");
+     if(db_num_rows($query) > 0){
+         $result = db_fetch_object($query);
+         ?>
 <h1><?php translate("UPLOAD_VIDEO");
-        ?></h1>
+         ?></h1>
 <form action="index.php?action=videos" method="post">
 <?php csrf_token_html();
-        ?>
+         ?>
 <input type="hidden" name="id" value="<?php echo $result -> id;
-        ?>">
+         ?>">
 <input type="hidden" name="update" value="update">
 <strong><?php translate("name");
-        ?></strong><br/>
+         ?></strong><br/>
 <input type="text" name="name" required="true" value="<?php echo htmlspecialchars($result -> name);
-        ?>" maxlength=255/>
+         ?>" maxlength=255/>
 <br/><br/>
 <strong><?php echo TRANSLATION_CATEGORY;
          ?></strong><br/>
@@ -28,40 +28,40 @@ if($acl -> hasPermission("videos")){
 
 <br/><br/>
 <strong><?php echo translate("video_ogg");
-        ?></strong><br/>
+         ?></strong><br/>
 <input name="ogg_file" type="text" value="<?php echo htmlspecialchars($result -> ogg_file);
-        ?>"><br/><br/>
+         ?>"><br/><br/>
 <strong><?php echo translate("video_mp4");
-        ?></strong><br/>
+         ?></strong><br/>
 <input name="mp4_file" type="text" value="<?php echo htmlspecialchars($result -> mp4_file);
-        ?>"><br/><br/>
+         ?>"><br/><br/>
 <strong><?php translate("width");
-        ?></strong><br/>
+         ?></strong><br/>
 <input type="number" name="width" value="<?php echo $result -> width;
-        ?>" step="1">
+         ?>" step="1">
 
 <br/><br/>
 <strong><?php translate("height");
-        ?></strong><br/>
+         ?></strong><br/>
 <input type="number" name="height" value="<?php echo $result -> height;
-        ?>" step="1">
+         ?>" step="1">
 <br/><br/>
 <strong><?php translate("insert_this_code_into_a_page");
-        ?></strong><br/>
+         ?></strong><br/>
 <input type="text" name="code" value="[video id=<?php echo $result -> id;
-        ?>]" onclick="this.focus();this.select();" readonly>
+         ?>]" onclick="this.focus();this.select();" readonly>
 <br/><br/>
 <input type="submit" value="<?php translate("SAVE_CHANGES");
-        ?>">
+         ?>">
 </form>
 <?php
         
-        }else{
+         }else{
          echo "video not found!";
-        }
+         }
     
     
-    }
+     }
 else{
      noperms();
-    }
+     }

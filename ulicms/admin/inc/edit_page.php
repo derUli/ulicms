@@ -17,7 +17,7 @@
 
 <form id="pageform" action="index.php?action=pages" method="post">
 <?php csrf_token_html();
-            ?>
+             ?>
 <input type="hidden" name="edit_page" value="edit_page">
 
 

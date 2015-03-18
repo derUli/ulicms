@@ -59,7 +59,7 @@ if(!$acl -> hasPermission("import")){
   <p><?php echo TRANSLATION_IMPORT_INTO_TABLE;
      ?><br/>
      <?php csrf_token_html();
-    ?>
+     ?>
   <select name="table" size="1">
   <?php foreach($tables as $name){
          ?>

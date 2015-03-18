@@ -7,28 +7,28 @@ function getLanguageFilePath($lang = "de", $component = null){
 
 function get_useragent(){
      return $_SERVER['HTTP_USER_AGENT'];
-    }
+     }
 
 
 function check_csrf_token(){
      if(!isset($_REQUEST["csrf_token"]))
          return false;
      return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];
-    }
+     }
 
 function get_csrf_token_html(){
      return '<input type="hidden" name="csrf_token" value="' . get_csrf_token() . '">';
-    }
+     }
 
 function csrf_token_html(){
      echo get_csrf_token_html();
-    }
+     }
 
 function get_csrf_token(){
      if(!isset($_SESSION["csrf_token"]))
          $_SESSION["csrf_token"] = md5(uniqid(rand(), true));
      return $_SESSION["csrf_token"];
-    }
+     }
 
 
 // returns site protocl
@@ -57,7 +57,7 @@ function recurse_copy($src, $dst){
              }
          }
      closedir($dir);
-    }
+     }
 
 function strbool($value)
 {
@@ -119,7 +119,7 @@ function get_ip()
          }
     
      return $_SERVER['REMOTE_ADDR'];
-    }
+     }
 
 
 function getModuleName($module){
@@ -517,7 +517,7 @@ function is_ssl(){
 
 function splitAndTrim($str){
      return array_map('trim', explode(";", $str));
-    }
+     }
 
 function setLocaleByLanguage(){
      $locale = null;
@@ -544,7 +544,7 @@ function setLocaleByLanguage(){
          }
     
      return $locale;
-    }
+     }
 
 // Returns the language code of the current language
 // If $current is true returns language of the current page
@@ -1245,6 +1245,7 @@ function is__writable($path)
 else
     
      return false; // Or return error - invalid path...
+
 
 
 

@@ -21,7 +21,7 @@ if($acl -> hasPermission("videos") and isset($_REQUEST["delete"])){
         
          db_query("DELETE FROM " . tbname("videos") . " where id = " . $_REQUEST["delete"]);
          }
-    }
+     }
 else if($acl -> hasPermission("videos") and isset($_REQUEST["update"])){
      $name = db_escape($_POST["name"]);
      $id = intval($_POST["id"]);
@@ -33,7 +33,7 @@ else if($acl -> hasPermission("videos") and isset($_REQUEST["update"])){
      $category_id = intval($_POST["category"]);
     
      db_query("UPDATE " . tbname("videos") . " SET name='$name', ogg_file='$ogg_file', mp4_file='$mp4_file', width=$width, height=$height, category_id = $category_id, `updated` = $updated where id = $id")or die(db_error());
-    }
+     }
 
 else if($acl -> hasPermission("videos") and isset($_FILES) and isset($_REQUEST["add"])){
      $mp4_file_value = "";
@@ -78,7 +78,7 @@ else if($acl -> hasPermission("videos") and isset($_FILES) and isset($_REQUEST["
          db_query("INSERT INTO " . tbname("videos") . " (name, ogg_file, mp4_file, width, height, created, category_id, `updated`) VALUES ('$name', '$ogg_file_value', '$mp4_file_value', $width, $height, $timestamp, $category_id, $timestamp);")or die(db_error());
          }
     
-    }
+     }
 
 
 if(!isset($_SESSION["filter_category"])){
@@ -93,14 +93,14 @@ if(!isset($_SESSION["filter_category"])){
 $sql = "SELECT id, name, mp4_file, ogg_file FROM " . tbname("videos") . " ";
 if($_SESSION["filter_category"] > 0){
      $sql .= " where category_id = " . $_SESSION["filter_category"] . " ";
-    }
+     }
 $sql .= " ORDER by id";
 
 $all_videos = db_query($sql);
 
 
 if($acl -> hasPermission("videos")){
-    ?>
+     ?>
 <script type="text/javascript">
 $(window).load(function(){
    $('#category').on('change', function (e) {
@@ -112,7 +112,7 @@ $(window).load(function(){
 });
 </script>
 <h1><?php translate("videos");
-    ?></h1>
+     ?></h1>
 <?php echo TRANSLATION_CATEGORY;
      ?> 
 <?php
@@ -121,52 +121,52 @@ $(window).load(function(){
 <br/>
 <br/>
 <p><a href="index.php?action=add_video">[<?php translate("upload_video");
-    ?>]</a></p>
+     ?>]</a></p>
 <table class="tablesorter">
 <thead>
 <tr>
 <th><?php translate("id");
-    ?></th>
+     ?></th>
 <th><?php translate("name");
-    ?></th>
+     ?></th>
 <th><?php translate("ogg_file");
-    ?></th>
+     ?></th>
 <th><?php translate("mp4_file");
-    ?></th>
+     ?></th>
 <td></td>
 <td></td>
 </tr>
 <tbody>
 <?php
-    while($row = db_fetch_object($all_videos)){
-        ?>
+     while($row = db_fetch_object($all_videos)){
+         ?>
 <tr>
 <td><?php echo $row -> id;
-        ?></td>
+         ?></td>
 <td><?php echo htmlspecialchars($row -> name);
-        ?></td>
+         ?></td>
 <td><?php echo htmlspecialchars(basename($row -> ogg_file));
-        ?></td>
+         ?></td>
 <td><?php echo htmlspecialchars(basename($row -> mp4_file));
-        ?></td>
+         ?></td>
 <td><a href="index.php?action=edit_video&id=<?php echo $row -> id;
-        ?>"><img src="gfx/edit.png"  class="mobile-big-image" alt="<?php translate("edit");
-        ?>" title="<?php translate("edit");
-        ?>"></a></td>
+         ?>"><img src="gfx/edit.png"  class="mobile-big-image" alt="<?php translate("edit");
+         ?>" title="<?php translate("edit");
+         ?>"></a></td>
 <td><a href="index.php?action=videos&delete=<?php echo $row -> id;
-        ?>" onclick="return confirm('<?php translate("ASK_FOR_DELETE");
-        ?>')"><img src="gfx/delete.png" class="mobile-big-image" alt="<?php translate("delete");
-        ?>" title="<?php translate("delete");
-        ?>"></a></td>
+         ?>" onclick="return confirm('<?php translate("ASK_FOR_DELETE");
+         ?>')"><img src="gfx/delete.png" class="mobile-big-image" alt="<?php translate("delete");
+         ?>" title="<?php translate("delete");
+         ?>"></a></td>
 </tr>
 <?php }
-    ?>
+     ?>
 </tbody>
 </thead>
 </table>
 
 <?php
-    }
+     }
 else{
      noperms();
-    }
+     }

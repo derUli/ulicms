@@ -24,7 +24,7 @@ if(logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and !isset($_REQUEST["aj
      if(!check_csrf_token()){
          die("This is probably a CSRF attack!");
          }
-    }
+     }
 
 setLocaleByLanguage();
 
@@ -77,7 +77,7 @@ if(!$eingeloggt){
      add_hook("register_actions");
     
     
-    $pkg = new packageManager();
+     $pkg = new packageManager();
     
      global $actions;
     

@@ -13,12 +13,12 @@ function db_query($query){
 function db_get_server_info(){
      global $db_connection;
      return mysqli_get_server_info($db_connection);
-    }
+     }
 
 function db_get_client_info(){
      global $db_connection;
      return mysqli_get_client_info($db_connection);
-    }
+     }
 
 // Using SQL Prepared statements
 function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE){
@@ -129,7 +129,7 @@ function db_fetch_all($result, $resulttype = MYSQLI_NUM){
          }
     
      return $retval;
-    }
+     }
 function db_close(){
      global $db_connection;
      mysqli_close($db_connection);

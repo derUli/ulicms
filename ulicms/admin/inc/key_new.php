@@ -5,7 +5,7 @@
 
 <form action="index.php?action=settings" method="post">
 <?php csrf_token_html();
-        ?>
+         ?>
 <input type="hidden" name="add_key" value="add_key">
 <strong><?php echo TRANSLATION_OPTION;
          ?></strong><br/>

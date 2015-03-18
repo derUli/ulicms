@@ -21,12 +21,14 @@ $this -> margBuffer = 2; // Allows an (empty) end of block to extend beyond the 
 
 
 
+
 // PAGE NUMBERING
 $this -> pagenumPrefix = '';
 $this -> pagenumSuffix = '';
 $this -> nbpgPrefix = '';
 $this -> nbpgSuffix = '';
 $this -> defaultPageNumStyle = '1'; // 1:Decimal, A:uppercase alphabetic etc. (as for list-style shorthands)
+
 
 
 
@@ -67,6 +69,7 @@ $this -> biDirectional = false; // automatically determine BIDI text in LTR page
 
 
 
+
 // AUTOMATIC FONT SELECTION
 // Based on script and/or language
 $this -> autoScriptToLang = false; // mPDF 6.0 (similar to previously using function SetAutoFont() )
@@ -80,8 +83,10 @@ $this -> autoLangToFont = false; // mPDF 6.0 (similar to old useLang)
 
 
 
+
 $this -> useSubstitutions = false; // Substitute missing characters in UTF-8(multibyte) documents - from other fonts
 $this -> falseBoldWeight = 5; // Weight for bold text when using an artificial (outline) bold; value 0 (off) - 10 (rec. max)
+
 
 
 
@@ -96,6 +101,7 @@ $this -> enableImports = false; // Adding mPDFI functions
 
 
 
+
 $this -> collapseBlockMargins = true; // Allows top and bottom margins to collapse between block elements
 $this -> progressBar = 0; // Shows progress-bars whilst generating file 0 off, 1 simple, 2 advanced
 $this -> progbar_heading = 'mPDF file progress';
@@ -103,6 +109,7 @@ $this -> progbar_altHTML = ''; // Should include <html> and <body> but NOT end t
  // Can incude <head> and link to stylesheet etc.
 // e.g. '<html><body><p><img src="loading.gif" /> Creating PDF file. Please wait...</p>';
 $this -> dpi = 96; // To interpret "px" pixel values in HTML/CSS (see img_dpi below)
+
 
 
 
@@ -131,6 +138,7 @@ $this -> incrementFPR4 = 50; // i.e. will alter by 1/[50]th of width and try aga
 
 
 
+
 // COLORSPACE
 // 1 - allow GRAYSCALE only [convert CMYK/RGB->gray]
 // 2 - allow RGB / SPOT COLOR / Grayscale [convert CMYK->RGB]
@@ -141,6 +149,7 @@ $this -> restrictColorSpace = 0;
 $this -> PDFX = false; // true=Forces compliance with PDFX-1a spec
  // Cannot be used with $this->restrictColorSpace (i.e. no RGB)
 $this -> PDFXauto = false; // Overrides warnings making changes when possible to force PDFX1-a compliance
+
 
 
 
@@ -168,11 +177,13 @@ $this -> table_error_report_param = ''; // Parameter which can be passed to show
 
 
 
+
 // ANNOTATIONS
 $this -> title2annots = false; // Automaticaaly convert title="" properties in tags, to annotations
 $this -> annotSize = 0.5; // default mm for Adobe annotations - nominal
 $this -> annotMargin; // default position for Annotations
 $this -> annotOpacity = 0.5; // default opacity for Annotations
+
 
 
 
@@ -238,6 +249,7 @@ $this -> CSSselectMedia = 'print'; // screen, print, or any other CSS @media typ
 
 
 
+
 // PAGE HEADERS & FOOTERS
 $this -> forcePortraitHeaders = false;
 // Values used if simple FOOTER/HEADER given i.e. not array
@@ -249,6 +261,7 @@ $this -> defaultfooterfontstyle = 'BI'; // '', or 'B' or 'I' or 'BI'
 $this -> defaultfooterline = 1; // 1 or 0 - line over the footer
 $this -> header_line_spacing = 0.25; // spacing between bottom of header and line (if present) - function of fontsize
 $this -> footer_line_spacing = 0.25; // spacing between bottom of header and line (if present) - function of fontsize
+
 
 
 
@@ -266,9 +279,11 @@ $this -> autoMarginPadding = 2; // distance in mm used as padding if 'stretch' m
 
 
 
+
 // TABLES
 $this -> simpleTables = false; // Forces all cells to have same border, background etc. Improves performance
 $this -> packTableData = false; // Reduce memory usage processing tables (but with increased processing time)
+
 
 
 
@@ -313,8 +328,10 @@ $this -> jSmaxChar = 2; // Maximum spacing to allocate to character spacing. (0 
 
 
 
+
 $this -> jSmaxCharLast = 1; // Maximum character spacing allowed (carried over) when finishing a last line
 $this -> jSmaxWordLast = 2; // Maximum word spacing allowed (carried over) when finishing a last line
+
 
 
 
@@ -331,7 +348,9 @@ $this -> normalLineheight = 1.33; // Default Value used for line-height when CSS
 
 
 
+
 $this -> adjustFontDescLineheight = 1.14; // Correction factor applied to lineheight values derived from 'win', 'mac', 'winTypo'
+
 
 
 
@@ -341,6 +360,7 @@ $this -> adjustFontDescLineheight = 1.14; // Correction factor applied to linehe
 // Small Caps
 $this -> smCapsScale = 0.75; // Factor of 1 to scale capital letters
 $this -> smCapsStretch = 110; // % to stretch small caps horizontally (i.e. 100 = no stretch)
+
 
 
 
@@ -356,10 +376,12 @@ $this -> useTibetanLBR = true; // Use the inbuilt algorithm to determine line-br
 
 
 
+
 // CJK Line-breaking
 $this -> allowCJKorphans = true; // FALSE=always wrap to next line; TRUE=squeeze or overflow
 $this -> allowCJKoverflow = false; // FALSE=squeeze; TRUE=overflow (only some characters, and disabled in tables)
 $this -> CJKforceend = false; // Forces overflowng punctuation to hang outside right margin mPDF 5.6.40
+
 
 
 
@@ -391,7 +413,9 @@ $this -> list_indent_first_level = 0; // 1/0 yes/no to indent first level of lis
 
 
 
+
 $this -> list_number_suffix = '.'; // Content to follow a numbered list marker e.g. '.' gives 1. or IV.; ')' gives 1) or a)
+
 
 
 
@@ -403,6 +427,7 @@ $this -> list_number_suffix = '.'; // Content to follow a numbered list marker e
 // Browsers use a fixed bullet size and offset
 $this -> list_marker_offset = '5.5pt'; // Offset (CSS length) of list marker bullets (disc/circle/square)
 $this -> list_symbol_size = '3.6pt'; // Size (CSS) of list marker bullets (disc/circle/square)
+
 
 
 
@@ -427,6 +452,7 @@ $this -> watermarkImgAlphaBlend = 'Normal';
 // "Multiply" works well for watermark image on top
 // BORDERS
 $this -> autoPadding = false; // Automatically increases padding in block elements when border-radius set - if required
+
 
 
 
@@ -689,6 +715,7 @@ $this -> SHYlanguages = array('en', 'de', 'es', 'fi', 'fr', 'it', 'nl', 'pl', 'r
 
 
 
+
 $this -> default_lineheight_correction = 1.2; // Value 1 sets lineheight=fontsize height; 
  // Value used if line-height not set by CSS (usually is)
 $this -> fontsizes = array('XX-SMALL' => 0.7, 'X-SMALL' => 0.77, 'SMALL' => 0.86, 'MEDIUM' => 1, 'LARGE' => 1.2, 'X-LARGE' => 1.5, 'XX-LARGE' => 2);
@@ -696,6 +723,7 @@ $this -> fontsizes = array('XX-SMALL' => 0.7, 'X-SMALL' => 0.77, 'SMALL' => 0.86
 // CHARACTER PATTERN MATCHES TO DETECT LANGUAGES
 // pattern used to detect RTL characters -> force RTL
 $this -> pregRTLchars = "\x{0590}-\x{06FF}\x{0700}-\x{085F}\x{FB00}-\x{FDFD}\x{FE70}-\x{FEFF}"; // 085F to include Mandaic
+
 
 
 
