@@ -14,3 +14,5 @@ Kontaktieren Sie gegebenfalls den Entwickler des Moduls oder beheben Sie es selb
 http://en.ulicms.de/aktuelles.html?single=patch-for-cve20152259-csrf-security-issue
 
 Setzen Sie nun die Rechte aller Dateien und Ordner Ihrer UliCMS Installation auf 0755 oder 0777, damit Sie das neu eingeführte Patch Management nutzen können.
+
+Geben Sie nun den Benutzergruppen, die Video oder Audiodateien hochladen können sollen, die Rechte auf "videos" und "audio".
