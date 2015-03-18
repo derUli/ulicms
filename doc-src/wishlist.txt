@@ -1,3 +1,4 @@
 [ ] Bildergalerie mit mehreren Fotoalben
+[ ] KCFinder durch eigene Medienverwaltung ersetzen
 [ ] UliCMS Android App
 [ ] Kommandozeilentool für Blog (wie wpcmd)
