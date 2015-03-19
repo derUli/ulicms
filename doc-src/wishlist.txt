@@ -3,3 +3,4 @@
 [ ] UliCMS Android App
 [ ] Kommandozeilentool für Blog (wie wpcmd)
 [ ] Seiten/Datensätze kopieren
+[ ] Wiedereinführung der integrierten Newsfunktion
