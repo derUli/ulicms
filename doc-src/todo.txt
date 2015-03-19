@@ -10,5 +10,5 @@ Filter für Videos:
     - Anwender muss alle Module, die Formulare nutzen neu installieren bzw. aktualisieren
     - Anwender muss csrf_tokens zu eigenen Modulen hinzufügen
     - Anwender muss sich gegebenfalls Rechte für "audio" und "videos" geben
-[ ] webm Unterstützung zu HTML5 Video Manager hinzufügen
+[X] WebM Unterstützung zu HTML5 Video Manager hinzufügen
 [ ] geänderte Pakete aus Paketquelle von 8.0.0 nach 9.0.0 übernehmen (gallery, lightbox_gallery, facebook_like, google_plusone)
