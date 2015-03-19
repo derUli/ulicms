@@ -9,7 +9,6 @@ function get_useragent(){
      return $_SERVER['HTTP_USER_AGENT'];
      }
 
-
 function check_csrf_token(){
      if(!isset($_REQUEST["csrf_token"]))
          return false;
