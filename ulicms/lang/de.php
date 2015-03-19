@@ -437,9 +437,13 @@ define("TRANSLATION_NO_HTML5", "Ihr Browser unterstützt kein HTML 5.");
 define("TRANSLATION_DOWNLOAD_VIDEO_INSTEAD", "Sie können das Video stattdessen hier herunterladen");
 define("TRANSLATION_INSERT_THIS_CODE_INTO_A_PAGE", "Fügen Sie diesen Code in eine Seite ein");
 
+
+define("TRANSLATION_VIDEO_WEBM", "Video im WebM Format (für Firefox)");
+define("TRANSLATION_WEBM_FILE", "WebM Datei");
+
 // Audio
 define("TRANSLATION_AUDIO", "Audio");
-define("TRANSLATION_AUDIO_OGG", "Audio file im OGG Vorbis Format (für Firefox)");
+define("TRANSLATION_AUDIO_OGG", "Audio Datei im OGG Vorbis Format (für Firefox)");
 define("TRANSLATION_AUDIO_MP3", "MP3 Datei (für andere Browser)");
 define("TRANSLATION_DOWNLOAD_AUDIO_INSTEAD", "Sie können die Audiodatei stattdessen hier herunterladen");
 define("TRANSLATION_UPLOAD_AUDIO", "Audiodatei hochladen");

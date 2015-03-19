@@ -960,7 +960,7 @@ $contains = strpos($txt, "[video id=") !== FALSE;
 
 
  if($contains){
-     $query = db_query("select id, ogg_file, mp4_file, width, height from " . tbname("videos") . " order by id");
+     $query = db_query("select id, ogg_file, webm_file, mp4_file, width, height from " . tbname("videos") . " order by id");
     
      while($row = db_fetch_object($query)){
         
@@ -969,8 +969,10 @@ $contains = strpos($txt, "[video id=") !== FALSE;
          $code3 = "[video id=" . $row -> id . "]";
          if(!empty($row -> mp4_file))
              $preferred = $row -> mp4_file;
-         else
+         else if(!empty($row -> ogg_file))
              $preferred = $row -> ogg_file;
+         else
+             $preferred = $row -> webm_file;
         
          $html = '<video width="' . $row -> width . '" height="' . $row -> height . '" controls>';
          if(!empty($row -> mp4_file)){
@@ -979,8 +981,11 @@ $contains = strpos($txt, "[video id=") !== FALSE;
          if(!empty($row -> ogg_file)){
              $html .= '<source src="content/videos/' . htmlspecialchars($row -> ogg_file) . '" type="video/ogg">';
              }
+         if(!empty($row -> webm_file)){
+             $html .= '<source src="content/videos/' . htmlspecialchars($row -> webm_file) . '" type="video/webm">';
+             }
          $html .= TRANSLATION_NO_HTML5;
-         if(!empty($row -> mp4_file) or !empty($row -> ogg_file)){
+         if(!empty($row -> mp4_file) or !empty($row -> ogg_file) or !empty($row -> webm_file)){
              $html .= '<br/>
 		<a href="content/videos/' . $preferred . '">' . TRANSLATION_DOWNLOAD_VIDEO_INSTEAD . '</a>';
              }

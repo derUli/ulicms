@@ -31,6 +31,14 @@ if($acl -> hasPermission("videos")){
          ?></strong><br/>
 <input name="ogg_file" type="text" value="<?php echo htmlspecialchars($result -> ogg_file);
          ?>"><br/><br/>
+         
+         
+<strong><?php echo translate("video_webm");
+         ?></strong><br/>
+<input name="webm_file" type="text" value="<?php echo htmlspecialchars($result -> web_file);
+         ?>"><br/><br/>
+         
+         
 <strong><?php echo translate("video_mp4");
          ?></strong><br/>
 <input name="mp4_file" type="text" value="<?php echo htmlspecialchars($result -> mp4_file);
