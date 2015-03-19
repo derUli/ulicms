@@ -4,7 +4,7 @@ class ulicms_version{
          $this -> version = "Purple Sky";
          $this -> internalVersion = Array(9, 0, 0);
          $this -> update = "";
-         $this -> developmentVersion = false;
+         $this -> developmentVersion = true;
          }
     
      // Gibt den Codenamen der UliCMS Version zurück (z.B. 2013R2)
