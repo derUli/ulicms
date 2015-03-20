@@ -1,23 +1,23 @@
 .antispam_honeypot{
-position:absolute;
-top:-8000px;
-left:-8000px;
+  position:absolute;
+  top:-8000px;
+  left:-8000px;
 }
 
 .ulicms_error{
-color:red;
+   color:red;
 }
 
 
 span.blog_article_next, span.blog_pagination_older{
-float:right;
+   float:right;
 }
 
 
 img{
-/* Keine Rahmen um verlinkte Bilder*/
-border:0px;
-/* Responsive Bilder */
+  /* Keine Rahmen um verlinkte Bilder*/
+  border:0px;
+  /* Responsive Bilder */
   max-width: 100%;
   height: auto;
 }
@@ -25,4 +25,4 @@ border:0px;
 body {
     margin:0;
     padding:0;
-    }
+}
