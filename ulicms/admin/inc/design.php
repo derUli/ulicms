@@ -13,6 +13,12 @@ if(!is_admin()){
              deleteconfig("disable_custom_layout_options");
              }
         
+        if(isset($_REQUEST["video_width_100_percent"]))
+           setconfig("video_width_100_percent", "width");
+        else
+           deleteconfig("video_width_100_percent");
+        
+        
          // Wenn Formular abgesendet wurde, Wert Speichern
         if($_REQUEST["theme"] !== $theme){ // if theme auf
              $themes = getThemesList();
@@ -94,7 +100,7 @@ if(!is_admin()){
      $zoom = intval(getconfig("zoom"));
      $font_size = getconfig("font-size");
      $ckeditor_skin = getconfig("ckeditor_skin");
-    
+     $video_width_100_percent = getconfig("video_width_100_percent");
      $font_sizes = getFontSizes();
     
      ?>
@@ -274,6 +280,13 @@ if(!is_admin()){
          ?>">
 </td>
 </tr>
+<tr>
+<td>
+<strong><?php translate("HTML5_VIDEO_WIDTH_100_PERCENT");?>
+</strong>
+<td>
+<input type="checkbox" name="video_width_100_percent" <?php if($video_width_100_percent) echo " checked";?> value="video_width_100_percent">
+</td></tr>
 </table>
 <p>
 <input type="submit" name="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;

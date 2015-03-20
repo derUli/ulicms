@@ -695,8 +695,24 @@ font-size:" . getconfig("font-size") . ";
 background-color:" . getconfig("body-background-color") . ";
 color:" . getconfig("body-text-color") . ";
 }
-</style>";
+</style>
+";
+
+
+    if(getconfig("video_width_100_percent")){
+        echo "<style type=\"text/css\">
+video {
+  width: 100%    !important;
+  height: auto   !important;
+  }
+           </style>
+        ";
+     }
+     
+     
          }
+         
+ 
     
      include_jquery();
      add_hook("head");

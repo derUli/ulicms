@@ -465,4 +465,6 @@ define("TRANSLATION_UPLOAD_AUDIO", "Upload a Audio file");
 
 define("TRANSLATION_MP3_FILE", "MP3 File");
 
+define("TRANSLATION_HTML5_VIDEO_WIDTH_100_PERCENT", "100 % width for HTML 5 Videos");
+
 add_hook("lang_en");

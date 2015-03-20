@@ -448,5 +448,6 @@ define("TRANSLATION_AUDIO_MP3", "MP3 Datei (für andere Browser)");
 define("TRANSLATION_DOWNLOAD_AUDIO_INSTEAD", "Sie können die Audiodatei stattdessen hier herunterladen");
 define("TRANSLATION_UPLOAD_AUDIO", "Audiodatei hochladen");
 
+define("TRANSLATION_HTML5_VIDEO_WIDTH_100_PERCENT", "100 % Breite für HTML 5 Videos");
 
 add_hook("lang_de");
