@@ -35,7 +35,7 @@ if($acl -> hasPermission("videos")){
          
 <strong><?php echo translate("video_webm");
          ?></strong><br/>
-<input name="webm_file" type="text" value="<?php echo htmlspecialchars($result -> web_file);
+<input name="webm_file" type="text" value="<?php echo htmlspecialchars($result -> webm_file);
          ?>"><br/><br/>
          
          
