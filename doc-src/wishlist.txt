@@ -6,4 +6,4 @@
 [ ] Wiedereinführung der integrierten Newsfunktion
 [ ] CSS-Klasse für parent Seiten von current-page.
     wenn z.B. Produkte > Produkt 1 offen ist, dann hat "Produkte" die CSS-Klasse current-page-parent
-[ ] Admin GUI für Einstellungen von facebook_sdk entwickeln
+[ ] Admin GUI für Einstellungen von facebook_like entwickeln

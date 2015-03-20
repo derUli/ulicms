@@ -11,4 +11,4 @@ Filter für Videos:
     - Anwender muss csrf_tokens zu eigenen Modulen hinzufügen
     - Anwender muss sich gegebenfalls Rechte für "audio" und "videos" geben
 [X] WebM Unterstützung zu HTML5 Video Manager hinzufügen
-[ ] geänderte Pakete aus Paketquelle von 8.0.0 nach 9.0.0 übernehmen (gallery, lightbox_gallery, facebook_like, google_plusone, facebook_sdk)
+[X] geänderte Pakete aus Paketquelle von 8.0.0 nach 9.0.0 übernehmen (gallery, lightbox_gallery, facebook_like, google_plusone, facebook_sdk)
