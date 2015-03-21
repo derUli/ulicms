@@ -21,6 +21,8 @@ if(!isset($_SESSION["language"])){
      $_SESSION["language"] = getconfig("default_language");
      }
 
+if(!getconfig("hide_meta_generator"))
+   header('X-Powered-By: UliCMS Release '.cms_version());
 
 setLocaleByLanguage();
 
