@@ -241,6 +241,9 @@ for($i = 0; $i < count($required_tables); $i++){
 }
 
 
+if(!getconfig("hide_meta_generator"))
+   @header('X-Powered-By: UliCMS Release '.cms_version());
+
 $memory_limit = getconfig("memory_limit");
 
 if($memory_limit !== false)
