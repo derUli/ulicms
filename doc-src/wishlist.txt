@@ -7,3 +7,6 @@
 [ ] CSS-Klasse für parent Seiten von current-page.
     wenn z.B. Produkte > Produkt 1 offen ist, dann hat "Produkte" die CSS-Klasse current-page-parent
 [ ] Admin GUI für Einstellungen von facebook_like entwickeln
+[ ] Multisite Fähigkeit.
+    seperate Multisite Admin UI unter /msadmin/
+    Tabellen mehrfach mit verschiebenen prefixen z.B. ulicms_2_content für Content von Site 2
