@@ -188,6 +188,19 @@ if(!isset($_REQUEST["step"])){
          if($connection == false){
              echo TRANSLATION_DB_CONNECTION_FAILED;
              }else{
+             
+             // Check if database is present else try to create it.
+             $query = mysqli_query($connection, "SHOW DATABASES");
+             $databases = array();
+             while($row = mysqli_fetch_array($query)){
+                $databases[] = $row[0];
+             }
+             
+                
+             if(!in_array($_POST["datenbank"], $databases)){
+                // Try to create database if it not exists
+                mysqli_query($connection, "CREATE DATABASE ".mysqli_real_escape_string($connection, $_POST["datenbank"]));
+             }
             
              @$select = mysqli_select_db($connection, $_POST["datenbank"]);
             
