@@ -12,3 +12,4 @@ Filter für Videos:
     - Anwender muss sich gegebenfalls Rechte für "audio" und "videos" geben
 [X] WebM Unterstützung zu HTML5 Video Manager hinzufügen
 [X] geänderte Pakete aus Paketquelle von 8.0.0 nach 9.0.0 übernehmen (gallery, lightbox_gallery, facebook_like, google_plusone, facebook_sdk)
+[ ] Dokumentation zum Upgrade und Promotext in Englisch verfassen
