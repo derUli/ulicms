@@ -211,7 +211,7 @@ if(!$select){
  throw new Exception("Fehler: Die Datenbank " . $config -> db_database . " existiert nicht.\n");
  }
 
-
+$existing_tables = array();
 
 if(!defined("SKIP_TABLE_CHECK")){
 $existing_tables = db_get_tables();
