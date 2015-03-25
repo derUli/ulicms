@@ -270,5 +270,3 @@ if(!getconfig("cache_disabled") and !$hasModul and
  add_hook("after_cron");
  die();
  }
-
-?>
