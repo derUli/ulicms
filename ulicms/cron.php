@@ -1,4 +1,5 @@
 <?php
+require_once "init.php";
 flush();
 
 $empty_trash_days = getconfig("empty_trash_days");
@@ -14,9 +15,6 @@ db_query("DELETE FROM " . tbname("content") . " WHERE " . time() . " -  `deleted
 // Cronjobs der Module
 add_hook("cron");
 
-
-?>
-<?php
 $version = new ulicms_version();
 
 $developmentVersion = "";
@@ -52,6 +50,3 @@ if(!function_exists('file_get_contents_wrapper')){
      }
 @file_get_contents_wrapper("$cfg_url?chs=$chs");
 exit();
-
-
-?>
