@@ -8,3 +8,4 @@
 + jQuery nun auch im Frontend automatisch integriert. Sofern Sie jQuery als Modul installiert haben, müssen Sie dieses Modul deinstallieren, da jQuery ansonsten doppelt eingebunden wird.
 + Scroll Up Button rechts unten hinzugefügt. Nur auf Desktop PCs.
 + Installer versucht, die Datenbank anzulegen, falls diese noch nicht existiert
++ no_auto_cron Option hinzugefügt. Wenn diese gesetzt ist, dann wird die cron.php nicht automatisch ausgeführt.
