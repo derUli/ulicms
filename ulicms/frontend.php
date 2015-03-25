@@ -259,6 +259,11 @@ if(!getconfig("cache_disabled") and !$hasModul and
  }
  echo($generated_html);
 
+
+// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
+if(getconfig("no_auto_cron")) 
+  die();
+
  add_hook("before_cron");
  @include 'cron.php';
  add_hook("after_cron");
