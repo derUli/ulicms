@@ -1,5 +1,8 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
+# required on some providers.
+# uncomment it, if needed
+# RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*).(html|pdf|csv|txt|json)$ ./?seite=$1&format=$2 [QSA]
 </IFModule>
