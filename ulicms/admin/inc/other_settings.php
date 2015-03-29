@@ -6,7 +6,7 @@ include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "
 
 $acl = new ACL();
 if(!$acl -> hasPermission("other")){
-     echo "<p class='ulicms_error'>Zugriff verweigert</p>";
+    noperms();
      }else{
     
      if(isset($_POST["submit"])){

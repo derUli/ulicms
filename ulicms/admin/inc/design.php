@@ -1,7 +1,7 @@
 <?php
 $acl = new ACL();
 if(!$acl -> hasPermission("design")){
-     echo "<p class='ulicms_error'>Zugriff verweigert</p>";
+     noperms();
      }else{
      $theme = getconfig("theme");
      $mobile_theme = getconfig("mobile_theme");
