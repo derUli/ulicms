@@ -3,7 +3,8 @@
 
 include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
 
-if(!is_admin()){
+$acl = new ACL();
+if(!$acl->hasPermission("other")){
      echo "<p class='ulicms_error'>Zugriff verweigert</p>";
      }else{
     
