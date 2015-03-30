@@ -646,6 +646,7 @@ function base_metas(){
      if(is_file($style_file))
         echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
      
+     echo "\r\n";
     
     
      $keywords = meta_keywords();
