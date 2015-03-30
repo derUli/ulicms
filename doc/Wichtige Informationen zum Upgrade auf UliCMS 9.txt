@@ -7,6 +7,8 @@ Das Script erstellt die Datenbanktabellen installed_patches, videos und audio.
 
 Loggen Sie sich nun in das CMS ein und deinstallieren sie "jQuery", sofern es installiert war. jQuery ist nun bereits im CMS enthaltgen.
 
+Entfernen Sie die Einbindung des style.css Stylesheets aus Ihrem Template "oben.php". Dieses wird nun automatisch per base_metas() eingebunden.
+
 Leeren Sie den Cache und installieren Sie alle Module, die Formulare enthalten erneut. Sie müssen diese nicht vorher deinstallieren.
 Wenn Sie von einem Modul die Fehlermeldung "This is probably a CSRF attack!" bekommen, ist es noch nicht mit UliCMS 9 kompatibel.
 Kontaktieren Sie gegebenfalls den Entwickler des Moduls oder beheben Sie es selbst, in dem Sie ein Anti CSRF Token in die Formulare über die unter folgendem Link beschrieben Methoden einfügen.

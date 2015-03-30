@@ -641,6 +641,11 @@ function base_metas(){
     
      echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
      echo "\r\n";
+     
+     $style_file = getTemplateDirPath(get_theme())."style.css";
+     if(is_file($style_file))
+        echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
+     
     
     
      $keywords = meta_keywords();

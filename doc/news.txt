@@ -9,3 +9,4 @@
 + Scroll Up Button rechts unten hinzugefügt. Nur auf Desktop PCs.
 + Installer versucht, die Datenbank anzulegen, falls diese noch nicht existiert
 + no_auto_cron Option hinzugefügt. Wenn diese gesetzt ist, dann wird die cron.php nicht automatisch ausgeführt.
++ style.css wird nun automatisch eingebunden wenn vorhanden.
