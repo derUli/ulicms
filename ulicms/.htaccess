@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
 RewriteEngine on
-# required on some providers.
+# required by some providers.
 # uncomment it, if needed
 # RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
