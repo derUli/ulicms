@@ -547,7 +547,11 @@ function get_menu($name = "top", $parent = null, $recursive = true){
     
      while($row = db_fetch_object($query)){
          if(checkAccess($row -> access)){
-             $html .= "  <li>" ;
+         
+             if(get_requested_pagename() != $row -> systemname)
+                $html .= "  <li>" ;
+             else
+                 $html .= "  <li class='menu_active_list_item'>" ;
              if(!empty($row -> alternate_title))
                  $title = $row -> alternate_title;
              else
