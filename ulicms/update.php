@@ -51,6 +51,19 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("log")."` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
+/*
+db_query("CREATE TABLE IF NOT EXISTS `".tbname("content_types")."` (
+`id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `description` text,
+  `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+db_query("INSERT INTO ".tbname("content_types")." (name, description) VALUES('pages','A regular page')");
+
+*/
+
 db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `type` varchar(50) DEFAULT 'page' NULL");
 
 setconfig("db_schema_version", "9.0.0");
