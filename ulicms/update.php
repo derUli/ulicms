@@ -60,7 +60,10 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("content_types")."` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
-db_query("INSERT INTO ".tbname("content_types")." (name, description) VALUES('pages','A regular page')");
+$query = db_query("select id as anzahl from ".tbname("content_types"));
+if(db_num_rows($query) == 0){
+   db_query("INSERT INTO ".tbname("content_types")." (name, description) VALUES('pages','A regular page')");
+}
 
 */
 
