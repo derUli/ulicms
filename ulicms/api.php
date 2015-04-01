@@ -23,6 +23,8 @@ function get_http_host(){
      
 function log_request($save_ip = false){
 
+  add_hook("before_log_request");
+
   if($save_ip)
      $ip = get_ip();
   else
@@ -37,6 +39,7 @@ function log_request($save_ip = false){
    db_query("INSERT INTO ".tbname("log")." (ip, request_method, useragent, request_uri, http_host) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host')")or die(db_error());
 
 
+  add_hook("after_log_request");
 }
 
 function check_csrf_token(){
