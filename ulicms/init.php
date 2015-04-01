@@ -250,8 +250,8 @@ $memory_limit = getconfig("memory_limit");
 if($memory_limit !== false)
  @ini_set('memory_limit', $memory_limit);
  
-if(in_array("log", $existing_tables)){
-   logRequest();
+if(in_array(tbname("log"), $existing_tables)){
+   log_request();
 }
 
 $cache_period = getconfig("cache_period");

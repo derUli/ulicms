@@ -41,13 +41,14 @@ db_query("CREATE TABLE IF NOT EXISTS `" . tbname("audio") . "` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 db_query("CREATE TABLE IF NOT EXISTS `".tbname("log")."` (
-`id` int(11) NOT NULL,
+`id` int(11) NOT NULL AUTO_INCREMENT,
   `zeit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `request_uri` varchar(255) DEFAULT NULL,
   `useragent` varchar(255) DEFAULT NULL,
   `request_method` varchar(10) DEFAULT NULL,
   `http_host` varchar(100) DEFAULT NULL,
-  `ip` varchar(255) DEFAULT NULL
+  `ip` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 setconfig("db_schema_version", "9.0.0");
