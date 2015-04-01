@@ -51,6 +51,8 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("log")."` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
+db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `type` varchar(50) DEFAULT 'page' NULL");
+
 setconfig("db_schema_version", "9.0.0");
 
 //  @unlink ("update.php");

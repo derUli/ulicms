@@ -406,6 +406,7 @@ mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix ."log` (
   `html_file` varchar(255) DEFAULT NULL,
   `theme` varchar(200) null,
   `custom_data` varchar(255) NULL DEFAULT '{}',
+  `type` varchar(50) DEFAULT 'page' NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
