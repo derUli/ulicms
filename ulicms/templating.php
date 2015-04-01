@@ -843,6 +843,10 @@ function check_status(){
     
      $page = $_GET["seite"];
      $cached_page_path = buildCacheFilePath($page);
+
+     $status = apply_filter("", "status");
+     if(!empty($status))
+        return $status;
     
      if(file_exists($cached_page_path) and !is_logged_in()){
          $last_modified = filemtime($cached_page_path);
