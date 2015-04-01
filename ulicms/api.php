@@ -5,12 +5,38 @@ function getLanguageFilePath($lang = "de", $component = null){
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
 
-function get_useragent($save_ip = false){
+function get_useragent(){
      return $_SERVER['HTTP_USER_AGENT'];
      }
      
-function logrequest(){
+function get_request_method(){
+   return $_SERVER["REQUEST_METHOD"];
+}
+
+function get_request_uri(){
+   return $_SERVER["REQUEST_URI"];
+}
+
+function get_http_host(){
+   return $_SERVER["HTTP_HOST"];
+}
+     
+function log_request($save_ip = false){
+
+  if($save_ip)
+     $ip = get_ip();
+  else
+     $ip = "";
    
+   $ip = db_escape($ip);
+   $request_method = db_escape(get_request_method());
+   $useragent = db_escape(get_useragent());
+   $request_uri = db_escape(get_request_uri());
+   $http_host = db_escape(get_http_host());
+   
+   db_query("INSERT INTO ".tbname("log")." (ip, request_method, useragent, request_uri, http_host) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host')")or die(db_error());
+
+
 }
 
 function check_csrf_token(){
