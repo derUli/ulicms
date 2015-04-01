@@ -11,3 +11,5 @@
 + no_auto_cron Option hinzugefügt. Wenn diese gesetzt ist, dann wird die cron.php nicht automatisch ausgeführt.
 + style.css wird nun automatisch eingebunden wenn vorhanden.
 + CSS Klasse li.menu_active_list_item hinzugefügt
++ "log" Datenbanktabelle für Logging von HTTP Anfragen hinzugefügt
++ API Befehle get_request_method, get_request_uri, get_http_host, log_request hinzugefügt
