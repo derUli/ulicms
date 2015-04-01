@@ -95,6 +95,18 @@ function strbool($value)
 {
      return $value ? 'true' : 'false';
      }
+     
+     
+function get_available_post_types(){
+   global $post_types;
+   $post_types = array("page");
+   add_hook($post_types);
+   
+   sort($post_types);
+   
+   return $post_types;
+   
+}
 
 function getFontSizes(){
      return array("xx-small", "x-small", "smaller", "small", "medium", "large", "larger", "x-large", "xx-large");
