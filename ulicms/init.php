@@ -224,6 +224,7 @@ $required_tables = array(tbname("users"),
  tbname("videos"),
  tbname("audio"),
  tbname("languages"),
+ tbname("log"),
  tbname("settings"));
 
 for($i = 0; $i < count($required_tables); $i++){
@@ -248,6 +249,10 @@ $memory_limit = getconfig("memory_limit");
 
 if($memory_limit !== false)
  @ini_set('memory_limit', $memory_limit);
+ 
+if(in_array("log", $existing_tables)){
+   logRequest();
+}
 
 $cache_period = getconfig("cache_period");
 

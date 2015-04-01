@@ -5,9 +5,13 @@ function getLanguageFilePath($lang = "de", $component = null){
     return ULICMS_ROOT . "/lang/" . $lang . ".php";
      }
 
-function get_useragent(){
+function get_useragent($save_ip = false){
      return $_SERVER['HTTP_USER_AGENT'];
      }
+     
+function logrequest(){
+   
+}
 
 function check_csrf_token(){
      if(!isset($_REQUEST["csrf_token"]))

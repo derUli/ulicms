@@ -362,6 +362,16 @@ if(!isset($_REQUEST["step"])){
   `language` VARCHAR( 255 ) NULL DEFAULT  'all',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
+
+mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix ."log` (
+`id` int(11) NOT NULL,
+  `zeit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `request_uri` varchar(255) DEFAULT NULL,
+  `useragent` varchar(255) DEFAULT NULL,
+  `request_method` varchar(10) DEFAULT NULL,
+  `http_host` varchar(100) DEFAULT NULL,
+  `ip` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
         
          mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "content` (
   
