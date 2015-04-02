@@ -1,0 +1,20 @@
+Important Note:
+Please make a backup of your files and database before upgrading!
+
+After uploading the upgrade package, you get the Auruf the CMS a message that required database tables do not exist.
+Therefore, please call the script "update.php" in the browser (eg www.meinehomepage.de/update.php).
+The script creates the database tables installed_patches, videos and audio.
+
+Login now a in the CMS and uninstall them "jQuery" if it was installed. jQuery is now enthaltgen already in the CMS.
+
+Remove the involvement of the style.css stylesheet from your template "oben.php". This will now automatically included by base_metas ().
+
+Empty the cache and install all the modules that contain forms again. You do not have to uninstall it.
+If you are from a module, the error message "This is Probably a CSRF attack!" get, it is not yet compatible with UliCMS 9.
+Contact optionally the developer of the module or fix it yourself, where you insert an anti-CSRF token in the forms of the methods described on the following link.
+
+http://en.ulicms.de/aktuelles.html?single=patch-for-cve20152259-csrf-security-issue
+
+Now put the rights of all files and folders of your UliCMS installation on 0755 or 0777, so you can take advantage of the newly introduced Patch Management.
+
+Enter the user groups that can upload video or audio files to the rights to "videos" and "audio".
