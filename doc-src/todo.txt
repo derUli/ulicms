@@ -12,7 +12,7 @@ Filter für Videos:
     - Anwender muss sich gegebenfalls Rechte für "audio" und "videos" geben
 [X] WebM Unterstützung zu HTML5 Video Manager hinzufügen
 [X] geänderte Pakete aus Paketquelle von 8.0.0 nach 9.0.0 übernehmen (gallery, lightbox_gallery, facebook_like, google_plusone, facebook_sdk)
-[ ] Dokumentation zum Upgrade auf UliCMS 9.0.0 in Englisch verfassen.
+[X] Dokumentation zum Upgrade auf UliCMS 9.0.0 in Englisch verfassen.
 [X] Promotext in Englisch verfassen.
 [ ] Dokumentation "Wie installiert man Updates" anpassen.
 [ ] Datenbanktabelle für Content Types
