@@ -110,12 +110,12 @@ class PEAR_Installer extends PEAR_Downloader
     /**
      * * List of file transactions queued for an install/upgrade/uninstall.
      * 
-     *                               Format:
-     *                                 array(
-     *                                   0 => array("rename => array("from-file", "to-file")),
-     *                                   1 => array("delete" => array("file-to-delete")),
-     *                                   ...
-     *                                 )
+     *                                Format:
+     *                                  array(
+     *                                    0 => array("rename => array("from-file", "to-file")),
+     *                                    1 => array("delete" => array("file-to-delete")),
+     *                                    ...
+     *                                  )
      * 
      * @var array 
      */
@@ -709,24 +709,24 @@ function _installFile2(& $pkg, $file, & $real_atts, $tmp_path, $options)
  * 
  * @see startFileTransaction
  * @param string $type This can be one of:
- *                                 - rename:  rename a file ($data has 3 values)
- *                                 - backup:  backup an existing file ($data has 1 value)
- *                                 - removebackup:  clean up backups created during install ($data has 1 value)
- *                                 - chmod:   change permissions on a file ($data has 2 values)
- *                                 - delete:  delete a file ($data has 1 value)
- *                                 - rmdir:   delete a directory if empty ($data has 1 value)
- *                                 - installed_as: mark a file as installed ($data has 4 values).
+ *                                  - rename:  rename a file ($data has 3 values)
+ *                                  - backup:  backup an existing file ($data has 1 value)
+ *                                  - removebackup:  clean up backups created during install ($data has 1 value)
+ *                                  - chmod:   change permissions on a file ($data has 2 values)
+ *                                  - delete:  delete a file ($data has 1 value)
+ *                                  - rmdir:   delete a directory if empty ($data has 1 value)
+ *                                  - installed_as: mark a file as installed ($data has 4 values).
  * @param array $data For all file operations, this array must contain the
- *                                 full path to the file or directory that is being operated on.  For
- *                                 the rename command, the first parameter must be the file to rename,
- *                                 the second its new name, the third whether this is a PHP extension.
+ *                                  full path to the file or directory that is being operated on.  For
+ *                                  the rename command, the first parameter must be the file to rename,
+ *                                  the second its new name, the third whether this is a PHP extension.
  * 
- *                                 The installed_as operation contains 4 elements in this order:
- *                                 1. Filename as listed in the filelist element from package.xml
- *                                 2. Full path to the installed file
- *                                 3. Full path from the php_dir configuration variable used in this
- *                                    installation
- *                                 4. Relative path from the php_dir that this file is installed in
+ *                                  The installed_as operation contains 4 elements in this order:
+ *                                  1. Filename as listed in the filelist element from package.xml
+ *                                  2. Full path to the installed file
+ *                                  3. Full path from the php_dir configuration variable used in this
+ *                                     installation
+ *                                  4. Relative path from the php_dir that this file is installed in
  */
 function addFileOperation($type, $data)
 {
@@ -1028,11 +1028,11 @@ function mkDirHier($dir)
  * @param PEAR_Config $ 
  * @param array $ options from the command line
  * @param array $ this is the array that will be populated with packages to
- *                                           install.  Format of each entry:
+ *                                            install.  Format of each entry:
  * 
  * <code>
  * array('pkg' => 'package_name', 'file' => '/path/to/local/file',
- *                                 'info' => array() // parsed package.xml
+ *                                  'info' => array() // parsed package.xml
  * );
  * </code>
  * @param array $ this will be populated with any error messages
@@ -1118,7 +1118,7 @@ function setDownloadedPackages(& $pkgs)
  * Installs the files within the package file specified.
  * 
  * @param string $ |PEAR_Downloader_Package $pkgfile path to the package file,
- *                                     or a pre-initialized packagefile object
+ *                                      or a pre-initialized packagefile object
  * @param array $options recognized options:
  * - installroot   : optional prefix directory for installation
  * - force         : force installation
@@ -1621,10 +1621,10 @@ function & getUninstallPackages()
  * @param string $ package name
  * @param array $ Command-line options.  Possibilities include:
  * 
- *                                           - installroot: base installation dir, if not the default
- *                                           - register-only : update registry but don't remove files
- *                                           - nodeps: do not process dependencies of other packages to ensure
- *                                                     uninstallation does not break things
+ *                                            - installroot: base installation dir, if not the default
+ *                                            - register-only : update registry but don't remove files
+ *                                            - nodeps: do not process dependencies of other packages to ensure
+ *                                                      uninstallation does not break things
  */
 function uninstall($package, $options = array())
 {

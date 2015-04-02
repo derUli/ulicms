@@ -1,22 +1,22 @@
 <?php
 
 function get_type(){
-   if(!$page)
-      $page = get_requested_pagename();
-         
-   $result = "";
+     if(!$page)
+         $page = get_requested_pagename();
     
-   $sql = "SELECT `type` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+     $result = "";
+    
+     $sql = "SELECT `type` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
      $query = db_query($sql);
      if(db_num_rows($query) > 0){
-        $result = db_fetch_object($query);
-     }
-     
-if(empty($result))
-   $result = "page";
-   
-   return $result;
-}
+         $result = db_fetch_object($query);
+         }
+    
+    if(empty($result))
+         $result = "page";
+    
+     return $result;
+    }
 
 function get_custom_data($page = null){
      if(!$page)
@@ -565,9 +565,9 @@ function get_menu($name = "top", $parent = null, $recursive = true){
     
      while($row = db_fetch_object($query)){
          if(checkAccess($row -> access)){
-         
+            
              if(get_requested_pagename() != $row -> systemname)
-                $html .= "  <li>" ;
+                 $html .= "  <li>" ;
              else
                  $html .= "  <li class='menu_active_list_item'>" ;
              if(!empty($row -> alternate_title))
@@ -663,11 +663,11 @@ function base_metas(){
     
      echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
      echo "\r\n";
-     
-     $style_file = getTemplateDirPath(get_theme())."style.css";
+    
+     $style_file = getTemplateDirPath(get_theme()) . "style.css";
      if(is_file($style_file))
-        echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
-     
+         echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
+    
      echo "\r\n";
     
     
@@ -725,22 +725,22 @@ color:" . getconfig("body-text-color") . ";
 }
 </style>
 ";
-
-
-    if(getconfig("video_width_100_percent")){
-        echo "<style type=\"text/css\">
+        
+        
+         if(getconfig("video_width_100_percent")){
+             echo "<style type=\"text/css\">
 video {
   width: 100%    !important;
   height: auto   !important;
   }
            </style>
         ";
-     }
-     
-     
+             }
+        
+        
          }
-         
- 
+    
+    
     
      include_jquery();
      add_hook("head");
@@ -865,10 +865,10 @@ function check_status(){
     
      $page = $_GET["seite"];
      $cached_page_path = buildCacheFilePath($page);
-
+    
      $status = apply_filter("", "status");
      if(!empty($status))
-        return $status;
+         return $status;
     
      if(file_exists($cached_page_path) and !is_logged_in()){
          $last_modified = filemtime($cached_page_path);

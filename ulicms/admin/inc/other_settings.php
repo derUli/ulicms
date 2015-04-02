@@ -6,7 +6,7 @@ include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "
 
 $acl = new ACL();
 if(!$acl -> hasPermission("other")){
-    noperms();
+     noperms();
      }else{
     
      if(isset($_POST["submit"])){
@@ -52,13 +52,20 @@ if(!$acl -> hasPermission("other")){
              }else{
              setconfig("hide_meta_generator", "hide");
              }
-             
-             
-          
+        
+        
+        
          if(!isset($_POST["log_ip"])){
              deleteconfig("log_ip");
              }else{
              setconfig("log_ip", "yo!");
+             }
+             
+         
+         if(!isset($_POST["no_auto_cron"])){
+             deleteconfig("no_auto_cron");
+             }else{
+             setconfig("no_auto_cron", "yo!");
              }
         
          if(isset($_POST["smtp_host"]))
@@ -109,6 +116,8 @@ if(!$acl -> hasPermission("other")){
      $smtp_auth = getconfig("smtp_auth");
     
      $log_ip = getconfig("log_ip");
+     
+     $no_auto_cron = getconfig("no_auto_cron");
     
      ?>
      
@@ -221,17 +230,37 @@ if(!$acl -> hasPermission("other")){
      ?></h2>
      
 <div class="accordion-content">
-<p><?php translate("LOG_IP_INFORMATION");?></p>
+<p><?php translate("LOG_IP_INFORMATION");
+    ?></p>
 <div class="label"><label for="log_ip">
-<?php translate("LOG_IP_ADDRESSES");?></label>
+<?php translate("LOG_IP_ADDRESSES");
+    ?></label>
 </div>
 <div class="inputWrapper">
-<input type="checkbox" id="log_ip" name="log_ip" <?php if(!$log_ip){
+<input type="checkbox" id="log_ip" name="log_ip" <?php if($log_ip){
          echo "checked ";
          }
      ?>>
 </div>
-<?php translate("LOG_IP_ADDRESSES_NOTICE");?>
+<?php translate("LOG_IP_ADDRESSES_NOTICE");
+    ?>
+</div>
+
+
+<h2 class="accordion-header"><?php echo TRANSLATION_CRONJOBS;
+     ?></h2>
+     
+<div class="accordion-content">
+<div class="label"><label for="no_auto_cron">
+<?php translate("NO_AUTO_CRON");
+    ?></label>
+</div>
+<div class="inputWrapper">
+<input type="checkbox" id="no_auto_cron" name="no_auto_cron" <?php if($no_auto_cron){
+         echo "checked ";
+         }
+     ?>>
+</div>
 </div>
      
 <h2 class="accordion-header"><?php echo TRANSLATION_ADDITIONAL_META_TAGS;

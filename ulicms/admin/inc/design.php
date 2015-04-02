@@ -4,6 +4,7 @@ if(!$acl -> hasPermission("design")){
      noperms();
      }else{
      $theme = getconfig("theme");
+     $additional_menus = getconfig("additional_menus");
      $mobile_theme = getconfig("mobile_theme");
     
      if(isset($_REQUEST["submit"])){
@@ -14,11 +15,14 @@ if(!$acl -> hasPermission("design")){
              deleteconfig("disable_custom_layout_options");
              }
         
-        if(isset($_REQUEST["video_width_100_percent"]))
-           setconfig("video_width_100_percent", "width");
-        else
-           deleteconfig("video_width_100_percent");
+         if(isset($_REQUEST["video_width_100_percent"]))
+             setconfig("video_width_100_percent", "width");
+         else
+             deleteconfig("video_width_100_percent");
         
+        if($_REQUEST["additional_menus"] !== $additional_menus){
+            setconfig("additional_menus", db_escape($_REQUEST["additional_menus"]));
+        }
         
          // Wenn Formular abgesendet wurde, Wert Speichern
         if($_REQUEST["theme"] !== $theme){ // if theme auf
@@ -96,6 +100,9 @@ if(!$acl -> hasPermission("design")){
     
     
     
+     $theme = getconfig("theme");
+     $additional_menus = getconfig("additional_menus");
+     $mobile_theme = getconfig("mobile_theme");
      $default_font = getconfig("default-font");
      $title_format = htmlspecialchars(getconfig("title_format"), ENT_QUOTES, "UTF-8");
      $zoom = intval(getconfig("zoom"));
@@ -283,11 +290,24 @@ if(!$acl -> hasPermission("design")){
 </tr>
 <tr>
 <td>
-<strong><?php translate("HTML5_VIDEO_WIDTH_100_PERCENT");?>
+<strong><?php translate("HTML5_VIDEO_WIDTH_100_PERCENT");
+        ?>
 </strong>
 <td>
-<input type="checkbox" name="video_width_100_percent" <?php if($video_width_100_percent) echo " checked";?> value="video_width_100_percent">
+<input type="checkbox" name="video_width_100_percent" <?php if($video_width_100_percent) echo " checked";
+        ?> value="video_width_100_percent">
 </td></tr>
+
+
+<tr>
+<td>
+<strong><?php translate("ADDITIONAL_MENUS");
+        ?>
+</strong>
+<td>
+<input type="text" name="additional_menus" value="<?php echo real_htmlspecialchars($additional_menus);?>">
+</td></tr>
+
 </table>
 <p>
 <input type="submit" name="submit" value="<?php echo TRANSLATION_SAVE_CHANGES;

@@ -188,19 +188,19 @@ if(!isset($_REQUEST["step"])){
          if($connection == false){
              echo TRANSLATION_DB_CONNECTION_FAILED;
              }else{
-             
+            
              // Check if database is present else try to create it.
-             $query = mysqli_query($connection, "SHOW DATABASES");
+            $query = mysqli_query($connection, "SHOW DATABASES");
              $databases = array();
              while($row = mysqli_fetch_array($query)){
-                $databases[] = $row[0];
-             }
-             
-                
+                 $databases[] = $row[0];
+                 }
+            
+            
              if(!in_array($_POST["datenbank"], $databases)){
-                // Try to create database if it not exists
-                mysqli_query($connection, "CREATE DATABASE ".mysqli_real_escape_string($connection, $_POST["datenbank"]));
-             }
+                 // Try to create database if it not exists
+                mysqli_query($connection, "CREATE DATABASE " . mysqli_real_escape_string($connection, $_POST["datenbank"]));
+                 }
             
              @$select = mysqli_select_db($connection, $_POST["datenbank"]);
             
@@ -362,8 +362,8 @@ if(!isset($_REQUEST["step"])){
   `language` VARCHAR( 255 ) NULL DEFAULT  'all',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
-
-mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix ."log` (
+        
+        mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "log` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `zeit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `request_uri` varchar(255) DEFAULT NULL,

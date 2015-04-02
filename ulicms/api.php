@@ -8,39 +8,39 @@ function getLanguageFilePath($lang = "de", $component = null){
 function get_useragent(){
      return $_SERVER['HTTP_USER_AGENT'];
      }
-     
+
 function get_request_method(){
-   return $_SERVER["REQUEST_METHOD"];
-}
+     return $_SERVER["REQUEST_METHOD"];
+    }
 
 function get_request_uri(){
-   return $_SERVER["REQUEST_URI"];
-}
+     return $_SERVER["REQUEST_URI"];
+    }
 
 function get_http_host(){
-   return $_SERVER["HTTP_HOST"];
-}
-     
+     return $_SERVER["HTTP_HOST"];
+    }
+
 function log_request($save_ip = false){
-
-  add_hook("before_log_request");
-
-  if($save_ip)
-     $ip = get_ip();
-  else
-     $ip = "";
-   
-   $ip = db_escape($ip);
-   $request_method = db_escape(get_request_method());
-   $useragent = db_escape(get_useragent());
-   $request_uri = db_escape(get_request_uri());
-   $http_host = db_escape(get_http_host());
-   
-   db_query("INSERT INTO ".tbname("log")." (ip, request_method, useragent, request_uri, http_host) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host')")or die(db_error());
-
-
-  add_hook("after_log_request");
-}
+    
+     add_hook("before_log_request");
+    
+     if($save_ip)
+         $ip = get_ip();
+     else
+         $ip = "";
+    
+     $ip = db_escape($ip);
+     $request_method = db_escape(get_request_method());
+     $useragent = db_escape(get_useragent());
+     $request_uri = db_escape(get_request_uri());
+     $http_host = db_escape(get_http_host());
+    
+     db_query("INSERT INTO " . tbname("log") . " (ip, request_method, useragent, request_uri, http_host) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host')")or die(db_error());
+    
+    
+     add_hook("after_log_request");
+    }
 
 function check_csrf_token(){
      if(!isset($_REQUEST["csrf_token"]))
@@ -95,18 +95,18 @@ function strbool($value)
 {
      return $value ? 'true' : 'false';
      }
-     
-     
+
+
 function get_available_post_types(){
-   global $post_types;
-   $post_types = array("page");
-   add_hook($post_types);
-   
-   sort($post_types);
-   
-   return $post_types;
-   
-}
+     global $post_types;
+     $post_types = array("page");
+     add_hook($post_types);
+    
+     sort($post_types);
+    
+     return $post_types;
+    
+    }
 
 function getFontSizes(){
      return array("xx-small", "x-small", "smaller", "small", "medium", "large", "larger", "x-large", "xx-large");
@@ -1294,6 +1294,7 @@ function is__writable($path)
 else
     
      return false; // Or return error - invalid path...
+
 
 
 

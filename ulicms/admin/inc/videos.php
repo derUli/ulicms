@@ -7,23 +7,23 @@ if(!is_dir($video_folder))
 if($acl -> hasPermission("videos") and isset($_REQUEST["delete"])){
      $query = db_query("select ogg_file, webm_file, mp4_file from " . tbname("videos") . " where id = " . intval($_REQUEST["delete"]));
      if(db_num_rows($query) > 0){
-     
+        
          // OGG
-         $result = db_fetch_object($query);
+        $result = db_fetch_object($query);
          $filepath = ULICMS_ROOT . "/content/videos/" . basename($result -> ogg_file);
          if(!empty($result -> ogg_file) and is_file($filepath)){
              @unlink($filepath);
              }
         
-          // WebM
-          $result = db_fetch_object($query);
+         // WebM
+        $result = db_fetch_object($query);
          $filepath = ULICMS_ROOT . "/content/videos/" . basename($result -> webm_file);
          if(!empty($result -> webm_file) and is_file($filepath)){
              @unlink($filepath);
-             }        
+             }
         
-        // MP4
-         $filepath = ULICMS_ROOT . "/content/videos/" . basename($result -> mp4_file);
+         // MP4
+        $filepath = ULICMS_ROOT . "/content/videos/" . basename($result -> mp4_file);
          if(!empty($result -> mp4_file) and is_file($filepath)){
             
              @unlink($filepath);
@@ -76,8 +76,8 @@ else if($acl -> hasPermission("videos") and isset($_FILES) and isset($_REQUEST["
         
          }
     
-    // WebM
-         $webm_file_value = "";
+     // WebM
+    $webm_file_value = "";
      // webm
     if(!empty($_FILES['webm_file']['name'])){
          $webm_file = time() . "-" . $_FILES['webm_file']['name'];

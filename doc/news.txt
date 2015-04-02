@@ -15,3 +15,4 @@
   - IP Adressen werden nicht geloggt, dies kann jedoch durch setzen von log_ip geändert werden, verstößt jedoch gegen das deutsche Datenschutzgesetz
 + API Befehle get_request_method, get_request_uri, get_http_host, log_request hinzugefügt
 + Datenbankspalte "type" zu cotent Tabelle hinzugefügt.
++ Textfeld für additional_menus zu Designeinstellungen hinzugefügt

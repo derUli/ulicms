@@ -454,7 +454,13 @@ define("TRANSLATION_HTML5_VIDEO_WIDTH_100_PERCENT", "100 % Breite für HTML 5 Vi
 define("TRANSLATION_LOG", "Protokoll");
 define("TRANSLATION_LOG_IP_ADDRESSES", "IP-Adressen speichern");
 define("TRANSLATION_LOG_IP_ADDRESSES_NOTICE", "<strong>Achtung!</strong><br>Dies stellt mitunter einen Verstoß gegen das Datenschutzgesetz dar.");
-define("TRANSLATION_LOG_IP_INFORMATION", "Das Protokoll wird in der Datenbanktabelle ".tbname("log")." gespeichert. Sie können es z.B. mit PHPMyAdmin oder sql_console anzeigen.");
+define("TRANSLATION_LOG_IP_INFORMATION", "Das Protokoll wird in der Datenbanktabelle " . tbname("log") . " gespeichert. Sie können es z.B. mit PHPMyAdmin oder sql_console anzeigen.");
 
+// Cronjobs
+define("TRANSLATION_CRONJOBS", "Cronjobs");
+define("TRANSLATION_NO_AUTO_CRON", "cron.php nicht automatisch ausführen");
+
+// additional_menus
+define("TRANSLATION_ADDITIONAL_MENUS", "Zusätzliche Menüs (Semikolon-getrennt)");
 
 add_hook("lang_de");
