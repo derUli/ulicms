@@ -15,3 +15,4 @@ Filter für Videos:
 [X] Dokumentation zum Upgrade auf UliCMS 9.0.0 in Englisch verfassen.
 [X] Promotext in Englisch verfassen.
 [X] Datenbankmodell in der Doku aktualisieren
+[ ] Button zum löschen von Protokoll (log) hinzufügen
