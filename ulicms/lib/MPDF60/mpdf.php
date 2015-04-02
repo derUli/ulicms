@@ -29,6 +29,7 @@ if (!defined('_FONT_DESCRIPTOR')) define("_FONT_DESCRIPTOR", 'win'); // Values: 
 
 
 
+
 /**
  * -- HTML-CSS --
  */
@@ -63,6 +64,7 @@ require_once(_MPDF_PATH . 'includes/functions.php');
 require_once(_MPDF_PATH . 'config_lang2fonts.php');
 
 require_once(_MPDF_PATH . 'classes/ucdn.php'); // mPDF 6.0
+
 
 
 
