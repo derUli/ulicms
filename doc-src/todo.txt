@@ -17,6 +17,5 @@ Filter für Videos:
 [ ] Dokumentation "Wie installiert man Updates" anpassen.
 [ ] Datenbanktabelle für Content Types
 [ ] Verwaltung für Content Types ähnlich wie z.B. Kategorienverwaltung
-[ ] Auswahlliste für Content Type in Seiten Bearbeitung
 [ ] Foreign Keys für neue Tabellen/Felder setzen
 [X] Datenbankmodell in der Doku aktualisieren
