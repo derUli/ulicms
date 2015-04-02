@@ -470,7 +470,7 @@ define("TRANSLATION_HTML5_VIDEO_WIDTH_100_PERCENT", "100 % width for HTML 5 Vide
 // Protokoll
 define("TRANSLATION_LOG", "Log");
 define("TRANSLATION_LOG_IP_ADDRESSES", "Log IP Addresses");
-define("TRANSLATION_LOG_IP_ADDRESSES_NOTICE", "Warning!<br>This is maybe a problem with the privacy policy law.");
+define("TRANSLATION_LOG_IP_ADDRESSES_NOTICE", "<strong>Warning!</strong><br>This is maybe a problem with the privacy policy law.");
 define("TRANSLATION_LOG_IP_INFORMATION", "The log will be saved in database table " . tbname("log") . ". You can view it using an database administration tool like PHPMyAdmin or sql_console.");
 
 // Cronjobs
