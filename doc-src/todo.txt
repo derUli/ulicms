@@ -16,3 +16,4 @@ Filter für Videos:
 [X] Promotext in Englisch verfassen.
 [X] Datenbankmodell in der Doku aktualisieren
 [ ] Button zum löschen von Protokoll (log) hinzufügen
+[ ] Deaktivieren von Logging soll möglich sein
