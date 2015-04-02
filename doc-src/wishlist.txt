@@ -14,3 +14,4 @@
 [ ] Cache automatisch bei Änderungen leeren (Optional, per Default aktiviert)
 [ ] Übersetzungen in Datenbank statt in Sprachdateien
 [ ] Backend besser erweiterbar machen
+[ ] Cronjobs monatlich, stündlich, täglich, bei jedem Request
