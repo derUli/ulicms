@@ -221,6 +221,7 @@ if(!$acl -> hasPermission("other")){
      ?></h2>
      
 <div class="accordion-content">
+<p><?php translate("LOG_IP_INFORMATION");?></p>
 <div class="label"><label for="log_ip">
 <?php translate("LOG_IP_ADDRESSES");?></label>
 </div>
