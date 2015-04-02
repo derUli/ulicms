@@ -52,6 +52,14 @@ if(!$acl -> hasPermission("other")){
              }else{
              setconfig("hide_meta_generator", "hide");
              }
+             
+             
+          
+         if(!isset($_POST["log_ip"])){
+             deleteconfig("log_ip");
+             }else{
+             setconfig("log_ip", "yo!");
+             }
         
          if(isset($_POST["smtp_host"]))
              setconfig("smtp_host", db_escape($_POST["smtp_host"]));
@@ -100,7 +108,7 @@ if(!$acl -> hasPermission("other")){
     
      $smtp_auth = getconfig("smtp_auth");
     
-    
+     $log_ip = getconfig("log_ip");
     
      ?>
      
@@ -114,9 +122,9 @@ if(!$acl -> hasPermission("other")){
     
     <div class="accordion-content">
 
-<div class="label"><?php echo TRANSLATION_CACHE_ENABLED;
-     ?></div>
-<div class="inputWrapper"><input type="checkbox" name="cache_enabled" value="cache_enabled" <?php if($cache_enabled) echo " checked=\"checked\"";
+<div class="label"><label for="cache_enabled"><?php echo TRANSLATION_CACHE_ENABLED;
+     ?></label></div>
+<div class="inputWrapper"><input type="checkbox" id="cache_enabled" name="cache_enabled" value="cache_enabled" <?php if($cache_enabled) echo " checked=\"checked\"";
      ?>></div>
 <div class="label"><?php echo TRANSLATION_CACHE_VALIDATION_DURATION;
      ?></div>
@@ -209,7 +217,22 @@ if(!$acl -> hasPermission("other")){
 </textarea>
 </p>
 </div>
-
+<h2 class="accordion-header"><?php echo TRANSLATION_LOG;
+     ?></h2>
+     
+<div class="accordion-content">
+<div class="label"><label for="log_ip">
+<?php translate("LOG_IP_ADDRESSES");?></label>
+</div>
+<div class="inputWrapper">
+<input type="checkbox" id="log_ip" name="log_ip" <?php if(!$log_ip){
+         echo "checked ";
+         }
+     ?>>
+</div>
+<?php translate("LOG_IP_ADDRESSES_NOTICE");?>
+</div>
+     
 <h2 class="accordion-header"><?php echo TRANSLATION_ADDITIONAL_META_TAGS;
      ?></h2>
 
@@ -218,7 +241,7 @@ if(!$acl -> hasPermission("other")){
 <div class="label"><label for="show_meta_generator"><?php echo TRANSLATION_SHOW_META_GENERATOR;
      ?></label></div>
 <div class="inputWrapper">
-<input type="checkbox" name="show_meta_generator" <?php if(!$hide_meta_generator){
+<input type="checkbox" id="show_meta_generator" name="show_meta_generator" <?php if(!$hide_meta_generator){
          echo "checked ";
          }
      ?>>
@@ -264,9 +287,9 @@ if(!$acl -> hasPermission("other")){
      ?>"</div>
 </div>
 
-<div class="label">
+<div class="label"><label for="smtp_auth">
 <?php echo TRANSLATION_AUTHENTIFACTION_REQUIRED;
-     ?>
+     ?></label>
 </div>
 <div class="inputWrapper">
 <input type="checkbox" id="smtp_auth" name="smtp_auth" <?php

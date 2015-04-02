@@ -450,4 +450,9 @@ define("TRANSLATION_UPLOAD_AUDIO", "Audiodatei hochladen");
 
 define("TRANSLATION_HTML5_VIDEO_WIDTH_100_PERCENT", "100 % Breite für HTML 5 Videos");
 
+// Protokoll
+define("TRANSLATION_LOG", "Protokoll");
+define("TRANSLATION_LOG_IP_ADDRESSES", "IP-Adressen speichern");
+define("TRANSLATION_LOG_IP_ADDRESSES_NOTICE", "<strong>Achtung!</strong><br>Dies stellt mitunter einen Verstoß gegen das Datenschutzgesetz dar.");
+
 add_hook("lang_de");
