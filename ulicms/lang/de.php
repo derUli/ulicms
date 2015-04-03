@@ -466,5 +466,7 @@ define("TRANSLATION_ADDITIONAL_MENUS", "Zusätzliche Menüs (Semikolon-getrennt)
 // HTML Editor
 define("TRANSLATION_HTML_EDITOR", "HTML Editor");
 
+// Hilfe zu Position
+define("TRANSLATION_HELP_POSITION", "Geben Sie hier eine Zahl ein.\nDiese wird dafür genutzt, die Reihenfolge der Einträge im Menü festzulegen.\nGeben Sie z.B. der \"Seite 1\" die Position 10, der \"Seite 2\" die Position 20 usw.\nWenn Sie zwischen Seite 1 und \"Seite 2\" eine weitere Seite einfügen möchten,\ngeben Sie hier z.B. 15 ein.");
 
 add_hook("lang_de");

@@ -78,9 +78,11 @@
 </select><br/> <br/>
 
 <strong><?php echo TRANSLATION_POSITION;
-         ?></strong><br/>
+         ?></strong> <span style="cursor:help;" onclick="$('div#position_help').slideToggle()">[?]</span><br/>
 <input type="text" required="true" name="position" value="0">
-              
+<div id="position_help" class="help" style="display:none">
+<?php echo nl2br(TRANSLATION_HELP_POSITION);?>
+</div>              
 <br/><br/>
 
 <strong><?php echo TRANSLATION_PARENT;

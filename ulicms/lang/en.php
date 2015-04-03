@@ -483,4 +483,7 @@ define("TRANSLATION_ADDITIONAL_MENUS", "Additional Menus (semicolon seperated)")
 // HTML Editor
 define("TRANSLATION_HTML_EDITOR", "HTML Editor");
 
+// Help
+
+define("TRANSLATION_HELP_POSITION", "Enter a numeric value here.\nIt will be used to sort your pages in navigation menu.\nGive \"Page 1\" e.g. position 10 and \"Page 2\" position 20.\nIf you want to insert a page between this two pages, give it position 15.");
 add_hook("lang_en");
