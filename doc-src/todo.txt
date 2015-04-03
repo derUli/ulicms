@@ -17,3 +17,4 @@ Filter für Videos:
 [ ] Datenbankmodell in der Doku vor der Veröffentlichung der neuen Version aktualisieren
 [X] Button zum löschen von Protokoll (log) hinzufügen
 [X] Deaktivieren von Logging soll möglich sein
+[ ] Inline Hilfe hinzufügen
