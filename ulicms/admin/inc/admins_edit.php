@@ -118,7 +118,7 @@
 <br/><br/>
 <strong><?php echo TRANSLATION_HTML_EDITOR;
              ?></strong>   <br/>
-<select name="html_Editor">
+<select name="html_editor">
 <option value="ckeditor" <?php if(!$row->html_editor or $row->html_editor == "ckeditor") echo "selected"?>>CKEditor</option>
 <option value="codemirror" <?php if($row->html_editor == "codemirror") echo "selected"?>>CodeMirror</option>
 </select>

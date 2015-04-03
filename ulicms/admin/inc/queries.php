@@ -558,6 +558,7 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
      $skype_id = db_escape($_POST["skype_id"]);
      $about_me = db_escape($_POST["about_me"]);
      $html_editor = db_escape($_POST["html_editor"]);
+
      add_hook("before_edit_user");
      db_query("UPDATE " . tbname("users") . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', 
