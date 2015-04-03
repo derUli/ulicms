@@ -477,8 +477,10 @@ define("TRANSLATION_LOG_IP_INFORMATION", "The log will be saved in database tabl
 define("TRANSLATION_CRONJOBS", "Cronjobs");
 define("TRANSLATION_NO_AUTO_CRON", "Don't run cron.php automatically");
 
-
 // additional_menus
 define("TRANSLATION_ADDITIONAL_MENUS", "Additional Menus (semicolon seperated)");
+
+// HTML Editor
+define("TRANSLATION_HTML_EDITOR", "HTML Editor");
 
 add_hook("lang_en");

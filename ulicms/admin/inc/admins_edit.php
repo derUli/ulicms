@@ -116,6 +116,14 @@
 <input type="text" name="skype_id" value="<?php echo $row -> skype_id?>">
 
 <br/><br/>
+<strong><?php echo TRANSLATION_HTML_EDITOR;
+             ?></strong>   <br/>
+<select name="html_Editor">
+<option value="ckeditor" <?php if(!$row->html_editor or $row->html_editor == "ckeditor") echo "selected"?>>CKEditor</option>
+<option value="codemirror" <?php if($row->html_editor == "codemirror") echo "selected"?>>CodeMirror</option>
+</select>
+
+<br/><br/>
 <input type="checkbox" id="notify_on_login" name="notify_on_login" <?php
              if($row -> notify_on_login){
                  echo "checked='checked'";

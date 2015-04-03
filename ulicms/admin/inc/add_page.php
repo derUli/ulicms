@@ -252,6 +252,11 @@ function openMenuImageSelectWindow(field) {
 
 <div>
 <textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
+<?php 
+$editor = get_html_editor();?>
+
+<?php if($editor === "ckeditor"){
+?>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( 'page_content',
 					{
@@ -293,7 +298,11 @@ function confirmExit()
 		return;
 }			
 </script>
-
+<?php } else if($editor == "codemirror") {?>
+<script type="text/javascript">
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content"));
+</script>
+<?php }?>
 <noscript>
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
 </noscript>

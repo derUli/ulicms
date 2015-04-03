@@ -16,3 +16,7 @@
 + API Befehle get_request_method, get_request_uri, get_http_host, log_request hinzugefügt
 + Datenbankspalte "type" zu cotent Tabelle hinzugefügt.
 + Textfeld für additional_menus zu Designeinstellungen hinzugefügt
++ HTML Editor nun je User festlegbar
+  - Auswahlmöglichkeiten sind 
+    X CKEditor (WYSIWYG, für Anfänger)
+    X CodeMirror (HTML Code mit farblicher Hervorhebung, für HTML-Experten)

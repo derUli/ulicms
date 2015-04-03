@@ -87,6 +87,13 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
     
      add_hook("after_create_user");
      }
+     
+function get_user_id(){
+  if(isset($_SESSION["login_id"]))
+    return $_SESSION["login_id"];
+  else
+    return 0;
+}
 
 function user_exists($name){
      $query = db_query("SELECT * FROM " . tbname("users") .

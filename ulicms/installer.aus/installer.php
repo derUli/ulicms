@@ -320,6 +320,7 @@ if(!isset($_REQUEST["step"])){
   `last_action` bigint(20) NOT NULL,
   `group_id` int(11) NULL,
   `notify_on_login` tinyint(1) NOT NULL DEFAULT '0',
+  `html_editor` varchar(100) NULL DEFAULT 'ckeditor',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;")or die(mysqli_error($connection));
         

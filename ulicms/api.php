@@ -12,6 +12,24 @@ function get_useragent(){
 function get_request_method(){
      return $_SERVER["REQUEST_METHOD"];
     }
+    
+function get_html_editor(){
+   if(!is_logged_in()){
+      return null;
+   }
+   
+   
+   
+   $query = db_query("SELECT html_editor from ".tbname("users")." where id = ".get_user_id());
+   if(!$query)
+      return "ckeditor";
+      
+   $obj = db_fetch_assoc($query);
+       if(!is_null($obj["html_editor"]) and !empty($obj["html_editor"]))
+          return $obj["html_editor"];
+       else
+          return "ckeditor";
+}
 
 function get_request_uri(){
      return $_SERVER["REQUEST_URI"];

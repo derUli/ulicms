@@ -463,4 +463,8 @@ define("TRANSLATION_NO_AUTO_CRON", "cron.php nicht automatisch ausführen");
 // additional_menus
 define("TRANSLATION_ADDITIONAL_MENUS", "Zusätzliche Menüs (Semikolon-getrennt)");
 
+// HTML Editor
+define("TRANSLATION_HTML_EDITOR", "HTML Editor");
+
+
 add_hook("lang_de");
