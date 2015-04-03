@@ -74,15 +74,7 @@
 <?php csrf_token_html();
                      ?>
 <style type="text/css">
-.CodeMirror {
-  border: 1px solid #eee;
-  height: auto;
-  overflow:hidden;
-}
-.CodeMirror-scroll {
-  overflow-y: hidden;
-  overflow-x: auto;
-}
+
 </style>
 <textarea id="code" name="code" cols=80 rows=20><?php
                      echo htmlspecialchars($template_content);

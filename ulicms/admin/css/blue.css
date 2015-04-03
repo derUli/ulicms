@@ -231,3 +231,16 @@ bottom:10px;
 right:10px;
 }
 
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto !important;
+  overflow:hidden;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+textarea#code, textarea#page_content{
+height:auto;
+}

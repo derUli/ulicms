@@ -300,7 +300,16 @@ function confirmExit()
 </script>
 <?php } else if($editor == "codemirror") {?>
 <script type="text/javascript">
-var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content"));
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content"),
+
+{lineNumbers: true,
+        matchBrackets: true,
+        mode : "text/html",
+        
+        indentUnit: 0,
+        indentWithTabs: false,
+        enterMode: "keep",
+        tabMode: "shift"});
 </script>
 <?php }?>
 <noscript>
