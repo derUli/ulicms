@@ -65,7 +65,7 @@ db_query("CREATE TABLE IF NOT EXISTS `" . tbname("log") . "` (
  * db_query("INSERT INTO ".tbname("content_types")." (name, description) VALUES('pages','A regular page')");
  * }
  */
-db_query("ALTER TABLE ".tbname("users")." ADD `html_editor` varchar(100) NULL DEFAULT 'ckeditor'");
+db_query("ALTER TABLE " . tbname("users") . " ADD `html_editor` varchar(100) NULL DEFAULT 'ckeditor'");
 db_query("ALTER TABLE " . tbname("content") . " ADD COLUMN `type` varchar(50) DEFAULT 'page' NULL");
 
 setconfig("db_schema_version", "9.0.0");

@@ -11,33 +11,33 @@ function get_useragent(){
 
 function get_request_method(){
      return $_SERVER["REQUEST_METHOD"];
-    }
-    
+     }
+
 function get_html_editor(){
-   if(!is_logged_in()){
-      return null;
-   }
-   
-   
-   
-   $query = db_query("SELECT html_editor from ".tbname("users")." where id = ".get_user_id());
-   if(!$query)
-      return "ckeditor";
-      
-   $obj = db_fetch_assoc($query);
-       if(!is_null($obj["html_editor"]) and !empty($obj["html_editor"]))
-          return $obj["html_editor"];
-       else
-          return "ckeditor";
-}
+     if(!is_logged_in()){
+         return null;
+         }
+    
+    
+    
+     $query = db_query("SELECT html_editor from " . tbname("users") . " where id = " . get_user_id());
+     if(!$query)
+         return "ckeditor";
+    
+     $obj = db_fetch_assoc($query);
+     if(!is_null($obj["html_editor"]) and !empty($obj["html_editor"]))
+         return $obj["html_editor"];
+     else
+         return "ckeditor";
+    }
 
 function get_request_uri(){
      return $_SERVER["REQUEST_URI"];
-    }
+     }
 
 function get_http_host(){
      return $_SERVER["HTTP_HOST"];
-    }
+     }
 
 function log_request($save_ip = false){
     
@@ -58,7 +58,7 @@ function log_request($save_ip = false){
     
     
      add_hook("after_log_request");
-    }
+     }
 
 function check_csrf_token(){
      if(!isset($_REQUEST["csrf_token"]))
@@ -124,7 +124,7 @@ function get_available_post_types(){
     
      return $post_types;
     
-    }
+     }
 
 function getFontSizes(){
      return array("xx-small", "x-small", "smaller", "small", "medium", "large", "larger", "x-large", "xx-large");
@@ -1312,6 +1312,7 @@ function is__writable($path)
 else
     
      return false; // Or return error - invalid path...
+
 
 
 

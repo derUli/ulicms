@@ -119,22 +119,22 @@
 <strong><?php echo TRANSLATION_HTML_EDITOR;
              ?></strong>   <br/>
 <select name="html_editor">
-<option value="ckeditor" <?php if(!$row->html_editor or $row->html_editor == "ckeditor") echo "selected"?>>CKEditor</option>
-<option value="codemirror" <?php if($row->html_editor == "codemirror") echo "selected"?>>CodeMirror</option>
+<option value="ckeditor" <?php if(!$row -> html_editor or $row -> html_editor == "ckeditor") echo "selected"?>>CKEditor</option>
+<option value="codemirror" <?php if($row -> html_editor == "codemirror") echo "selected"?>>CodeMirror</option>
 </select>
 
 <br/><br/>
 <input type="checkbox" id="notify_on_login" name="notify_on_login" <?php
-             if($row -> notify_on_login){
-                 echo "checked='checked'";
-                 }
-             ?>><strong> <label for="notify_on_login"><?php echo TRANSLATION_NOTIFY_ON_LOGIN;
-             ?></label></strong>
+                     if($row -> notify_on_login){
+                         echo "checked='checked'";
+                         }
+                     ?>><strong> <label for="notify_on_login"><?php echo TRANSLATION_NOTIFY_ON_LOGIN;
+                     ?></label></strong>
 <br/>
 <br/>
 
 <strong><?php echo TRANSLATION_ABOUT_ME;
-             ?></strong><br/>
+                     ?></strong><br/>
 <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
 
 
@@ -142,28 +142,28 @@
 <br/> <br/>
 <input type="submit" value="OK">
 <?php
-             if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-                 ?>
+                     if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
+                         ?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php }
-             ?>
+                     ?>
 </form>
 
 <?php
-             break;
-             }
-         ?>
+                     break;
+                     }
+                 ?>
 <?php
-         }
-    else{
-         noperms();
-         }
-    
-     ?>
+                 }
+            else{
+                 noperms();
+                 }
+            
+             ?>
 
 
 
 
 <?php }
-?>
+        ?>

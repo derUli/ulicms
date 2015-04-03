@@ -20,9 +20,9 @@ if(!$acl -> hasPermission("design")){
          else
              deleteconfig("video_width_100_percent");
         
-        if($_REQUEST["additional_menus"] !== $additional_menus){
-            setconfig("additional_menus", db_escape($_REQUEST["additional_menus"]));
-        }
+         if($_REQUEST["additional_menus"] !== $additional_menus){
+             setconfig("additional_menus", db_escape($_REQUEST["additional_menus"]));
+             }
         
          // Wenn Formular abgesendet wurde, Wert Speichern
         if($_REQUEST["theme"] !== $theme){ // if theme auf
@@ -291,21 +291,22 @@ if(!$acl -> hasPermission("design")){
 <tr>
 <td>
 <strong><?php translate("HTML5_VIDEO_WIDTH_100_PERCENT");
-        ?>
+         ?>
 </strong>
 <td>
 <input type="checkbox" name="video_width_100_percent" <?php if($video_width_100_percent) echo " checked";
-        ?> value="video_width_100_percent">
+         ?> value="video_width_100_percent">
 </td></tr>
 
 
 <tr>
 <td>
 <strong><?php translate("ADDITIONAL_MENUS");
-        ?>
+         ?>
 </strong>
 <td>
-<input type="text" name="additional_menus" value="<?php echo real_htmlspecialchars($additional_menus);?>">
+<input type="text" name="additional_menus" value="<?php echo real_htmlspecialchars($additional_menus);
+        ?>">
 </td></tr>
 
 </table>

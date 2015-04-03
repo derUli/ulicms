@@ -161,12 +161,12 @@ if(file_exists($cached_page_path) and !getconfig("cache_disabled")
 
  if($cached_content and (time() - $last_modified < CACHE_PERIOD) and !defined("NO_CACHE")){
  echo $cached_content;
- 
- 
-  if(getconfig("no_auto_cron"))
+
+
+ if(getconfig("no_auto_cron"))
      die();
-     
-     
+
+
  add_hook("before_cron");
  @include 'cron.php';
  add_hook("after_cron");
@@ -242,9 +242,9 @@ if(!getconfig("cache_disabled") and !$hasModul and
  $Cache_Lite -> save($data, $id);
  }
  echo $data;
- 
-  if(getconfig("no_auto_cron"))
-     die();
+
+ if(getconfig("no_auto_cron"))
+ die();
  add_hook("before_cron");
  @include 'cron.php';
  add_hook("after_cron");
@@ -270,7 +270,7 @@ if(!getconfig("cache_disabled") and !$hasModul and
 
 // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 if(getconfig("no_auto_cron"))
-   die();
+ die();
 
  add_hook("before_cron");
  @include 'cron.php';
@@ -278,10 +278,10 @@ if(getconfig("no_auto_cron"))
  die();
 
  }else{
- 
+
  if(getconfig("no_auto_cron"))
-   die();
- 
+ die();
+
  add_hook("before_cron");
  @include 'cron.php';
  add_hook("after_cron");

@@ -718,9 +718,9 @@ configuration.',
      * @param string $command command name
      * @param array $options option_name => value
      * @param array $params list of additional parameters.
-     *                                             $params[0] should contain a string with either:
-     *                                             - <channel name> or
-     *                                             - <username>:<password>@<channel name>
+     *                                              $params[0] should contain a string with either:
+     *                                              - <channel name> or
+     *                                              - <username>:<password>@<channel name>
      * @return null |PEAR_Error
      */
      function doDiscover($command, $options, $params)

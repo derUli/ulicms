@@ -484,7 +484,6 @@ define("TRANSLATION_ADDITIONAL_MENUS", "Additional Menus (semicolon seperated)")
 define("TRANSLATION_HTML_EDITOR", "HTML Editor");
 
 // Help
-
 define("TRANSLATION_HELP_POSITION", "Enter a numeric value here.\nIt will be used to sort your pages in navigation menu.\nGive \"Page 1\" e.g. position 10 and \"Page 2\" position 20.\nIf you want to insert a page between this two pages, give it position 15.");
 define("TRANSLATION_HELP_MENU", "Select in which navigation menu your page will be shown.\nUliCMS has 5 Slots for navigation menus by default.\nWhich slots you can use depends on your templates.\n");
 

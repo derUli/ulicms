@@ -53,7 +53,7 @@ class PEAR_REST
      * @param string $ full URL to this resource
      * @param array $ |false contents of the accept-encoding header
      * @param boolean $ if true, xml will be returned as a string, otherwise, xml will be
-     *                                                  parsed using PEAR_XMLParser
+     *                                                   parsed using PEAR_XMLParser
      * @return string |array
      */
      function retrieveCacheFirst($url, $accept = false, $forcestring = false, $channel = false)
@@ -74,7 +74,7 @@ class PEAR_REST
      * @param string $ full URL to this resource
      * @param array $ |false contents of the accept-encoding header
      * @param boolean $ if true, xml will be returned as a string, otherwise, xml will be
-     *                                                  parsed using PEAR_XMLParser
+     *                                                   parsed using PEAR_XMLParser
      * @return string |array
      */
      function retrieveData($url, $accept = false, $forcestring = false, $channel = false)
@@ -223,7 +223,7 @@ class PEAR_REST
      * @param string $ original contents of the REST resource
      * @param array $ HTTP Last-Modified and ETag headers
      * @param bool $ if true, then the cache id file should be regenerated to
-     *                                             trigger a new time-to-live value
+     *                                              trigger a new time-to-live value
      */
      function saveCache($url, $contents, $lastmodified, $nochange = false, $cacheid = null)
     {
@@ -315,14 +315,14 @@ class PEAR_REST
      * @param string $url the URL to download
      * @param string $save_dir directory to save file in
      * @param false $ |string|array $lastmodified header values to check against for caching
-     *                                                         use false to return the header values from this download
+     *                                                          use false to return the header values from this download
      * @param false $ |array $accept Accept headers to send
      * @return string |array  Returns the contents of the downloaded file or a PEAR
-     *                                                     error on failure.  If the error is caused by
-     *                                                     socket-related errors, the error object will
-     *                                                     have the fsockopen error code available through
-     *                                                     getCode().  If caching is requested, then return the header
-     *                                                     values.
+     *                                                      error on failure.  If the error is caused by
+     *                                                      socket-related errors, the error object will
+     *                                                      have the fsockopen error code available through
+     *                                                      getCode().  If caching is requested, then return the header
+     *                                                      values.
      * @access public 
      */
      function downloadHttp($url, $lastmodified = null, $accept = false, $channel = false)

@@ -60,8 +60,8 @@ if(!$acl -> hasPermission("other")){
              }else{
              setconfig("log_ip", "yo!");
              }
-             
-         
+        
+        
          if(!isset($_POST["no_auto_cron"])){
              deleteconfig("no_auto_cron");
              }else{
@@ -116,7 +116,7 @@ if(!$acl -> hasPermission("other")){
      $smtp_auth = getconfig("smtp_auth");
     
      $log_ip = getconfig("log_ip");
-     
+    
      $no_auto_cron = getconfig("no_auto_cron");
     
      ?>
@@ -231,10 +231,10 @@ if(!$acl -> hasPermission("other")){
      
 <div class="accordion-content">
 <p><?php translate("LOG_IP_INFORMATION");
-    ?></p>
+     ?></p>
 <div class="label"><label for="log_ip">
 <?php translate("LOG_IP_ADDRESSES");
-    ?></label>
+     ?></label>
 </div>
 <div class="inputWrapper">
 <input type="checkbox" id="log_ip" name="log_ip" <?php if($log_ip){
@@ -243,7 +243,7 @@ if(!$acl -> hasPermission("other")){
      ?>>
 </div>
 <?php translate("LOG_IP_ADDRESSES_NOTICE");
-    ?>
+     ?>
 </div>
 
 
@@ -253,7 +253,7 @@ if(!$acl -> hasPermission("other")){
 <div class="accordion-content">
 <div class="label"><label for="no_auto_cron">
 <?php translate("NO_AUTO_CRON");
-    ?></label>
+     ?></label>
 </div>
 <div class="inputWrapper">
 <input type="checkbox" id="no_auto_cron" name="no_auto_cron" <?php if($no_auto_cron){

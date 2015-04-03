@@ -13,7 +13,7 @@ Nick Ilyin <nick.ilyin@gmail.com>
 
 Original author: Victor Stanciu <vic.stanciu@gmail.com> 
  * @license Code and contributions have 'MIT License'
- *                  More details: https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt
+ *                   More details: https://github.com/serbanghita/Mobile-Detect/blob/master/LICENSE.txt
  * @link 
  * @version 2.8.11
  */
@@ -614,9 +614,9 @@ class Mobile_Detect
      * Construct an instance of this class.
      * 
      * @param array $headers Specify the headers as injection. Should be PHP _SERVER flavored.
-     *                              If left empty, will use the global _SERVER['HTTP_*'] vars instead.
+     *                               If left empty, will use the global _SERVER['HTTP_*'] vars instead.
      * @param string $userAgent Inject the User-Agent header. If null, will use HTTP_USER_AGENT
-     *                              from the $headers array instead.
+     *                               from the $headers array instead.
      */
      public function __construct(
         array $headers = null,
@@ -643,7 +643,7 @@ class Mobile_Detect
      * Set the HTTP Headers. Must be PHP-flavored. This method will reset existing headers.
      * 
      * @param array $httpHeaders The headers to set. If null, then using PHP's _SERVER to extract
-     *                               the headers. The default null is left for backwards compatibilty.
+     *                                the headers. The default null is left for backwards compatibilty.
      */
      public function setHttpHeaders($httpHeaders = null)
     {
@@ -679,8 +679,8 @@ class Mobile_Detect
      * Simply null is returned.
      * 
      * @param string $header The name of the header to retrieve. Can be HTTP compliant such as
-     *                           "User-Agent" or "X-Device-User-Agent" or can be php-esque with the
-     *                           all-caps, HTTP_ prefixed, underscore seperated awesomeness.
+     *                            "User-Agent" or "X-Device-User-Agent" or can be php-esque with the
+     *                            all-caps, HTTP_ prefixed, underscore seperated awesomeness.
      * @return string |null The value of the header.
      */
      public function getHttpHeader($header)
@@ -759,7 +759,7 @@ class Mobile_Detect
      * 
      * @deprecated since version 2.6.9
      * @param string $type The type. Must be a self::DETECTION_TYPE_* constant. The default
-     *                         parameter is null which will default to self::DETECTION_TYPE_MOBILE.
+     *                          parameter is null which will default to self::DETECTION_TYPE_MOBILE.
      */
      public function setDetectionType($type = null)
     {
@@ -1149,11 +1149,11 @@ class Mobile_Detect
      * Will return a float number. (eg. 2_0 will return 2.0, 4.3.1 will return 4.31)
      * 
      * @param string $propertyName The name of the property. See self::getProperties() array
-     *                                 keys for all possible properties.
+     *                                  keys for all possible properties.
      * @param string $type Either self::VERSION_TYPE_STRING to get a string value or
-     *                                 self::VERSION_TYPE_FLOAT indicating a float value. This parameter
-     *                                 is optional and defaults to self::VERSION_TYPE_STRING. Passing an
-     *                                 invalid parameter will default to the this type as well.
+     *                                  self::VERSION_TYPE_FLOAT indicating a float value. This parameter
+     *                                  is optional and defaults to self::VERSION_TYPE_STRING. Passing an
+     *                                  invalid parameter will default to the this type as well.
      * @return string |float The version of the property we are trying to extract.
      */
      public function version($propertyName, $type = self :: VERSION_TYPE_STRING)

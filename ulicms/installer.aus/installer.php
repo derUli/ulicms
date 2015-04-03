@@ -364,7 +364,7 @@ if(!isset($_REQUEST["step"])){
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")or die(mysqli_error($connection));
         
-        mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "log` (
+         mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "log` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `zeit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `request_uri` varchar(255) DEFAULT NULL,

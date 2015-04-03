@@ -12,11 +12,11 @@ function get_type(){
          $result = db_fetch_object($query);
          }
     
-    if(empty($result))
+     if(empty($result))
          $result = "page";
     
      return $result;
-    }
+     }
 
 function get_custom_data($page = null){
      if(!$page)
