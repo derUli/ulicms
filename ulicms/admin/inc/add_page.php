@@ -64,7 +64,7 @@
 <br/><br/>
 
 <strong><?php echo TRANSLATION_MENU;
-         ?></strong><br/>
+         ?></strong> <span style="cursor:help;" onclick="$('div#menu_help').slideToggle()">[?]</span><br/>
 <select name="menu" size=1>
 <?php
          foreach(getAllMenus() as $menu){
@@ -75,7 +75,11 @@
             
              }
          ?>
-</select><br/> <br/>
+</select>
+<div id="menu_help" class="help" style="display:none">
+<?php echo nl2br(TRANSLATION_HELP_MENU);?>
+</div>   
+<br/> <br/>
 
 <strong><?php echo TRANSLATION_POSITION;
          ?></strong> <span style="cursor:help;" onclick="$('div#position_help').slideToggle()">[?]</span><br/>
@@ -83,7 +87,7 @@
 <div id="position_help" class="help" style="display:none">
 <?php echo nl2br(TRANSLATION_HELP_POSITION);?>
 </div>              
-<br/><br/>
+<br/>
 
 <strong><?php echo TRANSLATION_PARENT;
          ?></strong><br/>
