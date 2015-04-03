@@ -14,7 +14,7 @@ Filter für Videos:
 [X] geänderte Pakete aus Paketquelle von 8.0.0 nach 9.0.0 übernehmen (gallery, lightbox_gallery, facebook_like, google_plusone, facebook_sdk)
 [X] Dokumentation zum Upgrade auf UliCMS 9.0.0 in Englisch verfassen.
 [X] Promotext in Englisch verfassen.
-[X] Datenbankmodell in der Doku aktualisieren
+[ ] Datenbankmodell in der Doku vor der Veröffentlichung der neuen Version aktualisieren
 [X] Button zum löschen von Protokoll (log) hinzufügen
 [X] Deaktivieren von Logging soll möglich sein
 [ ] Module sollen aktiviert und deaktiviert werden können

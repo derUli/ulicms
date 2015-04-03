@@ -18,5 +18,5 @@
 + Textfeld für additional_menus zu Designeinstellungen hinzugefügt
 + HTML Editor nun je User festlegbar
   - Auswahlmöglichkeiten sind 
-    X CKEditor (WYSIWYG, für Anfänger)
-    X CodeMirror (HTML Code mit farblicher Hervorhebung, für HTML-Experten)
+    (X) CKEditor (WYSIWYG, für Anfänger)
+    (X) CodeMirror (HTML Code mit farblicher Hervorhebung, für HTML-Experten)
