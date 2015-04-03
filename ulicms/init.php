@@ -250,7 +250,7 @@ $memory_limit = getconfig("memory_limit");
 if($memory_limit !== false)
  @ini_set('memory_limit', $memory_limit);
 
-if(in_array(tbname("log"), $existing_tables)){
+if(in_array(tbname("log"), $existing_tables) and !is_admin_dir()){
  $log_ip = getconfig("log_ip");
  log_request($log_ip);
 }
