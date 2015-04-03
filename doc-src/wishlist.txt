@@ -15,3 +15,4 @@
 [ ] Übersetzungen in Datenbank statt in Sprachdateien
 [ ] Backend besser erweiterbar machen
 [ ] Cronjobs monatlich, stündlich, täglich, bei jedem Request
+[ ] Erklärung zu "Position" hinzufügen
