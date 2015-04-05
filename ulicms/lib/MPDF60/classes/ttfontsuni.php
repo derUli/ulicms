@@ -1731,7 +1731,6 @@ $GSLuCoverage = ' . var_export($this -> GSLuCoverage , true) . ';
                      }
                  }
              // print_r($Lookup); exit;
-            
             // =====================================================================================
             // Process (2) Whole LookupList
             // Get Coverage tables and prepare preg_replace
@@ -2352,7 +2351,7 @@ $pstf = ' . var_export($pstf , true) . ';
             // =====================================================================================
             // print_r($rtlpua); exit;
             // print_r($GSUBScriptLang); exit;
-            }
+        }
          // print_r($Lookup); exit;
         return array($GSUBScriptLang, $gsub, $GSLookup, $rtlPUAstr); // , $rtlPUAarr Not needed
         
@@ -3432,7 +3431,6 @@ $pstf = ' . var_export($pstf , true) . ';
             // print_r($GPOSScriptLang); exit;
             // print_r($gpos); exit;
             // print_r($Lookup); exit;
-            
             $s = '<?php
 $LuCoverage = ' . var_export($this -> LuCoverage , true) . ';
 ?>';

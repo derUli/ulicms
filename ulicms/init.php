@@ -276,10 +276,10 @@ if(!$timezone){
 
 $locale = getconfig("locale");
 if($locale){
-      $locale = splitAndTrim($locale);
-      array_unshift($locale, LC_ALL);
-      @call_user_func_array("setlocale", $locale);
-   }
+ $locale = splitAndTrim($locale);
+ array_unshift($locale, LC_ALL);
+ @call_user_func_array("setlocale", $locale);
+ }
 
 if(!getconfig("session_timeout")){
  setconfig("session_timeout", 60);
@@ -300,7 +300,7 @@ else{
 
  }
  }
- 
+
 
 $enforce_https = getconfig("enforce_https");
 

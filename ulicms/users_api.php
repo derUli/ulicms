@@ -13,15 +13,15 @@ function getUsers(){
      }
 
 function getUsersOnline(){
-  $users_online = db_query("SELECT * FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
-  $retval = array();
-  while($row = db_fetch_object($users_online)){
-     $retval[] = $row -> username;
-  }
-  return $retval;
-  
-  }
-  
+     $users_online = db_query("SELECT * FROM " . tbname("users") . " WHERE last_action > " . (time() - 300) . " ORDER BY username");
+     $retval = array();
+     while($row = db_fetch_object($users_online)){
+         $retval[] = $row -> username;
+         }
+     return $retval;
+    
+     }
+
 
 function changePassword($password, $id){
      include_once ULICMS_ROOT . "lib/encryption.php";

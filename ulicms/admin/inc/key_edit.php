@@ -9,7 +9,8 @@ if(defined("_SECURITY")){
              ?>
 
 <form action="index.php?action=settings" method="post">
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+             ?>
 <input type="hidden" name="id" value="<?php echo $row -> id;
              ?>">
 <input type="hidden" name="edit_key" value="edit_key">
