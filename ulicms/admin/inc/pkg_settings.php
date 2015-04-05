@@ -37,7 +37,8 @@ if(!$acl -> hasPermission("pkg_settings")){
 <h1>Paketquelle</h1>
 <form id="pkg_settings" action="index.php?action=pkg_settings" method="post">
 
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+     ?>
     <fieldset>
 <input type="radio" id="pkgsrc1" name="radioButtonSRC"<?php if($pkg_src === $default_pkg_src) echo " checked";
      ?> onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $default_pkg_src?>');"> <label for="pkgsrc1"><?php echo TRANSLATION_OFFICIAL_PACKAGE_SOURCE;

@@ -506,9 +506,9 @@ class PEAR_PackageFile_Generator_v1
      * features like bundles and multiple releases
      * 
      * @param string $ the classname to instantiate and return.  This must be
-     *                                      PEAR_PackageFile_v2 or a descendant
+     *                                        PEAR_PackageFile_v2 or a descendant
      * @param boolean $ if true, only valid, deterministic package.xml 1.0 as defined by the
-     *                                       strictest parameters will be converted
+     *                                         strictest parameters will be converted
      * @return PEAR_PackageFile_v2 |PEAR_Error
      */
      function & toV2($class = 'PEAR_PackageFile_v2', $strict = false)
@@ -857,29 +857,29 @@ class PEAR_PackageFile_Generator_v1
      * 
      * <pre>
      * - if any install-as/platform exist, create a generic release and fill it with
-     *                          o <install as=..> tags for <file name=... install-as=...>
-     *                          o <install as=..> tags for <file name=... platform=!... install-as=..>
-     *                          o <ignore> tags for <file name=... platform=...>
-     *                          o <ignore> tags for <file name=... platform=... install-as=..>
+     *                            o <install as=..> tags for <file name=... install-as=...>
+     *                            o <install as=..> tags for <file name=... platform=!... install-as=..>
+     *                            o <ignore> tags for <file name=... platform=...>
+     *                            o <ignore> tags for <file name=... platform=... install-as=..>
      * - create a release for each platform encountered and fill with
-     *                          o <install as..> tags for <file name=... install-as=...>
-     *                          o <install as..> tags for <file name=... platform=this platform install-as=..>
-     *                          o <install as..> tags for <file name=... platform=!other platform install-as=..>
-     *                          o <ignore> tags for <file name=... platform=!this platform>
-     *                          o <ignore> tags for <file name=... platform=other platform>
-     *                          o <ignore> tags for <file name=... platform=other platform install-as=..>
-     *                          o <ignore> tags for <file name=... platform=!this platform install-as=..>
+     *                            o <install as..> tags for <file name=... install-as=...>
+     *                            o <install as..> tags for <file name=... platform=this platform install-as=..>
+     *                            o <install as..> tags for <file name=... platform=!other platform install-as=..>
+     *                            o <ignore> tags for <file name=... platform=!this platform>
+     *                            o <ignore> tags for <file name=... platform=other platform>
+     *                            o <ignore> tags for <file name=... platform=other platform install-as=..>
+     *                            o <ignore> tags for <file name=... platform=!this platform install-as=..>
      * </pre>
      * 
      * It does this by accessing the $package parameter, which contains an array with
      * indices:
      * 
-     *                         - platform: mapping of file => OS the file should be installed on
-     *                         - install-as: mapping of file => installed name
-     *                         - osmap: mapping of OS => list of files that should be installed
-     *                           on that OS
-     *                         - notosmap: mapping of OS => list of files that should not be
-     *                           installed on that OS
+     *                           - platform: mapping of file => OS the file should be installed on
+     *                           - install-as: mapping of file => installed name
+     *                           - osmap: mapping of OS => list of files that should be installed
+     *                             on that OS
+     *                           - notosmap: mapping of OS => list of files that should not be
+     *                             installed on that OS
      * 
      * @param array $ 
      * @param array $ 

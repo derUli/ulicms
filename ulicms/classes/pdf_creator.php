@@ -31,8 +31,8 @@ class PDFCreator{
                  $last_modified = filemtime($this -> cached_file);
                  if(time() - $last_modified < CACHE_PERIOD){
                      $this -> httpHeader();
-         readfile($this -> cached_file);
-         exit();
+                     readfile($this -> cached_file);
+                     exit();
                      }else{
                      @unlink($this -> cached_file);
                      }

@@ -3,68 +3,73 @@
 
 
 $family = 'khmeros';
-//////////////////////////////////
-$style = '';	// '','B','I','BI'; // At present only works for Regular style
-//////////////////////////////////
-//////////////////////////////////
-
+// ////////////////////////////////
+$style = ''; // '','B','I','BI'; // At present only works for Regular style
+// ////////////////////////////////
+// ////////////////////////////////
 $script = '';
 $lang = '';
-if (isset($_REQUEST['script'])) { $script = $_REQUEST['script']; }
-if (isset($_REQUEST['lang'])) { $lang = $_REQUEST['lang']; }
+if (isset($_REQUEST['script'])){
+     $script = $_REQUEST['script'];
+    }
+if (isset($_REQUEST['lang'])){
+     $lang = $_REQUEST['lang'];
+    }
 
-if ($script && strlen($script )<4) { $script = str_pad($script , 4, ' '); }
-if ($lang && strlen($lang)<4) { $lang = str_pad($lang, 4, ' '); }
+if ($script && strlen($script) < 4){
+     $script = str_pad($script , 4, ' ');
+    }
+if ($lang && strlen($lang) < 4){
+     $lang = str_pad($lang, 4, ' ');
+    }
 
-//////////////////////////////////
-//////////////////////////////////
-//////////////////////////////////
-
+// ////////////////////////////////
+// ////////////////////////////////
+// ////////////////////////////////
 set_time_limit(1200);
-ini_set("memory_limit","512M");
+ini_set("memory_limit", "512M");
 
-//==============================================================
+// ==============================================================
 $overrideTTFFontRestriction = true;
-//==============================================================
+// ==============================================================
 include("../mpdf.php");
 
-$mpdf=new mPDF(''); 
+$mpdf = new mPDF('');
 
-$mpdf->simpleTables = true;
+$mpdf -> simpleTables = true;
 
-//==============================================================
+// ==============================================================
 // This generates a .mtx.php file if not already generated
-$mpdf->SetFont($family,$style);
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
+$mpdf -> SetFont($family, $style);
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
 $ff = array();
 $ffs = '';
-if ($lang && $script) { 
-	$GSUBFeatures = $mpdf->CurrentFont['GSUBFeatures'][$script][$lang];
-	if (is_array($GSUBFeatures)) {
-		foreach($GSUBFeatures AS $tag=>$v) {
-			$ff[] = '"'.$tag.'" 0';
-		}
-	}
-	$GPOSFeatures = $mpdf->CurrentFont['GPOSFeatures'][$script][$lang];
-	if (is_array($GPOSFeatures )) {
-		foreach($GPOSFeatures AS $tag=>$v) {
-			$ff[] = '"'.$tag.'" 0';
-		}
-	}
-	$ffs = implode(', ',$ff);
-}
-//==============================================================
-
+if ($lang && $script){
+     $GSUBFeatures = $mpdf -> CurrentFont['GSUBFeatures'][$script][$lang];
+     if (is_array($GSUBFeatures)){
+         foreach($GSUBFeatures AS $tag => $v){
+             $ff[] = '"' . $tag . '" 0';
+             }
+         }
+     $GPOSFeatures = $mpdf -> CurrentFont['GPOSFeatures'][$script][$lang];
+     if (is_array($GPOSFeatures)){
+         foreach($GPOSFeatures AS $tag => $v){
+             $ff[] = '"' . $tag . '" 0';
+             }
+         }
+     $ffs = implode(', ', $ff);
+     }
+// ==============================================================
 $html = '
 <style>
 body { 
 	font-family: DejaVuSansCondensed;
 	font-weight: normal; 
 	font-size: 11pt;
-	font-feature-settings: '.$ffs.';
+	font-feature-settings: ' . $ffs . ';
 }
 h5 {
 	font-size: 1rem;
@@ -72,7 +77,7 @@ h5 {
 	margin-bottom: 0.3em;
 }
 .glyphs { 
-	font-family: '.$family.'; 
+	font-family: ' . $family . '; 
 }
 .subtable {
 	font-size: 0.7rem;
@@ -96,34 +101,34 @@ span.unicode {
 	font-size: 0.7rem;
 }
 span.changed {
-	font-family: '.$family.'; 
+	font-family: ' . $family . '; 
 	font-size: 1.5rem;
 	color: #FF4444;
-	font-feature-settings: '.$ffs.';
+	font-feature-settings: ' . $ffs . ';
 }
 span.unchanged {
-	font-family: '.$family.'; 
+	font-family: ' . $family . '; 
 	font-size: 1.5rem;
 	color: #4444FF;
-	font-feature-settings: '.$ffs.';
+	font-feature-settings: ' . $ffs . ';
 }
 span.backtrack {
-	font-family: '.$family.'; 
+	font-family: ' . $family . '; 
 	font-size: 1.5rem;
 	color: #66aa66;
-	font-feature-settings: '.$ffs.';
+	font-feature-settings: ' . $ffs . ';
 }
 span.lookahead {
-	font-family: '.$family.'; 
+	font-family: ' . $family . '; 
 	font-size: 1.5rem;
 	color: #66aa66;
-	font-feature-settings: '.$ffs.';
+	font-feature-settings: ' . $ffs . ';
 }
 span.inputother {
-	font-family: '.$family.'; 
+	font-family: ' . $family . '; 
 	font-size: 1.5rem;
 	color: #006688;
-	font-feature-settings: '.$ffs.';
+	font-feature-settings: ' . $ffs . ';
 }
 div.context {
 	font-size: 0.7rem;
@@ -145,93 +150,99 @@ div.level2 {
 }
 </style>
 <body>
-<h1 style="text-align:center;">'.strtoupper($family.$style).'</h1>
+<h1 style="text-align:center;">' . strtoupper($family . $style) . '</h1>
 ';
 
-if ($lang && $script) { 
-	$html .= '<h2 style="text-align:center;">'.$script.' '.$lang.'</h2>';
-}
-$mpdf->WriteHTML($html);
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
-	$mpdf->debugfonts = false;
+if ($lang && $script){
+     $html .= '<h2 style="text-align:center;">' . $script . ' ' . $lang . '</h2>';
+     }
+$mpdf -> WriteHTML($html);
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
+$mpdf -> debugfonts = false;
 
-	$family = strtolower($family);
-	$style=strtoupper($style);
-	if($style=='IB') $style='BI';
-	$fontkey = $family.$style;
-	$stylekey = $style;
-	if (!$style) { $stylekey = 'R'; }
+ $family = strtolower($family);
+ $style = strtoupper($style);
+ if($style == 'IB') $style = 'BI';
+ $fontkey = $family . $style;
+ $stylekey = $style;
+ if (!$style){
+     $stylekey = 'R';
+    }
 
-//==============================================================
-$mpdf->overrideOTLsettings[$fontkey]['script'] = $script;
-$mpdf->overrideOTLsettings[$fontkey]['lang'] = $lang;
-//==============================================================
+// ==============================================================
+$mpdf -> overrideOTLsettings[$fontkey]['script'] = $script;
+$mpdf -> overrideOTLsettings[$fontkey]['lang'] = $lang;
+// ==============================================================
+ // include(_MPDF_TTFONTDATAPATH.$fontkey.'.mtx.php');
+$ttffile = '';
+ if (defined('_MPDF_SYSTEM_TTFONTS')){
+     $ttffile = _MPDF_SYSTEM_TTFONTS . $mpdf -> fontdata[$family][$stylekey];
+     if (!file_exists($ttffile)){
+         $ttffile = '';
+         }
+     }
+ if (!$ttffile){
+     $ttffile = _MPDF_TTFONTPATH . $mpdf -> fontdata[$family][$stylekey];
+     if (!file_exists($ttffile)){
+         die("mPDF Error - cannot find TTF TrueType font file - " . $ttffile);
+         }
+     }
+ $ttfstat = stat($ttffile);
 
-
-	//include(_MPDF_TTFONTDATAPATH.$fontkey.'.mtx.php');
-
-	$ttffile = '';
-	if (defined('_MPDF_SYSTEM_TTFONTS')) {
-		$ttffile = _MPDF_SYSTEM_TTFONTS.$mpdf->fontdata[$family][$stylekey];
-		if (!file_exists($ttffile)) { $ttffile = ''; }
-	}
-	if (!$ttffile) {
-		$ttffile = _MPDF_TTFONTPATH.$mpdf->fontdata[$family][$stylekey];
-		if (!file_exists($ttffile)) { die("mPDF Error - cannot find TTF TrueType font file - ".$ttffile); }
-	}
-	$ttfstat = stat($ttffile);
-
-	if (isset($mpdf->fontdata[$family]['TTCfontID'][$stylekey])) { $TTCfontID = $mpdf->fontdata[$family]['TTCfontID'][$stylekey]; }
-	else { $TTCfontID = 0; }
-
-
-	$BMPonly = false;
-	if (in_array($family,$mpdf->BMPonly)) { $BMPonly = true; }
-	$useOTL = $mpdf->fontdata[$family]['useOTL'];
-	include(_MPDF_PATH .'classes/otl_dump.php');
-	$ttf = new OTLdump($mpdf);
-
-	$mpdf->OTLscript = $script;
-	$mpdf->OTLlang = $lang;
-
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
-if($lang && $script) {
-
-	$ttf->getMetrics($ttffile, $fontkey, $TTCfontID, $mpdf->debugfonts, $BMPonly, true, $useOTL, 'detail');
-}
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
-else {	// IF lang and script not defined
-
-	$ttf->getMetrics($ttffile, $fontkey, $TTCfontID, $mpdf->debugfonts, $BMPonly, true, $useOTL, 'summary');
-
-}
+ if (isset($mpdf -> fontdata[$family]['TTCfontID'][$stylekey])){
+     $TTCfontID = $mpdf -> fontdata[$family]['TTCfontID'][$stylekey];
+    }
+else{
+     $TTCfontID = 0;
+    }
 
 
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
+ $BMPonly = false;
+ if (in_array($family, $mpdf -> BMPonly)){
+     $BMPonly = true;
+    }
+ $useOTL = $mpdf -> fontdata[$family]['useOTL'];
+ include(_MPDF_PATH . 'classes/otl_dump.php');
+ $ttf = new OTLdump($mpdf);
 
-$mpdf->Output(); 
+ $mpdf -> OTLscript = $script;
+ $mpdf -> OTLlang = $lang;
+
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
+if($lang && $script){
+    
+     $ttf -> getMetrics($ttffile, $fontkey, $TTCfontID, $mpdf -> debugfonts, $BMPonly, true, $useOTL, 'detail');
+     }
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
+else{ // IF lang and script not defined
+    
+     $ttf -> getMetrics($ttffile, $fontkey, $TTCfontID, $mpdf -> debugfonts, $BMPonly, true, $useOTL, 'summary');
+    
+     }
+
+
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
+$mpdf -> Output();
 exit;
 
-//==============================================================
-//==============================================================
-//==============================================================
-//==============================================================
-
-
+// ==============================================================
+// ==============================================================
+// ==============================================================
+// ==============================================================
 ?>

@@ -383,7 +383,7 @@ class PEAR_DependencyDB
      * Upgraded packages first uninstall, then install
      * 
      * @param PEAR_PackageFile_v1 $ |PEAR_PackageFile_v2|array If an array, then it must have
-     *                               indices 'channel' and 'package'
+     *                                 indices 'channel' and 'package'
      */
      function uninstallPackage(& $pkg)
     {

@@ -1102,7 +1102,7 @@ class PEAR_Downloader_Package
 /**
  * 
  * @param array $ Parsed array from {@link PEAR_Registry::parsePackageName()} or a dependency
- *                                            returned from getDepDownloadURL()
+ *                                              returned from getDepDownloadURL()
  */
  function isEqual($param)
 {
@@ -1666,12 +1666,12 @@ class PEAR_Downloader_Package
 /**
  * 
  * @param string $ |array pass in an array of format
- *                                            array(
- *                                             'package' => 'pname',
- *                                            ['channel' => 'channame',]
- *                                            ['version' => 'version',]
- *                                            ['state' => 'state',])
- *                                            or a string of format [channame/]pname[-version|-state]
+ *                                              array(
+ *                                               'package' => 'pname',
+ *                                              ['channel' => 'channame',]
+ *                                              ['version' => 'version',]
+ *                                              ['state' => 'state',])
+ *                                              or a string of format [channame/]pname[-version|-state]
  */
  function _fromString($param)
 {
@@ -1773,7 +1773,7 @@ class PEAR_Downloader_Package
  * 
  * @param array $ output of package.getDownloadURL
  * @param string $ |array|object information for detecting packages to be downloaded, and
- *                                                   for errors
+ *                                                     for errors
  * @param array $ name information of the package
  * @param array $ |null packages to be downloaded
  * @param bool $ is this an optional dependency?

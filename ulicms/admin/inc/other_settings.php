@@ -106,7 +106,8 @@ if(!$acl -> hasPermission("other")){
 
 <form id="other_settings" action="index.php?action=other_settings" method="post">
 
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+     ?>
 <div id="accordion-container"> 
     <h2 class="accordion-header"><?php echo TRANSLATION_CACHE;
      ?></h2>

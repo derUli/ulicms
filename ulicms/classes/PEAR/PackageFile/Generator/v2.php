@@ -841,12 +841,12 @@ http://pear.php.net/dtd/package-2.0.xsd',
      * create a tag from an array
      * this method awaits an array in the following format
      * array(
-     *                              'qname'        => $tagName,
-     *                              'attributes'   => array(),
-     *                              'content'      => $content,      // optional
-     *                              'namespace'    => $namespace     // optional
-     *                              'namespaceUri' => $namespaceUri  // optional
-     *                          )
+     *                                'qname'        => $tagName,
+     *                                'attributes'   => array(),
+     *                                'content'      => $content,      // optional
+     *                                'namespace'    => $namespace     // optional
+     *                                'namespaceUri' => $namespaceUri  // optional
+     *                            )
      * 
      * @access private 
      * @param array $tag tag definition
