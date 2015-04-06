@@ -490,7 +490,7 @@ Ein Benutzer unter der Domain %host% hat von der %ip% aus eine Anfrage nach eine
 Ihr neues Passwort ist:
 %password%.
 
-Bitte ändern Sie das umgehend");
+Bitte ändern Sie das umgehend!");
 define("TRANSLATION_RESET_PASSWORD_SUBJECT", "Passwort zurücksetzen");
 define("TRANSLATION_RESET_PASSWORD", "Passwort zurücksetzen");
 
