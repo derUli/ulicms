@@ -67,7 +67,7 @@ if(getconfig("visitors_can_register") === "on" or getconfig("visitors_can_regist
      if(!empty($_REQUEST["go"])){
          echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
          }
-     ?>">Registrieren</a>
+     ?>"><?php translate("register");?></a>
 <?php
      }
 ?>
