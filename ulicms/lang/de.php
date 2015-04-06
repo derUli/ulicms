@@ -477,4 +477,10 @@ define("TRANSLATION_REGISTER", "Registrieren");
 define("TRANSLATION_FUNCTION_IS_DISABLED", "Diese Funktion ist deaktiviert.");
 define("TRANSLATION_PASSWORD_REPEAT", "Passwort (wiederholen)");
 
+define("TRANSLATION_FILL_ALL_FIELDS", "Bitte füllen Sie alle Felder aus.");
+define("TRANSLATION_USERNAME_ALREADY_EXISTS", "Dieser Benutzername ist leider schon vergeben.");
+define("TRANSLATION_PASSWORD_REPEAT_IS_WRONG", "Die Wiederholung stimmt nicht mit dem Passwort überein.");
+define("TRANSLATION_CONTINUE_HIKER", "Die Wiederholung stimmt nicht mit dem Passwort überein.");
+
+
 add_hook("lang_de");

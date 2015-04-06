@@ -6,14 +6,14 @@ $errors = false;
 if(isset($_POST["register_user"])){
     
      if(empty($_POST["admin_username"]) or empty($_POST["admin_password"]) or empty($_POST["admin_firstname"]) or empty($_POST["admin_lastname"])){
-         echo "<p style='color:red;'>Bitte füllen Sie alle Felder aus.</p>";
+         echo "<p style='color:red;'>".TRANSLATION_FILL_ALL_FIELDS."</p>";
         
          }
     else if(user_exists($_POST["admin_username"])){
-         echo "<p style='color:red;'>Dieser Benutzername ist leider schon vergeben. </p>";
+         echo "<p style='color:red;'>".TRANSLATION_USERNAME_ALREADY_EXISTS."</p>";
          }
     else if($_POST["admin_password"] != $_POST["admin_password_repeat"]){
-         echo "<p style='color:red;'>Die Wiederholung stimmt nicht mit dem Passwort überein.</p>";
+         echo "<p style='color:red;'>".TRANSLATION_PASSWORD_REPEAT_IS_WRONG."</p>";
          }
     
     else{
@@ -32,7 +32,7 @@ if(isset($_POST["register_user"])){
              }else{
              $go = "index.php";
              }
-         echo "<p><a href='$go'>Hier gehts weiter</a></p>";
+         echo "<p><a href='$go'>".TRANSLATION_CONTINUE_HERE."</a></p>";
          }
      }
 

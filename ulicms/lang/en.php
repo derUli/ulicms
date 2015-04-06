@@ -494,4 +494,9 @@ define("TRANSLATION_REGISTER", "Register");
 define("TRANSLATION_FUNCTION_IS_DISABLED", "This function is disabled");
 define("TRANSLATION_PASSWORD_REPEAT", "Password (repeat)");
 
+define("TRANSLATION_FILL_ALL_FIELDS", "Please fill all fields");
+define("TRANSLATION_USERNAME_ALREADY_EXISTS", "This username is already registered.");
+define("TRANSLATION_PASSWORD_REPEAT_IS_WRONG", "Repeated password is invalid.");
+define("TRANSLATION_CONTINUE_HERE", "Click to continue");
+
 add_hook("lang_en");

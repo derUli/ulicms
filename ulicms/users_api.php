@@ -28,6 +28,22 @@ function changePassword($password, $id){
      $newPassword = hash_password($password);
      return db_query("UPDATE " . tbname("users") . " SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
      }
+     
+     
+function resetPassword($username, $length = 8){
+  $new_pass = rand_string( $length );
+  $user = getUserByName($username);
+  if(!$user)
+     return false;
+  $uid = $user["id"];   
+  changePassword($new_pass, $uid);
+  
+  db_query("UPDATE " . tbname("users") . " SET require_password_change = 1 where id = $uid");
+  
+  
+  
+  
+}
 
 function getUserByName($name){
      $query = db_query("SELECT * FROM " . tbname("users") . " WHERE username='" .
