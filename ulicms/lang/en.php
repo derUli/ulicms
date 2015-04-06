@@ -511,4 +511,8 @@ Please change this immediately!");
 define("TRANSLATION_RESET_PASSWORD_SUBJECT", "Reset Password");
 define("TRANSLATION_RESET_PASSWORD", "Reset Password");
 
+
+define("TRANSLATE_NO_SUCH_USER", "There is no such user.");
+define("TRANSLATE_PASSWORD_RESET_SUCCESSFULL", "Your password has been reset. You will receive an E-Mail containing your new password.");
+
 add_hook("lang_en");
