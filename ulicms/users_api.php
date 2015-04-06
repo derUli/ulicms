@@ -35,12 +35,20 @@ function resetPassword($username, $length = 8){
   $user = getUserByName($username);
   if(!$user)
      return false;
-  $uid = $user["id"];   
+  $uid = intval($user["id"]);
   changePassword($new_pass, $uid);
   
   db_query("UPDATE " . tbname("users") . " SET require_password_change = 1 where id = $uid");
+  $message = TRANSLATION_RESET_PASSWORD_MAIL_BODY;
+  $message = str_replace("%host%", get_http_host(), $message);
+  $message = str_replace("%ip%", get_ip(), $message);
+  $message = str_replace("%password%", $new_pass, $message);
+  $message = str_replace("%username%", $user["username"], $message);
   
-  
+  $headers = "From: ".getconfig("email")."\n".
+  "Content-type: text/plain; charset=UTF-8";
+  @ulicms_mail($user["email"], TRANSLATION_RESET_PASSWORD_SUBJECT , $message, $headers);
+  return true;
   
   
 }
