@@ -1,14 +1,4 @@
 <?php
-/**
- * Dies ist die deutsche Sprachdatei von UliCMS.
- * Bitte beachten Sie, dass die Implementation von Sprachdateien in UliCMS
- * noch nicht fertig gestellt ist. 
- * Die Sprachdatei enthält bisher nur einige Übersetzungen, jedoch längst nicht alle.
- * Die restlichen Texte müssen im PHP-Code durch Platzhalter ersetzt werden.
- * Wenn Sie Übersetzungen beisteuern möchten, kontaktieren Sie bitte den Entwickler des Systems.
- * Beiträge zum Projekt werden gerne gesehen.
- */
-
 // Dashboard (Willkommen)
 define("TRANSLATION_MOTD", "Message of the Day");
 define("TRANSLATION_STATISTICS", "Statistics");
