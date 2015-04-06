@@ -480,7 +480,19 @@ define("TRANSLATION_PASSWORD_REPEAT", "Passwort (wiederholen)");
 define("TRANSLATION_FILL_ALL_FIELDS", "Bitte füllen Sie alle Felder aus.");
 define("TRANSLATION_USERNAME_ALREADY_EXISTS", "Dieser Benutzername ist leider schon vergeben.");
 define("TRANSLATION_PASSWORD_REPEAT_IS_WRONG", "Die Wiederholung stimmt nicht mit dem Passwort überein.");
-define("TRANSLATION_CONTINUE_HIKER", "Die Wiederholung stimmt nicht mit dem Passwort überein.");
+define("TRANSLATION_CONTINUE_HERE", "Hier gehts weiter.");
 
+// Reset Password
+define("TRANSLATION_RESET_PASSWORD_MAIL_BODY", "Hallo %username%!
+
+Ein Benutzer unter der Domain %host% hat von der %ip% aus eine Anfrage nach einem neuen Passwort gesendet.
+
+Ihr neues Passwort ist:
+%password%.
+
+Bitte ändern Sie das umgehend");
+define("TRANSLATION_RESET_PASSWORD_SUBJECT", "Reaet Password");
+
+add_hook("lang_en");
 
 add_hook("lang_de");

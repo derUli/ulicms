@@ -499,4 +499,15 @@ define("TRANSLATION_USERNAME_ALREADY_EXISTS", "This username is already register
 define("TRANSLATION_PASSWORD_REPEAT_IS_WRONG", "Repeated password is invalid.");
 define("TRANSLATION_CONTINUE_HERE", "Click to continue");
 
+// Reset Password
+define("TRANSLATION_RESET_PASSWORD_MAIL_BODY", "Hello %username%!
+
+An user from the IP address %ip% requested a password reset on %host%.
+
+Your new password is:
+%password%.
+
+Please change this immediately!");
+define("TRANSLATION_RESET_PASSWORD_SUBJECT", "Reaet Password");
+
 add_hook("lang_en");
