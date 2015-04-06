@@ -13,10 +13,11 @@
 + CSS Klasse li.menu_active_list_item hinzugefügt
 + "log" Datenbanktabelle für Logging von HTTP Anfragen hinzugefügt.
   - IP Adressen werden nicht geloggt, dies kann jedoch durch setzen von log_ip geändert werden, verstößt jedoch gegen das deutsche Datenschutzgesetz
-+ API Befehle get_request_method, get_request_uri, get_http_host, log_request, get_user_id hinzugefügt
++ API Befehle get_request_method, get_request_uri, get_http_host, log_request, rand_string, get_user_id hinzugefügt
 + Datenbankspalte "type" zu cotent Tabelle hinzugefügt.
 + Textfeld für additional_menus zu Designeinstellungen hinzugefügt
 + HTML Editor nun je User festlegbar
   - Auswahlmöglichkeiten sind 
     (X) CKEditor (WYSIWYG, für Anfänger)
     (X) CodeMirror (HTML Code mit farblicher Hervorhebung, für HTML-Experten)
+
