@@ -488,4 +488,9 @@ define("TRANSLATION_HELP_POSITION", "Enter a numeric value here.\nIt will be use
 define("TRANSLATION_HELP_MENU", "Select in which navigation menu your page will be shown.\nUliCMS has 5 Slots for navigation menus by default.\nWhich slots you can use depends on your templates.\n");
 
 
+// Register Form
+define("TRANSLATION_REGISTRATION", "Registration");
+define("TRANSLATION_REGISTER", "Register");
+define("TRANSLATION_FUNCTION_IS_DISABLED", "This function is disabled");
+
 add_hook("lang_en");

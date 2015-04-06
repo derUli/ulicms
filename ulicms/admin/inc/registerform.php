@@ -1,6 +1,6 @@
 <?php
-if(getconfig("visitors_can_register") == "off")
-     die("Diese Funktion ist deaktiviert");
+if(getconfig("visitors_can_register") == "off" or !getconfig("visitors_can_register"))
+     die(TRANSLATION_FUNCTION_IS_DISABLED);
 
 $errors = false;
 if(isset($_POST["register_user"])){
@@ -39,7 +39,7 @@ if(isset($_POST["register_user"])){
 ?>
 <?php add_hook("before_register_form_title");
 ?>
-<h1>Registrierung</h1>
+<h1><?php echo TRANSLATION_REGISTRATION;?></h1>
 <?php add_hook("before_register_form");
 ?>
 <form action="index.php?register=register" method="post">
@@ -78,7 +78,7 @@ if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") ==
 </script>
 <?php }
 ?>
-<input type="submit" value="Registrieren">
+<input type="submit" value="<?php echo TRANSLATION_REGISTER;?>">
 </form>
 
 <?php add_hook("after_register_form");
