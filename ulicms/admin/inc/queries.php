@@ -24,7 +24,11 @@ if($_GET["action"] == "save_settings" && isset($_POST["save_settings"])){
      else
          setconfig("disable_html_validation", "disable");
     
-    
+     if(!isset($_POST["disable_password_reset"]))
+        setconfig("disable_password_reset", "disable_password_reset");
+     else
+        deleteconfig("disable_password_reset");
+        
      add_hook("after_safe_simple_settings");
      header("Location: index.php?action=settings_simple");
      exit();

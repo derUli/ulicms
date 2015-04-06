@@ -71,4 +71,9 @@ if(getconfig("visitors_can_register") === "on" or getconfig("visitors_can_regist
 <?php
      }
 ?>
+<?php 
+if(!getconfig("disable_password_reset")){
+?>
 <a href="?reset_password" style="float:right;">[<?php translate("reset_password");?>]</a>
+<?php }
+?>

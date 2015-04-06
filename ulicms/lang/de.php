@@ -494,8 +494,10 @@ Bitte ändern Sie das umgehend!");
 define("TRANSLATION_RESET_PASSWORD_SUBJECT", "Passwort zurücksetzen");
 define("TRANSLATION_RESET_PASSWORD", "Passwort zurücksetzen");
 
-define("TRANSLATE_NO_SUCH_USER", "Es existiert kein Benutzerkonto mit diesem Namen.");
-define("TRANSLATE_PASSWORD_RESET_SUCCESSFULL", "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie bekommen demnächst eine E-Mail mit einem neuen Passwort zugeschickt.");
+define("TRANSLATION_NO_SUCH_USER", "Es existiert kein Benutzerkonto mit diesem Namen.");
+define("TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie bekommen demnächst eine E-Mail mit einem neuen Passwort zugeschickt.");
+
+define("TRANSLATION_ENABLE_PASSWORD_RESET", "Passwort kann zurückgesetzt werden");
 
 
 add_hook("lang_en");

@@ -1,11 +1,16 @@
+<?php 
+if(getconfig("disable_password_reset"))
+     die(TRANSLATION_FUNCTION_IS_DISABLED);
+?>
+
 <?php
 $messame = null;
 if(isset($_POST["username"]) and !empty($_POST["username"])){
   $username = db_escape($_POST["username"]);
   if(resetPassword($username))
-     $message = TRANSLATE_PASSWORD_RESET_SUCCESSFULL;
+     $message = TRANSLATION_PASSWORD_RESET_SUCCESSFULL;
   else
-     $message = TRANSLATE_NO_SUCH_USER;
+     $message = TRANSLATION_NO_SUCH_USER;
      
 }?>
 <h1><?php echo TRANSLATION_RESET_PASSWORD;?></h1>
