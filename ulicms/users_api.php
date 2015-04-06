@@ -24,7 +24,7 @@ function getUsersOnline(){
 
 
 function changePassword($password, $id){
-     include_once ULICMS_ROOT . "lib/encryption.php";
+     include_once ULICMS_ROOT . "/lib/encryption.php";
      $newPassword = hash_password($password);
      return db_query("UPDATE " . tbname("users") . " SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
      }
