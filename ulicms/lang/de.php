@@ -491,7 +491,8 @@ Ihr neues Passwort ist:
 %password%.
 
 Bitte ändern Sie das umgehend");
-define("TRANSLATION_RESET_PASSWORD_SUBJECT", "Reaet Password");
+define("TRANSLATION_RESET_PASSWORD_SUBJECT", "Passwort zurücksetzen");
+define("TRANSLATION_RESET_PASSWORD", "Passwort zurücksetzen");
 
 add_hook("lang_en");
 

@@ -508,6 +508,7 @@ Your new password is:
 %password%.
 
 Please change this immediately!");
-define("TRANSLATION_RESET_PASSWORD_SUBJECT", "Reaet Password");
+define("TRANSLATION_RESET_PASSWORD_SUBJECT", "Reset Password");
+define("TRANSLATION_RESET_PASSWORD", "Reset Password");
 
 add_hook("lang_en");

@@ -1,9 +1,6 @@
 <?php
 require_once "../init.php";
 
-
-
-
 @session_start();
 $acl = new acl();
 
@@ -66,6 +63,9 @@ require_once "inc/header.php";
 if(!$eingeloggt){
      if(isset($_GET["register"])){
          require_once "inc/registerform.php";
+         }
+     else if(isset($_GET["reset_password"])){
+         require_once "inc/reset_password.php";
          }
     else{
          require_once "inc/loginform.php";
