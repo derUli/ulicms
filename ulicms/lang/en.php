@@ -492,5 +492,6 @@ define("TRANSLATION_HELP_MENU", "Select in which navigation menu your page will 
 define("TRANSLATION_REGISTRATION", "Registration");
 define("TRANSLATION_REGISTER", "Register");
 define("TRANSLATION_FUNCTION_IS_DISABLED", "This function is disabled");
+define("TRANSLATION_PASSWORD_REPEAT", "Password (repeat)");
 
 add_hook("lang_en");

@@ -475,5 +475,6 @@ define("TRANSLATION_HELP_MENU", "Wählen Sie, in welchen Navigationsmenü die Se
 define("TRANSLATION_REGISTRATION", "Registrierung");
 define("TRANSLATION_REGISTER", "Registrieren");
 define("TRANSLATION_FUNCTION_IS_DISABLED", "Diese Funktion ist deaktiviert.");
+define("TRANSLATION_PASSWORD_REPEAT", "Passwort (wiederholen)");
 
 add_hook("lang_de");
