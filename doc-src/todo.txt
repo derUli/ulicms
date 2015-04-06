@@ -18,3 +18,9 @@ Filter für Videos:
 [X] Button zum löschen von Protokoll (log) hinzufügen
 [X] Deaktivieren von Logging soll möglich sein
 [ ] Inline Hilfe hinzufügen
+[ ] Funktion "Registrieren" übersetzen.
+[ ] "Passwort vergessen" Funktion implementieren. 
+    Nach der Eingabe seines Benutzernamens bekommt der User ein neues zufällig generiertes Passwort per E-Mail zugeschickt.
+    Nach der Anmeldung mit diesem Passwort wird er dazu gezwungen, ein neues Passwort festzulegen.
+[ ] Option "Passwortänderung bei nächster Anmeldung erzwingen" zu Userverwaltung hinzufügen
+    
