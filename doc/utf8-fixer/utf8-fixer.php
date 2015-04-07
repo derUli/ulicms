@@ -8,7 +8,7 @@
 <body>
 <form action="utf8-fixer.php" method="post">
 <strong>Broken</strong><br/>
-<textarea name="original" cols=80 rows=25></textarea>
+<textarea name="original" cols=80 rows=25><?php if(isset($_POST["original"])) echo htmlspecialchars($_POST["original"]);?></textarea>
 <br/><br/>
 <strong>Fixed</strong><br/>
 <textarea cols=80 rows=25><?php if(isset($_POST["original"])){
