@@ -556,7 +556,7 @@ function get_menu($name = "top", $parent = null, $recursive = true){
          }
     
      if(is_null($parent)){
-         $html .= "<ul class='menu_" . $name . "'>\n";
+         $html .= "<ul class='menu_" . $name . " navmenu'>\n";
          }else{
         
          $html .= "<ul class='sub_menu'>\n";
