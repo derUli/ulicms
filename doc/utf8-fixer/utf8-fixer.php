@@ -1,4 +1,5 @@
-<?php header("Content-Type: text/html; charset = utf-8");
+<?php 
+header("Content-Type: text/html; charset = utf-8");
 ?>
 <!doctype HTML>
 <html>
@@ -13,7 +14,6 @@
 <strong>Fixed</strong><br/>
 <textarea cols=80 rows=25><?php if(isset($_POST["original"])){
 include "Encoding.php";
-header("Content-Type: text/plain; charset=utf-8");
 $file = $_POST["original"];
 echo htmlspecialchars(ForceUTF8\Encoding::fixUTF8($file));
 }
