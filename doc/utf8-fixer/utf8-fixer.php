@@ -14,7 +14,7 @@
 <textarea cols=80 rows=25><?php if(isset($_POST["original"])){
 include "Encoding.php";
 header("Content-Type: text/plain; charset=utf-8");
-$file = file_get_contents("dump-2015-02-24.sql");
+$file = $_POST["original"];
 echo htmlspecialchars(ForceUTF8\Encoding::fixUTF8($file));
 }
 ?></textarea>
