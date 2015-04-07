@@ -3,8 +3,6 @@ include_once "init.php";
 $pages = getAllSystemnames();
 header("Content-type: text/plain; charset=utf-8");
 foreach($pages as $page){
-   echo "/?seite=$page => /$page.html";
-   echo "\r\n";
    echo "/index.php?seite=$page => /$page.html";
    echo "\r\n";
    echo "/index.php?seite=$page&zoom=90 => /$page.html?zoom=90";
