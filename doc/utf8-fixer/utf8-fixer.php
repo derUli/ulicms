@@ -15,7 +15,8 @@ include "Encoding.php";
 <strong>Fixed</strong><br/>
 <textarea cols=80 rows=25><?php if(isset($_POST["original"])){
 $file = $_POST["original"];
-echo htmlspecialchars(ForceUTF8\Encoding::fixUTF8($file));
+$file = ForceUTF8\Encoding::fixUTF8($file);
+echo htmlspecialchars($file);
 }
 ?></textarea>
 <br/><br/>
