@@ -489,6 +489,8 @@ define("TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Ihr Passwort wurde erfolgreich
 
 define("TRANSLATION_ENABLE_PASSWORD_RESET", "Passwort kann zurückgesetzt werden");
 
+define("TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "Sie müssen Ihr Passwort ändern da das 'require_password_change' Flag gesetzt ist.");
+
 
 add_hook("lang_en");
 
