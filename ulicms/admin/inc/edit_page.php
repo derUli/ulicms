@@ -116,6 +116,8 @@
 </div>   
               
 <br/>
+              
+<br/>
 <strong><?php echo TRANSLATION_PARENT;
              ?></strong><br/>
 <select name="parent" size=1>
