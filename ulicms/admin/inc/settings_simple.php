@@ -100,7 +100,8 @@
 ></td>
 </tr>
 <tr>
-<td><strong><?php translate("enable_password_reset");?></strong>
+<td><strong><?php translate("enable_password_reset");
+        ?></strong>
 <td><input type="checkbox" name="disable_password_reset" value="enable" <?php if(!isset($settings["disable_password_reset"])) echo " checked"?>>
 </td>
 </tr>

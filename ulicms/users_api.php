@@ -28,30 +28,30 @@ function changePassword($password, $id){
      $newPassword = hash_password($password);
      return db_query("UPDATE " . tbname("users") . " SET `password` = '$newPassword',  `old_encryption` = 0 WHERE id = $id");
      }
-     
-     
+
+
 function resetPassword($username, $length = 8){
-  $new_pass = rand_string( $length );
-  $user = getUserByName($username);
-  if(!$user)
-     return false;
-  $uid = intval($user["id"]);
-  changePassword($new_pass, $uid);
-  
-  db_query("UPDATE " . tbname("users") . " SET require_password_change = 1 where id = $uid");
-  $message = TRANSLATION_RESET_PASSWORD_MAIL_BODY;
-  $message = str_replace("%host%", get_http_host(), $message);
-  $message = str_replace("%ip%", get_ip(), $message);
-  $message = str_replace("%password%", $new_pass, $message);
-  $message = str_replace("%username%", $user["username"], $message);
-  
-  $headers = "From: ".getconfig("email")."\n".
-  "Content-type: text/plain; charset=UTF-8";
-  @ulicms_mail($user["email"], TRANSLATION_RESET_PASSWORD_SUBJECT , $message, $headers);
-  return true;
-  
-  
-}
+     $new_pass = rand_string($length);
+     $user = getUserByName($username);
+     if(!$user)
+         return false;
+     $uid = intval($user["id"]);
+     changePassword($new_pass, $uid);
+    
+     db_query("UPDATE " . tbname("users") . " SET require_password_change = 1 where id = $uid");
+     $message = TRANSLATION_RESET_PASSWORD_MAIL_BODY;
+     $message = str_replace("%host%", get_http_host(), $message);
+     $message = str_replace("%ip%", get_ip(), $message);
+     $message = str_replace("%password%", $new_pass, $message);
+     $message = str_replace("%username%", $user["username"], $message);
+    
+     $headers = "From: " . getconfig("email") . "\n" .
+     "Content-type: text/plain; charset=UTF-8";
+     @ulicms_mail($user["email"], TRANSLATION_RESET_PASSWORD_SUBJECT , $message, $headers);
+     return true;
+    
+    
+    }
 
 function getUserByName($name){
      $query = db_query("SELECT * FROM " . tbname("users") . " WHERE username='" .
@@ -118,7 +118,7 @@ function get_user_id(){
          return intval($_SESSION["login_id"]);
      else
          return 0;
-    }
+     }
 
 function user_exists($name){
      $query = db_query("SELECT * FROM " . tbname("users") .

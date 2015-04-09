@@ -68,7 +68,7 @@ db_query("CREATE TABLE IF NOT EXISTS `" . tbname("log") . "` (
 db_query("ALTER TABLE " . tbname("users") . " ADD COLUMN `html_editor` varchar(100) NULL DEFAULT 'ckeditor'");
 db_query("ALTER TABLE " . tbname("content") . " ADD COLUMN `type` varchar(50) DEFAULT 'page' NULL");
 
-db_query("ALTER TABLE ".tbname("users"). " ADD COLUMN `require_password_change` tinyint(1) NULL DEFAULT '0'");
+db_query("ALTER TABLE " . tbname("users") . " ADD COLUMN `require_password_change` tinyint(1) NULL DEFAULT '0'");
 
 setconfig("db_schema_version", "9.0.0");
 

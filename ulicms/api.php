@@ -1,11 +1,11 @@
 <?php
 
 // Random string generieren (für Passwort)
-function rand_string( $length ) {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    return substr(str_shuffle($chars),0,$length);
-
-}
+function rand_string($length){
+     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+     return substr(str_shuffle($chars), 0, $length);
+    
+    }
 
 function getLanguageFilePath($lang = "de", $component = null){
      // Todo Module Language Files
@@ -36,7 +36,7 @@ function get_html_editor(){
          return $obj["html_editor"];
      else
          return "ckeditor";
-    }
+     }
 
 function get_request_uri(){
      return $_SERVER["REQUEST_URI"];
@@ -1319,6 +1319,7 @@ function is__writable($path)
 else
     
      return false; // Or return error - invalid path...
+
 
 
 

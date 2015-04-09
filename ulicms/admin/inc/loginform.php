@@ -67,13 +67,15 @@ if(getconfig("visitors_can_register") === "on" or getconfig("visitors_can_regist
      if(!empty($_REQUEST["go"])){
          echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
          }
-     ?>">[<?php translate("register");?>]</a>
+     ?>">[<?php translate("register");
+    ?>]</a>
 <?php
      }
 ?>
-<?php 
+<?php
 if(!getconfig("disable_password_reset")){
-?>
-<a href="?reset_password" style="float:right;">[<?php translate("reset_password");?>]</a>
+    ?>
+<a href="?reset_password" style="float:right;">[<?php translate("reset_password");
+    ?>]</a>
 <?php }
 ?>

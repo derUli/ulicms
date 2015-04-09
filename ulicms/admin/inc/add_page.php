@@ -78,7 +78,7 @@
 </select>
 <div id="menu_help" class="help" style="display:none">
 <?php echo nl2br(TRANSLATION_HELP_MENU);
-        ?>
+         ?>
 </div>   
 <br/> <br/>
 
@@ -87,7 +87,7 @@
 <input type="text" required="true" name="position" value="0">
 <div id="position_help" class="help" style="display:none">
 <?php echo nl2br(TRANSLATION_HELP_POSITION);
-        ?>
+         ?>
 </div>              
 <br/>    
 <br/>
@@ -262,11 +262,11 @@ function openMenuImageSelectWindow(field) {
 <div>
 <textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
 <?php
-        $editor = get_html_editor();
-        ?>
+         $editor = get_html_editor();
+         ?>
 
 <?php if($editor === "ckeditor"){
-            ?>
+             ?>
 <script type="text/javascript">
 var editor = CKEDITOR.replace( 'page_content',
 					{
@@ -309,7 +309,7 @@ function confirmExit()
 }			
 </script>
 <?php }else if($editor == "codemirror"){
-            ?>
+             ?>
 <script type="text/javascript">
 var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content"),
 
@@ -323,7 +323,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
         tabMode: "shift"});
 </script>
 <?php }
-        ?>
+         ?>
 <noscript>
 <p style="color:red;">Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a></p>
 </noscript>

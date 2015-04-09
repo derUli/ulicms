@@ -65,7 +65,7 @@ if(!$eingeloggt){
      if(isset($_GET["register"])){
          require_once "inc/registerform.php";
          }
-     else if(isset($_GET["reset_password"])){
+    else if(isset($_GET["reset_password"])){
          require_once "inc/reset_password.php";
          }
     else{
@@ -81,10 +81,10 @@ if(!$eingeloggt){
      $pkg = new packageManager();
     
      global $actions;
-    if($_SESSION["require_password_change"]){
-       require_once "inc/change_password.php";
-     }
-     else if($_GET["action"] == "" || $_GET["action"] == "home"){
+     if($_SESSION["require_password_change"]){
+         require_once "inc/change_password.php";
+         }
+    else if($_GET["action"] == "" || $_GET["action"] == "home"){
          require_once "inc/dashboard.php";
          }
     else if($_GET["action"] == "help"){

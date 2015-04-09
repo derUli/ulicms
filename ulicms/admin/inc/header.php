@@ -17,6 +17,18 @@ if(is_mobile()){
 <script type="text/javascript">
 $(document).ready(function() {
   $.ajaxSetup({ cache: false });
+  
+<?php  if(!is_mobile()){ ?>
+  $(window).scroll(function() {
+    if ($(this).scrollTop()) {
+        $('a.scrollup:hidden').stop(true, true).fadeIn();
+    } else {
+        $('a.scrollup').stop(true, true).fadeOut();
+    }
+});
+  <?php
+  }
+  ?>
 });
 </script>
 <script type="text/javascript" src="scripts/jeditable.js"></script>

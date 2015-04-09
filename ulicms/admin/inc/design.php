@@ -306,7 +306,7 @@ if(!$acl -> hasPermission("design")){
 </strong>
 <td>
 <input type="text" name="additional_menus" value="<?php echo real_htmlspecialchars($additional_menus);
-        ?>">
+         ?>">
 </td></tr>
 
 </table>
