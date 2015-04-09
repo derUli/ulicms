@@ -89,6 +89,7 @@
 <?php echo nl2br(TRANSLATION_HELP_POSITION);
         ?>
 </div>              
+<br/>    
 <br/>
 
 <strong><?php echo TRANSLATION_PARENT;
