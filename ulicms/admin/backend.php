@@ -34,6 +34,7 @@ require_once "inc/logincheck.php";
 
 define("_SECURITY", true);
 
+
 if($_GET["action"] == "ulicms-news"){
      require_once "inc/ulicms-news.php";
      exit();
@@ -80,8 +81,10 @@ if(!$eingeloggt){
      $pkg = new packageManager();
     
      global $actions;
-    
-     if($_GET["action"] == "" || $_GET["action"] == "home"){
+    if($_SESSION["require_password_change"]){
+       require_once "inc/change_password.php";
+     }
+     else if($_GET["action"] == "" || $_GET["action"] == "home"){
          require_once "inc/dashboard.php";
          }
     else if($_GET["action"] == "help"){

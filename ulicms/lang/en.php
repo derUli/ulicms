@@ -510,4 +510,8 @@ define("TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "You must change your Passw
 
 define("TRANSLATION_ENABLE_PASSWORD_RESET", "Password can be reset");
 
+define("TRANSLATION_CHANGE_PASSWORD", "Change Password");
+
+define("TRANSLATION_PASSWORDS_NOT_EQUEL", "Passwords are not equal.");
+
 add_hook("lang_en");

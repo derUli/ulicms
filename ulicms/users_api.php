@@ -114,7 +114,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 
 function get_user_id(){
      if(isset($_SESSION["login_id"]))
-         return $_SESSION["login_id"];
+         return intval($_SESSION["login_id"]);
      else
          return 0;
     }
