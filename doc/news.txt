@@ -22,3 +22,4 @@
     (X) CodeMirror (HTML Code mit farblicher Hervorhebung, für HTML-Experten)
 + Registrierungsformular übersetzt
 + Funktion "Passwort zurücksetzen" hinzugefügt
++ Option "Änderung des Passworts bei nächster Anmeldung erzwingen" zu Benutzerverwaltung hinzugefügt
