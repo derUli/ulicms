@@ -366,7 +366,8 @@ if($_POST["add_admin"] == "add_admin" && (is_admin() or $acl -> hasPermission("u
      $password = $_POST["admin_password"];
      $email = $_POST["admin_email"];
      $sendMail = isset($_POST["send_mail"]);
-     adduser($username, $lastname, $firstname, $email, $password, $group, $sendMail);
+     $require_password_change = intval(isset($_POST["require_password_change"]));
+     adduser($username, $lastname, $firstname, $email, $password, $group, $sendMail, null, $require_password_change);
      header("Location: index.php?action=admins");
      exit();
     

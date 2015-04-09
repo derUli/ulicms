@@ -74,12 +74,13 @@ function getUserById($id){
 
 
 
-function adduser($username, $lastname, $firstname, $email, $password, $group, $sendMessage = true, $acl_group = null){
+function adduser($username, $lastname, $firstname, $email, $password, $group, $sendMessage = true, $acl_group = null, $require_password_change = 0){
      $username = db_escape($username);
      $lastname = db_escape($lastname);
      $firstname = db_escape($firstname);
      $email = db_escape($email);
      $password = $password;
+     $require_password_change = intval($require_password_change);
      // legacy group
     $group = intval($group);
      // Default ACL Group
@@ -95,7 +96,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
      add_hook("before_create_user");
     
      db_query("INSERT INTO " . tbname("users") . " 
-(username,lastname, firstname, email, password, `group`, `group_id`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape(hash_password($password)) . "',$group, " . $acl_group . ")")or die(db_error());
+(username,lastname, firstname, email, password, `group`, `group_id`, `require_password_change`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape(hash_password($password)) . "',$group, " . $acl_group . ", $require_password_change)")or die(db_error());
      $message = "Hallo $firstname,\n\n" .
      "Ein Administrator hat auf http://" . $_SERVER["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" .
      "Die Zugangsdaten lauten:\n\n" .
