@@ -133,6 +133,10 @@
 <br/>
 <br/>
 
+<input type="checkbox" value="1" <?php if($row->require_password_change) echo "checked";?> name="require_password_change" id="require_password_change" > <label for="require_password_change"><?php translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN");?> 
+</label>
+<br/><br/>
+
 <strong><?php echo TRANSLATION_ABOUT_ME;
                      ?></strong><br/>
 <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>

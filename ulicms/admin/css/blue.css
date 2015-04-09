@@ -251,3 +251,7 @@ border:solid rgb(200,200,200);
 padding:20px;
 margin-top:20px;
 }
+
+label{
+font-weight:bold;
+}

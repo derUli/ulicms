@@ -563,12 +563,13 @@ if(($_POST["edit_admin"] == "edit_admin" && $acl -> hasPermission("users"))
      $skype_id = db_escape($_POST["skype_id"]);
      $about_me = db_escape($_POST["about_me"]);
      $html_editor = db_escape($_POST["html_editor"]);
+     $require_password_change = intval(isset($_POST["require_password_change"]));
     
      add_hook("before_edit_user");
      db_query("UPDATE " . tbname("users") . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
-about_me = '$about_me', avatar_file = '$db_avatar_filename', html_editor='$html_editor' WHERE id=$id");
+about_me = '$about_me', avatar_file = '$db_avatar_filename', html_editor='$html_editor', require_password_change='$require_password_change' WHERE id=$id");
     
      if(!empty($password))
          changePassword($password, $id);

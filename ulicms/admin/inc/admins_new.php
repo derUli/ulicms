@@ -25,8 +25,8 @@
 <strong><?php echo TRANSLATION_PASSWORD;
              ?></strong><br/>
 <input type="text" required="true"  name="admin_password" value=""><br/><br/>
-
-<input type="checkbox" value="1" name="require_password_change" id="require_password_change" ><label for="require_password_change"><?php translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN");?>
+  
+<input type="checkbox" value="1" name="require_password_change" id="require_password_change" > <label for="require_password_change"><?php translate("REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN");?> 
 </label>
 <br/><br/>
 
