@@ -6,5 +6,5 @@ setconfig("locale_en", "en_US.UTF-8; en_GB.UTF-8; en_US; en_GB; english-uk; eng;
 
 setconfig("db_schema_version", "8.0.1");
 
-// @unlink("update.php");
+//  @unlink ("update.php");
 ulicms_redirect("admin/");

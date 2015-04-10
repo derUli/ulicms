@@ -21,10 +21,10 @@ add_hook("after_session_start");
 $syslang = getSystemLanguage();
 include_once getLanguageFilePath($syslang);
 if(logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and $_GET["action"] != "module_settings" and !isset($_REQUEST["ajax_cmd"])){
-    if(!check_csrf_token()){
-       die("This is probably a CSRF attack!");
-    }
-}
+     if(!check_csrf_token()){
+         die("This is probably a CSRF attack!");
+         }
+     }
 
 setLocaleByLanguage();
 
@@ -38,9 +38,9 @@ require_once "inc/logincheck.php";
 define("_SECURITY", true);
 
 if($_GET["action"] == "ulicms-news"){
-         require_once "inc/ulicms-news.php";
-         exit();
-         }    
+     require_once "inc/ulicms-news.php";
+     exit();
+     }
 
 if(isset($_SESSION["ulicms_login"]))
     {

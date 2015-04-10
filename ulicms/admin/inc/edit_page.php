@@ -16,7 +16,8 @@
 </form>
 
 <form id="pageform" action="index.php?action=pages" method="post">
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+             ?>
 <input type="hidden" name="edit_page" value="edit_page">
 
 
@@ -31,7 +32,7 @@
              ?></strong><br/>
 <input type="text" required="true" name="page_title" value="<?php
              echo htmlspecialchars($row -> title);
-            ?>">
+             ?>">
 <br/><br/>
 
 <strong><?php echo TRANSLATION_ALTERNATE_TITLE;

@@ -39,7 +39,8 @@
 <h1><?php echo TRANSLATION_HOMEPAGE_TITLE;
          ?></h1>
 <form action="index.php?action=homepage_title" id="homepage_title_settings" method="post">
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+         ?>
 <table border=0>
 <tr>
 <td style="min-width:100px;"><strong><?php echo TRANSLATION_LANGUAGE;

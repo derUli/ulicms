@@ -20,7 +20,8 @@ if($all_permissions){
     
      ?>
 <form action="?action=groups" method="post">
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+     ?>
 <input type="hidden" name="id" value="<?php echo $id;
      ?>">
 <p><strong><?php echo TRANSLATION_NAME;

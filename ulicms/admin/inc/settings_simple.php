@@ -19,7 +19,8 @@
          ?></h2>
 <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
 <form id="settings_simple" action="index.php?action=save_settings" method="post">
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+         ?>
 <table>
 <tr>
 <td><strong><?php echo TRANSLATION_HOMEPAGE_TITLE;

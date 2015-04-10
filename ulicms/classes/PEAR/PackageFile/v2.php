@@ -1406,7 +1406,7 @@ class PEAR_PackageFile_v2
      * @param string $ attribute name
      * @param string $ attribute value
      * @param int $ risky but fast - use this to choose a file based on its position in the list
-     *                                       of files.  Index is zero-based like PHP arrays.
+     *                                         of files.  Index is zero-based like PHP arrays.
      * @return bool success of operation
      */
      function setFileAttribute($filename, $attr, $value, $index = false)
@@ -2058,8 +2058,8 @@ class PEAR_PackageFile_v2
      * @param array $ format:
      * <pre>
      * array(
-     *                              tagname => array(list of tag names that follow this one),
-     *                              childtagname => array(list of child tag names that follow this one),
+     *                                tagname => array(list of tag names that follow this one),
+     *                                childtagname => array(list of child tag names that follow this one),
      * )
      * </pre>
      * 

@@ -293,7 +293,8 @@ if(defined("_SECURITY")){
          ?>
      <?php }
      ?>
-    <li><a href="?action=destroy" onclick="return confirm('<?php translate("logout");?>?')"><?php echo TRANSLATION_LOGOUT;
+    <li><a href="?action=destroy" onclick="return confirm('<?php translate("logout");
+     ?>?')"><?php echo TRANSLATION_LOGOUT;
      ?></a></li>
 </ul>
 <script type="text/javascript">

@@ -175,7 +175,7 @@ $mpdf -> debugfonts = false;
 // ==============================================================
 $mpdf -> overrideOTLsettings[$fontkey]['script'] = $script;
 $mpdf -> overrideOTLsettings[$fontkey]['lang'] = $lang;
-// ============================================================== 
+// ==============================================================
 // include(_MPDF_TTFONTDATAPATH.$fontkey.'.mtx.php');
 $ttffile = '';
  if (defined('_MPDF_SYSTEM_TTFONTS')){

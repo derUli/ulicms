@@ -71,7 +71,8 @@
                     
                      ?>
 <form id="templateForm" action="index.php?action=templates" method="post">
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+                     ?>
 <style type="text/css">
 .CodeMirror {
   border: 1px solid #eee;

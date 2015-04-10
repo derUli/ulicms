@@ -1,5 +1,6 @@
 <?php
-if(!is_admin()){
+$acl = new ACL();
+if(!$acl -> hasPermission("design")){
      echo "<p class='ulicms_error'>Zugriff verweigert</p>";
      }else{
      $theme = getconfig("theme");
@@ -101,7 +102,8 @@ if(!is_admin()){
 <h1><?php echo TRANSLATION_DESIGN;
      ?></h1>
 <form id="designForm" action="index.php?action=design" method="post">
-<?php csrf_token_html();?>
+<?php csrf_token_html();
+     ?>
 <table style="width:100%;">
 <tr>
 <td><strong><?php echo TRANSLATION_DESIGN_OPTIONS_ENABLED;
