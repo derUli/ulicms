@@ -497,6 +497,7 @@ define("TRANSLATION_PASSWORDS_NOT_EQUAL", "Passwörter stimmen nicht überein.")
 
 define("TRANSLATION_REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN", "Änderung des Passworts bei nächster Anmeldung erzwingen");
 
+define("TRANSLATION_BACK_TO_LOGIN", "Zurück zur Anmeldung");
 add_hook("lang_en");
 
 add_hook("lang_de");

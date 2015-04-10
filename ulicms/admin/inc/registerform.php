@@ -41,6 +41,7 @@ if(isset($_POST["register_user"])){
 ?>
 <h1><?php echo TRANSLATION_REGISTRATION;
 ?></h1>
+<p><a href="./">[<?php translate("back_to_login");?>]</a></p>
 <?php add_hook("before_register_form");
 ?>
 <form action="index.php?register=register" method="post">

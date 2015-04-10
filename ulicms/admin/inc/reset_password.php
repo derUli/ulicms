@@ -16,6 +16,7 @@ if(isset($_POST["username"]) and !empty($_POST["username"])){
 ?>
 <h1><?php echo TRANSLATION_RESET_PASSWORD;
 ?></h1>
+<p><a href="./">[<?php translate("back_to_login");?>]</a></p>
 <form action="index.php?reset_password" method="post">
 <strong><?php translate("username");
 ?></strong>
