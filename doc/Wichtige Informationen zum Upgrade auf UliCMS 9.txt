@@ -3,7 +3,7 @@ Bitte erstellen Sie eine Sicherung der Dateien und der Datenbank vor dem Upgrade
 
 Nach dem Hochladen des Upgrade Pakets, bekommen Sie beim Auruf des CMS eine Meldung, dass benötigte Datenbanktabellen nicht vorhanden sind.
 Rufen Sie deshalb bitte das Script "update.php" im Browser auf (z.B. www.meinehomepage.de/update.php).
-Das Script erstellt die Datenbanktabellen installed_patches, videos und audio.
+Das Script erstellt die Datenbanktabellen installed_patches, videos, log und audio.
 
 Loggen Sie sich nun in das CMS ein und deinstallieren sie "jQuery", sofern es installiert war. jQuery ist nun bereits im CMS enthalten.
 
