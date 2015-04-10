@@ -130,7 +130,7 @@ define("TRANSLATION_USERS_INFOTEXT", "Hier können Sie die Benutzer Ihrer Homepa
 define("TRANSLATION_CREATE_USER", "Benutzer anlegen");
 define("TRANSLATION_GROUP", "Gruppe");
 define("TRANSLATION_PASSWORD", "Passwort");
-define("TRANSLATION_SEND_LOGINDATA_BY_MAIL", "Die Zugangsdaten per E-Mail senden.");
+define("TRANSLATION_SEND_LOGINDATA_BY_MAIL", "Die Zugangsdaten per E-Mail senden");
 
 // Seitenverwaltung
 define("TRANSLATION_PAGES_INFOTEXT", "Hier können Sie die einzelnen Seiten Ihrer Homepage bearbeiten oder löschen.");
