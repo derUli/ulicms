@@ -967,15 +967,15 @@ function no_cache(){
 }
 
 function replaceAudioTags($txt){
- // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke
-$contains = strpos($txt, "[audio id=") !== FALSE;
+ // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
+ // Reguläre Ausdrücke sehen für mich so aus, als wäre eine Katze über die Tastatur gelaufen.
+  $contains = strpos($txt, "[audio id=") !== FALSE;
 
 
- if($contains){
+  if($contains){
      $query = db_query("select id, ogg_file, mp3_file from " . tbname("audio") . " order by id");
     
      while($row = db_fetch_object($query)){
-        
          $code1 = "[audio id=\"" . $row -> id . "\"]";
          $code2 = "[audio id=$quot;" . $row -> id . "$quot;]";
          $code3 = "[audio id=" . $row -> id . "]";
@@ -1008,7 +1008,8 @@ $contains = strpos($txt, "[audio id=") !== FALSE;
 }
 
 function replaceVideoTags($txt){
- // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke
+ // Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
+ // Reguläre Ausdrücke sehen für mich so aus, als wäre eine Katze über die Tastatur gelaufen.
 $contains = strpos($txt, "[video id=") !== FALSE;
 
 
