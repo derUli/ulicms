@@ -1015,9 +1015,8 @@ $contains = strpos($txt, "[video id=") !== FALSE;
 
  if($contains){
      $query = db_query("select id, ogg_file, webm_file, mp4_file, width, height from " . tbname("videos") . " order by id");
-    
+     
      while($row = db_fetch_object($query)){
-        
          $code1 = "[video id=\"" . $row -> id . "\"]";
          $code2 = "[video id=$quot;" . $row -> id . "$quot;]";
          $code3 = "[video id=" . $row -> id . "]";
@@ -1301,42 +1300,7 @@ function is__writable($path)
     
      }
 else
-    
      return false; // Or return error - invalid path...
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  }
 
 
@@ -1367,7 +1331,6 @@ if(is_null($page))
  $dataset = db_fetch_assoc($query);
  $content = $dataset["content"];
  $content = str_replace("&quot;", "\"", $content);
-
  if($module)
      return preg_match("/\[module=\"" . preg_quote($module) . "\"\]/",
          $content);
@@ -1381,22 +1344,14 @@ if(is_null($page))
  $query = db_query("SELECT `html_file` FROM " . tbname("content") . " WHERE systemname = '" .
      db_escape($page) . "'");
  $dataset = db_fetch_assoc($query);
-
-
  $html_file = $dataset["html_file"];
-
  if(empty($html_file) or is_null($html_file))
      return null;
-
  $html_file = dirname(__file__) . "/content/files/" . $html_file;
-
  if(!endsWith($html_file, ".html") && !endsWith($html_file, ".htm")){
      $html_file = $html_file . ".html";
      }
-
  return $html_file;
-
-
  }
 
 // API-Aufruf zur Deinstallation eines Moduls
@@ -1404,8 +1359,8 @@ if(is_null($page))
 // Löscht anschließend den Ordner modules/$name
 //  @TODO dies in die PackageManager Klasse verschieben
 function uninstall_module($name, $type = "module"){
- // Nur Admins können Module löschen
-if(!is_admin())
+  // Nur Admins können Module löschen
+  if(!is_admin())
      return false;
 
  $name = trim($name);
@@ -1425,7 +1380,6 @@ if($name == "." or $name == ".." or empty($name))
          // Uninstall Script ausführen, sofern vorhanden
         if(is_file($uninstall_script))
              include $uninstall_script;
-        
          sureRemoveDir($moduleDir, true);
          return !is_dir($moduleDir);
          }
@@ -1437,7 +1391,6 @@ if($name == "." or $name == ".." or empty($name))
          sureRemoveDir($theme_path, true);
          return !is_dir($theme_path);
          }
-    
      }
 }
 
@@ -1447,11 +1400,11 @@ function is_logged_in(){
  return isset($_SESSION["logged_in"]);
  }
 
-// Hat der Nutzer die notwendige Berechtigung
+// @Deprecated  
+// Gehörte noch zur alten Hierarchie-basierten Rechteverwaltung
 function has_permissions($mod){
  if(!isset($_SESSION["group"]))
      return false;
-
  return $_SESSION["group"] >= $mod;
  }
 
@@ -1536,7 +1489,7 @@ function convertPHPSizeToBytes($sSize)
 
 function getMaximumFileUploadSize()
 {
- return min(convertPHPSizeToBytes(ini_get('post_max_size')), convertPHPSizeToBytes(ini_get('upload_max_filesize')));
+  return min(convertPHPSizeToBytes(ini_get('post_max_size')), convertPHPSizeToBytes(ini_get('upload_max_filesize')));
 }
 
 require_once "users_api.php";
