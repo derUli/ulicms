@@ -666,7 +666,6 @@ if(!function_exists("cleanString")){
          $string = preg_replace('{ +}', ' ', $string);
          $string = trim($string);
          $string = str_replace(' ', $separator, $string);
-        
          return $string;
          }
     
@@ -678,9 +677,8 @@ function getTemplateDirPath($sub = "default"){
          $templateDir = "../templates/";
      else
          $templateDir = "templates/";
-    
+         
      $templateDir = $templateDir . $sub . "/";
-    
      return $templateDir;
      }
 
@@ -688,7 +686,6 @@ function getModuleAdminSelfPath(){
      $self_path = $_SERVER["REQUEST_URI"];
      $self_path = str_replace('"', '', $self_path);
      $self_path = str_replace("'", '', $self_path);
-    
      return $self_path;
      }
 
@@ -766,11 +763,11 @@ function replace_num_entity($ord)
 // This Returns the current full URL
 // for example: http://www.homepage.de/news.html?single=title
 function getCurrentURL(){
- $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
- $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
- $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
- $port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER["SERVER_PORT"]);
- return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
+   $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
+   $sp = strtolower($_SERVER["SERVER_PROTOCOL"]);
+   $protocol = substr($sp, 0, strpos($sp, "/")) . $s;
+   $port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER["SERVER_PORT"]);
+   return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
  }
 
 
@@ -779,10 +776,7 @@ function buildCacheFilePath($request_uri){
  if(!$language){
      $language = getconfig("default_language");
      }
-
-
  $unique_identifier = $request_uri . $language . strbool(is_mobile());
-
  return "content/cache/" . md5($unique_identifier) . ".tmp";
  }
 
@@ -841,22 +835,14 @@ function buildSEOUrl($page = false, $redirection = null){
 
  if($page === get_frontpage())
      return "./";
-
-
-
+     
  $seo_url = "";
-
+ 
  if(is_file("backend.php"))
      $seo_url .= "../";
-
-
-
-
  $seo_url .= $page;
  $seo_url .= ".html";
-
  return $seo_url;
-
  }
 
 function getModulePath($module){
@@ -924,9 +910,9 @@ function outputCSV($array){
  * getCSV creates a line of CSV and returns it.
  */
 function getCSV($array){
- ob_start(); // buffer the output ...
- outputCSV($array);
- return ob_get_clean(); // ... then return it as a string!
+  ob_start(); // buffer the output ...
+  outputCSV($array);
+  return ob_get_clean(); // ... then return it as a string!
 }
 
 
