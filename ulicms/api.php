@@ -20,13 +20,12 @@ function get_request_method(){
      return $_SERVER["REQUEST_METHOD"];
      }
 
+// Gibt den für den derzeit eingeloggten User eingestellten HTML-Editor aus. 
+// Wenn der Anwender nicht eingeloggt ist return null;
 function get_html_editor(){
      if(!is_logged_in()){
          return null;
          }
-    
-    
-    
      $query = db_query("SELECT html_editor from " . tbname("users") . " where id = " . get_user_id());
      if(!$query)
          return "ckeditor";
@@ -46,10 +45,9 @@ function get_http_host(){
      return $_SERVER["HTTP_HOST"];
      }
 
+// Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false){
-    
      add_hook("before_log_request");
-    
      if($save_ip)
          $ip = get_ip();
      else
@@ -67,12 +65,16 @@ function log_request($save_ip = false){
      add_hook("after_log_request");
      }
 
+//  Prüfen, ob Anti CSRF Token vorhanden ist
+// Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
 function check_csrf_token(){
      if(!isset($_REQUEST["csrf_token"]))
          return false;
      return $_REQUEST["csrf_token"] == $_SESSION["csrf_token"];
      }
 
+// HTML Code für Anti CSRF Token zurückgeben
+// Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
 function get_csrf_token_html(){
      return '<input type="hidden" name="csrf_token" value="' . get_csrf_token() . '">';
      }
@@ -99,7 +101,7 @@ function site_protocol(){
      echo get_site_protocol();
      }
 
-
+// Ordner rekursiv kopieren
 function recurse_copy($src, $dst){
      $dir = opendir($src);
      @mkdir($dst);
@@ -116,12 +118,14 @@ function recurse_copy($src, $dst){
      closedir($dir);
      }
 
+// Aus einer Boolean einen String machen ("true" oder "false")
 function strbool($value)
 {
      return $value ? 'true' : 'false';
      }
 
 
+// @TODO: Post Types implementieren.
 function get_available_post_types(){
      global $post_types;
      $post_types = array("page");
@@ -133,10 +137,15 @@ function get_available_post_types(){
     
      }
 
+// Schriftgrößen zurückgeben
+// @TODO: Filter implementieren
 function getFontSizes(){
      return array("xx-small", "x-small", "smaller", "small", "medium", "large", "larger", "x-large", "xx-large");
      }
 
+// Die IP-Adresse des Clients zurückgeben
+// Falls ein Proxy genutzt wurde, versuchen, die echte IP statt der
+// des Proxy zu ermitteln
 function get_ip()
 {
      $proxy_headers = array(
@@ -216,7 +225,7 @@ function getLanguageNameByCode($code){
     
      return $retval;
      }
-
+     
 function getAvailableBackendLanguages(){
      $langdir = ULICMS_ROOT . "/lang/";
      $list = scandir($langdir);
@@ -247,7 +256,7 @@ function getSystemLanguage(){
      return $lang;
      }
 
-
+// Übersetzung HTTP Status Code => Name
 function getStatusCodeByNumber($nr){
      $http_codes = array(
         100 => 'Continue',
@@ -310,7 +319,7 @@ function getStatusCodeByNumber($nr){
      return $nr . " " . $http_codes[$nr];
      }
 
-
+// Weiterleitung per Location header;
 function ulicms_redirect($url = "http://www.ulicms.de", $status = 302){
      header("HTTP/1.0 " . getStatusCodeByNumber($status));
      header("Location: " . $url);
@@ -335,16 +344,11 @@ function getDomainByLanguage($language){
                         
                          if($line[1] == $language){
                              return $line[0];
-                            
                              }
-                        
-                        
                          }
                      }
                  }
              }
-        
-        
          }
      return null;
      }
@@ -353,7 +357,6 @@ function getDomainByLanguage($language){
 // encodeURIComponent() is needed when working with accents
 // If not used, generate a JS error in CKEDITOR link plugin
 function encodeURIComponent($str){
-    
      $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
      return strtr(rawurlencode($str), $revert);
     
@@ -378,12 +381,9 @@ function setLanguageByDomain(){
                         
                          if($line[0] == $domain and in_array($line[1], getAllLanguages())){
                              $_SESSION["language"] = $line[1];
-                            
                              return true;
                             
                              }
-                        
-                        
                          }
                      }
                  }
@@ -486,6 +486,7 @@ if(!function_exists("get_host")){
     
      }
 
+// Mimetypen einer Datei ermitteln
 function get_mime($file){
      if (function_exists("finfo_file")){
          $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
@@ -504,7 +505,7 @@ function get_mime($file){
          }
      }
 
-
+// Alternative PHP Cache leeren, sofern installiert und aktiv
 function clearAPCCache(){
      if(!function_exists("apc_clear_cache")){
          return false;
@@ -515,6 +516,10 @@ function clearAPCCache(){
      return true;
     
      }
+     
+// Alle Caches leeren
+// Sowohl den Seiten-Cache, den Download/Paketmanager Cache
+// als auch den APC Bytecode Cache
  function clearCache(){
      add_hook("before_clear_cache");
      $cache_type = getconfig("cache_type");
@@ -531,13 +536,11 @@ function clearAPCCache(){
          else
              SureRemoveDir("content/cache", false);
          }
-    
-    
+         
      if(function_exists("apc_clear_cache")){
          clearAPCCache();
          }
-    
-    
+         
      add_hook("after_clear_cache");
      }
 
@@ -556,11 +559,9 @@ function add_hook($name){
              @include $file;
              }
          }
-    
      }
 
 function register_action($name, $file){
-    
      global $actions;
      $modules = getAllModules();
      $actions[$name] = $file;
@@ -611,7 +612,6 @@ function setLocaleByLanguage(){
              @call_user_func_array("setlocale", $locale);
              }
          }
-    
      return $locale;
      }
 
@@ -627,8 +627,7 @@ function getCurrentLanguage($current = true){
              return $fetch -> language;
              }
          }
-    
-    
+         
      if(isset($_SESSION["language"]))
          return basename($_SESSION["language"]);
      else
@@ -640,12 +639,10 @@ function getCurrentLanguage($current = true){
 function checkForUpdates(){
      include_once "../lib/file_get_contents_wrapper.php";
      $info = @file_get_contents_Wrapper(UPDATE_CHECK_URL, true);
-    
      if(!$info or trim($info) === "")
          return false;
      else
          return $info;
-    
      }
 
 function getThemeList(){
