@@ -619,12 +619,21 @@ function get_menu($name = "top", $parent = null, $recursive = true){
                  $title = $row -> alternate_title;
              else
                  $title = $row -> title;
+                 
+                 
+           $containsCurrentItem = parent_item_contains_current_page($row->id);
+           
+           $additional_classes = " ";
+           
+           if($containsCurrentItem)
+              $additional_classes = " contains-current-page";
+              
              if(get_requested_pagename() != $row -> systemname){
                  $html .= "<a href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" .
-                 $row -> target . "'>";
+                 $row -> target . "' class='".$additional_classes."'>";
                  }else{
                 
-                 $html .= "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "'>";
+                 $html .= "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "' class='".$additional_classes."'>";
                  }
              if(!is_null($row -> menu_image) and !empty($row -> menu_image)){
                  $html .= '<img src="' . $row -> menu_image . '" alt="' . htmlentities($row -> title, ENT_QUOTES, "UTF-8") . '"/>';
