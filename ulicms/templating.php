@@ -683,7 +683,7 @@ color:" . getconfig("body-text-color") . ";
 ";
      add_hook("head");
      }
-
+}
 
 
 function head(){
