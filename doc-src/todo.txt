@@ -23,4 +23,4 @@ Filter für Videos:
     Nach der Eingabe seines Benutzernamens bekommt der User ein neues zufällig generiertes Passwort per E-Mail zugeschickt.
     Nach der Anmeldung mit diesem Passwort wird er dazu gezwungen, ein neues Passwort festzulegen.
 [X] Option "Passwortänderung bei nächster Anmeldung erzwingen" zu Userverwaltung hinzufügen
-[ ] CSS-Klasse zu übergeordneten Menüpunkt von current-page hinzufügen
+[X] CSS-Klasse zu übergeordneten Menüpunkt von current-page hinzufügen
