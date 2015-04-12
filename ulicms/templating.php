@@ -3,9 +3,7 @@
 function get_type(){
      if(!$page)
          $page = get_requested_pagename();
-    
      $result = "";
-    
      $sql = "SELECT `type` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
      $query = db_query($sql);
      if(db_num_rows($query) > 0){
@@ -28,7 +26,6 @@ function get_custom_data($page = null){
          $result = db_fetch_object($query);
          return json_decode($result -> custom_data, true);
          }
-    
      return null;
      }
 
@@ -50,7 +47,6 @@ function include_jquery(){
 <?php
          add_hook("after_jquery_include");
          }
-    
      }
 
 function get_access($page = null){
@@ -85,7 +81,6 @@ function get_redirection($page = null){
     
      return null;
      }
-
 
 function get_theme($page = null){
     
@@ -142,7 +137,6 @@ function get_signature($page = null){
     
      return "";
      }
-
 
 function delete_custom_data($var = null, $page = null){
      if(!$page)
@@ -201,7 +195,6 @@ function get_category(){
      return categories :: getCategoryById($current_page["category"]);
      }
 
-
 function category(){
      echo get_category();
      }
@@ -233,7 +226,6 @@ function body_classes(){
      echo $str;
      }
 
-
 // Gibt "Diese Seite läuft mit UliCMS" aus
 function poweredByUliCMS(){
      translation("POWERED_BY_ULICMS");
@@ -248,9 +240,7 @@ function random_banner(){
              if(isset($row -> type)){
                  if(!empty($row -> type)){
                      $type = $row -> type;
-                    
                      }
-                
                  }
              if($type == "gif"){
                  $title = $row -> name;
@@ -261,11 +251,8 @@ function random_banner(){
                  echo $row -> html;
                  }
              }
-        
          }
-    
      }
-
 
 function logo(){
      if(!getconfig("logo_image")){
@@ -281,7 +268,6 @@ function logo(){
          echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars(getconfig("homepage_title"),
              ENT_QUOTES, "UTF-8") . '"/>';
          }
-    
      }
 
 
@@ -306,11 +292,7 @@ function get_homepage_title(){
 function homepage_title(){
      echo get_homepage_title();
      }
-
-
-
 $status = check_status();
-
 function meta_keywords($ipage = null){
      $status = check_status();
      $ipage = db_escape($_GET["seite"]);
@@ -344,10 +326,7 @@ function meta_description($ipage = null){
                  return $row -> meta_description;
                  }
              }
-        
-        
          }
-    
      $meta_description = getconfig("meta_description_" . $_SESSION["language"]);
      if(!$meta_description){
          $meta_description = getconfig("meta_description");
@@ -355,8 +334,6 @@ function meta_description($ipage = null){
     
      return $meta_description;
      }
-
-
 function get_title($ipage = null, $headline = false){
      $status = check_status();
      if($status == "404 Not Found"){
@@ -395,9 +372,6 @@ function get_headline($ipage = null){
 function headline($ipage = null){
      echo stringHelper :: real_htmlspecialchars(get_headline($ipage));
      }
-
-
-
 function import($ipage){
      $ipage = db_escape($ipage);
      if($ipage == ""){
@@ -411,7 +385,6 @@ function import($ipage){
      if(db_num_rows($query) == 0){
          return false;
          }else{
-        
          while($row = db_fetch_object($query)){
              $row -> content = replaceShortcodesWithModules($row -> content);
              $row -> content = apply_filter($row -> content, "content");
@@ -462,17 +435,11 @@ function apply_filter($text, $type){
                  $text = call_user_func($modules[$i] . "_" . $type . "_filter",
                      $text);
                  }
-            
              }
-        
-        
-         }
-    
-     return $text;
-    
-    
-     }
 
+         }
+     return $text;
+     }
 
 function get_motto(){
      // Existiert ein Motto für diese Sprache? z.B. motto_en
@@ -485,15 +452,12 @@ function get_motto(){
      return htmlspecialchars($motto, ENT_QUOTES, "UTF-8");
      }
 
-
 function motto(){
      echo get_motto();
      }
-
-
+     
 function get_frontpage(){
      setLanguageByDomain();
-    
      if(isset($_SESSION["language"])){
          $frontpage = getconfig("frontpage_" . $_SESSION["language"]);
         
@@ -501,14 +465,9 @@ function get_frontpage(){
              return $frontpage;
              }
         
-         }
-    
-    
-    
+         }  
      return getconfig("frontpage");
-    
      }
-
 
 function get_requested_pagename(){
      $value = db_escape($_GET["seite"]);
@@ -550,7 +509,6 @@ function buildtree($src_arr, $parent_id = 0, $tree = array())
     return $tree;
 }
 
-
 function parent_item_contains_current_page($id){
        $retval = false;
        $id = intval($id);
@@ -584,19 +542,16 @@ function get_menu($name = "top", $parent = null, $recursive = true){
          $sql .= " = " . intval($parent) . " ";
         
          }
-    
      $sql .= " ORDER by position";
      $query = db_query($sql);
     
      if(db_num_rows($query) == 0){
          return $html;
          }
-     
-     
+         
      if(is_null($parent)){
          $html .= "<ul class='menu_" . $name . " navmenu'>\n";
          }else{
-        
            $containsCurrentItem = parent_item_contains_current_page($parent);
            
            $classes = "sub_menu";
@@ -605,13 +560,10 @@ function get_menu($name = "top", $parent = null, $recursive = true){
               $classes .= " contains-current-page";
            }
            $html .= "<ul class='".$classes."'>\n";
-        
          }
     
      while($row = db_fetch_object($query)){
          if(checkAccess($row -> access)){
-            
-            
            $containsCurrentItem = parent_item_contains_current_page($row->id);
            
            $additional_classes = " ";
@@ -627,14 +579,10 @@ function get_menu($name = "top", $parent = null, $recursive = true){
                  $title = $row -> alternate_title;
              else
                  $title = $row -> title;
-                 
-                 
-              
              if(get_requested_pagename() != $row -> systemname){
                  $html .= "<a href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" .
                  $row -> target . "' class='".trim($additional_classes)."'>";
                  }else{
-                
                  $html .= "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "' class='".$additional_classes."'>";
                  }
              if(!is_null($row -> menu_image) and !empty($row -> menu_image)){
