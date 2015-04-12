@@ -8,10 +8,8 @@ function get_type(){
      if(db_num_rows($query) > 0){
          $result = db_fetch_object($query);
          }
-    
      if(empty($result))
          $result = "page";
-    
      return $result;
      }
 
@@ -388,7 +386,6 @@ function import($ipage){
              $row -> content = replaceShortcodesWithModules($row -> content);
              $row -> content = apply_filter($row -> content, "content");
              $row -> content = correctHTMLValidationErrors($row -> content);
-            
              echo $row -> content;
              return true;
              }
@@ -566,7 +563,6 @@ function get_menu($name = "top", $parent = null, $recursive = true){
            $containsCurrentItem = parent_item_contains_current_page($row->id);
            
            $additional_classes = " ";
-           
            if($containsCurrentItem)
               $additional_classes = " contains-current-page";
             
@@ -600,7 +596,6 @@ function get_menu($name = "top", $parent = null, $recursive = true){
              }
          }
      $html .= "</ul>";
-    
      return $html;
      }
 
@@ -615,7 +610,6 @@ function get_base_metas(){
      }
 
 function base_metas(){
-    
      $title_format = getconfig("title_format");
      if($title_format){
          $title = $title_format;
@@ -642,10 +636,6 @@ function base_metas(){
          echo '<meta name="robots" content="' . $robots . '"/>';
          echo "\r\n";
          }
-    
-    
-    
-    
      if(!getconfig("hide_meta_generator")){
          $powered_by = ULICMS_ROOT . "/powered-by.php";
          if(file_exists($powered_by))
@@ -661,26 +651,18 @@ function base_metas(){
              echo '<meta property="fb:admins" content="' . $facebook_id . '"/>';
              echo "\r\n";
              }
-        
          }
-    
      echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
      echo "\r\n";
-    
      $style_file = getTemplateDirPath(get_theme()) . "style.css";
      if(is_file($style_file))
          echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
-    
      echo "\r\n";
-    
-    
      $keywords = meta_keywords();
      if(!$keywords){
          $keywords = getconfig("meta_keywords");
          }
      if($keywords != "" && $keywords != false){
-        
-        
          if(!getconfig("hide_meta_keywords")){
              $keywords = apply_filter($keywords, "meta_keywords");
              $keywords = htmlentities($keywords, ENT_QUOTES, "UTF-8");
@@ -702,14 +684,8 @@ function base_metas(){
              echo "\r\n";
              }
          }
-    
-    
-    
-    
      echo '<link rel="stylesheet" type="text/css" href="core.css"/>';
      echo "\r\n";
-    
-    
      $zoom = getconfig("zoom");
      if($zoom === false){
          setconfig("zoom", 100);
@@ -728,9 +704,8 @@ color:" . getconfig("body-text-color") . ";
 }
 </style>
 ";
-        
-        
-         if(getconfig("video_width_100_percent")){
+
+if(getconfig("video_width_100_percent")){
              echo "<style type=\"text/css\">
 video {
   width: 100%    !important;
@@ -739,16 +714,9 @@ video {
            </style>
         ";
              }
-        
-        
          }
-    
-    
-    
      include_jquery();
      add_hook("head");
-    
-    
      }
 
 
@@ -801,7 +769,6 @@ function get_autor(){
          }
      }
 
-
 function get_page($systemname = ""){
      if(empty($systemname)){
          $systemname = $_GET["seite"];
@@ -809,8 +776,6 @@ function get_page($systemname = ""){
     
      if(empty($systemname))
          $systemname = get_frontpage();
-    
-    
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_escape($systemname) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
      if(db_num_rows($query) > 0){
          return db_fetch_assoc($query);
@@ -852,14 +817,12 @@ function checkAccess($access = ""){
          }
     
      for($i = 0; $i < count($access); $i++){
-        
          if(is_numeric($access[$i]) and isset($_SESSION["group_id"]) and $access[$i] == $_SESSION["group_id"]){
              return $access[$i];
              }
          }
      return null;
      }
-
 
 function check_status(){
      if($_GET["seite"] == ""){
