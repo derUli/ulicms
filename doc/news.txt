@@ -23,3 +23,4 @@
 + Registrierungsformular übersetzt
 + Funktion "Passwort zurücksetzen" hinzugefügt
 + Option "Änderung des Passworts bei nächster Anmeldung erzwingen" zu Benutzerverwaltung hinzugefügt
++ Sub-Menü hat nun die CSS Klasse "contains-current-page", sofern sich die aktuell geöffnete Seite darin befindet
