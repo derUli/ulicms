@@ -25,27 +25,7 @@ function get_custom_data($page = null){
          }
      return null;
      }
-
-function include_jquery(){
-    
-     $disabled_on_pages = getconfig("jquery_disabled_on");
-     if($disabled_on_pages){
-         $disabled_on_pages = trim($disabled_on_pages);
-         $disabled_on_pages = explode(";", $disabled_on_pages);
-         }else{
-         $disabled_on_pages = array();
-         }
-    
-    
-     if(!in_array(get_requested_pagename(), $disabled_on_pages)){
-         ?>
-       
-<script type="text/javascript" src="admin/scripts/jquery.js"></script>
-<?php
-         add_hook("after_jquery_include");
-         }
-     }
-
+     
 function get_access($page = null){
      if(!$page)
          $page = get_requested_pagename();
@@ -80,14 +60,11 @@ function get_redirection($page = null){
      }
 
 function get_theme($page = null){
-    
      if(!$page)
          $page = get_requested_pagename();
     
      $theme = getconfig("theme");
-    
      $mobile_theme = getconfig("mobile_theme");
-    
      if($mobile_theme and !empty($mobile_theme) and is_mobile())
          $theme = $mobile_theme;
     
@@ -704,18 +681,6 @@ color:" . getconfig("body-text-color") . ";
 }
 </style>
 ";
-
-if(getconfig("video_width_100_percent")){
-             echo "<style type=\"text/css\">
-video {
-  width: 100%    !important;
-  height: auto   !important;
-  }
-           </style>
-        ";
-             }
-         }
-     include_jquery();
      add_hook("head");
      }
 
