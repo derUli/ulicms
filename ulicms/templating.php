@@ -578,7 +578,7 @@ function get_menu($name = "top", $parent = null, $recursive = true){
                  $html .= "<a href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" .
                  $row -> target . "' class='".trim($additional_classes)."'>";
                  }else{
-                 $html .= "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "' class='".$additional_classes."'>";
+                 $html .= "<a class='menu_active_link".$additional_classes."' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "'>";
                  }
              if(!is_null($row -> menu_image) and !empty($row -> menu_image)){
                  $html .= '<img src="' . $row -> menu_image . '" alt="' . htmlentities($row -> title, ENT_QUOTES, "UTF-8") . '"/>';
