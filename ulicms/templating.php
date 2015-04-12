@@ -526,9 +526,7 @@ function get_menu($name = "top", $parent = null, $recursive = true){
          $html .= "<ul class='menu_" . $name . " navmenu'>\n";
          }else{
            $containsCurrentItem = parent_item_contains_current_page($parent);
-           
            $classes = "sub_menu";
-           
            if($containsCurrentItem){
               $classes .= " contains-current-page";
            }
@@ -684,7 +682,6 @@ color:" . getconfig("body-text-color") . ";
      add_hook("head");
      }
 }
-
 
 function head(){
      base_metas();
