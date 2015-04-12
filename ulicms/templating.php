@@ -533,7 +533,44 @@ function is_404(){
 function is_403(){
      return check_status() == "403 Forbidden";
      }
+     
+function buildtree($src_arr, $parent_id = 0, $tree = array())
+{
+    foreach($src_arr as $idx => $row)
+    {
+        if($row['parent'] == $parent_id)
+        {
+            foreach($row as $k => $v)
+                $tree[$row['id']][$k] = $v;
+            unset($src_arr[$idx]);
+            $tree[$row['id']]['children'] = buildtree($src_arr, $row['id']);
+        }
+    }
+    ksort($tree);
+    return $tree;
+}
 
+
+function parent_item_contains_current_page($id){
+       $retval = false;
+       $id = intval($id);
+       $language = $_SESSION["language"];
+       $sql = "SELECT id, systemname, parent FROM " . tbname("content") . 
+       " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
+       $r = db_query($sql);    
+       
+       $data = array();
+          while($row = db_fetch_assoc($r)) {
+          $data[] = $row;
+       }
+       
+       $tree = buildtree($data, $id);
+       foreach ($tree as $key){
+          if($key["systemname"] == get_requested_pagename())
+             $retval = true;
+       }
+       return $retval;
+}
 
 function get_menu($name = "top", $parent = null, $recursive = true){
      $html = "";
@@ -554,12 +591,20 @@ function get_menu($name = "top", $parent = null, $recursive = true){
      if(db_num_rows($query) == 0){
          return $html;
          }
-    
+     
+     
      if(is_null($parent)){
          $html .= "<ul class='menu_" . $name . " navmenu'>\n";
          }else{
         
-         $html .= "<ul class='sub_menu'>\n";
+           $containsCurrentItem = parent_item_contains_current_page($parent);
+           
+           $classes = "sub_menu";
+           
+           if($containsCurrentItem){
+              $classes .= " contains-current-page";
+           }
+           $html .= "<ul class='".$classes."'>\n";
         
          }
     
