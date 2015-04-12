@@ -365,10 +365,8 @@ function import($ipage){
              $row -> content = correctHTMLValidationErrors($row -> content);
              echo $row -> content;
              return true;
-             }
-        
+             }        
          }
-    
      }
 
 // Todo: nicht W3-konformen HTML-Code korrigieren
@@ -393,7 +391,6 @@ function correctHTMLValidationErrors($txt){
      $txt = str_ireplace("</dir>", "</ul>", $txt);
      $txt = str_ireplace("<acronym>", "<abbr>", $txt);
      $txt = str_ireplace("</acronym>", "</abbr>", $txt);
-    
      return $txt;
      }
 
@@ -409,7 +406,6 @@ function apply_filter($text, $type){
                      $text);
                  }
              }
-
          }
      return $text;
      }
@@ -433,11 +429,10 @@ function get_frontpage(){
      setLanguageByDomain();
      if(isset($_SESSION["language"])){
          $frontpage = getconfig("frontpage_" . $_SESSION["language"]);
-        
+         
          if($frontpage){
              return $frontpage;
              }
-        
          }  
      return getconfig("frontpage");
      }
@@ -561,13 +556,11 @@ function get_menu($name = "top", $parent = null, $recursive = true){
                  $html .= htmlentities($row -> title, ENT_QUOTES, "UTF-8");
                  }
              $html .= "</a>\n";
-            
              if($recursive){
                  $html .= get_menu($name, $row -> id);
                  }
             
              $html .= "</li>";
-            
              }
          }
      $html .= "</ul>";
@@ -600,7 +593,6 @@ function base_metas(){
     
      $dir = dirname($_SERVER["SCRIPT_NAME"]);
      $dir = str_replace("\\", "/", $dir);
-    
      if(endsWith($dir, "/") == false){
          $dir .= "/";
          }
@@ -615,13 +607,10 @@ function base_metas(){
          $powered_by = ULICMS_ROOT . "/powered-by.php";
          if(file_exists($powered_by))
              @include $powered_by;
-        
          echo '<meta name="generator" content="UliCMS ' . cms_version()
          . '"/>';
          echo "\r\n";
-        
          $facebook_id = getconfig("facebook_id");
-        
          if(!empty($facebook_id)){
              echo '<meta property="fb:admins" content="' . $facebook_id . '"/>';
              echo "\r\n";
@@ -802,7 +791,6 @@ function check_status(){
              return "200 OK";
              }
          }
-    
      $test = get_page($_GET["seite"]);
      if(!$test or !is_null($test["deleted_at"])){
          no_cache();
