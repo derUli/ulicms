@@ -611,26 +611,28 @@ function get_menu($name = "top", $parent = null, $recursive = true){
      while($row = db_fetch_object($query)){
          if(checkAccess($row -> access)){
             
-             if(get_requested_pagename() != $row -> systemname)
-                 $html .= "  <li>" ;
-             else
-                 $html .= "  <li class='menu_active_list_item'>" ;
-             if(!empty($row -> alternate_title))
-                 $title = $row -> alternate_title;
-             else
-                 $title = $row -> title;
-                 
-                 
+            
            $containsCurrentItem = parent_item_contains_current_page($row->id);
            
            $additional_classes = " ";
            
            if($containsCurrentItem)
               $additional_classes = " contains-current-page";
+            
+             if(get_requested_pagename() != $row -> systemname)
+                 $html .= "  <li class='".trim($additional_classes)."'>" ;
+             else
+                 $html .= "  <li class='menu_active_list_item".$additional_classes."'>" ;
+             if(!empty($row -> alternate_title))
+                 $title = $row -> alternate_title;
+             else
+                 $title = $row -> title;
+                 
+                 
               
              if(get_requested_pagename() != $row -> systemname){
                  $html .= "<a href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" .
-                 $row -> target . "' class='".$additional_classes."'>";
+                 $row -> target . "' class='".trim($additional_classes)."'>";
                  }else{
                 
                  $html .= "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "' class='".$additional_classes."'>";
