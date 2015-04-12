@@ -1,5 +1,4 @@
 <?php
-
 function get_type(){
      if(!$page)
          $page = get_requested_pagename();
@@ -866,14 +865,12 @@ function check_status(){
      if($_GET["seite"] == ""){
          $_GET["seite"] = get_frontpage();
          }
-    
+         
      $page = $_GET["seite"];
-     $cached_page_path = buildCacheFilePath($page);
-    
+     $cached_page_path = buildCacheFilePath($page); 
      $status = apply_filter("", "status");
      if(!empty($status))
          return $status;
-    
      if(file_exists($cached_page_path) and !is_logged_in()){
          $last_modified = filemtime($cached_page_path);
          if(time() - $last_modified < CACHE_PERIOD){
@@ -894,6 +891,4 @@ function check_status(){
          }
      no_cache();
      return "403 Forbidden";
-    
      }
-
