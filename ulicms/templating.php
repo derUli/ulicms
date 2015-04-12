@@ -40,8 +40,8 @@ function get_access($page = null){
     
      return null;
      }
-
-
+     
+     
 function get_redirection($page = null){
      if(!$page)
          $page = get_requested_pagename();
