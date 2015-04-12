@@ -1048,8 +1048,6 @@ $contains = strpos($txt, "[video id=") !== FALSE;
          $txt = str_replace($code3, $html, $txt);
          }
      }
-
-
  return $txt;
 }
 
@@ -1073,8 +1071,6 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
      $current_page = get_page();
      $string = str_replace('[category]', get_category(), $string);
      }
-
-
  $allModules = getAllModules();
  for($i = 0;$i <= count($allModules);$i++){
      $thisModule = $allModules[$i];
@@ -1101,13 +1097,9 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
     
      $string = str_replace($stringToReplace1, $html_output, $string);
      $string = str_replace($stringToReplace2, $html_output, $string);
-    
      $string = str_replace('[title]', get_title(), $string);
     
      }
-
-
-
  $string = replaceVideoTags($string);
  $string = replaceAudioTags($string);
  return $string;
