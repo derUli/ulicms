@@ -16,4 +16,4 @@
 [ ] Backend besser erweiterbar machen
 [ ] Cronjobs monatlich, stündlich, täglich, bei jedem Request (crontab)
 [X] Erklärung zu "Position" hinzufügen 
-[ ] Objekte bzw. Klassen für Page, Banner, Category, usw.
+[ ] Implementation von ActiveRecord
