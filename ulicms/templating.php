@@ -49,7 +49,6 @@ function include_jquery(){
 function get_access($page = null){
      if(!$page)
          $page = get_requested_pagename();
-    
      $sql = "SELECT `access` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
      $query = db_query($sql);
      if(db_num_rows($query) > 0){
@@ -57,7 +56,6 @@ function get_access($page = null){
          $access = explode(",", $result -> access);
          return $access;
          }
-    
      return null;
      }
 
@@ -65,7 +63,6 @@ function get_access($page = null){
 function get_redirection($page = null){
      if(!$page)
          $page = get_requested_pagename();
-    
      $sql = "SELECT `redirection` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
      $query = db_query($sql);
      if(db_num_rows($query) > 0){
@@ -75,7 +72,6 @@ function get_redirection($page = null){
              }
          return null;
          }
-    
      return null;
      }
 
@@ -83,11 +79,8 @@ function get_theme($page = null){
     
      if(!$page)
          $page = get_requested_pagename();
-    
      $theme = getconfig("theme");
-    
      $mobile_theme = getconfig("mobile_theme");
-    
      if($mobile_theme and !empty($mobile_theme) and is_mobile())
          $theme = $mobile_theme;
     
@@ -101,7 +94,6 @@ function get_theme($page = null){
                  }
              }
          }
-    
      $theme = apply_filter($theme, "theme");
      return $theme;
      }
@@ -167,7 +159,6 @@ function set_custom_data($var, $value, $page = null){
          $data = array();
     
      $data[$var] = $value;
-    
      $json = json_encode($data);
     
      return db_query("UPDATE " . tbname("content") . " SET custom_data = '" . db_escape($json) . "' WHERE systemname='" . db_escape($page) . "'");
@@ -389,9 +380,7 @@ function import($ipage){
              echo $row -> content;
              return true;
              }
-        
          }
-    
      }
 
 // Todo: nicht W3-konformen HTML-Code korrigieren
@@ -432,7 +421,6 @@ function apply_filter($text, $type){
                      $text);
                  }
              }
-
          }
      return $text;
      }
