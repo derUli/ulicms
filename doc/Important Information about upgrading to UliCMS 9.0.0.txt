@@ -1,6 +1,9 @@
 Important Note:
 Please make a backup of your files and database before upgrading!
 
+Attention!
+UliCMS 9.0.0 requires PHP 5.3 or newer. Older versions of PHP won't work.
+
 After uploading the upgrade package, you get the Auruf the CMS a message that required database tables do not exist.
 Therefore, please call the script "update.php" in the browser (eg www.meinehomepage.de/update.php).
 The script creates the database tables installed_patches, videos and audio.
