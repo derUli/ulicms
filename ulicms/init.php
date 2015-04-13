@@ -211,7 +211,6 @@ if(!$select){
  }
 
 $existing_tables = array();
-
 if(!defined("SKIP_TABLE_CHECK")){
 $existing_tables = db_get_tables();
 $required_tables = array(tbname("users"),
@@ -237,18 +236,6 @@ for($i = 0; $i < count($required_tables); $i++){
      }
 }
 }
-
-
-
-// Initialize ActiveRecord
-require_once 'ActiveRecord.php';
- 
-ActiveRecord\Config::initialize(function($cfg)
-{
-  $cfg->set_model_directory(ULICMS_ROOT.DIRECTORY_SEPARATOR."models");
-  $cfg->set_connections(array(
-  'production' => getPDOConnectionString()));
-});
 
 if(!getconfig("hide_meta_generator"))
  @header('X-Powered-By: UliCMS Release ' . cms_version());
@@ -318,10 +305,8 @@ if(isset($_SESSION["session_begin"])){
  }
 else{
  $_SESSION["session_begin"] = time();
-
  }
  }
-
 
 $enforce_https = getconfig("enforce_https");
 
@@ -330,7 +315,6 @@ if($_SERVER["HTTPS"] != "on" and $enforce_https !== false)
  header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
  exit();
  }
-
 
 add_hook("before_init");
 add_hook("init");
