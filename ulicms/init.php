@@ -24,7 +24,6 @@ switch($os)
      }
 
 $classes_dir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "classes";
-
 @set_include_path(get_include_path() . PATH_SEPARATOR . $classes_dir);
 
 if(!defined("ULICMS_TMP"))
