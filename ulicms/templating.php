@@ -444,11 +444,9 @@ function get_frontpage(){
      setLanguageByDomain();
      if(isset($_SESSION["language"])){
          $frontpage = getconfig("frontpage_" . $_SESSION["language"]);
-        
          if($frontpage){
              return $frontpage;
              }
-        
          }  
      return getconfig("frontpage");
      }
