@@ -14,5 +14,6 @@
 [ ] Cache automatisch bei Änderungen leeren (Optional, per Default aktiviert)
 [ ] Übersetzungen in Datenbank statt in Sprachdateien
 [ ] Backend besser erweiterbar machen
-[ ] Cronjobs monatlich, stündlich, täglich, bei jedem Request
-[ ] Erklärung zu "Position" hinzufügen
+[ ] Cronjobs monatlich, stündlich, täglich, bei jedem Request (crontab)
+[X] Erklärung zu "Position" hinzufügen 
+[ ] Objekte bzw. Klassen für Page, Banner, Category, usw.
