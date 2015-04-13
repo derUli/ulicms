@@ -1,4 +1,4 @@
-Release of UliCMS 9.0.0 schedules for first quarter of 2016
+Release of UliCMS 9.0.0 scheduled for first quarter of 2016
 
 The release of UliCMS 9.0.0 is scheduled for the first quarter of 2016. 
 This new version of UliCMS will introduce support for the newest web technologies,
