@@ -6,9 +6,19 @@ function db_query($query){
      log_db_query($query);
      global $db_connection;
      return mysqli_query($db_connection, $query);
-    
-    
      }
+     
+function getPDOConnectionString(){
+   $retval = "mysql://";
+   $cfg = new config();
+   $retval .= $cfg->db_user;
+   if(!empty($cfg->db_password))
+      $retval .= ":" . $cfg->db_password;
+   $retval .= "@" . $cfg->db_server;
+   $retval .= "/" . $cfg->db_database;
+   $retval .= "?charset=utf8";
+   return $retval;   
+   }
 
 function db_get_server_info(){
      global $db_connection;

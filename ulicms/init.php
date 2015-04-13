@@ -236,10 +236,19 @@ for($i = 0; $i < count($required_tables); $i++){
      exit();
      }
 }
-
-
 }
 
+
+
+// Initialize ActiveRecord
+require_once 'ActiveRecord.php';
+ 
+ActiveRecord\Config::initialize(function($cfg)
+{
+  $cfg->set_model_directory(ULICMS_ROOT.DIRECTORY_SEPARATOR."models");
+  $cfg->set_connections(array(
+  'production' => getPDOConnectionString()));
+});
 
 if(!getconfig("hide_meta_generator"))
  @header('X-Powered-By: UliCMS Release ' . cms_version());
