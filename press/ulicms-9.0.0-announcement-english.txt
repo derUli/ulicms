@@ -8,7 +8,6 @@ It's the modern, flexible and extensible open source content management
 solution you’d expect from the developer of UliCMS.
 
 Other improvements will include better security, better configurability and the
-introduction of an one-click patch management utility, which will make it much easier to keep your system
-up-to-date.
+introduction of an one-click patch management utility, which will make it much easier to keep your system up-to-date.
 
 Starting with this release UliCMS will follow a slower release cycle than before, releasing a new version every 1 to 3 years, since you should spend your time to manage your content and not to maintain your CMS.
