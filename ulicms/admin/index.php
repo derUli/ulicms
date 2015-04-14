@@ -1,2 +1,4 @@
-<?php require_once "backend.php";
+<?php
+
+require_once "backend.php";
 ?>

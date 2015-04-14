@@ -51,13 +51,13 @@ if (! isset ( $_REQUEST ["step"] )) {
 				onchange="window.location.replace('?language=' + this.value)">
 				<option value="de"<?php
 	
-if ($_SESSION ["language"] == "de")
+	if ($_SESSION ["language"] == "de")
 		echo "selected";
 	?>">Deutsch</option>
 				<option value="en"
 					<?php
 	
-if ($_SESSION ["language"] == "en")
+	if ($_SESSION ["language"] == "en")
 		echo "selected";
 	?>>English</option>
 			</select>
@@ -66,22 +66,21 @@ if ($_SESSION ["language"] == "en")
 			<input type="hidden" name="step" value="0"> <input type="submit"
 				value="<?php
 	
-echo TRANSLATION_NEXT;
+	echo TRANSLATION_NEXT;
 	?>">
 
 		</p>
 	</form>
 <?php
-
 } else if ($_REQUEST ["step"] == "0") {
 	?>
 <h2><?php
 	
-echo TRANSLATION_WELCOME;
+	echo TRANSLATION_WELCOME;
 	?></h2>
 	<p><?php
 	
-echo TRANSLATION_WELCOME2;
+	echo TRANSLATION_WELCOME2;
 	?></p>
 <?php
 	include "../version.php";
@@ -91,7 +90,7 @@ echo TRANSLATION_WELCOME2;
 		?>
 <p style="color: red;"><?php
 		
-echo TRANSLATION_BETA_VERSION;
+		echo TRANSLATION_BETA_VERSION;
 		?>
 </p>
 <?php
@@ -99,39 +98,39 @@ echo TRANSLATION_BETA_VERSION;
 	?>
 <p><?php
 	
-echo TRANSLATION_FOLLOW_INSTRUCTIONS;
+	echo TRANSLATION_FOLLOW_INSTRUCTIONS;
 	?></p>
 <?php
 	
-echo TRANSLATION_CHMOD;
+	echo TRANSLATION_CHMOD;
 	?>
 <h3><?php
 	
-echo TRANSLATION_PERMISSION;
+	echo TRANSLATION_PERMISSION;
 	?></h3>
 	<p>
 		<img
 			src="media/chmod_<?php
 	
-echo htmlspecialchars ( $_SESSION ["language"] );
+	echo htmlspecialchars ( $_SESSION ["language"] );
 	?>.png"
 			alt="<?php
 	
-echo TRANSLATION_PERMISSIONS2;
+	echo TRANSLATION_PERMISSIONS2;
 	?>"
 			title="<?php
 	
-echo TRANSLATION_PERMISSIONS2;
+	echo TRANSLATION_PERMISSIONS2;
 	?>" border=1 />
 	</p>
      
 <?php
 	
-if (! $required_php_version) {
+	if (! $required_php_version) {
 		?>
 <p style="color: red;"><?php
 		
-echo TRANSLATION_PHP_VERSION_TOO_LOW;
+		echo TRANSLATION_PHP_VERSION_TOO_LOW;
 		?></p>
 <?php
 	}
@@ -143,12 +142,11 @@ echo TRANSLATION_PHP_VERSION_TOO_LOW;
 <hr />
 	<p style="color: red;"><?php
 		
-echo TRANSLATION_GD_MISSING;
+		echo TRANSLATION_GD_MISSING;
 		?></p>
 	<hr />
 <?php
-	
-}
+	}
 	?>
 
 
@@ -158,7 +156,7 @@ echo TRANSLATION_GD_MISSING;
 		?>
 <p style="color: red;"><?php
 		
-echo TRANSLATION_MYSQLI_MISSING;
+		echo TRANSLATION_MYSQLI_MISSING;
 		?></p>
 
 <?php
@@ -169,12 +167,11 @@ echo TRANSLATION_MYSQLI_MISSING;
 
 <p style="color: red;"><?php
 		
-echo TRANSLATION_JSON_MISSING;
+		echo TRANSLATION_JSON_MISSING;
 		?></p>
 
 <?php
-	
-}
+	}
 	
 	if (! isset ( $error )) {
 		?>
@@ -183,92 +180,87 @@ echo TRANSLATION_JSON_MISSING;
 		<input type="hidden" name="step" value="1"> <input type="submit"
 			value="<?php
 		
-echo TRANSLATION_NEXT;
+		echo TRANSLATION_NEXT;
 		?>">
 	</form>
 	<br />
 
 <?php
-	
-}
+	}
 	?>
 <?php
 } else {
 	?>
 <?php
 
-	
-if ($_REQUEST ["step"] == "1") {
+	if ($_REQUEST ["step"] == "1") {
 		?>
 <h2><?php
 		
-echo TRANSLATION_MYSQL_LOGIN;
+		echo TRANSLATION_MYSQL_LOGIN;
 		?></h2>
 	<p><?php
 		
-echo TRANSLATION_MYSQL_LOGIN_HELP;
+		echo TRANSLATION_MYSQL_LOGIN_HELP;
 		?></p>
 	<form action="index.php" method="post">
 		<table border=1>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_SERVERNAME;
+		echo TRANSLATION_SERVERNAME;
 		?></td>
 				<td><input name="servername" type="text" value="localhost"></td>
 			</tr>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_LOGINNAME;
+		echo TRANSLATION_LOGINNAME;
 		?></td>
 				<td><input name="loginname" type="text" value=""></td>
 			</tr>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_PASSWORD;
+		echo TRANSLATION_PASSWORD;
 		?></td>
 				<td><input name="passwort" type="password" value=""></td>
 			</tr>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_DATABASE_NAME;
+		echo TRANSLATION_DATABASE_NAME;
 		?></td>
 				<td><input name="datenbank" type="text" value=""></td>
 			</tr>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_PREFIX;
+		echo TRANSLATION_PREFIX;
 		?></td>
 				<td><input name="prefix" type="text" value="ulicms_"></td>
 			</tr>
 		</table>
 		<p>
-			<input type="submit"
-				value="<?php
+			<input type="submit" value="<?php
 		
-echo TRANSLATION_NEXT;
+		echo TRANSLATION_NEXT;
 		?>">
 		</p>
 		<input type="hidden" name="step" value="2">
 	</form>
 
 <?php
-	
-}
+	}
 	?>
 <?php
 
-	
-if ($_REQUEST ["step"] == "2") {
+	if ($_REQUEST ["step"] == "2") {
 		
 		?>
 <h2><?php
 		
-echo TRANSLATION_MYSQL_LOGIN;
+		echo TRANSLATION_MYSQL_LOGIN;
 		?></h2>
 <?php
 		@$connection = mysqli_connect ( $_POST ["servername"], $_POST ["loginname"], $_POST ["passwort"] );
@@ -302,14 +294,14 @@ echo TRANSLATION_MYSQL_LOGIN;
 				?>
 <p><?php
 				
-echo TRANSLATION_SUCCESSFULL_DB_CONNECT;
+				echo TRANSLATION_SUCCESSFULL_DB_CONNECT;
 				?></p>
 
 	<form action="index.php" method="post">
 		<input type="hidden" name="step" value="3"> <input type="submit"
 			value="<?php
 				
-echo TRANSLATION_NEXT;
+				echo TRANSLATION_NEXT;
 				?>">
 	</form>
 
@@ -326,60 +318,60 @@ echo TRANSLATION_NEXT;
 
 <?php
 	
-if ($_REQUEST ["step"] == "3") {
+	if ($_REQUEST ["step"] == "3") {
 		?>
 <h2><?php
 		
-echo TRANSLATION_HOMEPAGE_SETTINGS;
+		echo TRANSLATION_HOMEPAGE_SETTINGS;
 		?></h2>
 	<form action="index.php" method="post">
 		<table border=1>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_HOMEPAGE_TITLE;
+		echo TRANSLATION_HOMEPAGE_TITLE;
 		?></td>
 				<td><input name="homepage_title" type="text" value="Meine Homepage"></td>
 			</tr>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_SITE_SLOGAN;
+		echo TRANSLATION_SITE_SLOGAN;
 		?></td>
 				<td><input name="motto" type="text" value="Dies und Das"></td>
 			</tr>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_YOUR_FIRSTNAME;
+		echo TRANSLATION_YOUR_FIRSTNAME;
 		?></td>
 				<td><input name="firstname" type="text" value="Max"></td>
 			</tr>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_YOUR_LASTNAME;
+		echo TRANSLATION_YOUR_LASTNAME;
 		?></td>
 				<td><input name="lastname" type="text" value="Mustermann"></td>
 			</tr>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_YOUR_EMAIL_ADRESS;
+		echo TRANSLATION_YOUR_EMAIL_ADRESS;
 		?></td>
 				<td><input name="email" type="text" value="max@muster.de"></td>
 			</tr>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_ADMIN_NAME;
+		echo TRANSLATION_ADMIN_NAME;
 		?></td>
 				<td><input name="admin_user" type="text" value="admin"></td>
 			</tr>
 			<tr>
 				<td><?php
 		
-echo TRANSLATION_ADMIN_PASSWORD;
+		echo TRANSLATION_ADMIN_PASSWORD;
 		?></td>
 				<td><input name="passwort" type="password" value=""></td>
 			</tr>
@@ -388,7 +380,7 @@ echo TRANSLATION_ADMIN_PASSWORD;
 			<input type="submit"
 				value="<?php
 		
-echo TRANSLATION_DO_INSTALL;
+		echo TRANSLATION_DO_INSTALL;
 		?>">
 		</p>
 		<input type="hidden" name="step" value="4">
@@ -401,7 +393,7 @@ echo TRANSLATION_DO_INSTALL;
 
 <?php
 	
-if ($_REQUEST ["step"] == "4") {
+	if ($_REQUEST ["step"] == "4") {
 		
 		$salt = uniqid ();
 		$connection = mysqli_connect ( $_SESSION ["mysql"] ["server"], $_SESSION ["mysql"] ["loginname"], $_SESSION ["mysql"] ["passwort"] );
@@ -691,6 +683,7 @@ ON DELETE SET NULL";
 		
 		/**
 		 * $constraint5 = "ALTER TABLE `" .
+		 *
 		 * $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`)
 		 * ON DELETE SET NULL";
 		 * mysqli_query($connection, $constraint5);
@@ -750,42 +743,43 @@ class config extends baseConfig{
 		?>
 <h2><?php
 		
-echo TRANSLATION_INSTALLATION_FINISHED;
+		echo TRANSLATION_INSTALLATION_FINISHED;
 		?></h2>
 	<p><?php
 		
-echo TRANSLATION_FIRST_LOGIN_HELP;
-		?><br />
-		<br />
+		echo TRANSLATION_FIRST_LOGIN_HELP;
+		?><br /> <br />
 <?php
 		
-if ($success) {
+		if ($success) {
 			?>
 <span style="color: green;"><?php
 			
-echo TRANSLATION_LOGIN_DATA_SENT_BY_MAIL;
+			echo TRANSLATION_LOGIN_DATA_SENT_BY_MAIL;
 			?>
 </span>
 
 <?php
-		
-} else {
+		} else {
 			?>
 <span style="color: red;"><?php
 			
-echo TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL;
-             ?></span>
-<?php }
-         ?>
+			echo TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL;
+			?></span>
+<?php
+		
+}
+		?>
 <br />
 	</p>
 
-<?php }
-    
-     ?>
 <?php
-    
-     }
+	
+}
+	
+	?>
+<?php
+}
 ?>
 <hr style="margin-top: 30px;" />
 	<p style="color: #6f6f6f; font-size: small;">
