@@ -3,17 +3,17 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "templates" )) {
-		
+
 		$theme = getconfig ( "theme" );
 		?>
 
 
 <h2><?php
-		
+
 echo TRANSLATION_TEMPLATES;
 		?></h2>
 <?php
-		
+
 		if (! empty ( $_GET ["save"] )) {
 			if ($_GET ["save"] == "true") {
 				echo "<p>Die Template wurde gespeichert.</p>";
@@ -24,39 +24,60 @@ echo TRANSLATION_TEMPLATES;
 			?>
 
 <p><?php
-			
+
 echo ULICMS_TEMPLATE_INFO_TEXT;
 			?></p>
 <strong><?php
-			
+
 echo TRANSLATION_PLEASE_SELECT_TEMPLATE;
 			?></strong>
 <br />
+<?php
+if (file_exists ( getTemplateDirPath ( $theme ) . "oben.php" )) {
+	?>
 <p>
 	<a href="index.php?action=templates&edit=oben.php"><?php
-			
+
 echo TRANSLATION_TOP;
 			?></a>
 </p>
+
+
+		<?php } ?>
+
+				<?php
+				if (file_exists ( getTemplateDirPath ( $theme ) . "unten.php" )) {
+					?>
 <p>
 	<a href="index.php?action=templates&edit=unten.php"><?php
-			
+
 echo TRANSLATION_BOTTOM;
 			?></a>
 </p>
+		<?php } ?>
+<?php
+if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )) {
+	?>
 <p>
 	<a href="index.php?action=templates&edit=maintenance.php"><?php
-			
+
 echo TRANSLATION_MAINTENANCE_PAGE;
 			?></a>
 </p>
+<?php } ?>
+
+
+				<?php
+				if (file_exists ( getTemplateDirPath ( $theme ) . "style.css" )) {
+					?>
 <p>
 	<a href="index.php?action=templates&edit=style.css"><?php
-			
+
 echo TRANSLATION_CSS;
 			?></a>
 </p>
 
+<?php } ?>
 <?php
 			if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 				?>
@@ -89,23 +110,23 @@ echo TRANSLATION_CSS;
 
 
 <?php
-		
+
 } else if (! empty ( $_GET ["edit"] )) {
 			$edit = basename ( $_GET ["edit"] );
 			$template_file = getTemplateDirPath ( $theme ) . $edit;
-			
+
 			if (is_file ( $template_file )) {
-				
+
 				if (! is_writable ( $template_file ) && file_exists ( $template_file )) {
 					echo "<p>Die gewählte Template konnte nicht geöffnet werden. Wenn Sie der Inhaber dieser Seite sind, probieren Sie die Datei-Rechte auf dem FTP-Server auf 0777 zu setzen. Wenn nicht, wenden Sie sich bitte an Ihren Administrator.</p>";
 				} else {
 					$template_content = file_get_contents ( $template_file );
-					
+
 					?>
 <form id="templateForm" action="index.php?action=templates"
 	method="post">
 <?php
-					
+
 csrf_token_html ();
 					?>
 <style type="text/css">
@@ -117,9 +138,9 @@ csrf_token_html ();
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         matchBrackets: true,
-		
+
         mode: "<?php
-					
+
 switch (file_extension ( $edit )) {
 						case "php" :
 							echo "application/x-httpd-php";
@@ -133,7 +154,7 @@ switch (file_extension ( $edit )) {
 							break;
 					}
 					?>",
-		
+
         indentUnit: 0,
         indentWithTabs: false,
         enterMode: "keep",
@@ -143,7 +164,7 @@ switch (file_extension ( $edit )) {
 
 	<input type="hidden" name="save_template"
 		value="<?php
-					
+
 echo htmlspecialchars ( $edit );
 					?>">
 	<div class="inPageMessage">
@@ -152,17 +173,17 @@ echo htmlspecialchars ( $edit );
 	</div>
 	<input type="submit"
 		value="<?php
-					
+
 echo TRANSLATION_SAVE_CHANGES;
 					?>">
-    
+
 <?php
 					if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
 						?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php
-					
+
 }
 					?>
 </form>
@@ -171,30 +192,30 @@ $("#templateForm").ajaxForm({beforeSubmit: function(e){
   $("#message_page_edit").html("");
   $("#message_page_edit").hide();
   $(".loading").show();
-  }, 
+  },
   success:function(e){
-  $(".loading").hide();  
+  $(".loading").hide();
   $("#message_page_edit").html("<span style=\"color:green;\"><?php
-					
+
 echo TRANSLATION_CHANGES_WAS_SAVED;
 					?></span>");
   $("#message_page_edit").show();
   }
-  
-}); 
+
+});
 
 </script>
 <?php
 				}
 			}
-			
+
 			?>
 
 
 
 
 <?php
-		
+
 }
 		?>
 
