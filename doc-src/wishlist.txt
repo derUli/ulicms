@@ -17,3 +17,4 @@
 [ ] Cronjobs monatlich, stündlich, täglich, bei jedem Request (crontab)
 [X] Erklärung zu "Position" hinzufügen 
 [ ] Implementation von ActiveRecord
+[ ] SlickNav auf mobile_devices
