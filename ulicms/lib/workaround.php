@@ -1,4 +1,4 @@
-<?php
+s<?php
 
 // Magic Quotes Workaround
 // Siehe http://php.net/manual/de/security.magicquotes.php /*

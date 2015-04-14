@@ -1,4 +1,4 @@
-<?php
+F<?php
 // Abstraktion für Ausführen von SQL Strings
 function db_query($query){
      include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
