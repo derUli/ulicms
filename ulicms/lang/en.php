@@ -170,7 +170,7 @@ define("TRANSLATION_GROUP_DELETED", "Die Gruppe wurde erfolgreich gelöscht.");
 define("ULICMS_PLEASE_SELECT_FILETYPE", "Plese select a file type");
 
 // Vorlagen
-define("ULICMS_TEMPLATE_INFO_TEXT", "You can edit your website templates here. Please be careful, cause of the contained PHP code.");
+define("ULICMS_TEMPLATE_INFO_TEXT", "You can edit your website templates here. Please be careful, because of the contained PHP code.");
 define("TRANSLATION_PLEASE_SELECT_TEMPLATE", "please select a template");
 define("TRANSLATION_CHANGES_WAS_SAVED", "Changes was saved.");
 
