@@ -1,2 +1,2 @@
 <?php
-define("TRANSLATION_FORTUNE", "Glückskeks");
+define ( "TRANSLATION_FORTUNE", "Glückskeks" );

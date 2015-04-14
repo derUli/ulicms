@@ -1,2 +1,2 @@
 <?php
-define("TRANSLATION_FORTUNE", "Fortune Cookie");
+define ( "TRANSLATION_FORTUNE", "Fortune Cookie" );
