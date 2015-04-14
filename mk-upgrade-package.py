@@ -28,7 +28,7 @@ def main():
     reformat = not args.no_reformat
     source_dir = os.path.dirname(__file__)
 
-    ignore = ('.git', "doc-src", "phpCB-1.0.1-linux", "*.py", "*.pyc",
+    ignore = ('.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
                        "Releases", "cms-config.php", "content", "services",
                        ".gitignore", ".htaccess", "installer.aus", "installer",
               "modules", "templates", "fonts.php", "config.php", "contents.css",
