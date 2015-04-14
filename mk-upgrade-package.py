@@ -32,7 +32,7 @@ def main():
                        "Releases", "cms-config.php", "content", "services",
                        ".gitignore", ".htaccess", "installer.aus", "installer",
               "modules", "templates", "fonts.php", "config.php", "contents.css",
-              "config.js", "comments", "*~")
+              "config.js", "comments", "*~", ".settings", ".project")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     operating_system = platform.system()
