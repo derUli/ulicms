@@ -4,9 +4,6 @@ The release of UliCMS 9.0.0 is scheduled for the first quarter of 2016.
 This new version of UliCMS will introduce support for the newest web technologies,
 including an improved template engine, an updated jQuery, HTML5 video and audio.
 
-It's the modern, flexible and extensible open source content management 
-solution you’d expect from the developer of UliCMS.
-
 Other improvements will include better security, better configurability and the
 introduction of an one-click patch management utility, which will make it much easier to keep your system up-to-date.
 
