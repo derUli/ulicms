@@ -512,7 +512,7 @@ define("TRANSLATION_ENABLE_PASSWORD_RESET", "Password can be reset");
 
 define("TRANSLATION_CHANGE_PASSWORD", "Change Password");
 
-define("TRANSLATION_PASSWORDS_NOT_EQUEL", "Passwords are not equal.");
+define("TRANSLATION_PASSWORDS_NOT_EQUAL", "Passwords are not equal.");
 
 define("TRANSLATION_REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN", "Enforce password change on next login");
 
