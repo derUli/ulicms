@@ -55,6 +55,9 @@ db_query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN `type` varchar(5
 
 db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `require_password_change` tinyint(1) NULL DEFAULT '0'" );
 
+db_query( "ALTER TABLE " . tbname("users"). " ADD COLUMN  `password_changed` DATETIME NULL");
+db_query( "UPDATE ".tbname("users") . " SET `password_changed` = NOW();");
+
 setconfig ( "db_schema_version", "9.0.0" );
 
 // @unlink ("update.php");
