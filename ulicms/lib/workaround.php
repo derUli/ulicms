@@ -1,4 +1,4 @@
-s<?php
+<?php
 
 // Magic Quotes Workaround
 // Siehe http://php.net/manual/de/security.magicquotes.php /*
@@ -14,7 +14,7 @@ function unfck_gpc() {
 			'POST',
 			'GET',
 			'REQUEST',
-			'COOKIE' 
+			'COOKIE'
 	) as $gpc )
 		$GLOBALS ["_$gpc"] = array_map ( 'unfck', $GLOBALS ["_$gpc"] );
 }
@@ -30,7 +30,7 @@ function unregister_globals() {
 				"_FILES",
 				"_SESSION",
 				"_COOKIES",
-				"_SERVER" 
+				"_SERVER"
 		);
 		foreach ( $GLOBALS as $key => $value ) {
 			// �berpr�fung, ob die Variablen/Arrays zu den Superglobals geh�ren, andernfalls l�schen
