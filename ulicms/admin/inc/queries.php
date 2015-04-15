@@ -486,7 +486,7 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	
 	} else {
           	$user = getUserById($id);
-          	$rechte = $user["rechte"];
+          	$rechte = $user["group"];
           	$admin = $user["admin"];
           	$group_id = $user["group_id"];
           	if(is_null($group_id))
@@ -504,10 +504,12 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$require_password_change = intval ( isset ( $_POST ["require_password_change"] ) );
 	
 	add_hook ( "before_edit_user" );
-	db_query ( "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
+	$sql = "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
-about_me = '$about_me', avatar_file = '$db_avatar_filename', html_editor='$html_editor', require_password_change='$require_password_change' WHERE id=$id" );
+about_me = '$about_me', avatar_file = '$db_avatar_filename', html_editor='$html_editor', require_password_change='$require_password_change' WHERE id=$id";
+
+	db_query ( $sql );
 	
 	if (! empty ( $password ))
 		changePassword ( $password, $id );
