@@ -1389,14 +1389,18 @@ function func_enabled($func) {
 	return $it_is_disabled;
 }
 function is_admin() {
-	$acl = new ACL ();
-	$permissions = $acl->getDefaultACLAsJSON ( true, true );
-	foreach ( $permissions as $permission => $value ) {
-		if (! $acl->hasPermission ( $permission )) {
-			return false;
-		}
+
+	$retval = false;
+	$user_id = get_user_id();
+	if(!$user_id){
+	   $retval = false;
 	}
-	return true;
+        else{
+          $query = db_query("SELECT `admin` FROM ".tbname("users"). " where id = ".$user_id. " and admin = 1");
+          $retval = db_num_rows($query);
+        }
+	
+	return $retval;
 }
 
 // This function transforms the php.ini notation for numbers (like '2M') to an integer (2*1024*1024 in this case)
