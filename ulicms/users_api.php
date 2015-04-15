@@ -59,11 +59,12 @@ function getUserById($id) {
 		return false;
 	}
 }
-function adduser($username, $lastname, $firstname, $email, $password, $group, $sendMessage = true, $acl_group = null, $require_password_change = 0) {
+function adduser($username, $lastname, $firstname, $email, $password, $group, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0) {
 	$username = db_escape ( $username );
 	$lastname = db_escape ( $lastname );
 	$firstname = db_escape ( $firstname );
 	$email = db_escape ( $email );
+	$admin = intval($admin);
 	$password = $password;
 	$require_password_change = intval ( $require_password_change );
 	// legacy group
@@ -80,7 +81,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	add_hook ( "before_create_user" );
 
 	db_query ( "INSERT INTO " . tbname ( "users" ) . "
-(username,lastname, firstname, email, password, `group`, `group_id`, `require_password_change`, `password_changed`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( hash_password ( $password ) ) . "',$group, " . $acl_group . ", $require_password_change, NOW())" ) or die ( db_error () );
+(username,lastname, firstname, email, password, `group`, `group_id`, `require_password_change`, `password_changed`, `admin`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( hash_password ( $password ) ) . "',$group, " . $acl_group . ", $require_password_change, NOW(), $admin)" ) or die ( db_error () );
 	$message = "Hallo $firstname,\n\n" . "Ein Administrator hat auf http://" . $_SERVER ["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" . "Die Zugangsdaten lauten:\n\n" . "Benutzername: $username\n" . "Passwort: $password\n";
 	$header = "From: " . getconfig ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
 
