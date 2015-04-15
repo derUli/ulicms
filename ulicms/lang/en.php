@@ -521,4 +521,6 @@ define("TRANSLATION_BACK_TO_LOGIN", "Back to login");
 define("TRANSLATION_SECURITY", "Security");
 define("TRANSLATION_FORCE_PASSWORD_CHANGE_EVERY_X_DAYS", "Users must change their passwords every x days (0 = disabled)");
 
+define("TRANSLATION_IS_ADMIN", "Is Admin");
+
 add_hook("lang_en");
