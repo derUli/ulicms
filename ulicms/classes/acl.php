@@ -20,6 +20,8 @@ class ACL {
 		$updateSQLString = "UPDATE `" . tbname ( "groups" ) . "` SET `permissions`='" . db_escape ( $newJSON ) . "' WHERE id=" . $group_id;
 	}
 	public function hasPermission($name) {
+		if(is_admin())
+		   return true;
 		$result = $this->getPermissionQueryResult ();
 		if (! $result)
 			return false;
