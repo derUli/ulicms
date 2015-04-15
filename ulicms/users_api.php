@@ -16,7 +16,7 @@ function getUsersOnline() {
 	$retval = array ();
 	while ( $row = db_fetch_object ( $users_online ) ) {
 		$retval [] = $row->username;
-	}`password_changed` = NOW()
+	}
 	return $retval;
 }
 function changePassword($password, $id) {
