@@ -453,8 +453,8 @@ if (! isset ( $_REQUEST ["step"] )) {
 		$encrypted_passwort = hash ( "sha512", $salt . $passwort );
 		$encrypted_passwort = mysqli_real_escape_string ( $connection, $encrypted_passwort );
 
-		mysqli_query ( $connection, "INSERT INTO `" . $prefix . "users` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`, `group_id`, `password_changed`) VALUES
-(1, 0, '" . $admin_user . "', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50, 1, NOW());" ) or die ( mysqli_error ( $connection ) );
+		mysqli_query ( $connection, "INSERT INTO `" . $prefix . "users` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`, `group_id`, `password_changed`, `admin`) VALUES
+(1, 0, '" . $admin_user . "', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50, 1, NOW(), 1);" ) or die ( mysqli_error ( $connection ) );
 
 		mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
