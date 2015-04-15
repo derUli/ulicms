@@ -190,7 +190,19 @@ if ($row->require_password_change)
 			
 translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );
 			?> 
-</label> <br />
+</label> 
+<?php if($acl->hasPermission("users")){
+?>
+<br /> 
+<br /> <input type="checkbox" value="1" name="admin"
+		id="admin" <?php if($row->admin) echo "checked";?>> <label for="admin"><?php
+			
+translate ( "is_admin" );?> 
+</label>
+<?php } else {
+echo '<input type="hidden" name="admin" value="'.$row->admin.'">';
+} ?>
+<br />
 	<br /> <strong><?php
 			
 echo TRANSLATION_ABOUT_ME;

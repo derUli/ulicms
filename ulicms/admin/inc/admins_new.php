@@ -41,7 +41,17 @@ echo TRANSLATION_PASSWORD;
 			
 translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );
 			?> 
-</label> <br />
+</label> 
+
+<br /> 
+<br /> <input type="checkbox" value="1" name="admin"
+		id="admin"> <label for="admin"><?php
+			
+translate ( "is_admin" );
+			?> 
+</label>
+
+<br />
 	<br /> <input type="checkbox" id="send_mail" name="send_mail"
 		value="sendmail"> <label for="send_mail"><?php
 			
