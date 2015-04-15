@@ -500,6 +500,7 @@ define("TRANSLATION_REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN", "Änderung des Passw
 define("TRANSLATION_BACK_TO_LOGIN", "Zurück zur Anmeldung");
 
 define("TRANSLATION_SECURITY", "Sicherheit");
+define("TRANSLATION_FORCE_PASSWORD_CHANGE_EVERY_X_DAYS", "Anwender müssen ihr Passwort alle X Tage ändern (0 = aus)");
 
 add_hook("lang_en");
 
