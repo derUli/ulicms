@@ -24,4 +24,5 @@ Filter für Videos:
     Nach der Anmeldung mit diesem Passwort wird er dazu gezwungen, ein neues Passwort festzulegen.
 [X] Option "Passwortänderung bei nächster Anmeldung erzwingen" zu Userverwaltung hinzufügen
 [X] CSS-Klasse zu übergeordneten Menüpunkt von current-page hinzufügen
-[ ] GUI Formularfeld für force_password_change_every_x_days erstellen unter Einstellungen > Sonstiges neuen Reiter "Sicherheit" anlegen
+[X] GUI Formularfeld für force_password_change_every_x_days erstellen unter Einstellungen > Sonstiges neuen Reiter "Sicherheit" anlegen
+[] Flag `is_admin` zu Benutzerverwaltung hinzufügen. Benutzerkonten mit diesem Flag sollen bei Installation eines neuen Moduls automatisch sämtliche Rechte dafür bekommen.
