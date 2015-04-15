@@ -6,7 +6,7 @@ $acl = new acl ();
 
 if ($acl->hasPermission ( $_REQUEST ["type"] ) and ($_REQUEST ["type"] == "images" or $_REQUEST ["type"] == "files" or $_REQUEST ["type"] == "flash")) {
 	$_CONFIG ["disabled"] = false;
-	
+
 	$_SESSION ['KCFINDER'] = array ();
 	$_SESSION ['KCFINDER'] ['disabled'] = false;
 }
@@ -29,6 +29,7 @@ require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 
 require_once "../version.php";
+require_once "inc/cron.php";
 require_once "inc/logincheck.php";
 
 define ( "_SECURITY", true );
@@ -67,11 +68,11 @@ if (! $eingeloggt) {
 	}
 } else {
 	require_once "inc/adminmenu.php";
-	
+
 	add_hook ( "register_actions" );
-	
+
 	$pkg = new packageManager ();
-	
+
 	global $actions;
 	if ($_SESSION ["require_password_change"]) {
 		require_once "inc/change_password.php";
@@ -129,7 +130,7 @@ if (! $eingeloggt) {
 		require_once "inc/key_new.php";
 	} else if ($_GET ["action"] == "key_edit") {
 		require_once "inc/key_edit.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "templates") {
 		require_once "inc/templates.php";
@@ -143,25 +144,25 @@ if (! $eingeloggt) {
 		require_once "inc/available_modules.php";
 	} else if ($_GET ["action"] == "install_modules") {
 		require_once "inc/install_modules.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "info") {
 		require_once "inc/info.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "info") {
 		require_once "inc/info.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "system_update") {
 		require_once "inc/system_update.php";
 	} else if ($_GET ["action"] == "motd") {
 		require_once "inc/motd.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "edit_profile") {
 		require_once "inc/edit_profile.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "logo_upload") {
 		require_once "inc/logo.php";
@@ -171,7 +172,7 @@ if (! $eingeloggt) {
 		require_once "inc/import.php";
 	} else if ($_GET ["action"] == "export") {
 		require_once "inc/export.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "cache") {
 		require_once "inc/cache_settings.php";
@@ -183,11 +184,11 @@ if (! $eingeloggt) {
 		require_once "inc/module_settings.php";
 	} else if ($_GET ["action"] == "other_settings") {
 		require_once "inc/other_settings.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "frontpage_settings") {
 		require_once "inc/frontpage.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "pkg_settings") {
 		require_once "inc/pkg_settings.php";
@@ -209,7 +210,7 @@ if (! $eingeloggt) {
 		require_once "inc/add_audio.php";
 	} else if ($_GET ["action"] == "edit_audio") {
 		require_once "inc/edit_audio.php";
-	} 
+	}
 
 	else if (isset ( $actions [$_GET ["action"]] )) {
 		include_once $actions [$_GET ["action"]];
