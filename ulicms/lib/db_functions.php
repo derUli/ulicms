@@ -1,13 +1,13 @@
-F<?php
+<?php
 // Abstraktion für Ausführen von SQL Strings
 function db_query($query){
      include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
-    
+
      log_db_query($query);
      global $db_connection;
      return mysqli_query($db_connection, $query);
      }
-     
+
 function getPDOConnectionString(){
    $retval = "mysql://";
    $cfg = new config();
@@ -17,7 +17,7 @@ function getPDOConnectionString(){
    $retval .= "@" . $cfg->db_server;
    $retval .= "/" . $cfg->db_database;
    $retval .= "?charset=utf8";
-   return $retval;   
+   return $retval;
    }
 
 function db_get_server_info(){
@@ -40,7 +40,7 @@ function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE){
              }else{
              $multiQuery = TRUE;
              }
-        
+
          if($typeDef){
              $bindParams = array();
              $bindParamsReferences = array();
@@ -52,7 +52,7 @@ function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE){
              $bindParamsMethod = new ReflectionMethod('mysqli_stmt', 'bind_param');
              $bindParamsMethod -> invokeArgs($stmt, $bindParamsReferences);
              }
-        
+
          $result = array();
          foreach($params as $queryKey => $query){
              foreach($bindParams as $paramKey => $value){
@@ -90,7 +90,7 @@ function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE){
          }else{
          $result = FALSE;
          }
-    
+
      if($multiQuery){
          return $result;
          }else{
@@ -106,7 +106,7 @@ function db_name_escape($name){
 function db_last_insert_id(){
      global $db_connection;
      return mysqli_insert_id($db_connection);
-    
+
      }
 
 function db_insert_id(){
@@ -131,13 +131,13 @@ function db_fetch_assoc($result){
 function db_fetch_all($result, $resulttype = MYSQLI_NUM){
      if(function_exists("mysqli_fetch_all"))
          return mysqli_fetch_all($result, $resulttype);
-    
+
      //  @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
     $retval = array();
      while($row = db_fetch_assoc($result)){
          $retval[] = $row;
          }
-    
+
      return $retval;
      }
 function db_close(){
@@ -154,7 +154,7 @@ function db_connect($server, $user, $password){
      db_query("SET NAMES 'utf8'");
      // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
     db_query("SET SESSION sql_mode = '';");
-    
+
      return $db_connection;
      }
 // Datenbank auswählen
@@ -213,7 +213,7 @@ function db_get_tables()
     {
          $tableList[] = $cRow[0];
          }
-    
+
      sort($tableList);
      return $tableList;
      }
@@ -233,7 +233,7 @@ define("DB_TYPE_BOOL", 4);
 function db_escape($value, $type = null){
      global $db_connection ;
      if(is_null($type)){
-        
+
          if(is_float($value)){
              return floatval($value);
              }
@@ -246,8 +246,8 @@ function db_escape($value, $type = null){
         else{
              return mysqli_real_escape_string($db_connection, $value);
              }
-        
-        
+
+
          }else{
          if($type === DB_TYPE_INT){
              return intval($value);
@@ -260,10 +260,10 @@ function db_escape($value, $type = null){
              }else{
              return $value;
              }
-        
-        
+
+
          }
-    
+
      }
 
 ?>
