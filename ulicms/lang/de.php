@@ -424,7 +424,7 @@ define("TRANSLATION_MP4_FILE", "MP4 Datei");
 define("TRANSLATION_OGG_FILE", "OGG Datei");
 define("TRANSLATION_MP3_FILE", "MP3 Datei");
 define("TRANSLATION_NO_HTML5", "Ihr Browser unterstützt kein HTML 5.");
-define("TRANSLATION_DOWNLOAD_VIDEO_INSTEAD", "Sie können das Video stattdessen hier herunterladen");
+define("TRANSLATION_DOWNLOAD_VIDEO_INSTEAD", "Sie können das Video stattdessen hier herunterladen.");
 define("TRANSLATION_INSERT_THIS_CODE_INTO_A_PAGE", "Fügen Sie diesen Code in eine Seite ein");
 
 
