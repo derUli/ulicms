@@ -29,7 +29,11 @@ require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 
 require_once "../version.php";
-require_once "inc/cron.php";
+
+if(!is_logged_in()){
+   require_once "inc/cron.php";
+}
+
 require_once "inc/logincheck.php";
 
 define ( "_SECURITY", true );

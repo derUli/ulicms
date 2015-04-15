@@ -25,4 +25,4 @@ Filter für Videos:
 [X] Option "Passwortänderung bei nächster Anmeldung erzwingen" zu Userverwaltung hinzufügen
 [X] CSS-Klasse zu übergeordneten Menüpunkt von current-page hinzufügen
 [X] GUI Formularfeld für force_password_change_every_x_days erstellen unter Einstellungen > Sonstiges neuen Reiter "Sicherheit" anlegen
-[] Flag `admin` zu Benutzerverwaltung hinzufügen. Benutzerkonten mit diesem Flag sollen bei Installation eines neuen Moduls automatisch sämtliche Rechte dafür bekommen.
+[X] Flag `admin` zu Benutzerverwaltung hinzufügen. Benutzerkonten mit diesem Flag sollen bei Installation eines neuen Moduls automatisch sämtliche Rechte dafür bekommen.
