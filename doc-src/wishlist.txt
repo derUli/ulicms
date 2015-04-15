@@ -18,3 +18,4 @@
 [X] Erklärung zu "Position" hinzufügen 
 [ ] Implementation von ActiveRecord
 [ ] SlickNav auf mobile_devices
+[ ] Möglichkeit, eigene Font-Dateien hochzuladen und dann unter Einstellungen > Schriftart ("Custom" bzw. "Benutzerdefiniert")
