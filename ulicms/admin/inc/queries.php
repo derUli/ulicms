@@ -469,11 +469,12 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$firstname = db_escape ( $_POST ["admin_firstname"] );
 	$email = db_escape ( $_POST ["admin_email"] );
 	$password = $_POST ["admin_password"];
+		// User mit eingeschränkten Rechten darf sich nicht selbst zum Admin machen können
+	if($acl->hasPermission("users")){
+
 	$rechte = db_escape ( $_POST ["admin_rechte"] );
-	
-	$notify_on_login = intval ( isset ( $_POST ["notify_on_login"] ) );
-	
-	if (isset ( $_POST ["group_id"] )) {
+	$admin = intval(isset($_POST["admin"]));
+		if (isset ( $_POST ["group_id"] )) {
 		$group_id = $_POST ["group_id"];
 		if ($group_id == "-")
 			$group_id = "NULL";
@@ -483,10 +484,22 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 		$group_id = $_SESSION ["group_id"];
 	}
 	
+	} else {
+          	$user = getUserById($id);
+          	$rechte = $user["rechte"];
+          	$admin = $user["admin"];
+          	$group_id = $user["group_id"];
+          	if(is_null($group_id))
+          	  $group_id = "NULL";
+	}
+	
+	$notify_on_login = intval ( isset ( $_POST ["notify_on_login"] ) );
+	
+
+	
 	$icq_id = db_escape ( $_POST ["icq_id"] );
 	$skype_id = db_escape ( $_POST ["skype_id"] );
 	$about_me = db_escape ( $_POST ["about_me"] );
-	$admin = intval(isset($_POST["admin"]));
 	$html_editor = db_escape ( $_POST ["html_editor"] );
 	$require_password_change = intval ( isset ( $_POST ["require_password_change"] ) );
 	
