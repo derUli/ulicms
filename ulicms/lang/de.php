@@ -224,7 +224,7 @@ define("TRANSLATION_SPAM_COUNTRIES", "Besucher aus folgenden Ländern dürfen <s
 define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Chinesische Schriftzeichen verbieten");
 
 // Cache
-define("TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern, 
+define("TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern,
 bietet das UliCMS eine Cache-Funktion.<br/>
 Statische Seiten, die keine Module enthalten, werden einmalig generiert und dann im cache-Ordner zwischengespeichert.
 Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, die Inhalte aus den gespeicherten HTML-Dateien geladen.</p>
@@ -498,6 +498,9 @@ define("TRANSLATION_PASSWORDS_NOT_EQUAL", "Passwörter stimmen nicht überein.")
 define("TRANSLATION_REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN", "Änderung des Passworts bei nächster Anmeldung erzwingen");
 
 define("TRANSLATION_BACK_TO_LOGIN", "Zurück zur Anmeldung");
+
+define("TRANSLATION_SECURITY", "Sicherheit");
+
 add_hook("lang_en");
 
 add_hook("lang_de");
