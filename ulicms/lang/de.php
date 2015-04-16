@@ -412,6 +412,7 @@ define("TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches sind verfügbar");
 // Hilfetexte
 define("TRANSLATION_HELP", "Hilfe");
 define("TRANSLATION_PATCH_INSTALL_HELP", file_get_contents(ULICMS_ROOT . "/lang/longtxt/de/patch_install_help.html"));
+define("TRANSLATION_HELP_IS_ADMIN", "Diese Option deaktiviert alle Zugriffsbeschränkungen für diesen Nutzer. Er hat somit vollen Zugriff auf das System.");
 
 // Videos
 define("TRANSLATION_VIDEOS", "Videos");
