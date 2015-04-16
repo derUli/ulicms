@@ -254,3 +254,7 @@ div.help {
 label {
 	font-weight: bold;
 }
+
+
+table tr:nth-child(odd)   { background-color:#eee; }
+table tr:nth-child(even)   { background-color:#fff; }

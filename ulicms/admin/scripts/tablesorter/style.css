@@ -25,11 +25,11 @@ table.tablesorter thead tr .header {
 table.tablesorter tbody td {
 	color: #3D3D3D;
 	padding: 4px;
-	background-color: #FFF;
+	background-color: #eee;
 	vertical-align: top;
 }
 table.tablesorter tbody tr.even td {
-	background-color:#F4FDFF;
+	background-color:white;
 }
 table.tablesorter thead tr .headerSortUp {
 	background-image: url(asc.gif);
