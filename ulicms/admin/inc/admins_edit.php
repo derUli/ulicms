@@ -17,7 +17,7 @@ if (defined ( "_SECURITY" )) {
 			
 			csrf_token_html ();
 			?>
-			<img src="<?php echo get_gravatar( $row->email, 80);?>" alt="Avatar Image"/>
+			<img src="<?php echo get_gravatar( $row->email, 200);?>" alt="Avatar Image"/>
 
 <br/><br/>
 
