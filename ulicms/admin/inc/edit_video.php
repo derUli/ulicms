@@ -9,89 +9,80 @@ if ($acl->hasPermission ( "videos" )) {
 		?>
 <h1><?php
 		
-translate ( "UPLOAD_VIDEO" );
+		translate ( "UPLOAD_VIDEO" );
 		?></h1>
 <form action="index.php?action=videos" method="post">
 <?php
 		
-csrf_token_html ();
+		csrf_token_html ();
 		?>
 <input type="hidden" name="id"
 		value="<?php
 		
-echo $result->id;
+		echo $result->id;
 		?>"> <input type="hidden" name="update" value="update"> <strong><?php
 		
-translate ( "name" );
-		?></strong><br /> <input type="text" name="name"
-		required="true"
+		translate ( "name" );
+		?></strong><br /> <input type="text" name="name" required="true"
 		value="<?php
 		
-echo htmlspecialchars ( $result->name );
+		echo htmlspecialchars ( $result->name );
 		?>"
-		maxlength=255 /> <br />
-	<br /> <strong><?php
+		maxlength=255 /> <br /> <br /> <strong><?php
 		
-echo TRANSLATION_CATEGORY;
+		echo TRANSLATION_CATEGORY;
 		?></strong><br />
 <?php
 		echo categories::getHTMLSelect ( $result->category_id );
 		?>
 
-<br />
-	<br /> <strong><?php
+<br /> <br /> <strong><?php
 		
-echo translate ( "video_ogg" );
+		echo translate ( "video_ogg" );
 		?></strong><br /> <input name="ogg_file" type="text"
 		value="<?php
 		
-echo htmlspecialchars ( $result->ogg_file );
-		?>"><br />
-	<br /> <strong><?php
+		echo htmlspecialchars ( $result->ogg_file );
+		?>"><br /> <br /> <strong><?php
 		
-echo translate ( "video_webm" );
+		echo translate ( "video_webm" );
 		?></strong><br /> <input name="webm_file" type="text"
 		value="<?php
 		
-echo htmlspecialchars ( $result->webm_file );
-		?>"><br />
-	<br /> <strong><?php
+		echo htmlspecialchars ( $result->webm_file );
+		?>"><br /> <br /> <strong><?php
 		
-echo translate ( "video_mp4" );
+		echo translate ( "video_mp4" );
 		?></strong><br /> <input name="mp4_file" type="text"
 		value="<?php
 		
-echo htmlspecialchars ( $result->mp4_file );
-		?>"><br />
-	<br /> <strong><?php
+		echo htmlspecialchars ( $result->mp4_file );
+		?>"><br /> <br /> <strong><?php
 		
-translate ( "width" );
+		translate ( "width" );
 		?></strong><br /> <input type="number" name="width"
 		value="<?php
 		
-echo $result->width;
-		?>" step="1"> <br />
-	<br /> <strong><?php
+		echo $result->width;
+		?>" step="1"> <br /> <br /> <strong><?php
 		
-translate ( "height" );
+		translate ( "height" );
 		?></strong><br /> <input type="number" name="height"
 		value="<?php
 		
-echo $result->height;
-		?>" step="1"> <br />
-	<br /> <strong><?php
+		echo $result->height;
+		?>" step="1"> <br /> <br /> <strong><?php
 		
-translate ( "insert_this_code_into_a_page" );
+		translate ( "insert_this_code_into_a_page" );
 		?></strong><br /> <input type="text" name="code"
 		value="[video id=<?php
 		
-echo $result->id;
+		echo $result->id;
 		?>]"
-		onclick="this.focus();this.select();" readonly> <br />
-	<br /> <input type="submit"
-		value="<?php
+		onclick="this.focus();this.select();" readonly> <br /> <br /> <input
+		type="submit" value="<?php
 		
-translate ( "SAVE_CHANGES" );
+		translate ( "SAVE_CHANGES" );
 		?>">
 </form>
 <?php
@@ -99,5 +90,5 @@ translate ( "SAVE_CHANGES" );
 		echo "video not found!";
 	}
 } else {
-	noperms();
-     }
+	noperms ();
+}

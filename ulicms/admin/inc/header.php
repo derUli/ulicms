@@ -9,7 +9,6 @@ if (is_mobile ()) {
 	?>
 <link rel="stylesheet" type="text/css" href="css/mobile.css" />
 <?php
-
 }
 ?>
 <link rel="stylesheet" type="text/css"
@@ -46,7 +45,6 @@ if (is_logged_in ()) {
 <script type="text/javascript" src="scripts/jquery-shiftclick.js"></script>
 <script type="text/javascript" src="scripts/shift_checkbox.js"></script>
 <?php
-
 }
 ?>
 <script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
