@@ -21,3 +21,6 @@ http://en.ulicms.de/aktuelles.html?single=patch-for-cve20152259-csrf-security-is
 Setzen Sie nun die Rechte aller Dateien und Ordner Ihrer UliCMS Installation auf 0755 oder 0777, damit Sie das neu eingeführte Patch Management nutzen können.
 
 Geben Sie nun den Benutzergruppen, die Video oder Audiodateien hochladen können sollen, die Rechte auf "videos" und "audio".
+
+Deinstallieren Sie das Modul "pfbc" sofern Sie es installiert hatten.
+Die" PHP Form Builder Class" ist nun bereits im System enthalten
