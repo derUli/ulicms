@@ -440,30 +440,9 @@ if (! empty ( $_FILES ['logo_upload_file'] ['name'] ) and $acl->hasPermission ( 
 if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) or ($_POST ["edit_admin"] == "edit_admin" and logged_in () and $_POST ["id"] == $_SESSION ["login_id"])) {
 	
 	$id = intval ( $_POST ["id"] );
-	if (! empty ( $_FILES ['avatar_upload'] ['name'] )) {
-		if (! file_exists ( "../content/avatars" )) {
-			@mkdir ( "../content/avatars" );
-			@chmod ( "../content/avatars", 0777 );
-		}
-		
-		$avatar_upload = $_FILES ['avatar_upload'];
-		$type = $avatar_upload ['type'];
-		$filename = $avatar_upload ['name'];
-		$extension = file_extension ( $filename );
-		$hash = md5 ( file_get_contents ( $avatar_upload ['tmp_name'] ) );
-		
-		if ($type == "image/jpeg" or $type == "image/jpg") {
-			
-			$new_filename = "../content/avatars/" . $hash . ".jpg";
-			
-			$db_avatar_filename = $hash . ".jpg";
-			resize_image ( $avatar_upload ['tmp_name'], $new_filename, 125, 125, $crop = FALSE );
-		}
-	}
 	
-	if ($db_avatar_filename == "content/avatars/") {
-		$db_avatar_filename = "";
-	}
+		
+		
 	$username = db_escape ( $_POST ["admin_username"] );
 	$lastname = db_escape ( $_POST ["admin_lastname"] );
 	$firstname = db_escape ( $_POST ["admin_firstname"] );
@@ -507,7 +486,7 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$sql = "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
-about_me = '$about_me', avatar_file = '$db_avatar_filename', html_editor='$html_editor', require_password_change='$require_password_change' WHERE id=$id";
+about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change' WHERE id=$id";
 
 	db_query ( $sql );
 	

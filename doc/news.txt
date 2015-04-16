@@ -29,3 +29,4 @@
 + Option "Ist Admin" zu Benutzerverwaltung hinzugefügt, wenn diese Option aktiviert ist, wird das Berechtigunssystem für den Benutzer deaktiviert, so dass dieser vollen Zugriff aufs System.
 + PHP Form Builder Class integriert (Beispiel im Modules Ordner)
 + "Zebra Tabellen"
++ Avatar Bilder nun über Gravatar

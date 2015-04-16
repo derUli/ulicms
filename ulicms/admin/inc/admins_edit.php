@@ -17,6 +17,10 @@ if (defined ( "_SECURITY" )) {
 			
 			csrf_token_html ();
 			?>
+			<img src="<?php echo get_gravatar( $row->email, 80);?> alt="Avatar Image"/>
+
+<br/><br/>
+
 <input type="hidden" name="edit_admin" value="edit_admin"> <input
 		type="hidden" name="id" value="<?php
 			
@@ -36,23 +40,9 @@ if (defined ( "_SECURITY" )) {
 		readonly="readonly" <?php
 			}
 			?>> <br /> <br />
-<?php
 			
-			if (file_exists ( "../content/avatars/" . $row->avatar_file ) and ! empty ( $row->avatar_file )) {
-				?>
-<img src='../content/avatars/<?php echo $row -> avatar_file?>'
-		alt="Avatarbild"> <br />
-<?php
-			}
-			?>
-<?php
 
-			echo TRANSLATION_UPLOAD_AVATAR;
-			?><br /> <input type="file" name="avatar_upload" accept="image/jpeg"><br>
-	<small><?php
-			
-			echo TRANSLATION_ONLY_JPEG;
-			?></small> <br /> <br /> <strong><?php
+    <strong><?php
 			
 			echo TRANSLATION_LASTNAME;
 			?></strong><br /> <input type="text" name="admin_lastname"
