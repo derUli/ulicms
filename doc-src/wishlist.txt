@@ -20,4 +20,5 @@
 [ ] SlickNav auf mobile_devices
 [ ] Möglichkeit, eigene Font-Dateien hochzuladen und dann unter Einstellungen > Schriftart ("Custom" bzw. "Benutzerdefiniert")
 [ ] Weitere Direkthilfe Texte
+    ( ) zu "Ist Admin"
 [ ] Zweifaktor Authentifizierung
