@@ -147,10 +147,11 @@ table tr td, table th td {
 
 /* Extra selectors needed to override the default styling */
 table.tablesorter tbody tr.normal-row td {
-  background: #888 !important;
+	background: #888 !important;
 }
+
 table.tablesorter tbody tr.alt-row td {
-  background: #555 !important;
+	background: #555 !important;
 }
 
 .menu ul {
@@ -255,6 +256,10 @@ label {
 	font-weight: bold;
 }
 
+table tr:nth-child(odd) {
+	background-color: #eee;
+}
 
-table tr:nth-child(odd)   { background-color:#eee; }
-table tr:nth-child(even)   { background-color:#fff; }
+table tr:nth-child(even) {
+	background-color: #fff;
+}
