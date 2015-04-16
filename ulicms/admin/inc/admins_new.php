@@ -44,20 +44,25 @@ translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );
 </label> 
 
 <br /> 
-<br /> <input type="checkbox" value="1" name="admin"
+<br />  <input type="checkbox" id="send_mail" name="send_mail"
+		value="sendmail"> <label for="send_mail"><?php
+			
+echo TRANSLATION_SEND_LOGINDATA_BY_MAIL;
+			?></label>
+			
+			 <br/><br/> 
+			<input type="checkbox" value="1" name="admin"
 		id="admin"> <label for="admin"><?php
 			
 translate ( "is_admin" );
 			?> 
 </label><span style="cursor: help;"
-		onclick="$('div#menu_help').slideToggle()">[?]</span><br />
-
-<br />
-	<br /> <input type="checkbox" id="send_mail" name="send_mail"
-		value="sendmail"> <label for="send_mail"><?php
-			
-echo TRANSLATION_SEND_LOGINDATA_BY_MAIL;
-			?></label> <br /> <br /> <input type="submit"
+		onclick="$('div#is_admin').slideToggle()">[?]</span><br />
+<div id="is_admin" class="help" style="display: none">
+<?php 
+echo nl2br(get_translation("HELP_IS_ADMIN"));?>
+</div>
+<br /> <input type="submit"
 		value="<?php
 			
 echo TRANSLATION_CREATE_USER;

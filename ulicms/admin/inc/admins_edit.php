@@ -198,7 +198,12 @@ translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );
 		id="admin" <?php if($row->admin) echo "checked";?>> <label for="admin"><?php
 			
 translate ( "is_admin" );?> 
-</label>
+</label> <span style="cursor: help;"
+		onclick="$('div#is_admin').slideToggle()">[?]</span>
+ <div id="is_admin" class="help" style="display: none">
+<?php 
+echo nl2br(get_translation("HELP_IS_ADMIN"));?>
+</div>
 <?php } else {
 echo '<input type="hidden" name="admin" value="'.$row->admin.'">';
 } ?>

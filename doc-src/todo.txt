@@ -26,5 +26,5 @@ Filter für Videos:
 [X] CSS-Klasse zu übergeordneten Menüpunkt von current-page hinzufügen
 [X] GUI Formularfeld für force_password_change_every_x_days erstellen unter Einstellungen > Sonstiges neuen Reiter "Sicherheit" anlegen
 [X] Flag `admin` zu Benutzerverwaltung hinzufügen. Benutzerkonten mit diesem Flag sollen bei Installation eines neuen Moduls automatisch sämtliche Rechte dafür bekommen.
-[ ] Hilfetext zu "Ist Admin" hinzufügen
+[X] Hilfetext zu "Ist Admin" hinzufügen
 [X] PHP Form Builder Class einbauen http://www.imavex.com/pfbc3.x-php5/
