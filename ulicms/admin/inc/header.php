@@ -77,7 +77,7 @@ if (is_logged_in ()) {
 <script type="text/javascript">
 $(document).ready(function(){
      
-        $(".tablesorter").tablesorter(); 
+        $(".tablesorter").tablesorter({widgets: ["zebra"]}); 
     } 
 ); 
 </script>

@@ -145,12 +145,12 @@ table tr td, table th td {
 	padding: 5px;
 }
 
-table tr:nth-child(odd), table th:nth-child(odd) {
-	background-color: #eee;
+/* Extra selectors needed to override the default styling */
+table.tablesorter tbody tr.normal-row td {
+  background: #888 !important;
 }
-
-table tr:nth-child(even), table th:nth-child(odd) {
-	background-color: #fff;
+table.tablesorter tbody tr.alt-row td {
+  background: #555 !important;
 }
 
 .menu ul {

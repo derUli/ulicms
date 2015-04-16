@@ -28,8 +28,8 @@ table.tablesorter tbody td {
 	background-color: #FFF;
 	vertical-align: top;
 }
-table.tablesorter tbody tr.odd td {
-	background-color:#F0F0F6;
+table.tablesorter tbody tr.even td {
+	background-color:#F4FDFF;
 }
 table.tablesorter thead tr .headerSortUp {
 	background-image: url(asc.gif);

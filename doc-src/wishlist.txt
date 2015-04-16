@@ -24,6 +24,6 @@
 [ ] Zweifaktor Authentifizierung
 [ ] Versionierung für Seiten
 [X] PHP Form Builder Class einbinden http://www.imavex.com/pfbc3.x-php5/
-[ ] Zebra-Tabellen http://fiddle.jshell.net/Shaz/xrak2/
+[X] Zebra-Tabellen http://fiddle.jshell.net/Shaz/xrak2/
     oder auch hier http://stackoverflow.com/questions/5783504/help-to-color-alternate-rows-in-sortable-table
 [ ] In-Page Editing
