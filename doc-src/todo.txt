@@ -28,4 +28,4 @@ Filter für Videos:
 [X] Flag `admin` zu Benutzerverwaltung hinzufügen. Benutzerkonten mit diesem Flag sollen bei Installation eines neuen Moduls automatisch sämtliche Rechte dafür bekommen.
 [X] Hilfetext zu "Ist Admin" hinzufügen
 [X] PHP Form Builder Class einbauen http://www.imavex.com/pfbc3.x-php5/
-[ ] Promotext um Erwähnung der "PHP Form Builder Class" ergänzen.
+[X] Promotext um Erwähnung der "PHP Form Builder Class" ergänzen.
