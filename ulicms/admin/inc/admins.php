@@ -81,7 +81,7 @@ echo TRANSLATION_DELETE;
 				echo '<tr>';
 				echo "<td style=\"width:40px;\">" . $row->id . "</td>";
 				echo "<td>";
-				echo '<img src="'.get_gravatar($row->email,30).'" alt="Avatar von '.real_htmlspecialchars ( $row->username) .'"> ';
+				echo '<img src="'.get_gravatar($row->email,26).'" alt="Avatar von '.real_htmlspecialchars ( $row->username) .'"> ';
 				echo real_htmlspecialchars ( $row->username ) . "</td>";
 				echo "<td>" . real_htmlspecialchars ( $row->lastname ) . "</td>";
 				echo "<td>" . real_htmlspecialchars ( $row->firstname ) . "</td>";
