@@ -22,3 +22,4 @@
 [ ] Weitere Direkthilfe Texte
     ( ) zu "Ist Admin"
 [ ] Zweifaktor Authentifizierung
+[ ] Versionierung für Seiten
