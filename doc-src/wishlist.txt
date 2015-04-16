@@ -27,4 +27,4 @@
 [X] Zebra-Tabellen http://fiddle.jshell.net/Shaz/xrak2/
     oder auch hier http://stackoverflow.com/questions/5783504/help-to-color-alternate-rows-in-sortable-table
 [ ] In-Page Editing
-[ ] Gravatar Integration
+[X] Gravatar Integration
