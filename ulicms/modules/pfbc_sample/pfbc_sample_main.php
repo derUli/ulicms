@@ -1,10 +1,15 @@
 <?php
+
+// Demonstration von "PHP Form Builder Class"
+// Diese ist ab UliCMS 9.0.0 im Kern der Software enthalten.
+// Unter UliCMS 8.0.x muss zuerst das "pfbc" Paket installiert werden
+
 function pfbc_sample_render(){
 
-$options = array("Option #1", "Option #2", "Option #3");
-$form = new Form("html5");
-$form = new Form("form-elements");
-$form->configure(array(
+  $options = array("Option #1", "Option #2", "Option #3");
+  $form = new Form("html5");
+  $form = new Form("form-elements");
+  $form->configure(array(
     "prevent" => array("bootstrap", "jQuery")
 ));
 $form->addElement(new Element_Hidden("form", "form-elements"));

@@ -27,4 +27,4 @@
 + Links zu Bearbeiten von Template-Dateien werden nur noch angezeigt, wenn diese im aktuellen Design vorhanden sind
 + Option "Anwender müssen ihr Passwort alle X Tage ändern" hinzugefügt.
 + Option "Ist Admin" zu Benutzerverwaltung hinzugefügt, wenn diese Option aktiviert ist, wird das Berechtigunssystem für den Benutzer deaktiviert, so dass dieser vollen Zugriff aufs System.
-+ PHP Form Builder Class integriert
++ PHP Form Builder Class integriert (Beispiel im Modules Ordner)
