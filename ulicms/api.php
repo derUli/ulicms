@@ -29,7 +29,7 @@ function get_html_editor() {
 	$query = db_query ( "SELECT html_editor from " . tbname ( "users" ) . " where id = " . get_user_id () );
 	if (! $query)
 		return "ckeditor";
-
+	
 	$obj = db_fetch_assoc ( $query );
 	if (! is_null ( $obj ["html_editor"] ) and ! empty ( $obj ["html_editor"] ))
 		return $obj ["html_editor"];
@@ -50,15 +50,15 @@ function log_request($save_ip = false) {
 		$ip = get_ip ();
 	else
 		$ip = "";
-
+	
 	$ip = db_escape ( $ip );
 	$request_method = db_escape ( get_request_method () );
 	$useragent = db_escape ( get_useragent () );
 	$request_uri = db_escape ( get_request_uri () );
 	$http_host = db_escape ( get_http_host () );
-
+	
 	db_query ( "INSERT INTO " . tbname ( "log" ) . " (ip, request_method, useragent, request_uri, http_host) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host')" ) or die ( db_error () );
-
+	
 	add_hook ( "after_log_request" );
 }
 
@@ -121,12 +121,12 @@ function strbool($value) {
 function get_available_post_types() {
 	global $post_types;
 	$post_types = array (
-			"page"
+			"page" 
 	);
 	add_hook ( $post_types );
-
+	
 	sort ( $post_types );
-
+	
 	return $post_types;
 }
 
@@ -142,7 +142,7 @@ function getFontSizes() {
 			"large",
 			"larger",
 			"x-large",
-			"xx-large"
+			"xx-large" 
 	);
 }
 
@@ -169,7 +169,7 @@ function get_ip() {
 			'HTTP_XROXY_CONNECTION',
 			'VIA',
 			'X_FORWARDED',
-			'X_FORWARDED_FOR'
+			'X_FORWARDED_FOR' 
 	);
 	$regEx = "/^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/";
 	foreach ( $proxy_headers as $proxy_header ) {
@@ -185,7 +185,7 @@ function get_ip() {
 			/**
 			 * Teile in einzelne IPs, gib die letzte zurück und entferne Leerzeichen
 			 */
-
+			
 			// if IPv4 address remove port if exists
 			if (preg_match ( $regEx, $proxy_header_temp ) && ($pos_temp = stripos ( $proxy_header_temp, ':' )) !== false) {
 				$proxy_header_temp = substr ( $proxy_header_temp, 0, $pos_temp );
@@ -193,7 +193,7 @@ function get_ip() {
 			return $proxy_header_temp;
 		}
 	}
-
+	
 	return $_SERVER ['REMOTE_ADDR'];
 }
 function getModuleName($module) {
@@ -216,7 +216,7 @@ function getLanguageNameByCode($code) {
 		$result = db_fetch_object ( $query );
 		$retval = $result->name;
 	}
-
+	
 	return $retval;
 }
 function getAvailableBackendLanguages() {
@@ -229,7 +229,7 @@ function getAvailableBackendLanguages() {
 			array_push ( $retval, basename ( $list [$i], ".php" ) );
 		}
 	}
-
+	
 	return $retval;
 }
 function getSystemLanguage() {
@@ -240,11 +240,11 @@ function getSystemLanguage() {
 	} else {
 		$lang = "de";
 	}
-
+	
 	if (! file_exists ( getLanguageFilePath ( $lang ) )) {
 		$lang = "de";
 	}
-
+	
 	return $lang;
 }
 
@@ -305,9 +305,9 @@ function getStatusCodeByNumber($nr) {
 			506 => 'Variant Also Negotiates',
 			507 => 'Insufficient Storage',
 			509 => 'Bandwidth Limit Exceeded',
-			510 => 'Not Extended'
+			510 => 'Not Extended' 
 	);
-
+	
 	return $nr . " " . $http_codes [$nr];
 }
 
@@ -319,19 +319,19 @@ function ulicms_redirect($url = "http://www.ulicms.de", $status = 302) {
 }
 function getDomainByLanguage($language) {
 	$domainMapping = getconfig ( "domain_to_language" );
-
+	
 	if (! empty ( $domainMapping )) {
 		$domainMapping = explode ( "\n", $domainMapping );
 		for($i = 0; $i < count ( $domainMapping ); $i ++) {
 			$line = trim ( $domainMapping [$i] );
 			if (! empty ( $line )) {
 				$line = explode ( "=>", $line );
-
+				
 				if (count ( $line ) > 1) {
 					$line [0] = trim ( $line [0] );
 					$line [1] = trim ( $line [1] );
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
-
+						
 						if ($line [1] == $language) {
 							return $line [0];
 						}
@@ -351,13 +351,13 @@ function encodeURIComponent($str) {
 			'%2A' => '*',
 			'%27' => "'",
 			'%28' => '(',
-			'%29' => ')'
+			'%29' => ')' 
 	);
 	return strtr ( rawurlencode ( $str ), $revert );
 }
 function setLanguageByDomain() {
 	$domainMapping = getconfig ( "domain_to_language" );
-
+	
 	if (! empty ( $domainMapping )) {
 		$domainMapping = explode ( "\n", $domainMapping );
 		for($i = 0; $i < count ( $domainMapping ); $i ++) {
@@ -367,10 +367,10 @@ function setLanguageByDomain() {
 				if (count ( $line ) > 1) {
 					$line [0] = trim ( $line [0] );
 					$line [1] = trim ( $line [1] );
-
+					
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
 						$domain = $_SERVER ["HTTP_HOST"];
-
+						
 						if ($line [0] == $domain and in_array ( $line [1], getAllLanguages () )) {
 							$_SESSION ["language"] = $line [1];
 							return true;
@@ -388,7 +388,7 @@ function getCacheType() {
 		case "cache_lite" :
 			@include "Cache/Lite.php";
 			$cache_type = "cache_lite";
-
+			
 			break;
 		case "file" :
 		default :
@@ -396,7 +396,7 @@ function getCacheType() {
 			break;
 			break;
 	}
-
+	
 	return $cache_type;
 }
 function getOnlineUsers() {
@@ -446,7 +446,7 @@ if (! function_exists ( "get_host" )) {
 	function get_host() {
 		if ($host = $_SERVER ['HTTP_X_FORWARDED_HOST']) {
 			$elements = explode ( ',', $host );
-
+			
 			$host = trim ( end ( $elements ) );
 		} else {
 			if (! $host = $_SERVER ['HTTP_HOST']) {
@@ -455,10 +455,10 @@ if (! function_exists ( "get_host" )) {
 				}
 			}
 		}
-
+		
 		// Remove port number from host
 		$host = preg_replace ( '/:\d+$/', '', $host );
-
+		
 		return trim ( $host );
 	}
 }
@@ -512,11 +512,11 @@ function clearCache() {
 		else
 			SureRemoveDir ( "content/cache", false );
 	}
-
+	
 	if (function_exists ( "apc_clear_cache" )) {
 		clearAPCCache ();
 	}
-
+	
 	add_hook ( "after_clear_cache" );
 }
 
@@ -571,7 +571,7 @@ function setLocaleByLanguage() {
 	} else {
 		$locale = getconfig ( "locale" );
 		if ($locale) {
-
+			
 			$locale = splitAndTrim ( $locale );
 			array_unshift ( $locale, LC_ALL );
 			@call_user_func_array ( "setlocale", $locale );
@@ -586,13 +586,13 @@ function setLocaleByLanguage() {
 function getCurrentLanguage($current = true) {
 	if ($current) {
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname='" . get_requested_pagename () . "'" );
-
+		
 		if (db_num_rows ( $query ) > 0) {
 			$fetch = db_fetch_object ( $query );
 			return $fetch->language;
 		}
 	}
-
+	
 	if (isset ( $_SESSION ["language"] ))
 		return basename ( $_SESSION ["language"] );
 	else
@@ -694,7 +694,7 @@ if (! function_exists ( "cleanString" )) {
 				'ö' => 'oe',
 				'Ü' => 'Ue',
 				'ü' => 'ue',
-				'ß' => 'ss'
+				'ß' => 'ss' 
 		);
 		$string = strtr ( $string, $accents );
 		$string = strtolower ( $string );
@@ -710,7 +710,7 @@ function getTemplateDirPath($sub = "default") {
 		$templateDir = "../templates/";
 	else
 		$templateDir = "templates/";
-
+	
 	$templateDir = $templateDir . $sub . "/";
 	return $templateDir;
 }
@@ -727,10 +727,10 @@ function replace_num_entity($ord) {
 	} else {
 		$ord = intval ( $ord );
 	}
-
+	
 	$no_bytes = 0;
 	$byte = array ();
-
+	
 	if ($ord < 128) {
 		return chr ( $ord );
 	} elseif ($ord < 2048) {
@@ -742,13 +742,13 @@ function replace_num_entity($ord) {
 	} else {
 		return;
 	}
-
+	
 	switch ($no_bytes) {
 		case 2 :
 			{
 				$prefix = array (
 						31,
-						192
+						192 
 				);
 				break;
 			}
@@ -756,7 +756,7 @@ function replace_num_entity($ord) {
 			{
 				$prefix = array (
 						15,
-						224
+						224 
 				);
 				break;
 			}
@@ -764,22 +764,22 @@ function replace_num_entity($ord) {
 			{
 				$prefix = array (
 						7,
-						240
+						240 
 				);
 			}
 	}
-
+	
 	for($i = 0; $i < $no_bytes; $i ++) {
 		$byte [$no_bytes - $i - 1] = (($ord & (63 * pow ( 2, 6 * $i ))) / pow ( 2, 6 * $i )) & 63 | 128;
 	}
-
+	
 	$byte [0] = ($byte [0] & $prefix [0]) | $prefix [1];
-
+	
 	$ret = '';
 	for($i = 0; $i < $no_bytes; $i ++) {
 		$ret .= chr ( $byte [$i] );
 	}
-
+	
 	return $ret;
 }
 
@@ -824,7 +824,7 @@ function SureRemoveDir($dir, $DeleteMe) {
 		if (! @unlink ( $dir . '/' . $obj ))
 			SureRemoveDir ( $dir . '/' . $obj, true );
 	}
-
+	
 	closedir ( $dh );
 	if ($DeleteMe) {
 		@rmdir ( $dir );
@@ -843,16 +843,16 @@ function SureRemoveDir($dir, $DeleteMe) {
 function buildSEOUrl($page = false, $redirection = null) {
 	if ($page === false)
 		$page = get_requested_pagename ();
-
+	
 	if (startsWith ( $redirection, "#" )) {
 		return $redirection;
 	}
-
+	
 	if ($page === get_frontpage ())
 		return "./";
-
+	
 	$seo_url = "";
-
+	
 	if (is_file ( "backend.php" ))
 		$seo_url .= "../";
 	$seo_url .= $page;
@@ -961,10 +961,10 @@ function replaceAudioTags($txt) {
 	// Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
 	// Reguläre Ausdrücke sehen für mich so aus, als wäre eine Katze über die Tastatur gelaufen.
 	$contains = strpos ( $txt, "[audio id=" ) !== FALSE;
-
+	
 	if ($contains) {
 		$query = db_query ( "select id, ogg_file, mp3_file from " . tbname ( "audio" ) . " order by id" );
-
+		
 		while ( $row = db_fetch_object ( $query ) ) {
 			$code1 = "[audio id=\"" . $row->id . "\"]";
 			$code2 = "[audio id=$quot;" . $row->id . "$quot;]";
@@ -973,7 +973,7 @@ function replaceAudioTags($txt) {
 				$preferred = $row->mp3_file;
 			else
 				$preferred = $row->ogg_file;
-
+			
 			$html = '<audio controls>';
 			if (! empty ( $row->mp3_file )) {
 				$html .= '<source src="content/audio/' . htmlspecialchars ( $row->mp3_file ) . '" type="audio/mp3">';
@@ -992,17 +992,17 @@ function replaceAudioTags($txt) {
 			$txt = str_replace ( $code3, $html, $txt );
 		}
 	}
-
+	
 	return $txt;
 }
 function replaceVideoTags($txt) {
 	// Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
 	// Reguläre Ausdrücke sehen für mich so aus, als wäre eine Katze über die Tastatur gelaufen.
 	$contains = strpos ( $txt, "[video id=" ) !== FALSE;
-
+	
 	if ($contains) {
 		$query = db_query ( "select id, ogg_file, webm_file, mp4_file, width, height from " . tbname ( "videos" ) . " order by id" );
-
+		
 		while ( $row = db_fetch_object ( $query ) ) {
 			$code1 = "[video id=\"" . $row->id . "\"]";
 			$code2 = "[video id=$quot;" . $row->id . "$quot;]";
@@ -1013,7 +1013,7 @@ function replaceVideoTags($txt) {
 				$preferred = $row->ogg_file;
 			else
 				$preferred = $row->webm_file;
-
+			
 			$html = '<video width="' . $row->width . '" height="' . $row->height . '" controls>';
 			if (! empty ( $row->mp4_file )) {
 				$html .= '<source src="content/videos/' . htmlspecialchars ( $row->mp4_file ) . '" type="video/mp4">';
@@ -1042,19 +1042,19 @@ function replaceVideoTags($txt) {
 function replaceShortcodesWithModules($string, $replaceOther = true) {
 	if ($replaceOther) {
 		$string = str_replace ( '[title]', get_title (), $string );
-
+		
 		ob_start ();
 		logo ();
 		$string = str_replace ( '[logo]', ob_get_clean (), $string );
-
+		
 		ob_start ();
 		motto ();
 		$string = str_replace ( '[motto]', ob_get_clean (), $string );
-
+		
 		ob_start ();
 		motto ();
 		$string = str_replace ( '[slogan]', ob_get_clean (), $string );
-
+		
 		$current_page = get_page ();
 		$string = str_replace ( '[category]', get_category (), $string );
 	}
@@ -1063,9 +1063,9 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$thisModule = $allModules [$i];
 		$stringToReplace1 = '[module="' . $thisModule . '"]';
 		$stringToReplace2 = '[module=&quot;' . $thisModule . '&quot;]';
-
+		
 		$module_mainfile_path = getModuleMainFilePath ( $thisModule );
-
+		
 		if (is_file ( $module_mainfile_path ) and (strstr ( $string, $stringToReplace1 ) or strstr ( $string, $stringToReplace2 ))) {
 			require_once $module_mainfile_path;
 			if (function_exists ( $thisModule . "_render" )) {
@@ -1076,7 +1076,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		} else {
 			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
 		}
-
+		
 		$string = str_replace ( $stringToReplace1, $html_output, $string );
 		$string = str_replace ( $stringToReplace2, $html_output, $string );
 		$string = str_replace ( '[title]', get_title (), $string );
@@ -1122,11 +1122,11 @@ function getAllPagesWithTitle() {
 	while ( $row = db_fetch_object ( $query ) ) {
 		$a = Array (
 				$row->title,
-				$row->systemname . ".html"
+				$row->systemname . ".html" 
 		);
 		array_push ( $returnvalues, $a );
 		if (containsModule ( $row->systemname, "blog" )) {
-
+			
 			$sql = "select title, seo_shortname from " . tbname ( "blog" ) . " ORDER by datum DESC";
 			$query_blog = db_query ( $sql );
 			while ( $row_blog = db_fetch_object ( $query_blog ) ) {
@@ -1134,13 +1134,13 @@ function getAllPagesWithTitle() {
 				$url = $row->systemname . ".html" . "?single=" . $row_blog->seo_shortname;
 				$b = Array (
 						$title,
-						$url
+						$url 
 				);
 				array_push ( $returnvalues, $b );
 			}
 		}
 	}
-
+	
 	return $returnvalues;
 }
 
@@ -1149,7 +1149,7 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
 	if (! $lang) {
 		$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL ORDER BY $order" );
 	} else {
-
+		
 		$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape ( $lang ) . "' ORDER BY $order" );
 	}
 	$returnvalues = Array ();
@@ -1158,7 +1158,7 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
 			array_push ( $returnvalues, $row );
 		}
 	}
-
+	
 	return $returnvalues;
 }
 
@@ -1167,14 +1167,14 @@ function getAllSystemNames($lang = null) {
 	if (! $lang) {
 		$query = db_query ( "SELECT systemname,id FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY systemname" );
 	} else {
-
+		
 		$query = db_query ( "SELECT systemname,id FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='" . db_escape ( $lang ) . "' ORDER BY systemname" );
 	}
 	$returnvalues = Array ();
 	while ( $row = db_fetch_object ( $query ) ) {
 		array_push ( $returnvalues, $row->systemname );
 	}
-
+	
 	return $returnvalues;
 }
 
@@ -1227,21 +1227,21 @@ function deleteconfig($key) {
 // Set a configuration Variable;
 function setconfig($key, $value) {
 	$query = db_query ( "SELECT * FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
-
+	
 	if (db_num_rows ( $query ) > 0) {
 		db_query ( "UPDATE " . tbname ( "settings" ) . " SET value='$value' WHERE name='$key'" );
 	} else {
-
+		
 		db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 	}
 }
 function is__writable($path) {
 	if ($path {strlen ( $path ) - 1} == '/')
-
+		
 		return is__writable ( $path . uniqid ( mt_rand () ) . '.tmp' );
-
+	
 	elseif (file_exists ( $path ) && preg_match ( '/\.tmp/', $path )) {
-
+		
 		return is_writable ( $path );
 	} else
 		return false; // Or return error - invalid path...
@@ -1256,10 +1256,10 @@ function getAllMenus() {
 			"top",
 			"right",
 			"bottom",
-			"none"
+			"none" 
 	);
 	$additional_menus = getconfig ( "additional_menus" );
-
+	
 	if ($additional_menus) {
 		$additional_menus = explode ( ";", $additional_menus );
 		foreach ( $additional_menus as $m ) {
@@ -1273,7 +1273,7 @@ function getAllMenus() {
 function containsModule($page = null, $module = false) {
 	if (is_null ( $page ))
 		$page = get_requested_pagename ();
-
+	
 	$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
 	$dataset = db_fetch_assoc ( $query );
 	$content = $dataset ["content"];
@@ -1304,16 +1304,16 @@ function uninstall_module($name, $type = "module") {
 	// Nur Admins können Module löschen
 	if (! is_admin ())
 		return false;
-
+	
 	$name = trim ( $name );
 	$name = basename ( $name );
 	$name = trim ( $name );
-
+	
 	// Verhindern, dass der Modulordner oder gar das ganze
 	// CMS gelöscht werden kann
 	if ($name == "." or $name == ".." or empty ( $name ))
 		return false;
-
+	
 	if ($type === "module") {
 		$moduleDir = getModulePath ( $name );
 		// Modul-Ordner entfernen
@@ -1389,17 +1389,15 @@ function func_enabled($func) {
 	return $it_is_disabled;
 }
 function is_admin() {
-
 	$retval = false;
-	$user_id = get_user_id();
-	if(!$user_id){
-	   $retval = false;
+	$user_id = get_user_id ();
+	if (! $user_id) {
+		$retval = false;
+	} else {
+		$query = db_query ( "SELECT `admin` FROM " . tbname ( "users" ) . " where id = " . $user_id . " and admin = 1" );
+		$retval = db_num_rows ( $query );
 	}
-        else{
-          $query = db_query("SELECT `admin` FROM ".tbname("users"). " where id = ".$user_id. " and admin = 1");
-          $retval = db_num_rows($query);
-        }
-
+	
 	return $retval;
 }
 

@@ -6,7 +6,7 @@
 // root directory of UliCMS
 if (! defined ( "ULICMS_ROOT" ))
 	define ( "ULICMS_ROOT", dirname ( __file__ ) );
-
+	
 	// UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if (ini_get ( 'register_globals' ) === '1') {
 	die ( 'SECURITY WARNING: "Register Globals" feature is enabled! UliCMS refuses to run with enabled "Register Globals"!' );
@@ -69,9 +69,7 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "export_helper.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "Mobile_Detect.php";
 
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
- "PFBC" . DIRECTORY_SEPERATOR . "Form.php";
-
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "PFBC" . DIRECTORY_SEPERATOR . "Form.php";
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "version.php";
 function exception_handler($exception) {
@@ -96,7 +94,7 @@ $path_to_config = dirname ( __file__ ) . DIRECTORY_SEPERATOR . "cms-config.php";
 
 if (file_exists ( $path_to_config )) {
 	require_once $path_to_config;
-}
+} 
 
 else if (is_dir ( "installer" )) {
 	header ( "Location: installer/" );
@@ -202,15 +200,15 @@ if (! defined ( "SKIP_TABLE_CHECK" )) {
 			tbname ( "audio" ),
 			tbname ( "languages" ),
 			tbname ( "log" ),
-			tbname ( "settings" )
+			tbname ( "settings" ) 
 	);
-
+	
 	for($i = 0; $i < count ( $required_tables ); $i ++) {
 		$table = $required_tables [$i];
 		if (! in_array ( $table, $existing_tables )) {
 			if (! headers_sent ())
 				header ( "Content-Type: text/html; charset=UTF-8" );
-
+			
 			throw new Exception ( "Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!" );
 			exit ();
 		}
