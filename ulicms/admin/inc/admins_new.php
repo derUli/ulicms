@@ -49,7 +49,8 @@ translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );
 			
 translate ( "is_admin" );
 			?> 
-</label>
+</label><span style="cursor: help;"
+		onclick="$('div#menu_help').slideToggle()">[?]</span><br />
 
 <br />
 	<br /> <input type="checkbox" id="send_mail" name="send_mail"
