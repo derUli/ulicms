@@ -30,3 +30,4 @@
 [X] Gravatar Integration
 [ ] Menü-Verwaltung von den Seiten lösen (wie z.B. in Joomla)
 [ ] Blacklist für bereits verwendete Passwörter (optional)
+[ ] Einführung a la "Erste Schritte" wie z.B. in Windows 2000 bei erster Anmeldung.
