@@ -270,7 +270,7 @@ table tr:nth-child(even) {
     color: #e7e5e5;
     background: #335599;
 }
-/* Auswahl*/
+/* Auswahl */
 ::selection {
     color: #e7e5e5; 
     background: #335599;
