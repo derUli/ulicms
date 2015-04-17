@@ -28,3 +28,4 @@
     oder auch hier http://stackoverflow.com/questions/5783504/help-to-color-alternate-rows-in-sortable-table
 [ ] In-Page Editing
 [X] Gravatar Integration
+[ ] Menü-Verwaltung von den Seiten lösen (wie z.B. in Joomla)
