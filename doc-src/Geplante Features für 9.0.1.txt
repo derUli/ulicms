@@ -1,0 +1,2 @@
+[ ] Bootstrap mitliefern, über API-Befehle get_bootstrap() oder bootstrap() in Template einbindbar
+[ ] Aktualisierung des CKEditors auf die neueste verfügbare Version
