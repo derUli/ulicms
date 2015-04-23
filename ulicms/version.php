@@ -1,7 +1,7 @@
 <?php
 class ulicms_version {
 	function ulicms_version() {
-		$this->version = "Purple Sky";
+		$this->version = "Monterey";
 		$this->internalVersion = Array (
 				9,
 				0,
