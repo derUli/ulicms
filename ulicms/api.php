@@ -1,4 +1,11 @@
 <?php
+
+// PHP Formbuilder Class initialisieren
+function initPFBC(){
+   include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "PFBC" . DIRECTORY_SEPERATOR . "Form.php";
+
+}
+
 function is_debug_mode() {
 	$config = new config ();
 	return (defined ( "ULICMS_DEBUG" ) and ULICMS_DEBUG) or (isset ( $config->debug ) and $config->debug);

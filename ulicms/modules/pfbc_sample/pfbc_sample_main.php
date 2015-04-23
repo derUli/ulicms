@@ -4,6 +4,8 @@
 // Diese ist ab UliCMS 9.0.0 im Kern der Software enthalten.
 // Unter UliCMS 8.0.x muss zuerst das "pfbc" Paket installiert werden
 function pfbc_sample_render() {
+        // PHP Formbuilder Klasse initialisieren
+        initPFBC();
 	$options = array (
 			"Option #1",
 			"Option #2",
