@@ -29,3 +29,4 @@ Filter für Videos:
 [X] Hilfetext zu "Ist Admin" hinzufügen
 [X] PHP Form Builder Class einbauen http://www.imavex.com/pfbc3.x-php5/
 [X] Promotext um Erwähnung der "PHP Form Builder Class" ergänzen.
+[ ] Medienverwaltung reparieren
