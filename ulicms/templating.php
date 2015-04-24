@@ -10,8 +10,25 @@ function get_type() {
 	}
 	if (empty ( $result ))
 		$result = "page";
-	return $result;
+	return $result->type;
 }
+
+
+function get_parent() {
+	if (! $page)
+		$page = get_requested_pagename ();
+	$result = "";
+	$sql = "SELECT `parent` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
+	$query = db_query ( $sql );
+	if (db_num_rows ( $query ) > 0) {
+		$result = db_fetch_object ( $query );
+	}
+	if (empty ( $result ))
+		$result = null;
+	return $result->parent;
+}
+
+
 function get_custom_data($page = null) {
 	if (! $page)
 		$page = get_requested_pagename ();
