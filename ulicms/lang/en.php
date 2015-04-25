@@ -406,7 +406,7 @@ define("TRANSLATION_ULICMS_NEWS", "News about UliCMS");
 define("TRANSLATION_POSTED_ON_DATE", "Posted on %s");
 
 define("TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">This page is powered by "
-     . "<a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS " . cms_version() . "</a></p>");
+. "<a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS " . cms_version() . "</a></p>");
 
 
 define("TRANSLATION_UNDER_MAINTENANCE", "This website is currently under maintenance.<br/>Please visit us again later.");
