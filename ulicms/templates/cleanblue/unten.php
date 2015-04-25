@@ -1,12 +1,9 @@
-<section class="advertisement">
-<?php
+<section class="advertisement"> <?php
 
 random_banner ();
-?>
-</section>
+?> </section>
 </main>
-<footer>
-<?php
+<footer> <?php
 
 poweredByUliCMS ();
 ?> | &copy; <?php
@@ -15,8 +12,7 @@ year ();
 ?> <?php
 
 homepage_owner ();
-?>
-</footer>
+?> </footer>
 </div>
 </body>
 </html>

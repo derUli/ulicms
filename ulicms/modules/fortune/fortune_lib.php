@@ -1,9 +1,9 @@
 <?php
 function getRandomFortune() {
 	if (is_admin_dir ())
-		$lang = getSystemLanguage ();
+	$lang = getSystemLanguage ();
 	else
-		$lang = getCurrentLanguage ( true );
+	$lang = getCurrentLanguage ( true );
 	$fortuneDir = getModulePath ( "fortune" ) . "cookies/" . $lang . "/";
 	if (! is_dir ( $fortuneDir )) {
 		$fortuneDir = getModulePath ( "fortune" ) . "cookies/en/";
@@ -14,7 +14,7 @@ function getRandomFortune() {
 		$file = $fortuneFiles [$file];
 		$file = $fortuneDir . $file;
 	} while ( ! is_file ( $file ) );
-	
+
 	$fileContent = file_get_contents ( $file );
 	$fileContent = trim ( $fileContent );
 	$fileContent = utf8_encode ( $fileContent );

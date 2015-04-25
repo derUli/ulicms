@@ -19,23 +19,23 @@ function pear_mail($to, $subject, $message, $headers = "") {
 	if (defined ( "NO_PEAR_MAIL" )) {
 		return false;
 	}
-	
+
 	$smtp_host = getconfig ( "smtp_host" );
 	if (! $smtp_host)
-		$smtp_host = "127.0.0.1";
-	
+	$smtp_host = "127.0.0.1";
+
 	$smtp_port = getconfig ( "smtp_port" );
 	if (! $smtp_port)
-		$smtp_port = "25";
-	
+	$smtp_port = "25";
+
 	$smtp_user = getconfig ( "smtp_user" );
 	if (! $smtp_user)
-		$smtp_user = null;
-	
+	$smtp_user = null;
+
 	$smtp_password = getconfig ( "smtp_password" );
 	if (! $smtp_password)
-		$smtp_password = null;
-	
+	$smtp_password = null;
+
 	if (! getconfig ( "smtp_auth" )) {
 		$mailer = Mail::factory ( 'smtp', array (
 				'host' => $smtp_host,
@@ -51,7 +51,7 @@ function pear_mail($to, $subject, $message, $headers = "") {
 				'password' => $smtp_password 
 		) );
 	}
-	
+
 	$header_list = split_headers ( $headers );
 	$header_list ['Subject'] = $subject;
 	return $mailer->send ( $to, $header_list, $message );
@@ -59,13 +59,13 @@ function pear_mail($to, $subject, $message, $headers = "") {
 function ulicms_mail($to, $subject, $message, $headers = "") {
 	$mode = getconfig ( "email_mode" );
 	if (! $mode)
-		$mode = "internal";
-		
-		// Damit Umlaute auch im Betreff korrekt dargestellt werden, diese mit UTF-8 kodieren
+	$mode = "internal";
+
+	// Damit Umlaute auch im Betreff korrekt dargestellt werden, diese mit UTF-8 kodieren
 	$subject = "=?UTF-8?B?" . base64_encode ( $subject ) . "?=";
-	
+
 	if ($mode == "pear_mail")
-		return pear_mail ( $to, $subject, $message, $headers );
+	return pear_mail ( $to, $subject, $message, $headers );
 	else
-		return mail ( $to, $subject, $message, $headers );
+	return mail ( $to, $subject, $message, $headers );
 }

@@ -1,7 +1,9 @@
-<h2 class="accordion-header"><?php
+<h2 class="accordion-header">
+<?php
 
 translate ( "fortune" );
-?></h2>
+?>
+</h2>
 <div class="accordion-content">
 <?php
 include_once getModulePath ( "fortune" ) . "fortune_lib.php";

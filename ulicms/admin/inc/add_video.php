@@ -49,6 +49,6 @@ if ($acl->hasPermission ( "videos" )) {
 	?>">
 </form>
 <?php
-} elseelse{
+} else{
 	noperms ();
 }

@@ -28,7 +28,7 @@ function resetPassword($username, $length = 8) {
 	$new_pass = rand_string ( $length );
 	$user = getUserByName ( $username );
 	if (! $user)
-		return false;
+	return false;
 	$uid = intval ( $user ["id"] );
 	changePassword ( $new_pass, $uid );
 
@@ -71,12 +71,12 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	$group = intval ( $group );
 	// Default ACL Group
 	if (! $acl_group)
-		$acl_group = getconfig ( "default_acl_group" );
+	$acl_group = getconfig ( "default_acl_group" );
 	if (! $acl_group)
-		$acl_group = "NULL";
+	$acl_group = "NULL";
 
 	if (is_null ( $acl_group ))
-		$acl_group = "NULL";
+	$acl_group = "NULL";
 
 	add_hook ( "before_create_user" );
 
@@ -93,9 +93,9 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 }
 function get_user_id() {
 	if (isset ( $_SESSION ["login_id"] ))
-		return intval ( $_SESSION ["login_id"] );
+	return intval ( $_SESSION ["login_id"] );
 	else
-		return 0;
+	return 0;
 }
 function user_exists($name) {
 	$query = db_query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE username = '" . db_escape ( $name ) . "'" );
@@ -116,7 +116,7 @@ function register_session($user, $redirect = true) {
 
 	$_SESSION ["logged_in"] = true;
 	if (is_null ( $_SESSION ["group_id"] ))
-		$_SESSION ["group_id"] = 0;
+	$_SESSION ["group_id"] = 0;
 
 	$_SESSION ["session_begin"] = time ();
 
@@ -128,12 +128,12 @@ function register_session($user, $redirect = true) {
 	}
 
 	if (! $redirect)
-		return;
+	return;
 
 	if (isset ( $_REQUEST ["go"] ))
-		header ( "Location: " . $_REQUEST ["go"] );
+	header ( "Location: " . $_REQUEST ["go"] );
 	else
-		header ( "Location: index.php" );
+	header ( "Location: index.php" );
 
 	return;
 }
@@ -143,9 +143,9 @@ function validate_login($user, $password) {
 
 	if ($user) {
 		if ($user ["old_encryption"])
-			$password = md5 ( $password );
+		$password = md5 ( $password );
 		else
-			$password = hash_password ( $password );
+		$password = hash_password ( $password );
 
 		if ($user ["password"] == $password) {
 			return $user;

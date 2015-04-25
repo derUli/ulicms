@@ -2,7 +2,7 @@
 
 // PHP Formbuilder Class initialisieren
 function initPFBC(){
-   include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "PFBC" . DIRECTORY_SEPERATOR . "Form.php";
+	include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "PFBC" . DIRECTORY_SEPERATOR . "Form.php";
 
 }
 
@@ -36,7 +36,7 @@ function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts 
 	if ($img) {
 		$url = '<img src="' . $url . '"';
 		foreach ( $atts as $key => $val )
-			$url .= ' ' . $key . '="' . $val . '"';
+		$url .= ' ' . $key . '="' . $val . '"';
 		$url .= ' />';
 	}
 	return $url;
@@ -66,13 +66,13 @@ function get_html_editor() {
 	}
 	$query = db_query ( "SELECT html_editor from " . tbname ( "users" ) . " where id = " . get_user_id () );
 	if (! $query)
-		return "ckeditor";
-	
+	return "ckeditor";
+
 	$obj = db_fetch_assoc ( $query );
 	if (! is_null ( $obj ["html_editor"] ) and ! empty ( $obj ["html_editor"] ))
-		return $obj ["html_editor"];
+	return $obj ["html_editor"];
 	else
-		return "ckeditor";
+	return "ckeditor";
 }
 function get_request_uri() {
 	return $_SERVER ["REQUEST_URI"];
@@ -85,18 +85,18 @@ function get_http_host() {
 function log_request($save_ip = false) {
 	add_hook ( "before_log_request" );
 	if ($save_ip)
-		$ip = get_ip ();
+	$ip = get_ip ();
 	else
-		$ip = "";
-	
+	$ip = "";
+
 	$ip = db_escape ( $ip );
 	$request_method = db_escape ( get_request_method () );
 	$useragent = db_escape ( get_useragent () );
 	$request_uri = db_escape ( get_request_uri () );
 	$http_host = db_escape ( get_http_host () );
-	
+
 	db_query ( "INSERT INTO " . tbname ( "log" ) . " (ip, request_method, useragent, request_uri, http_host) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host')" ) or die ( db_error () );
-	
+
 	add_hook ( "after_log_request" );
 }
 
@@ -104,7 +104,7 @@ function log_request($save_ip = false) {
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
 function check_csrf_token() {
 	if (! isset ( $_REQUEST ["csrf_token"] ))
-		return false;
+	return false;
 	return $_REQUEST ["csrf_token"] == $_SESSION ["csrf_token"];
 }
 
@@ -118,7 +118,7 @@ function csrf_token_html() {
 }
 function get_csrf_token() {
 	if (! isset ( $_SESSION ["csrf_token"] ))
-		$_SESSION ["csrf_token"] = md5 ( uniqid ( rand (), true ) );
+	$_SESSION ["csrf_token"] = md5 ( uniqid ( rand (), true ) );
 	return $_SESSION ["csrf_token"];
 }
 
@@ -126,9 +126,9 @@ function get_csrf_token() {
 // http:// or https://
 function get_site_protocol() {
 	if (isset ( $_SERVER ['HTTPS'] ) && ($_SERVER ['HTTPS'] == 'on' || $_SERVER ['HTTPS'] == 1) || isset ( $_SERVER ['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER ['HTTP_X_FORWARDED_PROTO'] == 'https')
-		return $protocol = 'https://';
+	return $protocol = 'https://';
 	else
-		return $protocol = 'http://';
+	return $protocol = 'http://';
 }
 function site_protocol() {
 	echo get_site_protocol ();
@@ -160,12 +160,12 @@ function get_available_post_types() {
 	global $post_types;
 	$post_types = array (
 			"page" 
-	);
-	add_hook ( $post_types );
-	
-	sort ( $post_types );
-	
-	return $post_types;
+			);
+			add_hook ( $post_types );
+
+			sort ( $post_types );
+
+			return $post_types;
 }
 
 // Schriftgrößen zurückgeben
@@ -181,7 +181,7 @@ function getFontSizes() {
 			"larger",
 			"x-large",
 			"xx-large" 
-	);
+			);
 }
 
 // Die IP-Adresse des Clients zurückgeben
@@ -208,31 +208,31 @@ function get_ip() {
 			'VIA',
 			'X_FORWARDED',
 			'X_FORWARDED_FOR' 
-	);
-	$regEx = "/^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/";
-	foreach ( $proxy_headers as $proxy_header ) {
-		if (isset ( $_SERVER [$proxy_header] )) {
-			/**
-			 * HEADER ist gesetzt und dies ist eine gültige IP
-			 */
-			return $_SERVER [$proxy_header];
-		} else if (stristr ( ',', $_SERVER [$proxy_header] ) !== false) {
-			// Behandle mehrere IPs in einer Anfrage
-			// (z.B.: X-Forwarded-For: client1, proxy1, proxy2)
-			$proxy_header_temp = trim ( array_shift ( explode ( ',', $_SERVER [$proxy_header] ) ) );
-			/**
-			 * Teile in einzelne IPs, gib die letzte zurück und entferne Leerzeichen
-			 */
-			
-			// if IPv4 address remove port if exists
-			if (preg_match ( $regEx, $proxy_header_temp ) && ($pos_temp = stripos ( $proxy_header_temp, ':' )) !== false) {
-				$proxy_header_temp = substr ( $proxy_header_temp, 0, $pos_temp );
+			);
+			$regEx = "/^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/";
+			foreach ( $proxy_headers as $proxy_header ) {
+				if (isset ( $_SERVER [$proxy_header] )) {
+					/**
+					 * HEADER ist gesetzt und dies ist eine gültige IP
+					 */
+					return $_SERVER [$proxy_header];
+				} else if (stristr ( ',', $_SERVER [$proxy_header] ) !== false) {
+					// Behandle mehrere IPs in einer Anfrage
+					// (z.B.: X-Forwarded-For: client1, proxy1, proxy2)
+					$proxy_header_temp = trim ( array_shift ( explode ( ',', $_SERVER [$proxy_header] ) ) );
+					/**
+					 * Teile in einzelne IPs, gib die letzte zurück und entferne Leerzeichen
+					 */
+						
+					// if IPv4 address remove port if exists
+					if (preg_match ( $regEx, $proxy_header_temp ) && ($pos_temp = stripos ( $proxy_header_temp, ':' )) !== false) {
+						$proxy_header_temp = substr ( $proxy_header_temp, 0, $pos_temp );
+					}
+					return $proxy_header_temp;
+				}
 			}
-			return $proxy_header_temp;
-		}
-	}
-	
-	return $_SERVER ['REMOTE_ADDR'];
+
+			return $_SERVER ['REMOTE_ADDR'];
 }
 function getModuleName($module) {
 	$name_file = getModulePath ( $module ) . $module . "_name.php";
@@ -254,7 +254,7 @@ function getLanguageNameByCode($code) {
 		$result = db_fetch_object ( $query );
 		$retval = $result->name;
 	}
-	
+
 	return $retval;
 }
 function getAvailableBackendLanguages() {
@@ -267,7 +267,7 @@ function getAvailableBackendLanguages() {
 			array_push ( $retval, basename ( $list [$i], ".php" ) );
 		}
 	}
-	
+
 	return $retval;
 }
 function getSystemLanguage() {
@@ -278,74 +278,74 @@ function getSystemLanguage() {
 	} else {
 		$lang = "de";
 	}
-	
+
 	if (! file_exists ( getLanguageFilePath ( $lang ) )) {
 		$lang = "de";
 	}
-	
+
 	return $lang;
 }
 
 // Übersetzung HTTP Status Code => Name
 function getStatusCodeByNumber($nr) {
 	$http_codes = array (
-			100 => 'Continue',
-			101 => 'Switching Protocols',
-			102 => 'Processing',
-			200 => 'OK',
-			201 => 'Created',
-			202 => 'Accepted',
-			203 => 'Non-Authoritative Information',
-			204 => 'No Content',
-			205 => 'Reset Content',
-			206 => 'Partial Content',
-			207 => 'Multi-Status',
-			300 => 'Multiple Choices',
-			301 => 'Moved Permanently',
-			302 => 'Found',
-			303 => 'See Other',
-			304 => 'Not Modified',
-			305 => 'Use Proxy',
-			306 => 'Switch Proxy',
-			307 => 'Temporary Redirect',
-			400 => 'Bad Request',
-			401 => 'Unauthorized',
-			402 => 'Payment Required',
-			403 => 'Forbidden',
-			404 => 'Not Found',
-			405 => 'Method Not Allowed',
-			406 => 'Not Acceptable',
-			407 => 'Proxy Authentication Required',
-			408 => 'Request Timeout',
-			409 => 'Conflict',
-			410 => 'Gone',
-			411 => 'Length Required',
-			412 => 'Precondition Failed',
-			413 => 'Request Entity Too Large',
-			414 => 'Request-URI Too Long',
-			415 => 'Unsupported Media Type',
-			416 => 'Requested Range Not Satisfiable',
-			417 => 'Expectation Failed',
-			418 => 'I\'m a teapot',
-			422 => 'Unprocessable Entity',
-			423 => 'Locked',
-			424 => 'Failed Dependency',
-			425 => 'Unordered Collection',
-			426 => 'Upgrade Required',
-			449 => 'Retry With',
-			450 => 'Blocked by Windows Parental Controls',
-			500 => 'Internal Server Error',
-			501 => 'Not Implemented',
-			502 => 'Bad Gateway',
-			503 => 'Service Unavailable',
-			504 => 'Gateway Timeout',
-			505 => 'HTTP Version Not Supported',
-			506 => 'Variant Also Negotiates',
-			507 => 'Insufficient Storage',
-			509 => 'Bandwidth Limit Exceeded',
-			510 => 'Not Extended' 
+	100 => 'Continue',
+	101 => 'Switching Protocols',
+	102 => 'Processing',
+	200 => 'OK',
+	201 => 'Created',
+	202 => 'Accepted',
+	203 => 'Non-Authoritative Information',
+	204 => 'No Content',
+	205 => 'Reset Content',
+	206 => 'Partial Content',
+	207 => 'Multi-Status',
+	300 => 'Multiple Choices',
+	301 => 'Moved Permanently',
+	302 => 'Found',
+	303 => 'See Other',
+	304 => 'Not Modified',
+	305 => 'Use Proxy',
+	306 => 'Switch Proxy',
+	307 => 'Temporary Redirect',
+	400 => 'Bad Request',
+	401 => 'Unauthorized',
+	402 => 'Payment Required',
+	403 => 'Forbidden',
+	404 => 'Not Found',
+	405 => 'Method Not Allowed',
+	406 => 'Not Acceptable',
+	407 => 'Proxy Authentication Required',
+	408 => 'Request Timeout',
+	409 => 'Conflict',
+	410 => 'Gone',
+	411 => 'Length Required',
+	412 => 'Precondition Failed',
+	413 => 'Request Entity Too Large',
+	414 => 'Request-URI Too Long',
+	415 => 'Unsupported Media Type',
+	416 => 'Requested Range Not Satisfiable',
+	417 => 'Expectation Failed',
+	418 => 'I\'m a teapot',
+	422 => 'Unprocessable Entity',
+	423 => 'Locked',
+	424 => 'Failed Dependency',
+	425 => 'Unordered Collection',
+	426 => 'Upgrade Required',
+	449 => 'Retry With',
+	450 => 'Blocked by Windows Parental Controls',
+	500 => 'Internal Server Error',
+	501 => 'Not Implemented',
+	502 => 'Bad Gateway',
+	503 => 'Service Unavailable',
+	504 => 'Gateway Timeout',
+	505 => 'HTTP Version Not Supported',
+	506 => 'Variant Also Negotiates',
+	507 => 'Insufficient Storage',
+	509 => 'Bandwidth Limit Exceeded',
+	510 => 'Not Extended'
 	);
-	
+
 	return $nr . " " . $http_codes [$nr];
 }
 
@@ -357,19 +357,19 @@ function ulicms_redirect($url = "http://www.ulicms.de", $status = 302) {
 }
 function getDomainByLanguage($language) {
 	$domainMapping = getconfig ( "domain_to_language" );
-	
+
 	if (! empty ( $domainMapping )) {
 		$domainMapping = explode ( "\n", $domainMapping );
 		for($i = 0; $i < count ( $domainMapping ); $i ++) {
 			$line = trim ( $domainMapping [$i] );
 			if (! empty ( $line )) {
 				$line = explode ( "=>", $line );
-				
+
 				if (count ( $line ) > 1) {
 					$line [0] = trim ( $line [0] );
 					$line [1] = trim ( $line [1] );
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
-						
+
 						if ($line [1] == $language) {
 							return $line [0];
 						}
@@ -390,12 +390,12 @@ function encodeURIComponent($str) {
 			'%27' => "'",
 			'%28' => '(',
 			'%29' => ')' 
-	);
-	return strtr ( rawurlencode ( $str ), $revert );
+			);
+			return strtr ( rawurlencode ( $str ), $revert );
 }
 function setLanguageByDomain() {
 	$domainMapping = getconfig ( "domain_to_language" );
-	
+
 	if (! empty ( $domainMapping )) {
 		$domainMapping = explode ( "\n", $domainMapping );
 		for($i = 0; $i < count ( $domainMapping ); $i ++) {
@@ -405,10 +405,10 @@ function setLanguageByDomain() {
 				if (count ( $line ) > 1) {
 					$line [0] = trim ( $line [0] );
 					$line [1] = trim ( $line [1] );
-					
+						
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
 						$domain = $_SERVER ["HTTP_HOST"];
-						
+
 						if ($line [0] == $domain and in_array ( $line [1], getAllLanguages () )) {
 							$_SESSION ["language"] = $line [1];
 							return true;
@@ -426,7 +426,7 @@ function getCacheType() {
 		case "cache_lite" :
 			@include "Cache/Lite.php";
 			$cache_type = "cache_lite";
-			
+				
 			break;
 		case "file" :
 		default :
@@ -434,7 +434,7 @@ function getCacheType() {
 			break;
 			break;
 	}
-	
+
 	return $cache_type;
 }
 function getOnlineUsers() {
@@ -484,7 +484,7 @@ if (! function_exists ( "get_host" )) {
 	function get_host() {
 		if ($host = $_SERVER ['HTTP_X_FORWARDED_HOST']) {
 			$elements = explode ( ',', $host );
-			
+				
 			$host = trim ( end ( $elements ) );
 		} else {
 			if (! $host = $_SERVER ['HTTP_HOST']) {
@@ -493,10 +493,10 @@ if (! function_exists ( "get_host" )) {
 				}
 			}
 		}
-		
+
 		// Remove port number from host
 		$host = preg_replace ( '/:\d+$/', '', $host );
-		
+
 		return trim ( $host );
 	}
 }
@@ -546,15 +546,15 @@ function clearCache() {
 	} else {
 		// File leeren
 		if (is_admin_dir ())
-			SureRemoveDir ( "../content/cache", false );
+		SureRemoveDir ( "../content/cache", false );
 		else
-			SureRemoveDir ( "content/cache", false );
+		SureRemoveDir ( "content/cache", false );
 	}
-	
+
 	if (function_exists ( "apc_clear_cache" )) {
 		clearAPCCache ();
 	}
-	
+
 	add_hook ( "after_clear_cache" );
 }
 
@@ -609,7 +609,7 @@ function setLocaleByLanguage() {
 	} else {
 		$locale = getconfig ( "locale" );
 		if ($locale) {
-			
+				
 			$locale = splitAndTrim ( $locale );
 			array_unshift ( $locale, LC_ALL );
 			@call_user_func_array ( "setlocale", $locale );
@@ -624,17 +624,17 @@ function setLocaleByLanguage() {
 function getCurrentLanguage($current = true) {
 	if ($current) {
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname='" . get_requested_pagename () . "'" );
-		
+
 		if (db_num_rows ( $query ) > 0) {
 			$fetch = db_fetch_object ( $query );
 			return $fetch->language;
 		}
 	}
-	
+
 	if (isset ( $_SESSION ["language"] ))
-		return basename ( $_SESSION ["language"] );
+	return basename ( $_SESSION ["language"] );
 	else
-		return basename ( getconfig ( "default_language" ) );
+	return basename ( getconfig ( "default_language" ) );
 }
 
 // Auf automatische aktualisieren prüfen.
@@ -643,9 +643,9 @@ function checkForUpdates() {
 	include_once "../lib/file_get_contents_wrapper.php";
 	$info = @file_get_contents_Wrapper ( UPDATE_CHECK_URL, true );
 	if (! $info or trim ( $info ) === "")
-		return false;
+	return false;
 	else
-		return $info;
+	return $info;
 }
 function getThemeList() {
 	return getThemesList ();
@@ -733,22 +733,22 @@ if (! function_exists ( "cleanString" )) {
 				'Ü' => 'Ue',
 				'ü' => 'ue',
 				'ß' => 'ss' 
-		);
-		$string = strtr ( $string, $accents );
-		$string = strtolower ( $string );
-		$string = preg_replace ( '/[^a-zA-Z0-9\s]/', '', $string );
-		$string = preg_replace ( '{ +}', ' ', $string );
-		$string = trim ( $string );
-		$string = str_replace ( ' ', $separator, $string );
-		return $string;
+				);
+				$string = strtr ( $string, $accents );
+				$string = strtolower ( $string );
+				$string = preg_replace ( '/[^a-zA-Z0-9\s]/', '', $string );
+				$string = preg_replace ( '{ +}', ' ', $string );
+				$string = trim ( $string );
+				$string = str_replace ( ' ', $separator, $string );
+				return $string;
 	}
 }
 function getTemplateDirPath($sub = "default") {
 	if (is_admin_dir ())
-		$templateDir = "../templates/";
+	$templateDir = "../templates/";
 	else
-		$templateDir = "templates/";
-	
+	$templateDir = "templates/";
+
 	$templateDir = $templateDir . $sub . "/";
 	return $templateDir;
 }
@@ -765,10 +765,10 @@ function replace_num_entity($ord) {
 	} else {
 		$ord = intval ( $ord );
 	}
-	
+
 	$no_bytes = 0;
 	$byte = array ();
-	
+
 	if ($ord < 128) {
 		return chr ( $ord );
 	} elseif ($ord < 2048) {
@@ -780,44 +780,44 @@ function replace_num_entity($ord) {
 	} else {
 		return;
 	}
-	
+
 	switch ($no_bytes) {
 		case 2 :
 			{
 				$prefix = array (
-						31,
-						192 
+				31,
+				192
 				);
 				break;
 			}
 		case 3 :
 			{
 				$prefix = array (
-						15,
-						224 
+				15,
+				224
 				);
 				break;
 			}
 		case 4 :
 			{
 				$prefix = array (
-						7,
-						240 
+				7,
+				240
 				);
 			}
 	}
-	
+
 	for($i = 0; $i < $no_bytes; $i ++) {
 		$byte [$no_bytes - $i - 1] = (($ord & (63 * pow ( 2, 6 * $i ))) / pow ( 2, 6 * $i )) & 63 | 128;
 	}
-	
+
 	$byte [0] = ($byte [0] & $prefix [0]) | $prefix [1];
-	
+
 	$ret = '';
 	for($i = 0; $i < $no_bytes; $i ++) {
 		$ret .= chr ( $byte [$i] );
 	}
-	
+
 	return $ret;
 }
 
@@ -855,14 +855,14 @@ function translate($name) {
 }
 function SureRemoveDir($dir, $DeleteMe) {
 	if (! $dh = @opendir ( $dir ))
-		return;
+	return;
 	while ( false !== ($obj = readdir ( $dh )) ) {
 		if ($obj == '.' || $obj == '..')
-			continue;
+		continue;
 		if (! @unlink ( $dir . '/' . $obj ))
-			SureRemoveDir ( $dir . '/' . $obj, true );
+		SureRemoveDir ( $dir . '/' . $obj, true );
 	}
-	
+
 	closedir ( $dh );
 	if ($DeleteMe) {
 		@rmdir ( $dir );
@@ -880,19 +880,19 @@ function SureRemoveDir($dir, $DeleteMe) {
  */
 function buildSEOUrl($page = false, $redirection = null) {
 	if ($page === false)
-		$page = get_requested_pagename ();
-	
+	$page = get_requested_pagename ();
+
 	if (startsWith ( $redirection, "#" )) {
 		return $redirection;
 	}
-	
+
 	if ($page === get_frontpage ())
-		return "./";
-	
+	return "./";
+
 	$seo_url = "";
-	
+
 	if (is_file ( "backend.php" ))
-		$seo_url .= "../";
+	$seo_url .= "../";
 	$seo_url .= $page;
 	$seo_url .= ".html";
 	return $seo_url;
@@ -902,7 +902,7 @@ function getModulePath($module) {
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "modules/";
 	}  // Backend Directory
-else {
+	else {
 		$module_folder = "../modules/";
 	}
 	$available_modules = Array ();
@@ -993,25 +993,25 @@ function getAllModules() {
 }
 function no_cache() {
 	if (! defined ( "NO_CACHE" ))
-		define ( "NO_CACHE", true );
+	define ( "NO_CACHE", true );
 }
 function replaceAudioTags($txt) {
 	// Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
 	// Reguläre Ausdrücke sehen für mich so aus, als wäre eine Katze über die Tastatur gelaufen.
 	$contains = strpos ( $txt, "[audio id=" ) !== FALSE;
-	
+
 	if ($contains) {
 		$query = db_query ( "select id, ogg_file, mp3_file from " . tbname ( "audio" ) . " order by id" );
-		
+
 		while ( $row = db_fetch_object ( $query ) ) {
 			$code1 = "[audio id=\"" . $row->id . "\"]";
 			$code2 = "[audio id=$quot;" . $row->id . "$quot;]";
 			$code3 = "[audio id=" . $row->id . "]";
 			if (! empty ( $row->mp3_file ))
-				$preferred = $row->mp3_file;
+			$preferred = $row->mp3_file;
 			else
-				$preferred = $row->ogg_file;
-			
+			$preferred = $row->ogg_file;
+				
 			$html = '<audio controls>';
 			if (! empty ( $row->mp3_file )) {
 				$html .= '<source src="content/audio/' . htmlspecialchars ( $row->mp3_file ) . '" type="audio/mp3">';
@@ -1030,28 +1030,28 @@ function replaceAudioTags($txt) {
 			$txt = str_replace ( $code3, $html, $txt );
 		}
 	}
-	
+
 	return $txt;
 }
 function replaceVideoTags($txt) {
 	// Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
 	// Reguläre Ausdrücke sehen für mich so aus, als wäre eine Katze über die Tastatur gelaufen.
 	$contains = strpos ( $txt, "[video id=" ) !== FALSE;
-	
+
 	if ($contains) {
 		$query = db_query ( "select id, ogg_file, webm_file, mp4_file, width, height from " . tbname ( "videos" ) . " order by id" );
-		
+
 		while ( $row = db_fetch_object ( $query ) ) {
 			$code1 = "[video id=\"" . $row->id . "\"]";
 			$code2 = "[video id=$quot;" . $row->id . "$quot;]";
 			$code3 = "[video id=" . $row->id . "]";
 			if (! empty ( $row->mp4_file ))
-				$preferred = $row->mp4_file;
+			$preferred = $row->mp4_file;
 			else if (! empty ( $row->ogg_file ))
-				$preferred = $row->ogg_file;
+			$preferred = $row->ogg_file;
 			else
-				$preferred = $row->webm_file;
-			
+			$preferred = $row->webm_file;
+				
 			$html = '<video width="' . $row->width . '" height="' . $row->height . '" controls>';
 			if (! empty ( $row->mp4_file )) {
 				$html .= '<source src="content/videos/' . htmlspecialchars ( $row->mp4_file ) . '" type="video/mp4">';
@@ -1080,19 +1080,19 @@ function replaceVideoTags($txt) {
 function replaceShortcodesWithModules($string, $replaceOther = true) {
 	if ($replaceOther) {
 		$string = str_replace ( '[title]', get_title (), $string );
-		
+
 		ob_start ();
 		logo ();
 		$string = str_replace ( '[logo]', ob_get_clean (), $string );
-		
+
 		ob_start ();
 		motto ();
 		$string = str_replace ( '[motto]', ob_get_clean (), $string );
-		
+
 		ob_start ();
 		motto ();
 		$string = str_replace ( '[slogan]', ob_get_clean (), $string );
-		
+
 		$current_page = get_page ();
 		$string = str_replace ( '[category]', get_category (), $string );
 	}
@@ -1101,9 +1101,9 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$thisModule = $allModules [$i];
 		$stringToReplace1 = '[module="' . $thisModule . '"]';
 		$stringToReplace2 = '[module=&quot;' . $thisModule . '&quot;]';
-		
+
 		$module_mainfile_path = getModuleMainFilePath ( $thisModule );
-		
+
 		if (is_file ( $module_mainfile_path ) and (strstr ( $string, $stringToReplace1 ) or strstr ( $string, $stringToReplace2 ))) {
 			require_once $module_mainfile_path;
 			if (function_exists ( $thisModule . "_render" )) {
@@ -1114,7 +1114,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		} else {
 			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
 		}
-		
+
 		$string = str_replace ( $stringToReplace1, $html_output, $string );
 		$string = str_replace ( $stringToReplace2, $html_output, $string );
 		$string = str_replace ( '[title]', get_title (), $string );
@@ -1159,26 +1159,26 @@ function getAllPagesWithTitle() {
 	$returnvalues = Array ();
 	while ( $row = db_fetch_object ( $query ) ) {
 		$a = Array (
-				$row->title,
-				$row->systemname . ".html" 
+		$row->title,
+		$row->systemname . ".html"
 		);
 		array_push ( $returnvalues, $a );
 		if (containsModule ( $row->systemname, "blog" )) {
-			
+				
 			$sql = "select title, seo_shortname from " . tbname ( "blog" ) . " ORDER by datum DESC";
 			$query_blog = db_query ( $sql );
 			while ( $row_blog = db_fetch_object ( $query_blog ) ) {
 				$title = $row->title . " -> " . $row_blog->title;
 				$url = $row->systemname . ".html" . "?single=" . $row_blog->seo_shortname;
 				$b = Array (
-						$title,
-						$url 
+				$title,
+				$url
 				);
 				array_push ( $returnvalues, $b );
 			}
 		}
 	}
-	
+
 	return $returnvalues;
 }
 
@@ -1187,7 +1187,7 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
 	if (! $lang) {
 		$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL ORDER BY $order" );
 	} else {
-		
+
 		$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape ( $lang ) . "' ORDER BY $order" );
 	}
 	$returnvalues = Array ();
@@ -1196,7 +1196,7 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
 			array_push ( $returnvalues, $row );
 		}
 	}
-	
+
 	return $returnvalues;
 }
 
@@ -1205,14 +1205,14 @@ function getAllSystemNames($lang = null) {
 	if (! $lang) {
 		$query = db_query ( "SELECT systemname,id FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY systemname" );
 	} else {
-		
+
 		$query = db_query ( "SELECT systemname,id FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='" . db_escape ( $lang ) . "' ORDER BY systemname" );
 	}
 	$returnvalues = Array ();
 	while ( $row = db_fetch_object ( $query ) ) {
 		array_push ( $returnvalues, $row->systemname );
 	}
-	
+
 	return $returnvalues;
 }
 
@@ -1265,24 +1265,24 @@ function deleteconfig($key) {
 // Set a configuration Variable;
 function setconfig($key, $value) {
 	$query = db_query ( "SELECT * FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
-	
+
 	if (db_num_rows ( $query ) > 0) {
 		db_query ( "UPDATE " . tbname ( "settings" ) . " SET value='$value' WHERE name='$key'" );
 	} else {
-		
+
 		db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 	}
 }
 function is__writable($path) {
 	if ($path {strlen ( $path ) - 1} == '/')
-		
-		return is__writable ( $path . uniqid ( mt_rand () ) . '.tmp' );
-	
+
+	return is__writable ( $path . uniqid ( mt_rand () ) . '.tmp' );
+
 	elseif (file_exists ( $path ) && preg_match ( '/\.tmp/', $path )) {
-		
+
 		return is_writable ( $path );
 	} else
-		return false; // Or return error - invalid path...
+	return false; // Or return error - invalid path...
 }
 
 // Gibt die Identifier aller Menüs zurück.
@@ -1295,38 +1295,38 @@ function getAllMenus() {
 			"right",
 			"bottom",
 			"none" 
-	);
-	$additional_menus = getconfig ( "additional_menus" );
-	
-	if ($additional_menus) {
-		$additional_menus = explode ( ";", $additional_menus );
-		foreach ( $additional_menus as $m ) {
-			array_push ( $menus, $m );
-		}
-	}
-	return $menus;
+			);
+			$additional_menus = getconfig ( "additional_menus" );
+
+			if ($additional_menus) {
+				$additional_menus = explode ( ";", $additional_menus );
+				foreach ( $additional_menus as $m ) {
+					array_push ( $menus, $m );
+				}
+			}
+			return $menus;
 }
 
 // Check if site contains a module
 function containsModule($page = null, $module = false) {
 	if (is_null ( $page ))
-		$page = get_requested_pagename ();
-	
+	$page = get_requested_pagename ();
+
 	$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
 	$dataset = db_fetch_assoc ( $query );
 	$content = $dataset ["content"];
 	$content = str_replace ( "&quot;", "\"", $content );
 	if ($module)
-		return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
+	return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
 	else
-		return preg_match ( "/\[module=\".+\"\]/", $content );
+	return preg_match ( "/\[module=\".+\"\]/", $content );
 }
 function page_has_html_file($page) {
 	$query = db_query ( "SELECT `html_file` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
 	$dataset = db_fetch_assoc ( $query );
 	$html_file = $dataset ["html_file"];
 	if (empty ( $html_file ) or is_null ( $html_file ))
-		return null;
+	return null;
 	$html_file = dirname ( __file__ ) . "/content/files/" . $html_file;
 	if (! endsWith ( $html_file, ".html" ) && ! endsWith ( $html_file, ".htm" )) {
 		$html_file = $html_file . ".html";
@@ -1341,17 +1341,17 @@ function page_has_html_file($page) {
 function uninstall_module($name, $type = "module") {
 	// Nur Admins können Module löschen
 	if (! is_admin ())
-		return false;
-	
+	return false;
+
 	$name = trim ( $name );
 	$name = basename ( $name );
 	$name = trim ( $name );
-	
+
 	// Verhindern, dass der Modulordner oder gar das ganze
 	// CMS gelöscht werden kann
 	if ($name == "." or $name == ".." or empty ( $name ))
-		return false;
-	
+	return false;
+
 	if ($type === "module") {
 		$moduleDir = getModulePath ( $name );
 		// Modul-Ordner entfernen
@@ -1359,7 +1359,7 @@ function uninstall_module($name, $type = "module") {
 			$uninstall_script = getModuleUninstallScriptPath ( $name );
 			// Uninstall Script ausführen, sofern vorhanden
 			if (is_file ( $uninstall_script ))
-				include $uninstall_script;
+			include $uninstall_script;
 			sureRemoveDir ( $moduleDir, true );
 			return ! is_dir ( $moduleDir );
 		}
@@ -1383,7 +1383,7 @@ function is_logged_in() {
 // Gehörte noch zur alten Hierarchie-basierten Rechteverwaltung
 function has_permissions($mod) {
 	if (! isset ( $_SESSION ["group"] ))
-		return false;
+	return false;
 	return $_SESSION ["group"] >= $mod;
 }
 
@@ -1435,7 +1435,7 @@ function is_admin() {
 		$query = db_query ( "SELECT `admin` FROM " . tbname ( "users" ) . " where id = " . $user_id . " and admin = 1" );
 		$retval = db_num_rows ( $query );
 	}
-	
+
 	return $retval;
 }
 

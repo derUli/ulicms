@@ -1,6 +1,6 @@
 <?php
 if (! defined ( "ULICMS_ROOT" ))
-	die ( "Dummer Hacker!" );
+die ( "Dummer Hacker!" );
 
 if (isset ( $_REQUEST ["standard"] )) {
 	$standard = intval ( $_REQUEST ["standard"] );
@@ -21,14 +21,14 @@ if (isset ( $_REQUEST ["sort"] ) and in_array ( $_REQUEST ["sort"], array (
 
 if ($_SESSION ["grp_sort"] == "id") {
 	if ($_SESSION ["sortDirection"] == "asc")
-		ksort ( $groups );
+	ksort ( $groups );
 	else if ($_SESSION ["sortDirection"] == "asc")
-		krsort ( $groups );
+	krsort ( $groups );
 } else if ($_SESSION ["grp_sort"] == "name") {
 	if ($_SESSION ["sortDirection"] == "asc")
-		asort ( $groups );
+	asort ( $groups );
 	else
-		arsort ( $groups );
+	arsort ( $groups );
 } else {
 	ksort ( $groups );
 }
@@ -37,79 +37,76 @@ if ($_SESSION ["grp_sort"] == "id") {
 <p>
 	<a href="?action=groups&add=add"><?php
 
-echo TRANSLATION_CREATE_GROUP;
-	?></a>
+	echo TRANSLATION_CREATE_GROUP;
+	?> </a>
 </p>
-<?php
+	<?php
 
-if (count ( $groups ) > 0) {
-	?>
+	if (count ( $groups ) > 0) {
+		?>
 <table class="tablesorter">
 	<thead>
 		<tr>
 			<th style="min-width: 100px;"><a
 				href="?action=groups&sort=id&sort_direction=change"><strong><?php
 
-echo TRANSLATION_ID;
-	?></strong></a></th>
+				echo TRANSLATION_ID;
+				?> </strong> </a></th>
 			<th style="min-width: 200px;"><a
 				href="?action=groups&sort=name&sort_direction=change"><strong><?php
 
-echo TRANSLATION_NAME;
-	?></strong></a></th>
+				echo TRANSLATION_NAME;
+				?> </strong> </a></th>
 			<th><strong><?php
 
-echo TRANSLATION_STANDARD;
-	?></strong></th>
+			echo TRANSLATION_STANDARD;
+			?> </strong></th>
 			<td></td>
 			<td></td>
 		</tr>
 	</thead>
 	<tbody>
 
-<?php
+	<?php
 
-foreach ( $groups as $id => $name ) {
+	foreach ( $groups as $id => $name ) {
 		?>
-<tr>
+		<tr>
 			<td><?php
 
-echo $id;
-		?></td>
+			echo $id;
+			?>
+			</td>
 			<td><?php
 
-echo $name;
-		?></td>
-			<td>
-<?php
-
-if ($default_acl_group === $id) {
+			echo $name;
 			?>
-<span style="color: green; font-weight: bold;"><?php
+			</td>
+			<td><?php
 
-echo TRANSLATION_YES;
-			?></a>
-<?php
+			if ($default_acl_group === $id) {
+				?> <span style="color: green; font-weight: bold;"><?php
 
-} else {
-			?>
-<a href="?action=groups&standard=<?php
+				echo TRANSLATION_YES;
+				?> </span> <?php
+
+			} else {
+				?> <a href="?action=groups&standard=<?php
 
 echo $id;
-			?>"<span style="color: red; font-weight: bold;"
-						onclick='return confirm("<?php
+			?>"><span style="color: red; font-weight: bold;"
+					onclick='return confirm("<?php
 
 echo str_ireplace ( "%name%", $name, TRANSLATION_MAKE_GROUP_DEFAULT );
-			?>")'><?php
+?>")'><?php
 
 echo TRANSLATION_NO;
-			?></a>
-<?php
+?>
+			</span>
+			</a> <?php
 
-}
-		?>
-
-
+			}
+			?>
 			</td>
 			<td><a href="?action=groups&edit=<?php
 
@@ -122,7 +119,7 @@ echo TRANSLATION_EDIT;
 					title="<?php
 
 echo TRANSLATION_EDIT;
-		?>"></a></td>
+		?>"> </a></td>
 			<td><a href="?action=groups&delete=<?php
 
 echo $id;
@@ -138,14 +135,14 @@ echo TRANSLATION_DELETE;
 					title="<?php
 
 echo TRANSLATION_DELETE;
-         ?>"></a></td>
+         ?>"> </a></td>
 		</tr>
 
 
-<?php }
-     ?>
+		<?php }
+		?>
 
-		</tbody>
+	</tbody>
 </table>
-<?php }
-?>
+		<?php }
+		?>

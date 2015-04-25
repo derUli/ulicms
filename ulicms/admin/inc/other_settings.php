@@ -426,7 +426,7 @@ if (! $acl->hasPermission ( "other" )) {
 						value="<?php
 	
 	echo real_htmlspecialchars ( $smtp_host );
-	?>"
+	?>">
 				
 				</div>
 			</div>
@@ -441,7 +441,7 @@ if (! $acl->hasPermission ( "other" )) {
 					value="<?php
 	
 	echo real_htmlspecialchars ( $smtp_port );
-	?>"
+	?>">
 			
 			</div>
 		</div>
@@ -471,8 +471,7 @@ if (! $acl->hasPermission ( "other" )) {
 					value="<?php
 	
 	echo real_htmlspecialchars ( $smtp_user );
-	?>"
-			
+	?>">			
 			</div>
 		</div>
 
@@ -485,7 +484,7 @@ if (! $acl->hasPermission ( "other" )) {
 				value="<?php
 	
 	echo real_htmlspecialchars ( $smtp_password );
-	?>"
+	?>">
 		
 		</div>
 	</div>

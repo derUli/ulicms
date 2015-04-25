@@ -76,15 +76,15 @@ if (! function_exists ( "cleanString" )) {
 				'Ü' => 'Ue',
 				'ü' => 'ue',
 				'ß' => 'ss' 
-		);
-		$string = strtr ( $string, $accents );
-		$string = strtolower ( $string );
-		$string = preg_replace ( '/[^a-zA-Z0-9\s]/', '', $string );
-		$string = preg_replace ( '{ +}', ' ', $string );
-		$string = trim ( $string );
-		$string = str_replace ( ' ', $separator, $string );
-		
-		return $string;
+				);
+				$string = strtr ( $string, $accents );
+				$string = strtolower ( $string );
+				$string = preg_replace ( '/[^a-zA-Z0-9\s]/', '', $string );
+				$string = preg_replace ( '{ +}', ' ', $string );
+				$string = trim ( $string );
+				$string = str_replace ( ' ', $separator, $string );
+
+				return $string;
 	}
 }
 
@@ -96,7 +96,7 @@ if (! function_exists ( "sanitize" )) {
 					"\n",
 					"%0a",
 					"%0d" 
-			), '', stripslashes ( $data ) );
+					), '', stripslashes ( $data ) );
 		}
 	}
 }
@@ -154,7 +154,7 @@ if (! function_exists ( "make_links_clickable" )) {
 }
 
 if (! function_exists ( "getExcerpt" )) {
-	
+
 	/**
 	 * Get excerpt from string
 	 *
@@ -176,7 +176,7 @@ if (! function_exists ( "getExcerpt" )) {
 		} else {
 			$excerpt = $str;
 		}
-		
+
 		return $excerpt;
 	}
 }
@@ -195,42 +195,42 @@ if (! function_exists ( "decodeHTMLEntities" )) {
 }
 
 if (! function_exists ( "keywordsFromString" )) {
-	
+
 	// Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
 	// z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
 	function keywordsFromString($text) {
 		$return = array ();
-		
+
 		// Punkt, Beistrich, Zeilenumbruch... in Leerzeichen umwandeln
 		$text = str_replace ( array (
 				"\n",
 				".",
 				"," 
-		), " ", $text );
-		
-		// text an Leerzeichen zerlegen
-		$array = explode ( " ", $text );
-		
-		foreach ( $array as $word ) {
-			if (strlen ( $word ) == 0) {
-				// wenn kein Wort vorhanden ist nichts machen
-				continue;
-			}
-			if (! in_array ( $word, $array )) {
-				// wenn das wort zum ersten mal gefunden wurde
-				$return [$word] = 1;
-			} else {
-				// wenn schon vorhanden
-				$return [$word] ++;
-			}
-		}
-		
-		$return = array_filter ( $return, "decodeHTMLEntities" );
-		// nach häufigkeit sortieren
-		arsort ( $return );
-		
-		// array zurückgeben
-		return $return;
+				), " ", $text );
+
+				// text an Leerzeichen zerlegen
+				$array = explode ( " ", $text );
+
+				foreach ( $array as $word ) {
+					if (strlen ( $word ) == 0) {
+						// wenn kein Wort vorhanden ist nichts machen
+						continue;
+					}
+					if (! in_array ( $word, $array )) {
+						// wenn das wort zum ersten mal gefunden wurde
+						$return [$word] = 1;
+					} else {
+						// wenn schon vorhanden
+						$return [$word] ++;
+					}
+				}
+
+				$return = array_filter ( $return, "decodeHTMLEntities" );
+				// nach häufigkeit sortieren
+				arsort ( $return );
+
+				// array zurückgeben
+				return $return;
 	}
 }
 

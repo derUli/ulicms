@@ -1,7 +1,7 @@
 <?php
 function formatTime($Sekundenzahl) {
 	$Sekundenzahl = abs ( $Sekundenzahl ); // Ganzzahlwert bilden
-	
+
 	return sprintf ( TRANSLATION_FORMAT_TIME, $Sekundenzahl / 60 / 60 / 24, ($Sekundenzahl / 60 / 60) % 24, ($Sekundenzahl / 60) % 60, $Sekundenzahl % 60 );
 }
 
@@ -20,6 +20,6 @@ function formatSizeUnits($bytes) {
 	} else {
 		$bytes = '0 bytes';
 	}
-	
+
 	return $bytes;
 }
