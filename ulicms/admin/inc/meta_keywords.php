@@ -4,12 +4,12 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "settings_simple" )) {
-		
+
 		$languages = getAllLanguages ();
-		
+
 		if (isset ( $_POST ["submit"] )) {
 			for($i = 0; $i < count ( $languages ); $i ++) {
-				
+
 				$lang = $languages [$i];
 				if (isset ( $_POST ["meta_keywords_" . $lang] )) {
 					$page = db_escape ( $_POST ["meta_keywords_" . $lang] );
@@ -20,47 +20,51 @@ if (defined ( "_SECURITY" )) {
 				}
 			}
 		}
-		
+
 		$meta_keywordss = array ();
-		
+
 		for($i = 0; $i < count ( $languages ); $i ++) {
 			$lang = $languages [$i];
 			$meta_keywordss [$lang] = getconfig ( "meta_keywords_" . $lang );
-			
+				
 			if (! $meta_keywordss [$lang])
-				$meta_keywordss [$lang] = getconfig ( "meta_keywords" );
+			$meta_keywordss [$lang] = getconfig ( "meta_keywords" );
 		}
-		
+
 		?>
-<h1><?php
-		
+<h1>
+<?php
+
 echo TRANSLATION_META_KEYWORDS;
-		?></h1>
+?>
+</h1>
 <form action="index.php?action=meta_keywords" id="meta_keywords"
 	method="post">
-<?php
-		
-csrf_token_html ();
-		?>
-<table border=0>
+	<?php
+
+	csrf_token_html ();
+	?>
+	<table border=0>
 		<tr>
 			<td style="min-width: 100px;"><strong><?php
-		
-echo TRANSLATION_LANGUAGE;
-		?></strong></td>
+
+			echo TRANSLATION_LANGUAGE;
+			?>
+			</strong></td>
 			<td><strong><?php
-		
-echo TRANSLATION_META_KEYWORDS;
-		?></strong></td>
+
+			echo TRANSLATION_META_KEYWORDS;
+			?>
+			</strong></td>
 		</tr>
-<?php
+		<?php
 		for($n = 0; $n < count ( $languages ); $n ++) {
 			$lang = $languages [$n];
 			?>
-<tr>
+		<tr>
 			<td><?php
-			
-echo $lang;
+
+			echo $lang;
 			?></td>
 			<td><input name="meta_keywords_<?php
 			
@@ -71,11 +75,10 @@ echo $lang;
 			
 echo stringHelper::real_htmlspecialchars ( $meta_keywordss [$lang] );
 			?>"></td>
-<?php
-		
-}
-		?>
+			<?php
 
+		}
+		?>
 		
 		
 		<tr>
@@ -104,11 +107,11 @@ $("#meta_keywords_settings").ajaxForm({beforeSubmit: function(e){
 
 </script>
 
-<?php
-	
-} else {
-         noperms();
-         }
-    
-     }
+		<?php
+
+	} else {
+		noperms();
+	}
+
+}
 ?>

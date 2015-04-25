@@ -12,12 +12,12 @@ if (defined ( "_SECURITY" )) {
 	<img src="gfx/logo.png" alt="UliCMS" />
 </p>
 <strong>Release <?php
-		
+
 echo cms_version ();
-		?> "<?php
-		
+?> "<?php
+
 echo $version->getVersion ();
-		?>"</strong>
+?>"</strong>
 <br />
 
 <p>
@@ -64,8 +64,8 @@ echo $version->getVersion ();
 </div>
 <br />
 
-<input type="button" value="UliCMS Portal"
-	onclick='window.open("http://www.ulicms.de");' />
+<input type="button"
+	value="UliCMS Portal" onclick='window.open("http://www.ulicms.de");' />
 
 <input type="button"
 	value="<?php
@@ -75,10 +75,12 @@ echo TRANSLATION_LICENSE;
 	onclick='window.open("license.html");' />
 
 
-<input type="button" value="Community"
+<input
+	type="button" value="Community"
 	onclick='location.replace("http://www.ulicms.de/forum.html");'>
 
-<input type="button" value="Feedback"
+<input
+	type="button" value="Feedback"
 	onclick='location.replace("http://www.ulicms.de/?seite=kontakt");'>
 
 
@@ -86,7 +88,7 @@ echo TRANSLATION_LICENSE;
 
 
 
-<?php }
-    
-     }
+		<?php }
+
+}
 ?>

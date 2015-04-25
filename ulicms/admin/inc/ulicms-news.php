@@ -1,6 +1,6 @@
 <?php
 if (! defined ( "_SECURITY" ))
-	die ( "No direct access allowed!" );
+die ( "No direct access allowed!" );
 @session_start ();
 
 $rss = new DOMDocument ();
@@ -43,4 +43,3 @@ for($x = 0; $x < $limit; $x ++) {
 	echo '<p>' . $description . '</p>';
 }
 
- 

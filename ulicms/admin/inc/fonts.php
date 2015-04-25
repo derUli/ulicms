@@ -25,14 +25,14 @@ if (! function_exists ( 'getFontFamilys' )) {
 		$fonts ["Calibri"] = "Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif";
 		$fonts ["Segoe"] = "'wf_SegoeUI', 'Segoe UI', 'Segoe','Segoe WP', 'Tahoma', 'Verdana', 'Arial', 'sans-serif'";
 		add_hook ( "custom_fonts" );
-		
+
 		// Hier bei Bedarf weitere Fonts einfügen
 		// $fonts["Meine Font 1"] = "myfont1";
 		// $fonts["Meine Font 2"] = "myfont2";
 		// $fonts["Meine Font 3"] = "myfont3";
 		// Weitere Fonts Ende
 		uksort ( $fonts, "strnatcasecmp" );
-		
+
 		return $fonts;
 	}
 }

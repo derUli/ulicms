@@ -34,7 +34,7 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST") {
 
 if (getconfig ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 	$txt = get_translation ( "IP_BLOCKED_BY_SPAMHAUS" );
-	
+
 	$txt = str_replace ( "%ip", get_ip (), $txt );
 	header ( "HTTP/1.0 403 Forbidden" );
 	header ( "Content-Type: text/html; charset=UTF-8" );
@@ -60,9 +60,9 @@ if (strtolower ( getconfig ( "maintenance_mode" ) ) == "on" || strtolower ( getc
 	header ( 'Retry-After: 60' );
 	header ( "Content-Type: text/html; charset=utf-8" );
 	if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" ))
-		require_once getTemplateDirPath ( $theme ) . "maintenance.php";
+	require_once getTemplateDirPath ( $theme ) . "maintenance.php";
 	else
-		die ( get_translation ( "UNDER_MAINTENANCE" ) );
+	die ( get_translation ( "UNDER_MAINTENANCE" ) );
 	add_hook ( "after_maintenance_message" );
 	die ();
 }
@@ -104,10 +104,10 @@ if ($format == "html") {
 add_hook ( "after_http_header" );
 
 if (count ( getThemeList () ) === 0)
-	throw new Exception ( "Keine Themes vorhanden!" );
+throw new Exception ( "Keine Themes vorhanden!" );
 
 if (! is_dir ( getTemplateDirPath ( $theme ) ))
-	throw new Exception ( "Das aktivierte Theme existiert nicht!" );
+throw new Exception ( "Das aktivierte Theme existiert nicht!" );
 
 if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 	include getTemplateDirPath ( $theme ) . "functions.php";
@@ -129,7 +129,7 @@ switch ($c) {
 	case "cache_lite" :
 		@include "Cache/Lite.php";
 		$cache_type = "cache_lite";
-		
+
 		break;
 	case "file" :
 	default :
@@ -139,16 +139,16 @@ switch ($c) {
 }
 
 if (file_exists ( $cached_page_path ) and ! getconfig ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
-	
+
 	$cached_content = file_get_contents ( $cached_page_path );
 	$last_modified = filemtime ( $cached_page_path );
-	
+
 	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! defined ( "NO_CACHE" )) {
 		echo $cached_content;
-		
+
 		if (getconfig ( "no_auto_cron" ))
-			die ();
-		
+		die ();
+
 		add_hook ( "before_cron" );
 		@include 'cron.php';
 		add_hook ( "after_cron" );
@@ -171,33 +171,33 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 	$options = array (
 			'lifeTime' => getconfig ( "cache_period" ),
 			'cacheDir' => "content/cache/" 
-	);
-	
-	if (! class_exists ( "Cache_Lite" )) {
-		throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
-	}
-	$Cache_Lite = new Cache_Lite ( $options );
-	
-	if ($data = $Cache_Lite->get ( $id )) {
-		die ( $data );
-	} else {
-		ob_start ();
-	}
+			);
+
+			if (! class_exists ( "Cache_Lite" )) {
+				throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
+			}
+			$Cache_Lite = new Cache_Lite ( $options );
+
+			if ($data = $Cache_Lite->get ( $id )) {
+				die ( $data );
+			} else {
+				ob_start ();
+			}
 }
 
 $html_file = page_has_html_file ( get_requested_pagename () );
 
 if ($html_file) {
 	if (file_exists ( $html_file ))
-		echo file_get_contents ( $html_file );
+	echo file_get_contents ( $html_file );
 	else
-		echo "File Not Found";
+	echo "File Not Found";
 } else {
 	require_once getTemplateDirPath ( $theme ) . "oben.php";
 	add_hook ( "before_content" );
 	content ();
 	add_hook ( "after_content" );
-	
+
 	require_once getTemplateDirPath ( $theme ) . "unten.php";
 }
 
@@ -205,14 +205,14 @@ add_hook ( "after_html" );
 
 if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
 	$data = ob_get_clean ();
-	
+
 	if (! defined ( "EXCEPTION_OCCURRED" ) and ! defined ( "NO_CACHE" )) {
 		$Cache_Lite->save ( $data, $id );
 	}
 	echo $data;
-	
+
 	if (getconfig ( "no_auto_cron" ))
-		die ();
+	die ();
 	add_hook ( "before_cron" );
 	@include 'cron.php';
 	add_hook ( "after_cron" );
@@ -221,27 +221,27 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 
 if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	$generated_html = ob_get_clean ();
-	
+
 	if (! defined ( "EXCEPTION_OCCURRED" ) and ! defined ( "NO_CACHE" )) {
 		$handle = fopen ( $cached_page_path, "wb" );
 		fwrite ( $handle, $generated_html );
 		fclose ( $handle );
 	}
 	echo ($generated_html);
-	
+
 	// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 	if (getconfig ( "no_auto_cron" ))
-		die ();
-	
+	die ();
+
 	add_hook ( "before_cron" );
 	@include 'cron.php';
 	add_hook ( "after_cron" );
 	die ();
 } else {
-	
+
 	if (getconfig ( "no_auto_cron" ))
-		die ();
-	
+	die ();
+
 	add_hook ( "before_cron" );
 	@include 'cron.php';
 	add_hook ( "after_cron" );

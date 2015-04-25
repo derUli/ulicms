@@ -331,7 +331,7 @@ function get_title($ipage = null, $headline = false) {
 			} else {
 				$title = $row->title;
 			}
-				
+
 			$title = apply_filter ( $title, "title" );
 			return $title;
 		}
@@ -512,11 +512,11 @@ function get_menu($name = "top", $parent = null, $recursive = true) {
 	while ( $row = db_fetch_object ( $query ) ) {
 		if (checkAccess ( $row->access )) {
 			$containsCurrentItem = parent_item_contains_current_page ( $row->id );
-				
+
 			$additional_classes = " ";
 			if ($containsCurrentItem)
 			$additional_classes = " contains-current-page";
-				
+
 			if (get_requested_pagename () != $row->systemname)
 			$html .= "  <li class='" . trim ( $additional_classes ) . "'>";
 			else
@@ -536,11 +536,11 @@ function get_menu($name = "top", $parent = null, $recursive = true) {
 				$html .= htmlentities ( $row->title, ENT_QUOTES, "UTF-8" );
 			}
 			$html .= "</a>\n";
-				
+
 			if ($recursive) {
 				$html .= get_menu ( $name, $row->id );
 			}
-				
+
 			$html .= "</li>";
 		}
 	}

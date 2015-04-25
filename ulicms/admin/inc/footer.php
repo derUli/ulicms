@@ -5,8 +5,8 @@ if (is_logged_in ()) {
 <a style="float: right" href="#" class="scrollup" name="scrollup"
 	onclick="scrollToAnchor('top'); return false;"><img
 	class="mobile-big-image" src="gfx/up.png" alt="Nach Oben"
-	title="Nach oben"></a>
-<?php
+	title="Nach oben"> </a>
+	<?php
 
 }
 ?>

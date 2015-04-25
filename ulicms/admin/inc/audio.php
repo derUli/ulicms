@@ -2,7 +2,7 @@
 $acl = new ACL ();
 $audio_folder = ULICMS_ROOT . "/content/audio";
 if (! is_dir ( $audio_folder ))
-	mkdir ( $audio_folder );
+mkdir ( $audio_folder );
 if ($acl->hasPermission ( "audio" ) and isset ( $_REQUEST ["delete"] )) {
 	$query = db_query ( "select ogg_file, mp3_file from " . tbname ( "audio" ) . " where id = " . intval ( $_REQUEST ["delete"] ) );
 	if (db_num_rows ( $query ) > 0) {
@@ -11,13 +11,13 @@ if ($acl->hasPermission ( "audio" ) and isset ( $_REQUEST ["delete"] )) {
 		if (! empty ( $result->ogg_file ) and is_file ( $filepath )) {
 			@unlink ( $filepath );
 		}
-		
+
 		$filepath = ULICMS_ROOT . "/content/audio/" . basename ( $result->mp3_file );
 		if (! empty ( $result->mp3_file ) and is_file ( $filepath )) {
-			
+				
 			@unlink ( $filepath );
 		}
-		
+
 		db_query ( "DELETE FROM " . tbname ( "audio" ) . " where id = " . $_REQUEST ["delete"] );
 	}
 } else if ($acl->hasPermission ( "audio" ) and isset ( $_REQUEST ["update"] )) {
@@ -27,9 +27,9 @@ if ($acl->hasPermission ( "audio" ) and isset ( $_REQUEST ["delete"] )) {
 	$mp3_file = db_escape ( basename ( $_POST ["mp3_file"] ) );
 	$updated = time ();
 	$category_id = intval ( $_POST ["category"] );
-	
+
 	db_query ( "UPDATE " . tbname ( "audio" ) . " SET name='$name', ogg_file='$ogg_file', mp3_file='$mp3_file', category_id = $category_id, `updated` = $updated where id = $id" ) or die ( db_error () );
-} 
+}
 
 else if ($acl->hasPermission ( "audio" ) and isset ( $_FILES ) and isset ( $_REQUEST ["add"] )) {
 	$mp3_file_value = "";
@@ -44,15 +44,15 @@ else if ($acl->hasPermission ( "audio" ) and isset ( $_FILES ) and isset ( $_REQ
 				"video/mpeg",
 				"video/x-mpeg",
 				"audio/mpeg" 
-		);
-		if (in_array ( $mp3_type, $mp3_allowed_mime_type )) {
-			$target = $audio_folder . "/" . $mp3_file;
-			if (move_uploaded_file ( $_FILES ['mp3_file'] ['tmp_name'], $target )) {
-				$mp3_file_value = basename ( $mp3_file );
-			}
-		}
+				);
+				if (in_array ( $mp3_type, $mp3_allowed_mime_type )) {
+					$target = $audio_folder . "/" . $mp3_file;
+					if (move_uploaded_file ( $_FILES ['mp3_file'] ['tmp_name'], $target )) {
+						$mp3_file_value = basename ( $mp3_file );
+					}
+				}
 	}
-	
+
 	$ogg_file_value = "";
 	// ogg
 	if (! empty ( $_FILES ['ogg_file'] ['name'] )) {
@@ -62,21 +62,21 @@ else if ($acl->hasPermission ( "audio" ) and isset ( $_FILES ) and isset ( $_REQ
 				"audio/ogg",
 				"application/ogg",
 				"video/ogg" 
-		);
-		if (in_array ( $ogg_type, $ogg_allowed_mime_type )) {
-			$target = $audio_folder . "/" . $ogg_file;
-			if (move_uploaded_file ( $_FILES ['ogg_file'] ['tmp_name'], $target )) {
-				$ogg_file_value = basename ( $ogg_file );
-			}
-		}
+				);
+				if (in_array ( $ogg_type, $ogg_allowed_mime_type )) {
+					$target = $audio_folder . "/" . $ogg_file;
+					if (move_uploaded_file ( $_FILES ['ogg_file'] ['tmp_name'], $target )) {
+						$ogg_file_value = basename ( $ogg_file );
+					}
+				}
 	}
-	
+
 	$name = db_escape ( $_POST ["name"] );
 	$category_id = intval ( $_POST ["category"] );
 	$ogg_file_value = db_escape ( $ogg_file_value );
 	$mp3_file_value = db_escape ( $mp3_file_value );
 	$timestamp = time ();
-	
+
 	if (! empty ( $ogg_file_value ) or ! empty ( $mp3_file_value )) {
 		db_query ( "INSERT INTO " . tbname ( "audio" ) . " (name, ogg_file, mp3_file, created, category_id, `updated`) VALUES ('$name', '$ogg_file_value', '$mp3_file_value', $timestamp, $category_id, $timestamp);" ) or die ( db_error () );
 	}
@@ -110,70 +110,80 @@ $(window).load(function(){
 
 });
 </script>
-<h1><?php
-	
+<h1>
+<?php
+
 translate ( "audio" );
-	?></h1>
+?>
+</h1>
 <?php
-	
+
 echo TRANSLATION_CATEGORY;
-	?> 
+?>
 <?php
-	echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
-	?>
+echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
+?>
 <br />
 <br />
 <p>
 	<a href="index.php?action=add_audio">[<?php
-	
-translate ( "upload_audio" );
+
+	translate ( "upload_audio" );
 	?>]</a>
 </p>
 <table class="tablesorter">
 	<thead>
 		<tr>
 			<th><?php
-	
-translate ( "id" );
-	?></th>
+
+			translate ( "id" );
+			?>
+			</th>
 			<th><?php
-	
-translate ( "name" );
-	?></th>
+
+			translate ( "name" );
+			?>
+			</th>
 			<th><?php
-	
-translate ( "OGG_FILE" );
-	?></th>
+
+			translate ( "OGG_FILE" );
+			?>
+			</th>
 			<th><?php
-	
-translate ( "MP3_FILE" );
-	?></th>
+
+			translate ( "MP3_FILE" );
+			?>
+			</th>
 			<td></td>
 			<td></td>
 		</tr>
 	
 	
 	<tbody>
-<?php
+	<?php
 	while ( $row = db_fetch_object ( $all_audio ) ) {
 		?>
-<tr>
+		<tr>
 			<td><?php
-		
-echo $row->id;
-		?></td>
+
+			echo $row->id;
+			?>
+			</td>
 			<td><?php
-		
-echo htmlspecialchars ( $row->name );
-		?></td>
+
+			echo htmlspecialchars ( $row->name );
+			?>
+			</td>
 			<td><?php
-		
-echo htmlspecialchars ( basename ( $row->ogg_file ) );
-		?></td>
+
+			echo htmlspecialchars ( basename ( $row->ogg_file ) );
+			?>
+			</td>
 			<td><?php
-		
-echo htmlspecialchars ( basename ( $row->mp3_file ) );
-		?></td>
+
+			echo htmlspecialchars ( basename ( $row->mp3_file ) );
+			?>
+			</td>
 			<td><a
 				href="index.php?action=edit_audio&id=<?php
 		
@@ -186,7 +196,7 @@ translate ( "edit" );
 					title="<?php
 		
 translate ( "edit" );
-		?>"></a></td>
+		?>"> </a></td>
 			<td><a
 				href="index.php?action=audio&delete=<?php
 		
@@ -203,11 +213,11 @@ translate ( "delete" );
 					title="<?php
 		
 translate ( "delete" );
-		?>"></a></td>
+		?>"> </a></td>
 		</tr>
-<?php }
-     ?>
-</tbody>
+		<?php }
+		?>
+	</tbody>
 	</thead>
 </table>
 

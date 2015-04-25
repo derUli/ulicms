@@ -101,9 +101,7 @@ echo str_ireplace ( "%name%", $name, TRANSLATION_MAKE_GROUP_DEFAULT );
 ?>")'><?php
 
 echo TRANSLATION_NO;
-?>
-			</span>
-			</a> <?php
+?> </span> </a> <?php
 
 			}
 			?>

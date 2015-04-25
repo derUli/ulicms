@@ -1,7 +1,8 @@
 <?php
 include_once ULICMS_ROOT . "/users_api.php";
-if (! defined ( "ULICMS_ROOT" ))
+if (! defined ( "ULICMS_ROOT" )){
 	die ( "direct access not allowed." );
+}
 
 if (isset ( $_POST ["change_password"] )) {
 	if (! empty ( $_POST ["password"] ) and $_POST ["password"] === $_POST ["password_repeat"]) {
@@ -20,26 +21,29 @@ if (! $_SESSION ["require_password_change"]) {
 	?>
 <form id="change_password_form" action="index.php" method="post">
 <?php
-	
+
 csrf_token_html ();
+?>
+	<h1>
+	<?php
+
+	translate ( "change_password" );
 	?>
-<h1><?php
-	
-translate ( "change_password" );
-	?></h1>
-	<p><?php
-	
-translate ( "require_password_change_notice" );
+	</h1>
+	<p>
+	<?php
+
+	translate ( "require_password_change_notice" );
 	?>
-</p>
+	</p>
 	<strong><?php
-	
-translate ( "password" );
-	?></strong> <input name="password" id="password" type="password"> <br />
+
+	translate ( "password" );
+	?> </strong> <input name="password" id="password" type="password"> <br />
 	<br /> <strong><?php
-	
-translate ( "password_repeat" );
-	?></strong> <input name="password_repeat" id="password_repeat"
+
+	translate ( "password_repeat" );
+	?> </strong> <input name="password_repeat" id="password_repeat"
 		type="password"> <br /></br> <input type="submit"
 		value="<?php
 	
@@ -50,5 +54,5 @@ translate ( "save_changes" );
 
 <br />
 <br />
-<?php
-     }
+	<?php
+}

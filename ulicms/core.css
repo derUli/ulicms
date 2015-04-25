@@ -8,12 +8,11 @@
 	color: red;
 }
 
-span.blog_article_next, span.blog_pagination_older {
+span.blog_article_next,span.blog_pagination_older {
 	float: right;
 }
 
-img {
-	/* Keine Rahmen um verlinkte Bilder*/
+img { /* Keine Rahmen um verlinkte Bilder*/
 	border: 0px;
 	/* Responsive Bilder */
 	max-width: 100%;

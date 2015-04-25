@@ -1,7 +1,8 @@
 <?php
 
-if (! defined ( "_SECURITY" ))
+if (! defined ( "_SECURITY" )){
 	die ();
+}
 ?>
 <div class="Popup">
 	<h2>
@@ -15,7 +16,8 @@ if (! defined ( "_SECURITY" ))
 
 	<a href="#" class="closePopup">Schließen</a>
 </div>
-<div id="overlay" class="closePopup"></div>
+<div id="overlay"
+	class="closePopup"></div>
 
 
 <script type="text/javascript">

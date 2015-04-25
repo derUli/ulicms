@@ -2,13 +2,13 @@
 if (isset ( $_GET ["destroy"] ) or $_GET ["action"] == "destroy") {
 	db_query ( "UPDATE " . tbname ( "users" ) . " SET last_action = 0 WHERE id = " . $_SESSION ["login_id"] );
 	header ( "Location: index.php" );
-	
+
 	session_destroy ();
 	exit ();
 }
 
 if (isset ( $_POST ["login"] )) {
-	
+
 	if (isset ( $_POST ["system_language"] )) {
 		$_SESSION ["system_language"] = basename ( $_POST ["system_language"] );
 	}

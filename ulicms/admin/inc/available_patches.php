@@ -6,51 +6,53 @@ if (defined ( "_SECURITY" )) {
 		?>
 
 
-<h1><?php
-		
+<h1>
+<?php
+
 translate ( "available_patches" );
-		?></h1>
+?>
+</h1>
 
 <?php
-		if (! $patches or empty ( $patches )) {
-			echo "<p class='ulicms_error'>" . get_translation ( "no_patches_available" ) . "</p>";
-		} else {
-			?>
+if (! $patches or empty ( $patches )) {
+	echo "<p class='ulicms_error'>" . get_translation ( "no_patches_available" ) . "</p>";
+} else {
+	?>
 <form action="index.php?action=install_patches" method="post">
 <?php
-			
+
 csrf_token_html ();
-			?>
+?>
 <?php
 
-			$lines = explode ( "\n", $patches );
-			foreach ( $lines as $line ) {
-				if (! empty ( $line )) {
-					$splitted = explode ( "|", $line );
-					$name = $splitted [0];
-					$description = $splitted [1];
-					$url = $splitted [2];
-					?><p>
+$lines = explode ( "\n", $patches );
+foreach ( $lines as $line ) {
+	if (! empty ( $line )) {
+		$splitted = explode ( "|", $line );
+		$name = $splitted [0];
+		$description = $splitted [1];
+		$url = $splitted [2];
+		?>
+	<p>
 		<label> <input name="patches[]" type="checkbox" checked="checked"
 			value="<?php
 					
 echo htmlspecialchars ( $line );
-					?>"> <strong><?php
-					
+?>"> <strong><?php
+
 echo htmlspecialchars ( $name );
-					?></strong><br /><?php
-					
+?></strong><br /> <?php
+
 echo htmlspecialchars ( $description );
-					?>
-</label>
+?> </label>
 	</p>
-<?php
-				
+	<?php
+
+	}
 }
-			}
-			
-			?>
-<input type="submit"
+
+?>
+	<input type="submit"
 		value="<?php
 			
 translate ( "install_selected_patches" );
@@ -61,8 +63,8 @@ translate ( "help" );
 			?>"
 		onclick="window.open('?action=help&help=patch_install');">
 </form>
-<?php
-		}
+			<?php
+}
 	} else {
 		noperms ();
 	}

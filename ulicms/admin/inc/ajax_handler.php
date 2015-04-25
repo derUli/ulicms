@@ -5,7 +5,7 @@ function sendChatMessage() {
 		$message = db_escape ( $_REQUEST ["message"] );
 		$from = db_escape ( $_SESSION ["ulicms_login"] );
 		$time = time ();
-		
+
 		db_query ( "INSERT INTO " . tbname ( "chat_messages" ) . " (`from`, `to`, message, date, `read`) VALUES('$from', '$to', '$message', $time, 0)" );
 	} else {
 		return;
