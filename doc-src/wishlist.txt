@@ -32,3 +32,5 @@
 [ ] Blacklist für bereits verwendete Passwörter (optional)
 [ ] Einführung a la "Erste Schritte" wie z.B. in Windows 2000 bei erster Anmeldung.
 [ ] Bootstrap mitliefern, Template-Tag implementieren, der Bootstrap Framework einbindet
+[ ] Zeitsteuerung (Seiten aktiv von ... bis ...)
+
