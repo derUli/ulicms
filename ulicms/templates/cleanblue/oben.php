@@ -19,8 +19,7 @@ echo getCurrentLanguage ();
 					?><strong><?php
 
 					homepage_title ();
-					?>
-				</strong> <?php
+					?> </strong> <?php
 
 				}
 				?> </a>
@@ -29,18 +28,19 @@ echo getCurrentLanguage ();
 			<?php
 
 			menu ( "top" );
-			?></nav>
+			?>
+			</nav>
 		</header>
 		<main> <?php
 
 		if (! containsModule ()) {
 			?>
 		<h1>
-			<?php
-	
-headline ();
-	?>
+		<?php
+
+		headline ();
+		?>
 		</h1>
 		<?php
-     }
-?>
+		}
+		?>
