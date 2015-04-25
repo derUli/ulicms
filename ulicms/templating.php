@@ -7,13 +7,12 @@ function get_type() {
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
+		$result = $result->type;
 	}
 	if (empty ( $result ))
 		$result = "page";
-	return $result->type;
+	return $result;
 }
-
-
 function get_parent() {
 	if (! $page)
 		$page = get_requested_pagename ();
@@ -22,10 +21,11 @@ function get_parent() {
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
+		$result = $result->parent;
 	}
 	if (empty ( $result ))
 		$result = null;
-	return $result->parent;
+	return $result;
 }
 
 
