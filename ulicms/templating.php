@@ -10,7 +10,7 @@ function get_type() {
 		$result = $result->type;
 	}
 	if (empty ( $result ))
-		$result = "page";
+	$result = "page";
 	return $result;
 }
 function get_parent() {
@@ -24,7 +24,7 @@ function get_parent() {
 		$result = $result->parent;
 	}
 	if (empty ( $result ))
-		$result = null;
+	$result = null;
 	return $result;
 }
 

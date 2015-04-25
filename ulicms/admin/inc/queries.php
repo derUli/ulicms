@@ -208,9 +208,9 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		if (empty ( $meta_description ) and ! getconfig ( "disable_auto_generate_meta_tags" )) {
 			include_once "../lib/string_functions.php";
 			$maxlength_chars = 160;
-				
+
 			$shortContent = strip_tags ( $page_content );
-				
+
 			// Leerzeichen und Zeilenumbrüche entfernen
 			$shortContent = trim ( $shortContent );
 			$shortContent = preg_replace ( "#[ ]*[\r\n\v]+#", "\r\n", $shortContent );
@@ -221,12 +221,12 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			$shortContent = trim ( $shortContent );
 			$shortstring = $shortContent;
 			$word_count = str_word_count ( $shortstring );
-				
+
 			while ( strlen ( $shortstring ) > 160 ) {
 				$shortstring = getExcerpt ( $shortContent, 0, $word_count );
 				$word_count -= 1;
 			}
-				
+
 			$meta_description = $shortstring;
 		}
 
@@ -236,7 +236,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 
 		// Wenn keine Meta Keywords gesetzt sind selbst ermitteln
 		if (empty ( $meta_keywords ) and ! getconfig ( "disable_auto_generate_meta_tags" )) {
-				
+
 			include_once "../lib/string_functions.php";
 			$stripped_content = trim ( $page_content );
 			$stripped_content = str_replace ( "\\r\\n", "\r\n", $stripped_content );
@@ -424,11 +424,11 @@ if (! empty ( $_FILES ['logo_upload_file'] ['name'] ) and $acl->hasPermission ( 
 		$image_size = getimagesize ( $new_filename );
 		if ($image_size [0] <= 500 and $image_size [1] <= 100) {
 			setconfig ( "logo_image", $logo_upload_filename );
-				
+
 			add_hook ( "after_upload_logo_successfull" );
 		} else {
 			header ( "Location: index.php?action=logo_upload&error=to_big" );
-				
+
 			add_hook ( "after_upload_logo_failed" );
 			exit ();
 		}
