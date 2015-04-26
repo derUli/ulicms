@@ -25,7 +25,7 @@ echo $version->getVersion ();
 	2015 by Ulrich Schmidt<br /> <a href="http://www.ckeditor.com"
 		target="_blank">CKEditor</a> &copy; 2003 - 2015 by CKSource<br /> <a
 		href="http://kcfinder.sunhater.com/" target="_blank">KCFinder</a>
-	Copyright 2010 - 2014 KCFinder Project <br/ > Copyright 2005, 2014
+	Copyright ©2010-2014 Pavel Tzonkov<br/ > Copyright 2005, 2014
 	jQuery Foundation, Inc. and other contributors <br /> <a
 		href="http://codemirror.net/" target="_blank">CodeMirror</a> &copy;
 	2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others
