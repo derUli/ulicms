@@ -30,4 +30,4 @@
 + PHP Form Builder Class integriert (Beispiel im Modules Ordner)
 + "Zebra Tabellen"
 + Integration von Gravatar
-+ KCFinder Medienverwaltung auf Version 2.54 aktualisiert
++ KCFinder Medienverwaltung auf Version 3.12 aktualisiert
