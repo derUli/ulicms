@@ -504,7 +504,7 @@ define("TRANSLATION_SECURITY", "Sicherheit");
 define("TRANSLATION_FORCE_PASSWORD_CHANGE_EVERY_X_DAYS", "Anwender müssen ihr Passwort alle X Tage ändern (0 = aus)");
 
 define("TRANSLATION_IS_ADMIN", "Ist Admin");
+define("TRANSLATION_NO_PATCHES_SELECTED", "Keine Patches zur Installation ausgewählt.");
 
 add_hook("lang_en");
-
 add_hook("lang_de");

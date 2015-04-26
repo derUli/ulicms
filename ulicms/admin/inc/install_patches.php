@@ -16,6 +16,10 @@ translate ( "install_patches" );
 $patches = $_POST ["patches"];
 $pkg = new PackageManager ();
 
+if(count($patches) <= 0){
+   translate("no_patches_selected");
+} else {
+
 foreach ( $patches as $patch ) {
 	$splitted = explode ( "|", $patch );
 	$success = $pkg->installPatch ( $splitted [0], $splitted [1], $splitted [2] );
@@ -25,6 +29,9 @@ foreach ( $patches as $patch ) {
 		echo '<p style="color:red">' . get_translation ( "installation_of" ) . " " . htmlspecialchars ( $splitted [0] ) . " " . get_Translation ( "is_failed" ) . "</p>";
 	}
 }
+
+}
+
 	} else {
 		noperms ();
 	}
