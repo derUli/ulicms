@@ -33,3 +33,4 @@ Filter für Videos:
 [X] KCFinder auf Version 3.12
 [ ] Anweisungen zu der Änderung von Dateirechten im Installer aktualisieren.
     Damit der Patch Manager funktioniert, müssen *alle* Dateien der UliCMS Installation von PHP beschreibar sein.
+[ ] Roadmap für Website verfassen
