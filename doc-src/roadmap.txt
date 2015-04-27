@@ -1,0 +1,5 @@
+Here is the Roadmap for the near-term and mid-term development of UliCMS
+
+Update of the package source in Juni 2015
+Release of UliCMS 9.0.0 in first quarter of 2016
+Then release a minor upgrade to UliCMS 9 every 1 to three years (e.g. 9.0.1, 9.0.2, 9.0.3)
