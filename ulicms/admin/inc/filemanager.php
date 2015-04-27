@@ -16,7 +16,7 @@ echo TRANSLATION_MEDIA;
 		
 echo basename ( $_GET ["action"] );
 		?>&lang=de"
-	style="border: 0px; width: 80%; height: 500px;"> </iframe>
+	style="border: 0px; width: 100%; height: 500px;"> </iframe>
 
 		<?php
 	} else {
