@@ -26,7 +26,7 @@ if (in_array ( $_SESSION ["language"], getAllLanguages () )) {
 	include getLanguageFilePath ( $_SESSION ["language"] );
 }
 
-if ($_SERVER ["REQUEST_METHOD"] == "POST") {
+if ($_SERVER ["REQUEST_METHOD"] == "POST" and !defined("NO_ANTI_CSRF")) {
 	if (! check_csrf_token ()) {
 		die ( "This is probably a CSRF attack!" );
 	}

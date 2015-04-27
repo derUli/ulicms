@@ -995,6 +995,12 @@ function no_cache() {
 	if (! defined ( "NO_CACHE" ))
 	define ( "NO_CACHE", true );
 }
+
+function no_anti_csrf() {
+        if (! defined ( "NO_ANTI_CSRF" ))
+        define ( "NO_ANTI_CSRF", true );
+}
+
 function replaceAudioTags($txt) {
 	// Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
 	// Reguläre Ausdrücke sehen für mich so aus, als wäre eine Katze über die Tastatur gelaufen.
