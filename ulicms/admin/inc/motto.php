@@ -1,15 +1,14 @@
 
 <?php
-
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "settings_simple" )) {
-
+		
 		$languages = getAllLanguages ();
-
+		
 		if (isset ( $_POST ["submit"] )) {
 			for($i = 0; $i < count ( $languages ); $i ++) {
-
+				
 				$lang = $languages [$i];
 				if (isset ( $_POST ["motto_" . $lang] )) {
 					$page = db_escape ( $_POST ["motto_" . $lang] );
@@ -20,40 +19,40 @@ if (defined ( "_SECURITY" )) {
 				}
 			}
 		}
-
+		
 		$mottos = array ();
-
+		
 		for($i = 0; $i < count ( $languages ); $i ++) {
 			$lang = $languages [$i];
 			$mottos [$lang] = getconfig ( "motto_" . $lang );
-				
+			
 			if (! $mottos [$lang])
-			$mottos [$lang] = getconfig ( "motto" );
+				$mottos [$lang] = getconfig ( "motto" );
 		}
-
+		
 		?>
 <h1>
 <?php
-
-echo TRANSLATION_MOTTO;
-?>
+		
+		echo TRANSLATION_MOTTO;
+		?>
 </h1>
 <form action="index.php?action=motto" id="motto" method="post">
 <?php
-
-csrf_token_html ();
-?>
+		
+		csrf_token_html ();
+		?>
 	<table border=0>
 		<tr>
 			<td style="min-width: 100px;"><strong><?php
-
-			echo TRANSLATION_LANGUAGE;
-			?>
+		
+		echo TRANSLATION_LANGUAGE;
+		?>
 			</strong></td>
 			<td><strong><?php
-
-			echo TRANSLATION_MOTTO;
-			?>
+		
+		echo TRANSLATION_MOTTO;
+		?>
 			</strong></td>
 		</tr>
 		<?php
@@ -62,22 +61,24 @@ csrf_token_html ();
 			?>
 		<tr>
 			<td><?php
-
+			
 			echo $lang;
 			?></td>
 			<td><input name="motto_<?php
 			
-echo $lang;
+			echo $lang;
 			?>"
 				style="width: 400px"
 				value="<?php
 			
-echo stringHelper::real_htmlspecialchars ( $mottos [$lang] );
+			echo stringHelper::real_htmlspecialchars ( $mottos [$lang] );
 			?>"></td>
 			<?php
-
 		}
 		?>
+		
+		
+		
 		
 		
 		<tr>
@@ -103,10 +104,9 @@ $("#motto_settings").ajaxForm({beforeSubmit: function(e){
 
 </script>
 
-		<?php
-
+<?php
 	} else {
-		noperms();
+		noperms ();
 	}
 
 }

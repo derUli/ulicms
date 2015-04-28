@@ -361,6 +361,5 @@ $("#settings_simple").ajaxForm({beforeSubmit: function(e){
 
 
 <?php
-
 }
 ?>

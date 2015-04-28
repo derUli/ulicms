@@ -4,21 +4,21 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 	noperms ();
 } else {
 	include_once "../lib/string_functions.php";
-
+	
 	$modified = false;
 	$created = false;
 	$removed = false;
-
+	
 	if (isset ( $_POST ["add_group"] )) {
 		$acl = new ACL ();
 		$all_permissions = $acl->getDefaultACL ( false, true );
-
+		
 		if (count ( $_POST ["user_permissons"] ) > 0) {
 			foreach ( $_POST ["user_permissons"] as $permission_name ) {
 				$all_permissions [$permission_name] = true;
 			}
 		}
-
+		
 		$name = trim ( $_POST ["name"] );
 		if (! empty ( $name )) {
 			$acl->createGroup ( $name, $all_permissions );
@@ -31,18 +31,18 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 		$acl->deleteGroup ( $id );
 		$removed = true;
 	} else if (isset ( $_POST ["edit_group"] )) {
-
+		
 		$acl = new ACL ();
 		$all_permissions = $acl->getDefaultACL ( false, true );
-
+		
 		$id = $_POST ["id"];
-
+		
 		if (count ( $_POST ["user_permissons"] ) > 0) {
 			foreach ( $_POST ["user_permissons"] as $permission_name ) {
 				$all_permissions [$permission_name] = true;
 			}
 		}
-
+		
 		$name = trim ( $_POST ["name"] );
 		$all_permissions = json_encode ( $all_permissions );
 		if (! empty ( $name )) {
@@ -54,65 +54,61 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 	?>
 <h1>
 <?php
-
-echo TRANSLATION_GROUPS;
-?>
+	
+	echo TRANSLATION_GROUPS;
+	?>
 </h1>
 <?php
-
-if ($created) {
-	?>
+	
+	if ($created) {
+		?>
 <p style='color: green;'>
 	Die Gruppe "
 	<?php
-
-	echo $name;
-	?>
+		
+		echo $name;
+		?>
 	" wurde erfolgreich angelegt.
 </p>
-	<?php
-
-}
-?>
+<?php
+	}
+	?>
 
 <?php
-
-if ($modified) {
-	?>
+	
+	if ($modified) {
+		?>
 <p style='color: green;'>
 <?php
-
-echo TRANSLATION_CHANGES_WAS_SAVED;
-?>
+		
+		echo TRANSLATION_CHANGES_WAS_SAVED;
+		?>
 </p>
 <?php
-
-}
-?>
-
-<?php
-
-if ($removed) {
+	}
 	?>
+
+<?php
+	
+	if ($removed) {
+		?>
 <p style='color: green;'>Die Gruppe wurde erfolgreich gelöscht.</p>
-	<?php
-
-}
-?>
+<?php
+	}
+	?>
 
 <?php
-
-if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] )) {
-
-	include "inc/group_list.php";
-} else if (isset ( $_GET ["add"] )) {
-	include "inc/group_add.php";
-} else if (isset ( $_GET ["edit"] )) {
-	include "inc/group_edit.php";
-}
-?>
+	
+	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] )) {
+		
+		include "inc/group_list.php";
+	} else if (isset ( $_GET ["add"] )) {
+		include "inc/group_add.php";
+	} else if (isset ( $_GET ["edit"] )) {
+		include "inc/group_edit.php";
+	}
+	?>
 
 <?php
-
 }
 ?>

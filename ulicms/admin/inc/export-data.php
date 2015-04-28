@@ -4,7 +4,7 @@ if (! $acl->hasPermission ( "export" )) {
 	header ( "HTTP/1.0 403 Forbidden" );
 	die ();
 } else {
-
+	
 	if (isset ( $_POST ["table"] )) {
 		@set_time_limit ( 0 );
 		$table = db_escape ( $_POST ["table"] );

@@ -1,5 +1,5 @@
 <?php
-if (! defined ( "ULICMS_ROOT" )){
+if (! defined ( "ULICMS_ROOT" )) {
 	die ( "Dummer Hacker!" );
 }
 
@@ -15,13 +15,13 @@ csrf_token_html ();
 ?>
 	<p>
 		<strong><?php
-
+		
 		echo TRANSLATION_NAME;
 		?> </strong> <input type="text" required="true" name="name" value="">
 	</p>
 	<p>
 		<strong><?php
-
+		
 		echo TRANSLATION_PERMISSIONS;
 		?> </strong>
 	</p>
@@ -29,31 +29,30 @@ csrf_token_html ();
 		<p>
 			<input id="checkall" type="checkbox" class="checkall"> <label
 				for="checkall"><?php
-
+				
 				echo TRANSLATION_SELECT_ALL;
 				?> </label>
 		</p>
 		<p>
 		<?php
-
+		
 		foreach ( $all_permissions as $key => $value ) {
 			?>
 			<input type="checkbox" id="<?php
-	
-echo $key;
-	?>"
+			
+			echo $key;
+			?>"
 				name="user_permissons[]" value="<?php
-	
-echo $key;
-	?>"> <label for="<?php
-	
-echo $key;
-?>"><?php
-
-echo $key;
-?> </label> <br />
+			
+			echo $key;
+			?>"> <label for="<?php
+			
+			echo $key;
+			?>"><?php
+			
+			echo $key;
+			?> </label> <br />
 <?php
-
 		}
 		?>
 		</p>
@@ -61,8 +60,9 @@ echo $key;
 	<br /> <input type="submit"
 		value="<?php
 		
-echo TRANSLATION_CREATE_GROUP;
-		?>" name="add_group">
+		echo TRANSLATION_CREATE_GROUP;
+		?>"
+		name="add_group">
 </form>
 
 <script type="text/javascript">
@@ -73,10 +73,12 @@ $(function () {
 });
 </script>
 
-		<?php
-		if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
-			?>
+<?php
+if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+	?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
-			<?php }
-			?>
+<?php
+
+}
+?>

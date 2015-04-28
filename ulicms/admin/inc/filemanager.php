@@ -1,5 +1,4 @@
 <?php
-
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( $_GET ["action"] )) {
@@ -7,28 +6,27 @@ if (defined ( "_SECURITY" )) {
 
 <h2>
 <?php
-
-echo TRANSLATION_MEDIA;
-?>
+		
+		echo TRANSLATION_MEDIA;
+		?>
 </h2>
 <iframe
 	src="kcfinder/browse.php?type=<?php
 		
-echo basename ( $_GET ["action"] );
+		echo basename ( $_GET ["action"] );
 		?>&lang=de"
 	style="border: 0px; width: 100%; height: 500px;"> </iframe>
 
-		<?php
+<?php
 	} else {
 		noperms ();
 	}
-
+	
 	?>
 
 
 
 
 	<?php
-
 }
 ?>

@@ -385,7 +385,7 @@ function openMenuImageSelectWindow(field) {
 			?></strong><br /> <textarea name="custom_data"
 			style="width: 100%; height: 200px;" cols=80 rows=10><?php
 			
-echo htmlspecialchars ( $row->custom_data );
+			echo htmlspecialchars ( $row->custom_data );
 			?></textarea>
 
 	</fieldset>

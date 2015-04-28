@@ -1,5 +1,4 @@
 <?php
-
 if (defined ( "_SECURITY" )) {
 	include_once "../version.php";
 	$version = new ulicms_version ();
@@ -12,12 +11,12 @@ if (defined ( "_SECURITY" )) {
 	<img src="gfx/logo.png" alt="UliCMS" />
 </p>
 <strong>Release <?php
-
-echo cms_version ();
-?> "<?php
-
-echo $version->getVersion ();
-?>"</strong>
+		
+		echo cms_version ();
+		?> "<?php
+		
+		echo $version->getVersion ();
+		?>"</strong>
 <br />
 
 <p>
@@ -25,8 +24,8 @@ echo $version->getVersion ();
 	2015 by Ulrich Schmidt<br /> <a href="http://www.ckeditor.com"
 		target="_blank">CKEditor</a> &copy; 2003 - 2015 by CKSource<br /> <a
 		href="http://kcfinder.sunhater.com/" target="_blank">KCFinder</a>
-	Copyright ©2010-2014 Pavel Tzonkov<br/ > Copyright 2005, 2014
-	jQuery Foundation, Inc. and other contributors <br /> <a
+	Copyright ©2010-2014 Pavel Tzonkov<br/ > Copyright 2005, 2014 jQuery
+	Foundation, Inc. and other contributors <br /> <a
 		href="http://codemirror.net/" target="_blank">CodeMirror</a> &copy;
 	2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others
 </p>
@@ -64,23 +63,20 @@ echo $version->getVersion ();
 </div>
 <br />
 
-<input type="button"
-	value="UliCMS Portal" onclick='window.open("http://www.ulicms.de");' />
+<input type="button" value="UliCMS Portal"
+	onclick='window.open("http://www.ulicms.de");' />
 
-<input type="button"
-	value="<?php
+<input type="button" value="<?php
 		
-echo TRANSLATION_LICENSE;
+		echo TRANSLATION_LICENSE;
 		?>"
 	onclick='window.open("license.html");' />
 
 
-<input
-	type="button" value="Community"
+<input type="button" value="Community"
 	onclick='location.replace("http://www.ulicms.de/forum.html");'>
 
-<input
-	type="button" value="Feedback"
+<input type="button" value="Feedback"
 	onclick='location.replace("http://www.ulicms.de/?seite=kontakt");'>
 
 
@@ -88,7 +84,8 @@ echo TRANSLATION_LICENSE;
 
 
 
-		<?php }
-
+<?php
+	
+}
 }
 ?>
