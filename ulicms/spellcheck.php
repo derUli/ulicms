@@ -111,7 +111,7 @@ function autocorrect_common_typos($text) {
 	$text = str_ireplace ( "Wehmutstropfen", "Wermutstropfen", $text );
 	$text = str_ireplace ( "wiederspiegeln", "widerspiegeln", $text );
 	$text = str_ireplace ( "Wiedersacher", "Widersacher", $text );
-
+	
 	return $text;
 }
 ?>
