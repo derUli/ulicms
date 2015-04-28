@@ -560,8 +560,8 @@ function base_metas() {
 	if ($title_format) {
 		$title = $title_format;
 		$title = str_ireplace ( "%homepage_title%", get_homepage_title (), $title );
-		$title = str_ireplace ( "%title%", get_title (), $title );
-
+		$title = str_ireplace ( "%title%", get_title(), $title );
+		$title = str_ireplace ( "%motto%", get_motto(), $title );
 		$title = htmlentities ( $title, ENT_QUOTES, "UTF-8" );
 
 		echo "<title>" . $title . "</title>\r\n";

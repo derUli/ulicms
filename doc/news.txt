@@ -31,3 +31,4 @@
 + "Zebra Tabellen"
 + Integration von Gravatar
 + KCFinder Medienverwaltung auf Version 3.12 aktualisiert
++ %motto% Platzhalter im <title>Tag wird nun ersetzt
