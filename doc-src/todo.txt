@@ -31,7 +31,8 @@ Filter für Videos:
 [X] Promotext um Erwähnung der "PHP Form Builder Class" ergänzen.
 [X] Medienverwaltung reparieren
 [X] KCFinder auf Version 3.12
-[ ] Anweisungen zu der Änderung von Dateirechten im Installer aktualisieren.
     Damit der Patch Manager funktioniert, müssen *alle* Dateien der UliCMS Installation von PHP beschreibar sein.
 [X] Roadmap für Projekt verfassen
-[ ] Roadmap auf englischer UliCMS Website veröffentlichen.
+[X] Roadmap auf englischer UliCMS Website veröffentlichen.
+[ ] Anweisungen zu der Änderung von Dateirechten im Installer aktualisieren.
+[ ] Copyright Jahr anpassen
