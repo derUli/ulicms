@@ -461,7 +461,6 @@ if (! $acl->hasPermission ( "other" )) {
 					?>
 				</select>
 			</div>
-			<br />
 			<div class="smtp_settings" id="smtp_settings" style="display: none">
 				<h3>
 				<?php
@@ -483,7 +482,6 @@ if (! $acl->hasPermission ( "other" )) {
 	?>">
 
 				</div>
-			</div>
 
 
 			<div class="label">
@@ -546,6 +544,7 @@ if (! $acl->hasPermission ( "other" )) {
 
 		</div>
 
+			</div>
 
 	</div>
 		</div>
