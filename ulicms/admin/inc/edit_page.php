@@ -383,13 +383,8 @@ function openMenuImageSelectWindow(field) {
 			
 		echo TRANSLATION_CUSTOM_DATA_JSON;
 		?></strong><br />
-		<textarea name="custom_data" style="width: 100%; height: 200px;"
-			cols=80 rows=>
-			<?php
-
-			echo htmlspecialchars ( $row->custom_data );
-			?>
-		</textarea>
+		<textarea name="custom_data" style="width: 100%; height: 200px;" cols=80 rows=><?php echo htmlspecialchars ( $row->custom_data );
+			?></textarea>
 
 	</fieldset>
 
