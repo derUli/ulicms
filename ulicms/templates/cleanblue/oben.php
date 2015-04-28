@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="<?php
-
 echo getCurrentLanguage ();
 ?>">
 <head>
@@ -17,29 +16,28 @@ echo getCurrentLanguage ();
 					?> <br /> <?php
 				} else {
 					?><strong><?php
-
+					
 					homepage_title ();
 					?> </strong> <?php
-
 				}
 				?> </a>
 			</section>
 			<nav>
 			<?php
-
+			
 			menu ( "top" );
 			?>
 			</nav>
 		</header>
 		<main> <?php
-
+		
 		if (! containsModule ()) {
 			?>
 		<h1>
 		<?php
-
-		headline ();
-		?>
+			
+			headline ();
+			?>
 		</h1>
 		<?php
 		}

@@ -53,7 +53,7 @@ html {
 	list-style: none;
 }
 
-.menu a,.menu a:visited {
+.menu a, .menu a:visited {
 	font-weight: bold;
 	color: #e7e5e5;
 	text-decoration: none;
@@ -62,7 +62,7 @@ html {
 	border-top: 1px transparent solid;
 }
 /* selected menu element */
-.menu .menu_active_link a,.menu li:hover>a {
+.menu .menu_active_link a, .menu li:hover>a {
 	background: #7788aa;
 	color: #000;
 	text-decoration: none;
@@ -70,7 +70,7 @@ html {
 	text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7);
 }
 /* sublevels */
-.menu ul li:hover a,.menu li:hover li a {
+.menu ul li:hover a, .menu li:hover li a {
 	background: none;
 	border: none;
 	color: #000;
@@ -100,7 +100,7 @@ div#root-container {
 	position: relative;
 }
 
-a,a:visited {
+a, a:visited {
 	color: rgb(30, 30, 30);
 	text-decoration: none;
 	font-weight: 500;
@@ -124,23 +124,24 @@ table {
 	width: 100%;
 }
 
-input[type="button"],input[type="submit"],button {
+input[type="button"], input[type="submit"], button {
 	background-color: #335599;
 	color: white;
 	padding: 10px;
 }
 
-input[type="text"],input[type="password"],input[type="email"],input[type="number"],input[type="phone"],input[type="color"],input.color,select,textarea
+input[type="text"], input[type="password"], input[type="email"], input[type="number"],
+	input[type="phone"], input[type="color"], input.color, select, textarea
 	{
 	background-color: rgb(253, 253, 253);
 	width: 100%;
 }
 
-input,select,table,textarea {
+input, select, table, textarea {
 	border: solid 1px #EDEDED;
 }
 
-table tr td,table th td {
+table tr td, table th td {
 	padding: 5px;
 }
 
@@ -199,7 +200,7 @@ code {
 		Courier, 'New Courier', monospace;
 }
 
-div#pkglist,div#loadpkg,div#message_page_edit,.loading {
+div#pkglist, div#loadpkg, div#message_page_edit, .loading {
 	display: none;
 }
 
@@ -214,7 +215,7 @@ div.inPageMessage {
 	width: 500px;
 }
 
-#login table,#login table tr,#login table td {
+#login table, #login table tr, #login table td {
 	border: none;
 }
 
@@ -240,7 +241,7 @@ div.inPageMessage {
 	overflow-x: auto;
 }
 
-textarea#code,textarea#page_content {
+textarea#code, textarea#page_content {
 	height: auto;
 }
 

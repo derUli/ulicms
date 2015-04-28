@@ -1,5 +1,4 @@
 <section class="advertisement"> <?php
-
 random_banner ();
 ?> </section>
 </main>
