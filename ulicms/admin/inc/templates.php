@@ -140,11 +140,9 @@ if (file_exists ( getTemplateDirPath ( $theme ) . "oben.php" )) {
 	?>
 	<style type="text/css">
 </style>
-	<textarea id="code" name="code" cols=80 rows=20>
-	<?php
+	<textarea id="code" name="code" cols=80 rows=20><?php
 	echo htmlspecialchars ( $template_content );
-	?>
-	</textarea>
+	?></textarea>
 	<script type="text/javascript">
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
