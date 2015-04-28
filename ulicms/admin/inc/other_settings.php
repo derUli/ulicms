@@ -317,12 +317,10 @@ if (! $acl->hasPermission ( "other" )) {
 		?>
 
 			<p>
-				<textarea name="domain_to_language" rows="10" cols="40">
-				<?php
+				<textarea name="domain_to_language" rows="10" cols="40"><?php
 
 				echo real_htmlspecialchars ( getconfig ( "domain_to_language" ) );
-				?>
-</textarea>
+				?></textarea>
 			</p>
 		</div>
 		<h2 class="accordion-header">
