@@ -28,8 +28,7 @@ echo htmlspecialchars ( $row->name, ENT_QUOTES, "UTF-8" );
 			
 		echo TRANSLATION_VALUE;
 		?></strong><br />
-	<textarea name="value" rows=15 cols=80>
-	<?php
+	<textarea name="value" rows=15 cols=80><?php
 
 	echo htmlspecialchars ( $row->value, ENT_QUOTES, "UTF-8" );
 	?></textarea>
