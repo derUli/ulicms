@@ -398,11 +398,7 @@ function openMenuImageSelectWindow(field) {
 
 
 	<div>
-		<textarea name="page_content" id="page_content" cols=60 rows=20>
-		<?php
-			
-		echo htmlspecialchars ( $row->content );
-		?></textarea>
+		<textarea name="page_content" id="page_content" cols=60 rows=20><?php echo htmlspecialchars ( $row->content ); ?></textarea>
 		<?php
 		$editor = get_html_editor ();
 		?>
