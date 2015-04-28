@@ -386,8 +386,7 @@ if (! $acl->hasPermission ( "other" )) {
 				}
 				?>>
 			</div>
-		</div>
-
+</div>
 		<h2 class="accordion-header">
 		<?php translate("security");?>
 		</h2>
@@ -404,7 +403,7 @@ if (! $acl->hasPermission ( "other" )) {
 					min="0" max="999"
 					value="<?php echo $force_password_change_every_x_days;?>" />
 			</div>
-		</div>
+			</div>
 		<h2 class="accordion-header">
 		<?php
 
@@ -503,7 +502,6 @@ if (! $acl->hasPermission ( "other" )) {
 	?>">
 
 			</div>
-		</div>
 
 		<div class="label">
 			<label for="smtp_auth"> <?php
@@ -550,10 +548,7 @@ if (! $acl->hasPermission ( "other" )) {
 	?>">
 
 		</div>
-	</div>
 
-	</div>
-	</div>
 
 	</div>
 	<script type="text/javascript">
