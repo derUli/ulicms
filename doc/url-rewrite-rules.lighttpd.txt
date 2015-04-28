@@ -1,0 +1,1 @@
+url.rewrite-once = ( "^(.*).(html|pdf|csv|txt|json)$" => "./?seite=$1&format=$2" )
