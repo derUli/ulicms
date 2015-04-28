@@ -113,11 +113,7 @@ csrf_token_html ();
 			if ($row->type != "html")
 				echo "display:none";
 			?>">
-		<textarea name="html" cols=40 rows=10>
-		<?php
-			
-		echo htmlspecialchars ( $row->html );
-		?></textarea>
+		<textarea name="html" cols=40 rows=10><?php echo htmlspecialchars ( $row->html );?></textarea>
 	</fieldset>
 
 	<br /> <strong><?php

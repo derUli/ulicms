@@ -53,11 +53,8 @@ function spamFilterEnabledcheckboxChanged(checked){
 		echo TRANSLATION_BLACKLIST;
 		?>
 		<br />
-		<textarea name="spamfilter_words_blacklist" rows=10 cols=40>
-		<?php
-		echo htmlspecialchars ( implode ( explode ( "||", getconfig ( "spamfilter_words_blacklist" ) ), "\n" ), ENT_QUOTES, "UTF-8" );
-		?>
-		</textarea>
+		<textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php
+		echo htmlspecialchars ( implode ( explode ( "||", getconfig ( "spamfilter_words_blacklist" ) ), "\n" ), ENT_QUOTES, "UTF-8" ); ?></textarea>
 
 		<br /> <br />
 

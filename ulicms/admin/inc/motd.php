@@ -33,12 +33,10 @@ if ($acl->hasPermission ( "motd" )) {
 
 	csrf_token_html ();
 	?>
-		<textarea name="motd" cols=60 rows=15>
-		<?php
+		<textarea name="motd" cols=60 rows=15><?php
 
 		echo htmlspecialchars ( getconfig ( "motd" ) );
-		?>
-		</textarea>
+		?></textarea>
 		<br> <br> <input type="submit" name="motd_submit"
 			value="<?php
 	

@@ -188,9 +188,7 @@ if (defined ( "_SECURITY" )) {
 
 	echo TRANSLATION_ABOUT_ME;
 	?></strong><br />
-	<textarea rows=10 cols=50 name="about_me">
-	<?php echo htmlspecialchars($row -> about_me)?>
-	</textarea>
+	<textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
 
 
 
