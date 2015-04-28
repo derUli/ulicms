@@ -532,7 +532,6 @@ if (! $acl->hasPermission ( "other" )) {
 	echo real_htmlspecialchars ( $smtp_user );
 	?>">
 			</div>
-		</div>
 
 		<div class="label">
 		<?php
@@ -551,6 +550,7 @@ if (! $acl->hasPermission ( "other" )) {
 
 
 	</div>
+		</div>
 	<script type="text/javascript">
 <?php
 	if ($smtp_auth) {
