@@ -36,3 +36,4 @@ Filter für Videos:
 [X] Roadmap auf englischer UliCMS Website veröffentlichen.
 [ ] Anweisungen zu der Änderung von Dateirechten im Installer aktualisieren.
 [ ] Copyright Jahr anpassen
+[ ] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
