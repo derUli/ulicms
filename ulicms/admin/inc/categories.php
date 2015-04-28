@@ -255,12 +255,10 @@ echo categories::getCategoryById ( intval ( $_GET ["edit"] ) );
 	echo TRANSLATION_DESCRIPTION;
 	?>
 		<br />
-		<textarea cols="50" name="description" rows="5" maxlength="255">
-		<?php
+		<textarea cols="50" name="description" rows="5" maxlength="255"><?php
 
 		echo htmlspecialchars ( categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
-		?>
-		</textarea>
+		?></textarea>
 	</p>
 	<p>
 		<input type="submit" name="update"
