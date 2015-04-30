@@ -38,3 +38,4 @@ Filter für Videos:
 [ ] Copyright Jahr anpassen
 [ ] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
 [ ] Liste der Hooks aktualisieren.
+[ ] top, left, right, bottom, none -> In der GUI übersetzen, Sprachdatei
