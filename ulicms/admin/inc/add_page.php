@@ -75,7 +75,7 @@ if (defined ( "_SECURITY" )) {
 		<option value="<?php echo $menu?>">
 		<?php
 			
-			echo $menu;
+			translate($menu);
 			?></option>
 		<?php
 		}

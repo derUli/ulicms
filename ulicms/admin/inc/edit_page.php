@@ -92,7 +92,7 @@ if (defined ( "_SECURITY" )) {
 			value="<?php echo $menu?>">
 			<?php
 				
-				echo $menu;
+				translate($menu);
 				?>
 		</option>
 		<?php

@@ -212,9 +212,9 @@ $(window).load(function(){
 				$name = $menu;
 			
 			if ($menu == $_SESSION ["filter_menu"])
-				echo '<option value="' . $menu . '" selected>' . $name . "</option>";
+				echo '<option value="' . $menu . '" selected>' . get_translation($name) . "</option>";
 			else
-				echo '<option value="' . $menu . '">' . $name . "</option>";
+				echo '<option value="' . $menu . '">' . get_translation($name) . "</option>";
 		}
 		
 		?>

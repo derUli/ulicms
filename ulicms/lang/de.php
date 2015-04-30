@@ -506,5 +506,8 @@ define("TRANSLATION_FORCE_PASSWORD_CHANGE_EVERY_X_DAYS", "Anwender müssen ihr P
 define("TRANSLATION_IS_ADMIN", "Ist Admin");
 define("TRANSLATION_NO_PATCHES_SELECTED", "Keine Patches zur Installation ausgewählt.");
 
+define("TRANSLATION_LEFT", "Links");
+define("TRANSLATION_RIGHT", "Rechts");
+
 add_hook("lang_en");
 add_hook("lang_de");

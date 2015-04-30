@@ -837,13 +837,13 @@ function buildCacheFilePath($request_uri) {
 	return "content/cache/" . md5 ( $unique_identifier ) . ".tmp";
 }
 function get_translation($name) {
-	$name = strtoupper ( $name );
+	$iname = strtoupper ( $name );
 	foreach ( get_defined_constants () as $key => $value ) {
-		if (startsWith ( $key, "TRANSLATION_" ) and $key == "TRANSLATION_" . $name) {
+		if (startsWith ( $key, "TRANSLATION_" ) and $key == "TRANSLATION_" . $iname) {
 			return $value;
 		}
 	}
-	return null;
+	return $name;
 }
 function translation($name) {
 	echo get_translation ( $name );
