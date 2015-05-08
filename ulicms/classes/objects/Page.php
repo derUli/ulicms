@@ -41,7 +41,7 @@ class Page{
    function load($id){
       throw new NotImplementedException('Not implemented yet.');
    }
-   
+      
    function save(){
       throw new NotImplementedException('Not implemented yet.');
    }
