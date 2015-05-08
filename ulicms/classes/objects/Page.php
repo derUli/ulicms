@@ -1,4 +1,7 @@
 <?php
+// (C) 2015 by Ulrich Schmidt, UliCMS
+// Page Object for object oriented programming
+// Not ready implemented yet.
 class Page{
    public $id = null;
    public $notinfeed = 0;
