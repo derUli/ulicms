@@ -18,7 +18,7 @@ class Page{
    public $comments_enabled = 0;
    public $redirection = null;
    public $menu = null;
-   public $position = 0:
+   public $position = 0;
    public $parent = null;
    public $valid_from = null;
    public $valid_to = null;
@@ -34,5 +34,12 @@ class Page{
    function __construct($id = null) {
       throw new NotImplementedException('Not implemented yet.');
    }
-
+   
+   function load($id){
+      throw new NotImplementedException('Not implemented yet.');
+   }
+   
+   function save(){
+      throw new NotImplementedException('Not implemented yet.');
+   }
 }
