@@ -31,6 +31,6 @@
 [ ] Menü-Verwaltung von den Seiten lösen (wie z.B. in Joomla)
 [ ] Blacklist für bereits verwendete Passwörter (optional)
 [ ] Einführung a la "Erste Schritte" wie z.B. in Windows 2000 bei erster Anmeldung.
-[ ] Bootstrap mitliefern, Template-Tag implementieren, der Bootstrap Framework einbindet
+[ ] Bootstrap mitliefern, Template-Tag implementieren, der Bootstrap Framework einbindet, CSS-Klassen von Bootstrap nutzen (Erweiterung vom Core)
 [ ] Zeitsteuerung (Seiten aktiv von ... bis ...)
 [ ] Ein schönerer Paketmanager (Meta-Daten, Dependency Check, Auto-Update)
