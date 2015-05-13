@@ -43,7 +43,7 @@ include $parent_path."init.php";
           if($argv[0] == "avail" or $argv[0] == "available"){
              $available = patchck_available();
              if(!$available)
-                $available = "No patches available";
+                $available = "No patches available\n";
              echo $available;
              exit();
              } else if($argv[0] == "help"){
