@@ -33,3 +33,6 @@
 + KCFinder Medienverwaltung auf Version 3.12 aktualisiert
 + %motto% Platzhalter im <title>-Tag wird nun ersetzt
 + translate() Funktion unterstützt jetzt die Ersetzung von Platzhaltern
++ shell Befehle hinzugefügt, diese können z.B. genutzt werden, um bestimmte Vorgänge als Unix Cronjob einzurichten
+  - clearcache.php
+  - patchck.php
