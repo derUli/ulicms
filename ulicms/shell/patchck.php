@@ -5,6 +5,8 @@ function patchck_usage(){
   echo "UliCMS Version ".cms_version()."\n";
   echo "Copyright (C) 2015 by Ulrich Schmidt\n";
   echo "\n";
+  echo "Warning: This is a beta stage utility. Use it with caution.";
+  echo "\n\n";
   echo "Usage php -f patchck.php [command] [parameters]\n\n";
   echo "Commands:\n";
   echo "avail | available\n";
