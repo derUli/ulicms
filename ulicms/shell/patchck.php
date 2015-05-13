@@ -38,6 +38,42 @@ include $parent_path."init.php";
              exit();
              } else if($argv[0] == "help"){
                patchck_usage();
+              } else if($argv[0] == "install"){
+                if(count($argv) > 1){
+                   $available = patchck_available();
+		  
+                   if($available and !empty($available)){
+                   $toinstall = array();
+                   for($i = 1; $i  < count($argv); $i++){
+                        $toinstall[] = $argv[$i];
+                  }
+                        $available = str_ireplace("\r\n", "\n", $available);
+			$available = explode("\n", $available);
+                        foreach($available as $line){
+                        $line = trim($line);
+                       $splitted = explode ( "|", $line );
+                        if(in_array($splitted[0], $toinstall) or in_array("all", $toinstall)){
+				$success = $pkg->installPatch ( $splitted [0], $splitted [1], $splitted[2]);
+				if($success){
+                                   echo "Patch ".$splitted[0]. " was installed.\n";
+                                } else {
+                                   echo "Installation of patch ".$success. " failed.\n";
+                                   echo "Abort.";
+                                   exit();
+                                 }
+
+
+
+}
+
+}
+              } else {
+                echo "no patches available\n";
+                }
+               } else {
+                echo "no patches available\n";
+}
+               
               } else if($argv[0] == "installed"){
       		$pkg = new PackageManager ();
 		$installed_patches = $pkg->getInstalledPatchNames();
