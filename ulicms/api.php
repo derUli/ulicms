@@ -836,20 +836,25 @@ function buildCacheFilePath($request_uri) {
 	$unique_identifier = $request_uri . $language . strbool ( is_mobile () );
 	return "content/cache/" . md5 ( $unique_identifier ) . ".tmp";
 }
-function get_translation($name) {
+function get_translation($name, $placeholders = array()) {
 	$iname = strtoupper ( $name );
 	foreach ( get_defined_constants () as $key => $value ) {
 		if (startsWith ( $key, "TRANSLATION_" ) and $key == "TRANSLATION_" . $iname) {
+			// Platzhalter ersetzen, diese können als assoziatives Array als zweiter Parameter
+			// dem Funktionsaufruf mitgegeben werden
+			foreach($placeholders as $placeholder=>$replacement){
+				$value = str_ireplace($placeholder, $replacement, $value);
+			}
 			return $value;
 		}
 	}
 	return $name;
 }
-function translation($name) {
-	echo get_translation ( $name );
+function translation($name, $placeholders = array()) {
+	echo get_translation ( $name, $placeholders );
 }
-function translate($name) {
-	translation ( $name );
+function translate($name, $placeholders = array()) {
+	translation ( $name, $placeholders );
 }
 function SureRemoveDir($dir, $DeleteMe) {
 	if (! $dh = @opendir ( $dir ))
