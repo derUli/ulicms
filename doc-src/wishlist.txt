@@ -35,3 +35,4 @@ Export der angepassten Übersetzungsdatei möglich
 [ ] Bootstrap mitliefern, Template-Tag implementieren, der Bootstrap Framework einbindet, CSS-Klassen von Bootstrap nutzen (Erweiterung vom Core)
 [ ] Zeitsteuerung (Seiten aktiv von ... bis ...)
 [ ] Ein schönerer Paketmanager (Meta-Daten, Dependency Check, Auto-Update)
+[ ] Shell Skript für „Alle Patches installieren“ ähnlich wie z.B. yum-cron
