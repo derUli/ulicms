@@ -91,6 +91,10 @@ if($installed_amount != 1 ){
 } else {
   echo $installed_amount. " patch installed.\n";
 }
+if($installed_amount > 0){
+  clearCache();
+}
+
               } else {
                 echo "no patches available\n";
                 }
