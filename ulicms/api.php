@@ -9,6 +9,10 @@ function is_debug_mode() {
 	return (defined ( "ULICMS_DEBUG" ) and ULICMS_DEBUG) or (isset ( $config->debug ) and $config->debug);
 }
 
+function isCLI(){
+   return php_sapi_name() == "cli";
+}
+
 /**
  * Get either a Gravatar URL or complete image tag for a specified email address.
  *
