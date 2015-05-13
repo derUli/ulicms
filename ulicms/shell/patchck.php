@@ -9,6 +9,8 @@ function patchck_usage(){
   echo "Commands:\n";
   echo "avail | available\n";
   echo "Show available patches\n\n";
+  echo "installed | list\n";
+  echo "List installed patches\n\n";
   echo "help\n";
   echo "Show this usage help\n";
   exit();
@@ -34,7 +36,21 @@ include $parent_path."init.php";
                 $available = "No patches available";
              echo $available;
              exit();
-             }
+             } else if($argv[0] == "help"){
+               patchck_usage();
+              } else if($argv[0] == "installed"){
+      		$pkg = new PackageManager ();
+		$installed_patches = $pkg->getInstalledPatchNames();
+		if(count($installed_patches) > 0){
+                   foreach($installed_patches as $patch){
+                       echo $patch;
+                       echo "\n";
+                   }
+                } else {
+                   echo "No patches installed.\n";
+}
+
+              }
        }
 
 ?>
