@@ -40,7 +40,7 @@ include $parent_path."init.php";
         if (count($argv) == 0) {
             patchck_usage();
         } else {
-          if($argv[0] == "avail"){
+          if($argv[0] == "avail" or $argv[0] == "available"){
              $available = patchck_available();
              if(!$available)
                 $available = "No patches available";
