@@ -13,6 +13,7 @@
 [X] IP Whitelist für Backend Login
 [ ] Cache automatisch bei Änderungen leeren (Optional, per Default aktiviert)
 [ ] Übersetzungen in Datenbank statt in Sprachdateien bzw. „TRANSLATION_OVERRIDES„
+Export der angepassten Übersetzungsdatei möglich
 [ ] Backend besser erweiterbar machen
 [ ] Cronjobs monatlich, stündlich, täglich, bei jedem Request (crontab)
 [X] Erklärung zu "Position" hinzufügen 
