@@ -1,3 +1,4 @@
+[ ] Funktion translate() soll Platzhalter ersetzen können, Mitgabe von Platzhaltern als optionaler Parameter, assoziatives Array platzhalter => String
 [X] Bildergalerie mit mehreren Fotoalben
 [ ] KCFinder durch eigene Medienverwaltung ersetzen
 [ ] UliCMS Android App
