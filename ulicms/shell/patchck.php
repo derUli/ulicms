@@ -102,7 +102,7 @@ if($installed_amount > 0){
                 echo "no patches available\n";
 }
                
-              } else if($argv[0] == "installed"){
+              } else if($argv[0] == "installed" or $argv[0] == "list"){
 		$installed_patches = $pkg->getInstalledPatchNames();
 		if(count($installed_patches) > 0){
                    foreach($installed_patches as $patch){
