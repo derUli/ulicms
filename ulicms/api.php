@@ -8,9 +8,8 @@ function is_debug_mode() {
 	$config = new config ();
 	return (defined ( "ULICMS_DEBUG" ) and ULICMS_DEBUG) or (isset ( $config->debug ) and $config->debug);
 }
-
-function isCLI(){
-   return php_sapi_name() == "cli";
+function isCLI() {
+	return php_sapi_name () == "cli";
 }
 
 /**
@@ -846,8 +845,8 @@ function get_translation($name, $placeholders = array()) {
 		if (startsWith ( $key, "TRANSLATION_" ) and $key == "TRANSLATION_" . $iname) {
 			// Platzhalter ersetzen, diese können als assoziatives Array als zweiter Parameter
 			// dem Funktionsaufruf mitgegeben werden
-			foreach($placeholders as $placeholder=>$replacement){
-				$value = str_ireplace($placeholder, $replacement, $value);
+			foreach ( $placeholders as $placeholder => $replacement ) {
+				$value = str_ireplace ( $placeholder, $replacement, $value );
 			}
 			return $value;
 		}
