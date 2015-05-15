@@ -1349,8 +1349,9 @@ function page_has_html_file($page) {
 // Löscht anschließend den Ordner modules/$name
 // @TODO dies in die PackageManager Klasse verschieben
 function uninstall_module($name, $type = "module") {
+	$acl = new ACL();
 	// Nur Admins können Module löschen
-	if (! is_admin ())
+	if (! $acl->hasPermission("install_packages"))
 		return false;
 	
 	$name = trim ( $name );
