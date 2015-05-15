@@ -59,10 +59,12 @@ class packageManager {
 				$url = db_escape ( $url );
 				db_query ( "INSERT INTO " . tbname ( "installed_patches" ) . " (name, description, url, date) VALUES ('$name', '$description', '$url', NOW())" );
 				SureRemoveDir ( $tmp_dir, true );
+				clearCache();
 				return true;
 			}
 		}
 		
+		clearCache();
 		SureRemoveDir ( $tmp_dir, true );
 		return false;
 	}
@@ -93,8 +95,11 @@ class packageManager {
 				include_once $post_install_script2;
 				unlink ( $post_install_script2 );
 			}
+			
+			clearCache();
 			return true;
 		} catch ( Exception $e ) {
+			clearCache();
 			return false;
 		}
 	}

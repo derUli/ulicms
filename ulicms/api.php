@@ -1371,6 +1371,7 @@ function uninstall_module($name, $type = "module") {
 			if (is_file ( $uninstall_script ))
 				include $uninstall_script;
 			sureRemoveDir ( $moduleDir, true );
+			clearCache();
 			return ! is_dir ( $moduleDir );
 		}
 	} else if ($type === "theme") {
@@ -1379,9 +1380,12 @@ function uninstall_module($name, $type = "module") {
 		if (in_array ( $name, $allThemes ) and $cTheme !== $name) {
 			$theme_path = getTemplateDirPath ( $name );
 			sureRemoveDir ( $theme_path, true );
+			clearCache();
 			return ! is_dir ( $theme_path );
 		}
 	}
+
+	return false;
 }
 
 // Ist der User eingeloggt
