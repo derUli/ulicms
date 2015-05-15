@@ -38,3 +38,4 @@ Export der angepassten Übersetzungsdatei möglich
 [ ] Ein schönerer Paketmanager (Meta-Daten, Dependency Check, Auto-Update)
 [X] Shell Skript für „Alle Patches installieren“ ähnlich wie z.B. yum-cron
 [ ] Shell Skript für Pakete installieren (pkgadd.php), Pakete entfernen (pkgrm.php), Installierte Pakete listen (pkgls.php)
+[ ] Versionierung
