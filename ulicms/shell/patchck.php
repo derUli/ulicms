@@ -34,6 +34,9 @@ $parent_path = dirname ( __file__ ) . "/../";
 include $parent_path . "init.php";
 array_shift ( $argv );
 
+// No time limit
+@set_time_limit(0);
+
 $pkg = new PackageManager ();
 if (count ( $argv ) == 0) {
 	patchck_usage ();

@@ -2,6 +2,9 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if (is_admin () or $acl->hasPermission ( "update_system" )) {
+	// No time limit
+	@set_time_limit(0);
+
 		?>
 
 
