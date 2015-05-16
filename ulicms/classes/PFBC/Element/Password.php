@@ -1,4 +1,4 @@
 <?php
-class Element_Password extends Element_Textbox {
-	protected $_attributes = array("type" => "password");
-}
+class Element_Password extends Element_Textbox{
+     protected $_attributes = array("type" => "password");
+    }

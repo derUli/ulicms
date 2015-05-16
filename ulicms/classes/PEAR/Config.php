@@ -592,8 +592,8 @@ class PEAR_Config extends PEAR
      * @param string $ file to read user-defined options from
      * @param string $ file to read system-wide defaults from
      * @param bool $ determines whether a registry object "follows"
-     *                                               the value of php_dir (is automatically created
-     *                                               and moved when php_dir is changed)
+     *                                                the value of php_dir (is automatically created
+     *                                                and moved when php_dir is changed)
      * @param bool $ if true, fails if configuration files cannot be loaded
      * @access public 
      * @see PEAR_Config::singleton
@@ -729,7 +729,7 @@ class PEAR_Config extends PEAR
      * file.
      * 
      * @param string $ file to read from, if NULL or not specified, the
-     *                                               last-used file for the same layer (second param) is used
+     *                                                last-used file for the same layer (second param) is used
      * @param string $ config layer to insert data into ('user' or 'system')
      * @return bool TRUE on success or a PEAR error on failure
      */
@@ -963,7 +963,7 @@ class PEAR_Config extends PEAR
      * 
      * @param string $ |null file to read from, or null for default
      * @param string $ config layer to insert data into ('user' or
-     *                                               'system')
+     *                                                'system')
      * @param string $ |null data to write to config file or null for internal data [DEPRECATED]
      * @return bool TRUE on success or a PEAR error on failure
      */
@@ -1776,7 +1776,7 @@ class PEAR_Config extends PEAR
  * 
  * @param string $ config key
  * @return array enumerated array of set values, or NULL if the
- *                                               config key is unknown or not a set
+ *                                                config key is unknown or not a set
  * @access public 
  */
  function getSetValues($key)
@@ -1888,8 +1888,8 @@ class PEAR_Config extends PEAR
  * @param boolean $ return the defining channel
  * @return string |array the config layer, or an empty string if not found.
  * 
- *                                         if $returnchannel, the return is an array array('layer' => layername,
- *                                         'channel' => channelname), or an empty string if not found
+ *                                          if $returnchannel, the return is an array array('layer' => layername,
+ *                                          'channel' => channelname), or an empty string if not found
  * @access public 
  */
  function definedBy($key, $returnchannel = false)
@@ -2066,7 +2066,7 @@ class PEAR_Config extends PEAR
 /**
  * 
  * @param string $ |false installation directory to prepend to all _dir variables, or false to
- *                                                     disable
+ *                                                      disable
  */
  function setInstallRoot($root)
 {

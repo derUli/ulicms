@@ -1,22 +1,22 @@
 <?php
-if (defined ( "_SECURITY" )) {
-	include_once "../version.php";
-	$version = new ulicms_version ();
-	$acl = new ACL ();
-	if (! $acl->hasPermission ( "info" )) {
-		noperms ();
-	} else {
-		?>
+if (defined ("_SECURITY")){
+     include_once "../version.php";
+     $version = new ulicms_version ();
+     $acl = new ACL ();
+     if (! $acl -> hasPermission ("info")){
+         noperms ();
+         }else{
+         ?>
 <p>
 	<img src="gfx/logo.png" alt="UliCMS" />
 </p>
 <strong>Release <?php
-		
-		echo cms_version ();
-		?> "<?php
-		
-		echo $version->getVersion ();
-		?>"</strong>
+        
+         echo cms_version ();
+         ?> "<?php
+        
+         echo $version -> getVersion ();
+         ?>"</strong>
 <br />
 
 <p>
@@ -67,9 +67,9 @@ if (defined ( "_SECURITY" )) {
 	onclick='window.open("http://www.ulicms.de");' />
 
 <input type="button" value="<?php
-		
-		echo TRANSLATION_LICENSE;
-		?>"
+        
+         echo TRANSLATION_LICENSE;
+         ?>"
 	onclick='window.open("license.html");' />
 
 
@@ -85,7 +85,7 @@ if (defined ( "_SECURITY" )) {
 
 
 <?php
-	
-}
-}
+        
+        }
+    }
 ?>

@@ -1,39 +1,39 @@
 <?php
-if (defined ( "_SECURITY" )) {
-	$acl = new ACL ();
-	if (is_admin () or $acl->hasPermission ( "update_system" )) {
-		?>
+if (defined ("_SECURITY")){
+     $acl = new ACL ();
+     if (is_admin () or $acl -> hasPermission ("update_system")){
+         ?>
 
 		<?php
-		
-		if (file_exists ( "../update.php" )) {
-			?>
+        
+         if (file_exists ("../update.php")){
+             ?>
 <p>
 	<a href="../update.php"><?php
-			
-			echo TRANSLATION_RUN_UPDATE;
-			?></a>
+            
+             echo TRANSLATION_RUN_UPDATE;
+             ?></a>
 </p>
 <?php
-			
-			echo TRANSLATION_UPDATE_NOTICE;
-			?>
+            
+             echo TRANSLATION_UPDATE_NOTICE;
+             ?>
 	<?php
-		} else {
-			?>
+             }else{
+             ?>
 			<?php
-			
-			echo TRANSLATION_UPDATE_INFORMATION_TEXT;
-			?>
+            
+             echo TRANSLATION_UPDATE_INFORMATION_TEXT;
+             ?>
 <p>
 
 <?php
-		}
-		?>
+             }
+         ?>
 
 		<?php
-	} else {
-		noperms ();
-	}
-}
+         }else{
+         noperms ();
+         }
+    }
 ?>

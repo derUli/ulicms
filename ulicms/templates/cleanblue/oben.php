@@ -11,34 +11,34 @@ echo getCurrentLanguage ();
 		<header>
 			<section id="logo">
 				<a href="./"> <?php
-				if (getconfig ( "logo_disabled" ) == "no") {
-					logo ();
-					?> <br /> <?php
-				} else {
-					?><strong><?php
-					
-					homepage_title ();
-					?> </strong> <?php
-				}
-				?> </a>
+ if (getconfig ("logo_disabled") == "no"){
+     logo ();
+     ?> <br /> <?php
+     }else{
+     ?><strong><?php
+    
+     homepage_title ();
+     ?> </strong> <?php
+     }
+ ?> </a>
 			</section>
 			<nav>
 			<?php
-			
-			menu ( "top" );
-			?>
+
+ menu ("top");
+ ?>
 			</nav>
 		</header>
 		<main> <?php
-		
-		if (! containsModule ()) {
-			?>
+
+ if (! containsModule ()){
+     ?>
 		<h1>
 		<?php
-			
-			headline ();
-			?>
+    
+     headline ();
+     ?>
 		</h1>
 		<?php
-		}
-		?>
+     }
+ ?>

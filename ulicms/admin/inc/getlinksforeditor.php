@@ -1,7 +1,7 @@
 <?php
 include "../../init.php";
-header ( 'Content-Type: application/json; charset=utf-8' );
+header ('Content-Type: application/json; charset=utf-8');
 
 $pages = getAllPagesWithTitle ();
-echo json_encode ( $pages, true );
+echo json_encode ($pages, true);
 exit ();

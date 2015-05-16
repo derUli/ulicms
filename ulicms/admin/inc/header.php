@@ -5,11 +5,11 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="css/blue.css" />
 <?php
-if (is_mobile ()) {
-	?>
+if (is_mobile ()){
+     ?>
 <link rel="stylesheet" type="text/css" href="css/mobile.css" />
 	<?php
-}
+    }
 ?>
 <link rel="stylesheet" type="text/css"
 	href="scripts/tablesorter/style.css" />
@@ -20,7 +20,8 @@ if (is_mobile ()) {
 $(document).ready(function() {
   $.ajaxSetup({ cache: false });
   
-<?php  if(!is_mobile()){ ?>
+<?php if(!is_mobile()){
+    ?>
   $(window).scroll(function() {
     if ($(this).scrollTop()) {
         $('a.scrollup:hidden').stop(true, true).fadeIn();
@@ -29,7 +30,7 @@ $(document).ready(function() {
     }
 });
   <?php
-}
+    }
 ?>
 });
 </script>
@@ -38,14 +39,14 @@ $(document).ready(function() {
 <script type="text/javascript" src="scripts/jquery.form.min.js"></script>
 <?php
 
-if (is_logged_in ()) {
-	?>
+if (is_logged_in ()){
+     ?>
 <script type="text/javascript" src="scripts/cookie.js"></script>
 <script type="text/javascript" src="scripts/notification.js"></script>
 <script type="text/javascript" src="scripts/jquery-shiftclick.js"></script>
 <script type="text/javascript" src="scripts/shift_checkbox.js"></script>
 	<?php
-}
+    }
 ?>
 <script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
 <link rel="stylesheet" href="scripts/vallenato/vallenato.css"
@@ -83,7 +84,7 @@ $(document).ready(function(){
 </script>
 <?php
 
-add_hook ( "admin_head" );
+add_hook ("admin_head");
 ?>
 </head>
 <body>

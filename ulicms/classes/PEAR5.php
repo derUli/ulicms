@@ -15,7 +15,7 @@ class PEAR5
      * @param string $class The calling classname, to prevent clashes
      * @param string $var The variable to retrieve.
      * @return mixed A reference to the variable. If not set it will be
-     *                                                auto initialised to NULL.
+     *                                                 auto initialised to NULL.
      */
      static function & getStaticProperty($class, $var)
     {

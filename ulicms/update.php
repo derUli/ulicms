@@ -1,20 +1,20 @@
 <?php
-define ( "SKIP_TABLE_CHECK", true );
+define ("SKIP_TABLE_CHECK", true);
 include_once "init.php";
 
-setconfig ( "locale_de", "de_DE.UTF-8; de_DE; deu_deu" );
-setconfig ( "locale_en", "en_US.UTF-8; en_GB.UTF-8; en_US; en_GB; english-uk; eng; uk" );
+setconfig ("locale_de", "de_DE.UTF-8; de_DE; deu_deu");
+setconfig ("locale_en", "en_US.UTF-8; en_GB.UTF-8; en_US; en_GB; english-uk; eng; uk");
 
-db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "installed_patches" ) . "` (
+db_query ("CREATE TABLE IF NOT EXISTS `" . tbname ("installed_patches") . "` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `url` varchar(255) NOT NULL,
   `date` DATETIME NOT NULL,
    PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;");
 
-db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "videos" ) . "` (
+db_query ("CREATE TABLE IF NOT EXISTS `" . tbname ("videos") . "` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `mp4_file` varchar(255) DEFAULT NULL,
@@ -26,9 +26,9 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "videos" ) . "` (
   `created` bigint(20) NOT NULL,
   `updated` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
-db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "audio" ) . "` (
+db_query ("CREATE TABLE IF NOT EXISTS `" . tbname ("audio") . "` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `mp3_file` varchar(255) DEFAULT NULL,
@@ -37,9 +37,9 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "audio" ) . "` (
   `created` bigint(20) NOT NULL,
   `updated` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
-db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "log" ) . "` (
+db_query ("CREATE TABLE IF NOT EXISTS `" . tbname ("log") . "` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `zeit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `request_uri` varchar(255) DEFAULT NULL,
@@ -48,19 +48,19 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "log" ) . "` (
   `http_host` varchar(100) DEFAULT NULL,
   `ip` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
-db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `html_editor` varchar(100) NULL DEFAULT 'ckeditor'" );
-db_query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN `type` varchar(50) DEFAULT 'page' NULL" );
+db_query ("ALTER TABLE " . tbname ("users") . " ADD COLUMN `html_editor` varchar(100) NULL DEFAULT 'ckeditor'");
+db_query ("ALTER TABLE " . tbname ("content") . " ADD COLUMN `type` varchar(50) DEFAULT 'page' NULL");
 
-db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `require_password_change` tinyint(1) NULL DEFAULT '0'" );
+db_query ("ALTER TABLE " . tbname ("users") . " ADD COLUMN `require_password_change` tinyint(1) NULL DEFAULT '0'");
 
-db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `admin` tinyint(1) NULL DEFAULT '0'" );
+db_query ("ALTER TABLE " . tbname ("users") . " ADD COLUMN `admin` tinyint(1) NULL DEFAULT '0'");
 
-db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN  `password_changed` DATETIME NULL" );
-db_query ( "UPDATE " . tbname ( "users" ) . " SET `password_changed` = NOW();" );
+db_query ("ALTER TABLE " . tbname ("users") . " ADD COLUMN  `password_changed` DATETIME NULL");
+db_query ("UPDATE " . tbname ("users") . " SET `password_changed` = NOW();");
 
-setconfig ( "db_schema_version", "9.0.0" );
+setconfig ("db_schema_version", "9.0.0");
 
-// @unlink ("update.php");
-ulicms_redirect ( "admin/" );
+//  @unlink ("update.php");
+ulicms_redirect ("admin/");
