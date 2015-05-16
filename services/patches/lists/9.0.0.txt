@@ -1,1 +1,2 @@
 test|Nur ein Test|http://www.deruli.de/content/files/share/test.zip
+Mobile_Detect-2.8.13|PHP-Klasse zur Erkennung von mobilen Geräten|http://patches.ulicms.de/downloads/8.0.0-9.0.0/Mobile_Detect-2.8.13.zip
