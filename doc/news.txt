@@ -37,3 +37,4 @@
   - clearcache.php
   - patchck.php
   - truncate_log.php
++ floating-tools hinzugefügt, wenn man Text markiert, wird nun eine zusätzliche Toolbar mit Formatierungsmöglichkeiten angezeigt
