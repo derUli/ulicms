@@ -648,8 +648,8 @@ color:" . getconfig ( "body-text-color" ) . ";
 		if (getconfig ( "video_width_100_percent" )) {
 			echo "<style type=\"text/css\">
 video {
-  width: 100%    !important;
-  height: auto   !important;
+  width: 100% !important;
+  height: auto !important;
   }
            </style>
         ";
