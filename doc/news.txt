@@ -36,3 +36,4 @@
 + shell Befehle hinzugefügt, diese können z.B. genutzt werden, um bestimmte Vorgänge als Unix Cronjob einzurichten
   - clearcache.php
   - patchck.php
+  - truncate_log.php
