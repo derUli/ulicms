@@ -23,7 +23,6 @@ CKEDITOR.editorConfig = function(config) {
 		config.filebrowserFlashUploadUrl = 'admin/kcfinder/upload.php?type=flash';
 	}
 	config.entities_latin = false;
-
 	config.uiColor = '#d1d8d0';
 	config.removePlugins = "link,newpage,templates,preview,print,save,language";
 	config.autoGrow_onStartup = true;
