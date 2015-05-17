@@ -51,8 +51,43 @@ if (is_logged_in ()){
 <script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
 <link rel="stylesheet" href="scripts/vallenato/vallenato.css"
 	type="text/css">
-<link rel="icon" href="gfx/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="gfx/favicon.ico" type="image/x-icon">
+<!--
+    Touch Icon Generator BY daik.de
+    http://www.web-stuebchen.de
+    Lizenz: GNU General Public License
+    Copyright: 2014 - 2015 Stephan Heller [daik.de] <heller@daik.de>
+-->
+<link rel="shortcut icon" type="image/x-icon" href="gfx/favicon.ico"/>
+<link rel="icon" type="image/x-icon" href="gfx/favicon.ico"/>
+<link rel="icon" type="image/gif" href="gfx/favicon.gif"/>
+<link rel="icon" type="image/png" href="gfx/favicon.png"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon.png"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-57x57.png" sizes="57x57"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-60x60.png" sizes="60x60"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-72x72.png" sizes="72x72"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-76x76.png" sizes="76x76"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-114x114.png" sizes="114x114"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-120x120.png" sizes="120x120"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-128x128.png" sizes="128x128"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-144x144.png" sizes="144x144"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-152x152.png" sizes="152x152"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-180x180.png" sizes="180x180"/>
+<link rel="apple-touch-icon" href="gfx/apple-touch-icon-precomposed.png"/>
+<link rel="icon" type="image/png" href="gfx/favicon-16x16.png" sizes="16x16"/>
+<link rel="icon" type="image/png" href="gfx/favicon-32x32.png" sizes="32x32"/>
+<link rel="icon" type="image/png" href="gfx/favicon-96x96.png" sizes="96x96"/>
+<link rel="icon" type="image/png" href="gfx/favicon-160x160.png" sizes="160x160"/>
+<link rel="icon" type="image/png" href="gfx/favicon-192x192.png" sizes="192x192"/>
+<link rel="icon" type="image/png" href="gfx/favicon-196x196.png" sizes="196x196"/>
+<meta name="msapplication-TileImage" content="gfx/win8-tile-144x144.png"/> 
+<meta name="msapplication-TileColor" content="#ffffff"/> 
+<meta name="msapplication-navbutton-color" content="#ffffff"/> 
+<meta name="msapplication-square70x70logo" content="gfx/win8-tile-70x70.png"/> 
+<meta name="msapplication-square144x144logo" content="gfx/win8-tile-144x144.png"/> 
+<meta name="msapplication-square150x150logo" content="gfx/win8-tile-150x150.png"/> 
+<meta name="msapplication-wide310x150logo" content="gfx/win8-tile-310x150.png"/> 
+<meta name="msapplication-square310x310logo" content="gfx/win8-tile-310x310.png"/> 
+
 
 <link rel="stylesheet" type="text/css"
 	href="codemirror/lib/codemirror.css">
