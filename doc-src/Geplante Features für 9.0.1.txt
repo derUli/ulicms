@@ -1,3 +1,5 @@
 [ ] Bootstrap mitliefern, über API-Befehle get_bootstrap() oder bootstrap() in Template einbindbar
 [ ] Aktualisierung des CKEditors auf die neueste verfügbare Version
 [ ] Alle Patches die bisher für UliCMS 9.0.0 erschienen sind
+[ ] Uploadmöglichkeit für Favicon im Backend des CMS
+    CMS soll den entsprechenden Link-Tag automatisch generieren
