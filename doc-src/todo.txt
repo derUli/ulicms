@@ -34,7 +34,7 @@ Filter für Videos:
     Damit der Patch Manager funktioniert, müssen *alle* Dateien der UliCMS Installation von PHP beschreibar sein.
 [X] Roadmap für Projekt verfassen
 [X] Roadmap auf englischer UliCMS Website veröffentlichen.
-[ ] Anweisungen zu der Änderung von Dateirechten im Installer aktualisieren.
+[X] Anweisungen zu der Änderung von Dateirechten im Installer aktualisieren.
 [ ] Copyright Jahr anpassen
 [ ] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
 [ ] Liste der Hooks aktualisieren.
