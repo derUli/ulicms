@@ -38,3 +38,5 @@
   - patchck.php
   - truncate_log.php
 + floating-tools hinzugefügt, wenn man Text markiert, wird nun eine zusätzliche Toolbar mit Formatierungsmöglichkeiten angezeigt
++ Variable $umask kann zur cms-config.php hinzugefügt werden, um die umask zu setzen.
+  Die umask legt die Standard Dateirechte für neue Dateien unter Unix Systemen fest

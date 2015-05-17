@@ -118,6 +118,10 @@ if ((defined ("ULICMS_DEBUG") and ULICMS_DEBUG) or (isset ($config -> debug) and
  error_reporting (0);
 }
 
+if(isset($config->umask)){
+   umask($config->umask)
+}
+
 include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "db_functions.php";
 include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "mailer.php";
 include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "file_get_contents_wrapper.php";
