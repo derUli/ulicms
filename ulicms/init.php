@@ -118,6 +118,13 @@ if ((defined ("ULICMS_DEBUG") and ULICMS_DEBUG) or (isset ($config -> debug) and
  error_reporting (0);
 }
 
+// umask setzen
+// Die umask legt die Standarddateirechte für neue Dateien auf Unix Systemen fest
+// Die Variable $umask sollte nur gesetzt werden, sofern es zu Berechtigungsproblemen bei durch UliCMS generierten Dateien kommt.
+// umask lässt sich wie folgt berechnen
+// 0777 - X = gewünschte Berechtigung
+// X ist die umask
+// Eine umask von 0022 erzeugt z.B. Ordner mit chmod 0755 und Dateien mit chmod 0655
 if(isset($config->umask)){
    umask($config->umask)
 }
