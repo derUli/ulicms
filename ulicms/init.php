@@ -126,7 +126,7 @@ if ((defined ("ULICMS_DEBUG") and ULICMS_DEBUG) or (isset ($config -> debug) and
 // X ist die umask
 // Eine umask von 0022 erzeugt z.B. Ordner mit chmod 0755 und Dateien mit chmod 0655
 if(isset($config->umask)){
-   umask($config->umask)
+   umask($config->umask);
 }
 
 include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "db_functions.php";
