@@ -37,6 +37,6 @@ Filter für Videos:
 [X] Anweisungen zu der Änderung von Dateirechten im Installer aktualisieren.
 [ ] Copyright Jahr anpassen
 [ ] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
-[ ] Liste der Hooks aktualisieren.
+[X] Liste der Hooks aktualisieren.
 [X] top, left, right, bottom, none -> In der GUI übersetzen, Sprachdatei
 [ ] "Autogrow" im Editor wieder deaktivieren
