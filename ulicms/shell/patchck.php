@@ -86,9 +86,9 @@ if (count ($argv) == 0){
                          }
                      }
                  if ($installed_amount != 1){
-                     echo $installed_amount . " patches installed.\n";
+                     echo $installed_amount . " patches successfully installed.\n";
                      }else{
-                     echo $installed_amount . " patch installed.\n";
+                     echo $installed_amount . " patch successfully installed.\n";
                      }
                  if ($installed_amount > 0){
                      clearCache ();
