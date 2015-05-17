@@ -8,10 +8,7 @@ Please don't use this in an production enviroment.");
 define("TRANSLATION_FOLLOW_INSTRUCTIONS", "Please follow instructions, to install UliCMS on this Server.");
 define("TRANSLATION_CHMOD", "<p>Please chmod the following files to 0755.<br/>
 <ol>
-<li>The main directory of UliCMS (excluding subdirectories)</li>
-<li>templates/ (recursive)</li>
-<li>content/ (recursive)</li>
-<li>modules/ (recursive)</li>
+<li>The main directory of UliCMS (recursive, including all files and subfolders)</li>
 </ol>
 </p>");
 define("TRANSLATION_PERMISSION", "Please set the file permissions like in this screenshot");

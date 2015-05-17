@@ -8,10 +8,7 @@ Setzen Sie diese Version bitte nicht produktiv ein!");
 define("TRANSLATION_FOLLOW_INSTRUCTIONS", "Folgen Sie den Anweisungen um das CMS auf Ihrem Server zu installieren.");
 define("TRANSLATION_CHMOD", "<p>Setzen Sie bitte vorher die Dateirechte der folgenden Dateien auf 0755.<br/>
 <ol>
-<li>Das Hauptverzeichnis des CMS (Ohne die Unterordner)</li>
-<li>templates/ (inklusive Inhalt und Unterordner)</li>
-<li>content/ (inklusive Inhalt und Unterordner)</li>
-<li>modules/ (inklusive Inhalt und Unterordner)</li>
+<li>Das Hauptverzeichnis des CMS (inklusive aller Dateien und Unterordner)</li>
 </ol>
 </p>");
 define("TRANSLATION_PERMISSION", "So müssen die Berechtigungen gesetzt sein");
