@@ -51,6 +51,7 @@ if (is_logged_in ()){
 <script src="scripts/vallenato/vallenato.js" type="text/javascript"></script>
 <link rel="stylesheet" href="scripts/vallenato/vallenato.css"
 	type="text/css">
+  <link rel="icon" href="gfx/favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="gfx/favicon.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" href="gfx/apple-touch-icon.png" />
   <link rel="apple-touch-icon" sizes="57x57" href="gfx/apple-touch-icon-57x57.png" />
