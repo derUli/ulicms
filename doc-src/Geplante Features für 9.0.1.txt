@@ -1,4 +1,4 @@
-[ ] Bootstrap mitliefern, über API-Befehle get_bootstrap() oder bootstrap() in Template einbindbar
+[ ] Bootstrap mitliefern, kann über enqueue_bootstrap($usecdn = false, $include_theme = false) eingebunden werden, wird dann von base_metas vor der style.css eingebunden
 [ ] Aktualisierung des CKEditors auf die neueste verfügbare Version
 [ ] Alle Patches die bisher für UliCMS 9.0.0 erschienen sind
 [ ] Uploadmöglichkeit für Favicon im Backend des CMS
