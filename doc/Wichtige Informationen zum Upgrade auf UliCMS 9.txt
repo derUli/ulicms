@@ -23,4 +23,3 @@ Setzen Sie nun die Rechte aller Dateien und Ordner Ihrer UliCMS Installation auf
 Geben Sie nun den Benutzergruppen, die Video oder Audiodateien hochladen können sollen, die Rechte auf "videos" und "audio".
 
 Deinstallieren Sie das Modul "pfbc" sofern Sie es installiert hatten.
-Die" PHP Form Builder Class" ist nun bereits im System enthalten
