@@ -3,3 +3,4 @@
 [ ] Alle Patches die bisher für UliCMS 9.0.0 erschienen sind
 [ ] Uploadmöglichkeit für Favicon im Backend des CMS
     CMS soll den entsprechenden Link-Tag automatisch generieren
+[ ] MOTD je Sprache
