@@ -1,4 +1,4 @@
-[ ] Datenschutz-freundlichere Social Media Buttons.
+[ ] Datenschutz-freundlichere Social Media Buttons (Modul)
     Siehe http://www.heise.de/extras/socialshareprivacy/
 [X] Funktion translate() soll Platzhalter ersetzen können, Mitgabe von Platzhaltern als optionaler Parameter, assoziatives Array platzhalter => String
 [X] Bildergalerie mit mehreren Fotoalben
