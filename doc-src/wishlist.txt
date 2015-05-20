@@ -39,3 +39,4 @@ Export der angepassten Übersetzungsdatei möglich
 [X] Shell Skript für „Alle Patches installieren“ ähnlich wie z.B. yum-cron
 [ ] Shell Skript für Pakete installieren (pkgadd.php), Pakete entfernen (pkgrm.php), Installierte Pakete listen (pkgls.php)
 [ ] Versionierung
+[ ] Slider Plugins implementieren - Soll ohne JSON Code schreiben zu müssen funktionieren, vielleicht Bedienung per Drag &Drop?
