@@ -1,3 +1,5 @@
+[ ] Datenschutz-freundlichere Social Media Buttons.
+    Siehe http://www.heise.de/extras/socialshareprivacy/
 [X] Funktion translate() soll Platzhalter ersetzen können, Mitgabe von Platzhaltern als optionaler Parameter, assoziatives Array platzhalter => String
 [X] Bildergalerie mit mehreren Fotoalben
 [ ] KCFinder durch eigene Medienverwaltung ersetzen
