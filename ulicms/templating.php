@@ -183,7 +183,7 @@ function get_category(){
 function category(){
      echo get_category ();
     }
-function body_classes(){
+function get_body_classes(){
      $str = "";
      if (is_frontpage ()){
          $str .= "home ";
@@ -202,13 +202,23 @@ function body_classes(){
          }else{
          $str .= "page ";
          }
+         
+     if(is_mobile()){
+       $str .= "mobile ";
+     } else {
+       $str .= "desktop ";
+     }
     
      if (containsModule (get_requested_pagename ())){
          $str .= "containsModule ";
          }
-    
-     echo $str;
+     $str = trim($str);
+     return $str;
     }
+
+function body_classes(){
+  echo get_body_classes();
+}
 
 // Gibt "Diese Seite läuft mit UliCMS" aus
 function poweredByUliCMS(){

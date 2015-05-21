@@ -6,7 +6,7 @@ echo getCurrentLanguage ();
 <meta name="viewport" content="width=1024" />
 <?php base_metas()?>
 </head>
-<body>
+<body class="<?php body_classes();?>">
 	<div id="root-container">
 		<header>
 			<section id="logo">
