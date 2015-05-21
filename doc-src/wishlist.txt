@@ -1,4 +1,4 @@
-[ ] Datenschutz-freundlichere Social Media Buttons (Modul)
+[X] Datenschutz-freundlichere Social Media Buttons (Modul)
     Siehe http://www.heise.de/extras/socialshareprivacy/
 [ ] Gästebuch Modul mit optionaler E-Mail Benachrichtigung
 [X] Funktion translate() soll Platzhalter ersetzen können, Mitgabe von Platzhaltern als optionaler Parameter, assoziatives Array platzhalter => String
