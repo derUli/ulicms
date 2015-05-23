@@ -1,3 +1,6 @@
 ===== Neues in UliCMS 9.0.1 ====
 + E-Mails, die über die ulicms_mail() Funktion versendet wurden, werden nun auch in der Datenbank gespeichert
 + API Funktion get_lang_config() hinzugefügt
++ UliCMS Konfigurationseinstellungen können per Umgebungsvariablen overridet werden.
+  Man kann z.B. folgendes in die .htaccess Datei schreiben, um den Homepage Titel zu overriden.
+  SetEnv ulicms_homepage_title "Hallo Welt"
