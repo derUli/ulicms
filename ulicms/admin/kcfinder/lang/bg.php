@@ -6,10 +6,9 @@
  */
 
 $lang = array(
-
-    '_locale' => "bg_BG.UTF-8",  // UNIX localization code
-    '_charset' => "utf-8",       // Browser charset
-
+    
+    '_locale' => "bg_BG.UTF-8", // UNIX localization code
+    '_charset' => "utf-8", // Browser charset
     // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e %B, %Y %H:%M",
      '_dateTimeMid' => "%a %e %b %Y %H:%M",
@@ -238,22 +237,20 @@ $lang = array(
     
      // SINCE 2.4
     "Checking for new version..." => "Проверка за нова версия...",
-    "Unable to connect!" => "Не може да се свърже!",
-    "Download version {version} now!" => "Свалете версия {version} сега!",
-    "KCFinder is up to date!" => "KCFinder е актуален!",
-    "Licenses:" => "Лицензи:",
-    "Attention" => "Внимание",
-    "Question" => "Въпрос",
-    "Yes" => "Да",
-    "No" => "Не",
-
-    // SINCE 2.41
-
+     "Unable to connect!" => "Не може да се свърже!",
+     "Download version {version} now!" => "Свалете версия {version} сега!",
+     "KCFinder is up to date!" => "KCFinder е актуален!",
+     "Licenses:" => "Лицензи:",
+     "Attention" => "Внимание",
+     "Question" => "Въпрос",
+     "Yes" => "Да",
+     "No" => "Не",
+    
+     // SINCE 2.41
     "You cannot rename the extension of files!" =>
-    "Не можете да преименувате разширенията на файловете!",
-
-    // SINCE 2.5
-
+     "Не можете да преименувате разширенията на файловете!",
+    
+     // SINCE 2.5
     "Uploading file {number} of {count}... {progress}" =>
      "Качване на файл {number} от {count}... {progress}",
     

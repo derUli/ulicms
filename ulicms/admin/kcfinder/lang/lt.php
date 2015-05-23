@@ -1,14 +1,14 @@
 <?php
 
-/** Lithuanian localization file for KCFinder
-  * author: Paulius Leščinskas <paulius.lescinskas@gmail.com>
-  */
+/**
+ * * Lithuanian localization file for KCFinder
+ * author: Paulius Leščinskas <paulius.lescinskas@gmail.com>
+ */
 
 $lang = array(
-
-    '_locale' => "lt_LT.UTF-8",  // UNIX localization code
-    '_charset' => "utf-8",       // Browser charset
-
+    
+    '_locale' => "lt_LT.UTF-8", // UNIX localization code
+    '_charset' => "utf-8", // Browser charset
     // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%F %T",
      '_dateTimeMid' => "%F %T",

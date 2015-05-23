@@ -1,16 +1,16 @@
 <?php
 
-/** Portuguese localization file for KCFinder
-  * author: Hugo Branquinho
-  * country: Portugal
-  * company website: www.framework.pt
-  */
+/**
+ * * Portuguese localization file for KCFinder
+ * author: Hugo Branquinho
+ * country: Portugal
+ * company website: www.framework.pt
+ */
 
 $lang = array(
-
-    '_locale' => "pt_PT.UTF-8",  // UNIX localization code
-    '_charset' => "utf-8",       // Browser charset
-
+    
+    '_locale' => "pt_PT.UTF-8", // UNIX localization code
+    '_charset' => "utf-8", // Browser charset
     // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e %B, %Y %H:%M",
      '_dateTimeMid' => "%a %e %b %Y %H:%M",
@@ -192,51 +192,51 @@ $lang = array(
     
      // VERSION 2 NEW LABELS
     "Cannot rename the folder." =>
-    "Não pode alterar o nome da pasta.",
-
-    "Non-existing directory type." =>
-    "Tipo de pasta inexistente.",
-
-    "Cannot delete the folder." =>
-    "Não pode apagar a pasta.",
-
-    "The files in the Clipboard are not readable." =>
-    "Os ficheiros que estão no Clipboard não podem ser copiados.",
-
-    "{count} files in the Clipboard are not readable. Do you want to copy the rest?" =>
-    "{count} ficheiros do Clipboard não podem ser copiados. Pretende copiar os restantes?",
-
-    "The files in the Clipboard are not movable." =>
-    "Os ficheiros que estão no Clipboard não podem ser movidos.",
-
-    "{count} files in the Clipboard are not movable. Do you want to move the rest?" =>
-    "{count} ficheiros do Clipboard não podem ser movidos. Pretende mover os restantes?",
-
-    "The files in the Clipboard are not removable." =>
-    "Os ficheiros que estão no Clipboard não podem ser removidos.",
-
-    "{count} files in the Clipboard are not removable. Do you want to delete the rest?" =>
-    "{count} ficheiros do Clipboard não podem ser removidos. Pretende apagar os restantes?",
-
-    "The selected files are not removable." =>
-    "Os ficheiros seleccionados não podem ser removidos.",
-
-    "{count} selected files are not removable. Do you want to delete the rest?" =>
-    "Não pode remover {count} ficheiros. Pretende apagar os restantes?",
-
-    "Are you sure you want to delete all selected files?" =>
-    "Tem a certeza que deseja apagar os ficheiros seleccionados?",
-
-    "Failed to delete {count} files/folders." =>
-    "Ocorreu um erro a apagar {count} ficheiros/pastas.",
-
-    "A file or folder with that name already exists." =>
-    "Já existe um ficheiro ou pasta com esse nome.",
-
-    "selected files" => "Ficheiros seleccionados",
-    "Type" => "Tipo",
-    "Select Thumbnails" => "Seleccionar miniaturas",
-    "Download files" => "Sacar ficheiros",
-);
+     "Não pode alterar o nome da pasta.",
+    
+     "Non-existing directory type." =>
+     "Tipo de pasta inexistente.",
+    
+     "Cannot delete the folder." =>
+     "Não pode apagar a pasta.",
+    
+     "The files in the Clipboard are not readable." =>
+     "Os ficheiros que estão no Clipboard não podem ser copiados.",
+    
+     "{count} files in the Clipboard are not readable. Do you want to copy the rest?" =>
+     "{count} ficheiros do Clipboard não podem ser copiados. Pretende copiar os restantes?",
+    
+     "The files in the Clipboard are not movable." =>
+     "Os ficheiros que estão no Clipboard não podem ser movidos.",
+    
+     "{count} files in the Clipboard are not movable. Do you want to move the rest?" =>
+     "{count} ficheiros do Clipboard não podem ser movidos. Pretende mover os restantes?",
+    
+     "The files in the Clipboard are not removable." =>
+     "Os ficheiros que estão no Clipboard não podem ser removidos.",
+    
+     "{count} files in the Clipboard are not removable. Do you want to delete the rest?" =>
+     "{count} ficheiros do Clipboard não podem ser removidos. Pretende apagar os restantes?",
+    
+     "The selected files are not removable." =>
+     "Os ficheiros seleccionados não podem ser removidos.",
+    
+     "{count} selected files are not removable. Do you want to delete the rest?" =>
+     "Não pode remover {count} ficheiros. Pretende apagar os restantes?",
+    
+     "Are you sure you want to delete all selected files?" =>
+     "Tem a certeza que deseja apagar os ficheiros seleccionados?",
+    
+     "Failed to delete {count} files/folders." =>
+     "Ocorreu um erro a apagar {count} ficheiros/pastas.",
+    
+     "A file or folder with that name already exists." =>
+     "Já existe um ficheiro ou pasta com esse nome.",
+    
+     "selected files" => "Ficheiros seleccionados",
+     "Type" => "Tipo",
+     "Select Thumbnails" => "Seleccionar miniaturas",
+     "Download files" => "Sacar ficheiros",
+    );
 
 ?>

@@ -1,17 +1,17 @@
 <?php
 
-/** Chinese Simplified localization file for KCFinder
-  * author: yutuo
-  * country: China
-  * E-mail: yutuo5@gmail.com
-  * URL: yutuo.net
-  */
+/**
+ * * Chinese Simplified localization file for KCFinder
+ * author: yutuo
+ * country: China
+ * E-mail: yutuo5@gmail.com
+ * URL: yutuo.net
+ */
 
 $lang = array(
-
-    '_locale' => "zh_CN.UTF-8",  // UNIX localization code
-    '_charset' => "utf-8",       // Browser charset
-
+    
+    '_locale' => "zh_CN.UTF-8", // UNIX localization code
+    '_charset' => "utf-8", // Browser charset
     // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e %B, %Y %H:%M",
      '_dateTimeMid' => "%a %e %b %Y %H:%M",

@@ -1,14 +1,14 @@
 <?php
 
-/** Czech localization file for KCFinder
-  * author: Rostislav Sivak <rsivak@rsivak.com>
-  */
+/**
+ * * Czech localization file for KCFinder
+ * author: Rostislav Sivak <rsivak@rsivak.com>
+ */
 
 $lang = array(
-
-    '_locale' => "cs_CZ.UTF-8",  // UNIX localization code
-    '_charset' => "utf-8",       // Browser charset
-
+    
+    '_locale' => "cs_CZ.UTF-8", // UNIX localization code
+    '_charset' => "utf-8", // Browser charset
     // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e.%B.%Y %H:%M",
      '_dateTimeMid' => "%a %e %b %Y %H:%M",

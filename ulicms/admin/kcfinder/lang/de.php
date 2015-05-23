@@ -1,14 +1,14 @@
 <?php
 
-/** German localization file for KCFinder
-  * author: Tim Wahrendorff <wahrendorff@users.sourceforge.net>
-  */
+/**
+ * * German localization file for KCFinder
+ * author: Tim Wahrendorff <wahrendorff@users.sourceforge.net>
+ */
 
 $lang = array(
-
-    '_locale' => "de_DE.UTF-8",  // UNIX localization code
-    '_charset' => "utf-8",       // Browser charset
-
+    
+    '_locale' => "de_DE.UTF-8", // UNIX localization code
+    '_charset' => "utf-8", // Browser charset
     // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e.%B.%Y %k:%M",
      '_dateTimeMid' => "%a %e %b %Y %k:%M",

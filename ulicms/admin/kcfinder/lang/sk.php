@@ -1,14 +1,14 @@
 <?php
 
-/** Slovak localization file for KCFinder
-  * author: drejk1 <drejk@inmail.sk>
-  */
+/**
+ * * Slovak localization file for KCFinder
+ * author: drejk1 <drejk@inmail.sk>
+ */
 
 $lang = array(
-
-    '_locale' => "sk_SK.UTF-8",  // UNIX localization code
-    '_charset' => "utf-8",       // Browser charset
-
+    
+    '_locale' => "sk_SK.UTF-8", // UNIX localization code
+    '_charset' => "utf-8", // Browser charset
     // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e.%B.%Y %H:%M",
      '_dateTimeMid' => "%a %e %b %Y %H:%M",

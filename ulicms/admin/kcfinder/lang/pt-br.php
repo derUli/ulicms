@@ -1,17 +1,17 @@
 <?php
 
-/** Portugues Brasil localization file for KCFinder
-  * author: Alexandre Benegas Ferreira
-  * country: Brasil
-  * company website: www.hostcataratas.com.br
-  * e-mail: contato@hostcataratas.com.br
-  */
+/**
+ * * Portugues Brasil localization file for KCFinder
+ * author: Alexandre Benegas Ferreira
+ * country: Brasil
+ * company website: www.hostcataratas.com.br
+ * e-mail: contato@hostcataratas.com.br
+ */
 
 $lang = array(
-
-    '_locale' => "pt_BR.UTF-8",  // UNIX localization code
-    '_charset' => "utf-8",       // Browser charset
-
+    
+    '_locale' => "pt_BR.UTF-8", // UNIX localization code
+    '_charset' => "utf-8", // Browser charset
     // Date time formats. See http://www.php.net/manual/en/function.strftime.php
     '_dateTimeFull' => "%A, %e %B, %Y %H:%M",
      '_dateTimeMid' => "%a %e %b %Y %H:%M",
