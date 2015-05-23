@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="doc"/>
+	<buildpathentry kind="src" path="doc-src"/>
+	<buildpathentry kind="src" path="services"/>
+	<buildpathentry kind="src" path="ulicms"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>

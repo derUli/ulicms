@@ -1,4 +1,17 @@
 <?php
+function get_type(){
+     if(!$page)
+         $page = get_requested_pagename();
+     $result = "";
+     $sql = "SELECT `type` FROM " . tbname("content") . " WHERE systemname='" . db_escape($page) . "'  AND language='" . db_escape($_SESSION["language"]) . "'";
+     $query = db_query($sql);
+     if(db_num_rows($query) > 0){
+         $result = db_fetch_object($query);
+         }
+     if(empty($result))
+         $result = "page";
+     return $result;
+     }
 
 function get_custom_data($page = null){
      if(!$page)
@@ -10,10 +23,9 @@ function get_custom_data($page = null){
          $result = db_fetch_object($query);
          return json_decode($result -> custom_data, true);
          }
-    
      return null;
      }
-
+     
 function get_access($page = null){
      if(!$page)
          $page = get_requested_pagename();
@@ -28,8 +40,8 @@ function get_access($page = null){
     
      return null;
      }
-
-
+     
+     
 function get_redirection($page = null){
      if(!$page)
          $page = get_requested_pagename();
@@ -47,16 +59,12 @@ function get_redirection($page = null){
      return null;
      }
 
-
 function get_theme($page = null){
-    
      if(!$page)
          $page = get_requested_pagename();
     
      $theme = getconfig("theme");
-    
      $mobile_theme = getconfig("mobile_theme");
-    
      if($mobile_theme and !empty($mobile_theme) and is_mobile())
          $theme = $mobile_theme;
     
@@ -103,7 +111,6 @@ function get_signature($page = null){
     
      return "";
      }
-
 
 function delete_custom_data($var = null, $page = null){
      if(!$page)
@@ -162,7 +169,6 @@ function get_category(){
      return categories :: getCategoryById($current_page["category"]);
      }
 
-
 function category(){
      echo get_category();
      }
@@ -194,7 +200,6 @@ function body_classes(){
      echo $str;
      }
 
-
 // Gibt "Diese Seite läuft mit UliCMS" aus
 function poweredByUliCMS(){
      translation("POWERED_BY_ULICMS");
@@ -209,9 +214,7 @@ function random_banner(){
              if(isset($row -> type)){
                  if(!empty($row -> type)){
                      $type = $row -> type;
-                    
                      }
-                
                  }
              if($type == "gif"){
                  $title = $row -> name;
@@ -222,11 +225,8 @@ function random_banner(){
                  echo $row -> html;
                  }
              }
-        
          }
-    
      }
-
 
 function logo(){
      if(!getconfig("logo_image")){
@@ -242,7 +242,6 @@ function logo(){
          echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars(getconfig("homepage_title"),
              ENT_QUOTES, "UTF-8") . '"/>';
          }
-    
      }
 
 
@@ -267,11 +266,7 @@ function get_homepage_title(){
 function homepage_title(){
      echo get_homepage_title();
      }
-
-
-
 $status = check_status();
-
 function meta_keywords($ipage = null){
      $status = check_status();
      $ipage = db_escape($_GET["seite"]);
@@ -305,10 +300,7 @@ function meta_description($ipage = null){
                  return $row -> meta_description;
                  }
              }
-        
-        
          }
-    
      $meta_description = getconfig("meta_description_" . $_SESSION["language"]);
      if(!$meta_description){
          $meta_description = getconfig("meta_description");
@@ -316,8 +308,6 @@ function meta_description($ipage = null){
     
      return $meta_description;
      }
-
-
 function get_title($ipage = null, $headline = false){
      $status = check_status();
      if($status == "404 Not Found"){
@@ -356,9 +346,6 @@ function get_headline($ipage = null){
 function headline($ipage = null){
      echo stringHelper :: real_htmlspecialchars(get_headline($ipage));
      }
-
-
-
 function import($ipage){
      $ipage = db_escape($ipage);
      if($ipage == ""){
@@ -372,18 +359,14 @@ function import($ipage){
      if(db_num_rows($query) == 0){
          return false;
          }else{
-        
          while($row = db_fetch_object($query)){
              $row -> content = replaceShortcodesWithModules($row -> content);
              $row -> content = apply_filter($row -> content, "content");
              $row -> content = correctHTMLValidationErrors($row -> content);
-            
              echo $row -> content;
              return true;
-             }
-        
+             }        
          }
-    
      }
 
 // Todo: nicht W3-konformen HTML-Code korrigieren
@@ -408,7 +391,6 @@ function correctHTMLValidationErrors($txt){
      $txt = str_ireplace("</dir>", "</ul>", $txt);
      $txt = str_ireplace("<acronym>", "<abbr>", $txt);
      $txt = str_ireplace("</acronym>", "</abbr>", $txt);
-    
      return $txt;
      }
 
@@ -423,17 +405,10 @@ function apply_filter($text, $type){
                  $text = call_user_func($modules[$i] . "_" . $type . "_filter",
                      $text);
                  }
-            
              }
-        
-        
          }
-    
      return $text;
-    
-    
      }
-
 
 function get_motto(){
      // Existiert ein Motto für diese Sprache? z.B. motto_en
@@ -446,30 +421,21 @@ function get_motto(){
      return htmlspecialchars($motto, ENT_QUOTES, "UTF-8");
      }
 
-
 function motto(){
      echo get_motto();
      }
-
-
+     
 function get_frontpage(){
      setLanguageByDomain();
-    
      if(isset($_SESSION["language"])){
          $frontpage = getconfig("frontpage_" . $_SESSION["language"]);
-        
+         
          if($frontpage){
              return $frontpage;
              }
-        
-         }
-    
-    
-    
+         }  
      return getconfig("frontpage");
-    
      }
-
 
 function get_requested_pagename(){
      $value = db_escape($_GET["seite"]);
@@ -494,7 +460,43 @@ function is_404(){
 function is_403(){
      return check_status() == "403 Forbidden";
      }
+     
+function buildtree($src_arr, $parent_id = 0, $tree = array())
+{
+    foreach($src_arr as $idx => $row)
+    {
+        if($row['parent'] == $parent_id)
+        {
+            foreach($row as $k => $v)
+                $tree[$row['id']][$k] = $v;
+            unset($src_arr[$idx]);
+            $tree[$row['id']]['children'] = buildtree($src_arr, $row['id']);
+        }
+    }
+    ksort($tree);
+    return $tree;
+}
 
+function parent_item_contains_current_page($id){
+       $retval = false;
+       $id = intval($id);
+       $language = $_SESSION["language"];
+       $sql = "SELECT id, systemname, parent FROM " . tbname("content") . 
+       " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
+       $r = db_query($sql);    
+       
+       $data = array();
+          while($row = db_fetch_assoc($r)) {
+          $data[] = $row;
+       }
+       
+       $tree = buildtree($data, $id);
+       foreach ($tree as $key){
+          if($key["systemname"] == get_requested_pagename())
+             $retval = true;
+       }
+       return $retval;
+}
 
 function get_menu($name = "top", $parent = null, $recursive = true){
      $html = "";
@@ -508,35 +510,45 @@ function get_menu($name = "top", $parent = null, $recursive = true){
          $sql .= " = " . intval($parent) . " ";
         
          }
-    
      $sql .= " ORDER by position";
      $query = db_query($sql);
     
      if(db_num_rows($query) == 0){
          return $html;
          }
-    
+         
      if(is_null($parent)){
-         $html .= "<ul class='menu_" . $name . "'>\n";
+         $html .= "<ul class='menu_" . $name . " navmenu'>\n";
          }else{
-        
-         $html .= "<ul class='sub_menu'>\n";
-        
+           $containsCurrentItem = parent_item_contains_current_page($parent);
+           $classes = "sub_menu";
+           if($containsCurrentItem){
+              $classes .= " contains-current-page";
+           }
+           $html .= "<ul class='".$classes."'>\n";
          }
     
      while($row = db_fetch_object($query)){
          if(checkAccess($row -> access)){
-             $html .= "  <li>" ;
+           $containsCurrentItem = parent_item_contains_current_page($row->id);
+           
+           $additional_classes = " ";
+           if($containsCurrentItem)
+              $additional_classes = " contains-current-page";
+            
+             if(get_requested_pagename() != $row -> systemname)
+                 $html .= "  <li class='".trim($additional_classes)."'>" ;
+             else
+                 $html .= "  <li class='menu_active_list_item".$additional_classes."'>" ;
              if(!empty($row -> alternate_title))
                  $title = $row -> alternate_title;
              else
                  $title = $row -> title;
              if(get_requested_pagename() != $row -> systemname){
                  $html .= "<a href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" .
-                 $row -> target . "'>";
+                 $row -> target . "' class='".trim($additional_classes)."'>";
                  }else{
-                
-                 $html .= "<a class='menu_active_link' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "'>";
+                 $html .= "<a class='menu_active_link".$additional_classes."' href='" . buildSEOUrl($row -> systemname, $row -> redirection) . "' target='" . $row -> target . "'>";
                  }
              if(!is_null($row -> menu_image) and !empty($row -> menu_image)){
                  $html .= '<img src="' . $row -> menu_image . '" alt="' . htmlentities($row -> title, ENT_QUOTES, "UTF-8") . '"/>';
@@ -544,17 +556,14 @@ function get_menu($name = "top", $parent = null, $recursive = true){
                  $html .= htmlentities($row -> title, ENT_QUOTES, "UTF-8");
                  }
              $html .= "</a>\n";
-            
              if($recursive){
                  $html .= get_menu($name, $row -> id);
                  }
             
              $html .= "</li>";
-            
              }
          }
      $html .= "</ul>";
-    
      return $html;
      }
 
@@ -569,7 +578,6 @@ function get_base_metas(){
      }
 
 function base_metas(){
-    
      $title_format = getconfig("title_format");
      if($title_format){
          $title = $title_format;
@@ -585,7 +593,6 @@ function base_metas(){
     
      $dir = dirname($_SERVER["SCRIPT_NAME"]);
      $dir = str_replace("\\", "/", $dir);
-    
      if(endsWith($dir, "/") == false){
          $dir .= "/";
          }
@@ -596,39 +603,30 @@ function base_metas(){
          echo '<meta name="robots" content="' . $robots . '"/>';
          echo "\r\n";
          }
-    
-    
-    
-    
      if(!getconfig("hide_meta_generator")){
          $powered_by = ULICMS_ROOT . "/powered-by.php";
          if(file_exists($powered_by))
              @include $powered_by;
-        
          echo '<meta name="generator" content="UliCMS ' . cms_version()
          . '"/>';
          echo "\r\n";
-        
          $facebook_id = getconfig("facebook_id");
-        
          if(!empty($facebook_id)){
              echo '<meta property="fb:admins" content="' . $facebook_id . '"/>';
              echo "\r\n";
              }
-        
          }
-    
      echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
      echo "\r\n";
-    
-    
+     $style_file = getTemplateDirPath(get_theme()) . "style.css";
+     if(is_file($style_file))
+         echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
+     echo "\r\n";
      $keywords = meta_keywords();
      if(!$keywords){
          $keywords = getconfig("meta_keywords");
          }
      if($keywords != "" && $keywords != false){
-        
-        
          if(!getconfig("hide_meta_keywords")){
              $keywords = apply_filter($keywords, "meta_keywords");
              $keywords = htmlentities($keywords, ENT_QUOTES, "UTF-8");
@@ -650,14 +648,8 @@ function base_metas(){
              echo "\r\n";
              }
          }
-    
-    
-    
-    
      echo '<link rel="stylesheet" type="text/css" href="core.css"/>';
      echo "\r\n";
-    
-    
      $zoom = getconfig("zoom");
      if($zoom === false){
          setconfig("zoom", 100);
@@ -674,16 +666,11 @@ font-size:" . getconfig("font-size") . ";
 background-color:" . getconfig("body-background-color") . ";
 color:" . getconfig("body-text-color") . ";
 }
-</style>";
-         }
-    
-    
+</style>
+";
      add_hook("head");
-    
-    
      }
-
-
+}
 
 function head(){
      base_metas();
@@ -733,7 +720,6 @@ function get_autor(){
          }
      }
 
-
 function get_page($systemname = ""){
      if(empty($systemname)){
          $systemname = $_GET["seite"];
@@ -741,8 +727,6 @@ function get_page($systemname = ""){
     
      if(empty($systemname))
          $systemname = get_frontpage();
-    
-    
      $query = db_query("SELECT * FROM " . tbname("content") . " WHERE systemname='" . db_escape($systemname) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
      if(db_num_rows($query) > 0){
          return db_fetch_assoc($query);
@@ -784,7 +768,6 @@ function checkAccess($access = ""){
          }
     
      for($i = 0; $i < count($access); $i++){
-        
          if(is_numeric($access[$i]) and isset($_SESSION["group_id"]) and $access[$i] == $_SESSION["group_id"]){
              return $access[$i];
              }
@@ -792,22 +775,22 @@ function checkAccess($access = ""){
      return null;
      }
 
-
 function check_status(){
      if($_GET["seite"] == ""){
          $_GET["seite"] = get_frontpage();
          }
-    
+         
      $page = $_GET["seite"];
-     $cached_page_path = buildCacheFilePath($page);
-    
+     $cached_page_path = buildCacheFilePath($page); 
+     $status = apply_filter("", "status");
+     if(!empty($status))
+         return $status;
      if(file_exists($cached_page_path) and !is_logged_in()){
          $last_modified = filemtime($cached_page_path);
          if(time() - $last_modified < CACHE_PERIOD){
              return "200 OK";
              }
          }
-    
      $test = get_page($_GET["seite"]);
      if(!$test or !is_null($test["deleted_at"])){
          no_cache();
@@ -821,6 +804,4 @@ function check_status(){
          }
      no_cache();
      return "403 Forbidden";
-    
      }
-
