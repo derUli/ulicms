@@ -42,7 +42,7 @@ if ($acl -> hasPermission ("dashboard")){
 
 	<?php
         
-         $motd = getconfig ("motd");
+         $motd = get_lang_config ("motd", getSystemLanguage());
          if ($motd or strlen ($motd) > 10){
              $motd = nl2br ($motd);
              ?>

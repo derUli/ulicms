@@ -1,5 +1,16 @@
 <?php
 
+
+function get_lang_config($name, $lang){
+   $retval = false;
+   $config =  getconfig($name. "_" . $lang);
+   if($config)
+      $retval = $config;
+   else
+     $config = getconfig($name);
+   return $config;
+}
+
 // PHP Formbuilder Class initialisieren
 function initPFBC(){
      include_once dirname (__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "PFBC" . DIRECTORY_SEPERATOR . "Form.php";
