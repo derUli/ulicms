@@ -19,13 +19,11 @@ def zipdir(basedir, archivename):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-n", "--no-reformat", help="Don't reformat code before creating patch", action="store_true")
     parser.add_argument("-z", "--zip", help="Compress with zip", action="store_true")
     parser.add_argument('-t', '--target', action ="store", dest="target", required = True, help="Target directory")
     args = parser.parse_args()
     target = os.path.expanduser(args.target)
     target = os.path.abspath(args.target)
-    reformat = not args.no_reformat
     source_dir = os.path.dirname(__file__)
 
     ignore = ('.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
@@ -33,15 +31,6 @@ def main():
               ".gitignore", "cache", "*~", ".settings", ".project", ".buildpath")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
-
-    operating_system = platform.system()
-    supported_os = ["Windows", "Linux"]
-    if not operating_system in supported_os and reformat:
-        print("Sorry Code refactoring is not supported on your operating system.")
-        reformat = False
-    if reformat:
-        print("Refactoring Code...")
-        execfile('reformat_code.py')
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
     installer_aus_folder = os.path.join(target, "ulicms", "installer.aus")
