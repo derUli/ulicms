@@ -4,9 +4,13 @@ $default_language = getSystemLanguage ();
 if (isset ($_SESSION ["language"]) and in_array ($_SESSION ["language"], $languages)){
      $default_language = $_SESSION ["language"];
     }
+
+$admin_logo = getconfig("admin_logo");
+if(!$admin_logo)
+   $admin_logo = "gfx/logo.png";
 ?>
 <p>
-	<img src="gfx/logo.png" alt="UliCMS" title="UliCMS" />
+	<img src="<?php echo $admin_logo;?>" alt="UliCMS" title="UliCMS" />
 </p>
 <h3>
 <?php

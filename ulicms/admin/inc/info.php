@@ -6,9 +6,13 @@ if (defined ("_SECURITY")){
      if (! $acl -> hasPermission ("info")){
          noperms ();
          }else{
+
+     $admin_logo = getconfig("admin_logo");
+     if(!$admin_logo)
+        $admin_logo = "gfx/logo.png";
          ?>
 <p>
-	<img src="gfx/logo.png" alt="UliCMS" />
+	<img src="<?php echo $admin_logo;?>" alt="UliCMS" />
 </p>
 <strong>Release <?php
         
