@@ -1,95 +1,81 @@
-   body{
-      font-size:x-large;    
-    }
-    
-    .menu li ul{
-       display:none !important;    
-    }
-    
-    .menu {
-        font-size:xx-large;
-    }
-
-    .menu li, .menu li ul li{
-     margin:14px;    
-    }
-    
-input[type="checkbox"],
-input[type="radio"]{
-zoom:3;
+body {
+	font-size: x-large;
 }
 
-div#root-container{
-width:85%;
+.menu li ul {
+	display: none !important;
 }
 
-
-div#root-container{
-width:95%;
-}
-#pbody table{
-display:block;
-overflow:auto;
+.menu {
+	font-size: xx-large;
 }
 
-
-
-input[type="button"], 
-input[type="submit"], 
-button{
-padding:30px;
-width:100%;
-margin-bottom:30px;
-font-size:larger;
+.menu li, .menu li ul li {
+	margin: 14px;
 }
 
-
-
-#pbody table thead th{
-white-space: nowrap;
+input[type="checkbox"], input[type="radio"] {
+	zoom: 3;
 }
 
-
-input[type="text"],
-input[type="password"],
-input[type="email"],
-input[type="number"],
-input[type="phone"], 
-input[type="color"],
-input.color,
-select,
-textarea,
-input[type="file"]{
-font-size:xx-large;
-}    
-
-
-input[type="file"]{
-width:100%;
+div#root-container {
+	width: 85%;
 }
 
-a{
-font-size:120% !important;
+div#root-container {
+	width: 95%;
 }
 
-#pbody table tbody tr td a img.mobile-big-image{
-width:2.0em;
-margin-left:50px;
-margin-right:50px;
+#pbody table {
+	display: block;
+	overflow: auto;
 }
 
-p{
-line-height:1.8em !important;
-margin-bottom:1.3em;
+input[type="button"], input[type="submit"], button {
+	padding: 30px;
+	width: 100%;
+	margin-bottom: 30px;
+	font-size: larger;
 }
 
-
-    
-.accordion-header{
-padding:20px !important;
-font-size:xx-large !important;
+#pbody table thead th {
+	white-space: nowrap;
 }
 
-.CodeMirror{
-font-size: 110%;
+input[type="text"], input[type="password"], input[type="email"], input[type="number"],
+	input[type="phone"], input[type="color"], input.color, select, textarea,
+	input[type="file"] {
+	font-size: xx-large;
+}
+
+input[type="file"] {
+	width: 100%;
+}
+
+a {
+	font-size: 120% !important;
+}
+
+#pbody table tbody tr td a img.mobile-big-image {
+	width: 2.0em;
+	margin-left: 50px;
+	margin-right: 50px;
+}
+
+p {
+	line-height: 1.8em !important;
+	margin-bottom: 1.3em;
+}
+
+.accordion-header {
+	padding: 20px !important;
+	font-size: xx-large !important;
+}
+
+.CodeMirror {
+	font-size: 110%;
+}
+
+.scrollup {
+	display: none;
 }

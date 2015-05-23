@@ -38,8 +38,8 @@ define('PEAR_TASK_PACKAGEANDINSTALL', 3);
  * Combining tasks is possible, but ordering is significant.
  * 
  * <file name="test.php" role="php">
- *                               <tasks:replace from="@data-dir@" to="data_dir" type="pear-config"/>
- *                               <tasks:postinstallscript/>
+ *                                   <tasks:replace from="@data-dir@" to="data_dir" type="pear-config"/>
+ *                                   <tasks:postinstallscript/>
  * </file>
  * 
  * This will first replace any instance of
@@ -64,7 +64,7 @@ class PEAR_Task_Common
      * 
      * - simple tasks operate on the contents of a file and write out changes to disk
      * - multiple tasks operate on the contents of many files and write out the
-     *                                changes directly to disk
+     *                                    changes directly to disk
      * 
      * Child task classes must override this property.
      * 
@@ -119,11 +119,11 @@ class PEAR_Task_Common
      * @param PEAR_Config $ 
      * @param array $ the entire parsed <file> tag
      * @return true |array On error, return an array in format:
-     *                                 array(PEAR_TASK_ERROR_???[, param1][, param2][, ...])
+     *                                     array(PEAR_TASK_ERROR_???[, param1][, param2][, ...])
      * 
-     *                                 For PEAR_TASK_ERROR_MISSING_ATTRIB, pass the attribute name in
-     *                                 For PEAR_TASK_ERROR_WRONG_ATTRIB_VALUE, pass the attribute name and an array
-     *                                 of legal values in
+     *                                     For PEAR_TASK_ERROR_MISSING_ATTRIB, pass the attribute name in
+     *                                     For PEAR_TASK_ERROR_WRONG_ATTRIB_VALUE, pass the attribute name and an array
+     *                                     of legal values in
      * @static 
      * @abstract 
      */
@@ -154,7 +154,7 @@ class PEAR_Task_Common
      * @param string $ file contents
      * @param string $ the eventual final file location (informational only)
      * @return string |false|PEAR_Error false to skip this file, PEAR_Error to fail
-     *                                      (use $this->throwError), otherwise return the new contents
+     *                                          (use $this->throwError), otherwise return the new contents
      * @abstract 
      */
      function startSession($pkg, $contents, $dest)

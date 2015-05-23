@@ -1,3 +1,5 @@
-$(window).load(function(){
-   $("input[type='checkbox']").shiftClick({'cache': false});
+$(window).load(function() {
+	$("input[type='checkbox']").shiftClick({
+		'cache' : false
+	});
 });

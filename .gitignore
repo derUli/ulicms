@@ -12,3 +12,6 @@ ulicms/cms-config.php
 ~$*
 *~
 releases/
+.settings
+.project
+.buildpath

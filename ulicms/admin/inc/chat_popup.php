@@ -1,16 +1,23 @@
-<?php if(!defined("_SECURITY"))
-     die();
+<?php
+
+if (! defined ("_SECURITY")){
+     die ();
+    }
 ?>
- <div class="Popup">
-            <h2>Chat mit <span id="chatTarget"></h2>
-            <form action="#">
-            <div id="chatLog"></div>
-            <input id="chatMessage" value="" type="text">
-            </form>
-            
-            <a href="#" class="closePopup">Schließen</a>
-        </div>
-        <div id="overlay" class="closePopup"></div>
+<div class="Popup">
+	<h2>
+		Chat mit <span id="chatTarget">
+	
+	</h2>
+	<form action="#">
+		<div id="chatLog"></div>
+		<input id="chatMessage" value="" type="text">
+	</form>
+
+	<a href="#" class="closePopup">Schließen</a>
+</div>
+<div id="overlay"
+	class="closePopup"></div>
 
 
 <script type="text/javascript">
@@ -23,12 +30,16 @@ $("#chatMessage").keyup(function(event){
            return;
         }
         $("#chatMessage").val("")
-        addMessageToLog("<?php echo $_SESSION["ulicms_login"];
-?>", message);
+        addMessageToLog("<?php
+
+echo $_SESSION ["ulicms_login"];
+ ?>", message);
         var data = {"ajax_cmd": "sendChatMessage", 
         "to" : $("#chatTarget").html(),
-        "from" : '<?php echo $_SESSION["ulicms_login"];
-?>',
+        "from" : '<?php
+
+echo $_SESSION ["ulicms_login"];
+ ?>',
         "message" : 'message'
         }
         $.post('index.php', data, function(response) {

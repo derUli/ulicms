@@ -1,45 +1,64 @@
 <?php
-$acl = new ACL();
-if($acl -> hasPermission("motd")){
+$acl = new ACL ();
+if ($acl -> hasPermission ("motd")){
      ?>
 <div>
-<h2><?php echo TRANSLATION_MOTD;
-     ?></h2>
-<?php
-     if(isset($_POST["motd"])){
+	<h2>
+	<?php
+    
+     echo TRANSLATION_MOTD;
+     ?>
+	</h2>
+	<?php
+     if (isset ($_POST ["motd"])){
         
-         $motd = strip_tags($_POST["motd"], getconfig("allowed_html"));
-         $motd = db_escape($motd);
-         setconfig("motd", $motd);
-        
+         $motd = strip_tags ($_POST ["motd"], getconfig ("allowed_html"));
+         $motd = db_escape ($motd);
+         setconfig ("motd", $motd);
         
          ?>
-<p><?php echo TRANSLATION_MOTD_WAS_CHANGED;
-         ?></p>
-<?php }
+	<p>
+	<?php
+        
+         echo TRANSLATION_MOTD_WAS_CHANGED;
+         ?>
+	</p>
+	<?php
+         }
      ?>
 
-<form id="motd_form" action="index.php?action=motd" method="post">
-<?php csrf_token_html();
+	<form id="motd_form" action="index.php?action=motd" method="post">
+	<?php
+    
+     csrf_token_html ();
      ?>
-<textarea name="motd" cols=60 rows=15><?php echo htmlspecialchars(getconfig("motd"));
-     ?></textarea>
-<br>
-<br>
-<input type="submit" name="motd_submit" value="<?php echo TRANSLATION_SAVE_CHANGES;
+		<textarea name="motd" cols=60 rows=15><?php
+    
+     echo htmlspecialchars (getconfig ("motd"));
+     ?></textarea> <br> <br> <input type="submit" name="motd_submit"
+			value="<?php
+    
+     echo TRANSLATION_SAVE_CHANGES;
      ?>">
-<p><strong><?php echo TRANSLATION_ALLOWED_HTML_TAGS;
-     ?></strong><br/>
-<?php echo htmlspecialchars(
-        getconfig("allowed_html"))?></p>
-<?php
-     if(getconfig("override_shortcuts") == "on" || getconfig("override_shortcuts") == "backend"){
-         ?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php }
+		<p>
+			<strong><?php
+    
+     echo TRANSLATION_ALLOWED_HTML_TAGS;
      ?>
-</form>
+			</strong><br />
+			<?php
+    
+     echo htmlspecialchars (getconfig ("allowed_html"))?>
+		</p>
+		<?php
+     if (getconfig ("override_shortcuts") == "on" || getconfig ("override_shortcuts") == "backend"){
+         ?>
+		<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+</script>
+<?php
+         }
+     ?>
+	</form>
 </div>
 <script type="text/javascript">
 $("#motd_form").ajaxForm({beforeSubmit: function(e){
@@ -57,9 +76,8 @@ $("#motd_form").ajaxForm({beforeSubmit: function(e){
 </script>
 
 <?php
-    
-     }else{
-     noperms();
-     }
+    }else{
+     noperms ();
+    }
 
 ?>

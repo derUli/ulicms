@@ -1,8 +1,13 @@
 <?php
 class ulicms_version{
      function ulicms_version(){
-         $this -> version = "White Alpaka";
-         $this -> internalVersion = Array(8, 0, 1);
+         $this -> version = "Purple Sky";
+         $this -> internalVersion = Array (
+            9,
+             0,
+             0,
+             1
+            );
          $this -> update = "";
          $this -> developmentVersion = false;
          }
@@ -11,11 +16,9 @@ class ulicms_version{
     function getVersion(){
          return $this -> version;
          }
-    
      function getUpdate(){
          return $this -> update;
          }
-    
      function getDevelopmentVersion(){
          return $this -> developmentVersion;
          }
@@ -24,6 +27,4 @@ class ulicms_version{
     function getInternalVersion(){
          return $this -> internalVersion;
          }
-    
-    
-     }
+    }

@@ -1,57 +1,58 @@
 <?php
 
-/** This file is part of KCFinder project
-  *
-  *      @desc CMS integration code: Drupal
-  *   @package KCFinder
-  *   @version 3.12
-  *    @author Dany Alejandro Cabrera <otello2040@gmail.com>
-  * @copyright 2010-2014 KCFinder Project
-  *   @license http://opensource.org/licenses/GPL-3.0 GPLv3
-  *   @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
-  *      @link http://kcfinder.sunhater.com
-  */
+/**
+ * * This file is part of KCFinder project
+ * 
+ * @desc CMS integration code: Drupal
+ * @package KCFinder
+ * @version 3.12
+ * @author Dany Alejandro Cabrera <otello2040@gmail.com> 
+ * @copyright 2010-2014 KCFinder Project
+ * @license http://opensource.org/licenses/GPL-3.0 GPLv3
+ * @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
+ * @link http://kcfinder.sunhater.com
+ */
 
 // gets a valid drupal_path
-function get_drupal_path() {
-    if (!empty($_SERVER['SCRIPT_FILENAME'])) {
-        $drupal_path = dirname(dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME']))));
-        if (!file_exists($drupal_path . '/includes/bootstrap.inc')) {
-            $drupal_path = dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])));
-            $depth = 2;
-            do {
-                $drupal_path = dirname($drupal_path);
-                $depth++;
-            } while (!($bootstrap_file_found = file_exists($drupal_path . '/includes/bootstrap.inc')) && $depth < 10);
-        }
+function get_drupal_path(){
+     if (!empty($_SERVER['SCRIPT_FILENAME'])){
+         $drupal_path = dirname(dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME']))));
+         if (!file_exists($drupal_path . '/includes/bootstrap.inc')){
+             $drupal_path = dirname(dirname(dirname($_SERVER['SCRIPT_FILENAME'])));
+             $depth = 2;
+             do{
+                 $drupal_path = dirname($drupal_path);
+                 $depth++;
+                 } while (!($bootstrap_file_found = file_exists($drupal_path . '/includes/bootstrap.inc')) && $depth < 10);
+             }
+         }
+    
+     if (!isset($bootstrap_file_found) || !$bootstrap_file_found){
+         $drupal_path = '../../../../..';
+         if (!file_exists($drupal_path . '/includes/bootstrap.inc')){
+             $drupal_path = '../..';
+             do{
+                 $drupal_path .= '/..';
+                 $depth = substr_count($drupal_path, '..');
+                 } while (!($bootstrap_file_found = file_exists($drupal_path . '/includes/bootstrap.inc')) && $depth < 10);
+             }
+         }
+     return $drupal_path;
     }
 
-    if (!isset($bootstrap_file_found) || !$bootstrap_file_found) {
-        $drupal_path = '../../../../..';
-        if (!file_exists($drupal_path . '/includes/bootstrap.inc')) {
-            $drupal_path = '../..';
-            do {
-                $drupal_path .= '/..';
-                $depth = substr_count($drupal_path, '..');
-            } while (!($bootstrap_file_found = file_exists($drupal_path . '/includes/bootstrap.inc')) && $depth < 10);
-        }
-    }
-    return $drupal_path;
-}
-
-function CheckAuthentication($drupal_path) {
-
-    static $authenticated;
-
-    if (!isset($authenticated)) {
-
-        if (!isset($bootstrap_file_found) || $bootstrap_file_found) {
-            $current_cwd = getcwd();
-            if (!defined('DRUPAL_ROOT')){
-                define('DRUPAL_ROOT', $drupal_path);
-            }
-
-            // Simulate being in the drupal root folder so we can share the session
+function CheckAuthentication($drupal_path){
+    
+     static $authenticated;
+    
+     if (!isset($authenticated)){
+        
+         if (!isset($bootstrap_file_found) || $bootstrap_file_found){
+             $current_cwd = getcwd();
+             if (!defined('DRUPAL_ROOT')){
+                 define('DRUPAL_ROOT', $drupal_path);
+                 }
+            
+             // Simulate being in the drupal root folder so we can share the session
             chdir(DRUPAL_ROOT);
 
             global $base_url;
@@ -98,16 +99,17 @@ function CheckAuthentication($drupal_path) {
                 //echo '<br />uploadDir: ' . $_SESSION['KCFINDER']['uploadDir']<br />;
 
                 chdir($current_cwd);
+                
+                 return true;
+                 }
+            
+             chdir($current_cwd);
+             return false;
+             }
+         }
+    }
 
                 return true;
             }
-
-            chdir($current_cwd);
-            return false;
-        }
-    }
-}
-
-CheckAuthentication(get_drupal_path());
 
 ?>

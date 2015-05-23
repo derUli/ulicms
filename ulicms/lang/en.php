@@ -1,14 +1,4 @@
 <?php
-/**
- * Dies ist die deutsche Sprachdatei von UliCMS.
- * Bitte beachten Sie, dass die Implementation von Sprachdateien in UliCMS
- * noch nicht fertig gestellt ist. 
- * Die Sprachdatei enthält bisher nur einige Übersetzungen, jedoch längst nicht alle.
- * Die restlichen Texte müssen im PHP-Code durch Platzhalter ersetzt werden.
- * Wenn Sie Übersetzungen beisteuern möchten, kontaktieren Sie bitte den Entwickler des Systems.
- * Beiträge zum Projekt werden gerne gesehen.
- */
-
 // Dashboard (Willkommen)
 define("TRANSLATION_MOTD", "Message of the Day");
 define("TRANSLATION_STATISTICS", "Statistics");
@@ -180,7 +170,7 @@ define("TRANSLATION_GROUP_DELETED", "Die Gruppe wurde erfolgreich gelöscht.");
 define("ULICMS_PLEASE_SELECT_FILETYPE", "Plese select a file type");
 
 // Vorlagen
-define("ULICMS_TEMPLATE_INFO_TEXT", "You can edit your website templates here. Please be careful, cause of the contained PHP code.");
+define("ULICMS_TEMPLATE_INFO_TEXT", "You can edit your website templates here. Please be careful, because of the contained PHP code.");
 define("TRANSLATION_PLEASE_SELECT_TEMPLATE", "please select a template");
 define("TRANSLATION_CHANGES_WAS_SAVED", "Changes was saved.");
 
@@ -233,7 +223,7 @@ define("TRANSLATION_SPAM_COUNTRIES", "Users from the following countries may <st
 define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Disallow chinese chars");
 
 // Cache
-define("TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern, 
+define("TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern,
 bietet das UliCMS eine Cache-Funktion.<br/>
 Statische Seiten, die keine Module enthalten, werden einmalig generiert und dann im cache-Ordner zwischengespeichert.
 Anschließend werden statt die Inhalte immer wieder aus der Datenbank zu laden, die Inhalte aus den gespeicherten HTML-Dateien geladen.</p>
@@ -422,5 +412,120 @@ define("TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">This pag
 define("TRANSLATION_UNDER_MAINTENANCE", "This website is currently under maintenance.<br/>Please visit us again later.");
 define("TRANSLATION_IP_BLOCKED_BY_SPAMHAUS", "Your IP-Adresse %ip is listed on spamhaus.org!<br/>Access Denied!");
 define("TRANSLATION_CHECK_FOR_SPAMHAUS", 'Block access from ip adresses that are listed at <a href="https://www.spamhaus.org/" target="_blank">spamhaus.org</a>.');
+
+// Patches
+define("TRANSLATION_NO_PATCHES_AVAILABLE", "No patches available");
+define("TRANSLATION_INSTALL_SELECTED_PATCHES", "Install selected patches");
+define("TRANSLATION_WAS_SUCCESSFULLY_INSTALLED", "was successfully installed");
+define("TRANSLATION_INSTALLATION_OF", "Installation of");
+define("TRANSLATION_IS_FAILED", "is failed!");
+
+define("TRANSLATION_AVAILABLE_PATCHES", "Available Patches");
+define("TRANSLATION_INSTALL_PATCHES", "Install Patches");
+
+define("TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches are available");
+
+// Hilfetexte
+define("TRANSLATION_HELP", "Help");
+define("TRANSLATION_PATCH_INSTALL_HELP", file_get_contents(ULICMS_ROOT . "/lang/longtxt/en/patch_install_help.html"));
+
+define("TRANSLATION_HELP_IS_ADMIN", "This option disables all access restrictions. The user have full access to the system..");
+
+// Videos
+define("TRANSLATION_VIDEOS", "Videos");
+define("TRANSLATION_UPLOAD_VIDEO", "Upload a Video");
+define("TRANSLATION_VIDEO_OGG", "Video in OGG Theora file format (for Firefox)");
+define("TRANSLATION_VIDEO_MP4", "Video in MP4 file format (for other browsers)");
+define("TRANSLATION_WIDTH", "Width");
+define("TRANSLATION_HEIGHT", "Height");
+define("TRANSLATION_MP4_FILE", "MP4 File");
+define("TRANSLATION_OGG_FILE", "OGG File");
+define("TRANSLATION_NO_HTML5", "Your browser doesn't support HTML 5.");
+define("TRANSLATION_DOWNLOAD_VIDEO_INSTEAD", "But you can download the video here.");
+define("TRANSLATION_INSERT_THIS_CODE_INTO_A_PAGE", "Insert this code into a page");
+
+
+define("TRANSLATION_VIDEO_WEBM", "Video in WebM file format (for Firefox)");
+define("TRANSLATION_WEBM_FILE", "WebM File");
+
+// Audio
+define("TRANSLATION_AUDIO", "Audio");
+define("TRANSLATION_AUDIO_OGG", "OGG Vorbis File (for Firefox)");
+define("TRANSLATION_AUDIO_MP3", "MP3 File (for other browsers)");
+define("TRANSLATION_DOWNLOAD_AUDIO_INSTEAD", "But you can download the audio file here.");
+define("TRANSLATION_UPLOAD_AUDIO", "Upload a Audio file");
+
+define("TRANSLATION_MP3_FILE", "MP3 File");
+
+define("TRANSLATION_HTML5_VIDEO_WIDTH_100_PERCENT", "100 % width for HTML 5 Videos");
+
+// Protokoll
+define("TRANSLATION_LOG", "Log");
+define("TRANSLATION_LOG_IP_ADDRESSES", "Log IP Addresses");
+define("TRANSLATION_LOG_IP_ADDRESSES_NOTICE", "<strong>Warning!</strong><br>This is maybe a problem with the privacy policy law.");
+define("TRANSLATION_LOG_IP_INFORMATION", "The log will be saved in database table " . tbname("log") . ". You can view it using an database administration tool like phpMyAdmin or sql_console.");
+
+// Cronjobs
+define("TRANSLATION_CRONJOBS", "Cronjobs");
+define("TRANSLATION_NO_AUTO_CRON", "Don't run cron.php automatically");
+
+// additional_menus
+define("TRANSLATION_ADDITIONAL_MENUS", "Additional Menus (semicolon seperated)");
+
+// HTML Editor
+define("TRANSLATION_HTML_EDITOR", "HTML Editor");
+
+// Help
+define("TRANSLATION_HELP_POSITION", "Enter a numeric value here.\nIt will be used to sort your pages in navigation menu.\nGive \"Page 1\" e.g. position 10 and \"Page 2\" position 20.\nIf you want to insert a page between this two pages, give it position 15.");
+define("TRANSLATION_HELP_MENU", "Select in which navigation menu your page will be shown.\nUliCMS has 5 Slots for navigation menus by default.\nWhich slots you can use depends on your templates.\n");
+
+
+// Register Form
+define("TRANSLATION_REGISTRATION", "Registration");
+define("TRANSLATION_REGISTER", "Register");
+define("TRANSLATION_FUNCTION_IS_DISABLED", "This function is disabled");
+define("TRANSLATION_PASSWORD_REPEAT", "Password (repeat)");
+
+define("TRANSLATION_FILL_ALL_FIELDS", "Please fill all fields");
+define("TRANSLATION_USERNAME_ALREADY_EXISTS", "This username is already registered.");
+define("TRANSLATION_PASSWORD_REPEAT_IS_WRONG", "Repeated password is invalid.");
+define("TRANSLATION_CONTINUE_HERE", "Click to continue");
+
+// Reset Password
+define("TRANSLATION_RESET_PASSWORD_MAIL_BODY", "Hello %username%!
+
+An user from the IP address %ip% requested a password reset on %host%.
+
+Your new password is:
+%password%.
+
+Please change this immediately!");
+define("TRANSLATION_RESET_PASSWORD_SUBJECT", "Reset Password");
+define("TRANSLATION_RESET_PASSWORD", "Reset Password");
+
+
+define("TRANSLATION_NO_SUCH_USER", "There is no such user.");
+define("TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Your password has been reset. You will receive an E-Mail containing your new password.");
+
+
+define("TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "You must change your Passwort, because t he 'require_password_change' is set.");
+
+define("TRANSLATION_ENABLE_PASSWORD_RESET", "Password can be reset");
+
+define("TRANSLATION_CHANGE_PASSWORD", "Change Password");
+
+define("TRANSLATION_PASSWORDS_NOT_EQUAL", "Passwords are not equal.");
+
+define("TRANSLATION_REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN", "Enforce password change on next login");
+
+define("TRANSLATION_BACK_TO_LOGIN", "Back to login");
+
+define("TRANSLATION_SECURITY", "Security");
+define("TRANSLATION_FORCE_PASSWORD_CHANGE_EVERY_X_DAYS", "Users must change their passwords every x days (0 = disabled)");
+define("TRANSLATION_IS_ADMIN", "Is Admin");
+define("TRANSLATION_NO_PATCHES_SELECTED", "No patches for installation selected.");
+
+define("TRANSLATION_LEFT", "Left");
+define("TRANSLATION_RIGHT", "Right");
 
 add_hook("lang_en");

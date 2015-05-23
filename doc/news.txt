@@ -1,28 +1,43 @@
-﻿===== Neues in UliCMS 8.0.1 ====
-+ Bedienung von UliCMS auf Mobile Devices wie Smartphones und Tablets optimiert (getestet auf Huawei Ascend Y300 mit Android)
-+ API Methoden register_action und remove_action hinzugefügt
-  Damit kann man eigene Actions zum Backend hinzugefügen
-+ Listen im Backend werden über jQuery Tablesorter sortiert, statt per SQL -> dadurch kein Page Reload mehr -> Sortierfunktion schneller
-+ Sprachdateien werden auch im Frontend geladen - Dadurch Lokalisierung von Modulen möglich.
-+ Fehlende Übersetzungen hinzugefügt (Grundeinstellungen, Fehlerseiten, etc.)
-+ Es wird nun eine Fehlermeldung bei einem fehlgeschlagenen Login angezeigt.
-+ Filtern nach "Aktiv" Status nun in der Seitenliste möglich
-+ Newsfeed von www.ulicms.de eingebunden
-+ "Cache leeren" nun direkt im "Einstellungen" Menü
-+ Aktualisierung von mPDF auf mPDF 6.0
-+ API Methoden get_translation, translate und translation hinzugefügt
-+ wordcount Plugin zu CKEditor hinzugefügt
-+ API Funktion get_site_protocol() hinzugefügt
-+ CodeMirror auf Version 4.12.0 aktualisiert
-+ Notification Sounds entfernt
-+ Mobile_Detect Klasse ins System integriert ( http://mobiledetect.net/ )
-+ Locales können nun je Sprache gesetzt werden (z.B. locale_en)
-+ Dropdownmenü auf mobilen Geräten deaktiviert
-+ Nachfrage zu Logout hinzugefügt
-+ API-Funktion splitAndTrim() hinzugefügt
-+ API-Funktionen db_get_server_info() und db_get_client_info() hinzugefügt
-+ API-Funktion get_useragent() hinzugefügt
-+ API-Funktion get_ip() hinzugefügt
-+ API-Funktion getUsersOnline() hinzugefügt
-+ API-Funktion recurse_copy($src, $dst) hinzugefügt
-+ Zugriff auf die Blacklist von spamhaus.org zur Spambekämpfung
+===== Neues in UliCMS 9.0.0 ====
++ HTML 5 Video hinzugefügt
++ HTML 5 Audio hinzugefügt
++ Flash Dateiverwaltung entfernt
++ Online Updates: Patches können nun direkt aus dem UliCMS Backend installiert werden. Dies setzt vorraus, dass die Berechtigungen so gesetzt sind, dass alle Dateien und Ordner der UliCMS Installation durch PHP beschreibbar sind.
++ integriertes jQuery auf Version 1.11.1 aktualisiert
++ Anti CSRF Tokens integriert
++ jQuery nun auch im Frontend automatisch integriert. Sofern Sie jQuery als Modul installiert haben, müssen Sie dieses Modul deinstallieren, da jQuery ansonsten doppelt eingebunden wird.
++ Scroll Up Button rechts unten hinzugefügt. Nur auf Desktop PCs.
++ Installer versucht, die Datenbank anzulegen, falls diese noch nicht existiert
++ no_auto_cron Option hinzugefügt. Wenn diese gesetzt ist, dann wird die cron.php nicht automatisch ausgeführt.
++ style.css wird nun automatisch eingebunden wenn vorhanden.
++ CSS Klasse li.menu_active_list_item hinzugefügt
++ "log" Datenbanktabelle für Logging von HTTP Anfragen hinzugefügt.
+  - IP Adressen werden nicht geloggt, dies kann jedoch durch setzen von log_ip geändert werden, verstößt jedoch gegen das deutsche Datenschutzgesetz
++ API Befehle get_request_method, get_request_uri, get_http_host, log_request, rand_string, get_user_id, get_type, get_parent und is_debug_mode hinzugefügt
++ Datenbankspalte "type" zu cotent Tabelle hinzugefügt.
++ Textfeld für additional_menus zu Designeinstellungen hinzugefügt
++ HTML Editor nun je User festlegbar
+  - Auswahlmöglichkeiten sind 
+    (X) CKEditor (WYSIWYG, für Anfänger)
+    (X) CodeMirror (HTML Code mit farblicher Hervorhebung, für HTML-Experten)
++ Registrierungsformular übersetzt
++ Funktion "Passwort zurücksetzen" hinzugefügt
++ Option "Änderung des Passworts bei nächster Anmeldung erzwingen" zu Benutzerverwaltung hinzugefügt
++ Sub-Menü hat nun die CSS Klasse "contains-current-page", sofern sich die aktuell geöffnete Seite darin befindet
++ Links zu Bearbeiten von Template-Dateien werden nur noch angezeigt, wenn diese im aktuellen Design vorhanden sind
++ Option "Anwender müssen ihr Passwort alle X Tage ändern" hinzugefügt.
++ Option "Ist Admin" zu Benutzerverwaltung hinzugefügt, wenn diese Option aktiviert ist, wird das Berechtigunssystem für den Benutzer deaktiviert, so dass dieser vollen Zugriff auf das System hat.
++ PHP Form Builder Class integriert (Beispiel im Modules Ordner)
++ "Zebra Tabellen"
++ Integration von Gravatar
++ KCFinder Medienverwaltung auf Version 3.12 aktualisiert
++ %motto% Platzhalter im <title>-Tag wird nun ersetzt
++ translate() Funktion unterstützt jetzt die Ersetzung von Platzhaltern
++ shell Befehle hinzugefügt, diese können z.B. genutzt werden, um bestimmte Vorgänge als Unix Cronjob einzurichten
+  - clearcache.php
+  - patchck.php
+  - truncate_log.php
++ floating-tools hinzugefügt, wenn man Text markiert, wird nun eine zusätzliche Toolbar mit Formatierungsmöglichkeiten angezeigt
++ Variable $umask kann zur cms-config.php hinzugefügt werden, um die umask zu setzen.
+  Die umask legt die Standard Dateirechte für neue Dateien unter Unix Systemen fest
+  Mehr Infos in der PHP Dokumentation unter https://php.net/manual/de/function.umask.php
