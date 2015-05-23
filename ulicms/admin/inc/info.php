@@ -12,7 +12,7 @@ if (defined ("_SECURITY")){
         $admin_logo = "gfx/logo.png";
          ?>
 <p>
-	<img src="<?php echo $admin_logo;?>" alt="UliCMS" />
+	<img src="<?php echo $admin_logo;?>" alt="UliCMS"  class="responsive-image" />
 </p>
 <strong>Release <?php
         

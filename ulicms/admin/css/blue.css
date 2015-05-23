@@ -8,6 +8,11 @@ body {
 	padding: 0;
 }
 
+img.responsive-image{
+  width:100%;
+  height:auto;
+}
+
 .CodeMirror {
 	margin-bottom: 20px;
 }

@@ -10,7 +10,7 @@ if(!$admin_logo)
    $admin_logo = "gfx/logo.png";
 ?>
 <p>
-	<img src="<?php echo $admin_logo;?>" alt="UliCMS" title="UliCMS" />
+	<img src="<?php echo $admin_logo;?>" alt="UliCMS" title="UliCMS" class="responsive-image" />
 </p>
 <h3>
 <?php
