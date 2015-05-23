@@ -1,0 +1,5 @@
+Datenbanktabelle anlegen um alle HTTP Request zu protokollieren.
+
+ID|Zeit|REQUEST_URI|REQUEST_METHOD|HTTP_HOST|IP
+
+IP ist optional, da Speicherung der IP-Adressen gegen das deutsche Datenschutzgesetzt verstößt.

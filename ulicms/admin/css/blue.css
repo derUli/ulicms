@@ -1,0 +1,277 @@
+body {
+	background-color: white;
+	font-family: "wf_SegoeUI", "Segoe UI", "Segoe", "Segoe WP", "Tahoma",
+		"Verdana", "Arial", "sans-serif";
+	font-size: medium;
+	color: rgb(50, 50, 50);
+	margin: 0;
+	padding: 0;
+}
+
+.CodeMirror {
+	margin-bottom: 20px;
+}
+
+img {
+	border: 0px;
+}
+
+#pbody ul li {
+	list-style-image: url('../gfx/list.png');
+}
+
+#pbody table.tablesorter thead th.header {
+	padding-right: 30px !important;
+}
+
+.ulicms_error {
+	color: red;
+	background-color: rgb(250, 250, 250);
+	border: solid rgb(230, 230, 230) 1px;
+	padding: 10px;
+}
+
+html {
+	overflow-y: scroll;
+}
+/* main menu styles */
+.menu {
+	display: inline-block;
+	width: 100%;
+	min-height: 40px;
+	position: relative;
+	margin: 0px auto;
+	padding: 0;
+	background: #335599;
+	font-size: large;
+}
+
+.menu li {
+	margin: 4px;
+	float: left;
+	position: relative;
+	list-style: none;
+}
+
+.menu a, .menu a:visited {
+	font-weight: bold;
+	color: #e7e5e5;
+	text-decoration: none;
+	display: block;
+	padding: 8px 20px;
+	border-top: 1px transparent solid;
+	cursor:default;
+}
+/* selected menu element */
+.menu .menu_active_link a, .menu li:hover>a {
+	background: #7788aa;
+	color: #000;
+	text-decoration: none;
+	border-top: 1px solid #f8f8f8;
+	text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7);
+}
+/* sublevels */
+.menu ul li:hover a, .menu li:hover li a {
+	background: none;
+	border: none;
+	color: #000;
+}
+
+.menu ul li>ul {
+	position: absolute;
+	left: 190px;
+}
+
+.menu ul li a:hover {
+	background: #335599 url(../images/bg.png);
+	color: #fff;
+	text-shadow: 0 2px 2px rgba(0, 0, 0, 0.7);
+}
+/* drop down */
+.menu li:hover>ul {
+	opacity: 1;
+	visibility: visible;
+	z-index: 5;
+}
+
+div#root-container {
+	padding: 0px 10px 5px 0px;
+	width: 85%;
+	margin: auto;
+	position: relative;
+}
+
+a, a:visited {
+	color: rgb(30, 30, 30);
+	text-decoration: none;
+	font-weight: 500;
+}
+
+a:hover {
+	color: rgb(30, 30, 30);
+	text-decoration: underline;
+}
+
+div#pbody {
+	padding: 20px 30px 5px 30px;
+}
+
+p#footer {
+	text-align: center;
+	margin-top: 50px;
+}
+
+table {
+	width: 100%;
+}
+
+input[type="button"], input[type="submit"], button {
+	background-color: #335599;
+	color: white;
+	padding: 10px;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="number"],
+	input[type="phone"], input[type="color"], input.color, select, textarea
+	{
+	background-color: rgb(253, 253, 253);
+	width: 100%;
+}
+
+input, select, table, textarea {
+	border: solid 1px #EDEDED;
+}
+
+table tr td, table th td {
+	padding: 5px;
+}
+
+/* Extra selectors needed to override the default styling */
+table.tablesorter tbody tr.normal-row td {
+	background: #888 !important;
+}
+
+table.tablesorter tbody tr.alt-row td {
+	background: #555 !important;
+}
+
+.menu ul {
+	opacity: 0;
+	visibility: hidden;
+	padding: 0;
+	position: absolute;
+	background: #aabbcc;
+	border: 1px solid #7788aa;
+	-moz-transition: opacity .25s linear, visibility .1s linear .1s;
+	-webkit-transition: opacity .25s linear, visibility .1s linear .1s;
+	-o-transition: opacity .25s linear, visibility .1s linear .1s;
+	transition: opacity .25s linear, visibility .1s linear .1s;
+}
+
+.menu ul li {
+	float: none;
+	margin: 0;
+}
+
+p {
+	width: 100%;
+	line-height: 1.5em;
+}
+
+.menu ul a {
+	font-weight: normal;
+	text-shadow: 0 2px 2px rgba(255, 255, 255, 0.7);
+}
+
+.menu ul ul {
+	left: 160px;
+	top: 0px;
+}
+
+code {
+	background-color: white;
+	display: block;
+	padding: 20px;
+	border: 1px dotted blue;
+	word-wrap: break-word;
+	/* Internet Explorer 5.5+ */
+	font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono',
+		Consolas, 'Everson Mono', 'Lucida Console', 'Andale Mono',
+		'Nimbus Mono L', 'Liberation Mono', FreeMono, 'Osaka Monospaced',
+		Courier, 'New Courier', monospace;
+}
+
+div#pkglist, div#loadpkg, div#message_page_edit, .loading {
+	display: none;
+}
+
+div.inPageMessage {
+	margin-bottom: 20px;
+	margin-top: 20px;
+	height: 24px;
+}
+
+#login {
+	margin: auto;
+	width: 500px;
+}
+
+#login table, #login table tr, #login table td {
+	border: none;
+}
+
+#login tr {
+	background-color: white;
+}
+
+.scrollup {
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	display: none;
+}
+
+.CodeMirror {
+	border: 1px solid #eee;
+	height: auto !important;
+	overflow: hidden;
+}
+
+.CodeMirror-scroll {
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+
+textarea#code, textarea#page_content {
+	height: auto;
+}
+
+div.help {
+	background-color: rgb(250, 250, 250);
+	border: solid rgb(200, 200, 200);
+	padding: 20px;
+	margin-top: 20px;
+}
+
+label {
+	font-weight: bold;
+}
+
+table tr:nth-child(odd) {
+	background-color: #eee;
+}
+
+table tr:nth-child(even) {
+	background-color: #fff;
+}
+
+/* Auswahl */
+::-moz-selection { /* Code for Firefox */
+	color: #e7e5e5;
+	background: #335599;
+}
+/* Auswahl */
+::selection {
+	color: #e7e5e5;
+	background: #335599;
+}

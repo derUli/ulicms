@@ -1,0 +1,1 @@
+$(window).bind('keydown', function(event) {    if (event.ctrlKey || event.metaKey) {        switch (String.fromCharCode(event.which).toLowerCase()) {        case 's':            event.preventDefault();            $("input[type='submit']").click();            break;              }    }});

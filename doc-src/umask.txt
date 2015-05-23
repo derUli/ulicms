@@ -1,0 +1,15 @@
+Die umask setzt die Standardberechtigungen für neue Dateien
+Die Umask lässt sich wie folgt berechnen
+0777 - X = gewünschte Berechtigung in Oktal
+X ist die umask (oktal)
+Die umask sollte nur geändert werden, sofern es zu Berechtigungsproblemen, bei durch PHP erzeugten Dateien und Ordnern kommt
+
+Hier einige Beispiele
+umask 0022 = 755 for dirs & 644 for files.
+umask 0000 = 777 for dirs & 666 for files.
+umask 0027 = 750 for dirs & 640 for files.
+umask 0077 = 700 for dirs & 600 for files
+umask 0007 = 770 for dirs & 660 for files 
+
+Mit folgendem Eintrag in der cms-config.php lässt sich die Umask für neue Dateien auf 0644 und für Ordner auf 0755 setzen
+$config->umask = 0022
