@@ -1,3 +1,0 @@
-# Achtung, dies ist ungetestet.
-# Es wird keine Garantie für die Funktion übernommen
-url.rewrite-once = ( "^(.*).(html|pdf|csv|txt|json)$" => "./?seite=$1&format=$2" )

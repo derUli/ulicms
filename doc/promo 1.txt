@@ -1,1 +1,0 @@
-Alternatives Content-Management-System mit einem leicht erlernbaren Templatesystem, einem benutzerfreundlichen Backend, medienneutraler Darstellung, einer Auswahl aus über 80 Modulen und Designs, sowie umfassender Dokumentation.
