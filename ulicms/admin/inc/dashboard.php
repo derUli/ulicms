@@ -33,8 +33,7 @@ if ($acl -> hasPermission ("dashboard")){
 	[<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>"><?php
         
          echo TRANSLATION_EDIT_PROFILE;
-         ?>
-	</a>]
+         ?></a>]
 </p>
 
 
