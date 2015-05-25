@@ -328,6 +328,17 @@ if (! $acl -> hasPermission ("design")){
         echo real_htmlspecialchars (getconfig ("body-background-color"));
          ?>"></td>
 		</tr>
+		<?php if($acl->hasPermission("favicon")){
+		?>
+		<tr>
+		<td>
+		<strong><?php translate("favicon");?></strong>
+		</td>
+		<td>
+		[<a href="index.php?action=favicon"><?php translate("upload_new_favicon");?></a>]
+		</td>
+</tr>		
+		<?php }?>
 		<tr>
 			<td><strong><?php
         
