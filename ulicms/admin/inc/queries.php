@@ -421,6 +421,8 @@ if (! empty ($_FILES ['favicon_upload_file'] ['name']) and $acl -> hasPermission
          add_hook ("after_upload_favicon");
           ulicms_redirect("index.php?action=favicon");
             
+         } else {
+             $_GET["error"] = get_translation("UPLOAD_WRONG_FILE_FORMAT");
          }
     
     }

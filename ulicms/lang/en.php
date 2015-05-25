@@ -533,4 +533,6 @@ define("TRANSLATION_FAVICON_INFOTEXT", "You can upload a <a href=\"http://en.wik
 define("TRANSLATION_CURRENT_FAVICON", "Current favicon");
 define("TRANSLATION_UPLOAD_NEW_FAVICON", "Upload new favicon");
 
+define("TRANSLATION_UPLOAD_WRONG_FILE_FORMAT", "The uploaded file had the wrong file type.");
+
 add_hook("lang_en");

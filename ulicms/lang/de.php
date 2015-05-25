@@ -514,5 +514,7 @@ define("TRANSLATION_FAVICON_INFOTEXT", "Hier können Sie ein <a href=\"http://de
 define("TRANSLATION_CURRENT_FAVICON", "Derzeitiges Favicon");
 define("TRANSLATION_UPLOAD_NEW_FAVICON", "Neues Favicon hochladen");
 
+define("TRANSLATION_UPLOAD_WRONG_FILE_FORMAT", "Die hochgeladene Datei hatte das falsche Dateiformat.");
+
 add_hook("lang_en");
 add_hook("lang_de");

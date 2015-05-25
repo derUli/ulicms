@@ -3,7 +3,13 @@ if (defined ("_SECURITY")){
      $acl = new ACL ();
      if ($acl -> hasPermission ("favicon")){
          ?>
-		
+<?php if(isset($_GET["error"])){
+?>
+<p class="ulicms_error">
+<?php echo htmlspecialchars($_GET["error"]);?>
+</p>
+<?php } ?>
+				
 <p>
 <?php
         
