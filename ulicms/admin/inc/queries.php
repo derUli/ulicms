@@ -406,9 +406,9 @@ if (! empty ($_FILES ['favicon_upload_file'] ['name']) and $acl -> hasPermission
          @chmod ("../content/images", 0777);
          }
     
-     $logo_upload = $_FILES ['logo_upload_file'];
-     $type = $logo_upload ['type'];
-     $filename = $logo_upload ['name'];
+     $favicon_upload_file = $_FILES['favicon_upload_file'];
+     $type = $favicon_upload_file['type'];
+     $filename = $favicon_upload_file['name'];
      $extension = file_extension ($filename);
     
      if ($type == "image/x-icon" or $type == "image/vnd.microsoft.icon" or $type == "image/ico" or $type == "image/icon" or $type == "text/ico" or $type == "text/ico" or $type == "application/ico"){
