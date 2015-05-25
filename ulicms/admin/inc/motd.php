@@ -1,94 +1,67 @@
-
 <?php
-if (defined ("_SECURITY")){
-     $acl = new ACL ();
-     if ($acl -> hasPermission ("motd")){
+$acl = new ACL ();
+if ($acl -> hasPermission ("motd")){
+     ?>
+<div>
+	<h2>
+	<?php
+    
+     echo TRANSLATION_MOTD;
+     ?>
+	</h2>
+	<?php
+     if (isset ($_POST ["motd"])){
         
-         $languages = getAllLanguages ();
-        
-         if (isset ($_POST ["submit"])){
-             for($i = 0; $i < count ($languages); $i ++){
-                
-                 $lang = $languages [$i];
-                 if (isset ($_POST ["motd_" . $lang])){
-                     $page = db_escape ($_POST ["motd_" . $lang]);
-                     setconfig ("motd_" . $lang, $page);
-                     if ($lang == getconfig ("default_language")){
-                         setconfig ("motd", $page);
-                         }
-                     }
-                 }
-             }
-        
-         $motd = array ();
-        
-         for($i = 0; $i < count ($languages); $i ++){
-             $lang = $languages [$i];
-             $motd [$lang] = getconfig ("motd_" . $lang);
-            
-             if (! $motd [$lang])
-                 $motd [$lang] = getconfig ("motd");
-             }
+         $motd = strip_tags ($_POST ["motd"], getconfig ("allowed_html"));
+         $motd = db_escape ($motd);
+         setconfig ("motd", $motd);
         
          ?>
-<h1>
-<?php
-        
-         translate("motd");
-         ?>
-</h1>
-<form action="index.php?action=motd"
-	id="motd_settings" method="post">
+	<p>
 	<?php
         
-         csrf_token_html ();
+         echo TRANSLATION_MOTD_WAS_CHANGED;
          ?>
-	<table border=0>
-		<tr>
-			<td style="min-width: 100px;"><strong><?php
-        
-         echo TRANSLATION_LANGUAGE;
-         ?>
-			</strong></td>
-			<td><strong><?php
-        
-         translate("motd");
-         ?>
-			</strong></td>
-		</tr>
-		<?php
-         for($n = 0; $n < count ($languages); $n ++){
-             $lang = $languages [$n];
-             ?>
-		<tr>
-			<td><?php
-            
-             echo $lang;
-             ?></td>
-			<td><textarea name="motd_<?php
-            
-             echo $lang;
-             ?>" rows=10><?php echo stringHelper :: real_htmlspecialchars ($motd [$lang]); ?></textarea></td>
-			<?php
-             }
-         ?>
-		
-		
-		
-		
-		
-		<tr>
-			<td></td>
-			<td style="text-align: center"><input name="submit" type="submit" value="<?php
-        
-         echo TRANSLATION_SAVE_CHANGES;
-         ?>"></td>
-	
-	</table>
-</form>
+	</p>
+	<?php
+         }
+     ?>
 
+	<form id="motd_form" action="index.php?action=motd" method="post">
+	<?php
+    
+     csrf_token_html ();
+     ?>
+		<textarea name="motd" cols=60 rows=15><?php
+    
+     echo htmlspecialchars (getconfig ("motd"));
+     ?></textarea> <br> <br> <input type="submit" name="motd_submit"
+			value="<?php
+    
+     echo TRANSLATION_SAVE_CHANGES;
+     ?>">
+		<p>
+			<strong><?php
+    
+     echo TRANSLATION_ALLOWED_HTML_TAGS;
+     ?>
+			</strong><br />
+			<?php
+    
+     echo htmlspecialchars (getconfig ("allowed_html"))?>
+		</p>
+		<?php
+     if (getconfig ("override_shortcuts") == "on" || getconfig ("override_shortcuts") == "backend"){
+         ?>
+		<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+</script>
+<?php
+         }
+     ?>
+	</form>
+</div>
 <script type="text/javascript">
-$("#motd_settings").ajaxForm({beforeSubmit: function(e){
+$("#motd_form").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");
   $("#loading").show();
   }, 
@@ -103,9 +76,8 @@ $("#motd_settings").ajaxForm({beforeSubmit: function(e){
 </script>
 
 <?php
-         }else{
-         noperms ();
-         }
-    
+    }else{
+     noperms ();
     }
+
 ?>
