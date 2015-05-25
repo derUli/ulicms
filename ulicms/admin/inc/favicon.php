@@ -11,6 +11,7 @@ if (defined ("_SECURITY")){
 <?php } ?>
 				
 <p>
+<h1><?php translate("favicon");?></h1>
 <?php
         
         translate("favicon_infotext");
