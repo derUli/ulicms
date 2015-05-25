@@ -480,7 +480,7 @@ echo TRANSLATION_TITLE;
          mysqli_query ($connection, $create_table_groups_sql) or die (mysqli_error ($connection));
         
          $insert_group_query = 'INSERT INTO `' . $prefix . 'groups` (`id`, `name`, `permissions`) VALUES
-(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"groups":true, "categories" : true, "images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"templates":true,"update_system":true,"users":true,"export":true, "import" : true, "videos":true, "audio":true}\')';
+(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"groups":true, "categories" : true, "images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"favicon":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"templates":true,"update_system":true,"users":true,"export":true, "import" : true, "videos":true, "audio":true}\')';
         
          mysqli_query ($connection, $insert_group_query);
         

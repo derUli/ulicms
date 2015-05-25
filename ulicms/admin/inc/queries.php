@@ -416,14 +416,13 @@ if (! empty ($_FILES ['favicon_upload_file'] ['name']) and $acl -> hasPermission
          $new_filename = "../content/images/favicon.ico";
         
          add_hook ("before_upload_favicon");
-         move_uploaded_file ($logo_upload ['tmp_name'], $new_filename);
+         move_uploaded_file ($favicon_upload_file['tmp_name'], $new_filename);
         
          add_hook ("after_upload_favicon");
-             ulicms_redirect("index.php?action=favicon_upload");
+          ulicms_redirect("index.php?action=favicon");
             
          }
     
-     add_hook ("after_upload_logo");
     }
 
 // Logo Upload

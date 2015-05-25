@@ -170,6 +170,10 @@ if (! $eingeloggt){
     
     else if ($_GET ["action"] == "logo_upload"){
          require_once "inc/logo.php";
+         }
+         
+    else if ($_GET ["action"] == "favicon"){
+         require_once "inc/favicon.php";
          }else if ($_GET ["action"] == "languages"){
          require_once "inc/languages.php";
          }else if ($_GET ["action"] == "import"){

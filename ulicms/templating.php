@@ -274,6 +274,8 @@ function get_homepage_title(){
          }
      return htmlspecialchars ($homepage_title, ENT_QUOTES, "UTF-8");
     }
+        
+    
 function homepage_title(){
      echo get_homepage_title ();
     }
@@ -562,6 +564,22 @@ function get_base_metas(){
      base_metas ();
      return ob_get_clean ();
     }
+    
+function output_favicon_code(){
+   echo get_output_favicon_code();
+}
+    
+function get_output_favicon_code(){
+  $url = "content/images/favicon.ico";
+  $path = ULICMS_ROOT."/".$url;
+  $html = "";
+  if(is_file($path)){
+      $html ='<link rel="icon" href="'.$url.'" type="image/x-icon" />'."\r\n".'<link rel="shortcut icon" href="'.$url.'" type="image/x-icon" />';
+
+  }
+  return $html;
+}    
+
 function base_metas(){
      $title_format = getconfig ("title_format");
      if ($title_format){
@@ -593,6 +611,9 @@ function base_metas(){
              @include $powered_by;
         
          echo '<meta name="generator" content="UliCMS ' . cms_version () . '"/>';
+         echo "\r\n";
+         
+         output_favicon_code();
          echo "\r\n";
         
         

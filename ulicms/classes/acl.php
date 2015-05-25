@@ -149,6 +149,7 @@ class ACL{
          $acl_data ["pkg_settings"] = null;
          $acl_data ["languages"] = null;
          $acl_data ["logo"] = null;
+         $acl_data ["favicon"] = null;
          $acl_data ["other"] = null;
          $acl_data ["expert_settings"] = null;
         
