@@ -123,7 +123,7 @@ if (defined ("_SECURITY")){
              ?>
 	</div>
 
-	<br /> <br /> <strong><?php
+	<br /> <strong><?php
             
              echo TRANSLATION_PARENT;
              ?> </strong><br /> <select name="parent" size=1>
@@ -323,35 +323,7 @@ function openMenuImageSelectWindow(field) {
              ?> </strong><br /> <input type="text" name="meta_keywords"
 			value="<?php
              echo htmlspecialchars ($row -> meta_keywords);
-             ?>"> <br /> <br /> <strong><?php
-            
-             echo TRANSLATION_COMMENTS;
-             ?> </strong><br /> <select name="comments_enabled" size=1>
-			<option value="1"
-				<?php
-            
-             if ($row -> comments_enabled == 1){
-                 echo "selected";
-                 }
-             ?>>
-			<?php
-            
-             echo TRANSLATION_ENABLED;
-             ?>
-			</option>
-			<option value="0"
-				<?php
-            
-             if ($row -> comments_enabled == 0){
-                 echo "selected";
-                 }
-             ?>>
-			<?php
-            
-             echo TRANSLATION_DISABLED;
-             ?>
-			</option>
-		</select> <br /> <br /> <strong><?php
+             ?>"> <br /> <br /><strong><?php
             
              echo TRANSLATION_OPEN_IN;
              ?></strong><br /> <select name="target" size=1>

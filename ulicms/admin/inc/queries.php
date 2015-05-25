@@ -11,9 +11,6 @@ if ($_GET ["action"] == "save_settings" && isset ($_POST ["save_settings"])){
      setconfig ("maintenance_mode", intval (isset ($_POST ["maintenance_mode"])));
      setconfig ("email", db_escape ($_POST ["email"]));
      setconfig ("max_news", (int) $_POST ["max_news"]);
-     setconfig ("comment_mode", db_escape ($_POST ["comment_mode"]));
-     setconfig ("disqus_id", db_escape ($_POST ["disqus_id"]));
-     setconfig ("facebook_id", db_escape ($_POST ["facebook_id"]));
      setconfig ("logo_disabled", db_escape ($_POST ["logo_disabled"]));
      setconfig ("timezone", db_escape ($_POST ["timezone"]));
      setconfig ("robots", db_escape ($_POST ["robots"]));
@@ -184,7 +181,7 @@ if ($_POST ["add_page"] == "add_page" && $acl -> hasPermission ("pages")){
          $alternate_title = db_escape ($_POST ["alternate_title"]);
          $activated = intval ($_POST ["activated"]);
          $page_content = $_POST ["page_content"];
-         $comments_enabled = (int) $_POST ["comments_enabled"];
+         $comments_enabled = 0;
          $category = intval ($_POST ["category"]);
          $notinfeed = 0;
          $redirection = db_escape ($_POST ["redirection"]);
@@ -335,7 +332,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl -> hasPermission ("pages")){
      $page_title = db_escape ($_POST ["page_title"]);
      $activated = intval ($_POST ["activated"]);
      $page_content = db_escape ($_POST ["page_content"]);
-     $comments_enabled = (int) $_POST ["comments_enabled"];
+     $comments_enabled = 0;
      $category = intval ($_POST ["category"]);
      $redirection = db_escape ($_POST ["redirection"]);
      $notinfeed = 0;

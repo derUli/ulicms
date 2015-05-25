@@ -100,7 +100,7 @@ if (defined ("_SECURITY")){
          echo nl2br (TRANSLATION_HELP_POSITION);
          ?>
 	</div>
-	<br /> <br /> <strong><?php
+	<br /> <strong><?php
         
          echo TRANSLATION_PARENT;
          ?>
@@ -281,23 +281,6 @@ function openMenuImageSelectWindow(field) {
          ?>
 		</strong><br /> <input type="text" name="meta_keywords" value=''> <br />
 		<br /> <strong><?php
-        
-         echo TRANSLATION_COMMENTS;
-         ?>
-		</strong><br /> <select name="comments_enabled" size=1>
-			<option value="1">
-			<?php
-        
-         echo TRANSLATION_ENABLED;
-         ?>
-			</option>
-			<option value="0" selected="selected">
-			<?php
-        
-         echo TRANSLATION_DISABLED;
-         ?>
-			</option>
-		</select> <br /> <br /> <strong><?php
         
          echo TRANSLATION_OPEN_IN;
          ?>

@@ -182,75 +182,7 @@ if (defined ("_SECURITY")){
 				value="enabled">
 		
 		</tr>
-		<tr>
-			<td></td>
-			<td><strong><?php
-        
-         echo TRANSLATION_COMMENTS;
-         ?></strong></td>
-		</tr>
-		<tr>
-			<td><strong><?php
-        
-         echo TRANSLATION_COMMENTING_SYSTEM;
-         ?></td>
-			<td><select name="comment_mode" size=1>
-					<!-- <option value="intern" <?php
-        
-         if ($settings ["comment_mode"] == "intern"){
-             echo 'selected';
-             }
-         ?>>Intern</option> !-->
-					<option value="facebook"
-						<?php
-        
-         if ($settings ["comment_mode"] == "facebook"){
-             echo 'selected';
-             }
-         ?>>Facebook Comments</option>
-					<option value="disqus"
-						<?php
-        
-         if ($settings ["comment_mode"] == "disqus"){
-             echo 'selected';
-             }
-         ?>>Disqus</option>
-					<option value="off"
-						<?php
-        
-         if ($settings ["comment_mode"] == "off"){
-             echo 'selected';
-             }
-         ?>><?php
-        
-         echo TRANSLATION_OFF;
-         ?></option>
-			</select></td>
-		</tr>
-		<tr>
-			<td><strong><?php
-        
-         echo TRANSLATION_FACEBOOK_ID;
-         ?></strong></td>
-			<td><input type="text" name="facebook_id"
-				value="<?php
-        
-         echo $settings ["facebook_id"];
-         ?>">
 		
-		</tr>
-		<tr>
-			<td><strong><?php
-        
-         echo TRANSLATION_DISQUS_SHORTNAME;
-         ?></strong></td>
-			<td><input type="text" name="disqus_id"
-				value="<?php
-        
-         echo $settings ["disqus_id"];
-         ?>">
-		
-		</tr>
 		<tr>
 			<td><strong><?php
         
