@@ -398,6 +398,34 @@ function resize_image($file, $target, $w, $h, $crop = FALSE){
      imagejpeg ($dst, $target, 100);
     }
 
+
+// Favicon Upload
+if (! empty ($_FILES ['favicon_upload_file'] ['name']) and $acl -> hasPermission ("favicon")){
+     if (! file_exists ("../content/images")){
+         @mkdir ("../content/images");
+         @chmod ("../content/images", 0777);
+         }
+    
+     $logo_upload = $_FILES ['logo_upload_file'];
+     $type = $logo_upload ['type'];
+     $filename = $logo_upload ['name'];
+     $extension = file_extension ($filename);
+    
+     if ($type == "image/x-icon" or $type == "image/vnd.microsoft.icon" or $type == "image/ico" or $type == "image/icon" or $type == "text/ico" or $type == "text/ico" or $type == "application/ico"){
+        
+         $new_filename = "../content/images/favicon.ico";
+        
+         add_hook ("before_upload_favicon");
+         move_uploaded_file ($logo_upload ['tmp_name'], $new_filename);
+        
+         add_hook ("after_upload_favicon");
+             ulicms_redirect("index.php?action=favicon_upload");
+            
+         }
+    
+     add_hook ("after_upload_logo");
+    }
+
 // Logo Upload
 if (! empty ($_FILES ['logo_upload_file'] ['name']) and $acl -> hasPermission ("logo")){
      if (! file_exists ("../content/images")){
