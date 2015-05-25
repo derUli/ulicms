@@ -176,8 +176,11 @@ function get_available_post_types(){
 
 // Schriftgrößen zurückgeben
 //  @TODO : Filter implementieren
+// Schriftgrößen zurückgeben
+//  @TODO : Filter implementieren
 function getFontSizes(){
-     return array (
+     global $sizes;
+     $sizes = array (
         "xx-small",
          "x-small",
          "smaller",
@@ -188,6 +191,8 @@ function getFontSizes(){
          "x-large",
          "xx-large"
         );
+        add_hook("custom_font_sizes");
+        return $sizes;
     }
 
 // Die IP-Adresse des Clients zurückgeben

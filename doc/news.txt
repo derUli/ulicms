@@ -6,3 +6,4 @@
   SetEnv ulicms_homepage_title "Hallo Welt"
 + Variable "admin_logo" kann nun gesetzt werden, um eine URL zu einem eigenen Admin-Logo anzugeben.
   Es wird im UliCMS Backend statt des UliCMS Logos angezeigt
++ custom_font_sizes Hook hinzugefügt
