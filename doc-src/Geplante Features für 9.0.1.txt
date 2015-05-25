@@ -3,4 +3,3 @@ Zuerst einmal, die Entwicklung von UliCMS 9.0.1 sollte erst Anfang 2016 beginnen
 [ ] Alle Patches die bisher für UliCMS 9.0.0 erschienen sind
 [X] Uploadmöglichkeit für Favicon im Backend des CMS
     CMS soll den entsprechenden Link-Tag automatisch generieren
-[ ] MOTD je Sprache
