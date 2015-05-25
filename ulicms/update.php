@@ -12,6 +12,10 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("mails")."` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
+$comments_dir = ULICMS_ROOT."/comments";
+
+@SureRemoveDir($comments_dir, true);
+
 setconfig ("db_schema_version", "9.0.1");
 
 //  @unlink ("update.php");
