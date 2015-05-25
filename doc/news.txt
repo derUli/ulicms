@@ -8,3 +8,4 @@
   Es wird im UliCMS Backend statt des UliCMS Logos angezeigt
 + custom_font_sizes Hook hinzugefügt
 + Legacy Kommentarsystem (Facebook / Disqus) entfernt, da veraltet und nicht mehr genutzt
++ Favicons können nun hochgeladen werden, sofern man die entsprechenden Berechtigungen unter "Design" hat.
