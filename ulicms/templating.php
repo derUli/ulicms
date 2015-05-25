@@ -595,12 +595,8 @@ function base_metas(){
          echo '<meta name="generator" content="UliCMS ' . cms_version () . '"/>';
          echo "\r\n";
         
-         $facebook_id = getconfig ("facebook_id");
         
-         if (! empty ($facebook_id)){
-             echo '<meta property="fb:admins" content="' . $facebook_id . '"/>';
-             echo "\r\n";
-             }
+ 
          }
      echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
      echo "\r\n";
