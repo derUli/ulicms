@@ -215,6 +215,7 @@ if (! defined ("SKIP_TABLE_CHECK")){
      tbname ("audio"),
      tbname ("languages"),
      tbname ("log"),
+     tbname ("mails"),
      tbname ("settings")
     );
 
