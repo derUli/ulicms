@@ -4,3 +4,8 @@ Zuerst einmal, die Entwicklung von UliCMS 9.0.1 sollte erst Anfang 2016 beginnen
 [X] Uploadmöglichkeit für Favicon im Backend des CMS
     CMS soll den entsprechenden Link-Tag automatisch generieren
 [ ] Option für memory_limit in der cms-config.php
+[ ] Versionierung der Seiten. Es soll lediglich der Content bzw. das Seiten-HTML versioniert werden.
+   [ ] Datenbanktabelle ulicms_history anlegen mit ID, content_id, content, date, user_id
+   [ ] Bei jeder Bearbeitung einer Seite soll der Inhalt den die Seite vorher hatte in die history Tabelle kopiert werden
+   [ ] Es soll die Möglichkeit geben, eine ältere Version einer Seite widerherzustellen. Dabei wird davor die aktuelle noch mal in die History gespeichert.
+   [ ] Beim löschen einer Seite sollen auch alle Einträge zu dieser Seite in der History gelöscht werden
