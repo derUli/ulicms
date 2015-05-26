@@ -536,5 +536,15 @@ define("TRANSLATION_FAVICON", "Favicon");
 
 define("TRANSLATION_UPLOAD_WRONG_FILE_FORMAT", "The uploaded file had the wrong file type.");
 
+// Versionionierung
+define("TRANSLATION_COMPARE_VERSION_FROM_TO", "Compare version from <strong>%current%</strong> with version from <strong>%old_version%</strong>.");
+
+define("TRANSLATION_VERSIONS", "Versions");
+define("TRANSLATION_CONTENT", "Content");
+define("TRANSLATION_DIFF", "Compare differences");
+define("TRANSLATION_VIEW_DIFF", "View differences");
+define("TRANSLATION_RESTORE", "Restore");
+define("TRANSLATION_RESTORE_OLDER_VERSION", "Restore an older version");
+define("TRANSLATION_ASK_FOR_RESTORE", "Do you really want to restore this older version?");
 
 add_hook("lang_en");

@@ -520,6 +520,7 @@ define("TRANSLATION_UPLOAD_WRONG_FILE_FORMAT", "Die hochgeladene Datei hatte das
 define("TRANSLATION_COMPARE_VERSION_FROM_TO", "Vergleiche Version von <strong>%current%</strong> mit Version von <strong>%old_version%</strong>.");
 
 define("TRANSLATION_VERSIONS", "Versionen");
+define("TRANSLATION_CONTENT", "Inhalt");
 define("TRANSLATION_DIFF", "Versionen vergleichen");
 define("TRANSLATION_VIEW_DIFF", "Versionen vergleichen");
 define("TRANSLATION_RESTORE", "Wiederherstellen");
