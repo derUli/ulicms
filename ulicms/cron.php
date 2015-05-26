@@ -13,7 +13,7 @@ db_query ("DELETE FROM " . tbname ("content") . " WHERE " . time () . " -  `dele
 
 // Alle Revisionen von bereits gelöschten Seiten entfernen
 db_query("DELETE FROM ".tbname("history")." WHERE content_id NOT IN (
-            SELECT id from ".tbname("content").");")
+            SELECT id from ".tbname("content").");");
 
 // Cronjobs der Module
 add_hook ("cron");
