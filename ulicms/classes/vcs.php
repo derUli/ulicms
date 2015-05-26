@@ -13,7 +13,7 @@ class VCS{
    $query = db_query("SELECT * FROM ".tbname("history"). " WHERE content_id = ".$content_id. " ORDER BY " .$order);
    $retval = array();
    while($row=db_fetch_object($query)){
-       $retval = $row;   
+       $retval[] = $row;   
    }
    return $retval;
    }

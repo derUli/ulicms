@@ -6,9 +6,10 @@ if (defined ("_SECURITY")){
      if ($acl -> hasPermission ("pages")){
      $content_id = intval($_GET["content_id"]);
      $revisions = VCS::getRevisionsByContentID($content_id);
+
   ?>
 <h1><?php translate("versions");?></h1>
-<table class="tablesorter"     >
+<table class="tablesorter">
 <thead>
 <tr>
 <th><?php translate("id");?></th>
@@ -24,7 +25,11 @@ if (defined ("_SECURITY")){
 <tr>
 <td><?php echo intval($revision->id);?></td>
 <td><?php translate("view_diff");?></td>
-<td><?php getUserById($revision->autor_id);?></td>
+<td><?php $user = getUserById($revision->user_id);
+if($user and isset($user["username"])){
+  echo htmlspecialchars($user["username"]);
+}
+?></td>
 <td><?php echo $revision->date;?></td>
 <td><?php translate("restore");?></td>
 </tr>
