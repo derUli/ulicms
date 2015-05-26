@@ -32,6 +32,8 @@ if (defined ("_SECURITY")){
 	Foundation, Inc. and other contributors <br /> <a
 		href="http://codemirror.net/" target="_blank">CodeMirror</a> &copy;
 	2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others
+	<br/>
+	<a href="http://www.raymondhill.net/finediff/viewdiff-ex.php" target="_blank">PHP  Fine Diff</a> Copyright 2011 (c) Raymond Hill
 </p>
 
 <div>
