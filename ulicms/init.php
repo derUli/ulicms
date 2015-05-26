@@ -216,7 +216,8 @@ if (! defined ("SKIP_TABLE_CHECK")){
      tbname ("languages"),
      tbname ("log"),
      tbname ("mails"),
-     tbname ("settings")
+     tbname ("history"),
+     tbname ("settings"),
     );
 
  for($i = 0; $i < count ($required_tables); $i ++){

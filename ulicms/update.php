@@ -12,6 +12,14 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("mails")."` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
+db_query("CREATE TABLE IF NOT EXISTS `".tbname("history")."` (
+  `id` int(11) NOT NULL,
+  `content_id` int(11) NOT NULL,
+  `content` longtext NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;")
+
 $comments_dir = ULICMS_ROOT."/comments";
 
 @SureRemoveDir($comments_dir, true);

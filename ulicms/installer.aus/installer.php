@@ -675,6 +675,14 @@ mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."mails` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
+mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."history"."` (
+`id` int(11) NOT NULL,
+  `content_id` int(11) NOT NULL,
+  `content` longtext NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
          mysqli_query ($connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "videos` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
