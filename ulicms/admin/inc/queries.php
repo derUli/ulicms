@@ -2,6 +2,8 @@
 $acl = new ACL ();
 add_hook ("query");
 
+include_once ULICMS_ROOT."/classes/vcs.php"; 
+
 if ($_GET ["action"] == "save_settings" && isset ($_POST ["save_settings"])){
      add_hook ("before_safe_simple_settings");
      setconfig ("registered_user_default_level", intval ($_POST ["registered_user_default_level"]));
@@ -258,6 +260,7 @@ if ($_POST ["add_page"] == "add_page" && $acl -> hasPermission ("pages")){
                  }
              }
         
+         $unescaped_content = $page_content;
          $page_content = db_real_escape_String ($page_content);
          $meta_keywords = unhtmlspecialchars ($meta_keywords);
          $meta_keywords = db_escape ($meta_keywords);
@@ -271,7 +274,10 @@ if ($_POST ["add_page"] == "add_page" && $acl -> hasPermission ("pages")){
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", " . $comments_enabled . ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "', 
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title', '$menu_image', '$custom_data', '$theme')") or die (db_error ());
-        
+        $user_id = get_user_id();
+        $content_id = db_insert_id();
+        $content = $unescaped_content;
+        VCS::createRevision($content_id, $content, $user_id);
          add_hook ("after_create_page");
          // header("Location: index.php?action=pages_edit&page=".db_insert_id()."#bottom");
         header ("Location: index.php?action=pages");
@@ -331,6 +337,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl -> hasPermission ("pages")){
      $system_title = db_escape ($_POST ["page_"]);
      $page_title = db_escape ($_POST ["page_title"]);
      $activated = intval ($_POST ["activated"]);
+     $unescaped_content = $_POST["page_content"];
      $page_content = db_escape ($_POST ["page_content"]);
      $comments_enabled = 0;
      $category = intval ($_POST ["category"]);
@@ -360,6 +367,12 @@ if ($_POST ["edit_page"] == "edit_page" && $acl -> hasPermission ("pages")){
      $language = db_escape ($_POST ["language"]);
      add_hook ("before_edit_page");
      db_query ("UPDATE " . tbname ("content") . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme' WHERE id=$id");
+     
+     
+     $user_id = get_user_id();
+     $content_id = $id;
+     $content = $unescaped_content;
+        VCS::createRevision($content_id, $content, $user_id);
     
      add_hook ("after_edit_page");
     
