@@ -1148,6 +1148,16 @@ function replaceShortcodesWithModules($string, $replaceOther = true){
  return $string;
 }
 
+function getPageByID($id){
+  $id = intval($id);
+  $query = db_query("SELECT * FROM ".tbname("content"). " where id = ".$id);
+  if(db_num_rows($query) > 0){
+    return db_fetch_object($query);
+  } else {
+    return null;  
+  }
+}
+
 // get page id by systemname
 function getPageIDBySystemname($systemname){
  $query = db_query ("SELECT systemname, id FROM `" . tbname ("content") . "` where systemname='" . db_escape ($systemname) . "'");

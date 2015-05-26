@@ -21,10 +21,11 @@ if (defined ("_SECURITY")){
 </thead>
 <tbody>
 <?php foreach($revisions as $revision){
+$view_diff_link = "index.php?action=view_diff&content_id=".$revision->content_id."&history_id=".$revision->id;
 ?>
 <tr>
 <td><?php echo intval($revision->id);?></td>
-<td><?php translate("view_diff");?></td>
+<td><a href="<?php echo $view_diff_link;?>"><?php translate("view_diff");?></a></td>
 <td><?php $user = getUserById($revision->user_id);
 if($user and isset($user["username"])){
   echo htmlspecialchars($user["username"]);
