@@ -31,7 +31,7 @@ if (defined ("_SECURITY")){
 <?php echo nl2br($html);?>
 </div>
 
-<p><a href="index.php?action?pages&do_restore_version=<?php echo $revision->id;?>" onclick="return confirm('<?php translate("ask_for_restore");?>');"><?php translate("restore");?></a></p>
+<p><a href="index.php?action?pages&do_restore_version=<?php echo $history_id;?>" onclick="return confirm('<?php translate("ask_for_restore");?>');"><?php translate("restore");?></a></p>
      <?php
     } else {
       noperms();    
