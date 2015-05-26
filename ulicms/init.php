@@ -129,6 +129,12 @@ if(isset($config->umask)){
    umask($config->umask);
 }
 
+// memory_limit setzen
+if(isset($config->memory_limit)){
+   @ini_set("memory_limit", $config->memory_limit);
+}
+
+
 include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "db_functions.php";
 include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "mailer.php";
 include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "file_get_contents_wrapper.php";
