@@ -92,6 +92,8 @@ if (! $eingeloggt){
          require_once "inc/contents.php";
          }else if ($_GET ["action"] == "pages"){
          require_once "inc/pages.php";
+         }else if ($_GET ["action"] == "restore_version"){
+            require_once "inc/restore_version.php";
          }else if ($_GET ["action"] == "categories"){
          require_once "inc/categories.php";
          }else if ($_GET ["action"] == "pages_edit"){
