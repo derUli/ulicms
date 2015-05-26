@@ -9,5 +9,5 @@ include $parent_path . "init.php";
 array_shift ($argv);
 
 db_query("TRUNCATE TABLE " . tbname("history"))or die(db_error() . "\n");
-echo "Logs was cleared\n";
+echo "History was cleared\n";
 exit ();
