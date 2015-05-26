@@ -13,6 +13,9 @@ if (defined ("_SECURITY")){
      $from_text = $current_version->content;
      $to_text = $old_version->content;     
      
+     $current_version_date = date("Y-m-d H:i:s", $current_version->lastmodified);
+     $old_version_date = $old_version->date;
+     
      
     $from_text = mb_convert_encoding($from_text, 'HTML-ENTITIES', 'UTF-8');
     $to_text = mb_convert_encoding($to_text, 'HTML-ENTITIES', 'UTF-8');
@@ -22,6 +25,8 @@ if (defined ("_SECURITY")){
 
   ?>
 <h1><?php translate("diff");?></h1>
+<p><?php translate("COMPARE_VERSION_FROM_TO", array("%current%" => $current_version_date, "%old_version%" => $old_version_date));?></p>
+
 <div class="diff">
 <?php echo nl2br($html);?>
 </div>

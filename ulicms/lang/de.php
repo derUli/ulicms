@@ -517,5 +517,7 @@ define("TRANSLATION_FAVICON", "Favicon");
 
 define("TRANSLATION_UPLOAD_WRONG_FILE_FORMAT", "Die hochgeladene Datei hatte das falsche Dateiformat.");
 
+define("TRANSLATION_COMPARE_VERSION_FROM_TO", "Vergleiche Version von <strong>%current%</strong> mit Version von <strong>%old_version%</strong>.");
+
 add_hook("lang_en");
 add_hook("lang_de");

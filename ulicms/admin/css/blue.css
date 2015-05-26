@@ -193,7 +193,7 @@ p {
 	top: 0px;
 }
 
-code {
+code, div.diff {
 	background-color: white;
 	display: block;
 	padding: 20px;
@@ -292,5 +292,4 @@ div.diff del{
   color: red;
   background: #fdd;
   text-decoration: none;
-}
 }
