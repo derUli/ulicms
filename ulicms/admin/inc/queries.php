@@ -174,6 +174,16 @@ if ($_GET ["action"] == "admin_delete" && (is_admin () or $acl -> hasPermission 
      header ("Location: index.php?action=admins");
      exit ();
     }
+    
+if(isset($_GET["do_restore_version"]) and $acl->hasPermission("pages")){
+   $do_restore_version = intval($_GET["do_restore_version"]);
+   $rev = VCS::getRevisionByID($do_restore_version);
+   if($rev){
+      VCS::restoreRevision($do_restore_version);
+   }
+   
+   ulicms_redirect("index.php?action=pages_edit&page=".$rev->content_id);
+}
 
 if ($_POST ["add_page"] == "add_page" && $acl -> hasPermission ("pages")){
      if ($_POST ["system_title"] != ""){

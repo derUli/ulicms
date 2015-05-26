@@ -32,7 +32,8 @@ if($user and isset($user["username"])){
 }
 ?></td>
 <td><?php echo $revision->date;?></td>
-<td><?php translate("restore");?></td>
+<td><a href="index.php?action?pages&do_restore_version=<?php echo $revision->id;?>" onclick="return confirm('<?php translate("ask_for_restore");?>');"><?php translate("restore");?></a>
+</td>
 </tr>
 <?php }?>
 </tbody>

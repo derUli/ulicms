@@ -1,4 +1,5 @@
 <?php
+include_once ULICMS_ROOT."/classes/vcs.php";
 if (defined ("_SECURITY")){
      $acl = new ACL ();
      if ($acl -> hasPermission ("pages")){
@@ -123,7 +124,8 @@ if (defined ("_SECURITY")){
              ?>
 	</div>
 
-	<br /> <strong><?php
+	<br /> 
+	<br /><strong><?php
             
              echo TRANSLATION_PARENT;
              ?> </strong><br /> <select name="parent" size=1>
@@ -450,6 +452,11 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 			</p>
 
 		</noscript>
+		<?php $rev = vcs::getRevisionsByContentID($row->id);
+		if(count($rev) > 0){
+		?>
+		<p>[<a href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"><?php translate("restore_older_version");?></a>]</p>
+		<?php }?>
 		<div class="inPageMessage">
 			<div id="message_page_edit" class="inPageMessage"></div>
 			<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">

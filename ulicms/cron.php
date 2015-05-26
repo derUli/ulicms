@@ -11,6 +11,10 @@ if ($empty_trash_days === false)
 $empty_trash_timestamp = $empty_trash_days * (60 * 60 * 24);
 db_query ("DELETE FROM " . tbname ("content") . " WHERE " . time () . " -  `deleted_at` > $empty_trash_timestamp") or die (db_error ());
 
+// Alle Revisionen von bereits gelöschten Seiten entfernen
+db_query("DELETE FROM ".tbname("history")." WHERE content_id NOT IN (
+            SELECT id from ".tbname("content").");")
+
 // Cronjobs der Module
 add_hook ("cron");
 

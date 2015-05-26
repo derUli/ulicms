@@ -519,5 +519,12 @@ define("TRANSLATION_UPLOAD_WRONG_FILE_FORMAT", "Die hochgeladene Datei hatte das
 
 define("TRANSLATION_COMPARE_VERSION_FROM_TO", "Vergleiche Version von <strong>%current%</strong> mit Version von <strong>%old_version%</strong>.");
 
+define("TRANSLATION_VERSIONS", "Versionen");
+define("TRANSLATION_DIFF", "Versionen vergleichen");
+define("TRANSLATION_VIEW_DIFF", "Versionen vergleichen");
+define("TRANSLATION_RESTORE", "Wiederherstellen");
+define("TRANSLATION_RESTORE_OLDER_VERSION", "Eine alte Version wiederherstellen");
+define("TRANSLATION_ASK_FOR_RESTORE", "Diese Version wirklich wiederherstellen?");
+
 add_hook("lang_en");
 add_hook("lang_de");
