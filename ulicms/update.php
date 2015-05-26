@@ -13,7 +13,7 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("mails")."` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 
 db_query("CREATE TABLE IF NOT EXISTS `".tbname("history")."` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `content_id` int(11) NOT NULL,
   `content` longtext NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
