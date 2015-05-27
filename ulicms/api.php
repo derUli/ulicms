@@ -1,7 +1,7 @@
 <?php
 
 function enqueueScriptFile($path){
-   if(!isset($_SERVER["script_qeue"])){
+   if(!isset($_SERVER["script_queue"])){
          $_SERVER["script_queue"] = array();
    }
    $_SERVER["script_queue"][] = $path;
