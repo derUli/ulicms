@@ -31,7 +31,7 @@ if (defined ("_SECURITY")){
                      }else{
                      echo '<p style="color:red">' . get_translation ("installation_of") . " " . htmlspecialchars ($splitted [0]) . " " . get_Translation ("is_failed") . "</p>";
                      }
-		 flush();
+		 fcflush();
                  }
              }
          }else{
