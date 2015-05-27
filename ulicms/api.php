@@ -1381,6 +1381,7 @@ function containsModule($page = null, $module = false){
  else
      return preg_match ("/\[module=\".+\"\]/", $content);
 }
+
 function page_has_html_file($page){
  $query = db_query ("SELECT `html_file` FROM " . tbname ("content") . " WHERE systemname = '" . db_escape ($page) . "'");
  $dataset = db_fetch_assoc ($query);
