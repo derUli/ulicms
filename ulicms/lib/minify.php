@@ -80,7 +80,7 @@ function enqueueStylesheetFile($path){
    
 }
 
-function getCombinedStylesheets(){
+function getCombinedStyleheets(){
    $output = "";
    if(isset($_GET["output_stylesheets"])){
       $stylesheets = explode(";", $_GET["output_stylesheets"]);

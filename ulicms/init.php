@@ -229,6 +229,8 @@ if (! defined ("SKIP_TABLE_CHECK")){
 
 if(isset($_GET["output_scripts"])){
   getCombinedScripts();
+} else if(isset($_GET["output_stylesheets"])){
+  getCombinedStylesheets();
 }
 
  for($i = 0; $i < count ($required_tables); $i ++){
