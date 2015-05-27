@@ -10,3 +10,4 @@
 + Legacy Kommentarsystem (Facebook / Disqus) entfernt, da veraltet und nicht mehr genutzt
 + Favicons können nun hochgeladen werden, sofern man die entsprechenden Berechtigungen unter "Design" hat.
 + Versionierung von Seiteninhalten
++ Mehrere Stylesheets und Scripts im Backend zu einer Datei zusammengefasst, um die Performance zu verbessern
