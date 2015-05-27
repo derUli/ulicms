@@ -329,7 +329,7 @@ function get_title($ipage = null, $headline = false){
          }
     
      $ipage = db_escape ($_GET ["seite"]);
-     $query = db_query ("SELECT * FROM " . tbname ("content") . " WHERE systemname='$ipage' AND language='" . db_escape ($_SESSION ["language"]) . "'", $connection);
+     $query = db_query ("SELECT alternate_title, title FROM " . tbname ("content") . " WHERE systemname='$ipage' AND language='" . db_escape ($_SESSION ["language"]) . "'", $connection);
      if ($ipage == ""){
          $query = db_query ("SELECT * FROM " . tbname ("content") . " ORDER BY id LIMIT 1");
          }
