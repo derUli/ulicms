@@ -28,3 +28,4 @@ Export der angepassten Übersetzungsdatei möglich
 [ ] Grafischer Formbuilder der die PHP Form Builder Class nutzt
 [ ] Ein einfaches "db_viewer" Modul für Anzeigen (nicht bearbeiten) der Datenbankinhalte
 [ ] Option "Täglich Nachts alle vefügbaren Patches installieren" hinzufügen
+[ ] Installationsfunktion von Installer GUI getrennt, Installation von UliCMS soll auch per Shell möglich sein.
