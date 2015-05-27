@@ -1,4 +1,5 @@
 <?php
+// Javascript Minify Funktionen
 function resetScriptQueue(){
    $_SERVER["script_queue"] = array();
 }
@@ -38,6 +39,7 @@ function getCombinedScripts(){
    }
    header("Content-Type: text/javascript");
    $len = mb_strlen($content , 'binary');
+   header("Content-Length". $len);
    
    echo $output;
    exit();
@@ -63,3 +65,5 @@ function getCombinedScriptURL(){
    
    return $url;
 }
+
+// Ab hier Stylesheet Funktionen
