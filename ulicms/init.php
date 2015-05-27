@@ -226,6 +226,10 @@ if (! defined ("SKIP_TABLE_CHECK")){
      tbname ("settings"),
     );
 
+if(isset($_GET["output_scripts"])){
+  getCombinedScripts();
+}
+
  for($i = 0; $i < count ($required_tables); $i ++){
      $table = $required_tables [$i];
      if (! in_array ($table, $existing_tables)){
