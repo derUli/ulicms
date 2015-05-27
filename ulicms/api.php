@@ -1277,7 +1277,7 @@ function getAllSystemNames($lang = null){
 
 // Sprachcodes abfragen und als Array zurück geben
 function getAllLanguages(){
- $query = db_query ("SELECT * FROM `" . tbname ("languages") . "` ORDER BY language_code");
+ $query = db_query ("SELECT language_code FROM `" . tbname ("languages") . "` ORDER BY language_code");
  $returnvalues = Array ();
  while ($row = db_fetch_object ($query)){
      array_push ($returnvalues, $row -> language_code);
@@ -1323,7 +1323,7 @@ function deleteconfig($key){
 
 // Set a configuration Variable;
 function setconfig($key, $value){
- $query = db_query ("SELECT * FROM " . tbname ("settings") . " WHERE name='$key'");
+ $query = db_query ("SELECT id FROM " . tbname ("settings") . " WHERE name='$key'");
 
  if (db_num_rows ($query) > 0){
      db_query ("UPDATE " . tbname ("settings") . " SET value='$value' WHERE name='$key'");
