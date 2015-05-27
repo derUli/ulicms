@@ -1,4 +1,3 @@
-<?php autor();?>
 <section class="advertisement"> <?php
 random_banner ();
 ?> </section>

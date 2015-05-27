@@ -3,7 +3,7 @@ include_once ULICMS_ROOT . "/lib/encryption.php";
 
 // this class contains functions for managing user accounts
 function getUsers(){
-     $query = db_query ("SELECT * FROM " . tbname ("users") . " ORDER by username");
+     $query = db_query ("SELECT username FROM " . tbname ("users") . " ORDER by username");
      $users = Array ();
      while ($row = db_fetch_object ($query)){
          array_push ($users, $row -> username);
@@ -12,7 +12,7 @@ function getUsers(){
      return $users;
     }
 function getUsersOnline(){
-     $users_online = db_query ("SELECT * FROM " . tbname ("users") . " WHERE last_action > " . (time () - 300) . " ORDER BY username");
+     $users_online = db_query ("SELECT username FROM " . tbname ("users") . " WHERE last_action > " . (time () - 300) . " ORDER BY username");
      $retval = array ();
      while ($row = db_fetch_object ($users_online)){
          $retval [] = $row -> username;
@@ -98,7 +98,7 @@ function get_user_id(){
          return 0;
     }
 function user_exists($name){
-     $query = db_query ("SELECT * FROM " . tbname ("users") . " WHERE username = '" . db_escape ($name) . "'");
+     $query = db_query ("SELECT id FROM " . tbname ("users") . " WHERE username = '" . db_escape ($name) . "'");
      return db_num_rows ($query) > 0;
     }
 function register_session($user, $redirect = true){
