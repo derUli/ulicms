@@ -139,6 +139,7 @@ include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERA
 include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "mailer.php";
 include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "file_get_contents_wrapper.php";
 require_once dirname (__file__) . DIRECTORY_SEPERATOR . "api.php";
+require_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib/minify.php";
 
 // define Constants
 define ('CR', "\r"); // carriage return; Mac
