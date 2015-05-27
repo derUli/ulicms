@@ -18,11 +18,14 @@ function eTagFromString($str){
 // Browser soll nur einen Tag Cachen
 // Für statische Ressourcen nutzen
 function browsercacheOneDay($modified = null){
+
+   header('Cache-Control: public');
    header("Expires: ".gmdate("D, d M Y H:i:s",time()+86400) . " GMT");
    header("Cache-Control: public,max-age=86400");
    if(!is_null($modified)){
      header("Last-Modified: ".gmdate("D, d M Y H:i:s", $modified) . " GMT");
         if(isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $modified <= strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+  $_SERVER["ulicms_send_304"];
   header("HTTP/1.1 304 Not Modified");
   exit;
 }

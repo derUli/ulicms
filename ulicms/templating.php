@@ -787,6 +787,10 @@ function check_status(){
      $page = $_GET ["seite"];
      $cached_page_path = buildCacheFilePath ($page);
      $status = apply_filter ("", "status");
+     if(isset($_SERVER["ulicms_send_304"])){
+          header("HTTP/1.1 304 Not Modified");
+          exit;
+     }
      if (! empty ($status))
          return $status;
      if (file_exists ($cached_page_path) and ! is_logged_in ()){
