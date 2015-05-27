@@ -3,16 +3,17 @@
 <head>
 <meta name="viewport" content="width=1000, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="css/blue.css" />
+<?php
+$styles = array("css/blue.css");
+?>
 <?php
 if (is_mobile ()){
-     ?>
-<link rel="stylesheet" type="text/css" href="css/mobile.css" />
-	<?php
-    }
+  $styles[] = "css/mobile.css";
+  }
 ?>
 <link rel="stylesheet" type="text/css"
 	href="scripts/tablesorter/style.css" />
+	<?php $styles[] = "scripts/tablesorter/style.css"; ?>
 <?php 
 $enq = array("scripts/php.js/strip_tags.js", "scripts/php.js/htmlspecialchars.js",
 "scripts/jquery.min.js",
@@ -65,8 +66,8 @@ $(document).ready(function() {
 ?>
 });
 </script>
-<link rel="stylesheet" href="scripts/vallenato/vallenato.css"
-	type="text/css">
+	
+  <?php $styles[] = "scripts/vallenato/vallenato.css"; ?>
   <link rel="icon" href="gfx/favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="gfx/favicon.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" href="gfx/apple-touch-icon.png" />
@@ -77,16 +78,22 @@ $(document).ready(function() {
   <link rel="apple-touch-icon" sizes="120x120" href="gfx/apple-touch-icon-120x120.png" />
   <link rel="apple-touch-icon" sizes="144x144" href="gfx/apple-touch-icon-144x144.png" />
   <link rel="apple-touch-icon" sizes="152x152" href="gfx/apple-touch-icon-152x152.png" />
-<link rel="stylesheet" type="text/css"
-	href="codemirror/lib/codemirror.css">
-<link rel="stylesheet" href="codemirror/mode/xml/xml.css"
-	type="text/css">
-<link rel="stylesheet" href="codemirror/mode/javascript/javascript.css"
-	type="text/css">
-<link rel="stylesheet" href="codemirror/mode/clike/clike.css"
-	type="text/css">
-<link rel="stylesheet" href="codemirror/mode/css/css.css"
-	type="text/css">
+<?php
+      $styles[] = "codemirror/lib/codemirror.css";
+      $styles[] = "codemirror/mode/xml/xml.css";
+      $styles[] = "codemirror/mode/javascript/javascript.css";
+      $styles[] = "codemirror/mode/clike/clike.css";
+      $styles[] = "codemirror/lib/codemirror.css";
+      $styles[] = "codemirror/mode/css/css.css";
+
+foreach($styles as $style){
+  enqueueStylesheet($style);
+}
+
+combined_stylesheet_html();
+?>
+
+
 <title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript">
 $(document).ready(function(){

@@ -72,7 +72,7 @@ function resetStylesheetQueue(){
    $_SERVER["stylesheet_queue"] = array();
 }
 
-function enqueueStylesheetFile($path){
+function enqueueStylesheet($path){
    if(!isset($_SERVER["stylesheet_queue"])){
          $_SERVER["stylesheet_queue"] = array();
    }
@@ -80,7 +80,7 @@ function enqueueStylesheetFile($path){
    
 }
 
-function getCombinedStyleheets(){
+function getCombinedStylesheets(){
    $output = "";
    if(isset($_GET["output_stylesheets"])){
       $stylesheets = explode(";", $_GET["output_stylesheets"]);
