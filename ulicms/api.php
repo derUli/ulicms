@@ -1,14 +1,5 @@
 <?php
 
-function outputMaintenanceMessage(){
-    header ('HTTP/1.0 503 Service Temporarily Unavailable');
-    header ('Status: 503 Service Temporarily Unavailable');
-    header ('Retry-After: 60');
-    header ("Content-Type: text/html; charset=utf-8");
-    translate("under_maintenance");
-    exit();
-}
-
 function get_lang_config($name, $lang){
    $retval = false;
    $config =  getconfig($name. "_" . $lang);

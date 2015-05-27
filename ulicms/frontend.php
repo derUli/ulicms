@@ -25,10 +25,6 @@ setLocaleByLanguage ();
 if (in_array ($_SESSION ["language"], getAllLanguages ())){
      include getLanguageFilePath ($_SESSION ["language"]);
     }
-    
-if(is_file(ULICMS_ROOT."/maintenance.flag")){
-   outputMaintenanceMessage();
-}
 
 if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ("NO_ANTI_CSRF")){
      if (! check_csrf_token ()){
