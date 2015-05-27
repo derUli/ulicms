@@ -46,6 +46,8 @@ function getCombinedScripts(){
    header("Content-Type: text/javascript");
    $len = mb_strlen($content , 'binary');
    header("Content-Length". $len);
+   $etag = md5($output);
+   header("Etag: $etag");
    browsercacheOneDay($lastmod);
    echo $output;
    exit();
@@ -119,7 +121,8 @@ function getCombinedStylesheets(){
    header("Content-Type: text/css");
    $len = mb_strlen($content , 'binary');
    header("Content-Length". $len);
-   
+   $etag = md5($output);
+   header("Etag: $etag");
    browsercacheOneDay($lastmod);
    echo $output;
    exit();
