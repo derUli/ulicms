@@ -13,18 +13,19 @@ function get_lang_config($name, $lang){
 
 // Browser soll nur einen Tag Cachen
 // Für statische Ressourcen nutzen
-function browsercacheOneDay($modified = null, $file = null){
+function browsercacheOneDay($modified = null){
    header("Expires: ".gmdate("D, d M Y H:i:s",time()+86400) . " GMT");
    header("Cache-Control: public,max-age=86400");
    if(!is_null($modified)){
      header("Last-Modified: ".gmdate("D, d M Y H:i:s", $modified) . " GMT");
-   }
-
-
-   if(isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $modified <= strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+        if(isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && $modified <= strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
   header("HTTP/1.1 304 Not Modified");
   exit;
 }
+   }
+
+
+
 }
 
 // PHP Formbuilder Class initialisieren
