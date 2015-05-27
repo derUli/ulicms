@@ -83,7 +83,7 @@ if (! $pkg_src){
                      echo nl2br ($pkgDescription);
                 
                  echo "</p>";
-                 flush ();
+                 fcflush ();
                  }
              }
          }

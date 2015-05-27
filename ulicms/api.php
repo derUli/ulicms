@@ -481,6 +481,7 @@ function getOnlineUsers(){
      return $users;
     }
 
+
 // get a config variable
 function getconfig($key){
      $env_key = "ulicms_".$key;
@@ -488,7 +489,7 @@ function getconfig($key){
      if($env_var)
         return $env_var;
      $ikey = db_escape ($key);
-     $query = db_query ("SELECT * FROM " . tbname ("settings") . " WHERE name='$key'");
+     $query = db_query ("SELECT value FROM " . tbname ("settings") . " WHERE name='$key'");
      if (db_num_rows ($query) > 0){
          while ($row = db_fetch_object ($query)){
              return $row -> value;
