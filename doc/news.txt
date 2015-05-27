@@ -12,3 +12,4 @@
 + Versionierung von Seiteninhalten
 + Mehrere Stylesheets und Scripts im Backend zu einer Datei zusammengefasst, um die Performance zu verbessern
 + Zusätzliche Nutzung von Browser-seitigen Caching bei aktiviertem Cache
++ Es wird nun das minified jQuery eingebunden
