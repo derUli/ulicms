@@ -10,6 +10,10 @@ function get_lang_config($name, $lang){
    return $config;
 }
 
+function eTagFromString($str){
+   header('ETag: ' . md5($str));
+}
+
 
 // Browser soll nur einen Tag Cachen
 // Für statische Ressourcen nutzen

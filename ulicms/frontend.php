@@ -144,6 +144,8 @@ if (file_exists ($cached_page_path) and ! getconfig ("cache_disabled") and geten
  $last_modified = filemtime ($cached_page_path);
 
  if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! defined ("NO_CACHE")){
+ browsercacheOneDay($last_modified);
+ eTagFromString($cached_content);
  echo $cached_content;
 
  if (getconfig ("no_auto_cron"))
@@ -209,6 +211,8 @@ if (! getconfig ("cache_disabled") and ! $hasModul and getenv ('REQUEST_METHOD')
  if (! defined ("EXCEPTION_OCCURRED") and ! defined ("NO_CACHE")){
  $Cache_Lite -> save ($data, $id);
  }
+ 
+ eTagFromString($data);
  echo $data;
 
  if (getconfig ("no_auto_cron"))
@@ -227,6 +231,8 @@ if (! getconfig ("cache_disabled") and ! $hasModul and getenv ('REQUEST_METHOD')
  fwrite ($handle, $generated_html);
  fclose ($handle);
  }
+ 
+ eTagFromString($generated_html);
  echo ($generated_html);
 
  // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
