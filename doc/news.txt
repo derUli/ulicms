@@ -11,3 +11,4 @@
 + Favicons können nun hochgeladen werden, sofern man die entsprechenden Berechtigungen unter "Design" hat.
 + Versionierung von Seiteninhalten
 + Mehrere Stylesheets und Scripts im Backend zu einer Datei zusammengefasst, um die Performance zu verbessern
++ Zusätzliche Nutzung von Browser-seitigen Caching bei aktiviertem Cache
