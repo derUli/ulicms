@@ -12,7 +12,8 @@ function enqueueScriptFile($path){
    
 }
 
-function getCombinedScripts(){
+function getCombinedScripts(){ 
+   $lastmod = 0;
    $output = "";
    if(isset($_GET["output_scripts"])){
       $scripts = explode(";", $_GET["output_scripts"]);
@@ -31,6 +32,8 @@ function getCombinedScripts(){
                    $output .= $content;
                    $output .= "\r\n";
                    $output .= "\r\n";
+                   if(filemtime($script) > $lastmod)
+                      $lastmod = filemtime($script); 
                 }
              }
              
@@ -43,7 +46,7 @@ function getCombinedScripts(){
    header("Content-Type: text/javascript");
    $len = mb_strlen($content , 'binary');
    header("Content-Length". $len);
-   
+   browsercacheOneDay($lastmod);
    echo $output;
    exit();
 }
@@ -85,6 +88,7 @@ function enqueueStylesheet($path){
 
 function getCombinedStylesheets(){
    $output = "";
+   $lastmod = 0;
    if(isset($_GET["output_stylesheets"])){
       $stylesheets = explode(";", $_GET["output_stylesheets"]);
       foreach($stylesheets as $stylesheet){
@@ -102,6 +106,8 @@ function getCombinedStylesheets(){
                    $output .= $content;
                    $output .= "\r\n";
                    $output .= "\r\n";
+                   if(filemtime($script) > $lastmod)
+                      $lastmod = filemtime($script); 
                 }
              }
              
@@ -114,6 +120,7 @@ function getCombinedStylesheets(){
    $len = mb_strlen($content , 'binary');
    header("Content-Length". $len);
    
+   browsercacheOneDay($lastmod);
    echo $output;
    exit();
 }

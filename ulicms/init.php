@@ -244,11 +244,7 @@ if (! defined ("SKIP_TABLE_CHECK")){
 if (! getconfig ("hide_meta_generator"))
  @header ('X-Powered-By: UliCMS Release ' . cms_version ());
 
-if(isset($_GET["output_scripts"])){
-  getCombinedScripts();
-} else if(isset($_GET["output_stylesheets"])){
-  getCombinedStylesheets();
-}
+
 
 $memory_limit = getconfig ("memory_limit");
 
@@ -290,6 +286,12 @@ if (! $timezone){
  setconfig ("timezone", "Europe/Berlin");
 }
 date_default_timezone_set (getconfig ("timezone"));
+
+if(isset($_GET["output_scripts"])){
+  getCombinedScripts();
+} else if(isset($_GET["output_stylesheets"])){
+  getCombinedStylesheets();
+}
 
 $locale = getconfig ("locale");
 if ($locale){

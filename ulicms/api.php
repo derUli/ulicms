@@ -10,6 +10,18 @@ function get_lang_config($name, $lang){
    return $config;
 }
 
+// Browser soll nur einen Tag Cachen
+// Für statische Ressourcen nutzen
+function browsercacheOneDay($modified = null){
+   header("Expires: ".gmdate("D, d M Y H:i:s",time()+86400) . " GMT");
+   header("Cache-Control: public,max-age=86400");
+   if(!is_null($modified)){
+     header("Last-Modified: ".gmdate("D, d M Y H:i:s", $modified) . " GMT");
+   }
+
+
+}
+
 // PHP Formbuilder Class initialisieren
 function initPFBC(){
      include_once dirname (__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "PFBC" . DIRECTORY_SEPERATOR . "Form.php";
