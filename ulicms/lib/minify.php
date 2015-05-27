@@ -45,7 +45,7 @@ function getCombinedScripts(){
    $output = trim($output);
    
    header("Content-Type: text/javascript");
-   $len = mb_strlen($content , 'binary');
+   $len = mb_strlen($output , 'binary');
    header("Content-Length: ". $len);
    eTagFromString($output);
    browsercacheOneDay($lastmod);
