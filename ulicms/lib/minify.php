@@ -45,7 +45,7 @@ function getCombinedScripts(){
    
    header("Content-Type: text/javascript");
    $len = mb_strlen($content , 'binary');
-   header("Content-Length". $len);
+   header("Content-Length: ". $len);
    eTagFromString($output);
    browsercacheOneDay($lastmod);
    echo $output;
@@ -119,7 +119,7 @@ function getCombinedStylesheets(){
    $output = trim($output);
    header("Content-Type: text/css");
    $len = mb_strlen($content , 'binary');
-   header("Content-Length". $len);
+   header("Content-Length: ". $len);
    eTagFromString($output);
    browsercacheOneDay($lastmod);
    echo $output;
