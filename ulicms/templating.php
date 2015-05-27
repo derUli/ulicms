@@ -697,7 +697,7 @@ function autor(){
 function get_autor(){
      $seite = $_GET ["seite"];
      if (empty ($seite)){
-         $query = db_query ("SELECT * FROM " . tbname ("content") . " ORDER BY id LIMIT 1");
+         $query = db_query ("SELECT systemname FROM " . tbname ("content") . " ORDER BY id LIMIT 1");
          $result = db_fetch_object ($query);
          $seite = $result -> systemname;
          }
@@ -706,15 +706,15 @@ function get_autor(){
          return;
          }
     
-     $query = db_query ("SELECT * FROM " . tbname ("content") . " WHERE systemname='" . db_escape ($seite) . "' AND language='" . db_escape ($_SESSION ["language"]) . "'", $connection);
+     $query = db_query ("SELECT systemname, autor FROM " . tbname ("content") . " WHERE systemname='" . db_escape ($seite) . "' AND language='" . db_escape ($_SESSION ["language"]) . "'", $connection);
      if (db_num_rows ($query) < 1){
          return;
          }
-     $result = db_fetch_array ($query);
+     $result = db_fetch_assoc ($query);
      if ($result ["systemname"] == "kontakt" || $result ["systemname"] == "impressum" || StartsWith ($result ["systemname"], "menu_")){
          return;
          }
-     $query2 = db_query ("SELECT * FROM " . tbname ("users") . " WHERE id=" . $result ["autor"], $connection);
+     $query2 = db_query ("SELECT firstname, lastname, username FROM " . tbname ("users") . " WHERE id=" . $result ["autor"], $connection);
      $result2 = db_fetch_array ($query2);
      if (db_num_rows ($query2) == 0){
          return;
@@ -724,7 +724,6 @@ function get_autor(){
      $out = str_replace ("Vorname", $result2 ["firstname"], $out);
      $out = str_replace ("Nachname", $result2 ["lastname"], $out);
      $out = str_replace ("Username", $result2 ["username"], $out);
-     $out = str_replace ("Datum", $result2 ["datum"], $out);
      if (! is_403 () or $_SESSION ["group"] >= 20){
          return $out;
          }
