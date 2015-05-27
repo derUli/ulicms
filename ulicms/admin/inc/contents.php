@@ -26,7 +26,7 @@ if ($acl -> hasPermission ("pages") or $acl -> hasPermission ("banners") or $acl
 	<a href="index.php?action=pages"><?php
         
          echo TRANSLATION_PAGES;
-         ?> </a><br /> <br />
+         ?></a><br /> <br />
 	<?php
          }
      ?>
@@ -37,7 +37,7 @@ if ($acl -> hasPermission ("pages") or $acl -> hasPermission ("banners") or $acl
 	<a href="index.php?action=banner"><?php
         
          echo TRANSLATION_ADVERTISEMENTS;
-         ?> </a><br /> <br />
+         ?></a><br /> <br />
 	<?php
          }
      ?>
@@ -51,7 +51,7 @@ if ($acl -> hasPermission ("pages") or $acl -> hasPermission ("banners") or $acl
 	<a href="index.php?action=categories"><?php
         
          echo TRANSLATION_CATEGORIES;
-         ?> </a><br /> <br />
+         ?></a><br /> <br />
 	<?php
          }
      ?>
@@ -91,7 +91,7 @@ if ($acl -> hasPermission ("pages") or $acl -> hasPermission ("banners") or $acl
 	<a href="index.php?action=export"><?php
         
          echo TRANSLATION_EXPORT;
-         ?> </a><br />
+         ?></a><br />
 	<?php
          }
      ?>
