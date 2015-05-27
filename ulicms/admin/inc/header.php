@@ -17,6 +17,7 @@ if (is_mobile ()){
 $enq = array("scripts/php.js/strip_tags.js", "scripts/php.js/htmlspecialchars.js",
 "scripts/jquery.min.js",
 "scripts/jquery.form.min.js",
+"scripts/jquery.tablesorter.min.js",
 "scripts/vallenato/vallenato.js",
 "codemirror/lib/codemirror.js",
 "codemirror/mode/php/php.js",
