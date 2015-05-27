@@ -121,7 +121,7 @@ function getCombinedStylesheets(){
    
    $output = trim($output);
    header("Content-Type: text/css");
-   $len = mb_strlen($content , 'binary');
+   $len = mb_strlen($output , 'binary');
    header("Content-Length: ". $len);
    eTagFromString($output);
    browsercacheOneDay($lastmod);
