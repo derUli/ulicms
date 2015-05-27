@@ -37,6 +37,9 @@ function getCombinedScripts(){
           }
       }
    }
+   
+   $output = trim($output);
+   
    header("Content-Type: text/javascript");
    $len = mb_strlen($content , 'binary');
    header("Content-Length". $len);
@@ -105,6 +108,8 @@ function getCombinedStylesheets(){
           }
       }
    }
+   
+   $output = trim($output);
    header("Content-Type: text/css");
    $len = mb_strlen($content , 'binary');
    header("Content-Length". $len);
