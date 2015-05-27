@@ -18,6 +18,7 @@ function getCombinedScripts(){
    if(isset($_GET["output_scripts"])){
       $scripts = explode(";", $_GET["output_scripts"]);
       foreach($scripts as $script){
+          $script = ltrim($script, "/");
           if(is_file($script)){
              $ext = pathinfo($script, PATHINFO_EXTENSION);
              if($ext == "js"){
@@ -92,7 +93,9 @@ function getCombinedStylesheets(){
    $lastmod = 0;
    if(isset($_GET["output_stylesheets"])){
       $stylesheets = explode(";", $_GET["output_stylesheets"]);
+      
       foreach($stylesheets as $stylesheet){
+      $stylesheet = ltrim($stylesheet, "/");
           if(is_file($stylesheet)){
              $ext = pathinfo($stylesheet, PATHINFO_EXTENSION);
              if($ext == "css"){
