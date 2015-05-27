@@ -3,17 +3,16 @@
 <head>
 <meta name="viewport" content="width=1000, user-scalable=no" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/blue.css"/>
 <?php
-$styles = array("css/blue.css");
+$styles = array();
 ?>
 <?php
 if (is_mobile ()){
   $styles[] = "css/mobile.css";
   }
 ?>
-<link rel="stylesheet" type="text/css"
-	href="scripts/tablesorter/style.css" />
-	<?php $styles[] = "scripts/tablesorter/style.css"; ?>
+<link rel="stylesheet" type="text/css" href="scripts/tablesorter/style.css"/>
 <?php 
 $enq = array("scripts/php.js/strip_tags.js", "scripts/php.js/htmlspecialchars.js",
 "scripts/jquery.min.js",
@@ -66,8 +65,7 @@ $(document).ready(function() {
 ?>
 });
 </script>
-	
-  <?php $styles[] = "scripts/vallenato/vallenato.css"; ?>
+  <link rel="stylesheet" type="text/css" href="scripts/vallenato/vallenato.css"/>
   <link rel="icon" href="gfx/favicon.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="gfx/favicon.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" href="gfx/apple-touch-icon.png" />
