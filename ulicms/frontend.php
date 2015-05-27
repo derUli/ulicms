@@ -144,8 +144,8 @@ if (file_exists ($cached_page_path) and ! getconfig ("cache_disabled") and geten
  $last_modified = filemtime ($cached_page_path);
 
  if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! defined ("NO_CACHE")){
- browsercacheOneDay($last_modified);
  eTagFromString($cached_content);
+ browsercacheOneDay($last_modified);
  echo $cached_content;
 
  if (getconfig ("no_auto_cron"))
