@@ -51,7 +51,7 @@ function include_jquery(){
      if (! in_array (get_requested_pagename (), $disabled_on_pages)){
          ?>
 
-<script type="text/javascript" src="admin/scripts/jquery.js"></script>
+<script type="text/javascript" src="admin/scripts/jquery.min.js"></script>
 <?php
          add_hook ("after_jquery_include");
          }
