@@ -230,12 +230,10 @@ $(window).load(function(){
          if ("null" == $_SESSION ["filter_parent"])
              echo "selected";
          ?>>
-			[
-			<?php
+			[<?php
         
          echo TRANSLATION_EVERY;
-         ?>
-			]
+         ?>]
 		</option>
 		<option value="-"
 			<?php
@@ -243,12 +241,10 @@ $(window).load(function(){
          if ("-" == $_SESSION ["filter_parent"])
              echo "selected";
          ?>>
-			[
-			<?php
+			[<?php
         
          echo TRANSLATION_NONE;
-         ?>
-			]
+         ?>]
 		</option>
 		<?php
         
@@ -285,23 +281,19 @@ $(window).load(function(){
         
          if (1 === $_SESSION ["filter_active"])
              echo "selected";
-         ?>>
-		<?php
+         ?>><?php
         
          echo TRANSLATION_ENABLED;
-         ?>
-		</option>
+         ?></option>
 		<option value="0"
 			<?php
         
          if (0 === $_SESSION ["filter_active"])
              echo "selected";
-         ?>>
-		<?php
+         ?>><?php
         
          echo TRANSLATION_DISABLED;
-         ?>
-		</option>
+         ?></option>
 	</select>
 </p>
 
