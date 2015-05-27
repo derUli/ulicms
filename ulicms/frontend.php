@@ -213,6 +213,7 @@ if (! getconfig ("cache_disabled") and ! $hasModul and getenv ('REQUEST_METHOD')
  }
  
  eTagFromString($data);
+ browsercacheOneDay();
  echo $data;
 
  if (getconfig ("no_auto_cron"))
@@ -233,6 +234,7 @@ if (! getconfig ("cache_disabled") and ! $hasModul and getenv ('REQUEST_METHOD')
  }
  
  eTagFromString($generated_html);
+ browsercacheOneDay();
  echo ($generated_html);
 
  // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
