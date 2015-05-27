@@ -43,7 +43,7 @@ foreach($enq as $script){
   enqueueScriptFile($script);
 }
 ?>
-<script type="text/javascript" src="<?php echo getCombinedScriptURL();?>"></script>
+<?php combined_script_html();?>
 
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>

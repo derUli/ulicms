@@ -1,5 +1,9 @@
 <?php
 
+function resetScriptQueue(){
+   $_SERVER["script_queue"] = array();
+}
+
 function enqueueScriptFile($path){
    if(!isset($_SERVER["script_queue"])){
          $_SERVER["script_queue"] = array();
@@ -38,6 +42,15 @@ function getCombinedScripts(){
    
    echo $output;
    exit();
+}
+
+function combined_script_html(){
+  echo get_combined_script_html();
+}
+
+function get_combined_script_html(){
+   $html = '<script src="'.getCombinedScriptURL().'" type="text/javascript"></script>';
+   return $html;
 }
 
 function getCombinedScriptURL(){
