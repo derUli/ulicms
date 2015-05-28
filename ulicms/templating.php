@@ -1,4 +1,17 @@
 <?php
+function get_all_combined_html(){
+   $html = "";
+   $html .= get_combined_stylesheet_html();
+   $html .= "\r\n";
+   $html .= combined_script_html();
+   $html .= "\r\n";
+   return $html;
+}
+
+function all_combined_html(){
+   echo all_comined_html();
+}
+
 function get_type(){
      if (! $page)
          $page = get_requested_pagename ();
@@ -54,6 +67,7 @@ function include_jquery(){
 <script type="text/javascript" src="admin/scripts/jquery.min.js"></script>
 <?php
          add_hook ("after_jquery_include");
+        
          }
     }
 function get_access($page = null){
