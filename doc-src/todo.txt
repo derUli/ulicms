@@ -1,2 +1,3 @@
 [ ] Copyright Jahr anpassen
 [ ] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
+[ ] Wenn Scripts oder Stylesheets in der queue sind, diese in base_metas() ausgeben
