@@ -8,3 +8,4 @@
     - Von welcher Version aus kann das Upgrade durchgeführt werden?
     - Was ist dabei zu beachten?
     - Müssen Anpassungen durchgeführt werden.
+[ ] Preview bzw. Alpha/Beta Version vorab veröffentlichen
