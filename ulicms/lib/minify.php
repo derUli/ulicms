@@ -58,9 +58,14 @@ function combined_script_html(){
 }
 
 function get_combined_script_html(){
+   $html = "";
+   if(isset($_SERVER["script_queue"]) and is_array($_SERVER["script_queue"]) 
+   and count($_SERVER["script_queue"]) > 0){
    $html = '<script src="'.getCombinedScriptURL().'" type="text/javascript"></script>';
-   return $html;
 }
+      return $html;
+}
+
 
 function getCombinedScriptURL(){
   $output = "";
@@ -134,7 +139,12 @@ function combined_stylesheet_html(){
 }
 
 function get_combined_stylesheet_html(){
-   $html = '<link rel="stylesheet" type="text/css" href="'.getCombinedStylesheetURL().'"/>';
+   $html = "";
+   
+   if(isset($_SERVER["stylesheet_queue"]) and is_array($_SERVER["stylesheet_queue"]) 
+   and count($_SERVER["stylesheet_queue"]) > 0){
+     $html = '<link rel="stylesheet" type="text/css" href="'.getCombinedStylesheetURL().'"/>';
+   }
    return $html;
 }
 
