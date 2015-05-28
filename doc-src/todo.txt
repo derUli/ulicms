@@ -3,3 +3,8 @@
 [ ] Wenn Scripts oder Stylesheets in der queue sind, diese in base_metas() ausgeben
 
 [ ] Dokumentation! Vor allem, zum Script/CSS queuing System!
+[ ] Dokumentation zum Upgrade auf UliCMS 9.0.1 verfassen
+    - Wie muss das Upgrade durchgeführt werden
+    - Von welcher Version aus kann das Upgrade durchgeführt werden?
+    - Was ist dabei zu beachten?
+    - Müssen Anpassungen durchgeführt werden.
