@@ -1,3 +1,3 @@
-Mit Cache (Datei):       0,67 Sekunden
-Mit Cache (Cache Lite)
+Mit Cache (Datei)        0,67 Sekunden
+Mit Cache (Cache Lite)   
 Ohne Cache               0,82 Sekunden
