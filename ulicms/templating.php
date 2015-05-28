@@ -505,7 +505,7 @@ function get_menu($name = "top", $parent = null, $recursive = true){
      $html = "";
      $name = db_escape ($name);
      $language = $_SESSION ["language"];
-     $sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image FROM " . tbname ("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent ";
+     $sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target FROM " . tbname ("content") . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent ";
     
      if (is_null ($parent)){
          $sql .= " IS NULL ";
