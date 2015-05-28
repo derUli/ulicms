@@ -2,4 +2,4 @@
 [ ] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
 [ ] Wenn Scripts oder Stylesheets in der queue sind, diese in base_metas() ausgeben
 
-[ ] Dokumentation! Vor allem, zum queing System.
+[ ] Dokumentation! Vor allem, zum Script/CSS queuing System!
