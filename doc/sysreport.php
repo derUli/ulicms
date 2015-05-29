@@ -63,10 +63,10 @@ function generateSysReport(){
 
 	$pkg = new PackageManager ();
 
+  if(method_exists($pkg, "getInstalledPatchNames")){
 	$str .= "<h3>Installierte Patches</h3>";
 
 
-	if(method_exists($pkg, "getInstalledPatchNames")){
 		$str .= "<ol>";
 	    $installed_patches = $pkg -> getInstalledPatchNames ();
 			foreach ($installed_patches as $patch){
