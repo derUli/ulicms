@@ -9,5 +9,5 @@
     - Was ist dabei zu beachten?
     - Müssen Anpassungen durchgeführt werden?
 [ ] Preview bzw. Alpha/Beta Version vorab veröffentlichen
-[ ] Fehler im sysreport Tool korrigieren
-[ ] installierte Patches im sysreport ausgeben
+[X] Fehler im sysreport Tool korrigieren
+[X] installierte Patches im sysreport ausgeben
