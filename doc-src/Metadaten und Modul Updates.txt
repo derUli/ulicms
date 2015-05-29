@@ -5,3 +5,9 @@ Diese kann folgende Informationen enthälten.
 - Hersteller des Moduls
 - Version
 - URL zu einer XML Datei, die die Versionsnummer der neuesten Version und einen Downloadlink dazu enthält, zur Durchführung automatischer Paketupdates
+
+Ob die Version neuer als die alte ist, kann wie folgt geprüft werden.
+if(version_compare($verfuegbare_version, $installierte_version, '>')){
+  // dann Update verfügbar
+  // Installieren?
+}
