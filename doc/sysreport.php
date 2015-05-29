@@ -60,6 +60,21 @@ function generateSysReport(){
 	}
 	$str .= "</ol>";
 
+
+	$pkg = new PackageManager ();
+
+	$str .= "<h3>Installierte Patches</h3>";
+
+
+	if(method_exists($pkg, "getInstalledPatchNames")){
+		$str .= "<ol>";
+	    $installed_patches = $pkg -> getInstalledPatchNames ();
+			foreach ($installed_patches as $patch){
+			$str .= "<li>".htmlspecialchars($patch)."</li>";
+					}
+					$str .= "</ol>";
+  }
+
 	$str .= "<h3>Installierte Themes</h3>";
 
 	$themes = getThemeList();
@@ -88,7 +103,8 @@ function generateSysReport(){
 	$str .= '<h2>$_SERVER</h2>'."";
 	ksort($_SERVER);
 	foreach($_SERVER as $key => $value){
-		$str .= htmlspecialchars($key) . " = " . htmlspecialchars($value) ."\n";
+		if(is_string($value))
+		   $str .= htmlspecialchars($key) . " = " . htmlspecialchars($value) ."\n";
 	}
 
 	$str .= '<h2>$_SESSION</h2>'."";
@@ -104,7 +120,7 @@ function generateSysReport(){
 	}
 
 	$str .= "\n\n";
-	$str .= "<small>generiert am " . strftime("%x"). " um ". strftime("%X")." Uhr durch sysreport Version 20150225</small>";
+	$str .= "<small>generiert am " . strftime("%x"). " um ". strftime("%X")." Uhr durch sysreport Version 20150529</small>";
 	return $str;
 }
 header("Content-Type: application/octet-stream; charset = UTF-8");
