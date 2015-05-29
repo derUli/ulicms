@@ -1,0 +1,7 @@
+Module können optional eine Datei
+metadata.xml haben.
+Diese kann folgende Informationen enthälten.
+- Name des Moduls
+- Hersteller des Moduls
+- Version
+- URL zu einer XML Datei, die die Versionsnummer der neuesten Version und einen Downloadlink dazu enthält, zur Durchführung automatischer Paketupdates
