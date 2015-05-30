@@ -198,6 +198,8 @@ if ($html_file){
  require_once getTemplateDirPath ($theme) . "oben.php";
  add_hook ("before_content");
  content ();
+ 
+ edit_button();
  add_hook ("after_content");
 
  require_once getTemplateDirPath ($theme) . "unten.php";

@@ -8,9 +8,38 @@ function get_all_combined_html(){
    return $html;
 }
 
+function edit_button(){
+  echo get_edit_button();
+}
+
+function get_edit_button(){
+   $html = "";
+   if(is_logged_in()){
+     $acl = new ACL();
+     if($acl->hasPermission("pages") and defined("NO_CACHE")){
+         $id = get_ID();
+         $html .= "<div class=\"ulicms_edit\"><a href=\"admin/index.php?action=pages_edit&page=$id\">[".get_translation("edit")."]</a></div>";
+     }
+   }
+   return $html;
+}
+
 function all_combined_html(){
    echo all_comined_html();
 }
+
+function get_ID(){
+     if (! $page)
+         $page = get_requested_pagename ();
+     $result = null;
+     $sql = "SELECT `id` FROM " . tbname ("content") . " WHERE systemname='" . db_escape ($page) . "'  AND language='" . db_escape ($_SESSION ["language"]) . "'";
+     $query = db_query ($sql);
+     if (db_num_rows ($query) > 0){
+         $result = db_fetch_object ($query);
+         $result = $result -> id;
+         }
+     return $result;
+    }
 
 function get_type(){
      if (! $page)
@@ -640,6 +669,10 @@ function base_metas(){
         
  
          }
+     
+     echo '<link rel="stylesheet" type="text/css" href="core.css"/>';
+     echo "\r\n";    
+     
      $style_file = getTemplateDirPath (get_theme ()) . "style.css";
      if (is_file ($style_file))
          echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
@@ -670,8 +703,6 @@ function base_metas(){
              echo "\r\n";
              }
          }
-     echo '<link rel="stylesheet" type="text/css" href="core.css"/>';
-     echo "\r\n";
      $zoom = getconfig ("zoom");
      if ($zoom === false){
          setconfig ("zoom", 100);

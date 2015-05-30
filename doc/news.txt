@@ -14,3 +14,4 @@
 + Zusätzliche Nutzung von Browser-seitigen Caching bei aktiviertem Cache
 + Es wird nun das minified jQuery eingebunden
 + Diverse weitere Performance Optimierungen
++ "Bearbeiten" Link wird nun unter dem Content angezeigt, wenn der User das Recht auf "pages" hat.
