@@ -9,3 +9,4 @@
 [ ] Preview bzw. Alpha/Beta Version vorab veröffentlichen
 [X] Fehler im sysreport Tool korrigieren
 [X] installierte Patches im sysreport ausgeben
+[ ] Datenbank Diagramm aktualsieren
