@@ -1,0 +1,5 @@
+Eine UliCMS Versionsnummer besteht aus drei Zahlen:
+z.B. 8.0.1
+Wenn sich die Major-Versionsnummer also die erste Zahl ändern, deutet dies auf "Breaking Changes" hin. Es müssen also manuelle Anpassungen an Templates und Modulen vorgenommen werden, nach dem ein Upgrade durchgeführt.
+
+Wenn sich nur die dritte Zahl ändert, sind keine manuellen Anpassungen erforderlich. In diesem Fall muss man bei einem Upgrade nur die Dateien hochladen und dann das update.php Script zur Anpassung der Datenbank im Browser aufrufen.
