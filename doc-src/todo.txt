@@ -1,4 +1,4 @@
-[ ] Copyright Jahr anpassen
+[X] Copyright Jahr anpassen
 [ ] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
 [ ] Dokumentation! Vor allem, zum Script/CSS queuing System!
 [ ] Dokumentation zum Upgrade auf UliCMS 9.0.1 verfassen
