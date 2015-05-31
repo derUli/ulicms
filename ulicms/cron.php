@@ -53,6 +53,7 @@ $oneWeek = 60 * 60 * 24 * 7;
 $hour = date("G", time());
 $is_night = $hour >= 0 and $hour <= 4;
 
+if(!$last_chs_cron or (time() - $last_chs_cron >= $oneWeek and $is_night)){
    @file_get_contents_wrapper ("$cfg_url?chs=$chs");
    setconfig("last_chs_cron", time());
    }
