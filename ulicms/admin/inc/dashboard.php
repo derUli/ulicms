@@ -65,8 +65,14 @@ if ($acl -> hasPermission ("dashboard")){
 
 	<?php
          if ($acl -> hasPermission ("update_system")){
+             $last_patch_check = getconfig("last_patch_check");
+             $twoDays = 60 * 60 * 24 * 2;
+             if(!last_patch_check or time () - $last_patch_check > $twoDays){
              $data = file_get_contents_wrapper (PATCH_CHECK_URL, true);
              $data = trim ($data);
+             } else {
+               $data = "";             
+             }
              if (! empty ($data)){
                  ?>
 	<h2 class="accordion-header">
@@ -92,7 +98,13 @@ if ($acl -> hasPermission ("dashboard")){
 
 	<?php
          if ($acl -> hasPermission ("update_system")){
-             $updateInfo = checkForUpdates ();
+             $last_update_check = getconfig("last_core_update_check");
+             $fiveDays = 60 * 60 * 24 * 5;
+             if(!$last_core_update_check or time() - $last_update_check >  $fiveDays){
+                $updateInfo = checkForUpdates ();
+             } else {
+               $updateInfo =   false;
+             }
             
              if ($updateInfo){
                  ?>
