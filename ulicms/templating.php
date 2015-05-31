@@ -14,7 +14,7 @@ function edit_button(){
 
 function get_edit_button(){
    $html = "";
-   if(is_logged_in()){
+   if(is_logged_in() and !containsModule()){
      $acl = new ACL();
      if($acl->hasPermission("pages") and defined("NO_CACHE")){
          $id = get_ID();
