@@ -228,9 +228,9 @@ if (! $eingeloggt){
 
 require_once "inc/footer.php";
 
-add_hook("before_cron");
+add_hook("before_admin_cron");
 require_once "inc/cron.php";
-add_hook("after_cron");
+add_hook("after_admin_cron");
 
 db_close ($connection);
 exit ();
