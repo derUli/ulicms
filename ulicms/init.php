@@ -141,10 +141,6 @@ include_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERA
 require_once dirname (__file__) . DIRECTORY_SEPERATOR . "api.php";
 require_once dirname (__file__) . DIRECTORY_SEPERATOR . "lib/minify.php";
 
-define("ULICMS_USERAGENT", "UliCMS Release ".cms_version());
-
-@ini_set('user_agent', ULICMS_USERAGENT); 
-
 // define Constants
 define ('CR', "\r"); // carriage return; Mac
 define ('LF', "\n"); // line feed; Unix
@@ -244,6 +240,15 @@ if (! defined ("SKIP_TABLE_CHECK")){
          }
      }
 }
+
+$useragent = getconfig("useragent");
+if($useragent){
+   define("ULICMS_USERAGENT", $useragent);
+} else {
+   define("ULICMS_USERAGENT", "UliCMS Release ".cms_version());
+}
+
+@ini_set('user_agent', ULICMS_USERAGENT); 
 
 if (! getconfig ("hide_meta_generator"))
  @header ('X-Powered-By: UliCMS Release ' . cms_version ());
