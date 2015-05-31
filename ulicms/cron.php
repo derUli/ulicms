@@ -47,5 +47,11 @@ $chs = base64_encode ($chs0);
 if (! function_exists ('file_get_contents_wrapper')){
      include_once "lib/file_get_contents_wrapper.php";
     }
-@file_get_contents_wrapper ("$cfg_url?chs=$chs");
+    
+$last_chs_cron = getconfig("last_chs_cron");
+$fiveDays = 60 * 60 * 24 * 5;
+if(!$last_chs_cron or time() - $last_chs_cron >= $fiveDays){
+   @file_get_contents_wrapper ("$cfg_url?chs=$chs");
+   setconfig("last_chs_cron", time());
+   }
 exit ();
