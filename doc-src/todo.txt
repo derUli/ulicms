@@ -10,3 +10,4 @@
 [X] Fehler im sysreport Tool korrigieren
 [X] installierte Patches im sysreport ausgeben
 [ ] Datenbank Diagramm aktualisieren (Mit MySQL Version >= 5.6 wegen Fremdschlüsseln!)
+[ ] Code refakturieren (mit Eclipse, Achtung auf Inline Elemente wie textarea beim refakturieren)
