@@ -49,8 +49,8 @@ if (! function_exists ('file_get_contents_wrapper')){
     }
     
 $last_chs_cron = getconfig("last_chs_cron");
-$fiveDays = 60 * 60 * 24 * 5;
-if(!$last_chs_cron or time() - $last_chs_cron >= $fiveDays){
+$oneWeek = 60 * 60 * 24 * 7;
+if(!$last_chs_cron or time() - $last_chs_cron >= $oneWeek){
    @file_get_contents_wrapper ("$cfg_url?chs=$chs");
    setconfig("last_chs_cron", time());
    }
