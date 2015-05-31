@@ -1,6 +1,6 @@
 <?php
 require_once "init.php";
-flush ();
+fcflush ();
 
 $empty_trash_days = getconfig ("empty_trash_days");
 
