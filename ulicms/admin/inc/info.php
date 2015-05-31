@@ -24,8 +24,7 @@ if (defined ("_SECURITY")){
 <br />
 
 <p>
-	<a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2010 -
-	2015 by Ulrich Schmidt<br /> <a href="http://www.ckeditor.com"
+	<a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2010 -	2016 by Ulrich Schmidt<br /> <a href="http://www.ckeditor.com"
 		target="_blank">CKEditor</a> &copy; 2003 - 2015 by CKSource<br /> <a
 		href="http://kcfinder.sunhater.com/" target="_blank">KCFinder</a>
 	Copyright ©2010-2014 Pavel Tzonkov<br/ > Copyright 2005, 2014 jQuery
