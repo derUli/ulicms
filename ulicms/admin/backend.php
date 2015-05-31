@@ -29,11 +29,6 @@ require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 
 require_once "../version.php";
-
-if (! is_logged_in ()){
-     require_once "inc/cron.php";
-    }
-
 require_once "inc/logincheck.php";
 
 define ("_SECURITY", true);
@@ -232,7 +227,11 @@ if (! $eingeloggt){
     }
 
 require_once "inc/footer.php";
-@include '../cron.php';
+
+add_hook("before_cron");
+require_once "inc/cron.php";
+add_hook("after_cron");
+
 db_close ($connection);
 exit ();
 ?>

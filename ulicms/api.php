@@ -13,7 +13,7 @@ function get_lang_config($name, $lang){
 // Check if it is night (current hour between 0 and 4 o'Clock AM)
 function is_night(){
    $hour = (int)date("G", time());
-   return  $hour >= 0 and $hour <= 4;
+   return  ($hour >= 0 and $hour <= 4);
 }
 
 function eTagFromString($str){
