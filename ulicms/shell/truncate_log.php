@@ -1,13 +1,13 @@
 #!/usr/bin/php -q
 <?php
-if (php_sapi_name () != "cli"){
-     die ("This script can be run from command line only.");
-    }
+if (php_sapi_name () != "cli") {
+	die ( "This script can be run from command line only." );
+}
 
-$parent_path = dirname (__file__) . "/../";
+$parent_path = dirname ( __file__ ) . "/../";
 include $parent_path . "init.php";
-array_shift ($argv);
+array_shift ( $argv );
 
-db_query("TRUNCATE TABLE " . tbname("log"))or die(db_error() . "\n");
+db_query ( "TRUNCATE TABLE " . tbname ( "log" ) ) or die ( db_error () . "\n" );
 echo "Logs was cleared\n";
 exit ();

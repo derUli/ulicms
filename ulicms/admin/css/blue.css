@@ -8,9 +8,9 @@ body {
 	padding: 0;
 }
 
-img.responsive-image{
-  max-width:100%;
-  height:auto;
+img.responsive-image {
+	max-width: 100%;
+	height: auto;
 }
 
 .CodeMirror {
@@ -65,7 +65,7 @@ html {
 	display: block;
 	padding: 8px 20px;
 	border-top: 1px transparent solid;
-	cursor:default;
+	cursor: default;
 }
 /* selected menu element */
 .menu .menu_active_link a, .menu li:hover>a {
@@ -281,15 +281,14 @@ table tr:nth-child(even) {
 	background: #335599;
 }
 
-
-div.diff ins{
-  color: green;
-  background: #dfd;
-  text-decoration: none;
+div.diff ins {
+	color: green;
+	background: #dfd;
+	text-decoration: none;
 }
 
-div.diff del{
-  color: red;
-  background: #fdd;
-  text-decoration: none;
+div.diff del {
+	color: red;
+	background: #fdd;
+	text-decoration: none;
 }

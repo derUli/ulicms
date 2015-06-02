@@ -1,13 +1,13 @@
 <?php
-if (! $acl -> hasPermission ("install_packages")){
-     noperms ();
-    }else{
-     ?>
+if (! $acl->hasPermission ( "install_packages" )) {
+	noperms ();
+} else {
+	?>
 <h1>
 <?php
-    
-    echo TRANSLATION_AVAILABLE_PACKAGES;
-    ?>
+	
+	echo TRANSLATION_AVAILABLE_PACKAGES;
+	?>
 </h1>
 <noscript>
 	<p>Bitte aktivieren Sie Javascript!</p>
@@ -17,9 +17,9 @@ if (! $acl -> hasPermission ("install_packages")){
 		alt="Bitte warten...">
 	<div style="padding-top: 3px;">
 	<?php
-    
-     echo TRANSLATION_LOADING_DATA;
-     ?>
+	
+	echo TRANSLATION_LOADING_DATA;
+	?>
 	</div>
 </div>
 <div id="pkglist"></div>
@@ -38,7 +38,6 @@ $.get("index.php?ajax_cmd=available_modules", function(result){
 });
 </script>
 
-	<?php
-    
-    }
+<?php
+}
 ?>

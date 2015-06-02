@@ -1,5 +1,3 @@
 <?php
-class NotImplementedException extends BadMethodCallException
-{
-    
-    }
+class NotImplementedException extends BadMethodCallException {
+}

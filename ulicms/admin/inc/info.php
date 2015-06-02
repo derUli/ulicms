@@ -1,38 +1,40 @@
 <?php
-if (defined ("_SECURITY")){
-     include_once "../version.php";
-     $version = new ulicms_version ();
-     $acl = new ACL ();
-     if (! $acl -> hasPermission ("info")){
-         noperms ();
-         }else{
-
-     $admin_logo = getconfig("admin_logo");
-     if(!$admin_logo)
-        $admin_logo = "gfx/logo.png";
-         ?>
+if (defined ( "_SECURITY" )) {
+	include_once "../version.php";
+	$version = new ulicms_version ();
+	$acl = new ACL ();
+	if (! $acl->hasPermission ( "info" )) {
+		noperms ();
+	} else {
+		
+		$admin_logo = getconfig ( "admin_logo" );
+		if (! $admin_logo)
+			$admin_logo = "gfx/logo.png";
+		?>
 <p>
-	<img src="<?php echo $admin_logo;?>" alt="UliCMS"  class="responsive-image" />
+	<img src="<?php echo $admin_logo;?>" alt="UliCMS"
+		class="responsive-image" />
 </p>
 <strong>Release <?php
-        
-         echo cms_version ();
-         ?> "<?php
-        
-         echo $version -> getVersion ();
-         ?>"</strong>
+		
+		echo cms_version ();
+		?> "<?php
+		
+		echo $version->getVersion ();
+		?>"</strong>
 <br />
 
 <p>
-	<a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2010 -	2016 by Ulrich Schmidt<br /> <a href="http://www.ckeditor.com"
+	<a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2010 -
+	2016 by Ulrich Schmidt<br /> <a href="http://www.ckeditor.com"
 		target="_blank">CKEditor</a> &copy; 2003 - 2015 by CKSource<br /> <a
 		href="http://kcfinder.sunhater.com/" target="_blank">KCFinder</a>
 	Copyright ©2010-2014 Pavel Tzonkov<br/ > Copyright 2005, 2014 jQuery
 	Foundation, Inc. and other contributors <br /> <a
 		href="http://codemirror.net/" target="_blank">CodeMirror</a> &copy;
-	2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others
-	<br/>
-	<a href="http://www.raymondhill.net/finediff/viewdiff-ex.php" target="_blank">PHP  Fine Diff</a> Copyright 2011 (c) Raymond Hill
+	2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others <br /> <a
+		href="http://www.raymondhill.net/finediff/viewdiff-ex.php"
+		target="_blank">PHP Fine Diff</a> Copyright 2011 (c) Raymond Hill
 </p>
 
 <div>
@@ -71,10 +73,11 @@ if (defined ("_SECURITY")){
 <input type="button" value="UliCMS Portal"
 	onclick='window.open("http://www.ulicms.de");' />
 
-<input type="button" value="<?php
-        
-         echo TRANSLATION_LICENSE;
-         ?>"
+<input type="button"
+	value="<?php
+		
+		echo TRANSLATION_LICENSE;
+		?>"
 	onclick='window.open("license.html");' />
 
 
@@ -90,7 +93,6 @@ if (defined ("_SECURITY")){
 
 
 <?php
-        
-        }
+	}
     }
 ?>

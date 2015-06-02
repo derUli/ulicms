@@ -1,8 +1,7 @@
 <?php
-
-if (! defined ("_SECURITY")){
-     die ();
-    }
+if (! defined ( "_SECURITY" )) {
+	die ();
+}
 ?>
 <div class="Popup">
 	<h2>
@@ -16,8 +15,7 @@ if (! defined ("_SECURITY")){
 
 	<a href="#" class="closePopup">Schließen</a>
 </div>
-<div id="overlay"
-	class="closePopup"></div>
+<div id="overlay" class="closePopup"></div>
 
 
 <script type="text/javascript">
@@ -31,15 +29,15 @@ $("#chatMessage").keyup(function(event){
         }
         $("#chatMessage").val("")
         addMessageToLog("<?php
-
-echo $_SESSION ["ulicms_login"];
- ?>", message);
+								
+								echo $_SESSION ["ulicms_login"];
+								?>", message);
         var data = {"ajax_cmd": "sendChatMessage", 
         "to" : $("#chatTarget").html(),
         "from" : '<?php
-
-echo $_SESSION ["ulicms_login"];
- ?>',
+								
+								echo $_SESSION ["ulicms_login"];
+								?>',
         "message" : 'message'
         }
         $.post('index.php', data, function(response) {
