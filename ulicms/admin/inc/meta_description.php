@@ -1,4 +1,3 @@
-
 <?php
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
