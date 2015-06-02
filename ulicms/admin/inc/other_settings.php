@@ -122,7 +122,7 @@ if (! $acl -> hasPermission ("other")){
 		<h2 class="accordion-header">
 		<?php
     
-     echo TRANSLATION_CACHE;
+     translate("page_cache");
      ?>
 		</h2>
 

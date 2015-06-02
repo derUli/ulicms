@@ -55,6 +55,7 @@ define("TRANSLATION_GENERAL_SETTINGS", "Grundeinstellungen");
 define("TRANSLATION_DESIGN", "Design");
 define("TRANSLATION_SPAMFILTER", "Spamfilter");
 define("TRANSLATION_CACHE", "Cache");
+define("TRANSLATION_PAGE_CACHE", "Seiten-Cache");
 define("TRANSLATION_CLEAR_CACHE", "Cache leeren");
 define("TRANSLATION_PACKAGE_SOURCE", "Paketquelle");
 define("TRANSLATION_LOGO", "Logo");
