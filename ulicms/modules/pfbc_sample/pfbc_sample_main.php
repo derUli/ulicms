@@ -20,6 +20,7 @@ function pfbc_sample_render() {
 			) 
 	) );
 	$form->addElement ( new Element_Hidden ( "form", "form-elements" ) );
+	$form->addElement ( new Element_HTML (get_csrf_token_html()) );
 	$form->addElement ( new Element_HTML ( '<legend>Standard</legend>' ) );
 	$form->addElement ( new Element_Textbox ( "Textbox:", "Textbox" ) );
 	$form->addElement ( new Element_Password ( "Password:", "Password" ) );
