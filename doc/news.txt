@@ -16,4 +16,4 @@
 + Diverse weitere Performance Optimierungen
 + "Bearbeiten" Link wird nun unter dem Content angezeigt, wenn der User das Recht auf "pages" hat.
 + UliCMS übermittelt nun User-Agent bei Laden von Daten von externen Servern (Paketquelle, News, Update Manager)
-+ Das Anti CSRF Token des pfbc_sample fehlte. Dies wurde korrigiert
++ Das Anti CSRF Token des pfbc_sample fehlte. Dies wurde korrigiert.
