@@ -31,3 +31,4 @@ Export der angepassten Übersetzungsdatei möglich
 [ ] Installationsfunktion von Installer GUI getrennt, Installation von UliCMS soll auch per Shell möglich sein.
     Kommandozeilen Argumente parsen in PHP siehe https://github.com/CHH/optparse
 [ ] Option Menüeintrag anzeigen auf "Allen Medien" oder "nur Mobile Geräte" oder  "nur PC"
+[ ] Gästebuch, Blog -> Nur registrierte Nutzer dürfen Kommentare schreiben
