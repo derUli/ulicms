@@ -1,0 +1,32 @@
+In diesem Textdokument wird beschrieben, wie ein Upgrade von UliCMS 9.0.0 auf UliCMS 9.0.1 durchgeführt werden muss, um die fehlerfreie  Installation sicher zu stellen.
+
+Voraussetzungen für das Upgrade
+===============================
+Ein Upgrade auf UliCMS 9.0.1 kann nur von UliCMS 9.0.0 aus erfolgen.
+Wenn Sie eine ältere Version von UliCMS nutzen, so müssen Sie diese zuerst auf Version 9.0.0 aktualisieren.
+
+Stellen Sie sicher das auf dem Webserver PHP 5.3 oder neuer läuft.
+Sonst wird es zu Kompatiblitätsproblemen mit einigen Komponenten von UliCMS kommen.
+
+Vorbereitungen
+===============================
+Sichern Sie vor dem Upgrade die Datenbank und die Dateien Ihrer UliCMS Installation.
+Schalten Sie Ihre Internetseite in den Wartungsmodus (In den Grundeinstellungen)
+
+Durchführung des Upgrades
+===============================
+Laden Sie den Inhalt des Ordners "ulicms" aus dem Upgrade Paket in den Ordner Ihrer UliCMS Installation auf den Server hoch und lassen Sie alle bereits vorhandenen Dateien ersetzen.
+Den Hauptordner Ihrer UliCMS erkennen Sie daran, dass sich darin die Datei "cms-config.php" befindet.
+
+Setzen Sie die Rechte aller Dateien Ihrer UliCMS Installation auf 0755 (empfohlen), oder wie bei einigen Providern notwendig auf 0777 (unsicher).
+
+Rufen Sie nun die Datei update.php auf Ihrer Domain im Browser auf.
+Wenn Sie die Domain beispiel.de haben, und UliCMS direkt im Hauptverzeichnis Ihrer Domain installiert ist, lautet die URL in diesem Beispiel http://beispiel.de/update.php
+Wenn Sie ulicms in einem Unterordner installiert haben, könnte diese URL z.B. http://beispiel.de/unterordner/update.php lauten.
+
+Anschließend werden Sie in den Administrationsbereich des CMS weitergeleitet.
+Löschen Sie nun die Datei update.php auf dem Webspace, sofern diese nicht automatisch gelöscht wurden sein sollte.
+
+Deaktivieren Sie den Wartungsmodus und leeren Sie den Cache ("Einstellungen" > "Cache leeren").
+
+Nun wurde das Upgrade erfolgreich abgeschlossen.
