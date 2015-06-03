@@ -1,3 +1,4 @@
+[ ] Button "Speichern und Anzeigen" in Seitenbearbeitung
 [X] Option Menüeintrag anzeigen auf "Allen Medien" oder "nur Mobile Geräte" oder  "nur PC"
 [ ] Gästebuch Modul mit optionaler E-Mail Benachrichtigung
 [ ] KCFinder durch eigene Medienverwaltung ersetzen
