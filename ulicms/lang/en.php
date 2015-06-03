@@ -532,4 +532,8 @@ define ( "TRANSLATION_RESTORE", "Restore" );
 define ( "TRANSLATION_RESTORE_OLDER_VERSION", "Restore an older version" );
 define ( "TRANSLATION_ASK_FOR_RESTORE", "Do you really want to restore this older version?" );
 
+
+define("TRANSLATION_MOBILE_DEVICES", "Mobile Devices");
+define("TRANSLATION_DESKTOP_COMPUTERS", "Desktop PCs");
+
 add_hook ( "lang_en" );

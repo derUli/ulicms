@@ -267,6 +267,8 @@ function openMenuImageSelectWindow(field) {
 		echo TRANSLATION_REGISTERED_USERS;
 		?>
 			</option>
+			<option value="mobile"><?php translate("mobile_devices");?></option>
+			<option value="desktop"><?php translate("desktop_computers");?></option>
 			<?php
 		while ( $row = db_fetch_object ( $groups ) ) {
 			echo '<option value="' . $row->id . '">' . real_htmlspecialchars ( $row->name ) . '</option>';

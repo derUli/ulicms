@@ -796,7 +796,27 @@ function content() {
 		db_query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . $_GET ["seite"] . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	return import ( $_GET ["seite"] );
 }
+
+function checkforAccessForDevice($access){
+	$access = explode ( ",", $access );
+	$allowed = false;
+	if (in_array ( "mobile", $access ) and is_mobile()){
+            $allowed = true;
+	}
+	if (in_array ( "desktop", $access ) and !is_mobile()){
+            $allowed = true;
+	}
+	if (!in_array ( "mobile", $access ) and !in_array ( "desktop", $access )){
+            $allowed = true;
+	}
+	return $allowed;
+}
+
 function checkAccess($access = "") {
+	$access_for_device = checkforAccessForDevice($access);
+	if(!$access_for_device){
+           return null;	
+	}
 	$access = explode ( ",", $access );
 	if (in_array ( "all", $access ))
 		return "all";
