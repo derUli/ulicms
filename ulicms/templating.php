@@ -50,9 +50,28 @@ function get_type() {
 		$result = "page";
 	return $result;
 }
-function get_parent() {
+
+function get_category_id($page = null) {
 	if (! $page)
 		$page = get_requested_pagename ();
+	$result = null;
+	$sql = "SELECT `category` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
+	$query = db_query ( $sql );
+	if (db_num_rows ( $query ) > 0) {
+		$result = db_fetch_object ( $query );
+		$result = $result->category;
+	}
+	return $result;
+}
+
+function category_id($page = null){
+  echo get_category_id($page);
+}
+
+
+function get_parent($page = null) {
+	if (! $page)
+	  $page = get_requested_pagename ();
 	$result = "";
 	$sql = "SELECT `parent` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
