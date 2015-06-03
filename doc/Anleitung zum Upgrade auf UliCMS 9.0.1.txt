@@ -25,7 +25,7 @@ Wenn Sie die Domain beispiel.de haben, und UliCMS direkt im Hauptverzeichnis Ihr
 Wenn Sie ulicms in einem Unterordner installiert haben, könnte diese URL z.B. http://beispiel.de/unterordner/update.php lauten.
 
 Anschließend werden Sie in den Administrationsbereich des CMS weitergeleitet.
-Löschen Sie nun die Datei update.php auf dem Webspace, sofern diese nicht automatisch gelöscht wurden sein sollte.
+Löschen Sie nun die Datei update.php auf dem Webspace, sofern diese nicht automatisch gelöscht worden sein sollte.
 
 Deaktivieren Sie den Wartungsmodus und leeren Sie den Cache ("Einstellungen" > "Cache leeren").
 
