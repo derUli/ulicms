@@ -11,7 +11,7 @@ Sonst wird es zu Kompatiblitätsproblemen mit einigen Komponenten von UliCMS kom
 Vorbereitungen
 ===============================
 Sichern Sie vor dem Upgrade die Datenbank und die Dateien Ihrer UliCMS Installation.
-Schalten Sie Ihre Internetseite in den Wartungsmodus (In den Grundeinstellungen)
+Schalten Sie Ihre Internetseite in den Wartungsmodus (In den Grundeinstellungen).
 
 Durchführung des Upgrades
 ===============================
