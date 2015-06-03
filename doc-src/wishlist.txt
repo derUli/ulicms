@@ -15,7 +15,7 @@ Export der angepassten Übersetzungsdatei möglich
 [ ] Backend besser erweiterbar machen
 [ ] Cronjobs monatlich, stündlich, täglich, bei jedem Request (crontab)
 [ ] Implementation von ActiveRecord
-[ ] SlickNav auf mobile_devices
+[ ] SlickNav auf mobile_devices im Backend
 [ ] Möglichkeit, eigene Font-Dateien hochzuladen und dann unter Einstellungen > Schriftart ("Custom" bzw. "Benutzerdefiniert")
 [ ] Zweifaktor Authentifizierung
 [ ] In-Page Editing
