@@ -14,7 +14,7 @@ if (defined ( "_SECURITY" )) {
 	src="kcfinder/browse.php?type=<?php
 		
 		echo basename ( $_GET ["action"] );
-		?>&lang=de"
+		?>&lang=<?php echo getSystemLanguage();?>"
 	style="border: 0px; width: 100%; height: 500px;"> </iframe>
 
 <?php
