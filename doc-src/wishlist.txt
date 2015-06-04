@@ -1,5 +1,6 @@
 [ ] Button "Speichern und Anzeigen" in Seitenbearbeitung
 [X] Option Menüeintrag anzeigen auf "Allen Medien" oder "nur Mobile Geräte" oder  "nur PC"
+[ ] "prev" und "next" Meta Links zum Blogmodul hinzufügen.
 [ ] Gästebuch Modul mit optionaler E-Mail Benachrichtigung
 [ ] KCFinder durch eigene Medienverwaltung ersetzen
 [ ] UliCMS Android App
