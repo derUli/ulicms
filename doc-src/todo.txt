@@ -9,5 +9,5 @@
 [ ] Preview bzw. Alpha/Beta Version vorab veröffentlichen
 [X] Fehler im sysreport Tool korrigieren
 [X] installierte Patches im sysreport ausgeben
-[ ] Datenbank Diagramm aktualisieren (Mit MySQL Version >= 5.6 wegen Fremdschlüsseln!)
+[X] Datenbank Diagramm aktualisieren (Mit MySQL Version >= 5.6 wegen Fremdschlüsseln!)
 [X] Code refakturieren (mit Eclipse, Achtung auf Inline Elemente wie textarea beim refakturieren)
