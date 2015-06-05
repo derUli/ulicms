@@ -1,0 +1,22 @@
+Stylesheet und Script Queue Dokumentation
+
+= Einleitung =
+
+UliCMS 9.0.1 enthält eine API, die es ermöglicht, mehrere Stylesheets oder Script Dateien zu einer Datei zusammenzufassen, um die Ladegeschwindigkeit zu erhöhen.
+
+= Scripts =
+
+== Technische Hintergründe ==
+Die Queue wird als Array in der Variable $_SERVER ["script_queue"] gespeichert.
+
+== Script hinzufügen ==
+Die Scripts müssen in der Reihenfolge, in der Sie eingebunden werden sollen, in die Queue gehängt werden. 
+enqueueScriptFile("js/myscript.js");
+enqueueScriptFile("js/otherscript.js");
+
+== Stylesheet einbinden == 
+Mit dem Aufruf der Funktion combined_script_html() in einem Template kann man den Code, um die in die Queue gehängten Scripts einzubinden.
+Es existiert außerdem die Funktion get_combined_script_html() die den HTML-String als Return Wert zurückgibt, statt diesen direkt auszugeben.
+
+== Queue zurücksetzen / leeren ==
+Mit dem Aufruf der Funktion resetScriptQueue() können Sie die Script Queue leeren.
