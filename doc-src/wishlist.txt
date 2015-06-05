@@ -1,4 +1,5 @@
 [ ] Button "Speichern und Anzeigen" in Seitenbearbeitung
+[ ] File Backup Solution (FTP, Cloud providers?)
 [X] Option Menüeintrag anzeigen auf "Allen Medien" oder "nur Mobile Geräte" oder  "nur PC"
 [ ] "prev" und "next" Meta Links zum Blogmodul hinzufügen.
 [ ] Gästebuch Modul mit optionaler E-Mail Benachrichtigung
