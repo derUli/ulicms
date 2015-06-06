@@ -1,1 +1,2 @@
 [ ] Option "Alles Patches automatisch jede Nacht installieren"
+[ ] "Option IP-Adressen nach 48 Stunden löschen" - Für log-Tabelle
