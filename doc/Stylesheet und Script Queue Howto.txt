@@ -14,9 +14,30 @@ Die Scripts müssen in der Reihenfolge, in der Sie eingebunden werden sollen, in
 enqueueScriptFile("js/myscript.js");
 enqueueScriptFile("js/otherscript.js");
 
-== Stylesheet einbinden == 
+== kombinierte Scripts einbinden == 
 Mit dem Aufruf der Funktion combined_script_html() in einem Template kann man den Code, um die in die Queue gehängten Scripts einzubinden.
 Es existiert außerdem die Funktion get_combined_script_html() die den HTML-String als Return Wert zurückgibt, statt diesen direkt auszugeben.
 
 == Queue zurücksetzen / leeren ==
 Mit dem Aufruf der Funktion resetScriptQueue() können Sie die Script Queue leeren.
+
+= Stylesheets =
+
+== Technische Hintergründe ==
+Die Queue wird als Array in der Variable $_SERVER ["stylesheet_queue"] gespeichert.
+
+== Stylesheet hinzufügen ==
+Die Scripts müssen in der Reihenfolge, in der Sie eingebunden werden sollen, in die Queue gehängt werden.
+enqueueStylesheet("css/style.css");
+enqueueStylesheet("css/custom.css");
+Achtung!
+
+=== Anpassungen ===
+Sofern in einem Stylesheet relative Pfade zu Ressourcen wie Grafiken oder Schriftarten vorhanden sind, müssen diese so angepasst werden, dass sie von der Basis-URL der Website aus gültig sind.
+
+== kombinierte Stylesheet einbinden == 
+Mit dem Aufruf der Funktion combined_stylesheet_html() in einem Template kann man den Code, um die in die Queue gehängten Stylesheets einzubinden.
+Es existiert außerdem die Funktion get_combined_stylesheet_html() die den HTML-String als Return Wert zurückgibt, statt diesen direkt auszugeben.
+
+== Queue zurücksetzen / leeren ==
+Mit dem Aufruf der Funktion resetStylesheetQueue() können Sie die Script Queue leeren.
