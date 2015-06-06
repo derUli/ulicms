@@ -1,8 +1,8 @@
 [X] Copyright Jahr anpassen
 [ ] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
-[ ] Dokumentation! Vor allem, zum Script/CSS queuing System!
+[X] Dokumentation! Vor allem, zum Script/CSS queuing System!
     [X] Zur Script Queue
-    [ ] Zur Stylesheet Queue
+    [X] Zur Stylesheet Queue
 [X] Dokumentation zum Upgrade auf UliCMS 9.0.1 verfassen
     - Wie muss das Upgrade durchgeführt werden
     - Von welcher Version aus kann das Upgrade durchgeführt werden?
