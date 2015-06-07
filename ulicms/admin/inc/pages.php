@@ -72,6 +72,15 @@ $(window).load(function(){
 });
 
 </script>
+<?php
+		if(!isset($_SESSION["filter_title"])){
+		   $_SESSION["filter_title"] = "";
+		}
+		
+		if(isset($_GET["filter_title"])){
+                   $_SESSION["filter_title"] = $_GET["filter_title"];
+		}
+		?>
 <form method="get" action="index.php">
 	<?php translate("title");?>
 	<input type="hidden" name="action" value="pages">
@@ -93,11 +102,7 @@ $(window).load(function(){
 		if (! empty ( $_GET ["filter_language"] ) and in_array ( $_GET ["filter_language"], getAllLanguages () )) {
 			$_SESSION ["filter_language"] = $_GET ["filter_language"];
 			$_SESSION ["filter_parent"] = null;
-		}
-		
-		if(!isset($_SESSION["filter_title"])){
-		   $_SESSION["filter_title"] = "";
-		}
+		}	
 		
 		if (! isset ( $_SESSION ["filter_category"] )) {
 			$_SESSION ["filter_category"] = 0;
@@ -117,9 +122,6 @@ $(window).load(function(){
 				$_SESSION ["filter_menu"] = $_GET ["filter_menu"];
 		}
 		
-		if(isset($_GET["filter_title"])){
-                   $_SESSION["filter_title"] = $_GET["filter_title"];
-		}
 		
 		if (isset ( $_GET ["filter_parent"] )) {
 			if ($_GET ["filter_parent"] == "null")
