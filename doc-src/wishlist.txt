@@ -1,4 +1,4 @@
-[ ] Möglichkeit, Logos zu deaktivieren (eventuell durch .disable Datei oder durch 'modules' Datenbanktabelle)
+[ ] Möglichkeit, Module zu deaktivieren (eventuell durch .disable Datei oder durch 'modules' Datenbanktabelle)
 [ ] Button "Speichern und Anzeigen" in Seitenbearbeitung
 [ ] File Backup Solution (FTP, Cloud providers?)
 [X] Option Menüeintrag anzeigen auf "Allen Medien" oder "nur Mobile Geräte" oder  "nur PC"
