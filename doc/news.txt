@@ -19,3 +19,4 @@
 + Das Anti CSRF Token des pfbc_sample fehlte. Dies wurde korrigiert.
 + Der Zugriff auf eine Seite lässt sich nun auf Arbeitsplatz Rechner oder mobile Geräte beschränken. Wenn das ausgewählt wird, muss außerdem noch eine andere Gruppe ausgewählt werden (z.B. "Jeder", oder "Registrierte Benutzer"), da diese Zugriffsbeschränkung nur ergänzend gilt.
 + Der Dateimanager verwendete als Sprache immer "de". Nun verwendet er ja nach bei der Anmeldung ausgewählter Sprache entweder Deutsch oder Englisch.
++ Filter für "Titel" hinzugefügt

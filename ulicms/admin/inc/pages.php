@@ -72,7 +72,12 @@ $(window).load(function(){
 });
 
 </script>
-<p>
+<form method="get" action="index.php">
+	<?php translate("title");?>
+	<input type="hidden" name="action" value="pages">
+	<input type="text" name="filter_title" value="<?php echo htmlspecialchars($_SESSION["filter_title"]);?>">
+	
+	</form>
 <?php
 		
 		echo TRANSLATION_FILTER_BY_LANGUAGE;
@@ -88,6 +93,10 @@ $(window).load(function(){
 		if (! empty ( $_GET ["filter_language"] ) and in_array ( $_GET ["filter_language"], getAllLanguages () )) {
 			$_SESSION ["filter_language"] = $_GET ["filter_language"];
 			$_SESSION ["filter_parent"] = null;
+		}
+		
+		if(!isset($_SESSION["filter_title"])){
+		   $_SESSION["filter_title"] = "";
 		}
 		
 		if (! isset ( $_SESSION ["filter_category"] )) {
@@ -106,6 +115,10 @@ $(window).load(function(){
 				$_SESSION ["filter_menu"] = null;
 			else
 				$_SESSION ["filter_menu"] = $_GET ["filter_menu"];
+		}
+		
+		if(isset($_GET["filter_title"])){
+                   $_SESSION["filter_title"] = $_GET["filter_title"];
 		}
 		
 		if (isset ( $_GET ["filter_parent"] )) {
@@ -414,11 +427,15 @@ $(window).load(function(){
 				$filter_sql .= "AND parent IS NULL ";
 		}
 		
+		
+		if(isset($_SESSION["filter_title"]) and !empty($_SESSION["filter_title"])){
+                   $filter_sql .= "AND (title LIKE '".db_escape($_SESSION["filter_title"])."%' or title LIKE '%".db_escape($_SESSION["filter_title"])."' or title LIKE '%".db_escape($_SESSION["filter_title"])."%' or title LIKE '".db_escape($_SESSION["filter_title"])."' )";
+		}
+		
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " " . $filter_sql . "ORDER BY $order,position, systemname ASC" ) or die ( db_error () );
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
-				?>
-						<?php
+
 				
 				echo '<tr>';
 				echo "<td>" . htmlspecialchars ( $row->title );
