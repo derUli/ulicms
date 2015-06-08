@@ -1,0 +1,3 @@
+Nächste Major Version soll UliCMS X heißen.
+Erste Version heißt dann
+UliCMS X - Version 1.0.0
