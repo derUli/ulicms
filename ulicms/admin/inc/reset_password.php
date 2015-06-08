@@ -26,7 +26,10 @@ translate ( "back_to_login" );
 	?>]</a>
 </p>
 <form action="index.php?reset_password" method="post">
-	<strong><?php
+<?php
+csrf_token_html ();
+?>
+		<strong><?php
 	
 	translate ( "username" );
 	?>
