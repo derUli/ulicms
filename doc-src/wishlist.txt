@@ -1,3 +1,4 @@
+[ ] Option "Täglich Nachts alle vefügbaren Patches installieren" hinzufügen
 [ ] Möglichkeit, Module zu deaktivieren (eventuell durch .disable Datei oder durch 'modules' Datenbanktabelle)
 [ ] Button "Speichern und Anzeigen" in Seitenbearbeitung
 [ ] File Backup Solution (FTP, Cloud providers?)
@@ -32,7 +33,7 @@ Export der angepassten Übersetzungsdatei möglich
 [ ] Slider Plugins implementieren - Soll ohne JSON Code schreiben zu müssen funktionieren, vielleicht Bedienung per Drag & Drop?
 [ ] Grafischer Formbuilder der die PHP Form Builder Class nutzt
 [ ] Ein einfaches "db_viewer" Modul für Anzeigen (nicht bearbeiten) der Datenbankinhalte
-[ ] Option "Täglich Nachts alle vefügbaren Patches installieren" hinzufügen
 [ ] Installationsfunktion von Installer GUI getrennt, Installation von UliCMS soll auch per Shell möglich sein.
     Kommandozeilen Argumente parsen in PHP siehe https://github.com/CHH/optparse
 [ ] Gästebuch, Blog -> Nur registrierte Nutzer dürfen Kommentare schreiben
+[ ] Link "Zurück zum Frontend" zu Loginmaske hinzufügen
