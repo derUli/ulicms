@@ -37,3 +37,4 @@ Export der angepassten Übersetzungsdatei möglich
     Kommandozeilen Argumente parsen in PHP siehe https://github.com/CHH/optparse
 [ ] Gästebuch, Blog -> Nur registrierte Nutzer dürfen Kommentare schreiben
 [ ] Link "Zurück zum Frontend" zu Loginmaske hinzufügen
+[ ] Blog soll Kategorien unterstützen -> eventuell per custom_data?
