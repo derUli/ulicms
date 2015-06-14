@@ -323,7 +323,7 @@ if (isset ( $_SESSION ["session_begin"] )) {
 
 $enforce_https = getconfig ( "enforce_https" );
 
-if ($_SERVER ["HTTPS"] != "on" and $enforce_https !== false) {
+if (!is_ssl() and $enforce_https !== false) {
 	header ( "Location: https://" . $_SERVER ["HTTP_HOST"] . $_SERVER ["REQUEST_URI"] );
 	exit ();
 }
