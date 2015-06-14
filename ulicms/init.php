@@ -328,6 +328,25 @@ if ($_SERVER ["HTTPS"] != "on" and $enforce_https !== false) {
 	exit ();
 }
 
+if(!getconfig("disable_hsts") and is_ssl()){
+   $maxage = getconfig("hsts_maxage");
+   if($maxage === false)
+      $maxage = 10 * 30;
+   
+   $maxage = intval($maxage);
+
+   $includeSubDomains = getconfig("hsts_include_subdomains");
+   if(!$includeSubDomains)
+      $includeSubDomains =  "";
+    $str = "Strict-Transport-Security: max-age=".$maxage;
+    if(!empty($includeSubDomains))
+       $str .= "; ".$includeSubDomains;
+
+    $str = trim($str);
+
+    header($str);
+}
+
 add_hook ( "before_init" );
 add_hook ( "init" );
 add_hook ( "after_init" );

@@ -21,3 +21,5 @@
 + Der Dateimanager verwendete als Sprache immer "de". Nun verwendet er ja nach bei der Anmeldung ausgewählter Sprache entweder Deutsch oder Englisch.
 + Filter für "Titel" hinzugefügt
 + Ein Fehler in der deutschen Sprachdatei der dazu führte, dass stattdessen die englischen Sprachdateien von Modulen geladen werden wurde korrigiert
++ Nutzung von HSTS bei SSL-verschlüsselten Verbindungen
+  Details siehe http://www.phpgangsta.de/hsts-http-strict-transport-security-hasts-schon
