@@ -1,3 +1,4 @@
 [ ] Option "Alle Patches automatisch jede Nacht installieren"
 [ ] "Option IP-Adressen nach 48 Stunden löschen" - Für log-Tabelle
 [ ] Option "Account nach X fehlgeschlagenen Anmeldeversuchen deaktivieren"
+[ ] Option "Passwörter dürfen nur einmal verwendet werden" -> In Kombination mit "Passwort muss alle X Tage geändert werden"
