@@ -4,4 +4,5 @@ Update of the package source in June of 2015
 Release of UliCMS 9.0.0 in first quarter of 2016
 Then releases of minor updates to UliCMS 9 every 1 to three years (e.g. 9.0.1, 9.0.2, 9.0.3)
 
-Nächste Major Version von UliCMS heißt "UliCMS X" die Erste Version davon "UliCMS X 1.0"
+The next Major Version will be called "UliCMS X Release 1.0".
+It will have support for content items, rows and multisite management
