@@ -2,3 +2,5 @@
 [ ] "Option IP-Adressen nach 48 Stunden löschen" - Für log-Tabelle
 [ ] Option "Account nach X fehlgeschlagenen Anmeldeversuchen deaktivieren"
 [ ] Option "Passwörter dürfen nur einmal verwendet werden" -> In Kombination mit "Passwort muss alle X Tage geändert werden"
+[ ] Schriftgröße in den Designeinstellungen als Prozentzahl
+[ ] Neues Standard-Theme was responsive ist
