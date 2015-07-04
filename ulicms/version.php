@@ -5,7 +5,7 @@ class ulicms_version {
 		$this->internalVersion = Array (
 				9,
 				0,
-				1 
+				2 
 		);
 		$this->update = "";
 		$this->developmentVersion = false;

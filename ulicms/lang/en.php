@@ -532,8 +532,9 @@ define ( "TRANSLATION_RESTORE", "Restore" );
 define ( "TRANSLATION_RESTORE_OLDER_VERSION", "Restore an older version" );
 define ( "TRANSLATION_ASK_FOR_RESTORE", "Do you really want to restore this older version?" );
 
-
 define("TRANSLATION_MOBILE_DEVICES", "Mobile Devices");
 define("TRANSLATION_DESKTOP_COMPUTERS", "Desktop PCs");
+
+define("TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "Delete IP addresses after 48 hours");
 
 add_hook ( "lang_en" );

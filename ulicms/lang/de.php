@@ -526,4 +526,6 @@ define ( "TRANSLATION_ASK_FOR_RESTORE", "Diese Version wirklich wiederherstellen
 define("TRANSLATION_MOBILE_DEVICES", "Mobile Geräte");
 define("TRANSLATION_DESKTOP_COMPUTERS", "Arbeitsplatz Rechner");
 
+define("TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "IP-Adressen nach 48 Stunden löschen");
+
 add_hook ( "lang_de" );

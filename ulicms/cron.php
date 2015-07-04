@@ -2,6 +2,10 @@
 require_once "init.php";
 fcflush ();
 
+if(getconfig("delete_ips_after_48_hours")){
+   db_query("Update ".tbname("log")." SET ip = NULL WHERE DATEDIFF(NOW(), zeit) >= 2")
+}
+
 $empty_trash_days = getconfig ( "empty_trash_days" );
 
 if ($empty_trash_days === false)

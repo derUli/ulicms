@@ -49,13 +49,20 @@ if (! $acl->hasPermission ( "other" )) {
 		if (! isset ( $_POST ["log_ip"] )) {
 			deleteconfig ( "log_ip" );
 		} else {
-			setconfig ( "log_ip", "yo!" );
+			setconfig ( "log_ip", "log_ip" );
 		}
+		
+		if (! isset ( $_POST ["delete_ips_after_48_hours"] )) {
+			deleteconfig ( "delete_ips_after_48_hours" );
+		} else {
+			setconfig ( "delete_ips_after_48_hours", "delete_ips_after_48_hours" );
+		}
+		
 		
 		if (! isset ( $_POST ["no_auto_cron"] )) {
 			deleteconfig ( "no_auto_cron" );
 		} else {
-			setconfig ( "no_auto_cron", "yo!" );
+			setconfig ( "no_auto_cron", "no_auto_cron" );
 		}
 		
 		if (isset ( $_POST ["smtp_host"] ))
@@ -357,6 +364,21 @@ if (! $acl->hasPermission ( "other" )) {
 	
 	translate ( "LOG_IP_ADDRESSES_NOTICE" );
 	?>
+	<hr/>
+	<div class="label">
+				<label for="delete_ips_after_48_hours">
+	<?php translate("DELETE_IPS_AFTER_48_HOURS");?>
+				</label>
+			</div>
+			<div class="inputWrapper">
+			<input type="checkbox" id="delete_ips_after_48_hours" name="delete_ips_after_48_hours"
+					<?php
+	
+	if ($delete_ips_after_48_hours) {
+		echo "checked ";
+	}
+	?>>
+	</div>
 		</div>
 
 
