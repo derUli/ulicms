@@ -212,6 +212,10 @@ if (! $acl->hasPermission ( "design" )) {
 						<?php
 	if ($ckeditor_skin === "kama")
 		echo " selected"?>>Kama</option>
+		<option value="office2013"
+						<?php
+	if ($ckeditor_skin === "office2013")
+		echo " selected"?>>Office 2013</option>
 			</select></td>
 		</tr>
 		<tr>

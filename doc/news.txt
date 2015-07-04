@@ -1,25 +1,3 @@
-===== Neues in UliCMS 9.0.1 ====
-+ E-Mails, die über die ulicms_mail() Funktion versendet wurden, werden nun auch in der Datenbank gespeichert
-+ API Funktion get_lang_config() hinzugefügt
-+ UliCMS Konfigurationseinstellungen können per Umgebungsvariablen overridet werden.
-  Man kann z.B. folgendes in die .htaccess Datei schreiben, um den Homepage Titel zu overriden.
-  SetEnv ulicms_homepage_title "Hallo Welt"
-+ Variable "admin_logo" kann nun gesetzt werden, um eine URL zu einem eigenen Admin-Logo anzugeben.
-  Es wird im UliCMS Backend statt des UliCMS Logos angezeigt
-+ custom_font_sizes Hook hinzugefügt
-+ Legacy Kommentarsystem (Facebook / Disqus) entfernt, da veraltet und nicht mehr genutzt
-+ Favicons können nun hochgeladen werden, sofern man die entsprechenden Berechtigungen unter "Design" hat.
-+ Versionierung von Seiteninhalten
-+ Mehrere Stylesheets und Scripts im Backend zu einer Datei zusammengefasst, um die Performance zu verbessern
-+ Zusätzliche Nutzung von Browser-seitigen Caching bei aktiviertem Cache
-+ Es wird nun das minified jQuery eingebunden
-+ Diverse weitere Performance Optimierungen
-+ "Bearbeiten" Link wird nun unter dem Content angezeigt, wenn der User das Recht auf "pages" hat.
-+ UliCMS übermittelt nun User-Agent bei Laden von Daten von externen Servern (Paketquelle, News, Update Manager)
-+ Das Anti CSRF Token des pfbc_sample fehlte. Dies wurde korrigiert.
-+ Der Zugriff auf eine Seite lässt sich nun auf Arbeitsplatz Rechner oder mobile Geräte beschränken. Wenn das ausgewählt wird, muss außerdem noch eine andere Gruppe ausgewählt werden (z.B. "Jeder", oder "Registrierte Benutzer"), da diese Zugriffsbeschränkung nur ergänzend gilt.
-+ Der Dateimanager verwendete als Sprache immer "de". Nun verwendet er ja nach bei der Anmeldung ausgewählter Sprache entweder Deutsch oder Englisch.
-+ Filter für "Titel" hinzugefügt
-+ Ein Fehler in der deutschen Sprachdatei der dazu führte, dass stattdessen die englischen Sprachdateien von Modulen geladen werden wurde korrigiert
-+ Nutzung von HSTS bei SSL-verschlüsselten Verbindungen
-  Details siehe http://www.phpgangsta.de/hsts-http-strict-transport-security-hasts-schon
+===== Neues in UliCMS 9.0.2 ====
++ CKEditor auf Version 4.5.1 aktualisiert
++ Skin "Office 2013" für CKEditor hinzugefügt
