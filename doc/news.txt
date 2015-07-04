@@ -2,3 +2,4 @@
 + CKEditor auf Version 4.5.1 aktualisiert
 + Skin "Office 2013" für CKEditor hinzugefügt
 + Option "IP-Adressen nach 48 Stunden löschen" hinzugefügt
++ Shell-Script delete_log_ips.php hinzugefügt
