@@ -1,0 +1,1 @@
+CKEditor-4.5.1|WYSIWYG HTML Editor|http://patches.ulicms.de/downloads/9.0.0/CKEditor-4.5.1.zip
