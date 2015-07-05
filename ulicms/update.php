@@ -32,6 +32,7 @@ if(is_dir($comments_dir)){
 
 setconfig ( "db_schema_version", "9.0.1" );
 
+// Patch Manager zurücksetzen
 $pkg = new PackageManager ();
 $pkg->truncateInstalledPatches ();
 
