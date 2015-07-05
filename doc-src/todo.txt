@@ -18,10 +18,10 @@
 
 UliCMS 8.0.1 Portable for Windows Version 1.0.0
 
-[ ] Liesmich-Text auf deutsch übersetzen
-[ ] doc Ordner erstellen, darin die Info-Texte einfügen
-[ ] "xampp" und "doc" Ordner zusammen zippen, und veröffentlichen.
-[ ] Newsbeitrag erstellen.
+[X] Liesmich-Text auf deutsch übersetzen
+[X] doc Ordner erstellen, darin die Info-Texte einfügen
+[X] "xampp" und "doc" Ordner zusammen zippen, und veröffentlichen.
+[X] Newsbeitrag erstellen.
 
 Doku
 [ ] Tutorial für Installation eines Webservers mit UliCMS auf Debian Linux / Ubuntu verfassen.

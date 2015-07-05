@@ -4,3 +4,4 @@
 [ ] Option "Passwörter dürfen nur einmal verwendet werden" -> In Kombination mit "Passwort muss alle X Tage geändert werden"
 [ ] Schriftgröße in den Designeinstellungen als Prozentzahl
 [ ] Neues Standard-Theme was responsive ist
+[ ] Achtung! Versionsnummer und Copyright Jahr anpassen
