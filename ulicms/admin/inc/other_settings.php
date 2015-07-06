@@ -113,6 +113,7 @@ if (! $acl->hasPermission ( "other" )) {
 	
 	$smtp_auth = getconfig ( "smtp_auth" );
 	$log_ip = getconfig ( "log_ip" );
+	$delete_ips_after_48_hours = getconfig("delete_ips_after_48_hours");
 	$no_auto_cron = getconfig ( "no_auto_cron" );
 	$no_auto_cron = getconfig ( "no_auto_cron" );
 	
