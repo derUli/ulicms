@@ -5,3 +5,17 @@
 [ ] Schriftgröße in den Designeinstellungen als Prozentzahl
 [ ] Neues Standard-Theme was responsive ist
 [ ] Achtung! Versionsnummer und Copyright Jahr anpassen
+[ ] CSRF Bug bei GET-Requests beheben, zuvor eine CVE beantragen, einen 
+
+CSRF Sicherheitsproblem bei GET Requests beheben.
+
+Report erstellen, und darin erwähnen, dass die Lücke von Ankit Bharathan von provensec, llc gemeldet wurde.
+
+"Delete" Image Links durch Formulare mit Image Buttons und Anti CSRF Schutz ersetzen.
+
+[ ] Beschreibung der Sicherheitslücke erstellen und in Blog auf ulicms.de veröffentlichen
+[ ] Patch für UliCMS 8.0.0 erstellen
+[ ] Patch für UliCMS 8.0.1 erstellen
+[ ] Patch für UliCMS 9.0.0 erstellen
+[ ] Patch für UliCMS 9.0.1 erstellen
+[ ] Bugfix in UliCMS 9.0.2 durchführen
