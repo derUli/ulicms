@@ -3,3 +3,4 @@
 + Skin "Office 2013" für CKEditor hinzugefügt
 + Option "IP-Adressen nach 48 Stunden löschen" hinzugefügt
 + Shell-Script delete_log_ips.php hinzugefügt
++ jQuery auf Version 1.11.3 aktualisiert
