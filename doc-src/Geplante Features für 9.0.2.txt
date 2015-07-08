@@ -1,21 +1,7 @@
 [ ] Option "Alle Patches automatisch jede Nacht installieren"
 [X] "Option IP-Adressen nach 48 Stunden löschen" - Für log-Tabelle
-[ ] Option "Account nach X fehlgeschlagenen Anmeldeversuchen deaktivieren"
-[ ] Option "Passwörter dürfen nur einmal verwendet werden" -> In Kombination mit "Passwort muss alle X Tage geändert werden"
-[ ] Schriftgröße in den Designeinstellungen als Prozentzahl
-[ ] Neues Standard-Theme was responsive ist
 [ ] Achtung! Versionsnummer und Copyright Jahr anpassen
-[ ] CSRF Bug bei GET-Requests beheben, zuvor eine CVE beantragen, einen 
-
-CSRF Sicherheitsproblem bei GET Requests beheben.
-
-Report erstellen, und darin erwähnen, dass die Lücke von Ankit Bharathan von provensec, llc gemeldet wurde.
-
-"Delete" Image Links durch Formulare mit Image Buttons und Anti CSRF Schutz ersetzen.
-
-[ ] Beschreibung der Sicherheitslücke erstellen und in Blog auf ulicms.de veröffentlichen
-[ ] Patch für UliCMS 8.0.0 erstellen
-[ ] Patch für UliCMS 8.0.1 erstellen
-[ ] Patch für UliCMS 9.0.0 erstellen
-[ ] Patch für UliCMS 9.0.1 erstellen
-[ ] Bugfix in UliCMS 9.0.2 durchführen
+[ ] Verwaltung für Telefonnummern bzw. Kontakte ähnlich wie in Joomla.
+[ ] Telefonnummern können auf mobilen Geräten per Klick angerufen werden.
+Dazu tel: Links nutzen.
+z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
