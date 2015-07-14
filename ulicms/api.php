@@ -155,7 +155,7 @@ function log_request($save_ip = false) {
 	$http_host = db_escape ( get_http_host () );
 	$referrer = db_escape(get_referrer());
 	
-	db_query ( "INSERT INTO " . tbname ( "log" ) . " (ip, request_method, useragent, request_uri, http_host, referrer) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host', '$referrer')" ) or die ( db_error () );
+	db_query ( "INSERT INTO " . tbname ( "log" ) . " (ip, request_method, useragent, request_uri, http_host, referrer) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host', '$referrer')" );
 	
 	add_hook ( "after_log_request" );
 }
