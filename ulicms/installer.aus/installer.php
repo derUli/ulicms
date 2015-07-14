@@ -515,6 +515,7 @@ echo TRANSLATION_TITLE;
   `zeit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `request_uri` varchar(255) DEFAULT NULL,
   `useragent` varchar(255) DEFAULT NULL,
+  `referrer` varchar(255) DEFAULT NULL,
   `request_method` varchar(10) DEFAULT NULL,
   `http_host` varchar(100) DEFAULT NULL,
   `ip` varchar(255) DEFAULT NULL,

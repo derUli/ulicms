@@ -128,6 +128,18 @@ function get_http_host() {
 	return $_SERVER ["HTTP_HOST"];
 }
 
+function get_referer(){
+  return get_referrer();
+}
+
+function get_referrer(){
+  $referrer = null;
+  if(isset($_SERVER['HTTP_REFERER'])){
+     $referrer = $_SERVER['HTTP_REFERER'];       
+  }
+  return $referrer;
+}
+
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false) {
 	add_hook ( "before_log_request" );
@@ -141,8 +153,9 @@ function log_request($save_ip = false) {
 	$useragent = db_escape ( get_useragent () );
 	$request_uri = db_escape ( get_request_uri () );
 	$http_host = db_escape ( get_http_host () );
+	$referrer = db_escape(get_referrer());
 	
-	db_query ( "INSERT INTO " . tbname ( "log" ) . " (ip, request_method, useragent, request_uri, http_host) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host')" ) or die ( db_error () );
+	db_query ( "INSERT INTO " . tbname ( "log" ) . " (ip, request_method, useragent, request_uri, http_host, referrer) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host', '$referrer')" ) or die ( db_error () );
 	
 	add_hook ( "after_log_request" );
 }

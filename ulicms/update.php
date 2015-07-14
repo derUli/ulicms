@@ -22,6 +22,7 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "history" ) . "` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
 
+db_query("ALTER TABLE ".tbname("log")." ADD COLUMN `referrer` varchar(255) DEFAULT NULL")or die(db_error());
 
 // comments Ordner weggelöschen, sofern er noch existiert, da dieser nicht mehr benötigt wird.
 $comments_dir = ULICMS_ROOT . "/comments";
@@ -30,7 +31,7 @@ if(is_dir($comments_dir)){
    @SureRemoveDir ( $comments_dir, true );
 }
 
-setconfig ( "db_schema_version", "9.0.1" );
+setconfig ( "db_schema_version", "9.0.2" );
 
 // Patch Manager zurücksetzen
 $pkg = new PackageManager ();
