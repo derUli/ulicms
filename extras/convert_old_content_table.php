@@ -4,7 +4,7 @@
 
 include_once "init.php";
 $old_table = "old_content";
-$new_table = "new_content";
+$new_table = "ulicms_content";
 
 $old_content = db_query("SELECT * FROM $old_table");
 while($row = db_fetch_assoc($old_content)){
@@ -26,13 +26,12 @@ while($row = db_fetch_assoc($old_content)){
   }
   
   db_query("INSERT INTO `".$new_table."` (id, notinfeed, systemname, title, content, active,
-created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified, language)
+created, lastchangeby, autor, views, comments_enabled, menu, position, parent, lastmodified, language, redirection, access)
 
 VALUES (".$row["id"].",0, '".db_escape(utf8_decode($row["systemname"]))."', 
 '".db_escape(utf8_decode($row["title"]))."', 
 '".db_escape(utf8_decode($row["content"]))."',
  1, ".time().",
-1, 1, 0, 0, 
-'', '".db_escape($row["menu"])."', 
-".$row["position"].", ".$row["parent"].", ".time().", 'de')")or die (db_error());
+1, 1, 0, 0, '".db_escape($row["menu"])."', 
+".$row["position"].", ".$row["parent"].", ".time().", 'de', '".db_escape(utf8_decode($row["redirection"]))."', 'all')")or die (db_error());
 }
