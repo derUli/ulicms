@@ -1,1 +1,6 @@
 [ ] Multisite Fähigkeit
+[ ] Vernünftiges Paket System mit
+    [ ] Metadaten, die aus einer XML-Datei eingelesen werden
+    [ ] Automatische Prüfung auf Updates von Paketen
+    [ ] Behandlung von Abhängigkeiten
+    [ ] Prüfung ob die UliCMS Version unterstützt wird
