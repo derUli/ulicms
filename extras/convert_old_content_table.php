@@ -23,7 +23,7 @@ while($row = db_fetch_assoc($old_content)){
   }
   
   db_query("INSERT INTO `".$new_table."` (id, notinfeed, systemname, title, content, active,
-created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified)
+created, lastchangeby, autor, views, comments_enabled, redirection, menu, position, parent, lastmodified, language)
 
 VALUES (".$row["id"].",0, '".db_escape(utf8_decode($row["systemname"]))."', 
 '".db_escape(utf8_decode($row["title"]))."', 
@@ -31,5 +31,5 @@ VALUES (".$row["id"].",0, '".db_escape(utf8_decode($row["systemname"]))."',
  1, ".time().",
 1, 1, 0, 0, 
 '', '".db_escape($row["menu"])."', 
-".$row["position"].", ".$row["parent"].", ".time().")")or die (db_error());
+".$row["position"].", ".$row["parent"].", ".time().", 'de')")or die (db_error());
 }
