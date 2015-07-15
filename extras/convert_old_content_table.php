@@ -1,4 +1,7 @@
 <?php
+// Copy content from a very ancient UliCMS version into a moderner one
+// Converts old Parent row format (varchar) to new one (int ID)
+
 include_once "init.php";
 $old_table = "old_cotent";
 $new_table = "new_content";
