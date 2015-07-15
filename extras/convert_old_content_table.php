@@ -8,8 +8,11 @@ $new_table = "new_content";
 
 $old_content = db_query("SELECT * FROM $old_table");
 while($row = db_fetch_assoc($old_content)){
+  if($row["menu"] == "down"){
+     $row["menu"] = "bottom";
+  }
   
-  foreach($row as $key=>$value){
+  foreach($row as $key=>$value){  
       if($key == "parent"){
          if(!is_null($value) and !empty($value) and $value != "-"){
          $sub_query = db_query("select id from $old_table where systemname='".db_escape($value)."'");
