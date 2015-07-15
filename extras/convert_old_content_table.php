@@ -3,7 +3,7 @@
 // Converts old Parent row format (varchar) to new one (int ID)
 
 include_once "init.php";
-$old_table = "old_cotent";
+$old_table = "old_content";
 $new_table = "new_content";
 
 $old_content = db_query("SELECT * FROM $old_table");
