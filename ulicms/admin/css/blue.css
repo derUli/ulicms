@@ -290,3 +290,9 @@ div.diff del {
 	background: #fdd;
 	text-decoration: none;
 }
+
+div.diff ins {
+	color: green;
+	background: #fdd;
+	text-decoration: none;
+}
