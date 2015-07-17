@@ -73,24 +73,9 @@ $(window).load(function(){
 
 </script>
 <?php
-		if(!isset($_SESSION["filter_title"])){
-		   $_SESSION["filter_title"] = "";
-		}
-		
-		if(isset($_GET["filter_title"])){
-                   $_SESSION["filter_title"] = $_GET["filter_title"];
-		}
-		?>
-<form method="get" action="index.php">
-	<?php translate("title");?>
-	<input type="hidden" name="action" value="pages">
-	<input type="text" name="filter_title" value="<?php echo htmlspecialchars($_SESSION["filter_title"]);?>">
-	
-	</form>
-<?php
-		
-		echo TRANSLATION_FILTER_BY_LANGUAGE;
-		?>
+
+         echo TRANSLATION_FILTER_BY_LANGUAGE;
+         ?>
 	<select name="filter_language" onchange="filter_by_language(this)">
 		<option value="">
 		<?php
@@ -373,114 +358,118 @@ $(window).load(function(){
 	</thead>
 	<tbody>
 	<?php
-		if (in_array ( $_GET ["order"], array (
-				"title",
-				"menu",
-				"position",
-				"parent",
-				"active" 
-		) ))
-			$order = $_GET ["order"];
-		$filter_language = basename ( $_GET ["filter_language"] );
-		$filter_status = basename ( $_GET ["filter_status"] );
-		
-		if (empty ( $filter_language )) {
-			if (! empty ( $_SESSION ["filter_language"] )) {
-				$filter_language = $_SESSION ["filter_language"];
-			} else {
-				$filter_language = "";
-			}
-		}
-		
-		if ($_SESSION ["filter_status"] == "trash") {
-			$filter_status = "`deleted_at` IS NOT NULL";
-		} else {
-			$filter_status = "`deleted_at` IS NULL";
-		}
-		
-		if (empty ( $order )) {
-			$order = "menu";
-		}
-		
-		if (! empty ( $filter_language )) {
-			$filter_sql = "WHERE language = '" . $filter_language . "' ";
-		} else {
-			$filter_sql = "WHERE 1=1 ";
-		}
-		
-		if ($_SESSION ["filter_category"] != 0) {
-			$filter_sql .= "AND category=" . intval ( $_SESSION ["filter_category"] ) . " ";
-		}
-		
-		$filter_sql .= "AND " . $filter_status . " ";
-		
-		if ($_SESSION ["filter_menu"] != null) {
-			$filter_sql .= "AND menu = '" . db_escape ( $_SESSION ["filter_menu"] ) . "' ";
-		}
-		
-		if ($_SESSION ["filter_active"] !== null) {
-			$filter_sql .= "AND active = " . intval ( $_SESSION ["filter_active"] ) . " ";
-		}
-		
-		if ($_SESSION ["filter_parent"] != null) {
-			if ($_SESSION ["filter_parent"] != "-")
-				$filter_sql .= "AND parent = '" . intval ( $_SESSION ["filter_parent"] ) . "' ";
-			else
-				$filter_sql .= "AND parent IS NULL ";
-		}
-		
-		
-		if(isset($_SESSION["filter_title"]) and !empty($_SESSION["filter_title"])){
-                   $filter_sql .= "AND (title LIKE '".db_escape($_SESSION["filter_title"])."%' or title LIKE '%".db_escape($_SESSION["filter_title"])."' or title LIKE '%".db_escape($_SESSION["filter_title"])."%' or title LIKE '".db_escape($_SESSION["filter_title"])."' )";
-		}
-		
-		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " " . $filter_sql . "ORDER BY $order,position, systemname ASC" ) or die ( db_error () );
-		if (db_num_rows ( $query ) > 0) {
-			while ( $row = db_fetch_object ( $query ) ) {
+         if (in_array ($_GET ["order"], array (
+                    "title",
+                     "menu",
+                     "position",
+                     "parent",
+                     "active"
+                    )))
+             $order = $_GET ["order"];
+         $filter_language = basename ($_GET ["filter_language"]);
+         $filter_status = basename ($_GET ["filter_status"]);
 
-				
-				echo '<tr>';
-				echo "<td>" . htmlspecialchars ( $row->title );
-				if (! empty ( $row->redirection ) and ! is_null ( $row->redirection ))
-					echo htmlspecialchars ( " --> " ) . htmlspecialchars ( $row->redirection );
-				
-				echo "</td>";
-				echo "<td>" . htmlspecialchars ( $row->menu ) . "</td>";
-				
-				echo "<td>" . $row->position . "</td>";
-				echo "<td>" . htmlspecialchars ( getPageTitleByID ( $row->parent ) ) . "</td>";
-				
-				if ($row->active) {
-					echo "<td>" . TRANSLATION_YES . "</td>";
-				} else {
-					echo "<td>" . TRANSLATION_NO . "</td>";
-				}
-				
-				if (startsWith ( $row->redirection, "#" )) {
-					echo "<td style='text-align:center'></td>";
-				} else {
-					$domain = getDomainByLanguage ( $row->language );
-					if (! $domain) {
-						$url = "../" . $row->systemname . ".html";
-					} else {
-						$url = "http://" . $domain . "/" . $row->systemname . ".html";
-					}
-					echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . TRANSLATION_VIEW . "\" title=\"" . TRANSLATION_VIEW . "\"></a></td>";
-				}
-				echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
-				
-				if ($_SESSION ["filter_status"] == "trash") {
-					echo "<td style='text-align:center'>" . '<a href="index.php?action=undelete_page&page=' . $row->id . '";"> <img class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></a></td>';
-				} else {
-					echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_delete&page=' . $row->id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></a></td>';
-				}
-				
-				echo '</tr>';
-			}
-			?>
+         if (empty ($filter_language)){
+             if (! empty ($_SESSION ["filter_language"])){
+                 $filter_language = $_SESSION ["filter_language"];
+                 }else{
+                 $filter_language = "";
+                 }
+             }
+
+         if ($_SESSION ["filter_status"] == "trash"){
+             $filter_status = "`deleted_at` IS NOT NULL";
+             }else{
+             $filter_status = "`deleted_at` IS NULL";
+             }
+
+         if (empty ($order)){
+             $order = "menu";
+             }
+
+         if (! empty ($filter_language)){
+             $filter_sql = "WHERE language = '" . $filter_language . "' ";
+             }else{
+             $filter_sql = "WHERE 1=1 ";
+             }
+
+         if ($_SESSION ["filter_category"] != 0){
+             $filter_sql .= "AND category=" . intval ($_SESSION ["filter_category"]) . " ";
+             }
+
+         $filter_sql .= "AND " . $filter_status . " ";
+
+         if ($_SESSION ["filter_menu"] != null){
+             $filter_sql .= "AND menu = '" . db_escape ($_SESSION ["filter_menu"]) . "' ";
+             }
+
+         if ($_SESSION ["filter_active"] !== null){
+             $filter_sql .= "AND active = " . intval ($_SESSION ["filter_active"]) . " ";
+             }
+
+         if ($_SESSION ["filter_parent"] != null){
+             if ($_SESSION ["filter_parent"] != "-")
+                 $filter_sql .= "AND parent = '" . intval ($_SESSION ["filter_parent"]) . "' ";
+             else
+                 $filter_sql .= "AND parent IS NULL ";
+             }
+
+         $query = db_query ("SELECT * FROM " . tbname ("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die (db_error ());
+         if (db_num_rows ($query) > 0){
+             while ($row = db_fetch_object ($query)){
+                 ?>
+						<?php
+
+                 echo '<tr>';
+                 echo "<td>" . htmlspecialchars ($row -> title);
+                 if (! empty ($row -> redirection) and ! is_null ($row -> redirection))
+                     echo htmlspecialchars (" --> ") . htmlspecialchars ($row -> redirection);
+
+                 echo "</td>";
+                 echo "<td>" . htmlspecialchars ($row -> menu) . "</td>";
+
+                 echo "<td>" . $row -> position . "</td>";
+                 echo "<td>" . htmlspecialchars (getPageTitleByID ($row -> parent)) . "</td>";
+
+                 if ($row -> active){
+                     echo "<td>" . TRANSLATION_YES . "</td>";
+                     }else{
+                     echo "<td>" . TRANSLATION_NO . "</td>";
+                     }
+
+                 if (startsWith ($row -> redirection, "#")){
+                     echo "<td style='text-align:center'></td>";
+                     }else{
+                     $domain = getDomainByLanguage ($row -> language);
+                     if (! $domain){
+                         $url = "../" . $row -> systemname . ".html";
+                         }else{
+                         $url = "http://" . $domain . "/" . $row -> systemname . ".html";
+                         }
+                     echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . TRANSLATION_VIEW . "\" title=\"" . TRANSLATION_VIEW . "\"></a></td>";
+                     }
+                 echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+
+                 if ($_SESSION ["filter_status"] == "trash"){
+                   /*
+                     echo "<td style='text-align:center'>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></a></td>';
+                   */
+                   echo "<td style='text-align:center'>" . '<form action="index.php?action=undelete_page&page=' . $row -> id . '" method="post">'.get_csrf_token_html().'<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></form></td>';
+
+                   }else{
+                    /*
+                     echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></a></td>';
+                    */
+                     echo "<td style='text-align:center'>" . '<form action="index.php?action=pages_delete&page=' . $row -> id . '" method="post" onsubmit="return confirm(\'Wirklich löschen?\');">'.get_csrf_token_html().'<input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></form></td>';
+
+                     }
+
+                 echo '</tr>';
+                 }
+             ?>
 		<?php
-		}
-		?>
+             }
+         ?>
 	</tbody>
 </table>
 
@@ -488,12 +477,13 @@ $(window).load(function(){
 <br />
 
 <?php
-	} else {
-		noperms ();
-	}
-	
-	?>
+         }else{
+         noperms ();
+         }
+
+     ?>
 
 <?php
-}
+
+    }
 ?>
