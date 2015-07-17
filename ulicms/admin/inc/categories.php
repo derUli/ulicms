@@ -130,21 +130,20 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 			if ($category ["id"] != 1) {
 				?>
 
-			<td style="text-align: center;"><a
-				href="?action=categories&del=<?php
-				
-				echo $category ["id"];
-				?>"
-				onclick="return confirm('Wirklich Löschen?')"><img
+			<td style="text-align: center;"><form action="?action=categories&del=<?php
+
+                 echo $category ["id"];
+                 ?>" method="post"
+				onsubmit="return confirm('Wirklich Löschen?')"><?php csrf_token_html();?><input type="image"
 					class="mobile-big-image" src="gfx/delete.gif"
 					alt="<?php
-				
-				echo TRANSLATION_DELETE;
-				?>"
+
+                 echo TRANSLATION_DELETE;
+                 ?>"
 					title="<?php
-				
-				echo TRANSLATION_DELETE;
-				?>"> </a></td>
+
+                 echo TRANSLATION_DELETE;
+                 ?>"> </form></td>
 
 				<?php
 			} else {

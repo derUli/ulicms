@@ -90,25 +90,30 @@ $(window).load(function(){
 			while ( $row = db_fetch_object ( $query ) ) {
 				?>
 			<?php
-				
-				echo '<tr>';
-				echo "<td style=\"width:40px;\">--></td>";
-				if ($row->type == "gif") {
-					echo '<td><a href="' . $row->link_url . '" target="_blank"><img src="' . $row->image_url . '" title="' . $row->name . '" alt="' . $row->name . '" border=0></a></td>';
-				} else {
-					echo '<td>' . htmlspecialchars ( $row->html ) . '</td>';
-				}
-				if ($row->language == "all") {
-					echo '<td>Alle</td>';
-				} else {
-					echo '<td>' . getLanguageNameByCode ( $row->language ) . "</td>";
-				}
-				echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
-				echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_delete&banner=' . $row->id . '" onclick="return confirm(\'Wirklich löschen?\');"><img class="mobile-big-image" src="gfx/delete.gif" title="' . TRANSLATION_DELETE . '"></a></td>';
-				echo '</tr>';
-			}
-		}
-		?>
+
+                 echo '<tr>';
+                 echo "<td style=\"width:40px;\">--></td>";
+                 if ($row -> type == "gif"){
+                     echo '<td><a href="' . $row -> link_url . '" target="_blank"><img src="' . $row -> image_url . '" title="' . $row -> name . '" alt="' . $row -> name . '" border=0></a></td>';
+                     }else{
+                     echo '<td>' . htmlspecialchars ($row -> html) . '</td>';
+                     }
+                 if ($row -> language == "all"){
+                     echo '<td>Alle</td>';
+                     }else{
+                     echo '<td>' . getLanguageNameByCode ($row -> language) . "</td>";
+                     }
+                 echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $row -> id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+                 /*
+                 echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_delete&banner=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img class="mobile-big-image" src="gfx/delete.gif" title="' . TRANSLATION_DELETE . '"></a></td>';
+                 */
+                 echo "<td style='text-align:center;'>" . '<form action="index.php?action=banner_delete&banner=' . $row -> id . '" method="post" onsubmit="return confirm(\'Wirklich löschen?\');">'.get_csrf_token_html().'<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . TRANSLATION_DELETE . '"></form></td>';
+
+
+                 echo '</tr>';
+                 }
+             }
+         ?>
 	</tbody>
 </table>
 

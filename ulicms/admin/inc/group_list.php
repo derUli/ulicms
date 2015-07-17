@@ -115,26 +115,25 @@ if (count ( $groups ) > 0) {
 		echo TRANSLATION_EDIT;
 		?>"
 					title="<?php
-		
-		echo TRANSLATION_EDIT;
-		?>"> </a></td>
-			<td><a
-				href="?action=groups&delete=<?php
-		
-		echo $id;
-		?>"
-				onclick="return confirm('<?php
-		
-		echo TRANSLATION_ASK_FOR_DELETE;
-		?>');"><img class="mobile-big-image" src="gfx/delete.gif"
+
+         echo TRANSLATION_EDIT;
+         ?>"> </a></td>
+			<td><form action="?action=groups&delete=<?php
+
+         echo $id;
+         ?>" method="post"
+				onsubmit="return confirm('<?php
+
+         echo TRANSLATION_ASK_FOR_DELETE;
+         ?>');"><?php csrf_token_html();?><input type="image" class="mobile-big-image" src="gfx/delete.gif"
 					alt="<?php
 		
 		echo TRANSLATION_DELETE;
 		?>"
 					title="<?php
-		
-		echo TRANSLATION_DELETE;
-		?>"> </a></td>
+
+         echo TRANSLATION_DELETE;
+         ?>"></form></td>
 		</tr>
 
 

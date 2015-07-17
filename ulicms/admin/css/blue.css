@@ -281,10 +281,8 @@ table tr:nth-child(even) {
 	background: #335599;
 }
 
-div.diff ins {
-	color: green;
-	background: #dfd;
-	text-decoration: none;
+input[type="image"]{
+	border:none;
 }
 
 div.diff del {
