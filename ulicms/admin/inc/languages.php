@@ -116,16 +116,16 @@ if (defined ("_SECURITY")){
                     
                      echo TRANSLATION_DELETE;
                      ?>">
-		</a> </a> <?php
+		</a> <?php
                      }else{
-                     ?> <a
-			onclick="return confirm('<?php
+                     ?> <form
+			onsubmit="return confirm('<?php
                      echo str_ireplace ("%name%", $row -> name, TRANSLATION_DELETE_LANGUAGE_REALLY);
                      ?>')"
-			href="index.php?action=languages&delete=<?php echo $row -> id?>"> <img
+			action="index.php?action=languages&delete=<?php echo $row -> id?>" method="post"> <input type="image"
 				src="gfx/delete.gif" class="mobile-big-image" alt="Löschen"
-				title="Löschen">
-		</a> </a> <?php
+				title="Löschen"><?php csrf_token_html();?>
+		</form>  <?php
                      }
                  ?>
 		</td>
