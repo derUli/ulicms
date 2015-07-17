@@ -3,7 +3,7 @@ $acl = new ACL ();
 $audio_folder = ULICMS_ROOT . "/content/audio";
 if (! is_dir ( $audio_folder ))
 	mkdir ( $audio_folder );
-if ($acl->hasPermission ( "audio" ) and isset ( $_REQUEST ["delete"] )) {
+if ($acl -> hasPermission ("audio") and isset ($_REQUEST ["delete"]) and get_request_method() == "POST"){
 	$query = db_query ( "select ogg_file, mp3_file from " . tbname ( "audio" ) . " where id = " . intval ( $_REQUEST ["delete"] ) );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
@@ -198,23 +198,22 @@ $(window).load(function(){
 		
 		translate ( "edit" );
 		?>"> </a></td>
-			<td><a
-				href="index.php?action=audio&delete=<?php
-		
-		echo $row->id;
-		?>"
-				onclick="return confirm('<?php
-		
-		translate ( "ASK_FOR_DELETE" );
-		?>')"><img src="gfx/delete.png" class="mobile-big-image"
+			<td><form action="index.php?action=audio&delete=<?php
+
+        echo $row -> id;
+         ?>" method="post"
+				onsubmit="return confirm('<?php
+
+        translate ("ASK_FOR_DELETE");
+         ?>')"><?php csrf_token_html();?><input type="image" src="gfx/delete.png" class="mobile-big-image"
 					alt="<?php
-		
-		translate ( "delete" );
-		?>"
+
+        translate ("delete");
+         ?>"
 					title="<?php
-		
-		translate ( "delete" );
-		?>"> </a></td>
+
+        translate ("delete");
+         ?>"></form></td>
 		</tr>
 		<?php
 	
