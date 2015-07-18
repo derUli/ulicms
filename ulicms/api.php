@@ -299,6 +299,24 @@ function get_ip() {
 	
 	return $_SERVER ['REMOTE_ADDR'];
 }
+
+function getModuleMeta($module, $attrib = null){
+    $retval = null;
+    $metadata_file = getModulePath ( $module ) . "metadata.json";
+    if(file_exists($metadata_file)){
+        $data = file_get_contents($metadata_file);
+        $data = json_decode($data);
+        if($attrib != null){
+           if(isset($data->$attrib)){
+              $retval = $data->$attrib;
+           }
+        } else {
+           $retval = $data;
+        }
+    }
+    return $retval;
+}
+
 function getModuleName($module) {
 	$name_file = getModulePath ( $module ) . $module . "_name.php";
 	if (! file_exists ( $name_file )) {

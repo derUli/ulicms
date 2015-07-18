@@ -55,6 +55,9 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			$module_has_admin_page = file_exists ( getModuleAdminFilePath ( $modules [$i] ) );
 			
 			echo getModuleName ( $modules [$i] );
+			$version = getModuleMeta($modules [$i], version);
+			if($version != null)
+			   echo " ".$version;
 			echo "</strong>";
 			
 			echo "<div style=\"float:right\">";
