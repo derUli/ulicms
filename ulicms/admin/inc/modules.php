@@ -114,6 +114,11 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			echo "<li style=\"margin-bottom:20px;padding-bottom:10px;border-bottom:solid #cdcdcd 1px;\"><strong>";
 			
 			echo $themes [$i];
+			
+			$version = getThemeMeta($themes [$i], version);
+			if($version != null)
+			   echo " ".$version;
+			   
 			echo "</strong>";
 			
 			echo "<div style=\"float:right\">";

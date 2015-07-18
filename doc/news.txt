@@ -5,3 +5,5 @@
 + Shell-Script delete_log_ips.php hinzugefügt
 + jQuery auf Version 1.11.3 aktualisiert
 + Referrer Spalte zu Protokoll hinzugefügt
++ Module können nun Metadaten haben (metadata.js)
++ Versionsnummern von Modulen und Designs können nun angezeigt werden
