@@ -10,3 +10,4 @@
 Dazu tel: Links nutzen.
 z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
 [ ] Titel-Filter für Seiten wieder hinzufügen
+[ ] Mobile-Friendly Design hinzufügen
