@@ -223,5 +223,51 @@ border:none;
 background-color:white;
 }
 
+.CodeMirror {
+	border: 1px solid #eee;
+	height: auto !important;
+	overflow: hidden;
+}
 
+.CodeMirror-scroll {
+	overflow-y: hidden;
+	overflow-x: auto;
+}
 
+textarea#code, textarea#page_content {
+	height: auto;
+}
+
+div.help {
+	background-color: rgb(250, 250, 250);
+	border: solid rgb(200, 200, 200);
+	padding: 20px;
+	margin-top: 20px;
+}
+
+label {
+	font-weight: bold;
+}
+
+table tr:nth-child(odd) {
+	background-color: #eee;
+}
+
+table tr:nth-child(even) {
+	background-color: #fff;
+}
+
+/* Auswahl */
+::-moz-selection { /* Code for Firefox */
+	color: #e7e5e5;
+	background: #335599;
+}
+/* Auswahl */
+::selection {
+	color: #e7e5e5;
+	background: #335599;
+}
+
+input[type="image"]{
+	border:none;
+}
