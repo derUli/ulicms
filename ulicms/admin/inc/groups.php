@@ -27,11 +27,10 @@ if(!is_admin() and !$acl -> hasPermission("groups")){
              $created = true;
              $name = real_htmlspecialchars($name);
              }
-        
-         }else if(isset($_GET["delete"])){
-         $id = intval($_GET["delete"]);
-         $acl = new ACL();
-         $acl -> deleteGroup($id);
+         }else if (isset ($_GET ["delete"]) and get_request_method() == "POST"){
+         $id = intval ($_GET ["delete"]);
+         $acl = new ACL ();
+         $acl -> deleteGroup ($id);
          $removed = true;
         
          }else if(isset($_POST["edit_group"])){
