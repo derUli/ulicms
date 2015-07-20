@@ -359,18 +359,21 @@ $(window).load(function(){
                     
                      }
                  echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row -> id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
-                
-                
-                 if($_SESSION["filter_status"] == "trash"){
+
+                 if ($_SESSION ["filter_status"] == "trash"){
+                   /*
                      echo "<td style='text-align:center'>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></a></td>';
-                     }
-                else
-                    {
+                   */
+                   echo "<td style='text-align:center'>" . '<form action="index.php?action=undelete_page&page=' . $row -> id . '" method="post">'.get_csrf_token_html().'<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></form></td>';
+
+                   }else{
+                    /*
                      echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></a></td>';
-                    
-                    
+                    */
+                     echo "<td style='text-align:center'>" . '<form action="index.php?action=pages_delete&page=' . $row -> id . '" method="post" onsubmit="return confirm(\'Wirklich löschen?\');">'.get_csrf_token_html().'<input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></form></td>';
+
                      }
-                
+
                  echo '</tr>';
                 
                  }
