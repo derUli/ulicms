@@ -10,6 +10,10 @@ function get_useragent(){
      }
 
 
+function get_request_method(){
+     return $_SERVER ["REQUEST_METHOD"];
+    }
+
 function check_csrf_token(){
      if(!isset($_REQUEST["csrf_token"]))
          return false;
