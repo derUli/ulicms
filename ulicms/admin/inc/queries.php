@@ -45,7 +45,7 @@ if(isset($_GET["clear_cache"])){
      }
 
 
-if($_GET["action"] == "undelete_page" && $acl -> hasPermission("pages")){
+if ($_GET ["action"] == "undelete_page" && $acl -> hasPermission ("pages") && get_request_method() == "POST"){
      $page = intval($_GET["page"]);
      add_hook("before_undelete_page");
      db_query("UPDATE " . tbname("content") . " SET `deleted_at` = NULL" .
@@ -56,7 +56,7 @@ if($_GET["action"] == "undelete_page" && $acl -> hasPermission("pages")){
     
      }
 
-if($_GET["action"] == "pages_delete" && $acl -> hasPermission("pages")){
+if ($_GET ["action"] == "pages_delete" && $acl -> hasPermission ("pages") && get_request_method() == "POST"){
      $page = intval($_GET["page"]);
      add_hook("before_delete_page");
      db_query("UPDATE " . tbname("content") . " SET `deleted_at` = " . time() .
@@ -141,7 +141,7 @@ if($_GET["action"] == "empty_trash"){
      }
 
 
-if($_GET["action"] == "key_delete" and $acl -> hasPermission("expert_settings")){
+if ($_GET ["action"] == "key_delete" and $acl -> hasPermission ("expert_settings") and get_request_method() == "POST"){
      add_hook("before_delete_key");
      deleteconfig($_GET["key"]);
      add_hook("after_delete_key");
@@ -149,7 +149,7 @@ if($_GET["action"] == "key_delete" and $acl -> hasPermission("expert_settings"))
      exit();
      }
 
-if($_GET["action"] == "languages" and !empty($_GET["delete"]) and $acl -> hasPermission("languages")){
+if ($_GET ["action"] == "languages" and ! empty ($_GET ["delete"]) and $acl -> hasPermission ("languages") and get_request_method() == "POST"){
      add_hook("before_delete_language");
      db_query("DELETE FROM " . tbname("languages") . " WHERE id = " . intval($_GET["delete"]));
      add_hook("after_delete_language");
@@ -176,7 +176,7 @@ if(isset($_POST["add_language"]) and $acl -> hasPermission("languages")){
          }
      }
 
-if($_GET["action"] == "banner_delete" && $acl -> hasPermission("banners")){
+if ($_GET ["action"] == "banner_delete" && $acl -> hasPermission ("banners")  && get_request_method() == "POST"){
      $banner = intval($_GET["banner"]);
     
      add_hook("before_banner_delete");
@@ -187,7 +187,7 @@ if($_GET["action"] == "banner_delete" && $acl -> hasPermission("banners")){
      }
 
 
-if($_GET["action"] == "admin_delete" && (is_admin() or $acl -> hasPermission("users"))){
+if ($_GET ["action"] == "admin_delete" && (is_admin () or $acl -> hasPermission ("users"))  && get_request_method() == "POST"){
      $admin = intval($_GET["admin"]);
      add_hook("before_admin_delete");
      $query = db_query("DELETE FROM " . tbname("users") . " WHERE id='$admin'", $connection);
