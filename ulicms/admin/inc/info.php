@@ -36,7 +36,7 @@ if (defined ( "_SECURITY" )) {
 		href="http://www.raymondhill.net/finediff/viewdiff-ex.php"
 		target="_blank">PHP Fine Diff</a> Copyright 2011 (c) Raymond Hill
 		<br/>
-		<a gref="http://mobiledetect.net/" target="_blank">Mobile_Detect</a> Copyright &copy; 2011-2015 Serban Ghita, Nick Ilyin and contributors.
+		<a href="http://mobiledetect.net/" target="_blank">Mobile_Detect</a> Copyright &copy; 2011-2015 Serban Ghita, Nick Ilyin and contributors.
 
 </p>
 
