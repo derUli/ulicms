@@ -13,3 +13,6 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
 [ ] Mobile-Friendly Design hinzufügen
 [ ] Möglichkeit Patches als Datei hochzuladen hinzufügen,
     Ansicht der bereits installierten Patches
+[ ] Liste der installierten Patches im Backend
+[ ] Möglichkeit, Patches als Datei manuell hochzuladen.
+    Dies ist z.B. hilfreich wenn der Server aus Sicherheitsgründen nicht mit externen Servern kommunizieren darf.
