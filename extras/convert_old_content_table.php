@@ -12,6 +12,8 @@ while($row = db_fetch_assoc($old_content)){
      $row["menu"] = "bottom";
   }
   
+  db_query("TRUNCATE TABLE $new_table");
+  
   foreach($row as $key=>$value){  
       if($key == "parent"){
          if(!is_null($value) and !empty($value) and $value != "-"){
