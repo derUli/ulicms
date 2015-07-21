@@ -37,3 +37,5 @@ VALUES (".$row["id"].",0, '".db_escape($row["systemname"])."',
 1, 1, 0, 0, '".db_escape($row["menu"])."', 
 ".$row["position"].", ".$row["parent"].", ".time().", 'de', '".db_escape($row["redirection"])."', 'all')")or die (db_error());
 }
+
+ulicms_redirect("admin/");
