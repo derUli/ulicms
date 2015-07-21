@@ -8,4 +8,4 @@ FacebookCommentsXSS|Fixes an XSS security issue in integration of Facebook's Com
 CronFix|Improvement of Handling of Pseudo Cronjobs|http://patches.ulicms.de/downloads/9.0.0/CronFix.zip
 FileManagerLanguageFix|File Manager Language Fix|http://patches.ulicms.de/downloads/9.0.0/LanguageFix.zip
 CKEditor-4.5.1|WYSIWYG HTML Editor|http://patches.ulicms.de/downloads/9.0.0/CKEditor-4.5.1.zip
-cve-2015-4168-fix|Security Fix CVE-2015-4168|http://patches.ulicms.de/downloads/9.0.0/cve-2015-4168-fix.zip
+CVE-2015-4168-Fix|Security Fix CVE-2015-4168|http://patches.ulicms.de/downloads/9.0.0/cve-2015-4168-fix.zip
