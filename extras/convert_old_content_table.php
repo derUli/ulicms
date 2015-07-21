@@ -27,15 +27,15 @@ while($row = db_fetch_assoc($old_content)){
          
   }
   
-  db_query("INSERT INTO `".$new_table."` (id, notinfeed, systemname, title, content, active,
-created, lastchangeby, autor, views, comments_enabled, menu, position, parent, lastmodified, language, redirection, access)
+  db_query("INSERT INTO `".$new_table."` (id, notinfeed, systemname, title, content, active, 
+created, lastchangeby, autor, views, comments_enabled, menu, position, parent, lastmodified, language, redirection, access) 
 
-VALUES (".$row["id"].",0, '".db_escape($row["systemname"])."', 
-'".db_escape($row["title"])."', 
-'".db_escape($row["content"])."',
- 1, ".time().",
-1, 1, 0, 0, '".db_escape($row["menu"])."', 
-".$row["position"].", ".$row["parent"].", ".time().", 'de', '".db_escape($row["redirection"])."', 'all')")or die (db_error());
+VALUES (".$row["id"].",0, '".db_escape(utf8_decode($row["systemname"]))."',  
+'".db_escape(utf8_decode($row["title"]))."',  
+'".db_escape(utf8_decode($row["content"]))."', 
+ 1, ".time().", 
+1, 1, 0, 0, '".db_escape($row["menu"])."',  
+".$row["position"].", ".$row["parent"].", ".time().", 'de', '".db_escape(utf8_decode($row["redirection"]))."', 'all')")or die (db_error()); 
 }
 
 ulicms_redirect("admin/");
