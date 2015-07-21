@@ -25,3 +25,6 @@ UliCMS 8.0.1 Portable for Windows Version 1.0.0
 
 Doku
 [ ] Tutorial für Installation eines Webservers mit UliCMS auf Debian Linux / Ubuntu verfassen.
+
+Updates
+[ ] Patch für Update auf neueste Mobile_Detect Version veröffentlichen
