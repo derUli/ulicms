@@ -1,8 +1,8 @@
 Planänderung:
 UliCMS 8.0.1 soll weiterhin bis 2020 mit Sicherheits-Updates und Bugfixes versorgt werden.
 Neue Features sollen zur 8er Versionsreihe jedoch nicht dazu kommen.
-Von der 9er Reihe hingegen soll nun nicht mehr eine neue Version jährlich veröffentlicht werden, sondern eine neue Version jedes Quartal (alle 4 Monate).
-Damit werden die Supportzeiträume für die 9er Versionen kürzer, da alle 4 Monate die alte Version abgelöst wird.
+Von der 9er Reihe hingegen soll nun nicht mehr eine neue Version jährlich veröffentlicht werden, sondern eine neue Version jedes Quartal (alle 3 Monate).
+Damit werden die Supportzeiträume für die 9er Versionen kürzer, da alle 3 Monate die alte Version abgelöst wird.
 Das ermöglicht jedoch, schneller, neue Features zu etablieren, und vereinfacht die Wartung für mich.
 
 Todo:
