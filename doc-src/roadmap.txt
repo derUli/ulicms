@@ -1,8 +1,9 @@
-Here is the Roadmap for the near-term and mid-term development of UliCMS.
+Planänderung:
+UliCMS 8.0.1 soll weiterhin bis 2020 mit Sicherheits-Updates und Bugfixes versorgt werden.
+Neue Features sollen zur 8er Versionsreihe jedoch nicht dazu kommen.
+Von der 9er Reihe hingegen soll nun nicht mehr eine neue Version jährlich veröffentlicht werden, sondern eine neue Version jedes Quartal (alle 4 Monate).
+Damit werden die Supportzeiträume für die 9er Versionen kürzer, da alle 4 Monate die alte Version abgelöst wird.
+Das ermöglicht jedoch, schneller, neue Features zu etablieren, und vereinfacht die Wartung für mich.
 
-Update of the package source in June of 2015
-Release of UliCMS 9.0.0 in first quarter of 2016
-Then releases of minor updates to UliCMS 9 every 1 to three years (e.g. 9.0.1, 9.0.2, 9.0.3)
-
-The next Major Version will be called "UliCMS X Release 1.0".
-It will have support for content items, rows and multisite management
+Todo:
+Infotext für Roadmap veröffentlichen.
