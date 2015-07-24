@@ -1,4 +1,4 @@
-[ ] CSRF Lücke in Get Requests fixen, die Lücke wurde von Ankit Bharathan von provensec llc entdeckt
+[X] CSRF Lücke in Get Requests fixen, die Lücke wurde von Ankit Bharathan von provensec llc entdeckt
     - Delete Aktionen sollen per Post statt per Get erfolgen und ein Token nutzen
     - <input type="image" statt Bildlinks
 [ ] Option "Alle Patches automatisch jede Nacht installieren"
