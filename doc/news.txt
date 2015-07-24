@@ -7,4 +7,4 @@
 + Referrer Spalte zu Protokoll hinzugefügt
 + Module können nun Metadaten haben (metadata.js)
 + Versionsnummern von Modulen und Designs können nun angezeigt werden
-+ Mobile_Detect Klasse auf Version 2.8.155 aktualisiert
++ Mobile_Detect Klasse auf Version 2.8.15 aktualisiert
