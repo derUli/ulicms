@@ -9,7 +9,7 @@
 + Versionsnummern von Modulen und Designs können nun angezeigt werden
 + Mobile_Detect Klasse auf Version 2.8.15 aktualisiert
 + Bugfix: Werte in der Spalte "Menü" in der Seitenliste werden nun übersetzt
-+ IP Whitelist hinzugefügt. In der Datei cms-config.php kann nun ein Array mit IP-Adressen als Variable definiert werden.
++ IP Whitelist hinzugefügt. In der Datei cms-config.php kann nun ein Array mit IP-Adressen als Variable ip_whitelist definiert werden.
   Sofern dieser Wert gesetzt ist, wird der Zugriff zum UliCMS Backend auf bestimmte
   IP-Adressen beschränkt. Die Nutzung dieser Option wird nur bei Internet-Zugängen mit einer 
   statischen IP empfohlen, wie dies z.B. in Firmennetzwerken oft der Fall ist.
