@@ -22,8 +22,6 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "history" ) . "` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
 
-
-
 // Änderungen in der Datenbank von 9.0.2
 db_query("ALTER TABLE ".tbname("log")." ADD COLUMN `referrer` varchar(255) DEFAULT NULL");
 
