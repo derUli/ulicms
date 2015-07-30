@@ -536,5 +536,8 @@ define("TRANSLATION_MOBILE_DEVICES", "Mobile Devices");
 define("TRANSLATION_DESKTOP_COMPUTERS", "Desktop PCs");
 
 define("TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "Delete IP addresses after 48 hours");
+define("TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Access from your ip address is not allowed.<br/>
+Please ask your system administrator to add your ip address to whitelist.");
+
 
 add_hook ( "lang_en" );

@@ -25,6 +25,14 @@ if (logged_in () and $_SERVER ["REQUEST_METHOD"] == "POST" and ! isset ( $_REQUE
 
 setLocaleByLanguage ();
 
+
+$cfg = new config();
+if(isset($cfg->ip_whitelist) and is_array($cfg->ip_whitelist) 
+and count($cfg->ip_whitelist) > 0 and !in_array(get_ip(), $cfg->ip_whitelist)){
+  translate("login_from_ip_not_allowed");
+  die();
+}
+
 require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 

@@ -528,4 +528,7 @@ define("TRANSLATION_DESKTOP_COMPUTERS", "Arbeitsplatz Rechner");
 
 define("TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "IP-Adressen nach 48 Stunden löschen");
 
+define("TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Der Zugriff von Ihrer IP-Adresse ist nicht erlaubt.<br/>
+Bitte kontaktieren Sie Ihren Systemadministrator, dass er Ihre IP-Adresse zur Whitelist hinzufügt.");
+
 add_hook ( "lang_de" );
