@@ -5,7 +5,7 @@
 + Shell-Script delete_log_ips.php hinzugefügt
 + jQuery auf Version 1.11.3 aktualisiert
 + Referrer Spalte zu Protokoll hinzugefügt
-+ Module können nun Metadaten haben (metadata.js)
++ Module können nun Metadaten haben (metadata.json)
 + Versionsnummern von Modulen und Designs können nun angezeigt werden
 + Mobile_Detect Klasse auf Version 2.8.15 aktualisiert
 + Bugfix: Werte in der Spalte "Menü" in der Seitenliste werden nun übersetzt
