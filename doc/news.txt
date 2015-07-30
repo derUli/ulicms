@@ -8,3 +8,4 @@
 + Module können nun Metadaten haben (metadata.js)
 + Versionsnummern von Modulen und Designs können nun angezeigt werden
 + Mobile_Detect Klasse auf Version 2.8.15 aktualisiert
++ Bugfix: Werte in der Spalte "Menü" in der Seitenliste werden nun übersetzt

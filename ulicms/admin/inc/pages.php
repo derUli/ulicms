@@ -426,7 +426,7 @@ $(window).load(function(){
                      echo htmlspecialchars (" --> ") . htmlspecialchars ($row -> redirection);
 
                  echo "</td>";
-                 echo "<td>" . htmlspecialchars ($row -> menu) . "</td>";
+                 echo "<td>" . htmlspecialchars (get_translation($row -> menu)) . "</td>";
 
                  echo "<td>" . $row -> position . "</td>";
                  echo "<td>" . htmlspecialchars (getPageTitleByID ($row -> parent)) . "</td>";
