@@ -14,13 +14,13 @@ body {
 	margin: 14px;
 }
 
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"], input[type="radio"]
 {
- /* All browsers except webkit*/
-  transform: scale(2);
+ /* All browsers except webkit */
+  transform: scale(3);
 
-  /* Webkit browsers*/
-  -webkit-transform: scale(2);
+  /* Webkit browsers */
+  -webkit-transform: scale(3);
 }
 
 div#root-container {
