@@ -17,10 +17,10 @@ body {
 input[type="checkbox"], input[type="radio"]
 {
  /* All browsers except webkit */
-  transform: scale(3);
+  transform: scale(4);
 
   /* Webkit browsers */
-  -webkit-transform: scale(3);
+  -webkit-transform: scale(4);
   margin: 20px;
 }
 
