@@ -21,6 +21,9 @@ input[type="checkbox"], input[type="radio"]
 
   /* Webkit browsers */
   -webkit-transform: scale(3);
+  
+  
+  padding: 10px;
 }
 
 div#root-container {
