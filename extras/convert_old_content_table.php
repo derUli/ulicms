@@ -5,14 +5,14 @@
 include_once "init.php";
 $old_table = "old_content";
 $new_table = "new_content";
+  
+db_query("TRUNCATE TABLE $new_table");
 
 $old_content = db_query("SELECT * FROM $old_table");
 while($row = db_fetch_assoc($old_content)){
   if($row["menu"] == "down"){
      $row["menu"] = "bottom";
   }
-  
-  db_query("TRUNCATE TABLE $new_table");
   
   foreach($row as $key=>$value){  
       if($key == "parent"){
