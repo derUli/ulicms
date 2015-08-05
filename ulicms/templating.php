@@ -575,14 +575,14 @@ function get_menu($name = "top", $parent = null, $recursive = true) {
 		if (checkAccess ( $row->access )) {
 			$containsCurrentItem = parent_item_contains_current_page ( $row->id );
 			
-			$additional_classes = " ";
+			$additional_classes = " menu-link-to-".$row->id." ";
 			if ($containsCurrentItem)
 				$additional_classes = " contains-current-page";
 			
 			if (get_requested_pagename () != $row->systemname)
 				$html .= "  <li class='" . trim ( $additional_classes ) . "'>";
 			else
-				$html .= "  <li class='menu_active_list_item" . $additional_classes . "'>";
+				$html .= "  <li class='menu_active_list_item" . rtrim($additional_classes) . "'>";
 			if (! empty ( $row->alternate_title ))
 				$title = $row->alternate_title;
 			else
@@ -590,7 +590,7 @@ function get_menu($name = "top", $parent = null, $recursive = true) {
 			if (get_requested_pagename () != $row->systemname) {
 				$html .= "<a href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "' class='" . trim ( $additional_classes ) . "'>";
 			} else {
-				$html .= "<a class='menu_active_link" . $additional_classes . "' href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "'>";
+				$html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "'>";
 			}
 			if (! is_null ( $row->menu_image ) and ! empty ( $row->menu_image )) {
 				$html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities ( $row->title, ENT_QUOTES, "UTF-8" ) . '"/>';
