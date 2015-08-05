@@ -14,4 +14,3 @@
   IP-Adressen beschränkt. Die Nutzung dieser Option wird nur bei Internet-Zugängen mit einer 
   statischen IP empfohlen, wie dies z.B. in Firmennetzwerken oft der Fall ist.
 + Checkboxes und Radiobuttons für mobile Geräte optimiert
-+ CSS-Klasse für Page-ID zu Menülinks hinzugefügt
