@@ -577,7 +577,7 @@ function get_menu($name = "top", $parent = null, $recursive = true) {
 			
 			$additional_classes = " menu-link-to-".$row->id." ";
 			if ($containsCurrentItem)
-				$additional_classes = " contains-current-page";
+				$additional_classes .= "contains-current-page ";
 			
 			if (get_requested_pagename () != $row->systemname)
 				$html .= "  <li class='" . trim ( $additional_classes ) . "'>";
