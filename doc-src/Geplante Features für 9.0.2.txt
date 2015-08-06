@@ -18,3 +18,5 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
     Dies ist z.B. hilfreich wenn der Server aus Sicherheitsgründen nicht mit externen Servern kommunizieren darf.
 [ ] Button für "Truncate Table installed_patches"
 [X] IP Whitelist für Backend Login
+[ ] Es sollte möglich sein "HTML-Items" in ein Menü einzufügen.
+    In diesen wird statt eines Links ein HTML-Code, der in den Editor des CMS eingegeben werden kann angezeigt
