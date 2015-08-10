@@ -28,3 +28,4 @@ Doku
 
 Updates
 [ ] Patch für Update auf neueste Mobile_Detect Version veröffentlichen
+[ ] Update für Sprachdatei veröffentlichen
