@@ -486,7 +486,7 @@ define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Ihr Passwort wurde erfolgrei
 
 define ( "TRANSLATION_ENABLE_PASSWORD_RESET", "Passwort kann zurückgesetzt werden" );
 
-define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "Sie müssen Ihr Passwort ändern da das 'require_password_change' Flag gesetzt ist." );
+define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "Sie müssen Ihr Passwort ändern." );
 
 define ( "TRANSLATION_CHANGE_PASSWORD", "Passwort ändern" );
 

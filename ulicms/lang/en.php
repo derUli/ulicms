@@ -493,7 +493,7 @@ define ( "TRANSLATION_RESET_PASSWORD", "Reset Password" );
 define ( "TRANSLATION_NO_SUCH_USER", "There is no such user." );
 define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Your password has been reset. You will receive an E-Mail containing your new password." );
 
-define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "You must change your Passwort, because t he 'require_password_change' is set." );
+define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "You must change your Password." );
 
 define ( "TRANSLATION_ENABLE_PASSWORD_RESET", "Password can be reset" );
 
