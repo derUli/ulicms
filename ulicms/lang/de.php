@@ -472,7 +472,7 @@ define ( "TRANSLATION_CONTINUE_HERE", "Hier gehts weiter." );
 // Reset Password
 define ( "TRANSLATION_RESET_PASSWORD_MAIL_BODY", "Hallo %username%!
 
-Ein Benutzer unter der Domain %host% hat von der %ip% aus eine Anfrage nach einem neuen Passwort gesendet.
+Ein Benutzer unter der Domain %host% hat von der IP-Adresse %ip% aus eine Anfrage nach einem neuen Passwort gesendet.
 
 Ihr neues Passwort ist:
 %password%.
