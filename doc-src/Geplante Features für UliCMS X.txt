@@ -4,3 +4,5 @@
     [ ] Automatische Prüfung auf Updates von Paketen
     [ ] Behandlung von Abhängigkeiten
     [ ] Prüfung ob die UliCMS Version unterstützt wird
+[ ] Drag and Drop Seitenaufbau mit Inhaltselementen In-Page Editing etc.
+[ ] WYSIWYG Template Bearbeitung
