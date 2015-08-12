@@ -9,4 +9,4 @@ CronFix|Improvement of Handling of Pseudo Cronjobs|http://patches.ulicms.de/down
 FileManagerLanguageFix|File Manager Language Fix|http://patches.ulicms.de/downloads/9.0.0/LanguageFix.zip
 CKEditor-4.5.1|WYSIWYG HTML Editor|http://patches.ulicms.de/downloads/9.0.0/CKEditor-4.5.1.zip
 CVE-2015-4168-Fix|Security Fix CVE-2015-4168|http://patches.ulicms.de/downloads/9.0.0/cve-2015-4168-fix.zip
-translation-2015-08-12|http://patches.ulicms.de/downloads/all/translation-2015-08-12.zip
+translation-2015-08-12|Improved language files|http://patches.ulicms.de/downloads/all/translation-2015-08-12.zip
