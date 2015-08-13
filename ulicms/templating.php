@@ -373,7 +373,7 @@ function meta_description($ipage = null) {
 	
 	return $meta_description;
 }
-function get_title($ipage = null, $headline = false) {
+function get_title($ipage = null, $headline = false, $for_title_tag = false) {
 	$status = check_status ();
 	if ($status == "404 Not Found") {
 		return TRANSLATION_PAGE_NOT_FOUND;
