@@ -540,4 +540,6 @@ define("TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Access from your ip address is 
 Please ask your system administrator to add your ip address to whitelist.");
 
 
+define ( "TRANSLATION_TITLE_OF_MENU_ENTRY", "Titel of menu entry" );
+
 add_hook ( "lang_en" );

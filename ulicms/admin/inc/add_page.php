@@ -21,7 +21,7 @@ if (defined ( "_SECURITY" )) {
 	</strong><br /> <input type="text" name="system_title" required="true"
 		value=""> <br /> <br /> <strong><?php
 		
-		echo TRANSLATION_PAGE_TITLE;
+		translate("title_of_menu_entry");
 		?>
 	</strong><br /> <input type="text" required="true" name="page_title"
 		value="" onkeyup="systemname_vorschlagen(this.value)"> <br /> <br /> <strong><?php

@@ -32,8 +32,7 @@ if (defined ( "_SECURITY" )) {
 			
 			echo $row->systemname;
 			?>"> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_PAGE_TITLE;
+			translate("title_of_menu_entry");
 			?> </strong><br /> <input type="text" required="true"
 		name="page_title"
 		value="<?php
