@@ -201,7 +201,7 @@ $(window).load(function(){
 	<?php
      while ($row = db_fetch_object ($all_videos)){
          ?>
-		<tr>
+		<tr id="dataset-<?php echo $row->id;?>">
 			<td><?php
 
          echo $row -> id;
@@ -247,7 +247,7 @@ $(window).load(function(){
 				onsubmit="return confirm('<?php
 
          translate ("ASK_FOR_DELETE");
-         ?>')"><?php csrf_token_html();?><input type="image" src="gfx/delete.png" class="mobile-big-image"
+         ?>')" class="delete-form"><?php csrf_token_html();?><input type="image" src="gfx/delete.png" class="mobile-big-image"
 					alt="<?php
 
          translate ("delete");
@@ -264,6 +264,23 @@ $(window).load(function(){
 	</tbody>
 	</thead>
 </table>
+
+<script type="text/javascript">
+
+var ajax_options = {
+  success : function(responseText, statusText, xhr, $form){
+  var action = $($form).attr("action");
+  var id = url('?delete', action);
+  var list_item_id = "dataset-" + id
+  var tr = $("tr#" + list_item_id);
+  $(tr).fadeOut();
+  
+  }
+ 
+}
+
+$("form.delete-form").ajaxForm(ajax_options); 
+</script>
 
 <?php
     }else{

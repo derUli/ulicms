@@ -20,3 +20,5 @@
 + Löschen von Kategorien nun per AJAX möglich
 + Löschen von Benutzern nun per AJAX möglich
 + Löschen von Gruppen nun per AJAX möglich
++ Löschen von Audio Dateien nun per AJAX möglich
++ Löschen von Videos nun per AJAX möglich
