@@ -15,3 +15,4 @@
   statischen IP empfohlen, wie dies z.B. in Firmennetzwerken oft der Fall ist.
 + Checkboxes und Radiobuttons für mobile Geräte optimiert
 + CSS-Klasse für Page-ID zu Menülinks hinzugefügt
++ Löschen von Seiten nun per AJAX möglich
