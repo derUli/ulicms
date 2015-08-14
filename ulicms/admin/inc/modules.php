@@ -50,7 +50,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	if (count ( $modules ) > 0) {
 		echo "<ol style=\"margin-bottom:30px;\">";
 		for($i = 0; $i < count ( $modules ); $i ++) {
-			echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\"><strong>";
+			echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-".$modules[$i]."\"><strong>";
 			
 			$module_has_admin_page = file_exists ( getModuleAdminFilePath ( $modules [$i] ) );
 			
@@ -69,7 +69,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			}
 			
 			if ($acl->hasPermission ( "remove_packages" )) {
-				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $modules [$i] . "&type=module\" onclick=\"return confirm('Möchten Sie das Modul " . $modules [$i] . " wirklich deinstallieren?')\">";
+				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $modules [$i] . "&type=module\" onclick=\"return uninstallModule(this.href, '".$modules[$i]."');\">";
 				echo " [" . TRANSLATION_DELETE . "]";
 				echo "</a>";
 			}
@@ -141,5 +141,22 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		}
 		echo "</ol>";
 	}
+?>
+<script type="text/javascript">
+function uninstallModule(url, name){
+   if(confirm("Möchten Sie das Modul " + name + " wirklich deinstallieren?")){
+   $.ajax({
+      url: url,
+      success: function(){
+         $("li+#dataset-" + name).slideUp();
+      }
+});
+} 
+  return false;
+}
+
+</script>	
+	
+	<?php
 }
 ?>
