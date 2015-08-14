@@ -16,3 +16,5 @@
 + Checkboxes und Radiobuttons für mobile Geräte optimiert
 + CSS-Klasse für Page-ID zu Menülinks hinzugefügt
 + Löschen von Seiten nun per AJAX möglich
++ Löschen von Bannern nun per AJAX möglich
++ Löschen von Kategorien nun per AJAX möglich

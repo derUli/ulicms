@@ -99,7 +99,7 @@ if (! is_admin () and ! $acl -> hasPermission ("categories")){
 		
 		foreach ( $categories as $category ) {
 			?>
-		<tr>
+		<tr id="dataset-<?php echo $category["id"];?>">
 			<td><?php
 			
 			echo $category ["id"];
@@ -134,7 +134,7 @@ if (! is_admin () and ! $acl -> hasPermission ("categories")){
 
                  echo $category ["id"];
                  ?>" method="post"
-				onsubmit="return confirm('Wirklich Löschen?')"><?php csrf_token_html();?><input type="image"
+				onsubmit="return confirm('Wirklich Löschen?')" class="delete-form"><?php csrf_token_html();?><input type="image"
 					class="mobile-big-image" src="gfx/delete.gif"
 					alt="<?php
 
@@ -169,6 +169,23 @@ if (! is_admin () and ! $acl -> hasPermission ("categories")){
 		?>
 	</tbody>
 </table>
+
+<script type="text/javascript">
+
+var ajax_options = {
+  success : function(responseText, statusText, xhr, $form){
+  var action = $($form).attr("action");
+  var id = url('?del', action);
+  var list_item_id = "dataset-" + id
+  var tr = $("tr#" + list_item_id);
+  $(tr).fadeOut();
+  
+  }
+ 
+}
+
+$("form.delete-form").ajaxForm(ajax_options); 
+</script>
 <?php
 	} else if (isset ( $_GET ["add"] )) {
 		?>
