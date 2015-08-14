@@ -19,3 +19,4 @@
 + Löschen von Bannern nun per AJAX möglich
 + Löschen von Kategorien nun per AJAX möglich
 + Löschen von Benutzern nun per AJAX möglich
++ Löschen von Gruppen nun per AJAX möglich

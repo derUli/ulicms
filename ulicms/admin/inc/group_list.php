@@ -71,7 +71,7 @@ if (count ( $groups ) > 0) {
 	
 	foreach ( $groups as $id => $name ) {
 		?>
-		<tr>
+		<tr id="dataset-<?php echo $id;?>">
 			<td><?php
 		
 		echo $id;
@@ -125,7 +125,7 @@ if (count ( $groups ) > 0) {
 				onsubmit="return confirm('<?php
 
          echo TRANSLATION_ASK_FOR_DELETE;
-         ?>');"><?php csrf_token_html();?><input type="image" class="mobile-big-image" src="gfx/delete.gif"
+         ?>');" class="delete-form"><?php csrf_token_html();?><input type="image" class="mobile-big-image" src="gfx/delete.gif"
 					alt="<?php
 		
 		echo TRANSLATION_DELETE;
@@ -143,6 +143,21 @@ if (count ( $groups ) > 0) {
 
 	</tbody>
 </table>
+<script type="text/javascript">
+var ajax_options = {
+  success : function(responseText, statusText, xhr, $form){
+  var action = $($form).attr("action");
+  var id = url('?delete', action);
+  var list_item_id = "dataset-" + id
+  var tr = $("tr#" + list_item_id);
+  $(tr).fadeOut();
+  
+  }
+ 
+}
+
+$("form.delete-form").ajaxForm(ajax_options); 
+</script>
 <?php
     
     }
