@@ -303,14 +303,14 @@ $(window).load(function(){
 
 &nbsp;&nbsp;
 <a href="index.php?action=empty_trash"
-	onclick="return confirm('Papierkorb leeren?');">Papierkorb leeren</a>
+	onclick="return ajaxEmptyTrash(this.href);">Papierkorb leeren</a>
 <?php
 		}
 		?>
 
 <br />
 
-<table class="tablesorter">
+<table class="tablesorter dataset-list">
 	<thead>
 		<tr style="font-weight: bold;">
 			<th><?php
@@ -490,6 +490,18 @@ var ajax_options = {
 
 $("form.delete-form").ajaxForm(ajax_options); 
 $("form.undelete-form").ajaxForm(ajax_options); 
+
+function ajaxEmptyTrash(url){
+   if(confirm("Papierkorb leeren?")){
+   $.ajax({
+      url: url,
+      success: function(){
+         $("table.dataset-list tbody").fadeOut();
+      }
+});
+} 
+  return false;
+}
 
 </script>
 
