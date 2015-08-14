@@ -123,12 +123,12 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			echo "<div style=\"float:right\">";
 			
-			if (is_admin () and $themes [$i] != $ctheme) {
+			if ($acl->hasPermission ( "remove_packages" ) and $themes [$i] != $ctheme) {
 				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $themes [$i] . "&type=theme\" onclick=\"return uninstallTheme(this.href, '".$themes[$i]."');\">";
 				
 				echo " [" . TRANSLATION_DELETE . "]";
 				echo "</a>";
-			} else if (is_admin ()) {
+			} else if ($acl->hasPermission ( "remove_packages" )) {
 				
 				echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert('Das Theme kann nicht gelöscht werden, da es gerade aktiv ist.')\">";
 				echo " [" . TRANSLATION_DELETE . "]";

@@ -24,3 +24,4 @@
 + Löschen von Videos nun per AJAX möglich
 + Löschen von Modulen nun per AJAX möglich
 + Löschen von Themes nun per AJAX möglich
++ Bugfix: Berechtigung "remove_packages"  wird nun korrekt ausgewertet
