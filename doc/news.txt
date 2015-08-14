@@ -23,3 +23,4 @@
 + Löschen von Audio Dateien nun per AJAX möglich
 + Löschen von Videos nun per AJAX möglich
 + Löschen von Modulen nun per AJAX möglich
++ Löschen von Themes nun per AJAX möglich
