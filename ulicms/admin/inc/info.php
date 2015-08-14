@@ -37,6 +37,10 @@ if (defined ( "_SECURITY" )) {
 		target="_blank">PHP Fine Diff</a> Copyright 2011 (c) Raymond Hill
 		<br/>
 		<a href="http://mobiledetect.net/" target="_blank">Mobile_Detect</a> Copyright &copy; 2011-2015 Serban Ghita, Nick Ilyin and contributors.
+<br/>
+
+
+<a href="https://plugins.jquery.com/url/" target="_blank">Query URL Plugin</a> Copyright (C) 2011-2012 <a href="http://www.websanova.com" target="_blank">Websanova</a>
 
 </p>
 
