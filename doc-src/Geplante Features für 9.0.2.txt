@@ -21,4 +21,4 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
 [ ] Es sollte möglich sein "HTML-Items" in ein Menü einzufügen.
     In diesen wird statt eines Links ein HTML-Code, der in den Editor des CMS eingegeben werden kann angezeigt
 [ ] <title> Tag unabhängig von Linktext im Navigationsmenü änderbar
-[ ] Löschen von Datensätzen per AJAX.
+[ ] Löschen von Datensätzen per AJAX
