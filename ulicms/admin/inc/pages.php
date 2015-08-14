@@ -496,7 +496,7 @@ function ajaxEmptyTrash(url){
    $.ajax({
       url: url,
       success: function(){
-         $("table.dataset-list tbody").fadeOut();
+         $("table.dataset-list tbody tr").fadeOut();
       }
 });
 } 
