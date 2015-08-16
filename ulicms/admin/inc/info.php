@@ -40,7 +40,7 @@ if (defined ( "_SECURITY" )) {
 <br/>
 
 
-<a href="https://plugins.jquery.com/url/" target="_blank">Query URL Plugin</a> Copyright (C) 2011-2012 <a href="http://www.websanova.com" target="_blank">Websanova</a>
+<a href="https://plugins.jquery.com/url/" target="_blank">jQuery URL Plugin</a> Copyright (C) 2011-2012 <a href="http://www.websanova.com" target="_blank">Websanova</a>
 
 </p>
 
