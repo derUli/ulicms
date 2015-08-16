@@ -5,7 +5,7 @@
 <?php base_metas()?>
 <meta name="viewport" content="width=1024"/>
 </head>
-<body class="<?php body_classes()?;">
+<body class="<?php body_classes();?>">
 <div id="root-container">
 <header>
 <section id="logo">
