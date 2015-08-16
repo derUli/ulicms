@@ -80,7 +80,7 @@ if (defined ( "_SECURITY" )) {
 				?>
 		<?php
 
-                 echo '<tr>';
+                 echo '<tr id="dataset-'.$row->id.'">';
                  echo "<td style=\"width:40px;\">" . $row -> id . "</td>";
                  echo "<td>";
                  echo '<img src="' . get_gravatar($row -> email, 26) . '" alt="Avatar von ' . real_htmlspecialchars ($row -> username) . '"> ';
@@ -97,7 +97,7 @@ if (defined ( "_SECURITY" )) {
                        /*
                      echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_delete&admin=' . $row -> id . '" onclick="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');"><img class="mobile-big-image" src="gfx/delete.gif"></a></td>';
                      */
-                     echo "<td style='text-align:center;'>" . '<form action="index.php?action=admin_delete&admin=' . $row -> id . '" method="post" onsubmit="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');">'.get_csrf_token_html().'<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
+                     echo "<td style='text-align:center;'>" . '<form action="index.php?action=admin_delete&admin=' . $row -> id . '" method="post" onsubmit="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');" class="delete-form">'.get_csrf_token_html().'<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
 
                      }
 
@@ -109,7 +109,21 @@ if (defined ( "_SECURITY" )) {
 
 	</tbody>
 </table>
+<script type="text/javascript">
+var ajax_options = {
+  success : function(responseText, statusText, xhr, $form){
+  var action = $($form).attr("action");
+  var id = url('?admin', action);
+  var list_item_id = "dataset-" + id
+  var tr = $("tr#" + list_item_id);
+  $(tr).fadeOut();
+  
+  }
+ 
+}
 
+$("form.delete-form").ajaxForm(ajax_options); 
+</script>
 <br />
 <br />
 <?php

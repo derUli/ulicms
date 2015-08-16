@@ -91,7 +91,7 @@ $(window).load(function(){
 				?>
 			<?php
 
-                 echo '<tr>';
+                 echo '<tr id="dataset-'.$row->id.'">';
                  echo "<td style=\"width:40px;\">--></td>";
                  if ($row -> type == "gif"){
                      echo '<td><a href="' . $row -> link_url . '" target="_blank"><img src="' . $row -> image_url . '" title="' . $row -> name . '" alt="' . $row -> name . '" border=0></a></td>';
@@ -107,7 +107,7 @@ $(window).load(function(){
                  /*
                  echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_delete&banner=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img class="mobile-big-image" src="gfx/delete.gif" title="' . TRANSLATION_DELETE . '"></a></td>';
                  */
-                 echo "<td style='text-align:center;'>" . '<form action="index.php?action=banner_delete&banner=' . $row -> id . '" method="post" onsubmit="return confirm(\'Wirklich löschen?\');">'.get_csrf_token_html().'<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . TRANSLATION_DELETE . '"></form></td>';
+                 echo "<td style='text-align:center;'>" . '<form action="index.php?action=banner_delete&banner=' . $row -> id . '" method="post" onsubmit="return confirm(\'Wirklich löschen?\');" class="delete-form">'.get_csrf_token_html().'<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . TRANSLATION_DELETE . '"></form></td>';
 
 
                  echo '</tr>';
@@ -116,6 +116,24 @@ $(window).load(function(){
          ?>
 	</tbody>
 </table>
+
+
+<script type="text/javascript">
+
+var ajax_options = {
+  success : function(responseText, statusText, xhr, $form){
+  var action = $($form).attr("action");
+  var id = url('?banner', action);
+  var list_item_id = "dataset-" + id
+  var tr = $("tr#" + list_item_id);
+  $(tr).fadeOut();
+  
+  }
+ 
+}
+
+$("form.delete-form").ajaxForm(ajax_options); 
+</script>
 
 <br />
 <br />

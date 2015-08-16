@@ -50,7 +50,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	if (count ( $modules ) > 0) {
 		echo "<ol style=\"margin-bottom:30px;\">";
 		for($i = 0; $i < count ( $modules ); $i ++) {
-			echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\"><strong>";
+			echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-".$modules[$i]."\"><strong>";
 			
 			$module_has_admin_page = file_exists ( getModuleAdminFilePath ( $modules [$i] ) );
 			
@@ -69,7 +69,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			}
 			
 			if ($acl->hasPermission ( "remove_packages" )) {
-				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $modules [$i] . "&type=module\" onclick=\"return confirm('Möchten Sie das Modul " . $modules [$i] . " wirklich deinstallieren?')\">";
+				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $modules [$i] . "&type=module\" onclick=\"return uninstallModule(this.href, '".$modules[$i]."');\">";
 				echo " [" . TRANSLATION_DELETE . "]";
 				echo "</a>";
 			}
@@ -111,7 +111,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	if (count ( $themes ) > 0) {
 		echo "<ol>";
 		for($i = 0; $i < count ( $themes ); $i ++) {
-			echo "<li style=\"margin-bottom:20px;padding-bottom:10px;border-bottom:solid #cdcdcd 1px;\"><strong>";
+			echo "<li style=\"margin-bottom:20px;padding-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-theme-".$themes[$i]."\"><strong>";
 			
 			echo $themes [$i];
 			
@@ -123,12 +123,12 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			echo "<div style=\"float:right\">";
 			
-			if (is_admin () and $themes [$i] != $ctheme) {
-				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $themes [$i] . "&type=theme\" onclick=\"return confirm('Möchten Sie das Theme " . $themes [$i] . " wirklich deinstallieren?')\">";
+			if ($acl->hasPermission ( "remove_packages" ) and $themes [$i] != $ctheme) {
+				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $themes [$i] . "&type=theme\" onclick=\"return uninstallTheme(this.href, '".$themes[$i]."');\">";
 				
 				echo " [" . TRANSLATION_DELETE . "]";
 				echo "</a>";
-			} else if (is_admin ()) {
+			} else if ($acl->hasPermission ( "remove_packages" )) {
 				
 				echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert('Das Theme kann nicht gelöscht werden, da es gerade aktiv ist.')\">";
 				echo " [" . TRANSLATION_DELETE . "]";
@@ -141,5 +141,38 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		}
 		echo "</ol>";
 	}
+?>
+<script type="text/javascript">
+function uninstallModule(url, name){
+   if(confirm("Möchten Sie das Modul " + name + " wirklich deinstallieren?")){
+   $.ajax({
+      url: url,
+      success: function(){      
+     
+         $("li#dataset-module-" + name).slideUp();
+         
+      }
+});
+} 
+  return false;
+}
+
+function uninstallTheme(url, name){
+   if(confirm("Möchten Sie das Theme " + name + " wirklich deinstallieren?")){
+   $.ajax({
+      url: url,
+      success: function(){
+
+         $("li#dataset-theme-" + name).slideUp();
+         
+      }
+});
+} 
+  return false;
+}
+
+</script>	
+	
+	<?php
 }
 ?>

@@ -1,5 +1,5 @@
 ===== Neues in UliCMS 9.0.2 ====
-+ CKEditor auf Version 4.5.1 aktualisiert
++ CKEditor auf Version 4.5.2 aktualisiert
 + Skin "Office 2013" für CKEditor hinzugefügt
 + Option "IP-Adressen nach 48 Stunden löschen" hinzugefügt
 + Shell-Script delete_log_ips.php hinzugefügt
@@ -15,3 +15,15 @@
   statischen IP empfohlen, wie dies z.B. in Firmennetzwerken oft der Fall ist.
 + Checkboxes und Radiobuttons für mobile Geräte optimiert
 + CSS-Klasse für Page-ID zu Menülinks hinzugefügt
++ Löschen von Seiten nun per AJAX möglich
++ Löschen von Bannern nun per AJAX möglich
++ Löschen von Kategorien nun per AJAX möglich
++ Löschen von Benutzern nun per AJAX möglich
++ Löschen von Gruppen nun per AJAX möglich
++ Löschen von Audio Dateien nun per AJAX möglich
++ Löschen von Videos nun per AJAX möglich
++ Löschen von Modulen nun per AJAX möglich
++ Löschen von Themes nun per AJAX möglich
++ Löschen von Einstellungen im Expertenmodus nun per AJAX möglich
++ Löschen von Sprachen nun per AJAX möglich
++ Bugfix: Berechtigung "remove_packages"  wird nun korrekt ausgewertet
