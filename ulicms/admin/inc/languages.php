@@ -72,7 +72,7 @@ if (defined ("_SECURITY")){
 	<?php
              while ($row = db_fetch_object ($languages)){
                  ?>
-	<tr>
+	<tr id="dataset-<?php echo $row->id;?>">
 		<td><?php echo htmlspecialchars($row -> language_code)?>
 		</td>
 		<td><?php
@@ -122,7 +122,7 @@ if (defined ("_SECURITY")){
 			onsubmit="return confirm('<?php
                      echo str_ireplace ("%name%", $row -> name, TRANSLATION_DELETE_LANGUAGE_REALLY);
                      ?>')"
-			action="index.php?action=languages&delete=<?php echo $row -> id?>" method="post"> <input type="image"
+			action="index.php?action=languages&delete=<?php echo $row -> id?>" class="delete-form" method="post"> <input type="image"
 				src="gfx/delete.gif" class="mobile-big-image" alt="Löschen"
 				title="Löschen"><?php csrf_token_html();?>
 		</form>  <?php
@@ -139,6 +139,23 @@ if (defined ("_SECURITY")){
 
 
 </table>
+
+<script type="text/javascript">
+
+var ajax_options = {
+  success : function(responseText, statusText, xhr, $form){
+  var action = $($form).attr("action");
+  var id = url('?delete', action);
+  var list_item_id = "dataset-" + id
+  var tr = $("tr#" + list_item_id);
+  $(tr).fadeOut();
+  
+  }
+ 
+}
+
+$("form.delete-form").ajaxForm(ajax_options); 
+</script>
 <?php
              }
          ?>

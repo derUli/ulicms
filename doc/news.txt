@@ -25,4 +25,5 @@
 + Löschen von Modulen nun per AJAX möglich
 + Löschen von Themes nun per AJAX möglich
 + Löschen von Einstellungen im Expertenmodus nun per AJAX möglich
++ Löschen von Sprachen nun per AJAX möglich
 + Bugfix: Berechtigung "remove_packages"  wird nun korrekt ausgewertet
