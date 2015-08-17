@@ -4,7 +4,7 @@
 [ ] Option "Alle Patches automatisch jede Nacht installieren"
 [ ] Tabelle für Sites schon mal anlegen (Multisite), Datensatz für Standardseite anlegen, Multisite Funktion noch nicht implementieren.
 [X] "Option IP-Adressen nach 48 Stunden löschen" - Für log-Tabelle
-[ ] Achtung! Versionsnummer und Copyright Jahr anpassen
+[X] Achtung! Versionsnummer und Copyright Jahr anpassen
 [ ] Verwaltung für Telefonnummern bzw. Kontakte ähnlich wie in Joomla.
 [ ] Telefonnummern können auf mobilen Geräten per Klick angerufen werden.
 Dazu tel: Links nutzen.
