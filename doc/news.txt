@@ -27,3 +27,4 @@
 + Löschen von Einstellungen im Expertenmodus nun per AJAX möglich
 + Löschen von Sprachen nun per AJAX möglich
 + Bugfix: Berechtigung "remove_packages"  wird nun korrekt ausgewertet
++ API-Funktion is_ajax_request() hinzugefügt

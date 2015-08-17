@@ -1,4 +1,10 @@
 <?php
+
+function is_ajax_request(){
+   return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
+   strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+}
+
 function is_crawler($userAgent = null)
 {
      if(is_null($useragent)){
