@@ -29,3 +29,4 @@
 + Bugfix: Berechtigung "remove_packages"  wird nun korrekt ausgewertet
 + API-Funktion is_ajax_request() hinzugefügt
 + Filter für Seitentitel wieder hinzugefügt
++ page-id CSS Klasse zum Body hinzugefügt

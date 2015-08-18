@@ -240,7 +240,7 @@ function category() {
 	echo get_category ();
 }
 function get_body_classes() {
-	$str = "";
+	$str = "page-id-".get_ID()." ";
 	if (is_frontpage ()) {
 		$str .= "home ";
 	}
