@@ -850,7 +850,7 @@ class config extends baseConfig{
 	?>
 	<hr style="margin-top: 30px;" />
 	<p style="color: #6f6f6f; font-size: small;">
-		&copy; 2011 - 2015 by <a href="http://www.ulicms.de" target="_blank">ulicms.de</a>
+		&copy; 2011 - 2016 by <a href="http://www.ulicms.de" target="_blank">ulicms.de</a>
 	</p>
 </body>
 </html>
