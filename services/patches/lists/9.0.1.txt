@@ -1,3 +1,4 @@
 CKEditor-4.5.1|WYSIWYG HTML Editor|http://patches.ulicms.de/downloads/9.0.0/CKEditor-4.5.1.zip
 CVE-2015-4168-Fix|Security Fix CVE-2015-4168|http://patches.ulicms.de/downloads/9.0.1/cve-2015-4168-fix.zip
-templating-20150805|Updated templating engine|http://patches.ulicms.de/downloads/9.0.1/templating-20150805.zip
+templating-20150819|Updated templating engine|http://patches.ulicms.de/downloads/9.0.1/templating-20150819.zip
+translation-2015-08-12|Improved language files|http://patches.ulicms.de/downloads/all/translation-2015-08-12.zip
