@@ -240,7 +240,7 @@ function category() {
 	echo get_category ();
 }
 function get_body_classes() {
-	$str = "";
+	$str = "page-id-".get_ID()." ";
 	if (is_frontpage ()) {
 		$str .= "home ";
 	}
@@ -577,7 +577,7 @@ function get_menu($name = "top", $parent = null, $recursive = true) {
 			
 			$additional_classes = " menu-link-to-".$row->id." ";
 			if ($containsCurrentItem)
-				$additional_classes .= " contains-current-page";
+				$additional_classes .= "contains-current-page ";
 			
 			if (get_requested_pagename () != $row->systemname)
 				$html .= "  <li class='" . trim ( $additional_classes ) . "'>";
@@ -636,6 +636,8 @@ function base_metas() {
 		$title = str_ireplace ( "%homepage_title%", get_homepage_title (), $title );
 		$title = str_ireplace ( "%title%", get_title (), $title );
 		$title = str_ireplace ( "%motto%", get_motto (), $title );
+		
+	        $title = apply_filter ( $title, "title_tag" );
 		$title = htmlentities ( $title, ENT_QUOTES, "UTF-8" );
 		
 		echo "<title>" . $title . "</title>\r\n";

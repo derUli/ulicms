@@ -493,7 +493,7 @@ define ( "TRANSLATION_RESET_PASSWORD", "Reset Password" );
 define ( "TRANSLATION_NO_SUCH_USER", "There is no such user." );
 define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Your password has been reset. You will receive an E-Mail containing your new password." );
 
-define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "You must change your Passwort, because t he 'require_password_change' is set." );
+define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "You must change your password." );
 
 define ( "TRANSLATION_ENABLE_PASSWORD_RESET", "Password can be reset" );
 
@@ -532,8 +532,12 @@ define ( "TRANSLATION_RESTORE", "Restore" );
 define ( "TRANSLATION_RESTORE_OLDER_VERSION", "Restore an older version" );
 define ( "TRANSLATION_ASK_FOR_RESTORE", "Do you really want to restore this older version?" );
 
-
 define("TRANSLATION_MOBILE_DEVICES", "Mobile Devices");
 define("TRANSLATION_DESKTOP_COMPUTERS", "Desktop PCs");
+
+define("TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "Delete IP addresses after 48 hours");
+define("TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Access from your ip address is not allowed.<br/>
+Please ask your system administrator to add your ip address to whitelist.");
+
 
 add_hook ( "lang_en" );

@@ -472,7 +472,7 @@ define ( "TRANSLATION_CONTINUE_HERE", "Hier gehts weiter." );
 // Reset Password
 define ( "TRANSLATION_RESET_PASSWORD_MAIL_BODY", "Hallo %username%!
 
-Ein Benutzer unter der Domain %host% hat von der %ip% aus eine Anfrage nach einem neuen Passwort gesendet.
+Ein Benutzer unter der Domain %host% hat von der IP-Adresse %ip% aus eine Anfrage nach einem neuen Passwort gesendet.
 
 Ihr neues Passwort ist:
 %password%.
@@ -486,7 +486,7 @@ define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Ihr Passwort wurde erfolgrei
 
 define ( "TRANSLATION_ENABLE_PASSWORD_RESET", "Passwort kann zurückgesetzt werden" );
 
-define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "Sie müssen Ihr Passwort ändern da das 'require_password_change' Flag gesetzt ist." );
+define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "Sie müssen Ihr Passwort ändern." );
 
 define ( "TRANSLATION_CHANGE_PASSWORD", "Passwort ändern" );
 
@@ -525,5 +525,10 @@ define ( "TRANSLATION_ASK_FOR_RESTORE", "Diese Version wirklich wiederherstellen
 
 define("TRANSLATION_MOBILE_DEVICES", "Mobile Geräte");
 define("TRANSLATION_DESKTOP_COMPUTERS", "Arbeitsplatz Rechner");
+
+define("TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "IP-Adressen nach 48 Stunden löschen");
+
+define("TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Der Zugriff von Ihrer IP-Adresse ist nicht erlaubt.<br/>
+Bitte kontaktieren Sie Ihren Systemadministrator, dass er Ihre IP-Adresse zur Whitelist hinzufügt.");
 
 add_hook ( "lang_de" );
