@@ -30,3 +30,4 @@
 + API-Funktion is_ajax_request() hinzugefügt
 + Filter für Seitentitel wieder hinzugefügt
 + page-id CSS Klasse zum Body hinzugefügt
++ title_tag Filter hinzugefügt
