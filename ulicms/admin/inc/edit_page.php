@@ -416,7 +416,8 @@ echo htmlspecialchars($og_url);?>"/></div>
 		
 		echo TRANSLATION_CUSTOM_DATA_JSON;
 		?>
-		</h3><br /> <textarea name="custom_data"
+		</h3>
+		<textarea name="custom_data"
 			style="width: 100%; height: 200px;" cols=80 rows=10><?php
 			
 			echo htmlspecialchars ( $row->custom_data );
