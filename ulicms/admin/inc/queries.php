@@ -373,6 +373,10 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	if ($_POST ["parent"] != "NULL") {
 		$parent = intval ( $_POST ["parent"] );
 	}
+	// Open Graph
+	$og_title = db_escape ( $_POST ["og_title"] );	
+	$og_type = db_escape ( $_POST ["og_type"] );	
+	$og_image = db_escape ( $_POST ["og_image"] );	
 	
 	$user = $_SESSION ["login_id"];
 	$id = intval ( $_POST ["page_id"] );
@@ -383,7 +387,8 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$meta_keywords = db_escape ( $_POST ["meta_keywords"] );
 	$language = db_escape ( $_POST ["language"] );
 	add_hook ( "before_edit_page" );
-	db_query ( "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme' WHERE id=$id" );
+	db_query ( "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
+	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image' WHERE id=$id" );
 	
 	$user_id = get_user_id ();
 	$content_id = $id;

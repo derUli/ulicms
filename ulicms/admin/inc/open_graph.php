@@ -53,7 +53,7 @@ function openMenuImageSelectWindow(field) {
 <?php
 if(!empty($og_url)){
 ?>
-<div><img class="responsive-image" src="<?php echo htmlspecialchars($og_url);?>"/></div>
+<div><img class="small-preview-image" src="<?php echo htmlspecialchars($og_url);?>"/></div>
 <?php }?>
 
 		<input type="text" id="og_image" name="og_image"

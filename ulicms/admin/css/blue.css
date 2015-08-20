@@ -296,3 +296,8 @@ div.diff ins {
 	background: #EFECEC;
 	text-decoration: none;
 }
+
+img.small-preview-image{
+   width: 300px !important;
+   height:auto !important;
+}

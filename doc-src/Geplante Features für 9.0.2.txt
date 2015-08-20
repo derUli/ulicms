@@ -25,7 +25,7 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
 [ ] Eingabefelder für OpenGraph Basic Meta-Tags. Diese werden z.B. von Facebook verwendet.
     [X] Datenbank anpassen
     [X] Template Funktionen erstellen
-    [ ] GUI Formularfelder in Seitenverwaltung erstellen
+    [X] GUI Formularfelder in Seitenverwaltung erstellen
     [X] GUI Seite für Default Werte erstellen
     [ ] Links zu Informationen zu Open Graph einfügen
         [ ] Link auf Liste der OG Typen
