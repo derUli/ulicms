@@ -54,6 +54,12 @@ function get_og_tags($systemname = null){
       $og_image = get_protocol_and_domain(). $og_image;
    }
    
+   
+   $og_title = apply_filter ( $og_title, "og_title" );
+   $og_type = apply_filter ( $og_type, "og_type" );
+   $og_url = apply_filter ( $og_url, "og_url" );
+   $og_image = apply_filter ( $og_image, "og_image" );
+   
    $html .= '<meta property="og:title" content="'.htmlspecialchars($og_title).'" />';
    $html .= "\r\n";
    $html .= '<meta property="og:type" content="'.htmlspecialchars($og_type).'" />';
