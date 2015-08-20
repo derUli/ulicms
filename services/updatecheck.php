@@ -33,7 +33,7 @@ if($version == "8.0.0"){
 }
 
 if($version == "9.0.0"){
-   die("<p>Ein Upgrade auf UliCMS 9.0.1 ist verfügbar. / An upgrade to UliMS 9.0.1 is available.<br/>
+   die("<p>Ein Upgrade auf UliCMS 9.0.1 ist verfügbar. / An upgrade to UliCMS 9.0.1 is available.<br/>
    <a href=\"http://www.ulicms.de/content/files/Releases/9.0.1/ulicms-9.0.1-mountain-king-upgrade.zip\">[Download]</a></p>");
 
 }
