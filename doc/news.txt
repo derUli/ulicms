@@ -31,3 +31,4 @@
 + Filter für Seitentitel wieder hinzugefügt
 + page-id CSS Klasse zum Body hinzugefügt
 + title_tag Filter hinzugefügt
++ Es können nun Open Graph Meta-Tags festgelegt werden.
