@@ -161,7 +161,7 @@ if (defined ( "_SECURITY" )) {
 		echo TRANSLATION_EDIT;
 		?></a></td>
 		</tr>
-		<?php if($acl->hasPermission ( "settings_simple" )){
+		<?php if($acl->hasPermission ( "open_graph" )){
                  ?>
               <tr>
 		<td><strong><?php translate("open_graph");?>
