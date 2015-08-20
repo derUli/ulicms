@@ -22,3 +22,9 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
     In diesen wird statt eines Links ein HTML-Code, der in den Editor des CMS eingegeben werden kann angezeigt
 [ ] <title> Tag unabhängig von Linktext im Navigationsmenü änderbar
 [X] Löschen von Datensätzen per AJAX
+[ ] Eingabefelder für OpenGraph Basic Meta-Tags. Diese werden z.B. von Facebook verwendet.
+Beispiel
+<meta property="og:title" content="The Rock" />
+<meta property="og:type" content="video.movie" />
+<meta property="og:url" content="http://www.imdb.com/title/tt0117500/" />
+<meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
