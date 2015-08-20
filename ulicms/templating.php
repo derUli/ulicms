@@ -1,4 +1,45 @@
 <?php
+function get_og_tags(){
+   $og_data = get_og_data();
+   
+   $og_title = $og_data["og_title"];
+   $og_type = $og_data["og_type"];
+   $og_image = $og_data["og_image"];
+   
+   // Falls kein og_title für die Seite gesetzt ist, Standardtitel bzw. Headline verwenden
+   if(is_null($og_title) or empty($og_title)){
+      $og_title = get_headline();
+   }
+   
+   if(is_null($og_type) or empty($og_type)){
+      $og_title = getconfig("og_type");
+   }
+   
+    if(is_null($og_image) or empty($og_image)){
+      $og_image = getconfig("og_image");
+   }
+   
+   
+   $html = "";
+   
+   return $html;
+}
+
+function get_og_data($systemname = "") {
+	if (empty ( $systemname )) {
+		$systemname = $_GET ["seite"];
+	}
+	
+	if (empty ( $systemname ))
+		$systemname = get_frontpage ();
+	$query = db_query ( "SELECT og_title, og_type, og_image FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
+	if (db_num_rows ( $query ) > 0) {
+		return db_fetch_assoc ( $query );
+	} else {
+		return null;
+	}
+}
+
 function get_all_combined_html() {
 	$html = "";
 	$html .= get_combined_stylesheet_html ();

@@ -34,6 +34,8 @@ db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `og_image` varchar(255) D
 // comments Ordner weggelöschen, sofern er noch existiert, da dieser nicht mehr benötigt wird.
 $comments_dir = ULICMS_ROOT . "/comments";
 
+setconfig("og_type", "article");
+
 if(is_dir($comments_dir)){
    @SureRemoveDir ( $comments_dir, true );
 }
