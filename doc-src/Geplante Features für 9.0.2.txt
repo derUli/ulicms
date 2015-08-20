@@ -27,3 +27,5 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
     [X] Template Funktionen erstellen
     [ ] GUI Formularfelder in Seitenverwaltung erstellen
     [ ] GUI Seite für Default Werte erstellen
+    [ ] Links zu Informationen zu Open Graph einfügen
+        [ ] Link auf Liste der OG Typen

@@ -3,11 +3,11 @@ if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "open_graph" )) {
 	    if(isset($_POST["og_type"])){
-               setconfig($og_type, db_escape($_POST["og_type"]));
+               setconfig("og_type", db_escape($_POST["og_type"]));
             }
                
              if(isset($_POST["og_image"])){
-               setconfig($og_image, db_escape($_POST["og_image"]));
+               setconfig("og_image", db_escape($_POST["og_image"]));
               }
 	    
 	$og_type = getconfig("og_type");
@@ -19,8 +19,8 @@ if (defined ( "_SECURITY" )) {
            $og_url = get_protocol_and_domain(). $og_image;
    }
 ?>
-<h1><?php translate("open_graph");?>
-<form action="index.php?action=open_graph" id="open_graph" method="open_graph">
+<h1><?php translate("open_graph");?></h1>
+<form action="index.php?action=open_graph" id="open_graph" method="post">
 <?php csrf_token_html ();?>
 
 
