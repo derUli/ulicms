@@ -555,6 +555,10 @@ echo TRANSLATION_TITLE;
   `theme` varchar(200) null,
   `custom_data` varchar(255) NULL DEFAULT '{}',
   `type` varchar(50) DEFAULT 'page' NULL,
+  `og_title` varchar(255) DEFAULT '',
+  `og_type` varchar(255) DEFAULT '',
+  `og_image` varchar(255) DEFAULT '',
+  `og_title` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" ) or die ( mysqli_error ( $connection ) );
 			
