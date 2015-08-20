@@ -285,7 +285,10 @@ function openMenuImageSelectWindow(field) {
 		echo TRANSLATION_META_KEYWORDS;
 		?>
 		</strong><br /> <input type="text" name="meta_keywords" value=''> <br />
-		<br /> <strong><?php
+		<br /> 
+		
+		
+		<strong><?php
 		
 		echo TRANSLATION_OPEN_IN;
 		?>
@@ -302,11 +305,48 @@ function openMenuImageSelectWindow(field) {
 		echo TRANSLATION_TARGET_BLANK;
 		?>
 			</option>
-		</select> <br /> <br /> <strong><?php
+		</select> 
+		
+		<h3>Open Graph</h3>
+		<div style="margin-left:20px;">
+		<strong><?php translate("title");?>
+		</strong><br /> <input type="text" name="og_title" value=''> <br />
+		 <br />
+		<strong><?php translate("type");?>
+		</strong><br /> <input type="text" name="og_type" value=''> <br /> <br />
+		<strong><?php translate("image");?>
+		<br/>
+		<script type="text/javascript">
+function openMenuImageSelectWindow(field) {
+    window.KCFinder = {
+        callBack: function(url) {
+            field.value = url;
+            window.KCFinder = null;
+        }
+    };
+    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'og_image',
+        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+        'resizable=1, scrollbars=0, width=800, height=600'
+    );
+}
+</script>
+
+
+		<input type="text" id="og_image" name="og_image"
+			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+			value="<?php echo htmlspecialchars($og_image);?>" style="cursor: pointer" /><br /> <a href="#"
+			onclick="$('#og_image').val('');return false;"><?php
+		
+		echo TRANSLATION_CLEAR;
+		?>
+		</a> 
+		
+		</div>
+		<h3><?php
 		
 		echo TRANSLATION_CUSTOM_DATA_JSON;
 		?>
-		</strong><br /> <textarea name="custom_data"
+		</h3><textarea name="custom_data"
 			style="width: 100%; height: 200px;" cols=80 rows=10>{}</textarea>
 
 

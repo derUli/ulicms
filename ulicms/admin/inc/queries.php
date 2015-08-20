@@ -211,6 +211,12 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$access = implode ( ",", $_POST ["access"] );
 		$access = db_escape ( $access );
 		$target = db_escape ( $_POST ["target"] );
+
+		// Open Graph
+		$og_title = db_escape ( $_POST ["og_title"] );	
+		$og_type = db_escape ( $_POST ["og_type"] );	
+		$og_image = db_escape ( $_POST ["og_image"] );		
+		
 		$meta_description = $_POST ["meta_description"];
 		$meta_keywords = $_POST ["meta_keywords"];
 		
@@ -280,10 +286,11 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		add_hook ( "before_create_page" );
 		db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position, 
-  access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`) 
+  access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`, 
+  `og_title`, `og_type`, `og_image`) 
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", " . $comments_enabled . ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "', 
   '$meta_description', '$meta_keywords',
-  '$language', '$target', '$category', '$html_file', '$alternate_title', '$menu_image', '$custom_data', '$theme')" ) or die ( db_error () );
+  '$language', '$target', '$category', '$html_file', '$alternate_title', '$menu_image', '$custom_data', '$theme', '$og_title', '$og_type', '$og_image')" ) or die ( db_error () );
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
 		$content = $unescaped_content;

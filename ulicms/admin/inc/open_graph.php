@@ -58,7 +58,7 @@ if(!empty($og_url)){
 
 		<input type="text" id="og_image" name="og_image"
 			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-			value="<?php echo htmlspecialchars($og_image);?>" style="cursor: pointer" /><br /> <a href="#"
+			value="" style="cursor: pointer" /><br /> <a href="#"
 			onclick="$('#og_image').val('');return false;"><?php
 		
 		echo TRANSLATION_CLEAR;
