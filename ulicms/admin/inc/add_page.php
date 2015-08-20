@@ -100,7 +100,7 @@ if (defined ( "_SECURITY" )) {
 		echo nl2br ( TRANSLATION_HELP_POSITION );
 		?>
 	</div>
-	<br /> <br />
+	<br> <br>
 	<strong><?php
 		
 		echo TRANSLATION_PARENT;
