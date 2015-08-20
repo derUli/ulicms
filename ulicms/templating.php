@@ -50,6 +50,10 @@ function get_og_tags($systemname = null){
        $og_type = "article";
    }
    
+   if(!empty($og_image) and !startsWith($og_image, "http")){
+      $og_image = get_protocol_and_domain(). $og_image;
+   }
+   
    $html .= '<meta property="og:title" content="'.htmlspecialchars($og_title).'" />';
    $html .= "\r\n";
    $html .= '<meta property="og:type" content="'.htmlspecialchars($og_type).'" />';

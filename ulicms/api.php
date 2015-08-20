@@ -931,6 +931,14 @@ function replace_num_entity($ord) {
 	return $ret;
 }
 
+function get_protocol_and_domain(){
+   return get_site_protocol().get_domain();
+}
+
+function get_domain(){
+  return $_SERVER['SERVER_NAME'];
+}
+
 // This Returns the current full URL
 // for example: http://www.homepage.de/news.html?single=title
 function getCurrentURL() {
