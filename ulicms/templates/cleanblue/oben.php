@@ -2,7 +2,8 @@
 <html lang="<?php echo getCurrentLanguage();
 ?>">
 <head>
-<?php base_metas()?>
+<?php base_metas(); ?>
+<?php og_tags(); ?>
 <meta name="viewport" content="width=1024"/>
 </head>
 <body class="<?php body_classes();?>">

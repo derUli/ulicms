@@ -1,27 +1,46 @@
 <?php
-function get_og_tags(){
-   $og_data = get_og_data();
+
+function og_tags(){
+   echo get_og_tags();
+}
+function get_og_tags($systemname = null){
+
+   $html = "";
+   if(is_200()){
+     $og_data = get_og_data($systemname);
+     $og_title = $og_data["og_title"];
+     $og_type = $og_data["og_type"];
+     $og_image = $og_data["og_image"];
+     $og_url = getCurrentURL();
    
-   $og_title = $og_data["og_title"];
-   $og_type = $og_data["og_type"];
-   $og_image = $og_data["og_image"];
-   
-   // Falls kein og_title für die Seite gesetzt ist, Standardtitel bzw. Headline verwenden
-   if(is_null($og_title) or empty($og_title)){
-      $og_title = get_headline();
+     // Falls kein og_title für die Seite gesetzt ist, Standardtitel bzw. Headline verwenden
+     if(is_null($og_title) or empty($og_title)){
+        $og_title = get_headline();
    }
    
    if(is_null($og_type) or empty($og_type)){
-      $og_title = getconfig("og_type");
+      $og_type = getconfig("og_type");
    }
    
     if(is_null($og_image) or empty($og_image)){
       $og_image = getconfig("og_image");
    }
    
+   if(!$og_type){
+       $og_type = "article";
+   }
    
-   $html = "";
+   $html .= '<meta property="og:title" content="'.htmlspecialchars($og_title).'" />';
+   $html .= "\r\n";
+   $html .= '<meta property="og:type" content="'.htmlspecialchars($og_type).'" />';
+   $html .= "\r\n";
    
+   $html .= '<meta property="og:url" content="'.htmlspecialchars($og_url).'" />';
+   $html .= "\r\n";
+   
+   $html .= '<meta property="og:image" content="'.htmlspecialchars($og_image).'" />';
+   $html .= "\r\n";
+   }
    return $html;
 }
 
