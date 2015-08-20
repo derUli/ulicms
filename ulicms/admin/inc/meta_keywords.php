@@ -92,7 +92,7 @@ if (defined ( "_SECURITY" )) {
 		
 		echo TRANSLATION_SAVE_CHANGES;
 		?>"></td>
-	
+	</tr>
 	</table>
 </form>
 

@@ -531,4 +531,9 @@ define("TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "IP-Adressen nach 48 Stunden lö
 define("TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Der Zugriff von Ihrer IP-Adresse ist nicht erlaubt.<br/>
 Bitte kontaktieren Sie Ihren Systemadministrator, dass er Ihre IP-Adresse zur Whitelist hinzufügt.");
 
+// Open Graph
+define("TRANSLATION_OPEN_GRAPH", "Open Graph");
+define("TRANSLATION_TYPE", "Typ");
+define("TRANSLATION_IMAGE", "Bild");
+
 add_hook ( "lang_de" );

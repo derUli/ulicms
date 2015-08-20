@@ -539,5 +539,10 @@ define("TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "Delete IP addresses after 48 ho
 define("TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Access from your ip address is not allowed.<br/>
 Please ask your system administrator to add your ip address to whitelist.");
 
+// Open Graph
+define("TRANSLATION_OPEN_GRAPH", "Open Graph");
+define("TRANSLATION_TYPE", "Type");
+define("TRANSLATION_IMAGE", "Image");
+
 
 add_hook ( "lang_en" );

@@ -88,6 +88,7 @@ if (defined ( "_SECURITY" )) {
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
 				value="Einstellungen Speichern"></td>
+				</tr>
 	
 	</table>
 </form>

@@ -2,7 +2,14 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "open_graph" )) {
-	
+	    if(isset($_POST["og_type"])){
+               setconfig($og_type, db_escape($_POST["og_type"]));
+            }
+               
+             if(isset($_POST["og_image"])){
+               setconfig($og_image, db_escape($_POST["og_image"]));
+              }
+	    
 	$og_type = getconfig("og_type");
 	$og_image = getconfig("og_image");
 	
@@ -12,6 +19,7 @@ if (defined ( "_SECURITY" )) {
            $og_url = get_protocol_and_domain(). $og_image;
    }
 ?>
+<h1><?php translate("open_graph");?>
 <form action="index.php?action=open_graph" id="open_graph" method="open_graph">
 <?php csrf_token_html ();?>
 
@@ -59,9 +67,32 @@ if(!empty($og_url)){
 		
 		</td>
 		</tr>
+		<tr>
+			<td></td>
+			<td style="text-align: center"><input type="submit" name="submit"
+				value="<?php
+		
+		translate("save_changes");
+		?>"></td>
+	</tr>
 		</table>
 
 </form>
+
+<script type="text/javascript">
+$("#open_graph").ajaxForm({beforeSubmit: function(e){
+  $("#message").html("");
+  $("#loading").show();
+  }, 
+  success:function(e){
+  $("#loading").hide();  
+  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
+  }
+  
+
+}); 
+
+</script>
 
 
 <?php
