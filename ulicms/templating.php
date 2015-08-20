@@ -1,5 +1,25 @@
 <?php
 
+function html5_doctype(){
+   echo get_html5_doctype();
+}
+
+function get_html5_doctype(){
+   $html = '<!doctype html>';
+   $html .= "\r\n";
+   return $html;
+}
+
+function og_html_prefix(){
+  echo get_og_html_prefix();
+}
+
+function get_og_html_prefix(){
+   $html = '<html prefix="og: http://ogp.me/ns#" lang="'.getCurrentLanguage().'">';
+   $html .= "\r\n";
+   return $html;
+}
+
 function og_tags(){
    echo get_og_tags();
 }

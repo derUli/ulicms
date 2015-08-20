@@ -1,6 +1,5 @@
-<!doctype html>
-<html lang="<?php echo getCurrentLanguage();
-?>">
+<?php html5_doctype();?>
+<?php og_html_prefix();?>
 <head>
 <?php base_metas(); ?>
 <?php og_tags(); ?>
