@@ -1,3 +1,6 @@
 Nächste Major Version soll UliCMS X heißen.
 Erste Version heißt dann
 UliCMS X - Version 1.0.0
+
+Unter Inhalte Verwaltung für "Benutzerdefinierte Felder".
+Diese können dann z.B. für Seiten gesetzt werden.
