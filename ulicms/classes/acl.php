@@ -152,6 +152,7 @@ class ACL {
 		$acl_data ["favicon"] = null;
 		$acl_data ["other"] = null;
 		$acl_data ["expert_settings"] = null;
+		$acl_data ["open_graph"] = null;
 		
 		$acl_data ["export"] = null;
 		$acl_data ["import"] = null;
