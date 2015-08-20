@@ -126,7 +126,8 @@ if (defined ( "_SECURITY" )) {
 			?>
 	</div>
 
-	<br /> <br />
+	<br /> 
+	<br /> 
 	<strong><?php
 			
 			echo TRANSLATION_PARENT;
