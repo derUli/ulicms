@@ -139,7 +139,7 @@ class ACL {
 		
 		// Updates durchführen
 		$acl_data ["update_system"] = null;
-		
+		$acl_data ["patch_management"] = null;
 		// Einstellungen
 		$acl_data ["settings_simple"] = null;
 		$acl_data ["design"] = null;

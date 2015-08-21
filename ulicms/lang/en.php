@@ -547,4 +547,12 @@ define("TRANSLATION_IMAGE", "Image");
 define("TRANSLATION_OG_HELP", "Open Graph Metadata are used by social networks like Facebook, when someone shares a link. If you let a field empty a default value that can be configured in settings will be used.");
 define("TRANSLATION_OG_DEFAULTS_HELP", "Open Graph Metadata are used by social networks like Facebook, when someone shares a link. You can set default values here. These are used as fallback if not specified for a page.");
 
+// Patch Management
+define("TRANSLATION_INSTALLED_PATCHES", "Installed Patches");
+define("TRANSLATION_INSTALLED_PATCHES_HELP", "Patches are files that fix errors in UliCMS.");
+define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST", "Reset List");
+define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM",
+"Warning! You are about to truncate the list of installed patches.\\nThis will not uninstall any patches. Only database entries will be deleted.\\nDo you want to continue?");
+
+
 add_hook ( "lang_en" );

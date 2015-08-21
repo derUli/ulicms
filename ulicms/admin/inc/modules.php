@@ -3,6 +3,9 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "list_packages" )) {
 	noperms ();
 } else {
+	if(isset($_POST["truncate_installed_patches"]) and $acl->hasPermission("patch_management")){
+	    db_query("TRUNCATE TABLE ".tbname("installed_patches"));
+	}
 	
 	if ($acl->hasPermission ( "remove_packages" )) {
 		
@@ -31,8 +34,6 @@ if (! $acl->hasPermission ( "list_packages" )) {
 <?php
 	}
 	?>
-
-
 <strong><?php
 	
 	echo TRANSLATION_INSTALLED_MODULES;
@@ -142,6 +143,51 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		echo "</ol>";
 	}
 ?>
+<?php if($acl->hasPermission("patch_management")){
+?>
+<p><strong><?php
+	
+	translate("installed_patches");
+	?>
+</strong></p>
+<p><?php 
+	translate("installed_patches_help");
+?>
+	</p>
+<div id="inst_patch_slide_container">
+<?php
+$pkg = new packageManager();
+$patches = $pkg->getInstalledPatchNames();
+if(count($patches) > 0){
+  echo "<ol id=\"installed_patches\">";
+  foreach($patches as $patch){
+     echo "<li>".htmlspecialchars($patch)."</li>";
+      }
+  echo "</ol>";
+
+?>
+<form id="truncate_installed_patches" action="index.php?action=modules" method="post" onsubmit='return confirm("<?php translate("TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM");?>");'>
+<?php csrf_token_html(); ?>
+<input type="submit" id="truncate_installed_patches" name="truncate_installed_patches" value="<?php translate("TRUNCATE_INSTALLED_PATCHES_LIST");?>">
+</form>
+</div>
+<script type="text/javascript">
+var ajax_options = {
+  success : function(responseText, statusText, xhr, $form){
+  $("div#inst_patch_slide_container").slideUp();
+  
+  }
+  
+
+}
+
+$("form#truncate_installed_patches").ajaxForm(ajax_options); 
+</script>
+
+<?php 
+}
+} ?>
+
 <script type="text/javascript">
 function uninstallModule(url, name){
    if(confirm("Möchten Sie das Modul " + name + " wirklich deinstallieren?")){

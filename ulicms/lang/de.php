@@ -540,4 +540,11 @@ define("TRANSLATION_OG_HELP", "Open Graph Metadaten werden von sozialen Netzwerk
 define("TRANSLATION_OG_DEFAULTS_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Hier können Sie Standardwerte festlegen, die verwendet werden, 
 sofern diese Felder bei einer Seite leer gelassen wurden.");
 
+// Patch Management
+define("TRANSLATION_INSTALLED_PATCHES", "Installierte Patches");
+define("TRANSLATION_INSTALLED_PATCHES_HELP", "Patches sind Dateien, die Fehler in UliCMS korrigieren.");
+define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST", "Liste zurücksetzen");
+define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM",
+"Achtung! Sie leeren den Index der bereits installierten Patches.\\nPatches werden nicht deinstalliert, lediglich die Einträge in der Datenbank werden gelöscht.\\nMöchten Sie fortfahren?");
+
 add_hook ( "lang_de" );
