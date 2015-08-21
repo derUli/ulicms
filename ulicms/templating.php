@@ -71,6 +71,8 @@ function get_og_tags($systemname = null){
    $html .= '<meta property="og:image" content="'.htmlspecialchars($og_image).'" />';
    $html .= "\r\n";
    }
+
+   $html = apply_filter($html, "og_html");
    return $html;
 }
 
