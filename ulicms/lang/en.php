@@ -545,4 +545,6 @@ define("TRANSLATION_TYPE", "Type");
 define("TRANSLATION_IMAGE", "Image");
 
 
+define("TRANSLATION_OG_HELP", "Open Graph Metadata are used by social networks like Facebook, when someone shares a link. If you let a field empty a default value that can be configured in settings will be used.");
+
 add_hook ( "lang_en" );

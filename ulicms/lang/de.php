@@ -536,4 +536,6 @@ define("TRANSLATION_OPEN_GRAPH", "Open Graph");
 define("TRANSLATION_TYPE", "Typ");
 define("TRANSLATION_IMAGE", "Bild");
 
+define("TRANSLATION_OG_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Sofern Felder leer gelassen werden, wird ein Standardwert, der in den Einstellungen festgelegt wird verwendet.");
+
 add_hook ( "lang_de" );
