@@ -298,6 +298,6 @@ div.diff ins {
 }
 
 img.small-preview-image{
-   width: 300px !important;
+   max-width: 300px !important;
    height:auto !important;
 }
