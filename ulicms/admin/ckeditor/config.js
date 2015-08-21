@@ -7,7 +7,7 @@
 CKEDITOR.editorConfig = function(config) {
 	// config.language = 'de';
 	config.ShiftEnterMode = 'p';
-	config.height = '300px';
+    config.height = '300px';
 	if (window.location.href.indexOf("admin/") != -1) {
 		config.filebrowserBrowseUrl = 'kcfinder/browse.php?type=files';
 		config.filebrowserImageBrowseUrl = 'kcfinder/browse.php?type=images';
@@ -26,6 +26,6 @@ CKEDITOR.editorConfig = function(config) {
 	config.entities_latin = false;
 	config.uiColor = '#d1d8d0';
 	config.removePlugins = "link,newpage,templates,preview,print,save,language";
-	config.autoGrow_onStartup = true;
-	config.extraPlugins = 'adv_link';
+	config.autoGrow_onStartup = false;
+	config.extraPlugins = 'adv_link,wordcount';
 };
