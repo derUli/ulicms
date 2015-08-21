@@ -3,10 +3,7 @@
 + Auswahl für Schriftart und Schriftgröße im CKEditor entfernt
 + Folgende Plugins in den CKEditor integriert
   - Auto Embed
-  - Auto Grow
-  - Code tag
   - CodeMirror
-  - Fixed toolbar on top
   - Media Embed
   - Word Count & Char Count Plugin
 + Skin "Office 2013" für CKEditor hinzugefügt
