@@ -536,6 +536,8 @@ define("TRANSLATION_OPEN_GRAPH", "Open Graph");
 define("TRANSLATION_TYPE", "Typ");
 define("TRANSLATION_IMAGE", "Bild");
 
-define("TRANSLATION_OG_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Sofern Felder leer gelassen werden, wird ein Standardwert, der in den Einstellungen festgelegt wird verwendet.");
+define("TRANSLATION_OG_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Sofern Felder leer gelassen werden, wird ein Standardwert, der in den Einstellungen festgelegt werden kann verwendet.");
+define("TRANSLATION_OG_DEFAULTS_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Hier können Sie Standardwerte festlegen, die verwendet werden, 
+sofern diese Felder bei einer Seite leer gelassen wurden.");
 
 add_hook ( "lang_de" );

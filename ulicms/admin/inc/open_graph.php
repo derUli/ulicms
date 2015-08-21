@@ -20,10 +20,9 @@ if (defined ( "_SECURITY" )) {
    }
 ?>
 <h1><?php translate("open_graph");?></h1>
+<p><?php translate("og_defaults_help");?></p>
 <form action="index.php?action=open_graph" id="open_graph" method="post">
 <?php csrf_token_html ();?>
-
-
 <table border=0>
 <tr>
 <td>
@@ -55,7 +54,6 @@ if(!empty($og_url)){
 ?>
 <div><img class="small-preview-image" src="<?php echo htmlspecialchars($og_url);?>"/></div>
 <?php }?>
-
 		<input type="text" id="og_image" name="og_image"
 			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 			value="<?php echo htmlspecialchars($og_image);?>" style="cursor: pointer" /><br /> <a href="#"
