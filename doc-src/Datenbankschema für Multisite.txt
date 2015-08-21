@@ -1,0 +1,26 @@
+Tabelle "sites"
+ID int
+Name String
+enabled Boolean
+
+Tabelle "site_domains"
+ID int
+site_id int foreign_key auf sites.ID
+name String
+
+Tabelle site_properties
+Pfad zu modules, templates und content Ordner der Installation
+ggf. weitere Einstellungen
+
+Site ID 1 ist "default".
+Diese Installation dient als Vorlage für neue Sites.
+
+Beim Anlegen einer neuen Seite werden einfach die Datenbanktabellen geklont und an den Namen wir die Site_ID angehängt
+z.B. ulicms_content_3.
+
+Bei der init Prozedur wird der SERVER_NAME in der Datenbank gesucht.
+Sofern eine Site mit dieser Domain gefunden wird, wird die Variable $_SESSION["site_id"] gesetzt
+tbname() Funktion muss angepasst werden, so dass diese die Site ID aus der Session dran hängt. 
+Jedoch nicht bei site Tabellen.
+
+UliCMS Backend muss einen Umschalter für die Sites bekommen.
