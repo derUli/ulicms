@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<meta name="viewport" content="width=1000, user-scalable=no" />
+<meta name="viewport" content="width=1000, user-scalable=yes" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="css/blue.css" />
 <?php
