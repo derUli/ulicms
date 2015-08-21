@@ -112,7 +112,7 @@ function get_edit_button() {
 	return $html;
 }
 function all_combined_html() {
-	echo all_comined_html ();
+	echo get_all_comined_html ();
 }
 function get_ID() {
 	if (! $page)
