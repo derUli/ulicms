@@ -366,6 +366,8 @@ function openMenuImageSelectWindow(field) {
 			?></option>
 		</select><br />
 		<h3><?php translate("open_graph");?></h3>
+		
+		<p><?php translate("og_help");?></p>
 		<div style="margin-left:20px;">
 		<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title" value='<?php
