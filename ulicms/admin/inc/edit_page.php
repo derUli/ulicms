@@ -370,14 +370,20 @@ function openMenuImageSelectWindow(field) {
 		<p><?php translate("og_help");?></p>
 		<div style="margin-left:20px;">
 		<strong><?php translate("title");?>
-		</strong><br /> <input type="text" name="og_title" value='<?php
+		</strong><br /> <input type="text" name="og_title" value="<?php
 			echo htmlspecialchars ( $row->og_title );
-			?>'> <br />
+			?>"> <br />
 		 <br />
+		 
+		<strong><?php translate("description");?>
+		</strong><br /> <input type="text" name="og_description" value="<?php
+			echo htmlspecialchars ( $row->og_description );
+			?>""> <br />
+		<br />
 		<strong><?php translate("type");?>
-		</strong><br /> <input type="text" name="og_type" value='<?php
+		</strong><br /> <input type="text" name="og_type" value="<?php
 			echo htmlspecialchars ( $row->og_type );
-			?>'> <br /> <br />
+			?>"> <br /> <br />
 		<strong><?php translate("image");?>
 		<br/>
 		<script type="text/javascript">

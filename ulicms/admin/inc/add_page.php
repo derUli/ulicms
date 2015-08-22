@@ -311,10 +311,14 @@ function openMenuImageSelectWindow(field) {
 		<p><?php translate("og_help");?></p>
 		<div style="margin-left:20px;">
 		<strong><?php translate("title");?>
-		</strong><br /> <input type="text" name="og_title" value=''> <br />
+		</strong><br /> <input type="text" name="og_title" value=""> <br />
 		 <br />
+		 
+		<strong><?php translate("description");?>
+		</strong><br /> <input type="text" name="og_description" value=""> <br />
+		<br />
 		<strong><?php translate("type");?>
-		</strong><br /> <input type="text" name="og_type" value=''> <br /> <br />
+		</strong><br /> <input type="text" name="og_type" value=""> <br /> <br />
 		<strong><?php translate("image");?>
 		<br/>
 		<script type="text/javascript">

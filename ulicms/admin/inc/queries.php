@@ -214,6 +214,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 
 		// Open Graph
 		$og_title = db_escape ( $_POST ["og_title"] );	
+		$og_description = db_escape ( $_POST ["og_description"] );	
 		$og_type = db_escape ( $_POST ["og_type"] );	
 		$og_image = db_escape ( $_POST ["og_image"] );		
 		
@@ -287,10 +288,12 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position, 
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`, 
-  `og_title`, `og_type`, `og_image`) 
+  `og_title`, `og_description`, `og_type`, `og_image`) 
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", " . $comments_enabled . ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "', 
   '$meta_description', '$meta_keywords',
-  '$language', '$target', '$category', '$html_file', '$alternate_title', '$menu_image', '$custom_data', '$theme', '$og_title', '$og_type', '$og_image')" ) or die ( db_error () );
+  '$language', '$target', '$category', '$html_file', '$alternate_title', 
+  '$menu_image', '$custom_data', '$theme', '$og_title',
+  '$og_description', '$og_type', '$og_image')" ) or die ( db_error () );
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
 		$content = $unescaped_content;
@@ -375,6 +378,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	}
 	// Open Graph
 	$og_title = db_escape ( $_POST ["og_title"] );	
+  $og_description = db_escape ( $_POST ["og_description"] );	
 	$og_type = db_escape ( $_POST ["og_type"] );	
 	$og_image = db_escape ( $_POST ["og_image"] );	
 	
@@ -388,7 +392,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$language = db_escape ( $_POST ["language"] );
 	add_hook ( "before_edit_page" );
 	db_query ( "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
-	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image' WHERE id=$id" );
+	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description' WHERE id=$id" );
 	
 	$user_id = get_user_id ();
 	$content_id = $id;
