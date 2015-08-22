@@ -31,6 +31,7 @@ function get_og_tags($systemname = null){
      $og_title = $og_data["og_title"];
      $og_type = $og_data["og_type"];
      $og_image = $og_data["og_image"];
+     $og_description = $og_data["og_description"];
      $og_url = getCurrentURL();
    
      // Falls kein og_title für die Seite gesetzt ist, Standardtitel bzw. Headline verwenden
@@ -55,13 +56,24 @@ function get_og_tags($systemname = null){
    }
    
    
+    if(is_null($og_description) or empty($og_description)){
+      $og_description = meta_description();
+   }
+   
    $og_title = apply_filter ( $og_title, "og_title" );
    $og_type = apply_filter ( $og_type, "og_type" );
    $og_url = apply_filter ( $og_url, "og_url" );
    $og_image = apply_filter ( $og_image, "og_image" );
+   $og_description = apply_filter($og_description, "og_description");
    
    $html .= '<meta property="og:title" content="'.htmlspecialchars($og_title).'" />';
    $html .= "\r\n";
+   
+   if(!is_null($og_description) and !empty($og_description)){
+      $html .= '<meta property="og:description" content="'.htmlspecialchars($og_description).'" />';
+      $html .= "\r\n";
+   }
+   
    $html .= '<meta property="og:type" content="'.htmlspecialchars($og_type).'" />';
    $html .= "\r\n";
    
