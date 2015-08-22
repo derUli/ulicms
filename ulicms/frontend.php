@@ -59,10 +59,12 @@ if (strtolower ( getconfig ( "maintenance_mode" ) ) == "on" || strtolower ( getc
 	header ( 'Status: 503 Service Temporarily Unavailable' );
 	header ( 'Retry-After: 60' );
 	header ( "Content-Type: text/html; charset=utf-8" );
-	if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" ))
-		require_once getTemplateDirPath ( $theme ) . "maintenance.php";
-	else
-		die ( get_translation ( "UNDER_MAINTENANCE" ) );
+	if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )){
+  		require_once getTemplateDirPath ( $theme ) . "maintenance.php";
+	}	
+	else {
+ 		die ( get_translation ( "UNDER_MAINTENANCE" ) );
+	}
 	add_hook ( "after_maintenance_message" );
 	die ();
 }
