@@ -95,7 +95,7 @@ function get_og_data($systemname = "") {
 	
 	if (empty ( $systemname ))
 		$systemname = get_frontpage ();
-	$query = db_query ( "SELECT og_title, og_type, og_image FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
+	$query = db_query ( "SELECT og_title, og_type, og_image, og_description FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	if (db_num_rows ( $query ) > 0) {
 		return db_fetch_assoc ( $query );
 	} else {
