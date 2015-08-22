@@ -14,7 +14,7 @@
 [ ] Multisite Fähigkeit.
     seperate Multisite Admin UI unter /msadmin/
     Tabellen mehrfach mit verschiebenen prefixen z.B. ulicms_2_content für Content von Site 2
-[ ] IP Whitelist für Backend Login
+[X] IP Whitelist für Backend Login
 [ ] Cache automatisch bei Änderungen leeren (Optional, per Default aktiviert)
 [ ] Übersetzungen in Datenbank statt in Sprachdateien bzw. "TRANSLATION_OVERRIDES"
 Export der angepassten Übersetzungsdatei möglich
