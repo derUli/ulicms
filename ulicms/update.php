@@ -26,10 +26,9 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "history" ) . "` (
 db_query("ALTER TABLE ".tbname("log")." ADD COLUMN `referrer` varchar(255) DEFAULT NULL");
 
 db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `og_title` varchar(255) DEFAULT ''");
-
 db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `og_type` varchar(255) DEFAULT ''");
-
 db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `og_image` varchar(255) DEFAULT ''");
+db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `og_description` varchar(255) DEFAULT ''");
 
 // comments Ordner weggelöschen, sofern er noch existiert, da dieser nicht mehr benötigt wird.
 $comments_dir = ULICMS_ROOT . "/comments";

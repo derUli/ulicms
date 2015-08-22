@@ -558,6 +558,7 @@ echo TRANSLATION_TITLE;
   `og_title` varchar(255) DEFAULT '',
   `og_type` varchar(255) DEFAULT '',
   `og_image` varchar(255) DEFAULT '',
+  `og_description` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" ) or die ( mysqli_error ( $connection ) );
 			
