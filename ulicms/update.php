@@ -37,11 +37,10 @@ db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `og_title` varchar(255) D
 db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `og_type` varchar(255) DEFAULT ''");
 db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `og_image` varchar(255) DEFAULT ''");
 db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `og_description` varchar(255) DEFAULT ''");
+setconfig("og_type", "article");
 
 // comments Ordner weggelöschen, sofern er noch existiert, da dieser nicht mehr benötigt wird.
 $comments_dir = ULICMS_ROOT . "/comments";
-
-setconfig("og_type", "article");
 
 if(is_dir($comments_dir)){
    @SureRemoveDir ( $comments_dir, true );
