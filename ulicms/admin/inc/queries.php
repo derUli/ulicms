@@ -448,13 +448,19 @@ if (! empty ( $_FILES ['favicon_upload_file'] ['name'] ) and $acl->hasPermission
 	$filename = $favicon_upload_file ['name'];
 	$extension = file_extension ( $filename );
 	
-	if ($type == "image/x-icon" or $type == "image/vnd.microsoft.icon" or $type == "image/ico" or $type == "image/icon" or $type == "text/ico" or $type == "text/ico" or $type == "application/ico") {
+	if (startsWith($type, "image/")) {
 		
 		$new_filename = "../content/images/favicon.ico";
 		
 		add_hook ( "before_upload_favicon" );
-		move_uploaded_file ( $favicon_upload_file ['tmp_name'], $new_filename );
-		
+
+		// move_uploaded_file ( $favicon_upload_file ['tmp_name'], $new_filename );
+		require_once ULICMS_ROOT . '/classes/class-php-ico.php';
+                $source = $favicon_upload_file ['tmp_name'];
+                $destination = $new_filename;
+                $ico_lib = new PHP_ICO( $source, array( array( 32, 32 ), array( 64, 64 ) ) );
+                $ico_lib->save_ico( $destination );
+
 		add_hook ( "after_upload_favicon" );
 		ulicms_redirect ( "index.php?action=favicon" );
 	} else {

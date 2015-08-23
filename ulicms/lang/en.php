@@ -514,7 +514,7 @@ define ( "TRANSLATION_LEFT", "Left" );
 define ( "TRANSLATION_RIGHT", "Right" );
 
 // Favicon
-define ( "TRANSLATION_FAVICON_INFOTEXT", "You can upload a <a href=\"http://en.wikipedia.org/wiki/Favicon\">Favicon</a> for your website here. It will be shown near the tabs and in the favorites in your browser. The file must be in .ico file format. The favicon will be automatically embedded in your page." );
+define ( "TRANSLATION_FAVICON_INFOTEXT", "You can upload a <a href=\"http://en.wikipedia.org/wiki/Favicon\">Favicon</a> for your website here. It will be shown near the tabs and in the favorites in your browser. The uploaded file will be converted into the suitable file format." );
 define ( "TRANSLATION_CURRENT_FAVICON", "Current favicon" );
 define ( "TRANSLATION_UPLOAD_NEW_FAVICON", "Upload new favicon" );
 define ( "TRANSLATION_FAVICON", "Favicon" );

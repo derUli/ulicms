@@ -506,7 +506,7 @@ define ( "TRANSLATION_LEFT", "Links" );
 define ( "TRANSLATION_RIGHT", "Rechts" );
 
 // Favicon
-define ( "TRANSLATION_FAVICON_INFOTEXT", "Hier können Sie ein <a href=\"http://de.wikipedia.org/wiki/Favicon\">Favicon</a> für Ihre Website hochladen. Es wird meistens in den Browsertabs neben dem Titel der Seite angezeigt, und in den Lesezeichen im Browser. Die Datei muss im .ico Format vorliegen. Das Favicon wird nach dem Upload automatisch in die Seite eingebunden. Einen Generator für Favicons gibt es [<a href=\"http://www.favicon-generator.de/\" target=\"_blank\">hier</a>]." );
+define ( "TRANSLATION_FAVICON_INFOTEXT", "Hier können Sie ein <a href=\"http://de.wikipedia.org/wiki/Favicon\">Favicon</a> für Ihre Website hochladen. Die Grafikdatei wird automatisch in das passende Format konvertiert.");
 define ( "TRANSLATION_CURRENT_FAVICON", "Derzeitiges Favicon" );
 define ( "TRANSLATION_UPLOAD_NEW_FAVICON", "Neues Favicon hochladen" );
 define ( "TRANSLATION_FAVICON", "Favicon" );

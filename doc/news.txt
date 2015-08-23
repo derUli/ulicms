@@ -40,3 +40,4 @@
 + Es können nun Open Graph Meta-Tags festgelegt werden.
 + Bugfix: API-Funktion all_combined_html() korrigiert. Der Aufruf dieser Methode führte zuvor zu einer Endlosschleife
 + Liste der bereits installierten Patches zur Paketverwaltung hinzugefügt
++ Favicon Generator akzeptiert nun auch andere Formate als .ico. Die Grafikdatei wird automatisch in das Favicon Format konvertiert
