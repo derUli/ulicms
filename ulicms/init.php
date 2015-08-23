@@ -372,3 +372,10 @@ if (! getconfig ( "session_name" )) {
 session_name ( getconfig ( "session_name" ) );
 
 @include_once "lib/string_functions.php";
+
+// Automatisches Update beim Seitenaufruf wenn update.php existiert
+$update_script = ULICMS_ROOT . "/update.php";
+if(file_exists($update_script) and is_writable($update_script)){
+   $_GET["include_update"] = true;
+   include $update_script;
+}

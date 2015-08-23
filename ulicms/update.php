@@ -3,8 +3,12 @@ include_once "init.php";
 define("SKIP_TABLE_CHECK", true);
 
 // Move folders to content Folder
-@rename(ULICMS_ROOT."/modules", ULICMS_ROOT."/content/modules");
-@rename(ULICMS_ROOT."/templates", ULICMS_ROOT."/content/templates");
+if(file_exists(ULICMS_ROOT."/modules")){
+  @rename(ULICMS_ROOT."/modules", ULICMS_ROOT."/content/modules");
+}
+if(file_exists(ULICMS_ROOT."/templates")){
+  @rename(ULICMS_ROOT."/templates", ULICMS_ROOT."/content/templates");
+}
 
 // Änderungen in der Datenbank von 9.0.1
 db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "mails" ) . "` (
@@ -49,6 +53,9 @@ setconfig ( "db_schema_version", "9.0.2" );
 $pkg = new PackageManager ();
 $pkg->truncateInstalledPatches ();
 
-// @unlink ("update.php");
-ulicms_redirect ( "admin/" );
 
+// @unlink ("update.php");
+
+if(!isset($_GET["include_update"])){
+   ulicms_redirect ( "admin/" );
+}
