@@ -378,4 +378,5 @@ $update_script = ULICMS_ROOT . "/update.php";
 if(file_exists($update_script) and is_writable($update_script)){
    $_GET["include_update"] = true;
    include $update_script;
+   clearCache();
 }
