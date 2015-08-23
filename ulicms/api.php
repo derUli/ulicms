@@ -855,9 +855,9 @@ if (! function_exists ( "cleanString" )) {
 }
 function getTemplateDirPath($sub = "default") {
 	if (is_admin_dir ())
-		$templateDir = "../templates/";
+		$templateDir = "../content/templates/";
 	else
-		$templateDir = "templates/";
+		$templateDir = "content/templates/";
 	
 	$templateDir = $templateDir . $sub . "/";
 	return $templateDir;
@@ -1023,10 +1023,10 @@ function buildSEOUrl($page = false, $redirection = null) {
 function getModulePath($module) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
-		$module_folder = "modules/";
+		$module_folder = "content/modules/";
 	}  // Backend Directory
 else {
-		$module_folder = "../modules/";
+		$module_folder = "../content/modules/";
 	}
 	$available_modules = Array ();
 	return $module_folder . $module . "/";

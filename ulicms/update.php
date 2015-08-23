@@ -2,6 +2,10 @@
 include_once "init.php";
 define("SKIP_TABLE_CHECK", true);
 
+// Move folders to content Folder
+rename(ULICMS_ROOT."/modules", ULICMS_ROOT."/content/modules");
+rename(ULICMS_ROOT."/templates", ULICMS_ROOT."/content/templates");
+
 // Änderungen in der Datenbank von 9.0.1
 db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "mails" ) . "` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
