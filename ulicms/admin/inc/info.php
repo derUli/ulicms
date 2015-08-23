@@ -38,6 +38,8 @@ if (defined ( "_SECURITY" )) {
 		<br/>
 		<a href="http://mobiledetect.net/" target="_blank">Mobile_Detect</a> Copyright &copy; 2011-2015 Serban Ghita, Nick Ilyin and contributors.
 <br/>
+<a href="https://github.com/chrisbliss18/php-ico" target="_blank">PHP ICO - The PHP ICO Generator</a> - Copyright 2011-2013 Chris Jean
+<br/>
 
 
 <a href="https://plugins.jquery.com/url/" target="_blank">jQuery URL Plugin</a> Copyright (C) 2011-2012 <a href="http://www.websanova.com" target="_blank">Websanova</a>
