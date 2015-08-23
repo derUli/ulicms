@@ -773,11 +773,6 @@ ON DELETE SET NULL";
 				@mkdir ( "../modules/", 0777, true );
 			}
 			
-			@chmod ( "../templates/oben.php", 0777 );
-			@chmod ( "../templates/unten.php", 0777 );
-			// @chmod ("../templates/news.txt", 0777);
-			@chmod ( "../templates/maintenance.php", 0777 );
-			
 			$config_string = '<?php
 class config extends baseConfig{
 
