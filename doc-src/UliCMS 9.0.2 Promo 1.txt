@@ -17,7 +17,7 @@ Der grafische Open Source WYSIWYG HTML-Editor CKEditor wurde auf Version 4.5.3 a
   - Media Embed
   - Word Count & Char Count Plugin
   
-Der neue Skin "Office 2013", der von Microsoft's beliebtes Office Paket inspiriert ist, wurde zum CKeditor hinzugefügt, was ein alternatives Look-and-Feel für den Anwender bringt.
+Der neue Skin "Office 2013", der von Microsoft's beliebtem Office Paket inspiriert ist, wurde zum CKeditor hinzugefügt, was ein alternatives Look-and-Feel für den Anwender bringt.
 
 Sicherheit:
 Laut den deutschen Gesetzen ist es nicht erlaubt, IP-Adressen zu speichern. Jedoch kann es aus bestimmten Gründen, etwa zur Spambekämpfung notwendig sein, kurzzeitig IP-Adressen zu speichern.
