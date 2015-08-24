@@ -18,3 +18,9 @@ Laut den deutschen Gesetzen ist es nicht erlaubt, IP-Adressen zu speichern. Jedo
 Es kann nun optional eingestellt werden, dass alle IP-Adressen im Zugriffs-Log in der Datenbank nach 48 Stunden entfernt werden.
 
 Die IP-Whitelist ermöglicht, den Zugriff auf das UliCMS Backend auf bestimmte IP-Adressen zu beschränken. Dies kann insbesondere in Firmennetzwerken mit statischer IP-Adresse die Sicherheit des Systems enorm erhöhen
+
+Die Patch-Management Werkzeuge wurden erweitert.
+In der Paketverwaltung ist nun eine Auflistung der bereits installierten Patches vorhanden. Dies gibt dem Systemadministrator einen Überblick über den Patch Status der Installation.
+
+Usability:
+
