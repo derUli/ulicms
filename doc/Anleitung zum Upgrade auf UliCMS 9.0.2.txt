@@ -17,7 +17,8 @@ damit der Upload der Dateien schneller geht
 
 3. Breaking Changes
 
-Die Ordner "modules" und "templates" sind ab dieser Version von UliCMS im content Ordner.
+Die Ordner "modules" und "templates" sind ab dieser Version von UliCMS im content Ordner, statt wie bisher direkt
+unter UliCMS_ROOT.
 Das Update Script versucht, die Ordner automatisch zu verschieben.
 Falls dies nicht klappen sollte, müssen Sie die Ordner manuell verschieben.
 Wenn Sie Pakete installieren möchten, die für ältere Versionen von UliCMS gedacht sind, 
