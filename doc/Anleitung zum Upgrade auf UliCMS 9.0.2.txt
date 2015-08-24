@@ -28,7 +28,7 @@ müssen Sie die Ordner nach der Installation des Moduls manuell verschieben.
 Sichern Sie vor dem Upgrade Ihre UliCMS Installation.
 Sichern Sie die Datenbank und die Dateien des Systems.
 
-5. Durchführung
+5. Durchführung des Upgrades
 
 Laden Sie den Inhalt des Ordners "ulicms" auf Ihren Webserver hoch.
 Lassen Sie die bereits vorhandenen Dateien ersetzen.
