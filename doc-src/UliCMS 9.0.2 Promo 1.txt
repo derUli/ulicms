@@ -5,12 +5,18 @@ UliCMS hat alle Features, die Ihr Geschäft heute und in der Zukunft des Interne
 
 Mit UliCMS 9.0.2 erschien eine neue Version, die zum Ziel hat, Ihre Arbeit noch einfacher als in den Vorgängerversionen zu machen.
 
-WYSIWYG HTML-Editor
-CKEditor wurde auf Version 4.5.3 aktualisiert und mit den folgenden Plugins integriert:
+Open Graph:
+Die Internetnutzung hat sich in den letzten Jahren stark verändert.
+Soziale Netzwerke nehmen einen großen Anteil der Internetnutzung von vielen Menschen an. Open Graph ist ein Standard für zusätzliche Metainformationen, welcher vor allem für die Generierung der Linkvorschau auf Facebook und anderen sozialen Netzwerken genutzt wird.
+UliCMS 9.0.2 ermöglicht Ihnen Open Graph Metainformationen je Seite festzulegen, und hilft Ihnen somit bei der Verbreitung Ihrer Links in sozialen Netzwerken
+
+WYSIWYG HTML-Editor:
+Der grafische Open Source WYSIWYG HTML-Editor CKEditor wurde auf Version 4.5.3 aktualisiert und mit den folgenden Plugins integriert:
   - Auto Embed
   - CodeMirror
   - Media Embed
   - Word Count & Char Count Plugin
+  
 Der neue Skin "Office 2013", der von Microsoft's beliebtes Office Paket inspiriert ist, wurde zum CKeditor hinzugefügt, was ein alternatives Look-and-Feel für den Anwender bringt.
 
 Sicherheit:
@@ -23,4 +29,5 @@ Die Patch-Management Werkzeuge wurden erweitert.
 In der Paketverwaltung ist nun eine Auflistung der bereits installierten Patches vorhanden. Dies gibt dem Systemadministrator einen Überblick über den Patch Status der Installation.
 
 Usability:
-
+UliCMS 9.0.2 macht verstärkten Gebrauch von der AJAX-Technologie, die es ermöglicht, Vorgänge auszuführen, ohne die Seite komplett neu zu laden.
+Insbesondere das Löschen von Datensätzen ist nun schneller abgeschlossen.
