@@ -32,3 +32,4 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
 [ ] Möglichkeit in einem CKEditor eine eigene Wartungsmeldung zu erstellen
 [X] Neue Paketquelle für 9.0.2
 [ ] Datenbankdiagramm und Liste der Hooks aktualisieren
+[ ] Werbematerial als PDF erstellen
