@@ -243,12 +243,14 @@ function get_redirection($page = null) {
 	return null;
 }
 function get_theme($page = null) {
-	if (! $page)
+	if (! $page){
 		$page = get_requested_pagename ();
+        }
 	$theme = getconfig ( "theme" );
 	$mobile_theme = getconfig ( "mobile_theme" );
-	if ($mobile_theme and ! empty ( $mobile_theme ) and is_mobile ())
+	if ($mobile_theme and ! empty ( $mobile_theme ) and is_mobile ()){
 		$theme = $mobile_theme;
+        }
 	
 	if (is_200 ()) {
 		$sql = "SELECT `theme` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
@@ -272,14 +274,17 @@ function signature() {
 	}
 }
 function get_signature($page = null) {
-	if (! is_200 ())
+	if (! is_200 ()){
 		return "";
+        }
 	
-	if (! $page)
+	if (! $page){
 		$page = get_requested_pagename ();
+        }
 	
-	if (containsModule ( $page ))
+	if (containsModule ( $page )){
 		return "";
+        }
 	
 	$sql = "SELECT `signature` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
