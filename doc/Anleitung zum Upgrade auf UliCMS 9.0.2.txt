@@ -19,7 +19,7 @@ Außerdem enthält es wichtige Hinweise, die zu beachten sind.
 
 2. Voraussetzungen
 
-Ein Upgrade auf UliCMS 9.0.2 ist von UliCMs Version 9.0.0 oder Version 9.0.1 möglich.
+Ein Upgrade auf UliCMS 9.0.2 ist von UliCMS Version 9.0.0 oder Version 9.0.1 möglich.
 Sie benötigen einen Zugang zu dem Webserver per FTP (Filezilla) oder ähnliches.
 
 Es ist sinvoll, die Anzahl der gleichzeitigen Dateiübertragungen in den Einstellungen von Filezilla zu erhöhen, 
