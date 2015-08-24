@@ -1,7 +1,6 @@
 [X] CSRF Lücke in Get Requests fixen, die Lücke wurde von Ankit Bharathan von provensec llc entdeckt
     - Delete Aktionen sollen per Post statt per Get erfolgen und ein Token nutzen
     - <input type="image" statt Bildlinks
-[ ] Option "Alle Patches automatisch jede Nacht installieren"
 [ ] Tabelle für Sites schon mal anlegen (Multisite), Datensatz für Standardseite anlegen, Multisite Funktion noch nicht implementieren.
 [X] "Option IP-Adressen nach 48 Stunden löschen" - Für log-Tabelle
 [X] Achtung! Versionsnummer und Copyright Jahr anpassen
@@ -31,5 +30,5 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
         [ ] Link auf Liste der OG Typen
 [X] Feld für og:description hinzufügen
 [ ] Möglichkeit in einem CKEditor eine eigene Wartungsmeldung zu erstellen
-[ ] Neue Paketquelle für 9.0.2
+[X] Neue Paketquelle für 9.0.2
 [ ] Datenbankdiagramm und Liste der Hooks aktualisieren
