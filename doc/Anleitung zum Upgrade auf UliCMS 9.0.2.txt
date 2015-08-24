@@ -2,6 +2,15 @@ Anleitung zum Upgrade auf UliCMS 9.0.2
 
 =============================================
 
+0. Inhaltsverzeichnis
+   1. Vorwort
+   2. Voraussetzungen
+   3. Breaking Changes
+   4. Datensicherung
+   5. Durchführung des Upgrades
+   6. Troubleshooting
+   
+
 1. Vorwort
 
 Dieses Dokument enthält eine Anleitung zum Upgrade auf UliCMS 9.0.2.
