@@ -4,3 +4,17 @@ mittelgroßen Webseiten. Die Software verbindet unvergleichbare Stabilität im O
 UliCMS hat alle Features, die Ihr Geschäft heute und in der Zukunft des Internets benötigt. Dazu zählen WYSIWYG Inhalte Bearbeitung, eine individuelle Rechteverwaltung über eine Access Control List, sowie einen integrierten Werbebanner Rotator.
 
 Mit UliCMS 9.0.2 erschien eine neue Version, die zum Ziel hat, Ihre Arbeit noch einfacher als in den Vorgängerversionen zu machen.
+
+WYSIWYG HTML-Editor
+CKEditor wurde auf Version 4.5.3 aktualisiert und mit den folgenden Plugins integriert:
+  - Auto Embed
+  - CodeMirror
+  - Media Embed
+  - Word Count & Char Count Plugin
+Der neue Skin "Office 2013", der von Microsoft's beliebtes Office Paket inspiriert ist, wurde zum CKeditor hinzugefügt, was ein alternatives Look-and-Feel für den Anwender bringt.
+
+Sicherheit:
+Laut den deutschen Gesetzen ist es nicht erlaubt, IP-Adressen zu speichern. Jedoch kann es aus bestimmten Gründen, etwa zur Spambekämpfung notwendig sein, kurzzeitig IP-Adressen zu speichern.
+Es kann nun optional eingestellt werden, dass alle IP-Adressen im Zugriffs-Log in der Datenbank nach 48 Stunden entfernt werden.
+
+Die IP-Whitelist ermöglicht, den Zugriff auf das UliCMS Backend auf bestimmte IP-Adressen zu beschränken. Dies kann insbesondere in Firmennetzwerken mit statischer IP-Adresse die Sicherheit des Systems enorm erhöhen
