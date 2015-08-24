@@ -554,5 +554,7 @@ define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST", "Reset List");
 define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM",
 "Warning! You are about to truncate the list of installed patches.\\nThis will not uninstall any patches. Only database entries will be deleted.\\nDo you want to continue?");
 
+// Favicon Upload
+define("TRANSLATION_HIGH_RESOLUTION", "High Resolution");
 
 add_hook ( "lang_en" );

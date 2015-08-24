@@ -547,4 +547,7 @@ define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST", "Liste zurücksetzen");
 define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM",
 "Achtung! Sie leeren den Index der bereits installierten Patches.\\nPatches werden nicht deinstalliert, lediglich die Einträge in der Datenbank werden gelöscht.\\nMöchten Sie fortfahren?");
 
+// Favicon Upload
+define("TRANSLATION_HIGH_RESOLUTION", "Hohe Auflösung");
+
 add_hook ( "lang_de" );

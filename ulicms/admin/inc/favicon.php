@@ -42,7 +42,14 @@ if (isset ( $_GET ["error"] )) {
 		?>
 			</td>
 		
-		
+		</tr>
+                <tr>
+
+                <td><label for="high_resolution"><strong><?php translate("high_resolution");?></strong></label>
+</td>
+                <td><input type="checkbox" id="high_resolution" name="high_resolution" value="high_resolution"></strong>
+                </td>
+		</tr>
 		<tr>
 			<td width=480><strong><?php
 		
@@ -51,7 +58,7 @@ if (isset ( $_GET ["error"] )) {
 			</strong></td>
 			<td><input name="favicon_upload_file" type="file"> <br /></td>
 		
-		
+		</tr>
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit"
