@@ -253,13 +253,15 @@ if ($useragent) {
 
 @ini_set ( 'user_agent', ULICMS_USERAGENT );
 
-if (! getconfig ( "hide_meta_generator" ))
+if (! getconfig ( "hide_meta_generator" )){
 	@header ( 'X-Powered-By: UliCMS Release ' . cms_version () );
+}
 
 $memory_limit = getconfig ( "memory_limit" );
 
-if ($memory_limit !== false)
+if ($memory_limit !== false){
 	@ini_set ( 'memory_limit', $memory_limit );
+}
 
 if (in_array ( tbname ( "log" ), $existing_tables )) {
 	$log_ip = getconfig ( "log_ip" );
