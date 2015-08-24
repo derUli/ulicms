@@ -8,7 +8,7 @@ Mit UliCMS 9.0.2 erschien eine neue Version, die zum Ziel hat, Ihre Arbeit noch 
 Open Graph:
 Die Internetnutzung hat sich in den letzten Jahren stark verändert.
 Soziale Netzwerke nehmen einen großen Anteil der Internetnutzung von vielen Menschen an. Open Graph ist ein Standard für zusätzliche Metainformationen, welcher vor allem für die Generierung der Linkvorschau auf Facebook und anderen sozialen Netzwerken genutzt wird.
-UliCMS 9.0.2 ermöglicht Ihnen Open Graph Metainformationen je Seite festzulegen, und hilft Ihnen somit bei der Verbreitung Ihrer Links in sozialen Netzwerken
+UliCMS 9.0.2 ermöglicht Ihnen Open Graph Metainformationen je Seite festzulegen, und hilft Ihnen somit bei der Verbreitung Ihrer Links in sozialen Netzwerken.
 
 WYSIWYG HTML-Editor:
 Der grafische Open Source WYSIWYG HTML-Editor CKEditor wurde auf Version 4.5.3 aktualisiert und mit den folgenden Plugins integriert:
