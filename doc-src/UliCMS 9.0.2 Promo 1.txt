@@ -1,4 +1,6 @@
 UliCMS ist die ideale Plattform für die Entwicklung von kleinen bis
 mittelgroßen Webseiten. Die Software verbindet unvergleichbare Stabilität im Open Source CMS Umfeld mit einem niedrigen Wartungsaufwand und einfacher Bedienung. Denn schließlich möchten Sie als Webmaster Ihr Projekt umsetzen, und nicht Ihre Zeit für die Wartung eines CMS verschwenden.
 
-Mit UliCMS 9.0.2 erschien eine neue Version der deutschen Open Source Web Content Management Lösung, die zum Ziel hat, Ihre Arbeit noch einfacher als in den Vorgängerversionen zu machen.
+UliCMS hat alle Features, die Ihr Geschäft heute und in der Zukunft des Internets benötigt. Dazu zählen WYSIWYG Inhalte Bearbeitung, eine individuelle Rechteverwaltung über eine Access Control List, sowie einen integrierten Werbebanner Rotator.
+
+Mit UliCMS 9.0.2 erschien eine neue Version, die zum Ziel hat, Ihre Arbeit noch einfacher als in den Vorgängerversionen zu machen.
