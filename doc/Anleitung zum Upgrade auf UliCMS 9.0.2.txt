@@ -1,0 +1,53 @@
+Anleitung zum Upgrade auf UliCMS 9.0.2
+
+=============================================
+
+1. Vorwort
+
+Dieses Dokument enthält eine Anleitung zum Upgrade auf UliCMS 9.0.2.
+Außerdem enthält es wichtige Hinweise, die zu beachten sind.
+
+2. Voraussetzungen
+
+Ein Upgrade auf UliCMS 9.0.2 ist von UliCMs Version 9.0.0 oder Version 9.0.1 möglich.
+Sie benötigen einen Zugang per FTP (Filezilla) oder ähnliches.
+
+Es ist sinvoll, die Anzahl der gleichzeitigen Dateiübertragungen in den Einstellungen von Filezilla zu erhöhen, 
+damit der Upload der Dateien schneller geht
+
+3. Breaking Changes
+
+Die Ordner "modules" und "templates" sind ab dieser Version von UliCMS im content Ordner.
+Das Update Script versucht, die Ordner automatisch zu verschieben.
+Falls dies nicht klappen sollte, müssen Sie die Ordner manuell verschieben.
+Wenn Sie Pakete installieren möchten, die für ältere Versionen von UliCMS gedacht sind, 
+müssen Sie die Ordner nach der Installation des Moduls manuell verschieben.
+
+4. Datensicherung
+
+Sichern Sie vor dem Upgrade Ihre UliCMS Installation.
+Sichern Sie die Datenbank und die Dateien des Systems.
+
+5. Durchführung
+
+Laden Sie den Inhalt des Ordners "ulicms" auf Ihren Webserver hoch.
+Lassen Sie die bereits vorhandenen Dateien ersetzen.
+Warten Sie bis der Upload aller Dateien abgeschlossen ist.
+
+Stellen Sie anschließend sicher, dass die Dateirechte korrekt gesetzt sind.
+Bei einem Webhosting wie dieses z.B. von Strato angeboten wird, müssen die Rechte aller Dateien und Ordner einer UliCMS Installation in der Regel auf Oktalwert 0755 stehen.
+
+Rufen Sie nun das Script update.php im Browser auf.
+Dieses erreichen Sie unter einer Adresse wie http://www.meinedomain.de/update.php.
+Sofern Sie den Fehler "404 Not Found" erhalten, und die Datei update.php nicht mehr auf Ihrem Webspace vorhanden ist, wurde das update-Skript bereits automatisch vom System ausgeführt.
+
+Loggen Sie sich nun in das CMS ein und leeren Sie den Cache.
+Sofern Sie eine andere Paketquelle als die Standard Paketquelle augewählt haben, ändern Sie diese auf eine Paketquelle für die neue UliCMS Version.
+
+6. Troubleshooting
+
+Sofern Fehler auftreten (z.B. weiße Seite) setzen Sie in der Konfigurationsdatei cms-config.php die Variable
+$debug = true;
+um die Ausgabe von Fehlermeldungen zu aktivieren.
+
+Wenn der Fehler durch ein Modul verursacht wird, prüfen Sie, ob eine neue Version des Moduls verfügbar ist, und aktualisieren Sie dieses, in dem Sie die neue Version des betroffenen Moduls über die alte drüber installierten.

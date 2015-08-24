@@ -1,6 +1,6 @@
 <?php
-include_once "init.php";
 define("SKIP_TABLE_CHECK", true);
+include_once "init.php";
 
 // Move folders to content Folder
 if(file_exists(ULICMS_ROOT."/modules")){
