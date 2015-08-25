@@ -557,4 +557,8 @@ define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM",
 // Favicon Upload
 define("TRANSLATION_HIGH_RESOLUTION", "High Resolution");
 
+// Multisite
+define("TRANSLATION_WEBSITE", "Website");
+define("TRANSLATION_DEFAULT_WEBSITE", "[Default]");
+
 add_hook ( "lang_en" );
