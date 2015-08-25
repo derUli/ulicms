@@ -301,3 +301,7 @@ img.small-preview-image{
    max-width: 300px !important;
    height:auto !important;
 }
+
+form#site-form{
+   margin-bottom:20px;
+}

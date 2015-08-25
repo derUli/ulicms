@@ -536,7 +536,7 @@ $('#clear_cache')
 <div class="clear"></div>
 <div id="pbody">
 <strong><?php translate("website");?></strong><br/>
-<form action="index.php?action=<?php htmlspecialchars($_GET["action"]);?>" id="site-form">
+<form action="index.php?action=<?php echo htmlspecialchars($_GET["action"]);?>" id="site-form">
 <select name="site-id" onchange="$('form#site-form').submit();">
 <option value="default"><?php translate("default_website");?></option>
 </select>
