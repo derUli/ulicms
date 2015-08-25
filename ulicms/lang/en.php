@@ -561,4 +561,6 @@ define("TRANSLATION_HIGH_RESOLUTION", "High Resolution");
 define("TRANSLATION_WEBSITE", "Website");
 define("TRANSLATION_DEFAULT_WEBSITE", "[Default]");
 
+define("TRANSLATION_MOBILE_CSS", "Mobile CSS");
+
 add_hook ( "lang_en" );

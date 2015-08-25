@@ -98,6 +98,19 @@ if (defined ( "_SECURITY" )) {
 			
 }
 			?>
+			
+			<?php
+		if (file_exists ( getTemplateDirPath ( $theme ) . "mobile.css" )) {
+			?>
+				<p><a href="?action=templates&edit=mobile.css"><?php
+			
+			echo TRANSLATION_MOBILE_CSS;
+			?></a></p>
+
+				<?php
+		
+}
+		?>
 	<?php
 			if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 				?>

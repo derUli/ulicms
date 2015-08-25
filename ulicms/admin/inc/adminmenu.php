@@ -255,6 +255,7 @@ if (defined ( "_SECURITY" )) {
 		
 }
 		?>
+		
 
 				<?php
 		if (file_exists ( getTemplateDirPath ( $theme ) . "style.css" )) {
@@ -262,6 +263,19 @@ if (defined ( "_SECURITY" )) {
 				<li><a href="?action=templates&edit=style.css"><?php
 			
 			echo TRANSLATION_CSS;
+			?></a></li>
+
+				<?php
+		
+}
+		?>
+		
+			<?php
+		if (file_exists ( getTemplateDirPath ( $theme ) . "mobile.css" )) {
+			?>
+				<li><a href="?action=templates&edit=mobile.css"><?php
+			
+			echo TRANSLATION_MOBILE_CSS;
 			?></a></li>
 
 				<?php
