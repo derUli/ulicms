@@ -31,6 +31,7 @@ In der Paketverwaltung ist nun eine Auflistung der bereits installierten Patches
 Usability:
 UliCMS 9.0.2 macht verstärkten Gebrauch von der AJAX-Technologie, die es ermöglicht, Vorgänge auszuführen, ohne die Seite komplett neu zu laden.
 Insbesondere das Löschen von Datensätzen geht nun schneller von der Hand.
+Die Bedienbarkeit bestimmter Formularelemente auf mobilen Geräten wurde desweiteren verbessert.
 
 Der Favicon Generator akzeptiert nun auch andere Grafikformate.
 Diese werden vom System automatisch in das ICO-Dateiformat konvertiert.
