@@ -1,5 +1,12 @@
 <?php
 
+function template_part($name, $theme = null){
+   if(!$theme){
+      $theme = get_theme();
+   }
+   $file = getTemplateDirPath ( $theme ) . $name.".php";
+}
+
 function html5_doctype(){
    echo get_html5_doctype();
 }
