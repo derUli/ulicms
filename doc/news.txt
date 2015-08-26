@@ -42,5 +42,4 @@
 + Liste der bereits installierten Patches zur Paketverwaltung hinzugefügt
 + Favicon Generator akzeptiert nun auch andere Formate als .ico. Die Grafikdatei wird automatisch in das Favicon Format konvertiert
 + "modules" und "templates" Ordner nach "content" verschoben
-+ "Webseite" Umschalter für Multisite hinzugefügt, noch ohne Funktion
 + Mobile CSS nun auch per Browser bearbeitbar
