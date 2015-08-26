@@ -305,3 +305,7 @@ img.small-preview-image{
 form#site-form{
    margin-bottom:20px;
 }
+
+div#site-switcher-container{
+  display:none;
+}

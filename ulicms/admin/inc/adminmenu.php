@@ -549,6 +549,7 @@ $('#clear_cache')
 
 <div class="clear"></div>
 <div id="pbody">
+<div id="site-switcher-container">
 <strong><?php translate("website");?></strong><br/>
 <form action="index.php" id="site-form" method="GET">
 <input name="action" type="hidden" value="<?php echo htmlspecialchars($_GET["action"]);?>">
@@ -556,6 +557,7 @@ $('#clear_cache')
 <option value="default"><?php translate("default_website");?></option>
 </select>
 </form>
+</div>
 	<?php
     }
 ?>
