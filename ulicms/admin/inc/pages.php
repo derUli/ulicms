@@ -434,6 +434,8 @@ $(window).load(function(){
                    $filter_sql .= "AND (title LIKE '".db_escape($_SESSION["filter_title"])."%' or title LIKE '%".db_escape($_SESSION["filter_title"])."' or title LIKE '%".db_escape($_SESSION["filter_title"])."%' or title LIKE '".db_escape($_SESSION["filter_title"])."' )";
 		}
 
+		 $filter_sql .= " AND `type` = 'page'";
+		
          $query = db_query ("SELECT * FROM " . tbname ("content") . " " . $filter_sql . "ORDER BY $order,position, systemname ASC") or die (db_error ());
          if (db_num_rows ($query) > 0){
              while ($row = db_fetch_object ($query)){
