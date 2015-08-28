@@ -29,7 +29,7 @@ def main():
     ignore = ('.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
                        "Releases", "cms-config.php", "content", "services",
                        ".gitignore", ".htaccess", "installer.aus", "installer",
-              "modules", "templates", "fonts.php", "config.php", "contents.css",
+              "modules", "templates", "fonts.php","contents.css",
               "config.js", "comments", "*~", ".settings", ".project", ".buildpath")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)

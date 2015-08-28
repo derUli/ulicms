@@ -46,6 +46,12 @@ if(is_dir($comments_dir)){
    @SureRemoveDir ( $comments_dir, true );
 }
 
+// Delete .htaccess in content Folder
+$content_htaccess = ULICMS_ROOT."/content/.htaccess";
+if(file_exists($content_htaccess)){
+   @unlink($content_htaccess);
+}
+
 setconfig ( "db_schema_version", "9.0.2" );
 
 // Patch Manager zurücksetzen
