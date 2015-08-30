@@ -122,7 +122,7 @@ div#pbody{
 <title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript">
 $(document).ready(function(){
-        $("div#pbody").fadeTo('fast', 1);
+        $("div#pbody").fadeTo('slow', 1);
 		
         $(".tablesorter").tablesorter({widgets: ["zebra"]}); 
 		
@@ -132,7 +132,7 @@ $(document).ready(function(){
 	  var eventListeners = $._data($(this)[0], "events");
 	  if(href.charAt(0) != "#" && target != "_blank" && !eventListeners){
       // do animation
-      $('div#pbody').fadeTo('fast', 0, function(){
+      $('div#pbody').fadeTo('slow', 0, function(){
             // go to link when animation completes
             window.location=href;
 
