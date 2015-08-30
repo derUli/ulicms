@@ -129,8 +129,8 @@ $(document).ready(function(){
 		$('a').click(function(){
       var href= $(this).attr('href');
       var target = $(this).attr('target');
-      
-	  if(href.charAt(0) != "#" && target != "_blank"){
+	  var eventListeners = $._data($(this)[0], "events");
+	  if(href.charAt(0) != "#" && target != "_blank" && !eventListeners){
       // do animation
       $('div#pbody').fadeTo('fast', 0, function(){
             // go to link when animation completes
