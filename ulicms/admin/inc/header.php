@@ -107,12 +107,41 @@ foreach ( $styles as $style ) {
 combined_stylesheet_html ();
 ?>
 
-
+<style type="text/css">
+div#pbody{
+  opacity: 0;
+}
+</style>
+<noscript>
+<style type="text/css">
+div#pbody{
+  opacity: 1;
+}
+</style>
+</noscript>
 <title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript">
 $(document).ready(function(){
-     
+        $("div#pbody").fadeTo('fast', 1);
+		
         $(".tablesorter").tablesorter({widgets: ["zebra"]}); 
+		
+		$('a').click(function(){
+      var href= $(this).attr('href');
+      var target = $(this).attr('target');
+      
+	  if(href.charAt(0) != "#" && target != "_blank"){
+      // do animation
+      $('div#pbody').fadeTo('fast', 0, function(){
+            // go to link when animation completes
+            window.location=href;
+
+      })
+
+      // over ride browser following link when clicked
+      return false;
+	  }
+})
     } 
 ); 
 </script>
