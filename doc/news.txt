@@ -43,4 +43,3 @@
 + Favicon Generator akzeptiert nun auch andere Formate als .ico. Die Grafikdatei wird automatisch in das Favicon Format konvertiert
 + "modules" und "templates" Ordner nach "content" verschoben
 + Mobile CSS nun auch per Browser bearbeitbar
-+ Fade-Effekte hinzugefügt
