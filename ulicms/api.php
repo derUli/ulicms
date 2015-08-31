@@ -1222,6 +1222,8 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		
 		$current_page = get_page ();
 		$string = str_replace ( '[category]', get_category (), $string );
+		
+		$string = str_replace( '[csrf_token_html]', get_csrf_token_html(), $string );
 	}
 	$allModules = getAllModules ();
 	for($i = 0; $i <= count ( $allModules ); $i ++) {
