@@ -13,7 +13,6 @@ class Forms{
    public static function submitForm($id){
         $retval = false;
         $form = self::getFormByID($id);
-		throw new NotImplementedException("Forms not implemented yet.");
 		if($form){
 		   $fields = $form["fields"];
 		   $fields = str_replace("\r\n", "\n", $fields);
