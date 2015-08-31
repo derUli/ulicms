@@ -83,6 +83,12 @@ if ($redirection) {
 	ulicms_redirect ( $redirection, 302 );
 }
 
+if(isset($_GET["submit-cms-for"]) and !empty($_GET["submit-cms-for"])){
+   $form_id = intval($_GET["submit-cms-for"]);
+   require_once ULICMS_ROOT . "/classes/forms.php";
+   Forms::submitForm($form_id);
+}
+
 header ( "HTTP/1.0 " . $status );
 
 if ($format == "html") {

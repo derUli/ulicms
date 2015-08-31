@@ -8,6 +8,6 @@ Wenn der zweite Name nicht gesetzt ist, wird der erste Wert genommen.
 CMS-Seite, auf die bei erfolgreichem Absenden des Formulars weitergeleitet wird, kann angegeben werden.
 
 Formular wird über Formular-Funktion von HTML-Editor erstellt und formatiert.
-Als target vom Formular muss eine URL mit ?submit-form=[formular-id] eingefügt werden.
+Als target vom Formular muss eine URL mit ?submit-cms-form=[formular-id] eingefügt werden.
 
 Platzhalter [csrf_token_html] muss in Formular eingefügt werden.

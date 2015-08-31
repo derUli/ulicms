@@ -11,6 +11,7 @@ class Forms{
    }
    
    public static function submitForm($id){
+        $retval = false;
         $form = self::getFormByID($id);
 		throw new NotImplementedException("Forms not implemented yet.");
 		if($form){
@@ -63,11 +64,13 @@ class Forms{
 		   
 		   if(ulicms_mail($email_to, $subject, $html, $headers)){
 		      ulicms_redirect($redirect_url);
+			  $retval = true;
 		   } else {
 		      translate("error_send_mail_form_failed");
+			  die();
 		}
    }
-   
+      return $retval;
    }
    
    
