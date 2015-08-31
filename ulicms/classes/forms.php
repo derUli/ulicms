@@ -65,8 +65,10 @@ class Forms{
 		      ulicms_redirect($redirect_url);
 		   } else {
 		      translate("error_send_mail_form_failed");
-		   0
-		   
 		}
    }
-}
+   
+   }
+   
+   
+   }
