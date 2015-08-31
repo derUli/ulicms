@@ -2,7 +2,8 @@ Möglichkeit Formulare anzulegen Felder
 Name / Titel
 Felder (Textarea, ein Feldname jetzt)
 CMS-Seite, auf die bei erfolgreichem Absenden des Formulars weitergeleitet wird, kann angegeben werden.
-Formular wird über Formular-Funktion von HTML-Editor erstellt.
+
+Formular wird über Formular-Funktion von HTML-Editor erstellt und formatiert.
 Als target vom Formular muss eine URL mit ?submit-form=[formular-id] eingefügt werden.
 
 Platzhalter [csrf_token_html] muss in Formular eingefügt werden.
