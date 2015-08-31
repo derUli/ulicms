@@ -720,7 +720,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."forms` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `email_to` varchar(255) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
   `fields` text,

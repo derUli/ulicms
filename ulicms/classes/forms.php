@@ -53,6 +53,20 @@ class Forms{
 		   $html .= "</body>";
 		   $html .= "</html>";
 		   
+		   $email_to = $form["email_to"];
+		   $subject = $form["subject"];
+		   $target_page_id = $form["target_page_id"];
+		   $target_page_systemname = getPageSystemnameByID($target_page_id);
+		   $redirect_url = buildSEOUrl($target_page_systemname);
+		   
+		   $headers = "Content-Type: text/html; charset=UTF-8";
+		   
+		   if(ulicms_mail($email_to, $subject, $html, $headers)){
+		      ulicms_redirect($redirect_url);
+		   } else {
+		      translate("error_send_mail_form_failed");
+		   0
+		   
 		}
    }
 }
