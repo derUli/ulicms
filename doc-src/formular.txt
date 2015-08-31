@@ -1,6 +1,6 @@
 Möglichkeit Formulare anzulegen Felder
 Name / Titel
-Felder (Textarea, ein Feldname jetzt)
+Felder (Textarea, ein Feldname je Zeile)
 CMS-Seite, auf die bei erfolgreichem Absenden des Formulars weitergeleitet wird, kann angegeben werden.
 
 Formular wird über Formular-Funktion von HTML-Editor erstellt und formatiert.
