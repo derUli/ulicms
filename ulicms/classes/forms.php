@@ -25,6 +25,31 @@ class Forms{
            $html .= '<meta charset="utf-8">';
 		   $html .="</head>";
 		   $html .= "<body>";
+		   $html .= "<table>";
+		   foreach($fields as $field){
+		      if(!empty($field)){
+		      $field_splitted = explode("=>", $field);
+              $field_splitted = array_map("trim", $field_splitted);
+			  if(len($field_splitted) > 1){
+			      $label = $field_splitted[1];
+			  } else{
+			      $label = $field_splitted[0];
+			  }
+			  
+			  }
+			  
+			  
+			  $value = "";
+			  if(isset($_POST[$field_splitted[0]]) and !empty($_POST[$field_splitted[0]])){
+			     $value = $_POST[$field_splitted[0]];
+			  }
+			  
+			  $html .= "<tr>";
+			  $html .= "<td><strong>".htmlspecialchars($label)."</strong></td>";
+			  $html .= "<td>".htmlspecialchars($value)."</td>";
+			  $html .= "</tr>";
+		   }
+		   $html .="</table>";
 		   $html .= "</body>";
 		   $html .= "</html>";
 		   
