@@ -1,4 +1,4 @@
-[ ] Multisite Fähigkeit
+﻿[ ] Multisite Fähigkeit
 [ ] Vernünftiges Paket System mit
     [ ] Metadaten, die aus einer XML-Datei eingelesen werden
     [ ] Automatische Prüfung auf Updates von Paketen
@@ -7,3 +7,5 @@
 [ ] Drag and Drop Seitenaufbau mit Inhaltselementen In-Page Editing etc.
 [ ] WYSIWYG Template Bearbeitung
 [ ] Seitenbaum wie in TYPO3
+[ ] Form Builder
+[ ] Animation / Slider Builder
