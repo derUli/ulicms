@@ -22,7 +22,7 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "mails" ) . "` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
 
 db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "history" ) . "` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT AUTO_INCREMENT,
   `content_id` int(11) NOT NULL,
   `content` longtext NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -43,7 +43,7 @@ setconfig("og_type", "article");
 
 
 db_query("CREATE TABLE IF NOT EXISTS `".tbname("forms")."` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email_to` varchar(255) NOT NULL,
   `subject` varchar(255) NOT NULL,

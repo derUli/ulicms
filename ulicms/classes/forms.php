@@ -25,12 +25,12 @@ class Forms{
            $html .= '<meta charset="utf-8">';
 		   $html .="</head>";
 		   $html .= "<body>";
-		   $html .= "<table>";
+		   $html .= "<table style=\"border:1px; width:100%;\">";
 		   foreach($fields as $field){
 		      if(!empty($field)){
 		      $field_splitted = explode("=>", $field);
               $field_splitted = array_map("trim", $field_splitted);
-			  if(len($field_splitted) > 1){
+			  if(count($field_splitted) > 1){
 			      $label = $field_splitted[1];
 			  } else{
 			      $label = $field_splitted[0];

@@ -718,7 +718,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
 
 mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."forms` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email_to` varchar(255) NOT NULL,
   `subject` varchar(255) NOT NULL,

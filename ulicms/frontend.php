@@ -83,8 +83,9 @@ if ($redirection) {
 	ulicms_redirect ( $redirection, 302 );
 }
 
-if(isset($_GET["submit-cms-for"]) and !empty($_GET["submit-cms-for"])){
-   $form_id = intval($_GET["submit-cms-for"]);
+if(isset($_GET["submit-cms-form"]) and !empty($_GET["submit-cms-form"]) and get_request_method() === "POST"){
+   $form_id = intval($_GET["submit-cms-form"]);
+   
    require_once ULICMS_ROOT . "/classes/forms.php";
    Forms::submitForm($form_id);
 }
