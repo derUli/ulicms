@@ -1,4 +1,4 @@
-[X] Copyright Jahr anpassen
+﻿[X] Copyright Jahr anpassen
 [ ] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
 [X] Dokumentation! Vor allem, zum Script/CSS queuing System!
     [X] Zur Script Queue
@@ -24,8 +24,8 @@ UliCMS 8.0.1 Portable for Windows Version 1.0.0
 [X] Newsbeitrag erstellen.
 
 Doku
-[ ] Tutorial für Installation eines Webservers mit UliCMS auf Debian Linux / Ubuntu verfassen.
+[X] Tutorial für Installation eines Webservers mit UliCMS auf Debian Linux / Ubuntu verfassen.
 
 Updates
 [ ] Patch für Update auf neueste Mobile_Detect Version veröffentlichen
-[ ] Update für Sprachdatei veröffentlichen
+[X] Update für Sprachdatei veröffentlichen
