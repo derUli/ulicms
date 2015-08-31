@@ -49,6 +49,7 @@ db_query("CREATE TABLE IF NOT EXISTS `".tbname("forms")."` (
   `subject` varchar(255) NOT NULL,
   `category_id` int(11) DEFAULT NULL,
   `fields` text,
+  `mail_from_field` varchar(255) NULL,
   `target_page_id` int(11) DEFAULT NULL,
   `created` bigint(20) DEFAULT NULL,
   `updated` bigint(20) DEFAULT NULL,

@@ -25,7 +25,7 @@ class Forms{
            $html .= '<meta charset="utf-8">';
 		   $html .="</head>";
 		   $html .= "<body>";
-		   $html .= "<table style=\"border:1px; width:100%;\">";
+		   $html .= "<table border=\"1\"";
 		   foreach($fields as $field){
 		      if(!empty($field)){
 		      $field_splitted = explode("=>", $field);
@@ -60,6 +60,15 @@ class Forms{
 		   $redirect_url = buildSEOUrl($target_page_systemname);
 		   
 		   $headers = "Content-Type: text/html; charset=UTF-8";
+		   
+		   $mail_from_field = $form["mail_from_field"];
+		   
+		   if(!is_null(§mail_from_field) and !empty($mail_from_field) and isset($_POST[$mail_from_field]) and !empty($_POST[$mail_from_field])){
+		     $mail_from = $_POST[$mail_from_field];
+			 sanitize($mail_from);
+			 $headers .="\n";
+			 $headers .= "From: ".$mail_from;
+		   }
 		   
 		   if(ulicms_mail($email_to, $subject, $html, $headers)){
 		      ulicms_redirect($redirect_url);
