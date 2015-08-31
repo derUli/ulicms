@@ -1211,18 +1211,14 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		ob_start ();
 		logo ();
 		$string = str_replace ( '[logo]', ob_get_clean (), $string );
-		
 		ob_start ();
 		motto ();
 		$string = str_replace ( '[motto]', ob_get_clean (), $string );
-		
 		ob_start ();
 		motto ();
 		$string = str_replace ( '[slogan]', ob_get_clean (), $string );
-		
 		$current_page = get_page ();
 		$string = str_replace ( '[category]', get_category (), $string );
-		
 		$string = str_replace( '[csrf_token_html]', get_csrf_token_html(), $string );
 	}
 	$allModules = getAllModules ();
