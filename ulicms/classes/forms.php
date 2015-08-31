@@ -18,6 +18,16 @@ class Forms{
 		   $fields = str_replace("\r\n", "\n", $fields);
 		   $fields = explode("\n", $fields);
 		   $fields = array_map("trim", $fields);
+		   $html = "<!DOCTYPE html>";
+		   $html .= "<html>";
+		   $html .= "<head>";
+		   $html .= '<meta http-equiv="content-type" content="text/html; charset=utf-8">';
+           $html .= '<meta charset="utf-8">';
+		   $html .="</head>";
+		   $html .= "<body>";
+		   $html .= "</body>";
+		   $html .= "</html>";
+		   
 		}
    }
 }
