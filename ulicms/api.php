@@ -1207,7 +1207,6 @@ function replaceVideoTags($txt) {
 function replaceShortcodesWithModules($string, $replaceOther = true) {
 	if ($replaceOther) {
 		$string = str_replace ( '[title]', get_title (), $string );
-		
 		ob_start ();
 		logo ();
 		$string = str_replace ( '[logo]', ob_get_clean (), $string );
