@@ -1,0 +1,4 @@
+﻿[ ] GUI für Erstellung und Bearbeitung von individuellen Formularen (forms Tabelle)
+[ ] Spamschutz für Formulare in der forms-Tabelle
+[ ] Dokumentation zu individuellen Formularen
+[ ] Video-Tutorial zu individuellen Formularen
