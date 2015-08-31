@@ -44,6 +44,6 @@
 + "modules" und "templates" Ordner nach "content" verschoben
 + Mobile CSS nun auch per Browser bearbeitbar
 + Individuelle Formulare können nun erstellt werden
-  - Logik zur Validierung und Versand ist schon vorhanden
+  - Logik zur Validierung und Versand von Formularen ist schon vorhanden
   - Grafische Oberfläche zur Verwaltung von Formularen ist noch nicht vorhanden
   - Formulare müssen noch per Hand in phpMyAdmin angelegt werden
