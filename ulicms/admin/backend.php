@@ -161,6 +161,8 @@ if (! $eingeloggt) {
 	
 	}  else if ($_GET ["action"] == "forms_new") {
 		require_once "inc/forms_new.php";
+	}   else if ($_GET ["action"] == "forms_edit") {
+		require_once "inc/forms_edit.php";
 	} 
 
 	else if ($_GET ["action"] == "info") {
