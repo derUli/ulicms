@@ -32,7 +32,7 @@ if (!$acl -> hasPermission ("forms")){
 	
 	
 	<p><strong><?php translate("mail_from_field");?></strong><br/>
-	<input type="email" value="<?php echo htmlspecialchars($form["mail_from_field"]);?>" name="mail_from_field"/></p>
+	<input type="text" value="<?php echo htmlspecialchars($form["mail_from_field"]);?>" name="mail_from_field"/></p>
 	
 	
 	<p><strong><?php translate("target_page_id");?></strong><br/>
