@@ -564,7 +564,7 @@ define("TRANSLATION_DEFAULT_WEBSITE", "[Default]");
 define("TRANSLATION_MOBILE_CSS", "Mobile CSS");
 
 // Forms
-define("TRANSLATION_FORMS", "Formulare");
+define("TRANSLATION_FORMS", "Forms");
 define("TRANSLATION_CREATE_FORM", "Create form");
 define("TRANSLATION_EDIT_FORM", "Edit form");
 define("TRANSLATION_EMAIL_TO", "E-Mail to");
