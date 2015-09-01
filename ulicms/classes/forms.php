@@ -119,7 +119,7 @@ class Forms{
 		     $mail_from = array($_POST[$mail_from_field]);
 			 sanitize($mail_from);
 			 $headers .="\n";
-			 $headers .= "From: ".$mail_from;
+			 $headers .= "From: ".$mail_from[0];
 		   }
 		   
 		   if(ulicms_mail($email_to, $subject, $html, $headers)){
