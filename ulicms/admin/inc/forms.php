@@ -27,7 +27,11 @@ if (!$acl -> hasPermission ("forms")){
 									 
 	Forms::editForm($id, $name, $email_to, $subject, $category_id, $fields, 
                                      $mail_from_field, $target_page_id);
+	} else if(isset($_GET["del"])){
+	   $del = intval($_GET["del"]);
+	   Forms::deleteForm($del);
 	}
+	
 	$forms = Forms::getAllForms();
 ?>
 <style type="text/css">
@@ -37,17 +41,18 @@ tr.odd input#form-submit-url{
 }
 </style>
 <h1><?php translate("forms"); ?></h1>
-<p><a href="index.php?action=create_form"><?php translate("create_form");?></a></p>
+<p><a href="index.php?action=forms_new"><?php translate("create_form");?></a></p>
 <table id="form-list" class="tablesorter">
 <thead>
 <tr>
-<td><?php translate("id");?></td>
-<td><?php translate("name");?></td>
-<td><?php translate("email_to");?></td>
-<td><?php translate("submit_form_url");?></td>
+<th><?php translate("id");?></th>
+<th><?php translate("name");?></th>
+<th><?php translate("email_to");?></th>
+<th><?php translate("submit_form_url");?></th>
 <td></td>
 <td></td>
 </tr>
+</thead>
 <tbody>
 <?php 
 foreach($forms as $form){
@@ -71,7 +76,22 @@ foreach($forms as $form){
 			
 			echo TRANSLATION_EDIT;
 			?>"></td>
-<td></td>
+<td style="text-align: center;">
+<form action="?action=forms&del=<?php
+
+                 echo $form ["id"];
+                 ?>" method="post"
+				onsubmit="return confirm('Wirklich Löschen?')" class="delete-form"><?php csrf_token_html();?><input type="image"
+					class="mobile-big-image" src="gfx/delete.gif"
+					alt="<?php
+
+                 echo TRANSLATION_DELETE;
+                 ?>"
+					title="<?php
+
+                 echo TRANSLATION_DELETE;
+                 ?>"> </form>
+</td>
 </tr>
 <?php }?>
 </tbody>

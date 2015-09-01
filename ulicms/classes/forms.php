@@ -10,6 +10,11 @@ class Forms{
 	   return $retval;
    }
    
+   public static function deleteForm($id){
+       $id = intval($id);
+       return db_query("DELETE FROM ".tbname("forms") . " WHERE id = $id");
+   }
+   
    public static function createForm($name, $email_to, $subject, $category_id, $fields, 
                                      $mail_from_field, $target_page_id){
 									 $name = db_escape($name);

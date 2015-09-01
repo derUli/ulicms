@@ -28,7 +28,7 @@ if (!$acl -> hasPermission ("forms")){
 	?></p>
 	
 	<p><strong><?php translate("fields");?></strong><br/>
-	<textarea name="fields" rows="10"></textarea></p>
+	<textarea name="fields" rows="10"><?php echo htmlspecialchars($form["fields"]);?></textarea></p>
 	
 	
 	<p><strong><?php translate("mail_from_field");?></strong><br/>

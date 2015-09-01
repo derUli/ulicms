@@ -93,7 +93,7 @@ if (! is_admin () and ! $acl -> hasPermission ("categories")){
 			<td></td>
 		</tr>
 	
-	
+	</thead>
 	<tbody>
 	<?php
 		
