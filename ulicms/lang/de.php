@@ -558,6 +558,7 @@ define("TRANSLATION_MOBILE_CSS", "Mobile CSS");
 
 // Forms
 define("TRANSLATION_FORMS", "Formulare");
+define("TRANSLATION_CREATE_FORM", "Formular erstellen");
 define("TRANSLATION_EMAIL_TO", "E-Mail an");
 define("TRANSLATION_SUBMIT_FORM_URL", "Formular Absende-URL");
 

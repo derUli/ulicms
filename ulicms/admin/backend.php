@@ -158,6 +158,9 @@ if (! $eingeloggt) {
 		require_once "inc/open_graph.php";	
 	}  else if ($_GET ["action"] == "forms") {
 		require_once "inc/forms.php";
+	
+	}  else if ($_GET ["action"] == "forms_new") {
+		require_once "inc/forms_new.php";
 	} 
 
 	else if ($_GET ["action"] == "info") {
