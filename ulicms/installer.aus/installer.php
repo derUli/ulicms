@@ -722,14 +722,14 @@ mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."forms` (
   `name` varchar(255) NOT NULL,
   `email_to` varchar(255) NOT NULL,
   `subject` varchar(255) NOT NULL,
-  `mail_from_field` varchar(255) NULL,
   `category_id` int(11) DEFAULT NULL,
   `fields` text,
+  `mail_from_field` varchar(255) NULL,
   `target_page_id` int(11) DEFAULT NULL,
   `created` bigint(20) DEFAULT NULL,
   `updated` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;");
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
 			
 			$sql_categories_table = "CREATE TABLE " . $prefix . "categories (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
