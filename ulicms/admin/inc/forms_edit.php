@@ -43,7 +43,7 @@ if (!$acl -> hasPermission ("forms")){
 	</select>
 	</p>
 	<p>
-	<input name="create_form" value="<?php translate("create");?>" type="submit">
+	<input name="edit_form" value="<?php translate("save");?>" type="submit">
 	</p>
 	</form>
 <?php 

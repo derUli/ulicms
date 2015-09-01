@@ -15,6 +15,18 @@ if (!$acl -> hasPermission ("forms")){
 									 
 	Forms::createForm($name, $email_to, $subject, $category_id, $fields, 
                                      $mail_from_field, $target_page_id);
+	} else if(isset($_POST["edit_form"])){
+		 $id = $_POST["id"];
+		 $name = $_POST["name"];
+		 $email_to = $_POST["email_to"];
+		 $subject = $_POST["subject"];
+		 $category_id = $_POST["category"];
+		 $fields = $_POST["fields"];
+		 $mail_from_field = $_POST["mail_from_field"];
+		 $target_page_id = $_POST["target_page_id"];
+									 
+	Forms::editForm($id, $name, $email_to, $subject, $category_id, $fields, 
+                                     $mail_from_field, $target_page_id);
 	}
 	$forms = Forms::getAllForms();
 ?>
