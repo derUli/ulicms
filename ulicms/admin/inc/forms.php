@@ -8,7 +8,7 @@ if (!$acl -> hasPermission ("forms")){
 		 $name = $_POST["name"];
 		 $email_to = $_POST["email_to"];
 		 $subject = $_POST["subject"];
-		 $category_id = $_POST["category_id"];
+		 $category_id = $_POST["category"];
 		 $fields = $_POST["fields"];
 		 $mail_from_field = $_POST["mail_from_field"];
 		 $target_page_id = $_POST["target_page_id"];
