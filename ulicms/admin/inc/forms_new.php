@@ -21,6 +21,13 @@ if (!$acl -> hasPermission ("forms")){
 	echo categories::getHTMLSelect ();
 	?></p>
 	
+	<p><strong><?php translate("fields");?></strong><br/>
+	<textarea name="fields" rows="10"></textarea></p>
+	
+	
+	<p><strong><?php translate("mail_from_field");?></strong><br/>
+	<input type="email" value="" name="mail_from_field"/></p>
+	
 	</form>
 <?php 
 }
