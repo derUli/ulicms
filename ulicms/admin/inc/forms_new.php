@@ -5,11 +5,11 @@ if (!$acl -> hasPermission ("forms")){
     }else{
 	require_once ULICMS_ROOT."/classes/forms.php";
 	$forms = Forms::getAllForms();
-	
 	$pages = getAllPages();
 	?>
 	<h1><?php translate("create_form");?></h1>
 	<form action="index.php?action=forms" method="post">
+	<?php csrf_token_html();?>
 	<p><strong><?php translate("name");?></strong><br/>
 	<input type="text" value="" name="name" required="true"/></p>
 	

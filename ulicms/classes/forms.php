@@ -12,8 +12,19 @@ class Forms{
    
    public static function createForm($name, $email_to, $subject, $category_id, $fields, 
                                      $mail_from_field, $target_page_id){
+									 $name = db_escape($name);
+									 $email_to = db_escape($email_to);
+									 $subject = db_escape($subject);
+									 $category_id = intval($category_id);
+									 $fields = db_escape($fields);
+									 $mail_from_field = db_escape($mail_from_field);
+									 $target_page_id = intval($target_page_id);
 									 $created = time();
 									 $updated = time();
+									 
+									 return db_query("INSERT INTO `".tbname("forms")."` (name, email_to, subject, category_id, `fields`,
+									 mail_from_field, target_page_id, `created`, `updated`) values ('$name', '$email_to', '$subject', $category_id, '$fields',
+									 '$mail_from_field', $target_page_id, $created, $updated)")or die(db_error());
        
    }
    
