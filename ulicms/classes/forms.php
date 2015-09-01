@@ -10,6 +10,18 @@ class Forms{
 	   return $retval;
    }
    
+   public static function getAllForms(){
+       $retval = array();
+	   $query = db_query("select * from `".tbname("forms")."` ORDER BY id");
+	   if(db_num_rows($query) > 0){
+	      while($row = db_fetch_assoc($query)){
+		       $retval[] = $row;
+		  }
+	   }
+	   
+	   return $retval;
+   }
+   
    public static function submitForm($id){
         $retval = false;
         $form = self::getFormByID($id);

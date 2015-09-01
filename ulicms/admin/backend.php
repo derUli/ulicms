@@ -6,7 +6,6 @@ $acl = new acl ();
 
 if ($acl->hasPermission ( $_REQUEST ["type"] ) and ($_REQUEST ["type"] == "images" or $_REQUEST ["type"] == "files" or $_REQUEST ["type"] == "flash")) {
 	$_CONFIG ["disabled"] = false;
-	
 	$_SESSION ['KCFINDER'] = array ();
 	$_SESSION ['KCFINDER'] ['disabled'] = false;
 }
@@ -156,7 +155,9 @@ if (! $eingeloggt) {
 	} else if ($_GET ["action"] == "install_modules") {
 		require_once "inc/install_modules.php";
 	}  else if ($_GET ["action"] == "open_graph") {
-		require_once "inc/open_graph.php";
+		require_once "inc/open_graph.php";	
+	}  else if ($_GET ["action"] == "forms") {
+		require_once "inc/forms.php";
 	} 
 
 	else if ($_GET ["action"] == "info") {
