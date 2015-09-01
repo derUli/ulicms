@@ -37,7 +37,10 @@ if (!$acl -> hasPermission ("forms")){
 	  <option value="<?php echo $page["id"];?>"><?php echo htmlspecialchars($page["title"]);?>
 	<?php } ?>
 	</select>
-	
+	</p>
+	<p>
+	<input name="create_form" value="<?php translate("create");?>" type="submit">
+	</p>
 	</form>
 <?php 
 }

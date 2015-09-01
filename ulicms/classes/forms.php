@@ -10,6 +10,13 @@ class Forms{
 	   return $retval;
    }
    
+   public static function createForm($name, $email_to, $subject, $category_id, $fields, 
+                                     $mail_from_field, $target_page_id){
+									 $created = time();
+									 $updated = time();
+       
+   }
+   
    public static function getAllForms(){
        $retval = array();
 	   $query = db_query("select * from `".tbname("forms")."` ORDER BY id");
