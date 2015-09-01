@@ -40,8 +40,6 @@ db_query("ALTER TABLE ".tbname("content")." ADD COLUMN `og_description` varchar(
 setconfig("og_type", "article");
 
 // Forms Builder
-
-
 db_query("CREATE TABLE IF NOT EXISTS `".tbname("forms")."` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
