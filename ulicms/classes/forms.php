@@ -115,8 +115,8 @@ class Forms{
 		   
 		   $mail_from_field = $form["mail_from_field"];
 		   
-		   if(!is_null(§mail_from_field) and !empty($mail_from_field) and isset($_POST[$mail_from_field]) and !empty($_POST[$mail_from_field])){
-		     $mail_from = $_POST[$mail_from_field];
+		   if(!is_null($mail_from_field) and !empty($mail_from_field) and isset($_POST[$mail_from_field]) and !empty($_POST[$mail_from_field])){
+		     $mail_from = array($_POST[$mail_from_field]);
 			 sanitize($mail_from);
 			 $headers .="\n";
 			 $headers .= "From: ".$mail_from;
