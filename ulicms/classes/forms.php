@@ -88,9 +88,6 @@ class Forms{
 			      $label = $field_splitted[0];
 			  }
 			  
-			  }
-			  
-			  
 			  $value = "";
 			  if(isset($_POST[$field_splitted[0]]) and !empty($_POST[$field_splitted[0]])){
 			     $value = $_POST[$field_splitted[0]];
@@ -98,8 +95,9 @@ class Forms{
 			  
 			  $html .= "<tr>";
 			  $html .= "<td><strong>".htmlspecialchars($label)."</strong></td>";
-			  $html .= "<td>".htmlspecialchars($value)."</td>";
+			  $html .= "<td>".nl2br(htmlspecialchars($value))."</td>";
 			  $html .= "</tr>";
+			  }
 		   }
 		   $html .="</table>";
 		   $html .= "</body>";
