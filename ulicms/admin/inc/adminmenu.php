@@ -43,7 +43,7 @@ if (defined ( "_SECURITY" )) {
 			</ul></li>
 			<?php
 	
-	if ($acl->hasPermission ( "banners" ) or $acl->hasPermission ( "pages" ) or $acl->hasPermission ( "categories" )) {
+	if ($acl->hasPermission ( "banners" ) or $acl->hasPermission ( "pages" ) or $acl->hasPermission ( "categories" ) or $acl->hasPermission("forms")) {
 		?>
 		<li><a href='?action=contents'><?php
 		
@@ -62,7 +62,17 @@ if (defined ( "_SECURITY" )) {
 				<?php
 		}
 		?>
-
+<?php
+		
+		if ($acl->hasPermission ( "forms" )) {
+			?>
+				<li><a href='?action=forms'><?php
+			
+			translate("forms");
+			?></a></li>
+				<?php
+		}
+		?>
 			<?php
 		
 		if ($acl->hasPermission ( "banners" )) {
@@ -87,7 +97,6 @@ if (defined ( "_SECURITY" )) {
 				<?php
 		}
 		?>
-
 			<?php
 		
 		if ($acl->hasPermission ( "import" )) {

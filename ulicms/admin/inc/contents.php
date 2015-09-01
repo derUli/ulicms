@@ -5,7 +5,8 @@ if (! defined ( "ULICMS_ROOT" )) {
 
 $acl = new ACL ();
 
-if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl->hasPermission ( "categories" ) or $acl->hasPermission ( "export" )) {
+if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl->hasPermission ( "categories" ) or $acl->hasPermission ( "export" )
+or $acl->hasPermission("forms")) {
 	?>
 
 <h2>
@@ -30,6 +31,19 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	<?php
 	}
 	?>
+
+	<?php
+		
+		if ($acl->hasPermission ( "forms" )) {
+			?><a href='?action=forms'><?php
+			
+			translate("forms");
+			?></a>
+			<br /> <br />
+				<?php
+		}
+		?>
+		
 	<?php
 	
 	if ($acl->hasPermission ( "banners" )) {
