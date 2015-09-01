@@ -37,7 +37,7 @@ tr.odd input#form-submit-url{
 }
 </style>
 <h1><?php translate("forms"); ?></h1>
-
+<p><a href="index.php?action=create_form"><?php translate("create_form");?></a></p>
 <table id="form-list" class="tablesorter">
 <thead>
 <tr>
@@ -45,6 +45,7 @@ tr.odd input#form-submit-url{
 <td><?php translate("name");?></td>
 <td><?php translate("email_to");?></td>
 <td><?php translate("submit_form_url");?></td>
+<td></td>
 <td></td>
 </tr>
 <tbody>
@@ -57,6 +58,20 @@ foreach($forms as $form){
 <td><?php echo htmlspecialchars($form["name"]);?></td>
 <td><?php echo htmlspecialchars($form["email_to"]);?></td>
 <td><input id="form-submit-url" type="text" readonly value="<?php echo htmlspecialchars($submit_form_url);?>" onclick="this.select();"></td>
+<td style="text-align: center;"><a
+				href="?action=forms_edit&id=<?php
+			
+			echo $form ["id"];
+			?>"><img src="gfx/edit.png" class="mobile-big-image"
+					alt="<?php
+			
+			echo TRANSLATION_EDIT;
+			?>"
+					title="<?php
+			
+			echo TRANSLATION_EDIT;
+			?>"></td>
+<td></td>
 </tr>
 <?php }?>
 </tbody>
