@@ -24,7 +24,7 @@ class Forms{
 									 
 									 return db_query("INSERT INTO `".tbname("forms")."` (name, email_to, subject, category_id, `fields`,
 									 mail_from_field, target_page_id, `created`, `updated`) values ('$name', '$email_to', '$subject', $category_id, '$fields',
-									 '$mail_from_field', $target_page_id, $created, $updated)")or die(db_error());
+									 '$mail_from_field', $target_page_id, $created, $updated)");
        
    }
    

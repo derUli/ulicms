@@ -32,7 +32,7 @@ if (!$acl -> hasPermission ("forms")){
 	
 	
 	<p><strong><?php translate("target_page_id");?></strong><br/>
-	<select name="target_page_id">
+	<select name="category_id">
 	<?php foreach($pages as $page){ ?>
 	  <option value="<?php echo $page["id"];?>"><?php echo htmlspecialchars($page["title"]);?>
 	<?php } ?>

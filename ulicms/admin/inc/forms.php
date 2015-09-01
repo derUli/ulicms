@@ -33,6 +33,7 @@ tr.odd input#form-submit-url{
 <td><?php translate("name");?></td>
 <td><?php translate("email_to");?></td>
 <td><?php translate("submit_form_url");?></td>
+<td></td>
 </tr>
 <tbody>
 <?php 
