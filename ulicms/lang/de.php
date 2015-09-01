@@ -564,5 +564,6 @@ define("TRANSLATION_SUBJECT", "Betreff");
 define("TRANSLATION_SUBMIT_FORM_URL", "Formular Absende-URL");
 define("TRANSLATION_FIELDS", "Felder");
 define("TRANSLATION_MAIL_FROM_FIELD", "Feld, welches den Absender enthält");
+define("TRANSLATION_TARGET_PAGE_ID", "Erfolgsseite");
 
 add_hook ( "lang_de" );

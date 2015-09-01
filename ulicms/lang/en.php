@@ -571,5 +571,6 @@ define("TRANSLATION_SUBJECT", "Subject");
 define("TRANSLATION_SUBMIT_FORM_URL", "Submit Form URL");
 define("TRANSLATION_FIELDS", "Fields");
 define("TRANSLATION_MAIL_FROM_FIELD", "Field, which contains the sender e-mail adress");
+define("TRANSLATION_TARGET_PAGE_ID", "Target Page");
 
 add_hook ( "lang_en" );
