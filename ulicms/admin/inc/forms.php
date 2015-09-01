@@ -49,8 +49,8 @@ tr.odd input#form-submit-url{
 <th><?php translate("name");?></th>
 <th><?php translate("email_to");?></th>
 <th><?php translate("submit_form_url");?></th>
-<td style="font-weight: bold"><?php translate("edit");?></td>
-<td style="font-weight: bold"><?php translate("delete");?></td>
+<td style="font-weight: bold; text-align:center"><?php translate("edit");?></td>
+<td style="font-weight: bold; text-align:center"><?php translate("delete");?></td>
 </tr>
 </thead>
 <tbody>
