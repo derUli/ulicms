@@ -157,8 +157,9 @@ if (file_exists ( $cached_page_path ) and ! getconfig ( "cache_disabled" ) and g
 		browsercacheOneDay ( $last_modified );
 		echo $cached_content;
 		
-		if (getconfig ( "no_auto_cron" ))
+		if (getconfig ( "no_auto_cron" )){
 			die ();
+		}
 		
 		add_hook ( "before_cron" );
 		@include 'cron.php';
@@ -199,10 +200,12 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 $html_file = page_has_html_file ( get_requested_pagename () );
 
 if ($html_file) {
-	if (file_exists ( $html_file ))
+	if (file_exists ( $html_file )){
 		echo file_get_contents ( $html_file );
-	else
+	}
+	else {
 		echo "File Not Found";
+	}
 } else {
 	require_once getTemplateDirPath ( $theme ) . "oben.php";
 	add_hook ( "before_content" );
@@ -227,8 +230,9 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 	browsercacheOneDay ();
 	echo $data;
 	
-	if (getconfig ( "no_auto_cron" ))
+	if (getconfig ( "no_auto_cron" )){
 		die ();
+	}
 	add_hook ( "before_cron" );
 	@include 'cron.php';
 	add_hook ( "after_cron" );
@@ -249,17 +253,18 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 	echo ($generated_html);
 	
 	// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
-	if (getconfig ( "no_auto_cron" ))
+	if (getconfig ( "no_auto_cron" )){
 		die ();
-	
+	}
 	add_hook ( "before_cron" );
 	@include 'cron.php';
 	add_hook ( "after_cron" );
 	die ();
 } else {
 	
-	if (getconfig ( "no_auto_cron" ))
+	if (getconfig ( "no_auto_cron" )){
 		die ();
+	}
 	
 	add_hook ( "before_cron" );
 	@include 'cron.php';
