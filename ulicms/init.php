@@ -344,11 +344,13 @@ if(!getconfig("disable_hsts") and is_ssl()){
    $maxage = intval($maxage);
 
    $includeSubDomains = getconfig("hsts_include_subdomains");
-   if(!$includeSubDomains)
+   if(!$includeSubDomains){
       $includeSubDomains =  "";
+	}
     $str = "Strict-Transport-Security: max-age=".$maxage;
-    if(!empty($includeSubDomains))
+    if(!empty($includeSubDomains)){
        $str .= "; ".$includeSubDomains;
+	}
 
     $str = trim($str);
 
