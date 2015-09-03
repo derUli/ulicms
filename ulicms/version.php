@@ -1,4 +1,6 @@
 <?php
+if(!class_exists("ulicms_version")){
+
 class ulicms_version {
 	function ulicms_version() {
 		$this->version = "Big Ben";
@@ -26,4 +28,6 @@ class ulicms_version {
 	function getInternalVersion() {
 		return $this->internalVersion;
 	}
+}
+
 }
