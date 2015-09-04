@@ -34,3 +34,4 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
 [X] Werbematerial erstellen
 [ ] developmentVersion = false setzen
 [X] Ankündigung um Absatz zu Formularen ergänzen
+[ ] tel Links auch im deutschen und englischen Promotext erwähnen

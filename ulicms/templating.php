@@ -765,6 +765,11 @@ function base_metas() {
 	echo '<meta charset="utf-8"/>';
 	echo "\r\n";
 	
+	if(!getconfig("disable_no_format_detection")){
+	   echo '<meta name="format-detection" content="telephone=no">';
+	   echo "\r\n";
+	}
+	
 	$dir = dirname ( $_SERVER ["SCRIPT_NAME"] );
 	$dir = str_replace ( "\\", "/", $dir );
 	
