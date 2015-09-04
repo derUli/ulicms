@@ -135,6 +135,7 @@ class ACL {
 		// Package Manager
 		$acl_data ["list_packages"] = null;
 		$acl_data ["install_packages"] = null;
+		$acl_data ["upload_patches"] = null;
 		$acl_data ["remove_packages"] = null;
 		$acl_data ["module_settings"] = null;
 		

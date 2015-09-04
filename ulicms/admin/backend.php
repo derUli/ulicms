@@ -154,7 +154,9 @@ if (! $eingeloggt) {
 		require_once "inc/available_modules.php";
 	} else if ($_GET ["action"] == "install_modules") {
 		require_once "inc/install_modules.php";
-	}  else if ($_GET ["action"] == "open_graph") {
+	} else if ($_GET ["action"] == "upload_patches") {
+		require_once "inc/upload_patches.php";
+	}   else if ($_GET ["action"] == "open_graph") {
 		require_once "inc/open_graph.php";	
 	}  else if ($_GET ["action"] == "forms") {
 		require_once "inc/forms.php";

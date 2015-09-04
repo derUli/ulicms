@@ -31,6 +31,8 @@ class packageManager {
 	
 	// @FIXME : Delete temporary files after install a patch
 	public function installPatch($name, $description, $url) {
+	
+		@set_time_limit ( 0 );
 		$test = $this->getInstalledPatchNames ();
 		if (in_array ( $name, $test ))
 			return false;
