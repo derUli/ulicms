@@ -31,6 +31,6 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
 [X] Neue Paketquelle für 9.0.2
 [X] Datenbankdiagramm aktualisieren ("forms" Tabelle muss enthalten sein)
 [ ] Liste der Hooks aktualisieren
-[ ] Werbematerial erstellen
+[X] Werbematerial erstellen
 [ ] developmentVersion = false setzen
-[ ] Ankündigung um Absatz zu Formularen ergänzen
+[X] Ankündigung um Absatz zu Formularen ergänzen
