@@ -45,4 +45,4 @@
 + Mobile CSS nun auch per Browser bearbeitbar
 + Individuelle Kontaktformulare können nun erstellt werden
 + Many Smartphones make phone numbers auto clickable. This is now disabled by default.
-+ tel Links are now supported. example: [tel]+49123456789[/tel]
++ tel Tags are now supported. example: [tel]+49123456789[/tel]
