@@ -1221,6 +1221,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = str_replace( '[csrf_token_html]', get_csrf_token_html(), $string );
 		// [tel] Links for tel Tags
 		$string = preg_replace('/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string );
+		$string = preg_replace('/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
 	}
 	$allModules = getAllModules ();
 	for($i = 0; $i <= count ( $allModules ); $i ++) {
