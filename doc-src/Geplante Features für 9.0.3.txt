@@ -1,3 +1,4 @@
-﻿[ ] Spamschutz für Formulare in der forms-Tabelle
-[X] Dokumentation zu individuellen Formularen
-[X] Video-Tutorial zu individuellen Formularen
+﻿[ ] GUI für Erstellung und Bearbeitung von individuellen Formularen (forms Tabelle)
+[ ] Spamschutz für Formulare in der forms-Tabelle
+[ ] Dokumentation zu individuellen Formularen
+[ ] Video-Tutorial zu individuellen Formularen

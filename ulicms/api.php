@@ -363,7 +363,6 @@ function getLanguageNameByCode($code) {
 	
 	return $retval;
 }
-
 function getAvailableBackendLanguages() {
 	$langdir = ULICMS_ROOT . "/lang/";
 	$list = scandir ( $langdir );
@@ -555,25 +554,14 @@ function getOnlineUsers() {
 
 // get a config variable
 function getconfig($key) {
-    if(!isset($_SESSION["cms_settings"])){
-	   $_SESSION["cms_settings"] = array();
-	}
 	$env_key = "ulicms_" . $key;
 	$env_var = getenv ( $env_key );
-	if ($env_var){
+	if ($env_var)
 		return $env_var;
-
-	}
-	if(isset($_SESSION["cms_settings"]) and isset($_SESSION["cms_settings"][$key])){
-	   return $_SESSION["cms_settings"][$key];
-	} 
 	$ikey = db_escape ( $key );
-	    
-	
 	$query = db_query ( "SELECT value FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
-		    $_SESSION["cms_settings"][$key] = $row->value;
 			return $row->value;
 		}
 	} else {
@@ -667,20 +655,15 @@ function clearCache() {
 		$Cache_Lite->clean ();
 	} else {
 		// File leeren
-		if (is_admin_dir ()){
+		if (is_admin_dir ())
 			SureRemoveDir ( "../content/cache", false );
-		}
-		else {
+		else
 			SureRemoveDir ( "content/cache", false );
-		}
 	}
 	
 	if (function_exists ( "apc_clear_cache" )) {
 		clearAPCCache ();
 	}
-	
-    $_SESSION["cms_settings"] = array();
-
 	
 	add_hook ( "after_clear_cache" );
 }
@@ -1417,9 +1400,6 @@ function deleteconfig($key) {
 
 // Set a configuration Variable;
 function setconfig($key, $value) {
-    if(!isset($_SESSION["cms_settings"])){
-	   $_SESSION["cms_settings"] = array();
-	}
 	$query = db_query ( "SELECT id FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 	
 	if (db_num_rows ( $query ) > 0) {
@@ -1428,7 +1408,6 @@ function setconfig($key, $value) {
 		
 		db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 	}
-	 $_SESSION["cms_settings"][$key] = $value;
 }
 function is__writable($path) {
 	if ($path {strlen ( $path ) - 1} == '/')
