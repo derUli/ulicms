@@ -47,3 +47,5 @@
 + Many Smartphones make phone numbers auto clickable. This is now disabled by default.
 + tel Tags are now supported. example: [tel]+49123456789[/tel]
 + skype Tags are now supported. example: [skype]MySkypeName[/skype]
++ Cache für getconfig und setconfig Funktionen implementiert, settings werden in der Session zwischengespeichert,
+  um die Datenbankabfragen zu reduzieren.
