@@ -5,6 +5,9 @@ error_reporting ( E_ALL ^ E_NOTICE );
 
 define ( "REQUIRED_PHP_VERSION", "5.3.0" );
 
+include_once "../version.php";
+$ulicms_version = new ulicms_version();
+
 if (! isset ( $_SESSION ["language"] )) {
 	$_SESSION ["language"] = "de";
 }
@@ -864,7 +867,7 @@ class config extends baseConfig{
 	?>
 	<hr style="margin-top: 30px;" />
 	<p style="color: #6f6f6f; font-size: small;">
-		&copy; 2011 - 2016 by <a href="http://www.ulicms.de" target="_blank">ulicms.de</a>
+		&copy; 2011 - <?php echo $ulicms_version->getReleaseYear();?> by <a href="http://www.ulicms.de" target="_blank">ulicms.de</a>
 	</p>
 </body>
 </html>

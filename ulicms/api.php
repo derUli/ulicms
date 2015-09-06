@@ -697,6 +697,11 @@ function remove_action($name) {
 	return $retval;
 }
 
+function cms_release_year(){
+   $v = new ulicms_version();
+   echo $v->getReleaseYear();
+}
+
 // Check for Secure HTTP Connection (SSL)
 function is_ssl() {
 	return (! empty ( $_SERVER ['HTTPS'] ) && $_SERVER ['HTTPS'] !== 'off' || $_SERVER ['SERVER_PORT'] == 443);
