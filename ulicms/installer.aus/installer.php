@@ -5,6 +5,8 @@ error_reporting ( E_ALL ^ E_NOTICE );
 
 define ( "REQUIRED_PHP_VERSION", "5.3.0" );
 
+@set_time_limit(0);
+
 include_once "../version.php";
 $ulicms_version = new ulicms_version();
 
