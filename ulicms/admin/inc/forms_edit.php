@@ -61,6 +61,8 @@ if (! $acl->hasPermission ( "forms" )) {
 	<?php } ?>
 	
 		
+		
+		
 		</select>
 	</p>
 	<p>
@@ -68,9 +70,8 @@ if (! $acl->hasPermission ( "forms" )) {
 			type="submit">
 	</p>
 </form>
-<?php 
-
-}
+<?php
+	}
 
 }
 ?>
