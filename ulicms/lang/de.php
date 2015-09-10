@@ -506,7 +506,7 @@ define ( "TRANSLATION_LEFT", "Links" );
 define ( "TRANSLATION_RIGHT", "Rechts" );
 
 // Favicon
-define ( "TRANSLATION_FAVICON_INFOTEXT", "Hier können Sie ein <a href=\"http://de.wikipedia.org/wiki/Favicon\">Favicon</a> für Ihre Website hochladen. Die Grafikdatei wird automatisch in das passende Format konvertiert.");
+define ( "TRANSLATION_FAVICON_INFOTEXT", "Hier können Sie ein <a href=\"http://de.wikipedia.org/wiki/Favicon\">Favicon</a> für Ihre Website hochladen. Die Grafikdatei wird automatisch in das passende Format konvertiert." );
 define ( "TRANSLATION_CURRENT_FAVICON", "Derzeitiges Favicon" );
 define ( "TRANSLATION_UPLOAD_NEW_FAVICON", "Neues Favicon hochladen" );
 define ( "TRANSLATION_FAVICON", "Favicon" );
@@ -523,48 +523,47 @@ define ( "TRANSLATION_RESTORE", "Wiederherstellen" );
 define ( "TRANSLATION_RESTORE_OLDER_VERSION", "Eine alte Version wiederherstellen" );
 define ( "TRANSLATION_ASK_FOR_RESTORE", "Diese Version wirklich wiederherstellen?" );
 
-define("TRANSLATION_MOBILE_DEVICES", "Mobile Geräte");
-define("TRANSLATION_DESKTOP_COMPUTERS", "Arbeitsplatz Rechner");
+define ( "TRANSLATION_MOBILE_DEVICES", "Mobile Geräte" );
+define ( "TRANSLATION_DESKTOP_COMPUTERS", "Arbeitsplatz Rechner" );
 
-define("TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "IP-Adressen nach 48 Stunden löschen");
+define ( "TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "IP-Adressen nach 48 Stunden löschen" );
 
-define("TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Der Zugriff von Ihrer IP-Adresse ist nicht erlaubt.<br/>
-Bitte kontaktieren Sie Ihren Systemadministrator, dass er Ihre IP-Adresse zur Whitelist hinzufügt.");
+define ( "TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Der Zugriff von Ihrer IP-Adresse ist nicht erlaubt.<br/>
+Bitte kontaktieren Sie Ihren Systemadministrator, dass er Ihre IP-Adresse zur Whitelist hinzufügt." );
 
 // Open Graph
-define("TRANSLATION_OPEN_GRAPH", "Open Graph");
-define("TRANSLATION_TYPE", "Typ");
-define("TRANSLATION_IMAGE", "Bild");
+define ( "TRANSLATION_OPEN_GRAPH", "Open Graph" );
+define ( "TRANSLATION_TYPE", "Typ" );
+define ( "TRANSLATION_IMAGE", "Bild" );
 
-define("TRANSLATION_OG_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Sofern Felder leer gelassen werden, wird ein Standardwert, der in den Einstellungen festgelegt werden kann verwendet.");
-define("TRANSLATION_OG_DEFAULTS_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Hier können Sie Standardwerte festlegen, die verwendet werden, 
-sofern diese Felder bei einer Seite leer gelassen wurden.");
+define ( "TRANSLATION_OG_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Sofern Felder leer gelassen werden, wird ein Standardwert, der in den Einstellungen festgelegt werden kann verwendet." );
+define ( "TRANSLATION_OG_DEFAULTS_HELP", "Open Graph Metadaten werden von sozialen Netzwerken wie Facebook benutzt, wenn dort ein Link geteilt wird. Hier können Sie Standardwerte festlegen, die verwendet werden, 
+sofern diese Felder bei einer Seite leer gelassen wurden." );
 
 // Patch Management
-define("TRANSLATION_INSTALLED_PATCHES", "Installierte Patches");
-define("TRANSLATION_INSTALLED_PATCHES_HELP", "Patches sind Dateien, die Fehler in UliCMS korrigieren.");
-define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST", "Liste zurücksetzen");
-define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM",
-"Achtung! Sie leeren den Index der bereits installierten Patches.\\nPatches werden nicht deinstalliert, lediglich die Einträge in der Datenbank werden gelöscht.\\nMöchten Sie fortfahren?");
+define ( "TRANSLATION_INSTALLED_PATCHES", "Installierte Patches" );
+define ( "TRANSLATION_INSTALLED_PATCHES_HELP", "Patches sind Dateien, die Fehler in UliCMS korrigieren." );
+define ( "TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST", "Liste zurücksetzen" );
+define ( "TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM", "Achtung! Sie leeren den Index der bereits installierten Patches.\\nPatches werden nicht deinstalliert, lediglich die Einträge in der Datenbank werden gelöscht.\\nMöchten Sie fortfahren?" );
 
 // Favicon Upload
-define("TRANSLATION_HIGH_RESOLUTION", "Hohe Auflösung");
+define ( "TRANSLATION_HIGH_RESOLUTION", "Hohe Auflösung" );
 
 // Multisite
-define("TRANSLATION_WEBSITE", "Webseite");
-define("TRANSLATION_DEFAULT_WEBSITE", "[Standard]");
+define ( "TRANSLATION_WEBSITE", "Webseite" );
+define ( "TRANSLATION_DEFAULT_WEBSITE", "[Standard]" );
 
-define("TRANSLATION_MOBILE_CSS", "Mobile CSS");
+define ( "TRANSLATION_MOBILE_CSS", "Mobile CSS" );
 
 // Forms
-define("TRANSLATION_FORMS", "Formulare");
-define("TRANSLATION_CREATE_FORM", "Formular erstellen");
-define("TRANSLATION_EDIT_FORM", "Formular bearbeiten");
-define("TRANSLATION_EMAIL_TO", "E-Mail an");
-define("TRANSLATION_SUBJECT", "Betreff");
-define("TRANSLATION_SUBMIT_FORM_URL", "Formular Absende-URL");
-define("TRANSLATION_FIELDS", "Felder");
-define("TRANSLATION_MAIL_FROM_FIELD", "Feld, welches den Absender enthält");
-define("TRANSLATION_TARGET_PAGE_ID", "Erfolgsseite");
+define ( "TRANSLATION_FORMS", "Formulare" );
+define ( "TRANSLATION_CREATE_FORM", "Formular erstellen" );
+define ( "TRANSLATION_EDIT_FORM", "Formular bearbeiten" );
+define ( "TRANSLATION_EMAIL_TO", "E-Mail an" );
+define ( "TRANSLATION_SUBJECT", "Betreff" );
+define ( "TRANSLATION_SUBMIT_FORM_URL", "Formular Absende-URL" );
+define ( "TRANSLATION_FIELDS", "Felder" );
+define ( "TRANSLATION_MAIL_FROM_FIELD", "Feld, welches den Absender enthält" );
+define ( "TRANSLATION_TARGET_PAGE_ID", "Erfolgsseite" );
 
 add_hook ( "lang_de" );

@@ -532,46 +532,45 @@ define ( "TRANSLATION_RESTORE", "Restore" );
 define ( "TRANSLATION_RESTORE_OLDER_VERSION", "Restore an older version" );
 define ( "TRANSLATION_ASK_FOR_RESTORE", "Do you really want to restore this older version?" );
 
-define("TRANSLATION_MOBILE_DEVICES", "Mobile Devices");
-define("TRANSLATION_DESKTOP_COMPUTERS", "Desktop PCs");
+define ( "TRANSLATION_MOBILE_DEVICES", "Mobile Devices" );
+define ( "TRANSLATION_DESKTOP_COMPUTERS", "Desktop PCs" );
 
-define("TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "Delete IP addresses after 48 hours");
-define("TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Access from your ip address is not allowed.<br/>
-Please ask your system administrator to add your ip address to whitelist.");
+define ( "TRANSLATION_DELETE_IPS_AFTER_48_HOURS", "Delete IP addresses after 48 hours" );
+define ( "TRANSLATION_LOGIN_FROM_IP_NOT_ALLOWED", "Access from your ip address is not allowed.<br/>
+Please ask your system administrator to add your ip address to whitelist." );
 
 // Open Graph
-define("TRANSLATION_OPEN_GRAPH", "Open Graph");
-define("TRANSLATION_TYPE", "Type");
-define("TRANSLATION_IMAGE", "Image");
+define ( "TRANSLATION_OPEN_GRAPH", "Open Graph" );
+define ( "TRANSLATION_TYPE", "Type" );
+define ( "TRANSLATION_IMAGE", "Image" );
 
-define("TRANSLATION_OG_HELP", "Open Graph Metadata are used by social networks like Facebook, when someone shares a link. If you let a field empty a default value that can be configured in settings will be used.");
-define("TRANSLATION_OG_DEFAULTS_HELP", "Open Graph Metadata are used by social networks like Facebook, when someone shares a link. You can set default values here. These are used as fallback if not specified for a page.");
+define ( "TRANSLATION_OG_HELP", "Open Graph Metadata are used by social networks like Facebook, when someone shares a link. If you let a field empty a default value that can be configured in settings will be used." );
+define ( "TRANSLATION_OG_DEFAULTS_HELP", "Open Graph Metadata are used by social networks like Facebook, when someone shares a link. You can set default values here. These are used as fallback if not specified for a page." );
 
 // Patch Management
-define("TRANSLATION_INSTALLED_PATCHES", "Installed Patches");
-define("TRANSLATION_INSTALLED_PATCHES_HELP", "Patches are files that fix errors in UliCMS.");
-define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST", "Reset List");
-define("TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM",
-"Warning! You are about to truncate the list of installed patches.\\nThis will not uninstall any patches. Only database entries will be deleted.\\nDo you want to continue?");
+define ( "TRANSLATION_INSTALLED_PATCHES", "Installed Patches" );
+define ( "TRANSLATION_INSTALLED_PATCHES_HELP", "Patches are files that fix errors in UliCMS." );
+define ( "TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST", "Reset List" );
+define ( "TRANSLATION_TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM", "Warning! You are about to truncate the list of installed patches.\\nThis will not uninstall any patches. Only database entries will be deleted.\\nDo you want to continue?" );
 
 // Favicon Upload
-define("TRANSLATION_HIGH_RESOLUTION", "High Resolution");
+define ( "TRANSLATION_HIGH_RESOLUTION", "High Resolution" );
 
 // Multisite
-define("TRANSLATION_WEBSITE", "Website");
-define("TRANSLATION_DEFAULT_WEBSITE", "[Default]");
+define ( "TRANSLATION_WEBSITE", "Website" );
+define ( "TRANSLATION_DEFAULT_WEBSITE", "[Default]" );
 
-define("TRANSLATION_MOBILE_CSS", "Mobile CSS");
+define ( "TRANSLATION_MOBILE_CSS", "Mobile CSS" );
 
 // Forms
-define("TRANSLATION_FORMS", "Forms");
-define("TRANSLATION_CREATE_FORM", "Create form");
-define("TRANSLATION_EDIT_FORM", "Edit form");
-define("TRANSLATION_EMAIL_TO", "E-Mail to");
-define("TRANSLATION_SUBJECT", "Subject");
-define("TRANSLATION_SUBMIT_FORM_URL", "Submit Form URL");
-define("TRANSLATION_FIELDS", "Fields");
-define("TRANSLATION_MAIL_FROM_FIELD", "Field, which contains the sender e-mail adress");
-define("TRANSLATION_TARGET_PAGE_ID", "Target Page");
+define ( "TRANSLATION_FORMS", "Forms" );
+define ( "TRANSLATION_CREATE_FORM", "Create form" );
+define ( "TRANSLATION_EDIT_FORM", "Edit form" );
+define ( "TRANSLATION_EMAIL_TO", "E-Mail to" );
+define ( "TRANSLATION_SUBJECT", "Subject" );
+define ( "TRANSLATION_SUBMIT_FORM_URL", "Submit Form URL" );
+define ( "TRANSLATION_FIELDS", "Fields" );
+define ( "TRANSLATION_MAIL_FROM_FIELD", "Field, which contains the sender e-mail adress" );
+define ( "TRANSLATION_TARGET_PAGE_ID", "Target Page" );
 
 add_hook ( "lang_en" );

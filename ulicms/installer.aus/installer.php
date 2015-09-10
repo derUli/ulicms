@@ -5,10 +5,10 @@ error_reporting ( E_ALL ^ E_NOTICE );
 
 define ( "REQUIRED_PHP_VERSION", "5.3.0" );
 
-@set_time_limit(0);
+@set_time_limit ( 0 );
 
 include_once "../version.php";
-$ulicms_version = new ulicms_version();
+$ulicms_version = new ulicms_version ();
 
 if (! isset ( $_SESSION ["language"] )) {
 	$_SESSION ["language"] = "de";
@@ -135,8 +135,7 @@ echo TRANSLATION_TITLE;
 			title="<?php
 		
 		echo TRANSLATION_PERMISSIONS2;
-		?>"
-			border=1 />
+		?>" border=1 />
 	</p>
 
 	<?php
@@ -721,8 +720,8 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   `updated` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
-
-mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."forms` (
+			
+			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "forms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email_to` varchar(255) NOT NULL,
@@ -734,7 +733,7 @@ mysqli_query($connection, "CREATE TABLE IF NOT EXISTS `".$prefix."forms` (
   `created` bigint(20) DEFAULT NULL,
   `updated` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
 			
 			$sql_categories_table = "CREATE TABLE " . $prefix . "categories (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -771,6 +770,7 @@ ON DELETE SET NULL";
 			
 			/**
 			 * $constraint5 = "ALTER TABLE `" .
+			 *
 			 *
 			 *
 			 *
@@ -869,7 +869,8 @@ class config extends baseConfig{
 	?>
 	<hr style="margin-top: 30px;" />
 	<p style="color: #6f6f6f; font-size: small;">
-		&copy; 2011 - <?php echo $ulicms_version->getReleaseYear();?> by <a href="http://www.ulicms.de" target="_blank">ulicms.de</a>
+		&copy; 2011 - <?php echo $ulicms_version->getReleaseYear();?> by <a
+			href="http://www.ulicms.de" target="_blank">ulicms.de</a>
 	</p>
 </body>
 </html>
