@@ -72,8 +72,7 @@ if ($acl->hasPermission ( "videos" )) {
 		value="<?php
 		
 		echo $result->width;
-		?>"
-		step="1"> <br /> <br /> <strong><?php
+		?>" step="1"> <br /> <br /> <strong><?php
 		
 		translate ( "height" );
 		?>
@@ -81,8 +80,7 @@ if ($acl->hasPermission ( "videos" )) {
 		value="<?php
 		
 		echo $result->height;
-		?>"
-		step="1"> <br /> <br /> <strong><?php
+		?>" step="1"> <br /> <br /> <strong><?php
 		
 		translate ( "insert_this_code_into_a_page" );
 		?>
@@ -92,8 +90,7 @@ if ($acl->hasPermission ( "videos" )) {
 		echo $result->id;
 		?>]"
 		onclick="this.focus();this.select();" readonly> <br /> <br /> <input
-		type="submit"
-		value="<?php
+		type="submit" value="<?php
 		
 		translate ( "SAVE_CHANGES" );
 		?>">
@@ -104,4 +101,4 @@ if ($acl->hasPermission ( "videos" )) {
 	}
 } else {
 	noperms ();
-    }
+}

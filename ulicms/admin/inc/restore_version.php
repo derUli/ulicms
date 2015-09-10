@@ -22,7 +22,7 @@ if (defined ( "_SECURITY" )) {
 	<tbody>
 <?php
 		
-foreach ( $revisions as $revision ) {
+		foreach ( $revisions as $revision ) {
 			$view_diff_link = "index.php?action=view_diff&content_id=" . $revision->content_id . "&history_id=" . $revision->id;
 			?>
 <tr>
@@ -30,7 +30,7 @@ foreach ( $revisions as $revision ) {
 			<td><a href="<?php echo $view_diff_link;?>" target="_blank"><?php translate("view_diff");?></a></td>
 			<td><?php
 			
-$user = getUserById ( $revision->user_id );
+			$user = getUserById ( $revision->user_id );
 			if ($user and isset ( $user ["username"] )) {
 				echo htmlspecialchars ( $user ["username"] );
 			}
@@ -47,8 +47,7 @@ $user = getUserById ( $revision->user_id );
 </table>
 <?php
 	} else {
-      noperms();    
-    }
-    
-    }
+		noperms ();
+	}
+}
 ?>

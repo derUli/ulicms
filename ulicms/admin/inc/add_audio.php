@@ -38,8 +38,7 @@ if ($acl->hasPermission ( "audio" )) {
 	echo translate ( "audio_mp3" );
 	?>
 	</strong><br /> <input name="mp3_file" type="file"><br /> <br /> <input
-		type="submit"
-		value="<?php
+		type="submit" value="<?php
 	
 	translate ( "UPLOAD_audio" );
 	?>">

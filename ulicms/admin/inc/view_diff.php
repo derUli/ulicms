@@ -39,6 +39,5 @@ if (defined ( "_SECURITY" )) {
 	} else {
 		noperms ();
 	}
-    
-    }
+}
 ?>

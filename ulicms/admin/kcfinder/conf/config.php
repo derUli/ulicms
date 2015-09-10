@@ -81,17 +81,17 @@ $_CONFIG = array (
 		'deniedExts' => "exe com msi bat cgi pl php phps phtml php3 php4 php5 php6 py pyc pyo pcgi pcgi3 pcgi4 pcgi5 pchi6",
 		
 		// MISC SETTINGS
-		'filenameChangeChars' => array ()/**
+		'filenameChangeChars' => array (),
+		/**
 		 * ' ' => "_",
 		 * ':' => "."
 		 */
-		,
 		
-		'dirnameChangeChars' => array ()/**
+		'dirnameChangeChars' => array (),
+		/**
 		 * ' ' => "_",
 		 * ':' => "."
 		 */
-		,
 		
 		'mime_magic' => "",
 		
@@ -104,14 +104,14 @@ $_CONFIG = array (
 		'_check4htaccess' => false,
 		// '_tinyMCEPath' => "/tiny_mce",
 		'_sessionVar' => "KCFINDER" 
-)
+);
 // '_sessionLifetime' => 30,
 // '_sessionDir' => "/full/directory/path",
 // '_sessionDomain' => ".mysite.com",
 // '_sessionPath' => "/my/path",
 // '_cssMinCmd' => "java -jar /path/to/yuicompressor.jar --type css {file}",
 // '_jsMinCmd' => "java -jar /path/to/yuicompressor.jar --type js {file}",
-;
+
 
 include_once "../../init.php";
 

@@ -100,8 +100,7 @@ if (defined ( "_SECURITY" )) {
 		echo nl2br ( TRANSLATION_HELP_POSITION );
 		?>
 	</div>
-	<br /> <br />
-	<strong><?php
+	<br /> <br /> <strong><?php
 		
 		echo TRANSLATION_PARENT;
 		?>
@@ -118,8 +117,7 @@ if (defined ( "_SECURITY" )) {
 		
 		foreach ( $pages as $key => $page ) {
 			?>
-		<option
-			value="<?php
+		<option value="<?php
 			
 			echo $page ["id"];
 			?>">
@@ -233,8 +231,7 @@ function openMenuImageSelectWindow(field) {
 		
 		foreach ( $allThemes as $th ) {
 			?>
-			<option
-				value="<?php
+			<option value="<?php
 			
 			echo $th;
 			?>">
@@ -285,10 +282,7 @@ function openMenuImageSelectWindow(field) {
 		echo TRANSLATION_META_KEYWORDS;
 		?>
 		</strong><br /> <input type="text" name="meta_keywords" value=''> <br />
-		<br /> 
-		
-		
-		<strong><?php
+		<br /> <strong><?php
 		
 		echo TRANSLATION_OPEN_IN;
 		?>
@@ -305,23 +299,20 @@ function openMenuImageSelectWindow(field) {
 		echo TRANSLATION_TARGET_BLANK;
 		?>
 			</option>
-		</select> 
-		
+		</select>
+
 		<h3><?php translate("open_graph");?></h3>
 		<p><?php translate("og_help");?></p>
-		<div style="margin-left:20px;">
-		<strong><?php translate("title");?>
-		</strong><br /> <input type="text" name="og_title" value=""> <br />
-		 <br />
-		 
-		<strong><?php translate("description");?>
+		<div style="margin-left: 20px;">
+			<strong><?php translate("title");?>
+		</strong><br /> <input type="text" name="og_title" value=""> <br /> <br />
+
+			<strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description" value=""> <br />
-		<br />
-		<strong><?php translate("type");?>
+			<br /> <strong><?php translate("type");?>
 		</strong><br /> <input type="text" name="og_type" value=""> <br /> <br />
-		<strong><?php translate("image");?>
-		<br/>
-		<script type="text/javascript">
+			<strong><?php translate("image");?>
+		<br /> <script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -334,25 +325,24 @@ function openMenuImageSelectWindow(field) {
         'resizable=1, scrollbars=0, width=800, height=600'
     );
 }
-</script>
-
-
-		<input type="text" id="og_image" name="og_image"
-			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-			value="<?php echo htmlspecialchars($og_image);?>" style="cursor: pointer" /><br /> <a href="#"
-			onclick="$('#og_image').val('');return false;"><?php
+</script> <input type="text" id="og_image" name="og_image"
+				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+				value="<?php echo htmlspecialchars($og_image);?>"
+				style="cursor: pointer" /><br /> <a href="#"
+				onclick="$('#og_image').val('');return false;"><?php
 		
 		echo TRANSLATION_CLEAR;
 		?>
-		</a> 
+		</a>
 		
 		</div>
 		<h3><?php
 		
 		echo TRANSLATION_CUSTOM_DATA_JSON;
 		?>
-		</h3><textarea name="custom_data"
-			style="width: 100%; height: 200px;" cols=80 rows=10>{}</textarea>
+		</h3>
+		<textarea name="custom_data" style="width: 100%; height: 200px;"
+			cols=80 rows=10>{}</textarea>
 
 
 	</fieldset>
@@ -444,8 +434,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 		</noscript>
 		<div class="inPageMessage"></div>
 		<input type="hidden" name="add_page" value="add_page"> <input
-			type="submit"
-			value="<?php
+			type="submit" value="<?php
 		
 		echo TRANSLATION_SAVE;
 		?>">
@@ -469,6 +458,5 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 	?>
 
 <?php
-    
-    }
+}
 ?>

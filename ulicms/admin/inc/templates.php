@@ -49,8 +49,7 @@ if (defined ( "_SECURITY" )) {
 
 
 <?php
-			
-}
+			}
 			?>
 
 	<?php
@@ -64,8 +63,7 @@ if (defined ( "_SECURITY" )) {
 	</a>
 </p>
 <?php
-			
-}
+			}
 			?>
 	<?php
 			if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )) {
@@ -78,8 +76,7 @@ if (defined ( "_SECURITY" )) {
 	</a>
 </p>
 <?php
-			
-}
+			}
 			?>
 
 
@@ -95,22 +92,22 @@ if (defined ( "_SECURITY" )) {
 </p>
 
 <?php
-			
-}
+			}
 			?>
 			
 			<?php
-		if (file_exists ( getTemplateDirPath ( $theme ) . "mobile.css" )) {
-			?>
-				<p><a href="?action=templates&edit=mobile.css"><?php
-			
-			echo TRANSLATION_MOBILE_CSS;
-			?></a></p>
+			if (file_exists ( getTemplateDirPath ( $theme ) . "mobile.css" )) {
+				?>
+<p>
+	<a href="?action=templates&edit=mobile.css"><?php
+				
+				echo TRANSLATION_MOBILE_CSS;
+				?></a>
+</p>
 
-				<?php
-		
-}
-		?>
+<?php
+			}
+			?>
 	<?php
 			if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 				?>
