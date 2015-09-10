@@ -1,2 +1,2 @@
 <?php
-no_anti_csrf();
+no_anti_csrf ();
