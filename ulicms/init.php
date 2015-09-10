@@ -10,8 +10,8 @@ if (! defined ( "ULICMS_ROOT" )) {
 
 $update_script = ULICMS_ROOT . "/update.php";
 
-if(file_exists($update_script) and is_writable($update_script) and !defined("SKIP_TABLE_CHECK") and basename($_SERVER['SCRIPT_NAME']) != "update.php"){
-   define("SKIP_TABLE_CHECK", true);
+if (file_exists ( $update_script ) and is_writable ( $update_script ) and ! defined ( "SKIP_TABLE_CHECK" ) and basename ( $_SERVER ['SCRIPT_NAME'] ) != "update.php") {
+	define ( "SKIP_TABLE_CHECK", true );
 }
 
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
@@ -253,13 +253,13 @@ if ($useragent) {
 
 @ini_set ( 'user_agent', ULICMS_USERAGENT );
 
-if (! getconfig ( "hide_meta_generator" )){
+if (! getconfig ( "hide_meta_generator" )) {
 	@header ( 'X-Powered-By: UliCMS Release ' . cms_version () );
 }
 
 $memory_limit = getconfig ( "memory_limit" );
 
-if ($memory_limit !== false){
+if ($memory_limit !== false) {
 	@ini_set ( 'memory_limit', $memory_limit );
 }
 
@@ -331,30 +331,30 @@ if (isset ( $_SESSION ["session_begin"] )) {
 
 $enforce_https = getconfig ( "enforce_https" );
 
-if (!is_ssl() and $enforce_https !== false) {
+if (! is_ssl () and $enforce_https !== false) {
 	header ( "Location: https://" . $_SERVER ["HTTP_HOST"] . $_SERVER ["REQUEST_URI"] );
 	exit ();
 }
 
-if(!getconfig("disable_hsts") and is_ssl()){
-   $maxage = getconfig("hsts_maxage");
-   if($maxage === false)
-      $maxage = 10 * 30;
-   
-   $maxage = intval($maxage);
-
-   $includeSubDomains = getconfig("hsts_include_subdomains");
-   if(!$includeSubDomains){
-      $includeSubDomains =  "";
+if (! getconfig ( "disable_hsts" ) and is_ssl ()) {
+	$maxage = getconfig ( "hsts_maxage" );
+	if ($maxage === false)
+		$maxage = 10 * 30;
+	
+	$maxage = intval ( $maxage );
+	
+	$includeSubDomains = getconfig ( "hsts_include_subdomains" );
+	if (! $includeSubDomains) {
+		$includeSubDomains = "";
 	}
-    $str = "Strict-Transport-Security: max-age=".$maxage;
-    if(!empty($includeSubDomains)){
-       $str .= "; ".$includeSubDomains;
+	$str = "Strict-Transport-Security: max-age=" . $maxage;
+	if (! empty ( $includeSubDomains )) {
+		$str .= "; " . $includeSubDomains;
 	}
-
-    $str = trim($str);
-
-    header($str);
+	
+	$str = trim ( $str );
+	
+	header ( $str );
 }
 
 add_hook ( "before_init" );
@@ -384,8 +384,8 @@ session_name ( getconfig ( "session_name" ) );
 @include_once "lib/string_functions.php";
 
 // Automatisches Update beim Seitenaufruf wenn update.php existiert
-if(file_exists($update_script) and is_writable($update_script) and basename($_SERVER['SCRIPT_NAME']) != "update.php"){
-   $_GET["include_update"] = true;
-   include $update_script;
-   clearCache();
+if (file_exists ( $update_script ) and is_writable ( $update_script ) and basename ( $_SERVER ['SCRIPT_NAME'] ) != "update.php") {
+	$_GET ["include_update"] = true;
+	include $update_script;
+	clearCache ();
 }

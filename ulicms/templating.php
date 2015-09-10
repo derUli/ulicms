@@ -1,102 +1,93 @@
 <?php
-
-function template_part($name, $theme = null){
-   if(!$theme){
-      $theme = get_theme();
-   }
-   $file = getTemplateDirPath ( $theme ) . $name.".php";
+function template_part($name, $theme = null) {
+	if (! $theme) {
+		$theme = get_theme ();
+	}
+	$file = getTemplateDirPath ( $theme ) . $name . ".php";
 }
-
-function html5_doctype(){
-   echo get_html5_doctype();
+function html5_doctype() {
+	echo get_html5_doctype ();
 }
-
-function get_html5_doctype(){
-   $html = '<!doctype html>';
-   $html .= "\r\n";
-   return $html;
+function get_html5_doctype() {
+	$html = '<!doctype html>';
+	$html .= "\r\n";
+	return $html;
 }
-
-function og_html_prefix(){
-  echo get_og_html_prefix();
+function og_html_prefix() {
+	echo get_og_html_prefix ();
 }
-
-function get_og_html_prefix(){
-   $html = '<html prefix="og: http://ogp.me/ns#" lang="'.getCurrentLanguage().'">';
-   $html .= "\r\n";
-   return $html;
+function get_og_html_prefix() {
+	$html = '<html prefix="og: http://ogp.me/ns#" lang="' . getCurrentLanguage () . '">';
+	$html .= "\r\n";
+	return $html;
 }
-
-function og_tags(){
-   echo get_og_tags();
+function og_tags() {
+	echo get_og_tags ();
 }
-function get_og_tags($systemname = null){
-
-   $html = "";
-   if(is_200()){
-     $og_data = get_og_data($systemname);
-     $og_title = $og_data["og_title"];
-     $og_type = $og_data["og_type"];
-     $og_image = $og_data["og_image"];
-     $og_description = $og_data["og_description"];
-     $og_url = getCurrentURL();
-   
-     // Falls kein og_title für die Seite gesetzt ist, Standardtitel bzw. Headline verwenden
-     if(is_null($og_title) or empty($og_title)){
-        $og_title = get_headline();
-   }
-   
-   if(is_null($og_type) or empty($og_type)){
-      $og_type = getconfig("og_type");
-   }
-   
-    if(is_null($og_image) or empty($og_image)){
-      $og_image = getconfig("og_image");
-   }
-   
-   if(!$og_type){
-       $og_type = "article";
-   }
-   
-   if(!empty($og_image) and !startsWith($og_image, "http")){
-      $og_image = get_protocol_and_domain(). $og_image;
-   }
-   
-   
-    if(is_null($og_description) or empty($og_description)){
-      $og_description = meta_description();
-   }
-   
-   $og_title = apply_filter ( $og_title, "og_title" );
-   $og_type = apply_filter ( $og_type, "og_type" );
-   $og_url = apply_filter ( $og_url, "og_url" );
-   $og_image = apply_filter ( $og_image, "og_image" );
-   $og_description = apply_filter($og_description, "og_description");
-   
-   $html .= '<meta property="og:title" content="'.htmlspecialchars($og_title).'" />';
-   $html .= "\r\n";
-   
-   if(!is_null($og_description) and !empty($og_description)){
-      $html .= '<meta property="og:description" content="'.htmlspecialchars($og_description).'" />';
-      $html .= "\r\n";
-   }
-   
-   $html .= '<meta property="og:type" content="'.htmlspecialchars($og_type).'" />';
-   $html .= "\r\n";
-   
-   $html .= '<meta property="og:url" content="'.htmlspecialchars($og_url).'" />';
-   $html .= "\r\n";
-   
-   $html .= '<meta property="og:image" content="'.htmlspecialchars($og_image).'" />';
-   $html .= "\r\n";
-   $html .= '<meta property="og:site_name" content="'.get_homepage_title().'" />';
-   $html .= "\r\n";
-   }
-
-   $html = apply_filter($html, "og_html");
-   return $html;
+function get_og_tags($systemname = null) {
+	$html = "";
+	if (is_200 ()) {
+		$og_data = get_og_data ( $systemname );
+		$og_title = $og_data ["og_title"];
+		$og_type = $og_data ["og_type"];
+		$og_image = $og_data ["og_image"];
+		$og_description = $og_data ["og_description"];
+		$og_url = getCurrentURL ();
+		
+		// Falls kein og_title für die Seite gesetzt ist, Standardtitel bzw. Headline verwenden
+		if (is_null ( $og_title ) or empty ( $og_title )) {
+			$og_title = get_headline ();
+		}
+		
+		if (is_null ( $og_type ) or empty ( $og_type )) {
+			$og_type = getconfig ( "og_type" );
+		}
+		
+		if (is_null ( $og_image ) or empty ( $og_image )) {
+			$og_image = getconfig ( "og_image" );
+		}
+		
+		if (! $og_type) {
+			$og_type = "article";
+		}
+		
+		if (! empty ( $og_image ) and ! startsWith ( $og_image, "http" )) {
+			$og_image = get_protocol_and_domain () . $og_image;
+		}
+		
+		if (is_null ( $og_description ) or empty ( $og_description )) {
+			$og_description = meta_description ();
+		}
+		
+		$og_title = apply_filter ( $og_title, "og_title" );
+		$og_type = apply_filter ( $og_type, "og_type" );
+		$og_url = apply_filter ( $og_url, "og_url" );
+		$og_image = apply_filter ( $og_image, "og_image" );
+		$og_description = apply_filter ( $og_description, "og_description" );
+		
+		$html .= '<meta property="og:title" content="' . htmlspecialchars ( $og_title ) . '" />';
+		$html .= "\r\n";
+		
+		if (! is_null ( $og_description ) and ! empty ( $og_description )) {
+			$html .= '<meta property="og:description" content="' . htmlspecialchars ( $og_description ) . '" />';
+			$html .= "\r\n";
+		}
+		
+		$html .= '<meta property="og:type" content="' . htmlspecialchars ( $og_type ) . '" />';
+		$html .= "\r\n";
+		
+		$html .= '<meta property="og:url" content="' . htmlspecialchars ( $og_url ) . '" />';
+		$html .= "\r\n";
+		
+		$html .= '<meta property="og:image" content="' . htmlspecialchars ( $og_image ) . '" />';
+		$html .= "\r\n";
+		$html .= '<meta property="og:site_name" content="' . get_homepage_title () . '" />';
+		$html .= "\r\n";
+	}
+	
+	$html = apply_filter ( $html, "og_html" );
+	return $html;
 }
-
 function get_og_data($systemname = "") {
 	if (empty ( $systemname )) {
 		$systemname = $_GET ["seite"];
@@ -111,7 +102,6 @@ function get_og_data($systemname = "") {
 		return null;
 	}
 }
-
 function get_all_combined_html() {
 	$html = "";
 	$html .= get_combined_stylesheet_html ();
@@ -163,7 +153,6 @@ function get_type() {
 		$result = "page";
 	return $result;
 }
-
 function get_category_id($page = null) {
 	if (! $page)
 		$page = get_requested_pagename ();
@@ -176,15 +165,12 @@ function get_category_id($page = null) {
 	}
 	return $result;
 }
-
-function category_id($page = null){
-  echo get_category_id($page);
+function category_id($page = null) {
+	echo get_category_id ( $page );
 }
-
-
 function get_parent($page = null) {
 	if (! $page)
-	  $page = get_requested_pagename ();
+		$page = get_requested_pagename ();
 	$result = "";
 	$sql = "SELECT `parent` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -252,14 +238,14 @@ function get_redirection($page = null) {
 	return null;
 }
 function get_theme($page = null) {
-	if (! $page){
+	if (! $page) {
 		$page = get_requested_pagename ();
-        }
+	}
 	$theme = getconfig ( "theme" );
 	$mobile_theme = getconfig ( "mobile_theme" );
-	if ($mobile_theme and ! empty ( $mobile_theme ) and is_mobile ()){
+	if ($mobile_theme and ! empty ( $mobile_theme ) and is_mobile ()) {
 		$theme = $mobile_theme;
-        }
+	}
 	
 	if (is_200 ()) {
 		$sql = "SELECT `theme` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
@@ -283,17 +269,17 @@ function signature() {
 	}
 }
 function get_signature($page = null) {
-	if (! is_200 ()){
+	if (! is_200 ()) {
 		return "";
-        }
+	}
 	
-	if (! $page){
+	if (! $page) {
 		$page = get_requested_pagename ();
-        }
+	}
 	
-	if (containsModule ( $page )){
+	if (containsModule ( $page )) {
 		return "";
-        }
+	}
 	
 	$sql = "SELECT `signature` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -358,7 +344,7 @@ function category() {
 	echo get_category ();
 }
 function get_body_classes() {
-	$str = "page-id-".get_ID()." ";
+	$str = "page-id-" . get_ID () . " ";
 	if (is_frontpage ()) {
 		$str .= "home ";
 	}
@@ -693,14 +679,14 @@ function get_menu($name = "top", $parent = null, $recursive = true) {
 		if (checkAccess ( $row->access )) {
 			$containsCurrentItem = parent_item_contains_current_page ( $row->id );
 			
-			$additional_classes = " menu-link-to-".$row->id." ";
+			$additional_classes = " menu-link-to-" . $row->id . " ";
 			if ($containsCurrentItem)
 				$additional_classes .= "contains-current-page ";
 			
 			if (get_requested_pagename () != $row->systemname)
 				$html .= "  <li class='" . trim ( $additional_classes ) . "'>";
 			else
-				$html .= "  <li class='menu_active_list_item" . rtrim($additional_classes) . "'>";
+				$html .= "  <li class='menu_active_list_item" . rtrim ( $additional_classes ) . "'>";
 			if (! empty ( $row->alternate_title ))
 				$title = $row->alternate_title;
 			else
@@ -708,7 +694,7 @@ function get_menu($name = "top", $parent = null, $recursive = true) {
 			if (get_requested_pagename () != $row->systemname) {
 				$html .= "<a href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "' class='" . trim ( $additional_classes ) . "'>";
 			} else {
-				$html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "'>";
+				$html .= "<a class='menu_active_link" . rtrim ( $additional_classes ) . "' href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "'>";
 			}
 			if (! is_null ( $row->menu_image ) and ! empty ( $row->menu_image )) {
 				$html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities ( $row->title, ENT_QUOTES, "UTF-8" ) . '"/>';
@@ -755,7 +741,7 @@ function base_metas() {
 		$title = str_ireplace ( "%title%", get_title (), $title );
 		$title = str_ireplace ( "%motto%", get_motto (), $title );
 		
-	        $title = apply_filter ( $title, "title_tag" );
+		$title = apply_filter ( $title, "title_tag" );
 		$title = htmlentities ( $title, ENT_QUOTES, "UTF-8" );
 		
 		echo "<title>" . $title . "</title>\r\n";
@@ -767,9 +753,9 @@ function base_metas() {
 	echo '<meta charset="utf-8"/>';
 	echo "\r\n";
 	
-	if(!getconfig("disable_no_format_detection")){
-	   echo '<meta name="format-detection" content="telephone=no">';
-	   echo "\r\n";
+	if (! getconfig ( "disable_no_format_detection" )) {
+		echo '<meta name="format-detection" content="telephone=no">';
+		echo "\r\n";
 	}
 	
 	$dir = dirname ( $_SERVER ["SCRIPT_NAME"] );
@@ -940,26 +926,24 @@ function content() {
 		db_query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . $_GET ["seite"] . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	return import ( $_GET ["seite"] );
 }
-
-function checkforAccessForDevice($access){
+function checkforAccessForDevice($access) {
 	$access = explode ( ",", $access );
 	$allowed = false;
-	if (in_array ( "mobile", $access ) and is_mobile()){
-            $allowed = true;
+	if (in_array ( "mobile", $access ) and is_mobile ()) {
+		$allowed = true;
 	}
-	if (in_array ( "desktop", $access ) and !is_mobile()){
-            $allowed = true;
+	if (in_array ( "desktop", $access ) and ! is_mobile ()) {
+		$allowed = true;
 	}
-	if (!in_array ( "mobile", $access ) and !in_array ( "desktop", $access )){
-            $allowed = true;
+	if (! in_array ( "mobile", $access ) and ! in_array ( "desktop", $access )) {
+		$allowed = true;
 	}
 	return $allowed;
 }
-
 function checkAccess($access = "") {
-	$access_for_device = checkforAccessForDevice($access);
-	if(!$access_for_device){
-           return null;	
+	$access_for_device = checkforAccessForDevice ( $access );
+	if (! $access_for_device) {
+		return null;
 	}
 	$access = explode ( ",", $access );
 	if (in_array ( "all", $access ))

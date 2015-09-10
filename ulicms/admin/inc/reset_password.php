@@ -22,7 +22,7 @@ echo TRANSLATION_RESET_PASSWORD;
 <p>
 	<a href="./">[<?php
 	
-translate ( "back_to_login" );
+	translate ( "back_to_login" );
 	?>]</a>
 </p>
 <form action="index.php?reset_password" method="post">
@@ -30,9 +30,9 @@ translate ( "back_to_login" );
 csrf_token_html ();
 ?>
 		<strong><?php
-	
-	translate ( "username" );
-	?>
+		
+		translate ( "username" );
+		?>
 	</strong> <br /> <input type="text" name="username" value=""> <br /> <br />
 	<input type="submit"
 		value="<?php

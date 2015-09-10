@@ -24,12 +24,10 @@ if (logged_in () and $_SERVER ["REQUEST_METHOD"] == "POST" and ! isset ( $_REQUE
 
 setLocaleByLanguage ();
 
-
-$cfg = new config();
-if(isset($cfg->ip_whitelist) and is_array($cfg->ip_whitelist) 
-and count($cfg->ip_whitelist) > 0 and !in_array(get_ip(), $cfg->ip_whitelist)){
-  translate("login_from_ip_not_allowed");
-  die();
+$cfg = new config ();
+if (isset ( $cfg->ip_whitelist ) and is_array ( $cfg->ip_whitelist ) and count ( $cfg->ip_whitelist ) > 0 and ! in_array ( get_ip (), $cfg->ip_whitelist )) {
+	translate ( "login_from_ip_not_allowed" );
+	die ();
 }
 
 require_once "inc/queries.php";
@@ -154,14 +152,13 @@ if (! $eingeloggt) {
 		require_once "inc/available_modules.php";
 	} else if ($_GET ["action"] == "install_modules") {
 		require_once "inc/install_modules.php";
-	}  else if ($_GET ["action"] == "open_graph") {
-		require_once "inc/open_graph.php";	
-	}  else if ($_GET ["action"] == "forms") {
+	} else if ($_GET ["action"] == "open_graph") {
+		require_once "inc/open_graph.php";
+	} else if ($_GET ["action"] == "forms") {
 		require_once "inc/forms.php";
-	
-	}  else if ($_GET ["action"] == "forms_new") {
+	} else if ($_GET ["action"] == "forms_new") {
 		require_once "inc/forms_new.php";
-	}   else if ($_GET ["action"] == "forms_edit") {
+	} else if ($_GET ["action"] == "forms_edit") {
 		require_once "inc/forms_edit.php";
 	} 
 
