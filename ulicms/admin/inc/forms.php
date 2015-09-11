@@ -57,7 +57,7 @@ tr.odd input#form-submit-url {
 	foreach ( $forms as $form ) {
 		$submit_form_url = "?submit-cms-form=" . $form ["id"];
 		?>
-<tr>
+<tr id="dataset-<?php echo $form["id"];?>">
 			<td><?php echo $form["id"];?></td>
 			<td><?php echo htmlspecialchars($form["name"]);?></td>
 			<td><?php echo htmlspecialchars($form["email_to"]);?></td>
@@ -100,6 +100,23 @@ tr.odd input#form-submit-url {
 <?php }?>
 </tbody>
 </table>
+<script type="text/javascript">
+
+var ajax_options = {
+  success : function(responseText, statusText, xhr, $form){
+  var action =$($form).attr("action");
+  var id = url('?del', action);
+  var list_item_id = "dataset-" + id
+  var tr = $("tr#" + list_item_id);
+  $(tr).fadeOut();
+  
+  }
+  
+
+}
+
+$("form.delete-form").ajaxForm(ajax_options); 
+</script>
 <?php 
 }
 ?>
