@@ -236,8 +236,9 @@ if (! defined ( "SKIP_TABLE_CHECK" )) {
 	for($i = 0; $i < count ( $required_tables ); $i ++) {
 		$table = $required_tables [$i];
 		if (! in_array ( $table, $existing_tables )) {
-			if (! headers_sent ())
+			if (! headers_sent ()){
 				header ( "Content-Type: text/html; charset=UTF-8" );
+			}
 			
 			throw new Exception ( "Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!" );
 			exit ();
