@@ -33,8 +33,11 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "history" ) . "` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
 
 // Änderungen in der Datenbank von 9.0.2
+
+// Log
 db_query ( "ALTER TABLE " . tbname ( "log" ) . " ADD COLUMN `referrer` varchar(255) DEFAULT NULL" );
 
+// Open Graph
 db_query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN `og_title` varchar(255) DEFAULT ''" );
 db_query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN `og_type` varchar(255) DEFAULT ''" );
 db_query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN `og_image` varchar(255) DEFAULT ''" );
