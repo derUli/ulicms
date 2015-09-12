@@ -340,8 +340,9 @@ if (! is_ssl () and $enforce_https !== false) {
 
 if (! getconfig ( "disable_hsts" ) and is_ssl ()) {
 	$maxage = getconfig ( "hsts_maxage" );
-	if ($maxage === false)
+	if ($maxage === false){
 		$maxage = 10 * 30;
+	}
 	
 	$maxage = intval ( $maxage );
 	
