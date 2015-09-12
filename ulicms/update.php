@@ -13,6 +13,7 @@ if (file_exists ( ULICMS_ROOT . "/templates" )) {
 }
 
 // Änderungen in der Datenbank von 9.0.1
+
 db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "mails" ) . "` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `headers` TEXT NOT NULL,
