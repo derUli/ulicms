@@ -229,7 +229,8 @@ if (! defined ( "SKIP_TABLE_CHECK" )) {
 			tbname ( "log" ),
 			tbname ( "mails" ),
 			tbname ( "history" ),
-			tbname ( "settings" ) 
+			tbname ( "settings" ) ,
+			tbname ( "forms" )
 	);
 	
 	for($i = 0; $i < count ( $required_tables ); $i ++) {
