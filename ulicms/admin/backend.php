@@ -14,6 +14,8 @@ $_COOKIE [session_name ()] = session_id ();
 
 add_hook ( "after_session_start" );
 
+setLanguageByDomain();
+
 $syslang = getSystemLanguage ();
 include_once getLanguageFilePath ( $syslang );
 if (logged_in () and $_SERVER ["REQUEST_METHOD"] == "POST" and ! isset ( $_REQUEST ["ajax_cmd"] ) and ! defined ( "NO_ANTI_CSRF" )) {

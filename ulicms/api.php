@@ -367,7 +367,11 @@ function getAvailableBackendLanguages() {
 function getSystemLanguage() {
 	if (isset ( $_SESSION ["system_language"] )) {
 		$lang = $_SESSION ["system_language"];
-	} else if (getconfig ( "system_language" )) {
+	} 
+	else if(isset($_SESSION["language"])){
+	    $lang = $_SESSION["language"];
+	}
+	else if (getconfig ( "system_language" )) {
 		$lang = getconfig ( "system_language" );
 	} else {
 		$lang = "de";
