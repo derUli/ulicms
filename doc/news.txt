@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 9.0.2 ====
+﻿===== Neues in UliCMS 9.8 ====
 + CKEditor auf Version 4.5.3 aktualisiert (Behebt Kompatiblitätsprobleme mit Microsofts neuem Edge Webbrowser)
 + Auswahl für Schriftart und Schriftgröße im CKEditor entfernt
 + Folgende Plugins in den CKEditor integriert

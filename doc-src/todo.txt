@@ -30,3 +30,6 @@ Doku
 Updates
 [ ] Patch für Update auf neueste Mobile_Detect Version veröffentlichen
 [X] Update für Sprachdatei veröffentlichen
+
+UliCMS 9.8
+[ ] Überall die Versionsnummer ersetzen (Info Broschüre, Paketquelle, usw.)
