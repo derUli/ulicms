@@ -33,7 +33,7 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "history" ) . "` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
 
-// Änderungen in der Datenbank von 9.0.2
+// Änderungen in der Datenbank von 9.8
 
 // Log
 db_query ( "ALTER TABLE " . tbname ( "log" ) . " ADD COLUMN `referrer` varchar(255) DEFAULT NULL" );
@@ -73,7 +73,7 @@ if (file_exists ( $content_htaccess )) {
 	@unlink ( $content_htaccess );
 }
 
-setconfig ( "db_schema_version", "9.0.2" );
+setconfig ( "db_schema_version", "9.8.0" );
 
 // Patch Manager zurücksetzen
 $pkg = new PackageManager ();
