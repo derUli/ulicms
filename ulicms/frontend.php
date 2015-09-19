@@ -89,7 +89,11 @@ if(isset($_GET["goid"])){
    if($sysname and $sysname != "-"){
       $url = buildSeoURL($sysname);
       ulicms_redirect ( $url, 301 );
-}
+   }
+   else {
+      $url = getBaseFolderURL();
+      ulicms_redirect ( $url, 301 );
+   }
    
 }
 
