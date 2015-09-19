@@ -784,32 +784,20 @@ function base_metas() {
 	}
 
         if(!getconfig("hide_shortlink") and (is_200() or is_403())){
-            $id = get_ID();
-            if($id){
-            $shortlink = getBaseFolderURL(). "/?goid=".get_ID();
-            echo '<link rel="shortlink" href="'.$shortlink.'"/>';
-            echo "\r\n";
+            $shortlink = get_shortlink();
+            if($shortlink){
+               echo '<link rel="shortlink" href="'.$shortlink.'"/>';
+               echo "\r\n";
             }
         }
 
         if(!getconfig("hide_canonical") and (is_200() or is_403())){
             
-            $canonical = getBaseFolderURL(). "/";
-            if(!is_frontpage()){
-               $canonical .= buildSEOUrl();
+            $canonical = get_canonical();
+            if($canonical){
+              echo '<link rel="canonical"  href="'.$canonical.'"/>';
+              echo "\r\n";
             }
-
-	    
-	    if (containsModule ( null, "blog" )) {
-                if(isset($_GET["single"])){
-                   $canonical .= "?single=".htmlspecialchars($_GET["single"]);
-                } else if(isset($_GET["limit"])){
-                   $canonical .= "?limit=".intval($_GET["limit"]);
-}
-            }
-
-            echo '<link rel="canonical"  href="'.$canonical.'"/>';
-            echo "\r\n";
             
         }
 	

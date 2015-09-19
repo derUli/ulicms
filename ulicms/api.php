@@ -2,6 +2,39 @@
 function is_ajax_request() {
 	return (! empty ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) && strtolower ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest');
 }
+
+function get_shortlink($id = null){
+
+if(is_null($id)){
+   $shortlink = null;
+   $id = get_ID();
+   }
+   if($id){
+       $shortlink = getBaseFolderURL(). "/?goid=".get_ID();         
+   }
+
+   return $shortlink;
+}
+
+function get_canonical(){
+   $canonical = getBaseFolderURL(). "/";
+   if(!is_frontpage()){
+               $canonical .= buildSEOUrl();
+            }
+
+	    
+	    if (containsModule ( null, "blog" )) {
+                if(isset($_GET["single"])){
+                   $canonical .= "?single=".htmlspecialchars($_GET["single"]);
+                } else if(isset($_GET["limit"])){
+                   $canonical .= "?limit=".intval($_GET["limit"]);
+}
+            }
+            return $canonical;
+}
+
+
+
 function is_crawler($userAgent = null) {
 	if (is_null ( $useragent )) {
 		$useragent = $_SERVER ['HTTP_USER_AGENT'];
