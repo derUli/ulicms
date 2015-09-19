@@ -18,7 +18,7 @@ if (! $acl->hasPermission ( "upload_patches" )) {
 window.location.replace("index.php?action=modules#installed_patches_a");
 </script>
 <?php }?>
-<h1><?php translate("upload_patch"); ?></h1>
+<h1><?php translate("install_patch_from_file"); ?></h1>
 <form enctype="multipart/form-data" action="index.php?action=upload_patches" method="POST">
 <?php csrf_token_html();?>
 <p><strong><?php translate("name");?></strong>

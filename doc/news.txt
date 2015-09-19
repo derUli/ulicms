@@ -50,3 +50,4 @@
 + Copyright-Jahr von UliCMS nun an zentraler Stelle
 + Bugfix: Beim Loginformular wurde immer die Sprachdatei der Standardsprache geladen. 
 Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird definiert ist geladen.
++ Patches können nun auch als Datei hochgeladen werden.

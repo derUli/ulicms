@@ -155,6 +155,10 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	translate("installed_patches_help");
 ?>
 	</p>
+	<?php if($acl->hasPermission("upload_patches")){
+	?>
+	<p><a href="index.php?action=upload_patches">[<?php translate("INSTALL_PATCH_FROM_FILE");?>]</a></p>
+	<?php }?>
 <div id="inst_patch_slide_container">
 <?php
 $pkg = new packageManager();
