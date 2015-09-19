@@ -782,6 +782,26 @@ function base_metas() {
 		output_favicon_code ();
 		echo "\r\n";
 	}
+
+        if(!getconfig("hide_shortlink") and (is_200() or is_403())){
+            $id = get_ID();
+            if($id){
+            $shortlink = getBaseFolderURL(). "/?goid=".get_ID();
+            echo '<link rel="shortlink" href="'.$shortlink.'"/>';
+            echo "\r\n";
+            }
+        }
+
+        if(!getconfig("hide_canonical") and (is_200() or is_403())){
+            
+            $canonical = getBaseFolderURL(). "/";
+            if(!is_frontpage()){
+               $canonical .= buildSEOUrl();
+            }
+            echo '<link rel="canonical"  href="'.$canonical.'"/>';
+            echo "\r\n";
+            
+        }
 	
 	echo '<link rel="stylesheet" type="text/css" href="core.css"/>';
 	echo "\r\n";

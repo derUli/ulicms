@@ -83,6 +83,16 @@ if ($redirection) {
 	ulicms_redirect ( $redirection, 302 );
 }
 
+if(isset($_GET["goid"])){
+   $goidd = intval($_GET["goid"]);
+   $sysname = getPageSystemnameByID($goid);
+   if($sysname and $sysname != "-"){
+      $url = buildSeoURL($sysname);
+      ulicms_redirect ( $url, 301 );
+}
+   
+}
+
 if(isset($_GET["submit-cms-form"]) and !empty($_GET["submit-cms-form"]) and get_request_method() === "POST"){
    $form_id = intval($_GET["submit-cms-form"]);
    

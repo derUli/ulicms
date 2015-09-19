@@ -935,6 +935,16 @@ function get_domain() {
 
 // This Returns the current full URL
 // for example: http://www.homepage.de/news.html?single=title
+function getBaseFolderURL() {
+	$s = empty ( $_SERVER ["HTTPS"] ) ? '' : ($_SERVER ["HTTPS"] == "on") ? "s" : "";
+	$sp = strtolower ( $_SERVER ["SERVER_PROTOCOL"] );
+	$protocol = substr ( $sp, 0, strpos ( $sp, "/" ) ) . $s;
+	$port = ($_SERVER ["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
+	return trim($protocol . "://" . $_SERVER ['SERVER_NAME'] . $port .dirname($_SERVER ['REQUEST_URI']), "/");
+}
+
+// This Returns the current full URL
+// for example: http://www.homepage.de/news.html?single=title
 function getCurrentURL() {
 	$s = empty ( $_SERVER ["HTTPS"] ) ? '' : ($_SERVER ["HTTPS"] == "on") ? "s" : "";
 	$sp = strtolower ( $_SERVER ["SERVER_PROTOCOL"] );
