@@ -30,9 +30,9 @@ function is_url($url) {
 // wird CURL alls Fallback genutzt, falls vorhanden.
 // Ansonsten wird false zurückgegeben.
 function file_get_contents_wrapper($url, $no_cache = false) {
-        if(!is_url($url)){
-           return file_get_contents($url);
-        }
+	if (! is_url ( $url )) {
+		return file_get_contents ( $url );
+	}
 	$cache_name = md5 ( $url ) . "-" . basename ( $url );
 	$cache_folder = ULICMS_ROOT . "/content/cache";
 	$cache_path = $cache_folder . "/" . $cache_name;

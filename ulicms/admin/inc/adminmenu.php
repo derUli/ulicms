@@ -43,7 +43,7 @@ if (defined ( "_SECURITY" )) {
 			</ul></li>
 			<?php
 	
-	if ($acl->hasPermission ( "banners" ) or $acl->hasPermission ( "pages" ) or $acl->hasPermission ( "categories" ) or $acl->hasPermission("forms")) {
+	if ($acl->hasPermission ( "banners" ) or $acl->hasPermission ( "pages" ) or $acl->hasPermission ( "categories" ) or $acl->hasPermission ( "forms" )) {
 		?>
 		<li><a href='?action=contents'><?php
 		
@@ -63,12 +63,12 @@ if (defined ( "_SECURITY" )) {
 		}
 		?>
 <?php
-		
+
 		if ($acl->hasPermission ( "forms" )) {
 			?>
 				<li><a href='?action=forms'><?php
 			
-			translate("forms");
+			translate ( "forms" );
 			?></a></li>
 				<?php
 		}
@@ -234,8 +234,7 @@ if (defined ( "_SECURITY" )) {
 			?></a></li>
 
 				<?php
-		
-}
+		}
 		?>
 
 
@@ -249,8 +248,7 @@ if (defined ( "_SECURITY" )) {
 
 
 				<?php
-		
-}
+		}
 		?>
 				<?php
 		if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )) {
@@ -261,8 +259,7 @@ if (defined ( "_SECURITY" )) {
 			?></a></li>
 
 				<?php
-		
-}
+		}
 		?>
 		
 
@@ -275,8 +272,7 @@ if (defined ( "_SECURITY" )) {
 			?></a></li>
 
 				<?php
-		
-}
+		}
 		?>
 		
 			<?php
@@ -288,8 +284,7 @@ if (defined ( "_SECURITY" )) {
 			?></a></li>
 
 				<?php
-		
-}
+		}
 		?>
 				<?php
 		if (file_exists ( $theme_dir . "403.php" )) {
@@ -488,6 +483,8 @@ if (defined ( "_SECURITY" )) {
 		
 		
 		
+		
+		
 		<li><a href="?action=info"><?php
 		
 		echo TRANSLATION_INFO;
@@ -511,6 +508,8 @@ if (defined ( "_SECURITY" )) {
 		?> <?php
 	}
 	?>
+		
+		
 		
 		
 		
@@ -558,15 +557,16 @@ $('#clear_cache')
 
 <div class="clear"></div>
 <div id="pbody">
-<div id="site-switcher-container">
-<strong><?php translate("website");?></strong><br/>
-<form action="index.php" id="site-form" method="GET">
-<input name="action" type="hidden" value="<?php echo htmlspecialchars($_GET["action"]);?>">
-<select name="site-id" onchange="$('form#site-form').submit();">
-<option value="default"><?php translate("default_website");?></option>
-</select>
-</form>
-</div>
+	<div id="site-switcher-container">
+		<strong><?php translate("website");?></strong><br />
+		<form action="index.php" id="site-form" method="GET">
+			<input name="action" type="hidden"
+				value="<?php echo htmlspecialchars($_GET["action"]);?>"> <select
+				name="site-id" onchange="$('form#site-form').submit();">
+				<option value="default"><?php translate("default_website");?></option>
+			</select>
+		</form>
+	</div>
 	<?php
     }
 ?>

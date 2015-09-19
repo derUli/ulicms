@@ -15,6 +15,7 @@
 [X] Code refakturieren (mit Eclipse, Achtung auf Inline Elemente wie textarea beim refakturieren)
 [ ] Ausgabe von sys_get_temp_dir() zu sysreport hinzufügen.
 [ ] Auch $_session variablen nur ausgeben, wenn diese kein Array sind
+[ ] Website auf Französisch übersetzen. Falls sich kein freiwilliger Übersetzer finden lassen sollte, notfalls per Google Translator.
 
 UliCMS 8.0.1 Portable for Windows Version 1.0.0
 

@@ -26,8 +26,7 @@ if (defined ( "_SECURITY" )) {
 		type="hidden" name="page_id" value="<?php echo $row -> id?>"> <strong><?php
 			
 			echo TRANSLATION_PERMALINK;
-			?></strong><br /> <input type="text" required="true"
-		name="page_"
+			?></strong><br /> <input type="text" required="true" name="page_"
 		value="<?php
 			
 			echo $row->systemname;
@@ -41,8 +40,7 @@ if (defined ( "_SECURITY" )) {
 			?>"> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_ALTERNATE_TITLE;
-			?> </strong><br /> <input type="text"
-		name="alternate_title"
+			?> </strong><br /> <input type="text" name="alternate_title"
 		value="<?php
 			echo htmlspecialchars ( $row->alternate_title );
 			
@@ -126,9 +124,7 @@ if (defined ( "_SECURITY" )) {
 			?>
 	</div>
 
-	<br /> 
-	<br /> 
-	<strong><?php
+	<br /> <br /> <strong><?php
 			
 			echo TRANSLATION_PARENT;
 			?> </strong><br /> <select name="parent" size=1>
@@ -144,8 +140,7 @@ if (defined ( "_SECURITY" )) {
 			
 			foreach ( $pages as $key => $page ) {
 				?>
-		<option
-			value="<?php
+		<option value="<?php
 				
 				echo $page ["id"];
 				?>"
@@ -263,8 +258,7 @@ function openMenuImageSelectWindow(field) {
 			
 			foreach ( $allThemes as $th ) {
 				?>
-			<option
-				value="<?php
+			<option value="<?php
 				
 				echo $th;
 				?>"
@@ -309,10 +303,12 @@ function openMenuImageSelectWindow(field) {
 			
 			echo TRANSLATION_REGISTERED_USERS;
 			?></option>
-			
-			
-			<option value="mobile" <?php if(in_array("mobile", $access)) echo " selected"?>><?php translate("mobile_devices");?></option>
-			<option value="desktop" <?php if(in_array("desktop", $access)) echo " selected"?>><?php translate("desktop_computers");?></option>
+
+
+			<option value="mobile"
+				<?php if(in_array("mobile", $access)) echo " selected"?>><?php translate("mobile_devices");?></option>
+			<option value="desktop"
+				<?php if(in_array("desktop", $access)) echo " selected"?>><?php translate("desktop_computers");?></option>
 				<?php
 			while ( $row2 = db_fetch_object ( $groups ) ) {
 				if (in_array ( strval ( $row2->id ), $access )) {
@@ -325,8 +321,7 @@ function openMenuImageSelectWindow(field) {
 		</select> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_META_DESCRIPTION;
-			?></strong><br /> <input type="text"
-			name="meta_description"
+			?></strong><br /> <input type="text" name="meta_description"
 			value="<?php
 			echo htmlspecialchars ( $row->meta_description );
 			?>"> <br /> <br /> <strong><?php
@@ -335,8 +330,7 @@ function openMenuImageSelectWindow(field) {
 			?> </strong><br /> <input type="text" name="meta_keywords"
 			value="<?php
 			echo htmlspecialchars ( $row->meta_keywords );
-			?>"> <br /> <br />
-		<strong><?php
+			?>"> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_OPEN_IN;
 			?></strong><br /> <select name="target" size=1>
@@ -366,27 +360,23 @@ function openMenuImageSelectWindow(field) {
 			?></option>
 		</select><br />
 		<h3><?php translate("open_graph");?></h3>
-		
+
 		<p><?php translate("og_help");?></p>
-		<div style="margin-left:20px;">
-		<strong><?php translate("title");?>
-		</strong><br /> <input type="text" name="og_title" value="<?php
+		<div style="margin-left: 20px;">
+			<strong><?php translate("title");?>
+		</strong><br /> <input type="text" name="og_title"
+				value="<?php
 			echo htmlspecialchars ( $row->og_title );
-			?>"> <br />
-		 <br />
-		 
-		<strong><?php translate("description");?>
-		</strong><br /> <input type="text" name="og_description" value="<?php
+			?>"> <br /> <br /> <strong><?php translate("description");?>
+		</strong><br /> <input type="text" name="og_description"
+				value="<?php
 			echo htmlspecialchars ( $row->og_description );
-			?>""> <br />
-		<br />
-		<strong><?php translate("type");?>
-		</strong><br /> <input type="text" name="og_type" value="<?php
+			?>""> <br /> <br /> <strong><?php translate("type");?>
+		</strong><br /> <input type="text" name="og_type"
+				value="<?php
 			echo htmlspecialchars ( $row->og_type );
-			?>"> <br /> <br />
-		<strong><?php translate("image");?>
-		<br/>
-		<script type="text/javascript">
+			?>"> <br /> <br /> <strong><?php translate("image");?>
+		<br /> <script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -399,35 +389,39 @@ function openMenuImageSelectWindow(field) {
         'resizable=1, scrollbars=0, width=800, height=600'
     );
 }
-</script>
-
-
-		<input type="text" id="og_image" name="og_image"
-			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-			value="<?php
+</script> <input type="text" id="og_image" name="og_image"
+				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+				value="<?php
 			echo htmlspecialchars ( $row->og_image );
-			?>" style="cursor: pointer" /><br /> <a href="#"
-			onclick="$('#og_image').val('');return false;"><?php
-		
-		echo TRANSLATION_CLEAR;
-		?>
+			?>"
+				style="cursor: pointer" /><br /> <a href="#"
+				onclick="$('#og_image').val('');return false;"><?php
+			
+			echo TRANSLATION_CLEAR;
+			?>
 		</a> 
 		<?php
-if(!empty($row->og_image)){
-$og_url = get_protocol_and_domain(). $row->og_image;
-?>
-<div style="margin-top:15px;"><img class="small-preview-image" src="<?php 
-
-echo htmlspecialchars($og_url);?>"/></div>
+			if (! empty ( $row->og_image )) {
+				$og_url = get_protocol_and_domain () . $row->og_image;
+				?>
+<div style="margin-top: 15px;">
+					<img class="small-preview-image"
+						src="<?php
+				
+				echo htmlspecialchars ( $og_url );
+				?>" />
+				</div>
 <?php }?>
+		
+		
 		</div>
 		<h3><?php
-		
-		echo TRANSLATION_CUSTOM_DATA_JSON;
-		?>
+			
+			echo TRANSLATION_CUSTOM_DATA_JSON;
+			?>
 		</h3>
-		<textarea name="custom_data"
-			style="width: 100%; height: 200px;" cols=80 rows=10><?php
+		<textarea name="custom_data" style="width: 100%; height: 200px;"
+			cols=80 rows=10><?php
 			
 			echo htmlspecialchars ( $row->custom_data );
 			?></textarea>
@@ -446,7 +440,7 @@ echo htmlspecialchars($og_url);?>"/></div>
 	<div>
 		<textarea name="page_content" id="page_content" cols=60 rows=20><?php
 			
-echo htmlspecialchars ( $row->content );
+			echo htmlspecialchars ( $row->content );
 			?></textarea>
 		<?php
 			$editor = get_html_editor ();
@@ -526,7 +520,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 		</noscript>
 		<?php
 			
-$rev = vcs::getRevisionsByContentID ( $row->id );
+			$rev = vcs::getRevisionsByContentID ( $row->id );
 			if (count ( $rev ) > 0) {
 				?>
 		<p>
@@ -587,9 +581,9 @@ $("#pageform").ajaxForm({beforeSubmit: function(e){
 		<?php
 	} else {
 		noperms ();
-         }
-     ?>
+	}
+	?>
 
 <?php
-    }
+}
 ?>

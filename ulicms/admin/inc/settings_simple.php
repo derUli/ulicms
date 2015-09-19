@@ -161,16 +161,17 @@ if (defined ( "_SECURITY" )) {
 		echo TRANSLATION_EDIT;
 		?></a></td>
 		</tr>
-		<?php if($acl->hasPermission ( "open_graph" )){
-                 ?>
-              <tr>
-		<td><strong><?php translate("open_graph");?>
-		</strong>
-		</td>
-		<td><a href="index.php?action=open_graph"><?php
+		<?php
 		
-		echo TRANSLATION_EDIT;
-		?></a></td>
+if ($acl->hasPermission ( "open_graph" )) {
+			?>
+              <tr>
+			<td><strong><?php translate("open_graph");?>
+		</strong></td>
+			<td><a href="index.php?action=open_graph"><?php
+			
+			echo TRANSLATION_EDIT;
+			?></a></td>
 		</tr>
 		   <?php
 		}

@@ -1,22 +1,15 @@
 <?php
-
-function is_ajax_request(){
-   return (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
-   strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
+function is_ajax_request() {
+	return (! empty ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) && strtolower ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest');
 }
-
-function is_crawler($userAgent = null)
-{
-     if(is_null($useragent)){
-        $useragent = $_SERVER['HTTP_USER_AGENT'];
-     }
-     $crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' .
-     'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' .
-     'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby';
-     $isCrawler = (preg_match("/$crawlers/", $userAgent) > 0);
-     return $isCrawler;
+function is_crawler($userAgent = null) {
+	if (is_null ( $useragent )) {
+		$useragent = $_SERVER ['HTTP_USER_AGENT'];
+	}
+	$crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' . 'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' . 'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby';
+	$isCrawler = (preg_match ( "/$crawlers/", $userAgent ) > 0);
+	return $isCrawler;
 }
-
 function get_lang_config($name, $lang) {
 	$retval = false;
 	$config = getconfig ( $name . "_" . $lang );
@@ -133,17 +126,15 @@ function get_request_uri() {
 function get_http_host() {
 	return $_SERVER ["HTTP_HOST"];
 }
-
-function get_referer(){
-  return get_referrer();
+function get_referer() {
+	return get_referrer ();
 }
-
-function get_referrer(){
-  $referrer = null;
-  if(isset($_SERVER['HTTP_REFERER'])){
-     $referrer = $_SERVER['HTTP_REFERER'];       
-  }
-  return $referrer;
+function get_referrer() {
+	$referrer = null;
+	if (isset ( $_SERVER ['HTTP_REFERER'] )) {
+		$referrer = $_SERVER ['HTTP_REFERER'];
+	}
+	return $referrer;
 }
 
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
@@ -159,7 +150,7 @@ function log_request($save_ip = false) {
 	$useragent = db_escape ( get_useragent () );
 	$request_uri = db_escape ( get_request_uri () );
 	$http_host = db_escape ( get_http_host () );
-	$referrer = db_escape(get_referrer());
+	$referrer = db_escape ( get_referrer () );
 	
 	db_query ( "INSERT INTO " . tbname ( "log" ) . " (ip, request_method, useragent, request_uri, http_host, referrer) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host', '$referrer')" );
 	
@@ -305,41 +296,38 @@ function get_ip() {
 	
 	return $_SERVER ['REMOTE_ADDR'];
 }
-
-function getModuleMeta($module, $attrib = null){
-    $retval = null;
-    $metadata_file = getModulePath ( $module ) . "metadata.json";
-    if(file_exists($metadata_file)){
-        $data = file_get_contents($metadata_file);
-        $data = json_decode($data);
-        if($attrib != null){
-           if(isset($data->$attrib)){
-              $retval = $data->$attrib;
-           }
-        } else {
-           $retval = $data;
-        }
-    }
-    return $retval;
+function getModuleMeta($module, $attrib = null) {
+	$retval = null;
+	$metadata_file = getModulePath ( $module ) . "metadata.json";
+	if (file_exists ( $metadata_file )) {
+		$data = file_get_contents ( $metadata_file );
+		$data = json_decode ( $data );
+		if ($attrib != null) {
+			if (isset ( $data->$attrib )) {
+				$retval = $data->$attrib;
+			}
+		} else {
+			$retval = $data;
+		}
+	}
+	return $retval;
 }
-
-function getThemeMeta($theme, $attrib = null){
-    $retval = null;
-    $metadata_file = getTemplateDirPath ( $theme ) . "metadata.json";
-    if(file_exists($metadata_file)){
-        $data = file_get_contents($metadata_file);
-        $data = json_decode($data);
-        if($attrib != null){
-           if(isset($data->$attrib)){
-              $retval = $data->$attrib;
-           }
-        } else {
-           $retval = $data;
-        }
-    }
-    return $retval;
+function getThemeMeta($theme, $attrib = null) {
+	$retval = null;
+	$metadata_file = getTemplateDirPath ( $theme ) . "metadata.json";
+	if (file_exists ( $metadata_file )) {
+		$data = file_get_contents ( $metadata_file );
+		$data = json_decode ( $data );
+		if ($attrib != null) {
+			if (isset ( $data->$attrib )) {
+				$retval = $data->$attrib;
+			}
+		} else {
+			$retval = $data;
+		}
+	}
+	return $retval;
 }
-
 function getModuleName($module) {
 	$name_file = getModulePath ( $module ) . $module . "_name.php";
 	if (! file_exists ( $name_file )) {
@@ -379,7 +367,11 @@ function getAvailableBackendLanguages() {
 function getSystemLanguage() {
 	if (isset ( $_SESSION ["system_language"] )) {
 		$lang = $_SESSION ["system_language"];
-	} else if (getconfig ( "system_language" )) {
+	} 
+	else if(isset($_SESSION["language"])){
+	    $lang = $_SESSION["language"];
+	}
+	else if (getconfig ( "system_language" )) {
 		$lang = getconfig ( "system_language" );
 	} else {
 		$lang = "de";
@@ -696,6 +688,10 @@ function remove_action($name) {
 	}
 	return $retval;
 }
+function cms_release_year() {
+	$v = new ulicms_version ();
+	echo $v->getReleaseYear ();
+}
 
 // Check for Secure HTTP Connection (SSL)
 function is_ssl() {
@@ -930,13 +926,11 @@ function replace_num_entity($ord) {
 	
 	return $ret;
 }
-
-function get_protocol_and_domain(){
-   return get_site_protocol().get_domain();
+function get_protocol_and_domain() {
+	return get_site_protocol () . get_domain ();
 }
-
-function get_domain(){
-  return $_SERVER['SERVER_NAME'];
+function get_domain() {
+	return $_SERVER ['SERVER_NAME'];
 }
 
 // This Returns the current full URL
@@ -1115,12 +1109,14 @@ function getAllModules() {
 	return $pkg->getInstalledPackages ( 'modules' );
 }
 function no_cache() {
-	if (! defined ( "NO_CACHE" ))
+	if (! defined ( "NO_CACHE" )) {
 		define ( "NO_CACHE", true );
+	}
 }
 function no_anti_csrf() {
-	if (! defined ( "NO_ANTI_CSRF" ))
+	if (! defined ( "NO_ANTI_CSRF" )) {
 		define ( "NO_ANTI_CSRF", true );
+	}
 }
 function replaceAudioTags($txt) {
 	// Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
@@ -1218,7 +1214,10 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = str_replace ( '[slogan]', ob_get_clean (), $string );
 		$current_page = get_page ();
 		$string = str_replace ( '[category]', get_category (), $string );
-		$string = str_replace( '[csrf_token_html]', get_csrf_token_html(), $string );
+		$string = str_replace ( '[csrf_token_html]', get_csrf_token_html (), $string );
+		// [tel] Links for tel Tags
+		$string = preg_replace ( '/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string );
+		$string = preg_replace ( '/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
 	}
 	$allModules = getAllModules ();
 	for($i = 0; $i <= count ( $allModules ); $i ++) {

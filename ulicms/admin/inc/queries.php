@@ -42,7 +42,7 @@ if (isset ( $_GET ["clear_cache"] )) {
 	clearCache ();
 }
 
-if ($_GET ["action"] == "undelete_page" && $acl -> hasPermission ("pages") && get_request_method() == "POST"){
+if ($_GET ["action"] == "undelete_page" && $acl->hasPermission ( "pages" ) && get_request_method () == "POST") {
 	$page = intval ( $_GET ["page"] );
 	add_hook ( "before_undelete_page" );
 	db_query ( "UPDATE " . tbname ( "content" ) . " SET `deleted_at` = NULL" . " WHERE id=$page" );
@@ -51,7 +51,7 @@ if ($_GET ["action"] == "undelete_page" && $acl -> hasPermission ("pages") && ge
 	exit ();
 }
 
-if ($_GET ["action"] == "pages_delete" && $acl -> hasPermission ("pages") && get_request_method() == "POST"){
+if ($_GET ["action"] == "pages_delete" && $acl->hasPermission ( "pages" ) && get_request_method () == "POST") {
 	$page = intval ( $_GET ["page"] );
 	add_hook ( "before_delete_page" );
 	db_query ( "UPDATE " . tbname ( "content" ) . " SET `deleted_at` = " . time () . " WHERE id=$page" );
@@ -124,7 +124,7 @@ if ($_GET ["action"] == "empty_trash") {
 	exit ();
 }
 
-if ($_GET ["action"] == "key_delete" and $acl -> hasPermission ("expert_settings") and get_request_method() == "POST"){
+if ($_GET ["action"] == "key_delete" and $acl->hasPermission ( "expert_settings" ) and get_request_method () == "POST") {
 	add_hook ( "before_delete_key" );
 	deleteconfig ( $_GET ["key"] );
 	add_hook ( "after_delete_key" );
@@ -132,7 +132,7 @@ if ($_GET ["action"] == "key_delete" and $acl -> hasPermission ("expert_settings
 	exit ();
 }
 
-if ($_GET ["action"] == "languages" and ! empty ($_GET ["delete"]) and $acl -> hasPermission ("languages") and get_request_method() == "POST"){
+if ($_GET ["action"] == "languages" and ! empty ( $_GET ["delete"] ) and $acl->hasPermission ( "languages" ) and get_request_method () == "POST") {
 	add_hook ( "before_delete_language" );
 	db_query ( "DELETE FROM " . tbname ( "languages" ) . " WHERE id = " . intval ( $_GET ["delete"] ) );
 	add_hook ( "after_delete_language" );
@@ -156,7 +156,7 @@ if (isset ( $_POST ["add_language"] ) and $acl->hasPermission ( "languages" )) {
 	}
 }
 
-if ($_GET ["action"] == "banner_delete" && $acl -> hasPermission ("banners")  && get_request_method() == "POST"){
+if ($_GET ["action"] == "banner_delete" && $acl->hasPermission ( "banners" ) && get_request_method () == "POST") {
 	$banner = intval ( $_GET ["banner"] );
 	
 	add_hook ( "before_banner_delete" );
@@ -166,7 +166,7 @@ if ($_GET ["action"] == "banner_delete" && $acl -> hasPermission ("banners")  &&
 	exit ();
 }
 
-if ($_GET ["action"] == "admin_delete" && (is_admin () or $acl -> hasPermission ("users"))  && get_request_method() == "POST"){
+if ($_GET ["action"] == "admin_delete" && (is_admin () or $acl->hasPermission ( "users" )) && get_request_method () == "POST") {
 	$admin = intval ( $_GET ["admin"] );
 	add_hook ( "before_admin_delete" );
 	$query = db_query ( "DELETE FROM " . tbname ( "users" ) . " WHERE id='$admin'", $connection );
@@ -211,12 +211,12 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$access = implode ( ",", $_POST ["access"] );
 		$access = db_escape ( $access );
 		$target = db_escape ( $_POST ["target"] );
-
+		
 		// Open Graph
-		$og_title = db_escape ( $_POST ["og_title"] );	
-		$og_description = db_escape ( $_POST ["og_description"] );	
-		$og_type = db_escape ( $_POST ["og_type"] );	
-		$og_image = db_escape ( $_POST ["og_image"] );		
+		$og_title = db_escape ( $_POST ["og_title"] );
+		$og_description = db_escape ( $_POST ["og_description"] );
+		$og_type = db_escape ( $_POST ["og_type"] );
+		$og_image = db_escape ( $_POST ["og_image"] );
 		
 		$meta_description = $_POST ["meta_description"];
 		$meta_keywords = $_POST ["meta_keywords"];
@@ -377,10 +377,10 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		$parent = intval ( $_POST ["parent"] );
 	}
 	// Open Graph
-	$og_title = db_escape ( $_POST ["og_title"] );	
-  $og_description = db_escape ( $_POST ["og_description"] );	
-	$og_type = db_escape ( $_POST ["og_type"] );	
-	$og_image = db_escape ( $_POST ["og_image"] );	
+	$og_title = db_escape ( $_POST ["og_title"] );
+	$og_description = db_escape ( $_POST ["og_description"] );
+	$og_type = db_escape ( $_POST ["og_type"] );
+	$og_image = db_escape ( $_POST ["og_image"] );
 	
 	$user = $_SESSION ["login_id"];
 	$id = intval ( $_POST ["page_id"] );
@@ -448,24 +448,46 @@ if (! empty ( $_FILES ['favicon_upload_file'] ['name'] ) and $acl->hasPermission
 	$filename = $favicon_upload_file ['name'];
 	$extension = file_extension ( $filename );
 	
-	if (startsWith($type, "image/")) {
+	if (startsWith ( $type, "image/" )) {
 		
 		$new_filename = "../content/images/favicon.ico";
 		
 		add_hook ( "before_upload_favicon" );
-
+		
 		// move_uploaded_file ( $favicon_upload_file ['tmp_name'], $new_filename );
 		require_once ULICMS_ROOT . '/classes/class-php-ico.php';
-                $source = $favicon_upload_file ['tmp_name'];
-                $destination = $new_filename;
-                
-                $sizes = array( array( 32, 32 ), array( 64, 64 ) );
-                if(isset($_POST["high_resolution"])){
-                   $sizes = array( array( 32, 32 ), array( 64, 64 ), array( 128, 128 ) );
-                }
-                $ico_lib = new PHP_ICO( $source, $sizes );
-                $ico_lib->save_ico( $destination );
-
+		$source = $favicon_upload_file ['tmp_name'];
+		$destination = $new_filename;
+		
+		$sizes = array (
+				array (
+						32,
+						32 
+				),
+				array (
+						64,
+						64 
+				) 
+		);
+		if (isset ( $_POST ["high_resolution"] )) {
+			$sizes = array (
+					array (
+							32,
+							32 
+					),
+					array (
+							64,
+							64 
+					),
+					array (
+							128,
+							128 
+					) 
+			);
+		}
+		$ico_lib = new PHP_ICO ( $source, $sizes );
+		$ico_lib->save_ico ( $destination );
+		
 		add_hook ( "after_upload_favicon" );
 		ulicms_redirect ( "index.php?action=favicon" );
 	} else {

@@ -30,7 +30,7 @@ $enq = array (
 		"codemirror/mode/clike/clike.js",
 		"codemirror/mode/css/css.js",
 		"scripts/url.min.js",
-		"scripts/util.js"
+		"scripts/util.js" 
 );
 ?>
 <?php

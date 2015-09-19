@@ -19,7 +19,6 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
 [X] IP Whitelist für Backend Login
 [ ] Es sollte möglich sein "HTML-Items" in ein Menü einzufügen.
     In diesen wird statt eines Links ein HTML-Code, der in den Editor des CMS eingegeben werden kann angezeigt
-[ ] <title> Tag unabhängig von Linktext im Navigationsmenü änderbar
 [X] Löschen von Datensätzen per AJAX
 [X] Eingabefelder für OpenGraph Basic Meta-Tags. Diese werden z.B. von Facebook verwendet.
     [X] Datenbank anpassen
@@ -30,7 +29,8 @@ z.B. <a href="tel:1-408-555-5555">1-408-555-5555</a>
 [ ] Möglichkeit in einem CKEditor eine eigene Wartungsmeldung zu erstellen
 [X] Neue Paketquelle für 9.0.2
 [X] Datenbankdiagramm aktualisieren ("forms" Tabelle muss enthalten sein)
-[ ] Liste der Hooks aktualisieren
+[X] Liste der Hooks aktualisieren
 [X] Werbematerial erstellen
 [ ] developmentVersion = false setzen
 [X] Ankündigung um Absatz zu Formularen ergänzen
+[X] tel Links auch im deutschen und englischen Promotext erwähnen

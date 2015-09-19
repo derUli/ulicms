@@ -25,24 +25,24 @@ if (defined ( "_SECURITY" )) {
 <br />
 
 <p>
-	<a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2010 -
-	2016 by Ulrich Schmidt<br /> <a href="http://www.ckeditor.com"
+	<a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2011 -
+	<?php cms_release_year();?> by Ulrich Schmidt<br /> <a href="http://www.ckeditor.com"
 		target="_blank">CKEditor</a> &copy; 2003 - 2015 by CKSource<br /> <a
 		href="http://kcfinder.sunhater.com/" target="_blank">KCFinder</a>
-	Copyright ©2010-2014 Pavel Tzonkov<br/ > Copyright 2005, 2014 jQuery
+	Copyright ©2010 - 2014 Pavel Tzonkov<br/ > Copyright 2005, 2014 jQuery
 	Foundation, Inc. and other contributors <br /> <a
 		href="http://codemirror.net/" target="_blank">CodeMirror</a> &copy;
 	2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others <br /> <a
 		href="http://www.raymondhill.net/finediff/viewdiff-ex.php"
 		target="_blank">PHP Fine Diff</a> Copyright 2011 (c) Raymond Hill
 		<br/>
-		<a href="http://mobiledetect.net/" target="_blank">Mobile_Detect</a> Copyright &copy; 2011-2015 Serban Ghita, Nick Ilyin and contributors.
+		<a href="http://mobiledetect.net/" target="_blank">Mobile_Detect</a> Copyright &copy; 2011 - 2015 Serban Ghita, Nick Ilyin and contributors.
 <br/>
-<a href="https://github.com/chrisbliss18/php-ico" target="_blank">PHP ICO - The PHP ICO Generator</a> - Copyright 2011-2013 Chris Jean
+<a href="https://github.com/chrisbliss18/php-ico" target="_blank">PHP ICO - The PHP ICO Generator</a> - Copyright 2011 - 2013 Chris Jean
 <br/>
 
 
-<a href="https://plugins.jquery.com/url/" target="_blank">jQuery URL Plugin</a> Copyright (C) 2011-2012 <a href="http://www.websanova.com" target="_blank">Websanova</a>
+<a href="https://plugins.jquery.com/url/" target="_blank">jQuery URL Plugin</a> Copyright (C) 2011 - 2012 <a href="http://www.websanova.com" target="_blank">Websanova</a>
 
 </p>
 
@@ -88,10 +88,6 @@ if (defined ( "_SECURITY" )) {
 		echo TRANSLATION_LICENSE;
 		?>"
 	onclick='window.open("license.html");' />
-
-
-<input type="button" value="Community"
-	onclick='location.replace("http://www.ulicms.de/forum.html");'>
 
 <input type="button" value="Feedback"
 	onclick='location.replace("http://www.ulicms.de/?seite=kontakt");'>

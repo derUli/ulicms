@@ -7,5 +7,4 @@
 [ ] Drag and Drop Seitenaufbau mit Inhaltselementen In-Page Editing etc.
 [ ] WYSIWYG Template Bearbeitung
 [ ] Seitenbaum wie in TYPO3
-[ ] Form Builder
 [ ] Animation / Slider Builder
