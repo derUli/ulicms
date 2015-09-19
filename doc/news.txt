@@ -13,7 +13,7 @@
 + Referrer Spalte zu Protokoll hinzugefügt
 + Module können nun Metadaten haben (metadata.json)
 + Versionsnummern von Modulen und Designs können nun angezeigt werden
-+ Mobile_Detect Klasse auf Version 2.8.15 aktualisiert
++ Mobile_Detect Klasse auf Version 2.8.17 aktualisiert
 + Bugfix: Werte in der Spalte "Menü" in der Seitenliste werden nun übersetzt
 + IP Whitelist hinzugefügt. In der Datei cms-config.php kann nun ein Array mit IP-Adressen als Variable ip_whitelist definiert werden.
   Sofern dieser Wert gesetzt ist, wird der Zugriff zum UliCMS Backend auf bestimmte
