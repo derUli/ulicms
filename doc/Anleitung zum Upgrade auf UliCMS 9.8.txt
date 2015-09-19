@@ -33,6 +33,7 @@ Das Update Script versucht, die Ordner automatisch zu verschieben.
 Falls dies nicht klappen sollte, müssen Sie die Ordner manuell verschieben.
 Wenn Sie Pakete installieren möchten, die für ältere Versionen von UliCMS gedacht sind, 
 müssen Sie die Ordner nach der Installation des Moduls manuell verschieben.
+Eventuell müssen relative Pfade in einigen Dateien angepasst werden.
 
 Ab dieser Version führt UliCMS das Script update.php automatisch aus, sofern das Script vorhanden ist und Schreibrechte darauf gesetzt sind. Somit ist es ab jetzt nicht mehr erforderlich, update.php manuell im Browser aufzurufen.
 
