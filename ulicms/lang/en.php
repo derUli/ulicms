@@ -574,7 +574,7 @@ define ( "TRANSLATION_MAIL_FROM_FIELD", "Field, which contains the sender e-mail
 define ( "TRANSLATION_TARGET_PAGE_ID", "Target Page" );
 
 // Patch upload
-define ( "TRANSLATION_INSTALL_PATCH_FROM_FILE", "Install patch from file upload" );
+define ( "TRANSLATION_INSTALL_PATCH_FROM_FILE", "Install patch from file" );
 define ( "TRANSLATION_INSTALL_PATCH", "Install patch" );
 
 add_hook ( "lang_en" );
