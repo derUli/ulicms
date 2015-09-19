@@ -798,6 +798,16 @@ function base_metas() {
             if(!is_frontpage()){
                $canonical .= buildSEOUrl();
             }
+
+	    
+	    if (containsModule ( null, "blog" )) {
+                if(isset($_GET["single"])){
+                   $canonical .= "?single=".htmlspecialchars($_GET["single"]);
+                } else if(isset($_GET["limit"])){
+                   $canonical .= "?limit=".intval($_GET["limit"]);
+}
+            }
+
             echo '<link rel="canonical"  href="'.$canonical.'"/>';
             echo "\r\n";
             
