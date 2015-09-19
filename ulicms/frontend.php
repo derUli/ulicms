@@ -84,7 +84,7 @@ if ($redirection) {
 }
 
 if(isset($_GET["goid"])){
-   $goidd = intval($_GET["goid"]);
+   $goid = intval($_GET["goid"]);
    $sysname = getPageSystemnameByID($goid);
    if($sysname and $sysname != "-"){
       $url = buildSeoURL($sysname);
