@@ -754,7 +754,7 @@ function base_metas() {
 	echo "\r\n";
 	
 	if (! getconfig ( "disable_no_format_detection" )) {
-		echo '<meta name="format-detection" content="telephone=no">';
+		echo '<meta name="format-detection" content="telephone=no"/>';
 		echo "\r\n";
 	}
 	
