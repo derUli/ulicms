@@ -1,6 +1,11 @@
-Nächste Major Version soll UliCMS X heißen.
+﻿Nächste Major Version soll UliCMS X heißen.
 Erste Version heißt dann
 UliCMS X - Version 1.0.0
 
 Unter Inhalte Verwaltung für "Benutzerdefinierte Felder".
 Diese können dann z.B. für Seiten gesetzt werden.
+
+Der Upload des Installationspaket dauert sehr lange wegen der größe des MPDF Frameworks
+Deshalb MPDF Optional machen.
+MPDF kann optional als Modul installiert werden.
+Wenn es nicht installiert ist, dann ist die "view as pdf" Funktion nicht verfügbar.
