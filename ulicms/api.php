@@ -12,7 +12,8 @@ if(is_null($id)){
    if($id){
        $shortlink = getBaseFolderURL(). "/?goid=".get_ID();         
    }
-
+   
+   $shortlink = apply_filter ( $shortlink, "shortlink" );
    return $shortlink;
 }
 
@@ -30,7 +31,8 @@ function get_canonical(){
                    $canonical .= "?limit=".intval($_GET["limit"]);
 }
             }
-            return $canonical;
+   	$canonical = apply_filter ( $canonical, "canonical" );
+        return $canonical;
 }
 
 
