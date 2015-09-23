@@ -22,7 +22,7 @@ img {
 }
 
 #pbody ul li {
-	list-style-image: url('../gfx/list.png');
+	list-style-image: url('../gfx/arrow.gif');
 }
 
 #pbody table.tablesorter thead th.header {
