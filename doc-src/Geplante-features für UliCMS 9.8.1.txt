@@ -1,0 +1,8 @@
+[ ] Option "Account sperren nach X fehlerhaften Anmeldeversuchen"
+
+- Sicherstellen, dass folgende Komponenten aktuell sind
+
+[ ] CKEditor
+[ ] KCFinder
+[ ] jQuery
+[ ] Mobile_Detect
