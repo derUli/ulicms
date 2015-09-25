@@ -14,14 +14,12 @@ body {
 	margin: 14px;
 }
 
-input[type="checkbox"], input[type="radio"]
-{
- /* All browsers except webkit */
-  transform: scale(4);
-
-  /* Webkit browsers */
-  -webkit-transform: scale(4);
-  margin: 20px;
+input[type="checkbox"], input[type="radio"] {
+	/* All browsers except webkit */
+	transform: scale(4);
+	/* Webkit browsers */
+	-webkit-transform: scale(4);
+	margin: 20px;
 }
 
 div#root-container {
@@ -62,9 +60,10 @@ a {
 	font-size: 120% !important;
 }
 
-#pbody table tbody tr td a img.mobile-big-image, #pbody table tbody tr td form input.mobile-big-image {
+#pbody table tbody tr td a img.mobile-big-image, #pbody table tbody tr td form input.mobile-big-image
+	{
 	width: 64px;
-	height:auto;
+	height: auto;
 	margin-left: 50px;
 	margin-right: 50px;
 }

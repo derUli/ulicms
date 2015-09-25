@@ -281,8 +281,8 @@ table tr:nth-child(even) {
 	background: #335599;
 }
 
-input[type="image"]{
-	border:none;
+input[type="image"] {
+	border: none;
 }
 
 div.diff del {
@@ -297,15 +297,15 @@ div.diff ins {
 	text-decoration: none;
 }
 
-img.small-preview-image{
-   max-width: 300px !important;
-   height:auto !important;
+img.small-preview-image {
+	max-width: 300px !important;
+	height: auto !important;
 }
 
-form#site-form{
-   margin-bottom:20px;
+form#site-form {
+	margin-bottom: 20px;
 }
 
-div#site-switcher-container{
-  display:none;
+div#site-switcher-container {
+	display: none;
 }
