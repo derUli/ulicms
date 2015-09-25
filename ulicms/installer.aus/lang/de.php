@@ -45,4 +45,4 @@ define ( "TRANSLATION_MAIL_MESSAGE_TITLE", "UliCMS Installation auf %domain%" );
 
 define ( "TRANSLATION_MAIL_MESSAGE_TEXT", "Hallo %person_name%!\n" . "Auf %domain% wurde UliCMS erfolgreich installiert\n\n" . "Die Zugangsdaten lauten:\n" . "Benutzername: %username%\n" . "Passwort: %password%\n\n" . "Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen." );
 
-define ( "TRANSLATION_PHP_VERSION_TOO_LOW", "Auf dem Server läuft momentan PHP " . phpversion () . ".<br/>" . "Es wird jedoch empfohlen, dass Sie mindestens PHP " . REQUIRED_PHP_VERSION . " verwenden, da sonst einige Funktionalitäten von UliCMS nicht verfügbar sind" );
+define ( "TRANSLATION_PHP_VERSION_TOO_LOW", "Auf dem Server läuft momentan PHP " . phpversion () . ".<br/>" . "Es wird jedoch empfohlen, dass Sie mindestens PHP " . REQUIRED_PHP_VERSION . " verwenden, da sonst einige Funktionalitäten von UliCMS nicht verfügbar sind." );
