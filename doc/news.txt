@@ -52,3 +52,5 @@
 Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird definiert ist geladen.
 + Patches können nun auch als Datei hochgeladen werden.
 + shortlink und canonical Meta-Tags zum System hinzugefügt
++ mPDF Framework entfernt. Dieses wird zur Ausgabe von Inhalten im PDF Format benötigt und wurde entfernt, um Speicherplatz zu sparen.
+  Es kann jedoch nachträglich als Ergänzung auf www.ulicms.de heruntergeladen und installiert werden.
