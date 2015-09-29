@@ -2,6 +2,8 @@
 
 [ ] Option "Account sperren nach X fehlerhaften Anmeldeversuchen"
 
+[ ] Möglichkeit, Accounts zu deaktivieren
+
 - Sicherstellen, dass folgende Komponenten aktuell sind
 
 [ ] CKEditor
