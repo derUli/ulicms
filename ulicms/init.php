@@ -287,6 +287,14 @@ if (! getconfig ( "allowed_html" )) {
 	setconfig ( "allowed_html", "<i><u><b><strong><em><ul><li><ol><a><span>" );
 }
 
+$ga_secret = getconfig("ga_secret");
+if(!$ga_secret){
+   require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
+   $ga = new PHPGangsta_GoogleAuthenticator();
+   $ga_secret = $ga->createSecret();
+   setconfig("ga_secret", db_escape($ga_secret));
+}
+
 // Falls nicht gesetzt, robots auf Standardwert setzen
 if (! getconfig ( "robots" )) {
 	setconfig ( "robots", "index,follow" );
