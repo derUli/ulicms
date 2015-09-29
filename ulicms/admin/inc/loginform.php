@@ -4,7 +4,8 @@ $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = getconfig("ga_secret");
 $qrCodeUrl = $ga->getQRCodeGoogleUrl("UliCMS Login auf ".get_domain(), $ga_secret);
 
-
+$twofactor_authentication = getconfig("twofactor_authentication");
+	
 $languages = getAvailableBackendLanguages ();
 $default_language = getSystemLanguage ();
 if (isset ( $_SESSION ["language"] ) and in_array ( $_SESSION ["language"], $languages )) {
@@ -74,18 +75,16 @@ csrf_token_html ();
 			?>
 			</select></td>
 		</tr>
-
+<?php if($twofactor_authentication){
+?>
 		<tr>
 <td>
 <strong><?php translate("confirmation_code");?></strong>
 </td>
 <td><input type="password" name="confirmation_code" value=""></td>
 </tr>
-<tr>
-<td></td>
-<td><img src="<?php echo $qrCodeUrl;?>" alt="QR-Code mit Google Authenticator scannen" title="QR-Code mit Google Authenticator scannen"/>
-</td>
-</tr>
+<?php }
+?>
 		<tr>
 			<td></td>
 			<td style="padding-top: 10px; text-align: center;"><input

@@ -1,6 +1,13 @@
 <?php
 @include_once "Cache/Lite.php";
 
+
+require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
+$ga = new PHPGangsta_GoogleAuthenticator();
+$ga_secret = getconfig("ga_secret");
+$qrCodeUrl = $ga->getQRCodeGoogleUrl("UliCMS Login auf ".get_domain(), $ga_secret);
+
+
 include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
 
 $acl = new ACL ();
@@ -44,6 +51,13 @@ if (! $acl->hasPermission ( "other" )) {
 			deleteconfig ( "hide_meta_generator" );
 		} else {
 			setconfig ( "hide_meta_generator", "hide" );
+		}
+		
+		
+		if (! isset ( $_POST ["twofactor_authentication"] )) {
+			deleteconfig ( "twofactor_authentication" );
+		} else {
+			setconfig ( "twofactor_authentication", "twofactor_authentication" );
 		}
 		
 		if (! isset ( $_POST ["log_ip"] )) {
@@ -115,7 +129,7 @@ if (! $acl->hasPermission ( "other" )) {
 	$log_ip = getconfig ( "log_ip" );
 	$delete_ips_after_48_hours = getconfig("delete_ips_after_48_hours");
 	$no_auto_cron = getconfig ( "no_auto_cron" );
-	$no_auto_cron = getconfig ( "no_auto_cron" );
+	$twofactor_authentication = getconfig("twofactor_authentication");
 	
 	?>
 
@@ -433,7 +447,28 @@ translate ( "FORCE_PASSWORD_CHANGE_EVERY_X_DAYS" );
 echo $force_password_change_every_x_days;
 	?>" />
 			</div>
+			
+<h2><?php translate("google_authenticator");?></h2><div class="label">
+				<label for="twofactor_authentication"><?php
+	
+	translate("2_FACTOR_AUTHENTICATION_ENABLED");
+	?>
+				</label>
+			</div>
+			<div class="inputWrapper">
+				<input type="checkbox" id="twofactor_authentication"
+					name="twofactor_authentication"
+					<?php
+	
+	if ($twofactor_authentication) {
+		echo "checked ";
+	}
+	?>>
+			</div>
+<p><img src="<?php echo $qrCodeUrl;?>" alt="QR-Codemit Google Authenticator scannen" title="QR-Code mit Google Authenticator scannen"/></p>
+<p><a href="https://support.google.com/accounts/answer/1066447" target="_blank">[Help]</a></p>
 		</div>
+		
 		<h2 class="accordion-header">
 		<?php
 	
@@ -461,7 +496,6 @@ echo $force_password_change_every_x_days;
 	?>>
 			</div>
 		</div>
-
 		<h2 class="accordion-header">
 		<?php
 	

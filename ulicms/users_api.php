@@ -148,9 +148,9 @@ function validate_login($user, $password, $token = null) {
 			$password = md5 ( $password );
 		else
 			$password = hash_password ( $password );
-		
+		$twofactor_authentication = getconfig("twofactor_authentication");
 		if ($user ["password"] == $password) {
-		    if(isset($_SESSION["ga_secret"]) and !is_null($token)){
+		    if($twofactor_authentication and !is_null($token)){
 			     $ga = new PHPGangsta_GoogleAuthenticator();
 				 $ga_secret = getconfig("ga_secret");
 				 $code = $ga->getCode($ga_secret);

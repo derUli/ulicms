@@ -570,4 +570,10 @@ define ( "TRANSLATION_TARGET_PAGE_ID", "Erfolgsseite" );
 define ( "TRANSLATION_INSTALL_PATCH_FROM_FILE", "Patch aus Datei installieren" );
 define ( "TRANSLATION_INSTALL_PATCH", "Patch installieren" );
 
+// 2-Faktor Authentifizierung
+define( "TRANSLATION_GOOGLE_AUTHENTICATOR", "Google Authenticator");
+define( "TRANSLATION_2_FACTOR_AUTHENTICATION_ENABLED", "2-Faktor Authentifizierung aktiviert");
+define( "TRANSLATION_CONFIRMATION_CODE", "Bestätigungscode");
+define( "TRANSLATION_CONFIRMATION_CODE_WRONG", "Bestätigungscode falsch.");
+
 add_hook ( "lang_de" );
