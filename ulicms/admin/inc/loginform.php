@@ -2,7 +2,7 @@
 require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = getconfig("ga_secret");
-$qrCodeUrl = $ga->getQRCodeGoogleUrl(sha1(get_domain()), $ga_secret);
+$qrCodeUrl = $ga->getQRCodeGoogleUrl("UliCMS Login auf ".get_domain(), $ga_secret);
 
 
 $languages = getAvailableBackendLanguages ();
