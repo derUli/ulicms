@@ -1,9 +1,14 @@
 <?php
 require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
 $ga = new PHPGangsta_GoogleAuthenticator();
-$secret = $ga->createSecret();
-$_SESSION["ga_secret"] = $secret;
-$qrCodeUrl = $ga->getQRCodeGoogleUrl(sha1(get_domain()), $secret);
+
+$ga_secret = getconfig("ga_secret");
+if(!$ga_secret){
+   $ga_secret = $ga->createSecret();
+   setconfig("ga_secret", db_escape($ga_secret));
+}
+
+$qrCodeUrl = $ga->getQRCodeGoogleUrl(sha1(get_domain()), $ga_secret);
 
 
 $languages = getAvailableBackendLanguages ();

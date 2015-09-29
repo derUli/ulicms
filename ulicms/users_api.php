@@ -130,15 +130,17 @@ function register_session($user, $redirect = true) {
 	if (! $redirect)
 		return;
 	
-	if (isset ( $_REQUEST ["go"] ))
+	if (isset ( $_REQUEST ["go"] )){
 		header ( "Location: " . $_REQUEST ["go"] );
-	else
+	} else {
 		header ( "Location: index.php" );
+	}
 	
 	return;
 }
-function validate_login($user, $password) {
+function validate_login($user, $password, $token = null) {
 	include_once ULICMS_ROOT . "/lib/encryption.php";
+    require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
 	$user = getUserByName ( $user );
 	
 	if ($user) {
@@ -148,6 +150,16 @@ function validate_login($user, $password) {
 			$password = hash_password ( $password );
 		
 		if ($user ["password"] == $password) {
+		    if(isset($_SESSION["ga_secret"]) and !is_null($token)){
+			     $ga = new PHPGangsta_GoogleAuthenticator();
+				 $ga_secret = getconfig("ga_secret");
+				 $code = $ga->getCode($ga_secret);
+				 if($code != $token){
+				    $_REQUEST ["error"] = get_translation("confirmation_code_wrong");
+				    return false;
+				 }
+
+			}
 			return $user;
 		}
 	}
