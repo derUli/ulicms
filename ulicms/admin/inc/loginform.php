@@ -1,4 +1,10 @@
 <?php
+require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
+$ga = new PHPGangsta_GoogleAuthenticator();
+$secret = $ga->createSecret();
+$qrCodeUrl = $ga->getQRCodeGoogleUrl(sha1(get_domain()), $secret);
+
+
 $languages = getAvailableBackendLanguages ();
 $default_language = getSystemLanguage ();
 if (isset ( $_SESSION ["language"] ) and in_array ( $_SESSION ["language"], $languages )) {
@@ -68,6 +74,18 @@ csrf_token_html ();
 			?>
 			</select></td>
 		</tr>
+
+		<tr>
+<td>
+<strong><?php translate("confirmation_code");?></strong>
+</td>
+<td><input type="password" name="confirmation_code" value=""></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="<?php echo $qrCodeUrl;?>" alt="QR-Code mit Google Authenticator scannen" title="QR-Code mit Google Authenticator scannen"/>
+</td>
+</tr>
 		<tr>
 			<td></td>
 			<td style="padding-top: 10px; text-align: center;"><input
@@ -76,7 +94,6 @@ csrf_token_html ();
 				echo TRANSLATION_LOGIN;
 				?>"></td>
 		</tr>
-
 	</table>
 </form>
 <?php
