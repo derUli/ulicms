@@ -43,6 +43,8 @@ if (defined ( "_SECURITY" )) {
 
 
 <a href="https://plugins.jquery.com/url/" target="_blank">jQuery URL Plugin</a> Copyright (C) 2011 - 2012 <a href="http://www.websanova.com" target="_blank">Websanova</a>
+<br/>
+<a href="http://www.phpgangsta.de/2-faktor-authentifizierung-mit-dem-google-authenticator" target="_blank">GoogleAuthenticator Class</a> Copyright (c) 2012, Michael Kliewe All rights reserved.
 </p>
 
 <div>
