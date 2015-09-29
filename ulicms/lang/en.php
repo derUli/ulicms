@@ -577,4 +577,13 @@ define ( "TRANSLATION_TARGET_PAGE_ID", "Target Page" );
 define ( "TRANSLATION_INSTALL_PATCH_FROM_FILE", "Install patch from file" );
 define ( "TRANSLATION_INSTALL_PATCH", "Install patch" );
 
+
+// 2-Faktor Authentifizierung
+define( "TRANSLATION_GOOGLE_AUTHENTICATOR", "Google Authenticator");
+define( "TRANSLATION_2_FACTOR_AUTHENTICATION_ENABLED", "2-Factor Authentication enabled");
+define( "TRANSLATION_CONFIRMATION_CODE", "Confirmation Code");
+define( "TRANSLATION_CONFIRMATION_CODE_WRONG", "Confirmation Code invalid.");
+
+define( "TRANSLATION_ULICMS_LOGIN_AT", "UliCMS Login on");
+
 add_hook ( "lang_en" );
