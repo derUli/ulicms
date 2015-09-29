@@ -2,7 +2,7 @@
 
 [ ] Option "Account sperren nach X fehlerhaften Anmeldeversuchen"
 
-[ ] Möglichkeit, Accounts zu deaktivieren
+[ ] Möglichkeit, Accounts zu sperren
 
 - Sicherstellen, dass folgende Komponenten aktuell sind
 
