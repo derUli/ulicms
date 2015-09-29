@@ -81,7 +81,7 @@ csrf_token_html ();
 <td>
 <strong><?php translate("confirmation_code");?></strong>
 </td>
-<td><input type="password" name="confirmation_code" value=""></td>
+<td><input type="text" name="confirmation_code" value=""></td>
 </tr>
 <?php }
 ?>
