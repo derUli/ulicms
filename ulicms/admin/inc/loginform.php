@@ -26,7 +26,7 @@ if (! $admin_logo)
 echo TRANSLATION_PLEASE_AUTHENTICATE;
 ?>
 </h3>
-<form action="index.php" method="post">
+<form id="login-form" action="index.php" method="post">
 <?php
 
 csrf_token_html ();

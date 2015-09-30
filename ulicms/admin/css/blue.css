@@ -309,3 +309,7 @@ form#site-form {
 div#site-switcher-container {
 	display: none;
 }
+
+form#login-form{
+  margin-bottom:5px;
+}
