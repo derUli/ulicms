@@ -576,5 +576,6 @@ define( "TRANSLATION_2_FACTOR_AUTHENTICATION_ENABLED", "2-Faktor Authentifizieru
 define( "TRANSLATION_CONFIRMATION_CODE", "Bestätigungscode");
 define( "TRANSLATION_CONFIRMATION_CODE_WRONG", "Bestätigungscode falsch.");
 define( "TRANSLATION_ULICMS_LOGIN_AT", "UliCMS Login auf");
+define( "TRANSLATION_PASSWORDS", "Passwörter");
 
 add_hook ( "lang_de" );

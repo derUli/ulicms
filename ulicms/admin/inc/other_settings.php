@@ -430,6 +430,7 @@ translate ( "security" );
 		</h2>
 
 		<div class="accordion-content">
+		<h2><?php translate("passwords");?></h2>
 			<div class="label">
 				<label for="force_password_change_every_x_days"><?php
 	
