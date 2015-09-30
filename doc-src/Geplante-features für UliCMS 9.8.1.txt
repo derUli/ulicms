@@ -1,4 +1,4 @@
-[ ] 2-Faktor Authentifizierung mit dem Google Authenticator
+[X] 2-Faktor Authentifizierung mit dem Google Authenticator
 
 [ ] Möglichkeit, Accounts zu sperren
 
