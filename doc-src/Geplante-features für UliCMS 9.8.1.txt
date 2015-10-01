@@ -1,6 +1,6 @@
 [X] 2-Faktor Authentifizierung mit dem Google Authenticator
 
-[ ] Möglichkeit, Accounts zu sperren
+[X] Möglichkeit, Accounts zu sperren
 
 [ ] Option "Account sperren nach X fehlerhaften Anmeldeversuchen"
 
