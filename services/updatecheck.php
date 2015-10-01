@@ -38,7 +38,9 @@ if($version == "9.0.0"){
 
 }
 
-
+if ($version == "9.0.1" and (new DateTime() > new DateTime("2016-01-31 23:59:59"))) {
+    // Meldung zum Supportende von UliCMS 9.0.1 und zum Upgrade ausgeben
+}
 
 
 die("");
