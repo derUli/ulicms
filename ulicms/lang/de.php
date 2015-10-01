@@ -578,4 +578,8 @@ define( "TRANSLATION_CONFIRMATION_CODE_WRONG", "Bestätigungscode falsch.");
 define( "TRANSLATION_ULICMS_LOGIN_AT", "UliCMS Login auf");
 define( "TRANSLATION_PASSWORDS", "Passwörter");
 
+// Acount Lock
+define("TRANSLATION_LOCKED", "Gesperrt");
+define("TRANSLATION_YOUR_ACCOUNT_IS_LOCKED", "Ihr Account ist gesperrt. Fragen Sie Ihren Administrator, falls Sie denken, dass das ein Fehler ist.");
+
 add_hook ( "lang_de" );

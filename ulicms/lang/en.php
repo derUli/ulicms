@@ -586,4 +586,8 @@ define( "TRANSLATION_CONFIRMATION_CODE_WRONG", "Confirmation Code invalid.");
 define( "TRANSLATION_ULICMS_LOGIN_AT", "UliCMS Login on");
 define( "TRANSLATION_PASSWORDS", "Passwords");
 
+// Acount Lock
+define("TRANSLATION_LOCKED", "Locked");
+define("TRANSLATION_YOUR_ACCOUNT_IS_LOCKED", "Your Account is locked. Please contact your system administrator if you think, that this is an error.");
+
 add_hook ( "lang_en" );

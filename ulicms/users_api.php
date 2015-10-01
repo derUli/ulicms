@@ -160,6 +160,11 @@ function validate_login($user, $password, $token = null) {
 				 }
 
 			}
+			
+			if($user["locked"]){
+				$_REQUEST ["error"] = TRANSLATION_YOUR_ACCOUNT_IS_LOCKED;
+				return false;
+			}
 			return $user;
 		}
 	}
