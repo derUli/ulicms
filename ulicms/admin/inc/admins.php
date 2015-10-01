@@ -34,7 +34,7 @@ if (defined ( "_SECURITY" )) {
 	<br /> <br /> <a href="index.php?action=admin_new"><?php
 			
 			echo TRANSLATION_CREATE_USER;
-			?> </a> <br />
+			?></a><br />
 </p>
 <table class="tablesorter">
 	<thead>

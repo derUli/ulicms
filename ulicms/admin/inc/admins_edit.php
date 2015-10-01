@@ -187,9 +187,24 @@ if ($row->admin)
 				echo nl2br ( get_translation ( "HELP_IS_ADMIN" ) );
 				?>
 	</div>
+	
+	<br /> 
+	<br /> <input type="checkbox" value="1"
+		name="locked" id="locked" <?php
+				
+if ($row->locked)
+					echo "checked";
+				?>> <label for="locked"><?php
+			
+			translate ( "locked" );
+			?> </label>
+			
 	<?php
 			} else {
 				echo '<input type="hidden" name="admin" value="' . $row->admin . '">';
+				if($row->locked){
+				   echo '<input type="hidden" name="locked" value="' . $row->locked . '">';
+				}
 			}
 			?>
 	<br /> <br /> <strong><?php

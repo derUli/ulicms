@@ -51,7 +51,15 @@ if (defined ( "_SECURITY" )) {
 			echo nl2br ( get_translation ( "HELP_IS_ADMIN" ) );
 			?>
 	</div>
-	<br /> <input type="submit"
+	<br /> <input type="checkbox" value="1"
+		name="locked" id="locked"> <label for="locked"><?php
+			
+			translate ( "locked" );
+			?> </label>
+			
+	<br /> 
+	<br /> 
+	<input type="submit"
 		value="<?php
 			
 			echo TRANSLATION_CREATE_USER;

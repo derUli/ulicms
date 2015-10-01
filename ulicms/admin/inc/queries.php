@@ -347,8 +347,9 @@ if ($_POST ["add_admin"] == "add_admin" && (is_admin () or $acl->hasPermission (
 	$email = $_POST ["admin_email"];
 	$sendMail = isset ( $_POST ["send_mail"] );
 	$admin = intval ( isset ( $_POST ["admin"] ) );
+	$locked = intval ( isset ( $_POST ["locked"] ) );
 	$require_password_change = intval ( isset ( $_POST ["require_password_change"] ) );
-	adduser ( $username, $lastname, $firstname, $email, $password, $group, $sendMail, null, $require_password_change, $admin );
+	adduser ( $username, $lastname, $firstname, $email, $password, $group, $sendMail, null, $require_password_change, $admin, $locked );
 	header ( "Location: index.php?action=admins" );
 	exit ();
 }
@@ -570,12 +571,13 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$about_me = db_escape ( $_POST ["about_me"] );
 	$html_editor = db_escape ( $_POST ["html_editor"] );
 	$require_password_change = intval ( isset ( $_POST ["require_password_change"] ) );
+	$locked = intval ( isset ( $_POST ["locked"] ) );
 	
 	add_hook ( "before_edit_user" );
 	$sql = "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
-about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change' WHERE id=$id";
+about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked'  WHERE id=$id";
 	
 	db_query ( $sql );
 	
