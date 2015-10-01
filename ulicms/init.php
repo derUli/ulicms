@@ -287,7 +287,7 @@ if (! getconfig ( "allowed_html" )) {
 	setconfig ( "allowed_html", "<i><u><b><strong><em><ul><li><ol><a><span>" );
 }
 
-// generate Secret for Google Authenticator if not already did
+// generate Secret for Google Authenticator if not already done
 $ga_secret = getconfig("ga_secret");
 if(!$ga_secret){
    require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
