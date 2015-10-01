@@ -63,6 +63,10 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "forms" ) . "` (
 // comments Ordner weggelöschen, sofern er noch existiert, da dieser nicht mehr benötigt wird.
 $comments_dir = ULICMS_ROOT . "/comments";
 
+// Users Tabelle
+db_query("ALTER TABLE ".tbname("users"). " ADD COLUMN `locked` tinyint(1) NOT NULL DEFAULT '0'");
+
+
 if (is_dir ( $comments_dir )) {
 	@SureRemoveDir ( $comments_dir, true );
 }

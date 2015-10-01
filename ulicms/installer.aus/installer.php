@@ -469,6 +469,7 @@ echo TRANSLATION_TITLE;
   `password_changed` DATETIME NULL,
   `group_id` int(11) NULL,
   `notify_on_login` tinyint(1) NOT NULL DEFAULT '0',
+  `locked` tinyint(1) NOT NULL DEFAULT '0',
   `html_editor` varchar(100) NULL DEFAULT 'ckeditor',
   `require_password_change` tinyint(1) NULL DEFAULT '0',
   `admin` tinyint(1) NULL DEFAULT '0',
