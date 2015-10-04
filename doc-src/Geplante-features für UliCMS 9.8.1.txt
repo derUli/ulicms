@@ -1,8 +1,6 @@
-[X] 2-Faktor Authentifizierung mit dem Google Authenticator
-
-[X] Möglichkeit, Accounts zu sperren
-
-[ ] Option "Account sperren nach X fehlerhaften Anmeldeversuchen"
+[ ] Settings Import- und Export
+    [ ] Optionen aus der settings-Tabelle können aus einer Liste ausgewählt werden und ins JSON Format exportiert werden
+    [ ] Optionen können aus einer solchen JSON Datei importiert werden, nicht vorhanden Optionen werden erstellt, ansonsten erfolgt ein Update
 
 - Sicherstellen, dass folgende Komponenten aktuell sind
 
