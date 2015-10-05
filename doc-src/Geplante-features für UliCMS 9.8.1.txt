@@ -1,3 +1,5 @@
+[ ] "Sprachen" Tabelle sortierbar machen
+
 [ ] Settings Import- und Export
     [ ] Optionen aus der settings-Tabelle können aus einer Liste ausgewählt werden und ins JSON Format exportiert werden
     [ ] Optionen können aus einer solchen JSON Datei importiert werden, nicht vorhanden Optionen werden erstellt, ansonsten erfolgt ein Update
