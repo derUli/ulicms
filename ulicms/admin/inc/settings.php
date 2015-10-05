@@ -14,17 +14,18 @@ if (defined ( "_SECURITY" )) {
 <br />
 <br />
 
-<table border=1>
+<table class="tablesorter">
+<thead>
 	<tr style="font-weight: bold;">
-		<td style="width: 40px;">--></td>
-		<td><?php
+	
+		<th><?php
 			
 			echo TRANSLATION_OPTION;
-			?></td>
-		<td><?php
+			?></th>
+		<th><?php
 			
 			echo TRANSLATION_VALUE;
-			?></td>
+			?></th>
 		<td><?php
 			
 			echo TRANSLATION_EDIT;
@@ -34,13 +35,14 @@ if (defined ( "_SECURITY" )) {
 			echo TRANSLATION_DELETE;
 			?></td>
 	</tr>
+	</thead>
+	<tbody>
 	<?php
 			while ( $row = db_fetch_object ( $query ) ) {
 				?>
 		<?php
 
                  echo '<tr id="dataset-'.htmlspecialchars($row->name).'">';
-                 echo "<td style=\"width:40px;\">--></td>";
                  echo "<td>" . htmlspecialchars ($row -> name, ENT_QUOTES, "UTF-8") . "</td>";
                  echo "<td style=\"word-break:break-all;\">" . nl2br (htmlspecialchars ($row -> value)) . "</td>";
                  echo "<td style=\"text-align:center\">" . '<a href="index.php?action=key_edit&key=' . $row -> id . '"><img src="gfx/edit.png" class="mobile-big-image" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
@@ -49,6 +51,7 @@ if (defined ( "_SECURITY" )) {
                  }
              }
          ?>
+		 </tbody>
 </table>
 
 <script type="text/javascript">
