@@ -56,3 +56,4 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
   Es kann jedoch nachträglich als Ergänzung auf www.ulicms.de heruntergeladen und installiert werden.
 + Optionale 2-Faktor Authentifizerung per Google Authenticator
 + Benutzer-Accounts können nun gesperrt werden
++ Experteneinstellungen nun per TableSorter sortierbar
