@@ -1,4 +1,4 @@
-[ ] jQuery shake Animation bei fehlerhaften Logins ins Backend
+[X] jQuery shake Animation bei fehlerhaften Logins ins Backend
     Funktion siehe https://github.com/jbhamilton/jquerynouishake/blob/master/shake.js
 
 [ ] "Sprachen" Tabelle sortierbar machen

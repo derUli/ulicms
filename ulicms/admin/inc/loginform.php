@@ -99,6 +99,12 @@ csrf_token_html ();
 
 if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {
 	?>
+	<script type="text/javascript">
+	$(window).load(function(){
+	   shake("form#login-form");
+	   
+	} );
+	</script>
 <p class="ulicms_error">
 <?php
 	
