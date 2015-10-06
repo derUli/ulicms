@@ -1,3 +1,6 @@
+[ ] jQuery shake Animation bei fehlerhaften Logins ins Backend
+    Funktion siehe https://github.com/jbhamilton/jquerynouishake/blob/master/shake.js
+
 [ ] "Sprachen" Tabelle sortierbar machen
 
 [ ] Import Filter um Inhalte aus WordPress zu importieren
