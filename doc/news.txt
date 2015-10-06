@@ -58,3 +58,4 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + Benutzer-Accounts können nun gesperrt werden
 + Experteneinstellungen nun per TableSorter sortierbar
 + "shake" Animation wenn Anmeldung fehlgeschlagen
++ "sprachen" Tabelle ist nun sortiert

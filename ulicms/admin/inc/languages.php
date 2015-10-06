@@ -53,22 +53,25 @@ if (defined ("_SECURITY")){
         
          if (db_num_rows ($languages) > 0){
              ?>
-<table>
+<table class="tablesorter">
+<thead>
 	<tr>
-		<td><strong><?php
+		<th><strong><?php
             
              echo TRANSLATION_SHORTCODE;
-             ?></strong></td>
-		<td><strong><?php
+             ?></strong></th>
+		<th><strong><?php
             
              echo TRANSLATION_FULL_NAME;
-             ?></strong></td>
-		<td align="center"><strong><?php
+             ?></strong></th>
+		<th style="text-align:center;"><strong><?php
             
              echo TRANSLATION_STANDARD;
-             ?></strong></td>
+             ?></strong></th>
 		<td></td>
 	</tr>
+</thead>
+<tbody>
 	<?php
              while ($row = db_fetch_object ($languages)){
                  ?>
@@ -131,13 +134,14 @@ if (defined ("_SECURITY")){
 		</td>
 
 
+		</tr>
 
 		<?php
                  }
              ?>
 
 
-
+</tbody>
 </table>
 
 <script type="text/javascript">
