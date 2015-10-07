@@ -164,7 +164,8 @@ $(window).load(function(){
 			}
 		}
 		
-		$menus = getAllMenus ();
+		$menus = getAllMenus (true);
+
 		array_unshift ( $menus, "null" );
 		
 		$sql = "select a.id as id, a.title as title from " . tbname ( "content" ) . " a inner join " . tbname ( "content" ) . " b on a.id = b.parent ";

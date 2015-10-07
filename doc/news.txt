@@ -59,3 +59,4 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + Experteneinstellungen nun per TableSorter sortierbar
 + "shake" Animation wenn Anmeldung fehlgeschlagen
 + "Sprachen" Tabelle ist nun sortiert
++ Im "Menü" Filter werden nur noch tatsächlich genutzte Menüs angezeigt

@@ -1,4 +1,14 @@
 <?php
+
+function get_all_used_menus(){
+    $retval = array();
+    $query = db_query("select menu from ".tbname("content")." group by menu");
+	while($row = db_fetch_object($query)){
+	   $retval[] = $row->menu;
+	}
+	return $retval;
+}
+
 function is_ajax_request() {
 	return (! empty ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) && strtolower ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest');
 }
@@ -1465,7 +1475,7 @@ function is__writable($path) {
 // Gibt die Identifier aller Menüs zurück.
 // Zusätzliche Navigationsmenüs können definiert werden,
 // durch setzen von additional_menus
-function getAllMenus() {
+function getAllMenus($only_used = false) {
 	$menus = Array (
 			"left",
 			"top",
@@ -1481,6 +1491,15 @@ function getAllMenus() {
 			array_push ( $menus, $m );
 		}
 	}
+	if($only_used){
+	$used = get_all_used_menus();
+	for($i=0; $i <= count($menus); $i++){
+	   if(!in_array($menus[$i], $used)){
+	      unset($menus[$i]);
+	   }
+	}
+	}
+	sort($menus);
 	return $menus;
 }
 
