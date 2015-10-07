@@ -1,5 +1,5 @@
 ﻿[X] Copyright Jahr anpassen
-[ ] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
+[X] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
 [X] Dokumentation! Vor allem, zum Script/CSS queuing System!
     [X] Zur Script Queue
     [X] Zur Stylesheet Queue
@@ -28,8 +28,8 @@ Doku
 [X] Tutorial für Installation eines Webservers mit UliCMS auf Debian Linux / Ubuntu verfassen.
 
 Updates
-[ ] Patch für Update auf neueste Mobile_Detect Version veröffentlichen
+[X] Patch für Update auf neueste Mobile_Detect Version veröffentlichen
 [X] Update für Sprachdatei veröffentlichen
 
 UliCMS 9.8
-[ ] Überall die Versionsnummer ersetzen (Info Broschüre, Paketquelle, usw.)
+[X] Überall die Versionsnummer ersetzen (Info Broschüre, Paketquelle, usw.)
