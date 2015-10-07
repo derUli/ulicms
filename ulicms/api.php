@@ -1501,8 +1501,6 @@ function getAllMenus($only_used = false) {
 	}
 	$menus = $new_menus;
 	}
-
-	$menus = array_filter($menus);
 	sort($menus);
 	return $menus;
 }
