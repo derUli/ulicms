@@ -1493,12 +1493,16 @@ function getAllMenus($only_used = false) {
 	}
 	if($only_used){
 	$used = get_all_used_menus();
+    $new_menus = array();
 	for($i=0; $i <= count($menus); $i++){
-	   if(!in_array($menus[$i], $used)){
-	      unset($menus[$i]);
+	   if(in_array($menus[$i], $used)){
+	      $new_menus[] = $menus[$i];
 	   }
 	}
+	$menus = $new_menus;
 	}
+
+	$menus = array_filter($menus);
 	sort($menus);
 	return $menus;
 }
