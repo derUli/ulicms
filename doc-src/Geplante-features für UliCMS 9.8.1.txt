@@ -1,4 +1,4 @@
-[ ] verschiedene Skins fürs Backend
+[ ] verschiedene Skins fürs Backend (Farbschemen etc.)
 
 [ ] Pagination für alle Tabellen 10 Datensätze pro Seite http://stackoverflow.com/questions/6677580/how-to-paginate-a-table-of-mysql-in-php
 [ ] Import Filter um Inhalte aus WordPress zu importieren
