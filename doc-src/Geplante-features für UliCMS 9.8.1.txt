@@ -1,4 +1,4 @@
-[ ] Bootstrap CSS Integration
+[ ] Bootstrap CSS Integration, Bootstrap Widgets können auch über den CKEditor eingefügt werden.
 
 [ ] verschiedene Skins fürs Backend (Farbschemen etc.)
 
