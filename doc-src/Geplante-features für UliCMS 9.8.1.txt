@@ -1,4 +1,4 @@
-[ ] "Bereiche" so wie in Joomla
+[ ] "Scopes" für Einstellungen. Scopes haben eine Root-Page und weitere Werte wie z.B. theme oder Domains.
 
 [ ] Bootstrap CSS Integration, Bootstrap Widgets können auch über den CKEditor eingefügt werden.
 
