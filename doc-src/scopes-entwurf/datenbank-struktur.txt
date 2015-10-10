@@ -1,0 +1,20 @@
+Tabellen
+
+prefix_scopes:
+  id int
+  description text
+  root_content_id id default null
+  language_code default null
+  menu default null
+  enabled boolean
+
+
+prefix_scope_domains
+  scope_id
+  domain_name 
+
+prefix_settings
+  Spalte hinzufügen
+  scope_id default null
+
+wenn scope_id = null ist, dann ist heißt der Scope [global]

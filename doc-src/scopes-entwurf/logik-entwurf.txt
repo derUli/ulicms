@@ -1,0 +1,21 @@
+*config Funktionen anpassen
+getconfig()
+setconfig()
+
+Diese Funktionen bekommen einen Parameter use_scope der per Default = true ist
+
+sofern use_scope = true ist, wird nur der Parameter mit diesen Scope geändert und ausgelesen.
+Wenn bei getconfig kein Parameter in diesem Scope vorhanden ist, wird der [global] Scope verwendet.
+[global] Scope ist dort, wo die scope_id = null ist
+
+Funktion get_menu wird angepasst:
+Wenn der Paramter $parent null ist, wird $parent auf den Wert von get_lang_config("frontpage") gesetzt.
+Somit ist es möglich, Subsites, mit eigenem Menübaum zu machen.
+
+Im Backend muss zumindest in den Einstellungsseiten ein Umschalter für die Scopes hinzugefügt werden, ähnlich wie z.B. dem Umschalter für die StoreViews in Magento
+
+Es müssen die Funktionen und get_scope_id(), get_scope() implementiert werden.
+Diese prüfen, anhand der Parameter in der scope-Tabelle, in welchem Scope wir uns befinden und geben dann 
+die Einstellungen dieses Scopes zurück
+
+Es muss außerdem eine GUI geschaffen werden, um Scopes zu konfigurieren
