@@ -1,3 +1,5 @@
+[ ] "Bereiche" so wie in Joomla
+
 [ ] Bootstrap CSS Integration, Bootstrap Widgets können auch über den CKEditor eingefügt werden.
 
 [ ] verschiedene Skins fürs Backend (Farbschemen etc.)
