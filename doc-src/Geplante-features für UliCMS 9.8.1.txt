@@ -1,4 +1,5 @@
-[ ] "Scopes" für Einstellungen. Scopes haben eine Root-Page und weitere Werte wie z.B. theme oder Domains.
+[ ] "Scopes" für Einstellungen. Ein Scope sind alle Seiten mit einer bestimmten Parent-Seite oder bestimmte Domains oder eine bestimmte Sprache
+    - Scopes ermöglichen, Subsites zu erstellen.
 
 [ ] Bootstrap CSS Integration, Bootstrap Widgets können auch über den CKEditor eingefügt werden.
 
