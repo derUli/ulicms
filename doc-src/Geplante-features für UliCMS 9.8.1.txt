@@ -1,3 +1,5 @@
+[ ] Editor Skin per User statt global konfigurierbar
+
 [ ] "Scopes" für Einstellungen. Ein Scope sind alle Seiten mit einer bestimmten Parent-Seite, ein bestimmtes Menü oder bestimmte Domains oder eine bestimmte Sprache
     - Scopes ermöglichen, Subsites zu erstellen.
 
