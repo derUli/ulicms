@@ -1,0 +1,4 @@
+Google Fonts müssen in Design Einstellungen auswählbar sein inklusive Vorschau
+
+Wenn eine Google Font ausgewählt ist, muss im Frontend automatisch das entsprechende CSS von Google eingebunden werden.
+
