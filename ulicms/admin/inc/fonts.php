@@ -24,7 +24,7 @@ if (! function_exists ( 'getFontFamilys' )) {
 		$fonts ["Zapf Chancery"] = "'Zapf Chancery', cursive";
 		$fonts ["Calibri"] = "Calibri, Candara, Segoe, 'Segoe UI', Optima, Arial, sans-serif";
 		$fonts ["Segoe"] = "'wf_SegoeUI', 'Segoe UI', 'Segoe','Segoe WP', 'Tahoma', 'Verdana', 'Arial', 'sans-serif'";
-		$fonts ["Google Font"] = "google";
+		$fonts ["Google Fonts"] = "google";
 		add_hook ( "custom_fonts" );
 		
 		// Hier bei Bedarf weitere Fonts einfügen
