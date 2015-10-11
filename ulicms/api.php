@@ -1,5 +1,16 @@
 <?php
 
+function get_google_fonts(){
+    $retval = array();
+    $file = ULICMS_ROOT."/lib/webFontNames.opml";
+    $content = file_get_contents($file);
+    $xml =  new SimpleXMLElement($content);
+    foreach($xml->body->outline as $outline){
+            $retval[] = $outline["text"];
+   };
+   return $retval;
+}
+
 function get_all_used_menus(){
     $retval = array();
     $query = db_query("select menu from ".tbname("content")." group by menu");

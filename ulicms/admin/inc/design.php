@@ -81,11 +81,12 @@ if (! $acl->hasPermission ( "design" )) {
 	$allThemes = getThemesList ();
 	include_once "inc/fonts.php";
 	$fonts = getFontFamilys ();
-	
+	$google_fonts = get_google_fonts();
 	$theme = getconfig ( "theme" );
 	$additional_menus = getconfig ( "additional_menus" );
 	$mobile_theme = getconfig ( "mobile_theme" );
 	$default_font = getconfig ( "default-font" );
+	$google_font = getconfig ( "google-font" );
 	$title_format = htmlspecialchars ( getconfig ( "title_format" ), ENT_QUOTES, "UTF-8" );
 	$zoom = intval ( getconfig ( "zoom" ) );
 	$font_size = getconfig ( "font-size" );
@@ -93,6 +94,17 @@ if (! $acl->hasPermission ( "design" )) {
 	$video_width_100_percent = getconfig ( "video_width_100_percent" );
 	$font_sizes = getFontSizes ();
 	
+	?>
+	<?php if($default_font != "google"){
+	?>
+	
+	<style type="text/css">
+	div#google-fonts{
+	   display:none;
+	}
+	</style>
+	<?php
+	}
 	?>
 <h1>
 <?php
@@ -223,7 +235,7 @@ if (! $acl->hasPermission ( "design" )) {
 	
 	echo TRANSLATION_FONT_FAMILY;
 	?> </strong></td>
-			<td><select name="default-font" size=1>
+			<td><select name="default-font" id="default-font" size=1>
 			<?php
 	$font_amount = count ( $fonts );
 	$i = 1;
@@ -246,7 +258,19 @@ if (! $acl->hasPermission ( "design" )) {
 	}
 	
 	?>
-			</select></td>
+			</select>
+			<div id="google-fonts">
+			<select name="default-font" size=1>
+			<?php foreach($google_fonts as $myfont){
+			    if($myfont == $google_font){
+			       echo '<option value="'.htmlspecialchars($myfont).'" selected>'.htmlspecialchars($myfont)."</option>";
+			    } else {
+			       echo '<option value="'.htmlspecialchars($myfont).'">'.htmlspecialchars($myfont)."</option>";
+			    }
+			}?>
+			</select>
+			</div>
+			</td>
 		</tr>
 		<tr>
 			<td><strong><?php
@@ -405,6 +429,18 @@ echo TRANSLATION_CHANGES_WAS_SAVED;
   
 
 }); 
+
+function onChangeDefaultFont(){
+    var value = $("select#default-font").val();
+    if(value == "google"){
+       $("div#google-fonts").slideDown();
+    } else {
+       
+       $("div#google-fonts").slideUp();
+    }
+}
+
+$("select#default-font").change(onChangeDefaultFont);
 
 </script>
 <?php
