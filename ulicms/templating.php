@@ -845,8 +845,9 @@ function base_metas() {
 	if($font == "google"){
 	   $google_font = getconfig("google-font");
 	   if($google_font){
-	       echo '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='.urlencode($google_font).'"/>';
-	       $font = "'$google_font'";
+	        echo '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='.urlencode($google_font).'"/>';
+		echo "\r\n";
+	        $font = "'$google_font'";
 	   }
 	}
 		echo "
