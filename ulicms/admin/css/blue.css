@@ -313,3 +313,7 @@ div#site-switcher-container {
 form#login-form{
 	margin-bottom:5px;
 }
+
+div#google-fonts select{
+   margin-top:10px;
+}
