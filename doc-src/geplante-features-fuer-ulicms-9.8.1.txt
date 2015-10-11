@@ -1,5 +1,13 @@
 ﻿[ ] Google Fonts Schrift-Vorschau mit Text "Franz jagt im komplett verwahrlosten Taxi quer durch Bayern."
 
+- Sicherstellen, dass folgende Komponenten aktuell sind
+
+[ ] CKEditor
+[ ] KCFinder
+[ ] jQuery
+[ ] Mobile_Detect
+[ ] CodeMirror
+
 [ ] Editor Skin per User statt global konfigurierbar
 
 [ ] "Scopes" für Einstellungen. Ein Scope sind alle Seiten mit einer bestimmten Parent-Seite, ein bestimmtes Menü oder bestimmte Domains oder eine bestimmte Sprache
@@ -16,13 +24,5 @@
 
     [ ] Optionen aus der settings-Tabelle können aus einer Liste ausgewählt werden und ins JSON Format exportiert werden
     [ ] Optionen können aus einer solchen JSON Datei importiert werden, nicht vorhanden Optionen werden erstellt, ansonsten erfolgt ein Update
-
-- Sicherstellen, dass folgende Komponenten aktuell sind
-
-[ ] CKEditor
-[ ] KCFinder
-[ ] jQuery
-[ ] Mobile_Detect
-[ ] CodeMirror
 
 [ ] Standarddesign "cleanblue" für Mobilgeräte kompatibel machen
