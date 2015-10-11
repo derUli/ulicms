@@ -20,5 +20,6 @@
 [ ] KCFinder
 [ ] jQuery
 [ ] Mobile_Detect
+[ ] CodeMirror
 
 [ ] Standarddesign "cleanblue" für Mobilgeräte kompatibel machen
