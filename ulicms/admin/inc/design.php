@@ -56,6 +56,15 @@ if (! $acl->hasPermission ( "design" )) {
 			setconfig ( "default-font", $font );
 		}
 		
+		if (!empty($_REQUEST ["google-font"])) {
+
+			$font = $_REQUEST ["google-font"];
+			
+			$font = db_escape ( $font );
+			
+			setconfig ( "google-font", $font );
+		}
+		
 		setconfig ( "zoom", intval ( $_REQUEST ["zoom"] ) );
 		
 		setconfig ( "font-size", db_escape ( $_REQUEST ["font-size"] ) );
@@ -260,7 +269,7 @@ if (! $acl->hasPermission ( "design" )) {
 	?>
 			</select>
 			<div id="google-fonts">
-			<select name="default-font" size=1>
+			<select name="google-font" size=1>
 			<?php foreach($google_fonts as $myfont){
 			    if($myfont == $google_font){
 			       echo '<option value="'.htmlspecialchars($myfont).'" selected>'.htmlspecialchars($myfont)."</option>";
