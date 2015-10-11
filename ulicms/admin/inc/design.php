@@ -234,7 +234,11 @@ if (! $acl->hasPermission ( "design" )) {
 		
 		if (! in_array ( $default_font, $fonts ) and $i === $font_amount)
 			$selected = "selected";
-		echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
+		if($value != 'google'){
+                   echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
+		} else {
+                   echo '<optgroup>';
+		}
 		echo "<option value=\"$value\" $selected>$key</option>";
 		echo '</optgroup>';
 		

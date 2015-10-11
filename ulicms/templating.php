@@ -841,11 +841,19 @@ function base_metas() {
 	}
 	
 	if (! getconfig ( "disable_custom_layout_options" )) {
+	$font = getconfig ( "default-font" );
+	if($font == "google"){
+	   $google_font = getconfig("google-font");
+	   if($google_font){
+	       echo '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='.urlencode($google_font).'"/>';
+	       $font = "'$google_font'";
+	   }
+	}
 		echo "
 <style type=\"text/css\">
 body{
 zoom:" . $zoom . "%;
-font-family:" . getconfig ( "default-font" ) . ";
+font-family:" . $font . ";
 font-size:" . getconfig ( "font-size" ) . ";
 background-color:" . getconfig ( "body-background-color" ) . ";
 color:" . getconfig ( "body-text-color" ) . ";
