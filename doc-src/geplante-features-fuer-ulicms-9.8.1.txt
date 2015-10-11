@@ -1,0 +1,25 @@
+[ ] Editor Skin per User statt global konfigurierbar
+
+[ ] "Scopes" für Einstellungen. Ein Scope sind alle Seiten mit einer bestimmten Parent-Seite, ein bestimmtes Menü oder bestimmte Domains oder eine bestimmte Sprache
+    - Scopes ermöglichen, Subsites zu erstellen.
+
+[ ] Bootstrap CSS Integration, Bootstrap Widgets können auch über den CKEditor eingefügt werden.
+
+[ ] verschiedene Skins fürs Backend (Farbschemen etc.)
+
+[ ] Pagination für alle Tabellen 10 Datensätze pro Seite http://stackoverflow.com/questions/6677580/how-to-paginate-a-table-of-mysql-in-php
+[ ] Import Filter um Inhalte aus WordPress zu importieren
+
+[ ] Settings Import- und Export
+    [ ] Optionen aus der settings-Tabelle können aus einer Liste ausgewählt werden und ins JSON Format exportiert werden
+    [ ] Optionen können aus einer solchen JSON Datei importiert werden, nicht vorhanden Optionen werden erstellt, ansonsten erfolgt ein Update
+
+- Sicherstellen, dass folgende Komponenten aktuell sind
+
+[ ] CKEditor
+[ ] KCFinder
+[ ] jQuery
+[ ] Mobile_Detect
+[ ] CodeMirror
+
+[ ] Standarddesign "cleanblue" für Mobilgeräte kompatibel machen
