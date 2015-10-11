@@ -1,5 +1,6 @@
 
-[ ] Google Fonts
+[X] Google Fonts
+    [ ] Google Fonts in Info-Broschüre erwähnen
 
 [ ] Editor Skin per User statt global konfigurierbar
 
