@@ -1,8 +1,4 @@
-
-[X] Google Fonts
-    [ ] Google Fonts in Info-Broschüre erwähnen
-
-[ ] Editor Skin per User statt global konfigurierbar
+﻿[ ] Editor Skin per User statt global konfigurierbar
 
 [ ] "Scopes" für Einstellungen. Ein Scope sind alle Seiten mit einer bestimmten Parent-Seite, ein bestimmtes Menü oder bestimmte Domains oder eine bestimmte Sprache
     - Scopes ermöglichen, Subsites zu erstellen.
@@ -15,6 +11,7 @@
 [ ] Import Filter um Inhalte aus WordPress zu importieren
 
 [ ] Settings Import- und Export
+
     [ ] Optionen aus der settings-Tabelle können aus einer Liste ausgewählt werden und ins JSON Format exportiert werden
     [ ] Optionen können aus einer solchen JSON Datei importiert werden, nicht vorhanden Optionen werden erstellt, ansonsten erfolgt ein Update
 
