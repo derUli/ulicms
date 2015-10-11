@@ -1,4 +1,6 @@
-﻿[ ] Editor Skin per User statt global konfigurierbar
+﻿[ ] Google Fonts Schrift-Vorschau mit Text "Franz jagt im komplett verwahrlosten Taxi quer durch Bayern."
+
+[ ] Editor Skin per User statt global konfigurierbar
 
 [ ] "Scopes" für Einstellungen. Ein Scope sind alle Seiten mit einer bestimmten Parent-Seite, ein bestimmtes Menü oder bestimmte Domains oder eine bestimmte Sprache
     - Scopes ermöglichen, Subsites zu erstellen.
