@@ -1,4 +1,6 @@
-Google Fonts müssen in Design Einstellungen auswählbar sein inklusive Vorschau
+In den Designeinstellungen eine Auswahl "Google Fonts" mit dem Value "google" hinzufügen.
+Wenn diese ausgewählt ist, klappt eine Liste aller Google Fonts als Auswahlfeld auf.
+Die Logik, die im Frontend die Font ausgibt, muss entsprechend angepasst werden.
 
 Wenn eine Google Font ausgewählt ist, muss im Frontend automatisch das entsprechende CSS von Google eingebunden werden.
 
