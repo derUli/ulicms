@@ -19,3 +19,19 @@ function shake(div){
     $(div).animate({ left: 0},interval);                                                                                
 
 }//shake   
+
+
+function bindTogglePassword(input, checkbox){
+   var input = $(input);
+   var checkbox = $(checkbox);
+   $(checkbox).click(function(){
+	   if ($(checkbox).is(':checked')){
+		   $(input).attr('type', 'text');
+	   }
+	   else{
+		   $(input).attr('type', 'password');
+
+	}
+
+});
+} 

@@ -61,3 +61,4 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + "Sprachen" Tabelle ist nun sortiert
 + Im "Menü" Filter werden nur noch tatsächlich genutzte Menüs angezeigt
 + Google Fonts nun auswählbar
++ Beim Loginformular kann man das Passwort bei Klick auf eine Checkbox im Klartext anzeigen lassen

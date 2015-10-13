@@ -51,11 +51,15 @@ csrf_token_html ();
 			<td><input type="text" name="user" value=""></td>
 		</tr>
 		<tr>
-			<td><strong><strong><?php
+			<td><strong><?php
 			
 			echo TRANSLATION_PASSWORD;
 			?></strong></td>
-			<td><input type="password" name="password" value=""></td>
+			<td><input type="password" id="password" name="password" value=""></td>
+		</tr>
+		<tr>
+		<td><label for="view_password"><?php translate("view_password");?></strong></td>
+		<td><input type="checkbox" id="view_password"/></td>
 		</tr>
 		<tr>
 			<td><strong><?php
@@ -95,6 +99,11 @@ csrf_token_html ();
 		</tr>
 	</table>
 </form>
+<script type="text/javascript">
+$(document).ready(function(){
+	bindTogglePassword("#password", "#view_password")
+});
+</script>
 <?php
 
 if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {

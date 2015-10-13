@@ -590,4 +590,7 @@ define( "TRANSLATION_PASSWORDS", "Passwords");
 define("TRANSLATION_LOCKED", "Locked");
 define("TRANSLATION_YOUR_ACCOUNT_IS_LOCKED", "Your Account is locked. Please contact your system administrator if you think, that this is an error.");
 
+// Passwort anzeigen
+define("TRANSLATION_VIEW_PASSWORD", "View Password");
+
 add_hook ( "lang_en" );

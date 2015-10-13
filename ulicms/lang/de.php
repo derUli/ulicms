@@ -582,4 +582,7 @@ define( "TRANSLATION_PASSWORDS", "Passwörter");
 define("TRANSLATION_LOCKED", "Gesperrt");
 define("TRANSLATION_YOUR_ACCOUNT_IS_LOCKED", "Ihr Account ist gesperrt. Fragen Sie Ihren Administrator, falls Sie denken, dass das ein Fehler ist.");
 
+// Passwort anzeigen
+define("TRANSLATION_VIEW_PASSWORD", "Passwort anzeigen");
+
 add_hook ( "lang_de" );
