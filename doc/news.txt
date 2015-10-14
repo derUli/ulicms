@@ -63,3 +63,4 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + Google Fonts nun auswählbar
 + Beim Loginformular kann man das Passwort bei Klick auf eine Checkbox im Klartext anzeigen lassen
 + API-Funktion get_prefered_language(array $available_languages, $http_accept_language) hinzugefügt
++ KCFinder auf KCFinder 3.20 Test 2 aktualisiert
