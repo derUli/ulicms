@@ -62,3 +62,4 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + Im "Menü" Filter werden nur noch tatsächlich genutzte Menüs angezeigt
 + Google Fonts nun auswählbar
 + Beim Loginformular kann man das Passwort bei Klick auf eine Checkbox im Klartext anzeigen lassen
++ API-Funktion get_prefered_language(array $available_languages, $http_accept_language) hinzugefügt
