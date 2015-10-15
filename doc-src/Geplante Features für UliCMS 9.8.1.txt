@@ -12,3 +12,5 @@
 [ ] CodeMirror
 
 [ ] Letzte Loginzeit jedes Users im System speichern
+
+[ ] Feature: Newsletter an alle User schicken
