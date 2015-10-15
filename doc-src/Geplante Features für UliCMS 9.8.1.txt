@@ -12,3 +12,7 @@
 [ ] CodeMirror
 
 [ ] Feature: Newsletter an alle User schicken
+
+[ ] Möglichkeit, den Zugriff auf Seiten für eine User-Gruppen beschränken
+    z.B. kann ein User nur alle Unterseiten von X bearbeiten, oder nur alle deutschen Seiten, 
+    oder nur alle Seiten in Menü X
