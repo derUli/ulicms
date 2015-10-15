@@ -11,4 +11,4 @@
 [ ] Mobile_Detect
 [ ] CodeMirror
 
-[ ] Letzten Login jedes Users im System speichern
+[ ] Letzte Loginzeit jedes Users im System speichern
