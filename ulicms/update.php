@@ -85,6 +85,6 @@ $pkg->truncateInstalledPatches ();
 
 // @unlink ("update.php");
 
-if (! isset ( $_GET ["include_update"] )) {
+// if (! isset ( $_GET ["include_update"] )) {
 	ulicms_redirect ( "admin/" );
-}
+// }

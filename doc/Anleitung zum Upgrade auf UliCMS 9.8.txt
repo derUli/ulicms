@@ -1,4 +1,4 @@
-Anleitung zum Upgrade auf UliCMS 9.8
+﻿Anleitung zum Upgrade auf UliCMS 9.8
 
 =============================================
 
@@ -34,8 +34,6 @@ Falls dies nicht klappen sollte, müssen Sie die Ordner manuell verschieben.
 Wenn Sie Pakete installieren möchten, die für ältere Versionen von UliCMS gedacht sind, 
 müssen Sie die Ordner nach der Installation des Pakets manuell verschieben.
 
-Ab dieser Version führt UliCMS das Script update.php automatisch aus, sofern das Script vorhanden ist und Schreibrechte darauf gesetzt sind. Somit ist es ab jetzt nicht mehr erforderlich, update.php manuell im Browser aufzurufen.
-
 4. Datensicherung
 
 Sichern Sie vor dem Upgrade Ihre UliCMS Installation.
@@ -52,7 +50,8 @@ Bei einem Webhosting wie dieses z.B. von Strato angeboten wird, müssen die Rech
 
 Rufen Sie nun das Script update.php im Browser auf.
 Dieses erreichen Sie unter einer Adresse wie http://www.meinedomain.de/update.php.
-Sofern Sie den Fehler "404 Not Found" erhalten, und die Datei update.php nicht mehr auf Ihrem Webspace vorhanden ist, wurde das update-Skript bereits automatisch vom System ausgeführt.
+Die notwendigen Aktualisierungen an der Datenbank werden durchgeführt.
+Anschließend löscht sich das update.php Script selbst und Sie werden in das UliCMS Backend weitergeleitet.
 
 Loggen Sie sich nun in das CMS ein und leeren Sie den Cache.
 Sofern Sie eine andere Paketquelle als die Standard Paketquelle augewählt haben, ändern Sie diese auf eine Paketquelle für die neue UliCMS Version.
