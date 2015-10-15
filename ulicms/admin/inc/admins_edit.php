@@ -62,7 +62,17 @@ echo get_gravatar ( $row->email, 200 );
 		value="<?php
 			
 			echo $row->email;
-			?>"><br /> <br /> <strong><?php
+			?>"><br /> <br /> 
+			<strong><?php translate("last_login");?></strong><br/>
+			<?php 
+			if(is_null($row->last_login)){
+			    translate("never");
+			} else {
+			    echo strftime("%x %X", $row -> last_login);
+			}
+			
+			?><br /> <br /> 
+			<strong><?php
 			
 			echo TRANSLATION_NEW_PASSWORD;
 			?></strong><br /> <input type="text" name="admin_password"

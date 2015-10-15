@@ -11,6 +11,6 @@
 [ ] Mobile_Detect
 [ ] CodeMirror
 
-[ ] Letzte Loginzeit jedes Users im System speichern
+[X] Letzte Loginzeit jedes Users im System speichern
 
 [ ] Feature: Newsletter an alle User schicken

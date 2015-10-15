@@ -593,4 +593,10 @@ define("TRANSLATION_YOUR_ACCOUNT_IS_LOCKED", "Your Account is locked. Please con
 // Passwort anzeigen
 define("TRANSLATION_VIEW_PASSWORD", "View Password");
 
+
+// Letzter Login
+define("TRANSLATION_LAST_LOGIN", "Last Login");
+define("TRANSLATION_NEVER", "Never");
+
+
 add_hook ( "lang_en" );
