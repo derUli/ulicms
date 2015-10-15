@@ -1,4 +1,6 @@
-﻿[ ] Neue Gruppe erstellen auf Basis von Gruppe X (Berechtigungen von Gruppe X werden vorausgewählt)
+[ ] Link auf Loginseite "Zurück zum Frontend" hinzufügen
+
+[ ] Neue Gruppe erstellen auf Basis von Gruppe X (Berechtigungen von Gruppe X werden vorausgewählt)
 
 
 - Sicherstellen, dass folgende Komponenten aktuell sind
