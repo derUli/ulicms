@@ -7,6 +7,10 @@ import platform
 from contextlib import closing
 from zipfile import ZipFile, ZIP_DEFLATED
 
+def get_git_revision_hash():
+    import subprocess
+    return subprocess.check_output(['git', 'rev-parse', 'HEAD'])
+
 def zipdir(basedir, archivename):
     assert os.path.isdir(basedir)
     with closing(ZipFile(archivename, "w", ZIP_DEFLATED)) as z:
@@ -25,6 +29,11 @@ def main():
     target = os.path.expanduser(args.target)
     target = os.path.abspath(args.target)
     source_dir = os.path.dirname(__file__)
+        
+    gitRev = get_git_revision_hash()
+    handle = open("ulicms/.rev", "w")
+    handle.write(gitRev)
+    handle.close()
 
     ignore = ('.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
               "Releases", "cms-config.php", "services", "update.php",

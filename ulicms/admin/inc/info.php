@@ -6,7 +6,13 @@ if (defined ( "_SECURITY" )) {
 	if (! $acl->hasPermission ( "info" )) {
 		noperms ();
 	} else {
-		
+	    $revision_string = null;
+		$gitrev_file = ULICMS_ROOT."/.rev";
+		if(file_exists($gitrev_file)){
+		   $gitrev_data = file_get_contents($gitrev_file);
+		   $revision_string = "Revision " . $gitrev_data;
+		   
+		}
 		$admin_logo = getconfig ( "admin_logo" );
 		if (! $admin_logo)
 			$admin_logo = "gfx/logo.png";
@@ -23,6 +29,16 @@ if (defined ( "_SECURITY" )) {
 		echo $version->getVersion ();
 		?>"</strong>
 <br />
+
+<?php 
+if($revision_string){
+?>
+
+<pre>
+<?php
+   echo htmlspecialchars($revision_string);
+?></pre>
+<?php }?>
 
 <p>
 	<a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2011 -
