@@ -62,7 +62,10 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "forms" ) . "` (
 
 
 // Users Tabelle
-db_query("ALTER TABLE ".tbname("users"). " ADD COLUMN `locked` tinyint(1) NOT NULL DEFAULT '0'");
+db_query( "ALTER TABLE ".tbname("users"). " ADD COLUMN `locked` tinyint(1) NOT NULL DEFAULT '0'" );
+
+// Last Login Time
+db_query( "ALTER TABLE " . tbname("users"). " ADD COLUMN `last_login` bigint(20) DEFAULT NULL");
 
 // comments Ordner weggelöschen, sofern er noch existiert, da dieser nicht mehr benötigt wird.
 $comments_dir = ULICMS_ROOT . "/comments";

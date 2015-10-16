@@ -466,6 +466,7 @@ echo TRANSLATION_TITLE;
   `avatar_file` varchar(40) NOT NULL,
   `about_me` text NOT NULL,
   `last_action` bigint(20) NOT NULL,
+  `last_login` bigint(20) DEFAULT NULL,
   `password_changed` DATETIME NULL,
   `group_id` int(11) NULL,
   `notify_on_login` tinyint(1) NOT NULL DEFAULT '0',

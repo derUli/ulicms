@@ -585,4 +585,8 @@ define("TRANSLATION_YOUR_ACCOUNT_IS_LOCKED", "Ihr Account ist gesperrt. Fragen S
 // Passwort anzeigen
 define("TRANSLATION_VIEW_PASSWORD", "Passwort anzeigen");
 
+// Letzter Login
+define("TRANSLATION_LAST_LOGIN", "Letzte Anmeldung");
+define("TRANSLATION_NEVER", "Niemals");
+
 add_hook ( "lang_de" );

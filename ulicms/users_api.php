@@ -121,6 +121,7 @@ function register_session($user, $redirect = true) {
 	
 	$_SESSION ["session_begin"] = time ();
 	
+	db_query("UPDATE ".tbname("users") . " SET `last_login` = ".time() . " where id = " . $user["id"]);
 	if ($user ["notify_on_login"]) {
 		$subject = "Login auf \"" . getconfig ( "homepage_title" ) . "\" als " . $user ["username"];
 		$text = "Von der IP " . $_SERVER ["REMOTE_ADDR"] . " hat sich jemand um " . date ( "r" ) . " erfolgreich in das Benutzerkonto " . $user ["username"] . " auf dem Server " . $_SERVER ["HTTP_HOST"] . " eingeloggt.";

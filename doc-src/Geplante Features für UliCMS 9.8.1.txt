@@ -14,3 +14,9 @@
 [ ] Der Safari unterstützt das „required“ HTML5-Attribut nicht.
   Im Safari einen Workaround mit jQuery umsetzen.
   Siehe http://stackoverflow.com/questions/23261301/required-attribute-not-work-in-safari-browser
+
+[ ] Feature: Newsletter an alle User schicken
+
+[ ] Möglichkeit, den Zugriff auf Seiten für eine User-Gruppen beschränken
+    z.B. kann ein User nur alle Unterseiten von X bearbeiten, oder nur alle deutschen Seiten, 
+    oder nur alle Seiten in Menü X
