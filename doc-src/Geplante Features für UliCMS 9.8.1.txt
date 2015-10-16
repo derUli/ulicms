@@ -19,3 +19,6 @@
 [ ] Möglichkeit, den Zugriff auf Seiten für eine User-Gruppen beschränken
     z.B. kann ein User nur alle Unterseiten von X bearbeiten, oder nur alle deutschen Seiten, 
     oder nur alle Seiten in Menü X
+
+[ ] "Translation Overrides" Möglichkeit, Translations durch Werte aus Datenbank zu overriden
+    Export aus Datenbank als Sprachdatei soll möglich sein
