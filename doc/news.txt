@@ -64,3 +64,4 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + Beim Loginformular kann man das Passwort bei Klick auf eine Checkbox im Klartext anzeigen lassen
 + API-Funktion get_prefered_language(array $available_languages, $http_accept_language) hinzugefügt
 + Letzte Anmeldung wird nun in Datenbank gespeichert und in Benutzerinformationen angezeigt
++ Die Git-Revision wird nun unter der Versionsnummer angezeigt
