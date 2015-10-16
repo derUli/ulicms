@@ -1,5 +1,7 @@
 ﻿[ ] Link auf Loginseite "Zurück zum Frontend" hinzufügen
 
+[ ] Loginform kann per Template angepasst werden im Aussehen
+
 [ ] Neue Gruppe erstellen auf Basis von Gruppe X (Berechtigungen von Gruppe X werden vorausgewählt)
 
 - Sicherstellen, dass folgende Komponenten aktuell sind
