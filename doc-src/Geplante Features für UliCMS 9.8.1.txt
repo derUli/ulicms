@@ -10,3 +10,7 @@
 [ ] jQuery
 [ ] Mobile_Detect
 [ ] CodeMirror
+
+[ ] Der Safari unterstützt das „required“ HTML5-Attribut nicht.
+  Im Safari einen Workaround mit jQuery umsetzen.
+  Siehe http://stackoverflow.com/questions/23261301/required-attribute-not-work-in-safari-browser
