@@ -24,3 +24,5 @@
 
 [ ] "Translation Overrides" Möglichkeit, Translations durch Werte aus Datenbank zu overriden
     Export aus Datenbank als Sprachdatei soll möglich sein
+
+[ ] Pagination
