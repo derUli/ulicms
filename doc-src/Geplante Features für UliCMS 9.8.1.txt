@@ -1,4 +1,6 @@
-﻿[ ] Link auf Loginseite "Zurück zum Frontend" hinzufügen
+﻿[ ] "Toggle Password" Funktion im Installer
+
+[ ] Link auf Loginseite "Zurück zum Frontend" hinzufügen
 
 [ ] Loginform kann per Template angepasst werden im Aussehen
 
