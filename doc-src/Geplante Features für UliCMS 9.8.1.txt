@@ -1,4 +1,4 @@
-[ ] Komprimierte Auslieferung von Inhalten auch ohne mod_gzip oder mod_deflate möglich machen
+﻿[ ] core.css minify
 
 [ ] "Toggle Password" Funktion im Installer
 
