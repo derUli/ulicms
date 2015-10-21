@@ -1,4 +1,6 @@
-﻿[ ] "Toggle Password" Funktion im Installer
+[ ] Komprimierte Auslieferung von Inhalten auch ohne mod_gzip oder mod_deflate möglich machen
+
+[ ] "Toggle Password" Funktion im Installer
 
 [ ] Link auf Loginseite "Zurück zum Frontend" hinzufügen
 
