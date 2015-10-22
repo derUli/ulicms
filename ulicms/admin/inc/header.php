@@ -29,13 +29,13 @@ $enq = array (
 		"codemirror/mode/javascript/javascript.js",
 		"codemirror/mode/clike/clike.js",
 		"codemirror/mode/css/css.js",
-		"scripts/util.js" 
+		"scripts/util.js"
 );
 ?>
 <?php
 
 if (is_logged_in ()) {
-	
+
 	$enq [] = "scripts/cookie.js";
 	$enq [] = "scripts/notification.js";
 	$enq [] = "scripts/jquery-shiftclick.js";
@@ -55,7 +55,7 @@ foreach ( $enq as $script ) {
 <script type="text/javascript">
 $(document).ready(function() {
   $.ajaxSetup({ cache: false });
-  
+
 <?php
 
 if (! is_mobile ()) {
@@ -110,10 +110,10 @@ combined_stylesheet_html ();
 <title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript">
 $(document).ready(function(){
-     
-        $(".tablesorter").tablesorter({widgets: ["zebra"]}); 
-    } 
-); 
+
+        $(".tablesorter").tablesorter({widgets: ["zebra"]});
+    }
+);
 </script>
 <?php
 
