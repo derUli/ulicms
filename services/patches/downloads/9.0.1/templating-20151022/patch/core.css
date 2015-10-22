@@ -1,0 +1,30 @@
+.antispam_honeypot {
+	position: absolute;
+	top: -8000px;
+	left: -8000px;
+}
+
+.ulicms_error {
+	color: red;
+}
+
+span.blog_article_next, span.blog_pagination_older {
+	float: right;
+}
+
+img { /* Keine Rahmen um verlinkte Bilder*/
+	border: 0px;
+	/* Responsive Bilder */
+	max-width: 100%;
+	height: auto;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+/* "Bearbeiten" Button unter der Seite*/
+div.ulicms_edit {
+	margin-top: 20px;
+}
