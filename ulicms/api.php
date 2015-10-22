@@ -1,5 +1,11 @@
 <?php
 
+function get_jquery_url(){
+    $url = "//code.jquery.com/jquery-1.11.3.min.js";
+    $url = apply_filter ( $url, "jquery_url" );
+    return $url;
+}
+
 function get_prefered_language(array $available_languages, $http_accept_language) {
 
     $available_languages = array_flip($available_languages);

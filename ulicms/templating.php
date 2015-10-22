@@ -195,6 +195,9 @@ function get_custom_data($page = null) {
 	return null;
 }
 function include_jquery() {
+    if(getconfig("disable_auto_include_jquery")){
+	   return;
+	}
 	$disabled_on_pages = getconfig ( "jquery_disabled_on" );
 	if ($disabled_on_pages) {
 		$disabled_on_pages = trim ( $disabled_on_pages );
@@ -206,7 +209,8 @@ function include_jquery() {
 	if (! in_array ( get_requested_pagename (), $disabled_on_pages )) {
 		?>
 
-<script type="text/javascript" src="admin/scripts/jquery.min.js"></script>
+
+<script type="text/javascript" src="<?php echo get_jquery_url();?>"></script>
 <?php
 		add_hook ( "after_jquery_include" );
 	}

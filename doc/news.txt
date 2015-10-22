@@ -65,3 +65,5 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + API-Funktion get_prefered_language(array $available_languages, $http_accept_language) hinzugefügt
 + Letzte Anmeldung wird nun in Datenbank gespeichert und in Benutzerinformationen angezeigt
 + core.css minified
++ jQuery wird im Frontend nun von CDN auf code.jquery.com eingebunden.
++ Konfigurations-Direktive disable_auto_include_jquery hinzugefügt
