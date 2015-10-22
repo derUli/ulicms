@@ -674,7 +674,7 @@ function base_metas() {
 		echo "\r\n";
 	}
 
-	echo '<link rel="stylesheet" type="text/css" href="core.css"/>';
+	echo '<link rel="stylesheet" type="text/css" href="core.min.css"/>';
 	echo "\r\n";
 
 	$style_file = getTemplateDirPath ( get_theme () ) . "style.css";
