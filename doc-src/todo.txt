@@ -1,4 +1,8 @@
-﻿[X] Copyright Jahr anpassen
+
+UliCMS 9.x
+[ ] Scripts wie jQuery von einem CDN einbinden. Dies als Patch veröffentlichen
+
+[X] Copyright Jahr anpassen
 [X] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
 [X] Dokumentation! Vor allem, zum Script/CSS queuing System!
     [X] Zur Script Queue
