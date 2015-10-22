@@ -1,6 +1,4 @@
-﻿[ ] core.css minify
-
-[ ] "Toggle Password" Funktion im Installer
+﻿[ ] "Toggle Password" Funktion im Installer
 
 [ ] Link auf Loginseite "Zurück zum Frontend" hinzufügen
 
