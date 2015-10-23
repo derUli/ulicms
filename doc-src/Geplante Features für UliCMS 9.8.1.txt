@@ -1,4 +1,6 @@
-﻿[ ] "Toggle Password" Funktion im Installer
+﻿[ ] Verwaltung von Content und Navigation trennen in "Menüs" und "Beiträge" (so wie in Joomla)
+
+[ ] "Toggle Password" Funktion im Installer
 
 [ ] Link auf Loginseite "Zurück zum Frontend" hinzufügen
 
