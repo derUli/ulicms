@@ -804,8 +804,9 @@ function base_metas() {
             }
             
         }
-	
-	echo '<link rel="stylesheet" type="text/css" href="core.min.css"/>';
+	if(!getconfig("no_autoembed_core_css")){
+	    echo '<link rel="stylesheet" type="text/css" href="core.min.css"/>';
+	}
 	echo "\r\n";
 	
 	$style_file = getTemplateDirPath ( get_theme () ) . "style.css";
