@@ -30,3 +30,5 @@
     Export aus Datenbank als Sprachdatei soll möglich sein
 
 [ ] Pagination
+
+[ ] Domain mit oder ohne www. anzeigen (Option)
