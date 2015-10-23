@@ -32,3 +32,5 @@
 [ ] Pagination
 
 [ ] Domain mit oder ohne www. anzeigen (Option)
+
+[ ] Ein neues Package System
