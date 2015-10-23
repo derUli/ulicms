@@ -632,19 +632,8 @@ function getOnlineUsers() {
 	return $users;
 }
 
-// Config Cache preload
-function preload_all_configs(){
-   $query = db_query("select `name`, `value` from ".tbname("settings"). " order by `name`");
-   while($row = db_fetch_object($query)){
-      $GLOBALS['settings_cache'][$row->name] = $row->value;
-   }
-}
-
 // get a config variable
 function getconfig($key) {
-    if(count($GLOBALS['settings_cache']) <=0 and getconfig("preload_all_settings")) {
-	   preload_all_configs();
-	}
     if(isset($GLOBALS['settings_cache'][$key])){
 		    return $GLOBALS['settings_cache'][$key];
 	}
