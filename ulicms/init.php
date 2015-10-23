@@ -8,6 +8,9 @@ if (! defined ( "ULICMS_ROOT" )) {
 	define ( "ULICMS_ROOT", dirname ( __file__ ) );
 }
 
+// Initialize Settings Cache
+$GLOBALS['settings_cache'] = array();
+
 /*
 $update_script = ULICMS_ROOT . "/update.php";
 
