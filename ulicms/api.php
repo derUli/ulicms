@@ -1145,10 +1145,11 @@ function find_all_files($dir) {
 			continue;
 		}
 		if (is_file ( "$dir/$value" )) {
-			$result [] = "$dir/$value";
+			$result [] = str_Replace("\\", "/", "$dir/$value");
 			continue;
 		}
 		foreach ( find_all_files ( "$dir/$value" ) as $value ) {
+		    $value = str_replace("\\", "/", $value);
 			$result [] = $value;
 		}
 	}
