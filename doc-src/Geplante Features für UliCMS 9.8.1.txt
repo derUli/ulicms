@@ -35,4 +35,4 @@
 
 [ ] Ein neues Package System
 
-[ ] Compiler für less Files
+[ ] Funktion less Files beim leeren des Caches kompilieren (optional) http://leafo.net/lessphp/
