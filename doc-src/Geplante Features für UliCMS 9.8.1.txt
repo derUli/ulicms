@@ -31,7 +31,9 @@
 
 [ ] Pagination
 
-[ ] Domain mit oder ohne www. anzeigen (Option)
+[ ] Domain mit oder ohne www. anzeigen (Option) 
+    Funktion in doc-src/enforce-www.php 
+    Todo: Option in der Datenbank und GUI dafür erstellen
 
 [ ] Ein neues Package System
 
