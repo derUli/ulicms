@@ -169,12 +169,16 @@ function validate_login($user, $password, $token = null) {
 				$_REQUEST ["error"] = TRANSLATION_YOUR_ACCOUNT_IS_LOCKED;
 				return false;
 			}
+			
+		    db_query("update ".tbname("users"). " set `failed_logins` = 0 where id = ".intval($user["id"]));
 			return $user;
 		} else {
 		   // Limit Login Attampts
-		   
-		      db_query("update ".tbname("users"). " set `failed_logins` = `failed_logins` + 1 where id = ".intval($user["id"]));
-			  db_query("update  ".tbname("users"). " set `locked` = 1, `failed_logins` = 0 where `failed_logins` = ")
+		      $max_failed_logins_items = intval(getconfig("max_failed_logins_items"));
+			  if($max_failed_logins_items  >= 1){
+		         db_query("update ".tbname("users"). " set `failed_logins` = `failed_logins` + 1 where id = ".intval($user["id"]));
+			     db_query("update  ".tbname("users"). " set `locked` = 1, `failed_logins` = 0 where `failed_logins` >= $max_failed_logins_items");
+			  }
 			  
 		}
 	}
