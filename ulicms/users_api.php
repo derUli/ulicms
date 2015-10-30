@@ -146,10 +146,12 @@ function validate_login($user, $password, $token = null) {
 	$user = getUserByName ( $user );
 	
 	if ($user) {
-		if ($user ["old_encryption"])
+		if ($user ["old_encryption"]){
 			$password = md5 ( $password );
-		else
+		}
+		else {
 			$password = hash_password ( $password );
+		}
 		$twofactor_authentication = getconfig("twofactor_authentication");
 		if ($user ["password"] == $password) {
 		    if($twofactor_authentication and !is_null($token)){
