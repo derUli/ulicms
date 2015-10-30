@@ -177,7 +177,7 @@ function validate_login($user, $password, $token = null) {
 		      $max_failed_logins_items = intval(getconfig("max_failed_logins_items"));
 			  if($max_failed_logins_items  >= 1){
 		         db_query("update ".tbname("users"). " set `failed_logins` = `failed_logins` + 1 where id = ".intval($user["id"]));
-			     db_query("update  ".tbname("users"). " set `locked` = 1, `failed_logins` = 0 where `failed_logins` >= $max_failed_logins_items");
+			     db_query("update ".tbname("users"). " set `locked` = 1, `failed_logins` = 0 where `failed_logins` >= $max_failed_logins_items");
 			  }
 			  
 		}

@@ -1,7 +1,7 @@
 [ ] CKEditor aktualisieren
 [ ] Option "Accounts nach X fehlgeschlagenen Anmeldeversuchen sperren"
-    [ ] Spalte "failed_logins" hinzufügen (Installer und Update-Skript)
+    [X] Spalte "failed_logins" hinzufügen (Installer und Update-Skript)
     [ ] Eingabefeld für maximale Anzahl der fehlgeschlagenen Logins hinzufügen.
-    [ ] Bei fehlgeschlagenen Logins failed_logins + 1 vom User setzen
-    [ ] Accounts locken bei überschreiten von X fehlgeschlagenen Logins
-    [ ] Bei einem erfolgreichen Login Zähler zurücksetzen
+    [X] Bei fehlgeschlagenen Logins failed_logins + 1 vom User setzen
+    [X] Accounts locken bei überschreiten von X fehlgeschlagenen Logins
+    [X] Bei einem erfolgreichen Login Zähler zurücksetzen
