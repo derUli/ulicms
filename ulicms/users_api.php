@@ -170,6 +170,12 @@ function validate_login($user, $password, $token = null) {
 				return false;
 			}
 			return $user;
+		} else {
+		   // Limit Login Attampts
+		   
+		      db_query("update ".tbname("users"). " set `failed_logins` = `failed_logins` + 1 where id = ".intval($user["id"]));
+			  db_query("update  ".tbname("users"). " set `locked` = 1, `failed_logins` = 0 where `failed_logins` = ")
+			  
 		}
 	}
 	$_REQUEST ["error"] = TRANSLATION_USER_OR_PASSWORD_INCORRECT;

@@ -474,6 +474,7 @@ echo TRANSLATION_TITLE;
   `html_editor` varchar(100) NULL DEFAULT 'ckeditor',
   `require_password_change` tinyint(1) NULL DEFAULT '0',
   `admin` tinyint(1) NULL DEFAULT '0',
+  `failed_logins` int(11) DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;" ) or die ( mysqli_error ( $connection ) );
 			
