@@ -68,3 +68,4 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + jQuery wird im Frontend nun von CDN auf code.jquery.com eingebunden.
 + Konfigurations-Direktive disable_auto_include_jquery hinzugefügt
 + Settings die aus der Datenbank abgefragt werden, werden gecacht
++ Übersetzung "Permalink" in "Name für URL geändert"
