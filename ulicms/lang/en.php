@@ -599,4 +599,7 @@ define("TRANSLATION_LAST_LOGIN", "Last Login");
 define("TRANSLATION_NEVER", "Never");
 
 
+// Fehlgeschlagene Loginversuche
+define("TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Lock user accounts after X failed login attempts (0 = disabled)");
+
 add_hook ( "lang_en" );

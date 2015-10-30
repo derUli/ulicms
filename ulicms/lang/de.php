@@ -497,7 +497,7 @@ define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN", "Änderung des Pas
 define ( "TRANSLATION_BACK_TO_LOGIN", "Zurück zur Anmeldung" );
 
 define ( "TRANSLATION_SECURITY", "Sicherheit" );
-define ( "TRANSLATION_FORCE_PASSWORD_CHANGE_EVERY_X_DAYS", "Anwender müssen ihr Passwort alle X Tage ändern (0 = aus)" );
+define ( "TRANSLATION_FORCE_PASSWORD_CHANGE_EVERY_X_DAYS", "Anwender müssen ihr Passwort alle X Tage ändern (0 = Aus)" );
 
 define ( "TRANSLATION_IS_ADMIN", "Ist Admin" );
 define ( "TRANSLATION_NO_PATCHES_SELECTED", "Keine Patches zur Installation ausgewählt." );
@@ -588,5 +588,8 @@ define("TRANSLATION_VIEW_PASSWORD", "Passwort anzeigen");
 // Letzter Login
 define("TRANSLATION_LAST_LOGIN", "Letzte Anmeldung");
 define("TRANSLATION_NEVER", "Niemals");
+
+// Fehlgeschlagene Loginversuche
+define("TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Benutzer-Accounts nach X fehlgeschlagenen Anmeldeversuchen sperren (0 = Aus)");
 
 add_hook ( "lang_de" );

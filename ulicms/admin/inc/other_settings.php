@@ -87,6 +87,10 @@ if (! $acl->hasPermission ( "other" )) {
 
 		if (isset ( $_POST ["force_password_change_every_x_days"] ))
 			setconfig ( "force_password_change_every_x_days", intval ( $_POST ["force_password_change_every_x_days"] ) );
+			
+		if(isset($_POST["max_failed_logins_items"])){
+		    setconfig("max_failed_logins_items", intval($_POST["max_failed_logins_items"]));
+		}
 
 		if (isset ( $_POST ["smtp_user"] ))
 			setconfig ( "smtp_user", db_escape ( $_POST ["smtp_user"] ) );
@@ -106,6 +110,7 @@ if (! $acl->hasPermission ( "other" )) {
 	$email_mode = getconfig ( "email_mode" );
 	$menus = getAllMenus ();
 	$force_password_change_every_x_days = intval ( getconfig ( "force_password_change_every_x_days" ) );
+	$max_failed_logins_items = getconfig("max_failed_logins_items");
 
 	$hide_meta_generator = getconfig ( "hide_meta_generator" );
 
@@ -446,6 +451,25 @@ translate ( "FORCE_PASSWORD_CHANGE_EVERY_X_DAYS" );
 					value="<?php
 
 echo $force_password_change_every_x_days;
+	?>" />
+			</div>
+			<br/>
+			
+			<div class="label">
+				<label for="max_failed_logins_items"><?php
+
+translate ( "max_failed_login_items" );
+	?>
+				</label>
+
+			</div>
+
+			<div class="inputWrapper">
+				<input type="number" name="max_failed_logins_items"
+					min="0" max="999"
+					value="<?php
+
+echo intval($max_failed_logins_items);
 	?>" />
 			</div>
 
