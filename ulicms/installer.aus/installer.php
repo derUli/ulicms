@@ -460,7 +460,7 @@ echo TRANSLATION_TITLE;
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `group` int(11) NOT NULL,
-  `old_encryption` boolean NOT NULL DEFAULT 0,
+  `old_encryption` boolean NOT NULL DEFAULT '0',
   `skype_id` varchar(32) NOT NULL,
   `icq_id` varchar(20) NOT NULL,
   `avatar_file` varchar(40) NOT NULL,
@@ -474,7 +474,7 @@ echo TRANSLATION_TITLE;
   `html_editor` varchar(100) NULL DEFAULT 'ckeditor',
   `require_password_change` tinyint(1) NULL DEFAULT '0',
   `admin` tinyint(1) NULL DEFAULT '0',
-  `failed_logins` int(11) DEFAULT 0,
+  `failed_logins` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;" ) or die ( mysqli_error ( $connection ) );
 			
