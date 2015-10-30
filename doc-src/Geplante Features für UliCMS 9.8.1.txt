@@ -1,4 +1,6 @@
-﻿[ ] Verwaltung von Content und Navigation trennen in "Menüs" und "Beiträge" (so wie in Joomla)
+﻿[ ] Accounts nach X fehlgeschlagenen Anmeldeversuchen sperren
+
+[ ] Verwaltung von Content und Navigation trennen in "Menüs" und "Beiträge" (so wie in Joomla)
 
 [ ] "Toggle Password" Funktion im Installer
 
