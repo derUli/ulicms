@@ -137,7 +137,7 @@ define ( "TRANSLATION_CREATE_PAGE", "Create page" );
 define ( "TRANSLATION_FILTER_BY_LANGUAGE", "Filter by language" );
 define ( "TRANSLATION_STATUS", "Status" );
 define ( "TRANSLATION_RECOVER", "Recover" );
-define ( "TRANSLATION_PERMALINK", "Permalink" );
+define ( "TRANSLATION_PERMALINK", "Name for URL" );
 define ( "TRANSLATION_MENU", "Menu" );
 define ( "TRANSLATION_POSITION", "Position" );
 define ( "TRANSLATION_PARENT", "Parent" );
