@@ -3,4 +3,4 @@
 [ ] zu Funktion buildSEOUrl den Parameter $format hinzufügen. Default Wert ist html.
     mit buildSEOURL(null, null, "pdf") kann man z.B. die PDF-URL zur aktuellen Seite ausgeben.
 [ ] API-Funktion get_format hinzufügen. Gibt $_GET["format"] 
-[ ] API-Funktion set_format hinzufügen zum setzen von $_GET["format"];
+[ ] API-Funktion set_format hinzufügen zum setzen von $_GET["format"]
