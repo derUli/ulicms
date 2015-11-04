@@ -1,5 +1,17 @@
 <?php
 
+function get_format(){
+   $format = "html";
+   if(isset($_GET["format"])){
+      $format = $_GET["format"];
+   }
+   return $format;
+}
+
+function set_format($format){
+   $_GET["format"] = trim($format, ".");
+}
+
 function get_jquery_url(){
     $url = "//code.jquery.com/jquery-1.11.3.min.js";
     $url = apply_filter ( $url, "jquery_url" );
@@ -1098,7 +1110,7 @@ function SureRemoveDir($dir, $DeleteMe) {
  * bzw.
  * seite.html;
  */
-function buildSEOUrl($page = false, $redirection = null) {
+function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 	if ($page === false)
 		$page = get_requested_pagename ();
 	
@@ -1114,7 +1126,7 @@ function buildSEOUrl($page = false, $redirection = null) {
 	if (is_file ( "backend.php" ))
 		$seo_url .= "../";
 	$seo_url .= $page;
-	$seo_url .= ".html";
+	$seo_url .= ".".trim($format, ".");
 	return $seo_url;
 }
 function getModulePath($module) {
