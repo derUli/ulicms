@@ -1,6 +1,6 @@
 <?php
 require_once "../init.php";
-
+require_once "../templating.php";
 @session_start ();
 $acl = new acl ();
 
