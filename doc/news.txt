@@ -73,3 +73,4 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
   Wenn dies überschritten wird, wird der Account gesperrt
 + API-Funktionen get_format() und set_format() hinzugefügt
 + API-Funktion buildSEOURL() um Parameter $format erweitert. $format ist per default = "html"
++ is_mobile_filter hinzugefügt

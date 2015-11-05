@@ -1,4 +1,4 @@
 [ ] CKEditor aktualisieren
 [ ] Option „Design für Mobilgeräte nicht auf iPad / Tablet verwenden“.
-[ ] Filter zur is_mobile Funktion hinzufügen
+[X] Filter zur is_mobile Funktion hinzufügen
 [ ] Neue Features dokumentieren
