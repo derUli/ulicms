@@ -11,14 +11,6 @@ if (! defined ( "ULICMS_ROOT" )) {
 // Initialize Settings Cache
 $GLOBALS['settings_cache'] = array();
 
-/*
-$update_script = ULICMS_ROOT . "/update.php";
-
-if (file_exists ( $update_script ) and is_writable ( $update_script ) and ! defined ( "SKIP_TABLE_CHECK" ) and basename ( $_SERVER ['SCRIPT_NAME'] ) != "update.php") {
-	define ( "SKIP_TABLE_CHECK", true );
-}
-*/
-
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if (ini_get ( 'register_globals' ) === '1') {
 	die ( 'SECURITY WARNING: "Register Globals" feature is enabled! UliCMS refuses to run with enabled "Register Globals"!' );
@@ -403,13 +395,3 @@ if (! getconfig ( "session_name" )) {
 session_name ( getconfig ( "session_name" ) );
 
 @include_once "lib/string_functions.php";
-
-
-/*
-// Automatisches Update beim Seitenaufruf wenn update.php existiert
-if (file_exists ( $update_script ) and is_writable ( $update_script ) and basename ( $_SERVER ['SCRIPT_NAME'] ) != "update.php") {
-	$_GET ["include_update"] = true;
-	include $update_script;
-	clearCache ();
-}
-*/
