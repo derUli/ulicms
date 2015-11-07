@@ -392,7 +392,9 @@ if (in_array ( tbname ( "installed_patches" ), $existing_tables )) {
 	$installed_patches = "";
 }
 
-define ( "PATCH_CHECK_URL", "http://patches.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&installed_patches=" . urlencode ( $installed_patches ) );
+if(!defined("PATCH_CHECK_URL")){
+  define ( "PATCH_CHECK_URL", "http://patches.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&installed_patches=" . urlencode ( $installed_patches ) );
+}
 
 if (! getconfig ( "session_name" )) {
 	setconfig ( "session_name", uniqid () . "_SESSION" );

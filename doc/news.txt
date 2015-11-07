@@ -75,3 +75,5 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + API-Funktion buildSEOURL() um Parameter $format erweitert. $format ist per default = "html"
 + is_mobile_filter hinzugefügt
 + Konstante UPDATE_CHECK_URL kann nun überschrieben werden
++ Konstante PATCH_CHECK_URL kann nun überschrieben werden
+
