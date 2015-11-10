@@ -1,5 +1,8 @@
 <?php
-require_once (ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "MPDF60" . DIRECTORY_SEPERATOR . "mpdf.php");
+$mpdf = ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "MPDF60" . DIRECTORY_SEPERATOR . "mpdf.php";
+if (file_exists ( $mpdf )) {
+	require_once ($mpdf);
+}
 class PDFCreator {
 	var $target_file = null;
 	var $content = null;
@@ -31,7 +34,10 @@ class PDFCreator {
 				}
 			}
 		}
-		
+		if (! class_exists ( "mPDF" )) {
+			echo "mPDF not installed. Please install <a href=\"http://www.ulicms.de/mpdf_supplement.html\" target=\"_blank\">mPDF supplement</a>.";
+			die ();
+		}
 		$mpdf = new mPDF ( getCurrentLanguage ( true ), 'A4' );
 		$mpdf->WriteHTML ( $this->content );
 		$mpdf->Output ( $this->cached_file );

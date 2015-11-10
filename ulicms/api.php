@@ -1489,7 +1489,12 @@ function tbname($name) {
 function cms_version() {
 	require_once "version.php";
 	$v = new ulicms_version ();
-	return implode ( ".", $v->getInternalVersion () );
+	$verstr = implode ( ".", $v->getInternalVersion () );
+	$update = $v->getUpdate();
+	if($update and !empty($update)){
+	   $verstr = $verstr. " " . $update;
+	}
+	return $verstr;
 }
 
 // 21. Februar 2015

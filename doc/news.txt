@@ -1,4 +1,4 @@
-===== Neues in UliCMS 9.0.1 ====
+﻿===== Neues in UliCMS 9.0.1 ====
 + E-Mails, die über die ulicms_mail() Funktion versendet wurden, werden nun auch in der Datenbank gespeichert
 + API Funktion get_lang_config() hinzugefügt
 + UliCMS Konfigurationseinstellungen können per Umgebungsvariablen overridet werden.
@@ -23,3 +23,9 @@
 + Ein Fehler in der deutschen Sprachdatei der dazu führte, dass stattdessen die englischen Sprachdateien von Modulen geladen werden wurde korrigiert
 + Nutzung von HSTS bei SSL-verschlüsselten Verbindungen
   Details siehe http://www.phpgangsta.de/hsts-http-strict-transport-security-hasts-schon
+
+===== Neues in UliCMS 9.0.1 Refresh 1 ====
++ mPDF Framework aus dem Core entfernt, um Speicherplatz zu sparen. Sofern PDF Unterstützung benötigt wird, kann mPDF unter der folgenden URL seperat heruntergeladen werden:
+  http://www.ulicms.de/mpdf_supplement.html
++ CKEditor 4.5.3 Supplement bereits integriert
++ Alle Patches die bisher für die Version 9.0.1 erschienen sind.
