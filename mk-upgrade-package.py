@@ -36,12 +36,6 @@ def main():
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
 
-    # Copy config file from MPDF60 since config.php is excluded
-    print("Copying config.php from MPDF60")
-    mpdf_config_source = os.path.join(source_dir, "ulicms", "lib", "MPDF60", "config.php")
-    mpdf_config_target = os.path.join(target, "ulicms", "lib", "MPDF60", "config.php")
-    shutil.copyfile(mpdf_config_source, mpdf_config_target)
-    
     update_script = os.path.join(target, "ulicms", "update.php")
 
     if os.path.exists(update_script):
