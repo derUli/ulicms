@@ -1489,7 +1489,10 @@ function tbname($name) {
 function cms_version() {
 	require_once "version.php";
 	$v = new ulicms_version ();
-	$verstr = implode ( ".", $v->getInternalVersion () );
+	$internal_version = $v->getInternalVersion ();
+	$internal_version = array_slice($internal_version, 0, 3);
+
+	$verstr = implode ( ".", $internal_version);
 	$update = $v->getUpdate();
 	if($update and !empty($update)){
 	   $verstr = $verstr. " " . $update;
