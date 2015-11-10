@@ -1491,7 +1491,6 @@ function cms_version() {
 	$v = new ulicms_version ();
 	$internal_version = $v->getInternalVersion ();
 	$internal_version = array_slice($internal_version, 0, 3);
-
 	$verstr = implode ( ".", $internal_version);
 	$update = $v->getUpdate();
 	if($update and !empty($update)){
