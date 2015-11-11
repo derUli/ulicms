@@ -317,3 +317,7 @@ form#login-form{
 div#google-fonts select{
    margin-top:10px;
 }
+
+.accordion-content, .accordion-header{
+   width: auto !important;
+}

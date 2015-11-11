@@ -76,4 +76,4 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + is_mobile_filter hinzugefügt
 + Konstante UPDATE_CHECK_URL kann nun überschrieben werden
 + Konstante PATCH_CHECK_URL kann nun überschrieben werden
-
++ Accordion Layouts werden nun an die Fenstergröße angepasst, wenn man das Browserfenster skaliert
