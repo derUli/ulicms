@@ -2,3 +2,4 @@
 [ ] Option „Design für Mobilgeräte nicht auf iPad / Tablet verwenden“.
 [ ] Neue Features dokumentieren
 [ ] Scopes
+[ ] Menüeinträge und "Beiträge" ändern
