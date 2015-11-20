@@ -3,3 +3,4 @@
 [ ] Neue Features dokumentieren
 [ ] Scopes
 [ ] Menüeinträge und "Beiträge" trennen
+[ ] Settings Export und Import als JSON
