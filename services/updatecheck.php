@@ -38,8 +38,9 @@ if($version == "9.0.0"){
 
 }
 
-if ($version == "9.0.1" and (new DateTime() > new DateTime("2016-01-31 23:59:59"))) {
-    // Meldung zum Supportende von UliCMS 9.0.1 und zum Upgrade ausgeben
+if (($version == "9.0.1"  or $version == "9.0.1.1") and ((new DateTime() > new DateTime("2016-01-31 23:59:59")) or isset($_GET["ndc"]))) {
+   die("<p>Ein Upgrade auf UliCMS 9.8.0 ist verfügbar. / An upgrade to UliCMS 9.8.0 is available.<br/>
+   <a href=\"http://www.ulicms.de/content/files/Releases/9.8.0/ulicms-9.8.0-big-ben-upgrade.zip\">[Download]</a></p>");
 }
 
 
