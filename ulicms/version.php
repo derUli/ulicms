@@ -10,7 +10,7 @@ if (! class_exists ( "ulicms_version" )) {
 					0 
 			);
 			$this->update = "";
-			$this->developmentVersion = true;
+			$this->developmentVersion = false;
 		}
 		public function getReleaseYear() {
 			return strval ( $this->releaseYear );
