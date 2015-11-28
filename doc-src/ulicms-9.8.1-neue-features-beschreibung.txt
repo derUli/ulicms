@@ -1,0 +1,11 @@
++ Option "Design für Mobilgeräte nicht auf Tablets verwenden" hinzugefügt
+  Die API-Funktion is_mobile() gibt beim Seitenaufruf auf Smartphones und Tablets true und beim Aufruf auf einem PC oder Laptop false zurück.
+  
+  Es wurde die Option "Design für Mobilgeräte nicht auf Tablets verwenden" zu "Einstellungen" > "Design" hinzugefügt
+  Wenn diese Option aktiviert ist, gibt is_mobile() auf Tablets false zurück, so dass spezifische Codes für Mobilgeräte auf Tablets nicht ausgeführt werden.
+  
++ CKEditor auf Version 4.5.5
+  Die CKEditor Komponente wurde auf Version 4.5.5 aktualisiert. Sie dient in UliCMS zur einfachen Bearbeitung von HTML-Codes.
+  Genauere Informationen zu den Änderungen finden Sie unter www.ckeditor.com
+  
+  Falls Probleme oder Fehler mit dem Seiteneditor nach dem Upgrade auftreten sollten, leeren Sie bitte Ihren Browser-Cache.
