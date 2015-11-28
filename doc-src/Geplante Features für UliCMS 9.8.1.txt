@@ -1,4 +1,4 @@
-﻿[ ] CKEditor aktualisieren
+﻿[X] CKEditor aktualisieren
 [X] Option „Design für Mobilgeräte nicht auf iPad / Tablet verwenden“.
 [ ] Neue Features dokumentieren
 [ ] Scopes
