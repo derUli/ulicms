@@ -6,3 +6,4 @@
 [ ] Settings Export und Import als JSON
 [ ] MOTD nach Sprache
 [ ] Hilfe System für Module
+[ ] Dokumentation zur neuen Version erstellen (Begriffsdefinitionen, Detailierte Beschreibung der neuen Features, Hinweise, Upgrade-Anleitung, Installationsanleitung)
