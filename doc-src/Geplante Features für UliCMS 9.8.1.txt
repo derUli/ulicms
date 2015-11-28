@@ -1,5 +1,5 @@
 ﻿[ ] CKEditor aktualisieren
-[ ] Option „Design für Mobilgeräte nicht auf iPad / Tablet verwenden“.
+[X] Option „Design für Mobilgeräte nicht auf iPad / Tablet verwenden“.
 [ ] Neue Features dokumentieren
 [ ] Scopes
 [ ] Menüeinträge und "Beiträge" trennen
