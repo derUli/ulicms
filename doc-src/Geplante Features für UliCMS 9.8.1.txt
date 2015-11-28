@@ -5,3 +5,4 @@
 [ ] Menüeinträge und "Beiträge" trennen
 [ ] Settings Export und Import als JSON
 [ ] MOTD nach Sprache
+[ ] Hilfe System für Module

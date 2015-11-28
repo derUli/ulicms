@@ -2,6 +2,15 @@
 $acl = new ACL ();
 if ($acl->hasPermission ( "motd" )) {
 	?>
+<script type="text/javascript">
+function filter_by_language(element){
+   var index = element.selectedIndex
+   if(element.options[index].value != ""){
+     location.replace("index.php?action=pages&filter_language=" + element.options[index].value)
+   }
+}
+
+</script>
 <div>
 	<h2>
 	<?php
