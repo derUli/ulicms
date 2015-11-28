@@ -6,3 +6,4 @@ Unter Inhalte Verwaltung für "Benutzerdefinierte Felder".
 Diese können dann z.B. für Seiten gesetzt werden.
 
 [ ] Freigabe-Workflows
+[ ] Login per Active Directory / LDAP
