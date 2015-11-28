@@ -1679,6 +1679,9 @@ function cms_version() {
 function is_mobile() {
 	$detect = new Mobile_Detect ();
 	$result = $detect->isMobile ();
+	if(getconfig("no_mobile_design_on_tablet") and $result and $detect->isTablet()){
+           $result = false;
+        }
   $result = apply_filter ( $result, "is_mobile" );
   return $result;
 }

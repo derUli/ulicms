@@ -1,1 +1,2 @@
 ﻿===== Neues in UliCMS 9.8.1 ﻿=====
++ Option "Design für Mobilgeräte nicht auf Tablets verwenden" hinzugefügt

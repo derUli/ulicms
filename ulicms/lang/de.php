@@ -592,4 +592,7 @@ define("TRANSLATION_NEVER", "Niemals");
 // Fehlgeschlagene Loginversuche
 define("TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Benutzer-Accounts nach X fehlgeschlagenen Anmeldeversuchen sperren (0 = Aus)");
 
+// No mobile design on tablets
+define("TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Das Design für Mobilgeräte nicht auf Tablets verwenden");
+
 add_hook ( "lang_de" );

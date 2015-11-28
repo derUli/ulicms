@@ -14,6 +14,13 @@ if (! $acl->hasPermission ( "design" )) {
 		} else {
 			deleteconfig ( "disable_custom_layout_options" );
 		}
+
+
+		if (isset ( $_REQUEST ["no_mobile_design_on_tablet"] )) {
+			setconfig ( "no_mobile_design_on_tablet", "no_mobile_design_on_tablet" );
+		} else {
+			deleteconfig ( "no_mobile_design_on_tablet" );
+		}
 		
 		if (isset ( $_REQUEST ["video_width_100_percent"] ))
 			setconfig ( "video_width_100_percent", "width" );
@@ -102,6 +109,8 @@ if (! $acl->hasPermission ( "design" )) {
 	$ckeditor_skin = getconfig ( "ckeditor_skin" );
 	$video_width_100_percent = getconfig ( "video_width_100_percent" );
 	$font_sizes = getFontSizes ();
+
+        $no_mobile_design_on_tablet = getconfig("no_mobile_design_on_tablet");
 	
 	?>
 	<?php if($default_font != "google"){
@@ -218,6 +227,19 @@ if (! $acl->hasPermission ( "design" )) {
 	}
 	?>
 			</select></td>
+		</tr>
+<tr>
+			<td><strong><?php
+	
+	translate("no_mobile_design_on_tablet");
+	?> </strong></td>
+			<td><input type="checkbox" name="no_mobile_design_on_tablet"
+				<?php
+	
+	if ($no_mobile_design_on_tablet) {
+		echo " checked";
+	}
+	?>></td>
 		</tr>
 		<tr>
 			<td><strong><?php
