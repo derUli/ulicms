@@ -7,3 +7,4 @@
 [ ] MOTD nach Sprache
 [ ] Hilfe System für Module
 [ ] Dokumentation zur neuen Version erstellen (Begriffsdefinitionen, Detailierte Beschreibung der neuen Features, Hinweise, Upgrade-Anleitung, Installationsanleitung)
+[ ] Erweiterung der API (create_page, delete_page, create_user, delete_user, usw.)
