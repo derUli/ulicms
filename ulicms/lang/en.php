@@ -603,6 +603,6 @@ define("TRANSLATION_NEVER", "Never");
 define("TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Lock user accounts after X failed login attempts (0 = disabled)");
 
 // No mobile design on tablets
-define("TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Don't use design for mobile device on tablets");
+define("TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Don't use design for mobile devices on tablets");
 
 add_hook ( "lang_en" );
