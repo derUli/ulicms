@@ -648,7 +648,7 @@ function parent_item_contains_current_page($id) {
 	}
 	return $retval;
 }
-function get_menu($name = "top", $parent = null, $recursive = true) {
+function get_menu($name = "top", $parent = null, $recursive = true, $order="position") {
 	$html = "";
 	$name = db_escape ( $name );
 	$language = $_SESSION ["language"];
@@ -659,7 +659,7 @@ function get_menu($name = "top", $parent = null, $recursive = true) {
 	} else {
 		$sql .= " = " . intval ( $parent ) . " ";
 	}
-	$sql .= " ORDER by position";
+	$sql .= " ORDER by ".$order;
 	$query = db_query ( $sql );
 	
 	if (db_num_rows ( $query ) == 0) {
@@ -717,8 +717,8 @@ function get_menu($name = "top", $parent = null, $recursive = true) {
 	$html .= "</ul>";
 	return $html;
 }
-function menu($name = "top", $parent = null, $recursive = true) {
-	echo get_menu ( $name, $parent, $recursive );
+function menu($name = "top", $parent = null, $recursive = true, $order = 'position') {
+	echo get_menu ( $name, $parent, $recursive, $order);
 }
 function get_base_metas() {
 	ob_start ();
