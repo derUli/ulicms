@@ -708,7 +708,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order="posi
 			$html .= "</a>\n";
 			
 			if ($recursive) {
-				$html .= get_menu ( $name, $row->id );
+				$html .= get_menu ( $name, $row->id, true, $order);
 			}
 			
 			$html .= "</li>";
