@@ -8,3 +8,6 @@
     grün = Paket aktuell, neueste Version des Pakets ist installiert
     rot = Paket ist veraltet, neuere Version des Paketes ist verfügbar
     schwarz = Überprüfung kann nicht durchgeführt werden
+
+  Die Installation von verfügaren Aktualisierungen muss jedoch manuell durchgeführt werden, 
+  da nur geprüft wird.
