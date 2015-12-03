@@ -145,9 +145,35 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			echo $themes [$i];
 			
-			$version = getThemeMeta($themes [$i], version);
-			if($version != null)
+			$version = getThemeMeta($themes [$i], "version");
+			$color = null;
+			
+			if($version != null){
+			
+			$status = $pkg->checkForNewerVersionOfPackage($modules[$i]);
+			
+			if($status){
+			   if (version_compare($status, $version, '>')) {
+			       $color = "red";
+
+			} else{
+			      $color = "green";
+			}
+			
+			}
+			
+			if($color){
+			   echo '<span style="color: '.$color.'">';
+			}
+			
 			   echo " ".$version;
+			   
+			   
+			if($color){
+			   echo "</span>";
+			}
+			
+			}
 			   
 			echo "</strong>";
 			

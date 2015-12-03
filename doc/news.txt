@@ -2,3 +2,9 @@
 + Option "Design für Mobilgeräte nicht auf Tablets verwenden" hinzugefügt
 + CKEditor auf Version 4.5.5 aktualisiert
 + Parameter $order zu den Funktionen menu() und get_menu() hinzugefügt
++ Die Paketverwaltung überprüft nun die Paketquelle auf Aktualisierungen.
+  Die Farbe der Versionsnummer wird dementsprechend angezeigt:
+
+  grün = Paket aktuell, neueste Version des Pakets ist installiert
+  rot = Paket ist veraltet, neue Version des Paketes ist verfügbar
+  schwarz = Überprüfung kann nicht durchgeführt werden

@@ -9,6 +9,10 @@ class packageManager {
 	
 	public function checkForNewerVersionOfPackage($package){
 			$result = null;
+			
+			if(getconfig("disable_package_update_check")){
+			   return $result;
+			}
 			$url = $this->package_source."newest_version.php";
 			$url .= "?q=".urlencode($package);
 			$response = @file_get_contents_wrapper($url, true);
