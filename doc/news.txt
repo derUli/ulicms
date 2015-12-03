@@ -5,6 +5,6 @@
 + Die Paketverwaltung überprüft nun die Paketquelle auf Aktualisierungen.
   Die Farbe der Versionsnummer wird dementsprechend angezeigt:
 
-  grün = Paket aktuell, neueste Version des Pakets ist installiert
-  rot = Paket ist veraltet, neuere Version des Paketes ist verfügbar
-  schwarz = Überprüfung kann nicht durchgeführt werden
+    grün = Paket aktuell, neueste Version des Pakets ist installiert
+    rot = Paket ist veraltet, neuere Version des Paketes ist verfügbar
+    schwarz = Überprüfung kann nicht durchgeführt werden
