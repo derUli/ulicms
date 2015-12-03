@@ -47,6 +47,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 </p>
 
 <?php
+
+    $pkg = new packageManager();
 	$modules = getAllModules ();
 	if (count ( $modules ) > 0) {
 		echo "<ol style=\"margin-bottom:30px;\">";
@@ -56,9 +58,36 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			$module_has_admin_page = file_exists ( getModuleAdminFilePath ( $modules [$i] ) );
 			
 			echo getModuleName ( $modules [$i] );
-			$version = getModuleMeta($modules [$i], version);
-			if($version != null)
+			$version = getModuleMeta($modules [$i], "version");
+			$color = null;
+			
+			if($version != null){
+			
+			$status = $pkg->checkForNewerVersionOfPackage($modules[$i]);
+			
+			if($status){
+			   if (version_compare($status, $version, '>')) {
+			       $color = "red";
+
+			} else{
+			      $color = "green";
+			}
+			
+			}
+			
+			if($color){
+			   echo '<span style="color: '.$color.'">';
+			}
+			
 			   echo " ".$version;
+			   
+			   
+			if($color){
+			   echo "</span>";
+			}
+			
+			}
+			
 			echo "</strong>";
 			
 			echo "<div style=\"float:right\">";

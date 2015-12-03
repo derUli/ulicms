@@ -6,6 +6,18 @@ class packageManager {
 		$this->package_source = $cfg->getVar ( "pkg_src" );
 		$this->package_source = $this->replacePlaceHolders ( $this->package_source );
 	}
+	
+	public function checkForNewerVersionOfPackage($package){
+			$result = null;
+			$url = $this->package_source."newest_version.php";
+			$url .= "?q=".urlencode($package);
+			$response = @file_get_contents_wrapper($url, true);
+			if($response and !empty($response)){
+			    $result = $response;
+			}
+			return $result;
+	}
+	
 	public function splitPackageName($name) {
 		$name = str_ireplace ( ".tar.gz", "", $name );
 		$name = str_ireplace ( ".zip", "", $name );
