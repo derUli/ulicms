@@ -1682,7 +1682,9 @@ function is_mobile() {
 	if(getconfig("no_mobile_design_on_tablet") and $result and $detect->isTablet()){
            $result = false;
         }
-  $result = apply_filter ( $result, "is_mobile" );
+  if(function_exists("apply_filter")){
+      $result = apply_filter ( $result, "is_mobile" );
+  }
   return $result;
 }
 function func_enabled($func) {

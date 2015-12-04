@@ -3,7 +3,7 @@
 [ ] Möglichkeit, eine Willkommensnachricht zum Login-Formular von UliCMS hinzuzufügen
 [ ] Neue Features dokumentieren
 [ ] Scopes
-[ ] Menüeinträge und "Beiträge" trennen
+[ ] Menüeinträge und "Dokumente" trennen, Inhaltselemente
 [ ] Settings Export und Import als JSON
 [ ] MOTD nach Sprache
 [ ] Hilfe System für Module
