@@ -1,55 +1,23 @@
 <?php
 
- function get_files($root_dir, $all_data=array()) 
+ function get_files($root_dir, $all_data=array(), $initial_root_dir = null) 
   {
-    // only include files with these extensions
-    $allow_extensions = array("php", "html");
-    // make any specific files you wish to be excluded
-    $ignore_files = array("gdform.php","fishheader.php","fishfooter.php",
-      "sitelinks.php","google204accd1c3ac0501.html","sitemapxml.php",
-      "rotate.php", "fishstockingreport2.php", "repcentral.php", "repne.php",
-      "repnorth.php","reppowell.php","repse.php","repsouth.php","repse.php",
-      "stockreplib.php","iestyles.php");
-    $ignore_regex = '/^_/';
-    // skip these directories
-    $ignore_dirs = array(".", "..", "images", "dev", "lib", "data", "osh", "fiq", "google",
-      "stats", "_db_backups", "maps", "php_uploads", "test");
-
-    // run through content of root directory
+	  $root_dir = str_replace("\\", "/", $root_dir);
+	  $initial_root_dir = str_replace("\\", "/", $initial_root_dir);
     $dir_content = scandir($root_dir); 
-    foreach($dir_content as $key => $content)
+    foreach($dir_content as $file)
     {
-      $path = $root_dir.'/'.$content;
-      if(is_file($path) && is_readable($path)) 
-      {
-        // skip ignored files
-        if(!in_array($content, $ignore_files)) 
-        {
-          if (preg_match($ignore_regex,$content) == 0)
-          {
-            $content_chunks = explode(".",$content);
-            $ext = $content_chunks[count($content_chunks) - 1];
-            // only include files with desired extensions
-            if (in_array($ext, $allow_extensions))
-            {
-                // save file name with path
-                $all_data[] = $path;    
-            }
-          }
-        }
-      }
-      // if content is a directory and readable, add path and name
-      elseif(is_dir($path) && is_readable($path)) 
-      {
-        // skip any ignored dirs
-        if(!in_array($content, $ignore_dirs))
-        {
-          // recursive callback to open new directory
-          $all_data = get_files($path, $all_data);
-        }
-      }
-    } // end foreach
-    return $all_data;
+	if($file != "." and $file != ".."){
+	  $path = str_replace("\\", "/", $root_dir. "/".$file);
+	  if(is_dir($path)){
+		$all_data = get_files($path, $all_data, $root_dir);
+	  } else if(is_file($path) and !is_dir($file)){
+	     $all_data[] = ltrim($path, $initial_root_dir);  
+	  }
+	}
+	}
+	var_dump($all_data);
+	return $all_data;
   } // end get_files()
 
 function get_format(){
