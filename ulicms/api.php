@@ -2,21 +2,26 @@
 
  function get_files($root_dir, $all_data=array(), $initial_root_dir = null) 
   {
-	  $root_dir = str_replace("\\", "/", $root_dir);
+	$root_dir = str_replace("\\", "/", $root_dir);
+	
+	if($initial_root_dir == null){
+	   $initial_root_dir = str_replace("\\", "/", $root_dir);
+	} 
+	else {
 	  $initial_root_dir = str_replace("\\", "/", $initial_root_dir);
+	}
     $dir_content = scandir($root_dir); 
     foreach($dir_content as $file)
     {
 	if($file != "." and $file != ".."){
 	  $path = str_replace("\\", "/", $root_dir. "/".$file);
 	  if(is_dir($path)){
-		$all_data = get_files($path, $all_data, $root_dir);
-	  } else if(is_file($path) and !is_dir($file)){
+		$all_data = get_files($path, $all_data, $initial_root_dir);
+	  } else if(is_file($path) and !is_dir($path)){
 	     $all_data[] = ltrim($path, $initial_root_dir);  
 	  }
 	}
 	}
-	var_dump($all_data);
 	return $all_data;
   } // end get_files()
 
