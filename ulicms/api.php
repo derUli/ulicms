@@ -18,7 +18,7 @@
 	  if(is_dir($path)){
 		$all_data = get_files($path, $all_data, $initial_root_dir);
 	  } else if(is_file($path) and !is_dir($path)){
-	     $all_data[] = ltrim($path, $initial_root_dir);  
+	     $all_data[] = substr($path, strlen($initial_root_dir) + 1);  
 	  }
 	}
 	}
