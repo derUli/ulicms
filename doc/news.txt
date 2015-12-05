@@ -11,3 +11,4 @@
 
   Die Installation von verfügaren Aktualisierungen muss jedoch manuell durchgeführt werden, 
   da nur geprüft wird.
++ API-Funktion get_files() hinzugefügt
