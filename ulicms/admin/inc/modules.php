@@ -150,7 +150,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 
 			if($version != null){
 
-			$status = $pkg->checkForNewerVersionOfPackage($themes[$i]);
+			$status = $pkg->checkForNewerVersionOfPackage("theme-".$themes[$i]);
 
 			if($status){
 			   if (version_compare($status, $version, '>')) {
