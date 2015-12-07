@@ -321,3 +321,8 @@ div#google-fonts select{
 .accordion-content, .accordion-header{
    width: auto !important;
 }
+
+div#login-welcome-text{
+border:solid 1px #EDEDED; 
+padding: 10px;
+}

@@ -13,14 +13,23 @@ if (isset ( $_SESSION ["language"] ) and in_array ( $_SESSION ["language"], $lan
 }
 
 $admin_logo = getconfig ( "admin_logo" );
-if (! $admin_logo)
+if (! $admin_logo){
 	$admin_logo = "gfx/logo.png";
+}
+
+   $login_welcome_text = get_lang_config("login_welcome_text", $default_language);
 ?>
 <p>
 	<img src="<?php echo $admin_logo;?>" alt="UliCMS" title="UliCMS"
 		class="responsive-image" />
 </p>
-<h3>
+<?php if($login_welcome_text){
+?>
+<div id="login-welcome-text">
+<?php echo nl2br($login_welcome_text);?>
+</div>
+<?php } ?>
+<h3 id="login-please-headline">
 <?php
 
 echo TRANSLATION_PLEASE_AUTHENTICATE;
