@@ -42,7 +42,7 @@ csrf_token_html ();
 	<?php
 	}
 	?>
-	<table style="border: 0px;">
+	<table>
 		<tr>
 			<td><strong><strong><?php
 			
