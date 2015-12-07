@@ -105,7 +105,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 	<div class="accordion-content">
 	<?php
 				
-				echo strip_tags ( $updateInfo, "<p><a><strong><b><u><em><i><span><img>" );
+				echo $updateInfo;
 				?>
 	</div>
 	<?php
