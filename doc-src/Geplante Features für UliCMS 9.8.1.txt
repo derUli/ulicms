@@ -1,12 +1,9 @@
 ﻿[X] CKEditor aktualisieren
 [X] Option „Design für Mobilgeräte nicht auf iPad / Tablet verwenden“.
-[ ] Möglichkeit, eine Willkommensnachricht zum Login-Formular von UliCMS hinzuzufügen
+[X] Möglichkeit, eine Willkommensnachricht zum Login-Formular von UliCMS hinzuzufügen
+[ ] Funktion initconfig (setconfig if not getconfig) implementieren
+[ ] Spamschutz für individuelle Formulare per Honeypot Feld.
+    [ ] Name des Honeypot Feld festlegen als "antispam_field_name"
+    [ ] Platzhalter code [anti spam] zum einfügen des Honeypot Felds
+    [ ] Prüfung ob Honeypot-Feld !empty dann Fehlermeldung anzeigen (Sprachdatei nutze!)
 [ ] Neue Features dokumentieren
-[ ] Scopes
-[ ] Menüeinträge und "Dokumente" trennen, Inhaltselemente
-[ ] Settings Export und Import als JSON
-[ ] MOTD nach Sprache
-[ ] Hilfe System für Module
-[ ] Dokumentation zur neuen Version erstellen (Begriffsdefinitionen, Detailierte Beschreibung der neuen Features, Hinweise, Upgrade-Anleitung, Installationsanleitung)
-[ ] Erweiterung der API (create_page, delete_page, create_user, delete_user, usw.)
-[ ] Neues Paketmanagement System SimpleInstall
