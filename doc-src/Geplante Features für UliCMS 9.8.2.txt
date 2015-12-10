@@ -1,0 +1,2 @@
+[ ] CKEditor aktualisieren auf neueste Version
+[ ] get_menu() Funktion um optionale Parameter $class und $id erweitern
