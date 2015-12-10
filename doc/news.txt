@@ -9,7 +9,8 @@
     rot = Paket ist veraltet, neuere Version des Paketes ist verfügbar
     schwarz = Überprüfung kann nicht durchgeführt werden
 
-  Die Installation von verfügaren Aktualisierungen muss jedoch manuell durchgeführt werden, 
+  Die Installation von verfügaren Aktualisierungen muss jedoch manuell durchgeführt werden,
   da nur geprüft wird.
 + API-Funktion get_files() hinzugefügt
 + Es kann nun eine Willkommensbotschaft für das Loginformular festgelegt werden
++ API-Funktion initconfig() hinzugefügt

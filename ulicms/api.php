@@ -1,4 +1,12 @@
 <?php
+function initconfig($key, $value){
+   $retval = false;
+   if(!getconfig($key)){
+      setconfig($key, $value);
+      $retval = true;
+   }
+   return $retval;
+}
 
  function get_files($root_dir, $all_data=array(), $initial_root_dir = null) 
   {
