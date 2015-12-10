@@ -1,0 +1,6 @@
+Dieser Spamschutz für UliCMS Forms basiert darauf, dass die meisten Spambots "dumm" sind und versuchen alle Felder auszufüllen.
+Man fügt ein Textfeld zum Formular hinzu (In diesem Modul "fax") genannt, der Name des Antispam-Felds kann durch setzen der Einstellung "antispam_field_name" geändert werden.
+Das Textfeld muss per CSS außerhalb des sichtbaren Bereichs positioniert werden.
+So sieht der Anwender das Feld nicht, aber der Spambot, weil Spambots in der Regel
+kein CSS parsen können.
+Wenn beim Absenden des Formulars das Textfeld gefüllt ist, handelt es sich um eine Spam.
