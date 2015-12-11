@@ -56,8 +56,6 @@
       padding-right:10px;
     }
 
-
-
 span.slicknav_icon-bar {
     width: 0.75em !important;
     /* height: 0.125em; */
@@ -74,5 +72,15 @@ nav .menu_bottom li{
 
 nav .menu_bottom li:last-child{
   margin-bottom: 0px;
+}
+
+.hide-on-mobile,
+.powered-by-ulicms{
+   display: none;
+}
+
+.menu_bottom{
+   margin-bottom:3px;
+
 }
 }
