@@ -35,7 +35,21 @@ nav a.menu_active_link, nav a.contains-current-page{
 </head>
 <body class="<?php body_classes();?>">
 <header>
-<a href="./"><?php logo();?></a>
+<a href="./">
+<?php
+if(getconfig("logo_disabled") == "no")
+    {
+     logo();
+     ?>
+<br/>  
+<?php
+     }
+else{
+     ?><strong><?php homepage_title();
+     ?></strong>
+<?php }
+?>
+</a>
 </header>
 <div id="root-container">
 <nav><?php menu("top");?></nav>
