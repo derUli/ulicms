@@ -64,9 +64,12 @@ span.slicknav_icon-bar {
    margin-bottom:0px;
 }
 
-nav ul li{
+nav .menu_bottom li{
    float: none;
    margin-bottom:20px;
 }
 
+nav .menu_bottom li:last-child{
+  margin-bottom: 0px;
+}
 }
