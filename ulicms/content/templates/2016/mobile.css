@@ -1,86 +1,45 @@
 @media only screen and (max-width: 830px) {
-    .mobile-menu {
-        display: block;
-    }
-
-    .menu_top {
-        display: none;
-    }
+    .mobile-menu { display: block }
+    .menu_top { display: none }
     .slicknav_menu {
         display: block;
         font-size: 110%;
-        padding:0px;
+        padding: 0px;
     }
-    .slicknav_menu ul.slicknav_nav {
-        margin-bottom: 40px;
-    }
-    .slicknav_nav a{
+    .slicknav_menu ul.slicknav_nav { margin-bottom: 40px }
+    .slicknav_nav a {
         margin: 0px;
-        padding:10px;
+        padding: 10px;
     }
-
-    .slicknav_nav{
-         margin-top:20px;
-     }
-    .mobile-menu {
-        display: block;
-    }
-    .slicknav_nav li {
-        margin-bottom: 20px;
-    }
-    .slicknav_nav ul {
-        margin-top: 20px;
-    }
-    ul.menu_bottom {
-        font-size: 110%;
-    }
-    div.socialshareprivacy {
-        display: none;
-    }
-    .mobile .menu_top {
-        display: none;
-    }
+    .slicknav_nav { margin-top: 20px }
+    .mobile-menu { display: block }
+    .slicknav_nav li { margin-bottom: 20px }
+    .slicknav_nav ul { margin-top: 20px }
+    ul.menu_bottom { font-size: 110% }
+    div.socialshareprivacy { display: none }
+    .mobile .menu_top { display: none }
     .mobile .slicknav_menu {
         display: block;
         font-size: 150%;
     }
-    .mobile .slicknav_menu ul.slicknav_nav {
-        margin-bottom: 40px;
+    .mobile .slicknav_menu ul.slicknav_nav { margin-bottom: 40px }
+    .mobile .mobile-menu { display: block }
+    main,
+    header {
+        padding-left: 10px;
+        padding-right: 10px;
     }
-    .mobile .mobile-menu {
-        display: block;
+    span.slicknav_icon-bar {
+        width: 0.75em !important;
+        /* height: 0.125em;*/
     }
-
-    main, header{
-      padding-left: 10px;
-      padding-right:10px;
+    .mobile .slicknav_menu ul.slicknav_nav { margin-bottom: 0px }
+    nav .menu_bottom li {
+        float: none;
+        margin-bottom: 20px;
     }
-
-span.slicknav_icon-bar {
-    width: 0.75em !important;
-    /* height: 0.125em; */
-}
-
-.mobile .slicknav_menu ul.slicknav_nav{
-   margin-bottom:0px;
-}
-
-nav .menu_bottom li{
-   float: none;
-   margin-bottom:20px;
-}
-
-nav .menu_bottom li:last-child{
-  margin-bottom: 0px;
-}
-
-.hide-on-mobile,
-.powered-by-ulicms{
-   display: none;
-}
-
-.menu_bottom{
-   margin-bottom:3px;
-
-}
+    nav .menu_bottom li:last-child { margin-bottom: 0px }
+    .hide-on-mobile,
+    .powered-by-ulicms { display: none }
+    .menu_bottom { margin-bottom: 3px }
 }
