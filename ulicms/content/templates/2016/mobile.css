@@ -51,8 +51,9 @@
         display: block;
     }
 
-    main{
-        font-size:130% !important;
+    main, header{
+      padding-left: 10px;
+      padding-right:10px;
     }
 
 span.slicknav_icon-bar {

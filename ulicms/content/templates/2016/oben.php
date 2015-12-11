@@ -52,6 +52,10 @@ else{
 <div id="root-container">
 <nav><?php menu("top");?></nav>
 <div id="mobile-menu"></div>
-<img class="header-image" src="<?php echo getTemplateDirPath(get_theme());?>header.jpg" alt="header-grafik">
+<img class="header-image" src="<?php echo getTemplateDirPath(get_theme());?>header.jpg" alt="Hedsaer-grafik">
 <main>
+  <?php
+  if(!containsModule(null, "blog")){
+    ?>
 <h1><?php headline();?></h1>
+<?php } ?>
