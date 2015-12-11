@@ -215,11 +215,6 @@ blockquote p {
   display: inline;
 }
 
-.menu_active_link{
-   color:black !important;
-   background-color:white;
-}
-
 .menu_bottom{
    border-top:solid 3px rgb(220, 220, 220);
 }
@@ -261,4 +256,9 @@ button[type=submit], input[type="submit"], input[type="reset"], input [type="but
  font-size:90%;
  height:60px;
  font-size:100%;
+}
+
+html{
+
+
 }
