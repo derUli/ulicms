@@ -6,4 +6,4 @@
     [ ] Name des Honeypot Feld festlegen als "antispam_field_name"
     [ ] Platzhalter code [anti spam] zum einfügen des Honeypot Felds
     [ ] Prüfung ob Honeypot-Feld !empty dann Fehlermeldung anzeigen (Sprachdatei nutze!)
-[ ] Neue Features dokumentieren
+[ ] Neue Features dokumentieren (auch neues Standard-Design)
