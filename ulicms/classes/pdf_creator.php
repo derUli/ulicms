@@ -35,7 +35,7 @@ class PDFCreator {
 			}
 		}
 		if (! class_exists ( "mPDF" )) {
-			echo "mPDF not installed. Please install <a href=\"http://www.ulicms.de/mpdf_supplement.html\" target=\"_blank\">mPDF supplement</a>.";
+			echo "mPDF is not installed. Please install <a href=\"http://www.ulicms.de/mpdf_supplement.html\" target=\"_blank\">mPDF supplement</a>.";
 			die ();
 		}
 		$mpdf = new mPDF ( getCurrentLanguage ( true ), 'A4' );
