@@ -64,13 +64,4 @@ span.slicknav_icon-bar {
    margin-bottom:0px;
 }
 
-.menu_active_link{
-   color:black !important;
-   background-color:white;
-}
-
-nav ul li{
-   float: none;
-   margin-bottom:20px;
-}
 }
