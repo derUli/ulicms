@@ -259,5 +259,13 @@ blockquote p {
 
 img.header-image{
    width:100%;
+}
 
+html{
+   overflow-x: hidden;
+}
+
+/* Würgaround für Internet Explodierer */
+main{
+    display: block;
 }
