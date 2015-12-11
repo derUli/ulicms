@@ -42,10 +42,6 @@ nav ul {
 }
 
 
-nav a.menu_active_link, nav a.contains-current-page{
-  border-bottom:3px solid orange;
-}
-
 
 nav ul.contains-current-page a.menu_active_link{
   border-bottom:0px !important;
