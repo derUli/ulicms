@@ -50,4 +50,9 @@ span.slicknav_icon-bar {
     width: 0.75em !important;
     /* height: 0.125em; */
 }
+
+nav ul li{
+   float: none;
+   margin-bottom:20px;
+}
 }
