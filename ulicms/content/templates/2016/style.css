@@ -160,16 +160,20 @@ textarea {
     outline: none;
     height: 150px;
 }
-input[type="search"] { -webkit-appearance: none }
+
 input[type="text"],
 input[type="password"],
 input[type="tel"],
 input[type="phone"],
 input[type="datetime-local"],
 input[type="email"],
-input[type="url"],
-input[type="search"] {
+input[type="url"]{
     width: 100%;
+    font-size: 100%;
+}
+
+input[type="search"] {
+  -webkit-appearance: none; 
     font-size: 100%;
 }
 select {
@@ -193,3 +197,8 @@ input [type="button"] {
 div#root-container{
    background-color:white;
 }
+
+
+div.socialshareprivacy { 
+  margin-bottom: 60px; 
+	}
