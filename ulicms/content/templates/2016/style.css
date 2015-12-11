@@ -1,4 +1,4 @@
-input[type="button"],
+﻿input[type="button"],
 button,
 input[type="reset"],
 input[type="submit"] {
@@ -168,7 +168,7 @@ input[type="phone"],
 input[type="datetime-local"],
 input[type="email"],
 input[type="url"]{
-    width: 100%;
+    width: 98%;
     font-size: 100%;
 }
 
@@ -177,7 +177,7 @@ input[type="search"] {
     font-size: 100%;
 }
 select {
-    width: 100%;
+    width: 98%;
     font-size: 100%;
 }
 button[type=submit],
