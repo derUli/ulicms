@@ -64,4 +64,9 @@ span.slicknav_icon-bar {
    margin-bottom:0px;
 }
 
+nav ul li{
+   float: none;
+   margin-bottom:20px;
+}
+
 }

@@ -84,7 +84,7 @@ nav ul li ul li{
 nav ul {
     padding: 0px;
     margin: 0px;
- 
+
     box-shadow: 2px 2px 2px #dfdfdf;
     -moz-box-shadow: 2px 2px 2px #dfdfdf;
     -webkit-box-shadow: 2px 2px 2px #dfdfdf;
@@ -99,7 +99,7 @@ nav ul li a {
     display: block;
     color: #333;
     padding: 14px 34px 14px 34px;
- 
+
     -webkit-transition: background 0.3s ease-out 0s;
     -moz-transition: background 0.3s ease-out 0s;
     -o-transition: background 0.3s ease-out 0s;
@@ -173,7 +173,7 @@ form input[type="email"]{
 }
 
 form input[type="text"],
-form input[type="email"], 
+form input[type="email"],
 form textarea{
   width:100%;
   font-size:110%;
@@ -195,9 +195,9 @@ form textarea{
 
 .desktop main a img:hover{
 	-webkit-transform:rotate(360deg);
-	-moz-transform:rotate(360deg); 
+	-moz-transform:rotate(360deg);
 	-o-transform:rotate(360deg);
-}	
+}
 
 ul.social_share_privacy_area, ul.social_share_privacy_area li{
   list-style-type:none;
@@ -234,7 +234,7 @@ code {
     font-size: 0.7em;
     word-wrap: break-word;
     /* Internet Explorer 5.5+ */
-    
+
     font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono', Consolas, 'Everson Mono', 'Lucida Console', 'Andale Mono', 'Nimbus Mono L', 'Liberation Mono', FreeMono, 'Osaka Monospaced', Courier, 'New Courier', monospace;
 }
 
@@ -260,9 +260,4 @@ blockquote p {
 .menu_active_link{
    color:black !important;
    background-color:white;
-}
-
-nav ul li{
-   float: none;
-   margin-bottom:20px;
 }
