@@ -257,9 +257,6 @@ button[type=submit], input[type="submit"], input[type="reset"], input [type="but
  font-size:90%;
  height:60px;
  font-size:100%;
-}
-
-html{
-
-
+ margin-top: 20px;
+ margin-bottom: 20px;
 }
