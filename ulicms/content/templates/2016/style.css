@@ -188,3 +188,8 @@ input [type="button"] {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+
+div#root-container{
+   background-color:white;
+}
