@@ -17,11 +17,9 @@ header, footer{
 h1, h2, h3, h4, h5, h6{
    color: <?php echo getconfig("header-background-color"); ?>;
 }
-
 nav a.menu_active_link, nav a.contains-current-page{
   border-bottom:3px solid <?php echo getconfig("header-background-color"); ?>;
 }
-
 </style>
 <script>
 	$(function(){

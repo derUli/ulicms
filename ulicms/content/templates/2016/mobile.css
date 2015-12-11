@@ -9,10 +9,20 @@
     .slicknav_menu {
         display: block;
         font-size: 110%;
+        padding:0px;
     }
     .slicknav_menu ul.slicknav_nav {
         margin-bottom: 40px;
     }
+
+    .slicknav_nav a{
+        margin: 0px;
+        padding:10px;
+    }
+
+    .slicknav_nav{
+         margin-top:20px;
+     }
     .mobile-menu {
         display: block;
     }
@@ -49,6 +59,15 @@
 span.slicknav_icon-bar {
     width: 0.75em !important;
     /* height: 0.125em; */
+}
+
+.mobile .slicknav_menu ul.slicknav_nav{
+   margin-bottom:0px;
+}
+
+.menu_active_link{
+   color:black !important;
+   background-color:white;
 }
 
 nav ul li{
