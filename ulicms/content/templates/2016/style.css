@@ -261,3 +261,7 @@ blockquote p {
    color:black !important;
    background-color:white;
 }
+
+.menu_bottom{
+   border-top:solid 3px rgb(220, 220, 220);
+}
