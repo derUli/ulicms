@@ -1,9 +1,9 @@
-<?php 
+<?php
   html5_doctype();
   og_html_prefix();
 ?>
 <head>
-<?php 
+<?php
   base_metas();
   og_tags();
   ?>
@@ -39,7 +39,7 @@ if(getconfig("logo_disabled") == "no")
     {
      logo();
      ?>
-<br/>  
+<br/>
 <?php
      }
 else{
@@ -52,6 +52,6 @@ else{
 <div id="root-container">
 <nav><?php menu("top");?></nav>
 <div id="mobile-menu"></div>
-<div id="header-image"></div>
+<img class="header-image" src="<?php echo getTemplateDirPath(get_theme());?>header.jpg" alt="header-grafik">
 <main>
 <h1><?php headline();?></h1>

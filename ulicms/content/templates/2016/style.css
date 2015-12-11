@@ -1,13 +1,4 @@
-﻿div#header-image{
-  background-color:white;
-  background-repeat:no-repeat;
-  background-image:url(header.jpg);
-  background-size:100%;
-  height:250px;
-  width:100%;
-}
-
-input[type="checkbox"], input[type="radio"]{
+﻿input[type="checkbox"], input[type="radio"]{
 zoom:230%;
 }
 
@@ -264,4 +255,9 @@ blockquote p {
 
 .menu_bottom{
    border-top:solid 3px rgb(220, 220, 220);
+}
+
+img.header-image{
+   width:100%;
+
 }
