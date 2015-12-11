@@ -82,7 +82,7 @@ main {
 header,
 footer {
     background-color: #F5982C;
-    padding: 14px 34px 0px 34px;
+    padding: 14px 34px 14px 34px;
 }
 footer { text-align: center }
 footer a:hover { color: white }
