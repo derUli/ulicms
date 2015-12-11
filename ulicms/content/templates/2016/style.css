@@ -170,26 +170,6 @@ form textarea{
   font-size:110%;
 }
 
-
-/* Rotate linked images on hover */
-.desktop main a img{
-	-webkit-transition-duration: 0.8s;
-	-moz-transition-duration: 0.8s;
-	-o-transition-duration: 0.8s;
-	transition-duration: 0.8s;
-	-webkit-transition-property: -webkit-transform;
-	-moz-transition-property: -moz-transform;
-	-o-transition-property: -o-transform;
-	transition-property: transform;
-	overflow:hidden;
-}
-
-.desktop main a img:hover{
-	-webkit-transform:rotate(360deg);
-	-moz-transform:rotate(360deg);
-	-o-transform:rotate(360deg);
-}
-
 ul.social_share_privacy_area, ul.social_share_privacy_area li{
   list-style-type:none;
   list-style-image:none;
@@ -259,10 +239,6 @@ blockquote p {
 
 img.header-image{
    width:100%;
-}
-
-html{
-   overflow-x: hidden;
 }
 
 /* Würgaround für Internet Explodierer */
