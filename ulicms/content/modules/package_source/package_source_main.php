@@ -8,6 +8,9 @@ function isNotExcluded($file){
 
 function package_source_version_list(){
 	   $html = "<ul>";
+	   if(!is_dir(PACKAGE_SOURCE_BASE_PATH. "/")){
+	      return "404";
+	   }
 	   $files = scandir(PACKAGE_SOURCE_BASE_PATH. "/");
 	   natcasesort($files);
 	   for($i=0; $i < count ($files); $i++){
@@ -30,7 +33,7 @@ function package_source_show_description(){
    basename($_GET["package"].".txt"));
    $html .= '<div class="package-description">';
    if(description){
-        $html .= $description;
+        $html .= nl2br($description);
    } else {
       $html .= get_translation("NO_DESCRIPTION_AVAILABLE");
    }
