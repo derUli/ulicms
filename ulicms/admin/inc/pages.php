@@ -437,7 +437,7 @@ $(window).load(function(){
 		
 		$filter_sql .= " AND `type` = 'page'";
 		
-		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " " . $filter_sql . "ORDER BY $order,position, systemname ASC" ) or die ( db_error () );
+		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " " . $filter_sql . " ORDER BY $order,position, systemname ASC" ) or die ( db_error () );
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
 				?>
