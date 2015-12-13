@@ -1,3 +1,6 @@
 [ ] CKEditor aktualisieren auf neueste Version
 [ ] get_menu() Funktion um optionale Parameter $class und $id erweitern
-[ ] Ein neues Standard-Theme mit Responsive Webdesign
+[ ] Bereiche - Feinere Abstufungen der Rechte für Seiten.
+    Rekursiv und mit Vererbung bei Unterseiten.
+    Es soll möglich sein, die Rechte so einzustellen, dass z.B. der Produkt-Manager von "Produkt 1" auf alle Unterseiten von der Seite "Produkt 1" zugreifen kann, andere Inhalte sieht er nicht.
+[ ] root_page je Gruppe festlegbar? Dann sehen User in der Gruppe nur die Unterseiten von root_page
