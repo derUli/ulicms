@@ -1,6 +1,6 @@
 <?php
 function package_source_title_filter($title){
-if(containsModule(nul, "package_source")){
+if(containsModule(null, "package_source")){
 
 if(empty($_GET["ulicms_version"])){
       $title = get_translation("SELECT_ULICMS_VERSION");
