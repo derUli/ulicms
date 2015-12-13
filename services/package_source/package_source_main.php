@@ -1,5 +1,5 @@
 <?php
-define("PACKAGE_SOURCE_BASE_PATH", "D:\\Server Sicherung\\2015-11-25\\dateien\\ulicms2015\\packages");
+define("PACKAGE_SOURCE_BASE_PATH", ULICMS_ROOT."/packages");
 define("PACKAGE_SOURCE_BAS_URL", "http://packages.ulicms.de");
 
 function isNotExcluded($file){
@@ -54,7 +54,8 @@ return $html;
 function package_source_package_list(){
 	    $html = "<ol>";
 	   $packages = file_get_contents(PACKAGE_SOURCE_BASE_PATH."/". basename($_GET["ulicms_version"])."/list.txt");
-	   $packages = explode("\r\n", $packages);
+	   $packages = str_replace("\r\n", "\n", $packages);
+	   $packages = explode("\n", $packages);
 	   foreach($packages as $package){
 	          if(!empty($package)){
 				  $html .= "<li>";
