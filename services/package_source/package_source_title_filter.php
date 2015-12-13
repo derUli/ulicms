@@ -8,7 +8,7 @@ if(empty($_GET["ulicms_version"])){
 		 ("%version%" => htmlspecialchars($_GET["ulicms_version"])));
 	  } else {
 	    
-   $text = get_translation("PACKAGE_FOR_VERSION", 
+   $title = get_translation("PACKAGE_FOR_VERSION", 
    array(
    "%paket%" => htmlspecialchars($_GET["package"]), 
    "%version%" => htmlspecialchars($_GET["ulicms_version"])));
