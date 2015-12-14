@@ -1,6 +1,6 @@
 <?php
 include_once "init.php";
-include_once ULICMS_ROOT."/lib/string_functions.php";
+include_once ULICMS_ROOT . "/lib/string_functions.php";
 $old_table = "alt_news";
 $new_table = "neu_blog";
 

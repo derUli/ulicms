@@ -1,4 +1,4 @@
 <?php
-function percent_font_size_render(){
-  return "";
+function percent_font_size_render() {
+	return "";
 }
