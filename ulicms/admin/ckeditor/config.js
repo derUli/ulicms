@@ -7,7 +7,7 @@
 CKEDITOR.editorConfig = function(config) {
 	// config.language = 'de';
 	config.ShiftEnterMode = 'p';
-    config.height = '300px';
+	config.height = '300px';
 	if (window.location.href.indexOf("admin/") != -1) {
 		config.filebrowserBrowseUrl = 'kcfinder/browse.php?type=files';
 		config.filebrowserImageBrowseUrl = 'kcfinder/browse.php?type=images';

@@ -14,8 +14,7 @@ if (! $acl->hasPermission ( "design" )) {
 		} else {
 			deleteconfig ( "disable_custom_layout_options" );
 		}
-
-
+		
 		if (isset ( $_REQUEST ["no_mobile_design_on_tablet"] )) {
 			setconfig ( "no_mobile_design_on_tablet", "no_mobile_design_on_tablet" );
 		} else {
@@ -63,8 +62,8 @@ if (! $acl->hasPermission ( "design" )) {
 			setconfig ( "default-font", $font );
 		}
 		
-		if (!empty($_REQUEST ["google-font"])) {
-
+		if (! empty ( $_REQUEST ["google-font"] )) {
+			
 			$font = $_REQUEST ["google-font"];
 			
 			$font = db_escape ( $font );
@@ -97,7 +96,7 @@ if (! $acl->hasPermission ( "design" )) {
 	$allThemes = getThemesList ();
 	include_once "inc/fonts.php";
 	$fonts = getFontFamilys ();
-	$google_fonts = get_google_fonts();
+	$google_fonts = get_google_fonts ();
 	$theme = getconfig ( "theme" );
 	$additional_menus = getconfig ( "additional_menus" );
 	$mobile_theme = getconfig ( "mobile_theme" );
@@ -109,19 +108,21 @@ if (! $acl->hasPermission ( "design" )) {
 	$ckeditor_skin = getconfig ( "ckeditor_skin" );
 	$video_width_100_percent = getconfig ( "video_width_100_percent" );
 	$font_sizes = getFontSizes ();
-
-        $no_mobile_design_on_tablet = getconfig("no_mobile_design_on_tablet");
+	
+	$no_mobile_design_on_tablet = getconfig ( "no_mobile_design_on_tablet" );
 	
 	?>
-	<?php if($default_font != "google"){
-	?>
-	
-	<style type="text/css">
-	div#google-fonts{
-	   display:none;
-	}
-	</style>
 	<?php
+	
+if ($default_font != "google") {
+		?>
+
+<style type="text/css">
+div#google-fonts {
+	display: none;
+}
+</style>
+<?php
 	}
 	?>
 <h1>
@@ -228,10 +229,10 @@ if (! $acl->hasPermission ( "design" )) {
 	?>
 			</select></td>
 		</tr>
-<tr>
+		<tr>
 			<td><strong><?php
 	
-	translate("no_mobile_design_on_tablet");
+	translate ( "no_mobile_design_on_tablet" );
 	?> </strong></td>
 			<td><input type="checkbox" name="no_mobile_design_on_tablet"
 				<?php
@@ -277,10 +278,10 @@ if (! $acl->hasPermission ( "design" )) {
 		
 		if (! in_array ( $default_font, $fonts ) and $i === $font_amount)
 			$selected = "selected";
-		if($value != 'google'){
-                   echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
+		if ($value != 'google') {
+			echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
 		} else {
-                   echo '<optgroup>';
+			echo '<optgroup>';
 		}
 		echo "<option value=\"$value\" $selected>$key</option>";
 		echo '</optgroup>';
@@ -290,18 +291,20 @@ if (! $acl->hasPermission ( "design" )) {
 	
 	?>
 			</select>
-			<div id="google-fonts">
-			<select name="google-font" size=1>
-			<?php foreach($google_fonts as $myfont){
-			    if($myfont == $google_font){
-			       echo '<option value="'.htmlspecialchars($myfont).'" selected>'.htmlspecialchars($myfont)."</option>";
-			    } else {
-			       echo '<option value="'.htmlspecialchars($myfont).'">'.htmlspecialchars($myfont)."</option>";
-			    }
-			}?>
+				<div id="google-fonts">
+					<select name="google-font" size=1>
+			<?php
+	
+foreach ( $google_fonts as $myfont ) {
+		if ($myfont == $google_font) {
+			echo '<option value="' . htmlspecialchars ( $myfont ) . '" selected>' . htmlspecialchars ( $myfont ) . "</option>";
+		} else {
+			echo '<option value="' . htmlspecialchars ( $myfont ) . '">' . htmlspecialchars ( $myfont ) . "</option>";
+		}
+	}
+	?>
 			</select>
-			</div>
-			</td>
+				</div></td>
 		</tr>
 		<tr>
 			<td><strong><?php
@@ -390,7 +393,7 @@ if (! $acl->hasPermission ( "design" )) {
 		</tr>
 		<?php
 	
-if ($acl->hasPermission ( "favicon" )) {
+	if ($acl->hasPermission ( "favicon" )) {
 		?>
 		<tr>
 			<td><strong><?php translate("favicon");?></strong></td>
@@ -454,7 +457,7 @@ $("#designForm").ajaxForm({beforeSubmit: function(e){
   $("#loading").hide();  
   $("#message").html("<span style=\"color:green;\"><?php
 	
-echo TRANSLATION_CHANGES_WAS_SAVED;
+	echo TRANSLATION_CHANGES_WAS_SAVED;
 	?></span>");
   }
   
@@ -475,6 +478,5 @@ $("select#default-font").change(onChangeDefaultFont);
 
 </script>
 <?php
-
 }
 ?>

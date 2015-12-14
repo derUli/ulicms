@@ -310,20 +310,20 @@ div#site-switcher-container {
 	display: none;
 }
 
-form#login-form{
-	margin-bottom:5px;
+form#login-form {
+	margin-bottom: 5px;
 }
 
-div#google-fonts select{
-   margin-top:10px;
+div#google-fonts select {
+	margin-top: 10px;
 }
 
-.accordion-content, .accordion-header{
-   width: auto !important;
+.accordion-content, .accordion-header {
+	width: auto !important;
 }
 
-div#login-welcome-text{
-  border:solid 1px #EDEDED; 
-  padding: 10px;
-  background-color:#eee;
+div#login-welcome-text {
+	border: solid 1px #EDEDED;
+	padding: 10px;
+	background-color: #eee;
 }

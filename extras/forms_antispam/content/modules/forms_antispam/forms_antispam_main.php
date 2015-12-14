@@ -1,4 +1,4 @@
 <?php
-function forms_antispam_render(){
-   return "";
+function forms_antispam_render() {
+	return "";
 }

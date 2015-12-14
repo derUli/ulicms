@@ -195,8 +195,8 @@ function get_custom_data($page = null) {
 	return null;
 }
 function include_jquery() {
-    if(getconfig("disable_auto_include_jquery")){
-	   return;
+	if (getconfig ( "disable_auto_include_jquery" )) {
+		return;
 	}
 	$disabled_on_pages = getconfig ( "jquery_disabled_on" );
 	if ($disabled_on_pages) {
@@ -648,7 +648,7 @@ function parent_item_contains_current_page($id) {
 	}
 	return $retval;
 }
-function get_menu($name = "top", $parent = null, $recursive = true, $order="position") {
+function get_menu($name = "top", $parent = null, $recursive = true, $order = "position") {
 	$html = "";
 	$name = db_escape ( $name );
 	$language = $_SESSION ["language"];
@@ -659,7 +659,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order="posi
 	} else {
 		$sql .= " = " . intval ( $parent ) . " ";
 	}
-	$sql .= " ORDER by ".$order;
+	$sql .= " ORDER by " . $order;
 	$query = db_query ( $sql );
 	
 	if (db_num_rows ( $query ) == 0) {
@@ -708,7 +708,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order="posi
 			$html .= "</a>\n";
 			
 			if ($recursive) {
-				$html .= get_menu ( $name, $row->id, true, $order);
+				$html .= get_menu ( $name, $row->id, true, $order );
 			}
 			
 			$html .= "</li>";
@@ -718,7 +718,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order="posi
 	return $html;
 }
 function menu($name = "top", $parent = null, $recursive = true, $order = 'position') {
-	echo get_menu ( $name, $parent, $recursive, $order);
+	echo get_menu ( $name, $parent, $recursive, $order );
 }
 function get_base_metas() {
 	ob_start ();
@@ -786,27 +786,26 @@ function base_metas() {
 		output_favicon_code ();
 		echo "\r\n";
 	}
-
-        if(!getconfig("hide_shortlink") and (is_200() or is_403())){
-            $shortlink = get_shortlink();
-            if($shortlink){
-               echo '<link rel="shortlink" href="'.$shortlink.'"/>';
-               echo "\r\n";
-            }
-        }
-
-        if(!getconfig("hide_canonical") and (is_200() or is_403())){
-            
-            $canonical = get_canonical();
-            if($canonical){
-              echo '<link rel="canonical"  href="'.$canonical.'"/>';
-              echo "\r\n";
-            }
-            
-        }
-	if(!getconfig("no_autoembed_core_css")){
-	    echo '<link rel="stylesheet" type="text/css" href="core.min.css"/>';
-	    echo "\r\n";
+	
+	if (! getconfig ( "hide_shortlink" ) and (is_200 () or is_403 ())) {
+		$shortlink = get_shortlink ();
+		if ($shortlink) {
+			echo '<link rel="shortlink" href="' . $shortlink . '"/>';
+			echo "\r\n";
+		}
+	}
+	
+	if (! getconfig ( "hide_canonical" ) and (is_200 () or is_403 ())) {
+		
+		$canonical = get_canonical ();
+		if ($canonical) {
+			echo '<link rel="canonical"  href="' . $canonical . '"/>';
+			echo "\r\n";
+		}
+	}
+	if (! getconfig ( "no_autoembed_core_css" )) {
+		echo '<link rel="stylesheet" type="text/css" href="core.min.css"/>';
+		echo "\r\n";
 	}
 	
 	$style_file = getTemplateDirPath ( get_theme () ) . "style.css";
@@ -846,15 +845,15 @@ function base_metas() {
 	}
 	
 	if (! getconfig ( "disable_custom_layout_options" )) {
-	$font = getconfig ( "default-font" );
-	if($font == "google"){
-	   $google_font = getconfig("google-font");
-	   if($google_font){
-	        echo '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family='.urlencode($google_font).'"/>';
-		echo "\r\n";
-	        $font = "'$google_font'";
-	   }
-	}
+		$font = getconfig ( "default-font" );
+		if ($font == "google") {
+			$google_font = getconfig ( "google-font" );
+			if ($google_font) {
+				echo '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=' . urlencode ( $google_font ) . '"/>';
+				echo "\r\n";
+				$font = "'$google_font'";
+			}
+		}
 		echo "
 <style type=\"text/css\">
 body{

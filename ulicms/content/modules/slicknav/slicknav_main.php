@@ -1,4 +1,4 @@
 <?php
-function slicknav_render(){
-  return "";
+function slicknav_render() {
+	return "";
 }

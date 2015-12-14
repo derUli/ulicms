@@ -251,12 +251,10 @@ $(document).ready(function() {
 			}
 			?>
 			<tr>
-				<td><a
-					href="<?php
+				<td><a href="<?php
 			
 			echo $url;
-			?>"
-					target="_blank"><?php
+			?>" target="_blank"><?php
 			
 			echo htmlspecialchars ( $row->title, ENT_QUOTES, "UTF-8" );
 			?></a></td>
@@ -311,12 +309,10 @@ $(document).ready(function() {
 			
 			?>
 			<tr>
-				<td><a
-					href="<?php
+				<td><a href="<?php
 			
 			echo $url;
-			?>"
-					target="_blank"><?php
+			?>" target="_blank"><?php
 			
 			echo htmlspecialchars ( $row->title, ENT_QUOTES, "UTF-8" );
 			?></a></td>
@@ -353,5 +349,5 @@ $(document).ready(function() {
 	<?php
 } else {
 	noperms ();
-    }
+}
 ?>

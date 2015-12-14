@@ -577,32 +577,29 @@ define ( "TRANSLATION_TARGET_PAGE_ID", "Target Page" );
 define ( "TRANSLATION_INSTALL_PATCH_FROM_FILE", "Install patch from file" );
 define ( "TRANSLATION_INSTALL_PATCH", "Install patch" );
 
-
 // 2-Faktor Authentifizierung
-define( "TRANSLATION_GOOGLE_AUTHENTICATOR", "Google Authenticator");
-define( "TRANSLATION_2_FACTOR_AUTHENTICATION_ENABLED", "Two-factor authentication enabled");
-define( "TRANSLATION_CONFIRMATION_CODE", "Confirmation Code");
-define( "TRANSLATION_CONFIRMATION_CODE_WRONG", "Confirmation Code invalid.");
-define( "TRANSLATION_ULICMS_LOGIN_AT", "UliCMS Login on");
-define( "TRANSLATION_PASSWORDS", "Passwords");
+define ( "TRANSLATION_GOOGLE_AUTHENTICATOR", "Google Authenticator" );
+define ( "TRANSLATION_2_FACTOR_AUTHENTICATION_ENABLED", "Two-factor authentication enabled" );
+define ( "TRANSLATION_CONFIRMATION_CODE", "Confirmation Code" );
+define ( "TRANSLATION_CONFIRMATION_CODE_WRONG", "Confirmation Code invalid." );
+define ( "TRANSLATION_ULICMS_LOGIN_AT", "UliCMS Login on" );
+define ( "TRANSLATION_PASSWORDS", "Passwords" );
 
 // Acount Lock
-define("TRANSLATION_LOCKED", "Locked");
-define("TRANSLATION_YOUR_ACCOUNT_IS_LOCKED", "Your Account is locked. Please contact your system administrator if you think, that this is an error.");
+define ( "TRANSLATION_LOCKED", "Locked" );
+define ( "TRANSLATION_YOUR_ACCOUNT_IS_LOCKED", "Your Account is locked. Please contact your system administrator if you think, that this is an error." );
 
 // Passwort anzeigen
-define("TRANSLATION_VIEW_PASSWORD", "View Password");
-
+define ( "TRANSLATION_VIEW_PASSWORD", "View Password" );
 
 // Letzter Login
-define("TRANSLATION_LAST_LOGIN", "Last Login");
-define("TRANSLATION_NEVER", "Never");
-
+define ( "TRANSLATION_LAST_LOGIN", "Last Login" );
+define ( "TRANSLATION_NEVER", "Never" );
 
 // Fehlgeschlagene Loginversuche
-define("TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Lock user accounts after X failed login attempts (0 = disabled)");
+define ( "TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Lock user accounts after X failed login attempts (0 = disabled)" );
 
 // No mobile design on tablets
-define("TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Don't use design for mobile devices on tablets");
+define ( "TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Don't use design for mobile devices on tablets" );
 
 add_hook ( "lang_en" );

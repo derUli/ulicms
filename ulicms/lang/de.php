@@ -571,28 +571,28 @@ define ( "TRANSLATION_INSTALL_PATCH_FROM_FILE", "Patch aus Datei installieren" )
 define ( "TRANSLATION_INSTALL_PATCH", "Patch installieren" );
 
 // 2-Faktor Authentifizierung
-define( "TRANSLATION_GOOGLE_AUTHENTICATOR", "Google Authenticator");
-define( "TRANSLATION_2_FACTOR_AUTHENTICATION_ENABLED", "2-Faktor Authentifizierung aktiviert");
-define( "TRANSLATION_CONFIRMATION_CODE", "Bestätigungscode");
-define( "TRANSLATION_CONFIRMATION_CODE_WRONG", "Bestätigungscode falsch.");
-define( "TRANSLATION_ULICMS_LOGIN_AT", "UliCMS Login auf");
-define( "TRANSLATION_PASSWORDS", "Passwörter");
+define ( "TRANSLATION_GOOGLE_AUTHENTICATOR", "Google Authenticator" );
+define ( "TRANSLATION_2_FACTOR_AUTHENTICATION_ENABLED", "2-Faktor Authentifizierung aktiviert" );
+define ( "TRANSLATION_CONFIRMATION_CODE", "Bestätigungscode" );
+define ( "TRANSLATION_CONFIRMATION_CODE_WRONG", "Bestätigungscode falsch." );
+define ( "TRANSLATION_ULICMS_LOGIN_AT", "UliCMS Login auf" );
+define ( "TRANSLATION_PASSWORDS", "Passwörter" );
 
 // Acount Lock
-define("TRANSLATION_LOCKED", "Gesperrt");
-define("TRANSLATION_YOUR_ACCOUNT_IS_LOCKED", "Ihr Account ist gesperrt. Fragen Sie Ihren Administrator, falls Sie denken, dass das ein Fehler ist.");
+define ( "TRANSLATION_LOCKED", "Gesperrt" );
+define ( "TRANSLATION_YOUR_ACCOUNT_IS_LOCKED", "Ihr Account ist gesperrt. Fragen Sie Ihren Administrator, falls Sie denken, dass das ein Fehler ist." );
 
 // Passwort anzeigen
-define("TRANSLATION_VIEW_PASSWORD", "Passwort anzeigen");
+define ( "TRANSLATION_VIEW_PASSWORD", "Passwort anzeigen" );
 
 // Letzter Login
-define("TRANSLATION_LAST_LOGIN", "Letzte Anmeldung");
-define("TRANSLATION_NEVER", "Niemals");
+define ( "TRANSLATION_LAST_LOGIN", "Letzte Anmeldung" );
+define ( "TRANSLATION_NEVER", "Niemals" );
 
 // Fehlgeschlagene Loginversuche
-define("TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Benutzer-Accounts nach X fehlgeschlagenen Anmeldeversuchen sperren (0 = Aus)");
+define ( "TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Benutzer-Accounts nach X fehlgeschlagenen Anmeldeversuchen sperren (0 = Aus)" );
 
 // No mobile design on tablets
-define("TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Das Design für Mobilgeräte nicht auf Tablets verwenden");
+define ( "TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Das Design für Mobilgeräte nicht auf Tablets verwenden" );
 
 add_hook ( "lang_de" );

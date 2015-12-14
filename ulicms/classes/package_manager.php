@@ -6,22 +6,20 @@ class packageManager {
 		$this->package_source = $cfg->getVar ( "pkg_src" );
 		$this->package_source = $this->replacePlaceHolders ( $this->package_source );
 	}
-	
-	public function checkForNewerVersionOfPackage($package){
-			$result = null;
-			
-			if(getconfig("disable_package_update_check")){
-			   return $result;
-			}
-			$url = $this->package_source."newest_version.php";
-			$url .= "?q=".urlencode($package);
-			$response = @file_get_contents_wrapper($url, true);
-			if($response and !empty($response)){
-			    $result = $response;
-			}
+	public function checkForNewerVersionOfPackage($package) {
+		$result = null;
+		
+		if (getconfig ( "disable_package_update_check" )) {
 			return $result;
+		}
+		$url = $this->package_source . "newest_version.php";
+		$url .= "?q=" . urlencode ( $package );
+		$response = @file_get_contents_wrapper ( $url, true );
+		if ($response and ! empty ( $response )) {
+			$result = $response;
+		}
+		return $result;
 	}
-	
 	public function splitPackageName($name) {
 		$name = str_ireplace ( ".tar.gz", "", $name );
 		$name = str_ireplace ( ".zip", "", $name );
@@ -47,7 +45,6 @@ class packageManager {
 	
 	// @FIXME : Delete temporary files after install a patch
 	public function installPatch($name, $description, $url) {
-	
 		@set_time_limit ( 0 );
 		$test = $this->getInstalledPatchNames ();
 		if (in_array ( $name, $test ))
