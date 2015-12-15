@@ -398,7 +398,7 @@ define ( "TRANSLATION_POSTED_ON_DATE", "Posted on %s" );
 
 define ( "TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">This page is powered by " . "<a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS " . cms_version () . "</a></p>" );
 
-define ( "TRANSLATION_UNDER_MAINTENANCE", "This website is currently under maintenance.<br/>Please visit us again later." );
+define ( "TRANSLATION_UNDER_MAINTENANCE", "<h1>Briefly unavailable for scheduled maintenance. Check back in a minute.</h1>" );
 define ( "TRANSLATION_IP_BLOCKED_BY_SPAMHAUS", "Your IP-Adresse %ip is listed on spamhaus.org!<br/>Access Denied!" );
 define ( "TRANSLATION_CHECK_FOR_SPAMHAUS", 'Block access from ip adresses that are listed at <a href="https://www.spamhaus.org/" target="_blank">spamhaus.org</a>.' );
 
