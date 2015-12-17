@@ -1,3 +1,4 @@
 [ ] CKEditor aktualisieren auf neueste Version
+
 Mehr OOP
     [ ] Settings-Klasse mit statischen Funktionen (get, set, init und delete)
