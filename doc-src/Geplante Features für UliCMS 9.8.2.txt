@@ -5,3 +5,4 @@ Mehr OOP
 
 [ ] Alle php, javascript, html und css files sollen per Backend bearbeitbar sein (Dateien des themes finden per get_files, default theme und mobile)
 [ ] Sprachdateien eines Themes sollen automatisch geladen werden
+[ ] footer() Funktion hinzufügen, ähnlich wie wp_footer() 
