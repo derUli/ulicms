@@ -1,4 +1,6 @@
 [ ] CKEditor aktualisieren auf neueste Version
+[ ] Mehr OOP
+    [ ] Settings-Klasse mit statischen Funktionen (get, set, init und delete)
 [ ] get_menu() Funktion um optionale Parameter $class und $id erweitern
 [ ] Bereiche - Feinere Abstufungen der Rechte für Seiten.
     Rekursiv und mit Vererbung bei Unterseiten.
