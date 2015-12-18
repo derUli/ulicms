@@ -1,4 +1,4 @@
-﻿Anleitung zum Upgrade auf UliCMS 9.8.1
+Anleitung zum Upgrade auf UliCMS 9.8.1
 
 =============================================
 
