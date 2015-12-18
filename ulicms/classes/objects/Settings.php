@@ -6,8 +6,8 @@ class Settings{
 
    public static function init($key, $value) {
 	$retval = false;
-	if (! getconfig ( $key )) {
-		setconfig ( $key, $value );
+	if (! self::get ( $key )) {
+		self::set ( $key, $value );
 		$retval = true;
 	}
 	return $retval;
@@ -20,9 +20,10 @@ class Settings{
 		}
 		$env_key = "ulicms_" . $key;
 		$env_var = getenv ( $env_key );
-		if ($env_var)
+		if ($env_var){
 			return $env_var;
-		$ikey = db_escape ( $key );
+		}
+	    $key = db_escape($key);
 		$query = db_query ( "SELECT value FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
@@ -37,7 +38,7 @@ class Settings{
 	
 	public static function getLang($name, $lang) {
 		$retval = false;
-		$config = getconfig ( $name . "_" . $lang );
+		$config = self::get ( $name . "_" . $lang );
 		if ($config)
 			$retval = $config;
 		else
@@ -47,6 +48,8 @@ class Settings{
 	
 	// Set a configuration Variable;
 	public static function set($key, $value) {
+	    $key = db_escape($key);
+		$value = db_escape($value);
 		$query = db_query ( "SELECT id FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 		
 		if (db_num_rows ( $query ) > 0) {
