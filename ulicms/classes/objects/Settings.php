@@ -8,8 +8,8 @@ class Settings {
 		if (! self::get ( $key )) {
 			self::set ( $key, $value );
 			$retval = true;
+			$GLOBALS ['settings_cache'] [$key] = $value;
 		}
-		$GLOBALS ['settings_cache'] [$key] = $value;
 		return $retval;
 	}
 	
