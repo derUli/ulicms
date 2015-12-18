@@ -16,3 +16,4 @@
 + API-Funktion initconfig() hinzugefügt
 + Neues Standard-Design "2016".
 + Settings Klasse hinzugefügt
++ Template Klasse hinzugefügt.
