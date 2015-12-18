@@ -12,7 +12,7 @@ class Settings {
 		}
 		return $retval;
 	}
-	
+
 	// get a config variable
 	public static function get($key) {
 		if (isset ( $GLOBALS ['settings_cache'] [$key] )) {
@@ -35,6 +35,21 @@ class Settings {
 			return false;
 		}
 	}
+
+	public static function output($key){
+      $value = self::get($key);
+			if($value){
+		    	echo $value;
+		}
+	}
+
+	public static function outputEscaped($key){
+			$value = self::get($key);
+			if($value){
+			  echo htmlspecialchars(value, ENT_QUOTES, "UTF-8");;
+			}
+	}
+
 	public static function getLang($name, $lang) {
 		$retval = false;
 		$config = self::get ( $name . "_" . $lang );
@@ -44,25 +59,25 @@ class Settings {
 			$config = self::get ( $name );
 		return $config;
 	}
-	
+
 	// Set a configuration Variable;
 	public static function set($key, $value) {
 		$key = db_escape ( $key );
 		$value = db_escape ( $value );
 		$query = db_query ( "SELECT id FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
-		
+
 		if (db_num_rows ( $query ) > 0) {
 			db_query ( "UPDATE " . tbname ( "settings" ) . " SET value='$value' WHERE name='$key'" );
 		} else {
-			
+
 			db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 		}
-		
+
 		if (isset ( $GLOBALS ['settings_cache'] [$key] )) {
 			unset ( $GLOBALS ['settings_cache'] [$key] );
 		}
 	}
-	
+
 	// Remove an configuration variable
 	public static function delete($key) {
 		$key = db_escape ( $key );
