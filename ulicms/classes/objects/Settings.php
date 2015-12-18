@@ -1,18 +1,17 @@
 <?php
-class Settings{
-	public static function register($key, $value){
-	   self::init($key, $value);
+class Settings {
+	public static function register($key, $value) {
+		self::init ( $key, $value );
 	}
-
-   public static function init($key, $value) {
-	$retval = false;
-	if (! self::get ( $key )) {
-		self::set ( $key, $value );
-		$retval = true;
+	public static function init($key, $value) {
+		$retval = false;
+		if (! self::get ( $key )) {
+			self::set ( $key, $value );
+			$retval = true;
+		}
+		return $retval;
 	}
-	return $retval;
-}
-
+	
 	// get a config variable
 	public static function get($key) {
 		if (isset ( $GLOBALS ['settings_cache'] [$key] )) {
@@ -20,10 +19,10 @@ class Settings{
 		}
 		$env_key = "ulicms_" . $key;
 		$env_var = getenv ( $env_key );
-		if ($env_var){
+		if ($env_var) {
 			return $env_var;
 		}
-	    $key = db_escape($key);
+		$key = db_escape ( $key );
 		$query = db_query ( "SELECT value FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
@@ -35,7 +34,6 @@ class Settings{
 			return false;
 		}
 	}
-	
 	public static function getLang($name, $lang) {
 		$retval = false;
 		$config = self::get ( $name . "_" . $lang );
@@ -48,8 +46,8 @@ class Settings{
 	
 	// Set a configuration Variable;
 	public static function set($key, $value) {
-	    $key = db_escape($key);
-		$value = db_escape($value);
+		$key = db_escape ( $key );
+		$value = db_escape ( $value );
 		$query = db_query ( "SELECT id FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 		
 		if (db_num_rows ( $query ) > 0) {
