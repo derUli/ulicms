@@ -1,4 +1,4 @@
-﻿[ ] CKEditor aktualisieren auf neueste Version
+[ ] CKEditor aktualisieren auf neueste Version
 
 Mehr OOP
     [X] Settings-Klasse mit statischen Funktionen (get, set, init und delete)
@@ -7,3 +7,4 @@ Mehr OOP
 [ ] Sprachdateien eines Themes sollen automatisch geladen werden
 [ ] footer() Funktion hinzufügen, ähnlich wie wp_footer() 
 [ ] Überall im Backend vallenato verwenden
+[ ] Einführung von Unit Testing
