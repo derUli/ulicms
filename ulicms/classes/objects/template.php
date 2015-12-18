@@ -1,5 +1,10 @@
 <?php
 class Template{
+        
+        public static function footer(){
+           add_hook("frontend_footer");
+        }
+
 	public static function executeModuleTemplate($module, $template){
 	    $retval = "";
 	    $originalTemplatePath = getModulePath($module) . "templates/" .
