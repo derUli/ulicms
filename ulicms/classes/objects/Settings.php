@@ -42,7 +42,7 @@ class Settings{
 		if ($config)
 			$retval = $config;
 		else
-			$config = getconfig ( $name );
+			$config = self::get ( $name );
 		return $config;
 	}
 	
