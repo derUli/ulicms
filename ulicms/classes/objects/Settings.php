@@ -1,7 +1,7 @@
 <?php
 class Settings{
 	public static function register($key, $value){
-	   init($key, $value);
+	   self::init($key, $value);
 	}
 
    public static function init($key, $value) {
