@@ -1,4 +1,6 @@
+<div class="myad">
 <?php random_banner();?>
+</div>
 </main>
 </div>
 <nav><?php menu("bottom");?></nav>
@@ -7,5 +9,6 @@
 			class="hide-on-mobile">| <?php poweredByUliCMS();?></span>
 	</p>
 </footer>
+<?php Template::footer();?>
 </body>
 </html>

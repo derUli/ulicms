@@ -18,5 +18,6 @@ homepage_owner ();
 ?>
 </footer>
 </div>
+<?php Template::footer();?>
 </body>
 </html>
