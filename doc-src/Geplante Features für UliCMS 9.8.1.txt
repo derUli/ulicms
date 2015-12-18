@@ -7,3 +7,5 @@
     [ ] Platzhalter code [anti spam] zum einfügen des Honeypot Felds
     [ ] Prüfung ob Honeypot-Feld !empty dann Fehlermeldung anzeigen (Sprachdatei nutze!)
 [ ] Neue Features dokumentieren (auch neues Standard-Design)
+[ ] Neue Paketquelle für UliCMS 9.8.1 erstellen
+    [ ] Die Themes darin so anpassen, dass diese Template::footer verwenden
