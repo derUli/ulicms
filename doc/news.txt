@@ -15,3 +15,4 @@
 + Es kann nun eine Willkommensbotschaft für das Loginformular festgelegt werden
 + API-Funktion initconfig() hinzugefügt
 + Neues Standard-Design "2016".
++ Settings Klasse hinzugefügt

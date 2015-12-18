@@ -1,7 +1,7 @@
-[ ] CKEditor aktualisieren auf neueste Version
+﻿[ ] CKEditor aktualisieren auf neueste Version
 
 Mehr OOP
-    [ ] Settings-Klasse mit statischen Funktionen (get, set, init und delete)
+    [X] Settings-Klasse mit statischen Funktionen (get, set, init und delete)
 
 [ ] Alle php, javascript, html und css files sollen per Backend bearbeitbar sein (Dateien des themes finden per get_files, default theme und mobile)
 [ ] Sprachdateien eines Themes sollen automatisch geladen werden
