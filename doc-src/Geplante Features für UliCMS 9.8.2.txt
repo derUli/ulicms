@@ -8,3 +8,5 @@ Mehr OOP
 [ ] footer() Funktion hinzufügen, ähnlich wie wp_footer() 
 [ ] Überall im Backend vallenato verwenden
 [ ] Einführung von Unit Testing
+[ ] Objektorientierte Datenbankklassen mit Interface.
+Erst mal nur für MySQL. Später auch für andere DBMS
