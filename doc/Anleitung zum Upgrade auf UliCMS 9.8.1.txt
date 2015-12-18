@@ -1,4 +1,4 @@
-﻿Anleitung zum Upgrade auf UliCMS 9.8
+﻿Anleitung zum Upgrade auf UliCMS 9.8.1
 
 =============================================
 
@@ -14,25 +14,21 @@
 
 1. Vorwort
 
-Dieses Dokument enthält eine Anleitung zum Upgrade auf UliCMS 9.8.
+Dieses Dokument enthält eine Anleitung zum Upgrade auf UliCMS 9.8.1.
 Außerdem enthält es wichtige Hinweise, die zu beachten sind.
 
 2. Voraussetzungen
 
-Ein Upgrade auf UliCMS 9.8 ist von UliCMS Version 9.0.0 oder Version 9.0.1 möglich.
+Ein Upgrade auf UliCMS 9.8.1 ist nur von UliCMS 9.8.0 aus möglich.
+Wenn Sie eine ältere Version von UliCMS benutzen, müssen Sie diese zuerst auf Version 9.8.0 aktualisieren.
 Sie benötigen einen Zugang zu dem Webserver per FTP (Filezilla) oder ähnliches.
 
 Es ist sinvoll, die Anzahl der gleichzeitigen Dateiübertragungen in den Einstellungen von Filezilla zu erhöhen, 
-damit der Upload der Dateien schneller geht
+damit der Upload der Dateien schneller geht.
 
 3. Breaking Changes
 
-Die Ordner "modules" und "templates" sind ab dieser Version von UliCMS im content Ordner, statt wie bisher direkt
-unter UliCMS_ROOT.
-Das Update Script versucht, die Ordner automatisch zu verschieben.
-Falls dies nicht klappen sollte, müssen Sie die Ordner manuell verschieben.
-Wenn Sie Pakete installieren möchten, die für ältere Versionen von UliCMS gedacht sind, 
-müssen Sie die Ordner nach der Installation des Pakets manuell verschieben.
+Gegenüber der Version 9.8.0 wurden keine Breaking Changes durchgeführt.
 
 4. Datensicherung
 
@@ -62,6 +58,4 @@ Sofern Fehler auftreten (z.B. weiße Seite) setzen Sie in der Konfigurationsdate
 $debug = true;
 um die Ausgabe von Fehlermeldungen zu aktivieren.
 
-Wenn der Fehler durch ein Modul verursacht wird, prüfen Sie, ob eine neue Version des Moduls verfügbar ist, und aktualisieren Sie dieses, in dem Sie die neue Version des betroffenen Moduls über die alte drüber installierten.
-
-Da sich die Pfade zu den Modulen und den Templates geändert haben, müssen eventuell müssen relative Pfade in einigen Dateien angepasst werden.
+Wenn der Fehler durch ein Modul verursacht wird, prüfen Sie, ob eine neue Version des Moduls verfügbar ist, und aktualisieren Sie dieses, in dem Sie die neue Version des betroffenen Moduls über die alte drüber installieren.
