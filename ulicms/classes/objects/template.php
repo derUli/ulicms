@@ -1,6 +1,5 @@
 <?php
 class Template{
-    
 	public static function executeModuleTemplate($module, $template){
 	    $retval = "";
 	    $originalTemplatePath = getModulePath($module) . "templates/" .
