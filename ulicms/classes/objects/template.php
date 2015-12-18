@@ -8,6 +8,7 @@ class Template{
 		$ownTemplatePath = getTemplateDirPath(get_theme()). $module."/" .
 		$template . ".php";
 		   ob_start();
+
 		if(file_exists($ownTemplatePath) and is_file($ownTemplatePath)){
 		   include $ownTemplatePath;
 		} else if(file_exists($originalTemplatePath) and is_file($originalTemplatePath)){
