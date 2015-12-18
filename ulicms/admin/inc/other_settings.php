@@ -4,7 +4,7 @@
 
 require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
 $ga = new PHPGangsta_GoogleAuthenticator();
-$ga_secret = getconfig("ga_secret");
+$ga_secret = Settings::get("ga_secret");
 $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation("ULICMS_LOGIN_AT")." ".get_domain(), $ga_secret);
 
 
@@ -103,38 +103,38 @@ if (! $acl->hasPermission ( "other" )) {
 		}
 	}
 
-	$cache_type = getconfig ( "cache_type" );
-	$cache_enabled = ! getconfig ( "cache_disabled" );
-	$cache_period = round ( getconfig ( "cache_period" ) / 60 );
-	$override_shortcuts = getconfig ( "override_shortcuts" );
-	$email_mode = getconfig ( "email_mode" );
+	$cache_type = Settings::get ( "cache_type" );
+	$cache_enabled = ! Settings::get ( "cache_disabled" );
+	$cache_period = round ( Settings::get ( "cache_period" ) / 60 );
+	$override_shortcuts = Settings::get ( "override_shortcuts" );
+	$email_mode = Settings::get ( "email_mode" );
 	$menus = getAllMenus ();
-	$force_password_change_every_x_days = intval ( getconfig ( "force_password_change_every_x_days" ) );
-	$max_failed_logins_items = getconfig("max_failed_logins_items");
+	$force_password_change_every_x_days = intval ( Settings::get ( "force_password_change_every_x_days" ) );
+	$max_failed_logins_items = Settings::get("max_failed_logins_items");
 
-	$hide_meta_generator = getconfig ( "hide_meta_generator" );
+	$hide_meta_generator = Settings::get ( "hide_meta_generator" );
 
-	$smtp_host = getconfig ( "smtp_host" );
+	$smtp_host = Settings::get ( "smtp_host" );
 	if (! $smtp_host)
 		$smtp_host = "127.0.0.1";
 
-	$smtp_port = getconfig ( "smtp_port" );
+	$smtp_port = Settings::get ( "smtp_port" );
 	if (! $smtp_port)
 		$smtp_port = "25";
 
-	$smtp_user = getconfig ( "smtp_user" );
+	$smtp_user = Settings::get ( "smtp_user" );
 	if (! $smtp_user)
 		$smtp_user = null;
 
-	$smtp_password = getconfig ( "smtp_password" );
+	$smtp_password = Settings::get ( "smtp_password" );
 	if (! $smtp_password)
 		$smtp_password = null;
 
-	$smtp_auth = getconfig ( "smtp_auth" );
-	$log_ip = getconfig ( "log_ip" );
-	$delete_ips_after_48_hours = getconfig("delete_ips_after_48_hours");
-	$no_auto_cron = getconfig ( "no_auto_cron" );
-	$twofactor_authentication = getconfig("twofactor_authentication");
+	$smtp_auth = Settings::get ( "smtp_auth" );
+	$log_ip = Settings::get ( "log_ip" );
+	$delete_ips_after_48_hours = Settings::get("delete_ips_after_48_hours");
+	$no_auto_cron = Settings::get ( "no_auto_cron" );
+	$twofactor_authentication = Settings::get("twofactor_authentication");
 
 	?>
 
@@ -346,7 +346,7 @@ if (! $acl->hasPermission ( "other" )) {
 			<p>
 				<textarea name="domain_to_language" rows="10" cols="40"><?php
 
-	echo real_htmlspecialchars ( getconfig ( "domain_to_language" ) );
+	echo real_htmlspecialchars ( Settings::get ( "domain_to_language" ) );
 	?></textarea>
 			</p>
 		</div>
@@ -708,7 +708,7 @@ if($('#email_mode').val() == "pear_mail"){
 	?>" />
 
 	<?php
-	if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
