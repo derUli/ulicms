@@ -1,4 +1,7 @@
 <?php 
 include_once "init.php";
-$files = get_files(ULICMS_ROOT."/content/modules");
-var_dump($files);
+var_dump(Settings::get("homepage_title"));
+var_dump(Settings::init("homepage_title", "bla bla"));
+var_dump(Settings::get("homepage_title"));
+var_dump(Settings::set("homepage_title", "Ulis löbliche Heimseite"));
+var_dump(Settings::get("homepage_title"));

@@ -35,7 +35,7 @@ class Settings{
 		}
 	}
 	
-	function getLang($name, $lang) {
+	public static function getLang($name, $lang) {
 		$retval = false;
 		$config = getconfig ( $name . "_" . $lang );
 		if ($config)
