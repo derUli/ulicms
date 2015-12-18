@@ -9,6 +9,7 @@ class Settings {
 			self::set ( $key, $value );
 			$retval = true;
 		}
+		$GLOBALS ['settings_cache'] [$key] = $value;
 		return $retval;
 	}
 	
