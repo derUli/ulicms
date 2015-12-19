@@ -60,15 +60,14 @@ db_query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "forms" ) . "` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
 
-
 // Users Tabelle
-db_query( "ALTER TABLE ".tbname("users"). " ADD COLUMN `locked` tinyint(1) NOT NULL DEFAULT '0'" );
+db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `locked` tinyint(1) NOT NULL DEFAULT '0'" );
 
 // Last Login Time
-db_query( "ALTER TABLE " . tbname("users"). " ADD COLUMN `last_login` bigint(20) DEFAULT NULL");
+db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `last_login` bigint(20) DEFAULT NULL" );
 
 // Failed login attempts Counter
-db_query( "ALTER TABLE " . tbname("users"). " ADD COLUMN `failed_logins` int(11) DEFAULT '0'");
+db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `failed_logins` int(11) DEFAULT '0'" );
 
 // comments Ordner weggelöschen, sofern er noch existiert, da dieser nicht mehr benötigt wird.
 $comments_dir = ULICMS_ROOT . "/comments";
@@ -90,4 +89,4 @@ $pkg = new PackageManager ();
 $pkg->truncateInstalledPatches ();
 
 // @unlink ("update.php");
-	ulicms_redirect ( "admin/" );
+ulicms_redirect ( "admin/" );

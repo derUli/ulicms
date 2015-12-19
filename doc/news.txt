@@ -17,4 +17,5 @@
 + Neues Standard-Design "2016".
 + Settings Klasse hinzugefügt
 + Template Klasse hinzugefügt
++ Encryption Klasse hinzugefügt
 + unique_identifier_filter hinzugefügt
