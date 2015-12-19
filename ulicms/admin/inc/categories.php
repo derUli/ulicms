@@ -1,45 +1,45 @@
 <?php
 $acl = new ACL ();
-if (! is_admin () and ! $acl -> hasPermission ("categories")){
-     noperms ();
-    }else{
-
-     // Create
-    if (isset ($_REQUEST ["create"])){
-         if (! empty ($_REQUEST ["name"])){
-             categories :: addCategory ($_REQUEST ["name"], $_REQUEST ["description"]);
-             }
-         }
-
-     // Create
-    if (isset ($_REQUEST ["update"])){
-         if (! empty ($_REQUEST ["name"]) and ! empty ($_REQUEST ["id"])){
-             categories :: updateCategory (intval ($_REQUEST ["id"]), $_REQUEST ["name"], $_REQUEST ["description"]);
-             }
-         }
-
-     // Delete
-    if (isset ($_GET ["del"]) && get_request_method() == "POST"){
-         $del = intval ($_GET ["del"]);
-         if ($del != 1)
-             categories :: deleteCategory ($del);
-         }
-
-     include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
-     if (isset ($_GET ["order"]) and in_array ($_GET ["order"], array (
-                    "id",
-                     "name",
-                     "description",
-                     "created",
-                     "updated"
-                    )))
-         $order = db_escape ($_GET ["order"]);
-     else
-         $order = "id";
-
-     $categories = categories :: getAllCategories ($order);
-
-     ?>
+if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
+	noperms ();
+} else {
+	
+	// Create
+	if (isset ( $_REQUEST ["create"] )) {
+		if (! empty ( $_REQUEST ["name"] )) {
+			categories::addCategory ( $_REQUEST ["name"], $_REQUEST ["description"] );
+		}
+	}
+	
+	// Create
+	if (isset ( $_REQUEST ["update"] )) {
+		if (! empty ( $_REQUEST ["name"] ) and ! empty ( $_REQUEST ["id"] )) {
+			categories::updateCategory ( intval ( $_REQUEST ["id"] ), $_REQUEST ["name"], $_REQUEST ["description"] );
+		}
+	}
+	
+	// Delete
+	if (isset ( $_GET ["del"] ) && get_request_method () == "POST") {
+		$del = intval ( $_GET ["del"] );
+		if ($del != 1)
+			categories::deleteCategory ( $del );
+	}
+	
+	include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
+	if (isset ( $_GET ["order"] ) and in_array ( $_GET ["order"], array (
+			"id",
+			"name",
+			"description",
+			"created",
+			"updated" 
+	) ))
+		$order = db_escape ( $_GET ["order"] );
+	else
+		$order = "id";
+	
+	$categories = categories::getAllCategories ( $order );
+	
+	?>
 
 			<?php
 	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] )) {
@@ -92,7 +92,7 @@ if (! is_admin () and ! $acl -> hasPermission ("categories")){
 			<td></td>
 			<td></td>
 		</tr>
-	
+
 	</thead>
 	<tbody>
 	<?php
@@ -130,20 +130,23 @@ if (! is_admin () and ! $acl -> hasPermission ("categories")){
 			if ($category ["id"] != 1) {
 				?>
 
-			<td style="text-align: center;"><form action="?action=categories&del=<?php
-
-                 echo $category ["id"];
-                 ?>" method="post"
-				onsubmit="return confirm('Wirklich Löschen?')" class="delete-form"><?php csrf_token_html();?><input type="image"
-					class="mobile-big-image" src="gfx/delete.gif"
-					alt="<?php
-
-                 echo TRANSLATION_DELETE;
-                 ?>"
-					title="<?php
-
-                 echo TRANSLATION_DELETE;
-                 ?>"> </form></td>
+			<td style="text-align: center;"><form
+					action="?action=categories&del=<?php
+				
+				echo $category ["id"];
+				?>"
+					method="post" onsubmit="return confirm('Wirklich Löschen?')"
+					class="delete-form"><?php csrf_token_html();?><input type="image"
+						class="mobile-big-image" src="gfx/delete.gif"
+						alt="<?php
+				
+				echo TRANSLATION_DELETE;
+				?>"
+						title="<?php
+				
+				echo TRANSLATION_DELETE;
+				?>">
+				</form></td>
 
 				<?php
 			} else {
