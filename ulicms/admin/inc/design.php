@@ -182,7 +182,7 @@ div#google-fonts {
 		
 		echo $th;
 		?>
-					</option>";
+					</option>
 					<?php
 	}
 	?>
