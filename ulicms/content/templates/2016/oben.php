@@ -54,10 +54,9 @@ if (getconfig ( "logo_disabled" ) == "no") {
 } else {
 	?><strong><?php
 	
-homepage_title ();
+	homepage_title ();
 	?></strong>
 <?php
-
 }
 ?>
 </a>

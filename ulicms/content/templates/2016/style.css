@@ -129,8 +129,8 @@ footer {
 }
 
 main h1, main h2, main h3, main h4, main h5, main h6 {
-	font-family: IPalatino, ‘Palatino Linotype’, ‘Hoefler Text’, Times,
-		‘Times New Roman’, serif
+	font-family: IPalatino, ï¿½Palatino Linotypeï¿½, ï¿½Hoefler Textï¿½, Times,
+		ï¿½Times New Romanï¿½, serif
 }
 
 p {
@@ -219,7 +219,7 @@ blockquote p {
 img.header-image {
 	width: 100%
 }
-/* Würgaround für Internet Explodierer */
+/* Wï¿½rgaround fï¿½r Internet Explodierer */
 main {
 	display: block
 }

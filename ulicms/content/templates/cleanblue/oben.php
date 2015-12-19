@@ -19,17 +19,16 @@ if (getconfig ( "logo_disabled" ) == "no") {
 } else {
 	?><strong><?php
 	
-homepage_title ();
+	homepage_title ();
 	?></strong>
 <?php
-
 }
 ?>
 </a>
 			</section>
 			<nav><?php
 			
-menu ( "top" );
+			menu ( "top" );
 			?></nav>
 		</header>
 		<main>
@@ -39,8 +38,8 @@ if (! containsModule ()) {
 	?>
 <h1><?php
 	
-headline ();
+	headline ();
 	?></h1>
 <?php
-     }
+}
 ?>
