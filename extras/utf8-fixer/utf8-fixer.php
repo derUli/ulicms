@@ -5,7 +5,7 @@ include "Encoding.php";
 <!doctype HTML>
 <html>
 <head>
-<title>UTF-8 Fixer</title
+<title>UTF-8 Fixer</title>
 
 </head>
 <body>

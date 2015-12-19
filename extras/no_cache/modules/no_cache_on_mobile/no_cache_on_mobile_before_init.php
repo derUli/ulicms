@@ -1,4 +1,4 @@
 <?php
-if(is_mobile()){
-   no_cache();
+if (is_mobile ()) {
+	no_cache ();
 }
