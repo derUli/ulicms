@@ -1078,6 +1078,9 @@ function buildCacheFilePath($request_uri) {
 		$language = getconfig ( "default_language" );
 	}
 	$unique_identifier = $request_uri . $language . strbool ( is_mobile () );
+	if (function_exists ( "apply_filter" )) {
+		$unique_identifier = apply_filter ( $unique_identifier, "unique_identifier" );
+	}
 	return "content/cache/" . md5 ( $unique_identifier ) . ".tmp";
 }
 function get_translation($name, $placeholders = array()) {
