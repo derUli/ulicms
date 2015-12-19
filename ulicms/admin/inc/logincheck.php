@@ -14,14 +14,14 @@ if (isset ( $_POST ["login"] )) {
 	}
 	
 	$confirmation_code = null;
-    $twofactor_authentication = getconfig("twofactor_authentication");
-
-	if($twofactor_authentication){
-	// @TODO: Confirmation Code nur Prüfen, wenn 2-Faktor Authentifizerung aktiviert ist
-       $confirmation_code = $_POST["confirmation_code"];
+	$twofactor_authentication = getconfig ( "twofactor_authentication" );
+	
+	if ($twofactor_authentication) {
+		// @TODO: Confirmation Code nur Prüfen, wenn 2-Faktor Authentifizerung aktiviert ist
+		$confirmation_code = $_POST ["confirmation_code"];
 	}
 	
-	$sessionData = validate_login ( $_POST ["user"], $_POST ["password"], $confirmation_code);
+	$sessionData = validate_login ( $_POST ["user"], $_POST ["password"], $confirmation_code );
 	if ($sessionData) {
 		add_hook ( "login_ok" );
 		register_session ( $sessionData, true );

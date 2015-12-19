@@ -163,7 +163,7 @@ if (defined ( "_SECURITY" )) {
 		</tr>
 		<?php
 		
-if ($acl->hasPermission ( "open_graph" )) {
+		if ($acl->hasPermission ( "open_graph" )) {
 			?>
               <tr>
 			<td><strong><?php translate("open_graph");?>

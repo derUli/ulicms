@@ -17,8 +17,7 @@ if (defined ( "_SECURITY" )) {
 		value="<?php
 			
 			echo $row->id;
-			?>"> <input type="hidden" name="edit_key" value="edit_key">
-	<strong><?php
+			?>"> <input type="hidden" name="edit_key" value="edit_key"> <strong><?php
 			
 			echo TRANSLATION_OPTION;
 			?></strong><br /> <input type="text" name="name"

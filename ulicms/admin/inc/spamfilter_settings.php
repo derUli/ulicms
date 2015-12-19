@@ -63,8 +63,8 @@ function spamFilterEnabledcheckboxChanged(checked){
 			value="<?php
 	
 	echo htmlspecialchars ( getconfig ( "country_blacklist" ) );
-	?>"> <br /> <br /> <input type="checkbox"
-			name="disallow_chinese_chars" id="disallow_chinese_chars"
+	?>"> <br /> <br /> <input type="checkbox" name="disallow_chinese_chars"
+			id="disallow_chinese_chars"
 			<?php
 	if (getconfig ( "disallow_chinese_chars" ))
 		echo " checked=\"checked\"";

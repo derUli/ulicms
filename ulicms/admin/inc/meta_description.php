@@ -64,8 +64,7 @@ if (defined ( "_SECURITY" )) {
 			
 			echo $lang;
 			?></td>
-			<td><input
-				name="meta_description_<?php
+			<td><input name="meta_description_<?php
 			
 			echo $lang;
 			?>"
@@ -77,6 +76,9 @@ if (defined ( "_SECURITY" )) {
 			<?php
 		}
 		?>
+		
+		
+		
 		
 		
 		
