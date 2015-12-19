@@ -37,9 +37,10 @@ $cfg_url = "http://www.ulicms.de/chs/api.php";
 
 $urlfrom = $_SERVER ['HTTP_HOST'];
 
-if (! is_file ( "init.php" ) and ! is_dir ( "lib" )) {
+if (! is_file ( "init.php" ) and ! is_dir ( "lib" )){
 	exit ();
 }
+	
 
 $folderfrom = str_replace ( "\\", "/", dirname ( $_SERVER ['SCRIPT_NAME'] ) );
 
