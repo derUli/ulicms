@@ -114,7 +114,7 @@ if (! $acl->hasPermission ( "design" )) {
 	?>
 	<?php
 	
-if ($default_font != "google") {
+	if ($default_font != "google") {
 		?>
 
 <style type="text/css">
@@ -223,7 +223,7 @@ div#google-fonts {
 		
 		echo $th;
 		?>
-					</option>";
+					</option>
 					<?php
 	}
 	?>
@@ -295,7 +295,7 @@ div#google-fonts {
 					<select name="google-font" size=1>
 			<?php
 	
-foreach ( $google_fonts as $myfont ) {
+	foreach ( $google_fonts as $myfont ) {
 		if ($myfont == $google_font) {
 			echo '<option value="' . htmlspecialchars ( $myfont ) . '" selected>' . htmlspecialchars ( $myfont ) . "</option>";
 		} else {

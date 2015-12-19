@@ -9,7 +9,7 @@ if (! defined ( "ULICMS_ROOT" )) {
 }
 
 // Initialize Settings Cache
-$GLOBALS['settings_cache'] = array();
+$GLOBALS ['settings_cache'] = array ();
 
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if (ini_get ( 'register_globals' ) === '1') {
@@ -141,10 +141,8 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPE
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "mailer.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "file_get_contents_wrapper.php";
 require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "api.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . 
-DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR ."settings.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . 
-DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR ."template.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "settings.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "template.php";
 
 require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib/minify.php";
 
@@ -231,14 +229,14 @@ if (! defined ( "SKIP_TABLE_CHECK" )) {
 			tbname ( "log" ),
 			tbname ( "mails" ),
 			tbname ( "history" ),
-			tbname ( "settings" ) ,
-			tbname ( "forms" )
+			tbname ( "settings" ),
+			tbname ( "forms" ) 
 	);
 	
 	for($i = 0; $i < count ( $required_tables ); $i ++) {
 		$table = $required_tables [$i];
 		if (! in_array ( $table, $existing_tables )) {
-			if (! headers_sent ()){
+			if (! headers_sent ()) {
 				header ( "Content-Type: text/html; charset=UTF-8" );
 			}
 			
@@ -290,12 +288,12 @@ if (! getconfig ( "allowed_html" )) {
 }
 
 // generate Secret for Google Authenticator if not already done
-$ga_secret = getconfig("ga_secret");
-if(!$ga_secret){
-   require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
-   $ga = new PHPGangsta_GoogleAuthenticator();
-   $ga_secret = $ga->createSecret();
-   setconfig("ga_secret", db_escape($ga_secret));
+$ga_secret = getconfig ( "ga_secret" );
+if (! $ga_secret) {
+	require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
+	$ga = new PHPGangsta_GoogleAuthenticator ();
+	$ga_secret = $ga->createSecret ();
+	setconfig ( "ga_secret", db_escape ( $ga_secret ) );
 }
 
 // Falls nicht gesetzt, robots auf Standardwert setzen
@@ -351,7 +349,7 @@ if (! is_ssl () and $enforce_https !== false) {
 
 if (! getconfig ( "disable_hsts" ) and is_ssl ()) {
 	$maxage = getconfig ( "hsts_maxage" );
-	if ($maxage === false){
+	if ($maxage === false) {
 		$maxage = 10 * 30;
 	}
 	
@@ -377,8 +375,8 @@ add_hook ( "after_init" );
 
 $version = new ulicms_version ();
 
-if(!defined("UPDATE_CHECK_URL")){
-  define ( "UPDATE_CHECK_URL", "http://update.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&update=" . urlencode ( $version->getUpdate () ) );
+if (! defined ( "UPDATE_CHECK_URL" )) {
+	define ( "UPDATE_CHECK_URL", "http://update.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&update=" . urlencode ( $version->getUpdate () ) );
 }
 
 if (in_array ( tbname ( "installed_patches" ), $existing_tables )) {
@@ -389,8 +387,8 @@ if (in_array ( tbname ( "installed_patches" ), $existing_tables )) {
 	$installed_patches = "";
 }
 
-if(!defined("PATCH_CHECK_URL")){
-  define ( "PATCH_CHECK_URL", "http://patches.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&installed_patches=" . urlencode ( $installed_patches ) );
+if (! defined ( "PATCH_CHECK_URL" )) {
+	define ( "PATCH_CHECK_URL", "http://patches.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&installed_patches=" . urlencode ( $installed_patches ) );
 }
 
 if (! getconfig ( "session_name" )) {
