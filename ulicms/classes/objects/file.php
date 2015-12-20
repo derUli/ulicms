@@ -15,6 +15,7 @@ class File{
    public static function delete($file){
      return unlink($file);
    }
+
    public static function rename($old, $new){
      return rename($old, $new);
    }
