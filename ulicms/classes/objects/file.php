@@ -11,4 +11,8 @@ class File{
    public static function read($file){
       return file_get_contents($file);
    }
+
+   public static function delete($file){
+     return unlink($file);
+   }
 }
