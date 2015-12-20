@@ -1,6 +1,6 @@
 <?php 
 class File{
-   public static function save($file, $data){
+   public static function write($file, $data){
       return file_put_contents($file, $data);
    }
    
