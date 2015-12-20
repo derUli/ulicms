@@ -22,5 +22,9 @@ class Template {
 		return $retval;
 	}
 	
+	public static function escape($value){
+			echo htmlspecialchars ( $value, ENT_QUOTES, "UTF-8" );
+	}
+	
 	// @TODO Restliche Funktionen aus templating.php implementieren
 }
