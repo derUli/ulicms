@@ -1,21 +1,2 @@
-===== Neues in UliCMS 9.8.1 =====
-+ Option "Design für Mobilgeräte nicht auf Tablets verwenden" hinzugefügt
-+ CKEditor auf Version 4.5.5 aktualisiert
-+ Parameter $order zu den Funktionen menu() und get_menu() hinzugefügt
-+ Die Paketverwaltung überprüft nun die Paketquelle auf Aktualisierungen.
-  Die Farbe der Versionsnummer wird dementsprechend angezeigt:
-
-    grün = Paket aktuell, neueste Version des Pakets ist installiert
-    rot = Paket ist veraltet, neuere Version des Paketes ist verfügbar
-    schwarz = Überprüfung kann nicht durchgeführt werden
-
-  Die Installation von verfügaren Aktualisierungen muss jedoch manuell durchgeführt werden,
-  da nur geprüft wird.
-+ API-Funktion get_files() hinzugefügt
-+ Es kann nun eine Willkommensbotschaft für das Loginformular festgelegt werden
-+ API-Funktion initconfig() hinzugefügt
-+ Neues Standard-Design "2016".
-+ Settings Klasse hinzugefügt
-+ Template Klasse hinzugefügt
-+ Encryption Klasse hinzugefügt
-+ unique_identifier_filter hinzugefügt
+===== Neues in UliCMS 9.8.2 =====
++ Klasse "File" hinzugefügt
