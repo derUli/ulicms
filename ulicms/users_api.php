@@ -21,7 +21,7 @@ function getUsersOnline() {
 }
 function changePassword($password, $id) {
 	include_once ULICMS_ROOT . "/lib/encryption.php";
-	$newPassword = hash_password ( $password );
+	$newPassword = Encryption::hashPassword ( $password );
 	return db_query ( "UPDATE " . tbname ( "users" ) . " SET `password` = '$newPassword',  `old_encryption` = 0, `password_changed` = NOW() WHERE id = $id" );
 }
 function resetPassword($username, $length = 8) {
@@ -82,7 +82,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	add_hook ( "before_create_user" );
 	
 	db_query ( "INSERT INTO " . tbname ( "users" ) . "
-(username,lastname, firstname, email, password, `group`, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( hash_password ( $password ) ) . "',$group, " . $acl_group . ", $require_password_change, NOW(), $admin, $locked)" ) or die ( db_error () );
+(username,lastname, firstname, email, password, `group`, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( Encryption::hashPassword ( $password ) ) . "',$group, " . $acl_group . ", $require_password_change, NOW(), $admin, $locked)" ) or die ( db_error () );
 	$message = "Hallo $firstname,\n\n" . "Ein Administrator hat auf http://" . $_SERVER ["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" . "Die Zugangsdaten lauten:\n\n" . "Benutzername: $username\n" . "Passwort: $password\n";
 	$header = "From: " . getconfig ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
 	
@@ -121,7 +121,7 @@ function register_session($user, $redirect = true) {
 	
 	$_SESSION ["session_begin"] = time ();
 	
-	db_query("UPDATE ".tbname("users") . " SET `last_login` = ".time() . " where id = " . $user["id"]);
+	db_query ( "UPDATE " . tbname ( "users" ) . " SET `last_login` = " . time () . " where id = " . $user ["id"] );
 	if ($user ["notify_on_login"]) {
 		$subject = "Login auf \"" . getconfig ( "homepage_title" ) . "\" als " . $user ["username"];
 		$text = "Von der IP " . $_SERVER ["REMOTE_ADDR"] . " hat sich jemand um " . date ( "r" ) . " erfolgreich in das Benutzerkonto " . $user ["username"] . " auf dem Server " . $_SERVER ["HTTP_HOST"] . " eingeloggt.";
@@ -132,7 +132,7 @@ function register_session($user, $redirect = true) {
 	if (! $redirect)
 		return;
 	
-	if (isset ( $_REQUEST ["go"] )){
+	if (isset ( $_REQUEST ["go"] )) {
 		header ( "Location: " . $_REQUEST ["go"] );
 	} else {
 		header ( "Location: index.php" );
@@ -142,44 +142,41 @@ function register_session($user, $redirect = true) {
 }
 function validate_login($user, $password, $token = null) {
 	include_once ULICMS_ROOT . "/lib/encryption.php";
-    require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
+	require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
 	$user = getUserByName ( $user );
 	
 	if ($user) {
-		if ($user ["old_encryption"]){
+		if ($user ["old_encryption"]) {
 			$password = md5 ( $password );
+		} else {
+			$password = Encryption::hashPassword ( $password );
 		}
-		else {
-			$password = hash_password ( $password );
-		}
-		$twofactor_authentication = getconfig("twofactor_authentication");
+		$twofactor_authentication = getconfig ( "twofactor_authentication" );
 		if ($user ["password"] == $password) {
-		    if($twofactor_authentication and !is_null($token)){
-			     $ga = new PHPGangsta_GoogleAuthenticator();
-				 $ga_secret = getconfig("ga_secret");
-				 $code = $ga->getCode($ga_secret);
-				 if($code != $token){
-				    $_REQUEST ["error"] = get_translation("confirmation_code_wrong");
-				    return false;
-				 }
-
+			if ($twofactor_authentication and ! is_null ( $token )) {
+				$ga = new PHPGangsta_GoogleAuthenticator ();
+				$ga_secret = getconfig ( "ga_secret" );
+				$code = $ga->getCode ( $ga_secret );
+				if ($code != $token) {
+					$_REQUEST ["error"] = get_translation ( "confirmation_code_wrong" );
+					return false;
+				}
 			}
 			
-			if($user["locked"]){
+			if ($user ["locked"]) {
 				$_REQUEST ["error"] = TRANSLATION_YOUR_ACCOUNT_IS_LOCKED;
 				return false;
 			}
 			
-		    db_query("update ".tbname("users"). " set `failed_logins` = 0 where id = ".intval($user["id"]));
+			db_query ( "update " . tbname ( "users" ) . " set `failed_logins` = 0 where id = " . intval ( $user ["id"] ) );
 			return $user;
 		} else {
-		   // Limit Login Attampts
-		      $max_failed_logins_items = intval(getconfig("max_failed_logins_items"));
-			  if($max_failed_logins_items  >= 1){
-		         db_query("update ".tbname("users"). " set `failed_logins` = `failed_logins` + 1 where id = ".intval($user["id"]));
-			     db_query("update ".tbname("users"). " set `locked` = 1, `failed_logins` = 0 where `failed_logins` >= $max_failed_logins_items");
-			  }
-			  
+			// Limit Login Attampts
+			$max_failed_logins_items = intval ( getconfig ( "max_failed_logins_items" ) );
+			if ($max_failed_logins_items >= 1) {
+				db_query ( "update " . tbname ( "users" ) . " set `failed_logins` = `failed_logins` + 1 where id = " . intval ( $user ["id"] ) );
+				db_query ( "update " . tbname ( "users" ) . " set `locked` = 1, `failed_logins` = 0 where `failed_logins` >= $max_failed_logins_items" );
+			}
 		}
 	}
 	$_REQUEST ["error"] = TRANSLATION_USER_OR_PASSWORD_INCORRECT;
