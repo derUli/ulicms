@@ -740,6 +740,5 @@ $("#other_settings").ajaxForm({beforeSubmit: function(e){
 
 </script>
 <?php
-
 }
 ?>

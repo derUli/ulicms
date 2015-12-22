@@ -63,8 +63,7 @@ if (defined ( "_SECURITY" )) {
 			
 			echo $lang;
 			?></td>
-			<td><input
-				name="motto_<?php
+			<td><input name="motto_<?php
 			
 			echo $lang;
 			?>"
@@ -84,12 +83,15 @@ if (defined ( "_SECURITY" )) {
 		
 		
 		
+		
+		
+		
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
 				value="Einstellungen Speichern"></td>
-				</tr>
-	
+		</tr>
+
 	</table>
 </form>
 
@@ -112,6 +114,5 @@ $("#motto_settings").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-    
-    }
+}
 ?>
