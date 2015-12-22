@@ -146,7 +146,6 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "encryption.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "file.php";
 
-
 require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib/minify.php";
 
 // define Constants
