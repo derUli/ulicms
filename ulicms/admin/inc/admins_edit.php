@@ -19,7 +19,7 @@ if (defined ( "_SECURITY" )) {
 			?>
 	<img src="<?php
 			
-echo get_gravatar ( $row->email, 200 );
+			echo get_gravatar ( $row->email, 200 );
 			?>"
 		alt="Avatar Image" /> <br /> <br /> <input type="hidden"
 		name="edit_admin" value="edit_admin"> <input type="hidden" name="id"
@@ -62,21 +62,19 @@ echo get_gravatar ( $row->email, 200 );
 		value="<?php
 			
 			echo $row->email;
-			?>"><br /> <br /> 
-			<strong><?php translate("last_login");?></strong><br/>
-			<?php 
-			if(is_null($row->last_login)){
-			    translate("never");
+			?>"><br /> <br /> <strong><?php translate("last_login");?></strong><br />
+			<?php
+			if (is_null ( $row->last_login )) {
+				translate ( "never" );
 			} else {
-			    echo strftime("%x %X", $row -> last_login);
+				echo strftime ( "%x %X", $row->last_login );
 			}
 			
-			?><br /> <br /> 
-			<strong><?php
+			?><br /> <br /> <strong><?php
 			
 			echo TRANSLATION_NEW_PASSWORD;
-			?></strong><br /> <input type="text" name="admin_password"
-		value=""> <br />
+			?></strong><br /> <input type="text" name="admin_password" value="">
+	<br />
 	<?php
 			$acl = new ACL ();
 			if ($acl->hasPermission ( "users" )) {
@@ -100,8 +98,7 @@ echo get_gravatar ( $row->email, 200 );
 				
 				foreach ( $allGroups as $key => $value ) {
 					?>
-		<option
-			value="<?php
+		<option value="<?php
 					
 					echo $key;
 					?>"
@@ -185,7 +182,7 @@ echo get_gravatar ( $row->email, 200 );
 	<br /> <br /> <input type="checkbox" value="1" name="admin" id="admin"
 		<?php
 				
-if ($row->admin)
+				if ($row->admin)
 					echo "checked";
 				?>> <label for="admin"><?php
 				
@@ -197,31 +194,30 @@ if ($row->admin)
 				echo nl2br ( get_translation ( "HELP_IS_ADMIN" ) );
 				?>
 	</div>
-	
-	<br /> 
-	<br /> <input type="checkbox" value="1"
-		name="locked" id="locked" <?php
+
+	<br /> <br /> <input type="checkbox" value="1" name="locked"
+		id="locked"
+		<?php
 				
-if ($row->locked)
+				if ($row->locked)
 					echo "checked";
 				?>> <label for="locked"><?php
-			
-			translate ( "locked" );
-			?> </label>
+				
+				translate ( "locked" );
+				?> </label>
 			
 	<?php
 			} else {
 				echo '<input type="hidden" name="admin" value="' . $row->admin . '">';
-				if($row->locked){
-				   echo '<input type="hidden" name="locked" value="' . $row->locked . '">';
+				if ($row->locked) {
+					echo '<input type="hidden" name="locked" value="' . $row->locked . '">';
 				}
 			}
 			?>
 	<br /> <br /> <strong><?php
 			
 			echo TRANSLATION_ABOUT_ME;
-			?></strong><br /> <textarea rows=10 cols=50
-		name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
+			?></strong><br /> <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
 
 
 
@@ -252,4 +248,4 @@ if ($row->locked)
 
 	<?php
 }
-        ?>
+?>

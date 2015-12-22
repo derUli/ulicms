@@ -79,34 +79,36 @@ if (defined ( "_SECURITY" )) {
 				$group = $group ["name"];
 				?>
 		<?php
+				
+				echo '<tr id="dataset-' . $row->id . '">';
+				echo "<td style=\"width:40px;\">" . $row->id . "</td>";
+				echo "<td>";
+				echo '<img src="' . get_gravatar ( $row->email, 26 ) . '" alt="Avatar von ' . real_htmlspecialchars ( $row->username ) . '"> ';
+				echo real_htmlspecialchars ( $row->username ) . "</td>";
+				echo "<td>" . real_htmlspecialchars ( $row->lastname ) . "</td>";
+				echo "<td>" . real_htmlspecialchars ( $row->firstname ) . "</td>";
+				echo "<td>" . real_htmlspecialchars ( $row->email ) . "</td>";
+				echo "<td>" . real_htmlspecialchars ( $group ) . "</td>";
+				echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+				
+				if ($row->id == $_SESSION ["login_id"]) {
+					echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . TRANSLATION_CANT_DELETE_ADMIN . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . TRANSLATION_DELETE . "\" title=\"" . TRANSLATION_EDIT . "\"></a></td>";
+				} else {
+					/*
+					 * echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_delete&admin=' . $row -> id . '" onclick="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');"><img class="mobile-big-image" src="gfx/delete.gif"></a></td>';
+					 */
+					echo "<td style='text-align:center;'>" . '<form action="index.php?action=admin_delete&admin=' . $row->id . '" method="post" onsubmit="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
+				}
+				
+				echo '</tr>';
+			}
+		}
+		?>
 
-                 echo '<tr id="dataset-'.$row->id.'">';
-                 echo "<td style=\"width:40px;\">" . $row -> id . "</td>";
-                 echo "<td>";
-                 echo '<img src="' . get_gravatar($row -> email, 26) . '" alt="Avatar von ' . real_htmlspecialchars ($row -> username) . '"> ';
-                 echo real_htmlspecialchars ($row -> username) . "</td>";
-                 echo "<td>" . real_htmlspecialchars ($row -> lastname) . "</td>";
-                 echo "<td>" . real_htmlspecialchars ($row -> firstname) . "</td>";
-                 echo "<td>" . real_htmlspecialchars ($row -> email) . "</td>";
-                 echo "<td>" . real_htmlspecialchars ($group) . "</td>";
-                 echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row -> id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
 
-                 if ($row -> id == $_SESSION ["login_id"]){
-                     echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . TRANSLATION_CANT_DELETE_ADMIN . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . TRANSLATION_DELETE . "\" title=\"" . TRANSLATION_EDIT . "\"></a></td>";
-                     }else{
-                       /*
-                     echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_delete&admin=' . $row -> id . '" onclick="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');"><img class="mobile-big-image" src="gfx/delete.gif"></a></td>';
-                     */
-                     echo "<td style='text-align:center;'>" . '<form action="index.php?action=admin_delete&admin=' . $row -> id . '" method="post" onsubmit="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');" class="delete-form">'.get_csrf_token_html().'<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
-
-                     }
-
-                 echo '</tr>';
-                 }
-             }
-         ?>
-
-
+	
+	
+	
 	</tbody>
 </table>
 <script type="text/javascript">

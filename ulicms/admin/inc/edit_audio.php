@@ -66,8 +66,7 @@ if ($acl->hasPermission ( "audio" )) {
 		echo $result->id;
 		?>]"
 		onclick="this.focus();this.select();" readonly> <br /> <br /> <input
-		type="submit"
-		value="<?php
+		type="submit" value="<?php
 		
 		translate ( "SAVE_CHANGES" );
 		?>">
