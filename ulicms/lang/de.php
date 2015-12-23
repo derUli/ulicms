@@ -475,7 +475,7 @@ define ( "TRANSLATION_RESET_PASSWORD_MAIL_BODY", "Hallo %username%!
 Ein Benutzer unter der Domain %host% hat von der IP-Adresse %ip% aus eine Anfrage nach einem neuen Passwort gesendet.
 
 Ihr neues Passwort ist:
-%password%.
+%password%
 
 Bitte ändern Sie das umgehend!" );
 define ( "TRANSLATION_RESET_PASSWORD_SUBJECT", "Passwort zurücksetzen" );

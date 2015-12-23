@@ -484,7 +484,7 @@ define ( "TRANSLATION_RESET_PASSWORD_MAIL_BODY", "Hello %username%!
 An user from the IP address %ip% requested a password reset on %host%.
 
 Your new password is:
-%password%.
+%password%
 
 Please change this immediately!" );
 define ( "TRANSLATION_RESET_PASSWORD_SUBJECT", "Reset Password" );
