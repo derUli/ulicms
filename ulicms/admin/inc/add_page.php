@@ -196,7 +196,7 @@ document.newpageform.system_title.value=systemname
 		?>
 		</strong><br /> <input type="text" name="redirection" value="">
 		</div>
-		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("theme");?></h2>
+		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
 
 		<div class="accordion-content">
 			<strong><?php

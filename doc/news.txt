@@ -3,3 +3,4 @@
 + Funktion Template::escape($value) hinzugefügt
 + Funktion Template::getEscape($value) hinzugefügt
 + Skript shell/sinstall.php hinzugefügt
++ Seite hinzufügen & Seite bearbeiten nun übersichtlicher Dank Tabs

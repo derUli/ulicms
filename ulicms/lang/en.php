@@ -602,4 +602,9 @@ define ( "TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Lock user accounts after X faile
 // No mobile design on tablets
 define ( "TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Don't use design for mobile devices on tablets" );
 
+
+define ( "TRANSLATION_TITLE_AND_HEADLINE", "Title and Headline" );
+define ( "TRANSLATION_MENU_ENTRY", "Menu Entry" );
+define ( "TRANSLATION_VISIBILITY", "Visibility" );
+
 add_hook ( "lang_en" );
