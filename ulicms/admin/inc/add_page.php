@@ -14,26 +14,38 @@ if (defined ( "_SECURITY" )) {
 		
 		csrf_token_html ();
 		?>
-	<strong><?php
+		
+<div id="accordion-container">
+
+		<h2 class="accordion-header"><?php translate("title_and_headline");?></h2>
+
+		<div class="accordion-content">
+			<strong><?php
 		
 		echo TRANSLATION_PERMALINK;
 		?>
 	</strong><br /> <input type="text" name="system_title" required="true"
-		value=""> <br /> <br /> <strong><?php
+				value=""> <br /> <br /> <strong><?php
 		
 		echo TRANSLATION_PAGE_TITLE;
 		?>
 	</strong><br /> <input type="text" required="true" name="page_title"
-		value="" onkeyup="systemname_vorschlagen(this.value)"> <br /> <br /> <strong><?php
+				value="" onkeyup="systemname_vorschlagen(this.value)"> <br /> <br />
+			<strong><?php
 		
 		echo TRANSLATION_ALTERNATE_TITLE;
 		?>
 	</strong><br /> <input type="text" name="alternate_title" value=""><br />
-	<small><?php
+			<small><?php
 		
 		echo TRANSLATION_ALTERNATE_TITLE_INFO;
 		?>
-	</small> <br /> <br /> <strong><?php
+	</small>
+		</div>
+		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
+
+		<div class="accordion-content">
+			<strong><?php
 		
 		echo TRANSLATION_LANGUAGE;
 		?>
@@ -67,8 +79,8 @@ if (defined ( "_SECURITY" )) {
 		echo TRANSLATION_MENU;
 		?>
 	</strong> <span style="cursor: help;"
-		onclick="$('div#menu_help').slideToggle()">[?]</span><br /> <select
-		name="menu" size=1>
+				onclick="$('div#menu_help').slideToggle()">[?]</span><br /> <select
+				name="menu" size=1>
 		<?php
 		foreach ( getAllMenus () as $menu ) {
 			?>
@@ -81,31 +93,30 @@ if (defined ( "_SECURITY" )) {
 		}
 		?>
 	</select>
-	<div id="menu_help" class="help" style="display: none">
+			<div id="menu_help" class="help" style="display: none">
 	<?php
 		
 		echo nl2br ( TRANSLATION_HELP_MENU );
 		?>
 	</div>
-	<br /> <br /> <strong><?php
+			<br /> <br /> <strong><?php
 		
 		echo TRANSLATION_POSITION;
 		?>
 	</strong> <span style="cursor: help;"
-		onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
-		type="text" required="true" name="position" value="0">
-	<div id="position_help" class="help" style="display: none">
+				onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
+				type="text" required="true" name="position" value="0">
+			<div id="position_help" class="help" style="display: none">
 	<?php
 		
 		echo nl2br ( TRANSLATION_HELP_POSITION );
 		?>
-	</div>
-	<br /> <br /> <strong><?php
+	</div><br /> <strong><?php
 		
 		echo TRANSLATION_PARENT;
 		?>
 	</strong><br /> <select name="parent" size=1>
-		<option selected="selected" value="NULL">
+				<option selected="selected" value="NULL">
 			[
 			<?php
 		
@@ -137,7 +148,7 @@ if (defined ( "_SECURITY" )) {
 		?>
 	</select> <br /> <br />
 
-	<script type="text/javascript">
+			<script type="text/javascript">
 function systemname_vorschlagen(txt){
 var systemname=txt.toLowerCase();
 systemname=systemname.replace(/ü/g,"ue");
@@ -156,45 +167,45 @@ document.newpageform.system_title.value=systemname
 }
 </script>
 
-	<strong><?php
+			<strong><?php
 		
 		echo TRANSLATION_ACTIVATED;
 		?>
 	</strong><br /> <select name="activated" size=1>
-		<option value="1">
+				<option value="1">
 		<?php
 		
 		echo TRANSLATION_ENABLED;
 		?>
 		</option>
-		<option value="0">
+				<option value="0">
 		<?php
 		
 		echo TRANSLATION_DISABLED;
 		?>
 		</option>
-	</select> <br /> <br />
+			</select>
+		</div>
 
+		<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
 
-
-	<p>
-		<a name="toggle_options" href="#toggle_options"
-			onclick="$('#extra_options').slideToggle();">Zusätzliche Optionen
-			&gt;&gt;</a>
-	</p>
-	<fieldset id="extra_options">
-		<strong><?php
+		<div class="accordion-content">
+			<strong><?php
 		
 		echo TRANSLATION_EXTERNAL_REDIRECT;
 		?>
-		</strong><br /> <input type="text" name="redirection" value=""> <br />
-		<br /> <strong><?php
+		</strong><br /> <input type="text" name="redirection" value="">
+		</div>
+		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("theme");?></h2>
+
+		<div class="accordion-content">
+			<strong><?php
 		
 		echo TRANSLATION_MENU_IMAGE;
 		?>
 		</strong><br />
 
-		<script type="text/javascript">
+			<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -208,10 +219,10 @@ function openMenuImageSelectWindow(field) {
     );
 }
 </script>
-		<input type="text" id="menu_image" name="menu_image"
-			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-			value="" style="cursor: pointer" /><br /> <a href="#"
-			onclick="$('#menu_image').val('');return false;"><?php
+			<input type="text" id="menu_image" name="menu_image"
+				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+				value="" style="cursor: pointer" /><br /> <a href="#"
+				onclick="$('#menu_image').val('');return false;"><?php
 		
 		echo TRANSLATION_CLEAR;
 		?>
@@ -219,7 +230,7 @@ function openMenuImageSelectWindow(field) {
 		
 		echo TRANSLATION_DESIGN;
 		?></strong><br /> <select name="theme" size=1>
-			<option value="">
+				<option value="">
 				[
 				<?php
 		
@@ -246,73 +257,88 @@ function openMenuImageSelectWindow(field) {
 		
 		echo TRANSLATION_HTML_FILE;
 		?>
-		</strong> <br /> <input type="text" name="html_file" value=""> <br />
-		<br /> <strong><?php
+		</strong> <br /> <input type="text" name="html_file" value="">
+		</div>
+		<h2 class="accordion-header"><?php translate("visibility");?></h2>
+
+		<div class="accordion-content">
+			<strong><?php
 		
 		echo TRANSLATION_VISIBLE_FOR;
 		?>
 		</strong><br /> <select name="access[]" size=4 multiple>
-			<option value="all" selected>
+				<option value="all" selected>
 			<?php
 		
 		echo TRANSLATION_EVERYONE;
 		?>
 			</option>
-			<option value="registered">
+				<option value="registered">
 			<?php
 		
 		echo TRANSLATION_REGISTERED_USERS;
 		?>
 			</option>
-			<option value="mobile"><?php translate("mobile_devices");?></option>
-			<option value="desktop"><?php translate("desktop_computers");?></option>
+				<option value="mobile"><?php translate("mobile_devices");?></option>
+				<option value="desktop"><?php translate("desktop_computers");?></option>
 			<?php
 		while ( $row = db_fetch_object ( $groups ) ) {
 			echo '<option value="' . $row->id . '">' . real_htmlspecialchars ( $row->name ) . '</option>';
 		}
 		?>
 
-		</select> <br /> <br /> <strong><?php
+		</select>
+		</div>
+		<h2 class="accordion-header"><?php translate("metadata");?></h2>
+
+		<div class="accordion-content">
+			<strong><?php
 		
 		echo TRANSLATION_META_DESCRIPTION;
 		?>
 		</strong><br /> <input type="text" name="meta_description" value=''> <br />
-		<br /> <strong><?php
+			<br /> <strong><?php
 		
 		echo TRANSLATION_META_KEYWORDS;
 		?>
-		</strong><br /> <input type="text" name="meta_keywords" value=''> <br />
-		<br /> <strong><?php
+		</strong><br /> <input type="text" name="meta_keywords" value=''>
+		</div>
+		<h2 class="accordion-header"><?php translate("open_in");?></h2>
+
+		<div class="accordion-content">
+			<strong><?php
 		
 		echo TRANSLATION_OPEN_IN;
 		?>
 		</strong><br /> <select name="target" size=1>
-			<option value="_self">
+				<option value="_self">
 			<?php
 		
 		echo TRANSLATION_TARGET_SELF;
 		?>
 			</option>
-			<option value="_blank">
+				<option value="_blank">
 			<?php
 		
 		echo TRANSLATION_TARGET_BLANK;
 		?>
 			</option>
-		</select>
+			</select>
+		</div>
+		<h2 class="accordion-header"><?php translate("open_graph");?></h2>
 
-		<h3><?php translate("open_graph");?></h3>
-		<p><?php translate("og_help");?></p>
-		<div style="margin-left: 20px;">
-			<strong><?php translate("title");?>
+		<div class="accordion-content">
+			<p><?php translate("og_help");?></p>
+			<div style="margin-left: 20px;">
+				<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title" value=""> <br /> <br />
 
-			<strong><?php translate("description");?>
+				<strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description" value=""> <br />
-			<br /> <strong><?php translate("type");?>
+				<br /> <strong><?php translate("type");?>
 		</strong><br /> <input type="text" name="og_type" value=""> <br /> <br />
-			<strong><?php translate("image");?>
-		<br /> <script type="text/javascript">
+				<strong><?php translate("image");?></strong> <br />
+				<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -325,28 +351,30 @@ function openMenuImageSelectWindow(field) {
         'resizable=1, scrollbars=0, width=800, height=600'
     );
 }
-</script> <input type="text" id="og_image" name="og_image"
-				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-				value="<?php echo htmlspecialchars($og_image);?>"
-				style="cursor: pointer" /><br /> <a href="#"
-				onclick="$('#og_image').val('');return false;"><?php
+</script>
+				<input type="text" id="og_image" name="og_image" readonly="readonly"
+					onclick="openMenuImageSelectWindow(this)"
+					value="<?php echo htmlspecialchars($og_image);?>"
+					style="cursor: pointer" /><br /> <a href="#"
+					onclick="$('#og_image').val('');return false;"><?php
 		
 		echo TRANSLATION_CLEAR;
 		?>
 		</a>
-		
+
+			</div>
 		</div>
-		<h3><?php
-		
-		echo TRANSLATION_CUSTOM_DATA_JSON;
-		?>
-		</h3>
-		<textarea name="custom_data" style="width: 100%; height: 200px;"
-			cols=80 rows=10>{}</textarea>
+
+		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
+
+		<div class="accordion-content">
 
 
-	</fieldset>
+			<textarea name="custom_data" style="width: 100%; height: 200px;"
+				cols=80 rows=10>{}</textarea>
 
+		</div>
+	</div>
 	<br /> <br />
 
 
@@ -390,7 +418,6 @@ var formchanged = 0;
 var submitted = 0;
  
 $(document).ready(function() {
-$("#extra_options").hide();
 	$('form').each(function(i,n){
 		$('input', n).change(function(){formchanged = 1});
 		$('textarea', n).change(function(){formchanged = 1});

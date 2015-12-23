@@ -1,4 +1,4 @@
-﻿[ ] shell/sinstall.php Befehl - Installieren von Paketen per Kommandozeile
+﻿[X] shell/sinstall.php Befehl - Installieren von Paketen per Kommandozeile
 [ ] CKEditor aktualisieren auf neueste Version
 
 Mehr OOP
