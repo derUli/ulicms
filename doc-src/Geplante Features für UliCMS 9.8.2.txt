@@ -1,9 +1,8 @@
 ﻿[X] shell/sinstall.php Befehl - Installieren von Paketen per Kommandozeile
+[ ] Mehrere verschiedene Inhaltstypen ("page", "article", ...)
 [ ] CKEditor aktualisieren auf neueste Version
-
 Mehr OOP
     [X] Settings-Klasse mit statischen Funktionen (get, set, init und delete)
-
 [ ] Alle php, javascript, html und css files sollen per Backend bearbeitbar sein (Dateien des themes finden per get_files, default theme und mobile)
 [ ] Sprachdateien eines Themes sollen automatisch geladen werden
 [ ] Überall im Backend vallenato verwenden
