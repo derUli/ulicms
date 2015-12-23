@@ -135,7 +135,7 @@ if (defined ( "_SECURITY" )) {
 			?>
 	</div>
 
-	<br /> <strong><?php
+	<br /> <br /> <strong><?php
 			
 			echo TRANSLATION_PARENT;
 			?> </strong><br /> <select name="parent" size=1>

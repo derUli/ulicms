@@ -111,7 +111,7 @@ if (defined ( "_SECURITY" )) {
 		
 		echo nl2br ( TRANSLATION_HELP_POSITION );
 		?>
-	</div><br /> <strong><?php
+	</div><br /><br />  <strong><?php
 		
 		echo TRANSLATION_PARENT;
 		?>
