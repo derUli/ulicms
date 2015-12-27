@@ -4,3 +4,4 @@
 + Funktion Template::getEscape($value) hinzugefügt
 + Skript shell/sinstall.php hinzugefügt
 + Seite hinzufügen & Seite bearbeiten nun übersichtlicher Dank Tabs
++ Mobile_Detect auf Version 2.8.19 aktualisiert
