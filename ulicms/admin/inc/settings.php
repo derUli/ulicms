@@ -15,42 +15,42 @@ if (defined ( "_SECURITY" )) {
 <br />
 
 <table class="tablesorter">
-<thead>
-	<tr style="font-weight: bold;">
-	
-		<th><?php
+	<thead>
+		<tr style="font-weight: bold;">
+
+			<th><?php
 			
 			echo TRANSLATION_OPTION;
 			?></th>
-		<th><?php
+			<th><?php
 			
 			echo TRANSLATION_VALUE;
 			?></th>
-		<td><?php
+			<td><?php
 			
 			echo TRANSLATION_EDIT;
 			?></td>
-		<td><?php
+			<td><?php
 			
 			echo TRANSLATION_DELETE;
 			?></td>
-	</tr>
+		</tr>
 	</thead>
 	<tbody>
 	<?php
 			while ( $row = db_fetch_object ( $query ) ) {
 				?>
 		<?php
-
-                 echo '<tr id="dataset-'.htmlspecialchars($row->name).'">';
-                 echo "<td>" . htmlspecialchars ($row -> name, ENT_QUOTES, "UTF-8") . "</td>";
-                 echo "<td style=\"word-break:break-all;\">" . nl2br (htmlspecialchars ($row -> value)) . "</td>";
-                 echo "<td style=\"text-align:center\">" . '<a href="index.php?action=key_edit&key=' . $row -> id . '"><img src="gfx/edit.png" class="mobile-big-image" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
-                 echo "<td style=\"text-align:center;\">" . '<form action="index.php?action=key_delete&key=' . htmlspecialchars ($row -> name, ENT_QUOTES) . '" onsubmit="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');" method="post" class="delete-form"><input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '">'.get_csrf_token_html().'</form></td>';
-                 echo '</tr>';
-                 }
-             }
-         ?>
+				
+				echo '<tr id="dataset-' . htmlspecialchars ( $row->name ) . '">';
+				echo "<td>" . htmlspecialchars ( $row->name, ENT_QUOTES, "UTF-8" ) . "</td>";
+				echo "<td style=\"word-break:break-all;\">" . nl2br ( htmlspecialchars ( $row->value ) ) . "</td>";
+				echo "<td style=\"text-align:center\">" . '<a href="index.php?action=key_edit&key=' . $row->id . '"><img src="gfx/edit.png" class="mobile-big-image" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+				echo "<td style=\"text-align:center;\">" . '<form action="index.php?action=key_delete&key=' . htmlspecialchars ( $row->name, ENT_QUOTES ) . '" onsubmit="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');" method="post" class="delete-form"><input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '">' . get_csrf_token_html () . '</form></td>';
+				echo '</tr>';
+			}
+		}
+		?>
 		 </tbody>
 </table>
 

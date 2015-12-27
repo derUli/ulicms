@@ -475,7 +475,7 @@ define ( "TRANSLATION_RESET_PASSWORD_MAIL_BODY", "Hallo %username%!
 Ein Benutzer unter der Domain %host% hat von der IP-Adresse %ip% aus eine Anfrage nach einem neuen Passwort gesendet.
 
 Ihr neues Passwort ist:
-%password%.
+%password%
 
 Bitte ändern Sie das umgehend!" );
 define ( "TRANSLATION_RESET_PASSWORD_SUBJECT", "Passwort zurücksetzen" );
@@ -594,5 +594,10 @@ define ( "TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Benutzer-Accounts nach X fehlges
 
 // No mobile design on tablets
 define ( "TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Das Design für Mobilgeräte nicht auf Tablets verwenden" );
+
+
+define ( "TRANSLATION_TITLE_AND_HEADLINE", "Titel und Überschrift" );
+define ( "TRANSLATION_MENU_ENTRY", "Menü Eintrag" );
+define ( "TRANSLATION_VISIBILITY", "Sichtbarkeit" );
 
 add_hook ( "lang_de" );

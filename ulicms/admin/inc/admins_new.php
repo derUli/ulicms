@@ -17,16 +17,16 @@ if (defined ( "_SECURITY" )) {
 		name="admin_username" value=""> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_LASTNAME;
-			?></strong><br /> <input type="text" name="admin_lastname"
-		value=""> <br /> <br /> <strong><?php
+			?></strong><br /> <input type="text" name="admin_lastname" value="">
+	<br /> <br /> <strong><?php
 			
 			echo TRANSLATION_FIRSTNAME;
-			?></strong><br /> <input type="text" name="admin_firstname"
-		value=""><br /> <br /> <strong><?php
+			?></strong><br /> <input type="text" name="admin_firstname" value=""><br />
+	<br /> <strong><?php
 			
 			echo TRANSLATION_EMAIL;
-			?></strong><br /> <input type="email" name="admin_email"
-		value=""><br /> <br /> <strong><?php
+			?></strong><br /> <input type="email" name="admin_email" value=""><br />
+	<br /> <strong><?php
 			
 			echo TRANSLATION_PASSWORD;
 			?></strong><br /> <input type="text" required="true"
@@ -35,9 +35,8 @@ if (defined ( "_SECURITY" )) {
 	<label for="require_password_change"><?php
 			
 			translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );
-			?> </label> <br /> <br /> <input type="checkbox"
-		id="send_mail" name="send_mail" value="sendmail"> <label
-		for="send_mail"><?php
+			?> </label> <br /> <br /> <input type="checkbox" id="send_mail"
+		name="send_mail" value="sendmail"> <label for="send_mail"><?php
 			
 			echo TRANSLATION_SEND_LOGINDATA_BY_MAIL;
 			?></label> <br /> <br /> <input type="checkbox" value="1"
@@ -51,15 +50,11 @@ if (defined ( "_SECURITY" )) {
 			echo nl2br ( get_translation ( "HELP_IS_ADMIN" ) );
 			?>
 	</div>
-	<br /> <input type="checkbox" value="1"
-		name="locked" id="locked"> <label for="locked"><?php
+	<br /> <input type="checkbox" value="1" name="locked" id="locked"> <label
+		for="locked"><?php
 			
 			translate ( "locked" );
-			?> </label>
-			
-	<br /> 
-	<br /> 
-	<input type="submit"
+			?> </label> <br /> <br /> <input type="submit"
 		value="<?php
 			
 			echo TRANSLATION_CREATE_USER;

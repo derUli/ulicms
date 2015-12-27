@@ -90,6 +90,5 @@ if (defined ( "_SECURITY" )) {
 
 
 	<?php
-
 }
 ?>

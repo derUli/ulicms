@@ -779,6 +779,8 @@ ON DELETE SET NULL";
 			 *
 			 *
 			 *
+			 *
+			 *
 			 * $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`)
 			 * ON DELETE SET NULL";
 			 * mysqli_query($connection, $constraint5);

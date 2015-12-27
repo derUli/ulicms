@@ -192,8 +192,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	?>
 <?php
 
-	
-if ($acl->hasPermission ( "patch_management" )) {
+	if ($acl->hasPermission ( "patch_management" )) {
 		?>
 <a name="installed_patches_a" id="installed_patches_a"></a>
 <p>
@@ -209,7 +208,7 @@ if ($acl->hasPermission ( "patch_management" )) {
 	</p>
 <?php
 		
-if ($acl->hasPermission ( "upload_patches" )) {
+		if ($acl->hasPermission ( "upload_patches" )) {
 			?>
 <p>
 	<a href="index.php?action=upload_patches">[<?php translate("INSTALL_PATCH_FROM_FILE");?>]</a>

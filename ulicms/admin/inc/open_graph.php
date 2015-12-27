@@ -95,6 +95,5 @@ $("#open_graph").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-    
-    }
+}
 ?>

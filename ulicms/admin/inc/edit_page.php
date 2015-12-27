@@ -23,7 +23,14 @@ if (defined ( "_SECURITY" )) {
 			csrf_token_html ();
 			?>
 	<input type="hidden" name="edit_page" value="edit_page"> <input
-		type="hidden" name="page_id" value="<?php echo $row -> id?>"> <strong><?php
+		type="hidden" name="page_id" value="<?php echo $row -> id?>"> 
+		
+<div id="accordion-container">
+
+		<h2 class="accordion-header"><?php translate("title_and_headline");?></h2>
+
+		<div class="accordion-content">
+		<strong><?php
 			
 			echo TRANSLATION_PERMALINK;
 			?></strong><br /> <input type="text" required="true" name="page_"
@@ -47,7 +54,11 @@ if (defined ( "_SECURITY" )) {
 			?>"><br /> <small><?php
 			
 			echo TRANSLATION_ALTERNATE_TITLE_INFO;
-			?> </small> <br /> <br /> <strong><?php
+			?> </small></div>
+			
+		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
+
+		<div class="accordion-content"><strong><?php
 			
 			echo TRANSLATION_LANGUAGE;
 			?></strong> <br /> <select name="language">
@@ -192,20 +203,11 @@ if (defined ( "_SECURITY" )) {
 			echo TRANSLATION_DISABLED;
 			?>
 		</option>
-	</select> <br /> <br />
+	</select></div>
 
+		<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
 
-
-	<p>
-		<a name="toggle_options" href="#toggle_options"
-			onclick="$('#extra_options').slideToggle();"><?php
-			
-			echo TRANSLATION_ADDITIONAL_SETTINGS;
-			?> </a>
-	</p>
-	<fieldset id="extra_options">
-
-
+		<div class="accordion-content">
 		<strong><?php
 			
 			echo TRANSLATION_EXTERNAL_REDIRECT;
@@ -213,7 +215,12 @@ if (defined ( "_SECURITY" )) {
 			value="<?php
 			
 			echo $row->redirection;
-			?>"> <br /> <br /> <strong><?php
+			?>">
+			</div>
+			
+		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
+			
+		<div class="accordion-content"><strong><?php
 			
 			echo TRANSLATION_MENU_IMAGE;
 			?> </strong><br />
@@ -282,7 +289,12 @@ function openMenuImageSelectWindow(field) {
 			value="<?php
 			
 			echo $row->html_file;
-			?>"> <br /> <br /> <strong><?php
+			?>"> 
+			</div>
+<h2 class="accordion-header"><?php translate("visibility");?></h2>
+
+		<div class="accordion-content">
+ <strong><?php
 			
 			echo TRANSLATION_VISIBLE_FOR;
 			?> </strong><br />
@@ -318,7 +330,11 @@ function openMenuImageSelectWindow(field) {
 				}
 			}
 			?>
-		</select> <br /> <br /> <strong><?php
+		</select></div>
+		<h2 class="accordion-header"><?php translate("metadata");?></h2>
+
+		<div class="accordion-content">
+		<strong><?php
 			
 			echo TRANSLATION_META_DESCRIPTION;
 			?></strong><br /> <input type="text" name="meta_description"
@@ -330,7 +346,11 @@ function openMenuImageSelectWindow(field) {
 			?> </strong><br /> <input type="text" name="meta_keywords"
 			value="<?php
 			echo htmlspecialchars ( $row->meta_keywords );
-			?>"> <br /> <br /> <strong><?php
+			?>"></div>
+			
+		<h2 class="accordion-header"><?php translate("open_in");?></h2>
+
+		<div class="accordion-content"><strong><?php
 			
 			echo TRANSLATION_OPEN_IN;
 			?></strong><br /> <select name="target" size=1>
@@ -358,8 +378,11 @@ function openMenuImageSelectWindow(field) {
 			
 			echo TRANSLATION_TARGET_BLANK;
 			?></option>
-		</select><br />
-		<h3><?php translate("open_graph");?></h3>
+		</select></div>
+		
+		<h2 class="accordion-header"><?php translate("open_graph");?></h2>
+
+		<div class="accordion-content">
 
 		<p><?php translate("og_help");?></p>
 		<div style="margin-left: 20px;">
@@ -414,23 +437,25 @@ function openMenuImageSelectWindow(field) {
 <?php }?>
 		
 		
+		
+		
 		</div>
-		<h3><?php
-			
-			echo TRANSLATION_CUSTOM_DATA_JSON;
-			?>
-		</h3>
+		</div>
+		
+		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
+
+		<div class="accordion-content">
+	
 		<textarea name="custom_data" style="width: 100%; height: 200px;"
 			cols=80 rows=10><?php
 			
 			echo htmlspecialchars ( $row->custom_data );
 			?></textarea>
+</div>
 
-	</fieldset>
-
+</div>
 
 	<br /> <br />
-
 	<?php
 			
 			add_hook ( "page_option" );

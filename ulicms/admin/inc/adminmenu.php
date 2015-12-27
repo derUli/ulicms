@@ -485,6 +485,8 @@ if (defined ( "_SECURITY" )) {
 		
 		
 		
+		
+		
 		<li><a href="?action=info"><?php
 		
 		echo TRANSLATION_INFO;
@@ -508,6 +510,8 @@ if (defined ( "_SECURITY" )) {
 		?> <?php
 	}
 	?>
+		
+		
 		
 		
 		

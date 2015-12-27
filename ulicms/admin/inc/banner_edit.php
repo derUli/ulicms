@@ -22,8 +22,7 @@ if (defined ( "_SECURITY" )) {
 			
 			if ($row->type == "gif") {
 				?>
-		<a
-			href="<?php
+		<a href="<?php
 				
 				echo $row->link_url;
 				?>"
@@ -39,8 +38,7 @@ if (defined ( "_SECURITY" )) {
 			alt="<?php
 				
 				echo $row->name;
-				?>"
-			border=0> </a>
+				?>" border=0> </a>
 	</p>
 
 	<?php
@@ -52,8 +50,7 @@ if (defined ( "_SECURITY" )) {
 
 
 	<input type="hidden" name="edit_banner" value="edit_banner"> <input
-		type="hidden" name="id"
-		value="<?php
+		type="hidden" name="id" value="<?php
 			
 			echo $row->id;
 			?>">
@@ -119,7 +116,7 @@ if (defined ( "_SECURITY" )) {
 			?>">
 		<textarea name="html" cols=40 rows=10><?php
 			
-echo htmlspecialchars ( $row->html );
+			echo htmlspecialchars ( $row->html );
 			?></textarea>
 	</fieldset>
 
@@ -186,6 +183,5 @@ echo htmlspecialchars ( $row->html );
 
 
 	<?php
-    
-    }
+}
 ?>
