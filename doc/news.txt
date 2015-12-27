@@ -5,3 +5,4 @@
 + Skript shell/sinstall.php hinzugefügt
 + Seite hinzufügen & Seite bearbeiten nun übersichtlicher Dank Tabs
 + Mobile_Detect auf Version 2.8.19 aktualisiert
++ CKEditor auf Version 4.5.6 aktualisiert
