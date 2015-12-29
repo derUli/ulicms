@@ -72,6 +72,8 @@ if (! is_mobile ()) {
         $('a.scrollup').stop(true, true).fadeOut();
     }
 });
+$(".menu li:has(ul)").doubleTapToGo();
+
   <?php
 }
 ?>
