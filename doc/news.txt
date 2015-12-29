@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 9.8.2 =====
+===== Neues in UliCMS 9.8.2 =====
 + Klasse "File" hinzugefügt
 + Funktion Template::escape($value) hinzugefügt
 + Funktion Template::getEscape($value) hinzugefügt
