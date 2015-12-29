@@ -2,6 +2,9 @@
 + Klasse "File" hinzugefügt
 + Funktion Template::escape($value) hinzugefügt
 + Funktion Template::getEscape($value) hinzugefügt
++ Funktion Template::getHomepageOwner() hinzugefügt
++ Funktion Template::homepageOwner() hinzugefügt
++ Funktion Template::poweredByUliCMS() hinzugefügt
 + Skript shell/sinstall.php hinzugefügt
 + Seite hinzufügen & Seite bearbeiten nun übersichtlicher Dank Tabs
 + Mobile_Detect auf Version 2.8.19 aktualisiert
