@@ -56,6 +56,12 @@ $(window).load(function(){
 </p>
 <table class="tablesorter">
 	<thead>
+		<tr style="font-weight: bold;">
+			<th><?php
+		
+		translate("advertisements");
+		?>
+			</th>
 			<th><?php
 		
 		echo TRANSLATION_LANGUAGE;
