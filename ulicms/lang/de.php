@@ -595,7 +595,6 @@ define ( "TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Benutzer-Accounts nach X fehlges
 // No mobile design on tablets
 define ( "TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Das Design für Mobilgeräte nicht auf Tablets verwenden" );
 
-
 define ( "TRANSLATION_TITLE_AND_HEADLINE", "Titel und Überschrift" );
 define ( "TRANSLATION_MENU_ENTRY", "Menü Eintrag" );
 define ( "TRANSLATION_VISIBILITY", "Sichtbarkeit" );
