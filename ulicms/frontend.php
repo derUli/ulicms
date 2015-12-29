@@ -59,11 +59,10 @@ if (strtolower ( getconfig ( "maintenance_mode" ) ) == "on" || strtolower ( getc
 	header ( 'Status: 503 Service Temporarily Unavailable' );
 	header ( 'Retry-After: 60' );
 	header ( "Content-Type: text/html; charset=utf-8" );
-	if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )){
-  		require_once getTemplateDirPath ( $theme ) . "maintenance.php";
-	}	
-	else {
- 		die ( get_translation ( "UNDER_MAINTENANCE" ) );
+	if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )) {
+		require_once getTemplateDirPath ( $theme ) . "maintenance.php";
+	} else {
+		die ( get_translation ( "UNDER_MAINTENANCE" ) );
 	}
 	add_hook ( "after_maintenance_message" );
 	die ();
@@ -83,25 +82,23 @@ if ($redirection) {
 	ulicms_redirect ( $redirection, 302 );
 }
 
-if(isset($_GET["goid"])){
-   $goid = intval($_GET["goid"]);
-   $sysname = getPageSystemnameByID($goid);
-   if($sysname and $sysname != "-"){
-      $url = buildSeoURL($sysname);
-      ulicms_redirect ( $url, 301 );
-   }
-   else {
-      $url = getBaseFolderURL();
-      ulicms_redirect ( $url, 301 );
-   }
-   
+if (isset ( $_GET ["goid"] )) {
+	$goid = intval ( $_GET ["goid"] );
+	$sysname = getPageSystemnameByID ( $goid );
+	if ($sysname and $sysname != "-") {
+		$url = buildSeoURL ( $sysname );
+		ulicms_redirect ( $url, 301 );
+	} else {
+		$url = getBaseFolderURL ();
+		ulicms_redirect ( $url, 301 );
+	}
 }
 
-if(isset($_GET["submit-cms-form"]) and !empty($_GET["submit-cms-form"]) and get_request_method() === "POST"){
-   $form_id = intval($_GET["submit-cms-form"]);
-   
-   require_once ULICMS_ROOT . "/classes/forms.php";
-   Forms::submitForm($form_id);
+if (isset ( $_GET ["submit-cms-form"] ) and ! empty ( $_GET ["submit-cms-form"] ) and get_request_method () === "POST") {
+	$form_id = intval ( $_GET ["submit-cms-form"] );
+	
+	require_once ULICMS_ROOT . "/classes/forms.php";
+	Forms::submitForm ( $form_id );
 }
 
 header ( "HTTP/1.0 " . $status );
@@ -171,7 +168,7 @@ if (file_exists ( $cached_page_path ) and ! getconfig ( "cache_disabled" ) and g
 		browsercacheOneDay ( $last_modified );
 		echo $cached_content;
 		
-		if (getconfig ( "no_auto_cron" )){
+		if (getconfig ( "no_auto_cron" )) {
 			die ();
 		}
 		
@@ -214,10 +211,9 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 $html_file = page_has_html_file ( get_requested_pagename () );
 
 if ($html_file) {
-	if (file_exists ( $html_file )){
+	if (file_exists ( $html_file )) {
 		echo file_get_contents ( $html_file );
-	}
-	else {
+	} else {
 		echo "File Not Found";
 	}
 } else {
@@ -244,7 +240,7 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 	browsercacheOneDay ();
 	echo $data;
 	
-	if (getconfig ( "no_auto_cron" )){
+	if (getconfig ( "no_auto_cron" )) {
 		die ();
 	}
 	add_hook ( "before_cron" );
@@ -267,7 +263,7 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 	echo ($generated_html);
 	
 	// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
-	if (getconfig ( "no_auto_cron" )){
+	if (getconfig ( "no_auto_cron" )) {
 		die ();
 	}
 	add_hook ( "before_cron" );
@@ -276,7 +272,7 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 	die ();
 } else {
 	
-	if (getconfig ( "no_auto_cron" )){
+	if (getconfig ( "no_auto_cron" )) {
 		die ();
 	}
 	
