@@ -31,10 +31,7 @@ $(window).load(function(){
 </script>
 
 <h2>
-<?php
-		
-		echo TRANSLATION_ADVERTISEMENTS;
-		?>
+<?php translate("advertisements"); ?>
 </h2>
 <p>
 <?php
@@ -59,13 +56,6 @@ $(window).load(function(){
 </p>
 <table class="tablesorter">
 	<thead>
-		<tr style="font-weight: bold;">
-			<th style="width: 40px;">--></th>
-			<th><?php
-		
-		echo TRANSLATION_ADVERTISEMENTS;
-		?>
-			</th>
 			<th><?php
 		
 		echo TRANSLATION_LANGUAGE;
@@ -92,7 +82,6 @@ $(window).load(function(){
 			<?php
 				
 				echo '<tr id="dataset-' . $row->id . '">';
-				echo "<td style=\"width:40px;\">--></td>";
 				if ($row->type == "gif") {
 					echo '<td><a href="' . $row->link_url . '" target="_blank"><img src="' . $row->image_url . '" title="' . $row->name . '" alt="' . $row->name . '" border=0></a></td>';
 				} else {
