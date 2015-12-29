@@ -24,7 +24,7 @@ function changePassword($password, $id) {
 	$newPassword = Encryption::hashPassword ( $password );
 	return db_query ( "UPDATE " . tbname ( "users" ) . " SET `password` = '$newPassword',  `old_encryption` = 0, `password_changed` = NOW() WHERE id = $id" );
 }
-function resetPassword($username, $length = 8) {
+function resetPassword($username, $length = 12) {
 	$new_pass = rand_string ( $length );
 	$user = getUserByName ( $username );
 	if (! $user)
