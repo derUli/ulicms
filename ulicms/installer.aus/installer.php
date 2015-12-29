@@ -33,6 +33,7 @@ header ( "Content-Type: text/html; charset=UTF-8" );
 include_once "../lib/workaround.php";
 ?>
 <!DOCTYPE html>
+<html>
 <head>
 <title><?php
 
@@ -773,6 +774,7 @@ ON DELETE SET NULL";
 			
 			/**
 			 * $constraint5 = "ALTER TABLE `" .
+			 *
 			 *
 			 *
 			 *
