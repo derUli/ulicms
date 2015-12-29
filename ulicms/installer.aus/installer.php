@@ -771,23 +771,11 @@ ON DELETE SET NULL";
 				$constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `" . $prefix . "users`(`id`)
 ON DELETE SET NULL";
 				mysqli_query ( $connection, $constraint4 );
-			
-			/**
-			 * $constraint5 = "ALTER TABLE `" .
-			 *
-			 *
-			 *
-			 *
-			 *
-			 *
-			 *
-			 *
-			 *
-			 * $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`)
-			 * ON DELETE SET NULL";
-			 * mysqli_query($connection, $constraint5);
-			 */
 			}
+			
+			// Beispieldaten für die Banner Tabelle
+			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "banner` VALUES (1,'Content Management einfach gemacht mit UliCMS','http://www.ulicms.de','http://www.ulicms.de/content/images/banners/ulicms-banner.jpg',1,'gif','','de');" );
+			
 			@chmod ( "../cms-config.php", 0777 );
 			
 			@mkdir ( "../content" );
