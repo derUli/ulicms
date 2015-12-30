@@ -42,6 +42,12 @@ if (defined ( "_SECURITY" )) {
 		?>
 	</small>
 		</div>
+		<h2 class="accordion-header"><?php translate("type");?></h2>
+
+		<div class="accordion-content">
+			<input type="radio" name="type" value="page" checked> <label
+				for="type"><?php translate("page");?></label>
+		</div>
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
 
 		<div class="accordion-content">
@@ -111,7 +117,8 @@ if (defined ( "_SECURITY" )) {
 		
 		echo nl2br ( TRANSLATION_HELP_POSITION );
 		?>
-	</div><br /><br />  <strong><?php
+	</div>
+			<br /> <br /> <strong><?php
 		
 		echo TRANSLATION_PARENT;
 		?>

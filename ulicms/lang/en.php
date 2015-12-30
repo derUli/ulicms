@@ -606,4 +606,7 @@ define ( "TRANSLATION_TITLE_AND_HEADLINE", "Title and Headline" );
 define ( "TRANSLATION_MENU_ENTRY", "Menu Entry" );
 define ( "TRANSLATION_VISIBILITY", "Visibility" );
 
+// Typ
+define ( "TRANSLATION_PAGE", "Page" );
+
 add_hook ( "lang_en" );

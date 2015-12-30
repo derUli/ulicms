@@ -599,4 +599,7 @@ define ( "TRANSLATION_TITLE_AND_HEADLINE", "Titel und Überschrift" );
 define ( "TRANSLATION_MENU_ENTRY", "Menü Eintrag" );
 define ( "TRANSLATION_VISIBILITY", "Sichtbarkeit" );
 
+// Typ
+define ( "TRANSLATION_PAGE", "Seite" );
+
 add_hook ( "lang_de" );
