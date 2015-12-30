@@ -67,6 +67,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			
 			echo TRANSLATION_NOTHING_TO_DO;
 			?>
+</strong>
 
 
 
