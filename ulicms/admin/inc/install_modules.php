@@ -8,9 +8,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 } else {
 	$pkg_src = getconfig ( "pkg_src" );
 	@set_time_limit ( 0 );
-	
 	?>
-
 <h1>Pakete installieren</h1>
 <?php
 	if (! $pkg_src) {
@@ -22,10 +20,8 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		?>
 	</strong> <br />
 	<?php
-		
 		echo TRANSLATION_PKGSRC_NOT_DEFINED;
-		?>
-</p>
+		?></p>
 <?php
 	} else if (! class_exists ( "PharData" )) {
 		?>
@@ -38,8 +34,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	<?php
 		
 		echo TRANSLATION_PHARDATA_NOT_AVAILABLE;
-		?>
-</p>
+		?></p>
 <?php
 	} 
 
@@ -67,15 +62,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			
 			echo TRANSLATION_NOTHING_TO_DO;
 			?>
-</strong>
-
-
-
-
-
-
-
-</p>
+</strong></p>
 
 <?php
 		} else {
