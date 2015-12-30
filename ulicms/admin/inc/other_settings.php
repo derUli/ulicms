@@ -606,8 +606,7 @@ if (! $acl->hasPermission ( "other" )) {
 					<input type="checkbox" id="smtp_auth" name="smtp_auth"
 						<?php
 	if ($smtp_auth)
-		echo ' checked="checked"'?>
-						value="auth">
+		echo ' checked="checked"'?> value="auth">
 				</div>
 
 
