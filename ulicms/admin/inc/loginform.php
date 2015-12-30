@@ -55,7 +55,7 @@ csrf_token_html ();
 	?>
 	<table>
 		<tr>
-			<td><strong><strong><?php
+			<td><strong><?php
 			
 			echo TRANSLATION_USERNAME;
 			?></strong></td>
@@ -69,7 +69,7 @@ csrf_token_html ();
 			<td><input type="password" id="password" name="password" value=""></td>
 		</tr>
 		<tr>
-			<td><label for="view_password"><?php translate("view_password");?></strong></td>
+			<td><label for="view_password"><?php translate("view_password");?></label></td>
 			<td><input type="checkbox" id="view_password" /></td>
 		</tr>
 		<tr>
@@ -99,14 +99,12 @@ if ($twofactor_authentication) {
 			<td><input type="text" name="confirmation_code" value=""></td>
 		</tr>
 <?php
-
 }
 ?>
 		<tr>
 			<td></td>
 			<td style="padding-top: 10px; text-align: center;"><input
-				type="submit"
-				value="<?php
+				type="submit" value="<?php
 				
 				echo TRANSLATION_LOGIN;
 				?>"></td>
