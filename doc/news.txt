@@ -11,3 +11,5 @@
 + Mobile_Detect auf Version 2.8.19 aktualisiert
 + CKEditor auf Version 4.5.6 aktualisiert
 + "Passwort zurücksetzen" Passwortlänge auf 12 Zeichen erhöht
++ Hooks "before_edit_button" und "after_edit_button" hinzugefügt
++ Hook "after_content" verschoben

@@ -221,8 +221,13 @@ if ($html_file) {
 	add_hook ( "before_content" );
 	content ();
 	
-	edit_button ();
 	add_hook ( "after_content" );
+
+
+	add_hook ( "before_edit_button" );
+
+	edit_button ();
+	add_hook ( "after_edit_button" );
 	
 	require_once getTemplateDirPath ( $theme ) . "unten.php";
 }
