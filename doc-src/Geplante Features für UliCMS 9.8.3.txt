@@ -1,0 +1,5 @@
+UliCMS 9.8.3 "The Force"
+[ ] Mobile_Detect aktualisieren
+[ ] CKEditor aktualisieren
+[ ] Feld für "Twitter" zu Benutzerprofilen hinzufügen
+[ ] Feld für "Homepage" zu benutzerprofilen hinzufügen
