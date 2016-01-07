@@ -15,7 +15,6 @@ class File {
 	public static function rename($old, $new) {
 		return rename ( $old, $new );
 	}
-	
 	public static function lastChanged($file) {
 		echo self::getLastChanged ( $file );
 	}
