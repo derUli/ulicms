@@ -1692,6 +1692,12 @@ function cms_version() {
 	return implode ( ".", $v->getInternalVersion () );
 }
 
+function is_tablet(){
+   $detect = new Mobile_Detect ();
+   $result = $detect->isTablet ();
+   return $result;
+}
+
 // 21. Februar 2015
 // Nutzt nun die Klasse Mobile_Detect
 function is_mobile() {

@@ -14,3 +14,4 @@
 + Hooks "before_edit_button" und "after_edit_button" hinzugefügt
 + Hook "after_content" verschoben
 + Tab "Typ" zu Seitenverwaltung hinzugefügt
++ API Funktion is_tablet() hinzugefügt
