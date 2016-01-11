@@ -70,7 +70,6 @@ class Settings {
 			
 			db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 		}
-		
 		if (isset ( $GLOBALS ['settings_cache'] [$key] )) {
 			unset ( $GLOBALS ['settings_cache'] [$key] );
 		}
