@@ -4,4 +4,3 @@
 [ ] Feld für "Twitter" zu Benutzerprofilen hinzufügen
 [ ] Feld für "Homepage" zu benutzerprofilen hinzufügen
 [ ] Weitere Objektorientierte Funktionen und Klassen hinzufügen
-[ ] Toogle Dingens für Passwort-Felder in Installer (Sternchen / Klartext umschalten)
