@@ -15,3 +15,4 @@
 + Hook "after_content" verschoben
 + Tab "Typ" zu Seitenverwaltung hinzugefügt
 + API Funktion is_tablet() hinzugefügt
++ Umschalter "Passwort anzeigen" zum Installationsprogramm hinzugefügt
