@@ -40,6 +40,8 @@ include_once "../lib/workaround.php";
 echo TRANSLATION_TITLE;
 ?></title>
 <link rel="stylesheet" type="text/css" href="media/style.css" />
+<script type="text/javascript" src="../admin/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="../admin/scripts/util.js"></script>
 </head>
 <body>
 	<p>
@@ -254,8 +256,12 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_PASSWORD;
 			?>
 				</td>
-				<td><input name="passwort" type="password" value=""></td>
+				<td><input name="passwort" id="password" type="password" value=""></td>
 			</tr>
+					<tr>
+			<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
+			<td><input type="checkbox" id="view_password" /></td>
+</tr>
 			<tr>
 				<td><?php
 			
@@ -273,6 +279,11 @@ echo TRANSLATION_TITLE;
 				<td><input name="prefix" type="text" value="ulicms_"></td>
 			</tr>
 		</table>
+		<script type="text/javascript">
+$(document).ready(function(){
+	bindTogglePassword("#password", "#view_password")
+});
+</script>
 		<p>
 			<input type="submit"
 				value="<?php
@@ -420,9 +431,19 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_ADMIN_PASSWORD;
 			?>
 				</td>
-				<td><input name="passwort" type="password" value=""></td>
+				<td><input name="passwort" id="password" type="password" value=""></td>
+				</tr>
+					<tr>
+			<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
+			<td><input type="checkbox" id="view_password" /></td>
+
 			</tr>
 		</table>
+				<script type="text/javascript">
+$(document).ready(function(){
+	bindTogglePassword("#password", "#view_password")
+});
+</script>
 		<p>
 			<input type="submit"
 				value="<?php
