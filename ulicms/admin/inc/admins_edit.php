@@ -17,7 +17,8 @@ if (defined ( "_SECURITY" )) {
 			
 			csrf_token_html ();
 			?>
-	<img src="<?php
+	<img
+		src="<?php
 			
 			echo get_gravatar ( $row->email, 200 );
 			?>"
@@ -139,6 +140,11 @@ if (defined ( "_SECURITY" )) {
 			}
 			?>
 	<br /> <strong><?php
+			
+			translate("twitter_profile");
+			?></strong> <br />
+	<input type="text" name="twitter" value="<?php echo $row -> twitter?>">
+	<br /> <br /> <strong><?php
 			
 			echo TRANSLATION_ICQ;
 			?></strong> <br /> <input type="text" name="icq_id"

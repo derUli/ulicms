@@ -570,6 +570,7 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$notify_on_login = intval ( isset ( $_POST ["notify_on_login"] ) );
 	
 	$icq_id = db_escape ( $_POST ["icq_id"] );
+	$twitter = db_escape ( $_POST ["twitter"] );
 	$skype_id = db_escape ( $_POST ["skype_id"] );
 	$about_me = db_escape ( $_POST ["about_me"] );
 	$html_editor = db_escape ( $_POST ["html_editor"] );
@@ -580,7 +581,7 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$sql = "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
-about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked'  WHERE id=$id";
+about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked', `twitter` = '$twitter'  WHERE id=$id";
 	
 	db_query ( $sql );
 	

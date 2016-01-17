@@ -69,6 +69,11 @@ db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `last_login` bigin
 // Failed login attempts Counter
 db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `failed_logins` int(11) DEFAULT '0'" );
 
+// Database changes of 9.8.2
+
+// New profile fields
+db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `twitter` varchar(15) NULL" );
+
 // comments Ordner weggelöschen, sofern er noch existiert, da dieser nicht mehr benötigt wird.
 $comments_dir = ULICMS_ROOT . "/comments";
 
@@ -82,7 +87,7 @@ if (file_exists ( $content_htaccess )) {
 	@unlink ( $content_htaccess );
 }
 
-setconfig ( "db_schema_version", "9.8.0" );
+setconfig ( "db_schema_version", "9.8.2" );
 
 // Patch Manager zurücksetzen
 $pkg = new PackageManager ();
