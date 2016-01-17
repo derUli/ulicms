@@ -139,7 +139,14 @@ if (defined ( "_SECURITY" )) {
 		<?php
 			}
 			?>
-	<br /> <strong><?php
+	<br />
+	<strong><?php
+			
+			translate("homepage");
+			?></strong> <br />
+	<input type="url" name="homepage" value="<?php echo $row -> homepage?>">
+	<br /> <br /> 
+	 <strong><?php
 			
 			translate("twitter_profile");
 			?></strong> <br />

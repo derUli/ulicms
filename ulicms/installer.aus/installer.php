@@ -486,6 +486,7 @@ $(document).ready(function(){
   `skype_id` varchar(32) NOT NULL,
   `icq_id` varchar(20) NULL,
   `twitter` varchar(15) NULL,
+  `homepage` text NULL,
   `avatar_file` varchar(40) NULL,
   `about_me` text NULL,
   `last_action` bigint(20) NOT NULL DEFAULT 0,

@@ -609,6 +609,8 @@ define ( "TRANSLATION_VISIBILITY", "Visibility" );
 // Typ
 define ( "TRANSLATION_PAGE", "Page" );
 
+// Neue Profilfelder
 define ( "TRANSLATION_TWITTER_PROFILE", "Twitter Profile (twitter.com/<u>xxx</u>)" );
+define ( "TRANSLATION_HOMEPAGE", "Homepage" );
 
 add_hook ( "lang_en" );
