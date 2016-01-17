@@ -74,7 +74,6 @@ db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `failed_logins` in
 // New profile fields
 db_query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `twitter` varchar(15) NULL" );
 
-
 // comments Ordner weggelöschen, sofern er noch existiert, da dieser nicht mehr benötigt wird.
 $comments_dir = ULICMS_ROOT . "/comments";
 

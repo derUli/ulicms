@@ -258,10 +258,10 @@ echo TRANSLATION_TITLE;
 				</td>
 				<td><input name="passwort" id="password" type="password" value=""></td>
 			</tr>
-					<tr>
-			<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
-			<td><input type="checkbox" id="view_password" /></td>
-</tr>
+			<tr>
+				<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
+				<td><input type="checkbox" id="view_password" /></td>
+			</tr>
 			<tr>
 				<td><?php
 			
@@ -432,14 +432,14 @@ $(document).ready(function(){
 			?>
 				</td>
 				<td><input name="passwort" id="password" type="password" value=""></td>
-				</tr>
-					<tr>
-			<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
-			<td><input type="checkbox" id="view_password" /></td>
+			</tr>
+			<tr>
+				<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
+				<td><input type="checkbox" id="view_password" /></td>
 
 			</tr>
 		</table>
-				<script type="text/javascript">
+		<script type="text/javascript">
 $(document).ready(function(){
 	bindTogglePassword("#password", "#view_password")
 });
