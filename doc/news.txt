@@ -16,3 +16,4 @@
 + Tab "Typ" zu Seitenverwaltung hinzugefügt
 + API Funktion is_tablet() hinzugefügt
 + Umschalter "Passwort anzeigen" zum Installationsprogramm hinzugefügt
++ Twitter-Profil kann nun im User hinterlegt werden

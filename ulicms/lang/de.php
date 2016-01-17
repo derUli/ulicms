@@ -602,4 +602,6 @@ define ( "TRANSLATION_VISIBILITY", "Sichtbarkeit" );
 // Typ
 define ( "TRANSLATION_PAGE", "Seite" );
 
+define ( "TRANSLATION_TWITTER_PROFILE", "Twitter Profil (twitter.com/<u>xxx</u>)" );
+
 add_hook ( "lang_de" );
