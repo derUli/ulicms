@@ -60,8 +60,7 @@ if ($_GET ["action"] == "pages_delete" && $acl->hasPermission ( "pages" ) && get
 	exit ();
 }
 
-if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_settings"] )) {
-	
+if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_settings"] ) and $acl->hasPermission ( "spam_filter" ) and get_request_method () == "POST") {
 	add_hook ( "before_save_spamfilter_settings" );
 	
 	if ($_POST ["spamfilter_enabled"] == "yes") {
@@ -71,7 +70,8 @@ if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_set
 	}
 	
 	if (isset ( $_POST ["country_blacklist"] )) {
-		setconfig ( "country_blacklist", $_POST ["country_blacklist"] );
+		$country_blacklist = db_escape ( $_POST ["country_blacklist"] );
+		setconfig ( "country_blacklist", $country_blacklist );
 	}
 	
 	if (isset ( $_POST ["check_for_spamhaus"] )) {
@@ -84,13 +84,15 @@ if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_set
 		$blacklist = $_POST ["spamfilter_words_blacklist"];
 		$blacklist = str_replace ( "\r\n", "||", $blacklist );
 		$blacklist = str_replace ( "\n", "||", $blacklist );
+		$blacklist = db_escape ( $blacklist );
 		setconfig ( "spamfilter_words_blacklist", $blacklist );
 	}
 	
-	if (isset ( $_POST ["disallow_chinese_chars"] ))
+	if (isset ( $_POST ["disallow_chinese_chars"] )) {
 		setconfig ( "disallow_chinese_chars", "disallow" );
-	else
+	} else {
 		deleteconfig ( "disallow_chinese_chars" );
+	}
 	add_hook ( "after_save_spamfilter_settings" );
 }
 
