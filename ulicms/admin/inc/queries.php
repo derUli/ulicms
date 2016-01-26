@@ -60,37 +60,37 @@ if ($_GET ["action"] == "pages_delete" && $acl->hasPermission ( "pages" ) && get
 	exit ();
 }
 
-if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_settings"] )) {
+if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_settings"] ) and $acl->hasPermission ( "spam_filter" ) and get_request_method () == "POST") {
 	
 	add_hook ( "before_save_spamfilter_settings" );
 	
 	if ($_POST ["spamfilter_enabled"] == "yes") {
-		setconfig ( "spamfilter_enabled", "yes" );
+		Settings::set ( "spamfilter_enabled", "yes" );
 	} else {
-		setconfig ( "spamfilter_enabled", "no" );
+		Settings::set ( "spamfilter_enabled", "no" );
 	}
 	
 	if (isset ( $_POST ["country_blacklist"] )) {
-		setconfig ( "country_blacklist", $_POST ["country_blacklist"] );
+		Settings::set ( "country_blacklist", $_POST ["country_blacklist"] );
 	}
 	
 	if (isset ( $_POST ["check_for_spamhaus"] )) {
-		setconfig ( "check_for_spamhaus", "check" );
+		Settings::set ( "check_for_spamhaus", "check" );
 	} else {
-		deleteconfig ( "check_for_spamhaus" );
+		Settings::delete ( "check_for_spamhaus" );
 	}
 	
 	if (isset ( $_POST ["spamfilter_words_blacklist"] )) {
 		$blacklist = $_POST ["spamfilter_words_blacklist"];
 		$blacklist = str_replace ( "\r\n", "||", $blacklist );
 		$blacklist = str_replace ( "\n", "||", $blacklist );
-		setconfig ( "spamfilter_words_blacklist", $blacklist );
+		Settings::set ( "spamfilter_words_blacklist", $blacklist );
 	}
 	
 	if (isset ( $_POST ["disallow_chinese_chars"] ))
-		setconfig ( "disallow_chinese_chars", "disallow" );
+		Settings::set ( "disallow_chinese_chars", "disallow" );
 	else
-		deleteconfig ( "disallow_chinese_chars" );
+		Settings::delete ( "disallow_chinese_chars" );
 	add_hook ( "after_save_spamfilter_settings" );
 }
 
