@@ -94,7 +94,7 @@ $(window).load(function(){
 					$name = Template::getEscape ( $row->name );
 					echo '<td><a href="' . $link_url . '" target="_blank"><img src="' . $image_url . '" title="' . $name . '" alt="' . $name . '" border=0></a></td>';
 				} else {
-					echo '<td>' . htmlspecialchars ( $row->html ) . '</td>';
+					echo '<td>' . Template::getEscape ( $row->html ) . '</td>';
 				}
 				if ($row->language == "all") {
 					echo '<td>Alle</td>';
