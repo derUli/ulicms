@@ -59,7 +59,7 @@ $(window).load(function(){
 		<tr style="font-weight: bold;">
 			<th><?php
 		
-		translate("advertisements");
+		translate ( "advertisements" );
 		?>
 			</th>
 			<th><?php
@@ -89,7 +89,10 @@ $(window).load(function(){
 				
 				echo '<tr id="dataset-' . $row->id . '">';
 				if ($row->type == "gif") {
-					echo '<td><a href="' . $row->link_url . '" target="_blank"><img src="' . $row->image_url . '" title="' . $row->name . '" alt="' . $row->name . '" border=0></a></td>';
+					$link_url = Template::getEscape ( $row->link_url );
+					$image_url = Template::getEscape ( $row->image_url );
+					$name = Template::getEscape ( $row->name );
+					echo '<td><a href="' . $link_url . '" target="_blank"><img src="' . $image_url . '" title="' . $name . '" alt="' . $name . '" border=0></a></td>';
 				} else {
 					echo '<td>' . htmlspecialchars ( $row->html ) . '</td>';
 				}

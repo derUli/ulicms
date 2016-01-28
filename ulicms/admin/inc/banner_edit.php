@@ -24,21 +24,22 @@ if (defined ( "_SECURITY" )) {
 				?>
 		<a href="<?php
 				
-				echo $row->link_url;
+				Template::escape ( $row->link_url );
 				?>"
 			target="_blank"><img
 			src="<?php
 				
-				echo $row->image_url;
+				Template::escape ( $row->image_url );
 				?>"
 			title="<?php
 				
-				echo $row->name;
+				Template::escape ( $row->name );
 				?>"
 			alt="<?php
 				
-				echo $row->name;
-				?>" border=0> </a>
+				Template::escape ( $row->name );
+				?>"
+			border=0> </a>
 	</p>
 
 	<?php

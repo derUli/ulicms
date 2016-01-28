@@ -400,9 +400,9 @@ function random_banner() {
 				}
 			}
 			if ($type == "gif") {
-				$title = $row->name;
-				$link_url = $row->link_url;
-				$image_url = $row->image_url;
+				$title = Template::getEscape($row->name);
+				$link_url = Template::getEscape($row->link_url);
+				$image_url = Template::getEscape($row->image_url);
 				echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' alt='$title' border=0></a>";
 			} else if ($type == "html") {
 				echo $row->html;
