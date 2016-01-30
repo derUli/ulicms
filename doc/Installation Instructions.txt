@@ -1,4 +1,4 @@
-This document describes how to install UliCMS on an apache webserver.
+This document describes how to install UliCMS on an Apache webserver.
 
 1. Upload the content of the "ulicms" folder into the main document folder of your webserver.
 
