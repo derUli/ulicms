@@ -2,3 +2,4 @@
 [ ] Mobile_Detect aktualisieren
 [ ] CKEditor aktualisieren
 [ ] Weitere Objektorientierte Funktionen und Klassen hinzufügen
+[ ] Translation overrides (Übersetzungen per Datenbank überschreibbar)
