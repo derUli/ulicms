@@ -83,7 +83,7 @@ if (defined ( "_SECURITY" )) {
 			?></strong><br /> <input type="text" name="banner_name"
 			value="<?php
 			
-			Template::escape( $row->name);
+			Template::escape ( $row->name );
 			?>"> <br /> <br /> <strong><?php
 			
 			translate ( "IMAGE_URL" );
