@@ -2,4 +2,5 @@
 [ ] Mobile_Detect aktualisieren
 [ ] CKEditor aktualisieren
 [ ] Weitere Objektorientierte Funktionen und Klassen hinzufügen
+    [ ] Klasse "Mailer" hinzufügen
 [ ] Translation overrides (Übersetzungen per Datenbank überschreibbar)
