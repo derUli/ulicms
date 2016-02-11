@@ -21,22 +21,22 @@ class Mailer {
 		}
 		
 		$smtp_host = Settings::get ( "smtp_host" );
-		if (! $smtp_host){
+		if (! $smtp_host) {
 			$smtp_host = "127.0.0.1";
 		}
 		
 		$smtp_port = Settings::get ( "smtp_port" );
-		if (! $smtp_port){
+		if (! $smtp_port) {
 			$smtp_port = "25";
 		}
 		
 		$smtp_user = Settings::get ( "smtp_user" );
-		if (! $smtp_user){
+		if (! $smtp_user) {
 			$smtp_user = null;
 		}
 		
 		$smtp_password = Settings::get ( "smtp_password" );
-		if (! $smtp_password){
+		if (! $smtp_password) {
 			$smtp_password = null;
 		}
 		
@@ -62,22 +62,21 @@ class Mailer {
 	}
 	public static function send($to, $subject, $message, $headers = "") {
 		$mode = Settings::get ( "email_mode" );
-		if (! $mode){
+		if (! $mode) {
 			$mode = "internal";
 		}
-			
-			// UliCMS speichert seit UliCMs 9.0.1 E-Mails, die das System versendet hat
-			// in der Datenbank
+		
+		// UliCMS speichert seit UliCMs 9.0.1 E-Mails, die das System versendet hat
+		// in der Datenbank
 		$insert_sql = "INSERT INTO " . tbname ( "mails" ) . " (headers, `to`, subject, body) VALUES (
      '" . db_escape ( $headers ) . "', '" . db_escape ( $to ) . "', '" . db_escape ( $subject ) . "', '" . db_escape ( $message ) . "')";
 		db_query ( $insert_sql );
 		
 		// Damit Umlaute auch im Betreff korrekt dargestellt werden, diese mit UTF-8 kodieren
 		$subject = "=?UTF-8?B?" . base64_encode ( $subject ) . "?=";
-		if ($mode == "pear_mail"){
+		if ($mode == "pear_mail") {
 			return self::sendByPEAR ( $to, $subject, $message, $headers );
-		}
-		else{
+		} else {
 			return mail ( $to, $subject, $message, $headers );
 		}
 	}
