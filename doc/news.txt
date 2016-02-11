@@ -19,3 +19,4 @@
 + Twitter-Profil kann nun im User hinterlegt werden
 + Homepage URL kann nun im User hinterlegt werden.
 + XSS Sicherheitslücke im Bannersystem korrigiert
++ Mailer Klasse hinzugefügt

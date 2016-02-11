@@ -40,7 +40,7 @@ function resetPassword($username, $length = 12) {
 	$message = str_replace ( "%username%", $user ["username"], $message );
 	
 	$headers = "From: " . getconfig ( "email" ) . "\n" . "Content-type: text/plain; charset=UTF-8";
-	@ulicms_mail ( $user ["email"], TRANSLATION_RESET_PASSWORD_SUBJECT, $message, $headers );
+	@Mailer::send ( $user ["email"], TRANSLATION_RESET_PASSWORD_SUBJECT, $message, $headers );
 	return true;
 }
 function getUserByName($name) {
@@ -87,7 +87,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	$header = "From: " . getconfig ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
 	
 	if ($sendMessage) {
-		@ulicms_mail ( $email, "Dein Benutzer-Account bei " . $_SERVER ["SERVER_NAME"], $message, $header );
+		@Mailer::send ( $email, "Dein Benutzer-Account bei " . $_SERVER ["SERVER_NAME"], $message, $header );
 	}
 	
 	add_hook ( "after_create_user" );
@@ -126,7 +126,7 @@ function register_session($user, $redirect = true) {
 		$subject = "Login auf \"" . getconfig ( "homepage_title" ) . "\" als " . $user ["username"];
 		$text = "Von der IP " . $_SERVER ["REMOTE_ADDR"] . " hat sich jemand um " . date ( "r" ) . " erfolgreich in das Benutzerkonto " . $user ["username"] . " auf dem Server " . $_SERVER ["HTTP_HOST"] . " eingeloggt.";
 		$headers = "From: " . getconfig ( "email" );
-		ulicms_mail ( $user ["email"], $subject, $text, $headers );
+		Mailer::send ( $user ["email"], $subject, $text, $headers );
 	}
 	
 	if (! $redirect)

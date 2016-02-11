@@ -113,7 +113,7 @@ class Forms {
 				$headers .= "From: " . $mail_from [0];
 			}
 			
-			if (ulicms_mail ( $email_to, $subject, $html, $headers )) {
+			if (Mailer::send ( $email_to, $subject, $html, $headers )) {
 				ulicms_redirect ( $redirect_url );
 				$retval = true;
 			} else {

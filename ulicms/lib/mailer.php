@@ -1,7 +1,7 @@
 <?php
 @include_once ("Mail.php");
 
-if (! class_exists ( "Mail" )) {
+if (! class_exists ( "Mail" ) and ! defined ( "NO_PEAR_MAIL" )) {
 	define ( "NO_PEAR_MAIL", true );
 }
 function split_headers($headers) {
