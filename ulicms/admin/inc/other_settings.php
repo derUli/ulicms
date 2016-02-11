@@ -35,15 +35,17 @@ if (! $acl->hasPermission ( "other" )) {
 		if (isset ( $_POST ["override_shortcuts"] ))
 			setconfig ( "override_shortcuts", db_escape ( $_POST ["override_shortcuts"] ) );
 		
-		if (isset ( $_POST ["cache_enabled"] ))
+		if (isset ( $_POST ["cache_enabled"] )) {
 			Settings::delete ( "cache_disabled" );
-		else
+		} else {
 			setconfig ( "cache_disabled", "disabled" );
+		}
 		
-		if (isset ( $_POST ["smtp_auth"] ))
+		if (isset ( $_POST ["smtp_auth"] )) {
 			setconfig ( "smtp_auth", "auth" );
-		else
+		} else {
 			Settings::delete ( "smtp_auth" );
+		}
 		
 		if (isset ( $_POST ["show_meta_generator"] )) {
 			Settings::delete ( "hide_meta_generator" );
@@ -111,20 +113,24 @@ if (! $acl->hasPermission ( "other" )) {
 	$hide_meta_generator = Settings::get ( "hide_meta_generator" );
 	
 	$smtp_host = Settings::get ( "smtp_host" );
-	if (! $smtp_host)
+	if (! $smtp_host) {
 		$smtp_host = "127.0.0.1";
+	}
 	
 	$smtp_port = Settings::get ( "smtp_port" );
-	if (! $smtp_port)
+	if (! $smtp_port) {
 		$smtp_port = "25";
+	}
 	
 	$smtp_user = Settings::get ( "smtp_user" );
-	if (! $smtp_user)
+	if (! $smtp_user) {
 		$smtp_user = null;
+	}
 	
 	$smtp_password = Settings::get ( "smtp_password" );
-	if (! $smtp_password)
+	if (! $smtp_password) {
 		$smtp_password = null;
+	}
 	
 	$smtp_auth = Settings::get ( "smtp_auth" );
 	$log_ip = Settings::get ( "log_ip" );
@@ -606,7 +612,8 @@ if (! $acl->hasPermission ( "other" )) {
 					<input type="checkbox" id="smtp_auth" name="smtp_auth"
 						<?php
 	if ($smtp_auth)
-		echo ' checked="checked"'?> value="auth">
+		echo ' checked="checked"'?>
+						value="auth">
 				</div>
 
 
