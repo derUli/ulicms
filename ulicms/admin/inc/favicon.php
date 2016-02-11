@@ -36,7 +36,7 @@ if (defined ( "_SECURITY" )) {
 		
 		$favicon_path = "../content/images/favicon.ico";
 		if (file_exists ( $favicon_path ) and is_file ( $favicon_path )) {
-			echo '<img class="website_favicon" src="' . $favicon_path . '" alt="' . getconfig ( "homepage_title" ) . '"/>';
+			echo '<img class="website_favicon" src="' . $favicon_path . '" alt="' . Settings::get ( "homepage_title" ) . '"/>';
 		}
 		?>
 			</td>
@@ -69,7 +69,7 @@ if (defined ( "_SECURITY" )) {
 	</table>
 
 	<?php
-		if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 			?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>

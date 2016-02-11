@@ -85,7 +85,7 @@ if (defined ( "_SECURITY" )) {
 		</td>
 
 			<td align="center" style="font-weight: bold;"><?php
-				if ($row->language_code === getconfig ( "default_language" )) {
+				if ($row->language_code === Settings::get ( "default_language" )) {
 					echo "<span style='color:green !important;'>" . TRANSLATION_YES . "</span>";
 				} else {
 					?> <a
@@ -104,7 +104,7 @@ if (defined ( "_SECURITY" )) {
 
 			<td align="center"><?php
 				
-				if ($row->language_code == getconfig ( "default_language" )) {
+				if ($row->language_code == Settings::get ( "default_language" )) {
 					?> <a
 				onclick="javascript:alert('<?php
 					

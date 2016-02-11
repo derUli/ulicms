@@ -7,7 +7,7 @@ if (defined ( "_SECURITY" )) {
 		noperms ();
 	} else {
 		
-		$admin_logo = getconfig ( "admin_logo" );
+		$admin_logo = Settings::get ( "admin_logo" );
 		if (! $admin_logo)
 			$admin_logo = "gfx/logo.png";
 		?>

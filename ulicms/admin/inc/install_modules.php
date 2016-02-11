@@ -6,7 +6,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 <p>Zugriff verweigert</p>
 <?php
 } else {
-	$pkg_src = getconfig ( "pkg_src" );
+	$pkg_src = Settings::get ( "pkg_src" );
 	@set_time_limit ( 0 );
 	?>
 <h1>Pakete installieren</h1>

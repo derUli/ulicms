@@ -21,7 +21,7 @@ class PDFCreator {
 	public function output() {
 		$hasModul = containsModule ( get_requested_pagename () );
 		
-		if (! getconfig ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
+		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
 			
 			if (file_exists ( $this->cached_file )) {
 				$last_modified = filemtime ( $this->cached_file );

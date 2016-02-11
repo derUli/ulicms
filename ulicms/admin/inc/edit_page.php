@@ -495,7 +495,7 @@ var editor = CKEDITOR.replace( 'page_content',
 					{
 						skin : '<?php
 				
-				echo getconfig ( "ckeditor_skin" );
+				echo Settings::get ( "ckeditor_skin" );
 				?>'
 					});                                         
 
@@ -581,7 +581,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 	</div>
 
 	<?php
-			if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 				?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>

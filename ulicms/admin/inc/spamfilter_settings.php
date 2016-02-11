@@ -17,7 +17,7 @@ if ($acl->hasPermission ( "spam_filter" )) {
 		name="spamfilter_enabled"
 		<?php
 	
-	if (getconfig ( "spamfilter_enabled" ) == "yes") {
+	if (Settings::get ( "spamfilter_enabled" ) == "yes") {
 		echo " checked";
 	}
 	?>
@@ -42,7 +42,7 @@ function spamFilterEnabledcheckboxChanged(checked){
 
 	<div id="country_filter_settings"
 		<?php
-	if (getconfig ( "spamfilter_enabled" ) != "yes") {
+	if (Settings::get ( "spamfilter_enabled" ) != "yes") {
 		echo " style='display:none;'";
 	}
 	?>>
@@ -52,7 +52,7 @@ function spamFilterEnabledcheckboxChanged(checked){
 	echo TRANSLATION_BLACKLIST;
 	?>
 		<br /> <textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php
-	echo htmlspecialchars ( implode ( explode ( "||", getconfig ( "spamfilter_words_blacklist" ) ), "\n" ), ENT_QUOTES, "UTF-8" );
+	echo htmlspecialchars ( implode ( explode ( "||", Settings::get ( "spamfilter_words_blacklist" ) ), "\n" ), ENT_QUOTES, "UTF-8" );
 	?></textarea> <br /> <br />
 
 		<?php
@@ -62,11 +62,11 @@ function spamFilterEnabledcheckboxChanged(checked){
 		<br /> <input type="text" name="country_blacklist"
 			value="<?php
 	
-	echo htmlspecialchars ( getconfig ( "country_blacklist" ) );
+	echo htmlspecialchars ( Settings::get ( "country_blacklist" ) );
 	?>"> <br /> <br /> <input type="checkbox" name="disallow_chinese_chars"
 			id="disallow_chinese_chars"
 			<?php
-	if (getconfig ( "disallow_chinese_chars" ))
+	if (Settings::get ( "disallow_chinese_chars" ))
 		echo " checked=\"checked\"";
 	?>> <label for="disallow_chinese_chars"><?php
 	
@@ -75,7 +75,7 @@ function spamFilterEnabledcheckboxChanged(checked){
 		</label> <br /> <br /> <input type="checkbox"
 			name="check_for_spamhaus" value="yes" id="check_for_spamhaus"
 			<?php
-	if (getconfig ( "check_for_spamhaus" ))
+	if (Settings::get ( "check_for_spamhaus" ))
 		echo " checked=\"checked\"";
 	?>> <label for="check_for_spamhaus"><?php
 	
@@ -90,7 +90,7 @@ function spamFilterEnabledcheckboxChanged(checked){
 	echo TRANSLATION_SAVE_CHANGES;
 	?>" />
 	<?php
-	if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>

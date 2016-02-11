@@ -9,7 +9,7 @@ class packageManager {
 	public function checkForNewerVersionOfPackage($package) {
 		$result = null;
 		
-		if (getconfig ( "disable_package_update_check" )) {
+		if (Settings::get ( "disable_package_update_check" )) {
 			return $result;
 		}
 		$url = $this->package_source . "newest_version.php";

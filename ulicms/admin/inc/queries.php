@@ -18,7 +18,7 @@ if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] )) {
 	setconfig ( "robots", db_escape ( $_POST ["robots"] ) );
 	
 	if ($_POST ["disable_html_validation"] == "enabled") {
-		deleteconfig ( "disable_html_validation" );
+		Settings::delete ( "disable_html_validation" );
 	} else {
 		setconfig ( "disable_html_validation", "disable" );
 	}
@@ -26,7 +26,7 @@ if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] )) {
 	if (! isset ( $_POST ["disable_password_reset"] )) {
 		setconfig ( "disable_password_reset", "disable_password_reset" );
 	} else {
-		deleteconfig ( "disable_password_reset" );
+		Settings::delete ( "disable_password_reset" );
 	}
 	
 	add_hook ( "after_safe_simple_settings" );
@@ -97,7 +97,7 @@ if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_set
 }
 
 if (! empty ( $_POST ["save_template"] ) and ! empty ( $_POST ["code"] ) && $acl->hasPermission ( "templates" )) {
-	$theme = getconfig ( "theme" );
+	$theme = Settings::get ( "theme" );
 	$save = getTemplateDirPath ( $theme ) . basename ( $_POST ["save_template"] );
 	add_hook ( "before_save_template" );
 	if (is_file ( $save ) && is_writable ( $save )) {
@@ -128,7 +128,7 @@ if ($_GET ["action"] == "empty_trash") {
 
 if ($_GET ["action"] == "key_delete" and $acl->hasPermission ( "expert_settings" ) and get_request_method () == "POST") {
 	add_hook ( "before_delete_key" );
-	deleteconfig ( $_GET ["key"] );
+	Settings::delete ( $_GET ["key"] );
 	add_hook ( "after_delete_key" );
 	header ( "Location: index.php?action=settings" );
 	exit ();
@@ -224,7 +224,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$meta_description = $_POST ["meta_description"];
 		$meta_keywords = $_POST ["meta_keywords"];
 		
-		if (empty ( $meta_description ) and ! getconfig ( "disable_auto_generate_meta_tags" )) {
+		if (empty ( $meta_description ) and ! Settings::get ( "disable_auto_generate_meta_tags" )) {
 			include_once "../lib/string_functions.php";
 			$maxlength_chars = 160;
 			
@@ -254,7 +254,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$meta_description = db_escape ( $meta_description );
 		
 		// Wenn keine Meta Keywords gesetzt sind selbst ermitteln
-		if (empty ( $meta_keywords ) and ! getconfig ( "disable_auto_generate_meta_tags" )) {
+		if (empty ( $meta_keywords ) and ! Settings::get ( "disable_auto_generate_meta_tags" )) {
 			
 			include_once "../lib/string_functions.php";
 			$stripped_content = trim ( $page_content );

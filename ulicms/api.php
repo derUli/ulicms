@@ -1,7 +1,7 @@
 <?php
 function initconfig($key, $value) {
 	$retval = false;
-	if (! getconfig ( $key )) {
+	if (! Settings::get ( $key )) {
 		setconfig ( $key, $value );
 		$retval = true;
 	}
@@ -129,11 +129,11 @@ function is_crawler($userAgent = null) {
 }
 function get_lang_config($name, $lang) {
 	$retval = false;
-	$config = getconfig ( $name . "_" . $lang );
+	$config = Settings::get ( $name . "_" . $lang );
 	if ($config)
 		$retval = $config;
 	else
-		$config = getconfig ( $name );
+		$config = Settings::get ( $name );
 	return $config;
 }
 
@@ -486,8 +486,8 @@ function getSystemLanguage() {
 		$lang = $_SESSION ["system_language"];
 	} else if (isset ( $_SESSION ["language"] )) {
 		$lang = $_SESSION ["language"];
-	} else if (getconfig ( "system_language" )) {
-		$lang = getconfig ( "system_language" );
+	} else if (Settings::get ( "system_language" )) {
+		$lang = Settings::get ( "system_language" );
 	} else {
 		$lang = "de";
 	}
@@ -569,7 +569,7 @@ function ulicms_redirect($url = "http://www.ulicms.de", $status = 302) {
 	exit ();
 }
 function getDomainByLanguage($language) {
-	$domainMapping = getconfig ( "domain_to_language" );
+	$domainMapping = Settings::get ( "domain_to_language" );
 	
 	if (! empty ( $domainMapping )) {
 		$domainMapping = explode ( "\n", $domainMapping );
@@ -607,7 +607,7 @@ function encodeURIComponent($str) {
 	return strtr ( rawurlencode ( $str ), $revert );
 }
 function setLanguageByDomain() {
-	$domainMapping = getconfig ( "domain_to_language" );
+	$domainMapping = Settings::get ( "domain_to_language" );
 	
 	if (! empty ( $domainMapping )) {
 		$domainMapping = explode ( "\n", $domainMapping );
@@ -634,7 +634,7 @@ function setLanguageByDomain() {
 	return false;
 }
 function getCacheType() {
-	$c = getconfig ( "cache_type" );
+	$c = Settings::get ( "cache_type" );
 	switch ($c) {
 		case "cache_lite" :
 			@include "Cache/Lite.php";
@@ -758,7 +758,7 @@ function clearAPCCache() {
 // als auch den APC Bytecode Cache
 function clearCache() {
 	add_hook ( "before_clear_cache" );
-	$cache_type = getconfig ( "cache_type" );
+	$cache_type = Settings::get ( "cache_type" );
 	// Es gibt zwei verschiedene Cache Modi
 	// Cache_Lite und File
 	// Cache_Lite leeren
@@ -827,13 +827,13 @@ function setLocaleByLanguage() {
 	} else {
 		$var = "locale_" . db_escape ( $_SESSION ["language"] );
 	}
-	$locale = getconfig ( $var );
+	$locale = Settings::get ( $var );
 	if ($locale) {
 		$locale = splitAndTrim ( $locale );
 		array_unshift ( $locale, LC_ALL );
 		@call_user_func_array ( "setlocale", $locale );
 	} else {
-		$locale = getconfig ( "locale" );
+		$locale = Settings::get ( "locale" );
 		if ($locale) {
 			
 			$locale = splitAndTrim ( $locale );
@@ -860,7 +860,7 @@ function getCurrentLanguage($current = true) {
 	if (isset ( $_SESSION ["language"] ))
 		return basename ( $_SESSION ["language"] );
 	else
-		return basename ( getconfig ( "default_language" ) );
+		return basename ( Settings::get ( "default_language" ) );
 }
 
 // Auf automatische aktualisieren prüfen.
@@ -1075,7 +1075,7 @@ function getCurrentURL() {
 function buildCacheFilePath($request_uri) {
 	$language = $_SESSION ["language"];
 	if (! $language) {
-		$language = getconfig ( "default_language" );
+		$language = Settings::get ( "default_language" );
 	}
 	$unique_identifier = $request_uri . $language . strbool ( is_mobile () );
 	if (function_exists ( "apply_filter" )) {
@@ -1566,7 +1566,7 @@ function getAllMenus($only_used = false) {
 			"bottom",
 			"none" 
 	);
-	$additional_menus = getconfig ( "additional_menus" );
+	$additional_menus = Settings::get ( "additional_menus" );
 	
 	if ($additional_menus) {
 		$additional_menus = explode ( ";", $additional_menus );
@@ -1647,7 +1647,7 @@ function uninstall_module($name, $type = "module") {
 			return ! is_dir ( $moduleDir );
 		}
 	} else if ($type === "theme") {
-		$cTheme = getconfig ( "theme" );
+		$cTheme = Settings::get ( "theme" );
 		$allThemes = getThemeList ();
 		if (in_array ( $name, $allThemes ) and $cTheme !== $name) {
 			$theme_path = getTemplateDirPath ( $name );
@@ -1703,7 +1703,7 @@ function is_tablet(){
 function is_mobile() {
 	$detect = new Mobile_Detect ();
 	$result = $detect->isMobile ();
-	if (getconfig ( "no_mobile_design_on_tablet" ) and $result and $detect->isTablet ()) {
+	if (Settings::get ( "no_mobile_design_on_tablet" ) and $result and $detect->isTablet ()) {
 		$result = false;
 	}
 	if (function_exists ( "apply_filter" )) {

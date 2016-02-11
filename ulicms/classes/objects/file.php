@@ -25,4 +25,9 @@ class File {
 		clearstatcache ();
 		return $retval;
 	}
+	public static function getExtension($filename) {
+		$ext = explode ( ".", $filename );
+		$ext = end ( $ext );
+		return $ext;
+	}
 }

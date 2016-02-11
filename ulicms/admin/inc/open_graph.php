@@ -10,8 +10,8 @@ if (defined ( "_SECURITY" )) {
 			setconfig ( "og_image", db_escape ( $_POST ["og_image"] ) );
 		}
 		
-		$og_type = getconfig ( "og_type" );
-		$og_image = getconfig ( "og_image" );
+		$og_type = Settings::get ( "og_type" );
+		$og_image = Settings::get ( "og_image" );
 		
 		$og_url = "";
 		

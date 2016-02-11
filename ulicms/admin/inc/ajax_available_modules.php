@@ -6,7 +6,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	<?php
 }
 
-$pkg_src = getconfig ( "pkg_src" );
+$pkg_src = Settings::get ( "pkg_src" );
 @set_time_limit ( 0 );
 
 include_once "../lib/file_get_contents_wrapper.php";

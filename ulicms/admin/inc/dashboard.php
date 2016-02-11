@@ -139,7 +139,7 @@ $(document).ready(function() {
 	<div class="accordion-content">
 		<table>
 		<?php
-		$installed_at = getconfig ( "installed_at" );
+		$installed_at = Settings::get ( "installed_at" );
 		if ($installed_at) {
 			$time = time () - $installed_at;
 			$formatted = formatTime ( $time );
@@ -176,14 +176,14 @@ $(document).ready(function() {
 
 			<?php
 		
-		if (getconfig ( "contact_form_refused_spam_mails" ) !== false) {
+		if (Settings::get ( "contact_form_refused_spam_mails" ) !== false) {
 			?>
 			<tr>
 				<td><?php
 			
 			echo TRANSLATION_BLOCKED_SPAM_MAILS;
 			?></td>
-				<td><?php echo getconfig("contact_form_refused_spam_mails")?></td>
+				<td><?php echo Settings::get("contact_form_refused_spam_mails")?></td>
 			</tr>
 			<?php
 		}

@@ -12,7 +12,7 @@ if (defined ( "_SECURITY" )) {
 				if (isset ( $_POST ["homepage_title_" . $lang] )) {
 					$page = db_escape ( $_POST ["homepage_title_" . $lang] );
 					setconfig ( "homepage_title_" . $lang, $page );
-					if ($lang == getconfig ( "default_language" )) {
+					if ($lang == Settings::get ( "default_language" )) {
 						setconfig ( "homepage_title", $page );
 					}
 				}
@@ -23,10 +23,10 @@ if (defined ( "_SECURITY" )) {
 		
 		for($i = 0; $i < count ( $languages ); $i ++) {
 			$lang = $languages [$i];
-			$homepage_titles [$lang] = getconfig ( "homepage_title_" . $lang );
+			$homepage_titles [$lang] = Settings::get ( "homepage_title_" . $lang );
 			
 			if (! $homepage_titles [$lang])
-				$homepage_titles [$lang] = getconfig ( "homepage_title" );
+				$homepage_titles [$lang] = Settings::get ( "homepage_title" );
 		}
 		
 		?>

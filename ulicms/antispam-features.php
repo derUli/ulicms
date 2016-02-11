@@ -7,8 +7,8 @@ function is_chinese($str) {
 
 // checking if this Country is blocked by spamfilter
 function isCountryBlocked() {
-	$country_blacklist = getconfig ( "country_blacklist" );
-	$country_whitelist = getconfig ( "country_whitelist" );
+	$country_blacklist = Settings::get ( "country_blacklist" );
+	$country_whitelist = Settings::get ( "country_whitelist" );
 	
 	$country_blacklist = str_replace ( " ", "", $country_blacklist );
 	$country_whitelist = str_replace ( " ", "", $country_whitelist );

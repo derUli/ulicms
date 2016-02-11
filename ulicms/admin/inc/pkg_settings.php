@@ -11,7 +11,7 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 			$new_pkg_src .= "/";
 		
 		if ($new_pkg_src == "/") {
-			deleteconfig ( "pkg_src" );
+			Settings::delete ( "pkg_src" );
 		} else {
 			$new_pkg_src = db_escape ( $new_pkg_src );
 			setconfig ( "pkg_src", $new_pkg_src );
@@ -26,7 +26,7 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 	
 	$local_pkg_dir = "../packages/";
 	$local_pkg_dir_value = "../packages/";
-	$pkg_src = getconfig ( "pkg_src" );
+	$pkg_src = Settings::get ( "pkg_src" );
 	
 	$is_other = ($pkg_src !== $default_pkg_src and $pkg_src !== $local_pkg_dir and $pkg_src !== $local_pkg_dir_value);
 	
@@ -95,7 +95,7 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 	?>" />
 
 	<?php
-	if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>
 		<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>

@@ -12,7 +12,7 @@ if (defined ( "_SECURITY" )) {
 				if (isset ( $_POST ["frontpage_" . $lang] )) {
 					$page = db_escape ( $_POST ["frontpage_" . $lang] );
 					setconfig ( "frontpage_" . $lang, $page );
-					if ($lang == getconfig ( "default_language" )) {
+					if ($lang == Settings::get ( "default_language" )) {
 						setconfig ( "frontpage", $page );
 					}
 				}
@@ -23,10 +23,10 @@ if (defined ( "_SECURITY" )) {
 		
 		for($i = 0; $i < count ( $languages ); $i ++) {
 			$lang = $languages [$i];
-			$frontpages [$lang] = getconfig ( "frontpage_" . $lang );
+			$frontpages [$lang] = Settings::get ( "frontpage_" . $lang );
 			
 			if (! $frontpages [$lang])
-				$frontpages [$lang] = getconfig ( "frontpage" );
+				$frontpages [$lang] = Settings::get ( "frontpage" );
 		}
 		
 		?>

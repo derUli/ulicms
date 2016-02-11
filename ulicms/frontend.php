@@ -17,7 +17,7 @@ if (! empty ( $_GET ["language"] ) and in_array ( $_GET ["language"], getAllLang
 }
 
 if (! isset ( $_SESSION ["language"] )) {
-	$_SESSION ["language"] = getconfig ( "default_language" );
+	$_SESSION ["language"] = Settings::get ( "default_language" );
 }
 
 setLocaleByLanguage ();
@@ -32,7 +32,7 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
 	}
 }
 
-if (getconfig ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
+if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 	$txt = get_translation ( "IP_BLOCKED_BY_SPAMHAUS" );
 	
 	$txt = str_replace ( "%ip", get_ip (), $txt );
@@ -44,15 +44,15 @@ if (getconfig ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 require_once "templating.php";
 $status = check_status ();
 
-if (getconfig ( "redirection" ) != "" && getconfig ( "redirection" ) != false) {
+if (Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
 	add_hook ( "before_global_redirection" );
-	header ( "Location: " . getconfig ( "redirection" ) );
+	header ( "Location: " . Settings::get ( "redirection" ) );
 	exit ();
 }
 
 $theme = get_theme ();
 
-if (strtolower ( getconfig ( "maintenance_mode" ) ) == "on" || strtolower ( getconfig ( "maintenance_mode" ) ) == "true" || getconfig ( "maintenance_mode" ) == "1") {
+if (strtolower ( Settings::get ( "maintenance_mode" ) ) == "on" || strtolower ( Settings::get ( "maintenance_mode" ) ) == "true" || Settings::get ( "maintenance_mode" ) == "1") {
 	add_hook ( "before_maintenance_message" );
 	// Sende HTTP Status 503 und Retry-After im Wartungsmodus
 	header ( 'HTTP/1.0 503 Service Temporarily Unavailable' );
@@ -144,7 +144,7 @@ if (is_logged_in ()) {
 
 add_hook ( "before_html" );
 
-$c = getconfig ( "cache_type" );
+$c = Settings::get ( "cache_type" );
 switch ($c) {
 	case "cache_lite" :
 		@include "Cache/Lite.php";
@@ -158,7 +158,7 @@ switch ($c) {
 		break;
 }
 
-if (file_exists ( $cached_page_path ) and ! getconfig ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
+if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	
 	$cached_content = file_get_contents ( $cached_page_path );
 	$last_modified = filemtime ( $cached_page_path );
@@ -168,7 +168,7 @@ if (file_exists ( $cached_page_path ) and ! getconfig ( "cache_disabled" ) and g
 		browsercacheOneDay ( $last_modified );
 		echo $cached_content;
 		
-		if (getconfig ( "no_auto_cron" )) {
+		if (Settings::get ( "no_auto_cron" )) {
 			die ();
 		}
 		
@@ -179,7 +179,7 @@ if (file_exists ( $cached_page_path ) and ! getconfig ( "cache_disabled" ) and g
 	}
 }
 
-if (! getconfig ( "cache_disabled" and getenv ( 'REQUEST_METHOD' ) == "GET" ) and ! file_exists ( $cached_page_path ) and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" and getenv ( 'REQUEST_METHOD' ) == "GET" ) and ! file_exists ( $cached_page_path ) and $cache_type === "file") {
 	ob_start ();
 } else if (file_exists ( $cached_page_path )) {
 	$last_modified = filemtime ( $cached_page_path );
@@ -190,9 +190,9 @@ if (! getconfig ( "cache_disabled" and getenv ( 'REQUEST_METHOD' ) == "GET" ) an
 
 $id = md5 ( $_SERVER ['REQUEST_URI'] . $_SESSION ["language"] . strbool ( is_mobile () ) );
 
-if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
+if (! Settings::get ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
 	$options = array (
-			'lifeTime' => getconfig ( "cache_period" ),
+			'lifeTime' => Settings::get ( "cache_period" ),
 			'cacheDir' => "content/cache/" 
 	);
 	
@@ -234,7 +234,7 @@ if ($html_file) {
 
 add_hook ( "after_html" );
 
-if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
+if (! Settings::get ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
 	$data = ob_get_clean ();
 	
 	if (! defined ( "EXCEPTION_OCCURRED" ) and ! defined ( "NO_CACHE" )) {
@@ -245,7 +245,7 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 	browsercacheOneDay ();
 	echo $data;
 	
-	if (getconfig ( "no_auto_cron" )) {
+	if (Settings::get ( "no_auto_cron" )) {
 		die ();
 	}
 	add_hook ( "before_cron" );
@@ -254,7 +254,7 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 	die ();
 }
 
-if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	$generated_html = ob_get_clean ();
 	
 	if (! defined ( "EXCEPTION_OCCURRED" ) and ! defined ( "NO_CACHE" )) {
@@ -268,7 +268,7 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 	echo ($generated_html);
 	
 	// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
-	if (getconfig ( "no_auto_cron" )) {
+	if (Settings::get ( "no_auto_cron" )) {
 		die ();
 	}
 	add_hook ( "before_cron" );
@@ -277,7 +277,7 @@ if (! getconfig ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHO
 	die ();
 } else {
 	
-	if (getconfig ( "no_auto_cron" )) {
+	if (Settings::get ( "no_auto_cron" )) {
 		die ();
 	}
 	

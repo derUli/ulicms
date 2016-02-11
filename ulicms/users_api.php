@@ -39,7 +39,7 @@ function resetPassword($username, $length = 12) {
 	$message = str_replace ( "%password%", $new_pass, $message );
 	$message = str_replace ( "%username%", $user ["username"], $message );
 	
-	$headers = "From: " . getconfig ( "email" ) . "\n" . "Content-type: text/plain; charset=UTF-8";
+	$headers = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=UTF-8";
 	@Mailer::send ( $user ["email"], TRANSLATION_RESET_PASSWORD_SUBJECT, $message, $headers );
 	return true;
 }
@@ -72,7 +72,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	$group = intval ( $group );
 	// Default ACL Group
 	if (! $acl_group)
-		$acl_group = getconfig ( "default_acl_group" );
+		$acl_group = Settings::get ( "default_acl_group" );
 	if (! $acl_group)
 		$acl_group = "NULL";
 	
@@ -84,7 +84,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	db_query ( "INSERT INTO " . tbname ( "users" ) . "
 (username,lastname, firstname, email, password, `group`, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( Encryption::hashPassword ( $password ) ) . "',$group, " . $acl_group . ", $require_password_change, NOW(), $admin, $locked)" ) or die ( db_error () );
 	$message = "Hallo $firstname,\n\n" . "Ein Administrator hat auf http://" . $_SERVER ["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" . "Die Zugangsdaten lauten:\n\n" . "Benutzername: $username\n" . "Passwort: $password\n";
-	$header = "From: " . getconfig ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
+	$header = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
 	
 	if ($sendMessage) {
 		@Mailer::send ( $email, "Dein Benutzer-Account bei " . $_SERVER ["SERVER_NAME"], $message, $header );
@@ -123,9 +123,9 @@ function register_session($user, $redirect = true) {
 	
 	db_query ( "UPDATE " . tbname ( "users" ) . " SET `last_login` = " . time () . " where id = " . $user ["id"] );
 	if ($user ["notify_on_login"]) {
-		$subject = "Login auf \"" . getconfig ( "homepage_title" ) . "\" als " . $user ["username"];
+		$subject = "Login auf \"" . Settings::get ( "homepage_title" ) . "\" als " . $user ["username"];
 		$text = "Von der IP " . $_SERVER ["REMOTE_ADDR"] . " hat sich jemand um " . date ( "r" ) . " erfolgreich in das Benutzerkonto " . $user ["username"] . " auf dem Server " . $_SERVER ["HTTP_HOST"] . " eingeloggt.";
-		$headers = "From: " . getconfig ( "email" );
+		$headers = "From: " . Settings::get ( "email" );
 		Mailer::send ( $user ["email"], $subject, $text, $headers );
 	}
 	
@@ -151,11 +151,11 @@ function validate_login($user, $password, $token = null) {
 		} else {
 			$password = Encryption::hashPassword ( $password );
 		}
-		$twofactor_authentication = getconfig ( "twofactor_authentication" );
+		$twofactor_authentication = Settings::get ( "twofactor_authentication" );
 		if ($user ["password"] == $password) {
 			if ($twofactor_authentication and ! is_null ( $token )) {
 				$ga = new PHPGangsta_GoogleAuthenticator ();
-				$ga_secret = getconfig ( "ga_secret" );
+				$ga_secret = Settings::get ( "ga_secret" );
 				$code = $ga->getCode ( $ga_secret );
 				if ($code != $token) {
 					$_REQUEST ["error"] = get_translation ( "confirmation_code_wrong" );
@@ -172,7 +172,7 @@ function validate_login($user, $password, $token = null) {
 			return $user;
 		} else {
 			// Limit Login Attampts
-			$max_failed_logins_items = intval ( getconfig ( "max_failed_logins_items" ) );
+			$max_failed_logins_items = intval ( Settings::get ( "max_failed_logins_items" ) );
 			if ($max_failed_logins_items >= 1) {
 				db_query ( "update " . tbname ( "users" ) . " set `failed_logins` = `failed_logins` + 1 where id = " . intval ( $user ["id"] ) );
 				db_query ( "update " . tbname ( "users" ) . " set `locked` = 1, `failed_logins` = 0 where `failed_logins` >= $max_failed_logins_items" );

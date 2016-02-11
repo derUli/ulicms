@@ -1,10 +1,10 @@
 <?php
 require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
 $ga = new PHPGangsta_GoogleAuthenticator ();
-$ga_secret = getconfig ( "ga_secret" );
+$ga_secret = Settings::get ( "ga_secret" );
 $qrCodeUrl = $ga->getQRCodeGoogleUrl ( "UliCMS Login auf " . get_domain (), $ga_secret );
 
-$twofactor_authentication = getconfig ( "twofactor_authentication" );
+$twofactor_authentication = Settings::get ( "twofactor_authentication" );
 
 $languages = getAvailableBackendLanguages ();
 $default_language = getSystemLanguage ();
@@ -12,7 +12,7 @@ if (isset ( $_SESSION ["language"] ) and in_array ( $_SESSION ["language"], $lan
 	$default_language = $_SESSION ["language"];
 }
 
-$admin_logo = getconfig ( "admin_logo" );
+$admin_logo = Settings::get ( "admin_logo" );
 if (! $admin_logo) {
 	$admin_logo = "gfx/logo.png";
 }
@@ -137,7 +137,7 @@ if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {
 ?>
 				<?php
 				
-				if (getconfig ( "visitors_can_register" ) === "on" or getconfig ( "visitors_can_register" ) === "1") {
+				if (Settings::get ( "visitors_can_register" ) === "on" or Settings::get ( "visitors_can_register" ) === "1") {
 					
 					?>
 <a
@@ -154,7 +154,7 @@ if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {
 				?>
 				<?php
 				
-				if (! getconfig ( "disable_password_reset" )) {
+				if (! Settings::get ( "disable_password_reset" )) {
 					?>
 <a href="?reset_password" style="float: right;">[<?php
 					

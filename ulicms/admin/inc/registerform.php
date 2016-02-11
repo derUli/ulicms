@@ -1,5 +1,5 @@
 <?php
-if (getconfig ( "visitors_can_register" ) == "off" or ! getconfig ( "visitors_can_register" ))
+if (Settings::get ( "visitors_can_register" ) == "off" or ! Settings::get ( "visitors_can_register" ))
 	die ( TRANSLATION_FUNCTION_IS_DISABLED );
 
 $errors = false;
@@ -14,7 +14,7 @@ if (isset ( $_POST ["register_user"] )) {
 	} 
 
 	else {
-		$registered_user_default_level = getconfig ( "registered_user_default_level" );
+		$registered_user_default_level = Settings::get ( "registered_user_default_level" );
 		if ($registered_user_default_level === false) {
 			$registered_user_default_level = 10;
 		}
@@ -104,7 +104,7 @@ csrf_token_html ();
 	<br />
 
 	<?php
-	if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>

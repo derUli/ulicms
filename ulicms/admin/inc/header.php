@@ -112,7 +112,7 @@ foreach ( $styles as $style ) {
 
 combined_stylesheet_html ();
 ?>
-<title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
+<title>[<?php echo Settings::get("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript">
 $(document).ready(function(){	
     $(".tablesorter").tablesorter({widgets: ["zebra"]}); 

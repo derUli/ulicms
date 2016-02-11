@@ -61,7 +61,7 @@ if (defined ( "_SECURITY" )) {
 		if (! empty ( $_SESSION ["filter_language"] )) {
 			$default_language = $_SESSION ["filter_language"];
 		} else {
-			$default_language = getconfig ( "default_language" );
+			$default_language = Settings::get ( "default_language" );
 		}
 		
 		for($j = 0; $j < count ( $languages ); $j ++) {
@@ -405,7 +405,7 @@ var editor = CKEDITOR.replace( 'page_content',
 					{
 						skin : '<?php
 			
-			echo getconfig ( "ckeditor_skin" );
+			echo Settings::get ( "ckeditor_skin" );
 			?>'
 					});                                         
 
@@ -474,7 +474,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 		?>">
 	</div>
 	<?php
-		if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 			?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
