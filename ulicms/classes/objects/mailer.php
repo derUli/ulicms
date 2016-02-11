@@ -68,8 +68,7 @@ class Mailer {
 		
 		// UliCMS speichert seit UliCMs 9.0.1 E-Mails, die das System versendet hat
 		// in der Datenbank
-		$insert_sql = "INSERT INTO " . tbname ( "mails" ) . " (headers, `to`, subject, body) VALUES (
-     '" . db_escape ( $headers ) . "', '" . db_escape ( $to ) . "', '" . db_escape ( $subject ) . "', '" . db_escape ( $message ) . "')";
+		$insert_sql = "INSERT INTO " . tbname ( "mails" ) . " (headers, `to`, subject, body) VALUES ('" . db_escape ( $headers ) . "', '" . db_escape ( $to ) . "', '" . db_escape ( $subject ) . "', '" . db_escape ( $message ) . "')";
 		db_query ( $insert_sql );
 		
 		// Damit Umlaute auch im Betreff korrekt dargestellt werden, diese mit UTF-8 kodieren
