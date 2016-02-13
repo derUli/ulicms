@@ -195,7 +195,7 @@ if ($config->db_server == "" or $config->db_user == "") {
 	exit ();
 }
 
-@$connection = db_connect ( $config->db_server, $config->db_user, $config->db_password );
+@$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password );
 
 if ($connection === false) {
 	throw new Exception ( "Fehler: Die Verbindung zum Datenbank Server konnte nicht hergestellt werden." );
@@ -211,7 +211,7 @@ if (file_exists ( $path_to_installer )) {
 	exit ();
 }
 
-$select = schema_select ( $config->db_database );
+$select = Database::select ( $config->db_database );
 
 if (! $select) {
 	throw new Exception ( "Fehler: Die Datenbank " . $config->db_database . " existiert nicht.\n" );
@@ -219,7 +219,7 @@ if (! $select) {
 
 $existing_tables = array ();
 if (! defined ( "SKIP_TABLE_CHECK" )) {
-	$existing_tables = db_get_tables ();
+	$existing_tables = Database::getAllTables ();
 	$required_tables = array (
 			tbname ( "users" ),
 			tbname ( "banner" ),
