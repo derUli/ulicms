@@ -124,7 +124,7 @@ class Database {
 		
 		// @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
 		$retval = array ();
-		while ( $row = db_fetch_assoc ( $result ) ) {
+		while ( $row = self::fetchAssoc ( $result ) ) {
 			$retval [] = $row;
 		}
 		
@@ -160,13 +160,6 @@ class Database {
 		global $db_connection;
 		return mysqli_affected_rows ( $db_connection );
 	}
-	public static function selectSchema($schema) {
-		global $db_connection;
-		return db_select ( $schema );
-	}
-	public static function selectDB($schema) {
-		return schema_select ( $schema );
-	}
 	public static function fetchObject($result) {
 		return mysqli_fetch_object ( $result );
 	}
@@ -181,7 +174,7 @@ class Database {
 		return mysqli_error ( $db_connection );
 	}
 	public static function error() {
-		return db_last_error ();
+		return self::getLastError ();
 	}
 	public static function getAllTables() {
 		global $db_connection;
