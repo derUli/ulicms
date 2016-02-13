@@ -297,7 +297,7 @@ if (! $ga_secret) {
 	require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
 	$ga = new PHPGangsta_GoogleAuthenticator ();
 	$ga_secret = $ga->createSecret ();
-	setconfig ( "ga_secret", db_escape ( $ga_secret ) );
+	setconfig ( "ga_secret", Database::escapeValue ( $ga_secret ) );
 }
 
 // Falls nicht gesetzt, robots auf Standardwert setzen
