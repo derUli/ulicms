@@ -182,5 +182,3 @@ function validate_login($user, $password, $token = null) {
 	$_REQUEST ["error"] = TRANSLATION_USER_OR_PASSWORD_INCORRECT;
 	return false;
 }
-
-?>
