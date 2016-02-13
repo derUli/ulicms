@@ -20,3 +20,4 @@
 + Homepage URL kann nun im User hinterlegt werden.
 + XSS Sicherheitslücke im Bannersystem korrigiert
 + Mailer Klasse hinzugefügt
++ Database Klasse hinzugefügt
