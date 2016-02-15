@@ -1691,11 +1691,10 @@ function cms_version() {
 	$v = new ulicms_version ();
 	return implode ( ".", $v->getInternalVersion () );
 }
-
-function is_tablet(){
-   $detect = new Mobile_Detect ();
-   $result = $detect->isTablet ();
-   return $result;
+function is_tablet() {
+	$detect = new Mobile_Detect ();
+	$result = $detect->isTablet ();
+	return $result;
 }
 
 // 21. Februar 2015
