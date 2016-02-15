@@ -6,7 +6,7 @@ class CustomData {
 		
 		$sql = "SELECT `custom_data` FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
 		$query = Database::query ( $sql );
-		if (db_num_rows ( $query ) > 0) {
+		if (Database::getNumRows ( $query ) > 0) {
 			$result = Database::fetchObject ( $query );
 			return json_decode ( $result->custom_data, true );
 		}
