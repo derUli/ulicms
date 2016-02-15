@@ -222,10 +222,9 @@ if ($html_file) {
 	content ();
 	
 	add_hook ( "after_content" );
-
-
+	
 	add_hook ( "before_edit_button" );
-
+	
 	edit_button ();
 	add_hook ( "after_edit_button" );
 	
