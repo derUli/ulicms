@@ -21,3 +21,4 @@
 + XSS Sicherheitslücke im Bannersystem korrigiert
 + Mailer Klasse hinzugefügt
 + Database Klasse hinzugefügt
++ CustomData Klasse hinzugefügt
