@@ -3,12 +3,9 @@
 // It's currently only used for overriding of translation
 class Translation {
 	private static $translations = null;
-	
-	public static function init(){
-		$translations = array(); 
-		
+	public static function init() {
+		$translations = array ();
 	}
-	
 	public static function set($key, $value) {
 		$key = "translation_" . $key;
 		$key = strtoupper ( $key );
