@@ -18,6 +18,7 @@ setLanguageByDomain ();
 
 $syslang = getSystemLanguage ();
 include_once getLanguageFilePath ( $syslang );
+Translation::includeCustomLangFile($_SESSION ["language"]);
 add_hook ( "custom_lang_" . $_SESSION ["language"] );
 
 if (logged_in () and $_SERVER ["REQUEST_METHOD"] == "POST" and ! isset ( $_REQUEST ["ajax_cmd"] ) and ! defined ( "NO_ANTI_CSRF" )) {

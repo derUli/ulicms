@@ -12,7 +12,7 @@ class Translation {
 		self::$translations [$key] = $value;
 	}
 	public static function override($key, $value) {
-		self::set($key, $value);
+		self::set ( $key, $value );
 	}
 	public static function get($key) {
 		$retval = null;
@@ -20,5 +20,12 @@ class Translation {
 			$retval = self::$translations [$key];
 		}
 		return $retval;
+	}
+	public static function includeCustomLangFile($lang) {
+		$file = ULICMS_ROOT . "/lang/custom/de.php";
+		if(file_exists($file) and is_file($file)){
+			include_once $file;
+			
+		}
 	}
 }

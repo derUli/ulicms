@@ -24,6 +24,7 @@ setLocaleByLanguage ();
 
 if (in_array ( $_SESSION ["language"], getAllLanguages () )) {
 	include getLanguageFilePath ( $_SESSION ["language"] );
+	Translation::includeCustomLangFile ( $_SESSION ["language"] );
 	add_hook ( "custom_lang_" . $_SESSION ["language"] );
 }
 
