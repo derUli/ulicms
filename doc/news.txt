@@ -22,3 +22,4 @@
 + Mailer Klasse hinzugefügt
 + Database Klasse hinzugefügt
 + CustomData Klasse hinzugefügt
++ Translation Overrides (Übersetzungen update-sicher anpassen)
