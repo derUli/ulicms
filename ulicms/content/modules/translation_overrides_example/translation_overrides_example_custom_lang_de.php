@@ -1,3 +1,3 @@
 <?php
-Translation::set("powered_by_ulicms", "Läuft mit UliCMS");
-Translation::set("page_cache", "Zwischenspeicher");
+Translation::override("powered_by_ulicms", "Läuft mit UliCMS");
+Translation::override("page_cache", "Zwischenspeicher");

@@ -11,6 +11,9 @@ class Translation {
 		$key = strtoupper ( $key );
 		self::$translations [$key] = $value;
 	}
+	public static function override($key, $value) {
+		self::set($key, $value);
+	}
 	public static function get($key) {
 		$retval = null;
 		if (isset ( self::$translations [$key] )) {
