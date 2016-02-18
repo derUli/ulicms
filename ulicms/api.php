@@ -1089,9 +1089,15 @@ function get_translation($name, $placeholders = array()) {
 		if (startsWith ( $key, "TRANSLATION_" ) and $key == "TRANSLATION_" . $iname) {
 			// Platzhalter ersetzen, diese können als assoziatives Array als zweiter Parameter
 			// dem Funktionsaufruf mitgegeben werden
+			$custom_translation = Translation::get ( $key );
+			if ($custom_translation != null) {
+				$value = $custom_translation;
+			}
 			foreach ( $placeholders as $placeholder => $replacement ) {
+				
 				$value = str_ireplace ( $placeholder, $replacement, $value );
 			}
+			
 			return $value;
 		}
 	}

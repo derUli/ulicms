@@ -18,6 +18,8 @@ setLanguageByDomain ();
 
 $syslang = getSystemLanguage ();
 include_once getLanguageFilePath ( $syslang );
+add_hook ( "custom_lang_" . $_SESSION ["language"] );
+
 if (logged_in () and $_SERVER ["REQUEST_METHOD"] == "POST" and ! isset ( $_REQUEST ["ajax_cmd"] ) and ! defined ( "NO_ANTI_CSRF" )) {
 	if (! check_csrf_token ()) {
 		die ( "This is probably a CSRF attack!" );
