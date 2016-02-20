@@ -85,4 +85,48 @@ class Page extends Content {
 			throw new Exception ( "No such page" );
 		}
 	}
+	public function save() {
+		$retval = null;
+		if ($id === null) {
+			$retval = $this->create ();
+		} else {
+			$retval = $this->update ();
+		}
+		return $retval;
+	}
+	public function create() {
+		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category, 
+				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views, 
+				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at, 
+				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description) VALUES (";
+		
+		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->title ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->alternate_title ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->target ) . "',";
+		$sql .= intval ( $this->category ) . ",";
+		$sql .= "'" . DB::escapeValue ( $this->content ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->language ) . "',";
+		
+		if ($this->menu_image == null) {
+			$sql .= " NULL ,";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->menu_image ) . "',";
+		}
+		
+		$sql .= intval ( $this->active ) . ",";
+		$this->created = time();
+		$this->lastmodified = $this->created;
+		$sql .= intval ( $this->created ) . ",";
+		$sql .= intval ( $this->lastmodified ) . ",";
+		$sql .= intval ( $this->autor ) . ",";
+		$sql .= intval ( $this->lastchangeby ) . ",";
+		$sql .= "0,";
+		
+		$sql .= ")";
+		
+		$result = DB::Query ( $sql );
+		$self->id = DB::getLastInsertID ();
+		return $result;
+	}
 }
