@@ -74,9 +74,3 @@ homepage_title ();
 			?>
 <h1><?php headline();?></h1>
 <?php } 
-$page = new Page ();
-$page->systemname = "blubb";
-$page->title = "Hallo Welt";
-$page->language = "de";
-$page->content = '"Hallo Welt!"';
-$page->save ();
