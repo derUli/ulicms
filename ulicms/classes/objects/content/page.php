@@ -182,10 +182,7 @@ class Page extends Content {
 		$self->id = DB::getLastInsertID ();
 		return $result;
 	}
-	
-
 	public function update() {
-		throw new NotImplementedException("Not implemented yet!");
-		
+		throw new NotImplementedException ( "Update not implemented yet!" );
 	}
 }
