@@ -73,4 +73,10 @@ homepage_title ();
 		if (! containsModule ( null, "blog" )) {
 			?>
 <h1><?php headline();?></h1>
-<?php } ?>
+<?php } 
+$page = new Page ();
+$page->systemname = "blubb";
+$page->title = "Hallo Welt";
+$page->language = "de";
+$page->content = '"Hallo Welt!"';
+$page->save ();

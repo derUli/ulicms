@@ -161,8 +161,8 @@ class Page extends Content {
 			$sql .= "'" . DB::escapeValue ( $this->theme ) . "',";
 		}
 		
-		if ($row->custom_data === null) {
-			$row->custom_data = array ();
+		if ($this->custom_data === null) {
+			$this->custom_data = array ();
 		}
 		
 		$json = json_encode ( $row->custom_data );
@@ -179,10 +179,18 @@ class Page extends Content {
 		$sql .= ")";
 		
 		$result = DB::Query ( $sql ) or die ( DB::error () );
-		$self->id = DB::getLastInsertID ();
+		$this->id = DB::getLastInsertID ();
 		return $result;
 	}
 	public function update() {
+		// 
+		if ($this->id === null) {
+			return $this->create ();
+		}
+		$sql = "UPDATE " . tbname ( "content" );
+		$sql .= " WHERE id = ".$this->id;
+		
 		throw new NotImplementedException ( "Page update not implemented yet!" );
 	}
 }
+
