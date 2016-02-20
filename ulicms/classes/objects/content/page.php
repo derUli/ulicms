@@ -175,7 +175,6 @@ class Page extends Content {
 		$sql .= "'" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_image ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_description ) . "'";
-		
 		$sql .= ")";
 		
 		$result = DB::Query ( $sql ) or die ( DB::error () );
@@ -183,14 +182,43 @@ class Page extends Content {
 		return $result;
 	}
 	public function update() {
-		//
+		$result = null;
 		if ($this->id === null) {
 			return $this->create ();
 		}
-		$sql = "UPDATE " . tbname ( "content" );
-		$sql .= " WHERE id = " . $this->id;
 		
-		throw new NotImplementedException ( "Page update not implemented yet!" );
+		$this->lastmodified = time ();
+		
+		if (get_user_id () > 0) {
+			$this->lastchangeby = get_user_id ();
+		}
+		
+		$sql = "UPDATE " . tbname ( "content" ) . " ";
+		
+		$sql .= "set systemname='" . DB::escapeValue ( $this->systemname ) . "',";
+		$sql .= "title='" . DB::escapeValue ( $this->title ) . "',";
+		$sql .= "alternate_title='" . DB::escapeValue ( $this->alternate_title ) . "',";
+		$sql .= "target='" . DB::escapeValue ( $this->target ) . "',";
+		$sql .= "category = " . intval ( $this->category ) . ",";
+		$sql .= "content='" . DB::escapeValue ( $this->content ) . "',";
+		$sql .= "language='" . DB::escapeValue ( $this->language ) . "',";
+		
+		if ($this->menu_image === null) {
+			$sql .= "menu_image = NULL ,";
+		} else {
+			$sql .= "menu_image =  '" . DB::escapeValue ( $this->menu_image ) . "',";
+		}
+		
+		$sql .= "active=" . intval ( $this->active ) . ",";
+		$sql .= "lastmodified=" . intval ( $this->lastmodified ) . ",";
+		$sql .= "autor=" . intval ( $this->autor ) . ",";
+		$sql .= "lastchangeby=" . intval ( $this->lastchangeby ) . ",";
+		
+		$sql .= " WHERE id = " . $this->id;
+		throw new NotImplementedException ( "Page update not Implemented yet" );
+		
+		$result = DB::query ( $sql ) or die ( DB::getLastError () );
+		return $result;
 	}
 }
 
