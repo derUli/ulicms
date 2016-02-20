@@ -1,5 +1,6 @@
 <?php
 class Page extends Content {
+	// @FIXME: Variablen alle private machen und getter und setter implementieren
 	public $id = null;
 	public $systemname = "";
 	public $title = "";
