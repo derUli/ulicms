@@ -108,20 +108,30 @@ class Page extends Content {
 		$sql .= "'" . DB::escapeValue ( $this->content ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->language ) . "',";
 		
-		if ($this->menu_image == null) {
+		if ($this->menu_image === null) {
 			$sql .= " NULL ,";
 		} else {
 			$sql .= "'" . DB::escapeValue ( $this->menu_image ) . "',";
 		}
 		
 		$sql .= intval ( $this->active ) . ",";
-		$this->created = time();
+		$this->created = time ();
 		$this->lastmodified = $this->created;
 		$sql .= intval ( $this->created ) . ",";
 		$sql .= intval ( $this->lastmodified ) . ",";
 		$sql .= intval ( $this->autor ) . ",";
 		$sql .= intval ( $this->lastchangeby ) . ",";
+		// Views
 		$sql .= "0,";
+		
+		if ($this->redirection === null) {
+			$sql .= " NULL ,";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->redirection ) . "',";
+		}
+		
+		$sql .= "'" . DB::escapeValue ( $this->menu ) . "',";
+		$sql .= intval ( $this->position ) . ",";
 		
 		$sql .= ")";
 		
