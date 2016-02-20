@@ -183,6 +183,6 @@ class Page extends Content {
 		return $result;
 	}
 	public function update() {
-		throw new NotImplementedException ( "Update not implemented yet!" );
+		throw new NotImplementedException ( "Page update not implemented yet!" );
 	}
 }
