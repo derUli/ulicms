@@ -8,7 +8,7 @@ class ContentFactory {
 			if ($result->type == "page") {
 				$page = new Page ();
 				$page->loadByID ( $id );
-				return $page
+				return $page;
 			}
 		} else {
 			throw new Exception ( "No page with id $id" );
@@ -23,7 +23,7 @@ class ContentFactory {
 			if ($result->type == "page") {
 				$page = new Page ();
 				$page->loadByID ( $result->$id );
-				return $page
+				return $page;
 			}
 		} else {
 			throw new Exception ( "No page with this combination of $name and $language" );
