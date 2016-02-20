@@ -183,12 +183,12 @@ class Page extends Content {
 		return $result;
 	}
 	public function update() {
-		// 
+		//
 		if ($this->id === null) {
 			return $this->create ();
 		}
 		$sql = "UPDATE " . tbname ( "content" );
-		$sql .= " WHERE id = ".$this->id;
+		$sql .= " WHERE id = " . $this->id;
 		
 		throw new NotImplementedException ( "Page update not implemented yet!" );
 	}
