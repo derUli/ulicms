@@ -133,11 +133,59 @@ class Page extends Content {
 		
 		$sql .= "'" . DB::escapeValue ( $this->menu ) . "',";
 		$sql .= intval ( $this->position ) . ",";
+		if ($this->parent === null) {
+			$sql .= " NULL ,";
+		} else {
+			$sql .= intval ( $this->parent ) . ",";
+		}
+		
+		$sql .= "'" . DB::escapeValue ( $this->access ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->meta_description ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->meta_keywords ) . "',";
+		
+		if ($this->deleted_at === null) {
+			$sql .= " NULL ,";
+		} else {
+			$sql .= intval ( $this->deleted_at ) . ",";
+		}
+		
+		if ($this->html_file === null) {
+			$sql .= " NULL ,";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->html_file ) . "',";
+		}
+		
+		if ($this->theme === null) {
+			$sql .= " NULL ,";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->theme ) . "',";
+		}
+		
+		if ($row->custom_data === null) {
+			$row->custom_data = array ();
+		}
+		
+		$json = json_encode ( $row->custom_data );
+		
+		$sql .= "'" . DB::escapeValue ( $row->custom_data ) . "',";
+		
+		$sql .= "'" . DB::escapeValue ( $row->type ) . "',";
+		
+		$sql .= "'" . DB::escapeValue ( $this->og_title ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->og_type ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->og_image ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->og_description ) . "'";
 		
 		$sql .= ")";
 		
-		$result = DB::Query ( $sql );
+		$result = DB::Query ( $sql ) or die ( DB::error () );
 		$self->id = DB::getLastInsertID ();
 		return $result;
+	}
+	
+
+	public function update() {
+		throw new NotImplementedException("Not implemented yet!");
+		
 	}
 }
