@@ -214,6 +214,20 @@ class Page extends Content {
 		$sql .= "autor=" . intval ( $this->autor ) . ",";
 		$sql .= "lastchangeby=" . intval ( $this->lastchangeby ) . ",";
 		
+		if ($this->redirection === null) {
+			$sql .= "redirection = NULL ,";
+		} else {
+			$sql .= "redirection = '" . DB::escapeValue ( $this->redirection ) . "',";
+		}
+		
+		$sql .= "menu = '" . DB::escapeValue ( $this->menu ) . "',";
+		$sql .= "position = " . intval ( $this->position ) . ",";
+		if ($this->parent === null) {
+			$sql .= "parent = NULL ,";
+		} else {
+			$sql .= "parent = " . intval ( $this->parent ) . ",";
+		}
+		
 		$sql .= " WHERE id = " . $this->id;
 		throw new NotImplementedException ( "Page update not Implemented yet" );
 		
