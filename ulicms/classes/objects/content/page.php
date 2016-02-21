@@ -32,6 +32,11 @@ class Page extends Content {
 	public $og_type = "";
 	public $og_image = "";
 	public $og_description = "";
+	public function __construct() {
+		if ($this->custom_data === null) {
+			$this->custom_data = array ();
+		}
+	}
 	private function fillVarsByResult($result) {
 		$this->id = $result->id;
 		$this->systemname = $result->systemname;
@@ -58,7 +63,11 @@ class Page extends Content {
 		$this->deleted_at = $result->deleted_at;
 		$this->html_file = $result->html_file;
 		$this->theme = $result->theme;
+		if ($this->customData === null) {
+			$this->custom_data = array ();
+		}
 		$this->custom_data = json_decode ( $result->custom_data, true );
+		
 		$this->type = "page";
 		$this->og_title = $result->og_title;
 		$this->og_type = $result->og_type;
@@ -88,7 +97,7 @@ class Page extends Content {
 	}
 	public function save() {
 		$retval = null;
-		if ($id === null) {
+		if ($this->id === null) {
 			$retval = $this->create ();
 		} else {
 			$retval = $this->update ();
@@ -165,11 +174,11 @@ class Page extends Content {
 			$this->custom_data = array ();
 		}
 		
-		$json = json_encode ( $row->custom_data );
+		$json = json_encode ( $this->custom_data, JSON_FORCE_OBJECT );
 		
 		$sql .= "'" . DB::escapeValue ( $json ) . "',";
 		
-		$sql .= "'" . DB::escapeValue ( $row->type ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->type ) . "',";
 		
 		$sql .= "'" . DB::escapeValue ( $this->og_title ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_type ) . "',";
@@ -254,19 +263,18 @@ class Page extends Content {
 			$this->custom_data = array ();
 		}
 		
-		$json = json_encode ( $row->custom_data );
+		$json = json_encode ( $this->custom_data, JSON_FORCE_OBJECT );
 		
 		$sql .= "custom_data='" . DB::escapeValue ( $json ) . "',";
 		
-		$sql .= "type='" . DB::escapeValue ( $row->type ) . "',";
+		$sql .= "type='" . DB::escapeValue ( $this->type ) . "',";
 		
 		$sql .= "og_title='" . DB::escapeValue ( $this->og_title ) . "',";
 		$sql .= "og_type='" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "og_image='" . DB::escapeValue ( $this->og_image ) . "',";
-		$sql .= "og_description'" . DB::escapeValue ( $this->og_description ) . "'";
+		$sql .= "og_description='" . DB::escapeValue ( $this->og_description ) . "' ";
 		
 		$sql .= " WHERE id = " . $this->id;
-		throw new NotImplementedException ( "Page update not Implemented yet" );
 		
 		$result = DB::query ( $sql ) or die ( DB::getLastError () );
 		return $result;
@@ -275,9 +283,11 @@ class Page extends Content {
 		if ($this->deleted_at === null) {
 			$this->deleted_at = time ();
 		}
+		$this->save ();
 	}
 	public function undelete() {
 		$this->deleted_at = null;
+		$this->save ();
 	}
 }
 
