@@ -23,3 +23,4 @@
 + Database Klasse hinzugefügt
 + CustomData Klasse hinzugefügt
 + Translation Overrides (Übersetzungen update-sicher anpassen)
++ Seiten können nun geklont werden

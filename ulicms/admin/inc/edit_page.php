@@ -3,7 +3,7 @@ include_once ULICMS_ROOT . "/classes/vcs.php";
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "pages" )) {
-		$page = db_escape ( $_GET ["page"] );
+		$page = intval ( $_GET ["page"] );
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE id='$page'" );
 		
 		$allThemes = getThemesList ();
@@ -33,7 +33,7 @@ if (defined ( "_SECURITY" )) {
 			?></strong><br /> <input type="text" required="true" name="page_"
 				value="<?php
 			
-			echo $row->systemname;
+			echo htmlspecialchars ( $row->systemname );
 			?>"> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_PAGE_TITLE;
@@ -451,6 +451,10 @@ function openMenuImageSelectWindow(field) {
 		
 		
 		
+			
+			
+			
+			
 			
 			
 			
