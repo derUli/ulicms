@@ -112,7 +112,7 @@ $_CONFIG = array (
 // '_cssMinCmd' => "java -jar /path/to/yuicompressor.jar --type css {file}",
 // '_jsMinCmd' => "java -jar /path/to/yuicompressor.jar --type js {file}",
 
-
+define("KCFINDER_PAGE", true);
 include_once "../../init.php";
 
 @session_start ();
