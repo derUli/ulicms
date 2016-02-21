@@ -23,7 +23,7 @@ class Page extends Content {
 	public $access = "all";
 	public $meta_description = "";
 	public $meta_keywords = "";
-	public $deleted_at = null;
+	private $deleted_at = null;
 	public $html_file = null;
 	public $theme = null;
 	public $custom_data = null;
@@ -167,7 +167,7 @@ class Page extends Content {
 		
 		$json = json_encode ( $row->custom_data );
 		
-		$sql .= "'" . DB::escapeValue ( $row->custom_data ) . "',";
+		$sql .= "'" . DB::escapeValue ( $json ) . "',";
 		
 		$sql .= "'" . DB::escapeValue ( $row->type ) . "',";
 		
@@ -232,11 +232,52 @@ class Page extends Content {
 		$sql .= "meta_description='" . DB::escapeValue ( $this->meta_description ) . "',";
 		$sql .= "meta_keywords='" . DB::escapeValue ( $this->meta_keywords ) . "',";
 		
+		if ($this->deleted_at === null) {
+			$sql .= "deleted_at=NULL ,";
+		} else {
+			$sql .= "deleted_at=" . intval ( $this->deleted_at ) . ",";
+		}
+		
+		if ($this->html_file === null) {
+			$sql .= "html_file=NULL ,";
+		} else {
+			$sql .= "html_file='" . DB::escapeValue ( $this->html_file ) . "',";
+		}
+		
+		if ($this->theme === null) {
+			$sql .= "theme=NULL ,";
+		} else {
+			$sql .= "theme='" . DB::escapeValue ( $this->theme ) . "',";
+		}
+		
+		if ($this->custom_data === null) {
+			$this->custom_data = array ();
+		}
+		
+		$json = json_encode ( $row->custom_data );
+		
+		$sql .= "custom_data='" . DB::escapeValue ( $json ) . "',";
+		
+		$sql .= "type='" . DB::escapeValue ( $row->type ) . "',";
+		
+		$sql .= "og_title='" . DB::escapeValue ( $this->og_title ) . "',";
+		$sql .= "og_type='" . DB::escapeValue ( $this->og_type ) . "',";
+		$sql .= "og_image='" . DB::escapeValue ( $this->og_image ) . "',";
+		$sql .= "og_description'" . DB::escapeValue ( $this->og_description ) . "'";
+		
 		$sql .= " WHERE id = " . $this->id;
 		throw new NotImplementedException ( "Page update not Implemented yet" );
 		
 		$result = DB::query ( $sql ) or die ( DB::getLastError () );
 		return $result;
+	}
+	public function delete() {
+		if ($this->deleted_at === null) {
+			$this->deleted_at = time ();
+		}
+	}
+	public function undelete() {
+		$this->deleted_at = null;
 	}
 }
 
