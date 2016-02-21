@@ -613,4 +613,6 @@ define ( "TRANSLATION_PAGE", "Page" );
 define ( "TRANSLATION_TWITTER_PROFILE", "Twitter Profile (twitter.com/<u>xxx</u>)" );
 define ( "TRANSLATION_HOMEPAGE", "Homepage" );
 
+define("TRANSLATION_CLONE", "Clone");
+
 add_hook ( "lang_en" );

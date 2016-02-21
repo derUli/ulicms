@@ -106,6 +106,8 @@ if (! $eingeloggt) {
 		require_once "inc/edit_page.php";
 	} else if ($_GET ["action"] == "pages_new") {
 		require_once "inc/add_page.php";
+	}  else if ($_GET ["action"] == "clone_page") {
+		require_once "inc/clone_page.php";
 	} else if ($_GET ["action"] == "banner") {
 		require_once "inc/banner.php";
 	} else if ($_GET ["action"] == "banner_new") {
