@@ -220,13 +220,17 @@ class Page extends Content {
 			$sql .= "redirection = '" . DB::escapeValue ( $this->redirection ) . "',";
 		}
 		
-		$sql .= "menu = '" . DB::escapeValue ( $this->menu ) . "',";
-		$sql .= "position = " . intval ( $this->position ) . ",";
+		$sql .= "menu='" . DB::escapeValue ( $this->menu ) . "',";
+		$sql .= "position=" . intval ( $this->position ) . ",";
 		if ($this->parent === null) {
 			$sql .= "parent = NULL ,";
 		} else {
-			$sql .= "parent = " . intval ( $this->parent ) . ",";
+			$sql .= "parent=" . intval ( $this->parent ) . ",";
 		}
+		
+		$sql .= "access='" . DB::escapeValue ( $this->access ) . "',";
+		$sql .= "meta_description='" . DB::escapeValue ( $this->meta_description ) . "',";
+		$sql .= "meta_keywords='" . DB::escapeValue ( $this->meta_keywords ) . "',";
 		
 		$sql .= " WHERE id = " . $this->id;
 		throw new NotImplementedException ( "Page update not Implemented yet" );
