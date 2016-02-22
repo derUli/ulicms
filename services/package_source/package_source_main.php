@@ -31,6 +31,15 @@ function package_source_show_description() {
 	} else {
 		$html .= get_translation ( "NO_DESCRIPTION_AVAILABLE" );
 	}
+	$package_file = PACKAGE_SOURCE_BASE_PATH . "/" . basename ( $_GET ["ulicms_version"] ) . "/archives/" . basename ( $_GET ["package"] ) . ".tar.gz";
+	
+	if (is_file ( $package_file )) {
+		$lastchanged = filemtime ( $package_file );
+		$lastchanged = strftime ( "%x", $lastchanged );
+		$html .= "<div class=\"last-changed\">" . get_translation ( "LAST_UPDATED", array (
+				"%date%" => $lastchanged 
+		) ) . "</small>";
+	}
 	
 	$html .= "</div>";
 	
