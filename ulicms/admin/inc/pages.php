@@ -355,21 +355,21 @@ $(window).load(function(){
 		echo TRANSLATION_ACTIVATED;
 		?>
 			</th>
-			<td><?php
+			<td style="text-align:center"><?php
 		
 		echo TRANSLATION_VIEW;
 		?>
-			</td><td><?php
+			</td><td style="text-align:center"><?php
 		
 		translate("clone");
 		?>
 			</td>
-			<td><?php
+			<td style="text-align:center"><?php
 		
 		echo TRANSLATION_EDIT;
 		?>
 			</td>
-			<td><?php
+			<td style="text-align:center"><?php
 		
 		echo TRANSLATION_DELETE;
 		?>
