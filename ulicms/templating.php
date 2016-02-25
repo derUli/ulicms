@@ -128,8 +128,9 @@ function all_combined_html() {
 	echo get_all_comined_html ();
 }
 function get_ID() {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$result = null;
 	$sql = "SELECT `id` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -140,8 +141,9 @@ function get_ID() {
 	return $result;
 }
 function get_type() {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$result = "";
 	$sql = "SELECT `type` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -154,8 +156,9 @@ function get_type() {
 	return $result;
 }
 function get_category_id($page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$result = null;
 	$sql = "SELECT `category` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -169,8 +172,9 @@ function category_id($page = null) {
 	echo get_category_id ( $page );
 }
 function get_parent($page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$result = "";
 	$sql = "SELECT `parent` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -183,8 +187,9 @@ function get_parent($page = null) {
 	return $result;
 }
 function get_custom_data($page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	
 	$sql = "SELECT `custom_data` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -216,8 +221,9 @@ function include_jquery() {
 	}
 }
 function get_access($page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$sql = "SELECT `access` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
@@ -228,8 +234,9 @@ function get_access($page = null) {
 	return null;
 }
 function get_redirection($page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$sql = "SELECT `redirection` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
@@ -298,9 +305,10 @@ function delete_custom_data($var = null, $page = null) {
 	if (! $page)
 		$page = get_requested_pagename ();
 	$data = get_custom_data ( $page );
-	if (is_null ( $data ))
+	if (is_null ( $data )) {
 		$data = array ();
-		// Wenn $var gesetzt ist, nur $var aus custom_data löschen
+	}
+	// Wenn $var gesetzt ist, nur $var aus custom_data löschen
 	if ($var) {
 		if (isset ( $data [$var] )) {
 			unset ( $data [$var] );
@@ -316,12 +324,14 @@ else {
 	return db_query ( "UPDATE " . tbname ( "content" ) . " SET custom_data = '" . db_escape ( $json ) . "' WHERE systemname='" . db_escape ( $page ) . "'" );
 }
 function set_custom_data($var, $value, $page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	
 	$data = get_custom_data ( $page );
-	if (is_null ( $data ))
+	if (is_null ( $data )) {
 		$data = array ();
+	}
 	
 	$data [$var] = $value;
 	$json = json_encode ( $data );
@@ -643,8 +653,9 @@ function parent_item_contains_current_page($id) {
 	
 	$tree = buildtree ( $data, $id );
 	foreach ( $tree as $key ) {
-		if ($key ["systemname"] == get_requested_pagename ())
+		if ($key ["systemname"] == get_requested_pagename ()) {
 			$retval = true;
+		}
 	}
 	return $retval;
 }
@@ -796,7 +807,6 @@ function base_metas() {
 	}
 	
 	if (! Settings::get ( "hide_canonical" ) and (is_200 () or is_403 ())) {
-		
 		$canonical = get_canonical ();
 		if ($canonical) {
 			echo '<link rel="canonical"  href="' . $canonical . '"/>';
@@ -809,8 +819,9 @@ function base_metas() {
 	}
 	
 	$style_file = getTemplateDirPath ( get_theme () ) . "style.css";
-	if (is_file ( $style_file ))
+	if (is_file ( $style_file )) {
 		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
+	}
 	echo "\r\n";
 	$keywords = meta_keywords ();
 	if (! $keywords) {
@@ -940,21 +951,24 @@ function content() {
 	$theme = Settings::get ( "theme" );
 	$status = check_status ();
 	if ($status == "404 Not Found") {
-		if (file_exists ( getTemplateDirPath ( $theme ) . "404.php" ))
+		if (file_exists ( getTemplateDirPath ( $theme ) . "404.php" )) {
 			include getTemplateDirPath ( $theme ) . "404.php";
-		else
+		} else {
 			echo TRANSLATION_PAGE_NOT_FOUND_CONTENT;
+		}
 		return false;
 	} else if ($status == "403 Forbidden") {
-		if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" ))
+		if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 			include getTemplateDirPath ( $theme ) . "403.php";
-		else
+		} else {
 			echo TRANSLATION_FORBIDDEN_COTENT;
+		}
 		return false;
 	}
 	
-	if (! is_logged_in ())
+	if (! is_logged_in ()) {
 		db_query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . $_GET ["seite"] . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
+	}
 	return import ( $_GET ["seite"] );
 }
 function checkforAccessForDevice($access) {
@@ -977,8 +991,9 @@ function checkAccess($access = "") {
 		return null;
 	}
 	$access = explode ( ",", $access );
-	if (in_array ( "all", $access ))
+	if (in_array ( "all", $access )) {
 		return "all";
+	}
 	if (in_array ( "registered", $access ) and is_logged_in ()) {
 		return "registered";
 	}
@@ -1018,8 +1033,9 @@ function check_status() {
 	}
 	$access = checkAccess ( $test ["access"] );
 	if ($access) {
-		if ($access != "all")
+		if ($access != "all") {
 			no_cache ();
+		}
 		return "200 OK";
 	}
 	no_cache ();
