@@ -5,33 +5,35 @@ function scrollToAnchor(aid) {
 	}, 'slow');
 }
 
-function shake(div){                                                                                                                                                                                            
-    var interval = 100;                                                                                                 
-    var distance = 10;                                                                                                  
-    var times = 4;                                                                                                      
+function shake(div) {
+	var interval = 100;
+	var distance = 10;
+	var times = 4;
 
-    $(div).css('position','relative');                                                                                  
+	$(div).css('position', 'relative');
 
-    for(var iter=0;iter<(times+1);iter++){                                                                              
-        $(div).animate({ left: ((iter%2==0 ? distance : distance*-1))},interval);                                   
-    }//for                                                                                                              
+	for (var iter = 0; iter < (times + 1); iter++) {
+		$(div).animate({
+			left : ((iter % 2 == 0 ? distance : distance * -1))
+		}, interval);
+	}// for
 
-    $(div).animate({ left: 0},interval);                                                                                
+	$(div).animate({
+		left : 0
+	}, interval);
 
-}//shake   
+}// shake
 
+function bindTogglePassword(input, checkbox) {
+	var input = $(input);
+	var checkbox = $(checkbox);
+	$(checkbox).click(function() {
+		if ($(checkbox).is(':checked')) {
+			$(input).attr('type', 'text');
+		} else {
+			$(input).attr('type', 'password');
 
-function bindTogglePassword(input, checkbox){
-   var input = $(input);
-   var checkbox = $(checkbox);
-   $(checkbox).click(function(){
-	   if ($(checkbox).is(':checked')){
-		   $(input).attr('type', 'text');
-	   }
-	   else{
-		   $(input).attr('type', 'password');
+		}
 
-	}
-
-});
-} 
+	});
+}

@@ -17,7 +17,8 @@ if (defined ( "_SECURITY" )) {
 			
 			csrf_token_html ();
 			?>
-	<img src="<?php
+	<img
+		src="<?php
 			
 			echo get_gravatar ( $row->email, 200 );
 			?>"
@@ -140,6 +141,14 @@ if (defined ( "_SECURITY" )) {
 			?>
 	<br /> <strong><?php
 			
+			translate ( "homepage" );
+			?></strong> <br /> <input type="url" name="homepage"
+		value="<?php echo $row -> homepage?>"> <br /> <br /> <strong><?php
+			
+			translate ( "twitter_profile" );
+			?></strong> <br /> <input type="text" name="twitter"
+		value="<?php echo $row -> twitter?>"> <br /> <br /> <strong><?php
+			
 			echo TRANSLATION_ICQ;
 			?></strong> <br /> <input type="text" name="icq_id"
 		value="<?php echo $row -> icq_id?>"> <br /> <br /> <strong><?php
@@ -223,7 +232,7 @@ if (defined ( "_SECURITY" )) {
 
 	<br /> <br /> <input type="submit" value="OK">
 	<?php
-			if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 				?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>

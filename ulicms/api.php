@@ -1,7 +1,7 @@
 <?php
 function initconfig($key, $value) {
 	$retval = false;
-	if (! getconfig ( $key )) {
+	if (! Settings::get ( $key )) {
 		setconfig ( $key, $value );
 		$retval = true;
 	}
@@ -76,8 +76,7 @@ function get_google_fonts() {
 	$xml = new SimpleXMLElement ( $content );
 	foreach ( $xml->body->outline as $outline ) {
 		$retval [] = $outline ["text"];
-	}
-	;
+	};
 	return $retval;
 }
 function get_all_used_menus() {
@@ -129,11 +128,13 @@ function is_crawler($userAgent = null) {
 }
 function get_lang_config($name, $lang) {
 	$retval = false;
-	$config = getconfig ( $name . "_" . $lang );
-	if ($config)
+	$config = Settings::get ( $name . "_" . $lang );
+	if ($config){
 		$retval = $config;
-	else
-		$config = getconfig ( $name );
+	}
+	else{
+		$config = Settings::get ( $name );
+	}
 	return $config;
 }
 
@@ -228,14 +229,16 @@ function get_html_editor() {
 		return null;
 	}
 	$query = db_query ( "SELECT html_editor from " . tbname ( "users" ) . " where id = " . get_user_id () );
-	if (! $query)
+	if (! $query) {
 		return "ckeditor";
+	}
 	
 	$obj = db_fetch_assoc ( $query );
-	if (! is_null ( $obj ["html_editor"] ) and ! empty ( $obj ["html_editor"] ))
+	if (! is_null ( $obj ["html_editor"] ) and ! empty ( $obj ["html_editor"] )) {
 		return $obj ["html_editor"];
-	else
+	} else {
 		return "ckeditor";
+	}
 }
 function get_request_uri() {
 	return $_SERVER ["REQUEST_URI"];
@@ -257,10 +260,11 @@ function get_referrer() {
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false) {
 	add_hook ( "before_log_request" );
-	if ($save_ip)
+	if ($save_ip) {
 		$ip = get_ip ();
-	else
+	} else {
 		$ip = "";
+	}
 	
 	$ip = db_escape ( $ip );
 	$request_method = db_escape ( get_request_method () );
@@ -277,8 +281,9 @@ function log_request($save_ip = false) {
 // Prüfen, ob Anti CSRF Token vorhanden ist
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
 function check_csrf_token() {
-	if (! isset ( $_REQUEST ["csrf_token"] ))
+	if (! isset ( $_REQUEST ["csrf_token"] )) {
 		return false;
+	}
 	return $_REQUEST ["csrf_token"] == $_SESSION ["csrf_token"];
 }
 
@@ -291,8 +296,9 @@ function csrf_token_html() {
 	echo get_csrf_token_html ();
 }
 function get_csrf_token() {
-	if (! isset ( $_SESSION ["csrf_token"] ))
+	if (! isset ( $_SESSION ["csrf_token"] )) {
 		$_SESSION ["csrf_token"] = md5 ( uniqid ( rand (), true ) );
+	}
 	return $_SESSION ["csrf_token"];
 }
 
@@ -486,8 +492,8 @@ function getSystemLanguage() {
 		$lang = $_SESSION ["system_language"];
 	} else if (isset ( $_SESSION ["language"] )) {
 		$lang = $_SESSION ["language"];
-	} else if (getconfig ( "system_language" )) {
-		$lang = getconfig ( "system_language" );
+	} else if (Settings::get ( "system_language" )) {
+		$lang = Settings::get ( "system_language" );
 	} else {
 		$lang = "de";
 	}
@@ -569,7 +575,7 @@ function ulicms_redirect($url = "http://www.ulicms.de", $status = 302) {
 	exit ();
 }
 function getDomainByLanguage($language) {
-	$domainMapping = getconfig ( "domain_to_language" );
+	$domainMapping = Settings::get ( "domain_to_language" );
 	
 	if (! empty ( $domainMapping )) {
 		$domainMapping = explode ( "\n", $domainMapping );
@@ -577,7 +583,6 @@ function getDomainByLanguage($language) {
 			$line = trim ( $domainMapping [$i] );
 			if (! empty ( $line )) {
 				$line = explode ( "=>", $line );
-				
 				if (count ( $line ) > 1) {
 					$line [0] = trim ( $line [0] );
 					$line [1] = trim ( $line [1] );
@@ -607,7 +612,7 @@ function encodeURIComponent($str) {
 	return strtr ( rawurlencode ( $str ), $revert );
 }
 function setLanguageByDomain() {
-	$domainMapping = getconfig ( "domain_to_language" );
+	$domainMapping = Settings::get ( "domain_to_language" );
 	
 	if (! empty ( $domainMapping )) {
 		$domainMapping = explode ( "\n", $domainMapping );
@@ -634,7 +639,7 @@ function setLanguageByDomain() {
 	return false;
 }
 function getCacheType() {
-	$c = getconfig ( "cache_type" );
+	$c = Settings::get ( "cache_type" );
 	switch ($c) {
 		case "cache_lite" :
 			@include "Cache/Lite.php";
@@ -666,8 +671,9 @@ function getconfig($key) {
 	}
 	$env_key = "ulicms_" . $key;
 	$env_var = getenv ( $env_key );
-	if ($env_var)
+	if ($env_var) {
 		return $env_var;
+	}
 	$ikey = db_escape ( $key );
 	$query = db_query ( "SELECT value FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 	if (db_num_rows ( $query ) > 0) {
@@ -758,7 +764,7 @@ function clearAPCCache() {
 // als auch den APC Bytecode Cache
 function clearCache() {
 	add_hook ( "before_clear_cache" );
-	$cache_type = getconfig ( "cache_type" );
+	$cache_type = Settings::get ( "cache_type" );
 	// Es gibt zwei verschiedene Cache Modi
 	// Cache_Lite und File
 	// Cache_Lite leeren
@@ -767,10 +773,11 @@ function clearCache() {
 		$Cache_Lite->clean ();
 	} else {
 		// File leeren
-		if (is_admin_dir ())
+		if (is_admin_dir ()) {
 			SureRemoveDir ( "../content/cache", false );
-		else
+		} else {
 			SureRemoveDir ( "content/cache", false );
+		}
 	}
 	
 	if (function_exists ( "apc_clear_cache" )) {
@@ -827,13 +834,13 @@ function setLocaleByLanguage() {
 	} else {
 		$var = "locale_" . db_escape ( $_SESSION ["language"] );
 	}
-	$locale = getconfig ( $var );
+	$locale = Settings::get ( $var );
 	if ($locale) {
 		$locale = splitAndTrim ( $locale );
 		array_unshift ( $locale, LC_ALL );
 		@call_user_func_array ( "setlocale", $locale );
 	} else {
-		$locale = getconfig ( "locale" );
+		$locale = Settings::get ( "locale" );
 		if ($locale) {
 			
 			$locale = splitAndTrim ( $locale );
@@ -857,10 +864,11 @@ function getCurrentLanguage($current = true) {
 		}
 	}
 	
-	if (isset ( $_SESSION ["language"] ))
+	if (isset ( $_SESSION ["language"] )) {
 		return basename ( $_SESSION ["language"] );
-	else
-		return basename ( getconfig ( "default_language" ) );
+	} else {
+		return basename ( Settings::get ( "default_language" ) );
+	}
 }
 
 // Auf automatische aktualisieren prüfen.
@@ -868,10 +876,11 @@ function getCurrentLanguage($current = true) {
 function checkForUpdates() {
 	include_once "../lib/file_get_contents_wrapper.php";
 	$info = @file_get_contents_Wrapper ( UPDATE_CHECK_URL, true );
-	if (! $info or trim ( $info ) === "")
+	if (! $info or trim ( $info ) === "") {
 		return false;
-	else
+	} else {
 		return $info;
+	}
 }
 function getThemeList() {
 	return getThemesList ();
@@ -970,10 +979,11 @@ if (! function_exists ( "cleanString" )) {
 	}
 }
 function getTemplateDirPath($sub = "default") {
-	if (is_admin_dir ())
+	if (is_admin_dir ()) {
 		$templateDir = "../content/templates/";
-	else
+	} else {
 		$templateDir = "content/templates/";
+	}
 	
 	$templateDir = $templateDir . $sub . "/";
 	return $templateDir;
@@ -1075,7 +1085,7 @@ function getCurrentURL() {
 function buildCacheFilePath($request_uri) {
 	$language = $_SESSION ["language"];
 	if (! $language) {
-		$language = getconfig ( "default_language" );
+		$language = Settings::get ( "default_language" );
 	}
 	$unique_identifier = $request_uri . $language . strbool ( is_mobile () );
 	if (function_exists ( "apply_filter" )) {
@@ -1089,9 +1099,14 @@ function get_translation($name, $placeholders = array()) {
 		if (startsWith ( $key, "TRANSLATION_" ) and $key == "TRANSLATION_" . $iname) {
 			// Platzhalter ersetzen, diese können als assoziatives Array als zweiter Parameter
 			// dem Funktionsaufruf mitgegeben werden
+			$custom_translation = Translation::get ( $key );
+			if ($custom_translation != null) {
+				$value = $custom_translation;
+			}
 			foreach ( $placeholders as $placeholder => $replacement ) {
 				$value = str_ireplace ( $placeholder, $replacement, $value );
 			}
+			
 			return $value;
 		}
 	}
@@ -1136,8 +1151,9 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 		return $redirection;
 	}
 	
-	if ($page === get_frontpage ())
+	if ($page === get_frontpage ()) {
 		return "./";
+	}
 	
 	$seo_url = "";
 	
@@ -1566,7 +1582,7 @@ function getAllMenus($only_used = false) {
 			"bottom",
 			"none" 
 	);
-	$additional_menus = getconfig ( "additional_menus" );
+	$additional_menus = Settings::get ( "additional_menus" );
 	
 	if ($additional_menus) {
 		$additional_menus = explode ( ";", $additional_menus );
@@ -1622,8 +1638,9 @@ function page_has_html_file($page) {
 function uninstall_module($name, $type = "module") {
 	$acl = new ACL ();
 	// Nur Admins können Module löschen
-	if (! $acl->hasPermission ( "install_packages" ))
+	if (! $acl->hasPermission ( "install_packages" )) {
 		return false;
+	}
 	
 	$name = trim ( $name );
 	$name = basename ( $name );
@@ -1640,14 +1657,15 @@ function uninstall_module($name, $type = "module") {
 		if (is_dir ( $moduleDir )) {
 			$uninstall_script = getModuleUninstallScriptPath ( $name );
 			// Uninstall Script ausführen, sofern vorhanden
-			if (is_file ( $uninstall_script ))
+			if (is_file ( $uninstall_script )) {
 				include $uninstall_script;
+			}
 			sureRemoveDir ( $moduleDir, true );
 			clearCache ();
 			return ! is_dir ( $moduleDir );
 		}
 	} else if ($type === "theme") {
-		$cTheme = getconfig ( "theme" );
+		$cTheme = Settings::get ( "theme" );
 		$allThemes = getThemeList ();
 		if (in_array ( $name, $allThemes ) and $cTheme !== $name) {
 			$theme_path = getTemplateDirPath ( $name );
@@ -1691,13 +1709,18 @@ function cms_version() {
 	$v = new ulicms_version ();
 	return implode ( ".", $v->getInternalVersion () );
 }
+function is_tablet() {
+	$detect = new Mobile_Detect ();
+	$result = $detect->isTablet ();
+	return $result;
+}
 
 // 21. Februar 2015
 // Nutzt nun die Klasse Mobile_Detect
 function is_mobile() {
 	$detect = new Mobile_Detect ();
 	$result = $detect->isMobile ();
-	if (getconfig ( "no_mobile_design_on_tablet" ) and $result and $detect->isTablet ()) {
+	if (Settings::get ( "no_mobile_design_on_tablet" ) and $result and $detect->isTablet ()) {
 		$result = false;
 	}
 	if (function_exists ( "apply_filter" )) {

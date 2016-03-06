@@ -31,10 +31,7 @@ $(window).load(function(){
 </script>
 
 <h2>
-<?php
-		
-		echo TRANSLATION_ADVERTISEMENTS;
-		?>
+<?php translate("advertisements"); ?>
 </h2>
 <p>
 <?php
@@ -60,10 +57,9 @@ $(window).load(function(){
 <table class="tablesorter">
 	<thead>
 		<tr style="font-weight: bold;">
-			<th style="width: 40px;">--></th>
 			<th><?php
 		
-		echo TRANSLATION_ADVERTISEMENTS;
+		translate ( "advertisements" );
 		?>
 			</th>
 			<th><?php
@@ -92,11 +88,13 @@ $(window).load(function(){
 			<?php
 				
 				echo '<tr id="dataset-' . $row->id . '">';
-				echo "<td style=\"width:40px;\">--></td>";
 				if ($row->type == "gif") {
-					echo '<td><a href="' . $row->link_url . '" target="_blank"><img src="' . $row->image_url . '" title="' . $row->name . '" alt="' . $row->name . '" border=0></a></td>';
+					$link_url = Template::getEscape ( $row->link_url );
+					$image_url = Template::getEscape ( $row->image_url );
+					$name = Template::getEscape ( $row->name );
+					echo '<td><a href="' . $link_url . '" target="_blank"><img src="' . $image_url . '" title="' . $name . '" alt="' . $name . '" border=0></a></td>';
 				} else {
-					echo '<td>' . htmlspecialchars ( $row->html ) . '</td>';
+					echo '<td>' . Template::getEscape ( $row->html ) . '</td>';
 				}
 				if ($row->language == "all") {
 					echo '<td>Alle</td>';

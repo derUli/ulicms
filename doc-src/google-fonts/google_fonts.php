@@ -5,4 +5,3 @@ foreach ( $xml->body->outline as $outline ) {
 	echo $outline ["text"];
 	echo "\r\n";
 }
-;

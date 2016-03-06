@@ -355,17 +355,21 @@ $(window).load(function(){
 		echo TRANSLATION_ACTIVATED;
 		?>
 			</th>
-			<td><?php
+			<td style="text-align:center"><?php
 		
 		echo TRANSLATION_VIEW;
 		?>
+			</td><td style="text-align:center"><?php
+		
+		translate("clone");
+		?>
 			</td>
-			<td><?php
+			<td style="text-align:center"><?php
 		
 		echo TRANSLATION_EDIT;
 		?>
 			</td>
-			<td><?php
+			<td style="text-align:center"><?php
 		
 		echo TRANSLATION_DELETE;
 		?>
@@ -470,7 +474,12 @@ $(window).load(function(){
 						$url = "http://" . $domain . "/" . $row->systemname . ".html";
 					}
 					echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . TRANSLATION_VIEW . "\" title=\"" . TRANSLATION_VIEW . "\"></a></td>";
+					
 				}
+				
+				
+					echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=".$row->id."\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone"). "\" title=\"" . get_translation("clone") . "\"></a></td>";
+					
 				echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
 				
 				if ($_SESSION ["filter_status"] == "trash") {

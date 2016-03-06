@@ -133,7 +133,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 
 <?php
 	$themes = getThemeList ();
-	$ctheme = getconfig ( "theme" );
+	$ctheme = Settings::get ( "theme" );
 	if (count ( $themes ) > 0) {
 		echo "<ol>";
 		for($i = 0; $i < count ( $themes ); $i ++) {

@@ -101,7 +101,7 @@ html {
 
 div#root-container {
 	padding: 0px 10px 5px 0px;
-	width: 85%;
+	width: 96%;
 	margin: auto;
 	position: relative;
 }
@@ -118,7 +118,7 @@ a:hover {
 }
 
 div#pbody {
-	padding: 20px 30px 5px 30px;
+	padding: 20px 27px 5px 27px;
 }
 
 p#footer {
@@ -137,7 +137,8 @@ input[type="button"], input[type="submit"], button {
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="number"],
-	input[type="phone"], input[type="color"], input.color, select, textarea
+	input[type="phone"], input[type="color"], input.color, select, textarea,
+	input[type="url"]
 	{
 	background-color: rgb(253, 253, 253);
 	width: 100%;

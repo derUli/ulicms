@@ -14,21 +14,21 @@ og_tags ();
 header, footer {
 	background-color: <?php
 	
-echo getconfig ( "header-background-color" );
+echo Settings::get ( "header-background-color" );
 	?>;
 }
 
 h1, h2, h3, h4, h5, h6 {
 	color: <?php
 	
-echo getconfig ( "header-background-color" );
+echo Settings::get ( "header-background-color" );
 	?>;
 }
 
 nav a.menu_active_link, nav a.contains-current-page {
 	border-bottom: 3px solid<?php
 	
-echo getconfig ( "header-background-color" );
+echo Settings::get ( "header-background-color" );
 	?>;
 }
 </style>
@@ -46,7 +46,7 @@ echo getconfig ( "header-background-color" );
 	<header>
 		<a href="./">
 <?php
-if (getconfig ( "logo_disabled" ) == "no") {
+if (Settings::get ( "logo_disabled" ) == "no") {
 	logo ();
 	?>
 <br />
@@ -54,9 +54,10 @@ if (getconfig ( "logo_disabled" ) == "no") {
 } else {
 	?><strong><?php
 	
-	homepage_title ();
+homepage_title ();
 	?></strong>
 <?php
+
 }
 ?>
 </a>
@@ -72,4 +73,4 @@ if (getconfig ( "logo_disabled" ) == "no") {
 		if (! containsModule ( null, "blog" )) {
 			?>
 <h1><?php headline();?></h1>
-<?php } ?>
+<?php } 

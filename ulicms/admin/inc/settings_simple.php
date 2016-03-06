@@ -63,13 +63,13 @@ if (defined ( "_SECURITY" )) {
 		?></strong></strong></td>
 			<td><select name="logo_disabled" size=1>
 					<option
-						<?php if (getconfig("logo_disabled") == "yes") echo 'selected '?>
+						<?php if (Settings::get("logo_disabled") == "yes") echo 'selected '?>
 						value="yes"><?php
 		
 		echo TRANSLATION_YES;
 		?></option>
 					<option
-						<?php if (getconfig("logo_disabled") != "yes") echo 'selected '?>
+						<?php if (Settings::get("logo_disabled") != "yes") echo 'selected '?>
 						value="no"><?php
 		
 		echo TRANSLATION_NO;
@@ -207,7 +207,7 @@ if (defined ( "_SECURITY" )) {
 <?php
 		$timezones = file ( "inc/timezones.txt" );
 		
-		$current_timezone = getconfig ( "timezone" );
+		$current_timezone = Settings::get ( "timezone" );
 		$current_timezone = trim ( $current_timezone );
 		sort ( $timezones );
 		for($i = 0; $i < count ( $timezones ); $i ++) {
@@ -230,7 +230,7 @@ if (defined ( "_SECURITY" )) {
 		?></strong></td>
 			<td><select name="robots" size=1>
 <?php
-		if (getconfig ( "robots" ) == "noindex,nofollow") {
+		if (Settings::get ( "robots" ) == "noindex,nofollow") {
 			?>
    
    <option value="index,follow"><?php
@@ -272,7 +272,7 @@ if (defined ( "_SECURITY" )) {
 	<input type="hidden" name="save_settings" value="save_settings">
 
 <?php
-		if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 			?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>

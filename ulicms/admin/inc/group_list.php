@@ -10,7 +10,7 @@ if (isset ( $_REQUEST ["standard"] )) {
 $acl = new ACL ();
 $groups = $acl->getAllGroups ();
 
-$default_acl_group = intval ( getconfig ( "default_acl_group" ) );
+$default_acl_group = intval ( Settings::get ( "default_acl_group" ) );
 
 if (isset ( $_REQUEST ["sort"] ) and in_array ( $_REQUEST ["sort"], array (
 		"id",

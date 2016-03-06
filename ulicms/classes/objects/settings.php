@@ -45,16 +45,16 @@ class Settings {
 		$value = self::get ( $key );
 		if ($value) {
 			echo htmlspecialchars ( $value, ENT_QUOTES, "UTF-8" );
-			;
 		}
 	}
 	public static function getLang($name, $lang) {
 		$retval = false;
 		$config = self::get ( $name . "_" . $lang );
-		if ($config)
+		if ($config) {
 			$retval = $config;
-		else
+		} else {
 			$config = self::get ( $name );
+		}
 		return $config;
 	}
 	
@@ -70,7 +70,6 @@ class Settings {
 			
 			db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 		}
-		
 		if (isset ( $GLOBALS ['settings_cache'] [$key] )) {
 			unset ( $GLOBALS ['settings_cache'] [$key] );
 		}

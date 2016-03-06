@@ -3,7 +3,7 @@ include_once ULICMS_ROOT . "/lib/encryption.php";
 
 // this class contains functions for managing user accounts
 function getUsers() {
-	$query = db_query ( "SELECT username FROM " . tbname ( "users" ) . " ORDER by username" );
+	$query = Database::query ( "SELECT username FROM " . tbname ( "users" ) . " ORDER by username" );
 	$users = Array ();
 	while ( $row = db_fetch_object ( $query ) ) {
 		array_push ( $users, $row->username );
@@ -12,7 +12,7 @@ function getUsers() {
 	return $users;
 }
 function getUsersOnline() {
-	$users_online = db_query ( "SELECT username FROM " . tbname ( "users" ) . " WHERE last_action > " . (time () - 300) . " ORDER BY username" );
+	$users_online = Database::query ( "SELECT username FROM " . tbname ( "users" ) . " WHERE last_action > " . (time () - 300) . " ORDER BY username" );
 	$retval = array ();
 	while ( $row = db_fetch_object ( $users_online ) ) {
 		$retval [] = $row->username;
@@ -22,9 +22,9 @@ function getUsersOnline() {
 function changePassword($password, $id) {
 	include_once ULICMS_ROOT . "/lib/encryption.php";
 	$newPassword = Encryption::hashPassword ( $password );
-	return db_query ( "UPDATE " . tbname ( "users" ) . " SET `password` = '$newPassword',  `old_encryption` = 0, `password_changed` = NOW() WHERE id = $id" );
+	return Database::query ( "UPDATE " . tbname ( "users" ) . " SET `password` = '$newPassword',  `old_encryption` = 0, `password_changed` = NOW() WHERE id = $id" );
 }
-function resetPassword($username, $length = 8) {
+function resetPassword($username, $length = 12) {
 	$new_pass = rand_string ( $length );
 	$user = getUserByName ( $username );
 	if (! $user)
@@ -32,19 +32,19 @@ function resetPassword($username, $length = 8) {
 	$uid = intval ( $user ["id"] );
 	changePassword ( $new_pass, $uid );
 	
-	db_query ( "UPDATE " . tbname ( "users" ) . " SET require_password_change = 1 where id = $uid" );
+	Database::query ( "UPDATE " . tbname ( "users" ) . " SET require_password_change = 1 where id = $uid" );
 	$message = TRANSLATION_RESET_PASSWORD_MAIL_BODY;
 	$message = str_replace ( "%host%", get_http_host (), $message );
 	$message = str_replace ( "%ip%", get_ip (), $message );
 	$message = str_replace ( "%password%", $new_pass, $message );
 	$message = str_replace ( "%username%", $user ["username"], $message );
 	
-	$headers = "From: " . getconfig ( "email" ) . "\n" . "Content-type: text/plain; charset=UTF-8";
-	@ulicms_mail ( $user ["email"], TRANSLATION_RESET_PASSWORD_SUBJECT, $message, $headers );
+	$headers = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=UTF-8";
+	@Mailer::send ( $user ["email"], TRANSLATION_RESET_PASSWORD_SUBJECT, $message, $headers );
 	return true;
 }
 function getUserByName($name) {
-	$query = db_query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE username='" . db_escape ( $name ) . "'" );
+	$query = Database::query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE username='" . db_escape ( $name ) . "'" );
 	if (db_num_rows ( $query ) > 0) {
 		return db_fetch_assoc ( $query );
 	} else {
@@ -52,7 +52,7 @@ function getUserByName($name) {
 	}
 }
 function getUserById($id) {
-	$query = db_query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE id = " . intval ( $id ) );
+	$query = Database::query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE id = " . intval ( $id ) );
 	if (db_num_rows ( $query ) > 0) {
 		return db_fetch_assoc ( $query );
 	} else {
@@ -72,7 +72,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	$group = intval ( $group );
 	// Default ACL Group
 	if (! $acl_group)
-		$acl_group = getconfig ( "default_acl_group" );
+		$acl_group = Settings::get ( "default_acl_group" );
 	if (! $acl_group)
 		$acl_group = "NULL";
 	
@@ -81,13 +81,13 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	
 	add_hook ( "before_create_user" );
 	
-	db_query ( "INSERT INTO " . tbname ( "users" ) . "
+	Database::query ( "INSERT INTO " . tbname ( "users" ) . "
 (username,lastname, firstname, email, password, `group`, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( Encryption::hashPassword ( $password ) ) . "',$group, " . $acl_group . ", $require_password_change, NOW(), $admin, $locked)" ) or die ( db_error () );
 	$message = "Hallo $firstname,\n\n" . "Ein Administrator hat auf http://" . $_SERVER ["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" . "Die Zugangsdaten lauten:\n\n" . "Benutzername: $username\n" . "Passwort: $password\n";
-	$header = "From: " . getconfig ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
+	$header = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
 	
 	if ($sendMessage) {
-		@ulicms_mail ( $email, "Dein Benutzer-Account bei " . $_SERVER ["SERVER_NAME"], $message, $header );
+		@Mailer::send ( $email, "Dein Benutzer-Account bei " . $_SERVER ["SERVER_NAME"], $message, $header );
 	}
 	
 	add_hook ( "after_create_user" );
@@ -99,7 +99,7 @@ function get_user_id() {
 		return 0;
 }
 function user_exists($name) {
-	$query = db_query ( "SELECT id FROM " . tbname ( "users" ) . " WHERE username = '" . db_escape ( $name ) . "'" );
+	$query = Database::query ( "SELECT id FROM " . tbname ( "users" ) . " WHERE username = '" . db_escape ( $name ) . "'" );
 	return db_num_rows ( $query ) > 0;
 }
 function register_session($user, $redirect = true) {
@@ -121,12 +121,12 @@ function register_session($user, $redirect = true) {
 	
 	$_SESSION ["session_begin"] = time ();
 	
-	db_query ( "UPDATE " . tbname ( "users" ) . " SET `last_login` = " . time () . " where id = " . $user ["id"] );
+	Database::query ( "UPDATE " . tbname ( "users" ) . " SET `last_login` = " . time () . " where id = " . $user ["id"] );
 	if ($user ["notify_on_login"]) {
-		$subject = "Login auf \"" . getconfig ( "homepage_title" ) . "\" als " . $user ["username"];
+		$subject = "Login auf \"" . Settings::get ( "homepage_title" ) . "\" als " . $user ["username"];
 		$text = "Von der IP " . $_SERVER ["REMOTE_ADDR"] . " hat sich jemand um " . date ( "r" ) . " erfolgreich in das Benutzerkonto " . $user ["username"] . " auf dem Server " . $_SERVER ["HTTP_HOST"] . " eingeloggt.";
-		$headers = "From: " . getconfig ( "email" );
-		ulicms_mail ( $user ["email"], $subject, $text, $headers );
+		$headers = "From: " . Settings::get ( "email" );
+		Mailer::send ( $user ["email"], $subject, $text, $headers );
 	}
 	
 	if (! $redirect)
@@ -151,11 +151,11 @@ function validate_login($user, $password, $token = null) {
 		} else {
 			$password = Encryption::hashPassword ( $password );
 		}
-		$twofactor_authentication = getconfig ( "twofactor_authentication" );
+		$twofactor_authentication = Settings::get ( "twofactor_authentication" );
 		if ($user ["password"] == $password) {
 			if ($twofactor_authentication and ! is_null ( $token )) {
 				$ga = new PHPGangsta_GoogleAuthenticator ();
-				$ga_secret = getconfig ( "ga_secret" );
+				$ga_secret = Settings::get ( "ga_secret" );
 				$code = $ga->getCode ( $ga_secret );
 				if ($code != $token) {
 					$_REQUEST ["error"] = get_translation ( "confirmation_code_wrong" );
@@ -168,19 +168,17 @@ function validate_login($user, $password, $token = null) {
 				return false;
 			}
 			
-			db_query ( "update " . tbname ( "users" ) . " set `failed_logins` = 0 where id = " . intval ( $user ["id"] ) );
+			Database::query ( "update " . tbname ( "users" ) . " set `failed_logins` = 0 where id = " . intval ( $user ["id"] ) );
 			return $user;
 		} else {
 			// Limit Login Attampts
-			$max_failed_logins_items = intval ( getconfig ( "max_failed_logins_items" ) );
+			$max_failed_logins_items = intval ( Settings::get ( "max_failed_logins_items" ) );
 			if ($max_failed_logins_items >= 1) {
-				db_query ( "update " . tbname ( "users" ) . " set `failed_logins` = `failed_logins` + 1 where id = " . intval ( $user ["id"] ) );
-				db_query ( "update " . tbname ( "users" ) . " set `locked` = 1, `failed_logins` = 0 where `failed_logins` >= $max_failed_logins_items" );
+				Database::query ( "update " . tbname ( "users" ) . " set `failed_logins` = `failed_logins` + 1 where id = " . intval ( $user ["id"] ) );
+				Database::query ( "update " . tbname ( "users" ) . " set `locked` = 1, `failed_logins` = 0 where `failed_logins` >= $max_failed_logins_items" );
 			}
 		}
 	}
 	$_REQUEST ["error"] = TRANSLATION_USER_OR_PASSWORD_INCORRECT;
 	return false;
 }
-
-?>

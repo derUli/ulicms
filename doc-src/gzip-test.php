@@ -5,7 +5,6 @@ if (substr_count ( $_SERVER ['HTTP_ACCEPT_ENCODING'], 'gzip' )) {
 } else {
 	ob_start ();
 }
-  }
 
 // Nach der letzten Ausgabe
-   ob_end_flush();
+ob_end_flush ();

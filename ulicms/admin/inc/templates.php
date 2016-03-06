@@ -3,7 +3,7 @@ if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "templates" )) {
 		
-		$theme = getconfig ( "theme" );
+		$theme = Settings::get ( "theme" );
 		?>
 
 
@@ -207,7 +207,7 @@ if (defined ( "_SECURITY" )) {
 					?>">
 
 					<?php
-					if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+					if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 						?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>

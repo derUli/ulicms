@@ -7,14 +7,14 @@ if (defined ( "_SECURITY" )) {
 			array_push ( $modules_with_admin_page, $modules [$i] );
 	}
 	
-	$theme = getconfig ( "theme" );
+	$theme = Settings::get ( "theme" );
 	$theme_dir = getTemplateDirPath ( $theme );
 	$acl = new ACL ();
 	
 	?>
 <div style="float: left">
 	<h2>
-		UliCMS <a href="../">[<?php echo getconfig("homepage_title")?>]</a>
+		UliCMS <a href="../">[<?php echo Settings::get("homepage_title")?>]</a>
 	</h2>
 </div>
 

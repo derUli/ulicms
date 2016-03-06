@@ -1,5 +1,15 @@
 <?php
 class Template {
+	public static function poweredByUliCMS() {
+		translation ( "POWERED_BY_ULICMS" );
+	}
+	public static function getHomepageOwner() {
+		$homepage_title = Settings::getLang ( "homepage_title", $_SESSION ["language"] );
+		return htmlspecialchars ( $homepage_title, ENT_QUOTES, "UTF-8" );
+	}
+	public static function homepageOwner() {
+		echo self::getHomepageOwner ();
+	}
 	public static function footer() {
 		add_hook ( "frontend_footer" );
 	}

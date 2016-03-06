@@ -19,7 +19,7 @@ class PlainTextCreator {
 	public function output() {
 		$hasModul = containsModule ( get_requested_pagename () );
 		
-		if (! getconfig ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
+		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
 			
 			if (getCacheType () == "file") {
 				
@@ -36,7 +36,7 @@ class PlainTextCreator {
 			} else if (getCacheType () == "cache_lite") {
 				$id = md5 ( $_SESSION ["REQUEST_URI"] );
 				$options = array (
-						'lifeTime' => getconfig ( "cache_period" ) 
+						'lifeTime' => Settings::get ( "cache_period" ) 
 				);
 				if (! class_exists ( "Cache_Lite" )) {
 					throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
@@ -71,7 +71,7 @@ class PlainTextCreator {
 		$this->content = unhtmlspecialchars ( $this->content );
 		$this->content = preg_replace_callback ( '/&#([0-9a-fx]+);/mi', 'replace_num_entity', $this->content );
 		
-		if (! getconfig ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
+		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
 			if (getCacheType () == "file") {
 				$handle = fopen ( $this->cached_file, "w" );
 				fwrite ( $handle, $this->content );

@@ -33,12 +33,15 @@ header ( "Content-Type: text/html; charset=UTF-8" );
 include_once "../lib/workaround.php";
 ?>
 <!DOCTYPE html>
+<html>
 <head>
 <title><?php
 
 echo TRANSLATION_TITLE;
 ?></title>
 <link rel="stylesheet" type="text/css" href="media/style.css" />
+<script type="text/javascript" src="../admin/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="../admin/scripts/util.js"></script>
 </head>
 <body>
 	<p>
@@ -253,7 +256,11 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_PASSWORD;
 			?>
 				</td>
-				<td><input name="passwort" type="password" value=""></td>
+				<td><input name="passwort" id="password" type="password" value=""></td>
+			</tr>
+			<tr>
+				<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
+				<td><input type="checkbox" id="view_password" /></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -272,6 +279,11 @@ echo TRANSLATION_TITLE;
 				<td><input name="prefix" type="text" value="ulicms_"></td>
 			</tr>
 		</table>
+		<script type="text/javascript">
+$(document).ready(function(){
+	bindTogglePassword("#password", "#view_password")
+});
+</script>
 		<p>
 			<input type="submit"
 				value="<?php
@@ -419,9 +431,19 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_ADMIN_PASSWORD;
 			?>
 				</td>
-				<td><input name="passwort" type="password" value=""></td>
+				<td><input name="passwort" id="password" type="password" value=""></td>
+			</tr>
+			<tr>
+				<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
+				<td><input type="checkbox" id="view_password" /></td>
+
 			</tr>
 		</table>
+		<script type="text/javascript">
+$(document).ready(function(){
+	bindTogglePassword("#password", "#view_password")
+});
+</script>
 		<p>
 			<input type="submit"
 				value="<?php
@@ -462,10 +484,12 @@ echo TRANSLATION_TITLE;
   `group` int(11) NOT NULL,
   `old_encryption` boolean NOT NULL DEFAULT '0',
   `skype_id` varchar(32) NOT NULL,
-  `icq_id` varchar(20) NOT NULL,
-  `avatar_file` varchar(40) NOT NULL,
-  `about_me` text NOT NULL,
-  `last_action` bigint(20) NOT NULL,
+  `icq_id` varchar(20) NULL,
+  `twitter` varchar(15) NULL,
+  `homepage` text NULL,
+  `avatar_file` varchar(40) NULL,
+  `about_me` text NULL,
+  `last_action` bigint(20) NOT NULL DEFAULT 0,
   `last_login` bigint(20) DEFAULT NULL,
   `password_changed` DATETIME NULL,
   `group_id` int(11) NULL,
@@ -630,7 +654,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (26, 'empty_trash_days', '30'),
 (27, 'password_salt', '$salt'),
 (28, 'timezone', 'Europe/Berlin'),
-(29, 'db_schema_version', '9.8.0'),
+(29, 'db_schema_version', '9.8.2'),
 (30, 'pkg_src', 'http://packages.ulicms.de/{version}/'),
 (31, 'theme', '2016'),
 (32, 'zoom', '100'),
@@ -770,22 +794,11 @@ ON DELETE SET NULL";
 				$constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `" . $prefix . "users`(`id`)
 ON DELETE SET NULL";
 				mysqli_query ( $connection, $constraint4 );
-			
-			/**
-			 * $constraint5 = "ALTER TABLE `" .
-			 *
-			 *
-			 *
-			 *
-			 *
-			 *
-			 *
-			 *
-			 * $prefix . "content` ADD FOREIGN KEY (`language`) REFERENCES `".$prefix."languages`(`language_code`)
-			 * ON DELETE SET NULL";
-			 * mysqli_query($connection, $constraint5);
-			 */
 			}
+			
+			// Beispieldaten für die Banner Tabelle
+			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "banner` VALUES (1,'Content Management einfach gemacht mit UliCMS','http://www.ulicms.de','http://www.ulicms.de/content/images/banners/ulicms-banner.jpg',1,'gif','','de');" );
+			
 			@chmod ( "../cms-config.php", 0777 );
 			
 			@mkdir ( "../content" );

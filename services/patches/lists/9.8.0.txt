@@ -1,0 +1,1 @@
+security-fix-spamfilter-settings|Fixed some security issues in spamfilter settings|http://patches.ulicms.de/downloads/9.8.0/security-fix-spamfilter-settings.zip

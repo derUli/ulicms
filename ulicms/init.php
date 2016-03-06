@@ -141,10 +141,22 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPE
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "mailer.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "file_get_contents_wrapper.php";
 require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "api.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "database.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "settings.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "template.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "encryption.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "file.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "path.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "mailer.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "custom_data.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "translation.php";
+
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "content.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "page.php";
+
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "content_factory.php";
+
+Translation::init ();
 
 require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib/minify.php";
 
@@ -193,7 +205,7 @@ if ($config->db_server == "" or $config->db_user == "") {
 	exit ();
 }
 
-@$connection = db_connect ( $config->db_server, $config->db_user, $config->db_password );
+@$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password );
 
 if ($connection === false) {
 	throw new Exception ( "Fehler: Die Verbindung zum Datenbank Server konnte nicht hergestellt werden." );
@@ -209,7 +221,7 @@ if (file_exists ( $path_to_installer )) {
 	exit ();
 }
 
-$select = schema_select ( $config->db_database );
+$select = Database::select ( $config->db_database );
 
 if (! $select) {
 	throw new Exception ( "Fehler: Die Datenbank " . $config->db_database . " existiert nicht.\n" );
@@ -217,7 +229,7 @@ if (! $select) {
 
 $existing_tables = array ();
 if (! defined ( "SKIP_TABLE_CHECK" )) {
-	$existing_tables = db_get_tables ();
+	$existing_tables = Database::getAllTables ();
 	$required_tables = array (
 			tbname ( "users" ),
 			tbname ( "banner" ),
@@ -248,7 +260,7 @@ if (! defined ( "SKIP_TABLE_CHECK" )) {
 	}
 }
 
-$useragent = getconfig ( "useragent" );
+$useragent = Settings::get ( "useragent" );
 if ($useragent) {
 	define ( "ULICMS_USERAGENT", $useragent );
 } else {
@@ -257,22 +269,22 @@ if ($useragent) {
 
 @ini_set ( 'user_agent', ULICMS_USERAGENT );
 
-if (! getconfig ( "hide_meta_generator" )) {
+if (! Settings::get ( "hide_meta_generator" )) {
 	@header ( 'X-Powered-By: UliCMS Release ' . cms_version () );
 }
 
-$memory_limit = getconfig ( "memory_limit" );
+$memory_limit = Settings::get ( "memory_limit" );
 
 if ($memory_limit !== false) {
 	@ini_set ( 'memory_limit', $memory_limit );
 }
 
 if (in_array ( tbname ( "log" ), $existing_tables )) {
-	$log_ip = getconfig ( "log_ip" );
+	$log_ip = Settings::get ( "log_ip" );
 	log_request ( $log_ip );
 }
 
-$cache_period = getconfig ( "cache_period" );
+$cache_period = Settings::get ( "cache_period" );
 
 // Prüfen ob Cache Gültigkeitsdauer gesetzt ist.
 // Ansonsten auf Standardwert setzen
@@ -285,32 +297,32 @@ if ($cache_period === false) {
 
 // check four allowed_html config var
 // if not exists create with default value
-if (! getconfig ( "allowed_html" )) {
+if (! Settings::get ( "allowed_html" )) {
 	setconfig ( "allowed_html", "<i><u><b><strong><em><ul><li><ol><a><span>" );
 }
 
 // generate Secret for Google Authenticator if not already done
-$ga_secret = getconfig ( "ga_secret" );
+$ga_secret = Settings::get ( "ga_secret" );
 if (! $ga_secret) {
 	require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
 	$ga = new PHPGangsta_GoogleAuthenticator ();
 	$ga_secret = $ga->createSecret ();
-	setconfig ( "ga_secret", db_escape ( $ga_secret ) );
+	setconfig ( "ga_secret", Database::escapeValue ( $ga_secret ) );
 }
 
 // Falls nicht gesetzt, robots auf Standardwert setzen
-if (! getconfig ( "robots" )) {
+if (! Settings::get ( "robots" )) {
 	setconfig ( "robots", "index,follow" );
 }
 
 // Prüfen ob Zeitzone gesetzt ist
-$timezone = getconfig ( "timezone" );
+$timezone = Settings::get ( "timezone" );
 
 // Wenn nicht, Zeitzone auf Standardwert setzen
 if (! $timezone) {
 	setconfig ( "timezone", "Europe/Berlin" );
 }
-date_default_timezone_set ( getconfig ( "timezone" ) );
+date_default_timezone_set ( Settings::get ( "timezone" ) );
 
 if (isset ( $_GET ["output_scripts"] )) {
 	getCombinedScripts ();
@@ -318,18 +330,18 @@ if (isset ( $_GET ["output_scripts"] )) {
 	getCombinedStylesheets ();
 }
 
-$locale = getconfig ( "locale" );
+$locale = Settings::get ( "locale" );
 if ($locale) {
 	$locale = splitAndTrim ( $locale );
 	array_unshift ( $locale, LC_ALL );
 	@call_user_func_array ( "setlocale", $locale );
 }
 
-if (! getconfig ( "session_timeout" )) {
+if (! Settings::get ( "session_timeout" )) {
 	setconfig ( "session_timeout", 60 );
 }
 
-$session_timeout = 60 * getconfig ( "session_timeout" );
+$session_timeout = 60 * Settings::get ( "session_timeout" );
 
 // Session abgelaufen
 if (isset ( $_SESSION ["session_begin"] )) {
@@ -342,22 +354,22 @@ if (isset ( $_SESSION ["session_begin"] )) {
 	}
 }
 
-$enforce_https = getconfig ( "enforce_https" );
+$enforce_https = Settings::get ( "enforce_https" );
 
 if (! is_ssl () and $enforce_https !== false) {
 	header ( "Location: https://" . $_SERVER ["HTTP_HOST"] . $_SERVER ["REQUEST_URI"] );
 	exit ();
 }
 
-if (! getconfig ( "disable_hsts" ) and is_ssl ()) {
-	$maxage = getconfig ( "hsts_maxage" );
+if (! Settings::get ( "disable_hsts" ) and is_ssl ()) {
+	$maxage = Settings::get ( "hsts_maxage" );
 	if ($maxage === false) {
 		$maxage = 10 * 30;
 	}
 	
 	$maxage = intval ( $maxage );
 	
-	$includeSubDomains = getconfig ( "hsts_include_subdomains" );
+	$includeSubDomains = Settings::get ( "hsts_include_subdomains" );
 	if (! $includeSubDomains) {
 		$includeSubDomains = "";
 	}
@@ -393,10 +405,10 @@ if (! defined ( "PATCH_CHECK_URL" )) {
 	define ( "PATCH_CHECK_URL", "http://patches.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&installed_patches=" . urlencode ( $installed_patches ) );
 }
 
-if (! getconfig ( "session_name" )) {
+if (! Settings::get ( "session_name" )) {
 	setconfig ( "session_name", uniqid () . "_SESSION" );
 }
 
-session_name ( getconfig ( "session_name" ) );
+session_name ( Settings::get ( "session_name" ) );
 
 @include_once "lib/string_functions.php";

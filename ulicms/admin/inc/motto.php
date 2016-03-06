@@ -12,7 +12,7 @@ if (defined ( "_SECURITY" )) {
 				if (isset ( $_POST ["motto_" . $lang] )) {
 					$page = db_escape ( $_POST ["motto_" . $lang] );
 					setconfig ( "motto_" . $lang, $page );
-					if ($lang == getconfig ( "default_language" )) {
+					if ($lang == Settings::get ( "default_language" )) {
 						setconfig ( "motto", $page );
 					}
 				}
@@ -23,10 +23,10 @@ if (defined ( "_SECURITY" )) {
 		
 		for($i = 0; $i < count ( $languages ); $i ++) {
 			$lang = $languages [$i];
-			$mottos [$lang] = getconfig ( "motto_" . $lang );
+			$mottos [$lang] = Settings::get ( "motto_" . $lang );
 			
 			if (! $mottos [$lang])
-				$mottos [$lang] = getconfig ( "motto" );
+				$mottos [$lang] = Settings::get ( "motto" );
 		}
 		
 		?>

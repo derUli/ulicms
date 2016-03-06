@@ -40,11 +40,11 @@ function get_og_tags($systemname = null) {
 		}
 		
 		if (is_null ( $og_type ) or empty ( $og_type )) {
-			$og_type = getconfig ( "og_type" );
+			$og_type = Settings::get ( "og_type" );
 		}
 		
 		if (is_null ( $og_image ) or empty ( $og_image )) {
-			$og_image = getconfig ( "og_image" );
+			$og_image = Settings::get ( "og_image" );
 		}
 		
 		if (! $og_type) {
@@ -128,8 +128,9 @@ function all_combined_html() {
 	echo get_all_comined_html ();
 }
 function get_ID() {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$result = null;
 	$sql = "SELECT `id` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -140,8 +141,9 @@ function get_ID() {
 	return $result;
 }
 function get_type() {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$result = "";
 	$sql = "SELECT `type` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -154,8 +156,9 @@ function get_type() {
 	return $result;
 }
 function get_category_id($page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$result = null;
 	$sql = "SELECT `category` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -169,8 +172,9 @@ function category_id($page = null) {
 	echo get_category_id ( $page );
 }
 function get_parent($page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$result = "";
 	$sql = "SELECT `parent` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -183,8 +187,9 @@ function get_parent($page = null) {
 	return $result;
 }
 function get_custom_data($page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	
 	$sql = "SELECT `custom_data` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
@@ -195,10 +200,10 @@ function get_custom_data($page = null) {
 	return null;
 }
 function include_jquery() {
-	if (getconfig ( "disable_auto_include_jquery" )) {
+	if (Settings::get ( "disable_auto_include_jquery" )) {
 		return;
 	}
-	$disabled_on_pages = getconfig ( "jquery_disabled_on" );
+	$disabled_on_pages = Settings::get ( "jquery_disabled_on" );
 	if ($disabled_on_pages) {
 		$disabled_on_pages = trim ( $disabled_on_pages );
 		$disabled_on_pages = explode ( ";", $disabled_on_pages );
@@ -216,8 +221,9 @@ function include_jquery() {
 	}
 }
 function get_access($page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$sql = "SELECT `access` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
@@ -228,8 +234,9 @@ function get_access($page = null) {
 	return null;
 }
 function get_redirection($page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$sql = "SELECT `redirection` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
@@ -245,8 +252,8 @@ function get_theme($page = null) {
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
-	$theme = getconfig ( "theme" );
-	$mobile_theme = getconfig ( "mobile_theme" );
+	$theme = Settings::get ( "theme" );
+	$mobile_theme = Settings::get ( "mobile_theme" );
 	if ($mobile_theme and ! empty ( $mobile_theme ) and is_mobile ()) {
 		$theme = $mobile_theme;
 	}
@@ -298,9 +305,10 @@ function delete_custom_data($var = null, $page = null) {
 	if (! $page)
 		$page = get_requested_pagename ();
 	$data = get_custom_data ( $page );
-	if (is_null ( $data ))
+	if (is_null ( $data )) {
 		$data = array ();
-		// Wenn $var gesetzt ist, nur $var aus custom_data löschen
+	}
+	// Wenn $var gesetzt ist, nur $var aus custom_data löschen
 	if ($var) {
 		if (isset ( $data [$var] )) {
 			unset ( $data [$var] );
@@ -316,12 +324,14 @@ else {
 	return db_query ( "UPDATE " . tbname ( "content" ) . " SET custom_data = '" . db_escape ( $json ) . "' WHERE systemname='" . db_escape ( $page ) . "'" );
 }
 function set_custom_data($var, $value, $page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	
 	$data = get_custom_data ( $page );
-	if (is_null ( $data ))
+	if (is_null ( $data )) {
 		$data = array ();
+	}
 	
 	$data [$var] = $value;
 	$json = json_encode ( $data );
@@ -400,9 +410,9 @@ function random_banner() {
 				}
 			}
 			if ($type == "gif") {
-				$title = $row->name;
-				$link_url = $row->link_url;
-				$image_url = $row->image_url;
+				$title = Template::getEscape ( $row->name );
+				$link_url = Template::getEscape ( $row->link_url );
+				$image_url = Template::getEscape ( $row->image_url );
 				echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' alt='$title' border=0></a>";
 			} else if ($type == "html") {
 				echo $row->html;
@@ -411,29 +421,29 @@ function random_banner() {
 	}
 }
 function logo() {
-	if (! getconfig ( "logo_image" )) {
+	if (! Settings::get ( "logo_image" )) {
 		setconfig ( "logo_image", "" );
 	}
-	if (! getconfig ( "logo_disabled" )) {
+	if (! Settings::get ( "logo_disabled" )) {
 		setconfig ( "logo_disabled", "no" );
 	}
 	
-	$logo_path = "content/images/" . getconfig ( "logo_image" );
+	$logo_path = "content/images/" . Settings::get ( "logo_image" );
 	
-	if (getconfig ( "logo_disabled" ) == "no" and file_exists ( $logo_path )) {
-		echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( getconfig ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
+	if (Settings::get ( "logo_disabled" ) == "no" and file_exists ( $logo_path )) {
+		echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
 	}
 }
 function year() {
 	echo date ( "Y" );
 }
 function homepage_owner() {
-	echo getconfig ( "homepage_owner" );
+	echo Settings::get ( "homepage_owner" );
 }
 function get_homepage_title() {
-	$homepage_title = getconfig ( "homepage_title_" . $_SESSION ["language"] );
+	$homepage_title = Settings::get ( "homepage_title_" . $_SESSION ["language"] );
 	if (! $homepage_title) {
-		$homepage_title = getconfig ( "homepage_title" );
+		$homepage_title = Settings::get ( "homepage_title" );
 	}
 	return htmlspecialchars ( $homepage_title, ENT_QUOTES, "UTF-8" );
 }
@@ -453,9 +463,9 @@ function meta_keywords($ipage = null) {
 			}
 		}
 	}
-	$meta_keywords = getconfig ( "meta_keywords_" . $_SESSION ["language"] );
+	$meta_keywords = Settings::get ( "meta_keywords_" . $_SESSION ["language"] );
 	if (! $meta_keywords) {
-		$meta_keywords = getconfig ( "meta_keywords" );
+		$meta_keywords = Settings::get ( "meta_keywords" );
 	}
 	
 	return $meta_keywords;
@@ -474,9 +484,9 @@ function meta_description($ipage = null) {
 			}
 		}
 	}
-	$meta_description = getconfig ( "meta_description_" . $_SESSION ["language"] );
+	$meta_description = Settings::get ( "meta_description_" . $_SESSION ["language"] );
 	if (! $meta_description) {
-		$meta_description = getconfig ( "meta_description" );
+		$meta_description = Settings::get ( "meta_description" );
 	}
 	
 	return $meta_description;
@@ -539,7 +549,7 @@ function import($ipage) {
 
 // Todo: nicht W3-konformen HTML-Code korrigieren
 function correctHTMLValidationErrors($txt) {
-	if (getconfig ( "disable_html_validation" )) {
+	if (Settings::get ( "disable_html_validation" )) {
 		return $txt;
 	}
 	
@@ -577,11 +587,11 @@ function apply_filter($text, $type) {
 }
 function get_motto() {
 	// Existiert ein Motto für diese Sprache? z.B. motto_en
-	$motto = getconfig ( "motto_" . $_SESSION ["language"] );
+	$motto = Settings::get ( "motto_" . $_SESSION ["language"] );
 	
 	// Ansonsten Standard Motto
 	if (! $motto) {
-		$motto = getconfig ( "motto" );
+		$motto = Settings::get ( "motto" );
 	}
 	return htmlspecialchars ( $motto, ENT_QUOTES, "UTF-8" );
 }
@@ -591,12 +601,12 @@ function motto() {
 function get_frontpage() {
 	setLanguageByDomain ();
 	if (isset ( $_SESSION ["language"] )) {
-		$frontpage = getconfig ( "frontpage_" . $_SESSION ["language"] );
+		$frontpage = Settings::get ( "frontpage_" . $_SESSION ["language"] );
 		if ($frontpage) {
 			return $frontpage;
 		}
 	}
-	return getconfig ( "frontpage" );
+	return Settings::get ( "frontpage" );
 }
 function get_requested_pagename() {
 	$value = db_escape ( $_GET ["seite"] );
@@ -643,8 +653,9 @@ function parent_item_contains_current_page($id) {
 	
 	$tree = buildtree ( $data, $id );
 	foreach ( $tree as $key ) {
-		if ($key ["systemname"] == get_requested_pagename ())
+		if ($key ["systemname"] == get_requested_pagename ()) {
 			$retval = true;
+		}
 	}
 	return $retval;
 }
@@ -738,7 +749,7 @@ function get_output_favicon_code() {
 	return $html;
 }
 function base_metas() {
-	$title_format = getconfig ( "title_format" );
+	$title_format = Settings::get ( "title_format" );
 	if ($title_format) {
 		$title = $title_format;
 		$title = str_ireplace ( "%homepage_title%", get_homepage_title (), $title );
@@ -757,7 +768,7 @@ function base_metas() {
 	echo '<meta charset="utf-8"/>';
 	echo "\r\n";
 	
-	if (! getconfig ( "disable_no_format_detection" )) {
+	if (! Settings::get ( "disable_no_format_detection" )) {
 		echo '<meta name="format-detection" content="telephone=no"/>';
 		echo "\r\n";
 	}
@@ -769,13 +780,13 @@ function base_metas() {
 		$dir .= "/";
 	}
 	
-	$robots = getconfig ( "robots" );
+	$robots = Settings::get ( "robots" );
 	if ($robots) {
 		$robots = apply_filter ( $robots, "meta_robots" );
 		echo '<meta name="robots" content="' . $robots . '"/>';
 		echo "\r\n";
 	}
-	if (! getconfig ( "hide_meta_generator" )) {
+	if (! Settings::get ( "hide_meta_generator" )) {
 		$powered_by = ULICMS_ROOT . "/powered-by.php";
 		if (file_exists ( $powered_by ))
 			@include $powered_by;
@@ -787,7 +798,7 @@ function base_metas() {
 		echo "\r\n";
 	}
 	
-	if (! getconfig ( "hide_shortlink" ) and (is_200 () or is_403 ())) {
+	if (! Settings::get ( "hide_shortlink" ) and (is_200 () or is_403 ())) {
 		$shortlink = get_shortlink ();
 		if ($shortlink) {
 			echo '<link rel="shortlink" href="' . $shortlink . '"/>';
@@ -795,29 +806,29 @@ function base_metas() {
 		}
 	}
 	
-	if (! getconfig ( "hide_canonical" ) and (is_200 () or is_403 ())) {
-		
+	if (! Settings::get ( "hide_canonical" ) and (is_200 () or is_403 ())) {
 		$canonical = get_canonical ();
 		if ($canonical) {
 			echo '<link rel="canonical"  href="' . $canonical . '"/>';
 			echo "\r\n";
 		}
 	}
-	if (! getconfig ( "no_autoembed_core_css" )) {
+	if (! Settings::get ( "no_autoembed_core_css" )) {
 		echo '<link rel="stylesheet" type="text/css" href="core.min.css"/>';
 		echo "\r\n";
 	}
 	
 	$style_file = getTemplateDirPath ( get_theme () ) . "style.css";
-	if (is_file ( $style_file ))
+	if (is_file ( $style_file )) {
 		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
+	}
 	echo "\r\n";
 	$keywords = meta_keywords ();
 	if (! $keywords) {
-		$keywords = getconfig ( "meta_keywords" );
+		$keywords = Settings::get ( "meta_keywords" );
 	}
 	if ($keywords != "" && $keywords != false) {
-		if (! getconfig ( "hide_meta_keywords" )) {
+		if (! Settings::get ( "hide_meta_keywords" )) {
 			$keywords = apply_filter ( $keywords, "meta_keywords" );
 			$keywords = htmlentities ( $keywords, ENT_QUOTES, "UTF-8" );
 			echo '<meta name="keywords" content="' . $keywords . '"/>';
@@ -826,28 +837,28 @@ function base_metas() {
 	}
 	$description = meta_description ();
 	if (! $description) {
-		$description = getconfig ( "meta_description" );
+		$description = Settings::get ( "meta_description" );
 	}
 	if ($description != "" && $description != false) {
 		
 		$description = apply_filter ( $description, "meta_description" );
 		
 		$$description = htmlentities ( $description, ENT_QUOTES, "UTF-8" );
-		if (! getconfig ( "hide_meta_description" )) {
+		if (! Settings::get ( "hide_meta_description" )) {
 			echo '<meta name="description" content="' . $description . '"/>';
 			echo "\r\n";
 		}
 	}
-	$zoom = getconfig ( "zoom" );
+	$zoom = Settings::get ( "zoom" );
 	if ($zoom === false) {
 		setconfig ( "zoom", 100 );
 		$zoom = 100;
 	}
 	
-	if (! getconfig ( "disable_custom_layout_options" )) {
-		$font = getconfig ( "default-font" );
+	if (! Settings::get ( "disable_custom_layout_options" )) {
+		$font = Settings::get ( "default-font" );
 		if ($font == "google") {
-			$google_font = getconfig ( "google-font" );
+			$google_font = Settings::get ( "google-font" );
 			if ($google_font) {
 				echo '<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=' . urlencode ( $google_font ) . '"/>';
 				echo "\r\n";
@@ -859,14 +870,14 @@ function base_metas() {
 body{
 zoom:" . $zoom . "%;
 font-family:" . $font . ";
-font-size:" . getconfig ( "font-size" ) . ";
-background-color:" . getconfig ( "body-background-color" ) . ";
-color:" . getconfig ( "body-text-color" ) . ";
+font-size:" . Settings::get ( "font-size" ) . ";
+background-color:" . Settings::get ( "body-background-color" ) . ";
+color:" . Settings::get ( "body-text-color" ) . ";
 }
 </style>
 ";
 		
-		if (getconfig ( "video_width_100_percent" )) {
+		if (Settings::get ( "video_width_100_percent" )) {
 			echo "<style type=\"text/css\">
 video {
   width: 100% !important;
@@ -914,7 +925,7 @@ function get_autor() {
 		return;
 	}
 	$datum = $result ["created"];
-	$out = getconfig ( "autor_text" );
+	$out = Settings::get ( "autor_text" );
 	$out = str_replace ( "Vorname", $result2 ["firstname"], $out );
 	$out = str_replace ( "Nachname", $result2 ["lastname"], $out );
 	$out = str_replace ( "Username", $result2 ["username"], $out );
@@ -937,24 +948,27 @@ function get_page($systemname = "") {
 	}
 }
 function content() {
-	$theme = getconfig ( "theme" );
+	$theme = Settings::get ( "theme" );
 	$status = check_status ();
 	if ($status == "404 Not Found") {
-		if (file_exists ( getTemplateDirPath ( $theme ) . "404.php" ))
+		if (file_exists ( getTemplateDirPath ( $theme ) . "404.php" )) {
 			include getTemplateDirPath ( $theme ) . "404.php";
-		else
+		} else {
 			echo TRANSLATION_PAGE_NOT_FOUND_CONTENT;
+		}
 		return false;
 	} else if ($status == "403 Forbidden") {
-		if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" ))
+		if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 			include getTemplateDirPath ( $theme ) . "403.php";
-		else
+		} else {
 			echo TRANSLATION_FORBIDDEN_COTENT;
+		}
 		return false;
 	}
 	
-	if (! is_logged_in ())
+	if (! is_logged_in ()) {
 		db_query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . $_GET ["seite"] . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
+	}
 	return import ( $_GET ["seite"] );
 }
 function checkforAccessForDevice($access) {
@@ -977,8 +991,9 @@ function checkAccess($access = "") {
 		return null;
 	}
 	$access = explode ( ",", $access );
-	if (in_array ( "all", $access ))
+	if (in_array ( "all", $access )) {
 		return "all";
+	}
 	if (in_array ( "registered", $access ) and is_logged_in ()) {
 		return "registered";
 	}
@@ -1018,8 +1033,9 @@ function check_status() {
 	}
 	$access = checkAccess ( $test ["access"] );
 	if ($access) {
-		if ($access != "all")
+		if ($access != "all") {
 			no_cache ();
+		}
 		return "200 OK";
 	}
 	no_cache ();

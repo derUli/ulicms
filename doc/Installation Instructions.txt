@@ -1,0 +1,19 @@
+This document describes how to install UliCMS on an Apache webserver.
+
+1. Upload the content of the "ulicms" folder into the main document folder of your webserver.
+
+   Notice:
+   An installation in a subfolder is possible but not recommend.
+
+2. When upload is finished open http://[your-domain]/installer
+   Replace [your-domain] with the domain of your website (e.g. http://www.myhomepage.de/installer).
+
+3. The installation tool will guide you through the installation procedure.
+
+4. When you finished the installation procedure delete the "installer" folder from your server.
+
+5. Open http://[your-domain]/admin to edit your website.
+   Replace [your-domain] with the domain of your website (e.g. http://www.myhomepage.de/admin).
+
+If you have problems with the installation you can contact the developer using the contact form:
+http://en.ulicms.de/contact.html

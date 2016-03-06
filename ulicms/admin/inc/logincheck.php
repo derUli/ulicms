@@ -14,7 +14,7 @@ if (isset ( $_POST ["login"] )) {
 	}
 	
 	$confirmation_code = null;
-	$twofactor_authentication = getconfig ( "twofactor_authentication" );
+	$twofactor_authentication = Settings::get ( "twofactor_authentication" );
 	
 	if ($twofactor_authentication) {
 		// @TODO: Confirmation Code nur Prüfen, wenn 2-Faktor Authentifizerung aktiviert ist

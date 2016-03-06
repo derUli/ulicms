@@ -2,7 +2,7 @@
 class securityHelper {
 	// Hash Salt + Passwort with SHA1
 	public static function hash_password($password) {
-		$salt = getconfig ( "password_salt" );
+		$salt = Settings::get ( "password_salt" );
 		
 		// if no salt is set, generate it
 		if (! $salt) {

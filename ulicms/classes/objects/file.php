@@ -15,4 +15,19 @@ class File {
 	public static function rename($old, $new) {
 		return rename ( $old, $new );
 	}
+	public static function lastChanged($file) {
+		echo self::getLastChanged ( $file );
+	}
+	public static function getLastChanged($file) {
+		$retval = null;
+		clearstatcache ();
+		$retval = filemtime ( $file );
+		clearstatcache ();
+		return $retval;
+	}
+	public static function getExtension($filename) {
+		$ext = explode ( ".", $filename );
+		$ext = end ( $ext );
+		return $ext;
+	}
 }

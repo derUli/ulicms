@@ -17,15 +17,17 @@ if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] )) {
 	setconfig ( "timezone", db_escape ( $_POST ["timezone"] ) );
 	setconfig ( "robots", db_escape ( $_POST ["robots"] ) );
 	
-	if ($_POST ["disable_html_validation"] == "enabled")
-		deleteconfig ( "disable_html_validation" );
-	else
+	if ($_POST ["disable_html_validation"] == "enabled") {
+		Settings::delete ( "disable_html_validation" );
+	} else {
 		setconfig ( "disable_html_validation", "disable" );
+	}
 	
-	if (! isset ( $_POST ["disable_password_reset"] ))
+	if (! isset ( $_POST ["disable_password_reset"] )) {
 		setconfig ( "disable_password_reset", "disable_password_reset" );
-	else
-		deleteconfig ( "disable_password_reset" );
+	} else {
+		Settings::delete ( "disable_password_reset" );
+	}
 	
 	add_hook ( "after_safe_simple_settings" );
 	header ( "Location: index.php?action=settings_simple" );
@@ -60,42 +62,42 @@ if ($_GET ["action"] == "pages_delete" && $acl->hasPermission ( "pages" ) && get
 	exit ();
 }
 
-if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_settings"] )) {
+if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_settings"] ) and $acl->hasPermission ( "spam_filter" ) and get_request_method () == "POST") {
 	
 	add_hook ( "before_save_spamfilter_settings" );
 	
 	if ($_POST ["spamfilter_enabled"] == "yes") {
-		setconfig ( "spamfilter_enabled", "yes" );
+		Settings::set ( "spamfilter_enabled", "yes" );
 	} else {
-		setconfig ( "spamfilter_enabled", "no" );
+		Settings::set ( "spamfilter_enabled", "no" );
 	}
 	
 	if (isset ( $_POST ["country_blacklist"] )) {
-		setconfig ( "country_blacklist", $_POST ["country_blacklist"] );
+		Settings::set ( "country_blacklist", $_POST ["country_blacklist"] );
 	}
 	
 	if (isset ( $_POST ["check_for_spamhaus"] )) {
-		setconfig ( "check_for_spamhaus", "check" );
+		Settings::set ( "check_for_spamhaus", "check" );
 	} else {
-		deleteconfig ( "check_for_spamhaus" );
+		Settings::delete ( "check_for_spamhaus" );
 	}
 	
 	if (isset ( $_POST ["spamfilter_words_blacklist"] )) {
 		$blacklist = $_POST ["spamfilter_words_blacklist"];
 		$blacklist = str_replace ( "\r\n", "||", $blacklist );
 		$blacklist = str_replace ( "\n", "||", $blacklist );
-		setconfig ( "spamfilter_words_blacklist", $blacklist );
+		Settings::set ( "spamfilter_words_blacklist", $blacklist );
 	}
 	
 	if (isset ( $_POST ["disallow_chinese_chars"] ))
-		setconfig ( "disallow_chinese_chars", "disallow" );
+		Settings::set ( "disallow_chinese_chars", "disallow" );
 	else
-		deleteconfig ( "disallow_chinese_chars" );
+		Settings::delete ( "disallow_chinese_chars" );
 	add_hook ( "after_save_spamfilter_settings" );
 }
 
 if (! empty ( $_POST ["save_template"] ) and ! empty ( $_POST ["code"] ) && $acl->hasPermission ( "templates" )) {
-	$theme = getconfig ( "theme" );
+	$theme = Settings::get ( "theme" );
 	$save = getTemplateDirPath ( $theme ) . basename ( $_POST ["save_template"] );
 	add_hook ( "before_save_template" );
 	if (is_file ( $save ) && is_writable ( $save )) {
@@ -126,7 +128,7 @@ if ($_GET ["action"] == "empty_trash") {
 
 if ($_GET ["action"] == "key_delete" and $acl->hasPermission ( "expert_settings" ) and get_request_method () == "POST") {
 	add_hook ( "before_delete_key" );
-	deleteconfig ( $_GET ["key"] );
+	Settings::delete ( $_GET ["key"] );
 	add_hook ( "after_delete_key" );
 	header ( "Location: index.php?action=settings" );
 	exit ();
@@ -203,6 +205,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$menu_image = db_escape ( $_POST ["menu_image"] );
 		$custom_data = db_escape ( $_POST ["custom_data"] );
 		$theme = db_escape ( $_POST ["theme"] );
+		$type = db_escape ( $_POST ["type"] );
 		
 		if ($_POST ["parent"] == "NULL")
 			$parent = "NULL";
@@ -221,7 +224,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$meta_description = $_POST ["meta_description"];
 		$meta_keywords = $_POST ["meta_keywords"];
 		
-		if (empty ( $meta_description ) and ! getconfig ( "disable_auto_generate_meta_tags" )) {
+		if (empty ( $meta_description ) and ! Settings::get ( "disable_auto_generate_meta_tags" )) {
 			include_once "../lib/string_functions.php";
 			$maxlength_chars = 160;
 			
@@ -251,7 +254,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$meta_description = db_escape ( $meta_description );
 		
 		// Wenn keine Meta Keywords gesetzt sind selbst ermitteln
-		if (empty ( $meta_keywords ) and ! getconfig ( "disable_auto_generate_meta_tags" )) {
+		if (empty ( $meta_keywords ) and ! Settings::get ( "disable_auto_generate_meta_tags" )) {
 			
 			include_once "../lib/string_functions.php";
 			$stripped_content = trim ( $page_content );
@@ -288,12 +291,12 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position, 
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`, 
-  `og_title`, `og_description`, `og_type`, `og_image`) 
+  `og_title`, `og_description`, `og_type`, `og_image`, `type`) 
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", " . $comments_enabled . ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "', 
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title', 
   '$menu_image', '$custom_data', '$theme', '$og_title',
-  '$og_description', '$og_type', '$og_image')" ) or die ( db_error () );
+  '$og_description', '$og_type', '$og_image', '$type')" ) or die ( db_error () );
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
 		$content = $unescaped_content;
@@ -367,6 +370,8 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$menu = db_escape ( $_POST ["menu"] );
 	$position = ( int ) $_POST ["position"];
 	$html_file = db_escape ( $_POST ["html_file"] );
+	
+	$type = db_escape ( $_POST ["type"] );
 	$menu_image = db_escape ( $_POST ["menu_image"] );
 	$custom_data = db_escape ( $_POST ["custom_data"] );
 	$theme = db_escape ( $_POST ["theme"] );
@@ -393,7 +398,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$language = db_escape ( $_POST ["language"] );
 	add_hook ( "before_edit_page" );
 	db_query ( "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
-	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description' WHERE id=$id" );
+	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type' WHERE id=$id" );
 	
 	$user_id = get_user_id ();
 	$content_id = $id;
@@ -567,6 +572,8 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$notify_on_login = intval ( isset ( $_POST ["notify_on_login"] ) );
 	
 	$icq_id = db_escape ( $_POST ["icq_id"] );
+	$twitter = db_escape ( $_POST ["twitter"] );
+	$homepage = db_escape ( $_POST ["homepage"] );
 	$skype_id = db_escape ( $_POST ["skype_id"] );
 	$about_me = db_escape ( $_POST ["about_me"] );
 	$html_editor = db_escape ( $_POST ["html_editor"] );
@@ -577,7 +584,7 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$sql = "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', 
 `icq_id`='$icq_id', skype_id = '$skype_id',
-about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked'  WHERE id=$id";
+about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked', `twitter` = '$twitter', `homepage` = '$homepage'  WHERE id=$id";
 	
 	db_query ( $sql );
 	

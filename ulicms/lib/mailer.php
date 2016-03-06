@@ -1,7 +1,7 @@
 <?php
 @include_once ("Mail.php");
 
-if (! class_exists ( "Mail" )) {
+if (! class_exists ( "Mail" ) and ! defined ( "NO_PEAR_MAIL" )) {
 	define ( "NO_PEAR_MAIL", true );
 }
 function split_headers($headers) {
@@ -20,23 +20,23 @@ function pear_mail($to, $subject, $message, $headers = "") {
 		return false;
 	}
 	
-	$smtp_host = getconfig ( "smtp_host" );
+	$smtp_host = Settings::get ( "smtp_host" );
 	if (! $smtp_host)
 		$smtp_host = "127.0.0.1";
 	
-	$smtp_port = getconfig ( "smtp_port" );
+	$smtp_port = Settings::get ( "smtp_port" );
 	if (! $smtp_port)
 		$smtp_port = "25";
 	
-	$smtp_user = getconfig ( "smtp_user" );
+	$smtp_user = Settings::get ( "smtp_user" );
 	if (! $smtp_user)
 		$smtp_user = null;
 	
-	$smtp_password = getconfig ( "smtp_password" );
+	$smtp_password = Settings::get ( "smtp_password" );
 	if (! $smtp_password)
 		$smtp_password = null;
 	
-	if (! getconfig ( "smtp_auth" )) {
+	if (! Settings::get ( "smtp_auth" )) {
 		$mailer = Mail::factory ( 'smtp', array (
 				'host' => $smtp_host,
 				'port' => $smtp_port 
@@ -57,7 +57,7 @@ function pear_mail($to, $subject, $message, $headers = "") {
 	return $mailer->send ( $to, $header_list, $message );
 }
 function ulicms_mail($to, $subject, $message, $headers = "") {
-	$mode = getconfig ( "email_mode" );
+	$mode = Settings::get ( "email_mode" );
 	if (! $mode)
 		$mode = "internal";
 		

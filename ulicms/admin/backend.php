@@ -18,6 +18,9 @@ setLanguageByDomain ();
 
 $syslang = getSystemLanguage ();
 include_once getLanguageFilePath ( $syslang );
+Translation::includeCustomLangFile ( $_SESSION ["language"] );
+add_hook ( "custom_lang_" . $_SESSION ["language"] );
+
 if (logged_in () and $_SERVER ["REQUEST_METHOD"] == "POST" and ! isset ( $_REQUEST ["ajax_cmd"] ) and ! defined ( "NO_ANTI_CSRF" )) {
 	if (! check_csrf_token ()) {
 		die ( "This is probably a CSRF attack!" );
@@ -103,6 +106,8 @@ if (! $eingeloggt) {
 		require_once "inc/edit_page.php";
 	} else if ($_GET ["action"] == "pages_new") {
 		require_once "inc/add_page.php";
+	}  else if ($_GET ["action"] == "clone_page") {
+		require_once "inc/clone_page.php";
 	} else if ($_GET ["action"] == "banner") {
 		require_once "inc/banner.php";
 	} else if ($_GET ["action"] == "banner_new") {

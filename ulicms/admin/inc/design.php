@@ -3,28 +3,28 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "design" )) {
 	noperms ();
 } else {
-	$theme = getconfig ( "theme" );
-	$additional_menus = getconfig ( "additional_menus" );
-	$mobile_theme = getconfig ( "mobile_theme" );
+	$theme = Settings::get ( "theme" );
+	$additional_menus = Settings::get ( "additional_menus" );
+	$mobile_theme = Settings::get ( "mobile_theme" );
 	
 	if (isset ( $_REQUEST ["submit"] )) {
 		
 		if (! isset ( $_REQUEST ["disable_custom_layout_options"] )) {
 			setconfig ( "disable_custom_layout_options", "disable" );
 		} else {
-			deleteconfig ( "disable_custom_layout_options" );
+			Settings::delete ( "disable_custom_layout_options" );
 		}
 		
 		if (isset ( $_REQUEST ["no_mobile_design_on_tablet"] )) {
 			setconfig ( "no_mobile_design_on_tablet", "no_mobile_design_on_tablet" );
 		} else {
-			deleteconfig ( "no_mobile_design_on_tablet" );
+			Settings::delete ( "no_mobile_design_on_tablet" );
 		}
 		
 		if (isset ( $_REQUEST ["video_width_100_percent"] ))
 			setconfig ( "video_width_100_percent", "width" );
 		else
-			deleteconfig ( "video_width_100_percent" );
+			Settings::delete ( "video_width_100_percent" );
 		
 		if ($_REQUEST ["additional_menus"] !== $additional_menus) {
 			setconfig ( "additional_menus", db_escape ( $_REQUEST ["additional_menus"] ) );
@@ -44,14 +44,14 @@ if (! $acl->hasPermission ( "design" )) {
 			$themes = getThemesList ();
 			
 			if (empty ( $_REQUEST ["mobile_theme"] ))
-				deleteconfig ( "mobile_theme" );
+				Settings::delete ( "mobile_theme" );
 			else if (in_array ( $_REQUEST ["mobile_theme"], $themes )) { // if in_array mobile_theme auf
 				setconfig ( "mobile_theme", db_escape ( $_REQUEST ["mobile_theme"] ) );
 				$mobile_theme = $_REQUEST ["mobile_theme"];
 			} // if in_array mobile_theme zu
 		} // if mobile_theme zu
 		
-		if ($_REQUEST ["default-font"] != getconfig ( "default-font" )) {
+		if ($_REQUEST ["default-font"] != Settings::get ( "default-font" )) {
 			if (! empty ( $_REQUEST ["custom-font"] ))
 				$font = $_REQUEST ["custom-font"];
 			else
@@ -77,18 +77,18 @@ if (! $acl->hasPermission ( "design" )) {
 		
 		setconfig ( "ckeditor_skin", db_escape ( $_REQUEST ["ckeditor_skin"] ) );
 		
-		if (getconfig ( "header-background-color" ) != $_REQUEST ["header-background-color"]) {
+		if (Settings::get ( "header-background-color" ) != $_REQUEST ["header-background-color"]) {
 			setconfig ( "header-background-color", db_escape ( $_REQUEST ["header-background-color"] ) );
 		}
 		
-		if (getconfig ( "body-text-color" ) != $_REQUEST ["body-text-color"]) {
+		if (Settings::get ( "body-text-color" ) != $_REQUEST ["body-text-color"]) {
 			setconfig ( "body-text-color", db_escape ( $_REQUEST ["body-text-color"] ) );
 		}
 		
-		if (getconfig ( "title_format" ) != $_REQUEST ["title_format"])
+		if (Settings::get ( "title_format" ) != $_REQUEST ["title_format"])
 			setconfig ( "title_format", db_escape ( $_REQUEST ["title_format"] ) );
 		
-		if (getconfig ( "body-background-color" ) != $_REQUEST ["body-background-color"]) {
+		if (Settings::get ( "body-background-color" ) != $_REQUEST ["body-background-color"]) {
 			setconfig ( "body-background-color", db_escape ( $_REQUEST ["body-background-color"] ) );
 		}
 	} // if submit zu
@@ -97,19 +97,19 @@ if (! $acl->hasPermission ( "design" )) {
 	include_once "inc/fonts.php";
 	$fonts = getFontFamilys ();
 	$google_fonts = get_google_fonts ();
-	$theme = getconfig ( "theme" );
-	$additional_menus = getconfig ( "additional_menus" );
-	$mobile_theme = getconfig ( "mobile_theme" );
-	$default_font = getconfig ( "default-font" );
-	$google_font = getconfig ( "google-font" );
-	$title_format = htmlspecialchars ( getconfig ( "title_format" ), ENT_QUOTES, "UTF-8" );
-	$zoom = intval ( getconfig ( "zoom" ) );
-	$font_size = getconfig ( "font-size" );
-	$ckeditor_skin = getconfig ( "ckeditor_skin" );
-	$video_width_100_percent = getconfig ( "video_width_100_percent" );
+	$theme = Settings::get ( "theme" );
+	$additional_menus = Settings::get ( "additional_menus" );
+	$mobile_theme = Settings::get ( "mobile_theme" );
+	$default_font = Settings::get ( "default-font" );
+	$google_font = Settings::get ( "google-font" );
+	$title_format = htmlspecialchars ( Settings::get ( "title_format" ), ENT_QUOTES, "UTF-8" );
+	$zoom = intval ( Settings::get ( "zoom" ) );
+	$font_size = Settings::get ( "font-size" );
+	$ckeditor_skin = Settings::get ( "ckeditor_skin" );
+	$video_width_100_percent = Settings::get ( "video_width_100_percent" );
 	$font_sizes = getFontSizes ();
 	
-	$no_mobile_design_on_tablet = getconfig ( "no_mobile_design_on_tablet" );
+	$no_mobile_design_on_tablet = Settings::get ( "no_mobile_design_on_tablet" );
 	
 	?>
 	<?php
@@ -145,7 +145,7 @@ div#google-fonts {
 			<td><input type="checkbox" name="disable_custom_layout_options"
 				<?php
 	
-	if (! getconfig ( "disable_custom_layout_options" )) {
+	if (! Settings::get ( "disable_custom_layout_options" )) {
 		echo " checked";
 	}
 	?>></td>
@@ -364,7 +364,7 @@ div#google-fonts {
 				class="color {hash:true,caps:true}"
 				value="<?php
 	
-	echo real_htmlspecialchars ( getconfig ( "header-background-color" ) );
+	echo real_htmlspecialchars ( Settings::get ( "header-background-color" ) );
 	?>"></td>
 		</tr>
 		<tr>
@@ -375,7 +375,7 @@ div#google-fonts {
 			<td><input name="body-text-color" class="color {hash:true,caps:true}"
 				value="<?php
 	
-	echo real_htmlspecialchars ( getconfig ( "body-text-color" ) );
+	echo real_htmlspecialchars ( Settings::get ( "body-text-color" ) );
 	?>"></td>
 		</tr>
 		</tr>
@@ -388,7 +388,7 @@ div#google-fonts {
 				class="color {hash:true,caps:true}"
 				value="<?php
 	
-	echo real_htmlspecialchars ( getconfig ( "body-background-color" ) );
+	echo real_htmlspecialchars ( Settings::get ( "body-background-color" ) );
 	?>"></td>
 		</tr>
 		<?php
@@ -440,7 +440,7 @@ div#google-fonts {
 	</p>
 
 	<?php
-	if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>

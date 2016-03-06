@@ -47,3 +47,6 @@ define ( "TRANSLATION_MAIL_MESSAGE_TEXT", "Hello %person_name%!\n" . "UliCMS was
 define ( "TRANSLATION_SUCCESSFULL_DB_CONNECT", "Successfull connected to database." );
 
 define ( "TRANSLATION_PHP_VERSION_TOO_LOW", "Your server is running PHP " . phpversion () . ".<br/>" . "It is recommend to upgrade to PHP " . REQUIRED_PHP_VERSION . " or better, or some functions of UliCMS will not be available." );
+
+
+define ( "TRANSLATION_VIEW_PASSWORD", "Show Password" );

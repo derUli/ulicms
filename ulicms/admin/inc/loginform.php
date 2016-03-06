@@ -1,10 +1,10 @@
 <?php
 require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
 $ga = new PHPGangsta_GoogleAuthenticator ();
-$ga_secret = getconfig ( "ga_secret" );
+$ga_secret = Settings::get ( "ga_secret" );
 $qrCodeUrl = $ga->getQRCodeGoogleUrl ( "UliCMS Login auf " . get_domain (), $ga_secret );
 
-$twofactor_authentication = getconfig ( "twofactor_authentication" );
+$twofactor_authentication = Settings::get ( "twofactor_authentication" );
 
 $languages = getAvailableBackendLanguages ();
 $default_language = getSystemLanguage ();
@@ -12,7 +12,7 @@ if (isset ( $_SESSION ["language"] ) and in_array ( $_SESSION ["language"], $lan
 	$default_language = $_SESSION ["language"];
 }
 
-$admin_logo = getconfig ( "admin_logo" );
+$admin_logo = Settings::get ( "admin_logo" );
 if (! $admin_logo) {
 	$admin_logo = "gfx/logo.png";
 }
@@ -55,7 +55,7 @@ csrf_token_html ();
 	?>
 	<table>
 		<tr>
-			<td><strong><strong><?php
+			<td><strong><?php
 			
 			echo TRANSLATION_USERNAME;
 			?></strong></td>
@@ -69,7 +69,7 @@ csrf_token_html ();
 			<td><input type="password" id="password" name="password" value=""></td>
 		</tr>
 		<tr>
-			<td><label for="view_password"><?php translate("view_password");?></strong></td>
+			<td><label for="view_password"><?php translate("view_password");?></label></td>
 			<td><input type="checkbox" id="view_password" /></td>
 		</tr>
 		<tr>
@@ -99,14 +99,12 @@ if ($twofactor_authentication) {
 			<td><input type="text" name="confirmation_code" value=""></td>
 		</tr>
 <?php
-
 }
 ?>
 		<tr>
 			<td></td>
 			<td style="padding-top: 10px; text-align: center;"><input
-				type="submit"
-				value="<?php
+				type="submit" value="<?php
 				
 				echo TRANSLATION_LOGIN;
 				?>"></td>
@@ -139,7 +137,7 @@ if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {
 ?>
 				<?php
 				
-				if (getconfig ( "visitors_can_register" ) === "on" or getconfig ( "visitors_can_register" ) === "1") {
+				if (Settings::get ( "visitors_can_register" ) === "on" or Settings::get ( "visitors_can_register" ) === "1") {
 					
 					?>
 <a
@@ -156,7 +154,7 @@ if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {
 				?>
 				<?php
 				
-				if (! getconfig ( "disable_password_reset" )) {
+				if (! Settings::get ( "disable_password_reset" )) {
 					?>
 <a href="?reset_password" style="float: right;">[<?php
 					

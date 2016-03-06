@@ -16,7 +16,7 @@ class CSVCreator {
 	public function output() {
 		$hasModul = containsModule ( get_requested_pagename () );
 		
-		if (! getconfig ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
+		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
 			
 			if (getCacheType () == "file") {
 				
@@ -33,7 +33,7 @@ class CSVCreator {
 			} else if (getCacheType () == "cache_lite") {
 				$id = md5 ( $_SESSION ["REQUEST_URI"] );
 				$options = array (
-						'lifeTime' => getconfig ( "cache_period" ) 
+						'lifeTime' => Settings::get ( "cache_period" ) 
 				);
 				if (! class_exists ( "Cache_Lite" )) {
 					throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
@@ -74,7 +74,7 @@ class CSVCreator {
 		$csv_string = getCSV ( $data [0] );
 		$csv_string .= getCSV ( $data [1] );
 		
-		if (! getconfig ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
+		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
 			if (getCacheType () == "file") {
 				$handle = fopen ( $this->cached_file, "w" );
 				fwrite ( $handle, $csv_string );

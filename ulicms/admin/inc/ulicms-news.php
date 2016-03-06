@@ -6,7 +6,6 @@ if (! defined ( "_SECURITY" ))
 $rss = new DOMDocument ();
 $feeds = array ();
 $feeds ["de"] = "http://www.ulicms.de/blog_rss.php?s=aktuelles&lang=de";
-
 $feeds ["en"] = "http://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en";
 
 if (isset ( $feeds [$_SESSION ["system_language"]] )) {

@@ -11,7 +11,7 @@
 			<section id="logo">
 				<a href="./">
 <?php
-if (getconfig ( "logo_disabled" ) == "no") {
+if (Settings::get ( "logo_disabled" ) == "no") {
 	logo ();
 	?>
 <br />  

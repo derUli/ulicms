@@ -42,6 +42,10 @@ if (is_logged_in ()) {
 	$enq [] = "scripts/jquery-shiftclick.js";
 	$enq [] = "scripts/shift_checkbox.js";
 }
+
+if(!is_mobile()){
+   $enq [] = "scripts/doubletaptogo/doubletaptogo.min.js";
+}
 ?>
 <?php
 
@@ -68,6 +72,8 @@ if (! is_mobile ()) {
         $('a.scrollup').stop(true, true).fadeOut();
     }
 });
+$(".menu li:has(ul)").doubleTapToGo();
+
   <?php
 }
 ?>
@@ -106,7 +112,7 @@ foreach ( $styles as $style ) {
 
 combined_stylesheet_html ();
 ?>
-<title>[<?php echo getconfig("homepage_title")?>] - UliCMS</title>
+<title>[<?php echo Settings::get("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript">
 $(document).ready(function(){	
     $(".tablesorter").tablesorter({widgets: ["zebra"]}); 

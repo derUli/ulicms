@@ -21,7 +21,7 @@ function filter_by_language(element){
 	<?php
 	if (isset ( $_POST ["motd"] )) {
 		
-		$motd = strip_tags ( $_POST ["motd"], getconfig ( "allowed_html" ) );
+		$motd = strip_tags ( $_POST ["motd"], Settings::get ( "allowed_html" ) );
 		$motd = db_escape ( $motd );
 		setconfig ( "motd", $motd );
 		
@@ -43,7 +43,7 @@ function filter_by_language(element){
 	?>
 		<textarea name="motd" cols=60 rows=15><?php
 	
-	echo htmlspecialchars ( getconfig ( "motd" ) );
+	echo htmlspecialchars ( Settings::get ( "motd" ) );
 	?></textarea> <br> <br> <input type="submit" name="motd_submit"
 			value="<?php
 	
@@ -57,10 +57,10 @@ function filter_by_language(element){
 			</strong><br />
 			<?php
 	
-	echo htmlspecialchars ( getconfig ( "allowed_html" ) )?>
+	echo htmlspecialchars ( Settings::get ( "allowed_html" ) )?>
 		</p>
 		<?php
-	if (getconfig ( "override_shortcuts" ) == "on" || getconfig ( "override_shortcuts" ) == "backend") {
+	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>
 		<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>

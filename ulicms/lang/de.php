@@ -595,9 +595,17 @@ define ( "TRANSLATION_MAX_FAILED_LOGIN_ITEMS", "Benutzer-Accounts nach X fehlges
 // No mobile design on tablets
 define ( "TRANSLATION_NO_MOBILE_DESIGN_ON_TABLET", "Das Design für Mobilgeräte nicht auf Tablets verwenden" );
 
-
 define ( "TRANSLATION_TITLE_AND_HEADLINE", "Titel und Überschrift" );
 define ( "TRANSLATION_MENU_ENTRY", "Menü Eintrag" );
 define ( "TRANSLATION_VISIBILITY", "Sichtbarkeit" );
+
+// Typ
+define ( "TRANSLATION_PAGE", "Seite" );
+
+// Neue Profilfelder
+define ( "TRANSLATION_TWITTER_PROFILE", "Twitter Profil (twitter.com/<u>xxx</u>)" );
+define ( "TRANSLATION_HOMEPAGE", "Homepage" );
+
+define ("TRANSLATION_CLONE", "Klonen");
 
 add_hook ( "lang_de" );

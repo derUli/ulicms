@@ -12,7 +12,7 @@ if (defined ( "_SECURITY" )) {
 				if (isset ( $_POST ["meta_description_" . $lang] )) {
 					$page = db_escape ( $_POST ["meta_description_" . $lang] );
 					setconfig ( "meta_description_" . $lang, $page );
-					if ($lang == getconfig ( "default_language" )) {
+					if ($lang == Settings::get ( "default_language" )) {
 						setconfig ( "meta_description", $page );
 					}
 				}
@@ -23,10 +23,10 @@ if (defined ( "_SECURITY" )) {
 		
 		for($i = 0; $i < count ( $languages ); $i ++) {
 			$lang = $languages [$i];
-			$meta_descriptions [$lang] = getconfig ( "meta_description_" . $lang );
+			$meta_descriptions [$lang] = Settings::get ( "meta_description_" . $lang );
 			
 			if (! $meta_descriptions [$lang])
-				$meta_descriptions [$lang] = getconfig ( "meta_description" );
+				$meta_descriptions [$lang] = Settings::get ( "meta_description" );
 		}
 		
 		?>

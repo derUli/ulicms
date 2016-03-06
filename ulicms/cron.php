@@ -2,11 +2,11 @@
 require_once "init.php";
 fcflush ();
 
-if (getconfig ( "delete_ips_after_48_hours" )) {
+if (Settings::get ( "delete_ips_after_48_hours" )) {
 	db_query ( "Update " . tbname ( "log" ) . " SET ip = NULL WHERE DATEDIFF(NOW(), zeit) >= 2" );
 }
 
-$empty_trash_days = getconfig ( "empty_trash_days" );
+$empty_trash_days = Settings::get ( "empty_trash_days" );
 
 if ($empty_trash_days === false) {
 	$empty_trash_days = 30;
@@ -56,7 +56,7 @@ if (! function_exists ( 'file_get_contents_wrapper' )) {
 	include_once "lib/file_get_contents_wrapper.php";
 }
 
-$last_chs_cron = getconfig ( "last_chs_cron" );
+$last_chs_cron = Settings::get ( "last_chs_cron" );
 $oneWeek = 60 * 60 * 24 * 7;
 
 if (! $last_chs_cron or (time () - $last_chs_cron >= $oneWeek and is_night ())) {

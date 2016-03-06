@@ -1,5 +1,5 @@
 <?php
-if (getconfig ( "disable_password_reset" ))
+if (Settings::get ( "disable_password_reset" ))
 	die ( TRANSLATION_FUNCTION_IS_DISABLED );
 ?>
 

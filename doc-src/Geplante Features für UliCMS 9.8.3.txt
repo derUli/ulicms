@@ -1,0 +1,3 @@
+﻿UliCMS 9.8.3 "The Force"
+[ ] Mobile_Detect aktualisieren
+[ ] CKEditor aktualisieren

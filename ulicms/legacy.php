@@ -1,6 +1,6 @@
 <?php
 
-// will be replaced with getconfig()
+// will be replaced with Settings::get()
 function env($key) {
 	$connection = MYSQL_CONNECTION;
 	$key = db_escape ( $key );
