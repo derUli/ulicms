@@ -14,7 +14,7 @@ class ContentFactory {
 			throw new Exception ( "No page with id $id" );
 		}
 	}
-	public function loadBySystemnameAndLanguage($name, $language) {
+	public static function loadBySystemnameAndLanguage($name, $language) {
 		$name = DB::escapeValue ( $name );
 		$language = DB::escapeValue ( $language );
 		$query = DB::query ( "SELECT id, `type` FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language'" );
