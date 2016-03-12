@@ -56,6 +56,9 @@ class Banner {
 		return $retval;
 	}
 	public function create() {
+		if ($this->id !== null) {
+			return $this->update ();
+		}
 		$sql = "INSERT INTO " . tbname ( "banner" ) . "(name, link_url, image_url, category, type, html, language) values (";
 		if ($this->name === null) {
 			$sql .= "NULL, ";
@@ -102,13 +105,58 @@ class Banner {
 		return $result;
 	}
 	public function update() {
-		throw new NotImplementedException ( "update banner not implemented yet" );
+		if ($this->id === null) {
+			return $this->create ();
+		}
+		$sql = "UPDATE " . tbname ( "content" );
+		
+		if ($this->name === null) {
+			$sql .= "name=NULL, ";
+		} else {
+			$sql .= "name='" . DB::escapeValue ( $this->name ) . "',";
+		}
+		if ($this->link_url === null) {
+			$sql .= "link_url=NULL, ";
+		} else {
+			$sql .= "link_url='" . DB::escapeValue ( $this->link_url ) . "',";
+		}
+		if ($this->image_url === null) {
+			$sql .= "image_url=NULL, ";
+		} else {
+			$sql .= "image_url='" . DB::escapeValue ( $this->image_url ) . "',";
+		}
+		if ($this->category === null) {
+			$sql .= "category=NULL, ";
+		} else {
+			$sql .= "category='" . intval ( $this->category ) . "',";
+		}
+		if ($this->type === null) {
+			$sql .= "`type`=NULL, ";
+		} else {
+			$sql .= "`type=`'" . DB::escapeValue ( $this->type ) . "',";
+		}
+		if ($this->html === null) {
+			$sql .= "html=NULL, ";
+		} else {
+			$sql .= "html='" . DB::escapeValue ( $this->html ) . "',";
+		}
+		if ($this->langage === null) {
+			$sql .= "langage=NULL ";
+		} else {
+			$sql .= "langage='" . DB::escapeValue ( $this->language ) . "'";
+		}
+		
+		$sql .= " where id = " . intval ( $this->id );
+		return DB::query ( $sql );
 	}
-	
-	public function delete(){
-		throw new NotImplementedException ( "delete banner not implemented yet" );
-		
-		
+	public function delete() {
+		$retval = false;
+		if ($this->id !== null) {
+			$sql = "DELETE from " . tbname ( "banner" ) . " where id = " . $this->id;
+			$retval = DB::Query ( $sql );
+			$this->id = null;
+		}
+		return $retval;
 	}
 }
 	
