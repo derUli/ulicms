@@ -104,5 +104,11 @@ class Banner {
 	public function update() {
 		throw new NotImplementedException ( "update banner not implemented yet" );
 	}
+	
+	public function delete(){
+		throw new NotImplementedException ( "delete banner not implemented yet" );
+		
+		
+	}
 }
 	
