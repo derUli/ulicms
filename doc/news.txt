@@ -1,6 +1,7 @@
 ﻿===== Neues in UliCMS 9.8.3 =====
 Neue Features
 + Klasse Banner hinzugefügt
++ Klasse Banners hinzugefügt
 
 Bugfixes
 + ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
