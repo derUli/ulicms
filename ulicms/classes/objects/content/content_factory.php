@@ -29,4 +29,5 @@ class ContentFactory {
 			throw new Exception ( "No page with this combination of $name and $language" );
 		}
 	}
+	
 }

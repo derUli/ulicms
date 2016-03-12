@@ -18,6 +18,14 @@ class Banner {
 			throw new Exception ( "No banner with id $id" );
 		}
 	}
+	public function loadRandom() {
+		$id = intval ( $id );
+		$query = DB::query ( "SELECT * FROM `" . tbname ( "banner" ) . "` order by rand() LIMIT 1" );
+		if (DB::getNumRows ( $query ) > 0) {
+			$result = DB::fetchObject ( $query );
+			$this->fillVarsByResult ( $result );
+		}
+	}
 	private function fillVarsByResult($result) {
 		$this->id = $result->id;
 		$this->name = $result->name;
