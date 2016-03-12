@@ -4,5 +4,5 @@
 	[X] Statische Funktionen für Banner in Content Factory hinzufügen
     [ ] Funktionen dokumentieren
 [ ] Shell-Script "shell/sremove.php"
-[ ] Weitere Funktionen in die Template Klasse verschieben
 [ ] ContentFactory um Funktionen erweitern, die mehrere Datensätze als Array zurückgeben
+[ ] Weitere Funktionen in die Template Klasse verschieben
