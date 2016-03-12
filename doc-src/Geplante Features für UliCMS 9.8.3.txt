@@ -1,4 +1,7 @@
 ﻿UliCMS 9.8.3 "The Force"
 [ ] Klasse "Banner"
+	[X] Klasse implemtieren
+	[ ] Statische Funktionen für Banner in Content Factory hinzufügen
+    [ ] Funktionen dokumentieren
 [ ] Shell-Script "shell/sremove.php"
 [ ] Weitere Funktionen in die Template Klasse verschieben

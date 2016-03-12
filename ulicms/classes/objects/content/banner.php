@@ -8,8 +8,6 @@ class Banner {
 	private $type = "gif";
 	public $html = "";
 	public $language = "";
-	public function __construct() {
-	}
 	public function loadByID($id) {
 		$id = intval ( $id );
 		$query = DB::query ( "SELECT * FROM `" . tbname ( "banner" ) . "` where id = $id" );
@@ -99,7 +97,7 @@ class Banner {
 		$sql .= ")";
 		
 		$result = DB::query ( $sql );
-		if ($retval) {
+		if ($result) {
 			$this->id = DB::getLastInsertID ();
 		}
 		return $result;
@@ -108,7 +106,7 @@ class Banner {
 		if ($this->id === null) {
 			return $this->create ();
 		}
-		$sql = "UPDATE " . tbname ( "content" );
+		$sql = "UPDATE " . tbname ( "content" ) . " ";
 		
 		if ($this->name === null) {
 			$sql .= "name=NULL, ";
