@@ -56,7 +56,50 @@ class Banner {
 		return $retval;
 	}
 	public function create() {
-		throw new NotImplementedException ( "create banner not implemented yet" );
+		$sql = "INSERT INTO " . tbname ( "banner" ) . "(name, link_url, image_url, category, type, html, language) values (";
+		if ($this->name === null) {
+			$sql .= "NULL, ";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->name ) . "',";
+		}
+		if ($this->link_url === null) {
+			$sql .= "NULL, ";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->link_url ) . "',";
+		}
+		if ($this->image_url === null) {
+			$sql .= "NULL, ";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->image_url ) . "',";
+		}
+		if ($this->category === null) {
+			$sql .= "NULL, ";
+		} else {
+			$sql .= "'" . intval ( $this->category ) . "',";
+		}
+		if ($this->type === null) {
+			$sql .= "NULL, ";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->type ) . "',";
+		}
+		if ($this->html === null) {
+			$sql .= "NULL, ";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->html ) . "',";
+		}
+		if ($this->langage === null) {
+			$sql .= "NULL ";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->language ) . "'";
+		}
+		
+		$sql .= ")";
+		
+		$result = DB::query ( $sql );
+		if ($retval) {
+			$this->id = DB::getLastInsertID ();
+		}
+		return $result;
 	}
 	public function update() {
 		throw new NotImplementedException ( "update banner not implemented yet" );
