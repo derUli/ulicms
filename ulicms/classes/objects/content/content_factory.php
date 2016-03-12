@@ -30,4 +30,10 @@ class ContentFactory {
 		}
 	}
 	
+	// @TODO: Funktionen für Abfrage von mehreren Datensätzen
+	// z.B. 
+	// getByLanguage()
+	// getByMenu()
+	// getByMenuAndLanguage
+	// usw.
 }
