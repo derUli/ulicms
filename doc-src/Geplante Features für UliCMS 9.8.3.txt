@@ -1,5 +1,5 @@
 ﻿UliCMS 9.8.3 "The Force"
-[ ] Klasse "Banner"
+[X] Klasse "Banner"
 	[X] Klasse implemtieren
 	[X] Statische Funktionen für Banner in Content Factory hinzufügen
     [X] Funktionen dokumentieren
