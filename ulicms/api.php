@@ -980,7 +980,7 @@ if (! function_exists ( "cleanString" )) {
 }
 function getTemplateDirPath($sub = "default", $abspath = false) {
 	if ($abspath) {
-		$templateDir = Path::resolve ( "ULICMS_ROOT/content/templates/" );
+		$templateDir = Path::resolve ( "ULICMS_ROOT/content/templates/" )."/";
 	} else if (is_admin_dir ()) {
 		$templateDir = "../content/templates/";
 	} else {
@@ -1170,7 +1170,7 @@ function getModulePath($module, $abspath = false) {
 		throw new InvalidArgumentException ( '$module is empty' );
 	}
 	if ($abspath) {
-		return Path::resolve ( "ULICMS_ROOT/content/modules/$module/" );
+		return Path::resolve ( "ULICMS_ROOT/content/modules/$module" )."/";
 	}
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
