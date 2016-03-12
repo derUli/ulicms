@@ -76,7 +76,8 @@ function get_google_fonts() {
 	$xml = new SimpleXMLElement ( $content );
 	foreach ( $xml->body->outline as $outline ) {
 		$retval [] = $outline ["text"];
-	};
+	}
+	;
 	return $retval;
 }
 function get_all_used_menus() {
@@ -129,10 +130,9 @@ function is_crawler($userAgent = null) {
 function get_lang_config($name, $lang) {
 	$retval = false;
 	$config = Settings::get ( $name . "_" . $lang );
-	if ($config){
+	if ($config) {
 		$retval = $config;
-	}
-	else{
+	} else {
 		$config = Settings::get ( $name );
 	}
 	return $config;
@@ -978,8 +978,10 @@ if (! function_exists ( "cleanString" )) {
 		return $string;
 	}
 }
-function getTemplateDirPath($sub = "default") {
-	if (is_admin_dir ()) {
+function getTemplateDirPath($sub = "default", $abspath = false) {
+	if ($abspath) {
+		$templateDir = Path::resolve ( "ULICMS_ROOT/content/templates/" );
+	} else if (is_admin_dir ()) {
 		$templateDir = "../content/templates/";
 	} else {
 		$templateDir = "content/templates/";
@@ -1163,10 +1165,16 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 	$seo_url .= "." . trim ( $format, "." );
 	return $seo_url;
 }
-function getModulePath($module) {
+function getModulePath($module, $abspath = false) {
+	if (empty ( $module )) {
+		throw new InvalidArgumentException ( '$module is empty' );
+	}
+	if ($abspath) {
+		return Path::resolve ( "ULICMS_ROOT/content/modules/$module/" );
+	}
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
-		$module_folder = "content/modules/";
+		$module_folder .= "content/modules/";
 	}  // Backend Directory
 else {
 		$module_folder = "../content/modules/";
@@ -1180,8 +1188,8 @@ function getModuleAdminFilePath($module) {
 function getModuleMainFilePath($module) {
 	return getModulePath ( $module ) . $module . "_main.php";
 }
-function getModuleUninstallScriptPath($module) {
-	return getModulePath ( $module ) . $module . "_uninstall.php";
+function getModuleUninstallScriptPath($module, $abspath = false) {
+	return getModulePath ( $module, $abspath ) . $module . "_uninstall.php";
 }
 function find_all_files($dir) {
 	$root = scandir ( $dir );
@@ -1652,10 +1660,10 @@ function uninstall_module($name, $type = "module") {
 		return false;
 	
 	if ($type === "module") {
-		$moduleDir = getModulePath ( $name );
+		$moduleDir = getModulePath ( $name, true );
 		// Modul-Ordner entfernen
 		if (is_dir ( $moduleDir )) {
-			$uninstall_script = getModuleUninstallScriptPath ( $name );
+			$uninstall_script = getModuleUninstallScriptPath ( $name, true );
 			// Uninstall Script ausführen, sofern vorhanden
 			if (is_file ( $uninstall_script )) {
 				include $uninstall_script;
@@ -1668,7 +1676,7 @@ function uninstall_module($name, $type = "module") {
 		$cTheme = Settings::get ( "theme" );
 		$allThemes = getThemeList ();
 		if (in_array ( $name, $allThemes ) and $cTheme !== $name) {
-			$theme_path = getTemplateDirPath ( $name );
+			$theme_path = getTemplateDirPath ( $name, true );
 			sureRemoveDir ( $theme_path, true );
 			clearCache ();
 			return ! is_dir ( $theme_path );
