@@ -2,7 +2,7 @@
 [ ] Klasse "Banner"
 	[X] Klasse implemtieren
 	[X] Statische Funktionen für Banner in Content Factory hinzufügen
-    [ ] Funktionen dokumentieren
+    [X] Funktionen dokumentieren
 [ ] Shell-Script "shell/sremove.php"
 [ ] ContentFactory um Funktionen erweitern, die mehrere Datensätze als Array zurückgeben
 [ ] Weitere Funktionen in die Template Klasse verschieben
