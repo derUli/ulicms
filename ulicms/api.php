@@ -1618,10 +1618,9 @@ function containsModule($page = null, $module = false) {
 	$dataset = db_fetch_assoc ( $query );
 	$content = $dataset ["content"];
 	$content = str_replace ( "&quot;", "\"", $content );
-	if ($module){
+	if ($module) {
 		return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
-	}
-	else{
+	} else {
 		return preg_match ( "/\[module=\".+\"\]/", $content );
 	}
 }
