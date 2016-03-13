@@ -3,7 +3,7 @@
 	[X] Klasse implemtieren
 	[X] Statische Funktionen für Banner in Content Factory hinzufügen
     [X] Funktionen dokumentieren
-[ ] Shell-Script "shell/sremove.php"
+[X] Shell-Script "shell/sremove.php"
 	[X] uninstall_module() Funktion anpassen
 	[X] Kommandozeilen-Tool mit Argumentparser implementieren
 	[X] Dokumentieren
