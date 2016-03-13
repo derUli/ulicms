@@ -1643,7 +1643,7 @@ function page_has_html_file($page) {
 function uninstall_module($name, $type = "module") {
 	$acl = new ACL ();
 	// Nur Admins können Module löschen
-	if (! $acl->hasPermission ( "install_packages" )) {
+	if (! $acl->hasPermission ( "install_packages" ) and !isCLI()) {
 		return false;
 	}
 	
@@ -1655,7 +1655,6 @@ function uninstall_module($name, $type = "module") {
 	// CMS gelöscht werden kann
 	if ($name == "." or $name == ".." or empty ( $name ))
 		return false;
-	
 	if ($type === "module") {
 		$moduleDir = getModulePath ( $name, true );
 		// Modul-Ordner entfernen

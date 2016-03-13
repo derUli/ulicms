@@ -7,5 +7,8 @@
 	[X] uninstall_module() Funktion anpassen
 	[ ] Kommandozeilen-Tool mit Argumentparser implementieren
 	[ ] Dokumentieren
+[ ] Shell-Skript sinfo.php erstellen (Alle Pakete + Versionsnummer anzeigen)
+	[ ] Implementieren
+	[ ] Dokumentieren 
 [ ] ContentFactory um Funktionen erweitern, die mehrere Datensätze als Array zurückgeben
 [ ] Weitere Funktionen in die Template Klasse verschieben
