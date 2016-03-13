@@ -421,7 +421,7 @@ function get_ip() {
 }
 function getModuleMeta($module, $attrib = null) {
 	$retval = null;
-	$metadata_file = getModulePath ( $module ) . "metadata.json";
+	$metadata_file = getModulePath ( $module, true ) . "metadata.json";
 	if (file_exists ( $metadata_file )) {
 		$data = file_get_contents ( $metadata_file );
 		$data = json_decode ( $data );
@@ -437,7 +437,7 @@ function getModuleMeta($module, $attrib = null) {
 }
 function getThemeMeta($theme, $attrib = null) {
 	$retval = null;
-	$metadata_file = getTemplateDirPath ( $theme ) . "metadata.json";
+	$metadata_file = getTemplateDirPath ( $theme, true ) . "metadata.json";
 	if (file_exists ( $metadata_file )) {
 		$data = file_get_contents ( $metadata_file );
 		$data = json_decode ( $data );
@@ -980,7 +980,7 @@ if (! function_exists ( "cleanString" )) {
 }
 function getTemplateDirPath($sub = "default", $abspath = false) {
 	if ($abspath) {
-		$templateDir = Path::resolve ( "ULICMS_ROOT/content/templates/" )."/";
+		$templateDir = Path::resolve ( "ULICMS_ROOT/content/templates/" ) . "/";
 	} else if (is_admin_dir ()) {
 		$templateDir = "../content/templates/";
 	} else {
@@ -1167,7 +1167,7 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 }
 function getModulePath($module, $abspath = false) {
 	if ($abspath) {
-		return Path::resolve ( "ULICMS_ROOT/content/modules/$module" )."/";
+		return Path::resolve ( "ULICMS_ROOT/content/modules/$module" ) . "/";
 	}
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
@@ -1643,7 +1643,7 @@ function page_has_html_file($page) {
 function uninstall_module($name, $type = "module") {
 	$acl = new ACL ();
 	// Nur Admins können Module löschen
-	if (! $acl->hasPermission ( "install_packages" ) and !isCLI()) {
+	if (! $acl->hasPermission ( "install_packages" ) and ! isCLI ()) {
 		return false;
 	}
 	
