@@ -4,6 +4,7 @@ Neue Features
 + Klasse Banners hinzugefügt
 + Shellscript sremove.php hinzugefügt
 + Shellscript sinfo.php hinzugefügt
++ Shellscript version.php hinzugefügt
 
 Bugfixes
 + ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
