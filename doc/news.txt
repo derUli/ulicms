@@ -5,6 +5,7 @@ Neue Features
 + Shellscript sremove.php hinzugefügt
 + Shellscript sinfo.php hinzugefügt
 + Shellscript version.php hinzugefügt
++ Funktion containsModule() zur Klasse Page hinzugefügt
 
 Bugfixes
 + ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
