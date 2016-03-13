@@ -1166,9 +1166,6 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 	return $seo_url;
 }
 function getModulePath($module, $abspath = false) {
-	if (empty ( $module )) {
-		throw new InvalidArgumentException ( '$module is empty' );
-	}
 	if ($abspath) {
 		return Path::resolve ( "ULICMS_ROOT/content/modules/$module" )."/";
 	}
