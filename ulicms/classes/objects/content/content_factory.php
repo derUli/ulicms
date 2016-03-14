@@ -29,11 +29,24 @@ class ContentFactory {
 			throw new Exception ( "No page with this combination of $name and $language" );
 		}
 	}
+	public static function getAll($order = "id") {
+		$result = array ();
+		$sql = "SELECT id, `type` FROM " . tbname ( "content" ) . " ORDER BY $order";
+		$query = DB::query ( $sql );
+		while ( $row = DB::fetchObject ( $query ) ) {
+			if ($result->type == "page") {
+				$page = new Page ();
+				$page->loadByID ( $row->id );
+				$result [] = $page;
+			}
+		}
+		return $result;
+	}
 	
 	// @TODO: Funktionen für Abfrage von mehreren Datensätzen
 	// z.B.
 	// getByLanguage()
 	// getByMenu()
-	// getByMenuAndLanguage
+	// getByMenuAndLanguage()
 	// usw.
 }
