@@ -9,7 +9,7 @@ Neue Features
 + Funktion ContentFactory::getAll() hinzugefügt
 
 Bugfixes
-+ ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
+# ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
 
-Entfernte Features:
-+ cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016
+Entfernte Features
+- cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016
