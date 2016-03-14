@@ -99,7 +99,7 @@ class ContentFactory {
 	public static function filterByLastChangeBy($elements, $lastchangeby = 1) {
 		$result = array ();
 		foreach ( $elements as $element ) {
-			if ($element->$lastchangeby == $lastchangeby) {
+			if ($element->lastchangeby == $lastchangeby) {
 				$result [] = $element;
 			}
 		}
