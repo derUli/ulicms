@@ -38,7 +38,7 @@ class ContentFactory {
 		}
 		return $result;
 	}
-	public static function getByLanguage($language, $order = "id") {
+	public static function getAllByLanguage($language, $order = "id") {
 		$language = DB::escapeValue ( $language );
 		$result = array ();
 		$sql = "SELECT id, `type` FROM " . tbname ( "content" ) . " where `language` = '$language' ORDER BY $order";
@@ -48,10 +48,61 @@ class ContentFactory {
 		}
 		return $result;
 	}
-	
-	// @TODO: Funktionen für Abfrage von mehreren Datensätzen
-	// z.B.
-	// getByMenu()
-	// getByMenuAndLanguage()
-	// usw.
+	public static function getAllByMenu($menu, $order = "id") {
+		$menu = DB::escapeValue ( $menu );
+		$result = array ();
+		$sql = "SELECT id, `type` FROM " . tbname ( "content" ) . " where `menu` = '$menu' ORDER BY $order";
+		$query = DB::query ( $sql );
+		while ( $row = DB::fetchObject ( $query ) ) {
+			$result [] = self::getContentObjectByID ( $row );
+		}
+		return $result;
+	}
+	public static function getAllByMenuAndLanguage($menu, $language, $order = "id") {
+		$menu = DB::escapeValue ( $menu );
+		$language = DB::escapeValue ( $language );
+		$result = array ();
+		$sql = "SELECT id, `type` FROM " . tbname ( "content" ) . " where `menu` = '$menu' and language = '$language' ORDER BY $order";
+		$query = DB::query ( $sql );
+		while ( $row = DB::fetchObject ( $query ) ) {
+			$result [] = self::getContentObjectByID ( $row );
+		}
+		return $result;
+	}
+	public static function filterByEnabled($elements, $enabled = 1) {
+		$result = array ();
+		foreach ( $elements as $element ) {
+			if ($element->active == $enabled) {
+				$result [] = $element;
+			}
+		}
+		return $result;
+	}
+	public static function filterByCategory($elements, $category = 1) {
+		$result = array ();
+		foreach ( $elements as $element ) {
+			if ($element->category == $category) {
+				$result [] = $element;
+			}
+		}
+		return $result;
+	}
+	public static function filterByAutor($elements, $autor = 1) {
+		$result = array ();
+		foreach ( $elements as $element ) {
+			if ($element->autor == $autor) {
+				$result [] = $element;
+			}
+		}
+		return $result;
+	}
+	public static function filterByLastChangeBy($elements, $lastchangeby = 1) {
+		$result = array ();
+		foreach ( $elements as $element ) {
+			if ($element->$lastchangeby == $lastchangeby) {
+				$result [] = $element;
+			}
+		}
+		return $result;
+	}
 }

@@ -1,3 +1,5 @@
 <?php
 include_once "init.php";
-var_dump(ContentFactory::getAll());
+$content = ContentFactory::getAllByMenuAndLanguage("bottom", "de");
+$content = ContentFactory::filterByEnabled($content);
+var_dump($content);

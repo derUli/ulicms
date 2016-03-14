@@ -14,8 +14,8 @@
 	[ ] Getter Implementieren
 		[X] getAll
 		[X] getAllByLanguage
-		[ ] getAllByMenu
-		[ ] getAllByMenuAndLanguage
-		[ ] filterEnabled
-	[ ] Neue Funktionen Dokumentieren
+		[X] getAllByMenu
+		[X] getAllByMenuAndLanguage
+		[X] filterEnabled
+	[ ] Neue Funktionen (getAllX und filterByX) dokumentieren
 [ ] Weitere Funktionen in die Template Klasse verschieben
