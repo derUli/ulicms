@@ -9,3 +9,6 @@ Neue Features
 
 Bugfixes
 + ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
+
+Entfernte Features:
++ cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016
