@@ -6,7 +6,7 @@ Neue Features
 + Shellscript sinfo.php hinzugefügt
 + Shellscript version.php hinzugefügt
 + Funktion containsModule() zur Klasse Page hinzugefügt
-+ Getter zu ContentFactory hinzugefügt
++ GetAllX und FilterByX Funktionen zur Klasse ContentFactory hinzugefügt
 
 Bugfixes
 # ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
