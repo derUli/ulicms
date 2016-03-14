@@ -13,9 +13,9 @@
 [ ] ContentFactory um Funktionen erweitern, die mehrere Datensätze als Array zurückgeben
 	[ ] Getter Implementieren
 		[X] getAll
-		[ ] getByLanguage
-		[ ] getByMenu
-		[ ] getByMenuAndLanguage
+		[X] getAllByLanguage
+		[ ] getAllByMenu
+		[ ] getAllByMenuAndLanguage
 		[ ] filterEnabled
 	[ ] Neue Funktionen Dokumentieren
 [ ] Weitere Funktionen in die Template Klasse verschieben
