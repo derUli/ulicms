@@ -10,12 +10,12 @@
 [X] Shell-Skript sinfo.php erstellen (Alle Pakete + Versionsnummer anzeigen)
 	[X] Implementieren
 	[X] Dokumentieren 
-[ ] ContentFactory um Funktionen erweitern, die mehrere Datensätze als Array zurückgeben
-	[ ] Getter Implementieren
+[X] ContentFactory um Funktionen erweitern, die mehrere Datensätze als Array zurückgeben
+	[X] Getter Implementieren
 		[X] getAll
 		[X] getAllByLanguage
 		[X] getAllByMenu
 		[X] getAllByMenuAndLanguage
 		[X] filterEnabled
-	[ ] Neue Funktionen (getAllX und filterByX) dokumentieren
+	[X] Neue Funktionen (getAllX und filterByX) dokumentieren
 [ ] Weitere Funktionen in die Template Klasse verschieben
