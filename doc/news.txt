@@ -7,6 +7,7 @@ Neue Features
 + Shellscript version.php hinzugefügt
 + Funktion containsModule() zur Klasse Page hinzugefügt
 + GetAllX() und FilterByX() Funktionen zur Klasse ContentFactory hinzugefügt
++ Klasse Request hinzugefügt
 
 Bugfixes
 # ContentFactory::loadBySystemnameAndLanguage() ist nun statisch

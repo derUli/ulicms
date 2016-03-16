@@ -48,6 +48,7 @@ if (! file_existS ( ULICMS_CACHE )) {
 }
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "base_config.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "request.php";
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "antispam-features.php";
 

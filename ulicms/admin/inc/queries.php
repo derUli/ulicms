@@ -184,7 +184,7 @@ if (isset ( $_GET ["do_restore_version"] ) and $acl->hasPermission ( "pages" )) 
 		VCS::restoreRevision ( $do_restore_version );
 	}
 	
-	ulicms_redirect ( "index.php?action=pages_edit&page=" . $rev->content_id );
+	Request::redirect ( "index.php?action=pages_edit&page=" . $rev->content_id );
 }
 
 if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
@@ -495,7 +495,7 @@ if (! empty ( $_FILES ['favicon_upload_file'] ['name'] ) and $acl->hasPermission
 		$ico_lib->save_ico ( $destination );
 		
 		add_hook ( "after_upload_favicon" );
-		ulicms_redirect ( "index.php?action=favicon" );
+		Request::redirect ( "index.php?action=favicon" );
 	} else {
 		$_GET ["error"] = get_translation ( "UPLOAD_WRONG_FILE_FORMAT" );
 	}
