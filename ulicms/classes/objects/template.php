@@ -37,7 +37,7 @@ class Template {
 	public static function getEscape($value) {
 		return htmlspecialchars ( $value, ENT_QUOTES, "UTF-8" );
 	}
-	function logo() {
+	public static function logo() {
 		if (! Settings::get ( "logo_image" )) {
 			setconfig ( "logo_image", "" );
 		}
@@ -51,10 +51,10 @@ class Template {
 			echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
 		}
 	}
-	function year() {
+	public static function year() {
 		echo date ( "Y" );
 	}
-	function getMotto() {
+	public static function getMotto() {
 		// Existiert ein Motto für diese Sprache? z.B. motto_en
 		$motto = Settings::get ( "motto_" . $_SESSION ["language"] );
 		
@@ -64,7 +64,7 @@ class Template {
 		}
 		return htmlspecialchars ( $motto, ENT_QUOTES, "UTF-8" );
 	}
-	function motto() {
+	public static function motto() {
 		echo self::getMotto ();
 	}
 	
