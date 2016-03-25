@@ -38,8 +38,13 @@ if (($version == "9.0.1" or $version == "9.0.1.1") and ((new DateTime () > new D
 }
 
 if (($version == "9.8.0") and ((new DateTime () > new DateTime ( "2016-01-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
-	die ( "<p>Ein Upgrade auf UliCMS 9.8.1 ist verfügbar. / An upgrade to UliCMS 9.8.1 is available.<br/>
-   <a href=\"http://www.ulicms.de/content/files/Releases/9.8.1/ulicms-9.8.1-snowfall-upgrade.zip\">[Download]</a></p>" );
+	die ( "<p>Ein Upgrade auf UliCMS 9.8.2 ist verfügbar. / An upgrade to UliCMS 9.8.2 is available.<br/>
+   <a href=\"http://en.ulicms.de/content/files/Releases/9.8.2/ulicms-9.8.2-upgrade.zip\">[Download]</a></p>" );
+}
+
+if (($version == "9.8.1") and ((new DateTime () > new DateTime ( "2016-03-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
+	die ( "<p>Ein Upgrade auf UliCMS 9.8.2 ist verfügbar. / An upgrade to UliCMS 9.8.2 is available.<br/>
+   <a href=\"http://en.ulicms.de/content/files/Releases/9.8.2/ulicms-9.8.2-upgrade.zip\">[Download]</a></p>" );
 }
 
 die ( "" );
