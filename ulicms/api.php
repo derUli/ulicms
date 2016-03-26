@@ -1146,6 +1146,9 @@ function SureRemoveDir($dir, $DeleteMe) {
  * seite.html;
  */
 function buildSEOUrl($page = false, $redirection = null, $format = "html") {
+        if(!is_null($redirection) and !empty($redirection)){
+             return $redirection;
+        }
 	if ($page === false)
 		$page = get_requested_pagename ();
 	
