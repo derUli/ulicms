@@ -73,26 +73,30 @@ class ACL {
 		$deleteGroupSQL = "DELETE FROM `" . tbname ( "groups" ) . "` WHERE id=" . $id;
 		db_query ( $deleteGroupSQL );
 		
-		if (is_null ( $move_users_to ))
+		if (is_null ( $move_users_to )) {
 			$updateUsers = "UPDATE " . tbname ( "users" ) . " SET `group_id`=NULL where `group_id`=$id";
-		else
+		} else {
 			$updateUsers = "UPDATE " . tbname ( "users" ) . " SET `group_id`=" . $move_users_to . " where `group_id`=$id";
+		}
 		
 		db_query ( $updateUsers );
 	}
 	public function getPermissionQueryResult($id = null) {
-		if ($id)
+		if ($id) {
 			$group_id = $id;
-		else
+		} else {
 			$group_id = $_SESSION ["group_id"];
-		if (! $group_id)
+		}
+		if (! $group_id) {
 			return null;
+		}
 		
 		$sqlString = "SELECT * FROM `" . tbname ( "groups" ) . "` WHERE id=" . $group_id;
 		$query = db_query ( $sqlString );
 		
-		if (db_num_rows ( $query ) == 0)
+		if (db_num_rows ( $query ) == 0) {
 			return null;
+		}
 		
 		$result = db_fetch_assoc ( $query );
 		
@@ -170,18 +174,20 @@ class ACL {
 		unset ( $acl_array );
 		
 		// Admin has all rights
-		if ($admin)
+		if ($admin) {
 			$default_value = true;
-		else
+		} else {
 			$default_value = false;
+		}
 		
 		foreach ( $acl_data as $key => $value ) {
 			$acl_data [$key] = $default_value;
 		}
 		
 		ksort ( $acl_data );
-		if ($plain)
+		if ($plain) {
 			return $acl_data;
+		}
 		
 		$json = json_encode ( $acl_data );
 		return $json;
