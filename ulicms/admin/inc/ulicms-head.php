@@ -1,6 +1,7 @@
 <head>
 <meta name="viewport" content="width=1000, user-scalable=yes" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>[<?php Template::escape(Settings::get("homepage_title"));?>] - UliCMS</title>
 <link rel="stylesheet" type="text/css" href="css/blue.css" />
 <?php
 $styles = array ();
@@ -94,7 +95,6 @@ foreach ( $styles as $style ) {
 
 combined_stylesheet_html ();
 ?>
-<title>[<?php echo Settings::get("homepage_title")?>] - UliCMS</title>
 <script type="text/javascript">
 $(document).ready(function(){	
     $(".tablesorter").tablesorter({widgets: ["zebra"]}); 
