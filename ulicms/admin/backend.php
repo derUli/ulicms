@@ -14,19 +14,19 @@ $_COOKIE [session_name ()] = session_id ();
 
 add_hook ( "after_session_start" );
 
-add_hook( "before_set_language_by_domain" );
+add_hook ( "before_set_language_by_domain" );
 setLanguageByDomain ();
-add_hook( "after_set_language_by_domain" );
+add_hook ( "after_set_language_by_domain" );
 
 $syslang = getSystemLanguage ();
 include_once getLanguageFilePath ( $syslang );
-add_hook( "before_include_custom_lang_file" );
+add_hook ( "before_include_custom_lang_file" );
 Translation::includeCustomLangFile ( $_SESSION ["language"] );
-add_hook( "after_include_custom_lang_file" );
-add_hook( "before_custom_lang" );
+add_hook ( "after_include_custom_lang_file" );
+add_hook ( "before_custom_lang" );
 add_hook ( "custom_lang_" . $_SESSION ["language"] );
 
-add_hook( "after_custom_lang" );
+add_hook ( "after_custom_lang" );
 
 if (logged_in () and $_SERVER ["REQUEST_METHOD"] == "POST" and ! isset ( $_REQUEST ["ajax_cmd"] ) and ! defined ( "NO_ANTI_CSRF" )) {
 	if (! check_csrf_token ()) {
@@ -34,9 +34,9 @@ if (logged_in () and $_SERVER ["REQUEST_METHOD"] == "POST" and ! isset ( $_REQUE
 	}
 }
 
-add_hook( "before_set_locale_by_language" );
+add_hook ( "before_set_locale_by_language" );
 setLocaleByLanguage ();
-add_hook( "after_set_locale_by_language" );
+add_hook ( "after_set_locale_by_language" );
 
 $cfg = new config ();
 if (isset ( $cfg->ip_whitelist ) and is_array ( $cfg->ip_whitelist ) and count ( $cfg->ip_whitelist ) > 0 and ! in_array ( get_ip (), $cfg->ip_whitelist )) {
@@ -69,13 +69,13 @@ if ($_GET ["action"] == "export" and isset ( $_POST ["table"] )) {
 
 header ( "Content-Type: text/html; charset=UTF-8" );
 
-add_hook( "before_ajax_handler" );
+add_hook ( "before_ajax_handler" );
 
 if (isset ( $_REQUEST ["ajax_cmd"] )) {
 	include_once "inc/ajax_handler.php";
 	exit ();
 }
-add_hook( "after_ajax_handler" );
+add_hook ( "after_ajax_handler" );
 
 require_once "inc/header.php";
 if (! $eingeloggt) {
@@ -88,11 +88,11 @@ if (! $eingeloggt) {
 	}
 } else {
 	require_once "inc/adminmenu.php";
-
+	
 	add_hook ( "register_actions" );
-
+	
 	$pkg = new packageManager ();
-
+	
 	global $actions;
 	if ($_SESSION ["require_password_change"]) {
 		require_once "inc/change_password.php";
@@ -118,7 +118,7 @@ if (! $eingeloggt) {
 		require_once "inc/edit_page.php";
 	} else if ($_GET ["action"] == "pages_new") {
 		require_once "inc/add_page.php";
-	}  else if ($_GET ["action"] == "clone_page") {
+	} else if ($_GET ["action"] == "clone_page") {
 		require_once "inc/clone_page.php";
 	} else if ($_GET ["action"] == "banner") {
 		require_once "inc/banner.php";
@@ -156,7 +156,7 @@ if (! $eingeloggt) {
 		require_once "inc/key_new.php";
 	} else if ($_GET ["action"] == "key_edit") {
 		require_once "inc/key_edit.php";
-	}
+	} 
 
 	else if ($_GET ["action"] == "templates") {
 		require_once "inc/templates.php";
@@ -180,29 +180,29 @@ if (! $eingeloggt) {
 		require_once "inc/forms_new.php";
 	} else if ($_GET ["action"] == "forms_edit") {
 		require_once "inc/forms_edit.php";
-	}
+	} 
 
 	else if ($_GET ["action"] == "info") {
 		require_once "inc/info.php";
-	}
+	} 
 
 	else if ($_GET ["action"] == "info") {
 		require_once "inc/info.php";
-	}
+	} 
 
 	else if ($_GET ["action"] == "system_update") {
 		require_once "inc/system_update.php";
 	} else if ($_GET ["action"] == "motd") {
 		require_once "inc/motd.php";
-	}
+	} 
 
 	else if ($_GET ["action"] == "edit_profile") {
 		require_once "inc/edit_profile.php";
-	}
+	} 
 
 	else if ($_GET ["action"] == "logo_upload") {
 		require_once "inc/logo.php";
-	}
+	} 
 
 	else if ($_GET ["action"] == "favicon") {
 		require_once "inc/favicon.php";
@@ -212,7 +212,7 @@ if (! $eingeloggt) {
 		require_once "inc/import.php";
 	} else if ($_GET ["action"] == "export") {
 		require_once "inc/export.php";
-	}
+	} 
 
 	else if ($_GET ["action"] == "cache") {
 		require_once "inc/cache_settings.php";
@@ -224,11 +224,11 @@ if (! $eingeloggt) {
 		require_once "inc/module_settings.php";
 	} else if ($_GET ["action"] == "other_settings") {
 		require_once "inc/other_settings.php";
-	}
+	} 
 
 	else if ($_GET ["action"] == "frontpage_settings") {
 		require_once "inc/frontpage.php";
-	}
+	} 
 
 	else if ($_GET ["action"] == "pkg_settings") {
 		require_once "inc/pkg_settings.php";
@@ -250,7 +250,7 @@ if (! $eingeloggt) {
 		require_once "inc/add_audio.php";
 	} else if ($_GET ["action"] == "edit_audio") {
 		require_once "inc/edit_audio.php";
-	}
+	} 
 
 	else if (isset ( $actions [$_GET ["action"]] )) {
 		include_once $actions [$_GET ["action"]];

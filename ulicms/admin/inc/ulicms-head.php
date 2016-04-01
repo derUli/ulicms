@@ -42,8 +42,8 @@ if (is_logged_in ()) {
 	$enq [] = "scripts/shift_checkbox.js";
 }
 
-if(!is_mobile()){
-   $enq [] = "scripts/doubletaptogo/doubletaptogo.min.js";
+if (! is_mobile ()) {
+	$enq [] = "scripts/doubletaptogo/doubletaptogo.min.js";
 }
 ?>
 <?php
@@ -82,6 +82,7 @@ $(".menu li:has(ul)").doubleTapToGo();
 	href="scripts/vallenato/vallenato.css" />
 <?php include "inc/ulicms-touch-icons.php";?>
 <?php
+
 $styles [] = "codemirror/lib/codemirror.css";
 $styles [] = "codemirror/mode/xml/xml.css";
 $styles [] = "codemirror/mode/javascript/javascript.css";
