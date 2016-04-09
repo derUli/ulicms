@@ -132,6 +132,6 @@ class Cache {
 		if (function_exists ( "apply_filter" )) {
 			$unique_identifier = apply_filter ( $unique_identifier, "unique_identifier" );
 		}
-		return "content/cache/" . md5 ( $unique_identifier ) . ".tmp";
+		return Path::resolve ( "ULICMS_ROOT/content/cache/" . md5 ( $unique_identifier ) . ".tmp" );
 	}
 }
