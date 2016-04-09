@@ -24,6 +24,23 @@ class Cache {
 		
 		add_hook ( "after_clear_cache" );
 	}
+	public static function getCacheType() {
+		$cache_type = "file";
+		$c = Settings::get ( "cache_type" );
+		switch ($c) {
+			case "cache_lite" :
+				@include "Cache/Lite.php";
+				$cache_type = "cache_lite";
+				
+				break;
+			case "file" :
+			default :
+				$cache_type = "file";
+				break;
+				break;
+		}
+		return $cache_type;
+	}
 	public static function clearAPC() {
 		if (! function_exists ( "apc_clear_cache" )) {
 			return false;
@@ -33,13 +50,65 @@ class Cache {
 		apc_clear_cache ( 'opcode' );
 	}
 	public static function store($data, $requestUri = null) {
+		$type = self::getCacheType ();
+		if ($type == "cache_lite") {
+			self::storeCacheLite ( $data, $requestUri );
+		} else {
+			self::storeFile ( $data, $requestUri );
+		}
+	}
+	public static function get($requestUri = null) {
+		$type = self::getCacheType ();
+		if ($type == "cache_lite") {
+			return self::getCacheLite ( $requestUri );
+		} else {
+			return self::getFile ( $requestUri );
+		}
+	}
+	private static function getCacheLite($data, $requestUri = null) {
+		if (! $request_uri) {
+			$requestUri = get_request_uri ();
+		}
+		
+		$cacheFile = md5 ( self::buildCacheFilePath ( $requestUri ) );
+		
+		$options = array (
+				'lifeTime' => Settings::get ( "cache_period" ),
+				'cacheDir' => "content/cache/" 
+		);
+		if (! class_exists ( "Cache_Lite" )) {
+			throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
+		}
+		
+		$Cache_Lite = new Cache_Lite ( $options );
+		return $Cache_Lite->get ( $cacheFile );
+	}
+	private static function storeCacheLite($data, $requestUri = null) {
+		if (! $request_uri) {
+			$requestUri = get_request_uri ();
+		}
+		
+		$cacheFile = md5 ( self::buildCacheFilePath ( $requestUri ) );
+		
+		$options = array (
+				'lifeTime' => Settings::get ( "cache_period" ),
+				'cacheDir' => "content/cache/" 
+		);
+		if (! class_exists ( "Cache_Lite" )) {
+			throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
+		}
+		
+		$Cache_Lite = new Cache_Lite ( $options );
+		$Cache_Lite->save ( $data, $cacheFile );
+	}
+	private static function storeFile($data, $requestUri = null) {
 		if (! $request_uri) {
 			$requestUri = get_request_uri ();
 		}
 		$cacheFile = self::buildCacheFilePath ( $requestUri );
 		file_put_contents ( $cacheFile, $data );
 	}
-	public static function get($requestUri) {
+	private static function getFile($requestUri = null) {
 		$retval = null;
 		if (! $request_uri) {
 			$requestUri = get_request_uri ();
