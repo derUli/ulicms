@@ -9,5 +9,20 @@ if (! defined ( "KCFINDER_PAGE" )) {
 			$path = rtrim ( $path, "/" );
 			return $path;
 		}
+		public static function removeDir($dir, $DeleteMe) {
+			if (! $dh = @opendir ( $dir ))
+				return;
+			while ( false !== ($obj = readdir ( $dh )) ) {
+				if ($obj == '.' || $obj == '..')
+					continue;
+				if (! @unlink ( $dir . '/' . $obj ))
+					self::removeDir ( $dir . '/' . $obj, true );
+			}
+			
+			closedir ( $dh );
+			if ($DeleteMe) {
+				@rmdir ( $dir );
+			}
+		}
 	}
 }

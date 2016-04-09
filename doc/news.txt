@@ -12,6 +12,8 @@ Neue Features
 + Updated CKEditor (Version 4.5.7)
 + Updated Mobile_Detect (Version 2.8.20)
 + Neue Hooks hinzugefügt
++ Funktion removeDir() zur Klasse Path hinzugefügt
++ Klasse Cache hinzugefügt
 
 Bugfixes
 # ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
