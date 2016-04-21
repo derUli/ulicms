@@ -36,4 +36,4 @@ VALUES (" . $row ["id"] . ",0, '" . db_escape ( utf8_decode ( $row ["systemname"
 " . $row ["position"] . ", " . $row ["parent"] . ", " . time () . ", 'de', '" . db_escape ( utf8_decode ( $row ["redirection"] ) ) . "', 'all')" ) or die ( db_error () );
 }
 
-ulicms_redirect ( "admin/" );
+Request::redirect ( "admin/" );

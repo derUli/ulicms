@@ -1,3 +1,21 @@
 ﻿UliCMS 9.8.3 "The Force"
-[ ] Mobile_Detect aktualisieren
-[ ] CKEditor aktualisieren
+[X] Klasse "Banner"
+	[X] Klasse implemtieren
+	[X] Statische Funktionen für Banner in Content Factory hinzufügen
+    [X] Funktionen dokumentieren
+[X] Shell-Script "shell/sremove.php"
+	[X] uninstall_module() Funktion anpassen
+	[X] Kommandozeilen-Tool mit Argumentparser implementieren
+	[X] Dokumentieren
+[X] Shell-Skript sinfo.php erstellen (Alle Pakete + Versionsnummer anzeigen)
+	[X] Implementieren
+	[X] Dokumentieren 
+[X] ContentFactory um Funktionen erweitern, die mehrere Datensätze als Array zurückgeben
+	[X] Getter Implementieren
+		[X] getAll
+		[X] getAllByLanguage
+		[X] getAllByMenu
+		[X] getAllByMenuAndLanguage
+		[X] filterEnabled
+	[X] Neue Funktionen (getAllX und filterByX) dokumentieren
+[ ] Weitere Funktionen in die Template Klasse verschieben

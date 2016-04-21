@@ -14,7 +14,7 @@ function enforce_www($doit = true){
 	     $new_url = get_site_protocol () . $domain . get_request_uri();
 	  }
    }
-   ulicms_redirect($new_url);
+   Request::redirect($new_url);
 }
 
 enforce_www(false);

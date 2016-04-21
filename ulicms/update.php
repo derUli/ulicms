@@ -95,4 +95,4 @@ $pkg = new PackageManager ();
 $pkg->truncateInstalledPatches ();
 
 // @unlink ("update.php");
-ulicms_redirect ( "admin/" );
+Request::redirect ( "admin/" );

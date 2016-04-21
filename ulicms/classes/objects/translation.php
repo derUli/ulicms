@@ -23,9 +23,8 @@ class Translation {
 	}
 	public static function includeCustomLangFile($lang) {
 		$file = ULICMS_ROOT . "/lang/custom/de.php";
-		if(file_exists($file) and is_file($file)){
+		if (file_exists ( $file ) and is_file ( $file )) {
 			include_once $file;
-			
 		}
 	}
 }

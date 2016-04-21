@@ -289,5 +289,14 @@ class Page extends Content {
 		$this->deleted_at = null;
 		$this->save ();
 	}
+	public function containsModule($module = false) {
+		$content = $this->content;
+		$content = str_replace ( "&quot;", "\"", $content );
+		if ($module) {
+			return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
+		} else {
+			return preg_match ( "/\[module=\".+\"\]/", $content );
+		}
+	}
 }
 

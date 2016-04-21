@@ -14,12 +14,19 @@ $_COOKIE [session_name ()] = session_id ();
 
 add_hook ( "after_session_start" );
 
+add_hook ( "before_set_language_by_domain" );
 setLanguageByDomain ();
+add_hook ( "after_set_language_by_domain" );
 
 $syslang = getSystemLanguage ();
 include_once getLanguageFilePath ( $syslang );
+add_hook ( "before_include_custom_lang_file" );
 Translation::includeCustomLangFile ( $_SESSION ["language"] );
+add_hook ( "after_include_custom_lang_file" );
+add_hook ( "before_custom_lang" );
 add_hook ( "custom_lang_" . $_SESSION ["language"] );
+
+add_hook ( "after_custom_lang" );
 
 if (logged_in () and $_SERVER ["REQUEST_METHOD"] == "POST" and ! isset ( $_REQUEST ["ajax_cmd"] ) and ! defined ( "NO_ANTI_CSRF" )) {
 	if (! check_csrf_token ()) {
@@ -27,7 +34,9 @@ if (logged_in () and $_SERVER ["REQUEST_METHOD"] == "POST" and ! isset ( $_REQUE
 	}
 }
 
+add_hook ( "before_set_locale_by_language" );
 setLocaleByLanguage ();
+add_hook ( "after_set_locale_by_language" );
 
 $cfg = new config ();
 if (isset ( $cfg->ip_whitelist ) and is_array ( $cfg->ip_whitelist ) and count ( $cfg->ip_whitelist ) > 0 and ! in_array ( get_ip (), $cfg->ip_whitelist )) {
@@ -60,10 +69,13 @@ if ($_GET ["action"] == "export" and isset ( $_POST ["table"] )) {
 
 header ( "Content-Type: text/html; charset=UTF-8" );
 
+add_hook ( "before_ajax_handler" );
+
 if (isset ( $_REQUEST ["ajax_cmd"] )) {
 	include_once "inc/ajax_handler.php";
 	exit ();
 }
+add_hook ( "after_ajax_handler" );
 
 require_once "inc/header.php";
 if (! $eingeloggt) {
@@ -106,7 +118,7 @@ if (! $eingeloggt) {
 		require_once "inc/edit_page.php";
 	} else if ($_GET ["action"] == "pages_new") {
 		require_once "inc/add_page.php";
-	}  else if ($_GET ["action"] == "clone_page") {
+	} else if ($_GET ["action"] == "clone_page") {
 		require_once "inc/clone_page.php";
 	} else if ($_GET ["action"] == "banner") {
 		require_once "inc/banner.php";

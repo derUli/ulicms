@@ -81,7 +81,7 @@ add_hook ( "before_http_header" );
 $redirection = get_redirection ();
 
 if ($redirection) {
-	ulicms_redirect ( $redirection, 302 );
+	Request::redirect ( $redirection, 302 );
 }
 
 if (isset ( $_GET ["goid"] )) {
@@ -89,10 +89,10 @@ if (isset ( $_GET ["goid"] )) {
 	$sysname = getPageSystemnameByID ( $goid );
 	if ($sysname and $sysname != "-") {
 		$url = buildSeoURL ( $sysname );
-		ulicms_redirect ( $url, 301 );
+		Request::redirect ( $url, 301 );
 	} else {
 		$url = getBaseFolderURL ();
-		ulicms_redirect ( $url, 301 );
+		Request::redirect ( $url, 301 );
 	}
 }
 

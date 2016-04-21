@@ -1,26 +1,22 @@
-﻿===== Neues in UliCMS 9.8.2 =====
-+ Klasse "File" hinzugefügt
-+ Klasse "Path" hinzugefügt
-+ Funktion Template::escape($value) hinzugefügt
-+ Funktion Template::getEscape($value) hinzugefügt
-+ Funktion Template::getHomepageOwner() hinzugefügt
-+ Funktion Template::homepageOwner() hinzugefügt
-+ Funktion Template::poweredByUliCMS() hinzugefügt
-+ Skript "shell/sinstall.php" hinzugefügt
-+ Seite hinzufügen & Seite bearbeiten nun übersichtlicher Dank Tabs
-+ Mobile_Detect auf Version 2.8.19 aktualisiert
-+ CKEditor auf Version 4.5.6 aktualisiert
-+ "Passwort zurücksetzen" Passwortlänge auf 12 Zeichen erhöht
-+ Hooks "before_edit_button" und "after_edit_button" hinzugefügt
-+ Hook "after_content" verschoben
-+ Tab "Typ" zu Seitenverwaltung hinzugefügt
-+ API Funktion is_tablet() hinzugefügt
-+ Umschalter "Passwort anzeigen" zum Installationsprogramm hinzugefügt
-+ Twitter-Profil kann nun im User hinterlegt werden
-+ Homepage URL kann nun im User hinterlegt werden.
-+ XSS Sicherheitslücke im Bannersystem korrigiert
-+ Mailer Klasse hinzugefügt
-+ Database Klasse hinzugefügt
-+ CustomData Klasse hinzugefügt
-+ Translation Overrides (Übersetzungen update-sicher anpassen)
-+ Seiten können nun geklont werden
+﻿===== Neues in UliCMS 9.8.3 =====
+Neue Features
++ Klasse Banner hinzugefügt
++ Klasse Banners hinzugefügt
++ Shellscript sremove.php hinzugefügt
++ Shellscript sinfo.php hinzugefügt
++ Shellscript version.php hinzugefügt
++ Funktion containsModule() zur Klasse Page hinzugefügt
++ GetAllX() und FilterByX() Funktionen zur Klasse ContentFactory hinzugefügt
++ Klasse Request hinzugefügt
++ Funktionen zur Template Klasse hinzugefügt
++ Updated CKEditor (Version 4.5.7)
++ Updated Mobile_Detect (Version 2.8.20)
++ Neue Hooks hinzugefügt
++ Funktion removeDir() zur Klasse Path hinzugefügt
++ Klasse Cache hinzugefügt
+
+Bugfixes
+# ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
+
+Entfernte Features
+- cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016

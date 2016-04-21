@@ -606,6 +606,6 @@ define ( "TRANSLATION_PAGE", "Seite" );
 define ( "TRANSLATION_TWITTER_PROFILE", "Twitter Profil (twitter.com/<u>xxx</u>)" );
 define ( "TRANSLATION_HOMEPAGE", "Homepage" );
 
-define ("TRANSLATION_CLONE", "Klonen");
+define ( "TRANSLATION_CLONE", "Klonen" );
 
 add_hook ( "lang_de" );

@@ -1,9 +1,9 @@
 #!/usr/bin/php -q
 <?php
 function sinstall_usage() {
-	echo "sinstall - Install UliCMS package\n";
+	echo "sinstall - Install an UliCMS package\n";
 	echo "UliCMS Version " . cms_version () . "\n";
-	echo "Copyright (C) 2015 by Ulrich Schmidt";
+	echo "Copyright (C) 2015 - 2016 by Ulrich Schmidt";
 	echo "\n\n";
 	echo "Usage php -f sinstall.php [file]\n\n";
 	exit ();

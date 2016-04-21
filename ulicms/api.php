@@ -76,7 +76,8 @@ function get_google_fonts() {
 	$xml = new SimpleXMLElement ( $content );
 	foreach ( $xml->body->outline as $outline ) {
 		$retval [] = $outline ["text"];
-	};
+	}
+	;
 	return $retval;
 }
 function get_all_used_menus() {
@@ -129,10 +130,9 @@ function is_crawler($userAgent = null) {
 function get_lang_config($name, $lang) {
 	$retval = false;
 	$config = Settings::get ( $name . "_" . $lang );
-	if ($config){
+	if ($config) {
 		$retval = $config;
-	}
-	else{
+	} else {
 		$config = Settings::get ( $name );
 	}
 	return $config;
@@ -421,7 +421,7 @@ function get_ip() {
 }
 function getModuleMeta($module, $attrib = null) {
 	$retval = null;
-	$metadata_file = getModulePath ( $module ) . "metadata.json";
+	$metadata_file = getModulePath ( $module, true ) . "metadata.json";
 	if (file_exists ( $metadata_file )) {
 		$data = file_get_contents ( $metadata_file );
 		$data = json_decode ( $data );
@@ -437,7 +437,7 @@ function getModuleMeta($module, $attrib = null) {
 }
 function getThemeMeta($theme, $attrib = null) {
 	$retval = null;
-	$metadata_file = getTemplateDirPath ( $theme ) . "metadata.json";
+	$metadata_file = getTemplateDirPath ( $theme, true ) . "metadata.json";
 	if (file_exists ( $metadata_file )) {
 		$data = file_get_contents ( $metadata_file );
 		$data = json_decode ( $data );
@@ -978,8 +978,10 @@ if (! function_exists ( "cleanString" )) {
 		return $string;
 	}
 }
-function getTemplateDirPath($sub = "default") {
-	if (is_admin_dir ()) {
+function getTemplateDirPath($sub = "default", $abspath = false) {
+	if ($abspath) {
+		$templateDir = Path::resolve ( "ULICMS_ROOT/content/templates/" ) . "/";
+	} else if (is_admin_dir ()) {
 		$templateDir = "../content/templates/";
 	} else {
 		$templateDir = "content/templates/";
@@ -1144,6 +1146,9 @@ function SureRemoveDir($dir, $DeleteMe) {
  * seite.html;
  */
 function buildSEOUrl($page = false, $redirection = null, $format = "html") {
+        if(!is_null($redirection) and !empty($redirection)){
+             return $redirection;
+        }
 	if ($page === false)
 		$page = get_requested_pagename ();
 	
@@ -1163,10 +1168,13 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 	$seo_url .= "." . trim ( $format, "." );
 	return $seo_url;
 }
-function getModulePath($module) {
+function getModulePath($module, $abspath = false) {
+	if ($abspath) {
+		return Path::resolve ( "ULICMS_ROOT/content/modules/$module" ) . "/";
+	}
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
-		$module_folder = "content/modules/";
+		$module_folder .= "content/modules/";
 	}  // Backend Directory
 else {
 		$module_folder = "../content/modules/";
@@ -1180,8 +1188,8 @@ function getModuleAdminFilePath($module) {
 function getModuleMainFilePath($module) {
 	return getModulePath ( $module ) . $module . "_main.php";
 }
-function getModuleUninstallScriptPath($module) {
-	return getModulePath ( $module ) . $module . "_uninstall.php";
+function getModuleUninstallScriptPath($module, $abspath = false) {
+	return getModulePath ( $module, $abspath ) . $module . "_uninstall.php";
 }
 function find_all_files($dir) {
 	$root = scandir ( $dir );
@@ -1613,10 +1621,11 @@ function containsModule($page = null, $module = false) {
 	$dataset = db_fetch_assoc ( $query );
 	$content = $dataset ["content"];
 	$content = str_replace ( "&quot;", "\"", $content );
-	if ($module)
+	if ($module) {
 		return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
-	else
+	} else {
 		return preg_match ( "/\[module=\".+\"\]/", $content );
+	}
 }
 function page_has_html_file($page) {
 	$query = db_query ( "SELECT `html_file` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
@@ -1638,7 +1647,7 @@ function page_has_html_file($page) {
 function uninstall_module($name, $type = "module") {
 	$acl = new ACL ();
 	// Nur Admins können Module löschen
-	if (! $acl->hasPermission ( "install_packages" )) {
+	if (! $acl->hasPermission ( "install_packages" ) and ! isCLI ()) {
 		return false;
 	}
 	
@@ -1650,12 +1659,11 @@ function uninstall_module($name, $type = "module") {
 	// CMS gelöscht werden kann
 	if ($name == "." or $name == ".." or empty ( $name ))
 		return false;
-	
 	if ($type === "module") {
-		$moduleDir = getModulePath ( $name );
+		$moduleDir = getModulePath ( $name, true );
 		// Modul-Ordner entfernen
 		if (is_dir ( $moduleDir )) {
-			$uninstall_script = getModuleUninstallScriptPath ( $name );
+			$uninstall_script = getModuleUninstallScriptPath ( $name, true );
 			// Uninstall Script ausführen, sofern vorhanden
 			if (is_file ( $uninstall_script )) {
 				include $uninstall_script;
@@ -1668,7 +1676,7 @@ function uninstall_module($name, $type = "module") {
 		$cTheme = Settings::get ( "theme" );
 		$allThemes = getThemeList ();
 		if (in_array ( $name, $allThemes ) and $cTheme !== $name) {
-			$theme_path = getTemplateDirPath ( $name );
+			$theme_path = getTemplateDirPath ( $name, true );
 			sureRemoveDir ( $theme_path, true );
 			clearCache ();
 			return ! is_dir ( $theme_path );

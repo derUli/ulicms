@@ -114,7 +114,7 @@ class Forms {
 			}
 			
 			if (Mailer::send ( $email_to, $subject, $html, $headers )) {
-				ulicms_redirect ( $redirect_url );
+				Request::redirect ( $redirect_url );
 				$retval = true;
 			} else {
 				translate ( "error_send_mail_form_failed" );
