@@ -59,7 +59,7 @@ if (! function_exists ( 'file_get_contents_wrapper' )) {
 $last_chs_cron = Settings::get ( "last_chs_cron" );
 $oneWeek = 60 * 60 * 24 * 7;
 
-if (! $last_chs_cron or (time () - $last_chs_cron >= $oneWeek and is_night ())) {
+if (! $last_chs_cron or time () - $last_chs_cron >= $oneWeek) {
 	@file_get_contents_wrapper ( "$cfg_url?chs=$chs" );
 	setconfig ( "last_chs_cron", time () );
 }
