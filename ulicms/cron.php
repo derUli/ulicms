@@ -22,11 +22,3 @@ db_query ( "DELETE FROM " . tbname ( "history" ) . " WHERE content_id NOT IN (
 
 // Cronjobs der Module
 add_hook ( "cron" );
-
-$version = new ulicms_version ();
-
-$developmentVersion = "";
-
-if ($version->getDevelopmentVersion ()) {
-	$developmentVersion = " Vorabversion";
-}
