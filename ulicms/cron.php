@@ -30,9 +30,3 @@ $developmentVersion = "";
 if ($version->getDevelopmentVersion ()) {
 	$developmentVersion = " Vorabversion";
 }
-
-if (! is_file ( "init.php" ) and ! is_dir ( "lib" )) {
-	exit ();
-}
-
-exit ();
