@@ -31,36 +31,8 @@ if ($version->getDevelopmentVersion ()) {
 	$developmentVersion = " Vorabversion";
 }
 
-// Start Call Home //
-$cfg_script = "UliCMS " . $version->getVersion () . " (v" . join ( ".", $version->getInternalVersion () ) . $developmentVersion . ")";
-$cfg_url = "http://www.ulicms.de/chs/api.php";
-
-$urlfrom = $_SERVER ['HTTP_HOST'];
-
 if (! is_file ( "init.php" ) and ! is_dir ( "lib" )) {
 	exit ();
 }
 
-$folderfrom = str_replace ( "\\", "/", dirname ( $_SERVER ['SCRIPT_NAME'] ) );
-
-if (! endsWith ( $folderfrom, "/" )) {
-	$folderfrom .= "/";
-}
-
-$var_url = get_site_protocol () . $urlfrom . $folderfrom;
-
-$chs0 = $cfg_script . "#" . $var_url;
-$chs = base64_encode ( $chs0 );
-
-if (! function_exists ( 'file_get_contents_wrapper' )) {
-	include_once "lib/file_get_contents_wrapper.php";
-}
-
-$last_chs_cron = Settings::get ( "last_chs_cron" );
-$oneWeek = 60 * 60 * 24 * 7;
-
-if (! $last_chs_cron or time () - $last_chs_cron >= $oneWeek) {
-	@file_get_contents_wrapper ( "$cfg_url?chs=$chs" );
-	setconfig ( "last_chs_cron", time () );
-}
 exit ();
