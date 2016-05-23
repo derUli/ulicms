@@ -2,6 +2,7 @@
 header ( "Content-Type: text/html; charset=UTF-8" );
 $version = $_REQUEST ["v"];
 
+
 if ($version == "7.0.0") {
 	die ( "<p>Ein Update auf UliCMS 7.1.2 ist verfügbar.<br/>
    <a href=\"http://www.ulicms.de/content/files/Releases/Upgrades/ulicms-7.0.0-auf-ulicms-7.1.2-upgrade.zip\">Download</a></p>" );
@@ -32,19 +33,23 @@ if ($version == "9.0.0") {
    <a href=\"http://www.ulicms.de/content/files/Releases/9.0.1/ulicms-9.0.1-mountain-king-upgrade.zip\">[Download]</a></p>" );
 }
 
+$version9_8_3_update_string = "<p>Ein Upgrade auf UliCMS 9.8.3 ist verfügbar. / An upgrade to UliCMS 9.8.3 is available.<br/>
+   <a href=\"http://en.ulicms.de/content/files/Releases/9.8.3/ulicms-9.8.3-the-force-upgrade.zip\">[Download]</a></p>";
+
 if (($version == "9.0.1" or $version == "9.0.1.1") and ((new DateTime () > new DateTime ( "2016-05-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
-	die ( "<p>Ein Upgrade auf UliCMS 9.8.0 ist verfügbar. / An upgrade to UliCMS 9.8.0 is available.<br/>
-   <a href=\"http://www.ulicms.de/content/files/Releases/9.8.0/ulicms-9.8.0-big-ben-upgrade.zip\">[Download]</a></p>" );
+	die ( $version9_8_3_update_string );
 }
 
 if (($version == "9.8.0") and ((new DateTime () > new DateTime ( "2016-01-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
-	die ( "<p>Ein Upgrade auf UliCMS 9.8.2 ist verfügbar. / An upgrade to UliCMS 9.8.2 is available.<br/>
-   <a href=\"http://en.ulicms.de/content/files/Releases/9.8.2/ulicms-9.8.2-upgrade.zip\">[Download]</a></p>" );
+	die ( $version9_8_3_update_string );
 }
 
 if (($version == "9.8.1") and ((new DateTime () > new DateTime ( "2016-03-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
-	die ( "<p>Ein Upgrade auf UliCMS 9.8.2 ist verfügbar. / An upgrade to UliCMS 9.8.2 is available.<br/>
-   <a href=\"http://en.ulicms.de/content/files/Releases/9.8.2/ulicms-9.8.2-upgrade.zip\">[Download]</a></p>" );
+	die ( $version9_8_3_update_string );
+	}
+	
+if (($version == "9.8.2") and ((new DateTime () > new DateTime ( "2016-05-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
+	die ( $version9_8_3_update_string );
 }
 
 die ( "" );
