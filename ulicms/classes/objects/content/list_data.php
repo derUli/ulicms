@@ -1,5 +1,5 @@
 <?php
-class List_Data implements Content {
+class List_Data extends Content {
 	public $content_id = null;
 	public $language = NULL;
 	public $category_id = null;
@@ -28,6 +28,24 @@ class List_Data implements Content {
 		$this->category_id = $data->category_id;
 		$this->menu = $data->menu;
 		$this->parent_id = $data - parent_id;
+	}
+	public function save() {
+		if ($this->content_id === null) {
+			throw new Exception ( "no content_id for list set" );
+		}
+		
+		$result = Database::query ( "select * from " . tbname ( "lists" ) . " WHERE id = $id" );
+		if (Database::getNumRows ( $result ) > 0) {
+			$this->update ();
+		} else {
+			$this->create ();
+		}
+	}
+	public function create() {
+		throw new NotImplementedException ( "create list not implemented yet!" );
+	}
+	public function update() {
+		throw new NotImplementedException ( "update list not implemented yet!" );
 	}
 	
 	// @TODO: update(), create(), save() implementieren

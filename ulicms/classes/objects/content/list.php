@@ -1,5 +1,5 @@
 <?php
-class Content_List implements Content {
+class Content_List extends Content {
 	// @FIXME: Variablen alle private machen und getter und setter implementieren
 	public $id = null;
 	public $systemname = "";
@@ -192,7 +192,7 @@ class Content_List implements Content {
 		
 		$result = DB::Query ( $sql ) or die ( DB::error () );
 		$this->id = DB::getLastInsertID ();
-		$this->listData->cotentID = $this->id; 
+		$this->listData->cotentID = $this->id;
 		return $result;
 	}
 	public function update() {
