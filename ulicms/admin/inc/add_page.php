@@ -22,18 +22,18 @@ if (defined ( "_SECURITY" )) {
 		<div class="accordion-content">
 			<strong><?php
 		
-		echo TRANSLATION_PERMALINK;
+		translate ( "permalink" );
 		?>
 	</strong><br /> <input type="text" name="system_title" required="true"
 				value=""> <br /> <br /> <strong><?php
 		
-		echo TRANSLATION_PAGE_TITLE;
+		translate ( "page_title" );
 		?>
 	</strong><br /> <input type="text" required="true" name="page_title"
 				value="" onkeyup="systemname_vorschlagen(this.value)"> <br /> <br />
 			<strong><?php
 		
-		echo TRANSLATION_ALTERNATE_TITLE;
+		translate ( "alternate_title" );
 		?>
 	</strong><br /> <input type="text" name="alternate_title" value=""><br />
 			<small><?php
@@ -45,8 +45,17 @@ if (defined ( "_SECURITY" )) {
 		<h2 class="accordion-header"><?php translate("type");?></h2>
 
 		<div class="accordion-content">
-			<input type="radio" name="type" value="page" checked> <label
-				for="type"><?php translate("page");?></label>
+			<p>
+
+				<span onclick="$('div#list-properties').slideUp();"> <input
+					type="radio" name="type" id="type_page" value="page" checked> <label
+					for="type_page"><?php translate("page");?></label>
+				</span> </br/> <span onclick="$('div#list-properties').slideDown();">
+					<input type="radio" name="type" value="list" id="type_list"> <label
+					for="type_list"><?php translate("list");?></label>
+
+				</span>
+			</p>
 		</div>
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
 
@@ -369,6 +378,96 @@ function openMenuImageSelectWindow(field) {
 		?>
 		</a>
 
+			</div>
+		</div>
+
+		<div id="list-properties" style="display: none">
+			<h2 class="accordion-header"><?php translate("list_properties");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php
+		
+		echo TRANSLATION_LANGUAGE;
+		?>
+	</strong> <br /> <select name="list_language">
+					<option value="">[<?php translate("none");?>]</option>
+	<?php
+		$languages = getAllLanguages ();
+		if (! empty ( $_SESSION ["filter_language"] )) {
+			$default_language = $_SESSION ["filter_language"];
+		} else {
+			$default_language = Settings::get ( "default_language" );
+		}
+		
+		for($j = 0; $j < count ( $languages ); $j ++) {
+			if ($languages [$j] === $default_language) {
+				echo "<option value='" . $languages [$j] . "' selected>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
+			} else {
+				echo "<option value='" . $languages [$j] . "'>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
+			}
+		}
+		
+		?>
+	</select> <br /> <br /> <strong><?php
+		
+		translate ( "category" );
+		?>
+	</strong><br />
+	<?php echo categories :: getHTMLSelect(1, true, "list_category")?>
+	<br /> <br /> <strong><?php
+		
+		translate ( "menu" );
+		?>
+	</strong><br /> <select name="list_menu" size=1>
+					<option value="">[<?php translate("none");?>]</option>
+		<?php
+		foreach ( getAllMenus () as $menu ) {
+			?>
+		<option value="<?php echo $menu?>">
+		<?php
+			
+			translate ( $menu );
+			?></option>
+			<?php
+		
+}
+		?>
+			</select> <br /> <br /> <strong><?php
+		
+		echo TRANSLATION_PARENT;
+		?>
+	</strong><br /> <select name="list_parent" size=1>
+					<option selected="selected" value="NULL">
+			[
+			<?php
+		
+		echo TRANSLATION_NONE;
+		?>
+			]
+		</option>
+		<?php
+		
+		foreach ( $pages as $key => $page ) {
+			?>
+		<option value="<?php
+			
+			echo $page ["id"];
+			?>">
+			<?php
+			
+			echo $page ["title"];
+			?>
+			(ID:
+			<?php
+			
+			echo $page ["id"];
+			?>
+			)
+		</option>
+		<?php
+		}
+		?>
+	</select>
 			</div>
 		</div>
 

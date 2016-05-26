@@ -608,4 +608,8 @@ define ( "TRANSLATION_HOMEPAGE", "Homepage" );
 
 define ( "TRANSLATION_CLONE", "Klonen" );
 
+// Inhaltstyp "Liste"
+define ( "TRANSLATION_LIST", "Liste" );
+define ( "TRANSLATION_LIST_PROPERTIES", "Eigenschaften der Liste" );
+
 add_hook ( "lang_de" );
