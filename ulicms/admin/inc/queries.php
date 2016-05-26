@@ -189,12 +189,11 @@ if (isset ( $_GET ["do_restore_version"] ) and $acl->hasPermission ( "pages" )) 
 
 if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 	if ($_POST ["system_title"] != "") {
-		
 		$system_title = db_escape ( $_POST ["system_title"] );
 		$page_title = db_escape ( $_POST ["page_title"] );
 		$alternate_title = db_escape ( $_POST ["alternate_title"] );
 		$activated = intval ( $_POST ["activated"] );
-		$page_content = $_POST ["page_content"];
+		$page_content = Database::escapeValue($_POST ["page_content"]);
 		$comments_enabled = 0;
 		$category = intval ( $_POST ["category"] );
 		$notinfeed = 0;
@@ -221,69 +220,8 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$og_type = db_escape ( $_POST ["og_type"] );
 		$og_image = db_escape ( $_POST ["og_image"] );
 		
-		$meta_description = $_POST ["meta_description"];
-		$meta_keywords = $_POST ["meta_keywords"];
-		
-		if (empty ( $meta_description ) and ! Settings::get ( "disable_auto_generate_meta_tags" )) {
-			include_once "../lib/string_functions.php";
-			$maxlength_chars = 160;
-			
-			$shortContent = strip_tags ( $page_content );
-			
-			// Leerzeichen und Zeilenumbrüche entfernen
-			$shortContent = trim ( $shortContent );
-			$shortContent = preg_replace ( "#[ ]*[\r\n\v]+#", "\r\n", $shortContent );
-			$shortContent = preg_replace ( "#[ \t]+#", " ", $shortContent );
-			$shortContent = str_replace ( "\r\n", " ", $shortContent );
-			$shortContent = str_replace ( "\n", " ", $shortContent );
-			$shortContent = str_replace ( "\r", " ", $shortContent );
-			$shortContent = trim ( $shortContent );
-			$shortstring = $shortContent;
-			$word_count = str_word_count ( $shortstring );
-			
-			while ( strlen ( $shortstring ) > 160 ) {
-				$shortstring = getExcerpt ( $shortContent, 0, $word_count );
-				$word_count -= 1;
-			}
-			
-			$meta_description = $shortstring;
-		}
-		
-		$meta_description = unhtmlspecialchars ( $meta_description );
-		
-		$meta_description = db_escape ( $meta_description );
-		
-		// Wenn keine Meta Keywords gesetzt sind selbst ermitteln
-		if (empty ( $meta_keywords ) and ! Settings::get ( "disable_auto_generate_meta_tags" )) {
-			
-			include_once "../lib/string_functions.php";
-			$stripped_content = trim ( $page_content );
-			$stripped_content = str_replace ( "\\r\\n", "\r\n", $stripped_content );
-			$stripped_content = strip_tags ( $stripped_content );
-			$words = keywordsFromString ( $stripped_content );
-			$maxWords = 10;
-			$currentWordCount = 0;
-			$maxi = count ( $words );
-			$i = 0;
-			$meta_keywords = Array ();
-			if (count ( $words ) > 0) {
-				foreach ( $words as $key => $value ) {
-					$i ++;
-					$key = trim ( $key );
-					if (! empty ( $key ) and $currentWordCount < $maxWords) {
-						$currentWordCount ++;
-						array_push ( $meta_keywords, $key );
-					}
-				}
-				
-				$meta_keywords = implode ( ", ", $meta_keywords );
-			}
-		}
-		
-		$unescaped_content = $page_content;
-		$page_content = db_real_escape_String ( $page_content );
-		$meta_keywords = unhtmlspecialchars ( $meta_keywords );
-		$meta_keywords = db_escape ( $meta_keywords );
+		$meta_description = Database::escapeValue ( $_POST ["meta_description"] );
+		$meta_keywords = Database::escapeValue ( $_POST ["meta_keywords"] );
 		
 		$language = db_escape ( $_POST ["language"] );
 		
@@ -299,6 +237,33 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
   '$og_description', '$og_type', '$og_image', '$type')" ) or die ( db_error () );
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
+		if ($type == "list") {
+			$list_language = $_POST ["list_language"];
+			if (empty ( $list_language )) {
+				$list_language = null;
+			}
+			$list_category = $_POST ["list_category"];
+			if (empty ( $list_category )) {
+				$list_category = null;
+			}
+			
+			$list_menu = $_POST ["list_menu"];
+			if (empty ( $list_menu )) {
+				$list_menu = null;
+			}
+			
+			$list_parent = $_POST ["list_parent"];
+			if (empty ( $list_parent )) {
+				$list_parent = null;
+			}
+			
+			$list = new List_Data ( $content_id );
+			$list->language = $list_language;
+			$list->category_id = $list_category;
+			$list->menu = $list_menu;
+			$list->parent = $list_parent;
+			$list->save ();
+		}
 		$content = $unescaped_content;
 		VCS::createRevision ( $content_id, $content, $user_id );
 		add_hook ( "after_create_page" );

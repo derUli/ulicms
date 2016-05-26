@@ -393,18 +393,10 @@ function openMenuImageSelectWindow(field) {
 					<option value="">[<?php translate("none");?>]</option>
 	<?php
 		$languages = getAllLanguages ();
-		if (! empty ( $_SESSION ["filter_language"] )) {
-			$default_language = $_SESSION ["filter_language"];
-		} else {
-			$default_language = Settings::get ( "default_language" );
-		}
-		
+			
 		for($j = 0; $j < count ( $languages ); $j ++) {
-			if ($languages [$j] === $default_language) {
-				echo "<option value='" . $languages [$j] . "' selected>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
-			} else {
 				echo "<option value='" . $languages [$j] . "'>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
-			}
+			
 		}
 		
 		?>
@@ -413,7 +405,7 @@ function openMenuImageSelectWindow(field) {
 		translate ( "category" );
 		?>
 	</strong><br />
-	<?php echo categories :: getHTMLSelect(1, true, "list_category")?>
+	<?php echo categories :: getHTMLSelect(-1, true, "list_category")?>
 	<br /> <br /> <strong><?php
 		
 		translate ( "menu" );
