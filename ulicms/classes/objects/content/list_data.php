@@ -13,14 +13,13 @@ class List_Data extends Content {
 	
 	public function filter(){
 		return ContentFactory::getForFilter($this->language, $this->category_id, $this->menu, $this->parent_id);
-		
 	}
 	
 	public function loadByID($id) {
 		$id = intval ( $id );
 		$result = Database::query ( "select * from " . tbname ( "lists" ) . " WHERE content_id = $id" );
 		if (Database::getNumRows ( $result ) > 0) {
-			$dataset = Database::fetch_object ( $dataset );
+			$dataset = Database::fetchObject ( $result );
 			$this->fillVars ( $dataset );
 		}
 		$this->content_id = $id;

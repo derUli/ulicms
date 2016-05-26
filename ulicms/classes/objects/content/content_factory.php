@@ -64,14 +64,14 @@ class ContentFactory {
 	}
 	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null) {
 		$result = array ();
-		$sql = "select id, `type` from " . tbname ( "content" ) . " where 1=1 and";
+		$sql = "select id, `type` from " . tbname ( "content" ) . " where 1=1 and ";
 		if ($language !== null) {
 			$language = Database::escape ( $language );
 			$sql .= "language = '$language' and ";
 		}
 		if ($catgegory_id !== null) {
-			$catgegory_id = intval ( $catgegory_id );
-			$sql .= "$catgegory_id = $catgegory_id and ";
+			$catgegory_id = intval ( $category_id );
+			$sql .= "category = $category_id and ";
 		}
 		if ($menu !== null) {
 			$menu = Database::escape ( $menu );
@@ -80,7 +80,7 @@ class ContentFactory {
 		
 		if ($parent_id !== null) {
 			$parent_id = intval ( $parent_id );
-			$sql .= "parent_id = $parent_id and ";
+			$sql .= "parent = $parent_id and ";
 		}
 		$sql .= " 1=1";
 		

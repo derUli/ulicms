@@ -223,7 +223,7 @@ if ($html_file) {
 	add_hook ( "before_content" );
 	content ();
 	if (get_type () === "list") {
-		echo Template::loadDefaultOrModuleTemplate ( "list" );
+		echo Template::executeDefaultOrOwnTemplate ( "list" );
 	}
 	
 	add_hook ( "after_content" );

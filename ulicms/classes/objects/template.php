@@ -67,9 +67,9 @@ class Template {
 	public static function motto() {
 		echo self::getMotto ();
 	}
-	public static function loadDefaultOrModuleTemplate($template) {
+	public static function executeDefaultOrOwnTemplate($template) {
 		$retval = "";
-		$originalTemplatePath = ULICMS_ROOT . "/default" . $template . ".php";
+		$originalTemplatePath = ULICMS_ROOT . "/default/" . $template . ".php";
 		$ownTemplatePath = getTemplateDirPath ( get_theme () ) . "/" . $template . ".php";
 		ob_start ();
 		
@@ -79,7 +79,7 @@ class Template {
 			include $originalTemplatePath;
 		} else {
 			$retval = ob_get_clean ();
-			throw new Exception ( "Template " . "/" . $template . " not found!" );
+			throw new Exception ( "Template " . $template . " not found!" );
 		}
 		
 		$retval = ob_get_clean ();
