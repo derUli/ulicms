@@ -29,4 +29,6 @@ class List_Data implements Content {
 		$this->menu = $data->menu;
 		$this->parent_id = $data - parent_id;
 	}
+	
+	// @TODO: update(), create(), save() implementieren
 }

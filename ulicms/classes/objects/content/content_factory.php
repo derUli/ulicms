@@ -26,7 +26,11 @@ class ContentFactory {
 		if ($row->type == "page") {
 			$retval = new Page ();
 			$retval->loadByID ( $row->id );
+		} else if ($row->type == "page") {
+			$retval = new Content_List ();
+			$retval->loadByID ( $row->id );
 		}
+		
 		return $retval;
 	}
 	public static function getAll($order = "id") {
