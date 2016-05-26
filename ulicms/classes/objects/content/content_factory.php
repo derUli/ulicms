@@ -62,6 +62,35 @@ class ContentFactory {
 		}
 		return $result;
 	}
+	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null) {
+		$result = array ();
+		$sql = "select id, `type` from " . tbname ( "content" ) . " where 1=1 and";
+		if ($language !== null) {
+			$language = Database::escape ( $language );
+			$sql .= "language = '$language' and ";
+		}
+		if ($catgegory_id !== null) {
+			$catgegory_id = intval ( $catgegory_id );
+			$sql .= "$catgegory_id = $catgegory_id and ";
+		}
+		if ($menu !== null) {
+			$menu = Database::escape ( $menu );
+			$sql .= "menu = '$menu' and ";
+		}
+		
+		if ($parent_id !== null) {
+			$parent_id = intval ( $parent_id );
+			$sql .= "parent_id = $parent_id and ";
+		}
+		$sql .= " 1=1";
+		
+		$query = Database::query ( $sql ) or die ( Database::error () );
+		
+		while ( $row = DB::fetchObject ( $query ) ) {
+			$result [] = self::getContentObjectByID ( $row );
+		}
+		return $result;
+	}
 	public static function getAllByMenuAndLanguage($menu, $language, $order = "id") {
 		$menu = DB::escapeValue ( $menu );
 		$language = DB::escapeValue ( $language );

@@ -222,6 +222,9 @@ if ($html_file) {
 	require_once getTemplateDirPath ( $theme ) . "oben.php";
 	add_hook ( "before_content" );
 	content ();
+	if (get_type () === "list") {
+		echo Template::loadDefaultOrModuleTemplate ( "list" );
+	}
 	
 	add_hook ( "after_content" );
 	

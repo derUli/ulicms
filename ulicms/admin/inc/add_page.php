@@ -390,7 +390,7 @@ function openMenuImageSelectWindow(field) {
 		echo TRANSLATION_LANGUAGE;
 		?>
 	</strong> <br /> <select name="list_language">
-					<option value="">[<?php translate("none");?>]</option>
+					<option value="">[<?php translate("every");?>]</option>
 	<?php
 		$languages = getAllLanguages ();
 			
@@ -411,7 +411,7 @@ function openMenuImageSelectWindow(field) {
 		translate ( "menu" );
 		?>
 	</strong><br /> <select name="list_menu" size=1>
-					<option value="">[<?php translate("none");?>]</option>
+					<option value="">[<?php translate("every");?>]</option>
 		<?php
 		foreach ( getAllMenus () as $menu ) {
 			?>
@@ -433,7 +433,7 @@ function openMenuImageSelectWindow(field) {
 			[
 			<?php
 		
-		echo TRANSLATION_NONE;
+		translate("every");
 		?>
 			]
 		</option>

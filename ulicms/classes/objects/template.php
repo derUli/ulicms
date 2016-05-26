@@ -67,6 +67,24 @@ class Template {
 	public static function motto() {
 		echo self::getMotto ();
 	}
+	public static function loadDefaultOrModuleTemplate($template) {
+		$retval = "";
+		$originalTemplatePath = ULICMS_ROOT . "/default" . $template . ".php";
+		$ownTemplatePath = getTemplateDirPath ( get_theme () ) . "/" . $template . ".php";
+		ob_start ();
+		
+		if (file_exists ( $ownTemplatePath ) and is_file ( $ownTemplatePath )) {
+			include $ownTemplatePath;
+		} else if (file_exists ( $originalTemplatePath ) and is_file ( $originalTemplatePath )) {
+			include $originalTemplatePath;
+		} else {
+			$retval = ob_get_clean ();
+			throw new Exception ( "Template " . "/" . $template . " not found!" );
+		}
+		
+		$retval = ob_get_clean ();
+		return $retval;
+	}
 	
 	// @TODO Restliche Funktionen aus templating.php implementieren
 }

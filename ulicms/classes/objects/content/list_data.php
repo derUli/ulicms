@@ -10,6 +10,12 @@ class List_Data extends Content {
 			$this->loadByID ( $id );
 		}
 	}
+	
+	public function filter(){
+		return ContentFactory::getForFilter($this->language, $this->category_id, $this->menu, $this->parent_id);
+		
+	}
+	
 	public function loadByID($id) {
 		$id = intval ( $id );
 		$result = Database::query ( "select * from " . tbname ( "lists" ) . " WHERE content_id = $id" );
