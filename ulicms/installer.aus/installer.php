@@ -654,7 +654,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (26, 'empty_trash_days', '30'),
 (27, 'password_salt', '$salt'),
 (28, 'timezone', 'Europe/Berlin'),
-(29, 'db_schema_version', '9.8.2'),
+(29, 'db_schema_version', '9.8.4'),
 (30, 'pkg_src', 'http://packages.ulicms.de/{version}/'),
 (31, 'theme', '2016'),
 (32, 'zoom', '100'),
@@ -776,28 +776,19 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 			
 			mysqli_query ( $connection, $sql );
 			
-			// Da InnoDB erst ab MySQL 5.6 Foreign Keys und Fulltext unterstützt
-			// Foreign Keys nur setzen, wenn MySQL Server Version >= 5.6
-			if (mysqli_get_server_version ( $connection ) >= 50600) {
-				
-				$constraint1 = "ALTER TABLE `" . $prefix . "users` ADD FOREIGN KEY (`group_id`) REFERENCES `" . $prefix . "groups`(`id`)
-ON DELETE SET NULL";
-				mysqli_query ( $connection, $constraint1 );
-				$constraint2 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`category`) REFERENCES `" . $prefix . "categories`(`id`)
-ON DELETE SET NULL";
-				mysqli_query ( $connection, $constraint2 );
-				
-				$constraint3 = "ALTER TABLE `" . $prefix . "banner` ADD FOREIGN KEY (`category`) REFERENCES `" . $prefix . "categories`(`id`)
-ON DELETE SET NULL";
-				mysqli_query ( $connection, $constraint3 );
-				
-				$constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `" . $prefix . "users`(`id`)
-ON DELETE SET NULL";
-				mysqli_query ( $connection, $constraint4 );
-			}
-			
 			// Beispieldaten für die Banner Tabelle
 			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "banner` VALUES (1,'Content Management einfach gemacht mit UliCMS','http://www.ulicms.de','http://www.ulicms.de/content/images/banners/ulicms-banner.jpg',1,'gif','','de');" );
+			
+			 mysqli_query( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "lists` (
+  `content_id` int(11) NOT NULL,
+  `language` varchar(50) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `menu` varchar(10) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `order_by` varchar(30) DEFAULT 'title',
+  `order_direction` varchar(30) DEFAULT 'asc',
+  UNIQUE KEY `content_id` (`content_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
 			
 			@chmod ( "../cms-config.php", 0777 );
 			
