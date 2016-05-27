@@ -58,17 +58,13 @@ if (defined ( "_SECURITY" )) {
 		<div class="accordion-content">
 
 			<p>
-
-				<span onclick="$('div#list-properties').slideUp();"> <input
-					type="radio" name="type" id="type_page" value="page"
+				<input type="radio" name="type" id="type_page" value="page"
 					<?php if($row->type == "page"){ echo "checked";}?>> <label
-					for="type_page"><?php translate("page");?></label>
-				</span> </br/> <span onclick="$('div#list-properties').slideDown();">
-					<input type="radio" name="type" value="list" id="type_list"
+					for="type_page"><?php translate("page");?></label> </br/> <input
+					type="radio" name="type" value="list" id="type_list"
 					<?php if($row->type == "list"){ echo "checked";}?>> <label
 					for="type_list"><?php translate("list");?></label>
 
-				</span>
 			</p>
 
 		</div>
@@ -475,22 +471,9 @@ function openMenuImageSelectWindow(field) {
 			
 			
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			</div>
 		</div>
-		<div id="list-properties"
-			<?php
-			if ($row->type !== "list") {
-				?> style="display: none">
-		<?php }?>>
+		<div id="list-properties" class="list-show">
 			<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
 			<div class="accordion-content">
@@ -759,10 +742,19 @@ $("#pageform").ajaxForm({beforeSubmit: function(e){
   
 }); 
 
+function showAndHideFieldsByType(){
+	if($("#pageform #type_list").is(":checked")){
+		$("#pageform .list-show").slideDown();
+	} else {
+		$("#pageform .list-show").slideUp();
+		}	
+}
+
+$(document).ready(showAndHideFieldsByType);
+$("#pageform [name=\"type\"]").change(showAndHideFieldsByType);
+	
+
 </script>
-
-
-
 <?php
 			break;
 		}

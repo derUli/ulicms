@@ -588,6 +588,19 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 			?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
+<script type="text/javascript">
+function showAndHideFieldsByType(){
+	if($("#pageform #type_list").is(":checked")){
+		$("#pageform .list-show").slideDown();
+	} else {
+		$("#pageform .list-show").slideUp();
+		}	
+}
+
+$("#pageform [name=\"type\"]").change(showAndHideFieldsByType);
+	
+
+</script>
 	<?php
 		}
 		?>

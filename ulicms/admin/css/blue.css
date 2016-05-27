@@ -328,3 +328,7 @@ div#login-welcome-text {
 	padding: 10px;
 	background-color: #eee;
 }
+
+.list-show{
+   display:none;
+}
