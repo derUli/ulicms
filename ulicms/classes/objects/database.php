@@ -97,7 +97,10 @@ class Database {
 		}
 	}
 	public static function escapeName($name) {
-		return "`" . db_escape ( $name ) . "`";
+		$name = "`" . db_escape ( $name ) . "`";
+		$name = str_replace("'", "", $name);
+		$name = str_replace("\"", "", $name);
+		return $name;		
 	}
 	public static function getLastInsertID() {
 		global $db_connection;

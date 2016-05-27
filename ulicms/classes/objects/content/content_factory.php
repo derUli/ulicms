@@ -82,6 +82,13 @@ class ContentFactory {
 			$parent_id = intval ( $parent_id );
 			$sql .= "parent = $parent_id and ";
 		}
+		
+		$order_by = Database::escapeName($order_by);
+		
+		if($order_direction != "desc"){
+			$order_direction = "asc";
+		}
+		
 		$sql .= " 1=1 order by $order_by $order_direction";
 		$query = Database::query ( $sql ) or die ( Database::error () );
 		

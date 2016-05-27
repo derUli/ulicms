@@ -5,6 +5,8 @@ class List_Data extends Content {
 	public $category_id = null;
 	public $menu = null;
 	public $parent_id = null;
+	public $order_by = "title";
+	public $order_direction = "asc";
 	public function __construct($id = null) {
 		if ($id !== null) {
 			$this->loadByID ( $id );
@@ -74,9 +76,19 @@ class List_Data extends Content {
 		} else {
 			$parent_id = intval ( $this->parent_id );
 		}
+		if ($this->order_by === null) {
+			$order_by = "title";
+		} else {
+			$order_by = Database::escapeValue ( $order_by );
+		}
+		if ($this->order_direction === "desc") {
+			$order_direction = "desc";
+		} else {
+			$order_direction = "asc";
+		}
 		
-		$sql = "INSERT INTO " . tbname ( "lists" ) . " (content_id, language, category_id, menu, parent_id) values ($content_id, $language, 
-		$category_id, $menu, $parent_id)";
+		$sql = "INSERT INTO " . tbname ( "lists" ) . " (content_id, language, category_id, menu, parent_id, `order_by`, `order_direction`) values ($content_id, $language, 
+		$category_id, $menu, $parent_id, '$order_by', '$order_direction')";
 		Database::query ( $sql ) or die ( Database::error () );
 	}
 	public function update() {
@@ -111,7 +123,7 @@ class List_Data extends Content {
 		}
 		
 		$sql = "UPDATE " . tbname ( "lists" ) . " set language = $language, 
-		category_id = $category_id, menu = $menu, parent_id = $parent_id where content_id = $content_id ";
+		category_id = $category_id, menu = $menu, parent_id = $parent_id, `order_by` = '$order_by', `order_direction` = '$order_direction' where content_id = $content_id ";
 		Database::query ( $sql ) or die ( Database::error () );
 	}
 }

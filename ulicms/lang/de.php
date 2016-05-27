@@ -612,4 +612,11 @@ define ( "TRANSLATION_CLONE", "Klonen" );
 define ( "TRANSLATION_LIST", "Liste" );
 define ( "TRANSLATION_LIST_PROPERTIES", "Eigenschaften der Liste" );
 
+define ( "TRANSLATION_ORDER_BY", "Sortieren nach" );
+
+define ( "TRANSLATION_ORDER_DIRECTION", "Sotieren Reihenfolge" );
+
+define ( "TRANSLATION_ASC", "Aufsteigend" );
+define ( "TRANSLATION_DESC", "Absteigend" );
+
 add_hook ( "lang_de" );

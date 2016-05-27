@@ -258,11 +258,16 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 				$list_parent = null;
 			}
 			
+			$list_order_by = Database::escapeValue ( $_POST ["list_order_by"] );
+			$list_order_direction = Database::escapeValue ( $_POST ["list_order_direction"] );
+			
 			$list = new List_Data ( $content_id );
 			$list->language = $list_language;
 			$list->category_id = $list_category;
 			$list->menu = $list_menu;
 			$list->parent = $list_parent;
+			$list->order_by = $list_order_by;
+			$list->order_direction = $list_order_direction;
 			$list->save ();
 		}
 		$content = $unescaped_content;

@@ -460,6 +460,25 @@ function openMenuImageSelectWindow(field) {
 		}
 		?>
 	</select>
+	<br/>
+	<br/>
+	<strong><?php
+		translate("order_by");
+		?>
+	</strong>
+	<br/>
+	<input type="text" name="list_order_by" value="title">
+	
+	<br/>
+	<br/>
+	<strong><?php
+		translate("order_direction");
+		?>
+	</strong>
+	<select name="list_order_direction">
+	<option value="asc"><?php translate("asc");?></option>
+	<option value="asc"><?php translate("desc");?></option>
+	</select>
 			</div>
 		</div>
 
