@@ -373,6 +373,40 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	
 	$user_id = get_user_id ();
 	$content_id = $id;
+	
+	if ($type == "list") {
+		$list_language = $_POST ["list_language"];
+		if (empty ( $list_language )) {
+			$list_language = null;
+		}
+		$list_category = $_POST ["list_category"];
+		if (empty ( $list_category )) {
+			$list_category = null;
+		}
+		
+		$list_menu = $_POST ["list_menu"];
+		if (empty ( $list_menu )) {
+			$list_menu = null;
+		}
+		
+		$list_parent = $_POST ["list_parent"];
+		if (empty ( $list_parent )) {
+			$list_parent = null;
+		}
+		
+		$list_order_by = Database::escapeValue ( $_POST ["list_order_by"] );
+		$list_order_direction = Database::escapeValue ( $_POST ["list_order_direction"] );
+		
+		$list = new List_Data ( $content_id );
+		$list->language = $list_language;
+		$list->category_id = $list_category;
+		$list->menu = $list_menu;
+		$list->parent_id = $list_parent;
+		$list->order_by = $list_order_by;
+		$list->order_direction = $list_order_direction;
+		$list->save ();
+	}
+	
 	$content = $unescaped_content;
 	VCS::createRevision ( $content_id, $content, $user_id );
 	

@@ -56,9 +56,21 @@ if (defined ( "_SECURITY" )) {
 		<h2 class="accordion-header"><?php translate("type");?></h2>
 
 		<div class="accordion-content">
-			<input type="radio" name="type" value="page"
-				<?php if($row->type == "page"){ echo "checked";}?>> <label
-				for="type"><?php translate("page");?></label>
+
+			<p>
+
+				<span onclick="$('div#list-properties').slideUp();"> <input
+					type="radio" name="type" id="type_page" value="page"
+					<?php if($row->type == "page"){ echo "checked";}?>> <label
+					for="type_page"><?php translate("page");?></label>
+				</span> </br/> <span onclick="$('div#list-properties').slideDown();">
+					<input type="radio" name="type" value="list" id="type_list"
+					<?php if($row->type == "list"){ echo "checked";}?>> <label
+					for="type_list"><?php translate("list");?></label>
+
+				</span>
+			</p>
+
 		</div>
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
 
@@ -447,10 +459,6 @@ function openMenuImageSelectWindow(field) {
 					</div>
 <?php }?>
 		
-		
-		
-		
-		
 			
 			
 			
@@ -458,6 +466,107 @@ function openMenuImageSelectWindow(field) {
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			</div>
+		</div>
+		<div id="list-properties"
+			<?php
+			if ($row->type !== "list") {
+				?> style="display: none">
+		<?php }?>>
+			<h2 class="accordion-header"><?php translate("list_properties");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php
+			
+			echo TRANSLATION_LANGUAGE;
+			?>
+	</strong> <br /> <select name="list_language">
+					<option value="">[<?php translate("every");?>]</option>
+	<?php
+			$languages = getAllLanguages ();
+			
+			for($j = 0; $j < count ( $languages ); $j ++) {
+				
+				echo "<option value='" . $languages [$j] . "'>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
+			}
+			
+			?>
+	</select> <br /> <br /> <strong><?php
+			
+			translate ( "category" );
+			?>
+	</strong><br />
+	<?php echo categories :: getHTMLSelect(-1, true, "list_category")?>
+	<br /> <br /> <strong><?php
+			
+			translate ( "menu" );
+			?>
+	</strong><br /> <select name="list_menu" size=1>
+					<option value="">[<?php translate("every");?>]</option>
+		<?php
+			foreach ( getAllMenus () as $menu ) {
+				?>
+		<option value="<?php echo $menu?>">
+		<?php
+				
+				translate ( $menu );
+				?></option>
+			<?php
+			}
+			?>
+			</select> <br /> <br /> <strong><?php
+			
+			echo TRANSLATION_PARENT;
+			?>
+	</strong><br /> <select name="list_parent" size=1>
+					<option selected="selected" value="NULL">
+			[
+			<?php
+			
+			translate ( "every" );
+			?>
+			]
+		</option>
+		<?php
+			
+			foreach ( $pages as $key => $page ) {
+				?>
+		<option value="<?php
+				
+				echo $page ["id"];
+				?>">
+			<?php
+				
+				echo $page ["title"];
+				?>
+			(ID:
+			<?php
+				
+				echo $page ["id"];
+				?>
+			)
+		</option>
+		<?php
+			}
+			?>
+	</select> <br /> <br /> <strong><?php
+			translate ( "order_by" );
+			?>
+	</strong> <br /> <input type="text" name="list_order_by" value="title">
+
+				<br /> <br /> <strong><?php
+			translate ( "order_direction" );
+			?>
+	</strong> <select name="list_order_direction">
+					<option value="asc"><?php translate("asc");?></option>
+					<option value="asc"><?php translate("desc");?></option>
+				</select>
 			</div>
 		</div>
 

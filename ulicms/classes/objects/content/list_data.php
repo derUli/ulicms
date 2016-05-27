@@ -122,6 +122,17 @@ class List_Data extends Content {
 			$parent_id = intval ( $this->parent_id );
 		}
 		
+		if ($this->order_by === null) {
+			$order_by = "title";
+		} else {
+			$order_by = Database::escapeValue ( $this->order_by );
+		}
+		if ($this->order_direction === "desc") {
+			$order_direction = "desc";
+		} else {
+			$order_direction = "asc";
+		}
+		
 		$sql = "UPDATE " . tbname ( "lists" ) . " set language = $language, 
 		category_id = $category_id, menu = $menu, parent_id = $parent_id, `order_by` = '$order_by', `order_direction` = '$order_direction' where content_id = $content_id ";
 		Database::query ( $sql ) or die ( Database::error () );
