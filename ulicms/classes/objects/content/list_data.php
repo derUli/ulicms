@@ -10,11 +10,9 @@ class List_Data extends Content {
 			$this->loadByID ( $id );
 		}
 	}
-	
-	public function filter(){
-		return ContentFactory::getForFilter($this->language, $this->category_id, $this->menu, $this->parent_id);
+	public function filter() {
+		return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id );
 	}
-	
 	public function loadByID($id) {
 		$id = intval ( $id );
 		$result = Database::query ( "select * from " . tbname ( "lists" ) . " WHERE content_id = $id" );
@@ -32,7 +30,7 @@ class List_Data extends Content {
 		$this->language = $data->language;
 		$this->category_id = $data->category_id;
 		$this->menu = $data->menu;
-		$this->parent_id = $data - parent_id;
+		$this->parent_id = $data->parent_id;
 	}
 	public function save() {
 		if ($this->content_id === null) {
@@ -60,7 +58,7 @@ class List_Data extends Content {
 		}
 		
 		if ($this->category_id === null) {
-			$language = "null";
+			$category_id = "null";
 		} else {
 			$category_id = intval ( $this->category_id );
 		}

@@ -26,7 +26,7 @@ class ContentFactory {
 		if ($row->type == "page") {
 			$retval = new Page ();
 			$retval->loadByID ( $row->id );
-		} else if ($row->type == "page") {
+		} else if ($row->type == "list") {
 			$retval = new Content_List ();
 			$retval->loadByID ( $row->id );
 		}
@@ -62,15 +62,15 @@ class ContentFactory {
 		}
 		return $result;
 	}
-	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null) {
+	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc") {
 		$result = array ();
 		$sql = "select id, `type` from " . tbname ( "content" ) . " where 1=1 and ";
 		if ($language !== null) {
 			$language = Database::escape ( $language );
 			$sql .= "language = '$language' and ";
 		}
-		if ($catgegory_id !== null) {
-			$catgegory_id = intval ( $category_id );
+		if ($category_id !== null) {
+			$category_id = intval ( $category_id );
 			$sql .= "category = $category_id and ";
 		}
 		if ($menu !== null) {
@@ -82,8 +82,7 @@ class ContentFactory {
 			$parent_id = intval ( $parent_id );
 			$sql .= "parent = $parent_id and ";
 		}
-		$sql .= " 1=1";
-		
+		$sql .= " 1=1 order by $order_by $order_direction";
 		$query = Database::query ( $sql ) or die ( Database::error () );
 		
 		while ( $row = DB::fetchObject ( $query ) ) {

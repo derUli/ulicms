@@ -193,7 +193,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$page_title = db_escape ( $_POST ["page_title"] );
 		$alternate_title = db_escape ( $_POST ["alternate_title"] );
 		$activated = intval ( $_POST ["activated"] );
-		$page_content = Database::escapeValue($_POST ["page_content"]);
+		$page_content = Database::escapeValue ( $_POST ["page_content"] );
 		$comments_enabled = 0;
 		$category = intval ( $_POST ["category"] );
 		$notinfeed = 0;
@@ -206,10 +206,11 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$theme = db_escape ( $_POST ["theme"] );
 		$type = db_escape ( $_POST ["type"] );
 		
-		if ($_POST ["parent"] == "NULL")
+		if ($_POST ["parent"] == "NULL") {
 			$parent = "NULL";
-		else
-			$parent = db_escape ( $_POST ["parent"] );
+		} else {
+			$parent = intval ( $_POST ["parent"] );
+		}
 		$access = implode ( ",", $_POST ["access"] );
 		$access = db_escape ( $access );
 		$target = db_escape ( $_POST ["target"] );

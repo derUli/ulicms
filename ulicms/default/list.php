@@ -7,14 +7,16 @@ if ($id !== null) {
 		if (count ( $entries ) > 0) {
 			?>
 <ol class="ulicms-content-list">
-	<?php foreach($entries as $entry){?>
+	<?php
+			
+			foreach ( $entries as $entry ) {
+				?>
 	<li><a
-		href="<?php Template::escape(buildSEOUrl($entry->$systemname));?>">Template::escape($entry->title)</a></li>
+		href="<?php Template::escape(buildSEOUrl($entry->systemname));?>"><?php Template::escape($entry->title)?></a></li>
 	<?php }?>
 	</ol>
 <?php
-		
-}
+		}
 		
 		?>
 	<?php
