@@ -21,4 +21,4 @@ Database::query ( "DELETE FROM " . tbname ( "history" ) . " WHERE content_id NOT
             SELECT id from " . tbname ( "content" ) . ");" );
 
 // Cronjobs der Module
-Database::query ( "cron" );
+add_hook ( "cron" );
