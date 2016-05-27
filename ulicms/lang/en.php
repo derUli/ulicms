@@ -615,4 +615,14 @@ define ( "TRANSLATION_HOMEPAGE", "Homepage" );
 
 define ( "TRANSLATION_CLONE", "Clone" );
 
+// Inhaltstyp "Liste"
+define ( "TRANSLATION_LIST", "List" );
+define ( "TRANSLATION_LIST_PROPERTIES", "List Properties" );
+
+define ( "TRANSLATION_ORDER_BY", "Order by" );
+define ( "TRANSLATION_ORDER_DIRECTION", "Order direction" );
+
+define ( "TRANSLATION_ASC", "Ascending" );
+define ( "TRANSLATION_DESC", "Descending" );
+
 add_hook ( "lang_en" );
