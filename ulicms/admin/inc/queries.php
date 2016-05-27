@@ -265,7 +265,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			$list->language = $list_language;
 			$list->category_id = $list_category;
 			$list->menu = $list_menu;
-			$list->parent = $list_parent;
+			$list->parent_id = $list_parent;
 			$list->order_by = $list_order_by;
 			$list->order_direction = $list_order_direction;
 			$list->save ();

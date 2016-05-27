@@ -79,7 +79,7 @@ class List_Data extends Content {
 		if ($this->order_by === null) {
 			$order_by = "title";
 		} else {
-			$order_by = Database::escapeValue ( $order_by );
+			$order_by = Database::escapeValue ( $this->order_by );
 		}
 		if ($this->order_direction === "desc") {
 			$order_direction = "desc";

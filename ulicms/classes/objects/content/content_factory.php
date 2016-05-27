@@ -66,7 +66,7 @@ class ContentFactory {
 		$result = array ();
 		$sql = "select id, `type` from " . tbname ( "content" ) . " where 1=1 and ";
 		if ($language !== null) {
-			$language = Database::escape ( $language );
+			$language = Database::escapeValue ( $language );
 			$sql .= "language = '$language' and ";
 		}
 		if ($category_id !== null) {
@@ -74,7 +74,7 @@ class ContentFactory {
 			$sql .= "category = $category_id and ";
 		}
 		if ($menu !== null) {
-			$menu = Database::escape ( $menu );
+			$menu = Database::escapeValue ( $menu );
 			$sql .= "menu = '$menu' and ";
 		}
 		
