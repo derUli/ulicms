@@ -404,6 +404,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		$list->parent_id = $list_parent;
 		$list->order_by = $list_order_by;
 		$list->order_direction = $list_order_direction;
+		var_dump($list_order_direction);
 		$list->save ();
 	}
 	

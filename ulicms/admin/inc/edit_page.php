@@ -10,7 +10,7 @@ if (defined ( "_SECURITY" )) {
 		
 		$groups = db_query ( "SELECT id, name from " . tbname ( "groups" ) );
 		while ( $row = db_fetch_object ( $query ) ) {
-			
+			$list_data = new List_Data ( $row->id );
 			?>
 
 
@@ -472,6 +472,18 @@ function openMenuImageSelectWindow(field) {
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			</div>
 		</div>
 		<div id="list-properties"
@@ -487,13 +499,17 @@ function openMenuImageSelectWindow(field) {
 			echo TRANSLATION_LANGUAGE;
 			?>
 	</strong> <br /> <select name="list_language">
-					<option value="">[<?php translate("every");?>]</option>
+					<option value=""
+						<?php if($list->language === "null") echo "selected";?>>[<?php translate("every");?>]</option>
 	<?php
 			$languages = getAllLanguages ();
 			
 			for($j = 0; $j < count ( $languages ); $j ++) {
-				
-				echo "<option value='" . $languages [$j] . "'>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
+				if ($list_data->language === $languages [$j]) {
+					echo "<option value='" . $languages [$j] . "' selected>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
+				} else {
+					echo "<option value='" . $languages [$j] . "'>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
+				}
 			}
 			
 			?>
@@ -502,7 +518,13 @@ function openMenuImageSelectWindow(field) {
 			translate ( "category" );
 			?>
 	</strong><br />
-	<?php echo categories :: getHTMLSelect(-1, true, "list_category")?>
+	<?php
+			
+			$lcat = $list_data->category_id;
+			if ($lcat === null)
+				$lcat = - 1;
+			?>
+	<?php echo categories :: getHTMLSelect($lcat, true, "list_category")?>
 	<br /> <br /> <strong><?php
 			
 			translate ( "menu" );
@@ -525,7 +547,14 @@ function openMenuImageSelectWindow(field) {
 			echo TRANSLATION_PARENT;
 			?>
 	</strong><br /> <select name="list_parent" size=1>
-					<option selected="selected" value="NULL">
+					<option
+						<?php
+			
+			if ($list_data->parent_id === null) {
+				echo 'selected="selected"';
+			}
+			?>
+						value="NULL">
 			[
 			<?php
 			
@@ -540,7 +569,13 @@ function openMenuImageSelectWindow(field) {
 		<option value="<?php
 				
 				echo $page ["id"];
-				?>">
+				?>"
+						<?php
+				
+				if ($list_data->parent_id === $page ["id"]) {
+					echo 'selected="selected"';
+				}
+				?>>
 			<?php
 				
 				echo $page ["title"];
@@ -558,14 +593,15 @@ function openMenuImageSelectWindow(field) {
 	</select> <br /> <br /> <strong><?php
 			translate ( "order_by" );
 			?>
-	</strong> <br /> <input type="text" name="list_order_by" value="title">
-
-				<br /> <br /> <strong><?php
+	</strong> <br /> <input type="text" name="list_order_by"
+					value="<?php Template::escape($list_data->order_by);?>"> <br /> <br />
+				<strong><?php
 			translate ( "order_direction" );
 			?>
 	</strong> <select name="list_order_direction">
 					<option value="asc"><?php translate("asc");?></option>
-					<option value="asc"><?php translate("desc");?></option>
+					<option value="desc"
+						<?php if($list_data->order_direction=== "desc") echo ' selected';?>><?php translate("desc");?></option>
 				</select>
 			</div>
 		</div>

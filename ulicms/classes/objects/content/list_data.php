@@ -33,13 +33,15 @@ class List_Data extends Content {
 		$this->category_id = $data->category_id;
 		$this->menu = $data->menu;
 		$this->parent_id = $data->parent_id;
+		$this->order_by = $data->order_by;
+		$this->order_direction = $data->order_direction;
 	}
 	public function save() {
 		if ($this->content_id === null) {
 			throw new Exception ( "no content_id for list set" );
 		}
-		
-		$result = Database::query ( "select * from " . tbname ( "lists" ) . " WHERE id = $id" );
+		$id = intval ( $this->content_id );
+		$result = Database::query ( "select * from " . tbname ( "lists" ) . " WHERE content_id = $id" );
 		if (Database::getNumRows ( $result ) > 0) {
 			$this->update ();
 		} else {
@@ -48,7 +50,7 @@ class List_Data extends Content {
 	}
 	public function create() {
 		if ($this->content_id === null) {
-			$language = "null";
+			$content_id = "null";
 		} else {
 			$content_id = intval ( $this->content_id );
 		}
@@ -93,7 +95,7 @@ class List_Data extends Content {
 	}
 	public function update() {
 		if ($this->content_id === null) {
-			$language = "null";
+			$content_id = "null";
 		} else {
 			$content_id = intval ( $this->content_id );
 		}
@@ -105,19 +107,19 @@ class List_Data extends Content {
 		}
 		
 		if ($this->category_id === null) {
-			$language = "null";
+			$category_id = "null";
 		} else {
 			$category_id = intval ( $this->category_id );
 		}
 		
 		if ($this->menu === null) {
-			$language = "null";
+			$menu = "null";
 		} else {
 			$menu = "'" . Database::escapeValue ( $this->menu ) . "'";
 		}
 		
 		if ($this->parent_id === null) {
-			$language = "null";
+			$parent_id = "null";
 		} else {
 			$parent_id = intval ( $this->parent_id );
 		}
@@ -127,6 +129,8 @@ class List_Data extends Content {
 		} else {
 			$order_by = Database::escapeValue ( $this->order_by );
 		}
+		
+		var_dump ( $this->order_direction );
 		if ($this->order_direction === "desc") {
 			$order_direction = "desc";
 		} else {

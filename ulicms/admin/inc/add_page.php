@@ -477,7 +477,7 @@ function openMenuImageSelectWindow(field) {
 	</strong>
 	<select name="list_order_direction">
 	<option value="asc"><?php translate("asc");?></option>
-	<option value="asc"><?php translate("desc");?></option>
+	<option value="desc"><?php translate("desc");?></option>
 	</select>
 			</div>
 		</div>
