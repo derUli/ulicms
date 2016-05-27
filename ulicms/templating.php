@@ -234,10 +234,11 @@ function get_access($page = null) {
 	return null;
 }
 function get_redirection($page = null) {
+
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
-	$sql = "SELECT `redirection` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
+	$sql = "SELECT `redirection` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "' and type='link'";
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );

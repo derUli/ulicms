@@ -54,6 +54,10 @@ if (defined ( "_SECURITY" )) {
 					<input type="radio" name="type" value="list" id="type_list"> <label
 					for="type_list"><?php translate("list");?></label>
 
+				</span></br/> <span onclick="$('div#list-properties').slideDown();">
+					<input type="radio" name="type" value="list" id="type_list"> <label
+					for="type_list"><?php translate("list");?></label>
+
 				</span>
 			</p>
 		</div>
@@ -202,7 +206,7 @@ document.newpageform.system_title.value=systemname
 		</option>
 			</select>
 		</div>
-
+<div class="link-show">
 		<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
 
 		<div class="accordion-content">
@@ -212,6 +216,8 @@ document.newpageform.system_title.value=systemname
 		?>
 		</strong><br /> <input type="text" name="redirection" value="">
 		</div>
+		</div>
+		
 		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
 
 		<div class="accordion-content">
