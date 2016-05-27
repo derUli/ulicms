@@ -471,6 +471,10 @@ function openMenuImageSelectWindow(field) {
 			
 			
 			
+			
+			
+			
+			
 			</div>
 		</div>
 		<div id="list-properties" class="list-show">
@@ -513,11 +517,13 @@ function openMenuImageSelectWindow(field) {
 			translate ( "menu" );
 			?>
 	</strong><br /> <select name="list_menu" size=1>
-					<option value="">[<?php translate("every");?>]</option>
+					<option value=""
+						<?php if($list_data->menu === null) echo " selected";?>>[<?php translate("every");?>]</option>
 		<?php
 			foreach ( getAllMenus () as $menu ) {
 				?>
-		<option value="<?php echo $menu?>">
+		<option value="<?php echo $menu?>"
+						<?php if($list_data->menu === $menu) echo " selected";?>>
 		<?php
 				
 				translate ( $menu );
