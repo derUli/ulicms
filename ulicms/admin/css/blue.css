@@ -138,7 +138,8 @@ input[type="button"], input[type="submit"], button {
 
 input[type="text"], input[type="password"], input[type="email"], input[type="number"],
 	input[type="phone"], input[type="color"], input.color, select, textarea,
-	input[type="url"] {
+	input[type="url"]
+	{
 	background-color: rgb(253, 253, 253);
 	width: 100%;
 }
@@ -328,8 +329,6 @@ div#login-welcome-text {
 	background-color: #eee;
 }
 
-.list-show,
-.link-show
- {
-	display: none;
+.list-show{
+   display:none;
 }
