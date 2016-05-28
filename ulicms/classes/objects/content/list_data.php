@@ -13,7 +13,7 @@ class List_Data extends Content {
 		}
 	}
 	public function filter() {
-		return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id );
+		return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction );
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
