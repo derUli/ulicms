@@ -76,7 +76,7 @@ class Page extends Content {
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where id = " . $id . " and `type` = 'page' or `type` = 'link'" );
+		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where id = " . $id . " and (`type` = 'page' or `type` = 'link')" );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );
@@ -87,7 +87,7 @@ class Page extends Content {
 	public function loadBySystemnameAndLanguage($name, $language) {
 		$name = DB::escapeValue ( $name );
 		$language = DB::escapeValue ( $language );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language' and `type` = 'page'" );
+		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language' and (`type` = 'page' or `type` = 'link')" );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );
