@@ -618,4 +618,7 @@ define ( "TRANSLATION_ORDER_DIRECTION", "Sotieren Reihenfolge" );
 define ( "TRANSLATION_ASC", "Aufsteigend" );
 define ( "TRANSLATION_DESC", "Absteigend" );
 
+// Inhaltstyp "Link"
+define ( "TRANSLATION_LINK", "Link" );
+
 add_hook ( "lang_de" );

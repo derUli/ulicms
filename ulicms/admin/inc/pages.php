@@ -495,8 +495,9 @@ $(window).load(function(){
 				
 				echo '<tr id="dataset-' . $row->id . '">';
 				echo "<td>" . htmlspecialchars ( $row->title );
-				if (! empty ( $row->redirection ) and ! is_null ( $row->redirection ))
+				if (! empty ( $row->redirection ) and ! is_null ( $row->redirection ) and $row->type == "link") {
 					echo htmlspecialchars ( " --> " ) . htmlspecialchars ( $row->redirection );
+				}
 				
 				echo "</td>";
 				echo "<td>" . htmlspecialchars ( get_translation ( $row->menu ) ) . "</td>";

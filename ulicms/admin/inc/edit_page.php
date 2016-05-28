@@ -471,6 +471,8 @@ function openMenuImageSelectWindow(field) {
 			
 			
 			
+			
+			
 			</div>
 		</div>
 		<div id="list-properties" class="list-show">
@@ -720,6 +722,9 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 <?php
 			}
 			?>
+			
+	<script src="scripts/page.js" type="text/javascript">
+</script>
 </form>
 
 <script type="text/javascript">
@@ -741,19 +746,6 @@ $("#pageform").ajaxForm({beforeSubmit: function(e){
   }
   
 }); 
-
-function showAndHideFieldsByType(){
-	if($("#pageform #type_list").is(":checked")){
-		$("#pageform .list-show").slideDown();
-	} else {
-		$("#pageform .list-show").slideUp();
-		}	
-}
-
-$(document).ready(showAndHideFieldsByType);
-$("#pageform [name=\"type\"]").change(showAndHideFieldsByType);
-	
-
 </script>
 <?php
 			break;

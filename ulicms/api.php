@@ -340,7 +340,8 @@ function get_available_post_types() {
 	global $post_types;
 	$post_types = array (
 			"page",
-			"list"
+			"list",
+			"link"
 	);
 	add_hook ( $post_types );
 	

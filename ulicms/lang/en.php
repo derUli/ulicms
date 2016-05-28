@@ -625,4 +625,7 @@ define ( "TRANSLATION_ORDER_DIRECTION", "Order direction" );
 define ( "TRANSLATION_ASC", "Ascending" );
 define ( "TRANSLATION_DESC", "Descending" );
 
+// Inhaltstyp "Link"
+define ( "TRANSLATION_LINK", "Link" );
+
 add_hook ( "lang_en" );

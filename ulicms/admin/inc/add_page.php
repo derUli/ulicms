@@ -47,14 +47,12 @@ if (defined ( "_SECURITY" )) {
 		<div class="accordion-content">
 			<p>
 
-				<span onclick="$('div#list-properties').slideUp();"> <input
-					type="radio" name="type" id="type_page" value="page" checked> <label
-					for="type_page"><?php translate("page");?></label>
-				</span> </br/> <span onclick="$('div#list-properties').slideDown();">
-					<input type="radio" name="type" value="list" id="type_list"> <label
-					for="type_list"><?php translate("list");?></label>
-
-				</span>
+				<input type="radio" name="type" id="type_page" value="page" checked>
+				<label for="type_page"><?php translate("page");?></label> </br/> <input
+					type="radio" name="type" value="list" id="type_list"> <label
+					for="type_list"><?php translate("list");?></label> </br/> <input
+					type="radio" name="type" value="list" id="type_link"> <label
+					for="type_link"><?php translate("link");?></label>
 			</p>
 		</div>
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
@@ -202,16 +200,15 @@ document.newpageform.system_title.value=systemname
 		</option>
 			</select>
 		</div>
+		<div id="tab-link" style="display: none;">
+			<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
 
-		<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
-
-		<div class="accordion-content">
-			<strong><?php
-		
-		echo TRANSLATION_EXTERNAL_REDIRECT;
-		?>
+			<div class="accordion-content">
+				<strong><?php translate("EXTERNAL_REDIRECT");?>
 		</strong><br /> <input type="text" name="redirection" value="">
+			</div>
 		</div>
+
 		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
 
 		<div class="accordion-content">
@@ -305,19 +302,22 @@ function openMenuImageSelectWindow(field) {
 
 		</select>
 		</div>
-		<h2 class="accordion-header"><?php translate("metadata");?></h2>
+		<div id="tab-metadata">
 
-		<div class="accordion-content">
-			<strong><?php
+			<h2 class="accordion-header"><?php translate("metadata");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php
 		
 		echo TRANSLATION_META_DESCRIPTION;
 		?>
 		</strong><br /> <input type="text" name="meta_description" value=''> <br />
-			<br /> <strong><?php
+				<br /> <strong><?php
 		
 		echo TRANSLATION_META_KEYWORDS;
 		?>
 		</strong><br /> <input type="text" name="meta_keywords" value=''>
+			</div>
 		</div>
 		<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
@@ -341,20 +341,21 @@ function openMenuImageSelectWindow(field) {
 			</option>
 			</select>
 		</div>
-		<h2 class="accordion-header"><?php translate("open_graph");?></h2>
+		<div id="tab-og" style="display: none;">
+			<h2 class="accordion-header"><?php translate("open_graph");?></h2>
 
-		<div class="accordion-content">
-			<p><?php translate("og_help");?></p>
-			<div style="margin-left: 20px;">
-				<strong><?php translate("title");?>
+			<div class="accordion-content">
+				<p><?php translate("og_help");?></p>
+				<div style="margin-left: 20px;">
+					<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title" value=""> <br /> <br />
 
-				<strong><?php translate("description");?>
+					<strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description" value=""> <br />
-				<br /> <strong><?php translate("type");?>
+					<br /> <strong><?php translate("type");?>
 		</strong><br /> <input type="text" name="og_type" value=""> <br /> <br />
-				<strong><?php translate("image");?></strong> <br />
-				<script type="text/javascript">
+					<strong><?php translate("image");?></strong> <br />
+					<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -368,20 +369,20 @@ function openMenuImageSelectWindow(field) {
     );
 }
 </script>
-				<input type="text" id="og_image" name="og_image" readonly="readonly"
-					onclick="openMenuImageSelectWindow(this)"
-					value="<?php echo htmlspecialchars($og_image);?>"
-					style="cursor: pointer" /><br /> <a href="#"
-					onclick="$('#og_image').val('');return false;"><?php
+					<input type="text" id="og_image" name="og_image"
+						readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+						value="<?php echo htmlspecialchars($og_image);?>"
+						style="cursor: pointer" /><br /> <a href="#"
+						onclick="$('#og_image').val('');return false;"><?php
 		
 		echo TRANSLATION_CLEAR;
 		?>
 		</a>
 
+				</div>
 			</div>
 		</div>
-
-		<div id="list-properties" style="display: none">
+		<div id="tab-list" style="display: none">
 			<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
 			<div class="accordion-content">
@@ -393,10 +394,9 @@ function openMenuImageSelectWindow(field) {
 					<option value="">[<?php translate("every");?>]</option>
 	<?php
 		$languages = getAllLanguages ();
-			
+		
 		for($j = 0; $j < count ( $languages ); $j ++) {
-				echo "<option value='" . $languages [$j] . "'>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
-			
+			echo "<option value='" . $languages [$j] . "'>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
 		}
 		
 		?>
@@ -421,8 +421,7 @@ function openMenuImageSelectWindow(field) {
 			translate ( $menu );
 			?></option>
 			<?php
-		
-}
+		}
 		?>
 			</select> <br /> <br /> <strong><?php
 		
@@ -433,7 +432,7 @@ function openMenuImageSelectWindow(field) {
 			[
 			<?php
 		
-		translate("every");
+		translate ( "every" );
 		?>
 			]
 		</option>
@@ -459,26 +458,18 @@ function openMenuImageSelectWindow(field) {
 		<?php
 		}
 		?>
-	</select>
-	<br/>
-	<br/>
-	<strong><?php
-		translate("order_by");
+	</select> <br /> <br /> <strong><?php
+		translate ( "order_by" );
 		?>
-	</strong>
-	<br/>
-	<input type="text" name="list_order_by" value="title">
-	
-	<br/>
-	<br/>
-	<strong><?php
-		translate("order_direction");
+	</strong> <br /> <input type="text" name="list_order_by" value="title">
+
+				<br /> <br /> <strong><?php
+		translate ( "order_direction" );
 		?>
-	</strong>
-	<select name="list_order_direction">
-	<option value="asc"><?php translate("asc");?></option>
-	<option value="desc"><?php translate("desc");?></option>
-	</select>
+	</strong> <select name="list_order_direction">
+					<option value="asc"><?php translate("asc");?></option>
+					<option value="desc"><?php translate("desc");?></option>
+				</select>
 			</div>
 		</div>
 
@@ -500,7 +491,7 @@ function openMenuImageSelectWindow(field) {
 		add_hook ( "page_option" );
 		?>
 
-	<div>
+	<div id="content-editor">
 		<textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
 		<?php
 		$editor = get_html_editor ();
@@ -588,23 +579,13 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 			?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
-<script type="text/javascript">
-function showAndHideFieldsByType(){
-	if($("#pageform #type_list").is(":checked")){
-		$("#pageform .list-show").slideDown();
-	} else {
-		$("#pageform .list-show").slideUp();
-		}	
-}
 
-$("#pageform [name=\"type\"]").change(showAndHideFieldsByType);
-	
-
-</script>
 	<?php
 		}
 		?>
 
+	<script src="scripts/page.js" type="text/javascript">
+</script>
 </form>
 
 

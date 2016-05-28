@@ -30,8 +30,8 @@ if (defined ( "_SECURITY" )) {
 			<strong><?php
 			
 			echo TRANSLATION_PERMALINK;
-			?></strong><br /> <input type="text" required="true" name="system_title"
-				id="system_title" value=""> <br /> <br /> <strong><?php
+			?></strong><br /> <input type="text" required="true"
+				name="system_title" id="system_title" value=""> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_PAGE_TITLE;
 			?> </strong><br /> <input type="text" required="true"
@@ -442,25 +442,6 @@ function openMenuImageSelectWindow(field) {
 					</div>
 <?php }?>
 		
-		
-		
-		
-		
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			</div>
 		</div>
 
