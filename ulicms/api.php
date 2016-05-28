@@ -339,7 +339,8 @@ function strbool($value) {
 function get_available_post_types() {
 	global $post_types;
 	$post_types = array (
-			"page" 
+			"page",
+			"list"
 	);
 	add_hook ( $post_types );
 	

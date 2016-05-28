@@ -33,6 +33,13 @@ function filter_by_language(element){
    }
 }
 
+function filter_by_type(element){
+	   var index = element.selectedIndex
+	   if(element.options[index].value != ""){
+	     location.replace("index.php?action=pages&filter_type=" + element.options[index].value)
+	   }
+	}
+
 
 function filter_by_menu(element){
    var index = element.selectedIndex
@@ -117,6 +124,14 @@ $(window).load(function(){
 				$_SESSION ["filter_active"] = intval ( $_GET ["filter_active"] );
 		}
 		
+		if (isset ( $_GET ["filter_type"] )) {
+			if ($_GET ["filter_type"] == "null") {
+				$_SESSION ["filter_type"] = null;
+			} else {
+				$_SESSION ["filter_type"] = $_GET ["filter_type"];
+			}
+		}
+		
 		if (isset ( $_GET ["filter_menu"] )) {
 			if ($_GET ["filter_menu"] == "null")
 				$_SESSION ["filter_menu"] = null;
@@ -137,6 +152,9 @@ $(window).load(function(){
 		
 		if (! isset ( $_SESSION ["filter_menu"] )) {
 			$_SESSION ["filter_menu"] = null;
+		}
+		if (! isset ( $_SESSION ["filter_type"] )) {
+			$_SESSION ["filter_type"] = null;
 		}
 		
 		if (! isset ( $_SESSION ["filter_active"] )) {
@@ -180,10 +198,34 @@ $(window).load(function(){
 		?>
 
 	</select>
-<?php
+
+<?php translate("type")?>
+<?php $types = get_available_post_types();?>
+<select name="filter_type" onchange="filter_by_type(this);">
+	<option value="null"
+		<?php
 		
-		echo TRANSLATION_STATUS;
+		if ("null" == $_SESSION ["filter_type"])
+			echo "selected";
+		?>>
+			[<?php
+		translate ( "every" )?>]
+		</option>
+		<?php
+		
+		foreach ( $types as $type ) {
+			if ($type == $_SESSION ["filter_type"]) {
+				echo '<option value="' . $type . '" selected>' . get_translation ( $type ) . "</option>";
+			} else {
+				echo '<option value="' . $type . '">' . get_translation ( $type ) . "</option>";
+			}
+		}
 		?>
+	</select>
+
+
+<?php
+		translate ( "status" )?>
 <select name="filter_status" onchange="filter_by_status(this)">
 	<option value="Standard"
 		<?php
@@ -355,21 +397,22 @@ $(window).load(function(){
 		echo TRANSLATION_ACTIVATED;
 		?>
 			</th>
-			<td style="text-align:center"><?php
+			<td style="text-align: center"><?php
 		
 		echo TRANSLATION_VIEW;
 		?>
-			</td><td style="text-align:center"><?php
+			</td>
+			<td style="text-align: center"><?php
 		
-		translate("clone");
+		translate ( "clone" );
 		?>
 			</td>
-			<td style="text-align:center"><?php
+			<td style="text-align: center"><?php
 		
 		echo TRANSLATION_EDIT;
 		?>
 			</td>
-			<td style="text-align:center"><?php
+			<td style="text-align: center"><?php
 		
 		echo TRANSLATION_DELETE;
 		?>
@@ -423,6 +466,9 @@ $(window).load(function(){
 		if ($_SESSION ["filter_menu"] != null) {
 			$filter_sql .= "AND menu = '" . db_escape ( $_SESSION ["filter_menu"] ) . "' ";
 		}
+		if ($_SESSION ["filter_type"] != null) {
+			$filter_sql .= "AND `type` = '" . db_escape ( $_SESSION ["filter_type"] ) . "' ";
+		}
 		
 		if ($_SESSION ["filter_active"] !== null) {
 			$filter_sql .= "AND active = " . intval ( $_SESSION ["filter_active"] ) . " ";
@@ -474,12 +520,10 @@ $(window).load(function(){
 						$url = "http://" . $domain . "/" . $row->systemname . ".html";
 					}
 					echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . TRANSLATION_VIEW . "\" title=\"" . TRANSLATION_VIEW . "\"></a></td>";
-					
 				}
 				
+				echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation ( "clone" ) . "\" title=\"" . get_translation ( "clone" ) . "\"></a></td>";
 				
-					echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=".$row->id."\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone"). "\" title=\"" . get_translation("clone") . "\"></a></td>";
-					
 				echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
 				
 				if ($_SESSION ["filter_status"] == "trash") {
