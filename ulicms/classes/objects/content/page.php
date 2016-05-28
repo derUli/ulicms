@@ -27,7 +27,7 @@ class Page extends Content {
 	public $html_file = null;
 	public $theme = null;
 	public $custom_data = null;
-	private $type = "page";
+	protected $type = "page";
 	public $og_title = "";
 	public $og_type = "";
 	public $og_image = "";
@@ -76,7 +76,7 @@ class Page extends Content {
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where id = " . $id . " and `type` = 'page'" );
+		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where id = " . $id . " and `type` = 'page' or `type` = 'link'" );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );

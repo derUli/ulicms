@@ -61,7 +61,7 @@ class List_Data extends Content {
 			$language = "'" . Database::escapeValue ( $this->language ) . "'";
 		}
 		
-		if ($this->category_id === null) {
+		if ($this->category_id === null or $this->category_id === 0) {
 			$category_id = "null";
 		} else {
 			$category_id = intval ( $this->category_id );
@@ -73,7 +73,7 @@ class List_Data extends Content {
 			$menu = "'" . Database::escapeValue ( $this->menu ) . "'";
 		}
 		
-		if ($this->parent_id === null || $this->parent_id === 0) {
+		if ($this->parent_id === null or $this->parent_id === 0) {
 			$parent_id = "null";
 		} else {
 			$parent_id = intval ( $this->parent_id );
@@ -89,6 +89,12 @@ class List_Data extends Content {
 			$order_direction = "asc";
 		}
 		
+		if ($category_id === 0) {
+			$category_id = "null";
+		}
+		if ($parent_id === 0) {
+			$parent_id = "null";
+		}
 		$sql = "INSERT INTO " . tbname ( "lists" ) . " (content_id, language, category_id, menu, parent_id, `order_by`, `order_direction`) values ($content_id, $language, 
 		$category_id, $menu, $parent_id, '$order_by', '$order_direction')";
 		Database::query ( $sql ) or die ( Database::error () );
@@ -106,7 +112,7 @@ class List_Data extends Content {
 			$language = "'" . Database::escapeValue ( $this->language ) . "'";
 		}
 		
-		if ($this->category_id === null) {
+		if ($this->category_id === null or $this->category_id === 0) {
 			$category_id = "null";
 		} else {
 			$category_id = intval ( $this->category_id );
@@ -118,7 +124,7 @@ class List_Data extends Content {
 			$menu = "'" . Database::escapeValue ( $this->menu ) . "'";
 		}
 		
-		if ($this->parent_id === null) {
+		if ($this->parent_id === null or $this->parent_id === 0) {
 			$parent_id = "null";
 		} else {
 			$parent_id = intval ( $this->parent_id );
@@ -130,7 +136,12 @@ class List_Data extends Content {
 			$order_by = Database::escapeValue ( $this->order_by );
 		}
 		
-		var_dump ( $this->order_direction );
+		if ($category_id === 0) {
+			$category_id = "null";
+		}
+		if ($parent_id === 0) {
+			$parent_id = "null";
+		}
 		if ($this->order_direction === "desc") {
 			$order_direction = "desc";
 		} else {

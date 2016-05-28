@@ -29,6 +29,9 @@ class ContentFactory {
 		} else if ($row->type == "list") {
 			$retval = new Content_List ();
 			$retval->loadByID ( $row->id );
+		} else if ($row->type == "link") {
+			$retval = new Link ();
+			$retval->loadByID ( $row->id );
 		}
 		
 		return $retval;
@@ -83,14 +86,14 @@ class ContentFactory {
 			$sql .= "parent = $parent_id and ";
 		}
 		
-		$order_by = Database::escapeName($order_by);
+		$order_by = Database::escapeName ( $order_by );
 		
-		if($order_direction != "desc"){
+		if ($order_direction != "desc") {
 			$order_direction = "asc";
 		}
 		
 		$sql .= " 1=1 order by $order_by $order_direction";
-	
+		
 		$query = Database::query ( $sql ) or die ( Database::error () );
 		
 		while ( $row = DB::fetchObject ( $query ) ) {
