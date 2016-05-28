@@ -73,7 +73,7 @@ class List_Data extends Content {
 			$menu = "'" . Database::escapeValue ( $this->menu ) . "'";
 		}
 		
-		if ($this->parent_id === null) {
+		if ($this->parent_id === null || $this->parent_id === 0) {
 			$parent_id = "null";
 		} else {
 			$parent_id = intval ( $this->parent_id );
