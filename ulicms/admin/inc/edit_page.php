@@ -459,30 +459,6 @@ function openMenuImageSelectWindow(field) {
 				?>" />
 						</div>
 <?php }?>
-		
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-					
-					
-				
-				
 				
 				</div>
 			</div>
@@ -713,7 +689,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 			[<a
 				href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"><?php translate("restore_older_version");?></a>]
 		</p>
-		<?php }?>
+		<?php }?>	</div>
 		<div class="inPageMessage">
 			<div id="message_page_edit" class="inPageMessage"></div>
 			<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
@@ -724,7 +700,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 			
 			echo TRANSLATION_SAVE_CHANGES;
 			?>">
-	</div>
+
 
 	<?php
 			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {

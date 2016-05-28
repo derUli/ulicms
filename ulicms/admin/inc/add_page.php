@@ -161,26 +161,6 @@ if (defined ( "_SECURITY" )) {
 		}
 		?>
 	</select> <br /> <br />
-
-			<script type="text/javascript">
-function systemname_vorschlagen(txt){
-var systemname=txt.toLowerCase();
-systemname=systemname.replace(/ü/g,"ue");
-systemname=systemname.replace(/ö/g,"oe");
-systemname=systemname.replace(/ä/g,"ae");
-systemname=systemname.replace(/Ã/g,"ss");
-systemname=systemname.replace(/\040/g,"_");
-systemname=systemname.replace(/\?/g,"");
-systemname=systemname.replace(/\!/g,"");
-systemname=systemname.replace(/\"/g,"");
-systemname=systemname.replace(/\'/g,"");
-systemname=systemname.replace(/\+/g,"");
-systemname=systemname.replace(/\&/g,"");
-systemname=systemname.replace(/\#/g,"");
-document.newpageform.system_title.value=systemname
-}
-</script>
-
 			<strong><?php
 		
 		echo TRANSLATION_ACTIVATED;
@@ -564,13 +544,13 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 					href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
 			</p>
 		</noscript>
+	</div>
 		<div class="inPageMessage"></div>
 		<input type="hidden" name="add_page" value="add_page"> <input
 			type="submit" value="<?php
 		
 		echo TRANSLATION_SAVE;
 		?>">
-	</div>
 	<?php
 		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 			?>
