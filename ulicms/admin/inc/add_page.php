@@ -48,10 +48,10 @@ if (defined ( "_SECURITY" )) {
 			<p>
 
 				<input type="radio" name="type" id="type_page" value="page" checked>
-				<label for="type_page"><?php translate("page");?></label> </br/> <input
+				<label for="type_page"><?php translate("page");?></label> <br /> <input
 					type="radio" name="type" value="list" id="type_list"> <label
-					for="type_list"><?php translate("list");?></label> </br/> <input
-					type="radio" name="type" value="list" id="type_link"> <label
+					for="type_list"><?php translate("list");?></label> <br /> <input
+					type="radio" name="type" value="link" id="type_link"> <label
 					for="type_link"><?php translate("link");?></label>
 			</p>
 		</div>
@@ -400,10 +400,7 @@ function openMenuImageSelectWindow(field) {
 		}
 		
 		?>
-	</select> <br /> <br /> <strong><?php
-		
-		translate ( "category" );
-		?>
+	</select> <br /> <br /> <strong><?php translate ( "category" );?>
 	</strong><br />
 	<?php echo categories :: getHTMLSelect(-1, true, "list_category")?>
 	<br /> <br /> <strong><?php

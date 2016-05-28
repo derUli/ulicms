@@ -596,6 +596,8 @@ $("form#editpageform #system_title").val(systemname);
 			?>
 					<input type="hidden" name="add_page" value="add_page">
 
+	<script src="scripts/page.js" type="text/javascript">
+</script>
 </form>
 
 

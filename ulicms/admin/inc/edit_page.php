@@ -63,8 +63,10 @@ if (defined ( "_SECURITY" )) {
 					for="type_page"><?php translate("page");?></label> </br/> <input
 					type="radio" name="type" value="list" id="type_list"
 					<?php if($row->type == "list"){ echo "checked";}?>> <label
-					for="type_list"><?php translate("list");?></label>
-
+					for="type_list"><?php translate("list");?></label> <br /> <input
+					type="radio" name="type" value="link" id="type_link"
+					<?php if($row->type == "link"){ echo "checked";}?>> <label
+					for="type_link"><?php translate("link");?></label>
 			</p>
 
 		</div>
@@ -218,20 +220,20 @@ if (defined ( "_SECURITY" )) {
 		</option>
 			</select>
 		</div>
+		<div id="tab-link">
+			<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
 
-		<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
-
-		<div class="accordion-content">
-			<strong><?php
+			<div class="accordion-content">
+				<strong><?php
 			
 			echo TRANSLATION_EXTERNAL_REDIRECT;
 			?></strong><br /> <input type="text" name="redirection"
-				value="<?php
+					value="<?php
 			
 			echo $row->redirection;
 			?>">
+			</div>
 		</div>
-
 		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
 
 		<div class="accordion-content">
@@ -347,75 +349,78 @@ function openMenuImageSelectWindow(field) {
 			?>
 		</select>
 		</div>
-		<h2 class="accordion-header"><?php translate("metadata");?></h2>
 
-		<div class="accordion-content">
-			<strong><?php
+		<div id="tab-metadata" style="display: none">
+			<h2 class="accordion-header"><?php translate("metadata");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php
 			
 			echo TRANSLATION_META_DESCRIPTION;
 			?></strong><br /> <input type="text" name="meta_description"
-				value="<?php
+					value="<?php
 			echo htmlspecialchars ( $row->meta_description );
 			?>"> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_META_KEYWORDS;
 			?> </strong><br /> <input type="text" name="meta_keywords"
-				value="<?php
+					value="<?php
 			echo htmlspecialchars ( $row->meta_keywords );
 			?>">
-		</div>
+			</div>
+			</div>
 
-		<h2 class="accordion-header"><?php translate("open_in");?></h2>
+			<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
-		<div class="accordion-content">
-			<strong><?php
+			<div class="accordion-content">
+				<strong><?php
 			
 			echo TRANSLATION_OPEN_IN;
 			?></strong><br /> <select name="target" size=1>
-				<option
-					<?php
+					<option
+						<?php
 			
 			if ($row->target == "_self") {
 				echo 'selected="selected" ';
 			}
 			?>
-					value="_self">
+						value="_self">
 				<?php
 			
 			echo TRANSLATION_TARGET_SELF;
 			?></option>
-				<option
-					<?php
+					<option
+						<?php
 			
 			if ($row->target == "_blank") {
 				echo 'selected="selected" ';
 			}
 			?>
-					value="_blank">
+						value="_blank">
 				<?php
 			
 			echo TRANSLATION_TARGET_BLANK;
 			?></option>
-			</select>
-		</div>
+				</select>
+			</div>
+			<div id="tab-og" style="display: none">
+			<h2 class="accordion-header"><?php translate("open_graph");?></h2>
 
-		<h2 class="accordion-header"><?php translate("open_graph");?></h2>
+				<div class="accordion-content">
 
-		<div class="accordion-content">
-
-			<p><?php translate("og_help");?></p>
-			<div style="margin-left: 20px;">
-				<strong><?php translate("title");?>
+					<p><?php translate("og_help");?></p>
+					<div style="margin-left: 20px;">
+						<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title"
-					value="<?php
+							value="<?php
 			echo htmlspecialchars ( $row->og_title );
 			?>"> <br /> <br /> <strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description"
-					value="<?php
+							value="<?php
 			echo htmlspecialchars ( $row->og_description );
 			?>""> <br /> <br /> <strong><?php translate("type");?>
 		</strong><br /> <input type="text" name="og_type"
-					value="<?php
+							value="<?php
 			echo htmlspecialchars ( $row->og_type );
 			?>"> <br /> <br /> <strong><?php translate("image");?>
 		<br /> <script type="text/javascript">
@@ -432,12 +437,12 @@ function openMenuImageSelectWindow(field) {
     );
 }
 </script> <input type="text" id="og_image" name="og_image"
-					readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-					value="<?php
+							readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+							value="<?php
 			echo htmlspecialchars ( $row->og_image );
 			?>"
-					style="cursor: pointer" /><br /> <a href="#"
-					onclick="$('#og_image').val('');return false;"><?php
+							style="cursor: pointer" /><br /> <a href="#"
+							onclick="$('#og_image').val('');return false;"><?php
 			
 			echo TRANSLATION_CLEAR;
 			?>
@@ -447,12 +452,12 @@ function openMenuImageSelectWindow(field) {
 				$og_url = get_protocol_and_domain () . $row->og_image;
 				?>
 <div style="margin-top: 15px;">
-						<img class="small-preview-image"
-							src="<?php
+								<img class="small-preview-image"
+									src="<?php
 				
 				echo htmlspecialchars ( $og_url );
 				?>" />
-					</div>
+							</div>
 <?php }?>
 		
 			
@@ -473,19 +478,22 @@ function openMenuImageSelectWindow(field) {
 			
 			
 			
+			
+					
+					</div>
+				</div>
 			</div>
-		</div>
-		<div id="list-properties" class="list-show">
-			<h2 class="accordion-header"><?php translate("list_properties");?></h2>
+			<div id="tab-list" class="list-show">
+				<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
-			<div class="accordion-content">
-				<strong><?php
+				<div class="accordion-content">
+					<strong><?php
 			
 			echo TRANSLATION_LANGUAGE;
 			?>
 	</strong> <br /> <select name="list_language">
-					<option value=""
-						<?php if($list->language === "null") echo "selected";?>>[<?php translate("every");?>]</option>
+						<option value=""
+							<?php if($list->language === "null") echo "selected";?>>[<?php translate("every");?>]</option>
 	<?php
 			$languages = getAllLanguages ();
 			
@@ -515,7 +523,7 @@ function openMenuImageSelectWindow(field) {
 			translate ( "menu" );
 			?>
 	</strong><br /> <select name="list_menu" size=1>
-					<option value="">[<?php translate("every");?>]</option>
+						<option value="">[<?php translate("every");?>]</option>
 		<?php
 			foreach ( getAllMenus () as $menu ) {
 				?>
@@ -532,14 +540,14 @@ function openMenuImageSelectWindow(field) {
 			echo TRANSLATION_PARENT;
 			?>
 	</strong><br /> <select name="list_parent" size=1>
-					<option
-						<?php
+						<option
+							<?php
 			
 			if ($list_data->parent_id === null) {
 				echo 'selected="selected"';
 			}
 			?>
-						value="NULL">
+							value="NULL">
 			[
 			<?php
 			
@@ -555,7 +563,7 @@ function openMenuImageSelectWindow(field) {
 				
 				echo $page ["id"];
 				?>"
-						<?php
+							<?php
 				
 				if ($list_data->parent_id === $page ["id"]) {
 					echo 'selected="selected"';
@@ -579,40 +587,40 @@ function openMenuImageSelectWindow(field) {
 			translate ( "order_by" );
 			?>
 	</strong> <br /> <input type="text" name="list_order_by"
-					value="<?php Template::escape($list_data->order_by);?>"> <br /> <br />
-				<strong><?php
+						value="<?php Template::escape($list_data->order_by);?>"> <br /> <br />
+					<strong><?php
 			translate ( "order_direction" );
 			?>
 	</strong> <select name="list_order_direction">
-					<option value="asc"><?php translate("asc");?></option>
-					<option value="desc"
-						<?php if($list_data->order_direction=== "desc") echo ' selected';?>><?php translate("desc");?></option>
-				</select>
+						<option value="asc"><?php translate("asc");?></option>
+						<option value="desc"
+							<?php if($list_data->order_direction=== "desc") echo ' selected';?>><?php translate("desc");?></option>
+					</select>
+				</div>
 			</div>
-		</div>
 
-		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
+			<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
-		<div class="accordion-content">
+			<div class="accordion-content">
 
-			<textarea name="custom_data" style="width: 100%; height: 200px;"
-				cols=80 rows=10><?php
+				<textarea name="custom_data" style="width: 100%; height: 200px;"
+					cols=80 rows=10><?php
 			
 			echo htmlspecialchars ( $row->custom_data );
 			?></textarea>
+			</div>
+
 		</div>
 
-	</div>
-
-	<br /> <br />
+		<br /> <br />
 	<?php
 			
 			add_hook ( "page_option" );
 			?>
 
 
-	<div>
-		<textarea name="page_content" id="page_content" cols=60 rows=20><?php
+	<div id="content-editor">
+			<textarea name="page_content" id="page_content" cols=60 rows=20><?php
 			
 			echo htmlspecialchars ( $row->content );
 			?></textarea>
@@ -686,33 +694,33 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 			}
 			?>
 		<noscript>
-			<p style="color: red;">
-				Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
-					href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
-			</p>
+				<p style="color: red;">
+					Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
+						href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
+				</p>
 
-		</noscript>
+			</noscript>
 		<?php
 			
 			$rev = vcs::getRevisionsByContentID ( $row->id );
 			if (count ( $rev ) > 0) {
 				?>
 		<p>
-			[<a
-				href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"><?php translate("restore_older_version");?></a>]
-		</p>
+				[<a
+					href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"><?php translate("restore_older_version");?></a>]
+			</p>
 		<?php }?>
 		<div class="inPageMessage">
-			<div id="message_page_edit" class="inPageMessage"></div>
-			<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
-		</div>
+				<div id="message_page_edit" class="inPageMessage"></div>
+				<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
+			</div>
 
-		<input type="submit"
-			value="<?php
+			<input type="submit"
+				value="<?php
 			
 			echo TRANSLATION_SAVE_CHANGES;
 			?>">
-	</div>
+		</div>
 
 	<?php
 			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
@@ -725,6 +733,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 			
 	<script src="scripts/page.js" type="text/javascript">
 </script>
+
 </form>
 
 <script type="text/javascript">
