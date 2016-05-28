@@ -24,7 +24,7 @@ if (defined ( "_SECURITY" )) {
 		
 		translate ( "permalink" );
 		?>
-	</strong><br /> <input type="text" name="system_title" required="true"
+	</strong><br /> <input type="text" name="system_title" id="system_title" required="true"
 				value=""> <br /> <br /> <strong><?php
 		
 		translate ( "page_title" );

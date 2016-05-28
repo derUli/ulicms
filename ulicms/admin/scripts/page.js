@@ -37,5 +37,5 @@ function systemname_vorschlagen(txt){
 	systemname=systemname.replace(/\+/g,"");
 	systemname=systemname.replace(/\&/g,"");
 	systemname=systemname.replace(/\#/g,"");
-	$("form#editpageform #system_title").val(systemname);
+	$("#system_title").val(systemname);
 	}
