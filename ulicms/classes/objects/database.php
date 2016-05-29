@@ -220,13 +220,13 @@ class Database {
 		}
 	}
 	public static function getColumnNames($table) {
-		$retval = null;
+		$retval = array ();
 		$table = tbname ( $table );
 		$query = Database::query ( "SELECT * FROM $table limit 1" );
 		if (self::getNumRows ( $query ) > 0) {
 			$row = self::fetchAssoc ( $query );
 			$retval = array_keys ( $row );
-			sort($retval);
+			sort ( $retval );
 		}
 		
 		return $retval;
