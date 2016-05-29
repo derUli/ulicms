@@ -7,7 +7,8 @@ if (defined ( "_SECURITY" )) {
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE id='$page'" );
 		
 		$allThemes = getThemesList ();
-		
+
+		$cols = Database::getColumnNames ( "content" );
 		$groups = db_query ( "SELECT id, name from " . tbname ( "groups" ) );
 		while ( $row = db_fetch_object ( $query ) ) {
 			$list_data = new List_Data ( $row->id );
@@ -566,8 +567,14 @@ function openMenuImageSelectWindow(field) {
 	</select> <br /> <br /> <strong><?php
 			translate ( "order_by" );
 			?>
-	</strong> <br /> <input type="text" name="list_order_by"
-					value="<?php Template::escape($list_data->order_by);?>"> <br /> <br />
+	</strong> <br /> 
+	<select name="list_order_by">
+	<?php foreach($cols as $col){?>
+	<option value="<?php echo $col;?>"
+						<?php if($col == $list_data->order_by) echo 'selected';?>><?php echo $col;?></option>
+	<?php }?>
+</select> 
+					 <br /> <br />
 				<strong><?php
 			translate ( "order_direction" );
 			?>

@@ -5,7 +5,7 @@ if (defined ( "_SECURITY" )) {
 	if ($acl->hasPermission ( "pages" )) {
 		
 		$allThemes = getThemesList ();
-		
+		$cols = Database::getColumnNames ( "content" );
 		?>
 <form id="pageform" name="newpageform" action="index.php?action=pages"
 	method="post">
@@ -24,8 +24,8 @@ if (defined ( "_SECURITY" )) {
 		
 		translate ( "permalink" );
 		?>
-	</strong><br /> <input type="text" name="system_title" id="system_title" required="true"
-				value=""> <br /> <br /> <strong><?php
+	</strong><br /> <input type="text" name="system_title"
+				id="system_title" required="true" value=""> <br /> <br /> <strong><?php
 		
 		translate ( "page_title" );
 		?>
@@ -160,8 +160,7 @@ if (defined ( "_SECURITY" )) {
 		<?php
 		}
 		?>
-	</select> <br /> <br />
-			<strong><?php
+	</select> <br /> <br /> <strong><?php
 		
 		echo TRANSLATION_ACTIVATED;
 		?>
@@ -438,9 +437,12 @@ function openMenuImageSelectWindow(field) {
 	</select> <br /> <br /> <strong><?php
 		translate ( "order_by" );
 		?>
-	</strong> <br /> <input type="text" name="list_order_by" value="title">
-
-				<br /> <br /> <strong><?php
+	</strong> <br /> <select name="list_order_by">
+	<?php foreach($cols as $col){?>
+	<option value="<?php echo $col;?>"
+						<?php if($col == "title") echo 'selected';?>><?php echo $col;?></option>
+	<?php }?>
+</select> <br /> <br /> <strong><?php
 		translate ( "order_direction" );
 		?>
 	</strong> <select name="list_order_direction">
@@ -545,9 +547,9 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 			</p>
 		</noscript>
 	</div>
-		<div class="inPageMessage"></div>
-		<input type="hidden" name="add_page" value="add_page"> <input
-			type="submit" value="<?php
+	<div class="inPageMessage"></div>
+	<input type="hidden" name="add_page" value="add_page"> <input
+		type="submit" value="<?php
 		
 		echo TRANSLATION_SAVE;
 		?>">

@@ -98,9 +98,9 @@ class Database {
 	}
 	public static function escapeName($name) {
 		$name = "`" . db_escape ( $name ) . "`";
-		$name = str_replace("'", "", $name);
-		$name = str_replace("\"", "", $name);
-		return $name;		
+		$name = str_replace ( "'", "", $name );
+		$name = str_replace ( "\"", "", $name );
+		return $name;
 	}
 	public static function getLastInsertID() {
 		global $db_connection;
@@ -218,6 +218,18 @@ class Database {
 				return $value;
 			}
 		}
+	}
+	public static function getColumnNames($table) {
+		$retval = null;
+		$table = tbname ( $table );
+		$query = Database::query ( "SELECT * FROM $table limit 1" );
+		if (self::getNumRows ( $query ) > 0) {
+			$row = self::fetchAssoc ( $query );
+			$retval = array_keys ( $row );
+			sort($retval);
+		}
+		
+		return $retval;
 	}
 }
 
