@@ -341,11 +341,9 @@ function get_available_post_types() {
 	$post_types = array (
 			"page",
 			"list",
-			"link"
+			"link" 
 	);
 	add_hook ( $post_types );
-	
-	sort ( $post_types );
 	
 	return $post_types;
 }
@@ -1148,9 +1146,9 @@ function SureRemoveDir($dir, $DeleteMe) {
  * seite.html;
  */
 function buildSEOUrl($page = false, $redirection = null, $format = "html") {
-        if(!is_null($redirection) and !empty($redirection)){
-             return $redirection;
-        }
+	if (! is_null ( $redirection ) and ! empty ( $redirection )) {
+		return $redirection;
+	}
 	if ($page === false)
 		$page = get_requested_pagename ();
 	
