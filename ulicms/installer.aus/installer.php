@@ -70,7 +70,7 @@ echo TRANSLATION_TITLE;
 		?>>English</option>
 			</select>
 		</p>
-		<p class="align-right">
+		<p>
 			<input type="hidden" name="step" value="0"> <input type="submit"
 				value="<?php
 		
@@ -202,14 +202,7 @@ echo TRANSLATION_TITLE;
 			?>
 
 	<form action="index.php" method="post">
-		<input type="button"
-			value="<?php
-			
-			echo TRANSLATION_BACK;
-			?>"
-			onclick="history.back()"> <input type="hidden" name="step" value="1">
-
-		<input class="pull-right" type="submit"
+		<input type="hidden" name="step" value="1"> <input type="submit"
 			value="<?php
 			
 			echo TRANSLATION_NEXT;
@@ -292,12 +285,7 @@ $(document).ready(function(){
 });
 </script>
 		<p>
-			<input type="button"
-				value="<?php
-			
-			echo TRANSLATION_BACK;
-			?>"
-				onclick="history.back()"> <input class="pull-right" type="submit"
+			<input type="submit"
 				value="<?php
 			
 			echo TRANSLATION_NEXT;
@@ -358,13 +346,7 @@ $(document).ready(function(){
 	</p>
 
 	<form action="index.php" method="post">
-		<input type="button"
-			value="<?php
-					
-					echo TRANSLATION_BACK;
-					?>"
-			onclick="history.back()"> <input type="hidden" name="step" value="3">
-		<input class="pull-right" type="submit"
+		<input type="hidden" name="step" value="3"> <input type="submit"
 			value="<?php
 					
 					echo TRANSLATION_NEXT;
@@ -463,8 +445,7 @@ $(document).ready(function(){
 });
 </script>
 		<p>
-			<input type="button" value="<?php echo TRANSLATION_BACK;?>"
-				onclick="history.back();"> <input class="pull-right" type="submit"
+			<input type="submit"
 				value="<?php
 			
 			echo TRANSLATION_DO_INSTALL;
@@ -798,7 +779,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 			// Beispieldaten für die Banner Tabelle
 			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "banner` VALUES (1,'Content Management einfach gemacht mit UliCMS','http://www.ulicms.de','http://www.ulicms.de/content/images/banners/ulicms-banner.jpg',1,'gif','','de');" );
 			
-			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "lists` (
+			 mysqli_query( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "lists` (
   `content_id` int(11) NOT NULL,
   `language` varchar(50) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
@@ -897,7 +878,7 @@ class config extends baseConfig{
 		<?php
 	}
 	?>
-	<hr class="footer-hr" />
+	<hr style="margin-top: 30px;" />
 	<p style="color: #6f6f6f; font-size: small;">
 		&copy; 2011 - <?php echo $ulicms_version->getReleaseYear();?> by <a
 			href="http://www.ulicms.de" target="_blank">ulicms.de</a>

@@ -48,4 +48,3 @@ define ( "TRANSLATION_MAIL_MESSAGE_TEXT", "Hallo %person_name%!\n" . "Auf %domai
 define ( "TRANSLATION_PHP_VERSION_TOO_LOW", "Auf dem Server läuft momentan PHP " . phpversion () . ".<br/>" . "Es wird jedoch empfohlen, dass Sie mindestens PHP " . REQUIRED_PHP_VERSION . " verwenden, da sonst einige Funktionalitäten von UliCMS nicht verfügbar sind." );
 
 define ( "TRANSLATION_VIEW_PASSWORD", "Passwort anzeigen" );
-define ( "TRANSLATION_BACK", "Zurück" );
