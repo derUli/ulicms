@@ -15,10 +15,11 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			$type = $_GET ["type"];
 			$uninstalled = uninstall_module ( $remove, $type );
-			if ($uninstalled)
+			if ($uninstalled) {
 				echo "<p style=\"color:green;\">" . htmlspecialchars ( $remove ) . " wurde erfolgreich deinstalliert.</p>";
-			else
+			} else {
 				echo "<p style=\"color:red;\">" . htmlspecialchars ( $remove ) . " konnte nicht deinstalliert werden.<br/>Bitte löschen Sie das Modul manuell vom Server.</p>";
+			}
 		}
 	}
 	?>
