@@ -102,7 +102,7 @@ $path_to_config = dirname ( __file__ ) . DIRECTORY_SEPERATOR . "cms-config.php";
 
 if (file_exists ( $path_to_config )) {
 	require_once $path_to_config;
-} 
+}
 
 else if (is_dir ( "installer" )) {
 	header ( "Location: installer/" );
@@ -254,16 +254,17 @@ if (! defined ( "SKIP_TABLE_CHECK" )) {
 			tbname ( "mails" ),
 			tbname ( "history" ),
 			tbname ( "settings" ),
-			tbname ( "forms" ) 
+			tbname ( "forms" ),
+			tbname ( "lists" )
 	);
-	
+
 	for($i = 0; $i < count ( $required_tables ); $i ++) {
 		$table = $required_tables [$i];
 		if (! in_array ( $table, $existing_tables )) {
 			if (! headers_sent ()) {
 				header ( "Content-Type: text/html; charset=UTF-8" );
 			}
-			
+
 			throw new Exception ( "Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!" );
 			exit ();
 		}
@@ -376,9 +377,9 @@ if (! Settings::get ( "disable_hsts" ) and is_ssl ()) {
 	if ($maxage === false) {
 		$maxage = 10 * 30;
 	}
-	
+
 	$maxage = intval ( $maxage );
-	
+
 	$includeSubDomains = Settings::get ( "hsts_include_subdomains" );
 	if (! $includeSubDomains) {
 		$includeSubDomains = "";
@@ -387,9 +388,9 @@ if (! Settings::get ( "disable_hsts" ) and is_ssl ()) {
 	if (! empty ( $includeSubDomains )) {
 		$str .= "; " . $includeSubDomains;
 	}
-	
+
 	$str = trim ( $str );
-	
+
 	header ( $str );
 }
 
