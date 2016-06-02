@@ -2,3 +2,4 @@
 Neue Features
 + Inhaltstyp "Liste" hinzugefügt
 + Inhaltstyp "Link" hinzugefügt
++ Funktion ModuleHelper::buildAdminURL($module, $suffix) hinzugefügt
