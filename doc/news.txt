@@ -1,22 +1,4 @@
-﻿===== Neues in UliCMS 9.8.3 =====
+﻿===== Neues in UliCMS 9.8.4 =====
 Neue Features
-+ Klasse Banner hinzugefügt
-+ Klasse Banners hinzugefügt
-+ Shellscript sremove.php hinzugefügt
-+ Shellscript sinfo.php hinzugefügt
-+ Shellscript version.php hinzugefügt
-+ Funktion containsModule() zur Klasse Page hinzugefügt
-+ GetAllX() und FilterByX() Funktionen zur Klasse ContentFactory hinzugefügt
-+ Klasse Request hinzugefügt
-+ Funktionen zur Template Klasse hinzugefügt
-+ Updated CKEditor (Version 4.5.7)
-+ Updated Mobile_Detect (Version 2.8.22)
-+ Neue Hooks hinzugefügt
-+ Funktion removeDir() zur Klasse Path hinzugefügt
-+ Klasse Cache hinzugefügt
-
-Bugfixes
-# ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
-
-Entfernte Features
-- cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016
++ Inhaltstyp "Liste" hinzugefügt
++ Inhaltstyp "Link" hinzugefügt

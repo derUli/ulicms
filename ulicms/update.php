@@ -16,7 +16,7 @@ Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "lists" ) . "` (
   UNIQUE KEY `content_id` (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
 
-Database::query( "update ".tbname("content") . " set `type` = 'link' where redirection is not null and redirection <> ''");
+Database::query ( "update ".tbname("content") . " set `type` = 'link' where redirection is not null and redirection <> ''");
 
 Settings::set ( "db_schema_version", "9.8.4" );
 
