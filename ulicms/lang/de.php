@@ -624,4 +624,7 @@ define ( "TRANSLATION_LINK", "Link" );
 // Inhaltstyp "Modul"
 define("TRANSLATION_MODULE", "Modul");
 
+// Treeview
+define("TRANSLATION_PAGES_TREEVIEW", "Seiten (Baumansicht)");
+
 add_hook ( "lang_de" );

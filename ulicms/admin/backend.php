@@ -1,6 +1,7 @@
 <?php
 require_once "../init.php";
 require_once "../templating.php";
+require_once Path::resolve("ULICMS_ROOT/classes/helper/backend_helper.php");
 @session_start ();
 $acl = new acl ();
 
