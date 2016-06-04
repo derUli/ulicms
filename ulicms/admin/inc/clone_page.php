@@ -30,11 +30,11 @@ if (defined ( "_SECURITY" )) {
 			<strong><?php
 			
 			echo TRANSLATION_PERMALINK;
-			?></strong><br /> <input type="text" required="true"
+			?></strong><br /> <input type="text" required="required"
 				name="system_title" id="system_title" value=""> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_PAGE_TITLE;
-			?> </strong><br /> <input type="text" required="true"
+			?> </strong><br /> <input type="text" required="required"
 				name="page_title" value=""
 				onkeyup="systemname_vorschlagen(this.value)"> <br /> <br /> <strong><?php
 			
@@ -135,7 +135,7 @@ if (defined ( "_SECURITY" )) {
 			echo TRANSLATION_POSITION;
 			?> </strong> <span style="cursor: help;"
 				onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
-				type="text" name="position" required="true"
+				type="text" name="position" required="required"
 				value="<?php
 			
 			echo $row->position;
@@ -416,7 +416,7 @@ function openMenuImageSelectWindow(field) {
 		</strong><br /> <input type="text" name="og_description"
 						value="<?php
 			echo htmlspecialchars ( $row->og_description );
-			?>""> <br /> <br /> <strong><?php translate("type");?>
+			?>"> <br /> <br /> <strong><?php translate("type");?>
 		</strong><br /> <input type="text" name="og_type"
 						value="<?php
 			echo htmlspecialchars ( $row->og_type );
@@ -457,6 +457,8 @@ function openMenuImageSelectWindow(field) {
 				?>" />
 						</div>
 <?php }?>
+				
+				
 				
 				
 				
@@ -597,9 +599,9 @@ function openMenuImageSelectWindow(field) {
 				</select>
 			</div>
 		</div>
-		
-		
-		
+
+
+
 		<div id="tab-module" style="display: none;">
 			<h2 class="accordion-header"><?php translate("module");?></h2>
 
