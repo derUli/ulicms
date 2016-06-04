@@ -222,8 +222,18 @@ if ($html_file) {
 	require_once getTemplateDirPath ( $theme ) . "oben.php";
 	add_hook ( "before_content" );
 	content ();
-	if (get_type () === "list") {
-		echo Template::executeDefaultOrOwnTemplate ( "list" );
+	$type = get_type ();
+	switch ($type) {
+		case "list" :
+			echo Template::executeDefaultOrOwnTemplate ( "list" );
+			break;
+		case "module" :
+			$page = get_page ();
+			if ($page ["module"] != null and strlen ( $page ["module"] ) > 0) {
+				no_cache ();
+				echo replaceShortcodesWithModules ( "[module=\"" . $page ["module"] . "\"]" );
+			}
+			break;
 	}
 	
 	add_hook ( "after_content" );

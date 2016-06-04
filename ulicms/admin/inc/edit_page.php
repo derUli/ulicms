@@ -7,7 +7,7 @@ if (defined ( "_SECURITY" )) {
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE id='$page'" );
 		
 		$allThemes = getThemesList ();
-
+		
 		$cols = Database::getColumnNames ( "content" );
 		$groups = db_query ( "SELECT id, name from " . tbname ( "groups" ) );
 		while ( $row = db_fetch_object ( $query ) ) {
@@ -61,13 +61,16 @@ if (defined ( "_SECURITY" )) {
 			<p>
 				<input type="radio" name="type" id="type_page" value="page"
 					<?php if($row->type == "page"){ echo "checked";}?>> <label
-					for="type_page"><?php translate("page");?></label> </br/> <input
+					for="type_page"><?php translate("page");?></label> <br/> <input
 					type="radio" name="type" value="list" id="type_list"
 					<?php if($row->type == "list"){ echo "checked";}?>> <label
 					for="type_list"><?php translate("list");?></label> <br /> <input
 					type="radio" name="type" value="link" id="type_link"
 					<?php if($row->type == "link"){ echo "checked";}?>> <label
-					for="type_link"><?php translate("link");?></label>
+					for="type_link"><?php translate("link");?></label> <br /> <input
+					type="radio" name="type" value="module" id="type_module"
+					<?php if($row->type == "module"){ echo "checked";}?>> <label
+					for="type_module"><?php translate("module");?></label>
 			</p>
 
 		</div>
@@ -461,6 +464,10 @@ function openMenuImageSelectWindow(field) {
 						</div>
 <?php }?>
 				
+				
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -567,15 +574,12 @@ function openMenuImageSelectWindow(field) {
 	</select> <br /> <br /> <strong><?php
 			translate ( "order_by" );
 			?>
-	</strong> <br /> 
-	<select name="list_order_by">
+	</strong> <br /> <select name="list_order_by">
 	<?php foreach($cols as $col){?>
 	<option value="<?php echo $col;?>"
 						<?php if($col == $list_data->order_by) echo 'selected';?>><?php echo $col;?></option>
 	<?php }?>
-</select> 
-					 <br /> <br />
-				<strong><?php
+</select> <br /> <br /> <strong><?php
 			translate ( "order_direction" );
 			?>
 	</strong> <select name="list_order_direction">
@@ -586,6 +590,21 @@ function openMenuImageSelectWindow(field) {
 			</div>
 		</div>
 
+		
+		<div id="tab-module" style="display: none;">
+			<h2 class="accordion-header"><?php translate("module");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("module");?></strong><br /> <select
+					name="module">
+					<option value="null"<?php if($module == null or empty($module)) echo " selected";?>>[<?php translate("none");?>]</option>
+				<?php foreach(ModuleHelper::getAllEmbedModules() as $module){?>
+				<option value="<?php echo $module;?>" <?php if($module == $row->module) echo " selected";?>><?php echo $module;?></option>
+				<?php }?>
+				</select>
+			</div>
+
+		</div>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
 		<div class="accordion-content">
@@ -697,13 +716,13 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 				href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"><?php translate("restore_older_version");?></a>]
 		</p>
 		<?php }?>	</div>
-		<div class="inPageMessage">
-			<div id="message_page_edit" class="inPageMessage"></div>
-			<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
-		</div>
+	<div class="inPageMessage">
+		<div id="message_page_edit" class="inPageMessage"></div>
+		<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
+	</div>
 
-		<input type="submit"
-			value="<?php
+	<input type="submit"
+		value="<?php
 			
 			echo TRANSLATION_SAVE_CHANGES;
 			?>">

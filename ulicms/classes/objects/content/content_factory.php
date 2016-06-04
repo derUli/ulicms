@@ -32,6 +32,9 @@ class ContentFactory {
 		} else if ($row->type == "link") {
 			$retval = new Link ();
 			$retval->loadByID ( $row->id );
+		}else if ($row->type == "module") {
+			$retval = new Module_page ();
+			$retval->loadByID ( $row->id );
 		}
 		
 		return $retval;

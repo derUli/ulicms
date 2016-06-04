@@ -621,4 +621,7 @@ define ( "TRANSLATION_DESC", "Absteigend" );
 // Inhaltstyp "Link"
 define ( "TRANSLATION_LINK", "Link" );
 
+// Inhaltstyp "Modul"
+define("TRANSLATION_MODULE", "Modul");
+
 add_hook ( "lang_de" );

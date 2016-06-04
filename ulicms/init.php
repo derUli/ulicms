@@ -147,6 +147,7 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "link.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "list_data.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "list.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "module_page.php";
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "banner.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "banners.php";
