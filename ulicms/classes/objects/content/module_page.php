@@ -246,4 +246,11 @@ class Module_Page extends Page {
 		$result = DB::query ( $sql ) or die ( DB::getLastError () );
 		return $result;
 	}
+	public function containsModule() {
+		$retval = false;
+		if ($this->module !== null and ! empty ( $this->module )) {
+			$retval = true;
+		}
+		return $retval;
+	}
 }
