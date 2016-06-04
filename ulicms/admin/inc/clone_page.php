@@ -61,7 +61,10 @@ if (defined ( "_SECURITY" )) {
 					for="type_list"><?php translate("list");?></label> <br /> <input
 					type="radio" name="type" value="link" id="type_link"
 					<?php if($row->type == "link"){ echo "checked";}?>> <label
-					for="type_link"><?php translate("link");?></label>
+					for="type_link"><?php translate("link");?></label> <br /> <input
+					type="radio" name="type" value="module" id="type_module"
+					<?php if($row->type == "module"){ echo "checked";}?>> <label
+					for="type_module"><?php translate("module");?></label>
 			</p>
 
 		</div>
@@ -454,6 +457,8 @@ function openMenuImageSelectWindow(field) {
 				?>" />
 						</div>
 <?php }?>
+				
+				
 				
 				
 				

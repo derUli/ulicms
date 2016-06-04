@@ -590,6 +590,8 @@ $(document).ready(function(){
   `og_type` varchar(255) DEFAULT '',
   `og_image` varchar(255) DEFAULT '',
   `og_description` varchar(255) DEFAULT '',
+  `module` varchar(200) default null,
+					
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" ) or die ( mysqli_error ( $connection ) );
 			
@@ -779,7 +781,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 			// Beispieldaten für die Banner Tabelle
 			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "banner` VALUES (1,'Content Management einfach gemacht mit UliCMS','http://www.ulicms.de','http://www.ulicms.de/content/images/banners/ulicms-banner.jpg',1,'gif','','de');" );
 			
-			 mysqli_query( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "lists` (
+			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "lists` (
   `content_id` int(11) NOT NULL,
   `language` varchar(50) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,

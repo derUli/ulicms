@@ -52,7 +52,9 @@ if (defined ( "_SECURITY" )) {
 					type="radio" name="type" value="list" id="type_list"> <label
 					for="type_list"><?php translate("list");?></label> <br /> <input
 					type="radio" name="type" value="link" id="type_link"> <label
-					for="type_link"><?php translate("link");?></label>
+					for="type_link"><?php translate("link");?></label> <br /> <input
+					type="radio" name="type" value="module" id="type_module"> <label
+					for="type_module"><?php translate("module");?></label>
 			</p>
 		</div>
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>

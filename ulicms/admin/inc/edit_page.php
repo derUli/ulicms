@@ -7,7 +7,7 @@ if (defined ( "_SECURITY" )) {
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE id='$page'" );
 		
 		$allThemes = getThemesList ();
-
+		
 		$cols = Database::getColumnNames ( "content" );
 		$groups = db_query ( "SELECT id, name from " . tbname ( "groups" ) );
 		while ( $row = db_fetch_object ( $query ) ) {
@@ -67,7 +67,10 @@ if (defined ( "_SECURITY" )) {
 					for="type_list"><?php translate("list");?></label> <br /> <input
 					type="radio" name="type" value="link" id="type_link"
 					<?php if($row->type == "link"){ echo "checked";}?>> <label
-					for="type_link"><?php translate("link");?></label>
+					for="type_link"><?php translate("link");?></label> <br /> <input
+					type="radio" name="type" value="module" id="type_module"
+					<?php if($row->type == "module"){ echo "checked";}?>> <label
+					for="type_module"><?php translate("module");?></label>
 			</p>
 
 		</div>
@@ -461,6 +464,10 @@ function openMenuImageSelectWindow(field) {
 						</div>
 <?php }?>
 				
+				
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -567,15 +574,12 @@ function openMenuImageSelectWindow(field) {
 	</select> <br /> <br /> <strong><?php
 			translate ( "order_by" );
 			?>
-	</strong> <br /> 
-	<select name="list_order_by">
+	</strong> <br /> <select name="list_order_by">
 	<?php foreach($cols as $col){?>
 	<option value="<?php echo $col;?>"
 						<?php if($col == $list_data->order_by) echo 'selected';?>><?php echo $col;?></option>
 	<?php }?>
-</select> 
-					 <br /> <br />
-				<strong><?php
+</select> <br /> <br /> <strong><?php
 			translate ( "order_direction" );
 			?>
 	</strong> <select name="list_order_direction">
@@ -697,13 +701,13 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 				href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"><?php translate("restore_older_version");?></a>]
 		</p>
 		<?php }?>	</div>
-		<div class="inPageMessage">
-			<div id="message_page_edit" class="inPageMessage"></div>
-			<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
-		</div>
+	<div class="inPageMessage">
+		<div id="message_page_edit" class="inPageMessage"></div>
+		<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
+	</div>
 
-		<input type="submit"
-			value="<?php
+	<input type="submit"
+		value="<?php
 			
 			echo TRANSLATION_SAVE_CHANGES;
 			?>">
