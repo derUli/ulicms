@@ -453,7 +453,7 @@ function openMenuImageSelectWindow(field) {
 				</select>
 			</div>
 		</div>
-		
+
 		<div id="tab-module" style="display: none;">
 			<h2 class="accordion-header"><?php translate("module");?></h2>
 
