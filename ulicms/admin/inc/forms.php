@@ -66,7 +66,6 @@ tr.odd input#form-submit-url {
 				onclick="this.select();"></td>
 			<td style="text-align: center;"><a
 				href="?action=forms_edit&id=<?php
-		
 		echo $form ["id"];
 		?>"><img src="gfx/edit.png" class="mobile-big-image"
 					alt="<?php
@@ -76,10 +75,9 @@ tr.odd input#form-submit-url {
 					title="<?php
 		
 		echo TRANSLATION_EDIT;
-		?>"></td>
+		?>"></a></td>
 			<td style="text-align: center;">
-				<form
-					action="?action=forms&del=<?php
+				<form action="?action=forms&del=<?php
 		
 		echo $form ["id"];
 		?>"
@@ -93,7 +91,7 @@ tr.odd input#form-submit-url {
 						title="<?php
 		
 		echo TRANSLATION_DELETE;
-                 ?>">
+		?>">
 				</form>
 			</td>
 		</tr>
@@ -117,6 +115,6 @@ var ajax_options = {
 
 $("form.delete-form").ajaxForm(ajax_options); 
 </script>
-<?php 
+<?php
 }
 ?>
