@@ -3,6 +3,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>[<?php Template::escape(Settings::get("homepage_title"));?>] - UliCMS</title>
 <link rel="stylesheet" type="text/css" href="css/blue.css" />
+<link rel="stylesheet" href="scripts/jstree/themes/default/style.min.css" />
 <?php
 $styles = array ();
 ?>
@@ -55,6 +56,7 @@ foreach ( $enq as $script ) {
 <?php combined_script_html();?>
 
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+<script type="text/javascript" src="scripts/jstree/jstree.min.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {

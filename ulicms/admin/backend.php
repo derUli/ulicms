@@ -250,6 +250,8 @@ if (! $eingeloggt) {
 		require_once "inc/add_audio.php";
 	} else if ($_GET ["action"] == "edit_audio") {
 		require_once "inc/edit_audio.php";
+	}  else if ($_GET ["action"] == "treeview") {
+		require_once "inc/treeview.php";
 	} 
 
 	else if (isset ( $actions [$_GET ["action"]] )) {
