@@ -2,4 +2,5 @@
 Neue Features
 + Inhaltstyp "Liste" hinzugefügt
 + Inhaltstyp "Link" hinzugefügt
++ Inhaltstyp "Modul" hinzugefügt
 + Klasse ModuleHelper hinzugefügt

@@ -17,7 +17,6 @@ Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "lists" ) . "` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
 
 Database::query ( "alter table " . tbname ( "content" ) . " add column `module` varchar(200) default null" );
-
 Database::query ( "update " . tbname ( "content" ) . " set `type` = 'link' where redirection is not null and redirection <> ''" );
 
 Settings::set ( "db_schema_version", "9.8.4" );

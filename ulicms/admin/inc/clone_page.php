@@ -55,7 +55,7 @@ if (defined ( "_SECURITY" )) {
 			<p>
 				<input type="radio" name="type" id="type_page" value="page"
 					<?php if($row->type == "page"){ echo "checked";}?>> <label
-					for="type_page"><?php translate("page");?></label> </br/> <input
+					for="type_page"><?php translate("page");?></label> <br /> <input
 					type="radio" name="type" value="list" id="type_list"
 					<?php if($row->type == "list"){ echo "checked";}?>> <label
 					for="type_list"><?php translate("list");?></label> <br /> <input
@@ -468,6 +468,14 @@ function openMenuImageSelectWindow(field) {
 				
 				
 				
+				
+				
+				
+				
+				
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -589,7 +597,23 @@ function openMenuImageSelectWindow(field) {
 				</select>
 			</div>
 		</div>
+		
+		
+		
+		<div id="tab-module" style="display: none;">
+			<h2 class="accordion-header"><?php translate("module");?></h2>
 
+			<div class="accordion-content">
+				<strong><?php translate("module");?></strong><br /> <select
+					name="module">
+					<option value="null">[<?php translate("none");?>]</option>
+				<?php foreach(ModuleHelper::getAllEmbedModules() as $module){?>
+				<option value="<?php echo $module;?>"><?php echo $module;?></option>
+				<?php }?>
+				</select>
+			</div>
+
+		</div>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
 		<div class="accordion-content">
