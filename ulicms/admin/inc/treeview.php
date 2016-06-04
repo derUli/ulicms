@@ -7,12 +7,19 @@ if (defined ( "_SECURITY" )) {
 		$menus = getAllMenus ( true );
 		sort ( $menus );
 		?>
-<h2>
+<div class="title-half"><h2>
 <?php
 		
 		translate ( "pages_treeview" );
 		?>
-</h2>
+</h2></div>
+<div class="align-right">
+	<a href="index.php?action=pages">[<?php translate("to_list_view");?>]</a>
+</div>
+<div class="notice clear">
+<?php translate("wip_notice");?>
+</div>
+
 <div id="treeview">
 	<ul>
 		<li data-jstree='{ "opened" : true }'><?php translate("website");?>

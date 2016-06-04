@@ -626,5 +626,10 @@ define("TRANSLATION_MODULE", "Modul");
 
 // Treeview
 define("TRANSLATION_PAGES_TREEVIEW", "Seiten (Baumansicht)");
+define("TRANSLATION_TO_TREEVIEW", "Zur Baumansicht");
+define("TRANSLATION_TO_LIST_VIEW", "Zur Listenansicht");
+
+
+define("TRANSLATION_WIP_NOTICE", "Bitte beachten Sie:<br/>Diese Funktion befindet sich noch in Entwicklung und ist noch nicht vollständig umgesetzt.");
 
 add_hook ( "lang_de" );

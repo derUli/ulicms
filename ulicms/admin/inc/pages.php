@@ -5,24 +5,31 @@ if (defined ( "_SECURITY" )) {
 	if ($acl->hasPermission ( "pages" )) {
 		
 		?>
-<h2>
+
+<div class="title-half">
+
+	<h2>
 <?php
 		
-		echo TRANSLATION_PAGES;
+		translate("pages");
 		?>
 </h2>
-<p>
+</div>
+<div class="align-right">
+	<a href="index.php?action=treeview">[<?php translate("to_treeview");?>]</a>
+</div>
+
+<div class="clear">
 <?php
 		
 		echo TRANSLATION_PAGES_INFOTEXT;
 		?>
-</p>
+</div>
 <p>
 	<a href="index.php?action=pages_new"><?php
 		
 		echo TRANSLATION_CREATE_PAGE;
-		?>
-	</a>
+		?></a>
 </p>
 
 <script type="text/javascript">

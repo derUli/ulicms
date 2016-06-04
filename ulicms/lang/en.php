@@ -628,12 +628,14 @@ define ( "TRANSLATION_DESC", "Descending" );
 // Inhaltstyp "Link"
 define ( "TRANSLATION_LINK", "Link" );
 
-
 // Inhaltstyp "Modul"
-define("TRANSLATION_MODULE", "Module");
-
+define ( "TRANSLATION_MODULE", "Module" );
 
 // Treeview
-define("TRANSLATION_PAGES_TREEVIEW", "Pages (Tree View)");
+define ( "TRANSLATION_PAGES_TREEVIEW", "Pages (Tree View)" );
+define ( "TRANSLATION_TO_TREEVIEW", "Open Tree View" );
+define ( "TRANSLATION_TO_LIST_VIEW", "Open List View" );
+
+define ( "TRANSLATION_WIP_NOTICE", "Please note:<br/>This Function is under construction.<br/>It's not completly implemented yet." );
 
 add_hook ( "lang_en" );
