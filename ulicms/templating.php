@@ -151,8 +151,9 @@ function get_type() {
 		$result = db_fetch_object ( $query );
 		$result = $result->type;
 	}
-	if (empty ( $result ))
+	if (empty ( $result )){
 		$result = "page";
+	}
 	return $result;
 }
 function get_category_id($page = null) {
