@@ -1615,14 +1615,15 @@ function getAllMenus($only_used = false) {
 
 // Check if site contains a module
 function containsModule($page = null, $module = false) {
-	if (is_null ( $page ))
+	if (is_null ( $page )){}
 		$page = get_requested_pagename ();
+}
 	
 	$query = db_query ( "SELECT content, module, `type` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
 	$dataset = db_fetch_assoc ( $query );
 	$content = $dataset ["content"];
 	$content = str_replace ( "&quot;", "\"", $content );
-	if (! is_null ( $dataset ["module"] ) and ! empty ( $dataset ["module"] ) and $dataset ["type"] == "module") {
+	if (! is_null ( $dataset ["module"] ) and ! empty ( $dataset ["module"] ) and $dataset ["type"] == "module" ) {
 		return true;
 	} else if ($module) {
 		return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
