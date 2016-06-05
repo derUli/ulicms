@@ -1623,12 +1623,15 @@ function containsModule($page = null, $module = false) {
 	$content = $dataset ["content"];
 	$content = str_replace ( "&quot;", "\"", $content );
 	if (! is_null ( $dataset ["module"] ) and ! empty ( $dataset ["module"] ) and $dataset ["type"] == "module") {
-		return true;
+		if (! $module or ($module and $dataset ["module"] == $module)) {
+			return true;
+		}
 	} else if ($module) {
 		return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
 	} else {
 		return preg_match ( "/\[module=\".+\"\]/", $content );
 	}
+	return false;
 }
 function page_has_html_file($page) {
 	$query = db_query ( "SELECT `html_file` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
