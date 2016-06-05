@@ -302,8 +302,9 @@ function get_signature($page = null) {
 	return "";
 }
 function delete_custom_data($var = null, $page = null) {
-	if (! $page)
+	if (! $page){
 		$page = get_requested_pagename ();
+	}
 	$data = get_custom_data ( $page );
 	if (is_null ( $data )) {
 		$data = array ();
@@ -343,10 +344,13 @@ function language_selection() {
 	echo "<ul class='language_selection'>";
 	while ( $row = db_fetch_object ( $query ) ) {
 		$domain = getDomainByLanguage ( $row->language_code );
-		if ($domain)
+		if ($domain){
 			echo "<li>" . "<a href='http://" . $domain . "'>" . $row->name . "</a></li>";
+		}
 		else
+		{
 			echo "<li>" . "<a href='./?language=" . $row->language_code . "'>" . $row->name . "</a></li>";
+		}
 	}
 	echo "</ul>";
 }
@@ -533,7 +537,6 @@ function import($ipage) {
 	} else {
 		$query = Database::query ( "SELECT content FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'" );
 	}
-	
 	if (db_num_rows ( $query ) == 0) {
 		return false;
 	} else {
@@ -552,7 +555,6 @@ function correctHTMLValidationErrors($txt) {
 	if (Settings::get ( "disable_html_validation" )) {
 		return $txt;
 	}
-	
 	// Ersetze & durch &amp;
 	$txt = preg_replace ( '/[&](?![A-Za-z]+[;])/', "&amp;", $txt );
 	
@@ -698,14 +700,18 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 			if ($containsCurrentItem)
 				$additional_classes .= "contains-current-page ";
 			
-			if (get_requested_pagename () != $row->systemname)
+			if (get_requested_pagename () != $row->systemname){
 				$html .= "  <li class='" . trim ( $additional_classes ) . "'>";
-			else
+			}
+			else{
 				$html .= "  <li class='menu_active_list_item" . rtrim ( $additional_classes ) . "'>";
-			if (! empty ( $row->alternate_title ))
+			}
+			if (! empty ( $row->alternate_title )){
 				$title = $row->alternate_title;
-			else
+			}
+			else{
 				$title = $row->title;
+			}
 			if (get_requested_pagename () != $row->systemname) {
 				$html .= "<a href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "' class='" . trim ( $additional_classes ) . "'>";
 			} else {
