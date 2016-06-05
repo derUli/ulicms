@@ -95,7 +95,7 @@ function get_og_data($systemname = "") {
 	
 	if (empty ( $systemname ))
 		$systemname = get_frontpage ();
-	$query = db_query ( "SELECT og_title, og_type, og_image, og_description FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
+	$query = Database::query ( "SELECT og_title, og_type, og_image, og_description FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $systemname ) . "' AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'" );
 	if (db_num_rows ( $query ) > 0) {
 		return db_fetch_assoc ( $query );
 	} else {
@@ -132,8 +132,8 @@ function get_ID() {
 		$page = get_requested_pagename ();
 	}
 	$result = null;
-	$sql = "SELECT `id` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
-	$query = db_query ( $sql );
+	$sql = "SELECT `id` FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$query = Database::query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
 		$result = $result->id;
@@ -145,8 +145,8 @@ function get_type() {
 		$page = get_requested_pagename ();
 	}
 	$result = "";
-	$sql = "SELECT `type` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
-	$query = db_query ( $sql );
+	$sql = "SELECT `type` FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$query = Database::query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
 		$result = $result->type;
@@ -160,8 +160,8 @@ function get_category_id($page = null) {
 		$page = get_requested_pagename ();
 	}
 	$result = null;
-	$sql = "SELECT `category` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
-	$query = db_query ( $sql );
+	$sql = "SELECT `category` FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$query = Database::query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
 		$result = $result->category;
@@ -176,8 +176,8 @@ function get_parent($page = null) {
 		$page = get_requested_pagename ();
 	}
 	$result = "";
-	$sql = "SELECT `parent` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
-	$query = db_query ( $sql );
+	$sql = "SELECT `parent` FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$query = Database::query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
 		$result = $result->parent;
@@ -191,8 +191,8 @@ function get_custom_data($page = null) {
 		$page = get_requested_pagename ();
 	}
 	
-	$sql = "SELECT `custom_data` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
-	$query = db_query ( $sql );
+	$sql = "SELECT `custom_data` FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$query = Database::query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
 		return json_decode ( $result->custom_data, true );
@@ -224,8 +224,8 @@ function get_access($page = null) {
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
-	$sql = "SELECT `access` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
-	$query = db_query ( $sql );
+	$sql = "SELECT `access` FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$query = Database::query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
 		$access = explode ( ",", $result->access );
@@ -237,8 +237,8 @@ function get_redirection($page = null) {
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
-	$sql = "SELECT `redirection` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "' and type='link'";
-	$query = db_query ( $sql );
+	$sql = "SELECT `redirection` FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "' and type='link'";
+	$query = Database::query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
 		if (! empty ( $result->redirection ) and ! is_null ( $result->redirection )) {
@@ -259,8 +259,8 @@ function get_theme($page = null) {
 	}
 	
 	if (is_200 ()) {
-		$sql = "SELECT `theme` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
-		$query = db_query ( $sql );
+		$sql = "SELECT `theme` FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+		$query = Database::query ( $sql );
 		if ($query and db_num_rows ( $query ) > 0) {
 			$data = db_fetch_object ( $query );
 			if (isset ( $data->theme ) and ! empty ( $data->theme ) and ! is_null ( $data->theme )) {
@@ -292,8 +292,8 @@ function get_signature($page = null) {
 		return "";
 	}
 	
-	$sql = "SELECT `signature` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
-	$query = db_query ( $sql );
+	$sql = "SELECT `signature` FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$query = Database::query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$data = db_fetch_object ( $query );
 		return $data->signature;
@@ -321,7 +321,7 @@ else {
 	
 	$json = json_encode ( $data );
 	
-	return db_query ( "UPDATE " . tbname ( "content" ) . " SET custom_data = '" . db_escape ( $json ) . "' WHERE systemname='" . db_escape ( $page ) . "'" );
+	return Database::query ( "UPDATE " . tbname ( "content" ) . " SET custom_data = '" . Database::escapeValue ( $json ) . "' WHERE systemname='" . Database::escapeValue ( $page ) . "'" );
 }
 function set_custom_data($var, $value, $page = null) {
 	if (! $page) {
@@ -336,10 +336,10 @@ function set_custom_data($var, $value, $page = null) {
 	$data [$var] = $value;
 	$json = json_encode ( $data );
 	
-	return db_query ( "UPDATE " . tbname ( "content" ) . " SET custom_data = '" . db_escape ( $json ) . "' WHERE systemname='" . db_escape ( $page ) . "'" );
+	return Database::query ( "UPDATE " . tbname ( "content" ) . " SET custom_data = '" . Database::escapeValue ( $json ) . "' WHERE systemname='" . Database::escapeValue ( $page ) . "'" );
 }
 function language_selection() {
-	$query = db_query ( "SELECT * FROM " . tbname ( "languages" ) . " ORDER by name" );
+	$query = Database::query ( "SELECT * FROM " . tbname ( "languages" ) . " ORDER by name" );
 	echo "<ul class='language_selection'>";
 	while ( $row = db_fetch_object ( $query ) ) {
 		$domain = getDomainByLanguage ( $row->language_code );
@@ -400,7 +400,7 @@ function poweredByUliCMS() {
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner() {
-	$query = db_query ( "SELECT * FROM " . tbname ( "banner" ) . " WHERE language='all' OR language='" . db_escape ( $_SESSION ["language"] ) . "'ORDER BY RAND() LIMIT 1" );
+	$query = Database::query ( "SELECT * FROM " . tbname ( "banner" ) . " WHERE language='all' OR language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'ORDER BY RAND() LIMIT 1" );
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
 			$type = "gif";
@@ -453,8 +453,8 @@ function homepage_title() {
 $status = check_status ();
 function meta_keywords($ipage = null) {
 	$status = check_status ();
-	$ipage = db_escape ( $_GET ["seite"] );
-	$query = db_query ( "SELECT meta_keywords FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
+	$ipage = Database::escapeValue ( $_GET ["seite"] );
+	$query = Database::query ( "SELECT meta_keywords FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'" );
 	
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
@@ -472,10 +472,10 @@ function meta_keywords($ipage = null) {
 }
 function meta_description($ipage = null) {
 	$status = check_status ();
-	$ipage = db_escape ( $_GET ["seite"] );
-	$query = db_query ( "SELECT meta_description FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'", $connection );
+	$ipage = Database::escapeValue ( $_GET ["seite"] );
+	$query = Database::query ( "SELECT meta_description FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'", $connection );
 	if ($ipage == "") {
-		$query = db_query ( "SELECT meta_description FROM " . tbname ( "content" ) . " ORDER BY id LIMIT 1", $connection );
+		$query = Database::query ( "SELECT meta_description FROM " . tbname ( "content" ) . " ORDER BY id LIMIT 1", $connection );
 	}
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
@@ -499,10 +499,10 @@ function get_title($ipage = null, $headline = false) {
 		return TRANSLATION_FORBIDDEN;
 	}
 	
-	$ipage = db_escape ( $_GET ["seite"] );
-	$query = db_query ( "SELECT alternate_title, title FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'", $connection );
+	$ipage = Database::escapeValue ( $_GET ["seite"] );
+	$query = Database::query ( "SELECT alternate_title, title FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'", $connection );
 	if ($ipage == "") {
-		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " ORDER BY id LIMIT 1" );
+		$query = Database::query ( "SELECT * FROM " . tbname ( "content" ) . " ORDER BY id LIMIT 1" );
 	}
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
@@ -527,11 +527,11 @@ function headline($ipage = null) {
 	echo stringHelper::real_htmlspecialchars ( get_headline ( $ipage ) );
 }
 function import($ipage) {
-	$ipage = db_escape ( $ipage );
+	$ipage = Database::escapeValue ( $ipage );
 	if ($ipage == "") {
-		$query = db_query ( "SELECT content FROM " . tbname ( "content" ) . " WHERE language='" . db_escape ( $_SESSION ["language"] ) . "' ORDER BY id LIMIT 1" );
+		$query = Database::query ( "SELECT content FROM " . tbname ( "content" ) . " WHERE language='" . Database::escapeValue ( $_SESSION ["language"] ) . "' ORDER BY id LIMIT 1" );
 	} else {
-		$query = db_query ( "SELECT content FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
+		$query = Database::query ( "SELECT content FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'" );
 	}
 	
 	if (db_num_rows ( $query ) == 0) {
@@ -609,7 +609,7 @@ function get_frontpage() {
 	return Settings::get ( "frontpage" );
 }
 function get_requested_pagename() {
-	$value = db_escape ( $_GET ["seite"] );
+	$value = Database::escapeValue ( $_GET ["seite"] );
 	if ($value == "") {
 		$value = get_frontpage ();
 	}
@@ -644,7 +644,7 @@ function parent_item_contains_current_page($id) {
 	$id = intval ( $id );
 	$language = $_SESSION ["language"];
 	$sql = "SELECT id, systemname, parent FROM " . tbname ( "content" ) . " WHERE language = '$language' AND active = 1 AND `deleted_at` IS NULL";
-	$r = db_query ( $sql );
+	$r = Database::query ( $sql );
 	
 	$data = array ();
 	while ( $row = db_fetch_assoc ( $r ) ) {
@@ -661,7 +661,7 @@ function parent_item_contains_current_page($id) {
 }
 function get_menu($name = "top", $parent = null, $recursive = true, $order = "position") {
 	$html = "";
-	$name = db_escape ( $name );
+	$name = Database::escapeValue ( $name );
 	$language = $_SESSION ["language"];
 	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent ";
 	
@@ -671,7 +671,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 		$sql .= " = " . intval ( $parent ) . " ";
 	}
 	$sql .= " ORDER by " . $order;
-	$query = db_query ( $sql );
+	$query = Database::query ( $sql );
 	
 	if (db_num_rows ( $query ) == 0) {
 		return $html;
@@ -902,7 +902,7 @@ function autor() {
 function get_autor() {
 	$seite = $_GET ["seite"];
 	if (empty ( $seite )) {
-		$query = db_query ( "SELECT systemname FROM " . tbname ( "content" ) . " ORDER BY id LIMIT 1" );
+		$query = Database::query ( "SELECT systemname FROM " . tbname ( "content" ) . " ORDER BY id LIMIT 1" );
 		$result = db_fetch_object ( $query );
 		$seite = $result->systemname;
 	}
@@ -911,7 +911,7 @@ function get_autor() {
 		return;
 	}
 	
-	$query = db_query ( "SELECT systemname, autor FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $seite ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'", $connection );
+	$query = Database::query ( "SELECT systemname, autor FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $seite ) . "' AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'", $connection );
 	if (db_num_rows ( $query ) < 1) {
 		return;
 	}
@@ -919,7 +919,7 @@ function get_autor() {
 	if ($result ["systemname"] == "kontakt" || $result ["systemname"] == "impressum" || StartsWith ( $result ["systemname"], "menu_" )) {
 		return;
 	}
-	$query2 = db_query ( "SELECT firstname, lastname, username FROM " . tbname ( "users" ) . " WHERE id=" . $result ["autor"], $connection );
+	$query2 = Database::query ( "SELECT firstname, lastname, username FROM " . tbname ( "users" ) . " WHERE id=" . $result ["autor"], $connection );
 	$result2 = db_fetch_array ( $query2 );
 	if (db_num_rows ( $query2 ) == 0) {
 		return;
@@ -938,9 +938,10 @@ function get_page($systemname = "") {
 		$systemname = $_GET ["seite"];
 	}
 	
-	if (empty ( $systemname ))
+	if (empty ( $systemname )){
 		$systemname = get_frontpage ();
-	$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
+	}
+	$query = Database::query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname='" . Database::escapeValue ( $systemname ) . "' AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'" );
 	if (db_num_rows ( $query ) > 0) {
 		return db_fetch_assoc ( $query );
 	} else {
@@ -967,7 +968,7 @@ function content() {
 	}
 	
 	if (! is_logged_in ()) {
-		db_query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . Database::escapeValue($_GET ["seite"]) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
+		Database::query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . Database::escapeValue($_GET ["seite"]) . "' AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'" );
 	}
 	return import ( $_GET ["seite"] );
 }
@@ -1017,8 +1018,9 @@ function check_status() {
 		header ( "HTTP/1.1 304 Not Modified" );
 		exit ();
 	}
-	if (! empty ( $status ))
+	if (! empty ( $status )){
 		return $status;
+	}
 	if (file_exists ( $cached_page_path ) and ! is_logged_in ()) {
 		$last_modified = filemtime ( $cached_page_path );
 		if (time () - $last_modified < CACHE_PERIOD) {
