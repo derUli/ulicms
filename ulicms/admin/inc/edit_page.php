@@ -13,6 +13,9 @@ if (defined ( "_SECURITY" )) {
 		
 		$sql = "SELECT id, name FROM " . tbname ( "videos" );
 		$videos = Database::query ( $sql );
+
+		$sql = "SELECT id, name FROM " . tbname ( "audio" );
+		$audios = Database::query ( $sql );
 		
 		while ( $row = db_fetch_object ( $query ) ) {
 			$list_data = new List_Data ( $row->id );
@@ -650,7 +653,22 @@ function openMenuImageSelectWindow(field) {
 			</div>
 
 		</div>
+<div id="tab-audio" style="display: none;">
+			<h2 class="accordion-header"><?php translate("audio");?></h2>
 
+			<div class="accordion-content">
+				<strong><?php translate("audio");?></strong><br /> <select
+					name="audio">
+					<option value=""
+						<?php if($row->audio == null or empty($row->audio)) echo " selected";?>>[<?php translate("none");?>]</option>
+				<?php while($row5 = Database::fetchObject($audios)){?>
+				<option value="<?php echo $row5->id;?>"
+						<?php if($row5->id == $row->audio) echo " selected";?>><?php Template::escape($row5->name);?> (ID: <?php echo $row5->id;?>)</option>
+				<?php }?>
+				</select>
+			</div>
+
+		</div>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
 		<div class="accordion-content">

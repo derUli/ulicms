@@ -3,4 +3,6 @@ Neue Features
 + Inhaltstyp "Liste" hinzugefügt
 + Inhaltstyp "Link" hinzugefügt
 + Inhaltstyp "Modul" hinzugefügt
++ Inhalstyp "Audio" hinzugefügt
++ Inhaltstyp "Video" hinzugefügt
 + Klasse ModuleHelper hinzugefügt
