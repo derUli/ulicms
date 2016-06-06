@@ -6,6 +6,9 @@ if (defined ( "_SECURITY" )) {
 		
 		$allThemes = getThemesList ();
 		$cols = Database::getColumnNames ( "content" );
+		$sql = "SELECT id, name FROM " . tbname ( "videos" );
+		$videos = Database::query ( $sql );
+		
 		?>
 <form id="pageform" name="newpageform" action="index.php?action=pages"
 	method="post">
@@ -54,7 +57,11 @@ if (defined ( "_SECURITY" )) {
 					type="radio" name="type" value="link" id="type_link"> <label
 					for="type_link"><?php translate("link");?></label> <br /> <input
 					type="radio" name="type" value="module" id="type_module"> <label
-					for="type_module"><?php translate("module");?></label>
+					for="type_module"><?php translate("module");?></label> <br /> <input
+					type="radio" name="type" value="video" id="type_video"> <label
+					for="type_video"><?php translate("video");?></label> <br /> <input
+					type="radio" name="type" value="audio" id="type_audio"> <label
+					for="type_audio"><?php translate("audio");?></label>
 			</p>
 		</div>
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
@@ -463,6 +470,20 @@ function openMenuImageSelectWindow(field) {
 					<option value="null">[<?php translate("none");?>]</option>
 				<?php foreach(ModuleHelper::getAllEmbedModules() as $module){?>
 				<option value="<?php echo $module;?>"><?php echo $module;?></option>
+				<?php }?>
+				</select>
+			</div>
+
+		</div>
+		<div id="tab-video" style="display: none;">
+			<h2 class="accordion-header"><?php translate("video");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("video");?></strong><br /> <select
+					name="video">
+					<option value="">[<?php translate("none");?>]</option>
+				<?php while($row = Database::fetchObject($videos)){?>
+				<option value="<?php echo $row->id;?>"><?php Template::escape($row->name);?> (ID: <?php echo $row->id;?>)</option>
 				<?php }?>
 				</select>
 			</div>

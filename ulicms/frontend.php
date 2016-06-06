@@ -234,6 +234,12 @@ if ($html_file) {
 				echo replaceShortcodesWithModules ( "[module=\"" . $page ["module"] . "\"]" );
 			}
 			break;
+		case "video" :
+			$page = get_page ();
+			if ($page ["video"] != null and strlen ( $page ["video"] ) > 0) {
+				echo replaceVideoTags ( "[video id=" . $page ["video"] . "]" );
+			}
+			break;
 	}
 	
 	add_hook ( "after_content" );

@@ -624,4 +624,7 @@ define ( "TRANSLATION_LINK", "Link" );
 // Inhaltstyp "Modul"
 define("TRANSLATION_MODULE", "Modul");
 
+// Inhaltstyp "Video"
+define ( "TRANSLATION_VIDEO", "Video" );
+
 add_hook ( "lang_de" );

@@ -10,6 +10,10 @@ if (defined ( "_SECURITY" )) {
 		
 		$cols = Database::getColumnNames ( "content" );
 		$groups = db_query ( "SELECT id, name from " . tbname ( "groups" ) );
+		
+		$sql = "SELECT id, name FROM " . tbname ( "videos" );
+		$videos = Database::query ( $sql );
+		
 		while ( $row = db_fetch_object ( $query ) ) {
 			$list_data = new List_Data ( $row->id );
 			?>
@@ -70,7 +74,14 @@ if (defined ( "_SECURITY" )) {
 					for="type_link"><?php translate("link");?></label> <br /> <input
 					type="radio" name="type" value="module" id="type_module"
 					<?php if($row->type == "module"){ echo "checked";}?>> <label
-					for="type_module"><?php translate("module");?></label>
+					for="type_module"><?php translate("module");?></label> <br /> <input
+					type="radio" name="type" value="video" id="type_video"
+					<?php if($row->type == "video"){ echo "checked";}?>> <label
+					for="type_video"><?php translate("video");?></label> <br /> <input
+					type="radio" name="type" value="audio" id="type_audio"
+					<?php if($row->type == "audio"){ echo "checked";}?>> <label
+					for="type_audio"><?php translate("audio");?></label>
+
 			</p>
 
 		</div>
@@ -478,6 +489,12 @@ function openMenuImageSelectWindow(field) {
 				
 				
 				
+				
+				
+				
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -617,6 +634,23 @@ function openMenuImageSelectWindow(field) {
 			</div>
 
 		</div>
+		<div id="tab-video" style="display: none;">
+			<h2 class="accordion-header"><?php translate("video");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("video");?></strong><br /> <select
+					name="video">
+					<option value=""
+						<?php if($row->video == null or empty($row->video)) echo " selected";?>>[<?php translate("none");?>]</option>
+				<?php while($row5 = Database::fetchObject($videos)){?>
+				<option value="<?php echo $row5->id;?>"
+						<?php if($row5->id == $row->video) echo " selected";?>><?php Template::escape($row5->name);?> (ID: <?php echo $row5->id;?>)</option>
+				<?php }?>
+				</select>
+			</div>
+
+		</div>
+
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
 		<div class="accordion-content">
