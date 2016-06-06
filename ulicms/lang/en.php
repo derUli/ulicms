@@ -628,8 +628,15 @@ define ( "TRANSLATION_DESC", "Descending" );
 // Inhaltstyp "Link"
 define ( "TRANSLATION_LINK", "Link" );
 
-
 // Inhaltstyp "Modul"
-define("TRANSLATION_MODULE", "Module");
+define ( "TRANSLATION_MODULE", "Module" );
+
+// Inhaltstyp "Video"
+define ( "TRANSLATION_VIDEO", "Video" );
+
+// Position
+define ( "TRANSLATION_POSITION_OF_DESCRIPTION", "Position of Description" );
+define ( "TRANSLATION_DESCRIPTION_BEFORE_CONTENT", "Show description text before content" );
+define ( "TRANSLATION_DESCRIPTION_AFTER_CONTENT", "Show description text after content" );
 
 add_hook ( "lang_en" );

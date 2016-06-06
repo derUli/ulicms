@@ -1,5 +1,32 @@
 <?php
 class Template {
+	public static function outputContentElement() {
+		$type = get_type ();
+		switch ($type) {
+			case "list" :
+				echo Template::executeDefaultOrOwnTemplate ( "list" );
+				break;
+			case "module" :
+				$page = get_page ();
+				if ($page ["module"] != null and strlen ( $page ["module"] ) > 0) {
+					no_cache ();
+					echo replaceShortcodesWithModules ( "[module=\"" . $page ["module"] . "\"]" );
+				}
+				break;
+			case "video" :
+				$page = get_page ();
+				if ($page ["video"] != null and strlen ( $page ["video"] ) > 0) {
+					echo replaceVideoTags ( "[video id=" . $page ["video"] . "]" );
+				}
+				break;
+			case "audio" :
+				$page = get_page ();
+				if ($page ["audio"] != null and strlen ( $page ["audio"] ) > 0) {
+					echo replaceAudioTags ( "[audio id=" . $page ["audio"] . "]" );
+				}
+				break;
+		}
+	}
 	public static function poweredByUliCMS() {
 		translation ( "POWERED_BY_ULICMS" );
 	}

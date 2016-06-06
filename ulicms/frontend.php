@@ -221,19 +221,16 @@ if ($html_file) {
 } else {
 	require_once getTemplateDirPath ( $theme ) . "oben.php";
 	add_hook ( "before_content" );
+	$text_position = get_text_position ();
+	
+	if($text_position == "after"){
+		Template::outputContentElement ();
+	}
+	
 	content ();
-	$type = get_type ();
-	switch ($type) {
-		case "list" :
-			echo Template::executeDefaultOrOwnTemplate ( "list" );
-			break;
-		case "module" :
-			$page = get_page ();
-			if ($page ["module"] != null and strlen ( $page ["module"] ) > 0) {
-				no_cache ();
-				echo replaceShortcodesWithModules ( "[module=\"" . $page ["module"] . "\"]" );
-			}
-			break;
+	
+	if($text_position == "before"){
+		Template::outputContentElement ();
 	}
 	
 	add_hook ( "after_content" );

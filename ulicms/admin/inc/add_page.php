@@ -6,6 +6,12 @@ if (defined ( "_SECURITY" )) {
 		
 		$allThemes = getThemesList ();
 		$cols = Database::getColumnNames ( "content" );
+		$sql = "SELECT id, name FROM " . tbname ( "videos" );
+		$videos = Database::query ( $sql );
+		
+		$sql = "SELECT id, name FROM " . tbname ( "audio" );
+		$audios = Database::query ( $sql );
+		
 		?>
 <form id="pageform" name="newpageform" action="index.php?action=pages"
 	method="post">
@@ -54,7 +60,11 @@ if (defined ( "_SECURITY" )) {
 					type="radio" name="type" value="link" id="type_link"> <label
 					for="type_link"><?php translate("link");?></label> <br /> <input
 					type="radio" name="type" value="module" id="type_module"> <label
-					for="type_module"><?php translate("module");?></label>
+					for="type_module"><?php translate("module");?></label> <br /> <input
+					type="radio" name="type" value="video" id="type_video"> <label
+					for="type_video"><?php translate("video");?></label> <br /> <input
+					type="radio" name="type" value="audio" id="type_audio"> <label
+					for="type_audio"><?php translate("audio");?></label>
 			</p>
 		</div>
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
@@ -467,6 +477,46 @@ function openMenuImageSelectWindow(field) {
 				</select>
 			</div>
 
+		</div>
+		<div id="tab-video" style="display: none;">
+			<h2 class="accordion-header"><?php translate("video");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("video");?></strong><br /> <select
+					name="video">
+					<option value="">[<?php translate("none");?>]</option>
+				<?php while($row = Database::fetchObject($videos)){?>
+				<option value="<?php echo $row->id;?>"><?php Template::escape($row->name);?> (ID: <?php echo $row->id;?>)</option>
+				<?php }?>
+				</select>
+			</div>
+
+		</div>
+		<div id="tab-audio" style="display: none;">
+			<h2 class="accordion-header"><?php translate("audio");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("audio");?></strong><br /> <select
+					name="audio">
+					<option value="">[<?php translate("none");?>]</option>
+				<?php while($row = Database::fetchObject($audios)){?>
+				<option value="<?php echo $row->id;?>"><?php Template::escape($row->name);?> (ID: <?php echo $row->id;?>)</option>
+				<?php }?>
+				</select>
+			</div>
+
+		</div>
+
+		<div id="tab-text-position" style="display: none">
+			<h2 class="accordion-header"><?php translate("position_of_description");?></h2>
+			<div class="accordion-content">
+				<strong><?php translate("position_of_description");?>
+					</strong> <br /> <select name="text_position">
+					<option value="before"><?php translate("description_before_content")?></option>
+					<option value="after"><?php translate("description_after_content")?></option>
+				</select>
+
+			</div>
 		</div>
 
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>

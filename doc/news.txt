@@ -3,4 +3,7 @@ Neue Features
 + Inhaltstyp "Liste" hinzugefügt
 + Inhaltstyp "Link" hinzugefügt
 + Inhaltstyp "Modul" hinzugefügt
++ Inhaltstyp "Audio" hinzugefügt
++ Inhaltstyp "Video" hinzugefügt
++ Tab "Position der Beschreibung" hinzugefügt
 + Klasse ModuleHelper hinzugefügt

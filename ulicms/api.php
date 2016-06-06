@@ -342,7 +342,9 @@ function get_available_post_types() {
 			"page",
 			"list",
 			"link",
-			"module" 
+			"module",
+			"video",
+			"audio"
 	);
 	add_hook ( $post_types );
 	
