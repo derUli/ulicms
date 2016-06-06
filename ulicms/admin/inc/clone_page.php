@@ -11,7 +11,7 @@ if (defined ( "_SECURITY" )) {
 		
 		$sql = "SELECT id, name FROM " . tbname ( "videos" );
 		$videos = Database::query ( $sql );
-
+		
 		$sql = "SELECT id, name FROM " . tbname ( "audio" );
 		$audios = Database::query ( $sql );
 		
@@ -497,6 +497,10 @@ function openMenuImageSelectWindow(field) {
 				
 				
 				
+				
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -651,7 +655,7 @@ function openMenuImageSelectWindow(field) {
 				</select>
 			</div>
 		</div>
-		
+
 		<div id="tab-audio" style="display: none;">
 			<h2 class="accordion-header"><?php translate("audio");?></h2>
 
@@ -668,7 +672,21 @@ function openMenuImageSelectWindow(field) {
 			</div>
 
 		</div>
-		
+		<div id="tab-text-position" style="display: none">
+			<h2 class="accordion-header"><?php translate("position_of_description");?></h2>
+			<div class="accordion-content">
+				<strong><?php translate("position_of_description");?>
+					</strong> <br /> <select name="text_position">
+					<option value="before"
+						<?php if($row->text_position == "before") echo "selected";?>><?php translate("description_before_content")?></option>
+					<option value="after"
+						<?php if($row->text_position == "after") echo "selected";?>><?php translate("description_after_content")?></option>
+				</select>
+
+			</div>
+		</div>
+
+
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
 		<div class="accordion-content">

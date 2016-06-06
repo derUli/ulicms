@@ -221,8 +221,17 @@ if ($html_file) {
 } else {
 	require_once getTemplateDirPath ( $theme ) . "oben.php";
 	add_hook ( "before_content" );
+	$text_position = get_text_position ();
+	
+	if($text_position == "after"){
+		Template::outputContentElement ();
+	}
+	
 	content ();
-	Template::outputContentElement ();
+	
+	if($text_position == "before"){
+		Template::outputContentElement ();
+	}
 	
 	add_hook ( "after_content" );
 	

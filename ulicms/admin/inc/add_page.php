@@ -506,6 +506,19 @@ function openMenuImageSelectWindow(field) {
 			</div>
 
 		</div>
+
+		<div id="tab-text-position" style="display: none">
+			<h2 class="accordion-header"><?php translate("position_of_description");?></h2>
+			<div class="accordion-content">
+				<strong><?php translate("position_of_description");?>
+					</strong> <br /> <select name="text_position">
+					<option value="before"><?php translate("description_before_content")?></option>
+					<option value="after"><?php translate("description_after_content")?></option>
+				</select>
+
+			</div>
+		</div>
+
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
 		<div class="accordion-content">

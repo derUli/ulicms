@@ -8,6 +8,7 @@ function showAndHideFieldsByType() {
 		$("#tab-module").slideUp();
 		$("#tab-video").slideUp();
 		$("#tab-audio").slideUp();
+		$("#tab-text-position").slideDown();
 	} else if ($("#type_link").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideDown();
@@ -17,6 +18,7 @@ function showAndHideFieldsByType() {
 		$("#tab-module").slideUp();
 		$("#tab-video").slideUp();
 		$("#tab-audio").slideUp();
+		$("#tab-text-position").slideUp();
 	} else if ($("#type_module").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
@@ -26,6 +28,7 @@ function showAndHideFieldsByType() {
 		$("#tab-module").slideDown();
 		$("#tab-video").slideUp();
 		$("#tab-audio").slideUp();
+		$("#tab-text-position").slideDown();
 	} else if ($("#type_video").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
@@ -35,6 +38,7 @@ function showAndHideFieldsByType() {
 		$("#tab-module").slideUp();
 		$("#tab-video").slideDown();
 		$("#tab-audio").slideUp();
+		$("#tab-text-position").slideDown();
 	} else if ($("#type_audio").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
@@ -44,6 +48,7 @@ function showAndHideFieldsByType() {
 		$("#tab-module").slideUp();
 		$("#tab-video").slideUp();
 		$("#tab-audio").slideDown();
+		$("#tab-text-position").slideDown();
 	} else {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
@@ -53,6 +58,7 @@ function showAndHideFieldsByType() {
 		$("#tab-module").slideUp();
 		$("#tab-video").slideUp();
 		$("#tab-audio").slideUp();
+		$("#tab-text-position").slideUp();
 	}
 }
 

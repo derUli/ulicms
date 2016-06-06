@@ -593,6 +593,8 @@ $(document).ready(function(){
   `module` varchar(200) default null,
   `video` int(11) default null,
   `audio` int(11) default null,
+  `text_position` varchar(10) default 'before',
+					
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" ) or die ( mysqli_error ( $connection ) );
 			

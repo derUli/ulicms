@@ -19,6 +19,7 @@ Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "lists" ) . "` (
 Database::query ( "alter table " . tbname ( "content" ) . " add column `module` varchar(200) default null" );
 Database::query ( "alter table " . tbname ( "content" ) . " add column `video` int(11) default null" );
 Database::query ( "alter table " . tbname ( "content" ) . " add column `audio` int(11) default null" );
+Database::query ( "alter table " . tbname ( "content" ) . " add column `text_position` varchar(10) default 'before'" );
 
 Database::query ( "update " . tbname ( "content" ) . " set `type` = 'link' where redirection is not null and redirection <> ''" );
 

@@ -5,4 +5,5 @@ Neue Features
 + Inhaltstyp "Modul" hinzugefügt
 + Inhalstyp "Audio" hinzugefügt
 + Inhaltstyp "Video" hinzugefügt
++ Tab "Position der Beschreibung" hinzugefügt
 + Klasse ModuleHelper hinzugefügt

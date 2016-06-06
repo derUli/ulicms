@@ -627,4 +627,9 @@ define("TRANSLATION_MODULE", "Modul");
 // Inhaltstyp "Video"
 define ( "TRANSLATION_VIDEO", "Video" );
 
+// Position
+define ( "TRANSLATION_POSITION_OF_DESCRIPTION", "Position der Beschreibung" );
+define ( "TRANSLATION_DESCRIPTION_BEFORE_CONTENT", "Beschreibungstext vor Inhalt anzeigen" );
+define ( "TRANSLATION_DESCRIPTION_AFTER_CONTENT", "Beschreibungstext nach Inhalt anzeigen" );
+
 add_hook ( "lang_de" );
