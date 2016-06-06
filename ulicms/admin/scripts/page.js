@@ -29,8 +29,8 @@ function showAndHideFieldsByType() {
 	} else if ($("#type_video").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
-		$("#tab-metadata").slideUp();
-		$("#tab-og").slideUp();
+		$("#tab-metadata").slideDown();
+		$("#tab-og").slideDown();
 		$("#content-editor").slideDown();
 		$("#tab-module").slideUp();
 		$("#tab-video").slideDown();
@@ -38,8 +38,8 @@ function showAndHideFieldsByType() {
 	} else if ($("#type_audio").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
-		$("#tab-metadata").slideUp();
-		$("#tab-og").slideUp();
+		$("#tab-metadata").slideDown();
+		$("#tab-og").slideDown();
 		$("#content-editor").slideDown();
 		$("#tab-module").slideUp();
 		$("#tab-video").slideUp();
