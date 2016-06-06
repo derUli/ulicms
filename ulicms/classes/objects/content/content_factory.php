@@ -32,8 +32,14 @@ class ContentFactory {
 		} else if ($row->type == "link") {
 			$retval = new Link ();
 			$retval->loadByID ( $row->id );
-		}else if ($row->type == "module") {
+		} else if ($row->type == "module") {
 			$retval = new Module_page ();
+			$retval->loadByID ( $row->id );
+		} else if ($row->type == "video") {
+			$retval = new Video_Page ();
+			$retval->loadByID ( $row->id );
+		} else if ($row->type == "audio") {
+			$retval = new Audio_Page ();
 			$retval->loadByID ( $row->id );
 		}
 		
