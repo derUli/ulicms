@@ -130,7 +130,8 @@ if (defined ( "_SECURITY" )) {
 		?>
 	</strong> <span style="cursor: help;"
 				onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
-				type="text" required="true" name="position" value="0">
+				type="number" required="true" name="position" value="0" min="0"
+				step="1">
 			<div id="position_help" class="help" style="display: none">
 	<?php
 		
@@ -460,7 +461,9 @@ function openMenuImageSelectWindow(field) {
 	</strong> <select name="list_order_direction">
 					<option value="asc"><?php translate("asc");?></option>
 					<option value="desc"><?php translate("desc");?></option>
-				</select>
+				</select> <br /> <br /> <strong><?php translate("limit");?></strong>
+				<input type="number" min="0" name="limit" step="1" value="0">
+
 			</div>
 		</div>
 

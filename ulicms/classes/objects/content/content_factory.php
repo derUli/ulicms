@@ -74,7 +74,7 @@ class ContentFactory {
 		}
 		return $result;
 	}
-	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc") {
+	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc", $limit = null) {
 		$result = array ();
 		$sql = "select id, `type` from " . tbname ( "content" ) . " where 1=1 and ";
 		if ($language !== null and $language !== "") {
@@ -102,6 +102,10 @@ class ContentFactory {
 		}
 		
 		$sql .= " 1=1 order by $order_by $order_direction";
+		
+		if (! is_null ( $limit ) and $limit > 0) {
+			$sql .= " limit " . $limit;
+		}
 		
 		$query = Database::query ( $sql ) or die ( Database::error () );
 		

@@ -625,6 +625,8 @@ define ( "TRANSLATION_ORDER_DIRECTION", "Order direction" );
 define ( "TRANSLATION_ASC", "Ascending" );
 define ( "TRANSLATION_DESC", "Descending" );
 
+define ( "TRANSLATION_LIMIT", "Limit" );
+
 // Inhaltstyp "Link"
 define ( "TRANSLATION_LINK", "Link" );
 
