@@ -8,7 +8,7 @@ Neue Features
 + Inhaltstyp "Video" hinzugefügt
 + Tab "Position der Beschreibung" hinzugefügt
 + Klasse ModuleHelper hinzugefügt
-+ post-install Scripts können nun manuell ausgeführt werden.
++ post-install Scripts können nun auch manuell ausgeführt werden.
 
 Änderungen
 # Feld "Position" ist jetzt ein HTML5 Number Feld
