@@ -7,13 +7,14 @@ class List_Data extends Content {
 	public $parent_id = null;
 	public $order_by = "title";
 	public $order_direction = "asc";
+	public $limit = null;
 	public function __construct($id = null) {
 		if ($id !== null) {
 			$this->loadByID ( $id );
 		}
 	}
 	public function filter() {
-		return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction );
+		return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction, $this->limit );
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
@@ -35,6 +36,7 @@ class List_Data extends Content {
 		$this->parent_id = $data->parent_id;
 		$this->order_by = $data->order_by;
 		$this->order_direction = $data->order_direction;
+		$this->limit = $data->limit;
 	}
 	public function save() {
 		if ($this->content_id === null) {
@@ -95,8 +97,13 @@ class List_Data extends Content {
 		if ($parent_id === 0) {
 			$parent_id = "null";
 		}
-		$sql = "INSERT INTO " . tbname ( "lists" ) . " (content_id, language, category_id, menu, parent_id, `order_by`, `order_direction`) values ($content_id, $language, 
-		$category_id, $menu, $parent_id, '$order_by', '$order_direction')";
+		
+		$limit = "null";
+		if (intval ( $this->limit ) > 0) {
+			$limit = intval ( $this->limit );
+		}
+		$sql = "INSERT INTO " . tbname ( "lists" ) . " (content_id, language, category_id, menu, parent_id, `order_by`, `order_direction`, `limit`) values ($content_id, $language, 
+		$category_id, $menu, $parent_id, '$order_by', '$order_direction', $limit)";
 		Database::query ( $sql ) or die ( Database::error () );
 	}
 	public function update() {
@@ -148,8 +155,13 @@ class List_Data extends Content {
 			$order_direction = "asc";
 		}
 		
+		$limit = "null";
+		if (intval ( $this->limit ) > 0) {
+			$limit = intval ( $this->limit );
+		}
+		
 		$sql = "UPDATE " . tbname ( "lists" ) . " set language = $language, 
-		category_id = $category_id, menu = $menu, parent_id = $parent_id, `order_by` = '$order_by', `order_direction` = '$order_direction' where content_id = $content_id ";
+		category_id = $category_id, menu = $menu, parent_id = $parent_id, `order_by` = '$order_by', `order_direction` = '$order_direction', `limit` = $limit where content_id = $content_id ";
 		Database::query ( $sql ) or die ( Database::error () );
 	}
 }

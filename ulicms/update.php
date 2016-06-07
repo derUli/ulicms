@@ -89,7 +89,7 @@ if (file_exists ( $content_htaccess )) {
 	@unlink ( $content_htaccess );
 }
 
-// Database changes of 9.8.2
+// Database changes of 9.8.4
 
 // Tabelle für Content Type "Liste"
 Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "lists" ) . "` (
@@ -102,6 +102,8 @@ Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "lists" ) . "` (
   `order_direction` varchar(30) DEFAULT 'asc',
   UNIQUE KEY `content_id` (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
+
+Database::query ( "alter table " . tbname ( "lists" ) . " add column `limit` int(11) default null" );
 
 Database::query ( "alter table " . tbname ( "content" ) . " add column `module` varchar(200) default null" );
 Database::query ( "alter table " . tbname ( "content" ) . " add column `video` int(11) default null" );

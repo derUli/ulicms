@@ -618,6 +618,8 @@ define ( "TRANSLATION_ORDER_DIRECTION", "Sotieren Reihenfolge" );
 define ( "TRANSLATION_ASC", "Aufsteigend" );
 define ( "TRANSLATION_DESC", "Absteigend" );
 
+define ( "TRANSLATION_LIMIT", "Limit" );
+
 // Inhaltstyp "Link"
 define ( "TRANSLATION_LINK", "Link" );
 

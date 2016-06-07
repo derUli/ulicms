@@ -147,8 +147,8 @@ if (defined ( "_SECURITY" )) {
 			
 			echo TRANSLATION_POSITION;
 			?> </strong> <span style="cursor: help;"
-				onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
-				type="text" name="position" required="required"
+				onclick="$('div#position_help').slideToggle()">[?]</span><br />
+			<input type="number" name="position" required="true" min="0" step="1"
 				value="<?php
 			
 			echo $row->position;
@@ -501,6 +501,12 @@ function openMenuImageSelectWindow(field) {
 				
 				
 				
+				
+				
+				
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -619,7 +625,10 @@ function openMenuImageSelectWindow(field) {
 					<option value="asc"><?php translate("asc");?></option>
 					<option value="desc"
 						<?php if($list_data->order_direction=== "desc") echo ' selected';?>><?php translate("desc");?></option>
-				</select>
+				</select> <br /> <br /> <strong><?php translate("limit");?></strong>
+				<input type="number" name="limit" min="0" step="1"
+					value="<?php echo intval($list_data->limit);?>">
+
 			</div>
 		</div>
 

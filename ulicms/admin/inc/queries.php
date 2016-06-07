@@ -278,6 +278,8 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			$list_order_by = Database::escapeValue ( $_POST ["list_order_by"] );
 			$list_order_direction = Database::escapeValue ( $_POST ["list_order_direction"] );
 			
+			$limit = intval ( $_POST ["limit"] );
+			
 			$list = new List_Data ( $content_id );
 			$list->language = $list_language;
 			$list->category_id = $list_category;
@@ -285,6 +287,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			$list->parent_id = $list_parent;
 			$list->order_by = $list_order_by;
 			$list->order_direction = $list_order_direction;
+			$list->limit = $limit;
 			$list->save ();
 		}
 		$content = $unescaped_content;
@@ -433,6 +436,8 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		$list_order_by = Database::escapeValue ( $_POST ["list_order_by"] );
 		$list_order_direction = Database::escapeValue ( $_POST ["list_order_direction"] );
 		
+		$limit = intval ( $_POST ["limit"] );
+		
 		$list = new List_Data ( $content_id );
 		$list->language = $list_language;
 		$list->category_id = $list_category;
@@ -440,6 +445,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		$list->parent_id = $list_parent;
 		$list->order_by = $list_order_by;
 		$list->order_direction = $list_order_direction;
+		$list->limit = $limit;
 		var_dump ( $list_order_direction );
 		$list->save ();
 	}

@@ -7,6 +7,9 @@ function initconfig($key, $value) {
 	}
 	return $retval;
 }
+function isNotNullOrEmpty($variable) {
+	return (! is_null ( $variable ) and ! is_empty ( $variable ));
+}
 function get_files($root_dir, $all_data = array(), $initial_root_dir = null) {
 	$root_dir = str_replace ( "\\", "/", $root_dir );
 	
@@ -344,7 +347,7 @@ function get_available_post_types() {
 			"link",
 			"module",
 			"video",
-			"audio"
+			"audio" 
 	);
 	add_hook ( $post_types );
 	
