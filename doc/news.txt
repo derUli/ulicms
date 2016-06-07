@@ -1,4 +1,5 @@
 ﻿===== Neues in UliCMS 9.8.4 =====
+
 Neue Features
 + Inhaltstyp "Liste" hinzugefügt
 + Inhaltstyp "Link" hinzugefügt
@@ -8,3 +9,6 @@ Neue Features
 + Tab "Position der Beschreibung" hinzugefügt
 + Klasse ModuleHelper hinzugefügt
 + post-install Scripts können nun manuell ausgeführt werden.
+
+Änderungen
+# Feld "Position" ist jetzt ein HTML5 Number Feld
