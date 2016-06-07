@@ -13,5 +13,5 @@ Neue Features
 Änderungen
 # Feld "Position" ist jetzt ein HTML5 Number Feld
 
-Entfernte Features:
+Entfernte Features
 - Templates können nicht mehr online im Browser bearbeitet werden
