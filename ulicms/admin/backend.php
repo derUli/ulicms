@@ -157,10 +157,6 @@ if (! $eingeloggt) {
 		require_once "inc/key_new.php";
 	} else if ($_GET ["action"] == "key_edit") {
 		require_once "inc/key_edit.php";
-	} 
-
-	else if ($_GET ["action"] == "templates") {
-		require_once "inc/templates.php";
 	} else if ($_GET ["action"] == "media") {
 		require_once "inc/media.php";
 	} else if ($_GET ["action"] == "images" || $_GET ["action"] == "files" || $_GET ["action"] == "flash") {

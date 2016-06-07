@@ -132,10 +132,7 @@ class ACL {
 		// Benutzer
 		$acl_data ["users"] = null;
 		$acl_data ["groups"] = null;
-		
-		// Templates
-		$acl_data ["templates"] = null;
-		
+				
 		// Package Manager
 		$acl_data ["list_packages"] = null;
 		$acl_data ["install_packages"] = null;
