@@ -87,6 +87,7 @@ if (! $eingeloggt) {
 		require_once "inc/loginform.php";
 	}
 } else {
+	
 	require_once "inc/adminmenu.php";
 	
 	add_hook ( "register_actions" );
@@ -254,6 +255,8 @@ if (! $eingeloggt) {
 
 	else if (isset ( $actions [$_GET ["action"]] )) {
 		include_once $actions [$_GET ["action"]];
+	} else if ($_GET ["action"] == "do-post-install") {
+		include_once "inc/do-post-install.php";
 	} else {
 		echo TRANSLATION_ACTION_NOT_FOUND;
 	}

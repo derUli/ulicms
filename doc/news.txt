@@ -7,3 +7,4 @@ Neue Features
 + Inhaltstyp "Video" hinzugefügt
 + Tab "Position der Beschreibung" hinzugefügt
 + Klasse ModuleHelper hinzugefügt
++ post-install Scripts können nun manuell ausgeführt werden.

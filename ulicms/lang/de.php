@@ -634,4 +634,11 @@ define ( "TRANSLATION_POSITION_OF_DESCRIPTION", "Position der Beschreibung" );
 define ( "TRANSLATION_DESCRIPTION_BEFORE_CONTENT", "Beschreibungstext vor Inhalt anzeigen" );
 define ( "TRANSLATION_DESCRIPTION_AFTER_CONTENT", "Beschreibungstext nach Inhalt anzeigen" );
 
+// post-install
+define ( "TRANSLATION_UNFINISHED_PACKAGE_INSTALLATIONS", "Unvollständige Paketinstallation" );
+define ( "TRANSLATION_THERE_ARE_UNFINISHED_PACKAGE_INSTALLATIONS", "Es gibt unvollständig installierte Pakete.<br/>Bitte klicken Sie hier um die Installation zu vervollständigen." );
+define ( "TRANSLATION_FINISHED", "Fertig!" );
+define ( "TRANSLATION_RUN_POST_INSTALL_SCRIPT", "Post Install Script ausführen" );
+
+
 add_hook ( "lang_de" );

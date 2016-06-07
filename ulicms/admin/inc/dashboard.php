@@ -86,9 +86,20 @@ if ($acl->hasPermission ( "dashboard" )) {
 			}
 		}
 		?>
+<?php
 
+		$pi = ULICMS_ROOT . "/post-install.php";
+		if (file_exists ( $pi ) and is_writable ( $pi )) {
+			?>
+<h2 class="accordion-header"><?php translate("unfinished_package_installations");?></h2>
 
+	<div class="accordion-content">
+		<a href="index.php?action=do-post-install">
+			<?php translate("there_are_unfinished_package_installations");?></a>
 
+	</div>
+
+	<?php } ?>
 
 	<?php
 		if ($acl->hasPermission ( "update_system" )) {

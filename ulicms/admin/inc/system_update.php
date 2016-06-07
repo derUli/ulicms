@@ -5,7 +5,6 @@ if (defined ( "_SECURITY" )) {
 		?>
 
 		<?php
-		
 		if (file_exists ( "../update.php" )) {
 			?>
 <p>

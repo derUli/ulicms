@@ -10,6 +10,13 @@ function initconfig($key, $value) {
 function isNotNullOrEmpty($variable) {
 	return (! is_null ( $variable ) and ! is_empty ( $variable ));
 }
+function get_action() {
+	$retval = "home";
+	if (isNotNullOrEmpty ( $_GET ["action"] )) {
+		$retval = $_GET ["action"];
+	}
+	return $retval;
+}
 function get_files($root_dir, $all_data = array(), $initial_root_dir = null) {
 	$root_dir = str_replace ( "\\", "/", $root_dir );
 	
