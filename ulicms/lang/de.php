@@ -624,7 +624,7 @@ define ( "TRANSLATION_LIMIT", "Limit" );
 define ( "TRANSLATION_LINK", "Link" );
 
 // Inhaltstyp "Modul"
-define("TRANSLATION_MODULE", "Modul");
+define ( "TRANSLATION_MODULE", "Modul" );
 
 // Inhaltstyp "Video"
 define ( "TRANSLATION_VIDEO", "Video" );
@@ -639,6 +639,5 @@ define ( "TRANSLATION_UNFINISHED_PACKAGE_INSTALLATIONS", "Unvollständige Paketi
 define ( "TRANSLATION_THERE_ARE_UNFINISHED_PACKAGE_INSTALLATIONS", "Es gibt unvollständig installierte Pakete.<br/>Bitte klicken Sie hier um die Installation zu vervollständigen." );
 define ( "TRANSLATION_FINISHED", "Fertig!" );
 define ( "TRANSLATION_RUN_POST_INSTALL_SCRIPT", "Post Install Script ausführen" );
-
 
 add_hook ( "lang_de" );
