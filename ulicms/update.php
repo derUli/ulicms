@@ -89,7 +89,7 @@ if (file_exists ( $content_htaccess )) {
 	@unlink ( $content_htaccess );
 }
 
-// Database changes of 9.8.2
+// Database changes of 9.8.4
 
 // Tabelle für Content Type "Liste"
 Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "lists" ) . "` (
