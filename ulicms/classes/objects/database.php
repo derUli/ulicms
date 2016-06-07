@@ -223,9 +223,12 @@ class Database {
 		$retval = array ();
 		$table = tbname ( $table );
 		$query = Database::query ( "SELECT * FROM $table limit 1" );
-		if (self::getNumRows ( $query ) > 0) {
-			$row = self::fetchAssoc ( $query );
-			$retval = array_keys ( $row );
+		$fields_num = self::getNumFieldCount($query);
+		if ($fields_num > 0) {
+			for($i = 0; $i < $fields_num; $i ++) {
+					$field = db_fetch_field ( $query );
+					$retval[] = $field->name;
+				}
 			sort ( $retval );
 		}
 		
