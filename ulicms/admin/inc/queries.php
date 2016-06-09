@@ -96,28 +96,6 @@ if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_set
 	add_hook ( "after_save_spamfilter_settings" );
 }
 
-if (! empty ( $_POST ["save_template"] ) and ! empty ( $_POST ["code"] ) && $acl->hasPermission ( "templates" )) {
-	$theme = Settings::get ( "theme" );
-	$save = getTemplateDirPath ( $theme ) . basename ( $_POST ["save_template"] );
-	add_hook ( "before_save_template" );
-	if (is_file ( $save ) && is_writable ( $save )) {
-		$handle = fopen ( $save, "w" );
-		fwrite ( $handle, $_POST ["code"] );
-		fclose ( $handle );
-		
-		add_hook ( "after_save_template" );
-		add_hook ( "after_save_template_successfull" );
-		header ( "Location: index.php?action=templates&save=true" );
-		exit ();
-	} else {
-		
-		add_hook ( "after_save_template" );
-		add_hook ( "after_save_template_failed" );
-		header ( "Location: index.php?action=templates&save=false" );
-		exit ();
-	}
-}
-
 if ($_GET ["action"] == "empty_trash") {
 	add_hook ( "before_empty_trash" );
 	db_query ( "DELETE FROM " . tbname ( "content" ) . " WHERE deleted_at IS NOT NULL" );
