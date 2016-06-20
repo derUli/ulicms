@@ -100,10 +100,9 @@ Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "lists" ) . "` (
   `parent_id` int(11) DEFAULT NULL,
   `order_by` varchar(30) DEFAULT 'title',
   `order_direction` varchar(30) DEFAULT 'asc',
+   `limit` int(11) default null,
   UNIQUE KEY `content_id` (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
-
-Database::query ( "alter table " . tbname ( "lists" ) . " add column `limit` int(11) default null" );
 
 Database::query ( "alter table " . tbname ( "content" ) . " add column `module` varchar(200) default null" );
 Database::query ( "alter table " . tbname ( "content" ) . " add column `video` int(11) default null" );
