@@ -4,7 +4,6 @@ include_once "init.php";
 
 @set_time_limit ( 0 );
 
-
 // Move folders to content Folder
 if (file_exists ( ULICMS_ROOT . "/modules" )) {
 	@rename ( ULICMS_ROOT . "/modules", ULICMS_ROOT . "/content/modules" );
