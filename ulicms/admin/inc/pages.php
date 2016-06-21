@@ -380,8 +380,7 @@ $(window).load(function(){
     [<?php
 
   translate("every");
-  ?>
-    ]</option>
+  ?>]</option>
 <option value="1"
   <?php
 
