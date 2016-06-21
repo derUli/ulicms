@@ -373,7 +373,7 @@ $(window).load(function(){
 
 <?php
 
-  echo TRANSLATION_ENABLED;
+  translate("approved");
   ?>
 <select name="filter_approved" onchange="filter_by_approved(this);">
 <option value="null"
@@ -385,7 +385,7 @@ $(window).load(function(){
     [
     <?php
 
-  echo TRANSLATION_EVERY;
+  translate("every");
   ?>
     ]
   </option>
