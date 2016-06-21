@@ -648,8 +648,8 @@ define ( "TRANSLATION_FINISHED", "Finished!" );
 define ( "TRANSLATION_RUN_POST_INSTALL_SCRIPT", "Run post install script" );
 
 // Workflow
-define( "TRANSLATION_APPROVED", "Approved" );
-define( "TRANSLATION_YES", "Yes" );
-define( "TRANSLATION_YES", "No" );
+define ( "TRANSLATION_APPROVED", "Approved" );
+define ( "TRANSLATION_YES", "Yes" );
+define ( "TRANSLATION_YES", "No" );
 
 add_hook ( "lang_en" );
