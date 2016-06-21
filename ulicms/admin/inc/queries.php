@@ -220,7 +220,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		}
 
 		$text_position = Database::escapeValue ( $_POST ["text_position"] );
-		
+
     $pages_activate_own = $acl->hasPermission("pages_activate_own");
 
 	  $approved = 1;
@@ -394,9 +394,22 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 
 	$approved = 0;
 
-	if($activated == 1){
-      $approved = 1;
-	}
+	$page = new Page()
+	$page->loadByID($id);
+
+	$autor = $page->autor;
+	$is_owner = $autor == get_user_id();
+	$pages_activate_own = $acl->hasPermission("pages_activate_own");
+	$pages_activate_others = $acl->hasPermission("pages_activate_others");
+
+  if($is_owner and $pages_activate_own and $activated == 1){
+       $approved = 1;
+	} else if(!$is_owner and $pages_activate_others and $activated == 1){
+	       $approved = 1;
+	} else {
+         $approved = $page->approved;
+
+		}
 
 	add_hook ( "before_edit_page" );
 	db_query ( "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',

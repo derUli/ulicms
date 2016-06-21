@@ -32,6 +32,7 @@ class Page extends Content {
 	public $og_type = "";
 	public $og_image = "";
 	public $og_description = "";
+	public $approved = 1;
 	public function __construct() {
 		if ($this->custom_data === null) {
 			$this->custom_data = array ();
@@ -67,12 +68,13 @@ class Page extends Content {
 			$this->custom_data = array ();
 		}
 		$this->custom_data = json_decode ( $result->custom_data, true );
-		
+
 		$this->type = "page";
 		$this->og_title = $result->og_title;
 		$this->og_type = $result->og_type;
 		$this->og_image = $result->og_image;
 		$this->og_description = $result->og_description;
+		$this->approved = $result->approved;
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
@@ -105,11 +107,11 @@ class Page extends Content {
 		return $retval;
 	}
 	public function create() {
-		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category, 
-				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views, 
-				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at, 
-				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description) VALUES (";
-		
+		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category,
+				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views,
+				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
+				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, approved) VALUES (";
+
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->title ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->alternate_title ) . "',";
@@ -117,13 +119,13 @@ class Page extends Content {
 		$sql .= intval ( $this->category ) . ",";
 		$sql .= "'" . DB::escapeValue ( $this->content ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->language ) . "',";
-		
+
 		if ($this->menu_image === null) {
 			$sql .= " NULL ,";
 		} else {
 			$sql .= "'" . DB::escapeValue ( $this->menu_image ) . "',";
 		}
-		
+
 		$sql .= intval ( $this->active ) . ",";
 		$this->created = time ();
 		$this->lastmodified = $this->created;
@@ -133,13 +135,13 @@ class Page extends Content {
 		$sql .= intval ( $this->lastchangeby ) . ",";
 		// Views
 		$sql .= "0,";
-		
+
 		if ($this->redirection === null) {
 			$sql .= " NULL ,";
 		} else {
 			$sql .= "'" . DB::escapeValue ( $this->redirection ) . "',";
 		}
-		
+
 		$sql .= "'" . DB::escapeValue ( $this->menu ) . "',";
 		$sql .= intval ( $this->position ) . ",";
 		if ($this->parent === null) {
@@ -147,45 +149,46 @@ class Page extends Content {
 		} else {
 			$sql .= intval ( $this->parent ) . ",";
 		}
-		
+
 		$sql .= "'" . DB::escapeValue ( $this->access ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->meta_description ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->meta_keywords ) . "',";
-		
+
 		if ($this->deleted_at === null) {
 			$sql .= " NULL ,";
 		} else {
 			$sql .= intval ( $this->deleted_at ) . ",";
 		}
-		
+
 		if ($this->html_file === null) {
 			$sql .= " NULL ,";
 		} else {
 			$sql .= "'" . DB::escapeValue ( $this->html_file ) . "',";
 		}
-		
+
 		if ($this->theme === null) {
 			$sql .= " NULL ,";
 		} else {
 			$sql .= "'" . DB::escapeValue ( $this->theme ) . "',";
 		}
-		
+
 		if ($this->custom_data === null) {
 			$this->custom_data = array ();
 		}
-		
+
 		$json = json_encode ( $this->custom_data, JSON_FORCE_OBJECT );
-		
+
 		$sql .= "'" . DB::escapeValue ( $json ) . "',";
-		
+
 		$sql .= "'" . DB::escapeValue ( $this->type ) . "',";
-		
+
 		$sql .= "'" . DB::escapeValue ( $this->og_title ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_image ) . "',";
-		$sql .= "'" . DB::escapeValue ( $this->og_description ) . "'";
+		$sql .= "'" . DB::escapeValue ( $this->og_description ) . "', ";
+		$sql .= intval($this->approved);
 		$sql .= ")";
-		
+
 		$result = DB::Query ( $sql ) or die ( DB::error () );
 		$this->id = DB::getLastInsertID ();
 		return $result;
@@ -195,15 +198,15 @@ class Page extends Content {
 		if ($this->id === null) {
 			return $this->create ();
 		}
-		
+
 		$this->lastmodified = time ();
-		
+
 		if (get_user_id () > 0) {
 			$this->lastchangeby = get_user_id ();
 		}
-		
+
 		$sql = "UPDATE " . tbname ( "content" ) . " ";
-		
+
 		$sql .= "set systemname='" . DB::escapeValue ( $this->systemname ) . "',";
 		$sql .= "title='" . DB::escapeValue ( $this->title ) . "',";
 		$sql .= "alternate_title='" . DB::escapeValue ( $this->alternate_title ) . "',";
@@ -211,24 +214,24 @@ class Page extends Content {
 		$sql .= "category = " . intval ( $this->category ) . ",";
 		$sql .= "content='" . DB::escapeValue ( $this->content ) . "',";
 		$sql .= "language='" . DB::escapeValue ( $this->language ) . "',";
-		
+
 		if ($this->menu_image === null) {
 			$sql .= "menu_image = NULL ,";
 		} else {
 			$sql .= "menu_image =  '" . DB::escapeValue ( $this->menu_image ) . "',";
 		}
-		
+
 		$sql .= "active=" . intval ( $this->active ) . ",";
 		$sql .= "lastmodified=" . intval ( $this->lastmodified ) . ",";
 		$sql .= "autor=" . intval ( $this->autor ) . ",";
 		$sql .= "lastchangeby=" . intval ( $this->lastchangeby ) . ",";
-		
+
 		if ($this->redirection === null) {
 			$sql .= "redirection = NULL ,";
 		} else {
 			$sql .= "redirection = '" . DB::escapeValue ( $this->redirection ) . "',";
 		}
-		
+
 		$sql .= "menu='" . DB::escapeValue ( $this->menu ) . "',";
 		$sql .= "position=" . intval ( $this->position ) . ",";
 		if ($this->parent === null) {
@@ -236,46 +239,48 @@ class Page extends Content {
 		} else {
 			$sql .= "parent=" . intval ( $this->parent ) . ",";
 		}
-		
+
 		$sql .= "access='" . DB::escapeValue ( $this->access ) . "',";
 		$sql .= "meta_description='" . DB::escapeValue ( $this->meta_description ) . "',";
 		$sql .= "meta_keywords='" . DB::escapeValue ( $this->meta_keywords ) . "',";
-		
+
 		if ($this->deleted_at === null) {
 			$sql .= "deleted_at=NULL ,";
 		} else {
 			$sql .= "deleted_at=" . intval ( $this->deleted_at ) . ",";
 		}
-		
+
 		if ($this->html_file === null) {
 			$sql .= "html_file=NULL ,";
 		} else {
 			$sql .= "html_file='" . DB::escapeValue ( $this->html_file ) . "',";
 		}
-		
+
 		if ($this->theme === null) {
 			$sql .= "theme=NULL ,";
 		} else {
 			$sql .= "theme='" . DB::escapeValue ( $this->theme ) . "',";
 		}
-		
+
 		if ($this->custom_data === null) {
 			$this->custom_data = array ();
 		}
-		
+
 		$json = json_encode ( $this->custom_data, JSON_FORCE_OBJECT );
-		
+
 		$sql .= "custom_data='" . DB::escapeValue ( $json ) . "',";
-		
+
 		$sql .= "type='" . DB::escapeValue ( $this->type ) . "',";
-		
+
 		$sql .= "og_title='" . DB::escapeValue ( $this->og_title ) . "',";
 		$sql .= "og_type='" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "og_image='" . DB::escapeValue ( $this->og_image ) . "',";
-		$sql .= "og_description='" . DB::escapeValue ( $this->og_description ) . "' ";
-		
+		$sql .= "og_description='" . DB::escapeValue ( $this->og_description ) . "', ";
+
+		$sql .= intval($this->approved);
+
 		$sql .= " WHERE id = " . $this->id;
-		
+
 		$result = DB::query ( $sql ) or die ( DB::getLastError () );
 		return $result;
 	}
@@ -299,4 +304,3 @@ class Page extends Content {
 		}
 	}
 }
-
