@@ -594,7 +594,7 @@ $(document).ready(function(){
   `video` int(11) default null,
   `audio` int(11) default null,
   `text_position` varchar(10) default 'before',
-
+	`approved` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" ) or die ( mysqli_error ( $connection ) );
 
