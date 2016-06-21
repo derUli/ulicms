@@ -392,28 +392,21 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 
 	$text_position = Database::escapeValue ( $_POST ["text_position"] );
 
-	$approved = 0;
-
 	$page = new Page()
 	$page->loadByID($id);
 
 	$autor = $page->autor;
 	$is_owner = $autor == get_user_id();
-	$pages_activate_own = $acl->hasPermission("pages_activate_own");
-	$pages_activate_others = $acl->hasPermission("pages_activate_others");
 
-  if($is_owner and $pages_activate_own and $activated == 1){
-       $approved = 1;
-	} else if(!$is_owner and $pages_activate_others and $activated == 1){
-	       $approved = 1;
-	} else {
-         $approved = $page->approved;
+  $actived_sql = "";
 
-		}
+	if($activated){
+		$approved_sql = ", approved = 1";
+	}
 
 	add_hook ( "before_edit_page" );
 	db_query ( "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
-	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', approved = $approved WHERE id=$id" );
+	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position' $approved_sql WHERE id=$id" );
 
 	$user_id = get_user_id ();
 	$content_id = $id;
