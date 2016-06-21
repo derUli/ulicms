@@ -16,3 +16,7 @@ löschen.
 pages_edit_others:
 Wenn der User dieses Recht hat, darf er die Seiten aller User bearbeiten und
 löschen.
+
+Todo:
+- Feld zum Ändern des Eigentümers einer Seite hinzufügen (benötigt recht "change_owner")
+- Auch Änderungen an bereits existierenden Seiten müssen freigeschaltet werden

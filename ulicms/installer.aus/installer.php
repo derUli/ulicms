@@ -58,13 +58,13 @@ echo TRANSLATION_TITLE;
 				name="language"
 				onchange="window.location.replace('?language=' + this.value)">
 				<option value="de"<?php
-		
+
 		if ($_SESSION ["language"] == "de")
 			echo "selected";
 		?>">Deutsch</option>
 				<option value="en"
 					<?php
-		
+
 		if ($_SESSION ["language"] == "en")
 			echo "selected";
 		?>>English</option>
@@ -73,7 +73,7 @@ echo TRANSLATION_TITLE;
 		<p>
 			<input type="hidden" name="step" value="0"> <input type="submit"
 				value="<?php
-		
+
 		echo TRANSLATION_NEXT;
 		?>">
 
@@ -84,25 +84,25 @@ echo TRANSLATION_TITLE;
 		?>
 	<h2>
 	<?php
-		
+
 		echo TRANSLATION_WELCOME;
 		?>
 	</h2>
 	<p>
 	<?php
-		
+
 		echo TRANSLATION_WELCOME2;
 		?>
 	</p>
 	<?php
 		include "../version.php";
 		$version = new ulicms_version ();
-		
+
 		if ($version->getDevelopmentVersion ()) {
 			?>
 	<p style="color: red;">
 	<?php
-			
+
 			echo TRANSLATION_BETA_VERSION;
 			?>
 	</p>
@@ -111,43 +111,43 @@ echo TRANSLATION_TITLE;
 		?>
 	<p>
 	<?php
-		
+
 		echo TRANSLATION_FOLLOW_INSTRUCTIONS;
 		?>
 	</p>
 	<?php
-		
+
 		echo TRANSLATION_CHMOD;
 		?>
 	<h3>
 	<?php
-		
+
 		echo TRANSLATION_PERMISSION;
 		?>
 	</h3>
 	<p>
 		<img
 			src="media/chmod_<?php
-		
+
 		echo htmlspecialchars ( $_SESSION ["language"] );
 		?>.png"
 			alt="<?php
-		
+
 		echo TRANSLATION_PERMISSIONS2;
 		?>"
 			title="<?php
-		
+
 		echo TRANSLATION_PERMISSIONS2;
 		?>" border=1 />
 	</p>
 
 	<?php
-		
+
 		if (! $required_php_version) {
 			?>
 	<p style="color: red;">
 	<?php
-			
+
 			echo TRANSLATION_PHP_VERSION_TOO_LOW;
 			?>
 	</p>
@@ -155,13 +155,13 @@ echo TRANSLATION_TITLE;
 		}
 		?>
 	<?php
-		
+
 		if (! function_exists ( 'gd_info' )) {
 			?>
 	<hr />
 	<p style="color: red;">
 	<?php
-			
+
 			echo TRANSLATION_GD_MISSING;
 			?>
 	</p>
@@ -177,7 +177,7 @@ echo TRANSLATION_TITLE;
 			?>
 	<p style="color: red;">
 	<?php
-			
+
 			echo TRANSLATION_MYSQLI_MISSING;
 			?>
 	</p>
@@ -190,21 +190,21 @@ echo TRANSLATION_TITLE;
 
 	<p style="color: red;">
 	<?php
-			
+
 			echo TRANSLATION_JSON_MISSING;
 			?>
 	</p>
 
 	<?php
 		}
-		
+
 		if (! isset ( $error )) {
 			?>
 
 	<form action="index.php" method="post">
 		<input type="hidden" name="step" value="1"> <input type="submit"
 			value="<?php
-			
+
 			echo TRANSLATION_NEXT;
 			?>">
 	</form>
@@ -217,18 +217,18 @@ echo TRANSLATION_TITLE;
 	} else {
 		?>
 		<?php
-		
+
 		if ($_REQUEST ["step"] == "1") {
 			?>
 	<h2>
 	<?php
-			
+
 			echo TRANSLATION_MYSQL_LOGIN;
 			?>
 	</h2>
 	<p>
 	<?php
-			
+
 			echo TRANSLATION_MYSQL_LOGIN_HELP;
 			?>
 	</p>
@@ -236,7 +236,7 @@ echo TRANSLATION_TITLE;
 		<table border=1>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_SERVERNAME;
 			?>
 				</td>
@@ -244,7 +244,7 @@ echo TRANSLATION_TITLE;
 			</tr>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_LOGINNAME;
 			?>
 				</td>
@@ -252,7 +252,7 @@ echo TRANSLATION_TITLE;
 			</tr>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_PASSWORD;
 			?>
 				</td>
@@ -264,7 +264,7 @@ echo TRANSLATION_TITLE;
 			</tr>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_DATABASE_NAME;
 			?>
 				</td>
@@ -272,7 +272,7 @@ echo TRANSLATION_TITLE;
 			</tr>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_PREFIX;
 			?>
 				</td>
@@ -287,7 +287,7 @@ $(document).ready(function(){
 		<p>
 			<input type="submit"
 				value="<?php
-			
+
 			echo TRANSLATION_NEXT;
 			?>">
 		</p>
@@ -298,13 +298,13 @@ $(document).ready(function(){
 		}
 		?>
 		<?php
-		
+
 		if ($_REQUEST ["step"] == "2") {
-			
+
 			?>
 	<h2>
 	<?php
-			
+
 			echo TRANSLATION_MYSQL_LOGIN;
 			?>
 	</h2>
@@ -313,21 +313,21 @@ $(document).ready(function(){
 			if ($connection == false) {
 				echo TRANSLATION_DB_CONNECTION_FAILED;
 			} else {
-				
+
 				// Check if database is present else try to create it.
 				$query = mysqli_query ( $connection, "SHOW DATABASES" );
 				$databases = array ();
 				while ( $row = mysqli_fetch_array ( $query ) ) {
 					$databases [] = $row [0];
 				}
-				
+
 				if (! in_array ( $_POST ["datenbank"], $databases )) {
 					// Try to create database if it not exists
 					mysqli_query ( $connection, "CREATE DATABASE " . mysqli_real_escape_string ( $connection, $_POST ["datenbank"] ) );
 				}
-				
+
 				@$select = mysqli_select_db ( $connection, $_POST ["datenbank"] );
-				
+
 				if ($select == false) {
 					echo TRANSLATION_CANT_OPEN_SCHEMA;
 				} else {
@@ -340,7 +340,7 @@ $(document).ready(function(){
 					?>
 	<p>
 	<?php
-					
+
 					echo TRANSLATION_SUCCESSFULL_DB_CONNECT;
 					?>
 	</p>
@@ -348,7 +348,7 @@ $(document).ready(function(){
 	<form action="index.php" method="post">
 		<input type="hidden" name="step" value="3"> <input type="submit"
 			value="<?php
-					
+
 					echo TRANSLATION_NEXT;
 					?>">
 	</form>
@@ -365,12 +365,12 @@ $(document).ready(function(){
 		?>
 
 		<?php
-		
+
 		if ($_REQUEST ["step"] == "3") {
 			?>
 	<h2>
 	<?php
-			
+
 			echo TRANSLATION_HOMEPAGE_SETTINGS;
 			?>
 	</h2>
@@ -378,7 +378,7 @@ $(document).ready(function(){
 		<table border=1>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_HOMEPAGE_TITLE;
 			?>
 				</td>
@@ -387,7 +387,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_SITE_SLOGAN;
 			?>
 				</td>
@@ -395,7 +395,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_YOUR_FIRSTNAME;
 			?>
 				</td>
@@ -403,7 +403,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_YOUR_LASTNAME;
 			?>
 				</td>
@@ -411,7 +411,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_YOUR_EMAIL_ADRESS;
 			?>
 				</td>
@@ -419,7 +419,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_ADMIN_NAME;
 			?>
 				</td>
@@ -427,7 +427,7 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 				<td><?php
-			
+
 			echo TRANSLATION_ADMIN_PASSWORD;
 			?>
 				</td>
@@ -447,7 +447,7 @@ $(document).ready(function(){
 		<p>
 			<input type="submit"
 				value="<?php
-			
+
 			echo TRANSLATION_DO_INSTALL;
 			?>">
 		</p>
@@ -460,20 +460,20 @@ $(document).ready(function(){
 		?>
 
 		<?php
-		
+
 		if ($_REQUEST ["step"] == "4") {
-			
+
 			$salt = uniqid ();
 			$connection = mysqli_connect ( $_SESSION ["mysql"] ["server"], $_SESSION ["mysql"] ["loginname"], $_SESSION ["mysql"] ["passwort"] );
 			mysqli_select_db ( $connection, $_SESSION ["mysql"] ["datenbank"] );
-			
+
 			$prefix = mysqli_real_escape_string ( $connection, $_SESSION ["mysql"] ["prefix"] );
-			
+
 			mysqli_query ( $connection, "SET NAMES 'utf8'" ) or die ( mysqli_error ( $connection ) );
-			
+
 			// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 			mysqli_query ( $connection, "SET SESSION sql_mode = '';" );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
@@ -501,7 +501,7 @@ $(document).ready(function(){
   `failed_logins` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;" ) or die ( mysqli_error ( $connection ) );
-			
+
 			$create_table_groups_sql = "CREATE TABLE IF NOT EXISTS `" . $prefix . "groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -509,14 +509,14 @@ $(document).ready(function(){
   PRIMARY KEY (`id`),
   KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
-			
+
 			mysqli_query ( $connection, $create_table_groups_sql ) or die ( mysqli_error ( $connection ) );
-			
+
 			$insert_group_query = 'INSERT INTO `' . $prefix . 'groups` (`id`, `name`, `permissions`) VALUES
-(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"groups":true, "categories" : true, "images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"favicon":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"update_system":true,"users":true,"export":true, "import" : true, "videos":true, "audio":true, "open_graph":true, "forms":true, "patch_management" : true, "upload_patches" : true}\')';
-			
+(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"groups":true, "categories" : true, "images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"favicon":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"update_system":true,"users":true,"export":true, "import" : true, "videos":true, "audio":true, "open_graph":true, "forms":true, "patch_management" : true, "upload_patches" : true, "pages_activate_own" : true, "pages_activate_others" : true, "pages_edit_own" : true, "pages_edit_others" : "true" }\')';
+
 			mysqli_query ( $connection, $insert_group_query );
-			
+
 			$vorname = mysqli_real_escape_string ( $connection, $_POST ["firstname"] );
 			$nachname = mysqli_real_escape_string ( $connection, $_POST ["lastname"] );
 			$zusammen = mysqli_real_escape_string ( $connection, "$vorname $nachname" );
@@ -525,10 +525,10 @@ $(document).ready(function(){
 			$admin_user = mysqli_real_escape_string ( $connection, $_POST ["admin_user"] );
 			$encrypted_passwort = hash ( "sha512", $salt . $passwort );
 			$encrypted_passwort = mysqli_real_escape_string ( $connection, $encrypted_passwort );
-			
+
 			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "users` (`id`, `old_encryption`,  `username`, `lastname`, `firstname`, `email`, `password`, `group`, `group_id`, `password_changed`, `admin`) VALUES
 (1, 0, '" . $admin_user . "', '" . $nachname . "', '" . $vorname . "', '" . $email . "', '" . $encrypted_passwort . "',50, 1, NOW(), 1);" ) or die ( mysqli_error ( $connection ) );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "banner` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
@@ -540,7 +540,7 @@ $(document).ready(function(){
   `language` VARCHAR( 255 ) NULL DEFAULT  'all',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" ) or die ( mysqli_error ( $connection ) );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "log` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `zeit` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -552,7 +552,7 @@ $(document).ready(function(){
   `ip` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "content` (
 
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -594,24 +594,24 @@ $(document).ready(function(){
   `video` int(11) default null,
   `audio` int(11) default null,
   `text_position` varchar(10) default 'before',
-					
+
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" ) or die ( mysqli_error ( $connection ) );
-			
+
 			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
 (1, 0, 'willkommen', 'Willkommen', '_self', '<p>Willkommen auf einer neuen Website die mit UliCMS betrieben wird.</p>\r\n', 'de', 1, 1364242679, 1364242833, 1, 1, 1, 19, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL),
 (2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 1, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;" ) or die ( mysqli_error ( $connection ) );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `value` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" ) or die ( mysqli_error ( $connection ) );
-			
+
 			$homepage_title = mysqli_real_escape_string ( $connection, $_POST ["homepage_title"] );
 			$motto = mysqli_real_escape_string ( $connection, $_POST ["motto"] );
-			
+
 			$badwords = "viagra
 vicodin
 cialis
@@ -622,12 +622,12 @@ pharm
 diploma
 enlargement
 pills";
-			
+
 			$badwords = str_replace ( "\r\n", "||", $badwords );
 			$badwords = str_replace ( "\n", "||", $badwords );
-			
+
 			$badwords = mysqli_real_escape_string ( $connection, $badwords );
-			
+
 			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "settings` (`id`, `name`, `value`) VALUES
 (1, 'homepage_title', '$homepage_title'),
 (2, 'maintenance_mode', '0'),
@@ -685,16 +685,16 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (52, 'locale_en', 'en_US.UTF-8; en_GB.UTF-8; en_US; en_GB; english-uk; eng; uk'),
 (53, 'session_timeout', '60'),
 (54, 'og_type', 'article');" ) or die ( mysqli_error ( $connection ) );
-			
+
 			mysqli_query ( $connection, "UPDATE `" . $prefix . "content` SET parent=NULL" ) or die ( mysqli_error ( $connection ) );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `language_code` varchar(6) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;" ) or die ( mysqli_error ( $connection ) );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "installed_patches` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -704,11 +704,11 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 " );
-			
+
 			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "languages` (`id`, `name`, `language_code`) VALUES
 (1, 'Deutsch', 'de'),
 (2, 'English', 'en');" ) or die ( mysqli_error ( $connection ) );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "mails` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `headers` text NOT NULL,
@@ -718,7 +718,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "history" . "` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `content_id` int(11) NOT NULL,
@@ -727,7 +727,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "videos` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -741,7 +741,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   `updated` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "audio` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -752,7 +752,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   `updated` bigint(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "forms` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -766,24 +766,24 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   `updated` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
-			
+
 			$sql_categories_table = "CREATE TABLE " . $prefix . "categories (
           id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
           name VARCHAR(100),
           `description` TEXT NULL DEFAULT ''
           ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;";
 			mysqli_query ( $connection, $sql_categories_table );
-			
+
 			$insert_categories_general = "INSERT INTO " . $prefix . "categories (name) VALUES('Allgemein')";
 			mysqli_query ( $connection, $insert_categories_general );
-			
+
 			$sql = "ALTER TABLE `" . $prefix . "languages` ADD UNIQUE(`language_code`)";
-			
+
 			mysqli_query ( $connection, $sql );
-			
+
 			// Beispieldaten für die Banner Tabelle
 			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "banner` VALUES (1,'Content Management einfach gemacht mit UliCMS','http://www.ulicms.de','http://www.ulicms.de/content/images/banners/ulicms-banner.jpg',1,'gif','','de');" );
-			
+
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "lists` (
   `content_id` int(11) NOT NULL,
   `language` varchar(50) DEFAULT NULL,
@@ -792,23 +792,23 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   `parent_id` int(11) DEFAULT NULL,
   `order_by` varchar(30) DEFAULT 'title',
   `order_direction` varchar(30) DEFAULT 'asc',
-  `limit` int(11) default null,	
+  `limit` int(11) default null,
   UNIQUE KEY `content_id` (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
-			
+
 			@chmod ( "../cms-config.php", 0777 );
-			
+
 			@mkdir ( "../content" );
 			@chmod ( "../content", 0777 );
-			
+
 			if (! file_exists ( "../content/cache" )) {
 				@mkdir ( "../content/cache", 0777, true );
 			}
-			
+
 			if (! file_exists ( "../modules/" )) {
 				@mkdir ( "../modules/", 0777, true );
 			}
-			
+
 			$config_string = '<?php
 class config extends baseConfig{
 
@@ -820,7 +820,7 @@ class config extends baseConfig{
   var $db_type = "mysql";
   var $debug = false;
 }';
-			
+
 			if (! is_writable ( "../" )) {
 				echo "<p>Die Konfigurationsdatei konnte wegen fehlenden Berechtigungen nicht erzeugt werden. Bitte bearbeiten Sie die Datei cms-config.php mit einem Texteditor und fügen Sie den Code aus der Textbox ein.</p>" . "<p><textarea cols=50 rows=10>" . htmlspecialchars ( $config_string ) . "</textarea></p>";
 			} else {
@@ -828,39 +828,39 @@ class config extends baseConfig{
 				fwrite ( $handle, $config_string );
 				fclose ( $handle );
 			}
-			
-			$message = 
+
+			$message =
 
 			$title = str_ireplace ( "%domain%", $_SERVER ["HTTP_HOST"], TRANSLATION_MAIL_MESSAGE_TITLE );
-			
+
 			$content = TRANSLATION_MAIL_MESSAGE_TEXT;
 			$content = str_ireplace ( "%domain%", $_SERVER ["HTTP_HOST"], $content );
 			$content = str_ireplace ( "%person_name%", $zusammen, $content );
 			$content = str_ireplace ( "%username%", $admin_user, $content );
 			$content = str_ireplace ( "%password%", $passwort, $content );
 			$success = @mail ( $email, $title, $content, "From: $email\nContent-Type: text/plain; charset=UTF-8" );
-			
+
 			session_destroy ();
-			
+
 			?>
 	<h2>
 	<?php
-			
+
 			echo TRANSLATION_INSTALLATION_FINISHED;
 			?>
 	</h2>
 	<p>
 	<?php
-			
+
 			echo TRANSLATION_FIRST_LOGIN_HELP;
 			?>
 		<br /> <br />
 		<?php
-			
+
 			if ($success) {
 				?>
 		<span style="color: green;"><?php
-				
+
 				echo TRANSLATION_LOGIN_DATA_SENT_BY_MAIL;
 				?> </span>
 
@@ -868,7 +868,7 @@ class config extends baseConfig{
 			} else {
 				?>
 		<span style="color: red;"><?php
-				
+
 				echo TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL;
 				?></span>
 		<?php
@@ -879,7 +879,7 @@ class config extends baseConfig{
 
 	<?php
 		}
-		
+
 		?>
 		<?php
 	}
