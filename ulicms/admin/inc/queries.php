@@ -391,13 +391,6 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	}
 
 	$text_position = Database::escapeValue ( $_POST ["text_position"] );
-
-	$page = new Page()
-	$page->loadByID($id);
-
-	$autor = $page->autor;
-	$is_owner = $autor == get_user_id();
-
   $actived_sql = "";
 
 	if($activated){
