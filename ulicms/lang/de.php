@@ -640,4 +640,9 @@ define ( "TRANSLATION_THERE_ARE_UNFINISHED_PACKAGE_INSTALLATIONS", "Es gibt unvo
 define ( "TRANSLATION_FINISHED", "Fertig!" );
 define ( "TRANSLATION_RUN_POST_INSTALL_SCRIPT", "Post Install Script ausführen" );
 
+// Workflow
+define( "TRANSLATION_APPROVED", "Genehmigt" );
+define( "TRANSLATION_YES", "Ja" );
+define( "TRANSLATION_YES", "Nein" );
+
 add_hook ( "lang_de" );

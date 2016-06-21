@@ -53,6 +53,13 @@ function filter_by_active(element){
    }
 }
 
+function filter_by_approved(element){
+   var index = element.selectedIndex
+   if(element.options[index].value != ""){
+     location.replace("index.php?action=pages&filter_approved=" + element.options[index].value)
+   }
+}
+
 function filter_by_parent(element){
    var index = element.selectedIndex
    if(element.options[index].value != ""){
@@ -122,6 +129,13 @@ $(window).load(function(){
 				$_SESSION ["filter_active"] = intval ( $_GET ["filter_active"] );
 		}
 
+		if (isset ( $_GET ["filter_approved"] )) {
+		  if ($_GET ["filter_approved"] === "null")
+		    $_SESSION ["filter_approved"] = null;
+		  else
+		    $_SESSION ["filter_approved"] = intval ( $_GET ["filter_approved"] );
+		}
+
 		if (isset ( $_GET ["filter_type"] )) {
 			if ($_GET ["filter_type"] == "null") {
 				$_SESSION ["filter_type"] = null;
@@ -158,6 +172,10 @@ $(window).load(function(){
 		if (! isset ( $_SESSION ["filter_active"] )) {
 			$_SESSION ["filter_active"] = null;
 		}
+
+	 if (! isset ( $_SESSION ["filter_approved"] )) {
+					$_SESSION ["filter_approved"] = null;
+				}
 
 		if (isset ( $_GET ["filter_category"] )) {
 			$_SESSION ["filter_category"] = intval ( $_GET ["filter_category"] );
@@ -352,6 +370,44 @@ $(window).load(function(){
 		echo TRANSLATION_DISABLED;
 		?></option>
 </select>
+
+<?php
+
+  echo TRANSLATION_ENABLED;
+  ?>
+<select name="filter_approved" onchange="filter_by_approved(this);">
+<option value="null"
+  <?php
+
+  if (null == $_SESSION ["filter_approved"])
+    echo "selected";
+  ?>>
+    [
+    <?php
+
+  echo TRANSLATION_EVERY;
+  ?>
+    ]
+  </option>
+<option value="1"
+  <?php
+
+  if (1 === $_SESSION ["filter_approved"])
+    echo "selected";
+  ?>><?php
+
+  translate("yes");
+  ?></option>
+<option value="0"
+  <?php
+
+  if (0 === $_SESSION ["filter_approved"])
+    echo "selected";
+  ?>><?php
+
+	  translate("no");
+  ?></option>
+</select>
 </p>
 
 <?php
@@ -470,6 +526,11 @@ $(window).load(function(){
 
 		if ($_SESSION ["filter_active"] !== null) {
 			$filter_sql .= "AND active = " . intval ( $_SESSION ["filter_active"] ) . " ";
+		}
+
+
+		if ($_SESSION ["filter_approved"] !== null) {
+			$filter_sql .= "AND approved = " . intval ( $_SESSION ["filter_approved"] ) . " ";
 		}
 
 		if ($_SESSION ["filter_parent"] != null) {
