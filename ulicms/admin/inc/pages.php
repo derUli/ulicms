@@ -344,12 +344,7 @@ $(window).load(function(){
 		if (null == $_SESSION ["filter_active"])
 			echo "selected";
 		?>>
-			[
-			<?php
-
-		echo TRANSLATION_EVERY;
-		?>
-			]
+			[<?php translate("every"); ?>]
 		</option>
 	<option value="1"
 		<?php
@@ -382,13 +377,11 @@ $(window).load(function(){
   if (null == $_SESSION ["filter_approved"])
     echo "selected";
   ?>>
-    [
-    <?php
+    [<?php
 
   translate("every");
   ?>
-    ]
-  </option>
+    ]</option>
 <option value="1"
   <?php
 
