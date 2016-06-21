@@ -10,6 +10,7 @@ Neue Features
 + Klasse ModuleHelper hinzugefügt
 + post-install Scripts können nun auch manuell ausgeführt werden
 + Rudimentäre Freigabe-Workflows sind nun möglich
++ Eigentümer einer Seite kann nun geändert werden
 
 Änderungen
 # Feld "Position" ist jetzt ein HTML5 Number Feld

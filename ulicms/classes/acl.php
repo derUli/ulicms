@@ -168,6 +168,8 @@ class ACL {
 		$acl_data ["pages_edit_own"] = null;
 		$acl_data ["pages_edit_others"] = null;
 		
+		$acl_data ["pages_change_owner"] = null;
+		
 		// Hook für das Erstellen eigener ACL Objekte
 		// Temporäres globales Array zum hinzufügen eigener Objekte
 		global $acl_array;

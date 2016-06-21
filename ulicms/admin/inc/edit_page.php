@@ -17,6 +17,10 @@ if (defined ( "_SECURITY" )) {
 		$sql = "SELECT id, name FROM " . tbname ( "audio" );
 		$audios = Database::query ( $sql );
 		
+		$users = getAllUsers ();
+		
+		$pages_change_owner = $acl->hasPermission ( "pages_change_owner" );
+		
 		while ( $row = db_fetch_object ( $query ) ) {
 			$list_data = new List_Data ( $row->id );
 			
@@ -537,6 +541,8 @@ function openMenuImageSelectWindow(field) {
 
 				
 				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -724,6 +730,20 @@ function openMenuImageSelectWindow(field) {
 				</select>
 
 			</div>
+		</div>
+
+		<h2 class="accordion-header"><?php translate("owner");?></h2>
+
+		<div class="accordion-content">
+			<strong><?php translate("owner");?></strong> <select name="autor"
+				<?php if(!$pages_change_owner) echo "disabled";?>>
+<?php
+				foreach ( $users as $user ) {
+					?>
+	<option value="<?php Template::escape($user->id);?>"
+					<?php if($user->id == $row->autor) echo "selected";?>><?php Template::escape($user->username);?></option>
+	<?php } ?>
+</select>
 		</div>
 
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>

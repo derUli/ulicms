@@ -644,5 +644,6 @@ define ( "TRANSLATION_RUN_POST_INSTALL_SCRIPT", "Post Install Script ausführen"
 define ( "TRANSLATION_APPROVED", "Genehmigt" );
 define ( "TRANSLATION_YES", "Ja" );
 define ( "TRANSLATION_YES", "Nein" );
+define ( "TRANSLATION_OWNER", "Eigentümer" );
 
 add_hook ( "lang_de" );
