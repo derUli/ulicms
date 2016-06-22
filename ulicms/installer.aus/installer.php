@@ -293,6 +293,7 @@ $(document).ready(function(){
 			echo TRANSLATION_NEXT;
 			?>">
 		</p>
+		<img src="../admin/gfx/loading.gif" id="loading">
 		<div id="error-message"></div>
 		<input type="hidden" name="step" value="2">
 	</form>
@@ -377,7 +378,7 @@ $(document).ready(function(){
 			echo TRANSLATION_HOMEPAGE_SETTINGS;
 			?>
 	</h2>
-	<form action="index.php" method="post">
+	<form action="index.php" method="post" class="show-loading-indicator-on-submit">
 		<table border=1>
 			<tr>
 				<td><?php
@@ -459,6 +460,9 @@ $(document).ready(function(){
 			echo TRANSLATION_DO_INSTALL;
 			?>">
 		</p>
+		
+		
+		<img src="../admin/gfx/loading.gif" id="loading">
 		<input type="hidden" name="step" value="4">
 	</form>
 

@@ -43,3 +43,7 @@ input[type="submit"]:hover, button:hover {
 	padding: 20px;
 	background-color: rgb(250, 255, 189);
 }
+
+#loading {
+	display:none;	
+}

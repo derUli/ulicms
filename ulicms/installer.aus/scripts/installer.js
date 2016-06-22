@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 	$("form#database-login").on("submit", function(e) {
 		e.preventDefault();
+		$("img#loading").show();
 		var data = {
 			servername : $("input[name='servername']").val(),
 			loginname : $("input[name='loginname']").val(),
@@ -17,9 +18,16 @@ $(document).ready(function() {
 				$("form#database-login").submit();
 				return true;
 			} else {
+
+				$("img#loading").hide();
 				$("#error-message").slideDown();
+
 			}
 		});
+	});
+	$("form.show-loading-indicator-on-submit").on("submit", function(e) {
+
+		$("img#loading").show();
 	});
 
 });
