@@ -53,7 +53,8 @@ echo TRANSLATION_TITLE;
 	<?php
 	if (! isset ( $_REQUEST ["step"] )) {
 		?>
-	<form action="index.php" method="get" class="show-loading-indicator-on-submit">
+	<form action="index.php" method="get"
+		class="show-loading-indicator-on-submit">
 		<p>
 			<strong>Sprache auswählen / Select a language</strong><br /> <select
 				name="language"
@@ -205,7 +206,8 @@ echo TRANSLATION_TITLE;
 		if (! isset ( $error )) {
 			?>
 
-	<form action="index.php" method="post" class="show-loading-indicator-on-submit">
+	<form action="index.php" method="post"
+		class="show-loading-indicator-on-submit">
 		<input type="hidden" name="step" value="1"> <input type="submit"
 			value="<?php
 			
@@ -239,7 +241,8 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_MYSQL_LOGIN_HELP;
 			?>
 	</p>
-	<form action="index.php" method="post" id="database-login" class="show-loading-indicator-on-submit">
+	<form action="index.php" method="post" id="database-login"
+		class="show-loading-indicator-on-submit">
 		<table border=1>
 			<tr>
 				<td><?php
@@ -355,18 +358,24 @@ $(document).ready(function(){
 					?>
 	</p>
 
-	<form action="index.php" method="post" class="show-loading-indicator-on-submit">
+	<form action="index.php" method="post"
+		class="show-loading-indicator-on-submit">
 		<input type="hidden" name="step" value="3"> <input type="submit"
 			value="<?php
 					
 					echo TRANSLATION_NEXT;
 					?>">
 		<p>
-			
-		<p>
-	
-	<img src="../admin/gfx/loading.gif" id="loading">
-		</p></form>
+
+
+
+
+
+
+			<img src="../admin/gfx/loading.gif" id="loading">
+		</p>
+
+	</form>
 
 	<?php
 				}
