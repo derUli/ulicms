@@ -11,10 +11,10 @@ Neue Features
 + post-install Scripts können nun auch manuell ausgeführt werden
 + Rudimentäre Freigabe-Workflows sind nun möglich
 + Eigentümer einer Seite kann nun geändert werden
-+ Benutzerfreundliches des Installationsassistenten verbessert
 
 Änderungen
 # Feld "Position" ist jetzt ein HTML5 Number Feld
+# Berfreundlichkeit des Installationsassistenten verbessert
 
 Entfernte Features
 - Templates können nicht mehr online im Browser bearbeitet werden
