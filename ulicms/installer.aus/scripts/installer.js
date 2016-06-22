@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	$("form#database-login").on("submit", function(e) {
 		e.preventDefault();
 		$("img#loading").show();
@@ -18,7 +17,6 @@ $(document).ready(function() {
 				$("form#database-login").submit();
 				return true;
 			} else {
-
 				$("img#loading").hide();
 				$("#error-message").slideDown();
 			}
