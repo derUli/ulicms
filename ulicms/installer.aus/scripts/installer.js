@@ -1,9 +1,7 @@
 $(document).ready(function() {
 
 	$("form#database-login").on("submit", function(e) {
-
 		e.preventDefault();
-
 		var data = {
 			servername : $("input[name='servername']").val(),
 			loginname : $("input[name='loginname']").val(),
