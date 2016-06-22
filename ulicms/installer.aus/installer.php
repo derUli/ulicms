@@ -42,6 +42,7 @@ echo TRANSLATION_TITLE;
 <link rel="stylesheet" type="text/css" href="media/style.css" />
 <script type="text/javascript" src="../admin/scripts/jquery.min.js"></script>
 <script type="text/javascript" src="../admin/scripts/util.js"></script>
+<script type="text/javascript" src="scripts/installer.js"></script>
 </head>
 <body>
 	<p>
@@ -232,7 +233,7 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_MYSQL_LOGIN_HELP;
 			?>
 	</p>
-	<form action="index.php" method="post">
+	<form action="index.php" method="post" id="database-login">
 		<table border=1>
 			<tr>
 				<td><?php
@@ -240,7 +241,8 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_SERVERNAME;
 			?>
 				</td>
-				<td><input name="servername" type="text" value="localhost"></td>
+				<td><input name="servername" type="text" value="localhost"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -248,7 +250,7 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_LOGINNAME;
 			?>
 				</td>
-				<td><input name="loginname" type="text" value=""></td>
+				<td><input name="loginname" type="text" value="" required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -268,7 +270,7 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_DATABASE_NAME;
 			?>
 				</td>
-				<td><input name="datenbank" type="text" value=""></td>
+				<td><input name="datenbank" type="text" value="" required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -291,6 +293,7 @@ $(document).ready(function(){
 			echo TRANSLATION_NEXT;
 			?>">
 		</p>
+		<div id="error-message"></div>
 		<input type="hidden" name="step" value="2">
 	</form>
 
@@ -382,8 +385,8 @@ $(document).ready(function(){
 			echo TRANSLATION_HOMEPAGE_TITLE;
 			?>
 				</td>
-				<td><input name="homepage_title" type="text" value="Meine Homepage">
-				</td>
+				<td><input name="homepage_title" type="text" value="Meine Homepage"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -391,7 +394,8 @@ $(document).ready(function(){
 			echo TRANSLATION_SITE_SLOGAN;
 			?>
 				</td>
-				<td><input name="motto" type="text" value="Dies und Das"></td>
+				<td><input name="motto" type="text" value="Dies und Das"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -399,7 +403,7 @@ $(document).ready(function(){
 			echo TRANSLATION_YOUR_FIRSTNAME;
 			?>
 				</td>
-				<td><input name="firstname" type="text" value="Max"></td>
+				<td><input name="firstname" type="text" value="Max" required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -407,7 +411,8 @@ $(document).ready(function(){
 			echo TRANSLATION_YOUR_LASTNAME;
 			?>
 				</td>
-				<td><input name="lastname" type="text" value="Mustermann"></td>
+				<td><input name="lastname" type="text" value="Mustermann"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -415,7 +420,8 @@ $(document).ready(function(){
 			echo TRANSLATION_YOUR_EMAIL_ADRESS;
 			?>
 				</td>
-				<td><input name="email" type="text" value="max@muster.de"></td>
+				<td><input name="email" type="text" value="max@muster.de"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -423,7 +429,8 @@ $(document).ready(function(){
 			echo TRANSLATION_ADMIN_NAME;
 			?>
 				</td>
-				<td><input name="admin_user" type="text" value="admin"></td>
+				<td><input name="admin_user" type="text" value="admin"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -431,7 +438,8 @@ $(document).ready(function(){
 			echo TRANSLATION_ADMIN_PASSWORD;
 			?>
 				</td>
-				<td><input name="passwort" id="password" type="password" value=""></td>
+				<td><input name="passwort" id="password" type="password" value=""
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
