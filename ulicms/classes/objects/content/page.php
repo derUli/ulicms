@@ -105,9 +105,9 @@ class Page extends Content {
 		return $retval;
 	}
 	public function create() {
-		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category, 
-				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views, 
-				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at, 
+		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category,
+				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views,
+				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
 				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
@@ -299,4 +299,3 @@ class Page extends Content {
 		}
 	}
 }
-

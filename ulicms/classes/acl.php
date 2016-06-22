@@ -132,7 +132,7 @@ class ACL {
 		// Benutzer
 		$acl_data ["users"] = null;
 		$acl_data ["groups"] = null;
-				
+		
 		// Package Manager
 		$acl_data ["list_packages"] = null;
 		$acl_data ["install_packages"] = null;
@@ -161,6 +161,14 @@ class ACL {
 		$acl_data ["import"] = null;
 		
 		$acl_data ["info"] = null;
+		
+		// Workflows
+		$acl_data ["pages_activate_own"] = null;
+		$acl_data ["pages_activate_others"] = null;
+		$acl_data ["pages_edit_own"] = null;
+		$acl_data ["pages_edit_others"] = null;
+		
+		$acl_data ["pages_change_owner"] = null;
 		
 		// Hook für das Erstellen eigener ACL Objekte
 		// Temporäres globales Array zum hinzufügen eigener Objekte

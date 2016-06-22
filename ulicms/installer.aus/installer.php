@@ -513,7 +513,7 @@ $(document).ready(function(){
 			mysqli_query ( $connection, $create_table_groups_sql ) or die ( mysqli_error ( $connection ) );
 			
 			$insert_group_query = 'INSERT INTO `' . $prefix . 'groups` (`id`, `name`, `permissions`) VALUES
-(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"groups":true, "categories" : true, "images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"favicon":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"update_system":true,"users":true,"export":true, "import" : true, "videos":true, "audio":true, "open_graph":true, "forms":true, "patch_management" : true, "upload_patches" : true}\')';
+(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"groups":true, "categories" : true, "images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"favicon":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"update_system":true,"users":true,"export":true, "import" : true, "videos":true, "audio":true, "open_graph":true, "forms":true, "patch_management" : true, "upload_patches" : true, "pages_activate_own" : true, "pages_activate_others" : true, "pages_edit_own" : true, "pages_edit_others" : true, "pages_change_owner" : true }\')';
 			
 			mysqli_query ( $connection, $insert_group_query );
 			
@@ -594,7 +594,7 @@ $(document).ready(function(){
   `video` int(11) default null,
   `audio` int(11) default null,
   `text_position` varchar(10) default 'before',
-					
+	`approved` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" ) or die ( mysqli_error ( $connection ) );
 			
@@ -792,7 +792,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   `parent_id` int(11) DEFAULT NULL,
   `order_by` varchar(30) DEFAULT 'title',
   `order_direction` varchar(30) DEFAULT 'asc',
-  `limit` int(11) default null,	
+  `limit` int(11) default null,
   UNIQUE KEY `content_id` (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
 			

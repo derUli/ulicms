@@ -1,0 +1,22 @@
+Berechtigungen für Workflows:
+
+pages_activate_own:
+- Wenn der User dieses Recht hat, darf er seine eigenen Seiten aktivieren
+- Ansonsten ist das Feld "Aktiviert" deaktiviert und beim Anlegen
+einer neuen Seite per default auf "deaktiviert".
+
+pages_activate_others:
+- Wenn der User dieses Recht hat, darf er seine eigenen Seiten und die Seiten
+anderer Autoren aktivieren und bearbeiten
+
+pages_edit_own:
+Wenn der User dieses Recht hat, darf er seine eigenen Seiten bearbeiten und
+löschen.
+
+pages_edit_others:
+Wenn der User dieses Recht hat, darf er die Seiten aller User bearbeiten und
+löschen.
+
+Todo:
+- Feld zum Ändern des Eigentümers einer Seite hinzufügen (benötigt recht "change_owner")
+- Auch Änderungen an bereits existierenden Seiten müssen freigeschaltet werden

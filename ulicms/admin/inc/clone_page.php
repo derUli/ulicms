@@ -18,6 +18,8 @@ if (defined ( "_SECURITY" )) {
 		$groups = db_query ( "SELECT id, name from " . tbname ( "groups" ) );
 		while ( $row = db_fetch_object ( $query ) ) {
 			$list_data = new List_Data ( $row->id );
+			$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
+			
 			?>
 
 
@@ -147,8 +149,8 @@ if (defined ( "_SECURITY" )) {
 			
 			echo TRANSLATION_POSITION;
 			?> </strong> <span style="cursor: help;"
-				onclick="$('div#position_help').slideToggle()">[?]</span><br />
-			<input type="number" name="position" required="true" min="0" step="1"
+				onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
+				type="number" name="position" required="true" min="0" step="1"
 				value="<?php
 			
 			echo $row->position;
@@ -204,31 +206,21 @@ if (defined ( "_SECURITY" )) {
 	</select> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_ACTIVATED;
-			?> </strong><br /> <select name="activated" size=1>
-				<option value="1"
-					<?php
-			
-			if ($row->active == 1) {
-				echo "selected";
-			}
-			?>>
-		<?php
+			?> </strong><br />
+			<select name="activated" size=1
+				<?php if(!$pages_activate_own) echo "disabled";?>>
+				<option value="1">
+				<?php
 			
 			echo TRANSLATION_ENABLED;
 			?>
-		</option>
-				<option value="0"
-					<?php
-			
-			if ($row->active == 0) {
-				echo "selected";
-			}
-			?>>
-		<?php
+				</option>
+				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
+				<?php
 			
 			echo TRANSLATION_DISABLED;
 			?>
-		</option>
+				</option>
 			</select>
 		</div>
 		<div id="tab-link">
@@ -457,7 +449,7 @@ function openMenuImageSelectWindow(field) {
 			
 			echo TRANSLATION_CLEAR;
 			?>
-		</a> 
+		</a>
 		<?php
 			if (! empty ( $row->og_image )) {
 				$og_url = get_protocol_and_domain () . $row->og_image;
@@ -470,41 +462,43 @@ function openMenuImageSelectWindow(field) {
 				?>" />
 						</div>
 <?php }?>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 				
 				
 				</div>
@@ -736,7 +730,7 @@ var editor = CKEDITOR.replace( 'page_content',
 				
 				echo Settings::get ( "ckeditor_skin" );
 				?>'
-					});                                         
+					});
 
 
 
@@ -746,31 +740,31 @@ editor.on("instanceReady", function()
 	this.document.on("paste", CKCHANGED);
 }
 );
-function CKCHANGED() { 
+function CKCHANGED() {
 	formchanged = 1;
-}					
-			
+}
+
 var formchanged = 0;
 var submitted = 0;
- 
+
 $(document).ready(function() {
 $("#extra_options").hide();
 	$('form').each(function(i,n){
 		$('input', n).change(function(){formchanged = 1});
 		$('textarea', n).change(function(){formchanged = 1});
-		$('select', n).change(function(){formchanged = 1}); 
+		$('select', n).change(function(){formchanged = 1});
 		$(n).submit(function(){submitted=1});
 	});
 });
- 
+
 window.onbeforeunload = confirmExit;
 function confirmExit()
 {
 	if(formchanged == 1 && submitted == 0)
 		return "Wenn Sie diese Seite verlassen gehen nicht gespeicherte Änderungen verloren.";
-	else 
+	else
 		return;
-}			
+}
 </script>
 <?php
 			} else if ($editor == "codemirror") {
@@ -781,7 +775,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 {lineNumbers: true,
         matchBrackets: true,
         mode : "text/html",
-        
+
         indentUnit: 0,
         indentWithTabs: false,
         enterMode: "keep",
@@ -827,7 +821,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 <?php
 			}
 			?>
-			
+
 	<script src="scripts/page.js" type="text/javascript">
 </script>
 	<input type="hidden" name="add_page" value="add_page">
