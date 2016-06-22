@@ -21,12 +21,10 @@ $(document).ready(function() {
 
 				$("img#loading").hide();
 				$("#error-message").slideDown();
-
 			}
 		});
 	});
 	$("form.show-loading-indicator-on-submit").on("submit", function(e) {
-
 		$("img#loading").show();
 	});
 
