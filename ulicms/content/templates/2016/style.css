@@ -1,4 +1,4 @@
-input[type="button"], button, input[type="reset"], input[type="submit"]
+﻿input[type="button"], button, input[type="reset"], input[type="submit"]
 	{
 	font-size: 120%;
 	padding: 20px;
@@ -268,4 +268,9 @@ div#root-container {
 
 div.socialshareprivacy {
 	margin-bottom: 60px;
+}
+
+.grey-bar{
+	background-color:rgb(100,100,100);
+	height:20px;
 }
