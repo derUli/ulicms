@@ -48,5 +48,6 @@ define ( "TRANSLATION_SUCCESSFULL_DB_CONNECT", "Successfull connected to databas
 
 define ( "TRANSLATION_PHP_VERSION_TOO_LOW", "Your server is running PHP " . phpversion () . ".<br/>" . "It is recommend to upgrade to PHP " . REQUIRED_PHP_VERSION . " or better, or some functions of UliCMS will not be available." );
 
-
 define ( "TRANSLATION_VIEW_PASSWORD", "Show Password" );
+
+define ( "TRANSLATION_INSTALL_DEMO_DATA", "Install additional demo data" );
