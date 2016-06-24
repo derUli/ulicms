@@ -81,3 +81,42 @@ function systemname_vorschlagen(txt) {
 	systemname = systemname.replace(/\#/g, "");
 	$("#system_title").val(systemname);
 }
+
+function systemnameOrLanguageChanged(item){
+	var id_field = $("input[name='page_id']");
+	var myid = 0;
+	if(id_field){
+		myid = $(id_field).val();
+	}
+	var data = {
+		ajax_cmd : "check_if_systemname_is_free",
+		systemname : $("input[name='system_title']").val(),
+		language: $("select[name='language']").val(),
+		id: myid
+	};
+	$.post("index.php", data, function(text, status) {
+		if(text == "yes"){
+			$("input[name='system_title']").removeClass("error-field");	
+			$("select[name='language']").removeClass("error-field");
+		} else {
+			$("input[name='system_title']").addClass("error-field");	
+			$("select[name='language']").addClass("error-field");
+		}
+	});
+	
+}
+
+$(function(){
+
+	$("input[name='system_title']").keyup(function(){
+		systemnameOrLanguageChanged($(this));
+	});
+
+
+	$("select[name='language']").change(function(){
+		systemnameOrLanguageChanged($(this));
+	});
+
+systemnameOrLanguageChanged($("input[name='system_title']"));
+systemnameOrLanguageChanged($("select[name='language']"));
+});
