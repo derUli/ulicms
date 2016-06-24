@@ -335,4 +335,5 @@ div#login-welcome-text {
 
 .error-field{
    background-color:red !important;
+	 color:white !important;
 }
