@@ -469,7 +469,7 @@ $(document).ready(function(){
 
 			</tr>
 			<tr><td><?php echo TRANSLATION_INSTALL_DEMO_DATA;?></td>
-			<td><input type="checkbox" name="install_demo_data" checked></td>
+			<td><input type="checkbox" name="install_demo_data" checked value="install"></td>
 			</tr>
 		</table>
 		<script type="text/javascript">
