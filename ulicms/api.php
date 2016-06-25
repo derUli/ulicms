@@ -354,7 +354,8 @@ function get_available_post_types() {
 			"link",
 			"module",
 			"video",
-			"audio" 
+			"audio",
+			"image" 
 	);
 	add_hook ( $post_types );
 	

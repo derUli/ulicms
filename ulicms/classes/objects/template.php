@@ -6,6 +6,9 @@ class Template {
 			case "list" :
 				echo Template::executeDefaultOrOwnTemplate ( "list" );
 				break;
+			case "image" :
+				echo Template::executeDefaultOrOwnTemplate ( "image" );
+				break;
 			case "module" :
 				$page = get_page ();
 				if ($page ["module"] != null and strlen ( $page ["module"] ) > 0) {
@@ -25,6 +28,7 @@ class Template {
 					echo replaceAudioTags ( "[audio id=" . $page ["audio"] . "]" );
 				}
 				break;
+			
 		}
 	}
 	public static function poweredByUliCMS() {

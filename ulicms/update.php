@@ -111,6 +111,8 @@ Database::query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN `approved
 
 Database::query ( "update " . tbname ( "content" ) . " set `type` = 'link' where redirection is not null and redirection <> ''" );
 
+Database::query ( "alter table " . tbname ( "content" ) . "  add column `image_url` text default null" );
+
 Settings::set ( "db_schema_version", "9.8.4" );
 
 // Patch Manager zurücksetzen

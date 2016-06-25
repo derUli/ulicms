@@ -41,6 +41,9 @@ class ContentFactory {
 		} else if ($row->type == "audio") {
 			$retval = new Audio_Page ();
 			$retval->loadByID ( $row->id );
+		} else if ($row->type == "image") {
+			$retval = new Image_Page ();
+			$retval->loadByID ( $row->id );
 		}
 		
 		return $retval;
