@@ -3,6 +3,7 @@
 Neue Features
 + Inhaltstyp "Liste" hinzugefügt
 + Inhaltstyp "Link" hinzugefügt
++ Inhaltstyp "Bild" hinzugefügt
 + Inhaltstyp "Modul" hinzugefügt
 + Inhaltstyp "Audio" hinzugefügt
 + Inhaltstyp "Video" hinzugefügt
@@ -11,6 +12,7 @@ Neue Features
 + post-install Scripts können nun auch manuell ausgeführt werden
 + Rudimentäre Freigabe-Workflows sind nun möglich
 + Eigentümer einer Seite kann nun geändert werden
++ Bei der Installation können nun zusätzliche Demodaten installiert werden
 
 Änderungen
 # Feld "Position" ist jetzt ein HTML5 Number Feld
