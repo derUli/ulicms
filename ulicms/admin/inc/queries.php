@@ -412,7 +412,6 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	add_hook ( "before_edit_page" );
 	$sql = "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
 	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, image_url = $image_url $approved_sql WHERE id=$id";
-	var_dump ( $sql );
 	db_query ( $sql ) or die ( DB::error () );
 	
 	$user_id = get_user_id ();
@@ -451,7 +450,6 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		$list->order_by = $list_order_by;
 		$list->order_direction = $list_order_direction;
 		$list->limit = $limit;
-		var_dump ( $list_order_direction );
 		$list->save ();
 	}
 	
