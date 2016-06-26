@@ -22,9 +22,18 @@ class Translation {
 		return $retval;
 	}
 	public static function includeCustomLangFile($lang) {
-		$file = ULICMS_ROOT . "/lang/custom/de.php";
+		$file = ULICMS_ROOT . "/lang/custom/" . basename ( $lang ) . ".php";
 		if (file_exists ( $file ) and is_file ( $file )) {
 			include_once $file;
+		}
+	}
+	public static function loadAllModuleLanguageFiles($lang) {
+		$modules = getAllModules ();
+		foreach ( $modules as $module ) {
+			$file = getModulePath ( $module, true ) . "/lang/" . $lang . ".php";
+			if (file_exists ( $file ) and is_file ( $file )) {
+				include_once $file;
+			}
 		}
 	}
 }

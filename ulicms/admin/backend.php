@@ -20,11 +20,12 @@ add_hook ( "after_set_language_by_domain" );
 
 $syslang = getSystemLanguage ();
 include_once getLanguageFilePath ( $syslang );
+Translation::loadAllModuleLanguageFiles ( $syslang );
 add_hook ( "before_include_custom_lang_file" );
-Translation::includeCustomLangFile ( $_SESSION ["language"] );
+Translation::includeCustomLangFile ( $syslang );
 add_hook ( "after_include_custom_lang_file" );
 add_hook ( "before_custom_lang" );
-add_hook ( "custom_lang_" . $_SESSION ["language"] );
+add_hook ( "custom_lang_" . $syslang );
 
 add_hook ( "after_custom_lang" );
 
