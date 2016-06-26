@@ -1,4 +1,4 @@
-﻿[ ] Unterstützung für Module mit einem "lang" Ordner für Sprachdateien
+﻿[X] Unterstützung für Module mit einem "lang" Ordner für Sprachdateien
     z.B. ULICMS_ROOT/content/modules/meinmodul/lang/de.php
 [ ] Prepared Statements
 [ ] Funktionen für Drop, Truncate table und "select (avg)" zur Database Klasse hinzufügen.
