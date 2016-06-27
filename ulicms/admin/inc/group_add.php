@@ -30,7 +30,7 @@ csrf_token_html ();
 			<input id="checkall" type="checkbox" class="checkall"> <label
 				for="checkall"><?php
 				
-				echo TRANSLATION_SELECT_ALL;
+				translate("select_all");
 				?> </label>
 		</p>
 		<p>
@@ -42,8 +42,7 @@ csrf_token_html ();
 			
 			echo $key;
 			?>"
-				name="user_permissons[]"
-				value="<?php
+				name="user_permissons[]" value="<?php
 			
 			echo $key;
 			?>"> <label for="<?php
@@ -62,7 +61,8 @@ csrf_token_html ();
 		value="<?php
 		
 		echo TRANSLATION_CREATE_GROUP;
-		?>" name="add_group">
+		?>"
+		name="add_group">
 </form>
 
 <script type="text/javascript">
