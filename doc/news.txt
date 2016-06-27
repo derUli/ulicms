@@ -13,6 +13,9 @@ Neue Features
 + Rudimentäre Freigabe-Workflows sind nun möglich
 + Eigentümer einer Seite kann nun geändert werden
 + Bei der Installation können nun zusätzliche Demodaten installiert werden
++ Es wird nun auch ein "lang" Ordner als Speicherort für Lokalisierungen von Mdulen
+unterstützt
+
 
 Änderungen
 # Feld "Position" ist jetzt ein HTML5 Number Feld
