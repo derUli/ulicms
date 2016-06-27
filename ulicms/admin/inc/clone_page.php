@@ -70,6 +70,9 @@ if (defined ( "_SECURITY" )) {
 					type="radio" name="type" value="link" id="type_link"
 					<?php if($row->type == "link"){ echo "checked";}?>> <label
 					for="type_link"><?php translate("link");?></label> <br /> <input
+					type="radio" name="type" value="image" id="type_image"
+					<?php if($row->type == "image") echo "checked"?>> <label
+					for="type_image"><?php translate("image");?></label> <br /> <input
 					type="radio" name="type" value="module" id="type_module"
 					<?php if($row->type == "module"){ echo "checked";}?>> <label
 					for="type_module"><?php translate("module");?></label> <br /> <input
@@ -206,8 +209,7 @@ if (defined ( "_SECURITY" )) {
 	</select> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_ACTIVATED;
-			?> </strong><br />
-			<select name="activated" size=1
+			?> </strong><br /> <select name="activated" size=1
 				<?php if(!$pages_activate_own) echo "disabled";?>>
 				<option value="1">
 				<?php
@@ -501,6 +503,10 @@ function openMenuImageSelectWindow(field) {
 
 				
 				
+				
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -674,6 +680,21 @@ function openMenuImageSelectWindow(field) {
 				</select>
 			</div>
 
+		</div>
+		<div id="tab-image" style="display: none;">
+			<h2 class="accordion-header"><?php translate("image");?></h2>
+
+			<div class="accordion-content">
+				<input type="text" id="image_url" name="image_url"
+					readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+					value="<?php Template::escape($row->image_url);?>"
+					style="cursor: pointer" /><br /> <a href="#"
+					onclick="$('#menu_image').val('');return false;"><?php
+			
+			translate ( "clear" );
+			?>
+		</a>
+			</div>
 		</div>
 		<div id="tab-text-position" style="display: none">
 			<h2 class="accordion-header"><?php translate("position_of_description");?></h2>

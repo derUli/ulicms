@@ -60,6 +60,8 @@
 					for="type_list"><?php translate("list");?></label> <br /> <input
 					type="radio" name="type" value="link" id="type_link"> <label
 					for="type_link"><?php translate("link");?></label> <br /> <input
+					type="radio" name="type" value="image" id="type_image"> <label
+					for="type_image"><?php translate("image");?></label><br /> <input
 					type="radio" name="type" value="module" id="type_module"> <label
 					for="type_module"><?php translate("module");?></label> <br /> <input
 					type="radio" name="type" value="video" id="type_video"> <label
@@ -512,6 +514,20 @@ function openMenuImageSelectWindow(field) {
 
 		</div>
 
+		<div id="tab-image" style="display: none;">
+			<h2 class="accordion-header"><?php translate("image");?></h2>
+
+			<div class="accordion-content">
+				<input type="text" id="image_url" name="image_url"
+					readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+					value="" style="cursor: pointer" /><br /> <a href="#"
+					onclick="$('#menu_image').val('');return false;"><?php
+			
+			translate ( "clear" );
+			?>
+		</a>
+			</div>
+		</div>
 		<div id="tab-text-position" style="display: none">
 			<h2 class="accordion-header"><?php translate("position_of_description");?></h2>
 			<div class="accordion-content">
@@ -637,6 +653,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 
 	<script src="scripts/page.js" type="text/javascript">
 </script>
+
 </form>
 
 
@@ -648,4 +665,4 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 
 <?php
 	}
-?>
+	?>

@@ -352,6 +352,7 @@ function get_available_post_types() {
 			"page",
 			"list",
 			"link",
+			"image",
 			"module",
 			"video",
 			"audio" 

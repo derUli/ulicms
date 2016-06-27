@@ -108,8 +108,10 @@ Database::query ( "alter table " . tbname ( "content" ) . " add column `video` i
 Database::query ( "alter table " . tbname ( "content" ) . " add column `audio` int(11) default null" );
 Database::query ( "alter table " . tbname ( "content" ) . " add column `text_position` varchar(10) default 'before'" );
 Database::query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN `approved` tinyint(1) NOT NULL DEFAULT '1'" );
+Database::query ( "alter table " . tbname ( "content" ) . "  add column `image_url` text default null" );
 
 Database::query ( "update " . tbname ( "content" ) . " set `type` = 'link' where redirection is not null and redirection <> ''" );
+
 
 Settings::set ( "db_schema_version", "9.8.4" );
 
