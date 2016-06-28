@@ -599,7 +599,7 @@ function apply_filter($text, $type) {
 				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
 			}
 		} else if (file_exists ( $module_content_filter_file2 )) {
-			include_once $module_content_filter_file1;
+			include_once $module_content_filter_file2;
 			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
 				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
 			}
