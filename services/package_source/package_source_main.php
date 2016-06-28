@@ -58,7 +58,7 @@ function package_source_package_list() {
 	$packages = file_get_contents ( PACKAGE_SOURCE_BASE_PATH . "/" . basename ( $_GET ["ulicms_version"] ) . "/list.txt" );
 	$packages = str_replace ( "\r\n", "\n", $packages );
 	$packages = explode ( "\n", $packages );
-	natcasesort($packages);
+	natcasesort ( $packages );
 	foreach ( $packages as $package ) {
 		if (! empty ( $package )) {
 			$html .= "<li>";
