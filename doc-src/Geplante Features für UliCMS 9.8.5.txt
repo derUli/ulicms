@@ -1,2 +1,12 @@
-﻿[ ] Prepared Statements
-[ ] Funktionen für Drop, Truncate table und "select (avg)" zur Database Klasse hinzufügen.
+﻿[ ] Option "Überschriften" anzeigen / verbergen
+[ ] mehrspaltige Seiten (Bootstrap Grid)
+[ ] Migration Framework a la FluentMigrator
+[ 9 Prepared Statements
+
+API-Funktionen 
+[ ] Database::dropTable($table)
+[ ] Database::dropColumn($table, $column)
+[ ] Database::selectAvg($table, $column)
+[ ] Database::selectMin($table, $column)
+[ ] Database::selectMax($table, $column)
+[ ] Database::selectAll($table, $columns = "*")
