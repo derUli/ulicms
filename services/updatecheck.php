@@ -2,7 +2,6 @@
 header ( "Content-Type: text/html; charset=UTF-8" );
 $version = $_REQUEST ["v"];
 
-
 if ($version == "7.0.0") {
 	die ( "<p>Ein Update auf UliCMS 7.1.2 ist verfügbar.<br/>
    <a href=\"http://www.ulicms.de/content/files/Releases/Upgrades/ulicms-7.0.0-auf-ulicms-7.1.2-upgrade.zip\">Download</a></p>" );
@@ -46,8 +45,8 @@ if (($version == "9.8.0") and ((new DateTime () > new DateTime ( "2016-01-31 23:
 
 if (($version == "9.8.1") and ((new DateTime () > new DateTime ( "2016-03-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
 	die ( $version9_8_3_update_string );
-	}
-	
+}
+
 if (($version == "9.8.2") and ((new DateTime () > new DateTime ( "2016-05-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
 	die ( $version9_8_3_update_string );
 }
