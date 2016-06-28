@@ -16,6 +16,7 @@ Neue Features
 + Es wird nun auch ein "lang" Ordner als Speicherort für Lokalisierungen von Modulen
 unterstützt
 + Module update_manager und update_managerd_dashboard vorinstalliert (bei in Version 1.0.0)
++ Filter und Hooks können nun auch in einem Unterordner untergebracht werden
 
 
 Änderungen
