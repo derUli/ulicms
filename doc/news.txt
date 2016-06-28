@@ -13,9 +13,9 @@ Neue Features
 + Rudimentäre Freigabe-Workflows sind nun möglich
 + Eigentümer einer Seite kann nun geändert werden
 + Bei der Installation können nun zusätzliche Demodaten installiert werden
-+ Es wird nun auch ein "lang" Ordner als Speicherort für Lokalisierungen von Mdulen
++ Es wird nun auch ein "lang" Ordner als Speicherort für Lokalisierungen von Modulen
 unterstützt
-+ update_manager Modul vorinstalliert (Version 1.0.0)
++ Module update_manager und update_managerd_dashboard vorinstalliert (bei in Version 1.0.0)
 
 
 Änderungen
