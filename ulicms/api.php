@@ -808,9 +808,12 @@ function is_admin_dir() {
 function add_hook($name) {
 	$modules = getAllModules ();
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
-		$file = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
-		if (file_exists ( $file )) {
-			@include $file;
+		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
+		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
+		if (file_exists ( $file1 )) {
+			@include $file1;
+		} else if (file_exists ( $file2 )) {
+			@include $file2;
 		}
 	}
 }
