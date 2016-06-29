@@ -7,9 +7,9 @@ abstract class Content {
 	abstract protected function save();
 	public function getShowHeadline() {
 		$retval = true;
-		$query = Database::query ( "SELECT `show_headline` FROM content where id =" . intval ( $this->id ) );
+		$query = Database::query ( "SELECT `show_headline` FROM " . tbname ( "content" ) . " where id =" . intval ( $this->id ) );
 		if ($query) {
-			$data = Database::fetch ( $query );
+			$data = Database::fetchObject ( $query );
 			$retval = boolval ( $data->show_headline );
 		}
 		return $retval;
