@@ -26,30 +26,28 @@ class Database {
 		global $db_connection;
 		return mysqli_get_client_info ( $db_connection );
 	}
-
-	public static function dropTable($table, $prefix = true){
-		if($prefix){
-				$table = tbname($table);
+	public static function dropTable($table, $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
 		}
-
-		$table = self::escapeName($table);
-		return self::query("DROP TABLE $table");
-
+		
+		$table = self::escapeName ( $table );
+		return self::query ( "DROP TABLE $table" );
 	}
-
+	
 	// Using SQL Prepared statements
 	public static function preparedQuery($sql, $typeDef = FALSE, $params = FALSE) {
 		global $db_connection;
 		if ($stmt = mysqli_prepare ( $db_connection, $sql )) {
 			if (count ( $params ) == count ( $params, 1 )) {
 				$params = array (
-						$params
+						$params 
 				);
 				$multiQuery = FALSE;
 			} else {
 				$multiQuery = TRUE;
 			}
-
+			
 			if ($typeDef) {
 				$bindParams = array ();
 				$bindParamsReferences = array ();
@@ -61,7 +59,7 @@ class Database {
 				$bindParamsMethod = new ReflectionMethod ( 'mysqli_stmt', 'bind_param' );
 				$bindParamsMethod->invokeArgs ( $stmt, $bindParamsReferences );
 			}
-
+			
 			$result = array ();
 			foreach ( $params as $queryKey => $query ) {
 				foreach ( $bindParams as $paramKey => $value ) {
@@ -99,7 +97,7 @@ class Database {
 		} else {
 			$result = FALSE;
 		}
-
+		
 		if ($multiQuery) {
 			return $result;
 		} else {
@@ -119,7 +117,7 @@ class Database {
 	public static function getInsertID() {
 		return self::getLastInsertID ();
 	}
-
+	
 	// Fetch Row in diversen Datentypen
 	public static function fetchArray($result) {
 		return mysqli_fetch_array ( $result );
@@ -134,20 +132,20 @@ class Database {
 		if (function_exists ( "mysqli_fetch_all" )) {
 			return mysqli_fetch_all ( $result, $resulttype );
 		}
-
+		
 		// @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
 		$retval = array ();
 		while ( $row = self::fetchAssoc ( $result ) ) {
 			$retval [] = $row;
 		}
-
+		
 		return $retval;
 	}
 	public static function close() {
 		global $db_connection;
 		mysqli_close ( $db_connection );
 	}
-
+	
 	// Connect with database server
 	public static function connect($server, $user, $password) {
 		global $db_connection;
@@ -157,7 +155,7 @@ class Database {
 		self::query ( "SET NAMES 'utf8'" );
 		// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 		self::query ( "SET SESSION sql_mode = '';" );
-
+		
 		return $db_connection;
 	}
 	// Datenbank auswählen
@@ -196,16 +194,16 @@ class Database {
 		while ( $cRow = mysqli_fetch_array ( $res ) ) {
 			$tableList [] = $cRow [0];
 		}
-
+		
 		sort ( $tableList );
 		return $tableList;
 	}
-
+	
 	// Abstraktion für Escapen von Werten
 	public static function escapeValue($value, $type = null) {
 		global $db_connection;
 		if (is_null ( $type )) {
-
+			
 			if (is_float ( $value )) {
 				return floatval ( $value );
 			} else if (is_int ( $value )) {
@@ -233,15 +231,15 @@ class Database {
 		$retval = array ();
 		$table = tbname ( $table );
 		$query = Database::query ( "SELECT * FROM $table limit 1" );
-		$fields_num = self::getNumFieldCount($query);
+		$fields_num = self::getNumFieldCount ( $query );
 		if ($fields_num > 0) {
 			for($i = 0; $i < $fields_num; $i ++) {
-					$field = db_fetch_field ( $query );
-					$retval[] = $field->name;
-				}
+				$field = db_fetch_field ( $query );
+				$retval [] = $field->name;
+			}
 			sort ( $retval );
 		}
-
+		
 		return $retval;
 	}
 }
