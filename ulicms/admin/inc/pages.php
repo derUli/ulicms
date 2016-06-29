@@ -3,7 +3,6 @@ if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	
 	if ($acl->hasPermission ( "pages" )) {
-		
 		?>
 <h2>
 <?php
@@ -13,7 +12,6 @@ if (defined ( "_SECURITY" )) {
 </h2>
 <p>
 <?php
-		
 		echo TRANSLATION_PAGES_INFOTEXT;
 		?>
 </p>
@@ -33,6 +31,13 @@ function filter_by_language(element){
    }
 }
 
+function filter_by_type(element){
+	   var index = element.selectedIndex
+	   if(element.options[index].value != ""){
+	     location.replace("index.php?action=pages&filter_type=" + element.options[index].value)
+	   }
+	}
+
 
 function filter_by_menu(element){
    var index = element.selectedIndex
@@ -45,6 +50,13 @@ function filter_by_active(element){
    var index = element.selectedIndex
    if(element.options[index].value != ""){
      location.replace("index.php?action=pages&filter_active=" + element.options[index].value)
+   }
+}
+
+function filter_by_approved(element){
+   var index = element.selectedIndex
+   if(element.options[index].value != ""){
+     location.replace("index.php?action=pages&filter_approved=" + element.options[index].value)
    }
 }
 
@@ -66,7 +78,7 @@ $(window).load(function(){
    $('#category').on('change', function (e) {
    var valueSelected = $('#category').val();
      location.replace("index.php?action=pages&filter_category=" + valueSelected)
-   
+
    });
 
 });
@@ -117,6 +129,21 @@ $(window).load(function(){
 				$_SESSION ["filter_active"] = intval ( $_GET ["filter_active"] );
 		}
 		
+		if (isset ( $_GET ["filter_approved"] )) {
+			if ($_GET ["filter_approved"] === "null")
+				$_SESSION ["filter_approved"] = null;
+			else
+				$_SESSION ["filter_approved"] = intval ( $_GET ["filter_approved"] );
+		}
+		
+		if (isset ( $_GET ["filter_type"] )) {
+			if ($_GET ["filter_type"] == "null") {
+				$_SESSION ["filter_type"] = null;
+			} else {
+				$_SESSION ["filter_type"] = $_GET ["filter_type"];
+			}
+		}
+		
 		if (isset ( $_GET ["filter_menu"] )) {
 			if ($_GET ["filter_menu"] == "null")
 				$_SESSION ["filter_menu"] = null;
@@ -138,9 +165,16 @@ $(window).load(function(){
 		if (! isset ( $_SESSION ["filter_menu"] )) {
 			$_SESSION ["filter_menu"] = null;
 		}
+		if (! isset ( $_SESSION ["filter_type"] )) {
+			$_SESSION ["filter_type"] = null;
+		}
 		
 		if (! isset ( $_SESSION ["filter_active"] )) {
 			$_SESSION ["filter_active"] = null;
+		}
+		
+		if (! isset ( $_SESSION ["filter_approved"] )) {
+			$_SESSION ["filter_approved"] = null;
 		}
 		
 		if (isset ( $_GET ["filter_category"] )) {
@@ -180,10 +214,34 @@ $(window).load(function(){
 		?>
 
 	</select>
-<?php
+
+<?php translate("type")?>
+<?php $types = get_available_post_types();?>
+<select name="filter_type" onchange="filter_by_type(this);">
+	<option value="null"
+		<?php
 		
-		echo TRANSLATION_STATUS;
+		if ("null" == $_SESSION ["filter_type"])
+			echo "selected";
+		?>>
+			[<?php
+		translate ( "every" )?>]
+		</option>
+		<?php
+		
+		foreach ( $types as $type ) {
+			if ($type == $_SESSION ["filter_type"]) {
+				echo '<option value="' . $type . '" selected>' . get_translation ( $type ) . "</option>";
+			} else {
+				echo '<option value="' . $type . '">' . get_translation ( $type ) . "</option>";
+			}
+		}
 		?>
+	</select>
+
+
+<?php
+		translate ( "status" )?>
 <select name="filter_status" onchange="filter_by_status(this)">
 	<option value="Standard"
 		<?php
@@ -286,12 +344,7 @@ $(window).load(function(){
 		if (null == $_SESSION ["filter_active"])
 			echo "selected";
 		?>>
-			[
-			<?php
-		
-		echo TRANSLATION_EVERY;
-		?>
-			]
+			[<?php translate("every"); ?>]
 		</option>
 	<option value="1"
 		<?php
@@ -310,6 +363,41 @@ $(window).load(function(){
 		?>><?php
 		
 		echo TRANSLATION_DISABLED;
+		?></option>
+</select>
+
+<?php
+		
+		translate ( "approved" );
+		?>
+<select name="filter_approved" onchange="filter_by_approved(this);">
+	<option value="null"
+		<?php
+		
+		if (null == $_SESSION ["filter_approved"])
+			echo "selected";
+		?>>
+    [<?php
+		
+		translate ( "every" );
+		?>]</option>
+	<option value="1"
+		<?php
+		
+		if (1 === $_SESSION ["filter_approved"])
+			echo "selected";
+		?>><?php
+		
+		translate ( "yes" );
+		?></option>
+	<option value="0"
+		<?php
+		
+		if (0 === $_SESSION ["filter_approved"])
+			echo "selected";
+		?>><?php
+		
+		translate ( "no" );
 		?></option>
 </select>
 </p>
@@ -355,21 +443,22 @@ $(window).load(function(){
 		echo TRANSLATION_ACTIVATED;
 		?>
 			</th>
-			<td style="text-align:center"><?php
+			<td style="text-align: center"><?php
 		
 		echo TRANSLATION_VIEW;
 		?>
-			</td><td style="text-align:center"><?php
+			</td>
+			<td style="text-align: center"><?php
 		
-		translate("clone");
+		translate ( "clone" );
 		?>
 			</td>
-			<td style="text-align:center"><?php
+			<td style="text-align: center"><?php
 		
 		echo TRANSLATION_EDIT;
 		?>
 			</td>
-			<td style="text-align:center"><?php
+			<td style="text-align: center"><?php
 		
 		echo TRANSLATION_DELETE;
 		?>
@@ -423,9 +512,16 @@ $(window).load(function(){
 		if ($_SESSION ["filter_menu"] != null) {
 			$filter_sql .= "AND menu = '" . db_escape ( $_SESSION ["filter_menu"] ) . "' ";
 		}
+		if ($_SESSION ["filter_type"] != null) {
+			$filter_sql .= "AND `type` = '" . db_escape ( $_SESSION ["filter_type"] ) . "' ";
+		}
 		
 		if ($_SESSION ["filter_active"] !== null) {
 			$filter_sql .= "AND active = " . intval ( $_SESSION ["filter_active"] ) . " ";
+		}
+		
+		if ($_SESSION ["filter_approved"] !== null) {
+			$filter_sql .= "AND approved = " . intval ( $_SESSION ["filter_approved"] ) . " ";
 		}
 		
 		if ($_SESSION ["filter_parent"] != null) {
@@ -439,7 +535,7 @@ $(window).load(function(){
 			$filter_sql .= "AND (title LIKE '" . db_escape ( $_SESSION ["filter_title"] ) . "%' or title LIKE '%" . db_escape ( $_SESSION ["filter_title"] ) . "' or title LIKE '%" . db_escape ( $_SESSION ["filter_title"] ) . "%' or title LIKE '" . db_escape ( $_SESSION ["filter_title"] ) . "' )";
 		}
 		
-		$filter_sql .= " AND `type` = 'page'";
+		$filter_sql .= " ";
 		
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " " . $filter_sql . " ORDER BY $order,position, systemname ASC" ) or die ( db_error () );
 		if (db_num_rows ( $query ) > 0) {
@@ -449,8 +545,9 @@ $(window).load(function(){
 				
 				echo '<tr id="dataset-' . $row->id . '">';
 				echo "<td>" . htmlspecialchars ( $row->title );
-				if (! empty ( $row->redirection ) and ! is_null ( $row->redirection ))
+				if (! empty ( $row->redirection ) and ! is_null ( $row->redirection ) and $row->type == "link") {
 					echo htmlspecialchars ( " --> " ) . htmlspecialchars ( $row->redirection );
+				}
 				
 				echo "</td>";
 				echo "<td>" . htmlspecialchars ( get_translation ( $row->menu ) ) . "</td>";
@@ -474,26 +571,40 @@ $(window).load(function(){
 						$url = "http://" . $domain . "/" . $row->systemname . ".html";
 					}
 					echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . TRANSLATION_VIEW . "\" title=\"" . TRANSLATION_VIEW . "\"></a></td>";
-					
+				}
+				echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation ( "clone" ) . "\" title=\"" . get_translation ( "clone" ) . "\"></a></td>";
+				
+				$autor = $row->autor;
+				$is_owner = $autor == get_user_id ();
+				
+				$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
+				$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
+				
+				$can_edit_this = false;
+				
+				if ($is_owner and $pages_edit_own) {
+					$can_edit_this = true;
+				} else if (! $is_owner and $pages_edit_others) {
+					$can_edit_this = true;
 				}
 				
-				
-					echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=".$row->id."\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone"). "\" title=\"" . get_translation("clone") . "\"></a></td>";
-					
-				echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
-				
-				if ($_SESSION ["filter_status"] == "trash") {
-					/*
-					 * echo "<td style='text-align:center'>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></a></td>';
-					 */
-					echo "<td style='text-align:center'>" . '<form action="index.php?action=undelete_page&page=' . $row->id . '" method="post" class="undelete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></form></td>';
+				if (! $can_edit_this) {
+					echo "<td></td><td></td>";
 				} else {
-					/*
-					 * echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></a></td>';
-					 */
-					echo "<td style='text-align:center'>" . '<form action="index.php?action=pages_delete&page=' . $row->id . '" method="post" class="delete-form" onsubmit="return confirm(\'Wirklich löschen?\');">' . get_csrf_token_html () . '<input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></form></td>';
+					echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+					
+					if ($_SESSION ["filter_status"] == "trash") {
+						/*
+						 * echo "<td style='text-align:center'>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></a></td>';
+						 */
+						echo "<td style='text-align:center'>" . '<form action="index.php?action=undelete_page&page=' . $row->id . '" method="post" class="undelete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></form></td>';
+					} else {
+						/*
+						 * echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></a></td>';
+						 */
+						echo "<td style='text-align:center'>" . '<form action="index.php?action=pages_delete&page=' . $row->id . '" method="post" class="delete-form" onsubmit="return confirm(\'Wirklich löschen?\');">' . get_csrf_token_html () . '<input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></form></td>';
+					}
 				}
-				
 				echo '</tr>';
 			}
 			?>
@@ -512,14 +623,14 @@ var ajax_options = {
   var list_item_id = "dataset-" + id
   var tr = $("tr#" + list_item_id);
   $(tr).fadeOut();
-  
+
   }
-  
+
 
 }
 
-$("form.delete-form").ajaxForm(ajax_options); 
-$("form.undelete-form").ajaxForm(ajax_options); 
+$("form.delete-form").ajaxForm(ajax_options);
+$("form.undelete-form").ajaxForm(ajax_options);
 
 function ajaxEmptyTrash(url){
    if(confirm("Papierkorb leeren?")){
@@ -529,7 +640,7 @@ function ajaxEmptyTrash(url){
          $("table.dataset-list tbody tr").fadeOut();
       }
 });
-} 
+}
   return false;
 }
 

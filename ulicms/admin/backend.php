@@ -20,11 +20,12 @@ add_hook ( "after_set_language_by_domain" );
 
 $syslang = getSystemLanguage ();
 include_once getLanguageFilePath ( $syslang );
+Translation::loadAllModuleLanguageFiles ( $syslang );
 add_hook ( "before_include_custom_lang_file" );
-Translation::includeCustomLangFile ( $_SESSION ["language"] );
+Translation::includeCustomLangFile ( $syslang );
 add_hook ( "after_include_custom_lang_file" );
 add_hook ( "before_custom_lang" );
-add_hook ( "custom_lang_" . $_SESSION ["language"] );
+add_hook ( "custom_lang_" . $syslang );
 
 add_hook ( "after_custom_lang" );
 
@@ -87,6 +88,7 @@ if (! $eingeloggt) {
 		require_once "inc/loginform.php";
 	}
 } else {
+	
 	require_once "inc/adminmenu.php";
 	
 	add_hook ( "register_actions" );
@@ -156,10 +158,6 @@ if (! $eingeloggt) {
 		require_once "inc/key_new.php";
 	} else if ($_GET ["action"] == "key_edit") {
 		require_once "inc/key_edit.php";
-	} 
-
-	else if ($_GET ["action"] == "templates") {
-		require_once "inc/templates.php";
 	} else if ($_GET ["action"] == "media") {
 		require_once "inc/media.php";
 	} else if ($_GET ["action"] == "images" || $_GET ["action"] == "files" || $_GET ["action"] == "flash") {
@@ -254,6 +252,8 @@ if (! $eingeloggt) {
 
 	else if (isset ( $actions [$_GET ["action"]] )) {
 		include_once $actions [$_GET ["action"]];
+	} else if ($_GET ["action"] == "do-post-install") {
+		include_once "inc/do-post-install.php";
 	} else {
 		echo TRANSLATION_ACTION_NOT_FOUND;
 	}

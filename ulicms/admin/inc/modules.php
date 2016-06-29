@@ -15,10 +15,11 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			$type = $_GET ["type"];
 			$uninstalled = uninstall_module ( $remove, $type );
-			if ($uninstalled)
+			if ($uninstalled) {
 				echo "<p style=\"color:green;\">" . htmlspecialchars ( $remove ) . " wurde erfolgreich deinstalliert.</p>";
-			else
+			} else {
 				echo "<p style=\"color:red;\">" . htmlspecialchars ( $remove ) . " konnte nicht deinstalliert werden.<br/>Bitte löschen Sie das Modul manuell vom Server.</p>";
+			}
 		}
 	}
 	?>
@@ -26,28 +27,18 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	if ($acl->hasPermission ( "install_packages" )) {
 		?>
 <p style="margin-bottom: 30px;">
-	<a href="?action=install_method">[<?php
-		
-		echo TRANSLATION_INSTALL_PACKAGE;
-		?>]</a>
+	<a href="?action=install_method">[<?php translate("install_package");?>]</a>
 </p>
 <?php
 	}
 	?>
-<strong><?php
-	
-	echo TRANSLATION_INSTALLED_MODULES;
-	?>
+<strong><?php translate("installed_modules"); ?>
 </strong>
 <p>
-<?php
-	
-	echo TRANSLATION_INSTALLED_MODULES_INFO;
-	?>
+<?php translate ( "installed_modules_info" );?>
 </p>
 
 <?php
-	
 	$pkg = new packageManager ();
 	$modules = getAllModules ();
 	if (count ( $modules ) > 0) {

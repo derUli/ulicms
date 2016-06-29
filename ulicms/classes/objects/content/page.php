@@ -27,7 +27,7 @@ class Page extends Content {
 	public $html_file = null;
 	public $theme = null;
 	public $custom_data = null;
-	private $type = "page";
+	protected $type = "page";
 	public $og_title = "";
 	public $og_type = "";
 	public $og_image = "";
@@ -76,7 +76,7 @@ class Page extends Content {
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where id = " . $id . " and `type` = 'page'" );
+		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where id = " . $id . " and (`type` = 'page' or `type` = 'link')" );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );
@@ -87,7 +87,7 @@ class Page extends Content {
 	public function loadBySystemnameAndLanguage($name, $language) {
 		$name = DB::escapeValue ( $name );
 		$language = DB::escapeValue ( $language );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language' and `type` = 'page'" );
+		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language' and (`type` = 'page' or `type` = 'link')" );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );
@@ -105,9 +105,9 @@ class Page extends Content {
 		return $retval;
 	}
 	public function create() {
-		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category, 
-				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views, 
-				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at, 
+		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category,
+				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views,
+				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
 				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
@@ -299,4 +299,3 @@ class Page extends Content {
 		}
 	}
 }
-

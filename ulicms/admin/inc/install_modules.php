@@ -16,11 +16,11 @@ if (! $acl->hasPermission ( "install_packages" )) {
 <p>
 	<strong><?php
 		
-		echo TRANSLATION_ERROR;
+		translation ( "error" );
 		?>
 	</strong> <br />
 	<?php
-		echo TRANSLATION_PKGSRC_NOT_DEFINED;
+		translate ( "pkgsrc_not_defined" );
 		?></p>
 <?php
 	} else if (! class_exists ( "PharData" )) {
@@ -28,13 +28,10 @@ if (! $acl->hasPermission ( "install_packages" )) {
 <p>
 	<strong><?php
 		
-		echo TRANSLATION_ERROR;
+		translate ( "error" );
 		?>
 	</strong> <br />
-	<?php
-		
-		echo TRANSLATION_PHARDATA_NOT_AVAILABLE;
-		?></p>
+	<?php translate ( "phardata_not_available" );?></p>
 <?php
 	} 
 
@@ -62,7 +59,8 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			
 			echo TRANSLATION_NOTHING_TO_DO;
 			?>
-</strong></p>
+</strong>
+</p>
 
 <?php
 		} else {

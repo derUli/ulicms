@@ -57,11 +57,8 @@ if (! $acl->hasPermission ( "forms" )) {
 			name="target_page_id">
 	<?php foreach($pages as $page){ ?>
 	  <option value="<?php echo $page["id"];?>"
-				<?php if($page["id"] == $form["target_page_id"]){ echo " selected"; } ?>><?php echo htmlspecialchars($page["title"]);?>
+				<?php if($page["id"] == $form["target_page_id"]){ echo " selected"; } ?>><?php echo htmlspecialchars($page["title"]);?></option>
 	<?php } ?>
-	
-		
-		
 		
 		</select>
 	</p>
@@ -72,6 +69,5 @@ if (! $acl->hasPermission ( "forms" )) {
 </form>
 <?php
 	}
-
 }
 ?>

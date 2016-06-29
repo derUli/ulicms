@@ -328,3 +328,12 @@ div#login-welcome-text {
 	padding: 10px;
 	background-color: #eee;
 }
+
+.list-show{
+   display:none;
+}
+
+.error-field{
+   background-color:red !important;
+	 color:white !important;
+}

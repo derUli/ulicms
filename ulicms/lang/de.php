@@ -608,4 +608,42 @@ define ( "TRANSLATION_HOMEPAGE", "Homepage" );
 
 define ( "TRANSLATION_CLONE", "Klonen" );
 
+// Inhaltstyp "Liste"
+define ( "TRANSLATION_LIST", "Liste" );
+define ( "TRANSLATION_LIST_PROPERTIES", "Eigenschaften der Liste" );
+
+define ( "TRANSLATION_ORDER_BY", "Sortieren nach" );
+define ( "TRANSLATION_ORDER_DIRECTION", "Sotieren Reihenfolge" );
+
+define ( "TRANSLATION_ASC", "Aufsteigend" );
+define ( "TRANSLATION_DESC", "Absteigend" );
+
+define ( "TRANSLATION_LIMIT", "Limit" );
+
+// Inhaltstyp "Link"
+define ( "TRANSLATION_LINK", "Link" );
+
+// Inhaltstyp "Modul"
+define ( "TRANSLATION_MODULE", "Modul" );
+
+// Inhaltstyp "Video"
+define ( "TRANSLATION_VIDEO", "Video" );
+
+// Position
+define ( "TRANSLATION_POSITION_OF_DESCRIPTION", "Position der Beschreibung" );
+define ( "TRANSLATION_DESCRIPTION_BEFORE_CONTENT", "Beschreibungstext vor Inhalt anzeigen" );
+define ( "TRANSLATION_DESCRIPTION_AFTER_CONTENT", "Beschreibungstext nach Inhalt anzeigen" );
+
+// post-install
+define ( "TRANSLATION_UNFINISHED_PACKAGE_INSTALLATIONS", "Unvollständige Paketinstallation" );
+define ( "TRANSLATION_THERE_ARE_UNFINISHED_PACKAGE_INSTALLATIONS", "Es gibt unvollständig installierte Pakete.<br/>Bitte klicken Sie hier um die Installation zu vervollständigen." );
+define ( "TRANSLATION_FINISHED", "Fertig!" );
+define ( "TRANSLATION_RUN_POST_INSTALL_SCRIPT", "Post Install Script ausführen" );
+
+// Workflow
+define ( "TRANSLATION_APPROVED", "Genehmigt" );
+define ( "TRANSLATION_YES", "Ja" );
+define ( "TRANSLATION_YES", "Nein" );
+define ( "TRANSLATION_OWNER", "Eigentümer" );
+
 add_hook ( "lang_de" );

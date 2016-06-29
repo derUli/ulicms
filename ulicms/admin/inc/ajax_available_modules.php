@@ -17,13 +17,10 @@ include_once "../lib/file_get_contents_wrapper.php";
 if (! $pkg_src) {
 	?>
 <p>
-	<strong><?php
-	
-	echo TRANSLATION_ERROR;
-	?> </strong> <br />
+	<strong><?php translate("error");?> </strong> <br />
 	<?php
 	
-	echo TRANSLATION_PKGSRC_NOT_DEFINED;
+	translate ( "pkgsrc_not_defined" );
 	?>
 </p>
 <?php

@@ -1,22 +1,27 @@
-﻿===== Neues in UliCMS 9.8.3 =====
-Neue Features
-+ Klasse Banner hinzugefügt
-+ Klasse Banners hinzugefügt
-+ Shellscript sremove.php hinzugefügt
-+ Shellscript sinfo.php hinzugefügt
-+ Shellscript version.php hinzugefügt
-+ Funktion containsModule() zur Klasse Page hinzugefügt
-+ GetAllX() und FilterByX() Funktionen zur Klasse ContentFactory hinzugefügt
-+ Klasse Request hinzugefügt
-+ Funktionen zur Template Klasse hinzugefügt
-+ Updated CKEditor (Version 4.5.7)
-+ Updated Mobile_Detect (Version 2.8.22)
-+ Neue Hooks hinzugefügt
-+ Funktion removeDir() zur Klasse Path hinzugefügt
-+ Klasse Cache hinzugefügt
+﻿===== Neues in UliCMS 9.8.4 =====
 
-Bugfixes
-# ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
+Neue Features
++ Inhaltstyp "Liste" hinzugefügt
++ Inhaltstyp "Link" hinzugefügt
++ Inhaltstyp "Bild" hinzugefügt
++ Inhaltstyp "Modul" hinzugefügt
++ Inhaltstyp "Audio" hinzugefügt
++ Inhaltstyp "Video" hinzugefügt
++ Tab "Position der Beschreibung" hinzugefügt
++ Klasse ModuleHelper hinzugefügt
++ post-install Scripts können nun auch manuell ausgeführt werden
++ Rudimentäre Freigabe-Workflows sind nun möglich
++ Eigentümer einer Seite kann nun geändert werden
++ Bei der Installation können nun zusätzliche Demodaten installiert werden
++ Es wird nun auch ein "lang" Ordner als Speicherort für Lokalisierungen von Modulen
+unterstützt
++ Module update_manager und update_managerd_dashboard vorinstalliert (bei in Version 1.0.0)
++ Filter und Hooks können nun auch in einem Unterordner untergebracht werden
+
+
+Änderungen
+# Feld "Position" ist jetzt ein HTML5 Number Feld
+# Berfreundlichkeit des Installationsassistenten verbessert
 
 Entfernte Features
-- cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016
+- Templates können nicht mehr online im Browser bearbeitet werden

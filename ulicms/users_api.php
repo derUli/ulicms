@@ -11,6 +11,18 @@ function getUsers() {
 	
 	return $users;
 }
+
+
+// this class contains functions for managing user accounts
+function getAllUsers() {
+	$query = Database::query ( "SELECT * FROM " . tbname ( "users" ) . " ORDER by username" );
+	$users = Array ();
+	while ( $row = db_fetch_object ( $query ) ) {
+		array_push ( $users, $row );
+	}
+	
+	return $users;
+}
 function getUsersOnline() {
 	$users_online = Database::query ( "SELECT username FROM " . tbname ( "users" ) . " WHERE last_action > " . (time () - 300) . " ORDER BY username" );
 	$retval = array ();

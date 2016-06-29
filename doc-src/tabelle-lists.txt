@@ -1,0 +1,5 @@
+Content_ID Unique Int
+Sprache varchar 50 default null
+Kategorie int default null
+Menü varchar 255 default null
+parent_id int default null

@@ -42,6 +42,7 @@ echo TRANSLATION_TITLE;
 <link rel="stylesheet" type="text/css" href="media/style.css" />
 <script type="text/javascript" src="../admin/scripts/jquery.min.js"></script>
 <script type="text/javascript" src="../admin/scripts/util.js"></script>
+<script type="text/javascript" src="scripts/installer.js"></script>
 </head>
 <body>
 	<p>
@@ -52,11 +53,12 @@ echo TRANSLATION_TITLE;
 	<?php
 	if (! isset ( $_REQUEST ["step"] )) {
 		?>
-	<form action="index.php" method="get">
+	<form action="index.php" method="get"
+		class="show-loading-indicator-on-submit">
 		<p>
 			<strong>Sprache auswählen / Select a language</strong><br /> <select
 				name="language"
-				onchange="window.location.replace('?language=' + this.value)">
+				onchange="$('#loading').show();window.location.replace('?language=' + this.value)">
 				<option value="de"<?php
 		
 		if ($_SESSION ["language"] == "de")
@@ -77,6 +79,9 @@ echo TRANSLATION_TITLE;
 		echo TRANSLATION_NEXT;
 		?>">
 
+		</p>
+		<p>
+			<img src="../admin/gfx/loading.gif" id="loading">
 		</p>
 	</form>
 	<?php
@@ -201,12 +206,16 @@ echo TRANSLATION_TITLE;
 		if (! isset ( $error )) {
 			?>
 
-	<form action="index.php" method="post">
+	<form action="index.php" method="post"
+		class="show-loading-indicator-on-submit">
 		<input type="hidden" name="step" value="1"> <input type="submit"
 			value="<?php
 			
 			echo TRANSLATION_NEXT;
 			?>">
+		<p>
+			<img src="../admin/gfx/loading.gif" id="loading">
+		</p>
 	</form>
 	<br />
 
@@ -232,7 +241,8 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_MYSQL_LOGIN_HELP;
 			?>
 	</p>
-	<form action="index.php" method="post">
+	<form action="index.php" method="post" id="database-login"
+		class="show-loading-indicator-on-submit">
 		<table border=1>
 			<tr>
 				<td><?php
@@ -240,7 +250,8 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_SERVERNAME;
 			?>
 				</td>
-				<td><input name="servername" type="text" value="localhost"></td>
+				<td><input name="servername" type="text" value="localhost"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -248,7 +259,7 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_LOGINNAME;
 			?>
 				</td>
-				<td><input name="loginname" type="text" value=""></td>
+				<td><input name="loginname" type="text" value="" required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -268,7 +279,7 @@ echo TRANSLATION_TITLE;
 			echo TRANSLATION_DATABASE_NAME;
 			?>
 				</td>
-				<td><input name="datenbank" type="text" value=""></td>
+				<td><input name="datenbank" type="text" value="" required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -291,6 +302,8 @@ $(document).ready(function(){
 			echo TRANSLATION_NEXT;
 			?>">
 		</p>
+		<img src="../admin/gfx/loading.gif" id="loading">
+		<div id="error-message"></div>
 		<input type="hidden" name="step" value="2">
 	</form>
 
@@ -345,12 +358,23 @@ $(document).ready(function(){
 					?>
 	</p>
 
-	<form action="index.php" method="post">
+	<form action="index.php" method="post"
+		class="show-loading-indicator-on-submit">
 		<input type="hidden" name="step" value="3"> <input type="submit"
 			value="<?php
 					
 					echo TRANSLATION_NEXT;
 					?>">
+		<p>
+
+
+
+
+
+
+			<img src="../admin/gfx/loading.gif" id="loading">
+		</p>
+
 	</form>
 
 	<?php
@@ -374,7 +398,8 @@ $(document).ready(function(){
 			echo TRANSLATION_HOMEPAGE_SETTINGS;
 			?>
 	</h2>
-	<form action="index.php" method="post">
+	<form action="index.php" method="post"
+		class="show-loading-indicator-on-submit">
 		<table border=1>
 			<tr>
 				<td><?php
@@ -382,8 +407,8 @@ $(document).ready(function(){
 			echo TRANSLATION_HOMEPAGE_TITLE;
 			?>
 				</td>
-				<td><input name="homepage_title" type="text" value="Meine Homepage">
-				</td>
+				<td><input name="homepage_title" type="text" value="Meine Homepage"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -391,7 +416,8 @@ $(document).ready(function(){
 			echo TRANSLATION_SITE_SLOGAN;
 			?>
 				</td>
-				<td><input name="motto" type="text" value="Dies und Das"></td>
+				<td><input name="motto" type="text" value="Dies und Das"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -399,7 +425,7 @@ $(document).ready(function(){
 			echo TRANSLATION_YOUR_FIRSTNAME;
 			?>
 				</td>
-				<td><input name="firstname" type="text" value="Max"></td>
+				<td><input name="firstname" type="text" value="Max" required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -407,7 +433,8 @@ $(document).ready(function(){
 			echo TRANSLATION_YOUR_LASTNAME;
 			?>
 				</td>
-				<td><input name="lastname" type="text" value="Mustermann"></td>
+				<td><input name="lastname" type="text" value="Mustermann"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -415,7 +442,8 @@ $(document).ready(function(){
 			echo TRANSLATION_YOUR_EMAIL_ADRESS;
 			?>
 				</td>
-				<td><input name="email" type="text" value="max@muster.de"></td>
+				<td><input name="email" type="text" value="max@muster.de"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -423,7 +451,8 @@ $(document).ready(function(){
 			echo TRANSLATION_ADMIN_NAME;
 			?>
 				</td>
-				<td><input name="admin_user" type="text" value="admin"></td>
+				<td><input name="admin_user" type="text" value="admin"
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><?php
@@ -431,12 +460,16 @@ $(document).ready(function(){
 			echo TRANSLATION_ADMIN_PASSWORD;
 			?>
 				</td>
-				<td><input name="passwort" id="password" type="password" value=""></td>
+				<td><input name="passwort" id="password" type="password" value=""
+					required="true"></td>
 			</tr>
 			<tr>
 				<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
 				<td><input type="checkbox" id="view_password" /></td>
 
+			</tr>
+			<tr><td><?php echo TRANSLATION_INSTALL_DEMO_DATA;?></td>
+			<td><input type="checkbox" name="install_demo_data" checked value="install"></td>
 			</tr>
 		</table>
 		<script type="text/javascript">
@@ -450,6 +483,11 @@ $(document).ready(function(){
 			
 			echo TRANSLATION_DO_INSTALL;
 			?>">
+		</p>
+
+
+		<p>
+			<img src="../admin/gfx/loading.gif" id="loading">
 		</p>
 		<input type="hidden" name="step" value="4">
 	</form>
@@ -513,7 +551,7 @@ $(document).ready(function(){
 			mysqli_query ( $connection, $create_table_groups_sql ) or die ( mysqli_error ( $connection ) );
 			
 			$insert_group_query = 'INSERT INTO `' . $prefix . 'groups` (`id`, `name`, `permissions`) VALUES
-(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"groups":true, "categories" : true, "images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"favicon":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"templates":true,"update_system":true,"users":true,"export":true, "import" : true, "videos":true, "audio":true, "open_graph":true, "forms":true, "patch_management" : true, "upload_patches" : true}\')';
+(1, \'Administrator\', \'{"banners":true,"cache":true,"dashboard":true,"design":true,"expert_settings":true,"files":true,"groups":true, "categories" : true, "images":true,"info":true,"install_packages":true,"languages":true,"list_packages":true,"logo":true,"favicon":true,"module_settings":true,"motd":true,"other":true,"pages":true,"pkg_settings":true,"remove_packages":true,"settings_simple":true,"spam_filter":true,"update_system":true,"users":true,"export":true, "import" : true, "videos":true, "audio":true, "open_graph":true, "forms":true, "patch_management" : true, "upload_patches" : true, "pages_activate_own" : true, "pages_activate_others" : true, "pages_edit_own" : true, "pages_edit_others" : true, "pages_change_owner" : true }\')';
 			
 			mysqli_query ( $connection, $insert_group_query );
 			
@@ -590,12 +628,25 @@ $(document).ready(function(){
   `og_type` varchar(255) DEFAULT '',
   `og_image` varchar(255) DEFAULT '',
   `og_description` varchar(255) DEFAULT '',
+  `module` varchar(200) default null,
+  `video` int(11) default null,
+  `audio` int(11) default null,
+  `text_position` varchar(10) default 'before',
+  `approved` tinyint(1) NOT NULL DEFAULT '1',
+  `image_url` text default null,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" ) or die ( mysqli_error ( $connection ) );
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;" ) or die ( mysqli_error ( $connection ) );
 			
-			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
+
+			if(isset($_POST["install_demo_data"])){
+				$sql = file_get_contents("sample/extended_demo.sql");
+				$sql = str_replace("{%prefix%}", $prefix, $sql);
+			} else {
+				$sql = "INSERT INTO `" . $prefix . "content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
 (1, 0, 'willkommen', 'Willkommen', '_self', '<p>Willkommen auf einer neuen Website die mit UliCMS betrieben wird.</p>\r\n', 'de', 1, 1364242679, 1364242833, 1, 1, 1, 19, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL),
-(2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 1, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;" ) or die ( mysqli_error ( $connection ) );
+(2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 1, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;";
+			}
+			mysqli_query ( $connection, $sql) or die ( mysqli_error ( $connection ) );
 			
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -654,7 +705,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (26, 'empty_trash_days', '30'),
 (27, 'password_salt', '$salt'),
 (28, 'timezone', 'Europe/Berlin'),
-(29, 'db_schema_version', '9.8.2'),
+(29, 'db_schema_version', '9.8.4'),
 (30, 'pkg_src', 'http://packages.ulicms.de/{version}/'),
 (31, 'theme', '2016'),
 (32, 'zoom', '100'),
@@ -679,10 +730,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (51, 'locale_de', 'de_DE.UTF-8; de_DE; deu_deu'),
 (52, 'locale_en', 'en_US.UTF-8; en_GB.UTF-8; en_US; en_GB; english-uk; eng; uk'),
 (53, 'session_timeout', '60'),
-(54, 'og_type', 'article');" ) or die ( mysqli_error ( $connection ) );
-			
-			mysqli_query ( $connection, "UPDATE `" . $prefix . "content` SET parent=NULL" ) or die ( mysqli_error ( $connection ) );
-			
+(54, 'og_type', 'article');" ) or die ( mysqli_error ( $connection ) );			
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -776,28 +824,20 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 			
 			mysqli_query ( $connection, $sql );
 			
-			// Da InnoDB erst ab MySQL 5.6 Foreign Keys und Fulltext unterstützt
-			// Foreign Keys nur setzen, wenn MySQL Server Version >= 5.6
-			if (mysqli_get_server_version ( $connection ) >= 50600) {
-				
-				$constraint1 = "ALTER TABLE `" . $prefix . "users` ADD FOREIGN KEY (`group_id`) REFERENCES `" . $prefix . "groups`(`id`)
-ON DELETE SET NULL";
-				mysqli_query ( $connection, $constraint1 );
-				$constraint2 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`category`) REFERENCES `" . $prefix . "categories`(`id`)
-ON DELETE SET NULL";
-				mysqli_query ( $connection, $constraint2 );
-				
-				$constraint3 = "ALTER TABLE `" . $prefix . "banner` ADD FOREIGN KEY (`category`) REFERENCES `" . $prefix . "categories`(`id`)
-ON DELETE SET NULL";
-				mysqli_query ( $connection, $constraint3 );
-				
-				$constraint4 = "ALTER TABLE `" . $prefix . "content` ADD FOREIGN KEY (`autor`) REFERENCES `" . $prefix . "users`(`id`)
-ON DELETE SET NULL";
-				mysqli_query ( $connection, $constraint4 );
-			}
-			
 			// Beispieldaten für die Banner Tabelle
 			mysqli_query ( $connection, "INSERT INTO `" . $prefix . "banner` VALUES (1,'Content Management einfach gemacht mit UliCMS','http://www.ulicms.de','http://www.ulicms.de/content/images/banners/ulicms-banner.jpg',1,'gif','','de');" );
+			
+			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "lists` (
+  `content_id` int(11) NOT NULL,
+  `language` varchar(50) DEFAULT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `menu` varchar(10) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `order_by` varchar(30) DEFAULT 'title',
+  `order_direction` varchar(30) DEFAULT 'asc',
+  `limit` int(11) default null,
+  UNIQUE KEY `content_id` (`content_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
 			
 			@chmod ( "../cms-config.php", 0777 );
 			

@@ -7,6 +7,16 @@ function initconfig($key, $value) {
 	}
 	return $retval;
 }
+function isNotNullOrEmpty($variable) {
+	return (! is_null ( $variable ) and ! is_empty ( $variable ));
+}
+function get_action() {
+	$retval = "home";
+	if (isNotNullOrEmpty ( $_GET ["action"] )) {
+		$retval = $_GET ["action"];
+	}
+	return $retval;
+}
 function get_files($root_dir, $all_data = array(), $initial_root_dir = null) {
 	$root_dir = str_replace ( "\\", "/", $root_dir );
 	
@@ -339,11 +349,15 @@ function strbool($value) {
 function get_available_post_types() {
 	global $post_types;
 	$post_types = array (
-			"page" 
+			"page",
+			"list",
+			"link",
+			"image",
+			"module",
+			"video",
+			"audio" 
 	);
 	add_hook ( $post_types );
-	
-	sort ( $post_types );
 	
 	return $post_types;
 }
@@ -794,9 +808,12 @@ function is_admin_dir() {
 function add_hook($name) {
 	$modules = getAllModules ();
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
-		$file = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
-		if (file_exists ( $file )) {
-			@include $file;
+		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
+		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
+		if (file_exists ( $file1 )) {
+			@include $file1;
+		} else if (file_exists ( $file2 )) {
+			@include $file2;
 		}
 	}
 }
@@ -1146,9 +1163,9 @@ function SureRemoveDir($dir, $DeleteMe) {
  * seite.html;
  */
 function buildSEOUrl($page = false, $redirection = null, $format = "html") {
-        if(!is_null($redirection) and !empty($redirection)){
-             return $redirection;
-        }
+	if (! is_null ( $redirection ) and ! empty ( $redirection )) {
+		return $redirection;
+	}
 	if ($page === false)
 		$page = get_requested_pagename ();
 	
@@ -1617,15 +1634,20 @@ function containsModule($page = null, $module = false) {
 	if (is_null ( $page ))
 		$page = get_requested_pagename ();
 	
-	$query = db_query ( "SELECT content FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
+	$query = db_query ( "SELECT content, module, `type` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
 	$dataset = db_fetch_assoc ( $query );
 	$content = $dataset ["content"];
 	$content = str_replace ( "&quot;", "\"", $content );
-	if ($module) {
+	if (! is_null ( $dataset ["module"] ) and ! empty ( $dataset ["module"] ) and $dataset ["type"] == "module") {
+		if (! $module or ($module and $dataset ["module"] == $module)) {
+			return true;
+		}
+	} else if ($module) {
 		return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
 	} else {
 		return preg_match ( "/\[module=\".+\"\]/", $content );
 	}
+	return false;
 }
 function page_has_html_file($page) {
 	$query = db_query ( "SELECT `html_file` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );

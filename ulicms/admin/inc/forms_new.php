@@ -46,7 +46,7 @@ if (! $acl->hasPermission ( "forms" )) {
 		<strong><?php translate("target_page_id");?></strong><br /> <select
 			name="target_page_id">
 	<?php foreach($pages as $page){ ?>
-	  <option value="<?php echo $page["id"];?>"><?php echo htmlspecialchars($page["title"]);?>
+	  <option value="<?php echo $page["id"];?>"><?php echo htmlspecialchars($page["title"]);?></option>
 	<?php } ?>
 	
 		
@@ -57,6 +57,6 @@ if (! $acl->hasPermission ( "forms" )) {
 			type="submit">
 	</p>
 </form>
-<?php 
+<?php
 }
 ?>

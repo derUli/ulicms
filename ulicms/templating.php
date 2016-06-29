@@ -155,6 +155,22 @@ function get_type() {
 		$result = "page";
 	return $result;
 }
+function get_text_position() {
+	if (! $page) {
+		$page = get_requested_pagename ();
+	}
+	$result = "";
+	$sql = "SELECT `text_position` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
+	$query = db_query ( $sql );
+	if (db_num_rows ( $query ) > 0) {
+		$result = db_fetch_object ( $query );
+		$result = $result->text_position;
+	}
+	if (empty ( $result )) {
+		$result = "before";
+	}
+	return $result;
+}
 function get_category_id($page = null) {
 	if (! $page) {
 		$page = get_requested_pagename ();
@@ -237,7 +253,7 @@ function get_redirection($page = null) {
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
-	$sql = "SELECT `redirection` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
+	$sql = "SELECT `redirection` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "' and type='link'";
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
@@ -575,9 +591,15 @@ function correctHTMLValidationErrors($txt) {
 function apply_filter($text, $type) {
 	$modules = getAllModules ();
 	for($i = 0; $i < count ( $modules ); $i ++) {
-		$module_content_filter_file = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
-		if (file_exists ( $module_content_filter_file )) {
-			include_once $module_content_filter_file;
+		$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
+		$module_content_filter_file2 = getModulePath ( $modules [$i] ) . "filters/" . $type . ".php";
+		if (file_exists ( $module_content_filter_file1 )) {
+			include_once $module_content_filter_file1;
+			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
+				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
+			}
+		} else if (file_exists ( $module_content_filter_file2 )) {
+			include_once $module_content_filter_file2;
 			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
 				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
 			}
@@ -967,7 +989,7 @@ function content() {
 	}
 	
 	if (! is_logged_in ()) {
-		db_query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . $_GET ["seite"] . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
+		db_query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . Database::escapeValue ( $_GET ["seite"] ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	}
 	return import ( $_GET ["seite"] );
 }

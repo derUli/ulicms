@@ -2,15 +2,15 @@
 if (! class_exists ( "ulicms_version" )) {
 	class ulicms_version {
 		function __construct() {
-			$this->version = "The Force";
+			$this->version = "The Bird";
 			$this->releaseYear = 2016;
 			$this->internalVersion = Array (
 					9,
 					8,
-					3 
+					4 
 			);
 			$this->update = "";
-			$this->developmentVersion = false;
+			$this->developmentVersion = true;
 		}
 		public function getReleaseYear() {
 			return strval ( $this->releaseYear );

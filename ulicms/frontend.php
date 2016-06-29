@@ -24,6 +24,7 @@ setLocaleByLanguage ();
 
 if (in_array ( $_SESSION ["language"], getAllLanguages () )) {
 	include getLanguageFilePath ( $_SESSION ["language"] );
+	Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
 	Translation::includeCustomLangFile ( $_SESSION ["language"] );
 	add_hook ( "custom_lang_" . $_SESSION ["language"] );
 }
@@ -221,7 +222,17 @@ if ($html_file) {
 } else {
 	require_once getTemplateDirPath ( $theme ) . "oben.php";
 	add_hook ( "before_content" );
+	$text_position = get_text_position ();
+	
+	if ($text_position == "after") {
+		Template::outputContentElement ();
+	}
+	
 	content ();
+	
+	if ($text_position == "before") {
+		Template::outputContentElement ();
+	}
 	
 	add_hook ( "after_content" );
 	

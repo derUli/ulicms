@@ -29,7 +29,7 @@ if (defined ( "_SECURITY" )) {
 	<?php cms_release_year();?> by Ulrich Schmidt<br /> <a
 		href="http://www.ckeditor.com" target="_blank">CKEditor</a> &copy;
 	2003 - 2015 by CKSource<br /> <a href="http://kcfinder.sunhater.com/"
-		target="_blank">KCFinder</a> Copyright ©2010 - 2014 Pavel Tzonkov<br/ >
+		target="_blank">KCFinder</a> Copyright ©2010 - 2014 Pavel Tzonkov<br />
 	Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors <br />
 	<a href="http://codemirror.net/" target="_blank">CodeMirror</a> &copy;
 	2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others <br /> <a

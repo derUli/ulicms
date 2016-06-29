@@ -26,7 +26,26 @@ class ContentFactory {
 		if ($row->type == "page") {
 			$retval = new Page ();
 			$retval->loadByID ( $row->id );
+		} else if ($row->type == "list") {
+			$retval = new Content_List ();
+			$retval->loadByID ( $row->id );
+		} else if ($row->type == "link") {
+			$retval = new Link ();
+			$retval->loadByID ( $row->id );
+		} else if ($row->type == "module") {
+			$retval = new Module_page ();
+			$retval->loadByID ( $row->id );
+		} else if ($row->type == "video") {
+			$retval = new Video_Page ();
+			$retval->loadByID ( $row->id );
+		} else if ($row->type == "audio") {
+			$retval = new Audio_Page ();
+			$retval->loadByID ( $row->id );
+		} else if ($row->type == "image") {
+			$retval = new Image_Page ();
+			$retval->loadByID ( $row->id );
 		}
+		
 		return $retval;
 	}
 	public static function getAll($order = "id") {
@@ -53,6 +72,46 @@ class ContentFactory {
 		$result = array ();
 		$sql = "SELECT id, `type` FROM " . tbname ( "content" ) . " where `menu` = '$menu' ORDER BY $order";
 		$query = DB::query ( $sql );
+		while ( $row = DB::fetchObject ( $query ) ) {
+			$result [] = self::getContentObjectByID ( $row );
+		}
+		return $result;
+	}
+	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc", $limit = null) {
+		$result = array ();
+		$sql = "select id, `type` from " . tbname ( "content" ) . " where 1=1 and ";
+		if ($language !== null and $language !== "") {
+			$language = Database::escapeValue ( $language );
+			$sql .= "language = '$language' and ";
+		}
+		if ($category_id !== null and $category_id !== 0) {
+			$category_id = intval ( $category_id );
+			$sql .= "category = $category_id and ";
+		}
+		if ($menu !== null and $menu !== "") {
+			$menu = Database::escapeValue ( $menu );
+			$sql .= "menu = '$menu' and ";
+		}
+		
+		if ($parent_id !== null and $parent_id !== 0) {
+			$parent_id = intval ( $parent_id );
+			$sql .= "parent = $parent_id and ";
+		}
+		
+		$order_by = Database::escapeName ( $order_by );
+		
+		if ($order_direction != "desc") {
+			$order_direction = "asc";
+		}
+		
+		$sql .= " 1=1 order by $order_by $order_direction";
+		
+		if (! is_null ( $limit ) and $limit > 0) {
+			$sql .= " limit " . $limit;
+		}
+		
+		$query = Database::query ( $sql ) or die ( Database::error () );
+		
 		while ( $row = DB::fetchObject ( $query ) ) {
 			$result [] = self::getContentObjectByID ( $row );
 		}
