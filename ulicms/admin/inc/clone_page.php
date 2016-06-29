@@ -54,7 +54,13 @@ if (defined ( "_SECURITY" )) {
 			?>"><br /> <small><?php
 			
 			echo TRANSLATION_ALTERNATE_TITLE_INFO;
-			?> </small>
+			?> </small> <br /> <br /> <strong><?php translate("show_headline");?></strong>
+			<br /> <select name="show_headline">
+				<option value="1"
+					<?php if($row->show_headline == 1) echo "selected";?>><?php translate("yes");?></option>
+				<option vlaue="0"
+					<?php if($row->show_headline == 0) echo "selected";?>><?php translate("no");?></option>
+			</select>
 		</div>
 		<h2 class="accordion-header"><?php translate("type");?></h2>
 
@@ -501,6 +507,8 @@ function openMenuImageSelectWindow(field) {
 
 
 
+				
+				
 				
 				
 				

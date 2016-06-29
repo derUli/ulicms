@@ -84,15 +84,21 @@ if (defined ( "_SECURITY" )) {
 				echo htmlspecialchars ( $row->title );
 				?>"> <br /> <br /> <strong><?php
 				
-				echo TRANSLATION_ALTERNATE_TITLE;
+				translate ( "ALTERNATE_TITLE" );
 				?> </strong><br /> <input type="text" name="alternate_title"
 				value="<?php
 				echo htmlspecialchars ( $row->alternate_title );
 				
 				?>"><br /> <small><?php
 				
-				echo TRANSLATION_ALTERNATE_TITLE_INFO;
-				?> </small>
+				echo translate ( "ALTERNATE_TITLE_INFO" );
+				?> </small> <br /> <br /> <strong><?php translate("show_headline");?></strong>
+			<br /> <select name="show_headline">
+				<option value="1"
+					<?php if($row->show_headline == 1) echo "selected";?>><?php translate("yes");?></option>
+				<option vlaue="0"
+					<?php if($row->show_headline == 0) echo "selected";?>><?php translate("no");?></option>
+			</select>
 		</div>
 		<h2 class="accordion-header"><?php translate("type");?></h2>
 
@@ -108,10 +114,10 @@ if (defined ( "_SECURITY" )) {
 					type="radio" name="type" value="link" id="type_link"
 					<?php if($row->type == "link"){ echo "checked";}?>> <label
 					for="type_link"><?php translate("link");?></label> <br /> <input
-					type="radio" name="type" value="image" id="type_image" <?php if($row->type == "image") echo "checked"?>> <label
-					for="type_image" ><?php translate("image");?></label>
-				<br /> <input type="radio" name="type" value="module"
-					id="type_module"
+					type="radio" name="type" value="image" id="type_image"
+					<?php if($row->type == "image") echo "checked"?>> <label
+					for="type_image"><?php translate("image");?></label> <br /> <input
+					type="radio" name="type" value="module" id="type_module"
 					<?php if($row->type == "module"){ echo "checked";}?>> <label
 					for="type_module"><?php translate("module");?></label> <br /> <input
 					type="radio" name="type" value="video" id="type_video"
@@ -549,6 +555,14 @@ function openMenuImageSelectWindow(field) {
 
 				
 				
+				
+				
+				
+				
+				
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -723,17 +737,18 @@ function openMenuImageSelectWindow(field) {
 			</div>
 
 		</div>
-<div id="tab-image" style="display: none;">
+		<div id="tab-image" style="display: none;">
 			<h2 class="accordion-header"><?php translate("image");?></h2>
 
 			<div class="accordion-content">
 				<input type="text" id="image_url" name="image_url"
 					readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-					value="<?php Template::escape($row->image_url);?>" style="cursor: pointer" /><br /> <a href="#"
+					value="<?php Template::escape($row->image_url);?>"
+					style="cursor: pointer" /><br /> <a href="#"
 					onclick="$('#menu_image').val('');return false;"><?php
-			
-			translate ( "clear" );
-			?>
+				
+				translate ( "clear" );
+				?>
 		</a>
 			</div>
 		</div>

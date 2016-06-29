@@ -45,9 +45,14 @@
 	</strong><br /> <input type="text" name="alternate_title" value=""><br />
 			<small><?php
 			
-			echo TRANSLATION_ALTERNATE_TITLE_INFO;
+			translate ( "ALTERNATE_TITLE_INFO" );
+			;
 			?>
-	</small>
+	</small> <br /> <br /> <strong><?php translate("show_headline");?></strong>
+			<br /> <select name="show_headline">
+				<option value="1" selected><?php translate("yes");?></option>
+				<option vlaue="0"><?php translate("no");?></option>
+			</select>
 		</div>
 		<h2 class="accordion-header"><?php translate("type");?></h2>
 
