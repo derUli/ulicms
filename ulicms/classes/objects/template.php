@@ -28,7 +28,6 @@ class Template {
 					echo replaceAudioTags ( "[audio id=" . $page ["audio"] . "]" );
 				}
 				break;
-			
 		}
 	}
 	public static function poweredByUliCMS() {
@@ -115,6 +114,18 @@ class Template {
 		
 		$retval = ob_get_clean ();
 		return $retval;
+	}
+	public static function headline($format = "<h1>%title%</h1>") {
+		echo self::getHeadline ( $format );
+	}
+	public static function getHeadline($format = "<h1>%title%</h1>") {
+		$retval = "";
+		$id = get_ID ();
+		$content = ContentFactory::getByID ( $id );
+		if ($content->getShowHeadline ()) {
+			$html = str_replace ( "%title%", get_title ( null, true ), $format );
+		}
+		return $html;
 	}
 	
 	// @TODO Restliche Funktionen aus templating.php implementieren

@@ -1,4 +1,4 @@
-ï»¿input[type="button"], button, input[type="reset"], input[type="submit"]
+input[type="button"], button, input[type="reset"], input[type="submit"]
 	{
 	font-size: 120%;
 	padding: 20px;
@@ -129,8 +129,8 @@ footer {
 }
 
 main h1, main h2, main h3, main h4, main h5, main h6 {
-	font-family: IPalatino, â€˜Palatino Linotypeâ€™, â€˜Hoefler Textâ€™, Times,
-		â€˜Times New Romanâ€™, serif
+	font-family: IPalatino, ‘Palatino Linotype’, ‘Hoefler Text’, Times,
+		‘Times New Roman’, serif
 }
 
 p {
@@ -219,7 +219,7 @@ blockquote p {
 img.header-image {
 	width: 100%
 }
-/* WÃ¼rgaround fÃ¼r Internet Explodierer */
+/* Würgaround für Internet Explodierer */
 main {
 	display: block
 }
@@ -270,7 +270,7 @@ div.socialshareprivacy {
 	margin-bottom: 60px;
 }
 
-.grey-bar{
-	background-color:rgb(100,100,100);
-	height:20px;
+.grey-bar {
+	background-color: rgb(100, 100, 100);
+	height: 20px;
 }
