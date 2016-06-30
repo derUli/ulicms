@@ -40,7 +40,6 @@ if ($acl->hasPermission ( "dashboard" )) {
 
 
 <?php
-		
 		$motd = get_lang_config ( "motd", getSystemLanguage () );
 		if ($motd or strlen ( $motd ) > 10) {
 			$motd = nl2br ( $motd );
@@ -59,35 +58,16 @@ if ($acl->hasPermission ( "dashboard" )) {
 			echo $motd;
 			?>
 	</div>
-	<?php
-		}
-		?>
-
-	<?php
-		if ($acl->hasPermission ( "update_system" )) {
-			$data = file_get_contents_wrapper ( PATCH_CHECK_URL, true );
-			$data = trim ( $data );
-			if (! empty ( $data )) {
-				?>
-	<h2 class="accordion-header">
-	<?php
-				
-				translate ( "there_are_patches_available" );
-				?>
+		<?php }?>
+	<div id="patch-notification" style="display:none;">
+		<h2 class="accordion-header">
+	<?php translate ( "there_are_patches_available" );	?>
 	</h2>
-	<div class="accordion-content">
-		<a href="?action=available_patches"><strong><?php
-				
-				translate ( "install_patches" );
-				?>
-		</strong> </a>
-	</div>
-	<?php
-			}
-		}
-		?>
+	<div class="accordion-content" id="patch-message">
+	   
+	</div>		
+		</div>
 <?php
-
 		$pi = ULICMS_ROOT . "/post-install.php";
 		if (file_exists ( $pi ) and is_writable ( $pi )) {
 			?>
@@ -101,27 +81,12 @@ if ($acl->hasPermission ( "dashboard" )) {
 
 	<?php } ?>
 
-	<?php
-		if ($acl->hasPermission ( "update_system" )) {
-			$updateInfo = checkForUpdates ();
-			
-			if ($updateInfo) {
-				?>
+				<div id="core-update-check" style="display:none">
 	<h2 class="accordion-header">
-	<?php
-				
-				echo TRANSLATION_UPDATE_AVAILABLE;
-				?>
+	<?php translate("update_available");?>
 	</h2>
-	<div class="accordion-content">
-	<?php
-				
-				echo $updateInfo;
-				?>
+	<div class="accordion-content" id="core-update-message"></div>
 	</div>
-	<?php
-			}
-			?>
 	<h2 class="accordion-header">
 	<?php
 			
@@ -135,12 +100,6 @@ $(document).ready(function() {
  $('#ulicms-feed').load('?action=ulicms-news');
 });
 </script>
-
-<?php
-		}
-		?>
-
-
 	<h2 class="accordion-header">
 	<?php
 		
@@ -217,10 +176,7 @@ $(document).ready(function() {
 		</table>
 	</div>
 	<h2 class="accordion-header">
-	<?php
-		
-		echo TRANSLATION_ONLINE_NOW;
-		?>
+	<?php translate("online_now");?>
 	</h2>
 	<div class="accordion-content">
 		<ul id="users_online">
@@ -351,7 +307,7 @@ $(document).ready(function() {
 		?>
 </div>
 </div>
-
+<script src="scripts/dashboard.js" type="text/javascript"></script>
 <?php
 	}
 	
