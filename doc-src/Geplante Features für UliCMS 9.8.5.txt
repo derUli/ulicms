@@ -1,4 +1,11 @@
 ﻿[ ] Prepared Statements
-[ ] Funktionen für Drop, Truncate table und "select (avg)" zur Database Klasse hinzufügen.
+[ ] Funktionen zur Database Klasse hinzufügen
+   [X] Database::dropTable($table, $prefix = true)
+   [ ] Database::dropColumn($table, $column, $prefix = true)
+   [ ] Database::selectAvg($table, $column, $where = "")
+   [ ] Database::selectMin($table, $column, $where = "")
+   [ ] Database::selectMax($table, $column, $where = "")
 [ ] Erste Unit Tests mit PHPUnit
-[ ] Option "Überschrift anzeigen ja/nein"
+[X] Option "Überschrift anzeigen ja/nein"
+[ ] Neuer Installer mit OOP, AJAX, Progressbar usw.
+[ ] Update-Check Unter "Pakete" per Ajax für jedes Paket
