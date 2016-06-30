@@ -1,27 +1,9 @@
-﻿===== Neues in UliCMS 9.8.4 =====
+﻿===== Neues in UliCMS 9.8.5 =====
 
 Neue Features
-+ Inhaltstyp "Liste" hinzugefügt
-+ Inhaltstyp "Link" hinzugefügt
-+ Inhaltstyp "Bild" hinzugefügt
-+ Inhaltstyp "Modul" hinzugefügt
-+ Inhaltstyp "Audio" hinzugefügt
-+ Inhaltstyp "Video" hinzugefügt
-+ Tab "Position der Beschreibung" hinzugefügt
-+ Klasse ModuleHelper hinzugefügt
-+ post-install Scripts können nun auch manuell ausgeführt werden
-+ Rudimentäre Freigabe-Workflows sind nun möglich
-+ Eigentümer einer Seite kann nun geändert werden
-+ Bei der Installation können nun zusätzliche Demodaten installiert werden
-+ Es wird nun auch ein "lang" Ordner als Speicherort für Lokalisierungen von Modulen
-unterstützt
-+ Module update_manager und update_managerd_dashboard vorinstalliert (bei in Version 1.0.0)
-+ Filter und Hooks können nun auch in einem Unterordner untergebracht werden
-
++ update_manager auf Version 1.0.1 aktualisiert
++ Option "Überschrift anzeigen" hinzugefügt
++ Funktion Database::dropTable() hinzugefügt
 
 Änderungen
-# Feld "Position" ist jetzt ein HTML5 Number Feld
-# Berfreundlichkeit des Installationsassistenten verbessert
-
-Entfernte Features
-- Templates können nicht mehr online im Browser bearbeitet werden
++ Dashboard nun mit mehr Ajax
