@@ -26,6 +26,14 @@ class Database {
 		global $db_connection;
 		return mysqli_get_client_info ( $db_connection );
 	}
+	public static function dropTable($table, $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$table = self::escapeName ( $table );
+		return self::query ( "DROP TABLE $table" );
+	}
 	
 	// Using SQL Prepared statements
 	public static function preparedQuery($sql, $typeDef = FALSE, $params = FALSE) {
@@ -223,12 +231,12 @@ class Database {
 		$retval = array ();
 		$table = tbname ( $table );
 		$query = Database::query ( "SELECT * FROM $table limit 1" );
-		$fields_num = self::getNumFieldCount($query);
+		$fields_num = self::getNumFieldCount ( $query );
 		if ($fields_num > 0) {
 			for($i = 0; $i < $fields_num; $i ++) {
-					$field = db_fetch_field ( $query );
-					$retval[] = $field->name;
-				}
+				$field = db_fetch_field ( $query );
+				$retval [] = $field->name;
+			}
 			sort ( $retval );
 		}
 		
