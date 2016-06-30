@@ -468,8 +468,10 @@ $(document).ready(function(){
 				<td><input type="checkbox" id="view_password" /></td>
 
 			</tr>
-			<tr><td><?php echo TRANSLATION_INSTALL_DEMO_DATA;?></td>
-			<td><input type="checkbox" name="install_demo_data" checked value="install"></td>
+			<tr>
+				<td><?php echo TRANSLATION_INSTALL_DEMO_DATA;?></td>
+				<td><input type="checkbox" name="install_demo_data" checked
+					value="install"></td>
 			</tr>
 		</table>
 		<script type="text/javascript">
@@ -634,19 +636,20 @@ $(document).ready(function(){
   `text_position` varchar(10) default 'before',
   `approved` tinyint(1) NOT NULL DEFAULT '1',
   `image_url` text default null,
+   show_headline tinyint(1) NOT NULL DEFAULT '1',
+					
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;" ) or die ( mysqli_error ( $connection ) );
 			
-
-			if(isset($_POST["install_demo_data"])){
-				$sql = file_get_contents("sample/extended_demo.sql");
-				$sql = str_replace("{%prefix%}", $prefix, $sql);
+			if (isset ( $_POST ["install_demo_data"] )) {
+				$sql = file_get_contents ( "sample/extended_demo.sql" );
+				$sql = str_replace ( "{%prefix%}", $prefix, $sql );
 			} else {
 				$sql = "INSERT INTO `" . $prefix . "content` (`id`, `notinfeed`, `systemname`, `title`, `target`, `content`, `language`, `active`, `created`, `lastmodified`, `autor`, `category`, `lastchangeby`, `views`, `comments_enabled`, `redirection`, `menu`, `position`, `parent`, `valid_from`, `valid_to`, `access`, `meta_description`, `meta_keywords`, `deleted_at`) VALUES
 (1, 0, 'willkommen', 'Willkommen', '_self', '<p>Willkommen auf einer neuen Website die mit UliCMS betrieben wird.</p>\r\n', 'de', 1, 1364242679, 1364242833, 1, 1, 1, 19, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL),
 (2, 0, 'welcome', 'Welcome', '_self', '<p>Welcome to a new website running with UliCMS.</p>\r\n', 'en', 1, 1364242890, 1364242944, 1, 1, 1, 2, 1, '', 'top', 10, NULL, '0000-00-00', NULL, 'all', '', '', NULL) ;";
 			}
-			mysqli_query ( $connection, $sql) or die ( mysqli_error ( $connection ) );
+			mysqli_query ( $connection, $sql ) or die ( mysqli_error ( $connection ) );
 			
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -705,7 +708,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (26, 'empty_trash_days', '30'),
 (27, 'password_salt', '$salt'),
 (28, 'timezone', 'Europe/Berlin'),
-(29, 'db_schema_version', '9.8.4'),
+(29, 'db_schema_version', '9.8.5'),
 (30, 'pkg_src', 'http://packages.ulicms.de/{version}/'),
 (31, 'theme', '2016'),
 (32, 'zoom', '100'),
@@ -730,7 +733,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
 (51, 'locale_de', 'de_DE.UTF-8; de_DE; deu_deu'),
 (52, 'locale_en', 'en_US.UTF-8; en_GB.UTF-8; en_US; en_GB; english-uk; eng; uk'),
 (53, 'session_timeout', '60'),
-(54, 'og_type', 'article');" ) or die ( mysqli_error ( $connection ) );			
+(54, 'og_type', 'article');" ) or die ( mysqli_error ( $connection ) );
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,

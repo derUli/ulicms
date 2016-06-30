@@ -112,8 +112,10 @@ Database::query ( "alter table " . tbname ( "content" ) . "  add column `image_u
 
 Database::query ( "update " . tbname ( "content" ) . " set `type` = 'link' where redirection is not null and redirection <> ''" );
 
+// Database Changes of 9.8.5
+Database::query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN show_headline tinyint(1) NOT NULL DEFAULT '1'" );
 
-Settings::set ( "db_schema_version", "9.8.4" );
+Settings::set ( "db_schema_version", "9.8.5" );
 
 // Patch Manager zurücksetzen
 $pkg = new PackageManager ();

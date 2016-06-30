@@ -1,2 +1,4 @@
 ﻿[ ] Prepared Statements
 [ ] Funktionen für Drop, Truncate table und "select (avg)" zur Database Klasse hinzufügen.
+[ ] Erste Unit Tests mit PHPUnit
+[ ] Option "Überschrift anzeigen ja/nein"

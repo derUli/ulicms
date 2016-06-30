@@ -653,4 +653,7 @@ define ( "TRANSLATION_YES", "Yes" );
 define ( "TRANSLATION_YES", "No" );
 define ( "TRANSLATION_OWNER", "Owner" );
 
+// Überschrift anzeigen
+define ( "TRANSLATION_SHOW_HEADLINE", "Show Headline" );
+
 add_hook ( "lang_en" );
