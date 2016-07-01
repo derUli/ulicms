@@ -7,3 +7,4 @@ Neue Features
 
 Änderungen
 + Dashboard nun mit mehr Ajax
++ Haupt-Templates eines Designs können nun auch "top.php" und "bottom.php" heißen
