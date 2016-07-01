@@ -220,7 +220,17 @@ if ($html_file) {
 		echo "File Not Found";
 	}
 } else {
-	require_once getTemplateDirPath ( $theme ) . "oben.php";
+	$top_files = array (
+			"oben.php",
+			"top.php" 
+	);
+	foreach ( $top_files as $file ) {
+		$file = getTemplateDirPath ( $theme ) . $file;
+		if (file_exists ( $file )) {
+			require $file;
+			break;
+		}
+	}
 	add_hook ( "before_content" );
 	$text_position = get_text_position ();
 	
@@ -240,8 +250,17 @@ if ($html_file) {
 	
 	edit_button ();
 	add_hook ( "after_edit_button" );
-	
-	require_once getTemplateDirPath ( $theme ) . "unten.php";
+	$bottom_files = array (
+			"unten.php",
+			"bottom.php" 
+	);
+	foreach ( $bottom_files as $file ) {
+		$file = getTemplateDirPath ( $theme ) . $file;
+		if (file_exists ( $file )) {
+			require $file;
+			break;
+		}
+	}
 }
 
 add_hook ( "after_html" );
