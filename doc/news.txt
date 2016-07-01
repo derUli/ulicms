@@ -1,9 +1,13 @@
 ﻿===== Neues in UliCMS 9.8.5 =====
 
-Neue Features
+Neue Features für Endanwender
 + update_manager auf Version 1.0.2 aktualisiert
 + Option "Überschrift anzeigen" hinzugefügt
+
+Neue Features für Entwickler
 + Funktion Database::dropTable() hinzugefügt
++ Funktion Database::dropColumn() hinzugefügt
++ Funktionen Template::headline() und Template::getHeadline() hinzugefügt
 
 Änderungen
 + Dashboard nun mit mehr Ajax
