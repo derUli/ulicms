@@ -93,7 +93,7 @@ if (! $eingeloggt) {
 	
 	add_hook ( "register_actions" );
 	
-	$pkg = new packageManager ();
+	$pkg = new PackageManager ();
 	
 	global $actions;
 	if ($_SESSION ["require_password_change"]) {

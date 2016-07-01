@@ -1,5 +1,5 @@
 <?php
-class packageManager {
+class PackageManager {
 	private $package_source;
 	public function __construct() {
 		$cfg = new config ();

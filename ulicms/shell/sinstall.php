@@ -29,7 +29,7 @@ if (count ( $argv ) == 0) {
 	if (is_dir ( $file )) {
 		echo "$file is a directory.";
 	} else if (is_file ( $file )) {
-		$pkg = new packageManager ();
+		$pkg = new PackageManager ();
 		$result = $pkg->installPackage ( $file );
 		if ($result) {
 			echo "Package $file was successfully installed.";

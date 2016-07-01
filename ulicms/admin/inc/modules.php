@@ -39,7 +39,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 </p>
 
 <?php
-	$pkg = new packageManager ();
+	$pkg = new PackageManager ();
 	$modules = getAllModules ();
 	if (count ( $modules ) > 0) {
 		echo "<ol style=\"margin-bottom:30px;\">";
@@ -207,7 +207,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 <?php }?>
 <div id="inst_patch_slide_container">
 <?php
-		$pkg = new packageManager ();
+		$pkg = new PackageManager ();
 		$patches = $pkg->getInstalledPatchNames ();
 		if (count ( $patches ) > 0) {
 			echo "<ol id=\"installed_patches\">";

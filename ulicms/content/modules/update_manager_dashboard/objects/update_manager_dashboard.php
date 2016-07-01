@@ -1,7 +1,7 @@
 <?php
 class UpdateManagerDashboard {
 	public static function anyUpdateAvailable() {
-		$pkg = new packageManager ();
+		$pkg = new PackageManager ();
 		$modules = getAllModules ();
 		if (count ( $modules ) > 0) {
 			foreach ( $modules as $module ) {

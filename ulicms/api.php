@@ -903,7 +903,7 @@ function getThemeList() {
 	return getThemesList ();
 }
 function getThemesList() {
-	$pkg = new packageManager ();
+	$pkg = new PackageManager ();
 	return $pkg->getInstalledPackages ( 'themes' );
 }
 
@@ -1280,7 +1280,7 @@ function isModuleInstalled($name) {
 	return in_array ( $name, getAllModules () );
 }
 function getAllModules() {
-	$pkg = new packageManager ();
+	$pkg = new PackageManager ();
 	return $pkg->getInstalledPackages ( 'modules' );
 }
 function no_cache() {

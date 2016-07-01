@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL ();
-$pkg = new packageManager ();
+$pkg = new PackageManager ();
 if (! $acl->hasPermission ( "install_packages" )) {
 	?>
 <p>Zugriff verweigert</p>

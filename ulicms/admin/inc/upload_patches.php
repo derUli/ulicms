@@ -6,7 +6,7 @@ if (! $acl->hasPermission ( "upload_patches" )) {
 	$redirect = false;
 	
 	if (isset ( $_POST ["upload_patch"] ) and isset ( $_FILES ['file'] ['tmp_name'] ) and endsWith ( $_FILES ['file'] ['name'], ".zip" )) {
-		$pkg = new packageManager ();
+		$pkg = new PackageManager ();
 		if ($pkg->installPatch ( $_POST ["name"], $_POST ["description"], $_FILES ['file'] ['tmp_name'] )) {
 			
 			$redirect = true;
