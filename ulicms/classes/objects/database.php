@@ -34,6 +34,15 @@ class Database {
 		$table = self::escapeName ( $table );
 		return self::query ( "DROP TABLE $table" );
 	}
+	public static function dropColumn($table, $column, $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$column = self::escapeName ( $column );
+		$table = self::escapeName ( $table );
+		return self::query ( "ALTER TABLE $table DROP COLUMN $table" );
+	}
 	
 	// Using SQL Prepared statements
 	public static function preparedQuery($sql, $typeDef = FALSE, $params = FALSE) {
