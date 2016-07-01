@@ -1,7 +1,7 @@
 ﻿[ ] Prepared Statements
 [ ] Funktionen zur Database Klasse hinzufügen
    [X] Database::dropTable($table, $prefix = true)
-   [ ] Database::dropColumn($table, $column, $prefix = true)
+   [X] Database::dropColumn($table, $column, $prefix = true)
    [ ] Database::selectAvg($table, $column, $where = "")
    [ ] Database::selectMin($table, $column, $where = "")
    [ ] Database::selectMax($table, $column, $where = "")
