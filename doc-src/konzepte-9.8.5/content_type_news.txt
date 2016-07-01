@@ -1,7 +1,7 @@
 Inhaltstyp "News"
 
 Template news im Default Ordner
-Auch templates a la news-{category-id}.php möglich.
+Auch templates a la news-{category-id}.php mÃ¶glich.
 HTML5 Article Markup verwenden
 <section>
    <address class="author"><a href="/link/zum/profil/von/autor" rel="author">By$autor</a></adress> am <time datetime="2008-02-14 20:00">
