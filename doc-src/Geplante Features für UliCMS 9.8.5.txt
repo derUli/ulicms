@@ -9,3 +9,4 @@
 [X] Option "Überschrift anzeigen ja/nein"
 [ ] Neuer Installer mit OOP, AJAX, Progressbar usw.
 [ ] Update-Check Unter "Pakete" per Ajax für jedes Paket
+[ ] Passwort-Reset -> Verschicken eines Links, der den Nutzer auf ein Passwort zurücksetzen Formular bringt, statt ein neues Passwort zu versenden 
