@@ -1,5 +1,5 @@
 ﻿[ ] Prepared Statements
-[ ] Funktionen zur Database Klasse hinzufügen
+[X] Funktionen zur Database Klasse hinzufügen
    [X] Database::dropTable($table, $prefix = true)
    [X] Database::dropColumn($table, $column, $prefix = true)
    [X] Database::selectAvg($table, $column, $where = "")
