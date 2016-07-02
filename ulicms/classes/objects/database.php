@@ -34,6 +34,62 @@ class Database {
 		$table = self::escapeName ( $table );
 		return self::query ( "DROP TABLE $table" );
 	}
+	public static function selectAVG($table, $column, $where = "", $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$table = self::escapeName ( $table );
+		$column = self::escapeName ( $column );
+		$sql = "select avg($column) from $table";
+		if (! isNotNullOrEmpty ( $where )) {
+			$sql .= " where $where";
+		}
+		$result = Database::query ( $sql );
+		return $result;
+	}
+	public static function selectMin($table, $column, $where = "", $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$table = self::escapeName ( $table );
+		$column = self::escapeName ( $column );
+		$sql = "select min($column) from $table";
+		if (! isNotNullOrEmpty ( $where )) {
+			$sql .= " where $where";
+		}
+		$result = Database::query ( $sql );
+		return $result;
+	}
+	public static function deleteFrom($table, $where = "", $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$table = self::escapeName ( $table );
+		
+		$sql = "DELETE FROM $table";
+		if (! isNotNullOrEmpty ( $where )) {
+			$sql .= " where $where";
+		}
+		$result = Database::query ( $sql );
+		return $result;
+	}
+	public static function selectMax($table, $column, $where = "", $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$table = self::escapeName ( $table );
+		$column = self::escapeName ( $column );
+		$sql = "select min($column) from $table";
+		if (! isNotNullOrEmpty ( $where )) {
+			$sql .= " where $where";
+		}
+		$result = Database::query ( $sql );
+		return $result;
+	}
 	public static function truncateTable($table, $prefix = true) {
 		if ($prefix) {
 			$table = tbname ( $table );

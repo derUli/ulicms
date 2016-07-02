@@ -7,6 +7,10 @@ Neue Features für Endanwender
 Neue Features für Entwickler
 + Funktion Database::dropTable() hinzugefügt
 + Funktion Database::dropColumn() hinzugefügt
++ Funktion Database::selectAvg() hinzugefügt
++ Funktion Database::selectMin() hinzugefügt
++ Funktion Database::selectMax() hinzugefügt
++ Funktion Database::deleteFrom() hinzugefügt
 + Funktionen Template::headline() und Template::getHeadline() hinzugefügt
 
 Änderungen
