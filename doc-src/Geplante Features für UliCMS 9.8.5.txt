@@ -1,4 +1,4 @@
-﻿[ ] Prepared Statements
+﻿[X] Prepared Statements
 [X] Funktionen zur Database Klasse hinzufügen
    [X] Database::dropTable($table, $prefix = true)
    [X] Database::dropColumn($table, $column, $prefix = true)

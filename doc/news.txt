@@ -5,6 +5,7 @@ Neue Features für Endanwender
 + Option "Überschrift anzeigen" hinzugefügt
 
 Neue Features für Entwickler
++ Prepared Statements
 + Funktion Database::dropTable() hinzugefügt
 + Funktion Database::dropColumn() hinzugefügt
 + Funktion Database::selectAvg() hinzugefügt
@@ -12,6 +13,7 @@ Neue Features für Entwickler
 + Funktion Database::selectMax() hinzugefügt
 + Funktion Database::deleteFrom() hinzugefügt
 + Funktionen Template::headline() und Template::getHeadline() hinzugefügt
++ Funktion str_replace_first() hinzugefügt
 
 Änderungen
 + Dashboard nun mit mehr Ajax

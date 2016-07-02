@@ -7,6 +7,13 @@ function initconfig($key, $value) {
 	}
 	return $retval;
 }
+function str_replace_first($search, $replace, $subject) {
+	$pos = strpos ( $subject, $search );
+	if ($pos !== false) {
+		return substr_replace ( $subject, $replace, $pos, strlen ( $search ) );
+	}
+	return $subject;
+}
 function isNotNullOrEmpty($variable) {
 	return (! is_null ( $variable ) and ! is_empty ( $variable ));
 }
@@ -1119,7 +1126,7 @@ function get_translation($name, $placeholders = array()) {
 			$custom_translation = Translation::get ( $key );
 			if ($custom_translation != null) {
 				$value = $custom_translation;
-			}			
+			}
 			// Platzhalter ersetzen, diese können als assoziatives Array als zweiter Parameter
 			// dem Funktionsaufruf mitgegeben werden
 			foreach ( $placeholders as $placeholder => $replacement ) {

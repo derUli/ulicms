@@ -7,6 +7,25 @@ class Database {
 		global $db_connection;
 		return mysqli_query ( $db_connection, $query );
 	}
+	public static function pQuery($query, $args = array()) {
+		include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
+		foreach ( $args as $value ) {
+			if (is_float ( $value )) {
+				$value = floatval ( $value );
+			} else if (is_int ( $value )) {
+				$value = intval ( $value );
+			} else if (is_bool ( $value )) {
+				$value = ( int ) $value;
+			} else {
+				$value = "'" . self::escapeValue ( $value ) . "'";
+			}
+			$query = str_replace_first ( "?", $value, $query );
+		}
+		var_dump ( $query );
+		log_db_query ( $query );
+		global $db_connection;
+		return Database::query ( $query );
+	}
 	public static function getPDOConnectionString() {
 		$retval = "mysql://";
 		$cfg = new config ();
