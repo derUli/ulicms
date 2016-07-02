@@ -30,7 +30,8 @@ def main():
                        "Releases", "cms-config.php", "content", "services",
                        ".gitignore", ".htaccess", "installer.aus", "installer",
               "modules", "templates", "contents.css",
-              "config.js", "comments", "*~", ".settings", ".project", ".buildpath")
+              "config.js", "comments", "*~", ".settings", ".project", ".buildpath",
+              "tests")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     print("copying files")

@@ -11,7 +11,7 @@ class Database {
 		include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
 		foreach ( $args as $value ) {
 			if (is_float ( $value )) {
-				$value = floatval ( $value );
+				$value = str_replace ( ",", ".", floatval ( $value ) );
 			} else if (is_int ( $value )) {
 				$value = intval ( $value );
 			} else if (is_bool ( $value )) {
@@ -21,7 +21,6 @@ class Database {
 			}
 			$query = str_replace_first ( "?", $value, $query );
 		}
-		var_dump ( $query );
 		log_db_query ( $query );
 		global $db_connection;
 		return Database::query ( $query );
