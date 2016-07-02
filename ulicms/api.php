@@ -816,6 +816,9 @@ function clearCache() {
 	if (function_exists ( "apc_clear_cache" )) {
 		clearAPCCache ();
 	}
+	if (function_exists ( "opcache_reset" )) {
+		opcache_reset ();
+	}
 	
 	add_hook ( "after_clear_cache" );
 }
