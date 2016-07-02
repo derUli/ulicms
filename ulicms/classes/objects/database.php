@@ -34,6 +34,14 @@ class Database {
 		$table = self::escapeName ( $table );
 		return self::query ( "DROP TABLE $table" );
 	}
+	public static function truncateTable($table, $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$table = self::escapeName ( $table );
+		return self::query ( "TRUNCATE TABLE $table" );
+	}
 	public static function dropColumn($table, $column, $prefix = true) {
 		if ($prefix) {
 			$table = tbname ( $table );
