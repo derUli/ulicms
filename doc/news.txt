@@ -1,7 +1,7 @@
 ﻿===== Neues in UliCMS 9.8.5 =====
 
 Neue Features für Endanwender
-+ update_manager auf Version 1.0.2 aktualisiert
++ update_manager auf Version 1.0.3 aktualisiert
 + Option "Überschrift anzeigen" hinzugefügt
 
 Neue Features für Entwickler

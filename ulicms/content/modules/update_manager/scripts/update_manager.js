@@ -1,6 +1,6 @@
 $(function() {
 	$("form#update-manager").submit(
-			function() {
+			function(event) {
 				event.preventDefault();
 				var packages = $('form#update-manager .package:checked').map(
 						function(_, el) {
