@@ -14,6 +14,8 @@ Neue Features für Entwickler
 + Funktion Database::deleteFrom() hinzugefügt
 + Funktionen Template::headline() und Template::getHeadline() hinzugefügt
 + Funktion str_replace_first() hinzugefügt
++ Funktion str_replace_nth() hinzugefügt
++ Funktion mb_str_split() hinzugefügt
 
 Änderungen
 + Dashboard nun mit mehr Ajax

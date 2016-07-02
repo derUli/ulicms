@@ -8,22 +8,31 @@ class Database {
 		return mysqli_query ( $db_connection, $query );
 	}
 	public static function pQuery($query, $args = array()) {
+		$preparedQuery = "";
+		$chars = mb_str_split ( $query );
 		include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
-		foreach ( $args as $value ) {
-			if (is_float ( $value )) {
-				$value = str_replace ( ",", ".", floatval ( $value ) );
-			} else if (is_int ( $value )) {
-				$value = intval ( $value );
-			} else if (is_bool ( $value )) {
-				$value = ( int ) $value;
+		$i = 0;
+		foreach ( $chars as $char ) {
+			if ($char != "?") {
+				$preparedQuery .= $char;
 			} else {
-				$value = "'" . self::escapeValue ( $value ) . "'";
+				$value = $args [$i];
+				if (is_float ( $value )) {
+					$value = str_replace ( ",", ".", floatval ( $value ) );
+				} else if (is_int ( $value )) {
+					$value = intval ( $value );
+				} else if (is_bool ( $value )) {
+					$value = ( int ) $value;
+				} else {
+					$value = "'" . self::escapeValue ( $value ) . "'";
+				}
+				$preparedQuery .= $value;
+				$i ++;
 			}
-			$query = str_replace_first ( "{?}", $value, $query );
 		}
-		log_db_query ( $query );
+		log_db_query ( $preparedQuery );
 		global $db_connection;
-		return Database::query ( $query );
+		return Database::query ( $preparedQuery );
 	}
 	public static function getPDOConnectionString() {
 		$retval = "mysql://";
