@@ -7,14 +7,11 @@ function initconfig($key, $value) {
 	}
 	return $retval;
 }
-
-function mb_str_split( $string ) {
-	# Split at all position not after the start: ^
-	# and not before the end: $
-	return preg_split('/(?<!^)(?!$)/u', $string );
+function mb_str_split($string) {
+	// Split at all position not after the start: ^
+	// and not before the end: $
+	return preg_split ( '/(?<!^)(?!$)/u', $string );
 }
-
-
 function str_replace_nth($search, $replace, $subject, $nth) {
 	$found = preg_match_all ( '/' . preg_quote ( $search ) . '/', $subject, $matches, PREG_OFFSET_CAPTURE );
 	if (false !== $found && $found > $nth) {

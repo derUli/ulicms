@@ -31,7 +31,6 @@ class Database {
 			}
 		}
 		log_db_query ( $preparedQuery );
-		global $db_connection;
 		return Database::query ( $preparedQuery );
 	}
 	public static function getPDOConnectionString() {
