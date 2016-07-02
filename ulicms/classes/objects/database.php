@@ -19,7 +19,7 @@ class Database {
 			} else {
 				$value = "'" . self::escapeValue ( $value ) . "'";
 			}
-			$query = str_replace_first ( "?", $value, $query );
+			$query = str_replace_first ( "{?}", $value, $query );
 		}
 		log_db_query ( $query );
 		global $db_connection;
