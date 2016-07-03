@@ -7,6 +7,25 @@ function initconfig($key, $value) {
 	}
 	return $retval;
 }
+function mb_str_split($string) {
+	// Split at all position not after the start: ^
+	// and not before the end: $
+	return preg_split ( '/(?<!^)(?!$)/u', $string );
+}
+function str_replace_nth($search, $replace, $subject, $nth) {
+	$found = preg_match_all ( '/' . preg_quote ( $search ) . '/', $subject, $matches, PREG_OFFSET_CAPTURE );
+	if (false !== $found && $found > $nth) {
+		return substr_replace ( $subject, $replace, $matches [0] [$nth] [1], strlen ( $search ) );
+	}
+	return $subject;
+}
+function str_replace_first($search, $replace, $subject) {
+	$pos = strpos ( $subject, $search );
+	if ($pos !== false) {
+		return substr_replace ( $subject, $replace, $pos, strlen ( $search ) );
+	}
+	return $subject;
+}
 function isNotNullOrEmpty($variable) {
 	return (! is_null ( $variable ) and ! is_empty ( $variable ));
 }
@@ -797,6 +816,9 @@ function clearCache() {
 	if (function_exists ( "apc_clear_cache" )) {
 		clearAPCCache ();
 	}
+	if (function_exists ( "opcache_reset" )) {
+		opcache_reset ();
+	}
 	
 	add_hook ( "after_clear_cache" );
 }
@@ -1119,7 +1141,7 @@ function get_translation($name, $placeholders = array()) {
 			$custom_translation = Translation::get ( $key );
 			if ($custom_translation != null) {
 				$value = $custom_translation;
-			}			
+			}
 			// Platzhalter ersetzen, diese können als assoziatives Array als zweiter Parameter
 			// dem Funktionsaufruf mitgegeben werden
 			foreach ( $placeholders as $placeholder => $replacement ) {
