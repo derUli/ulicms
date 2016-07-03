@@ -16,6 +16,7 @@ Neue Features für Entwickler
 + Funktion str_replace_first() hinzugefügt
 + Funktion str_replace_nth() hinzugefügt
 + Funktion mb_str_split() hinzugefügt
++ modul_main und modul_admin Dateien müssen nun nicht mehr mit dem Namen des Moduls geprefixt werden
 
 Änderungen
 + Dashboard nun mit mehr Ajax
