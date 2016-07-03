@@ -6,7 +6,7 @@ if (! defined ( "ULICMS_ROOT" )) {
 $module = basename ( $_GET ["module"] );
 
 $admin_file_path = getModuleAdminFilePath ( $module );
-$admin_file_path2 = getModuleAdminFilePath ( $module );
+$admin_file_path2 = getModuleAdminFilePath2 ( $module );
 
 if (! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 )) {
 	?>
@@ -14,10 +14,9 @@ if (! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 )) 
 <?php
 } else {
 	if (file_exists ( $admin_file_path2 )) {
-		
 		include $admin_file_path2;
 	} else {
-		include $admin_file_pat3;
+		include $admin_file_path;
 	}
 	
 	if (defined ( "MODULE_ADMIN_HEADLINE" )) {
