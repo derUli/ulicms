@@ -1224,8 +1224,14 @@ else {
 function getModuleAdminFilePath($module) {
 	return getModulePath ( $module ) . $module . "_admin.php";
 }
+function getModuleAdminFilePath2($module) {
+	return getModulePath ( $module ) . "admin.php";
+}
 function getModuleMainFilePath($module) {
 	return getModulePath ( $module ) . $module . "_main.php";
+}
+function getModuleMainFilePath2($module) {
+	return getModulePath ( $module ) . "main.php";
 }
 function getModuleUninstallScriptPath($module, $abspath = false) {
 	return getModulePath ( $module, $abspath ) . $module . "_uninstall.php";
@@ -1423,14 +1429,18 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$stringToReplace2 = '[module=&quot;' . $thisModule . '&quot;]';
 		
 		$module_mainfile_path = getModuleMainFilePath ( $thisModule );
+		$module_mainfile_path2 = getModuleMainFilePath2 ( $thisModule );
 		
 		if (is_file ( $module_mainfile_path ) and (strstr ( $string, $stringToReplace1 ) or strstr ( $string, $stringToReplace2 ))) {
 			require_once $module_mainfile_path;
-			if (function_exists ( $thisModule . "_render" )) {
-				$html_output = call_user_func ( $thisModule . "_render" );
-			} else {
-				$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
-			}
+		} else if (is_file ( $module_mainfile_path2 )) {
+			require_once $module_mainfile_path2;
+		} else {
+			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
+		}
+		
+		if (function_exists ( $thisModule . "_render" )) {
+			$html_output = call_user_func ( $thisModule . "_render" );
 		} else {
 			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
 		}

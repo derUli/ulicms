@@ -136,9 +136,10 @@ class PackageManager {
 		for($i = 0; $i < count ( $directory_content ); $i ++) {
 			if (is_dir ( $module_folder . $directory_content [$i] )) {
 				$module_init_file = $module_folder . $directory_content [$i] . "/" . $directory_content [$i] . "_main.php";
+				$module_init_file2 = $module_folder . $directory_content [$i] . "/" . "main.php";
 				
 				if ($directory_content [$i] != ".." and $directory_content [$i] != ".") {
-					if (is_file ( $module_init_file )) {
+					if (is_file ( $module_init_file ) or is_file ( $module_init_file2 )) {
 						array_push ( $available_modules, $directory_content [$i] );
 					}
 				}

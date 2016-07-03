@@ -46,7 +46,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		for($i = 0; $i < count ( $modules ); $i ++) {
 			echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
 			
-			$module_has_admin_page = file_exists ( getModuleAdminFilePath ( $modules [$i] ) );
+			$module_has_admin_page = (file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) ));
 			
 			echo getModuleName ( $modules [$i] );
 			$version = getModuleMeta ( $modules [$i], "version" );

@@ -3,7 +3,7 @@ if (defined ( "_SECURITY" )) {
 	$modules = getAllModules ();
 	$modules_with_admin_page = Array ();
 	for($i = 0; $i < count ( $modules ); $i ++) {
-		if (file_exists ( getModuleAdminFilePath ( $modules [$i] ) ))
+		if (file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) ))
 			array_push ( $modules_with_admin_page, $modules [$i] );
 	}
 	
@@ -383,6 +383,10 @@ if (defined ( "_SECURITY" )) {
 		
 		
 		
+		
+		
+		
+		
 		<li><a href="?action=info"><?php
 		
 		echo TRANSLATION_INFO;
@@ -406,6 +410,10 @@ if (defined ( "_SECURITY" )) {
 		?> <?php
 	}
 	?>
+		
+		
+		
+		
 		
 		
 		
