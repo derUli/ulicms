@@ -94,8 +94,15 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			echo "</div>";
 			$noembed_file1 = getModulePath ( $modules [$i] ) . ".noembed";
 			$noembed_file2 = getModulePath ( $modules [$i] ) . "noembed.txt";
+			$embed_attrib = true;
+			
+			$meta_attr = getModuleMeta ( $modules [$i], "embed" );
+			if (! is_null ( $meta_attr ) and is_bool ( $meta_attr )) {
+				$embed_attrib = $meta_attr;
+			}
+			
 			echo "<br/>";
-			if (! file_exists ( $noembed_file1 ) and ! file_exists ( $noembed_file2 )) {
+			if (! file_exists ( $noembed_file1 ) and ! file_exists ( $noembed_file2 ) and $embed_attrib) {
 				echo "<input type='text' value='[module=\"" . $modules [$i] . "\"]' readonly='readonly' onclick='this.focus(); this.select()'>";
 			} else {
 				echo "Kein Embed Modul";
