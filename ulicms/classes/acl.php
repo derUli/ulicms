@@ -178,6 +178,16 @@ class ACL {
 		$acl_data = $acl_array;
 		unset ( $acl_array );
 		
+		$modules = getAllModules ();
+		foreach ( $modules as $module ) {
+			$acl_metadata = getModuleMeta ( $module, "custom_acl" );
+			if ($acl_metadata and is_array ( $acl_metadata )) {
+				foreach ( $acl_metadata as $permission ) {
+					$acl_data [$permission] = null;
+				}
+			}
+		}
+		
 		// Admin has all rights
 		if ($admin) {
 			$default_value = true;
