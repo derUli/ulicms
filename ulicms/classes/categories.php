@@ -12,9 +12,9 @@ class categories {
 		db_query ( $sqlString );
 		return db_insert_id ();
 	}
-	public static function getHTMLSelect($default = 1, $allowNull = false, $name='category') {
+	public static function getHTMLSelect($default = 1, $allowNull = false, $name = 'category') {
 		$lst = self::getAllCategories ( "name" );
-		$html = "<select name='".$name."' id='category' size='1'>";
+		$html = "<select name='" . $name . "' id='category' size='1'>";
 		if ($allowNull) {
 			if ($default == 0)
 				$html .= "<option value='0' selected='selected' >[" . TRANSLATION_EVERY . "]</option>";
