@@ -93,8 +93,9 @@ function get_og_data($systemname = "") {
 		$systemname = $_GET ["seite"];
 	}
 	
-	if (empty ( $systemname ))
+	if (empty ( $systemname )) {
 		$systemname = get_frontpage ();
+	}
 	$query = db_query ( "SELECT og_title, og_type, og_image, og_description FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	if (db_num_rows ( $query ) > 0) {
 		return db_fetch_assoc ( $query );
@@ -151,8 +152,9 @@ function get_type() {
 		$result = db_fetch_object ( $query );
 		$result = $result->type;
 	}
-	if (empty ( $result ))
+	if (empty ( $result )) {
 		$result = "page";
+	}
 	return $result;
 }
 function get_text_position() {
@@ -198,8 +200,9 @@ function get_parent($page = null) {
 		$result = db_fetch_object ( $query );
 		$result = $result->parent;
 	}
-	if (empty ( $result ))
+	if (empty ( $result )) {
 		$result = null;
+	}
 	return $result;
 }
 function get_custom_data($page = null) {
@@ -318,8 +321,9 @@ function get_signature($page = null) {
 	return "";
 }
 function delete_custom_data($var = null, $page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$data = get_custom_data ( $page );
 	if (is_null ( $data )) {
 		$data = array ();
@@ -359,10 +363,11 @@ function language_selection() {
 	echo "<ul class='language_selection'>";
 	while ( $row = db_fetch_object ( $query ) ) {
 		$domain = getDomainByLanguage ( $row->language_code );
-		if ($domain)
+		if ($domain) {
 			echo "<li>" . "<a href='http://" . $domain . "'>" . $row->name . "</a></li>";
-		else
+		} else {
 			echo "<li>" . "<a href='./?language=" . $row->language_code . "'>" . $row->name . "</a></li>";
+		}
 	}
 	echo "</ul>";
 }
@@ -1039,8 +1044,9 @@ function check_status() {
 		header ( "HTTP/1.1 304 Not Modified" );
 		exit ();
 	}
-	if (! empty ( $status ))
+	if (! empty ( $status )) {
 		return $status;
+	}
 	if (file_exists ( $cached_page_path ) and ! is_logged_in ()) {
 		$last_modified = filemtime ( $cached_page_path );
 		if (time () - $last_modified < CACHE_PERIOD) {

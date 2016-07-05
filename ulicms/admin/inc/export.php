@@ -9,9 +9,7 @@ $table = null;
 if (! $acl->hasPermission ( "export" )) {
 	noperms ();
 } else {
-	
 	$tables = db_get_tables ();
-	
 	?>
 <h1>
 <?php

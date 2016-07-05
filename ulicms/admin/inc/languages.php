@@ -1,15 +1,10 @@
-<h2>
-<?php
-echo TRANSLATION_LANGUAGES;
-?>
-</h2>
+<h2><?php translate("languages");?></h2>
 <?php
 
 if (defined ( "_SECURITY" )) {
 	
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "languages" )) {
-		
 		$languages = db_query ( "SELECT * FROM " . tbname ( "languages" ) . " ORDER BY language_code ASC" );
 		
 		?>
@@ -95,7 +90,7 @@ if (defined ( "_SECURITY" )) {
 				href="index.php?action=languages&default=<?php echo $row -> language_code?>">
 					<span style="color: red !important;"><?php
 					
-					echo TRANSLATION_NO;
+					translate ( "no" );
 					?></span>
 			</a> <?php
 				}
@@ -106,19 +101,10 @@ if (defined ( "_SECURITY" )) {
 				
 				if ($row->language_code == Settings::get ( "default_language" )) {
 					?> <a
-				onclick="javascript:alert('<?php
-					
-					echo TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE;
-					?>')"
+				onclick="javascript:alert('<?php translate("CANT_DELETE_DEFAULT_LANGUAGE");?>')"
 				href="#"> <img src="gfx/delete.gif" class="mobile-big-image"
-					alt="<?php
-					
-					echo TRANSLATION_DELETE;
-					?>"
-					title="<?php
-					
-					echo TRANSLATION_DELETE;
-					?>">
+					alt="<?php translate("delete");?>"
+					title="<?php translate("delete");?>">
 			</a> <?php
 				} else {
 					?> <form
@@ -170,8 +156,9 @@ $("form.delete-form").ajaxForm(ajax_options);
 		<?php
 	} else {
 		noperms ();
-         }
-     ?>
+	}
+	?>
 
-	<?php }
- ?>
+	<?php
+}
+?>

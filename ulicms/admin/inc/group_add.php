@@ -4,7 +4,6 @@ if (! defined ( "ULICMS_ROOT" )) {
 }
 
 $acl = new ACL ();
-
 $all_permissions = $acl->getDefaultACL ( true, true );
 
 ?>

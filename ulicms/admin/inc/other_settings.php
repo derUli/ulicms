@@ -77,24 +77,29 @@ if (! $acl->hasPermission ( "other" )) {
 			setconfig ( "no_auto_cron", "no_auto_cron" );
 		}
 		
-		if (isset ( $_POST ["smtp_host"] ))
+		if (isset ( $_POST ["smtp_host"] )) {
 			setconfig ( "smtp_host", db_escape ( $_POST ["smtp_host"] ) );
+		}
 		
-		if (isset ( $_POST ["smtp_port"] ))
+		if (isset ( $_POST ["smtp_port"] )) {
 			setconfig ( "smtp_port", intval ( $_POST ["smtp_port"] ) );
+		}
 		
-		if (isset ( $_POST ["force_password_change_every_x_days"] ))
+		if (isset ( $_POST ["force_password_change_every_x_days"] )) {
 			setconfig ( "force_password_change_every_x_days", intval ( $_POST ["force_password_change_every_x_days"] ) );
+		}
 		
 		if (isset ( $_POST ["max_failed_logins_items"] )) {
 			setconfig ( "max_failed_logins_items", intval ( $_POST ["max_failed_logins_items"] ) );
 		}
 		
-		if (isset ( $_POST ["smtp_user"] ))
+		if (isset ( $_POST ["smtp_user"] )) {
 			setconfig ( "smtp_user", db_escape ( $_POST ["smtp_user"] ) );
+		}
 		
-		if (isset ( $_POST ["smtp_password"] ))
+		if (isset ( $_POST ["smtp_password"] )) {
 			setconfig ( "smtp_password", db_escape ( $_POST ["smtp_password"] ) );
+		}
 		
 		if ($_POST ["move_from"] != "-" and $_POST ["move_to"] != "-") {
 			db_query ( "UPDATE " . tbname ( "content" ) . " SET menu='" . db_escape ( $_POST ["move_to"] ) . "' WHERE menu='" . db_escape ( $_POST ["move_from"] ) . "'" );
@@ -137,10 +142,7 @@ if (! $acl->hasPermission ( "other" )) {
 	$delete_ips_after_48_hours = Settings::get ( "delete_ips_after_48_hours" );
 	$no_auto_cron = Settings::get ( "no_auto_cron" );
 	$twofactor_authentication = Settings::get ( "twofactor_authentication" );
-	
 	?>
-
-
 <form id="other_settings" action="index.php?action=other_settings"
 	method="post">
 	<?php

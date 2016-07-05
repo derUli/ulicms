@@ -25,8 +25,9 @@ if (defined ( "_SECURITY" )) {
 			$lang = $languages [$i];
 			$mottos [$lang] = Settings::get ( "motto_" . $lang );
 			
-			if (! $mottos [$lang])
+			if (! $mottos [$lang]) {
 				$mottos [$lang] = Settings::get ( "motto" );
+			}
 		}
 		
 		?>
@@ -75,6 +76,9 @@ if (defined ( "_SECURITY" )) {
 			<?php
 		}
 		?>
+		
+		
+		
 		
 		
 		

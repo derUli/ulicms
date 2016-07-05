@@ -5,10 +5,7 @@ if (! defined ( "ULICMS_ROOT" ))
 $acl = new ACL ();
 ?>
 <h1>
-<?php
-
-echo TRANSLATION_SETTINGS;
-?>
+<?php translate("settings");?>
 </h1>
 <?php
 
@@ -32,10 +29,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	
 	if ($acl->hasPermission ( "design" )) {
 		?>
-	<a href="index.php?action=design"><?php
-		
-		echo TRANSLATION_DESIGN;
-		?>
+	<a href="index.php?action=design"><?php translate("design");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -44,10 +38,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 
 	if ($acl->hasPermission ( "spam_filter" )) {
 		?>
-	<a href="index.php?action=spam_filter"><?php
-		
-		echo TRANSLATION_SPAMFILTER;
-		?>
+	<a href="index.php?action=spam_filter"><?php translate("spamfilter");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -68,10 +59,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 
 	if ($acl->hasPermission ( "motd" )) {
 		?>
-	<a href="index.php?action=motd"><?php
-		
-		echo TRANSLATION_MOTD;
-		?>
+	<a href="index.php?action=motd"><?php translate("motd");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -92,10 +80,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 
 	if ($acl->hasPermission ( "logo" )) {
 		?>
-	<a href="index.php?action=logo_upload"><?php
-		
-		echo TRANSLATION_LOGO;
-		?>
+	<a href="index.php?action=logo_upload"><?php translate("logo");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -116,10 +101,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 
 	if ($acl->hasPermission ( "other" )) {
 		?>
-	<a href="?action=other_settings"><?php
-		
-		echo TRANSLATION_OTHER;
-		?>
+	<a href="?action=other_settings"><?php translate("other");?>
 	</a>
 	<?php
 	}

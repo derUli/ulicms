@@ -61,10 +61,7 @@ if (defined ( "_SECURITY" )) {
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit"
-				value="<?php
-		
-		echo TRANSLATION_UPLOAD;
-		?>"></td>
+				value="<?php translate("upload");?>"></td>
 	
 	</table>
 

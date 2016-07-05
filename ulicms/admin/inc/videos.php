@@ -2,8 +2,9 @@
 $acl = new ACL ();
 
 $video_folder = ULICMS_ROOT . "/content/videos";
-if (! is_dir ( $video_folder ))
+if (! is_dir ( $video_folder )) {
 	mkdir ( $video_folder );
+}
 if ($acl->hasPermission ( "videos" ) and isset ( $_REQUEST ["delete"] ) and get_request_method () == "POST") {
 	$query = db_query ( "select ogg_file, webm_file, mp4_file from " . tbname ( "videos" ) . " where id = " . intval ( $_REQUEST ["delete"] ) );
 	if (db_num_rows ( $query ) > 0) {
@@ -195,8 +196,7 @@ $(window).load(function(){
 			<td></td>
 			<td></td>
 		</tr>
-	
-	
+	</thead>
 	<tbody>
 	<?php
 	while ( $row = db_fetch_object ( $all_videos ) ) {
@@ -266,7 +266,6 @@ $(window).load(function(){
 	}
 	?>
 	</tbody>
-	</thead>
 </table>
 
 <script type="text/javascript">

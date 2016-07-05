@@ -7,8 +7,9 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 	// Wenn Formular abgesendet wurde, Wert Speichern
 	if (isset ( $_REQUEST ["pkg_src"] )) {
 		$new_pkg_src = trim ( $_REQUEST ["pkg_src"] );
-		if (! endsWith ( $new_pkg_src, "/" ))
+		if (! endsWith ( $new_pkg_src, "/" )) {
 			$new_pkg_src .= "/";
+		}
 		
 		if ($new_pkg_src == "/") {
 			Settings::delete ( "pkg_src" );

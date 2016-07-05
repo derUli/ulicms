@@ -8,8 +8,9 @@ if (defined ( "_SECURITY" )) {
 	} else {
 		
 		$admin_logo = Settings::get ( "admin_logo" );
-		if (! $admin_logo)
+		if (! $admin_logo) {
 			$admin_logo = "gfx/logo.png";
+		}
 		?>
 <p>
 	<img src="<?php echo $admin_logo;?>" alt="UliCMS"
@@ -78,16 +79,20 @@ if (defined ( "_SECURITY" )) {
 	is licensed under <a href="http://creativecommons.org/licenses/by/3.0/"
 		title="Creative Commons BY 3.0">CC BY 3.0</a>
 </div>
-<div>Icons made by <a href="http://www.flaticon.com/authors/butterflytronics" title="Butterflytronics">Butterflytronics</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+<div>
+	Icons made by <a
+		href="http://www.flaticon.com/authors/butterflytronics"
+		title="Butterflytronics">Butterflytronics</a> from <a
+		href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>
+	is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"
+		title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+</div>
 <br />
 
 <input type="button" value="UliCMS Portal"
 	onclick='window.open("http://www.ulicms.de");' />
 
-<input type="button" value="<?php
-		
-		echo TRANSLATION_LICENSE;
-		?>"
+<input type="button" value="<?php translate("license");?>"
 	onclick='window.open("license.html");' />
 
 <input type="button" value="Feedback"
@@ -100,5 +105,5 @@ if (defined ( "_SECURITY" )) {
 
 <?php
 	}
-    }
+}
 ?>

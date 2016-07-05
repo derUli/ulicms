@@ -17,17 +17,12 @@ if (! $acl->hasPermission ( "install_packages" )) {
 				echo "<p style='color:red'>" . str_ireplace ( "%file%", $_FILES ['file'] ['name'], TRANSLATION_INSALLATION_FAILED ) . "</p>";
 			}
 		} else {
-			echo "<p style='color:red'>" . TRANSLATION_UPLOAD_FAILED . "</p>";
+			echo "<p style='color:red'>" . get_translation ( "upload_failed" ) . "</p>";
 		}
 	}
 	
 	?>
-<h1>
-<?php
-	
-	echo TRANSLATION_UPLOAD_PACKAGE;
-	?>
-</h1>
+<h1><?php translate("upload_package");?></h1>
 <form action="?action=upload_package" enctype="multipart/form-data"
 	method="post">
 	<?php
@@ -35,10 +30,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	csrf_token_html ();
 	?>
 	<input type="file" name="file"><br /> <br /> <input type="submit"
-		value="<?php
-	
-	echo TRANSLATION_INSTALL_PACKAGE;
-	?>">
+		value="<?php translate("install_packages");?>">
 </form>
 
 

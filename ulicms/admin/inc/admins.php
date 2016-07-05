@@ -14,7 +14,6 @@ if (defined ( "_SECURITY" )) {
 		) )) {
 			$order = basename ( $_GET ["order"] );
 		} else {
-			
 			$order = "username";
 		}
 		$query = db_query ( "SELECT * FROM " . tbname ( "users" ) . " ORDER BY $order", $connection );
@@ -106,6 +105,12 @@ if (defined ( "_SECURITY" )) {
 		?>
 
 
+	
+	
+	
+	
+	
+	
 	
 	
 	

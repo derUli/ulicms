@@ -20,15 +20,17 @@ if (isset ( $_REQUEST ["sort"] ) and in_array ( $_REQUEST ["sort"], array (
 }
 
 if ($_SESSION ["grp_sort"] == "id") {
-	if ($_SESSION ["sortDirection"] == "asc")
+	if ($_SESSION ["sortDirection"] == "asc") {
 		ksort ( $groups );
-	else if ($_SESSION ["sortDirection"] == "asc")
+	} else if ($_SESSION ["sortDirection"] == "asc") {
 		krsort ( $groups );
+	}
 } else if ($_SESSION ["grp_sort"] == "name") {
-	if ($_SESSION ["sortDirection"] == "asc")
+	if ($_SESSION ["sortDirection"] == "asc") {
 		asort ( $groups );
-	else
+	} else {
 		arsort ( $groups );
+	}
 } else {
 	ksort ( $groups );
 }
@@ -90,8 +92,7 @@ if (count ( $groups ) > 0) {
 			echo TRANSLATION_YES;
 			?> </span> <?php
 		} else {
-			?> <a
-				href="?action=groups&standard=<?php
+			?> <a href="?action=groups&standard=<?php
 			
 			echo $id;
 			?>"><span style="color: red; font-weight: bold;"
@@ -105,8 +106,7 @@ if (count ( $groups ) > 0) {
 		}
 		?>
 			</td>
-			<td><a
-				href="?action=groups&edit=<?php
+			<td><a href="?action=groups&edit=<?php
 		
 		echo $id;
 		?>"><img class="mobile-big-image" src="gfx/edit.png"
@@ -115,25 +115,30 @@ if (count ( $groups ) > 0) {
 		echo TRANSLATION_EDIT;
 		?>"
 					title="<?php
-
-         echo TRANSLATION_EDIT;
-         ?>"> </a></td>
-			<td><form action="?action=groups&delete=<?php
-
-         echo $id;
-         ?>" method="post"
-				onsubmit="return confirm('<?php
-
-         echo TRANSLATION_ASK_FOR_DELETE;
-         ?>');" class="delete-form"><?php csrf_token_html();?><input type="image" class="mobile-big-image" src="gfx/delete.gif"
-					alt="<?php
+		
+		echo TRANSLATION_EDIT;
+		?>"> </a></td>
+			<td><form
+					action="?action=groups&delete=<?php
+		
+		echo $id;
+		?>"
+					method="post"
+					onsubmit="return confirm('<?php
+		
+		echo TRANSLATION_ASK_FOR_DELETE;
+		?>');"
+					class="delete-form"><?php csrf_token_html();?><input type="image"
+						class="mobile-big-image" src="gfx/delete.gif"
+						alt="<?php
 		
 		echo TRANSLATION_DELETE;
 		?>"
-					title="<?php
-
-         echo TRANSLATION_DELETE;
-         ?>"></form></td>
+						title="<?php
+		
+		echo TRANSLATION_DELETE;
+		?>">
+				</form></td>
 		</tr>
 
 

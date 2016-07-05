@@ -2,9 +2,7 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "settings_simple" )) {
-		
 		$languages = getAllLanguages ();
-		
 		if (isset ( $_POST ["submit"] )) {
 			for($i = 0; $i < count ( $languages ); $i ++) {
 				
@@ -25,8 +23,9 @@ if (defined ( "_SECURITY" )) {
 			$lang = $languages [$i];
 			$meta_descriptions [$lang] = Settings::get ( "meta_description_" . $lang );
 			
-			if (! $meta_descriptions [$lang])
+			if (! $meta_descriptions [$lang]) {
 				$meta_descriptions [$lang] = Settings::get ( "meta_description" );
+			}
 		}
 		
 		?>
@@ -76,6 +75,9 @@ if (defined ( "_SECURITY" )) {
 			<?php
 		}
 		?>
+		
+		
+		
 		
 		
 		

@@ -1844,4 +1844,3 @@ function getMaximumFileUploadSize() {
 }
 
 require_once "users_api.php";
-require_once "legacy.php";

@@ -47,10 +47,11 @@ function isCountryBlocked() {
 }
 function checkForSpamhaus($host = null) {
 	if (is_null ( $host )) {
-		if (function_exists ( "get_ip" ))
+		if (function_exists ( "get_ip" )) {
 			$host = get_ip ();
-		else
+		} else {
 			$host = $_SERVER ["REMOTE_ADDR"];
+		}
 	}
 	$rbl = 'sbl-xbl.spamhaus.org';
 	// valid query format is: 156.200.53.64.sbl-xbl.spamhaus.org

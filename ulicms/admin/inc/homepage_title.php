@@ -25,8 +25,9 @@ if (defined ( "_SECURITY" )) {
 			$lang = $languages [$i];
 			$homepage_titles [$lang] = Settings::get ( "homepage_title_" . $lang );
 			
-			if (! $homepage_titles [$lang])
+			if (! $homepage_titles [$lang]) {
 				$homepage_titles [$lang] = Settings::get ( "homepage_title" );
+			}
 		}
 		
 		?>
@@ -64,8 +65,7 @@ if (defined ( "_SECURITY" )) {
 			
 			echo $lang;
 			?></td>
-			<td><input
-				name="homepage_title_<?php
+			<td><input name="homepage_title_<?php
 			
 			echo $lang;
 			?>"
@@ -77,6 +77,9 @@ if (defined ( "_SECURITY" )) {
 			<?php
 		}
 		?>
+		
+		
+		
 		
 		
 		

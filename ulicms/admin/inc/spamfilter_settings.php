@@ -1,8 +1,4 @@
-<h1>
-<?php
-echo TRANSLATION_SPAMFILTER;
-?>
-</h1>
+<h1><?php translate("spamfilter");?></h1>
 
 <?php
 

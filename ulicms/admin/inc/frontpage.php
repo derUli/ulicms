@@ -25,8 +25,9 @@ if (defined ( "_SECURITY" )) {
 			$lang = $languages [$i];
 			$frontpages [$lang] = Settings::get ( "frontpage_" . $lang );
 			
-			if (! $frontpages [$lang])
+			if (! $frontpages [$lang]) {
 				$frontpages [$lang] = Settings::get ( "frontpage" );
+			}
 		}
 		
 		?>
@@ -64,12 +65,11 @@ if (defined ( "_SECURITY" )) {
 			
 			echo $lang;
 			?></td>
-			<td><select
-				name="frontpage_<?php
+			<td><select name="frontpage_<?php
 			
 			echo $lang;
-			?>"
-				size=1 style="width: 400px">
+			?>" size=1
+				style="width: 400px">
 				<?php
 			
 			$pages = getAllPages ( $lang, "title", true );
@@ -86,6 +86,9 @@ if (defined ( "_SECURITY" )) {
 			<?php
 		}
 		?>
+		
+		
+		
 		
 		
 		

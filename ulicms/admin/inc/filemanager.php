@@ -5,10 +5,7 @@ if (defined ( "_SECURITY" )) {
 		?>
 
 <h2>
-<?php
-		
-		echo TRANSLATION_MEDIA;
-		?>
+<?php translate("media"); ?>
 </h2>
 <iframe
 	src="kcfinder/browse.php?type=<?php

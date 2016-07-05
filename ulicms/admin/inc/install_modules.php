@@ -2,9 +2,7 @@
 $acl = new ACL ();
 $pkg = new PackageManager ();
 if (! $acl->hasPermission ( "install_packages" )) {
-	?>
-<p>Zugriff verweigert</p>
-<?php
+	noperms ();
 } else {
 	$pkg_src = Settings::get ( "pkg_src" );
 	@set_time_limit ( 0 );
@@ -52,20 +50,13 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		if (count ( $packagesToInstall ) === 0 or empty ( $_REQUEST ["packages"] )) {
 			?>
 <p>
-	<strong><?php
-			
-			echo TRANSLATION_ERROR;
-			?>/strong> <br /> <?php
-			
-			echo TRANSLATION_NOTHING_TO_DO;
-			?>
+	<strong><?php translate("error");?></strong> <br /> <?php translate("nothing_to_do");?>
 </strong>
 </p>
 
 <?php
 		} else {
 			for($i = 0; $i < count ( $packagesToInstall ); $i ++) {
-				
 				if (! empty ( $packagesToInstall [$i] )) {
 					$pkgURL = $packageArchiveFolder . basename ( $packagesToInstall [$i] ) . ".tar.gz";
 					$pkgContent = @file_get_contents_wrapper ( $pkgURL );

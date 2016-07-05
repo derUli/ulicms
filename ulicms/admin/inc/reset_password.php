@@ -7,17 +7,15 @@ if (Settings::get ( "disable_password_reset" ))
 $messame = null;
 if (isset ( $_POST ["username"] ) and ! empty ( $_POST ["username"] )) {
 	$username = db_escape ( $_POST ["username"] );
-	if (resetPassword ( $username ))
+	if (resetPassword ( $username )) {
 		$message = TRANSLATION_PASSWORD_RESET_SUCCESSFULL;
-	else
+	} else {
 		$message = TRANSLATION_NO_SUCH_USER;
+	}
 }
 ?>
 <h1>
-<?php
-
-echo TRANSLATION_RESET_PASSWORD;
-?>
+<?php translate("reset_password");?>
 </h1>
 <p>
 	<a href="./">[<?php

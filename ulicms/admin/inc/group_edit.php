@@ -9,8 +9,9 @@ $groupName = real_htmlspecialchars ( $all_permissions ["name"] );
 $all_permissions_all = $acl->getDefaultACL ( false, true );
 $all_permissions = json_decode ( $all_permissions ["permissions"], true );
 foreach ( $all_permissions_all as $name => $value ) {
-	if (! isset ( $all_permissions [$name] ))
+	if (! isset ( $all_permissions [$name] )) {
 		$all_permissions [$name] = $value;
+	}
 }
 
 ksort ( $all_permissions );
@@ -23,8 +24,7 @@ if ($all_permissions) {
 	
 	csrf_token_html ();
 	?>
-	<input type="hidden" name="id"
-		value="<?php
+	<input type="hidden" name="id" value="<?php
 	
 	echo $id;
 	?>">
@@ -60,13 +60,11 @@ if ($all_permissions) {
 	
 	foreach ( $all_permissions as $key => $value ) {
 		?>
-			<input type="checkbox"
-				id="<?php
+			<input type="checkbox" id="<?php
 		
 		echo $key;
 		?>"
-				name="user_permissons[]"
-				value="<?php
+				name="user_permissons[]" value="<?php
 		
 		echo $key;
 		?>"
@@ -75,8 +73,7 @@ if ($all_permissions) {
 		if ($value) {
 			echo "checked='checked'";
 		}
-		?>> <label
-				for="<?php
+		?>> <label for="<?php
 		
 		echo $key;
 		?>"><?php
@@ -121,4 +118,4 @@ else {
 	?>
 <p style="color: red">Diese Gruppe ist nicht vorhanden.</p>
 <?php
-    }
+}

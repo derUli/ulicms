@@ -5,10 +5,7 @@ if (defined ( "_SECURITY" )) {
 	if ($acl->hasPermission ( "pages" )) {
 		?>
 <h2>
-<?php
-		
-		echo TRANSLATION_PAGES;
-		?>
+<?php translate("pages");?>
 </h2>
 <p>
 <?php
@@ -16,10 +13,7 @@ if (defined ( "_SECURITY" )) {
 		?>
 </p>
 <p>
-	<a href="index.php?action=pages_new"><?php
-		
-		echo TRANSLATION_CREATE_PAGE;
-		?>
+	<a href="index.php?action=pages_new"><?php translate("create_page");?>
 	</a>
 </p>
 
@@ -249,10 +243,7 @@ $(window).load(function(){
 			echo " selected";
 		}
 		?>>
-		<?php
-		
-		echo TRANSLATION_STANDARD;
-		?>
+		<?php translate("standard");?>
 		</option>
 	<option value="trash"
 		<?php
@@ -266,38 +257,31 @@ $(window).load(function(){
 		?>
 		</option>
 </select>
-<?php
-		
-		echo TRANSLATION_CATEGORY;
-		?>
+<?php translate("category");?>
 	<?php
 		echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
 		?>
-	<?php
-		
-		echo TRANSLATION_MENU;
-		?>
+	<?php translate("menu");?>
 <select name="filter_menu" onchange="filter_by_menu(this);">
 
 	<?php
 		foreach ( $menus as $menu ) {
-			if ($menu == "null")
+			if ($menu == "null") {
 				$name = "[" . TRANSLATION_EVERY . "]";
-			else
+			} else {
 				$name = $menu;
+			}
 			
-			if ($menu == $_SESSION ["filter_menu"])
+			if ($menu == $_SESSION ["filter_menu"]) {
 				echo '<option value="' . $menu . '" selected>' . get_translation ( $name ) . "</option>";
-			else
+			} else {
 				echo '<option value="' . $menu . '">' . get_translation ( $name ) . "</option>";
+			}
 		}
 		
 		?>
 	</select>
-<?php
-		
-		echo TRANSLATION_PARENT;
-		?>
+<?php translate("parent");?>
 <select name="filter_parent" onchange="filter_by_parent(this);">
 	<option value="null"
 		<?php
@@ -305,10 +289,7 @@ $(window).load(function(){
 		if ("null" == $_SESSION ["filter_parent"])
 			echo "selected";
 		?>>
-			[<?php
-		
-		echo TRANSLATION_EVERY;
-		?>]
+			[<?php translate ( "every" );?>]
 		</option>
 	<option value="-"
 		<?php
@@ -326,17 +307,15 @@ $(window).load(function(){
 		while ( $parent = db_fetch_object ( $parents ) ) {
 			$parent_id = $parent->id;
 			$title = htmlspecialchars ( $parent->title );
-			if ($parent_id == $_SESSION ["filter_parent"])
+			if ($parent_id == $_SESSION ["filter_parent"]) {
 				echo '<option value="' . $parent_id . '" selected>' . $title . "</option>";
-			else
+			} else {
 				echo '<option value="' . $parent_id . '">' . $title . "</option>";
+			}
 		}
 		?>
 	</select>
-<?php
-		
-		echo TRANSLATION_ENABLED;
-		?>
+<?php translate("enabled");?>
 <select name="filter_active" onchange="filter_by_active(this);">
 	<option value="null"
 		<?php
