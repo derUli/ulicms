@@ -47,13 +47,14 @@ class PackageManager {
 	public function installPatch($name, $description, $url) {
 		@set_time_limit ( 0 );
 		$test = $this->getInstalledPatchNames ();
-		if (in_array ( $name, $test ))
+		if (in_array ( $name, $test )) {
 			return false;
+		}
 		
 		$tmp_dir = ULICMS_TMP . "/" . uniqid () . "/";
-		if (! file_exists ( $tmp_dir ))
+		if (! file_exists ( $tmp_dir )) {
 			mkdir ( $tmp_dir );
-		
+		}
 		$download = file_get_contents_wrapper ( $url, true );
 		
 		$download_tmp = $tmp_dir . "patch.zip";
