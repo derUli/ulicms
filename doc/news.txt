@@ -3,6 +3,7 @@
 Neue Features für Endanwender
 + update_manager auf Version 1.0.3 aktualisiert
 + Option "Überschrift anzeigen" hinzugefügt
++ Bootstrap CSS 3.3.6 wird nun per Default im Editor integriert
 
 Neue Features für Entwickler
 + Prepared Statements
@@ -22,4 +23,3 @@ Neue Features für Entwickler
 Änderungen
 + Dashboard nun mit mehr Ajax
 + Haupt-Templates eines Designs können nun auch "top.php" und "bottom.php" heißen
-+ Bootstrap CSS 3.3.6 wird nun per Default im Editor integriert
