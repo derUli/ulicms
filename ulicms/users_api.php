@@ -12,7 +12,6 @@ function getUsers() {
 	return $users;
 }
 
-
 // this class contains functions for managing user accounts
 function getAllUsers() {
 	$query = Database::query ( "SELECT * FROM " . tbname ( "users" ) . " ORDER by username" );
