@@ -22,3 +22,4 @@ Neue Features für Entwickler
 Änderungen
 + Dashboard nun mit mehr Ajax
 + Haupt-Templates eines Designs können nun auch "top.php" und "bottom.php" heißen
++ Bootstrap CSS 3.3.6 wird nun per Default im Editor integriert
