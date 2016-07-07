@@ -10,7 +10,6 @@ class Encryption {
 			Settings::set ( "password_salt", $newSalt );
 			$salt = $newSalt;
 		}
-		
 		return hash ( "sha512", $salt . $password );
 	}
 }
