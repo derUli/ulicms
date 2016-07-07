@@ -141,9 +141,12 @@ class Database {
 		if (count ( $columns ) == 0) {
 			$columns [] = "*";
 		}
+		
 		$columns_sql = implode ( ", ", $columns );
 		
-		$sql = "select $columns_sql from $table where $where";
+		$sql = "select $columns_sql from $table";
+			$sql .= " where $where";
+		}
 		return self::pQuery ( $sql, $args );
 	}
 	
