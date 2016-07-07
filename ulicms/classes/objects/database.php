@@ -145,6 +145,7 @@ class Database {
 		$columns_sql = implode ( ", ", $columns );
 		
 		$sql = "select $columns_sql from $table";
+		if (isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
 		}
 		return self::pQuery ( $sql, $args );
