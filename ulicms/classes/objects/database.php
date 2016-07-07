@@ -133,6 +133,19 @@ class Database {
 		$table = self::escapeName ( $table );
 		return self::query ( "ALTER TABLE $table DROP COLUMN $table" );
 	}
+	public static function selectAll($table, $columns = array(), $where = "", $args = array(), $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		$table = self::escapeName ( $prefix );
+		if (count ( $columns ) == 0) {
+			$columns [] = "*";
+		}
+		$columns_sql = implode ( ", ", $columns );
+		
+		$sql = "select $columns_sql from $table where $where";
+		return self::pQuery ( $sql, $args );
+	}
 	
 	// Using SQL Prepared statements
 	public static function preparedQuery($sql, $typeDef = FALSE, $params = FALSE) {

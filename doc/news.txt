@@ -13,6 +13,7 @@ Neue Features für Entwickler
 + Funktion Database::selectMin() hinzugefügt
 + Funktion Database::selectMax() hinzugefügt
 + Funktion Database::deleteFrom() hinzugefügt
++ Funktion Database::selectAll()  hinzugefügt
 + Funktionen Template::headline() und Template::getHeadline() hinzugefügt
 + Funktion str_replace_first() hinzugefügt
 + Funktion str_replace_nth() hinzugefügt
