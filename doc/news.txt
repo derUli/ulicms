@@ -25,5 +25,5 @@ Neue Features für Entwickler
 + Dashboard nun mit mehr Ajax
 + Haupt-Templates eines Designs können nun auch "top.php" und "bottom.php" heißen
 
-Entfernte Features:
+Entfernte Features
 - Funktion Database::preparedQuery() entfernt, stattdessen Database::pQuery() verwenden
