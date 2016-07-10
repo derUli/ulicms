@@ -22,8 +22,8 @@ Neue Features für Entwickler
 + Attribute "embed" (Boolean) und "custom_acl" (Array of Boolean) werden nun aus der metadata.json ausgelesen und ausgewertet
 
 Änderungen
-+ Dashboard nun mit mehr Ajax
-+ Haupt-Templates eines Designs können nun auch "top.php" und "bottom.php" heißen
+# Dashboard nun mit mehr Ajax
+# Haupt-Templates eines Designs können nun auch "top.php" und "bottom.php" heißen
 
 Entfernte Features
 - Funktion Database::preparedQuery() entfernt, stattdessen Database::pQuery() verwenden
