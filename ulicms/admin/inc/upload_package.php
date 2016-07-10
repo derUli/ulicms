@@ -30,7 +30,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	csrf_token_html ();
 	?>
 	<input type="file" name="file"><br /> <br /> <input type="submit"
-		value="<?php translate("install_packages");?>">
+		value="<?php translate("install_package");?>">
 </form>
 
 
