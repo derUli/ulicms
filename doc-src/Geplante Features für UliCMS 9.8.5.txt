@@ -8,9 +8,9 @@
    [X] Database::truncateTable($table) 
    [X] Database::deleteFrom($table, $where, $prefix = true)
    [X] Database::selectAll($table, $columns = array(), $where = "", $prefix)
-[ ] Pagination für Inhaltstyp "Liste"
-    [ ] Datenbankbankfeld "items_per_page" zu lists Tabelle hinzufügen.
-    [ ] GUI dafür machen
+[X] Pagination für Inhaltstyp "Liste"
+    [X] Datenbankbankfeld "items_per_page" zu lists Tabelle hinzufügen.
+    [X] GUI dafür machen
 [ ] Inhaltstyp "News" implementieren
     [ ] Kommentarfunktion für Inhaltstyp "News" implementieren
 [ ] Erste Unit Tests mit PHPUnit

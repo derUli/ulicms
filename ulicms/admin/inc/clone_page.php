@@ -433,8 +433,8 @@ function openMenuImageSelectWindow(field) {
 		</strong><br /> <input type="text" name="og_type"
 						value="<?php
 			echo htmlspecialchars ( $row->og_type );
-			?>"> <br /> <br /> <strong><?php translate("image");?>
-		<br /> <script type="text/javascript">
+			?>"> <br /> <br /> <strong><?php translate("image");?></strong> <br />
+					<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -447,7 +447,8 @@ function openMenuImageSelectWindow(field) {
         'resizable=1, scrollbars=0, width=800, height=600'
     );
 }
-</script> <input type="text" id="og_image" name="og_image"
+</script>
+					<input type="text" id="og_image" name="og_image"
 						readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 						value="<?php
 			echo htmlspecialchars ( $row->og_image );
@@ -463,12 +464,12 @@ function openMenuImageSelectWindow(field) {
 				$og_url = get_protocol_and_domain () . $row->og_image;
 				?>
 <div style="margin-top: 15px;">
-							<img class="small-preview-image"
-								src="<?php
+						<img class="small-preview-image"
+							src="<?php
 				
 				echo htmlspecialchars ( $og_url );
 				?>" />
-						</div>
+					</div>
 <?php }?>
 
 
@@ -562,7 +563,9 @@ function openMenuImageSelectWindow(field) {
 		<?php
 			foreach ( getAllMenus () as $menu ) {
 				?>
-		<option value="<?php echo $menu?>">
+				<option value="<?php echo $menu?>"
+						<?php if($menu == $list_data->menu) echo "selected"?>>
+
 		<?php
 				
 				translate ( $menu );
@@ -635,8 +638,13 @@ function openMenuImageSelectWindow(field) {
 						<?php if($list_data->order_direction=== "desc") echo ' selected';?>><?php translate("desc");?></option>
 				</select> <br /> <br /> <strong><?php translate("limit");?></strong>
 				<input type="number" name="limit" min="0" step="1"
-					value="<?php echo intval($list_data->limit);?>">
-
+					value="<?php echo intval($list_data->limit);?>"> <br /> <br /> <strong><?php translate ( "use_pagination" );?></strong><br />
+				<select name="list_use_pagination">
+					<option value="1"
+						<?php if($list_data->use_pagination) echo "selected";?>><?php translate("yes")?></option>
+					<option value="0"
+						<?php if(!$list_data->use_pagination) echo "selected";?>><?php translate("no")?></option>
+				</select>
 			</div>
 		</div>
 
