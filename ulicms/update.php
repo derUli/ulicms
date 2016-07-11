@@ -114,7 +114,6 @@ Database::query ( "update " . tbname ( "content" ) . " set `type` = 'link' where
 
 // Database Changes of 9.8.5
 Database::query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN show_headline tinyint(1) NOT NULL DEFAULT '1'" );
-Database::query ( "ALTER TABLE " . tbname ( "lists" ) . " `items_per_page` int(11) default 0" );
 
 Settings::set ( "db_schema_version", "9.8.5" );
 
