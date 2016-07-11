@@ -11,7 +11,7 @@
 [X] Pagination für Inhaltstyp "Liste"
     [X] Datenbankbankfeld "items_per_page" zu lists Tabelle hinzufügen.
     [X] GUI dafür machen
-[ ] Listen sollen auch nach Typ filtern können
+[X] Listen sollen auch nach Typ filtern können
 [ ] Inhaltstyp "News" implementieren
     [ ] Kommentarfunktion für Inhaltstyp "News" implementieren
 [ ] Erste Unit Tests mit PHPUnit
