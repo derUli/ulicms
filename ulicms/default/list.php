@@ -6,6 +6,7 @@ if ($id !== null) {
 		$entries = $list->filter ();
 		if (count ( $entries ) > 0) {
 			// Pagination
+			$entries_count_total = count ( $entries );
 			$use_pagination = $list->use_pagination;
 			$start = 0;
 			$limit = intval ( $list->limit );
@@ -15,6 +16,16 @@ if ($id !== null) {
 				}
 				$entries = array_slice ( $entries, $start, $limit );
 				$entries_count = count ( $entries );
+			}
+			
+			$previous_start = $start - $limit;
+			if($previous_start < 0){
+				$previous_start = 0;
+			}
+
+			$next_start = $start + $limit;
+			if($next_start > $entries_total_count){
+				$previous_start = $entries_total_count - $limit;
 			}
 			?>
 <ol class="ulicms-content-list">
