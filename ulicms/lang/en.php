@@ -656,4 +656,7 @@ define ( "TRANSLATION_OWNER", "Owner" );
 // Überschrift anzeigen
 define ( "TRANSLATION_SHOW_HEADLINE", "Show Headline" );
 
+// Pagination
+define("TRANSLATION_USE_PAGINATION", "Use Pagination");
+
 add_hook ( "lang_en" );

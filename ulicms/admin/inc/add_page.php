@@ -471,8 +471,14 @@ function openMenuImageSelectWindow(field) {
 					<option value="asc"><?php translate("asc");?></option>
 					<option value="desc"><?php translate("desc");?></option>
 				</select> <br /> <br /> <strong><?php translate("limit");?></strong>
-				<input type="number" min="0" name="limit" step="1" value="0">
-
+				<input type="number" min="0" name="limit" step="1" value="0"> <br />
+				<br /> <strong><?php translate ( "use_pagination" );?></strong><br/>
+				<select name="list_use_pagination">
+				<option value="1"><?php translate("yes")?></option>
+				<option value="0" selected><?php translate("no")?></option>
+				</select>
+			
+			
 			</div>
 		</div>
 

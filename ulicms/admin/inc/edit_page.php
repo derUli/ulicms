@@ -563,6 +563,12 @@ function openMenuImageSelectWindow(field) {
 				
 				
 				
+				
+				
+				
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -683,8 +689,13 @@ function openMenuImageSelectWindow(field) {
 						<?php if($list_data->order_direction=== "desc") echo ' selected';?>><?php translate("desc");?></option>
 				</select> <br /> <br /> <strong><?php translate("limit");?></strong>
 				<input type="number" name="limit" min="0" step="1"
-					value="<?php echo intval($list_data->limit);?>">
-
+					value="<?php echo intval($list_data->limit);?>"> <br /> <br /> <strong><?php translate ( "use_pagination" );?></strong><br />
+				<select name="list_use_pagination">
+					<option value="1"
+						<?php if($list_data->use_pagination) echo "selected";?>><?php translate("yes")?></option>
+					<option value="0"
+						<?php if(!$list_data->use_pagination) echo "selected";?>><?php translate("no")?></option>
+				</select>
 			</div>
 		</div>
 
