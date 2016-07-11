@@ -569,6 +569,8 @@ function openMenuImageSelectWindow(field) {
 				
 				
 				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -616,7 +618,8 @@ function openMenuImageSelectWindow(field) {
 		<?php
 				foreach ( getAllMenus () as $menu ) {
 					?>
-		<option value="<?php echo $menu?>" <?php if($menu == $list_data->menu) echo "selected"?>>
+		<option value="<?php echo $menu?>"
+						<?php if($menu == $list_data->menu) echo "selected"?>>
 		<?php
 					
 					translate ( $menu );
