@@ -483,8 +483,8 @@ function openMenuImageSelectWindow(field) {
 		</strong><br /> <input type="text" name="og_type"
 						value="<?php
 				echo htmlspecialchars ( $row->og_type );
-				?>"> <br /> <br /> <strong><?php translate("image");?>
-		<br /> <script type="text/javascript">
+				?>"> <br /> <br /> <strong><?php translate("image");?></strong> <br />
+					<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -497,7 +497,8 @@ function openMenuImageSelectWindow(field) {
         'resizable=1, scrollbars=0, width=800, height=600'
     );
 }
-</script> <input type="text" id="og_image" name="og_image"
+</script>
+					<input type="text" id="og_image" name="og_image"
 						readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 						value="<?php
 				echo htmlspecialchars ( $row->og_image );
@@ -513,12 +514,12 @@ function openMenuImageSelectWindow(field) {
 					$og_url = get_protocol_and_domain () . $row->og_image;
 					?>
 <div style="margin-top: 15px;">
-							<img class="small-preview-image"
-								src="<?php
+						<img class="small-preview-image"
+							src="<?php
 					
 					echo htmlspecialchars ( $og_url );
 					?>" />
-						</div>
+					</div>
 <?php }?>
 
 
