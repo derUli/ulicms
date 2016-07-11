@@ -73,6 +73,7 @@
 					for="type_video"><?php translate("video");?></label> <br /> <input
 					type="radio" name="type" value="audio" id="type_audio"> <label
 					for="type_audio"><?php translate("audio");?></label>
+
 			</p>
 		</div>
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
@@ -387,7 +388,20 @@ function openMenuImageSelectWindow(field) {
 			<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
 			<div class="accordion-content">
-				<strong><?php
+				<strong><?php translate("type")?></strong> <br />
+			
+						<?php $types = get_available_post_types();?>
+<select name="list_type">
+					<option value="null" selected>[<?php
+			translate ( "every" )?>]
+		</option>
+		<?php
+			
+			foreach ( $types as $type ) {
+				echo '<option value="' . $type . '">' . get_translation ( $type ) . "</option>";
+			}
+			?>
+	</select> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_LANGUAGE;
 			?>
@@ -472,13 +486,13 @@ function openMenuImageSelectWindow(field) {
 					<option value="desc"><?php translate("desc");?></option>
 				</select> <br /> <br /> <strong><?php translate("limit");?></strong>
 				<input type="number" min="0" name="limit" step="1" value="0"> <br />
-				<br /> <strong><?php translate ( "use_pagination" );?></strong><br/>
+				<br /> <strong><?php translate ( "use_pagination" );?></strong><br />
 				<select name="list_use_pagination">
-				<option value="1"><?php translate("yes")?></option>
-				<option value="0" selected><?php translate("no")?></option>
+					<option value="1"><?php translate("yes")?></option>
+					<option value="0" selected><?php translate("no")?></option>
 				</select>
-			
-			
+
+
 			</div>
 		</div>
 

@@ -9,6 +9,7 @@ class List_Data extends Content {
 	public $order_direction = "asc";
 	public $limit = null;
 	public $use_pagination = false;
+	public $type = null;
 	public function __construct($id = null) {
 		if ($id !== null) {
 			$this->loadByID ( $id );
@@ -16,9 +17,9 @@ class List_Data extends Content {
 	}
 	public function filter() {
 		if ($this->use_pagination) {
-			return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction );
+			return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction, $this->type );
 		} else {
-			return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction, $this->limit );
+			return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction, $this->type, $this->limit );
 		}
 	}
 	public function loadByID($id) {
@@ -43,6 +44,7 @@ class List_Data extends Content {
 		$this->order_direction = $data->order_direction;
 		$this->limit = $data->limit;
 		$this->use_pagination = boolval ( $data->use_pagination );
+		$this->type = $data->type;
 	}
 	public function save() {
 		if ($this->content_id === null) {
@@ -106,12 +108,18 @@ class List_Data extends Content {
 		
 		$use_pagination = intval ( $this->use_pagination );
 		
+		if ($this->type === null) {
+			$type = "null";
+		} else {
+			$type = "'" . Database::escapeValue ( $this->type ) . "'";
+		}
+		
 		$limit = "null";
 		if (intval ( $this->limit ) > 0) {
 			$limit = intval ( $this->limit );
 		}
-		$sql = "INSERT INTO " . tbname ( "lists" ) . " (content_id, language, category_id, menu, parent_id, `order_by`, `order_direction`, `limit`, `use_pagination`) values ($content_id, $language, 
-		$category_id, $menu, $parent_id, '$order_by', '$order_direction', $limit, $use_pagination)";
+		$sql = "INSERT INTO " . tbname ( "lists" ) . " (content_id, language, category_id, menu, parent_id, `order_by`, `order_direction`, `limit`, `use_pagination`, `type`) values ($content_id, $language, 
+		$category_id, $menu, $parent_id, '$order_by', '$order_direction', $limit, $use_pagination, $type)";
 		Database::query ( $sql ) or die ( Database::error () );
 	}
 	public function update() {
@@ -168,10 +176,16 @@ class List_Data extends Content {
 			$limit = intval ( $this->limit );
 		}
 		
+		if ($this->type === null) {
+			$type = "null";
+		} else {
+			$type = "'" . Database::escapeValue ( $this->type ) . "'";
+		}
+		
 		$use_pagination = intval ( $this->use_pagination );
 		
 		$sql = "UPDATE " . tbname ( "lists" ) . " set language = $language, 
-		category_id = $category_id, menu = $menu, parent_id = $parent_id, `order_by` = '$order_by', `order_direction` = '$order_direction', `limit` = $limit, `use_pagination` = $use_pagination where content_id = $content_id ";
+		category_id = $category_id, menu = $menu, parent_id = $parent_id, `order_by` = '$order_by', `order_direction` = '$order_direction', `limit` = $limit, `use_pagination` = $use_pagination, `type` = $type where content_id = $content_id ";
 		Database::query ( $sql ) or die ( Database::error () );
 	}
 }

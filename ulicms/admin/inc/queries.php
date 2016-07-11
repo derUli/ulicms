@@ -274,6 +274,11 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			
 			$limit = intval ( $_POST ["limit"] );
 			
+			$list_type = $_POST ["list_type"];
+			if (empty ( $list_type )) {
+				$list_type = null;
+			}
+			
 			$list = new List_Data ( $content_id );
 			$list->language = $list_language;
 			$list->category_id = $list_category;
@@ -283,6 +288,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			$list->order_direction = $list_order_direction;
 			$list->limit = $limit;
 			$list->use_pagination = $list_use_pagination;
+			$list->type = $list_type;
 			$list->save ();
 		}
 		$content = $unescaped_content;
@@ -451,6 +457,11 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		
 		$list_use_pagination = intval ( $_POST ["list_use_pagination"] );
 		
+		$list_type = $_POST ["list_type"];
+		if (empty ( $list_type )) {
+			$list_type = null;
+		}
+		
 		$list = new List_Data ( $content_id );
 		$list->language = $list_language;
 		$list->category_id = $list_category;
@@ -460,6 +471,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		$list->order_direction = $list_order_direction;
 		$list->limit = $limit;
 		$list->use_pagination = $list_use_pagination;
+		$list->type = $list_type;
 		$list->save ();
 	}
 	

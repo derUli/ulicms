@@ -571,6 +571,22 @@ function openMenuImageSelectWindow(field) {
 				
 				
 				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				</div>
 			</div>
 		</div>
@@ -578,7 +594,29 @@ function openMenuImageSelectWindow(field) {
 			<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
 			<div class="accordion-content">
-				<strong><?php
+				<strong><?php translate("type")?></strong> <br />
+			<?php $types = get_available_post_types();?>
+				<select name="list_type">
+					<option value="null"
+						<?php
+				
+				if ("null" == $list_data->type)
+					echo "selected";
+				?>>
+			[<?php
+				translate ( "every" )?>]
+		</option>
+		<?php
+				
+				foreach ( $types as $type ) {
+					if ($type == $list_data->type) {
+						echo '<option value="' . $type . '" selected>' . get_translation ( $type ) . "</option>";
+					} else {
+						echo '<option value="' . $type . '">' . get_translation ( $type ) . "</option>";
+					}
+				}
+				?>
+	</select> <br /> <br /> <strong><?php
 				
 				echo TRANSLATION_LANGUAGE;
 				?>
