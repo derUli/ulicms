@@ -8,13 +8,18 @@ class List_Data extends Content {
 	public $order_by = "title";
 	public $order_direction = "asc";
 	public $limit = null;
+	public $use_pagination = false;
 	public function __construct($id = null) {
 		if ($id !== null) {
 			$this->loadByID ( $id );
 		}
 	}
 	public function filter() {
-		return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction, $this->limit );
+		if ($this->use_pagination) {
+			return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction );
+		} else {
+			return ContentFactory::getForFilter ( $this->language, $this->category_id, $this->menu, $this->parent_id, $this->order_by, $this->order_direction, $this->limit );
+		}
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
@@ -37,6 +42,7 @@ class List_Data extends Content {
 		$this->order_by = $data->order_by;
 		$this->order_direction = $data->order_direction;
 		$this->limit = $data->limit;
+		$this->use_pagination = boolval ( $data->use_pagination );
 	}
 	public function save() {
 		if ($this->content_id === null) {
@@ -98,12 +104,14 @@ class List_Data extends Content {
 			$parent_id = "null";
 		}
 		
+		$use_pagination = intval ( $this->use_pagination );
+		
 		$limit = "null";
 		if (intval ( $this->limit ) > 0) {
 			$limit = intval ( $this->limit );
 		}
-		$sql = "INSERT INTO " . tbname ( "lists" ) . " (content_id, language, category_id, menu, parent_id, `order_by`, `order_direction`, `limit`) values ($content_id, $language, 
-		$category_id, $menu, $parent_id, '$order_by', '$order_direction', $limit)";
+		$sql = "INSERT INTO " . tbname ( "lists" ) . " (content_id, language, category_id, menu, parent_id, `order_by`, `order_direction`, `limit`, `use_pagination`) values ($content_id, $language, 
+		$category_id, $menu, $parent_id, '$order_by', '$order_direction', $limit, $use_pagination)";
 		Database::query ( $sql ) or die ( Database::error () );
 	}
 	public function update() {
@@ -160,8 +168,10 @@ class List_Data extends Content {
 			$limit = intval ( $this->limit );
 		}
 		
+		$use_pagination = intval ( $this->use_pagination );
+		
 		$sql = "UPDATE " . tbname ( "lists" ) . " set language = $language, 
-		category_id = $category_id, menu = $menu, parent_id = $parent_id, `order_by` = '$order_by', `order_direction` = '$order_direction', `limit` = $limit where content_id = $content_id ";
+		category_id = $category_id, menu = $menu, parent_id = $parent_id, `order_by` = '$order_by', `order_direction` = '$order_direction', `limit` = $limit, `use_pagination` = $use_pagination where content_id = $content_id ";
 		Database::query ( $sql ) or die ( Database::error () );
 	}
 }

@@ -839,6 +839,7 @@ Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_b
   `order_by` varchar(30) DEFAULT 'title',
   `order_direction` varchar(30) DEFAULT 'asc',
   `limit` int(11) default null,
+  `use_pagination` tinyint(1) NOT NULL DEFAULT '0',				
   UNIQUE KEY `content_id` (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
 			
