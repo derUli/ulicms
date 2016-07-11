@@ -77,7 +77,7 @@ class ContentFactory {
 		}
 		return $result;
 	}
-	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc", $limit = null) {
+	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc", $type = null, $limit = null) {
 		$result = array ();
 		$sql = "select id, `type` from " . tbname ( "content" ) . " where 1=1 and ";
 		if ($language !== null and $language !== "") {
@@ -96,6 +96,11 @@ class ContentFactory {
 		if ($parent_id !== null and $parent_id !== 0) {
 			$parent_id = intval ( $parent_id );
 			$sql .= "parent = $parent_id and ";
+		}
+		
+		if ($type !== null and $type !== "") {
+			$type = Database::escapeValue ( $type );
+			$sql .= "type = '$type' and ";
 		}
 		
 		$order_by = Database::escapeName ( $order_by );

@@ -1,10 +1,11 @@
-﻿===== Neues in UliCMS 9.8.5 =====
+===== Neues in UliCMS 9.8.5 =====
 
 Neue Features für Endanwender
 + update_manager auf Version 1.0.3 aktualisiert
 + Option "Überschrift anzeigen" hinzugefügt
 + Bootstrap CSS 3.3.6 wird nun per Default im Editor integriert
 + Listen unterstützen nun "Pagination"
++ Listen können nun auch nach Typ filtern
 
 Neue Features für Entwickler
 + Prepared Statements
