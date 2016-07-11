@@ -71,5 +71,4 @@ if (getconfig ( "logo_disabled" ) == "no") {
 		<main>
 
 <?php
-
-Template::headline ();	
+Template::headline (); ?>
