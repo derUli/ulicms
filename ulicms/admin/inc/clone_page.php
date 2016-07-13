@@ -21,10 +21,7 @@ if (defined ( "_SECURITY" )) {
 		while ( $row = db_fetch_object ( $query ) ) {
 			$list_data = new List_Data ( $row->id );
 			$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
-			
 			?>
-
-
 <form name="editpageform" id="editpageform"
 	action="index.php?action=pages" method="post"><?php
 			

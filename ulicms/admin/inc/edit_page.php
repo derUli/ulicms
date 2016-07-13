@@ -54,8 +54,6 @@ if (defined ( "_SECURITY" )) {
 				noperms ();
 			} else {
 				?>
-
-
 <form id="pageform" action="index.php?action=pages" method="post">
 <?php
 				

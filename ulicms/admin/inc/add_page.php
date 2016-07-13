@@ -18,7 +18,7 @@
 			?>
 <form id="pageform" name="newpageform" action="index.php?action=pages"
 	method="post">
-	
+
 	<input type="hidden" name="add" value="add">
 	<?php
 			
