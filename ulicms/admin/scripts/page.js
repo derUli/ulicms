@@ -65,7 +65,6 @@ function showAndHideFieldsByType() {
 		$("#tab-audio").slideUp();
 		$("#tab-image").slideDown();
 		$("#tab-text-position").slideDown();
-
 	} else {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
