@@ -13,9 +13,12 @@
 			$audios = Database::query ( $sql );
 			
 			$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
+			
+			$types = get_available_post_types ();
 			?>
 <form id="pageform" name="newpageform" action="index.php?action=pages"
 	method="post">
+	
 	<input type="hidden" name="add" value="add">
 	<?php
 			
@@ -57,24 +60,14 @@
 		<h2 class="accordion-header"><?php translate("type");?></h2>
 
 		<div class="accordion-content">
-			<p>
+		
+<?php foreach($types as $type){?>
+			<input type="radio" name="type" id="type_<?php echo $type;?>"
+				value="<?php echo $type;?>"
+				<?php if($type == "page") echo "checked";?>> <label
+				for="type_<?php echo $type;?>"><?php translate($type);?></label> <br />
+			<?php }?>
 
-				<input type="radio" name="type" id="type_page" value="page" checked>
-				<label for="type_page"><?php translate("page");?></label> <br /> <input
-					type="radio" name="type" value="list" id="type_list"> <label
-					for="type_list"><?php translate("list");?></label> <br /> <input
-					type="radio" name="type" value="link" id="type_link"> <label
-					for="type_link"><?php translate("link");?></label> <br /> <input
-					type="radio" name="type" value="image" id="type_image"> <label
-					for="type_image"><?php translate("image");?></label><br /> <input
-					type="radio" name="type" value="module" id="type_module"> <label
-					for="type_module"><?php translate("module");?></label> <br /> <input
-					type="radio" name="type" value="video" id="type_video"> <label
-					for="type_video"><?php translate("video");?></label> <br /> <input
-					type="radio" name="type" value="audio" id="type_audio"> <label
-					for="type_audio"><?php translate("audio");?></label>
-
-			</p>
 		</div>
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
 

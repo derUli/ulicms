@@ -21,6 +21,8 @@ if (defined ( "_SECURITY" )) {
 		
 		$pages_change_owner = $acl->hasPermission ( "pages_change_owner" );
 		
+		$types = get_available_post_types ();
+		
 		while ( $row = db_fetch_object ( $query ) ) {
 			$list_data = new List_Data ( $row->id );
 			
@@ -103,31 +105,12 @@ if (defined ( "_SECURITY" )) {
 		<h2 class="accordion-header"><?php translate("type");?></h2>
 
 		<div class="accordion-content">
-
-			<p>
-				<input type="radio" name="type" id="type_page" value="page"
-					<?php if($row->type == "page"){ echo "checked";}?>> <label
-					for="type_page"><?php translate("page");?></label> <br /> <input
-					type="radio" name="type" value="list" id="type_list"
-					<?php if($row->type == "list"){ echo "checked";}?>> <label
-					for="type_list"><?php translate("list");?></label> <br /> <input
-					type="radio" name="type" value="link" id="type_link"
-					<?php if($row->type == "link"){ echo "checked";}?>> <label
-					for="type_link"><?php translate("link");?></label> <br /> <input
-					type="radio" name="type" value="image" id="type_image"
-					<?php if($row->type == "image") echo "checked"?>> <label
-					for="type_image"><?php translate("image");?></label> <br /> <input
-					type="radio" name="type" value="module" id="type_module"
-					<?php if($row->type == "module"){ echo "checked";}?>> <label
-					for="type_module"><?php translate("module");?></label> <br /> <input
-					type="radio" name="type" value="video" id="type_video"
-					<?php if($row->type == "video"){ echo "checked";}?>> <label
-					for="type_video"><?php translate("video");?></label> <br /> <input
-					type="radio" name="type" value="audio" id="type_audio"
-					<?php if($row->type == "audio"){ echo "checked";}?>> <label
-					for="type_audio"><?php translate("audio");?></label>
-
-			</p>
+<?php foreach($types as $type){?>
+				<input type="radio" name="type" id="type_<?php echo $type;?>"
+				value="<?php echo $type;?>"
+				<?php if($type == $row->type) echo "checked";?>> <label
+				for="type_<?php echo $type;?>"><?php translate($type);?></label> <br />
+					<?php }?>
 
 		</div>
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
