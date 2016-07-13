@@ -12,8 +12,8 @@
     [X] Datenbankbankfeld "items_per_page" zu lists Tabelle hinzufügen.
     [X] GUI dafür machen
 [X] Listen sollen auch nach Typ filtern können
-[ ] Inhaltstyp "News" implementieren
-    [ ] Kommentarfunktion für Inhaltstyp "News" implementieren
+[X] Inhaltstyp "Artikel" implementieren
+    [ ] Kommentarfunktion für Inhaltstyp "Artikel" implementieren
 [ ] Erste Unit Tests mit PHPUnit
 [X] Option "Überschrift anzeigen ja/nein"
 [ ] Neuer Installer mit OOP, AJAX, Progressbar usw.
