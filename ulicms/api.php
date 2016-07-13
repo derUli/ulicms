@@ -369,6 +369,7 @@ function get_available_post_types() {
 	global $post_types;
 	$post_types = array (
 			"page",
+			"article",
 			"list",
 			"link",
 			"image",

@@ -657,6 +657,9 @@ define ( "TRANSLATION_OWNER", "Owner" );
 define ( "TRANSLATION_SHOW_HEADLINE", "Show Headline" );
 
 // Pagination
-define("TRANSLATION_USE_PAGINATION", "Use Pagination");
+define ( "TRANSLATION_USE_PAGINATION", "Use Pagination" );
+
+// Type Article
+define ( "TRANSLATION_ARTICLE", "Article" );
 
 add_hook ( "lang_en" );

@@ -650,6 +650,9 @@ define ( "TRANSLATION_OWNER", "Eigentümer" );
 define ( "TRANSLATION_SHOW_HEADLINE", "Überschrift anzeigen" );
 
 // Pagination
-define("TRANSLATION_USE_PAGINATION", "Benutze Pagination");
+define ( "TRANSLATION_USE_PAGINATION", "Benutze Pagination" );
+
+// Type Article
+define ( "TRANSLATION_ARTICLE", "Artikel" );
 
 add_hook ( "lang_de" );
