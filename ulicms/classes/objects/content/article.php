@@ -27,7 +27,7 @@ class Article extends Content {
 	public $html_file = null;
 	public $theme = null;
 	public $custom_data = null;
-	protected $type = "page";
+	protected $type = "article";
 	public $og_title = "";
 	public $og_type = "";
 	public $og_image = "";
@@ -68,7 +68,7 @@ class Article extends Content {
 		}
 		$this->custom_data = json_decode ( $result->custom_data, true );
 		
-		$this->type = "page";
+		$this->type = "article";
 		$this->og_title = $result->og_title;
 		$this->og_type = $result->og_type;
 		$this->og_image = $result->og_image;
@@ -76,23 +76,23 @@ class Article extends Content {
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where id = " . $id . " and (`type` = 'page' or `type` = 'link')" );
+		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where id = " . $id . " and (`type` = 'article')" );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );
 		} else {
-			throw new Exception ( "No page with id $id" );
+			throw new Exception ( "No article with id $id" );
 		}
 	}
 	public function loadBySystemnameAndLanguage($name, $language) {
 		$name = DB::escapeValue ( $name );
 		$language = DB::escapeValue ( $language );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language' and (`type` = 'page' or `type` = 'link')" );
+		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language' and (`type` = 'article')" );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );
 		} else {
-			throw new Exception ( "No such page" );
+			throw new Exception ( "No such article" );
 		}
 	}
 	public function save() {
