@@ -108,8 +108,8 @@ class List_Data extends Content {
 		
 		$use_pagination = intval ( $this->use_pagination );
 		
-		if ($this->type === null) {
-			$type = "null";
+		if ($this->type === null || $this->type == "null") {
+		$type = "null";
 		} else {
 			$type = "'" . Database::escapeValue ( $this->type ) . "'";
 		}
@@ -176,7 +176,7 @@ class List_Data extends Content {
 			$limit = intval ( $this->limit );
 		}
 		
-		if ($this->type === null) {
+		if ($this->type === null || $this->type == "null") {
 			$type = "null";
 		} else {
 			$type = "'" . Database::escapeValue ( $this->type ) . "'";

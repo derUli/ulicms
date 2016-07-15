@@ -275,7 +275,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			$limit = intval ( $_POST ["limit"] );
 			
 			$list_type = $_POST ["list_type"];
-			if (empty ( $list_type )) {
+			if (empty ( $list_type ) or $list_type == "null") {
 				$list_type = null;
 			}
 			
@@ -432,8 +432,8 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	
 	if ($type == "list") {
 		$list_language = $_POST ["list_language"];
-		if (empty ( $list_language )) {
-			$list_language = null;
+		if (empty ( $list_type ) or $list_type == "null") {
+			$list_type = null;
 		}
 		$list_category = $_POST ["list_category"];
 		if (empty ( $list_category )) {
