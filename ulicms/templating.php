@@ -155,6 +155,7 @@ function get_type() {
 	if (empty ( $result )) {
 		$result = "page";
 	}
+	$result = apply_filter ( $result, "get_type" );
 	return $result;
 }
 function get_text_position() {
