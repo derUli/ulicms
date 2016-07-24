@@ -14,6 +14,7 @@
 [X] Listen sollen auch nach Typ filtern können
 [X] Inhaltstyp "Artikel" implementieren
     [ ] Kommentarfunktion für Inhaltstyp "Artikel" implementieren
+    [ ] Eigenes Template für Artikel
 [ ] Erste Unit Tests mit PHPUnit
 [X] Option "Überschrift anzeigen ja/nein"
 [ ] Neuer Installer mit OOP, AJAX, Progressbar usw.
