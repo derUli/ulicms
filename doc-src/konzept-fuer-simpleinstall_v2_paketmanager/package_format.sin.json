@@ -1,0 +1,14 @@
+{
+   "id" : "sample_package",
+   "title" : "SimpleInstall v2 Sample Package",
+   "description" : "Short Description Text"
+   "categories" : ["social_media", "blog", "sample"]
+   "version" : "1.0.5",
+   "license" : "License Text as base64 encoded String"
+   "dependencies" : ["random_color", "jquery_migrate"],
+   "data" : "base64 encoded tar.gz archive",
+   "checksum" : "sha1 checksum of data"
+   // Compatible UliCMS Versions
+   "compatible_from" : "9.8.5"
+   "compatible_to" : "9.8.7"
+}
