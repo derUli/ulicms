@@ -7,10 +7,11 @@ include_once ULICMS_ROOT . "/classes/vcs.php";
 if ($_REQUEST ["action"] == "install-sin-package" and isNotNullOrEmpty ( $_REQUEST ["file"] ) and $acl->hasPermission ( "install_packages" )) {
 	$file = basename ( $_POST ["file"] );
 	$path = Path::resolve ( "ULICMS_TMP/$file" );
-	$pkg = new SinPackageInstaller($path);
-	$pkg->installPackage();
+	$pkg = new SinPackageInstaller ( $path );
+	$pkg->installPackage ();
 	Request::redirect ( "index.php?action=sin-package-install-ok&file=$file" );
-} else if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] ) && $acl->hasPermission ( "settings_simple" )) {
+}
+if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] ) && $acl->hasPermission ( "settings_simple" )) {
 	add_hook ( "before_safe_simple_settings" );
 	setconfig ( "registered_user_default_level", intval ( $_POST ["registered_user_default_level"] ) );
 	setconfig ( "homepage_owner", db_escape ( $_POST ["homepage_owner"] ) );
