@@ -12,6 +12,24 @@ class SinPackageInstaller {
 		$json = json_decode ( $data, false );
 		return $json;
 	}
+	public function extractArchive() {
+		$path = Path::resolve ( "ULICMS_TMP/package-" . $this->getProperty ( "id" ) . "-" . $this->getProperty ( "version" ) . ".tar.gz" );
+		$data = $this->loadPackage ();
+		$decoded = base64_decode ( $data ["data"] );
+		file_put_contents ( $path, $decoded );
+		return $path;
+	}
+	public function installPackage() {
+		if ($this->isInstallable ()) {
+			$path = $this->extractArchive ();
+			$pkg = new PackageManager ();
+			$result = $pkg->installPackage ( $path );
+			unlink ( $path );
+			return $result;
+		} else {
+			return false;
+		}
+	}
 	public function getSize() {
 		$data = $this->loadPackage ();
 		$decoded = base64_decode ( $data ["data"] );
@@ -53,6 +71,12 @@ class SinPackageInstaller {
 				}
 				if ($version_not_supported) {
 					$this->errors [] = get_translation ( "this_ulicms_version_is_not_supported" );
+				}
+				
+				$decoded = base64_decode ( $data ["data"] );
+				$sha_hash = sha1 ( $decoded );
+				if ($sha_hash != $data ["checksum"]) {
+					$this->errors [] = get_translation ( "sha1_checksum_not_equal" );
 				}
 			}
 		}
