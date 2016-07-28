@@ -105,7 +105,18 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			?>
 <?php
 
-			if (! $installable) {
+			if ($installable) {
+				?>
+				
+<div style="text-align: right; margin-top:30px;">
+	<form action="index.php" method="post">
+		<input type="hidden" name="action" value="install-sin-package"> <input
+			type="hidden" name="file"
+			value="<?php Template::escape(basename($tempfile));?>"> <input
+			type="submit" value="<?php translate("install");?>">
+				<?php csrf_token_html();?></form>
+</div>
+<?php
 			}
 		} else {
 			translate ( "file_not_found", array (

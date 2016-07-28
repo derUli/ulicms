@@ -339,7 +339,6 @@ div#login-welcome-text {
 
 .license-agreement {
 	overflow: auto;
-	width: 100%;
 	height: 200px;
 	border: 1px solid #eee;
 	background-color: rgb(250, 250, 250);
