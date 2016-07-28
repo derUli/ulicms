@@ -662,4 +662,11 @@ define ( "TRANSLATION_USE_PAGINATION", "Use Pagination" );
 // Type Article
 define ( "TRANSLATION_ARTICLE", "Article" );
 
+// SimpleInstall v2 Packages
+define ( "TRANSLATION_VERSION", "Version" );
+define ( "TRANSLATION_COMPATIBLE_FROM", "Compatible from" );
+define ( "TRANSLATION_COMPATIBLE_TO", "Compatible to" );
+define ( "TRANSLATION_DEPENDENCIES", "Dependencies" );
+define ( "TRANSLATION_LICENSE_AGREEMENT", "License Agreeement" );
+
 add_hook ( "lang_en" );
