@@ -56,7 +56,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 				?>
 			<tr>
 		<td><strong><?php translate("compatible_from")?></strong></td>
-		<td><?php Template::escape($compatible_from);?></td>
+		<td>UliCMS <?php Template::escape($compatible_from);?></td>
 
 	</tr>		
 			<?php }?>
@@ -67,7 +67,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 				?>
 			<tr>
 		<td><strong><?php translate("compatible_to")?></strong></td>
-		<td><?php Template::escape($compatible_to);?></td>
+		<td>UliCMS <?php Template::escape($compatible_to);?></td>
 
 	</tr>		
 			<?php }?>
