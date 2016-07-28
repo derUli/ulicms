@@ -1,0 +1,2 @@
+fix-content-factory|Fix function ContentFactory::getByID()|http://patches.ulicms.de/downloads/9.8.4/fix-content-factory.zip
+ckeditor-4.5.9|CKEditor 4.5.9 Update|http://patches.ulicms.de/downloads/9.x.x/ckeditor_4.5.9.zip
