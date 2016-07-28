@@ -27,7 +27,7 @@ function str_replace_first($search, $replace, $subject) {
 	return $subject;
 }
 function isNotNullOrEmpty($variable) {
-	return (! is_null ( $variable ) and ! is_empty ( $variable ));
+	return (! is_null ( $variable ) and ! empty ( $variable ));
 }
 function get_action() {
 	$retval = "home";

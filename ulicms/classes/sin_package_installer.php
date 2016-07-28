@@ -9,7 +9,7 @@ class SinPackageInstaller {
 	}
 	private function loadPackage() {
 		$data = file_get_contents ( $this->file );
-		$json = json_decode ( $data, false );
+		$json = json_decode ( $data, true );
 		return $json;
 	}
 	public function extractArchive() {
@@ -38,7 +38,11 @@ class SinPackageInstaller {
 	}
 	public function getProperty($name) {
 		$data = $this->loadPackage ();
-		return $data [$name];
+		if (isset ( $data [$name] ) and isNotNullOrEmpty ( $data [$name] )) {
+			return $data [$name];
+		} else {
+			return null;
+		}
 	}
 	public function getErrors() {
 		return $this->errors;
@@ -47,7 +51,7 @@ class SinPackageInstaller {
 		$this->errors = array ();
 		$installed_modules = getAllModules ();
 		$data = $this->loadPackage ();
-		if (isset ( $data ["dependencies"] ) and is_aray ( $data ["dependencies"] )) {
+		if (isset ( $data ["dependencies"] ) and is_array ( $data ["dependencies"] )) {
 			$dependencies = $data ["dependencies"];
 			foreach ( $dependencies as $dependency ) {
 				if (! in_array ( $dependency, $installed_modules )) {
@@ -56,7 +60,7 @@ class SinPackageInstaller {
 					) );
 				}
 				$version = new ulicms_version ();
-				$version->getInternalVersionAsString ();
+				$version = $version->getInternalVersionAsString ();
 				$version_not_supported = false;
 				if (isNotNullOrEmpty ( $data ["compatible_from"] ) and is_string ( $data ["compatible_from"] )) {
 					if (! version_compare ( $version, $data ["compatible_from"], ">=" )) {

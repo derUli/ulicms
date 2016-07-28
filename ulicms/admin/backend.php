@@ -254,6 +254,8 @@ if (! $eingeloggt) {
 		include_once $actions [$_GET ["action"]];
 	} else if ($_GET ["action"] == "do-post-install") {
 		include_once "inc/do-post-install.php";
+	} else if ($_GET ["action"] == "pkginfo") {
+		include_once "inc/pkginfo.php";
 	} else {
 		echo TRANSLATION_ACTION_NOT_FOUND;
 	}
