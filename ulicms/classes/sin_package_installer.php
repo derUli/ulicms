@@ -55,10 +55,11 @@ class SinPackageInstaller {
 			$dependencies = $data ["dependencies"];
 			foreach ( $dependencies as $dependency ) {
 				if (! in_array ( $dependency, $installed_modules )) {
-					$this->errors [] = get_translation ( "dependecy_x_is_not_installed", array (
-							$dependency 
+					$this->errors [] = get_translation ( "dependency_x_is_not_installed", array (
+							"%x%" => $dependency 
 					) );
 				}
+			}
 				$version = new ulicms_version ();
 				$version = $version->getInternalVersionAsString ();
 				$version_not_supported = false;
@@ -82,7 +83,7 @@ class SinPackageInstaller {
 				if ($sha_hash != $data ["checksum"]) {
 					$this->errors [] = get_translation ( "sha1_checksum_not_equal" );
 				}
-			}
+			
 		}
 		return (count ( $this->errors ) <= 0);
 	}

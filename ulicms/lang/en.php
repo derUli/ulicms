@@ -668,5 +668,9 @@ define ( "TRANSLATION_COMPATIBLE_FROM", "Compatible from" );
 define ( "TRANSLATION_COMPATIBLE_TO", "Compatible to" );
 define ( "TRANSLATION_DEPENDENCIES", "Dependencies" );
 define ( "TRANSLATION_LICENSE_AGREEMENT", "License Agreeement" );
+define ( "TRANSLATION_DEPENDENCY_X_IS_NOT_INSTALLED", "Depedency %x% is not installed." );
+define ( "TRANSLATION_THIS_ULICMS_VERSION_IS_NOT_SUPPORTED", "The package is not with your UliCMS Version compatible." );
+define ( "TRANSLATION_SHA1_CHECKSUM_NOT_EQUAL", "SHA1 checksums are not equal." );
+define ( "TRANSLATION_ERRORS", "Errors" );
 
 add_hook ( "lang_en" );

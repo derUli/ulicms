@@ -18,7 +18,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			$compatible_to = $pkg->getProperty ( "compatible_to" );
 			$dependencies = $pkg->getProperty ( "dependencies" );
 			$license = $pkg->getProperty ( "license" );
-				
+			
 			?>
 <h1><?php
 			
@@ -79,7 +79,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		<td><strong><?php translate("dependencies")?></strong></td>
 		<td><?php
 				
-foreach ( $dependencies as $dep ) {
+				foreach ( $dependencies as $dep ) {
 					?>
 		<?php Template::escape($dep);?><br />
 		<?php }?></td>
@@ -90,10 +90,21 @@ foreach ( $dependencies as $dep ) {
 
 <?php if($license){?>
 <h2><?php translate("license_agreement");?></h2>
-<div class="license-agreement"><?php echo nl2br(Template::getEscape
-		($license))?></div>
+<div class="license-agreement"><?php
+				
+				echo nl2br ( Template::getEscape ( $license ) )?></div>
 <?php }?>
 <?php
+
+			if (! $installable) {
+				?>
+<h2><?php translate("errors");?></h2>
+<?php
+				echo implode ( "<br/>", $errors );
+			}
+			?>
+<?php
+
 			if (! $installable) {
 			}
 		} else {
