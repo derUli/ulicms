@@ -7,6 +7,7 @@ Neue Features für Endanwender
 + Listen unterstützen nun "Pagination"
 + Listen können nun auch nach Typ filtern
 + Inhaltstyp "Artikel" hinzugefügt
++ Neues Paketformat: SimpleInstall v2
 
 Neue Features für Entwickler
 + Prepared Statements

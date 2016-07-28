@@ -9,6 +9,7 @@ if ($_REQUEST ["action"] == "install-sin-package" and isNotNullOrEmpty ( $_REQUE
 	$path = Path::resolve ( "ULICMS_TMP/$file" );
 	$pkg = new SinPackageInstaller ( $path );
 	$pkg->installPackage ();
+	@unlink($path);
 	Request::redirect ( "index.php?action=sin-package-install-ok&file=$file" );
 }
 if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] ) && $acl->hasPermission ( "settings_simple" )) {
