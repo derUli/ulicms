@@ -4,7 +4,7 @@ add_hook ( "query" );
 
 include_once ULICMS_ROOT . "/classes/vcs.php";
 
-if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] )) {
+if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] ) && $acl->hasPermission ( "simple_settings" )) {
 	add_hook ( "before_safe_simple_settings" );
 	setconfig ( "registered_user_default_level", intval ( $_POST ["registered_user_default_level"] ) );
 	setconfig ( "homepage_owner", db_escape ( $_POST ["homepage_owner"] ) );
