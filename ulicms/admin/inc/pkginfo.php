@@ -89,7 +89,7 @@ foreach ( $dependencies as $dep ) {
 </table>
 
 <?php if($license){?>
-<h1><?php translate("license_agreement");?></h1>
+<h2><?php translate("license_agreement");?></h2>
 <div class="license-agreement"><?php echo nl2br(Template::getEscape
 		($license))?></div>
 <?php }?>
