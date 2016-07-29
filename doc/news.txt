@@ -33,4 +33,4 @@
 ==== Neues in UliCMS 9.0.1 Refresh 2 =====
 + CKEditor 4.5.9
 + Mobile_Detect 2.8.22
-+ Alle bisher erschienen Sicherheits-Update und Patches für UliCMS 9.0 bereits enthalten
++ Alle bisher erschienen Sicherheits-Updates und Patches für UliCMS 9.0 sind bereits enthalten
