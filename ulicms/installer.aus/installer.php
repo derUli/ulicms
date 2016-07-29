@@ -594,7 +594,6 @@ $(document).ready(function(){
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
 			
 			mysqli_query ( $connection, "CREATE TABLE IF NOT EXISTS `" . $prefix . "content` (
-
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `notinfeed` tinyint(1) NOT NULL,
   `systemname` varchar(255) NOT NULL,
@@ -636,10 +635,9 @@ $(document).ready(function(){
   `text_position` varchar(10) default 'before',
   `approved` tinyint(1) NOT NULL DEFAULT '1',
   `image_url` text default null,
-   show_headline tinyint(1) NOT NULL DEFAULT '1',
-					
+   show_headline tinyint(1) NOT NULL DEFAULT '1',	
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;" ) or die ( mysqli_error ( $connection ) );
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;" ) or die ( mysqli_error ( $connection ) );
 			
 			if (isset ( $_POST ["install_demo_data"] )) {
 				$sql = file_get_contents ( "sample/extended_demo.sql" );
