@@ -29,8 +29,27 @@ if (count ( $argv ) == 0) {
 	if (is_dir ( $file )) {
 		echo "$file is a directory.";
 	} else if (is_file ( $file )) {
-		$pkg = new PackageManager ();
-		$result = $pkg->installPackage ( $file );
+		$result = false;
+		if (endsWith ( $file, ".tar.gz" )) {
+			$pkg = new PackageManager ();
+			$result = $pkg->installPackage ( $file );
+		} else if (endsWith ( $file, ".sin" )) {
+			$pkg = new SinPackageInstaller ( $file );
+			$is_installable = $pkg->isInstallable();
+			if($is_installable){
+			$result = $pkg->installPackage ();
+			} else {
+				foreach($pkg->getErrors() as $error){
+					echo "$error\n";
+				}
+				exit();
+			}
+		} else {
+			translate ( "not_supported_format" );
+			echo "\n";
+			exit();
+		}
+		
 		if ($result) {
 			echo "Package $file was successfully installed.";
 		} else {

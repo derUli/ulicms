@@ -19,6 +19,8 @@ if (! $acl->hasPermission ( "install_packages" )) {
 				} else if (endsWith ( $file_in_tmp, ".sin" )) {
 					$url = "?action=pkginfo&file=" . basename ( $file_in_tmp );
 					Request::javascriptRedirect ( $url );
+				} else {
+					echo "<p style='color:red'>" . get_translation ( "not_supported_format" ) . "</p>";
 				}
 			} else {
 				echo "<p style='color:red'>" . get_translation ( "upload_failed" ) . "</p>";
