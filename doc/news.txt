@@ -29,3 +29,7 @@
   http://www.ulicms.de/mpdf_supplement.html
 + CKEditor 4.5.3 Supplement bereits integriert
 + Alle Patches die bisher für die Version 9.0.1 erschienen sind.
+
+==== Neues in UliCMS 9.0.1 Refresh 2 =====
++ CKEditor 4.5.9
++ Alle bisher erschienen Sicherheits-Update und Patches für UliCMS 9.0 bereits enthalten

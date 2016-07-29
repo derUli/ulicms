@@ -6,9 +6,9 @@ class ulicms_version {
 				9,
 				0,
 				1,
-                1				
+				2
 		);
-		$this->update = "Refresh 1";
+		$this->update = "Refresh ".$this->internalVersion[3];
 		$this->developmentVersion = false;
 	}
 	
@@ -19,6 +19,17 @@ class ulicms_version {
 	function getUpdate() {
 		return $this->update;
 	}
+	public function getVersionString(){
+		$version = array_slice($this->getVersion(), 0, 3);
+		$text = implode(".", $version);
+		if(count($this->getVersion()) > 3){
+			$v = $this->getVersion();
+			$refresh = $v[4];
+			$text = $text . " Refresh " . $refresh;
+		}
+		return $text;
+	}
+
 	function getDevelopmentVersion() {
 		return $this->developmentVersion;
 	}
