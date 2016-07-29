@@ -1,5 +1,7 @@
 #!/usr/bin/php -q
 <?php
+$language = "en";
+
 function sinstall_usage() {
 	echo "sinstall - Install an UliCMS package\n";
 	echo "UliCMS Version " . cms_version () . "\n";
@@ -17,6 +19,8 @@ $parent_path = dirname ( __file__ ) . "/../";
 include $parent_path . "init.php";
 include_once ULICMS_ROOT . "/classes/package_manager.php";
 array_shift ( $argv );
+
+include getLanguageFilePath ( $language );
 
 // No time limit
 @set_time_limit ( 0 );
