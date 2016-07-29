@@ -1,7 +1,6 @@
 #!/usr/bin/php -q
 <?php
 $language = "en";
-
 function sinstall_usage() {
 	echo "sinstall - Install an UliCMS package\n";
 	echo "UliCMS Version " . cms_version () . "\n";
@@ -39,19 +38,19 @@ if (count ( $argv ) == 0) {
 			$result = $pkg->installPackage ( $file );
 		} else if (endsWith ( $file, ".sin" )) {
 			$pkg = new SinPackageInstaller ( $file );
-			$is_installable = $pkg->isInstallable();
-			if($is_installable){
-			$result = $pkg->installPackage ();
+			$is_installable = $pkg->isInstallable ();
+			if ($is_installable) {
+				$result = $pkg->installPackage ();
 			} else {
-				foreach($pkg->getErrors() as $error){
+				foreach ( $pkg->getErrors () as $error ) {
 					echo "$error\n";
 				}
-				exit();
+				exit ();
 			}
 		} else {
 			translate ( "not_supported_format" );
 			echo "\n";
-			exit();
+			exit ();
 		}
 		
 		if ($result) {
