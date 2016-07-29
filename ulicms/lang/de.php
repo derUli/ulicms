@@ -655,4 +655,16 @@ define ( "TRANSLATION_USE_PAGINATION", "Benutze Pagination" );
 // Type Article
 define ( "TRANSLATION_ARTICLE", "Artikel" );
 
+// SimpleInstall v2 Packages
+define ( "TRANSLATION_VERSION", "Version" );
+define ( "TRANSLATION_COMPATIBLE_FROM", "Kompatibel von" );
+define ( "TRANSLATION_COMPATIBLE_TO", "Kompatibel bis" );
+define ( "TRANSLATION_DEPENDENCIES", "Abhängigkeiten" );
+define ( "TRANSLATION_LICENSE_AGREEMENT", "Lizenzbedingungen" );
+define ( "TRANSLATION_DEPENDENCY_X_IS_NOT_INSTALLED", "Die Abhänigkeit %x% ist nicht installiert." );
+define ( "TRANSLATION_THIS_ULICMS_VERSION_IS_NOT_SUPPORTED", "Diese UliCMS Version wird nicht unterstützt." );
+define ( "TRANSLATION_SHA1_CHECKSUM_NOT_EQUAL", "SHA1 Prüfsummen stimmen nicht überein." );
+define ( "TRANSLATION_ERRORS", "Fehler" );
+
+
 add_hook ( "lang_de" );

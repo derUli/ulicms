@@ -248,13 +248,17 @@ if (! $eingeloggt) {
 		require_once "inc/add_audio.php";
 	} else if ($_GET ["action"] == "edit_audio") {
 		require_once "inc/edit_audio.php";
-	} 
-
-	else if (isset ( $actions [$_GET ["action"]] )) {
-		include_once $actions [$_GET ["action"]];
 	} else if ($_GET ["action"] == "do-post-install") {
 		include_once "inc/do-post-install.php";
-	} else {
+	} else if ($_GET ["action"] == "pkginfo") {
+		include_once "inc/pkginfo.php";
+	} else if ($_GET ["action"] = "sin-package-install-ok") {
+		include_once "inc/sin-package-install-ok.php";
+	} else if (isset ( $actions [$_GET ["action"]] )) {
+		include_once $actions [$_GET ["action"]];
+	} 
+
+	else {
 		echo TRANSLATION_ACTION_NOT_FOUND;
 	}
 }
