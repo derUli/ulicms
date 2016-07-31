@@ -113,18 +113,9 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 			echo nl2br ( real_htmlspecialchars ( $category ["description"] ) );
 			?></td>
 			<td style="text-align: center;"><a
-				href="?action=categories&edit=<?php
-			
-			echo $category ["id"];
-			?>"><img src="gfx/edit.png" class="mobile-big-image"
-					alt="<?php
-			
-			echo TRANSLATION_EDIT;
-			?>"
-					title="<?php
-			
-			echo TRANSLATION_EDIT;
-			?>"></td>
+				href="?action=categories&edit=<?php echo $category ["id"];?>"><img
+					src="gfx/edit.png" class="mobile-big-image"
+					alt="<?php translate("edit");?>" title="<?php translate("edit");?>"></a></td>
 			<?php
 			
 			if ($category ["id"] != 1) {

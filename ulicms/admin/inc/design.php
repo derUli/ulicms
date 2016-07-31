@@ -21,10 +21,11 @@ if (! $acl->hasPermission ( "design" )) {
 			Settings::delete ( "no_mobile_design_on_tablet" );
 		}
 		
-		if (isset ( $_REQUEST ["video_width_100_percent"] ))
+		if (isset ( $_REQUEST ["video_width_100_percent"] )) {
 			setconfig ( "video_width_100_percent", "width" );
-		else
+		} else {
 			Settings::delete ( "video_width_100_percent" );
+		}
 		
 		if ($_REQUEST ["additional_menus"] !== $additional_menus) {
 			setconfig ( "additional_menus", db_escape ( $_REQUEST ["additional_menus"] ) );
@@ -42,7 +43,6 @@ if (! $acl->hasPermission ( "design" )) {
 		// Wenn Formular abgesendet wurde, Wert Speichern
 		if ($_REQUEST ["mobile_theme"] !== $mobile_theme) { // if mobile_theme auf
 			$themes = getThemesList ();
-			
 			if (empty ( $_REQUEST ["mobile_theme"] ))
 				Settings::delete ( "mobile_theme" );
 			else if (in_array ( $_REQUEST ["mobile_theme"], $themes )) { // if in_array mobile_theme auf
@@ -52,10 +52,11 @@ if (! $acl->hasPermission ( "design" )) {
 		} // if mobile_theme zu
 		
 		if ($_REQUEST ["default-font"] != Settings::get ( "default-font" )) {
-			if (! empty ( $_REQUEST ["custom-font"] ))
+			if (! empty ( $_REQUEST ["custom-font"] )) {
 				$font = $_REQUEST ["custom-font"];
-			else
+			} else {
 				$font = $_REQUEST ["default-font"];
+			}
 			
 			$font = db_escape ( $font );
 			
@@ -65,16 +66,12 @@ if (! $acl->hasPermission ( "design" )) {
 		if (! empty ( $_REQUEST ["google-font"] )) {
 			
 			$font = $_REQUEST ["google-font"];
-			
 			$font = db_escape ( $font );
-			
 			setconfig ( "google-font", $font );
 		}
 		
 		setconfig ( "zoom", intval ( $_REQUEST ["zoom"] ) );
-		
 		setconfig ( "font-size", db_escape ( $_REQUEST ["font-size"] ) );
-		
 		setconfig ( "ckeditor_skin", db_escape ( $_REQUEST ["ckeditor_skin"] ) );
 		
 		if (Settings::get ( "header-background-color" ) != $_REQUEST ["header-background-color"]) {
@@ -126,10 +123,7 @@ div#google-fonts {
 	}
 	?>
 <h1>
-<?php
-	
-	echo TRANSLATION_DESIGN;
-	?>
+<?php translate("design");?>
 </h1>
 <form id="designForm" action="index.php?action=design" method="post">
 <?php
@@ -176,8 +170,10 @@ div#google-fonts {
 		echo $th;
 		?>"
 						<?php
-		if ($th === $theme)
-			echo " selected"?>>
+		if ($th === $theme) {
+			echo " selected";
+		}
+		?>>
 		<?php
 		
 		echo $th;
@@ -198,14 +194,12 @@ div#google-fonts {
 					<option value=""
 						<?php
 	
-	if (! $mobile_theme)
+	if (! $mobile_theme) {
 		echo " selected";
+	}
 	?>>
 						[
-						<?php
-	
-	echo TRANSLATION_STANDARD;
-	?>
+						<?php translate("standard");?>
 						]
 					</option>
 					<?php
@@ -217,8 +211,10 @@ div#google-fonts {
 		echo $th;
 		?>"
 						<?php
-		if ($th === $mobile_theme)
-			echo " selected"?>>
+		if ($th === $mobile_theme) {
+			echo " selected";
+		}
+		?>>
 		<?php
 		
 		echo $th;
@@ -273,11 +269,13 @@ div#google-fonts {
 	$i = 1;
 	foreach ( $fonts as $key => $value ) {
 		$selected = "";
-		if ($default_font === $value)
+		if ($default_font === $value) {
 			$selected = "selected";
+		}
 		
-		if (! in_array ( $default_font, $fonts ) and $i === $font_amount)
+		if (! in_array ( $default_font, $fonts ) and $i === $font_amount) {
 			$selected = "selected";
+		}
 		if ($value != 'google') {
 			echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
 		} else {
@@ -377,7 +375,6 @@ div#google-fonts {
 	
 	echo real_htmlspecialchars ( Settings::get ( "body-text-color" ) );
 	?>"></td>
-		</tr>
 		</tr>
 		<tr>
 			<td><strong><?php

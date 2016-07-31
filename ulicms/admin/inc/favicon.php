@@ -47,7 +47,7 @@ if (defined ( "_SECURITY" )) {
 			<td><label for="high_resolution"><strong><?php translate("high_resolution");?></strong></label>
 			</td>
 			<td><input type="checkbox" id="high_resolution"
-				name="high_resolution" value="high_resolution"></strong></td>
+				name="high_resolution" value="high_resolution"></td>
 		</tr>
 		<tr>
 			<td width=480><strong><?php

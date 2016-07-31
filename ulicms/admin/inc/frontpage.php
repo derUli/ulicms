@@ -43,7 +43,7 @@ if (defined ( "_SECURITY" )) {
 		
 		csrf_token_html ();
 		?>
-	<table border=0>
+	<table border="0">
 		<tr>
 			<td style="min-width: 100px;"><strong><?php
 		
@@ -86,6 +86,12 @@ if (defined ( "_SECURITY" )) {
 			<?php
 		}
 		?>
+		
+		
+		
+		
+		
+		
 		
 		
 		

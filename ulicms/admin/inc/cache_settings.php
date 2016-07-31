@@ -35,7 +35,7 @@ if ($acl->hasPermission ( "cache" )) {
 		?>
 
 
-<form post="index.php" method="get">
+<form action="index.php" method="get">
 <?php
 		
 		csrf_token_html ();

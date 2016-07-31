@@ -198,16 +198,10 @@ if (defined ( "_SECURITY" )) {
 			?> </strong><br /> <select name="activated" size=1
 				<?php if(!$pages_activate_own) echo "disabled";?>>
 				<option value="1">
-				<?php
-			
-			echo TRANSLATION_ENABLED;
-			?>
+				<?php translate("enabled");?>
 				</option>
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
-				<?php
-			
-			echo TRANSLATION_DISABLED;
-			?>
+				<?php translate("disabled");?>
 				</option>
 			</select>
 		</div>
@@ -279,8 +273,9 @@ function openMenuImageSelectWindow(field) {
 				?>"
 					<?php
 				
-				if (! is_null ( $row->theme ) and ! empty ( $row->theme ) and $row->theme == $th)
+				if (! is_null ( $row->theme ) and ! empty ( $row->theme ) and $row->theme == $th) {
 					echo "selected";
+				}
 				?>>
 				<?php
 				
@@ -509,8 +504,9 @@ function openMenuImageSelectWindow(field) {
 					<option value="null"
 						<?php
 			
-			if ("null" == $list_data->type)
+			if ("null" == $list_data->type) {
 				echo "selected";
+			}
 			?>>
 			[<?php
 			translate ( "every" )?>]
@@ -552,8 +548,9 @@ function openMenuImageSelectWindow(field) {
 	<?php
 			
 			$lcat = $list_data->category_id;
-			if ($lcat === null)
+			if ($lcat === null) {
 				$lcat = - 1;
+			}
 			?>
 	<?php echo categories :: getHTMLSelect($lcat, true, "list_category")?>
 	<br /> <br /> <strong><?php
@@ -575,10 +572,7 @@ function openMenuImageSelectWindow(field) {
 			<?php
 			}
 			?>
-			</select> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_PARENT;
-			?>
+			</select> <br /> <br /> <strong><?php translate("parent")?>
 	</strong><br /> <select name="list_parent" size=1>
 					<option
 						<?php
@@ -727,10 +721,7 @@ function openMenuImageSelectWindow(field) {
 
 			</div>
 		</div>
-
-
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
-
 		<div class="accordion-content">
 
 			<textarea name="custom_data" style="width: 100%; height: 200px;"

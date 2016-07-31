@@ -73,8 +73,9 @@ if (defined ( "_SECURITY" )) {
 	</p>
 	<fieldset id="type_gif" style="<?php
 			
-			if ($row->type != "gif")
+			if ($row->type != "gif") {
 				echo "display:none";
+			}
 			?>">
 
 		<strong><?php
@@ -110,7 +111,7 @@ if (defined ( "_SECURITY" )) {
 		id="radio_html" name="type" value="html"
 		onclick="$('#type_html').slideDown();$('#type_gif').slideUp();"><label
 		for="radio_html">HTML</label>
-	</p>
+
 	<fieldset id="type_html" style="<?php
 			
 			if ($row->type != "html")
