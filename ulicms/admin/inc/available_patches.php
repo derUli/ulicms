@@ -7,10 +7,7 @@ if (defined ( "_SECURITY" )) {
 
 
 <h1>
-<?php
-		
-		translate ( "available_patches" );
-		?>
+<?php translate ( "available_patches" );?>
 </h1>
 
 <?php

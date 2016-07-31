@@ -336,7 +336,6 @@ function delete_custom_data($var = null, $page = null) {
 		}
 	}  // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
 else {
-		
 		$data = array ();
 	}
 	
@@ -348,7 +347,6 @@ function set_custom_data($var, $value, $page = null) {
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
-	
 	$data = get_custom_data ( $page );
 	if (is_null ( $data )) {
 		$data = array ();
@@ -555,7 +553,6 @@ function import($ipage) {
 	} else {
 		$query = db_query ( "SELECT content FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	}
-	
 	if (db_num_rows ( $query ) == 0) {
 		return false;
 	} else {
@@ -658,8 +655,9 @@ function is_403() {
 function buildtree($src_arr, $parent_id = 0, $tree = array()) {
 	foreach ( $src_arr as $idx => $row ) {
 		if ($row ['parent'] == $parent_id) {
-			foreach ( $row as $k => $v )
+			foreach ( $row as $k => $v ) {
 				$tree [$row ['id']] [$k] = $v;
+			}
 			unset ( $src_arr [$idx] );
 			$tree [$row ['id']] ['children'] = buildtree ( $src_arr, $row ['id'] );
 		}
@@ -723,17 +721,20 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 			$containsCurrentItem = parent_item_contains_current_page ( $row->id );
 			
 			$additional_classes = " menu-link-to-" . $row->id . " ";
-			if ($containsCurrentItem)
+			if ($containsCurrentItem) {
 				$additional_classes .= "contains-current-page ";
+			}
 			
-			if (get_requested_pagename () != $row->systemname)
+			if (get_requested_pagename () != $row->systemname) {
 				$html .= "  <li class='" . trim ( $additional_classes ) . "'>";
-			else
+			} else {
 				$html .= "  <li class='menu_active_list_item" . rtrim ( $additional_classes ) . "'>";
-			if (! empty ( $row->alternate_title ))
+			}
+			if (! empty ( $row->alternate_title )) {
 				$title = $row->alternate_title;
-			else
+			} else {
 				$title = $row->title;
+			}
 			if (get_requested_pagename () != $row->systemname) {
 				$html .= "<a href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "' class='" . trim ( $additional_classes ) . "'>";
 			} else {
@@ -783,10 +784,8 @@ function base_metas() {
 		$title = str_ireplace ( "%homepage_title%", get_homepage_title (), $title );
 		$title = str_ireplace ( "%title%", get_title (), $title );
 		$title = str_ireplace ( "%motto%", get_motto (), $title );
-		
 		$title = apply_filter ( $title, "title_tag" );
 		$title = htmlentities ( $title, ENT_QUOTES, "UTF-8" );
-		
 		echo "<title>" . $title . "</title>\r\n";
 	}
 	
@@ -868,9 +867,7 @@ function base_metas() {
 		$description = Settings::get ( "meta_description" );
 	}
 	if ($description != "" && $description != false) {
-		
 		$description = apply_filter ( $description, "meta_description" );
-		
 		$$description = htmlentities ( $description, ENT_QUOTES, "UTF-8" );
 		if (! Settings::get ( "hide_meta_description" )) {
 			echo '<meta name="description" content="' . $description . '"/>';
@@ -965,9 +962,9 @@ function get_page($systemname = "") {
 	if (empty ( $systemname )) {
 		$systemname = $_GET ["seite"];
 	}
-	
-	if (empty ( $systemname ))
+	if (empty ( $systemname )) {
 		$systemname = get_frontpage ();
+	}
 	$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	if (db_num_rows ( $query ) > 0) {
 		return db_fetch_assoc ( $query );
@@ -1025,7 +1022,6 @@ function checkAccess($access = "") {
 	if (in_array ( "registered", $access ) and is_logged_in ()) {
 		return "registered";
 	}
-	
 	for($i = 0; $i < count ( $access ); $i ++) {
 		if (is_numeric ( $access [$i] ) and isset ( $_SESSION ["group_id"] ) and $access [$i] == $_SESSION ["group_id"]) {
 			return $access [$i];

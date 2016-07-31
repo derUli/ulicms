@@ -19,7 +19,7 @@ if ($acl->hasPermission ( "videos" )) {
 	
 	translate ( "name" );
 	?>
-	</strong><br /> <input type="text" name="name" required="true" value=""
+	</strong><br /> <input type="text" name="name" required value=""
 		maxlength=255 /> <br /> <br /> <strong><?php
 	
 	echo TRANSLATION_CATEGORY;

@@ -37,7 +37,6 @@ if (defined ( "_SECURITY" )) {
 </p>
 <table class="tablesorter">
 	<thead>
-
 		<tr style="font-weight: bold;">
 			<th style="width: 40px;"><a href="index.php?action=admins&order=id">ID</a>
 			</th>
@@ -71,7 +70,7 @@ if (defined ( "_SECURITY" )) {
 			?> </span></td>
 		</tr>
 	</thead>
-	<body>
+	<tbody>
 	<?php
 			while ( $row = db_fetch_object ( $query ) ) {
 				$group = $acl->getPermissionQueryResult ( $row->group_id );
@@ -103,18 +102,7 @@ if (defined ( "_SECURITY" )) {
 			}
 		}
 		?>
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	</tbody>
+		</tbody>
 </table>
 <script type="text/javascript">
 var ajax_options = {
@@ -144,6 +132,5 @@ $("form.delete-form").ajaxForm(ajax_options);
 
 
 	<?php
-
 }
- ?>
+?>

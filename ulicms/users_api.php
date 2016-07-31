@@ -38,8 +38,9 @@ function changePassword($password, $id) {
 function resetPassword($username, $length = 12) {
 	$new_pass = rand_string ( $length );
 	$user = getUserByName ( $username );
-	if (! $user)
+	if (! $user) {
 		return false;
+	}
 	$uid = intval ( $user ["id"] );
 	changePassword ( $new_pass, $uid );
 	
@@ -82,13 +83,16 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	// legacy group
 	$group = intval ( $group );
 	// Default ACL Group
-	if (! $acl_group)
+	if (! $acl_group) {
 		$acl_group = Settings::get ( "default_acl_group" );
-	if (! $acl_group)
+	}
+	if (! $acl_group) {
 		$acl_group = "NULL";
+	}
 	
-	if (is_null ( $acl_group ))
+	if (is_null ( $acl_group )) {
 		$acl_group = "NULL";
+	}
 	
 	add_hook ( "before_create_user" );
 	
@@ -104,10 +108,11 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	add_hook ( "after_create_user" );
 }
 function get_user_id() {
-	if (isset ( $_SESSION ["login_id"] ))
+	if (isset ( $_SESSION ["login_id"] )) {
 		return intval ( $_SESSION ["login_id"] );
-	else
+	} else {
 		return 0;
+	}
 }
 function user_exists($name) {
 	$query = Database::query ( "SELECT id FROM " . tbname ( "users" ) . " WHERE username = '" . db_escape ( $name ) . "'" );
@@ -127,8 +132,9 @@ function register_session($user, $redirect = true) {
 	$_SESSION ["group_id"] = $user ["group_id"];
 	
 	$_SESSION ["logged_in"] = true;
-	if (is_null ( $_SESSION ["group_id"] ))
+	if (is_null ( $_SESSION ["group_id"] )) {
 		$_SESSION ["group_id"] = 0;
+	}
 	
 	$_SESSION ["session_begin"] = time ();
 	
@@ -140,8 +146,9 @@ function register_session($user, $redirect = true) {
 		Mailer::send ( $user ["email"], $subject, $text, $headers );
 	}
 	
-	if (! $redirect)
+	if (! $redirect) {
 		return;
+	}
 	
 	if (isset ( $_REQUEST ["go"] )) {
 		header ( "Location: " . $_REQUEST ["go"] );

@@ -48,7 +48,7 @@ if (defined ( "_SECURITY" )) {
 				echo $row->html;
 			}
 			?>
-	</p>
+	
 
 
 	<input type="hidden" name="edit_banner" value="edit_banner"> <input

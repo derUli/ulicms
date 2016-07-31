@@ -13,8 +13,8 @@ if (defined ( "_SECURITY" )) {
 	<input type="hidden" name="add_admin" value="add_admin"> <strong><?php
 			
 			echo TRANSLATION_USERNAME;
-			?></strong><br /> <input type="text" required="true"
-		name="admin_username" value=""> <br /> <br /> <strong><?php
+			?></strong><br /> <input type="text" required name="admin_username"
+		value=""> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_LASTNAME;
 			?></strong><br /> <input type="text" name="admin_lastname" value="">
@@ -29,10 +29,10 @@ if (defined ( "_SECURITY" )) {
 	<br /> <strong><?php
 			
 			echo TRANSLATION_PASSWORD;
-			?></strong><br /> <input type="text" required="true"
-		name="admin_password" value=""><br /> <br /> <input type="checkbox"
-		value="1" name="require_password_change" id="require_password_change">
-	<label for="require_password_change"><?php
+			?></strong><br /> <input type="text" required name="admin_password"
+		value=""><br /> <br /> <input type="checkbox" value="1"
+		name="require_password_change" id="require_password_change"> <label
+		for="require_password_change"><?php
 			
 			translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );
 			?> </label> <br /> <br /> <input type="checkbox" id="send_mail"

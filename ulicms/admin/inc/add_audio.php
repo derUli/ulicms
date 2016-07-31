@@ -2,11 +2,7 @@
 $acl = new ACL ();
 if ($acl->hasPermission ( "audio" )) {
 	?>
-<h1>
-<?php
-	
-	translate ( "UPLOAD_AUDIO" );
-	?>
+<h1><?php translate ( "UPLOAD_AUDIO" );?>
 </h1>
 <form action="index.php?action=audio" method="post"
 	enctype="multipart/form-data">
@@ -15,16 +11,9 @@ if ($acl->hasPermission ( "audio" )) {
 	
 	csrf_token_html ();
 	?>
-	<strong><?php
-	
-	translate ( "name" );
-	?>
-	</strong><br /> <input type="text" name="name" required="true" value=""
-		maxlength=255 /> <br /> <br /> <strong><?php
-	
-	echo TRANSLATION_CATEGORY;
-	?>
-	</strong><br />
+	<strong><?php translate ( "name" );?></strong> <br /> <input
+		type="text" name="name" required value="" maxlength=255 /> <br /> <br />
+	<strong><?php translate("category");?></strong><br />
 	<?php
 	echo categories::getHTMLSelect ();
 	?>

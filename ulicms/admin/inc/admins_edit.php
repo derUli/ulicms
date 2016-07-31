@@ -129,12 +129,12 @@ if (defined ( "_SECURITY" )) {
 	<input type="hidden" name="admin_rechte"
 		value="<?php echo $row -> group?>"> <input type="hidden"
 		name="group_id"
-		value=<?php
-				
-				if (! $_SESSION ["group_id"])
+		value="<?php
+				if (! $_SESSION ["group_id"]) {
 					echo "-";
-				else
+				} else {
 					echo $_SESSION ["group_id"];
+				}
 				?>">
 		<?php
 			}

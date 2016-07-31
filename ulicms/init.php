@@ -99,9 +99,7 @@ $path_to_config = dirname ( __file__ ) . DIRECTORY_SEPERATOR . "cms-config.php";
 
 if (file_exists ( $path_to_config )) {
 	require_once $path_to_config;
-} 
-
-else if (is_dir ( "installer" )) {
+} else if (is_dir ( "installer" )) {
 	header ( "Location: installer/" );
 	exit ();
 } else {
@@ -391,7 +389,6 @@ if (! Settings::get ( "disable_hsts" ) and is_ssl ()) {
 	}
 	
 	$str = trim ( $str );
-	
 	header ( $str );
 }
 

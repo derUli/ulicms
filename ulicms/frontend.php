@@ -37,7 +37,6 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
 
 if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 	$txt = get_translation ( "IP_BLOCKED_BY_SPAMHAUS" );
-	
 	$txt = str_replace ( "%ip", get_ip (), $txt );
 	header ( "HTTP/1.0 403 Forbidden" );
 	header ( "Content-Type: text/html; charset=UTF-8" );
@@ -126,11 +125,13 @@ if ($format == "html") {
 
 add_hook ( "after_http_header" );
 
-if (count ( getThemeList () ) === 0)
+if (count ( getThemeList () ) === 0) {
 	throw new Exception ( "Keine Themes vorhanden!" );
+}
 
-if (! is_dir ( getTemplateDirPath ( $theme ) ))
+if (! is_dir ( getTemplateDirPath ( $theme ) )) {
 	throw new Exception ( "Das aktivierte Theme existiert nicht!" );
+}
 
 if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 	include getTemplateDirPath ( $theme ) . "functions.php";
@@ -307,7 +308,6 @@ if (! Settings::get ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_M
 	add_hook ( "after_cron" );
 	die ();
 } else {
-	
 	if (Settings::get ( "no_auto_cron" )) {
 		die ();
 	}
