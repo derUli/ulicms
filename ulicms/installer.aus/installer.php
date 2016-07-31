@@ -35,10 +35,7 @@ include_once "../lib/workaround.php";
 <!DOCTYPE html>
 <html>
 <head>
-<title><?php
-
-echo TRANSLATION_TITLE;
-?></title>
+<title><?php echo TRANSLATION_TITLE;?></title>
 <link rel="stylesheet" type="text/css" href="media/style.css" />
 <script type="text/javascript" src="../admin/scripts/jquery.min.js"></script>
 <script type="text/javascript" src="../admin/scripts/util.js"></script>
@@ -59,25 +56,23 @@ echo TRANSLATION_TITLE;
 			<strong>Sprache auswählen / Select a language</strong><br /> <select
 				name="language"
 				onchange="$('#loading').show();window.location.replace('?language=' + this.value)">
-				<option value="de"<?php
-		
-		if ($_SESSION ["language"] == "de")
+				<option value="de"
+					<?php
+		if ($_SESSION ["language"] == "de") {
 			echo "selected";
-		?>">Deutsch</option>
+		}
+		?>>Deutsch</option>
 				<option value="en"
 					<?php
-		
-		if ($_SESSION ["language"] == "en")
+		if ($_SESSION ["language"] == "en") {
 			echo "selected";
+		}
 		?>>English</option>
 			</select>
 		</p>
 		<p>
 			<input type="hidden" name="step" value="0"> <input type="submit"
-				value="<?php
-		
-		echo TRANSLATION_NEXT;
-		?>">
+				value="<?php echo TRANSLATION_NEXT;?>">
 
 		</p>
 		<p>
@@ -88,16 +83,10 @@ echo TRANSLATION_TITLE;
 	} else if ($_REQUEST ["step"] == "0") {
 		?>
 	<h2>
-	<?php
-		
-		echo TRANSLATION_WELCOME;
-		?>
+	<?php echo TRANSLATION_WELCOME;?>
 	</h2>
 	<p>
-	<?php
-		
-		echo TRANSLATION_WELCOME2;
-		?>
+	<?php echo TRANSLATION_WELCOME2;?>
 	</p>
 	<?php
 		include "../version.php";
@@ -106,29 +95,17 @@ echo TRANSLATION_TITLE;
 		if ($version->getDevelopmentVersion ()) {
 			?>
 	<p style="color: red;">
-	<?php
-			
-			echo TRANSLATION_BETA_VERSION;
-			?>
+	<?php echo TRANSLATION_BETA_VERSION;?>
 	</p>
 	<?php
 		}
 		?>
 	<p>
-	<?php
-		
-		echo TRANSLATION_FOLLOW_INSTRUCTIONS;
-		?>
+	<?php echo TRANSLATION_FOLLOW_INSTRUCTIONS;?>
 	</p>
-	<?php
-		
-		echo TRANSLATION_CHMOD;
-		?>
+	<?php echo TRANSLATION_CHMOD;?>
 	<h3>
-	<?php
-		
-		echo TRANSLATION_PERMISSION;
-		?>
+	<?php echo TRANSLATION_PERMISSION;?>
 	</h3>
 	<p>
 		<img
@@ -136,14 +113,8 @@ echo TRANSLATION_TITLE;
 		
 		echo htmlspecialchars ( $_SESSION ["language"] );
 		?>.png"
-			alt="<?php
-		
-		echo TRANSLATION_PERMISSIONS2;
-		?>"
-			title="<?php
-		
-		echo TRANSLATION_PERMISSIONS2;
-		?>" border=1 />
+			alt="<?php echo TRANSLATION_PERMISSIONS2;?>"
+			title="<?php echo TRANSLATION_PERMISSIONS2;?>" border=1 />
 	</p>
 
 	<?php
@@ -151,10 +122,7 @@ echo TRANSLATION_TITLE;
 		if (! $required_php_version) {
 			?>
 	<p style="color: red;">
-	<?php
-			
-			echo TRANSLATION_PHP_VERSION_TOO_LOW;
-			?>
+	<?php echo TRANSLATION_PHP_VERSION_TOO_LOW;?>
 	</p>
 	<?php
 		}
@@ -165,10 +133,7 @@ echo TRANSLATION_TITLE;
 			?>
 	<hr />
 	<p style="color: red;">
-	<?php
-			
-			echo TRANSLATION_GD_MISSING;
-			?>
+	<?php echo TRANSLATION_GD_MISSING;?>
 	</p>
 	<hr />
 	<?php
@@ -181,10 +146,7 @@ echo TRANSLATION_TITLE;
 			$error = true;
 			?>
 	<p style="color: red;">
-	<?php
-			
-			echo TRANSLATION_MYSQLI_MISSING;
-			?>
+	<?php echo TRANSLATION_MYSQLI_MISSING;?>
 	</p>
 
 	<?php
@@ -194,10 +156,7 @@ echo TRANSLATION_TITLE;
 			?>
 
 	<p style="color: red;">
-	<?php
-			
-			echo TRANSLATION_JSON_MISSING;
-			?>
+	<?php echo TRANSLATION_JSON_MISSING;?>
 	</p>
 
 	<?php
@@ -209,10 +168,7 @@ echo TRANSLATION_TITLE;
 	<form action="index.php" method="post"
 		class="show-loading-indicator-on-submit">
 		<input type="hidden" name="step" value="1"> <input type="submit"
-			value="<?php
-			
-			echo TRANSLATION_NEXT;
-			?>">
+			value="<?php echo TRANSLATION_NEXT;?>">
 		<p>
 			<img src="../admin/gfx/loading.gif" id="loading">
 		</p>
@@ -230,42 +186,26 @@ echo TRANSLATION_TITLE;
 		if ($_REQUEST ["step"] == "1") {
 			?>
 	<h2>
-	<?php
-			
-			echo TRANSLATION_MYSQL_LOGIN;
-			?>
+	<?php echo TRANSLATION_MYSQL_LOGIN;?>
 	</h2>
 	<p>
-	<?php
-			
-			echo TRANSLATION_MYSQL_LOGIN_HELP;
-			?>
+	<?php echo TRANSLATION_MYSQL_LOGIN_HELP;?>
 	</p>
 	<form action="index.php" method="post" id="database-login"
 		class="show-loading-indicator-on-submit">
 		<table border=1>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_SERVERNAME;
-			?>
+				<td><?php echo TRANSLATION_SERVERNAME;?>
 				</td>
-				<td><input name="servername" type="text" value="localhost"
-					required="true"></td>
+				<td><input name="servername" type="text" value="localhost" required></td>
 			</tr>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_LOGINNAME;
-			?>
+				<td><?php echo TRANSLATION_LOGINNAME;?>
 				</td>
-				<td><input name="loginname" type="text" value="" required="true"></td>
+				<td><input name="loginname" type="text" value="" required></td>
 			</tr>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_PASSWORD;
-			?>
+				<td><?php echo TRANSLATION_PASSWORD;?>
 				</td>
 				<td><input name="passwort" id="password" type="password" value=""></td>
 			</tr>
@@ -274,18 +214,12 @@ echo TRANSLATION_TITLE;
 				<td><input type="checkbox" id="view_password" /></td>
 			</tr>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_DATABASE_NAME;
-			?>
+				<td><?php echo TRANSLATION_DATABASE_NAME;?>
 				</td>
-				<td><input name="datenbank" type="text" value="" required="true"></td>
+				<td><input name="datenbank" type="text" value="" required></td>
 			</tr>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_PREFIX;
-			?>
+				<td><?php echo TRANSLATION_PREFIX;?>
 				</td>
 				<td><input name="prefix" type="text" value="ulicms_"></td>
 			</tr>
@@ -296,11 +230,7 @@ $(document).ready(function(){
 });
 </script>
 		<p>
-			<input type="submit"
-				value="<?php
-			
-			echo TRANSLATION_NEXT;
-			?>">
+			<input type="submit" value="<?php echo TRANSLATION_NEXT;?>">
 		</p>
 		<img src="../admin/gfx/loading.gif" id="loading">
 		<div id="error-message"></div>
@@ -316,10 +246,7 @@ $(document).ready(function(){
 			
 			?>
 	<h2>
-	<?php
-			
-			echo TRANSLATION_MYSQL_LOGIN;
-			?>
+	<?php echo TRANSLATION_MYSQL_LOGIN;?>
 	</h2>
 	<?php
 			@$connection = mysqli_connect ( $_POST ["servername"], $_POST ["loginname"], $_POST ["passwort"] );
@@ -352,26 +279,14 @@ $(document).ready(function(){
 					$_SESSION ["mysql"] ["prefix"] = $_POST ["prefix"];
 					?>
 	<p>
-	<?php
-					
-					echo TRANSLATION_SUCCESSFULL_DB_CONNECT;
-					?>
+	<?php echo TRANSLATION_SUCCESSFULL_DB_CONNECT;?>
 	</p>
 
 	<form action="index.php" method="post"
 		class="show-loading-indicator-on-submit">
 		<input type="hidden" name="step" value="3"> <input type="submit"
-			value="<?php
-					
-					echo TRANSLATION_NEXT;
-					?>">
+			value="<?php echo TRANSLATION_NEXT;?>">
 		<p>
-
-
-
-
-
-
 			<img src="../admin/gfx/loading.gif" id="loading">
 		</p>
 
@@ -380,11 +295,6 @@ $(document).ready(function(){
 	<?php
 				}
 			}
-			?>
-
-
-
-	<?php
 		}
 		?>
 
@@ -393,75 +303,47 @@ $(document).ready(function(){
 		if ($_REQUEST ["step"] == "3") {
 			?>
 	<h2>
-	<?php
-			
-			echo TRANSLATION_HOMEPAGE_SETTINGS;
-			?>
+	<?php echo TRANSLATION_HOMEPAGE_SETTINGS;?>
 	</h2>
 	<form action="index.php" method="post"
 		class="show-loading-indicator-on-submit">
 		<table border=1>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_HOMEPAGE_TITLE;
-			?>
+				<td><?php echo TRANSLATION_HOMEPAGE_TITLE;?>
 				</td>
 				<td><input name="homepage_title" type="text" value="Meine Homepage"
-					required="true"></td>
+					required></td>
 			</tr>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_SITE_SLOGAN;
-			?>
+				<td><?php echo TRANSLATION_SITE_SLOGAN;?>
 				</td>
-				<td><input name="motto" type="text" value="Dies und Das"
-					required="true"></td>
+				<td><input name="motto" type="text" value="Dies und Das" required></td>
 			</tr>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_YOUR_FIRSTNAME;
-			?>
+				<td><?php echo TRANSLATION_YOUR_FIRSTNAME;?>
 				</td>
-				<td><input name="firstname" type="text" value="Max" required="true"></td>
+				<td><input name="firstname" type="text" value="Max" required></td>
 			</tr>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_YOUR_LASTNAME;
-			?>
+				<td><?php echo TRANSLATION_YOUR_LASTNAME;?>
 				</td>
-				<td><input name="lastname" type="text" value="Mustermann"
-					required="true"></td>
+				<td><input name="lastname" type="text" value="Mustermann" required></td>
 			</tr>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_YOUR_EMAIL_ADRESS;
-			?>
+				<td><?php echo TRANSLATION_YOUR_EMAIL_ADRESS;?>
 				</td>
-				<td><input name="email" type="text" value="max@muster.de"
-					required="true"></td>
+				<td><input name="email" type="text" value="max@muster.de" required></td>
 			</tr>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_ADMIN_NAME;
-			?>
+				<td><?php echo TRANSLATION_ADMIN_NAME;?>
 				</td>
-				<td><input name="admin_user" type="text" value="admin"
-					required="true"></td>
+				<td><input name="admin_user" type="text" value="admin" required></td>
 			</tr>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_ADMIN_PASSWORD;
-			?>
+				<td><?php echo TRANSLATION_ADMIN_PASSWORD;?>
 				</td>
 				<td><input name="passwort" id="password" type="password" value=""
-					required="true"></td>
+					required></td>
 			</tr>
 			<tr>
 				<td><label for="view_password"><?php echo TRANSLATION_VIEW_PASSWORD;?></label></td>
@@ -480,14 +362,8 @@ $(document).ready(function(){
 });
 </script>
 		<p>
-			<input type="submit"
-				value="<?php
-			
-			echo TRANSLATION_DO_INSTALL;
-			?>">
+			<input type="submit" value="<?php echo TRANSLATION_DO_INSTALL;?>">
 		</p>
-
-
 		<p>
 			<img src="../admin/gfx/loading.gif" id="loading">
 		</p>
@@ -502,7 +378,6 @@ $(document).ready(function(){
 		<?php
 		
 		if ($_REQUEST ["step"] == "4") {
-			
 			$salt = uniqid ();
 			$connection = mysqli_connect ( $_SESSION ["mysql"] ["server"], $_SESSION ["mysql"] ["loginname"], $_SESSION ["mysql"] ["passwort"] );
 			mysqli_select_db ( $connection, $_SESSION ["mysql"] ["datenbank"] );
@@ -878,7 +753,6 @@ class config extends baseConfig{
 			$message = 
 
 			$title = str_ireplace ( "%domain%", $_SERVER ["HTTP_HOST"], TRANSLATION_MAIL_MESSAGE_TITLE );
-			
 			$content = TRANSLATION_MAIL_MESSAGE_TEXT;
 			$content = str_ireplace ( "%domain%", $_SERVER ["HTTP_HOST"], $content );
 			$content = str_ireplace ( "%person_name%", $zusammen, $content );
@@ -890,33 +764,21 @@ class config extends baseConfig{
 			
 			?>
 	<h2>
-	<?php
-			
-			echo TRANSLATION_INSTALLATION_FINISHED;
-			?>
+	<?php echo TRANSLATION_INSTALLATION_FINISHED;?>
 	</h2>
 	<p>
-	<?php
-			
-			echo TRANSLATION_FIRST_LOGIN_HELP;
-			?>
+	<?php echo TRANSLATION_FIRST_LOGIN_HELP;?>
 		<br /> <br />
 		<?php
 			
 			if ($success) {
 				?>
-		<span style="color: green;"><?php
-				
-				echo TRANSLATION_LOGIN_DATA_SENT_BY_MAIL;
-				?> </span>
+		<span style="color: green;"><?php echo TRANSLATION_LOGIN_DATA_SENT_BY_MAIL;?> </span>
 
 		<?php
 			} else {
 				?>
-		<span style="color: red;"><?php
-				
-				echo TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL;
-				?></span>
+		<span style="color: red;"><?php	echo TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL;?></span>
 		<?php
 			}
 			?>

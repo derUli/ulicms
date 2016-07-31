@@ -10,13 +10,16 @@ if (! defined ( "KCFINDER_PAGE" )) {
 			return $path;
 		}
 		public static function removeDir($dir, $DeleteMe) {
-			if (! $dh = @opendir ( $dir ))
+			if (! $dh = @opendir ( $dir )) {
 				return;
+			}
 			while ( false !== ($obj = readdir ( $dh )) ) {
-				if ($obj == '.' || $obj == '..')
+				if ($obj == '.' || $obj == '..') {
 					continue;
-				if (! @unlink ( $dir . '/' . $obj ))
+				}
+				if (! @unlink ( $dir . '/' . $obj )) {
 					self::removeDir ( $dir . '/' . $obj, true );
+				}
 			}
 			
 			closedir ( $dh );

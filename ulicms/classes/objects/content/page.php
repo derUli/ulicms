@@ -273,7 +273,6 @@ class Page extends Content {
 		$sql .= "og_type='" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "og_image='" . DB::escapeValue ( $this->og_image ) . "',";
 		$sql .= "og_description='" . DB::escapeValue ( $this->og_description ) . "' ";
-		
 		$sql .= " WHERE id = " . $this->id;
 		
 		$result = DB::query ( $sql ) or die ( DB::getLastError () );
