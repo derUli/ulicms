@@ -26,7 +26,7 @@ if ($acl->hasPermission ( "audio" )) {
 		
 		translate ( "name" );
 		?>
-	</strong><br /> <input type="text" name="name" required="true"
+	</strong><br /> <input type="text" name="name" required
 		value="<?php
 		
 		echo htmlspecialchars ( $result->name );
