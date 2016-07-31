@@ -31,9 +31,9 @@ if (! class_exists ( "ulicms_version" )) {
 		public function getInternalVersion() {
 			return $this->internalVersion;
 		}
-		// Gibt die interne Versionsnummer als String  mit Integer-Datentyp zurück
+		// Gibt die interne Versionsnummer als String mit Integer-Datentyp zurück
 		public function getInternalVersionAsString() {
-			return implode(".", $this->internalVersion);
+			return implode ( ".", $this->internalVersion );
 		}
 	}
 }

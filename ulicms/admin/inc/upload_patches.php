@@ -24,16 +24,16 @@ window.location.replace("index.php?action=modules#installed_patches_a");
 <?php csrf_token_html();?>
 <p>
 		<strong><?php translate("name");?></strong> <br /> <input type="text"
-			name="name" value="" required="required" />
+			name="name" value="" required />
 	</p>
 	<p>
 		<strong><?php translate("description");?></strong> <br /> <input
-			type="text" name="description" value="" required="required" />
+			type="text" name="description" value="" required />
 	</p>
 
 	<p>
 		<strong><?php translate("file");?></strong> <br /> <input name="file"
-			type="file" required="required" />
+			type="file" required />
 	</p>
 	<input type="submit" name="upload_patch"
 		value="<?php translate("install_patch");?>" />

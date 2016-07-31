@@ -12,17 +12,17 @@ if (! $acl->hasPermission ( "forms" )) {
 	<?php csrf_token_html();?>
 	<p>
 		<strong><?php translate("name");?></strong><br /> <input type="text"
-			value="" name="name" required="true" />
+			value="" name="name" required />
 	</p>
 
 	<p>
 		<strong><?php translate("email_to");?></strong><br /> <input
-			type="email" value="" name="email_to" required="true" />
+			type="email" value="" name="email_to" required />
 	</p>
 
 	<p>
 		<strong><?php translate("subject");?></strong><br /> <input
-			type="text" value="" name="subject" required="true" />
+			type="text" value="" name="subject" required />
 	</p>
 	<p>
 		<strong><?php translate("category");?></strong><br />
