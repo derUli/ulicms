@@ -37,8 +37,9 @@ class Database {
 		$retval = "mysql://";
 		$cfg = new config ();
 		$retval .= $cfg->db_user;
-		if (! empty ( $cfg->db_password ))
+		if (! empty ( $cfg->db_password )) {
 			$retval .= ":" . $cfg->db_password;
+		}
 		$retval .= "@" . $cfg->db_server;
 		$retval .= "/" . $cfg->db_database;
 		$retval .= "?charset=utf8";
@@ -68,7 +69,7 @@ class Database {
 		$table = self::escapeName ( $table );
 		$column = self::escapeName ( $column );
 		$sql = "select avg($column) from $table";
-		if (! isNotNullOrEmpty ( $where )) {
+		if (isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
 		}
 		$result = Database::query ( $sql );
@@ -82,7 +83,7 @@ class Database {
 		$table = self::escapeName ( $table );
 		$column = self::escapeName ( $column );
 		$sql = "select min($column) from $table";
-		if (! isNotNullOrEmpty ( $where )) {
+		if (isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
 		}
 		$result = Database::query ( $sql );
@@ -94,9 +95,8 @@ class Database {
 		}
 		
 		$table = self::escapeName ( $table );
-		
 		$sql = "DELETE FROM $table";
-		if (! isNotNullOrEmpty ( $where )) {
+		if (isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
 		}
 		$result = Database::query ( $sql );
@@ -110,7 +110,7 @@ class Database {
 		$table = self::escapeName ( $table );
 		$column = self::escapeName ( $column );
 		$sql = "select min($column) from $table";
-		if (! isNotNullOrEmpty ( $where )) {
+		if (isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
 		}
 		$result = Database::query ( $sql );
@@ -196,8 +196,9 @@ class Database {
 	public static function connect($server, $user, $password) {
 		global $db_connection;
 		$db_connection = mysqli_connect ( $server, $user, $password );
-		if (! $db_connection)
+		if (! $db_connection) {
 			return false;
+		}
 		self::query ( "SET NAMES 'utf8'" );
 		// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 		self::query ( "SET SESSION sql_mode = '';" );
@@ -249,7 +250,6 @@ class Database {
 	public static function escapeValue($value, $type = null) {
 		global $db_connection;
 		if (is_null ( $type )) {
-			
 			if (is_float ( $value )) {
 				return floatval ( $value );
 			} else if (is_int ( $value )) {
@@ -285,7 +285,6 @@ class Database {
 			}
 			sort ( $retval );
 		}
-		
 		return $retval;
 	}
 }
