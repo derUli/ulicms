@@ -51,12 +51,11 @@ if (defined ( "_SECURITY" )) {
 			?>"> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_FIRSTNAME;
-			?></strong><br /> <input type="text" required="true"
-		name="admin_firstname"
+			?></strong><br /> <input type="text" name="admin_firstname"
 		value="<?php
 			
 			echo $row->firstname;
-			?>"><br /> <br /> <strong><?php
+			?>" required><br /> <br /> <strong><?php
 			
 			echo TRANSLATION_EMAIL;
 			?></strong><br /> <input type="email" name="admin_email"

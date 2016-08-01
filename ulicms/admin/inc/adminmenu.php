@@ -322,7 +322,7 @@ if (defined ( "_SECURITY" )) {
 				<li><a href="?action=motd"><?php
 			
 			echo TRANSLATION_MOTD;
-			?></a></a></li>
+			?></a></li>
 				<?php
 		}
 		?>
@@ -390,6 +390,14 @@ if (defined ( "_SECURITY" )) {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
 		<li><a href="?action=info"><?php
 		
 		echo TRANSLATION_INFO;
@@ -413,6 +421,14 @@ if (defined ( "_SECURITY" )) {
 		?> <?php
 	}
 	?>
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
