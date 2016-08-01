@@ -78,11 +78,11 @@ if (defined ( "_SECURITY" )) {
 				?>"> <br /> <br /> <strong><?php
 				
 				echo TRANSLATION_PAGE_TITLE;
-				?> </strong><br /> <input type="text" required="true"
-				name="page_title"
+				?> </strong><br /> <input type="text" name="page_title"
 				value="<?php
 				echo htmlspecialchars ( $row->title );
-				?>"> <br /> <br /> <strong><?php
+				?>"
+				required> <br /> <br /> <strong><?php
 				
 				translate ( "ALTERNATE_TITLE" );
 				?> </strong><br /> <input type="text" name="alternate_title"

@@ -26,12 +26,12 @@ if ($acl->hasPermission ( "audio" )) {
 		
 		translate ( "name" );
 		?>
-	</strong><br /> <input type="text" name="name" required
+	</strong><br /> <input type="text" name="name"
 		value="<?php
 		
 		echo htmlspecialchars ( $result->name );
 		?>"
-		maxlength=255 /> <br /> <br /> <strong><?php
+		maxlength="255" required /> <br /> <br /> <strong><?php
 		
 		echo TRANSLATION_CATEGORY;
 		?>

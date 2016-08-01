@@ -158,8 +158,8 @@ $(window).load(function(){
 			<td></td>
 			<td></td>
 		</tr>
-	
-	
+
+	</thead>
 	<tbody>
 	<?php
 	while ( $row = db_fetch_object ( $all_audio ) ) {
@@ -224,7 +224,7 @@ $(window).load(function(){
 	}
 	?>
 	</tbody>
-	</thead>
+
 </table>
 
 <script type="text/javascript">

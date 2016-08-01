@@ -512,7 +512,6 @@ function openMenuImageSelectWindow(field) {
 			translate ( "every" )?>]
 		</option>
 		<?php
-			
 			foreach ( $types as $type ) {
 				if ($type == $list_data->type) {
 					echo '<option value="' . $type . '" selected>' . get_translation ( $type ) . "</option>";

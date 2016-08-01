@@ -199,8 +199,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 		
 		echo TRANSLATION_NAME;
 		?>
-		<input type="text" required="true" name="name" required="true"
-			value="">
+		<input type="text" name="name" value="" required>
 
 	</p>
 
