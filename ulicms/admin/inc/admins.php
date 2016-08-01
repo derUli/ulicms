@@ -20,10 +20,7 @@ if (defined ( "_SECURITY" )) {
 		if (db_num_rows ( $query )) {
 			?>
 <h2>
-<?php
-			
-			echo TRANSLATION_USERS;
-			?>
+<?php translate("users");?>
 </h2>
 <p>
 <?php
@@ -60,14 +57,8 @@ if (defined ( "_SECURITY" )) {
 			
 			echo TRANSLATION_GROUP;
 			?> </a></th>
-			<td><?php
-			
-			echo TRANSLATION_EDIT;
-			?></td>
-			<td><span><?php
-			
-			echo TRANSLATION_DELETE;
-			?> </span></td>
+			<td><?php translate ( "edit" );?></td>
+			<td><span><?php translate("delete");?> </span></td>
 		</tr>
 	</thead>
 	<tbody>
