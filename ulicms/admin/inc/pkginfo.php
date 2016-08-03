@@ -1,4 +1,5 @@
 <?php
+include_once Path::resolve ( "ULICMS_ROOT/lib/formatter.php" );
 $acl = new ACL ();
 if (! $acl->hasPermission ( "install_packages" )) {
 	noperms ();
@@ -18,7 +19,8 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			$compatible_to = $pkg->getProperty ( "compatible_to" );
 			$dependencies = $pkg->getProperty ( "dependencies" );
 			$license = $pkg->getProperty ( "license" );
-			
+			$size = intval ( $pkg->getSize () );
+			$size = formatSizeUnits ( $size );
 			?>
 <h1><?php
 			
@@ -31,14 +33,17 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			<tr>
 		<td><strong><?php translate("name")?></strong></td>
 		<td><?php Template::escape($name)?></td>
-
 	</tr>		
 			<?php }?>
-			
+				
 			<tr>
 		<td><strong><?php translate("version")?></strong></td>
 		<td><?php Template::escape($version)?></td>
 	</tr>
+	<tr>
+		<td><strong><?php translate("size")?></strong></td>
+		<td><?php Template::escape($size)?></td>
+	</tr>	
 	
 			<?php
 			if ($description) {
@@ -107,8 +112,8 @@ if (! $acl->hasPermission ( "install_packages" )) {
 
 			if ($installable) {
 				?>
-				
-<div style="text-align: right; margin-top:30px;">
+
+<div style="text-align: right; margin-top: 30px;">
 	<form action="index.php" method="post">
 		<input type="hidden" name="action" value="install-sin-package"> <input
 			type="hidden" name="file"
