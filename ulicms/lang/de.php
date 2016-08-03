@@ -666,5 +666,6 @@ define ( "TRANSLATION_THIS_ULICMS_VERSION_IS_NOT_SUPPORTED", "Diese UliCMS Versi
 define ( "TRANSLATION_SHA1_CHECKSUM_NOT_EQUAL", "SHA1 Prüfsummen stimmen nicht überein." );
 define ( "TRANSLATION_ERRORS", "Fehler" );
 
+define ( "TRANSLATION_SIZE", "Größe" );
 
 add_hook ( "lang_de" );

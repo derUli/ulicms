@@ -673,4 +673,6 @@ define ( "TRANSLATION_THIS_ULICMS_VERSION_IS_NOT_SUPPORTED", "The package is not
 define ( "TRANSLATION_SHA1_CHECKSUM_NOT_EQUAL", "SHA1 checksums are not equal." );
 define ( "TRANSLATION_ERRORS", "Errors" );
 
+define ( "TRANSLATION_SIZE", "Size" );
+
 add_hook ( "lang_en" );
