@@ -1,4 +1,2 @@
-[ ] SimpleInstall v3 Paketformat
-.sin3 Dateien, bzip2 (tar.bz2) Kompression statt gzip (tar.gz)
-[ ] Beim Löschen eines Users sollen alle Datensätze des gelöschten Users  an einen anderen User übertragen werden können.
+﻿[ ] Beim Löschen eines Users sollen alle Datensätze des gelöschten Users  an einen anderen User übertragen werden können.
 [ ] Neuer Installer
