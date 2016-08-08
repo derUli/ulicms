@@ -10,7 +10,10 @@
 	border-top:none;
 }
 
-#navigation, 
-#main{
-	padding-top:20px;	
+#navigation{
+	padding-top:20px;
+}
+
+a.current-item{
+  font-weight:bold;
 }
