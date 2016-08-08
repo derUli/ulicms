@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title><?php echo Installer::getTitle();?> - <?php echo APPLICATION_TITLE;?> </title>
+<title><?php echo InstallerController::getTitle();?> - <?php echo APPLICATION_TITLE;?> </title>
 <link rel="stylesheet" type="text/css"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/href" href="media/style.css" />

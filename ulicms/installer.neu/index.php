@@ -1,7 +1,9 @@
 <?php
 include_once "controllers/installer_controller.php";
 
-InstallerController::loadLanguageFile ();
+$lang = InstallerController::getLanguage();
+
+InstallerController::loadLanguageFile ($lang);
 
 $step = InstallerController::getStep ();
 
