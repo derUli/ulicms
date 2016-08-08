@@ -17,3 +17,9 @@
 a.current-item{
   font-weight:bold;
 }
+
+
+#footer{
+	margin-top:10px;
+	text-align:center;
+}
