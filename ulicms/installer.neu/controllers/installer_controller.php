@@ -8,14 +8,29 @@ class InstallerController {
 		}
 		return $step;
 	}
+	public static function initSessionVars() {
+		$vars = array (
+				"mysql_user",
+				"mysql_host",
+				"mysql_password",
+				"mysql_database",
+				"language" 
+		);
+		foreach ( $vars as $var ) {
+			if (! isset ( $_SESSION [$var] )) {
+				$_SESSION [$var] = "";
+			}
+		}
+	}
 	public static function loadLanguageFile($lang) {
 		include_once "lang/" . $lang . ".php";
 		include_once "lang/all.php";
 	}
 	public static function getLanguage() {
-		if (isset ( $_SESSION ["language"] )) {
+		if (isset ( $_SESSION ["language"] ) and !empty($_SESSION["language"])) {
 			return basename ( $_SESSION ["language"] );
 		} else {
+			$_SESSION["language"] = "en";
 			return "en";
 		}
 	}

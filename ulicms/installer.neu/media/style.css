@@ -47,3 +47,10 @@ a.current-item {
 select {
 	width: 100%;
 }
+
+
+
+#loading, #error-message {
+	display: none;
+	margin-top:20px;
+}

@@ -1,6 +1,10 @@
 <?php
+session_start ();
+setcookie ( session_name (), session_id () );
+error_reporting ( E_ALL ^ E_NOTICE );
 include_once "controllers/installer_controller.php";
 
+InstallerController::initSessionVars ();
 $lang = InstallerController::getLanguage ();
 
 InstallerController::loadLanguageFile ( $lang );

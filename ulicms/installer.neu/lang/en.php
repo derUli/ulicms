@@ -15,3 +15,11 @@ define ( "TRANSLATION_CHMOD", "<p>Please chmod the following files to 0755.<br/>
 </p>" );
 define ( "TRANSLATION_PERMISSION", "Please set the file permissions like in this screenshot" );
 define ( "TRANSLATION_PERMISSIONS2", "FTP Permission changes" );
+define ( "TRANSLATION_MYSQL_HOST", "MySQL Host" );
+define ( "TRANSLATION_MYSQL_USER", "MySQL User" );
+define ( "TRANSLATION_MYSQL_PASSWORD", "MySQL Password" );
+define ( "TRANSLATION_MYSQL_DATABASE", "MySQL Database" );
+define ( "TRANSLATION_CONNECT", "Connect" );
+
+define ( "TRANSLATION_DB_CONNECTION_FAILED", "Can't connect to database server." );
+define ( "TRANSLATION_CANT_OPEN_SCHEMA", "Can't open database. No such scheme exists" );
