@@ -4,7 +4,7 @@
 <title><?php echo InstallerController::getTitle();?> - <?php echo APPLICATION_TITLE;?> </title>
 <link rel="stylesheet" type="text/css"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/href" href="media/style.css" />
+<link rel="stylesheet" type="text/css" href="media/style.css" />
 </head>
 <body>
 
@@ -19,7 +19,7 @@
 				</p>
 			</div>
 		</div>
-		<div class="row">
+		<div class="row" id="my-container">
 			<div class="col-sm-4" id="steps">
 				<ol id="navigation">
 				<?php for($i=1; $i <= 6; $i++){?>

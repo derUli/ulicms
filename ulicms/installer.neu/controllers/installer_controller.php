@@ -20,6 +20,10 @@ class InstallerController {
 		}
 	}
 	public static function getTitle() {
-		return constant ( "TRANLATION_TITLE_STEP_" . self::getStep () );
+		return constant ( "TRANSLATION_TITLE_STEP_" . self::getStep () );
+	}
+	public static function getFooter() {
+		$version = new ulicms_version ();
+		return "&copy; 2011 - " . $version->getReleaseYear () . " by <a href=\"http://www.ulicms.de\” target=\"_blank\">UliCMS</a>";
 	}
 }
