@@ -7,3 +7,6 @@
 </head>
 <body>
 	<div class="container">
+		<div class="row">
+			<div class="col-sm-4" id="steps">{List of Steps}</div>
+			<div class="col-sm-8" id="main">
