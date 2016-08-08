@@ -9,7 +9,7 @@ class InstallerController {
 		return $step;
 	}
 	public static function loadLanguageFile($lang) {
-		include_once "lang/$lang.php";
+		include_once "lang/" . $lang . ".php";
 		include_once "lang/all.php";
 	}
 	public static function getLanguage() {
