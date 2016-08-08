@@ -24,6 +24,6 @@ class InstallerController {
 	}
 	public static function getFooter() {
 		$version = new ulicms_version ();
-		return "&copy; 2011 - " . $version->getReleaseYear () . " by <a href=\"http://www.ulicms.de\” target=\"_blank\">UliCMS</a>";
+		return "&copy; 2011 - " . $version->getReleaseYear () . " by <a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS</a>";
 	}
 }

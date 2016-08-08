@@ -1,11 +1,15 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta name="viewport" content="width=device-width"/>
+<meta name="viewport" content="width=device-width" />
 <title><?php echo InstallerController::getTitle();?> - <?php echo APPLICATION_TITLE;?> </title>
 <link rel="stylesheet" type="text/css"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="media/style.css" />
+<link rel="stylesheet" type="text/css" href="media/css/select2.min.css" />
+</script>
+
+</script>
 </head>
 <body>
 
@@ -31,4 +35,4 @@
 </ol>
 			</div>
 			<div class="col-sm-8" id="main">
-<h1><?php echo InstallerController::getTitle();?></h1>
+				<h1><?php echo InstallerController::getTitle();?></h1>

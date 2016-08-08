@@ -1,41 +1,48 @@
-body{
+body {
 	font-family: "wf_SegoeUI", "Segoe UI", "Segoe", "Segoe WP", "Tahoma",
 		"Verdana", "Arial", "sans-serif";
-	background-color: rgb(246,245,250);
+	background-color: rgb(246, 245, 250);
 	font-size: 15px;
 }
 
 #header {
 	padding-top: 10px;
-	border:1px solid #b7b7b7;
+	border: 1px solid #b7b7b7;
 	border-top: none;
-	background-color:#60a8bd;
+	background-color: #60a8bd;
 }
 
-#my-container{
-	border:1px solid #b7b7b7;
-	border-top:none;
+#main {
+	padding-bottom: 30px;
 }
 
-#navigation{
-	padding-top:30px;
+#my-container {
+	border: 1px solid #b7b7b7;
+	border-top: none;
 }
 
-a.current-item{
-  font-weight:bold;
+#navigation {
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 
-
-#footer{
-	margin-top:10px;
-	text-align:center;
+a.current-item {
+	font-weight: bold;
 }
 
-#my-container{
-  background-color: white;
+#footer {
+	margin-top: 10px;
+	text-align: center;
 }
 
+#my-container {
+	background-color: white;
+}
 
-#navigation li{
-	margin-bottom:5px;
+#navigation li {
+	margin-bottom: 5px;
+}
+
+select {
+	width: 100%;
 }
