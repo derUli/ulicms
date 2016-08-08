@@ -11,7 +11,6 @@ $("form#database-login").on("submit", function(e) {
 		passwort : $("input[name='mysql_password']").val(),
 		datenbank : $("input[name='mysql_database']").val(),
 	}
-
 	$("#error-message").hide();
 	$.post("try_connect.php", data, function(text, status) {
 		$("#error-message").html(text);
@@ -22,7 +21,6 @@ $("form#database-login").on("submit", function(e) {
 			$("#loading").hide();
 			$("#error-message").slideDown();
 		}
-
 	});
 	$("form.show-loading-indicator-on-submit").on("submit", function(e) {
 		$("#loading").show();
