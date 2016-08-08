@@ -37,3 +37,8 @@ if (! in_array ( $_POST ["datenbank"], $databases )) {
 if ($select == false) {
 	die ( TRANSLATION_CANT_OPEN_SCHEMA );
 }
+
+$_SESSION ["mysql_host"] = $_POST ["servername"];
+$_SESSION ["mysql_user"] = $_POST ["loginname"];
+$_SESSION ["mysql_password"] = $_POST ["passwort"];
+$_SESSION ["mysql_database"] = $_POST ["datenbank"];

@@ -16,8 +16,7 @@ $("form#database-login").on("submit", function(e) {
 	$.post("try_connect.php", data, function(text, status) {
 		$("#error-message").html(text);
 		if (text.length <= 0) {
-			$("form#database-login").off('submit');
-			$("form#database-login").submit();
+			location.replace("index.php?step=4")
 			return true;
 		} else {
 			$("#loading").hide();
