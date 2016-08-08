@@ -2,7 +2,7 @@ body{
 	font-family: "wf_SegoeUI", "Segoe UI", "Segoe", "Segoe WP", "Tahoma",
 		"Verdana", "Arial", "sans-serif";
 	background-color: rgb(246,245,250);
-	font-size: 18px;
+	font-size: 15px;
 }
 
 #header {
@@ -18,7 +18,7 @@ body{
 }
 
 #navigation{
-	padding-top:20px;
+	padding-top:30px;
 }
 
 a.current-item{
@@ -33,4 +33,9 @@ a.current-item{
 
 #my-container{
   background-color: white;
+}
+
+
+#navigation li{
+	margin-bottom:5px;
 }
