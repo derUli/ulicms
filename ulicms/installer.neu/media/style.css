@@ -2,6 +2,7 @@ body{
 	font-family: "wf_SegoeUI", "Segoe UI", "Segoe", "Segoe WP", "Tahoma",
 		"Verdana", "Arial", "sans-serif";
 	background-color: rgb(246,245,250);
+	font-size: 18px;
 }
 
 #header {
