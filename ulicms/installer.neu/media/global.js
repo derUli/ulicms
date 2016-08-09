@@ -12,7 +12,7 @@ $("form#database-login").on("submit", function(e) {
 		datenbank : $("input[name='mysql_database']").val(),
 	}
 	$("#error-message").hide();
-	$.post("try_connect.php", data, function(text, status) {
+	$.post("index.php?submit_form=TryConnect", data, function(text, status) {
 		$("#error-message").html(text);
 		if (text.length <= 0) {
 			location.replace("index.php?step=4")

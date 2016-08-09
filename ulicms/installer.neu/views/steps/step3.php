@@ -28,7 +28,7 @@
 			value="<?php echo htmlspecialchars($_SESSION["mysql_database"]);?>"
 			required>
 	</div>
-
+	<input type="hidden" name="submit_form" value="TryConnect">
 	<button type="submit" class="btn btn-default"><?php echo TRANSLATION_CONNECT;?></button>
 	<div id="loading">
 		<img src="../admin/gfx/loading.gif" alt="Loading">

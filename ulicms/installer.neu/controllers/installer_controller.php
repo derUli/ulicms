@@ -41,4 +41,35 @@ class InstallerController {
 		$version = new ulicms_version ();
 		return "&copy; 2011 - " . $version->getReleaseYear () . " by <a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS</a>";
 	}
+	
+	public static function submitTryConnect(){
+		@$connection = mysqli_connect ( $_POST ["servername"], $_POST ["loginname"], $_POST ["passwort"] );
+		if ($connection == false) {
+			die ( TRANSLATION_DB_CONNECTION_FAILED );
+		}
+		
+		// Check if database is present else try to create it.
+		$query = mysqli_query ( $connection, "SHOW DATABASES" );
+		$databases = array ();
+		while ( $row = mysqli_fetch_array ( $query ) ) {
+			$databases [] = $row [0];
+		}
+		
+		if (! in_array ( $_POST ["datenbank"], $databases )) {
+			// Try to create database if it not exists
+			mysqli_query ( $connection, "CREATE DATABASE " . mysqli_real_escape_string ( $connection, $_POST ["datenbank"] ) );
+		}
+		
+		@$select = mysqli_select_db ( $connection, $_POST ["datenbank"] );
+		
+		if ($select == false) {
+			die ( TRANSLATION_CANT_OPEN_SCHEMA );
+		}
+		
+		$_SESSION ["mysql_host"] = $_POST ["servername"];
+		$_SESSION ["mysql_user"] = $_POST ["loginname"];
+		$_SESSION ["mysql_password"] = $_POST ["passwort"];
+		$_SESSION ["mysql_database"] = $_POST ["datenbank"];
+		
+	}
 }
