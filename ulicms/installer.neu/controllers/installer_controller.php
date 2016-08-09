@@ -20,7 +20,8 @@ class InstallerController {
 				"admin_user",
 				"admin_email",
 				"admin_lastname",
-				"admin_firstname" 
+				"admin_firstname",
+				"install_demodata"
 		);
 		foreach ( $vars as $var ) {
 			if (! isset ( $_SESSION [$var] )) {
