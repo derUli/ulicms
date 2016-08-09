@@ -29,3 +29,4 @@ define ( "TRANSLATION_ADMIN_PASSWORD_REPEAT", "Admin Password (repeat)" );
 define ( "TRANSLATION_ADMIN_FIRSTNAME", "Vorname" );
 define ( "TRANSLATION_ADMIN_LASTNAME", "Nachname" );
 define ( "TRANSLATION_APPLY", "Apply" );
+define ( "TRANSLATION_ADMIN_EMAIL", "E-Mail Adresse" );

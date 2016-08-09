@@ -3,13 +3,15 @@
 	<div class="form-group">
 		<label for="text"><?php echo TRANSLATION_MYSQL_HOST;?></label> <input
 			type="text" class="form-control" name="mysql_host" id="mysql_host"
-			value="<?php echo htmlspecialchars($_SESSION["mysql_host"]);?>">
+			value="<?php echo htmlspecialchars($_SESSION["mysql_host"]);?>"
+			required>
 	</div>
 
 	<div class="form-group">
 		<label for="text"><?php echo TRANSLATION_MYSQL_USER;?></label> <input
 			type="text" class="form-control" name="mysql_user" id="mysql_user"
-			value="<?php echo htmlspecialchars($_SESSION["mysql_user"]);?>">
+			value="<?php echo htmlspecialchars($_SESSION["mysql_user"]);?>"
+			required>
 	</div>
 
 	<div class="form-group">
@@ -23,7 +25,8 @@
 		<label for="text"><?php echo TRANSLATION_MYSQL_DATABASE;?></label> <input
 			type="text" name="mysql_database" class="form-control"
 			id="mysql_database"
-			value="<?php echo htmlspecialchars($_SESSION["mysql_database"]);?>">
+			value="<?php echo htmlspecialchars($_SESSION["mysql_database"]);?>"
+			required>
 	</div>
 
 	<button type="submit" class="btn btn-default"><?php echo TRANSLATION_CONNECT;?></button>
