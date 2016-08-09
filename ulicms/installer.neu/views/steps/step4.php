@@ -1,5 +1,5 @@
 <form role="form" id="admin-login" method="post"
-	action="index.php?step=5">
+	action="index.php?submit_form=AdminData">
 	<div class="form-group">
 		<label for="text"><?php echo TRANSLATION_ADMIN_USER;?></label> <input
 			type="text" class="form-control" name="admin_user" id="admin_user"
