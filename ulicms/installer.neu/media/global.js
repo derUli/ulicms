@@ -28,3 +28,18 @@ $("form#database-login").on("submit", function(e) {
 	});
 
 });
+
+$("form#admin-login").on("submit", function(e) {
+	e.preventDefault();
+	var pass1 = $("#admin_password").val();
+	var pass2 = $("#admin_password_repeat").val();
+	if (pass1 == "") {
+		alert("Password can not be empty.");
+	}
+
+	else if (pass1 != pass2) {
+		alert("Passwords are not equal.");
+	} else {
+		$("form#admin-login").off("submit");
+	}
+});

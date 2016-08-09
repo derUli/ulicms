@@ -1,5 +1,5 @@
 Todo für Feature "Installer":
-[ ] Password Wiederholung prüfen
+[X] Password Wiederholung prüfen
 [ ] Seite "Select optional Components" erstellen
 [ ] Seite "Install" erstellen
 [ ] Installationsroutine
