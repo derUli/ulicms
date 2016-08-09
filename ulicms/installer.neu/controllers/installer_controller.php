@@ -96,4 +96,13 @@ class InstallerController {
 		$_SESSION ["mysql_database"] = $_POST ["datenbank"];
 		$_SESSION ["mysql_prefix"] = $_POST ["mysql_prefix"];
 	}
+	public static function submitDemodata() {
+		if (isset ( $_REQUEST ["install_demodata"] )) {
+			$_SESSION ["install_demodata"] = "yes";
+		} else {
+			$_SESSION ["install_demodata"] = "";
+		}
+		header("Location: index.php?step=6");
+	}
 }
+

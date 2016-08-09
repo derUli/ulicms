@@ -31,3 +31,4 @@ define ( "TRANSLATION_ADMIN_LASTNAME", "Lastname" );
 define ( "TRANSLATION_APPLY", "Apply" );
 define ( "TRANSLATION_ADMIN_EMAIL", "E-Mail Address" );
 define ( "TRANSLATION_MYSQL_PREFIX", "MySQL Prefix" );
+define ( "TRANSLATION_INSTALL_DEMO_DATA", "Install additional Demo Data" );
