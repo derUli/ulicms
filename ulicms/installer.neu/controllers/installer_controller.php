@@ -102,7 +102,7 @@ class InstallerController {
 		} else {
 			$_SESSION ["install_demodata"] = "";
 		}
-		header("Location: index.php?step=6");
+		header ( "Location: index.php?step=6" );
 	}
 }
 
