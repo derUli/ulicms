@@ -10,6 +10,7 @@ $("form#database-login").on("submit", function(e) {
 		loginname : $("input[name='mysql_user']").val(),
 		passwort : $("input[name='mysql_password']").val(),
 		datenbank : $("input[name='mysql_database']").val(),
+		mysql_prefix : $("input[name='mysql_prefix']").val()
 	}
 	$("#error-message").hide();
 	$.post("index.php?submit_form=TryConnect", data, function(text, status) {

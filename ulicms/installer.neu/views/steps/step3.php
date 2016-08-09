@@ -28,6 +28,15 @@
 			value="<?php echo htmlspecialchars($_SESSION["mysql_database"]);?>"
 			required>
 	</div>
+
+
+	<div class="form-group">
+		<label for="text"><?php echo TRANSLATION_MYSQL_PREFIX;?></label> <input
+			type="text" name="mysql_prefix" class="form-control"
+			id="mysql_prefix"
+			value="<?php echo htmlspecialchars($_SESSION["mysql_prefix"]);?>">
+	</div>
+
 	<input type="hidden" name="submit_form" value="TryConnect">
 	<button type="submit" class="btn btn-default"><?php echo TRANSLATION_CONNECT;?></button>
 	<div id="loading">

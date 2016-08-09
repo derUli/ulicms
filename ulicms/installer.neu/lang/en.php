@@ -26,7 +26,8 @@ define ( "TRANSLATION_CANT_OPEN_SCHEMA", "Can't open database. No such scheme ex
 define ( "TRANSLATION_ADMIN_USER", "Admin Username" );
 define ( "TRANSLATION_ADMIN_PASSWORD", "Admin Password" );
 define ( "TRANSLATION_ADMIN_PASSWORD_REPEAT", "Admin Password (repeat)" );
-define ( "TRANSLATION_ADMIN_FIRSTNAME", "Vorname" );
-define ( "TRANSLATION_ADMIN_LASTNAME", "Nachname" );
+define ( "TRANSLATION_ADMIN_FIRSTNAME", "Firstname" );
+define ( "TRANSLATION_ADMIN_LASTNAME", "Lastname" );
 define ( "TRANSLATION_APPLY", "Apply" );
-define ( "TRANSLATION_ADMIN_EMAIL", "E-Mail Adresse" );
+define ( "TRANSLATION_ADMIN_EMAIL", "E-Mail Address" );
+define ( "TRANSLATION_MYSQL_PREFIX", "MySQL Prefix" );

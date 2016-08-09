@@ -14,11 +14,28 @@ class InstallerController {
 				"mysql_host",
 				"mysql_password",
 				"mysql_database",
-				"language"
+				"mysql_prefix",
+				"language",
+				"admin_password",
+				"admin_user",
+				"admin_email",
+				"admin_lastname",
+				"admin_firstname" 
 		);
 		foreach ( $vars as $var ) {
 			if (! isset ( $_SESSION [$var] )) {
 				$_SESSION [$var] = "";
+				switch ($var) {
+					case "mysql_host" :
+						$_SESSION [$var] = "localhost";
+						break;
+					case "mysql_prefix" :
+						$_SESSION [$var] = "ulicms_";
+						break;
+					case "admin_user" :
+						$_SESSION [$var] = "admin";
+						break;
+				}
 			}
 		}
 	}
@@ -54,28 +71,29 @@ class InstallerController {
 		if ($connection == false) {
 			die ( TRANSLATION_DB_CONNECTION_FAILED );
 		}
-
+		
 		// Check if database is present else try to create it.
 		$query = mysqli_query ( $connection, "SHOW DATABASES" );
 		$databases = array ();
 		while ( $row = mysqli_fetch_array ( $query ) ) {
 			$databases [] = $row [0];
 		}
-
+		
 		if (! in_array ( $_POST ["datenbank"], $databases )) {
 			// Try to create database if it not exists
 			mysqli_query ( $connection, "CREATE DATABASE " . mysqli_real_escape_string ( $connection, $_POST ["datenbank"] ) );
 		}
-
+		
 		@$select = mysqli_select_db ( $connection, $_POST ["datenbank"] );
-
+		
 		if ($select == false) {
 			die ( TRANSLATION_CANT_OPEN_SCHEMA );
 		}
-
+		
 		$_SESSION ["mysql_host"] = $_POST ["servername"];
 		$_SESSION ["mysql_user"] = $_POST ["loginname"];
 		$_SESSION ["mysql_password"] = $_POST ["passwort"];
 		$_SESSION ["mysql_database"] = $_POST ["datenbank"];
+		$_SESSION ["mysql_prefix"] = $_POST ["mysql_prefix"];
 	}
 }
