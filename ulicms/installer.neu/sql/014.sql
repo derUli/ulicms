@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `{prefix}history" . "` (
+CREATE TABLE IF NOT EXISTS `{prefix}history` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
 `content_id` int(11) NOT NULL,
 `content` longtext NOT NULL,
