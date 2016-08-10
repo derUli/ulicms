@@ -100,6 +100,36 @@ class InstallerController {
 		$_SESSION ["mysql_database"] = $_POST ["datenbank"];
 		$_SESSION ["mysql_prefix"] = $_POST ["mysql_prefix"];
 	}
+	public static function submitInstall() {
+		if (! isset ( $_SESSION ["install_index"] )) {
+			$_SESSION ["install_index"] = 0;
+		}
+		$files = array ();
+		foreach ( glob ( "sql/*.sql" ) as $file ) {
+			$files [] = $file;
+		}
+		if (! empty ( $_SESSION ["install_demodata"] )) {
+			$files [] = "sql/opt/democontent.full.sql";
+		} else {
+			$files [] = "sql/opt/democontent.min.sql";
+		}
+		$onefile = 100 / floatval ( count ( $files ) );
+		$currentPercent = floatval ( $_SESSION ["install_index"] ) * $onefile;
+		
+		if ($_SESSION ["install_index"] + 1 == count ( $files )) {
+			echo "finish";
+		} else {
+			$sql_file = $files [$_SESSION ["install_index"]];
+			// @TODO Datenbankverbindung aufbauen und SQL-Script $sql_file ausführen
+			$str = TRANSLATION_INSTALL_X_OF_Y;
+			$str = str_ireplace ( "%x%", $_SESSION ["install_index"] + 1, $str );
+			$str = str_ireplace ( "%y%", count ( $files ), $str );
+			
+			echo '<div style="background-color:green;height:50px; width:' . $currentPercent . '%"></div>';
+			echo "<div class='info-text-progress'>" . $str . "</div>";
+			$_SESSION ["install_index"] += 1;
+		}
+	}
 	public static function submitDemodata() {
 		if (isset ( $_REQUEST ["install_demodata"] )) {
 			$_SESSION ["install_demodata"] = "yes";
