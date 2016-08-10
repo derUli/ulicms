@@ -1,1 +1,1 @@
-INSERT INTO {prefix}categories` (name) VALUES('Allgemein');
+INSERT INTO `{prefix}categories` (name) VALUES('Allgemein');

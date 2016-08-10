@@ -131,12 +131,34 @@ class InstallerController {
 			
 			// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 			mysqli_query ( $connection, "SET SESSION sql_mode = '';" );
-			$script = file_get_contents ( $sql_file );
-			$script = str_replace ( "{prefix}", $_SESSION ["mysql_prefix"], $script );
-			// @TODO weitere Platzhalter ersetzen
 			
-			$salt = uniqid ();
-			$password = hash ( "sha512", $salt . $_SESSION ["admin_password"] );
+			if (! isset ( $_SESSION ["salt"] )) {
+				$salt = uniqid ();
+				$_SESSION ["salt"] = $salt;
+			}
+			if (! isset ( $_SESSION ["encrypted_password"] )) {
+				$_SESSION ["encrypted_password"] = hash ( "sha512", $salt . $_SESSION ["admin_password"] );
+			}
+			
+			$script = file_get_contents ( $sql_file );
+			$prefix = mysqli_real_escape_string ( $connection, $_SESSION ["mysql_prefix"] );
+			$language = mysqli_real_escape_string ( $connection, $_SESSION ["language"] );
+			$admin_user = mysqli_real_escape_string ( $connection, $_SESSION ["admin_user"] );
+			$encrypted_password = mysqli_real_escape_string ( $connection, $_SESSION ["encrypted_password"] );
+			$admin_lastname = mysqli_real_escape_string ( $connection, $_SESSION ["admin_lastname"] );
+			$admin_firstname = mysqli_real_escape_string ( $connection, $_SESSION ["admin_firstname"] );
+			$admin_email = mysqli_real_escape_string ( $connection, $_SESSION ["admin_email"] );
+			$salt = $_SESSION ["salt"];
+			$script = str_ireplace ( "{prefix}", $prefix, $script );
+			$script = str_ireplace ( "{language}", $language, $script );
+			$script = str_ireplace ( "{admin_user}", $admin_user, $script );
+			$script = str_ireplace ( "{enrypted_password}", $encrypted_password, $script );
+			$script = str_ireplace ( "{salt}", $salt, $script );
+			$script = str_ireplace ( "{admin_lastname}", $admin_lastname, $script );
+			$script = str_ireplace ( "{admin_firstname}", $admin_firstname, $script );
+			$script = str_ireplace ( "{admin_email}", $admin_email, $script );
+			
+			var_dump ( $script );
 			echo '<!--ok--><div style="background-color:green;height:50px; width:' . $currentPercent . '%"></div>';
 			echo "<div class='info-text-progress'>" . $str . "</div>";
 			
