@@ -120,13 +120,26 @@ class InstallerController {
 			echo "finish";
 		} else {
 			$sql_file = $files [$_SESSION ["install_index"]];
-			// @TODO Datenbankverbindung aufbauen und SQL-Script $sql_file ausführen
 			$str = TRANSLATION_INSTALL_X_OF_Y;
 			$str = str_ireplace ( "%x%", $_SESSION ["install_index"] + 1, $str );
 			$str = str_ireplace ( "%y%", count ( $files ), $str );
+			@$connection = mysqli_connect ( $_SESSION ["mysql_host"], $_SESSION ["mysql_user"], $_SESSION ["mysql_password"] ) or die ( TRANSLATION_DB_CONNECTION_FAILED );
+			if (! mysqli_select_db ( $connection, $_SESSION ["mysql_database"] )) {
+				die ( TRANSLATION_CANT_OPEN_SCHEMA );
+			}
+			mysqli_query ( $connection, "SET NAMES 'utf8'" ) or die ( mysqli_error ( $connection ) );
 			
-			echo '<div style="background-color:green;height:50px; width:' . $currentPercent . '%"></div>';
+			// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
+			mysqli_query ( $connection, "SET SESSION sql_mode = '';" );
+			$script = file_get_contents ( $sql_file );
+			$script = str_replace ( "{prefix}", $_SESSION ["mysql_prefix"], $script );
+			// @TODO weitere Platzhalter ersetzen
+			
+			$salt = uniqid ();
+			$password = hash ( "sha512", $salt . $_SESSION ["admin_password"] );
+			echo '<!--ok--><div style="background-color:green;height:50px; width:' . $currentPercent . '%"></div>';
 			echo "<div class='info-text-progress'>" . $str . "</div>";
+			
 			$_SESSION ["install_index"] += 1;
 		}
 	}
