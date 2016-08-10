@@ -148,7 +148,7 @@ class InstallerController {
 			$admin_lastname = mysqli_real_escape_string ( $connection, $_SESSION ["admin_lastname"] );
 			$admin_firstname = mysqli_real_escape_string ( $connection, $_SESSION ["admin_firstname"] );
 			$admin_email = mysqli_real_escape_string ( $connection, $_SESSION ["admin_email"] );
-			$salt = $_SESSION ["salt"];
+			$salt = mysqli_real_escape_string ( $connection, $_SESSION ["salt"] );
 			$script = str_ireplace ( "{prefix}", $prefix, $script );
 			$script = str_ireplace ( "{language}", $language, $script );
 			$script = str_ireplace ( "{admin_user}", $admin_user, $script );
@@ -157,9 +157,8 @@ class InstallerController {
 			$script = str_ireplace ( "{admin_lastname}", $admin_lastname, $script );
 			$script = str_ireplace ( "{admin_firstname}", $admin_firstname, $script );
 			$script = str_ireplace ( "{admin_email}", $admin_email, $script );
-			
-			var_dump ( $script );
-			echo '<!--ok--><div style="background-color:green;height:50px; width:' . $currentPercent . '%"></div>';
+			mysqli_query ( $connection, $script );
+			echo '<!--ok--><div style="background-color:green;height:50px; width:' . intval ( $currentPercent ) . '%"></div>';
 			echo "<div class='info-text-progress'>" . $str . "</div>";
 			
 			$_SESSION ["install_index"] += 1;

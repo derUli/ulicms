@@ -6,7 +6,6 @@
 <link rel="stylesheet" type="text/css"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="media/style.css" />
-<link rel="stylesheet" type="text/css" href="media/css/select2.min.css" />
 </script>
 
 </script>
