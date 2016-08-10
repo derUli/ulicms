@@ -5,6 +5,14 @@ error_reporting ( E_ALL ^ E_NOTICE );
 include_once "controllers/installer_controller.php";
 
 InstallerController::initSessionVars ();
+if (isset ( $_GET ["language"] )) {
+	$languages = array (
+			"en" 
+	);
+	if (in_array ( $_GET ["language"], $languages )) {
+		$_SESSION ["language"] = $_GET ["language"];
+	}
+}
 $lang = InstallerController::getLanguage ();
 
 InstallerController::loadLanguageFile ( $lang );
