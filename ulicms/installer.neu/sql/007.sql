@@ -40,6 +40,6 @@ CREATE TABLE IF NOT EXISTS `{prefix}content` (
 `text_position` varchar(10) default 'before',
 `approved` tinyint(1) NOT NULL DEFAULT '1',
 `image_url` text default null,
-show_headline tinyint(1) NOT NULL DEFAULT '1',
+`show_headline` tinyint(1) NOT NULL DEFAULT '1',
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
