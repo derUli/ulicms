@@ -2,7 +2,7 @@ Todo für Feature "Installer":
 [X] Password Wiederholung prüfen
 [X] Seite "Select optional Components" erstellen
 [ ] Installationsroutine
-[ ] SQL Scripts anlegen
+[X] SQL Scripts anlegen
 [ ] Seite „Create config file anlegen“
 [ ] Progressbar
 [ ] Hinweis auf Löschen des installer-Ordners anzeigen
