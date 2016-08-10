@@ -5,7 +5,9 @@ define ( "TRANSLATION_TITLE_STEP_2", "Change File Permissions" );
 define ( "TRANSLATION_TITLE_STEP_3", "Connect to Database" );
 define ( "TRANSLATION_TITLE_STEP_4", "Create Administrator account" );
 define ( "TRANSLATION_TITLE_STEP_5", "Select optional Components" );
-define ( "TRANSLATION_TITLE_STEP_6", "Install" );
+define ( "TRANSLATION_TITLE_STEP_6", "Build Database" );
+define ( "TRANSLATION_TITLE_STEP_7", "Create Config File" );
+define ( "TRANSLATION_TITLE_STEP_8", "Remove Installer Folder" );
 define ( "TRANSLATION_SELECT_LANGUAGE", "Please select your language." );
 define ( "TRANSLATION_FOLLOW_INSTRUCTIONS", "Please follow instructions, to install UliCMS on this Server." );
 define ( "TRANSLATION_CHMOD", "<p>Please chmod the following files to 0755.<br/>
