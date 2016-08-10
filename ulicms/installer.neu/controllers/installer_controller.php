@@ -21,12 +21,15 @@ class InstallerController {
 				"admin_email",
 				"admin_lastname",
 				"admin_firstname",
-				"install_demodata"
+				"install_demodata" 
 		);
 		foreach ( $vars as $var ) {
 			if (! isset ( $_SESSION [$var] )) {
 				$_SESSION [$var] = "";
 				switch ($var) {
+					case "install_demodata" :
+						$_SESSION [$var] = "yes";
+						break;
 					case "mysql_host" :
 						$_SESSION [$var] = "localhost";
 						break;
