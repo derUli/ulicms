@@ -32,4 +32,4 @@ define ( "TRANSLATION_APPLY", "Apply" );
 define ( "TRANSLATION_ADMIN_EMAIL", "E-Mail Address" );
 define ( "TRANSLATION_MYSQL_PREFIX", "MySQL Prefix" );
 define ( "TRANSLATION_INSTALL_DEMO_DATA", "Install additional Demo Data" );
-define ( "TRANSLATION_INSTALL_X_OF_Y", "Install %x% of %y%" );
+define ( "TRANSLATION_INSTALL_X_OF_Y", "Install File %x% of %y%" );
