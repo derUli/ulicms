@@ -118,7 +118,7 @@ class InstallerController {
 		
 		if ($_SESSION ["install_index"] == count ( $files )) {
 			$str = TRANSLATION_INSTALL_X_OF_Y;
-			$str = str_ireplace ( "%x%", $_SESSION ["install_index"] + 1, $str );
+			$str = str_ireplace ( "%x%", $_SESSION ["install_index"], $str );
 			$str = str_ireplace ( "%y%", count ( $files ), $str );
 			echo '<!--finish--><div style="background-color:green;height:50px; width:' . intval ( 100 ) . '%"></div>';
 			echo "<div class='info-text-progress'>" . $str . "</div>";
