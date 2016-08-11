@@ -63,4 +63,4 @@ pills'),
 (51, 'locale_de', 'de_DE.UTF-8; de_DE; deu_deu'),
 (52, 'locale_en', 'en_US.UTF-8; en_GB.UTF-8; en_US; en_GB; english-uk; eng; uk'),
 (53, 'session_timeout', '60'),
-(54, 'og_type', 'article');"
+(54, 'og_type', 'article');

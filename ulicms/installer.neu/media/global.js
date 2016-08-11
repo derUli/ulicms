@@ -2,6 +2,8 @@ $.ajaxSetup({
 	cache : false
 });
 
+progress_indicator_html = '<img src="../admin/gfx/loading.gif" alt="Loading">';
+
 $("select#language").change(function() {
 	var language = $("select#language").val();
 	window.location.replace("index.php?step=1&language=" + language);
@@ -39,8 +41,11 @@ String.prototype.contains = function(it) {
 
 function installNextDBScript() {
 	$.post("index.php?submit_form=Install", function(text, status) {
-		if (text == "finish") {
-			location.replace("index.php?step=7");
+		if (text.contains("<!--finish-->")) {
+			$("form#setup-database").html(text);
+			setTimeout(function() {
+				location.replace("index.php?step=7");
+			}, 500);
 		} else if (text.contains("<!--ok-->")) {
 			$("form#setup-database").html(text);
 			installNextDBScript();
@@ -52,7 +57,20 @@ function installNextDBScript() {
 
 $("form#setup-database").on("submit", function(e) {
 	e.preventDefault();
+	$("form#setup-database").html(progress_indicator_html);
 	installNextDBScript();
+});
+
+$("form#create-cms-config").on("submit", function(e) {
+	e.preventDefault();
+	$("form#create-cms-config").html(progress_indicator_html);
+	$.post("index.php?submit_form=CreateConfig", function(text, status) {
+		if (text.contains("<!--ok-->")) {
+			location.replace("index.php?step=8");
+		} else {
+			$("form#create-cms-config").html(text);
+		}
+	});
 });
 
 $("form#admin-login").on("submit", function(e) {

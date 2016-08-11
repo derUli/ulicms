@@ -117,7 +117,12 @@ class InstallerController {
 		$currentPercent = floatval ( $_SESSION ["install_index"] ) * $onefile;
 		
 		if ($_SESSION ["install_index"] + 1 == count ( $files )) {
-			echo "finish";
+			
+			$str = TRANSLATION_INSTALL_X_OF_Y;
+			$str = str_ireplace ( "%x%", $_SESSION ["install_index"] + 1, $str );
+			$str = str_ireplace ( "%y%", count ( $files ), $str );
+			echo '<!--finish--><div style="background-color:green;height:50px; width:' . intval ( 100 ) . '%"></div>';
+			echo "<div class='info-text-progress'>" . $str . "</div>";
 		} else {
 			$sql_file = $files [$_SESSION ["install_index"]];
 			$str = TRANSLATION_INSTALL_X_OF_Y;
@@ -137,7 +142,7 @@ class InstallerController {
 				$_SESSION ["salt"] = $salt;
 			}
 			if (! isset ( $_SESSION ["encrypted_password"] )) {
-				$_SESSION ["encrypted_password"] = hash ( "sha512", $salt . $_SESSION ["admin_password"] );
+				$_SESSION ["encrypted_password"] = hash ( "sha512", $_SESSION ["salt"] . $_SESSION ["admin_password"] );
 			}
 			
 			$script = file_get_contents ( $sql_file );
@@ -162,6 +167,23 @@ class InstallerController {
 			echo "<div class='info-text-progress'>" . $str . "</div>";
 			
 			$_SESSION ["install_index"] += 1;
+		}
+	}
+	public static function submitCreateConfig() {
+		$template_path = "templates/cms-config.tpl";
+		$content = file_get_contents ( $template_path );
+		$content = str_replace ( "{prefix}", $_SESSION ["mysql_prefix"], $content );
+		$content = str_replace ( "{mysql_host}", $_SESSION ["mysql_host"], $content );
+		$content = str_replace ( "{mysql_user}", $_SESSION ["mysql_user"], $content );
+		$content = str_replace ( "{mysql_password}", $_SESSION ["mysql_password"], $content );
+		$content = str_replace ( "{mysql_database}", $_SESSION ["mysql_database"], $content );
+		$filled_file = "../cms-config.php";
+		
+		if (file_put_contents ( $filled_file, $content )) {
+			echo "<!--ok-->";
+		} else {
+			echo "<!--failed-->" . TRANSLATION_WRITE_CMS_CONFIG_FAILED;
+			echo "<p><textarea rows=10 class=\"form-control\" readonly>" . htmlspecialchars ( $content ) . "</textarea></p>";
 		}
 	}
 	public static function submitDemodata() {
