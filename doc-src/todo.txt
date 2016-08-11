@@ -7,3 +7,4 @@
 [X] Progressbar
 [ ] Hinweis auf Löschen des installer-Ordners anzeigen
 [ ] Deutsche Sprachdatei erstellen
+[ ] Neues Bootstrap basiertes Theme theme-2017
