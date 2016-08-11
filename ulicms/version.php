@@ -5,9 +5,8 @@ if (! class_exists ( "ulicms_version" )) {
 			$this->version = "Vasengo Town";
 			$this->releaseYear = 2017;
 			$this->internalVersion = Array (
-					9,
-					8,
-					5 
+					2017,
+					1 
 			);
 			$this->update = "";
 			$this->developmentVersion = true;
