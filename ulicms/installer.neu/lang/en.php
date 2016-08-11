@@ -36,3 +36,4 @@ define ( "TRANSLATION_MYSQL_PREFIX", "MySQL Prefix" );
 define ( "TRANSLATION_INSTALL_DEMO_DATA", "Install additional Demo Data" );
 define ( "TRANSLATION_INSTALL_X_OF_Y", "Install File %x% of %y%" );
 define ( "TRANSLATION_BUILD_DATABASE", "Build Database" );
+define ( "TRANSLATION_CREATE_CMS_CONFIG_PHP", "Create cms-config.php" );
