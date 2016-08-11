@@ -116,8 +116,7 @@ class InstallerController {
 		$onefile = 100 / floatval ( count ( $files ) );
 		$currentPercent = floatval ( $_SESSION ["install_index"] ) * $onefile;
 		
-		if ($_SESSION ["install_index"] + 1 == count ( $files )) {
-			
+		if ($_SESSION ["install_index"] == count ( $files )) {
 			$str = TRANSLATION_INSTALL_X_OF_Y;
 			$str = str_ireplace ( "%x%", $_SESSION ["install_index"] + 1, $str );
 			$str = str_ireplace ( "%y%", count ( $files ), $str );
