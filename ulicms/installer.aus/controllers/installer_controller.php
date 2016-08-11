@@ -157,7 +157,7 @@ class InstallerController {
 			$script = str_ireplace ( "{prefix}", $prefix, $script );
 			$script = str_ireplace ( "{language}", $language, $script );
 			$script = str_ireplace ( "{admin_user}", $admin_user, $script );
-			$script = str_ireplace ( "{enrypted_password}", $encrypted_password, $script );
+			$script = str_ireplace ( "{encrypted_password}", $encrypted_password, $script );
 			$script = str_ireplace ( "{salt}", $salt, $script );
 			$script = str_ireplace ( "{admin_lastname}", $admin_lastname, $script );
 			$script = str_ireplace ( "{admin_firstname}", $admin_firstname, $script );
