@@ -38,3 +38,6 @@ define ( "TRANSLATION_INSTALL_X_OF_Y", "Install File %x% of %y%" );
 define ( "TRANSLATION_BUILD_DATABASE", "Build Database" );
 define ( "TRANSLATION_CREATE_CMS_CONFIG_PHP", "Create cms-config.php" );
 define ( "TRANSLATION_WRITE_CMS_CONFIG_FAILED", "Writing cms-config.php failed.<br/>" . "Please create cms-config.php manually and insert the following code:" );
+define ( "TRANSLATION_LAST_STEP", "This is the last step of the installation. Now, please delete the \"installer\" Folder from your web server.<br/>
+		Then you can login to UliCMS.<br/><br/>
+		<a href=\"../admin/\">Goto login</a>" );
