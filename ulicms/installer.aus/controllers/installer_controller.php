@@ -208,5 +208,9 @@ class InstallerController {
 			@rmdir ( $dir );
 		}
 	}
+	public static function submitLoginToBackend() {
+		@session_destroy();
+		header("Location: ../admin/");
+	}
 }
 
