@@ -209,8 +209,8 @@ class InstallerController {
 		}
 	}
 	public static function submitLoginToBackend() {
-		@session_destroy();
-		header("Location: ../admin/");
+		@session_destroy ();
+		header ( "Location: ../admin/" );
 	}
 }
 
