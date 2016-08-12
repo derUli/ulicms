@@ -22,7 +22,6 @@ define ( "TRANSLATION_MYSQL_USER", "MySQL User" );
 define ( "TRANSLATION_MYSQL_PASSWORD", "MySQL Password" );
 define ( "TRANSLATION_MYSQL_DATABASE", "MySQL Database" );
 define ( "TRANSLATION_CONNECT", "Connect" );
-
 define ( "TRANSLATION_DB_CONNECTION_FAILED", "Can't connect to database server." );
 define ( "TRANSLATION_CANT_OPEN_SCHEMA", "Can't open database. No such scheme exists" );
 define ( "TRANSLATION_ADMIN_USER", "Admin Username" );
