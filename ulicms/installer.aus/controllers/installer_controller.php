@@ -161,6 +161,8 @@ class InstallerController {
 			$script = str_ireplace ( "{admin_lastname}", $admin_lastname, $script );
 			$script = str_ireplace ( "{admin_firstname}", $admin_firstname, $script );
 			$script = str_ireplace ( "{admin_email}", $admin_email, $script );
+			$script = str_ireplace ( "{time}", time (), $script );
+			
 			mysqli_query ( $connection, $script );
 			echo '<!--ok--><div style="background-color:green;height:50px; width:' . intval ( $currentPercent ) . '%"></div>';
 			echo "<div class='info-text-progress'>" . $str . "</div>";
