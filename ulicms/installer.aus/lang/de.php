@@ -1,51 +1,42 @@
 <?php
-define ( "TRANSLATION_TITLE", "UliCMS Installation" );
-define ( "TRANSLATION_WELCOME", "Willkommen" );
-define ( "TRANSLATION_WELCOME2", "Willkommen zur Installation von UliCMS." );
-define ( "TRANSLATION_BETA_VERSION", "Das hier ist eine Vorab-Version von UliCMS.<br/>
-Das bedeutet, diese Version ist noch nicht 100-prozentig fertig und dient nur der Vorschau auf ein neues Release.<br/>
-Setzen Sie diese Version bitte nicht produktiv ein!" );
-define ( "TRANSLATION_FOLLOW_INSTRUCTIONS", "Folgen Sie den Anweisungen um das CMS auf Ihrem Server zu installieren." );
-define ( "TRANSLATION_CHMOD", "<p>Setzen Sie bitte vorher die Dateirechte der folgenden Dateien auf 0755.<br/>
+define ( "TRANSLATION_INSTALLATION", "Installation" );
+define ( "TRANSLATION_TITLE_STEP_1", "Sprache auswählen" );
+define ( "TRANSLATION_TITLE_STEP_2", "Dateiberechtigungen setzen" );
+define ( "TRANSLATION_TITLE_STEP_3", "Verbinden mit der Datenbank" );
+define ( "TRANSLATION_TITLE_STEP_4", "Administrator Account erstellen" );
+define ( "TRANSLATION_TITLE_STEP_5", "Optionale Komponenten auswählen" );
+define ( "TRANSLATION_TITLE_STEP_6", "Datenbank aufbauen" );
+define ( "TRANSLATION_TITLE_STEP_7", "Erstelle Konfigurationsdatei" );
+define ( "TRANSLATION_TITLE_STEP_8", "Installer Ordner löschen" );
+define ( "TRANSLATION_SELECT_LANGUAGE", "Bitte wählen Sie Ihre Sprache aus." );
+define ( "TRANSLATION_FOLLOW_INSTRUCTIONS", "Bitte folgen Sie den Anweisungen um UliCMS zu installieren" );
+define ( "TRANSLATION_CHMOD", "<p>Bitte setzen Sie die Berechtigungen der folgenden Dateien auf 0755.<br/>
 <ol>
-<li>Das Hauptverzeichnis des CMS (inklusive aller Dateien und Unterordner)</li>
+<li>Der Hauptordner von UliCMS und alle darin enthaltenen Dateien und Ordner</li>
 </ol>
 </p>" );
-define ( "TRANSLATION_PERMISSION", "So müssen die Berechtigungen gesetzt sein" );
-define ( "TRANSLATION_PERMISSIONS2", "FTP Rechtevergabe" );
-define ( "TRANSLATION_GD_MISSING", "<strong>php5-gd</strong> ist nicht installiert.<br/>Ohne <strong>php5-gd</strong> lässt sich UliCMS zwar installieren,<br/>Bitte installieren Sie dieses PHP-Modul und versuchen Sie es erneut." );
-define ( "TRANSLATION_MYSQLI_MISSING", "<strong>php5-mysqli</strong> ist nicht installiert.<br/>Bitte installieren Sie dieses PHP-Modul und versuchen Sie es erneut." );
-define ( "TRANSLATION_JSON_MISSING", "<strong>php5-json</strong> ist nicht installiert.<br/>Bitte installieren Sie zuerst php5-json und versuchen Sie es dann erneut." );
-define ( "TRANSLATION_NEXT", "Weiter" );
-define ( "TRANSLATION_MYSQL_LOGIN", "MySQL Logindaten" );
-define ( "TRANSLATION_MYSQL_LOGIN_HELP", "Bitte tragen Sie in das untere Formular die Logindaten für den MySQL-Server ein. Diese bekommen Sie von Ihrem Provider." );
-
-define ( "TRANSLATION_SERVERNAME", "Servername" );
-define ( "TRANSLATION_LOGINNAME", "Benutzername" );
-define ( "TRANSLATION_PASSWORD", "Passwort" );
-define ( "TRANSLATION_DATABASE_NAME", "Datenbankname" );
-define ( "TRANSLATION_PREFIX", "Prefix" );
-define ( "TRANSLATION_DB_CONNECTION_FAILED", "Die Verbindung mit dem MySQL-Datenbankserver konnte nicht hergestellt werden.<br/>Dies kann z.B. an einem falschen Passwort liegen. Wenn Sie sich sicher sind, dass das Passwort richtig ist, prüfen Sie ob der MySQL-Datenbankserver läuft und erreichbar ist." );
-define ( "TRANSLATION_CANT_OPEN_SCHEMA", "<p>Die Datenbank \"" . htmlspecialchars ( $_POST ["datenbank"] ) . "\" konnte nicht geöffnet werden.<br/>Eventuell müssen Sie die Datenbank vorher anlegen.</p>" );
-define ( "TRANSLATION_SUCCESSFULL_DB_CONNECT", "Die Verbindung mit dem Datenbankserver wurde erfolgreich hergestellt." );
-define ( "TRANSLATION_HOMEPAGE_SETTINGS", "Homepage Einstellungen" );
-define ( "TRANSLATION_HOMEPAGE_TITLE", "Titel der Homepage" );
-define ( "TRANSLATION_SITE_SLOGAN", "Motto" );
-define ( "TRANSLATION_YOUR_FIRSTNAME", "Ihr Vorname" );
-define ( "TRANSLATION_YOUR_LASTNAME", "Ihr Nachname" );
-define ( "TRANSLATION_YOUR_EMAIL_ADRESS", "Ihre E-Mail Adresse" );
-define ( "TRANSLATION_ADMIN_NAME", "Name des Adminaccounts" );
-define ( "TRANSLATION_ADMIN_PASSWORD", "Passwort des Adminaccounts" );
-define ( "TRANSLATION_DO_INSTALL", "Installieren" );
-define ( "TRANSLATION_INSTALLATION_FINISHED", "Installation beendet" );
-define ( "TRANSLATION_FIRST_LOGIN_HELP", 'Die Installation von UliCMS wurde erfolgreich beendet.<br/>Bitte löschen Sie nun aus Sicherheitsgründen den Ordner "installer" vom Server. Sie können sich nun <a href="../admin/">hier</a> mit Ihrem vorhin angegebenen Benutzernamen und Passwort einloggen.' );
-define ( "TRANSLATION_LOGIN_DATA_SENT_BY_MAIL", "Die Zugangsdaten wurden Ihnen per Mail geschickt." );
-define ( "TRANSLATION_LOGIN_DATA_NOT_SENT_BY_MAIL", "Die Zugangsdaten konnten Ihnen wegen einem technischen Problem nicht per E-Mail geschickt werden." );
-define ( "TRANSLATION_MAIL_MESSAGE_TITLE", "UliCMS Installation auf %domain%" );
-
-define ( "TRANSLATION_MAIL_MESSAGE_TEXT", "Hallo %person_name%!\n" . "Auf %domain% wurde UliCMS erfolgreich installiert\n\n" . "Die Zugangsdaten lauten:\n" . "Benutzername: %username%\n" . "Passwort: %password%\n\n" . "Den Adminbereich finden Sie, indem Sie an die URL hinter dem letzen / (Schrägstrich) ein /admin anhängen." );
-
-define ( "TRANSLATION_PHP_VERSION_TOO_LOW", "Auf dem Server läuft momentan PHP " . phpversion () . ".<br/>" . "Es wird jedoch empfohlen, dass Sie mindestens PHP " . REQUIRED_PHP_VERSION . " verwenden, da sonst einige Funktionalitäten von UliCMS nicht verfügbar sind." );
-
-define ( "TRANSLATION_VIEW_PASSWORD", "Passwort anzeigen" );
+define ( "TRANSLATION_PERMISSION", "Bitte setzen Sie die Dateiberechtigungen wie in diesem Screenshot" );
+define ( "TRANSLATION_PERMISSIONS2", "Geänderte FTP Berechtigungen" );
+define ( "TRANSLATION_MYSQL_HOST", "MySQL Host" );
+define ( "TRANSLATION_MYSQL_USER", "MySQL Benutzer" );
+define ( "TRANSLATION_MYSQL_PASSWORD", "MySQL Passwort" );
+define ( "TRANSLATION_MYSQL_DATABASE", "MySQL Datenbank" );
+define ( "TRANSLATION_CONNECT", "Verbinden" );
+define ( "TRANSLATION_DB_CONNECTION_FAILED", "Kann keine Verbindung mit der Datenbank herstellen." );
+define ( "TRANSLATION_CANT_OPEN_SCHEMA", "Kann keine Verbindung mit der Datenbank herstellen. Kein solches Datenbankschema existiert." );
+define ( "TRANSLATION_ADMIN_USER", "Admin Benutzername" );
+define ( "TRANSLATION_ADMIN_PASSWORD", "Admin Passwort" );
+define ( "TRANSLATION_ADMIN_PASSWORD_REPEAT", "Admin Passwort (Wiederholung)" );
+define ( "TRANSLATION_ADMIN_FIRSTNAME", "Vorname" );
+define ( "TRANSLATION_ADMIN_LASTNAME", "Nachname" );
+define ( "TRANSLATION_APPLY", "Übernehmen" );
+define ( "TRANSLATION_ADMIN_EMAIL", "E-Mail Adresse" );
+define ( "TRANSLATION_MYSQL_PREFIX", "MySQL Präfix" );
 define ( "TRANSLATION_INSTALL_DEMO_DATA", "Installiere zusätzliche Demodaten" );
+define ( "TRANSLATION_INSTALL_X_OF_Y", "Installiere Datei %x% von %y%" );
+define ( "TRANSLATION_BUILD_DATABASE", "Datenbank aufbauen" );
+define ( "TRANSLATION_CREATE_CMS_CONFIG_PHP", "Erstelle cms-config.php" );
+define ( "TRANSLATION_WRITE_CMS_CONFIG_FAILED", "Speichern der cms-config.php fehlgeschlagen.<br/>" . "Bitte erstellen Sie die Datei cms-config.php und fügen Sie den folgenden Code darin ein." );
+define ( "TRANSLATION_LAST_STEP", "Dies ist der letzte Schritt der Installation. Bitte löschen Sie den \"installer\" Ordner von ihrem Server.<br/>
+		Danach können Sie sich in UliCMS ausloggen..<br/><br/>
+		<a href=\"index.php?submit_form=LoginToBackend\">Gehe zur Anmeldung</a>" );
