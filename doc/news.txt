@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 2017.1 =====
+﻿===== Neues in UliCMS 9.8.5 =====
 
 Neue Features für Endanwender
 + update_manager auf Version 1.0.3 aktualisiert
