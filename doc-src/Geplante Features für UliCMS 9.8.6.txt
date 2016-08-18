@@ -1,2 +1,1 @@
 ﻿[ ] Beim Löschen eines Users sollen alle Datensätze des gelöschten Users  an einen anderen User übertragen werden können.
-[ ] Neuer Installer
