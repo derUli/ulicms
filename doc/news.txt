@@ -10,6 +10,9 @@ Neue Features für Endanwender
 + Inhaltstyp "Artikel" hinzugefügt
 + Neues Paketformat: SimpleInstall v2
 
+Performance
++ Kombinierte Stylesheets werden nun minified
+
 Neue Features für Entwickler
 + Prepared Statements
 + Funktion Database::dropTable() hinzugefügt
