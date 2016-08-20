@@ -2,7 +2,7 @@
 	src="<?php
 	
 echo getModulePath ( "slicknav" );
-	?>jquery.slicknav.min.js"></script>
+	?>jquery.slicknav.min.js" async></script>
 <link type="text/css"
 	href="<?php
 	
