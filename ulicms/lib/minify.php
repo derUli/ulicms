@@ -113,11 +113,19 @@ function getCombinedStylesheets() {
 	$output = trim ( $output );
 	
 	// Remove comments
-	$output = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $output);
+	$output = preg_replace ( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $output );
 	// Remove space after colons
-	$output = str_replace(': ', ':', $output);
+	$output = str_replace ( ': ', ':', $output );
 	// Remove whitespace
-	$output = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $output);
+	$output = str_replace ( array (
+			"\r\n",
+			"\r",
+			"\n",
+			"\t",
+			'  ',
+			'    ',
+			'    ' 
+	), '', $output );
 	
 	header ( "Content-Type: text/css" );
 	$len = mb_strlen ( $output, 'binary' );
