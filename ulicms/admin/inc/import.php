@@ -31,12 +31,7 @@ if (! $acl->hasPermission ( "import" )) {
 	}
 	
 	?>
-<h1>
-<?php
-	
-	echo TRANSLATION_JSON_IMPORT;
-	?>
-</h1>
+<h1><?php translate("json_import");	?></h1>
 <?php
 	
 	if (count ( $errors ) > 0) {
@@ -67,9 +62,7 @@ if (! $acl->hasPermission ( "import" )) {
 	if ($valid === false) {
 		?>
 <p class="ulicms_error">
-<?php
-		
-		echo TRANSLATION_NOT_A_JSON_FILE;
+<?php translate("not_ajson")
 		?>
 </p>
 <?php

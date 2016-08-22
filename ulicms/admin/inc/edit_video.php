@@ -31,10 +31,7 @@ if ($acl->hasPermission ( "videos" )) {
 		
 		echo htmlspecialchars ( $result->name );
 		?>"
-		maxlength=255 /> <br /> <br /> <strong><?php
-		
-		echo TRANSLATION_CATEGORY;
-		?>
+		maxlength=255 /> <br /> <br /> <strong><?php translate("category");	?>
 	</strong><br />
 	<?php
 		echo categories::getHTMLSelect ( $result->category_id );
@@ -92,7 +89,7 @@ if ($acl->hasPermission ( "videos" )) {
 		onclick="this.focus();this.select();" readonly> <br /> <br /> <input
 		type="submit" value="<?php
 		
-		translate ( "SAVE_CHANGES" );
+		translate ( "save_changes" );
 		?>">
 </form>
 <?php
