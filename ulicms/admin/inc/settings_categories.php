@@ -16,10 +16,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	
 	if ($acl->hasPermission ( "settings_simple" )) {
 		?>
-	<a href="index.php?action=settings_simple"><?php
-		
-		echo TRANSLATION_GENERAL_SETTINGS;
-		?>
+	<a href="index.php?action=settings_simple"><?php translate("general_settings");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -48,8 +45,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	if ($acl->hasPermission ( "cache" )) {
 		?>
 	<a href="index.php?action=cache&clear_cache=yes"><?php
-		
-		echo TRANSLATION_CLEAR_CACHE;
+		translate ( "clear_cache" );
 		?>
 	</a> <br /> <br />
 	<?php
@@ -69,8 +65,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	if ($acl->hasPermission ( "pkg_settings" )) {
 		?>
 	<a href="?action=pkg_settings"><?php
-		
-		echo TRANSLATION_PACKAGE_SOURCE;
+		translate ( "package_source" );
 		?>
 	</a> <br /> <br />
 	<?php
@@ -89,10 +84,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 
 	if ($acl->hasPermission ( "languages" )) {
 		?>
-	<a href="index.php?action=languages"><?php
-		
-		echo TRANSLATION_LANGUAGES;
-		?>
+	<a href="index.php?action=languages"><?php translate("languages");?>
 	</a> <br /> <br />
 	<?php
 	}

@@ -72,10 +72,7 @@
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
 
 		<div class="accordion-content">
-			<strong><?php
-			
-			echo TRANSLATION_LANGUAGE;
-			?>
+			<strong><?php translate("language");?>
 	</strong> <br /> <select name="language">
 	<?php
 			$languages = getAllLanguages ();

@@ -514,9 +514,9 @@ function meta_description($ipage = null) {
 function get_title($ipage = null, $headline = false) {
 	$status = check_status ();
 	if ($status == "404 Not Found") {
-		return TRANSLATION_PAGE_NOT_FOUND;
+		return get_translation("page_not_found")
 	} else if ($status == "403 Forbidden") {
-		return TRANSLATION_FORBIDDEN;
+		return get_translation ( "forbidden" );
 	}
 	
 	$ipage = db_escape ( $_GET ["seite"] );

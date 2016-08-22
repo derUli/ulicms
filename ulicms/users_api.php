@@ -45,14 +45,14 @@ function resetPassword($username, $length = 12) {
 	changePassword ( $new_pass, $uid );
 	
 	Database::query ( "UPDATE " . tbname ( "users" ) . " SET require_password_change = 1 where id = $uid" );
-	$message = TRANSLATION_RESET_PASSWORD_MAIL_BODY;
+	$message = get_translation ( "reset_password_mail_body" );
 	$message = str_replace ( "%host%", get_http_host (), $message );
 	$message = str_replace ( "%ip%", get_ip (), $message );
 	$message = str_replace ( "%password%", $new_pass, $message );
 	$message = str_replace ( "%username%", $user ["username"], $message );
 	
 	$headers = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=UTF-8";
-	@Mailer::send ( $user ["email"], TRANSLATION_RESET_PASSWORD_SUBJECT, $message, $headers );
+	@Mailer::send ( $user ["email"], get_translation ( "reset_password_subject" ), $message, $headers );
 	return true;
 }
 function getUserByName($name) {

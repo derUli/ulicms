@@ -149,10 +149,7 @@ $(window).load(function(){
 	translate ( "videos" );
 	?>
 </h1>
-<?php
-	
-	echo TRANSLATION_CATEGORY;
-	?>
+<?php translate("category");?>
 <?php
 
 	echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );

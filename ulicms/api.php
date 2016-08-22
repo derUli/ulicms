@@ -1496,7 +1496,7 @@ function getPageTitleByID($id) {
 		$row = db_fetch_object ( $query );
 		return $row->title;
 	} else {
-		return "[" . TRANSLATION_NONE . "]";
+		return "[" . get_translation ( "none" ) . "]";
 	}
 }
 

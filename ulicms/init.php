@@ -179,7 +179,7 @@ define ( "ONE_DAY_IN_SECONDS", 60 * 60 * 24 );
 global $actions;
 $actions = array ();
 function noperms() {
-	echo "<p class=\"ulicms_error\">" . TRANSLATION_NO_PERMISSIONS . "</p>";
+	echo "<p class=\"ulicms_error\">" . get_translation ( "no_permissions" ) . "</p>";
 	return false;
 }
 function startsWith($haystack, $needle, $case = true) {

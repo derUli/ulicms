@@ -48,10 +48,7 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 		echo " checked";
 	?>
 			onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $default_pkg_src?>');">
-		<label for="pkgsrc1"><?php
-	
-	echo TRANSLATION_OFFICIAL_PACKAGE_SOURCE;
-	?>
+		<label for="pkgsrc1"><?php translate("official_package_source");?>
 		</label><br> <input type="radio" id="pkgsrc2" name="radioButtonSRC"
 			<?php
 	
@@ -59,21 +56,16 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 		echo " checked";
 	?>
 			onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $local_pkg_dir_value?>');">
-		<label for="pkgsrc2"><?php
-	
-	echo TRANSLATION_FROM_FILESYSTEM;
-	?>
+		<label for="pkgsrc2"><?php translate("from_filesystem");?>
 		</label><br> <input type="radio" id="pkgsrc3" name="radioButtonSRC"
 			<?php
 	
-	if ($is_other)
+	if ($is_other) {
 		echo " checked";
+	}
 	?>
 			onclick="$('#sonstigePaketQuelle').slideDown();"> <label
-			for="pkgsrc3"><?php
-	
-	echo TRANSLATION_OTHER_PACKAGE_SOURCE;
-	?>
+			for="pkgsrc3"><?php translate("other_package_source");?>
 		</label><br>
 		<div id="sonstigePaketQuelle"
 			<?php

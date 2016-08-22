@@ -8,22 +8,13 @@ if (defined ( "_SECURITY" )) {
 		if (file_exists ( "../update.php" )) {
 			?>
 <p>
-	<a href="../update.php"><?php
-			
-			echo TRANSLATION_RUN_UPDATE;
-			?></a>
+	<a href="../update.php"><?php translate("run_update");?></a>
 </p>
-<?php
-			
-			echo TRANSLATION_UPDATE_NOTICE;
-			?>
+<?php translate("update_notice");?>
 	<?php
 		} else {
 			?>
-			<?php
-			
-			echo TRANSLATION_UPDATE_INFORMATION_TEXT;
-			?>
+			<?php translate("update_information_text");	?>
 <p>
 
 <?php

@@ -17,9 +17,9 @@ class categories {
 		$html = "<select name='" . $name . "' id='category' size='1'>";
 		if ($allowNull) {
 			if ($default == 0)
-				$html .= "<option value='0' selected='selected' >[" . TRANSLATION_EVERY . "]</option>";
+				$html .= "<option value='0' selected='selected' >[" . get_translation ( "every" ) . "]</option>";
 			else
-				$html .= "<option value='0'>[" . TRANSLATION_EVERY . "]</option>";
+				$html .= "<option value='0'>[" . get_translation ( "every" ) . "]</option>";
 		}
 		foreach ( $lst as $cat ) {
 			if ($cat ["id"] == $default)

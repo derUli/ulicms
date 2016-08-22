@@ -32,10 +32,7 @@ if (defined ( "_SECURITY" )) {
 		
 		?>
 <h1>
-<?php
-		
-		echo TRANSLATION_MOTTO;
-		?>
+<?php translate("motto");?>
 </h1>
 <form action="index.php?action=motto" id="motto" method="post">
 <?php
@@ -44,15 +41,9 @@ if (defined ( "_SECURITY" )) {
 		?>
 	<table border=0>
 		<tr>
-			<td style="min-width: 100px;"><strong><?php
-		
-		echo TRANSLATION_LANGUAGE;
-		?>
+			<td style="min-width: 100px;"><strong><?php translate("language");?>
 			</strong></td>
-			<td><strong><?php
-		
-		echo TRANSLATION_MOTTO;
-		?>
+			<td><strong><?php translate("motto");?>
 			</strong></td>
 		</tr>
 		<?php
@@ -76,6 +67,12 @@ if (defined ( "_SECURITY" )) {
 			<?php
 		}
 		?>
+		
+		
+		
+		
+		
+		
 		
 		
 		
