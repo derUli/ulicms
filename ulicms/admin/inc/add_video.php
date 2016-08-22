@@ -27,7 +27,6 @@ if ($acl->hasPermission ( "videos" )) {
 	?>
 
 	<br /> <br /> <strong><?php
-	
 	echo translate ( "video_ogg" );
 	?>
 	</strong><br /> <input name="ogg_file" type="file"><br /> <br /> <strong><?php

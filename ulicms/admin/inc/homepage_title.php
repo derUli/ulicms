@@ -32,10 +32,7 @@ if (defined ( "_SECURITY" )) {
 		
 		?>
 <h1>
-<?php
-		
-		echo TRANSLATION_HOMEPAGE_TITLE;
-		?>
+<?php translate("homepage_title");?>
 </h1>
 <form action="index.php?action=homepage_title"
 	id="homepage_title_settings" method="post">
@@ -45,15 +42,9 @@ if (defined ( "_SECURITY" )) {
 		?>
 	<table border=0>
 		<tr>
-			<td style="min-width: 100px;"><strong><?php
-		
-		echo TRANSLATION_LANGUAGE;
-		?>
+			<td style="min-width: 100px;"><strong><?php translate("language");?>
 			</strong></td>
-			<td><strong><?php
-		
-		echo TRANSLATION_TITLE;
-		?>
+			<td><strong><?php translate("title");?>?>
 			</strong></td>
 		</tr>
 		<?php
@@ -74,20 +65,10 @@ if (defined ( "_SECURITY" )) {
 			
 			echo stringHelper::real_htmlspecialchars ( $homepage_titles [$lang] );
 			?>"></td>
+		</tr>
 			<?php
 		}
 		?>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
@@ -118,6 +99,5 @@ $("#homepage_title_settings").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-    
-    }
+}
 ?>

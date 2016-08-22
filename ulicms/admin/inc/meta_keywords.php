@@ -66,26 +66,10 @@ if (defined ( "_SECURITY" )) {
 			
 			echo stringHelper::real_htmlspecialchars ( $meta_keywordss [$lang] );
 			?>"></td>
+		</tr>
 			<?php
 		}
-		?>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		?>	
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
@@ -113,6 +97,5 @@ $("#meta_keywords_settings").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-    
-    }
+}
 ?>

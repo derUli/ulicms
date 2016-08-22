@@ -63,10 +63,10 @@ if (defined ( "_SECURITY" )) {
 			
 			echo stringHelper::real_htmlspecialchars ( $meta_descriptions [$lang] );
 			?>"></td>
+		</tr>
 			<?php
 		}
 		?>
-</tr>
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
