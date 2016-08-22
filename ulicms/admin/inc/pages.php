@@ -8,7 +8,7 @@ if (defined ( "_SECURITY" )) {
 <?php translate("pages");?>
 </h2>
 <p>
-<?php translate("pages_infotext");?>
+<?php translate ( "pages_infotext" );?>
 </p>
 <p>
 	<a href="index.php?action=pages_new"><?php translate("create_page");?>
