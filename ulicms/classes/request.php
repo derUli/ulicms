@@ -69,9 +69,8 @@ class Request {
 		header ( "Location: " . $url );
 		exit ();
 	}
-	
-	public static function javascriptRedirect($url = "http://www.ulicms.de"){
+	public static function javascriptRedirect($url = "http://www.ulicms.de") {
 		echo "<script type=\"text/javascript\">location.replace(\"$url\");</script>";
-		exit();
+		exit ();
 	}
 }

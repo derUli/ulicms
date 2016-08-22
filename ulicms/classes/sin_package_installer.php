@@ -60,30 +60,29 @@ class SinPackageInstaller {
 					) );
 				}
 			}
-				$version = new ulicms_version ();
-				$version = $version->getInternalVersionAsString ();
-				$version_not_supported = false;
-				if (isNotNullOrEmpty ( $data ["compatible_from"] ) and is_string ( $data ["compatible_from"] )) {
-					if (! version_compare ( $version, $data ["compatible_from"], ">=" )) {
-						$version_not_supported = true;
-					}
+			$version = new ulicms_version ();
+			$version = $version->getInternalVersionAsString ();
+			$version_not_supported = false;
+			if (isNotNullOrEmpty ( $data ["compatible_from"] ) and is_string ( $data ["compatible_from"] )) {
+				if (! version_compare ( $version, $data ["compatible_from"], ">=" )) {
+					$version_not_supported = true;
 				}
-				
-				if (isNotNullOrEmpty ( $data ["compatible_to"] ) and is_string ( $data ["compatible_to"] )) {
-					if (! version_compare ( $version, $data ["compatible_to"], "<=" )) {
-						$version_not_supported = true;
-					}
-				}
-				if ($version_not_supported) {
-					$this->errors [] = get_translation ( "this_ulicms_version_is_not_supported" );
-				}
-				
-				$decoded = base64_decode ( $data ["data"] );
-				$sha_hash = sha1 ( $decoded );
-				if ($sha_hash != $data ["checksum"]) {
-					$this->errors [] = get_translation ( "sha1_checksum_not_equal" );
-				}
+			}
 			
+			if (isNotNullOrEmpty ( $data ["compatible_to"] ) and is_string ( $data ["compatible_to"] )) {
+				if (! version_compare ( $version, $data ["compatible_to"], "<=" )) {
+					$version_not_supported = true;
+				}
+			}
+			if ($version_not_supported) {
+				$this->errors [] = get_translation ( "this_ulicms_version_is_not_supported" );
+			}
+			
+			$decoded = base64_decode ( $data ["data"] );
+			$sha_hash = sha1 ( $decoded );
+			if ($sha_hash != $data ["checksum"]) {
+				$this->errors [] = get_translation ( "sha1_checksum_not_equal" );
+			}
 		}
 		return (count ( $this->errors ) <= 0);
 	}
