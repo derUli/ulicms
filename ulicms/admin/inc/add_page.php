@@ -95,10 +95,7 @@
 	</select> <br /> <br /> <strong><?php translate("category");?>
 	</strong><br />
 	<?php echo categories :: getHTMLSelect()?>
-	<br /> <br /> <strong><?php
-
-			echo TRANSLATION_MENU;
-			?>
+	<br /> <br /> <strong><?php translate("menu");?>
 	</strong> <span style="cursor: help;"
 				onclick="$('div#menu_help').slideToggle()">[?]</span><br /> <select
 				name="menu" size=1>
