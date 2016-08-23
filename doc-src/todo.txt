@@ -9,4 +9,4 @@
 [X] Deutsche Sprachdatei erstellen
 [ ] Neues Bootstrap basiertes Theme theme-2017
 [ ] Alle Referenzen von TRANSLATION_* Konstanten ersetzen durch translation() und get_translation()
-[ ] Multisite-Fähigkeit implementieren
+[ ] Multisite-Fähigkeit / Scopes implementieren
