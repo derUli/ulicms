@@ -51,14 +51,8 @@ if (! $pkg_src) {
 	if (! $packageList or count ( $packageList ) === 0) {
 		?>
 <p>
-	<strong><?php
-		
-		echo TRANSLATION_ERROR;
-		?> </strong> <br />
-	<?php
-		
-		echo TRANSLATION_NO_PACKAGES_AVAILABLE;
-		?>
+	<strong><?php translate("error");?> </strong> <br />
+	<?php translate("no_packages_available");?>
 </p>
 
 <?php
@@ -73,19 +67,15 @@ if (! $pkg_src) {
 				
 				$pkgDescription = @file_get_contents_wrapper ( $pkgDescriptionURL );
 				
-				if (! $pkgDescription or strlen ( $pkgDescription ) < 1)
-					echo TRANSLATION_NO_DESCRIPTION_AVAILABLE;
-				else
+				if (! $pkgDescription or strlen ( $pkgDescription ) < 1) {
+					translate ( "no_description_available" );
+				} else {
 					echo nl2br ( $pkgDescription );
+				}
 				
 				echo "</p>";
 				fcflush ();
 			}
 		}
 	}
-	
-	?>
-
-
-	<?php
 }
