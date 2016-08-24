@@ -336,7 +336,6 @@ $('#clear_cache')
 });
 </script>
 </div>
-
 <div class="clear"></div>
 <div id="pbody">
 	<div id="site-switcher-container">
