@@ -29,37 +29,25 @@ if (defined ( "_SECURITY" )) {
 <div class="clear"></div>
 <div class="navbar_top">
 	<ul class="menu">
-		<li><a href='?action=home'><?php
-	
-	echo TRANSLATION_WELCOME;
-	?>
+		<li><a href='?action=home'><?php translate("welcome");?>
 		</a>
 			<ul>
 				<li><a
-					href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>"><?php
-	
-	echo TRANSLATION_EDIT_PROFILE;
-	?>
+					href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>"><?php translate("edit_profile");?>
 				</a></li>
 			</ul></li>
 			<?php
 	
 	if ($acl->hasPermission ( "banners" ) or $acl->hasPermission ( "pages" ) or $acl->hasPermission ( "categories" ) or $acl->hasPermission ( "forms" )) {
 		?>
-		<li><a href='?action=contents'><?php
-		
-		echo TRANSLATION_CONTENTS;
-		?>
+		<li><a href='?action=contents'><?php translate("contents");?>
 		</a>
 			<ul>
 			<?php
 		
 		if ($acl->hasPermission ( "pages" )) {
 			?>
-				<li><a href='?action=pages'><?php
-			
-			echo TRANSLATION_PAGES;
-			?></a></li>
+				<li><a href='?action=pages'><?php translate("pages");?></a></li>
 				<?php
 		}
 		?>
@@ -78,10 +66,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "banners" )) {
 			?>
-				<li><a href='?action=banner'><?php
-			
-			echo TRANSLATION_ADVERTISEMENTS;
-			?></a></li>
+				<li><a href='?action=banner'><?php translate("advertisements");?></a></li>
 
 				<?php
 		}
@@ -91,36 +76,14 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "categories" )) {
 			?>
-				<li><a href='?action=categories'><?php
-			
-			echo TRANSLATION_CATEGORIES;
-			?></a></li>
+				<li><a href='?action=categories'><?php translate("categories");?></a></li>
 				<?php
 		}
-		?>
-			<?php
-		
-		if ($acl->hasPermission ( "import" )) {
-			?>
-				<!--
-            <li>
-              <a href='?action=import'><?php
-			
-			echo TRANSLATION_IMPORT;
-			?></a>
-            </li> -->
-			<?php
-		}
-		?>
-
-			<?php
+		?>			<?php
 		
 		if ($acl->hasPermission ( "export" )) {
 			?>
-				<li><a href='?action=export'><?php
-			
-			echo TRANSLATION_EXPORT;
-			?></a></li>
+				<li><a href='?action=export'><?php translate("export");?></a></li>
 				<?php
 		}
 		?>
@@ -133,20 +96,14 @@ if (defined ( "_SECURITY" )) {
 	
 	if ($acl->hasPermission ( "images" ) or $acl->hasPermission ( "videos" ) or $acl->hasPermission ( "audio" ) or $acl->hasPermission ( "files" )) {
 		?>
-		<li><a href="?action=media"><?php
-		
-		echo TRANSLATION_MEDIA;
-		?>
+		<li><a href="?action=media"><?php translate("media");?>
 		</a>
 			<ul>
 			<?php
 		
 		if ($acl->hasPermission ( "images" )) {
 			?>
-				<li><a href="?action=images"><?php
-			
-			echo TRANSLATION_IMAGES;
-			?></a></li>
+				<li><a href="?action=images"><?php translate("images");?></a></li>
 				<?php
 		}
 		?>
@@ -155,10 +112,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "files" )) {
 			?>
-				<li><a href="?action=files"><?php
-			
-			echo TRANSLATION_FILES;
-			?></a></li>
+				<li><a href="?action=files"><?php translate("files");?></a></li>
 				<?php
 		}
 		?>
@@ -168,10 +122,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "videos" )) {
 			?>
-				<li><a href="?action=videos"><?php
-			
-			echo TRANSLATION_VIDEOS;
-			?></a></li>
+				<li><a href="?action=videos"><?php translate("videos");?></a></li>
 				<?php
 		}
 		?>
@@ -179,10 +130,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "audio" )) {
 			?>
-				<li><a href="?action=audio"><?php
-			
-			echo TRANSLATION_AUDIO;
-			?></a></li>
+				<li><a href="?action=audio"><?php translate("audio");?></a></li>
 				<?php
 		}
 		?>
@@ -195,10 +143,7 @@ if (defined ( "_SECURITY" )) {
 	
 	if ($acl->hasPermission ( "users" )) {
 		?>
-		<li><a href="?action=admins"><?php
-		
-		echo TRANSLATION_USERS;
-		?>
+		<li><a href="?action=admins"><?php translate("users");?>
 		</a></li>
 		<?php
 	}
@@ -207,10 +152,7 @@ if (defined ( "_SECURITY" )) {
 	
 	if (is_admin () or $acl->hasPermission ( "groups" )) {
 		?>
-		<li><a href="?action=groups"><?php
-		
-		echo TRANSLATION_GROUPS;
-		?>
+		<li><a href="?action=groups"><?php translate("groups");?>
 		</a></li>
 		<?php
 	}
@@ -219,10 +161,7 @@ if (defined ( "_SECURITY" )) {
 	
 	if ($acl->hasPermission ( "list_packages" )) {
 		?>
-		<li><a href="?action=modules"><?php
-		
-		echo TRANSLATION_PACKAGES;
-		?>
+		<li><a href="?action=modules"><?php translate("packages")?>
 		</a> <?php
 		
 		if (count ( $modules_with_admin_page ) > 0) {
@@ -252,10 +191,7 @@ if (defined ( "_SECURITY" )) {
 		?>
 
 
-		<li><a href="?action=system_update"><?php
-		
-		echo TRANSLATION_UPDATE;
-		?>
+		<li><a href="?action=system_update"><?php translate("update");?>
 		</a></li>
 		<?php
 	}
@@ -264,10 +200,7 @@ if (defined ( "_SECURITY" )) {
 	
 	if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" ) or $acl->hasPermission ( "spam_filter" ) or $acl->hasPermission ( "cache" ) or $acl->hasPermission ( "motd" ) or $acl->hasPermission ( "pkg_settings" ) or $acl->hasPermission ( "logo" ) or $acl->hasPermission ( "languages" ) or $acl->hasPermission ( "other" )) {
 		?>
-		<li><a href="?action=settings_categories"><?php
-		
-		echo TRANSLATION_SETTINGS;
-		?>
+		<li><a href="?action=settings_categories"><?php translate("settings");?>
 		</a>
 
 			<ul>
@@ -275,10 +208,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "settings_simple" )) {
 			?>
-				<li><a href="?action=settings_simple"><?php
-			
-			echo TRANSLATION_GENERAL_SETTINGS;
-			?></a></li>
+				<li><a href="?action=settings_simple"><?php translate("general_settings");?></a></li>
 				<?php
 		}
 		?>
@@ -286,10 +216,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "design" )) {
 			?>
-				<li><a href="?action=design"><?php
-			
-			echo TRANSLATION_DESIGN;
-			?></a></li>
+				<li><a href="?action=design"><?php translate("design");?></a></li>
 				<?php
 		}
 		?>
@@ -297,10 +224,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "spam_filter" )) {
 			?>
-				<li><a href="?action=spam_filter"><?php
-			
-			echo TRANSLATION_SPAMFILTER;
-			?></a></li>
+				<li><a href="?action=spam_filter"><?php translate("spamfilter");?></a></li>
 				<?php
 		}
 		?>
@@ -308,10 +232,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "cache" )) {
 			?>
-				<li><a id="clear_cache" href="?action=cache&clear_cache=yes"><?php
-			
-			echo TRANSLATION_CLEAR_CACHE;
-			?></a></li>
+				<li><a id="clear_cache" href="?action=cache&clear_cache=yes"><?php translate("clear_cache");?></a></li>
 				<?php
 		}
 		?>
@@ -319,10 +240,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "motd" )) {
 			?>
-				<li><a href="?action=motd"><?php
-			
-			echo TRANSLATION_MOTD;
-			?></a></li>
+				<li><a href="?action=motd"><?php translate("motd");?></a></li>
 				<?php
 		}
 		?>
@@ -330,10 +248,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "pkg_settings" )) {
 			?>
-				<li><a href="?action=pkg_settings"><?php
-			
-			echo TRANSLATION_PACKAGE_SOURCE;
-			?></a></li>
+				<li><a href="?action=pkg_settings"><?php translate("package_source");?></a></li>
 				<?php
 		}
 		?>
@@ -341,10 +256,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "logo" )) {
 			?>
-				<li><a href="?action=logo_upload"><?php
-			
-			echo TRANSLATION_LOGO;
-			?></a></li>
+				<li><a href="?action=logo_upload"><?php translate("logo");?></a></li>
 				<?php
 		}
 		?>
@@ -352,10 +264,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "languages" )) {
 			?>
-				<li><a href="?action=languages"><?php
-			
-			echo TRANSLATION_LANGUAGES;
-			?></a></li>
+				<li><a href="?action=languages"><?php translate("languages");?></a></li>
 				<?php
 		}
 		?>
@@ -364,10 +273,7 @@ if (defined ( "_SECURITY" )) {
 		
 		if ($acl->hasPermission ( "other" )) {
 			?>
-				<li><a href="?action=other_settings"><?php
-			
-			echo TRANSLATION_OTHER;
-			?></a></li>
+				<li><a href="?action=other_settings"><?php translate("other");?></a></li>
 				<?php
 		}
 		?>
@@ -377,41 +283,15 @@ if (defined ( "_SECURITY" )) {
 	
 	if ($acl->hasPermission ( "info" )) {
 		?>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<li><a href="?action=info"><?php
-		
-		echo TRANSLATION_INFO;
-		?>
+</li>
+		<li><a href="?action=info"><?php translate("info");?>
 		</a>
 			<ul>
 				<li><a href="http://www.ulicms.de/" target="_blank">UliCMS Portal</a>
 				</li>
 				<li><a href="http://www.ulicms.de/forum.html" target="_blank">Community</a>
 				</li>
-				<li><a href="license.html" target="_blank"><?php
-		
-		echo TRANSLATION_LICENSE;
-		?>
+				<li><a href="license.html" target="_blank"><?php translate("license");?>
 				</a></li>
 				<li><a href="http://www.ulicms.de/?seite=kontakt" target="_blank">Feedback</a>
 				</li>
@@ -422,26 +302,7 @@ if (defined ( "_SECURITY" )) {
 	}
 	?>
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		</li>
 		<li><a href="?action=destroy"
 			onclick="return confirm('<?php
 	
@@ -497,5 +358,5 @@ $('#clear_cache')
 		</form>
 	</div>
 	<?php
-    }
+}
 ?>
