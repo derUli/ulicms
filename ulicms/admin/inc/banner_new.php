@@ -13,43 +13,28 @@ if (defined ( "_SECURITY" )) {
 		<input type="radio" checked="checked" id="radio_gif" name="type"
 			value="gif"
 			onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label
-			for="radio_gif"><?php
-		
-		echo TRANSLATION_GIF_BANNER;
-		?>
+			for="radio_gif"><?php translate("gif_banner");?>
 		</label>
 	</p>
 	<fieldset id="type_gif">
-		<input type="hidden" name="add_banner" value="add_banner"> <strong><?php
-		
-		echo TRANSLATION_BANNERTEXT;
-		?>
+		<input type="hidden" name="add_banner" value="add_banner"> <strong><?php translate("bannertext");?>
 		</strong><br /> <input type="text" name="banner_name" value=""> <br />
 		<br /> <strong>Bild-URL:</strong><br /> <input type="text"
-			name="image_url" value=""> <br /> <br /> <strong><?php
-		
-		echo TRANSLATION_LINK_URL;
-		?>
+			name="image_url" value=""> <br /> <br /> <strong><?php translate("link_url");?>
 		</strong><br /> <input type="text" name="link_url" value=""> <br />
 	</fieldset>
 
 	<p>
 		<input type="radio" id="radio_html" name="type" value="html"
 			onclick="$('#type_html').slideDown();$('#type_gif').slideUp();"><label
-			for="radio_html"><?php
-		
-		echo TRANSLATION_HTML;
-		?>
+			for="radio_html"><?php translate("html");?>
 		</label>
 	</p>
 
 	<fieldset id="type_html" style="display: none">
 		<textarea name="html" rows=10 cols=40></textarea>
 	</fieldset>
-	<br /> <strong><?php
-		
-		echo TRANSLATION_LANGUAGE;
-		?>
+	<br /> <strong><?php translate("language");?>
 	</strong><br /> <select name="language">
 	<?php
 		$languages = getAllLanguages ();
@@ -58,18 +43,13 @@ if (defined ( "_SECURITY" )) {
 			echo "<option value='" . $languages [$j] . "'>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
 		}
 		?>
-	</select> <br /> <br /> <strong><?php
+	</select> <br /> <br /> <strong><?php translate("category");?>
 		
-		echo TRANSLATION_CATEGORY;
-		?>
 	</strong><br />
 	<?php echo categories :: getHTMLSelect()?>
 
 	<br /> <br /> <input type="submit"
-		value="<?php
-		
-		echo TRANSLATION_ADD_BANNER;
-		?>">
+		value="<?php translate("add_banner");?>">
 		<?php
 		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 			?>
@@ -83,12 +63,4 @@ if (defined ( "_SECURITY" )) {
 	} else {
 		noperms ();
 	}
-	
-	?>
-
-
-
-
-	<?php
 }
-?>

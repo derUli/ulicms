@@ -12,16 +12,13 @@ if (defined ( "_SECURITY" )) {
 			
 			csrf_token_html ();
 			?>
-	<h4>
-	<?php
-			
-			echo TRANSLATION_PREVIEW;
-			?></h4>
-	<p>
+	<h4><?php translate("preview");?></h4>
+	
 	<?php
 			
 			if ($row->type == "gif") {
 				?>
+				<p>
 		<a
 			href="<?php
 				
@@ -66,10 +63,7 @@ if (defined ( "_SECURITY" )) {
 			?>
 			id="radio_gif" name="type" value="gif"
 			onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label
-			for="radio_gif"><?php
-			
-			echo TRANSLATION_GIF_BANNER;
-			?></label>
+			for="radio_gif"><?php translate("gif_banner");?></label>
 	</p>
 	<fieldset id="type_gif" style="<?php
 			
@@ -80,7 +74,7 @@ if (defined ( "_SECURITY" )) {
 
 		<strong><?php
 			
-			echo TRANSLATION_BANNERTEXT;
+			translate ( "bannertext" );
 			?></strong><br /> <input type="text" name="banner_name"
 			value="<?php
 			
@@ -92,10 +86,8 @@ if (defined ( "_SECURITY" )) {
 			value="<?php
 			
 			Template::escape ( $row->image_url );
-			?>"> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_LINK_URL;
-			?></strong><br /> <input type="text" name="link_url"
+			?>"> <br /> <br /> <strong><?php translate("link_url");?></strong><br />
+		<input type="text" name="link_url"
 			value="<?php
 			
 			Template::escape ( $row->link_url );
@@ -106,7 +98,6 @@ if (defined ( "_SECURITY" )) {
 			if ($row->type == "html") {
 				echo 'checked="checked"';
 			}
-			;
 			?>
 		id="radio_html" name="type" value="html"
 		onclick="$('#type_html').slideDown();$('#type_gif').slideUp();"><label
@@ -114,8 +105,9 @@ if (defined ( "_SECURITY" )) {
 
 	<fieldset id="type_html" style="<?php
 			
-			if ($row->type != "html")
+			if ($row->type != "html") {
 				echo "display:none";
+			}
 			?>">
 		<textarea name="html" cols=40 rows=10><?php
 			
@@ -123,10 +115,8 @@ if (defined ( "_SECURITY" )) {
 			?></textarea>
 	</fieldset>
 
-	<br /> <strong><?php
-			
-			echo TRANSLATION_LANGUAGE;
-			?></strong><br /> <select name="language">
+	<br /> <strong><?php translate("language");?></strong><br /> <select
+		name="language">
 	<?php
 			$languages = getAllLanguages ();
 			
@@ -148,19 +138,13 @@ if (defined ( "_SECURITY" )) {
 			
 			$pages = getAllPages ( $page_language, "title" );
 			?>
-	</select> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_CATEGORY;
-			?></strong><br />
+	</select> <br /> <br /> <strong><?php translate("category");?></strong><br />
 	<?php
 			echo categories::getHTMLSelect ( $row->category );
 			?>
 
 	<br /> <br /> <input type="submit"
-		value="<?php
-			
-			echo TRANSLATION_SAVE_CHANGES;
-			?>">
+		value="<?php translate("save_changes");?>">
 			<?php
 			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 				?>

@@ -36,11 +36,8 @@ if (defined ( "_SECURITY" )) {
 </h1>
 <form action="index.php?action=homepage_title"
 	id="homepage_title_settings" method="post">
-	<?php
-		
-		csrf_token_html ();
-		?>
-	<table border=0>
+	<?php csrf_token_html ();?>
+	<table border="0">
 		<tr>
 			<td style="min-width: 100px;"><strong><?php translate("language");?>
 			</strong></td>
@@ -73,7 +70,7 @@ if (defined ( "_SECURITY" )) {
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
 				value="<?php translate("save_changes");?>"></td>
-	
+	</tr>
 	</table>
 </form>
 

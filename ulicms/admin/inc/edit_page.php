@@ -68,7 +68,6 @@ if (defined ( "_SECURITY" )) {
 
 		<div class="accordion-content">
 			<strong><?php
-				
 				echo TRANSLATION_PERMALINK;
 				?></strong><br /> <input type="text" required="true"
 				name="system_title"
@@ -76,7 +75,6 @@ if (defined ( "_SECURITY" )) {
 				
 				echo htmlspecialchars ( $row->systemname );
 				?>"> <br /> <br /> <strong><?php
-				
 				echo TRANSLATION_PAGE_TITLE;
 				?> </strong><br /> <input type="text" name="page_title"
 				value="<?php
@@ -114,10 +112,8 @@ if (defined ( "_SECURITY" )) {
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
 
 		<div class="accordion-content">
-			<strong><?php
-				
-				echo TRANSLATION_LANGUAGE;
-				?></strong> <br /> <select name="language">
+			<strong><?php translate("language");?></strong> <br /> <select
+				name="language">
 			<?php
 				$languages = getAllLanguages ();
 				
@@ -133,20 +129,12 @@ if (defined ( "_SECURITY" )) {
 				
 				$pages = getAllPages ( $page_language, "title", false );
 				?>
-	</select> <br /> <br /> <strong><?php
-				
-				echo TRANSLATION_CATEGORY;
-				?> </strong><br />
-	<?php
-				echo categories::getHTMLSelect ( $row->category );
-				?>
+	</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
+	<?php echo categories::getHTMLSelect ( $row->category );?>
 
-	<br /> <br /> <strong><?php
-				
-				echo TRANSLATION_MENU;
-				?> </strong> <span style="cursor: help;"
-				onclick="$('div#menu_help').slideToggle()">[?]</span><br /> <select
-				name="menu" size=1>
+	<br /> <br /> <strong><?php translate("menu");?> </strong> <span
+				style="cursor: help;" onclick="$('div#menu_help').slideToggle()">[?]</span><br />
+			<select name="menu" size=1>
 		<?php
 				foreach ( getAllMenus () as $menu ) {
 					?>
@@ -187,20 +175,15 @@ if (defined ( "_SECURITY" )) {
 			<div id="position_help" class="help" style="display: none">
 	<?php
 				
-				echo nl2br ( TRANSLATION_HELP_POSITION );
+				echo nl2br ( get_translation ( "help_position" ) );
 				?>
 	</div>
 
-			<br /> <br /> <strong><?php
-				
-				echo TRANSLATION_PARENT;
-				?> </strong><br /> <select name="parent" size=1>
+			<br /> <br /> <strong><?php translate("parent");?> </strong><br /> <select
+				name="parent" size=1>
 				<option value="NULL">
 			[
-			<?php
-				
-				echo TRANSLATION_NONE;
-				?>
+			<?php translate("none");?>
 			]
 		</option>
 		<?php
@@ -231,10 +214,8 @@ if (defined ( "_SECURITY" )) {
 		<?php
 				}
 				?>
-	</select> <br /> <br /> <strong><?php
-				
-				echo TRANSLATION_ACTIVATED;
-				?> </strong><br /> <select name="activated" size=1
+	</select> <br /> <br /> <strong><?php translate("activated");?> </strong><br />
+			<select name="activated" size=1
 				<?php if(!$can_active_this) echo "disabled";?>>
 				<option value="1"
 					<?php
@@ -243,10 +224,7 @@ if (defined ( "_SECURITY" )) {
 					echo "selected";
 				}
 				?>>
-		<?php
-				
-				echo TRANSLATION_ENABLED;
-				?>
+		<?php translate("enabled");?>
 		</option>
 				<option value="0"
 					<?php
@@ -255,10 +233,7 @@ if (defined ( "_SECURITY" )) {
 					echo "selected";
 				}
 				?>>
-		<?php
-				
-				echo TRANSLATION_DISABLED;
-				?>
+		<?php translate("disabled");?>
 		</option>
 			</select>
 		</div>
@@ -266,10 +241,8 @@ if (defined ( "_SECURITY" )) {
 			<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
 
 			<div class="accordion-content">
-				<strong><?php
-				
-				echo TRANSLATION_EXTERNAL_REDIRECT;
-				?></strong><br /> <input type="text" name="redirection"
+				<strong><?php translate("external_redirect");?></strong><br /> <input
+					type="text" name="redirection"
 					value="<?php
 				
 				echo $row->redirection;
@@ -279,10 +252,7 @@ if (defined ( "_SECURITY" )) {
 		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
 
 		<div class="accordion-content">
-			<strong><?php
-				
-				echo TRANSLATION_MENU_IMAGE;
-				?> </strong><br />
+			<strong><?php translate("menu_image");?> </strong><br />
 
 			<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
@@ -305,19 +275,12 @@ function openMenuImageSelectWindow(field) {
 				echo $row->menu_image;
 				?>"
 				style="cursor: pointer" /><br /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php
-				
-				echo TRANSLATION_CLEAR;
-				?> </a> <br /> <br /> <strong><?php
-				
-				echo TRANSLATION_DESIGN;
-				?></strong><br /> <select name="theme" size=1>
+				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
+			<br /> <br /> <strong><?php translate("design");?></strong><br /> <select
+				name="theme" size=1>
 				<option value="">
 				[
-				<?php
-				
-				echo TRANSLATION_STANDARD;
-				?>
+				<?php translate("standard");?>
 				]
 			</option>
 			<?php
@@ -341,10 +304,8 @@ function openMenuImageSelectWindow(field) {
 			<?php
 				}
 				?>
-		</select> <br /> <br /> <strong><?php
-				
-				echo TRANSLATION_HTML_FILE;
-				?></strong> <br /> <input type="text" name="html_file"
+		</select> <br /> <br /> <strong><?php translate("html_file");?></strong>
+			<br /> <input type="text" name="html_file"
 				value="<?php
 				
 				echo $row->html_file;
@@ -353,27 +314,27 @@ function openMenuImageSelectWindow(field) {
 		<h2 class="accordion-header"><?php translate("visibility");?></h2>
 
 		<div class="accordion-content">
-			<strong><?php
-				
-				echo TRANSLATION_VISIBLE_FOR;
-				?> </strong><br />
+			<strong><?php translate("visible_for");?> </strong><br />
 			<?php
 				
 				$access = explode ( ",", $row->access );
 				?>
 		<select name="access[]" size=4 multiple>
 				<option value="all"
-					<?php if(in_array("all", $access)) echo " selected"?>>
-				<?php
+					<?php
 				
-				echo TRANSLATION_EVERYONE;
-				?></option>
+				if (in_array ( "all", $access )) {
+					echo " selected";
+				}
+				?>>
+				<?php translate("everyone");?></option>
 				<option value="registered"
-					<?php if(in_array("registered", $access)) echo " selected"?>>
-				<?php
-				
-				echo TRANSLATION_REGISTERED_USERS;
-				?></option>
+					<?php
+				if (in_array ( "registered", $access )) {
+					echo " selected";
+				}
+				?>>
+				<?php translate("registered_users");?></option>
 
 
 				<option value="mobile"
@@ -396,16 +357,12 @@ function openMenuImageSelectWindow(field) {
 			<h2 class="accordion-header"><?php translate("metadata");?></h2>
 
 			<div class="accordion-content">
-				<strong><?php
-				
-				echo TRANSLATION_META_DESCRIPTION;
-				?></strong><br /> <input type="text" name="meta_description"
+				<strong><?php translate("meta_description");?></strong><br /> <input
+					type="text" name="meta_description"
 					value="<?php
 				echo htmlspecialchars ( $row->meta_description );
-				?>"> <br /> <br /> <strong><?php
-				
-				echo TRANSLATION_META_KEYWORDS;
-				?> </strong><br /> <input type="text" name="meta_keywords"
+				?>"> <br /> <br /> <strong><?php translate("meta_keywords");?></strong><br />
+				<input type="text" name="meta_keywords"
 					value="<?php
 				echo htmlspecialchars ( $row->meta_keywords );
 				?>">
@@ -415,10 +372,8 @@ function openMenuImageSelectWindow(field) {
 		<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
 		<div class="accordion-content">
-			<strong><?php
-				
-				echo TRANSLATION_OPEN_IN;
-				?></strong><br /> <select name="target" size=1>
+			<strong><?php translate("open_in");?></strong><br /> <select
+				name="target" size=1>
 				<option
 					<?php
 				
@@ -439,10 +394,7 @@ function openMenuImageSelectWindow(field) {
 				}
 				?>
 					value="_blank">
-				<?php
-				
-				echo TRANSLATION_TARGET_BLANK;
-				?></option>
+				<?php translate ( "target_blank" );?></option>
 			</select>
 		</div>
 		<div id="tab-og" style="display: none">
@@ -485,10 +437,7 @@ function openMenuImageSelectWindow(field) {
 				echo htmlspecialchars ( $row->og_image );
 				?>"
 						style="cursor: pointer" /><br /> <a href="#"
-						onclick="$('#og_image').val('');return false;"><?php
-				
-				echo TRANSLATION_CLEAR;
-				?>
+						onclick="$('#og_image').val('');return false;"><?php translate("clear");?>
 		</a>
 		<?php
 				if (! empty ( $row->og_image )) {
@@ -502,73 +451,6 @@ function openMenuImageSelectWindow(field) {
 					?>" />
 					</div>
 <?php }?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 				</div>
 			</div>
 		</div>
@@ -582,8 +464,9 @@ function openMenuImageSelectWindow(field) {
 					<option value="null"
 						<?php
 				
-				if ("null" == $list_data->type)
+				if ("null" == $list_data->type) {
 					echo "selected";
+				}
 				?>>
 			[<?php
 				translate ( "every" )?>]
@@ -598,13 +481,14 @@ function openMenuImageSelectWindow(field) {
 					}
 				}
 				?>
-	</select> <br /> <br /> <strong><?php
-				
-				echo TRANSLATION_LANGUAGE;
-				?>
+	</select> <br /> <br /> <strong><?php translate("language");?>
 	</strong> <br /> <select name="list_language">
 					<option value=""
-						<?php if($list->language === "null") echo "selected";?>>[<?php translate("every");?>]</option>
+						<?php
+				if ($list->language === "null") {
+					echo "selected";
+				}
+				?>>[<?php translate("every");?>]</option>
 	<?php
 				$languages = getAllLanguages ();
 				
@@ -647,10 +531,7 @@ function openMenuImageSelectWindow(field) {
 			<?php
 				}
 				?>
-			</select> <br /> <br /> <strong><?php
-				
-				echo TRANSLATION_PARENT;
-				?>
+			</select> <br /> <br /> <strong><?php translate("parent");?>
 	</strong><br /> <select name="list_parent" size=1>
 					<option
 						<?php
@@ -779,10 +660,7 @@ function openMenuImageSelectWindow(field) {
 					readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 					value="<?php Template::escape($row->image_url);?>"
 					style="cursor: pointer" /><br /> <a href="#"
-					onclick="$('#menu_image').val('');return false;"><?php
-				
-				translate ( "clear" );
-				?>
+					onclick="$('#menu_image').val('');return false;"><?php translate ( "clear" );?>
 		</a>
 			</div>
 		</div>
@@ -792,9 +670,17 @@ function openMenuImageSelectWindow(field) {
 				<strong><?php translate("position_of_description");?>
 					</strong> <br /> <select name="text_position">
 					<option value="before"
-						<?php if($row->text_position == "before") echo "selected";?>><?php translate("description_before_content")?></option>
+						<?php
+				if ($row->text_position == "before") {
+					echo "selected";
+				}
+				?>><?php translate("description_before_content")?></option>
 					<option value="after"
-						<?php if($row->text_position == "after") echo "selected";?>><?php translate("description_after_content")?></option>
+						<?php
+				if ($row->text_position == "after") {
+					echo "selected";
+				}
+				?>><?php translate("description_after_content")?></option>
 				</select>
 
 			</div>
@@ -804,7 +690,11 @@ function openMenuImageSelectWindow(field) {
 
 		<div class="accordion-content">
 			<strong><?php translate("owner");?></strong> <select name="autor"
-				<?php if(!$pages_change_owner) echo "disabled";?>>
+				<?php
+				if (! $pages_change_owner) {
+					echo "disabled";
+				}
+				?>>
 <?php
 				foreach ( $users as $user ) {
 					?>
@@ -930,13 +820,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 		<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
 	</div>
 
-	<input type="submit"
-		value="<?php
-				
-				echo TRANSLATION_SAVE_CHANGES;
-				?>">
-
-
+	<input type="submit" value="<?php translate("save_changes");?>">
 	<?php
 				if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 					?>
@@ -945,7 +829,6 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 <?php
 				}
 				?>
-
 	<script src="scripts/page.js" type="text/javascript">
 </script>
 
@@ -980,8 +863,4 @@ $("#pageform").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-	?>
-
-<?php
 }
-?>

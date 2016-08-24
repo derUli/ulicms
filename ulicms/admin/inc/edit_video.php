@@ -8,10 +8,7 @@ if ($acl->hasPermission ( "videos" )) {
 		$result = db_fetch_object ( $query );
 		?>
 <h1>
-<?php
-		
-		translate ( "UPLOAD_VIDEO" );
-		?>
+<?php translate ( "UPLOAD_VIDEO" );?>
 </h1>
 <form action="index.php?action=videos" method="post">
 <?php
@@ -26,7 +23,7 @@ if ($acl->hasPermission ( "videos" )) {
 		
 		translate ( "name" );
 		?>
-	</strong><br /> <input type="text" name="name" required
+	</strong><br /> <input type="text" name="name" required="required"
 		value="<?php
 		
 		echo htmlspecialchars ( $result->name );

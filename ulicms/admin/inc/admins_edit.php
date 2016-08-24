@@ -27,10 +27,8 @@ if (defined ( "_SECURITY" )) {
 		value="<?php
 			
 			echo $row->id;
-			?>"> <strong><?php
-			
-			echo TRANSLATION_USERNAME;
-			?></strong><br /> <input type="text" name="admin_username"
+			?>"> <strong><?php translate("username");?></strong><br /> <input
+		type="text" name="admin_username"
 		value="<?php
 			
 			echo $row->username;
@@ -41,24 +39,19 @@ if (defined ( "_SECURITY" )) {
 				?>
 		readonly="readonly" <?php
 			}
-			?>> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_LASTNAME;
-			?></strong><br /> <input type="text" name="admin_lastname"
+			?>> <br /> <br /> <strong><?php translate("lastname");?></strong><br />
+	<input type="text" name="admin_lastname"
 		value="<?php
 			
 			echo $row->lastname;
-			?>"> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_FIRSTNAME;
-			?></strong><br /> <input type="text" name="admin_firstname"
+			?>"> <br /> <br /> <strong><?php translate("firstname");?></strong><br />
+	<input type="text" name="admin_firstname"
 		value="<?php
 			
 			echo $row->firstname;
-			?>" required><br /> <br /> <strong><?php
-			
-			echo TRANSLATION_EMAIL;
-			?></strong><br /> <input type="email" name="admin_email"
+			?>"
+		required="required"><br /> <br /> <strong><?php translate("email");?></strong><br />
+	<input type="email" name="admin_email"
 		value="<?php
 			
 			echo $row->email;
@@ -70,11 +63,8 @@ if (defined ( "_SECURITY" )) {
 				echo strftime ( "%x %X", $row->last_login );
 			}
 			
-			?><br /> <br /> <strong><?php
-			
-			echo TRANSLATION_NEW_PASSWORD;
-			?></strong><br /> <input type="text" name="admin_password" value="">
-	<br />
+			?><br /> <br /> <strong><?php translate("new_password");?></strong><br />
+	<input type="text" name="admin_password" value=""> <br />
 	<?php
 			$acl = new ACL ();
 			if ($acl->hasPermission ( "users" )) {
@@ -82,11 +72,8 @@ if (defined ( "_SECURITY" )) {
 				$allGroups = $acl->getAllGroups ();
 				asort ( $allGroups );
 				?>
-	<br> <strong><?php
-				
-				echo TRANSLATION_USERGROUP;
-				?>
-	</strong> <br /> <select name="group_id">
+	<br> <strong><?php translate("usergroup");?></strong> <br /> <select
+		name="group_id">
 		<option value="-"
 			<?php
 				
@@ -146,18 +133,12 @@ if (defined ( "_SECURITY" )) {
 			
 			translate ( "twitter_profile" );
 			?></strong> <br /> <input type="text" name="twitter"
-		value="<?php echo $row -> twitter?>"> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_ICQ;
-			?></strong> <br /> <input type="text" name="icq_id"
-		value="<?php echo $row -> icq_id?>"> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_SKYPE;
-			?></strong> <br /> <input type="text" name="skype_id"
-		value="<?php echo $row -> skype_id?>"> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_HTML_EDITOR;
-			?></strong> <br /> <select name="html_editor">
+		value="<?php echo $row -> twitter?>"> <br /> <br /> <strong><?php translate("icq");?></strong>
+	<br /> <input type="text" name="icq_id"
+		value="<?php echo $row -> icq_id?>"> <br /> <br /> <strong><?php translate("skype");?></strong>
+	<br /> <input type="text" name="skype_id"
+		value="<?php echo $row -> skype_id?>"> <br /> <br /> <strong><?php translate("html_editor");?></strong>
+	<br /> <select name="html_editor">
 		<option value="ckeditor"
 			<?php if(!$row -> html_editor or $row -> html_editor == "ckeditor") echo "selected"?>>CKEditor</option>
 		<option value="codemirror"
@@ -168,15 +149,13 @@ if (defined ( "_SECURITY" )) {
 			if ($row->notify_on_login) {
 				echo "checked='checked'";
 			}
-			?>><strong> <label for="notify_on_login"><?php
-			
-			echo TRANSLATION_NOTIFY_ON_LOGIN;
-			?></label>
+			?>><strong> <label for="notify_on_login"><?php translate("NOTIFY_ON_LOGIN");?></label>
 	</strong> <br /> <br /> <input type="checkbox" value="1"
 		<?php
 			
-			if ($row->require_password_change)
+			if ($row->require_password_change){
 				echo "checked";
+			}
 			?>
 		name="require_password_change" id="require_password_change"> <label
 		for="require_password_change"><?php
@@ -190,8 +169,9 @@ if (defined ( "_SECURITY" )) {
 	<br /> <br /> <input type="checkbox" value="1" name="admin" id="admin"
 		<?php
 				
-				if ($row->admin)
+				if ($row->admin) {
 					echo "checked";
+				}
 				?>> <label for="admin"><?php
 				
 				translate ( "is_admin" );
@@ -207,8 +187,9 @@ if (defined ( "_SECURITY" )) {
 		id="locked"
 		<?php
 				
-				if ($row->locked)
+				if ($row->locked){
 					echo "checked";
+				}
 				?>> <label for="locked"><?php
 				
 				translate ( "locked" );
@@ -222,10 +203,8 @@ if (defined ( "_SECURITY" )) {
 				}
 			}
 			?>
-	<br /> <br /> <strong><?php
-			
-			echo TRANSLATION_ABOUT_ME;
-			?></strong><br /> <textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
+	<br /> <br /> <strong><?php translate("about_me");?></strong><br /> <textarea
+		rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
 
 
 
@@ -248,12 +227,4 @@ if (defined ( "_SECURITY" )) {
 	} else {
 		noperms ();
 	}
-	
-	?>
-
-
-
-
-	<?php
 }
-?>
