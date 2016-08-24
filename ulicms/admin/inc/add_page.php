@@ -113,10 +113,7 @@
 				type="number" required="required" name="position" value="0" min="0"
 				step="1">
 			<div id="position_help" class="help" style="display: none">
-	<?php
-			
-			echo nl2br ( TRANSLATION_HELP_POSITION );
-			?>
+	<?php echo nl2br ( get_translation ( "help_position" ) );?>
 	</div>
 			<br /> <br /> <strong><?php translate("parent");?></strong><br /> <select
 				name="parent" size=1>
@@ -191,10 +188,8 @@ function openMenuImageSelectWindow(field) {
 				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 				value="" style="cursor: pointer" /><br /> <a href="#"
 				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?>
-		</a> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_DESIGN;
-			?></strong><br /> <select name="theme" size=1>
+		</a> <br /> <br /> <strong><?php translate("design");?></strong><br />
+			<select name="theme" size=1>
 				<option value="">
 				[
 				<?php
