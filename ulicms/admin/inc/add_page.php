@@ -20,10 +20,7 @@
 	method="post">
 
 	<input type="hidden" name="add" value="add">
-	<?php
-			
-			csrf_token_html ();
-			?>
+	<?php csrf_token_html ();?>
 
 <div id="accordion-container">
 
@@ -192,10 +189,7 @@ function openMenuImageSelectWindow(field) {
 			<select name="theme" size=1>
 				<option value="">
 				[
-				<?php
-			
-			echo TRANSLATION_STANDARD;
-			?>
+				<?php translate("standard");?>
 				]
 			</option>
 			<?php
@@ -213,30 +207,21 @@ function openMenuImageSelectWindow(field) {
 			<?php
 			}
 			?>
-		</select> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_HTML_FILE;
-			?>
+		</select> <br /> <br /> <strong><?php translate("html_file");?>
 		</strong> <br /> <input type="text" name="html_file" value="">
 		</div>
 		<h2 class="accordion-header"><?php translate("visibility");?></h2>
 
 		<div class="accordion-content">
-			<strong><?php
-			
-			echo TRANSLATION_VISIBLE_FOR;
-			?>
+			<strong><?php translate("visible_for");?>
 		</strong><br /> <select name="access[]" size=4 multiple>
 				<option value="all" selected>
-			<?php
-			
-			echo TRANSLATION_EVERYONE;
-			?>
+			<?php translate("everyone");?>
 			</option>
 				<option value="registered">
 			<?php
 			
-			echo TRANSLATION_REGISTERED_USERS;
+			translate ( "registered_users" );
 			?>
 			</option>
 				<option value="mobile"><?php translate("mobile_devices");?></option>
@@ -254,15 +239,9 @@ function openMenuImageSelectWindow(field) {
 			<h2 class="accordion-header"><?php translate("metadata");?></h2>
 
 			<div class="accordion-content">
-				<strong><?php
-			
-			echo TRANSLATION_META_DESCRIPTION;
-			?>
+				<strong><?php translate("meta_description");?>
 		</strong><br /> <input type="text" name="meta_description" value=''> <br />
-				<br /> <strong><?php
-			
-			echo TRANSLATION_META_KEYWORDS;
-			?>
+				<br /> <strong><?php translate("meta_keywords");?>
 		</strong><br /> <input type="text" name="meta_keywords" value=''>
 			</div>
 		</div>
@@ -271,20 +250,14 @@ function openMenuImageSelectWindow(field) {
 		<div class="accordion-content">
 			<strong><?php
 			
-			echo TRANSLATION_OPEN_IN;
+			translate ( "open_in" );
 			?>
 		</strong><br /> <select name="target" size=1>
 				<option value="_self">
-			<?php
-			
-			echo TRANSLATION_TARGET_SELF;
-			?>
+			<?php translate("target_self");?>
 			</option>
 				<option value="_blank">
-			<?php
-			
-			echo TRANSLATION_TARGET_BLANK;
-			?>
+			<?php translate("target_blank");?>
 			</option>
 			</select>
 		</div>
@@ -320,12 +293,7 @@ function openMenuImageSelectWindow(field) {
 						readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 						value="<?php echo htmlspecialchars($og_image);?>"
 						style="cursor: pointer" /><br /> <a href="#"
-						onclick="$('#og_image').val('');return false;"><?php
-			
-			echo TRANSLATION_CLEAR;
-			?>
-		</a>
-
+						onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
 				</div>
 			</div>
 		</div>
@@ -346,10 +314,7 @@ function openMenuImageSelectWindow(field) {
 				echo '<option value="' . $type . '">' . get_translation ( $type ) . "</option>";
 			}
 			?>
-	</select> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_LANGUAGE;
-			?>
+	</select> <br /> <br /> <strong><?php translate("language");?>
 	</strong> <br /> <select name="list_language">
 					<option value="">[<?php translate("every");?>]</option>
 	<?php
@@ -380,10 +345,7 @@ function openMenuImageSelectWindow(field) {
 			<?php
 			}
 			?>
-			</select> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_PARENT;
-			?>
+			</select> <br /> <br /> <strong><?php translate("parent");?>
 	</strong><br /> <select name="list_parent" size=1>
 					<option selected="selected" value="NULL">
 			[
@@ -421,7 +383,7 @@ function openMenuImageSelectWindow(field) {
 	</strong> <br /> <select name="list_order_by">
 	<?php foreach($cols as $col){?>
 	<option value="<?php echo $col;?>"
-						<?php if($col == "title") echo 'selected';?>><?php echo $col;?></option>
+						<?php if($col == "title"){ echo 'selected';}?>><?php echo $col;?></option>
 	<?php }?>
 </select> <br /> <br /> <strong><?php
 			translate ( "order_direction" );
@@ -607,10 +569,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 	</div>
 	<div class="inPageMessage"></div>
 	<input type="hidden" name="add_page" value="add_page"> <input
-		type="submit" value="<?php
-			
-			echo TRANSLATION_SAVE;
-			?>">
+		type="submit" value="<?php translate("save");?>">
 	<?php
 			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 				?>
@@ -623,16 +582,9 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 
 	<script src="scripts/page.js" type="text/javascript">
 </script>
-
 </form>
-
-
 <?php
 		} else {
 			noperms ();
 		}
-		?>
-
-<?php
 	}
-	?>
