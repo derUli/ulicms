@@ -72,10 +72,7 @@ if (defined ( "_SECURITY" )) {
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
-				value="<?php
-		
-		echo TRANSLATION_SAVE_CHANGES;
-		?>"></td>
+				value="<?php translate("save_changes");?>"></td>
 	
 	</table>
 </form>

@@ -81,11 +81,7 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 	?>">
 		</div>
 
-		<br /> <input type="submit"
-			value="<?php
-	
-	echo TRANSLATION_SAVE_CHANGES;
-	?>" />
+		<br /> <input type="submit" value="<?php translate("save_changes");?>" />
 
 	<?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
@@ -105,10 +101,7 @@ $("#pkg_settings").ajaxForm({beforeSubmit: function(e){
   }, 
   success:function(e){
   $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\"><?php
-	
-	echo TRANSLATION_CHANGES_WAS_SAVED;
-	?></span>");
+  $("#message").html("<span style=\"color:green;\"><?php translate("changes_was_saved");?></span>");
   }
   
 

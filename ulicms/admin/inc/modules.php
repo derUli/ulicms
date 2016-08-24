@@ -81,13 +81,13 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			if ($module_has_admin_page) {
 				echo "<a style=\"font-size:0.8em;\" href=\"?action=module_settings&module=" . $modules [$i] . "\">";
-				echo "[" . TRANSLATION_SETTINGS . "]";
+				echo "[" . get_translation ( "settings" ) . "]";
 				echo "</a>";
 			}
 			
 			if ($acl->hasPermission ( "remove_packages" )) {
 				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $modules [$i] . "&type=module\" onclick=\"return uninstallModule(this.href, '" . $modules [$i] . "');\">";
-				echo " [" . TRANSLATION_DELETE . "]";
+				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
 			}
 			

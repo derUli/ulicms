@@ -31,10 +31,7 @@ if ($acl->hasPermission ( "audio" )) {
 		
 		echo htmlspecialchars ( $result->name );
 		?>"
-		maxlength="255" required /> <br /> <br /> <strong><?php
-		
-		echo TRANSLATION_CATEGORY;
-		?>
+		maxlength="255" required /> <br /> <br /> <strong><?php translate("category");?>
 	</strong><br />
 	<?php
 		echo categories::getHTMLSelect ( $result->category_id );

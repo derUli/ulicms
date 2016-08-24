@@ -182,7 +182,7 @@ function validate_login($user, $password, $token = null) {
 			}
 			
 			if ($user ["locked"]) {
-				$_REQUEST ["error"] = TRANSLATION_YOUR_ACCOUNT_IS_LOCKED;
+				$_REQUEST ["error"] = get_translation ( "YOUR_ACCOUNT_IS_LOCKED" );
 				return false;
 			}
 			

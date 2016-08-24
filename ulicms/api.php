@@ -1353,7 +1353,7 @@ function replaceAudioTags($txt) {
 			if (! empty ( $row->ogg_file )) {
 				$html .= '<source src="content/audio/' . htmlspecialchars ( $row->ogg_file ) . '" type="audio/ogg">';
 			}
-			$html .= TRANSLATION_NO_HTML5;
+			$html .= get_translation ( "no_html5" );
 			if (! empty ( $row->mp3_file ) or ! empty ( $row->ogg_file )) {
 				$html .= '<br/>
 		<a href="content/audio/' . $preferred . '">' . TRANSLATION_DOWNLOAD_AUDIO_INSTEAD . '</a>';

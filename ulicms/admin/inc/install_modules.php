@@ -63,7 +63,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 					
 					// Wenn Paket nicht runtergeladen werden konnte
 					if (! $pkgContent or strlen ( $pkgContent ) < 1) {
-						echo "<p style='color:red;'>" . str_ireplace ( "%pkg%", $packagesToInstall [$i], TRANSLATION_DOWNLOAD_FAILED ) . "</p>";
+						echo "<p style='color:red;'>" . str_ireplace ( "%pkg%", $packagesToInstall [$i], get_translation ( "download_failed" ) ) . "</p>";
 					} else {
 						$tmpdir = "../content/tmp/";
 						if (! is_dir ( $tmpdir )) {

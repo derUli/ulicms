@@ -979,14 +979,14 @@ function content() {
 		if (file_exists ( getTemplateDirPath ( $theme ) . "404.php" )) {
 			include getTemplateDirPath ( $theme ) . "404.php";
 		} else {
-			echo TRANSLATION_PAGE_NOT_FOUND_CONTENT;
+			translate ( "PAGE_NOT_FOUND_CONTENT" );
 		}
 		return false;
 	} else if ($status == "403 Forbidden") {
 		if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 			include getTemplateDirPath ( $theme ) . "403.php";
 		} else {
-			echo TRANSLATION_FORBIDDEN_COTENT;
+			translate ( "FORBIDDEN_COTENT" );
 		}
 		return false;
 	}
