@@ -8,7 +8,6 @@ if (isset ( $_GET ["destroy"] ) or $_GET ["action"] == "destroy") {
 }
 
 if (isset ( $_POST ["login"] )) {
-	
 	if (isset ( $_POST ["system_language"] )) {
 		$_SESSION ["system_language"] = basename ( $_POST ["system_language"] );
 	}
