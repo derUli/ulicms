@@ -300,17 +300,12 @@ if (defined ( "_SECURITY" )) {
 		add_hook ( "admin_menu_item" );
 		?> <?php
 	}
-	?>
-		
-		</li>
+	?></li>
 		<li><a href="?action=destroy"
 			onclick="return confirm('<?php
 	
 	translate ( "logout" );
-	?>?')"><?php
-	
-	echo TRANSLATION_LOGOUT;
-	?>
+	?>?')"><?php translate("logo");?>
 		</a></li>
 	</ul>
 	<script type="text/javascript">
@@ -324,10 +319,7 @@ $('#clear_cache')
        url: "index.php?action=cache&clear_cache=yes",
        success: function(evt){
        $("#loading").hide();
-       $("#message").html("<span style=\"color:green\"><?php
-	
-	echo TRANSLATION_CACHE_WAS_CLEARED;
-	?></span>");
+       $("#message").html("<span style=\"color:green\"><?php translate("cache_was_cleared");?></span>");
 
        },
        error: function(evt){
@@ -349,7 +341,7 @@ $('#clear_cache')
 <div id="pbody">
 	<div id="site-switcher-container">
 		<strong><?php translate("website");?></strong><br />
-		<form action="index.php" id="site-form" method="GET">
+		<form action="index.php" id="site-form" method="get">
 			<input name="action" type="hidden"
 				value="<?php echo htmlspecialchars($_GET["action"]);?>"> <select
 				name="site-id" onchange="$('form#site-form').submit();">
