@@ -64,7 +64,6 @@ if (! $acl->hasPermission ( "design" )) {
 		}
 		
 		if (! empty ( $_REQUEST ["google-font"] )) {
-			
 			$font = $_REQUEST ["google-font"];
 			$font = db_escape ( $font );
 			setconfig ( "google-font", $font );

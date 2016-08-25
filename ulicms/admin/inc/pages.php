@@ -99,10 +99,7 @@ $(window).load(function(){
 		?>
 <select name="filter_language" onchange="filter_by_language(this)">
 	<option value="">
-		<?php
-		
-		echo TRANSLATION_PLEASE_SELECT;
-		?>
+		<?php translate("please_select");?>
 		</option>
 		<?php
 		if (! empty ( $_GET ["filter_language"] ) and in_array ( $_GET ["filter_language"], getAllLanguages () )) {
@@ -295,10 +292,7 @@ $(window).load(function(){
 		if ("-" == $_SESSION ["filter_parent"])
 			echo "selected";
 		?>>
-			[<?php
-		
-		echo TRANSLATION_NONE;
-		?>]
+			[<?php translate("none");?>]
 		</option>
 		<?php
 		
@@ -328,19 +322,13 @@ $(window).load(function(){
 		
 		if (1 === $_SESSION ["filter_active"])
 			echo "selected";
-		?>><?php
-		
-		echo TRANSLATION_ENABLED;
-		?></option>
+		?>><?php translate("enabled");?></option>
 	<option value="0"
 		<?php
 		
 		if (0 === $_SESSION ["filter_active"])
 			echo "selected";
-		?>><?php
-		
-		echo TRANSLATION_DISABLED;
-		?></option>
+		?>><?php translate("disabled");?></option>
 </select>
 
 <?php
@@ -351,8 +339,9 @@ $(window).load(function(){
 	<option value="null"
 		<?php
 		
-		if (null == $_SESSION ["filter_approved"])
+		if (null == $_SESSION ["filter_approved"]) {
 			echo "selected";
+		}
 		?>>
     [<?php
 		
@@ -361,8 +350,9 @@ $(window).load(function(){
 	<option value="1"
 		<?php
 		
-		if (1 === $_SESSION ["filter_approved"])
+		if (1 === $_SESSION ["filter_approved"]) {
 			echo "selected";
+		}
 		?>><?php
 		
 		translate ( "yes" );
@@ -370,8 +360,9 @@ $(window).load(function(){
 	<option value="0"
 		<?php
 		
-		if (0 === $_SESSION ["filter_approved"])
+		if (0 === $_SESSION ["filter_approved"]) {
 			echo "selected";
+		}
 		?>><?php
 		
 		translate ( "no" );
@@ -395,50 +386,23 @@ $(window).load(function(){
 <table class="tablesorter dataset-list">
 	<thead>
 		<tr style="font-weight: bold;">
-			<th><?php
-		
-		echo TRANSLATION_TITLE;
-		?>
+			<th><?php translate("title");?>
 			</th>
-			<th><?php
-		
-		echo TRANSLATION_MENU;
-		?>
+			<th><?php translate("menu");?>
 			</th>
-			<th><?php
-		
-		echo TRANSLATION_POSITION;
-		?>
+			<th><?php translate("position");?>
 			</th>
-			<th><?php
-		
-		echo TRANSLATION_PARENT;
-		?>
+			<th><?php translate("parent");?>
 			</th>
-			<th><?php
-		
-		echo TRANSLATION_ACTIVATED;
-		?>
+			<th><?php translate("activated");?>
 			</th>
-			<td style="text-align: center"><?php
-		
-		echo TRANSLATION_VIEW;
-		?>
+			<td style="text-align: center"><?php translate("view");?>
 			</td>
-			<td style="text-align: center"><?php
-		
-		translate ( "clone" );
-		?>
+			<td style="text-align: center"><?php translate ( "clone" );?>
 			</td>
-			<td style="text-align: center"><?php
-		
-		echo TRANSLATION_EDIT;
-		?>
+			<td style="text-align: center"><?php translate("edit");?>
 			</td>
-			<td style="text-align: center"><?php
-		
-		echo TRANSLATION_DELETE;
-		?>
+			<td style="text-align: center"><?php translate("delete");?>
 			</td>
 
 		</tr>
@@ -502,10 +466,11 @@ $(window).load(function(){
 		}
 		
 		if ($_SESSION ["filter_parent"] != null) {
-			if ($_SESSION ["filter_parent"] != "-")
+			if ($_SESSION ["filter_parent"] != "-") {
 				$filter_sql .= "AND parent = '" . intval ( $_SESSION ["filter_parent"] ) . "' ";
-			else
+			} else {
 				$filter_sql .= "AND parent IS NULL ";
+			}
 		}
 		
 		if (isset ( $_SESSION ["filter_title"] ) and ! empty ( $_SESSION ["filter_title"] )) {
@@ -517,9 +482,6 @@ $(window).load(function(){
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " " . $filter_sql . " ORDER BY $order,position, systemname ASC" ) or die ( db_error () );
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
-				?>
-						<?php
-				
 				echo '<tr id="dataset-' . $row->id . '">';
 				echo "<td>" . htmlspecialchars ( $row->title );
 				if (! empty ( $row->redirection ) and ! is_null ( $row->redirection ) and $row->type == "link") {
@@ -584,8 +546,6 @@ $(window).load(function(){
 				}
 				echo '</tr>';
 			}
-			?>
-		<?php
 		}
 		?>
 	</tbody>
@@ -630,9 +590,4 @@ function ajaxEmptyTrash(url){
 	} else {
 		noperms ();
 	}
-	
-	?>
-
-<?php
 }
-?>
