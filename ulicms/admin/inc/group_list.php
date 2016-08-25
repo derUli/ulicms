@@ -50,19 +50,12 @@ if (count ( $groups ) > 0) {
 	<thead>
 		<tr>
 			<th style="min-width: 100px;"><a
-				href="?action=groups&sort=id&sort_direction=change"><strong><?php
-	
-	echo TRANSLATION_ID;
-	?> </strong> </a></th>
+				href="?action=groups&sort=id&sort_direction=change"><strong><?php translate("id");?> </strong>
+			</a></th>
 			<th style="min-width: 200px;"><a
-				href="?action=groups&sort=name&sort_direction=change"><strong><?php
-	
-	echo TRANSLATION_NAME;
-	?> </strong> </a></th>
-			<th><strong><?php
-	
-	echo TRANSLATION_STANDARD;
-	?> </strong></th>
+				href="?action=groups&sort=name&sort_direction=change"><strong><?php translate("name");?> </strong>
+			</a></th>
+			<th><strong><?php translate("standard");?> </strong></th>
 			<td></td>
 			<td></td>
 		</tr>
@@ -118,8 +111,7 @@ if (count ( $groups ) > 0) {
 		
 		echo TRANSLATION_EDIT;
 		?>"> </a></td>
-			<td><form
-					action="?action=groups&delete=<?php
+			<td><form action="?action=groups&delete=<?php
 		
 		echo $id;
 		?>"
@@ -164,6 +156,5 @@ var ajax_options = {
 $("form.delete-form").ajaxForm(ajax_options); 
 </script>
 <?php
-    
-    }
+}
 ?>

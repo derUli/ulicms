@@ -9,15 +9,9 @@ if ($acl->hasPermission ( "images" ) or $acl->hasPermission ( "videos" ) or $acl
 	?>
 
 <h2>
-<?php
-	
-	echo TRANSLATION_MEDIA;
-	?>
+<?php translate("media");?>
 </h2>
-<strong><?php
-	
-	echo ULICMS_PLEASE_SELECT_FILETYPE;
-	?>
+<strong><?php translate("please_select_filetype");?>
 </strong>
 <br />
 <br />
@@ -25,10 +19,7 @@ if ($acl->hasPermission ( "images" ) or $acl->hasPermission ( "videos" ) or $acl
 	
 	if ($acl->hasPermission ( "images" )) {
 		?>
-<a href="index.php?action=images"><?php
-		
-		echo TRANSLATION_IMAGES;
-		?>
+<a href="index.php?action=images"><?php translate("images");?>
 </a>
 <br />
 <br />
@@ -39,10 +30,7 @@ if ($acl->hasPermission ( "images" ) or $acl->hasPermission ( "videos" ) or $acl
 
 	if ($acl->hasPermission ( "files" )) {
 		?>
-<a href="index.php?action=files"><?php
-		
-		echo TRANSLATION_FILES;
-		?>
+<a href="index.php?action=files"><?php translate("files");?>
 </a>
 <br />
 <br />
@@ -55,10 +43,7 @@ if ($acl->hasPermission ( "images" ) or $acl->hasPermission ( "videos" ) or $acl
 	
 	if ($acl->hasPermission ( "videos" )) {
 		?>
-<a href="index.php?action=videos"><?php
-		
-		echo TRANSLATION_VIDEOS;
-		?>
+<a href="index.php?action=videos"><?php translate("videos");?>
 </a>
 <br />
 <br />
@@ -70,20 +55,10 @@ if ($acl->hasPermission ( "images" ) or $acl->hasPermission ( "videos" ) or $acl
 	
 	if ($acl->hasPermission ( "audio" )) {
 		?>
-<a href="index.php?action=audio"><?php
-		
-		echo TRANSLATION_AUDIO;
-		?>
+<a href="index.php?action=audio"><?php translate("audio");?>
 </a>
 <?php
 	}
-	?>
-
-
-
-
-<?php
 } else {
 	noperms ();
 }
-?>

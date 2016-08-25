@@ -80,9 +80,9 @@ if (! $acl->hasPermission ( "install_packages" )) {
 						if (file_exists ( $tmpFile )) {
 							// Paket installieren
 							if ($pkg->installPackage ( $tmpFile )) {
-								echo "<p style='color:green;'>" . str_ireplace ( "%pkg%", $packagesToInstall [$i], TRANSLATION_INSTALLATION_SUCCESSFULL ) . "</p>";
+								echo "<p style='color:green;'>" . str_ireplace ( "%pkg%", $packagesToInstall [$i], get_translation ( "INSTALLATION_SUCCESSFULL" ) ) . "</p>";
 							} else {
-								echo "<p style='color:red;'>" . str_ireplace ( "%pkg%", $packagesToInstall [$i], TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED ) . "</p>";
+								echo "<p style='color:red;'>" . str_ireplace ( "%pkg%", $packagesToInstall [$i], get_translation ( "EXTRACTION_OF_PACKAGE_FAILED" ) ) . "</p>";
 							}
 						}
 						@unlink ( $tmpFile );

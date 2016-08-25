@@ -116,17 +116,11 @@ if (! $acl->hasPermission ( "list_packages" )) {
 
 
 <p>
-	<strong><?php
-	
-	echo TRANSLATION_INSTALLED_DESIGNS;
-	?>
+	<strong><?php translate("installed_designs");?>
 	</strong>
 </p>
 <p>
-<?php
-	
-	echo TRANSLATION_INSTALLED_DESIGNS_INFO;
-	?>
+<?php translate("installed_designs_info");?>
 </p>
 
 <?php
@@ -171,13 +165,11 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			if ($acl->hasPermission ( "remove_packages" ) and $themes [$i] != $ctheme) {
 				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $themes [$i] . "&type=theme\" onclick=\"return uninstallTheme(this.href, '" . $themes [$i] . "');\">";
-				
-				echo " [" . TRANSLATION_DELETE . "]";
+				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
 			} else if ($acl->hasPermission ( "remove_packages" )) {
-				
 				echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert('Das Theme kann nicht gelöscht werden, da es gerade aktiv ist.')\">";
-				echo " [" . TRANSLATION_DELETE . "]";
+				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
 			}
 			

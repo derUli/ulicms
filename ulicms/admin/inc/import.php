@@ -62,8 +62,9 @@ if (! $acl->hasPermission ( "import" )) {
 	if ($valid === false) {
 		?>
 <p class="ulicms_error">
-<?php translate("not_ajson")
-		?>
+<?php
+		
+translate ( "not_ajson" )?>
 </p>
 <?php
 	}
@@ -115,17 +116,11 @@ if (! $acl->hasPermission ( "import" )) {
 	if ($do_update) {
 		echo "checked";
 	}
-	?>><label for="do_update"><?php
-	
-	echo TRANSLATION_DO_UPDATE;
-	?>
+	?>><label for="do_update"><?php translate("do_update");?>
 		</label>
 	</p>
 	<input type="submit" name="submit"
-		value="<?php
-	
-	echo TRANSLATION_DO_IMPORT;
-	?>">
+		value="<?php translate("do_import");?>">
 </form>
 
 <?php

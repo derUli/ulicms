@@ -136,10 +136,7 @@ if (defined ( "_SECURITY" )) {
 				name="parent" size=1>
 				<option value="NULL">
 			[
-			<?php
-			
-			echo TRANSLATION_NONE;
-			?>
+			<?php translate("none");?>
 			]
 		</option>
 		<?php
@@ -418,10 +415,7 @@ function openMenuImageSelectWindow(field) {
 				}
 			}
 			?>
-	</select> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_LANGUAGE;
-			?>
+	</select> <br /> <br /> <strong><?php translate("language");?>
 	</strong> <br /> <select name="list_language">
 					<option value=""
 						<?php if($list->language === "null") echo "selected";?>>[<?php translate("every");?>]</option>
@@ -733,11 +727,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 		<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
 	</div>
 
-	<input type="submit"
-		value="<?php
-			
-			echo TRANSLATION_SAVE_CHANGES;
-			?>">
+	<input type="submit" value="<?php translate("save_changes");?>">
 
 
 	<?php
