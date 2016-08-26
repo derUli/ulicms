@@ -80,10 +80,7 @@ if (count ( $groups ) > 0) {
 			<td><?php
 		
 		if ($default_acl_group === $id) {
-			?> <span style="color: green; font-weight: bold;"><?php
-			
-			echo TRANSLATION_YES;
-			?> </span> <?php
+			?> <span style="color: green; font-weight: bold;"><?php translate("yes");?> </span> <?php
 		} else {
 			?> <a href="?action=groups&standard=<?php
 			
@@ -91,11 +88,8 @@ if (count ( $groups ) > 0) {
 			?>"><span style="color: red; font-weight: bold;"
 					onclick='return confirm("<?php
 			
-			echo str_ireplace ( "%name%", $name, TRANSLATION_MAKE_GROUP_DEFAULT );
-			?>")'><?php
-			
-			echo TRANSLATION_NO;
-			?> </span> </a> <?php
+			echo str_ireplace ( "%name%", $name, get_translation ( "make_group_default" ) );
+			?>")'><?php translate("no");?> </span> </a> <?php
 		}
 		?>
 			</td>
@@ -105,30 +99,26 @@ if (count ( $groups ) > 0) {
 		?>"><img class="mobile-big-image" src="gfx/edit.png"
 					alt="<?php
 		
-		translate("edit");
+		translate ( "edit" );
 		?>"
 					title="<?php
 		
-		translate("edit");
+		translate ( "edit" );
 		?>"> </a></td>
 			<td><form action="?action=groups&delete=<?php
-		
 		echo $id;
 		?>"
 					method="post"
-					onsubmit="return confirm('<?php
-		
-		echo TRANSLATION_ASK_FOR_DELETE;
-		?>');"
+					onsubmit="return confirm('<?php translate("ask_for_delete")?>');"
 					class="delete-form"><?php csrf_token_html();?><input type="image"
 						class="mobile-big-image" src="gfx/delete.gif"
 						alt="<?php
 		
-		echo TRANSLATION_DELETE;
+		translate ( "delete" );
 		?>"
 						title="<?php
 		
-		echo TRANSLATION_DELETE;
+		translate ( "delete" );
 		?>">
 				</form></td>
 		</tr>

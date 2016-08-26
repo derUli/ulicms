@@ -74,7 +74,7 @@ $(window).load(function(){
 			</td>
 			<td><?php
 		
-		echo TRANSLATION_DELETE;
+		translate("delete");
 		?>
 			</td>
 		</tr>

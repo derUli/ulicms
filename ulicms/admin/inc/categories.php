@@ -131,11 +131,11 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 						class="mobile-big-image" src="gfx/delete.gif"
 						alt="<?php
 				
-				echo TRANSLATION_DELETE;
+				translate("delete");
 				?>"
 						title="<?php
 				
-				echo TRANSLATION_DELETE;
+				translate("delete");
 				?>">
 				</form></td>
 
@@ -147,11 +147,11 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 					class="mobile-big-image" src="gfx/delete.gif"
 					alt="<?php
 				
-				echo TRANSLATION_DELETE;
+				translate("delete");
 				?>"
 					title="<?php
 				
-				echo TRANSLATION_DELETE;
+				translate("delete");
 				?>"> </a></td>
 				<?php
 			}
