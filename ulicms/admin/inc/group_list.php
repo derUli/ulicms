@@ -37,10 +37,7 @@ if ($_SESSION ["grp_sort"] == "id") {
 
 ?>
 <p>
-	<a href="?action=groups&add=add"><?php
-	
-	echo TRANSLATION_CREATE_GROUP;
-	?> </a>
+	<a href="?action=groups&add=add"><?php translate("create_group");?> </a>
 </p>
 <?php
 

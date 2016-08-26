@@ -30,8 +30,8 @@ if (defined ( "_SECURITY" )) {
 				echo '<tr id="dataset-' . htmlspecialchars ( $row->name ) . '">';
 				echo "<td>" . htmlspecialchars ( $row->name, ENT_QUOTES, "UTF-8" ) . "</td>";
 				echo "<td style=\"word-break:break-all;\">" . nl2br ( htmlspecialchars ( $row->value ) ) . "</td>";
-				echo "<td style=\"text-align:center\">" . '<a href="index.php?action=key_edit&key=' . $row->id . '"><img src="gfx/edit.png" class="mobile-big-image" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
-				echo "<td style=\"text-align:center;\">" . '<form action="index.php?action=key_delete&key=' . htmlspecialchars ( $row->name, ENT_QUOTES ) . '" onsubmit="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');" method="post" class="delete-form"><input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . get_translation ( "delete" ) . '">' . get_csrf_token_html () . '</form></td>';
+				echo "<td style=\"text-align:center\">" . '<a href="index.php?action=key_edit&key=' . $row->id . '"><img src="gfx/edit.png" class="mobile-big-image" alt="' . get_translation("edit") . '" title="' . get_translation("edit") . '"></a></td>';
+				echo "<td style=\"text-align:center;\">" . '<form action="index.php?action=key_delete&key=' . htmlspecialchars ( $row->name, ENT_QUOTES ) . '" onsubmit="return confirm(\'' . get_translation("ask_for_delete") . '\');" method="post" class="delete-form"><input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . get_translation( "delete" ) . '" title="' . get_translation ( "delete" ) . '">' . get_csrf_token_html () . '</form></td>';
 				echo '</tr>';
 			}
 		}

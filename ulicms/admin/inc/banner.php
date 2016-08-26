@@ -45,10 +45,7 @@ $(window).load(function(){
 	</a><br />
 </p>
 <p>
-<?php
-		
-		echo TRANSLATION_CATEGORY;
-		?>
+<?php translate("category");?>
 <?php
 
 		echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
@@ -62,19 +59,16 @@ $(window).load(function(){
 		translate ( "advertisements" );
 		?>
 			</th>
-			<th><?php
-		
-		echo TRANSLATION_LANGUAGE;
-		?>
+			<th><?php translate("language");?>
 			</th>
 			<td><?php
 		
-		translate("edit");
+		translate ( "edit" );
 		?>
 			</td>
 			<td><?php
 		
-		translate("delete");
+		translate ( "delete" );
 		?>
 			</td>
 		</tr>
