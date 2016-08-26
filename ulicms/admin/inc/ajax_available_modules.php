@@ -61,7 +61,7 @@ if (! $pkg_src) {
 			$pkg = trim ( $packageList [$i] );
 			
 			if (! empty ( $pkg )) {
-				$pkgDescriptionURL = $pkg_src . "descriptions/" . $pkg . ".txt";				
+				$pkgDescriptionURL = $pkg_src . "descriptions/" . $pkg . ".txt";
 				echo "<p><strong>" . $pkg . "</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('" . str_ireplace ( "%pkg%", $pkg, get_translation ( "ASK_FOR_INSTALL_PACKAGE" ) ) . "');\"> [" . get_translation ( "install" ) . "]</a><br/>";
 				
 				$pkgDescription = @file_get_contents_wrapper ( $pkgDescriptionURL );
