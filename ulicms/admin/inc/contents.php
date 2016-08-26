@@ -38,10 +38,8 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	
 	if ($acl->hasPermission ( "banners" )) {
 		?>
-	<a href="index.php?action=banner"><?php
-		
-		echo TRANSLATION_ADVERTISEMENTS;
-		?></a><br /> <br />
+	<a href="index.php?action=banner"><?php get_translation("advertisements");?></a><br />
+	<br />
 	<?php
 	}
 	?>
@@ -61,7 +59,9 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	<?php
 	if ($acl->hasPermission ( "export" ) or $acl->hasPermission ( "import" )) {
 		?>
- <p>
+ 
+
+<p>
 	<strong><?php
 		translate ( "import_export" );
 		?></strong><br /> <br />

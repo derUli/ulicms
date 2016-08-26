@@ -38,7 +38,7 @@ if (defined ( "_SECURITY" )) {
 	</strong><br /> <select name="language">
 	<?php
 		$languages = getAllLanguages ();
-		echo "<option value='all'>" . TRANSLATION_EVERY . "</option>";
+		echo "<option value='all'>" . get_translation ( "every" ) . "</option>";
 		for($j = 0; $j < count ( $languages ); $j ++) {
 			echo "<option value='" . $languages [$j] . "'>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
 		}

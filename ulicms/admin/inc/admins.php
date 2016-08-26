@@ -27,36 +27,19 @@ if (defined ( "_SECURITY" )) {
 			
 			echo TRANSLATION_USERS_INFOTEXT;
 			?>
-	<br /> <br /> <a href="index.php?action=admin_new"><?php
-			
-			echo TRANSLATION_CREATE_USER;
-			?></a><br />
+	<br /> <br /> <a href="index.php?action=admin_new"><?php translate("create_user");?></a><br />
 </p>
 <table class="tablesorter">
 	<thead>
 		<tr style="font-weight: bold;">
 			<th style="width: 40px;"><a href="index.php?action=admins&order=id">ID</a>
 			</th>
-			<th><span><a href="index.php?action=admins&order=username"><?php
-			
-			echo TRANSLATION_USERNAME;
-			?> </a> </span></th>
-			<th><a href="index.php?action=admins&order=lastname"><?php
-			
-			echo TRANSLATION_LASTNAME;
-			?> </a></th>
-			<th><a href="index.php?action=admins&order=firstname"><?php
-			
-			echo TRANSLATION_FIRSTNAME;
-			?> </a></th>
-			<th><a href="index.php?action=admins&order=email"><?php
-			
-			echo TRANSLATION_EMAIL;
-			?> </a></th>
-			<th><a href="index.php?action=admins&order=group_id"><?php
-			
-			echo TRANSLATION_GROUP;
-			?> </a></th>
+			<th><span><a href="index.php?action=admins&order=username"><?php translate("username");?> </a>
+			</span></th>
+			<th><a href="index.php?action=admins&order=lastname"><?php translate("lastname");?> </a></th>
+			<th><a href="index.php?action=admins&order=firstname"><?php translate("firstname");?> </a></th>
+			<th><a href="index.php?action=admins&order=email"><?php translate("email");?> </a></th>
+			<th><a href="index.php?action=admins&order=group_id"><?php translate("group");?> </a></th>
 			<td><?php translate ( "edit" );?></td>
 			<td><span><?php translate("delete");?> </span></td>
 		</tr>
@@ -78,15 +61,15 @@ if (defined ( "_SECURITY" )) {
 				echo "<td>" . real_htmlspecialchars ( $row->firstname ) . "</td>";
 				echo "<td>" . real_htmlspecialchars ( $row->email ) . "</td>";
 				echo "<td>" . real_htmlspecialchars ( $group ) . "</td>";
-				echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+				echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . get_translation ( "edit" ) . '"></a></td>';
 				
 				if ($row->id == $_SESSION ["login_id"]) {
-					echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . TRANSLATION_CANT_DELETE_ADMIN . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . TRANSLATION_DELETE . "\" title=\"" . TRANSLATION_EDIT . "\"></a></td>";
+					echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . TRANSLATION_CANT_DELETE_ADMIN . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . TRANSLATION_DELETE . "\" title=\"" . get_translation ( "edit" ) . "\"></a></td>";
 				} else {
 					/*
 					 * echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_delete&admin=' . $row -> id . '" onclick="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');"><img class="mobile-big-image" src="gfx/delete.gif"></a></td>';
 					 */
-					echo "<td style='text-align:center;'>" . '<form action="index.php?action=admin_delete&admin=' . $row->id . '" method="post" onsubmit="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
+					echo "<td style='text-align:center;'>" . '<form action="index.php?action=admin_delete&admin=' . $row->id . '" method="post" onsubmit="return confirm(\'' . get_translation("ask_for_delete") . '\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
 				}
 				
 				echo '</tr>';

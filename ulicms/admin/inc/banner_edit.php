@@ -123,9 +123,9 @@ if (defined ( "_SECURITY" )) {
 			$page_language = $row->language;
 			
 			if ($page_language === "all") {
-				echo "<option value='all' selected='selected'>" . TRANSLATION_EVERY . "</option>";
+				echo "<option value='all' selected='selected'>" . get_translation ( "every" ) . "</option>";
 			} else {
-				echo "<option value='all'>" . TRANSLATION_EVERY . "</option>";
+				echo "<option value='all'>" . get_translation ( "every" ) . "</option>";
 			}
 			
 			for($j = 0; $j < count ( $languages ); $j ++) {

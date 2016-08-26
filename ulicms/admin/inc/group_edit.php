@@ -29,10 +29,7 @@ if ($all_permissions) {
 	echo $id;
 	?>">
 	<p>
-		<strong><?php
-	
-	echo TRANSLATION_NAME;
-	?>
+		<strong><?php translate("name")?>
 		</strong> <input type="text" required="true" name="name"
 			value="<?php
 	
@@ -40,19 +37,13 @@ if ($all_permissions) {
 	?>">
 	</p>
 	<p>
-		<strong><?php
-	
-	echo TRANSLATION_PERMISSIONS;
-	?>
+		<strong><?php translate("permissions");?>
 		</strong>
 	</p>
 	<fieldset>
 		<p>
 			<input id="checkall" type="checkbox" class="checkall"> <label
-				for="checkall"><?php
-	
-	echo TRANSLATION_SELECT_ALL;
-	?>
+				for="checkall"><?php translate("select_all");?>
 			</label>
 		</p>
 		<p>
@@ -86,11 +77,7 @@ if ($all_permissions) {
 	?>
 		</p>
 	</fieldset>
-	<br /> <input type="submit"
-		value="<?php
-	
-	echo TRANSLATION_SAVE_CHANGES;
-	?>"
+	<br /> <input type="submit" value="<?php translate("save_changes");?>"
 		name="edit_group">
 </form>
 
