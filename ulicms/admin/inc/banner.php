@@ -69,7 +69,7 @@ $(window).load(function(){
 			</th>
 			<td><?php
 		
-		echo TRANSLATION_EDIT;
+		translate("edit");
 		?>
 			</td>
 			<td><?php

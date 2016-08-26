@@ -105,11 +105,11 @@ if (count ( $groups ) > 0) {
 		?>"><img class="mobile-big-image" src="gfx/edit.png"
 					alt="<?php
 		
-		echo TRANSLATION_EDIT;
+		translate("edit");
 		?>"
 					title="<?php
 		
-		echo TRANSLATION_EDIT;
+		translate("edit");
 		?>"> </a></td>
 			<td><form action="?action=groups&delete=<?php
 		

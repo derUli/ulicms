@@ -85,7 +85,7 @@ if (defined ( "_SECURITY" )) {
 		?></strong></td>
 			<td><a href="index.php?action=frontpage_settings"><?php
 
-		echo TRANSLATION_EDIT;
+		translate("edit");
 		?></a></td>
 		</tr>
 		<tr>
@@ -139,7 +139,7 @@ if (defined ( "_SECURITY" )) {
 		?></strong></td>
 			<td><a href="index.php?action=meta_description"><?php
 
-		echo TRANSLATION_EDIT;
+		translate("edit");
 		?></a></td>
 		</tr>
 		<tr>
@@ -149,7 +149,7 @@ if (defined ( "_SECURITY" )) {
 		?></strong></td>
 			<td><a href="index.php?action=meta_keywords"><?php
 
-		echo TRANSLATION_EDIT;
+		translate("edit");
 		?></a></td>
 		</tr>
 		<?php
@@ -161,7 +161,7 @@ if (defined ( "_SECURITY" )) {
 		</strong></td>
 			<td><a href="index.php?action=open_graph"><?php
 
-			echo TRANSLATION_EDIT;
+			translate("edit");
 			?></a></td>
 		</tr>
 		   <?php
