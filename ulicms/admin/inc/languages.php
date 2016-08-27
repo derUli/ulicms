@@ -99,7 +99,8 @@ if (defined ( "_SECURITY" )) {
 					action="index.php?action=languages&delete=<?php echo $row -> id?>"
 					class="delete-form" method="post">
 					<input type="image" src="gfx/delete.gif" class="mobile-big-image"
-						alt="<?php translate("delete");?>" title="<?php translate("delete");?>"><?php csrf_token_html();?>
+						alt="<?php translate("delete");?>"
+						title="<?php translate("delete");?>"><?php csrf_token_html();?>
 		</form>  <?php
 				}
 				?>
