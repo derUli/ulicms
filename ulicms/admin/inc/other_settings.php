@@ -615,11 +615,8 @@ if($('#email_mode').val() == "pear_mail"){
 });
 
 </script>
-
-
-
 		<h2 class="accordion-header">
-	<?php translate("export_settings");?>
+	<?php translate("expert_settings");?>
 	</h2>
 
 		<div class="accordion-content">
