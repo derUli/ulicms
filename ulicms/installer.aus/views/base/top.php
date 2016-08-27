@@ -2,13 +2,11 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><?php echo InstallerController::getTitle();?> - <?php echo APPLICATION_TITLE;?> </title>
 <link rel="stylesheet" type="text/css"
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" href="media/style.css" />
-</script>
-
-</script>
 </head>
 <body>
 
