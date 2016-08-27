@@ -40,3 +40,4 @@ define ( "TRANSLATION_WRITE_CMS_CONFIG_FAILED", "Writing cms-config.php failed.<
 define ( "TRANSLATION_LAST_STEP", "This is the last step of the installation. Now, please delete the \"installer\" Folder from your web server.<br/>
 		Then you can login to UliCMS.<br/><br/>
 		<a href=\"index.php?submit_form=LoginToBackend\">Goto login</a>" );
+define("TRANSLATION_ADD_FK", "Add Foreign Keys");

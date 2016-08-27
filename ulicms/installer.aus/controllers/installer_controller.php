@@ -21,7 +21,8 @@ class InstallerController {
 				"admin_email",
 				"admin_lastname",
 				"admin_firstname",
-				"install_demodata" 
+				"install_demodata",
+				"add_fk" 
 		);
 		foreach ( $vars as $var ) {
 			if (! isset ( $_SESSION [$var] )) {
@@ -113,6 +114,13 @@ class InstallerController {
 		} else {
 			$files [] = "sql/opt/democontent.min.sql";
 		}
+		
+		if (! empty ( $_SESSION ["add_fk"] )) {
+			foreach ( glob ( "sql/fk/*.sql" ) as $file ) {
+				$files [] = $file;
+			}
+		}
+		
 		$onefile = 100 / floatval ( count ( $files ) );
 		$currentPercent = floatval ( $_SESSION ["install_index"] ) * $onefile;
 		
@@ -192,6 +200,12 @@ class InstallerController {
 			$_SESSION ["install_demodata"] = "yes";
 		} else {
 			$_SESSION ["install_demodata"] = "";
+		}
+		
+		if (isset ( $_REQUEST ["add_fk"] )) {
+			$_SESSION ["add_fk"] = "yes";
+		} else {
+			$_SESSION ["add_fk"] = "";
 		}
 		header ( "Location: index.php?step=6" );
 	}

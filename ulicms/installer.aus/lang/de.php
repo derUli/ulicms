@@ -40,3 +40,4 @@ define ( "TRANSLATION_WRITE_CMS_CONFIG_FAILED", "Speichern der cms-config.php fe
 define ( "TRANSLATION_LAST_STEP", "Dies ist der letzte Schritt der Installation. Bitte löschen Sie den \"installer\" Ordner von ihrem Server.<br/>
 		Danach können Sie sich in UliCMS ausloggen..<br/><br/>
 		<a href=\"index.php?submit_form=LoginToBackend\">Gehe zur Anmeldung</a>" );
+define ( "TRANSLATION_ADD_FK", "Fremdschlüssel hinzufügen" );

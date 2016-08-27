@@ -1,4 +1,4 @@
-ALTER TABLE `{prefix}language`
+ALTER TABLE `{prefix}content`
   ADD CONSTRAINT fk_audio
   FOREIGN KEY (audio) 
   REFERENCES `{prefix}audio`(id)
