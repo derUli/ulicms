@@ -10,6 +10,17 @@
 				}
 				?>><?php echo TRANSLATION_INSTALL_DEMO_DATA;?></label>
 		</div>
+		
+		
+		<div class="checkbox">
+			<label><input type="checkbox" value="yes" name="add_fk"
+				id="add_fk"
+				<?php
+				if (! empty ( $_SESSION ["add_fk"] )) {
+					echo "checked";
+				}
+				?>><?php echo TRANSLATION_ADD_FK;?></label>
+		</div>
 	</div>
 	<button type="submit" class="btn btn-default"><?php echo TRANSLATION_APPLY;?></button>
 </form>
