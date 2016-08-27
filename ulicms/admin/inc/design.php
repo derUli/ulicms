@@ -131,10 +131,7 @@ div#google-fonts {
 	?>
 	<table style="width: 100%;">
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_DESIGN_OPTIONS_ENABLED;
-	?> </strong></td>
+			<td><strong><?php translate("DESIGN_OPTIONS_ENABLED");?> </strong></td>
 			<td><input type="checkbox" name="disable_custom_layout_options"
 				<?php
 	
@@ -179,10 +176,7 @@ div#google-fonts {
 		</tr>
 
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_MOBILE_DESIGN;
-	?> </strong></td>
+			<td><strong><?php translate("mobile_design");?> </strong></td>
 			<td><select name="mobile_theme" size=1>
 					<option value=""
 						<?php
@@ -232,30 +226,30 @@ div#google-fonts {
 	?>></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_EDITOR_SKIN;
-	?> </strong></td>
+			<td><strong><?php translate("editor_skin");?> </strong></td>
 			<td><select name="ckeditor_skin" size=1>
 					<option value="moono"
 						<?php
-	if ($ckeditor_skin === "moono")
-		echo " selected"?>>Moono</option>
+	if ($ckeditor_skin === "moono") {
+		echo " selected";
+	}
+	?>>Moono</option>
 					<option value="kama"
 						<?php
-	if ($ckeditor_skin === "kama")
-		echo " selected"?>>Kama</option>
+	if ($ckeditor_skin === "kama") {
+		echo " selected";
+	}
+	?>>Kama</option>
 					<option value="office2013"
 						<?php
-	if ($ckeditor_skin === "office2013")
-		echo " selected"?>>Office 2013</option>
+	if ($ckeditor_skin === "office2013") {
+		echo " selected";
+	}
+	?>>Office 2013</option>
 			</select></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_FONT_FAMILY;
-	?> </strong></td>
+			<td><strong><?php translate("font_family");?> </strong></td>
 			<td><select name="default-font" id="default-font" size=1>
 			<?php
 	$font_amount = count ( $fonts );
@@ -326,17 +320,15 @@ div#google-fonts {
 			</select></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_FONT_SIZE;
-	?> </strong>
+			<td><strong><?php translate("font_size");?> </strong>
 			
 			<td><select name="font-size">
 			<?php
 	foreach ( $font_sizes as $size ) {
 		echo '<option value="' . $size . '"';
-		if ($font_size == $size)
+		if ($font_size == $size) {
 			echo " selected";
+		}
 		echo ">";
 		echo $size;
 		echo "</option>";
@@ -345,10 +337,7 @@ div#google-fonts {
 			</select></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_HEADER_BACKGROUNDCOLOR;
-	?> </strong></td>
+			<td><strong><?php translate("HEADER_BACKGROUNDCOLOR");?> </strong></td>
 			<td><input name="header-background-color"
 				class="color {hash:true,caps:true}"
 				value="<?php
@@ -357,10 +346,7 @@ div#google-fonts {
 	?>"></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_FONT_COLOR;
-	?> </strong></td>
+			<td><strong><?php translate("font_color");?> </strong></td>
 			<td><input name="body-text-color" class="color {hash:true,caps:true}"
 				value="<?php
 	
@@ -368,10 +354,7 @@ div#google-fonts {
 	?>"></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_BACKGROUNDCOLOR;
-	?> </strong></td>
+			<td><strong><?php translate("BACKGROUNDCOLOR");?> </strong></td>
 			<td><input name="body-background-color"
 				class="color {hash:true,caps:true}"
 				value="<?php
@@ -398,8 +381,9 @@ div#google-fonts {
 			<td><input type="checkbox" name="video_width_100_percent"
 				<?php
 	
-	if ($video_width_100_percent)
+	if ($video_width_100_percent){
 		echo " checked";
+	}
 	?>
 				value="video_width_100_percent"></td>
 		</tr>
@@ -421,10 +405,7 @@ div#google-fonts {
 	</table>
 	<p>
 		<input type="submit" name="submit"
-			value="<?php
-	
-	echo TRANSLATION_SAVE_CHANGES;
-	?>" />
+			value="<?php translate("save_changes");?>" />
 	</p>
 
 	<?php
@@ -443,13 +424,8 @@ $("#designForm").ajaxForm({beforeSubmit: function(e){
   }, 
   success:function(e){
   $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\"><?php
-	
-	echo TRANSLATION_CHANGES_WAS_SAVED;
-	?></span>");
+  $("#message").html("<span style=\"color:green;\"><?php translate("CHANGES_WAS_SAVED");?></span>");
   }
-  
-
 }); 
 
 function onChangeDefaultFont(){

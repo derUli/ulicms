@@ -32,10 +32,6 @@ if ($acl->hasPermission ( "dashboard" )) {
 		?>
 	[<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>"><?php translate("edit_profile");?></a>]
 </p>
-
-
-
-
 <?php
 		$motd = get_lang_config ( "motd", getSystemLanguage () );
 		if ($motd or strlen ( $motd ) > 10) {
@@ -205,20 +201,11 @@ $(document).ready(function() {
 	<div class="accordion-content">
 		<table cellpadding="2">
 			<tr style="font-weight: bold;">
-				<td><?php
-		
-		echo TRANSLATION_TITLE;
-		?>
+				<td><?php translate("title");?>
 				</td>
-				<td><?php
-		
-		echo TRANSLATION_DATE;
-		?>
+				<td><?php translate("date");?>
 				</td>
-				<td><?php
-		
-		echo TRANSLATION_DONE_BY;
-		?>
+				<td><?php translate("done_by");?>
 				</td>
 			</tr>
 
@@ -264,7 +251,6 @@ $(document).ready(function() {
 		
 		add_hook ( "accordion_layout" );
 		?>
-</div>
 </div>
 <script src="scripts/dashboard.js" type="text/javascript"></script>
 <?php

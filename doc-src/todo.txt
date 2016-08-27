@@ -8,7 +8,7 @@
 [X] Hinweis auf Löschen des installer-Ordners anzeigen
 [X] Deutsche Sprachdatei erstellen
 [ ] Neues Bootstrap basiertes Theme theme-2017
-[ ] Alle Referenzen von TRANSLATION_* Konstanten ersetzen durch translation() und get_translation()
+[X] Alle Referenzen von TRANSLATION_* Konstanten ersetzen durch translation() und get_translation()
 [ ] Multisite-Fähigkeit / Scopes implementieren
 [ ] Autosave / Restore bei Browsercrash
 [ ] Seitenverwaltung - Beim Auswählen einer Sprache soll "Übergeordnete Seite" mit einer Liste der Seiten aus der gewählten Sprache aktualisiert werden
