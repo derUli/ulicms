@@ -46,23 +46,14 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 		?>
 
 <h2>
-<?php
-		
-		echo TRANSLATION_CATEGORIES;
-		?>
+<?php translate("categoris");?>
 </h2>
 <p>
-<?php
-		
-		echo TRANSLATION_CATEGORIES_INFOTEXT;
-		?>
+<?php translate("categories_infotext");?>
 </p>
 
 <p>
-	<a href="?action=categories&add"><?php
-		
-		echo TRANSLATION_CREATE_CATEGORY;
-		?> </a>
+	<a href="?action=categories&add"><?php translate("create_category");?> </a>
 </p>
 <?php
 	}
@@ -75,20 +66,11 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 
 	<thead>
 		<tr>
-			<th style="min-width: 50px;"><a href="?action=categories&order=id"><?php
-		
-		echo TRANSLATION_ID;
-		?> </a></th>
+			<th style="min-width: 50px;"><a href="?action=categories&order=id"><?php translate("id");?> </a></th>
 
-			<th style="min-width: 200px;"><a href="?action=categories&order=name"><?php
-		
-		echo TRANSLATION_NAME;
-		?> </a></th>
+			<th style="min-width: 200px;"><a href="?action=categories&order=name"><?php translate("name");?></a></th>
 			<th style="min-width: 200px;"><a
-				href="?action=categories&order=description"><?php
-		
-		echo TRANSLATION_DESCRIPTION;
-		?> </a></th>
+				href="?action=categories&order=description"><?php translate("description");?> </a></th>
 			<td></td>
 			<td></td>
 		</tr>
@@ -131,11 +113,11 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 						class="mobile-big-image" src="gfx/delete.gif"
 						alt="<?php
 				
-				translate("delete");
+				translate ( "delete" );
 				?>"
 						title="<?php
 				
-				translate("delete");
+				translate ( "delete" );
 				?>">
 				</form></td>
 
@@ -147,11 +129,11 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 					class="mobile-big-image" src="gfx/delete.gif"
 					alt="<?php
 				
-				translate("delete");
+				translate ( "delete" );
 				?>"
 					title="<?php
 				
-				translate("delete");
+				translate ( "delete" );
 				?>"> </a></td>
 				<?php
 			}
@@ -195,27 +177,18 @@ $("form.delete-form").ajaxForm(ajax_options);
 		csrf_token_html ();
 		?>
 	<p>
-	<?php
-		
-		echo TRANSLATION_NAME;
-		?>
+	<?php translate("name");?>
 		<input type="text" name="name" value="" required>
 
 	</p>
 
 	<p>
-	<?php
-		
-		echo TRANSLATION_DESCRIPTION;
-		?>
+	<?php translate("description");?>
 		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
 	</p>
 	<p>
 		<input type="submit" name="create"
-			value="<?php
-		
-		echo TRANSLATION_CREATE;
-		?>">
+			value="<?php translate("create");?>">
 	</p>
 
 
@@ -225,10 +198,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 	} else if (isset ( $_GET ["edit"] )) {
 		?>
 <h2>
-<?php
-		
-		echo TRANSLATION_EDIT_CATEGORY;
-		?>
+<?php translate("edit_category");?>
 </h2>
 <form action="?action=categories" method="post">
 <?php
@@ -238,10 +208,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 	<input type="hidden" name="id"
 		value="<?php echo intval($_GET["edit"])?>">
 	<p>
-	<?php
-		
-		echo TRANSLATION_NAME;
-		?>
+	<?php translate("name");?>
 		<input type="text" name="name" required="true"
 			value="<?php
 		
@@ -250,27 +217,19 @@ $("form.delete-form").ajaxForm(ajax_options);
 	</p>
 
 	<p>
-	<?php
-		
-		echo TRANSLATION_DESCRIPTION;
-		?>
+	<?php translate("description");?>
 		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"><?php
-		
 		echo htmlspecialchars ( categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
 		?></textarea>
 	</p>
 	<p>
 		<input type="submit" name="update"
 			value="<?php
-		
-		echo TRANSLATION_SAVE;
+		translate ( "save" );
 		?>">
 	</p>
 </form>
 
 <?php
 	}
-	?>
-         <?php
 }
-?>

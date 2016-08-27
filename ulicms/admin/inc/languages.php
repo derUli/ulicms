@@ -15,18 +15,12 @@ if (defined ( "_SECURITY" )) {
 		?>
 	<table border=0>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_SHORTCODE;
-		?>
+			<td><strong><?php translate("shortcode");?>
 			</strong></td>
 			<td><input type="text" name="language_code" maxlength=6 size=6></td>
 		</tr>
 		<tr>
-			<td style="width: 100px;"><strong><?php
-		
-		echo TRANSLATION_FULL_NAME;
-		?>
+			<td style="width: 100px;"><strong><?php translate("full_name");?>
 			</strong></td>
 			<td><input type="text" name="name" maxlength=100 size=40></td>
 		</tr>
@@ -35,7 +29,7 @@ if (defined ( "_SECURITY" )) {
 			<td><input type="submit" name="add_language"
 				value="<?php
 		
-		echo TRANSLATION_ADD_LANGUAGE;
+		translate ( "add_language" );
 		?>"></td>
 		</tr>
 
@@ -51,18 +45,9 @@ if (defined ( "_SECURITY" )) {
 <table class="tablesorter">
 	<thead>
 		<tr>
-			<th><strong><?php
-			
-			echo TRANSLATION_SHORTCODE;
-			?></strong></th>
-			<th><strong><?php
-			
-			echo TRANSLATION_FULL_NAME;
-			?></strong></th>
-			<th style="text-align: center;"><strong><?php
-			
-			echo TRANSLATION_STANDARD;
-			?></strong></th>
+			<th><strong><?php translate("shortcode");?></strong></th>
+			<th><strong><?php translate("full_name");?></strong></th>
+			<th style="text-align: center;"><strong><?php translate("standard");?></strong></th>
 			<td></td>
 		</tr>
 	</thead>
@@ -81,13 +66,13 @@ if (defined ( "_SECURITY" )) {
 
 			<td align="center" style="font-weight: bold;"><?php
 				if ($row->language_code === Settings::get ( "default_language" )) {
-					echo "<span style='color:green !important;'>" . TRANSLATION_YES . "</span>";
+					echo "<span style='color:green !important;'>" . get_translation ( "yes" ) . "</span>";
 				} else {
 					?> <a
 				onclick="return confirm('<?php
-					echo str_ireplace ( "%name%", $row->name, TRANSLATION_REALLY_MAKE_DEFAULT_LANGUAGE );
+					echo str_ireplace ( "%name%", $row->name, get_translation ( "REALLY_MAKE_DEFAULT_LANGUAGE" ) );
 					?>')"
-				href="index.php?action=languages&default=<?php echo $row -> language_code?>">
+				href="index.php?action=languages&default=<?php echo htmlspecialchars($row -> language_code);?>">
 					<span style="color: red !important;"><?php
 					
 					translate ( "no" );
@@ -109,12 +94,12 @@ if (defined ( "_SECURITY" )) {
 				} else {
 					?> <form
 					onsubmit="return confirm('<?php
-					echo str_ireplace ( "%name%", $row->name, TRANSLATION_DELETE_LANGUAGE_REALLY );
+					echo str_ireplace ( "%name%", $row->name, get_translation ( "DELETE_LANGUAGE_REALLY" ) );
 					?>')"
 					action="index.php?action=languages&delete=<?php echo $row -> id?>"
 					class="delete-form" method="post">
 					<input type="image" src="gfx/delete.gif" class="mobile-big-image"
-						alt="Löschen" title="Löschen"><?php csrf_token_html();?>
+						alt="<?php translate("delete");?>" title="<?php translate("delete");?>"><?php csrf_token_html();?>
 		</form>  <?php
 				}
 				?>

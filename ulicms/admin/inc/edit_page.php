@@ -67,16 +67,13 @@ if (defined ( "_SECURITY" )) {
 		<h2 class="accordion-header"><?php translate("title_and_headline");?></h2>
 
 		<div class="accordion-content">
-			<strong><?php
-				echo TRANSLATION_PERMALINK;
-				?></strong><br /> <input type="text" required="true"
-				name="system_title"
+			<strong><?php translate("permalink");?></strong><br /> <input
+				type="text" required="true" name="system_title"
 				value="<?php
 				
 				echo htmlspecialchars ( $row->systemname );
-				?>"> <br /> <br /> <strong><?php
-				echo TRANSLATION_PAGE_TITLE;
-				?> </strong><br /> <input type="text" name="page_title"
+				?>"> <br /> <br /> <strong><?php translate("page_title");?> </strong><br />
+			<input type="text" name="page_title"
 				value="<?php
 				echo htmlspecialchars ( $row->title );
 				?>"
@@ -158,16 +155,13 @@ if (defined ( "_SECURITY" )) {
 			<div id="menu_help" class="help" style="display: none">
 	<?php
 				
-				echo nl2br ( TRANSLATION_HELP_MENU );
+				echo nl2br ( get_translation ( "help_menu" ) );
 				?>
 	</div>
-			<br /> <br /> <strong><?php
-				
-				echo TRANSLATION_POSITION;
-				?> </strong> <span style="cursor: help;"
-				onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
-				type="number" name="position" required="true" min="0" step="1"
-				value="<?php
+			<br /> <br /> <strong><?php translate("position");?> </strong> <span
+				style="cursor: help;" onclick="$('div#position_help').slideToggle()">[?]</span><br />
+			<input type="number" name="position" required="required" min="0"
+				step="1" value="<?php
 				
 				echo $row->position;
 				?>">
@@ -382,10 +376,7 @@ function openMenuImageSelectWindow(field) {
 				}
 				?>
 					value="_self">
-				<?php
-				
-				echo TRANSLATION_TARGET_SELF;
-				?></option>
+				<?php translate("target_self");?></option>
 				<option
 					<?php
 				
