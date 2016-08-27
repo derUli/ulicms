@@ -187,17 +187,11 @@ if (! $acl->hasPermission ( "other" )) {
 	
 	echo $cache_period;
 	?>">
-	<?php
-	
-	echo TRANSLATION_MINUTES;
-	?>
+	<?php translate("minutes");?>
 			</div>
 
 			<div class="label">
-			<?php
-	
-	echo TRANSLATION_CACHE_ENGINE;
-	?>
+			<?php translate("cache_engine");?>
 			</div>
 			<div class="inputWrapper">
 				<select name="cache_type" size=1>
@@ -208,10 +202,7 @@ if (! $acl->hasPermission ( "other" )) {
 		echo " selected";
 	}
 	?>>
-					<?php
-	
-	echo TRANSLATION_FILE;
-	?></option>
+					<?php translate("file");?></option>
 					<option value="cache_lite"
 						<?php
 	
@@ -229,56 +220,35 @@ if (! $acl->hasPermission ( "other" )) {
 
 
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_SHORTCUTS;
-	?>
+		<?php translate("shortcuts");?>
 		</h2>
 
 		<div class="accordion-content">
 			<div class="label">
-			<?php
-	
-	echo TRANSLATION_REPLACE_SHORTCUTS;
-	?>
+			<?php translate("replace_shortcuts");?>
 			</div>
 			<div class="inputWrapper">
 				<select name="override_shortcuts" size=1>
 					<option value="off"
 						<?php if($override_shortcuts == "off" or !$override_shortcuts) echo " selected=\"selected\""?>>
-						<?php
-	
-	echo TRANSLATION_OFF;
-	?>
+						<?php translate("off");?>
 					</option>
 					<option value="frontend"
 						<?php if($override_shortcuts == "frontend") echo " selected=\"selected\""?>>
-						<?php
-	
-	echo TRANSLATION_ONLY_IN_FRONTEND;
-	?>
+						<?php translate("only_in_frontend");?>
 					</option>
 					<option value="backend"
 						<?php if($override_shortcuts == "backend") echo " selected=\"selected\""?>>
-						<?php
-	
-	echo TRANSLATION_ONLY_IN_BACKEND;
-	?>
+						<?php translate("only_in_backend");?>
 					</option>
 					<option value="on"
 						<?php if($override_shortcuts == "on") echo " selected=\"selected\""?>>
-						<?php
-	
-	echo TRANSLATION_BOOTH_BACKEND_AND_FRONTEND;
-	?>
+						<?php translate("BOOTH_BACKEND_AND_FRONTEND");?>
 					</option>
 				</select>
 			</div>
 			<p>
-			<?php
-	
-	echo TRANSLATION_REPLACE_SHORTCUTS_INFO;
-	?>
+			<?php translate("replace_shortcuts_info");?>
 			</p>
 		</div>
 
@@ -287,19 +257,13 @@ if (! $acl->hasPermission ( "other" )) {
 
 
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_MOVE_MENU_ITEMS;
-	?>
+		<?php translate("move_menu_items");?>
 		</h2>
 
 
 		<div class="accordion-content">
 			<p>
-			<?php
-	
-	echo TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM;
-	?>
+			<?php translate("move_all_menu_items_from");?>
 				<select name="move_from" size="1">
 					<option value="-" selected>-</option>
 					<?php
@@ -313,10 +277,7 @@ if (! $acl->hasPermission ( "other" )) {
 	}
 	?>
 				</select>
-				<?php
-	
-	echo TRANSLATION_MOVE_ALL_MENU_ITEMS_TO;
-	?>
+				<?php translate("move_all_menu_items_to");?>
 				<select name="move_to" size="1">
 					<option value="-" selected>-</option>
 					<?php
@@ -334,18 +295,12 @@ if (! $acl->hasPermission ( "other" )) {
 		</div>
 
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_DOMAIN2LANGUAGE_MAPPING;
-	?>
+		<?php translate("DOMAIN2LANGUAGE_MAPPING");?>
 		</h2>
 
 		<div class="accordion-content">
 
-		<?php
-	
-	echo TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO;
-	?>
+		<?php translate("DOMAIN2LANGUAGE_MAPPING_INFO");?>
 
 			<p>
 				<textarea name="domain_to_language" rows="10" cols="40"><?php
@@ -355,10 +310,7 @@ if (! $acl->hasPermission ( "other" )) {
 			</p>
 		</div>
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_LOG;
-	?>
+		<?php translate("log");?>
 		</h2>
 
 		<div class="accordion-content">
@@ -614,8 +566,7 @@ if (! $acl->hasPermission ( "other" )) {
 					<input type="checkbox" id="smtp_auth" name="smtp_auth"
 						<?php
 	if ($smtp_auth)
-		echo ' checked="checked"'?>
-						value="auth">
+		echo ' checked="checked"'?> value="auth">
 				</div>
 
 
