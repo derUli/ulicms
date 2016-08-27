@@ -190,17 +190,21 @@ if (defined ( "_SECURITY" )) {
 			?>
 
    <option value="index,follow"><?php translate("EARCH_ENGINES_INDEX");?></option>
-					<option value="noindex,nofollow" selected><?php translate ( "SEARCH_ENGINES_NOINDEX" );
+					<option value="noindex,nofollow" selected><?php
+			
+			translate ( "SEARCH_ENGINES_NOINDEX" );
 			?></option>
 
 <?php
 		} else {
 			?>
    <option value="index,follow" selected><?php
-			translate("SEARCH_ENGINES_INDEX");?></option>
+			translate ( "SEARCH_ENGINES_INDEX" );
+			?></option>
 					<option value="noindex,nofollow"><?php
 			
-			translate("SEARCH_ENGINES_NOINDEX");?></option>
+			translate ( "SEARCH_ENGINES_NOINDEX" );
+			?></option>
 <?php
 		}
 		?>
@@ -213,12 +217,8 @@ if (defined ( "_SECURITY" )) {
 <tr>
 			<td>
 			
-			
-
-
-
-
-<td align="center"><input type="submit" value="OK" style="width: 100%;"></td>
+			<td align="center"><input type="submit" value="OK"
+				style="width: 100%;"></td>
 		</tr>
 	</table>
 	<input type="hidden" name="save_settings" value="save_settings">
@@ -253,7 +253,4 @@ $("#settings_simple").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-	
-	?><?php
 }
-?>
