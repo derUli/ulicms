@@ -144,10 +144,7 @@ div#google-fonts {
 	?>></td>
 		</tr>
 		<tr>
-			<td style="width: 300px;"><strong><?php
-	
-	echo TRANSLATION_TITLE_FORMAT;
-	?> </strong></td>
+			<td style="width: 300px;"><strong><?php translate("title_format");?> </strong></td>
 			<td><input type="text" name="title_format"
 				value="<?php
 	
@@ -155,10 +152,7 @@ div#google-fonts {
 	?>"></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_FRONTEND_DESIGN;
-	?> </strong></td>
+			<td><strong><?php translate("frontend_design");?> </strong></td>
 			<td><select name="theme" size=1>
 			<?php
 	
@@ -304,10 +298,7 @@ div#google-fonts {
 				</div></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_ZOOM;
-	?> </strong>
+			<td><strong><?php translate("zoom");?> </strong>
 			
 			<td><select name="zoom">
 			<?php
@@ -315,8 +306,9 @@ div#google-fonts {
 		?>
 					<option
 						<?php
-		if ($i === $zoom or ($i === 100 and $zoom === 0))
+		if ($i === $zoom or ($i === 100 and $zoom === 0)) {
 			echo " selected";
+		}
 		?>
 						value="<?php
 		

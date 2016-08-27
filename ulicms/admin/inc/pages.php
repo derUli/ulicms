@@ -494,9 +494,9 @@ $(window).load(function(){
 				echo "<td>" . htmlspecialchars ( getPageTitleByID ( $row->parent ) ) . "</td>";
 				
 				if ($row->active) {
-					echo "<td>" . TRANSLATION_YES . "</td>";
+					echo "<td>" . get_translation ( "yes" ) . "</td>";
 				} else {
-					echo "<td>" . TRANSLATION_NO . "</td>";
+					echo "<td>" . get_translation ( "no" ) . "</td>";
 				}
 				
 				if (startsWith ( $row->redirection, "#" )) {
@@ -508,7 +508,7 @@ $(window).load(function(){
 					} else {
 						$url = "http://" . $domain . "/" . $row->systemname . ".html";
 					}
-					echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . TRANSLATION_VIEW . "\" title=\"" . TRANSLATION_VIEW . "\"></a></td>";
+					echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation ( "view" ) . "\" title=\"" . get_translation ( "view" ) . "\"></a></td>";
 				}
 				echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation ( "clone" ) . "\" title=\"" . get_translation ( "clone" ) . "\"></a></td>";
 				
@@ -529,7 +529,7 @@ $(window).load(function(){
 				if (! $can_edit_this) {
 					echo "<td></td><td></td>";
 				} else {
-					echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+					echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
 					
 					if ($_SESSION ["filter_status"] == "trash") {
 						echo "<td style='text-align:center'>" . '<form action="index.php?action=undelete_page&page=' . $row->id . '" method="post" class="undelete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . get_translation ( "recover" ) . '"></form></td>';
