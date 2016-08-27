@@ -360,10 +360,7 @@ if (! $acl->hasPermission ( "other" )) {
 
 
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_CRONJOBS;
-	?>
+		<?php translate("cronjobs");?>
 		</h2>
 
 		<div class="accordion-content">
@@ -460,19 +457,13 @@ if (! $acl->hasPermission ( "other" )) {
 		</div>
 
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_ADDITIONAL_META_TAGS;
-	?>
+		<?php translate("ADDITIONAL_META_TAGS");?>
 		</h2>
 
 		<div class="accordion-content">
 
 			<div class="label">
-				<label for="show_meta_generator"><?php
-	
-	echo TRANSLATION_SHOW_META_GENERATOR;
-	?>
+				<label for="show_meta_generator"><?php translate ( "SHOW_META_GENERATOR" );?>
 				</label>
 			</div>
 			<div class="inputWrapper">
@@ -487,10 +478,7 @@ if (! $acl->hasPermission ( "other" )) {
 			</div>
 		</div>
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_EMAIL_DELIVERY;
-	?>
+		<?php translate("EMAIL_DELIVERY");?>
 		</h2>
 
 
@@ -500,8 +488,9 @@ if (! $acl->hasPermission ( "other" )) {
 				<select id='email_mode' name="email_mode" size="1">
 					<option value="internal"
 						<?php
-	if ($email_mode == "internal")
+	if ($email_mode == "internal") {
 		echo ' selected="selected"';
+	}
 	?>>PHP</option>
 					<?php
 	
@@ -509,8 +498,9 @@ if (! $acl->hasPermission ( "other" )) {
 		?>
 					<option value="pear_mail"
 						<?php
-		if ($email_mode == "pear_mail")
+		if ($email_mode == "pear_mail") {
 			echo ' selected="selected"';
+		}
 		?>>PEAR Mail</option>
 					<?php
 	}
@@ -519,23 +509,14 @@ if (! $acl->hasPermission ( "other" )) {
 			</div>
 			<div class="smtp_settings" id="smtp_settings" style="display: none">
 				<h3>
-				<?php
-	
-	echo TRANSLATION_SMTP_SETTINGS;
-	?>
+				<?php translate("smtp_settings");?>
 				</h3>
 				<div class="label">
-				<?php
-	
-	echo TRANSLATION_HOSTNAME;
-	?>
+				<?php translate("hostname");?>
 				</div>
 				<div class="inputWrapper">
 					<input type="text" name="smtp_host"
-						value="<?php
-	
-	echo real_htmlspecialchars ( $smtp_host );
-	?>">
+						value="<?php echo real_htmlspecialchars ( $smtp_host );?>">
 
 				</div>
 
@@ -543,7 +524,7 @@ if (! $acl->hasPermission ( "other" )) {
 				<div class="label">
 			<?php
 	
-	echo TRANSLATION_PORT;
+	translate ( "port" );
 	?>
 			</div>
 				<div class="inputWrapper">
@@ -556,27 +537,24 @@ if (! $acl->hasPermission ( "other" )) {
 				</div>
 
 				<div class="label">
-					<label for="smtp_auth"> <?php
-	
-	echo TRANSLATION_AUTHENTIFACTION_REQUIRED;
-	?>
+					<label for="smtp_auth"> <?php translate("AUTHENTIFACTION_REQUIRED");?>
 			</label>
 				</div>
 				<div class="inputWrapper">
 					<input type="checkbox" id="smtp_auth" name="smtp_auth"
 						<?php
-	if ($smtp_auth)
-		echo ' checked="checked"'?> value="auth">
+	if ($smtp_auth) {
+		echo ' checked="check ed"';
+	}
+	?>
+						value="auth">
 				</div>
 
 
 				<div id="smtp_auth_div" style="display: none">
 					<div class="label">
-			<?php
-	
-	echo TRANSLATION_USER;
-	?>
-			</div>
+			<?php translate("user");?>
+</div>
 					<div class="inputWrapper">
 						<input type="text" name="smtp_user"
 							value="<?php
