@@ -1,5 +1,5 @@
 ALTER TABLE `{prefix}content`
-  ADD CONSTRAINT fk_language 
+  ADD CONSTRAINT fk_content_language 
   FOREIGN KEY (language) 
   REFERENCES `{prefix}languages`(language_code) 
   ON DELETE Set NULL;

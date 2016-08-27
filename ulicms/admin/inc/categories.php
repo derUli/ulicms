@@ -46,7 +46,7 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 		?>
 
 <h2>
-<?php translate("categoris");?>
+<?php translate("categories");?>
 </h2>
 <p>
 <?php translate("categories_infotext");?>
