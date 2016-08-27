@@ -166,10 +166,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 	} else if (isset ( $_GET ["add"] )) {
 		?>
 <h2>
-<?php
-		
-		echo TRANSLATION_CREATE_CATEGORY;
-		?>
+<?php translate("create_category");?>
 </h2>
 <form action="?action=categories" method="post">
 <?php

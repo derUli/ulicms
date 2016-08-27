@@ -57,10 +57,7 @@ if (defined ( "_SECURITY" )) {
 			</select></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_OWNER_MAILADRESS;
-		?></strong></td>
+			<td><strong><?php translate("OWNER_MAILADRESS");?></strong></td>
 			<td><input type="email" name="email"
 				value="<?php
 		
@@ -85,10 +82,7 @@ if (defined ( "_SECURITY" )) {
 		?>></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_GUEST_MAY_REGISTER;
-		?></strong></td>
+			<td><strong><?php translate("GUEST_MAY_REGISTER");?></strong></td>
 			<td><input type="checkbox" name="visitors_can_register"
 				<?php
 		if (strtolower ( $settings ["visitors_can_register"] == "on" ) || $settings ["visitors_can_register"] == "1" || strtolower ( $settings ["visitors_can_register"] ) == "true") {

@@ -160,10 +160,7 @@ if (! $acl->hasPermission ( "other" )) {
 		<div class="accordion-content">
 
 			<div class="label">
-				<label for="cache_enabled"><?php
-	
-	echo TRANSLATION_CACHE_ENABLED;
-	?>
+				<label for="cache_enabled"><?php translate("cache_enabled");?>
 				</label>
 			</div>
 			<div class="inputWrapper">
@@ -178,11 +175,11 @@ if (! $acl->hasPermission ( "other" )) {
 			<div class="label">
 			<?php
 	
-	echo TRANSLATION_CACHE_VALIDATION_DURATION;
+	translate ( "CACHE_VALIDATION_DURATION" );
 	?>
 			</div>
 			<div class="inputWrapper">
-				<input type="number" name="cache_period" min=1 max=20160
+				<input type="number" name="cache_period" min="1" max="20160"
 					value="<?php
 	
 	echo $cache_period;
@@ -564,10 +561,7 @@ if (! $acl->hasPermission ( "other" )) {
 					</div>
 
 					<div class="label">
-		<?php
-	
-	echo TRANSLATION_PASSWORD;
-	?>
+		<?php translate("password");?>
 		</div>
 					<div class="inputWrapper">
 						<input type="password" name="smtp_password"
@@ -586,9 +580,7 @@ if (! $acl->hasPermission ( "other" )) {
 <?php
 	if ($smtp_auth) {
 		?>
-
 $('#smtp_auth_div').show();
-
 <?php
 	}
 	?>
@@ -627,27 +619,18 @@ if($('#email_mode').val() == "pear_mail"){
 
 
 		<h2 class="accordion-header">
-	<?php
-	
-	echo TRANSLATION_EXPERT_SETTINGS;
-	?>
+	<?php translate("export_settings");?>
 	</h2>
 
 		<div class="accordion-content">
 			<p>
-				<a href="index.php?action=settings"><?php
-	
-	echo TRANSLATION_VIEW;
-	?>
+				<a href="index.php?action=settings"><?php translate("view");?>
 			</a>
 			</p>
 		</div>
 	</div>
 	<br /> <input name="submit" type="submit"
-		value="<?php
-	
-	echo TRANSLATION_SAVE_CHANGES;
-	?>" />
+		value="<?php translate("save_changes");?>" />
 
 	<?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
@@ -658,7 +641,6 @@ if($('#email_mode').val() == "pear_mail"){
 	}
 	?>
 </form>
-</div>
 <script type="text/javascript">
 $("#other_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");
@@ -666,10 +648,7 @@ $("#other_settings").ajaxForm({beforeSubmit: function(e){
   },
   success:function(e){
   $("#loading").hide();
-  $("#message").html("<span style=\"color:green;\"><?php
-	
-	echo TRANSLATION_CHANGES_WAS_SAVED;
-	?></span>");
+  $("#message").html("<span style=\"color:green;\"><?php translate("CHANGES_WAS_SAVED");?></span>");
   }
 
 

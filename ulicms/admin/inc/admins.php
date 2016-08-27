@@ -58,10 +58,10 @@ if (defined ( "_SECURITY" )) {
 				echo "<td>" . real_htmlspecialchars ( $row->firstname ) . "</td>";
 				echo "<td>" . real_htmlspecialchars ( $row->email ) . "</td>";
 				echo "<td>" . real_htmlspecialchars ( $group ) . "</td>";
-				echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation("edit") . '" title="' . get_translation ( "edit" ) . '"></a></td>';
+				echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
 				
 				if ($row->id == $_SESSION ["login_id"]) {
-					echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . TRANSLATION_CANT_DELETE_ADMIN . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . get_translation("edit") . "\" title=\"" . get_translation ( "edit" ) . "\"></a></td>";
+					echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . get_translation ( "CANT_DELETE_ADMIN" ) . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . get_translation ( "edit" ) . "\" title=\"" . get_translation ( "edit" ) . "\"></a></td>";
 				} else {
 					/*
 					 * echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_delete&admin=' . $row -> id . '" onclick="return confirm(\'' . TRANSLATION_ASK_FOR_DELETE . '\');"><img class="mobile-big-image" src="gfx/delete.gif"></a></td>';

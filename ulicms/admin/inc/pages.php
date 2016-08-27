@@ -93,10 +93,7 @@ $(window).load(function(){
 
 </form>
 
-<?php
-		
-		echo TRANSLATION_FILTER_BY_LANGUAGE;
-		?>
+<?php translate("filter_by_language");?>
 <select name="filter_language" onchange="filter_by_language(this)">
 	<option value="">
 		<?php translate("please_select");?>
@@ -134,17 +131,19 @@ $(window).load(function(){
 		}
 		
 		if (isset ( $_GET ["filter_menu"] )) {
-			if ($_GET ["filter_menu"] == "null")
+			if ($_GET ["filter_menu"] == "null") {
 				$_SESSION ["filter_menu"] = null;
-			else
+			} else {
 				$_SESSION ["filter_menu"] = $_GET ["filter_menu"];
+			}
 		}
 		
 		if (isset ( $_GET ["filter_parent"] )) {
-			if ($_GET ["filter_parent"] == "null")
+			if ($_GET ["filter_parent"] == "null") {
 				$_SESSION ["filter_parent"] = null;
-			else
+			} else {
 				$_SESSION ["filter_parent"] = $_GET ["filter_parent"];
+			}
 		}
 		
 		if (! isset ( $_SESSION ["filter_parent"] )) {
