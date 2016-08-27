@@ -246,10 +246,7 @@ $(window).load(function(){
 			echo " selected";
 		}
 		?>>
-		<?php
-		
-		echo TRANSLATION_RECYCLE_BIN;
-		?>
+		<?php translate("recycle_bin");?>
 		</option>
 </select>
 <?php translate("category");?>
@@ -262,7 +259,7 @@ $(window).load(function(){
 	<?php
 		foreach ( $menus as $menu ) {
 			if ($menu == "null") {
-				$name = "[" . TRANSLATION_EVERY . "]";
+				$name = "[" . get_translation ( "every" ) . "]";
 			} else {
 				$name = $menu;
 			}
@@ -312,22 +309,25 @@ $(window).load(function(){
 	<option value="null"
 		<?php
 		
-		if (null == $_SESSION ["filter_active"])
+		if (null == $_SESSION ["filter_active"]) {
 			echo "selected";
+		}
 		?>>
 			[<?php translate("every"); ?>]
 		</option>
 	<option value="1"
 		<?php
 		
-		if (1 === $_SESSION ["filter_active"])
+		if (1 === $_SESSION ["filter_active"]) {
 			echo "selected";
+		}
 		?>><?php translate("enabled");?></option>
 	<option value="0"
 		<?php
 		
-		if (0 === $_SESSION ["filter_active"])
+		if (0 === $_SESSION ["filter_active"]) {
 			echo "selected";
+		}
 		?>><?php translate("disabled");?></option>
 </select>
 

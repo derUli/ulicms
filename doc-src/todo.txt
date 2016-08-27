@@ -17,9 +17,9 @@
 [ ] editable_for_admins_only checkbox on contents
 Inhaltstyp "Artikel":
 [ ] Um Metadaten erweitern
-    [ ] author_name
-    [ ] author_email
-    [ ] last_update
+    [ ] author_name (varchar 80)
+    [ ] author_email (varchar 80)
+    [ ] last_update (date default null)
 [ ] Kommentarfunktion implementieren
 [ ] Eigene Templates 
 User
