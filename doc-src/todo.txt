@@ -22,3 +22,5 @@ Inhaltstyp "Artikel":
     [ ] last_update
 [ ] Kommentarfunktion implementieren
 [ ] Eigene Templates 
+User
+[ ] Backend Startseite (welche Seite soll nach dem Login als erstes gezeigt werden)
