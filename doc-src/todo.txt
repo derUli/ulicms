@@ -20,6 +20,7 @@ Inhaltstyp "Artikel":
     [ ] author_name (varchar 80)
     [ ] author_email (varchar 80)
     [ ] last_update (date default null)
+    [ ] Feld zum Hochladen von Artikelbild
 [ ] Kommentarfunktion implementieren
 [ ] Eigene Templates 
 User
