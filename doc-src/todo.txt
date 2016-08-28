@@ -28,3 +28,5 @@ User
 
 Datenbank
 [X] Option "Fremdschlüssel setzen" zum Installer hinzufügen
+
+[ ] Möglichkeit eigene Inhaltstypen mit frei definierbaren Feldern , ähnlich wie z.B. in Drupal
