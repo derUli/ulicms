@@ -13,14 +13,17 @@
 [ ] Autosave / Restore bei Browsercrash
 [ ] Seitenverwaltung - Beim Auswählen einer Sprache soll "Übergeordnete Seite" mit einer Liste der Seiten aus der gewählten Sprache aktualisiert werden
 [ ] Attribut force_caching (boolean) zur Seitenverwaltung hinzufügen, wenn force_caching = true ist, wird eine Seite immer gecacht, auch wenn diese ein Modul enthält.
-[ ] "disable_cache" Checkbox on Contents 
+[ ] "cache_control" Option zur Inhalteverwaltung hinzufügen.
+	[ ] Auto
+	[ ] Cache
+	[ ] No Cache
 [ ] editable_for_admins_only checkbox on contents
 Inhaltstyp "Artikel":
 [ ] Um Metadaten erweitern
-    [ ] author_name (varchar 80)
-    [ ] author_email (varchar 80)
-    [ ] last_update (date default null)
-    [ ] Feld zum Hochladen von Artikelbild
+	[ ] author_name (varchar 80)
+	[ ] author_email (varchar 80)
+	[ ] last_update (date default null)
+ 	[ ] Feld zum Hochladen von Artikelbild
 [ ] Kommentarfunktion implementieren
 [ ] Eigene Templates 
 User
