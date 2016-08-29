@@ -26,7 +26,7 @@ if (defined ( "_SECURITY" )) {
 			<td><a href="index.php?action=homepage_title"><?php translate("edit");?></a></td>
 		</tr>
 		<tr>
-			<td><strong><?php translate("motto");?>></strong></td>
+			<td><strong><?php translate("motto");?></strong></td>
 			<td><a href="index.php?action=motto"><?php translate("edit");?></a></td>
 		</tr>
 		<tr>
