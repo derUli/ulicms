@@ -206,7 +206,11 @@ if (! Settings::get ( "cache_disabled" and getenv ( 'REQUEST_METHOD' ) == "GET" 
 
 $id = md5 ( $_SERVER ['REQUEST_URI'] . $_SESSION ["language"] . strbool ( is_mobile () ) );
 
-if (! Settings::get ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
+if($hasModul){
+	no_cache();	
+}
+
+if (! Settings::get ( "cache_disabled" ) and !$GLOBALS["no_cache"] and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
 	$options = array (
 			'lifeTime' => Settings::get ( "cache_period" ),
 			'cacheDir' => "content/cache/" 
@@ -278,7 +282,7 @@ if ($html_file) {
 
 add_hook ( "after_html" );
 
-if (! Settings::get ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
+if (! Settings::get ( "cache_disabled" ) and !$GLOBALS["no_cache"] and $cache_type === "cache_lite") {
 	$data = ob_get_clean ();
 	
 	if (! defined ( "EXCEPTION_OCCURRED" ) and ! $GLOBALS ["no_cache"]) {
