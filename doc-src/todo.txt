@@ -12,7 +12,6 @@
 [ ] Multisite-Fähigkeit / Scopes implementieren
 [ ] Autosave / Restore bei Browsercrash
 [ ] Seitenverwaltung - Beim Auswählen einer Sprache soll "Übergeordnete Seite" mit einer Liste der Seiten aus der gewählten Sprache aktualisiert werden
-[ ] Attribut force_caching (boolean) zur Seitenverwaltung hinzufügen, wenn force_caching = true ist, wird eine Seite immer gecacht, auch wenn diese ein Modul enthält.
 [X] "cache_control" Option zur Inhalteverwaltung hinzufügen.
 	[X] Auto
 	[X] Cach
