@@ -9,7 +9,7 @@ if ($_REQUEST ["action"] == "install-sin-package" and isNotNullOrEmpty ( $_REQUE
 	$path = Path::resolve ( "ULICMS_TMP/$file" );
 	$pkg = new SinPackageInstaller ( $path );
 	$pkg->installPackage ();
-	@unlink($path);
+	@unlink ( $path );
 	Request::redirect ( "index.php?action=sin-package-install-ok&file=$file" );
 }
 if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] ) && $acl->hasPermission ( "settings_simple" )) {
@@ -191,6 +191,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$custom_data = db_escape ( $_POST ["custom_data"] );
 		$theme = db_escape ( $_POST ["theme"] );
 		$type = db_escape ( $_POST ["type"] );
+		$cache_control = db_escape ( $_POST ["cache_control"] );
 		
 		if ($_POST ["parent"] == "NULL") {
 			$parent = "NULL";
@@ -247,12 +248,12 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`,
-  `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`)
+  `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`)
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", " . $comments_enabled . ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
-  '$og_description', '$og_type', '$og_image', '$type', $module, $video, $audio, '$text_position', $image_url, $approved, $show_headline)" ) or die ( db_error () );
+  '$og_description', '$og_type', '$og_image', '$type', $module, $video, $audio, '$text_position', $image_url, $approved, $show_headline, '$cache_control')" ) or die ( db_error () );
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
 		if ($type == "list") {
@@ -376,6 +377,8 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$custom_data = db_escape ( $_POST ["custom_data"] );
 	$theme = db_escape ( $_POST ["theme"] );
 	
+	$cache_control = db_escape ( $_POST ["cache_control"] );
+	
 	$alternate_title = db_escape ( $_POST ["alternate_title"] );
 	
 	$parent = "NULL";
@@ -432,7 +435,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	
 	add_hook ( "before_edit_page" );
 	$sql = "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
-	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, image_url = $image_url, show_headline = $show_headline $approved_sql WHERE id=$id";
+	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql WHERE id=$id";
 	db_query ( $sql ) or die ( DB::error () );
 	
 	$user_id = get_user_id ();

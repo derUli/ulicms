@@ -388,6 +388,31 @@ function openMenuImageSelectWindow(field) {
 				<?php translate ( "target_blank" );?></option>
 			</select>
 		</div>
+
+
+		<div id="tab-cache-control" style="display: none;">
+			<h2 class="accordion-header"><?php translate("cache_control");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("cache_control");?></strong> <br /> <select
+					name="cache_control">
+					<option value="auto" <?php if($row->cache_control == "auto"){
+						 echo "selected";
+						
+					}?>><?php translate("auto");?></option>
+					<option value="force" <?php if($row->cache_control == "force"){
+						 echo "selected";
+						
+					}?>><?php translate("force");?></option>
+					<option value="no_cache" <?php if($row->cache_control == "no_cache"){
+						 echo "selected";
+						
+					}?>><?php translate("no_cache");?></option>
+				</select>
+			</div>
+		</div>
+
+
 		<div id="tab-og" style="display: none">
 			<h2 class="accordion-header"><?php translate("open_graph");?></h2>
 
@@ -445,6 +470,8 @@ function openMenuImageSelectWindow(field) {
 				</div>
 			</div>
 		</div>
+
+
 		<div id="tab-list" class="list-show">
 			<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
