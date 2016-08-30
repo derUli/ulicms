@@ -27,10 +27,10 @@ Inhaltstyp "Artikel":
 [ ] Kommentarfunktion implementieren
 [ ] Eigene Templates 
 
-User
+User:
 [ ] Backend Startseite (welche Seite soll nach dem Login als erstes gezeigt werden)
 
-Datenbank
+Datenbank:
 [X] Option "Fremdschlüssel setzen" zum Installer hinzufügen
 
 [ ] Möglichkeit eigene Inhaltstypen mit frei definierbaren Feldern , ähnlich wie z.B. in Drupal
