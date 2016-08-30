@@ -141,6 +141,18 @@ $cached_page_path = buildCacheFilePath ( $_SERVER ['REQUEST_URI'] );
 $modules = getAllModules ();
 $hasModul = containsModule ( get_requested_pagename () );
 
+$cache_control = get_cache_control ();
+switch ($cache_control) {
+	case "auto" :
+	case "force" :
+		$GLOBALS ["no_cache"] = false;
+		break;
+		break;
+	case "no_cache" :
+		$GLOBALS ["no_cache"] = true;
+		break;
+}
+
 // Kein Caching wenn man eingeloggt ist
 if (is_logged_in () and get_cache_control () == "auto") {
 	no_cache ();
