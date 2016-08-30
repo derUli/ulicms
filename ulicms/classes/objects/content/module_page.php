@@ -26,6 +26,7 @@ class Module_Page extends Page {
 		$this->meta_keywords = $result->meta_keywords;
 		$this->deleted_at = $result->deleted_at;
 		$this->html_file = $result->html_file;
+		$this->cache_control = $result->cache_control;
 		$this->theme = $result->theme;
 		if ($this->customData === null) {
 			$this->custom_data = array ();
@@ -74,7 +75,7 @@ class Module_Page extends Page {
 		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category,
 				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views,
 				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
-				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, module) VALUES (";
+				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, module, cache_control) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->title ) . "',";
@@ -150,7 +151,8 @@ class Module_Page extends Page {
 		$sql .= "'" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_image ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_description ) . "',";
-		$sql .= "'" . DB::escapeValue ( $this->module ) . "'";
+		$sql .= "'" . DB::escapeValue ( $this->module ) . "', ";
+		$sql .= "'" . DB::escapeValue ( $this->cache_control ) . "'";
 		$sql .= ")";
 		
 		$result = DB::Query ( $sql ) or die ( DB::error () );
@@ -240,7 +242,8 @@ class Module_Page extends Page {
 		$sql .= "og_type='" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "og_image='" . DB::escapeValue ( $this->og_image ) . "',";
 		$sql .= "og_description='" . DB::escapeValue ( $this->og_description ) . "', ";
-		$sql .= "module='" . DB::escapeValue ( $this->module ) . "' ";
+		$sql .= "module='" . DB::escapeValue ( $this->module ) . "', ";
+		$sql .= "cache_control='" . DB::escapeValue ( $this->cache_control ) . "' ";
 		$sql .= " WHERE id = " . $this->id;
 		
 		$result = DB::query ( $sql ) or die ( DB::getLastError () );

@@ -675,4 +675,9 @@ define ( "TRANSLATION_ERRORS", "Errors" );
 
 define ( "TRANSLATION_SIZE", "Size" );
 
+define ( "TRANSLATION_CACHE_CONTROL", "Cache Control" );
+define ( "TRANSLATION_AUTO", "Auto" );
+define ( "TRANSLATION_FORCE", "Enforce" );
+define ( "TRANSLATION_NO_CACHE", "Disable Cache" );
+
 add_hook ( "lang_en" );

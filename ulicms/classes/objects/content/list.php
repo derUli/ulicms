@@ -22,6 +22,7 @@ class Content_List extends Content {
 	public $position = 0;
 	public $parent = null;
 	public $access = "all";
+	public $cache_control = "auto";
 	public $meta_description = "";
 	public $meta_keywords = "";
 	private $deleted_at = null;
@@ -75,6 +76,7 @@ class Content_List extends Content {
 		$this->og_type = $result->og_type;
 		$this->og_image = $result->og_image;
 		$this->og_description = $result->og_description;
+		$this->cache_control = $result->cache_control;
 		
 		$this->listData = new List_Data ( $this->id );
 	}
@@ -112,7 +114,7 @@ class Content_List extends Content {
 		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category, 
 				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views, 
 				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at, 
-				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description) VALUES (";
+				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->title ) . "',";
@@ -187,7 +189,8 @@ class Content_List extends Content {
 		$sql .= "'" . DB::escapeValue ( $this->og_title ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_image ) . "',";
-		$sql .= "'" . DB::escapeValue ( $this->og_description ) . "'";
+		$sql .= "'" . DB::escapeValue ( $this->og_description ) . "',";
+		$sql .= "'" . DB::escapeValue ( $this->cache_control ) . "'";
 		$sql .= ")";
 		
 		$result = DB::Query ( $sql ) or die ( DB::error () );
@@ -277,7 +280,8 @@ class Content_List extends Content {
 		$sql .= "og_title='" . DB::escapeValue ( $this->og_title ) . "',";
 		$sql .= "og_type='" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "og_image='" . DB::escapeValue ( $this->og_image ) . "',";
-		$sql .= "og_description='" . DB::escapeValue ( $this->og_description ) . "' ";
+		$sql .= "og_description='" . DB::escapeValue ( $this->og_description ) . "', ";
+		$sql .= "cache_control='" . DB::escapeValue ( $this->cache_control ) . "'";
 		
 		$sql .= " WHERE id = " . $this->id;
 		
