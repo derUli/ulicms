@@ -9,7 +9,7 @@ if ($_REQUEST ["action"] == "install-sin-package" and isNotNullOrEmpty ( $_REQUE
 	$path = Path::resolve ( "ULICMS_TMP/$file" );
 	$pkg = new SinPackageInstaller ( $path );
 	$pkg->installPackage ();
-	@unlink($path);
+	@unlink ( $path );
 	Request::redirect ( "index.php?action=sin-package-install-ok&file=$file" );
 }
 if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] ) && $acl->hasPermission ( "settings_simple" )) {
@@ -646,8 +646,9 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 		$rechte = $user ["group"];
 		$admin = $user ["admin"];
 		$group_id = $user ["group_id"];
-		if (is_null ( $group_id ))
+		if (is_null ( $group_id )) {
 			$group_id = "NULL";
+		}
 	}
 	
 	$notify_on_login = intval ( isset ( $_POST ["notify_on_login"] ) );
@@ -669,8 +670,9 @@ about_me = '$about_me', html_editor='$html_editor', require_password_change='$re
 	
 	db_query ( $sql );
 	
-	if (! empty ( $password ))
+	if (! empty ( $password )){
 		changePassword ( $password, $id );
+	}
 	
 	add_hook ( "after_edit_user" );
 	;
