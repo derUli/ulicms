@@ -1320,8 +1320,8 @@ function getAllModules() {
 	return $pkg->getInstalledPackages ( 'modules' );
 }
 function no_cache() {
-	if (! defined ( "NO_CACHE" )) {
-		define ( "NO_CACHE", true );
+	if(get_cache_control() == "auto"){
+		$GLOBALS["no_cache"] = true;
 	}
 }
 function no_anti_csrf() {

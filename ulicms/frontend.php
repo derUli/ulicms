@@ -142,7 +142,7 @@ $modules = getAllModules ();
 $hasModul = containsModule ( get_requested_pagename () );
 
 // Kein Caching wenn man eingeloggt ist
-if (is_logged_in ()) {
+if (is_logged_in () and get_cache_control () == "auto") {
 	no_cache ();
 }
 
@@ -167,7 +167,7 @@ if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) a
 	$cached_content = file_get_contents ( $cached_page_path );
 	$last_modified = filemtime ( $cached_page_path );
 	
-	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! defined ( "NO_CACHE" )) {
+	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! $GLOBALS ["no_cache"]) {
 		eTagFromString ( $cached_content );
 		browsercacheOneDay ( $last_modified );
 		echo $cached_content;
@@ -269,7 +269,7 @@ add_hook ( "after_html" );
 if (! Settings::get ( "cache_disabled" ) and ! $hasModul and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
 	$data = ob_get_clean ();
 	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! defined ( "NO_CACHE" )) {
+	if (! defined ( "EXCEPTION_OCCURRED" ) and ! $GLOBALS ["no_cache"]) {
 		$Cache_Lite->save ( $data, $id );
 	}
 	
