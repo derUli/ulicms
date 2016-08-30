@@ -1320,7 +1320,7 @@ function getAllModules() {
 	return $pkg->getInstalledPackages ( 'modules' );
 }
 function no_cache() {
-	if(get_cache_control() == "auto"){
+	if(get_cache_control() == "auto" || get_cache_control() == "no_cache"){
 		$GLOBALS["no_cache"] = true;
 	}
 }
