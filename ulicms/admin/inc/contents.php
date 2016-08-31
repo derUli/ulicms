@@ -29,7 +29,7 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 		?><a href='?action=forms'><?php
 		
 		translate ( "forms" );
-		?></a> <br /> <br />
+		?></a> <br />
 				<?php
 	}
 	?>
@@ -39,7 +39,7 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	if ($acl->hasPermission ( "banners" )) {
 		?>
 	<a href="index.php?action=banner"><?php get_translation("advertisements");?></a><br />
-	<br />
+
 	<?php
 	}
 	?>

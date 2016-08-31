@@ -12,12 +12,12 @@
 [ ] Multisite-Fähigkeit / Scopes implementieren
 [ ] Autosave / Restore bei Browsercrash
 [ ] Seitenverwaltung - Beim Auswählen einer Sprache soll "Übergeordnete Seite" mit einer Liste der Seiten aus der gewählten Sprache aktualisiert werden
-[ ] Attribut force_caching (boolean) zur Seitenverwaltung hinzufügen, wenn force_caching = true ist, wird eine Seite immer gecacht, auch wenn diese ein Modul enthält.
-[ ] "cache_control" Option zur Inhalteverwaltung hinzufügen.
-	[ ] Auto
-	[ ] Cache
-	[ ] No Cache
+[X] "cache_control" Option zur Inhalteverwaltung hinzufügen.
+	[X] Auto
+	[X] Cach
+	[X] No Cache
 [ ] editable_for_admins_only checkbox on contents
+
 Inhaltstyp "Artikel":
 [ ] Um Metadaten erweitern
 	[ ] author_name (varchar 80)
@@ -26,11 +26,15 @@ Inhaltstyp "Artikel":
  	[ ] Feld zum Hochladen von Artikelbild
 [ ] Kommentarfunktion implementieren
 [ ] Eigene Templates 
-User
+
+User:
 [ ] Backend Startseite (welche Seite soll nach dem Login als erstes gezeigt werden)
 
-Datenbank
+Datenbank:
 [X] Option "Fremdschlüssel setzen" zum Installer hinzufügen
 
 [ ] Möglichkeit eigene Inhaltstypen mit frei definierbaren Feldern , ähnlich wie z.B. in Drupal
+
 [ ] "Passwort wiederholen" Feld unter "Profil bearbeiten"
+
+[ ] Beim Löschen eines Users sollen alle Datensätze des gelöschten Users an einen anderen User übertragen werden können.

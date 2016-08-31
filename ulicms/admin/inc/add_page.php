@@ -297,6 +297,19 @@ function openMenuImageSelectWindow(field) {
 				</div>
 			</div>
 		</div>
+		<div id="tab-cache-control" style="display: none;">
+			<h2 class="accordion-header"><?php translate("cache_control");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("cache_control");?></strong> <br /> <select
+					name="cache_control">
+					<option value="auto" selected><?php translate("auto");?></option>
+					<option value="force"><?php translate("force");?></option>
+					<option value="no_cache"><?php translate("no_cache");?></option>
+				</select>
+			</div>
+		</div>
+
 		<div id="tab-list" style="display: none">
 			<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 

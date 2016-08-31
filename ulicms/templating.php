@@ -118,7 +118,7 @@ function get_edit_button() {
 	$html = "";
 	if (is_logged_in () and ! containsModule ()) {
 		$acl = new ACL ();
-		if ($acl->hasPermission ( "pages" ) and defined ( "NO_CACHE" )) {
+		if ($acl->hasPermission ( "pages" ) and $GLOBALS["no_cache"]) {
 			$id = get_ID ();
 			$html .= "<div class=\"ulicms_edit\">[<a href=\"admin/index.php?action=pages_edit&page=$id\">" . get_translation ( "edit" ) . "</a>]</div>";
 		}
@@ -158,6 +158,25 @@ function get_type() {
 	$result = apply_filter ( $result, "get_type" );
 	return $result;
 }
+
+function get_cache_control() {
+	if (! $page) {
+		$page = get_requested_pagename ();
+	}
+	$result = "";
+	$sql = "SELECT `cache_control` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
+	$query = db_query ( $sql );
+	if ($query and db_num_rows ( $query ) > 0) {
+		$result = db_fetch_object ( $query );
+		$result = $result->cache_control;
+	}
+	if (empty ( $result )) {
+		$result = "auto";
+	}
+	$result = apply_filter ( $result, "get_cache_control" );
+	return $result;
+}
+
 function get_text_position() {
 	if (! $page) {
 		$page = get_requested_pagename ();

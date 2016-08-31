@@ -117,6 +117,8 @@ Database::query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN show_head
 Database::query ( "ALTER TABLE " . tbname ( "lists" ) . " ADD COLUMN `use_pagination` tinyint(1) NOT NULL DEFAULT '0'" );
 Database::query ( "ALTER TABLE " . tbname ( "lists" ) . " ADD COLUMN `type` varchar(50) DEFAULT NULL" );
 
+Database::query ( "alter table " . tbname ( "content" ) . " add column `cache_control` varchar(10) default 'auto'" );
+
 Settings::set ( "db_schema_version", "9.8.5" );
 
 // Patch Manager zurücksetzen
