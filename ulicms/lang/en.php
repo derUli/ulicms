@@ -682,6 +682,7 @@ define ( "TRANSLATION_NO_CACHE", "Disable Cache" );
 
 define ( "TRANSLATION_AUTHOR_NAME", "Author Name" );
 define ( "TRANSLATION_AUTHOR_EMAIL", "Author E-Mail Adress" );
+define ( "TRANSLATION_ARTICLE_DATE", "Artikeldatum" );
 define ( "TRANSLATION_ARTICLE_IMAGE", "Article Image" );
 
 add_hook ( "lang_en" );
