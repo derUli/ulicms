@@ -681,5 +681,6 @@ define ( "TRANSLATION_FORCE", "Enforce" );
 define ( "TRANSLATION_NO_CACHE", "Disable Cache" );
 
 define ( "TRANSLATION_AUTHOR_NAME", "Author Name" );
+define ( "TRANSLATION_AUTHOR_EMAIL", "Author E-Mail Adress" );
 
 add_hook ( "lang_en" );

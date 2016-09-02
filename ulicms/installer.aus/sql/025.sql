@@ -1,1 +1,1 @@
-alter table `{prefix}content` add column `article_last_email` datetime default null;
+alter table `{prefix}content` add column `article_date` datetime default null;

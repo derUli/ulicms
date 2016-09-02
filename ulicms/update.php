@@ -121,7 +121,7 @@ Database::query ( "alter table " . tbname ( "content" ) . " add column `cache_co
 
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_author_name` varchar(80) default '';" );
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_author_email` varchar(80) default '';" );
-Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_last_email` datetime default null;" );
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_date` datetime default null;" );
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_article_image` varchar(255) default '';" );
 
 Settings::set ( "db_schema_version", "9.8.5" );
