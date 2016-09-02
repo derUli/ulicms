@@ -673,5 +673,6 @@ define ( "TRANSLATION_AUTO", "Automatisch" );
 define ( "TRANSLATION_FORCE", "Erzwingen" );
 define ( "TRANSLATION_NO_CACHE", "Caching deaktiviert" );
 
+define ( "TRANSLATION_AUTHOR_NAME", "Name des Autors" );
 
 add_hook ( "lang_de" );
