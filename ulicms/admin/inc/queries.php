@@ -242,18 +242,21 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			$approved = 0;
 		}
 		
+		$article_author_name = Database::escapeValue ( $_POST ["article_author_name"] );
+		$article_author_email = Database::escapeValue ( $_POST ["article_author_email"] );
+		
 		$show_headline = intval ( $_POST ["show_headline"] );
 		
 		add_hook ( "before_create_page" );
 		db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`,
-  `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`)
+  `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`)
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", " . $comments_enabled . ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
-  '$og_description', '$og_type', '$og_image', '$type', $module, $video, $audio, '$text_position', $image_url, $approved, $show_headline, '$cache_control')" ) or die ( db_error () );
+  '$og_description', '$og_type', '$og_image', '$type', $module, $video, $audio, '$text_position', $image_url, $approved, $show_headline, '$cache_control', '$article_author_name', '$article_author_email')" ) or die ( db_error () );
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
 		if ($type == "list") {
@@ -673,7 +676,7 @@ about_me = '$about_me', html_editor='$html_editor', require_password_change='$re
 	
 	db_query ( $sql );
 	
-	if (! empty ( $password )){
+	if (! empty ( $password )) {
 		changePassword ( $password, $id );
 	}
 	
