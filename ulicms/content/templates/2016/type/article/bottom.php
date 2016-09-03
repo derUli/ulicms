@@ -19,10 +19,7 @@ if (isNotNullOrEmpty ( $article_meta )) {
 	if (isNotNullOrEmpty ( $article_meta->article_date )) {
 		?>
 	<?php translate("on_time");?>
-		<?php
-		
-		echo strftime ( "%A, %x %X", strtotime ( $article_meta->article_date ) );
-		?>
+		<?php echo strftime ( "%A, %x %X", strtotime ( $article_meta->article_date ) );?>
 		
 		<?php translate("o_clock");?>
 	 
