@@ -677,6 +677,7 @@ define ( "TRANSLATION_AUTHOR_NAME", "Name des Autors" );
 define ( "TRANSLATION_AUTHOR_EMAIL", "E-Mail Adresse des Autors" );
 define ( "TRANSLATION_ARTICLE_DATE", "Artikeldatum" );
 define ( "TRANSLATION_ARTICLE_IMAGE", "Artikelbild" );
+
 define ( "TRANSLATION_ON_TIME", "Um" );
 define ( "TRANSLATION_O_CLOCK", "Uhr" );
 
