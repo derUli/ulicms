@@ -236,6 +236,8 @@ if ($html_file) {
 	}
 } else {
 	$top_files = array (
+			"type/" . get_type () . "/oben.php",
+			"type/" . get_type () . "/top.php",
 			"oben.php",
 			"top.php" 
 	);
@@ -266,6 +268,8 @@ if ($html_file) {
 	edit_button ();
 	add_hook ( "after_edit_button" );
 	$bottom_files = array (
+			"type-" . get_type () . "/unten.php",
+			"type-" . get_type () . "/bottom.php",
 			"unten.php",
 			"bottom.php" 
 	);
