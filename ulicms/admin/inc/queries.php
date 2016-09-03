@@ -245,7 +245,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$article_author_name = Database::escapeValue ( $_POST ["article_author_name"] );
 		$article_author_email = Database::escapeValue ( $_POST ["article_author_email"] );
 		$article_image = Database::escapeValue ( $_POST ["article_image"] );
-		$article_date = date ( 'c', strtotime ( $_POST ["article_date"] ) );
+		$article_date = date ( DATE_RFC3339, strtotime ( $_POST ["article_date"] ) );
 		
 		$show_headline = intval ( $_POST ["show_headline"] );
 		
@@ -441,7 +441,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$article_author_name = Database::escapeValue ( $_POST ["article_author_name"] );
 	$article_author_email = Database::escapeValue ( $_POST ["article_author_email"] );
 	$article_image = Database::escapeValue ( $_POST ["article_image"] );
-	$article_date = date ( 'c', strtotime ( $_POST ["article_date"] ) );
+	$article_date = date ( DATE_RFC3339, strtotime ( $_POST ["article_date"] ) );
 	
 	add_hook ( "before_edit_page" );
 	$sql = "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
