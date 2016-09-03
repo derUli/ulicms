@@ -304,6 +304,23 @@ function openMenuImageSelectWindow(field) {
 					value="<?php
 			echo htmlspecialchars ( $row->meta_keywords );
 			?>">
+				<div id="article-metadata">
+					<br /> <strong><?php translate("author_name");?></strong><br /> <input
+						type="text" name="article_author_name"
+						value="<?php echo real_htmlspecialchars($row->article_author_name);?>"
+						maxlength="80"> <br /> <br /> <strong><?php translate("author_email");?></strong><br />
+					<input type="email" name="article_author_email"
+						value="<?php echo real_htmlspecialchars($row->article_author_email);?>"
+						maxlength="80"> <br /> <br /> <strong><?php translate("article_date");?></strong><br />
+					<input name="article_date" type="datetime-local"
+						value="<?php
+				
+if (isNotNullOrEmpty ( $row->article_date )) {
+					echo date ( "Y-m-d\TH:i:s", strtotime ( $row->article_date ) );
+				}
+				?>"
+						step=any>
+				</div>
 			</div>
 		</div>
 
@@ -624,6 +641,36 @@ function openMenuImageSelectWindow(field) {
 						<?php if($row->text_position == "after") echo "selected";?>><?php translate("description_after_content")?></option>
 				</select>
 
+			</div>
+		</div>
+
+		<div id="article-image">
+			<h2 class="accordion-header"><?php translate("article_image");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("article_image");?>
+		</strong><br />
+
+				<script type="text/javascript">
+function openArticleImageSelectWindow(field) {
+    window.KCFinder = {
+        callBack: function(url) {
+            field.value = url;
+            window.KCFinder = null;
+        }
+    };
+    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'article_image',
+        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+        'resizable=1, scrollbars=0, width=800, height=600'
+    );
+}
+</script>
+				<input type="text" id="article_image" name="article_image"
+					readonly="readonly" onclick="openArticleImageSelectWindow(this)"
+					value="<?php echo real_htmlspecialchars($row->article_image);?>"
+					style="cursor: pointer" /><br /> <a href="#"
+					onclick="$('#article_image').val('');return false;" maxlength="255"><?php translate("clear");?>
+		</a>
 			</div>
 		</div>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
