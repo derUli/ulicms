@@ -33,6 +33,10 @@ class Article extends Content {
 	public $og_image = "";
 	public $og_description = "";
 	public $cache_control = "auto";
+	public $article_author_name = "";
+	public $article_author_email = "";
+	public $article_date = "";
+	public $article_image = "";
 	public function __construct() {
 		if ($this->custom_data === null) {
 			$this->custom_data = array ();
@@ -75,6 +79,10 @@ class Article extends Content {
 		$this->og_image = $result->og_image;
 		$this->og_description = $result->og_description;
 		$this->cache_control = $result->cache_control;
+		$this->article_author_email = $result->article_author_email;
+		$this->article_author_name = $result->article_author_name;
+		$this->article_image = $result->article_image;
+		$this->article_date = $result->article_date;
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
@@ -110,7 +118,7 @@ class Article extends Content {
 		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category,
 				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views,
 				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
-				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, `cache_control`) VALUES (";
+				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, `cache_control`, article_author_email, article_author_name, article_date, article_image) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->title ) . "',";
@@ -186,7 +194,13 @@ class Article extends Content {
 		$sql .= "'" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_image ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_description ) . "',";
-		$sql .= "'" . DB::escapeValue ( $this->cache_control ) . "'";
+		$sql .= "'" . DB::escapeValue ( $this->cache_control ) . "', ";
+		$sql .= "'" . DB::escapeValue ( $this->article_author_email ) . "', ";
+		$sql .= "'" . DB::escapeValue ( $this->article_author_name ) . "', ";
+		
+		$sql .= "'" . DB::escapeValue ( $this->article_date ) . "', ";
+		$sql .= "'" . DB::escapeValue ( $this->article_image ) . "'";
+		
 		$sql .= ")";
 		
 		$result = DB::Query ( $sql ) or die ( DB::error () );
@@ -276,7 +290,13 @@ class Article extends Content {
 		$sql .= "og_type='" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "og_image='" . DB::escapeValue ( $this->og_image ) . "',";
 		$sql .= "og_description='" . DB::escapeValue ( $this->og_description ) . "', ";
-		$sql .= "cache_control = '" . DB::escapeValue ( $this->cache_control ) . "' ";
+		$sql .= "cache_control = '" . DB::escapeValue ( $this->cache_control ) . "', ";
+		
+		$sql .= "article_author_email = '" . DB::escapeValue ( $this->article_author_email ) . "', ";
+		$sql .= "article_author_name = '" . DB::escapeValue ( $this->article_author_name ) . "', ";
+		
+		$sql .= "article_date ='" . DB::escapeValue ( $this->article_date ) . "', ";
+		$sql .= "article_image = '" . DB::escapeValue ( $this->article_image ) . "' ";
 		
 		$sql .= " WHERE id = " . $this->id;
 		
