@@ -19,13 +19,13 @@
 [ ] editable_for_admins_only checkbox on contents
 
 Inhaltstyp "Artikel":
-[ ] Um Metadaten erweitern
-	[ ] author_name (varchar 80)
-	[ ] author_email (varchar 80)
-	[ ] last_update (date default null)
+[X] Um Metadaten erweitern
+	[X] author_name (varchar 80)
+	[X] author_email (varchar 80)
+	[X] last_update (date default null)
  	[ ] Feld zum Hochladen von Artikelbild
 [ ] Kommentarfunktion implementieren
-[ ] Eigene Templates 
+[X] Eigene Templates 
 
 User:
 [ ] Backend Startseite (welche Seite soll nach dem Login als erstes gezeigt werden)
