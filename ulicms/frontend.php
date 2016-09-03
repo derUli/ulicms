@@ -268,8 +268,8 @@ if ($html_file) {
 	edit_button ();
 	add_hook ( "after_edit_button" );
 	$bottom_files = array (
-			"type-" . get_type () . "/unten.php",
-			"type-" . get_type () . "/bottom.php",
+			"type/" . get_type () . "/unten.php",
+			"type/" . get_type () . "/bottom.php",
 			"unten.php",
 			"bottom.php" 
 	);

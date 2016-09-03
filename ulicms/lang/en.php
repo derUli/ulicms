@@ -685,4 +685,7 @@ define ( "TRANSLATION_AUTHOR_EMAIL", "Author E-Mail Adress" );
 define ( "TRANSLATION_ARTICLE_DATE", "Artikeldatum" );
 define ( "TRANSLATION_ARTICLE_IMAGE", "Article Image" );
 
+define ( "TRANSLATION_ON_TIME", "At" );
+define ( "TRANSLATION_O_CLOCK", "o'clock" );
+
 add_hook ( "lang_en" );
