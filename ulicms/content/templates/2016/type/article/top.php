@@ -7,6 +7,6 @@ if (isNotNullOrEmpty ( $article_meta ) and isNotNullOrEmpty ( $article_meta->art
 	?>
 <div id="main-article-image">
 <img src="<?php Template::escape($article_meta->article_image)?>"
-	alt="<?php title();?>"></div>
+	alt="<?php headline();?>"></div>
 <?php
 }
