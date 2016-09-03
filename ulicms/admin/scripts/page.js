@@ -12,6 +12,7 @@ function showAndHideFieldsByType() {
 		$("#tab-text-position").slideDown();
 		$("#tab-cache-control").slideDown();
 		$("#article-metadata").slideUp();
+		$("#article-image").slideUp();
 	} else if ($("#type_link").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideDown();
@@ -25,6 +26,7 @@ function showAndHideFieldsByType() {
 		$("#tab-text-position").slideUp();
 		$("#tab-cache-control").slideUp();
 		$("#article-metadata").slideUp();
+		$("#article-image").slideUp();
 	} else if ($("#type_module").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
@@ -38,6 +40,7 @@ function showAndHideFieldsByType() {
 		$("#tab-text-position").slideDown();
 		$("#tab-cache-control").slideDown();
 		$("#article-metadata").slideUp();
+		$("#article-image").slideUp();
 	} else if ($("#type_video").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
@@ -51,6 +54,7 @@ function showAndHideFieldsByType() {
 		$("#tab-text-position").slideDown();
 		$("#tab-cache-control").slideDown();
 		$("#article-metadata").slideUp();
+		$("#article-image").slideUp();
 	} else if ($("#type_audio").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
@@ -64,6 +68,7 @@ function showAndHideFieldsByType() {
 		$("#tab-cache-control").slideDown();
 		$("#tab-text-position").slideDown();
 		$("#article-metadata").slideUp();
+		$("#article-image").slideUp();
 	} else if ($("#type_image").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
@@ -77,6 +82,7 @@ function showAndHideFieldsByType() {
 		$("#tab-text-position").slideDown();
 		$("#tab-cache-control").slideDown();
 		$("#article-metadata").slideUp();
+		$("#article-image").slideUp();
 	} else {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
@@ -91,8 +97,10 @@ function showAndHideFieldsByType() {
 		$("#tab-cache-control").slideDown();
 		if ($("#type_article").is(":checked")) {
 			$("#article-metadata").slideDown();
+			$("#article-image").slideDown();
 		} else {
 			$("#article-metadata").slideUp();
+			$("#article-image").slideUp();
 		}
 	}
 }
