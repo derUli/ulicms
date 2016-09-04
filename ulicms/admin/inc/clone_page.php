@@ -48,7 +48,7 @@ if (defined ( "_SECURITY" )) {
 			<select name="show_headline">
 				<option value="1"
 					<?php if($row->show_headline == 1) echo "selected";?>><?php translate("yes");?></option>
-				<option vlaue="0"
+				<option value="0"
 					<?php if($row->show_headline == 0) echo "selected";?>><?php translate("no");?></option>
 			</select>
 		</div>
@@ -670,8 +670,7 @@ function openArticleImageSelectWindow(field) {
 					readonly="readonly" onclick="openArticleImageSelectWindow(this)"
 					value="<?php echo real_htmlspecialchars($row->article_image);?>"
 					style="cursor: pointer" maxlength="255" /><br /> <a href="#"
-					onclick="$('#article_image').val('');return false;"><?php translate("clear");?>
-		</a>
+					onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 			</div>
 		</div>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>

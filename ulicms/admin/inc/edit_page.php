@@ -68,7 +68,7 @@ if (defined ( "_SECURITY" )) {
 
 		<div class="accordion-content">
 			<strong><?php translate("permalink");?></strong><br /> <input
-				type="text" required="true" name="system_title"
+				type="text" required="required" name="system_title"
 				value="<?php
 				
 				echo htmlspecialchars ( $row->systemname );
@@ -755,8 +755,7 @@ function openArticleImageSelectWindow(field) {
 					readonly="readonly" onclick="openArticleImageSelectWindow(this)"
 					value="<?php echo real_htmlspecialchars($row->article_image);?>"
 					style="cursor: pointer" maxlength="255" /><br /> <a href="#"
-					onclick="$('#article_image').val('');return false;"><?php translate("clear");?>
-		</a>
+					onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 			</div>
 		</div>
 
