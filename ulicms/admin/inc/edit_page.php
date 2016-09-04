@@ -68,7 +68,7 @@ if (defined ( "_SECURITY" )) {
 
 		<div class="accordion-content">
 			<strong><?php translate("permalink");?></strong><br /> <input
-				type="text" required="true" name="system_title"
+				type="text" required="required" name="system_title"
 				value="<?php
 				
 				echo htmlspecialchars ( $row->systemname );
@@ -360,6 +360,24 @@ function openMenuImageSelectWindow(field) {
 					value="<?php
 				echo htmlspecialchars ( $row->meta_keywords );
 				?>">
+				<div id="article-metadata">
+					<br /> <strong><?php translate("author_name");?></strong><br /> <input
+						type="text" name="article_author_name"
+						value="<?php echo real_htmlspecialchars($row->article_author_name);?>"
+						maxlength="80"> <br /> <br /> <strong><?php translate("author_email");?></strong><br />
+					<input type="email" name="article_author_email"
+						value="<?php echo real_htmlspecialchars($row->article_author_email);?>"
+						maxlength="80"> <br /> <br /> <strong><?php translate("article_date");?></strong><br />
+					<input name="article_date" type="datetime-local"
+						value="<?php
+				
+				if (isNotNullOrEmpty ( $row->article_date )) {
+					echo date ( "Y-m-d\TH:i:s", strtotime ( $row->article_date ) );
+				}
+				?>"
+						step=any> <br /> <br /> <strong><?php translate("excerpt");?></strong>
+					<textarea name="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt);?></textarea>
+				</div>
 			</div>
 		</div>
 
@@ -396,18 +414,27 @@ function openMenuImageSelectWindow(field) {
 			<div class="accordion-content">
 				<strong><?php translate("cache_control");?></strong> <br /> <select
 					name="cache_control">
-					<option value="auto" <?php if($row->cache_control == "auto"){
-						 echo "selected";
-						
-					}?>><?php translate("auto");?></option>
-					<option value="force" <?php if($row->cache_control == "force"){
-						 echo "selected";
-						
-					}?>><?php translate("force");?></option>
-					<option value="no_cache" <?php if($row->cache_control == "no_cache"){
-						 echo "selected";
-						
-					}?>><?php translate("no_cache");?></option>
+					<option value="auto"
+						<?php
+				
+				if ($row->cache_control == "auto") {
+					echo "selected";
+				}
+				?>><?php translate("auto");?></option>
+					<option value="force"
+						<?php
+				
+				if ($row->cache_control == "force") {
+					echo "selected";
+				}
+				?>><?php translate("force");?></option>
+					<option value="no_cache"
+						<?php
+				
+				if ($row->cache_control == "no_cache") {
+					echo "selected";
+				}
+				?>><?php translate("no_cache");?></option>
 				</select>
 			</div>
 		</div>
@@ -701,6 +728,34 @@ function openMenuImageSelectWindow(field) {
 				?>><?php translate("description_after_content")?></option>
 				</select>
 
+			</div>
+		</div>
+		<div id="article-image">
+			<h2 class="accordion-header"><?php translate("article_image");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("article_image");?>
+		</strong><br />
+
+				<script type="text/javascript">
+function openArticleImageSelectWindow(field) {
+    window.KCFinder = {
+        callBack: function(url) {
+            field.value = url;
+            window.KCFinder = null;
+        }
+    };
+    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'article_image',
+        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+        'resizable=1, scrollbars=0, width=800, height=600'
+    );
+}
+</script>
+				<input type="text" id="article_image" name="article_image"
+					readonly="readonly" onclick="openArticleImageSelectWindow(this)"
+					value="<?php echo real_htmlspecialchars($row->article_image);?>"
+					style="cursor: pointer" maxlength="255" /><br /> <a href="#"
+					onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 			</div>
 		</div>
 

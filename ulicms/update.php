@@ -119,6 +119,12 @@ Database::query ( "ALTER TABLE " . tbname ( "lists" ) . " ADD COLUMN `type` varc
 
 Database::query ( "alter table " . tbname ( "content" ) . " add column `cache_control` varchar(10) default 'auto'" );
 
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_author_name` varchar(80) default '';" );
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_author_email` varchar(80) default '';" );
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_date` datetime default null;" );
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_image` varchar(255) default '';" );
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `excerpt` text default '';" );
+
 Settings::set ( "db_schema_version", "9.8.5" );
 
 // Patch Manager zurücksetzen

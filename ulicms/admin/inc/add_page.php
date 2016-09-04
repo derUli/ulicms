@@ -47,7 +47,7 @@
 	</small> <br /> <br /> <strong><?php translate("show_headline");?></strong>
 			<br /> <select name="show_headline">
 				<option value="1" selected><?php translate("yes");?></option>
-				<option vlaue="0"><?php translate("no");?></option>
+				<option value="0"><?php translate("no");?></option>
 			</select>
 		</div>
 		<h2 class="accordion-header"><?php translate("type");?></h2>
@@ -243,7 +243,19 @@ function openMenuImageSelectWindow(field) {
 		</strong><br /> <input type="text" name="meta_description" value=''> <br />
 				<br /> <strong><?php translate("meta_keywords");?>
 		</strong><br /> <input type="text" name="meta_keywords" value=''>
+				<div id="article-metadata">
+					<br /> <strong><?php translate("author_name");?></strong><br /> <input
+						type="text" name="article_author_name" value="" maxlength="80"> <br />
+					<br /> <strong><?php translate("author_email");?></strong><br /> <input
+						type="email" name="article_author_email" value="" maxlength="80">
+					<br /> <br /> <strong><?php translate("article_date");?></strong><br />
+					<input name="article_date" type="datetime-local"
+						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
+					<strong><?php translate("excerpt");?></strong> <textarea
+						name="excerpt" rows="5" cols="80"></textarea>
+				</div>
 			</div>
+
 		</div>
 		<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
@@ -484,7 +496,33 @@ function openMenuImageSelectWindow(field) {
 
 			</div>
 		</div>
+		<div id="article-image">
+			<h2 class="accordion-header"><?php translate("article_image");?></h2>
 
+			<div class="accordion-content">
+				<strong><?php translate("article_image");?>
+		</strong><br />
+
+				<script type="text/javascript">
+function openArticleImageSelectWindow(field) {
+    window.KCFinder = {
+        callBack: function(url) {
+            field.value = url;
+            window.KCFinder = null;
+        }
+    };
+    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'article_image',
+        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+        'resizable=1, scrollbars=0, width=800, height=600'
+    );
+}
+</script>
+				<input type="text" id="article_image" name="article_image"
+					readonly="readonly" onclick="openArticleImageSelectWindow(this)"
+					value="" style="cursor: pointer" maxlength="255" /><br /> <a
+					href="#" onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
+			</div>
+		</div>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
 		<div class="accordion-content">
@@ -595,6 +633,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 
 	<script src="scripts/page.js" type="text/javascript">
 </script>
+
 </form>
 <?php
 		} else {

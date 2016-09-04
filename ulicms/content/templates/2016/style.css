@@ -271,6 +271,11 @@ div.socialshareprivacy {
 }
 
 .grey-bar {
-	background-color:#4c4c4c;
+	background-color: #4c4c4c;
 	height: 20px;
+}
+
+#article-meta {
+	margin-top: 20px;
+	margin-bottom: 20px;
 }

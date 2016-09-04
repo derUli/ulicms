@@ -152,8 +152,8 @@ switch ($cache_control) {
 		$GLOBALS ["no_cache"] = true;
 		break;
 }
-if($hasModul){
-	no_cache();	
+if ($hasModul) {
+	no_cache ();
 }
 
 // Kein Caching wenn man eingeloggt ist
@@ -197,7 +197,7 @@ if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) a
 	}
 }
 
-if (! Settings::get ( "cache_disabled") and getenv ( 'REQUEST_METHOD' ) == "GET"  and ! file_exists ( $cached_page_path ) and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! file_exists ( $cached_page_path ) and $cache_type === "file") {
 	ob_start ();
 } else if (file_exists ( $cached_page_path )) {
 	$last_modified = filemtime ( $cached_page_path );
@@ -208,7 +208,7 @@ if (! Settings::get ( "cache_disabled") and getenv ( 'REQUEST_METHOD' ) == "GET"
 
 $id = md5 ( $_SERVER ['REQUEST_URI'] . $_SESSION ["language"] . strbool ( is_mobile () ) );
 
-if (! Settings::get ( "cache_disabled" ) and !$GLOBALS["no_cache"] and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
+if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
 	$options = array (
 			'lifeTime' => Settings::get ( "cache_period" ),
 			'cacheDir' => "content/cache/" 
@@ -236,6 +236,8 @@ if ($html_file) {
 	}
 } else {
 	$top_files = array (
+			"type/" . get_type () . "/oben.php",
+			"type/" . get_type () . "/top.php",
 			"oben.php",
 			"top.php" 
 	);
@@ -266,6 +268,8 @@ if ($html_file) {
 	edit_button ();
 	add_hook ( "after_edit_button" );
 	$bottom_files = array (
+			"type/" . get_type () . "/unten.php",
+			"type/" . get_type () . "/bottom.php",
 			"unten.php",
 			"bottom.php" 
 	);
@@ -280,10 +284,10 @@ if ($html_file) {
 
 add_hook ( "after_html" );
 
-if (! Settings::get ( "cache_disabled" ) and !$GLOBALS["no_cache"] and $cache_type === "cache_lite") {
+if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and $cache_type === "cache_lite") {
 	$data = ob_get_clean ();
 	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and !$GLOBALS ["no_cache"]) {
+	if (! defined ( "EXCEPTION_OCCURRED" ) and ! $GLOBALS ["no_cache"]) {
 		$Cache_Lite->save ( $data, $id );
 	}
 	
@@ -300,10 +304,10 @@ if (! Settings::get ( "cache_disabled" ) and !$GLOBALS["no_cache"] and $cache_ty
 	die ();
 }
 
-if (! Settings::get ( "cache_disabled" ) and !$GLOBALS["no_cache"] and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	$generated_html = ob_get_clean ();
 	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! $GLOBALS["no_cache"]) {
+	if (! defined ( "EXCEPTION_OCCURRED" ) and ! $GLOBALS ["no_cache"]) {
 		$handle = fopen ( $cached_page_path, "wb" );
 		fwrite ( $handle, $generated_html );
 		fclose ( $handle );

@@ -673,5 +673,13 @@ define ( "TRANSLATION_AUTO", "Automatisch" );
 define ( "TRANSLATION_FORCE", "Erzwingen" );
 define ( "TRANSLATION_NO_CACHE", "Caching deaktiviert" );
 
+define ( "TRANSLATION_AUTHOR_NAME", "Name des Autors" );
+define ( "TRANSLATION_AUTHOR_EMAIL", "E-Mail Adresse des Autors" );
+define ( "TRANSLATION_ARTICLE_DATE", "Artikeldatum" );
+define ( "TRANSLATION_ARTICLE_IMAGE", "Artikelbild" );
+define ( "TRANSLATION_EXCERPT", "Auszug" );
+
+define ( "TRANSLATION_ON_TIME", "Um" );
+define ( "TRANSLATION_O_CLOCK", "Uhr" );
 
 add_hook ( "lang_de" );
