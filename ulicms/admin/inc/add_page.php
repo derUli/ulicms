@@ -47,7 +47,7 @@
 	</small> <br /> <br /> <strong><?php translate("show_headline");?></strong>
 			<br /> <select name="show_headline">
 				<option value="1" selected><?php translate("yes");?></option>
-				<option vlaue="0"><?php translate("no");?></option>
+				<option value="0"><?php translate("no");?></option>
 			</select>
 		</div>
 		<h2 class="accordion-header"><?php translate("type");?></h2>
@@ -519,8 +519,8 @@ function openArticleImageSelectWindow(field) {
 </script>
 				<input type="text" id="article_image" name="article_image"
 					readonly="readonly" onclick="openArticleImageSelectWindow(this)"
-					value="" style="cursor: pointer" /><br /> <a href="#"
-					onclick="$('#article_image').val('');return false;" maxlength="255"><?php translate("clear");?>
+					value="" style="cursor: pointer" maxlength="255" /><br /> <a
+					href="#" onclick="$('#article_image').val('');return false;"><?php translate("clear");?>
 		</a>
 			</div>
 		</div>
