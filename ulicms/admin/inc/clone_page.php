@@ -669,8 +669,8 @@ function openArticleImageSelectWindow(field) {
 				<input type="text" id="article_image" name="article_image"
 					readonly="readonly" onclick="openArticleImageSelectWindow(this)"
 					value="<?php echo real_htmlspecialchars($row->article_image);?>"
-					style="cursor: pointer" /><br /> <a href="#"
-					onclick="$('#article_image').val('');return false;" maxlength="255"><?php translate("clear");?>
+					style="cursor: pointer" maxlength="255" /><br /> <a href="#"
+					onclick="$('#article_image').val('');return false;"><?php translate("clear");?>
 		</a>
 			</div>
 		</div>
