@@ -123,6 +123,7 @@ Database::query ( "alter table `" . tbname ( "content" ) . "` add column `articl
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_author_email` varchar(80) default '';" );
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_date` datetime default null;" );
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_image` varchar(255) default '';" );
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `excerpt` text default '';" );
 
 Settings::set ( "db_schema_version", "9.8.5" );
 

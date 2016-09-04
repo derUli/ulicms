@@ -371,11 +371,12 @@ function openMenuImageSelectWindow(field) {
 					<input name="article_date" type="datetime-local"
 						value="<?php
 				
-if (isNotNullOrEmpty ( $row->article_date )) {
+				if (isNotNullOrEmpty ( $row->article_date )) {
 					echo date ( "Y-m-d\TH:i:s", strtotime ( $row->article_date ) );
 				}
 				?>"
-						step=any>
+						step=any> <br /> <br /> <strong><?php translate("excerpt");?></strong>
+					<textarea name="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt);?></textarea>
 				</div>
 			</div>
 		</div>

@@ -250,7 +250,9 @@ function openMenuImageSelectWindow(field) {
 						type="email" name="article_author_email" value="" maxlength="80">
 					<br /> <br /> <strong><?php translate("article_date");?></strong><br />
 					<input name="article_date" type="datetime-local"
-						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any>
+						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
+					<strong><?php translate("excerpt");?></strong> <textarea
+						name="excerpt" rows="5" cols="80"></textarea>
 				</div>
 			</div>
 

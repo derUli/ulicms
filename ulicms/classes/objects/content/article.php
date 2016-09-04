@@ -37,6 +37,7 @@ class Article extends Content {
 	public $article_author_email = "";
 	public $article_date = "";
 	public $article_image = "";
+	public $excerpt = "";
 	public function __construct() {
 		if ($this->custom_data === null) {
 			$this->custom_data = array ();
@@ -83,6 +84,7 @@ class Article extends Content {
 		$this->article_author_name = $result->article_author_name;
 		$this->article_image = $result->article_image;
 		$this->article_date = $result->article_date;
+		$this->excerpt = $result->expert;
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
@@ -118,7 +120,7 @@ class Article extends Content {
 		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category,
 				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views,
 				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
-				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, `cache_control`, article_author_email, article_author_name, article_date, article_image) VALUES (";
+				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, `cache_control`, article_author_email, article_author_name, article_date, article_image, excerpt) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->title ) . "',";
@@ -199,7 +201,8 @@ class Article extends Content {
 		$sql .= "'" . DB::escapeValue ( $this->article_author_name ) . "', ";
 		
 		$sql .= "'" . DB::escapeValue ( $this->article_date ) . "', ";
-		$sql .= "'" . DB::escapeValue ( $this->article_image ) . "'";
+		$sql .= "'" . DB::escapeValue ( $this->article_image ) . "', ";
+		$sql .= "'" . DB::escapeValue ( $this->excerpt ) . "'";
 		
 		$sql .= ")";
 		
@@ -296,7 +299,8 @@ class Article extends Content {
 		$sql .= "article_author_name = '" . DB::escapeValue ( $this->article_author_name ) . "', ";
 		
 		$sql .= "article_date ='" . DB::escapeValue ( $this->article_date ) . "', ";
-		$sql .= "article_image = '" . DB::escapeValue ( $this->article_image ) . "' ";
+		$sql .= "article_image = '" . DB::escapeValue ( $this->article_image ) . "', ";
+		$sql .= "excerpt = '" . DB::escapeValue ( $this->excerpt ) . "' ";
 		
 		$sql .= " WHERE id = " . $this->id;
 		
