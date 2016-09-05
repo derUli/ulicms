@@ -1,4 +1,6 @@
 <?php
+
+if (! defined ( "KCFINDER_PAGE" )) {
 class File {
 	public static function write($file, $data) {
 		return file_put_contents ( $file, $data );
@@ -30,4 +32,6 @@ class File {
 		$ext = end ( $ext );
 		return $ext;
 	}
+}
+
 }
