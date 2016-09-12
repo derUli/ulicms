@@ -1,12 +1,4 @@
-﻿Todo für Feature "Installer":
-[X] Password Wiederholung prüfen
-[X] Seite "Select optional Components" erstellen
-[X] Installationsroutine
-[X] SQL Scripts anlegen
-[X] Seite „Create config file anlegen“
-[X] Progressbar
-[X] Hinweis auf Löschen des installer-Ordners anzeigen
-[X] Deutsche Sprachdatei erstellen
+[ ] Inhaltstyp "Liste" - Sortierbar nach "Random"
 [ ] Neues Bootstrap basiertes Theme theme-2017
 [X] Alle Referenzen von TRANSLATION_* Konstanten ersetzen durch translation() und get_translation()
 [ ] Multisite-Fähigkeit / Scopes implementieren
