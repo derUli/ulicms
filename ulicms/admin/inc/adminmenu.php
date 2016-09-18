@@ -305,7 +305,7 @@ if (defined ( "_SECURITY" )) {
 			onclick="return confirm('<?php
 	
 	translate ( "logout" );
-	?>?')"><?php translate("logo");?>
+	?>?')"><?php translate("logout");?>
 		</a></li>
 	</ul>
 	<script type="text/javascript">
