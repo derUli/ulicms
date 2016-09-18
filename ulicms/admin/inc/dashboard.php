@@ -112,7 +112,7 @@ $(document).ready(function() {
 				<td><?php echo $pages_count?></td>
 			</tr>
 			<tr>
-				<td><?php translate("REGISTERED_USERS_COUNT;");?>
+				<td><?php translate("REGISTERED_USERS_COUNT");?>
 				</td>
 				<td><?php echo count(getUsers())?></td>
 			</tr>
