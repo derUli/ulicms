@@ -3,13 +3,15 @@ class ACL {
 	public function setPermission($name, $value, $group_id) {
 		$result = $this->getPermissionQueryResult ();
 		
-		if (! $result)
+		if (! $result) {
 			return false;
-			
-			// JSON holen
+		}
+		
+		// JSON holen
 		$json = $result ["permissions"];
-		if (is_null ( $json ) or strlen ( $json ) < 2)
+		if (is_null ( $json ) or strlen ( $json ) < 2) {
 			return false;
+		}
 		
 		$permissionData = json_decode ( $json, true );
 		
@@ -20,31 +22,37 @@ class ACL {
 		$updateSQLString = "UPDATE `" . tbname ( "groups" ) . "` SET `permissions`='" . db_escape ( $newJSON ) . "' WHERE id=" . $group_id;
 	}
 	public function hasPermission($name) {
-		if (is_admin ())
+		if (is_admin ()) {
 			return true;
+		}
 		$result = $this->getPermissionQueryResult ();
-		if (! $result)
+		if (! $result) {
 			return false;
-			
-			// JSON holen
+		}
+		
+		// JSON holen
 		$json = $result ["permissions"];
-		if (is_null ( $json ) or strlen ( $json ) < 2)
+		if (is_null ( $json ) or strlen ( $json ) < 2) {
 			return false;
+		}
 		
 		$permissionData = json_decode ( $json, true );
-		if (! isset ( $permissionData [$name] ))
+		if (! isset ( $permissionData [$name] )) {
 			return false;
+		}
 		
-		if (is_null ( $permissionData [$name] ))
+		if (is_null ( $permissionData [$name] )) {
 			return false;
+		}
 		
 		return $permissionData [$name];
 	}
 	public function createGroup($name, $permissions = null) {
-		if (is_null ( $permissions ))
+		if (is_null ( $permissions )) {
 			$permission_data = $this->getDefaultACL ();
-		else
+		} else {
 			$permissionData = json_encode ( $permissions );
+		}
 		
 		$sql = "INSERT INTO `" . tbname ( "groups" ) . "` (`name`, `permissions`) " . "VALUES('" . db_escape ( $name ) . "','" . db_escape ( $permissionData ) . "')";
 		
@@ -55,10 +63,11 @@ class ACL {
 		return db_last_insert_id ();
 	}
 	public function updateGroup($id, $name, $permissions = null) {
-		if (is_null ( $permissions ))
+		if (is_null ( $permissions )) {
 			$permission_data = $this->getDefaultACL ();
-		else
+		} else {
 			$permissionData = json_encode ( $permissions );
+		}
 		
 		$sql = "UPDATE `" . tbname ( "groups" ) . "` SET name='" . db_escape ( $name ) . "', permissions='" . db_escape ( $permissions ) . "' WHERE id=" . $id;
 		
