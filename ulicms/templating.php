@@ -93,8 +93,9 @@ function get_og_data($systemname = "") {
 		$systemname = $_GET ["seite"];
 	}
 	
-	if (empty ( $systemname ))
+	if (empty ( $systemname )) {
 		$systemname = get_frontpage ();
+	}
 	$query = db_query ( "SELECT og_title, og_type, og_image, og_description FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	if (db_num_rows ( $query ) > 0) {
 		return db_fetch_assoc ( $query );
@@ -117,7 +118,7 @@ function get_edit_button() {
 	$html = "";
 	if (is_logged_in () and ! containsModule ()) {
 		$acl = new ACL ();
-		if ($acl->hasPermission ( "pages" ) and defined ( "NO_CACHE" )) {
+		if ($acl->hasPermission ( "pages" ) and $GLOBALS ["no_cache"]) {
 			$id = get_ID ();
 			$html .= "<div class=\"ulicms_edit\">[<a href=\"admin/index.php?action=pages_edit&page=$id\">" . get_translation ( "edit" ) . "</a>]</div>";
 		}
@@ -151,8 +152,40 @@ function get_type() {
 		$result = db_fetch_object ( $query );
 		$result = $result->type;
 	}
-	if (empty ( $result ))
+	if (empty ( $result )) {
 		$result = "page";
+	}
+	$result = apply_filter ( $result, "get_type" );
+	return $result;
+}
+function get_article_meta($page = null) {
+	if (! $page) {
+		$page = get_requested_pagename ();
+	}
+	$result = null;
+	$sql = "SELECT `article_author_name`, `article_author_email`, `article_date`, `article_image` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$query = db_query ( $sql );
+	if (db_num_rows ( $query ) > 0) {
+		$result = Database::fetchObject ( $query );
+	}
+	$result = apply_filter ( $result, "get_article_meta" );
+	return $result;
+}
+function get_cache_control() {
+	if (! $page) {
+		$page = get_requested_pagename ();
+	}
+	$result = "";
+	$sql = "SELECT `cache_control` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
+	$query = db_query ( $sql );
+	if ($query and db_num_rows ( $query ) > 0) {
+		$result = db_fetch_object ( $query );
+		$result = $result->cache_control;
+	}
+	if (empty ( $result )) {
+		$result = "auto";
+	}
+	$result = apply_filter ( $result, "get_cache_control" );
 	return $result;
 }
 function get_text_position() {
@@ -198,8 +231,9 @@ function get_parent($page = null) {
 		$result = db_fetch_object ( $query );
 		$result = $result->parent;
 	}
-	if (empty ( $result ))
+	if (empty ( $result )) {
 		$result = null;
+	}
 	return $result;
 }
 function get_custom_data($page = null) {
@@ -318,8 +352,9 @@ function get_signature($page = null) {
 	return "";
 }
 function delete_custom_data($var = null, $page = null) {
-	if (! $page)
+	if (! $page) {
 		$page = get_requested_pagename ();
+	}
 	$data = get_custom_data ( $page );
 	if (is_null ( $data )) {
 		$data = array ();
@@ -331,7 +366,6 @@ function delete_custom_data($var = null, $page = null) {
 		}
 	}  // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
 else {
-		
 		$data = array ();
 	}
 	
@@ -343,7 +377,6 @@ function set_custom_data($var, $value, $page = null) {
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
-	
 	$data = get_custom_data ( $page );
 	if (is_null ( $data )) {
 		$data = array ();
@@ -359,10 +392,11 @@ function language_selection() {
 	echo "<ul class='language_selection'>";
 	while ( $row = db_fetch_object ( $query ) ) {
 		$domain = getDomainByLanguage ( $row->language_code );
-		if ($domain)
+		if ($domain) {
 			echo "<li>" . "<a href='http://" . $domain . "'>" . $row->name . "</a></li>";
-		else
+		} else {
 			echo "<li>" . "<a href='./?language=" . $row->language_code . "'>" . $row->name . "</a></li>";
+		}
 	}
 	echo "</ul>";
 }
@@ -510,9 +544,9 @@ function meta_description($ipage = null) {
 function get_title($ipage = null, $headline = false) {
 	$status = check_status ();
 	if ($status == "404 Not Found") {
-		return TRANSLATION_PAGE_NOT_FOUND;
+		return get_translation ( "page_not_found" );
 	} else if ($status == "403 Forbidden") {
-		return TRANSLATION_FORBIDDEN;
+		return get_translation ( "forbidden" );
 	}
 	
 	$ipage = db_escape ( $_GET ["seite"] );
@@ -549,7 +583,6 @@ function import($ipage) {
 	} else {
 		$query = db_query ( "SELECT content FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	}
-	
 	if (db_num_rows ( $query ) == 0) {
 		return false;
 	} else {
@@ -652,8 +685,9 @@ function is_403() {
 function buildtree($src_arr, $parent_id = 0, $tree = array()) {
 	foreach ( $src_arr as $idx => $row ) {
 		if ($row ['parent'] == $parent_id) {
-			foreach ( $row as $k => $v )
+			foreach ( $row as $k => $v ) {
 				$tree [$row ['id']] [$k] = $v;
+			}
 			unset ( $src_arr [$idx] );
 			$tree [$row ['id']] ['children'] = buildtree ( $src_arr, $row ['id'] );
 		}
@@ -717,17 +751,20 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 			$containsCurrentItem = parent_item_contains_current_page ( $row->id );
 			
 			$additional_classes = " menu-link-to-" . $row->id . " ";
-			if ($containsCurrentItem)
+			if ($containsCurrentItem) {
 				$additional_classes .= "contains-current-page ";
+			}
 			
-			if (get_requested_pagename () != $row->systemname)
+			if (get_requested_pagename () != $row->systemname) {
 				$html .= "  <li class='" . trim ( $additional_classes ) . "'>";
-			else
+			} else {
 				$html .= "  <li class='menu_active_list_item" . rtrim ( $additional_classes ) . "'>";
-			if (! empty ( $row->alternate_title ))
+			}
+			if (! empty ( $row->alternate_title )) {
 				$title = $row->alternate_title;
-			else
+			} else {
 				$title = $row->title;
+			}
 			if (get_requested_pagename () != $row->systemname) {
 				$html .= "<a href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "' class='" . trim ( $additional_classes ) . "'>";
 			} else {
@@ -777,10 +814,8 @@ function base_metas() {
 		$title = str_ireplace ( "%homepage_title%", get_homepage_title (), $title );
 		$title = str_ireplace ( "%title%", get_title (), $title );
 		$title = str_ireplace ( "%motto%", get_motto (), $title );
-		
 		$title = apply_filter ( $title, "title_tag" );
 		$title = htmlentities ( $title, ENT_QUOTES, "UTF-8" );
-		
 		echo "<title>" . $title . "</title>\r\n";
 	}
 	
@@ -862,9 +897,7 @@ function base_metas() {
 		$description = Settings::get ( "meta_description" );
 	}
 	if ($description != "" && $description != false) {
-		
 		$description = apply_filter ( $description, "meta_description" );
-		
 		$$description = htmlentities ( $description, ENT_QUOTES, "UTF-8" );
 		if (! Settings::get ( "hide_meta_description" )) {
 			echo '<meta name="description" content="' . $description . '"/>';
@@ -959,9 +992,9 @@ function get_page($systemname = "") {
 	if (empty ( $systemname )) {
 		$systemname = $_GET ["seite"];
 	}
-	
-	if (empty ( $systemname ))
+	if (empty ( $systemname )) {
 		$systemname = get_frontpage ();
+	}
 	$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	if (db_num_rows ( $query ) > 0) {
 		return db_fetch_assoc ( $query );
@@ -976,14 +1009,14 @@ function content() {
 		if (file_exists ( getTemplateDirPath ( $theme ) . "404.php" )) {
 			include getTemplateDirPath ( $theme ) . "404.php";
 		} else {
-			echo TRANSLATION_PAGE_NOT_FOUND_CONTENT;
+			translate ( "PAGE_NOT_FOUND_CONTENT" );
 		}
 		return false;
 	} else if ($status == "403 Forbidden") {
 		if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 			include getTemplateDirPath ( $theme ) . "403.php";
 		} else {
-			echo TRANSLATION_FORBIDDEN_COTENT;
+			translate ( "FORBIDDEN_COTENT" );
 		}
 		return false;
 	}
@@ -1019,7 +1052,6 @@ function checkAccess($access = "") {
 	if (in_array ( "registered", $access ) and is_logged_in ()) {
 		return "registered";
 	}
-	
 	for($i = 0; $i < count ( $access ); $i ++) {
 		if (is_numeric ( $access [$i] ) and isset ( $_SESSION ["group_id"] ) and $access [$i] == $_SESSION ["group_id"]) {
 			return $access [$i];
@@ -1039,8 +1071,9 @@ function check_status() {
 		header ( "HTTP/1.1 304 Not Modified" );
 		exit ();
 	}
-	if (! empty ( $status ))
+	if (! empty ( $status )) {
 		return $status;
+	}
 	if (file_exists ( $cached_page_path ) and ! is_logged_in ()) {
 		$last_modified = filemtime ( $cached_page_path );
 		if (time () - $last_modified < CACHE_PERIOD) {

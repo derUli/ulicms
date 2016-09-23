@@ -68,30 +68,18 @@ tr.odd input#form-submit-url {
 				href="?action=forms_edit&id=<?php
 		echo $form ["id"];
 		?>"><img src="gfx/edit.png" class="mobile-big-image"
-					alt="<?php
-		
-		echo TRANSLATION_EDIT;
-		?>"
-					title="<?php
-		
-		echo TRANSLATION_EDIT;
-		?>"></a></td>
+					alt="<?php translate("edit");?>" title="<?php translate("edit");?>"></a></td>
 			<td style="text-align: center;">
-				<form action="?action=forms&del=<?php
+				<form
+					action="?action=forms&del=<?php
 		
 		echo $form ["id"];
 		?>"
 					method="post" onsubmit="return confirm('Wirklich Löschen?')"
 					class="delete-form"><?php csrf_token_html();?><input type="image"
 						class="mobile-big-image" src="gfx/delete.gif"
-						alt="<?php
-		
-		echo TRANSLATION_DELETE;
-		?>"
-						title="<?php
-		
-		echo TRANSLATION_DELETE;
-		?>">
+						alt="<?php translate("delete");?>"
+						title="<?php translate("delete");?>">
 				</form>
 			</td>
 		</tr>

@@ -1,23 +1,23 @@
 <?php
-if (Settings::get ( "disable_password_reset" ))
-	die ( TRANSLATION_FUNCTION_IS_DISABLED );
+if (Settings::get ( "disable_password_reset" )) {
+	translate ( "function_is_diabled" );
+	die ();
+}
 ?>
 
 <?php
 $messame = null;
 if (isset ( $_POST ["username"] ) and ! empty ( $_POST ["username"] )) {
 	$username = db_escape ( $_POST ["username"] );
-	if (resetPassword ( $username ))
-		$message = TRANSLATION_PASSWORD_RESET_SUCCESSFULL;
-	else
-		$message = TRANSLATION_NO_SUCH_USER;
+	if (resetPassword ( $username )) {
+		$message = get_translation ( "PASSWORD_RESET_SUCCESSFULL" );
+	} else {
+		$message = get_translation ( "NO_SUCH_USER" );
+	}
 }
 ?>
 <h1>
-<?php
-
-echo TRANSLATION_RESET_PASSWORD;
-?>
+<?php translate("reset_password");?>
 </h1>
 <p>
 	<a href="./">[<?php

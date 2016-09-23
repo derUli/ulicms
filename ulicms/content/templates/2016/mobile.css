@@ -69,4 +69,7 @@
 	.menu_bottom {
 		margin-bottom: 3px
 	}
+	.grey-bar {
+		display: none;
+	}
 }

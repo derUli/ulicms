@@ -15,7 +15,7 @@ function filter_by_language(element){
 	<h2>
 	<?php
 	
-	echo TRANSLATION_MOTD;
+	translate ( "motd" );
 	?>
 	</h2>
 	<?php
@@ -27,10 +27,7 @@ function filter_by_language(element){
 		
 		?>
 	<p>
-	<?php
-		
-		echo TRANSLATION_MOTD_WAS_CHANGED;
-		?>
+	<?php translate("motd_was_changed");?>
 	</p>
 	<?php
 	}
@@ -45,15 +42,9 @@ function filter_by_language(element){
 	
 	echo htmlspecialchars ( Settings::get ( "motd" ) );
 	?></textarea> <br> <br> <input type="submit" name="motd_submit"
-			value="<?php
-	
-	echo TRANSLATION_SAVE_CHANGES;
-	?>">
+			value="<?php translate("save_changes");?>">
 		<p>
-			<strong><?php
-	
-	echo TRANSLATION_ALLOWED_HTML_TAGS;
-	?>
+			<strong><?php translate("allowed_html_tags");?>
 			</strong><br />
 			<?php
 	

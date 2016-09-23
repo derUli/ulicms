@@ -14,7 +14,15 @@ class ModuleHelper {
 		foreach ( $modules as $module ) {
 			$noembedfile1 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/.noembed" );
 			$noembedfile2 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/noembed.txt" );
-			if (! file_exists ( $noembedfile1 ) and ! file_exists ( $noembedfile2 )) {
+			
+			$embed_attrib = true;
+			
+			$meta_attr = getModuleMeta ( $module, "embed" );
+			if (! is_null ( $meta_attr ) and is_bool ( $meta_attr )) {
+				$embed_attrib = $meta_attr;
+			}
+			
+			if (! file_exists ( $noembedfile1 ) and ! file_exists ( $noembedfile2 ) and $embed_attrib) {
 				$retval [] = $module;
 			}
 		}
@@ -24,7 +32,15 @@ class ModuleHelper {
 		$retval = true;
 		$noembedfile1 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/.noembed" );
 		$noembedfile2 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/noembed.txt" );
-		if (file_exists ( $noembedfile1 ) or ! file_exists ( $noembedfile2 )) {
+		
+		$embed_attrib = true;
+		
+		$meta_attr = getModuleMeta ( $module, "embed" );
+		if (! is_null ( $meta_attr ) and is_bool ( $meta_attr )) {
+			$embed_attrib = $meta_attr;
+		}
+		
+		if (file_exists ( $noembedfile1 ) or file_exists ( $noembedfile2 ) or ! $embed_attrib) {
 			$retval = false;
 		}
 		return $retval;

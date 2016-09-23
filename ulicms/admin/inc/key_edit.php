@@ -17,25 +17,18 @@ if (defined ( "_SECURITY" )) {
 		value="<?php
 			
 			echo $row->id;
-			?>"> <input type="hidden" name="edit_key" value="edit_key"> <strong><?php
-			
-			echo TRANSLATION_OPTION;
-			?></strong><br /> <input type="text" name="name"
+			?>"> <input type="hidden" name="edit_key" value="edit_key"> <strong><?php translate ( "option" );?></strong><br />
+	<input type="text" name="name"
 		value="<?php
 			
 			echo htmlspecialchars ( $row->name, ENT_QUOTES, "UTF-8" );
 			?>"
-		readonly="readonly"> <br /> <br /> <strong><?php
-			
-			echo TRANSLATION_VALUE;
-			?></strong><br /> <textarea name="value" rows=15 cols=80><?php
+		readonly="readonly"> <br /> <br /> <strong><?php translate("option");?></strong><br />
+	<textarea name="value" rows=15 cols=80><?php
 			
 			echo htmlspecialchars ( $row->value, ENT_QUOTES, "UTF-8" );
 			?></textarea> <br /> <br /> <input type="submit"
-		value="<?php
-			
-			echo TRANSLATION_SAVE_CHANGES;
-			?>">
+		value="<?php translate("save_changes");?>">
 
 			<?php
 			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {

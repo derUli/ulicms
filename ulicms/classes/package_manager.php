@@ -1,5 +1,5 @@
 <?php
-class packageManager {
+class PackageManager {
 	private $package_source;
 	public function __construct() {
 		$cfg = new config ();
@@ -47,13 +47,14 @@ class packageManager {
 	public function installPatch($name, $description, $url) {
 		@set_time_limit ( 0 );
 		$test = $this->getInstalledPatchNames ();
-		if (in_array ( $name, $test ))
+		if (in_array ( $name, $test )) {
 			return false;
+		}
 		
 		$tmp_dir = ULICMS_TMP . "/" . uniqid () . "/";
-		if (! file_exists ( $tmp_dir ))
+		if (! file_exists ( $tmp_dir )) {
 			mkdir ( $tmp_dir );
-		
+		}
 		$download = file_get_contents_wrapper ( $url, true );
 		
 		$download_tmp = $tmp_dir . "patch.zip";
@@ -136,9 +137,10 @@ class packageManager {
 		for($i = 0; $i < count ( $directory_content ); $i ++) {
 			if (is_dir ( $module_folder . $directory_content [$i] )) {
 				$module_init_file = $module_folder . $directory_content [$i] . "/" . $directory_content [$i] . "_main.php";
+				$module_init_file2 = $module_folder . $directory_content [$i] . "/" . "main.php";
 				
 				if ($directory_content [$i] != ".." and $directory_content [$i] != ".") {
-					if (is_file ( $module_init_file )) {
+					if (is_file ( $module_init_file ) or is_file ( $module_init_file2 )) {
 						array_push ( $available_modules, $directory_content [$i] );
 					}
 				}

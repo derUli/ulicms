@@ -5,10 +5,7 @@ if (! defined ( "ULICMS_ROOT" ))
 $acl = new ACL ();
 ?>
 <h1>
-<?php
-
-echo TRANSLATION_SETTINGS;
-?>
+<?php translate("settings");?>
 </h1>
 <?php
 
@@ -19,10 +16,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	
 	if ($acl->hasPermission ( "settings_simple" )) {
 		?>
-	<a href="index.php?action=settings_simple"><?php
-		
-		echo TRANSLATION_GENERAL_SETTINGS;
-		?>
+	<a href="index.php?action=settings_simple"><?php translate("general_settings");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -32,10 +26,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	
 	if ($acl->hasPermission ( "design" )) {
 		?>
-	<a href="index.php?action=design"><?php
-		
-		echo TRANSLATION_DESIGN;
-		?>
+	<a href="index.php?action=design"><?php translate("design");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -44,10 +35,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 
 	if ($acl->hasPermission ( "spam_filter" )) {
 		?>
-	<a href="index.php?action=spam_filter"><?php
-		
-		echo TRANSLATION_SPAMFILTER;
-		?>
+	<a href="index.php?action=spam_filter"><?php translate("spamfilter");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -57,8 +45,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	if ($acl->hasPermission ( "cache" )) {
 		?>
 	<a href="index.php?action=cache&clear_cache=yes"><?php
-		
-		echo TRANSLATION_CLEAR_CACHE;
+		translate ( "clear_cache" );
 		?>
 	</a> <br /> <br />
 	<?php
@@ -68,10 +55,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 
 	if ($acl->hasPermission ( "motd" )) {
 		?>
-	<a href="index.php?action=motd"><?php
-		
-		echo TRANSLATION_MOTD;
-		?>
+	<a href="index.php?action=motd"><?php translate("motd");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -81,8 +65,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	if ($acl->hasPermission ( "pkg_settings" )) {
 		?>
 	<a href="?action=pkg_settings"><?php
-		
-		echo TRANSLATION_PACKAGE_SOURCE;
+		translate ( "package_source" );
 		?>
 	</a> <br /> <br />
 	<?php
@@ -92,10 +75,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 
 	if ($acl->hasPermission ( "logo" )) {
 		?>
-	<a href="index.php?action=logo_upload"><?php
-		
-		echo TRANSLATION_LOGO;
-		?>
+	<a href="index.php?action=logo_upload"><?php translate("logo");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -104,10 +84,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 
 	if ($acl->hasPermission ( "languages" )) {
 		?>
-	<a href="index.php?action=languages"><?php
-		
-		echo TRANSLATION_LANGUAGES;
-		?>
+	<a href="index.php?action=languages"><?php translate("languages");?>
 	</a> <br /> <br />
 	<?php
 	}
@@ -116,10 +93,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 
 	if ($acl->hasPermission ( "other" )) {
 		?>
-	<a href="?action=other_settings"><?php
-		
-		echo TRANSLATION_OTHER;
-		?>
+	<a href="?action=other_settings"><?php translate("other");?>
 	</a>
 	<?php
 	}

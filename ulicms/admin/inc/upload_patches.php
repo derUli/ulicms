@@ -6,7 +6,7 @@ if (! $acl->hasPermission ( "upload_patches" )) {
 	$redirect = false;
 	
 	if (isset ( $_POST ["upload_patch"] ) and isset ( $_FILES ['file'] ['tmp_name'] ) and endsWith ( $_FILES ['file'] ['name'], ".zip" )) {
-		$pkg = new packageManager ();
+		$pkg = new PackageManager ();
 		if ($pkg->installPatch ( $_POST ["name"], $_POST ["description"], $_FILES ['file'] ['tmp_name'] )) {
 			
 			$redirect = true;
@@ -24,16 +24,16 @@ window.location.replace("index.php?action=modules#installed_patches_a");
 <?php csrf_token_html();?>
 <p>
 		<strong><?php translate("name");?></strong> <br /> <input type="text"
-			name="name" value="" required="true" />
+			name="name" value="" required />
 	</p>
 	<p>
 		<strong><?php translate("description");?></strong> <br /> <input
-			type="text" name="description" value="" required="true" />
+			type="text" name="description" value="" required />
 	</p>
 
 	<p>
 		<strong><?php translate("file");?></strong> <br /> <input name="file"
-			type="file" required="true" />
+			type="file" required />
 	</p>
 	<input type="submit" name="upload_patch"
 		value="<?php translate("install_patch");?>" />

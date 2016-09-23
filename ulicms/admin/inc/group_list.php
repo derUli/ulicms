@@ -20,25 +20,24 @@ if (isset ( $_REQUEST ["sort"] ) and in_array ( $_REQUEST ["sort"], array (
 }
 
 if ($_SESSION ["grp_sort"] == "id") {
-	if ($_SESSION ["sortDirection"] == "asc")
+	if ($_SESSION ["sortDirection"] == "asc") {
 		ksort ( $groups );
-	else if ($_SESSION ["sortDirection"] == "asc")
+	} else if ($_SESSION ["sortDirection"] == "asc") {
 		krsort ( $groups );
+	}
 } else if ($_SESSION ["grp_sort"] == "name") {
-	if ($_SESSION ["sortDirection"] == "asc")
+	if ($_SESSION ["sortDirection"] == "asc") {
 		asort ( $groups );
-	else
+	} else {
 		arsort ( $groups );
+	}
 } else {
 	ksort ( $groups );
 }
 
 ?>
 <p>
-	<a href="?action=groups&add=add"><?php
-	
-	echo TRANSLATION_CREATE_GROUP;
-	?> </a>
+	<a href="?action=groups&add=add"><?php translate("create_group");?> </a>
 </p>
 <?php
 
@@ -48,19 +47,12 @@ if (count ( $groups ) > 0) {
 	<thead>
 		<tr>
 			<th style="min-width: 100px;"><a
-				href="?action=groups&sort=id&sort_direction=change"><strong><?php
-	
-	echo TRANSLATION_ID;
-	?> </strong> </a></th>
+				href="?action=groups&sort=id&sort_direction=change"><strong><?php translate("id");?> </strong>
+			</a></th>
 			<th style="min-width: 200px;"><a
-				href="?action=groups&sort=name&sort_direction=change"><strong><?php
-	
-	echo TRANSLATION_NAME;
-	?> </strong> </a></th>
-			<th><strong><?php
-	
-	echo TRANSLATION_STANDARD;
-	?> </strong></th>
+				href="?action=groups&sort=name&sort_direction=change"><strong><?php translate("name");?> </strong>
+			</a></th>
+			<th><strong><?php translate("standard");?> </strong></th>
 			<td></td>
 			<td></td>
 		</tr>
@@ -85,55 +77,47 @@ if (count ( $groups ) > 0) {
 			<td><?php
 		
 		if ($default_acl_group === $id) {
-			?> <span style="color: green; font-weight: bold;"><?php
-			
-			echo TRANSLATION_YES;
-			?> </span> <?php
+			?> <span style="color: green; font-weight: bold;"><?php translate("yes");?> </span> <?php
 		} else {
-			?> <a
-				href="?action=groups&standard=<?php
+			?> <a href="?action=groups&standard=<?php
 			
 			echo $id;
 			?>"><span style="color: red; font-weight: bold;"
 					onclick='return confirm("<?php
 			
-			echo str_ireplace ( "%name%", $name, TRANSLATION_MAKE_GROUP_DEFAULT );
-			?>")'><?php
-			
-			echo TRANSLATION_NO;
-			?> </span> </a> <?php
+			echo str_ireplace ( "%name%", $name, get_translation ( "make_group_default" ) );
+			?>")'><?php translate("no");?> </span> </a> <?php
 		}
 		?>
 			</td>
-			<td><a
-				href="?action=groups&edit=<?php
+			<td><a href="?action=groups&edit=<?php
 		
 		echo $id;
 		?>"><img class="mobile-big-image" src="gfx/edit.png"
 					alt="<?php
 		
-		echo TRANSLATION_EDIT;
+		translate ( "edit" );
 		?>"
 					title="<?php
-
-         echo TRANSLATION_EDIT;
-         ?>"> </a></td>
-			<td><form action="?action=groups&delete=<?php
-
-         echo $id;
-         ?>" method="post"
-				onsubmit="return confirm('<?php
-
-         echo TRANSLATION_ASK_FOR_DELETE;
-         ?>');" class="delete-form"><?php csrf_token_html();?><input type="image" class="mobile-big-image" src="gfx/delete.gif"
-					alt="<?php
 		
-		echo TRANSLATION_DELETE;
+		translate ( "edit" );
+		?>"> </a></td>
+			<td><form action="?action=groups&delete=<?php
+		echo $id;
 		?>"
-					title="<?php
-
-         echo TRANSLATION_DELETE;
-         ?>"></form></td>
+					method="post"
+					onsubmit="return confirm('<?php translate("ask_for_delete")?>');"
+					class="delete-form"><?php csrf_token_html();?><input type="image"
+						class="mobile-big-image" src="gfx/delete.gif"
+						alt="<?php
+		
+		translate ( "delete" );
+		?>"
+						title="<?php
+		
+		translate ( "delete" );
+		?>">
+				</form></td>
 		</tr>
 
 
@@ -159,6 +143,5 @@ var ajax_options = {
 $("form.delete-form").ajaxForm(ajax_options); 
 </script>
 <?php
-    
-    }
+}
 ?>

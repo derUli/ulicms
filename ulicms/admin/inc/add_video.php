@@ -19,18 +19,14 @@ if ($acl->hasPermission ( "videos" )) {
 	
 	translate ( "name" );
 	?>
-	</strong><br /> <input type="text" name="name" required="true" value=""
-		maxlength=255 /> <br /> <br /> <strong><?php
-	
-	echo TRANSLATION_CATEGORY;
-	?>
+	</strong><br /> <input type="text" name="name" value="" maxlength="255"
+		required /> <br /> <br /> <strong><?php translate("category");?>
 	</strong><br />
 	<?php
 	echo categories::getHTMLSelect ();
 	?>
 
 	<br /> <br /> <strong><?php
-	
 	echo translate ( "video_ogg" );
 	?>
 	</strong><br /> <input name="ogg_file" type="file"><br /> <br /> <strong><?php

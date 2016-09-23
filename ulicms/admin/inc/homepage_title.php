@@ -25,34 +25,23 @@ if (defined ( "_SECURITY" )) {
 			$lang = $languages [$i];
 			$homepage_titles [$lang] = Settings::get ( "homepage_title_" . $lang );
 			
-			if (! $homepage_titles [$lang])
+			if (! $homepage_titles [$lang]) {
 				$homepage_titles [$lang] = Settings::get ( "homepage_title" );
+			}
 		}
 		
 		?>
 <h1>
-<?php
-		
-		echo TRANSLATION_HOMEPAGE_TITLE;
-		?>
+<?php translate("homepage_title");?>
 </h1>
 <form action="index.php?action=homepage_title"
 	id="homepage_title_settings" method="post">
-	<?php
-		
-		csrf_token_html ();
-		?>
-	<table border=0>
+	<?php csrf_token_html ();?>
+	<table border="0">
 		<tr>
-			<td style="min-width: 100px;"><strong><?php
-		
-		echo TRANSLATION_LANGUAGE;
-		?>
+			<td style="min-width: 100px;"><strong><?php translate("language");?>
 			</strong></td>
-			<td><strong><?php
-		
-		echo TRANSLATION_TITLE;
-		?>
+			<td><strong><?php translate("title");?>?>
 			</strong></td>
 		</tr>
 		<?php
@@ -64,8 +53,7 @@ if (defined ( "_SECURITY" )) {
 			
 			echo $lang;
 			?></td>
-			<td><input
-				name="homepage_title_<?php
+			<td><input name="homepage_title_<?php
 			
 			echo $lang;
 			?>"
@@ -74,25 +62,15 @@ if (defined ( "_SECURITY" )) {
 			
 			echo stringHelper::real_htmlspecialchars ( $homepage_titles [$lang] );
 			?>"></td>
+		</tr>
 			<?php
 		}
 		?>
-		
-		
-		
-		
-		
-		
-		
-		
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
-				value="<?php
-		
-		echo TRANSLATION_SAVE_CHANGES;
-		?>"></td>
-	
+				value="<?php translate("save_changes");?>"></td>
+	</tr>
 	</table>
 </form>
 
@@ -115,6 +93,5 @@ $("#homepage_title_settings").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-    
-    }
+}
 ?>

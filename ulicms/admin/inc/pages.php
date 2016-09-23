@@ -5,21 +5,13 @@ if (defined ( "_SECURITY" )) {
 	if ($acl->hasPermission ( "pages" )) {
 		?>
 <h2>
-<?php
-		
-		echo TRANSLATION_PAGES;
-		?>
+<?php translate("pages");?>
 </h2>
 <p>
-<?php
-		echo TRANSLATION_PAGES_INFOTEXT;
-		?>
+<?php translate ( "pages_infotext" );?>
 </p>
 <p>
-	<a href="index.php?action=pages_new"><?php
-		
-		echo TRANSLATION_CREATE_PAGE;
-		?>
+	<a href="index.php?action=pages_new"><?php translate("create_page");?>
 	</a>
 </p>
 
@@ -101,16 +93,10 @@ $(window).load(function(){
 
 </form>
 
-<?php
-		
-		echo TRANSLATION_FILTER_BY_LANGUAGE;
-		?>
+<?php translate("filter_by_language");?>
 <select name="filter_language" onchange="filter_by_language(this)">
 	<option value="">
-		<?php
-		
-		echo TRANSLATION_PLEASE_SELECT;
-		?>
+		<?php translate("please_select");?>
 		</option>
 		<?php
 		if (! empty ( $_GET ["filter_language"] ) and in_array ( $_GET ["filter_language"], getAllLanguages () )) {
@@ -145,17 +131,19 @@ $(window).load(function(){
 		}
 		
 		if (isset ( $_GET ["filter_menu"] )) {
-			if ($_GET ["filter_menu"] == "null")
+			if ($_GET ["filter_menu"] == "null") {
 				$_SESSION ["filter_menu"] = null;
-			else
+			} else {
 				$_SESSION ["filter_menu"] = $_GET ["filter_menu"];
+			}
 		}
 		
 		if (isset ( $_GET ["filter_parent"] )) {
-			if ($_GET ["filter_parent"] == "null")
+			if ($_GET ["filter_parent"] == "null") {
 				$_SESSION ["filter_parent"] = null;
-			else
+			} else {
 				$_SESSION ["filter_parent"] = $_GET ["filter_parent"];
+			}
 		}
 		
 		if (! isset ( $_SESSION ["filter_parent"] )) {
@@ -249,10 +237,7 @@ $(window).load(function(){
 			echo " selected";
 		}
 		?>>
-		<?php
-		
-		echo TRANSLATION_STANDARD;
-		?>
+		<?php translate("standard");?>
 		</option>
 	<option value="trash"
 		<?php
@@ -260,44 +245,34 @@ $(window).load(function(){
 			echo " selected";
 		}
 		?>>
-		<?php
-		
-		echo TRANSLATION_RECYCLE_BIN;
-		?>
+		<?php translate("recycle_bin");?>
 		</option>
 </select>
-<?php
-		
-		echo TRANSLATION_CATEGORY;
-		?>
+<?php translate("category");?>
 	<?php
 		echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
 		?>
-	<?php
-		
-		echo TRANSLATION_MENU;
-		?>
+	<?php translate("menu");?>
 <select name="filter_menu" onchange="filter_by_menu(this);">
 
 	<?php
 		foreach ( $menus as $menu ) {
-			if ($menu == "null")
-				$name = "[" . TRANSLATION_EVERY . "]";
-			else
+			if ($menu == "null") {
+				$name = "[" . get_translation ( "every" ) . "]";
+			} else {
 				$name = $menu;
+			}
 			
-			if ($menu == $_SESSION ["filter_menu"])
+			if ($menu == $_SESSION ["filter_menu"]) {
 				echo '<option value="' . $menu . '" selected>' . get_translation ( $name ) . "</option>";
-			else
+			} else {
 				echo '<option value="' . $menu . '">' . get_translation ( $name ) . "</option>";
+			}
 		}
 		
 		?>
 	</select>
-<?php
-		
-		echo TRANSLATION_PARENT;
-		?>
+<?php translate("parent");?>
 <select name="filter_parent" onchange="filter_by_parent(this);">
 	<option value="null"
 		<?php
@@ -305,10 +280,7 @@ $(window).load(function(){
 		if ("null" == $_SESSION ["filter_parent"])
 			echo "selected";
 		?>>
-			[<?php
-		
-		echo TRANSLATION_EVERY;
-		?>]
+			[<?php translate ( "every" );?>]
 		</option>
 	<option value="-"
 		<?php
@@ -316,54 +288,46 @@ $(window).load(function(){
 		if ("-" == $_SESSION ["filter_parent"])
 			echo "selected";
 		?>>
-			[<?php
-		
-		echo TRANSLATION_NONE;
-		?>]
+			[<?php translate("none");?>]
 		</option>
 		<?php
 		
 		while ( $parent = db_fetch_object ( $parents ) ) {
 			$parent_id = $parent->id;
 			$title = htmlspecialchars ( $parent->title );
-			if ($parent_id == $_SESSION ["filter_parent"])
+			if ($parent_id == $_SESSION ["filter_parent"]) {
 				echo '<option value="' . $parent_id . '" selected>' . $title . "</option>";
-			else
+			} else {
 				echo '<option value="' . $parent_id . '">' . $title . "</option>";
+			}
 		}
 		?>
 	</select>
-<?php
-		
-		echo TRANSLATION_ENABLED;
-		?>
+<?php translate("enabled");?>
 <select name="filter_active" onchange="filter_by_active(this);">
 	<option value="null"
 		<?php
 		
-		if (null == $_SESSION ["filter_active"])
+		if (null == $_SESSION ["filter_active"]) {
 			echo "selected";
+		}
 		?>>
 			[<?php translate("every"); ?>]
 		</option>
 	<option value="1"
 		<?php
 		
-		if (1 === $_SESSION ["filter_active"])
+		if (1 === $_SESSION ["filter_active"]) {
 			echo "selected";
-		?>><?php
-		
-		echo TRANSLATION_ENABLED;
-		?></option>
+		}
+		?>><?php translate("enabled");?></option>
 	<option value="0"
 		<?php
 		
-		if (0 === $_SESSION ["filter_active"])
+		if (0 === $_SESSION ["filter_active"]) {
 			echo "selected";
-		?>><?php
-		
-		echo TRANSLATION_DISABLED;
-		?></option>
+		}
+		?>><?php translate("disabled");?></option>
 </select>
 
 <?php
@@ -374,8 +338,9 @@ $(window).load(function(){
 	<option value="null"
 		<?php
 		
-		if (null == $_SESSION ["filter_approved"])
+		if (null == $_SESSION ["filter_approved"]) {
 			echo "selected";
+		}
 		?>>
     [<?php
 		
@@ -384,8 +349,9 @@ $(window).load(function(){
 	<option value="1"
 		<?php
 		
-		if (1 === $_SESSION ["filter_approved"])
+		if (1 === $_SESSION ["filter_approved"]) {
 			echo "selected";
+		}
 		?>><?php
 		
 		translate ( "yes" );
@@ -393,8 +359,9 @@ $(window).load(function(){
 	<option value="0"
 		<?php
 		
-		if (0 === $_SESSION ["filter_approved"])
+		if (0 === $_SESSION ["filter_approved"]) {
 			echo "selected";
+		}
 		?>><?php
 		
 		translate ( "no" );
@@ -418,50 +385,23 @@ $(window).load(function(){
 <table class="tablesorter dataset-list">
 	<thead>
 		<tr style="font-weight: bold;">
-			<th><?php
-		
-		echo TRANSLATION_TITLE;
-		?>
+			<th><?php translate("title");?>
 			</th>
-			<th><?php
-		
-		echo TRANSLATION_MENU;
-		?>
+			<th><?php translate("menu");?>
 			</th>
-			<th><?php
-		
-		echo TRANSLATION_POSITION;
-		?>
+			<th><?php translate("position");?>
 			</th>
-			<th><?php
-		
-		echo TRANSLATION_PARENT;
-		?>
+			<th><?php translate("parent");?>
 			</th>
-			<th><?php
-		
-		echo TRANSLATION_ACTIVATED;
-		?>
+			<th><?php translate("activated");?>
 			</th>
-			<td style="text-align: center"><?php
-		
-		echo TRANSLATION_VIEW;
-		?>
+			<td style="text-align: center"><?php translate("view");?>
 			</td>
-			<td style="text-align: center"><?php
-		
-		translate ( "clone" );
-		?>
+			<td style="text-align: center"><?php translate ( "clone" );?>
 			</td>
-			<td style="text-align: center"><?php
-		
-		echo TRANSLATION_EDIT;
-		?>
+			<td style="text-align: center"><?php translate("edit");?>
 			</td>
-			<td style="text-align: center"><?php
-		
-		echo TRANSLATION_DELETE;
-		?>
+			<td style="text-align: center"><?php translate("delete");?>
 			</td>
 
 		</tr>
@@ -525,10 +465,11 @@ $(window).load(function(){
 		}
 		
 		if ($_SESSION ["filter_parent"] != null) {
-			if ($_SESSION ["filter_parent"] != "-")
+			if ($_SESSION ["filter_parent"] != "-") {
 				$filter_sql .= "AND parent = '" . intval ( $_SESSION ["filter_parent"] ) . "' ";
-			else
+			} else {
 				$filter_sql .= "AND parent IS NULL ";
+			}
 		}
 		
 		if (isset ( $_SESSION ["filter_title"] ) and ! empty ( $_SESSION ["filter_title"] )) {
@@ -540,9 +481,6 @@ $(window).load(function(){
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " " . $filter_sql . " ORDER BY $order,position, systemname ASC" ) or die ( db_error () );
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
-				?>
-						<?php
-				
 				echo '<tr id="dataset-' . $row->id . '">';
 				echo "<td>" . htmlspecialchars ( $row->title );
 				if (! empty ( $row->redirection ) and ! is_null ( $row->redirection ) and $row->type == "link") {
@@ -556,9 +494,9 @@ $(window).load(function(){
 				echo "<td>" . htmlspecialchars ( getPageTitleByID ( $row->parent ) ) . "</td>";
 				
 				if ($row->active) {
-					echo "<td>" . TRANSLATION_YES . "</td>";
+					echo "<td>" . get_translation ( "yes" ) . "</td>";
 				} else {
-					echo "<td>" . TRANSLATION_NO . "</td>";
+					echo "<td>" . get_translation ( "no" ) . "</td>";
 				}
 				
 				if (startsWith ( $row->redirection, "#" )) {
@@ -570,7 +508,7 @@ $(window).load(function(){
 					} else {
 						$url = "http://" . $domain . "/" . $row->systemname . ".html";
 					}
-					echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . TRANSLATION_VIEW . "\" title=\"" . TRANSLATION_VIEW . "\"></a></td>";
+					echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation ( "view" ) . "\" title=\"" . get_translation ( "view" ) . "\"></a></td>";
 				}
 				echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation ( "clone" ) . "\" title=\"" . get_translation ( "clone" ) . "\"></a></td>";
 				
@@ -591,24 +529,16 @@ $(window).load(function(){
 				if (! $can_edit_this) {
 					echo "<td></td><td></td>";
 				} else {
-					echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
+					echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
 					
 					if ($_SESSION ["filter_status"] == "trash") {
-						/*
-						 * echo "<td style='text-align:center'>" . '<a href="index.php?action=undelete_page&page=' . $row -> id . '";"> <img class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></a></td>';
-						 */
-						echo "<td style='text-align:center'>" . '<form action="index.php?action=undelete_page&page=' . $row->id . '" method="post" class="undelete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . TRANSLATION_RECOVER . '" title="' . TRANSLATION_RECOVER . '"></form></td>';
+						echo "<td style='text-align:center'>" . '<form action="index.php?action=undelete_page&page=' . $row->id . '" method="post" class="undelete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . get_translation ( "recover" ) . '" title="' . get_translation ( "recover" ) . '"></form></td>';
 					} else {
-						/*
-						 * echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_delete&page=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></a></td>';
-						 */
-						echo "<td style='text-align:center'>" . '<form action="index.php?action=pages_delete&page=' . $row->id . '" method="post" class="delete-form" onsubmit="return confirm(\'Wirklich löschen?\');">' . get_csrf_token_html () . '<input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . TRANSLATION_DELETE . '" title="' . TRANSLATION_DELETE . '"></form></td>';
+						echo "<td style='text-align:center'>" . '<form action="index.php?action=pages_delete&page=' . $row->id . '" method="post" class="delete-form" onsubmit="return confirm(\'Wirklich löschen?\');">' . get_csrf_token_html () . '<input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . get_translation ( "delete" ) . '" title="' . get_translation ( "delete" ) . '"></form></td>';
 					}
 				}
 				echo '</tr>';
 			}
-			?>
-		<?php
 		}
 		?>
 	</tbody>
@@ -653,9 +583,4 @@ function ajaxEmptyTrash(url){
 	} else {
 		noperms ();
 	}
-	
-	?>
-
-<?php
 }
-?>

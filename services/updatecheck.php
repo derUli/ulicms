@@ -32,23 +32,26 @@ if ($version == "9.0.0") {
    <a href=\"http://www.ulicms.de/content/files/Releases/9.0.1/ulicms-9.0.1-mountain-king-upgrade.zip\">[Download]</a></p>" );
 }
 
-$version9_8_3_update_string = "<p>Ein Upgrade auf UliCMS 9.8.3 ist verfügbar. / An upgrade to UliCMS 9.8.3 is available.<br/>
-   <a href=\"http://en.ulicms.de/content/files/Releases/9.8.3/ulicms-9.8.3-the-force-upgrade.zip\">[Download]</a></p>";
+$current_version_update_string = "<p>Ein Upgrade auf UliCMS 9.8.4 ist verfügbar. / An upgrade to UliCMS 9.8.4 is available.<br/>
+   <a href=\"http://en.ulicms.de/content/files/Releases/9.8.4/ulicms-9.8.4-upgrade.zip\">[Download]</a></p>";
 
 if (($version == "9.0.1" or $version == "9.0.1.1") and ((new DateTime () > new DateTime ( "2016-12-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
-	die ( $version9_8_3_update_string );
+	die ( $current_version_update_string );
 }
 
 if (($version == "9.8.0") and ((new DateTime () > new DateTime ( "2016-01-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
-	die ( $version9_8_3_update_string );
+	die ( $current_version_update_string );
 }
 
 if (($version == "9.8.1") and ((new DateTime () > new DateTime ( "2016-03-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
-	die ( $version9_8_3_update_string );
+	die ( $current_version_update_string );
 }
 
 if (($version == "9.8.2") and ((new DateTime () > new DateTime ( "2016-05-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
-	die ( $version9_8_3_update_string );
+	die ( $current_version_update_string );
+}
+if (($version == "9.8.3") and ((new DateTime () > new DateTime ( "2016-07-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
+	die ( $current_version_update_string );
 }
 if (($version == "9.8.3") and ((new DateTime () > new DateTime ( "2016-07-31 23:59:59" )) or isset ( $_GET ["ndc"] ))) {
 	die ( "<p>Ein Upgrade auf UliCMS 9.8.4 ist verfügbar. / An upgrade to UliCMS 9.8.4 is available.<br/>

@@ -6,14 +6,18 @@ if (! defined ( "ULICMS_ROOT" )) {
 $module = basename ( $_GET ["module"] );
 
 $admin_file_path = getModuleAdminFilePath ( $module );
+$admin_file_path2 = getModuleAdminFilePath2 ( $module );
 
-if (! file_exists ( $admin_file_path )) {
+if (! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 )) {
 	?>
 <p class='ulicms_error'>Dieses Modul bietet keine Einstellungen.</p>
 <?php
 } else {
-	
-	include $admin_file_path;
+	if (file_exists ( $admin_file_path2 )) {
+		include $admin_file_path2;
+	} else {
+		include $admin_file_path;
+	}
 	
 	if (defined ( "MODULE_ADMIN_HEADLINE" )) {
 		echo "<h1>" . MODULE_ADMIN_HEADLINE . "</h1>";

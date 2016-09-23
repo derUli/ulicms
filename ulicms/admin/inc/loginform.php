@@ -32,10 +32,7 @@ if ($login_welcome_text) {
 </div>
 <?php } ?>
 <h3 id="login-please-headline">
-<?php
-
-echo TRANSLATION_PLEASE_AUTHENTICATE;
-?>
+<?php translate("please_authenticate");?>
 </h3>
 <form id="login-form" action="index.php" method="post">
 <?php
@@ -55,17 +52,11 @@ csrf_token_html ();
 	?>
 	<table>
 		<tr>
-			<td><strong><?php
-			
-			echo TRANSLATION_USERNAME;
-			?></strong></td>
+			<td><strong><?php translate("username");?></strong></td>
 			<td><input type="text" name="user" value=""></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-			
-			echo TRANSLATION_PASSWORD;
-			?></strong></td>
+			<td><strong><?php translate("password");?></strong></td>
 			<td><input type="password" id="password" name="password" value=""></td>
 		</tr>
 		<tr>
@@ -73,15 +64,11 @@ csrf_token_html ();
 			<td><input type="checkbox" id="view_password" /></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-			
-			echo TRANSLATION_LANGUAGE;
-			?></strong></td>
+			<td><strong><?php translate("language");?></strong></td>
 			<td><select name="system_language">
 			<?php
 			for($i = 0; $i < count ( $languages ); $i ++) {
 				if ($default_language == $languages [$i]) {
-					
 					echo '<option value="' . $languages [$i] . '" selected>' . getLanguageNameByCode ( $languages [$i] ) . '</option>';
 				} else {
 					echo '<option value="' . $languages [$i] . '">' . getLanguageNameByCode ( $languages [$i] ) . '</option>';
@@ -104,10 +91,7 @@ if ($twofactor_authentication) {
 		<tr>
 			<td></td>
 			<td style="padding-top: 10px; text-align: center;"><input
-				type="submit" value="<?php
-				
-				echo TRANSLATION_LOGIN;
-				?>"></td>
+				type="submit" value="<?php translate("login");?>"></td>
 		</tr>
 	</table>
 </form>

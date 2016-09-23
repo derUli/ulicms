@@ -77,24 +77,29 @@ if (! $acl->hasPermission ( "other" )) {
 			setconfig ( "no_auto_cron", "no_auto_cron" );
 		}
 		
-		if (isset ( $_POST ["smtp_host"] ))
+		if (isset ( $_POST ["smtp_host"] )) {
 			setconfig ( "smtp_host", db_escape ( $_POST ["smtp_host"] ) );
+		}
 		
-		if (isset ( $_POST ["smtp_port"] ))
+		if (isset ( $_POST ["smtp_port"] )) {
 			setconfig ( "smtp_port", intval ( $_POST ["smtp_port"] ) );
+		}
 		
-		if (isset ( $_POST ["force_password_change_every_x_days"] ))
+		if (isset ( $_POST ["force_password_change_every_x_days"] )) {
 			setconfig ( "force_password_change_every_x_days", intval ( $_POST ["force_password_change_every_x_days"] ) );
+		}
 		
 		if (isset ( $_POST ["max_failed_logins_items"] )) {
 			setconfig ( "max_failed_logins_items", intval ( $_POST ["max_failed_logins_items"] ) );
 		}
 		
-		if (isset ( $_POST ["smtp_user"] ))
+		if (isset ( $_POST ["smtp_user"] )) {
 			setconfig ( "smtp_user", db_escape ( $_POST ["smtp_user"] ) );
+		}
 		
-		if (isset ( $_POST ["smtp_password"] ))
+		if (isset ( $_POST ["smtp_password"] )) {
 			setconfig ( "smtp_password", db_escape ( $_POST ["smtp_password"] ) );
+		}
 		
 		if ($_POST ["move_from"] != "-" and $_POST ["move_to"] != "-") {
 			db_query ( "UPDATE " . tbname ( "content" ) . " SET menu='" . db_escape ( $_POST ["move_to"] ) . "' WHERE menu='" . db_escape ( $_POST ["move_from"] ) . "'" );
@@ -137,10 +142,7 @@ if (! $acl->hasPermission ( "other" )) {
 	$delete_ips_after_48_hours = Settings::get ( "delete_ips_after_48_hours" );
 	$no_auto_cron = Settings::get ( "no_auto_cron" );
 	$twofactor_authentication = Settings::get ( "twofactor_authentication" );
-	
 	?>
-
-
 <form id="other_settings" action="index.php?action=other_settings"
 	method="post">
 	<?php
@@ -158,10 +160,7 @@ if (! $acl->hasPermission ( "other" )) {
 		<div class="accordion-content">
 
 			<div class="label">
-				<label for="cache_enabled"><?php
-	
-	echo TRANSLATION_CACHE_ENABLED;
-	?>
+				<label for="cache_enabled"><?php translate("cache_enabled");?>
 				</label>
 			</div>
 			<div class="inputWrapper">
@@ -176,26 +175,20 @@ if (! $acl->hasPermission ( "other" )) {
 			<div class="label">
 			<?php
 	
-	echo TRANSLATION_CACHE_VALIDATION_DURATION;
+	translate ( "CACHE_VALIDATION_DURATION" );
 	?>
 			</div>
 			<div class="inputWrapper">
-				<input type="number" name="cache_period" min=1 max=20160
+				<input type="number" name="cache_period" min="1" max="20160"
 					value="<?php
 	
 	echo $cache_period;
 	?>">
-	<?php
-	
-	echo TRANSLATION_MINUTES;
-	?>
+	<?php translate("minutes");?>
 			</div>
 
 			<div class="label">
-			<?php
-	
-	echo TRANSLATION_CACHE_ENGINE;
-	?>
+			<?php translate("cache_engine");?>
 			</div>
 			<div class="inputWrapper">
 				<select name="cache_type" size=1>
@@ -206,10 +199,7 @@ if (! $acl->hasPermission ( "other" )) {
 		echo " selected";
 	}
 	?>>
-					<?php
-	
-	echo TRANSLATION_FILE;
-	?></option>
+					<?php translate("file");?></option>
 					<option value="cache_lite"
 						<?php
 	
@@ -227,56 +217,35 @@ if (! $acl->hasPermission ( "other" )) {
 
 
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_SHORTCUTS;
-	?>
+		<?php translate("shortcuts");?>
 		</h2>
 
 		<div class="accordion-content">
 			<div class="label">
-			<?php
-	
-	echo TRANSLATION_REPLACE_SHORTCUTS;
-	?>
+			<?php translate("replace_shortcuts");?>
 			</div>
 			<div class="inputWrapper">
 				<select name="override_shortcuts" size=1>
 					<option value="off"
 						<?php if($override_shortcuts == "off" or !$override_shortcuts) echo " selected=\"selected\""?>>
-						<?php
-	
-	echo TRANSLATION_OFF;
-	?>
+						<?php translate("off");?>
 					</option>
 					<option value="frontend"
 						<?php if($override_shortcuts == "frontend") echo " selected=\"selected\""?>>
-						<?php
-	
-	echo TRANSLATION_ONLY_IN_FRONTEND;
-	?>
+						<?php translate("only_in_frontend");?>
 					</option>
 					<option value="backend"
 						<?php if($override_shortcuts == "backend") echo " selected=\"selected\""?>>
-						<?php
-	
-	echo TRANSLATION_ONLY_IN_BACKEND;
-	?>
+						<?php translate("only_in_backend");?>
 					</option>
 					<option value="on"
 						<?php if($override_shortcuts == "on") echo " selected=\"selected\""?>>
-						<?php
-	
-	echo TRANSLATION_BOOTH_BACKEND_AND_FRONTEND;
-	?>
+						<?php translate("BOOTH_BACKEND_AND_FRONTEND");?>
 					</option>
 				</select>
 			</div>
 			<p>
-			<?php
-	
-	echo TRANSLATION_REPLACE_SHORTCUTS_INFO;
-	?>
+			<?php translate("replace_shortcuts_info");?>
 			</p>
 		</div>
 
@@ -285,19 +254,13 @@ if (! $acl->hasPermission ( "other" )) {
 
 
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_MOVE_MENU_ITEMS;
-	?>
+		<?php translate("move_menu_items");?>
 		</h2>
 
 
 		<div class="accordion-content">
 			<p>
-			<?php
-	
-	echo TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM;
-	?>
+			<?php translate("move_all_menu_items_from");?>
 				<select name="move_from" size="1">
 					<option value="-" selected>-</option>
 					<?php
@@ -311,10 +274,7 @@ if (! $acl->hasPermission ( "other" )) {
 	}
 	?>
 				</select>
-				<?php
-	
-	echo TRANSLATION_MOVE_ALL_MENU_ITEMS_TO;
-	?>
+				<?php translate("move_all_menu_items_to");?>
 				<select name="move_to" size="1">
 					<option value="-" selected>-</option>
 					<?php
@@ -332,18 +292,12 @@ if (! $acl->hasPermission ( "other" )) {
 		</div>
 
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_DOMAIN2LANGUAGE_MAPPING;
-	?>
+		<?php translate("DOMAIN2LANGUAGE_MAPPING");?>
 		</h2>
 
 		<div class="accordion-content">
 
-		<?php
-	
-	echo TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO;
-	?>
+		<?php translate("DOMAIN2LANGUAGE_MAPPING_INFO");?>
 
 			<p>
 				<textarea name="domain_to_language" rows="10" cols="40"><?php
@@ -353,10 +307,7 @@ if (! $acl->hasPermission ( "other" )) {
 			</p>
 		</div>
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_LOG;
-	?>
+		<?php translate("log");?>
 		</h2>
 
 		<div class="accordion-content">
@@ -406,10 +357,7 @@ if (! $acl->hasPermission ( "other" )) {
 
 
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_CRONJOBS;
-	?>
+		<?php translate("cronjobs");?>
 		</h2>
 
 		<div class="accordion-content">
@@ -506,19 +454,13 @@ if (! $acl->hasPermission ( "other" )) {
 		</div>
 
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_ADDITIONAL_META_TAGS;
-	?>
+		<?php translate("ADDITIONAL_META_TAGS");?>
 		</h2>
 
 		<div class="accordion-content">
 
 			<div class="label">
-				<label for="show_meta_generator"><?php
-	
-	echo TRANSLATION_SHOW_META_GENERATOR;
-	?>
+				<label for="show_meta_generator"><?php translate ( "SHOW_META_GENERATOR" );?>
 				</label>
 			</div>
 			<div class="inputWrapper">
@@ -533,10 +475,7 @@ if (! $acl->hasPermission ( "other" )) {
 			</div>
 		</div>
 		<h2 class="accordion-header">
-		<?php
-	
-	echo TRANSLATION_EMAIL_DELIVERY;
-	?>
+		<?php translate("EMAIL_DELIVERY");?>
 		</h2>
 
 
@@ -546,8 +485,9 @@ if (! $acl->hasPermission ( "other" )) {
 				<select id='email_mode' name="email_mode" size="1">
 					<option value="internal"
 						<?php
-	if ($email_mode == "internal")
+	if ($email_mode == "internal") {
 		echo ' selected="selected"';
+	}
 	?>>PHP</option>
 					<?php
 	
@@ -555,8 +495,9 @@ if (! $acl->hasPermission ( "other" )) {
 		?>
 					<option value="pear_mail"
 						<?php
-		if ($email_mode == "pear_mail")
+		if ($email_mode == "pear_mail") {
 			echo ' selected="selected"';
+		}
 		?>>PEAR Mail</option>
 					<?php
 	}
@@ -565,23 +506,14 @@ if (! $acl->hasPermission ( "other" )) {
 			</div>
 			<div class="smtp_settings" id="smtp_settings" style="display: none">
 				<h3>
-				<?php
-	
-	echo TRANSLATION_SMTP_SETTINGS;
-	?>
+				<?php translate("smtp_settings");?>
 				</h3>
 				<div class="label">
-				<?php
-	
-	echo TRANSLATION_HOSTNAME;
-	?>
+				<?php translate("hostname");?>
 				</div>
 				<div class="inputWrapper">
 					<input type="text" name="smtp_host"
-						value="<?php
-	
-	echo real_htmlspecialchars ( $smtp_host );
-	?>">
+						value="<?php echo real_htmlspecialchars ( $smtp_host );?>">
 
 				</div>
 
@@ -589,7 +521,7 @@ if (! $acl->hasPermission ( "other" )) {
 				<div class="label">
 			<?php
 	
-	echo TRANSLATION_PORT;
+	translate ( "port" );
 	?>
 			</div>
 				<div class="inputWrapper">
@@ -602,28 +534,24 @@ if (! $acl->hasPermission ( "other" )) {
 				</div>
 
 				<div class="label">
-					<label for="smtp_auth"> <?php
-	
-	echo TRANSLATION_AUTHENTIFACTION_REQUIRED;
-	?>
+					<label for="smtp_auth"> <?php translate("AUTHENTIFACTION_REQUIRED");?>
 			</label>
 				</div>
 				<div class="inputWrapper">
 					<input type="checkbox" id="smtp_auth" name="smtp_auth"
 						<?php
-	if ($smtp_auth)
-		echo ' checked="checked"'?>
+	if ($smtp_auth) {
+		echo ' checked="check ed"';
+	}
+	?>
 						value="auth">
 				</div>
 
 
 				<div id="smtp_auth_div" style="display: none">
 					<div class="label">
-			<?php
-	
-	echo TRANSLATION_USER;
-	?>
-			</div>
+			<?php translate("user");?>
+</div>
 					<div class="inputWrapper">
 						<input type="text" name="smtp_user"
 							value="<?php
@@ -633,10 +561,7 @@ if (! $acl->hasPermission ( "other" )) {
 					</div>
 
 					<div class="label">
-		<?php
-	
-	echo TRANSLATION_PASSWORD;
-	?>
+		<?php translate("password");?>
 		</div>
 					<div class="inputWrapper">
 						<input type="password" name="smtp_password"
@@ -655,9 +580,7 @@ if (! $acl->hasPermission ( "other" )) {
 <?php
 	if ($smtp_auth) {
 		?>
-
 $('#smtp_auth_div').show();
-
 <?php
 	}
 	?>
@@ -692,31 +615,19 @@ if($('#email_mode').val() == "pear_mail"){
 });
 
 </script>
-
-
-
 		<h2 class="accordion-header">
-	<?php
-	
-	echo TRANSLATION_EXPERT_SETTINGS;
-	?>
+	<?php translate("expert_settings");?>
 	</h2>
 
 		<div class="accordion-content">
 			<p>
-				<a href="index.php?action=settings"><?php
-	
-	echo TRANSLATION_VIEW;
-	?>
+				<a href="index.php?action=settings"><?php translate("view");?>
 			</a>
 			</p>
 		</div>
 	</div>
 	<br /> <input name="submit" type="submit"
-		value="<?php
-	
-	echo TRANSLATION_SAVE_CHANGES;
-	?>" />
+		value="<?php translate("save_changes");?>" />
 
 	<?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
@@ -727,7 +638,6 @@ if($('#email_mode').val() == "pear_mail"){
 	}
 	?>
 </form>
-</div>
 <script type="text/javascript">
 $("#other_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");
@@ -735,10 +645,7 @@ $("#other_settings").ajaxForm({beforeSubmit: function(e){
   },
   success:function(e){
   $("#loading").hide();
-  $("#message").html("<span style=\"color:green;\"><?php
-	
-	echo TRANSLATION_CHANGES_WAS_SAVED;
-	?></span>");
+  $("#message").html("<span style=\"color:green;\"><?php translate("CHANGES_WAS_SAVED");?></span>");
   }
 
 

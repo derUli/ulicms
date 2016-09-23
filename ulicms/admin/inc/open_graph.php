@@ -23,7 +23,7 @@ if (defined ( "_SECURITY" )) {
 <p><?php translate("og_defaults_help");?></p>
 <form action="index.php?action=open_graph" id="open_graph" method="post">
 <?php csrf_token_html ();?>
-<table border=0>
+<table style="border: 0px;">
 		<tr>
 			<td><strong><?php translate("type");?></strong></td>
 			<td><input type="text" name="og_type"
@@ -57,10 +57,7 @@ function openMenuImageSelectWindow(field) {
 				onclick="openMenuImageSelectWindow(this)"
 				value="<?php echo htmlspecialchars($og_image);?>"
 				style="cursor: pointer" /><br /> <a href="#"
-				onclick="$('#og_image').val('');return false;"><?php
-		
-		echo TRANSLATION_CLEAR;
-		?>
+				onclick="$('#og_image').val('');return false;"><?php translate("clear");?>
 		</a></td>
 		</tr>
 		<tr>

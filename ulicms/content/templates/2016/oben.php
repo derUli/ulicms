@@ -43,7 +43,7 @@ echo getconfig ( "header-background-color" );
 </script>
 </head>
 <body class="<?php body_classes();?>">
-<div class="grey-bar"></div>
+	<div class="grey-bar"></div>
 	<header>
 		<a href="./">
 <?php
@@ -55,10 +55,9 @@ if (getconfig ( "logo_disabled" ) == "no") {
 } else {
 	?><strong><?php
 	
-homepage_title ();
+	homepage_title ();
 	?></strong>
 <?php
-
 }
 ?>
 </a>
@@ -70,8 +69,6 @@ homepage_title ();
 			src="<?php echo getTemplateDirPath(get_theme());?>header.jpg"
 			alt="Hedsaer-grafik">
 		<main>
-  <?php
-		if (! containsModule ( null, "blog" )) {
-			?>
-<h1><?php headline();?></h1>
-<?php } ?>
+
+<?php
+Template::headline (); ?>

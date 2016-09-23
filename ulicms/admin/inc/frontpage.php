@@ -25,16 +25,14 @@ if (defined ( "_SECURITY" )) {
 			$lang = $languages [$i];
 			$frontpages [$lang] = Settings::get ( "frontpage_" . $lang );
 			
-			if (! $frontpages [$lang])
+			if (! $frontpages [$lang]) {
 				$frontpages [$lang] = Settings::get ( "frontpage" );
+			}
 		}
 		
 		?>
 <h1>
-<?php
-		
-		echo TRANSLATION_FRONTPAGE;
-		?>
+<?php translate("frontpage");?>
 </h1>
 <form action="index.php?action=frontpage_settings"
 	id="frontpage_settings" method="post">
@@ -42,17 +40,11 @@ if (defined ( "_SECURITY" )) {
 		
 		csrf_token_html ();
 		?>
-	<table border=0>
+	<table border="0">
 		<tr>
-			<td style="min-width: 100px;"><strong><?php
-		
-		echo TRANSLATION_LANGUAGE;
-		?>
+			<td style="min-width: 100px;"><strong><?php translate("language");?>
 			</strong></td>
-			<td><strong><?php
-		
-		echo TRANSLATION_FRONTPAGE;
-		?>
+			<td><strong><?php translate("frontpage");?>
 			</strong></td>
 		</tr>
 		<?php
@@ -64,12 +56,11 @@ if (defined ( "_SECURITY" )) {
 			
 			echo $lang;
 			?></td>
-			<td><select
-				name="frontpage_<?php
+			<td><select name="frontpage_<?php
 			
 			echo $lang;
-			?>"
-				size=1 style="width: 400px">
+			?>" size=1
+				style="width: 400px">
 				<?php
 			
 			$pages = getAllPages ( $lang, "title", true );
@@ -86,21 +77,11 @@ if (defined ( "_SECURITY" )) {
 			<?php
 		}
 		?>
-		
-		
-		
-		
-		
-		
-		
-		
+</tr>
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
-				value="<?php
-		
-		echo TRANSLATION_SAVE_CHANGES;
-		?>"></td>
+				value="<?php translate("save_changes");?>"></td>
 	
 	</table>
 </form>
@@ -124,6 +105,5 @@ $("#frontpage_settings").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-    
-    }
+}
 ?>

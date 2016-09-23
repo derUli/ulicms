@@ -112,8 +112,20 @@ Database::query ( "alter table " . tbname ( "content" ) . "  add column `image_u
 
 Database::query ( "update " . tbname ( "content" ) . " set `type` = 'link' where redirection is not null and redirection <> ''" );
 
+// Database Changes of 9.8.5
+Database::query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN show_headline tinyint(1) NOT NULL DEFAULT '1'" );
+Database::query ( "ALTER TABLE " . tbname ( "lists" ) . " ADD COLUMN `use_pagination` tinyint(1) NOT NULL DEFAULT '0'" );
+Database::query ( "ALTER TABLE " . tbname ( "lists" ) . " ADD COLUMN `type` varchar(50) DEFAULT NULL" );
 
-Settings::set ( "db_schema_version", "9.8.4" );
+Database::query ( "alter table " . tbname ( "content" ) . " add column `cache_control` varchar(10) default 'auto'" );
+
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_author_name` varchar(80) default '';" );
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_author_email` varchar(80) default '';" );
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_date` datetime default null;" );
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_image` varchar(255) default '';" );
+Database::query ( "alter table `" . tbname ( "content" ) . "` add column `excerpt` text default '';" );
+
+Settings::set ( "db_schema_version", "9.8.5" );
 
 // Patch Manager zurücksetzen
 $pkg = new PackageManager ();

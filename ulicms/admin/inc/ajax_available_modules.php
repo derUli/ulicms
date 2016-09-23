@@ -51,14 +51,8 @@ if (! $pkg_src) {
 	if (! $packageList or count ( $packageList ) === 0) {
 		?>
 <p>
-	<strong><?php
-		
-		echo TRANSLATION_ERROR;
-		?> </strong> <br />
-	<?php
-		
-		echo TRANSLATION_NO_PACKAGES_AVAILABLE;
-		?>
+	<strong><?php translate("error");?> </strong> <br />
+	<?php translate("no_packages_available");?>
 </p>
 
 <?php
@@ -68,24 +62,19 @@ if (! $pkg_src) {
 			
 			if (! empty ( $pkg )) {
 				$pkgDescriptionURL = $pkg_src . "descriptions/" . $pkg . ".txt";
-				
-				echo "<p><strong>" . $pkg . "</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('" . str_ireplace ( "%pkg%", $pkg, TRANSLATION_ASK_FOR_INSTALL_PACKAGE ) . "');\"> [" . TRANSLATION_INSTALL . "]</a><br/>";
+				echo "<p><strong>" . $pkg . "</strong> <a href=\"?action=install_modules&amp;packages=$pkg\" onclick=\"return confirm('" . str_ireplace ( "%pkg%", $pkg, get_translation ( "ASK_FOR_INSTALL_PACKAGE" ) ) . "');\"> [" . get_translation ( "install" ) . "]</a><br/>";
 				
 				$pkgDescription = @file_get_contents_wrapper ( $pkgDescriptionURL );
 				
-				if (! $pkgDescription or strlen ( $pkgDescription ) < 1)
-					echo TRANSLATION_NO_DESCRIPTION_AVAILABLE;
-				else
+				if (! $pkgDescription or strlen ( $pkgDescription ) < 1) {
+					translate ( "no_description_available" );
+				} else {
 					echo nl2br ( $pkgDescription );
+				}
 				
 				echo "</p>";
 				fcflush ();
 			}
 		}
 	}
-	
-	?>
-
-
-	<?php
 }

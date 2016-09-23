@@ -7,10 +7,7 @@ if (defined ( "_SECURITY" )) {
 
 
 <h1>
-<?php
-		
-		translate ( "available_patches" );
-		?>
+<?php translate ( "available_patches" );?>
 </h1>
 
 <?php
@@ -52,11 +49,8 @@ if (defined ( "_SECURITY" )) {
 			
 			?>
 	<input type="submit"
-		value="<?php
-			
-			translate ( "install_selected_patches" );
-			?>"> <input type="button"
-		value="<?php
+		value="<?php translate ( "install_selected_patches" );?>"> <input
+		type="button" value="<?php
 			
 			translate ( "help" );
 			?>"

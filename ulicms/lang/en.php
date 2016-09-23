@@ -653,4 +653,40 @@ define ( "TRANSLATION_YES", "Yes" );
 define ( "TRANSLATION_YES", "No" );
 define ( "TRANSLATION_OWNER", "Owner" );
 
+// Überschrift anzeigen
+define ( "TRANSLATION_SHOW_HEADLINE", "Show Headline" );
+
+// Pagination
+define ( "TRANSLATION_USE_PAGINATION", "Use Pagination" );
+
+// Type Article
+define ( "TRANSLATION_ARTICLE", "Article" );
+
+// SimpleInstall v2 Packages
+define ( "TRANSLATION_VERSION", "Version" );
+define ( "TRANSLATION_COMPATIBLE_FROM", "Compatible from" );
+define ( "TRANSLATION_COMPATIBLE_TO", "Compatible to" );
+define ( "TRANSLATION_DEPENDENCIES", "Dependencies" );
+define ( "TRANSLATION_LICENSE_AGREEMENT", "License Agreeement" );
+define ( "TRANSLATION_DEPENDENCY_X_IS_NOT_INSTALLED", "Depedency %x% is not installed." );
+define ( "TRANSLATION_THIS_ULICMS_VERSION_IS_NOT_SUPPORTED", "The package is not with your UliCMS Version compatible." );
+define ( "TRANSLATION_SHA1_CHECKSUM_NOT_EQUAL", "SHA1 checksums are not equal." );
+define ( "TRANSLATION_ERRORS", "Errors" );
+
+define ( "TRANSLATION_SIZE", "Size" );
+
+define ( "TRANSLATION_CACHE_CONTROL", "Cache Control" );
+define ( "TRANSLATION_AUTO", "Auto" );
+define ( "TRANSLATION_FORCE", "Enforce" );
+define ( "TRANSLATION_NO_CACHE", "Disable Cache" );
+
+define ( "TRANSLATION_AUTHOR_NAME", "Author Name" );
+define ( "TRANSLATION_AUTHOR_EMAIL", "Author E-Mail Address" );
+define ( "TRANSLATION_ARTICLE_DATE", "Artikeldatum" );
+define ( "TRANSLATION_ARTICLE_IMAGE", "Article Image" );
+define ( "TRANSLATION_EXCERPT", "Excerpt" );
+
+define ( "TRANSLATION_ON_TIME", "At" );
+define ( "TRANSLATION_O_CLOCK", "o'clock" );
+
 add_hook ( "lang_en" );

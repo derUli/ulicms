@@ -21,10 +21,11 @@ if (! $acl->hasPermission ( "design" )) {
 			Settings::delete ( "no_mobile_design_on_tablet" );
 		}
 		
-		if (isset ( $_REQUEST ["video_width_100_percent"] ))
+		if (isset ( $_REQUEST ["video_width_100_percent"] )) {
 			setconfig ( "video_width_100_percent", "width" );
-		else
+		} else {
 			Settings::delete ( "video_width_100_percent" );
+		}
 		
 		if ($_REQUEST ["additional_menus"] !== $additional_menus) {
 			setconfig ( "additional_menus", db_escape ( $_REQUEST ["additional_menus"] ) );
@@ -42,7 +43,6 @@ if (! $acl->hasPermission ( "design" )) {
 		// Wenn Formular abgesendet wurde, Wert Speichern
 		if ($_REQUEST ["mobile_theme"] !== $mobile_theme) { // if mobile_theme auf
 			$themes = getThemesList ();
-			
 			if (empty ( $_REQUEST ["mobile_theme"] ))
 				Settings::delete ( "mobile_theme" );
 			else if (in_array ( $_REQUEST ["mobile_theme"], $themes )) { // if in_array mobile_theme auf
@@ -52,10 +52,11 @@ if (! $acl->hasPermission ( "design" )) {
 		} // if mobile_theme zu
 		
 		if ($_REQUEST ["default-font"] != Settings::get ( "default-font" )) {
-			if (! empty ( $_REQUEST ["custom-font"] ))
+			if (! empty ( $_REQUEST ["custom-font"] )) {
 				$font = $_REQUEST ["custom-font"];
-			else
+			} else {
 				$font = $_REQUEST ["default-font"];
+			}
 			
 			$font = db_escape ( $font );
 			
@@ -63,18 +64,13 @@ if (! $acl->hasPermission ( "design" )) {
 		}
 		
 		if (! empty ( $_REQUEST ["google-font"] )) {
-			
 			$font = $_REQUEST ["google-font"];
-			
 			$font = db_escape ( $font );
-			
 			setconfig ( "google-font", $font );
 		}
 		
 		setconfig ( "zoom", intval ( $_REQUEST ["zoom"] ) );
-		
 		setconfig ( "font-size", db_escape ( $_REQUEST ["font-size"] ) );
-		
 		setconfig ( "ckeditor_skin", db_escape ( $_REQUEST ["ckeditor_skin"] ) );
 		
 		if (Settings::get ( "header-background-color" ) != $_REQUEST ["header-background-color"]) {
@@ -126,10 +122,7 @@ div#google-fonts {
 	}
 	?>
 <h1>
-<?php
-	
-	echo TRANSLATION_DESIGN;
-	?>
+<?php translate("design");?>
 </h1>
 <form id="designForm" action="index.php?action=design" method="post">
 <?php
@@ -138,10 +131,7 @@ div#google-fonts {
 	?>
 	<table style="width: 100%;">
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_DESIGN_OPTIONS_ENABLED;
-	?> </strong></td>
+			<td><strong><?php translate("DESIGN_OPTIONS_ENABLED");?> </strong></td>
 			<td><input type="checkbox" name="disable_custom_layout_options"
 				<?php
 	
@@ -151,10 +141,7 @@ div#google-fonts {
 	?>></td>
 		</tr>
 		<tr>
-			<td style="width: 300px;"><strong><?php
-	
-	echo TRANSLATION_TITLE_FORMAT;
-	?> </strong></td>
+			<td style="width: 300px;"><strong><?php translate("title_format");?> </strong></td>
 			<td><input type="text" name="title_format"
 				value="<?php
 	
@@ -162,10 +149,7 @@ div#google-fonts {
 	?>"></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_FRONTEND_DESIGN;
-	?> </strong></td>
+			<td><strong><?php translate("frontend_design");?> </strong></td>
 			<td><select name="theme" size=1>
 			<?php
 	
@@ -176,8 +160,10 @@ div#google-fonts {
 		echo $th;
 		?>"
 						<?php
-		if ($th === $theme)
-			echo " selected"?>>
+		if ($th === $theme) {
+			echo " selected";
+		}
+		?>>
 		<?php
 		
 		echo $th;
@@ -190,22 +176,17 @@ div#google-fonts {
 		</tr>
 
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_MOBILE_DESIGN;
-	?> </strong></td>
+			<td><strong><?php translate("mobile_design");?> </strong></td>
 			<td><select name="mobile_theme" size=1>
 					<option value=""
 						<?php
 	
-	if (! $mobile_theme)
+	if (! $mobile_theme) {
 		echo " selected";
+	}
 	?>>
 						[
-						<?php
-	
-	echo TRANSLATION_STANDARD;
-	?>
+						<?php translate("standard");?>
 						]
 					</option>
 					<?php
@@ -217,8 +198,10 @@ div#google-fonts {
 		echo $th;
 		?>"
 						<?php
-		if ($th === $mobile_theme)
-			echo " selected"?>>
+		if ($th === $mobile_theme) {
+			echo " selected";
+		}
+		?>>
 		<?php
 		
 		echo $th;
@@ -243,41 +226,43 @@ div#google-fonts {
 	?>></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_EDITOR_SKIN;
-	?> </strong></td>
+			<td><strong><?php translate("editor_skin");?> </strong></td>
 			<td><select name="ckeditor_skin" size=1>
 					<option value="moono"
 						<?php
-	if ($ckeditor_skin === "moono")
-		echo " selected"?>>Moono</option>
+	if ($ckeditor_skin === "moono") {
+		echo " selected";
+	}
+	?>>Moono</option>
 					<option value="kama"
 						<?php
-	if ($ckeditor_skin === "kama")
-		echo " selected"?>>Kama</option>
+	if ($ckeditor_skin === "kama") {
+		echo " selected";
+	}
+	?>>Kama</option>
 					<option value="office2013"
 						<?php
-	if ($ckeditor_skin === "office2013")
-		echo " selected"?>>Office 2013</option>
+	if ($ckeditor_skin === "office2013") {
+		echo " selected";
+	}
+	?>>Office 2013</option>
 			</select></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_FONT_FAMILY;
-	?> </strong></td>
+			<td><strong><?php translate("font_family");?> </strong></td>
 			<td><select name="default-font" id="default-font" size=1>
 			<?php
 	$font_amount = count ( $fonts );
 	$i = 1;
 	foreach ( $fonts as $key => $value ) {
 		$selected = "";
-		if ($default_font === $value)
+		if ($default_font === $value) {
 			$selected = "selected";
+		}
 		
-		if (! in_array ( $default_font, $fonts ) and $i === $font_amount)
+		if (! in_array ( $default_font, $fonts ) and $i === $font_amount) {
 			$selected = "selected";
+		}
 		if ($value != 'google') {
 			echo '<optgroup style="font-family:' . $value . '; font-size:1.2em;">';
 		} else {
@@ -307,10 +292,7 @@ div#google-fonts {
 				</div></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_ZOOM;
-	?> </strong>
+			<td><strong><?php translate("zoom");?> </strong>
 			
 			<td><select name="zoom">
 			<?php
@@ -318,8 +300,9 @@ div#google-fonts {
 		?>
 					<option
 						<?php
-		if ($i === $zoom or ($i === 100 and $zoom === 0))
+		if ($i === $zoom or ($i === 100 and $zoom === 0)) {
 			echo " selected";
+		}
 		?>
 						value="<?php
 		
@@ -337,17 +320,15 @@ div#google-fonts {
 			</select></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_FONT_SIZE;
-	?> </strong>
+			<td><strong><?php translate("font_size");?> </strong>
 			
 			<td><select name="font-size">
 			<?php
 	foreach ( $font_sizes as $size ) {
 		echo '<option value="' . $size . '"';
-		if ($font_size == $size)
+		if ($font_size == $size) {
 			echo " selected";
+		}
 		echo ">";
 		echo $size;
 		echo "</option>";
@@ -356,10 +337,7 @@ div#google-fonts {
 			</select></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_HEADER_BACKGROUNDCOLOR;
-	?> </strong></td>
+			<td><strong><?php translate("HEADER_BACKGROUNDCOLOR");?> </strong></td>
 			<td><input name="header-background-color"
 				class="color {hash:true,caps:true}"
 				value="<?php
@@ -368,22 +346,15 @@ div#google-fonts {
 	?>"></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_FONT_COLOR;
-	?> </strong></td>
+			<td><strong><?php translate("font_color");?> </strong></td>
 			<td><input name="body-text-color" class="color {hash:true,caps:true}"
 				value="<?php
 	
 	echo real_htmlspecialchars ( Settings::get ( "body-text-color" ) );
 	?>"></td>
 		</tr>
-		</tr>
 		<tr>
-			<td><strong><?php
-	
-	echo TRANSLATION_BACKGROUNDCOLOR;
-	?> </strong></td>
+			<td><strong><?php translate("BACKGROUNDCOLOR");?> </strong></td>
 			<td><input name="body-background-color"
 				class="color {hash:true,caps:true}"
 				value="<?php
@@ -410,8 +381,9 @@ div#google-fonts {
 			<td><input type="checkbox" name="video_width_100_percent"
 				<?php
 	
-	if ($video_width_100_percent)
+	if ($video_width_100_percent){
 		echo " checked";
+	}
 	?>
 				value="video_width_100_percent"></td>
 		</tr>
@@ -433,10 +405,7 @@ div#google-fonts {
 	</table>
 	<p>
 		<input type="submit" name="submit"
-			value="<?php
-	
-	echo TRANSLATION_SAVE_CHANGES;
-	?>" />
+			value="<?php translate("save_changes");?>" />
 	</p>
 
 	<?php
@@ -455,13 +424,8 @@ $("#designForm").ajaxForm({beforeSubmit: function(e){
   }, 
   success:function(e){
   $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\"><?php
-	
-	echo TRANSLATION_CHANGES_WAS_SAVED;
-	?></span>");
+  $("#message").html("<span style=\"color:green;\"><?php translate("CHANGES_WAS_SAVED");?></span>");
   }
-  
-
 }); 
 
 function onChangeDefaultFont(){

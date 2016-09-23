@@ -47,7 +47,7 @@ if (defined ( "_SECURITY" )) {
 			<td><label for="high_resolution"><strong><?php translate("high_resolution");?></strong></label>
 			</td>
 			<td><input type="checkbox" id="high_resolution"
-				name="high_resolution" value="high_resolution"></strong></td>
+				name="high_resolution" value="high_resolution"></td>
 		</tr>
 		<tr>
 			<td width=480><strong><?php
@@ -61,10 +61,7 @@ if (defined ( "_SECURITY" )) {
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit"
-				value="<?php
-		
-		echo TRANSLATION_UPLOAD;
-		?>"></td>
+				value="<?php translate("upload");?>"></td>
 	
 	</table>
 

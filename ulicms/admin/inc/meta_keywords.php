@@ -31,10 +31,7 @@ if (defined ( "_SECURITY" )) {
 		
 		?>
 <h1>
-<?php
-		
-		echo TRANSLATION_META_KEYWORDS;
-		?>
+<?php translate("meta_keywords");?>
 </h1>
 <form action="index.php?action=meta_keywords" id="meta_keywords"
 	method="post">
@@ -44,15 +41,11 @@ if (defined ( "_SECURITY" )) {
 		?>
 	<table border=0>
 		<tr>
-			<td style="min-width: 100px;"><strong><?php
-		
-		echo TRANSLATION_LANGUAGE;
-		?>
+			<td style="min-width: 100px;"><strong>
+<?php translate("language");?>
 			</strong></td>
-			<td><strong><?php
-		
-		echo TRANSLATION_META_KEYWORDS;
-		?>
+			<td><strong>
+<?php translate("meta_keywords");?>
 			</strong></td>
 		</tr>
 		<?php
@@ -64,8 +57,7 @@ if (defined ( "_SECURITY" )) {
 			
 			echo $lang;
 			?></td>
-			<td><input
-				name="meta_keywords_<?php
+			<td><input name="meta_keywords_<?php
 			
 			echo $lang;
 			?>"
@@ -74,25 +66,15 @@ if (defined ( "_SECURITY" )) {
 			
 			echo stringHelper::real_htmlspecialchars ( $meta_keywordss [$lang] );
 			?>"></td>
+		</tr>
 			<?php
 		}
-		?>
-		
-		
-		
-		
-		
-		
-		
-		
+		?>	
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
-				value="<?php
-		
-		echo TRANSLATION_SAVE_CHANGES;
-		?>"></td>
-	</tr>
+				value="<?php translate("save_changes");?>"></td>
+		</tr>
 	</table>
 </form>
 
@@ -115,6 +97,5 @@ $("#meta_keywords_settings").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-    
-    }
+}
 ?>

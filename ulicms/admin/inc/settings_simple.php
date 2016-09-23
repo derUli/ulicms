@@ -6,17 +6,13 @@ if (defined ( "_SECURITY" )) {
 		$query = db_query ( "SELECT * FROM " . tbname ( "settings" ) . " ORDER BY name", $connection );
 		$settings = Array ();
 		while ( $row = db_fetch_object ( $query ) ) {
-			
 			$settings [$row->name] = $row->value;
 			$settings [$row->name] = htmlspecialchars ( $settings [$row->name], ENT_QUOTES, "UTF-8" );
 		}
 		
 		?>
 
-<h2><?php
-		
-		echo TRANSLATION_GENERAL_SETTINGS;
-		?></h2>
+<h2><?php translate("general_settings");?></h2>
 <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
 <form id="settings_simple" action="index.php?action=save_settings"
 	method="post">
@@ -26,30 +22,15 @@ if (defined ( "_SECURITY" )) {
 		?>
 <table>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_HOMEPAGE_TITLE;
-		?></strong></td>
-			<td><a href="index.php?action=homepage_title"><?php
-		
-		echo TRANSLATION_EDIT;
-		?></a></td>
+			<td><strong><?php translate("homepage_title");?></strong></td>
+			<td><a href="index.php?action=homepage_title"><?php translate("edit");?></a></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_MOTTO;
-		?></strong></td>
-			<td><a href="index.php?action=motto"><?php
-		
-		echo TRANSLATION_EDIT;
-		?></a></td>
+			<td><strong><?php translate("motto");?></strong></td>
+			<td><a href="index.php?action=motto"><?php translate("edit");?></a></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_HOMEPAGE_OWNER;
-		?></strong></td>
+			<td><strong><?php translate("homepage_owner");?></strong></td>
 			<td><input type="text" name="homepage_owner"
 				value="<?php
 		
@@ -57,30 +38,26 @@ if (defined ( "_SECURITY" )) {
 		?>"></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_HIDE_LOGO;
-		?></strong></strong></td>
+			<td><strong><?php translate("hide_logo")?></strong></td>
 			<td><select name="logo_disabled" size=1>
 					<option
-						<?php if (Settings::get("logo_disabled") == "yes") echo 'selected '?>
-						value="yes"><?php
-		
-		echo TRANSLATION_YES;
-		?></option>
+						<?php
+		if (Settings::get ( "logo_disabled" ) == "yes") {
+			echo 'selected ';
+		}
+		?>
+						value="yes"><?php translate("yes");?></option>
 					<option
-						<?php if (Settings::get("logo_disabled") != "yes") echo 'selected '?>
-						value="no"><?php
-		
-		echo TRANSLATION_NO;
-		?></option>
+						<?php
+		if (Settings::get ( "logo_disabled" ) != "yes") {
+			echo 'selected ';
+		}
+		?>
+						value="no"><?php translate("no");?></option>
 			</select></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_OWNER_MAILADRESS;
-		?></strong></td>
+			<td><strong><?php translate("OWNER_MAILADRESS");?></strong></td>
 			<td><input type="email" name="email"
 				value="<?php
 		
@@ -88,35 +65,26 @@ if (defined ( "_SECURITY" )) {
 		?>"></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_FRONTPAGE;
-		?></strong></td>
+			<td><strong><?php translate("frontpage");?></strong></td>
 			<td><a href="index.php?action=frontpage_settings"><?php
 		
-		echo TRANSLATION_EDIT;
+		translate ( "edit" );
 		?></a></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_MAINTENANCE_MODE_ENABLED;
-		?></strong></td>
+			<td><strong><?php translate("MAINTENANCE_MODE_ENABLED");?></strong></td>
 			<td><input type="checkbox" name="maintenance_mode"
 				<?php
 		if (strtolower ( $settings ["maintenance_mode"] == "on" ) || $settings ["maintenance_mode"] == "1" || strtolower ( $settings ["maintenance_mode"] ) == "true") {
 			echo " checked";
 		}
 		
-		?>></strong></td>
+		?>></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_GUEST_MAY_REGISTER;
-		?></strong></td>
-			<td><strong><input type="checkbox" name="visitors_can_register"
-					<?php
+			<td><strong><?php translate("GUEST_MAY_REGISTER");?></strong></td>
+			<td><input type="checkbox" name="visitors_can_register"
+				<?php
 		if (strtolower ( $settings ["visitors_can_register"] == "on" ) || $settings ["visitors_can_register"] == "1" || strtolower ( $settings ["visitors_can_register"] ) == "true") {
 			echo " checked";
 		}
@@ -136,29 +104,23 @@ if (defined ( "_SECURITY" )) {
 		</tr>
 		<tr>
 			<td></td>
-			<td><strong><?php
-		
-		echo TRANSLATION_METADATA;
-		?></strong></strong></td>
+			<td><strong><?php translate("metadata");?></strong></strong></td>
 		</tr>
 		<tr>
 			<td><strong><?php
 		
-		echo TRANSLATION_DESCRIPTION;
+		translate ( "description" );
 		?></strong></td>
 			<td><a href="index.php?action=meta_description"><?php
 		
-		echo TRANSLATION_EDIT;
+		translate ( "edit" );
 		?></a></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_KEYWORDS;
-		?></strong></td>
+			<td><strong><?php translate("keywords");?></strong></td>
 			<td><a href="index.php?action=meta_keywords"><?php
 		
-		echo TRANSLATION_EDIT;
+		translate ( "edit" );
 		?></a></td>
 		</tr>
 		<?php
@@ -170,7 +132,7 @@ if (defined ( "_SECURITY" )) {
 		</strong></td>
 			<td><a href="index.php?action=open_graph"><?php
 			
-			echo TRANSLATION_EDIT;
+			translate ( "edit" );
 			?></a></td>
 		</tr>
 		   <?php
@@ -178,31 +140,22 @@ if (defined ( "_SECURITY" )) {
 		?>
 		<tr>
 			<td></td>
-			<td><strong><?php
-		
-		echo TRANSLATION_TECHNICAL_STUFF;
-		?></strong></td>
-			</strong>
+			<td><strong><?php translate("technical_stuff");?></strong></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_FIX_W3C_VALIDATION_ERRORS;
-		?></strong></td>
+			<td><strong><?php translate("FIX_W3C_VALIDATION_ERRORS");?></strong></td>
 			<td><input type="checkbox" name="disable_html_validation"
 				<?php
-		if (! isset ( $settings ["disable_html_validation"] ))
+		if (! isset ( $settings ["disable_html_validation"] )) {
 			echo " checked";
+		}
 		?>
 				value="enabled">
 		
 		</tr>
 
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_TIMEZONE;
-		?></strong></td>
+			<td><strong><?php translate ( "timezone" );?></strong></td>
 			<td><select name="timezone" size=1>
 <?php
 		$timezones = file ( "inc/timezones.txt" );
@@ -224,34 +177,27 @@ if (defined ( "_SECURITY" )) {
 </select></td>
 		</tr>
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_SEARCH_ENGINES;
-		?></strong></td>
+			<td><strong><?php translate("search_engines");?></strong></td>
 			<td><select name="robots" size=1>
 <?php
 		if (Settings::get ( "robots" ) == "noindex,nofollow") {
 			?>
-   
-   <option value="index,follow"><?php
-			
-			echo TRANSLATION_SEARCH_ENGINES_INDEX;
-			?></option>
+
+   <option value="index,follow"><?php translate("EARCH_ENGINES_INDEX");?></option>
 					<option value="noindex,nofollow" selected><?php
 			
-			echo TRANSLATION_SEARCH_ENGINES_NOINDEX;
+			translate ( "SEARCH_ENGINES_NOINDEX" );
 			?></option>
-   
+
 <?php
 		} else {
 			?>
    <option value="index,follow" selected><?php
-			
-			echo TRANSLATION_SEARCH_ENGINES_INDEX;
+			translate ( "SEARCH_ENGINES_INDEX" );
 			?></option>
 					<option value="noindex,nofollow"><?php
 			
-			echo TRANSLATION_SEARCH_ENGINES_NOINDEX;
+			translate ( "SEARCH_ENGINES_NOINDEX" );
 			?></option>
 <?php
 		}
@@ -284,14 +230,14 @@ if (defined ( "_SECURITY" )) {
 $("#settings_simple").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");
   $("#loading").show();
-  }, 
+  },
   success:function(e){
-  $("#loading").hide();  
+  $("#loading").hide();
   $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
   }
-  
 
-}); 
+
+});
 
 </script>
 
@@ -301,12 +247,4 @@ $("#settings_simple").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-	
-	?>
-
-
-
-
-<?php
 }
-?>

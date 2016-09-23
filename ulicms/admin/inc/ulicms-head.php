@@ -35,7 +35,6 @@ $enq = array (
 <?php
 
 if (is_logged_in ()) {
-	
 	$enq [] = "scripts/cookie.js";
 	$enq [] = "scripts/notification.js";
 	$enq [] = "scripts/jquery-shiftclick.js";

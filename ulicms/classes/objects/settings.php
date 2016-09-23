@@ -63,11 +63,9 @@ class Settings {
 		$key = db_escape ( $key );
 		$value = db_escape ( $value );
 		$query = db_query ( "SELECT id FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
-		
 		if (db_num_rows ( $query ) > 0) {
 			db_query ( "UPDATE " . tbname ( "settings" ) . " SET value='$value' WHERE name='$key'" );
 		} else {
-			
 			db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 		}
 		if (isset ( $GLOBALS ['settings_cache'] [$key] )) {

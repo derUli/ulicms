@@ -1,39 +1,33 @@
+[ ] Inhaltstyp "Liste" - Sortierbar nach "Random"
+[ ] Neues Bootstrap basiertes Theme theme-2017
+[X] Alle Referenzen von TRANSLATION_* Konstanten ersetzen durch translation() und get_translation()
+[ ] Multisite-Fähigkeit / Scopes implementieren
+[ ] Autosave / Restore bei Browsercrash
+[ ] Seitenverwaltung - Beim Auswählen einer Sprache soll "Übergeordnete Seite" mit einer Liste der Seiten aus der gewählten Sprache aktualisiert werden
+[X] "cache_control" Option zur Inhalteverwaltung hinzufügen.
+	[X] Auto
+	[X] Cach
+	[X] No Cache
+[ ] editable_for_admins_only checkbox on contents
 
-UliCMS 9.x
-[ ] Scripts wie jQuery von einem CDN einbinden. Dies als Patch veröffentlichen
+Inhaltstyp "Artikel":
+[X] Um Metadaten erweitern
+	[X] author_name (varchar 80)
+	[X] author_email (varchar 80)
+	[X] last_update (date default null)
+ 	[X] Feld zum Hochladen von Artikelbild
+	[X] Excerpt (Vorschautext)
+[ ] Kommentarfunktion implementieren
+[X] Eigene Templates 
 
-[X] Copyright Jahr anpassen
-[X] Unnötige Dateien rausschmeissen, um Speicherplatz zu sparen
-[X] Dokumentation! Vor allem, zum Script/CSS queuing System!
-    [X] Zur Script Queue
-    [X] Zur Stylesheet Queue
-[X] Dokumentation zum Upgrade auf UliCMS 9.0.1 verfassen
-    - Wie muss das Upgrade durchgeführt werden
-    - Von welcher Version aus kann das Upgrade durchgeführt werden?
-    - Was ist dabei zu beachten?
-    - Müssen Anpassungen durchgeführt werden?
-[X] Promotext zu UliCMS 9.0.1 in Deutsch verfassen
-[X] Fehler im sysreport Tool korrigieren
-[X] installierte Patches im sysreport ausgeben
-[X] Datenbank Diagramm aktualisieren (Mit MySQL Version >= 5.6 wegen Fremdschlüsseln!)
-[X] Code refakturieren (mit Eclipse, Achtung auf Inline Elemente wie textarea beim refakturieren)
-[ ] Ausgabe von sys_get_temp_dir() zu sysreport hinzufügen.
-[ ] Auch $_session variablen nur ausgeben, wenn diese kein Array sind
-[ ] Website auf Französisch übersetzen. Falls sich kein freiwilliger Übersetzer finden lassen sollte, notfalls per Google Translator.
+User:
+[ ] Backend Startseite (welche Seite soll nach dem Login als erstes gezeigt werden)
 
-UliCMS 8.0.1 Portable for Windows Version 1.0.0
+Datenbank:
+[X] Option "Fremdschlüssel setzen" zum Installer hinzufügen
 
-[X] Liesmich-Text auf deutsch übersetzen
-[X] doc Ordner erstellen, darin die Info-Texte einfügen
-[X] "xampp" und "doc" Ordner zusammen zippen, und veröffentlichen.
-[X] Newsbeitrag erstellen.
+[ ] Möglichkeit eigene Inhaltstypen mit frei definierbaren Feldern , ähnlich wie z.B. in Drupal
 
-Doku
-[X] Tutorial für Installation eines Webservers mit UliCMS auf Debian Linux / Ubuntu verfassen.
+[ ] "Passwort wiederholen" Feld unter "Profil bearbeiten"
 
-Updates
-[X] Patch für Update auf neueste Mobile_Detect Version veröffentlichen
-[X] Update für Sprachdatei veröffentlichen
-
-UliCMS 9.8
-[X] Überall die Versionsnummer ersetzen (Info Broschüre, Paketquelle, usw.)
+[ ] Beim Löschen eines Users sollen alle Datensätze des gelöschten Users an einen anderen User übertragen werden können.

@@ -4,7 +4,15 @@ add_hook ( "query" );
 
 include_once ULICMS_ROOT . "/classes/vcs.php";
 
-if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] )) {
+if ($_REQUEST ["action"] == "install-sin-package" and isNotNullOrEmpty ( $_REQUEST ["file"] ) and $acl->hasPermission ( "install_packages" )) {
+	$file = basename ( $_POST ["file"] );
+	$path = Path::resolve ( "ULICMS_TMP/$file" );
+	$pkg = new SinPackageInstaller ( $path );
+	$pkg->installPackage ();
+	@unlink ( $path );
+	Request::redirect ( "index.php?action=sin-package-install-ok&file=$file" );
+}
+if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] ) && $acl->hasPermission ( "settings_simple" )) {
 	add_hook ( "before_safe_simple_settings" );
 	setconfig ( "registered_user_default_level", intval ( $_POST ["registered_user_default_level"] ) );
 	setconfig ( "homepage_owner", db_escape ( $_POST ["homepage_owner"] ) );
@@ -183,6 +191,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$custom_data = db_escape ( $_POST ["custom_data"] );
 		$theme = db_escape ( $_POST ["theme"] );
 		$type = db_escape ( $_POST ["type"] );
+		$cache_control = db_escape ( $_POST ["cache_control"] );
 		
 		if ($_POST ["parent"] == "NULL") {
 			$parent = "NULL";
@@ -233,16 +242,24 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			$approved = 0;
 		}
 		
+		$article_author_name = Database::escapeValue ( $_POST ["article_author_name"] );
+		$article_author_email = Database::escapeValue ( $_POST ["article_author_email"] );
+		$article_image = Database::escapeValue ( $_POST ["article_image"] );
+		$article_date = date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) );
+		$excerpt = Database::escapeValue ( $_POST ["excerpt"] );
+		
+		$show_headline = intval ( $_POST ["show_headline"] );
+		
 		add_hook ( "before_create_page" );
 		db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
   comments_enabled,notinfeed,redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`,
-  `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`)
+  `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`, `article_date`, `article_image`, `excerpt`)
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", " . $comments_enabled . ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
-  '$og_description', '$og_type', '$og_image', '$type', $module, $video, $audio, '$text_position', $image_url, $approved)" ) or die ( db_error () );
+  '$og_description', '$og_type', '$og_image', '$type', $module, $video, $audio, '$text_position', $image_url, $approved, $show_headline, '$cache_control', '$article_author_name', '$article_author_email', '$article_date', '$article_image', '$excerpt')" ) or die ( db_error () );
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
 		if ($type == "list") {
@@ -268,7 +285,14 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			$list_order_by = Database::escapeValue ( $_POST ["list_order_by"] );
 			$list_order_direction = Database::escapeValue ( $_POST ["list_order_direction"] );
 			
+			$list_use_pagination = intval ( $_POST ["list_use_pagination"] );
+			
 			$limit = intval ( $_POST ["limit"] );
+			
+			$list_type = $_POST ["list_type"];
+			if (empty ( $list_type ) or $list_type == "null") {
+				$list_type = null;
+			}
 			
 			$list = new List_Data ( $content_id );
 			$list->language = $list_language;
@@ -278,6 +302,8 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 			$list->order_by = $list_order_by;
 			$list->order_direction = $list_order_direction;
 			$list->limit = $limit;
+			$list->use_pagination = $list_use_pagination;
+			$list->type = $list_type;
 			$list->save ();
 		}
 		$content = $unescaped_content;
@@ -357,6 +383,8 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$custom_data = db_escape ( $_POST ["custom_data"] );
 	$theme = db_escape ( $_POST ["theme"] );
 	
+	$cache_control = db_escape ( $_POST ["cache_control"] );
+	
 	$alternate_title = db_escape ( $_POST ["alternate_title"] );
 	
 	$parent = "NULL";
@@ -409,9 +437,18 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		$image_url = "'" . Database::escapeValue ( $_POST ["image_url"] ) . "'";
 	}
 	
+	$show_headline = intval ( $_POST ["show_headline"] );
+	
+	$article_author_name = Database::escapeValue ( $_POST ["article_author_name"] );
+	$article_author_email = Database::escapeValue ( $_POST ["article_author_email"] );
+	$article_image = Database::escapeValue ( $_POST ["article_image"] );
+	$article_date = date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) );
+	$excerpt = Database::escapeValue ( $_POST ["excerpt"] );
+	
 	add_hook ( "before_edit_page" );
 	$sql = "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
-	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, image_url = $image_url $approved_sql WHERE id=$id";
+	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
+	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = '$article_date', excerpt = '$excerpt' WHERE id=$id";
 	db_query ( $sql ) or die ( DB::error () );
 	
 	$user_id = get_user_id ();
@@ -419,8 +456,8 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	
 	if ($type == "list") {
 		$list_language = $_POST ["list_language"];
-		if (empty ( $list_language )) {
-			$list_language = null;
+		if (empty ( $list_type ) or $list_type == "null") {
+			$list_type = null;
 		}
 		$list_category = $_POST ["list_category"];
 		if (empty ( $list_category )) {
@@ -442,6 +479,13 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		
 		$limit = intval ( $_POST ["limit"] );
 		
+		$list_use_pagination = intval ( $_POST ["list_use_pagination"] );
+		
+		$list_type = $_POST ["list_type"];
+		if (empty ( $list_type )) {
+			$list_type = null;
+		}
+		
 		$list = new List_Data ( $content_id );
 		$list->language = $list_language;
 		$list->category_id = $list_category;
@@ -450,6 +494,8 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		$list->order_by = $list_order_by;
 		$list->order_direction = $list_order_direction;
 		$list->limit = $limit;
+		$list->use_pagination = $list_use_pagination;
+		$list->type = $list_type;
 		$list->save ();
 	}
 	
@@ -616,8 +662,9 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 		$rechte = $user ["group"];
 		$admin = $user ["admin"];
 		$group_id = $user ["group_id"];
-		if (is_null ( $group_id ))
+		if (is_null ( $group_id )) {
 			$group_id = "NULL";
+		}
 	}
 	
 	$notify_on_login = intval ( isset ( $_POST ["notify_on_login"] ) );
@@ -639,8 +686,9 @@ about_me = '$about_me', html_editor='$html_editor', require_password_change='$re
 	
 	db_query ( $sql );
 	
-	if (! empty ( $password ))
+	if (! empty ( $password )) {
 		changePassword ( $password, $id );
+	}
 	
 	add_hook ( "after_edit_user" );
 	;

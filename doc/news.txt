@@ -1,27 +1,42 @@
-﻿===== Neues in UliCMS 9.8.4 =====
+﻿===== Neues in UliCMS 9.8.5 =====
 
-Neue Features
-+ Inhaltstyp "Liste" hinzugefügt
-+ Inhaltstyp "Link" hinzugefügt
-+ Inhaltstyp "Bild" hinzugefügt
-+ Inhaltstyp "Modul" hinzugefügt
-+ Inhaltstyp "Audio" hinzugefügt
-+ Inhaltstyp "Video" hinzugefügt
-+ Tab "Position der Beschreibung" hinzugefügt
-+ Klasse ModuleHelper hinzugefügt
-+ post-install Scripts können nun auch manuell ausgeführt werden
-+ Rudimentäre Freigabe-Workflows sind nun möglich
-+ Eigentümer einer Seite kann nun geändert werden
-+ Bei der Installation können nun zusätzliche Demodaten installiert werden
-+ Es wird nun auch ein "lang" Ordner als Speicherort für Lokalisierungen von Modulen
-unterstützt
-+ Module update_manager und update_managerd_dashboard vorinstalliert (bei in Version 1.0.0)
-+ Filter und Hooks können nun auch in einem Unterordner untergebracht werden
+Neue Features für Endanwender
++ Neuer Installer
++ update_manager auf Version 1.0.3 aktualisiert
++ Option "Überschrift anzeigen" hinzugefügt
++ Bootstrap CSS 3.3.6 wird nun per Default im Editor integriert
++ Listen unterstützen nun "Pagination"
++ Listen können nun auch nach Typ filtern
++ Inhaltstyp "Artikel" hinzugefügt
++ Neues Paketformat: SimpleInstall v2
++ Feld "Cache Steuerung" hinzugefügt
++ Metadaten für Artikel
 
+Performance
++ Kombinierte Stylesheets werden nun minified
+
+Neue Features für Entwickler
++ Prepared Statements
++ Funktion Database::dropTable() hinzugefügt
++ Funktion Database::dropColumn() hinzugefügt
++ Funktion Database::selectAvg() hinzugefügt
++ Funktion Database::selectMin() hinzugefügt
++ Funktion Database::selectMax() hinzugefügt
++ Funktion Database::deleteFrom() hinzugefügt
++ Funktion Database::truncateTable() hinzugefügt
++ Funktion Database::selectAll()  hinzugefügt
++ Funktionen Template::headline() und Template::getHeadline() hinzugefügt
++ Funktion str_replace_first() hinzugefügt
++ Funktion str_replace_nth() hinzugefügt
++ Funktion mb_str_split() hinzugefügt
++ modul_main und modul_admin Dateien müssen nun nicht mehr mit dem Namen des Moduls geprefixt werden
++ Attribute "embed" (Boolean) und "custom_acl" (Array of String) werden nun aus der metadata.json ausgelesen und ausgewertet
++ Filter für get_type() hinzugefügt
++ Templates je Inhaltstyp
 
 Änderungen
-# Feld "Position" ist jetzt ein HTML5 Number Feld
-# Berfreundlichkeit des Installationsassistenten verbessert
+# Dashboard nun mit mehr Ajax
+# Haupt-Templates eines Designs können nun auch "top.php" und "bottom.php" heißen
 
 Entfernte Features
-- Templates können nicht mehr online im Browser bearbeitet werden
+- Funktion Database::preparedQuery() entfernt, stattdessen Database::pQuery() verwenden

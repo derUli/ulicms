@@ -53,10 +53,7 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 	}
 	?>
 <h1>
-<?php
-	
-	echo TRANSLATION_GROUPS;
-	?>
+<?php translation("groups");?>
 </h1>
 <?php
 	
@@ -79,10 +76,7 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 	if ($modified) {
 		?>
 <p style='color: green;'>
-<?php
-		
-		echo TRANSLATION_CHANGES_WAS_SAVED;
-		?>
+<?php translate("changes_was_saved");?>
 </p>
 <?php
 	}

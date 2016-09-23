@@ -116,10 +116,7 @@ $(window).load(function(){
 	translate ( "audio" );
 	?>
 </h1>
-<?php
-	
-	echo TRANSLATION_CATEGORY;
-	?>
+<?php translate("category");?>
 <?php
 
 	echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
@@ -158,8 +155,8 @@ $(window).load(function(){
 			<td></td>
 			<td></td>
 		</tr>
-	
-	
+
+	</thead>
 	<tbody>
 	<?php
 	while ( $row = db_fetch_object ( $all_audio ) ) {
@@ -224,7 +221,7 @@ $(window).load(function(){
 	}
 	?>
 	</tbody>
-	</thead>
+
 </table>
 
 <script type="text/javascript">

@@ -1,4 +1,11 @@
 <?php
+
+// boolval PHP 5.4 Implementation with checking version
+if (! function_exists ( 'boolval' )) {
+	function boolval($my_value) {
+		return ( bool ) $my_value;
+	}
+}
 function initconfig($key, $value) {
 	$retval = false;
 	if (! Settings::get ( $key )) {
@@ -7,8 +14,27 @@ function initconfig($key, $value) {
 	}
 	return $retval;
 }
+function mb_str_split($string) {
+	// Split at all position not after the start: ^
+	// and not before the end: $
+	return preg_split ( '/(?<!^)(?!$)/u', $string );
+}
+function str_replace_nth($search, $replace, $subject, $nth) {
+	$found = preg_match_all ( '/' . preg_quote ( $search ) . '/', $subject, $matches, PREG_OFFSET_CAPTURE );
+	if (false !== $found && $found > $nth) {
+		return substr_replace ( $subject, $replace, $matches [0] [$nth] [1], strlen ( $search ) );
+	}
+	return $subject;
+}
+function str_replace_first($search, $replace, $subject) {
+	$pos = strpos ( $subject, $search );
+	if ($pos !== false) {
+		return substr_replace ( $subject, $replace, $pos, strlen ( $search ) );
+	}
+	return $subject;
+}
 function isNotNullOrEmpty($variable) {
-	return (! is_null ( $variable ) and ! is_empty ( $variable ));
+	return (! is_null ( $variable ) and ! empty ( $variable ));
 }
 function get_action() {
 	$retval = "home";
@@ -350,6 +376,7 @@ function get_available_post_types() {
 	global $post_types;
 	$post_types = array (
 			"page",
+			"article",
 			"list",
 			"link",
 			"image",
@@ -797,6 +824,9 @@ function clearCache() {
 	if (function_exists ( "apc_clear_cache" )) {
 		clearAPCCache ();
 	}
+	if (function_exists ( "opcache_reset" )) {
+		opcache_reset ();
+	}
 	
 	add_hook ( "after_clear_cache" );
 }
@@ -903,7 +933,7 @@ function getThemeList() {
 	return getThemesList ();
 }
 function getThemesList() {
-	$pkg = new packageManager ();
+	$pkg = new PackageManager ();
 	return $pkg->getInstalledPackages ( 'themes' );
 }
 
@@ -1116,12 +1146,12 @@ function get_translation($name, $placeholders = array()) {
 	$iname = strtoupper ( $name );
 	foreach ( get_defined_constants () as $key => $value ) {
 		if (startsWith ( $key, "TRANSLATION_" ) and $key == "TRANSLATION_" . $iname) {
-			// Platzhalter ersetzen, diese können als assoziatives Array als zweiter Parameter
-			// dem Funktionsaufruf mitgegeben werden
 			$custom_translation = Translation::get ( $key );
 			if ($custom_translation != null) {
 				$value = $custom_translation;
 			}
+			// Platzhalter ersetzen, diese können als assoziatives Array als zweiter Parameter
+			// dem Funktionsaufruf mitgegeben werden
 			foreach ( $placeholders as $placeholder => $replacement ) {
 				$value = str_ireplace ( $placeholder, $replacement, $value );
 			}
@@ -1191,7 +1221,7 @@ function getModulePath($module, $abspath = false) {
 	}
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
-		$module_folder .= "content/modules/";
+		$module_folder = "content/modules/";
 	}  // Backend Directory
 else {
 		$module_folder = "../content/modules/";
@@ -1202,8 +1232,14 @@ else {
 function getModuleAdminFilePath($module) {
 	return getModulePath ( $module ) . $module . "_admin.php";
 }
+function getModuleAdminFilePath2($module) {
+	return getModulePath ( $module ) . "admin.php";
+}
 function getModuleMainFilePath($module) {
 	return getModulePath ( $module ) . $module . "_main.php";
+}
+function getModuleMainFilePath2($module) {
+	return getModulePath ( $module ) . "main.php";
 }
 function getModuleUninstallScriptPath($module, $abspath = false) {
 	return getModulePath ( $module, $abspath ) . $module . "_uninstall.php";
@@ -1280,12 +1316,12 @@ function isModuleInstalled($name) {
 	return in_array ( $name, getAllModules () );
 }
 function getAllModules() {
-	$pkg = new packageManager ();
+	$pkg = new PackageManager ();
 	return $pkg->getInstalledPackages ( 'modules' );
 }
 function no_cache() {
-	if (! defined ( "NO_CACHE" )) {
-		define ( "NO_CACHE", true );
+	if(get_cache_control() == "auto" || get_cache_control() == "no_cache"){
+		$GLOBALS["no_cache"] = true;
 	}
 }
 function no_anti_csrf() {
@@ -1317,7 +1353,7 @@ function replaceAudioTags($txt) {
 			if (! empty ( $row->ogg_file )) {
 				$html .= '<source src="content/audio/' . htmlspecialchars ( $row->ogg_file ) . '" type="audio/ogg">';
 			}
-			$html .= TRANSLATION_NO_HTML5;
+			$html .= get_translation ( "no_html5" );
 			if (! empty ( $row->mp3_file ) or ! empty ( $row->ogg_file )) {
 				$html .= '<br/>
 		<a href="content/audio/' . $preferred . '">' . TRANSLATION_DOWNLOAD_AUDIO_INSTEAD . '</a>';
@@ -1401,14 +1437,18 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$stringToReplace2 = '[module=&quot;' . $thisModule . '&quot;]';
 		
 		$module_mainfile_path = getModuleMainFilePath ( $thisModule );
+		$module_mainfile_path2 = getModuleMainFilePath2 ( $thisModule );
 		
 		if (is_file ( $module_mainfile_path ) and (strstr ( $string, $stringToReplace1 ) or strstr ( $string, $stringToReplace2 ))) {
 			require_once $module_mainfile_path;
-			if (function_exists ( $thisModule . "_render" )) {
-				$html_output = call_user_func ( $thisModule . "_render" );
-			} else {
-				$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
-			}
+		} else if (is_file ( $module_mainfile_path2 )) {
+			require_once $module_mainfile_path2;
+		} else {
+			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
+		}
+		
+		if (function_exists ( $thisModule . "_render" )) {
+			$html_output = call_user_func ( $thisModule . "_render" );
 		} else {
 			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
 		}
@@ -1456,7 +1496,7 @@ function getPageTitleByID($id) {
 		$row = db_fetch_object ( $query );
 		return $row->title;
 	} else {
-		return "[" . TRANSLATION_NONE . "]";
+		return "[" . get_translation ( "none" ) . "]";
 	}
 }
 
@@ -1812,4 +1852,3 @@ function getMaximumFileUploadSize() {
 }
 
 require_once "users_api.php";
-require_once "legacy.php";

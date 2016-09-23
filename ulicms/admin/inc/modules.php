@@ -39,14 +39,14 @@ if (! $acl->hasPermission ( "list_packages" )) {
 </p>
 
 <?php
-	$pkg = new packageManager ();
+	$pkg = new PackageManager ();
 	$modules = getAllModules ();
 	if (count ( $modules ) > 0) {
 		echo "<ol style=\"margin-bottom:30px;\">";
 		for($i = 0; $i < count ( $modules ); $i ++) {
 			echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
 			
-			$module_has_admin_page = file_exists ( getModuleAdminFilePath ( $modules [$i] ) );
+			$module_has_admin_page = (file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) ));
 			
 			echo getModuleName ( $modules [$i] );
 			$version = getModuleMeta ( $modules [$i], "version" );
@@ -81,21 +81,28 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			if ($module_has_admin_page) {
 				echo "<a style=\"font-size:0.8em;\" href=\"?action=module_settings&module=" . $modules [$i] . "\">";
-				echo "[" . TRANSLATION_SETTINGS . "]";
+				echo "[" . get_translation ( "settings" ) . "]";
 				echo "</a>";
 			}
 			
 			if ($acl->hasPermission ( "remove_packages" )) {
 				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $modules [$i] . "&type=module\" onclick=\"return uninstallModule(this.href, '" . $modules [$i] . "');\">";
-				echo " [" . TRANSLATION_DELETE . "]";
+				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
 			}
 			
 			echo "</div>";
 			$noembed_file1 = getModulePath ( $modules [$i] ) . ".noembed";
 			$noembed_file2 = getModulePath ( $modules [$i] ) . "noembed.txt";
+			$embed_attrib = true;
+			
+			$meta_attr = getModuleMeta ( $modules [$i], "embed" );
+			if (! is_null ( $meta_attr ) and is_bool ( $meta_attr )) {
+				$embed_attrib = $meta_attr;
+			}
+			
 			echo "<br/>";
-			if (! file_exists ( $noembed_file1 ) and ! file_exists ( $noembed_file2 )) {
+			if (! file_exists ( $noembed_file1 ) and ! file_exists ( $noembed_file2 ) and $embed_attrib) {
 				echo "<input type='text' value='[module=\"" . $modules [$i] . "\"]' readonly='readonly' onclick='this.focus(); this.select()'>";
 			} else {
 				echo "Kein Embed Modul";
@@ -109,17 +116,11 @@ if (! $acl->hasPermission ( "list_packages" )) {
 
 
 <p>
-	<strong><?php
-	
-	echo TRANSLATION_INSTALLED_DESIGNS;
-	?>
+	<strong><?php translate("installed_designs");?>
 	</strong>
 </p>
 <p>
-<?php
-	
-	echo TRANSLATION_INSTALLED_DESIGNS_INFO;
-	?>
+<?php translate("installed_designs_info");?>
 </p>
 
 <?php
@@ -164,13 +165,11 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			if ($acl->hasPermission ( "remove_packages" ) and $themes [$i] != $ctheme) {
 				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $themes [$i] . "&type=theme\" onclick=\"return uninstallTheme(this.href, '" . $themes [$i] . "');\">";
-				
-				echo " [" . TRANSLATION_DELETE . "]";
+				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
 			} else if ($acl->hasPermission ( "remove_packages" )) {
-				
 				echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert('Das Theme kann nicht gelöscht werden, da es gerade aktiv ist.')\">";
-				echo " [" . TRANSLATION_DELETE . "]";
+				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
 			}
 			
@@ -207,7 +206,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 <?php }?>
 <div id="inst_patch_slide_container">
 <?php
-		$pkg = new packageManager ();
+		$pkg = new PackageManager ();
 		$patches = $pkg->getInstalledPatchNames ();
 		if (count ( $patches ) > 0) {
 			echo "<ol id=\"installed_patches\">";

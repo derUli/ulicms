@@ -9,24 +9,16 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	?>
 
 <h2>
-<?php
-	
-	echo TRANSLATION_CONTENTS;
-	?>
+<?php translate("contents");?>
 </h2>
 <p>
-	<strong><?php
-	
-	echo TRANSLATION_SELECT_CONTENT_TYPE;
-	?> </strong><br /> <br />
+	<strong><?php translate("select_content_type");?> </strong><br /> <br />
 	<?php
 	
 	if ($acl->hasPermission ( "pages" )) {
 		?>
-	<a href="index.php?action=pages"><?php
-		
-		echo TRANSLATION_PAGES;
-		?></a><br /> <br />
+	<a href="index.php?action=pages"><?php translate("pages");?></a><br />
+	<br />
 	<?php
 	}
 	?>
@@ -37,7 +29,7 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 		?><a href='?action=forms'><?php
 		
 		translate ( "forms" );
-		?></a> <br /> <br />
+		?></a> <br />
 				<?php
 	}
 	?>
@@ -46,10 +38,8 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	
 	if ($acl->hasPermission ( "banners" )) {
 		?>
-	<a href="index.php?action=banner"><?php
-		
-		echo TRANSLATION_ADVERTISEMENTS;
-		?></a><br /> <br />
+	<a href="index.php?action=banner"><?php get_translation("advertisements");?></a><br />
+
 	<?php
 	}
 	?>
@@ -60,10 +50,8 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	if ($acl->hasPermission ( "categories" )) {
 		?>
 
-	<a href="index.php?action=categories"><?php
-		
-		echo TRANSLATION_CATEGORIES;
-		?></a><br /> <br />
+	<a href="index.php?action=categories"><?php translate("categories");?></a><br />
+	<br />
 	<?php
 	}
 	?>
@@ -71,57 +59,25 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	<?php
 	if ($acl->hasPermission ( "export" ) or $acl->hasPermission ( "import" )) {
 		?>
-
-
+ 
 
 <p>
 	<strong><?php
-		
-		echo TRANSLATION_IMPORT_EXPORT;
-		?> </strong><br /> <br />
+		translate ( "import_export" );
+		?></strong><br /> <br />
 	<?php
 	}
-	?>
-
-	<?php
-	
-	if ($acl->hasPermission ( "import" )) {
-		?>
-	<!--
-<a href="index.php?action=import"><?php
-		
-		echo TRANSLATION_IMPORT;
-		?></a><br/><br/>
-
--->
-		<?php
-	}
-	?>
-
-	<?php
-	
 	if ($acl->hasPermission ( "export" )) {
 		?>
 
-	<a href="index.php?action=export"><?php
-		
-		echo TRANSLATION_EXPORT;
-		?></a><br />
+	<a href="index.php?action=export"><?php translate("export");?></a><br />
 	<?php
 	}
 	?>
-
 </p>
 <?php
-	
 	add_hook ( "content_type_list_entry" );
 	?>
-
-
-
-
-
-
 	<?php
 } else {
 	noperms ();

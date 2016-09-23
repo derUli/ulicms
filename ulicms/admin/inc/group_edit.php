@@ -9,8 +9,9 @@ $groupName = real_htmlspecialchars ( $all_permissions ["name"] );
 $all_permissions_all = $acl->getDefaultACL ( false, true );
 $all_permissions = json_decode ( $all_permissions ["permissions"], true );
 foreach ( $all_permissions_all as $name => $value ) {
-	if (! isset ( $all_permissions [$name] ))
+	if (! isset ( $all_permissions [$name] )) {
 		$all_permissions [$name] = $value;
+	}
 }
 
 ksort ( $all_permissions );
@@ -23,16 +24,12 @@ if ($all_permissions) {
 	
 	csrf_token_html ();
 	?>
-	<input type="hidden" name="id"
-		value="<?php
+	<input type="hidden" name="id" value="<?php
 	
 	echo $id;
 	?>">
 	<p>
-		<strong><?php
-	
-	echo TRANSLATION_NAME;
-	?>
+		<strong><?php translate("name")?>
 		</strong> <input type="text" required="true" name="name"
 			value="<?php
 	
@@ -40,19 +37,13 @@ if ($all_permissions) {
 	?>">
 	</p>
 	<p>
-		<strong><?php
-	
-	echo TRANSLATION_PERMISSIONS;
-	?>
+		<strong><?php translate("permissions");?>
 		</strong>
 	</p>
 	<fieldset>
 		<p>
 			<input id="checkall" type="checkbox" class="checkall"> <label
-				for="checkall"><?php
-	
-	echo TRANSLATION_SELECT_ALL;
-	?>
+				for="checkall"><?php translate("select_all");?>
 			</label>
 		</p>
 		<p>
@@ -60,13 +51,11 @@ if ($all_permissions) {
 	
 	foreach ( $all_permissions as $key => $value ) {
 		?>
-			<input type="checkbox"
-				id="<?php
+			<input type="checkbox" id="<?php
 		
 		echo $key;
 		?>"
-				name="user_permissons[]"
-				value="<?php
+				name="user_permissons[]" value="<?php
 		
 		echo $key;
 		?>"
@@ -75,8 +64,7 @@ if ($all_permissions) {
 		if ($value) {
 			echo "checked='checked'";
 		}
-		?>> <label
-				for="<?php
+		?>> <label for="<?php
 		
 		echo $key;
 		?>"><?php
@@ -89,11 +77,7 @@ if ($all_permissions) {
 	?>
 		</p>
 	</fieldset>
-	<br /> <input type="submit"
-		value="<?php
-	
-	echo TRANSLATION_SAVE_CHANGES;
-	?>"
+	<br /> <input type="submit" value="<?php translate("save_changes");?>"
 		name="edit_group">
 </form>
 
@@ -121,4 +105,4 @@ else {
 	?>
 <p style="color: red">Diese Gruppe ist nicht vorhanden.</p>
 <?php
-    }
+}

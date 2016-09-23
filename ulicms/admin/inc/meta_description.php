@@ -2,9 +2,7 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "settings_simple" )) {
-		
 		$languages = getAllLanguages ();
-		
 		if (isset ( $_POST ["submit"] )) {
 			for($i = 0; $i < count ( $languages ); $i ++) {
 				
@@ -25,16 +23,14 @@ if (defined ( "_SECURITY" )) {
 			$lang = $languages [$i];
 			$meta_descriptions [$lang] = Settings::get ( "meta_description_" . $lang );
 			
-			if (! $meta_descriptions [$lang])
+			if (! $meta_descriptions [$lang]) {
 				$meta_descriptions [$lang] = Settings::get ( "meta_description" );
+			}
 		}
 		
 		?>
 <h1>
-<?php
-		
-		echo TRANSLATION_META_DESCRIPTION;
-		?>
+<?php get_translation("meta_description");?>
 </h1>
 <form action="index.php?action=meta_description" id="meta_description"
 	method="post">
@@ -42,17 +38,11 @@ if (defined ( "_SECURITY" )) {
 		
 		csrf_token_html ();
 		?>
-	<table border=0>
+	<table style="border: 0">
 		<tr>
-			<td style="min-width: 100px;"><strong><?php
-		
-		echo TRANSLATION_LANGUAGE;
-		?>
+			<td style="min-width: 100px;"><strong><?php translate("language");?>
 			</strong></td>
-			<td><strong><?php
-		
-		echo TRANSLATION_META_DESCRIPTION;
-		?>
+			<td><strong><?php get_translation("meta_description");?>
 			</strong></td>
 		</tr>
 		<?php
@@ -73,27 +63,14 @@ if (defined ( "_SECURITY" )) {
 			
 			echo stringHelper::real_htmlspecialchars ( $meta_descriptions [$lang] );
 			?>"></td>
+		</tr>
 			<?php
 		}
 		?>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
-				value="<?php
-		
-		echo TRANSLATION_SAVE_CHANGES;
-		?>"></td>
+				value="<?php translate("save_changes");?>"></td>
 	
 	</table>
 </form>
@@ -117,6 +94,5 @@ $("#meta_description_settings").ajaxForm({beforeSubmit: function(e){
 	} else {
 		noperms ();
 	}
-    
-    }
+}
 ?>

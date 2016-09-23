@@ -4,7 +4,6 @@ if (! defined ( "ULICMS_ROOT" )) {
 }
 
 $acl = new ACL ();
-
 $all_permissions = $acl->getDefaultACL ( true, true );
 
 ?>
@@ -14,23 +13,18 @@ $all_permissions = $acl->getDefaultACL ( true, true );
 csrf_token_html ();
 ?>
 	<p>
-		<strong><?php
-		
-		echo TRANSLATION_NAME;
-		?> </strong> <input type="text" required="true" name="name" value="">
+		<strong><?php translate("name");?> </strong> <input type="text"
+			required="true" name="name" value="">
 	</p>
 	<p>
-		<strong><?php
-		
-		echo TRANSLATION_PERMISSIONS;
-		?> </strong>
+		<strong><?php translate("permissions");?> </strong>
 	</p>
 	<fieldset>
 		<p>
 			<input id="checkall" type="checkbox" class="checkall"> <label
 				for="checkall"><?php
 				
-				translate("select_all");
+				translate ( "select_all" );
 				?> </label>
 		</p>
 		<p>
@@ -57,11 +51,7 @@ csrf_token_html ();
 		?>
 		</p>
 	</fieldset>
-	<br /> <input type="submit"
-		value="<?php
-		
-		echo TRANSLATION_CREATE_GROUP;
-		?>"
+	<br /> <input type="submit" value="<?php translate("create_group");?>"
 		name="add_group">
 </form>
 

@@ -28,7 +28,7 @@ def main():
 
     ignore = ('.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
               "Releases", "cms-config.php", "services", "update.php",
-              ".gitignore", "cache", "*~", ".settings", ".project", ".buildpath")
+              ".gitignore", "cache", "*~", ".settings", ".project", ".buildpath", "tests")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     print("copying files")

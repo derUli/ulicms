@@ -8,18 +8,12 @@ if (defined ( "_SECURITY" )) {
 		if ($_GET ["error"] == "to_big") {
 			?>
 <p style="color: red; font-size: 1.2em">
-<?php
-			
-			echo TRANSLATION_UPLOADED_IMAGE_TO_BIG;
-			?></p>
+<?php translate("uploaded_image_too_big");?></p>
 <?php
 		}
 		?>
 <p>
-<?php
-		
-		echo TRANSLATION_LOGO_INFOTEXT;
-		?>
+<?php translate("logo_infotext");?>
 </p>
 <form enctype="multipart/form-data"
 	action="index.php?action=logo_upload" method="post">
@@ -27,12 +21,9 @@ if (defined ( "_SECURITY" )) {
 		
 		csrf_token_html ();
 		?>
-	<table border=0 height=250>
+	<table border="0" height="250">
 		<tr>
-			<td><strong><?php
-		
-		echo TRANSLATION_YOUR_LOGO;
-		?>
+			<td><strong><?php translate("your_logo");?>
 			</strong></td>
 			<td><?php
 		
@@ -45,10 +36,7 @@ if (defined ( "_SECURITY" )) {
 		
 		
 		<tr>
-			<td width=480><strong><?php
-		
-		echo TRANSLATION_UPLOAD_NEW_LOGO;
-		?>
+			<td width=480><strong><?php translate("upload_new_logo");?>
 			</strong></td>
 			<td><input name="logo_upload_file" type="file"> <br /></td>
 		
@@ -56,11 +44,8 @@ if (defined ( "_SECURITY" )) {
 		<tr>
 			<td></td>
 			<td style="text-align: center"><input type="submit"
-				value="<?php
-		
-		echo TRANSLATION_UPLOAD;
-		?>"></td>
-	
+				value="<?php translate("upload");?>"></td>
+		</tr>
 	</table>
 
 	<?php

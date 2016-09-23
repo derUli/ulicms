@@ -1,7 +1,7 @@
 <?php
 class UpdateManager {
 	public static function getAllUpdateablePackages() {
-		$pkg = new packageManager ();
+		$pkg = new PackageManager ();
 		$retval = array ();
 		$modules = getAllModules ();
 		if (count ( $modules ) > 0) {

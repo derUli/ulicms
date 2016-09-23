@@ -93,7 +93,7 @@ if (! $eingeloggt) {
 	
 	add_hook ( "register_actions" );
 	
-	$pkg = new packageManager ();
+	$pkg = new PackageManager ();
 	
 	global $actions;
 	if ($_SESSION ["require_password_change"]) {
@@ -206,8 +206,6 @@ if (! $eingeloggt) {
 		require_once "inc/favicon.php";
 	} else if ($_GET ["action"] == "languages") {
 		require_once "inc/languages.php";
-	} else if ($_GET ["action"] == "import") {
-		require_once "inc/import.php";
 	} else if ($_GET ["action"] == "export") {
 		require_once "inc/export.php";
 	} 
@@ -248,14 +246,16 @@ if (! $eingeloggt) {
 		require_once "inc/add_audio.php";
 	} else if ($_GET ["action"] == "edit_audio") {
 		require_once "inc/edit_audio.php";
-	} 
-
-	else if (isset ( $actions [$_GET ["action"]] )) {
-		include_once $actions [$_GET ["action"]];
 	} else if ($_GET ["action"] == "do-post-install") {
 		include_once "inc/do-post-install.php";
+	} else if ($_GET ["action"] == "pkginfo") {
+		include_once "inc/pkginfo.php";
+	} else if ($_GET ["action"] = "sin-package-install-ok") {
+		include_once "inc/sin-package-install-ok.php";
+	} else if (isset ( $actions [$_GET ["action"]] )) {
+		include_once $actions [$_GET ["action"]];
 	} else {
-		echo TRANSLATION_ACTION_NOT_FOUND;
+		translate ( "action_not_found" );
 	}
 }
 

@@ -53,6 +53,8 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "antispam-features.php
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "categories.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "package_manager.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "acl.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "sin_package_installer.php";
+
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "logger.php";
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "html_helper.php";
@@ -97,9 +99,7 @@ $path_to_config = dirname ( __file__ ) . DIRECTORY_SEPERATOR . "cms-config.php";
 
 if (file_exists ( $path_to_config )) {
 	require_once $path_to_config;
-} 
-
-else if (is_dir ( "installer" )) {
+} else if (is_dir ( "installer" )) {
 	header ( "Location: installer/" );
 	exit ();
 } else {
@@ -158,10 +158,9 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "video_page.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "audio_page.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "image_page.php";
-
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "banner.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "banners.php";
-
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "article.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "content_factory.php";
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "groups" . DIRECTORY_SEPERATOR . "group.php";
@@ -180,7 +179,7 @@ define ( "ONE_DAY_IN_SECONDS", 60 * 60 * 24 );
 global $actions;
 $actions = array ();
 function noperms() {
-	echo "<p class=\"ulicms_error\">" . TRANSLATION_NO_PERMISSIONS . "</p>";
+	echo "<p class=\"ulicms_error\">" . get_translation ( "no_permissions" ) . "</p>";
 	return false;
 }
 function startsWith($haystack, $needle, $case = true) {
@@ -390,7 +389,6 @@ if (! Settings::get ( "disable_hsts" ) and is_ssl ()) {
 	}
 	
 	$str = trim ( $str );
-	
 	header ( $str );
 }
 

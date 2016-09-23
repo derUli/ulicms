@@ -34,21 +34,12 @@ $(window).load(function(){
 <?php translate("advertisements"); ?>
 </h2>
 <p>
-<?php
-		
-		echo TRANSLATION_ADVERTISEMENT_INFOTEXT;
-		?>
-	<br /> <br /> <a href="index.php?action=banner_new"><?php
-		
-		echo TRANSLATION_ADD_ADVERTISEMENT;
-		?>
+<?php translate("advertisement_infotext");?>
+	<br /> <br /> <a href="index.php?action=banner_new"><?php translate("add_advertisement");?>
 	</a><br />
 </p>
 <p>
-<?php
-		
-		echo TRANSLATION_CATEGORY;
-		?>
+<?php translate("category");?>
 <?php
 
 		echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
@@ -62,19 +53,16 @@ $(window).load(function(){
 		translate ( "advertisements" );
 		?>
 			</th>
-			<th><?php
-		
-		echo TRANSLATION_LANGUAGE;
-		?>
+			<th><?php translate("language");?>
 			</th>
 			<td><?php
 		
-		echo TRANSLATION_EDIT;
+		translate ( "edit" );
 		?>
 			</td>
 			<td><?php
 		
-		echo TRANSLATION_DELETE;
+		translate ( "delete" );
 		?>
 			</td>
 		</tr>
@@ -101,11 +89,8 @@ $(window).load(function(){
 				} else {
 					echo '<td>' . getLanguageNameByCode ( $row->language ) . "</td>";
 				}
-				echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . TRANSLATION_EDIT . '" title="' . TRANSLATION_EDIT . '"></a></td>';
-				/*
-				 * echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_delete&banner=' . $row -> id . '" onclick="return confirm(\'Wirklich löschen?\');"><img class="mobile-big-image" src="gfx/delete.gif" title="' . TRANSLATION_DELETE . '"></a></td>';
-				 */
-				echo "<td style='text-align:center;'>" . '<form action="index.php?action=banner_delete&banner=' . $row->id . '" method="post" onsubmit="return confirm(\'Wirklich löschen?\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . TRANSLATION_DELETE . '"></form></td>';
+				echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
+				echo "<td style='text-align:center;'>" . '<form action="index.php?action=banner_delete&banner=' . $row->id . '" method="post" onsubmit="return confirm(\'Wirklich löschen?\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . get_translation ( "delete" ) . '"></form></td>';
 				
 				echo '</tr>';
 			}

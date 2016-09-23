@@ -25,22 +25,14 @@ if ($acl->hasPermission ( "dashboard" )) {
 		?>
 <p>
 <?php
-		$str = TRANSLATION_HELLO_NAME;
+		$str = get_translation ( "hello_name" );
 		$str = str_ireplace ( "%firstname%", $_SESSION ["firstname"], $str );
 		$str = str_ireplace ( "%lastname%", $_SESSION ["lastname"], $str );
 		echo $str;
 		?>
-	[<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>"><?php
-		
-		echo TRANSLATION_EDIT_PROFILE;
-		?></a>]
+	[<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>"><?php translate("edit_profile");?></a>]
 </p>
-
-
-
-
 <?php
-		
 		$motd = get_lang_config ( "motd", getSystemLanguage () );
 		if ($motd or strlen ( $motd ) > 10) {
 			$motd = nl2br ( $motd );
@@ -49,45 +41,21 @@ if ($acl->hasPermission ( "dashboard" )) {
 <div id="accordion-container">
 
 	<h2 class="accordion-header">
-	<?php
-			
-			echo TRANSLATION_MOTD;
-			?></h2>
+	<?php translate("motd");?></h2>
 	<div class="accordion-content">
 	<?php
 			
 			echo $motd;
 			?>
 	</div>
-	<?php
-		}
-		?>
-
-	<?php
-		if ($acl->hasPermission ( "update_system" )) {
-			$data = file_get_contents_wrapper ( PATCH_CHECK_URL, true );
-			$data = trim ( $data );
-			if (! empty ( $data )) {
-				?>
-	<h2 class="accordion-header">
-	<?php
-				
-				translate ( "there_are_patches_available" );
-				?>
+		<?php }?>
+	<div id="patch-notification" style="display: none;">
+		<h2 class="accordion-header">
+	<?php translate ( "there_are_patches_available" );	?>
 	</h2>
-	<div class="accordion-content">
-		<a href="?action=available_patches"><strong><?php
-				
-				translate ( "install_patches" );
-				?>
-		</strong> </a>
+		<div class="accordion-content" id="patch-message"></div>
 	</div>
-	<?php
-			}
-		}
-		?>
 <?php
-
 		$pi = ULICMS_ROOT . "/post-install.php";
 		if (file_exists ( $pi ) and is_writable ( $pi )) {
 			?>
@@ -101,32 +69,14 @@ if ($acl->hasPermission ( "dashboard" )) {
 
 	<?php } ?>
 
-	<?php
-		if ($acl->hasPermission ( "update_system" )) {
-			$updateInfo = checkForUpdates ();
-			
-			if ($updateInfo) {
-				?>
-	<h2 class="accordion-header">
-	<?php
-				
-				echo TRANSLATION_UPDATE_AVAILABLE;
-				?>
+				<div id="core-update-check" style="display: none">
+		<h2 class="accordion-header">
+	<?php translate("update_available");?>
 	</h2>
-	<div class="accordion-content">
-	<?php
-				
-				echo $updateInfo;
-				?>
+		<div class="accordion-content" id="core-update-message"></div>
 	</div>
-	<?php
-			}
-			?>
 	<h2 class="accordion-header">
-	<?php
-			
-			echo TRANSLATION_ULICMS_NEWS;
-			?></h2>
+	<?php translate("ulicms_news");?></h2>
 	<div class="accordion-content" id="ulicms-feed">
 		<img src="gfx/loading.gif" alt="Feed wird geladen..." />
 	</div>
@@ -135,17 +85,8 @@ $(document).ready(function() {
  $('#ulicms-feed').load('?action=ulicms-news');
 });
 </script>
-
-<?php
-		}
-		?>
-
-
 	<h2 class="accordion-header">
-	<?php
-		
-		echo TRANSLATION_STATISTICS;
-		?>
+	<?php translate("statistics");?>
 	</h2>
 	<div class="accordion-content">
 		<table>
@@ -156,10 +97,7 @@ $(document).ready(function() {
 			$formatted = formatTime ( $time );
 			?>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_SITE_ONLINE_SINCE;
-			?></td>
+				<td><?php translate("site_online_since");?></td>
 				<td><?php
 			
 			echo $formatted;
@@ -169,18 +107,12 @@ $(document).ready(function() {
 		}
 		?>
 			<tr>
-				<td><?php
-		
-		echo TRANSLATION_PAGES_COUNT;
-		?>
+				<td><?php translate("pages_count");?>
 				</td>
 				<td><?php echo $pages_count?></td>
 			</tr>
 			<tr>
-				<td><?php
-		
-		echo TRANSLATION_REGISTERED_USERS_COUNT;
-		?>
+				<td><?php translate("REGISTERED_USERS_COUNT");?>
 				</td>
 				<td><?php echo count(getUsers())?></td>
 			</tr>
@@ -190,10 +122,7 @@ $(document).ready(function() {
 		if (Settings::get ( "contact_form_refused_spam_mails" ) !== false) {
 			?>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_BLOCKED_SPAM_MAILS;
-			?></td>
+				<td><?php echo translate("BLOCKED_SPAM_MAILS");?></td>
 				<td><?php echo Settings::get("contact_form_refused_spam_mails")?></td>
 			</tr>
 			<?php
@@ -205,10 +134,7 @@ $(document).ready(function() {
 		if ($test) {
 			?>
 			<tr>
-				<td><?php
-			
-			echo TRANSLATION_GUESTBOOK_ENTRIES;
-			?></td>
+				<td><?php translate("GUESTBOOK_ENTRIES");?></td>
 				<td><?php echo db_num_rows($test)?></td>
 			</tr>
 			<?php
@@ -217,10 +143,7 @@ $(document).ready(function() {
 		</table>
 	</div>
 	<h2 class="accordion-header">
-	<?php
-		
-		echo TRANSLATION_ONLINE_NOW;
-		?>
+	<?php translate("online_now");?>
 	</h2>
 	<div class="accordion-content">
 		<ul id="users_online">
@@ -231,23 +154,14 @@ $(document).ready(function() {
 		</ul>
 	</div>
 	<h2 class="accordion-header">
-	<?php
-		
-		echo TRANSLATION_TOP_PAGES;
-		?>
+	<?php translate("top_pages");?>
 	</h2>
 	<div class="accordion-content">
 		<table cellpadding="2">
 			<tr style="font-weight: bold;">
-				<td><?php
-		
-		echo TRANSLATION_TITLE;
-		?>
+				<td><?php translate("title");?>
 				</td>
-				<td><?php
-		
-		echo TRANSLATION_VIEWS;
-		?>
+				<td><?php translate("views");?>
 				</td>
 			</tr>
 			<?php
@@ -278,32 +192,20 @@ $(document).ready(function() {
 		?>
 			</tr>
 		</table>
-		</p>
+
 	</div>
 
 	<h2 class="accordion-header">
-	<?php
-		
-		echo TRANSLATION_LAST_CHANGES;
-		?>
+	<?php translate("last_changes");?>
 	</h2>
 	<div class="accordion-content">
 		<table cellpadding="2">
 			<tr style="font-weight: bold;">
-				<td><?php
-		
-		echo TRANSLATION_TITLE;
-		?>
+				<td><?php translate("title");?>
 				</td>
-				<td><?php
-		
-		echo TRANSLATION_DATE;
-		?>
+				<td><?php translate("date");?>
 				</td>
-				<td><?php
-		
-		echo TRANSLATION_DONE_BY;
-		?>
+				<td><?php translate("done_by");?>
 				</td>
 			</tr>
 
@@ -350,8 +252,7 @@ $(document).ready(function() {
 		add_hook ( "accordion_layout" );
 		?>
 </div>
-</div>
-
+<script src="scripts/dashboard.js" type="text/javascript"></script>
 <?php
 	}
 	

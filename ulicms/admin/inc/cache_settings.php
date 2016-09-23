@@ -8,45 +8,28 @@ if ($acl->hasPermission ( "cache" )) {
 	if (isset ( $_GET ["clear_cache"] )) {
 		?>
 <p style="color: green;">
-<?php
-		
-		echo TRANSLATION_CACHE_WAS_CLEARED;
-		?>
+<?php translate ( "cache_was_cleared" );?>
 </p>
 <?php
 	}
 	?>
-	<?php
-	
-	echo TRANSLATION_CACHE_TEXT1;
-	?>
+	<?php translate("cache_text1");?>
 <p>
 	<strong>Aktueller Status des Caches:</strong><br />
 	<?php
-	
 	if (! Settings::get ( "cache_disabled" )) {
 		?>
-	<span style="color: green;">aktiv</span>
+	<span style="color: green;"><?php translate("enabled");?></span>
 </p>
-
-<?php
-		
-		echo TRANSLATION_CACHE_TEXT3;
-		?>
-
-
-<form post="index.php" method="get">
+<?php translate("cache_text3");?>
+<form action="index.php" method="get">
 <?php
 		
 		csrf_token_html ();
 		?>
 	<input type="hidden" name="action" value="cache" /> <input
 		type="hidden" name="clear_cache" value="yes" /> <input type="submit"
-		value="<?php
-		
-		echo TRANSLATION_CLEAR_CACHE;
-		?>" />
-
+		value="<?php translate("clear_cache");?>" />
 		<?php
 		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 			?>
@@ -60,17 +43,12 @@ if ($acl->hasPermission ( "cache" )) {
 <?php
 	} else {
 		?>
-<span style="color: red;">deaktiviert</span>
+<p>
+	<span style="color: red;"><?php translate("disabled");?></span>
 </p>
-<?php
-		
-		echo TRANSLATION_CACHE_TEXT2;
-		?>
+<?php translate("cache_text2");?>
 		<?php
 	}
-	?>
-
-	<?php
 } else {
 	noperms ();
 }

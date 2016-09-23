@@ -7,12 +7,39 @@ class Database {
 		global $db_connection;
 		return mysqli_query ( $db_connection, $query );
 	}
+	public static function pQuery($query, $args = array()) {
+		$preparedQuery = "";
+		$chars = mb_str_split ( $query );
+		include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
+		$i = 0;
+		foreach ( $chars as $char ) {
+			if ($char != "?") {
+				$preparedQuery .= $char;
+			} else {
+				$value = $args [$i];
+				if (is_float ( $value )) {
+					$value = str_replace ( ",", ".", floatval ( $value ) );
+				} else if (is_int ( $value )) {
+					$value = intval ( $value );
+				} else if (is_bool ( $value )) {
+					$value = ( int ) $value;
+				} else {
+					$value = "'" . self::escapeValue ( $value ) . "'";
+				}
+				$preparedQuery .= $value;
+				$i ++;
+			}
+		}
+		log_db_query ( $preparedQuery );
+		return Database::query ( $preparedQuery );
+	}
 	public static function getPDOConnectionString() {
 		$retval = "mysql://";
 		$cfg = new config ();
 		$retval .= $cfg->db_user;
-		if (! empty ( $cfg->db_password ))
+		if (! empty ( $cfg->db_password )) {
 			$retval .= ":" . $cfg->db_password;
+		}
 		$retval .= "@" . $cfg->db_server;
 		$retval .= "/" . $cfg->db_database;
 		$retval .= "?charset=utf8";
@@ -26,75 +53,102 @@ class Database {
 		global $db_connection;
 		return mysqli_get_client_info ( $db_connection );
 	}
-	
-	// Using SQL Prepared statements
-	public static function preparedQuery($sql, $typeDef = FALSE, $params = FALSE) {
-		global $db_connection;
-		if ($stmt = mysqli_prepare ( $db_connection, $sql )) {
-			if (count ( $params ) == count ( $params, 1 )) {
-				$params = array (
-						$params 
-				);
-				$multiQuery = FALSE;
-			} else {
-				$multiQuery = TRUE;
-			}
-			
-			if ($typeDef) {
-				$bindParams = array ();
-				$bindParamsReferences = array ();
-				$bindParams = array_pad ( $bindParams, (count ( $params, 1 ) - count ( $params )) / count ( $params ), "" );
-				foreach ( $bindParams as $key => $value ) {
-					$bindParamsReferences [$key] = & $bindParams [$key];
-				}
-				array_unshift ( $bindParamsReferences, $typeDef );
-				$bindParamsMethod = new ReflectionMethod ( 'mysqli_stmt', 'bind_param' );
-				$bindParamsMethod->invokeArgs ( $stmt, $bindParamsReferences );
-			}
-			
-			$result = array ();
-			foreach ( $params as $queryKey => $query ) {
-				foreach ( $bindParams as $paramKey => $value ) {
-					$bindParams [$paramKey] = $query [$paramKey];
-				}
-				$queryResult = array ();
-				if (mysqli_stmt_execute ( $stmt )) {
-					$resultMetaData = mysqli_stmt_result_metadata ( $stmt );
-					if ($resultMetaData) {
-						$stmtRow = array ();
-						$rowReferences = array ();
-						while ( $field = mysqli_fetch_field ( $resultMetaData ) ) {
-							$rowReferences [] = & $stmtRow [$field->name];
-						}
-						mysqli_free_result ( $resultMetaData );
-						$bindResultMethod = new ReflectionMethod ( 'mysqli_stmt', 'bind_result' );
-						$bindResultMethod->invokeArgs ( $stmt, $rowReferences );
-						while ( mysqli_stmt_fetch ( $stmt ) ) {
-							$row = array ();
-							foreach ( $stmtRow as $key => $value ) {
-								$row [$key] = $value;
-							}
-							$queryResult [] = $row;
-						}
-						mysqli_stmt_free_result ( $stmt );
-					} else {
-						$queryResult [] = mysqli_stmt_affected_rows ( $stmt );
-					}
-				} else {
-					$queryResult [] = FALSE;
-				}
-				$result [$queryKey] = $queryResult;
-			}
-			mysqli_stmt_close ( $stmt );
-		} else {
-			$result = FALSE;
+	public static function dropTable($table, $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
 		}
 		
-		if ($multiQuery) {
-			return $result;
-		} else {
-			return $result [0];
+		$table = self::escapeName ( $table );
+		return self::query ( "DROP TABLE $table" );
+	}
+	public static function selectAVG($table, $column, $where = "", $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
 		}
+		
+		$table = self::escapeName ( $table );
+		$column = self::escapeName ( $column );
+		$sql = "select avg($column) from $table";
+		if (isNotNullOrEmpty ( $where )) {
+			$sql .= " where $where";
+		}
+		$result = Database::query ( $sql );
+		return $result;
+	}
+	public static function selectMin($table, $column, $where = "", $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$table = self::escapeName ( $table );
+		$column = self::escapeName ( $column );
+		$sql = "select min($column) from $table";
+		if (isNotNullOrEmpty ( $where )) {
+			$sql .= " where $where";
+		}
+		$result = Database::query ( $sql );
+		return $result;
+	}
+	public static function deleteFrom($table, $where = "", $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$table = self::escapeName ( $table );
+		$sql = "DELETE FROM $table";
+		if (isNotNullOrEmpty ( $where )) {
+			$sql .= " where $where";
+		}
+		$result = Database::query ( $sql );
+		return $result;
+	}
+	public static function selectMax($table, $column, $where = "", $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$table = self::escapeName ( $table );
+		$column = self::escapeName ( $column );
+		$sql = "select min($column) from $table";
+		if (isNotNullOrEmpty ( $where )) {
+			$sql .= " where $where";
+		}
+		$result = Database::query ( $sql );
+		return $result;
+	}
+	public static function truncateTable($table, $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$table = self::escapeName ( $table );
+		return self::query ( "TRUNCATE TABLE $table" );
+	}
+	public static function dropColumn($table, $column, $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		
+		$column = self::escapeName ( $column );
+		$table = self::escapeName ( $table );
+		return self::query ( "ALTER TABLE $table DROP COLUMN $table" );
+	}
+	public static function selectAll($table, $columns = array(), $where = "", $args = array(), $prefix = true) {
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
+		$table = self::escapeName ( $prefix );
+		if (count ( $columns ) == 0) {
+			$columns [] = "*";
+		}
+		
+		$columns_sql = implode ( ", ", $columns );
+		
+		$sql = "select $columns_sql from $table";
+		if (isNotNullOrEmpty ( $where )) {
+			$sql .= " where $where";
+		}
+		return self::pQuery ( $sql, $args );
 	}
 	public static function escapeName($name) {
 		$name = "`" . db_escape ( $name ) . "`";
@@ -142,8 +196,9 @@ class Database {
 	public static function connect($server, $user, $password) {
 		global $db_connection;
 		$db_connection = mysqli_connect ( $server, $user, $password );
-		if (! $db_connection)
+		if (! $db_connection) {
 			return false;
+		}
 		self::query ( "SET NAMES 'utf8'" );
 		// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 		self::query ( "SET SESSION sql_mode = '';" );
@@ -195,7 +250,6 @@ class Database {
 	public static function escapeValue($value, $type = null) {
 		global $db_connection;
 		if (is_null ( $type )) {
-			
 			if (is_float ( $value )) {
 				return floatval ( $value );
 			} else if (is_int ( $value )) {
@@ -223,15 +277,14 @@ class Database {
 		$retval = array ();
 		$table = tbname ( $table );
 		$query = Database::query ( "SELECT * FROM $table limit 1" );
-		$fields_num = self::getNumFieldCount($query);
+		$fields_num = self::getNumFieldCount ( $query );
 		if ($fields_num > 0) {
 			for($i = 0; $i < $fields_num; $i ++) {
-					$field = db_fetch_field ( $query );
-					$retval[] = $field->name;
-				}
+				$field = db_fetch_field ( $query );
+				$retval [] = $field->name;
+			}
 			sort ( $retval );
 		}
-		
 		return $retval;
 	}
 }

@@ -1,16 +1,16 @@
 <?php
 if (Settings::get ( "visitors_can_register" ) == "off" or ! Settings::get ( "visitors_can_register" ))
-	die ( TRANSLATION_FUNCTION_IS_DISABLED );
+	die ( get_translation ( "FUNCTION_IS_DISABLED" ) );
 
 $errors = false;
 if (isset ( $_POST ["register_user"] )) {
 	
 	if (empty ( $_POST ["admin_username"] ) or empty ( $_POST ["admin_password"] ) or empty ( $_POST ["admin_firstname"] ) or empty ( $_POST ["admin_lastname"] )) {
-		echo "<p style='color:red;'>" . TRANSLATION_FILL_ALL_FIELDS . "</p>";
+		echo "<p style='color:red;'>" . get_translation ( "FILL_ALL_FIELDS" ) . "</p>";
 	} else if (user_exists ( $_POST ["admin_username"] )) {
-		echo "<p style='color:red;'>" . TRANSLATION_USERNAME_ALREADY_EXISTS . "</p>";
+		echo "<p style='color:red;'>" . get_translation ( "USERNAME_ALREADY_EXISTS" ) . "</p>";
 	} else if ($_POST ["admin_password"] != $_POST ["admin_password_repeat"]) {
-		echo "<p style='color:red;'>" . TRANSLATION_PASSWORD_REPEAT_IS_WRONG . "</p>";
+		echo "<p style='color:red;'>" . get_translation ( "PASSWORD_REPEAT_IS_WRONG" ) . "</p>";
 	} 
 
 	else {
@@ -25,7 +25,7 @@ if (isset ( $_POST ["register_user"] )) {
 		} else {
 			$go = "index.php";
 		}
-		echo "<p><a href='$go'>" . TRANSLATION_CONTINUE_HERE . "</a></p>";
+		echo "<p><a href='$go'>" . get_translation ( "continue_here" ) . "</a></p>";
 	}
 }
 
@@ -35,15 +35,12 @@ if (isset ( $_POST ["register_user"] )) {
 add_hook ( "before_register_form_title" );
 ?>
 <h1>
-<?php
-
-echo TRANSLATION_REGISTRATION;
-?>
+<?php translate("registration");?>
 </h1>
 <p>
 	<a href="./">[<?php
 	
-translate ( "back_to_login" );
+	translate ( "back_to_login" );
 	?>]</a>
 </p>
 <?php
@@ -66,36 +63,18 @@ csrf_token_html ();
 	<?php
 	}
 	?>
-	<strong><?php
-	
-	echo TRANSLATION_USERNAME;
-	?>
-	</strong><br /> <input type="text" required="true"
-		name="admin_username" value=""> <br /> <br /> <strong><?php
-		
-		echo TRANSLATION_LASTNAME;
-		?>
-	</strong><br /> <input type="text" required="true"
-		name="admin_lastname" value=""> <br /> <br /> <strong><?php
-		
-		echo TRANSLATION_FIRSTNAME;
-		?>
-	</strong><br /> <input type="text" required="true"
-		name="admin_firstname" value=""><br /> <br /> <strong><?php
-		
-		echo TRANSLATION_EMAIL;
-		?>
-	</strong><br /> <input type="email" required="true" name="admin_email"
-		value=""><br /> <br /> <strong><?php
-		
-		echo TRANSLATION_PASSWORD;
-		?>
-	</strong><br /> <input type="password" required="true"
-		name="admin_password" value=""><br /> <br /> <strong><?php
-		
-		echo TRANSLATION_PASSWORD_REPEAT;
-		?>
-	</strong></strong><br /> <input type="password" required="true"
+	<strong><?php translate("username");?>
+	</strong><br /> <input type="text" required="required"
+		name="admin_username" value=""> <br /> <br /> <strong><?php translate("lastname")?>
+	</strong><br /> <input type="text" required="required"
+		name="admin_lastname" value=""> <br /> <br /> <strong><?php translate("firstname");?>
+	</strong><br /> <input type="text" required="required"
+		name="admin_firstname" value=""><br /> <br /> <strong><?php translate("email");?>
+	</strong><br /> <input type="email" required="required"
+		name="admin_email" value=""><br /> <br /> <strong><?php translate("password");?>
+	</strong><br /> <input type="password" required="required"
+		name="admin_password" value=""><br /> <br /> <strong><?php translate("password_repeat");?>
+	</strong><br /> <input type="password" required="required"
 		name="admin_password_repeat" value=""><br /> <br />
 		<?php
 		
@@ -111,10 +90,7 @@ csrf_token_html ();
 <?php
 	}
 	?>
-	<input type="submit" value="<?php
-	
-	echo TRANSLATION_REGISTER;
-	?>">
+	<input type="submit" value="<?php translate("register");?>">
 </form>
 
 <?php

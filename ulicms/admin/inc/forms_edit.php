@@ -17,20 +17,20 @@ if (! $acl->hasPermission ( "forms" )) {
 	<p>
 		<strong><?php translate("name");?></strong><br /> <input type="text"
 			value="<?php echo htmlspecialchars($form["name"]);?>" name="name"
-			required="true" />
+			required />
 	</p>
 
 	<p>
 		<strong><?php translate("email_to");?></strong><br /> <input
 			type="email"
 			value="<?php echo htmlspecialchars($form["email_to"]);?>"
-			name="email_to" required="true" />
+			name="email_to" required />
 	</p>
 
 	<p>
 		<strong><?php translate("subject");?></strong><br /> <input
 			type="text" value="<?php echo htmlspecialchars($form["subject"]);?>"
-			name="subject" required="true" />
+			name="subject" required />
 	</p>
 	<p>
 		<strong><?php translate("category");?></strong><br />

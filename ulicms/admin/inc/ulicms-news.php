@@ -1,6 +1,7 @@
 <?php
-if (! defined ( "_SECURITY" ))
+if (! defined ( "_SECURITY" )) {
 	die ( "No direct access allowed!" );
+}
 @session_start ();
 
 $rss = new DOMDocument ();

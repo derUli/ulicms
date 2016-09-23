@@ -11,7 +11,17 @@ function update_manager_admin() {
 	<?php
 	if (count ( $updates ) > 0) {
 		?>
-		<p>
+<p><?php
+		
+		if (count ( $updates ) == 1) {
+			translate ( "UPDATES_AVAILABLE_SINGULAR" );
+		} else {
+			translate ( "UPDATES_AVAILABLE_MULTIPLE", array (
+					"%count%" => count ( $updates ) 
+			) );
+		}
+		?></p>
+	<p>
 		<input id="checkall" type="checkbox" class="checkall" checked> <label
 			for="checkall"><?php
 		
