@@ -15,7 +15,7 @@ Inhaltstyp "Artikel":
 	[X] author_name (varchar 80)
 	[X] author_email (varchar 80)
 	[X] last_update (date default null)
- 	[X] Feld zum Hochladen von Artikelbild
+	[X] Feld zum Hochladen von Artikelbild
 	[X] Excerpt (Vorschautext)
 [ ] Kommentarfunktion implementieren
 [X] Eigene Templates 

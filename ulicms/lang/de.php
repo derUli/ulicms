@@ -75,7 +75,6 @@ define ( "TRANSLATION_FIRSTNAME", "Vorname" );
 define ( "TRANSLATION_EMAIL", "E-Mail" );
 define ( "TRANSLATION_NEW_PASSWORD", "Neues Passwort" );
 define ( "TRANSLATION_USERGROUP", "Benutzergruppe" );
-define ( "TRANSLATION_ICQ", "ICQ" );
 define ( "TRANSLATION_SKYPE", "Skype" );
 define ( "TRANSLATION_ONLY_JPEG", "Nur JPEG-Grafiken werden akzeptiert." );
 define ( "TRANSLATION_NOTIFY_ON_LOGIN", "Benachrichtige mich per E-Mail,<br/>

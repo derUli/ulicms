@@ -2,12 +2,13 @@
 if (! class_exists ( "ulicms_version" )) {
 	class ulicms_version {
 		function __construct() {
-			$this->version = "Vasengo Town";
+			$this->version = "Ice Crusher";
 			$this->releaseYear = 2016;
 			$this->internalVersion = Array (
 					9,
 					8,
-					6
+					5,
+					1
 			);
 			$this->update = "";
 			$this->developmentVersion = false;
