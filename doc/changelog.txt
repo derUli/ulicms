@@ -49,7 +49,7 @@ Entfernte Features
 - Funktion Database::preparedQuery() entfernt, stattdessen Database::pQuery() verwenden
 
 
-﻿===== Neues in UliCMS 9.8.4 =====
+===== Neues in UliCMS 9.8.4 =====
 
 Neue Features
 + Inhaltstyp "Liste" hinzugefügt
@@ -156,7 +156,7 @@ Entfernte Features
 + unique_identifier_filter hinzugefügt
 
 
-﻿===== Neues in UliCMS 9.8.0 ====
+===== Neues in UliCMS 9.8.0 ====
 
 + CKEditor auf Version 4.5.3 aktualisiert (Behebt Kompatiblitätsprobleme mit Microsofts neuem Edge Webbrowser)
 + Auswahl für Schriftart und Schriftgröße im CKEditor entfernt
