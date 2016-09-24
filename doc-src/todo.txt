@@ -28,6 +28,6 @@ Datenbank:
 
 [ ] Möglichkeit eigene Inhaltstypen mit frei definierbaren Feldern , ähnlich wie z.B. in Drupal
 
-[ ] "Passwort wiederholen" Feld unter "Profil bearbeiten"
+[X] "Passwort wiederholen" Feld unter "Profil bearbeiten"
 
 [ ] Beim Löschen eines Users sollen alle Datensätze des gelöschten Users an einen anderen User übertragen werden können.
