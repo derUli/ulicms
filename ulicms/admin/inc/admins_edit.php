@@ -12,7 +12,7 @@ if (defined ( "_SECURITY" )) {
 			?>
 
 <form action="index.php?action=admins" name="userdata_form"
-	method="post" enctype="multipart/form-data">
+	method="post" enctype="multipart/form-data" id="edit_user" autocomplete="off">
 	<?php
 			
 			csrf_token_html ();
@@ -62,7 +62,8 @@ if (defined ( "_SECURITY" )) {
 			}
 			
 			?><br /> <br /> <strong><?php translate("new_password");?></strong><br />
-	<input type="text" name="admin_password" value=""> <br />
+	<input type="text" name="admin_password" id="admin_password" value="" autocomplete="off"><br /> <br /> <strong><?php translate("password_repeat");?></strong><br />
+	<input type="text" name="admin_password_repeat" id="admin_password_repeat" value="" autocomplete="off"> <br />
 	<?php
 			$acl = new ACL ();
 			if ($acl->hasPermission ( "users" )) {
