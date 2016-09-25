@@ -1,8 +1,8 @@
-﻿===== Neues in UliCMS 9.8.6 =====
+===== Neues in UliCMS 9.8.6 =====
 
++ "Passwort wiederholen" Feld zur Userverwaltung hinzugefügt
 + CKEditor auf Version 4.5.11 geupdatet
 - Feld für ICQ-UID entfernt
-
 
 
 ===== Neues in UliCMS 9.8.5 =====
@@ -49,7 +49,7 @@ Entfernte Features
 - Funktion Database::preparedQuery() entfernt, stattdessen Database::pQuery() verwenden
 
 
-﻿===== Neues in UliCMS 9.8.4 =====
+===== Neues in UliCMS 9.8.4 =====
 
 Neue Features
 + Inhaltstyp "Liste" hinzugefügt
@@ -78,7 +78,6 @@ Entfernte Features
 - Templates können nicht mehr online im Browser bearbeitet werden
 
 
-
 ===== Neues in UliCMS 9.8.3 =====
 
 Neue Features
@@ -102,7 +101,6 @@ Bugfixes
 
 Entfernte Features
 - cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016
-
 
 
 ===== Neues in UliCMS 9.8.2 =====
@@ -134,7 +132,6 @@ Entfernte Features
 + Seiten können nun geklont werden
 
 
-
 ===== Neues in UliCMS 9.8.1 =====
 
 + Option "Design für Mobilgeräte nicht auf Tablets verwenden" hinzugefügt
@@ -159,9 +156,7 @@ Entfernte Features
 + unique_identifier_filter hinzugefügt
 
 
-
-
-﻿===== Neues in UliCMS 9.8.0 ====
+===== Neues in UliCMS 9.8.0 ====
 
 + CKEditor auf Version 4.5.3 aktualisiert (Behebt Kompatiblitätsprobleme mit Microsofts neuem Edge Webbrowser)
 + Auswahl für Schriftart und Schriftgröße im CKEditor entfernt
@@ -243,7 +238,6 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + Accordion Layouts werden nun an die Fenstergröße angepasst, wenn man das Browserfenster skaliert
 
 
-
 ==== Neues in UliCMS 9.0.1 Refresh 2 =====
 
 + CKEditor 4.5.9
@@ -283,4 +277,3 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + Ein Fehler in der deutschen Sprachdatei der dazu führte, dass stattdessen die englischen Sprachdateien von Modulen geladen werden wurde korrigiert
 + Nutzung von HSTS bei SSL-verschlüsselten Verbindungen
 Details siehe http://www.phpgangsta.de/hsts-http-strict-transport-security-hasts-schon
-
