@@ -12,9 +12,13 @@ if (! $acl->hasPermission ( "install_packages" )) {
 					$pkg = new PackageManager ();
 					if ($pkg->installPackage ( $file_in_tmp )) {
 						@unlink ( $file_in_tmp );
-						echo "<p style='color:green'>" . str_ireplace ( "%file%", $_FILES ['file'] ['name'], get_translation ( "PACKAGE_SUCCESSFULL_UPLOADED " ) ) . "</p>";
+						echo "<p style='color:green'>" . get_translation ( "PACKAGE_SUCCESSFULL_UPLOADED", array (
+								"%file%" => $_FILES ['file'] ['name'] 
+						) ) . "</p>";
 					} else {
-						echo "<p style='color:red'>" . str_ireplace ( "%file%", $_FILES ['file'] ['name'], get_translation ( "installation_failed" ) ) . "</p>";
+						echo "<p style='color:red'>" . get_translation ( "installation_failed", array (
+								"%file%" => $_FILES ['file'] ['name'] 
+						) ) . "</p>";
 					}
 				} else if (endsWith ( $file_in_tmp, ".sin" )) {
 					$url = "?action=pkginfo&file=" . basename ( $file_in_tmp );
