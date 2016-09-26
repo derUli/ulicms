@@ -41,4 +41,5 @@ Datenbank:
 	[ ] Kategorien implementieren
 	[ ] Neues Build-Script implementieren
 	[ ] Zukünftig: Auf SimpleInstall v2 umstellen
-	[ ] update_manager und update_manager_dashboard anpassen.
+	[ ] update_manager und update_manager_dashboard anpassen
+	[ ] Online Browser für Paketquelle anpassen
