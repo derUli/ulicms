@@ -13,11 +13,11 @@ if (! $acl->hasPermission ( "install_packages" )) {
 					if ($pkg->installPackage ( $file_in_tmp )) {
 						@unlink ( $file_in_tmp );
 						echo "<p style='color:green'>" . get_translation ( "PACKAGE_SUCCESSFULL_UPLOADED", array (
-								"%file%" => $_FILES ['file'] ['name']
+								"%file%" => $_FILES ['file'] ['name'] 
 						) ) . "</p>";
 					} else {
 						echo "<p style='color:red'>" . get_translation ( "installation_failed", array (
-								"%file%" => $_FILES ['file'] ['name']
+								"%file%" => $_FILES ['file'] ['name'] 
 						) ) . "</p>";
 					}
 				} else if (endsWith ( $file_in_tmp, ".sin" )) {
@@ -31,13 +31,13 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			}
 		}
 	}
-
+	
 	?>
 <h1><?php translate("upload_package");?></h1>
 <form action="?action=upload_package" enctype="multipart/form-data"
 	method="post">
 	<?php
-
+	
 	csrf_token_html ();
 	?>
 	<input type="file" name="file"><br /> <br /> <input type="submit"
