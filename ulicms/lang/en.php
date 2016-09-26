@@ -688,4 +688,8 @@ define ( "TRANSLATION_EXCERPT", "Excerpt" );
 define ( "TRANSLATION_ON_TIME", "At" );
 define ( "TRANSLATION_O_CLOCK", "o'clock" );
 
+
+define ( "TRANSLATION_INSTALLATION_FAILED", "The installation of package \"%file%\" is failed." );
+define ( "TRANSLATION_NOT_SUPPORTED_FORMAT", "The format is not supported." );
+
 add_hook ( "lang_en" );

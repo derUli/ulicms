@@ -167,7 +167,7 @@ define ( "TRANSLATION_MAKE_GROUP_DEFAULT", "Die Gruppe %name% zum Standard für 
 define ( "TRANSLATION_GROUP_DELETED", "Die Gruppe wurde erfolgreich gelöscht." );
 
 // Medien
-define ( "TRANSLATION_PLEASE_SELECT_FILETYPE", "Bitte wählen Sie einen Dateityp aus" );
+define ( "TRANSLATIONS_PLEASE_SELECT_FILETYPE", "Bitte wählen Sie einen Dateityp aus" );
 
 // Vorlagen
 define ( "TRANSLATION_TEMPLATE_INFO_TEXT", "Hier können Sie das Aussehen Ihrer Website durch Templates anpassen. Bitte vorsichtig beim Bearbeiten sein, wegen des enthaltenen PHP-Codes. Am Besten sollte diese Aufgabe von einem Profi übernommen werden." );
@@ -321,7 +321,6 @@ define ( "TRANSLATION_DOWNLOAD_FAILED", "Download fehlgeschlagen (%pkg%)" );
 define ( "TRANSLATION_INSTALLATION_SUCCESSFULL", "Installation erfolgreich (%pkg%)" );
 define ( "TRANSLATION_EXTRACTION_OF_PACKAGE_FAILED", "Entpacken der Datei fehlgeschlagen (%pkg%)" );
 define ( "TRANSLATION_PACKAGE_SUCCESSFULL_UPLOADED", "Das Paket \"%file%\" wurde erfolgreich installiert." );
-define ( "TRANSLATION_INSALLATION_FAILED", "Das Paket \"%file%\" konnte nicht installiert werden." );
 define ( "TRANSLATION_UPLOAD_FAILED", "Dateiupload fehlgeschlagen!" );
 
 // Info
@@ -680,5 +679,8 @@ define ( "TRANSLATION_EXCERPT", "Auszug" );
 
 define ( "TRANSLATION_ON_TIME", "Um" );
 define ( "TRANSLATION_O_CLOCK", "Uhr" );
+
+define ( "TRANSLATION_INSTALLATION_FAILED", "Das Paket \"%file%\" konnte nicht installiert werden." );
+define ( "TRANSLATION_NOT_SUPPORTED_FORMAT", "Das Dateiformat wird nicht unterstützt." );
 
 add_hook ( "lang_de" );
