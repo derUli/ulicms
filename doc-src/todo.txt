@@ -44,3 +44,4 @@ Datenbank:
 	[ ] update_manager und update_manager_dashboard anpassen
 	[ ] Online Browser für Paketquelle anpassen
 	[ ] Mehrsprachige Beschreibungen
+[ ] Redesign des Backends mit Bootstrap
