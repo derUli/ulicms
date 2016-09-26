@@ -168,7 +168,7 @@ define ( "TRANSLATION_MAKE_GROUP_DEFAULT", "Die Gruppe %name% zum Standard für 
 define ( "TRANSLATION_GROUP_DELETED", "Die Gruppe wurde erfolgreich gelöscht." );
 
 // Medien
-define ( TRANSLATIONS_PLEASE_SELECT_FILETYPE", "Bitte wählen Sie einen Dateityp aus" );
+define ( "TRANSLATIONS_PLEASE_SELECT_FILETYPE", "Bitte wählen Sie einen Dateityp aus" );
 
 // Vorlagen
 define ( "TRANSLATION_TEMPLATE_INFO_TEXT", "Hier können Sie das Aussehen Ihrer Website durch Templates anpassen. Bitte vorsichtig beim Bearbeiten sein, wegen des enthaltenen PHP-Codes. Am Besten sollte diese Aufgabe von einem Profi übernommen werden." );
