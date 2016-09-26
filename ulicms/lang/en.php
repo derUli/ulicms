@@ -167,10 +167,10 @@ define ( "TRANSLATION_MAKE_GROUP_DEFAULT", "Make group %name% default for new us
 define ( "TRANSLATION_GROUP_DELETED", "Die Gruppe wurde erfolgreich gelöscht." );
 
 // Medien
-define ( "ULICMS_PLEASE_SELECT_FILETYPE", "Plese select a file type" );
+define ( "TRANSLATION_PLEASE_SELECT_FILETYPE", "Plese select a file type" );
 
 // Vorlagen
-define ( "ULICMS_TEMPLATE_INFO_TEXT", "You can edit your website templates here. Please be careful, because of the contained PHP code." );
+define ( "TRANSLATION_TEMPLATE_INFO_TEXT", "You can edit your website templates here. Please be careful, because of the contained PHP code." );
 define ( "TRANSLATION_PLEASE_SELECT_TEMPLATE", "please select a template" );
 define ( "TRANSLATION_CHANGES_WAS_SAVED", "Changes was saved." );
 
