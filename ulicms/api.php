@@ -1322,7 +1322,7 @@ function getAllModules() {
 }
 function no_cache() {
 	if (get_cache_control () == "auto" || get_cache_control () == "no_cache") {
-		$GLOBALS ["no_cache"] = true;
+		Flags::setNoCache(true);
 	}
 }
 function no_anti_csrf() {
