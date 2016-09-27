@@ -12,6 +12,7 @@ function initconfig($key, $value) {
 		setconfig ( $key, $value );
 		$retval = true;
 	}
+	SettingsCache::set ( $key, $value );
 	return $retval;
 }
 function mb_str_split($string) {
@@ -707,23 +708,23 @@ function getOnlineUsers() {
 
 // get a config variable
 function getconfig($key) {
-	if (isset ( $GLOBALS ['settings_cache'] [$key] )) {
-		return $GLOBALS ['settings_cache'] [$key];
+	if (SettingsCache::get ( $key )) {
+		return SettingsCache::get ( $key );
 	}
 	$env_key = "ulicms_" . $key;
 	$env_var = getenv ( $env_key );
 	if ($env_var) {
 		return $env_var;
 	}
-	$ikey = db_escape ( $key );
+	$ikey = Database::escapeValue ( $key );
 	$query = db_query ( "SELECT value FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
-			$GLOBALS ['settings_cache'] [$key] = $row->value;
+			SettingsCache::set ( $key, $row->value );
 			return $row->value;
 		}
 	} else {
-		$GLOBALS ['settings_cache'] [$key] = false;
+		SettingsCache::set ( $key, null );
 		return false;
 	}
 }
@@ -1320,8 +1321,8 @@ function getAllModules() {
 	return $pkg->getInstalledPackages ( 'modules' );
 }
 function no_cache() {
-	if(get_cache_control() == "auto" || get_cache_control() == "no_cache"){
-		$GLOBALS["no_cache"] = true;
+	if (get_cache_control () == "auto" || get_cache_control () == "no_cache") {
+		$GLOBALS ["no_cache"] = true;
 	}
 }
 function no_anti_csrf() {
@@ -1606,23 +1607,19 @@ function file_extension($filename) {
 function deleteconfig($key) {
 	$key = db_escape ( $key );
 	db_query ( "DELETE FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
+	SettingsCache::set ( $key, null );
 	return db_affected_rows () > 0;
 }
 
 // Set a configuration Variable;
 function setconfig($key, $value) {
 	$query = db_query ( "SELECT id FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
-	
 	if (db_num_rows ( $query ) > 0) {
 		db_query ( "UPDATE " . tbname ( "settings" ) . " SET value='$value' WHERE name='$key'" );
 	} else {
-		
 		db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 	}
-	
-	if (isset ( $GLOBALS ['settings_cache'] [$key] )) {
-		unset ( $GLOBALS ['settings_cache'] [$key] );
-	}
+	SettingsCache::set ( $key, null );
 }
 function is__writable($path) {
 	if ($path {strlen ( $path ) - 1} == '/')
