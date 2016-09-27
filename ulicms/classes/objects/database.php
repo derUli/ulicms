@@ -7,6 +7,9 @@ class Database {
 		log_db_query ( $query );
 		return mysqli_query ( self::$connection, $query );
 	}
+	public static function getConnection(){
+      return self::$connection;		
+	}
 	public static function pQuery($query, $args = array()) {
 		$preparedQuery = "";
 		$chars = mb_str_split ( $query );
