@@ -67,7 +67,7 @@ if (getconfig ( "logo_disabled" ) == "no") {
 		<div id="mobile-menu"></div>
 		<img class="header-image"
 			src="<?php echo getTemplateDirPath(get_theme());?>header.jpg"
-			alt="Header-grafik">
+			alt="Header Grafik">
 		<main>
 
 <?php
