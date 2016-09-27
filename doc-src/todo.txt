@@ -45,3 +45,4 @@ Datenbank:
 	[ ] Online Browser für Paketquelle anpassen
 	[ ] Mehrsprachige Beschreibungen
 [ ] Redesign des Backends mit Bootstrap
+[ ] Global Variablen entledigen
