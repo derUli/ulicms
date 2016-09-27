@@ -145,11 +145,11 @@ $cache_control = get_cache_control ();
 switch ($cache_control) {
 	case "auto" :
 	case "force" :
-		$GLOBALS ["no_cache"] = false;
+		Flags::setNoCache ( false );
 		break;
 		break;
 	case "no_cache" :
-		$GLOBALS ["no_cache"] = true;
+		Flags::setNoCache ( true );
 		break;
 }
 if ($hasModul) {
@@ -181,7 +181,7 @@ if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) a
 	$cached_content = file_get_contents ( $cached_page_path );
 	$last_modified = filemtime ( $cached_page_path );
 	
-	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! $GLOBALS ["no_cache"]) {
+	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! Flags::getNoCache ()) {
 		eTagFromString ( $cached_content );
 		browsercacheOneDay ( $last_modified );
 		echo $cached_content;
@@ -208,7 +208,7 @@ if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET
 
 $id = md5 ( $_SERVER ['REQUEST_URI'] . $_SESSION ["language"] . strbool ( is_mobile () ) );
 
-if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
+if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
 	$options = array (
 			'lifeTime' => Settings::get ( "cache_period" ),
 			'cacheDir' => "content/cache/" 
@@ -284,10 +284,10 @@ if ($html_file) {
 
 add_hook ( "after_html" );
 
-if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and $cache_type === "cache_lite") {
+if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and $cache_type === "cache_lite") {
 	$data = ob_get_clean ();
 	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! $GLOBALS ["no_cache"]) {
+	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache()) {
 		$Cache_Lite->save ( $data, $id );
 	}
 	
@@ -304,10 +304,10 @@ if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and $cache_
 	die ();
 }
 
-if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	$generated_html = ob_get_clean ();
 	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! $GLOBALS ["no_cache"]) {
+	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache ()) {
 		$handle = fopen ( $cached_page_path, "wb" );
 		fwrite ( $handle, $generated_html );
 		fclose ( $handle );

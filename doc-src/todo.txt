@@ -46,3 +46,4 @@ Datenbank:
 	[ ] Mehrsprachige Beschreibungen
 [ ] Redesign des Backends mit Bootstrap
 [ ] Global Variablen entledigen
+	[X] search-Modul für 9.8.6 anpassen, damit es nicht mehr $db_connection nutzt

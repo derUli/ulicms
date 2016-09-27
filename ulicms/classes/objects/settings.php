@@ -8,15 +8,15 @@ class Settings {
 		if (! self::get ( $key )) {
 			self::set ( $key, $value );
 			$retval = true;
-			$GLOBALS ['settings_cache'] [$key] = $value;
 		}
+		SettingsCache::set ( $key, $value );
 		return $retval;
 	}
 	
 	// get a config variable
 	public static function get($key) {
-		if (isset ( $GLOBALS ['settings_cache'] [$key] )) {
-			return $GLOBALS ['settings_cache'] [$key];
+		if (SettingsCache::get ( $key )) {
+			return SettingsCache::get ( $key );
 		}
 		$env_key = "ulicms_" . $key;
 		$env_var = getenv ( $env_key );
@@ -27,11 +27,11 @@ class Settings {
 		$query = db_query ( "SELECT value FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
-				$GLOBALS ['settings_cache'] [$key] = $row->value;
+				SettingsCache::set ( $key, $row->value );
 				return $row->value;
 			}
 		} else {
-			$GLOBALS ['settings_cache'] [$key] = false;
+			SettingsCache::set ( $key, null );
 			return false;
 		}
 	}
@@ -68,9 +68,7 @@ class Settings {
 		} else {
 			db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 		}
-		if (isset ( $GLOBALS ['settings_cache'] [$key] )) {
-			unset ( $GLOBALS ['settings_cache'] [$key] );
-		}
+		Settings::set($key, null);
 	}
 	
 	// Remove an configuration variable

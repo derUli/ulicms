@@ -118,7 +118,7 @@ function get_edit_button() {
 	$html = "";
 	if (is_logged_in () and ! containsModule ()) {
 		$acl = new ACL ();
-		if ($acl->hasPermission ( "pages" ) and $GLOBALS ["no_cache"]) {
+		if ($acl->hasPermission ( "pages" ) and Flags::getNoCache ()) {
 			$id = get_ID ();
 			$html .= "<div class=\"ulicms_edit\">[<a href=\"admin/index.php?action=pages_edit&page=$id\">" . get_translation ( "edit" ) . "</a>]</div>";
 		}

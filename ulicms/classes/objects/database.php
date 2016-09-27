@@ -1,11 +1,17 @@
 <?php
 class Database {
+	private static $connection = null;
 	// Abstraktion für Ausführen von SQL Strings
 	public static function query($query) {
 		include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
 		log_db_query ( $query );
-		global $db_connection;
-		return mysqli_query ( $db_connection, $query );
+		return mysqli_query ( self::$connection, $query );
+	}
+	public static function getConnection(){
+      return self::$connection;		
+	}
+	public static function setConnection($con){
+      self::$connection = $con;
 	}
 	public static function pQuery($query, $args = array()) {
 		$preparedQuery = "";
@@ -46,18 +52,16 @@ class Database {
 		return $retval;
 	}
 	public static function getServerVersion() {
-		global $db_connection;
-		return mysqli_get_server_info ( $db_connection );
+		return mysqli_get_server_info ( self::$connection );
 	}
 	public static function getClientInfo() {
-		global $db_connection;
-		return mysqli_get_client_info ( $db_connection );
+		return mysqli_get_client_info ( self::$connection  );
 	}
 	public static function dropTable($table, $prefix = true) {
 		if ($prefix) {
 			$table = tbname ( $table );
 		}
-		
+
 		$table = self::escapeName ( $table );
 		return self::query ( "DROP TABLE $table" );
 	}
@@ -65,7 +69,7 @@ class Database {
 		if ($prefix) {
 			$table = tbname ( $table );
 		}
-		
+
 		$table = self::escapeName ( $table );
 		$column = self::escapeName ( $column );
 		$sql = "select avg($column) from $table";
@@ -79,7 +83,7 @@ class Database {
 		if ($prefix) {
 			$table = tbname ( $table );
 		}
-		
+
 		$table = self::escapeName ( $table );
 		$column = self::escapeName ( $column );
 		$sql = "select min($column) from $table";
@@ -93,7 +97,7 @@ class Database {
 		if ($prefix) {
 			$table = tbname ( $table );
 		}
-		
+
 		$table = self::escapeName ( $table );
 		$sql = "DELETE FROM $table";
 		if (isNotNullOrEmpty ( $where )) {
@@ -106,7 +110,7 @@ class Database {
 		if ($prefix) {
 			$table = tbname ( $table );
 		}
-		
+
 		$table = self::escapeName ( $table );
 		$column = self::escapeName ( $column );
 		$sql = "select min($column) from $table";
@@ -120,7 +124,7 @@ class Database {
 		if ($prefix) {
 			$table = tbname ( $table );
 		}
-		
+
 		$table = self::escapeName ( $table );
 		return self::query ( "TRUNCATE TABLE $table" );
 	}
@@ -128,7 +132,7 @@ class Database {
 		if ($prefix) {
 			$table = tbname ( $table );
 		}
-		
+
 		$column = self::escapeName ( $column );
 		$table = self::escapeName ( $table );
 		return self::query ( "ALTER TABLE $table DROP COLUMN $table" );
@@ -141,9 +145,9 @@ class Database {
 		if (count ( $columns ) == 0) {
 			$columns [] = "*";
 		}
-		
+
 		$columns_sql = implode ( ", ", $columns );
-		
+
 		$sql = "select $columns_sql from $table";
 		if (isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
@@ -157,13 +161,12 @@ class Database {
 		return $name;
 	}
 	public static function getLastInsertID() {
-		global $db_connection;
-		return mysqli_insert_id ( $db_connection );
+		return mysqli_insert_id ( self::$connection  );
 	}
 	public static function getInsertID() {
 		return self::getLastInsertID ();
 	}
-	
+
 	// Fetch Row in diversen Datentypen
 	public static function fetchArray($result) {
 		return mysqli_fetch_array ( $result );
@@ -178,45 +181,40 @@ class Database {
 		if (function_exists ( "mysqli_fetch_all" )) {
 			return mysqli_fetch_all ( $result, $resulttype );
 		}
-		
+
 		// @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
 		$retval = array ();
 		while ( $row = self::fetchAssoc ( $result ) ) {
 			$retval [] = $row;
 		}
-		
+
 		return $retval;
 	}
 	public static function close() {
-		global $db_connection;
-		mysqli_close ( $db_connection );
+		mysqli_close ( self::$connection  );
 	}
-	
+
 	// Connect with database server
 	public static function connect($server, $user, $password) {
-		global $db_connection;
-		$db_connection = mysqli_connect ( $server, $user, $password );
-		if (! $db_connection) {
+		self::$connection = mysqli_connect ( $server, $user, $password );
+		if (! self::$connection ) {
 			return false;
 		}
 		self::query ( "SET NAMES 'utf8'" );
 		// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 		self::query ( "SET SESSION sql_mode = '';" );
-		
-		return $db_connection;
+
+		return self::$connection ;
 	}
 	// Datenbank auswählen
 	public static function select($schema) {
-		global $db_connection;
-		return mysqli_select_db ( $db_connection, $schema );
+		return mysqli_select_db ( self::$connection , $schema );
 	}
 	public static function getNumFieldCount($result) {
-		global $db_connection;
-		return mysqli_field_count ( $db_connection );
+		return mysqli_field_count ( self::$connection  );
 	}
 	public static function getAffectedRows() {
-		global $db_connection;
-		return mysqli_affected_rows ( $db_connection );
+		return mysqli_affected_rows ( self::$connection  );
 	}
 	public static function fetchObject($result) {
 		return mysqli_fetch_object ( $result );
@@ -228,27 +226,24 @@ class Database {
 		return mysqli_num_rows ( $result );
 	}
 	public static function getLastError() {
-		global $db_connection;
-		return mysqli_error ( $db_connection );
+		return mysqli_error ( self::$connection  );
 	}
 	public static function error() {
 		return self::getLastError ();
 	}
 	public static function getAllTables() {
-		global $db_connection;
 		$tableList = array ();
-		$res = mysqli_query ( $db_connection, "SHOW TABLES" );
+		$res = mysqli_query ( self::$connection , "SHOW TABLES" );
 		while ( $cRow = mysqli_fetch_array ( $res ) ) {
 			$tableList [] = $cRow [0];
 		}
-		
+
 		sort ( $tableList );
 		return $tableList;
 	}
-	
+
 	// Abstraktion für Escapen von Werten
 	public static function escapeValue($value, $type = null) {
-		global $db_connection;
 		if (is_null ( $type )) {
 			if (is_float ( $value )) {
 				return floatval ( $value );
@@ -257,7 +252,7 @@ class Database {
 			} else if (is_bool ( $value )) {
 				return ( int ) $value;
 			} else {
-				return mysqli_real_escape_string ( $db_connection, $value );
+				return mysqli_real_escape_string ( self::$connection , $value );
 			}
 		} else {
 			if ($type === DB_TYPE_INT) {
@@ -265,7 +260,7 @@ class Database {
 			} else if ($type === DB_TYPE_FLOAT) {
 				return floatval ( $value );
 			} else if ($type === DB_TYPE_STRING) {
-				return mysqli_real_escape_string ( $db_connection, $value );
+				return mysqli_real_escape_string ( self::$connection , $value );
 			} else if ($type === DB_TYPE_BOOL) {
 				return intval ( $value );
 			} else {
