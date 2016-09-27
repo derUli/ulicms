@@ -106,7 +106,7 @@ if (file_exists ( $path_to_config )) {
 	throw new Exception ( "Can't include cms-config.php. Starting installer failed, too." );
 }
 
-global $connection, $config;
+global $config;
 $config = new config ();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
@@ -206,7 +206,7 @@ function is_in_include_path($find) {
 	}
 }
 
-global $connection, $config;
+global $config;
 $config = new config ();
 
 if ($config->db_server == "" or $config->db_user == "") {
@@ -254,16 +254,16 @@ if (! defined ( "SKIP_TABLE_CHECK" )) {
 			tbname ( "history" ),
 			tbname ( "settings" ),
 			tbname ( "forms" ),
-			tbname ( "lists" ) 
+			tbname ( "lists" )
 	);
-	
+
 	for($i = 0; $i < count ( $required_tables ); $i ++) {
 		$table = $required_tables [$i];
 		if (! in_array ( $table, $existing_tables )) {
 			if (! headers_sent ()) {
 				header ( "Content-Type: text/html; charset=UTF-8" );
 			}
-			
+
 			throw new Exception ( "Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!" );
 			exit ();
 		}
@@ -376,9 +376,9 @@ if (! Settings::get ( "disable_hsts" ) and is_ssl ()) {
 	if ($maxage === false) {
 		$maxage = 10 * 30;
 	}
-	
+
 	$maxage = intval ( $maxage );
-	
+
 	$includeSubDomains = Settings::get ( "hsts_include_subdomains" );
 	if (! $includeSubDomains) {
 		$includeSubDomains = "";
@@ -387,7 +387,7 @@ if (! Settings::get ( "disable_hsts" ) and is_ssl ()) {
 	if (! empty ( $includeSubDomains )) {
 		$str .= "; " . $includeSubDomains;
 	}
-	
+
 	$str = trim ( $str );
 	header ( $str );
 }
