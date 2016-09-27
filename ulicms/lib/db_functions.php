@@ -15,24 +15,24 @@ function getPDOConnectionString() {
 	return $retval;
 }
 function db_get_server_info() {
-	return mysqli_get_server_info ( Database::getConnection() );
+	return mysqli_get_server_info ( Database::getConnection () );
 }
 function db_get_client_info() {
-	return mysqli_get_client_info ( Database::getConnection() );
+	return mysqli_get_client_info ( Database::getConnection () );
 }
 
 // Using SQL Prepared statements
 function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE) {
-	if ($stmt = mysqli_prepare ( Database::getConnection(), $sql )) {
+	if ($stmt = mysqli_prepare ( Database::getConnection (), $sql )) {
 		if (count ( $params ) == count ( $params, 1 )) {
 			$params = array (
-					$params
+					$params 
 			);
 			$multiQuery = FALSE;
 		} else {
 			$multiQuery = TRUE;
 		}
-
+		
 		if ($typeDef) {
 			$bindParams = array ();
 			$bindParamsReferences = array ();
@@ -44,7 +44,7 @@ function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE) {
 			$bindParamsMethod = new ReflectionMethod ( 'mysqli_stmt', 'bind_param' );
 			$bindParamsMethod->invokeArgs ( $stmt, $bindParamsReferences );
 		}
-
+		
 		$result = array ();
 		foreach ( $params as $queryKey => $query ) {
 			foreach ( $bindParams as $paramKey => $value ) {
@@ -82,7 +82,7 @@ function db_prepared_query($sql, $typeDef = FALSE, $params = FALSE) {
 	} else {
 		$result = FALSE;
 	}
-
+	
 	if ($multiQuery) {
 		return $result;
 	} else {
@@ -93,7 +93,7 @@ function db_name_escape($name) {
 	return "`" . db_escape ( $name ) . "`";
 }
 function db_last_insert_id() {
-	return mysqli_insert_id ( Database::getConnection() );
+	return mysqli_insert_id ( Database::getConnection () );
 }
 function db_insert_id() {
 	return db_last_insert_id ();
@@ -112,39 +112,39 @@ function db_fetch_assoc($result) {
 function db_fetch_all($result, $resulttype = MYSQLI_NUM) {
 	if (function_exists ( "mysqli_fetch_all" ))
 		return mysqli_fetch_all ( $result, $resulttype );
-
+		
 		// @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
 	$retval = array ();
 	while ( $row = db_fetch_assoc ( $result ) ) {
 		$retval [] = $row;
 	}
-
+	
 	return $retval;
 }
 function db_close() {
-	mysqli_close ( Database::getConnection() );
+	mysqli_close ( Database::getConnection () );
 }
 
 // Connect with database server
 function db_connect($server, $user, $password) {
-	Database::getConnection() = mysqli_connect ( $server, $user, $password );
-	if (! Database::getConnection())
+	Database::setConnection ( mysqli_connect ( $server, $user, $password ) );
+	if (! Database::getConnection ())
 		return false;
 	db_query ( "SET NAMES 'utf8'" );
 	// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 	db_query ( "SET SESSION sql_mode = '';" );
-
-	return Database::getConnection();
+	
+	return Database::getConnection ();
 }
 // Datenbank auswählen
 function db_select($schema) {
-	return mysqli_select_db ( Database::getConnection(), $schema );
+	return mysqli_select_db ( Database::getConnection (), $schema );
 }
 function db_num_fields($result) {
-	return mysqli_field_count ( Database::getConnection() );
+	return mysqli_field_count ( Database::getConnection () );
 }
 function db_affected_rows() {
-	return mysqli_affected_rows ( Database::getConnection() );
+	return mysqli_affected_rows ( Database::getConnection () );
 }
 function schema_select($schema) {
 	return db_select ( $schema );
@@ -162,23 +162,23 @@ function db_num_rows($result) {
 	return mysqli_num_rows ( $result );
 }
 function db_last_error() {
-	return mysqli_error ( Database::getConnection() );
+	return mysqli_error ( Database::getConnection () );
 }
 function db_error() {
 	return db_last_error ();
 }
 function db_get_tables() {
 	$tableList = array ();
-	$res = mysqli_query ( Database::getConnection(), "SHOW TABLES" );
+	$res = mysqli_query ( Database::getConnection (), "SHOW TABLES" );
 	while ( $cRow = mysqli_fetch_array ( $res ) ) {
 		$tableList [] = $cRow [0];
 	}
-
+	
 	sort ( $tableList );
 	return $tableList;
 }
 function db_real_escape_string($value) {
-	return mysqli_real_escape_string ( Database::getConnection(), $value );
+	return mysqli_real_escape_string ( Database::getConnection (), $value );
 }
 
 define ( "DB_TYPE_INT", 1 );
@@ -189,7 +189,7 @@ define ( "DB_TYPE_BOOL", 4 );
 // Abstraktion für Escapen von Werten
 function db_escape($value, $type = null) {
 	if (is_null ( $type )) {
-
+		
 		if (is_float ( $value )) {
 			return floatval ( $value );
 		} else if (is_int ( $value )) {
@@ -197,7 +197,7 @@ function db_escape($value, $type = null) {
 		} else if (is_bool ( $value )) {
 			return ( int ) $value;
 		} else {
-			return mysqli_real_escape_string ( Database::getConnection(), $value );
+			return mysqli_real_escape_string ( Database::getConnection (), $value );
 		}
 	} else {
 		if ($type === DB_TYPE_INT) {
@@ -205,7 +205,7 @@ function db_escape($value, $type = null) {
 		} else if ($type === DB_TYPE_FLOAT) {
 			return floatval ( $value );
 		} else if ($type === DB_TYPE_STRING) {
-			return mysqli_real_escape_string ( Database::getConnection(), $value );
+			return mysqli_real_escape_string ( Database::getConnection (), $value );
 		} else if ($type === DB_TYPE_BOOL) {
 			return intval ( $value );
 		} else {

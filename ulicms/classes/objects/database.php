@@ -1,6 +1,6 @@
 <?php
 class Database {
-	private $connection = null;
+	private static $connection = null;
 	// Abstraktion für Ausführen von SQL Strings
 	public static function query($query) {
 		include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
@@ -9,6 +9,9 @@ class Database {
 	}
 	public static function getConnection(){
       return self::$connection;		
+	}
+	public static function setConnection($con){
+      self::$connection = $con;
 	}
 	public static function pQuery($query, $args = array()) {
 		$preparedQuery = "";
