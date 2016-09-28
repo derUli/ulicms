@@ -5,7 +5,7 @@
 </div>
 <nav><?php menu("bottom");?></nav>
 <footer>
-	<p>&copy; 2015 by <?php homepage_owner();?> <span
+	<p>&copy; <?php year();?> by <?php homepage_owner();?> <span
 			class="hide-on-mobile">| <?php poweredByUliCMS();?></span>
 	</p>
 </footer>
