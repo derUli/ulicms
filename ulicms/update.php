@@ -110,6 +110,7 @@ Database::query ( "alter table `" . tbname ( "content" ) . "` add column `excerp
 
 // Database Changes of 9.8.6
 Database::query ( "ALTER TABLE `" . tbname ( "users" ) . "` DROP COLUMN `icq_id`" );
+Database::query ( "ALTER TABLE `" . tbname ( "settings" ) . "` ADD UNIQUE (`name`)" );
 
 Settings::set ( "db_schema_version", "9.8.6" );
 
