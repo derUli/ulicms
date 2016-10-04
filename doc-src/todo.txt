@@ -1,4 +1,4 @@
-﻿[ ] Inhaltstyp "Liste" - Sortierbar nach "Random"
+[ ] Inhaltstyp "Liste" - Sortierbar nach "Random"
 [ ] Neues Bootstrap basiertes Theme theme-2017
 [X] Alle Referenzen von TRANSLATION_* Konstanten ersetzen durch translation() und get_translation()
 [ ] Multisite-Fähigkeit / Scopes implementieren
