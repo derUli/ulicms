@@ -30,10 +30,7 @@ if (defined ( "_SECURITY" )) {
 			echo $row->id;
 			?>"> <strong><?php translate("username");?></strong><br /> <input
 		type="text" name="admin_username"
-		value="<?php
-			
-			echo $row->username;
-			?>"
+		value="<?php echo real_htmlspecialchars($row->username);?>"
 		<?php
 			
 			if (! $acl->hasPermission ( "users" )) {
@@ -44,18 +41,18 @@ if (defined ( "_SECURITY" )) {
 	<input type="text" name="admin_lastname"
 		value="<?php
 			
-			echo $row->lastname;
+			echo real_htmlspecialchars ( $row->lastname );
 			?>"> <br /> <br /> <strong><?php translate("firstname");?></strong><br />
 	<input type="text" name="admin_firstname"
 		value="<?php
 			
-			echo $row->firstname;
+			echo real_htmlspecialchars ( $row->firstname );
 			?>"
 		required="required"><br /> <br /> <strong><?php translate("email");?></strong><br />
 	<input type="email" name="admin_email"
 		value="<?php
 			
-			echo $row->email;
+			echo real_htmlspecialchars ( $row->email );
 			?>"><br /> <br /> <strong><?php translate("last_login");?></strong><br />
 			<?php
 			if (is_null ( $row->last_login )) {
@@ -111,8 +108,6 @@ if (defined ( "_SECURITY" )) {
 				
 				echo $row->group;
 				?>">
-
-
 				<?php
 			} else {
 				?>
@@ -133,13 +128,14 @@ if (defined ( "_SECURITY" )) {
 			
 			translate ( "homepage" );
 			?></strong> <br /> <input type="url" name="homepage"
-		value="<?php echo $row -> homepage?>"> <br /> <br /> <strong><?php
+		value="<?php echo real_htmlspecialchars($row -> homepage);?>"> <br />
+	<br /> <strong><?php
 			
 			translate ( "twitter_profile" );
 			?></strong> <br /> <input type="text" name="twitter"
-		value="<?php echo real_htmlspecialchars($row -> twitter);?>"> <br />
-	<br /> <strong><?php translate("skype");?></strong> <br /> <input
-		type="text" name="skype_id"
+		value="<?php echo real_htmlspecialchars($row -> twitter);?>"> <br /> <br />
+	<strong><?php translate("skype");?></strong> <br /> <input type="text"
+		name="skype_id"
 		value="<?php echo real_htmlspecialchars($row -> skype_id);?>"> <br />
 	<br /> <strong><?php translate("html_editor");?></strong> <br /> <select
 		name="html_editor">
