@@ -4,12 +4,8 @@ if (defined ( "_SECURITY" )) {
 	
 	if ($acl->hasPermission ( "pages" )) {
 		?>
-<h2>
-<?php translate("pages");?>
-</h2>
-<p>
-<?php translate ( "pages_infotext" );?>
-</p>
+<h2><?php translate("pages");?></h2>
+<p><?php translate ( "pages_infotext" );?></p>
 <p>
 	<a href="index.php?action=pages_new"><?php translate("create_page");?>
 	</a>

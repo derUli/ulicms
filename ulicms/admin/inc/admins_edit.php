@@ -12,12 +12,14 @@ if (defined ( "_SECURITY" )) {
 			?>
 
 <form action="index.php?action=admins" name="userdata_form"
-	method="post" enctype="multipart/form-data" id="edit_user" autocomplete="off">
+	method="post" enctype="multipart/form-data" id="edit_user"
+	autocomplete="off">
 	<?php
 			
 			csrf_token_html ();
 			?>
-	<img src="<?php
+	<img
+		src="<?php
 			
 			echo get_gravatar ( $row->email, 200 );
 			?>"
@@ -48,7 +50,8 @@ if (defined ( "_SECURITY" )) {
 		value="<?php
 			
 			echo $row->firstname;
-			?>" required="required"><br /> <br /> <strong><?php translate("email");?></strong><br />
+			?>"
+		required="required"><br /> <br /> <strong><?php translate("email");?></strong><br />
 	<input type="email" name="admin_email"
 		value="<?php
 			
@@ -62,8 +65,10 @@ if (defined ( "_SECURITY" )) {
 			}
 			
 			?><br /> <br /> <strong><?php translate("new_password");?></strong><br />
-	<input type="password" name="admin_password" id="admin_password" value="" autocomplete="off"><br /> <br /> <strong><?php translate("password_repeat");?></strong><br />
-	<input type="password" name="admin_password_repeat" id="admin_password_repeat" value="" autocomplete="off"> <br />
+	<input type="password" name="admin_password" id="admin_password"
+		value="" autocomplete="off"><br /> <br /> <strong><?php translate("password_repeat");?></strong><br />
+	<input type="password" name="admin_password_repeat"
+		id="admin_password_repeat" value="" autocomplete="off"> <br />
 	<?php
 			$acl = new ACL ();
 			if ($acl->hasPermission ( "users" )) {
@@ -132,10 +137,12 @@ if (defined ( "_SECURITY" )) {
 			
 			translate ( "twitter_profile" );
 			?></strong> <br /> <input type="text" name="twitter"
-		value="<?php echo $row -> twitter?>"> <br /> <br />
-	<strong><?php translate("skype");?></strong> <br /> <input type="text"
-		name="skype_id" value="<?php echo $row -> skype_id?>"> <br /> <br /> <strong><?php translate("html_editor");?></strong>
-	<br /> <select name="html_editor">
+		value="<?php echo real_htmlspecialchars($row -> twitter);?>"> <br />
+	<br /> <strong><?php translate("skype");?></strong> <br /> <input
+		type="text" name="skype_id"
+		value="<?php echo real_htmlspecialchars($row -> skype_id);?>"> <br />
+	<br /> <strong><?php translate("html_editor");?></strong> <br /> <select
+		name="html_editor">
 		<option value="ckeditor"
 			<?php if(!$row -> html_editor or $row -> html_editor == "ckeditor") echo "selected"?>>CKEditor</option>
 		<option value="codemirror"
@@ -200,8 +207,8 @@ if (defined ( "_SECURITY" )) {
 				}
 			}
 			?>
-	<br /> <br /> <strong><?php translate("about_me");?></strong><br />
-	<textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
+	<br /> <br /> <strong><?php translate("about_me");?></strong><br /> <textarea
+		rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
 
 
 
