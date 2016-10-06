@@ -33,7 +33,7 @@ if (defined ( "_SECURITY" )) {
 			?></strong><br /> <input type="text" name="admin_username"
 		value="<?php
 			
-			echo $row->username;
+			echo real_htmlspecialchars ( $row->username );
 			?>"
 		<?php
 			
@@ -47,7 +47,7 @@ if (defined ( "_SECURITY" )) {
 			?></strong><br /> <input type="text" name="admin_lastname"
 		value="<?php
 			
-			echo $row->lastname;
+			echo real_htmlspecialchars ( $row->lastname );
 			?>"> <br /> <br /> <strong><?php
 			
 			echo TRANSLATION_FIRSTNAME;
@@ -55,14 +55,14 @@ if (defined ( "_SECURITY" )) {
 		name="admin_firstname"
 		value="<?php
 			
-			echo $row->firstname;
+			echo real_htmlspecialchars ( $row->firstname );
 			?>"><br /> <br /> <strong><?php
 			
 			echo TRANSLATION_EMAIL;
 			?></strong><br /> <input type="email" name="admin_email"
 		value="<?php
 			
-			echo $row->email;
+			echo real_htmlspecialchars ( $row->email );
 			?>"><br /> <br /> <strong><?php translate("last_login");?></strong><br />
 			<?php
 			if (is_null ( $row->last_login )) {
@@ -127,7 +127,7 @@ if (defined ( "_SECURITY" )) {
 			} else {
 				?>
 	<input type="hidden" name="admin_rechte"
-		value="<?php echo $row -> group?>"> <input type="hidden"
+		value="<?php echo $row -> group;?>"> <input type="hidden"
 		name="group_id"
 		value=<?php
 				
@@ -143,19 +143,23 @@ if (defined ( "_SECURITY" )) {
 			
 			translate ( "homepage" );
 			?></strong> <br /> <input type="url" name="homepage"
-		value="<?php echo $row -> homepage?>"> <br /> <br /> <strong><?php
+		value="<?php echo real_htmlspecialchars($row -> homepage);?>"> <br />
+	<br /> <strong><?php
 			
 			translate ( "twitter_profile" );
 			?></strong> <br /> <input type="text" name="twitter"
-		value="<?php echo $row -> twitter?>"> <br /> <br /> <strong><?php
+		value="<?php echo real_htmlspecialchars($row -> twitter);?>"> <br /> <br />
+	<strong><?php
 			
 			echo TRANSLATION_ICQ;
 			?></strong> <br /> <input type="text" name="icq_id"
-		value="<?php echo $row -> icq_id?>"> <br /> <br /> <strong><?php
+		value="<?php echo real_htmlspecialchars($row -> icq_id);?>"> <br /> <br />
+	<strong><?php
 			
 			echo TRANSLATION_SKYPE;
 			?></strong> <br /> <input type="text" name="skype_id"
-		value="<?php echo $row -> skype_id?>"> <br /> <br /> <strong><?php
+		value="<?php echo real_htmlspecialchars($row -> skype_id);?>"> <br />
+	<br /> <strong><?php
 			
 			echo TRANSLATION_HTML_EDITOR;
 			?></strong> <br /> <select name="html_editor">
