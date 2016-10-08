@@ -68,7 +68,7 @@ class Settings {
 		} else {
 			db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 		}
-		Settings::set($key, null);
+		SettingsCache::set($key, null);
 	}
 	
 	// Remove an configuration variable

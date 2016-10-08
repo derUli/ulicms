@@ -8,7 +8,11 @@ class SettingsCache {
 		return null;
 	}
 	public static function set($key, $value) {
-		self::$settings [$key] = $value;
+		if ($value === null and isset ( self::$settings [$key] )) {
+			unset ( self::$settings [$key] );
+		} else {
+			self::$settings [$key] = $value;
+		}
 	}
 }
 	
