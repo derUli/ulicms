@@ -42,12 +42,14 @@ if (defined ( "_SECURITY" )) {
 			$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
 			$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
 			
-			$can_edit_this = false;
+			$can_edit_this = true;
 			
-			if ($is_owner and $pages_edit_own) {
-				$can_edit_this = true;
-			} else if (! $is_owner and $pages_edit_others) {
-				$can_edit_this = true;
+			if (! $is_owner and ! $pages_edit_others) {
+				$can_edit_this = false;
+			}
+			
+			if ($row->only_admins_can_edit and ! is_admin ()) {
+				$can_edit_this = false;
 			}
 			
 			if (! $can_edit_this) {
@@ -759,7 +761,7 @@ function openArticleImageSelectWindow(field) {
 			</div>
 		</div>
 
-		<h2 class="accordion-header"><?php translate("owner");?></h2>
+		<h2 class="accordion-header"><?php translate("permissions");?></h2>
 
 		<div class="accordion-content">
 			<strong><?php translate("owner");?></strong> <select name="autor"
@@ -774,7 +776,11 @@ function openArticleImageSelectWindow(field) {
 	<option value="<?php Template::escape($user->id);?>"
 					<?php if($user->id == $row->autor) echo "selected";?>><?php Template::escape($user->username);?></option>
 	<?php } ?>
-</select>
+</select> <br /> <br /> <strong><?php translate("restrict_edit_access");?></strong><br />
+			<input type="checkbox" name="only_admins_can_edit"
+				id="only_admins_can_edit" value="1"
+				<?php if($row->only_admins_can_edit) echo "checked";?>> <label
+				for="only_admins_can_edit"><?php translate("admins");?></label>
 		</div>
 
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>

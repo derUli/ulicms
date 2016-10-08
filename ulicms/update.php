@@ -1,9 +1,7 @@
 <?php
 define ( "SKIP_TABLE_CHECK", true );
-
 include_once "init.php";
 @set_time_limit ( 0 );
-
 // Move folders to content Folder
 if (file_exists ( ULICMS_ROOT . "/modules" )) {
 	@rename ( ULICMS_ROOT . "/modules", ULICMS_ROOT . "/content/modules" );
@@ -11,7 +9,6 @@ if (file_exists ( ULICMS_ROOT . "/modules" )) {
 if (file_exists ( ULICMS_ROOT . "/templates" )) {
 	@rename ( ULICMS_ROOT . "/templates", ULICMS_ROOT . "/content/templates" );
 }
-
 // Änderungen in der Datenbank von 9.0.1
 Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "mails" ) . "` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -30,7 +27,6 @@ Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "history" ) . "` (
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;" );
-
 // Änderungen in der Datenbank von 9.8.0
 // Log
 Database::query ( "ALTER TABLE " . tbname ( "log" ) . " ADD COLUMN `referrer` varchar(255) DEFAULT NULL" );
@@ -60,7 +56,6 @@ Database::query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `locked` ti
 Database::query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `last_login` bigint(20) DEFAULT NULL" );
 // Failed login attempts Counter
 Database::query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `failed_logins` int(11) DEFAULT '0'" );
-
 // Database changes of 9.8.2
 // New profile fields
 Database::query ( "ALTER TABLE " . tbname ( "users" ) . " ADD COLUMN `twitter` varchar(15) NULL" );
@@ -75,7 +70,6 @@ $content_htaccess = ULICMS_ROOT . "/content/.htaccess";
 if (file_exists ( $content_htaccess )) {
 	@unlink ( $content_htaccess );
 }
-
 // Database changes of 9.8.4
 // Tabelle für Content Type "Liste"
 Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "lists" ) . "` (
@@ -96,7 +90,6 @@ Database::query ( "alter table " . tbname ( "content" ) . " add column `text_pos
 Database::query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN `approved` tinyint(1) NOT NULL DEFAULT '1'" );
 Database::query ( "alter table " . tbname ( "content" ) . "  add column `image_url` text default null" );
 Database::query ( "update " . tbname ( "content" ) . " set `type` = 'link' where redirection is not null and redirection <> ''" );
-
 // Database Changes of 9.8.5
 Database::query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN show_headline tinyint(1) NOT NULL DEFAULT '1'" );
 Database::query ( "ALTER TABLE " . tbname ( "lists" ) . " ADD COLUMN `use_pagination` tinyint(1) NOT NULL DEFAULT '0'" );
@@ -108,9 +101,11 @@ Database::query ( "alter table `" . tbname ( "content" ) . "` add column `articl
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_image` varchar(255) default '';" );
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `excerpt` text default '';" );
 
+
 // Database Changes of 9.8.6
 Database::query ( "ALTER TABLE `" . tbname ( "users" ) . "` DROP COLUMN `icq_id`" );
 Database::query ( "ALTER TABLE `" . tbname ( "settings" ) . "` ADD UNIQUE (`name`)" );
+Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_admins_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
 
 Settings::set ( "db_schema_version", "9.8.6" );
 
