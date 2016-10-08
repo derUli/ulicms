@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}content` ADD COLUMN `only_owner_can_edit` tinyint(1) NOT NULL DEFAULT '0'
