@@ -48,27 +48,25 @@ if (defined ( "_SECURITY" )) {
 			$owner_group = $owner_data ["group_id"];
 			$current_group = $_SESSION ["group_id"];
 			
-			$can_edit_this = false;
-			
-			if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit) {
-				if ($row->only_group_can_edit and $owner_group == $current_group) {
-					$can_edit_this = true;
-				}
-				if ($row->only_admins_can_edit and is_admin ()) {
-					$can_edit_this = true;
-				}
+		$can_edit_this = false;
 				
-				if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
-					$can_edit_this = true;
+				if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit or $row->only_others_can_edit) {
+					if ($row->only_group_can_edit and $owner_group == $current_group) {
+						$can_edit_this = true;
+					} else if ($row->only_admins_can_edit and is_admin ()) {
+						$can_edit_this = true;
+					} else if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
+						$can_edit_this = true;
+					} else if ($row->only_others_can_edit and $owner_group != $current_group and ! is_admin () and ! $is_owner) {
+						$can_edit_this = true;
+					}
+				} else {
+					if (! $is_owner and $pages_edit_others) {
+						$can_edit_this = true;
+					} else if ($is_owner and $pages_edit_own) {
+						$can_edit_this = true;
+					}
 				}
-			} 
-			else {
-				if (! $is_owner and $pages_edit_others) {
-					$can_edit_this = true;
-				} else if ($is_owner and $pages_edit_own) {
-					$can_edit_this = true;
-				}
-			}
 			
 			if (! $can_edit_this) {
 				noperms ();
@@ -807,6 +805,13 @@ function openArticleImageSelectWindow(field) {
 				id="only_owner_can_edit" value="1"
 				<?php if($row->only_owner_can_edit) echo "checked";?>> <label
 				for="only_owner_can_edit"><?php translate("owner");?></label>
+				
+				 <br />
+			<input type="checkbox" name="only_others_can_edit"
+				id="only_others_can_edit" value="1"
+				<?php if($row->only_others_can_edit) echo "checked";?>> <label
+				for="only_others_can_edit"><?php translate("others");?></label>
+				
 
 		</div>
 

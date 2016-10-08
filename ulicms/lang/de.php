@@ -684,5 +684,6 @@ define ( "TRANSLATION_INSTALLATION_FAILED", "Das Paket \"%file%\" konnte nicht i
 define ( "TRANSLATION_NOT_SUPPORTED_FORMAT", "Das Dateiformat wird nicht unterstützt." );
 
 define ( "TRANSLATION_RESTRICT_EDIT_ACCESS", "Bearbeitung beschränken" );
+define ( "TRANSLATION_OTHERS", "Andere" );
 
 add_hook ( "lang_de" );

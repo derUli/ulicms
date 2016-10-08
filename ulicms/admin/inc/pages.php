@@ -520,14 +520,14 @@ $(window).load(function(){
 				
 				$can_edit_this = false;
 				
-				if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit) {
+				if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit or $row->only_others_can_edit) {
 					if ($row->only_group_can_edit and $owner_group == $current_group) {
 						$can_edit_this = true;
-					}
-					if ($row->only_admins_can_edit and is_admin ()) {
+					} else if ($row->only_admins_can_edit and is_admin ()) {
 						$can_edit_this = true;
-					}
-					if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
+					} else if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
+						$can_edit_this = true;
+					} else if ($row->only_others_can_edit and $owner_group != $current_group and ! is_admin () and ! $is_owner) {
 						$can_edit_this = true;
 					}
 				} else {
