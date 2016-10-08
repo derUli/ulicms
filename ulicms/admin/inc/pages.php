@@ -514,16 +514,13 @@ $(window).load(function(){
 				$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
 				$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
 				
-				$can_edit_this = false;
+				$can_edit_this = true;
 				
-				if ($is_owner and $pages_edit_own) {
-					$can_edit_this = true;
-				} else if (! $is_owner and $pages_edit_others) {
-					$can_edit_this = true;
+				if (! $is_owner and ! $pages_edit_others) {
+					$can_edit_this = false;
 				}
-				if ($row->only_admins_can_edit and is_admin ()) {
-					$can_edit_this = true;
-				} else if ($row->only_admins_can_edit and ! is_admin ()) {
+				
+				if ($row->only_admins_can_edit and ! is_admin ()) {
 					$can_edit_this = false;
 				}
 				
