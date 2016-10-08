@@ -527,13 +527,10 @@ $(window).load(function(){
 					if ($row->only_admins_can_edit and is_admin ()) {
 						$can_edit_this = true;
 					}
-					
 					if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
 						$can_edit_this = true;
 					}
-				} 
-
-				else {
+				} else {
 					if (! $is_owner and $pages_edit_others) {
 						$can_edit_this = true;
 					} else if ($is_owner and $pages_edit_own) {
