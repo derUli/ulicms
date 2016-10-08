@@ -522,6 +522,10 @@ $(window).load(function(){
 					$can_edit_this = true;
 				}
 				
+				if ($row->only_admins_can_edit and is_admin ()) {
+					$can_edit_this = true;
+				}
+				
 				if (! $can_edit_this) {
 					echo "<td></td><td></td>";
 				} else {

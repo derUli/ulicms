@@ -683,4 +683,6 @@ define ( "TRANSLATION_O_CLOCK", "Uhr" );
 define ( "TRANSLATION_INSTALLATION_FAILED", "Das Paket \"%file%\" konnte nicht installiert werden." );
 define ( "TRANSLATION_NOT_SUPPORTED_FORMAT", "Das Dateiformat wird nicht unterstützt." );
 
+define ( "TRANSLATION_RESTRICT_EDIT_ACCESS", "Bearbeitung beschränken" );
+
 add_hook ( "lang_de" );
