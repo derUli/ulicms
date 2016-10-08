@@ -23,17 +23,26 @@ if (defined ( "_SECURITY" )) {
 		
 		$types = get_available_post_types ();
 		
+		$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
+		$pages_activate_others = $acl->hasPermission ( "pages_activate_others" );
+		
+		$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
+		$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
+		
 		while ( $row = db_fetch_object ( $query ) ) {
 			$list_data = new List_Data ( $row->id );
 			
 			$autor = $row->autor;
+			
 			$is_owner = $autor == get_user_id ();
 			
-			$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
-			$pages_activate_others = $acl->hasPermission ( "pages_activate_others" );
+			$can_active_this = false;
 			
-			$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
-			$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
+			if ($is_owner and $pages_activate_own) {
+				$can_active_this = true;
+			} else if (! $is_owner and $pages_activate_others) {
+				$can_active_this = true;
+			}
 			
 			$owner_data = getUserById ( $autor );
 			$owner_group = $owner_data ["group_id"];
