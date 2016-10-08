@@ -521,7 +521,6 @@ $(window).load(function(){
 			$can_edit_this = false;
 			
 			if ($row->only_group_can_edit or $row->only_admins_can_edit) {
-				
 				if ($row->only_group_can_edit) {
 					if ($owner_group == $current_group) {
 						$can_edit_this = true;
