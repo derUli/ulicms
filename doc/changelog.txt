@@ -2,8 +2,9 @@
 
 + "Passwort wiederholen" Feld zur Userverwaltung hinzugefügt
 + CKEditor auf Version 4.5.11 geupdatet
-- Feld für ICQ-UID entfernt
++ Schreibzugriff auf Seiten kann nun beschränkt werden
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
+- Feld für ICQ-UID entfernt
 
 ===== Neues in UliCMS 9.8.5 =====
 
