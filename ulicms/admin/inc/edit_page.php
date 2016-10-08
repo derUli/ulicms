@@ -62,7 +62,6 @@ if (defined ( "_SECURITY" )) {
 					$can_edit_this = true;
 				}
 			} 
-
 			else {
 				if (! $is_owner and $pages_edit_others) {
 					$can_edit_this = true;
