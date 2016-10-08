@@ -508,21 +508,40 @@ $(window).load(function(){
 				}
 				echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation ( "clone" ) . "\" title=\"" . get_translation ( "clone" ) . "\"></a></td>";
 				
-				$autor = $row->autor;
-				$is_owner = $autor == get_user_id ();
+						$autor = $row->autor;
+			$is_owner = $autor == get_user_id ();
+			
+			$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
+			$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
+			
+			$owner_data = getUserById ( $autor );
+			$owner_group = $owner_data ["group_id"];
+			$current_group = $_SESSION ["group_id"];
+			
+			$can_edit_this = false;
+			
+			if ($row->only_group_can_edit or $row->only_admins_can_edit) {
 				
-				$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
-				$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
-				
-				$can_edit_this = true;
-				
-				if (! $is_owner and ! $pages_edit_others) {
-					$can_edit_this = false;
+				if ($row->only_group_can_edit) {
+					if ($owner_group == $current_group) {
+						$can_edit_this = true;
+					}
 				}
-				
-				if ($row->only_admins_can_edit and ! is_admin ()) {
-					$can_edit_this = false;
+				if ($row->only_admins_can_edit) {
+					if (is_admin ()) {
+						$can_edit_this = true;
+					}
 				}
+			} 
+
+			else {
+				if (! $is_owner and $pages_edit_others) {
+					$can_edit_this = true;
+				} else if ($is_owner and $pages_edit_own) {
+					$can_edit_this = true;
+				}
+			}
+			
 				
 				if (! $can_edit_this) {
 					echo "<td></td><td></td>";

@@ -28,28 +28,36 @@ if (defined ( "_SECURITY" )) {
 			
 			$autor = $row->autor;
 			$is_owner = $autor == get_user_id ();
-			$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
-			$pages_activate_others = $acl->hasPermission ( "pages_activate_others" );
-			
-			$can_active_this = false;
-			
-			if ($is_owner and $pages_activate_own) {
-				$can_active_this = true;
-			} else if (! $is_owner and $pages_activate_others) {
-				$can_active_this = true;
-			}
 			
 			$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
 			$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
 			
-			$can_edit_this = true;
+			$owner_data = getUserById ( $autor );
+			$owner_group = $owner_data ["group_id"];
+			$current_group = $_SESSION ["group_id"];
 			
-			if (! $is_owner and ! $pages_edit_others) {
-				$can_edit_this = false;
-			}
+			$can_edit_this = false;
 			
-			if ($row->only_admins_can_edit and ! is_admin ()) {
-				$can_edit_this = false;
+			if ($row->only_group_can_edit or $row->only_admins_can_edit) {
+				
+				if ($row->only_group_can_edit) {
+					if ($owner_group == $current_group) {
+						$can_edit_this = true;
+					}
+				}
+				if ($row->only_admins_can_edit) {
+					if (is_admin ()) {
+						$can_edit_this = true;
+					}
+				}
+			} 
+
+			else {
+				if (! $is_owner and $pages_edit_others) {
+					$can_edit_this = true;
+				} else if ($is_owner and $pages_edit_own) {
+					$can_edit_this = true;
+				}
 			}
 			
 			if (! $can_edit_this) {
@@ -780,7 +788,12 @@ function openArticleImageSelectWindow(field) {
 			<input type="checkbox" name="only_admins_can_edit"
 				id="only_admins_can_edit" value="1"
 				<?php if($row->only_admins_can_edit) echo "checked";?>> <label
-				for="only_admins_can_edit"><?php translate("admins");?></label>
+				for="only_admins_can_edit"><?php translate("admins");?></label> <br />
+			<input type="checkbox" name="only_group_can_edit"
+				id="only_group_can_edit" value="1"
+				<?php if($row->only_group_can_edit) echo "checked";?>> <label
+				for="only_group_can_edit"><?php translate("group");?></label>
+
 		</div>
 
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
