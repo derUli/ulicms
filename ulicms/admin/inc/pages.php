@@ -521,9 +521,10 @@ $(window).load(function(){
 				} else if (! $is_owner and $pages_edit_others) {
 					$can_edit_this = true;
 				}
-				
 				if ($row->only_admins_can_edit and is_admin ()) {
 					$can_edit_this = true;
+				} else if ($row->only_admins_can_edit and ! is_admin ()) {
+					$can_edit_this = false;
 				}
 				
 				if (! $can_edit_this) {

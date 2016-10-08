@@ -52,6 +52,8 @@ if (defined ( "_SECURITY" )) {
 			
 			if ($row->only_admins_can_edit and is_admin ()) {
 				$can_edit_this = true;
+			} else if ($row->only_admins_can_edit and ! is_admin ()) {
+				$can_edit_this = false;
 			}
 			
 			if (! $can_edit_this) {
