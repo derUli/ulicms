@@ -127,8 +127,7 @@ if (defined ( "_SECURITY" )) {
 			
 			translate ( "homepage" );
 			?></strong> <br /> <input type="url" name="homepage"
-		value="<?php echo real_htmlspecialchars($row -> homepage);?>"> <br />
-	<br /> <strong><?php
+		value="<?php echo $row -> homepage?>"> <br /> <br /> <strong><?php
 			
 			translate ( "twitter_profile" );
 			?></strong> <br /> <input type="text" name="twitter"
