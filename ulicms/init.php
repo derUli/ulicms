@@ -235,40 +235,6 @@ if (! $select) {
 	throw new Exception ( "Fehler: Die Datenbank " . $config->db_database . " existiert nicht.\n" );
 }
 
-$existing_tables = array ();
-if (! defined ( "SKIP_TABLE_CHECK" )) {
-	$existing_tables = Database::getAllTables ();
-	$required_tables = array (
-			tbname ( "users" ),
-			tbname ( "banner" ),
-			tbname ( "categories" ),
-			tbname ( "content" ),
-			tbname ( "groups" ),
-			tbname ( "installed_patches" ),
-			tbname ( "videos" ),
-			tbname ( "audio" ),
-			tbname ( "languages" ),
-			tbname ( "log" ),
-			tbname ( "mails" ),
-			tbname ( "history" ),
-			tbname ( "settings" ),
-			tbname ( "forms" ),
-			tbname ( "lists" )
-	);
-
-	for($i = 0; $i < count ( $required_tables ); $i ++) {
-		$table = $required_tables [$i];
-		if (! in_array ( $table, $existing_tables )) {
-			if (! headers_sent ()) {
-				header ( "Content-Type: text/html; charset=UTF-8" );
-			}
-
-			throw new Exception ( "Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!" );
-			exit ();
-		}
-	}
-}
-
 $useragent = Settings::get ( "useragent" );
 if ($useragent) {
 	define ( "ULICMS_USERAGENT", $useragent );
@@ -288,10 +254,8 @@ if ($memory_limit !== false) {
 	@ini_set ( 'memory_limit', $memory_limit );
 }
 
-if (in_array ( tbname ( "log" ), $existing_tables )) {
-	$log_ip = Settings::get ( "log_ip" );
-	log_request ( $log_ip );
-}
+$log_ip = Settings::get ( "log_ip" );
+log_request ( $log_ip );
 
 $cache_period = Settings::get ( "cache_period" );
 
@@ -304,33 +268,6 @@ if ($cache_period === false) {
 	define ( "CACHE_PERIOD", $cache_period );
 }
 
-// check four allowed_html config var
-// if not exists create with default value
-if (! Settings::get ( "allowed_html" )) {
-	setconfig ( "allowed_html", "<i><u><b><strong><em><ul><li><ol><a><span>" );
-}
-
-// generate Secret for Google Authenticator if not already done
-$ga_secret = Settings::get ( "ga_secret" );
-if (! $ga_secret) {
-	require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
-	$ga = new PHPGangsta_GoogleAuthenticator ();
-	$ga_secret = $ga->createSecret ();
-	setconfig ( "ga_secret", Database::escapeValue ( $ga_secret ) );
-}
-
-// Falls nicht gesetzt, robots auf Standardwert setzen
-if (! Settings::get ( "robots" )) {
-	setconfig ( "robots", "index,follow" );
-}
-
-// Prüfen ob Zeitzone gesetzt ist
-$timezone = Settings::get ( "timezone" );
-
-// Wenn nicht, Zeitzone auf Standardwert setzen
-if (! $timezone) {
-	setconfig ( "timezone", "Europe/Berlin" );
-}
 date_default_timezone_set ( Settings::get ( "timezone" ) );
 
 if (isset ( $_GET ["output_scripts"] )) {
@@ -346,11 +283,7 @@ if ($locale) {
 	@call_user_func_array ( "setlocale", $locale );
 }
 
-if (! Settings::get ( "session_timeout" )) {
-	setconfig ( "session_timeout", 60 );
-}
-
-$session_timeout = 60 * Settings::get ( "session_timeout" );
+$session_timeout = 60 * intval ( Settings::get ( "session_timeout" ) );
 
 // Session abgelaufen
 if (isset ( $_SESSION ["session_begin"] )) {
@@ -370,27 +303,6 @@ if (! is_ssl () and $enforce_https !== false) {
 	exit ();
 }
 
-if (! Settings::get ( "disable_hsts" ) and is_ssl ()) {
-	$maxage = Settings::get ( "hsts_maxage" );
-	if ($maxage === false) {
-		$maxage = 10 * 30;
-	}
-
-	$maxage = intval ( $maxage );
-
-	$includeSubDomains = Settings::get ( "hsts_include_subdomains" );
-	if (! $includeSubDomains) {
-		$includeSubDomains = "";
-	}
-	$str = "Strict-Transport-Security: max-age=" . $maxage;
-	if (! empty ( $includeSubDomains )) {
-		$str .= "; " . $includeSubDomains;
-	}
-
-	$str = trim ( $str );
-	header ( $str );
-}
-
 add_hook ( "before_init" );
 add_hook ( "init" );
 add_hook ( "after_init" );
@@ -401,13 +313,9 @@ if (! defined ( "UPDATE_CHECK_URL" )) {
 	define ( "UPDATE_CHECK_URL", "http://update.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&update=" . urlencode ( $version->getUpdate () ) );
 }
 
-if (in_array ( tbname ( "installed_patches" ), $existing_tables )) {
-	$pkg = new PackageManager ();
-	$installed_patches = $pkg->getInstalledPatchNames ();
-	$installed_patches = implode ( ";", $installed_patches );
-} else {
-	$installed_patches = "";
-}
+$pkg = new PackageManager ();
+$installed_patches = $pkg->getInstalledPatchNames ();
+$installed_patches = implode ( ";", $installed_patches );
 
 if (! defined ( "PATCH_CHECK_URL" )) {
 	define ( "PATCH_CHECK_URL", "http://patches.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&installed_patches=" . urlencode ( $installed_patches ) );

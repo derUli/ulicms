@@ -148,6 +148,14 @@ class InstallerController {
 				$salt = uniqid ();
 				$_SESSION ["salt"] = $salt;
 			}
+			
+			if (! isset ( $_SESSION ["ga_secret"] )) {
+				require_once "../classes/GoogleAuthenticator.php";
+				$ga = new PHPGangsta_GoogleAuthenticator ();
+				$ga_secret = $ga->createSecret ();
+				$_SESSION ["ga_secret"] = $ga_secret;
+			}
+			
 			if (! isset ( $_SESSION ["encrypted_password"] )) {
 				$_SESSION ["encrypted_password"] = hash ( "sha512", $_SESSION ["salt"] . $_SESSION ["admin_password"] );
 			}
@@ -166,6 +174,7 @@ class InstallerController {
 			$script = str_ireplace ( "{admin_user}", $admin_user, $script );
 			$script = str_ireplace ( "{encrypted_password}", $encrypted_password, $script );
 			$script = str_ireplace ( "{salt}", $salt, $script );
+			$script = str_ireplace ( "{ga_secret}", $_SESSION ["ga_secret"], $script );
 			$script = str_ireplace ( "{admin_lastname}", $admin_lastname, $script );
 			$script = str_ireplace ( "{admin_firstname}", $admin_firstname, $script );
 			$script = str_ireplace ( "{admin_email}", $admin_email, $script );
