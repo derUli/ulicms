@@ -1320,8 +1320,10 @@ function getAllModules() {
 	$pkg = new PackageManager ();
 	return $pkg->getInstalledPackages ( 'modules' );
 }
-function no_cache() {
-	if (get_cache_control () == "auto" || get_cache_control () == "no_cache") {
+function no_cache($do = false) {
+	if ($do) {
+		Flags::setNoCache ( true );
+	} else if (get_cache_control () == "auto" || get_cache_control () == "no_cache") {
 		Flags::setNoCache ( true );
 	}
 }
