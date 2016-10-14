@@ -25,6 +25,7 @@ if (isset ( $_POST ["login"] )) {
 		add_hook ( "login_ok" );
 		register_session ( $sessionData, true );
 	} else {
+		@header ( 'HTTP/1.0 403 Forbidden' );
 		add_hook ( "login_failed" );
 	}
 }
