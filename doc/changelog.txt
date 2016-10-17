@@ -3,6 +3,7 @@
 + "Passwort wiederholen" Feld zur Userverwaltung hinzugefügt
 + CKEditor auf Version 4.5.11 geupdatet
 + Schreibzugriff auf Seiten kann nun beschränkt werden
++ Es wird nun curl als bevorzugte Methode zum Downloaden von Dateien verwedendet
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
