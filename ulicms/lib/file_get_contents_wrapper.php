@@ -40,7 +40,7 @@ function file_get_contents_wrapper($url, $no_cache = false) {
 		if (function_exists ( "curl_init" ) and is_url ( $url )) {
 			$content = file_get_contents_curl ( $url );
 		}
-		else if (ini_get ( "allow_url_fopen" ) or ! is_url ( $url )) {
+		else if (ini_get ( "allow_url_fopen" )) {
 			$content = file_get_contents ( $url );
 	}
 	if ($content) {
