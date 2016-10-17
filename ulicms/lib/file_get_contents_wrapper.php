@@ -25,10 +25,8 @@ function is_url($url) {
 	return false;
 }
 
-// Wrapper um file_get_contents
-// Falls allow_url_fopen deaktiviert ist,
-// wird CURL alls Fallback genutzt, falls vorhanden.
-// Ansonsten wird false zurückgegeben.
+// Nutze curl zum Download der Datei, sofern verfügbar
+// Ansonsten Fallback auf file_get_contents
 function file_get_contents_wrapper($url, $no_cache = false) {
 	if (! is_url ( $url )) {
 		return file_get_contents ( $url );
@@ -43,7 +41,7 @@ function file_get_contents_wrapper($url, $no_cache = false) {
 			$content = file_get_contents_curl ( $url );
 		}
 		else if (ini_get ( "allow_url_fopen" ) or ! is_url ( $url )) {
-		$content = file_get_contents ( $url );
+			$content = file_get_contents ( $url );
 	}
 	if ($content) {
 		if (is_dir ( $cache_folder ) and is_url ( $url ) and ! $no_cache)
