@@ -1,22 +1,25 @@
 <?php
-if (! defined ( "ULICMS_ROOT" ))
-	die ( "Dummer Hacker!" );
+$acl = new ACL();
 
-$id = intval ( $_REQUEST ["edit"] );
-$acl = new ACL ();
-$all_permissions = $acl->getPermissionQueryResult ( $id );
-$groupName = real_htmlspecialchars ( $all_permissions ["name"] );
-$all_permissions_all = $acl->getDefaultACL ( false, true );
-$all_permissions = json_decode ( $all_permissions ["permissions"], true );
-foreach ( $all_permissions_all as $name => $value ) {
-	if (! isset ( $all_permissions [$name] )) {
-		$all_permissions [$name] = $value;
+if (! $acl->hasPermission ( "forms" ) or !$acl->hasPermission ( "forms_edit" )) {
+   noperms();	
+} else {
+
+	$id = intval ( $_REQUEST ["edit"] );
+	$acl = new ACL ();
+	$all_permissions = $acl->getPermissionQueryResult ( $id );
+	$groupName = real_htmlspecialchars ( $all_permissions ["name"] );
+	$all_permissions_all = $acl->getDefaultACL ( false, true );
+	$all_permissions = json_decode ( $all_permissions ["permissions"], true );
+	foreach ( $all_permissions_all as $name => $value ) {
+		if (! isset ( $all_permissions [$name] )) {
+			$all_permissions [$name] = $value;
+		}
 	}
-}
 
-ksort ( $all_permissions );
+	ksort ( $all_permissions );
 
-if ($all_permissions) {
+	if ($all_permissions) {
 	
 	?>
 <form action="?action=groups" method="post">
@@ -105,4 +108,7 @@ else {
 	?>
 <p style="color: red">Diese Gruppe ist nicht vorhanden.</p>
 <?php
+}
+
+
 }

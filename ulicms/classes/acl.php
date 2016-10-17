@@ -131,6 +131,8 @@ class ACL {
 		$acl_data ["banners"] = null;
 		$acl_data ["categories"] = null;
 		$acl_data ["forms"] = null;
+		$acl_data ["forms_create"] = null;
+		$acl_data ["forms_edit"] = null;
 		
 		// Medien
 		$acl_data ["images"] = null;

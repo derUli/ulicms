@@ -38,9 +38,11 @@ tr.odd input#form-submit-url {
 }
 </style>
 <h1><?php translate("forms"); ?></h1>
+ <?php if($acl->hasPermission ( "forms_create" )){ ?>
 <p>
 	<a href="index.php?action=forms_new"><?php translate("create_form");?></a>
 </p>
+ <?php }?>
 <table id="form-list" class="tablesorter">
 	<thead>
 		<tr>
