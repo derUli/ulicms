@@ -10,6 +10,8 @@
 
 Neue Berechtigungen hinzugefügt:
 + pages_create
++ forms_create
++ forms_edit
 
 ===== Neues in UliCMS 9.8.5 =====
 

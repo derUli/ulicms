@@ -50,8 +50,10 @@ tr.odd input#form-submit-url {
 			<th><?php translate("name");?></th>
 			<th><?php translate("email_to");?></th>
 			<th><?php translate("submit_form_url");?></th>
+			<?php if($acl->hasPermission ( "forms_edit" )){ ?>
 			<td style="font-weight: bold; text-align: center"><?php translate("edit");?></td>
 			<td style="font-weight: bold; text-align: center"><?php translate("delete");?></td>
+			<?php }?>
 		</tr>
 	</thead>
 	<tbody>
@@ -66,6 +68,8 @@ tr.odd input#form-submit-url {
 			<td><input id="form-submit-url" type="text" readonly
 				value="<?php echo htmlspecialchars($submit_form_url);?>"
 				onclick="this.select();"></td>
+				
+			<?php if($acl->hasPermission ( "forms_edit" )){ ?>
 			<td style="text-align: center;"><a
 				href="?action=forms_edit&id=<?php
 		echo $form ["id"];
@@ -82,6 +86,7 @@ tr.odd input#form-submit-url {
 						class="mobile-big-image" src="gfx/delete.gif"
 						alt="<?php translate("delete");?>"
 						title="<?php translate("delete");?>">
+			<?php }?>
 				</form>
 			</td>
 		</tr>

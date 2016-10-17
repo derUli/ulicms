@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL ();
-if (! $acl->hasPermission ( "forms" )) {
+if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_edit" )) {
 	noperms ();
 } else {
 	require_once ULICMS_ROOT . "/classes/forms.php";
