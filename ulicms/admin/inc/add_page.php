@@ -2,7 +2,7 @@
 	if (defined ( "_SECURITY" )) {
 		$acl = new ACL ();
 		$groups = db_query ( "SELECT id, name from " . tbname ( "groups" ) );
-		if ($acl->hasPermission ( "pages" )) {
+		if ($acl->hasPermission ( "pages" ) and $acl->hasPermission("pages_create")) {
 			
 			$allThemes = getThemesList ();
 			$cols = Database::getColumnNames ( "content" );

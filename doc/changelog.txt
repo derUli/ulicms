@@ -1,4 +1,4 @@
-===== Neues in UliCMS 9.8.6 =====
+﻿===== Neues in UliCMS 9.8.6 =====
 
 + "Passwort wiederholen" Feld zur Userverwaltung hinzugefügt
 + CKEditor auf Version 4.5.11 geupdatet
@@ -7,6 +7,9 @@
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
+
+Neue Berechtigungen hinzugefügt:
++ pages_create
 
 ===== Neues in UliCMS 9.8.5 =====
 

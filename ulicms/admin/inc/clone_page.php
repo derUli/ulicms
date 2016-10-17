@@ -2,7 +2,7 @@
 include_once ULICMS_ROOT . "/classes/vcs.php";
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
-	if ($acl->hasPermission ( "pages" )) {
+	if ($acl->hasPermission ( "pages" ) and $acl->hasPermission("pages_create")) {
 		$page = intval ( $_GET ["page"] );
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE id='$page'" );
 		
