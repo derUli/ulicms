@@ -129,6 +129,8 @@ class ACL {
 		// Inhalte
 		$acl_data ["pages"] = null;
 		$acl_data ["banners"] = null;
+		$acl_data ["banners_create"] = null;
+		$acl_data ["banners_edit"] = null;
 		$acl_data ["categories"] = null;
 		$acl_data ["forms"] = null;
 		$acl_data ["forms_create"] = null;
