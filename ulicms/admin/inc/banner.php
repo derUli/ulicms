@@ -3,18 +3,19 @@ if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "banners" )) {
 		
-		if (! isset ( $_SESSION ["filter_category"] ))
+		if (! isset ( $_SESSION ["filter_category"] )) {
 			$_SESSION ["filter_category"] = 0;
+		}
 		
-		if (isset ( $_GET ["filter_category"] ))
+		if (isset ( $_GET ["filter_category"] )) {
 			$_SESSION ["filter_category"] = intval ( $_GET ["filter_category"] );
-		
+		}
 		$sql = "SELECT * FROM " . tbname ( "banner" ) . " ";
-		if ($_SESSION ["filter_category"] == 0)
+		if ($_SESSION ["filter_category"] == 0) {
 			$sql .= "WHERE 1=1 ";
-		else
+		} else {
 			$sql .= "WHERE category=" . $_SESSION ["filter_category"] . " ";
-		
+		}
 		$sql .= "ORDER BY id";
 		$query = db_query ( $sql );
 		
@@ -35,8 +36,11 @@ $(window).load(function(){
 </h2>
 <p>
 <?php translate("advertisement_infotext");?>
-	<br /> <br /> <a href="index.php?action=banner_new"><?php translate("add_advertisement");?>
+	<?php
+		if ($acl->hasPermission ( "banners_create" )) {
+			?><br /> <br /> <a href="index.php?action=banner_new"><?php translate("add_advertisement");?>
 	</a><br />
+	<?php }?>
 </p>
 <p>
 <?php translate("category");?>
@@ -55,16 +59,18 @@ $(window).load(function(){
 			</th>
 			<th><?php translate("language");?>
 			</th>
+			<?php if ($acl->hasPermission ( "banners_edit" )) {?>
 			<td><?php
-		
-		translate ( "edit" );
-		?>
+			
+			translate ( "edit" );
+			?>
 			</td>
 			<td><?php
-		
-		translate ( "delete" );
-		?>
+			
+			translate ( "delete" );
+			?>
 			</td>
+				<?php }?>
 		</tr>
 	</thead>
 	<tbody>
@@ -89,9 +95,10 @@ $(window).load(function(){
 				} else {
 					echo '<td>' . getLanguageNameByCode ( $row->language ) . "</td>";
 				}
-				echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
-				echo "<td style='text-align:center;'>" . '<form action="index.php?action=banner_delete&banner=' . $row->id . '" method="post" onsubmit="return confirm(\'Wirklich löschen?\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . get_translation ( "delete" ) . '"></form></td>';
-				
+				if ($acl->hasPermission ( "banners_edit" )) {
+					echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
+					echo "<td style='text-align:center;'>" . '<form action="index.php?action=banner_delete&banner=' . $row->id . '" method="post" onsubmit="return confirm(\'Wirklich löschen?\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . get_translation ( "delete" ) . '"></form></td>';
+				}
 				echo '</tr>';
 			}
 		}

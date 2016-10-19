@@ -1,7 +1,7 @@
 <?php
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
-	if ($acl->hasPermission ( "banners" )) {
+	if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )) {
 		$banner = db_escape ( $_GET ["banner"] );
 		$query = db_query ( "SELECT * FROM " . tbname ( "banner" ) . " WHERE id='$banner'" );
 		while ( $row = db_fetch_object ( $query ) ) {
@@ -19,8 +19,7 @@ if (defined ( "_SECURITY" )) {
 			if ($row->type == "gif") {
 				?>
 				<p>
-		<a
-			href="<?php
+		<a href="<?php
 				
 				Template::escape ( $row->link_url );
 				?>"
@@ -36,8 +35,7 @@ if (defined ( "_SECURITY" )) {
 			alt="<?php
 				
 				Template::escape ( $row->name );
-				?>"
-			border=0> </a>
+				?>" border=0> </a>
 	</p>
 
 	<?php

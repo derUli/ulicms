@@ -12,6 +12,8 @@ Neue Berechtigungen hinzugefügt:
 + pages_create
 + forms_create
 + forms_edit
++ banners_create
++ banners_delete
 
 ===== Neues in UliCMS 9.8.5 =====
 
