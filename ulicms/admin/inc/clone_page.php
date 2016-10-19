@@ -672,7 +672,7 @@ function openArticleImageSelectWindow(field) {
 					style="cursor: pointer" maxlength="255" /><br /> <a href="#"
 					onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 			</div>
-		</div>
+		</div><?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 		<div class="accordion-content">
 

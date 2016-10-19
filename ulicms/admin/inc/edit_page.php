@@ -814,7 +814,7 @@ function openArticleImageSelectWindow(field) {
 				
 
 		</div>
-
+<?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
 		<div class="accordion-content">

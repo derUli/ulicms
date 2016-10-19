@@ -4,6 +4,8 @@
 + CKEditor auf Version 4.5.11 geupdatet
 + Schreibzugriff auf Seiten kann nun beschränkt werden
 + Bevorzuge nun curl als Methode um Dateien herunterzuladen
++ Filter custom_post_types hinzugefügt
++ Hook before_custom_data_json hinzugefügt
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
