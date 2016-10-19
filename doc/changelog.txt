@@ -6,7 +6,7 @@
 + Bevorzuge nun curl als Methode um Dateien herunterzuladen
 + Filter custom_post_types hinzugefügt
 + Hook before_custom_data_json hinzugefügt
-+ Beim ändern der Sprache einer Seite wird nun die Liste der übergeordneten Seiten nach Sprache gefiltert
++ Feld "Übergeordnete Seite" wird nun gefiltert nach Menü und Sprache (Seitenverwaltung)
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
