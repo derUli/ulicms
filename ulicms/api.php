@@ -374,7 +374,6 @@ function strbool($value) {
 
 // @TODO : Post Types implementieren.
 function get_available_post_types() {
-	global $post_types;
 	$post_types = array (
 			"page",
 			"article",
@@ -385,7 +384,7 @@ function get_available_post_types() {
 			"video",
 			"audio" 
 	);
-	add_hook ( $post_types );
+	$post_types = apply_filter($post_types, "custom_post_types");
 	
 	return $post_types;
 }
