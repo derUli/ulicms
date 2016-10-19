@@ -384,7 +384,7 @@ function get_available_post_types() {
 			"video",
 			"audio" 
 	);
-	$post_types = apply_filter($post_types, "custom_post_types");
+	$post_types = apply_filter ( $post_types, "custom_post_types" );
 	
 	return $post_types;
 }
@@ -1532,12 +1532,20 @@ function getAllPagesWithTitle() {
 }
 
 // Get all pages
-function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = true) {
+function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = true, $menu = null) {
 	if (! $lang) {
-		$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL ORDER BY $order" );
+		if (! $menu) {
+			$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL ORDER BY $order" );
+		} else {
+			$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL and menu = '" . Database::escapeValue ( $menu ) . "' ORDER BY $order" );
+		}
 	} else {
 		
-		$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape ( $lang ) . "' ORDER BY $order" );
+		if (! $menu) {
+			$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape ( $lang ) . "' ORDER BY $order" );
+		} else {
+			$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape ( $lang ) . "' and menu = '" . Database::escapeValue ( $menu ) . "' ORDER BY $order" );
+		}
 	}
 	$returnvalues = Array ();
 	while ( $row = db_fetch_assoc ( $query ) ) {

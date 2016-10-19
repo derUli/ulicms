@@ -149,26 +149,33 @@ function systemnameOrLanguageChanged(item) {
 
 }
 
-$(function() {
+function filterParentPages() {
+	var data = {
+		ajax_cmd : "getPageListByLang",
+		mlang : $("select[name='language']").val(),
+		mmenu : $("select[name='menu']").val()
+	};
 
+	$.post("index.php", data, function(text, status) {
+		$("select[name='parent']").html(text);
+	});
+}
+
+$(function() {
 	$("input[name='system_title']").keyup(function() {
 		systemnameOrLanguageChanged($(this));
+	});
+	$("select[name='menu']").change(function() {
+		filterParentPages();
 	});
 
 	$("select[name='language']").change(function() {
 		systemnameOrLanguageChanged($(this));
-
-		var data = {
-			ajax_cmd : "getPageListByLang",
-			mlang : $("select[name='language']").val()
-		};
-
-		$.post("index.php", data, function(text, status) {
-			$("select[name='parent']").html(text);
-		});
-
+		filterParentPages();
 	});
 
 	systemnameOrLanguageChanged($("input[name='system_title']"));
 	systemnameOrLanguageChanged($("select[name='language']"));
+
+	filterParentPages();
 });
