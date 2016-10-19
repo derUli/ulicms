@@ -153,7 +153,8 @@ function filterParentPages() {
 	var data = {
 		ajax_cmd : "getPageListByLang",
 		mlang : $("select[name='language']").val(),
-		mmenu : $("select[name='menu']").val()
+		mmenu : $("select[name='menu']").val(),
+		mparent : $("select[name='parent']").val()
 	};
 
 	$.post("index.php", data, function(text, status) {

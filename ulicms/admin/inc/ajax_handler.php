@@ -22,7 +22,7 @@ function checkIfSystemnameIsFree($systemname, $language, $id) {
 	$result = Database::query ( $sql );
 	return (Database::getNumRows ( $result ) <= 0);
 }
-function ajaxOnChangeLanguage($lang, $menu) {
+function ajaxOnChangeLanguage($lang, $menu, $parent) {
 	?>
 <option selected="selected" value="NULL">
 			[
@@ -39,7 +39,7 @@ function ajaxOnChangeLanguage($lang, $menu) {
 <option value="<?php
 		
 		echo $page ["id"];
-		?>">
+		?>" <?php if($page["id"] == $parent) echo "selected";?>>
 				<?php
 		
 		echo $page ["title"];
@@ -82,7 +82,7 @@ switch ($ajax_cmd) {
 		sendChatMessage ();
 		break;
 	case "getPageListByLang" :
-		ajaxOnChangeLanguage ( $_REQUEST ["mlang"], $_REQUEST ["mmenu"] );
+		ajaxOnChangeLanguage ( $_REQUEST ["mlang"], $_REQUEST ["mmenu"], $_REQUEST ["mparent"] );
 		break;
 	default :
 		echo "Unknown Call";
