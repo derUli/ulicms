@@ -157,6 +157,16 @@ $(function() {
 
 	$("select[name='language']").change(function() {
 		systemnameOrLanguageChanged($(this));
+
+		var data = {
+			ajax_cmd : "getPageListByLang",
+			mlang : $("select[name='language']").val()
+		};
+
+		$.post("index.php", data, function(text, status) {
+			$("select[name='parent']").html(text);
+		});
+
 	});
 
 	systemnameOrLanguageChanged($("input[name='system_title']"));
