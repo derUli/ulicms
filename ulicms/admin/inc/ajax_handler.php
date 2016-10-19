@@ -28,7 +28,7 @@ function ajaxOnChangeLanguage($lang, $menu) {
 			[
 			<?php
 	
-	translate ( "every" );
+	translate ( "none" );
 	?>
 			]
 		</option>

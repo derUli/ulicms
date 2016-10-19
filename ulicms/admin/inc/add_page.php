@@ -2,7 +2,7 @@
 	if (defined ( "_SECURITY" )) {
 		$acl = new ACL ();
 		$groups = db_query ( "SELECT id, name from " . tbname ( "groups" ) );
-		if ($acl->hasPermission ( "pages" ) and $acl->hasPermission("pages_create")) {
+		if ($acl->hasPermission ( "pages" ) and $acl->hasPermission ( "pages_create" )) {
 			
 			$allThemes = getThemesList ();
 			$cols = Database::getColumnNames ( "content" );
@@ -95,7 +95,8 @@
 		<?php
 			foreach ( getAllMenus () as $menu ) {
 				?>
-		<option value="<?php echo $menu?>">
+		<option value="<?php echo $menu?>"
+					<?php if($menu == "top") echo "selected";?>>
 		<?php translate ( $menu );?></option>
 		<?php
 			}
@@ -251,8 +252,8 @@ function openMenuImageSelectWindow(field) {
 					<br /> <br /> <strong><?php translate("article_date");?></strong><br />
 					<input name="article_date" type="datetime-local"
 						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
-					<strong><?php translate("excerpt");?></strong> <textarea
-						name="excerpt" rows="5" cols="80"></textarea>
+					<strong><?php translate("excerpt");?></strong>
+					<textarea name="excerpt" rows="5" cols="80"></textarea>
 				</div>
 			</div>
 
@@ -362,7 +363,7 @@ function openMenuImageSelectWindow(field) {
 		<?php
 			foreach ( getAllMenus () as $menu ) {
 				?>
-		<option value="<?php echo $menu?>">
+		<option value="<?php echo $menu;?>">
 		<?php
 				
 				translate ( $menu );
