@@ -11,34 +11,54 @@ function sendChatMessage() {
 		return;
 	}
 }
-
-function checkIfSystemnameIsFree($systemname, $language, $id){
-	$systemname = Database::escapeValue($systemname);
-	$language = Database::escapeValue($language);
-	$id = intval($id);
-	$sql = "SELECT id FROM ".tbname("content"). " where systemname='$systemname' and language = '$language' ";
-	if($id > 0){
+function checkIfSystemnameIsFree($systemname, $language, $id) {
+	$systemname = Database::escapeValue ( $systemname );
+	$language = Database::escapeValue ( $language );
+	$id = intval ( $id );
+	$sql = "SELECT id FROM " . tbname ( "content" ) . " where systemname='$systemname' and language = '$language' ";
+	if ($id > 0) {
 		$sql .= "and id <> $id";
 	}
-	$result = Database::query($sql);
-	return (Database::getNumRows($result) <= 0);
+	$result = Database::query ( $sql );
+	return (Database::getNumRows ( $result ) <= 0);
 }
-
+function ajaxOnChangeLanguage($lang) {
+	$pages = getAllPages ( $lang, "title", false );
+	foreach ( $pages as $key => $page ) {
+		?>
+<option value="<?php
+		
+		echo $page ["id"];
+		?>">
+				<?php
+		
+		echo $page ["title"];
+		?>
+				(ID:
+				<?php
+		
+		echo $page ["id"];
+		?>
+				)
+			</option>
+<?php
+	}
+}
 
 $ajax_cmd = $_REQUEST ["ajax_cmd"];
 
 switch ($ajax_cmd) {
-	case "check_if_systemname_is_free":
-	    if(checkIfSystemnameIsFree($_REQUEST["systemname"], $_REQUEST["language"], intval($_REQUEST["id"]))){
+	case "check_if_systemname_is_free" :
+		if (checkIfSystemnameIsFree ( $_REQUEST ["systemname"], $_REQUEST ["language"], intval ( $_REQUEST ["id"] ) )) {
 			echo "yes";
 		}
-	break;
-	case "core_update_check":
+		break;
+	case "core_update_check" :
 		include "inc/ajax_core_update_check.php";
-	break;
-	case "ajax_patch_check":
-	include "inc/ajax_patch_check.php";
-	break;
+		break;
+	case "ajax_patch_check" :
+		include "inc/ajax_patch_check.php";
+		break;
 	case "users_online" :
 		include "inc/users_online.php";
 		break;
@@ -50,6 +70,9 @@ switch ($ajax_cmd) {
 		break;
 	case "sendChatMessage" :
 		sendChatMessage ();
+		break;
+	case "getPageListByLang" :
+		ajaxOnChangeLanguage ( $_REQUEST ["mlang"] );
 		break;
 	default :
 		echo "Unknown Call";
