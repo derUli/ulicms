@@ -91,11 +91,12 @@ if (! $eingeloggt) {
 	
 	require_once "inc/adminmenu.php";
 	
-	add_hook ( "register_actions" );
-	
 	$pkg = new PackageManager ();
 	
 	global $actions;
+	$actions = array ();
+	
+	add_hook ( "register_actions" );
 	if ($_SESSION ["require_password_change"]) {
 		require_once "inc/change_password.php";
 	} else if ($_GET ["action"] == "" || $_GET ["action"] == "home") {
@@ -250,7 +251,7 @@ if (! $eingeloggt) {
 		include_once "inc/do-post-install.php";
 	} else if ($_GET ["action"] == "pkginfo") {
 		include_once "inc/pkginfo.php";
-	} else if ($_GET ["action"] = "sin-package-install-ok") {
+	} else if ($_GET ["action"] == "sin-package-install-ok") {
 		include_once "inc/sin-package-install-ok.php";
 	} else if (isset ( $actions [$_GET ["action"]] )) {
 		include_once $actions [$_GET ["action"]];
