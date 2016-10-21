@@ -18,6 +18,9 @@ Neue Berechtigungen hinzugefügt:
 + banners_create
 + banners_delete
 
+Bugfix:
+# file_get_contents_curl() akzeptiert nun auch HTTP Status 302
+
 ===== Neues in UliCMS 9.8.5 =====
 
 Neue Features für Endanwender
