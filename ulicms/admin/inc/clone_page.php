@@ -2,7 +2,7 @@
 include_once ULICMS_ROOT . "/classes/vcs.php";
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
-	if ($acl->hasPermission ( "pages" ) and $acl->hasPermission("pages_create")) {
+	if ($acl->hasPermission ( "pages" ) and $acl->hasPermission ( "pages_create" )) {
 		$page = intval ( $_GET ["page"] );
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE id='$page'" );
 		
@@ -83,12 +83,7 @@ if (defined ( "_SECURITY" )) {
 			
 			$pages = getAllPages ( $page_language, "title", false );
 			?>
-	</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
-	<?php
-			echo categories::getHTMLSelect ( $row->category );
-			?>
-
-	<br /> <br /> <strong><?php translate("menu");?> </strong> <span
+	</select> <br /> <br /> <strong><?php translate("menu");?> </strong> <span
 				style="cursor: help;" onclick="$('div#menu_help').slideToggle()">[?]</span><br />
 			<select name="menu" size=1>
 		<?php
@@ -176,7 +171,10 @@ if (defined ( "_SECURITY" )) {
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
 				<?php translate("disabled");?>
 				</option>
-			</select>
+			</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
+	<?php
+			echo categories::getHTMLSelect ( $row->category );
+			?>
 		</div>
 		<div id="tab-link">
 			<h2 class="accordion-header"><?php translate("external_redirect");?></h2>

@@ -85,10 +85,7 @@
 			
 			$pages = getAllPages ( $default_language, "title", false );
 			?>
-	</select> <br /> <br /> <strong><?php translate("category");?>
-	</strong><br />
-	<?php echo categories :: getHTMLSelect()?>
-	<br /> <br /> <strong><?php translate("menu");?>
+	</select><br /> <br /> <strong><?php translate("menu");?>
 	</strong> <span style="cursor: help;"
 				onclick="$('div#menu_help').slideToggle()">[?]</span><br /> <select
 				name="menu" size=1>
@@ -151,7 +148,10 @@
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
 		<?php translate("disabled");?>
 		</option>
-			</select>
+			</select> <br /> <br /><strong><?php translate("category");?>
+	</strong><br />
+	<?php echo categories :: getHTMLSelect();?>
+	
 		</div>
 		<div id="tab-link" style="display: none;">
 			<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
@@ -252,8 +252,8 @@ function openMenuImageSelectWindow(field) {
 					<br /> <br /> <strong><?php translate("article_date");?></strong><br />
 					<input name="article_date" type="datetime-local"
 						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
-					<strong><?php translate("excerpt");?></strong>
-					<textarea name="excerpt" rows="5" cols="80"></textarea>
+					<strong><?php translate("excerpt");?></strong> <textarea
+						name="excerpt" rows="5" cols="80"></textarea>
 				</div>
 			</div>
 
