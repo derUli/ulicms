@@ -132,6 +132,8 @@ class ACL {
 		$acl_data ["banners_create"] = null;
 		$acl_data ["banners_edit"] = null;
 		$acl_data ["categories"] = null;
+		$acl_data ["categories_create"] = null;
+		$acl_data ["categories_edit"] = null;
 		$acl_data ["forms"] = null;
 		$acl_data ["forms_create"] = null;
 		$acl_data ["forms_edit"] = null;
@@ -172,7 +174,6 @@ class ACL {
 		
 		$acl_data ["export"] = null;
 		$acl_data ["import"] = null;
-		
 		$acl_data ["info"] = null;
 		
 		// Workflows

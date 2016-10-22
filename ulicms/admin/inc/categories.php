@@ -32,17 +32,18 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 			"description",
 			"created",
 			"updated" 
-	) ))
+	) )) {
 		$order = db_escape ( $_GET ["order"] );
-	else
+	} else {
 		$order = "id";
+	}
 	
 	$categories = categories::getAllCategories ( $order );
 	
 	?>
 
 			<?php
-	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] )) {
+	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] ) and $acl->hasPermission ( "categories_create" )) {
 		?>
 
 <h2>
@@ -71,8 +72,12 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 			<th style="min-width: 200px;"><a href="?action=categories&order=name"><?php translate("name");?></a></th>
 			<th style="min-width: 200px;"><a
 				href="?action=categories&order=description"><?php translate("description");?> </a></th>
+				<?php
+		if ($acl->hasPermission ( "categories_edit" )) {
+			?>
 			<td></td>
 			<td></td>
+			<?php }?>
 		</tr>
 
 	</thead>
@@ -94,51 +99,54 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 			
 			echo nl2br ( real_htmlspecialchars ( $category ["description"] ) );
 			?></td>
+			<?php
+			if ($acl->hasPermission ( "categories_edit" )) {
+				?>
 			<td style="text-align: center;"><a
 				href="?action=categories&edit=<?php echo $category ["id"];?>"><img
 					src="gfx/edit.png" class="mobile-big-image"
 					alt="<?php translate("edit");?>" title="<?php translate("edit");?>"></a></td>
 			<?php
-			
-			if ($category ["id"] != 1) {
-				?>
+				
+				if ($category ["id"] != 1) {
+					?>
 
 			<td style="text-align: center;"><form
 					action="?action=categories&del=<?php
-				
-				echo $category ["id"];
-				?>"
+					
+					echo $category ["id"];
+					?>"
 					method="post" onsubmit="return confirm('Wirklich Löschen?')"
 					class="delete-form"><?php csrf_token_html();?><input type="image"
 						class="mobile-big-image" src="gfx/delete.gif"
 						alt="<?php
-				
-				translate ( "delete" );
-				?>"
+					
+					translate ( "delete" );
+					?>"
 						title="<?php
-				
-				translate ( "delete" );
-				?>">
+					
+					translate ( "delete" );
+					?>">
 				</form></td>
 
 				<?php
-			} else {
-				?>
+				} else {
+					?>
 			<td style="text-align: center;"><a href="#"
 				onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img
 					class="mobile-big-image" src="gfx/delete.gif"
 					alt="<?php
-				
-				translate ( "delete" );
-				?>"
+					
+					translate ( "delete" );
+					?>"
 					title="<?php
-				
-				translate ( "delete" );
-				?>"> </a></td>
+					
+					translate ( "delete" );
+					?>"> </a></td>
 				<?php
-			}
-			?>
-
+				}
+				?>
+<?php }?>
 		</tr>
 		<?php
 		}
@@ -164,15 +172,16 @@ $("form.delete-form").ajaxForm(ajax_options);
 </script>
 <?php
 	} else if (isset ( $_GET ["add"] )) {
-		?>
+		if ($acl->hasPermission ( "categories_create" )) {
+			?>
 <h2>
 <?php translate("create_category");?>
 </h2>
 <form action="?action=categories" method="post">
 <?php
-		
-		csrf_token_html ();
-		?>
+			
+			csrf_token_html ();
+			?>
 	<p>
 	<?php translate("name");?>
 		<input type="text" name="name" value="" required>
@@ -192,41 +201,49 @@ $("form.delete-form").ajaxForm(ajax_options);
 </form>
 
 <?php
+		} else {
+			noperms ();
+		}
 	} else if (isset ( $_GET ["edit"] )) {
-		?>
+		
+		if ($acl->hasPermission ( "categories_edit" )) {
+			?>
 <h2>
 <?php translate("edit_category");?>
 </h2>
 <form action="?action=categories" method="post">
 <?php
-		
-		csrf_token_html ();
-		?>
+			
+			csrf_token_html ();
+			?>
 	<input type="hidden" name="id"
 		value="<?php echo intval($_GET["edit"])?>">
 	<p>
 	<?php translate("name");?>
 		<input type="text" name="name" required="true"
 			value="<?php
-		
-		echo categories::getCategoryById ( intval ( $_GET ["edit"] ) );
-		?>">
+			
+			echo categories::getCategoryById ( intval ( $_GET ["edit"] ) );
+			?>">
 	</p>
 
 	<p>
 	<?php translate("description");?>
 		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"><?php
-		echo htmlspecialchars ( categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
-		?></textarea>
+			echo htmlspecialchars ( categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
+			?></textarea>
 	</p>
 	<p>
 		<input type="submit" name="update"
 			value="<?php
-		translate ( "save" );
-		?>">
+			translate ( "save" );
+			?>">
 	</p>
 </form>
 
 <?php
+		} else {
+			noperms ();
+		}
 	}
 }

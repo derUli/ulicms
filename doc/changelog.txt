@@ -17,6 +17,8 @@ Neue Berechtigungen hinzugefügt:
 + forms_edit
 + banners_create
 + banners_delete
++ categories_create
++ categories_edit
 
 Bugfix:
 # file_get_contents_curl() akzeptiert nun auch HTTP Status 302
