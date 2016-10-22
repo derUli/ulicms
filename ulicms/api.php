@@ -306,8 +306,8 @@ function get_referrer() {
 
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false) {
-	if(isFastMode()){
-		return;		
+	if (isFastMode ()) {
+		return;
 	}
 	add_hook ( "before_log_request" );
 	if ($save_ip) {
@@ -384,8 +384,6 @@ function recurse_copy($src, $dst) {
 function strbool($value) {
 	return $value ? 'true' : 'false';
 }
-
-// @TODO : Post Types implementieren.
 function get_available_post_types() {
 	$post_types = array (
 			"page",
@@ -667,7 +665,6 @@ function encodeURIComponent($str) {
 }
 function setLanguageByDomain() {
 	$domainMapping = Settings::get ( "domain_to_language" );
-	
 	if (! empty ( $domainMapping )) {
 		$domainMapping = explode ( "\n", $domainMapping );
 		for($i = 0; $i < count ( $domainMapping ); $i ++) {
@@ -710,7 +707,7 @@ function getCacheType() {
 	return $cache_type;
 }
 function getOnlineUsers() {
-	$users_online = db_query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE last_action > " . (time () - 300) . " ORDER BY username" );
+	$users_online = db_query ( "SELECT username FROM " . tbname ( "users" ) . " WHERE last_action > " . (time () - 300) . " ORDER BY username" );
 	$users = array ();
 	while ( $row = db_fetch_object ( $users_online ) ) {
 		array_push ( $users, $row->username );
@@ -916,7 +913,7 @@ function setLocaleByLanguage() {
 // else it returns $_SESSION["language"];
 function getCurrentLanguage($current = true) {
 	if ($current) {
-		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname='" . get_requested_pagename () . "'" );
+		$query = db_query ( "SELECT language FROM " . tbname ( "content" ) . " WHERE systemname='" . get_requested_pagename () . "'" );
 		
 		if (db_num_rows ( $query ) > 0) {
 			$fetch = db_fetch_object ( $query );

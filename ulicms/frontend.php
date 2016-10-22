@@ -46,7 +46,7 @@ if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 require_once "templating.php";
 $status = check_status ();
 
-if (!isFastMode() && Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
+if (! isFastMode () && Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
 	add_hook ( "before_global_redirection" );
 	header ( "Location: " . Settings::get ( "redirection" ) );
 	exit ();
@@ -125,12 +125,14 @@ if ($format == "html") {
 
 add_hook ( "after_http_header" );
 
-if (count ( getThemeList () ) === 0) {
-	throw new Exception ( "Keine Themes vorhanden!" );
-}
-
-if (! is_dir ( getTemplateDirPath ( $theme ) )) {
-	throw new Exception ( "Das aktivierte Theme existiert nicht!" );
+if (! isFastMode ()) {
+	if (count ( getThemeList () ) === 0) {
+		throw new Exception ( "Keine Themes vorhanden!" );
+	}
+	
+	if (! is_dir ( getTemplateDirPath ( $theme ) )) {
+		throw new Exception ( "Das aktivierte Theme existiert nicht!" );
+	}
 }
 
 if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {

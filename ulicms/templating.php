@@ -450,7 +450,7 @@ function poweredByUliCMS() {
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner() {
-	$query = db_query ( "SELECT * FROM " . tbname ( "banner" ) . " WHERE language='all' OR language='" . db_escape ( $_SESSION ["language"] ) . "'ORDER BY RAND() LIMIT 1" );
+	$query = db_query ( "SELECT name, title, link_url, image_url, `type`, html FROM " . tbname ( "banner" ) . " WHERE language='all' OR language='" . db_escape ( $_SESSION ["language"] ) . "'ORDER BY RAND() LIMIT 1" );
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
 			$type = "gif";
@@ -471,6 +471,9 @@ function random_banner() {
 	}
 }
 function logo() {
+	if (Settings::get ( "logo_disabled" ) != "no") {
+		return;
+	}
 	if (! Settings::get ( "logo_image" )) {
 		setconfig ( "logo_image", "" );
 	}
@@ -502,7 +505,6 @@ function homepage_title() {
 }
 $status = check_status ();
 function meta_keywords($ipage = null) {
-	$status = check_status ();
 	$ipage = db_escape ( $_GET ["seite"] );
 	$query = db_query ( "SELECT meta_keywords FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	
@@ -521,7 +523,6 @@ function meta_keywords($ipage = null) {
 	return $meta_keywords;
 }
 function meta_description($ipage = null) {
-	$status = check_status ();
 	$ipage = db_escape ( $_GET ["seite"] );
 	$query = db_query ( "SELECT meta_description FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'", $connection );
 	if ($ipage == "") {
@@ -1023,7 +1024,7 @@ function content() {
 		return false;
 	}
 	
-	if (! is_logged_in () and !isFastMode()) {
+	if (! is_logged_in () and ! isFastMode ()) {
 		db_query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . Database::escapeValue ( $_GET ["seite"] ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	}
 	return import ( $_GET ["seite"] );
