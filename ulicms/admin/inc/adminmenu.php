@@ -4,7 +4,21 @@ if (defined ( "_SECURITY" )) {
 	$modules_with_admin_page = Array ();
 	for($i = 0; $i < count ( $modules ); $i ++) {
 		if (file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) )) {
+
+			$admin_file_path = getModuleAdminFilePath ( $modules [$i] );
+			$admin_file_path2 = getModuleAdminFilePath2 ( $modules [$i] );
+			if(file_exists ( $admin_file_path)){
+				include_once $admin_file_path;
+			} else {
+				include_once $admin_file_path2;
+			}
+			$acl = new ACL();
+				if (defined ( "MODULE_ADMIN_REQUIRED_PERMISSION" )) {
+				if ($acl->hasPermission ( MODULE_ADMIN_REQUIRED_PERMISSION ) and $acl->hasPermission ( "module_settings" )) {
+			
 			array_push ( $modules_with_admin_page, $modules [$i] );
+		}
+				}
 		}
 	}
 	
