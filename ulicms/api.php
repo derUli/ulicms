@@ -15,6 +15,12 @@ function initconfig($key, $value) {
 	SettingsCache::set ( $key, $value );
 	return $retval;
 }
+function getBackendActionLink($action) {
+	return "index.php?action=" . $action;
+}
+function backendActionLink($action) {
+	echo getBackendActionLink ( $action );
+}
 function mb_str_split($string) {
 	// Split at all position not after the start: ^
 	// and not before the end: $
