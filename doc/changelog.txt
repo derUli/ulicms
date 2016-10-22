@@ -7,6 +7,7 @@
 + Filter custom_post_types hinzugefügt
 + Hook before_custom_data_json hinzugefügt
 + Feld "Übergeordnete Seite" wird nun gefiltert nach Menü und Sprache (Seitenverwaltung)
+# Unter dem Menü "Pakete" werden nun nur noch Module angezeigt, für die der Anwender Zugriffsrechte hat
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
@@ -20,6 +21,7 @@ Neue Berechtigungen hinzugefügt:
 
 Bugfix:
 # file_get_contents_curl() akzeptiert nun auch HTTP Status 302
+# register_actions Hook repariert
 
 ===== Neues in UliCMS 9.8.5 =====
 

@@ -308,7 +308,6 @@ add_hook ( "init" );
 add_hook ( "after_init" );
 
 $version = new ulicms_version ();
-
 if (! defined ( "UPDATE_CHECK_URL" )) {
 	define ( "UPDATE_CHECK_URL", "http://update.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&update=" . urlencode ( $version->getUpdate () ) );
 }
