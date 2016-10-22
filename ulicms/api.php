@@ -1,4 +1,8 @@
 <?php
+function isFastMode() {
+	$cfg = new config ();
+	return (isset ( $cfg->fast_mode ) and $cfg->fast_mode);
+}
 
 // boolval PHP 5.4 Implementation with checking version
 if (! function_exists ( 'boolval' )) {
@@ -302,6 +306,9 @@ function get_referrer() {
 
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false) {
+	if(isFastMode()){
+		return;		
+	}
 	add_hook ( "before_log_request" );
 	if ($save_ip) {
 		$ip = get_ip ();

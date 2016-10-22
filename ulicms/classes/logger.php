@@ -28,8 +28,9 @@ class logger {
 		
 		if (! is_dir ( $logdir )) {
 			@mkdir ( $logdir, 0755, true );
-			if (! is_dir ( $logdir ))
+			if (! is_dir ( $logdir )) {
 				return false;
+			}
 		}
 		
 		@$date = date ( "Y-m-d" );

@@ -46,7 +46,7 @@ if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 require_once "templating.php";
 $status = check_status ();
 
-if (Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
+if (!isFastMode() && Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
 	add_hook ( "before_global_redirection" );
 	header ( "Location: " . Settings::get ( "redirection" ) );
 	exit ();
@@ -138,7 +138,6 @@ if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 }
 
 $cached_page_path = buildCacheFilePath ( $_SERVER ['REQUEST_URI'] );
-$modules = getAllModules ();
 $hasModul = containsModule ( get_requested_pagename () );
 
 $cache_control = get_cache_control ();
@@ -287,7 +286,7 @@ add_hook ( "after_html" );
 if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and $cache_type === "cache_lite") {
 	$data = ob_get_clean ();
 	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache()) {
+	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache ()) {
 		$Cache_Lite->save ( $data, $id );
 	}
 	

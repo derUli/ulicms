@@ -1003,16 +1003,18 @@ function get_page($systemname = "") {
 	}
 }
 function content() {
-	$theme = Settings::get ( "theme" );
 	$status = check_status ();
 	if ($status == "404 Not Found") {
 		if (file_exists ( getTemplateDirPath ( $theme ) . "404.php" )) {
+			$theme = Settings::get ( "theme" );
 			include getTemplateDirPath ( $theme ) . "404.php";
 		} else {
 			translate ( "PAGE_NOT_FOUND_CONTENT" );
 		}
 		return false;
 	} else if ($status == "403 Forbidden") {
+		
+		$theme = Settings::get ( "theme" );
 		if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 			include getTemplateDirPath ( $theme ) . "403.php";
 		} else {
@@ -1021,7 +1023,7 @@ function content() {
 		return false;
 	}
 	
-	if (! is_logged_in ()) {
+	if (! is_logged_in () and !isFastMode()) {
 		db_query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . Database::escapeValue ( $_GET ["seite"] ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	}
 	return import ( $_GET ["seite"] );

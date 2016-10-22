@@ -12,6 +12,12 @@ class Settings {
 		SettingsCache::set ( $key, $value );
 		return $retval;
 	}
+	public static function preloadAll() {
+		$query = db_query ( "SELECT name, value FROM " . tbname ( "settings" ) );
+		while ( $result = Database::fetchObject ( $result ) ) {
+			SettingsCache::set ( $result->name, $result->value );
+		}
+	}
 	
 	// get a config variable
 	public static function get($key) {
@@ -68,7 +74,7 @@ class Settings {
 		} else {
 			db_query ( "INSERT INTO " . tbname ( "settings" ) . " (name, value) VALUES('$key', '$value')" );
 		}
-		SettingsCache::set($key, null);
+		SettingsCache::set ( $key, null );
 	}
 	
 	// Remove an configuration variable
