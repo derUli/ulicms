@@ -11,8 +11,7 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 	
 	if (isset ( $_POST ["add_group"] )) {
 		$acl = new ACL ();
-		$all_permissions = $acl->getDefaultACL ( false, true );
-		
+		$all_permissions = $acl->getDefaultACL ( false, true );		
 		if (count ( $_POST ["user_permissons"] ) > 0) {
 			foreach ( $_POST ["user_permissons"] as $permission_name ) {
 				$all_permissions [$permission_name] = true;
@@ -30,8 +29,10 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 		$acl = new ACL ();
 		$acl->deleteGroup ( $id );
 		$removed = true;
+		if(isset($GLOBALS["permissions"])){
+			unset($GLOBALS["permissions"]);			
+		}
 	} else if (isset ( $_POST ["edit_group"] )) {
-		
 		$acl = new ACL ();
 		$all_permissions = $acl->getDefaultACL ( false, true );
 		
@@ -49,6 +50,9 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 			$acl->updateGroup ( $id, $name, $all_permissions );
 			$modified = true;
 			$name = real_htmlspecialchars ( $name );
+		}
+		if(isset($GLOBALS["permissions"])){
+			unset($GLOBALS["permissions"]);			
 		}
 	}
 	?>

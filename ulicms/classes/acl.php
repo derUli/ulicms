@@ -25,6 +25,9 @@ class ACL {
 		if (is_admin ()) {
 			return true;
 		}
+		if(isset($GLOBALS["permissions"])){
+			return $GLOBALS["permissions"];
+		}
 		$result = $this->getPermissionQueryResult ();
 		if (! $result) {
 			return false;
@@ -37,6 +40,7 @@ class ACL {
 		}
 		
 		$permissionData = json_decode ( $json, true );
+
 		if (! isset ( $permissionData [$name] )) {
 			return false;
 		}
@@ -45,6 +49,7 @@ class ACL {
 			return false;
 		}
 		
+		$GLOBALS["permissions"] = $permissionData;
 		return $permissionData [$name];
 	}
 	public function createGroup($name, $permissions = null) {
@@ -74,6 +79,10 @@ class ACL {
 		// Führe Query aus
 		db_query ( $sql );
 		
+		if(isset($GLOBALS["permissions"])){
+			unset($GLOBALS["permissions"]);			
+		}
+		
 		// Gebe die letzte Insert-ID zurück, damit man gleich mit der erzeugten Gruppe arbeiten kann.
 		return $id;
 	}
@@ -89,6 +98,9 @@ class ACL {
 		}
 		
 		db_query ( $updateUsers );
+		if(isset($GLOBALS["permissions"])){
+			unset($GLOBALS["permissions"]);			
+		}
 	}
 	public function getPermissionQueryResult($id = null) {
 		if ($id) {

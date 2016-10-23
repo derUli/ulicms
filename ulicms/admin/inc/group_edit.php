@@ -4,7 +4,6 @@ $acl = new ACL();
 if (! $acl->hasPermission ( "groups")) {
    noperms();	
 } else {
-
 	$id = intval ( $_REQUEST ["edit"] );
 	$acl = new ACL ();
 	$all_permissions = $acl->getPermissionQueryResult ( $id );
