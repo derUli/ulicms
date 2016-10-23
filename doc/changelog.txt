@@ -8,6 +8,7 @@
 + Hook before_custom_data_json hinzugefügt
 + Feld "Übergeordnete Seite" wird nun gefiltert nach Menü und Sprache (Seitenverwaltung)
 + Fast Mode hinzugefügt (Verbesserung der Performance durch Deaktivierung bestimmter Funktionen)
++ Performance verbessert
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
