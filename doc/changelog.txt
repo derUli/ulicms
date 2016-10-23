@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 9.8.6 =====
+﻿===== Neues in UliCMS 2017.1 =====
 
 + "Passwort wiederholen" Feld zur Userverwaltung hinzugefügt
 + CKEditor auf Version 4.5.11 geupdatet
