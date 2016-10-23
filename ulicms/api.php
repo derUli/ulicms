@@ -382,7 +382,7 @@ function recurse_copy($src, $dst) {
 
 // Aus einer Boolean einen String machen ("true" oder "false")
 function strbool($value) {
-	return $value ? 'true' : 'false';
+	return ($value) ? 'true' : 'false';
 }
 function get_available_post_types() {
 	$post_types = array (
