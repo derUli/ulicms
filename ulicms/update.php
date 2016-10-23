@@ -101,7 +101,7 @@ Database::query ( "alter table `" . tbname ( "content" ) . "` add column `articl
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_image` varchar(255) default '';" );
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `excerpt` text default '';" );
 
-// Database Changes of 9.8.6
+// Database Changes of 2017.1
 Database::query ( "ALTER TABLE `" . tbname ( "users" ) . "` DROP COLUMN `icq_id`" );
 Database::query ( "ALTER TABLE `" . tbname ( "settings" ) . "` ADD UNIQUE (`name`)" );
 Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_admins_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
