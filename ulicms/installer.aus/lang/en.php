@@ -41,3 +41,4 @@ define ( "TRANSLATION_LAST_STEP", "This is the last step of the installation. No
 		Then you can login to UliCMS.<br/><br/>
 		<a href=\"index.php?submit_form=LoginToBackend\">Goto login</a>" );
 define("TRANSLATION_ADD_FK", "Add Foreign Keys");
+define ( "TRANSLATION_ENABLE_FAST_MODE", "Enable fast_mode" );

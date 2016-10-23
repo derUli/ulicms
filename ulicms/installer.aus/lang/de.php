@@ -41,3 +41,4 @@ define ( "TRANSLATION_LAST_STEP", "Dies ist der letzte Schritt der Installation.
 		Danach können Sie sich in UliCMS ausloggen..<br/><br/>
 		<a href=\"index.php?submit_form=LoginToBackend\">Gehe zur Anmeldung</a>" );
 define ( "TRANSLATION_ADD_FK", "Fremdschlüssel hinzufügen" );
+define ( "TRANSLATION_ENABLE_FAST_MODE", "fast_mode aktivieren" );

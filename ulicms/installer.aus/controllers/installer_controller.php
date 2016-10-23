@@ -22,7 +22,8 @@ class InstallerController {
 				"admin_lastname",
 				"admin_firstname",
 				"install_demodata",
-				"add_fk" 
+				"add_fk",
+				"fast_mode" 
 		);
 		foreach ( $vars as $var ) {
 			if (! isset ( $_SESSION [$var] )) {
@@ -39,6 +40,9 @@ class InstallerController {
 						break;
 					case "admin_user" :
 						$_SESSION [$var] = "admin";
+						break;
+					case "fast_mode" :
+						$_SESSION [$var] = false;
 						break;
 				}
 			}
@@ -195,6 +199,10 @@ class InstallerController {
 		$content = str_replace ( "{mysql_user}", $_SESSION ["mysql_user"], $content );
 		$content = str_replace ( "{mysql_password}", $_SESSION ["mysql_password"], $content );
 		$content = str_replace ( "{mysql_database}", $_SESSION ["mysql_database"], $content );
+		$fast_mode = ($_SESSION ["fast_mode"]) ? 'true' : 'false';
+		
+		$content = str_replace ( "{fast_mode}", $fast_mode, $content );
+		
 		$filled_file = "../cms-config.php";
 		
 		if (file_put_contents ( $filled_file, $content )) {
@@ -209,6 +217,13 @@ class InstallerController {
 			$_SESSION ["install_demodata"] = "yes";
 		} else {
 			$_SESSION ["install_demodata"] = "";
+		}
+		
+		if (isset ( $_REQUEST ["fast_mode"] )) {
+			$_SESSION ["fast_mode"] = true;
+		} else {
+			
+			$_SESSION ["fast_mode"] = false;
 		}
 		
 		if (isset ( $_REQUEST ["add_fk"] )) {
