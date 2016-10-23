@@ -1,8 +1,8 @@
 <?php
-$acl = new ACL();
+$acl = new ACL ();
 
-if (! $acl->hasPermission ( "groups")) {
-   noperms();	
+if (! $acl->hasPermission ( "groups" )) {
+	noperms ();
 } else {
 	$id = intval ( $_REQUEST ["edit"] );
 	$acl = new ACL ();
@@ -15,28 +15,28 @@ if (! $acl->hasPermission ( "groups")) {
 			$all_permissions [$name] = $value;
 		}
 	}
-
-	ksort ( $all_permissions );
-
-	if ($all_permissions) {
 	
-	?>
+	ksort ( $all_permissions );
+	
+	if ($all_permissions) {
+		
+		?>
 <form action="?action=groups" method="post">
 <?php
-	
-	csrf_token_html ();
-	?>
+		
+		csrf_token_html ();
+		?>
 	<input type="hidden" name="id" value="<?php
-	
-	echo $id;
-	?>">
+		
+		echo $id;
+		?>">
 	<p>
 		<strong><?php translate("name")?>
 		</strong> <input type="text" required="true" name="name"
 			value="<?php
-	
-	echo $groupName;
-	?>">
+		
+		echo $groupName;
+		?>">
 	</p>
 	<p>
 		<strong><?php translate("permissions");?>
@@ -50,33 +50,33 @@ if (! $acl->hasPermission ( "groups")) {
 		</p>
 		<p>
 		<?php
-	
-	foreach ( $all_permissions as $key => $value ) {
-		?>
+		
+		foreach ( $all_permissions as $key => $value ) {
+			?>
 			<input type="checkbox" id="<?php
-		
-		echo $key;
-		?>"
+			
+			echo $key;
+			?>"
 				name="user_permissons[]" value="<?php
-		
-		echo $key;
-		?>"
+			
+			echo $key;
+			?>"
 				<?php
-		
-		if ($value) {
-			echo "checked='checked'";
-		}
-		?>> <label for="<?php
-		
-		echo $key;
-		?>"><?php
-		
-		echo $key;
-		?>
+			
+			if ($value) {
+				echo "checked='checked'";
+			}
+			?>> <label for="<?php
+			
+			echo $key;
+			?>"><?php
+			
+			echo $key;
+			?>
 			</label><br />
 			<?php
-	}
-	?>
+		}
+		?>
 		</p>
 	</fieldset>
 	<br /> <input type="submit" value="<?php translate("save_changes");?>"
@@ -92,22 +92,20 @@ $(function () {
 </script>
 
 <?php
-	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-		?>
+		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
+			?>
 <script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php
-	}
-	?>
+		}
+		?>
 
 	<?php
-} 
+	} 
 
-else {
-	?>
+	else {
+		?>
 <p style="color: red">Diese Gruppe ist nicht vorhanden.</p>
 <?php
-}
-
-
+	}
 }

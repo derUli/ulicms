@@ -148,7 +148,8 @@
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
 		<?php translate("disabled");?>
 		</option>
-			</select> <br /> <br /><strong><?php translate("category");?>
+			</select> <br /> <br />
+			<strong><?php translate("category");?>
 	</strong><br />
 	<?php echo categories :: getHTMLSelect();?>
 	

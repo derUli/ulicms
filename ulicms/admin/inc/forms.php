@@ -38,11 +38,11 @@ tr.odd input#form-submit-url {
 }
 </style>
 <h1><?php translate("forms"); ?></h1>
- <?php if($acl->hasPermission ( "forms_create" )){ ?>
+<?php if($acl->hasPermission ( "forms_create" )){ ?>
 <p>
 	<a href="index.php?action=forms_new"><?php translate("create_form");?></a>
 </p>
- <?php }?>
+<?php }?>
 <table id="form-list" class="tablesorter">
 	<thead>
 		<tr>
@@ -72,15 +72,15 @@ tr.odd input#form-submit-url {
 			<?php if($acl->hasPermission ( "forms_edit" )){ ?>
 			<td style="text-align: center;"><a
 				href="?action=forms_edit&id=<?php
-		echo $form ["id"];
-		?>"><img src="gfx/edit.png" class="mobile-big-image"
+			echo $form ["id"];
+			?>"><img src="gfx/edit.png" class="mobile-big-image"
 					alt="<?php translate("edit");?>" title="<?php translate("edit");?>"></a></td>
 			<td style="text-align: center;">
 				<form
 					action="?action=forms&del=<?php
-		
-		echo $form ["id"];
-		?>"
+			
+			echo $form ["id"];
+			?>"
 					method="post" onsubmit="return confirm('Wirklich Löschen?')"
 					class="delete-form"><?php csrf_token_html();?><input type="image"
 						class="mobile-big-image" src="gfx/delete.gif"

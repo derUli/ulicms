@@ -1,5 +1,3 @@
 <?php
-function test_render(){
-	
-	
+function test_render() {
 }

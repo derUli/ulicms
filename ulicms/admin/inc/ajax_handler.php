@@ -39,7 +39,8 @@ function ajaxOnChangeLanguage($lang, $menu, $parent) {
 <option value="<?php
 		
 		echo $page ["id"];
-		?>" <?php if($page["id"] == $parent) echo "selected";?>>
+		?>"
+	<?php if($page["id"] == $parent) echo "selected";?>>
 				<?php
 		
 		echo $page ["title"];

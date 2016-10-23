@@ -61,6 +61,7 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 		?>
  
 
+
 <p>
 	<strong><?php
 		translate ( "import_export" );

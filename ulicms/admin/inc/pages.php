@@ -6,8 +6,10 @@ if (defined ( "_SECURITY" )) {
 		?>
 <h2><?php translate("pages");?></h2>
 <p><?php translate ( "pages_infotext" );?></p>
-<?php if($acl->hasPermission("pages_create")){
-	?>
+<?php
+		
+if ($acl->hasPermission ( "pages_create" )) {
+			?>
 <p>
 	<a href="index.php?action=pages_new"><?php translate("create_page");?>
 	</a>
@@ -396,8 +398,10 @@ $(window).load(function(){
 			</th>
 			<td style="text-align: center"><?php translate("view");?>
 			</td>
-			<?php if($acl->hasPermission("pages_create")){
-	?>
+			<?php
+		
+if ($acl->hasPermission ( "pages_create" )) {
+			?>
 			<td style="text-align: center"><?php translate ( "clone" );?>
 			</td>
 			<?php }?>
@@ -512,7 +516,7 @@ $(window).load(function(){
 					}
 					echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation ( "view" ) . "\" title=\"" . get_translation ( "view" ) . "\"></a></td>";
 				}
-				if($acl->hasPermission("pages_create")){
+				if ($acl->hasPermission ( "pages_create" )) {
 					echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation ( "clone" ) . "\" title=\"" . get_translation ( "clone" ) . "\"></a></td>";
 				}
 				$autor = $row->autor;

@@ -29,8 +29,8 @@ $enq = array (
 		"codemirror/mode/clike/clike.js",
 		"codemirror/mode/css/css.js",
 		"scripts/url.min.js",
-		"scripts/util.js" ,
-		"scripts/users.js"
+		"scripts/util.js",
+		"scripts/users.js" 
 );
 ?>
 <?php

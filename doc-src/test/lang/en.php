@@ -1,2 +1,2 @@
 <?php
-define("TRANSLATION_PRODUCT", "Product");
+define ( "TRANSLATION_PRODUCT", "Product" );

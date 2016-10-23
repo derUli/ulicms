@@ -381,7 +381,7 @@ div#google-fonts {
 			<td><input type="checkbox" name="video_width_100_percent"
 				<?php
 	
-	if ($video_width_100_percent){
+	if ($video_width_100_percent) {
 		echo " checked";
 	}
 	?>

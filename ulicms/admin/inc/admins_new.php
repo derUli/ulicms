@@ -5,7 +5,8 @@ if (defined ( "_SECURITY" )) {
 		$query = db_query ( "SELECT * FROM " . tbname ( "users" ) . " ORDER BY id", $connection );
 		if (db_num_rows ( $query )) {
 			?>
-<form action="index.php?action=admins" method="post" autocomplete="off" id="edit_user">
+<form action="index.php?action=admins" method="post" autocomplete="off"
+	id="edit_user">
 <?php csrf_token_html();?>
 	<input type="hidden" name="add_admin" value="add_admin"> <strong><?php translate("username");?></strong><br />
 	<input type="text" required="required" name="admin_username" value="">

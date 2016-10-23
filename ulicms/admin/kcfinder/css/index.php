@@ -12,12 +12,11 @@
  * @license http://opensource.org/licenses/LGPL-3.0 LGPLv3
  * @link http://kcfinder.sunhater.com
  */
-
 namespace kcfinder;
 
-chdir("..");
+chdir ( ".." );
 require "core/autoload.php";
-$min = new minifier("css");
-$min -> minify("cache/base.css");
+$min = new minifier ( "css" );
+$min->minify ( "cache/base.css" );
 
 ?>
