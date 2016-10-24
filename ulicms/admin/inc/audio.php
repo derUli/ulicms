@@ -123,12 +123,14 @@ $(window).load(function(){
 	?>
 <br />
 <br />
+<?php if($acl->hasPermission("audio_create")){?>
 <p>
 	<a href="index.php?action=add_audio">[<?php
-	
-	translate ( "upload_audio" );
-	?>]</a>
+		
+		translate ( "upload_audio" );
+		?>]</a>
 </p>
+<?php }?>
 <table class="tablesorter">
 	<thead>
 		<tr>
@@ -152,8 +154,11 @@ $(window).load(function(){
 	translate ( "MP3_FILE" );
 	?>
 			</th>
+			
+<?php if($acl->hasPermission("audio_edit")){?>
 			<td></td>
 			<td></td>
+			<?php }?>
 		</tr>
 
 	</thead>
@@ -182,40 +187,43 @@ $(window).load(function(){
 		echo htmlspecialchars ( basename ( $row->mp3_file ) );
 		?>
 			</td>
+			
+	<?php if($acl->hasPermission("audio_edit")){?>
 			<td><a
 				href="index.php?action=edit_audio&id=<?php
-		
-		echo $row->id;
-		?>"><img src="gfx/edit.png" class="mobile-big-image"
+			
+			echo $row->id;
+			?>"><img src="gfx/edit.png" class="mobile-big-image"
 					alt="<?php
-		
-		translate ( "edit" );
-		?>"
+			
+			translate ( "edit" );
+			?>"
 					title="<?php
-		
-		translate ( "edit" );
-		?>"> </a></td>
+			
+			translate ( "edit" );
+			?>"> </a></td>
 			<td><form
 					action="index.php?action=audio&delete=<?php
-		
-		echo $row->id;
-		?>"
+			
+			echo $row->id;
+			?>"
 					method="post"
 					onsubmit="return confirm('<?php
-		
-		translate ( "ASK_FOR_DELETE" );
-		?>')"
+			
+			translate ( "ASK_FOR_DELETE" );
+			?>')"
 					class="delete-form"><?php csrf_token_html();?><input type="image"
 						src="gfx/delete.png" class="mobile-big-image"
 						alt="<?php
-		
-		translate ( "delete" );
-		?>"
+			
+			translate ( "delete" );
+			?>"
 						title="<?php
-		
-		translate ( "delete" );
-		?>">
+			
+			translate ( "delete" );
+			?>">
 				</form></td>
+				<?php }?>
 		</tr>
 		<?php
 	}

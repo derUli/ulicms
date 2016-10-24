@@ -144,6 +144,8 @@ class ACL {
 		$acl_data ["videos_create"] = null;
 		$acl_data ["videos_edit"] = null;
 		$acl_data ["audio"] = null;
+		$acl_data ["audio_create"] = null;
+		$acl_data ["audio_edit"] = null;
 		
 		// Benutzer
 		$acl_data ["users"] = null;

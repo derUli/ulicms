@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL ();
-if ($acl->hasPermission ( "audio" )) {
+if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_edit" )) {
 	
 	$id = intval ( $_REQUEST ["id"] );
 	$query = db_query ( "SELECT * FROM " . tbname ( "audio" ) . " WHERE id = $id" );

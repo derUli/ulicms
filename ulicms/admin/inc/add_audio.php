@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL ();
-if ($acl->hasPermission ( "audio" )) {
+if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_create" )) {
 	?>
 <h1><?php translate ( "UPLOAD_AUDIO" );?>
 </h1>
