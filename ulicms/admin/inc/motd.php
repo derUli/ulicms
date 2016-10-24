@@ -20,11 +20,7 @@ function filter_by_language(element){
 	</h2>
 	<?php
 	if (isset ( $_POST ["motd"] )) {
-		
-		$motd = strip_tags ( $_POST ["motd"], Settings::get ( "allowed_html" ) );
-		$motd = db_escape ( $motd );
-		setconfig ( "motd", $motd );
-		
+		Settings::set ("motd", $_POST["motd"] );
 		?>
 	<p>
 	<?php translate("motd_was_changed");?>
@@ -38,18 +34,84 @@ function filter_by_language(element){
 	
 	csrf_token_html ();
 	?>
-		<textarea name="motd" cols=60 rows=15><?php
-	
+		<p><textarea name="motd" id="motd" cols=60 rows=15><?php
 	echo htmlspecialchars ( Settings::get ( "motd" ) );
-	?></textarea> <br> <br> <input type="submit" name="motd_submit"
+	?></textarea></p>
+		<?php
+			$editor = get_html_editor ();
+			?>
+
+		<?php
+			if ($editor === "ckeditor") {
+				?>
+		<script type="text/javascript">
+var editor = CKEDITOR.replace( 'motd',
+					{
+						skin : '<?php
+				
+				echo Settings::get ( "ckeditor_skin" );
+				?>'
+					});
+
+
+
+editor.on("instanceReady", function()
+{
+	this.document.on("keyup", CKCHANGED);
+	this.document.on("paste", CKCHANGED);
+}
+);
+function CKCHANGED() {
+	formchanged = 1;
+}
+
+var formchanged = 0;
+var submitted = 0;
+
+$(document).ready(function() {
+	$('form').each(function(i,n){
+		$('input', n).change(function(){formchanged = 1});
+		$('textarea', n).change(function(){formchanged = 1});
+		$('select', n).change(function(){formchanged = 1});
+		$(n).submit(function(){submitted=1});
+	});
+});
+
+window.onbeforeunload = confirmExit;
+function confirmExit()
+{
+	if(formchanged == 1 && submitted == 0)
+		return "Wenn Sie diese Seite verlassen gehen nicht gespeicherte Änderungen verloren.";
+	else
+		return;
+}
+</script>
+<?php
+			} else if ($editor == "codemirror") {
+				?>
+		<script type="text/javascript">
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("motd"),
+
+{lineNumbers: true,
+        matchBrackets: true,
+        mode : "text/html",
+
+        indentUnit: 0,
+        indentWithTabs: false,
+        enterMode: "keep",
+        tabMode: "shift"});
+</script>
+<?php
+			}
+			?>
+		<noscript>
+			<p style="color: red;">
+				Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
+					href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
+			</p>
+		</noscript>
+<input type="submit" name="motd_submit"
 			value="<?php translate("save_changes");?>">
-		<p>
-			<strong><?php translate("allowed_html_tags");?>
-			</strong><br />
-			<?php
-	
-	echo htmlspecialchars ( Settings::get ( "allowed_html" ) )?>
-		</p>
 		<?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>
