@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL ();
-if ($acl->hasPermission ( "videos" )) {
+if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_create" )) {
 	?>
 <h1>
 <?php
