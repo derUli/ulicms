@@ -6,7 +6,7 @@ if (! class_exists ( "ulicms_version" )) {
 			$this->releaseYear = 2017;
 			$this->internalVersion = Array (
 					2017,
-					1
+					1 
 			);
 			$this->update = "";
 			$this->developmentVersion = false;
@@ -14,7 +14,7 @@ if (! class_exists ( "ulicms_version" )) {
 		public function getReleaseYear() {
 			return strval ( $this->releaseYear );
 		}
-
+		
 		// Gibt den Codenamen der UliCMS Version zurück (z.B. 2013R2)
 		public function getVersion() {
 			return $this->version;
@@ -25,7 +25,7 @@ if (! class_exists ( "ulicms_version" )) {
 		public function getDevelopmentVersion() {
 			return $this->developmentVersion;
 		}
-
+		
 		// Gibt die interne Versionsnummer als Array mit Integer-Datentyp zurück
 		public function getInternalVersion() {
 			return $this->internalVersion;

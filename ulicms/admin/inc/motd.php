@@ -20,7 +20,7 @@ function filter_by_language(element){
 	</h2>
 	<?php
 	if (isset ( $_POST ["motd"] )) {
-		Settings::set ("motd", $_POST["motd"] );
+		Settings::set ( "motd", $_POST ["motd"] );
 		?>
 	<p>
 	<?php translate("motd_was_changed");?>
@@ -34,23 +34,25 @@ function filter_by_language(element){
 	
 	csrf_token_html ();
 	?>
-		<p><textarea name="motd" id="motd" cols=60 rows=15><?php
+		<p>
+			<textarea name="motd" id="motd" cols=60 rows=15><?php
 	echo htmlspecialchars ( Settings::get ( "motd" ) );
-	?></textarea></p>
+	?></textarea>
+		</p>
 		<?php
-			$editor = get_html_editor ();
-			?>
+	$editor = get_html_editor ();
+	?>
 
 		<?php
-			if ($editor === "ckeditor") {
-				?>
+	if ($editor === "ckeditor") {
+		?>
 		<script type="text/javascript">
 var editor = CKEDITOR.replace( 'motd',
 					{
 						skin : '<?php
-				
-				echo Settings::get ( "ckeditor_skin" );
-				?>'
+		
+		echo Settings::get ( "ckeditor_skin" );
+		?>'
 					});
 
 
@@ -87,8 +89,8 @@ function confirmExit()
 }
 </script>
 <?php
-			} else if ($editor == "codemirror") {
-				?>
+	} else if ($editor == "codemirror") {
+		?>
 		<script type="text/javascript">
 var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("motd"),
 
@@ -102,15 +104,15 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("motd"),
         tabMode: "shift"});
 </script>
 <?php
-			}
-			?>
+	}
+	?>
 		<noscript>
 			<p style="color: red;">
 				Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
 					href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
 			</p>
 		</noscript>
-<input type="submit" name="motd_submit"
+		<input type="submit" name="motd_submit"
 			value="<?php translate("save_changes");?>">
 		<?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
