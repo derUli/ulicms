@@ -149,6 +149,8 @@ class ACL {
 		
 		// Benutzer
 		$acl_data ["users"] = null;
+		$acl_data ["users_create"] = null;
+		$acl_data ["users_edit"] = null;
 		$acl_data ["groups"] = null;
 		
 		// Package Manager

@@ -22,10 +22,12 @@ if (defined ( "_SECURITY" )) {
 <h2>
 <?php translate("users");?>
 </h2>
+<?php if($acl->hasPermission("users_create")){?>
 <p>
 <?php translate("users_infotext");?>
 	<br /> <br /> <a href="index.php?action=admin_new"><?php translate("create_user");?></a><br />
 </p>
+<?php }?>
 <table class="tablesorter">
 	<thead>
 		<tr style="font-weight: bold;">
@@ -37,8 +39,11 @@ if (defined ( "_SECURITY" )) {
 			<th><a href="index.php?action=admins&order=firstname"><?php translate("firstname");?> </a></th>
 			<th><a href="index.php?action=admins&order=email"><?php translate("email");?> </a></th>
 			<th><a href="index.php?action=admins&order=group_id"><?php translate("group");?> </a></th>
+			
+<?php if($acl->hasPermission("users_edit")){?>
 			<td><?php translate ( "edit" );?></td>
 			<td><span><?php translate("delete");?> </span></td>
+			<?php }?>
 		</tr>
 	</thead>
 	<tbody>
@@ -58,14 +63,15 @@ if (defined ( "_SECURITY" )) {
 				echo "<td>" . real_htmlspecialchars ( $row->firstname ) . "</td>";
 				echo "<td>" . real_htmlspecialchars ( $row->email ) . "</td>";
 				echo "<td>" . real_htmlspecialchars ( $group ) . "</td>";
-				echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
-				
-				if ($row->id == $_SESSION ["login_id"]) {
-					echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . get_translation ( "CANT_DELETE_ADMIN" ) . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . get_translation ( "edit" ) . "\" title=\"" . get_translation ( "edit" ) . "\"></a></td>";
-				} else {
-					echo "<td style='text-align:center;'>" . '<form action="index.php?action=admin_delete&admin=' . $row->id . '" method="post" onsubmit="return confirm(\'' . get_translation ( "ask_for_delete" ) . '\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
+				if ($acl->hasPermission ( "users_edit" )) {
+					echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
+					
+					if ($row->id == $_SESSION ["login_id"]) {
+						echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . get_translation ( "CANT_DELETE_ADMIN" ) . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . get_translation ( "edit" ) . "\" title=\"" . get_translation ( "edit" ) . "\"></a></td>";
+					} else {
+						echo "<td style='text-align:center;'>" . '<form action="index.php?action=admin_delete&admin=' . $row->id . '" method="post" onsubmit="return confirm(\'' . get_translation ( "ask_for_delete" ) . '\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
+					}
 				}
-				
 				echo '</tr>';
 			}
 		}

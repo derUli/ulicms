@@ -3,7 +3,7 @@ if (defined ( "_SECURITY" )) {
 	include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
 	$acl = new ACL ();
 	
-	if (($acl->hasPermission ( "users" ) or is_admin ()) or ($_GET ["admin"] == $_SESSION ["login_id"])) {
+	if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) or ($_GET ["admin"] == $_SESSION ["login_id"])) {
 		
 		$admin = intval ( $_GET ["admin"] );
 		

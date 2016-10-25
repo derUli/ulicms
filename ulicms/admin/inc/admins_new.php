@@ -1,10 +1,7 @@
 <?php
 if (defined ( "_SECURITY" )) {
-	if (is_admin () or $acl->hasPermission ( "users" )) {
-		
-		$query = db_query ( "SELECT * FROM " . tbname ( "users" ) . " ORDER BY id", $connection );
-		if (db_num_rows ( $query )) {
-			?>
+	if ($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_create" )) {
+		?>
 <form action="index.php?action=admins" method="post" autocomplete="off"
 	id="edit_user">
 <?php csrf_token_html();?>
@@ -27,28 +24,27 @@ if (defined ( "_SECURITY" )) {
 		style="cursor: help;" onclick="$('div#is_admin').slideToggle()">[?]</span><br />
 	<div id="is_admin" class="help" style="display: none">
 	<?php
-			echo nl2br ( get_translation ( "HELP_IS_ADMIN" ) );
-			?>
+		echo nl2br ( get_translation ( "HELP_IS_ADMIN" ) );
+		?>
 	</div>
 	<br /> <input type="checkbox" value="1" name="locked" id="locked"> <label
 		for="locked"><?php
-			
-			translate ( "locked" );
-			?> </label> <br /> <br /> <input type="submit"
+		
+		translate ( "locked" );
+		?> </label> <br /> <br /> <input type="submit"
 		value="<?php translate ( "create_user" );?>">
 			<?php
-			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-				?>
+		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
+			?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php
-			}
-			?>
+		}
+		?>
 </form>
 
 <?php
-		} else {
-			noperms ();
-		}
+	} else {
+		noperms ();
 	}
 }
