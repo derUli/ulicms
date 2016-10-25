@@ -2,15 +2,6 @@
 $acl = new ACL ();
 if ($acl->hasPermission ( "motd" )) {
 	?>
-<script type="text/javascript">
-function filter_by_language(element){
-   var index = element.selectedIndex
-   if(element.options[index].value != ""){
-     location.replace("index.php?action=pages&filter_language=" + element.options[index].value)
-   }
-}
-
-</script>
 <div>
 	<h2>
 	<?php
@@ -54,39 +45,6 @@ var editor = CKEDITOR.replace( 'motd',
 		echo Settings::get ( "ckeditor_skin" );
 		?>'
 					});
-
-
-
-editor.on("instanceReady", function()
-{
-	this.document.on("keyup", CKCHANGED);
-	this.document.on("paste", CKCHANGED);
-}
-);
-function CKCHANGED() {
-	formchanged = 1;
-}
-
-var formchanged = 0;
-var submitted = 0;
-
-$(document).ready(function() {
-	$('form').each(function(i,n){
-		$('input', n).change(function(){formchanged = 1});
-		$('textarea', n).change(function(){formchanged = 1});
-		$('select', n).change(function(){formchanged = 1});
-		$(n).submit(function(){submitted=1});
-	});
-});
-
-window.onbeforeunload = confirmExit;
-function confirmExit()
-{
-	if(formchanged == 1 && submitted == 0)
-		return "Wenn Sie diese Seite verlassen gehen nicht gespeicherte Änderungen verloren.";
-	else
-		return;
-}
 </script>
 <?php
 	} else if ($editor == "codemirror") {
@@ -124,20 +82,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("motd"),
 	?>
 	</form>
 </div>
-<script type="text/javascript">
-$("#motd_form").ajaxForm({beforeSubmit: function(e){
-  $("#message").html("");
-  $("#loading").show();
-  }, 
-  success:function(e){
-  $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
-  }
-  
 
-}); 
-
-</script>
 
 <?php
 } else {
