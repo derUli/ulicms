@@ -4,6 +4,7 @@ INSERT INTO `{prefix}groups` (`id`, `name`, `permissions`) VALUES
   "forms_create" : true, "forms_edit" : true, "banners_create" : true, "banners_edit" : true, "categories_edit" : true, "categories_create" : true,
   "videos_create" : true, "videos_edit" : true,
   "audio_create" : true, "audio_edit" : true,
-  "users_create" : true, "users_edit" : true
+  "users_create" : true, "users_edit" : true,
+  "groups_create" : true, "groups_edit" : true
   }'
 );

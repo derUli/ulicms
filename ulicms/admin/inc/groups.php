@@ -98,12 +98,19 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 <?php
 	
 	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] )) {
-		
 		include "inc/group_list.php";
 	} else if (isset ( $_GET ["add"] )) {
-		include "inc/group_add.php";
+		if ($acl->hasPermission ( "groups_create" )) {
+			include "inc/group_add.php";
+		} else {
+			noperms ();
+		}
 	} else if (isset ( $_GET ["edit"] )) {
-		include "inc/group_edit.php";
+		if ($acl->hasPermission ( "groups_edit" )) {
+			include "inc/group_edit.php";
+		} else {
+			noperms ();
+		}
 	}
 	?>
 
