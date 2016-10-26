@@ -56,9 +56,10 @@ if (count ( $groups ) > 0) {
 			</a></th>
 			<?php if($acl->hasPermission("groups_edit")){?>
 			<th><strong><?php translate("standard");?> </strong></th>
+
+			<td></td>
+			<td></td>
 			<?php }?>
-			<td></td>
-			<td></td>
 		</tr>
 	</thead>
 	<tbody>

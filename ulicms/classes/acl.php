@@ -177,6 +177,8 @@ class ACL {
 		$acl_data ["favicon"] = null;
 		$acl_data ["other"] = null;
 		$acl_data ["expert_settings"] = null;
+		$acl_data ["expert_settings_create"] = null;
+		$acl_data ["expert_settings_edit"] = null;
 		$acl_data ["open_graph"] = null;
 		
 		$acl_data ["export"] = null;

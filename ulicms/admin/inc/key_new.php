@@ -1,7 +1,7 @@
 <?php
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
-	if ($acl->hasPermission ( "expert_settings" )) {
+	if ($acl->hasPermission ( "expert_settings" ) and $acl->hasPermission ( "expert_settings_create" )) {
 		?>
 
 <form action="index.php?action=settings" method="post">

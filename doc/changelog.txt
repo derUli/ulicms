@@ -30,6 +30,8 @@ Neue Berechtigungen hinzugefügt:
 + users_edit
 + groups_create
 + groups_edit
++ expert_settings_create
++ expert_settings_edit
 
 Bugfix:
 # file_get_contents_curl() akzeptiert nun auch HTTP Status 302

@@ -2,7 +2,7 @@
 $acl = new ACL ();
 
 if (defined ( "_SECURITY" )) {
-	if ($acl->hasPermission ( "expert_settings" )) {
+	if ($acl->hasPermission ( "expert_settings" ) and $acl->hasPermission ( "expert_settings_edit" )) {
 		$key = intval ( $_GET ["key"] );
 		$query = db_query ( "SELECT * FROM " . tbname ( "settings" ) . " WHERE id='$key'" );
 		while ( $row = db_fetch_object ( $query ) ) {

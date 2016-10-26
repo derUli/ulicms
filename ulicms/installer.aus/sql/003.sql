@@ -5,6 +5,7 @@ INSERT INTO `{prefix}groups` (`id`, `name`, `permissions`) VALUES
   "videos_create" : true, "videos_edit" : true,
   "audio_create" : true, "audio_edit" : true,
   "users_create" : true, "users_edit" : true,
-  "groups_create" : true, "groups_edit" : true
+  "groups_create" : true, "groups_edit" : true,
+  "expert_settings_create" : true, "expert_settings_edit" : true
   }'
 );
