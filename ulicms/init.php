@@ -216,23 +216,15 @@ if ($config->db_server == "" or $config->db_user == "") {
 @$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password );
 
 if ($connection === false) {
-	throw new Exception ( "Fehler: Die Verbindung zum Datenbank Server konnte nicht hergestellt werden." );
+	throw new Exception ( "<h1>Can't connect to Database</h1>" );
 }
 
 $path_to_installer = dirname ( __file__ ) . DIRECTORY_SEPERATOR . "installer" . DIRECTORY_SEPERATOR . "installer.php";
 
-if (file_exists ( $path_to_installer )) {
-	header ( "Content-Type: text/html; charset=utf-8" );
-	throw new Exception ( "<p>Bitte löschen Sie den Ordner \"installer\" vom Server.<br/>
-     Das CMS kann erst betrieben werden, nach dem der Installer gelöscht wurde.
-     Dies ist ein Sicherheitsmerkmal von UliCMS.</p>" );
-	exit ();
-}
-
 $select = Database::select ( $config->db_database );
 
 if (! $select) {
-	throw new Exception ( "Fehler: Die Datenbank " . $config->db_database . " existiert nicht.\n" );
+	throw new Exception ( "<h1>Database " . $config->db_database . " doesn't exist.</h1>" );
 }
 if (isFastMode ()) {
 	$useragent = null;
