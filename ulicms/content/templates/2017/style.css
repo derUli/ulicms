@@ -92,6 +92,7 @@ nav .sub_menu {
 	display: none;
 	position: absolute;
 	list-style-type: none;
+	min-width: 130px;
 }
 
 .slicknav_nav a {
