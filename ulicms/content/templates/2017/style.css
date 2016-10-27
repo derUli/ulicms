@@ -181,9 +181,7 @@ nav .sub_menu li:hover {
 	color: white !important;
 }
 
-.active {
-	background: #337ab7 !important;
-}
+
 
 nav ul {
 	position: relative;
