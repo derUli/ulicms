@@ -115,7 +115,7 @@ nav ul ul {
 	background-color: rgb(240, 240, 240);
 }
 
-nav ul ul li {
+nav ul ul li a{
 	padding: 10px 15px;
 }
 
@@ -168,11 +168,14 @@ nav .menu_active_list_item {
 	color: white;
 }
 
-nav .sub_menu li a:hover{
+
+
+nav .sub_menu li a:hover {
 	text-decoration: none;
 	color: white !important;
 	'
 }
+
 nav .sub_menu li:hover {
 	color: white !important;
 }
