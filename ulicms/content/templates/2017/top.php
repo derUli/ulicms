@@ -19,3 +19,23 @@ og_html_prefix ();
     <![endif]-->
 </head>
 <body>
+	<div class="container">
+		<div class="header clearfix">
+			<nav>
+				<?= jumbotron_get_menu("top");?>
+			</nav>
+			<h3 class="text-muted">Project name</h3>
+		</div>
+
+		<div class="jumbotron">
+			<h1>Jumbotron heading</h1>
+			<p class="lead">Cras justo odio, dapibus ac facilisis in, egestas
+				eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris
+				condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+			<p>
+				<a class="btn btn-lg btn-success" href="#" role="button">Sign up
+					today</a>
+			</p>
+		</div>
+
+		<div class="row marketing">
