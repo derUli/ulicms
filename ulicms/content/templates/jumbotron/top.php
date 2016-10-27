@@ -24,18 +24,17 @@ og_html_prefix ();
 			<nav>
 				<?= jumbotron_get_menu("top");?>
 			</nav>
-			<h3 class="text-muted">Project name</h3>
+			<h3 class="text-muted"><?php homepage_title();?></h3>
 		</div>
-
+<?php if(is_frontpage()){?>
 		<div class="jumbotron">
-			<h1>Jumbotron heading</h1>
-			<p class="lead">Cras justo odio, dapibus ac facilisis in, egestas
-				eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-				condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+			<p class="lead"><?php echo Settings::get("motd");?></p>
 			<p>
-				<a class="btn btn-lg btn-success" href="#" role="button">Sign up
-					today</a>
+				<a class="btn btn-lg btn-success" href="admin/?register"
+					role="button"><?php translate("register") ?></a>
 			</p>
 		</div>
+		<?php }?>
 
 		<div class="row marketing">
+		<?php Template::headline();?>

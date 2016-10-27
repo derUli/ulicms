@@ -36,13 +36,13 @@ function jumbotron_get_menu($name = "top", $parent = null, $recursive = true, $o
 			
 			$additional_classes = " menu-link-to-" . $row->id . " ";
 			if ($containsCurrentItem) {
-				$additional_classes .= "contains-current-page ";
+				$additional_classes .= "active ";
 			}
 			
 			if (get_requested_pagename () != $row->systemname) {
 				$html .= "  <li class='" . trim ( $additional_classes ) . "'>";
 			} else {
-				$html .= "  <li class='menu_active_list_item" . rtrim ( $additional_classes ) . "'>";
+				$html .= "  <li class='active" . rtrim ( $additional_classes ) . "'>";
 			}
 			if (! empty ( $row->alternate_title )) {
 				$title = $row->alternate_title;
