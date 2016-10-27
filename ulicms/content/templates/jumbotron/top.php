@@ -18,11 +18,13 @@ og_html_prefix ();
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <style type="text/css">
-.slicknav_btn, .slicknav_nav {
+.slicknav_btn, .slicknav_nav, .active {
 	background: <?php
 	
 echo getconfig ( "header-background-color" );
-	?>;
+	?>
+	!
+	important;
 }
 
 h1, h2, h3, h4, h5, h6 {

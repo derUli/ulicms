@@ -85,10 +85,6 @@ body {
 	margin: 0 !important;
 }
 
-.active {
-	background-color: #337ab7;
-}
-
 #mobile-nav {
 	display: none;
 	font-size: 140%;
