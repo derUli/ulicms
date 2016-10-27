@@ -151,6 +151,10 @@ blockquote p {
 	display: inline;
 }
 
+.active {
+	background: #337ab7 !important;
+}
+
 @media only screen and (max-width: 830px) {
 	#mobile-nav {
 		display: block;
