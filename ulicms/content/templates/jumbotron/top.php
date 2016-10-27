@@ -19,12 +19,21 @@ og_html_prefix ();
     <![endif]-->
 </head>
 <body>
-	<div class="container">
+	<div class="container root">
 		<div class="header clearfix">
 			<nav>
 				<?= jumbotron_get_menu("top");?>
 			</nav>
-			<h3 class="text-muted"><?php homepage_title();?></h3>
+
+			<h3 class="text-muted">
+			<?php
+			
+			if (getconfig ( "logo_disabled" ) == "no") {
+				logo ();
+			} else {
+				homepage_title ();
+			}
+			?></h3>
 		</div>
 <?php if(is_frontpage()){?>
 		<div class="jumbotron">
