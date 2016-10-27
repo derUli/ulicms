@@ -157,9 +157,8 @@ class PackageManager {
 		natcasesort ( $folders );
 		for($i = 0; $i < count ( $folders ); $i ++) {
 			$f = $templateDir . $folders [$i] . "/";
-			if (is_dir ( $templateDir . $folders [$i] )) {
-				if (is_file ( $f . "oben.php" ) and is_file ( $f . "unten.php" ) and is_file ( $f . "style.css" ))
-					array_push ( $themes, $folders [$i] );
+			if (is_dir ( $templateDir . $folders [$i] ) and ! startsWith ( $folders [$i], "." )) {
+				array_push ( $themes, $folders [$i] );
 			}
 		}
 		
