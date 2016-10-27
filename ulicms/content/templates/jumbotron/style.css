@@ -99,17 +99,18 @@ body {
 		display: block;
 		margin-top: 0px;
 	}
-	.slicknav_nav {
-		margin-top: 10px;
-	}
 	nav ul {
 		display: none;
 	}
 	.header h3 {
 		float: left;
 		margin-bottom: 10px;
+		width: 70%;
 	}
 	span.slicknav_arrow {
 		display: none;
+	}
+	.slicknav_btn, .slicknav_nav {
+		margin: 0 !important;
 	}
 }
