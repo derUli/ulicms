@@ -111,11 +111,19 @@ body {
 		float: left;
 		margin-bottom: 10px;
 		width: 70%;
+		margin-top: 12px;
 	}
 	span.slicknav_arrow {
 		display: none;
 	}
 	.slicknav_btn, .slicknav_nav {
 		margin: 0 !important;
+	}
+	.slicknav_nav {
+		font-size: 20px !important;
+	}
+	.slicknav_nav li a {
+		padding-top: 15px !important;
+		padding-bottom: 15px !important;
 	}
 }
