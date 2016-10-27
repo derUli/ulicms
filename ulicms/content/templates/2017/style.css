@@ -84,6 +84,10 @@ html {
 	}
 }
 
+nav li a {
+	display: inline-block;
+}
+
 nav .sub_menu {
 	display: none;
 	position: absolute;
@@ -107,12 +111,8 @@ nav .sub_menu {
 	padding: 15px !important;
 }
 
-nav li ul li a {
-	padding: 10px 15px;
-}
-
 nav ul ul {
-	background-color: rgba(240, 240, 240, 0.7);
+	background-color: rgb(240, 240, 240);
 }
 
 nav ul ul li {
