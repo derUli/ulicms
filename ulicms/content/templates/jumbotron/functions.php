@@ -52,7 +52,7 @@ function jumbotron_get_menu($name = "top", $parent = null, $recursive = true, $o
 			if (get_requested_pagename () != $row->systemname) {
 				$html .= "<a href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "' class='" . trim ( $additional_classes ) . "'>";
 			} else {
-				$html .= "<a class='menu_active_link" . rtrim ( $additional_classes ) . "' href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "'>";
+				$html .= "<a class='active" . rtrim ( $additional_classes ) . "' href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "'>";
 			}
 			if (! is_null ( $row->menu_image ) and ! empty ( $row->menu_image )) {
 				$html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities ( $row->title, ENT_QUOTES, "UTF-8" ) . '"/>';

@@ -81,6 +81,14 @@ body {
 	display: none !important;
 }
 
+.slicknav_nav a {
+	margin: 0 !important;
+}
+
+.active {
+	background-color: #337ab7;
+}
+
 #mobile-nav {
 	display: none;
 	font-size: 140%;
@@ -97,6 +105,10 @@ body {
 .jumbotron {
 	padding-top: 20px !important;
 	padding-bottom: 20px !important;
+}
+
+.slicknav_nav li a:hover, .nav-pills>li>a {
+	border-radius: 0px !important;
 }
 
 @media only screen and (max-width: 830px) {
