@@ -1,6 +1,11 @@
 <?php
 html5_doctype ();
 og_html_prefix ();
+$motto = get_motto ();
+$data = get_custom_data ();
+if (isset ( $data ["motto"] )) {
+	$motto = $data ["motto"];
+}
 ?>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -62,5 +67,9 @@ echo getconfig ( "header-background-color" );
 		<?php }?>
 
 		<div class="row marketing">
+			<?php if($motto){?>
+			<blockquote>
+		<?php echo $motto;?></blockquote>
+		<?php }?>
 			<main>
 		<?php Template::headline();?>
