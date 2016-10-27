@@ -30,8 +30,7 @@ og_html_prefix ();
 		<div class="jumbotron">
 			<p class="lead"><?php echo Settings::get("motd");?></p>
 			<p>
-				<a class="btn btn-lg btn-success" href="admin/?register"
-					role="button"><?php translate("register") ?></a>
+				<a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate("login") ?></a>
 			</p>
 		</div>
 		<?php }?>
