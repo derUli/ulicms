@@ -37,13 +37,6 @@ html {
 	border-top: 1px solid #e5e5e5;
 }
 
-/* Customize container */
-@media ( min-width : 768px) {
-	.container {
-		max-width: 730px;
-	}
-}
-
 .container-narrow>hr {
 	margin: 30px 0;
 }
@@ -62,6 +55,7 @@ html {
 /* Supporting marketing content */
 .marketing {
 	margin: 0;
+	margin-bottom: 20px;
 }
 
 .marketing p+h4 {
@@ -204,9 +198,9 @@ li:hover ul {
 	}
 	.header h3 {
 		float: left;
-		margin-bottom: 10px;
+		margin-bottom: 8px;
 		width: 70%;
-		margin-top: 12px;
+		margin-top: 8px;
 	}
 	.slicknav_btn, .slicknav_nav {
 		margin: 0 !important;
