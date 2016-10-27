@@ -59,4 +59,5 @@ echo getconfig ( "header-background-color" );
 		<?php }?>
 
 		<div class="row marketing">
+		<main>
 		<?php Template::headline();?>

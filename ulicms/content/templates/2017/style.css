@@ -4,6 +4,11 @@ body {
 	padding-bottom: 20px;
 }
 
+/* Fucking Internet Exploder sucks */
+main, header, footer {
+	display: block;
+}
+
 html {
 	overflow-y: scroll;
 }

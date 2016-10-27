@@ -1,3 +1,4 @@
+</main>
 </div>
 <footer class="footer">
 	<p>&copy; <?php year();?> by <?php homepage_owner();?>
