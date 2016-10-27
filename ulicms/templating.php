@@ -876,8 +876,12 @@ function base_metas() {
 		echo "\r\n";
 	}
 	
+	$min_style_file = getTemplateDirPath ( get_theme () ) . "style.min.css";
 	$style_file = getTemplateDirPath ( get_theme () ) . "style.css";
-	if (is_file ( $style_file )) {
+	
+	if (is_file ( $min_style_file )) {
+		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
+	} else if (is_file ( $style_file )) {
 		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
 	}
 	echo "\r\n";

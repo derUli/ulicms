@@ -1,0 +1,233 @@
+/* Space out content a bit */
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+/* Fucking Internet Exploder sucks */
+main, header, footer {
+	display: block;
+}
+
+html {
+	overflow-y: scroll;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+	border-radius: 0px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header, .marketing, .footer {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+/* Custom page header */
+.header {
+	padding-bottom: 20px;
+	border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+	margin-top: 0;
+	margin-bottom: 0;
+	line-height: 40px;
+}
+
+/* Custom page footer */
+.footer {
+	padding-top: 19px;
+	color: #777;
+	border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow>hr {
+	margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.jumbotron .btn {
+	padding: 14px 24px;
+	font-size: 21px;
+}
+
+/* Supporting marketing content */
+.marketing {
+	margin: 0;
+	margin-bottom: 20px;
+}
+
+.marketing p+h4 {
+	margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+	/* Remove the padding we set earlier */
+	.header, .marketing, .footer {
+		padding-right: 0;
+		padding-left: 0;
+	}
+	/* Space out the masthead */
+	.header {
+		margin-bottom: 30px;
+	}
+	/* Remove the bottom border on the jumbotron for visual effect */
+	.jumbotron {
+		border-bottom: 0;
+	}
+}
+
+nav li a {
+	display: block;
+}
+
+nav .sub_menu {
+	display: none;
+	position: absolute;
+	list-style-type: none;
+	min-width: 130px;
+}
+
+.slicknav_nav a {
+	margin: 0 !important;
+}
+
+#mobile-nav {
+	display: none;
+	font-size: 140%;
+}
+
+.slicknav_menu {
+	background: none !important;
+}
+
+.slicknav_btn {
+	padding: 15px !important;
+}
+
+nav ul ul {
+	background-color: rgb(240, 240, 240);
+}
+
+nav ul ul li a {
+	padding: 10px 15px;
+}
+
+.jumbotron {
+	padding-top: 20px !important;
+	padding-bottom: 20px !important;
+	border-radius: 0px !important;
+}
+
+.slicknav_nav li a:hover, .nav-pills>li>a {
+	border-radius: 0px !important;
+}
+
+code {
+	background-color: white;
+	display: block;
+	padding: 20px;
+	border: 1px dotted blue;
+	font-size: 0.7em;
+	word-wrap: break-word;
+	/* Internet Explorer 5.5+ */
+	font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono',
+		Consolas, 'Everson Mono', 'Lucida Console', 'Andale Mono',
+		'Nimbus Mono L', 'Liberation Mono', FreeMono, 'Osaka Monospaced',
+		Courier, 'New Courier', monospace;
+}
+
+blockquote {
+	background: #f9f9f9;
+	border-left: 10px solid #ccc;
+	margin: 1.5em 10px;
+	padding: 0.5em 10px;
+	quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+blockquote:before {
+	color: #ccc;
+	content: open-quote;
+	font-size: 4em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+}
+
+blockquote p {
+	display: inline;
+}
+
+nav .menu_active_list_item, nav .menu_active_link {
+	color: white;
+}
+
+nav .sub_menu li a:hover {
+	text-decoration: none;
+	color: white !important;
+	'
+}
+
+nav .sub_menu li:hover {
+	color: white !important;
+}
+
+nav ul {
+	position: relative;
+	padding: 0px;
+	margin: 0px
+}
+
+nav ul 
+li:hover ul {
+	display: block;
+}
+
+@media only screen and (max-width: 830px) {
+	#mobile-nav {
+		display: block;
+		margin-top: 0px;
+	}
+	nav ul {
+		display: none;
+	}
+	.header h3 {
+		float: left;
+		margin-bottom: 8px;
+		width: 70%;
+		margin-top: 8px;
+	}
+	.slicknav_btn, .slicknav_nav {
+		margin: 0 !important;
+	}
+	.slicknav_nav {
+		font-size: 20px !important;
+	}
+	.slicknav_nav li a {
+		padding-top: 15px !important;
+		padding-bottom: 15px !important;
+	}
+	.marketing {
+		overflow: auto;
+	}
+	.slicknav_nav ul {
+		margin: 0 !important;
+	}
+	.slicknav_nav .active>a, .slicknav_nav .menu_active_list_item a {
+		background: #ccc;
+		color: #fff;
+	}
+	span.slicknav_icon-bar {
+		width: 0.75em !important;
+	}
+	.slicknav_menu .sub_menu li a {
+		padding-left: 30px;
+	}
+}
