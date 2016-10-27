@@ -18,7 +18,7 @@ og_html_prefix ();
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <style type="text/css">
-.slicknav_btn{
+.slicknav_btn, .slicknav_nav {
 	background: <?php
 	
 echo getconfig ( "header-background-color" );
@@ -31,13 +31,6 @@ h1, h2, h3, h4, h5, h6 {
 echo getconfig ( "header-background-color" );
 	?>;
 }
-
-nav a.menu_active_link, nav a.contains-current-page {
-	border-bottom: 3px solid<?php
-	
-echo getconfig ( "header-background-color" );
-	?>;
-}
 </style>
 </head>
 <body>
@@ -46,7 +39,6 @@ echo getconfig ( "header-background-color" );
 			<nav>
 				<?= jumbotron_get_menu("top");?>
 			</nav>
-			<div id="mobile-nav"></div>
 			<h3 class="text-muted">
 			<?php
 			
@@ -56,6 +48,8 @@ echo getconfig ( "header-background-color" );
 				homepage_title ();
 			}
 			?></h3>
+
+			<div id="mobile-nav"></div>
 		</div>
 <?php if(is_frontpage()){?>
 		<div class="jumbotron">
