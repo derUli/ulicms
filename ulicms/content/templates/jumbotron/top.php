@@ -18,7 +18,7 @@ og_html_prefix ();
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <style type="text/css">
-.slicknav_btn, .slicknav_nav, .active {
+.slicknav_btn, .slicknav_nav, .active, .nav .sub_menu li:hover {
 	background: <?php
 	
 echo getconfig ( "header-background-color" );

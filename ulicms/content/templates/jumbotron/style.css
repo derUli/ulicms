@@ -85,8 +85,10 @@ html {
 	}
 }
 
-.sub_menu {
-	display: none !important;
+nav .sub_menu {
+	display: none;
+	position: absolute;
+	list-style-type: none;
 }
 
 .slicknav_nav a {
@@ -104,6 +106,18 @@ html {
 
 .slicknav_btn {
 	padding: 15px !important;
+}
+
+nav li ul li a {
+	padding: 10px 15px;
+}
+
+nav ul ul {
+	background-color: rgba(240, 240, 240, 0.7);
+}
+
+nav ul ul li {
+	padding: 10px 15px;
 }
 
 .jumbotron {
@@ -151,8 +165,33 @@ blockquote p {
 	display: inline;
 }
 
+nav .menu_active_list_item {
+	color: white;
+}
+
+nav .sub_menu li a:hover {
+	text-decoration: none;
+	color: white;
+	'
+}
+
+nav .sub_menu li:hover {
+	color: white !important;
+}
+
 .active {
 	background: #337ab7 !important;
+}
+
+nav ul {
+	position: relative;
+	padding: 0px;
+	margin: 0px
+}
+
+nav ul 
+li:hover ul {
+	display: block;
 }
 
 @media only screen and (max-width: 830px) {
@@ -168,9 +207,6 @@ blockquote p {
 		margin-bottom: 10px;
 		width: 70%;
 		margin-top: 12px;
-	}
-	span.slicknav_arrow {
-		display: none;
 	}
 	.slicknav_btn, .slicknav_nav {
 		margin: 0 !important;
