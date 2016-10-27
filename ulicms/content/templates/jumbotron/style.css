@@ -111,6 +111,41 @@ body {
 	border-radius: 0px !important;
 }
 
+code {
+	background-color: white;
+	display: block;
+	padding: 20px;
+	border: 1px dotted blue;
+	font-size: 0.7em;
+	word-wrap: break-word;
+	/* Internet Explorer 5.5+ */
+	font-family: Pragmata, Menlo, 'DejaVu LGC Sans Mono', 'DejaVu Sans Mono',
+		Consolas, 'Everson Mono', 'Lucida Console', 'Andale Mono',
+		'Nimbus Mono L', 'Liberation Mono', FreeMono, 'Osaka Monospaced',
+		Courier, 'New Courier', monospace;
+}
+
+blockquote {
+	background: #f9f9f9;
+	border-left: 10px solid #ccc;
+	margin: 1.5em 10px;
+	padding: 0.5em 10px;
+	quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+blockquote:before {
+	color: #ccc;
+	content: open-quote;
+	font-size: 4em;
+	line-height: 0.1em;
+	margin-right: 0.25em;
+	vertical-align: -0.4em;
+}
+
+blockquote p {
+	display: inline;
+}
+
 @media only screen and (max-width: 830px) {
 	#mobile-nav {
 		display: block;
@@ -137,5 +172,8 @@ body {
 	.slicknav_nav li a {
 		padding-top: 15px !important;
 		padding-bottom: 15px !important;
+	}
+	.marketing {
+		overflow: auto;
 	}
 }
