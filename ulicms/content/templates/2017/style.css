@@ -85,7 +85,7 @@ html {
 }
 
 nav li a {
-	display: inline-block;
+	display: block;
 }
 
 nav .sub_menu {
@@ -116,7 +116,7 @@ nav ul ul {
 	background-color: rgb(240, 240, 240);
 }
 
-nav ul ul li a{
+nav ul ul li a {
 	padding: 10px 15px;
 }
 
@@ -165,11 +165,9 @@ blockquote p {
 	display: inline;
 }
 
-nav .menu_active_list_item {
+nav .menu_active_list_item, nav .menu_active_link {
 	color: white;
 }
-
-
 
 nav .sub_menu li a:hover {
 	text-decoration: none;
@@ -180,8 +178,6 @@ nav .sub_menu li a:hover {
 nav .sub_menu li:hover {
 	color: white !important;
 }
-
-
 
 nav ul {
 	position: relative;
@@ -220,5 +216,12 @@ li:hover ul {
 	}
 	.marketing {
 		overflow: auto;
+	}
+	.slicknav_nav ul {
+		margin: 0 !important;
+	}
+	.slicknav_nav .active>a, .slicknav_nav .menu_active_list_item a {
+		background: #ccc;
+		color: #fff;
 	}
 }

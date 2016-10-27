@@ -18,11 +18,14 @@ og_html_prefix ();
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 <style type="text/css">
-.slicknav_btn, .slicknav_nav, nav .active, nav .sub_menu li:hover {
+.slicknav_btn, .slicknav_nav, nav .active, nav .sub_menu li:hover, nav .menu_active_link
+	{
 	background: <?php
 	
 echo getconfig ( "header-background-color" );
-	?>;
+	?>
+	!
+	important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -59,5 +62,5 @@ echo getconfig ( "header-background-color" );
 		<?php }?>
 
 		<div class="row marketing">
-		<main>
+			<main>
 		<?php Template::headline();?>
