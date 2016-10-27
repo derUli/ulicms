@@ -12,7 +12,6 @@ if (isset ( $_POST ["register_user"] )) {
 	} else if ($_POST ["admin_password"] != $_POST ["admin_password_repeat"]) {
 		echo "<p style='color:red;'>" . get_translation ( "PASSWORD_REPEAT_IS_WRONG" ) . "</p>";
 	} 
-
 	else {
 		$registered_user_default_level = Settings::get ( "registered_user_default_level" );
 		if ($registered_user_default_level === false) {
