@@ -168,12 +168,11 @@ nav .menu_active_list_item {
 	color: white;
 }
 
-nav .sub_menu li a:hover {
+nav .sub_menu li a:hover{
 	text-decoration: none;
-	color: white;
+	color: white !important;
 	'
 }
-
 nav .sub_menu li:hover {
 	color: white !important;
 }
