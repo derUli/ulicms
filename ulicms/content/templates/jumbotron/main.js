@@ -1,6 +1,6 @@
 	$(function(){
 		$('nav ul:first-child').slicknav({
-           "prependTo" : "body",
+		           "prependTo" : "#mobile-nav",
            "label" : "",
            "allowParentLinks" : true
         });

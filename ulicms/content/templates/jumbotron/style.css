@@ -80,3 +80,25 @@ body {
 .sub_menu {
 	display: none !important;
 }
+
+#mobile-nav {
+	display: none;
+	font-size: 140%;
+}
+
+.slicknav_menu {
+	background: none !important;
+}
+
+.slicknav_btn {
+	padding: 15px !important;
+}
+
+@media only screen and (max-width: 830px) {
+	#mobile-nav {
+		display: block
+	}
+	nav ul {
+		display: none;
+	}
+}

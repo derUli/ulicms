@@ -5,8 +5,8 @@
 </footer>
 <?php Template::footer();?>
 </div>
-<!-- <script type="text/javascript"
+<script type="text/javascript"
 	src="<?php echo getTemplateDirPath(get_theme());?>main.js"></script>
--->
+
 </body>
 </html>

@@ -17,14 +17,36 @@ og_html_prefix ();
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+<style type="text/css">
+.slicknav_btn{
+	background: <?php
+	
+echo getconfig ( "header-background-color" );
+	?>;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: <?php
+	
+echo getconfig ( "header-background-color" );
+	?>;
+}
+
+nav a.menu_active_link, nav a.contains-current-page {
+	border-bottom: 3px solid<?php
+	
+echo getconfig ( "header-background-color" );
+	?>;
+}
+</style>
 </head>
 <body>
-	<div class="container root">
+	<div class="container" id="root">
 		<div class="header clearfix">
 			<nav>
 				<?= jumbotron_get_menu("top");?>
 			</nav>
-
+			<div id="mobile-nav"></div>
 			<h3 class="text-muted">
 			<?php
 			
