@@ -94,6 +94,11 @@ body {
 	padding: 15px !important;
 }
 
+.jumbotron {
+	padding-top: 10px !important;
+	padding-bottom: 10px !important;
+}
+
 @media only screen and (max-width: 830px) {
 	#mobile-nav {
 		display: block;
