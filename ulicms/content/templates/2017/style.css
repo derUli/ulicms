@@ -95,8 +95,8 @@ body {
 }
 
 .jumbotron {
-	padding-top: 10px !important;
-	padding-bottom: 10px !important;
+	padding-top: 20px !important;
+	padding-bottom: 20px !important;
 }
 
 @media only screen and (max-width: 830px) {

@@ -40,19 +40,17 @@ echo getconfig ( "header-background-color" );
 				<?= jumbotron_get_menu("top");?>
 			</nav>
 			<h3 class="text-muted">
-			<?php
-			
-			if (getconfig ( "logo_disabled" ) == "no") {
-				logo ();
-			} else {
-				homepage_title ();
-			}
-			?></h3>
+			<?php homepage_title ();?></h3>
 
 			<div id="mobile-nav"></div>
 		</div>
 <?php if(is_frontpage()){?>
 		<div class="jumbotron">
+		<?php
+	if (getconfig ( "logo_disabled" ) == "no") {
+		logo ();
+	}
+	?>
 			<p class="lead"><?php echo Settings::get("motd");?></p>
 			<p>
 				<a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate("login") ?></a>
