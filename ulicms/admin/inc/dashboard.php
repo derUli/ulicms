@@ -7,7 +7,9 @@ if ($acl->hasPermission ( "dashboard" )) {
 
 	<?php
 	if (defined ( "_SECURITY" ) and logged_in ()) {
-		$pages_count = db_num_rows ( db_query ( "SELECT * FROM " . tbname ( "content" ) ) );
+		$query = db_query ( "SELECT count(id) as amount FROM " . tbname ( "content" ) );
+		$result = Database::fetchObject($query);
+		$pages_count = $result->amount;
 		
 		$topPages = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE notinfeed = 0 AND redirection NOT LIKE '#%' ORDER BY views DESC LIMIT 5" );
 		$lastModfiedPages = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY lastmodified DESC LIMIT 5" );
