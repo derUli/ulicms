@@ -11,19 +11,16 @@ if ($acl->hasPermission ( "dashboard" )) {
 		$result = Database::fetchObject($query);
 		$pages_count = $result->amount;
 		
-		$topPages = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE notinfeed = 0 AND redirection NOT LIKE '#%' ORDER BY views DESC LIMIT 5" );
-		$lastModfiedPages = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY lastmodified DESC LIMIT 5" );
+		$topPages = db_query ( "SELECT language, systemname, title, `views` FROM " . tbname ( "content" ) . " WHERE notinfeed = 0 AND redirection NOT LIKE '#%' ORDER BY views DESC LIMIT 5" );
+		$lastModfiedPages = db_query ( "SELECT language, systemname, title, lastmodified, lastchangeby FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY lastmodified DESC LIMIT 5" );
 		
-		$admins_query = db_query ( "SELECT * FROM " . tbname ( "users" ) );
+		$admins_query = db_query ( "SELECT id, username FROM " . tbname ( "users" ) );
 		
 		$admins = Array ();
 		
 		while ( $row = db_fetch_object ( $admins_query ) ) {
 			$admins [$row->id] = $row->username;
-		}
-		
-		$users_online = db_query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE last_action > " . (time () - 300) . " ORDER BY username" );
-		
+		}	
 		?>
 <p>
 <?php
@@ -131,7 +128,7 @@ $(document).ready(function() {
 		?>
 			<?php
 		
-		$test = db_query ( "SELECT * FROM " . tbname ( "guestbook_entries" ) );
+		$test = db_query ( "SELECT id FROM " . tbname ( "guestbook_entries" ) );
 		if ($test) {
 			?>
 			<tr>
