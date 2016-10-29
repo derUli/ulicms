@@ -388,7 +388,7 @@ function set_custom_data($var, $value, $page = null) {
 	return db_query ( "UPDATE " . tbname ( "content" ) . " SET custom_data = '" . db_escape ( $json ) . "' WHERE systemname='" . db_escape ( $page ) . "'" );
 }
 function language_selection() {
-	$query = db_query ( "SELECT * FROM " . tbname ( "languages" ) . " ORDER by name" );
+	$query = db_query ( "SELECT language_code, name FROM " . tbname ( "languages" ) . " ORDER by name" );
 	echo "<ul class='language_selection'>";
 	while ( $row = db_fetch_object ( $query ) ) {
 		$domain = getDomainByLanguage ( $row->language_code );

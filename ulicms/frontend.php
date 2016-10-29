@@ -12,7 +12,9 @@ add_hook ( "after_session_start" );
 
 setLanguageByDomain ();
 
-if (! empty ( $_GET ["language"] ) and in_array ( $_GET ["language"], getAllLanguages () )) {
+$languages = getAllLanguages ();
+
+if (! empty ( $_GET ["language"] ) and in_array ( $_GET ["language"], $languages )) {
 	$_SESSION ["language"] = db_escape ( $_GET ["language"] );
 }
 
@@ -22,7 +24,7 @@ if (! isset ( $_SESSION ["language"] )) {
 
 setLocaleByLanguage ();
 
-if (in_array ( $_SESSION ["language"], getAllLanguages () )) {
+if (in_array ( $_SESSION ["language"], $languages )) {
 	include getLanguageFilePath ( $_SESSION ["language"] );
 	Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
 	Translation::includeCustomLangFile ( $_SESSION ["language"] );
