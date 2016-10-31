@@ -1,7 +1,7 @@
 $(function() {
 	$('nav ul:first-child').slicknav({
 		"prependTo" : "#mobile-nav",
-		"label" : "",
+		"label" : Translation.MENU,
 		"allowParentLinks" : true
 	});
 });
