@@ -8,7 +8,6 @@
 </div>
 <?php
 $translation = new JSTranslation ();
-$translation->addKey ( "pages" );
 $translation->addKey ( "menu" );
 $translation->renderJS ();
 ?>

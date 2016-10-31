@@ -40,7 +40,7 @@ class JSTranslation {
 			$line = "Translation." . $key . " = \"" . $value . "\";";
 			$js [] = $line;
 		}
-		$jsString = implode ( " ", $js );
+		$jsString = implode ( "", $js );
 		$output = str_replace ( "{code}", $jsString, $wrap );
 		return $output;
 	}
