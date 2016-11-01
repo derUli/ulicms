@@ -15,7 +15,7 @@ class JSTranslation {
 	}
 	public function removeKey($del_var) {
 		if (($key = array_search ( $del_val, $this->keys )) !== false) {
-			unset ( $messages [$key] );
+			unset ( $this->keys [$key] );
 		}
 	}
 	public function removeKeys($del_vars) {
@@ -28,7 +28,7 @@ class JSTranslation {
 	}
 	public function getJS($wrap = "<script type=\"text/javascript\">{code}</script>") {
 		$js = array (
-				"Translation = {};" 
+				"Translation = {};"
 		);
 		foreach ( $this->keys as $key ) {
 			if (startsWith ( $key, "TRANSLATION_" )) {
