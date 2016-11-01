@@ -1681,6 +1681,28 @@ function getAllMenus($only_used = false) {
 		}
 		$menus = $new_menus;
 	}
+	
+	$themesList = getThemesList ();
+	$allThemeMenus = array ();
+	foreach ( $themesList as $theme ) {
+		$themeMenus = getThemeMeta ( $theme, "menus" );
+		if ($themeMenus and is_array ( $themeMenus )) {
+			foreach ( $themeMenus as $m ) {
+				if (! in_array ( $m, $allThemeMenus )) {
+					$allThemeMenus [] = $m;
+				}
+			}
+		}
+	}
+	
+	if (count ( $allThemeMenus ) > 0) {
+		$menus = $allThemeMenus;
+	}
+	
+	if (! in_array ( "none", $menus )) {
+		$menus [] = "none";
+	}
+	
 	sort ( $menus );
 	return $menus;
 }
