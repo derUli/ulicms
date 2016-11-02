@@ -17,6 +17,7 @@
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
+- PHP Form Builder Class aus dem Core entfernt. Dies soll zukünftig auf ein Modul entfallen
 
 Neue Berechtigungen hinzugefügt:
 + pages_create
