@@ -212,7 +212,7 @@ function browsercacheOneDay($modified = null) {
 
 // PHP Formbuilder Class initialisieren
 function initPFBC() {
-	include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "PFBC" . DIRECTORY_SEPERATOR . "Form.php";
+	add_hook("init_pfbc");
 }
 function is_debug_mode() {
 	$config = new config ();
