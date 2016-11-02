@@ -212,7 +212,7 @@ function browsercacheOneDay($modified = null) {
 
 // PHP Formbuilder Class initialisieren
 function initPFBC() {
-	include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "PFBC" . DIRECTORY_SEPERATOR . "Form.php";
+	add_hook("init_pfbc");
 }
 function is_debug_mode() {
 	$config = new config ();
@@ -1681,6 +1681,28 @@ function getAllMenus($only_used = false) {
 		}
 		$menus = $new_menus;
 	}
+	
+	$themesList = getThemesList ();
+	$allThemeMenus = array ();
+	foreach ( $themesList as $theme ) {
+		$themeMenus = getThemeMeta ( $theme, "menus" );
+		if ($themeMenus and is_array ( $themeMenus )) {
+			foreach ( $themeMenus as $m ) {
+				if (! in_array ( $m, $allThemeMenus )) {
+					$allThemeMenus [] = $m;
+				}
+			}
+		}
+	}
+	
+	if (count ( $allThemeMenus ) > 0) {
+		$menus = $allThemeMenus;
+	}
+	
+	if (! in_array ( "none", $menus )) {
+		$menus [] = "none";
+	}
+	
 	sort ( $menus );
 	return $menus;
 }
