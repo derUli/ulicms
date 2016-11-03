@@ -15,6 +15,7 @@
 			$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
 			
 			$types = get_available_post_types ();
+			
 			?>
 <form id="pageform" name="newpageform" action="index.php?action=pages"
 	method="post">
@@ -148,8 +149,7 @@
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
 		<?php translate("disabled");?>
 		</option>
-			</select> <br /> <br />
-			<strong><?php translate("category");?>
+			</select> <br /> <br /> <strong><?php translate("category");?>
 	</strong><br />
 	<?php echo categories :: getHTMLSelect();?>
 	
@@ -258,6 +258,28 @@ function openMenuImageSelectWindow(field) {
 				</div>
 			</div>
 
+		</div>
+		<div id="custom_fields_container">
+		<?php
+			
+			foreach ( $types as $type ) {
+				$fields = getFieldsForCustomType ($type);
+				if (count ( $fields ) > 0) {
+					?>
+		<div class="custom-field-tab" data-type="<?php echo $type;?>">
+			<h2 class="accordion-header"><?php translate($type);?></h2>
+
+			<div class="accordion-content">
+		<?php foreach($fields as $field){?>
+		<p>
+					<strong><?php translate($field);?></strong> <br /> <input
+						type="text" name="cf_<?php echo $field;?>" value="">
+				</p>					
+		<?php }?>
+		</div>
+		<?php }?>
+		
+		<?php }?>
 		</div>
 		<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
