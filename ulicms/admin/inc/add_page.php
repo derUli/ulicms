@@ -273,46 +273,47 @@ function openMenuImageSelectWindow(field) {
 		<?php foreach($fields as $field){?>
 		<p>
 						<strong><?php translate($field);?></strong> <br /> <input
-							type="text" name="cf_<?echo $type;?>_<?php echo $field;?>"
+							type="text" name="cf_<?php echo $type;?>_<?php echo $field;?>"
 							value="">
 					</p>					
 		<?php }?>
 		</div>
+			</div>
 		<?php }?>
 		
 		<?php }?>
 		</div>
-			<h2 class="accordion-header"><?php translate("open_in");?></h2>
+		<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
-			<div class="accordion-content">
-				<strong><?php
+		<div class="accordion-content">
+			<strong><?php
 			
 			translate ( "open_in" );
 			?>
 		</strong><br /> <select name="target" size=1>
-					<option value="_self">
+				<option value="_self">
 			<?php translate("target_self");?>
 			</option>
-					<option value="_blank">
+				<option value="_blank">
 			<?php translate("target_blank");?>
 			</option>
-				</select>
-			</div>
-			<div id="tab-og" style="display: none;">
-				<h2 class="accordion-header"><?php translate("open_graph");?></h2>
+			</select>
+		</div>
+		<div id="tab-og" style="display: none;">
+			<h2 class="accordion-header"><?php translate("open_graph");?></h2>
 
-				<div class="accordion-content">
-					<p><?php translate("og_help");?></p>
-					<div style="margin-left: 20px;">
-						<strong><?php translate("title");?>
+			<div class="accordion-content">
+				<p><?php translate("og_help");?></p>
+				<div style="margin-left: 20px;">
+					<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title" value=""> <br /> <br />
 
-						<strong><?php translate("description");?>
+					<strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description" value=""> <br />
-						<br /> <strong><?php translate("type");?>
+					<br /> <strong><?php translate("type");?>
 		</strong><br /> <input type="text" name="og_type" value=""> <br /> <br />
-						<strong><?php translate("image");?></strong> <br />
-						<script type="text/javascript">
+					<strong><?php translate("image");?></strong> <br />
+					<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -326,36 +327,36 @@ function openMenuImageSelectWindow(field) {
     );
 }
 </script>
-						<input type="text" id="og_image" name="og_image"
-							readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-							value="<?php echo htmlspecialchars($og_image);?>"
-							style="cursor: pointer" /><br /> <a href="#"
-							onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
-					</div>
+					<input type="text" id="og_image" name="og_image"
+						readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+						value="<?php echo htmlspecialchars($og_image);?>"
+						style="cursor: pointer" /><br /> <a href="#"
+						onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
 				</div>
 			</div>
-			<div id="tab-cache-control" style="display: none;">
-				<h2 class="accordion-header"><?php translate("cache_control");?></h2>
+		</div>
+		<div id="tab-cache-control" style="display: none;">
+			<h2 class="accordion-header"><?php translate("cache_control");?></h2>
 
-				<div class="accordion-content">
-					<strong><?php translate("cache_control");?></strong> <br /> <select
-						name="cache_control">
-						<option value="auto" selected><?php translate("auto");?></option>
-						<option value="force"><?php translate("force");?></option>
-						<option value="no_cache"><?php translate("no_cache");?></option>
-					</select>
-				</div>
+			<div class="accordion-content">
+				<strong><?php translate("cache_control");?></strong> <br /> <select
+					name="cache_control">
+					<option value="auto" selected><?php translate("auto");?></option>
+					<option value="force"><?php translate("force");?></option>
+					<option value="no_cache"><?php translate("no_cache");?></option>
+				</select>
 			</div>
+		</div>
 
-			<div id="tab-list" style="display: none">
-				<h2 class="accordion-header"><?php translate("list_properties");?></h2>
+		<div id="tab-list" style="display: none">
+			<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
-				<div class="accordion-content">
-					<strong><?php translate("type")?></strong> <br />
+			<div class="accordion-content">
+				<strong><?php translate("type")?></strong> <br />
 
 						<?php $types = get_available_post_types();?>
 <select name="list_type">
-						<option value="null" selected>[<?php
+					<option value="null" selected>[<?php
 			translate ( "every" )?>]
 		</option>
 		<?php
@@ -366,7 +367,7 @@ function openMenuImageSelectWindow(field) {
 			?>
 	</select> <br /> <br /> <strong><?php translate("language");?>
 	</strong> <br /> <select name="list_language">
-						<option value="">[<?php translate("every");?>]</option>
+					<option value="">[<?php translate("every");?>]</option>
 	<?php
 			$languages = getAllLanguages ();
 			
@@ -383,7 +384,7 @@ function openMenuImageSelectWindow(field) {
 			translate ( "menu" );
 			?>
 	</strong><br /> <select name="list_menu" size=1>
-						<option value="">[<?php translate("every");?>]</option>
+					<option value="">[<?php translate("every");?>]</option>
 		<?php
 			foreach ( getAllMenus () as $menu ) {
 				?>
@@ -397,7 +398,7 @@ function openMenuImageSelectWindow(field) {
 			?>
 			</select> <br /> <br /> <strong><?php translate("parent");?>
 	</strong><br /> <select name="list_parent" size=1>
-						<option selected="selected" value="NULL">
+					<option selected="selected" value="NULL">
 			[
 			<?php
 			
@@ -433,102 +434,102 @@ function openMenuImageSelectWindow(field) {
 	</strong> <br /> <select name="list_order_by">
 	<?php foreach($cols as $col){?>
 	<option value="<?php echo $col;?>"
-							<?php if($col == "title"){ echo 'selected';}?>><?php echo $col;?></option>
+						<?php if($col == "title"){ echo 'selected';}?>><?php echo $col;?></option>
 	<?php }?>
 </select> <br /> <br /> <strong><?php
 			translate ( "order_direction" );
 			?>
 	</strong> <select name="list_order_direction">
-						<option value="asc"><?php translate("asc");?></option>
-						<option value="desc"><?php translate("desc");?></option>
-					</select> <br /> <br /> <strong><?php translate("limit");?></strong>
-					<input type="number" min="0" name="limit" step="1" value="0"> <br />
-					<br /> <strong><?php translate ( "use_pagination" );?></strong><br />
-					<select name="list_use_pagination">
-						<option value="1"><?php translate("yes")?></option>
-						<option value="0" selected><?php translate("no")?></option>
-					</select>
+					<option value="asc"><?php translate("asc");?></option>
+					<option value="desc"><?php translate("desc");?></option>
+				</select> <br /> <br /> <strong><?php translate("limit");?></strong>
+				<input type="number" min="0" name="limit" step="1" value="0"> <br />
+				<br /> <strong><?php translate ( "use_pagination" );?></strong><br />
+				<select name="list_use_pagination">
+					<option value="1"><?php translate("yes")?></option>
+					<option value="0" selected><?php translate("no")?></option>
+				</select>
 
 
-				</div>
 			</div>
+		</div>
 
-			<div id="tab-module" style="display: none;">
-				<h2 class="accordion-header"><?php translate("module");?></h2>
+		<div id="tab-module" style="display: none;">
+			<h2 class="accordion-header"><?php translate("module");?></h2>
 
-				<div class="accordion-content">
-					<strong><?php translate("module");?></strong><br /> <select
-						name="module">
-						<option value="null">[<?php translate("none");?>]</option>
+			<div class="accordion-content">
+				<strong><?php translate("module");?></strong><br /> <select
+					name="module">
+					<option value="null">[<?php translate("none");?>]</option>
 				<?php foreach(ModuleHelper::getAllEmbedModules() as $module){?>
 				<option value="<?php echo $module;?>"><?php echo $module;?></option>
 				<?php }?>
 				</select>
-				</div>
-
 			</div>
-			<div id="tab-video" style="display: none;">
-				<h2 class="accordion-header"><?php translate("video");?></h2>
 
-				<div class="accordion-content">
-					<strong><?php translate("video");?></strong><br /> <select
-						name="video">
-						<option value="">[<?php translate("none");?>]</option>
+		</div>
+		<div id="tab-video" style="display: none;">
+			<h2 class="accordion-header"><?php translate("video");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("video");?></strong><br /> <select
+					name="video">
+					<option value="">[<?php translate("none");?>]</option>
 				<?php while($row = Database::fetchObject($videos)){?>
 				<option value="<?php echo $row->id;?>"><?php Template::escape($row->name);?> (ID: <?php echo $row->id;?>)</option>
 				<?php }?>
 				</select>
-				</div>
-
 			</div>
-			<div id="tab-audio" style="display: none;">
-				<h2 class="accordion-header"><?php translate("audio");?></h2>
 
-				<div class="accordion-content">
-					<strong><?php translate("audio");?></strong><br /> <select
-						name="audio">
-						<option value="">[<?php translate("none");?>]</option>
+		</div>
+		<div id="tab-audio" style="display: none;">
+			<h2 class="accordion-header"><?php translate("audio");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("audio");?></strong><br /> <select
+					name="audio">
+					<option value="">[<?php translate("none");?>]</option>
 				<?php while($row = Database::fetchObject($audios)){?>
 				<option value="<?php echo $row->id;?>"><?php Template::escape($row->name);?> (ID: <?php echo $row->id;?>)</option>
 				<?php }?>
 				</select>
-				</div>
-
 			</div>
 
-			<div id="tab-image" style="display: none;">
-				<h2 class="accordion-header"><?php translate("image");?></h2>
+		</div>
 
-				<div class="accordion-content">
-					<input type="text" id="image_url" name="image_url"
-						readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-						value="" style="cursor: pointer" /><br /> <a href="#"
-						onclick="$('#menu_image').val('');return false;"><?php
+		<div id="tab-image" style="display: none;">
+			<h2 class="accordion-header"><?php translate("image");?></h2>
+
+			<div class="accordion-content">
+				<input type="text" id="image_url" name="image_url"
+					readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+					value="" style="cursor: pointer" /><br /> <a href="#"
+					onclick="$('#menu_image').val('');return false;"><?php
 			
 			translate ( "clear" );
 			?>
 		</a>
-				</div>
 			</div>
-			<div id="tab-text-position" style="display: none">
-				<h2 class="accordion-header"><?php translate("position_of_description");?></h2>
-				<div class="accordion-content">
-					<strong><?php translate("position_of_description");?>
+		</div>
+		<div id="tab-text-position" style="display: none">
+			<h2 class="accordion-header"><?php translate("position_of_description");?></h2>
+			<div class="accordion-content">
+				<strong><?php translate("position_of_description");?>
 					</strong> <br /> <select name="text_position">
-						<option value="before"><?php translate("description_before_content")?></option>
-						<option value="after"><?php translate("description_after_content")?></option>
-					</select>
+					<option value="before"><?php translate("description_before_content")?></option>
+					<option value="after"><?php translate("description_after_content")?></option>
+				</select>
 
-				</div>
 			</div>
-			<div id="article-image">
-				<h2 class="accordion-header"><?php translate("article_image");?></h2>
+		</div>
+		<div id="article-image">
+			<h2 class="accordion-header"><?php translate("article_image");?></h2>
 
-				<div class="accordion-content">
-					<strong><?php translate("article_image");?>
+			<div class="accordion-content">
+				<strong><?php translate("article_image");?>
 		</strong><br />
 
-					<script type="text/javascript">
+				<script type="text/javascript">
 function openArticleImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -542,24 +543,24 @@ function openArticleImageSelectWindow(field) {
     );
 }
 </script>
-					<input type="text" id="article_image" name="article_image"
-						readonly="readonly" onclick="openArticleImageSelectWindow(this)"
-						value="" style="cursor: pointer" maxlength="255" /><br /> <a
-						href="#" onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
-				</div>
+				<input type="text" id="article_image" name="article_image"
+					readonly="readonly" onclick="openArticleImageSelectWindow(this)"
+					value="" style="cursor: pointer" maxlength="255" /><br /> <a
+					href="#" onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 			</div>
+		</div>
 		<?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
-			<div class="accordion-content">
+		<div class="accordion-content">
 
 
-				<textarea name="custom_data" style="width: 100%; height: 200px;"
-					cols=80 rows=10>{}</textarea>
+			<textarea name="custom_data" style="width: 100%; height: 200px;"
+				cols=80 rows=10>{}</textarea>
 
-			</div>
 		</div>
-		<br /> <br />
+	</div>
+	<br /> <br />
 
 
 	<?php
@@ -568,7 +569,7 @@ function openArticleImageSelectWindow(field) {
 			?>
 
 	<div id="content-editor">
-			<textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
+		<textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
 		<?php
 			$editor = get_html_editor ();
 			?>
@@ -638,15 +639,15 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
 			}
 			?>
 		<noscript>
-				<p style="color: red;">
-					Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
-						href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
-				</p>
-			</noscript>
-		</div>
-		<div class="inPageMessage"></div>
-		<input type="hidden" name="add_page" value="add_page"> <input
-			type="submit" value="<?php translate("save");?>">
+			<p style="color: red;">
+				Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
+					href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
+			</p>
+		</noscript>
+	</div>
+	<div class="inPageMessage"></div>
+	<input type="hidden" name="add_page" value="add_page"> <input
+		type="submit" value="<?php translate("save");?>">
 	<?php
 			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 				?>

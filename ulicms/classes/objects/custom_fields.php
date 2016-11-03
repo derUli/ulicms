@@ -11,7 +11,7 @@ class CustomFields {
 		);
 		$sql = "Select count(id) as amount, id from {prefix}custom_fields where content_id = ? and name = ?";
 		$query = Database::pQuery ( $sql, $args, true );
-		$result = Database::fetchObject ( $sql );
+		$result = Database::fetchObject ( $query );
 		if ($result->amount > 0) {
 			if (is_null ( $value )) {
 				$args = array (
@@ -34,7 +34,7 @@ class CustomFields {
 					$value 
 			);
 			$sql = "INSERT INTO {prefix}custom_fields (content_id, name, value) (?, ?, ?)";
-			return $query = Database::pQuery ( $sql, $args, true );
+			return Database::pQuery ( $sql, $args, true );
 		}
 	}
 	public static function get($name, $content_id = null) {
@@ -49,7 +49,7 @@ class CustomFields {
 		$sql = "Select value from {prefix}custom_fields where content_id = ? and name = ?";
 		$query = Database::pQuery ( $sql, $args, true );
 		if (Database::getNumRows ( $query ) > 0) {
-			$result = Database::fetchObject ( $sql );
+			$result = Database::fetchObject ( $query );
 			return $result->value;
 		} else {
 			return null;
