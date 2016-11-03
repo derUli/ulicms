@@ -390,13 +390,12 @@ function getFieldsForCustomType($type) {
 	foreach ( $modules as $module ) {
 		$custom_types = getModuleMeta ( $module, "custom_types" );
 		
-		if (custom_types) {
+		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
-				if ($key != $type) {
-					break;
-				}
-				foreach($value as $field){
-				$fields [] = $field;
+				if ($key == $type) {
+					foreach ( $value as $field ) {
+						$fields [] = $field;
+					}
 				}
 			}
 		}
