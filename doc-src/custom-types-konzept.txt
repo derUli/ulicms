@@ -1,0 +1,8 @@
+In metadata.json:
+
+"content_types" : {
+   {"employee_profile" : [
+      
+   ]
+}
+}
