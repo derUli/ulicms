@@ -109,6 +109,8 @@ Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_g
 Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_owner_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
 Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_others_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
 
+Database::query ( "CREATE TABLE `{prefix}custom_fields` ( `id` INT NOT NULL AUTO_INCREMENT , `content_id` INT NOT NULL , `name` VARCHAR(100) NOT NULL , `value` TEXT NOT NULL , PRIMARY KEY (`id`) ) ENGINE = InnoDB;", true );
+
 Settings::set ( "db_schema_version", "2017.1" );
 
 // Patch Manager zurücksetzen
