@@ -1,8 +1,12 @@
 In metadata.json:
 
 "content_types" : {
-   {"employee_profile" : [
-      
+   {"employee_profile" : [ // Enthält die Felder
+	"title" : {
+		"de" : "Beruf",
+		"en" : "Job"
+	}
+            
    ]
 }
 }
