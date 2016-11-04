@@ -64,10 +64,6 @@ if (isset ( $_SESSION ["ulicms_login"] )) {
 	$eingeloggt = false;
 }
 
-if ($_GET ["action"] == "export" and isset ( $_POST ["table"] )) {
-	require_once "inc/export-data.php";
-}
-
 header ( "Content-Type: text/html; charset=UTF-8" );
 
 add_hook ( "before_ajax_handler" );
@@ -193,13 +189,9 @@ if (! $eingeloggt) {
 		require_once "inc/system_update.php";
 	} else if ($_GET ["action"] == "motd") {
 		require_once "inc/motd.php";
-	} 
-
-	else if ($_GET ["action"] == "edit_profile") {
+	} else if ($_GET ["action"] == "edit_profile") {
 		require_once "inc/edit_profile.php";
-	} 
-
-	else if ($_GET ["action"] == "logo_upload") {
+	} else if ($_GET ["action"] == "logo_upload") {
 		require_once "inc/logo.php";
 	} 
 
@@ -207,11 +199,7 @@ if (! $eingeloggt) {
 		require_once "inc/favicon.php";
 	} else if ($_GET ["action"] == "languages") {
 		require_once "inc/languages.php";
-	} else if ($_GET ["action"] == "export") {
-		require_once "inc/export.php";
-	} 
-
-	else if ($_GET ["action"] == "cache") {
+	} else if ($_GET ["action"] == "cache") {
 		require_once "inc/cache_settings.php";
 	} else if ($_GET ["action"] == "install_method") {
 		require_once "inc/install_method.php";
