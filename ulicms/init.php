@@ -165,6 +165,8 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "groups" . DIRECTORY_SEPERATOR . "group.php";
 
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "custom_fields.php";
+
 Translation::init ();
 
 require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib/minify.php";

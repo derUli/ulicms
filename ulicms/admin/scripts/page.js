@@ -103,6 +103,14 @@ function showAndHideFieldsByType() {
 			$("#article-image").slideUp();
 		}
 	}
+	$(".custom-field-tab").each(function(index, el) {
+		if ($(el).data("type") == $("input[name='type']:checked").val()) {
+			$(el).slideDown();
+		} else {
+			$(el).slideUp();
+		}
+
+	});
 }
 
 $("input[name=\"type\"]").change(showAndHideFieldsByType);

@@ -212,7 +212,7 @@ function browsercacheOneDay($modified = null) {
 
 // PHP Formbuilder Class initialisieren
 function initPFBC() {
-	add_hook("init_pfbc");
+	add_hook ( "init_pfbc" );
 }
 function is_debug_mode() {
 	$config = new config ();
@@ -384,6 +384,24 @@ function recurse_copy($src, $dst) {
 function strbool($value) {
 	return ($value) ? 'true' : 'false';
 }
+function getFieldsForCustomType($type) {
+	$fields = array ();
+	$modules = getAllModules ();
+	foreach ( $modules as $module ) {
+		$custom_types = getModuleMeta ( $module, "custom_types" );
+		
+		if ($custom_types) {
+			foreach ( $custom_types as $key => $value ) {
+				if ($key == $type) {
+					foreach ( $value as $field ) {
+						$fields [] = $field;
+					}
+				}
+			}
+		}
+	}
+	return $fields;
+}
 function get_available_post_types() {
 	$post_types = array (
 			"page",
@@ -395,8 +413,31 @@ function get_available_post_types() {
 			"video",
 			"audio" 
 	);
-	$post_types = apply_filter ( $post_types, "custom_post_types" );
+	$modules = getAllModules ();
+	foreach ( $modules as $module ) {
+		$custom_types = getModuleMeta ( $module, "custom_types" );
+		if ($custom_types) {
+			foreach ( $custom_types as $key => $value ) {
+				if (! in_array ( $key, $post_types )) {
+					$post_types [] = $key;
+				}
+			}
+		}
+	}
 	
+	$themes = getAllModules ();
+	foreach ( $themes as $theme ) {
+		$custom_types = getThemeMeta ( $theme, "custom_types" );
+		if ($custom_types) {
+			foreach ( $custom_types as $key => $value ) {
+				if (! in_array ( $key, $post_types )) {
+					$post_types [] = $key;
+				}
+			}
+		}
+	}
+	
+	$post_types = apply_filter ( $post_types, "custom_post_types" );
 	return $post_types;
 }
 
