@@ -180,9 +180,6 @@ class ACL {
 		$acl_data ["expert_settings_create"] = null;
 		$acl_data ["expert_settings_edit"] = null;
 		$acl_data ["open_graph"] = null;
-		
-		$acl_data ["export"] = null;
-		$acl_data ["import"] = null;
 		$acl_data ["info"] = null;
 		
 		// Workflows

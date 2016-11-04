@@ -54,29 +54,6 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	<br />
 	<?php
 	}
-	?>
-
-	<?php
-	if ($acl->hasPermission ( "export" ) or $acl->hasPermission ( "import" )) {
-		?>
- 
-
-
-<p>
-	<strong><?php
-		translate ( "import_export" );
-		?></strong><br /> <br />
-	<?php
-	}
-	if ($acl->hasPermission ( "export" )) {
-		?>
-
-	<a href="index.php?action=export"><?php translate("export");?></a><br />
-	<?php
-	}
-	?>
-</p>
-<?php
 	add_hook ( "content_type_list_entry" );
 	?>
 	<?php

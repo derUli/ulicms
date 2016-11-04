@@ -87,13 +87,6 @@ if (defined ( "_SECURITY" )) {
 				<li><a href='?action=categories'><?php translate("categories");?></a></li>
 				<?php
 		}
-		?>			<?php
-		
-		if ($acl->hasPermission ( "export" )) {
-			?>
-				<li><a href='?action=export'><?php translate("export");?></a></li>
-				<?php
-		}
 		?>
 
 			</ul></li>
