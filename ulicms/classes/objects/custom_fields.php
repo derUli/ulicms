@@ -9,10 +9,10 @@ class CustomFields {
 				$content_id,
 				$name 
 		);
-		$sql = "Select count(id) as amount, id from {prefix}custom_fields where content_id = ? and name = ?";
+		$sql = "Select id from {prefix}custom_fields where content_id = ? and name = ?";
 		$query = Database::pQuery ( $sql, $args, true );
-		$result = Database::fetchObject ( $query );
-		if ($result->amount > 0) {
+		if (Database::getNumRows($result) > 0) {
+			$result = Database::fetchObject ( $query );
 			if (is_null ( $value )) {
 				$args = array (
 						$result->id 
@@ -33,7 +33,7 @@ class CustomFields {
 					$name,
 					$value 
 			);
-			$sql = "INSERT INTO {prefix}custom_fields (content_id, name, value) (?, ?, ?)";
+			$sql = "INSERT INTO {prefix}custom_fields (content_id, name, value) VALUES(?, ?, ?)";
 			return Database::pQuery ( $sql, $args, true );
 		}
 	}
