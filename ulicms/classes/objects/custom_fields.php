@@ -11,7 +11,7 @@ class CustomFields {
 		);
 		$sql = "Select id from {prefix}custom_fields where content_id = ? and name = ?";
 		$query = Database::pQuery ( $sql, $args, true );
-		if (Database::getNumRows($result) > 0) {
+		if (Database::getNumRows ( $query ) > 0) {
 			$result = Database::fetchObject ( $query );
 			if (is_null ( $value )) {
 				$args = array (
@@ -22,9 +22,10 @@ class CustomFields {
 			} else {
 				$args = array (
 						$value,
+						$name,
 						$content_id 
 				);
-				$sql = "UPDATE {prefix}custom_fields set value = ? where content_id = ?";
+				$sql = "UPDATE {prefix}custom_fields set value = ? where name = ? and content_id = ?";
 				return Database::pQuery ( $sql, $args, true );
 			}
 		} else {

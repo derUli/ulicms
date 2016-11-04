@@ -253,8 +253,8 @@ function openMenuImageSelectWindow(field) {
 					<br /> <br /> <strong><?php translate("article_date");?></strong><br />
 					<input name="article_date" type="datetime-local"
 						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
-					<strong><?php translate("excerpt");?></strong> <textarea
-						name="excerpt" rows="5" cols="80"></textarea>
+					<strong><?php translate("excerpt");?></strong>
+					<textarea name="excerpt" rows="5" cols="80"></textarea>
 				</div>
 			</div>
 
@@ -273,7 +273,8 @@ function openMenuImageSelectWindow(field) {
 		<?php foreach($fields as $field){?>
 		<p>
 						<strong><?php translate($field);?></strong> <br /> <input
-							type="text" name="cf_<?php echo $type;?>_<?php echo $field;?>"
+							type="text"
+							name="cf_<?php echo Template::escape($type);?>_<?php echo Template::escape($field);?>"
 							value="">
 					</p>					
 		<?php }?>

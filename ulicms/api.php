@@ -419,7 +419,9 @@ function get_available_post_types() {
 		
 		if (custom_types) {
 			foreach ( $custom_types as $key => $value ) {
-				$post_types [] = $key;
+				if (! in_array ( $key, $post_types )) {
+					$post_types [] = $key;
+				}
 			}
 		}
 	}

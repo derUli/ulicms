@@ -14,6 +14,7 @@
 + "admin_permission" Attribut in metadata.json wird nun unterstützt
 + "menus" Attribut in metadata.json von Theems wird nun ausgewertet und die Auswahllisten für Menüs danach gefiltert
 + Übersetzungssystem für JavaScript hinzugefügt
++ Custom Fields
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt

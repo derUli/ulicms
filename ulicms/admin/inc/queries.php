@@ -520,6 +520,17 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$content = $unescaped_content;
 	VCS::createRevision ( $content_id, $content, $user_id );
 	
+	$fields = getFieldsForCustomType ( $type );
+	foreach ( $fields as $field ) {
+		if (isset ( $_POST ["cf_" . $type . "_" . $field] )) {
+			$value = $_POST ["cf_" . $type . "_" . $field];
+			if (empty ( $value )) {
+				$value = null;
+			}
+			CustomFields::set ( $field, $value, $content_id );
+		}
+	}
+	
 	add_hook ( "after_edit_page" );
 	
 	header ( "Location: index.php?action=pages" );
