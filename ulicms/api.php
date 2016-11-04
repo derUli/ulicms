@@ -417,7 +417,20 @@ function get_available_post_types() {
 	foreach ( $modules as $module ) {
 		$custom_types = getModuleMeta ( $module, "custom_types" );
 		
-		if (custom_types) {
+		if ($custom_types) {
+			foreach ( $custom_types as $key => $value ) {
+				if (! in_array ( $key, $post_types )) {
+					$post_types [] = $key;
+				}
+			}
+		}
+	}
+	
+	$themes = getAllModules ();
+	foreach ( $themes as $theme ) {
+		$custom_types = getThemeMeta ( $theme, "custom_types" );
+		
+		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
 				if (! in_array ( $key, $post_types )) {
 					$post_types [] = $key;
