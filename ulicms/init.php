@@ -46,6 +46,7 @@ if (! file_existS ( ULICMS_CACHE )) {
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "users_api.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR. "lib" . DIRECTORY_SEPERATOR . "network.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR. "lib" . DIRECTORY_SEPERATOR . "settings.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "base_config.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "request.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "antispam-features.php";
@@ -65,9 +66,7 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "module_helper.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "import_helper.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "export_helper.php";
-
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "NotImplementedException.php";
-
 
 $mobile_detect_as_module = dirname ( __file__ ) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
 if (file_exists ( $mobile_detect_as_module )) {
