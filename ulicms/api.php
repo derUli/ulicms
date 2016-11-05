@@ -443,8 +443,6 @@ function get_available_post_types() {
 
 // Schriftgrößen zurückgeben
 // @TODO : Filter implementieren
-// Schriftgrößen zurückgeben
-// @TODO : Filter implementieren
 function getFontSizes() {
 	global $sizes;
 	$sizes = array (
@@ -1357,7 +1355,6 @@ function no_anti_csrf() {
 		define ( "NO_ANTI_CSRF", true );
 	}
 }
-
 // replace Shortcodes with modules
 function replaceShortcodesWithModules($string, $replaceOther = true) {
 	if ($replaceOther) {
