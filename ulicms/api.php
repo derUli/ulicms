@@ -1,4 +1,8 @@
 <?php
+// sind wir gerade im Adminordner?
+function is_admin_dir() {
+	return basename ( getcwd () ) === "admin";
+}
 function initconfig($key, $value) {
 	$retval = false;
 	if (! Settings::get ( $key )) {
@@ -552,10 +556,6 @@ function clearCache() {
 	add_hook ( "after_clear_cache" );
 }
 
-// sind wir gerade im Adminordner?
-function is_admin_dir() {
-	return basename ( getcwd () ) === "admin";
-}
 function add_hook($name) {
 	$modules = getAllModules ();
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
