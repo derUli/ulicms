@@ -200,3 +200,23 @@ function validate_login($user, $password, $token = null) {
 	$_REQUEST ["error"] = get_translation ( "USER_OR_PASSWORD_INCORRECT" );
 	return false;
 }
+
+
+
+// Ist der User eingeloggt
+function is_logged_in() {
+	return isset ( $_SESSION ["logged_in"] );
+}
+
+// @Deprecated
+// Gehörte noch zur alten Hierarchie-basierten Rechteverwaltung
+function has_permissions($mod) {
+	if (! isset ( $_SESSION ["group"] ))
+		return false;
+	return $_SESSION ["group"] >= $mod;
+}
+
+// Alias für is_logged_in
+function logged_in() {
+	return is_logged_in ();
+}

@@ -44,9 +44,6 @@ function str_replace_first($search, $replace, $subject) {
 	}
 	return $subject;
 }
-function isNotNullOrEmpty($variable) {
-	return (! is_null ( $variable ) and ! empty ( $variable ));
-}
 function get_action() {
 	$retval = "home";
 	if (isNotNullOrEmpty ( $_GET ["action"] )) {
@@ -135,9 +132,7 @@ function get_all_used_menus() {
 	}
 	return $retval;
 }
-function is_ajax_request() {
-	return (! empty ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) && strtolower ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest');
-}
+
 function get_shortlink($id = null) {
 	if (is_null ( $id )) {
 		$shortlink = null;
@@ -262,13 +257,6 @@ function getLanguageFilePath($lang = "de", $component = null) {
 	// Todo Module Language Files
 	return ULICMS_ROOT . "/lang/" . $lang . ".php";
 }
-function get_useragent() {
-	return $_SERVER ['HTTP_USER_AGENT'];
-}
-function get_request_method() {
-	return $_SERVER ["REQUEST_METHOD"];
-}
-
 // Gibt den für den derzeit eingeloggten User eingestellten HTML-Editor aus.
 // Wenn der Anwender nicht eingeloggt ist return null;
 function get_html_editor() {
@@ -287,23 +275,6 @@ function get_html_editor() {
 		return "ckeditor";
 	}
 }
-function get_request_uri() {
-	return $_SERVER ["REQUEST_URI"];
-}
-function get_http_host() {
-	return $_SERVER ["HTTP_HOST"];
-}
-function get_referer() {
-	return get_referrer ();
-}
-function get_referrer() {
-	$referrer = null;
-	if (isset ( $_SERVER ['HTTP_REFERER'] )) {
-		$referrer = $_SERVER ['HTTP_REFERER'];
-	}
-	return $referrer;
-}
-
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false) {
 	if (isFastMode ()) {
@@ -351,33 +322,11 @@ function get_csrf_token() {
 	}
 	return $_SESSION ["csrf_token"];
 }
-
-// Ordner rekursiv kopieren
-function recurse_copy($src, $dst) {
-	$dir = opendir ( $src );
-	@mkdir ( $dst );
-	while ( false !== ($file = readdir ( $dir )) ) {
-		if (($file != '.') && ($file != '..')) {
-			if (is_dir ( $src . '/' . $file )) {
-				recurse_copy ( $src . '/' . $file, $dst . '/' . $file );
-			} else {
-				copy ( $src . '/' . $file, $dst . '/' . $file );
-			}
-		}
-	}
-	closedir ( $dir );
-}
-
-// Aus einer Boolean einen String machen ("true" oder "false")
-function strbool($value) {
-	return ($value) ? 'true' : 'false';
-}
 function getFieldsForCustomType($type) {
 	$fields = array ();
 	$modules = getAllModules ();
 	foreach ( $modules as $module ) {
 		$custom_types = getModuleMeta ( $module, "custom_types" );
-		
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
 				if ($key == $type) {
@@ -534,78 +483,8 @@ function getSystemLanguage() {
 	return $lang;
 }
 
-// Übersetzung HTTP Status Code => Name
-function getStatusCodeByNumber($nr) {
-	$http_codes = array (
-			100 => 'Continue',
-			101 => 'Switching Protocols',
-			102 => 'Processing',
-			200 => 'OK',
-			201 => 'Created',
-			202 => 'Accepted',
-			203 => 'Non-Authoritative Information',
-			204 => 'No Content',
-			205 => 'Reset Content',
-			206 => 'Partial Content',
-			207 => 'Multi-Status',
-			300 => 'Multiple Choices',
-			301 => 'Moved Permanently',
-			302 => 'Found',
-			303 => 'See Other',
-			304 => 'Not Modified',
-			305 => 'Use Proxy',
-			306 => 'Switch Proxy',
-			307 => 'Temporary Redirect',
-			400 => 'Bad Request',
-			401 => 'Unauthorized',
-			402 => 'Payment Required',
-			403 => 'Forbidden',
-			404 => 'Not Found',
-			405 => 'Method Not Allowed',
-			406 => 'Not Acceptable',
-			407 => 'Proxy Authentication Required',
-			408 => 'Request Timeout',
-			409 => 'Conflict',
-			410 => 'Gone',
-			411 => 'Length Required',
-			412 => 'Precondition Failed',
-			413 => 'Request Entity Too Large',
-			414 => 'Request-URI Too Long',
-			415 => 'Unsupported Media Type',
-			416 => 'Requested Range Not Satisfiable',
-			417 => 'Expectation Failed',
-			418 => 'I\'m a teapot',
-			422 => 'Unprocessable Entity',
-			423 => 'Locked',
-			424 => 'Failed Dependency',
-			425 => 'Unordered Collection',
-			426 => 'Upgrade Required',
-			449 => 'Retry With',
-			450 => 'Blocked by Windows Parental Controls',
-			500 => 'Internal Server Error',
-			501 => 'Not Implemented',
-			502 => 'Bad Gateway',
-			503 => 'Service Unavailable',
-			504 => 'Gateway Timeout',
-			505 => 'HTTP Version Not Supported',
-			506 => 'Variant Also Negotiates',
-			507 => 'Insufficient Storage',
-			509 => 'Bandwidth Limit Exceeded',
-			510 => 'Not Extended' 
-	);
-	
-	return $nr . " " . $http_codes [$nr];
-}
-
-// Weiterleitung per Location header;
-function ulicms_redirect($url = "http://www.ulicms.de", $status = 302) {
-	header ( "HTTP/1.0 " . getStatusCodeByNumber ( $status ) );
-	header ( "Location: " . $url );
-	exit ();
-}
 function getDomainByLanguage($language) {
 	$domainMapping = Settings::get ( "domain_to_language" );
-	
 	if (! empty ( $domainMapping )) {
 		$domainMapping = explode ( "\n", $domainMapping );
 		for($i = 0; $i < count ( $domainMapping ); $i ++) {
@@ -700,27 +579,6 @@ function rootDirectory() {
 		$pageURL .= $_SERVER ["SERVER_NAME"] . $dirname;
 	}
 	return $pageURL;
-}
-
-if (! function_exists ( "get_host" )) {
-	function get_host() {
-		if ($host = $_SERVER ['HTTP_X_FORWARDED_HOST']) {
-			$elements = explode ( ',', $host );
-			
-			$host = trim ( end ( $elements ) );
-		} else {
-			if (! $host = $_SERVER ['HTTP_HOST']) {
-				if (! $host = $_SERVER ['SERVER_NAME']) {
-					$host = ! empty ( $_SERVER ['SERVER_ADDR'] ) ? $_SERVER ['SERVER_ADDR'] : '';
-				}
-			}
-		}
-		
-		// Remove port number from host
-		$host = preg_replace ( '/:\d+$/', '', $host );
-		
-		return trim ( $host );
-	}
 }
 
 // Mimetypen einer Datei ermitteln
@@ -819,11 +677,6 @@ function cms_release_year() {
 	$v = new ulicms_version ();
 	echo $v->getReleaseYear ();
 }
-
-// Check for Secure HTTP Connection (SSL)
-function is_ssl() {
-	return (! empty ( $_SERVER ['HTTPS'] ) && $_SERVER ['HTTPS'] !== 'off' || $_SERVER ['SERVER_PORT'] == 443);
-}
 function splitAndTrim($str) {
 	return array_map ( 'trim', explode ( ";", $str ) );
 }
@@ -874,7 +727,7 @@ function getCurrentLanguage($current = true) {
 // Auf automatische aktualisieren prüfen.
 // Rückgabewert: ein String oder False
 function checkForUpdates() {
-	include_once "../lib/file_get_contents_wrapper.php";
+	include_once ULICMS_ROOT."/lib/file_get_contents_wrapper.php";
 	$info = @file_get_contents_Wrapper ( UPDATE_CHECK_URL, true );
 	if (! $info or trim ( $info ) === "") {
 		return false;
@@ -1078,25 +931,6 @@ function getModuleMainFilePath2($module) {
 function getModuleUninstallScriptPath($module, $abspath = false) {
 	return getModulePath ( $module, $abspath ) . $module . "_uninstall.php";
 }
-function find_all_files($dir) {
-	$root = scandir ( $dir );
-	$result = array ();
-	foreach ( $root as $value ) {
-		if ($value === '.' || $value === '..') {
-			continue;
-		}
-		if (is_file ( "$dir/$value" )) {
-			$result [] = str_Replace ( "\\", "/", "$dir/$value" );
-			continue;
-		}
-		foreach ( find_all_files ( "$dir/$value" ) as $value ) {
-			$value = str_replace ( "\\", "/", $value );
-			$result [] = $value;
-		}
-	}
-	return $result;
-}
-
 /**
  * outputCSV creates a line of CSV and outputs it to browser
  */
@@ -1137,15 +971,7 @@ function fcflush() {
 		@ob_start ();
 	}
 }
-function convertLineEndingsToLF($s) {
-	// Normalize line endings using Global
-	// Convert all line-endings to UNIX format
-	$s = str_replace ( CRLF, LF, $s );
-	$s = str_replace ( CR, LF, $s );
-	// Don't allow out-of-control blank lines
-	$s = preg_replace ( "/\n{2,}/", LF . LF, $s );
-	return $s;
-}
+
 function isModuleInstalled($name) {
 	return in_array ( $name, getAllModules () );
 }
@@ -1280,7 +1106,6 @@ function getAllPagesWithTitle() {
 			}
 		}
 	}
-	
 	return $returnvalues;
 }
 
@@ -1358,23 +1183,6 @@ function the_url() {
 		$pageURL .= $_SERVER ["SERVER_NAME"] . $dirname;
 	}
 	return $pageURL;
-}
-function file_extension($filename) {
-	$ext = explode ( ".", $filename );
-	$ext = end ( $ext );
-	return $ext;
-}
-
-function is__writable($path) {
-	if ($path {strlen ( $path ) - 1} == '/')
-		
-		return is__writable ( $path . uniqid ( mt_rand () ) . '.tmp' );
-	
-	elseif (file_exists ( $path ) && preg_match ( '/\.tmp/', $path )) {
-		
-		return is_writable ( $path );
-	} else
-		return false; // Or return error - invalid path...
 }
 
 // Gibt die Identifier aller Menüs zurück.
@@ -1511,31 +1319,6 @@ function uninstall_module($name, $type = "module") {
 	return false;
 }
 
-// Ist der User eingeloggt
-function is_logged_in() {
-	return isset ( $_SESSION ["logged_in"] );
-}
-
-// @Deprecated
-// Gehörte noch zur alten Hierarchie-basierten Rechteverwaltung
-function has_permissions($mod) {
-	if (! isset ( $_SESSION ["group"] ))
-		return false;
-	return $_SESSION ["group"] >= $mod;
-}
-
-// Alias für is_logged_in
-function logged_in() {
-	return is_logged_in ();
-}
-
-// Tabellenname zusammensetzen
-function tbname($name) {
-	require_once "cms-config.php";
-	$config = new config ();
-	return $config->db_prefix . $name;
-}
-
 // returns version number of UliCMS Core
 function cms_version() {
 	require_once "version.php";
@@ -1588,28 +1371,9 @@ function is_admin() {
 	return $retval;
 }
 
-// This function transforms the php.ini notation for numbers (like '2M') to an integer (2*1024*1024 in this case)
-function convertPHPSizeToBytes($sSize) {
-	if (is_numeric ( $sSize )) {
-		return $sSize;
-	}
-	$sSuffix = substr ( $sSize, - 1 );
-	$iValue = substr ( $sSize, 0, - 1 );
-	switch (strtoupper ( $sSuffix )) {
-		case 'P' :
-			$iValue *= 1024;
-		case 'T' :
-			$iValue *= 1024;
-		case 'G' :
-			$iValue *= 1024;
-		case 'M' :
-			$iValue *= 1024;
-		case 'K' :
-			$iValue *= 1024;
-			break;
-	}
-	return $iValue;
-}
-function getMaximumFileUploadSize() {
-	return min ( convertPHPSizeToBytes ( ini_get ( 'post_max_size' ) ), convertPHPSizeToBytes ( ini_get ( 'upload_max_filesize' ) ) );
+// Tabellenname zusammensetzen
+function tbname($name) {
+	require_once "cms-config.php";
+	$config = new config ();
+	return $config->db_prefix . $name;
 }

@@ -247,4 +247,24 @@ function encodeURIComponent($str) {
 	return strtr ( rawurlencode ( $str ), $revert );
 }
 
-?>
+// Aus einer Boolean einen String machen ("true" oder "false")
+function strbool($value) {
+	return ($value) ? 'true' : 'false';
+}
+
+function isNullOrEmpty($variable) {
+	return (is_null ( $variable ) or empty ( $variable ));
+}
+function isNotNullOrEmpty($variable) {
+	return (! is_null ( $variable ) and ! empty ( $variable ));
+}
+
+function convertLineEndingsToLF($s) {
+	// Normalize line endings using Global
+	// Convert all line-endings to UNIX format
+	$s = str_replace ( CRLF, LF, $s );
+	$s = str_replace ( CR, LF, $s );
+	// Don't allow out-of-control blank lines
+	$s = preg_replace ( "/\n{2,}/", LF . LF, $s );
+	return $s;
+}

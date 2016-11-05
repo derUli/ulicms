@@ -213,5 +213,3 @@ function db_escape($value, $type = null) {
 		}
 	}
 }
-
-?>
