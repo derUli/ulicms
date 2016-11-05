@@ -268,3 +268,25 @@ function convertLineEndingsToLF($s) {
 	$s = preg_replace ( "/\n{2,}/", LF . LF, $s );
 	return $s;
 }
+
+function str_replace_nth($search, $replace, $subject, $nth) {
+	$found = preg_match_all ( '/' . preg_quote ( $search ) . '/', $subject, $matches, PREG_OFFSET_CAPTURE );
+	if (false !== $found && $found > $nth) {
+		return substr_replace ( $subject, $replace, $matches [0] [$nth] [1], strlen ( $search ) );
+	}
+	return $subject;
+}
+
+function mb_str_split($string) {
+	// Split at all position not after the start: ^
+	// and not before the end: $
+	return preg_split ( '/(?<!^)(?!$)/u', $string );
+}
+
+function str_replace_first($search, $replace, $subject) {
+	$pos = strpos ( $subject, $search );
+	if ($pos !== false) {
+		return substr_replace ( $subject, $replace, $pos, strlen ( $search ) );
+	}
+	return $subject;
+}

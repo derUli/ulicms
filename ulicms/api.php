@@ -1,15 +1,4 @@
 <?php
-function isFastMode() {
-	$cfg = new config ();
-	return (isset ( $cfg->fast_mode ) and $cfg->fast_mode);
-}
-
-// boolval PHP 5.4 Implementation with checking version
-if (! function_exists ( 'boolval' )) {
-	function boolval($my_value) {
-		return ( bool ) $my_value;
-	}
-}
 function initconfig($key, $value) {
 	$retval = false;
 	if (! Settings::get ( $key )) {
@@ -18,66 +7,6 @@ function initconfig($key, $value) {
 	}
 	SettingsCache::set ( $key, $value );
 	return $retval;
-}
-function getBackendActionLink($action) {
-	return "index.php?action=" . $action;
-}
-function backendActionLink($action) {
-	echo getBackendActionLink ( $action );
-}
-function mb_str_split($string) {
-	// Split at all position not after the start: ^
-	// and not before the end: $
-	return preg_split ( '/(?<!^)(?!$)/u', $string );
-}
-function str_replace_nth($search, $replace, $subject, $nth) {
-	$found = preg_match_all ( '/' . preg_quote ( $search ) . '/', $subject, $matches, PREG_OFFSET_CAPTURE );
-	if (false !== $found && $found > $nth) {
-		return substr_replace ( $subject, $replace, $matches [0] [$nth] [1], strlen ( $search ) );
-	}
-	return $subject;
-}
-function str_replace_first($search, $replace, $subject) {
-	$pos = strpos ( $subject, $search );
-	if ($pos !== false) {
-		return substr_replace ( $subject, $replace, $pos, strlen ( $search ) );
-	}
-	return $subject;
-}
-function get_action() {
-	$retval = "home";
-	if (isNotNullOrEmpty ( $_GET ["action"] )) {
-		$retval = $_GET ["action"];
-	}
-	return $retval;
-}
-function get_files($root_dir, $all_data = array(), $initial_root_dir = null) {
-	$root_dir = str_replace ( "\\", "/", $root_dir );
-	
-	if ($initial_root_dir == null) {
-		$initial_root_dir = str_replace ( "\\", "/", $root_dir );
-	} else {
-		$initial_root_dir = str_replace ( "\\", "/", $initial_root_dir );
-	}
-	$dir_content = scandir ( $root_dir );
-	foreach ( $dir_content as $file ) {
-		if ($file != "." and $file != "..") {
-			$path = str_replace ( "\\", "/", $root_dir . "/" . $file );
-			if (is_dir ( $path )) {
-				$all_data = get_files ( $path, $all_data, $initial_root_dir );
-			} else if (is_file ( $path ) and ! is_dir ( $path )) {
-				$all_data [] = substr ( $path, strlen ( $initial_root_dir ) + 1 );
-			}
-		}
-	}
-	return $all_data;
-} // end get_files()
-function get_format() {
-	$format = "html";
-	if (isset ( $_GET ["format"] )) {
-		$format = $_GET ["format"];
-	}
-	return $format;
 }
 function set_format($format) {
 	$_GET ["format"] = trim ( $format, "." );
@@ -579,25 +508,6 @@ function rootDirectory() {
 		$pageURL .= $_SERVER ["SERVER_NAME"] . $dirname;
 	}
 	return $pageURL;
-}
-
-// Mimetypen einer Datei ermitteln
-function get_mime($file) {
-	if (function_exists ( "finfo_file" )) {
-		$finfo = finfo_open ( FILEINFO_MIME_TYPE ); // return mime type ala mimetype extension
-		$mime = finfo_file ( $finfo, $file );
-		finfo_close ( $finfo );
-		return $mime;
-	} else if (function_exists ( "mime_content_type" )) {
-		return mime_content_type ( $file );
-	} else if (! stristr ( ini_get ( "disable_functions" ), "shell_exec" )) {
-		// http://stackoverflow.com/a/134930/1593459
-		$file = escapeshellarg ( $file );
-		$mime = shell_exec ( "file -bi " . $file );
-		return $mime;
-	} else {
-		return false;
-	}
 }
 
 // Alternative PHP Cache leeren, sofern installiert und aktiv
@@ -1376,4 +1286,9 @@ function tbname($name) {
 	require_once "cms-config.php";
 	$config = new config ();
 	return $config->db_prefix . $name;
+}
+
+function isFastMode() {
+	$cfg = new config ();
+	return (isset ( $cfg->fast_mode ) and $cfg->fast_mode);
 }

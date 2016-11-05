@@ -4,7 +4,7 @@ class JSTranslation {
 	public function __construct() {
 	}
 	public function addKey($name) {
-		if (! in_array ( $name, $this->key )) {
+		if (! in_array ( $name, $this->keys )) {
 			$this->keys [] = $name;
 		}
 	}
