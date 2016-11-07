@@ -15,6 +15,7 @@
 + "menus" Attribut in metadata.json von Theems wird nun ausgewertet und die Auswahllisten für Menüs danach gefiltert
 + Übersetzungssystem für JavaScript hinzugefügt
 + Custom Fields
++ Feld "Auszug" verwendet nun den HTML-Editor
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
