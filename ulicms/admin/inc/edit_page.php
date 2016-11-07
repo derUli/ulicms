@@ -393,7 +393,7 @@ function openMenuImageSelectWindow(field) {
 				}
 				?>"
 						step=any> <br /> <br /> <strong><?php translate("excerpt");?></strong>
-					<textarea name="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt);?></textarea>
+					<textarea name="excerpt" id="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt);?></textarea>
 				</div>
 			</div>
 		</div>
@@ -882,6 +882,13 @@ var editor = CKEDITOR.replace( 'page_content',
 					});
 
 
+var editor2 = CKEDITOR.replace( 'excerpt',
+		{
+			skin : '<?php
+					
+					echo Settings::get ( "ckeditor_skin" );
+					?>'
+		});
 
 editor.on("instanceReady", function()
 {
@@ -889,6 +896,16 @@ editor.on("instanceReady", function()
 	this.document.on("paste", CKCHANGED);
 }
 );
+
+
+editor2.on("instanceReady", function()
+		{
+			this.document.on("keyup", CKCHANGED);
+			this.document.on("paste", CKCHANGED);
+		}
+
+);
+
 function CKCHANGED() {
 	formchanged = 1;
 }
@@ -929,10 +946,20 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
         indentWithTabs: false,
         enterMode: "keep",
         tabMode: "shift"});
+
+
+var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
+
+		{lineNumbers: true,
+		        matchBrackets: true,
+		        mode : "text/html",
+
+		        indentUnit: 0,
+		        indentWithTabs: false,
+		        enterMode: "keep",
+		        tabMode: "shift"});
 </script>
-<?php
-				}
-				?>
+<?php }?>
 		<noscript>
 			<p style="color: red;">
 				Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a

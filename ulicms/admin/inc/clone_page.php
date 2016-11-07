@@ -723,23 +723,30 @@ function openArticleImageSelectWindow(field) {
 			echo htmlspecialchars ( $row->content );
 			?></textarea>
 		<?php
-			$editor = get_html_editor ();
-			?>
+				$editor = get_html_editor ();
+				?>
 
 		<?php
-			
-			if ($editor === "ckeditor") {
-				?>
+				
+				if ($editor === "ckeditor") {
+					?>
 		<script type="text/javascript">
 var editor = CKEDITOR.replace( 'page_content',
 					{
 						skin : '<?php
-				
-				echo Settings::get ( "ckeditor_skin" );
-				?>'
+					
+					echo Settings::get ( "ckeditor_skin" );
+					?>'
 					});
 
 
+var editor2 = CKEDITOR.replace( 'excerpt',
+		{
+			skin : '<?php
+					
+					echo Settings::get ( "ckeditor_skin" );
+					?>'
+		});
 
 editor.on("instanceReady", function()
 {
@@ -747,6 +754,16 @@ editor.on("instanceReady", function()
 	this.document.on("paste", CKCHANGED);
 }
 );
+
+
+editor2.on("instanceReady", function()
+		{
+			this.document.on("keyup", CKCHANGED);
+			this.document.on("paste", CKCHANGED);
+		}
+
+);
+
 function CKCHANGED() {
 	formchanged = 1;
 }
@@ -774,8 +791,8 @@ function confirmExit()
 }
 </script>
 <?php
-			} else if ($editor == "codemirror") {
-				?>
+				} else if ($editor == "codemirror") {
+					?>
 		<script type="text/javascript">
 var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content"),
 
@@ -787,10 +804,20 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
         indentWithTabs: false,
         enterMode: "keep",
         tabMode: "shift"});
+
+
+var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
+
+		{lineNumbers: true,
+		        matchBrackets: true,
+		        mode : "text/html",
+
+		        indentUnit: 0,
+		        indentWithTabs: false,
+		        enterMode: "keep",
+		        tabMode: "shift"});
 </script>
-<?php
-			}
-			?>
+<?php }?>
 		<noscript>
 			<p style="color: red;">
 				Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
