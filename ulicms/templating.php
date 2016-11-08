@@ -989,7 +989,7 @@ function get_autor() {
 	$out = str_replace ( "Vorname", $result2 ["firstname"], $out );
 	$out = str_replace ( "Nachname", $result2 ["lastname"], $out );
 	$out = str_replace ( "Username", $result2 ["username"], $out );
-	if (! is_403 () or $_SESSION ["group"] >= 20) {
+	if (! is_403 () and ! is_404 ()) {
 		return $out;
 	}
 }
