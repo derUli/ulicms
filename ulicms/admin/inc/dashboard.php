@@ -11,7 +11,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 		$result = Database::fetchObject($query);
 		$pages_count = $result->amount;
 		
-		$topPages = db_query ( "SELECT language, systemname, title, `views` FROM " . tbname ( "content" ) . " WHERE notinfeed = 0 AND redirection NOT LIKE '#%' ORDER BY views DESC LIMIT 5" );
+		$topPages = db_query ( "SELECT language, systemname, title, `views` FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY views DESC LIMIT 5" );
 		$lastModfiedPages = db_query ( "SELECT language, systemname, title, lastmodified, lastchangeby FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY lastmodified DESC LIMIT 5" );
 		
 		$admins_query = db_query ( "SELECT id, username FROM " . tbname ( "users" ) );

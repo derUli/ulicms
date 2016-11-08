@@ -182,7 +182,6 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$page_content = Database::escapeValue ( $_POST ["page_content"] );
 		$comments_enabled = 0;
 		$category = intval ( $_POST ["category"] );
-		$notinfeed = 0;
 		$redirection = db_escape ( $_POST ["redirection"] );
 		$html_file = db_escape ( $_POST ["html_file"] );
 		$menu = db_escape ( $_POST ["menu"] );
@@ -252,10 +251,10 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		
 		add_hook ( "before_create_page" );
 		db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
-  comments_enabled,notinfeed,redirection,menu,position,
+  comments_enabled,redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`,
   `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`, `article_date`, `article_image`, `excerpt`)
-  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", " . $comments_enabled . ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "',
+  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", " . $comments_enabled . ", '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
@@ -385,7 +384,6 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$comments_enabled = 0;
 	$category = intval ( $_POST ["category"] );
 	$redirection = db_escape ( $_POST ["redirection"] );
-	$notinfeed = 0;
 	$menu = db_escape ( $_POST ["menu"] );
 	$position = ( int ) $_POST ["position"];
 	$html_file = db_escape ( $_POST ["html_file"] );
@@ -462,7 +460,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$only_others_can_edit = intval ( isset ( $_POST ["only_others_can_edit"] ) );
 	
 	add_hook ( "before_edit_page" );
-	$sql = "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
+	$sql = "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
 	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
 	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = '$article_date', excerpt = '$excerpt', 
 	only_admins_can_edit = $only_admins_can_edit, `only_group_can_edit` = $only_group_can_edit,

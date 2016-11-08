@@ -16,7 +16,6 @@ function add_page($system_title, $page_title, $page_content, $position, $activat
 	$system_title = db_escape ( $system_title );
 	$page_title = db_escape ( $page_title );
 	$page_content = $page_content;
-	$notinfeed = 0;
 	$redirection = db_escape ( $redirection );
 	$menu = db_escape ( $menu );
 	$position = $position;
@@ -43,9 +42,9 @@ function add_page($system_title, $page_title, $page_content, $position, $activat
 	}
 	
 	return db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
-  comments_enabled,notinfeed,redirection,menu,position, 
+  comments_enabled,redirection,menu,position, 
   access, meta_description, meta_keywords, language, target) 
-  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $session_id . ", " . $comments_enabled . ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "', 
+  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $session_id . ", " . $comments_enabled . ", '$redirection', '$menu', $position, '" . $access . "', 
   '$meta_description', '$meta_keywords',
   '$language', '$target')" ) !== false;
 }

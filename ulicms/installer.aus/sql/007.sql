@@ -1,6 +1,5 @@
 CREATE TABLE IF NOT EXISTS `{prefix}content` (
 `id` int(11) NOT NULL AUTO_INCREMENT,
-`notinfeed` tinyint(1) NOT NULL,
 `systemname` varchar(255) NOT NULL,
 `title` varchar(255) NOT NULL,
 `alternate_title` VARCHAR(255) DEFAULT '',
