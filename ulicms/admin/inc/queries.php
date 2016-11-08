@@ -362,7 +362,6 @@ if ($_POST ["add_admin"] == "add_admin" && (is_admin () or $acl->hasPermission (
 	$username = $_POST ["admin_username"];
 	$lastname = $_POST ["admin_lastname"];
 	$firstname = $_POST ["admin_firstname"];
-	$group = 40;
 	$password = $_POST ["admin_password"];
 	$email = $_POST ["admin_email"];
 	$sendMail = isset ( $_POST ["send_mail"] );

@@ -98,7 +98,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $sendMessa
 	
 	Database::query ( "INSERT INTO " . tbname ( "users" ) . "
 (username,lastname, firstname, email, password, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`) 
-			VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( Encryption::hashPassword ( $password ) ) . "',$group, " . $acl_group . ", $require_password_change, NOW(), $admin, $locked)" ) or die ( db_error () );
+			VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( Encryption::hashPassword ( $password ) ) . "', " . $acl_group . ", $require_password_change, NOW(), $admin, $locked)" ) or die ( db_error () );
 	$message = "Hallo $firstname,\n\n" . "Ein Administrator hat auf http://" . $_SERVER ["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" . "Die Zugangsdaten lauten:\n\n" . "Benutzername: $username\n" . "Passwort: $password\n";
 	$header = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
 	
