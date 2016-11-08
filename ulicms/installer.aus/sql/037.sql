@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}content` drop COLUMN valid_from;
