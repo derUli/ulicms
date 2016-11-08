@@ -12,7 +12,7 @@ function delete_page($id = false, $systemname = false) {
 	
 	return false;
 }
-function add_page($system_title, $page_title, $page_content, $position, $activated = 1, $comments_enabled = 0, $redirection = "", $menu = "top", $parent = "NULL", $language = "de", $access = array("all"), $target = "_self", $meta_keywords = "", $meta_description = "") {
+function add_page($system_title, $page_title, $page_content, $position, $activated = 1, $redirection = "", $menu = "top", $parent = "NULL", $language = "de", $access = array("all"), $target = "_self", $meta_keywords = "", $meta_description = "") {
 	$system_title = db_escape ( $system_title );
 	$page_title = db_escape ( $page_title );
 	$page_content = $page_content;
@@ -42,9 +42,9 @@ function add_page($system_title, $page_title, $page_content, $position, $activat
 	}
 	
 	return db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
-  comments_enabled,redirection,menu,position, 
+  redirection,menu,position, 
   access, meta_description, meta_keywords, language, target) 
-  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $session_id . ", " . $comments_enabled . ", '$redirection', '$menu', $position, '" . $access . "', 
+  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $session_id . ", '$redirection', '$menu', $position, '" . $access . "', 
   '$meta_description', '$meta_keywords',
   '$language', '$target')" ) !== false;
 }

@@ -19,8 +19,6 @@ CREATE TABLE IF NOT EXISTS `{prefix}content` (
 `menu` varchar(10) NOT NULL,
 `position` int(11) NOT NULL,
 `parent` int(11) DEFAULT NULL,
-`valid_from` date NOT NULL,
-`valid_to` date DEFAULT NULL,
 `access` varchar(100) DEFAULT NULL,
 `meta_description` text NOT NULL,
 `meta_keywords` text NOT NULL,
