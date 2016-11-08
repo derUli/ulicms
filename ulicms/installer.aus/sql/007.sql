@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS `{prefix}content` (
 `autor` int(11) NULL,
 `lastchangeby` int(11) NOT NULL,
 `views` int(11) NOT NULL,
-`comments_enabled` tinyint(1) NOT NULL,
 `redirection` varchar(255) NOT NULL,
 `menu` varchar(10) NOT NULL,
 `position` int(11) NOT NULL,
