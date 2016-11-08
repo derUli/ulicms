@@ -490,12 +490,10 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		
 		$list_order_by = Database::escapeValue ( $_POST ["list_order_by"] );
 		$list_order_direction = Database::escapeValue ( $_POST ["list_order_direction"] );
-		
 		$limit = intval ( $_POST ["limit"] );
-		
 		$list_use_pagination = intval ( $_POST ["list_use_pagination"] );
-		
 		$list_type = $_POST ["list_type"];
+		
 		if (empty ( $list_type )) {
 			$list_type = null;
 		}
@@ -636,7 +634,6 @@ if (! empty ( $_FILES ['logo_upload_file'] ['name'] ) and $acl->hasPermission ( 
 	$extension = file_extension ( $filename );
 	
 	if ($type == "image/jpeg" or $type == "image/jpg" or $type == "image/gif" or $type == "image/png") {
-		
 		$hash = md5 ( file_get_contents ( $logo_upload ['tmp_name'] ) );
 		$new_filename = "../content/images/" . $hash . "." . $extension;
 		$logo_upload_filename = $hash . "." . $extension;
@@ -646,11 +643,9 @@ if (! empty ( $_FILES ['logo_upload_file'] ['name'] ) and $acl->hasPermission ( 
 		$image_size = getimagesize ( $new_filename );
 		if ($image_size [0] <= 500 and $image_size [1] <= 100) {
 			setconfig ( "logo_image", $logo_upload_filename );
-			
 			add_hook ( "after_upload_logo_successfull" );
 		} else {
 			header ( "Location: index.php?action=logo_upload&error=to_big" );
-			
 			add_hook ( "after_upload_logo_failed" );
 			exit ();
 		}
@@ -662,7 +657,6 @@ if (! empty ( $_FILES ['logo_upload_file'] ['name'] ) and $acl->hasPermission ( 
 if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) or ($_POST ["edit_admin"] == "edit_admin" and logged_in () and $_POST ["id"] == $_SESSION ["login_id"])) {
 	
 	$id = intval ( $_POST ["id"] );
-	
 	$username = db_escape ( $_POST ["admin_username"] );
 	$lastname = db_escape ( $_POST ["admin_lastname"] );
 	$firstname = db_escape ( $_POST ["admin_firstname"] );
