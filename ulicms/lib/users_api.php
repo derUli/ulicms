@@ -80,8 +80,6 @@ function adduser($username, $lastname, $firstname, $email, $password, $sendMessa
 	$locked = intval ( $locked );
 	$password = $password;
 	$require_password_change = intval ( $require_password_change );
-	// legacy group
-	$group = intval ( $group );
 	// Default ACL Group
 	if (! $acl_group) {
 		$acl_group = Settings::get ( "default_acl_group" );
