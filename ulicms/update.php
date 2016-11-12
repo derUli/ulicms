@@ -118,6 +118,12 @@ Database::query ( "ALTER TABLE `{prefix}content` modify `content` mediumtext NOT
 Database::query ( "ALTER TABLE `{prefix}settings` modify `value` mediumtext NOT NULL;;", true );
 Database::query ( "ALTER TABLE `{prefix}history` modify `content` mediumtext NOT NULL;", true );
 
+// CKEditor skin office2013 was removed
+// change to moono
+if (Settings::get ( "ckeditor_skin" ) == "office2013") {
+	Settings::set ( "ckeditor_skin", "moono" );
+}
+
 Settings::set ( "db_schema_version", "2017.1" );
 
 // Patch Manager zurücksetzen
