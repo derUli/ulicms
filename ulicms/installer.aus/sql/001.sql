@@ -5,7 +5,6 @@ CREATE TABLE IF NOT EXISTS `{prefix}users` (
 `firstname` varchar(255) NOT NULL,
 `email` varchar(255) NOT NULL,
 `password` varchar(255) NOT NULL,
-`group` int(11) NOT NULL,
 `old_encryption` boolean NOT NULL DEFAULT '0',
 `skype_id` varchar(32) NOT NULL,
 `icq_id` varchar(20) NULL,

@@ -102,7 +102,7 @@ Database::query ( "alter table `" . tbname ( "content" ) . "` add column `articl
 Database::query ( "alter table `" . tbname ( "content" ) . "` add column `excerpt` text default '';" );
 
 // Database Changes of 2017.1
-Database::query ( "ALTER TABLE `" . tbname ( "users" ) . "` DROP COLUMN `icq_id`" );
+Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` drop column `notinfeed`" );
 Database::query ( "ALTER TABLE `" . tbname ( "settings" ) . "` ADD UNIQUE (`name`)" );
 Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_admins_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
 Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_group_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
@@ -110,6 +110,9 @@ Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_o
 Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_others_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
 
 Database::query ( "CREATE TABLE `{prefix}custom_fields` ( `id` INT NOT NULL AUTO_INCREMENT , `content_id` INT NOT NULL , `name` VARCHAR(100) NOT NULL , `value` TEXT NOT NULL , PRIMARY KEY (`id`) ) ENGINE = InnoDB;", true );
+Database::query ( "ALTER TABLE `{prefix}content` drop COLUMN valid_from;", true );
+Database::query ( "ALTER TABLE `{prefix}content` drop COLUMN valid_to;", true );
+Database::query ( "ALTER TABLE `{prefix}content` DROP COLUMN `icq_id`", true );
 
 Settings::set ( "db_schema_version", "2017.1" );
 

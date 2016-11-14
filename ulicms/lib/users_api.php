@@ -8,7 +8,7 @@ function getUsers() {
 	while ( $row = db_fetch_object ( $query ) ) {
 		array_push ( $users, $row->username );
 	}
-
+	
 	return $users;
 }
 
@@ -19,7 +19,7 @@ function getAllUsers() {
 	while ( $row = db_fetch_object ( $query ) ) {
 		array_push ( $users, $row );
 	}
-
+	
 	return $users;
 }
 function getUsersOnline() {
@@ -43,14 +43,14 @@ function resetPassword($username, $length = 12) {
 	}
 	$uid = intval ( $user ["id"] );
 	changePassword ( $new_pass, $uid );
-
+	
 	Database::query ( "UPDATE " . tbname ( "users" ) . " SET require_password_change = 1 where id = $uid" );
 	$message = get_translation ( "reset_password_mail_body" );
 	$message = str_replace ( "%host%", get_http_host (), $message );
 	$message = str_replace ( "%ip%", get_ip (), $message );
 	$message = str_replace ( "%password%", $new_pass, $message );
 	$message = str_replace ( "%username%", $user ["username"], $message );
-
+	
 	$headers = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=UTF-8";
 	@Mailer::send ( $user ["email"], get_translation ( "reset_password_subject" ), $message, $headers );
 	return true;
@@ -71,7 +71,7 @@ function getUserById($id) {
 		return false;
 	}
 }
-function adduser($username, $lastname, $firstname, $email, $password, $group, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0) {
+function adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0) {
 	$username = db_escape ( $username );
 	$lastname = db_escape ( $lastname );
 	$firstname = db_escape ( $firstname );
@@ -80,8 +80,6 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	$locked = intval ( $locked );
 	$password = $password;
 	$require_password_change = intval ( $require_password_change );
-	// legacy group
-	$group = intval ( $group );
 	// Default ACL Group
 	if (! $acl_group) {
 		$acl_group = Settings::get ( "default_acl_group" );
@@ -89,22 +87,23 @@ function adduser($username, $lastname, $firstname, $email, $password, $group, $s
 	if (! $acl_group) {
 		$acl_group = "NULL";
 	}
-
+	
 	if (is_null ( $acl_group )) {
 		$acl_group = "NULL";
 	}
-
+	
 	add_hook ( "before_create_user" );
-
+	
 	Database::query ( "INSERT INTO " . tbname ( "users" ) . "
-(username,lastname, firstname, email, password, `group`, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`) VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( Encryption::hashPassword ( $password ) ) . "',$group, " . $acl_group . ", $require_password_change, NOW(), $admin, $locked)" ) or die ( db_error () );
+(username,lastname, firstname, email, password, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`) 
+			VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( Encryption::hashPassword ( $password ) ) . "', " . $acl_group . ", $require_password_change, NOW(), $admin, $locked)" ) or die ( db_error () );
 	$message = "Hallo $firstname,\n\n" . "Ein Administrator hat auf http://" . $_SERVER ["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" . "Die Zugangsdaten lauten:\n\n" . "Benutzername: $username\n" . "Passwort: $password\n";
 	$header = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
-
+	
 	if ($sendMessage) {
 		@Mailer::send ( $email, "Dein Benutzer-Account bei " . $_SERVER ["SERVER_NAME"], $message, $header );
 	}
-
+	
 	add_hook ( "after_create_user" );
 }
 function get_user_id() {
@@ -125,19 +124,17 @@ function register_session($user, $redirect = true) {
 	$_SESSION ["email"] = $user ["email"];
 	$_SESSION ["login_id"] = $user ["id"];
 	$_SESSION ["require_password_change"] = $user ["require_password_change"];
-	// Soll durch group_id und eine ACL ersetzt werden
-	$_SESSION ["group"] = $user ["group"];
-
+	
 	// Group ID
 	$_SESSION ["group_id"] = $user ["group_id"];
-
+	
 	$_SESSION ["logged_in"] = true;
 	if (is_null ( $_SESSION ["group_id"] )) {
 		$_SESSION ["group_id"] = 0;
 	}
-
+	
 	$_SESSION ["session_begin"] = time ();
-
+	
 	Database::query ( "UPDATE " . tbname ( "users" ) . " SET `last_login` = " . time () . " where id = " . $user ["id"] );
 	if ($user ["notify_on_login"]) {
 		$subject = "Login auf \"" . Settings::get ( "homepage_title" ) . "\" als " . $user ["username"];
@@ -145,24 +142,24 @@ function register_session($user, $redirect = true) {
 		$headers = "From: " . Settings::get ( "email" );
 		Mailer::send ( $user ["email"], $subject, $text, $headers );
 	}
-
+	
 	if (! $redirect) {
 		return;
 	}
-
+	
 	if (isset ( $_REQUEST ["go"] )) {
 		header ( "Location: " . $_REQUEST ["go"] );
 	} else {
 		header ( "Location: index.php" );
 	}
-
+	
 	return;
 }
 function validate_login($user, $password, $token = null) {
 	include_once ULICMS_ROOT . "/lib/encryption.php";
 	require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
 	$user = getUserByName ( $user );
-
+	
 	if ($user) {
 		if ($user ["old_encryption"]) {
 			$password = md5 ( $password );
@@ -180,12 +177,12 @@ function validate_login($user, $password, $token = null) {
 					return false;
 				}
 			}
-
+			
 			if ($user ["locked"]) {
 				$_REQUEST ["error"] = get_translation ( "YOUR_ACCOUNT_IS_LOCKED" );
 				return false;
 			}
-
+			
 			Database::query ( "update " . tbname ( "users" ) . " set `failed_logins` = 0 where id = " . intval ( $user ["id"] ) );
 			return $user;
 		} else {
@@ -201,19 +198,9 @@ function validate_login($user, $password, $token = null) {
 	return false;
 }
 
-
-
 // Ist der User eingeloggt
 function is_logged_in() {
 	return isset ( $_SESSION ["logged_in"] );
-}
-
-// @Deprecated
-// Gehörte noch zur alten Hierarchie-basierten Rechteverwaltung
-function has_permissions($mod) {
-	if (! isset ( $_SESSION ["group"] ))
-		return false;
-	return $_SESSION ["group"] >= $mod;
 }
 
 // Alias für is_logged_in

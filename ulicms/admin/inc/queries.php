@@ -180,9 +180,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$alternate_title = db_escape ( $_POST ["alternate_title"] );
 		$activated = intval ( $_POST ["activated"] );
 		$page_content = Database::escapeValue ( $_POST ["page_content"] );
-		$comments_enabled = 0;
 		$category = intval ( $_POST ["category"] );
-		$notinfeed = 0;
 		$redirection = db_escape ( $_POST ["redirection"] );
 		$html_file = db_escape ( $_POST ["html_file"] );
 		$menu = db_escape ( $_POST ["menu"] );
@@ -252,10 +250,10 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		
 		add_hook ( "before_create_page" );
 		db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
-  comments_enabled,notinfeed,redirection,menu,position,
+  redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`,
   `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`, `article_date`, `article_image`, `excerpt`)
-  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", " . $comments_enabled . ",$notinfeed, '$redirection', '$menu', $position, '" . $access . "',
+  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
@@ -364,14 +362,13 @@ if ($_POST ["add_admin"] == "add_admin" && (is_admin () or $acl->hasPermission (
 	$username = $_POST ["admin_username"];
 	$lastname = $_POST ["admin_lastname"];
 	$firstname = $_POST ["admin_firstname"];
-	$group = 40;
 	$password = $_POST ["admin_password"];
 	$email = $_POST ["admin_email"];
 	$sendMail = isset ( $_POST ["send_mail"] );
 	$admin = intval ( isset ( $_POST ["admin"] ) );
 	$locked = intval ( isset ( $_POST ["locked"] ) );
 	$require_password_change = intval ( isset ( $_POST ["require_password_change"] ) );
-	adduser ( $username, $lastname, $firstname, $email, $password, $group, $sendMail, null, $require_password_change, $admin, $locked );
+	adduser ( $username, $lastname, $firstname, $email, $password, $sendMail, null, $require_password_change, $admin, $locked );
 	header ( "Location: index.php?action=admins" );
 	exit ();
 }
@@ -382,10 +379,8 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$activated = intval ( $_POST ["activated"] );
 	$unescaped_content = $_POST ["page_content"];
 	$page_content = db_escape ( $_POST ["page_content"] );
-	$comments_enabled = 0;
 	$category = intval ( $_POST ["category"] );
 	$redirection = db_escape ( $_POST ["redirection"] );
-	$notinfeed = 0;
 	$menu = db_escape ( $_POST ["menu"] );
 	$position = ( int ) $_POST ["position"];
 	$html_file = db_escape ( $_POST ["html_file"] );
@@ -462,7 +457,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$only_others_can_edit = intval ( isset ( $_POST ["only_others_can_edit"] ) );
 	
 	add_hook ( "before_edit_page" );
-	$sql = "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", comments_enabled=$comments_enabled, redirection = '$redirection', notinfeed = $notinfeed, menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
+	$sql = "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
 	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
 	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = '$article_date', excerpt = '$excerpt', 
 	only_admins_can_edit = $only_admins_can_edit, `only_group_can_edit` = $only_group_can_edit,
@@ -494,12 +489,10 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 		
 		$list_order_by = Database::escapeValue ( $_POST ["list_order_by"] );
 		$list_order_direction = Database::escapeValue ( $_POST ["list_order_direction"] );
-		
 		$limit = intval ( $_POST ["limit"] );
-		
 		$list_use_pagination = intval ( $_POST ["list_use_pagination"] );
-		
 		$list_type = $_POST ["list_type"];
+		
 		if (empty ( $list_type )) {
 			$list_type = null;
 		}
@@ -640,7 +633,6 @@ if (! empty ( $_FILES ['logo_upload_file'] ['name'] ) and $acl->hasPermission ( 
 	$extension = file_extension ( $filename );
 	
 	if ($type == "image/jpeg" or $type == "image/jpg" or $type == "image/gif" or $type == "image/png") {
-		
 		$hash = md5 ( file_get_contents ( $logo_upload ['tmp_name'] ) );
 		$new_filename = "../content/images/" . $hash . "." . $extension;
 		$logo_upload_filename = $hash . "." . $extension;
@@ -650,11 +642,9 @@ if (! empty ( $_FILES ['logo_upload_file'] ['name'] ) and $acl->hasPermission ( 
 		$image_size = getimagesize ( $new_filename );
 		if ($image_size [0] <= 500 and $image_size [1] <= 100) {
 			setconfig ( "logo_image", $logo_upload_filename );
-			
 			add_hook ( "after_upload_logo_successfull" );
 		} else {
 			header ( "Location: index.php?action=logo_upload&error=to_big" );
-			
 			add_hook ( "after_upload_logo_failed" );
 			exit ();
 		}
@@ -666,7 +656,6 @@ if (! empty ( $_FILES ['logo_upload_file'] ['name'] ) and $acl->hasPermission ( 
 if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) or ($_POST ["edit_admin"] == "edit_admin" and logged_in () and $_POST ["id"] == $_SESSION ["login_id"])) {
 	
 	$id = intval ( $_POST ["id"] );
-	
 	$username = db_escape ( $_POST ["admin_username"] );
 	$lastname = db_escape ( $_POST ["admin_lastname"] );
 	$firstname = db_escape ( $_POST ["admin_firstname"] );
@@ -674,21 +663,19 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$password = $_POST ["admin_password"];
 	// User mit eingeschränkten Rechten darf sich nicht selbst zum Admin machen können
 	if ($acl->hasPermission ( "users" )) {
-		
-		$rechte = db_escape ( $_POST ["admin_rechte"] );
 		$admin = intval ( isset ( $_POST ["admin"] ) );
 		if (isset ( $_POST ["group_id"] )) {
 			$group_id = $_POST ["group_id"];
-			if ($group_id == "-")
+			if ($group_id == "-") {
 				$group_id = "NULL";
-			else
+			} else {
 				$group_id = intval ( $group_id );
+			}
 		} else {
 			$group_id = $_SESSION ["group_id"];
 		}
 	} else {
 		$user = getUserById ( $id );
-		$rechte = $user ["group"];
 		$admin = $user ["admin"];
 		$group_id = $user ["group_id"];
 		if (is_null ( $group_id )) {
@@ -707,7 +694,7 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$locked = intval ( isset ( $_POST ["locked"] ) );
 	
 	add_hook ( "before_edit_user" );
-	$sql = "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group`= $rechte, `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
+	$sql = "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', skype_id = '$skype_id',
 about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked', `twitter` = '$twitter', `homepage` = '$homepage'  WHERE id=$id";
 	
