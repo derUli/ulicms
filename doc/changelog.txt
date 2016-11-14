@@ -16,11 +16,13 @@
 + Übersetzungssystem für JavaScript hinzugefügt
 + Custom Fields
 + Feld "Auszug" verwendet nun den HTML-Editor
++ Alle png-Grafiken optimiert
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
 - PHP Form Builder Class aus dem Core entfernt. Dies soll zukünftig in ein Modul ausgelagert werden.
 - generischer JSON Export entfernt
+- CKEditor Skin office2013 entfernt
 
 Neue Berechtigungen hinzugefügt:
 + pages_create
