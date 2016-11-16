@@ -22,28 +22,28 @@ function get_jquery_url() {
 }
 function get_prefered_language(array $available_languages, $http_accept_language) {
 	$available_languages = array_flip ( $available_languages );
-	
+
 	$langs;
 	preg_match_all ( '~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower ( $http_accept_language ), $matches, PREG_SET_ORDER );
 	foreach ( $matches as $match ) {
-		
+
 		list ( $a, $b ) = explode ( '-', $match [1] ) + array (
 				'',
-				'' 
+				''
 		);
 		$value = isset ( $match [2] ) ? ( float ) $match [2] : 1.0;
-		
+
 		if (isset ( $available_languages [$match [1]] )) {
 			$langs [$match [1]] = $value;
 			continue;
 		}
-		
+
 		if (isset ( $available_languages [$a] )) {
 			$langs [$a] = $value - 0.1;
 		}
 	}
 	arsort ( $langs );
-	
+
 	return $langs;
 }
 function get_google_fonts() {
@@ -74,7 +74,7 @@ function get_shortlink($id = null) {
 	if ($id) {
 		$shortlink = getBaseFolderURL () . "/?goid=" . get_ID ();
 	}
-	
+
 	$shortlink = apply_filter ( $shortlink, "shortlink" );
 	return $shortlink;
 }
@@ -83,7 +83,7 @@ function get_canonical() {
 	if (! is_frontpage ()) {
 		$canonical .= buildSEOUrl ();
 	}
-	
+
 	if (containsModule ( null, "blog" )) {
 		if (isset ( $_GET ["single"] )) {
 			$canonical .= "?single=" . htmlspecialchars ( $_GET ["single"] );
@@ -200,7 +200,7 @@ function get_html_editor() {
 	if (! $query) {
 		return "ckeditor";
 	}
-	
+
 	$obj = db_fetch_assoc ( $query );
 	if (! is_null ( $obj ["html_editor"] ) and ! empty ( $obj ["html_editor"] )) {
 		return $obj ["html_editor"];
@@ -219,16 +219,16 @@ function log_request($save_ip = false) {
 	} else {
 		$ip = "";
 	}
-	
+
 	$ip = db_escape ( $ip );
 	$request_method = db_escape ( get_request_method () );
 	$useragent = db_escape ( get_useragent () );
 	$request_uri = db_escape ( get_request_uri () );
 	$http_host = db_escape ( get_http_host () );
 	$referrer = db_escape ( get_referrer () );
-	
+
 	db_query ( "INSERT INTO " . tbname ( "log" ) . " (ip, request_method, useragent, request_uri, http_host, referrer) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host', '$referrer')" );
-	
+
 	add_hook ( "after_log_request" );
 }
 
@@ -281,7 +281,7 @@ function get_available_post_types() {
 			"image",
 			"module",
 			"video",
-			"audio" 
+			"audio"
 	);
 	$modules = getAllModules ();
 	foreach ( $modules as $module ) {
@@ -294,7 +294,7 @@ function get_available_post_types() {
 			}
 		}
 	}
-	
+
 	$themes = getAllModules ();
 	foreach ( $themes as $theme ) {
 		$custom_types = getThemeMeta ( $theme, "custom_types" );
@@ -306,7 +306,7 @@ function get_available_post_types() {
 			}
 		}
 	}
-	
+
 	$post_types = apply_filter ( $post_types, "custom_post_types" );
 	return $post_types;
 }
@@ -324,7 +324,7 @@ function getFontSizes() {
 			"large",
 			"larger",
 			"x-large",
-			"xx-large" 
+			"xx-large"
 	);
 	add_hook ( "custom_font_sizes" );
 	return $sizes;
@@ -382,7 +382,7 @@ function getLanguageNameByCode($code) {
 		$result = db_fetch_object ( $query );
 		$retval = $result->name;
 	}
-	
+
 	return $retval;
 }
 function getAvailableBackendLanguages() {
@@ -395,7 +395,7 @@ function getAvailableBackendLanguages() {
 			array_push ( $retval, basename ( $list [$i], ".php" ) );
 		}
 	}
-	
+
 	return $retval;
 }
 function getSystemLanguage() {
@@ -408,11 +408,11 @@ function getSystemLanguage() {
 	} else {
 		$lang = "de";
 	}
-	
+
 	if (! file_exists ( getLanguageFilePath ( $lang ) )) {
 		$lang = "de";
 	}
-	
+
 	return $lang;
 }
 
@@ -428,7 +428,7 @@ function getDomainByLanguage($language) {
 					$line [0] = trim ( $line [0] );
 					$line [1] = trim ( $line [1] );
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
-						
+
 						if ($line [1] == $language) {
 							return $line [0];
 						}
@@ -451,10 +451,10 @@ function setLanguageByDomain() {
 				if (count ( $line ) > 1) {
 					$line [0] = trim ( $line [0] );
 					$line [1] = trim ( $line [1] );
-					
+
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
 						$domain = $_SERVER ["HTTP_HOST"];
-						
+
 						if ($line [0] == $domain and in_array ( $line [1], getAllLanguages () )) {
 							$_SESSION ["language"] = $line [1];
 							return true;
@@ -472,7 +472,7 @@ function getCacheType() {
 		case "cache_lite" :
 			@include "Cache/Lite.php";
 			$cache_type = "cache_lite";
-			
+
 			break;
 		case "file" :
 		default :
@@ -480,7 +480,7 @@ function getCacheType() {
 			break;
 			break;
 	}
-	
+
 	return $cache_type;
 }
 function getOnlineUsers() {
@@ -545,14 +545,14 @@ function clearCache() {
 			SureRemoveDir ( "content/cache", false );
 		}
 	}
-	
+
 	if (function_exists ( "apc_clear_cache" )) {
 		clearAPCCache ();
 	}
 	if (function_exists ( "opcache_reset" )) {
 		opcache_reset ();
 	}
-	
+
 	add_hook ( "after_clear_cache" );
 }
 
@@ -605,7 +605,7 @@ function setLocaleByLanguage() {
 	} else {
 		$locale = Settings::get ( "locale" );
 		if ($locale) {
-			
+
 			$locale = splitAndTrim ( $locale );
 			array_unshift ( $locale, LC_ALL );
 			@call_user_func_array ( "setlocale", $locale );
@@ -620,13 +620,13 @@ function setLocaleByLanguage() {
 function getCurrentLanguage($current = true) {
 	if ($current) {
 		$query = db_query ( "SELECT language FROM " . tbname ( "content" ) . " WHERE systemname='" . get_requested_pagename () . "'" );
-		
+
 		if (db_num_rows ( $query ) > 0) {
 			$fetch = db_fetch_object ( $query );
 			return $fetch->language;
 		}
 	}
-	
+
 	if (isset ( $_SESSION ["language"] )) {
 		return basename ( $_SESSION ["language"] );
 	} else {
@@ -660,7 +660,7 @@ function getTemplateDirPath($sub = "default", $abspath = false) {
 	} else {
 		$templateDir = "content/templates/";
 	}
-	
+
 	$templateDir = $templateDir . $sub . "/";
 	return $templateDir;
 }
@@ -677,10 +677,10 @@ function replace_num_entity($ord) {
 	} else {
 		$ord = intval ( $ord );
 	}
-	
+
 	$no_bytes = 0;
 	$byte = array ();
-	
+
 	if ($ord < 128) {
 		return chr ( $ord );
 	} elseif ($ord < 2048) {
@@ -692,13 +692,13 @@ function replace_num_entity($ord) {
 	} else {
 		return;
 	}
-	
+
 	switch ($no_bytes) {
 		case 2 :
 			{
 				$prefix = array (
 						31,
-						192 
+						192
 				);
 				break;
 			}
@@ -706,7 +706,7 @@ function replace_num_entity($ord) {
 			{
 				$prefix = array (
 						15,
-						224 
+						224
 				);
 				break;
 			}
@@ -714,22 +714,22 @@ function replace_num_entity($ord) {
 			{
 				$prefix = array (
 						7,
-						240 
+						240
 				);
 			}
 	}
-	
+
 	for($i = 0; $i < $no_bytes; $i ++) {
 		$byte [$no_bytes - $i - 1] = (($ord & (63 * pow ( 2, 6 * $i ))) / pow ( 2, 6 * $i )) & 63 | 128;
 	}
-	
+
 	$byte [0] = ($byte [0] & $prefix [0]) | $prefix [1];
-	
+
 	$ret = '';
 	for($i = 0; $i < $no_bytes; $i ++) {
 		$ret .= chr ( $byte [$i] );
 	}
-	
+
 	return $ret;
 }
 
@@ -772,7 +772,7 @@ function SureRemoveDir($dir, $DeleteMe) {
 		if (! @unlink ( $dir . '/' . $obj ))
 			SureRemoveDir ( $dir . '/' . $obj, true );
 	}
-	
+
 	closedir ( $dh );
 	if ($DeleteMe) {
 		@rmdir ( $dir );
@@ -794,17 +794,17 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 	}
 	if ($page === false)
 		$page = get_requested_pagename ();
-	
+
 	if (startsWith ( $redirection, "#" )) {
 		return $redirection;
 	}
-	
+
 	if ($page === get_frontpage ()) {
 		return "./";
 	}
-	
+
 	$seo_url = "";
-	
+
 	if (is_file ( "backend.php" )){
 		$seo_url .= "../";
 	}
@@ -926,10 +926,10 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$thisModule = $allModules [$i];
 		$stringToReplace1 = '[module="' . $thisModule . '"]';
 		$stringToReplace2 = '[module=&quot;' . $thisModule . '&quot;]';
-		
+
 		$module_mainfile_path = getModuleMainFilePath ( $thisModule );
 		$module_mainfile_path2 = getModuleMainFilePath2 ( $thisModule );
-		
+
 		if (is_file ( $module_mainfile_path ) and (strstr ( $string, $stringToReplace1 ) or strstr ( $string, $stringToReplace2 ))) {
 			require_once $module_mainfile_path;
 		} else if (is_file ( $module_mainfile_path2 )) {
@@ -937,13 +937,13 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		} else {
 			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
 		}
-		
+
 		if (function_exists ( $thisModule . "_render" )) {
 			$html_output = call_user_func ( $thisModule . "_render" );
 		} else {
 			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
 		}
-		
+
 		$string = str_replace ( $stringToReplace1, $html_output, $string );
 		$string = str_replace ( $stringToReplace2, $html_output, $string );
 		$string = str_replace ( '[title]', get_title (), $string );
@@ -998,11 +998,11 @@ function getAllPagesWithTitle() {
 	while ( $row = db_fetch_object ( $query ) ) {
 		$a = Array (
 				$row->title,
-				$row->systemname . ".html" 
+				$row->systemname . ".html"
 		);
 		array_push ( $returnvalues, $a );
 		if (containsModule ( $row->systemname, "blog" )) {
-			
+
 			$sql = "select title, seo_shortname from " . tbname ( "blog" ) . " ORDER by datum DESC";
 			$query_blog = db_query ( $sql );
 			while ( $row_blog = db_fetch_object ( $query_blog ) ) {
@@ -1010,7 +1010,7 @@ function getAllPagesWithTitle() {
 				$url = $row->systemname . ".html" . "?single=" . $row_blog->seo_shortname;
 				$b = Array (
 						$title,
-						$url 
+						$url
 				);
 				array_push ( $returnvalues, $b );
 			}
@@ -1028,7 +1028,7 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
 			$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL and menu = '" . Database::escapeValue ( $menu ) . "' ORDER BY $order" );
 		}
 	} else {
-		
+
 		if (! $menu) {
 			$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape ( $lang ) . "' ORDER BY $order" );
 		} else {
@@ -1041,7 +1041,7 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
 			array_push ( $returnvalues, $row );
 		}
 	}
-	
+
 	return $returnvalues;
 }
 
@@ -1050,14 +1050,14 @@ function getAllSystemNames($lang = null) {
 	if (! $lang) {
 		$query = db_query ( "SELECT systemname,id FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL AND redirection NOT LIKE '#%' ORDER BY systemname" );
 	} else {
-		
+
 		$query = db_query ( "SELECT systemname,id FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL  AND redirection NOT LIKE '#%' AND language ='" . db_escape ( $lang ) . "' ORDER BY systemname" );
 	}
 	$returnvalues = Array ();
 	while ( $row = db_fetch_object ( $query ) ) {
 		array_push ( $returnvalues, $row->systemname );
 	}
-	
+
 	return $returnvalues;
 }
 
@@ -1104,10 +1104,10 @@ function getAllMenus($only_used = false) {
 			"top",
 			"right",
 			"bottom",
-			"none" 
+			"none"
 	);
 	$additional_menus = Settings::get ( "additional_menus" );
-	
+
 	if ($additional_menus) {
 		$additional_menus = explode ( ";", $additional_menus );
 		foreach ( $additional_menus as $m ) {
@@ -1124,7 +1124,7 @@ function getAllMenus($only_used = false) {
 		}
 		$menus = $new_menus;
 	}
-	
+
 	$themesList = getThemesList ();
 	$allThemeMenus = array ();
 	foreach ( $themesList as $theme ) {
@@ -1137,15 +1137,15 @@ function getAllMenus($only_used = false) {
 			}
 		}
 	}
-	
+
 	if (count ( $allThemeMenus ) > 0) {
 		$menus = $allThemeMenus;
 	}
-	
+
 	if (! in_array ( "none", $menus )) {
 		$menus [] = "none";
 	}
-	
+
 	sort ( $menus );
 	return $menus;
 }
@@ -1154,7 +1154,7 @@ function getAllMenus($only_used = false) {
 function containsModule($page = null, $module = false) {
 	if (is_null ( $page ))
 		$page = get_requested_pagename ();
-	
+
 	$query = db_query ( "SELECT content, module, `type` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
 	$dataset = db_fetch_assoc ( $query );
 	$content = $dataset ["content"];
@@ -1193,11 +1193,11 @@ function uninstall_module($name, $type = "module") {
 	if (! $acl->hasPermission ( "install_packages" ) and ! isCLI ()) {
 		return false;
 	}
-	
+
 	$name = trim ( $name );
 	$name = basename ( $name );
 	$name = trim ( $name );
-	
+
 	// Verhindern, dass der Modulordner oder gar das ganze
 	// CMS gelöscht werden kann
 	if ($name == "." or $name == ".." or empty ( $name ))
@@ -1225,7 +1225,7 @@ function uninstall_module($name, $type = "module") {
 			return ! is_dir ( $theme_path );
 		}
 	}
-	
+
 	return false;
 }
 
@@ -1277,7 +1277,7 @@ function is_admin() {
 		$query = db_query ( "SELECT `admin` FROM " . tbname ( "users" ) . " where id = " . $user_id . " and admin = 1" );
 		$retval = db_num_rows ( $query );
 	}
-	
+
 	return $retval;
 }
 
@@ -1291,4 +1291,23 @@ function tbname($name) {
 function isFastMode() {
 	$cfg = new config ();
 	return (isset ( $cfg->fast_mode ) and $cfg->fast_mode);
+}
+
+// Mimetypen einer Datei ermitteln
+function get_mime($file) {
+	if (function_exists ( "finfo_file" )) {
+		$finfo = finfo_open ( FILEINFO_MIME_TYPE ); // return mime type ala mimetype extension
+		$mime = finfo_file ( $finfo, $file );
+		finfo_close ( $finfo );
+		return $mime;
+	} else if (function_exists ( "mime_content_type" )) {
+		return mime_content_type ( $file );
+	} else if (! stristr ( ini_get ( "disable_functions" ), "shell_exec" )) {
+		// http://stackoverflow.com/a/134930/1593459
+		$file = escapeshellarg ( $file );
+		$mime = shell_exec ( "file -bi " . $file );
+		return $mime;
+	} else {
+		return false;
+	}
 }
