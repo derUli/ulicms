@@ -34,3 +34,9 @@ function find_all_files($dir) {
 	}
 	return $result;
 }
+
+function file_extension($filename) {
+	$ext = explode ( ".", $filename );
+	$ext = end ( $ext );
+	return $ext;
+}
