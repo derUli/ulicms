@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}content` (
 `deleted_at` bigint(20) DEFAULT NULL,
 `html_file` varchar(255) DEFAULT NULL,
 `theme` varchar(200) null,
-`custom_data` varchar(255) NULL DEFAULT '{}',
+`custom_data` text DEFAULT NULL,
 `type` varchar(50) DEFAULT 'page' NULL,
 `og_title` varchar(255) DEFAULT '',
 `og_type` varchar(255) DEFAULT '',

@@ -115,6 +115,8 @@ Database::query ( "ALTER TABLE `{prefix}content` drop COLUMN valid_to;", true );
 Database::query ( "ALTER TABLE `{prefix}content` DROP COLUMN `icq_id`", true );
 
 Database::query ( "ALTER TABLE `{prefix}content` modify `content` mediumtext NOT NULL;", true );
+Database::query ( "ALTER TABLE `{prefix}content` modify `custom_data` text DEFAULT NULL;", true );
+
 Database::query ( "ALTER TABLE `{prefix}settings` modify `value` mediumtext NOT NULL;;", true );
 Database::query ( "ALTER TABLE `{prefix}history` modify `content` mediumtext NOT NULL;", true );
 
