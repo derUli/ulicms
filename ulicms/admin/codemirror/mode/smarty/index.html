@@ -1,37 +1,30 @@
 <!doctype html>
 
 <title>CodeMirror: Smarty mode</title>
-<meta charset="utf-8" />
+<meta charset="utf-8"/>
 <link rel=stylesheet href="../../doc/docs.css">
 
 <link rel="stylesheet" href="../../lib/codemirror.css">
 <script src="../../lib/codemirror.js"></script>
 <script src="smarty.js"></script>
-<style type="text/css">
-.CodeMirror {
-	border-top: 1px solid black;
-	border-bottom: 1px solid black;
-}
-</style>
+<style type="text/css">.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
 <div id=nav>
-	<a href="http://codemirror.net"><h1>CodeMirror</h1>
-		<img id=logo src="../../doc/logo.png"></a>
+  <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
 
-	<ul>
-		<li><a href="../../index.html">Home</a>
-		<li><a href="../../doc/manual.html">Manual</a>
-		<li><a href="https://github.com/codemirror/codemirror">Code</a>
-	</ul>
-	<ul>
-		<li><a href="../index.html">Language modes</a>
-		<li><a class=active href="#">Smarty</a>
-	</ul>
+  <ul>
+    <li><a href="../../index.html">Home</a>
+    <li><a href="../../doc/manual.html">Manual</a>
+    <li><a href="https://github.com/codemirror/codemirror">Code</a>
+  </ul>
+  <ul>
+    <li><a href="../index.html">Language modes</a>
+    <li><a class=active href="#">Smarty</a>
+  </ul>
 </div>
 
 <article>
-	<h2>Smarty mode</h2>
-	<form>
-		<textarea id="code" name="code">
+<h2>Smarty mode</h2>
+<form><textarea id="code" name="code">
 {extends file="parent.tpl"}
 {include file="template.tpl"}
 
@@ -51,21 +44,19 @@
       {/if}
     {/foreach}
   {/function}
-{/if}</textarea>
-	</form>
+{/if}</textarea></form>
 
-	<script>
+    <script>
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         lineNumbers: true,
         mode: "smarty"
       });
     </script>
 
-	<br />
+    <br />
 
 	<h3>Smarty 2, custom delimiters</h3>
-	<form>
-		<textarea id="code2" name="code2">
+    <form><textarea id="code2" name="code2">
 {--extends file="parent.tpl"--}
 {--include file="template.tpl"--}
 
@@ -85,10 +76,9 @@
       {--/if--}
     {--/foreach--}
   {--/function--}
-{--/if--}</textarea>
-	</form>
+{--/if--}</textarea></form>
 
-	<script>
+    <script>
       var editor = CodeMirror.fromTextArea(document.getElementById("code2"), {
         lineNumbers: true,
         mode: {
@@ -140,11 +130,7 @@ Smarty "dot" syntax (note: embedded {} are used to address ambiguities):
 	</script>
 
 
-	<p>A plain text/Smarty version 2 or 3 mode, which allows for custom
-		delimiter tags.</p>
+    <p>A plain text/Smarty version 2 or 3 mode, which allows for custom delimiter tags.</p>
 
-	<p>
-		<strong>MIME types defined:</strong>
-		<code>text/x-smarty</code>
-	</p>
-</article>
+    <p><strong>MIME types defined:</strong> <code>text/x-smarty</code></p>
+  </article>
