@@ -8,7 +8,7 @@ if (defined ( "_SECURITY" )) {
 <p><?php translate ( "pages_infotext" );?></p>
 <?php
 		
-if ($acl->hasPermission ( "pages_create" )) {
+		if ($acl->hasPermission ( "pages_create" )) {
 			?>
 <p>
 	<a href="index.php?action=pages_new"><?php translate("create_page");?>
@@ -205,7 +205,7 @@ $(window).load(function(){
 	</select>
 
 <?php translate("type")?>
-<?php $types = get_available_post_types();?>
+<?php $types = get_used_post_types();?>
 <select name="filter_type" onchange="filter_by_type(this);">
 	<option value="null"
 		<?php
@@ -400,7 +400,7 @@ $(window).load(function(){
 			</td>
 			<?php
 		
-if ($acl->hasPermission ( "pages_create" )) {
+		if ($acl->hasPermission ( "pages_create" )) {
 			?>
 			<td style="text-align: center"><?php translate ( "clone" );?>
 			</td>
