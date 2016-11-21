@@ -1033,6 +1033,11 @@ function content() {
 	}
 	return import ( $_GET ["seite"] );
 }
+function get_content() {
+	ob_start ();
+	content ();
+	return ob_get_clean ();
+}
 function checkforAccessForDevice($access) {
 	$access = explode ( ",", $access );
 	$allowed = false;
