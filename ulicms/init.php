@@ -7,6 +7,10 @@
 if (! defined ( "ULICMS_ROOT" )) {
 	define ( "ULICMS_ROOT", dirname ( __file__ ) );
 }
+function uimport($class) {
+	$path = str_replace ( "\\", "/", ULICMS_ROOT ) . "/" . $class . ".php";
+	return include_once $path;
+}
 
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if (ini_get ( 'register_globals' ) === '1') {
@@ -45,8 +49,8 @@ if (! file_existS ( ULICMS_CACHE )) {
 }
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "users_api.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR. "lib" . DIRECTORY_SEPERATOR . "network.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR. "lib" . DIRECTORY_SEPERATOR . "settings.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "network.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "settings.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "base_config.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "request.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "antispam-features.php";
