@@ -12,7 +12,7 @@
 + Performance verbessert
 + "Nachricht des Tages" nutzt nun den HTML-Editor
 + "admin_permission" Attribut in metadata.json wird nun unterstützt
-+ "menus" Attribut in metadata.json von Theems wird nun ausgewertet und die Auswahllisten für Menüs danach gefiltert
++ "menus" Attribut in metadata.json von Themes wird nun ausgewertet und die Auswahllisten für Menüs danach gefiltert
 + Übersetzungssystem für JavaScript hinzugefügt
 + Custom Fields
 + Feld "Auszug" verwendet nun den HTML-Editor
