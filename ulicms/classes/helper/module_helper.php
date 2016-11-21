@@ -8,6 +8,14 @@ class ModuleHelper {
 		$url = rtrim ( $url, "&" );
 		return $url;
 	}
+	public static function buildActionURL($action, $suffix = null) {
+		$url = "?action=" . $action;
+		if ($suffix !== null and ! empty ( $suffix )) {
+			$url .= "&" . $suffix;
+		}
+		$url = rtrim ( $url, "&" );
+		return $url;
+	}
 	public static function getAllEmbedModules() {
 		$retval = array ();
 		$modules = getAllModules ();
