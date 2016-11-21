@@ -145,7 +145,7 @@ class Database {
 		if ($prefix) {
 			$table = tbname ( $table );
 		}
-		$table = self::escapeName ( $prefix );
+		$table = self::escapeName ( $table );
 		if (count ( $columns ) == 0) {
 			$columns [] = "*";
 		}
@@ -272,9 +272,11 @@ class Database {
 			}
 		}
 	}
-	public static function getColumnNames($table) {
+	public static function getColumnNames($table, $prefix = true) {
 		$retval = array ();
-		$table = tbname ( $table );
+		if ($prefix) {
+			$table = tbname ( $table );
+		}
 		$query = Database::query ( "SELECT * FROM $table limit 1" );
 		$fields_num = self::getNumFieldCount ( $query );
 		if ($fields_num > 0) {
