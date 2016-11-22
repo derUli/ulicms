@@ -23,6 +23,9 @@
   = SecurityHelper::securePath()
   = ModuleHelper::buildActionURL()
   = get_content()
++ Controller eines Moduls werden nun automatisch initialisiert,
+sofern in der metadata.json angegeben
++ Backend Actions eines Moduls werden nun automatisch initialisiert, sofern in der metatadata.json angegeben
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
@@ -227,7 +230,7 @@ Entfernte Features
 + Bugfix: Werte in der Spalte "Menü" in der Seitenliste werden nun übersetzt
 + IP Whitelist hinzugefügt. In der Datei cms-config.php kann nun ein Array mit IP-Adressen als Variable ip_whitelist definiert werden.
   Sofern dieser Wert gesetzt ist, wird der Zugriff zum UliCMS Backend auf bestimmte
-  IP-Adressen beschränkt. Die Nutzung dieser Option wird nur bei Internet-Zugängen mit einer 
+  IP-Adressen beschränkt. Die Nutzung dieser Option wird nur bei Internet-Zugängen mit einer
   statischen IP empfohlen, wie dies z.B. in Firmennetzwerken oft der Fall ist.
 + Checkboxes und Radiobuttons für mobile Geräte optimiert
 + CSS-Klasse für Page-ID zu Menülinks hinzugefügt
@@ -258,7 +261,7 @@ Entfernte Features
 + tel Tags are now supported. example: [tel]+49123456789[/tel]
 + skype Tags are now supported. example: [skype]MySkypeName[/skype]
 + Copyright-Jahr von UliCMS nun an zentraler Stelle
-+ Bugfix: Beim Loginformular wurde immer die Sprachdatei der Standardsprache geladen. 
++ Bugfix: Beim Loginformular wurde immer die Sprachdatei der Standardsprache geladen.
 Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird definiert ist geladen.
 + Patches können nun auch als Datei hochgeladen werden.
 + shortlink und canonical Meta-Tags zum System hinzugefügt
@@ -279,7 +282,7 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + Konfigurations-Direktive disable_auto_include_jquery hinzugefügt
 + Settings die aus der Datenbank abgefragt werden, werden gecacht
 + Übersetzung "Permalink" in "Name für URL geändert"
-+ Es ist nun möglich, die maximale Anzahl der fehlgeschlagenen Anmeldeversuche zu beschränken. 
++ Es ist nun möglich, die maximale Anzahl der fehlgeschlagenen Anmeldeversuche zu beschränken.
   Wenn dies überschritten wird, wird der Account gesperrt
 + API-Funktionen get_format() und set_format() hinzugefügt
 + API-Funktion buildSEOURL() um Parameter $format erweitert. $format ist per default = "html"

@@ -6,26 +6,31 @@ class ControllerRegistry {
 		$modules = getAllModules ();
 		foreach ( $modules as $module ) {
 			$controllers = getModuleMeta ( $module, "controllers" );
-			if ($controllers and is_array ( $controllers )) {
-				foreach ( $controller as $key => $value ) {
+			if ($controllers) {
+				foreach ( $controllers as $key => $value ) {
 					$path = getModulePath ( $module ) . trim ( $value, "/" );
 					if (! endsWith ( $path, ".php" )) {
 						$path .= ".php";
 					}
-					$controllerRegistry [$key] = $value;
+					$controllerRegistry [$key] = $path;
 				}
 			}
 		}
 		foreach ( $controllerRegistry as $key => $value ) {
 			include_once $value;
 			if (class_exists ( $key )) {
-				$controllers [$key] = new $key ();
+				$classInstance = new $key ();
+				if ($classInstance instanceof Controller) {
+					self::$controllers [$key] = $classInstance;
+				}
 			}
 		}
 	}
-	public static function get($class) {
-		if (isset ( self::$controllers ["class"] )) {
-			return self::$controllers ["class"];
+	public static function get($class = null) {
+		if ($class == null and get_action ()) {
+			return ActionRegistry::getController ();
+		} else if (isset ( self::$controllers [$class] )) {
+			return self::$controllers [$class];
 		} else {
 			return null;
 		}
