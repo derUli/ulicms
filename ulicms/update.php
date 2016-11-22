@@ -121,6 +121,8 @@ Database::query ( "ALTER TABLE `{prefix}content` modify `custom_data` text DEFAU
 Database::query ( "ALTER TABLE `{prefix}settings` modify `value` mediumtext NOT NULL;;", true );
 Database::query ( "ALTER TABLE `{prefix}history` modify `content` mediumtext NOT NULL;", true );
 
+Database::query("update {prefix}content set type = 'node' where type = 'link' and redirection = '#'", true);
+
 // CKEditor skin office2013 was removed
 // change to moono
 if (Settings::get ( "ckeditor_skin" ) == "office2013") {
