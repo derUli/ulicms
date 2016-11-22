@@ -694,4 +694,6 @@ define ( "TRANSLATION_NOT_SUPPORTED_FORMAT", "The format is not supported." );
 define ( "TRANSLATION_RESTRICT_EDIT_ACCESS", "Restrict Edit Access" );
 define ( "TRANSLATION_OTHERS", "Others" );
 
+define ( "TRANSLATION_HIDDEN", "Hidden" );
+
 add_hook ( "lang_en" );

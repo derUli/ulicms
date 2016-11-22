@@ -171,6 +171,14 @@ if (defined ( "_SECURITY" )) {
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
 				<?php translate("disabled");?>
 				</option>
+			</select> <br /> <br /> <strong><?php translate("hidden");?>
+	</strong><br /> <select name="hidden" size="1"><option value="1"
+					<?php if($row->hidden == 1) echo "selected";?>>
+		<?php translate("yes");?>
+		</option>
+				<option value="0" <?php if($row->hidden == 0) echo "selected";?>>
+		<?php translate("no");?>
+		</option>
 			</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
 	<?php
 			echo categories::getHTMLSelect ( $row->category );
@@ -723,29 +731,29 @@ function openArticleImageSelectWindow(field) {
 			echo htmlspecialchars ( $row->content );
 			?></textarea>
 		<?php
-				$editor = get_html_editor ();
-				?>
+			$editor = get_html_editor ();
+			?>
 
 		<?php
-				
-				if ($editor === "ckeditor") {
-					?>
+			
+			if ($editor === "ckeditor") {
+				?>
 		<script type="text/javascript">
 var editor = CKEDITOR.replace( 'page_content',
 					{
 						skin : '<?php
-					
-					echo Settings::get ( "ckeditor_skin" );
-					?>'
+				
+				echo Settings::get ( "ckeditor_skin" );
+				?>'
 					});
 
 
 var editor2 = CKEDITOR.replace( 'excerpt',
 		{
 			skin : '<?php
-					
-					echo Settings::get ( "ckeditor_skin" );
-					?>'
+				
+				echo Settings::get ( "ckeditor_skin" );
+				?>'
 		});
 
 editor.on("instanceReady", function()
@@ -791,8 +799,8 @@ function confirmExit()
 }
 </script>
 <?php
-				} else if ($editor == "codemirror") {
-					?>
+			} else if ($editor == "codemirror") {
+				?>
 		<script type="text/javascript">
 var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content"),
 
