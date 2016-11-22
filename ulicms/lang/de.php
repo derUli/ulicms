@@ -686,4 +686,7 @@ define ( "TRANSLATION_NOT_SUPPORTED_FORMAT", "Das Dateiformat wird nicht unterst
 define ( "TRANSLATION_RESTRICT_EDIT_ACCESS", "Bearbeitung beschränken" );
 define ( "TRANSLATION_OTHERS", "Andere" );
 
+define ( "TRANSLATION_HIDDEN", "Versteckt" );
+define ( "TRANSLATION_NODE", "Knotenpunkt" );
+
 add_hook ( "lang_de" );

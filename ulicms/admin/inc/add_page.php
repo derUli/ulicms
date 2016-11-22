@@ -149,6 +149,13 @@
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
 		<?php translate("disabled");?>
 		</option>
+			</select> <br /> <br /> <strong><?php translate("hidden");?>
+	</strong><br /> <select name="hidden" size="1"><option value="1">
+		<?php translate("yes");?>
+		</option>
+				<option value="0" selected>
+		<?php translate("no");?>
+		</option>
 			</select> <br /> <br /> <strong><?php translate("category");?>
 	</strong><br />
 	<?php echo categories :: getHTMLSelect();?>
@@ -253,8 +260,8 @@ function openMenuImageSelectWindow(field) {
 					<br /> <br /> <strong><?php translate("article_date");?></strong><br />
 					<input name="article_date" type="datetime-local"
 						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
-					<strong><?php translate("excerpt");?></strong>
-					<textarea name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
+					<strong><?php translate("excerpt");?></strong> <textarea
+						name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
 				</div>
 			</div>
 

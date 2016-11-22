@@ -27,6 +27,20 @@ function showAndHideFieldsByType() {
 		$("#tab-cache-control").slideUp();
 		$("#article-metadata").slideUp();
 		$("#article-image").slideUp();
+	} else if ($("#type_node").is(":checked")) {
+		$("#tab-list").slideUp();
+		$("#tab-link").slideUp();
+		$("#tab-metadata").slideUp();
+		$("#tab-og").slideUp();
+		$("#tab-image").slideUp();
+		$("#content-editor").slideUp();
+		$("#tab-module").slideUp();
+		$("#tab-video").slideUp();
+		$("#tab-audio").slideUp();
+		$("#tab-text-position").slideUp();
+		$("#tab-cache-control").slideUp();
+		$("#article-metadata").slideUp();
+		$("#article-image").slideUp();
 	} else if ($("#type_module").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();

@@ -108,6 +108,7 @@ Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_a
 Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_group_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
 Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_owner_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
 Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_others_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
+Database::query ( "ALTER TABLE `{prefix}content` ADD COLUMN `hidden` tinyint(1) NOT NULL DEFAULT '0'", true );
 
 Database::query ( "CREATE TABLE `{prefix}custom_fields` ( `id` INT NOT NULL AUTO_INCREMENT , `content_id` INT NOT NULL , `name` VARCHAR(100) NOT NULL , `value` TEXT NOT NULL , PRIMARY KEY (`id`) ) ENGINE = InnoDB;", true );
 Database::query ( "ALTER TABLE `{prefix}content` drop COLUMN valid_from;", true );
