@@ -695,5 +695,6 @@ define ( "TRANSLATION_RESTRICT_EDIT_ACCESS", "Restrict Edit Access" );
 define ( "TRANSLATION_OTHERS", "Others" );
 
 define ( "TRANSLATION_HIDDEN", "Hidden" );
+define ( "TRANSLATION_NODE", "Knotenpunkt" );
 
 add_hook ( "lang_en" );
