@@ -23,8 +23,10 @@ class ControllerRegistry {
 			}
 		}
 	}
-	public static function get($class) {
-		if (isset ( self::$controllers [$class] )) {
+	public static function get($class = null) {
+		if ($class == null and get_action ()) {
+			return ActionRegistry::getController ();
+		} else if (isset ( self::$controllers [$class] )) {
 			return self::$controllers [$class];
 		} else {
 			return null;
