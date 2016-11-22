@@ -340,7 +340,7 @@ if (! defined ( "PATCH_CHECK_URL" )) {
 }
 
 if (! Settings::get ( "session_name" )) {
-	setconfig ( "session_name", uniqid () . "_SESSION" );
+	Settings::set ( "session_name", uniqid () . "_SESSION" );
 }
 
 session_name ( Settings::get ( "session_name" ) );
