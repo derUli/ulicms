@@ -17,6 +17,12 @@
 + Custom Fields
 + Feld "Auszug" verwendet nun den HTML-Editor
 + Alle png-Grafiken optimiert
++ Filter „Typen“ zeigt nur noch tatsächlich verwendete Typen
++ Neue API-Funktionen hinzugefügt
+  = uimport()
+  = SecurityHelper::securePath()
+  = ModuleHelper::buildActionURL()
+  = get_content()
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
