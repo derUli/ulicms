@@ -19,7 +19,10 @@ class ControllerRegistry {
 		foreach ( $controllerRegistry as $key => $value ) {
 			include_once $value;
 			if (class_exists ( $key )) {
-				self::$controllers [$key] = new $key ();
+				$classInstance = new $key ();
+				if ($classInstance instanceof Controller) {
+					self::$controllers [$key] = $classInstance;
+				}
 			}
 		}
 	}
