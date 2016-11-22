@@ -190,6 +190,9 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$custom_data = db_escape ( $_POST ["custom_data"] );
 		$theme = db_escape ( $_POST ["theme"] );
 		$type = db_escape ( $_POST ["type"] );
+		if ($type == "node") {
+			$redirection = "#";
+		}
 		$cache_control = db_escape ( $_POST ["cache_control"] );
 		
 		if ($_POST ["parent"] == "NULL") {
@@ -387,6 +390,9 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$html_file = db_escape ( $_POST ["html_file"] );
 	
 	$type = db_escape ( $_POST ["type"] );
+	if ($type == "node") {
+		$redirection = "#";
+	}
 	$menu_image = db_escape ( $_POST ["menu_image"] );
 	$custom_data = db_escape ( $_POST ["custom_data"] );
 	$theme = db_escape ( $_POST ["theme"] );

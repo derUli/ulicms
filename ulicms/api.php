@@ -300,10 +300,11 @@ function get_available_post_types() {
 			"article",
 			"list",
 			"link",
+			"node",
 			"image",
 			"module",
 			"video",
-			"audio" 
+			"audio"
 	);
 	$modules = getAllModules ();
 	foreach ( $modules as $module ) {
