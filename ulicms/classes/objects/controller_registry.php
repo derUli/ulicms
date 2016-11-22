@@ -19,13 +19,13 @@ class ControllerRegistry {
 		foreach ( $controllerRegistry as $key => $value ) {
 			include_once $value;
 			if (class_exists ( $key )) {
-				$controllers [$key] = new $key ();
+				self::$controllers [$key] = new $key ();
 			}
 		}
 	}
 	public static function get($class) {
-		if (isset ( self::$controllers ["class"] )) {
-			return self::$controllers ["class"];
+		if (isset ( self::$controllers [$class] )) {
+			return self::$controllers [$class];
 		} else {
 			return null;
 		}
