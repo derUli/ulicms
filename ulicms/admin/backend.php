@@ -92,7 +92,10 @@ if (! $eingeloggt) {
 	global $actions;
 	$actions = array ();
 	
+	ActionRegistry::loadModuleActions ();
+	
 	add_hook ( "register_actions" );
+	
 	if ($_SESSION ["require_password_change"]) {
 		require_once "inc/change_password.php";
 	} else if ($_GET ["action"] == "" || $_GET ["action"] == "home") {
