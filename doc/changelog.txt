@@ -27,6 +27,7 @@
 sofern in der metadata.json angegeben
 + Backend Actions eines Moduls werden nun automatisch initialisiert, sofern in der metatadata.json angegeben
 + Option "Versteckt" hinzugefügt
++ Inhaltstyp "Knotenpunkt" hinzugefügt
 # Sende Error 403 bei fehlgeschlagenem Login
 # Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
 - Feld für ICQ-UID entfernt
