@@ -18,7 +18,6 @@ class ControllerRegistry {
 		}
 		foreach ( $controllerRegistry as $key => $value ) {
 			include_once $value;
-			var_dump ( $key );
 			if (class_exists ( $key )) {
 				$controllers [$key] = new $key ();
 			}
