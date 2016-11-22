@@ -7,7 +7,7 @@ function get_translation($name, $placeholders = array()) {
 			if ($custom_translation != null) {
 				$value = $custom_translation;
 			}
-			// Platzhalter ersetzen, diese können als assoziatives Array als zweiter Parameter
+			// Platzhalter ersetzen, diese kÃ¶nnen als assoziatives Array als zweiter Parameter
 			// dem Funktionsaufruf mitgegeben werden
 			foreach ( $placeholders as $placeholder => $replacement ) {
 				$value = str_ireplace ( $placeholder, $replacement, $value );
@@ -24,7 +24,6 @@ function translation($name, $placeholders = array()) {
 function translate($name, $placeholders = array()) {
 	translation ( $name, $placeholders );
 }
-
-function t($name, $placeholders = array()){
+function t($name, $placeholders = array()) {
 	translation ( $name, $placeholders );
 }
