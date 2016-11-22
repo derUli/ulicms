@@ -23,7 +23,7 @@
   = SecurityHelper::securePath()
   = ModuleHelper::buildActionURL()
   = get_content()
-+ Controller eines Moduls werden nun automatisch initialisiert,
++ Controller und Helper eines Moduls werden nun automatisch initialisiert,
 sofern in der metadata.json angegeben
 + Backend Actions eines Moduls werden nun automatisch initialisiert, sofern in der metatadata.json angegeben
 + Option "Versteckt" hinzugefügt
