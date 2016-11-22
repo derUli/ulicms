@@ -136,6 +136,8 @@ if (isset ( $config->memory_limit )) {
 	@ini_set ( "memory_limit", $config->memory_limit );
 }
 
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "controller.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "controller_registry.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "db_functions.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "files.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "mailer.php";
@@ -312,6 +314,8 @@ if (! is_ssl () and $enforce_https !== false) {
 	header ( "Location: https://" . $_SERVER ["HTTP_HOST"] . $_SERVER ["REQUEST_URI"] );
 	exit ();
 }
+
+ControllerRegistry::loadModuleControllers ();
 
 add_hook ( "before_init" );
 add_hook ( "init" );
