@@ -2,8 +2,7 @@
 class HelperRegistry {
 	private static $helpers = array ();
 	public static function loadModuleHelpers() {
-
-		if(!defined("KCFINDER_PAGE")){
+		if (! defined ( "KCFINDER_PAGE" )) {
 			$helperRegistry = array ();
 			$modules = getAllModules ();
 			foreach ( $modules as $module ) {

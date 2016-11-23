@@ -2,7 +2,7 @@
 class ActionRegistry {
 	private static $assignedControllers = array ();
 	public static function loadModuleActions() {
-		if(!defined("KCFINDER_PAGE")){
+		if (! defined ( "KCFINDER_PAGE" )) {
 			global $actions;
 			$modules = getAllModules ();
 			foreach ( $modules as $module ) {
@@ -13,7 +13,7 @@ class ActionRegistry {
 						if (! endsWith ( $path, ".php" )) {
 							$path .= ".php";
 						}
-
+						
 						if (file_exists ( $path ) and is_file ( $path )) {
 							$actions [$key] = $path;
 						}
@@ -21,7 +21,7 @@ class ActionRegistry {
 				}
 			}
 			self::loadModuleActionAssignment ();
-	}
+		}
 	}
 	public static function loadModuleActionAssignment() {
 		$modules = getAllModules ();

@@ -2,7 +2,7 @@
 class ObjectRegistry {
 	private static $objects = array ();
 	public static function loadModuleObjects() {
-		if(!defined("KCFINDER_PAGE")){
+		if (! defined ( "KCFINDER_PAGE" )) {
 			$objectRegistry = array ();
 			$modules = getAllModules ();
 			foreach ( $modules as $module ) {
