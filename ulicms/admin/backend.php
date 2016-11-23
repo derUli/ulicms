@@ -74,6 +74,8 @@ if (isset ( $_REQUEST ["ajax_cmd"] )) {
 }
 add_hook ( "after_ajax_handler" );
 
+ControllerRegistry::runMethods ();
+
 require_once "inc/header.php";
 if (! $eingeloggt) {
 	if (isset ( $_GET ["register"] )) {

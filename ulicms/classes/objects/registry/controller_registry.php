@@ -2,8 +2,7 @@
 class ControllerRegistry {
 	private static $controllers = array ();
 	public static function loadModuleControllers() {
-
-		if(!defined("KCFINDER_PAGE")){
+		if (! defined ( "KCFINDER_PAGE" )) {
 			$controllerRegistry = array ();
 			$modules = getAllModules ();
 			foreach ( $modules as $module ) {
@@ -26,6 +25,16 @@ class ControllerRegistry {
 						self::$controllers [$key] = $classInstance;
 					}
 				}
+			}
+		}
+	}
+	public static function runMethods() {
+		if (isset ( $_REQUEST ["sClass"] ) and isNotNullOrEmpty ( $_REQUEST ["sClass"] )) {
+			if (self::get ( $_REQUEST ["sClass"] )) {
+				$sClass = $_REQUEST ["sClass"];
+				self::get ( $sClass )->runCommand ();
+			} else {
+				throw new BadMethodCallException ( "class " . htmlspecialchars ( $sClass ) . " not found" );
 			}
 		}
 	}

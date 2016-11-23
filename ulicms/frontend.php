@@ -104,6 +104,7 @@ if (isset ( $_GET ["submit-cms-form"] ) and ! empty ( $_GET ["submit-cms-form"] 
 	require_once ULICMS_ROOT . "/classes/forms.php";
 	Forms::submitForm ( $form_id );
 }
+ControllerRegistry::runMethods ();
 
 header ( "HTTP/1.0 " . $status );
 
