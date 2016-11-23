@@ -8,7 +8,7 @@ class Controller {
 			if (method_exists ( $this, $sMethod ) and ! startsWith ( $sMethod, "_" ) and $reflection->isPublic ()) {
 				$this->$sMethod ();
 			} else {
-				throw new NotImplementedException ( "method " . htmlspecialchars ( $sMethod ) . " is not available" );
+				throw new NotImplementedException ( "method " . htmlspecialchars ( $sMethod ) . " is not callable" );
 			}
 		}
 	}
