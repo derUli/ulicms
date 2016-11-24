@@ -10,17 +10,17 @@ if ($acl->hasPermission ( "dashboard" )) {
 		$query = db_query ( "SELECT count(id) as amount FROM " . tbname ( "content" ) );
 		$result = Database::fetchObject($query);
 		$pages_count = $result->amount;
-		
+
 		$topPages = db_query ( "SELECT language, systemname, title, `views` FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY views DESC LIMIT 5" );
 		$lastModfiedPages = db_query ( "SELECT language, systemname, title, lastmodified, lastchangeby FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY lastmodified DESC LIMIT 5" );
-		
+
 		$admins_query = db_query ( "SELECT id, username FROM " . tbname ( "users" ) );
-		
+
 		$admins = Array ();
-		
+
 		while ( $row = db_fetch_object ( $admins_query ) ) {
 			$admins [$row->id] = $row->username;
-		}	
+		}
 		?>
 <p>
 <?php
@@ -42,7 +42,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 	<?php translate("motd");?></h2>
 	<div class="accordion-content">
 	<?php
-			
+
 			echo $motd;
 			?>
 	</div>
@@ -73,8 +73,11 @@ if ($acl->hasPermission ( "dashboard" )) {
 	</h2>
 		<div class="accordion-content" id="core-update-message"></div>
 	</div>
+	<?php if(!Settings::get("disable_ulicms_newsfeed")){
+			?>
 	<h2 class="accordion-header">
 	<?php translate("ulicms_news");?></h2>
+
 	<div class="accordion-content" id="ulicms-feed">
 		<img src="gfx/loading.gif" alt="Feed wird geladen..." />
 	</div>
@@ -83,6 +86,7 @@ $(document).ready(function() {
  $('#ulicms-feed').load('?action=ulicms-news');
 });
 </script>
+<?php } ?>
 	<h2 class="accordion-header">
 	<?php translate("statistics");?>
 	</h2>
@@ -97,7 +101,7 @@ $(document).ready(function() {
 			<tr>
 				<td><?php translate("site_online_since");?></td>
 				<td><?php
-			
+
 			echo $formatted;
 			?></td>
 			</tr>
@@ -116,7 +120,7 @@ $(document).ready(function() {
 			</tr>
 
 			<?php
-		
+
 		if (Settings::get ( "contact_form_refused_spam_mails" ) !== false) {
 			?>
 			<tr>
@@ -127,7 +131,7 @@ $(document).ready(function() {
 		}
 		?>
 			<?php
-		
+
 		$test = db_query ( "SELECT id FROM " . tbname ( "guestbook_entries" ) );
 		if ($test) {
 			?>
@@ -146,7 +150,7 @@ $(document).ready(function() {
 	<div class="accordion-content">
 		<ul id="users_online">
 		<?php
-		
+
 		include_once "inc/users_online_dashboard.php";
 		?>
 		</ul>
@@ -163,9 +167,9 @@ $(document).ready(function() {
 				</td>
 			</tr>
 			<?php
-		
+
 		while ( $row = db_fetch_object ( $topPages ) ) {
-			
+
 			$domain = getDomainByLanguage ( $row->language );
 			if (! $domain) {
 				$url = "../" . $row->systemname . ".html";
@@ -175,14 +179,14 @@ $(document).ready(function() {
 			?>
 			<tr>
 				<td><a href="<?php
-			
+
 			echo $url;
 			?>" target="_blank"><?php
-			
+
 			echo htmlspecialchars ( $row->title, ENT_QUOTES, "UTF-8" );
 			?></a></td>
 				<td align="right"><?php
-			
+
 			echo $row->views;
 			?></td>
 				<?php
@@ -208,23 +212,23 @@ $(document).ready(function() {
 			</tr>
 
 			<?php
-		
+
 		while ( $row = db_fetch_object ( $lastModfiedPages ) ) {
-			
+
 			$domain = getDomainByLanguage ( $row->language );
 			if (! $domain) {
 				$url = "../" . $row->systemname . ".html";
 			} else {
 				$url = "http://" . $domain . "/" . $row->systemname . ".html";
 			}
-			
+
 			?>
 			<tr>
 				<td><a href="<?php
-			
+
 			echo $url;
 			?>" target="_blank"><?php
-			
+
 			echo htmlspecialchars ( $row->title, ENT_QUOTES, "UTF-8" );
 			?></a></td>
 
@@ -235,7 +239,7 @@ $(document).ready(function() {
 			} else {
 				$autorName = $admins [$row->autor];
 			}
-			
+
 			echo $autorName;
 			?></td>
 
@@ -246,14 +250,14 @@ $(document).ready(function() {
 		</table>
 	</div>
 	<?php
-		
+
 		add_hook ( "accordion_layout" );
 		?>
 </div>
 <script src="scripts/dashboard.js" type="text/javascript"></script>
 <?php
 	}
-	
+
 	?>
 
 	<?php
