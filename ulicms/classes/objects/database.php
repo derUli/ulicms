@@ -33,6 +33,8 @@ class Database {
 					$value = intval ( $value );
 				} else if (is_bool ( $value )) {
 					$value = ( int ) $value;
+				} else if (is_null ( $value )) {
+					$value = "NULL";
 				} else {
 					$value = "'" . self::escapeValue ( $value ) . "'";
 				}
