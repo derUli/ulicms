@@ -38,7 +38,7 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	
 	if ($acl->hasPermission ( "banners" )) {
 		?>
-	<a href="index.php?action=banner"><?php get_translation("advertisements");?></a><br />
+	<a href="index.php?action=banner"><?php translate("advertisements");?></a><br />
 
 	<?php
 	}
