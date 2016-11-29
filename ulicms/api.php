@@ -1048,7 +1048,6 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
 			$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL and menu = '" . Database::escapeValue ( $menu ) . "' ORDER BY $order" );
 		}
 	} else {
-
 		if (! $menu) {
 			$query = db_query ( "SELECT * FROM `" . tbname ( "content" ) . "` WHERE `deleted_at` IS NULL AND language ='" . db_escape ( $lang ) . "' ORDER BY $order" );
 		} else {
