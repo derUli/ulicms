@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `{prefix}content` (
 `target` varchar(255) DEFAULT '_self',
 `category` int(11) DEFAULT '1',
 `content` longtext NOT NULL,
-`language` varchar(6) NOT NULL,
+`language` varchar(6) NULL,
 `menu_image` varchar(255) NULL,
 `active` tinyint(1) NOT NULL,
 `created` bigint(20) NOT NULL,
