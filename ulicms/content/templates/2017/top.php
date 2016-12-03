@@ -61,7 +61,7 @@ echo getconfig ( "header-background-color" );
 	?>
 			<p class="lead"><?php echo Settings::get("motd");?></p>
 			<p>
-				<a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate("login") ?></a>
+				<a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate("login");?></a>
 			</p>
 		</div>
 		<?php }?>
