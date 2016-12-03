@@ -154,7 +154,7 @@ class InstallerController {
 			}
 			
 			if (! isset ( $_SESSION ["ga_secret"] )) {
-				require_once "../classes/GoogleAuthenticator.php";
+				require_once "../classes/objects/security/GoogleAuthenticator.php";
 				$ga = new PHPGangsta_GoogleAuthenticator ();
 				$ga_secret = $ga->createSecret ();
 				$_SESSION ["ga_secret"] = $ga_secret;

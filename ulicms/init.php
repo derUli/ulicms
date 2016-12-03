@@ -54,7 +54,8 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPE
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "base_config.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "request.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "antispam-features.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "categories.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . 
+"objects" . DIRECTORY_SEPERATOR . "categories.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR .
 "objects" . DIRECTORY_SEPERATOR . "pkg" . DIRECTORY_SEPERATOR .
  "package_manager.php";

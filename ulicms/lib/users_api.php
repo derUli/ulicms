@@ -157,7 +157,7 @@ function register_session($user, $redirect = true) {
 }
 function validate_login($user, $password, $token = null) {
 	include_once ULICMS_ROOT . "/lib/encryption.php";
-	require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
+	require_once ULICMS_ROOT . "/classes/objects/security/GoogleAuthenticator.php";
 	$user = getUserByName ( $user );
 	
 	if ($user) {

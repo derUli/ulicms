@@ -1,7 +1,7 @@
 <?php
 @include_once "Cache/Lite.php";
 
-require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
+require_once ULICMS_ROOT . "/classes/objects/security/GoogleAuthenticator.php";
 $ga = new PHPGangsta_GoogleAuthenticator ();
 $ga_secret = Settings::get ( "ga_secret" );
 $qrCodeUrl = $ga->getQRCodeGoogleUrl ( get_translation ( "ULICMS_LOGIN_AT" ) . " " . get_domain (), $ga_secret );
