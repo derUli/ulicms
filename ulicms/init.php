@@ -80,7 +80,7 @@ $mobile_detect_as_module = dirname ( __file__ ) . "/content/modules/Mobile_Detec
 if (file_exists ( $mobile_detect_as_module )) {
 	include_once $mobile_detect_as_module;
 } else {
-	include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "Mobile_Detect.php";
+	include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "Mobile_Detect" . DIRECTORY_SEPERATOR . "Mobile_Detect.php";
 }
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "version.php";

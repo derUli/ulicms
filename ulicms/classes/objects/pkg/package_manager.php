@@ -3,7 +3,7 @@ class PackageManager {
 	private $package_source;
 	public function __construct() {
 		$cfg = new config ();
-		$this->package_source = $cfg->getVar ( "pkg_src" );
+		$this->package_source = Settings::get ( "pkg_src" );
 		$this->package_source = $this->replacePlaceHolders ( $this->package_source );
 	}
 	public function checkForNewerVersionOfPackage($package) {
