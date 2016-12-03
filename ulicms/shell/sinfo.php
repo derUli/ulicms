@@ -47,7 +47,7 @@ if (php_sapi_name () != "cli") {
 
 $parent_path = dirname ( __file__ ) . "/../";
 include $parent_path . "init.php";
-include_once ULICMS_ROOT . "/classes/package_manager.php";
+include_once ULICMS_ROOT . "/classes/objects/pkg/package_manager.php";
 array_shift ( $argv );
 
 // No time limit
