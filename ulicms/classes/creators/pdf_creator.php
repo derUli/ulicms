@@ -20,9 +20,7 @@ class PDFCreator {
 	}
 	public function output() {
 		$hasModul = containsModule ( get_requested_pagename () );
-		
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
-			
 			if (file_exists ( $this->cached_file )) {
 				$last_modified = filemtime ( $this->cached_file );
 				if (time () - $last_modified < CACHE_PERIOD) {
@@ -41,7 +39,6 @@ class PDFCreator {
 		$mpdf = new mPDF ( getCurrentLanguage ( true ), 'A4' );
 		$mpdf->WriteHTML ( $this->content );
 		$mpdf->Output ( $this->cached_file );
-		
 		$this->httpHeader ();
 		readfile ( $this->cached_file );
 		exit ();

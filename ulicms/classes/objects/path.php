@@ -21,7 +21,6 @@ if (! defined ( "KCFINDER_PAGE" )) {
 					self::removeDir ( $dir . '/' . $obj, true );
 				}
 			}
-			
 			closedir ( $dh );
 			if ($DeleteMe) {
 				@rmdir ( $dir );

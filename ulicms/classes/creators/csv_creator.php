@@ -15,11 +15,8 @@ class CSVCreator {
 	}
 	public function output() {
 		$hasModul = containsModule ( get_requested_pagename () );
-		
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
-			
 			if (getCacheType () == "file") {
-				
 				if (file_exists ( $this->cached_file )) {
 					$last_modified = filemtime ( $this->cached_file );
 					if (time () - $last_modified < CACHE_PERIOD) {
@@ -47,11 +44,9 @@ class CSVCreator {
 				}
 			}
 		}
-		
 		ob_start ();
 		autor ();
 		$author = ob_get_clean ();
-		
 		$data = array ();
 		$data [] = array (
 				"Title",
@@ -70,10 +65,8 @@ class CSVCreator {
 				meta_keywords (),
 				$author 
 		);
-		
 		$csv_string = getCSV ( $data [0] );
 		$csv_string .= getCSV ( $data [1] );
-		
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
 			if (getCacheType () == "file") {
 				$handle = fopen ( $this->cached_file, "w" );
@@ -83,7 +76,6 @@ class CSVCreator {
 				$Cache_Lite->save ( $csv_string, $id );
 			}
 		}
-		
 		$this->httpHeader ();
 		echo $csv_string;
 		exit ();

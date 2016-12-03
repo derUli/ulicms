@@ -59,10 +59,8 @@ class Request {
 				509 => 'Bandwidth Limit Exceeded',
 				510 => 'Not Extended' 
 		);
-		
 		return $nr . " " . $http_codes [$nr];
 	}
-	
 	// Weiterleitung per Location header;
 	public static function redirect($url = "http://www.ulicms.de", $status = 302) {
 		header ( "HTTP/1.0 " . self::getStatusCodeByNumber ( $status ) );

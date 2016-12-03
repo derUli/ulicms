@@ -33,5 +33,4 @@ class File {
 		return $ext;
 	}
 }
-
 }

@@ -17,11 +17,9 @@ class Cache {
 			$cache_dir = Path::resolve ( "ULICMS_CACHE" );
 			Path::removeDir ( $cache_dir, false );
 		}
-		
 		if (function_exists ( "apc_clear_cache" )) {
 			self::clearAPC ();
 		}
-		
 		add_hook ( "after_clear_cache" );
 	}
 	public static function getCacheType() {
@@ -69,9 +67,7 @@ class Cache {
 		if (! $request_uri) {
 			$requestUri = get_request_uri ();
 		}
-		
 		$cacheFile = md5 ( self::buildCacheFilePath ( $requestUri ) );
-		
 		$options = array (
 				'lifeTime' => Settings::get ( "cache_period" ),
 				'cacheDir' => "content/cache/" 
@@ -79,7 +75,6 @@ class Cache {
 		if (! class_exists ( "Cache_Lite" )) {
 			throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
 		}
-		
 		$Cache_Lite = new Cache_Lite ( $options );
 		return $Cache_Lite->get ( $cacheFile );
 	}
@@ -87,9 +82,7 @@ class Cache {
 		if (! $request_uri) {
 			$requestUri = get_request_uri ();
 		}
-		
 		$cacheFile = md5 ( self::buildCacheFilePath ( $requestUri ) );
-		
 		$options = array (
 				'lifeTime' => Settings::get ( "cache_period" ),
 				'cacheDir' => "content/cache/" 
@@ -97,7 +90,6 @@ class Cache {
 		if (! class_exists ( "Cache_Lite" )) {
 			throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
 		}
-		
 		$Cache_Lite = new Cache_Lite ( $options );
 		$Cache_Lite->save ( $data, $cacheFile );
 	}
@@ -114,7 +106,6 @@ class Cache {
 			$requestUri = get_request_uri ();
 		}
 		$cacheFile = self::buildCacheFilePath ( $requestUri );
-		
 		if (file_exists ( $cacheFile )) {
 			$lastModified = filemtime ( $cacheFile );
 			if (time () - $lastModified < CACHE_PERIOD) {

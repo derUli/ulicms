@@ -48,7 +48,6 @@ class Template {
 		$originalTemplatePath = getModulePath ( $module ) . "templates/" . $template . ".php";
 		$ownTemplatePath = getTemplateDirPath ( get_theme () ) . $module . "/" . $template . ".php";
 		ob_start ();
-		
 		if (file_exists ( $ownTemplatePath ) and is_file ( $ownTemplatePath )) {
 			include $ownTemplatePath;
 		} else if (file_exists ( $originalTemplatePath ) and is_file ( $originalTemplatePath )) {
@@ -57,7 +56,6 @@ class Template {
 			$retval = ob_get_clean ();
 			throw new Exception ( "Template " . $module . "/" . $template . " not found!" );
 		}
-		
 		$retval = ob_get_clean ();
 		return $retval;
 	}
@@ -74,9 +72,7 @@ class Template {
 		if (! Settings::get ( "logo_disabled" )) {
 			setconfig ( "logo_disabled", "no" );
 		}
-		
 		$logo_path = "content/images/" . Settings::get ( "logo_image" );
-		
 		if (Settings::get ( "logo_disabled" ) == "no" and file_exists ( $logo_path )) {
 			echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
 		}
@@ -102,7 +98,6 @@ class Template {
 		$originalTemplatePath = ULICMS_ROOT . "/default/" . $template . ".php";
 		$ownTemplatePath = getTemplateDirPath ( get_theme () ) . "/" . $template . ".php";
 		ob_start ();
-		
 		if (file_exists ( $ownTemplatePath ) and is_file ( $ownTemplatePath )) {
 			include $ownTemplatePath;
 		} else if (file_exists ( $originalTemplatePath ) and is_file ( $originalTemplatePath )) {
@@ -111,7 +106,6 @@ class Template {
 			$retval = ob_get_clean ();
 			throw new Exception ( "Template " . $template . " not found!" );
 		}
-		
 		$retval = ob_get_clean ();
 		return $retval;
 	}
@@ -121,7 +115,6 @@ class Template {
 	public static function getHeadline($format = "<h1>%title%</h1>") {
 		$retval = "";
 		$id = get_ID ();
-		
 		$query = "SELECT show_headline FROM ".tbname("content"). " where id = $id";
 		$query = Database::query($query);
 		$result = Database::fetchObject($query);
@@ -130,6 +123,5 @@ class Template {
 		}
 		return $html;
 	}
-	
 	// @TODO Restliche Funktionen aus templating.php implementieren
 }

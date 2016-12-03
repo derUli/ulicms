@@ -17,9 +17,7 @@ class JSONCreator {
 		$hasModul = containsModule ( get_requested_pagename () );
 		
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
-			
 			if (getCacheType () == "file") {
-				
 				if (file_exists ( $this->cached_file )) {
 					$last_modified = filemtime ( $this->cached_file );
 					if (time () - $last_modified < CACHE_PERIOD) {
@@ -38,20 +36,16 @@ class JSONCreator {
 				if (! class_exists ( "Cache_Lite" )) {
 					throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
 				}
-				
 				$Cache_Lite = new Cache_Lite ( $options );
-				
 				if ($data = $Cache_Lite->get ( $id )) {
 					$this->httpHeader ();
 					die ( $data );
 				}
 			}
 		}
-		
 		ob_start ();
 		autor ();
 		$author = ob_get_clean ();
-		
 		$data = array ();
 		$this->content = str_replace ( "\r\n", "\n", $this->content );
 		$this->content = str_replace ( "\r", "\n", $this->content );
@@ -61,9 +55,7 @@ class JSONCreator {
 		$data ["meta_description"] = meta_description ();
 		$data ["meta_keywords"] = meta_keywords ();
 		$data ["author"] = $author;
-		
 		$json_string = json_encode ( $data );
-		
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
 			if (getCacheType () == "file") {
 				$handle = fopen ( $this->cached_file, "w" );
@@ -73,7 +65,6 @@ class JSONCreator {
 				$Cache_Lite->save ( $json_string, $id );
 			}
 		}
-		
 		$this->httpHeader ();
 		echo $json_string;
 		exit ();

@@ -18,7 +18,6 @@ class Settings {
 			SettingsCache::set ( $result->name, $result->value );
 		}
 	}
-	
 	// get a config variable
 	public static function get($key) {
 		if (SettingsCache::get ( $key )) {
@@ -63,7 +62,6 @@ class Settings {
 		}
 		return $config;
 	}
-	
 	// Set a configuration Variable;
 	public static function set($key, $value) {
 		$key = db_escape ( $key );
@@ -76,7 +74,6 @@ class Settings {
 		}
 		SettingsCache::set ( $key, null );
 	}
-	
 	// Remove an configuration variable
 	public static function delete($key) {
 		$key = db_escape ( $key );
