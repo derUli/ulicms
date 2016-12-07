@@ -34,6 +34,8 @@ sofern in der metadata.json angegeben
 - PHP Form Builder Class aus dem Core entfernt. Dies soll zukünftig in ein Modul ausgelagert werden.
 - generischer JSON Export entfernt
 - CKEditor Skin office2013 entfernt
+- Mobile_Detect aus dem Core entfernt, die Lib kann hier heruntergeladen werden:
+  http://extend.ulicms.de/mobile_detect.html
 
 Neue Berechtigungen hinzugefügt:
 + pages_create

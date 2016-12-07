@@ -1261,6 +1261,9 @@ function cms_version() {
 	return implode ( ".", $v->getInternalVersion () );
 }
 function is_tablet() {
+	if (! class_exists ( "Mobile_Detect" )) {
+		return false;
+	}
 	$detect = new Mobile_Detect ();
 	$result = $detect->isTablet ();
 	return $result;
@@ -1269,6 +1272,9 @@ function is_tablet() {
 // 21. Februar 2015
 // Nutzt nun die Klasse Mobile_Detect
 function is_mobile() {
+	if (! class_exists ( "Mobile_Detect" )) {
+		return false;
+	}
 	$detect = new Mobile_Detect ();
 	$result = $detect->isMobile ();
 	if (Settings::get ( "no_mobile_design_on_tablet" ) and $result and $detect->isTablet ()) {
