@@ -1,6 +1,4 @@
 <?php
-
-
 // get a config variable
 function getconfig($key) {
 	if (SettingsCache::get ( $key )) {

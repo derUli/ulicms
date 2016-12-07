@@ -8,8 +8,8 @@ class Settings {
 		if (! self::get ( $key )) {
 			self::set ( $key, $value );
 			$retval = true;
+			SettingsCache::set ( $key, $value );
 		}
-		SettingsCache::set ( $key, $value );
 		return $retval;
 	}
 	public static function preloadAll() {
@@ -78,7 +78,7 @@ class Settings {
 	public static function delete($key) {
 		$key = db_escape ( $key );
 		db_query ( "DELETE FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
-		return db_affected_rows () > 0;
 		SettingsCache::set ( $key, null );
+		return db_affected_rows () > 0;
 	}
 }

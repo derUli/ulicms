@@ -16,8 +16,8 @@ function initconfig($key, $value) {
 	if (! Settings::get ( $key )) {
 		setconfig ( $key, $value );
 		$retval = true;
+		SettingsCache::set ( $key, $value );
 	}
-	SettingsCache::set ( $key, $value );
 	return $retval;
 }
 function set_format($format) {
