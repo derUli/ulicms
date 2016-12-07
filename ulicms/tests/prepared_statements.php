@@ -1,27 +1,22 @@
 <?php
-class SettingsTest extends PHPUnit_Framework_TestCase {
-	public function testSettingsOld() {
-		deleteconfig ( "example_setting" );
-		$this->assertEquals ( false, getconfig ( "example_setting" ) );
-		initconfig ( "example_setting", "hello" );
-		$this->assertEquals ( "hello", getconfig ( "example_setting" ) );
-		initconfig ( "example_setting", "bye" );
-		$this->assertEquals ( "hello", getconfig ( "example_setting" ) );
-		setconfig ( "example_setting", "bye" );
-		$this->assertEquals ( "bye", getconfig ( "example_setting" ) );
-		deleteconfig ( "example_setting" );
-		$this->assertEquals ( false, getconfig ( "example_setting" ) );
-	}
-	public function testSettingsNew() {
-		Settings::delete ( "example_setting" );
-		$this->assertEquals ( false, Settings::get ( "example_setting" ) );
-		Settings::register ( "example_setting", "hello" );
-		$this->assertEquals ( "hello", Settings::get ( "example_setting" ) );
-		Settings::register ( "example_setting", "bye" );
-		$this->assertEquals ( "hello", Settings::get ( "example_setting" ) );
-		Settings::set ( "example_setting", "bye" );
-		$this->assertEquals ( "bye", Settings::get ( "example_setting" ) );
-		Settings::delete ( "example_setting" );
-		$this->assertEquals ( false, Settings::get ( "example_setting" ) );
+class PreparedStatementTest extends PHPUnit_Framework_TestCase {
+	public function testPreparedStatements() {
+		$query = Database::pQuery ( "SELECT ? as wert1, ? as wert2, ? as wert3, ? as wert4, ? as wert5, ? as wert6", array (
+				123,
+				1.85,
+				"My Text",
+				"2014-11-22 13:23:44.657",
+				true,
+				false 
+		) );
+		$result = Database::fetchObject ( $query );
+		$this->assertEquals ( 123, $result->wert1 );
+		$this->assertEquals ( "1.85", $result->wert2 );
+		$this->assertEquals ( "My Text", $result->wert3 );
+		$this->assertEquals ( "2014-11-22 13:23:44.657", $result->wert4 );
+		$this->assertEquals ( 1, $result->wert5 );
+		$this->assertEquals ( 0, $result->wert6 );
 	}
 }
+
+

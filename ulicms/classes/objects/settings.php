@@ -79,5 +79,6 @@ class Settings {
 		$key = db_escape ( $key );
 		db_query ( "DELETE FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 		return db_affected_rows () > 0;
+		SettingsCache::set ( $key, null );
 	}
 }
