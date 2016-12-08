@@ -845,10 +845,7 @@ function base_metas() {
 		echo "\r\n";
 	}
 	if (! Settings::get ( "hide_meta_generator" )) {
-		$powered_by = ULICMS_ROOT . "/powered-by.php";
-		if (file_exists ( $powered_by ))
-			@include $powered_by;
-		
+		echo Template::executeDefaultOrOwnTemplate("powered-by");
 		echo '<meta name="generator" content="UliCMS ' . cms_version () . '"/>';
 		echo "\r\n";
 		
