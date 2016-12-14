@@ -30,7 +30,7 @@ $enq = array (
 		"codemirror/mode/css/css.js",
 		"scripts/url.min.js",
 		"scripts/util.js",
-		"scripts/users.js" 
+		"scripts/users.js"
 );
 ?>
 <?php
@@ -59,7 +59,7 @@ foreach ( $enq as $script ) {
 <script type="text/javascript">
 $(document).ready(function() {
   $.ajaxSetup({ cache: false });
-  
+
 <?php
 
 if (! is_mobile ()) {
@@ -80,7 +80,7 @@ $(".menu li:has(ul)").doubleTapToGo();
 </script>
 <link rel="stylesheet" type="text/css"
 	href="scripts/vallenato/vallenato.css" />
-<?php include "inc/ulicms-touch-icons.php";?>
+<?php include "inc/ulicms_touch_icons.php";?>
 <?php
 
 $styles [] = "codemirror/lib/codemirror.css";
@@ -97,10 +97,10 @@ foreach ( $styles as $style ) {
 combined_stylesheet_html ();
 ?>
 <script type="text/javascript">
-$(document).ready(function(){	
-    $(".tablesorter").tablesorter({widgets: ["zebra"]}); 
-    } 
-); 
+$(document).ready(function(){
+    $(".tablesorter").tablesorter({widgets: ["zebra"]});
+    }
+);
 </script>
 <?php
 
