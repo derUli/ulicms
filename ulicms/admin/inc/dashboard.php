@@ -83,7 +83,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 	</div>
 	<script type="text/javascript">
 $(document).ready(function() {
- $('#ulicms-feed').load('?action=ulicms-news');
+ $('#ulicms-feed').load('?action=ulicms_news');
 });
 </script>
 <?php } ?>

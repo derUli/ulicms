@@ -52,8 +52,8 @@ require_once "inc/logincheck.php";
 
 define ( "_SECURITY", true );
 
-if ($_GET ["action"] == "ulicms-news") {
-	require_once "inc/ulicms-news.php";
+if ($_GET ["action"] == "ulicms_news") {
+	require_once "inc/ulicms_news.php";
 	exit ();
 }
 
@@ -86,18 +86,18 @@ if (! $eingeloggt) {
 		require_once "inc/loginform.php";
 	}
 } else {
-	
+
 	require_once "inc/adminmenu.php";
-	
+
 	$pkg = new PackageManager ();
-	
+
 	global $actions;
 	$actions = array ();
-	
+
 	ActionRegistry::loadModuleActions ();
-	
+
 	add_hook ( "register_actions" );
-	
+
 	if ($_SESSION ["require_password_change"]) {
 		require_once "inc/change_password.php";
 	} else if ($_GET ["action"] == "" || $_GET ["action"] == "home") {
@@ -180,15 +180,15 @@ if (! $eingeloggt) {
 		require_once "inc/forms_new.php";
 	} else if ($_GET ["action"] == "forms_edit") {
 		require_once "inc/forms_edit.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "info") {
 		require_once "inc/info.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "info") {
 		require_once "inc/info.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "system_update") {
 		require_once "inc/system_update.php";
@@ -198,7 +198,7 @@ if (! $eingeloggt) {
 		require_once "inc/edit_profile.php";
 	} else if ($_GET ["action"] == "logo_upload") {
 		require_once "inc/logo.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "favicon") {
 		require_once "inc/favicon.php";
@@ -214,11 +214,11 @@ if (! $eingeloggt) {
 		require_once "inc/module_settings.php";
 	} else if ($_GET ["action"] == "other_settings") {
 		require_once "inc/other_settings.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "frontpage_settings") {
 		require_once "inc/frontpage.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "pkg_settings") {
 		require_once "inc/pkg_settings.php";
