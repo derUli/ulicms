@@ -244,8 +244,8 @@ if (! $eingeloggt) {
 		include_once "inc/do-post-install.php";
 	} else if ($_GET ["action"] == "pkginfo") {
 		include_once "inc/pkginfo.php";
-	} else if ($_GET ["action"] == "sin-package-install-ok") {
-		include_once "inc/sin-package-install-ok.php";
+	} else if ($_GET ["action"] == "sin_package_install_ok") {
+		include_once "inc/sin_package_install_ok.php";
 	} else if (isset ( $actions [$_GET ["action"]] )) {
 		include_once $actions [$_GET ["action"]];
 	} else {
