@@ -1222,8 +1222,9 @@ function uninstall_module($name, $type = "module") {
 	
 	// Verhindern, dass der Modulordner oder gar das ganze
 	// CMS gelöscht werden kann
-	if ($name == "." or $name == ".." or empty ( $name ))
+	if ($name == "." or $name == ".." or empty ( $name )) {
 		return false;
+	}
 	if ($type === "module") {
 		$moduleDir = getModulePath ( $name, true );
 		// Modul-Ordner entfernen
