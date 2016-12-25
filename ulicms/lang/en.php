@@ -75,7 +75,6 @@ define ( "TRANSLATION_FIRSTNAME", "First Name" );
 define ( "TRANSLATION_EMAIL", "E-Mail" );
 define ( "TRANSLATION_NEW_PASSWORD", "New Password" );
 define ( "TRANSLATION_USERGROUP", "Usergroup" );
-define ( "TRANSLATION_ICQ", "ICQ" );
 define ( "TRANSLATION_SKYPE", "Skype" );
 define ( "TRANSLATION_ONLY_JPEG", "Only JPEG images accepted." );
 define ( "TRANSLATION_NOTIFY_ON_LOGIN", "Notify me by E-Mail,<br/>
@@ -689,8 +688,13 @@ define ( "TRANSLATION_EXCERPT", "Excerpt" );
 define ( "TRANSLATION_ON_TIME", "At" );
 define ( "TRANSLATION_O_CLOCK", "o'clock" );
 
-
 define ( "TRANSLATION_INSTALLATION_FAILED", "The installation of package \"%file%\" is failed." );
 define ( "TRANSLATION_NOT_SUPPORTED_FORMAT", "The format is not supported." );
+
+define ( "TRANSLATION_RESTRICT_EDIT_ACCESS", "Restrict Edit Access" );
+define ( "TRANSLATION_OTHERS", "Others" );
+
+define ( "TRANSLATION_HIDDEN", "Hidden" );
+define ( "TRANSLATION_NODE", "Knotenpunkt" );
 
 add_hook ( "lang_en" );

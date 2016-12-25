@@ -1,7 +1,7 @@
 <?php
-if (! defined ( "ULICMS_ROOT" ))
+if (! defined ( "ULICMS_ROOT" )) {
 	die ( "Dummer Hacker!" );
-
+}
 if (isset ( $_REQUEST ["standard"] )) {
 	$standard = intval ( $_REQUEST ["standard"] );
 	setconfig ( "default_acl_group", $standard );
@@ -36,9 +36,11 @@ if ($_SESSION ["grp_sort"] == "id") {
 }
 
 ?>
+<?php if($acl->hasPermission("groups_create")){?>
 <p>
 	<a href="?action=groups&add=add"><?php translate("create_group");?> </a>
 </p>
+<?php }?>
 <?php
 
 if (count ( $groups ) > 0) {
@@ -52,9 +54,12 @@ if (count ( $groups ) > 0) {
 			<th style="min-width: 200px;"><a
 				href="?action=groups&sort=name&sort_direction=change"><strong><?php translate("name");?> </strong>
 			</a></th>
+			<?php if($acl->hasPermission("groups_edit")){?>
 			<th><strong><?php translate("standard");?> </strong></th>
+
 			<td></td>
 			<td></td>
+			<?php }?>
 		</tr>
 	</thead>
 	<tbody>
@@ -74,50 +79,55 @@ if (count ( $groups ) > 0) {
 		echo $name;
 		?>
 			</td>
+			
+<?php if($acl->hasPermission("groups_edit")){?>
 			<td><?php
-		
-		if ($default_acl_group === $id) {
-			?> <span style="color: green; font-weight: bold;"><?php translate("yes");?> </span> <?php
-		} else {
-			?> <a href="?action=groups&standard=<?php
+			
+			if ($default_acl_group === $id) {
+				?> <span style="color: green; font-weight: bold;"><?php translate("yes");?> </span> <?php
+			} else {
+				?> <a
+				href="?action=groups&standard=<?php
+				
+				echo $id;
+				?>"><span style="color: red; font-weight: bold;"
+					onclick='return confirm("<?php
+				
+				echo str_ireplace ( "%name%", $name, get_translation ( "make_group_default" ) );
+				?>")'><?php translate("no");?> </span> </a> <?php
+			}
+			?>
+			</td>
+
+			<td><a href="?action=groups&edit=<?php
 			
 			echo $id;
-			?>"><span style="color: red; font-weight: bold;"
-					onclick='return confirm("<?php
-			
-			echo str_ireplace ( "%name%", $name, get_translation ( "make_group_default" ) );
-			?>")'><?php translate("no");?> </span> </a> <?php
-		}
-		?>
-			</td>
-			<td><a href="?action=groups&edit=<?php
-		
-		echo $id;
-		?>"><img class="mobile-big-image" src="gfx/edit.png"
+			?>"><img class="mobile-big-image" src="gfx/edit.png"
 					alt="<?php
-		
-		translate ( "edit" );
-		?>"
+			
+			translate ( "edit" );
+			?>"
 					title="<?php
-		
-		translate ( "edit" );
-		?>"> </a></td>
+			
+			translate ( "edit" );
+			?>"> </a></td>
 			<td><form action="?action=groups&delete=<?php
-		echo $id;
-		?>"
+			echo $id;
+			?>"
 					method="post"
 					onsubmit="return confirm('<?php translate("ask_for_delete")?>');"
 					class="delete-form"><?php csrf_token_html();?><input type="image"
 						class="mobile-big-image" src="gfx/delete.gif"
 						alt="<?php
-		
-		translate ( "delete" );
-		?>"
+			
+			translate ( "delete" );
+			?>"
 						title="<?php
-		
-		translate ( "delete" );
-		?>">
+			
+			translate ( "delete" );
+			?>">
 				</form></td>
+				<?php }?>
 		</tr>
 
 

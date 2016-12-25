@@ -27,6 +27,20 @@ function showAndHideFieldsByType() {
 		$("#tab-cache-control").slideUp();
 		$("#article-metadata").slideUp();
 		$("#article-image").slideUp();
+	} else if ($("#type_node").is(":checked")) {
+		$("#tab-list").slideUp();
+		$("#tab-link").slideUp();
+		$("#tab-metadata").slideUp();
+		$("#tab-og").slideUp();
+		$("#tab-image").slideUp();
+		$("#content-editor").slideUp();
+		$("#tab-module").slideUp();
+		$("#tab-video").slideUp();
+		$("#tab-audio").slideUp();
+		$("#tab-text-position").slideUp();
+		$("#tab-cache-control").slideUp();
+		$("#article-metadata").slideUp();
+		$("#article-image").slideUp();
 	} else if ($("#type_module").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
@@ -103,6 +117,14 @@ function showAndHideFieldsByType() {
 			$("#article-image").slideUp();
 		}
 	}
+	$(".custom-field-tab").each(function(index, el) {
+		if ($(el).data("type") == $("input[name='type']:checked").val()) {
+			$(el).slideDown();
+		} else {
+			$(el).slideUp();
+		}
+
+	});
 }
 
 $("input[name=\"type\"]").change(showAndHideFieldsByType);
@@ -149,16 +171,34 @@ function systemnameOrLanguageChanged(item) {
 
 }
 
-$(function() {
+function filterParentPages() {
+	var data = {
+		ajax_cmd : "getPageListByLang",
+		mlang : $("select[name='language']").val(),
+		mmenu : $("select[name='menu']").val(),
+		mparent : $("select[name='parent']").val()
+	};
 
+	$.post("index.php", data, function(text, status) {
+		$("select[name='parent']").html(text);
+	});
+}
+
+$(function() {
 	$("input[name='system_title']").keyup(function() {
 		systemnameOrLanguageChanged($(this));
+	});
+	$("select[name='menu']").change(function() {
+		filterParentPages();
 	});
 
 	$("select[name='language']").change(function() {
 		systemnameOrLanguageChanged($(this));
+		filterParentPages();
 	});
 
 	systemnameOrLanguageChanged($("input[name='system_title']"));
 	systemnameOrLanguageChanged($("select[name='language']"));
+
+	filterParentPages();
 });

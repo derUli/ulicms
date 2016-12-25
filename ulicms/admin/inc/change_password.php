@@ -1,5 +1,4 @@
 <?php
-include_once ULICMS_ROOT . "/users_api.php";
 if (! defined ( "ULICMS_ROOT" )) {
 	die ( "direct access not allowed." );
 }

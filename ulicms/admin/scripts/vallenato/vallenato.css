@@ -2,7 +2,7 @@
 	background: #ffffff;
 	padding: 5px 10px 10px 10px;
 	border: 1px solid #cccccc;
-        width:100%;
+	width: 100%;
 }
 
 .accordion-header {
@@ -18,14 +18,14 @@
 	background: #335599;
 	background-repeat: no-repeat;
 	background-position: right 50%;
-	color:white;
+	color: white;
 }
 
 .active-header:hover {
 	background: url(images/active-header.gif) #335599;
 	background-repeat: no-repeat;
 	background-position: right 50%;
-	color:white;
+	color: white;
 }
 
 .inactive-header {

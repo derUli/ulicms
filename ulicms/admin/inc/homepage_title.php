@@ -41,7 +41,7 @@ if (defined ( "_SECURITY" )) {
 		<tr>
 			<td style="min-width: 100px;"><strong><?php translate("language");?>
 			</strong></td>
-			<td><strong><?php translate("title");?>?>
+			<td><strong><?php translate("title");?>
 			</strong></td>
 		</tr>
 		<?php
@@ -70,7 +70,7 @@ if (defined ( "_SECURITY" )) {
 			<td></td>
 			<td style="text-align: center"><input type="submit" name="submit"
 				value="<?php translate("save_changes");?>"></td>
-	</tr>
+		</tr>
 	</table>
 </form>
 

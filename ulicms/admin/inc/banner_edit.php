@@ -1,7 +1,7 @@
 <?php
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
-	if ($acl->hasPermission ( "banners" )) {
+	if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )) {
 		$banner = db_escape ( $_GET ["banner"] );
 		$query = db_query ( "SELECT * FROM " . tbname ( "banner" ) . " WHERE id='$banner'" );
 		while ( $row = db_fetch_object ( $query ) ) {

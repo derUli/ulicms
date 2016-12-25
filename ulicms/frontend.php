@@ -12,7 +12,9 @@ add_hook ( "after_session_start" );
 
 setLanguageByDomain ();
 
-if (! empty ( $_GET ["language"] ) and in_array ( $_GET ["language"], getAllLanguages () )) {
+$languages = getAllLanguages ();
+
+if (! empty ( $_GET ["language"] ) and in_array ( $_GET ["language"], $languages )) {
 	$_SESSION ["language"] = db_escape ( $_GET ["language"] );
 }
 
@@ -22,7 +24,7 @@ if (! isset ( $_SESSION ["language"] )) {
 
 setLocaleByLanguage ();
 
-if (in_array ( $_SESSION ["language"], getAllLanguages () )) {
+if (in_array ( $_SESSION ["language"], $languages )) {
 	include getLanguageFilePath ( $_SESSION ["language"] );
 	Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
 	Translation::includeCustomLangFile ( $_SESSION ["language"] );
@@ -46,7 +48,7 @@ if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 require_once "templating.php";
 $status = check_status ();
 
-if (Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
+if (! isFastMode () && Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
 	add_hook ( "before_global_redirection" );
 	header ( "Location: " . Settings::get ( "redirection" ) );
 	exit ();
@@ -99,9 +101,10 @@ if (isset ( $_GET ["goid"] )) {
 if (isset ( $_GET ["submit-cms-form"] ) and ! empty ( $_GET ["submit-cms-form"] ) and get_request_method () === "POST") {
 	$form_id = intval ( $_GET ["submit-cms-form"] );
 	
-	require_once ULICMS_ROOT . "/classes/forms.php";
+	require_once ULICMS_ROOT . "/classes/objects/forms.php";
 	Forms::submitForm ( $form_id );
 }
+ControllerRegistry::runMethods ();
 
 header ( "HTTP/1.0 " . $status );
 
@@ -125,12 +128,14 @@ if ($format == "html") {
 
 add_hook ( "after_http_header" );
 
-if (count ( getThemeList () ) === 0) {
-	throw new Exception ( "Keine Themes vorhanden!" );
-}
-
-if (! is_dir ( getTemplateDirPath ( $theme ) )) {
-	throw new Exception ( "Das aktivierte Theme existiert nicht!" );
+if (! isFastMode ()) {
+	if (count ( getThemeList () ) === 0) {
+		throw new Exception ( "Keine Themes vorhanden!" );
+	}
+	
+	if (! is_dir ( getTemplateDirPath ( $theme ) )) {
+		throw new Exception ( "Das aktivierte Theme existiert nicht!" );
+	}
 }
 
 if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
@@ -138,18 +143,17 @@ if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 }
 
 $cached_page_path = buildCacheFilePath ( $_SERVER ['REQUEST_URI'] );
-$modules = getAllModules ();
 $hasModul = containsModule ( get_requested_pagename () );
 
 $cache_control = get_cache_control ();
 switch ($cache_control) {
 	case "auto" :
 	case "force" :
-		$GLOBALS ["no_cache"] = false;
+		Flags::setNoCache ( false );
 		break;
 		break;
 	case "no_cache" :
-		$GLOBALS ["no_cache"] = true;
+		Flags::setNoCache ( true );
 		break;
 }
 if ($hasModul) {
@@ -181,7 +185,7 @@ if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) a
 	$cached_content = file_get_contents ( $cached_page_path );
 	$last_modified = filemtime ( $cached_page_path );
 	
-	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! $GLOBALS ["no_cache"]) {
+	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! Flags::getNoCache ()) {
 		eTagFromString ( $cached_content );
 		browsercacheOneDay ( $last_modified );
 		echo $cached_content;
@@ -208,7 +212,7 @@ if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET
 
 $id = md5 ( $_SERVER ['REQUEST_URI'] . $_SESSION ["language"] . strbool ( is_mobile () ) );
 
-if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
+if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
 	$options = array (
 			'lifeTime' => Settings::get ( "cache_period" ),
 			'cacheDir' => "content/cache/" 
@@ -284,10 +288,10 @@ if ($html_file) {
 
 add_hook ( "after_html" );
 
-if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and $cache_type === "cache_lite") {
+if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and $cache_type === "cache_lite") {
 	$data = ob_get_clean ();
 	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! $GLOBALS ["no_cache"]) {
+	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache ()) {
 		$Cache_Lite->save ( $data, $id );
 	}
 	
@@ -304,10 +308,10 @@ if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and $cache_
 	die ();
 }
 
-if (! Settings::get ( "cache_disabled" ) and ! $GLOBALS ["no_cache"] and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	$generated_html = ob_get_clean ();
 	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! $GLOBALS ["no_cache"]) {
+	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache ()) {
 		$handle = fopen ( $cached_page_path, "wb" );
 		fwrite ( $handle, $generated_html );
 		fclose ( $handle );

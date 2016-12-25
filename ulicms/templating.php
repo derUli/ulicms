@@ -118,7 +118,7 @@ function get_edit_button() {
 	$html = "";
 	if (is_logged_in () and ! containsModule ()) {
 		$acl = new ACL ();
-		if ($acl->hasPermission ( "pages" ) and $GLOBALS ["no_cache"]) {
+		if ($acl->hasPermission ( "pages" ) and Flags::getNoCache ()) {
 			$id = get_ID ();
 			$html .= "<div class=\"ulicms_edit\">[<a href=\"admin/index.php?action=pages_edit&page=$id\">" . get_translation ( "edit" ) . "</a>]</div>";
 		}
@@ -163,7 +163,7 @@ function get_article_meta($page = null) {
 		$page = get_requested_pagename ();
 	}
 	$result = null;
-	$sql = "SELECT `article_author_name`, `article_author_email`, `article_date`, `article_image` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$sql = "SELECT `article_author_name`, `article_author_email`, `article_date`, `article_image`, `excerpt` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = Database::fetchObject ( $query );
@@ -388,7 +388,7 @@ function set_custom_data($var, $value, $page = null) {
 	return db_query ( "UPDATE " . tbname ( "content" ) . " SET custom_data = '" . db_escape ( $json ) . "' WHERE systemname='" . db_escape ( $page ) . "'" );
 }
 function language_selection() {
-	$query = db_query ( "SELECT * FROM " . tbname ( "languages" ) . " ORDER by name" );
+	$query = db_query ( "SELECT language_code, name FROM " . tbname ( "languages" ) . " ORDER by name" );
 	echo "<ul class='language_selection'>";
 	while ( $row = db_fetch_object ( $query ) ) {
 		$domain = getDomainByLanguage ( $row->language_code );
@@ -450,7 +450,7 @@ function poweredByUliCMS() {
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner() {
-	$query = db_query ( "SELECT * FROM " . tbname ( "banner" ) . " WHERE language='all' OR language='" . db_escape ( $_SESSION ["language"] ) . "'ORDER BY RAND() LIMIT 1" );
+	$query = db_query ( "SELECT name, link_url, image_url, `type`, html FROM " . tbname ( "banner" ) . " WHERE language='all' OR language='" . db_escape ( $_SESSION ["language"] ) . "'ORDER BY RAND() LIMIT 1" );
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
 			$type = "gif";
@@ -471,6 +471,9 @@ function random_banner() {
 	}
 }
 function logo() {
+	if (Settings::get ( "logo_disabled" ) != "no") {
+		return;
+	}
 	if (! Settings::get ( "logo_image" )) {
 		setconfig ( "logo_image", "" );
 	}
@@ -502,7 +505,6 @@ function homepage_title() {
 }
 $status = check_status ();
 function meta_keywords($ipage = null) {
-	$status = check_status ();
 	$ipage = db_escape ( $_GET ["seite"] );
 	$query = db_query ( "SELECT meta_keywords FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	
@@ -521,7 +523,6 @@ function meta_keywords($ipage = null) {
 	return $meta_keywords;
 }
 function meta_description($ipage = null) {
-	$status = check_status ();
 	$ipage = db_escape ( $_GET ["seite"] );
 	$query = db_query ( "SELECT meta_description FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'", $connection );
 	if ($ipage == "") {
@@ -552,7 +553,7 @@ function get_title($ipage = null, $headline = false) {
 	$ipage = db_escape ( $_GET ["seite"] );
 	$query = db_query ( "SELECT alternate_title, title FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'", $connection );
 	if ($ipage == "") {
-		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " ORDER BY id LIMIT 1" );
+		$query = db_query ( "SELECT title, alternate_title FROM " . tbname ( "content" ) . " ORDER BY id LIMIT 1" );
 	}
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
@@ -719,7 +720,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 	$html = "";
 	$name = db_escape ( $name );
 	$language = $_SESSION ["language"];
-	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent ";
+	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and parent ";
 	
 	if (is_null ( $parent )) {
 		$sql .= " IS NULL ";
@@ -844,10 +845,7 @@ function base_metas() {
 		echo "\r\n";
 	}
 	if (! Settings::get ( "hide_meta_generator" )) {
-		$powered_by = ULICMS_ROOT . "/powered-by.php";
-		if (file_exists ( $powered_by ))
-			@include $powered_by;
-		
+		echo Template::executeDefaultOrOwnTemplate ( "powered-by" );
 		echo '<meta name="generator" content="UliCMS ' . cms_version () . '"/>';
 		echo "\r\n";
 		
@@ -875,8 +873,12 @@ function base_metas() {
 		echo "\r\n";
 	}
 	
+	$min_style_file = getTemplateDirPath ( get_theme () ) . "style.min.css";
 	$style_file = getTemplateDirPath ( get_theme () ) . "style.css";
-	if (is_file ( $style_file )) {
+	
+	if (is_file ( $min_style_file )) {
+		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
+	} else if (is_file ( $style_file )) {
 		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
 	}
 	echo "\r\n";
@@ -984,7 +986,7 @@ function get_autor() {
 	$out = str_replace ( "Vorname", $result2 ["firstname"], $out );
 	$out = str_replace ( "Nachname", $result2 ["lastname"], $out );
 	$out = str_replace ( "Username", $result2 ["username"], $out );
-	if (! is_403 () or $_SESSION ["group"] >= 20) {
+	if (! is_403 () and ! is_404 ()) {
 		return $out;
 	}
 }
@@ -1003,16 +1005,18 @@ function get_page($systemname = "") {
 	}
 }
 function content() {
-	$theme = Settings::get ( "theme" );
 	$status = check_status ();
 	if ($status == "404 Not Found") {
 		if (file_exists ( getTemplateDirPath ( $theme ) . "404.php" )) {
+			$theme = Settings::get ( "theme" );
 			include getTemplateDirPath ( $theme ) . "404.php";
 		} else {
 			translate ( "PAGE_NOT_FOUND_CONTENT" );
 		}
 		return false;
 	} else if ($status == "403 Forbidden") {
+		
+		$theme = Settings::get ( "theme" );
 		if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 			include getTemplateDirPath ( $theme ) . "403.php";
 		} else {
@@ -1021,10 +1025,15 @@ function content() {
 		return false;
 	}
 	
-	if (! is_logged_in ()) {
+	if (! is_logged_in () and ! isFastMode ()) {
 		db_query ( "UPDATE " . tbname ( "content" ) . " SET views = views + 1 WHERE systemname='" . Database::escapeValue ( $_GET ["seite"] ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	}
 	return import ( $_GET ["seite"] );
+}
+function get_content() {
+	ob_start ();
+	content ();
+	return ob_get_clean ();
 }
 function checkforAccessForDevice($access) {
 	$access = explode ( ",", $access );

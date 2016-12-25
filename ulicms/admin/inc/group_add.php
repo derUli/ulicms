@@ -14,7 +14,7 @@ csrf_token_html ();
 ?>
 	<p>
 		<strong><?php translate("name");?> </strong> <input type="text"
-			required="true" name="name" value="">
+			required="required" name="name" value="">
 	</p>
 	<p>
 		<strong><?php translate("permissions");?> </strong>

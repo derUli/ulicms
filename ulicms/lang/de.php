@@ -75,7 +75,6 @@ define ( "TRANSLATION_FIRSTNAME", "Vorname" );
 define ( "TRANSLATION_EMAIL", "E-Mail" );
 define ( "TRANSLATION_NEW_PASSWORD", "Neues Passwort" );
 define ( "TRANSLATION_USERGROUP", "Benutzergruppe" );
-define ( "TRANSLATION_ICQ", "ICQ" );
 define ( "TRANSLATION_SKYPE", "Skype" );
 define ( "TRANSLATION_ONLY_JPEG", "Nur JPEG-Grafiken werden akzeptiert." );
 define ( "TRANSLATION_NOTIFY_ON_LOGIN", "Benachrichtige mich per E-Mail,<br/>
@@ -660,7 +659,7 @@ define ( "TRANSLATION_COMPATIBLE_FROM", "Kompatibel von" );
 define ( "TRANSLATION_COMPATIBLE_TO", "Kompatibel bis" );
 define ( "TRANSLATION_DEPENDENCIES", "Abhängigkeiten" );
 define ( "TRANSLATION_LICENSE_AGREEMENT", "Lizenzbedingungen" );
-define ( "TRANSLATION_DEPENDENCY_X_IS_NOT_INSTALLED", "Die Abhänigkeit %x% ist nicht installiert." );
+define ( "TRANSLATION_DEPENDENCY_X_IS_NOT_INSTALLED", "Die Abhängigkeit %x% ist nicht installiert." );
 define ( "TRANSLATION_THIS_ULICMS_VERSION_IS_NOT_SUPPORTED", "Diese UliCMS Version wird nicht unterstützt." );
 define ( "TRANSLATION_SHA1_CHECKSUM_NOT_EQUAL", "SHA1 Prüfsummen stimmen nicht überein." );
 define ( "TRANSLATION_ERRORS", "Fehler" );
@@ -683,5 +682,11 @@ define ( "TRANSLATION_O_CLOCK", "Uhr" );
 
 define ( "TRANSLATION_INSTALLATION_FAILED", "Das Paket \"%file%\" konnte nicht installiert werden." );
 define ( "TRANSLATION_NOT_SUPPORTED_FORMAT", "Das Dateiformat wird nicht unterstützt." );
+
+define ( "TRANSLATION_RESTRICT_EDIT_ACCESS", "Bearbeitung beschränken" );
+define ( "TRANSLATION_OTHERS", "Andere" );
+
+define ( "TRANSLATION_HIDDEN", "Versteckt" );
+define ( "TRANSLATION_NODE", "Knotenpunkt" );
 
 add_hook ( "lang_de" );

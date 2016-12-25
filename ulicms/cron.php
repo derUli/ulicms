@@ -2,8 +2,10 @@
 require_once "init.php";
 fcflush ();
 
-if (Settings::get ( "delete_ips_after_48_hours" )) {
-	Database::query ( "Update " . tbname ( "log" ) . " SET ip = NULL WHERE DATEDIFF(NOW(), zeit) >= 2" );
+if (! isFastMode ()) {
+	if (Settings::get ( "delete_ips_after_48_hours" )) {
+		Database::query ( "Update " . tbname ( "log" ) . " SET ip = NULL WHERE DATEDIFF(NOW(), zeit) >= 2" );
+	}
 }
 
 $empty_trash_days = Settings::get ( "empty_trash_days" );

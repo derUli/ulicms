@@ -444,8 +444,7 @@ class Services_JSON {
 				
 				// eliminate multi-line comments in '/* ... */' form, at end of string
 				'#/\*(.+)\*/\s*$#Us' 
-		)
-		, '', $str );
+		), '', $str );
 		
 		// eliminate extraneous space
 		return trim ( $str );

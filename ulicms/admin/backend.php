@@ -52,8 +52,8 @@ require_once "inc/logincheck.php";
 
 define ( "_SECURITY", true );
 
-if ($_GET ["action"] == "ulicms-news") {
-	require_once "inc/ulicms-news.php";
+if ($_GET ["action"] == "ulicms_news") {
+	require_once "inc/ulicms_news.php";
 	exit ();
 }
 
@@ -62,10 +62,6 @@ if (isset ( $_SESSION ["ulicms_login"] )) {
 	db_query ( "UPDATE " . tbname ( "users" ) . " SET last_action = " . time () . " WHERE id = " . $_SESSION ["login_id"] );
 } else {
 	$eingeloggt = false;
-}
-
-if ($_GET ["action"] == "export" and isset ( $_POST ["table"] )) {
-	require_once "inc/export-data.php";
 }
 
 header ( "Content-Type: text/html; charset=UTF-8" );
@@ -78,6 +74,8 @@ if (isset ( $_REQUEST ["ajax_cmd"] )) {
 }
 add_hook ( "after_ajax_handler" );
 
+ControllerRegistry::runMethods ();
+
 require_once "inc/header.php";
 if (! $eingeloggt) {
 	if (isset ( $_GET ["register"] )) {
@@ -88,14 +86,18 @@ if (! $eingeloggt) {
 		require_once "inc/loginform.php";
 	}
 } else {
-	
+
 	require_once "inc/adminmenu.php";
-	
-	add_hook ( "register_actions" );
-	
+
 	$pkg = new PackageManager ();
-	
+
 	global $actions;
+	$actions = array ();
+
+	ActionRegistry::loadModuleActions ();
+
+	add_hook ( "register_actions" );
+
 	if ($_SESSION ["require_password_change"]) {
 		require_once "inc/change_password.php";
 	} else if ($_GET ["action"] == "" || $_GET ["action"] == "home") {
@@ -178,39 +180,31 @@ if (! $eingeloggt) {
 		require_once "inc/forms_new.php";
 	} else if ($_GET ["action"] == "forms_edit") {
 		require_once "inc/forms_edit.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "info") {
 		require_once "inc/info.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "info") {
 		require_once "inc/info.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "system_update") {
 		require_once "inc/system_update.php";
 	} else if ($_GET ["action"] == "motd") {
 		require_once "inc/motd.php";
-	} 
-
-	else if ($_GET ["action"] == "edit_profile") {
+	} else if ($_GET ["action"] == "edit_profile") {
 		require_once "inc/edit_profile.php";
-	} 
-
-	else if ($_GET ["action"] == "logo_upload") {
+	} else if ($_GET ["action"] == "logo_upload") {
 		require_once "inc/logo.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "favicon") {
 		require_once "inc/favicon.php";
 	} else if ($_GET ["action"] == "languages") {
 		require_once "inc/languages.php";
-	} else if ($_GET ["action"] == "export") {
-		require_once "inc/export.php";
-	} 
-
-	else if ($_GET ["action"] == "cache") {
+	} else if ($_GET ["action"] == "cache") {
 		require_once "inc/cache_settings.php";
 	} else if ($_GET ["action"] == "install_method") {
 		require_once "inc/install_method.php";
@@ -220,11 +214,11 @@ if (! $eingeloggt) {
 		require_once "inc/module_settings.php";
 	} else if ($_GET ["action"] == "other_settings") {
 		require_once "inc/other_settings.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "frontpage_settings") {
 		require_once "inc/frontpage.php";
-	} 
+	}
 
 	else if ($_GET ["action"] == "pkg_settings") {
 		require_once "inc/pkg_settings.php";
@@ -250,8 +244,8 @@ if (! $eingeloggt) {
 		include_once "inc/do-post-install.php";
 	} else if ($_GET ["action"] == "pkginfo") {
 		include_once "inc/pkginfo.php";
-	} else if ($_GET ["action"] = "sin-package-install-ok") {
-		include_once "inc/sin-package-install-ok.php";
+	} else if ($_GET ["action"] == "sin_package_install_ok") {
+		include_once "inc/sin_package_install_ok.php";
 	} else if (isset ( $actions [$_GET ["action"]] )) {
 		include_once $actions [$_GET ["action"]];
 	} else {

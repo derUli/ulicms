@@ -17,7 +17,7 @@ include "Encoding.php";
 			cols=80 rows=25>
 		<?php
 		
-if (isset ( $_POST ["original"] )) {
+		if (isset ( $_POST ["original"] )) {
 			$file = $_POST ["original"];
 			$file = ForceUTF8\Encoding::fixUTF8 ( $file );
 			echo htmlspecialchars ( $file );

@@ -1,33 +1,30 @@
 [ ] Inhaltstyp "Liste" - Sortierbar nach "Random"
 [ ] Neues Bootstrap basiertes Theme theme-2017
-[X] Alle Referenzen von TRANSLATION_* Konstanten ersetzen durch translation() und get_translation()
 [ ] Multisite-Fähigkeit / Scopes implementieren
+	[ ] Konzept ausdenken
+	[ ] Datenbankstruktur entwerfen
+	[ ] msadmin Oberfläche erstellen (Bootstrap nutzen)
+	[ ] Logik zur Erkennung der aktuellen Website (site_id) anhand der Domain
+	[ ] Alle Module multisite kompatibel machen
 [ ] Autosave / Restore bei Browsercrash
 [ ] Seitenverwaltung - Beim Auswählen einer Sprache soll "Übergeordnete Seite" mit einer Liste der Seiten aus der gewählten Sprache aktualisiert werden
-[X] "cache_control" Option zur Inhalteverwaltung hinzufügen.
-	[X] Auto
-	[X] Cach
-	[X] No Cache
-[ ] editable_for_admins_only checkbox on contents
 
-Inhaltstyp "Artikel":
-[X] Um Metadaten erweitern
-	[X] author_name (varchar 80)
-	[X] author_email (varchar 80)
-	[X] last_update (date default null)
- 	[X] Feld zum Hochladen von Artikelbild
-	[X] Excerpt (Vorschautext)
-[ ] Kommentarfunktion implementieren
-[X] Eigene Templates 
+[ ] Kommentarfunktion für Artikel implementieren
 
 User:
 [ ] Backend Startseite (welche Seite soll nach dem Login als erstes gezeigt werden)
 
-Datenbank:
-[X] Option "Fremdschlüssel setzen" zum Installer hinzufügen
-
 [ ] Möglichkeit eigene Inhaltstypen mit frei definierbaren Feldern , ähnlich wie z.B. in Drupal
 
-[ ] "Passwort wiederholen" Feld unter "Profil bearbeiten"
-
 [ ] Beim Löschen eines Users sollen alle Datensätze des gelöschten Users an einen anderen User übertragen werden können.
+[ ] Neues Format für die Paketquelle erstellen
+	[ ] JSON Format konzipieren
+	[ ] Kategorien implementieren
+	[ ] Neues Build-Script implementieren
+	[ ] Zukünftig: Auf SimpleInstall v2 umstellen
+	[ ] update_manager und update_manager_dashboard anpassen
+	[ ] Online Browser für Paketquelle anpassen
+	[ ] Mehrsprachige Beschreibungen
+[ ] Redesign des Backends mit Bootstrap
+[ ] Global Variablen entledigen
+

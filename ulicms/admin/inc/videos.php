@@ -156,12 +156,14 @@ $(window).load(function(){
 	?>
 <br />
 <br />
+<?php if($acl->hasPermission("videos_create")){?>
 <p>
 	<a href="index.php?action=add_video">[<?php
-	
-	translate ( "upload_video" );
-	?>]</a>
+		
+		translate ( "upload_video" );
+		?>]</a>
 </p>
+<?php }?>
 <table class="tablesorter">
 	<thead>
 		<tr>
@@ -190,8 +192,10 @@ $(window).load(function(){
 	translate ( "mp4_file" );
 	?>
 			</th>
+			<?php if($acl->hasPermission("videos_edit")){?>
 			<td></td>
 			<td></td>
+			<?php }?>
 		</tr>
 	</thead>
 	<tbody>
@@ -224,6 +228,8 @@ $(window).load(function(){
 		echo htmlspecialchars ( basename ( $row->mp4_file ) );
 		?>
 			</td>
+			
+			<?php if($acl->hasPermission("videos_edit")){?>
 			<td><a
 				href="index.php?action=edit_video&id=<?php
 		
@@ -258,6 +264,7 @@ $(window).load(function(){
 		translate ( "delete" );
 		?>">
 				</form></td>
+				<?php }?>
 		</tr>
 		<?php
 	}

@@ -234,4 +234,59 @@ if (! function_exists ( "keywordsFromString" )) {
 	}
 }
 
-?>
+// encodeURIComponent() is needed when working with accents
+// If not used, generate a JS error in CKEDITOR link plugin
+function encodeURIComponent($str) {
+	$revert = array (
+			'%21' => '!',
+			'%2A' => '*',
+			'%27' => "'",
+			'%28' => '(',
+			'%29' => ')' 
+	);
+	return strtr ( rawurlencode ( $str ), $revert );
+}
+
+// Aus einer Boolean einen String machen ("true" oder "false")
+function strbool($value) {
+	return ($value) ? 'true' : 'false';
+}
+
+function isNullOrEmpty($variable) {
+	return (is_null ( $variable ) or empty ( $variable ));
+}
+function isNotNullOrEmpty($variable) {
+	return (! is_null ( $variable ) and ! empty ( $variable ));
+}
+
+function convertLineEndingsToLF($s) {
+	// Normalize line endings using Global
+	// Convert all line-endings to UNIX format
+	$s = str_replace ( CRLF, LF, $s );
+	$s = str_replace ( CR, LF, $s );
+	// Don't allow out-of-control blank lines
+	$s = preg_replace ( "/\n{2,}/", LF . LF, $s );
+	return $s;
+}
+
+function str_replace_nth($search, $replace, $subject, $nth) {
+	$found = preg_match_all ( '/' . preg_quote ( $search ) . '/', $subject, $matches, PREG_OFFSET_CAPTURE );
+	if (false !== $found && $found > $nth) {
+		return substr_replace ( $subject, $replace, $matches [0] [$nth] [1], strlen ( $search ) );
+	}
+	return $subject;
+}
+
+function mb_str_split($string) {
+	// Split at all position not after the start: ^
+	// and not before the end: $
+	return preg_split ( '/(?<!^)(?!$)/u', $string );
+}
+
+function str_replace_first($search, $replace, $subject) {
+	$pos = strpos ( $subject, $search );
+	if ($pos !== false) {
+		return substr_replace ( $subject, $replace, $pos, strlen ( $search ) );
+	}
+	return $subject;
+}

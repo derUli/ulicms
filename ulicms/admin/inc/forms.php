@@ -3,7 +3,7 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "forms" )) {
 	noperms ();
 } else {
-	require_once ULICMS_ROOT . "/classes/forms.php";
+	require_once ULICMS_ROOT . "/classes/objects/forms.php";
 	if (isset ( $_POST ["create_form"] )) {
 		$name = $_POST ["name"];
 		$email_to = $_POST ["email_to"];
@@ -38,9 +38,11 @@ tr.odd input#form-submit-url {
 }
 </style>
 <h1><?php translate("forms"); ?></h1>
+<?php if($acl->hasPermission ( "forms_create" )){ ?>
 <p>
 	<a href="index.php?action=forms_new"><?php translate("create_form");?></a>
 </p>
+<?php }?>
 <table id="form-list" class="tablesorter">
 	<thead>
 		<tr>
@@ -48,8 +50,10 @@ tr.odd input#form-submit-url {
 			<th><?php translate("name");?></th>
 			<th><?php translate("email_to");?></th>
 			<th><?php translate("submit_form_url");?></th>
+			<?php if($acl->hasPermission ( "forms_edit" )){ ?>
 			<td style="font-weight: bold; text-align: center"><?php translate("edit");?></td>
 			<td style="font-weight: bold; text-align: center"><?php translate("delete");?></td>
+			<?php }?>
 		</tr>
 	</thead>
 	<tbody>
@@ -64,22 +68,25 @@ tr.odd input#form-submit-url {
 			<td><input id="form-submit-url" type="text" readonly
 				value="<?php echo htmlspecialchars($submit_form_url);?>"
 				onclick="this.select();"></td>
+				
+			<?php if($acl->hasPermission ( "forms_edit" )){ ?>
 			<td style="text-align: center;"><a
 				href="?action=forms_edit&id=<?php
-		echo $form ["id"];
-		?>"><img src="gfx/edit.png" class="mobile-big-image"
+			echo $form ["id"];
+			?>"><img src="gfx/edit.png" class="mobile-big-image"
 					alt="<?php translate("edit");?>" title="<?php translate("edit");?>"></a></td>
 			<td style="text-align: center;">
 				<form
 					action="?action=forms&del=<?php
-		
-		echo $form ["id"];
-		?>"
+			
+			echo $form ["id"];
+			?>"
 					method="post" onsubmit="return confirm('Wirklich Löschen?')"
 					class="delete-form"><?php csrf_token_html();?><input type="image"
 						class="mobile-big-image" src="gfx/delete.gif"
 						alt="<?php translate("delete");?>"
 						title="<?php translate("delete");?>">
+			<?php }?>
 				</form>
 			</td>
 		</tr>

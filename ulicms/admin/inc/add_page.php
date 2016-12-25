@@ -2,7 +2,7 @@
 	if (defined ( "_SECURITY" )) {
 		$acl = new ACL ();
 		$groups = db_query ( "SELECT id, name from " . tbname ( "groups" ) );
-		if ($acl->hasPermission ( "pages" )) {
+		if ($acl->hasPermission ( "pages" ) and $acl->hasPermission ( "pages_create" )) {
 			
 			$allThemes = getThemesList ();
 			$cols = Database::getColumnNames ( "content" );
@@ -15,6 +15,7 @@
 			$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
 			
 			$types = get_available_post_types ();
+			
 			?>
 <form id="pageform" name="newpageform" action="index.php?action=pages"
 	method="post">
@@ -85,17 +86,15 @@
 			
 			$pages = getAllPages ( $default_language, "title", false );
 			?>
-	</select> <br /> <br /> <strong><?php translate("category");?>
-	</strong><br />
-	<?php echo categories :: getHTMLSelect()?>
-	<br /> <br /> <strong><?php translate("menu");?>
+	</select><br /> <br /> <strong><?php translate("menu");?>
 	</strong> <span style="cursor: help;"
 				onclick="$('div#menu_help').slideToggle()">[?]</span><br /> <select
 				name="menu" size=1>
 		<?php
 			foreach ( getAllMenus () as $menu ) {
 				?>
-		<option value="<?php echo $menu?>">
+		<option value="<?php echo $menu?>"
+					<?php if($menu == "top") echo "selected";?>>
 		<?php translate ( $menu );?></option>
 		<?php
 			}
@@ -150,7 +149,17 @@
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
 		<?php translate("disabled");?>
 		</option>
-			</select>
+			</select> <br /> <br /> <strong><?php translate("hidden");?>
+	</strong><br /> <select name="hidden" size="1"><option value="1">
+		<?php translate("yes");?>
+		</option>
+				<option value="0" selected>
+		<?php translate("no");?>
+		</option>
+			</select> <br /> <br /> <strong><?php translate("category");?>
+	</strong><br />
+	<?php echo categories :: getHTMLSelect();?>
+	
 		</div>
 		<div id="tab-link" style="display: none;">
 			<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
@@ -252,10 +261,35 @@ function openMenuImageSelectWindow(field) {
 					<input name="article_date" type="datetime-local"
 						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
 					<strong><?php translate("excerpt");?></strong> <textarea
-						name="excerpt" rows="5" cols="80"></textarea>
+						name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
 				</div>
 			</div>
 
+		</div>
+		<div id="custom_fields_container">
+		<?php
+			
+			foreach ( $types as $type ) {
+				$fields = getFieldsForCustomType ( $type );
+				if (count ( $fields ) > 0) {
+					?>
+		<div class="custom-field-tab" data-type="<?php echo $type;?>">
+				<h2 class="accordion-header"><?php translate($type);?></h2>
+
+				<div class="accordion-content">
+		<?php foreach($fields as $field){?>
+		<p>
+						<strong><?php translate($field);?></strong> <br /> <input
+							type="text"
+							name="cf_<?php echo Template::escape($type);?>_<?php echo Template::escape($field);?>"
+							value="">
+					</p>					
+		<?php }?>
+		</div>
+			</div>
+		<?php }?>
+		
+		<?php }?>
 		</div>
 		<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
@@ -362,7 +396,7 @@ function openMenuImageSelectWindow(field) {
 		<?php
 			foreach ( getAllMenus () as $menu ) {
 				?>
-		<option value="<?php echo $menu?>">
+		<option value="<?php echo $menu;?>">
 		<?php
 				
 				translate ( $menu );
@@ -523,6 +557,7 @@ function openArticleImageSelectWindow(field) {
 					href="#" onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 			</div>
 		</div>
+		<?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
 		<div class="accordion-content">
@@ -559,7 +594,13 @@ var editor = CKEDITOR.replace( 'page_content',
 				echo Settings::get ( "ckeditor_skin" );
 				?>'
 					});
-
+var editor2 = CKEDITOR.replace( 'excerpt',
+		{
+			skin : '<?php
+				
+				echo Settings::get ( "ckeditor_skin" );
+				?>'
+		});
 
 
 editor.on("instanceReady", function()
@@ -567,6 +608,14 @@ editor.on("instanceReady", function()
 	this.document.on("keyup", CKCHANGED);
 	this.document.on("paste", CKCHANGED);
 }
+
+);
+editor2.on("instanceReady", function()
+		{
+			this.document.on("keyup", CKCHANGED);
+			this.document.on("paste", CKCHANGED);
+		}
+
 );
 function CKCHANGED() {
 	formchanged = 1;
@@ -607,6 +656,17 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
         indentWithTabs: false,
         enterMode: "keep",
         tabMode: "shift"});
+
+var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
+
+		{lineNumbers: true,
+		        matchBrackets: true,
+		        mode : "text/html",
+
+		        indentUnit: 0,
+		        indentWithTabs: false,
+		        enterMode: "keep",
+		        tabMode: "shift"});
 </script>
 <?php
 			}

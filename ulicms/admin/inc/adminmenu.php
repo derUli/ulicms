@@ -1,10 +1,18 @@
 <?php
 if (defined ( "_SECURITY" )) {
+	$acl = new ACL ();
 	$modules = getAllModules ();
 	$modules_with_admin_page = Array ();
 	for($i = 0; $i < count ( $modules ); $i ++) {
 		if (file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) )) {
-			array_push ( $modules_with_admin_page, $modules [$i] );
+			$admin_permission = getModuleMeta ( $modules [$i], "admin_permission" );
+			$allowed = true;
+			if (isNotNullOrEmpty ( $admin_permission )) {
+				$allowed = $acl->hasPermission ( $admin_permission );
+			}
+			if ($allowed) {
+				array_push ( $modules_with_admin_page, $modules [$i] );
+			}
 		}
 	}
 	
@@ -77,13 +85,6 @@ if (defined ( "_SECURITY" )) {
 		if ($acl->hasPermission ( "categories" )) {
 			?>
 				<li><a href='?action=categories'><?php translate("categories");?></a></li>
-				<?php
-		}
-		?>			<?php
-		
-		if ($acl->hasPermission ( "export" )) {
-			?>
-				<li><a href='?action=export'><?php translate("export");?></a></li>
 				<?php
 		}
 		?>

@@ -5,7 +5,7 @@ RewriteEngine on
 # RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*).(html|pdf|csv|txt|json)$ ./?seite=$1&format=$2 [QSA]
+RewriteRule ^(.*).(html|pdf|csv|txt|json|rss)$ ./?seite=$1&format=$2 [QSA]
 </IFModule>
 
 <IfModule mod_deflate.c>
@@ -25,3 +25,9 @@ SetOutputFilter DEFLATE
  mod_gzip_item_exclude mime      ^image/.*
  mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
 </IfModule>
+
+# Deny access to wp-config.php file
+<files metadata.json>
+order allow,deny
+deny from all
+</files>

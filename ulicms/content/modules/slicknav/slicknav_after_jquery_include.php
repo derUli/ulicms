@@ -7,5 +7,5 @@ echo getModulePath ( "slicknav" );
 	href="<?php
 	
 echo getModulePath ( "slicknav" );
-	?>slicknav.css"
+	?>slicknav.min.css"
 	rel="stylesheet" />

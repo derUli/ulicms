@@ -27,8 +27,14 @@ if (! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 )) 
 	}
 	
 	$acl = new ACL ();
-	
-	if (defined ( "MODULE_ADMIN_REQUIRED_PERMISSION" )) {
+	$admin_permission = getModuleMeta ( $module, "admin_permission" );
+	if ($admin_permission) {
+		if ($acl->hasPermission ( $admin_permission )) {
+			define ( "MODULE_ACCESS_PERMITTED", true );
+		} else {
+			define ( "MODULE_ACCESS_PERMITTED", false );
+		}
+	} else if (defined ( "MODULE_ADMIN_REQUIRED_PERMISSION" )) {
 		if ($acl->hasPermission ( MODULE_ADMIN_REQUIRED_PERMISSION ) and $acl->hasPermission ( "module_settings" )) {
 			define ( "MODULE_ACCESS_PERMITTED", true );
 		} else {

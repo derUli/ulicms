@@ -26,7 +26,7 @@ while ( $row = db_fetch_assoc ( $old_content ) ) {
 	}
 	
 	db_query ( "INSERT INTO `" . $new_table . "` (id, notinfeed, systemname, title, content, active, 
-created, lastchangeby, autor, views, comments_enabled, menu, position, parent, lastmodified, language, redirection, access) 
+created, lastchangeby, autor, views,  menu, position, parent, lastmodified, language, redirection, access) 
 
 VALUES (" . $row ["id"] . ",0, '" . db_escape ( utf8_decode ( $row ["systemname"] ) ) . "',  
 '" . db_escape ( utf8_decode ( $row ["title"] ) ) . "',  

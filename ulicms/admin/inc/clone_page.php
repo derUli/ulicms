@@ -2,7 +2,7 @@
 include_once ULICMS_ROOT . "/classes/vcs.php";
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
-	if ($acl->hasPermission ( "pages" )) {
+	if ($acl->hasPermission ( "pages" ) and $acl->hasPermission ( "pages_create" )) {
 		$page = intval ( $_GET ["page"] );
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE id='$page'" );
 		
@@ -83,12 +83,7 @@ if (defined ( "_SECURITY" )) {
 			
 			$pages = getAllPages ( $page_language, "title", false );
 			?>
-	</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
-	<?php
-			echo categories::getHTMLSelect ( $row->category );
-			?>
-
-	<br /> <br /> <strong><?php translate("menu");?> </strong> <span
+	</select> <br /> <br /> <strong><?php translate("menu");?> </strong> <span
 				style="cursor: help;" onclick="$('div#menu_help').slideToggle()">[?]</span><br />
 			<select name="menu" size=1>
 		<?php
@@ -176,7 +171,18 @@ if (defined ( "_SECURITY" )) {
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
 				<?php translate("disabled");?>
 				</option>
-			</select>
+			</select> <br /> <br /> <strong><?php translate("hidden");?>
+	</strong><br /> <select name="hidden" size="1"><option value="1"
+					<?php if($row->hidden == 1) echo "selected";?>>
+		<?php translate("yes");?>
+		</option>
+				<option value="0" <?php if($row->hidden == 0) echo "selected";?>>
+		<?php translate("no");?>
+		</option>
+			</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
+	<?php
+			echo categories::getHTMLSelect ( $row->category );
+			?>
 		</div>
 		<div id="tab-link">
 			<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
@@ -323,6 +329,33 @@ function openMenuImageSelectWindow(field) {
 					<textarea name="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt);?></textarea>
 				</div>
 			</div>
+		</div>
+
+
+		<div id="custom_fields_container">
+		<?php
+			foreach ( $types as $type ) {
+				$fields = getFieldsForCustomType ( $type );
+				if (count ( $fields ) > 0) {
+					?>
+		<div class="custom-field-tab" data-type="<?php echo $type;?>">
+				<h2 class="accordion-header"><?php translate($type);?></h2>
+
+				<div class="accordion-content">
+		<?php foreach($fields as $field){?>
+		<p>
+						<strong><?php translate($field);?></strong> <br /> <input
+							type="text"
+							name="cf_<?php echo Template::escape($type);?>_<?php echo Template::escape($field);?>"
+							value="<?php
+						echo Template::escape ( CustomFields::get ( $field, $row->id ) )?>">
+					</p>					
+		<?php }?>
+		</div>
+			</div>
+		<?php }?>
+		
+		<?php }?>
 		</div>
 
 		<h2 class="accordion-header"><?php translate("open_in");?></h2>
@@ -672,7 +705,7 @@ function openArticleImageSelectWindow(field) {
 					style="cursor: pointer" maxlength="255" /><br /> <a href="#"
 					onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 			</div>
-		</div>
+		</div><?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 		<div class="accordion-content">
 
@@ -715,6 +748,13 @@ var editor = CKEDITOR.replace( 'page_content',
 					});
 
 
+var editor2 = CKEDITOR.replace( 'excerpt',
+		{
+			skin : '<?php
+				
+				echo Settings::get ( "ckeditor_skin" );
+				?>'
+		});
 
 editor.on("instanceReady", function()
 {
@@ -722,6 +762,16 @@ editor.on("instanceReady", function()
 	this.document.on("paste", CKCHANGED);
 }
 );
+
+
+editor2.on("instanceReady", function()
+		{
+			this.document.on("keyup", CKCHANGED);
+			this.document.on("paste", CKCHANGED);
+		}
+
+);
+
 function CKCHANGED() {
 	formchanged = 1;
 }
@@ -762,10 +812,20 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
         indentWithTabs: false,
         enterMode: "keep",
         tabMode: "shift"});
+
+
+var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
+
+		{lineNumbers: true,
+		        matchBrackets: true,
+		        mode : "text/html",
+
+		        indentUnit: 0,
+		        indentWithTabs: false,
+		        enterMode: "keep",
+		        tabMode: "shift"});
 </script>
-<?php
-			}
-			?>
+<?php }?>
 		<noscript>
 			<p style="color: red;">
 				Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a

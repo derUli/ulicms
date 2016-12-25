@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL ();
-if ($acl->hasPermission ( "videos" )) {
+if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_edit" )) {
 	
 	$id = intval ( $_REQUEST ["id"] );
 	$query = db_query ( "SELECT * FROM " . tbname ( "videos" ) . " WHERE id = $id" );

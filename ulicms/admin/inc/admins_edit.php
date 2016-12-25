@@ -3,7 +3,7 @@ if (defined ( "_SECURITY" )) {
 	include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
 	$acl = new ACL ();
 	
-	if (($acl->hasPermission ( "users" ) or is_admin ()) or ($_GET ["admin"] == $_SESSION ["login_id"])) {
+	if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) or ($_GET ["admin"] == $_SESSION ["login_id"])) {
 		
 		$admin = intval ( $_GET ["admin"] );
 		
@@ -12,7 +12,8 @@ if (defined ( "_SECURITY" )) {
 			?>
 
 <form action="index.php?action=admins" name="userdata_form"
-	method="post" enctype="multipart/form-data">
+	method="post" enctype="multipart/form-data" id="edit_user"
+	autocomplete="off">
 	<?php
 			
 			csrf_token_html ();
@@ -29,10 +30,7 @@ if (defined ( "_SECURITY" )) {
 			echo $row->id;
 			?>"> <strong><?php translate("username");?></strong><br /> <input
 		type="text" name="admin_username"
-		value="<?php
-			
-			echo real_htmlspecialchars ( $row->username );
-			?>"
+		value="<?php echo real_htmlspecialchars($row->username);?>"
 		<?php
 			
 			if (! $acl->hasPermission ( "users" )) {
@@ -64,7 +62,10 @@ if (defined ( "_SECURITY" )) {
 			}
 			
 			?><br /> <br /> <strong><?php translate("new_password");?></strong><br />
-	<input type="text" name="admin_password" value=""> <br />
+	<input type="password" name="admin_password" id="admin_password"
+		value="" autocomplete="off"><br /> <br /> <strong><?php translate("password_repeat");?></strong><br />
+	<input type="password" name="admin_password_repeat"
+		id="admin_password_repeat" value="" autocomplete="off"> <br />
 	<?php
 			$acl = new ACL ();
 			if ($acl->hasPermission ( "users" )) {
@@ -133,9 +134,6 @@ if (defined ( "_SECURITY" )) {
 			translate ( "twitter_profile" );
 			?></strong> <br /> <input type="text" name="twitter"
 		value="<?php echo real_htmlspecialchars($row -> twitter);?>"> <br /> <br />
-	<strong><?php translate("icq");?></strong> <br /> <input type="text"
-		name="icq_id"
-		value="<?php echo real_htmlspecialchars($row -> icq_id);?>"> <br /> <br />
 	<strong><?php translate("skype");?></strong> <br /> <input type="text"
 		name="skype_id"
 		value="<?php echo real_htmlspecialchars($row -> skype_id);?>"> <br />

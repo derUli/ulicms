@@ -1,24 +1,21 @@
 <?php
-if (Settings::get ( "visitors_can_register" ) == "off" or ! Settings::get ( "visitors_can_register" ))
+if (Settings::get ( "visitors_can_register" ) == "off" or ! Settings::get ( "visitors_can_register" )) {
 	die ( get_translation ( "FUNCTION_IS_DISABLED" ) );
+}
 
 $errors = false;
 if (isset ( $_POST ["register_user"] )) {
-	
 	if (empty ( $_POST ["admin_username"] ) or empty ( $_POST ["admin_password"] ) or empty ( $_POST ["admin_firstname"] ) or empty ( $_POST ["admin_lastname"] )) {
 		echo "<p style='color:red;'>" . get_translation ( "FILL_ALL_FIELDS" ) . "</p>";
 	} else if (user_exists ( $_POST ["admin_username"] )) {
 		echo "<p style='color:red;'>" . get_translation ( "USERNAME_ALREADY_EXISTS" ) . "</p>";
 	} else if ($_POST ["admin_password"] != $_POST ["admin_password_repeat"]) {
 		echo "<p style='color:red;'>" . get_translation ( "PASSWORD_REPEAT_IS_WRONG" ) . "</p>";
-	} 
-
-	else {
-		$registered_user_default_level = Settings::get ( "registered_user_default_level" );
-		if ($registered_user_default_level === false) {
-			$registered_user_default_level = 10;
-		}
-		adduser ( $_POST ["admin_username"], $_POST ["admin_lastname"], $_POST ["admin_firstname"], $_POST ["admin_email"], $_POST ["admin_password"], $registered_user_default_level, false );
+	} else {
+		add_hook ( "before_user_registration" );
+		adduser ( $_POST ["admin_username"], $_POST ["admin_lastname"], $_POST ["admin_firstname"], $_POST ["admin_email"], $_POST ["admin_password"], false );
+		add_hook ( "after_user_registration" );
+		
 		echo "<p style='color:green;'>Registrierung erfolgreich!</p>";
 		if (! empty ( $_REQUEST ["go"] )) {
 			$go = htmlspecialchars ( $_REQUEST ["go"] );
@@ -28,7 +25,6 @@ if (isset ( $_POST ["register_user"] )) {
 		echo "<p><a href='$go'>" . get_translation ( "continue_here" ) . "</a></p>";
 	}
 }
-
 ?>
 <?php
 

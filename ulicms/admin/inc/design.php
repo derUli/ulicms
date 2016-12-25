@@ -240,12 +240,6 @@ div#google-fonts {
 		echo " selected";
 	}
 	?>>Kama</option>
-					<option value="office2013"
-						<?php
-	if ($ckeditor_skin === "office2013") {
-		echo " selected";
-	}
-	?>>Office 2013</option>
 			</select></td>
 		</tr>
 		<tr>
@@ -381,7 +375,7 @@ div#google-fonts {
 			<td><input type="checkbox" name="video_width_100_percent"
 				<?php
 	
-	if ($video_width_100_percent){
+	if ($video_width_100_percent) {
 		echo " checked";
 	}
 	?>

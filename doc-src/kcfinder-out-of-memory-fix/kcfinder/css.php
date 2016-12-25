@@ -1,23 +1,23 @@
 <?php
 
 /** This file is part of KCFinder project
-  *
-  *      @desc Base CSS definitions
-  *   @package KCFinder
-  *   @version 2.51
-  *    @author Pavel Tzonkov <pavelc@users.sourceforge.net>
-  * @copyright 2010, 2011 KCFinder Project
-  *   @license http://www.opensource.org/licenses/gpl-2.0.php GPLv2
-  *   @license http://www.opensource.org/licenses/lgpl-2.1.php LGPLv2
-  *      @link http://kcfinder.sunhater.com
-  */
-
+ *
+ *      @desc Base CSS definitions
+ *   @package KCFinder
+ *   @version 2.51
+ *    @author Pavel Tzonkov <pavelc@users.sourceforge.net>
+ * @copyright 2010, 2011 KCFinder Project
+ *   @license http://www.opensource.org/licenses/gpl-2.0.php GPLv2
+ *   @license http://www.opensource.org/licenses/lgpl-2.1.php LGPLv2
+ *      @link http://kcfinder.sunhater.com
+ */
 require "core/autoload.php";
-$mtime = @filemtime(__FILE__);
-if ($mtime) httpCache::checkMTime($mtime);
-$browser = new browser();
+$mtime = @filemtime ( __FILE__ );
+if ($mtime)
+	httpCache::checkMTime ( $mtime );
+$browser = new browser ();
 $config = $browser->config;
-ob_start();
+ob_start ();
 
 ?>
 html, body {
@@ -253,5 +253,5 @@ span.brace.opened, span.brace.closed {
     filter: alpha(opacity:0);
 }
 <?php
-header("Content-Type: text/css");
-echo text::compressCSS(ob_get_clean());
+header ( "Content-Type: text/css" );
+echo text::compressCSS ( ob_get_clean () );

@@ -1,0 +1,337 @@
+﻿===== Neues in UliCMS 2017.1 =====
+
++ Neues Standard-Design theme-2017
++ "Passwort wiederholen" Feld zur Userverwaltung hinzugefügt
++ CKEditor auf Version 4.5.11 geupdatet
++ Schreibzugriff auf Seiten kann nun beschränkt werden
++ Bevorzuge nun curl als Methode um Dateien herunterzuladen
++ Filter custom_post_types hinzugefügt
++ Hook before_custom_data_json hinzugefügt
++ Feld "Übergeordnete Seite" wird nun gefiltert nach Menü und Sprache (Seitenverwaltung)
++ Fast Mode hinzugefügt (Verbesserung der Performance durch Deaktivierung bestimmter Funktionen)
++ Performance verbessert
++ "Nachricht des Tages" nutzt nun den HTML-Editor
++ "admin_permission" Attribut in metadata.json wird nun unterstützt
++ "menus" Attribut in metadata.json von Themes wird nun ausgewertet und die Auswahllisten für Menüs danach gefiltert
++ Übersetzungssystem für JavaScript hinzugefügt
++ Custom Fields
++ Feld "Auszug" verwendet nun den HTML-Editor
++ Alle png-Grafiken optimiert
++ Filter „Typen“ zeigt nur noch tatsächlich verwendete Typen
++ Neue API-Funktionen hinzugefügt
+  = uimport()
+  = SecurityHelper::securePath()
+  = ModuleHelper::buildActionURL()
+  = get_content()
++ Controller, Objects und Helper eines Moduls werden nun automatisch initialisiert,
+sofern in der metadata.json angegeben
++ Backend Actions eines Moduls werden nun automatisch initialisiert, sofern in der metatadata.json angegeben
++ Option "Versteckt" hinzugefügt
++ Inhaltstyp "Knotenpunkt" hinzugefügt
+# Sende Error 403 bei fehlgeschlagenem Login
+# Unique Index zu der Spalte "name" der setttings-Tabelle hinzugefügt
+- Feld für ICQ-UID entfernt
+- PHP Form Builder Class aus dem Core entfernt. Dies soll zukünftig in ein Modul ausgelagert werden.
+- generischer JSON Export entfernt
+- CKEditor Skin office2013 entfernt
+- Mobile_Detect aus dem Core entfernt, die Lib kann hier heruntergeladen werden:
+  http://extend.ulicms.de/mobile_detect.html
+
+Neue Berechtigungen hinzugefügt:
++ pages_create
++ forms_create
++ forms_edit
++ banners_create
++ banners_delete
++ categories_create
++ categories_edit
++ videos_create
++ videos_edit
++ audio_create
++ audio_edit
++ users_create
++ users_edit
++ groups_create
++ groups_edit
++ expert_settings_create
++ expert_settings_edit
+
+Hooks hinzugefügt:
++ before_user_registration
++ after_user_registration
+
+Bugfix:
+# file_get_contents_curl() akzeptiert nun auch HTTP Status 302
+
+===== Neues in UliCMS 9.8.5 =====
+
+Neue Features für Endanwender
++ Neuer Installer
++ update_manager auf Version 1.0.3 aktualisiert
++ Option "Überschrift anzeigen" hinzugefügt
++ Bootstrap CSS 3.3.6 wird nun per Default im Editor integriert
++ Listen unterstützen nun "Pagination"
++ Listen können nun auch nach Typ filtern
++ Inhaltstyp "Artikel" hinzugefügt
++ Neues Paketformat: SimpleInstall v2
++ Feld "Cache Steuerung" hinzugefügt
++ Metadaten für Artikel
+
+Performance
++ Kombinierte Stylesheets werden nun minified
+
+Neue Features für Entwickler
++ Prepared Statements
++ Funktion Database::dropTable() hinzugefügt
++ Funktion Database::dropColumn() hinzugefügt
++ Funktion Database::selectAvg() hinzugefügt
++ Funktion Database::selectMin() hinzugefügt
++ Funktion Database::selectMax() hinzugefügt
++ Funktion Database::deleteFrom() hinzugefügt
++ Funktion Database::truncateTable() hinzugefügt
++ Funktion Database::selectAll()  hinzugefügt
++ Funktionen Template::headline() und Template::getHeadline() hinzugefügt
++ Funktion str_replace_first() hinzugefügt
++ Funktion str_replace_nth() hinzugefügt
++ Funktion mb_str_split() hinzugefügt
++ modul_main und modul_admin Dateien müssen nun nicht mehr mit dem Namen des Moduls geprefixt werden
++ Attribute "embed" (Boolean) und "custom_acl" (Array of String) werden nun aus der metadata.json ausgelesen und ausgewertet
++ Filter für get_type() hinzugefügt
++ Templates je Inhaltstyp
+
+Änderungen
+# Dashboard nun mit mehr Ajax
+# Haupt-Templates eines Designs können nun auch "top.php" und "bottom.php" heißen
+
+Entfernte Features
+- Funktion Database::preparedQuery() entfernt, stattdessen Database::pQuery() verwenden
+
+
+===== Neues in UliCMS 9.8.4 =====
+
+Neue Features
++ Inhaltstyp "Liste" hinzugefügt
++ Inhaltstyp "Link" hinzugefügt
++ Inhaltstyp "Bild" hinzugefügt
++ Inhaltstyp "Modul" hinzugefügt
++ Inhaltstyp "Audio" hinzugefügt
++ Inhaltstyp "Video" hinzugefügt
++ Tab "Position der Beschreibung" hinzugefügt
++ Klasse ModuleHelper hinzugefügt
++ post-install Scripts können nun auch manuell ausgeführt werden
++ Rudimentäre Freigabe-Workflows sind nun möglich
++ Eigentümer einer Seite kann nun geändert werden
++ Bei der Installation können nun zusätzliche Demodaten installiert werden
++ Es wird nun auch ein "lang" Ordner als Speicherort für Lokalisierungen von Modulen
+unterstützt
++ Module update_manager und update_managerd_dashboard vorinstalliert (bei in Version 1.0.0)
++ Filter und Hooks können nun auch in einem Unterordner untergebracht werden
+
+
+Änderungen
+# Feld "Position" ist jetzt ein HTML5 Number Feld
+# Berfreundlichkeit des Installationsassistenten verbessert
+
+Entfernte Features
+- Templates können nicht mehr online im Browser bearbeitet werden
+
+
+===== Neues in UliCMS 9.8.3 =====
+
+Neue Features
++ Klasse Banner hinzugefügt
++ Klasse Banners hinzugefügt
++ Shellscript sremove.php hinzugefügt
++ Shellscript sinfo.php hinzugefügt
++ Shellscript version.php hinzugefügt
++ Funktion containsModule() zur Klasse Page hinzugefügt
++ GetAllX() und FilterByX() Funktionen zur Klasse ContentFactory hinzugefügt
++ Klasse Request hinzugefügt
++ Funktionen zur Template Klasse hinzugefügt
++ Updated CKEditor (Version 4.5.7)
++ Updated Mobile_Detect (Version 2.8.22)
++ Neue Hooks hinzugefügt
++ Funktion removeDir() zur Klasse Path hinzugefügt
++ Klasse Cache hinzugefügt
+
+Bugfixes
+# ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
+
+Entfernte Features
+- cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016
+
+
+===== Neues in UliCMS 9.8.2 =====
+
++ Klasse "File" hinzugefügt
++ Klasse "Path" hinzugefügt
++ Funktion Template::escape($value) hinzugefügt
++ Funktion Template::getEscape($value) hinzugefügt
++ Funktion Template::getHomepageOwner() hinzugefügt
++ Funktion Template::homepageOwner() hinzugefügt
++ Funktion Template::poweredByUliCMS() hinzugefügt
++ Skript "shell/sinstall.php" hinzugefügt
++ Seite hinzufügen & Seite bearbeiten nun übersichtlicher Dank Tabs
++ Mobile_Detect auf Version 2.8.19 aktualisiert
++ CKEditor auf Version 4.5.6 aktualisiert
++ "Passwort zurücksetzen" Passwortlänge auf 12 Zeichen erhöht
++ Hooks "before_edit_button" und "after_edit_button" hinzugefügt
++ Hook "after_content" verschoben
++ Tab "Typ" zu Seitenverwaltung hinzugefügt
++ API Funktion is_tablet() hinzugefügt
++ Umschalter "Passwort anzeigen" zum Installationsprogramm hinzugefügt
++ Twitter-Profil kann nun im User hinterlegt werden
++ Homepage URL kann nun im User hinterlegt werden.
++ XSS Sicherheitslücke im Bannersystem korrigiert
++ Mailer Klasse hinzugefügt
++ Database Klasse hinzugefügt
++ CustomData Klasse hinzugefügt
++ Translation Overrides (Übersetzungen update-sicher anpassen)
++ Seiten können nun geklont werden
+
+
+===== Neues in UliCMS 9.8.1 =====
+
++ Option "Design für Mobilgeräte nicht auf Tablets verwenden" hinzugefügt
++ CKEditor auf Version 4.5.5 aktualisiert
++ Parameter $order zu den Funktionen menu() und get_menu() hinzugefügt
++ Die Paketverwaltung überprüft nun die Paketquelle auf Aktualisierungen.
+  Die Farbe der Versionsnummer wird dementsprechend angezeigt:
+
+    grün = Paket aktuell, neueste Version des Pakets ist installiert
+    rot = Paket ist veraltet, neuere Version des Paketes ist verfügbar
+    schwarz = Überprüfung kann nicht durchgeführt werden
+
+  Die Installation von verfügaren Aktualisierungen muss jedoch manuell durchgeführt werden,
+  da nur geprüft wird.
++ API-Funktion get_files() hinzugefügt
++ Es kann nun eine Willkommensbotschaft für das Loginformular festgelegt werden
++ API-Funktion initconfig() hinzugefügt
++ Neues Standard-Design "2016".
++ Settings Klasse hinzugefügt
++ Template Klasse hinzugefügt
++ Encryption Klasse hinzugefügt
++ unique_identifier_filter hinzugefügt
+
+
+===== Neues in UliCMS 9.8.0 ====
+
++ CKEditor auf Version 4.5.3 aktualisiert (Behebt Kompatiblitätsprobleme mit Microsofts neuem Edge Webbrowser)
++ Auswahl für Schriftart und Schriftgröße im CKEditor entfernt
++ Folgende Plugins in den CKEditor integriert
+  - Auto Embed
+  - CodeMirror
+  - Media Embed
+  - Word Count & Char Count Plugin
++ Skin "Office 2013" für CKEditor hinzugefügt
++ Option "IP-Adressen nach 48 Stunden löschen" hinzugefügt
++ Shell-Script delete_log_ips.php hinzugefügt
++ jQuery auf Version 1.11.3 aktualisiert
++ Referrer Spalte zu Protokoll hinzugefügt
++ Module können nun Metadaten haben (metadata.json)
++ Versionsnummern von Modulen und Designs können nun angezeigt werden
++ Mobile_Detect Klasse auf Version 2.8.17 aktualisiert
++ Bugfix: Werte in der Spalte "Menü" in der Seitenliste werden nun übersetzt
++ IP Whitelist hinzugefügt. In der Datei cms-config.php kann nun ein Array mit IP-Adressen als Variable ip_whitelist definiert werden.
+  Sofern dieser Wert gesetzt ist, wird der Zugriff zum UliCMS Backend auf bestimmte
+  IP-Adressen beschränkt. Die Nutzung dieser Option wird nur bei Internet-Zugängen mit einer
+  statischen IP empfohlen, wie dies z.B. in Firmennetzwerken oft der Fall ist.
++ Checkboxes und Radiobuttons für mobile Geräte optimiert
++ CSS-Klasse für Page-ID zu Menülinks hinzugefügt
++ Löschen von Seiten nun per AJAX möglich
++ Löschen von Bannern nun per AJAX möglich
++ Löschen von Kategorien nun per AJAX möglich
++ Löschen von Benutzern nun per AJAX möglich
++ Löschen von Gruppen nun per AJAX möglich
++ Löschen von Audio Dateien nun per AJAX möglich
++ Löschen von Videos nun per AJAX möglich
++ Löschen von Modulen nun per AJAX möglich
++ Löschen von Themes nun per AJAX möglich
++ Löschen von Einstellungen im Expertenmodus nun per AJAX möglich
++ Löschen von Sprachen nun per AJAX möglich
++ Bugfix: Berechtigung "remove_packages"  wird nun korrekt ausgewertet
++ API-Funktion is_ajax_request() hinzugefügt
++ Filter für Seitentitel wieder hinzugefügt
++ page-id CSS Klasse zum Body hinzugefügt
++ title_tag Filter hinzugefügt
++ Es können nun Open Graph Meta-Tags festgelegt werden.
++ Bugfix: API-Funktion all_combined_html() korrigiert. Der Aufruf dieser Methode führte zuvor zu einer Endlosschleife
++ Liste der bereits installierten Patches zur Paketverwaltung hinzugefügt
++ Favicon Generator akzeptiert nun auch andere Formate als .ico. Die Grafikdatei wird automatisch in das Favicon Format konvertiert
++ "modules" und "templates" Ordner nach "content" verschoben
++ Mobile CSS nun auch per Browser bearbeitbar
++ Individuelle Kontaktformulare können nun erstellt werden
++ Many Smartphones make phone numbers auto clickable. This is now disabled by default.
++ tel Tags are now supported. example: [tel]+49123456789[/tel]
++ skype Tags are now supported. example: [skype]MySkypeName[/skype]
++ Copyright-Jahr von UliCMS nun an zentraler Stelle
++ Bugfix: Beim Loginformular wurde immer die Sprachdatei der Standardsprache geladen.
+Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird definiert ist geladen.
++ Patches können nun auch als Datei hochgeladen werden.
++ shortlink und canonical Meta-Tags zum System hinzugefügt
++ mPDF Framework entfernt. Dieses wird zur Ausgabe von Inhalten im PDF Format benötigt und wurde entfernt, um Speicherplatz zu sparen.
+  Es kann jedoch nachträglich als Ergänzung auf www.ulicms.de heruntergeladen und installiert werden.
++ Optionale 2-Faktor Authentifizerung per Google Authenticator
++ Benutzer-Accounts können nun gesperrt werden
++ Experteneinstellungen nun per TableSorter sortierbar
++ "shake" Animation wenn Anmeldung fehlgeschlagen
++ "Sprachen" Tabelle ist nun sortiert
++ Im "Menü" Filter werden nur noch tatsächlich genutzte Menüs angezeigt
++ Google Fonts nun auswählbar
++ Beim Loginformular kann man das Passwort bei Klick auf eine Checkbox im Klartext anzeigen lassen
++ API-Funktion get_prefered_language(array $available_languages, $http_accept_language) hinzugefügt
++ Letzte Anmeldung wird nun in Datenbank gespeichert und in Benutzerinformationen angezeigt
++ core.css minified
++ jQuery wird im Frontend nun von CDN auf code.jquery.com eingebunden.
++ Konfigurations-Direktive disable_auto_include_jquery hinzugefügt
++ Settings die aus der Datenbank abgefragt werden, werden gecacht
++ Übersetzung "Permalink" in "Name für URL geändert"
++ Es ist nun möglich, die maximale Anzahl der fehlgeschlagenen Anmeldeversuche zu beschränken.
+  Wenn dies überschritten wird, wird der Account gesperrt
++ API-Funktionen get_format() und set_format() hinzugefügt
++ API-Funktion buildSEOURL() um Parameter $format erweitert. $format ist per default = "html"
++ is_mobile_filter hinzugefügt
++ Konstante UPDATE_CHECK_URL kann nun überschrieben werden
++ Konstante PATCH_CHECK_URL kann nun überschrieben werden
++ Accordion Layouts werden nun an die Fenstergröße angepasst, wenn man das Browserfenster skaliert
+
+
+==== Neues in UliCMS 9.0.1 Refresh 2 =====
+
++ CKEditor 4.5.9
++ Mobile_Detect 2.8.22
++ Alle bisher erschienen Sicherheits-Updates und Patches für UliCMS 9.0 sind bereits enthalten
+
+===== Neues in UliCMS 9.0.1 Refresh 1 ====
+
++ mPDF Framework aus dem Core entfernt, um Speicherplatz zu sparen. Sofern PDF Unterstützung benötigt wird, kann mPDF unter der folgenden URL seperat heruntergeladen werden:
+  http://www.ulicms.de/mpdf_supplement.html
++ CKEditor 4.5.3 Supplement bereits integriert
++ Alle Patches die bisher für die Version 9.0.1 erschienen sind.
+
+===== Neues in UliCMS 9.0.1 ====
+
++ E-Mails, die über die ulicms_mail() Funktion versendet wurden, werden nun auch in der Datenbank gespeichert
++ API Funktion get_lang_config() hinzugefügt
++ UliCMS Konfigurationseinstellungen können per Umgebungsvariablen overridet werden.
+  Man kann z.B. folgendes in die .htaccess Datei schreiben, um den Homepage Titel zu overriden.
+  SetEnv ulicms_homepage_title "Hallo Welt"
++ Variable "admin_logo" kann nun gesetzt werden, um eine URL zu einem eigenen Admin-Logo anzugeben.
+  Es wird im UliCMS Backend statt des UliCMS Logos angezeigt
++ custom_font_sizes Hook hinzugefügt
++ Legacy Kommentarsystem (Facebook / Disqus) entfernt, da veraltet und nicht mehr genutzt
++ Favicons können nun hochgeladen werden, sofern man die entsprechenden Berechtigungen unter "Design" hat.
++ Versionierung von Seiteninhalten
++ Mehrere Stylesheets und Scripts im Backend zu einer Datei zusammengefasst, um die Performance zu verbessern
++ Zusätzliche Nutzung von Browser-seitigen Caching bei aktiviertem Cache
++ Es wird nun das minified jQuery eingebunden
++ Diverse weitere Performance Optimierungen
++ "Bearbeiten" Link wird nun unter dem Content angezeigt, wenn der User das Recht auf "pages" hat.
++ UliCMS übermittelt nun User-Agent bei Laden von Daten von externen Servern (Paketquelle, News, Update Manager)
++ Das Anti CSRF Token des pfbc_sample fehlte. Dies wurde korrigiert.
++ Der Zugriff auf eine Seite lässt sich nun auf Arbeitsplatz Rechner oder mobile Geräte beschränken. Wenn das ausgewählt wird, muss außerdem noch eine andere Gruppe ausgewählt werden (z.B. "Jeder", oder "Registrierte Benutzer"), da diese Zugriffsbeschränkung nur ergänzend gilt.
++ Der Dateimanager verwendete als Sprache immer "de". Nun verwendet er ja nach bei der Anmeldung ausgewählter Sprache entweder Deutsch oder Englisch.
++ Filter für "Titel" hinzugefügt
++ Ein Fehler in der deutschen Sprachdatei der dazu führte, dass stattdessen die englischen Sprachdateien von Modulen geladen werden wurde korrigiert
++ Nutzung von HSTS bei SSL-verschlüsselten Verbindungen
+Details siehe http://www.phpgangsta.de/hsts-http-strict-transport-security-hasts-schon

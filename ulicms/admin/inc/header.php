@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-<?php include "inc/ulicms-head.php";?>
+<?php include "inc/ulicms_head.php";?>
 
 <body>
 	<div id="root-container">

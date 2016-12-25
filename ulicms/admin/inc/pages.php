@@ -4,16 +4,17 @@ if (defined ( "_SECURITY" )) {
 	
 	if ($acl->hasPermission ( "pages" )) {
 		?>
-<h2>
-<?php translate("pages");?>
-</h2>
-<p>
-<?php translate ( "pages_infotext" );?>
-</p>
+<h2><?php translate("pages");?></h2>
+<p><?php translate ( "pages_infotext" );?></p>
+<?php
+		
+		if ($acl->hasPermission ( "pages_create" )) {
+			?>
 <p>
 	<a href="index.php?action=pages_new"><?php translate("create_page");?>
 	</a>
 </p>
+<?php } ?>
 
 <script type="text/javascript">
 function filter_by_language(element){
@@ -204,7 +205,7 @@ $(window).load(function(){
 	</select>
 
 <?php translate("type")?>
-<?php $types = get_available_post_types();?>
+<?php $types = get_used_post_types();?>
 <select name="filter_type" onchange="filter_by_type(this);">
 	<option value="null"
 		<?php
@@ -397,8 +398,13 @@ $(window).load(function(){
 			</th>
 			<td style="text-align: center"><?php translate("view");?>
 			</td>
+			<?php
+		
+		if ($acl->hasPermission ( "pages_create" )) {
+			?>
 			<td style="text-align: center"><?php translate ( "clone" );?>
 			</td>
+			<?php }?>
 			<td style="text-align: center"><?php translate("edit");?>
 			</td>
 			<td style="text-align: center"><?php translate("delete");?>
@@ -510,20 +516,37 @@ $(window).load(function(){
 					}
 					echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation ( "view" ) . "\" title=\"" . get_translation ( "view" ) . "\"></a></td>";
 				}
-				echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation ( "clone" ) . "\" title=\"" . get_translation ( "clone" ) . "\"></a></td>";
-				
+				if ($acl->hasPermission ( "pages_create" )) {
+					echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation ( "clone" ) . "\" title=\"" . get_translation ( "clone" ) . "\"></a></td>";
+				}
 				$autor = $row->autor;
 				$is_owner = $autor == get_user_id ();
 				
 				$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
 				$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
 				
+				$owner_data = getUserById ( $autor );
+				$owner_group = $owner_data ["group_id"];
+				$current_group = $_SESSION ["group_id"];
+				
 				$can_edit_this = false;
 				
-				if ($is_owner and $pages_edit_own) {
-					$can_edit_this = true;
-				} else if (! $is_owner and $pages_edit_others) {
-					$can_edit_this = true;
+				if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit or $row->only_others_can_edit) {
+					if ($row->only_group_can_edit and $owner_group == $current_group) {
+						$can_edit_this = true;
+					} else if ($row->only_admins_can_edit and is_admin ()) {
+						$can_edit_this = true;
+					} else if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
+						$can_edit_this = true;
+					} else if ($row->only_others_can_edit and $owner_group != $current_group and ! is_admin () and ! $is_owner) {
+						$can_edit_this = true;
+					}
+				} else {
+					if (! $is_owner and $pages_edit_others) {
+						$can_edit_this = true;
+					} else if ($is_owner and $pages_edit_own) {
+						$can_edit_this = true;
+					}
 				}
 				
 				if (! $can_edit_this) {

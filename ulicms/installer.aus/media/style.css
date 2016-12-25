@@ -54,3 +54,7 @@ select {
 	display: none;
 	margin-top:20px;
 }
+
+img{
+   max-width:100%;
+}

@@ -1,7 +1,7 @@
 <?php
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
-	if ($acl->hasPermission ( "banners" )) {
+	if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_create" )) {
 		?>
 
 <form action="index.php?action=banner" method="post">

@@ -8,8 +8,8 @@ function package_source_version_list() {
 		return "404";
 	}
 	$files = scandir ( PACKAGE_SOURCE_BASE_PATH . "/" );
-	usort($files, "version_compare");
-
+	usort ( $files, "version_compare" );
+	
 	for($i = 0; $i < count ( $files ); $i ++) {
 		$file = $files [$i];
 		$fullpath = PACKAGE_SOURCE_BASE_PATH . "/" . $file;

@@ -7,9 +7,10 @@
 if (! defined ( "ULICMS_ROOT" )) {
 	define ( "ULICMS_ROOT", dirname ( __file__ ) );
 }
-
-// Initialize Settings Cache
-$GLOBALS ['settings_cache'] = array ();
+function uimport($class) {
+	$path = str_replace ( "\\", "/", ULICMS_ROOT ) . "/" . $class . ".php";
+	return include_once $path;
+}
 
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if (ini_get ( 'register_globals' ) === '1') {
@@ -46,17 +47,18 @@ if (! defined ( "ULICMS_CACHE" )) {
 if (! file_existS ( ULICMS_CACHE )) {
 	mkdir ( ULICMS_CACHE );
 }
-
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "base_config.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "request.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "users_api.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "network.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "settings.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "base_config.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "request.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "antispam-features.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "categories.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "package_manager.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "acl.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "sin_package_installer.php";
-
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "categories.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "pkg" . DIRECTORY_SEPERATOR . "package_manager.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "security" . DIRECTORY_SEPERATOR . "acl.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "pkg" . DIRECTORY_SEPERATOR . "sin_package_installer.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "logger.php";
-
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "html_helper.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "security_helper.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "number_format_helper.php";
@@ -66,14 +68,11 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "module_helper.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "import_helper.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "export_helper.php";
-
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "NotImplementedException.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "exceptions" . DIRECTORY_SEPERATOR . "NotImplementedException.php";
 
 $mobile_detect_as_module = dirname ( __file__ ) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
 if (file_exists ( $mobile_detect_as_module )) {
 	include_once $mobile_detect_as_module;
-} else {
-	include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "Mobile_Detect.php";
 }
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "version.php";
@@ -89,10 +88,10 @@ set_exception_handler ( 'exception_handler' );
 // Workaround für Magic Quotes und Register Globals
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "workaround.php";
 
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "pdf_creator.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "csv_creator.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "json_creator.php";
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "plaintext_creator.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "pdf_creator.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "csv_creator.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "json_creator.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "plaintext_creator.php";
 
 // if config exists require_config else redirect to installer
 $path_to_config = dirname ( __file__ ) . DIRECTORY_SEPERATOR . "cms-config.php";
@@ -106,7 +105,7 @@ if (file_exists ( $path_to_config )) {
 	throw new Exception ( "Can't include cms-config.php. Starting installer failed, too." );
 }
 
-global $connection, $config;
+global $config;
 $config = new config ();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
@@ -132,13 +131,25 @@ if (isset ( $config->umask )) {
 if (isset ( $config->memory_limit )) {
 	@ini_set ( "memory_limit", $config->memory_limit );
 }
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "helper.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "spellchecker.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "registry" . DIRECTORY_SEPERATOR . "helper_registry.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "controller.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "registry" . DIRECTORY_SEPERATOR . "controller_registry.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "registry" . DIRECTORY_SEPERATOR . "action_registry.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "registry" . DIRECTORY_SEPERATOR . "object_registry.php";
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "db_functions.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "files.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "mailer.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "file_get_contents_wrapper.php";
 require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "api.php";
+require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "translation.php";
+require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "html5_media.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "database.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "settings.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "flags.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "settings_cache.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "template.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "encryption.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "file.php";
@@ -146,11 +157,13 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "mailer.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "custom_data.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "translation.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "js_translation.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "cache.php";
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "content.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "page.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "link.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "node.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "list_data.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "list.php";
 
@@ -164,6 +177,8 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "content_factory.php";
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "groups" . DIRECTORY_SEPERATOR . "group.php";
+
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "custom_fields.php";
 
 Translation::init ();
 
@@ -206,7 +221,7 @@ function is_in_include_path($find) {
 	}
 }
 
-global $connection, $config;
+global $config;
 $config = new config ();
 
 if ($config->db_server == "" or $config->db_user == "") {
@@ -217,60 +232,21 @@ if ($config->db_server == "" or $config->db_user == "") {
 @$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password );
 
 if ($connection === false) {
-	throw new Exception ( "Fehler: Die Verbindung zum Datenbank Server konnte nicht hergestellt werden." );
+	throw new Exception ( "<h1>Can't connect to Database.</h1>" );
 }
 
 $path_to_installer = dirname ( __file__ ) . DIRECTORY_SEPERATOR . "installer" . DIRECTORY_SEPERATOR . "installer.php";
 
-if (file_exists ( $path_to_installer )) {
-	header ( "Content-Type: text/html; charset=utf-8" );
-	throw new Exception ( "<p>Bitte löschen Sie den Ordner \"installer\" vom Server.<br/>
-     Das CMS kann erst betrieben werden, nach dem der Installer gelöscht wurde.
-     Dies ist ein Sicherheitsmerkmal von UliCMS.</p>" );
-	exit ();
-}
-
 $select = Database::select ( $config->db_database );
 
 if (! $select) {
-	throw new Exception ( "Fehler: Die Datenbank " . $config->db_database . " existiert nicht.\n" );
+	throw new Exception ( "<h1>Database " . $config->db_database . " doesn't exist.</h1>" );
 }
-
-$existing_tables = array ();
-if (! defined ( "SKIP_TABLE_CHECK" )) {
-	$existing_tables = Database::getAllTables ();
-	$required_tables = array (
-			tbname ( "users" ),
-			tbname ( "banner" ),
-			tbname ( "categories" ),
-			tbname ( "content" ),
-			tbname ( "groups" ),
-			tbname ( "installed_patches" ),
-			tbname ( "videos" ),
-			tbname ( "audio" ),
-			tbname ( "languages" ),
-			tbname ( "log" ),
-			tbname ( "mails" ),
-			tbname ( "history" ),
-			tbname ( "settings" ),
-			tbname ( "forms" ),
-			tbname ( "lists" ) 
-	);
-	
-	for($i = 0; $i < count ( $required_tables ); $i ++) {
-		$table = $required_tables [$i];
-		if (! in_array ( $table, $existing_tables )) {
-			if (! headers_sent ()) {
-				header ( "Content-Type: text/html; charset=UTF-8" );
-			}
-			
-			throw new Exception ( "Fehler: Die vom System benötigte Tabelle '$table' ist nicht in der Datenbank vorhanden.<br/>Bitte prüfen Sie die Installation!" );
-			exit ();
-		}
-	}
+if (isFastMode ()) {
+	$useragent = null;
+} else {
+	$useragent = Settings::get ( "useragent" );
 }
-
-$useragent = Settings::get ( "useragent" );
 if ($useragent) {
 	define ( "ULICMS_USERAGENT", $useragent );
 } else {
@@ -283,13 +259,14 @@ if (! Settings::get ( "hide_meta_generator" )) {
 	@header ( 'X-Powered-By: UliCMS Release ' . cms_version () );
 }
 
-$memory_limit = Settings::get ( "memory_limit" );
-
-if ($memory_limit !== false) {
-	@ini_set ( 'memory_limit', $memory_limit );
+if (! isFastMode ()) {
+	$memory_limit = Settings::get ( "memory_limit" );
+	
+	if ($memory_limit !== false) {
+		@ini_set ( 'memory_limit', $memory_limit );
+	}
 }
-
-if (in_array ( tbname ( "log" ), $existing_tables )) {
+if (! isFastMode ()) {
 	$log_ip = Settings::get ( "log_ip" );
 	log_request ( $log_ip );
 }
@@ -305,33 +282,6 @@ if ($cache_period === false) {
 	define ( "CACHE_PERIOD", $cache_period );
 }
 
-// check four allowed_html config var
-// if not exists create with default value
-if (! Settings::get ( "allowed_html" )) {
-	setconfig ( "allowed_html", "<i><u><b><strong><em><ul><li><ol><a><span>" );
-}
-
-// generate Secret for Google Authenticator if not already done
-$ga_secret = Settings::get ( "ga_secret" );
-if (! $ga_secret) {
-	require_once ULICMS_ROOT . "/classes/GoogleAuthenticator.php";
-	$ga = new PHPGangsta_GoogleAuthenticator ();
-	$ga_secret = $ga->createSecret ();
-	setconfig ( "ga_secret", Database::escapeValue ( $ga_secret ) );
-}
-
-// Falls nicht gesetzt, robots auf Standardwert setzen
-if (! Settings::get ( "robots" )) {
-	setconfig ( "robots", "index,follow" );
-}
-
-// Prüfen ob Zeitzone gesetzt ist
-$timezone = Settings::get ( "timezone" );
-
-// Wenn nicht, Zeitzone auf Standardwert setzen
-if (! $timezone) {
-	setconfig ( "timezone", "Europe/Berlin" );
-}
 date_default_timezone_set ( Settings::get ( "timezone" ) );
 
 if (isset ( $_GET ["output_scripts"] )) {
@@ -347,11 +297,7 @@ if ($locale) {
 	@call_user_func_array ( "setlocale", $locale );
 }
 
-if (! Settings::get ( "session_timeout" )) {
-	setconfig ( "session_timeout", 60 );
-}
-
-$session_timeout = 60 * Settings::get ( "session_timeout" );
+$session_timeout = 60 * intval ( Settings::get ( "session_timeout" ) );
 
 // Session abgelaufen
 if (isset ( $_SESSION ["session_begin"] )) {
@@ -371,53 +317,29 @@ if (! is_ssl () and $enforce_https !== false) {
 	exit ();
 }
 
-if (! Settings::get ( "disable_hsts" ) and is_ssl ()) {
-	$maxage = Settings::get ( "hsts_maxage" );
-	if ($maxage === false) {
-		$maxage = 10 * 30;
-	}
-	
-	$maxage = intval ( $maxage );
-	
-	$includeSubDomains = Settings::get ( "hsts_include_subdomains" );
-	if (! $includeSubDomains) {
-		$includeSubDomains = "";
-	}
-	$str = "Strict-Transport-Security: max-age=" . $maxage;
-	if (! empty ( $includeSubDomains )) {
-		$str .= "; " . $includeSubDomains;
-	}
-	
-	$str = trim ( $str );
-	header ( $str );
-}
+ControllerRegistry::loadModuleControllers ();
 
 add_hook ( "before_init" );
 add_hook ( "init" );
 add_hook ( "after_init" );
 
-$version = new ulicms_version ();
+ObjectRegistry::loadModuleObjects ();
 
+$version = new ulicms_version ();
 if (! defined ( "UPDATE_CHECK_URL" )) {
 	define ( "UPDATE_CHECK_URL", "http://update.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&update=" . urlencode ( $version->getUpdate () ) );
 }
 
-if (in_array ( tbname ( "installed_patches" ), $existing_tables )) {
-	$pkg = new PackageManager ();
-	$installed_patches = $pkg->getInstalledPatchNames ();
-	$installed_patches = implode ( ";", $installed_patches );
-} else {
-	$installed_patches = "";
-}
+$pkg = new PackageManager ();
+$installed_patches = $pkg->getInstalledPatchNames ();
+$installed_patches = implode ( ";", $installed_patches );
 
 if (! defined ( "PATCH_CHECK_URL" )) {
 	define ( "PATCH_CHECK_URL", "http://patches.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&installed_patches=" . urlencode ( $installed_patches ) );
 }
 
 if (! Settings::get ( "session_name" )) {
-	setconfig ( "session_name", uniqid () . "_SESSION" );
+	Settings::set ( "session_name", uniqid () . "_SESSION" );
 }
 
 session_name ( Settings::get ( "session_name" ) );
-
-@include_once "lib/string_functions.php";

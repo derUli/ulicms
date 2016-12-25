@@ -28,9 +28,7 @@ class ImportHelper {
 			} else {
 				$id = 0;
 			}
-			
 			$query = db_query ( "SELECT * FROM " . $target . " WHERE id=" . $id );
-			
 			foreach ( $ds as $key => $value ) {
 				if (db_num_rows ( $query ) > 0) {
 					if ($key != "id" and $id > 0 and $doUpdate) {
@@ -44,7 +42,6 @@ class ImportHelper {
 					$insert = true;
 				}
 			}
-			
 			if ($insert and count ( $fields ) > 0 and count ( $values ) > 0) {
 				$sql = "INSERT INTO " . $target . " (" . join ( ",", $fields ) . ") VALUES (";
 				for($m = 0; $m < count ( $values ); $m ++) {
@@ -61,4 +58,3 @@ class ImportHelper {
 		}
 	}
 }
-

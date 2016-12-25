@@ -50,13 +50,16 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			echo getModuleName ( $modules [$i] );
 			$version = getModuleMeta ( $modules [$i], "version" );
+			$source = getModuleMeta ( $modules [$i], "source" );
 			$color = null;
 			
 			if ($version != null) {
-				
-				$status = $pkg->checkForNewerVersionOfPackage ( $modules [$i] );
-				
-				if ($status) {
+				if ($source != "extend") {
+					$status = $pkg->checkForNewerVersionOfPackage ( $modules [$i] );
+				}
+				if ($source == "extend") {
+					$color = "blue";
+				} else if ($status) {
 					if (version_compare ( $status, $version, '>' )) {
 						$color = "red";
 					} else {
@@ -134,13 +137,16 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			echo $themes [$i];
 			
 			$version = getThemeMeta ( $themes [$i], "version" );
+			$source = getThemeMeta ( $themes [$i], "source" );
 			$color = null;
 			
 			if ($version != null) {
-				
-				$status = $pkg->checkForNewerVersionOfPackage ( "theme-" . $themes [$i] );
-				
-				if ($status) {
+				if ($source != "extend") {
+					$status = $pkg->checkForNewerVersionOfPackage ( "theme-" . $themes [$i] );
+				}
+				if ($source == "extend") {
+					$color = "blue";
+				} else if ($status) {
 					if (version_compare ( $status, $version, '>' )) {
 						$color = "red";
 					} else {

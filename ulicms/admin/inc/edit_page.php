@@ -23,13 +23,18 @@ if (defined ( "_SECURITY" )) {
 		
 		$types = get_available_post_types ();
 		
+		$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
+		$pages_activate_others = $acl->hasPermission ( "pages_activate_others" );
+		
+		$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
+		$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
+		
 		while ( $row = db_fetch_object ( $query ) ) {
 			$list_data = new List_Data ( $row->id );
 			
 			$autor = $row->autor;
+			
 			$is_owner = $autor == get_user_id ();
-			$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
-			$pages_activate_others = $acl->hasPermission ( "pages_activate_others" );
 			
 			$can_active_this = false;
 			
@@ -39,15 +44,28 @@ if (defined ( "_SECURITY" )) {
 				$can_active_this = true;
 			}
 			
-			$pages_edit_own = $acl->hasPermission ( "pages_edit_own" );
-			$pages_edit_others = $acl->hasPermission ( "pages_edit_others" );
+			$owner_data = getUserById ( $autor );
+			$owner_group = $owner_data ["group_id"];
+			$current_group = $_SESSION ["group_id"];
 			
 			$can_edit_this = false;
 			
-			if ($is_owner and $pages_edit_own) {
-				$can_edit_this = true;
-			} else if (! $is_owner and $pages_edit_others) {
-				$can_edit_this = true;
+			if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit or $row->only_others_can_edit) {
+				if ($row->only_group_can_edit and $owner_group == $current_group) {
+					$can_edit_this = true;
+				} else if ($row->only_admins_can_edit and is_admin ()) {
+					$can_edit_this = true;
+				} else if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
+					$can_edit_this = true;
+				} else if ($row->only_others_can_edit and $owner_group != $current_group and ! is_admin () and ! $is_owner) {
+					$can_edit_this = true;
+				}
+			} else {
+				if (! $is_owner and $pages_edit_others) {
+					$can_edit_this = true;
+				} else if ($is_owner and $pages_edit_own) {
+					$can_edit_this = true;
+				}
 			}
 			
 			if (! $can_edit_this) {
@@ -126,10 +144,7 @@ if (defined ( "_SECURITY" )) {
 				
 				$pages = getAllPages ( $page_language, "title", false );
 				?>
-	</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
-	<?php echo categories::getHTMLSelect ( $row->category );?>
-
-	<br /> <br /> <strong><?php translate("menu");?> </strong> <span
+	</select> <br /> <br /> <strong><?php translate("menu");?> </strong> <span
 				style="cursor: help;" onclick="$('div#menu_help').slideToggle()">[?]</span><br />
 			<select name="menu" size=1>
 		<?php
@@ -229,7 +244,19 @@ if (defined ( "_SECURITY" )) {
 				?>>
 		<?php translate("disabled");?>
 		</option>
-			</select>
+			</select> <br /> <br />
+			 <strong><?php translate("hidden");?>
+	</strong><br /> <select name="hidden" size="1"><option value="1" <?php if($row->hidden == 1) echo "selected";?>>
+		<?php translate("yes");?>
+		</option>
+				<option value="0" <?php if($row->hidden == 0) echo "selected";?>>
+		<?php translate("no");?>
+		</option>
+			</select> <br /> <br />
+			
+			 <strong><?php translate("category");?> </strong><br />
+	<?php echo categories::getHTMLSelect ( $row->category );?>
+			
 		</div>
 		<div id="tab-link">
 			<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
@@ -376,9 +403,36 @@ function openMenuImageSelectWindow(field) {
 				}
 				?>"
 						step=any> <br /> <br /> <strong><?php translate("excerpt");?></strong>
-					<textarea name="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt);?></textarea>
+					<textarea name="excerpt" id="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt);?></textarea>
 				</div>
 			</div>
+		</div>
+
+
+		<div id="custom_fields_container">
+		<?php
+				foreach ( $types as $type ) {
+					$fields = getFieldsForCustomType ( $type );
+					if (count ( $fields ) > 0) {
+						?>
+		<div class="custom-field-tab" data-type="<?php echo $type;?>">
+				<h2 class="accordion-header"><?php translate($type);?></h2>
+
+				<div class="accordion-content">
+		<?php foreach($fields as $field){?>
+		<p>
+						<strong><?php translate($field);?></strong> <br /> <input
+							type="text"
+							name="cf_<?php echo Template::escape($type);?>_<?php echo Template::escape($field);?>"
+							value="<?php
+							echo Template::escape ( CustomFields::get ( $field, $row->id ) )?>">
+					</p>					
+		<?php }?>
+		</div>
+			</div>
+		<?php }?>
+		
+		<?php }?>
 		</div>
 
 		<h2 class="accordion-header"><?php translate("open_in");?></h2>
@@ -759,7 +813,7 @@ function openArticleImageSelectWindow(field) {
 			</div>
 		</div>
 
-		<h2 class="accordion-header"><?php translate("owner");?></h2>
+		<h2 class="accordion-header"><?php translate("permissions");?></h2>
 
 		<div class="accordion-content">
 			<strong><?php translate("owner");?></strong> <select name="autor"
@@ -774,9 +828,27 @@ function openArticleImageSelectWindow(field) {
 	<option value="<?php Template::escape($user->id);?>"
 					<?php if($user->id == $row->autor) echo "selected";?>><?php Template::escape($user->username);?></option>
 	<?php } ?>
-</select>
-		</div>
+</select> <br /> <br /> <strong><?php translate("restrict_edit_access");?></strong><br />
+			<input type="checkbox" name="only_admins_can_edit"
+				id="only_admins_can_edit" value="1"
+				<?php if($row->only_admins_can_edit) echo "checked";?>> <label
+				for="only_admins_can_edit"><?php translate("admins");?></label> <br />
+			<input type="checkbox" name="only_group_can_edit"
+				id="only_group_can_edit" value="1"
+				<?php if($row->only_group_can_edit) echo "checked";?>> <label
+				for="only_group_can_edit"><?php translate("group");?></label> <br />
+			<input type="checkbox" name="only_owner_can_edit"
+				id="only_owner_can_edit" value="1"
+				<?php if($row->only_owner_can_edit) echo "checked";?>> <label
+				for="only_owner_can_edit"><?php translate("owner");?></label> <br />
+			<input type="checkbox" name="only_others_can_edit"
+				id="only_others_can_edit" value="1"
+				<?php if($row->only_others_can_edit) echo "checked";?>> <label
+				for="only_others_can_edit"><?php translate("others");?></label>
 
+
+		</div>
+<?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
 		<div class="accordion-content">
@@ -820,6 +892,13 @@ var editor = CKEDITOR.replace( 'page_content',
 					});
 
 
+var editor2 = CKEDITOR.replace( 'excerpt',
+		{
+			skin : '<?php
+					
+					echo Settings::get ( "ckeditor_skin" );
+					?>'
+		});
 
 editor.on("instanceReady", function()
 {
@@ -827,6 +906,16 @@ editor.on("instanceReady", function()
 	this.document.on("paste", CKCHANGED);
 }
 );
+
+
+editor2.on("instanceReady", function()
+		{
+			this.document.on("keyup", CKCHANGED);
+			this.document.on("paste", CKCHANGED);
+		}
+
+);
+
 function CKCHANGED() {
 	formchanged = 1;
 }
@@ -867,10 +956,20 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content
         indentWithTabs: false,
         enterMode: "keep",
         tabMode: "shift"});
+
+
+var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
+
+		{lineNumbers: true,
+		        matchBrackets: true,
+		        mode : "text/html",
+
+		        indentUnit: 0,
+		        indentWithTabs: false,
+		        enterMode: "keep",
+		        tabMode: "shift"});
 </script>
-<?php
-				}
-				?>
+<?php }?>
 		<noscript>
 			<p style="color: red;">
 				Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
