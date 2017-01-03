@@ -1,5 +1,9 @@
 ﻿===== Neues in UliCMS 2017.1 =====
 
+# Kompatiblität mit PHP < 5.5 wieder hergestellt
+
+===== Neues in UliCMS 2017.1 =====
+
 + Neues Standard-Design theme-2017
 + "Passwort wiederholen" Feld zur Userverwaltung hinzugefügt
 + CKEditor auf Version 4.5.11 geupdatet
