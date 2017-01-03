@@ -7,6 +7,13 @@ function get_action() {
 	}
 }
 
+// boolval PHP 5.4 Implementation with checking version
+if ( !function_exists( 'boolval' ) ) {
+	function boolval( $my_value ) {
+	return (bool)$my_value;
+	}
+}
+
 // sind wir gerade im Adminordner?
 function is_admin_dir() {
 	return basename ( getcwd () ) === "admin";
