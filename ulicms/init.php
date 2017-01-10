@@ -317,6 +317,7 @@ if (! is_ssl () and $enforce_https !== false) {
 	exit ();
 }
 
+HelperRegistry::loadModuleHelpers ();
 ControllerRegistry::loadModuleControllers ();
 
 add_hook ( "before_init" );
