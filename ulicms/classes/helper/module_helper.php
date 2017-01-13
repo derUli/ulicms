@@ -8,6 +8,35 @@ class ModuleHelper {
 		$url = rtrim ( $url, "&" );
 		return $url;
 	}
+	public static function getFirstPageWithModule($module = null, $language = null) {
+		if (is_null ( $language )) {
+			$language = getCurrentLanguage ();
+		}
+		$args = array (
+				1,
+				$language 
+		);
+		$sql = "select * from {prefix}content where active = ? and language = ?";
+		$query = Database::pQuery ( $sql, $args, true );
+		while ( $dataset = Database::fetchObject ( $query ) ) {
+			$content = $dataset->content;
+			$content = str_replace ( "&quot;", "\"", $content );
+			if (! is_null ( $dataset->module ) and ! empty ( $dataset->module ) and $dataset->type == "module") {
+				if (! $module or ($module and $dataset->module == $module)) {
+					return $dataset;
+				}
+			} else if ($module) {
+				if (preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content )) {
+					return $dataset;
+				}
+			} else {
+				if (preg_match ( "/\[module=\".+\"\]/", $content )) {
+					return $dataset;
+				}
+			}
+		}
+		return null;
+	}
 	public static function buildActionURL($action, $suffix = null) {
 		$url = "?action=" . $action;
 		if ($suffix !== null and ! empty ( $suffix )) {
