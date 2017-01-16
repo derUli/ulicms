@@ -70,66 +70,9 @@ $content_htaccess = ULICMS_ROOT . "/content/.htaccess";
 if (file_exists ( $content_htaccess )) {
 	@unlink ( $content_htaccess );
 }
-// Database changes of 9.8.4
-// Tabelle für Content Type "Liste"
-Database::query ( "CREATE TABLE IF NOT EXISTS `" . tbname ( "lists" ) . "` (
-  `content_id` int(11) NOT NULL,
-  `language` varchar(50) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
-  `menu` varchar(10) DEFAULT NULL,
-  `parent_id` int(11) DEFAULT NULL,
-  `order_by` varchar(30) DEFAULT 'title',
-  `order_direction` varchar(30) DEFAULT 'asc',
-  `limit` int(11) default null,
-  UNIQUE KEY `content_id` (`content_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;" );
-Database::query ( "alter table " . tbname ( "content" ) . " add column `module` varchar(200) default null" );
-Database::query ( "alter table " . tbname ( "content" ) . " add column `video` int(11) default null" );
-Database::query ( "alter table " . tbname ( "content" ) . " add column `audio` int(11) default null" );
-Database::query ( "alter table " . tbname ( "content" ) . " add column `text_position` varchar(10) default 'before'" );
-Database::query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN `approved` tinyint(1) NOT NULL DEFAULT '1'" );
-Database::query ( "alter table " . tbname ( "content" ) . "  add column `image_url` text default null" );
-Database::query ( "update " . tbname ( "content" ) . " set `type` = 'link' where redirection is not null and redirection <> ''" );
-// Database Changes of 9.8.5
-Database::query ( "ALTER TABLE " . tbname ( "content" ) . " ADD COLUMN show_headline tinyint(1) NOT NULL DEFAULT '1'" );
-Database::query ( "ALTER TABLE " . tbname ( "lists" ) . " ADD COLUMN `use_pagination` tinyint(1) NOT NULL DEFAULT '0'" );
-Database::query ( "ALTER TABLE " . tbname ( "lists" ) . " ADD COLUMN `type` varchar(50) DEFAULT NULL" );
-Database::query ( "alter table " . tbname ( "content" ) . " add column `cache_control` varchar(10) default 'auto'" );
-Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_author_name` varchar(80) default '';" );
-Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_author_email` varchar(80) default '';" );
-Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_date` datetime default null;" );
-Database::query ( "alter table `" . tbname ( "content" ) . "` add column `article_image` varchar(255) default '';" );
-Database::query ( "alter table `" . tbname ( "content" ) . "` add column `excerpt` text default '';" );
 
-// Database Changes of 2017.1
-Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` drop column `notinfeed`" );
-Database::query ( "ALTER TABLE `" . tbname ( "settings" ) . "` ADD UNIQUE (`name`)" );
-Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_admins_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
-Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_group_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
-Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_owner_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
-Database::query ( "ALTER TABLE `" . tbname ( "content" ) . "` ADD COLUMN `only_others_can_edit` tinyint(1) NOT NULL DEFAULT '0'" );
-Database::query ( "ALTER TABLE `{prefix}content` ADD COLUMN `hidden` tinyint(1) NOT NULL DEFAULT '0'", true );
-
-Database::query ( "CREATE TABLE `{prefix}custom_fields` ( `id` INT NOT NULL AUTO_INCREMENT , `content_id` INT NOT NULL , `name` VARCHAR(100) NOT NULL , `value` TEXT NOT NULL , PRIMARY KEY (`id`) ) ENGINE = InnoDB;", true );
-Database::query ( "ALTER TABLE `{prefix}content` drop COLUMN valid_from;", true );
-Database::query ( "ALTER TABLE `{prefix}content` drop COLUMN valid_to;", true );
-Database::query ( "ALTER TABLE `{prefix}content` DROP COLUMN `icq_id`", true );
-
-Database::query ( "ALTER TABLE `{prefix}content` modify `content` mediumtext NOT NULL;", true );
-Database::query ( "ALTER TABLE `{prefix}content` modify `custom_data` text DEFAULT NULL;", true );
-
-Database::query ( "ALTER TABLE `{prefix}settings` modify `value` mediumtext NOT NULL;;", true );
-Database::query ( "ALTER TABLE `{prefix}history` modify `content` mediumtext NOT NULL;", true );
-
-Database::query("update {prefix}content set type = 'node' where type = 'link' and redirection = '#'", true);
-
-// CKEditor skin office2013 was removed
-// change to moono
-if (Settings::get ( "ckeditor_skin" ) == "office2013") {
-	Settings::set ( "ckeditor_skin", "moono" );
-}
-
-Settings::set ( "db_schema_version", "2017.1" );
+Database::query ( "ALTER TABLE `{prefix}users` DROP COLUMN `avatar_file`", true );
+Settings::set ( "db_schema_version", "2017.2" );
 
 // Patch Manager zurücksetzen
 $pkg = new PackageManager ();
