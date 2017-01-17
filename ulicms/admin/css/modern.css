@@ -355,7 +355,8 @@ div#login-welcome-text {
 }
 
 .menu-container img {
-	height: 35px;
+	height: 30px;
+	margin-top: 5px;
 }
 
 .main {
