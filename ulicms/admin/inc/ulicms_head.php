@@ -1,5 +1,8 @@
+<!DOCTYPE html>
+<html>
 <head>
-<meta name="viewport" content="width=device-width, user-scalable=yes" />
+<meta name="viewport"
+	content="width=device-width, user-scalable=yes, initial-scale=1" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>[<?php Template::escape(Settings::get("homepage_title"));?>] - UliCMS</title>
 <link rel="stylesheet" type="text/css" href="css/modern.css" />
