@@ -1,6 +1,7 @@
 body {
 	background-color: white;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 	font-size: medium;
 	color: rgb(50, 50, 50);
 	margin: 0;
@@ -38,6 +39,11 @@ img {
 html {
 	overflow-y: scroll;
 }
+
+.scroll {
+	overflow-x: auto;
+}
+
 /* main menu styles */
 .menu {
 	display: inline-block;
