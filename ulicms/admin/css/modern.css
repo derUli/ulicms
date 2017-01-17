@@ -354,6 +354,15 @@ div#login-welcome-text {
 	text-align: right;
 }
 
+.menu-container img {
+	height: 35px;
+}
+
 .main {
 	margin-top: 20px;
+}
+
+.ulicms-logo {
+	max-width: 100%;
+}
 }
