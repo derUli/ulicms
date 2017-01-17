@@ -352,4 +352,9 @@ div#login-welcome-text {
 
 .menu-container {
 	min-width: 50px;
+	text-align: right;
+}
+
+.main {
+	margin-top: 20px;
 }
