@@ -115,5 +115,5 @@ add_hook ( "admin_head" );
 			<img src="gfx/menu-icon.png">
 		</div>
 	</div>
-	<div class="row">
+	<div class="row main-content">
 		<div class="col-xs-12">
