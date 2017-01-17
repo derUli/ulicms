@@ -349,3 +349,7 @@ div#login-welcome-text {
 	background-color: rgb(250, 250, 250);
 	padding: 20px;
 }
+
+.menu-container {
+	min-width: 50px;
+}
