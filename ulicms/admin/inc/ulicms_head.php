@@ -24,7 +24,7 @@ $enq = array (
 		"codemirror/mode/css/css.js",
 		"scripts/url.min.js",
 		"scripts/util.js",
-		"scripts/users.js"
+		"scripts/users.js" 
 );
 ?>
 <?php
@@ -77,6 +77,7 @@ $(".menu li:has(ul)").doubleTapToGo();
 <?php include "inc/ulicms_touch_icons.php";?>
 <?php
 
+$styles [] = "css/bootstrap.min.css";
 $styles [] = "codemirror/lib/codemirror.css";
 $styles [] = "codemirror/mode/xml/xml.css";
 $styles [] = "codemirror/mode/javascript/javascript.css";
@@ -101,3 +102,5 @@ $(document).ready(function(){
 add_hook ( "admin_head" );
 ?>
 </head>
+<div class="container">
+	<div class="col-12-md">
