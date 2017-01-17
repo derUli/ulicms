@@ -108,12 +108,12 @@ add_hook ( "admin_head" );
 <div class="container main">
 
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-xs-8">
 			<img src="gfx/logo.png" alt="UliCMS">
 		</div>
-		<div class="col-md-4 menu-container">
+		<div class="col-xs-4 menu-container">
 			<img src="gfx/menu-icon.png">
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-xs-12">
