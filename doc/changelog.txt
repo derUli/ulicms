@@ -4,6 +4,7 @@
 # Datenbankspalte "avatar_file" entfernt, wird nicht mehr verwendet
 # Helper von Modulen werden nun initialisiert.
 # Kompatiblität mit PHP < 5.5 wieder hergestellt
+- Funktion "W3C Validierungsfehler automatisch korrigieren" entfernt
 
 ===== Neues in UliCMS 2017.1 =====
 
