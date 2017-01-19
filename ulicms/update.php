@@ -4,6 +4,7 @@ include_once "init.php";
 @set_time_limit ( 0 );
 
 Database::query ( "ALTER TABLE `{prefix}users` DROP COLUMN `avatar_file`", true );
+Database::query ( "DELETE FROM `{prefix}settings` where name in ('comment_mode', 'facebook_id', 'disqus_id');" );
 Settings::delete ( "disable_html_validation" );
 Settings::set ( "db_schema_version", "2017.2" );
 
