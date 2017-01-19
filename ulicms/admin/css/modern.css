@@ -380,3 +380,24 @@ h2.accordion-header {
 	color: white;
 	display: none;
 }
+
+.mainmenu ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.mainmenu ul a, .mainmenu ul a:visited, .mainmenu ul a:active {
+	display: block;
+	color: white;
+	font-size: 24px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.mainmenu ul a:hover {
+	text-decoration: none;
+	background-color: #335599;
+}
