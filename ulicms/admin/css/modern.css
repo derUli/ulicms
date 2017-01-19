@@ -406,3 +406,8 @@ h2.accordion-header {
 	text-decoration: none;
 	background-color: #335599;
 }
+@media (max-width: 1200px){
+	table.tablesorter .header{
+		background-image:none !important;
+	}
+}
