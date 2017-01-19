@@ -6,9 +6,10 @@ if (defined ( "_SECURITY" )) {
 	if ($acl->hasPermission ( "pages" )) {
 		$content_id = intval ( $_GET ["content_id"] );
 		$revisions = VCS::getRevisionsByContentID ( $content_id );
-		
+
 		?>
 <h1><?php translate("versions");?></h1>
+<div class="scroll">
 <table class="tablesorter">
 	<thead>
 		<tr>
@@ -21,7 +22,7 @@ if (defined ( "_SECURITY" )) {
 	</thead>
 	<tbody>
 <?php
-		
+
 		foreach ( $revisions as $revision ) {
 			$view_diff_link = "index.php?action=view_diff&content_id=" . $revision->content_id . "&history_id=" . $revision->id;
 			?>
@@ -29,7 +30,7 @@ if (defined ( "_SECURITY" )) {
 			<td><?php echo intval($revision->id);?></td>
 			<td><a href="<?php echo $view_diff_link;?>" target="_blank"><?php translate("view_diff");?></a></td>
 			<td><?php
-			
+
 			$user = getUserById ( $revision->user_id );
 			if ($user and isset ( $user ["username"] )) {
 				echo htmlspecialchars ( $user ["username"] );
@@ -43,8 +44,8 @@ if (defined ( "_SECURITY" )) {
 		</tr>
 <?php }?>
 </tbody>
-
 </table>
+</div>
 <?php
 	} else {
 		noperms ();

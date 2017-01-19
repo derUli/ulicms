@@ -14,7 +14,7 @@ $default_acl_group = intval ( Settings::get ( "default_acl_group" ) );
 
 if (isset ( $_REQUEST ["sort"] ) and in_array ( $_REQUEST ["sort"], array (
 		"id",
-		"name" 
+		"name"
 ) )) {
 	$_SESSION ["grp_sort"] = $_REQUEST ["sort"];
 }
@@ -45,6 +45,7 @@ if ($_SESSION ["grp_sort"] == "id") {
 
 if (count ( $groups ) > 0) {
 	?>
+	<div class="scroll">
 <table class="tablesorter">
 	<thead>
 		<tr>
@@ -65,34 +66,34 @@ if (count ( $groups ) > 0) {
 	<tbody>
 
 	<?php
-	
+
 	foreach ( $groups as $id => $name ) {
 		?>
 		<tr id="dataset-<?php echo $id;?>">
 			<td><?php
-		
+
 		echo $id;
 		?>
 			</td>
 			<td><?php
-		
+
 		echo $name;
 		?>
 			</td>
-			
+
 <?php if($acl->hasPermission("groups_edit")){?>
 			<td><?php
-			
+
 			if ($default_acl_group === $id) {
 				?> <span style="color: green; font-weight: bold;"><?php translate("yes");?> </span> <?php
 			} else {
 				?> <a
 				href="?action=groups&standard=<?php
-				
+
 				echo $id;
 				?>"><span style="color: red; font-weight: bold;"
 					onclick='return confirm("<?php
-				
+
 				echo str_ireplace ( "%name%", $name, get_translation ( "make_group_default" ) );
 				?>")'><?php translate("no");?> </span> </a> <?php
 			}
@@ -100,15 +101,15 @@ if (count ( $groups ) > 0) {
 			</td>
 
 			<td><a href="?action=groups&edit=<?php
-			
+
 			echo $id;
 			?>"><img class="mobile-big-image" src="gfx/edit.png"
 					alt="<?php
-			
+
 			translate ( "edit" );
 			?>"
 					title="<?php
-			
+
 			translate ( "edit" );
 			?>"> </a></td>
 			<td><form action="?action=groups&delete=<?php
@@ -119,11 +120,11 @@ if (count ( $groups ) > 0) {
 					class="delete-form"><?php csrf_token_html();?><input type="image"
 						class="mobile-big-image" src="gfx/delete.gif"
 						alt="<?php
-			
+
 			translate ( "delete" );
 			?>"
 						title="<?php
-			
+
 			translate ( "delete" );
 			?>">
 				</form></td>
@@ -137,6 +138,7 @@ if (count ( $groups ) > 0) {
 
 	</tbody>
 </table>
+</div>
 <script type="text/javascript">
 var ajax_options = {
   success : function(responseText, statusText, xhr, $form){
@@ -145,12 +147,12 @@ var ajax_options = {
   var list_item_id = "dataset-" + id
   var tr = $("tr#" + list_item_id);
   $(tr).fadeOut();
-  
+
   }
- 
+
 }
 
-$("form.delete-form").ajaxForm(ajax_options); 
+$("form.delete-form").ajaxForm(ajax_options);
 </script>
 <?php
 }
