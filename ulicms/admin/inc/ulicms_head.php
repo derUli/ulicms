@@ -27,7 +27,8 @@ $enq = array (
 		"codemirror/mode/css/css.js",
 		"scripts/url.min.js",
 		"scripts/util.js",
-		"scripts/users.js"
+		"scripts/users.js",
+		"scripts/global.js" 
 );
 ?>
 <?php
@@ -112,9 +113,11 @@ add_hook ( "admin_head" );
 			<img src="gfx/logo.png" alt="UliCMS" class="ulicms-logo">
 		</div>
 		<div class="col-xs-4 menu-container">
-		<?php if(is_logged_in()){
+		<?php
+		
+		if (is_logged_in ()) {
 			?>
-			<img src="gfx/menu-icon.png">
+			<img src="gfx/menu-icon.png" id="menu-toggle">
 			<?php }?>
 		</div>
 	</div>

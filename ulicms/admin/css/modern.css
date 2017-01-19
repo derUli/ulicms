@@ -371,6 +371,12 @@ div#login-welcome-text {
 	margin-top: 20px;
 }
 
-h2.accordion-header{
-   font-size:20px;
+h2.accordion-header {
+	font-size: 20px;
+}
+
+.mainmenu {
+	background-color: black;
+	color: white;
+	display: none;
 }
