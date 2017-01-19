@@ -388,6 +388,10 @@ h2.accordion-header {
 	padding: 0;
 }
 
+#menu-toggle {
+	cursor: pointer;
+}
+
 .mainmenu ul a, .mainmenu ul a:visited, .mainmenu ul a:active {
 	display: block;
 	color: white;
