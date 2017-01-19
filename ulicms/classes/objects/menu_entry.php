@@ -3,10 +3,12 @@ class MenuEntry {
 	private $title;
 	private $link;
 	private $identifier;
-	public function __construct($title, $link, $identifier) {
+	private $children = array ();
+	public function __construct($title, $link, $identifier, $children = array()) {
 		$this->title = $title;
 		$this->link = $link;
 		$this->identifier = $identifier;
+		$this->children = $children;
 	}
 	public function getTitle() {
 		return $this->title;
@@ -25,5 +27,32 @@ class MenuEntry {
 	}
 	public function setIdentifier($value) {
 		$this->identifier = $value;
+	}
+	public function getChildren() {
+		return $this->children;
+	}
+	public function setChildren($value) {
+		$this->children = $value;
+	}
+	public function hasChildren() {
+		return (count ( $this->children ) > 0);
+	}
+	public function addChild($children) {
+		$this->children [] = $children;
+	}
+	public function getChildByID($identifier, $root = null) {
+		$result = null;
+		if (! $root) {
+			$root = $this->children;
+		}
+		foreach ( $this->children as $root ) {
+			if ($child->getIdentifier () == $identifier) {
+				return $child;
+			}
+			if ($child->hasChildren ()) {
+				return $this->getChildByID ( $identifier, $child );
+			}
+		}
+		return null;
 	}
 }
