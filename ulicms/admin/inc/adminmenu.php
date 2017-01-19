@@ -1,4 +1,4 @@
-<div class="row mainmenu">
+<div class="mainmenu">
 	<ul>
 		<li><a href="#">Entry 1</a></li>
 

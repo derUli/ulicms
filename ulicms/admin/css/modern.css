@@ -379,6 +379,7 @@ h2.accordion-header {
 	background-color: black;
 	color: white;
 	display: none;
+	margin-bottom: 20px;
 }
 
 .mainmenu ul {
@@ -397,7 +398,7 @@ h2.accordion-header {
 	padding-right: 20px;
 }
 
-.mainmenu ul a:hover {
+.mainmenu ul a:hover, .mainmenu ul a.active {
 	text-decoration: none;
 	background-color: #335599;
 }
