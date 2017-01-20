@@ -404,10 +404,6 @@ h2.accordion-header {
 	background-color: #335599;
 }
 
-.tablesorter {
-	word-break: break-word;
-}
-
 @media ( min-width : 1200px) {
 	.main {
 		margin-left: 40px;
