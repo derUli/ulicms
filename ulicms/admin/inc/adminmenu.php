@@ -1,11 +1,18 @@
 <div class="mainmenu">
-	<ul>
-		<li><a href="#">Entry 1</a></li>
-
-		<li><a href="#">Entry 2</a></li>
-
-		<li><a href="#">Entry 3</a></li>
-
-		<li><a href="#">Entry 4</a></li>
-	</ul>
+<?php
+$menu = new AdminMenu ();
+$entries = array ();
+$entries [] = new MenuEntry ( get_translation ( "welcome" ), "?action=home", "home" );
+$entries [] = new MenuEntry ( get_translation ( "contents" ), "?action=contents", "contents" );
+$entries [] = new MenuEntry ( get_translation ( "media" ), "?action=media", "media" );
+$entries [] = new MenuEntry ( get_translation ( "users" ), "?action=admins", "admins" );
+$entries [] = new MenuEntry ( get_translation ( "groups" ), "?action=groups", "groups" );
+$entries [] = new MenuEntry ( get_translation ( "modules" ), "?action=modules", "modules" );
+$entries [] = new MenuEntry ( get_translation ( "settings" ), "?action=settings", "settings" );
+$entries [] = new MenuEntry ( get_translation ( "info" ), "?action=info", "info" );
+$entries [] = new MenuEntry ( get_translation ( "logout" ), "?action=destroy", "destroy" );
+$entries = apply_filter($entries, "admin_menu_entries");
+$menu->setChildren ( $entries );
+$menu->render ();
+?>
 </div>

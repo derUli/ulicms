@@ -31,7 +31,7 @@ class AdminMenu {
 		}
 		return null;
 	}
-	public function outputMenu() {
+	public function render() {
 		$html = "<ul>";
 		foreach ( $this->children as $child ) {
 			if (get_action () == $child->getIdentifier ()) {
@@ -40,9 +40,10 @@ class AdminMenu {
 				$html .= "</li>";
 			}
 			$html .= '<a href="' . $child->getLink () . '">';
-			$html .= $child->getLink ();
+			$html .= $child->getTitle ();
 			$html .= "</a>";
 			$html .= "</li>";
 		}
+		echo $html;
 	}
 }
