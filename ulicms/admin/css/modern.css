@@ -107,13 +107,13 @@ div#root-container {
 	position: relative;
 }
 
-a, a:visited {
+a, a:visited, a:focus {
 	color: rgb(30, 30, 30);
 	text-decoration: none;
 	font-weight: 500;
 }
 
-a:hover, a:focus {
+a:hover, a:active {
 	color: rgb(30, 30, 30);
 	text-decoration: underline;
 }
