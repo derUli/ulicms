@@ -255,9 +255,13 @@ div.help {
 	margin-top: 20px;
 }
 
-label {
+label, .label {
 	font-weight: bold;
 	color: black;
+  white-space: normal;
+	text-align:left;
+	padding:0;
+	font-size:inherit;
 }
 
 table tr:nth-child(odd) {
