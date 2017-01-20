@@ -21,10 +21,6 @@ img {
 	border: 0px;
 }
 
-#pbody ul li {
-	list-style-image: url('../gfx/list.png');
-}
-
 #pbody table.tablesorter thead th.header {
 	padding-right: 30px !important;
 }
@@ -406,8 +402,9 @@ h2.accordion-header {
 	text-decoration: none;
 	background-color: #335599;
 }
-@media (max-width: 1200px){
-	table.tablesorter .header{
-		background-image:none !important;
+
+@media ( max-width : 1200px) {
+	table.tablesorter .header {
+		background-image: none !important;
 	}
 }

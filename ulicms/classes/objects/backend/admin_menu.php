@@ -34,12 +34,12 @@ class AdminMenu {
 	public function render() {
 		$html = "<ul>";
 		foreach ( $this->children as $child ) {
-			if (get_action () == $child->getIdentifier ()) {
-				$html .= '<li class="active">';
+			$html .= "<li>";
+			if ($child->getIdentifier () == get_action ()) {
+				$html .= '<a href="' . $child->getLink () . '" class="active">';
 			} else {
-				$html .= "</li>";
+				$html .= '<a href="' . $child->getLink () . '">';
 			}
-			$html .= '<a href="' . $child->getLink () . '">';
 			$html .= $child->getTitle ();
 			$html .= "</a>";
 			$html .= "</li>";

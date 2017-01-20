@@ -8,7 +8,7 @@ $entries [] = new MenuEntry ( get_translation ( "media" ), "?action=media", "med
 $entries [] = new MenuEntry ( get_translation ( "users" ), "?action=admins", "admins" );
 $entries [] = new MenuEntry ( get_translation ( "groups" ), "?action=groups", "groups" );
 $entries [] = new MenuEntry ( get_translation ( "packages" ), "?action=modules", "modules" );
-$entries [] = new MenuEntry ( get_translation ( "settings" ), "?action=settings", "settings" );
+$entries [] = new MenuEntry ( get_translation ( "settings" ), "?action=settings_simple", "settings_simple" );
 $entries [] = new MenuEntry ( get_translation ( "info" ), "?action=info", "info" );
 $entries [] = new MenuEntry ( get_translation ( "logout" ), "?action=destroy", "destroy" );
 $entries = apply_filter ( $entries, "admin_menu_entries" );
