@@ -3,7 +3,7 @@ $(function() {
 		sessionStorage.setItem("openMenu", "yes" );
 	}
 	if(sessionStorage.getItem("openMenu") == "yes"){
-			$(".mainmenu").show();
+			$(".mainmenu").slideDown();
 	}
 	$("#menu-toggle").click(function() {
 		$(".mainmenu").slideToggle();
