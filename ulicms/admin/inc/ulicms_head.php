@@ -5,7 +5,6 @@
 	content="width=device-width, user-scalable=yes, initial-scale=1" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>[<?php Template::escape(Settings::get("homepage_title"));?>] - UliCMS</title>
-<link rel="stylesheet" type="text/css" href="css/modern.css" />
 <?php
 $styles = array ();
 ?>
@@ -88,6 +87,7 @@ $styles [] = "codemirror/mode/javascript/javascript.css";
 $styles [] = "codemirror/mode/clike/clike.css";
 $styles [] = "codemirror/lib/codemirror.css";
 $styles [] = "codemirror/mode/css/css.css";
+$styles [] = "css/modern.css";
 
 foreach ( $styles as $style ) {
 	enqueueStylesheet ( $style );
@@ -106,7 +106,7 @@ $(document).ready(function(){
 add_hook ( "admin_head" );
 ?>
 </head>
-<div class="container main">
+<div class="fluid-container main">
 
 	<div class="row">
 		<div class="col-xs-8">

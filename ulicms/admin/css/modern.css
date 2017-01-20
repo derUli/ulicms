@@ -21,7 +21,7 @@ img {
 	border: 0px;
 }
 
-#pbody table.tablesorter thead th.header {
+#main-content table.tablesorter thead th.header {
 	padding-right: 30px !important;
 }
 
@@ -113,13 +113,9 @@ a, a:visited {
 	font-weight: 500;
 }
 
-a:hover {
+a:hover, a:focus {
 	color: rgb(30, 30, 30);
 	text-decoration: underline;
-}
-
-div#pbody {
-	padding: 20px 27px 5px 27px;
 }
 
 p#footer {
@@ -403,8 +399,20 @@ h2.accordion-header {
 	background-color: #335599;
 }
 
+@media ( min-width : 1200px) {
+	.main {
+		margin-left: 40px;
+		margin-right: 40px;
+	}
+}
+
 @media ( max-width : 1200px) {
 	table.tablesorter .header {
 		background-image: none !important;
+	}
+	
+		.main {
+		margin-left: 20px;
+		margin-right: 20px;
 	}
 }
