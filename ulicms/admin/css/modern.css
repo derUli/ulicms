@@ -257,6 +257,7 @@ div.help {
 
 label {
 	font-weight: bold;
+	color: black;
 }
 
 table tr:nth-child(odd) {
@@ -399,6 +400,10 @@ h2.accordion-header {
 	background-color: #335599;
 }
 
+.tablesorter {
+	word-break: break-word;
+}
+
 @media ( min-width : 1200px) {
 	.main {
 		margin-left: 40px;
@@ -410,8 +415,7 @@ h2.accordion-header {
 	table.tablesorter .header {
 		background-image: none !important;
 	}
-	
-		.main {
+	.main {
 		margin-left: 20px;
 		margin-right: 20px;
 	}
