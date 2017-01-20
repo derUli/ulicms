@@ -27,14 +27,13 @@ $enq = array (
 		"scripts/url.min.js",
 		"scripts/util.js",
 		"scripts/users.js",
-		"scripts/global.js" 
+		"scripts/global.js"
 );
 ?>
 <?php
 
 if (is_logged_in ()) {
 	$enq [] = "scripts/cookie.js";
-	$enq [] = "scripts/notification.js";
 	$enq [] = "scripts/jquery-shiftclick.js";
 	$enq [] = "scripts/shift_checkbox.js";
 }
@@ -114,7 +113,7 @@ add_hook ( "admin_head" );
 		</div>
 		<div class="col-xs-4 menu-container">
 		<?php
-		
+
 		if (is_logged_in ()) {
 			?>
 			<img src="gfx/menu-icon.png" id="menu-toggle">
