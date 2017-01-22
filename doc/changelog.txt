@@ -1,5 +1,6 @@
 ﻿===== Neues in UliCMS 2017.2 =====
-
++ Neues Backend Design
++ Zugriff auf ulicms.de erfolgt nun mit verschlüsselter Verbindung
 + Funktion ModuleHelper::getFirstPageWithModule() hinzugefügt
 # Datenbankspalte "avatar_file" entfernt, wird nicht mehr verwendet
 # Helper von Modulen werden nun initialisiert.
