@@ -330,7 +330,7 @@ ObjectRegistry::loadModuleObjects ();
 
 $version = new ulicms_version ();
 if (! defined ( "UPDATE_CHECK_URL" )) {
-	define ( "UPDATE_CHECK_URL", "http://update.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&update=" . urlencode ( $version->getUpdate () ) );
+	define ( "UPDATE_CHECK_URL", "https://update.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&update=" . urlencode ( $version->getUpdate () ) );
 }
 
 $pkg = new PackageManager ();
@@ -338,7 +338,7 @@ $installed_patches = $pkg->getInstalledPatchNames ();
 $installed_patches = implode ( ";", $installed_patches );
 
 if (! defined ( "PATCH_CHECK_URL" )) {
-	define ( "PATCH_CHECK_URL", "http://patches.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&installed_patches=" . urlencode ( $installed_patches ) );
+	define ( "PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&installed_patches=" . urlencode ( $installed_patches ) );
 }
 
 if (! Settings::get ( "session_name" )) {
