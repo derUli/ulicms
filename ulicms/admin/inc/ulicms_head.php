@@ -109,8 +109,8 @@ add_hook ( "admin_head" );
 
 	<div class="row">
 		<div class="col-xs-8">
-			<a href="../"></a><img src="gfx/logo.png" alt="UliCMS"
-				class="ulicms-logo"></a>
+			<a href="../" title="<?php translate("goto_frontend");?>"><img
+				src="gfx/logo.png" alt="UliCMS" class="ulicms-logo"></a>
 		</div>
 		<div class="col-xs-4 menu-container">
 		<?php
