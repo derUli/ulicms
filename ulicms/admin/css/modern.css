@@ -258,10 +258,10 @@ div.help {
 label, .label {
 	font-weight: bold;
 	color: black;
-  white-space: normal;
-	text-align:left;
-	padding:0;
-	font-size:inherit;
+	white-space: normal;
+	text-align: left;
+	padding: 0;
+	font-size: inherit;
 }
 
 table tr:nth-child(odd) {
@@ -404,6 +404,12 @@ h2.accordion-header {
 	background-color: #335599;
 }
 
+@media ( max-width : 500px) {
+	.hide-on-mobile {
+		display: none;
+	}
+}
+
 @media ( min-width : 1200px) {
 	.main {
 		margin-left: 40px;
@@ -421,14 +427,14 @@ h2.accordion-header {
 	}
 }
 
-h1, h2, h3, h4, h5, h6{
-	margin-bottom:20px;
+h1, h2, h3, h4, h5, h6 {
+	margin-bottom: 20px;
 }
 
-div#message{
-		margin-top:20px;
+div#message {
+	margin-top: 20px;
 }
 
-#msgcontainer{
-	padding-top:16px;
+#msgcontainer {
+	padding-top: 16px;
 }

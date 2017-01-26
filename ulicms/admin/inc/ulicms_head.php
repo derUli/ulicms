@@ -27,7 +27,7 @@ $enq = array (
 		"scripts/url.min.js",
 		"scripts/util.js",
 		"scripts/users.js",
-		"scripts/global.js"
+		"scripts/global.js" 
 );
 ?>
 <?php
@@ -109,11 +109,12 @@ add_hook ( "admin_head" );
 
 	<div class="row">
 		<div class="col-xs-8">
-			<img src="gfx/logo.png" alt="UliCMS" class="ulicms-logo">
+			<a href="../"></a><img src="gfx/logo.png" alt="UliCMS"
+				class="ulicms-logo"></a>
 		</div>
 		<div class="col-xs-4 menu-container">
 		<?php
-
+		
 		if (is_logged_in ()) {
 			?>
 			<img src="gfx/menu-icon.png" id="menu-toggle">
