@@ -12,7 +12,7 @@ if (! $acl->hasPermission ( "forms" )) {
 		$fields = $_POST ["fields"];
 		$mail_from_field = $_POST ["mail_from_field"];
 		$target_page_id = $_POST ["target_page_id"];
-		
+
 		Forms::createForm ( $name, $email_to, $subject, $category_id, $fields, $mail_from_field, $target_page_id );
 	} else if (isset ( $_POST ["edit_form"] )) {
 		$id = $_POST ["id"];
@@ -23,13 +23,13 @@ if (! $acl->hasPermission ( "forms" )) {
 		$fields = $_POST ["fields"];
 		$mail_from_field = $_POST ["mail_from_field"];
 		$target_page_id = $_POST ["target_page_id"];
-		
+
 		Forms::editForm ( $id, $name, $email_to, $subject, $category_id, $fields, $mail_from_field, $target_page_id );
 	} else if (isset ( $_GET ["del"] )) {
 		$del = intval ( $_GET ["del"] );
 		Forms::deleteForm ( $del );
 	}
-	
+
 	$forms = Forms::getAllForms ();
 	?>
 <style type="text/css">
@@ -43,6 +43,7 @@ tr.odd input#form-submit-url {
 	<a href="index.php?action=forms_new"><?php translate("create_form");?></a>
 </p>
 <?php }?>
+<div class="scroll">
 <table id="form-list" class="tablesorter">
 	<thead>
 		<tr>
@@ -68,7 +69,7 @@ tr.odd input#form-submit-url {
 			<td><input id="form-submit-url" type="text" readonly
 				value="<?php echo htmlspecialchars($submit_form_url);?>"
 				onclick="this.select();"></td>
-				
+
 			<?php if($acl->hasPermission ( "forms_edit" )){ ?>
 			<td style="text-align: center;"><a
 				href="?action=forms_edit&id=<?php
@@ -78,7 +79,7 @@ tr.odd input#form-submit-url {
 			<td style="text-align: center;">
 				<form
 					action="?action=forms&del=<?php
-			
+
 			echo $form ["id"];
 			?>"
 					method="post" onsubmit="return confirm('Wirklich Löschen?')"
@@ -93,6 +94,7 @@ tr.odd input#form-submit-url {
 <?php }?>
 </tbody>
 </table>
+</div>
 <script type="text/javascript">
 
 var ajax_options = {
@@ -102,13 +104,13 @@ var ajax_options = {
   var list_item_id = "dataset-" + id
   var tr = $("tr#" + list_item_id);
   $(tr).fadeOut();
-  
+
   }
-  
+
 
 }
 
-$("form.delete-form").ajaxForm(ajax_options); 
+$("form.delete-form").ajaxForm(ajax_options);
 </script>
 <?php
 }

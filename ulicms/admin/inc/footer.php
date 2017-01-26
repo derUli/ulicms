@@ -1,18 +1,14 @@
-<?php
-if (is_logged_in ()) {
-	?>
-<a style="float: right" href="#" class="scrollup" name="scrollup"
-	onclick="scrollToAnchor('top'); return false;"><img
-	class="mobile-big-image" src="gfx/up.png" alt="Nach Oben"
-	title="Nach oben"> </a>
-<?php
-}
-?>
+<div id="msgcontainer">
+	<img id="loading" src="gfx/loading.gif" alt="Bitte warten..."
+		style="display: none;">
+</div>
+<div id="message"><br/></div>
 </div>
 <p id="footer">
 	&copy; 2011 - <?php cms_release_year();?> by <a
 		href="http://www.ulicms.de" target="_blank">UliCMS</a>
 </p>
+</div>
 </div>
 </div>
 </body>
