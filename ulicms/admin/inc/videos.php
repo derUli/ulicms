@@ -177,17 +177,17 @@ $(window).load(function(){
 	translate ( "name" );
 	?>
 			</th>
-			<th><?php
+			<th class="hide-on-mobile"><?php
 	
 	translate ( "ogg_file" );
 	?>
 			</th>
-			<th><?php
+			<th class="hide-on-mobile"><?php
 	
 	translate ( "webm_file" );
 	?>
 			</th>
-			<th><?php
+			<th class="hide-on-mobile"><?php
 	
 	translate ( "mp4_file" );
 	?>
@@ -213,17 +213,17 @@ $(window).load(function(){
 		echo htmlspecialchars ( $row->name );
 		?>
 			</td>
-			<td><?php
+			<td class="hide-on-mobile"><?php
 		
 		echo htmlspecialchars ( basename ( $row->ogg_file ) );
 		?>
 			</td>
-			<td><?php
+			<td class="hide-on-mobile"><?php
 		
 		echo htmlspecialchars ( basename ( $row->webm_file ) );
 		?>
 			</td>
-			<td><?php
+			<td class="hide-on-mobile"><?php
 		
 		echo htmlspecialchars ( basename ( $row->mp4_file ) );
 		?>
@@ -232,37 +232,37 @@ $(window).load(function(){
 			<?php if($acl->hasPermission("videos_edit")){?>
 			<td><a
 				href="index.php?action=edit_video&id=<?php
-		
-		echo $row->id;
-		?>"><img src="gfx/edit.png" class="mobile-big-image"
+			
+			echo $row->id;
+			?>"><img src="gfx/edit.png" class="mobile-big-image"
 					alt="<?php
-		
-		translate ( "edit" );
-		?>"
+			
+			translate ( "edit" );
+			?>"
 					title="<?php
-		
-		translate ( "edit" );
-		?>"> </a></td>
+			
+			translate ( "edit" );
+			?>"> </a></td>
 			<td><form
 					action="index.php?action=videos&delete=<?php
-		
-		echo $row->id;
-		?>"
+			
+			echo $row->id;
+			?>"
 					method="post"
 					onsubmit="return confirm('<?php
-		
-		translate ( "ASK_FOR_DELETE" );
-		?>')"
+			
+			translate ( "ASK_FOR_DELETE" );
+			?>')"
 					class="delete-form"><?php csrf_token_html();?><input type="image"
 						src="gfx/delete.png" class="mobile-big-image"
 						alt="<?php
-		
-		translate ( "delete" );
-		?>"
+			
+			translate ( "delete" );
+			?>"
 						title="<?php
-		
-		translate ( "delete" );
-		?>">
+			
+			translate ( "delete" );
+			?>">
 				</form></td>
 				<?php }?>
 		</tr>
