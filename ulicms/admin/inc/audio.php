@@ -145,12 +145,12 @@ $(window).load(function(){
 	translate ( "name" );
 	?>
 			</th>
-			<th><?php
+			<th class="hide-on-mobile"><?php
 
 	translate ( "OGG_FILE" );
 	?>
 			</th>
-			<th><?php
+			<th class="hide-on-mobile"><?php
 
 	translate ( "MP3_FILE" );
 	?>
@@ -178,12 +178,12 @@ $(window).load(function(){
 		echo htmlspecialchars ( $row->name );
 		?>
 			</td>
-			<td><?php
+			<td class="hide-on-mobile"><?php
 
 		echo htmlspecialchars ( basename ( $row->ogg_file ) );
 		?>
 			</td>
-			<td><?php
+			<td class="hide-on-mobile"><?php
 
 		echo htmlspecialchars ( basename ( $row->mp3_file ) );
 		?>
