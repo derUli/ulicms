@@ -7,15 +7,7 @@ class DBMigrator {
 		$this->folder = $folder;
 	}
 	public function migrate() {
-		if (isNullOrEmpty ( $this->component )) {
-			throw new Exception ( "component is null or empty" );
-		}
-		if (isNullOrEmpty ( $this->folder )) {
-			throw new Exception ( "folder is null or empty" );
-		}
-		if (! is_dir ( $this->folder )) {
-			throw new Exception ( "folder not found " . $this->folder );
-		}
+		$this->checkVars ();
 		$files = scandir ( $this->folder );
 		natcasesort ( $files );
 		foreach ( $files as $file ) {
@@ -39,15 +31,7 @@ class DBMigrator {
 		}
 	}
 	public function rollback() {
-		if (isNullOrEmpty ( $this->component )) {
-			throw new Exception ( "component is null or empty" );
-		}
-		if (isNullOrEmpty ( $this->folder )) {
-			throw new Exception ( "folder is null or empty" );
-		}
-		if (! is_dir ( $this->folder )) {
-			throw new Exception ( "folder not found " . $this->folder );
-		}
+		$this->checkVars ();
 		$files = scandir ( $this->folder );
 		natcasesort ( $files );
 		foreach ( $files as $file ) {
@@ -74,5 +58,16 @@ class DBMigrator {
 		return Database::pQuery ( "DELETE FROM {prefix}dbtrack where component = ?", array (
 				$this->component 
 		), true );
+	}
+	private function checkVars() {
+		if (isNullOrEmpty ( $this->component )) {
+			throw new Exception ( "component is null or empty" );
+		}
+		if (isNullOrEmpty ( $this->folder )) {
+			throw new Exception ( "folder is null or empty" );
+		}
+		if (! is_dir ( $this->folder )) {
+			throw new Exception ( "folder not found " . $this->folder );
+		}
 	}
 }
