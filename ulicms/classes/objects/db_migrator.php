@@ -6,6 +6,8 @@ class DBMigrator {
 		$this->component = $component;
 		$this->folder = $folder;
 	}
+	
+	// @TODO Implement Rollbacks
 	public function run() {
 		if (isNullOrEmpty ( $this->component )) {
 			throw new Exception ( "component is null or empty" );
@@ -37,5 +39,10 @@ class DBMigrator {
 				}
 			}
 		}
+	}
+	public function resetDBTrack() {
+		return Database::pQuery ( "DELETE FROM {prefix}dbtrack where component = ?", array (
+				$this->component 
+		), true );
 	}
 }
