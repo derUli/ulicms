@@ -15,7 +15,7 @@ class DBMigrator {
 				$sql = "SELECT id from {prefix}dbtrack where component = ? and name = ?";
 				$args = array (
 						$this->component,
-						$file 
+						$file
 				);
 				$result = Database::pQuery ( $sql, $args, true );
 				if (Database::getNumRows ( $result ) == 0) {
@@ -30,16 +30,17 @@ class DBMigrator {
 			}
 		}
 	}
-	public function rollback() {
+	public function rollback($stop = null) {
 		$this->checkVars ();
 		$files = scandir ( $this->folder );
 		natcasesort ( $files );
+		$files = array_reverse ( $files );
 		foreach ( $files as $file ) {
 			if (endsWith ( $file, ".sql" )) {
 				$sql = "SELECT id from {prefix}dbtrack where component = ? and name = ?";
 				$args = array (
 						$this->component,
-						$file 
+						$file
 				);
 				$result = Database::pQuery ( $sql, $args, true );
 				if (Database::getNumRows ( $result ) > 0) {
@@ -52,11 +53,14 @@ class DBMigrator {
 					Database::pQuery ( $sql, $args, true );
 				}
 			}
+			if ($file === $stop) {
+				return;
+			}
 		}
 	}
 	public function resetDBTrack() {
 		return Database::pQuery ( "DELETE FROM {prefix}dbtrack where component = ?", array (
-				$this->component 
+				$this->component
 		), true );
 	}
 	private function checkVars() {
