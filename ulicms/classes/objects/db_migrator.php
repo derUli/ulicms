@@ -6,7 +6,7 @@ class DBMigrator {
 		$this->component = $component;
 		$this->folder = $folder;
 	}
-	public function migrate() {
+	public function migrate($stop = null) {
 		$this->checkVars ();
 		$files = scandir ( $this->folder );
 		natcasesort ( $files );
@@ -15,7 +15,7 @@ class DBMigrator {
 				$sql = "SELECT id from {prefix}dbtrack where component = ? and name = ?";
 				$args = array (
 						$this->component,
-						$file
+						$file 
 				);
 				$result = Database::pQuery ( $sql, $args, true );
 				if (Database::getNumRows ( $result ) == 0) {
@@ -27,6 +27,9 @@ class DBMigrator {
 					$sql = "INSERT INTO {prefix}dbtrack (component, name) values (?,?)";
 					Database::pQuery ( $sql, $args, true );
 				}
+			}
+			if ($file === $stop) {
+				return;
 			}
 		}
 	}
@@ -40,7 +43,7 @@ class DBMigrator {
 				$sql = "SELECT id from {prefix}dbtrack where component = ? and name = ?";
 				$args = array (
 						$this->component,
-						$file
+						$file 
 				);
 				$result = Database::pQuery ( $sql, $args, true );
 				if (Database::getNumRows ( $result ) > 0) {
@@ -60,7 +63,7 @@ class DBMigrator {
 	}
 	public function resetDBTrack() {
 		return Database::pQuery ( "DELETE FROM {prefix}dbtrack where component = ?", array (
-				$this->component
+				$this->component 
 		), true );
 	}
 	private function checkVars() {
