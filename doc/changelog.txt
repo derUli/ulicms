@@ -2,6 +2,7 @@
 + Neues Backend Design
 + Zugriff auf ulicms.de erfolgt nun mit verschlüsselter Verbindung
 + Funktion ModuleHelper::getFirstPageWithModule() hinzugefügt
++ DBMigrator hinzugefügt
 # Schriftgröße wird nun in px angegeben
 # Datenbankspalte "avatar_file" entfernt, wird nicht mehr verwendet
 # Helper von Modulen werden nun initialisiert.
