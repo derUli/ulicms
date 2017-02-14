@@ -1,0 +1,5 @@
+{
+ "custom_types" : { "comment" :
+["name", "email", "homepage"]
+}
+}
