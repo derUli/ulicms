@@ -1,3 +1,9 @@
+<?php
+	 $admin_logo = Settings::get ( "admin_logo" );
+	 if (! $admin_logo) {
+		 $admin_logo = "gfx/logo.png";
+	 }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +33,7 @@ $enq = array (
 		"scripts/url.min.js",
 		"scripts/util.js",
 		"scripts/users.js",
-		"scripts/global.js" 
+		"scripts/global.js"
 );
 ?>
 <?php
@@ -110,11 +116,11 @@ add_hook ( "admin_head" );
 	<div class="row">
 		<div class="col-xs-8">
 			<a href="../" title="<?php translate("goto_frontend");?>"><img
-				src="gfx/logo.png" alt="UliCMS" class="ulicms-logo"></a>
+				src="<?php Template::escape($admin_logo);?>" alt="UliCMS" class="ulicms-logo"></a>
 		</div>
 		<div class="col-xs-4 menu-container">
 		<?php
-		
+
 		if (is_logged_in ()) {
 			?>
 			<img src="gfx/menu-icon.png" id="menu-toggle">
