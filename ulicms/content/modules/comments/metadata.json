@@ -1,7 +1,0 @@
-{
-	"embed" : false,
-	"version" : "0.1",
- 	"custom_types" : { "comment" :
-		["name", "email", "homepage", "ip_address"]
-}
-}

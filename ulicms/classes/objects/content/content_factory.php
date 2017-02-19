@@ -50,6 +50,9 @@ class ContentFactory {
 		} else if ($row->type == "article") {
 			$retval = new Article ();
 			$retval->loadByID ( $row->id );
+		} else if ($row->type == "comment") {
+			$retval = new Comment ();
+			$retval->loadByID ( $row->id );
 		}
 		
 		return $retval;
