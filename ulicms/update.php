@@ -9,7 +9,7 @@ Settings::delete ( "disable_html_validation" );
 Database::query ( "CREATE TABLE `{prefix}dbtrack` ( `id` INT NOT NULL AUTO_INCREMENT , `component` VARCHAR(150) NOT NULL , `name` VARCHAR(150) NOT NULL , `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;", true );
 Settings::set ( "db_schema_version", "2017.2" );
 
-$migrator = new DBMigrator ( "core", "updates/up" );
+$migrator = new DBMigrator ( "core", "lib/updates/up" );
 $migrator->migrate ();
 
 // Patch Manager zurücksetzen
