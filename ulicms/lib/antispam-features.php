@@ -2,47 +2,47 @@
 
 // String contains chinese chars?
 function is_chinese($str) {
-	return preg_match ( "/\p{Han}+/u", $str );
+	return preg_match ( "/(\p{Han})|(\p{Cyrillic})+/u", $str );
 }
 
 // checking if this Country is blocked by spamfilter
 function isCountryBlocked() {
 	$country_blacklist = Settings::get ( "country_blacklist" );
 	$country_whitelist = Settings::get ( "country_whitelist" );
-	
+
 	$country_blacklist = str_replace ( " ", "", $country_blacklist );
 	$country_whitelist = str_replace ( " ", "", $country_whitelist );
-	
+
 	$country_blacklist = strtolower ( $country_blacklist );
 	$country_whitelist = strtolower ( $country_whitelist );
-	
+
 	$country_blacklist = explode ( ",", $country_blacklist );
 	$country_whitelist = explode ( ",", $country_whitelist );
-	
+
 	$ip_adress = $_SERVER ["REMOTE_ADDR"];
-	
+
 	@$hostname = gethostbyaddr ( $ip_adress );
-	
+
 	if (! $hostname) {
 		return false;
 	}
-	
+
 	$hostname = strtolower ( $hostname );
-	
+
 	for($i = 0; $i < count ( $country_whitelist ); $i ++) {
 		$ending = "." . $country_whitelist [$i];
 		if (EndsWith ( $hostname, $ending )) {
 			return false;
 		}
 	}
-	
+
 	for($i = 0; $i < count ( $country_blacklist ); $i ++) {
 		$ending = "." . $country_blacklist [$i];
 		if (EndsWith ( $hostname, $ending )) {
 			return true;
 		}
 	}
-	
+
 	return false;
 }
 function checkForSpamhaus($host = null) {
@@ -62,13 +62,13 @@ function checkForSpamhaus($host = null) {
 function trackbackSpamCheck($url) {
 	// trackback prinzipiell als spam definieren
 	$spam = TRUE;
-	
+
 	// URL in einzelteile zerlegen
 	$url = parse_url ( trim ( addSlashes ( $url ) ) );
-	
+
 	// verbindung zum host auf port 80 herstellen
 	$fp = fSockOpen ( $url ['host'], 80, $errno, $errstr, 30 );
-	
+
 	// ueberpruefen, ob die verbindung steht
 	if ($fp) {
 		// pfad zur zieldatei auslesen
@@ -76,17 +76,17 @@ function trackbackSpamCheck($url) {
 		if (isSet ( $url ['query'] )) {
 			$path .= "?" . $url ['query'];
 		}
-		
+
 		// wenn der pfad leer ist '/' verwenden
 		if ($path == "") {
 			$path = "/";
 		}
-		
+
 		// get request an den server senden
 		$req = "GET " . $path . " HTTP/1.0\r\n";
 		$req .= "Host: " . $url ['host'] . "\r\n\r\n";
 		fPuts ( $fp, $req );
-		
+
 		// http headers auslesen
 		while ( ! feof ( $fp ) ) {
 			$data = fgets ( $fp, 1024 );
@@ -94,11 +94,11 @@ function trackbackSpamCheck($url) {
 				break;
 			}
 		}
-		
+
 		// daten auslesen
 		while ( ! feof ( $fp ) ) {
 			$data = fgets ( $fp, 1024 );
-			
+
 			// ueberpruefen, ob t-error.ch darin vorkommt
 			// dies kann man noch verfeinern,
 			// in dem man nach einem link sucht
@@ -107,16 +107,16 @@ function trackbackSpamCheck($url) {
 				break;
 			}
 		}
-		
+
 		// verbindung zum server trennne
 		fclose ( $fp );
 	}
-	
+
 	// ip adresse des hosts auslesen,
 	// auf dem die im trackback angegebene
 	// webseite liegt
 	$ip = @getHostByName ( $url ['host'] );
-	
+
 	// ueberpruefen, ob die ip adresse
 	// aufgeloest werden konnte.
 	// trackback sonst als spam definieren
@@ -131,7 +131,7 @@ function trackbackSpamCheck($url) {
 			$spam = TRUE;
 		}
 	}
-	
+
 	// spam status zurueckgeben
 	return $spam;
 }

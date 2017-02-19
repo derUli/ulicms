@@ -699,4 +699,6 @@ define ( "TRANSLATION_NODE", "Knotenpunkt" );
 
 define ( "TRANSLATION_GOTO_FRONTEND", "Goto Frontend" );
 
+define ( "TRANSLATION_COMMENT", "Comment" );
+
 add_hook ( "lang_en" );
