@@ -244,17 +244,15 @@ if (defined ( "_SECURITY" )) {
 				?>>
 		<?php translate("disabled");?>
 		</option>
-			</select> <br /> <br />
-			 <strong><?php translate("hidden");?>
-	</strong><br /> <select name="hidden" size="1"><option value="1" <?php if($row->hidden == 1) echo "selected";?>>
+			</select> <br /> <br /> <strong><?php translate("hidden");?>
+	</strong><br /> <select name="hidden" size="1"><option value="1"
+					<?php if($row->hidden == 1) echo "selected";?>>
 		<?php translate("yes");?>
 		</option>
 				<option value="0" <?php if($row->hidden == 0) echo "selected";?>>
 		<?php translate("no");?>
 		</option>
-			</select> <br /> <br />
-			
-			 <strong><?php translate("category");?> </strong><br />
+			</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
 	<?php echo categories::getHTMLSelect ( $row->category );?>
 			
 		</div>
@@ -394,8 +392,15 @@ function openMenuImageSelectWindow(field) {
 						maxlength="80"> <br /> <br /> <strong><?php translate("author_email");?></strong><br />
 					<input type="email" name="article_author_email"
 						value="<?php echo real_htmlspecialchars($row->article_author_email);?>"
-						maxlength="80"> <br /> <br /> <strong><?php translate("article_date");?></strong><br />
-					<input name="article_date" type="datetime-local"
+						maxlength="80"> <br /> <br />
+					<div id="comment-fields">
+						<strong><?php translate("homepage");?></strong><br /> <input
+							type="url" name="comment_homepage"
+							value="<?php echo real_htmlspecialchars($row->comment_homepage);?>"
+							maxlength="255"> <br /> <br />
+					</div>
+					<strong><?php translate("article_date");?></strong><br /> <input
+						name="article_date" type="datetime-local"
 						value="<?php
 				
 				if (isNotNullOrEmpty ( $row->article_date )) {

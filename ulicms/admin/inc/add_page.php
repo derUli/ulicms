@@ -257,8 +257,15 @@ function openMenuImageSelectWindow(field) {
 						type="text" name="article_author_name" value="" maxlength="80"> <br />
 					<br /> <strong><?php translate("author_email");?></strong><br /> <input
 						type="email" name="article_author_email" value="" maxlength="80">
-					<br /> <br /> <strong><?php translate("article_date");?></strong><br />
-					<input name="article_date" type="datetime-local"
+					<br /> <br />
+					<div id="comment-fields">
+						<strong><?php translate("homepage");?></strong><br /> <input
+							type="url" name="comment_homepage" value="" maxlength="255"> <br />
+						<br />
+					</div>
+
+					<strong><?php translate("article_date");?></strong><br /> <input
+						name="article_date" type="datetime-local"
 						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
 					<strong><?php translate("excerpt");?></strong> <textarea
 						name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
