@@ -305,6 +305,7 @@ function get_available_post_types() {
 	$post_types = array (
 			"page",
 			"article",
+			"comment",
 			"list",
 			"link",
 			"node",
