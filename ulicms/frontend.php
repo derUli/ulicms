@@ -45,6 +45,7 @@ if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 	echo $txt;
 	exit ();
 }
+
 require_once "templating.php";
 $status = check_status ();
 
