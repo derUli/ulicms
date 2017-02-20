@@ -30,6 +30,24 @@ class CommentManager {
 		if (isNullOrEmpty ( $args ["content"] )) {
 			$errors [] = get_translation ( "message_is_empty" );
 		}
+		
+		$parent_id = intval ( $args ["parent_id"] );
+		$article_author_name = $args ["article_author_name"];
+		$content = $args ["content"];
+		$content = strip_tags ( $content );
+		$content = make_links_clickable ( $content );
+		$comment_homepage = $args ["comment_homepage"];
+		
+		if (count ( $errors ) <= 0) {
+			try {
+				$parent = ContentFactory::getByID ( $parent_id );
+			} catch ( Exception $e ) {
+				$errors [] = get_translation ( "no_such_parent" );
+			}
+			
+			return true;
+		}
+		return false;
 	}
 	public function containsBadWords() {
 		$words_blacklist = getconfig ( "spamfilter_words_blacklist" );
