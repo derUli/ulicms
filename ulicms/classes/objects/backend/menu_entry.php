@@ -9,6 +9,7 @@ class MenuEntry {
 		$this->title = $title;
 		$this->link = $link;
 		$this->identifier = $identifier;
+		$this->permissions = $permissions;
 		$this->children = $children;
 	}
 	public function getTitle() {
@@ -65,7 +66,7 @@ class MenuEntry {
 	public function userHasPermission(){
       $acl = new ACL();
 			if(is_string($this->permissions) and !empty($this->permissions)){
-         return $acl->hasPermission($permissions);
+         return $acl->hasPermission($this->permissions);
 			} else if(is_array($this->permissions) and count($this->permissions) > 0){
 				foreach($this->permissions as $permission){
 					  $isPermitted = false;
