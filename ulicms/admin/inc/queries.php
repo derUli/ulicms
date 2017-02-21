@@ -25,12 +25,6 @@ if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] ) &&
 	setconfig ( "timezone", db_escape ( $_POST ["timezone"] ) );
 	setconfig ( "robots", db_escape ( $_POST ["robots"] ) );
 
-	if ($_POST ["disable_html_validation"] == "enabled") {
-		Settings::delete ( "disable_html_validation" );
-	} else {
-		setconfig ( "disable_html_validation", "disable" );
-	}
-
 	if (! isset ( $_POST ["disable_password_reset"] )) {
 		setconfig ( "disable_password_reset", "disable_password_reset" );
 	} else {

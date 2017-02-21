@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS `{prefix}users` (
 `icq_id` varchar(20) NULL,
 `twitter` varchar(15) NULL,
 `homepage` text NULL,
-`avatar_file` varchar(40) NULL,
 `about_me` text NULL,
 `last_action` bigint(20) NOT NULL DEFAULT 0,
 `last_login` bigint(20) DEFAULT NULL,

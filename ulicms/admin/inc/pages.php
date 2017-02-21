@@ -382,21 +382,22 @@ $(window).load(function(){
 		?>
 
 <br />
+<div class="scroll">
+	<table class="tablesorter dataset-list">
+		<thead>
+			<tr style="font-weight: bold;">
+				<th><?php translate("title");?>
+			</th>
+				<th class="hide-on-mobile"><?php translate("menu");?>
+			</th>
+				<th class="hide-on-mobile"><?php translate("position");?>
+			</th>
+				<th class="hide-on-mobile"><?php translate("parent");?>
+			</th>
 
-<table class="tablesorter dataset-list">
-	<thead>
-		<tr style="font-weight: bold;">
-			<th><?php translate("title");?>
+				<th class="hide-on-mobile"><?php translate("activated");?>
 			</th>
-			<th><?php translate("menu");?>
-			</th>
-			<th><?php translate("position");?>
-			</th>
-			<th><?php translate("parent");?>
-			</th>
-			<th><?php translate("activated");?>
-			</th>
-			<td style="text-align: center"><?php translate("view");?>
+				<td style="text-align: center"><?php translate("view");?>
 			</td>
 			<?php
 		
@@ -407,12 +408,12 @@ $(window).load(function(){
 			<?php }?>
 			<td style="text-align: center"><?php translate("edit");?>
 			</td>
-			<td style="text-align: center"><?php translate("delete");?>
+				<td style="text-align: center"><?php translate("delete");?>
 			</td>
 
-		</tr>
-	</thead>
-	<tbody>
+			</tr>
+		</thead>
+		<tbody>
 	<?php
 		if (in_array ( $_GET ["order"], array (
 				"title",
@@ -494,15 +495,15 @@ $(window).load(function(){
 				}
 				
 				echo "</td>";
-				echo "<td>" . htmlspecialchars ( get_translation ( $row->menu ) ) . "</td>";
+				echo "<td class=\"hide-on-mobile\">" . htmlspecialchars ( get_translation ( $row->menu ) ) . "</td>";
 				
-				echo "<td>" . $row->position . "</td>";
-				echo "<td>" . htmlspecialchars ( getPageTitleByID ( $row->parent ) ) . "</td>";
+				echo "<td class=\"hide-on-mobile\">" . $row->position . "</td>";
+				echo "<td class=\"hide-on-mobile\">" . htmlspecialchars ( getPageTitleByID ( $row->parent ) ) . "</td>";
 				
 				if ($row->active) {
-					echo "<td>" . get_translation ( "yes" ) . "</td>";
+					echo "<td class=\"hide-on-mobile\">" . get_translation ( "yes" ) . "</td>";
 				} else {
-					echo "<td>" . get_translation ( "no" ) . "</td>";
+					echo "<td class=\"hide-on-mobile\">" . get_translation ( "no" ) . "</td>";
 				}
 				
 				if (startsWith ( $row->redirection, "#" )) {
@@ -565,8 +566,8 @@ $(window).load(function(){
 		}
 		?>
 	</tbody>
-</table>
-
+	</table>
+</div>
 <script type="text/javascript">
 
 var ajax_options = {

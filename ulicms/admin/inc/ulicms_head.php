@@ -1,16 +1,18 @@
+<?php
+	 $admin_logo = Settings::get ( "admin_logo" );
+	 if (! $admin_logo) {
+		 $admin_logo = "gfx/logo.png";
+	 }
+?>
+<!DOCTYPE html>
+<html>
 <head>
-<meta name="viewport" content="width=1000, user-scalable=yes" />
+<meta name="viewport"
+	content="width=device-width, user-scalable=yes, initial-scale=1" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>[<?php Template::escape(Settings::get("homepage_title"));?>] - UliCMS</title>
-<link rel="stylesheet" type="text/css" href="css/blue.css" />
 <?php
 $styles = array ();
-?>
-<?php
-
-if (is_mobile ()) {
-	$styles [] = "css/mobile.css";
-}
 ?>
 <link rel="stylesheet" type="text/css"
 	href="scripts/tablesorter/style.css" />
@@ -30,14 +32,14 @@ $enq = array (
 		"codemirror/mode/css/css.js",
 		"scripts/url.min.js",
 		"scripts/util.js",
-		"scripts/users.js"
+		"scripts/users.js",
+		"scripts/global.js"
 );
 ?>
 <?php
 
 if (is_logged_in ()) {
 	$enq [] = "scripts/cookie.js";
-	$enq [] = "scripts/notification.js";
 	$enq [] = "scripts/jquery-shiftclick.js";
 	$enq [] = "scripts/shift_checkbox.js";
 }
@@ -83,12 +85,14 @@ $(".menu li:has(ul)").doubleTapToGo();
 <?php include "inc/ulicms_touch_icons.php";?>
 <?php
 
+$styles [] = "css/bootstrap.min.css";
 $styles [] = "codemirror/lib/codemirror.css";
 $styles [] = "codemirror/mode/xml/xml.css";
 $styles [] = "codemirror/mode/javascript/javascript.css";
 $styles [] = "codemirror/mode/clike/clike.css";
 $styles [] = "codemirror/lib/codemirror.css";
 $styles [] = "codemirror/mode/css/css.css";
+$styles [] = "css/modern.css";
 
 foreach ( $styles as $style ) {
 	enqueueStylesheet ( $style );
@@ -107,3 +111,21 @@ $(document).ready(function(){
 add_hook ( "admin_head" );
 ?>
 </head>
+<div class="fluid-container main">
+
+	<div class="row">
+		<div class="col-xs-8">
+			<a href="../" title="<?php translate("goto_frontend");?>"><img
+				src="<?php Template::escape($admin_logo);?>" alt="UliCMS" class="ulicms-logo"></a>
+		</div>
+		<div class="col-xs-4 menu-container">
+		<?php
+
+		if (is_logged_in ()) {
+			?>
+			<img src="gfx/menu-icon.png" id="menu-toggle">
+			<?php }?>
+		</div>
+	</div>
+	<div class="row main-content">
+		<div class="col-xs-12">

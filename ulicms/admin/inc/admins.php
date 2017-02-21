@@ -28,25 +28,30 @@ if (defined ( "_SECURITY" )) {
 	<br /> <br /> <a href="index.php?action=admin_new"><?php translate("create_user");?></a><br />
 </p>
 <?php }?>
-<table class="tablesorter">
-	<thead>
-		<tr style="font-weight: bold;">
-			<th style="width: 40px;"><a href="index.php?action=admins&order=id">ID</a>
-			</th>
-			<th><span><a href="index.php?action=admins&order=username"><?php translate("username");?> </a>
-			</span></th>
-			<th><a href="index.php?action=admins&order=lastname"><?php translate("lastname");?> </a></th>
-			<th><a href="index.php?action=admins&order=firstname"><?php translate("firstname");?> </a></th>
-			<th><a href="index.php?action=admins&order=email"><?php translate("email");?> </a></th>
-			<th><a href="index.php?action=admins&order=group_id"><?php translate("group");?> </a></th>
-			
+<div class="scroll">
+	<table class="tablesorter">
+		<thead>
+			<tr style="font-weight: bold;">
+				<th style="width: 40px;"><a href="index.php?action=admins&order=id">ID</a>
+				</th>
+				<th><span><a href="index.php?action=admins&order=username"><?php translate("username");?> </a>
+				</span></th>
+				<th class="hide-on-mobile"><a
+					href="index.php?action=admins&order=lastname"><?php translate("lastname");?> </a></th>
+				<th class="hide-on-mobile"><a
+					href="index.php?action=admins&order=firstname"><?php translate("firstname");?> </a></th>
+				<th class="hide-on-mobile"><a
+					href="index.php?action=admins&order=email"><?php translate("email");?> </a></th>
+				<th class="hide-on-mobile"><a
+					href="index.php?action=admins&order=group_id"><?php translate("group");?> </a></th>
+
 <?php if($acl->hasPermission("users_edit")){?>
 			<td><?php translate ( "edit" );?></td>
-			<td><span><?php translate("delete");?> </span></td>
+				<td><span><?php translate("delete");?> </span></td>
 			<?php }?>
 		</tr>
-	</thead>
-	<tbody>
+		</thead>
+		<tbody>
 	<?php
 			while ( $row = db_fetch_object ( $query ) ) {
 				$group = $acl->getPermissionQueryResult ( $row->group_id );
@@ -59,10 +64,10 @@ if (defined ( "_SECURITY" )) {
 				echo "<td>";
 				echo '<img src="' . get_gravatar ( $row->email, 26 ) . '" alt="Avatar von ' . real_htmlspecialchars ( $row->username ) . '"> ';
 				echo real_htmlspecialchars ( $row->username ) . "</td>";
-				echo "<td>" . real_htmlspecialchars ( $row->lastname ) . "</td>";
-				echo "<td>" . real_htmlspecialchars ( $row->firstname ) . "</td>";
-				echo "<td>" . real_htmlspecialchars ( $row->email ) . "</td>";
-				echo "<td>" . real_htmlspecialchars ( $group ) . "</td>";
+				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->lastname ) . "</td>";
+				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->firstname ) . "</td>";
+				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->email ) . "</td>";
+				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $group ) . "</td>";
 				if ($acl->hasPermission ( "users_edit" )) {
 					echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
 					
@@ -77,7 +82,8 @@ if (defined ( "_SECURITY" )) {
 		}
 		?>
 		</tbody>
-</table>
+	</table>
+</div>
 <script type="text/javascript">
 var ajax_options = {
   success : function(responseText, statusText, xhr, $form){
@@ -86,12 +92,12 @@ var ajax_options = {
   var list_item_id = "dataset-" + id
   var tr = $("tr#" + list_item_id);
   $(tr).fadeOut();
-  
+
   }
- 
+
 }
 
-$("form.delete-form").ajaxForm(ajax_options); 
+$("form.delete-form").ajaxForm(ajax_options);
 </script>
 <br />
 <br />

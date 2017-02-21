@@ -29,5 +29,5 @@ CKEDITOR.editorConfig = function(config) {
 	config.uiColor = '#d1d8d0';
 	config.removePlugins = "link,newpage,templates,preview,print,save,language";
 	config.autoGrow_onStartup = false;
-	config.extraPlugins = 'adv_link';
+	config.extraPlugins = 'adv_link,font';
 };

@@ -3,7 +3,14 @@ function get_action() {
 	if (isset ( $_REQUEST ["action"] )) {
 		return $_REQUEST ["action"];
 	} else {
-		return null;
+		return "home";
+	}
+}
+
+// boolval PHP 5.4 Implementation with checking version
+if (! function_exists ( 'boolval' )) {
+	function boolval($my_value) {
+		return ( bool ) $my_value;
 	}
 }
 
@@ -298,6 +305,7 @@ function get_available_post_types() {
 	$post_types = array (
 			"page",
 			"article",
+			// "comment",
 			"list",
 			"link",
 			"node",
@@ -338,17 +346,10 @@ function get_available_post_types() {
 // @TODO : Filter implementieren
 function getFontSizes() {
 	global $sizes;
-	$sizes = array (
-			"xx-small",
-			"x-small",
-			"smaller",
-			"small",
-			"medium",
-			"large",
-			"larger",
-			"x-large",
-			"xx-large" 
-	);
+	$sizes = array ();
+	for($i = 6; $i <= 80; $i ++) {
+		$sizes [] = $i . "px";
+	}
 	add_hook ( "custom_font_sizes" );
 	return $sizes;
 }

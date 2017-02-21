@@ -688,5 +688,8 @@ define ( "TRANSLATION_OTHERS", "Andere" );
 
 define ( "TRANSLATION_HIDDEN", "Versteckt" );
 define ( "TRANSLATION_NODE", "Knotenpunkt" );
+define ( "TRANSLATION_GOTO_FRONTEND", "Gehe ins Frontend" );
+
+define ( "TRANSLATION_COMMENT", "Kommentar" );
 
 add_hook ( "lang_de" );

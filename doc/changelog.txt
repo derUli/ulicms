@@ -1,4 +1,16 @@
-﻿===== Neues in UliCMS 2017.1 =====
+﻿===== Neues in UliCMS 2017.2 =====
++ Neues Backend Design
++ Zugriff auf ulicms.de erfolgt nun mit verschlüsselter Verbindung
++ Funktion ModuleHelper::getFirstPageWithModule() hinzugefügt
++ DBMigrator hinzugefügt
+# Schriftgröße wird nun in px angegeben
+# Datenbankspalte "avatar_file" entfernt, wird nicht mehr verwendet
+# Helper von Modulen werden nun initialisiert.
+# Kompatiblität mit PHP < 5.5 wieder hergestellt
+- ungenutztes Datenbankfeld "avatar_file" entfernt
+- Funktion "W3C Validierungsfehler automatisch korrigieren" entfernt
+
+===== Neues in UliCMS 2017.1 =====
 
 + Neues Standard-Design theme-2017
 + "Passwort wiederholen" Feld zur Userverwaltung hinzugefügt
@@ -106,7 +118,6 @@ Neue Features für Entwickler
 Entfernte Features
 - Funktion Database::preparedQuery() entfernt, stattdessen Database::pQuery() verwenden
 
-
 ===== Neues in UliCMS 9.8.4 =====
 
 Neue Features
@@ -135,7 +146,6 @@ unterstützt
 Entfernte Features
 - Templates können nicht mehr online im Browser bearbeitet werden
 
-
 ===== Neues in UliCMS 9.8.3 =====
 
 Neue Features
@@ -159,7 +169,6 @@ Bugfixes
 
 Entfernte Features
 - cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016
-
 
 ===== Neues in UliCMS 9.8.2 =====
 
@@ -189,7 +198,6 @@ Entfernte Features
 + Translation Overrides (Übersetzungen update-sicher anpassen)
 + Seiten können nun geklont werden
 
-
 ===== Neues in UliCMS 9.8.1 =====
 
 + Option "Design für Mobilgeräte nicht auf Tablets verwenden" hinzugefügt
@@ -212,7 +220,6 @@ Entfernte Features
 + Template Klasse hinzugefügt
 + Encryption Klasse hinzugefügt
 + unique_identifier_filter hinzugefügt
-
 
 ===== Neues in UliCMS 9.8.0 ====
 
@@ -294,7 +301,6 @@ Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird d
 + Konstante UPDATE_CHECK_URL kann nun überschrieben werden
 + Konstante PATCH_CHECK_URL kann nun überschrieben werden
 + Accordion Layouts werden nun an die Fenstergröße angepasst, wenn man das Browserfenster skaliert
-
 
 ==== Neues in UliCMS 9.0.1 Refresh 2 =====
 

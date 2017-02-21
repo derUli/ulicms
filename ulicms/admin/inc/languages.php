@@ -2,17 +2,18 @@
 <?php
 
 if (defined ( "_SECURITY" )) {
-	
+
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "languages" )) {
 		$languages = db_query ( "SELECT * FROM " . tbname ( "languages" ) . " ORDER BY language_code ASC" );
-		
+
 		?>
 <form action="index.php?action=languages" method="post">
 <?php
-		
+
 		csrf_token_html ();
 		?>
+		<div class="scroll">
 	<table border=0>
 		<tr>
 			<td><strong><?php translate("shortcode");?>
@@ -28,7 +29,7 @@ if (defined ( "_SECURITY" )) {
 			<td></td>
 			<td><input type="submit" name="add_language"
 				value="<?php
-		
+
 		translate ( "add_language" );
 		?>"></td>
 		</tr>
@@ -39,7 +40,7 @@ if (defined ( "_SECURITY" )) {
 <div class="seperator"></div>
 <br>
 <?php
-		
+
 		if (db_num_rows ( $languages ) > 0) {
 			?>
 <table class="tablesorter">
@@ -59,7 +60,7 @@ if (defined ( "_SECURITY" )) {
 			<td><?php echo htmlspecialchars($row -> language_code)?>
 		</td>
 			<td><?php
-				
+
 				echo htmlspecialchars ( $row->name );
 				?>
 		</td>
@@ -74,7 +75,7 @@ if (defined ( "_SECURITY" )) {
 					?>')"
 				href="index.php?action=languages&default=<?php echo htmlspecialchars($row -> language_code);?>">
 					<span style="color: red !important;"><?php
-					
+
 					translate ( "no" );
 					?></span>
 			</a> <?php
@@ -83,7 +84,7 @@ if (defined ( "_SECURITY" )) {
 		</td>
 
 			<td align="center"><?php
-				
+
 				if ($row->language_code == Settings::get ( "default_language" )) {
 					?> <a
 				onclick="javascript:alert('<?php translate("CANT_DELETE_DEFAULT_LANGUAGE");?>')"
@@ -116,7 +117,7 @@ if (defined ( "_SECURITY" )) {
 
 </tbody>
 </table>
-
+</div>
 <script type="text/javascript">
 
 var ajax_options = {
@@ -126,12 +127,12 @@ var ajax_options = {
   var list_item_id = "dataset-" + id
   var tr = $("tr#" + list_item_id);
   $(tr).fadeOut();
-  
+
   }
- 
+
 }
 
-$("form.delete-form").ajaxForm(ajax_options); 
+$("form.delete-form").ajaxForm(ajax_options);
 </script>
 <?php
 		}

@@ -6,21 +6,17 @@ if (defined ( "_SECURITY" )) {
 	if (! $acl->hasPermission ( "info" )) {
 		noperms ();
 	} else {
-		
+
 		$admin_logo = Settings::get ( "admin_logo" );
 		if (! $admin_logo) {
 			$admin_logo = "gfx/logo.png";
 		}
 		?>
-<p>
-	<img src="<?php echo $admin_logo;?>" alt="UliCMS"
-		class="responsive-image" />
-</p>
 <strong>Release <?php
-		
+
 		echo cms_version ();
 		?> "<?php
-		
+
 		echo $version->getVersion ();
 		?>"</strong>
 <br />
@@ -96,7 +92,7 @@ if (defined ( "_SECURITY" )) {
 	onclick='window.open("license.html");' />
 
 <input type="button" value="Feedback"
-	onclick='location.replace("http://www.ulicms.de/?seite=kontakt");'>
+	onclick='location.replace("http://www.ulicms.de/kontakt.html");'>
 
 
 <br />
