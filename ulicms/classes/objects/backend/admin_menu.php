@@ -34,7 +34,7 @@ class AdminMenu {
 	public function render() {
 		$html = "<ul>";
 		foreach ( $this->children as $child ) {
-			if($child->userHasPermission()){
+			if ($child->userHasPermission ()) {
 				$html .= "<li>";
 				if ($child->getIdentifier () == get_action ()) {
 					$html .= '<a href="' . $child->getLink () . '" class="active">';

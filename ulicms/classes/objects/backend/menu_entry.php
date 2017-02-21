@@ -57,29 +57,26 @@ class MenuEntry {
 		}
 		return null;
 	}
-	public function getPermissions(){
+	public function getPermissions() {
 		return $this->permissions;
 	}
-	public function setPermissions($permissions){
+	public function setPermissions($permissions) {
 		$this->permissions = $permissions;
 	}
-	public function userHasPermission(){
-      $acl = new ACL();
-			if(is_string($this->permissions) and !empty($this->permissions)){
-         return $acl->hasPermission($this->permissions);
-			} else if(is_array($this->permissions) and count($this->permissions) > 0){
-				foreach($this->permissions as $permission){
-					  $isPermitted = false;
-            if(is_string($permission) and !empty($permission) and $acl->hasPermission($permission)){
-								$isPermitted = true;
-						}
-
+	public function userHasPermission() {
+		$acl = new ACL ();
+		if (is_string ( $this->permissions ) and ! empty ( $this->permissions )) {
+			return $acl->hasPermission ( $this->permissions );
+		} else if (is_array ( $this->permissions ) and count ( $this->permissions ) > 0) {
+			foreach ( $this->permissions as $permission ) {
+				$isPermitted = false;
+				if (is_string ( $permission ) and ! empty ( $permission ) and $acl->hasPermission ( $permission )) {
+					$isPermitted = true;
 				}
-        return $isPermitted;
-			} else {
-        return true;
-
 			}
-
+			return $isPermitted;
+		} else {
+			return true;
+		}
 	}
 }
