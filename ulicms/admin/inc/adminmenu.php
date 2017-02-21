@@ -9,7 +9,7 @@ $entries [] = new MenuEntry ( get_translation ( "users" ), "?action=admins", "ad
 $entries [] = new MenuEntry ( get_translation ( "groups" ), "?action=groups", "groups", "groups" );
 $entries [] = new MenuEntry ( get_translation ( "packages" ), "?action=modules", "modules", "list_packages" );
 $entries [] = new MenuEntry ( get_translation ( "settings" ), "?action=settings_categories", "settings_categories",
-array("settings_simple", "design", "spam_filter", "cache", "motd", "pkg_settings", "logo", "languages", "other", "exep" ) );
+array("settings_simple", "design", "spam_filter", "cache", "motd", "pkg_settings", "logo", "languages", "other", "expert_settings" ) );
 $entries [] = new MenuEntry ( get_translation ( "info" ), "?action=info", "info", "info" );
 $entries [] = new MenuEntry ( get_translation ( "logout" ), "?action=destroy", "destroy" );
 $entries = apply_filter ( $entries, "admin_menu_entries" );
