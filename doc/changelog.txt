@@ -1,5 +1,6 @@
- ===== Neues in UliCMS 2017.3 =====
-# Fix: Menüpunkte werden nur noch angezeigt, wenn darauf die Zugriffsrechte hat
+﻿ ===== Neues in UliCMS 2017.3 =====
+# Menüpunkte werden nur noch angezeigt, wenn darauf die Zugriffsrechte hat
+# Doppelklick auf "Paket installieren" Button erzeugt nun keinen Fehler mehr
 
 
 ﻿===== Neues in UliCMS 2017.2 =====
