@@ -12,6 +12,7 @@ class Comment extends Content {
 	public $menu_image = null;
 	public $active = 1;
 	public $created = 0;
+	public $hidden = 0;
 	public $lastmodified = 0;
 	public $autor = 1;
 	public $lastchangeby = 1;
@@ -27,7 +28,7 @@ class Comment extends Content {
 	public $html_file = null;
 	public $theme = null;
 	public $custom_data = null;
-	protected $type = "article";
+	protected $type = "comment";
 	public $og_title = "";
 	public $og_type = "";
 	public $og_image = "";
@@ -87,6 +88,7 @@ class Comment extends Content {
 		$this->article_date = $result->article_date;
 		$this->excerpt = $result->expert;
 		$this->comment_homepage = $result->comment_homepage;
+		$this->hidden = $result->hidden;
 	}
 	public function loadByID($id) {
 		$id = intval ( $id );
@@ -123,7 +125,7 @@ class Comment extends Content {
 				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views,
 				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
 				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, `cache_control`, article_author_email, 
-				article_author_name, article_date, article_image, excerpt, comment_homepage) VALUES (";
+				article_author_name, article_date, article_image, excerpt, comment_homepage, hidden) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->title ) . "',";
@@ -206,7 +208,8 @@ class Comment extends Content {
 		$sql .= "'" . DB::escapeValue ( $this->article_date ) . "', ";
 		$sql .= "'" . DB::escapeValue ( $this->article_image ) . "', ";
 		$sql .= "'" . DB::escapeValue ( $this->excerpt ) . "', ";
-		$sql .= "'" . DB::escapeValue ( $this->comment_homepage ) . "'";
+		$sql .= "'" . DB::escapeValue ( $this->comment_homepage ) . "', ";
+		$sql .= intval ( $this->hidden ) . "";
 		
 		$sql .= ")";
 		
@@ -305,6 +308,7 @@ class Comment extends Content {
 		$sql .= "article_date ='" . DB::escapeValue ( $this->article_date ) . "', ";
 		$sql .= "article_image = '" . DB::escapeValue ( $this->article_image ) . "', ";
 		$sql .= "excerpt = '" . DB::escapeValue ( $this->excerpt ) . "', ";
+		$sql .= "hidden = " . intval ( $this->hidden ) . ", ";
 		$sql .= "comment_homepage = '" . DB::escapeValue ( $this->comment_homepage ) . "' ";
 		
 		$sql .= " WHERE id = " . $this->id;

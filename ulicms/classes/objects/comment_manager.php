@@ -53,12 +53,22 @@ class CommentManager {
 		
 		if (count ( $errors ) <= 0) {
 			try {
-				$parent = ContentFactory::getByID ( $parent_id );
+				$parentData = ContentFactory::getByID ( $parent );
+				$comment = new Comment ();
+				$comment->autor = $autor;
+				$comment->article_author_name = $article_author_name;
+				$comment->content = $content;
+				$comment->comment_homepage = $comment_homepage;
+				$comment->parent = $parent;
+				$comment->title = "Comment " . time () . " on Article $parent";
+				$comment->systemname = $parentData ["system-name"] . "_comment_" . microtime ( false ) . "_" . $autor;
+				$comment->hidden = 1;
+				$comment->menu = $parentData ["menu"];
+				$comment->save ();
+				return true;
 			} catch ( Exception $e ) {
 				$errors [] = get_translation ( "no_such_parent" );
 			}
-			
-			return true;
 		}
 		
 		ViewBag::set ( "errors", $errors );
