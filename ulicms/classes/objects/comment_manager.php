@@ -36,7 +36,7 @@ class CommentManager {
 			$errors [] = get_translation ( "message_is_empty" );
 		}
 
-		$parent_id = intval ( $args ["parent_id"] );
+		$parent = intval ( $args ["parent"] );
 		$article_author_name = $args ["article_author_name"];
 		$content = $args ["content"];
 		$content = strip_tags ( $content );
