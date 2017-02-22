@@ -57,6 +57,7 @@ class CommentManager {
 				$comment = new Comment ();
 				$comment->autor = $autor;
 				$comment->article_author_name = $article_author_name;
+				$comment->article_author_email = $article_author_email;
 				$comment->content = $content;
 				$comment->comment_homepage = $comment_homepage;
 				$comment->parent = $parent;
