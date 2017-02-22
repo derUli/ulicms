@@ -1,3 +1,9 @@
+﻿ ===== Neues in UliCMS 2017.3 =====
++ ViewBag hinzugefügt
+# Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
+# Menüpunkte werden nur noch angezeigt, wenn darauf die Zugriffsrechte hat
+# Doppelklick auf "Paket installieren" Button erzeugt nun keinen Fehler mehr
+
 ﻿===== Neues in UliCMS 2017.2 =====
 + Neues Backend Design
 + Zugriff auf ulicms.de erfolgt nun mit verschlüsselter Verbindung

@@ -34,15 +34,17 @@ class AdminMenu {
 	public function render() {
 		$html = "<ul>";
 		foreach ( $this->children as $child ) {
-			$html .= "<li>";
-			if ($child->getIdentifier () == get_action ()) {
-				$html .= '<a href="' . $child->getLink () . '" class="active">';
-			} else {
-				$html .= '<a href="' . $child->getLink () . '">';
+			if ($child->userHasPermission ()) {
+				$html .= "<li>";
+				if ($child->getIdentifier () == get_action ()) {
+					$html .= '<a href="' . $child->getLink () . '" class="active">';
+				} else {
+					$html .= '<a href="' . $child->getLink () . '">';
+				}
+				$html .= $child->getTitle ();
+				$html .= "</a>";
+				$html .= "</li>";
 			}
-			$html .= $child->getTitle ();
-			$html .= "</a>";
-			$html .= "</li>";
 		}
 		echo $html;
 	}
