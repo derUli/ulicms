@@ -246,11 +246,9 @@ $select = Database::select ( $config->db_database );
 if (! $select) {
 	throw new Exception ( "<h1>Database " . $config->db_database . " doesn't exist.</h1>" );
 }
-if (isFastMode ()) {
-	$useragent = null;
-} else {
-	$useragent = Settings::get ( "useragent" );
-}
+
+$useragent = Settings::get ( "useragent" );
+
 if ($useragent) {
 	define ( "ULICMS_USERAGENT", $useragent );
 } else {
@@ -263,17 +261,14 @@ if (! Settings::get ( "hide_meta_generator" )) {
 	@header ( 'X-Powered-By: UliCMS Release ' . cms_version () );
 }
 
-if (! isFastMode ()) {
-	$memory_limit = Settings::get ( "memory_limit" );
-	
-	if ($memory_limit !== false) {
-		@ini_set ( 'memory_limit', $memory_limit );
-	}
+$memory_limit = Settings::get ( "memory_limit" );
+
+if ($memory_limit !== false) {
+	@ini_set ( 'memory_limit', $memory_limit );
 }
-if (! isFastMode ()) {
-	$log_ip = Settings::get ( "log_ip" );
-	log_request ( $log_ip );
-}
+
+$log_ip = Settings::get ( "log_ip" );
+log_request ( $log_ip );
 
 $cache_period = Settings::get ( "cache_period" );
 
