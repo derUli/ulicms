@@ -124,7 +124,7 @@ add_hook ( "admin_head" );
 		
 		if (is_logged_in ()) {
 			?>
-			<div class="row">
+			<div class="row pull-right">
 				<div class="col-xs-6">
 					<img src="gfx/clear-cache.png" id="menu-clear-cache"
 						alt="<?php translate("clear_cache");?>">
