@@ -65,13 +65,11 @@ class CommentManager {
 		} else {
 			return false;
 		}
-
 		for($i = 0; $i < count ( $words_blacklist ); $i ++) {
 			$word = strtolower ( $words_blacklist [$i] );
 			if (strpos ( $str, $word ) !== false)
 				return true;
 		}
-
 		return false;
 	}
 }
