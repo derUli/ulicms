@@ -9,7 +9,7 @@ define ( "TRANSLATION_LAST_CHANGES", "Last changes" );
 define ( "TRANSLATION_SITE_ONLINE_SINCE", "Site online since" );
 define ( "TRANSLATION_PAGES_COUNT", "Count of page" );
 define ( "TRANSLATION_REGISTERED_USERS_COUNT", "Amount of users" );
-define ( "TRANSLATION_BLOCKED_SPAM_MAILS", "refused spam emails" );
+define ( "TRANSLATION_BLOCKED_SPAM_MAILS", "refused spam messages" );
 define ( "TRANSLATION_GUESTBOOK_ENTRIES", "guestbook entries" );
 
 define ( "TRANSLATION_TITLE", "Title" );
