@@ -43,7 +43,10 @@ class CommentManager {
 		$content = make_links_clickable ( $content );
 		$comment_homepage = $args ["comment_homepage"];
 		$article_author_email = $args["article_author_email"];
-		$user_id = get_user_id();
+		$autor = get_user_id();
+		if($autor == 0){
+				// @TODO: Gastnutzer als Autor eintragen
+		}
 
 		if (count ( $errors ) <= 0) {
 			try {
