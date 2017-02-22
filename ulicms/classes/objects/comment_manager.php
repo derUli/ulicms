@@ -64,6 +64,7 @@ class CommentManager {
 				$comment->systemname = $parentData ["system-name"] . "_comment_" . microtime ( false ) . "_" . $autor;
 				$comment->hidden = 1;
 				$comment->menu = $parentData ["menu"];
+				$comment->language = $parentData ["language"];
 				$comment->save ();
 				return true;
 			} catch ( Exception $e ) {
