@@ -21,11 +21,11 @@ class CommentManager {
 				$is_spam = true;
 			}
 		}
-
-		if($is_spam){
-			Settings::set( "contact_form_refused_spam_mails", Settings::get( "contact_form_refused_spam_mails" ) + 1);
+		
+		if ($is_spam) {
+			Settings::set ( "contact_form_refused_spam_mails", Settings::get ( "contact_form_refused_spam_mails" ) + 1 );
 		}
-
+		
 		if (isNullOrEmpty ( $args ["parent_id"] )) {
 			$errors [] = get_translation ( "parent_id_is_empty" );
 		}
@@ -35,37 +35,41 @@ class CommentManager {
 		if (isNullOrEmpty ( $args ["content"] )) {
 			$errors [] = get_translation ( "message_is_empty" );
 		}
-
+		
 		$parent = intval ( $args ["parent"] );
 		$article_author_name = $args ["article_author_name"];
 		$content = $args ["content"];
 		$content = strip_tags ( $content );
 		$content = make_links_clickable ( $content );
 		$comment_homepage = $args ["comment_homepage"];
-		$article_author_email = $args["article_author_email"];
-		$autor = get_user_id();
-		if($autor == 0){
-				$guestUser = getUserByName("guest");
-				if($guestUser){
-					  $autor = $guestUser["id"];
-				}
+		$article_author_email = $args ["article_author_email"];
+		$autor = get_user_id ();
+		if ($autor == 0) {
+			$guestUser = getUserByName ( "guest" );
+			if ($guestUser) {
+				$autor = $guestUser ["id"];
+			}
 		}
-
+		
 		if (count ( $errors ) <= 0) {
 			try {
 				$parent = ContentFactory::getByID ( $parent_id );
 			} catch ( Exception $e ) {
 				$errors [] = get_translation ( "no_such_parent" );
 			}
-
+			
 			return true;
 		}
+		
+		ViewBag::set ( "errors", $errors );
+		Template::executeDefaultOrOwnTemplate ( "comments/error" );
+		
 		return false;
 	}
 	public function containsBadWords() {
 		$words_blacklist = getconfig ( "spamfilter_words_blacklist" );
 		$str = strtolower ( $str );
-
+		
 		if ($words_blacklist !== false) {
 			$words_blacklist = explode ( "||", $words_blacklist );
 		} else {
