@@ -61,7 +61,7 @@ class CommentManager {
 				$comment->comment_homepage = $comment_homepage;
 				$comment->parent = $parent;
 				$comment->title = "Comment " . time () . " on Article $parent";
-				$comment->systemname = $parentData ["system-name"] . "_comment_" . microtime ( false ) . "_" . $autor;
+				$comment->systemname = $parentData ["system-name"] . "_comment_" . uniqid () . "_" . $autor;
 				$comment->hidden = 1;
 				$comment->menu = $parentData ["menu"];
 				$comment->language = $parentData ["language"];
