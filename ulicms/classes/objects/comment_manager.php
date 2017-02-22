@@ -25,7 +25,7 @@ class CommentManager {
 		if($is_spam){
 			Settings::set( "contact_form_refused_spam_mails", Settings::get( "contact_form_refused_spam_mails" ) + 1);
 		}
-		
+
 		if (isNullOrEmpty ( $args ["parent_id"] )) {
 			$errors [] = get_translation ( "parent_id_is_empty" );
 		}
@@ -42,6 +42,8 @@ class CommentManager {
 		$content = strip_tags ( $content );
 		$content = make_links_clickable ( $content );
 		$comment_homepage = $args ["comment_homepage"];
+		$article_author_email = $args["article_author_email"];
+		$user_id = get_user_id();
 
 		if (count ( $errors ) <= 0) {
 			try {
