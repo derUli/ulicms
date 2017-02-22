@@ -45,7 +45,10 @@ class CommentManager {
 		$article_author_email = $args["article_author_email"];
 		$autor = get_user_id();
 		if($autor == 0){
-				// @TODO: Gastnutzer als Autor eintragen
+				$guestUser = getUserByName("guest");
+				if($guestUser){
+					  $autor = $guestUser["id"];
+				}
 		}
 
 		if (count ( $errors ) <= 0) {
