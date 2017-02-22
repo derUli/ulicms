@@ -701,4 +701,6 @@ define ( "TRANSLATION_GOTO_FRONTEND", "Goto Frontend" );
 
 define ( "TRANSLATION_COMMENT", "Comment" );
 
+define ( "TRANSLATION_FILE_NOT_FOUND", "File not found!" );
+
 add_hook ( "lang_en" );

@@ -692,4 +692,6 @@ define ( "TRANSLATION_GOTO_FRONTEND", "Gehe ins Frontend" );
 
 define ( "TRANSLATION_COMMENT", "Kommentar" );
 
+define ( "TRANSLATION_FILE_NOT_FOUND", "Datei nicht gefunden!" );
+
 add_hook ( "lang_de" );
