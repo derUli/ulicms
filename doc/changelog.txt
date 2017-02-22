@@ -1,4 +1,5 @@
 ﻿ ===== Neues in UliCMS 2017.3 =====
++ Shortcut zum Leeren des Caches hinzugefügt
 + ViewBag hinzugefügt
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
 # Menüpunkte werden nur noch angezeigt, wenn darauf die Zugriffsrechte hat
