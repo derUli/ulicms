@@ -35,7 +35,7 @@ class Article extends Content {
 	public $cache_control = "auto";
 	public $article_author_name = "";
 	public $article_author_email = "";
-	public $article_date = "NULL";
+	public $article_date = null;
 	public $article_image = "";
 	public $excerpt = "";
 	public function __construct() {
@@ -200,7 +200,12 @@ class Article extends Content {
 		$sql .= "'" . DB::escapeValue ( $this->article_author_email ) . "', ";
 		$sql .= "'" . DB::escapeValue ( $this->article_author_name ) . "', ";
 		
-		$sql .= "'" . DB::escapeValue ( $this->article_date ) . "', ";
+		if ($this->article_date === null) {
+			$sql .= "NULL, ";
+		} else {
+			$sql .= "'" . DB::escapeValue ( $this->article_date ) . "', ";
+		}
+		
 		$sql .= "'" . DB::escapeValue ( $this->article_image ) . "', ";
 		$sql .= "'" . DB::escapeValue ( $this->excerpt ) . "'";
 		
@@ -297,8 +302,11 @@ class Article extends Content {
 		
 		$sql .= "article_author_email = '" . DB::escapeValue ( $this->article_author_email ) . "', ";
 		$sql .= "article_author_name = '" . DB::escapeValue ( $this->article_author_name ) . "', ";
-		
-		$sql .= "article_date ='" . DB::escapeValue ( $this->article_date ) . "', ";
+		if ($this->article_date === null) {
+			$sql .= "article_date = NULL, ";
+		} else {
+			$sql .= "article_date ='" . DB::escapeValue ( $this->article_date ) . "', ";
+		}
 		$sql .= "article_image = '" . DB::escapeValue ( $this->article_image ) . "', ";
 		$sql .= "excerpt = '" . DB::escapeValue ( $this->excerpt ) . "' ";
 		
