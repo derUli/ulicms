@@ -35,7 +35,7 @@ class Article extends Content {
 	public $cache_control = "auto";
 	public $article_author_name = "";
 	public $article_author_email = "";
-	public $article_date = "";
+	public $article_date = "NULL";
 	public $article_image = "";
 	public $excerpt = "";
 	public function __construct() {
