@@ -9,7 +9,7 @@ define ( "TRANSLATION_LAST_CHANGES", "Letzte Änderungen" );
 define ( "TRANSLATION_SITE_ONLINE_SINCE", "Alter dieser Website" );
 define ( "TRANSLATION_PAGES_COUNT", "Anzahl der Seiten" );
 define ( "TRANSLATION_REGISTERED_USERS_COUNT", "Anzahl der Benutzer" );
-define ( "TRANSLATION_BLOCKED_SPAM_MAILS", "Blockierte Spam E-Mails" );
+define ( "TRANSLATION_BLOCKED_SPAM_MAILS", "Blockierte Spam Nachrichten" );
 define ( "TRANSLATION_GUESTBOOK_ENTRIES", "Gästebucheinträge" );
 
 define ( "TRANSLATION_TITLE", "Titel" );
@@ -691,5 +691,7 @@ define ( "TRANSLATION_NODE", "Knotenpunkt" );
 define ( "TRANSLATION_GOTO_FRONTEND", "Gehe ins Frontend" );
 
 define ( "TRANSLATION_COMMENT", "Kommentar" );
+
+define ( "TRANSLATION_FILE_NOT_FOUND", "Datei nicht gefunden!" );
 
 add_hook ( "lang_de" );

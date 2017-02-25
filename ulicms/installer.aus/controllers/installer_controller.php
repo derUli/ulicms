@@ -22,15 +22,14 @@ class InstallerController {
 				"admin_lastname",
 				"admin_firstname",
 				"install_demodata",
-				"add_fk",
-				"fast_mode"
+				"add_fk" 
 		);
 		foreach ( $vars as $var ) {
 			if (! isset ( $_SESSION [$var] )) {
 				$_SESSION [$var] = "";
 				switch ($var) {
 					case "install_demodata" :
-					case "add_fk":
+					case "add_fk" :
 						$_SESSION [$var] = "yes";
 						break;
 						break;
@@ -42,9 +41,6 @@ class InstallerController {
 						break;
 					case "admin_user" :
 						$_SESSION [$var] = "admin";
-						break;
-					case "fast_mode" :
-						$_SESSION [$var] = false;
 						break;
 				}
 			}
@@ -82,25 +78,25 @@ class InstallerController {
 		if ($connection == false) {
 			die ( TRANSLATION_DB_CONNECTION_FAILED );
 		}
-
+		
 		// Check if database is present else try to create it.
 		$query = mysqli_query ( $connection, "SHOW DATABASES" );
 		$databases = array ();
 		while ( $row = mysqli_fetch_array ( $query ) ) {
 			$databases [] = $row [0];
 		}
-
+		
 		if (! in_array ( $_POST ["datenbank"], $databases )) {
 			// Try to create database if it not exists
 			mysqli_query ( $connection, "CREATE DATABASE " . mysqli_real_escape_string ( $connection, $_POST ["datenbank"] ) );
 		}
-
+		
 		@$select = mysqli_select_db ( $connection, $_POST ["datenbank"] );
-
+		
 		if ($select == false) {
 			die ( TRANSLATION_CANT_OPEN_SCHEMA );
 		}
-
+		
 		$_SESSION ["mysql_host"] = $_POST ["servername"];
 		$_SESSION ["mysql_user"] = $_POST ["loginname"];
 		$_SESSION ["mysql_password"] = $_POST ["passwort"];
@@ -120,16 +116,16 @@ class InstallerController {
 		} else {
 			$files [] = "sql/opt/democontent.min.sql";
 		}
-
+		
 		if (! empty ( $_SESSION ["add_fk"] )) {
 			foreach ( glob ( "sql/fk/*.sql" ) as $file ) {
 				$files [] = $file;
 			}
 		}
-
+		
 		$onefile = 100 / floatval ( count ( $files ) );
 		$currentPercent = floatval ( $_SESSION ["install_index"] ) * $onefile;
-
+		
 		if ($_SESSION ["install_index"] == count ( $files )) {
 			$str = TRANSLATION_INSTALL_X_OF_Y;
 			$str = str_ireplace ( "%x%", $_SESSION ["install_index"], $str );
@@ -146,26 +142,26 @@ class InstallerController {
 				die ( TRANSLATION_CANT_OPEN_SCHEMA );
 			}
 			mysqli_query ( $connection, "SET NAMES 'utf8'" ) or die ( mysqli_error ( $connection ) );
-
+			
 			// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 			mysqli_query ( $connection, "SET SESSION sql_mode = '';" );
-
+			
 			if (! isset ( $_SESSION ["salt"] )) {
 				$salt = uniqid ();
 				$_SESSION ["salt"] = $salt;
 			}
-
+			
 			if (! isset ( $_SESSION ["ga_secret"] )) {
 				require_once "../classes/objects/security/GoogleAuthenticator.php";
 				$ga = new PHPGangsta_GoogleAuthenticator ();
 				$ga_secret = $ga->createSecret ();
 				$_SESSION ["ga_secret"] = $ga_secret;
 			}
-
+			
 			if (! isset ( $_SESSION ["encrypted_password"] )) {
 				$_SESSION ["encrypted_password"] = hash ( "sha512", $_SESSION ["salt"] . $_SESSION ["admin_password"] );
 			}
-
+			
 			$script = file_get_contents ( $sql_file );
 			$prefix = mysqli_real_escape_string ( $connection, $_SESSION ["mysql_prefix"] );
 			$language = mysqli_real_escape_string ( $connection, $_SESSION ["language"] );
@@ -185,11 +181,11 @@ class InstallerController {
 			$script = str_ireplace ( "{admin_firstname}", $admin_firstname, $script );
 			$script = str_ireplace ( "{admin_email}", $admin_email, $script );
 			$script = str_ireplace ( "{time}", time (), $script );
-
+			
 			mysqli_query ( $connection, $script );
 			echo '<!--ok--><div style="background-color:green;height:50px; width:' . intval ( $currentPercent ) . '%"></div>';
 			echo "<div class='info-text-progress'>" . $str . "</div>";
-
+			
 			$_SESSION ["install_index"] += 1;
 		}
 	}
@@ -201,12 +197,8 @@ class InstallerController {
 		$content = str_replace ( "{mysql_user}", $_SESSION ["mysql_user"], $content );
 		$content = str_replace ( "{mysql_password}", $_SESSION ["mysql_password"], $content );
 		$content = str_replace ( "{mysql_database}", $_SESSION ["mysql_database"], $content );
-		$fast_mode = ($_SESSION ["fast_mode"]) ? 'true' : 'false';
-
-		$content = str_replace ( "{fast_mode}", $fast_mode, $content );
-
 		$filled_file = "../cms-config.php";
-
+		
 		if (file_put_contents ( $filled_file, $content )) {
 			echo "<!--ok-->";
 		} else {
@@ -220,14 +212,7 @@ class InstallerController {
 		} else {
 			$_SESSION ["install_demodata"] = "";
 		}
-
-		if (isset ( $_REQUEST ["fast_mode"] )) {
-			$_SESSION ["fast_mode"] = true;
-		} else {
-
-			$_SESSION ["fast_mode"] = false;
-		}
-
+		
 		if (isset ( $_REQUEST ["add_fk"] )) {
 			$_SESSION ["add_fk"] = "yes";
 		} else {
@@ -244,7 +229,7 @@ class InstallerController {
 			if (! @unlink ( $dir . '/' . $obj ))
 				SureRemoveDir ( $dir . '/' . $obj, true );
 		}
-
+		
 		closedir ( $dh );
 		if ($DeleteMe) {
 			@rmdir ( $dir );

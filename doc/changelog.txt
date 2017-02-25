@@ -1,8 +1,11 @@
 ﻿ ===== Neues in UliCMS 2017.3 =====
++ Shortcut zum Leeren des Caches hinzugefügt
 + ViewBag hinzugefügt
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
 # Menüpunkte werden nur noch angezeigt, wenn darauf die Zugriffsrechte hat
 # Doppelklick auf "Paket installieren" Button erzeugt nun keinen Fehler mehr
+# article_date wird nun korrekt gespeichert
+- fast_mode entfernt
 
 ﻿===== Neues in UliCMS 2017.2 =====
 + Neues Backend Design

@@ -224,9 +224,6 @@ function get_html_editor() {
 }
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false) {
-	if (isFastMode ()) {
-		return;
-	}
 	add_hook ( "before_log_request" );
 	if ($save_ip) {
 		$ip = get_ip ();
@@ -1319,10 +1316,6 @@ function tbname($name) {
 	require_once "cms-config.php";
 	$config = new config ();
 	return $config->db_prefix . $name;
-}
-function isFastMode() {
-	$cfg = new config ();
-	return (isset ( $cfg->fast_mode ) and $cfg->fast_mode);
 }
 
 // Mimetypen einer Datei ermitteln

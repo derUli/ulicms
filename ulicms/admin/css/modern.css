@@ -385,7 +385,7 @@ h2.accordion-header {
 	padding: 0;
 }
 
-#menu-toggle {
+#menu-toggle, #menu-clear-cache {
 	cursor: pointer;
 }
 
@@ -429,7 +429,7 @@ h2.accordion-header {
 
 h1, h2, h3, h4, h5, h6 {
 	margin-bottom: 20px;
-  word-break: break-word;
+	word-break: break-word;
 }
 
 div#message {
