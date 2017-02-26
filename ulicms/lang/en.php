@@ -702,5 +702,7 @@ define ( "TRANSLATION_GOTO_FRONTEND", "Goto Frontend" );
 define ( "TRANSLATION_COMMENT", "Comment" );
 
 define ( "TRANSLATION_FILE_NOT_FOUND", "File not found!" );
+define ( "TRANSLATION_ONE_DATASET_FOUND", "One dataset found." );
+define ( "TRANSLATION_X_DATASETS_FOUND", "%x datasets found." );
 
 add_hook ( "lang_en" );
