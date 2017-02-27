@@ -1,6 +1,7 @@
-﻿===== Neues in UliCMS 2017.3 =====
+===== Neues in UliCMS 2017.3 =====
 + Shortcut zum Leeren des Caches hinzugefügt
 + ViewBag hinzugefügt
++ Anzahl der gefundenen Datensätze wird nun angezeigt
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
 # Menüpunkte werden nur noch angezeigt, wenn darauf die Zugriffsrechte hat
 # Doppelklick auf "Paket installieren" Button erzeugt nun keinen Fehler mehr
@@ -8,7 +9,7 @@
 # Username ist jetzt Unique
 - fast_mode entfernt
 
-﻿===== Neues in UliCMS 2017.2 =====
+===== Neues in UliCMS 2017.2 =====
 + Neues Backend Design
 + Zugriff auf ulicms.de erfolgt nun mit verschlüsselter Verbindung
 + Funktion ModuleHelper::getFirstPageWithModule() hinzugefügt
@@ -34,7 +35,7 @@
 + Performance verbessert
 + "Nachricht des Tages" nutzt nun den HTML-Editor
 + "admin_permission" Attribut in metadata.json wird nun unterstützt
-+ "menus" Attribut in metadata.json von Themes wird nun ausgewertet und die Auswahllisten für Menüs danach 
++ "menus" Attribut in metadata.json von Themes wird nun ausgewertet und die Auswahllisten für Menüs danach
 
 gefiltert
 + Übersetzungssystem für JavaScript hinzugefügt
@@ -119,7 +120,7 @@ Neue Features für Entwickler
 + Funktion str_replace_nth() hinzugefügt
 + Funktion mb_str_split() hinzugefügt
 + modul_main und modul_admin Dateien müssen nun nicht mehr mit dem Namen des Moduls geprefixt werden
-+ Attribute "embed" (Boolean) und "custom_acl" (Array of String) werden nun aus der metadata.json ausgelesen und 
++ Attribute "embed" (Boolean) und "custom_acl" (Array of String) werden nun aus der metadata.json ausgelesen und
 
 ausgewertet
 + Filter für get_type() hinzugefügt
@@ -253,7 +254,7 @@ Entfernte Features
 + Versionsnummern von Modulen und Designs können nun angezeigt werden
 + Mobile_Detect Klasse auf Version 2.8.17 aktualisiert
 + Bugfix: Werte in der Spalte "Menü" in der Seitenliste werden nun übersetzt
-+ IP Whitelist hinzugefügt. In der Datei cms-config.php kann nun ein Array mit IP-Adressen als Variable 
++ IP Whitelist hinzugefügt. In der Datei cms-config.php kann nun ein Array mit IP-Adressen als Variable
 
 ip_whitelist definiert werden.
   Sofern dieser Wert gesetzt ist, wird der Zugriff zum UliCMS Backend auf bestimmte
@@ -278,11 +279,11 @@ ip_whitelist definiert werden.
 + page-id CSS Klasse zum Body hinzugefügt
 + title_tag Filter hinzugefügt
 + Es können nun Open Graph Meta-Tags festgelegt werden.
-+ Bugfix: API-Funktion all_combined_html() korrigiert. Der Aufruf dieser Methode führte zuvor zu einer 
++ Bugfix: API-Funktion all_combined_html() korrigiert. Der Aufruf dieser Methode führte zuvor zu einer
 
 Endlosschleife
 + Liste der bereits installierten Patches zur Paketverwaltung hinzugefügt
-+ Favicon Generator akzeptiert nun auch andere Formate als .ico. Die Grafikdatei wird automatisch in das Favicon 
++ Favicon Generator akzeptiert nun auch andere Formate als .ico. Die Grafikdatei wird automatisch in das Favicon
 
 Format konvertiert
 + "modules" und "templates" Ordner nach "content" verschoben
@@ -296,7 +297,7 @@ Format konvertiert
 Nun wird die Sprache die für die Domain über die das Backend aufgerufen wird definiert ist geladen.
 + Patches können nun auch als Datei hochgeladen werden.
 + shortlink und canonical Meta-Tags zum System hinzugefügt
-+ mPDF Framework entfernt. Dieses wird zur Ausgabe von Inhalten im PDF Format benötigt und wurde entfernt, um 
++ mPDF Framework entfernt. Dieses wird zur Ausgabe von Inhalten im PDF Format benötigt und wurde entfernt, um
 
 Speicherplatz zu sparen.
   Es kann jedoch nachträglich als Ergänzung auf www.ulicms.de heruntergeladen und installiert werden.
@@ -332,7 +333,7 @@ Speicherplatz zu sparen.
 
 ===== Neues in UliCMS 9.0.1 Refresh 1 ====
 
-+ mPDF Framework aus dem Core entfernt, um Speicherplatz zu sparen. Sofern PDF Unterstützung benötigt wird, kann 
++ mPDF Framework aus dem Core entfernt, um Speicherplatz zu sparen. Sofern PDF Unterstützung benötigt wird, kann
 
 mPDF unter der folgenden URL seperat heruntergeladen werden:
   http://www.ulicms.de/mpdf_supplement.html
@@ -359,16 +360,16 @@ mPDF unter der folgenden URL seperat heruntergeladen werden:
 + "Bearbeiten" Link wird nun unter dem Content angezeigt, wenn der User das Recht auf "pages" hat.
 + UliCMS übermittelt nun User-Agent bei Laden von Daten von externen Servern (Paketquelle, News, Update Manager)
 + Das Anti CSRF Token des pfbc_sample fehlte. Dies wurde korrigiert.
-+ Der Zugriff auf eine Seite lässt sich nun auf Arbeitsplatz Rechner oder mobile Geräte beschränken. Wenn das 
++ Der Zugriff auf eine Seite lässt sich nun auf Arbeitsplatz Rechner oder mobile Geräte beschränken. Wenn das
 
-ausgewählt wird, muss außerdem noch eine andere Gruppe ausgewählt werden (z.B. "Jeder", oder "Registrierte 
+ausgewählt wird, muss außerdem noch eine andere Gruppe ausgewählt werden (z.B. "Jeder", oder "Registrierte
 
 Benutzer"), da diese Zugriffsbeschränkung nur ergänzend gilt.
-+ Der Dateimanager verwendete als Sprache immer "de". Nun verwendet er ja nach bei der Anmeldung ausgewählter 
++ Der Dateimanager verwendete als Sprache immer "de". Nun verwendet er ja nach bei der Anmeldung ausgewählter
 
 Sprache entweder Deutsch oder Englisch.
 + Filter für "Titel" hinzugefügt
-+ Ein Fehler in der deutschen Sprachdatei der dazu führte, dass stattdessen die englischen Sprachdateien von 
++ Ein Fehler in der deutschen Sprachdatei der dazu führte, dass stattdessen die englischen Sprachdateien von
 
 Modulen geladen werden wurde korrigiert
 + Nutzung von HSTS bei SSL-verschlüsselten Verbindungen
