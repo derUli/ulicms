@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 2017.3 =====
+===== Neues in UliCMS 2017.3 =====
 + Shortcut zum Leeren des Caches hinzugefügt
 + ViewBag hinzugefügt
 + Anzahl der gefundenen Datensätze wird nun angezeigt
@@ -9,7 +9,7 @@
 # Username ist jetzt Unique
 - fast_mode entfernt
 
-﻿===== Neues in UliCMS 2017.2 =====
+===== Neues in UliCMS 2017.2 =====
 + Neues Backend Design
 + Zugriff auf ulicms.de erfolgt nun mit verschlüsselter Verbindung
 + Funktion ModuleHelper::getFirstPageWithModule() hinzugefügt
