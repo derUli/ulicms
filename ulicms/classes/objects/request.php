@@ -1,5 +1,26 @@
 <?php
 class Request {
+	public static function getVar($name, $default = null, $convert = "") {
+		$value = $default;
+		if (isset ( $_REQUEST [$name] )) {
+			$value = $_REQUEST [$name];
+		}
+		if ($value !== null) {
+			switch ($convert) {
+				case "int" :
+					$value = intval ( $value );
+					break;
+				case "float" :
+					$value = floatval ( $value );
+					break;
+				case "str" :
+					$value = strval ( $value );
+					break;
+			}
+		}
+		return $value;
+	}
+	
 	// Übersetzung HTTP Status Code => Name
 	public static function getStatusCodeByNumber($nr) {
 		$http_codes = array (
