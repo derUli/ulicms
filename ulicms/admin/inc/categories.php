@@ -59,8 +59,9 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 <?php
 	}
 	?>
+<p><?php BackendHelper::formatDatasetCount(count($categories));?></p>
 
-			<?php
+<?php
 	if (count ( $categories ) > 0 and ! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] )) {
 		?>
 <div class="scroll">
@@ -193,8 +194,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 
 	<p>
 	<?php translate("description");?>
-		<br />
-		<textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
+		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
 	</p>
 	<p>
 		<input type="submit" name="create"
@@ -233,8 +233,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 
 	<p>
 	<?php translate("description");?>
-		<br />
-		<textarea cols="50" name="description" rows="5" maxlength="255"><?php
+		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"><?php
 			echo htmlspecialchars ( categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
 			?></textarea>
 	</p>
