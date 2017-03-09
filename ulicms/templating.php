@@ -310,6 +310,11 @@ function get_theme($page = null) {
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
+
+	if(!is_null(Vars::get("theme_".$page))){
+			return Vars::get("theme_".$page);
+
+	}
 	$theme = Settings::get ( "theme" );
 	$mobile_theme = Settings::get ( "mobile_theme" );
 	if ($mobile_theme and ! empty ( $mobile_theme ) and is_mobile ()) {
@@ -327,6 +332,7 @@ function get_theme($page = null) {
 		}
 	}
 	$theme = apply_filter ( $theme, "theme" );
+	Vars::set("theme_".$page, $theme);
 	return $theme;
 }
 function delete_custom_data($var = null, $page = null) {
