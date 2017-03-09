@@ -957,10 +957,16 @@ function get_page($systemname = "") {
 	if (empty ( $systemname )) {
 		$systemname = get_frontpage ();
 	}
+	if(Vars::get("page_".$systemname)){
+		return Vars::get("page_".$systemname);
+	}
 	$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	if (db_num_rows ( $query ) > 0) {
-		return db_fetch_assoc ( $query );
+		$result = db_fetch_assoc ( $query );
+		Vars::set("page_".$systemname, $result);
+		return $result;
 	} else {
+		Vars::set("page_".$systemname, null);
 		return null;
 	}
 }
