@@ -513,6 +513,10 @@ function meta_description($ipage = null) {
 	return $meta_description;
 }
 function get_title($ipage = null, $headline = false) {
+	if(Vars::get("title")){
+			return Vars::get("title");
+
+	}
 	$status = check_status ();
 	if ($status == "404 Not Found") {
 		return get_translation ( "page_not_found" );
@@ -534,6 +538,7 @@ function get_title($ipage = null, $headline = false) {
 			}
 
 			$title = apply_filter ( $title, "title" );
+			Vars::set("title", $title);
 			return $title;
 		}
 	}
