@@ -1176,7 +1176,7 @@ function containsModule($page = null, $module = false) {
 		$page = get_requested_pagename ();
   }
 
-  if(!is_null("page_".$page. "_contains_". $module ? $module : "_")){
+  if(!is_null("page_".$page. "_contains_". $module != false ? $module : "_")){
 		return Vars::get("page_".$page. "_contains_". $module != false ? $module : "_");
 	};
 
