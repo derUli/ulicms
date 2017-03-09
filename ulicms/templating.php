@@ -180,6 +180,10 @@ function get_article_meta($page = null) {
 	return $result;
 }
 function get_cache_control() {
+	if(!is_null(Vars::get("cache_control"))){
+		return Vars::get("cache_control");
+		
+	}
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
@@ -194,6 +198,7 @@ function get_cache_control() {
 		$result = "auto";
 	}
 	$result = apply_filter ( $result, "get_cache_control" );
+	Vars::set("cache_control", $result);
 	return $result;
 }
 function get_text_position() {
