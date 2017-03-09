@@ -1083,11 +1083,15 @@ function getAllSystemNames($lang = null) {
 
 // Sprachcodes abfragen und als Array zurück geben
 function getAllLanguages() {
+	if(!is_null(Vars::get("all_languages"))){
+		return Vars::get("all_languages");
+	}
 	$query = db_query ( "SELECT language_code FROM `" . tbname ( "languages" ) . "` ORDER BY language_code" );
 	$returnvalues = Array ();
 	while ( $row = db_fetch_object ( $query ) ) {
 		array_push ( $returnvalues, $row->language_code );
 	}
+	Vars::set("all_languages", $returnvalues);
 	return $returnvalues;
 }
 
