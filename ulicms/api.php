@@ -1176,8 +1176,9 @@ function containsModule($page = null, $module = false) {
 		$page = get_requested_pagename ();
   }
 
-  if(!is_null("page_".$page. "_contains_". $module != false ? $module : "_")){
-		return Vars::get("page_".$page. "_contains_". $module != false ? $module : "_");
+
+  if(!is_null(Vars::get("page_".$page. "_contains_". $module))){
+		return Vars::get("page_".$page. "_contains_". $module);
 	};
 
 	$query = db_query ( "SELECT content, module, `type` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
@@ -1186,20 +1187,20 @@ function containsModule($page = null, $module = false) {
 	$content = str_replace ( "&quot;", "\"", $content );
 	if (! is_null ( $dataset ["module"] ) and ! empty ( $dataset ["module"] ) and $dataset ["type"] == "module") {
 		if (! $module or ($module and $dataset ["module"] == $module)) {
-			Vars::set("page_".$page. "_contains_". $module != false ? $module : "_", true);
+			Vars::set("page_".$page. "_contains_". $module, true);
 			return true;
 		}
 	} else if ($module) {
 		  $result = preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
-		  Vars::set("page_".$page. "_contains_". $module != false ? $module : "_", $result);
+		  Vars::set("page_".$page. "_contains_". $module, $result);
 			return $result;
 	} else {
 		$result =  preg_match ( "/\[module=\".+\"\]/", $content );
-		Vars::set("page_".$page. "_contains_". $module != false ? $module : "_", $result);
+		Vars::set("page_".$page. "_contains_". $module, $result);
 		return $result;
 	}
 
-	Vars::set("page_".$page. "_contains_". $module != false ? $module : "_", false);
+	Vars::set("page_".$page. "_contains_". $module, false);
 	return false;
 }
 function page_has_html_file($page) {
