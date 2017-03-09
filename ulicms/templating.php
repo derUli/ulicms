@@ -142,6 +142,9 @@ function get_ID() {
 	return $result;
 }
 function get_type() {
+	if(Vars::get("type")){
+		return Vars::get("type");
+	}
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
@@ -156,6 +159,7 @@ function get_type() {
 		$result = "page";
 	}
 	$result = apply_filter ( $result, "get_type" );
+	Vars::set("type", $result);
 	return $result;
 }
 function get_article_meta($page = null) {
