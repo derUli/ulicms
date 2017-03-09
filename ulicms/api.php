@@ -1175,12 +1175,9 @@ function containsModule($page = null, $module = false) {
 	if (is_null ( $page )){
 		$page = get_requested_pagename ();
   }
-
-
   if(!is_null(Vars::get("page_".$page. "_contains_". $module))){
 		return Vars::get("page_".$page. "_contains_". $module);
 	};
-
 	$query = db_query ( "SELECT content, module, `type` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
 	$dataset = db_fetch_assoc ( $query );
 	$content = $dataset ["content"];
@@ -1199,7 +1196,6 @@ function containsModule($page = null, $module = false) {
 		Vars::set("page_".$page. "_contains_". $module, $result);
 		return $result;
 	}
-
 	Vars::set("page_".$page. "_contains_". $module, false);
 	return false;
 }
