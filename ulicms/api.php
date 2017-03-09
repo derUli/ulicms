@@ -1172,8 +1172,13 @@ function getAllMenus($only_used = false) {
 
 // Check if site contains a module
 function containsModule($page = null, $module = false) {
-	if (is_null ( $page ))
+	if (is_null ( $page )){
 		$page = get_requested_pagename ();
+  }
+
+  if(!is_null("page_".$page. "_contains_". $module ? $module : "_")){
+		return Vars::get("page_".$page. "_contains_". $module != false ? $module : "_");
+	};
 
 	$query = db_query ( "SELECT content, module, `type` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
 	$dataset = db_fetch_assoc ( $query );
@@ -1181,13 +1186,20 @@ function containsModule($page = null, $module = false) {
 	$content = str_replace ( "&quot;", "\"", $content );
 	if (! is_null ( $dataset ["module"] ) and ! empty ( $dataset ["module"] ) and $dataset ["type"] == "module") {
 		if (! $module or ($module and $dataset ["module"] == $module)) {
+			Vars::set("page_".$page. "_contains_". $module != false ? $module : "_", true);
 			return true;
 		}
 	} else if ($module) {
-		return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
+		  $result = preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
+		  Vars::set("page_".$page. "_contains_". $module != false ? $module : "_", $result);
+			return $result;
 	} else {
-		return preg_match ( "/\[module=\".+\"\]/", $content );
+		$result =  preg_match ( "/\[module=\".+\"\]/", $content );
+		Vars::set("page_".$page. "_contains_". $module != false ? $module : "_", $result);
+		return $result;
 	}
+
+	Vars::set("page_".$page. "_contains_". $module != false ? $module : "_", false);
 	return false;
 }
 function page_has_html_file($page) {
