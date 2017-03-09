@@ -129,6 +129,9 @@ function all_combined_html() {
 	echo get_all_comined_html ();
 }
 function get_ID() {
+	if(!is_null(Vars::get("id"))){
+		return Vars::get("id");
+	}
 	if (! $page) {
 		$page = get_requested_pagename ();
 	}
@@ -139,6 +142,7 @@ function get_ID() {
 		$result = db_fetch_object ( $query );
 		$result = $result->id;
 	}
+	Vars::set("id", $result);
 	return $result;
 }
 function get_type() {
