@@ -1,5 +1,5 @@
 <?php
-class Controller {
+abstract class Controller {
 	protected $blacklist = array (
 			"runCommand" 
 	);
