@@ -17,12 +17,13 @@ $empty_trash_timestamp = $empty_trash_days * (60 * 60 * 24);
 Database::query ( "DELETE FROM " . tbname ( "content" ) . " WHERE " . time () . " -  `deleted_at` > $empty_trash_timestamp" ) or die ( db_error () );
 
 // Alle Revisionen von bereits gelöschten Seiten entfernen
-/** Database::query ( "DELETE FROM " . tbname ( "history" ) . " WHERE content_id NOT IN (
-            SELECT id from " . tbname ( "content" ) . ");" );
-// Listen von bereits gelöschten Content Objekten aufräumen
-Database::query ( "DELETE FROM " . tbname ( "lists" ) . " WHERE content_id NOT IN (
-            SELECT id from " . tbname ( "content" ) . ");" );
-
-**/
+/**
+ * Database::query ( "DELETE FROM " .
+ * tbname ( "history" ) . " WHERE content_id NOT IN (
+ * SELECT id from " . tbname ( "content" ) . ");" );
+ * // Listen von bereits gelöschten Content Objekten aufräumen
+ * Database::query ( "DELETE FROM " . tbname ( "lists" ) . " WHERE content_id NOT IN (
+ * SELECT id from " . tbname ( "content" ) . ");" );
+ */
 // Cronjobs der Module
 add_hook ( "cron" );
