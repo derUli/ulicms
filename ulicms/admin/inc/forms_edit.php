@@ -3,7 +3,7 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_edit" )) {
 	noperms ();
 } else {
-	require_once ULICMS_ROOT . "/classes/objects/forms.php";
+	require_once ULICMS_ROOT . "/classes/objects/content/forms.php";
 	$forms = Forms::getAllForms ();
 	$pages = getAllPages ();
 	$id = intval ( $_GET ["id"] );

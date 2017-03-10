@@ -3,7 +3,7 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "forms" )) {
 	noperms ();
 } else {
-	require_once ULICMS_ROOT . "/classes/objects/forms.php";
+	require_once ULICMS_ROOT . "/classes/objects/content/forms.php";
 	if (isset ( $_POST ["create_form"] )) {
 		$name = $_POST ["name"];
 		$email_to = $_POST ["email_to"];
