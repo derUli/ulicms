@@ -1,5 +1,5 @@
 <?php
-include_once ULICMS_ROOT . "/classes/vcs.php";
+include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "pages" )) {
@@ -244,17 +244,15 @@ if (defined ( "_SECURITY" )) {
 				?>>
 		<?php translate("disabled");?>
 		</option>
-			</select> <br /> <br />
-			 <strong><?php translate("hidden");?>
-	</strong><br /> <select name="hidden" size="1"><option value="1" <?php if($row->hidden == 1) echo "selected";?>>
+			</select> <br /> <br /> <strong><?php translate("hidden");?>
+	</strong><br /> <select name="hidden" size="1"><option value="1"
+					<?php if($row->hidden == 1) echo "selected";?>>
 		<?php translate("yes");?>
 		</option>
 				<option value="0" <?php if($row->hidden == 0) echo "selected";?>>
 		<?php translate("no");?>
 		</option>
-			</select> <br /> <br />
-			
-			 <strong><?php translate("category");?> </strong><br />
+			</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
 	<?php echo categories::getHTMLSelect ( $row->category );?>
 			
 		</div>
