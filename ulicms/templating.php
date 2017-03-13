@@ -180,9 +180,8 @@ function get_article_meta($page = null) {
 	return $result;
 }
 function get_cache_control() {
-	if(!is_null(Vars::get("cache_control"))){
-		return Vars::get("cache_control");
-		
+	if (! is_null ( Vars::get ( "cache_control" ) )) {
+		return Vars::get ( "cache_control" );
 	}
 	if (! $page) {
 		$page = get_requested_pagename ();
@@ -198,7 +197,7 @@ function get_cache_control() {
 		$result = "auto";
 	}
 	$result = apply_filter ( $result, "get_cache_control" );
-	Vars::set("cache_control", $result);
+	Vars::set ( "cache_control", $result );
 	return $result;
 }
 function get_text_position() {
@@ -962,16 +961,16 @@ function get_page($systemname = "") {
 	if (empty ( $systemname )) {
 		$systemname = get_frontpage ();
 	}
-	if(Vars::get("page_".$systemname)){
-		return Vars::get("page_".$systemname);
+	if (Vars::get ( "page_" . $systemname )) {
+		return Vars::get ( "page_" . $systemname );
 	}
 	$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $systemname ) . "' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_assoc ( $query );
-		Vars::set("page_".$systemname, $result);
+		Vars::set ( "page_" . $systemname, $result );
 		return $result;
 	} else {
-		Vars::set("page_".$systemname, null);
+		Vars::set ( "page_" . $systemname, null );
 		return null;
 	}
 }

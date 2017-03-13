@@ -1,8 +1,9 @@
-===== Neues in UliCMS 2017.3 =====
+﻿===== Neues in UliCMS 2017.3 =====
 + Shortcut zum Leeren des Caches hinzugefügt
 + ViewBag hinzugefügt
 + Anzahl der gefundenen Datensätze wird nun angezeigt
 + Funktion Request::getVar() hinzugefügt
++ Content-Typen können nun auf entsprechende Model Klassen gemappt werden
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
 # Menüpunkte werden nur noch angezeigt, wenn darauf die Zugriffsrechte hat
 # Doppelklick auf "Paket installieren" Button erzeugt nun keinen Fehler mehr
