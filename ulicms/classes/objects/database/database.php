@@ -3,7 +3,6 @@ class Database {
 	private static $connection = null;
 	// Abstraktion für Ausführen von SQL Strings
 	public static function query($query, $replacePrefix = false) {
-		include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
 		log_db_query ( $query );
 		if ($replacePrefix) {
 			$cfg = new config ();
@@ -20,7 +19,6 @@ class Database {
 	public static function pQuery($query, $args = array(), $replacePrefix = false) {
 		$preparedQuery = "";
 		$chars = mb_str_split ( $query );
-		include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
 		$i = 0;
 		foreach ( $chars as $char ) {
 			if ($char != "?") {

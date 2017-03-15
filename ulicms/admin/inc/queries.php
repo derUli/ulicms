@@ -588,7 +588,7 @@ if (! empty ( $_FILES ['favicon_upload_file'] ['name'] ) and $acl->hasPermission
 		add_hook ( "before_upload_favicon" );
 		
 		// move_uploaded_file ( $favicon_upload_file ['tmp_name'], $new_filename );
-		require_once ULICMS_ROOT . '/classes/class-php-ico.php';
+		require_once ULICMS_ROOT . '/classes/3rdparty/class-php-ico.php';
 		$source = $favicon_upload_file ['tmp_name'];
 		$destination = $new_filename;
 		
