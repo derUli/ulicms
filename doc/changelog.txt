@@ -6,6 +6,7 @@
 + Funktion Request::getVar() hinzugefügt
 + Content-Typen können nun auf entsprechende Model Klassen gemappt werden
 + Man kann nun schon beim Anlegen eines Benutzers eine Gruppe wählen
++ PHP_ICO auf Version 1.0.4 aktualisiert
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
 # Menüpunkte werden nur noch angezeigt, wenn darauf die Zugriffsrechte hat
 # Doppelklick auf "Paket installieren" Button erzeugt nun keinen Fehler mehr
