@@ -2,8 +2,10 @@
 class Request {
 	public static function getVar($name, $default = null, $convert = "") {
 		$value = $default;
-		if (isset ( $_REQUEST [$name] )) {
-			$value = $_REQUEST [$name];
+		if (isset ( $_POST [$name] )) {
+			$value = $_POST [$name];
+		} else if (isset ( $_GET [$name] )) {
+			$value = $_GET [$name];
 		}
 		if ($value !== null) {
 			switch ($convert) {
