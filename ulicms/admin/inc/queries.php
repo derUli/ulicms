@@ -367,8 +367,12 @@ if ($_POST ["add_admin"] == "add_admin" && (is_admin () or $acl->hasPermission (
 	$sendMail = isset ( $_POST ["send_mail"] );
 	$admin = intval ( isset ( $_POST ["admin"] ) );
 	$locked = intval ( isset ( $_POST ["locked"] ) );
+	$group_id = intval ( $_POST ["group_id"] );
+	if ($group_id <= 0) {
+		$group_id = null;
+	}
 	$require_password_change = intval ( isset ( $_POST ["require_password_change"] ) );
-	adduser ( $username, $lastname, $firstname, $email, $password, $sendMail, null, $require_password_change, $admin, $locked );
+	adduser ( $username, $lastname, $firstname, $email, $password, $sendMail, $group_id, $require_password_change, $admin, $locked );
 	header ( "Location: index.php?action=admins" );
 	exit ();
 }
@@ -584,7 +588,7 @@ if (! empty ( $_FILES ['favicon_upload_file'] ['name'] ) and $acl->hasPermission
 		add_hook ( "before_upload_favicon" );
 		
 		// move_uploaded_file ( $favicon_upload_file ['tmp_name'], $new_filename );
-		require_once ULICMS_ROOT . '/classes/class-php-ico.php';
+		require_once ULICMS_ROOT . '/classes/3rdparty/class-php-ico.php';
 		$source = $favicon_upload_file ['tmp_name'];
 		$destination = $new_filename;
 		

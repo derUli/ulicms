@@ -81,7 +81,7 @@ if (defined ( "_SECURITY" )) {
 				if ($row->group_id === null) {
 					echo "selected";
 				}
-				?>>[Keine]</option>
+				?>>[<?php translate("none");?>]</option>
 		<?php
 				
 				foreach ( $allGroups as $key => $value ) {
