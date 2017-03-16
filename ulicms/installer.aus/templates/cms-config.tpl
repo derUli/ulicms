@@ -7,4 +7,5 @@ class config extends baseConfig {
 	var $db_prefix = "{prefix}";
 	var $db_type = "mysql";
 	var $debug = false;
+	var $log_requests = false;
 }

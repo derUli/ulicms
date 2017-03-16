@@ -278,8 +278,10 @@ if ($memory_limit !== false) {
 	@ini_set ( 'memory_limit', $memory_limit );
 }
 
-$log_ip = Settings::get ( "log_ip" );
-log_request ( $log_ip );
+if (isset ( $config->log_requests ) and $config->log_requests == true) {
+	$log_ip = Settings::get ( "log_ip" );
+	log_request ( $log_ip );
+}
 
 $cache_period = Settings::get ( "cache_period" );
 
