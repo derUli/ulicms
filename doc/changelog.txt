@@ -16,6 +16,7 @@
 - fast_mode entfernt
 
 ===== Neues in UliCMS 2017.2 =====
+
 + Neues Backend Design
 + Zugriff auf ulicms.de erfolgt nun mit verschlüsselter Verbindung
 + Funktion ModuleHelper::getFirstPageWithModule() hinzugefügt
@@ -28,6 +29,7 @@
 - Funktion "W3C Validierungsfehler automatisch korrigieren" entfernt
 
 ===== Neues in UliCMS 2017.1 =====
+
 + Neues Standard-Design theme-2017
 + "Passwort wiederholen" Feld zur Userverwaltung hinzugefügt
 + CKEditor auf Version 4.5.11 geupdatet
