@@ -11,7 +11,7 @@ if(isset($_GET["q"])){
    $q = $_GET["q"];
 }
 $modules = getAllModules();
-$hasSearch = in_array("search", $modules) || in_array("extended_search", $modules);
+$hasSearch = (in_array("search", $modules) || in_array("extended_search", $modules));
 $searchPage = ModuleHelper::getFirstPageWithModule("extended_search");
 if(!$searchPage){
 	$searchPage = ModuleHelper::getFirstPageWithModule("search");
