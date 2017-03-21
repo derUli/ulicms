@@ -27,13 +27,15 @@ if ($id !== null) {
 			if ($next_start <= $entries_total_count) {
 				$next_start = $start + $limit;
 			}
+			
+
 			?>
 			
 				<div class="container">
 	<?php
 			
 			foreach ( $entries as $entry ) {
-				$article_image = "/content/images/nopic.jpg";
+				$article_image = getTemplateDirPath("2018") . "images/nopic.jpg";
 				$meta = get_article_meta($entry->systemname);
 				?>
   <div class="row article-list-row">
