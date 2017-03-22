@@ -14,10 +14,10 @@
 	}
 	?></p>
 <?php }?>
-<?php if(isNotNullOrEmpty(meta_keywords())){?>
+<?php if(isNotNullOrEmpty(get_meta_keywords())){?>
 <p>
 	<strong><?php translate("tags")?>:</strong> <br />
-<?php Template::escape(meta_keywords());?>
+<?php Template::escape(get_meta_keywords());?>
 </p>
 <?php }?>
 <?php

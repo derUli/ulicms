@@ -61,8 +61,8 @@ class CSVCreator {
 		$data [] = array (
 				$this->title,
 				$this->content,
-				meta_description (),
-				meta_keywords (),
+				get_meta_description (),
+				get_meta_keywords (),
 				$author 
 		);
 		$csv_string = getCSV ( $data [0] );

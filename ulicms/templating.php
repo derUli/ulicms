@@ -56,7 +56,7 @@ function get_og_tags($systemname = null) {
 		}
 		
 		if (is_null ( $og_description ) or empty ( $og_description )) {
-			$og_description = meta_description ();
+			$og_description = get_meta_description ();
 		}
 		
 		$og_title = apply_filter ( $og_title, "og_title" );
@@ -491,8 +491,7 @@ function homepage_title() {
 	echo get_homepage_title ();
 }
 $status = check_status ();
-function meta_keywords($ipage = null) {
-	$ipage = db_escape ( $_GET ["seite"] );
+function get_meta_keywords($dummy = null) {
 	$query = db_query ( "SELECT meta_keywords FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	
 	if (db_num_rows ( $query ) > 0) {
@@ -509,9 +508,15 @@ function meta_keywords($ipage = null) {
 	
 	return $meta_keywords;
 }
-function meta_description($ipage = null) {
+function meta_keywords($dummy = null) {
+	$value = get_meta_keywords ( $dummy );
+	if ($value) {
+		echo $value;
+	}
+}
+function get_meta_description($ipage = null) {
 	$ipage = db_escape ( $_GET ["seite"] );
-	$query = db_query ( "SELECT meta_description FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'");
+	$query = db_query ( "SELECT meta_description FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'" );
 	if ($ipage == "") {
 		$query = db_query ( "SELECT meta_description FROM " . tbname ( "content" ) . " ORDER BY id LIMIT 1", $connection );
 	}
@@ -528,6 +533,12 @@ function meta_description($ipage = null) {
 	}
 	
 	return $meta_description;
+}
+function meta_description($dummy = null) {
+	$value = get_meta_keywords ( $dummy );
+	if ($value) {
+		echo $value;
+	}
 }
 function get_title($ipage = null, $headline = false) {
 	if (Vars::get ( "title" )) {
@@ -846,7 +857,7 @@ function base_metas() {
 		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
 	}
 	echo "\r\n";
-	$keywords = meta_keywords ();
+	$keywords = get_meta_keywords ();
 	if (! $keywords) {
 		$keywords = Settings::get ( "meta_keywords" );
 	}
@@ -858,7 +869,7 @@ function base_metas() {
 			echo "\r\n";
 		}
 	}
-	$description = meta_description ();
+	$description = get_meta_description ();
 	if (! $description) {
 		$description = Settings::get ( "meta_description" );
 	}
