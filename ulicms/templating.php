@@ -497,7 +497,7 @@ function meta_keywords($ipage = null) {
 	
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
-			if (! empty ( $row->meta_keywords )) {
+			if (isNotNullOrEmpty ( $row->meta_keywords )) {
 				return $row->meta_keywords;
 			}
 		}
@@ -511,7 +511,7 @@ function meta_keywords($ipage = null) {
 }
 function meta_description($ipage = null) {
 	$ipage = db_escape ( $_GET ["seite"] );
-	$query = db_query ( "SELECT meta_description FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'", $connection );
+	$query = db_query ( "SELECT meta_description FROM " . tbname ( "content" ) . " WHERE systemname='$ipage' AND language='" . db_escape ( $_SESSION ["language"] ) . "'");
 	if ($ipage == "") {
 		$query = db_query ( "SELECT meta_description FROM " . tbname ( "content" ) . " ORDER BY id LIMIT 1", $connection );
 	}
