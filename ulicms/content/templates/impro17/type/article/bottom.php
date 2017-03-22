@@ -15,7 +15,7 @@
 	?></p>
 <?php }?>
 <?php if(isNotNullOrEmpty(get_meta_keywords())){?>
-<p>
+<p class="tags">
 	<strong><?php translate("tags")?>:</strong> <br />
 <?php Template::escape(get_meta_keywords());?>
 </p>
