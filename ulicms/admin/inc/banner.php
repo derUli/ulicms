@@ -45,7 +45,7 @@ $(window).load(function(){
 <p>
 <?php translate("category");?>
 <?php
-		
+
 		echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
 		?>
 </p>

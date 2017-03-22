@@ -6,15 +6,15 @@ $data = get_custom_data ();
 if (isset ( $data ["motto"] )) {
 	$motto = $data ["motto"];
 }
-$q="";
-if(isset($_GET["q"])){
-   $q = $_GET["q"];
+$q = "";
+if (isset ( $_GET ["q"] )) {
+	$q = $_GET ["q"];
 }
-$modules = getAllModules();
-$hasSearch = (in_array("search", $modules) || in_array("extended_search", $modules));
-$searchPage = ModuleHelper::getFirstPageWithModule("extended_search");
-if(!$searchPage){
-	$searchPage = ModuleHelper::getFirstPageWithModule("search");
+$modules = getAllModules ();
+$hasSearch = (in_array ( "search", $modules ) || in_array ( "extended_search", $modules ));
+$searchPage = ModuleHelper::getFirstPageWithModule ( "extended_search" );
+if (! $searchPage) {
+	$searchPage = ModuleHelper::getFirstPageWithModule ( "search" );
 }
 
 ?>
@@ -59,17 +59,22 @@ echo getconfig ( "header-background-color" );
 				<?= jumbotron_get_menu("top");?>
 			</nav>
 			<h3 class="text-muted">
-            <a href="/">
-            <?php homepage_title ();?></a></h3>
-        
+				<a href="/">
+            <?php homepage_title ();?></a>
+			</h3>
+
 			<div id="mobile-nav"></div>
-        <?php if((!containsModule(null, "extended_search") and !containsModule(null, "search")) and $hasSearch and $searchPage){
-    	?>
-		<form id="search-form-head" method="get" action="<?php Template::escape(buildSEOURL($searchPage->systemname));?>">
-        <input type="search" required="required" name="q"
-		value="<?php  Template::escape($q);?>" results="10"
-		autosave="<?php echo md5 ( $_SERVER ["SERVER_NAME"] );?>" placeholder="<?php translate("search");?>...">
-        </form>
+        <?php
+								
+if ((! containsModule ( null, "extended_search" ) and ! containsModule ( null, "search" )) and $hasSearch and $searchPage) {
+									?>
+		<form id="search-form-head" method="get"
+				action="<?php Template::escape(buildSEOURL($searchPage->systemname));?>">
+				<input type="search" required="required" name="q"
+					value="<?php  Template::escape($q);?>" results="10"
+					autosave="<?php echo md5 ( $_SERVER ["SERVER_NAME"] );?>"
+					placeholder="<?php translate("search");?>...">
+			</form>
         <?php }?>
 		</div>
 <?php if(is_frontpage()){?>

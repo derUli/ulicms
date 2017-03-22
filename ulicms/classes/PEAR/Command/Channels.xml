@@ -23,7 +23,8 @@
 		<shortcut>cde</shortcut>
 		<options />
 		<doc>&lt;channel name&gt;
-			Delete a channel from the registry. You may not
+			Delete a channel from the registry. You may
+			not
 			remove any channel that has installed packages.
 		</doc>
 	</channel-delete>
@@ -33,9 +34,12 @@
 		<shortcut>ca</shortcut>
 		<options />
 		<doc>&lt;channel.xml&gt;
-			Add a private channel to the channel list. Note that all
-			public channels should be synced using &quot;update-channels&quot;.
-			Parameter may be either a local file or remote URL to a
+			Add a private channel to the channel list.
+			Note that all
+			public channels should be synced using
+			&quot;update-channels&quot;.
+			Parameter may be either a local file or
+			remote URL to a
 			channel.xml.
 		</doc>
 	</channel-add>
@@ -57,9 +61,12 @@
 			</channel>
 		</options>
 		<doc>[&lt;channel.xml&gt;|&lt;channel name&gt;]
-			Update a channel in the channel list directly. Note that all
-			public channels can be synced using &quot;update-channels&quot;.
-			Parameter may be a local or remote channel.xml, or the name of
+			Update a channel in the
+			channel list directly. Note that all
+			public channels can be synced
+			using &quot;update-channels&quot;.
+			Parameter may be a local or remote
+			channel.xml, or the name of
 			an existing channel.
 		</doc>
 	</channel-update>
@@ -78,7 +85,8 @@
 		<shortcut>cha</shortcut>
 		<options />
 		<doc>&lt;channel&gt; &lt;alias&gt;
-			Specify a specific alias to use for a channel name.
+			Specify a specific alias to use for
+			a channel name.
 			The alias may not be an existing channel name or
 			alias.
 		</doc>
@@ -89,15 +97,20 @@
 		<shortcut>di</shortcut>
 		<options />
 		<doc>[&lt;channel.xml&gt;|&lt;channel name&gt;]
-			Initialize a channel from its server and create a local channel.xml.
-			If &lt;channel name&gt; is in the format
+			Initialize a channel
+			from its server and create a local channel.xml.
+			If &lt;channel
+			name&gt; is in the format
 			&quot;&lt;username&gt;:&lt;password&gt;@&lt;channel&gt;&quot; then
 			&lt;username&gt; and &lt;password&gt; will be set as the login
 			username/password for
-			&lt;channel&gt;. Use caution when passing the username/password in this way, as
-			it may allow other users on your computer to briefly view your
+			&lt;channel&gt;. Use caution when passing the
+			username/password in this way, as
+			it may allow other users on your
+			computer to briefly view your
 			username/
-			password via the system&#039;s process list.
+			password via the system&#039;s
+			process list.
 		</doc>
 	</channel-discover>
 	<channel-login>
@@ -106,14 +119,21 @@
 		<shortcut>cli</shortcut>
 		<options />
 		<doc>&lt;channel name&gt;
-			Log in to a remote channel server. If &lt;channel name&gt; is not
+			Log in to a remote channel server. If
+			&lt;channel name&gt; is not
 			supplied,
-			the default channel is used. To use remote functions in the installer
-			that require any kind of privileges, you need to log in first. The
-			username and password you enter here will be stored in your per-user
-			PEAR configuration (~/.pearrc on Unix-like systems). After logging
-			in, your username and password will be sent along in subsequent
-			operations on the remote server.</doc>
+			the default channel is used. To
+			use remote functions in the installer
+			that require any kind of
+			privileges, you need to log in first. The
+			username and password you
+			enter here will be stored in your per-user
+			PEAR configuration
+			(~/.pearrc on Unix-like systems). After logging
+			in, your username and
+			password will be sent along in subsequent
+			operations on the remote
+			server.</doc>
 	</channel-login>
 	<channel-logout>
 		<summary>Logs out from the remote channel server</summary>
@@ -121,11 +141,14 @@
 		<shortcut>clo</shortcut>
 		<options />
 		<doc>&lt;channel name&gt;
-			Logs out from a remote channel server. If &lt;channel name&gt; is not
+			Logs out from a remote channel server. If
+			&lt;channel name&gt; is not
 			supplied,
-			the default channel is used. This command does not actually connect to
+			the default channel is used. This
+			command does not actually connect to
 			the
-			remote server, it only deletes the stored username and password from your
+			remote server, it only deletes
+			the stored username and password from your
 			user
 			configuration.</doc>
 	</channel-logout>

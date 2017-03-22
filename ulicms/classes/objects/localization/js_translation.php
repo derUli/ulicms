@@ -28,7 +28,7 @@ class JSTranslation {
 	}
 	public function getJS($wrap = "<script type=\"text/javascript\">{code}</script>") {
 		$js = array (
-				"Translation = {};"
+				"Translation = {};" 
 		);
 		foreach ( $this->keys as $key ) {
 			if (startsWith ( $key, "TRANSLATION_" )) {

@@ -68,14 +68,22 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 -webkit-transform
 
 
+
+
 :rotate(360deg)
+
+
 
 
 ;
 transform
 
 
+
+
 :rotate(360deg)
+
+
 
 
 }
@@ -90,14 +98,22 @@ keyframes dialog_spinner { 0%{
 -webkit-transform
 
 
+
+
 :rotate(360deg)
+
+
 
 
 ;
 transform
 
 
+
+
 :rotate(360deg)
+
+
 
 
 }

@@ -37,7 +37,7 @@ csrf_token_html ();
 ?>
 	<input type="hidden" name="login" value="login">
 	<?php
-
+	
 	if (! empty ( $_REQUEST ["go"] )) {
 		?>
 	<input type="hidden" name="go"
@@ -108,7 +108,7 @@ if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {
 	</script>
 <p class="ulicms_error">
 <?php
-
+	
 	echo htmlspecialchars ( $_REQUEST ["error"] );
 	?>
 </p>
@@ -116,9 +116,9 @@ if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {
 }
 ?>
 				<?php
-
+				
 				if (Settings::get ( "visitors_can_register" ) === "on" or Settings::get ( "visitors_can_register" ) === "1") {
-
+					
 					?>
 <a
 	href="?register=register&<?php
@@ -126,18 +126,18 @@ if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {
 						echo "go=" . real_htmlspecialchars ( $_REQUEST ["go"] );
 					}
 					?>">[<?php
-
+					
 					translate ( "register" );
 					?>]</a>
 <?php
 				}
 				?>
 				<?php
-
+				
 				if (! Settings::get ( "disable_password_reset" )) {
 					?>
 <a href="?reset_password" style="float: right;">[<?php
-
+					
 					translate ( "reset_password" );
 					?>]</a>
 <?php

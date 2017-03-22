@@ -17,17 +17,16 @@
  */
 
 /**
- * 
  * @nodep Gtk
  */
-if ('@include_path@' != '@' . 'include_path' . '@'){
-     ini_set('include_path', '@include_path@');
-     $raw = false;
-     }else{
-     // this is a raw, uninstalled pear, either a cvs checkout, or php distro
-    $raw = true;
-     }
-define('PEAR_RUNTYPE', 'pecl');
+if ('@include_path@' != '@' . 'include_path' . '@') {
+	ini_set ( 'include_path', '@include_path@' );
+	$raw = false;
+} else {
+	// this is a raw, uninstalled pear, either a cvs checkout, or php distro
+	$raw = true;
+}
+define ( 'PEAR_RUNTYPE', 'pecl' );
 require_once 'pearcmd.php';
 /**
  * Local variables:

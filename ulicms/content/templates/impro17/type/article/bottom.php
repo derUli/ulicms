@@ -13,6 +13,12 @@
 		) );
 	}
 	?></p>
+<?php if(isNotNullOrEmpty(meta_keywords())){?>
+<p>
+	<strong><?php translate("tags")?>:</strong> <br />
+<?php Template::escape(meta_keywords());?>
+</p>
+<?php }?>
 <?php }?>
 <?php
 

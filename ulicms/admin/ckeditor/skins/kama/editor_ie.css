@@ -1706,8 +1706,9 @@ a.cke_path_item:hover, a.cke_path_item:focus, a.cke_path_item:active {
 
 .cke_rtl .cke_dialog_footer_buttons .cke_dialog_ui_hbox_first {
 	padding-left: 10px !important
-}_ltr .cke_button__redo_icon, .cke_ltr.cke_hidpi .cke_button__redo_icon
-	{
+}
+
+_ltr .cke_button__redo_icon, .cke_ltr.cke_hidpi .cke_button__redo_icon {
 	background: url(icons_hidpi.png) no-repeat 0 -1824px !important
 }
 

@@ -1,31 +1,38 @@
 <!doctype html>
 
 <title>CodeMirror: Julia mode</title>
-<meta charset="utf-8"/>
+<meta charset="utf-8" />
 <link rel=stylesheet href="../../doc/docs.css">
 
 <link rel="stylesheet" href="../../lib/codemirror.css">
 <script src="../../lib/codemirror.js"></script>
 <script src="julia.js"></script>
-<style type="text/css">.CodeMirror {border-top: 1px solid black; border-bottom: 1px solid black;}</style>
+<style type="text/css">
+.CodeMirror {
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+}
+</style>
 <div id=nav>
-  <a href="http://codemirror.net"><h1>CodeMirror</h1><img id=logo src="../../doc/logo.png"></a>
+	<a href="http://codemirror.net"><h1>CodeMirror</h1>
+		<img id=logo src="../../doc/logo.png"></a>
 
-  <ul>
-    <li><a href="../../index.html">Home</a>
-    <li><a href="../../doc/manual.html">Manual</a>
-    <li><a href="https://github.com/codemirror/codemirror">Code</a>
-  </ul>
-  <ul>
-    <li><a href="../index.html">Language modes</a>
-    <li><a class=active href="#">Julia</a>
-  </ul>
+	<ul>
+		<li><a href="../../index.html">Home</a>
+		<li><a href="../../doc/manual.html">Manual</a>
+		<li><a href="https://github.com/codemirror/codemirror">Code</a>
+	</ul>
+	<ul>
+		<li><a href="../index.html">Language modes</a>
+		<li><a class=active href="#">Julia</a>
+	</ul>
 </div>
 
 <article>
-<h2>Julia mode</h2>
+	<h2>Julia mode</h2>
 
-    <div><textarea id="code" name="code">
+	<div>
+		<textarea id="code" name="code">
 #numbers
 1234
 1234im
@@ -79,26 +86,18 @@ finally
 end
 
 #types
-immutable Color{T<:Number}
-  r::T
-  g::T
-  b::T
-end
+immutable Color{T<:Number }
+  r::T g::T b::T end
 
-#functions
-function change!(x::Vector{Float64})
-  for i = 1:length(x)
-    x[i] *= 2
-  end
-end
+#functions function
+				change!(x::Vector{Float64})
+  for i=1:length(x) x[i] *=2 end
+				end
 
-#function invocation
-f('b', (2, 3)...)
+#function invocation f('b', (2, 3)...)
 
 #operators
-|=
-&=
-^=
+|=&=^=
 \-
 %=
 *=
@@ -180,8 +179,9 @@ type immutable quote
 true false enumerate
 
 
-    </textarea></div>
-    <script>
+    </textarea>
+	</div>
+	<script>
       var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
         mode: {name: "julia",
                },
@@ -191,5 +191,9 @@ true false enumerate
       });
     </script>
 
-    <p><strong>MIME types defined:</strong> <code>text/x-julia</code>.</p>
+	<p>
+		<strong>MIME types defined:</strong>
+		<code>text/x-julia</code>
+		.
+	</p>
 </article>

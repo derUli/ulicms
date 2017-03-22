@@ -53,18 +53,18 @@ class categories {
 		return null;
 	}
 	public static function getCategoryById($id) {
-		if(Vars::get("category_".intval($id))){
-			return Vars::get("category_".intval($id));			
+		if (Vars::get ( "category_" . intval ( $id ) )) {
+			return Vars::get ( "category_" . intval ( $id ) );
 		}
 		$sqlString = "SELECT name FROM " . tbname ( "categories" ) . " WHERE id=" . $id;
 		$result = db_query ( $sqlString );
 		if (db_num_rows ( $result ) > 0) {
 			$row = db_fetch_assoc ( $result );
-			Vars::set("category_".intval($id), $row["name"]);
+			Vars::set ( "category_" . intval ( $id ), $row ["name"] );
 			return $row ["name"];
 		}
 		
-		Vars::set("category_" . intval($id), null);
+		Vars::set ( "category_" . intval ( $id ), null );
 		return null;
 	}
 	public static function getAllCategories($order = 'id') {

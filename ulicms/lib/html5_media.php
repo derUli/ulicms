@@ -1,4 +1,4 @@
-<?php 
+<?php
 function replaceAudioTags($txt) {
 	// Ich weiß, dass das eigentlich einfacher mit einem regulären Ausdruck geht, aber ich kann keine reguläre Ausdrücke.
 	// Reguläre Ausdrücke sehen für mich so aus, als wäre eine Katze über die Tastatur gelaufen.

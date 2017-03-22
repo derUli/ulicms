@@ -260,8 +260,8 @@ function openMenuImageSelectWindow(field) {
 					<br /> <br /> <strong><?php translate("article_date");?></strong><br />
 					<input name="article_date" type="datetime-local"
 						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
-					<strong><?php translate("excerpt");?></strong> <textarea
-						name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
+					<strong><?php translate("excerpt");?></strong>
+					<textarea name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
 				</div>
 			</div>
 

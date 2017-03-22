@@ -2,14 +2,14 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "settings_simple" )) {
-
+		
 		$query = db_query ( "SELECT * FROM " . tbname ( "settings" ) . " ORDER BY name", $connection );
 		$settings = Array ();
 		while ( $row = db_fetch_object ( $query ) ) {
 			$settings [$row->name] = $row->value;
 			$settings [$row->name] = htmlspecialchars ( $settings [$row->name], ENT_QUOTES, "UTF-8" );
 		}
-
+		
 		?>
 
 <h2><?php translate("general_settings");?></h2>
@@ -17,7 +17,7 @@ if (defined ( "_SECURITY" )) {
 <form id="settings_simple" action="index.php?action=save_settings"
 	method="post">
 <?php
-
+		
 		csrf_token_html ();
 		?>
 <table>
@@ -33,7 +33,7 @@ if (defined ( "_SECURITY" )) {
 			<td><strong><?php translate("homepage_owner");?></strong></td>
 			<td><input type="text" name="homepage_owner"
 				value="<?php
-
+		
 		echo $settings ["homepage_owner"];
 		?>"></td>
 		</tr>
@@ -60,14 +60,14 @@ if (defined ( "_SECURITY" )) {
 			<td><strong><?php translate("OWNER_MAILADRESS");?></strong></td>
 			<td><input type="email" name="email"
 				value="<?php
-
+		
 		echo $settings ["email"];
 		?>"></td>
 		</tr>
 		<tr>
 			<td><strong><?php translate("frontpage");?></strong></td>
 			<td><a href="index.php?action=frontpage_settings"><?php
-
+		
 		translate ( "edit" );
 		?></a></td>
 		</tr>
@@ -78,7 +78,7 @@ if (defined ( "_SECURITY" )) {
 		if (strtolower ( $settings ["maintenance_mode"] == "on" ) || $settings ["maintenance_mode"] == "1" || strtolower ( $settings ["maintenance_mode"] ) == "true") {
 			echo " checked";
 		}
-
+		
 		?>></td>
 		</tr>
 		<tr>
@@ -88,15 +88,15 @@ if (defined ( "_SECURITY" )) {
 		if (strtolower ( $settings ["visitors_can_register"] == "on" ) || $settings ["visitors_can_register"] == "1" || strtolower ( $settings ["visitors_can_register"] ) == "true") {
 			echo " checked";
 		}
-
+		
 		?>></td>
 		</tr>
 		<tr>
 			<td><strong><?php
-
+		
 		translate ( "enable_password_reset" );
 		?></strong>
-
+			
 			<td><input type="checkbox" name="disable_password_reset"
 				value="enable"
 				<?php if(!isset($settings["disable_password_reset"])) echo " checked"?>>
@@ -108,30 +108,30 @@ if (defined ( "_SECURITY" )) {
 		</tr>
 		<tr>
 			<td><strong><?php
-
+		
 		translate ( "description" );
 		?></strong></td>
 			<td><a href="index.php?action=meta_description"><?php
-
+		
 		translate ( "edit" );
 		?></a></td>
 		</tr>
 		<tr>
 			<td><strong><?php translate("keywords");?></strong></td>
 			<td><a href="index.php?action=meta_keywords"><?php
-
+		
 		translate ( "edit" );
 		?></a></td>
 		</tr>
 		<?php
-
+		
 		if ($acl->hasPermission ( "open_graph" )) {
 			?>
               <tr>
 			<td><strong><?php translate("open_graph");?>
 		</strong></td>
 			<td><a href="index.php?action=open_graph"><?php
-
+			
 			translate ( "edit" );
 			?></a></td>
 		</tr>
@@ -143,12 +143,12 @@ if (defined ( "_SECURITY" )) {
 			<td><select name="timezone" size=1>
 <?php
 		$timezones = file ( "inc/timezones.txt" );
-
+		
 		$current_timezone = Settings::get ( "timezone" );
 		$current_timezone = trim ( $current_timezone );
 		sort ( $timezones );
 		for($i = 0; $i < count ( $timezones ); $i ++) {
-
+			
 			$thisTimezone = $timezones [$i];
 			$thisTimezone = trim ( $thisTimezone );
 			if ($thisTimezone === $current_timezone) {
@@ -169,7 +169,7 @@ if (defined ( "_SECURITY" )) {
 
    <option value="index,follow"><?php translate("EARCH_ENGINES_INDEX");?></option>
 					<option value="noindex,nofollow" selected><?php
-
+			
 			translate ( "SEARCH_ENGINES_NOINDEX" );
 			?></option>
 
@@ -180,7 +180,7 @@ if (defined ( "_SECURITY" )) {
 			translate ( "SEARCH_ENGINES_INDEX" );
 			?></option>
 					<option value="noindex,nofollow"><?php
-
+			
 			translate ( "SEARCH_ENGINES_NOINDEX" );
 			?></option>
 <?php
@@ -189,12 +189,12 @@ if (defined ( "_SECURITY" )) {
 </select></td>
 		</tr>
 <?php
-
+		
 		add_hook ( "settings_simple" );
 		?>
 <tr>
 			<td>
-
+			
 			<td align="center"><input type="submit" value="OK"
 				style="width: 100%;"></td>
 		</tr>

@@ -66,9 +66,18 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
 100%{
 -webkit-transform
+
+
 :rotate(360deg)
-;transform
+
+
+;
+transform
+
+
 :rotate(360deg)
+
+
 }
 }
 @
@@ -79,9 +88,18 @@ keyframes dialog_spinner { 0%{
 
 100%{
 -webkit-transform
+
+
 :rotate(360deg)
-;transform
+
+
+;
+transform
+
+
 :rotate(360deg)
+
+
 }
 }
 .cke_dialog_contents {
@@ -227,13 +245,46 @@ a.cke_dialog_close_button {
 }
 
 .cke_dialog_close_button:hover {
-	opacity: ;
-	 = '#ffffff', GradientType
-=0)}.cke_hc a.cke_dialog_tab
-	:hover , .cke_hc  a .cke_dialog_tab :focus , .cke_hc;
-	 a .cke_dialog_tab_selected ursor: pointer
+	opacity:;
+	=
+	'#
+	ffffff
+	',
+	GradientType
+	=0)
 }
 
+.cke_hc
+ 
+a
+.cke_dialog_tab
+
+	
+:hover
+,
+.cke_hc
+  
+a
+ 
+.cke_dialog_tab
+ 
+:focus
+,
+.cke_hc
+;
+
+	 
+a
+ 
+.cke_dialog_tab_selected
+ 
+ursor
+:
+ 
+pointer
+
+
+}
 .cke_disabled {
 	color: #a0a0a0
 }

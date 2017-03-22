@@ -194,7 +194,8 @@ $("form.delete-form").ajaxForm(ajax_options);
 
 	<p>
 	<?php translate("description");?>
-		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
+		<br />
+		<textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
 	</p>
 	<p>
 		<input type="submit" name="create"
@@ -233,7 +234,8 @@ $("form.delete-form").ajaxForm(ajax_options);
 
 	<p>
 	<?php translate("description");?>
-		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"><?php
+		<br />
+		<textarea cols="50" name="description" rows="5" maxlength="255"><?php
 			echo htmlspecialchars ( categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
 			?></textarea>
 	</p>
