@@ -17,24 +17,24 @@ if ($id !== null) {
 				$entries = array_slice ( $entries, $start, $limit );
 				$entries_count = count ( $entries );
 			}
-
+			
 			$previous_start = $start - $limit;
 			if ($previous_start < 0) {
 				$previous_start = 0;
 			}
-
+			
 			$next_start = $start + $limit;
 			if ($next_start <= $entries_total_count) {
 				$next_start = $start + $limit;
 			}
-
+			
 			?>
 
 <div class="container">
 	<?php
-
+			
 			foreach ( $entries as $entry ) {
-				$article_image = getTemplateDirPath ( "2018" ) . "images/nopic.jpg";
+				$article_image = getTemplateDirPath ( "impro17" ) . "images/nopic.jpg";
 				$meta = get_article_meta ( $entry->systemname );
 				$excerpt = strip_tags ( $meta->excerpt, "<img><iframe><embed><object>" );
 				$excerpt = trim ( $excerpt );
@@ -48,7 +48,7 @@ if ($id !== null) {
 
 		<div class="col-sm-5">
 		<?php
-
+				
 				if ($meta and ! empty ( $meta->article_image )) {
 					$article_image = $meta->article_image;
 				}
