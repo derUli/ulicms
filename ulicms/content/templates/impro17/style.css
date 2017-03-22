@@ -374,6 +374,6 @@ a.list-article-image {
 	}
 }
 
-p.tags {
+p.tags, p.author-info {
 	margin-top: 20px;
 }
