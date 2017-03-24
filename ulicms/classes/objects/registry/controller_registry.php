@@ -9,7 +9,7 @@ class ControllerRegistry {
 				$controllers = getModuleMeta ( $module, "controllers" );
 				if ($controllers) {
 					foreach ( $controllers as $key => $value ) {
-						$path = getModulePath ( $module ) . trim ( $value, "/" );
+						$path = getModulePath ( $module, true ) . trim ( $value, "/" );
 						if (! endsWith ( $path, ".php" )) {
 							$path .= ".php";
 						}
