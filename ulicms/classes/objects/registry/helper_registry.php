@@ -9,7 +9,7 @@ class HelperRegistry {
 				$helpers = getModuleMeta ( $module, "helpers" );
 				if ($helpers) {
 					foreach ( $helpers as $key => $value ) {
-						$path = getModulePath ( $module ) . trim ( $value, "/" );
+						$path = getModulePath ( $module, true ) . trim ( $value, "/" );
 						if (! endsWith ( $path, ".php" )) {
 							$path .= ".php";
 						}

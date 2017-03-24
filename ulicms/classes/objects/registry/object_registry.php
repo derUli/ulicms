@@ -9,7 +9,7 @@ class ObjectRegistry {
 				$objects = getModuleMeta ( $module, "objects" );
 				if ($objects) {
 					foreach ( $objects as $key => $value ) {
-						$path = getModulePath ( $module ) . trim ( $value, "/" );
+						$path = getModulePath ( $module, true ) . trim ( $value, "/" );
 						if (! endsWith ( $path, ".php" )) {
 							$path .= ".php";
 						}
