@@ -1,0 +1,11 @@
+{
+	"source" : "extend",
+	"version" : "0.5",
+	"embed" : true,
+	"controllers" : {
+	"SearchController" : "controllers/search_controller"
+	},
+	"objects" : {
+	"SearchController" : "objects/search_indexer"
+	}
+}

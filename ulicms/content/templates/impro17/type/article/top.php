@@ -3,11 +3,18 @@ include_once getTemplateDirPath ( get_theme () ) . "/top.php";
 $meta = get_article_meta ();
 $page = get_page ();
 $lastmodified = $page ["lastmodified"];
+if (! is_null ( $meta->article_date )) {
+	$lastmodified = $meta->article_date;
+}
 $article_image = getTemplateDirPath ( "impro17" ) . "images/nopic.jpg";
 ?>
 
 <strong><?php translate("date");?>:</strong>
-<?php echo strftime("%x", $lastmodified);?></p>
+<time datetime="<?php echo date(DATE_W3C, $lastmodified);?>">
+<?php echo strftime("%x", $lastmodified);?>
+</time>
+
+</p>
 <?php
 
 if ($meta and ! empty ( $meta->article_image )) {
