@@ -274,9 +274,7 @@ function include_jquery() {
 	}
 	
 	if (! in_array ( get_requested_pagename (), $disabled_on_pages )) {
-		?>
-
-
+?>
 <script type="text/javascript" src="<?php echo get_jquery_url();?>"></script>
 <?php
 		add_hook ( "after_jquery_include" );

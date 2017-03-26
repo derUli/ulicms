@@ -24,10 +24,13 @@ if (! isset ( $_SESSION ["language"] )) {
 
 setLocaleByLanguage ();
 
+require_once "templating.php";
+
 if (in_array ( $_SESSION ["language"], $languages )) {
 	include getLanguageFilePath ( $_SESSION ["language"] );
 	Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
 	Translation::includeCustomLangFile ( $_SESSION ["language"] );
+	Translation::loadCurrentThemeLanguageFiles ( $_SESSION ["language"] );
 	add_hook ( "custom_lang_" . $_SESSION ["language"] );
 }
 
@@ -45,7 +48,6 @@ if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 	echo $txt;
 	exit ();
 }
-require_once "templating.php";
 $status = check_status ();
 
 if (Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {

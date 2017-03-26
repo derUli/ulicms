@@ -9,7 +9,7 @@ class ActionRegistry {
 				$cActions = getModuleMeta ( $module, "actions" );
 				if ($cActions) {
 					foreach ( $cActions as $key => $value ) {
-						$path = getModulePath ( $module ) . trim ( $value, "/" );
+						$path = getModulePath ( $module, true ) . trim ( $value, "/" );
 						if (! endsWith ( $path, ".php" )) {
 							$path .= ".php";
 						}

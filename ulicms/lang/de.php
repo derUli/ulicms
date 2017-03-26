@@ -696,4 +696,6 @@ define ( "TRANSLATION_FILE_NOT_FOUND", "Datei nicht gefunden!" );
 define ( "TRANSLATION_ONE_DATASET_FOUND", "Ein Datensatz gefunden." );
 define ( "TRANSLATION_X_DATASETS_FOUND", "%x Datensätze gefunden." );
 
+define ( "TRANSLATION_INSTALL_ANOTHER_PACKAGE", "Ein weiteres Paket installieren" );
+
 add_hook ( "lang_de" );

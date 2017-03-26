@@ -36,4 +36,11 @@ class Translation {
 			}
 		}
 	}
+	public static function loadCurrentThemeLanguageFiles($lang) {
+		$modules = getAllModules ();
+		$file = getTemplateDirPath ( get_theme (), true ) . "/lang/" . $lang . ".php";
+		if (file_exists ( $file ) and is_file ( $file )) {
+			include_once $file;
+		}
+	}
 }

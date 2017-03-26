@@ -90,6 +90,13 @@ if (! $acl->hasPermission ( "install_packages" )) {
 					}
 				}
 			}
+			?>
+<p>
+	[ <a
+		href="<?php echo ModuleHelper::buildActionURL("available_modules");?>"><?php translate("install_another_package")?></a>]
+</p>
+
+<?php
 		}
 		
 		?>
