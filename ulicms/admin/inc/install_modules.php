@@ -44,7 +44,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		$packagesToInstall = explode ( ",", $_REQUEST ["packages"] );
 		
 		$post_install_script = "../post-install.php";
-		if (file_exists ( $post_install_script )){
+		if (file_exists ( $post_install_script )) {
 			unlink ( $post_install_script );
 		}
 		
@@ -90,6 +90,13 @@ if (! $acl->hasPermission ( "install_packages" )) {
 					}
 				}
 			}
+			?>
+<p>
+	[ <a
+		href="<?php echo ModuleHelper::buildActionURL("available_modules");?>"><?php translate("install_another_package")?></a>]
+</p>
+
+<?php
 		}
 		
 		?>
