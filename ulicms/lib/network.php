@@ -10,7 +10,6 @@ function get_site_protocol() {
 function site_protocol() {
 	echo get_site_protocol ();
 }
-
 function get_protocol_and_domain() {
 	return get_site_protocol () . get_domain ();
 }
@@ -89,7 +88,6 @@ if (! function_exists ( "get_host" )) {
 	}
 }
 
-
 // Übersetzung HTTP Status Code => Name
 function getStatusCodeByNumber($nr) {
 	$http_codes = array (
@@ -152,7 +150,6 @@ function getStatusCodeByNumber($nr) {
 	
 	return $nr . " " . $http_codes [$nr];
 }
-
 function get_request_uri() {
 	return $_SERVER ["REQUEST_URI"];
 }
@@ -169,7 +166,6 @@ function get_referrer() {
 	}
 	return $referrer;
 }
-
 function get_useragent() {
 	return $_SERVER ['HTTP_USER_AGENT'];
 }

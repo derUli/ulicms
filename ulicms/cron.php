@@ -19,6 +19,7 @@ Database::query ( "DELETE FROM " . tbname ( "content" ) . " WHERE " . time () . 
 // Alle Revisionen von bereits gelöschten Seiten entfernen
 /**
  * Database::query ( "DELETE FROM " .
+ *
  * tbname ( "history" ) . " WHERE content_id NOT IN (
  * SELECT id from " . tbname ( "content" ) . ");" );
  * // Listen von bereits gelöschten Content Objekten aufräumen

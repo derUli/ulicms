@@ -468,8 +468,8 @@ class FineDiff {
 			// increase granularity
 			if ($fragment_edit instanceof FineDiffReplaceOp && $has_next_stage) {
 				$this->_processGranularity ( substr ( $this->from_text, $this->from_offset, $fragment_edit->getFromLen () ), $fragment_edit->getText () );
-			} 			// fuse copy ops whenever possible
-			else if ($fragment_edit instanceof FineDiffCopyOp && $this->last_edit instanceof FineDiffCopyOp) {
+			}  // fuse copy ops whenever possible
+else if ($fragment_edit instanceof FineDiffCopyOp && $this->last_edit instanceof FineDiffCopyOp) {
 				$this->edits [count ( $this->edits ) - 1]->increase ( $fragment_edit->getFromLen () );
 				$this->from_offset += $fragment_edit->getFromLen ();
 			} else {
@@ -718,8 +718,8 @@ class FineDiff {
 						$to_copy_start + $copy_len,
 						$to_segment_end 
 				);
-			} 			// no match, so delete all, insert all
-			else {
+			}  // no match, so delete all, insert all
+else {
 				$result [$from_segment_start * 4] = new FineDiffReplaceOp ( $from_segment_len, substr ( $to_text, $to_segment_start, $to_segment_len ) );
 			}
 		}

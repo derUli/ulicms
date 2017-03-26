@@ -15,7 +15,7 @@ function ajaxOnChangeLanguage($lang, $menu, $parent) {
 <option selected="selected" value="NULL">
 			[
 			<?php
-
+	
 	translate ( "none" );
 	?>
 			]
@@ -25,17 +25,17 @@ function ajaxOnChangeLanguage($lang, $menu, $parent) {
 	foreach ( $pages as $key => $page ) {
 		?>
 <option value="<?php
-
+		
 		echo $page ["id"];
 		?>"
 	<?php if($page["id"] == $parent) echo "selected";?>>
 				<?php
-
+		
 		echo $page ["title"];
 		?>
 				(ID:
 				<?php
-
+		
 		echo $page ["id"];
 		?>
 				)

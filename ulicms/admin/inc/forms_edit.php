@@ -39,8 +39,8 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_edit" ))
 		?></p>
 
 	<p>
-		<strong><?php translate("fields");?></strong><br /> <textarea
-			name="fields" rows="10"><?php echo htmlspecialchars($form["fields"]);?></textarea>
+		<strong><?php translate("fields");?></strong><br />
+		<textarea name="fields" rows="10"><?php echo htmlspecialchars($form["fields"]);?></textarea>
 	</p>
 
 

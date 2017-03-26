@@ -37,8 +37,7 @@ class CustomData {
 			if (isset ( $data [$var] )) {
 				unset ( $data [$var] );
 			}
-		}
-		else {
+		} else {
 			// Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
 			$data = array ();
 		}
