@@ -78,7 +78,8 @@ if (defined ( "_SECURITY" )) {
 				csrf_token_html ();
 				?>
 	<input type="hidden" name="edit_page" value="edit_page"> <input
-		type="hidden" name="page_id" value="<?php echo $row -> id?>">
+		type="hidden" name="page_id" id="page_id"
+		value="<?php echo $row -> id?>">
 
 	<div id="accordion-container">
 
@@ -989,8 +990,17 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		<div id="message_page_edit" class="inPageMessage"></div>
 		<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
 	</div>
+	<div class="row">
+		<div class="col-xs-6">
+			<input type="submit" value="<?php translate("save_changes");?>">
 
-	<input type="submit" value="<?php translate("save_changes");?>">
+		</div>
+
+		<div class="col-xs-6 text-right">
+			<input type="button" id="btn-view-page"
+				value="<?php translate("view");?>">
+		</div>
+	</div>
 	<?php
 				if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 					?>
