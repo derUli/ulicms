@@ -9,6 +9,7 @@
 + PHP_ICO auf Version 1.0.4 aktualisiert
 + request_logging ist nun in der cms-config Datei einstellbar. Es ist in den Voreinstellungen deaktiviert.
 + Link "Ein weiteres Paket installieren" hinzugefügt
++ Themes können nun auch Sprachdateien haben
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
 # Menüpunkte werden nur noch angezeigt, wenn darauf die Zugriffsrechte hat
 # Doppelklick auf "Paket installieren" Button erzeugt nun keinen Fehler mehr
