@@ -211,7 +211,7 @@ $(function() {
 
 	$("#btn-view-page").click(function() {
 		var url = "../?goid=" + $("#page_id").val();
-		location.replace(url);
+		window.open(url);
 	})
 
 	systemnameOrLanguageChanged($("input[name='system_title']"));
