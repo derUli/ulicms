@@ -11,6 +11,8 @@
 + request_logging ist nun in der cms-config Datei einstellbar. Es ist in den Voreinstellungen deaktiviert.
 + Link "Ein weiteres Paket installieren" hinzugefügt
 + Themes können nun auch Sprachdateien haben
++ Link "Anzeigen" unter "Seite Bearbeiten" hinzugefügt
+# Fehlermeldung auf 404er Fehlerseiten in der Funktion Template::getHeadline() behoben
 # Funktionen zur Ausgabe der Metadaten einer Seite entsprechen nun dem Namensschema
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
 # Menüpunkte werden nur noch angezeigt, wenn darauf die Zugriffsrechte hat

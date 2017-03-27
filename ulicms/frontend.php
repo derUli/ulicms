@@ -15,7 +15,7 @@ setLanguageByDomain ();
 $languages = getAllLanguages ();
 
 if (! empty ( $_GET ["language"] ) and in_array ( $_GET ["language"], $languages )) {
-	$_SESSION ["language"] = db_escape ( $_GET ["language"] );
+	$_SESSION ["language"] = Database::escapeValue ( $_GET ["language"], DB_TYPE_STRING );
 }
 
 if (! isset ( $_SESSION ["language"] )) {
