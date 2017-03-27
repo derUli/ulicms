@@ -447,7 +447,6 @@ function getDomainByLanguage($language) {
 					$line [0] = trim ( $line [0] );
 					$line [1] = trim ( $line [1] );
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
-						
 						if ($line [1] == $language) {
 							return $line [0];
 						}
