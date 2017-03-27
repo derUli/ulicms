@@ -82,4 +82,26 @@ class ModuleHelper {
 		}
 		return $retval;
 	}
+	public static function getFullPageURLByID($page_id = null) {
+		if (! $page_id) {
+			$page_id = get_id ();
+		}
+		if (! $page_id) {
+			return null;
+		}
+		$page = ContentFactory::getByID ( $page_id );
+		if (is_null ( $page->id )) {
+			return null;
+		}
+		$domain = getDomainByLanguage ( $page->language );
+		if (! $domain) {
+			if ($page->language != getCurrentLanguage ()) {
+				return get_protocol_and_domain () . "/" . $page->systemname . ".html" . "?language=" . $page->language;
+			} else {
+				return get_protocol_and_domain () . "/" . $page->systemname . ".html";
+			}
+		} else {
+			return get_site_protocol () . $domain . "/" . $page->systemname . ".html";
+		}
+	}
 }

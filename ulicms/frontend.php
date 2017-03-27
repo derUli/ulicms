@@ -90,9 +90,8 @@ if ($redirection) {
 
 if (isset ( $_GET ["goid"] )) {
 	$goid = intval ( $_GET ["goid"] );
-	$sysname = getPageSystemnameByID ( $goid );
-	if ($sysname and $sysname != "-") {
-		$url = buildSeoURL ( $sysname );
+	$url = ModuleHelper::getFullPageURLByID ( $goid );
+	if ($url) {
 		Request::redirect ( $url, 301 );
 	} else {
 		$url = getBaseFolderURL ();
