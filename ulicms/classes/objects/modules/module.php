@@ -24,11 +24,12 @@ class Module {
 		return false;
 	}
 	public function save() {
-		$sql = "select * from {prefix}modules where name = ?";
+		$sql = "select name from {prefix}modules where name = ?";
 		$args = array (
-				$name 
+				$this->name 
 		);
 		$query = Database::pQuery ( $sql, $args, true );
+		
 		if (Database::any ( $query )) {
 			$this->update ();
 		} else {
@@ -84,9 +85,9 @@ class Module {
 		$this->version = strval ( $version );
 	}
 	public function delete() {
-		$sql = "select * from {prefix}modules where name = ?";
+		$sql = "select name from {prefix}modules where name = ?";
 		$args = array (
-				$name 
+				$this->name 
 		);
 		$query = Database::pQuery ( $sql, $args, true );
 		if (Database::any ( $query )) {

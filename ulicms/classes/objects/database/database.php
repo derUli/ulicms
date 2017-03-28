@@ -319,7 +319,7 @@ class Database {
 		return $default;
 	}
 	public static function any($result) {
-		return (Database::getNumRows ( $result > 0 ));
+		return (Database::getNumRows ( $result ) > 0);
 	}
 }
 
