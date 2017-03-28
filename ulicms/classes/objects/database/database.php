@@ -317,7 +317,9 @@ class Database {
 			return self::fetchObject ( $result );
 		}
 		return $default;
-		;
+	}
+	public static function any($result) {
+		return (Database::getNumRows ( $result > 0 ));
 	}
 }
 
