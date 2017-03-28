@@ -9,6 +9,15 @@ class ModuleManager {
 		}
 		return $modules;
 	}
+	public function getAllModuleNames() {
+		$sql = "select name from {prefix}modules";
+		$query = Database::query ( $sql, true );
+		$modules = array ();
+		while ( $row = Database::fetchObject ( $query ) ) {
+			$modules [] = $row->name;
+		}
+		return $modules;
+	}
 	// Diese Funktion synchronisiert die modules in der Datenbank mit den modules im Modulordner
 	// - Neue Module werden erfassen
 	// - Versionsupdates erfassen
