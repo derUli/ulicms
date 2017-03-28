@@ -59,4 +59,8 @@ class ModuleManagerTest extends PHPUnit_Framework_TestCase {
 		$allModules = $manager->getAllModuleNames ();
 		$this->assertFalse ( in_array ( self::sampleName2, $allModules ) );
 	}
+	
+	// TODO: Test für sync() implementieren
+	public function testSync() {
+	}
 }
