@@ -288,6 +288,15 @@ class Database {
 		}
 		return $retval;
 	}
+	public static function fetchSingle($result) {
+		if (self::getNumRows ( $result ) > 1) {
+			throw new RangeException ( "Result contains more than one element." );
+		}
+		if (Database::getNumRows ( $result ) == 1) {
+			return self::fetchObject ( $result );
+		}
+		return null;
+	}
 }
 
 // Alias für Database

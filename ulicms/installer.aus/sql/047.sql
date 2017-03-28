@@ -3,4 +3,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}modules` (
   `version` varchar(20) DEFAULT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
