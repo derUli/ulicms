@@ -171,6 +171,7 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "security" . DIRECTORY_SEPERATOR . "encryption.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "files" . DIRECTORY_SEPERATOR . "file.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "files" . DIRECTORY_SEPERATOR . "path.php";
+
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "web" . DIRECTORY_SEPERATOR . "mailer.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "custom_data.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "localization" . DIRECTORY_SEPERATOR . "translation.php";
@@ -331,10 +332,13 @@ if (! is_ssl () and $enforce_https !== false) {
 	exit ();
 }
 
-ObjectRegistry::loadModuleObjects ();
-TypeMapper::loadMapping ();
-HelperRegistry::loadModuleHelpers ();
-ControllerRegistry::loadModuleControllers ();
+
+if(!defined("KCFINDER_PAGE")){
+	ObjectRegistry::loadModuleObjects ();
+	TypeMapper::loadMapping ();
+	HelperRegistry::loadModuleHelpers ();
+	ControllerRegistry::loadModuleControllers ();
+}
 
 add_hook ( "before_init" );
 add_hook ( "init" );
