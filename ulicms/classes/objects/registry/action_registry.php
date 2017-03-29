@@ -5,7 +5,7 @@ class ActionRegistry {
 		if (! defined ( "KCFINDER_PAGE" )) {
 			global $actions;
 			$modules = getAllModules ();
-			$disabledModules = Vars::get ( "disabledVars" );
+			$disabledModules = Vars::get ( "disabledModules" );
 			foreach ( $modules as $module ) {
 				if(in_array($module, $disabledModules)){
 					continue;
