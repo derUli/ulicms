@@ -5,7 +5,11 @@ class ControllerRegistry {
 		if (! defined ( "KCFINDER_PAGE" )) {
 			$controllerRegistry = array ();
 			$modules = getAllModules ();
+			$disabledModules = Vars::get ( "disabledVars" );
 			foreach ( $modules as $module ) {
+				if (in_array ( $module, $disabledModules )) {
+					continue;
+				}
 				$controllers = getModuleMeta ( $module, "controllers" );
 				if ($controllers) {
 					foreach ( $controllers as $key => $value ) {
