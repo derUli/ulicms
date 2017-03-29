@@ -45,9 +45,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		echo "<ol style=\"margin-bottom:30px;\">";
 		for($i = 0; $i < count ( $modules ); $i ++) {
 			echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
-			
-			$module_has_admin_page = (file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) ));
-			
+			$disabledModules = Vars::get ( "disabledModules" );
+			$module_has_admin_page = ((file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) )) && ! in_array ( $modules [$i], $disabledModules ));
 			echo getModuleName ( $modules [$i] );
 			$version = getModuleMeta ( $modules [$i], "version" );
 			$source = getModuleMeta ( $modules [$i], "source" );

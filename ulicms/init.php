@@ -332,8 +332,10 @@ if (! is_ssl () and $enforce_https !== false) {
 	exit ();
 }
 
+$moduleManager = new ModuleManager ();
+Vars::set ( "disabledModules", $moduleManager->getDisabledModuleNames () );
 
-if(!defined("KCFINDER_PAGE")){
+if (! defined ( "KCFINDER_PAGE" )) {
 	ObjectRegistry::loadModuleObjects ();
 	TypeMapper::loadMapping ();
 	HelperRegistry::loadModuleHelpers ();

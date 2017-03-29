@@ -576,6 +576,9 @@ function clearCache() {
 function add_hook($name) {
 	$modules = getAllModules ();
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
+		if (in_array ( $modules [$hook_i], $disabledModules )) {
+			continue;
+		}
 		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
 		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
 		if (file_exists ( $file1 )) {
@@ -945,7 +948,11 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 	}
 	$allModules = getAllModules ();
 	for($i = 0; $i <= count ( $allModules ); $i ++) {
+		$disabledModules = Vars::get ( "disabledModules" );
 		$thisModule = $allModules [$i];
+		if (in_array ( $thisModule, $disabledModules )) {
+			continue;
+		}
 		$stringToReplace1 = '[module="' . $thisModule . '"]';
 		$stringToReplace2 = '[module=&quot;' . $thisModule . '&quot;]';
 		

@@ -9,6 +9,24 @@ class ModuleManager {
 		}
 		return $modules;
 	}
+	public function getEnabledModuleNames() {
+		$sql = "select name from {prefix}modules where enabled = 1";
+		$query = Database::query ( $sql, true );
+		$modules = array ();
+		while ( $row = Database::fetchObject ( $query ) ) {
+			$modules [] = $row->name;
+		}
+		return $modules;
+	}
+	public function getDisabledModuleNames() {
+		$sql = "select name from {prefix}modules where enabled = 0";
+		$query = Database::query ( $sql, true );
+		$modules = array ();
+		while ( $row = Database::fetchObject ( $query ) ) {
+			$modules [] = $row->name;
+		}
+		return $modules;
+	}
 	public function getAllModuleNames() {
 		$sql = "select name from {prefix}modules";
 		$query = Database::query ( $sql, true );
