@@ -105,7 +105,12 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			echo "<br/>";
 			if (! file_exists ( $noembed_file1 ) and ! file_exists ( $noembed_file2 ) and $embed_attrib) {
-				echo "<input type='text' value='[module=\"" . $modules [$i] . "\"]' readonly='readonly' onclick='this.focus(); this.select()'>";
+				$disabled = "";
+				if (in_array ( $modules [$i], $disabledModules )) {
+					$disabled = "disabled";
+				}
+				
+				echo "<input type='text' value='[module=\"" . $modules [$i] . "\"]' readonly='readonly' " . $disabled . " onclick='this.focus(); this.select()'>";
 			} else {
 				echo "Kein Embed Modul";
 			}
