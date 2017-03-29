@@ -54,6 +54,6 @@ foreach($files as $file){
 }
 
 // Todo: Ordner tmpDir löschen und aufräumen
-$redirectUrl = get_protocol_and_domain(). "/post-install.php";
+$redirectUrl = get_protocol_and_domain(). "/update.php";
 var_dump($redirectUrl);
 Request::redirect($redirectUrl);
