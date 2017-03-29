@@ -246,7 +246,12 @@ if (! $eingeloggt) {
 		include_once "inc/pkginfo.php";
 	} else if ($_GET ["action"] == "sin_package_install_ok") {
 		include_once "inc/sin_package_install_ok.php";
-	} else if (isset ( $actions [$_GET ["action"]] )) {
+	} 
+	else if($_GET["action"] == "default_access_restrictions"){
+		include_once "inc/default_access_restrictions.php";
+		
+	} 
+	else if (isset ( $actions [$_GET ["action"]] )) {
 		include_once $actions [$_GET ["action"]];
 	} else {
 		translate ( "action_not_found" );

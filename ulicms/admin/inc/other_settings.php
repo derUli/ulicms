@@ -451,6 +451,19 @@ if (! $acl->hasPermission ( "other" )) {
 				<a href="https://support.google.com/accounts/answer/1066447"
 					target="_blank">[<?php translate("help");?>]</a>
 			</p>
+			
+			<?php
+	
+	if ($acl->hasPermission ( "default_access_restrictions_edit" )) {
+		?>
+				<h2><?php translate("DEFAULT_ACCESS_RESTRICTIONS");?></h2>
+			<p>
+				<a
+					href="<?php echo ModuleHelper::buildActionURL("default_access_restrictions");?>"><?php translate("view");?></a>
+			</p>
+				<?php
+	}
+	?>
 		</div>
 
 		<h2 class="accordion-header">
