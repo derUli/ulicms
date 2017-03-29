@@ -598,7 +598,12 @@ function import($ipage) {
 }
 function apply_filter($text, $type) {
 	$modules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledVars" );
 	for($i = 0; $i < count ( $modules ); $i ++) {
+		foreach ( $modules as $module ) {
+			if (in_array ( $module, $disabledModules )) {
+				continue;
+			}
 		$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
 		$module_content_filter_file2 = getModulePath ( $modules [$i] ) . "filters/" . $type . ".php";
 		if (file_exists ( $module_content_filter_file1 )) {

@@ -575,6 +575,7 @@ function clearCache() {
 }
 function add_hook($name) {
 	$modules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
 		if (in_array ( $modules [$hook_i], $disabledModules )) {
 			continue;
@@ -947,8 +948,8 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = preg_replace ( '/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
 	}
 	$allModules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i <= count ( $allModules ); $i ++) {
-		$disabledModules = Vars::get ( "disabledModules" );
 		$thisModule = $allModules [$i];
 		if (in_array ( $thisModule, $disabledModules )) {
 			continue;
