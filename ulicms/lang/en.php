@@ -707,4 +707,6 @@ define ( "TRANSLATION_X_DATASETS_FOUND", "%x datasets found." );
 
 define ( "TRANSLATION_INSTALL_ANOTHER_PACKAGE", "Install another Package" );
 
+define ( "TRANSLATION_NO_LANGUAGE", "No Language" );
+
 add_hook ( "lang_en" );

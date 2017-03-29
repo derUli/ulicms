@@ -698,4 +698,6 @@ define ( "TRANSLATION_X_DATASETS_FOUND", "%x Datensätze gefunden." );
 
 define ( "TRANSLATION_INSTALL_ANOTHER_PACKAGE", "Ein weiteres Paket installieren" );
 
+define ( "TRANSLATION_NO_LANGUAGE", "Keine Sprache");
+
 add_hook ( "lang_de" );
