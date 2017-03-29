@@ -10,8 +10,13 @@ if ($acl->hasPermission ( "motd" )) {
 	?>
 	</h2>
 	<?php
+	$languages = getAllLanguages ();
 	if (isset ( $_POST ["motd"] )) {
-		Settings::set ( "motd", $_POST ["motd"] );
+		if (isNullOrEmpty ( Request::getVar ( "language" ) )) {
+			Settings::set ( "motd", $_POST ["motd"] );
+		} else {
+			Settings::set ( "motd_" . Request::getVar ( "language" ), Request::getVar ( "motd" ) );
+		}
 		?>
 	<p>
 	<?php translate("motd_was_changed");?>
@@ -19,15 +24,29 @@ if ($acl->hasPermission ( "motd" )) {
 	<?php
 	}
 	?>
-
 	<form id="motd_form" action="index.php?action=motd" method="post">
+		<p>
+			<strong><?php translate("language");?></strong> <br /> <select
+				name="language" id="language">
+				<option value=""
+					<?php if(!Request::getVar ( "language" )){ echo "selected";}?>>[<?php translate("no_language");?>]</option>
+	<?php
+	
+	foreach ( $languages as $language ) {
+		?>
+		<option value="<?php Template::escape($language);?>"
+					<?php if(Request::getVar ( "language" ) == $language){ echo "selected";}?>><?php Template::escape(getLanguageNameByCode($language));?></option>
+		<?php }?>
+		
+		</select>
+		</p>
 	<?php
 	
 	csrf_token_html ();
 	?>
 		<p>
 			<textarea name="motd" id="motd" cols=60 rows=15><?php
-	echo htmlspecialchars ( Settings::get ( "motd" ) );
+	echo htmlspecialchars ( Request::getVar ( "language" ) ? Settings::get ( "motd_" . Request::getVar ( "language" ) ) : Settings::get ( "motd" ) );
 	?></textarea>
 		</p>
 		<?php
@@ -76,7 +95,10 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("motd"),
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>
 		<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+	
+	
 </script>
+		<script type="text/javascript" src="scripts/motd.js"></script>
 <?php
 	}
 	?>
