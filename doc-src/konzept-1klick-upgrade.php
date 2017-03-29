@@ -14,46 +14,15 @@ file_put_contents($tmpArchive, $data);
 
 $zip = new ZipArchive ();
 if ($zip->open ( $tmpArchive ) === TRUE) {
-			$zip->extractTo ( $tmpDir );
-		}
+		$zip->extractTo ( $tmpDir );
 		$zip->close();
+		}
 @unlink($tmpArchive);
 
 $upgradeCodeDir = Path::resolve("$tmpDir/ulicms");
 
-$files = find_all_files($upgradeCodeDir);
-$skipFiles = array("/admin/ckeditor/build-config.js");
+rename($upgradeCodeDir, ULICMS_ROOT);
 
-$skipFolders = array("/admin/kcfinder");
-// Todo: Vorher nicht vorhandene Ordner anlegen
-/* $folders = find_all_folders($upgradeCodeDir);
-foreach($folders as $folder){
-		$relUpgradeSourceFilePath = str_replace($upgradeCodeDir, "", $file);
-	$absUpgradeSourceFilePath = Path::resolve($upgradeCodeDir . $relUpgradeSourceFilePath);
-	if(in_array($relUpgradeSourceFilePath, $skipFolders)){
-		continue;
-	}
-	$targetFolder = Path::resolve(ULICMS_ROOT . $relUpgradeSourceFilePath);
-	id(!file_exists($targetFolder)){
-		mkdir($targetFolder, 0777, true);
-	}
-	
-}
+sureRemoveDir($upgradeCodeDir, true);
 
-*/
-
-foreach($files as $file){
-	$relUpgradeSourceFilePath = str_replace($upgradeCodeDir, "", $file);
-	$absUpgradeSourceFilePath = Path::resolve($upgradeCodeDir . $relUpgradeSourceFilePath);
-	if(in_array($relUpgradeSourceFilePath, $skipFiles)){
-		continue;
-	}
-	$targetFile = Path::resolve(ULICMS_ROOT . $relUpgradeSourceFilePath);
-	echo "copy $absUpgradeSourceFilePath) to $targetFile\n"; 
-	// Datei kopieren
-}
-
-// Todo: Ordner tmpDir löschen und aufräumen
-$redirectUrl = get_protocol_and_domain(). "/update.php";
-var_dump($redirectUrl);
-Request::redirect($redirectUrl);
+include_once Path::resolve("ULICMS_ROOT/update.php");
