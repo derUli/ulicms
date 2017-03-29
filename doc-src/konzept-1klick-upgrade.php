@@ -21,7 +21,7 @@ if ($zip->open ( $tmpArchive ) === TRUE) {
 
 $upgradeCodeDir = Path::resolve("$tmpDir/ulicms");
 
-rename($upgradeCodeDir, ULICMS_ROOT);
+recurse_copy($upgradeCodeDir, ULICMS_ROOT);
 
 sureRemoveDir($upgradeCodeDir, true);
 
