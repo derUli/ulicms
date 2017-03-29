@@ -58,6 +58,8 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "storages" . DIRECTORY_SEPERATOR . "vars.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "storages" . DIRECTORY_SEPERATOR . "flags.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "storages" . DIRECTORY_SEPERATOR . "settings_cache.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "modules" . DIRECTORY_SEPERATOR . "module.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "modules" . DIRECTORY_SEPERATOR . "module_manager.php";
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "backend" . DIRECTORY_SEPERATOR . "admin_menu.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "backend" . DIRECTORY_SEPERATOR . "menu_entry.php";
@@ -169,6 +171,7 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "security" . DIRECTORY_SEPERATOR . "encryption.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "files" . DIRECTORY_SEPERATOR . "file.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "files" . DIRECTORY_SEPERATOR . "path.php";
+
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "web" . DIRECTORY_SEPERATOR . "mailer.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "custom_data.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "localization" . DIRECTORY_SEPERATOR . "translation.php";
@@ -329,10 +332,15 @@ if (! is_ssl () and $enforce_https !== false) {
 	exit ();
 }
 
-ObjectRegistry::loadModuleObjects ();
-TypeMapper::loadMapping ();
-HelperRegistry::loadModuleHelpers ();
-ControllerRegistry::loadModuleControllers ();
+$moduleManager = new ModuleManager ();
+Vars::set ( "disabledModules", $moduleManager->getDisabledModuleNames () );
+
+if (! defined ( "KCFINDER_PAGE" )) {
+	ObjectRegistry::loadModuleObjects ();
+	TypeMapper::loadMapping ();
+	HelperRegistry::loadModuleHelpers ();
+	ControllerRegistry::loadModuleControllers ();
+}
 
 add_hook ( "before_init" );
 add_hook ( "init" );

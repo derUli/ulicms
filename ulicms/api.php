@@ -312,7 +312,11 @@ function get_available_post_types() {
 			"audio" 
 	);
 	$modules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	foreach ( $modules as $module ) {
+		if (in_array ( $module, $disabledModules )) {
+			continue;
+		}
 		$custom_types = getModuleMeta ( $module, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
@@ -325,6 +329,9 @@ function get_available_post_types() {
 	
 	$themes = getAllModules ();
 	foreach ( $themes as $theme ) {
+		if (in_array ( $module, $disabledModules )) {
+			continue;
+		}
 		$custom_types = getThemeMeta ( $theme, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
@@ -569,11 +576,17 @@ function clearCache() {
 		opcache_reset ();
 	}
 	
+	$moduleManager = new ModuleManager ();
+	$moduleManager->sync ();
 	add_hook ( "after_clear_cache" );
 }
 function add_hook($name) {
 	$modules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
+		if (in_array ( $modules [$hook_i], $disabledModules )) {
+			continue;
+		}
 		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
 		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
 		if (file_exists ( $file1 )) {
@@ -942,8 +955,12 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = preg_replace ( '/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
 	}
 	$allModules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i <= count ( $allModules ); $i ++) {
 		$thisModule = $allModules [$i];
+		if (in_array ( $thisModule, $disabledModules )) {
+			continue;
+		}
 		$stringToReplace1 = '[module="' . $thisModule . '"]';
 		$stringToReplace2 = '[module=&quot;' . $thisModule . '&quot;]';
 		

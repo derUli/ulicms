@@ -274,7 +274,7 @@ function include_jquery() {
 	}
 	
 	if (! in_array ( get_requested_pagename (), $disabled_on_pages )) {
-?>
+		?>
 <script type="text/javascript" src="<?php echo get_jquery_url();?>"></script>
 <?php
 		add_hook ( "after_jquery_include" );
@@ -598,21 +598,28 @@ function import($ipage) {
 }
 function apply_filter($text, $type) {
 	$modules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i < count ( $modules ); $i ++) {
-		$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
-		$module_content_filter_file2 = getModulePath ( $modules [$i] ) . "filters/" . $type . ".php";
-		if (file_exists ( $module_content_filter_file1 )) {
-			include_once $module_content_filter_file1;
-			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
-				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
+		foreach ( $modules as $module ) {
+			if (in_array ( $module, $disabledModules )) {
+				continue;
 			}
-		} else if (file_exists ( $module_content_filter_file2 )) {
-			include_once $module_content_filter_file2;
-			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
-				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
+			$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
+			$module_content_filter_file2 = getModulePath ( $modules [$i] ) . "filters/" . $type . ".php";
+			if (file_exists ( $module_content_filter_file1 )) {
+				include_once $module_content_filter_file1;
+				if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
+					$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
+				}
+			} else if (file_exists ( $module_content_filter_file2 )) {
+				include_once $module_content_filter_file2;
+				if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
+					$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
+				}
 			}
 		}
 	}
+	
 	return $text;
 }
 function get_motto() {

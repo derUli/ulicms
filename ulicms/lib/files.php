@@ -32,6 +32,24 @@ function find_all_files($dir) {
 	}
 	return $result;
 }
+function find_all_folders($dir) {
+	$root = scandir ( $dir );
+	$result = array ();
+	foreach ( $root as $value ) {
+		if ($value === '.' || $value === '..') {
+			continue;
+		}
+		if (is_dir ( "$dir/$value" )) {
+			$result [] = str_Replace ( "\\", "/", "$dir/$value" );
+			continue;
+		}
+		foreach ( find_all_files ( "$dir/$value" ) as $value ) {
+			$value = str_replace ( "\\", "/", $value );
+			$result [] = $value;
+		}
+	}
+	return $result;
+}
 function file_extension($filename) {
 	$ext = explode ( ".", $filename );
 	$ext = end ( $ext );

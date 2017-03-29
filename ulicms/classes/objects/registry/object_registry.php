@@ -5,7 +5,11 @@ class ObjectRegistry {
 		if (! defined ( "KCFINDER_PAGE" )) {
 			$objectRegistry = array ();
 			$modules = getAllModules ();
+			$disabledModules = Vars::get ( "disabledModules" );
 			foreach ( $modules as $module ) {
+				if (in_array ( $module, $disabledModules )) {
+					continue;
+				}
 				$objects = getModuleMeta ( $module, "objects" );
 				if ($objects) {
 					foreach ( $objects as $key => $value ) {

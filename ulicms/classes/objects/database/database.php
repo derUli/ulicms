@@ -288,6 +288,39 @@ class Database {
 		}
 		return $retval;
 	}
+	public static function fetchSingle($result) {
+		if (self::getNumRows ( $result ) > 1) {
+			throw new RangeException ( "Result contains more than one element." );
+		}
+		if (Database::getNumRows ( $result ) == 1) {
+			return self::fetchObject ( $result );
+		}
+		return null;
+	}
+	public static function fetchSingleOrDefault($result, $default = null) {
+		if (self::getNumRows ( $result ) > 1) {
+			throw new RangeException ( "Result contains more than one element." );
+		}
+		if (Database::getNumRows ( $result ) == 1) {
+			return self::fetchObject ( $result );
+		}
+		return $default;
+	}
+	public static function fetchFirst($result) {
+		if (Database::getNumRows ( $result ) > 0) {
+			return self::fetchObject ( $result );
+		}
+		return null;
+	}
+	public static function fetchFirstOrDefault($result, $default = null) {
+		if (Database::getNumRows ( $result ) > 0) {
+			return self::fetchObject ( $result );
+		}
+		return $default;
+	}
+	public static function any($result) {
+		return (Database::getNumRows ( $result ) > 0);
+	}
 }
 
 // Alias für Database

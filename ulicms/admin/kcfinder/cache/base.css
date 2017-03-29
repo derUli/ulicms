@@ -193,9 +193,7 @@ span.brace.opened, span.brace.closed {
 	background: #000;
 	opacity: 0;
 	filter: alpha(opacity = 0);
-}
-
-body.mobile {
+}body.mobile {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
