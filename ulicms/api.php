@@ -312,7 +312,11 @@ function get_available_post_types() {
 			"audio" 
 	);
 	$modules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	foreach ( $modules as $module ) {
+		if (in_array ( $module, $disabledModules )) {
+			continue;
+		}
 		$custom_types = getModuleMeta ( $module, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
@@ -325,6 +329,9 @@ function get_available_post_types() {
 	
 	$themes = getAllModules ();
 	foreach ( $themes as $theme ) {
+		if (in_array ( $module, $disabledModules )) {
+			continue;
+		}
 		$custom_types = getThemeMeta ( $theme, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
