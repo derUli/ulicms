@@ -569,6 +569,8 @@ function clearCache() {
 		opcache_reset ();
 	}
 	
+	$moduleManager = new ModuleManager ();
+	$moduleManager->sync ();
 	add_hook ( "after_clear_cache" );
 }
 function add_hook($name) {

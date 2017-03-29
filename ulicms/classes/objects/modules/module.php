@@ -12,7 +12,7 @@ class Module {
 		$sql = "select * from {prefix}modules where name = ?";
 		$args = array (
 				$name 
-		);
+		);		
 		$query = Database::pQuery ( $sql, $args, true );
 		$dataset = Database::fetchSingle ( $query );
 		if ($dataset) {
@@ -82,6 +82,9 @@ class Module {
 		$this->name = strval ( $name );
 	}
 	public function setVersion($version) {
+		if ($version === null) {
+			$this->version = null;
+		}
 		$this->version = strval ( $version );
 	}
 	public function delete() {

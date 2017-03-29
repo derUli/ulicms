@@ -25,6 +25,34 @@ class ModuleManager {
 	// - neue Module sollen erst mal deaktiviert sein
 	// - Diese Funktion aufrufen beim installieren von Modulen, beim leeren des Caches und beim deinstallieren von Modulen
 	public function sync() {
-		throw new NotImplementedException ( "Sync not implemented yet." );
+		$realModules = getAllModules ();
+		
+		$dataBaseModules = $this->getAllModuleNames ();		
+		// Nicht mehr vorhandene Module entfernen
+		foreach ( $dataBaseModules as $dbModule ) {
+				
+			if (! in_array ( $dbModule, $realModules )) {
+				
+				$module = new Module ( $dbModule );
+				$module->delete ();
+			}
+		}
+		
+		$dataBaseModules = $this->getAllModuleNames ();
+		foreach ( $realModules as $realModule ) {
+			$version = getModuleMeta ( $realModule, "version" );
+			if (in_array ( $realModule, $dataBaseModules )) {
+				$module = new Module ( $realModule );
+				if ($module->getVersion () != $version) {
+					$module->setVersion ( $version );
+				}
+				$module->save ();
+			} else {
+				$module = new Module ();
+				$module->setName ( $realModule );
+				$module->setVersion ( $version );
+				$module->save ();
+			}
+		}
 	}
 }
