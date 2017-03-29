@@ -27,10 +27,10 @@ class ModuleManager {
 	public function sync() {
 		$realModules = getAllModules ();
 		
-		$dataBaseModules = $this->getAllModuleNames ();		
+		$dataBaseModules = $this->getAllModuleNames ();
 		// Nicht mehr vorhandene Module entfernen
 		foreach ( $dataBaseModules as $dbModule ) {
-				
+			
 			if (! in_array ( $dbModule, $realModules )) {
 				
 				$module = new Module ( $dbModule );
@@ -52,6 +52,7 @@ class ModuleManager {
 				$module->setName ( $realModule );
 				$module->setVersion ( $version );
 				$module->save ();
+				$module->enable ();
 			}
 		}
 	}
