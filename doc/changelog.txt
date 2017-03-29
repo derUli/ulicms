@@ -18,6 +18,7 @@
   * Database::fetchSingle()
   * Database::fetchSingleOrDefault()
   * Database::any()
++ Globale Funktion find_all_folders() hinzugefügt
 # Fehlermeldung auf 404er Fehlerseiten in der Funktion Template::getHeadline() behoben
 # Funktionen zur Ausgabe der Metadaten einer Seite entsprechen nun dem Namensschema
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
