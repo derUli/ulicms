@@ -458,8 +458,8 @@ if (! $acl->hasPermission ( "other" )) {
 		?>
 				<h2><?php translate("DEFAULT_ACCESS_RESTRICTIONS");?></h2>
 			<p>
-				<a
-					href="<?php echo ModuleHelper::buildActionURL("default_access_restrictions");?>"><?php translate("view");?></a>
+				[<a
+					href="<?php echo ModuleHelper::buildActionURL("default_access_restrictions");?>"><?php translate("view");?></a>]
 			</p>
 				<?php
 	}
@@ -634,8 +634,7 @@ if($('#email_mode').val() == "pear_mail"){
 
 		<div class="accordion-content">
 			<p>
-				<a href="index.php?action=settings"><?php translate("view");?>
-			</a>
+				[<a href="index.php?action=settings"><?php translate("view");?></a>]
 			</p>
 		</div>
 	</div>
