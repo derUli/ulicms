@@ -709,4 +709,7 @@ define ( "TRANSLATION_INSTALL_ANOTHER_PACKAGE", "Install another Package" );
 
 define ( "TRANSLATION_NO_LANGUAGE", "No Language" );
 
+define ( "TRANSLATION_DEFAULT_ACCESS_RESTRICTIONS", "Edit Access Restrictions for new Contents" );
+
+
 add_hook ( "lang_en" );

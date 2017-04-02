@@ -246,18 +246,30 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$article_date = date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) );
 		$excerpt = Database::escapeValue ( $_POST ["excerpt"] );
 		
+		$only_admins_can_edit = intval ( Settings::get ( "only_admins_can_edit" ) );
+		$only_group_can_edit = intval ( Settings::get ( "only_group_can_edit" ) );
+		$only_owner_can_edit = intval ( Settings::get ( "only_owner_can_edit" ) );
+		$only_others_can_edit = intval ( Settings::get ( "only_others_can_edit" ) );
+		
 		$show_headline = intval ( $_POST ["show_headline"] );
 		
 		add_hook ( "before_create_page" );
 		db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
   redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`,
-  `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`, `article_date`, `article_image`, `excerpt`, `hidden`)
+  `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`, 
+				`article_date`, `article_image`, `excerpt`, `hidden`,
+				`only_admins_can_edit`, `only_group_can_edit`, `only_owner_can_edit`, `only_others_can_edit`)
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
-  '$og_description', '$og_type', '$og_image', '$type', $module, $video, $audio, '$text_position', $image_url, $approved, $show_headline, '$cache_control', '$article_author_name', '$article_author_email', '$article_date', '$article_image', '$excerpt', $hidden)" ) or die ( db_error () );
+  '$og_description', '$og_type', '$og_image', 
+  '$type', $module, $video, $audio, '$text_position', 
+   $image_url, $approved, $show_headline, '$cache_control', 
+   '$article_author_name', '$article_author_email', 
+   '$article_date', '$article_image', '$excerpt', 
+   $hidden, $only_admins_can_edit, $only_group_can_edit, $only_owner_can_edit, $only_others_can_edit)" ) or die ( db_error () );
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
 		if ($type == "list") {

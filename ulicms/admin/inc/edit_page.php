@@ -844,8 +844,6 @@ function openArticleImageSelectWindow(field) {
 				id="only_others_can_edit" value="1"
 				<?php if($row->only_others_can_edit) echo "checked";?>> <label
 				for="only_others_can_edit"><?php translate("others");?></label>
-
-
 		</div>
 <?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
