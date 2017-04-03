@@ -22,6 +22,7 @@
 + "Nachricht des Tages" je Sprache
 + Einstellung "Zugriffsbeschränkungen für neue Inhalte" hinzugefügt
 + Das Modul oneclick_upgrade ist nun vorinstalliert
++ Installer löscht sich nun selbst am Ende der Installation
 # Fehlermeldung auf 404er Fehlerseiten in der Funktion Template::getHeadline() behoben
 # Funktionen zur Ausgabe der Metadaten einer Seite entsprechen nun dem Namensschema
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
