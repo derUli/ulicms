@@ -64,12 +64,47 @@ class Module {
 		return boolval ( $this->enabled );
 	}
 	public function enable() {
-		$this->enabled = 1;
-		$this->save ();
+		if (! $this->isMissingDependencies ()) {
+			$this->enabled = 1;
+			$this->save ();
+		}
+	}
+	public function getMissingDependencies() {
+		$result = array ();
+		$manager = new ModuleManager ();
+		$dependencies = $manager->getDependencies ( $this->name );
+		$enabledMods = $manager->getEnabledModuleNames ();
+		foreach ( $dependencies as $dependency ) {
+			if (! in_array ( $dependency, $enabledMods )) {
+				$result [] = $dependency;
+			}
+		}
+		return $result;
+	}
+	public function isMissingDependencies() {
+		return (count ( $this->getMissingDependencies () ) > 0);
+	}
+	public function getDependentModules() {
+		$result = array ();
+		$manager = new ModuleManager ();
+		$enabledMods = $manager->getEnabledModuleNames ();
+		$dependent = $manager->getDependentModules ( $module );
+		
+		foreach ( $dependent as $dep ) {
+			if (in_array ( $dep, $enabledMods )) {
+				$result [] = $dependency;
+			}
+		}
+		return $result;
+	}
+	public function hasDependentModules() {
+		return (count ( $this->getDependentModules () ) > 0);
 	}
 	public function disable() {
-		$this->enabled = 0;
-		$this->save ();
+		if (! $this->hasDependentModules ()) {
+			$this->enabled = 0;
+			$this->save ();
+		}
 	}
 	public function toggleEnabled() {
 		if ($this->isEnabled ()) {
