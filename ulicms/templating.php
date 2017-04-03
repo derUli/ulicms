@@ -600,8 +600,7 @@ function apply_filter($text, $type) {
 	$modules = getAllModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i < count ( $modules ); $i ++) {
-		foreach ( $modules as $module ) {
-			if (in_array ( $module, $disabledModules )) {
+			if (in_array ( $modules[$i], $disabledModules )) {
 				continue;
 			}
 			$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
@@ -616,7 +615,7 @@ function apply_filter($text, $type) {
 				if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
 					$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
 				}
-			}
+			
 		}
 	}
 	
