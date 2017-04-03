@@ -236,6 +236,10 @@ class InstallerController {
 		}
 	}
 	public static function submitLoginToBackend() {
+		$installerDir = "../installer";
+		if (file_exists ( $installerDir )) {
+			@SureRemoveDir ( $installerDir, true );
+		}
 		@session_destroy ();
 		header ( "Location: ../admin/" );
 	}
