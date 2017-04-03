@@ -36,6 +36,31 @@ class ModuleManager {
 		}
 		return $modules;
 	}
+	public function getDependentModules($module, $allDeps = array()) {
+		$dependencies = getModuleMeta ( $module, "dependencies" );
+		if ($dependencies) {
+			foreach ( $dependencies as $dep ) {
+				$allDeps [] = $dep;
+				$allDeps [] = $this->getDependentModules ( $dep, $allDeps );
+			}
+		}
+		$allDeps = array_unique ( $allDeps );
+		return $allDeps;
+	}
+	public function getEnabledDependentModules($module, $allDeps = array()) {
+		$dependencies = getModuleMeta ( $module, "dependencies" );
+		$enabledMods = $this->getEnabledModuleNames ();
+		if ($dependencies) {
+			foreach ( $dependencies as $dep ) {
+				if (in_array ( $dep, $enabledMods )) {
+					$allDeps [] = $dep;
+					$allDeps [] = $this->getDependentModules ( $dep, $allDeps );
+				}
+			}
+		}
+		$allDeps = array_unique ( $allDeps );
+		return $allDeps;
+	}
 	// Diese Funktion synchronisiert die modules in der Datenbank mit den modules im Modulordner
 	// - Neue Module werden erfassen
 	// - Versionsupdates erfassen
@@ -55,7 +80,6 @@ class ModuleManager {
 				$module->delete ();
 			}
 		}
-		
 		$dataBaseModules = $this->getAllModuleNames ();
 		foreach ( $realModules as $realModule ) {
 			$version = getModuleMeta ( $realModule, "version" );
