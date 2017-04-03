@@ -28,6 +28,9 @@ class ContentFactory {
 		if (isset ( $mappings [$type] ) and isNotNullOrEmpty ( $mappings [$type] ) and class_exists ( $mappings [$type] )) {
 			$retval = new $mappings [$type] ();
 			$retval->loadByID ( $row->id );
+		} else if ($row->type == "comment") {
+			$retval = new Comment ();
+			$retval->loadByID ( $row->id );
 		}
 		
 		return $retval;

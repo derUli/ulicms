@@ -48,6 +48,7 @@ if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 	echo $txt;
 	exit ();
 }
+
 $status = check_status ();
 
 if (Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
