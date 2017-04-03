@@ -36,26 +36,24 @@ class ModuleManager {
 		}
 		return $modules;
 	}
-	public function getDependentModules($module, $allDeps = array()) {
+	public function getDependencies($module, $allDeps = array()) {
 		$dependencies = getModuleMeta ( $module, "dependencies" );
 		if ($dependencies) {
 			foreach ( $dependencies as $dep ) {
 				$allDeps [] = $dep;
-				$allDeps [] = $this->getDependentModules ( $dep, $allDeps );
+				$allDeps = array_combine ( $allDeps, $this->getDependencies ( $dep, $allDeps ) );
 			}
 		}
 		$allDeps = array_unique ( $allDeps );
 		return $allDeps;
 	}
-	public function getEnabledDependentModules($module, $allDeps = array()) {
-		$dependencies = getModuleMeta ( $module, "dependencies" );
-		$enabledMods = $this->getEnabledModuleNames ();
-		if ($dependencies) {
-			foreach ( $dependencies as $dep ) {
-				if (in_array ( $dep, $enabledMods )) {
-					$allDeps [] = $dep;
-					$allDeps [] = $this->getDependentModules ( $dep, $allDeps );
-				}
+	public function getDependentModules($module, $allDeps = array()) {
+		$allModules = $this->getEnabledModuleNames ();
+		foreach ( $allModules as $mod ) {
+			$dependencies = getModuleMeta ( $mod, "dependencies" );
+			if ($dependencies && in_array ( $module, $dependencies )) {
+				$allDeps [] = $mod;
+				$allDeps = array_combine ( $allDeps, $this->getDependentModules ( $dep, $allDeps ) );
 			}
 		}
 		$allDeps = array_unique ( $allDeps );
