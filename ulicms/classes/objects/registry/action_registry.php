@@ -5,11 +5,15 @@ class ActionRegistry {
 		if (! defined ( "KCFINDER_PAGE" )) {
 			global $actions;
 			$modules = getAllModules ();
+			$disabledModules = Vars::get ( "disabledModules" );
 			foreach ( $modules as $module ) {
+				if(in_array($module, $disabledModules)){
+					continue;
+				}
 				$cActions = getModuleMeta ( $module, "actions" );
 				if ($cActions) {
 					foreach ( $cActions as $key => $value ) {
-						$path = getModulePath ( $module ) . trim ( $value, "/" );
+						$path = getModulePath ( $module, true ) . trim ( $value, "/" );
 						if (! endsWith ( $path, ".php" )) {
 							$path .= ".php";
 						}

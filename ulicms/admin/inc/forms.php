@@ -3,7 +3,7 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "forms" )) {
 	noperms ();
 } else {
-	require_once ULICMS_ROOT . "/classes/objects/forms.php";
+	require_once ULICMS_ROOT . "/classes/objects/content/forms.php";
 	if (isset ( $_POST ["create_form"] )) {
 		$name = $_POST ["name"];
 		$email_to = $_POST ["email_to"];
@@ -43,6 +43,7 @@ tr.odd input#form-submit-url {
 	<a href="index.php?action=forms_new"><?php translate("create_form");?></a>
 </p>
 <?php }?>
+<p><?php BackendHelper::formatDatasetCount(count($forms));?></p>
 <div class="scroll">
 	<table id="form-list" class="tablesorter">
 		<thead>
@@ -78,7 +79,8 @@ tr.odd input#form-submit-url {
 						alt="<?php translate("edit");?>"
 						title="<?php translate("edit");?>"></a></td>
 				<td style="text-align: center;">
-					<form action="?action=forms&del=<?php
+					<form
+						action="?action=forms&del=<?php
 			
 			echo $form ["id"];
 			?>"

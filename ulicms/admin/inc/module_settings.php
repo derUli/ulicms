@@ -8,7 +8,9 @@ $module = basename ( $_GET ["module"] );
 $admin_file_path = getModuleAdminFilePath ( $module );
 $admin_file_path2 = getModuleAdminFilePath2 ( $module );
 
-if (! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 )) {
+$disabledModules = Vars::get ( "disabledModules" );
+
+if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 )) or in_array( $module, $disabledModules )) {
 	?>
 <p class='ulicms_error'>Dieses Modul bietet keine Einstellungen.</p>
 <?php

@@ -15,7 +15,7 @@ setLanguageByDomain ();
 $languages = getAllLanguages ();
 
 if (! empty ( $_GET ["language"] ) and in_array ( $_GET ["language"], $languages )) {
-	$_SESSION ["language"] = db_escape ( $_GET ["language"] );
+	$_SESSION ["language"] = Database::escapeValue ( $_GET ["language"], DB_TYPE_STRING );
 }
 
 if (! isset ( $_SESSION ["language"] )) {
@@ -24,10 +24,13 @@ if (! isset ( $_SESSION ["language"] )) {
 
 setLocaleByLanguage ();
 
+require_once "templating.php";
+
 if (in_array ( $_SESSION ["language"], $languages )) {
 	include getLanguageFilePath ( $_SESSION ["language"] );
 	Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
 	Translation::includeCustomLangFile ( $_SESSION ["language"] );
+	Translation::loadCurrentThemeLanguageFiles ( $_SESSION ["language"] );
 	add_hook ( "custom_lang_" . $_SESSION ["language"] );
 }
 
@@ -45,10 +48,9 @@ if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 	echo $txt;
 	exit ();
 }
-require_once "templating.php";
 $status = check_status ();
 
-if (! isFastMode () && Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
+if (Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
 	add_hook ( "before_global_redirection" );
 	header ( "Location: " . Settings::get ( "redirection" ) );
 	exit ();
@@ -88,9 +90,8 @@ if ($redirection) {
 
 if (isset ( $_GET ["goid"] )) {
 	$goid = intval ( $_GET ["goid"] );
-	$sysname = getPageSystemnameByID ( $goid );
-	if ($sysname and $sysname != "-") {
-		$url = buildSeoURL ( $sysname );
+	$url = ModuleHelper::getFullPageURLByID ( $goid );
+	if ($url) {
 		Request::redirect ( $url, 301 );
 	} else {
 		$url = getBaseFolderURL ();
@@ -101,7 +102,7 @@ if (isset ( $_GET ["goid"] )) {
 if (isset ( $_GET ["submit-cms-form"] ) and ! empty ( $_GET ["submit-cms-form"] ) and get_request_method () === "POST") {
 	$form_id = intval ( $_GET ["submit-cms-form"] );
 	
-	require_once ULICMS_ROOT . "/classes/objects/forms.php";
+	require_once ULICMS_ROOT . "/classes/objects/content/forms.php";
 	Forms::submitForm ( $form_id );
 }
 ControllerRegistry::runMethods ();
@@ -128,14 +129,12 @@ if ($format == "html") {
 
 add_hook ( "after_http_header" );
 
-if (! isFastMode ()) {
-	if (count ( getThemeList () ) === 0) {
-		throw new Exception ( "Keine Themes vorhanden!" );
-	}
-	
-	if (! is_dir ( getTemplateDirPath ( $theme ) )) {
-		throw new Exception ( "Das aktivierte Theme existiert nicht!" );
-	}
+if (count ( getThemeList () ) === 0) {
+	throw new Exception ( "Keine Themes vorhanden!" );
+}
+
+if (! is_dir ( getTemplateDirPath ( $theme ) )) {
+	throw new Exception ( "Das aktivierte Theme existiert nicht!" );
 }
 
 if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {

@@ -140,8 +140,8 @@ class Cache_Lite_Function extends Cache_Lite {
 							$method 
 					), $arguments );
 				} else if (strstr ( $target, '->' )) { // object->method
-				                                  // use a stupid name ($objet_123456789 because) of problems where the object
-				                                  // name is the same as this var name
+				                                       // use a stupid name ($objet_123456789 because) of problems where the object
+				                                       // name is the same as this var name
 					list ( $object_123456789, $method ) = explode ( '->', $target );
 					global $$object_123456789;
 					$result = call_user_func_array ( array (

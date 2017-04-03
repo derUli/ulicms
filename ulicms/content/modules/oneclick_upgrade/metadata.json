@@ -1,0 +1,14 @@
+{
+	"source" : "extend",
+	"version" : "1.0.1",
+	"embed" : false,
+	"controllers" : {
+		"CoreUpgradeController" : "controllers/CoreUpgradeController"
+	},
+	"actions" : {
+		"UpgradeCheck" : "templates/UpgradeCheck"
+	},
+	"action_controllers" : {
+		"UpgradeCheck" : "CoreUpgradeController"
+	}
+}

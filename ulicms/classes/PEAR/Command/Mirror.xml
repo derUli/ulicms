@@ -11,9 +11,12 @@
 			</channel>
 		</options>
 		<doc>
-			Requests a list of available packages from the default channel ({config
+			Requests a list of available packages from the default channel
+			({config
 			default_channel})
-			and downloads them to current working directory. Note: only
-			packages within preferred_state ({config preferred_state}) will be downloaded</doc>
+			and downloads them to current working
+			directory. Note: only
+			packages within preferred_state ({config
+			preferred_state}) will be downloaded</doc>
 	</download-all>
 </commands>

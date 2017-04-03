@@ -1,5 +1,5 @@
 <?php
-abstract class Content {
+abstract class Content extends Model {
 	abstract protected function loadByID($id);
 	abstract protected function loadBySystemnameAndLanguage($name, $language);
 	abstract protected function update();

@@ -1716,36 +1716,59 @@ a.cke_path_item:hover, a.cke_path_item:focus, a.cke_path_item:active {
 }
 
 .cke_rtl
+
  
+
 .cke_toolgroup
 ,
 .cke_rtl
+
  
+
 .cke_toolbar_separator
 ,
 .cke_rtl
+
  
+
 .cke_combo_button
 ,
 .cke_rtl
+
  
+
 .cke_combo_button
+
  
+
 *
 ,
 .cke_rtl
+
  
+
 .cke_button
 ,
 .cke_rtl
+
  
+
 .cke_button_icon
 ,
 {
 display
+
+
 :inline-block
-;vertical-align
+
+
+;
+vertical-align
+
+
 :top
+
+
 }
 .cke_toolbox {
 	display: inline-block;
@@ -1871,10 +1894,28 @@ a.cke_button {
 .cke_wysiwyg_div {
 	padding-top: 0 !important;
 	padding-bottom: 0 !important
-}{
-	background: url(icons_hidpi.png) no-repeat 0 -2240px !important
 }
 
+{
+background
+:
+ 
+url
+(icons_hidpi
+.png
+)
+ 
+no-repeat
+ 
+0
+-2240
+px
+ 
+!
+important
+
+
+}
 .cke_hidpi .cke_button__spellchecker_icon {
 	background: url(icons_hidpi.png) no-repeat 0 -2272px !important
 }
@@ -2021,36 +2062,59 @@ a.cke_path_item:hover, a.cke_path_item:focus, a.cke_path_item:active {
 }
 
 .cke_rtl
+
  
+
 .cke_toolgroup
 ,
 .cke_rtl
+
  
+
 .cke_toolbar_separator
 ,
 .cke_rtl
+
  
+
 .cke_combo_button
 ,
 .cke_rtl
+
  
+
 .cke_combo_button
+
  
+
 *
 ,
 .cke_rtl
+
  
+
 .cke_button
 ,
 .cke_rtl
+
  
+
 .cke_button_icon
 ,
 {
 display
+
+
 :inline-block
-;vertical-align
+
+
+;
+vertical-align
+
+
 :top
+
+
 }
 .cke_toolbox {
 	display: inline-block;

@@ -3,11 +3,13 @@ class MenuEntry {
 	private $title;
 	private $link;
 	private $identifier;
+	private $permissions;
 	private $children = array ();
-	public function __construct($title, $link, $identifier, $children = array()) {
+	public function __construct($title, $link, $identifier, $permissions = null, $children = array()) {
 		$this->title = $title;
 		$this->link = $link;
 		$this->identifier = $identifier;
+		$this->permissions = $permissions;
 		$this->children = $children;
 	}
 	public function getTitle() {
@@ -54,5 +56,27 @@ class MenuEntry {
 			}
 		}
 		return null;
+	}
+	public function getPermissions() {
+		return $this->permissions;
+	}
+	public function setPermissions($permissions) {
+		$this->permissions = $permissions;
+	}
+	public function userHasPermission() {
+		$acl = new ACL ();
+		if (is_string ( $this->permissions ) and ! empty ( $this->permissions )) {
+			return $acl->hasPermission ( $this->permissions );
+		} else if (is_array ( $this->permissions ) and count ( $this->permissions ) > 0) {
+			foreach ( $this->permissions as $permission ) {
+				$isPermitted = false;
+				if (is_string ( $permission ) and ! empty ( $permission ) and $acl->hasPermission ( $permission )) {
+					$isPermitted = true;
+				}
+			}
+			return $isPermitted;
+		} else {
+			return true;
+		}
 	}
 }

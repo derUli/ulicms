@@ -15,9 +15,9 @@
 namespace kcfinder;
 
 class image_imagick extends image {
-	static $MIMES = array ()
+	static $MIMES = array ();
 	// 'tif' => "image/tiff"
-	;
+	
 	
 	// ABSTRACT PUBLIC METHODS
 	public function resize($width, $height) {

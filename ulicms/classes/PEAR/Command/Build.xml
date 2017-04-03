@@ -5,6 +5,7 @@
 		<shortcut>b</shortcut>
 		<options />
 		<doc>[package.xml]
-			Builds one or more extensions contained in a package.</doc>
+			Builds one or more extensions contained in a
+			package.</doc>
 	</build>
 </commands>

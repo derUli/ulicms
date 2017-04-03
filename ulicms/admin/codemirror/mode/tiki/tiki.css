@@ -10,7 +10,9 @@
 .cm-tw-header5 {
 	font-weight: bold;
 }
-.cm-tw-listitem:first-child { /*Added first child to fix duplicate padding when highlighting*/
+
+.cm-tw-listitem:first-child {
+	/*Added first child to fix duplicate padding when highlighting*/
 	padding-left: 10px;
 }
 

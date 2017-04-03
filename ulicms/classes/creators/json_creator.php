@@ -52,8 +52,8 @@ class JSONCreator {
 		$this->content = str_replace ( "\n", "\r\n", $this->content );
 		$data ["title"] = $this->title;
 		$data ["content"] = $this->content;
-		$data ["meta_description"] = meta_description ();
-		$data ["meta_keywords"] = meta_keywords ();
+		$data ["meta_description"] = get_meta_description ();
+		$data ["meta_keywords"] = get_meta_keywords ();
 		$data ["author"] = $author;
 		$json_string = json_encode ( $data );
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {

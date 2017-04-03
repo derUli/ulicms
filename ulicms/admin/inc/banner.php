@@ -2,11 +2,11 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "banners" )) {
-
+		
 		if (! isset ( $_SESSION ["filter_category"] )) {
 			$_SESSION ["filter_category"] = 0;
 		}
-
+		
 		if (isset ( $_GET ["filter_category"] )) {
 			$_SESSION ["filter_category"] = intval ( $_GET ["filter_category"] );
 		}
@@ -18,7 +18,7 @@ if (defined ( "_SECURITY" )) {
 		}
 		$sql .= "ORDER BY id";
 		$query = db_query ( $sql );
-
+		
 		?>
 <script type="text/javascript">
 $(window).load(function(){
@@ -49,39 +49,41 @@ $(window).load(function(){
 		echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
 		?>
 </p>
-<div class="scroll">
-<table class="tablesorter">
-	<thead>
-		<tr style="font-weight: bold;">
-			<th><?php
 
+<p><?php BackendHelper::formatDatasetCount(Database::getNumRows($query));?></p>
+<div class="scroll">
+	<table class="tablesorter">
+		<thead>
+			<tr style="font-weight: bold;">
+				<th><?php
+		
 		translate ( "advertisements" );
 		?>
 			</th>
-			<th><?php translate("language");?>
+				<th><?php translate("language");?>
 			</th>
 			<?php if ($acl->hasPermission ( "banners_edit" )) {?>
 			<td><?php
-
+			
 			translate ( "edit" );
 			?>
 			</td>
-			<td><?php
-
+				<td><?php
+			
 			translate ( "delete" );
 			?>
 			</td>
 				<?php }?>
 		</tr>
-	</thead>
-	<tbody>
+		</thead>
+		<tbody>
 	<?php
-
+		
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
 				?>
 			<?php
-
+				
 				echo '<tr id="dataset-' . $row->id . '">';
 				if ($row->type == "gif") {
 					$link_url = Template::getEscape ( $row->link_url );
@@ -105,7 +107,7 @@ $(window).load(function(){
 		}
 		?>
 	</tbody>
-</table>
+	</table>
 </div>
 
 <script type="text/javascript">
@@ -132,7 +134,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 	} else {
 		noperms ();
 	}
-
+	
 	?>
 
 

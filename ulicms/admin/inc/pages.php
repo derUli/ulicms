@@ -486,6 +486,9 @@ $(window).load(function(){
 		$filter_sql .= " ";
 		
 		$query = db_query ( "SELECT * FROM " . tbname ( "content" ) . " " . $filter_sql . " ORDER BY $order,position, systemname ASC" ) or die ( db_error () );
+		?>
+				<p><?php BackendHelper::formatDatasetCount(Database::getNumRows($query));?></p>
+				<?php
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
 				echo '<tr id="dataset-' . $row->id . '">';

@@ -59,8 +59,9 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 <?php
 	}
 	?>
+<p><?php BackendHelper::formatDatasetCount(count($categories));?></p>
 
-			<?php
+<?php
 	if (count ( $categories ) > 0 and ! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] )) {
 		?>
 <div class="scroll">

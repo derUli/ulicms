@@ -65,7 +65,8 @@
 			</pretend>
 		</options>
 		<doc>[channel/]&lt;package&gt; ...
-			Installs one or more PEAR packages. You can specify a package to
+			Installs one or more PEAR packages.
+			You can specify a package to
 			install in four ways:
 
 			&quot;Package-1.0.tgz&quot; : installs from a local file
@@ -73,26 +74,35 @@
 			&quot;http://example.com/Package-1.0.tgz&quot; : installs from
 			anywhere on the net.
 
-			&quot;package.xml&quot; : installs the package described in
-			package.xml. Useful for testing, or for wrapping a PEAR package in
+			&quot;package.xml&quot; : installs the package
+			described in
+			package.xml. Useful for testing, or for wrapping a PEAR
+			package in
 			another package manager such as RPM.
 
 			&quot;Package[-version/state][.tar]&quot; : queries your default
 			channel&#039;s server
-			({config master_server}) and downloads the newest package with
-			the preferred quality/state ({config preferred_state}).
+			({config master_server}) and downloads the
+			newest package with
+			the preferred quality/state ({config
+			preferred_state}).
 
-			To retrieve Package version 1.1, use &quot;Package-1.1,&quot; to
+			To retrieve Package version 1.1, use
+			&quot;Package-1.1,&quot; to
 			retrieve
-			Package state beta, use &quot;Package-beta.&quot; To retrieve an
+			Package state beta, use
+			&quot;Package-beta.&quot; To retrieve an
 			uncompressed
-			file, append .tar (make sure there is no file by the same name first)
+			file, append .tar
+			(make sure there is no file by the same name first)
 
-			To download a package from another channel, prefix with the channel
+			To download a
+			package from another channel, prefix with the channel
 			name like
 			&quot;channel/Package&quot;
 
-			More than one package may be specified at once. It is ok to mix these
+			More than one package may be specified at
+			once. It is ok to mix these
 			four ways of specifying packages.
 		</doc>
 	</install>
@@ -158,14 +168,19 @@
 			</pretend>
 		</options>
 		<doc>&lt;package&gt; ...
-			Upgrades one or more PEAR packages. See documentation for the
-			&quot;install&quot; command for ways to specify a package.
+			Upgrades one or more PEAR packages. See
+			documentation for the
+			&quot;install&quot; command for ways to specify
+			a package.
 
-			When upgrading, your package will be updated if the provided new
-			package has a higher version number (use the -f option if you need to
+			When upgrading, your package will be updated if the
+			provided new
+			package has a higher version number (use the -f option if
+			you need to
 			upgrade anyway).
 
-			More than one package may be specified at once.
+			More than one package may be specified at
+			once.
 		</doc>
 	</upgrade>
 	<upgrade-all>
@@ -211,14 +226,19 @@
 			</loose>
 		</options>
 		<doc>
-			WARNING: This function is deprecated in favor of using the upgrade command
+			WARNING: This function is deprecated in favor of using the
+			upgrade command
 			with no params
 
-			Upgrades all packages that have a newer release available. Upgrades are
-			done only if there is a release available of the state specified in
-			&quot;preferred_state&quot; (currently {config preferred_state}), or
+			Upgrades all packages that have a newer
+			release available. Upgrades are
+			done only if there is a release
+			available of the state specified in
+			&quot;preferred_state&quot;
+			(currently {config preferred_state}), or
 			a state considered
-			more stable.
+			more
+			stable.
 		</doc>
 	</upgrade-all>
 	<uninstall>
@@ -251,9 +271,12 @@
 			</offline>
 		</options>
 		<doc>[channel/]&lt;package&gt; ...
-			Uninstalls one or more PEAR packages. More than one package may be
-			specified at once. Prefix with channel name to uninstall from a
-			channel not in your default channel ({config default_channel})
+			Uninstalls one or more PEAR
+			packages. More than one package may be
+			specified at once. Prefix with
+			channel name to uninstall from a
+			channel not in your default channel
+			({config default_channel})
 		</doc>
 	</uninstall>
 	<bundle>
@@ -273,7 +296,8 @@
 			</force>
 		</options>
 		<doc>&lt;package&gt;
-			Unpacks a Pecl Package into the selected location. It will download the
+			Unpacks a Pecl Package into the selected location.
+			It will download the
 			package if needed.
 		</doc>
 	</bundle>
@@ -283,7 +307,8 @@
 		<shortcut>rs</shortcut>
 		<options />
 		<doc>&lt;package&gt;
-			Run post-installation scripts in package &lt;package&gt;, if any exist.
+			Run post-installation scripts in package
+			&lt;package&gt;, if any exist.
 		</doc>
 	</run-scripts>
 </commands>
