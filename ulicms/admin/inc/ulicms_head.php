@@ -33,7 +33,8 @@ $enq = array (
 		"scripts/url.min.js",
 		"scripts/util.js",
 		"scripts/users.js",
-		"scripts/global.js" 
+		"scripts/global.js",
+		"scripts/bootstrap.min.js"
 );
 ?>
 <?php
