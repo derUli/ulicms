@@ -18,9 +18,12 @@
 	</p>
 		</div>
 		<div class="col-sm-6">
+		<!--
 			<p class="imprint-right">
-				<a href="http://www.ulicms.de/impressum.html">Impressum</a>
+			
+				<a href="#"><?php translate("imprint");?></a>
 			</p>
+			-->
 		</div>
 	</div>
 </footer>
