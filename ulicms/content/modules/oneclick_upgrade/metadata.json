@@ -1,6 +1,6 @@
 {
 	"source" : "extend",
-	"version" : "1.0.1",
+	"version" : "1.0.2",
 	"embed" : false,
 	"controllers" : {
 		"CoreUpgradeController" : "controllers/CoreUpgradeController"
@@ -10,5 +10,7 @@
 	},
 	"action_controllers" : {
 		"UpgradeCheck" : "CoreUpgradeController"
-	}
+	},
+	"custom_acl" : ["oneclick_upgrade_settings"],
+	"admin_permission" : ["oneclick_upgrade_settings"]
 }
