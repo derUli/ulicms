@@ -18,8 +18,7 @@ if (defined ( "_SECURITY" )) {
 			
 			csrf_token_html ();
 			?>
-	<img
-		src="<?php
+	<img src="<?php
 			
 			echo get_gravatar ( $row->email, 200 );
 			?>"
@@ -81,7 +80,7 @@ if (defined ( "_SECURITY" )) {
 				if ($row->group_id === null) {
 					echo "selected";
 				}
-				?>>[Keine]</option>
+				?>>[<?php translate("none");?>]</option>
 		<?php
 				
 				foreach ( $allGroups as $key => $value ) {
@@ -203,8 +202,8 @@ if (defined ( "_SECURITY" )) {
 				}
 			}
 			?>
-	<br /> <br /> <strong><?php translate("about_me");?></strong><br /> <textarea
-		rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
+	<br /> <br /> <strong><?php translate("about_me");?></strong><br />
+	<textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
 
 
 

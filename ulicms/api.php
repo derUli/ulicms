@@ -224,9 +224,6 @@ function get_html_editor() {
 }
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false) {
-	if (isFastMode ()) {
-		return;
-	}
 	add_hook ( "before_log_request" );
 	if ($save_ip) {
 		$ip = get_ip ();
@@ -305,7 +302,7 @@ function get_available_post_types() {
 	$post_types = array (
 			"page",
 			"article",
-			// "comment",
+			"comment",
 			"list",
 			"link",
 			"node",
@@ -315,7 +312,11 @@ function get_available_post_types() {
 			"audio" 
 	);
 	$modules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	foreach ( $modules as $module ) {
+		if (in_array ( $module, $disabledModules )) {
+			continue;
+		}
 		$custom_types = getModuleMeta ( $module, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
@@ -328,6 +329,9 @@ function get_available_post_types() {
 	
 	$themes = getAllModules ();
 	foreach ( $themes as $theme ) {
+		if (in_array ( $module, $disabledModules )) {
+			continue;
+		}
 		$custom_types = getThemeMeta ( $theme, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
@@ -450,7 +454,6 @@ function getDomainByLanguage($language) {
 					$line [0] = trim ( $line [0] );
 					$line [1] = trim ( $line [1] );
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
-						
 						if ($line [1] == $language) {
 							return $line [0];
 						}
@@ -573,11 +576,17 @@ function clearCache() {
 		opcache_reset ();
 	}
 	
+	$moduleManager = new ModuleManager ();
+	$moduleManager->sync ();
 	add_hook ( "after_clear_cache" );
 }
 function add_hook($name) {
 	$modules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
+		if (in_array ( $modules [$hook_i], $disabledModules )) {
+			continue;
+		}
 		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
 		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
 		if (file_exists ( $file1 )) {
@@ -946,8 +955,12 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = preg_replace ( '/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
 	}
 	$allModules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i <= count ( $allModules ); $i ++) {
 		$thisModule = $allModules [$i];
+		if (in_array ( $thisModule, $disabledModules )) {
+			continue;
+		}
 		$stringToReplace1 = '[module="' . $thisModule . '"]';
 		$stringToReplace2 = '[module=&quot;' . $thisModule . '&quot;]';
 		
@@ -1086,11 +1099,15 @@ function getAllSystemNames($lang = null) {
 
 // Sprachcodes abfragen und als Array zurück geben
 function getAllLanguages() {
+	if (! is_null ( Vars::get ( "all_languages" ) )) {
+		return Vars::get ( "all_languages" );
+	}
 	$query = db_query ( "SELECT language_code FROM `" . tbname ( "languages" ) . "` ORDER BY language_code" );
 	$returnvalues = Array ();
 	while ( $row = db_fetch_object ( $query ) ) {
 		array_push ( $returnvalues, $row->language_code );
 	}
+	Vars::set ( "all_languages", $returnvalues );
 	return $returnvalues;
 }
 
@@ -1175,22 +1192,32 @@ function getAllMenus($only_used = false) {
 
 // Check if site contains a module
 function containsModule($page = null, $module = false) {
-	if (is_null ( $page ))
+	if (is_null ( $page )) {
 		$page = get_requested_pagename ();
-	
+	}
+	if (! is_null ( Vars::get ( "page_" . $page . "_contains_" . $module ) )) {
+		return Vars::get ( "page_" . $page . "_contains_" . $module );
+	}
+	;
 	$query = db_query ( "SELECT content, module, `type` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
 	$dataset = db_fetch_assoc ( $query );
 	$content = $dataset ["content"];
 	$content = str_replace ( "&quot;", "\"", $content );
 	if (! is_null ( $dataset ["module"] ) and ! empty ( $dataset ["module"] ) and $dataset ["type"] == "module") {
 		if (! $module or ($module and $dataset ["module"] == $module)) {
+			Vars::set ( "page_" . $page . "_contains_" . $module, true );
 			return true;
 		}
 	} else if ($module) {
-		return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
+		$result = preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
+		Vars::set ( "page_" . $page . "_contains_" . $module, $result );
+		return $result;
 	} else {
-		return preg_match ( "/\[module=\".+\"\]/", $content );
+		$result = preg_match ( "/\[module=\".+\"\]/", $content );
+		Vars::set ( "page_" . $page . "_contains_" . $module, $result );
+		return $result;
 	}
+	Vars::set ( "page_" . $page . "_contains_" . $module, false );
 	return false;
 }
 function page_has_html_file($page) {
@@ -1319,10 +1346,6 @@ function tbname($name) {
 	require_once "cms-config.php";
 	$config = new config ();
 	return $config->db_prefix . $name;
-}
-function isFastMode() {
-	$cfg = new config ();
-	return (isset ( $cfg->fast_mode ) and $cfg->fast_mode);
 }
 
 // Mimetypen einer Datei ermitteln

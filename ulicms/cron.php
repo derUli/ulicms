@@ -2,10 +2,8 @@
 require_once "init.php";
 fcflush ();
 
-if (! isFastMode ()) {
-	if (Settings::get ( "delete_ips_after_48_hours" )) {
-		Database::query ( "Update " . tbname ( "log" ) . " SET ip = NULL WHERE DATEDIFF(NOW(), zeit) >= 2" );
-	}
+if (Settings::get ( "delete_ips_after_48_hours" )) {
+	Database::query ( "Update " . tbname ( "log" ) . " SET ip = NULL WHERE DATEDIFF(NOW(), zeit) >= 2" );
 }
 
 $empty_trash_days = Settings::get ( "empty_trash_days" );
@@ -19,11 +17,14 @@ $empty_trash_timestamp = $empty_trash_days * (60 * 60 * 24);
 Database::query ( "DELETE FROM " . tbname ( "content" ) . " WHERE " . time () . " -  `deleted_at` > $empty_trash_timestamp" ) or die ( db_error () );
 
 // Alle Revisionen von bereits gelöschten Seiten entfernen
-Database::query ( "DELETE FROM " . tbname ( "history" ) . " WHERE content_id NOT IN (
-            SELECT id from " . tbname ( "content" ) . ");" );
-// Listen von bereits gelöschten Content Objekten aufräumen
-Database::query ( "DELETE FROM " . tbname ( "lists" ) . " WHERE content_id NOT IN (
-            SELECT id from " . tbname ( "content" ) . ");" );
-
+/**
+ * Database::query ( "DELETE FROM " .
+ *
+ * tbname ( "history" ) . " WHERE content_id NOT IN (
+ * SELECT id from " . tbname ( "content" ) . ");" );
+ * // Listen von bereits gelöschten Content Objekten aufräumen
+ * Database::query ( "DELETE FROM " . tbname ( "lists" ) . " WHERE content_id NOT IN (
+ * SELECT id from " . tbname ( "content" ) . ");" );
+ */
 // Cronjobs der Module
 add_hook ( "cron" );

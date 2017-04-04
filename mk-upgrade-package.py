@@ -42,6 +42,9 @@ def main():
     content_dir_from = os.path.join(source_dir, "ulicms", "classes", "objects", "content")
     content_dir_to = os.path.join(target, "ulicms", "classes", "objects", "content")
     shutil.copytree(content_dir_from, content_dir_to, ignore=IGNORE_PATTERNS)
+    modules_dir_from = os.path.join(source_dir, "ulicms", "classes", "objects", "modules")
+    modules_dir_to = os.path.join(target, "ulicms", "classes", "objects", "modules")
+    shutil.copytree(modules_dir_from, modules_dir_to, ignore=IGNORE_PATTERNS)
 
 
     if os.path.exists(update_script):

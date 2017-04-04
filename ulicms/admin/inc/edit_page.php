@@ -1,5 +1,5 @@
 <?php
-include_once ULICMS_ROOT . "/classes/vcs.php";
+include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "pages" )) {
@@ -78,7 +78,8 @@ if (defined ( "_SECURITY" )) {
 				csrf_token_html ();
 				?>
 	<input type="hidden" name="edit_page" value="edit_page"> <input
-		type="hidden" name="page_id" value="<?php echo $row -> id?>">
+		type="hidden" name="page_id" id="page_id"
+		value="<?php echo $row -> id?>">
 
 	<div id="accordion-container">
 
@@ -244,17 +245,15 @@ if (defined ( "_SECURITY" )) {
 				?>>
 		<?php translate("disabled");?>
 		</option>
-			</select> <br /> <br />
-			 <strong><?php translate("hidden");?>
-	</strong><br /> <select name="hidden" size="1"><option value="1" <?php if($row->hidden == 1) echo "selected";?>>
+			</select> <br /> <br /> <strong><?php translate("hidden");?>
+	</strong><br /> <select name="hidden" size="1"><option value="1"
+					<?php if($row->hidden == 1) echo "selected";?>>
 		<?php translate("yes");?>
 		</option>
 				<option value="0" <?php if($row->hidden == 0) echo "selected";?>>
 		<?php translate("no");?>
 		</option>
-			</select> <br /> <br />
-			
-			 <strong><?php translate("category");?> </strong><br />
+			</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
 	<?php echo categories::getHTMLSelect ( $row->category );?>
 			
 		</div>
@@ -394,8 +393,15 @@ function openMenuImageSelectWindow(field) {
 						maxlength="80"> <br /> <br /> <strong><?php translate("author_email");?></strong><br />
 					<input type="email" name="article_author_email"
 						value="<?php echo real_htmlspecialchars($row->article_author_email);?>"
-						maxlength="80"> <br /> <br /> <strong><?php translate("article_date");?></strong><br />
-					<input name="article_date" type="datetime-local"
+						maxlength="80"> <br /> <br />
+					<div id="comment-fields">
+						<strong><?php translate("homepage");?></strong><br /> <input
+							type="url" name="comment_homepage"
+							value="<?php echo real_htmlspecialchars($row->comment_homepage);?>"
+							maxlength="255"> <br /> <br />
+					</div>
+					<strong><?php translate("article_date");?></strong><br /> <input
+						name="article_date" type="datetime-local"
 						value="<?php
 				
 				if (isNotNullOrEmpty ( $row->article_date )) {
@@ -845,8 +851,6 @@ function openArticleImageSelectWindow(field) {
 				id="only_others_can_edit" value="1"
 				<?php if($row->only_others_can_edit) echo "checked";?>> <label
 				for="only_others_can_edit"><?php translate("others");?></label>
-
-
 		</div>
 <?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
@@ -991,8 +995,17 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		<div id="message_page_edit" class="inPageMessage"></div>
 		<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
 	</div>
+	<div class="row">
+		<div class="col-xs-6">
+			<input type="submit" value="<?php translate("save_changes");?>">
 
-	<input type="submit" value="<?php translate("save_changes");?>">
+		</div>
+
+		<div class="col-xs-6 text-right">
+			<input type="button" id="btn-view-page"
+				value="<?php translate("view");?>">
+		</div>
+	</div>
 	<?php
 				if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 					?>

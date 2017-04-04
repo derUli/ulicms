@@ -3,7 +3,7 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" )) {
 	noperms ();
 } else {
-	require_once ULICMS_ROOT . "/classes/objects/forms.php";
+	require_once ULICMS_ROOT . "/classes/objects/content/forms.php";
 	$forms = Forms::getAllForms ();
 	$pages = getAllPages ();
 	?>
@@ -31,8 +31,8 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" 
 	?></p>
 
 	<p>
-		<strong><?php translate("fields");?></strong><br /> <textarea
-			name="fields" rows="10"></textarea>
+		<strong><?php translate("fields");?></strong><br />
+		<textarea name="fields" rows="10"></textarea>
 	</p>
 
 

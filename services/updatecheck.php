@@ -1,4 +1,6 @@
 <?php
+// Update Check Schnittstelle erst mal ausgeschaltet
+die();
 header ( "Content-Type: text/html; charset=UTF-8" );
 $version = $_REQUEST ["v"];
 

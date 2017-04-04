@@ -45,9 +45,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		echo "<ol style=\"margin-bottom:30px;\">";
 		for($i = 0; $i < count ( $modules ); $i ++) {
 			echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
-			
-			$module_has_admin_page = (file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) ));
-			
+			$disabledModules = Vars::get ( "disabledModules" );
+			$module_has_admin_page = ((file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) )) && ! in_array ( $modules [$i], $disabledModules ));
 			echo getModuleName ( $modules [$i] );
 			$version = getModuleMeta ( $modules [$i], "version" );
 			$source = getModuleMeta ( $modules [$i], "source" );
@@ -106,7 +105,12 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			echo "<br/>";
 			if (! file_exists ( $noembed_file1 ) and ! file_exists ( $noembed_file2 ) and $embed_attrib) {
-				echo "<input type='text' value='[module=\"" . $modules [$i] . "\"]' readonly='readonly' onclick='this.focus(); this.select()'>";
+				$disabled = "";
+				if (in_array ( $modules [$i], $disabledModules )) {
+					$disabled = "disabled";
+				}
+				
+				echo "<input type='text' value='[module=\"" . $modules [$i] . "\"]' readonly='readonly' " . $disabled . " onclick='this.focus(); this.select()'>";
 			} else {
 				echo "Kein Embed Modul";
 			}

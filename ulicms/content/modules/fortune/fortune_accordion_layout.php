@@ -1,5 +1,4 @@
 <h2 class="accordion-header"><?php
-
 translate ( "fortune" );
 ?></h2>
 <div class="accordion-content">

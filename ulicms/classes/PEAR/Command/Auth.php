@@ -65,8 +65,7 @@ Logs out from the remote server.  This command does not actually
 connect to the remote server, it only deletes the stored username and
 password from your user configuration.' 
 			) 
-	)
-	;
+	);
 	
 	/**
 	 * PEAR_Command_Auth constructor.

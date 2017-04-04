@@ -1,6 +1,6 @@
 <?php
-include_once ULICMS_ROOT . "/classes/finediff.php";
-include_once ULICMS_ROOT . "/classes/vcs.php";
+include_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
+include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "pages" )) {

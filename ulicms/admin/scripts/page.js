@@ -209,6 +209,11 @@ $(function() {
 		filterParentPages();
 	});
 
+	$("#btn-view-page").click(function() {
+		var url = "../?goid=" + $("#page_id").val();
+		window.open(url);
+	})
+
 	systemnameOrLanguageChanged($("input[name='system_title']"));
 	systemnameOrLanguageChanged($("select[name='language']"));
 

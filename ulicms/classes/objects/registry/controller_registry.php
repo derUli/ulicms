@@ -5,11 +5,15 @@ class ControllerRegistry {
 		if (! defined ( "KCFINDER_PAGE" )) {
 			$controllerRegistry = array ();
 			$modules = getAllModules ();
+			$disabledModules = Vars::get ( "disabledModules" );
 			foreach ( $modules as $module ) {
+				if (in_array ( $module, $disabledModules )) {
+					continue;
+				}
 				$controllers = getModuleMeta ( $module, "controllers" );
 				if ($controllers) {
 					foreach ( $controllers as $key => $value ) {
-						$path = getModulePath ( $module ) . trim ( $value, "/" );
+						$path = getModulePath ( $module, true ) . trim ( $value, "/" );
 						if (! endsWith ( $path, ".php" )) {
 							$path .= ".php";
 						}

@@ -14,9 +14,35 @@ if (defined ( "_SECURITY" )) {
 	<input type="password" required="required" name="admin_password"
 		id="admin_password" value="" autocomplete="off"> <br /> <br /> <strong><?php translate("password_repeat");?></strong><br />
 	<input type="password" required="required" name="admin_password_repeat"
-		id="admin_password_repeat" value="" autocomplete="off"> <br /> <br />
-	<input type="checkbox" value="1" name="require_password_change"
-		id="require_password_change"> <label for="require_password_change"><?php translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );?> </label>
+		id="admin_password_repeat" value="" autocomplete="off"> <br /> 
+		<?php
+		$acl = new ACL ();
+		$allGroups = $acl->getAllGroups ();
+		asort ( $allGroups );
+		?>
+	<br> <strong><?php translate("usergroup");?></strong> <br /> <select
+		name="group_id">
+		<?php
+		
+		foreach ( $allGroups as $key => $value ) {
+			?>
+		<option value="<?php
+			
+			echo $key;
+			?>"
+			<?php
+			if (Settings::get ( "default_acl_group" ) == $key) {
+				echo "selected";
+			}
+			?>>
+					<?php echo real_htmlspecialchars($value)?>
+		</option>
+		<?php
+		}
+		?>
+	</select> <br /> <br /> <input type="checkbox" value="1"
+		name="require_password_change" id="require_password_change"> <label
+		for="require_password_change"><?php translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );?> </label>
 	<br /> <br /> <input type="checkbox" id="send_mail" name="send_mail"
 		value="sendmail"> <label for="send_mail"><?php translate("SEND_LOGINDATA_BY_MAIL");?></label>
 	<br /> <br /> <input type="checkbox" value="1" name="admin" id="admin">

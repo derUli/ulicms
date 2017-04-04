@@ -23,32 +23,13 @@ class ContentFactory {
 	}
 	private static function getContentObjectByID($row) {
 		$retval = null;
-		if ($row->type == "page") {
-			$retval = new Page ();
+		$type = $row->type;
+		$mappings = TypeMapper::getMappings ();
+		if (isset ( $mappings [$type] ) and isNotNullOrEmpty ( $mappings [$type] ) and class_exists ( $mappings [$type] )) {
+			$retval = new $mappings [$type] ();
 			$retval->loadByID ( $row->id );
-		} else if ($row->type == "list") {
-			$retval = new Content_List ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "link") {
-			$retval = new Link ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "node") {
-			$retval = new Node ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "module") {
-			$retval = new Module_page ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "video") {
-			$retval = new Video_Page ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "audio") {
-			$retval = new Audio_Page ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "image") {
-			$retval = new Image_Page ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "article") {
-			$retval = new Article ();
+		} else if ($row->type == "comment") {
+			$retval = new Comment ();
 			$retval->loadByID ( $row->id );
 		}
 		
