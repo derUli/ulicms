@@ -919,8 +919,13 @@ function isModuleInstalled($name) {
 	return in_array ( $name, getAllModules () );
 }
 function getAllModules() {
+	if (Vars::get ( "allModules" )) {
+		return Vars::get ( "allModules" );
+	}
 	$pkg = new PackageManager ();
-	return $pkg->getInstalledPackages ( 'modules' );
+	$modules = $pkg->getInstalledPackages ( 'modules' );
+	Vars::set ( "allModules", $modules );
+	return $modules;
 }
 function no_cache($do = false) {
 	if ($do) {
