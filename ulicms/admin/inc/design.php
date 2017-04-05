@@ -333,7 +333,7 @@ div#google-fonts {
 		<tr>
 			<td><strong><?php translate("HEADER_BACKGROUNDCOLOR");?> </strong></td>
 			<td><input name="header-background-color"
-				class="color {hash:true,caps:true}"
+				class="jscolor {hash:true,caps:true}"
 				value="<?php
 	
 	echo real_htmlspecialchars ( Settings::get ( "header-background-color" ) );
@@ -341,7 +341,7 @@ div#google-fonts {
 		</tr>
 		<tr>
 			<td><strong><?php translate("font_color");?> </strong></td>
-			<td><input name="body-text-color" class="color {hash:true,caps:true}"
+			<td><input name="body-text-color" class="jscolor {hash:true,caps:true}"
 				value="<?php
 	
 	echo real_htmlspecialchars ( Settings::get ( "body-text-color" ) );
@@ -350,7 +350,7 @@ div#google-fonts {
 		<tr>
 			<td><strong><?php translate("BACKGROUNDCOLOR");?> </strong></td>
 			<td><input name="body-background-color"
-				class="color {hash:true,caps:true}"
+				class="jscolor {hash:true,caps:true}"
 				value="<?php
 	
 	echo real_htmlspecialchars ( Settings::get ( "body-background-color" ) );

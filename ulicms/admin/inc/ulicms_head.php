@@ -15,7 +15,7 @@ if (! $admin_logo) {
 $styles = array ();
 ?>
 <link rel="stylesheet" type="text/css"
-	href="scripts/tablesorter/style.css" />
+	href="scripts/tablesorter/style.min.css" />
 <?php
 $enq = array (
 		"scripts/php.js/strip_tags.js",
@@ -58,7 +58,7 @@ foreach ( $enq as $script ) {
 <?php combined_script_html();?>
 
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>
+<script type="text/javascript" src="scripts/jscolor/jscolor.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   $.ajaxSetup({ cache: false });
