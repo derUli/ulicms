@@ -770,8 +770,8 @@ function getBaseFolderURL() {
 	$s = empty ( $_SERVER ["HTTPS"] ) ? '' : ($_SERVER ["HTTPS"] == "on") ? "s" : "";
 	$sp = strtolower ( $_SERVER ["SERVER_PROTOCOL"] );
 	$protocol = substr ( $sp, 0, strpos ( $sp, "/" ) ) . $s;
-	$port = ($_SERVER ["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
-	return trim ( $protocol . "://" . $_SERVER ['SERVER_NAME'] . $port . dirname ( $_SERVER ['REQUEST_URI'] ), "/" );
+	$port = ($_SERVER ["SERVER_PORT"] == "80" || $_SERVER ["SERVER_PORT"] == "443") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
+	return trim ( rtrim($protocol . "://" . $_SERVER ['SERVER_NAME'] . $port . str_replace ( "\\", "/", dirname ( $_SERVER ['REQUEST_URI'] ) ) ), "/");
 }
 
 // This Returns the current full URL
