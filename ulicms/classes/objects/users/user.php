@@ -17,6 +17,8 @@ class User {
 	private $password_changed = null;
 	private $locked = false;
 	private $last_login = null;
+	private $twitter = "";
+	private $homepage = "";
 	public function __construct($id = null) {
 		if ($id) {
 			$this->loadById ( $id );
@@ -176,5 +178,68 @@ class User {
 	}
 	public function setLastLogin($val) {
 		$this->last_login = ! is_null ( $val ) ? intval ( $val ) : null;
+	}
+	public function getFailedLogins() {
+		$result = 0;
+		if (! is_null ( $this->id )) {
+			
+			$sql = "select failed_logins from {prefix}users where id = ?";
+			$args = array (
+					$this->id 
+			);
+			$query = Database::pQuery ( $sql, $args, true );
+			if (Database::any ( $query )) {
+				$data = Database::fetchObject ( $query );
+				$result = $data->failed_logins;
+			}
+		}
+		return $result;
+	}
+	public function increaseFailedLogins() {
+		if (is_null ( $this->id )) {
+			return;
+		}
+		$time = intval ( $time );
+		$sql = "update {prefix}users set failed_logins = failed_logins + 1 where id = ?";
+		$args = array (
+				$this->id 
+		);
+		Database::pQuery ( $sql, $args, true );
+	}
+	public function resetFailedLogins() {
+		if (is_null ( $this->id )) {
+			return;
+		}
+		$time = intval ( $time );
+		$sql = "update {prefix}users set failed_logins = ? where id = ?";
+		$args = array (
+				0,
+				$this->id 
+		);
+		Database::pQuery ( $sql, $args, true );
+	}
+	public function setFailedLogins($amount) {
+		if (is_null ( $this->id )) {
+			return;
+		}
+		$time = intval ( $time );
+		$sql = "update {prefix}users set failed_logins = ? where id = ?";
+		$args = array (
+				$amount,
+				$this->id 
+		);
+		Database::pQuery ( $sql, $args, true );
+	}
+	public function getTwitter() {
+		return $this->twitter;
+	}
+	public function setTwitter($val) {
+		$this->twitter = strval ( $val );
+	}
+	public function getHomepage() {
+		return $this->homepage;
+	}
+	public function setHomepage($val) {
+		$this->homepage = strval ( $val );
 	}
 }
