@@ -2,7 +2,13 @@
 class User {
 	private $id = null;
 	private $username = null;
-	private $lastname = null;
+	private $lastname = "";
+	private $firstname = "";
+	private $email = "";
+	private $password = "";
+	private $old_encryption = false;
+	private $skype_id = "";
+	private $about_me = "";
 	public function __construct($id = null) {
 		if ($id) {
 			$this->loadById ( $id );
@@ -45,7 +51,44 @@ class User {
 	public function setLastname($lastname) {
 		$this->lastname = ! is_null ( $lastname ) ? strval ( $lastname ) : null;
 	}
+	public function getFirstname() {
+		return $this->firstname;
+	}
+	public function setFirstname($firstname) {
+		$this->firstname = ! is_null ( $firstname ) ? strval ( $firstname ) : null;
+	}
+	public function getEmail() {
+		return $this->email;
+	}
+	public function setEmail($email) {
+		$this->email = ! is_null ( $email ) ? strval ( $firstname ) : null;
+	}
 	public function delete() {
 		throw new NotImplementedException ();
+	}
+	public function getPassword() {
+		return $this->password;
+	}
+	public function setPassword($password) {
+		$this->password = securityHelper::hash_password ( $password );
+		$this->old_encryption = true;
+	}
+	public function getOldEncryption() {
+		return $this->old_encryption;
+	}
+	public function setOldEncryption($value) {
+		$this->old_encryption = boolval ( $value );
+	}
+	public function getSkypeId() {
+		return $this->skype_id;
+	}
+	public function setSkypeId($skype_id) {
+		$this->skype_id = ! is_null ( $skype_id ) ? strval ( $skype_id ) : null;
+	}
+	public function getAboutMe() {
+		return $this->about_me;
+	}
+	public function setAboutMe($text) {
+		$this->about_me = ! is_null ( $text ) ? strval ( $text ) : null;
 	}
 }
