@@ -9,6 +9,14 @@ class User {
 	private $old_encryption = false;
 	private $skype_id = "";
 	private $about_me = "";
+	private $group_id = null;
+	private $notify_on_login = false;
+	private $html_editor = "ckeditor";
+	private $require_password_change = false;
+	private $admin = false;
+	private $password_changed = null;
+	private $locked = false;
+	private $last_login = null;
 	public function __construct($id = null) {
 		if ($id) {
 			$this->loadById ( $id );
@@ -71,7 +79,8 @@ class User {
 	}
 	public function setPassword($password) {
 		$this->password = securityHelper::hash_password ( $password );
-		$this->old_encryption = true;
+		$this->old_encryption = false;
+		$this->password_changed = date ( "Y-m-d H:i:s" );
 	}
 	public function getOldEncryption() {
 		return $this->old_encryption;
@@ -90,5 +99,82 @@ class User {
 	}
 	public function setAboutMe($text) {
 		$this->about_me = ! is_null ( $text ) ? strval ( $text ) : null;
+	}
+	public function getLastAction() {
+		$result = 0;
+		if (! is_null ( $this->id )) {
+			
+			$sql = "select last_action from {prefix}users where id = ?";
+			$args = array (
+					$this->id 
+			);
+			$query = Database::pQuery ( $sql, $args, true );
+			if (Database::any ( $query )) {
+				$data = Database::fetchObject ( $query );
+				$result = $data->last_action;
+			}
+		}
+		return $result;
+	}
+	public function setLastAction($time) {
+		if (is_null ( $this->id )) {
+			return;
+		}
+		$time = intval ( $time );
+		$sql = "update {prefix}users set last_action = ? where id = ?";
+		$args = array (
+				$time,
+				$this->id 
+		);
+		Database::pQuery ( $sql, $args, true );
+	}
+	public function getGroupId() {
+		return $this->group_id;
+	}
+	public function setGroupId($gid) {
+		$this->group_id = ! is_null ( $gid ) ? $gid : null;
+	}
+	public function getNotifyOnLogin() {
+		return boolval ( $this->notify_on_login );
+	}
+	public function setNotifyOnLogin($val) {
+		$this->notify_on_login = boolval ( $val );
+	}
+	public function getHTMLEditor() {
+		return $this->html_editor;
+	}
+	public function setHTMLEditor($editor) {
+		$allowedEditors = array (
+				"ckeditor",
+				"codemirror" 
+		);
+		if (! in_array ( $editor, $allowedEditors )) {
+			$editor = "ckeditor";
+		}
+		$this->html_editor = $editor;
+	}
+	public function getRequirePasswordChange() {
+		return $this->require_password_change;
+	}
+	public function setRequirePasswordChange($val) {
+		$this->require_password_change = boolval ( $val );
+	}
+	public function getAdmin() {
+		return $this->admin;
+	}
+	public function setAdmin($val) {
+		$this->admin = boolval ( $val );
+	}
+	public function getLocked() {
+		return $this->locked;
+	}
+	public function setLocked($val) {
+		$this->locked = boolval ( $val );
+	}
+	public function getLastLogin() {
+		return $this->last_login;
+	}
+	public function setLastLogin($val) {
+		$this->last_login = ! is_null ( $val ) ? intval ( $val ) : null;
 	}
 }
