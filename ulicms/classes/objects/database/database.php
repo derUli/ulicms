@@ -235,6 +235,9 @@ class Database {
 	public static function error() {
 		return self::getLastError ();
 	}
+	public function getError() {
+		return self::getLastError ();
+	}
 	public static function getAllTables() {
 		$tableList = array ();
 		$res = mysqli_query ( self::$connection, "SHOW TABLES" );
