@@ -19,6 +19,6 @@ class UserManagementTest extends PHPUnit_Framework_TestCase {
 		$user->delete ();
 		
 		$user = new User ();
-		$this - assertNull ( $user->getId () );
+		$this->assertNull ( $user->getId () );
 	}
 }
