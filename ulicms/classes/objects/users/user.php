@@ -37,6 +37,16 @@ class User {
 			$this->insert ();
 		}
 	}
+	public function fillVars($query) {
+		if (Database::any ( $query )) {
+			$result = Database::fetchAssoc ( $query );
+			foreach ( $result as $key => $value ) {
+				if (isset ( $this->$key ) || property_exists ( $this, $key )) {
+					$this->$key = $value;
+				}
+			}
+		}
+	}
 	protected function insert() {
 		throw new NotImplementedException ();
 	}
