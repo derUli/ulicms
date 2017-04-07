@@ -25,10 +25,20 @@ class User {
 		}
 	}
 	public function loadById($id) {
-		throw new NotImplementedException ();
+		$sql = "select * from {prefix}users where id = ?";
+		$args = array (
+				intval ( $id ) 
+		);
+		$query = Database::pQuery ( $sql, $args, true );
+		$this->fillVars ( $query );
 	}
 	public function loadByUsername($name) {
-		throw new NotImplementedException ();
+		$sql = "select * from {prefix}users where username = ?";
+		$args = array (
+				strval ( $name ) 
+		);
+		$query = Database::pQuery ( $sql, $args, true );
+		$this->fillVars ( $query );
 	}
 	public function save() {
 		if ($this->id) {
