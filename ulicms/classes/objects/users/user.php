@@ -74,7 +74,18 @@ class User {
 		$this->email = ! is_null ( $email ) ? strval ( $firstname ) : null;
 	}
 	public function delete() {
-		throw new NotImplementedException ();
+		if (is_null ( $this->id )) {
+			return false;
+		}
+		$sql = "delete from {prefix}users where id = ?";
+		$args = array (
+				$this->id 
+		);
+		$result = Database::pQuery ( $sql, $args, true );
+		if ($result) {
+			$this->id = null;
+		}
+		return $result;
 	}
 	public function getPassword() {
 		return $this->password;
