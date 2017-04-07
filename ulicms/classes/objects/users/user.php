@@ -59,7 +59,7 @@ class User {
 	}
 	protected function insert() {
 		$sql = "insert into {prefix}users (username, lastname, firstname, email, password,
-				old_encryption, skype_id, about_me, group_id, notify_on_login, html_editor
+				old_encryption, skype_id, about_me, group_id, notify_on_login, html_editor, 
 				require_password_change, admin, password_changed, locked, last_login, 
 				twitter, homepage) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$args = array (
@@ -88,7 +88,35 @@ class User {
 		}
 	}
 	protected function update() {
-		throw new NotImplementedException ();
+		$sql = "update {prefix}users set username = ?, lastname = ?, firstname = ?, email = ?, password = ?,
+				old_encryption = ?, skype_id = ?, about_me = ?, group_id = ?, notify_on_login = ?, html_editor = ?,
+				require_password_change = ?, admin = ?, password_changed = ?, locked = ?, last_login = ?,
+				twitter = ?, homepage = ? where id = ?";
+		$args = array (
+				$this->username,
+				$this->lastname,
+				$this->firstname,
+				$this->email,
+				$this->password,
+				$this->old_encryption,
+				$this->skype_id,
+				$this->about_me,
+				$this->group_id,
+				$this->notify_on_login,
+				$this->html_editor,
+				$this->require_password_change,
+				$this->admin,
+				$this->password_changed,
+				$this->locked,
+				$this->last_login,
+				$this->twitter,
+				$this->homepage,
+				$this->id 
+		);
+		$result = Database::pQuery ( $sql, $args, true ) or die ( Database::getError () );
+		if ($result) {
+			$this->id = Database::getLastInsertID ();
+		}
 	}
 	public function getId() {
 		return $this->id;
@@ -141,6 +169,9 @@ class User {
 		$this->password = securityHelper::hash_password ( $password );
 		$this->old_encryption = false;
 		$this->password_changed = date ( "Y-m-d H:i:s" );
+	}
+	public function getPasswordChanged() {
+		return $this->password_changed;
 	}
 	public function resetPassword() {
 		throw new NotImplementedException ();
