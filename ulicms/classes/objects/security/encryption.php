@@ -1,6 +1,5 @@
 <?php
 class Encryption {
-	// Hash Salt + Passwort with SHA1
 	public static function hashPassword($password) {
 		$salt = Settings::get ( "password_salt" );
 		
