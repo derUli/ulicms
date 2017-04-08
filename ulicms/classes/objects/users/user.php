@@ -248,19 +248,19 @@ class User {
 		$this->html_editor = $editor;
 	}
 	public function getRequirePasswordChange() {
-		return $this->require_password_change;
+		return boolval ( $this->require_password_change );
 	}
 	public function setRequirePasswordChange($val) {
 		$this->require_password_change = boolval ( $val );
 	}
 	public function getAdmin() {
-		return $this->admin;
+		return boolval ( $this->admin );
 	}
 	public function setAdmin($val) {
 		$this->admin = boolval ( $val );
 	}
 	public function getLocked() {
-		return $this->locked;
+		return boolval ( $this->locked );
 	}
 	public function setLocked($val) {
 		$this->locked = boolval ( $val );

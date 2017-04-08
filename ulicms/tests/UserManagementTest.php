@@ -21,6 +21,7 @@ class UserManagementTest extends PHPUnit_Framework_TestCase {
 		$user->setHomepage ( "http://www.google.de" );
 		$user->setSkypeId ( "deruliimnetz" );
 		$user->setHTMLEditor ( "ckeditor" );
+		$user->setAboutMe ( "hello world" );
 		$lastLogin = time ();
 		$user->setLastLogin ( $lastLogin );
 		$user->save ();
@@ -37,12 +38,28 @@ class UserManagementTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "http://www.google.de", $user->getHomepage () );
 		$this->assertEquals ( "deruliimnetz", $user->getSkypeId () );
 		$this->assertEquals ( "ckeditor", $user->getHTMLEditor () );
+		$this->assertEquals ( false, $user->getRequirePasswordChange () );
+		$this->assertEquals ( false, $user->getNotifyOnLogin () );
+		$this->assertEquals ( false, $user->getAdmin () );
+		$this->assertEquals ( false, $user->getLocked () );
+		$this->assertEquals ( "hello world", $user->getAboutMe () );
 		$user->setHTMLEditor ( "codemirror" );
+		$user->setNotifyOnLogin ( true );
+		$user->setRequirePasswordChange ( true );
+		$user->setLocked ( true );
+		$user->setAdmin ( true );
+		$user->setAboutMe ( "bye" );
 		$user->save ();
 		
 		$user = new User ();
 		$user->loadByUsername ( "max_muster" );
 		$this->assertEquals ( "codemirror", $user->getHTMLEditor () );
+		$this->assertEquals ( true, $user->getNotifyOnLogin () );
+		
+		$this->assertEquals ( true, $user->getLocked () );
+		$this->assertEquals ( true, $user->getAdmin () );
+		$this->assertEquals ( true, $user->getRequirePasswordChange () );
+		$this->assertEquals ( "bye", $user->getAboutMe () );
 		$user->delete ();
 		
 		$user = new User ();
