@@ -29,7 +29,6 @@ function getUsersOnline() {
 	return $retval;
 }
 function changePassword($password, $id) {
-	include_once ULICMS_ROOT . "/lib/encryption.php";
 	$newPassword = Encryption::hashPassword ( $password );
 	return Database::query ( "UPDATE " . tbname ( "users" ) . " SET `password` = '$newPassword',  `old_encryption` = 0, `password_changed` = NOW() WHERE id = $id" );
 }
