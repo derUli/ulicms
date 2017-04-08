@@ -235,7 +235,7 @@ class Database {
 	public static function error() {
 		return self::getLastError ();
 	}
-	public function getError() {
+	public static function getError() {
 		return self::getLastError ();
 	}
 	public static function getAllTables() {

@@ -146,7 +146,7 @@ class User {
 		return $this->email;
 	}
 	public function setEmail($email) {
-		$this->email = ! is_null ( $email ) ? strval ( $firstname ) : null;
+		$this->email = ! is_null ( $email ) ? strval ( $email ) : null;
 	}
 	public function delete() {
 		if (is_null ( $this->id )) {
