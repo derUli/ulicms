@@ -23,6 +23,7 @@
 + Einstellung "Zugriffsbeschränkungen für neue Inhalte" hinzugefügt
 + Das Modul oneclick_upgrade ist nun vorinstalliert
 + Installer löscht sich nun selbst am Ende der Installation
++ jscolor aktualisiert (Version 2.0.4)
 # Fehlermeldung auf 404er Fehlerseiten in der Funktion Template::getHeadline() behoben
 # Funktionen zur Ausgabe der Metadaten einer Seite entsprechen nun dem Namensschema
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
@@ -30,6 +31,7 @@
 # Doppelklick auf "Paket installieren" Button erzeugt nun keinen Fehler mehr
 # article_date wird nun korrekt gespeichert
 # Username ist jetzt Unique
+- Funktion SecurityHelper::hash_password() entfernt
 - fast_mode entfernt
 
 ===== Neues in UliCMS 2017.2 =====

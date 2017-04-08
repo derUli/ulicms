@@ -166,7 +166,7 @@ class User {
 		return $this->password;
 	}
 	public function setPassword($password) {
-		$this->password = securityHelper::hash_password ( $password );
+		$this->password = Encryption::hashPassword ( $password );
 		$this->old_encryption = false;
 		$this->password_changed = date ( "Y-m-d H:i:s" );
 	}

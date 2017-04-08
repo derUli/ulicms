@@ -15,7 +15,7 @@ class UserManagementTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "Max", $user->getFirstname () );
 		$this->assertEquals ( "Muster", $user->getLastname () );
 		$this->assertEquals ( 1, $user->getGroupId () );
-		$this->assertEquals ( securityHelper::hash_password ( "password123" ), $user->getPassword () );
+		$this->assertEquals ( Encryption::hashPassword ( "password123" ), $user->getPassword () );
 		$user->delete ();
 		
 		$user = new User ();
