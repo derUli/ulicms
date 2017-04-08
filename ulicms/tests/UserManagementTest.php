@@ -21,6 +21,7 @@ class UserManagementTest extends PHPUnit_Framework_TestCase {
 		$user->setHomepage ( "http://www.google.de" );
 		$user->setSkypeId ( "deruliimnetz" );
 		$user->setHTMLEditor ( "ckeditor" );
+		$user->setTwitter ( "ulicms" );
 		$user->setAboutMe ( "hello world" );
 		$lastLogin = time ();
 		$user->setLastLogin ( $lastLogin );
@@ -43,6 +44,7 @@ class UserManagementTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( false, $user->getAdmin () );
 		$this->assertEquals ( false, $user->getLocked () );
 		$this->assertEquals ( "hello world", $user->getAboutMe () );
+		$this->assertEquals ( "ulicms", $user->getTwitter () );
 		$user->setHTMLEditor ( "codemirror" );
 		$user->setNotifyOnLogin ( true );
 		$user->setRequirePasswordChange ( true );
