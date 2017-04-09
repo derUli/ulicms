@@ -4,6 +4,9 @@ class Group {
 	private $name = "";
 	private $permissions = array ();
 	public function __construct($id = null) {
+		if (! is_null ( $id )) {
+			$this->loadById ( $id );
+		}
 	}
 	public function loadById($id) {
 		$sql = "select * from `{prefix}groups` where id = ?";
