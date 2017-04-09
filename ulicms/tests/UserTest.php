@@ -1,5 +1,5 @@
 <?php
-class UserManagementTest extends PHPUnit_Framework_TestCase {
+class UserTest extends PHPUnit_Framework_TestCase {
 	public function setUp() {
 		$user = new User ();
 		$user->loadByUsername ( "max_muster" );

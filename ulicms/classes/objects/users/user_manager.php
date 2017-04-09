@@ -12,7 +12,7 @@ class UserManager {
 		}
 		return $users;
 	}
-	public function getLocked($locked = true) {
+	public function getLockedUsers($locked = true) {
 		$users = array ();
 		$sql = "select id from {prefix}users where `locked` = ?";
 		$args = array (
