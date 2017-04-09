@@ -36,10 +36,25 @@ class Group {
 		}
 	}
 	protected function insert() {
-		throw new NotImplementedException ();
+		$sql = "insert into `{prefix}groups` (name, permissions) values (?,?)";
+		$args = array (
+				$this->getName (),
+				json_encode ( $this->getPermissions () ) 
+		);
+		$query = Database::pQuery ( $sql, $args, true );
+		if ($query) {
+			$id = Database::getInsertID ();
+			$this->id = $id;
+		}
 	}
 	protected function update() {
-		throw new NotImplementedException ();
+		$sql = "update `{prefix}groups` set name = ?, permissions = ? where id = ?";
+		$args = array (
+				$this->getName (),
+				json_encode ( $this->getPermissions () ),
+				$this->id 
+		);
+		return Database::pQuery ( $sql, $args, true );
 	}
 	public function delete() {
 		if (is_null ( $this->id )) {

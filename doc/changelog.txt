@@ -360,7 +360,6 @@ Speicherplatz zu sparen.
 ===== Neues in UliCMS 9.0.1 Refresh 1 ====
 
 + mPDF Framework aus dem Core entfernt, um Speicherplatz zu sparen. Sofern PDF Unterstützung benötigt wird, kann
-
 mPDF unter der folgenden URL seperat heruntergeladen werden:
   http://www.ulicms.de/mpdf_supplement.html
 + CKEditor 4.5.3 Supplement bereits integriert
