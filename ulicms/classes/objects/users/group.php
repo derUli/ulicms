@@ -23,7 +23,7 @@ class Group {
 			$allPermissions = $acl->getDefaultACL ();
 			foreach ( $allPermissions as $name => $value ) {
 				if (! isset ( $this->permissions [$name] )) {
-					$this->permissions [$name] = $value;
+					$this->addPermission ( $name, $value );
 				}
 			}
 		}
@@ -75,6 +75,9 @@ class Group {
 	}
 	public function addPermission($name, $value = false) {
 		$this->permissions [$name] = $value;
+	}
+	public function hasPermission($name) {
+		return (in_array ( $name, $this->permissions ) and $this->permissions [$name]);
 	}
 	public function removePermission($name) {
 		if (isset ( $this->permissions [$name] )) {
