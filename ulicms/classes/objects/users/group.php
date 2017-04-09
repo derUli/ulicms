@@ -42,7 +42,18 @@ class Group {
 		throw new NotImplementedException ();
 	}
 	public function delete() {
-		throw new NotImplementedException ();
+		if (is_null ( $this->id )) {
+			return false;
+		}
+		$sql = "delete from `{prefix}groups` where id = ?";
+		$args = array (
+				$this->id 
+		);
+		$query = Database::pQuery ( $sql, $args, true );
+		if ($query) {
+			$this->id = null;
+		}
+		return $query;
 	}
 	public function getId() {
 		return $this->id;
