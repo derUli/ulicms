@@ -20,7 +20,7 @@ class TypeMapper {
 			$mappings = getModuleMeta ( $module, "type_classes" );
 			if ($mappings) {
 				foreach ( $mappings as $key => $value ) {
-					if (isNullOrEmpty ( $value )) {
+					if (StringHelper::isNullOrEmpty ( $value )) {
 						unset ( self::$mapping [$key] );
 					} else {
 						self::$mapping [$key] = $value;

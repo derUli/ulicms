@@ -67,10 +67,10 @@ class DBMigrator {
 		), true );
 	}
 	private function checkVars() {
-		if (isNullOrEmpty ( $this->component )) {
+		if (StringHelper::isNullOrEmpty ( $this->component )) {
 			throw new Exception ( "component is null or empty" );
 		}
-		if (isNullOrEmpty ( $this->folder )) {
+		if (StringHelper::isNullOrEmpty ( $this->folder )) {
 			throw new Exception ( "folder is null or empty" );
 		}
 		if (! is_dir ( $this->folder )) {

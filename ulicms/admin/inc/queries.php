@@ -4,7 +4,7 @@ add_hook ( "query" );
 
 include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 
-if ($_REQUEST ["action"] == "install-sin-package" and isNotNullOrEmpty ( $_REQUEST ["file"] ) and $acl->hasPermission ( "install_packages" )) {
+if ($_REQUEST ["action"] == "install-sin-package" and StringHelper::isNotNullOrEmpty ( $_REQUEST ["file"] ) and $acl->hasPermission ( "install_packages" )) {
 	$file = basename ( $_POST ["file"] );
 	$path = Path::resolve ( "ULICMS_TMP/$file" );
 	$pkg = new SinPackageInstaller ( $path );
@@ -243,13 +243,13 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$article_author_name = Database::escapeValue ( $_POST ["article_author_name"] );
 		$article_author_email = Database::escapeValue ( $_POST ["article_author_email"] );
 		$article_image = Database::escapeValue ( $_POST ["article_image"] );
-		$article_date = date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) );
+		$article_date = stringHelper::isNotNullOrEmpty ( $_POST ["article_date"] ) ? "'" . date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) ) . "'" : "Null";
 		$excerpt = Database::escapeValue ( $_POST ["excerpt"] );
 		$only_admins_can_edit = intval ( Settings::get ( "only_admins_can_edit" ) );
 		$only_group_can_edit = intval ( Settings::get ( "only_group_can_edit" ) );
 		$only_owner_can_edit = intval ( Settings::get ( "only_owner_can_edit" ) );
 		$only_others_can_edit = intval ( Settings::get ( "only_others_can_edit" ) );
-
+		
 		$comment_homepage = Database::escapeValue ( $_POST ["comment_homepage"] );
 		
 		$show_headline = intval ( $_POST ["show_headline"] );
@@ -270,9 +270,9 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
   '$type', $module, $video, $audio, '$text_position', 
    $image_url, $approved, $show_headline, '$cache_control', 
    '$article_author_name', '$article_author_email', 
-   '$article_date', '$article_image', '$excerpt', 
+   $article_date, '$article_image', '$excerpt', 
    $hidden, $only_admins_can_edit, $only_group_can_edit, $only_owner_can_edit, $only_others_can_edit, '$comment_homepage')" ) or die ( db_error () );
-
+		
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
 		if ($type == "list") {
@@ -471,7 +471,8 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$article_author_name = Database::escapeValue ( $_POST ["article_author_name"] );
 	$article_author_email = Database::escapeValue ( $_POST ["article_author_email"] );
 	$article_image = Database::escapeValue ( $_POST ["article_image"] );
-	$article_date = date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) );
+	
+	$article_date = stringHelper::isNotNullOrEmpty ( $_POST ["article_date"] ) ? "'" . date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) ) . "'" : "Null";
 	$excerpt = Database::escapeValue ( $_POST ["excerpt"] );
 	$only_admins_can_edit = intval ( isset ( $_POST ["only_admins_can_edit"] ) );
 	$only_group_can_edit = intval ( isset ( $_POST ["only_group_can_edit"] ) );
@@ -484,7 +485,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	add_hook ( "before_edit_page" );
 	$sql = "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
 	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
-	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = '$article_date', excerpt = '$excerpt',
+	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = $article_date, excerpt = '$excerpt',
 	only_admins_can_edit = $only_admins_can_edit, `only_group_can_edit` = $only_group_can_edit,
 	only_owner_can_edit = $only_owner_can_edit, only_others_can_edit = $only_others_can_edit, hidden = $hidden, comment_homepage = '$comment_homepage' WHERE id=$id";
 	db_query ( $sql ) or die ( DB::error () );

@@ -1,5 +1,17 @@
 <?php
 class stringHelper {
+	public static function isNullOrEmpty($variable) {
+		return (is_null ( $variable ) or empty ( $variable ));
+	}
+	public static function isNotNullOrEmpty($variable) {
+		return (! is_null ( $variable ) and ! empty ( $variable ));
+	}
+	public static function isNullOrWhitespace($variable) {
+		return self::isNullOrEmpty ( trim ( $variable ) );
+	}
+	public static function isNotNullOrWhitespace($variable) {
+		return self::isNotNullOrEmpty ( trim ( $variable ) );
+	}
 	public static function cleanString($string, $separator = '-') {
 		$accents = array (
 				'Š' => 'S',

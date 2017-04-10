@@ -33,7 +33,7 @@ class ControllerRegistry {
 		}
 	}
 	public static function runMethods() {
-		if (isset ( $_REQUEST ["sClass"] ) and isNotNullOrEmpty ( $_REQUEST ["sClass"] )) {
+		if (isset ( $_REQUEST ["sClass"] ) and StringHelper::isNotNullOrEmpty ( $_REQUEST ["sClass"] )) {
 			if (self::get ( $_REQUEST ["sClass"] )) {
 				$sClass = $_REQUEST ["sClass"];
 				self::get ( $sClass )->runCommand ();

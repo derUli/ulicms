@@ -404,7 +404,7 @@ function openMenuImageSelectWindow(field) {
 						name="article_date" type="datetime-local"
 						value="<?php
 				
-				if (isNotNullOrEmpty ( $row->article_date )) {
+				if (StringHelper::isNotNullOrEmpty ( $row->article_date )) {
 					echo date ( "Y-m-d\TH:i:s", strtotime ( $row->article_date ) );
 				}
 				?>"

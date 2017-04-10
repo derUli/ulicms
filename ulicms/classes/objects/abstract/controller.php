@@ -6,7 +6,7 @@ abstract class Controller {
 	public function __construct() {
 	}
 	public function runCommand() {
-		if (isset ( $_REQUEST ["sMethod"] ) and isNotNullOrEmpty ( $_REQUEST ["sMethod"] ) and ! in_array ( $_REQUEST ["sMethod"], $this->blacklist )) {
+		if (isset ( $_REQUEST ["sMethod"] ) and StringHelper::isNotNullOrEmpty ( $_REQUEST ["sMethod"] ) and ! in_array ( $_REQUEST ["sMethod"], $this->blacklist )) {
 			$sMethod = $_REQUEST ["sMethod"];
 			$reflection = new ReflectionMethod ( $this, $sMethod );
 			

@@ -25,7 +25,7 @@ class ContentFactory {
 		$retval = null;
 		$type = $row->type;
 		$mappings = TypeMapper::getMappings ();
-		if (isset ( $mappings [$type] ) and isNotNullOrEmpty ( $mappings [$type] ) and class_exists ( $mappings [$type] )) {
+		if (isset ( $mappings [$type] ) and StringHelper::isNotNullOrEmpty ( $mappings [$type] ) and class_exists ( $mappings [$type] )) {
 			$retval = new $mappings [$type] ();
 			$retval->loadByID ( $row->id );
 		} else if ($row->type == "comment") {
