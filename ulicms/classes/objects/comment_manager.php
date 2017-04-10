@@ -4,7 +4,7 @@ class CommentManager {
 		$is_spam = false;
 		$errors = array ();
 		if (Settings::get ( "spamfilter_enabled" ) == "yes") {
-			if (isNotNullOrEmpty ( $args ["phone"] )) {
+			if (StringHelper::isNotNullOrEmpty ( $args ["phone"] )) {
 				$errors [] = get_translation ( "spam_honeypot_trapped" );
 				$is_spam = true;
 			}

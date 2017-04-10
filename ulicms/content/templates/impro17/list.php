@@ -38,7 +38,7 @@ if ($id !== null) {
 				$meta = get_article_meta ( $entry->systemname );
 				$excerpt = strip_tags ( $meta->excerpt, "<img><iframe><embed><object>" );
 				$excerpt = trim ( $excerpt );
-				$excerpt = isNotNullOrEmpty ( $excerpt ) ? $excerpt : $entry->content;
+				$excerpt = StringHelper::isNotNullOrEmpty ( $excerpt ) ? $excerpt : $entry->content;
 				?>
   <div class="row article-list-row">
 		<p>

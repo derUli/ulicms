@@ -4,7 +4,7 @@ add_hook ( "query" );
 
 include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 
-if ($_REQUEST ["action"] == "install-sin-package" and isNotNullOrEmpty ( $_REQUEST ["file"] ) and $acl->hasPermission ( "install_packages" )) {
+if ($_REQUEST ["action"] == "install-sin-package" and StringHelper::isNotNullOrEmpty ( $_REQUEST ["file"] ) and $acl->hasPermission ( "install_packages" )) {
 	$file = basename ( $_POST ["file"] );
 	$path = Path::resolve ( "ULICMS_TMP/$file" );
 	$pkg = new SinPackageInstaller ( $path );
@@ -249,7 +249,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$only_group_can_edit = intval ( Settings::get ( "only_group_can_edit" ) );
 		$only_owner_can_edit = intval ( Settings::get ( "only_owner_can_edit" ) );
 		$only_others_can_edit = intval ( Settings::get ( "only_others_can_edit" ) );
-
+		
 		$comment_homepage = Database::escapeValue ( $_POST ["comment_homepage"] );
 		
 		$show_headline = intval ( $_POST ["show_headline"] );
@@ -272,7 +272,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
    '$article_author_name', '$article_author_email', 
    '$article_date', '$article_image', '$excerpt', 
    $hidden, $only_admins_can_edit, $only_group_can_edit, $only_owner_can_edit, $only_others_can_edit, '$comment_homepage')" ) or die ( db_error () );
-
+		
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
 		if ($type == "list") {
