@@ -30,6 +30,8 @@
 # Doppelklick auf "Paket installieren" Button erzeugt nun keinen Fehler mehr
 # article_date wird nun korrekt gespeichert
 # Username ist jetzt Unique
+# get_article_meta gibt nun article_date als Unix_Timestamp zurück
+# Umgang mit leerem article_date korrigiert
 - fast_mode entfernt
 
 ===== Neues in UliCMS 2017.2 =====

@@ -171,7 +171,7 @@ function get_article_meta($page = null) {
 		$page = get_requested_pagename ();
 	}
 	$result = null;
-	$sql = "SELECT `article_author_name`, `article_author_email`, `article_date`, `article_image`, `excerpt` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$sql = "SELECT `article_author_name`, `article_author_email`, CASE WHEN `article_date` is not null then UNIX_TIMESTAMP(article_date) else null end as article_date, `article_image`, `excerpt` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = Database::fetchObject ( $query );
@@ -495,7 +495,7 @@ function get_meta_keywords($dummy = null) {
 	
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
-			if (isNotNullOrEmpty ( $row->meta_keywords )) {
+			if (StringHelper::isNotNullOrEmpty ( $row->meta_keywords )) {
 				return $row->meta_keywords;
 			}
 		}
@@ -600,22 +600,21 @@ function apply_filter($text, $type) {
 	$modules = getAllModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i < count ( $modules ); $i ++) {
-			if (in_array ( $modules[$i], $disabledModules )) {
-				continue;
+		if (in_array ( $modules [$i], $disabledModules )) {
+			continue;
+		}
+		$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
+		$module_content_filter_file2 = getModulePath ( $modules [$i] ) . "filters/" . $type . ".php";
+		if (file_exists ( $module_content_filter_file1 )) {
+			include_once $module_content_filter_file1;
+			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
+				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
 			}
-			$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
-			$module_content_filter_file2 = getModulePath ( $modules [$i] ) . "filters/" . $type . ".php";
-			if (file_exists ( $module_content_filter_file1 )) {
-				include_once $module_content_filter_file1;
-				if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
-					$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
-				}
-			} else if (file_exists ( $module_content_filter_file2 )) {
-				include_once $module_content_filter_file2;
-				if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
-					$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
-				}
-			
+		} else if (file_exists ( $module_content_filter_file2 )) {
+			include_once $module_content_filter_file2;
+			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
+				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
+			}
 		}
 	}
 	

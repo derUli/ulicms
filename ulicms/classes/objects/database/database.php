@@ -77,7 +77,7 @@ class Database {
 		$table = self::escapeName ( $table );
 		$column = self::escapeName ( $column );
 		$sql = "select avg($column) from $table";
-		if (isNotNullOrEmpty ( $where )) {
+		if (StringHelper::isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
 		}
 		$result = Database::query ( $sql );
@@ -91,7 +91,7 @@ class Database {
 		$table = self::escapeName ( $table );
 		$column = self::escapeName ( $column );
 		$sql = "select min($column) from $table";
-		if (isNotNullOrEmpty ( $where )) {
+		if (StringHelper::isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
 		}
 		$result = Database::query ( $sql );
@@ -104,7 +104,7 @@ class Database {
 		
 		$table = self::escapeName ( $table );
 		$sql = "DELETE FROM $table";
-		if (isNotNullOrEmpty ( $where )) {
+		if (StringHelper::isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
 		}
 		$result = Database::query ( $sql );
@@ -118,7 +118,7 @@ class Database {
 		$table = self::escapeName ( $table );
 		$column = self::escapeName ( $column );
 		$sql = "select min($column) from $table";
-		if (isNotNullOrEmpty ( $where )) {
+		if (StringHelper::isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
 		}
 		$result = Database::query ( $sql );
@@ -153,7 +153,7 @@ class Database {
 		$columns_sql = implode ( ", ", $columns );
 		
 		$sql = "select $columns_sql from $table";
-		if (isNotNullOrEmpty ( $where )) {
+		if (StringHelper::isNotNullOrEmpty ( $where )) {
 			$sql .= " where $where";
 		}
 		return self::pQuery ( $sql, $args );
