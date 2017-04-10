@@ -1,6 +1,4 @@
 <?php
-include_once ULICMS_ROOT . "/lib/encryption.php";
-
 // this class contains functions for managing user accounts
 function getUsers() {
 	$query = Database::query ( "SELECT username FROM " . tbname ( "users" ) . " ORDER by username" );
@@ -31,7 +29,6 @@ function getUsersOnline() {
 	return $retval;
 }
 function changePassword($password, $id) {
-	include_once ULICMS_ROOT . "/lib/encryption.php";
 	$newPassword = Encryption::hashPassword ( $password );
 	return Database::query ( "UPDATE " . tbname ( "users" ) . " SET `password` = '$newPassword',  `old_encryption` = 0, `password_changed` = NOW() WHERE id = $id" );
 }
@@ -156,7 +153,6 @@ function register_session($user, $redirect = true) {
 	return;
 }
 function validate_login($user, $password, $token = null) {
-	include_once ULICMS_ROOT . "/lib/encryption.php";
 	require_once ULICMS_ROOT . "/classes/objects/security/GoogleAuthenticator.php";
 	$user = getUserByName ( $user );
 	

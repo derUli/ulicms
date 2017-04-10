@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 2017.3 =====
+===== Neues in UliCMS 2017.3 =====
 
 + Neues Standardtheme "impro17"
 + Shortcut zum Leeren des Caches hinzugefügt
@@ -19,10 +19,12 @@
   * Database::fetchSingleOrDefault()
   * Database::any()
 + Globale Funktion find_all_folders() hinzugefügt
++ Model-Klassen User, Group und UserManager hinzugefügt
 + "Nachricht des Tages" je Sprache
 + Einstellung "Zugriffsbeschränkungen für neue Inhalte" hinzugefügt
 + Das Modul oneclick_upgrade ist nun vorinstalliert
 + Installer löscht sich nun selbst am Ende der Installation
++ jscolor aktualisiert (Version 2.0.4)
 # Fehlermeldung auf 404er Fehlerseiten in der Funktion Template::getHeadline() behoben
 # Funktionen zur Ausgabe der Metadaten einer Seite entsprechen nun dem Namensschema
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
@@ -30,6 +32,7 @@
 # Doppelklick auf "Paket installieren" Button erzeugt nun keinen Fehler mehr
 # article_date wird nun korrekt gespeichert
 # Username ist jetzt Unique
+- Funktion SecurityHelper::hash_password() entfernt
 # get_article_meta gibt nun article_date als Unix_Timestamp zurück
 # Umgang mit leerem article_date korrigiert
 - fast_mode entfernt
@@ -360,7 +363,6 @@ Speicherplatz zu sparen.
 ===== Neues in UliCMS 9.0.1 Refresh 1 ====
 
 + mPDF Framework aus dem Core entfernt, um Speicherplatz zu sparen. Sofern PDF Unterstützung benötigt wird, kann
-
 mPDF unter der folgenden URL seperat heruntergeladen werden:
   http://www.ulicms.de/mpdf_supplement.html
 + CKEditor 4.5.3 Supplement bereits integriert
