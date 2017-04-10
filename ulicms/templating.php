@@ -171,7 +171,7 @@ function get_article_meta($page = null) {
 		$page = get_requested_pagename ();
 	}
 	$result = null;
-	$sql = "SELECT `article_author_name`, `article_author_email`, `article_date`, `article_image`, `excerpt` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
+	$sql = "SELECT `article_author_name`, `article_author_email`, UNIX_TIMESTAMP(article_date) as article_date, `article_image`, `excerpt` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . Database::escapeValue ( $_SESSION ["language"] ) . "'";
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = Database::fetchObject ( $query );
