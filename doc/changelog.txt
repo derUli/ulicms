@@ -19,6 +19,7 @@
   * Database::fetchSingleOrDefault()
   * Database::any()
 + Globale Funktion find_all_folders() hinzugefügt
++ Model-Klassen User, Group und UserManager hinzugefügt
 + "Nachricht des Tages" je Sprache
 + Einstellung "Zugriffsbeschränkungen für neue Inhalte" hinzugefügt
 + Das Modul oneclick_upgrade ist nun vorinstalliert
