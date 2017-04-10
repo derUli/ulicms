@@ -26,13 +26,13 @@ class CommentManager {
 			Settings::set ( "contact_form_refused_spam_mails", Settings::get ( "contact_form_refused_spam_mails" ) + 1 );
 		}
 		
-		if (isNullOrEmpty ( $args ["parent_id"] )) {
+		if (StringHelper::isNullOrEmpty ( $args ["parent_id"] )) {
 			$errors [] = get_translation ( "parent_id_is_empty" );
 		}
-		if (isNullOrEmpty ( $args ["article_author_name"] )) {
+		if (StringHelper::isNullOrEmpty ( $args ["article_author_name"] )) {
 			$errors [] = get_translation ( "author_is_empty" );
 		}
-		if (isNullOrEmpty ( $args ["content"] )) {
+		if (StringHelper::isNullOrEmpty ( $args ["content"] )) {
 			$errors [] = get_translation ( "message_is_empty" );
 		}
 		

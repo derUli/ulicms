@@ -252,9 +252,11 @@ function strbool($value) {
 	return ($value) ? 'true' : 'false';
 }
 function isNullOrEmpty($variable) {
+	trigger_error ( "global function isNullOrEmpty() is deprecated. Plese use StringHelper::isNullOrEmpty() instead.", E_USER_WARNING );
 	return (is_null ( $variable ) or empty ( $variable ));
 }
 function isNotNullOrEmpty($variable) {
+	trigger_error ( "global function isNotNullOrEmpty() is deprecated. Plese use StringHelper::isNotNullOrEmpty() instead.", E_USER_WARNING );
 	return (! is_null ( $variable ) and ! empty ( $variable ));
 }
 function convertLineEndingsToLF($s) {

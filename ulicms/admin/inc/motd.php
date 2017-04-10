@@ -12,7 +12,7 @@ if ($acl->hasPermission ( "motd" )) {
 	<?php
 	$languages = getAllLanguages ();
 	if (isset ( $_POST ["motd"] )) {
-		if (isNullOrEmpty ( Request::getVar ( "language" ) )) {
+		if (StringHelper::isNullOrEmpty ( Request::getVar ( "language" ) )) {
 			Settings::set ( "motd", $_POST ["motd"] );
 		} else {
 			Settings::set ( "motd_" . Request::getVar ( "language" ), Request::getVar ( "motd" ) );
