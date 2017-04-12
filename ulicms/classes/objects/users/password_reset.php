@@ -11,4 +11,14 @@ class PasswordReset {
 		Database::pQuery ( $sql, $args, true );
 		return $token;
 	}
+	public function sendMail($token, $email, $ip) {
+		throw new NotImplementedException ();
+	}
+	public function deleteToken($token) {
+		$sql = "delete from {prefix}password_reset where token = ?";
+		$args = array (
+				strval ( $token ) 
+		);
+		Database::pQuery ( $sql, $args, true );
+	}
 }
