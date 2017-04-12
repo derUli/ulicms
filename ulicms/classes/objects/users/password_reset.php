@@ -12,11 +12,12 @@ class PasswordReset {
 		return $token;
 	}
 	public function sendMail($token, $to, $ip) {
+		ViewBag::set ( "token", $token );
+		ViewBag::set ( "ip", $ip );
+		
 		$message = Template::executeDefaultOrOwnTemplate ( "email/password_reset" );
 		$subject = get_translation ( "reset_password_subject" );
 		$from = Settings::get ( "email" );
-		ViewBag::set ( "token", $token );
-		ViewBag::set ( "ip", $ip );
 		$headers = "From: $from\n";
 		$headers .= "Content-type: text/plain; charset=utf-8";
 		Mailer::send ( $to, $subject, $message, $headers );
