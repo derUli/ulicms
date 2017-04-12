@@ -702,4 +702,8 @@ define ( "TRANSLATION_NO_LANGUAGE", "Keine Sprache" );
 
 define ( "TRANSLATION_DEFAULT_ACCESS_RESTRICTIONS", "Zugriffsbeschränkungen für neue Inhalte" );
 
+define ( "TRANSLATION_PASSWORD_RESET1", "Jemand mit der IP-Adresse %ip% hat das Zurücksetzen Ihres Passworts auf der Domain %domain% angefordert." );
+define ( "TRANSLATION_PASSWORD_RESET2", "Klicken Sie bitte den folgenden Link an, um ein neues Passwort zu setzen:" );
+define ( "TRANSLATION_PASSWORD_RESET3", "Falls Sie das Zurücksetzen Ihres Passworts nicht angefordert haben, ignorieren Sie diese E-Mail bitte einfach." );
+
 add_hook ( "lang_de" );
