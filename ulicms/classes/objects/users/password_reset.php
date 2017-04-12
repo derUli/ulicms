@@ -17,7 +17,7 @@ class PasswordReset {
 	public function getPasswordResetLink($token) {
 		$url = getBaseFolderURL ();
 		$url = rtrim ( $url, "/" );
-		if (is_admin_dir ()) {
+		if (!is_admin_dir ()) {
 			$url .= "/admin";
 		}
 		$url .= "/?password_reset_token=" . $token;
