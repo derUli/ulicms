@@ -7,6 +7,19 @@ if (isset ( $_GET ["destroy"] ) or $_GET ["action"] == "destroy") {
 	exit ();
 }
 
+if (isset ( $_REQUEST ["reset_password_token"] )) {
+	$reset = new PasswordReset ();
+	$token = $reset->getToken ( $_REQUEST ["reset_password_token"] );
+	if ($token) {
+		$user_id = $token->user_id;
+		$user = new User ( $user_id );
+		// @TODO Einloggen
+		$token = $reset->deleteToken ( $_REQUEST ["reset_password_token"] );
+	} else {
+		// @TODO Fehler anzeigen
+	}
+}
+
 if (isset ( $_POST ["login"] )) {
 	if (isset ( $_POST ["system_language"] )) {
 		$_SESSION ["system_language"] = basename ( $_POST ["system_language"] );

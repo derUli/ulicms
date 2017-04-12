@@ -17,20 +17,23 @@ class PasswordReset {
 	public function getPasswordResetLink($token) {
 		$url = getBaseFolderURL ();
 		$url = rtrim ( $url, "/" );
-		if (!is_admin_dir ()) {
+		if (! is_admin_dir ()) {
 			$url .= "/admin";
 		}
 		$url .= "/?password_reset_token=" . $token;
 		return $url;
 	}
-	public function checkToken($token, $user_id) {
-		$sql = "select id from {prefix}password_reset where token = ? and user_id = ?";
+	public function getToken($token) {
+		$sql = "select * from {prefix}password_reset where token = ?";
 		$args = array (
-				strval ( $token ),
-				intval ( $user_id ) 
+				strval ( $token ) 
 		);
 		$query = Database::pQuery ( $sql, $args, true );
-		return Database::any ( $query );
+		if (Database::any ( $query )) {
+			return Database::fetchObject ( $query );
+		} else {
+			return null;
+		}
 	}
 	public function deleteToken($token) {
 		$sql = "delete from {prefix}password_reset where token = ?";
