@@ -12,7 +12,7 @@ class PasswordReset {
 		return $token;
 	}
 	public function sendMail($token, $to, $ip) {
-		ViewBag::set ( "token", $token );
+		ViewBag::set ( "url", $this->getPasswordResetLink ( $token ) );
 		ViewBag::set ( "ip", $ip );
 		
 		$message = Template::executeDefaultOrOwnTemplate ( "email/password_reset" );
