@@ -6,7 +6,7 @@ class PasswordReset {
 		$sql = "INSERT INTO {prefix}password_reset (token, user_id) values (?, ?)";
 		$args = array (
 				$token,
-				$user_id 
+				$user_id
 		);
 		Database::pQuery ( $sql, $args, true );
 		return $token;
@@ -16,7 +16,7 @@ class PasswordReset {
 		ViewBag::set ( "firstname", $firstname );
 		ViewBag::set ( "lastname", $lastname );
 		ViewBag::set ( "ip", $ip );
-		
+
 		$message = Template::executeDefaultOrOwnTemplate ( "email/password_reset" );
 		$subject = get_translation ( "reset_password_subject" );
 		$from = Settings::get ( "email" );
@@ -30,13 +30,13 @@ class PasswordReset {
 		if (! is_admin_dir ()) {
 			$url .= "/admin";
 		}
-		$url .= "/?password_reset_token=" . $token;
+		$url .= "/?reset_password_token=" . $token;
 		return $url;
 	}
 	public function getToken($token) {
 		$sql = "select * from {prefix}password_reset where token = ?";
 		$args = array (
-				strval ( $token ) 
+				strval ( $token )
 		);
 		$query = Database::pQuery ( $sql, $args, true );
 		if (Database::any ( $query )) {
@@ -48,7 +48,7 @@ class PasswordReset {
 	public function deleteToken($token) {
 		$sql = "delete from {prefix}password_reset where token = ?";
 		$args = array (
-				strval ( $token ) 
+				strval ( $token )
 		);
 		Database::pQuery ( $sql, $args, true );
 	}
