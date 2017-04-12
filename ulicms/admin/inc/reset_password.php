@@ -13,7 +13,7 @@ if (isset ( $_POST ["username"] ) and ! empty ( $_POST ["username"] )) {
 	if ($user) {
 		$passwordReset = new PasswordReset ();
 		$token = $passwordReset->addToken ( $user ["id"] );
-		$passwordReset->sendMail ( $token, $user ["email"], get_ip () );
+		$passwordReset->sendMail ( $token, $user ["email"], get_ip (), $user ["firstname"], $user ["lastname"] );
 		$message = get_translation ( "PASSWORD_RESET_SUCCESSFULL" );
 	} else {
 		$message = get_translation ( "NO_SUCH_USER" );

@@ -11,8 +11,10 @@ class PasswordReset {
 		Database::pQuery ( $sql, $args, true );
 		return $token;
 	}
-	public function sendMail($token, $to, $ip) {
+	public function sendMail($token, $to, $ip, $firstname, $lastname) {
 		ViewBag::set ( "url", $this->getPasswordResetLink ( $token ) );
+		ViewBag::set ( "firstname", $firstname );
+		ViewBag::set ( "lastname", $lastname );
 		ViewBag::set ( "ip", $ip );
 		
 		$message = Template::executeDefaultOrOwnTemplate ( "email/password_reset" );
