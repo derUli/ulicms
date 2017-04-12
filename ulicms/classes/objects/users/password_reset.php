@@ -14,6 +14,15 @@ class PasswordReset {
 	public function sendMail($token, $email, $ip) {
 		throw new NotImplementedException ();
 	}
+	public function checkToken($token, $user_id) {
+		$sql = "select id from {prefix}password_reset where token = ? and user_id = ?";
+		$args = array (
+				strval ( $token ),
+				intval ( $user_id ) 
+		);
+		$query = Database::pQuery ( $sql, $args, true );
+		return Database::any ( $query );
+	}
 	public function deleteToken($token) {
 		$sql = "delete from {prefix}password_reset where token = ?";
 		$args = array (
