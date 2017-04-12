@@ -11,8 +11,15 @@ class PasswordReset {
 		Database::pQuery ( $sql, $args, true );
 		return $token;
 	}
-	public function sendMail($token, $email, $ip) {
-		throw new NotImplementedException ();
+	public function sendMail($token, $to, $ip) {
+		$message = Template::executeDefaultOrOwnTemplate ( "email/password_reset" );
+		$subject = get_translation ( "reset_password_subject" );
+		$from = Settings::get ( "email" );
+		ViewBag::set ( "token", $token );
+		ViewBag::set ( "ip", $ip );
+		$headers = "From: $from\n";
+		$headers .= "Content-type: text/plain; charset=utf-8";
+		Mailer::send ( $to, $subject, $message, $headers );
 	}
 	public function getPasswordResetLink($token) {
 		$url = getBaseFolderURL ();
