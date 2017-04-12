@@ -490,7 +490,7 @@ define ( "TRANSLATION_RESET_PASSWORD_SUBJECT", "Reset Password" );
 define ( "TRANSLATION_RESET_PASSWORD", "Reset Password" );
 
 define ( "TRANSLATION_NO_SUCH_USER", "There is no such user." );
-define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Your password has been reset. You will receive an E-Mail containing your new password." );
+define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "An email with a link to reset your password was sent" );
 
 define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "You must change your password." );
 
@@ -710,6 +710,5 @@ define ( "TRANSLATION_INSTALL_ANOTHER_PACKAGE", "Install another Package" );
 define ( "TRANSLATION_NO_LANGUAGE", "No Language" );
 
 define ( "TRANSLATION_DEFAULT_ACCESS_RESTRICTIONS", "Edit Access Restrictions for new Contents" );
-
 
 add_hook ( "lang_en" );

@@ -8,8 +8,12 @@ if (Settings::get ( "disable_password_reset" )) {
 <?php
 $messame = null;
 if (isset ( $_POST ["username"] ) and ! empty ( $_POST ["username"] )) {
-	$username = db_escape ( $_POST ["username"] );
-	if (resetPassword ( $username )) {
+	$username = $_POST ["username"];
+	$user = getUserByName ( $username );
+	if ($user) {
+		$passwordReset = new PasswordReset ();
+		$token = $passwordReset->addToken ( $user ["id"] );
+		$passwordReset->sendMail ( $token, $user ["email"], get_ip () );
 		$message = get_translation ( "PASSWORD_RESET_SUCCESSFULL" );
 	} else {
 		$message = get_translation ( "NO_SUCH_USER" );
