@@ -1,1 +1,1 @@
-<?php translate("password_reset_email_1")?>
+Insert Password Reset Stuff here
