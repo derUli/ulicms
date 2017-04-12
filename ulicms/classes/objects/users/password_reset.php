@@ -14,6 +14,15 @@ class PasswordReset {
 	public function sendMail($token, $email, $ip) {
 		throw new NotImplementedException ();
 	}
+	public function getPasswordResetLink($token) {
+		$url = getBaseFolderURL ();
+		$url = rtrim ( $url, "/" );
+		if (is_admin_dir ()) {
+			$url .= "/admin";
+		}
+		$url .= "/?password_reset_token=" . $token;
+		return $url;
+	}
 	public function checkToken($token, $user_id) {
 		$sql = "select id from {prefix}password_reset where token = ? and user_id = ?";
 		$args = array (
