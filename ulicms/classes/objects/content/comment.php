@@ -1,5 +1,5 @@
 <?php
-class Comment extends Content {
+class Comment extends Page {
 	// @FIXME: Variablen alle private machen und getter und setter implementieren
 	protected $type = "comment";
 	public $comment_homepage = null;
@@ -8,7 +8,7 @@ class Comment extends Content {
 			$this->custom_data = array ();
 		}
 	}
-	private function fillVarsByResult($result) {
+	protected function fillVarsByResult($result) {
 		parent::fillVarsByResult ( $result );
 		$this->comment_homepage = $result->comment_homepage;
 	}
