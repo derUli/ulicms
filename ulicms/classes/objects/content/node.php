@@ -1,6 +1,6 @@
 <?php
 class Node extends Link {
-	protected $type = "node";
+	public $type = "node";
 	public $redirection = "#";
 	protected function fillVarsByResult($result) {
 		parent::fillVarsByResult ( $result );

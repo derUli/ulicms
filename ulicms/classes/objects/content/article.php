@@ -6,7 +6,7 @@ class Article extends Page {
 	public $article_date = null;
 	public $article_image = "";
 	public $excerpt = "";
-	protected $type = "article";
+	public $type = "article";
 	protected function fillVarsByResult($result) {
 		parent::fillVarsByResult ( $result );
 		$this->article_author_email = $result->article_author_email;

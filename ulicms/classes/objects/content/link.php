@@ -1,7 +1,7 @@
 <?php
 class Link extends Page {
 	public $redirection = "";
-	protected $type = "link";
+	public $type = "link";
 	public function save() {
 		$retval = null;
 		if ($this->id === null) {

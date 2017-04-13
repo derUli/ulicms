@@ -1,7 +1,7 @@
 <?php
 class Comment extends Page {
 	// @FIXME: Variablen alle private machen und getter und setter implementieren
-	protected $type = "comment";
+	public $type = "comment";
 	public $comment_homepage = null;
 	public function __construct() {
 		if ($this->custom_data === null) {

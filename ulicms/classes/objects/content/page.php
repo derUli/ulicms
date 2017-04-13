@@ -26,7 +26,7 @@ class Page extends Content {
 	public $html_file = null;
 	public $theme = null;
 	public $custom_data = null;
-	protected $type = "page";
+	public $type = "page";
 	public $og_title = "";
 	public $og_type = "";
 	public $og_image = "";

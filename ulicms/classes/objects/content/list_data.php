@@ -9,7 +9,7 @@ class List_Data extends Content {
 	public $order_direction = "asc";
 	public $limit = null;
 	public $use_pagination = false;
-	protected $type = null;
+	public $type = null;
 	public function __construct($id = null) {
 		if ($id !== null) {
 			$this->loadByID ( $id );
