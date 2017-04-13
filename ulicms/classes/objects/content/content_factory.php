@@ -92,8 +92,7 @@ class ContentFactory {
 		if ($order_direction != "desc") {
 			$order_direction = "asc";
 		}
-		
-		$sql .= " 1=1 order by $order_by $order_direction";
+		$sql .= " type <> '$type' order by $order_by $order_direction";
 		
 		if (! is_null ( $limit ) and $limit > 0) {
 			$sql .= " limit " . $limit;
