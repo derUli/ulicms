@@ -2,9 +2,23 @@
 if (isset ( $_GET ["destroy"] ) or $_GET ["action"] == "destroy") {
 	db_query ( "UPDATE " . tbname ( "users" ) . " SET last_action = 0 WHERE id = " . $_SESSION ["login_id"] );
 	header ( "Location: index.php" );
-	
 	session_destroy ();
 	exit ();
+}
+
+if (isset ( $_REQUEST ["reset_password_token"] )) {
+	$reset = new PasswordReset ();
+	$token = $reset->getToken ( $_REQUEST ["reset_password_token"] );
+	if ($token) {
+		$user_id = $token->user_id;
+		$user = new User ( $user_id );
+		$user->setRequirePasswordChange ( 1 );
+		$user->save ();
+		register_session ( getUserById ( $user_id ) );
+		$token = $reset->deleteToken ( $_REQUEST ["reset_password_token"] );
+	} else {
+		// @FIXME Fehler anzeigen "Token ungültig"
+	}
 }
 
 if (isset ( $_POST ["login"] )) {

@@ -24,6 +24,3 @@ function translation($name, $placeholders = array()) {
 function translate($name, $placeholders = array()) {
 	translation ( $name, $placeholders );
 }
-function t($name, $placeholders = array()) {
-	translation ( $name, $placeholders );
-}

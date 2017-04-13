@@ -480,7 +480,7 @@ define ( "TRANSLATION_RESET_PASSWORD_SUBJECT", "Passwort zurücksetzen" );
 define ( "TRANSLATION_RESET_PASSWORD", "Passwort zurücksetzen" );
 
 define ( "TRANSLATION_NO_SUCH_USER", "Es existiert kein Benutzerkonto mit diesem Namen." );
-define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie bekommen demnächst eine E-Mail mit einem neuen Passwort zugeschickt." );
+define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Sie bekommen demnächst eine E-Mail mit einem Link zum Zurücksetzen des Passworts zugeschickt." );
 
 define ( "TRANSLATION_ENABLE_PASSWORD_RESET", "Passwort kann zurückgesetzt werden" );
 
@@ -701,5 +701,9 @@ define ( "TRANSLATION_INSTALL_ANOTHER_PACKAGE", "Ein weiteres Paket installieren
 define ( "TRANSLATION_NO_LANGUAGE", "Keine Sprache" );
 
 define ( "TRANSLATION_DEFAULT_ACCESS_RESTRICTIONS", "Zugriffsbeschränkungen für neue Inhalte" );
+
+define ( "TRANSLATION_PASSWORD_RESET1", "Jemand mit der IP-Adresse %ip% hat das Zurücksetzen Ihres Passworts auf der Domain %domain% angefordert." );
+define ( "TRANSLATION_PASSWORD_RESET2", "Klicken Sie bitte den folgenden Link an, um ein neues Passwort zu setzen:" );
+define ( "TRANSLATION_PASSWORD_RESET3", "Falls Sie das Zurücksetzen Ihres Passworts nicht angefordert haben, ignorieren Sie diese E-Mail bitte einfach." );
 
 add_hook ( "lang_de" );
