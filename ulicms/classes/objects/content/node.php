@@ -1,8 +1,9 @@
 <?php
 class Node extends Link {
-	function __construct() {
-		parent::__construct ();
-		$this->type = "node";
+	protected $type = "node";
+	protected $redirection = "#";
+	protected function fillVarsByResult($result) {
+		parent::fillVarsByResult ( $result );
 		$this->redirection = "#";
 	}
 }
