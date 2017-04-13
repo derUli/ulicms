@@ -43,7 +43,7 @@ if ($id !== null) {
   <div class="row article-list-row">
 		<p>
 			<strong><a
-				href="<?php Template::escape(buildSEOUrl($entry->systemname));?>"><?php Template::escape($entry->title);?></a></strong>
+				href="<?php Template::escape(buildSEOUrl($entry->systemname, $entry->redirection));?>"><?php Template::escape($entry->title);?></a></strong>
 		</p>
 
 		<div class="col-sm-5">
@@ -66,7 +66,8 @@ if ($id !== null) {
 
 	<?php echo $excerpt;?>
 	<p>
-				<a href="<?php Template::escape(buildSEOUrl($entry->systemname));?>"><?php translate("readmore");?></a>
+				<a
+					href="<?php Template::escape(buildSEOUrl($entry->systemname, $entry->redirection));?>"><?php translate("readmore");?></a>
 			</p>
 		</div>
 	</div>

@@ -4,6 +4,7 @@ class TypeMapper {
 			"page" => "Page",
 			"list" => "Content_List",
 			"node" => "Node",
+			"link" => "Link",
 			"module" => "Module_Page",
 			"video" => "Video_Page",
 			"audio" => "Audio_Page",
