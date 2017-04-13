@@ -1,6 +1,5 @@
 <?php
 class Page extends Content {
-	// @FIXME: Variablen alle private machen und getter und setter implementieren
 	public $id = null;
 	public $systemname = "";
 	public $title = "";
@@ -32,6 +31,7 @@ class Page extends Content {
 	public $og_type = "";
 	public $og_image = "";
 	public $og_description = "";
+	public $hidden = 0;
 	public function __construct() {
 		if ($this->custom_data === null) {
 			$this->custom_data = array ();
@@ -73,6 +73,7 @@ class Page extends Content {
 		$this->og_image = $result->og_image;
 		$this->og_description = $result->og_description;
 		$this->cache_control = $result->cache_control;
+		$this->hidden = $result->hidden;
 	}
 	public function loadByID($id) {
 		$query = DB::pQuery ( "SELECT * FROM `{prefix}content` where id = ?", array (
@@ -108,7 +109,7 @@ class Page extends Content {
 	public function create() {
 		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category,
 				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
-				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control) VALUES (";
+				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->title ) . "',";
@@ -178,7 +179,8 @@ class Page extends Content {
 		$sql .= "'" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_image ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_description ) . "', ";
-		$sql .= "'" . DB::escapeValue ( $this->cache_control ) . "' ";
+		$sql .= "'" . DB::escapeValue ( $this->cache_control ) . "', ";
+		$sql .= DB::escapeValue ( $this->hidden );
 		$sql .= ")";
 		
 		$result = DB::Query ( $sql ) or die ( DB::error () );
@@ -262,6 +264,7 @@ class Page extends Content {
 		$sql .= "og_type='" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "og_image='" . DB::escapeValue ( $this->og_image ) . "',";
 		$sql .= "og_description='" . DB::escapeValue ( $this->og_description ) . "', ";
+		$sql .= "hidden='" . DB::escapeValue ( $this->hidden ) . "', ";
 		$sql .= "cache_control='" . DB::escapeValue ( $this->cache_control ) . "' ";
 		
 		$sql .= " WHERE id = " . $this->id;
