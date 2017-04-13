@@ -1,7 +1,7 @@
 <?php
 class Module_Page extends Page {
 	public $module = null;
-	private function fillVarsByResult($result) {
+	protected function fillVarsByResult($result) {
 		$this->id = $result->id;
 		$this->systemname = $result->systemname;
 		$this->title = $result->title;

@@ -38,7 +38,7 @@ class Page extends Content {
 			$this->custom_data = array ();
 		}
 	}
-	private function fillVarsByResult($result) {
+	protected function fillVarsByResult($result) {
 		$this->id = $result->id;
 		$this->systemname = $result->systemname;
 		$this->title = $result->title;
@@ -69,7 +69,7 @@ class Page extends Content {
 		}
 		$this->custom_data = json_decode ( $result->custom_data, true );
 		
-		$this->type = "page";
+		$this->type = $result->type;
 		$this->og_title = $result->og_title;
 		$this->og_type = $result->og_type;
 		$this->og_image = $result->og_image;
@@ -77,19 +77,20 @@ class Page extends Content {
 		$this->cache_control = $result->cache_control;
 	}
 	public function loadByID($id) {
-		$id = intval ( $id );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where id = " . $id . " and (`type` = 'page' or `type` = 'link' or `type` = 'node')" );
+		$query = DB::pQuery ( "SELECT * FROM `{prefix}content` where id = ?", array (
+				intval ( $id ) 
+		), true );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );
 		} else {
-			throw new Exception ( "No page with id $id" );
+			throw new Exception ( "No content with id $id" );
 		}
 	}
 	public function loadBySystemnameAndLanguage($name, $language) {
 		$name = DB::escapeValue ( $name );
 		$language = DB::escapeValue ( $language );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language' and (`type` = 'page' or `type` = 'link' or type='node')" );
+		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language'" );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );
