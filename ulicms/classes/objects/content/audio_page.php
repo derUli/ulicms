@@ -1,9 +1,11 @@
 <?php
 class Audio_Page extends Page {
 	public $audio = null;
+	public $text_position = "after";
 	protected function fillVarsByResult($result) {
 		parent::fillVarsByResult ( $result );
 		$this->audio = $result->audio;
+		$this->text_position = $result->text_position;
 	}
 	public function save() {
 		$retval = null;
@@ -21,9 +23,10 @@ class Audio_Page extends Page {
 			return $this->create ();
 		}
 		parent::update ();
-		$sql = "update {prefix}content set audio = ? where id = ?";
+		$sql = "update {prefix}content set audio = ?, text_position = ? where id = ?";
 		$args = array (
 				$this->audio,
+				$this->text_position,
 				$this->id 
 		);
 		

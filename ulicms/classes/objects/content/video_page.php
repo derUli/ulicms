@@ -1,9 +1,11 @@
 <?php
 class Video_Page extends Page {
 	public $video = null;
+	public $text_position = "after";
 	protected function fillVarsByResult($result) {
 		parent::fillVarsByResult ( $result );
-		$this->video = $result->audio;
+		$this->video = $result->video;
+		$this->text_position = $result->text_position;
 	}
 	public function save() {
 		$retval = null;
@@ -21,9 +23,10 @@ class Video_Page extends Page {
 			return $this->create ();
 		}
 		parent::update ();
-		$sql = "update {prefix}content set video = ? where id = ?";
+		$sql = "update {prefix}content set video = ?, text_position = ? where id = ?";
 		$args = array (
 				$this->video,
+				$this->text_position,
 				$this->id 
 		);
 		
