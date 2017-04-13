@@ -16,7 +16,6 @@ class Page extends Content {
 	public $autor = 1;
 	public $lastchangeby = 1;
 	public $views = 0;
-	public $redirection = "";
 	public $menu = "top";
 	public $position = 0;
 	public $cache_control = "auto";
@@ -54,7 +53,6 @@ class Page extends Content {
 		$this->autor = $result->autor;
 		$this->lastchangeby = $result->lastchangeby;
 		$this->views = $result->views;
-		$this->redirection = $result->redirection;
 		$this->menu = $result->menu;
 		$this->position = $result->position;
 		$this->parent = $result->parent;
@@ -109,8 +107,7 @@ class Page extends Content {
 	}
 	public function create() {
 		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category,
-				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views,
-				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
+				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
 				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
@@ -136,12 +133,6 @@ class Page extends Content {
 		$sql .= intval ( $this->lastchangeby ) . ",";
 		// Views
 		$sql .= "0,";
-		
-		if ($this->redirection === null) {
-			$sql .= " NULL ,";
-		} else {
-			$sql .= "'" . DB::escapeValue ( $this->redirection ) . "',";
-		}
 		
 		$sql .= "'" . DB::escapeValue ( $this->menu ) . "',";
 		$sql .= intval ( $this->position ) . ",";
@@ -226,12 +217,6 @@ class Page extends Content {
 		$sql .= "lastmodified=" . intval ( $this->lastmodified ) . ",";
 		$sql .= "autor=" . intval ( $this->autor ) . ",";
 		$sql .= "lastchangeby=" . intval ( $this->lastchangeby ) . ",";
-		
-		if ($this->redirection === null) {
-			$sql .= "redirection = NULL ,";
-		} else {
-			$sql .= "redirection = '" . DB::escapeValue ( $this->redirection ) . "',";
-		}
 		
 		$sql .= "menu='" . DB::escapeValue ( $this->menu ) . "',";
 		$sql .= "position=" . intval ( $this->position ) . ",";
