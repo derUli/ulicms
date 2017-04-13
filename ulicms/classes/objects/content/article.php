@@ -26,10 +26,10 @@ class Article extends Page {
 		return $retval;
 	}
 	public function update() {
-		parent::update ();
 		if (is_null ( $this->id )) {
 			return false;
 		}
+		parent::update ();
 		$sql = "update {prefix} content set article_author_email = ?, article_author_name = ?, article_image = ?, article_date = ?, excerpt = ? where id = ?";
 		$args = array (
 				$this->article_author_email,
