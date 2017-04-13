@@ -52,6 +52,9 @@ if ($id !== null) {
 				if ($meta and ! empty ( $meta->article_image )) {
 					$article_image = $meta->article_image;
 				}
+				if ($entry instanceof Image_Page and StringHelper::isNotNullOrEmpty ( $entry->image_url )) {
+					$article_image = $entry->image_url;
+				}
 				?>
 		<p>
 				<a href="<?php Template::escape(buildSEOUrl($entry->systemname));?>"
