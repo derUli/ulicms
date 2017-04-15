@@ -1,10 +1,10 @@
 <?php
 // this class contains functions for managing user accounts
 function getUsers() {
-	$query = Database::query ( "SELECT username FROM " . tbname ( "users" ) . " ORDER by username" );
+	$query = Database::query ( "SELECT id, username FROM " . tbname ( "users" ) . " ORDER by username" );
 	$users = Array ();
 	while ( $row = db_fetch_object ( $query ) ) {
-		array_push ( $users, $row->username );
+		array_push ( $users, $row );
 	}
 	
 	return $users;

@@ -28,9 +28,6 @@ class ContentFactory {
 		if (isset ( $mappings [$type] ) and StringHelper::isNotNullOrEmpty ( $mappings [$type] ) and class_exists ( $mappings [$type] )) {
 			$retval = new $mappings [$type] ();
 			$retval->loadByID ( $row->id );
-		} else if ($row->type == "comment") {
-			$retval = new Comment ();
-			$retval->loadByID ( $row->id );
 		}
 		
 		return $retval;
@@ -95,8 +92,7 @@ class ContentFactory {
 		if ($order_direction != "desc") {
 			$order_direction = "asc";
 		}
-		
-		$sql .= " 1=1 order by $order_by $order_direction";
+		$sql .= " type <> '$type' order by $order_by $order_direction";
 		
 		if (! is_null ( $limit ) and $limit > 0) {
 			$sql .= " limit " . $limit;

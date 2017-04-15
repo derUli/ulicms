@@ -1,6 +1,5 @@
 <?php
 class Page extends Content {
-	// @FIXME: Variablen alle private machen und getter und setter implementieren
 	public $id = null;
 	public $systemname = "";
 	public $title = "";
@@ -16,7 +15,6 @@ class Page extends Content {
 	public $autor = 1;
 	public $lastchangeby = 1;
 	public $views = 0;
-	public $redirection = "";
 	public $menu = "top";
 	public $position = 0;
 	public $cache_control = "auto";
@@ -28,17 +26,18 @@ class Page extends Content {
 	public $html_file = null;
 	public $theme = null;
 	public $custom_data = null;
-	protected $type = "page";
+	public $type = "page";
 	public $og_title = "";
 	public $og_type = "";
 	public $og_image = "";
 	public $og_description = "";
+	public $hidden = 0;
 	public function __construct() {
 		if ($this->custom_data === null) {
 			$this->custom_data = array ();
 		}
 	}
-	private function fillVarsByResult($result) {
+	protected function fillVarsByResult($result) {
 		$this->id = $result->id;
 		$this->systemname = $result->systemname;
 		$this->title = $result->title;
@@ -54,7 +53,6 @@ class Page extends Content {
 		$this->autor = $result->autor;
 		$this->lastchangeby = $result->lastchangeby;
 		$this->views = $result->views;
-		$this->redirection = $result->redirection;
 		$this->menu = $result->menu;
 		$this->position = $result->position;
 		$this->parent = $result->parent;
@@ -69,27 +67,29 @@ class Page extends Content {
 		}
 		$this->custom_data = json_decode ( $result->custom_data, true );
 		
-		$this->type = "page";
+		$this->type = $result->type;
 		$this->og_title = $result->og_title;
 		$this->og_type = $result->og_type;
 		$this->og_image = $result->og_image;
 		$this->og_description = $result->og_description;
 		$this->cache_control = $result->cache_control;
+		$this->hidden = $result->hidden;
 	}
 	public function loadByID($id) {
-		$id = intval ( $id );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where id = " . $id . " and (`type` = 'page' or `type` = 'link' or `type` = 'node')" );
+		$query = DB::pQuery ( "SELECT * FROM `{prefix}content` where id = ?", array (
+				intval ( $id ) 
+		), true );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );
 		} else {
-			throw new Exception ( "No page with id $id" );
+			throw new Exception ( "No content with id $id" );
 		}
 	}
 	public function loadBySystemnameAndLanguage($name, $language) {
 		$name = DB::escapeValue ( $name );
 		$language = DB::escapeValue ( $language );
-		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language' and (`type` = 'page' or `type` = 'link' or type='node')" );
+		$query = DB::query ( "SELECT * FROM `" . tbname ( "content" ) . "` where `systemname` = '$name' and `language` = '$language'" );
 		if (DB::getNumRows ( $query ) > 0) {
 			$result = DB::fetchObject ( $query );
 			$this->fillVarsByResult ( $result );
@@ -108,9 +108,8 @@ class Page extends Content {
 	}
 	public function create() {
 		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category,
-				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views,
-				redirection, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
-				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control) VALUES (";
+				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
+				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->title ) . "',";
@@ -135,12 +134,6 @@ class Page extends Content {
 		$sql .= intval ( $this->lastchangeby ) . ",";
 		// Views
 		$sql .= "0,";
-		
-		if ($this->redirection === null) {
-			$sql .= " NULL ,";
-		} else {
-			$sql .= "'" . DB::escapeValue ( $this->redirection ) . "',";
-		}
 		
 		$sql .= "'" . DB::escapeValue ( $this->menu ) . "',";
 		$sql .= intval ( $this->position ) . ",";
@@ -186,7 +179,8 @@ class Page extends Content {
 		$sql .= "'" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_image ) . "',";
 		$sql .= "'" . DB::escapeValue ( $this->og_description ) . "', ";
-		$sql .= "'" . DB::escapeValue ( $this->cache_control ) . "' ";
+		$sql .= "'" . DB::escapeValue ( $this->cache_control ) . "', ";
+		$sql .= DB::escapeValue ( $this->hidden );
 		$sql .= ")";
 		
 		$result = DB::Query ( $sql ) or die ( DB::error () );
@@ -225,12 +219,6 @@ class Page extends Content {
 		$sql .= "lastmodified=" . intval ( $this->lastmodified ) . ",";
 		$sql .= "autor=" . intval ( $this->autor ) . ",";
 		$sql .= "lastchangeby=" . intval ( $this->lastchangeby ) . ",";
-		
-		if ($this->redirection === null) {
-			$sql .= "redirection = NULL ,";
-		} else {
-			$sql .= "redirection = '" . DB::escapeValue ( $this->redirection ) . "',";
-		}
 		
 		$sql .= "menu='" . DB::escapeValue ( $this->menu ) . "',";
 		$sql .= "position=" . intval ( $this->position ) . ",";
@@ -276,6 +264,7 @@ class Page extends Content {
 		$sql .= "og_type='" . DB::escapeValue ( $this->og_type ) . "',";
 		$sql .= "og_image='" . DB::escapeValue ( $this->og_image ) . "',";
 		$sql .= "og_description='" . DB::escapeValue ( $this->og_description ) . "', ";
+		$sql .= "hidden='" . DB::escapeValue ( $this->hidden ) . "', ";
 		$sql .= "cache_control='" . DB::escapeValue ( $this->cache_control ) . "' ";
 		
 		$sql .= " WHERE id = " . $this->id;
