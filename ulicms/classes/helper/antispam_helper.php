@@ -117,9 +117,9 @@ class AntispamHelper {
 		return $spam;
 	}
 	public static function isChinese($str) {
-		returnpreg_match ( "/\p{Han}+/u", $str );
+		return preg_match ( "/\p{Han}+/u", $str );
 	}
 	public static function isCyrillic($str) {
-		$n = preg_match_all ( '/\p{Cyrillic}/u', $str );
+		return ( bool ) preg_match ( '/\p{Cyrillic}/u', $str );
 	}
 }
