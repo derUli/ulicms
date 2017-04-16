@@ -1,5 +1,5 @@
 <?php
-class antispamHelper {
+class AntispamHelper {
 	// checking if this Country is blocked by spamfilter
 	public static function isCountryBlocked() {
 		$country_blacklist = Settings::get ( "country_blacklist" );
@@ -115,5 +115,11 @@ class antispamHelper {
 		
 		// spam status zurueckgeben
 		return $spam;
+	}
+	public static function isChinese($str) {
+		returnpreg_match ( "/\p{Han}+/u", $str );
+	}
+	public static function isCyrillic($str) {
+		$n = preg_match_all ( '/\p{Cyrillic}/u', $str );
 	}
 }
