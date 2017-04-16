@@ -41,11 +41,9 @@ function spamFilterEnabledcheckboxChanged(checked){
 	?>>
 		<br />
 		<?php translate("blacklist");?>
-		<br />
-		<textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php
+		<br /> <textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php
 	echo htmlspecialchars ( implode ( explode ( "||", Settings::get ( "spamfilter_words_blacklist" ) ), "\n" ), ENT_QUOTES, "UTF-8" );
-	?></textarea>
-		<br /> <br />
+	?></textarea> <br /> <br />
 
 		<?php translate("spam_countries");?>
 		<br /> <input type="text" name="country_blacklist"
@@ -59,6 +57,13 @@ function spamFilterEnabledcheckboxChanged(checked){
 		echo " checked=\"checked\"";
 	}
 	?>> <label for="disallow_chinese_chars"><?php translate("disallow_chinese_chars");?>
+		</label> <br /> <br /> <input type="checkbox"
+			name="disallow_cyrillic_chars" id="disallow_cyrillic_chars"
+			<?php
+	if (Settings::get ( "disallow_cyrillic_chars" )) {
+		echo " checked=\"checked\"";
+	}
+	?>> <label for="disallow_cyrillic_chars"><?php translate("disallow_cyrillic_chars");?>
 		</label> <br /> <br /> <input type="checkbox"
 			name="check_for_spamhaus" value="yes" id="check_for_spamhaus"
 			<?php
