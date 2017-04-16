@@ -2,7 +2,7 @@
 
 // String contains chinese chars?
 function is_chinese($str) {
-	returnpreg_match ( "/\p{Han}+/u", $str );
+	return preg_match ( "/\p{Han}+/u", $str );
 }
 
 // checking if this Country is blocked by spamfilter
