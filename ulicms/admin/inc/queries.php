@@ -93,10 +93,16 @@ if ($_GET ["action"] == "spam_filter" and isset ( $_POST ["submit_spamfilter_set
 		Settings::set ( "spamfilter_words_blacklist", $blacklist );
 	}
 	
-	if (isset ( $_POST ["disallow_chinese_chars"] ))
+	if (isset ( $_POST ["disallow_chinese_chars"] )) {
 		Settings::set ( "disallow_chinese_chars", "disallow" );
-	else
+	} else {
 		Settings::delete ( "disallow_chinese_chars" );
+	}
+	if (isset ( $_POST ["disallow_cyrillic_chars"] )) {
+		Settings::set ( "disallow_cyrillic_chars", "disallow" );
+	} else {
+		Settings::delete ( "disallow_cyrillic_chars" );
+	}
 	add_hook ( "after_save_spamfilter_settings" );
 }
 
