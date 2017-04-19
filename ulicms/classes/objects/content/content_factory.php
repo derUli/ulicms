@@ -84,7 +84,7 @@ class ContentFactory {
 		
 		if ($type !== null and $type !== "") {
 			$type = Database::escapeValue ( $type );
-			$sql .= "type = '$type' and ";
+			$sql .= "type = '$type'";
 		}
 		
 		$order_by = Database::escapeName ( $order_by );
@@ -92,7 +92,7 @@ class ContentFactory {
 		if ($order_direction != "desc") {
 			$order_direction = "asc";
 		}
-		$sql .= " type <> '$type' order by $order_by $order_direction";
+		$sql .= " order by $order_by $order_direction";
 		
 		if (! is_null ( $limit ) and $limit > 0) {
 			$sql .= " limit " . $limit;
