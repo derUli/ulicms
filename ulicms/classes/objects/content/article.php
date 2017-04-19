@@ -30,14 +30,15 @@ class Article extends Page {
 			return false;
 		}
 		parent::update ();
-		$sql = "update {prefix} content set article_author_email = ?, article_author_name = ?, article_image = ?, article_date = ?, excerpt = ? where id = ?";
+		$sql = "update {prefix}content set article_author_email = ?, article_author_name = ?, article_image = ?, article_date = ?, excerpt = ? where id = ?";
 		$args = array (
 				$this->article_author_email,
 				$this->article_author_name,
 				$this->article_image,
 				$this->article_date,
 				$this->excerpt,
-				$this->id 
+				$this->id
 		);
+		Database::pQuery($sql, $args, true);
 	}
 }
