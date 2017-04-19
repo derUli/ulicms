@@ -84,8 +84,10 @@ class ContentFactory {
 		
 		if ($type !== null and $type !== "") {
 			$type = Database::escapeValue ( $type );
-			$sql .= "type = '$type'";
+			$sql .= "type = '$type' and ";
 		}
+		
+		$sql .= "1=1 ";
 		
 		$order_by = Database::escapeName ( $order_by );
 		
