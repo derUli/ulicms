@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `{prefix}ulicms_password_reset` (
+CREATE TABLE IF NOT EXISTS `{prefix}password_reset` (
   `token` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
