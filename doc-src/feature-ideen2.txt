@@ -13,7 +13,7 @@
 - Sicherstellen, dass folgende Komponenten aktuell sind
 
 [ ] CKEditor
-[ ] KCFinder
+[X] KCFinder
 [ ] jQuery
 [ ] Mobile_Detect
 [ ] CodeMirror
@@ -37,6 +37,6 @@
     Funktion in doc-src/enforce-www.php 
     Todo: Option in der Datenbank und GUI dafür erstellen
 
-[ ] Ein neues Package System
+[X] Ein neues Package System
 
 [ ] Funktion less Files beim leeren des Caches kompilieren (optional) http://leafo.net/lessphp/
