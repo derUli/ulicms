@@ -1132,7 +1132,7 @@ function the_url() {
 	} else {
 		$dirname = "/";
 	}
-	if ($_SERVER ["SERVER_PORT"] != "80") {
+	if ($_SERVER ["SERVER_PORT"] != "80" && $_SERVER ["SERVER_PORT"] != "443") {
 		$pageURL .= $_SERVER ["SERVER_NAME"] . ":" . $_SERVER ["SERVER_PORT"] . $dirname;
 	} else {
 		$pageURL .= $_SERVER ["SERVER_NAME"] . $dirname;
