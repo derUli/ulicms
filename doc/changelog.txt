@@ -26,7 +26,8 @@
 + Installer löscht sich nun selbst am Ende der Installation
 + jscolor aktualisiert (Version 2.0.4)
 + Option "Kyrillische Schriftzeichen verbieten" hinzugefügt
-# Passwort vergessen verschickt nun Links zum Setzen eines neuen Passworts, statt direkt ein neues Passwort zu vergeben
+# Passwort vergessen verschickt nun Links zum Setzen eines neuen Passworts, 
+  statt direkt ein neues Passwort zu vergeben
 # Fehlermeldung auf 404er Fehlerseiten in der Funktion Template::getHeadline() behoben
 # Funktionen zur Ausgabe der Metadaten einer Seite entsprechen nun dem Namensschema
 # Menüpunkt "Update" wird wieder angezeigt, wenn die Datei "update.php" vorhanden ist
