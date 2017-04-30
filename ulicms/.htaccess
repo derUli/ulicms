@@ -27,6 +27,12 @@ SetOutputFilter DEFLATE
 </IfModule>
 
 # Deny access to wp-config.php file
+<files wp-config.php>
+order allow,deny
+deny from all
+</files>
+
+# Deny access to metadata.json file
 <files metadata.json>
 order allow,deny
 deny from all
