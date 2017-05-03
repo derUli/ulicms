@@ -1,0 +1,13 @@
+{
+	"source" : "extend",
+	"version" : "1.0",
+	"embed" : false,
+	"custom_acl" : ["extend_upgrade_helper"],
+	"admin_permission" : "extend_upgrade_helper",
+	"controllers" : {
+		"ExtendUpgradeHelper" : "controllers/ExtendUpgradeHelper"
+	},
+	"objects" : {
+		"ExtendModule" : "objects/ExtendModule"
+	}
+}
