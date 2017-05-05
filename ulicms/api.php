@@ -596,21 +596,6 @@ function add_hook($name) {
 		}
 	}
 }
-function register_action($name, $file) {
-	global $actions;
-	$modules = getAllModules ();
-	$actions [$name] = $file;
-	return $actions;
-}
-function remove_action($name) {
-	global $actions;
-	$retval = false;
-	if (isset ( $action [$name] )) {
-		unset ( $name );
-		$retval = true;
-	}
-	return $retval;
-}
 function cms_release_year() {
 	$v = new ulicms_version ();
 	echo $v->getReleaseYear ();
