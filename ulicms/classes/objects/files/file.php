@@ -31,5 +31,21 @@ if (! defined ( "KCFINDER_PAGE" )) {
 			$ext = end ( $ext );
 			return $ext;
 		}
+		public static function loadLines($url) {
+			$data = file_get_contents_wrapper ( $url );
+			if (! $data) {
+				return null;
+			}
+			$data = str_replace ( "\r\n", "\n" );
+			$data = explode ( "\n", $data );
+			return $data;
+		}
+		public static function loadLinesAndTrim($url) {
+			$data = self::loadLines ( $url );
+			if ($data) {
+				$data = array_map ( 'trim', $data );
+			}
+			return $data;
+		}
 	}
 }
