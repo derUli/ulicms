@@ -281,6 +281,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		
 		$user_id = get_user_id ();
 		$content_id = db_insert_id ();
+		
 		if ($type == "list") {
 			$list_language = $_POST ["list_language"];
 			if (empty ( $list_language )) {
@@ -341,8 +342,12 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		
 		add_hook ( "after_create_page" );
 		// header("Location: index.php?action=pages_edit&page=".db_insert_id()."#bottom");
-		header ( "Location: index.php?action=pages" );
-		exit ();
+		
+		if ($acl->hasPermission ( "pages_edit_own" ) and $content_id) {
+			Request::redirect ( ModuleHelper::buildActionURL ( "pages_edit", "page=$content_id" ) );
+		} else {
+			Request::redirect ( ModuleHelper::buildActionURL ( "pages" ) );
+		}
 	}
 }
 
