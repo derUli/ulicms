@@ -1,4 +1,7 @@
-﻿===== Neues in UliCMS 2017.3 =====
+﻿===== Neues in UliCMS 2017.4 =====
+# Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet.
+
+===== Neues in UliCMS 2017.3 =====
 
 + Neues Standardtheme "impro17"
 + Shortcut zum Leeren des Caches hinzugefügt
