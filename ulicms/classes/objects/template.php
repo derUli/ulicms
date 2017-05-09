@@ -115,9 +115,13 @@ class Template {
 	public static function getHeadline($format = "<h1>%title%</h1>") {
 		$retval = "";
 		$id = get_ID ();
-		$query = "SELECT show_headline FROM ".tbname("content"). " where id = $id";
-		$query = Database::query($query);
-		$result = Database::fetchObject($query);
+		if (! $id) {
+			$html = str_replace ( "%title%", get_title ( null, true ), $format );
+			return $html;
+		}
+		$query = "SELECT show_headline FROM " . tbname ( "content" ) . " where id = $id";
+		$query = Database::query ( $query );
+		$result = Database::fetchObject ( $query );
 		if ($result->show_headline) {
 			$html = str_replace ( "%title%", get_title ( null, true ), $format );
 		}

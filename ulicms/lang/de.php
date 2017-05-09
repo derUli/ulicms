@@ -9,7 +9,7 @@ define ( "TRANSLATION_LAST_CHANGES", "Letzte Änderungen" );
 define ( "TRANSLATION_SITE_ONLINE_SINCE", "Alter dieser Website" );
 define ( "TRANSLATION_PAGES_COUNT", "Anzahl der Seiten" );
 define ( "TRANSLATION_REGISTERED_USERS_COUNT", "Anzahl der Benutzer" );
-define ( "TRANSLATION_BLOCKED_SPAM_MAILS", "Blockierte Spam E-Mails" );
+define ( "TRANSLATION_BLOCKED_SPAM_MAILS", "Blockierte Spam Nachrichten" );
 define ( "TRANSLATION_GUESTBOOK_ENTRIES", "Gästebucheinträge" );
 
 define ( "TRANSLATION_TITLE", "Titel" );
@@ -221,6 +221,7 @@ define ( "TRANSLATION_SPAMFILTER_ENABLED", "Spamfilter aktivieren" );
 define ( "TRANSLATION_BLACKLIST", "Schwarze Liste" );
 define ( "TRANSLATION_SPAM_COUNTRIES", "Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren" );
 define ( "TRANSLATION_DISALLOW_CHINESE_CHARS", "Chinesische Schriftzeichen verbieten" );
+define ( "TRANSLATION_DISALLOW_CYRILLIC_CHARS", "Kyrillische Schriftzeichen verbieten" );
 
 // Cache
 define ( "TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern,
@@ -480,7 +481,7 @@ define ( "TRANSLATION_RESET_PASSWORD_SUBJECT", "Passwort zurücksetzen" );
 define ( "TRANSLATION_RESET_PASSWORD", "Passwort zurücksetzen" );
 
 define ( "TRANSLATION_NO_SUCH_USER", "Es existiert kein Benutzerkonto mit diesem Namen." );
-define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Ihr Passwort wurde erfolgreich zurückgesetzt. Sie bekommen demnächst eine E-Mail mit einem neuen Passwort zugeschickt." );
+define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Sie bekommen demnächst eine E-Mail mit einem Link zum Zurücksetzen des Passworts zugeschickt." );
 
 define ( "TRANSLATION_ENABLE_PASSWORD_RESET", "Passwort kann zurückgesetzt werden" );
 
@@ -691,5 +692,19 @@ define ( "TRANSLATION_NODE", "Knotenpunkt" );
 define ( "TRANSLATION_GOTO_FRONTEND", "Gehe ins Frontend" );
 
 define ( "TRANSLATION_COMMENT", "Kommentar" );
+
+define ( "TRANSLATION_FILE_NOT_FOUND", "Datei nicht gefunden!" );
+define ( "TRANSLATION_ONE_DATASET_FOUND", "Ein Datensatz gefunden." );
+define ( "TRANSLATION_X_DATASETS_FOUND", "%x Datensätze gefunden." );
+
+define ( "TRANSLATION_INSTALL_ANOTHER_PACKAGE", "Ein weiteres Paket installieren" );
+
+define ( "TRANSLATION_NO_LANGUAGE", "Keine Sprache" );
+
+define ( "TRANSLATION_DEFAULT_ACCESS_RESTRICTIONS", "Zugriffsbeschränkungen für neue Inhalte" );
+
+define ( "TRANSLATION_PASSWORD_RESET1", "Jemand mit der IP-Adresse %ip% hat das Zurücksetzen Ihres Passworts auf der Domain %domain% angefordert." );
+define ( "TRANSLATION_PASSWORD_RESET2", "Klicken Sie bitte den folgenden Link an, um ein neues Passwort zu setzen:" );
+define ( "TRANSLATION_PASSWORD_RESET3", "Falls Sie das Zurücksetzen Ihres Passworts nicht angefordert haben, ignorieren Sie diese E-Mail bitte einfach." );
 
 add_hook ( "lang_de" );

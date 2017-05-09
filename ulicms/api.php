@@ -224,9 +224,6 @@ function get_html_editor() {
 }
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false) {
-	if (isFastMode ()) {
-		return;
-	}
 	add_hook ( "before_log_request" );
 	if ($save_ip) {
 		$ip = get_ip ();
@@ -315,7 +312,11 @@ function get_available_post_types() {
 			"audio" 
 	);
 	$modules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	foreach ( $modules as $module ) {
+		if (in_array ( $module, $disabledModules )) {
+			continue;
+		}
 		$custom_types = getModuleMeta ( $module, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
@@ -328,6 +329,9 @@ function get_available_post_types() {
 	
 	$themes = getAllModules ();
 	foreach ( $themes as $theme ) {
+		if (in_array ( $module, $disabledModules )) {
+			continue;
+		}
 		$custom_types = getThemeMeta ( $theme, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
@@ -450,7 +454,6 @@ function getDomainByLanguage($language) {
 					$line [0] = trim ( $line [0] );
 					$line [1] = trim ( $line [1] );
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
-						
 						if ($line [1] == $language) {
 							return $line [0];
 						}
@@ -526,7 +529,7 @@ function rootDirectory() {
 	} else {
 		$dirname = "/";
 	}
-	if ($_SERVER ["SERVER_PORT"] != "80") {
+	if ($_SERVER ["SERVER_PORT"] != "80" && $_SERVER ["SERVER_PORT"] != "443") {
 		$pageURL .= $_SERVER ["SERVER_NAME"] . ":" . $_SERVER ["SERVER_PORT"] . $dirname;
 	} else {
 		$pageURL .= $_SERVER ["SERVER_NAME"] . $dirname;
@@ -573,11 +576,17 @@ function clearCache() {
 		opcache_reset ();
 	}
 	
+	$moduleManager = new ModuleManager ();
+	$moduleManager->sync ();
 	add_hook ( "after_clear_cache" );
 }
 function add_hook($name) {
 	$modules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
+		if (in_array ( $modules [$hook_i], $disabledModules )) {
+			continue;
+		}
 		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
 		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
 		if (file_exists ( $file1 )) {
@@ -586,21 +595,6 @@ function add_hook($name) {
 			@include $file2;
 		}
 	}
-}
-function register_action($name, $file) {
-	global $actions;
-	$modules = getAllModules ();
-	$actions [$name] = $file;
-	return $actions;
-}
-function remove_action($name) {
-	global $actions;
-	$retval = false;
-	if (isset ( $action [$name] )) {
-		unset ( $name );
-		$retval = true;
-	}
-	return $retval;
 }
 function cms_release_year() {
 	$v = new ulicms_version ();
@@ -761,8 +755,8 @@ function getBaseFolderURL() {
 	$s = empty ( $_SERVER ["HTTPS"] ) ? '' : ($_SERVER ["HTTPS"] == "on") ? "s" : "";
 	$sp = strtolower ( $_SERVER ["SERVER_PROTOCOL"] );
 	$protocol = substr ( $sp, 0, strpos ( $sp, "/" ) ) . $s;
-	$port = ($_SERVER ["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
-	return trim ( $protocol . "://" . $_SERVER ['SERVER_NAME'] . $port . dirname ( $_SERVER ['REQUEST_URI'] ), "/" );
+	$port = ($_SERVER ["SERVER_PORT"] == "80" || $_SERVER ["SERVER_PORT"] == "443") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
+	return trim ( rtrim ( $protocol . "://" . $_SERVER ['SERVER_NAME'] . $port . str_replace ( "\\", "/", dirname ( $_SERVER ['REQUEST_URI'] ) ) ), "/" );
 }
 
 // This Returns the current full URL
@@ -841,7 +835,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	}  // Backend Directory
+	} // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
@@ -910,8 +904,13 @@ function isModuleInstalled($name) {
 	return in_array ( $name, getAllModules () );
 }
 function getAllModules() {
+	if (Vars::get ( "allModules" )) {
+		return Vars::get ( "allModules" );
+	}
 	$pkg = new PackageManager ();
-	return $pkg->getInstalledPackages ( 'modules' );
+	$modules = $pkg->getInstalledPackages ( 'modules' );
+	Vars::set ( "allModules", $modules );
+	return $modules;
 }
 function no_cache($do = false) {
 	if ($do) {
@@ -946,8 +945,12 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = preg_replace ( '/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
 	}
 	$allModules = getAllModules ();
+	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i <= count ( $allModules ); $i ++) {
 		$thisModule = $allModules [$i];
+		if (in_array ( $thisModule, $disabledModules )) {
+			continue;
+		}
 		$stringToReplace1 = '[module="' . $thisModule . '"]';
 		$stringToReplace2 = '[module=&quot;' . $thisModule . '&quot;]';
 		
@@ -1086,11 +1089,15 @@ function getAllSystemNames($lang = null) {
 
 // Sprachcodes abfragen und als Array zurück geben
 function getAllLanguages() {
+	if (! is_null ( Vars::get ( "all_languages" ) )) {
+		return Vars::get ( "all_languages" );
+	}
 	$query = db_query ( "SELECT language_code FROM `" . tbname ( "languages" ) . "` ORDER BY language_code" );
 	$returnvalues = Array ();
 	while ( $row = db_fetch_object ( $query ) ) {
 		array_push ( $returnvalues, $row->language_code );
 	}
+	Vars::set ( "all_languages", $returnvalues );
 	return $returnvalues;
 }
 
@@ -1110,7 +1117,7 @@ function the_url() {
 	} else {
 		$dirname = "/";
 	}
-	if ($_SERVER ["SERVER_PORT"] != "80") {
+	if ($_SERVER ["SERVER_PORT"] != "80" && $_SERVER ["SERVER_PORT"] != "443") {
 		$pageURL .= $_SERVER ["SERVER_NAME"] . ":" . $_SERVER ["SERVER_PORT"] . $dirname;
 	} else {
 		$pageURL .= $_SERVER ["SERVER_NAME"] . $dirname;
@@ -1175,22 +1182,32 @@ function getAllMenus($only_used = false) {
 
 // Check if site contains a module
 function containsModule($page = null, $module = false) {
-	if (is_null ( $page ))
+	if (is_null ( $page )) {
 		$page = get_requested_pagename ();
-	
+	}
+	if (! is_null ( Vars::get ( "page_" . $page . "_contains_" . $module ) )) {
+		return Vars::get ( "page_" . $page . "_contains_" . $module );
+	}
+	;
 	$query = db_query ( "SELECT content, module, `type` FROM " . tbname ( "content" ) . " WHERE systemname = '" . db_escape ( $page ) . "'" );
 	$dataset = db_fetch_assoc ( $query );
 	$content = $dataset ["content"];
 	$content = str_replace ( "&quot;", "\"", $content );
 	if (! is_null ( $dataset ["module"] ) and ! empty ( $dataset ["module"] ) and $dataset ["type"] == "module") {
 		if (! $module or ($module and $dataset ["module"] == $module)) {
+			Vars::set ( "page_" . $page . "_contains_" . $module, true );
 			return true;
 		}
 	} else if ($module) {
-		return preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
+		$result = preg_match ( "/\[module=\"" . preg_quote ( $module ) . "\"\]/", $content );
+		Vars::set ( "page_" . $page . "_contains_" . $module, $result );
+		return $result;
 	} else {
-		return preg_match ( "/\[module=\".+\"\]/", $content );
+		$result = preg_match ( "/\[module=\".+\"\]/", $content );
+		Vars::set ( "page_" . $page . "_contains_" . $module, $result );
+		return $result;
 	}
+	Vars::set ( "page_" . $page . "_contains_" . $module, false );
 	return false;
 }
 function page_has_html_file($page) {
@@ -1319,10 +1336,6 @@ function tbname($name) {
 	require_once "cms-config.php";
 	$config = new config ();
 	return $config->db_prefix . $name;
-}
-function isFastMode() {
-	$cfg = new config ();
-	return (isset ( $cfg->fast_mode ) and $cfg->fast_mode);
 }
 
 // Mimetypen einer Datei ermitteln

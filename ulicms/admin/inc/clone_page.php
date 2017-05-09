@@ -1,5 +1,5 @@
 <?php
-include_once ULICMS_ROOT . "/classes/vcs.php";
+include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "pages" ) and $acl->hasPermission ( "pages_create" )) {
@@ -317,11 +317,19 @@ function openMenuImageSelectWindow(field) {
 						maxlength="80"> <br /> <br /> <strong><?php translate("author_email");?></strong><br />
 					<input type="email" name="article_author_email"
 						value="<?php echo real_htmlspecialchars($row->article_author_email);?>"
-						maxlength="80"> <br /> <br /> <strong><?php translate("article_date");?></strong><br />
-					<input name="article_date" type="datetime-local"
+						maxlength="80"> <br /> <br />
+					<div id="comment-fields">
+						<strong><?php translate("homepage");?></strong><br /> <input
+							type="url" name="comment_homepage"
+							value="<?php echo real_htmlspecialchars($row->comment_homepage);?>"
+							maxlength="255"> <br /> <br />
+					</div>
+
+					<strong><?php translate("article_date");?></strong><br /> <input
+						name="article_date" type="datetime-local"
 						value="<?php
 			
-			if (isNotNullOrEmpty ( $row->article_date )) {
+			if (StringHelper::isNotNullOrEmpty ( $row->article_date )) {
 				echo date ( "Y-m-d\TH:i:s", strtotime ( $row->article_date ) );
 			}
 			?>"

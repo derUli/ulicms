@@ -2,45 +2,48 @@
 <?php
 
 if (defined ( "_SECURITY" )) {
-
+	
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "languages" )) {
 		$languages = db_query ( "SELECT * FROM " . tbname ( "languages" ) . " ORDER BY language_code ASC" );
-
+		
 		?>
 <form action="index.php?action=languages" method="post">
 <?php
-
+		
 		csrf_token_html ();
 		?>
 		<div class="scroll">
-	<table border=0>
-		<tr>
-			<td><strong><?php translate("shortcode");?>
+		<table border=0>
+			<tr>
+				<td><strong><?php translate("shortcode");?>
 			</strong></td>
-			<td><input type="text" name="language_code" maxlength=6 size=6></td>
-		</tr>
-		<tr>
-			<td style="width: 100px;"><strong><?php translate("full_name");?>
+				<td><input type="text" name="language_code" maxlength=6 size=6></td>
+			</tr>
+			<tr>
+				<td style="width: 100px;"><strong><?php translate("full_name");?>
 			</strong></td>
-			<td><input type="text" name="name" maxlength=100 size=40></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit" name="add_language"
-				value="<?php
-
+				<td><input type="text" name="name" maxlength=100 size=40></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" name="add_language"
+					value="<?php
+		
 		translate ( "add_language" );
 		?>"></td>
-		</tr>
+			</tr>
 
-	</table>
+		</table>
+
 </form>
 <br>
 <div class="seperator"></div>
 <br>
-<?php
+<p><?php BackendHelper::formatDatasetCount(Database::getNumRows($languages));?></p>
 
+<?php
+		
 		if (db_num_rows ( $languages ) > 0) {
 			?>
 <table class="tablesorter">
@@ -60,7 +63,7 @@ if (defined ( "_SECURITY" )) {
 			<td><?php echo htmlspecialchars($row -> language_code)?>
 		</td>
 			<td><?php
-
+				
 				echo htmlspecialchars ( $row->name );
 				?>
 		</td>
@@ -75,7 +78,7 @@ if (defined ( "_SECURITY" )) {
 					?>')"
 				href="index.php?action=languages&default=<?php echo htmlspecialchars($row -> language_code);?>">
 					<span style="color: red !important;"><?php
-
+					
 					translate ( "no" );
 					?></span>
 			</a> <?php
@@ -84,7 +87,7 @@ if (defined ( "_SECURITY" )) {
 		</td>
 
 			<td align="center"><?php
-
+				
 				if ($row->language_code == Settings::get ( "default_language" )) {
 					?> <a
 				onclick="javascript:alert('<?php translate("CANT_DELETE_DEFAULT_LANGUAGE");?>')"

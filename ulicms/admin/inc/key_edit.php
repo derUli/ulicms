@@ -27,7 +27,8 @@ if (defined ( "_SECURITY" )) {
 	<textarea name="value" rows=15 cols=80><?php
 			
 			echo htmlspecialchars ( $row->value, ENT_QUOTES, "UTF-8" );
-			?></textarea> <br /> <br /> <input type="submit"
+			?></textarea>
+	<br /> <br /> <input type="submit"
 		value="<?php translate("save_changes");?>">
 
 			<?php

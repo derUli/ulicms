@@ -1,12 +1,10 @@
 <?php
-include_once ULICMS_ROOT . "/lib/encryption.php";
-
 // this class contains functions for managing user accounts
 function getUsers() {
-	$query = Database::query ( "SELECT username FROM " . tbname ( "users" ) . " ORDER by username" );
+	$query = Database::query ( "SELECT id, username FROM " . tbname ( "users" ) . " ORDER by username" );
 	$users = Array ();
 	while ( $row = db_fetch_object ( $query ) ) {
-		array_push ( $users, $row->username );
+		array_push ( $users, $row );
 	}
 	
 	return $users;
@@ -14,13 +12,7 @@ function getUsers() {
 
 // this class contains functions for managing user accounts
 function getAllUsers() {
-	$query = Database::query ( "SELECT * FROM " . tbname ( "users" ) . " ORDER by username" );
-	$users = Array ();
-	while ( $row = db_fetch_object ( $query ) ) {
-		array_push ( $users, $row );
-	}
-	
-	return $users;
+	return getUsers ();
 }
 function getUsersOnline() {
 	$users_online = Database::query ( "SELECT username FROM " . tbname ( "users" ) . " WHERE last_action > " . (time () - 300) . " ORDER BY username" );
@@ -31,29 +23,8 @@ function getUsersOnline() {
 	return $retval;
 }
 function changePassword($password, $id) {
-	include_once ULICMS_ROOT . "/lib/encryption.php";
 	$newPassword = Encryption::hashPassword ( $password );
 	return Database::query ( "UPDATE " . tbname ( "users" ) . " SET `password` = '$newPassword',  `old_encryption` = 0, `password_changed` = NOW() WHERE id = $id" );
-}
-function resetPassword($username, $length = 12) {
-	$new_pass = rand_string ( $length );
-	$user = getUserByName ( $username );
-	if (! $user) {
-		return false;
-	}
-	$uid = intval ( $user ["id"] );
-	changePassword ( $new_pass, $uid );
-	
-	Database::query ( "UPDATE " . tbname ( "users" ) . " SET require_password_change = 1 where id = $uid" );
-	$message = get_translation ( "reset_password_mail_body" );
-	$message = str_replace ( "%host%", get_http_host (), $message );
-	$message = str_replace ( "%ip%", get_ip (), $message );
-	$message = str_replace ( "%password%", $new_pass, $message );
-	$message = str_replace ( "%username%", $user ["username"], $message );
-	
-	$headers = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=UTF-8";
-	@Mailer::send ( $user ["email"], get_translation ( "reset_password_subject" ), $message, $headers );
-	return true;
 }
 function getUserByName($name) {
 	$query = Database::query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE username='" . db_escape ( $name ) . "'" );
@@ -156,7 +127,6 @@ function register_session($user, $redirect = true) {
 	return;
 }
 function validate_login($user, $password, $token = null) {
-	include_once ULICMS_ROOT . "/lib/encryption.php";
 	require_once ULICMS_ROOT . "/classes/objects/security/GoogleAuthenticator.php";
 	$user = getUserByName ( $user );
 	

@@ -1714,9 +1714,15 @@ a.cke_path_item:hover, a.cke_path_item:focus, a.cke_path_item:active {
 
 .cke_toolbox_collapser.cke_toolbox_collapser_min .cke_arrow {
 	border-width: 3px
-}x !important
 }
 
+x
+ 
+!
+important
+
+
+}
 .cke_hidpi .cke_button__removeformat_icon {
 	background: url(icons_hidpi.png) no-repeat 0 -1856px !important
 }

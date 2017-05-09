@@ -251,14 +251,14 @@ function encodeURIComponent($str) {
 function strbool($value) {
 	return ($value) ? 'true' : 'false';
 }
-
 function isNullOrEmpty($variable) {
+	trigger_error ( "global function isNullOrEmpty() is deprecated. Plese use StringHelper::isNullOrEmpty() instead.", E_USER_WARNING );
 	return (is_null ( $variable ) or empty ( $variable ));
 }
 function isNotNullOrEmpty($variable) {
+	trigger_error ( "global function isNotNullOrEmpty() is deprecated. Plese use StringHelper::isNotNullOrEmpty() instead.", E_USER_WARNING );
 	return (! is_null ( $variable ) and ! empty ( $variable ));
 }
-
 function convertLineEndingsToLF($s) {
 	// Normalize line endings using Global
 	// Convert all line-endings to UNIX format
@@ -268,7 +268,6 @@ function convertLineEndingsToLF($s) {
 	$s = preg_replace ( "/\n{2,}/", LF . LF, $s );
 	return $s;
 }
-
 function str_replace_nth($search, $replace, $subject, $nth) {
 	$found = preg_match_all ( '/' . preg_quote ( $search ) . '/', $subject, $matches, PREG_OFFSET_CAPTURE );
 	if (false !== $found && $found > $nth) {
@@ -276,13 +275,11 @@ function str_replace_nth($search, $replace, $subject, $nth) {
 	}
 	return $subject;
 }
-
 function mb_str_split($string) {
 	// Split at all position not after the start: ^
 	// and not before the end: $
 	return preg_split ( '/(?<!^)(?!$)/u', $string );
 }
-
 function str_replace_first($search, $replace, $subject) {
 	$pos = strpos ( $subject, $search );
 	if ($pos !== false) {

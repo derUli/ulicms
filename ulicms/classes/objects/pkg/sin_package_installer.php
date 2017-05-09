@@ -3,7 +3,7 @@ class SinPackageInstaller {
 	private $file = null;
 	private $errors = array ();
 	public function __construct($file) {
-		if (isNotNullOrEmpty ( $file )) {
+		if (StringHelper::isNotNullOrEmpty ( $file )) {
 			$this->file = $file;
 		}
 	}
@@ -38,7 +38,7 @@ class SinPackageInstaller {
 	}
 	public function getProperty($name) {
 		$data = $this->loadPackage ();
-		if (isset ( $data [$name] ) and isNotNullOrEmpty ( $data [$name] )) {
+		if (isset ( $data [$name] ) and StringHelper::isNotNullOrEmpty ( $data [$name] )) {
 			return $data [$name];
 		} else {
 			return null;
@@ -63,13 +63,13 @@ class SinPackageInstaller {
 			$version = new ulicms_version ();
 			$version = $version->getInternalVersionAsString ();
 			$version_not_supported = false;
-			if (isNotNullOrEmpty ( $data ["compatible_from"] ) and is_string ( $data ["compatible_from"] )) {
+			if (StringHelper::isNotNullOrEmpty ( $data ["compatible_from"] ) and is_string ( $data ["compatible_from"] )) {
 				if (! version_compare ( $version, $data ["compatible_from"], ">=" )) {
 					$version_not_supported = true;
 				}
 			}
 			
-			if (isNotNullOrEmpty ( $data ["compatible_to"] ) and is_string ( $data ["compatible_to"] )) {
+			if (StringHelper::isNotNullOrEmpty ( $data ["compatible_to"] ) and is_string ( $data ["compatible_to"] )) {
 				if (! version_compare ( $version, $data ["compatible_to"], "<=" )) {
 					$version_not_supported = true;
 				}

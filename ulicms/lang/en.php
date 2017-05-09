@@ -9,7 +9,7 @@ define ( "TRANSLATION_LAST_CHANGES", "Last changes" );
 define ( "TRANSLATION_SITE_ONLINE_SINCE", "Site online since" );
 define ( "TRANSLATION_PAGES_COUNT", "Count of page" );
 define ( "TRANSLATION_REGISTERED_USERS_COUNT", "Amount of users" );
-define ( "TRANSLATION_BLOCKED_SPAM_MAILS", "refused spam emails" );
+define ( "TRANSLATION_BLOCKED_SPAM_MAILS", "refused spam messages" );
 define ( "TRANSLATION_GUESTBOOK_ENTRIES", "guestbook entries" );
 
 define ( "TRANSLATION_TITLE", "Title" );
@@ -220,7 +220,7 @@ define ( "TRANSLATION_SPAMFILTER_ENABLED", "Spamfilter enabled" );
 define ( "TRANSLATION_BLACKLIST", "Black list" );
 define ( "TRANSLATION_SPAM_COUNTRIES", "Users from the following countries may <strong>not</strong> write comments." );
 define ( "TRANSLATION_DISALLOW_CHINESE_CHARS", "Disallow chinese chars" );
-
+define ( "TRANSLATION_DISALLOW_CYRILLIC_CHARS", "Disallow cyrillic chars" );
 // Cache
 define ( "TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern,
 bietet das UliCMS eine Cache-Funktion.<br/>
@@ -490,7 +490,7 @@ define ( "TRANSLATION_RESET_PASSWORD_SUBJECT", "Reset Password" );
 define ( "TRANSLATION_RESET_PASSWORD", "Reset Password" );
 
 define ( "TRANSLATION_NO_SUCH_USER", "There is no such user." );
-define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "Your password has been reset. You will receive an E-Mail containing your new password." );
+define ( "TRANSLATION_PASSWORD_RESET_SUCCESSFULL", "An email with a link to reset your password was sent" );
 
 define ( "TRANSLATION_REQUIRE_PASSWORD_CHANGE_NOTICE", "You must change your password." );
 
@@ -700,5 +700,19 @@ define ( "TRANSLATION_NODE", "Knotenpunkt" );
 define ( "TRANSLATION_GOTO_FRONTEND", "Goto Frontend" );
 
 define ( "TRANSLATION_COMMENT", "Comment" );
+
+define ( "TRANSLATION_FILE_NOT_FOUND", "File not found!" );
+define ( "TRANSLATION_ONE_DATASET_FOUND", "One dataset found." );
+define ( "TRANSLATION_X_DATASETS_FOUND", "%x datasets found." );
+
+define ( "TRANSLATION_INSTALL_ANOTHER_PACKAGE", "Install another Package" );
+
+define ( "TRANSLATION_NO_LANGUAGE", "No Language" );
+
+define ( "TRANSLATION_DEFAULT_ACCESS_RESTRICTIONS", "Edit Access Restrictions for new Contents" );
+
+define ( "TRANSLATION_PASSWORD_RESET1", "Someone with the ip address %ip% has requested a password reset at %domain%." );
+define ( "TRANSLATION_PASSWORD_RESET2", "Click this link to change your password:" );
+define ( "TRANSLATION_PASSWORD_RESET3", "If you did request the password reset just ignore this email." );
 
 add_hook ( "lang_en" );

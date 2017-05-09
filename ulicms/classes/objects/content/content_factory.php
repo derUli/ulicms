@@ -23,32 +23,10 @@ class ContentFactory {
 	}
 	private static function getContentObjectByID($row) {
 		$retval = null;
-		if ($row->type == "page") {
-			$retval = new Page ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "list") {
-			$retval = new Content_List ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "link") {
-			$retval = new Link ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "node") {
-			$retval = new Node ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "module") {
-			$retval = new Module_page ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "video") {
-			$retval = new Video_Page ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "audio") {
-			$retval = new Audio_Page ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "image") {
-			$retval = new Image_Page ();
-			$retval->loadByID ( $row->id );
-		} else if ($row->type == "article") {
-			$retval = new Article ();
+		$type = $row->type;
+		$mappings = TypeMapper::getMappings ();
+		if (isset ( $mappings [$type] ) and StringHelper::isNotNullOrEmpty ( $mappings [$type] ) and class_exists ( $mappings [$type] )) {
+			$retval = new $mappings [$type] ();
 			$retval->loadByID ( $row->id );
 		}
 		
@@ -109,13 +87,14 @@ class ContentFactory {
 			$sql .= "type = '$type' and ";
 		}
 		
+		$sql .= "1=1 ";
+		
 		$order_by = Database::escapeName ( $order_by );
 		
 		if ($order_direction != "desc") {
 			$order_direction = "asc";
 		}
-		
-		$sql .= " 1=1 order by $order_by $order_direction";
+		$sql .= " order by $order_by $order_direction";
 		
 		if (! is_null ( $limit ) and $limit > 0) {
 			$sql .= " limit " . $limit;

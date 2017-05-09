@@ -1,8 +1,8 @@
 <?php
-	 $admin_logo = Settings::get ( "admin_logo" );
-	 if (! $admin_logo) {
-		 $admin_logo = "gfx/logo.png";
-	 }
+$admin_logo = Settings::get ( "admin_logo" );
+if (! $admin_logo) {
+	$admin_logo = "gfx/logo.png";
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
 $styles = array ();
 ?>
 <link rel="stylesheet" type="text/css"
-	href="scripts/tablesorter/style.css" />
+	href="scripts/tablesorter/style.min.css" />
 <?php
 $enq = array (
 		"scripts/php.js/strip_tags.js",
@@ -33,7 +33,8 @@ $enq = array (
 		"scripts/url.min.js",
 		"scripts/util.js",
 		"scripts/users.js",
-		"scripts/global.js"
+		"scripts/global.js",
+		"scripts/bootstrap.min.js"
 );
 ?>
 <?php
@@ -57,7 +58,7 @@ foreach ( $enq as $script ) {
 <?php combined_script_html();?>
 
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-<script type="text/javascript" src="scripts/jscolor/jscolor.js"></script>
+<script type="text/javascript" src="scripts/jscolor/jscolor.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   $.ajaxSetup({ cache: false });
@@ -116,14 +117,24 @@ add_hook ( "admin_head" );
 	<div class="row">
 		<div class="col-xs-8">
 			<a href="../" title="<?php translate("goto_frontend");?>"><img
-				src="<?php Template::escape($admin_logo);?>" alt="UliCMS" class="ulicms-logo"></a>
+				src="<?php Template::escape($admin_logo);?>" alt="UliCMS"
+				class="ulicms-logo"></a>
 		</div>
 		<div class="col-xs-4 menu-container">
 		<?php
-
+		
 		if (is_logged_in ()) {
 			?>
-			<img src="gfx/menu-icon.png" id="menu-toggle">
+			<div class="row pull-right">
+				<div class="col-xs-6">
+					<img src="gfx/clear-cache.png" id="menu-clear-cache"
+						alt="<?php translate("clear_cache");?>">
+				</div>
+				<div class="col-xs-6">
+					<img src="gfx/menu-icon.png" id="menu-toggle"
+						alt="<?php translate("toggle_menu");?>">
+				</div>
+			</div>
 			<?php }?>
 		</div>
 	</div>

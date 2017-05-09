@@ -2021,8 +2021,9 @@ a.cke_button_disabled, a.cke_button_disabled:hover, a.cke_button_disabled:focus,
 	background: url(icons_hidpi.png?t=3876e73) no-repeat 0 -2040px
 		!important;
 	background-size: 16px !important;
-}st_icon
-	{
+}
+
+st_icon {
 	background: url(icons_hidpi.png?t=3876e73) no-repeat 0 -1368px
 		!important;
 	background-size: 16px !important;

@@ -3,7 +3,7 @@
 - Sicherstellen, dass folgende Komponenten aktuell sind
 
 [ ] CKEditor
-[ ] KCFinder
+[X] KCFinder
 [ ] jQuery
 [ ] Mobile_Detect
 [ ] CodeMirror
@@ -13,7 +13,7 @@
 [ ] "Scopes" für Einstellungen. Ein Scope sind alle Seiten mit einer bestimmten Parent-Seite, ein bestimmtes Menü oder bestimmte Domains oder eine bestimmte Sprache
     - Scopes ermöglichen, Subsites zu erstellen.
 
-[ ] Bootstrap CSS Integration, Bootstrap Widgets können auch über den CKEditor eingefügt werden.
+[X] Bootstrap CSS Integration, Bootstrap Widgets können auch über den CKEditor eingefügt werden.
 
 [ ] verschiedene Skins fürs Backend (Farbschemen etc.)
 
@@ -21,7 +21,6 @@
 [ ] Import Filter um Inhalte aus WordPress zu importieren
 
 [ ] Settings Import- und Export
-
     [ ] Optionen aus der settings-Tabelle können aus einer Liste ausgewählt werden und ins JSON Format exportiert werden
     [ ] Optionen können aus einer solchen JSON Datei importiert werden, nicht vorhanden Optionen werden erstellt, ansonsten erfolgt ein Update
 

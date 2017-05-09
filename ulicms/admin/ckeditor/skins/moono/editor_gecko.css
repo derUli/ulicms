@@ -1204,32 +1204,51 @@ legend.cke_voice_label {
 	background: url(icons.png?t=3876e73) no-repeat 0 -744px !important;
 }
 
-.cke_button__imagebutton_icon {
-	: none } legend .cke_voice_label { display : none } .cke_bottom
+.cke_button__imagebutton_icon { : none
+	
+}
 
-{padding-bottom
-	: 3px } .cke_combo_text { margin-bottom : -1px; margin-top
+legend .cke_voice_label {
+	display: none
+}
 
-:1px}.cke_button__about_icon {background:url(icons.png?t=3876e73)no-repeat0-0px
-	!important; } .cke_rtl .cke_button__copy_icon , .cke_mixed_dir_content 
+.cke_bottom {
+	padding-bottom: 3px
+}
 
- .cke_rtl .cke_button__copy_icon
-	{ background : url(icons.png?t=3876e73) no-repeat 0 -24px !important
+.cke_combo_text {
+	margin-bottom: -1px;
+	margin-top: 1px
+}
 
-;}.cke_ltr .cke_button__copy_icon {background:url(icons.png?t=3876e73)no-repeat
-	0 -48px !important ; } .cke_rtl .cke_button__cut_icon 
-		, .cke_mixed_dir_content
+.cke_button__about_icon {
+	background: url(icons.png?t=3876e73) no-repeat0-0px !important;
+}
 
- .cke_rtl .cke_button__cut_icon
-	{ background : url(icons.png?t=3876e73) no-repeat 0 -72px
+.cke_rtl .cke_button__copy_icon, .cke_mixed_dir_content 
 
-!important;}.cke_ltr .cke_button__cut_icon {background:url(icons.png?t=3876e73)no-repeat
-	0 -96px !important ; } .cke_rtl .cke_button__paste_icon 
-		, .cke_mixed_dir_content
- .cke_rtl .cke_button__paste_icon
-	 { background : url(icons.png?t=3876e73) no-repeat 0
-	-120pxent .cke_rtl .cke_button__numberedlist_icon
-	{
+ .cke_rtl .cke_button__copy_icon {
+	background: url(icons.png?t=3876e73) no-repeat 0 -24px !important;
+}
+
+.cke_ltr .cke_button__copy_icon {
+	background: url(icons.png?t=3876e73) no-repeat 0 -48px !important;
+}
+
+.cke_rtl .cke_button__cut_icon, .cke_mixed_dir_content
+
+ .cke_rtl .cke_button__cut_icon {
+	background: url(icons.png?t=3876e73) no-repeat 0 -72px !important;
+}
+
+.cke_ltr .cke_button__cut_icon {
+	background: url(icons.png?t=3876e73) no-repeat 0 -96px !important;
+}
+
+.cke_rtl .cke_button__paste_icon, .cke_mixed_dir_content
+ .cke_rtl .cke_button__paste_icon {
+	background: url(icons.png?t=3876e73) no-repeat 0 -120pxent .cke_rtl
+		.cke_button__numberedlist_icon{ 
 	background: url(icons_hidpi.png?t=3876e73) no-repeat 0 -1392px
 		!important;
 	background-size: 16px !important;

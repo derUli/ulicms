@@ -3,9 +3,8 @@ if (! defined ( "_SECURITY" )) {
 	die ( "No direct access allowed!" );
 }
 
-if(Settings::get("disable_ulicms_newsfeed")){
-   die();
-
+if (Settings::get ( "disable_ulicms_newsfeed" )) {
+	die ();
 }
 
 @session_start ();
@@ -28,7 +27,7 @@ foreach ( $rss->getElementsByTagName ( 'item' ) as $node ) {
 			'title' => $node->getElementsByTagName ( 'title' )->item ( 0 )->nodeValue,
 			'desc' => $node->getElementsByTagName ( 'description' )->item ( 0 )->nodeValue,
 			'link' => $node->getElementsByTagName ( 'link' )->item ( 0 )->nodeValue,
-			'date' => $node->getElementsByTagName ( 'pubDate' )->item ( 0 )->nodeValue
+			'date' => $node->getElementsByTagName ( 'pubDate' )->item ( 0 )->nodeValue 
 	);
 	array_push ( $feed, $item );
 }

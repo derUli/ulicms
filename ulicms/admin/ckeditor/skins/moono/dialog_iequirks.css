@@ -66,9 +66,18 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
 100%{
 -webkit-transform
+
+
 :rotate(360deg)
-;transform
+
+
+;
+transform
+
+
 :rotate(360deg)
+
+
 }
 }
 @
@@ -79,9 +88,18 @@ keyframes dialog_spinner { 0%{
 
 100%{
 -webkit-transform
+
+
 :rotate(360deg)
-;transform
+
+
+;
+transform
+
+
 :rotate(360deg)
+
+
 }
 }
 .cke_dialog_contents {
@@ -145,6 +163,7 @@ keyframes dialog_spinner { 0%{
 .cke_rtl .cke_dialog_tabs {
 	right: 10px
 }
+
 a.cke_dialog_tab {
 	height: 16px;
 	padding: 4px 8px;
@@ -155,12 +174,24 @@ a.cke_dialog_tab {
 	outline: 0;
 	color: #595959;
 	border: 1px solid #bfbfbf;;
-	border-radius: 3px 3px ;
-	 .cke_resizer_rtl ;
-	{ margin-left : 5px } .cke_dialog .cke_resizer_ltr;
-	{ margin-right : 5px } .cke_dialog_tabs {height: 24px;
-		display : inline-block; margin : 5px0 0; position abled {
-	color: #a0a0a0
+	border-radius: 3px 3px; . cke_resizer_rtl; {
+	margin-left: 5px
+}
+
+.cke_dialog .cke_resizer_ltr ; {
+	margin-right: 5px
+}
+
+.cke_dialog_tabs {
+	height: 24px;
+	display: inline-block;
+	margin: 5px0 0;
+	position
+	abled
+	{
+	color
+	:
+	#a0a0a0
 }
 
 .cke_dialog_body .cke_label {

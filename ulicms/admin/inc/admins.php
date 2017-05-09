@@ -28,6 +28,8 @@ if (defined ( "_SECURITY" )) {
 	<br /> <br /> <a href="index.php?action=admin_new"><?php translate("create_user");?></a><br />
 </p>
 <?php }?>
+<p><?php BackendHelper::formatDatasetCount(Database::getNumRows($query));?></p>
+
 <div class="scroll">
 	<table class="tablesorter">
 		<thead>

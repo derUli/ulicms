@@ -15,7 +15,7 @@ if (defined ( "_SECURITY" )) {
 			?>
 <form action="index.php?action=install_patches" method="post">
 <?php
-
+			
 			csrf_token_html ();
 			?>
 <?php
@@ -31,25 +31,25 @@ if (defined ( "_SECURITY" )) {
 	<p>
 		<label> <input name="patches[]" type="checkbox" checked="checked"
 			value="<?php
-
+					
 					echo htmlspecialchars ( $line );
 					?>"> <strong><?php
-
+					
 					echo htmlspecialchars ( $name );
 					?></strong><br /> <?php
-
+					
 					echo htmlspecialchars ( $description );
 					?> </label>
 	</p>
 	<?php
 				}
 			}
-
+			
 			?>
 	<input type="submit"
 		value="<?php translate ( "install_selected_patches" );?>"> <input
 		type="button" value="<?php
-
+			
 			translate ( "help" );
 			?>"
 		onclick="window.open('?action=help&help=patch_install');">

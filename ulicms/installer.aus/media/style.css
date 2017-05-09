@@ -48,13 +48,11 @@ select {
 	width: 100%;
 }
 
-
-
 #loading, #error-message {
 	display: none;
-	margin-top:20px;
+	margin-top: 20px;
 }
 
-img{
-   max-width:100%;
+img {
+	max-width: 100%;
 }

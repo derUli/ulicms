@@ -19,8 +19,7 @@ if (defined ( "_SECURITY" )) {
 			if ($row->type == "gif") {
 				?>
 				<p>
-		<a
-			href="<?php
+		<a href="<?php
 				
 				Template::escape ( $row->link_url );
 				?>"
@@ -36,8 +35,7 @@ if (defined ( "_SECURITY" )) {
 			alt="<?php
 				
 				Template::escape ( $row->name );
-				?>"
-			border=0> </a>
+				?>" border=0> </a>
 	</p>
 
 	<?php
