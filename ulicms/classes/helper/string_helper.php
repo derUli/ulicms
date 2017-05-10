@@ -1,5 +1,5 @@
 <?php
-class stringHelper {
+class StringHelper {
 	public static function isNullOrEmpty($variable) {
 		return (is_null ( $variable ) or empty ( $variable ));
 	}

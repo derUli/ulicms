@@ -249,7 +249,7 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$article_author_name = Database::escapeValue ( $_POST ["article_author_name"] );
 		$article_author_email = Database::escapeValue ( $_POST ["article_author_email"] );
 		$article_image = Database::escapeValue ( $_POST ["article_image"] );
-		$article_date = stringHelper::isNotNullOrEmpty ( $_POST ["article_date"] ) ? "'" . date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) ) . "'" : "Null";
+		$article_date = StringHelper::isNotNullOrEmpty ( $_POST ["article_date"] ) ? "'" . date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) ) . "'" : "Null";
 		$excerpt = Database::escapeValue ( $_POST ["excerpt"] );
 		$only_admins_can_edit = intval ( Settings::get ( "only_admins_can_edit" ) );
 		$only_group_can_edit = intval ( Settings::get ( "only_group_can_edit" ) );
@@ -483,7 +483,7 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$article_author_email = Database::escapeValue ( $_POST ["article_author_email"] );
 	$article_image = Database::escapeValue ( $_POST ["article_image"] );
 	
-	$article_date = stringHelper::isNotNullOrEmpty ( $_POST ["article_date"] ) ? "'" . date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) ) . "'" : "Null";
+	$article_date = StringHelper::isNotNullOrEmpty ( $_POST ["article_date"] ) ? "'" . date ( 'Y-m-d H:i:s', strtotime ( $_POST ["article_date"] ) ) . "'" : "Null";
 	$excerpt = Database::escapeValue ( $_POST ["excerpt"] );
 	$only_admins_can_edit = intval ( isset ( $_POST ["only_admins_can_edit"] ) );
 	$only_group_can_edit = intval ( isset ( $_POST ["only_group_can_edit"] ) );

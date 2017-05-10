@@ -564,13 +564,13 @@ function get_title($ipage = null, $headline = false) {
 	}
 }
 function title($ipage = null) {
-	echo stringHelper::real_htmlspecialchars ( get_title ( $ipage ) );
+	echo StringHelper::real_htmlspecialchars ( get_title ( $ipage ) );
 }
 function get_headline($ipage = null) {
 	return get_title ( $ipage, true );
 }
 function headline($ipage = null) {
-	echo stringHelper::real_htmlspecialchars ( get_headline ( $ipage ) );
+	echo StringHelper::real_htmlspecialchars ( get_headline ( $ipage ) );
 }
 function import($ipage) {
 	$ipage = db_escape ( $ipage );

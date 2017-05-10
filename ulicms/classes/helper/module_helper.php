@@ -8,6 +8,10 @@ class ModuleHelper {
 		$url = rtrim ( $url, "&" );
 		return $url;
 	}
+	public static function buildModuleRessourcePath($module, $path) {
+		$path = trim ( $path, "/" );
+		return getModulePath ( $module ) . "/" . $path;
+	}
 	public static function getFirstPageWithModule($module = null, $language = null) {
 		if (is_null ( $language )) {
 			$language = getCurrentLanguage ();
