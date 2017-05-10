@@ -44,7 +44,9 @@ if ($acl->hasPermission ( "update_system" )) {
 <div class="alert alert-danger">
 <?php translate("upgrade_warning_notice");?>
 </div>
-	<input type="submit" value="<?php translate("do_core_upgrade");?>">
+	<p>
+		<input type="submit" value="<?php translate("do_core_upgrade");?>">
+	</p>
 <?php }?>
 </form>
 <?php
