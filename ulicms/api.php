@@ -630,7 +630,7 @@ function setLocaleByLanguage() {
 // Returns the language code of the current language
 // If $current is true returns language of the current page
 // else it returns $_SESSION["language"];
-function getCurrentLanguage($current = true) {
+function getCurrentLanguage($current = false) {
 	if ($current) {
 		$query = db_query ( "SELECT language FROM " . tbname ( "content" ) . " WHERE systemname='" . get_requested_pagename () . "'" );
 		
