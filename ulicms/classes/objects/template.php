@@ -45,8 +45,13 @@ class Template {
 	}
 	public static function executeModuleTemplate($module, $template) {
 		$retval = "";
-		$originalTemplatePath = getModulePath ( $module ) . "templates/" . $template . ".php";
-		$ownTemplatePath = getTemplateDirPath ( get_theme () ) . $module . "/" . $template . ".php";
+		$originalTemplatePath = getModulePath ( $module ) . "templates/" . $template;
+		$ownTemplatePath = getTemplateDirPath ( get_theme () ) . $module . "/" . $template;
+		
+		if (! endsWith ( $template, ".php" )) {
+			$originalTemplatePath .= ".php";
+			$ownTemplatePath .= ".php";
+		}
 		ob_start ();
 		if (file_exists ( $ownTemplatePath ) and is_file ( $ownTemplatePath )) {
 			include $ownTemplatePath;
@@ -95,8 +100,14 @@ class Template {
 	}
 	public static function executeDefaultOrOwnTemplate($template) {
 		$retval = "";
-		$originalTemplatePath = ULICMS_ROOT . "/default/" . $template . ".php";
-		$ownTemplatePath = getTemplateDirPath ( get_theme () ) . "/" . $template . ".php";
+		$originalTemplatePath = ULICMS_ROOT . "/default/" . $template;
+		$ownTemplatePath = getTemplateDirPath ( get_theme () ) . "/" . $template;
+		
+		if (! endsWith ( $template, ".php" )) {
+			$originalTemplatePath .= ".php";
+			$ownTemplatePath .= ".php";
+		}
+		
 		ob_start ();
 		if (file_exists ( $ownTemplatePath ) and is_file ( $ownTemplatePath )) {
 			include $ownTemplatePath;
