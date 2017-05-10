@@ -94,4 +94,16 @@ class Request {
 		echo "<script type=\"text/javascript\">location.replace(\"$url\");</script>";
 		exit ();
 	}
+	public static function getMethod() {
+		return strtolower ( $_SERVER ["REQUEST_METHOD"] );
+	}
+	public static function isGet() {
+		return self::getMethod () == "get";
+	}
+	public static function isPost() {
+		return self::getMethod () == "post";
+	}
+	public static function isHead() {
+		return self::getMethod () == "head";
+	}
 }
