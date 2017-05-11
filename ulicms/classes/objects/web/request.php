@@ -22,6 +22,9 @@ class Request {
 		}
 		return $value;
 	}
+	public static function hasVar($name) {
+		return (isset ( $_POST [$name] ) || isset ( $_GET [$name] ));
+	}
 	
 	// Übersetzung HTTP Status Code => Name
 	public static function getStatusCodeByNumber($nr) {

@@ -4,6 +4,7 @@
   * Request::isGet()
   * Request::isPost()
   * Request::isHead()
+  * Request::hasVar()
   * ModuleHelper::buildModuleRessourcePath($module, $path)
 + settings können nun über die metadata.json eines Moduls initialisiert werden
 
