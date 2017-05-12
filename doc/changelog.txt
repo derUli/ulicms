@@ -1,4 +1,7 @@
 ===== Neues in UliCMS 2017.4 =====
+
++ main_class Direktive wird nun ausgewertet. Methoden (render, admin, Hooks, Filter) in der main_class werden automatisch aufgerufen.
++ settings können nun über die metadata.json eines Moduls initialisiert werden
 + Neue Funktionen
   * Request::getMethod()
   * Request::isGet()
@@ -8,8 +11,6 @@
   * ModuleHelper::buildModuleRessourcePath($module, $path)
   * CustomData::getCustomDataOrSetting($name)
   * ModuleHelper::underscoreToCamel($str)
-+ settings können nun über die metadata.json eines Moduls initialisiert werden
-
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
 # Die Funktionen Template::executeModuleTemplate() und Template::executeDefaultOrOwnTemplate() akzeptieren nun auch Templatenamen mit Dateiendung
 # Funktion getCurrentLanguage() - Der Parameter $current ist nun per Default false
