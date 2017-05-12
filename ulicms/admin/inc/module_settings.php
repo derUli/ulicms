@@ -58,7 +58,11 @@ if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ) 
 	$admin_func = $module . "_admin";
 	
 	if ($controller and method_exists ( $controller, "settings" )) {
-		echo $controller->settings ();
+		if (MODULE_ACCESS_PERMITTED) {
+			echo $controller->settings ();
+		} else {
+			noperms ();
+		}
 	} else if (function_exists ( $admin_func )) {
 		if (MODULE_ACCESS_PERMITTED) {
 			call_user_func ( $admin_func );
