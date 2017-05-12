@@ -3,6 +3,6 @@
 	"Fortune" : "fortune.php"
 	},
 	"main_class" : "Fortune",
-	"version" : "0.1.0"
+	"version" : "0.1.0",
+	"embed" : true
 }
-

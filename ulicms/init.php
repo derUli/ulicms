@@ -333,7 +333,6 @@ if (! defined ( "KCFINDER_PAGE" )) {
 	add_hook ( "before_init" );
 	add_hook ( "init" );
 	add_hook ( "after_init" );
-	;
 }
 
 $version = new ulicms_version ();
