@@ -1,5 +1,8 @@
 <?php
 class Fortune extends Controller {
+	public function accordionLayout() {
+		return Template::executeModuleTemplate ( "fortune", "dashboard" );
+	}
 	public function render() {
 		return Template::executeModuleTemplate ( "fortune", "default" );
 	}

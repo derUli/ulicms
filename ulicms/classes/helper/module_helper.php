@@ -108,4 +108,13 @@ class ModuleHelper {
 			return get_site_protocol () . $domain . "/" . $page->systemname . ".html";
 		}
 	}
+	/**
+	 * Convert underscore_strings to camelCase.
+	 *
+	 * @param {string} $str        	
+	 */
+	public static function underscoreToCamel($str) {
+		// Remove underscores, capitalize words, squash, lowercase first.
+		return lcfirst ( str_replace ( ' ', '', ucwords ( str_replace ( '_', ' ', $str ) ) ) );
+	}
 }
