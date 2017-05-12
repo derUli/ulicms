@@ -28,10 +28,11 @@ class Fortune extends Controller {
 	// get a random fortune cookie from files
 	// fortune cookies are extracted from Linux "fortune" command.
 	public function getRandomFortune() {
-		if (is_admin_dir ())
+		if (is_admin_dir ()) {
 			$lang = getSystemLanguage ();
-		else
+		} else {
 			$lang = getCurrentLanguage ( true );
+		}
 		$fortuneDir = getModulePath ( $this->moduleName ) . "cookies/" . $lang . "/";
 		if (! is_dir ( $fortuneDir )) {
 			$fortuneDir = getModulePath ( $this->moduleName ) . "cookies/en/";
