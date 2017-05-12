@@ -1,10 +1,11 @@
 <?php
 class Fortune extends Controller {
+	private $moduleName = "fortune2";
 	public function accordionLayout() {
-		return Template::executeModuleTemplate ( "fortune", "dashboard" );
+		return Template::executeModuleTemplate ( $this->moduleName, "dashboard" );
 	}
 	public function render() {
-		return Template::executeModuleTemplate ( "fortune", "default" );
+		return Template::executeModuleTemplate ( $this->moduleName, "default" );
 	}
 	public function contentFilter($text) {
 		return str_replace ( "[fortune]", $this->render (), $text );
@@ -14,9 +15,9 @@ class Fortune extends Controller {
 			$lang = getSystemLanguage ();
 		else
 			$lang = getCurrentLanguage ( true );
-		$fortuneDir = getModulePath ( "fortune" ) . "cookies/" . $lang . "/";
+		$fortuneDir = getModulePath ( $this->moduleName ) . "cookies/" . $lang . "/";
 		if (! is_dir ( $fortuneDir )) {
-			$fortuneDir = getModulePath ( "fortune" ) . "cookies/en/";
+			$fortuneDir = getModulePath ( $this->moduleName ) . "cookies/en/";
 		}
 		$fortuneFiles = scandir ( $fortuneDir );
 		do {

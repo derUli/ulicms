@@ -1,5 +1,5 @@
 <?php
-$controller = ControllerRegistry::get ( getModuleMeta ( "fortune", "main_class" ) );
+$controller = ControllerRegistry::get ( getModuleMeta ( "fortune2", "main_class" ) );
 ?>
 <h2 class="accordion-header"><?php
 translate ( "fortune" );
