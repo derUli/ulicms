@@ -18,10 +18,19 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 14, ModuleHelper::getFirstPageWithModule ( "pfbc_sample" )->id );
 		$this->assertEquals ( 13, ModuleHelper::getFirstPageWithModule ( "fortune" )->id );
 		$this->assertEquals ( 7, ModuleHelper::getFirstPageWithModule ( "pfbc_sample", "de" )->id );
-		$this->assertEquals ( 6, ModuleHelper::getFirstPageWithModule ( "fortune" , "de" )->id);
+		$this->assertEquals ( 6, ModuleHelper::getFirstPageWithModule ( "fortune", "de" )->id );
 		$this->assertEquals ( 14, ModuleHelper::getFirstPageWithModule ( "pfbc_sample", "en" )->id );
-		$this->assertEquals ( 13, ModuleHelper::getFirstPageWithModule ( "fortune" , "en" )->id);
-		$this->assertEquals ( 6, ModuleHelper::getFirstPageWithModule ( null , "de" )->id);
-		$this->assertEquals ( 13, ModuleHelper::getFirstPageWithModule ( null , "en" )->id);
+		$this->assertEquals ( 13, ModuleHelper::getFirstPageWithModule ( "fortune", "en" )->id );
+		$this->assertEquals ( 6, ModuleHelper::getFirstPageWithModule ( null, "de" )->id );
+		$this->assertEquals ( 13, ModuleHelper::getFirstPageWithModule ( null, "en" )->id );
+	}
+	public function testIsEmbedModule() {
+		$this->assertTrue ( ModuleHelper::isEmbedModule ( "fortune" ) );
+		$this->assertFalse ( ModuleHelper::isEmbedModule ( "slicknav" ) );
+	}
+	public function testIsEmbedModule() {
+		$embedModules = ModuleHelper::getAllEmbedModules ();
+		$this->assertTrue ( in_array ( "fortune", $embedModules ) );
+		$this->assertFalse ( in_array ( "slicknav", $embedModules ) );
 	}
 }
