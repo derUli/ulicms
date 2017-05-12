@@ -8,7 +8,9 @@ class Fortune extends Controller {
 		return Template::executeModuleTemplate ( $this->moduleName, "default" );
 	}
 	public function contentFilter($text) {
-		return str_replace ( "[fortune]", $this->render (), $text );
+		$text = str_replace ( "[fortune]", $this->render (), $text );
+		$text = str_replace ( "[hello]", get_translation ( "hello_world" ), $text );
+		return $text;
 	}
 	public function getSettingsHeadline() {
 		return get_translation ( "my_settings_page" );
