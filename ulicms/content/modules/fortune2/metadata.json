@@ -1,4 +1,5 @@
 {
+	"source" : "extend",
 	"controllers" : {
 	"Fortune" : "fortune.php"
 	},
