@@ -7,6 +7,7 @@
   * Request::hasVar()
   * ModuleHelper::buildModuleRessourcePath($module, $path)
   * CustomData::getCustomDataOrSetting($name)
+  * ModuleHelper::underscoreToCamel($str)
 + settings können nun über die metadata.json eines Moduls initialisiert werden
 
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
