@@ -329,11 +329,12 @@ if (! defined ( "KCFINDER_PAGE" )) {
 	TypeMapper::loadMapping ();
 	HelperRegistry::loadModuleHelpers ();
 	ControllerRegistry::loadModuleControllers ();
+	
+	add_hook ( "before_init" );
+	add_hook ( "init" );
+	add_hook ( "after_init" );
+	;
 }
-
-add_hook ( "before_init" );
-add_hook ( "init" );
-add_hook ( "after_init" );
 
 $version = new ulicms_version ();
 if (! defined ( "UPDATE_CHECK_URL" )) {
