@@ -10,6 +10,12 @@ class Fortune extends Controller {
 	public function contentFilter($text) {
 		return str_replace ( "[fortune]", $this->render (), $text );
 	}
+	public function getSettingsHeadline() {
+		return get_translation ( "my_settings_page" );
+	}
+	public function settings() {
+		return get_translation ( "hello_world" );
+	}
 	public function getRandomFortune() {
 		if (is_admin_dir ())
 			$lang = getSystemLanguage ();
