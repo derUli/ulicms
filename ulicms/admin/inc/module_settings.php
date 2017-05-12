@@ -10,8 +10,9 @@ $admin_file_path2 = getModuleAdminFilePath2 ( $module );
 
 $disabledModules = Vars::get ( "disabledModules" );
 
-if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 )) or in_array( $module, $disabledModules )) {
+if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 )) or in_array ( $module, $disabledModules )) {
 	?>
+<!--  @FIXME: Das hier lokalisieren -->
 <p class='ulicms_error'>Dieses Modul bietet keine Einstellungen.</p>
 <?php
 } else {
@@ -50,9 +51,10 @@ if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ))
 		if (MODULE_ACCESS_PERMITTED) {
 			call_user_func ( $admin_func );
 		} else {
-			echo "<p>Zugriff verweigert</p>";
+			noperms ();
 		}
 	} else {
+		// @FIXME: Das hier lokalisieren
 		echo "<p>Keine Einstellungsmöglichkeiten vorhanden.</p>";
 	}
 }
