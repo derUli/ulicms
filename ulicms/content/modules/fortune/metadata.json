@@ -1,4 +1,8 @@
 {
-"version" : "0.0.6"
+	"controllers" : {
+	"Fortune" : "fortune.php"
+	},
+	"main_class" : "Fortune",
+	"version" : "0.1.0"
 }
 
