@@ -6,6 +6,9 @@ class Fortune extends Controller {
 	public function render() {
 		return Template::executeModuleTemplate ( "fortune", "default" );
 	}
+	public function contentFilter($text) {
+		return str_replace ( "[fortune]", $this->render (), $text );
+	}
 	public function getRandomFortune() {
 		if (is_admin_dir ())
 			$lang = getSystemLanguage ();
