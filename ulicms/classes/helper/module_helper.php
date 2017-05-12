@@ -69,6 +69,14 @@ class ModuleHelper {
 		}
 		return $retval;
 	}
+	public function getMainController($module) {
+		$controller = null;
+		$main_class = getModuleMeta ( $module, "main_class" );
+		if ($main_class) {
+			$controller = ControllerRegistry::get ( $main_class );
+		}
+		return $controller;
+	}
 	public static function isEmbedModule($module) {
 		$retval = true;
 		$noembedfile1 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/.noembed" );

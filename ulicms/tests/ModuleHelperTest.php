@@ -46,4 +46,9 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue ( in_array ( "fortune2", $embedModules ) );
 		$this->assertFalse ( in_array ( "slicknav", $embedModules ) );
 	}
+	public function testGetMainController() {
+		$this->assertInstanceOf ( "Fortune", ModuleHelper::getMainController ( "fortune2" ) );
+		$this->assertNull ( ModuleHelper::getMainController ( "slicknav" ) );
+		$this->assertNull ( ModuleHelper::getMainController ( "not_a_module" ) );
+	}
 }
