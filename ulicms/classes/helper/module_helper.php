@@ -10,7 +10,7 @@ class ModuleHelper {
 	}
 	public static function buildModuleRessourcePath($module, $path) {
 		$path = trim ( $path, "/" );
-		return getModulePath ( $module ) . "/" . $path;
+		return getModulePath ( $module ) . $path;
 	}
 	public static function getFirstPageWithModule($module = null, $language = null) {
 		if (is_null ( $language )) {
