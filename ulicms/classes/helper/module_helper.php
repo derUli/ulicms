@@ -69,7 +69,7 @@ class ModuleHelper {
 		}
 		return $retval;
 	}
-	public function getMainController($module) {
+	public static function getMainController($module) {
 		$controller = null;
 		$main_class = getModuleMeta ( $module, "main_class" );
 		if ($main_class) {
