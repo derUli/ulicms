@@ -10,7 +10,7 @@ class ModuleHelper {
 	}
 	public static function buildModuleRessourcePath($module, $path) {
 		$path = trim ( $path, "/" );
-		return getModulePath ( $module ) . "/" . $path;
+		return getModulePath ( $module ) . $path;
 	}
 	public static function getFirstPageWithModule($module = null, $language = null) {
 		if (is_null ( $language )) {
@@ -69,6 +69,14 @@ class ModuleHelper {
 		}
 		return $retval;
 	}
+	public static function getMainController($module) {
+		$controller = null;
+		$main_class = getModuleMeta ( $module, "main_class" );
+		if ($main_class) {
+			$controller = ControllerRegistry::get ( $main_class );
+		}
+		return $controller;
+	}
 	public static function isEmbedModule($module) {
 		$retval = true;
 		$noembedfile1 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/.noembed" );
@@ -107,5 +115,14 @@ class ModuleHelper {
 		} else {
 			return get_site_protocol () . $domain . "/" . $page->systemname . ".html";
 		}
+	}
+	/**
+	 * Convert underscore_strings to camelCase.
+	 *
+	 * @param {string} $str        	
+	 */
+	public static function underscoreToCamel($str) {
+		// Remove underscores, capitalize words, squash, lowercase first.
+		return lcfirst ( str_replace ( ' ', '', ucwords ( str_replace ( '_', ' ', $str ) ) ) );
 	}
 }

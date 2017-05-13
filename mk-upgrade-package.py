@@ -31,7 +31,7 @@ def main():
                        ".gitignore", ".htaccess", "installer.aus", "installer",
               "modules", "templates", "contents.css",
               "config.js", "comments", "*~", ".settings", ".project", ".buildpath",
-              "tests")
+              "tests", "run-tests.sh")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     print("copying files")

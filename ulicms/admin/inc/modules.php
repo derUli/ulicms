@@ -46,7 +46,12 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		for($i = 0; $i < count ( $modules ); $i ++) {
 			echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
 			$disabledModules = Vars::get ( "disabledModules" );
-			$module_has_admin_page = ((file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) )) && ! in_array ( $modules [$i], $disabledModules ));
+			$controller = null;
+			$main_class = getModuleMeta ( $modules [$i], "main_class" );
+			if ($main_class) {
+				$controller = ControllerRegistry::get ( $main_class );
+			}
+			$module_has_admin_page = ((file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) ) or ($controller and method_exists ( $controller, "settings" ))) && ! in_array ( $modules [$i], $disabledModules ));
 			echo getModuleName ( $modules [$i] );
 			$version = getModuleMeta ( $modules [$i], "version" );
 			$source = getModuleMeta ( $modules [$i], "source" );
@@ -191,7 +196,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	}
 	?>
 <?php
-
+	
 	if ($acl->hasPermission ( "patch_management" )) {
 		?>
 <a name="installed_patches_a" id="installed_patches_a"></a>

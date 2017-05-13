@@ -589,7 +589,15 @@ function add_hook($name) {
 		}
 		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
 		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
-		if (file_exists ( $file1 )) {
+		$main_class = getModuleMeta ( $modules [$hook_i], "main_class" );
+		$controller = null;
+		if ($main_class) {
+			$controller = ControllerRegistry::get ( $main_class );
+		}
+		$escapedName = ModuleHelper::underscoreToCamel ( $name );
+		if ($controller and method_exists ( $controller, $escapedName )) {
+			echo $controller->$escapedName ();
+		} else if (file_exists ( $file1 )) {
 			@include $file1;
 		} else if (file_exists ( $file2 )) {
 			@include $file2;
@@ -835,7 +843,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	} // Backend Directory
+	}  // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
@@ -965,7 +973,16 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
 		}
 		
-		if (function_exists ( $thisModule . "_render" )) {
+		$main_class = getModuleMeta ( $thisModule, "main_class" );
+		$controller = null;
+		$hasRenderMethod = false;
+		if ($main_class) {
+			$controller = ControllerRegistry::get ( $main_class );
+		}
+		
+		if ($controller and method_exists ( $controller, "render" )) {
+			$html_output = $controller->render ();
+		} else if (function_exists ( $thisModule . "_render" )) {
 			$html_output = call_user_func ( $thisModule . "_render" );
 		} else {
 			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
