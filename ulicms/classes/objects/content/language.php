@@ -5,9 +5,10 @@ class Language {
 	private $language_code = null;
 	public function __construct($id = null) {
 		if (! is_null ( $id )) {
+			$this->loadById($id);
 		}
 	}
-	public function loadVars($query) {
+	public function fillVars($query) {
 		if (Database::getNumRows ( $query ) > 0) {
 			$result = Database::fetchObject ( $query );
 			$this->id = $result->id;
@@ -42,7 +43,7 @@ class Language {
 		return $this->name;
 	}
 	public function getLanguageCode() {
-		return $this->language;
+		return $this->language_code;
 	}
 	public function setId($val) {
 		$this->id = ! is_null ( $val ) ? intval ( $val ) : null;
@@ -95,7 +96,7 @@ class Language {
 			Settings::set ( "default_language", $this->language_code );
 		}
 	}
-	public function isDefautlLangauge() {
+	public function isDefaultLanguage() {
 		return $this->language_code == Settings::get ( "default_language" );
 	}
 	public function isCurrentLanguage() {
