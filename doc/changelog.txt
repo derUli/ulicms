@@ -2,6 +2,7 @@
 
 + main_class Direktive wird nun ausgewertet. Methoden (render, admin, Hooks, Filter) in der main_class werden automatisch aufgerufen.
 + settings können nun über die metadata.json eines Moduls initialisiert werden
++ Model Klasse für 'oLanguage' hinzugefügt
 + Neue Funktionen
   * Request::getMethod()
   * Request::isGet()
