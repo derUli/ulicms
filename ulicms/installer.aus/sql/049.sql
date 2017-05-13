@@ -1,1 +1,1 @@
-INSERT INTO `{prefix}settings` (name, value) ('oneclick_upgrade_channel', 'slow');
+INSERT INTO `{prefix}settings` (name, value) VALUES ('oneclick_upgrade_channel', 'slow');
