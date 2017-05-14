@@ -50,7 +50,6 @@ class Translation {
 			include_once $file;
 		} else {
 			$file = getTemplateDirPath ( get_theme (), true ) . "/lang/en.php";
-			
 			if (file_exists ( $file ) and is_file ( $file )) {
 				include_once $file;
 			}
