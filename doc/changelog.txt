@@ -16,6 +16,7 @@
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
 # Die Funktionen Template::executeModuleTemplate() und Template::executeDefaultOrOwnTemplate() akzeptieren nun auch Templatenamen mit Dateiendung
 # Funktion getCurrentLanguage() - Der Parameter $current ist nun per Default false
+# Auf Fehlerseiten wird der "Bearbeiten" Button nicht mehr angezeigt
 
 ===== Neues in UliCMS 2017.3 =====
 
