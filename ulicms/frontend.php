@@ -26,13 +26,16 @@ setLocaleByLanguage ();
 
 require_once "templating.php";
 
-if (in_array ( $_SESSION ["language"], $languages )) {
-	include getLanguageFilePath ( $_SESSION ["language"] );
-	Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
-	Translation::includeCustomLangFile ( $_SESSION ["language"] );
-	Translation::loadCurrentThemeLanguageFiles ( $_SESSION ["language"] );
-	add_hook ( "custom_lang_" . $_SESSION ["language"] );
+if (in_array ( $_SESSION ["language"], $languages ) && file_exists ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
+	include_once getLanguageFilePath ( $_SESSION ["language"] );
+} else if (file_exists ( getLanguageFilePath ( "en" ) )) {
+	include getLanguageFilePath ( "en" );
 }
+
+Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
+Translation::includeCustomLangFile ( $_SESSION ["language"] );
+Translation::loadCurrentThemeLanguageFiles ( $_SESSION ["language"] );
+add_hook ( "custom_lang_" . $_SESSION ["language"] );
 
 if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
 	if (! check_csrf_token ()) {
