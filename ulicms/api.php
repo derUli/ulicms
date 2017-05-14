@@ -773,7 +773,7 @@ function getCurrentURL() {
 	$s = empty ( $_SERVER ["HTTPS"] ) ? '' : ($_SERVER ["HTTPS"] == "on") ? "s" : "";
 	$sp = strtolower ( $_SERVER ["SERVER_PROTOCOL"] );
 	$protocol = substr ( $sp, 0, strpos ( $sp, "/" ) ) . $s;
-	$port = ($_SERVER ["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
+	$port = ($_SERVER ["SERVER_PORT"] == "80" || $_SERVER ["SERVER_PORT"] == "443") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
 	return $protocol . "://" . $_SERVER ['SERVER_NAME'] . $port . $_SERVER ['REQUEST_URI'];
 }
 function buildCacheFilePath($request_uri) {
@@ -843,7 +843,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	}  // Backend Directory
+	} // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
