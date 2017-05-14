@@ -16,6 +16,7 @@ if (isset ( $_POST ["register_user"] )) {
 		adduser ( $_POST ["admin_username"], $_POST ["admin_lastname"], $_POST ["admin_firstname"], $_POST ["admin_email"], $_POST ["admin_password"], false );
 		add_hook ( "after_user_registration" );
 		
+		// @FIXME: Das hier muss lokalisiert werden
 		echo "<p style='color:green;'>Registrierung erfolgreich!</p>";
 		if (! empty ( $_REQUEST ["go"] )) {
 			$go = htmlspecialchars ( $_REQUEST ["go"] );
