@@ -707,4 +707,6 @@ define ( "TRANSLATION_PASSWORD_RESET1", "Jemand mit der IP-Adresse %ip% hat das 
 define ( "TRANSLATION_PASSWORD_RESET2", "Klicken Sie bitte den folgenden Link an, um ein neues Passwort zu setzen:" );
 define ( "TRANSLATION_PASSWORD_RESET3", "Falls Sie das Zurücksetzen Ihres Passworts nicht angefordert haben, ignorieren Sie diese E-Mail bitte einfach." );
 
+define ( "TRANSLATION_REGISTRATION_SUCCESSFUL", "Registrierung erfolgreich!" );
+
 add_hook ( "lang_de" );
