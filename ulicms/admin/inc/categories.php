@@ -135,6 +135,7 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 
 				<?php
 				} else {
+					// @FIXME: In Sprachdatei auslagern ('Die Allgemeine Kategorie kann nicht gelöscht werden!')
 					?>
 			<td style="text-align: center;"><a href="#"
 					onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img

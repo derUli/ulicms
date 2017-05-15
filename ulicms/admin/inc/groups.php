@@ -89,6 +89,8 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 <?php
 	
 	if ($removed) {
+
+		// @FIXME: In Sprachdatei auslagern ('Die Gruppe wurde erfolgreich gelöscht.')
 		?>
 <p style='color: green;'>Die Gruppe wurde erfolgreich gelöscht.</p>
 <?php

@@ -3,6 +3,10 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "list_packages" )) {
 	noperms ();
 } else {
+	
+	// @FIXME: Hartgecodete Texte in Sprachdateien auslagern.
+	// Das hier sollte am besten gleichzeitig mit dem Redesign der Paketverwaltung geschehen.
+	
 	if (isset ( $_POST ["truncate_installed_patches"] ) and $acl->hasPermission ( "patch_management" )) {
 		db_query ( "TRUNCATE TABLE " . tbname ( "installed_patches" ) );
 	}
@@ -196,7 +200,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	}
 	?>
 <?php
-	
+
 	if ($acl->hasPermission ( "patch_management" )) {
 		?>
 <a name="installed_patches_a" id="installed_patches_a"></a>
