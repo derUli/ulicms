@@ -24,3 +24,12 @@ function translation($name, $placeholders = array()) {
 function translate($name, $placeholders = array()) {
 	translation ( $name, $placeholders );
 }
+function get_secure_translation($name, $placeholders = array()) {
+	return Template::getEscape ( get_translation ( $name, $placeholders ) );
+}
+function secure_translation($name, $placeholders = array()) {
+	echo get_secure_translation ( $name, $placeholders );
+}
+function secure_translate($name, $placeholders = array()) {
+	secure_translation ( $name, $placeholders );
+}
