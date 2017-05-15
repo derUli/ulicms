@@ -715,7 +715,7 @@ define ( "TRANSLATION_PASSWORD_RESET2", "Click this link to change your password
 define ( "TRANSLATION_PASSWORD_RESET3", "If you did request the password reset just ignore this email." );
 
 define ( "TRANSLATION_REGISTRATION_SUCCESSFUL", "Registration Successful!" );
-
 define ( "TRANSLATION_THIS_MODULE_HAS_NO_SETTINGS", "This module has no settings." );
+define ( "TRANSLATION_CANT_DELETE_CATEGORY_GENERAL", "Can\'t delete this category." );
 
 add_hook ( "lang_en" );

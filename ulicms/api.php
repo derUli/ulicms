@@ -200,8 +200,7 @@ function rand_string($length) {
 	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	return substr ( str_shuffle ( $chars ), 0, $length );
 }
-function getLanguageFilePath($lang = "de", $component = null) {
-	// Todo Module Language Files
+function getLanguageFilePath($lang = "de") {
 	return ULICMS_ROOT . "/lang/" . $lang . ".php";
 }
 // Gibt den für den derzeit eingeloggten User eingestellten HTML-Editor aus.

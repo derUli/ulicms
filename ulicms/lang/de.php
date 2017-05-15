@@ -709,5 +709,6 @@ define ( "TRANSLATION_PASSWORD_RESET3", "Falls Sie das Zurücksetzen Ihres Passw
 
 define ( "TRANSLATION_REGISTRATION_SUCCESSFUL", "Registrierung erfolgreich!" );
 define ( "TRANSLATION_THIS_MODULE_HAS_NO_SETTINGS", "Dieses Modul hat keine Einstellungen." );
+define ( "TRANSLATION_CANT_DELETE_CATEGORY_GENERAL", "Die Allgemeine Kategorie kann nicht gelöscht werden!" );
 
 add_hook ( "lang_de" );
