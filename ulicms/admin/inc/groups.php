@@ -60,8 +60,8 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 <?php translation("groups");?>
 </h1>
 <?php
-	
 	if ($created) {
+		// @FIXME: Das hier lokalisieren
 		?>
 <p style='color: green;'>
 	Die Gruppe "
@@ -89,10 +89,8 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 <?php
 	
 	if ($removed) {
-
-		// @FIXME: In Sprachdatei auslagern ('Die Gruppe wurde erfolgreich gelöscht.')
 		?>
-<p style='color: green;'>Die Gruppe wurde erfolgreich gelöscht.</p>
+<p style='color: green;'><?php translate("group_was_deleted")?></p>
 <?php
 	}
 	?>

@@ -69,7 +69,6 @@ if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ) 
 			noperms ();
 		}
 	} else {
-		// @FIXME: Das hier lokalisieren
 		echo "<p>" . get_translation ( "this_module_has_no_settings" ) . "</p>";
 	}
 }

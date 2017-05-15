@@ -717,5 +717,7 @@ define ( "TRANSLATION_PASSWORD_RESET3", "If you did request the password reset j
 define ( "TRANSLATION_REGISTRATION_SUCCESSFUL", "Registration Successful!" );
 define ( "TRANSLATION_THIS_MODULE_HAS_NO_SETTINGS", "This module has no settings." );
 define ( "TRANSLATION_CANT_DELETE_CATEGORY_GENERAL", "Can\'t delete this category." );
+define ( "TRANSLATION_GROUP_WAS_DELETED", "The group was deleted." );
+
 
 add_hook ( "lang_en" );
