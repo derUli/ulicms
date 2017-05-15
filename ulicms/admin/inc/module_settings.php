@@ -18,8 +18,7 @@ $disabledModules = Vars::get ( "disabledModules" );
 
 if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ) and ! ($controller and method_exists ( $controller, "settings" )) or in_array ( $module, $disabledModules ))) {
 	?>
-<!--  @FIXME: Das hier lokalisieren -->
-<p class='ulicms_error'>Dieses Modul bietet keine Einstellungen.</p>
+<p class='ulicms_error'><?php translate("this_module_has_no_settings")?></p>
 <?php
 } else {
 	if ($controller and method_exists ( $controller, "settings" )) {
@@ -71,7 +70,7 @@ if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ) 
 		}
 	} else {
 		// @FIXME: Das hier lokalisieren
-		echo "<p>Keine Einstellungsmöglichkeiten vorhanden.</p>";
+		echo "<p>" . get_translation ( "this_module_has_no_settings" ) . "</p>";
 	}
 }
 ?>

@@ -708,5 +708,6 @@ define ( "TRANSLATION_PASSWORD_RESET2", "Klicken Sie bitte den folgenden Link an
 define ( "TRANSLATION_PASSWORD_RESET3", "Falls Sie das Zurücksetzen Ihres Passworts nicht angefordert haben, ignorieren Sie diese E-Mail bitte einfach." );
 
 define ( "TRANSLATION_REGISTRATION_SUCCESSFUL", "Registrierung erfolgreich!" );
+define ( "TRANSLATION_THIS_MODULE_HAS_NO_SETTINGS", "Dieses Modul hat keine Einstellungen." );
 
 add_hook ( "lang_de" );
