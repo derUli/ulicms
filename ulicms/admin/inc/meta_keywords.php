@@ -64,7 +64,7 @@ if (defined ( "_SECURITY" )) {
 				style="width: 400px"
 				value="<?php
 			
-			echo stringHelper::real_htmlspecialchars ( $meta_keywordss [$lang] );
+			echo StringHelper::real_htmlspecialchars ( $meta_keywordss [$lang] );
 			?>"></td>
 		</tr>
 			<?php

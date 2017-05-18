@@ -112,7 +112,7 @@ function get_edit_button() {
 	$html = "";
 	if (is_logged_in () and ! containsModule ()) {
 		$acl = new ACL ();
-		if ($acl->hasPermission ( "pages" ) and Flags::getNoCache ()) {
+		if ($acl->hasPermission ( "pages" ) and Flags::getNoCache () && is_200 ()) {
 			$id = get_ID ();
 			$html .= "<div class=\"ulicms_edit\">[<a href=\"admin/index.php?action=pages_edit&page=$id\">" . get_translation ( "edit" ) . "</a>]</div>";
 		}
@@ -564,13 +564,13 @@ function get_title($ipage = null, $headline = false) {
 	}
 }
 function title($ipage = null) {
-	echo stringHelper::real_htmlspecialchars ( get_title ( $ipage ) );
+	echo StringHelper::real_htmlspecialchars ( get_title ( $ipage ) );
 }
 function get_headline($ipage = null) {
 	return get_title ( $ipage, true );
 }
 function headline($ipage = null) {
-	echo stringHelper::real_htmlspecialchars ( get_headline ( $ipage ) );
+	echo StringHelper::real_htmlspecialchars ( get_headline ( $ipage ) );
 }
 function import($ipage) {
 	$ipage = db_escape ( $ipage );
@@ -599,7 +599,16 @@ function apply_filter($text, $type) {
 		}
 		$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
 		$module_content_filter_file2 = getModulePath ( $modules [$i] ) . "filters/" . $type . ".php";
-		if (file_exists ( $module_content_filter_file1 )) {
+		
+		$main_class = getModuleMeta ( $modules [$i], "main_class" );
+		$controller = null;
+		if ($main_class) {
+			$controller = ControllerRegistry::get ( $main_class );
+		}
+		$escapedName = ModuleHelper::underscoreToCamel ( $type . "_filter" );
+		if ($controller and method_exists ( $controller, $escapedName )) {
+			$text = $controller->$escapedName ( $text );
+		} else if (file_exists ( $module_content_filter_file1 )) {
 			include_once $module_content_filter_file1;
 			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
 				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );

@@ -71,9 +71,7 @@ class ModuleManager {
 		$dataBaseModules = $this->getAllModuleNames ();
 		// Nicht mehr vorhandene Module entfernen
 		foreach ( $dataBaseModules as $dbModule ) {
-			
 			if (! in_array ( $dbModule, $realModules )) {
-				
 				$module = new Module ( $dbModule );
 				$module->delete ();
 			}
@@ -93,6 +91,17 @@ class ModuleManager {
 				$module->setVersion ( $version );
 				$module->save ();
 				$module->enable ();
+			}
+		}
+		
+		// Settings aller aktiven Module auslesen und registrieren
+		$enabledModules = $this->getEnabledModuleNames ();
+		foreach ( $enabledModules as $module ) {
+			$settings = getModuleMeta ( $module, "settings" );
+			if ($settings and is_array ( $settings )) {
+				foreach ( $settings as $key => $value ) {
+					Settings::register ( $key, $value );
+				}
 			}
 		}
 	}

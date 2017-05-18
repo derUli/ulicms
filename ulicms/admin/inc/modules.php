@@ -3,6 +3,10 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "list_packages" )) {
 	noperms ();
 } else {
+	
+	// @FIXME: Hartgecodete Texte in Sprachdateien auslagern.
+	// Das hier sollte am besten gleichzeitig mit dem Redesign der Paketverwaltung geschehen.
+	
 	if (isset ( $_POST ["truncate_installed_patches"] ) and $acl->hasPermission ( "patch_management" )) {
 		db_query ( "TRUNCATE TABLE " . tbname ( "installed_patches" ) );
 	}
@@ -46,7 +50,12 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		for($i = 0; $i < count ( $modules ); $i ++) {
 			echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
 			$disabledModules = Vars::get ( "disabledModules" );
-			$module_has_admin_page = ((file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) )) && ! in_array ( $modules [$i], $disabledModules ));
+			$controller = null;
+			$main_class = getModuleMeta ( $modules [$i], "main_class" );
+			if ($main_class) {
+				$controller = ControllerRegistry::get ( $main_class );
+			}
+			$module_has_admin_page = ((file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) ) or ($controller and method_exists ( $controller, "settings" ))) && ! in_array ( $modules [$i], $disabledModules ));
 			echo getModuleName ( $modules [$i] );
 			$version = getModuleMeta ( $modules [$i], "version" );
 			$source = getModuleMeta ( $modules [$i], "source" );

@@ -37,7 +37,6 @@ define ( "TRANSLATION_FLASH", "Flash" );
 define ( "TRANSLATION_FILES", "Files" );
 
 define ( "TRANSLATION_USERS", "Users" );
-
 define ( "TRANSLATION_GROUPS", "Groups" );
 
 define ( "TRANSLATION_TEMPLATES", "Templates" );
@@ -714,5 +713,11 @@ define ( "TRANSLATION_DEFAULT_ACCESS_RESTRICTIONS", "Edit Access Restrictions fo
 define ( "TRANSLATION_PASSWORD_RESET1", "Someone with the ip address %ip% has requested a password reset at %domain%." );
 define ( "TRANSLATION_PASSWORD_RESET2", "Click this link to change your password:" );
 define ( "TRANSLATION_PASSWORD_RESET3", "If you did request the password reset just ignore this email." );
+
+define ( "TRANSLATION_REGISTRATION_SUCCESSFUL", "Registration Successful!" );
+define ( "TRANSLATION_THIS_MODULE_HAS_NO_SETTINGS", "This module has no settings." );
+define ( "TRANSLATION_CANT_DELETE_CATEGORY_GENERAL", "Can\'t delete this category." );
+define ( "TRANSLATION_GROUP_WAS_DELETED", "The group was deleted." );
+
 
 add_hook ( "lang_en" );

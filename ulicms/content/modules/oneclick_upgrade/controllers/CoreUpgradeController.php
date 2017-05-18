@@ -1,12 +1,10 @@
 <?php
 class CoreUpgradeController extends Controller {
-	const DEFAULT_CHECK_URL = "https://www.ulicms.de/current_version.json";
-	private $checkURL = null;
-	public function __construct() {
-		$this->checkURL = self::DEFAULT_CHECK_URL;
-	}
 	public function getCheckURL() {
-		return apply_filter ( $this->checkURL, "core_upgrade_check_url" );
+		return "http://channels.ulicms.de/" . Settings::get ( "oneclick_upgrade_channel" ) . ".json";
+	}
+	public function __construct() {
+		$this->checkURL = $this->getCheckURL ();
 	}
 	public function setCheckURL($url) {
 		$this->checkURL = $url;

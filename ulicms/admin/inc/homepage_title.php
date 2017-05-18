@@ -60,7 +60,7 @@ if (defined ( "_SECURITY" )) {
 				style="width: 400px"
 				value="<?php
 			
-			echo stringHelper::real_htmlspecialchars ( $homepage_titles [$lang] );
+			echo StringHelper::real_htmlspecialchars ( $homepage_titles [$lang] );
 			?>"></td>
 		</tr>
 			<?php

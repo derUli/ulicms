@@ -200,8 +200,7 @@ function rand_string($length) {
 	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	return substr ( str_shuffle ( $chars ), 0, $length );
 }
-function getLanguageFilePath($lang = "de", $component = null) {
-	// Todo Module Language Files
+function getLanguageFilePath($lang = "de") {
 	return ULICMS_ROOT . "/lang/" . $lang . ".php";
 }
 // Gibt den für den derzeit eingeloggten User eingestellten HTML-Editor aus.
@@ -589,7 +588,15 @@ function add_hook($name) {
 		}
 		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
 		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
-		if (file_exists ( $file1 )) {
+		$main_class = getModuleMeta ( $modules [$hook_i], "main_class" );
+		$controller = null;
+		if ($main_class) {
+			$controller = ControllerRegistry::get ( $main_class );
+		}
+		$escapedName = ModuleHelper::underscoreToCamel ( $name );
+		if ($controller and method_exists ( $controller, $escapedName )) {
+			echo $controller->$escapedName ();
+		} else if (file_exists ( $file1 )) {
 			@include $file1;
 		} else if (file_exists ( $file2 )) {
 			@include $file2;
@@ -630,7 +637,7 @@ function setLocaleByLanguage() {
 // Returns the language code of the current language
 // If $current is true returns language of the current page
 // else it returns $_SESSION["language"];
-function getCurrentLanguage($current = true) {
+function getCurrentLanguage($current = false) {
 	if ($current) {
 		$query = db_query ( "SELECT language FROM " . tbname ( "content" ) . " WHERE systemname='" . get_requested_pagename () . "'" );
 		
@@ -765,7 +772,7 @@ function getCurrentURL() {
 	$s = empty ( $_SERVER ["HTTPS"] ) ? '' : ($_SERVER ["HTTPS"] == "on") ? "s" : "";
 	$sp = strtolower ( $_SERVER ["SERVER_PROTOCOL"] );
 	$protocol = substr ( $sp, 0, strpos ( $sp, "/" ) ) . $s;
-	$port = ($_SERVER ["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
+	$port = ($_SERVER ["SERVER_PORT"] == "80" || $_SERVER ["SERVER_PORT"] == "443") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
 	return $protocol . "://" . $_SERVER ['SERVER_NAME'] . $port . $_SERVER ['REQUEST_URI'];
 }
 function buildCacheFilePath($request_uri) {
@@ -965,7 +972,16 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";
 		}
 		
-		if (function_exists ( $thisModule . "_render" )) {
+		$main_class = getModuleMeta ( $thisModule, "main_class" );
+		$controller = null;
+		$hasRenderMethod = false;
+		if ($main_class) {
+			$controller = ControllerRegistry::get ( $main_class );
+		}
+		
+		if ($controller and method_exists ( $controller, "render" )) {
+			$html_output = $controller->render ();
+		} else if (function_exists ( $thisModule . "_render" )) {
 			$html_output = call_user_func ( $thisModule . "_render" );
 		} else {
 			$html_output = "<p class='ulicms_error'>Das Modul " . $thisModule . " konnte nicht geladen werden.</p>";

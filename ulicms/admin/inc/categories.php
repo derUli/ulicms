@@ -137,7 +137,7 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 				} else {
 					?>
 			<td style="text-align: center;"><a href="#"
-					onclick="alert('Die Allgemeine Kategorie kann nicht gelöscht werden!')"><img
+					onclick="alert('<?php translate("CANT_DELETE_CATEGORY_GENERAL");?>')"><img
 						class="mobile-big-image" src="gfx/delete.gif"
 						alt="<?php
 					
@@ -194,8 +194,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 
 	<p>
 	<?php translate("description");?>
-		<br />
-		<textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
+		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
 	</p>
 	<p>
 		<input type="submit" name="create"
@@ -234,8 +233,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 
 	<p>
 	<?php translate("description");?>
-		<br />
-		<textarea cols="50" name="description" rows="5" maxlength="255"><?php
+		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"><?php
 			echo htmlspecialchars ( categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
 			?></textarea>
 	</p>

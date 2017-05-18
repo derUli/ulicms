@@ -44,4 +44,11 @@ class CustomData {
 		$json = json_encode ( $data );
 		return Database::query ( "UPDATE " . tbname ( "content" ) . " SET custom_data = '" . Database::escapeValue ( $json ) . "' WHERE systemname='" . Database::escapeValue ( $page ) . "'" );
 	}
+	public static function getCustomDataOrSetting($name) {
+		$data = CustomData::get ();
+		if (! is_null ( $data ) and is_array ( $data ) and isset ( $data [$name] )) {
+			return $data [$name];
+		}
+		return Settings::get ( $name );
+	}
 }

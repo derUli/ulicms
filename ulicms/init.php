@@ -186,6 +186,7 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "comment.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "content_factory.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "custom_fields.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "language.php";
 
 Translation::init ();
 
@@ -329,11 +330,11 @@ if (! defined ( "KCFINDER_PAGE" )) {
 	TypeMapper::loadMapping ();
 	HelperRegistry::loadModuleHelpers ();
 	ControllerRegistry::loadModuleControllers ();
+	
+	add_hook ( "before_init" );
+	add_hook ( "init" );
+	add_hook ( "after_init" );
 }
-
-add_hook ( "before_init" );
-add_hook ( "init" );
-add_hook ( "after_init" );
 
 $version = new ulicms_version ();
 if (! defined ( "UPDATE_CHECK_URL" )) {

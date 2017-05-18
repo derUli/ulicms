@@ -16,6 +16,23 @@ class RequestClassTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( 123.0, Request::getVar ( "var2", null, "float" ) );
 		$this->assertEquals ( 1, Request::getVar ( "var3", null, "int" ) );
 	}
+	public function testGetMethod() {
+		$_SERVER ["REQUEST_METHOD"] = "GET";
+		$this->assertEquals ( "get", Request::getMethod () );
+		$this->assertTrue ( Request::isGet () );
+		$this->assertFalse ( Request::isPost () );
+		$this->assertFalse ( Request::isHead () );
+		$_SERVER ["REQUEST_METHOD"] = "POST";
+		$this->assertEquals ( "post", Request::getMethod () );
+		$this->assertFalse ( Request::isGet () );
+		$this->assertTrue ( Request::isPost () );
+		$this->assertFalse ( Request::isHead () );
+		$_SERVER ["REQUEST_METHOD"] = "HEAD";
+		$this->assertEquals ( "head", Request::getMethod () );
+		$this->assertFalse ( Request::isGet () );
+		$this->assertFalse ( Request::isPost () );
+		$this->assertTrue ( Request::isHead () );
+	}
 }
 
 

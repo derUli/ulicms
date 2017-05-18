@@ -9,3 +9,6 @@ define ( "TRANSLATION_RELEASE_NOTES", "Veröffentlichungshinweise" );
 define ( "TRANSLATION_AN_UPGRADE_IS_AVAILABLE", "Ein Upgrade auf Version %version% ist verfügbar." );
 define ( "TRANSLATION_SHOW_MORE", "Mehr Informationen" );
 define ( "TRANSLATION_SKIP_KCFINDER", "kcfinder überspringen" );
+define ( "TRANSLATION_CHANNEL", "Kanal" );
+define ( "TRANSLATION_FAST", "Schnell" );
+define ( "TRANSLATION_SLOW", "Langsam" );

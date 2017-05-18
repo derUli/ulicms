@@ -31,8 +31,15 @@ class Translation {
 		$modules = getAllModules ();
 		foreach ( $modules as $module ) {
 			$file = getModulePath ( $module, true ) . "/lang/" . $lang . ".php";
+			
 			if (file_exists ( $file ) and is_file ( $file )) {
 				include_once $file;
+			} else {
+				$file = getModulePath ( $module, true ) . "/lang/en.php";
+				
+				if (file_exists ( $file ) and is_file ( $file )) {
+					include_once $file;
+				}
 			}
 		}
 	}
@@ -41,6 +48,11 @@ class Translation {
 		$file = getTemplateDirPath ( get_theme (), true ) . "/lang/" . $lang . ".php";
 		if (file_exists ( $file ) and is_file ( $file )) {
 			include_once $file;
+		} else {
+			$file = getTemplateDirPath ( get_theme (), true ) . "/lang/en.php";
+			if (file_exists ( $file ) and is_file ( $file )) {
+				include_once $file;
+			}
 		}
 	}
 }

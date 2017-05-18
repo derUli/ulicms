@@ -22,7 +22,10 @@ class Request {
 		}
 		return $value;
 	}
-	
+	public static function hasVar($name) {
+		return (isset ( $_POST [$name] ) or isset ( $_GET [$name] ));
+	}
+
 	// Übersetzung HTTP Status Code => Name
 	public static function getStatusCodeByNumber($nr) {
 		$http_codes = array (
@@ -80,7 +83,7 @@ class Request {
 				506 => 'Variant Also Negotiates',
 				507 => 'Insufficient Storage',
 				509 => 'Bandwidth Limit Exceeded',
-				510 => 'Not Extended' 
+				510 => 'Not Extended'
 		);
 		return $nr . " " . $http_codes [$nr];
 	}
@@ -93,5 +96,17 @@ class Request {
 	public static function javascriptRedirect($url = "http://www.ulicms.de") {
 		echo "<script type=\"text/javascript\">location.replace(\"$url\");</script>";
 		exit ();
+	}
+	public static function getMethod() {
+		return strtolower ( $_SERVER ["REQUEST_METHOD"] );
+	}
+	public static function isGet() {
+		return self::getMethod () == "get";
+	}
+	public static function isPost() {
+		return self::getMethod () == "post";
+	}
+	public static function isHead() {
+		return self::getMethod () == "head";
 	}
 }
