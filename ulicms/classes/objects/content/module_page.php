@@ -34,6 +34,7 @@ class Module_Page extends Page {
 	}
 	public function containsModule($module = false) {
 		$retval = false;
+		if (parent::containsModule ( $module )) {
 			$retval = true;
 		}
 		if ($this->module !== null and ! empty ( $this->module )) {
