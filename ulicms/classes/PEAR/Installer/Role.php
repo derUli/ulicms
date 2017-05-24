@@ -249,7 +249,7 @@ class PEAR_Installer_Role {
 			$dir = dirname ( __FILE__ ) . '/Role';
 		}
 		
-		if (! file_exists ( $dir ) || ! is_dir ( $dir )) {
+		if (! faster_file_exists ( $dir ) || ! is_dir ( $dir )) {
 			return PEAR::raiseError ( "registerRoles: opendir($dir) failed: does not exist/is not directory" );
 		}
 		

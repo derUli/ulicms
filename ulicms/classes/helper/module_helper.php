@@ -63,7 +63,7 @@ class ModuleHelper {
 				$embed_attrib = $meta_attr;
 			}
 			
-			if (! file_exists ( $noembedfile1 ) and ! file_exists ( $noembedfile2 ) and $embed_attrib) {
+			if (! faster_file_exists ( $noembedfile1 ) and ! faster_file_exists ( $noembedfile2 ) and $embed_attrib) {
 				$retval [] = $module;
 			}
 		}
@@ -89,7 +89,7 @@ class ModuleHelper {
 			$embed_attrib = $meta_attr;
 		}
 		
-		if (file_exists ( $noembedfile1 ) or file_exists ( $noembedfile2 ) or ! $embed_attrib) {
+		if (faster_file_exists ( $noembedfile1 ) or faster_file_exists ( $noembedfile2 ) or ! $embed_attrib) {
 			$retval = false;
 		}
 		return $retval;

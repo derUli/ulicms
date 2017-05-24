@@ -85,13 +85,13 @@ class PEAR_Builder extends PEAR_Common {
 		$dir = dirname ( $descfile );
 		$old_cwd = getcwd ();
 		
-		if (! file_exists ( $dir ) || ! is_dir ( $dir ) || ! chdir ( $dir )) {
+		if (! faster_file_exists ( $dir ) || ! is_dir ( $dir ) || ! chdir ( $dir )) {
 			return $this->raiseError ( "could not chdir to $dir" );
 		}
 		
 		// packages that were in a .tar have the packagefile in this directory
 		$vdir = $pkg->getPackage () . '-' . $pkg->getVersion ();
-		if (file_exists ( $dir ) && is_dir ( $vdir )) {
+		if (faster_file_exists ( $dir ) && is_dir ( $vdir )) {
 			if (! chdir ( $vdir )) {
 				return $this->raiseError ( "could not chdir to " . realpath ( $vdir ) );
 			}
@@ -102,7 +102,7 @@ class PEAR_Builder extends PEAR_Common {
 		$this->log ( 2, "building in $dir" );
 		
 		$dsp = $pkg->getPackage () . '.dsp';
-		if (! file_exists ( "$dir/$dsp" )) {
+		if (! faster_file_exists ( "$dir/$dsp" )) {
 			return $this->raiseError ( "The DSP $dsp does not exist." );
 		}
 		// XXX TODO: make release build type configurable
@@ -279,7 +279,7 @@ class PEAR_Builder extends PEAR_Common {
 		}
 		
 		$old_cwd = getcwd ();
-		if (! file_exists ( $dir ) || ! is_dir ( $dir ) || ! chdir ( $dir )) {
+		if (! faster_file_exists ( $dir ) || ! is_dir ( $dir ) || ! chdir ( $dir )) {
 			return $this->raiseError ( "could not chdir to $dir" );
 		}
 		
@@ -365,7 +365,7 @@ class PEAR_Builder extends PEAR_Common {
 				"$make_command INSTALL_ROOT=\"$inst_dir\" install",
 				"find \"$inst_dir\" | xargs ls -dils" 
 		);
-		if (! file_exists ( $build_dir ) || ! is_dir ( $build_dir ) || ! chdir ( $build_dir )) {
+		if (! faster_file_exists ( $build_dir ) || ! is_dir ( $build_dir ) || ! chdir ( $build_dir )) {
 			return $this->raiseError ( "could not chdir to $build_dir" );
 		}
 		putenv ( 'PHP_PEAR_VERSION=1.9.4' );

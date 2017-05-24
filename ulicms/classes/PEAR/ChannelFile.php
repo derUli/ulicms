@@ -378,7 +378,7 @@ class PEAR_ChannelFile {
 	 * @return bool success of parsing
 	 */
 	function fromXmlFile($descfile) {
-		if (! file_exists ( $descfile ) || ! is_file ( $descfile ) || ! is_readable ( $descfile ) || (! $fp = fopen ( $descfile, 'r' ))) {
+		if (! faster_file_exists ( $descfile ) || ! is_file ( $descfile ) || ! is_readable ( $descfile ) || (! $fp = fopen ( $descfile, 'r' ))) {
 			require_once 'PEAR.php';
 			return PEAR::raiseError ( "Unable to open $descfile" );
 		}
@@ -402,7 +402,7 @@ class PEAR_ChannelFile {
 	 * @return bool
 	 */
 	function fromAny($info) {
-		if (is_string ( $info ) && file_exists ( $info ) && strlen ( $info ) < 255) {
+		if (is_string ( $info ) && faster_file_exists ( $info ) && strlen ( $info ) < 255) {
 			$tmp = substr ( $info, - 4 );
 			if ($tmp == '.xml') {
 				$info = $this->fromXmlFile ( $info );
@@ -1632,7 +1632,7 @@ class PEAR_ChannelFile {
 	function isIncludeable($path) {
 		$possibilities = explode ( PATH_SEPARATOR, ini_get ( 'include_path' ) );
 		foreach ( $possibilities as $dir ) {
-			if (file_exists ( $dir . DIRECTORY_SEPARATOR . $path ) && is_readable ( $dir . DIRECTORY_SEPARATOR . $path )) {
+			if (faster_file_exists ( $dir . DIRECTORY_SEPARATOR . $path ) && is_readable ( $dir . DIRECTORY_SEPARATOR . $path )) {
 				return true;
 			}
 		}

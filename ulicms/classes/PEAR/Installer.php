@@ -326,7 +326,7 @@ class PEAR_Installer extends PEAR_Downloader {
 			return $this->raiseError ( "SECURITY ERROR: file $file (installed to $dest_file) contains parent directory reference ..", PEAR_INSTALLER_FAILED );
 		}
 		// }}}
-		if (empty ( $this->_options ['register-only'] ) && (! file_exists ( $dest_dir ) || ! is_dir ( $dest_dir ))) {
+		if (empty ( $this->_options ['register-only'] ) && (! faster_file_exists ( $dest_dir ) || ! is_dir ( $dest_dir ))) {
 			if (! $this->mkDirHier ( $dest_dir )) {
 				return $this->raiseError ( "failed to mkdir $dest_dir", PEAR_INSTALLER_FAILED );
 			}
@@ -336,7 +336,7 @@ class PEAR_Installer extends PEAR_Downloader {
 		// pretty much nothing happens if we are only registering the install
 		if (empty ( $this->_options ['register-only'] )) {
 			if (empty ( $atts ['replacements'] )) {
-				if (! file_exists ( $orig_file )) {
+				if (! faster_file_exists ( $orig_file )) {
 					return $this->raiseError ( "file $orig_file does not exist", PEAR_INSTALLER_FAILED );
 				}
 				
@@ -350,7 +350,7 @@ class PEAR_Installer extends PEAR_Downloader {
 				}
 			} else {
 				// {{{ file with replacements
-				if (! file_exists ( $orig_file )) {
+				if (! faster_file_exists ( $orig_file )) {
 					return $this->raiseError ( "file does not exist", PEAR_INSTALLER_FAILED );
 				}
 				
@@ -433,7 +433,7 @@ class PEAR_Installer extends PEAR_Downloader {
 				} else {
 					if (empty ( $options ['force'] )) {
 						// delete the file
-						if (file_exists ( $dest_file )) {
+						if (faster_file_exists ( $dest_file )) {
 							unlink ( $dest_file );
 						}
 						
@@ -563,7 +563,7 @@ class PEAR_Installer extends PEAR_Downloader {
 		$dest_file = $dest_dir . DIRECTORY_SEPARATOR . '.tmp' . basename ( $final_dest_file );
 		// }}}
 		if (empty ( $this->_options ['register-only'] )) {
-			if (! file_exists ( $dest_dir ) || ! is_dir ( $dest_dir )) {
+			if (! faster_file_exists ( $dest_dir ) || ! is_dir ( $dest_dir )) {
 				if (! $this->mkDirHier ( $dest_dir )) {
 					return $this->raiseError ( "failed to mkdir $dest_dir", PEAR_INSTALLER_FAILED );
 				}
@@ -576,7 +576,7 @@ class PEAR_Installer extends PEAR_Downloader {
 		// pretty much nothing happens if we are only registering the install
 		if (empty ( $this->_options ['register-only'] )) {
 			if (! count ( $atts )) { // no tasks
-				if (! file_exists ( $orig_file )) {
+				if (! faster_file_exists ( $orig_file )) {
 					return $this->raiseError ( "file $orig_file does not exist", PEAR_INSTALLER_FAILED );
 				}
 				
@@ -589,7 +589,7 @@ class PEAR_Installer extends PEAR_Downloader {
 					$md5sum = md5_file ( $dest_file );
 				}
 			} else { // file with tasks
-				if (! file_exists ( $orig_file )) {
+				if (! faster_file_exists ( $orig_file )) {
 					return $this->raiseError ( "file $orig_file does not exist", PEAR_INSTALLER_FAILED );
 				}
 				
@@ -652,7 +652,7 @@ class PEAR_Installer extends PEAR_Downloader {
 				} else {
 					if (empty ( $options ['force'] )) {
 						// delete the file
-						if (file_exists ( $dest_file )) {
+						if (faster_file_exists ( $dest_file )) {
 							unlink ( $dest_file );
 						}
 						
@@ -786,7 +786,7 @@ class PEAR_Installer extends PEAR_Downloader {
 			list ( $type, $data ) = $tr;
 			switch ($type) {
 				case 'rename' :
-					if (! file_exists ( $data [0] )) {
+					if (! faster_file_exists ( $data [0] )) {
 						$errors [] = "cannot rename file $data[0], doesn't exist";
 					}
 					
@@ -802,11 +802,11 @@ class PEAR_Installer extends PEAR_Downloader {
 					}
 					break;
 				case 'delete' :
-					if (! file_exists ( $data [0] )) {
+					if (! faster_file_exists ( $data [0] )) {
 						$this->log ( 2, "warning: file $data[0] doesn't exist, can't be deleted" );
 					}
 					// check that directory is writable
-					if (file_exists ( $data [0] )) {
+					if (faster_file_exists ( $data [0] )) {
 						if (! is_writable ( dirname ( $data [0] ) )) {
 							$errors [] = "permission denied ($type): $data[0]";
 						} else {
@@ -869,7 +869,7 @@ class PEAR_Installer extends PEAR_Downloader {
 			list ( $type, $data ) = $tr;
 			switch ($type) {
 				case 'backup' :
-					if (! file_exists ( $data [0] )) {
+					if (! faster_file_exists ( $data [0] )) {
 						$this->file_operations [$i] = false;
 						break;
 					}
@@ -881,14 +881,14 @@ class PEAR_Installer extends PEAR_Downloader {
 					$this->log ( 3, "+ backup $data[0] to $data[0].bak" );
 					break;
 				case 'removebackup' :
-					if (file_exists ( $data [0] . '.bak' ) && is_writable ( $data [0] . '.bak' )) {
+					if (faster_file_exists ( $data [0] . '.bak' ) && is_writable ( $data [0] . '.bak' )) {
 						unlink ( $data [0] . '.bak' );
 						$this->log ( 3, "+ rm backup of $data[0] ($data[0].bak)" );
 					}
 					break;
 				case 'rename' :
-					$test = file_exists ( $data [1] ) ? @unlink ( $data [1] ) : null;
-					if (! $test && file_exists ( $data [1] )) {
+					$test = faster_file_exists ( $data [1] ) ? @unlink ( $data [1] ) : null;
+					if (! $test && faster_file_exists ( $data [1] )) {
 						if ($data [2]) {
 							$extra = ', this extension must be installed manually.  Rename to "' . basename ( $data [1] ) . '"';
 						} else {
@@ -926,7 +926,7 @@ class PEAR_Installer extends PEAR_Downloader {
 					$this->log ( 3, "+ chmod $octmode $data[1]" );
 					break;
 				case 'delete' :
-					if (file_exists ( $data [0] )) {
+					if (faster_file_exists ( $data [0] )) {
 						if (! @unlink ( $data [0] )) {
 							$this->log ( 1, 'Could not delete ' . $data [0] . ' ' . $php_errormsg );
 							return false;
@@ -935,7 +935,7 @@ class PEAR_Installer extends PEAR_Downloader {
 					}
 					break;
 				case 'rmdir' :
-					if (file_exists ( $data [0] )) {
+					if (faster_file_exists ( $data [0] )) {
 						do {
 							$testme = opendir ( $data [0] );
 							while ( false !== ($entry = readdir ( $testme )) ) {
@@ -986,8 +986,8 @@ class PEAR_Installer extends PEAR_Downloader {
 			list ( $type, $data ) = $tr;
 			switch ($type) {
 				case 'backup' :
-					if (file_exists ( $data [0] . '.bak' )) {
-						if (file_exists ( $data [0] && is_writable ( $data [0] ) )) {
+					if (faster_file_exists ( $data [0] . '.bak' )) {
+						if (faster_file_exists ( $data [0] && is_writable ( $data [0] ) )) {
 							unlink ( $data [0] );
 						}
 						@copy ( $data [0] . '.bak', $data [0] );
@@ -995,7 +995,7 @@ class PEAR_Installer extends PEAR_Downloader {
 					}
 					break;
 				case 'removebackup' :
-					if (file_exists ( $data [0] . '.bak' ) && is_writable ( $data [0] . '.bak' )) {
+					if (faster_file_exists ( $data [0] . '.bak' ) && is_writable ( $data [0] . '.bak' )) {
 						unlink ( $data [0] . '.bak' );
 						$this->log ( 3, "+ rm backup of $data[0] ($data[0].bak)" );
 					}
@@ -1203,7 +1203,7 @@ class PEAR_Installer extends PEAR_Downloader {
 		}
 		
 		// {{{ checks to do when not in "force" mode
-		if (empty ( $options ['force'] ) && (file_exists ( $this->config->get ( 'php_dir' ) ) && is_dir ( $this->config->get ( 'php_dir' ) ))) {
+		if (empty ( $options ['force'] ) && (faster_file_exists ( $this->config->get ( 'php_dir' ) ) && is_dir ( $this->config->get ( 'php_dir' ) ))) {
 			$testp = $channel == 'pear.php.net' ? $pkgname : array (
 					$channel,
 					$pkgname 
@@ -1574,7 +1574,7 @@ class PEAR_Installer extends PEAR_Downloader {
 			$copydir = dirname ( $copyto );
 			// pretty much nothing happens if we are only registering the install
 			if (empty ( $this->_options ['register-only'] )) {
-				if (! file_exists ( $copydir ) || ! is_dir ( $copydir )) {
+				if (! faster_file_exists ( $copydir ) || ! is_dir ( $copydir )) {
 					if (! $this->mkDirHier ( $copydir )) {
 						return $this->raiseError ( "failed to mkdir $copydir", PEAR_INSTALLER_FAILED );
 					}

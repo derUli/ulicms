@@ -141,7 +141,7 @@ class PEAR_Frontend extends PEAR {
 	 *
 	 */
 	function isIncludeable($path) {
-		if (file_exists ( $path ) && is_readable ( $path )) {
+		if (faster_file_exists ( $path ) && is_readable ( $path )) {
 			return true;
 		}
 		

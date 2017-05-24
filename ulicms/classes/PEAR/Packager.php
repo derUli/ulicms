@@ -150,12 +150,12 @@ class PEAR_Packager extends PEAR_Common {
 			
 			// TAR the Package -------------------------------------------
 			$this->log ( 1, "Package $dest_package done" );
-			if (file_exists ( "$pkgdir/CVS/Root" )) {
+			if (faster_file_exists ( "$pkgdir/CVS/Root" )) {
 				$cvsversion = preg_replace ( '/[^a-z0-9]/i', '_', $pf->getVersion () );
 				$cvstag = "RELEASE_$cvsversion";
 				$this->log ( 1, 'Tag the released code with "pear cvstag ' . $main->getPackageFile () . '"' );
 				$this->log ( 1, "(or set the CVS tag $cvstag by hand)" );
-			} elseif (file_exists ( "$pkgdir/.svn" )) {
+			} elseif (faster_file_exists ( "$pkgdir/.svn" )) {
 				$svnversion = preg_replace ( '/[^a-z0-9]/i', '.', $pf->getVersion () );
 				$svntag = $pf->getName () . "-$svnversion";
 				$this->log ( 1, 'Tag the released code with "pear svntag ' . $main->getPackageFile () . '"' );
@@ -174,12 +174,12 @@ class PEAR_Packager extends PEAR_Common {
 			
 			// TAR the Package -------------------------------------------
 			$this->log ( 1, "Package $dest_package done" );
-			if (file_exists ( "$pkgdir/CVS/Root" )) {
+			if (faster_file_exists ( "$pkgdir/CVS/Root" )) {
 				$cvsversion = preg_replace ( '/[^a-z0-9]/i', '_', $pf->getVersion () );
 				$cvstag = "RELEASE_$cvsversion";
 				$this->log ( 1, "Tag the released code with `pear cvstag $pkgfile'" );
 				$this->log ( 1, "(or set the CVS tag $cvstag by hand)" );
-			} elseif (file_exists ( "$pkgdir/.svn" )) {
+			} elseif (faster_file_exists ( "$pkgdir/.svn" )) {
 				$svnversion = preg_replace ( '/[^a-z0-9]/i', '.', $pf->getVersion () );
 				$svntag = $pf->getName () . "-$svnversion";
 				$this->log ( 1, "Tag the released code with `pear svntag $pkgfile'" );

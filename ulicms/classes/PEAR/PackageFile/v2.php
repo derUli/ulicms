@@ -1859,7 +1859,7 @@ class PEAR_PackageFile_v2 {
 					DIRECTORY_SEPARATOR,
 					DIRECTORY_SEPARATOR 
 			), $file );
-			if (file_exists ( $file ) && is_readable ( $file )) {
+			if (faster_file_exists ( $file ) && is_readable ( $file )) {
 				return implode ( '', file ( $file ) );
 			}
 		} else { // tgz

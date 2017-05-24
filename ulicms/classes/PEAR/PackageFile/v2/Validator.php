@@ -1703,7 +1703,7 @@ class PEAR_PackageFile_v2_Validator {
 		}
 		$pkg = & new PEAR_PackageFile ( $this->_pf->_config );
 		foreach ( $info as $package ) {
-			if (! file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $package )) {
+			if (! faster_file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $package )) {
 				$this->_fileNotFound ( $dir_prefix . DIRECTORY_SEPARATOR . $package );
 				$this->_isValid = 0;
 				continue;
@@ -1766,7 +1766,7 @@ class PEAR_PackageFile_v2_Validator {
 		foreach ( $info as $fa ) {
 			$fa = $fa ['attribs'];
 			$file = $fa ['name'];
-			if (! file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $file )) {
+			if (! faster_file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $file )) {
 				$this->_fileNotFound ( $dir_prefix . DIRECTORY_SEPARATOR . $file );
 				$this->_isValid = 0;
 				continue;

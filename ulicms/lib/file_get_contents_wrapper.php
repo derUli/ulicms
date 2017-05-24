@@ -34,7 +34,7 @@ function file_get_contents_wrapper($url, $no_cache = false) {
 	$cache_name = md5 ( $url ) . "-" . basename ( $url );
 	$cache_folder = ULICMS_ROOT . "/content/cache";
 	$cache_path = $cache_folder . "/" . $cache_name;
-	if (file_exists ( $cache_path ) && is_url ( $url ) && ! $no_cache) {
+	if (faster_file_exists ( $cache_path ) && is_url ( $url ) && ! $no_cache) {
 		return file_get_contents ( $cache_path );
 	}
 	

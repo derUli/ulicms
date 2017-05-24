@@ -272,9 +272,9 @@ class PEAR_RunTest {
 		return $cmd;
 	}
 	function runPHPUnit($file, $ini_settings = '') {
-		if (! file_exists ( $file ) && file_exists ( getcwd () . DIRECTORY_SEPARATOR . $file )) {
+		if (! faster_file_exists ( $file ) && faster_file_exists ( getcwd () . DIRECTORY_SEPARATOR . $file )) {
 			$file = realpath ( getcwd () . DIRECTORY_SEPARATOR . $file );
-		} elseif (file_exists ( $file )) {
+		} elseif (faster_file_exists ( $file )) {
 			$file = realpath ( $file );
 		}
 		
@@ -511,7 +511,7 @@ class PEAR_RunTest {
 		
 		$output = preg_replace ( '/\r\n/', "\n", trim ( $out ) );
 		
-		if (isset ( $tmp_post ) && realpath ( $tmp_post ) && file_exists ( $tmp_post )) {
+		if (isset ( $tmp_post ) && realpath ( $tmp_post ) && faster_file_exists ( $tmp_post )) {
 			@unlink ( realpath ( $tmp_post ) );
 		}
 		chdir ( $cwd ); // in case the test moves us around
@@ -569,7 +569,7 @@ class PEAR_RunTest {
 				 * var_dump($output);
 				 */
 				if (! $returnfail && preg_match ( "/^$wanted_re\$/s", $output )) {
-					if (file_exists ( $temp_file )) {
+					if (faster_file_exists ( $temp_file )) {
 						unlink ( $temp_file );
 					}
 					if (array_key_exists ( 'FAIL', $section_text )) {
@@ -604,7 +604,7 @@ class PEAR_RunTest {
 				
 				// compare and leave on success
 				if (! $returnfail && 0 == strcmp ( $output, $wanted )) {
-					if (file_exists ( $temp_file )) {
+					if (faster_file_exists ( $temp_file )) {
 						unlink ( $temp_file );
 					}
 					if (array_key_exists ( 'FAIL', $section_text )) {
@@ -978,7 +978,7 @@ $text
 			if (strlen ( $output [1] )) {
 				echo "BORKED --CLEAN-- section! output:\n", $output [1];
 			}
-			if (file_exists ( $temp_clean )) {
+			if (faster_file_exists ( $temp_clean )) {
 				unlink ( $temp_clean );
 			}
 		}

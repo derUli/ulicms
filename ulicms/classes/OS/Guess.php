@@ -174,8 +174,8 @@ class OS_Guess {
 		include_once "System.php";
 		// Use glibc's <features.h> header file to
 		// get major and minor version number:
-		if (@file_exists ( '/usr/include/features.h' ) && @is_readable ( '/usr/include/features.h' )) {
-			if (! @file_exists ( '/usr/bin/cpp' ) || ! @is_executable ( '/usr/bin/cpp' )) {
+		if (@faster_file_exists ( '/usr/include/features.h' ) && @is_readable ( '/usr/include/features.h' )) {
+			if (! @faster_file_exists ( '/usr/bin/cpp' ) || ! @is_executable ( '/usr/bin/cpp' )) {
 				$features_file = fopen ( '/usr/include/features.h', 'rb' );
 				while ( ! feof ( $features_file ) ) {
 					$line = fgets ( $features_file, 8192 );

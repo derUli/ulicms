@@ -8,7 +8,7 @@ if ($_REQUEST ["action"] == "install-sin-package" and StringHelper::isNotNullOrE
 	$file = basename ( $_POST ["file"] );
 	$path = Path::resolve ( "ULICMS_TMP/$file" );
 	$pkg = new SinPackageInstaller ( $path );
-	if (file_exists ( $path )) {
+	if (faster_file_exists ( $path )) {
 		$pkg->installPackage ();
 		@unlink ( $path );
 	}
@@ -600,7 +600,7 @@ function resize_image($file, $target, $w, $h, $crop = FALSE) {
 
 // Favicon Upload
 if (! empty ( $_FILES ['favicon_upload_file'] ['name'] ) and $acl->hasPermission ( "favicon" )) {
-	if (! file_exists ( "../content/images" )) {
+	if (! faster_file_exists ( "../content/images" )) {
 		@mkdir ( "../content/images" );
 		@chmod ( "../content/images", 0777 );
 	}
@@ -659,7 +659,7 @@ if (! empty ( $_FILES ['favicon_upload_file'] ['name'] ) and $acl->hasPermission
 
 // Logo Upload
 if (! empty ( $_FILES ['logo_upload_file'] ['name'] ) and $acl->hasPermission ( "logo" )) {
-	if (! file_exists ( "../content/images" )) {
+	if (! faster_file_exists ( "../content/images" )) {
 		@mkdir ( "../content/images" );
 		@chmod ( "../content/images", 0777 );
 	}

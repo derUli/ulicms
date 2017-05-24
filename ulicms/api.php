@@ -359,7 +359,7 @@ function getFontSizes() {
 function getModuleMeta($module, $attrib = null) {
 	$retval = null;
 	$metadata_file = getModulePath ( $module, true ) . "metadata.json";
-	if (file_exists ( $metadata_file )) {
+	if (faster_file_exists ( $metadata_file )) {
 		$data = file_get_contents ( $metadata_file );
 		$data = json_decode ( $data );
 		if ($attrib != null) {
@@ -375,7 +375,7 @@ function getModuleMeta($module, $attrib = null) {
 function getThemeMeta($theme, $attrib = null) {
 	$retval = null;
 	$metadata_file = getTemplateDirPath ( $theme, true ) . "metadata.json";
-	if (file_exists ( $metadata_file )) {
+	if (faster_file_exists ( $metadata_file )) {
 		$data = file_get_contents ( $metadata_file );
 		$data = json_decode ( $data );
 		if ($attrib != null) {
@@ -390,7 +390,7 @@ function getThemeMeta($theme, $attrib = null) {
 }
 function getModuleName($module) {
 	$name_file = getModulePath ( $module ) . $module . "_name.php";
-	if (! file_exists ( $name_file )) {
+	if (! faster_file_exists ( $name_file )) {
 		return $module;
 	}
 	include_once $name_file;
@@ -435,7 +435,7 @@ function getSystemLanguage() {
 		$lang = "de";
 	}
 	
-	if (! file_exists ( getLanguageFilePath ( $lang ) )) {
+	if (! faster_file_exists ( getLanguageFilePath ( $lang ) )) {
 		$lang = "de";
 	}
 	
@@ -596,9 +596,9 @@ function add_hook($name) {
 		$escapedName = ModuleHelper::underscoreToCamel ( $name );
 		if ($controller and method_exists ( $controller, $escapedName )) {
 			echo $controller->$escapedName ();
-		} else if (file_exists ( $file1 )) {
+		} else if (faster_file_exists ( $file1 )) {
 			@include $file1;
-		} else if (file_exists ( $file2 )) {
+		} else if (faster_file_exists ( $file2 )) {
 			@include $file2;
 		}
 	}

@@ -70,7 +70,7 @@ class PEAR_PackageFile_Generator_v1 {
 		) )) {
 			return PEAR::raiseError ( 'PEAR_Packagefile_v1::toTgz: "' . $where . '" could' . ' not be created' );
 		}
-		if (file_exists ( $where . DIRECTORY_SEPARATOR . 'package.xml' ) && ! is_file ( $where . DIRECTORY_SEPARATOR . 'package.xml' )) {
+		if (faster_file_exists ( $where . DIRECTORY_SEPARATOR . 'package.xml' ) && ! is_file ( $where . DIRECTORY_SEPARATOR . 'package.xml' )) {
 			return PEAR::raiseError ( 'PEAR_Packagefile_v1::toTgz: unable to save package.xml as' . ' "' . $where . DIRECTORY_SEPARATOR . 'package.xml"' );
 		}
 		if (! $this->_packagefile->validate ( PEAR_VALIDATE_PACKAGING )) {
@@ -80,7 +80,7 @@ class PEAR_PackageFile_Generator_v1 {
 		$ext = $compress ? '.tgz' : '.tar';
 		$pkgver = $pkginfo ['package'] . '-' . $pkginfo ['version'];
 		$dest_package = getcwd () . DIRECTORY_SEPARATOR . $pkgver . $ext;
-		if (file_exists ( getcwd () . DIRECTORY_SEPARATOR . $pkgver . $ext ) && ! is_file ( getcwd () . DIRECTORY_SEPARATOR . $pkgver . $ext )) {
+		if (faster_file_exists ( getcwd () . DIRECTORY_SEPARATOR . $pkgver . $ext ) && ! is_file ( getcwd () . DIRECTORY_SEPARATOR . $pkgver . $ext )) {
 			return PEAR::raiseError ( 'PEAR_Packagefile_v1::toTgz: cannot create tgz file "' . getcwd () . DIRECTORY_SEPARATOR . $pkgver . $ext . '"' );
 		}
 		if ($pkgfile = $this->_packagefile->getPackageFile ()) {
@@ -95,7 +95,7 @@ class PEAR_PackageFile_Generator_v1 {
 		
 		foreach ( $this->_packagefile->getFilelist () as $fname => $atts ) {
 			$file = $pkgdir . DIRECTORY_SEPARATOR . $fname;
-			if (! file_exists ( $file )) {
+			if (! faster_file_exists ( $file )) {
 				return PEAR::raiseError ( "File does not exist: $fname" );
 			} else {
 				$filelist [$i ++] = $file;
