@@ -406,7 +406,7 @@ parameter.
 			$data ['data'] [$info ['category']] [] = $packageinfo;
 		}
 		
-		if (isset ( $options ['mode'] ) && in_array ( $options ['mode'], array (
+		if (isset ( $options ['mode'] ) && faster_in_array ( $options ['mode'], array (
 				'notinstalled',
 				'upgrades' 
 		) )) {

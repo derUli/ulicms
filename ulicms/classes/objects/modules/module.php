@@ -75,7 +75,7 @@ class Module {
 		$dependencies = $manager->getDependencies ( $this->name );
 		$enabledMods = $manager->getEnabledModuleNames ();
 		foreach ( $dependencies as $dependency ) {
-			if (! in_array ( $dependency, $enabledMods )) {
+			if (! faster_in_array ( $dependency, $enabledMods )) {
 				$result [] = $dependency;
 			}
 		}
@@ -91,7 +91,7 @@ class Module {
 		$dependent = $manager->getDependentModules ( $module );
 		
 		foreach ( $dependent as $dep ) {
-			if (in_array ( $dep, $enabledMods )) {
+			if (faster_in_array ( $dep, $enabledMods )) {
 				$result [] = $dependency;
 			}
 		}

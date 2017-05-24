@@ -634,7 +634,7 @@ class PEAR_Registry extends PEAR {
 			return null;
 		}
 		
-		if (! in_array ( $mode, array (
+		if (! faster_in_array ( $mode, array (
 				'r',
 				'rb' 
 		) ) && ! $this->hasWriteAccess ()) {
@@ -661,7 +661,7 @@ class PEAR_Registry extends PEAR {
 			return null;
 		}
 		
-		if (! in_array ( $mode, array (
+		if (! faster_in_array ( $mode, array (
 				'r',
 				'rb' 
 		) ) && ! $this->hasWriteAccess ()) {
@@ -709,12 +709,12 @@ class PEAR_Registry extends PEAR {
 						continue;
 					}
 					
-					if (isset ( $attrs ['role'] ) && ! in_array ( $attrs ['role'], PEAR_Installer_Role::getInstallableRoles () )) {
+					if (isset ( $attrs ['role'] ) && ! faster_in_array ( $attrs ['role'], PEAR_Installer_Role::getInstallableRoles () )) {
 						// these are not installed
 						continue;
 					}
 					
-					if (isset ( $attrs ['role'] ) && ! in_array ( $attrs ['role'], PEAR_Installer_Role::getBaseinstallRoles () )) {
+					if (isset ( $attrs ['role'] ) && ! faster_in_array ( $attrs ['role'], PEAR_Installer_Role::getBaseinstallRoles () )) {
 						$attrs ['baseinstalldir'] = $package;
 					}
 					
@@ -952,7 +952,7 @@ class PEAR_Registry extends PEAR {
 				}
 			}
 		} else {
-			if ($update && ! in_array ( $channel->getName (), array (
+			if ($update && ! faster_in_array ( $channel->getName (), array (
 					'pear.php.net',
 					'pecl.php.net',
 					'doc.php.net' 
@@ -1211,19 +1211,19 @@ class PEAR_Registry extends PEAR {
 		}
 		
 		closedir ( $dp );
-		if (! in_array ( 'pear.php.net', $channellist )) {
+		if (! faster_in_array ( 'pear.php.net', $channellist )) {
 			$channellist [] = 'pear.php.net';
 		}
 		
-		if (! in_array ( 'pecl.php.net', $channellist )) {
+		if (! faster_in_array ( 'pecl.php.net', $channellist )) {
 			$channellist [] = 'pecl.php.net';
 		}
 		
-		if (! in_array ( 'doc.php.net', $channellist )) {
+		if (! faster_in_array ( 'doc.php.net', $channellist )) {
 			$channellist [] = 'doc.php.net';
 		}
 		
-		if (! in_array ( '__uri', $channellist )) {
+		if (! faster_in_array ( '__uri', $channellist )) {
 			$channellist [] = '__uri';
 		}
 		
@@ -2092,11 +2092,11 @@ class PEAR_Registry extends PEAR {
 					if (isset ( $attrs ['install-as'] )) {
 						$name = $attrs ['install-as'];
 					}
-					if (! in_array ( $attrs ['role'], PEAR_Installer_Role::getInstallableRoles () )) {
+					if (! faster_in_array ( $attrs ['role'], PEAR_Installer_Role::getInstallableRoles () )) {
 						// these are not installed
 						continue;
 					}
-					if (! in_array ( $attrs ['role'], PEAR_Installer_Role::getBaseinstallRoles () )) {
+					if (! faster_in_array ( $attrs ['role'], PEAR_Installer_Role::getBaseinstallRoles () )) {
 						$attrs ['baseinstalldir'] = is_array ( $package ) ? $package [1] : $package;
 					}
 					if (isset ( $attrs ['baseinstalldir'] )) {
@@ -2268,7 +2268,7 @@ class PEAR_Registry extends PEAR {
 			}
 			// check for extension
 			$pathinfo = pathinfo ( $param ['package'] );
-			if (isset ( $pathinfo ['extension'] ) && in_array ( strtolower ( $pathinfo ['extension'] ), array (
+			if (isset ( $pathinfo ['extension'] ) && faster_in_array ( strtolower ( $pathinfo ['extension'] ), array (
 					'tgz',
 					'tar' 
 			) )) {
@@ -2312,7 +2312,7 @@ class PEAR_Registry extends PEAR {
 			}
 		}
 		if (isset ( $param ['state'] )) {
-			if (! in_array ( strtolower ( $param ['state'] ), $validate->getValidStates () )) {
+			if (! faster_in_array ( strtolower ( $param ['state'] ), $validate->getValidStates () )) {
 				return PEAR::raiseError ( 'parsePackageName(): state "' . $param ['state'] . '" is not a valid state in "' . $saveparam . '"', 'state', null, null, $param );
 			}
 		}
@@ -2321,7 +2321,7 @@ class PEAR_Registry extends PEAR {
 				return PEAR::raiseError ( 'parsePackageName(): cannot contain both ' . 'a version and a stability (state) in "' . $saveparam . '"', 'version/state', null, null, $param );
 			}
 			// check whether version is actually a state
-			if (in_array ( strtolower ( $param ['version'] ), $validate->getValidStates () )) {
+			if (faster_in_array ( strtolower ( $param ['version'] ), $validate->getValidStates () )) {
 				$param ['state'] = strtolower ( $param ['version'] );
 				unset ( $param ['version'] );
 			} else {

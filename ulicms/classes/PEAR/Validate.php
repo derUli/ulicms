@@ -117,7 +117,7 @@ class PEAR_Validate {
 	 *
 	 */
 	function validState($state) {
-		return in_array ( $state, array (
+		return faster_in_array ( $state, array (
 				'snapshot',
 				'devel',
 				'alpha',
@@ -507,7 +507,7 @@ class PEAR_Validate {
 		}
 		$apistates = PEAR_Validate::getValidStates ();
 		array_shift ( $apistates ); // snapshot is not allowed
-		if (! in_array ( $apistability, $apistates )) {
+		if (! faster_in_array ( $apistability, $apistates )) {
 			$this->_addFailure ( 'state', 'invalid API stability "' . $this->_packagexml->getState ( 'api' ) . '", must be one of: ' . implode ( ', ', $apistates ) );
 			$ret = false;
 		}

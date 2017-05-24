@@ -271,23 +271,23 @@ function openMenuImageSelectWindow(field) {
 				<option value="all"
 					<?php
 			
-			if (in_array ( "all", $access )) {
+			if (faster_in_array ( "all", $access )) {
 				echo " selected";
 			}
 			?>>
 				<?php translate("everyone");?></option>
 				<option value="registered"
-					<?php if(in_array("registered", $access)) {echo " selected";}?>>
+					<?php if(faster_in_array("registered", $access)) {echo " selected";}?>>
 				<?php translate("registered_users");?></option>
 
 
 				<option value="mobile"
-					<?php if(in_array("mobile", $access)){ echo " selected";};?>><?php translate("mobile_devices");?></option>
+					<?php if(faster_in_array("mobile", $access)){ echo " selected";};?>><?php translate("mobile_devices");?></option>
 				<option value="desktop"
-					<?php if(in_array("desktop", $access)){ echo " selected";}?>><?php translate("desktop_computers");?></option>
+					<?php if(faster_in_array("desktop", $access)){ echo " selected";}?>><?php translate("desktop_computers");?></option>
 				<?php
 			while ( $row2 = db_fetch_object ( $groups ) ) {
-				if (in_array ( strval ( $row2->id ), $access )) {
+				if (faster_in_array ( strval ( $row2->id ), $access )) {
 					echo '<option value="' . $row2->id . '" selected>' . real_htmlspecialchars ( $row2->name ) . '</option>';
 				} else {
 					echo '<option value="' . $row2->id . '">' . real_htmlspecialchars ( $row2->name ) . '</option>';

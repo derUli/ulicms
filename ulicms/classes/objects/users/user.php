@@ -242,7 +242,7 @@ class User {
 				"ckeditor",
 				"codemirror" 
 		);
-		if (! in_array ( $editor, $allowedEditors )) {
+		if (! faster_in_array ( $editor, $allowedEditors )) {
 			$editor = "ckeditor";
 		}
 		$this->html_editor = $editor;

@@ -14,6 +14,10 @@ function uimport($class) {
 function faster_file_exists($file) {
 	return (stream_resolve_include_path ( $file ) !== false);
 }
+function faster_in_array($needle, $haystack) {
+	$flipped = array_flip ( $haystack );
+	return isset ( $flipped [$needle] );
+}
 
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if (ini_get ( 'register_globals' ) === '1') {
@@ -333,7 +337,7 @@ if (! defined ( "KCFINDER_PAGE" )) {
 	TypeMapper::loadMapping ();
 	HelperRegistry::loadModuleHelpers ();
 	ControllerRegistry::loadModuleControllers ();
-	
+
 	add_hook ( "before_init" );
 	add_hook ( "init" );
 	add_hook ( "after_init" );

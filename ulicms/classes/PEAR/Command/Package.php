@@ -455,7 +455,7 @@ used for automated conversion or learning the format.
 			);
 			$answers = $this->ui->confirmDialog ( $params );
 			
-			if (! in_array ( $answers ['modified'], array (
+			if (! faster_in_array ( $answers ['modified'], array (
 					'y',
 					'yes',
 					'on',
@@ -480,7 +480,7 @@ used for automated conversion or learning the format.
 		}
 		pclose ( $fp );
 		
-		if (in_array ( $svntag . DIRECTORY_SEPARATOR, explode ( "\n", $out ) )) {
+		if (faster_in_array ( $svntag . DIRECTORY_SEPARATOR, explode ( "\n", $out ) )) {
 			$this->ui->outputData ( $this->output, $command );
 			return $this->raiseError ( 'SVN tag ' . $svntag . ' for ' . $package . ' already exists.' );
 		} elseif (faster_file_exists ( $path ['local'] ['base'] . 'tags' ) === false) {
@@ -512,7 +512,7 @@ used for automated conversion or learning the format.
 		$dir = dirname ( $packageFile );
 		$dir = substr ( $dir, strrpos ( $dir, DIRECTORY_SEPARATOR ) + 1 );
 		$files = array_keys ( $info->getFilelist () );
-		if (! in_array ( basename ( $packageFile ), $files )) {
+		if (! faster_in_array ( basename ( $packageFile ), $files )) {
 			$files [] = basename ( $packageFile );
 		}
 		
