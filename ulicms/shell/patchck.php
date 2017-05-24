@@ -66,7 +66,7 @@ if (count ( $argv ) == 0) {
 					if (! empty ( $line )) {
 						$splitted = explode ( "|", $line );
 						if (count ( $splitted ) >= 3) {
-							if (in_array ( $splitted [0], $toinstall ) or in_array ( "all", $toinstall )) {
+							if (faster_in_array ( $splitted [0], $toinstall ) or faster_in_array ( "all", $toinstall )) {
 								$success = $pkg->installPatch ( $splitted [0], $splitted [1], $splitted [2] );
 								if ($success) {
 									echo "Patch " . $splitted [0] . " was installed.\n";

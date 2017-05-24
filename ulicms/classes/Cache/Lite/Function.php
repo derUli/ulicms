@@ -86,7 +86,7 @@ class Cache_Lite_Function extends Cache_Lite {
 				'dontCacheWhenTheResultIsNull' 
 		);
 		while ( list ( $name, $value ) = each ( $options ) ) {
-			if (in_array ( $name, $availableOptions )) {
+			if (faster_in_array ( $name, $availableOptions )) {
 				$property = '_' . $name;
 				$this->$property = $value;
 			}

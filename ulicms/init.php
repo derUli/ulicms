@@ -11,6 +11,10 @@ function uimport($class) {
 	$path = str_replace ( "\\", "/", ULICMS_ROOT ) . "/" . $class . ".php";
 	return include_once $path;
 }
+function faster_in_array($needle, $haystack) {
+	$flipped = array_flip ( $haystack );
+	return isset ( $flipped [$needle] );
+}
 
 // UliCMS verweigert den Betrieb mit aktivierten Register Globals
 if (ini_get ( 'register_globals' ) === '1') {

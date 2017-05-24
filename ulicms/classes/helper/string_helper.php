@@ -159,7 +159,7 @@ class StringHelper {
 				// wenn kein Wort vorhanden ist nichts machen
 				continue;
 			}
-			if (! in_array ( $word, $array )) {
+			if (! faster_in_array ( $word, $array )) {
 				// wenn das wort zum ersten mal gefunden wurde
 				$return [$word] = 1;
 			} else {

@@ -55,7 +55,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			if ($main_class) {
 				$controller = ControllerRegistry::get ( $main_class );
 			}
-			$module_has_admin_page = ((file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) ) or ($controller and method_exists ( $controller, "settings" ))) && ! in_array ( $modules [$i], $disabledModules ));
+			$module_has_admin_page = ((file_exists ( getModuleAdminFilePath ( $modules [$i] ) ) or file_exists ( getModuleAdminFilePath2 ( $modules [$i] ) ) or ($controller and method_exists ( $controller, "settings" ))) && ! faster_in_array ( $modules [$i], $disabledModules ));
 			echo getModuleName ( $modules [$i] );
 			$version = getModuleMeta ( $modules [$i], "version" );
 			$source = getModuleMeta ( $modules [$i], "source" );
@@ -115,7 +115,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			echo "<br/>";
 			if (! file_exists ( $noembed_file1 ) and ! file_exists ( $noembed_file2 ) and $embed_attrib) {
 				$disabled = "";
-				if (in_array ( $modules [$i], $disabledModules )) {
+				if (faster_in_array ( $modules [$i], $disabledModules )) {
 					$disabled = "disabled";
 				}
 				

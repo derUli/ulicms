@@ -94,7 +94,7 @@ class Group {
 		$this->permissions [$name] = $value;
 	}
 	public function hasPermission($name) {
-		return (in_array ( $name, $this->permissions ) and $this->permissions [$name]);
+		return (faster_in_array ( $name, $this->permissions ) and $this->permissions [$name]);
 	}
 	public function removePermission($name) {
 		if (isset ( $this->permissions [$name] )) {

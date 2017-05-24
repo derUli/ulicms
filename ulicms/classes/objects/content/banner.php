@@ -41,7 +41,7 @@ class Banner {
 				"gif",
 				"html" 
 		);
-		if (in_array ( $type, $allowedTypes )) {
+		if (faster_in_array ( $type, $allowedTypes )) {
 			$this->type = $type;
 			return true;
 		}

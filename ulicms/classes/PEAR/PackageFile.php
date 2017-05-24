@@ -94,7 +94,7 @@ class PEAR_PackageFile {
 	 * @return PEAR_PackageFile_Parser_v1 |PEAR_PackageFile_Parser_v1
 	 */
 	function &parserFactory($version) {
-		if (! in_array ( $version {0}, array (
+		if (! faster_in_array ( $version {0}, array (
 				'1',
 				'2' 
 		) )) {
@@ -125,7 +125,7 @@ class PEAR_PackageFile {
 	 * @return PEAR_PackageFile_v1 |PEAR_PackageFile_v1
 	 */
 	function &factory($version) {
-		if (! in_array ( $version {0}, array (
+		if (! faster_in_array ( $version {0}, array (
 				'1',
 				'2' 
 		) )) {
@@ -196,7 +196,7 @@ class PEAR_PackageFile {
 	 */
 	function &fromXmlString($data, $state, $file, $archive = false) {
 		if (preg_match ( '/<package[^>]+version=[\'"]([0-9]+\.[0-9]+)[\'"]/', $data, $packageversion )) {
-			if (! in_array ( $packageversion [1], array (
+			if (! faster_in_array ( $packageversion [1], array (
 					'1.0',
 					'2.0',
 					'2.1' 

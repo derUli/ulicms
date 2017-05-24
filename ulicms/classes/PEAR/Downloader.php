@@ -1350,7 +1350,7 @@ class PEAR_Downloader extends PEAR_Common {
 		}
 		
 		if (isset ( $deplinks [$dep] )) {
-			if (in_array ( $test, array_keys ( $deplinks [$dep] ), true )) {
+			if (faster_in_array ( $test, array_keys ( $deplinks [$dep] ), true )) {
 				return true;
 			}
 			
@@ -1505,7 +1505,7 @@ class PEAR_Downloader extends PEAR_Common {
 		}
 		
 		$info = parse_url ( $url );
-		if (! isset ( $info ['scheme'] ) || ! in_array ( $info ['scheme'], array (
+		if (! isset ( $info ['scheme'] ) || ! faster_in_array ( $info ['scheme'], array (
 				'http',
 				'https' 
 		) )) {
@@ -1642,7 +1642,7 @@ class PEAR_Downloader extends PEAR_Common {
 					return false;
 				}
 				
-				if (! in_array ( $reply, array (
+				if (! faster_in_array ( $reply, array (
 						200,
 						301,
 						302,

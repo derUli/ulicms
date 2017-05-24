@@ -395,7 +395,7 @@ class PEAR {
 	function _checkDelExpect($error_code) {
 		$deleted = false;
 		foreach ( $this->_expected_errors as $key => $error_array ) {
-			if (in_array ( $error_code, $error_array )) {
+			if (faster_in_array ( $error_code, $error_array )) {
 				unset ( $this->_expected_errors [$key] [array_search ( $error_code, $error_array )] );
 				$deleted = true;
 			}
@@ -491,7 +491,7 @@ class PEAR {
 		}
 		
 		if (isset ( $this ) && isset ( $this->_expected_errors ) && count ( $this->_expected_errors ) > 0 && count ( $exp = end ( $this->_expected_errors ) )) {
-			if ($exp [0] == "*" || (is_int ( reset ( $exp ) ) && in_array ( $code, $exp )) || (is_string ( reset ( $exp ) ) && in_array ( $message, $exp ))) {
+			if ($exp [0] == "*" || (is_int ( reset ( $exp ) ) && faster_in_array ( $code, $exp )) || (is_string ( reset ( $exp ) ) && faster_in_array ( $message, $exp ))) {
 				$mode = PEAR_ERROR_RETURN;
 			}
 		}

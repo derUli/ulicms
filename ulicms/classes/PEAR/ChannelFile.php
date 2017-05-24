@@ -254,7 +254,7 @@ class PEAR_ChannelFile {
 	 */
 	function fromXmlString($data) {
 		if (preg_match ( '/<channel\s+version="([0-9]+\.[0-9]+)"/', $data, $channelversion )) {
-			if (! in_array ( $channelversion [1], $this->_supportedVersions )) {
+			if (! faster_in_array ( $channelversion [1], $this->_supportedVersions )) {
 				$this->_stack->push ( PEAR_CHANNELFILE_ERROR_INVALID_VERSION, 'error', array (
 						'version' => $channelversion [1] 
 				) );

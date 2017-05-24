@@ -343,7 +343,7 @@ installed package.'
 							$att ['installed_as'] 
 					);
 				} else {
-					if (isset ( $att ['baseinstalldir'] ) && ! in_array ( $att ['role'], array (
+					if (isset ( $att ['baseinstalldir'] ) && ! faster_in_array ( $att ['role'], array (
 							'test',
 							'data',
 							'doc' 
@@ -657,7 +657,7 @@ installed package.'
 				unset ( $info [$key] );
 			} else {
 				$info [$key] = trim ( $info [$key] );
-				if (in_array ( $key, $longtext )) {
+				if (faster_in_array ( $key, $longtext )) {
 					$info [$key] = preg_replace ( '/  +/', ' ', $info [$key] );
 				}
 			}

@@ -281,7 +281,7 @@ class PEAR_PackageFile_v2 {
 	 * @return string |false Extension name
 	 */
 	function getProvidesExtension() {
-		if (in_array ( $this->getPackageType (), array (
+		if (faster_in_array ( $this->getPackageType (), array (
 				'extsrc',
 				'extbin',
 				'zendextsrc',
@@ -301,7 +301,7 @@ class PEAR_PackageFile_v2 {
 	 * @return bool
 	 */
 	function isExtension($extension) {
-		if (in_array ( $this->getPackageType (), array (
+		if (faster_in_array ( $this->getPackageType (), array (
 				'extsrc',
 				'extbin',
 				'zendextsrc',
@@ -1366,7 +1366,7 @@ class PEAR_PackageFile_v2 {
 	 */
 	function setFileAttribute($filename, $attr, $value, $index = false) {
 		$this->_isValid = 0;
-		if (in_array ( $attr, array (
+		if (faster_in_array ( $attr, array (
 				'role',
 				'name',
 				'baseinstalldir' 
