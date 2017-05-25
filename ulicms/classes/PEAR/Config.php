@@ -80,7 +80,7 @@ if (getenv ( 'PHP_PEAR_HTTP_PROXY' )) {
 if (getenv ( 'PHP_PEAR_INSTALL_DIR' )) {
 	define ( 'PEAR_CONFIG_DEFAULT_PHP_DIR', getenv ( 'PHP_PEAR_INSTALL_DIR' ) );
 } else {
-	if (@file_exists ( $PEAR_INSTALL_DIR ) && is_dir ( $PEAR_INSTALL_DIR )) {
+	if (@faster_file_exists ( $PEAR_INSTALL_DIR ) && is_dir ( $PEAR_INSTALL_DIR )) {
 		define ( 'PEAR_CONFIG_DEFAULT_PHP_DIR', $PEAR_INSTALL_DIR );
 	} else {
 		define ( 'PEAR_CONFIG_DEFAULT_PHP_DIR', $PEAR_INSTALL_DIR );
@@ -93,7 +93,7 @@ if (getenv ( 'PHP_PEAR_EXTENSION_DIR' )) {
 } else {
 	if (ini_get ( 'extension_dir' )) {
 		define ( 'PEAR_CONFIG_DEFAULT_EXT_DIR', ini_get ( 'extension_dir' ) );
-	} elseif (defined ( 'PEAR_EXTENSION_DIR' ) && file_exists ( PEAR_EXTENSION_DIR ) && is_dir ( PEAR_EXTENSION_DIR )) {
+	} elseif (defined ( 'PEAR_EXTENSION_DIR' ) && faster_file_exists ( PEAR_EXTENSION_DIR ) && is_dir ( PEAR_EXTENSION_DIR )) {
 		define ( 'PEAR_CONFIG_DEFAULT_EXT_DIR', PEAR_EXTENSION_DIR );
 	} elseif (defined ( 'PHP_EXTENSION_DIR' )) {
 		define ( 'PEAR_CONFIG_DEFAULT_EXT_DIR', PHP_EXTENSION_DIR );
@@ -636,7 +636,7 @@ class PEAR_Config extends PEAR {
 		$this->layers = array_keys ( $this->configuration );
 		$this->files ['user'] = $user_file;
 		$this->files ['system'] = $system_file;
-		if ($user_file && file_exists ( $user_file )) {
+		if ($user_file && faster_file_exists ( $user_file )) {
 			$this->pushErrorHandling ( PEAR_ERROR_RETURN );
 			$this->readConfigFile ( $user_file, 'user', $strict );
 			$this->popErrorHandling ();
@@ -645,7 +645,7 @@ class PEAR_Config extends PEAR {
 			}
 		}
 		
-		if ($system_file && @file_exists ( $system_file )) {
+		if ($system_file && @faster_file_exists ( $system_file )) {
 			$this->mergeConfigFile ( $system_file, false, 'system', $strict );
 			if ($this->_errorsFound > 0) {
 				return;
@@ -831,7 +831,7 @@ class PEAR_Config extends PEAR {
 			
 			$fail = array ();
 			foreach ( $this->configuration_info as $key => $val ) {
-				if (in_array ( $this->getGroup ( $key ), array (
+				if (faster_in_array ( $this->getGroup ( $key ), array (
 						'File Locations',
 						'File Locations (Advanced)' 
 				) ) && $this->getType ( $key ) == 'directory') {
@@ -1011,7 +1011,7 @@ class PEAR_Config extends PEAR {
 			return $this->raiseError ( "could not create directory: " . dirname ( $file ) );
 		}
 		
-		if (file_exists ( $file ) && is_file ( $file ) && ! is_writeable ( $file )) {
+		if (faster_file_exists ( $file ) && is_file ( $file ) && ! is_writeable ( $file )) {
 			return $this->raiseError ( "no write access to $file!" );
 		}
 		
@@ -1038,7 +1038,7 @@ class PEAR_Config extends PEAR {
 	 */
 	function _readConfigDataFrom($file) {
 		$fp = false;
-		if (file_exists ( $file )) {
+		if (faster_file_exists ( $file )) {
 			$fp = @fopen ( $file, "r" );
 		}
 		
@@ -1137,7 +1137,7 @@ class PEAR_Config extends PEAR {
 			
 			if (! isset ( $var ['type'] )) {
 				return $this->raiseError ( 'Configuration information must contain a type' );
-			} elseif (! in_array ( $var ['type'], array (
+			} elseif (! faster_in_array ( $var ['type'], array (
 					'string',
 					'mask',
 					'password',
@@ -1351,10 +1351,10 @@ class PEAR_Config extends PEAR {
 		}
 		$channel = strtolower ( $channel );
 		
-		$test = (in_array ( $key, $this->_channelConfigInfo )) ? $this->_getChannelValue ( $key, $layer, $channel ) : null;
+		$test = (faster_in_array ( $key, $this->_channelConfigInfo )) ? $this->_getChannelValue ( $key, $layer, $channel ) : null;
 		if ($test !== null) {
 			if ($this->_installRoot) {
-				if (in_array ( $this->getGroup ( $key ), array (
+				if (faster_in_array ( $this->getGroup ( $key ), array (
 						'File Locations',
 						'File Locations (Advanced)' 
 				) ) && $this->getType ( $key ) == 'directory') {
@@ -1369,7 +1369,7 @@ class PEAR_Config extends PEAR {
 				if (isset ( $this->configuration [$layer] [$key] )) {
 					$test = $this->configuration [$layer] [$key];
 					if ($this->_installRoot) {
-						if (in_array ( $this->getGroup ( $key ), array (
+						if (faster_in_array ( $this->getGroup ( $key ), array (
 								'File Locations',
 								'File Locations (Advanced)' 
 						) ) && $this->getType ( $key ) == 'directory') {
@@ -1396,7 +1396,7 @@ class PEAR_Config extends PEAR {
 		} elseif (isset ( $this->configuration [$layer] [$key] )) {
 			$test = $this->configuration [$layer] [$key];
 			if ($this->_installRoot) {
-				if (in_array ( $this->getGroup ( $key ), array (
+				if (faster_in_array ( $this->getGroup ( $key ), array (
 						'File Locations',
 						'File Locations (Advanced)' 
 				) ) && $this->getType ( $key ) == 'directory') {
@@ -1545,7 +1545,7 @@ class PEAR_Config extends PEAR {
 					// any value.
 					if ($valid_set) {
 						reset ( $valid_set );
-						if ((key ( $valid_set ) === 0 && ! in_array ( $value, $valid_set )) || (key ( $valid_set ) !== 0 && empty ( $valid_set [$value] ))) {
+						if ((key ( $valid_set ) === 0 && ! faster_in_array ( $value, $valid_set )) || (key ( $valid_set ) !== 0 && empty ( $valid_set [$value] ))) {
 							return false;
 						}
 					}
@@ -1557,20 +1557,20 @@ class PEAR_Config extends PEAR {
 			$channel = $this->get ( 'default_channel', null, 'pear.php.net' );
 		}
 		
-		if (! in_array ( $channel, $this->_channels )) {
+		if (! faster_in_array ( $channel, $this->_channels )) {
 			$this->_lazyChannelSetup ( $layer );
 			$reg = & $this->getRegistry ( $layer );
 			if ($reg) {
 				$channel = $reg->channelName ( $channel );
 			}
 			
-			if (! in_array ( $channel, $this->_channels )) {
+			if (! faster_in_array ( $channel, $this->_channels )) {
 				return false;
 			}
 		}
 		
 		if ($channel != 'pear.php.net') {
-			if (in_array ( $key, $this->_channelConfigInfo )) {
+			if (faster_in_array ( $key, $this->_channelConfigInfo )) {
 				$this->configuration [$layer] ['__channels'] [$channel] [$key] = $value;
 				return true;
 			}
@@ -2008,7 +2008,7 @@ class PEAR_Config extends PEAR {
 			return false;
 		}
 		
-		if (! in_array ( $layer, array (
+		if (! faster_in_array ( $layer, array (
 				'user',
 				'system' 
 		) )) {

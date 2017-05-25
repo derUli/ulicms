@@ -990,7 +990,7 @@ class PEAR_PackageFile_v1 {
 					continue;
 				}
 				if (! empty ( $d ['optional'] )) {
-					if (! in_array ( $d ['optional'], array (
+					if (! faster_in_array ( $d ['optional'], array (
 							'yes',
 							'no' 
 					) )) {
@@ -1060,7 +1060,7 @@ class PEAR_PackageFile_v1 {
 							'roles' => PEAR_Common::getFileRoles () 
 					) );
 					continue;
-				} elseif (! in_array ( $fa ['role'], PEAR_Common::getFileRoles () )) {
+				} elseif (! faster_in_array ( $fa ['role'], PEAR_Common::getFileRoles () )) {
 					$this->_validateError ( PEAR_PACKAGEFILE_ERROR_INVALID_FILEROLE, array (
 							'file' => $file,
 							'role' => $fa ['role'],
@@ -1132,7 +1132,7 @@ class PEAR_PackageFile_v1 {
 		);
 		$info = $this->getFilelist ();
 		foreach ( $info as $file => $fa ) {
-			if (! file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $file )) {
+			if (! faster_file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $file )) {
 				$this->_validateError ( PEAR_PACKAGEFILE_ERROR_FILE_NOTFOUND, array (
 						'file' => realpath ( $dir_prefix ) . DIRECTORY_SEPARATOR . $file 
 				) );
@@ -1215,7 +1215,7 @@ class PEAR_PackageFile_v1 {
 					DIRECTORY_SEPARATOR,
 					DIRECTORY_SEPARATOR 
 			), $file );
-			if (file_exists ( $file ) && is_readable ( $file )) {
+			if (faster_file_exists ( $file ) && is_readable ( $file )) {
 				return implode ( '', file ( $file ) );
 			}
 		} else { // tgz
@@ -1370,7 +1370,7 @@ class PEAR_PackageFile_v1 {
 					continue 2;
 				case T_STRING :
 					if (version_compare ( zend_version (), '2.0', '<' )) {
-						if (in_array ( strtolower ( $data ), array (
+						if (faster_in_array ( strtolower ( $data ), array (
 								'public',
 								'private',
 								'protected',

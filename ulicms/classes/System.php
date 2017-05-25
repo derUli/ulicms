@@ -198,7 +198,7 @@ class System {
 				$tmp = System::_dirToStruct ( $file, 0 );
 				$struct = array_merge_recursive ( $tmp, $struct );
 			} else {
-				if (! in_array ( $file, $struct ['files'] )) {
+				if (! faster_in_array ( $file, $struct ['files'] )) {
 					$struct ['files'] [] = $file;
 				}
 			}
@@ -292,7 +292,7 @@ class System {
 		if (isset ( $create_parents )) {
 			foreach ( $opts [1] as $dir ) {
 				$dirstack = array ();
-				while ( (! file_exists ( $dir ) || ! is_dir ( $dir )) && $dir != DIRECTORY_SEPARATOR ) {
+				while ( (! faster_file_exists ( $dir ) || ! is_dir ( $dir )) && $dir != DIRECTORY_SEPARATOR ) {
 					array_unshift ( $dirstack, $dir );
 					$dir = dirname ( $dir );
 				}
@@ -310,7 +310,7 @@ class System {
 			}
 		} else {
 			foreach ( $opts [1] as $dir ) {
-				if ((@file_exists ( $dir ) || ! is_dir ( $dir )) && ! mkdir ( $dir, $mode )) {
+				if ((@faster_file_exists ( $dir ) || ! is_dir ( $dir )) && ! mkdir ( $dir, $mode )) {
 					$ret = false;
 				}
 			}
@@ -617,7 +617,7 @@ class System {
 		for($i = 0; $i < $args_count; $i ++) {
 			switch ($args [$i]) {
 				case '-type' :
-					if (in_array ( $args [$i + 1], array (
+					if (faster_in_array ( $args [$i + 1], array (
 							'd',
 							'f' 
 					) )) {

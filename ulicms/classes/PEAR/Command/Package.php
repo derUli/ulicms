@@ -322,7 +322,7 @@ used for automated conversion or learning the format.
 		$this->output = '';
 		$pkginfofile = isset ( $params [0] ) ? $params [0] : 'package.xml';
 		$pkg2 = isset ( $params [1] ) ? $params [1] : null;
-		if (! $pkg2 && ! isset ( $params [0] ) && file_exists ( 'package2.xml' )) {
+		if (! $pkg2 && ! isset ( $params [0] ) && faster_file_exists ( 'package2.xml' )) {
 			$pkg2 = 'package2.xml';
 		}
 		
@@ -455,7 +455,7 @@ used for automated conversion or learning the format.
 			);
 			$answers = $this->ui->confirmDialog ( $params );
 			
-			if (! in_array ( $answers ['modified'], array (
+			if (! faster_in_array ( $answers ['modified'], array (
 					'y',
 					'yes',
 					'on',
@@ -480,10 +480,10 @@ used for automated conversion or learning the format.
 		}
 		pclose ( $fp );
 		
-		if (in_array ( $svntag . DIRECTORY_SEPARATOR, explode ( "\n", $out ) )) {
+		if (faster_in_array ( $svntag . DIRECTORY_SEPARATOR, explode ( "\n", $out ) )) {
 			$this->ui->outputData ( $this->output, $command );
 			return $this->raiseError ( 'SVN tag ' . $svntag . ' for ' . $package . ' already exists.' );
-		} elseif (file_exists ( $path ['local'] ['base'] . 'tags' ) === false) {
+		} elseif (faster_file_exists ( $path ['local'] ['base'] . 'tags' ) === false) {
 			return $this->raiseError ( 'Can not locate the tags directory at ' . $path ['local'] ['base'] . 'tags' );
 		} elseif (is_writeable ( $path ['local'] ['base'] . 'tags' ) === false) {
 			return $this->raiseError ( 'Can not write to the tag directory at ' . $path ['local'] ['base'] . 'tags' );
@@ -512,7 +512,7 @@ used for automated conversion or learning the format.
 		$dir = dirname ( $packageFile );
 		$dir = substr ( $dir, strrpos ( $dir, DIRECTORY_SEPARATOR ) + 1 );
 		$files = array_keys ( $info->getFilelist () );
-		if (! in_array ( basename ( $packageFile ), $files )) {
+		if (! faster_in_array ( basename ( $packageFile ), $files )) {
 			$files [] = basename ( $packageFile );
 		}
 		
@@ -524,7 +524,7 @@ used for automated conversion or learning the format.
 		
 		$commands = array ();
 		foreach ( $files as $file ) {
-			if (! file_exists ( $file )) {
+			if (! faster_file_exists ( $file )) {
 				$file = $dir . DIRECTORY_SEPARATOR . $file;
 			}
 			$commands [] = $command . ' ' . escapeshellarg ( $file ) . ' ' . escapeshellarg ( $releaseTag . DIRECTORY_SEPARATOR . $file );
@@ -670,7 +670,7 @@ used for automated conversion or learning the format.
 		$dir = dirname ( $packageFile );
 		$dir = substr ( $dir, strrpos ( $dir, '/' ) + 1 );
 		foreach ( $files as $file ) {
-			if (! file_exists ( $file )) {
+			if (! faster_file_exists ( $file )) {
 				$file = $dir . DIRECTORY_SEPARATOR . $file;
 			}
 			$command .= ' ' . escapeshellarg ( $file );
@@ -962,7 +962,7 @@ used for automated conversion or learning the format.
 		require_once 'System.php';
 		require_once 'Archive/Tar.php';
 		
-		if (! file_exists ( $params [0] )) {
+		if (! faster_file_exists ( $params [0] )) {
 			return $this->raiseError ( "file does not exist: $params[0]" );
 		}
 		
@@ -980,20 +980,20 @@ used for automated conversion or learning the format.
 			return $this->raiseError ( "failed to extract tar file" );
 		}
 		
-		if (file_exists ( "$tmpdir/package.sig" )) {
+		if (faster_file_exists ( "$tmpdir/package.sig" )) {
 			return $this->raiseError ( "package already signed" );
 		}
 		
 		$packagexml = 'package.xml';
-		if (file_exists ( "$tmpdir/package2.xml" )) {
+		if (faster_file_exists ( "$tmpdir/package2.xml" )) {
 			$packagexml = 'package2.xml';
 		}
 		
-		if (file_exists ( "$tmpdir/package.sig" )) {
+		if (faster_file_exists ( "$tmpdir/package.sig" )) {
 			unlink ( "$tmpdir/package.sig" );
 		}
 		
-		if (! file_exists ( "$tmpdir/$packagexml" )) {
+		if (! faster_file_exists ( "$tmpdir/$packagexml" )) {
 			return $this->raiseError ( "Extracted file $tmpdir/$packagexml not found." );
 		}
 		
@@ -1014,7 +1014,7 @@ used for automated conversion or learning the format.
 		}
 		
 		fwrite ( $gpg, "$input[0]\n" );
-		if (pclose ( $gpg ) || ! file_exists ( "$tmpdir/package.sig" )) {
+		if (pclose ( $gpg ) || ! faster_file_exists ( "$tmpdir/package.sig" )) {
 			return $this->raiseError ( "gpg sign failed" );
 		}
 		

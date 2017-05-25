@@ -7,7 +7,7 @@ class ControllerRegistry {
 			$modules = getAllModules ();
 			$disabledModules = Vars::get ( "disabledModules" );
 			foreach ( $modules as $module ) {
-				if (in_array ( $module, $disabledModules )) {
+				if (faster_in_array ( $module, $disabledModules )) {
 					continue;
 				}
 				$controllers = getModuleMeta ( $module, "controllers" );

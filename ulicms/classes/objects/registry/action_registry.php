@@ -82,14 +82,14 @@ class ActionRegistry {
 				if (! endsWith ( $path, ".php" )) {
 					$path .= ".php";
 				}
-				if (file_exists ( $path )) {
+				if (faster_file_exists ( $path )) {
 					$actions [$action] = $file;
 				}
 			}
 			$modules = getAllModules ();
 			$disabledModules = Vars::get ( "disabledModules" );
 			foreach ( $modules as $module ) {
-				if (in_array ( $module, $disabledModules )) {
+				if (faster_in_array ( $module, $disabledModules )) {
 					continue;
 				}
 				$cActions = getModuleMeta ( $module, "actions" );
@@ -100,7 +100,7 @@ class ActionRegistry {
 							$path .= ".php";
 						}
 						
-						if (file_exists ( $path ) and is_file ( $path )) {
+						if (faster_file_exists ( $path ) and is_file ( $path )) {
 							$actions [$key] = $path;
 						}
 					}

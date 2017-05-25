@@ -278,7 +278,7 @@ installed package.'
 		
 		$reg = & $this->config->getRegistry ();
 		$fp = false;
-		if (! is_dir ( $params [0] ) && (file_exists ( $params [0] ) || $fp = @fopen ( $params [0], 'r' ))) {
+		if (! is_dir ( $params [0] ) && (faster_file_exists ( $params [0] ) || $fp = @fopen ( $params [0], 'r' ))) {
 			if ($fp) {
 				fclose ( $fp );
 			}
@@ -343,7 +343,7 @@ installed package.'
 							$att ['installed_as'] 
 					);
 				} else {
-					if (isset ( $att ['baseinstalldir'] ) && ! in_array ( $att ['role'], array (
+					if (isset ( $att ['baseinstalldir'] ) && ! faster_in_array ( $att ['role'], array (
 							'test',
 							'data',
 							'doc' 
@@ -467,7 +467,7 @@ installed package.'
 		
 		$info = $fp = false;
 		$reg = & $this->config->getRegistry ();
-		if (is_file ( $params [0] ) && ! is_dir ( $params [0] ) && (file_exists ( $params [0] ) || $fp = @fopen ( $params [0], 'r' ))) {
+		if (is_file ( $params [0] ) && ! is_dir ( $params [0] ) && (faster_file_exists ( $params [0] ) || $fp = @fopen ( $params [0], 'r' ))) {
 			if ($fp) {
 				fclose ( $fp );
 			}
@@ -657,7 +657,7 @@ installed package.'
 				unset ( $info [$key] );
 			} else {
 				$info [$key] = trim ( $info [$key] );
-				if (in_array ( $key, $longtext )) {
+				if (faster_in_array ( $key, $longtext )) {
 					$info [$key] = preg_replace ( '/  +/', ' ', $info [$key] );
 				}
 			}

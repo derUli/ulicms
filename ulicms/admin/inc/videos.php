@@ -55,7 +55,7 @@ else if ($acl->hasPermission ( "videos" ) and isset ( $_FILES ) and isset ( $_RE
 		$mp4_allowed_mime_type = array (
 				"video/mp4" 
 		);
-		if (in_array ( $mp4_type, $mp4_allowed_mime_type )) {
+		if (faster_in_array ( $mp4_type, $mp4_allowed_mime_type )) {
 			$target = $video_folder . "/" . $mp4_file;
 			if (move_uploaded_file ( $_FILES ['mp4_file'] ['tmp_name'], $target )) {
 				$mp4_file_value = basename ( $mp4_file );
@@ -73,7 +73,7 @@ else if ($acl->hasPermission ( "videos" ) and isset ( $_FILES ) and isset ( $_RE
 				"application/ogg",
 				"audio/ogg" 
 		);
-		if (in_array ( $ogg_type, $ogg_allowed_mime_type )) {
+		if (faster_in_array ( $ogg_type, $ogg_allowed_mime_type )) {
 			$target = $video_folder . "/" . $ogg_file;
 			if (move_uploaded_file ( $_FILES ['ogg_file'] ['tmp_name'], $target )) {
 				$ogg_file_value = basename ( $ogg_file );
@@ -92,7 +92,7 @@ else if ($acl->hasPermission ( "videos" ) and isset ( $_FILES ) and isset ( $_RE
 				"audio/webm",
 				"application/webm" 
 		);
-		if (in_array ( $webm_type, $webm_allowed_mime_type )) {
+		if (faster_in_array ( $webm_type, $webm_allowed_mime_type )) {
 			$target = $video_folder . "/" . $webm_file;
 			if (move_uploaded_file ( $_FILES ['webm_file'] ['tmp_name'], $target )) {
 				$webm_file_value = basename ( $webm_file );

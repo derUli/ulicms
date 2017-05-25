@@ -291,7 +291,7 @@ function get_used_post_types() {
 		$used_types [] = $row->type;
 	}
 	foreach ( $types as $type ) {
-		if (in_array ( $type, $used_types )) {
+		if (faster_in_array ( $type, $used_types )) {
 			$return_types [] = $type;
 		}
 	}
@@ -313,13 +313,13 @@ function get_available_post_types() {
 	$modules = getAllModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	foreach ( $modules as $module ) {
-		if (in_array ( $module, $disabledModules )) {
+		if (faster_in_array ( $module, $disabledModules )) {
 			continue;
 		}
 		$custom_types = getModuleMeta ( $module, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
-				if (! in_array ( $key, $post_types )) {
+				if (! faster_in_array ( $key, $post_types )) {
 					$post_types [] = $key;
 				}
 			}
@@ -328,13 +328,13 @@ function get_available_post_types() {
 	
 	$themes = getAllModules ();
 	foreach ( $themes as $theme ) {
-		if (in_array ( $module, $disabledModules )) {
+		if (faster_in_array ( $module, $disabledModules )) {
 			continue;
 		}
 		$custom_types = getThemeMeta ( $theme, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
-				if (! in_array ( $key, $post_types )) {
+				if (! faster_in_array ( $key, $post_types )) {
 					$post_types [] = $key;
 				}
 			}
@@ -359,7 +359,7 @@ function getFontSizes() {
 function getModuleMeta($module, $attrib = null) {
 	$retval = null;
 	$metadata_file = getModulePath ( $module, true ) . "metadata.json";
-	if (file_exists ( $metadata_file )) {
+	if (faster_file_exists ( $metadata_file )) {
 		$data = file_get_contents ( $metadata_file );
 		$data = json_decode ( $data );
 		if ($attrib != null) {
@@ -375,7 +375,7 @@ function getModuleMeta($module, $attrib = null) {
 function getThemeMeta($theme, $attrib = null) {
 	$retval = null;
 	$metadata_file = getTemplateDirPath ( $theme, true ) . "metadata.json";
-	if (file_exists ( $metadata_file )) {
+	if (faster_file_exists ( $metadata_file )) {
 		$data = file_get_contents ( $metadata_file );
 		$data = json_decode ( $data );
 		if ($attrib != null) {
@@ -390,7 +390,7 @@ function getThemeMeta($theme, $attrib = null) {
 }
 function getModuleName($module) {
 	$name_file = getModulePath ( $module ) . $module . "_name.php";
-	if (! file_exists ( $name_file )) {
+	if (! faster_file_exists ( $name_file )) {
 		return $module;
 	}
 	include_once $name_file;
@@ -435,7 +435,7 @@ function getSystemLanguage() {
 		$lang = "de";
 	}
 	
-	if (! file_exists ( getLanguageFilePath ( $lang ) )) {
+	if (! faster_file_exists ( getLanguageFilePath ( $lang ) )) {
 		$lang = "de";
 	}
 	
@@ -478,7 +478,7 @@ function setLanguageByDomain() {
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
 						$domain = $_SERVER ["HTTP_HOST"];
 						
-						if ($line [0] == $domain and in_array ( $line [1], getAllLanguages () )) {
+						if ($line [0] == $domain and faster_in_array ( $line [1], getAllLanguages () )) {
 							$_SESSION ["language"] = $line [1];
 							return true;
 						}
@@ -583,7 +583,7 @@ function add_hook($name) {
 	$modules = getAllModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
-		if (in_array ( $modules [$hook_i], $disabledModules )) {
+		if (faster_in_array ( $modules [$hook_i], $disabledModules )) {
 			continue;
 		}
 		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
@@ -596,9 +596,9 @@ function add_hook($name) {
 		$escapedName = ModuleHelper::underscoreToCamel ( $name );
 		if ($controller and method_exists ( $controller, $escapedName )) {
 			echo $controller->$escapedName ();
-		} else if (file_exists ( $file1 )) {
+		} else if (faster_file_exists ( $file1 )) {
 			@include $file1;
-		} else if (file_exists ( $file2 )) {
+		} else if (faster_file_exists ( $file2 )) {
 			@include $file2;
 		}
 	}
@@ -908,7 +908,7 @@ function fcflush() {
 	}
 }
 function isModuleInstalled($name) {
-	return in_array ( $name, getAllModules () );
+	return faster_in_array ( $name, getAllModules () );
 }
 function getAllModules() {
 	if (Vars::get ( "allModules" )) {
@@ -955,7 +955,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i <= count ( $allModules ); $i ++) {
 		$thisModule = $allModules [$i];
-		if (in_array ( $thisModule, $disabledModules )) {
+		if (faster_in_array ( $thisModule, $disabledModules )) {
 			continue;
 		}
 		$stringToReplace1 = '[module="' . $thisModule . '"]';
@@ -1164,7 +1164,7 @@ function getAllMenus($only_used = false) {
 		$used = get_all_used_menus ();
 		$new_menus = array ();
 		for($i = 0; $i <= count ( $menus ); $i ++) {
-			if (in_array ( $menus [$i], $used )) {
+			if (faster_in_array ( $menus [$i], $used )) {
 				$new_menus [] = $menus [$i];
 			}
 		}
@@ -1177,7 +1177,7 @@ function getAllMenus($only_used = false) {
 		$themeMenus = getThemeMeta ( $theme, "menus" );
 		if ($themeMenus and is_array ( $themeMenus )) {
 			foreach ( $themeMenus as $m ) {
-				if (! in_array ( $m, $allThemeMenus )) {
+				if (! faster_in_array ( $m, $allThemeMenus )) {
 					$allThemeMenus [] = $m;
 				}
 			}
@@ -1188,7 +1188,7 @@ function getAllMenus($only_used = false) {
 		$menus = $allThemeMenus;
 	}
 	
-	if (! in_array ( "none", $menus )) {
+	if (! faster_in_array ( "none", $menus )) {
 		$menus [] = "none";
 	}
 	
@@ -1278,7 +1278,7 @@ function uninstall_module($name, $type = "module") {
 	} else if ($type === "theme") {
 		$cTheme = Settings::get ( "theme" );
 		$allThemes = getThemeList ();
-		if (in_array ( $name, $allThemes ) and $cTheme !== $name) {
+		if (faster_in_array ( $name, $allThemes ) and $cTheme !== $name) {
 			$theme_path = getTemplateDirPath ( $name, true );
 			sureRemoveDir ( $theme_path, true );
 			clearCache ();
@@ -1325,7 +1325,7 @@ function func_enabled($func) {
 	foreach ( $disabled as $disableFunction ) {
 		$is_disabled [] = trim ( $disableFunction );
 	}
-	if (in_array ( $func, $is_disabled )) {
+	if (faster_in_array ( $func, $is_disabled )) {
 		$it_is_disabled ["m"] = $func . '() has been disabled for security reasons in php.ini';
 		$it_is_disabled ["s"] = 0;
 	} else {

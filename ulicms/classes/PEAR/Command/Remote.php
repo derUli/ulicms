@@ -406,7 +406,7 @@ parameter.
 			$data ['data'] [$info ['category']] [] = $packageinfo;
 		}
 		
-		if (isset ( $options ['mode'] ) && in_array ( $options ['mode'], array (
+		if (isset ( $options ['mode'] ) && faster_in_array ( $options ['mode'], array (
 				'notinstalled',
 				'upgrades' 
 		) )) {
@@ -764,7 +764,7 @@ parameter.
 		$cache_dir = $this->config->get ( 'cache_dir' );
 		$verbose = $this->config->get ( 'verbose' );
 		$output = '';
-		if (! file_exists ( $cache_dir ) || ! is_dir ( $cache_dir )) {
+		if (! faster_file_exists ( $cache_dir ) || ! is_dir ( $cache_dir )) {
 			return $this->raiseError ( "$cache_dir does not exist or is not a directory" );
 		}
 		
@@ -780,7 +780,7 @@ parameter.
 		while ( $ent = readdir ( $dp ) ) {
 			if (preg_match ( '/rest.cache(file|id)\\z/', $ent )) {
 				$path = $cache_dir . DIRECTORY_SEPARATOR . $ent;
-				if (file_exists ( $path )) {
+				if (faster_file_exists ( $path )) {
 					$ok = @unlink ( $path );
 				} else {
 					$ok = false;

@@ -19,9 +19,9 @@ setLanguageByDomain ();
 add_hook ( "after_set_language_by_domain" );
 
 $syslang = getSystemLanguage ();
-if (file_exists ( getLanguageFilePath ( $syslang ) )) {
+if (faster_file_exists ( getLanguageFilePath ( $syslang ) )) {
 	include_once getLanguageFilePath ( $syslang );
-} else if (file_exists ( getLanguageFilePath ( "en" ) )) {
+} else if (faster_file_exists ( getLanguageFilePath ( "en" ) )) {
 	include_once getLanguageFilePath ( "en" );
 }
 Translation::loadAllModuleLanguageFiles ( $syslang );
@@ -44,7 +44,7 @@ setLocaleByLanguage ();
 add_hook ( "after_set_locale_by_language" );
 
 $cfg = new config ();
-if (isset ( $cfg->ip_whitelist ) and is_array ( $cfg->ip_whitelist ) and count ( $cfg->ip_whitelist ) > 0 and ! in_array ( get_ip (), $cfg->ip_whitelist )) {
+if (isset ( $cfg->ip_whitelist ) and is_array ( $cfg->ip_whitelist ) and count ( $cfg->ip_whitelist ) > 0 and ! faster_in_array ( get_ip (), $cfg->ip_whitelist )) {
 	translate ( "login_from_ip_not_allowed" );
 	die ();
 }

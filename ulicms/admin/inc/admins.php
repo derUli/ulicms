@@ -5,7 +5,7 @@ if (defined ( "_SECURITY" )) {
 	if (is_admin () or $acl->hasPermission ( "users" )) {
 		if (empty ( $_GET ["order"] )) {
 			$order = "username";
-		} else if (in_array ( $_GET ["order"], array (
+		} else if (faster_in_array ( $_GET ["order"], array (
 				"id",
 				"firstname",
 				"lastname",

@@ -364,7 +364,7 @@ Run post-installation scripts in package <package>, if any exist.
 			$enable = 'zend_extension' . $debug . $ts;
 		}
 		foreach ( $ini [$search] as $line => $extension ) {
-			if (in_array ( $extension, $binaries, true ) || in_array ( $ini ['extension_dir'] . DIRECTORY_SEPARATOR . $extension, $binaries, true )) {
+			if (faster_in_array ( $extension, $binaries, true ) || faster_in_array ( $ini ['extension_dir'] . DIRECTORY_SEPARATOR . $extension, $binaries, true )) {
 				// already enabled - assume if one is, all are
 				return true;
 			}
@@ -415,7 +415,7 @@ Run post-installation scripts in package <package>, if any exist.
 		}
 		$found = false;
 		foreach ( $ini [$search] as $line => $extension ) {
-			if (in_array ( $extension, $binaries, true ) || in_array ( $ini ['extension_dir'] . DIRECTORY_SEPARATOR . $extension, $binaries, true )) {
+			if (faster_in_array ( $extension, $binaries, true ) || faster_in_array ( $ini ['extension_dir'] . DIRECTORY_SEPARATOR . $extension, $binaries, true )) {
 				$found = true;
 				break;
 			}
@@ -442,7 +442,7 @@ Run post-installation scripts in package <package>, if any exist.
 		return true;
 	}
 	function _parseIni($filename) {
-		if (! file_exists ( $filename )) {
+		if (! faster_file_exists ( $filename )) {
 			return PEAR::raiseError ( 'php.ini "' . $filename . '" does not exist' );
 		}
 		
@@ -558,7 +558,7 @@ Run post-installation scripts in package <package>, if any exist.
 				continue;
 			}
 			
-			if (strpos ( $param, 'channel://' ) === false && @file_exists ( $param )) {
+			if (strpos ( $param, 'channel://' ) === false && @faster_file_exists ( $param )) {
 				if (isset ( $options ['force'] )) {
 					$otherpackages [] = $param;
 					continue;
@@ -729,7 +729,7 @@ Run post-installation scripts in package <package>, if any exist.
 				
 				foreach ( $instpkg->getFilelist () as $name => $atts ) {
 					$pinfo = pathinfo ( $atts ['installed_as'] );
-					if (! isset ( $pinfo ['extension'] ) || in_array ( $pinfo ['extension'], array (
+					if (! isset ( $pinfo ['extension'] ) || faster_in_array ( $pinfo ['extension'], array (
 							'c',
 							'h' 
 					) )) {
@@ -990,7 +990,7 @@ Run post-installation scripts in package <package>, if any exist.
 					
 					foreach ( $pkg->getFilelist () as $name => $atts ) {
 						$pinfo = pathinfo ( $atts ['installed_as'] );
-						if (! isset ( $pinfo ['extension'] ) || in_array ( $pinfo ['extension'], array (
+						if (! isset ( $pinfo ['extension'] ) || faster_in_array ( $pinfo ['extension'], array (
 								'c',
 								'h' 
 						) )) {

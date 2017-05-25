@@ -266,7 +266,7 @@ class PEAR_Common extends PEAR {
 						'-rf',
 						$file 
 				) );
-			} elseif (file_exists ( $file )) {
+			} elseif (faster_file_exists ( $file )) {
 				unlink ( $file );
 			}
 		}
@@ -530,14 +530,14 @@ class PEAR_Common extends PEAR {
 	 *
 	 */
 	function isIncludeable($path) {
-		if (file_exists ( $path ) && is_readable ( $path )) {
+		if (faster_file_exists ( $path ) && is_readable ( $path )) {
 			return true;
 		}
 		
 		$ipath = explode ( PATH_SEPARATOR, ini_get ( 'include_path' ) );
 		foreach ( $ipath as $include ) {
 			$test = realpath ( $include . DIRECTORY_SEPARATOR . $path );
-			if (file_exists ( $test ) && is_readable ( $test )) {
+			if (faster_file_exists ( $test ) && is_readable ( $test )) {
 				return true;
 			}
 		}
@@ -645,7 +645,7 @@ class PEAR_Common extends PEAR {
 	 * @deprecated use PEAR_PackageFile->fromAnyFile() instead
 	 */
 	function infoFromAny($info) {
-		if (is_string ( $info ) && file_exists ( $info )) {
+		if (is_string ( $info ) && faster_file_exists ( $info )) {
 			$packagefile = & new PEAR_PackageFile ( $this->config );
 			$pf = & $packagefile->fromAnyFile ( $info, PEAR_VALIDATE_NORMAL );
 			if (PEAR::isError ( $pf )) {

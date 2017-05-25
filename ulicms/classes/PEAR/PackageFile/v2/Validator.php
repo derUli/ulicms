@@ -467,7 +467,7 @@ class PEAR_PackageFile_v2_Validator {
 			if (! preg_match ( '/^\d+(?:\.\d+)*(?:[a-zA-Z]+\d*)?\\z/', $this->_packageInfo ['version'] ['api'] )) {
 				$this->_invalidVersion ( 'api', $this->_packageInfo ['version'] ['api'] );
 			}
-			if (! in_array ( $this->_packageInfo ['stability'] ['release'], array (
+			if (! faster_in_array ( $this->_packageInfo ['stability'] ['release'], array (
 					'snapshot',
 					'devel',
 					'alpha',
@@ -476,7 +476,7 @@ class PEAR_PackageFile_v2_Validator {
 			) )) {
 				$this->_invalidState ( 'release', $this->_packageInfo ['stability'] ['release'] );
 			}
-			if (! in_array ( $this->_packageInfo ['stability'] ['api'], array (
+			if (! faster_in_array ( $this->_packageInfo ['stability'] ['api'], array (
 					'devel',
 					'alpha',
 					'beta',
@@ -1360,7 +1360,7 @@ class PEAR_PackageFile_v2_Validator {
 	 * @param string $        	
 	 */
 	function _validateRole($role) {
-		return in_array ( $role, PEAR_Installer_Role::getValidRoles ( $this->_pf->getPackageType () ) );
+		return faster_in_array ( $role, PEAR_Installer_Role::getValidRoles ( $this->_pf->getPackageType () ) );
 	}
 	function _pearVersionTooLow($version) {
 		$this->_stack->push ( __FUNCTION__, 'error', array (
@@ -1703,7 +1703,7 @@ class PEAR_PackageFile_v2_Validator {
 		}
 		$pkg = & new PEAR_PackageFile ( $this->_pf->_config );
 		foreach ( $info as $package ) {
-			if (! file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $package )) {
+			if (! faster_file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $package )) {
 				$this->_fileNotFound ( $dir_prefix . DIRECTORY_SEPARATOR . $package );
 				$this->_isValid = 0;
 				continue;
@@ -1766,12 +1766,12 @@ class PEAR_PackageFile_v2_Validator {
 		foreach ( $info as $fa ) {
 			$fa = $fa ['attribs'];
 			$file = $fa ['name'];
-			if (! file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $file )) {
+			if (! faster_file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $file )) {
 				$this->_fileNotFound ( $dir_prefix . DIRECTORY_SEPARATOR . $file );
 				$this->_isValid = 0;
 				continue;
 			}
-			if (in_array ( $fa ['role'], PEAR_Installer_Role::getPhpRoles () ) && $dir_prefix) {
+			if (faster_in_array ( $fa ['role'], PEAR_Installer_Role::getPhpRoles () ) && $dir_prefix) {
 				call_user_func_array ( $log, array (
 						1,
 						"Analyzing $file" 
@@ -1979,7 +1979,7 @@ class PEAR_PackageFile_v2_Validator {
 					continue 2;
 				case T_STRING :
 					if (version_compare ( zend_version (), '2.0', '<' )) {
-						if (in_array ( strtolower ( $data ), array (
+						if (faster_in_array ( strtolower ( $data ), array (
 								'public',
 								'private',
 								'protected',

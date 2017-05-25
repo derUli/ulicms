@@ -8,7 +8,7 @@ $twofactor_authentication = Settings::get ( "twofactor_authentication" );
 
 $languages = getAvailableBackendLanguages ();
 $default_language = getSystemLanguage ();
-if (isset ( $_SESSION ["language"] ) and in_array ( $_SESSION ["language"], $languages )) {
+if (isset ( $_SESSION ["language"] ) and faster_in_array ( $_SESSION ["language"], $languages )) {
 	$default_language = $_SESSION ["language"];
 }
 

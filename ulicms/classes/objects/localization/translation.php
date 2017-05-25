@@ -23,7 +23,7 @@ class Translation {
 	}
 	public static function includeCustomLangFile($lang) {
 		$file = ULICMS_ROOT . "/lang/custom/" . basename ( $lang ) . ".php";
-		if (file_exists ( $file ) and is_file ( $file )) {
+		if (faster_file_exists ( $file ) and is_file ( $file )) {
 			include_once $file;
 		}
 	}
@@ -32,12 +32,12 @@ class Translation {
 		foreach ( $modules as $module ) {
 			$file = getModulePath ( $module, true ) . "/lang/" . $lang . ".php";
 			
-			if (file_exists ( $file ) and is_file ( $file )) {
+			if (faster_file_exists ( $file ) and is_file ( $file )) {
 				include_once $file;
 			} else {
 				$file = getModulePath ( $module, true ) . "/lang/en.php";
 				
-				if (file_exists ( $file ) and is_file ( $file )) {
+				if (faster_file_exists ( $file ) and is_file ( $file )) {
 					include_once $file;
 				}
 			}
@@ -46,11 +46,11 @@ class Translation {
 	public static function loadCurrentThemeLanguageFiles($lang) {
 		$modules = getAllModules ();
 		$file = getTemplateDirPath ( get_theme (), true ) . "/lang/" . $lang . ".php";
-		if (file_exists ( $file ) and is_file ( $file )) {
+		if (faster_file_exists ( $file ) and is_file ( $file )) {
 			include_once $file;
 		} else {
 			$file = getTemplateDirPath ( get_theme (), true ) . "/lang/en.php";
-			if (file_exists ( $file ) and is_file ( $file )) {
+			if (faster_file_exists ( $file ) and is_file ( $file )) {
 				include_once $file;
 			}
 		}

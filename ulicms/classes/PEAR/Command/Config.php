@@ -338,7 +338,7 @@ and uninstall).
 			$root = str_replace ( '/', '\\', $root );
 		}
 		
-		if (! file_exists ( $params [1] ) && ! @touch ( $params [1] )) {
+		if (! faster_file_exists ( $params [1] ) && ! @touch ( $params [1] )) {
 			return PEAR::raiseError ( 'Could not create "' . $params [1] . '"' );
 		}
 		
@@ -415,7 +415,7 @@ and uninstall).
 	function _checkLayer($layer = null) {
 		if (! empty ( $layer ) && $layer != 'default') {
 			$layers = $this->config->getLayers ();
-			if (! in_array ( $layer, $layers )) {
+			if (! faster_in_array ( $layer, $layers )) {
 				return " only the layers: \"" . implode ( '" or "', $layers ) . "\" are supported";
 			}
 		}

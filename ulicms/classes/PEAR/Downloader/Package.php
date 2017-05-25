@@ -1416,10 +1416,10 @@ class PEAR_Downloader_Package {
 	function _fromFile(& $param) {
 		$saveparam = $param;
 		if (is_string ( $param )) {
-			if (! @file_exists ( $param )) {
+			if (! @faster_file_exists ( $param )) {
 				$test = explode ( '#', $param );
 				$group = array_pop ( $test );
-				if (@file_exists ( implode ( '#', $test ) )) {
+				if (@faster_file_exists ( implode ( '#', $test ) )) {
 					$this->setGroup ( $group );
 					$param = implode ( '#', $test );
 					$this->_explicitGroup = true;
@@ -1731,7 +1731,7 @@ class PEAR_Downloader_Package {
 						require_once 'PEAR/Common.php';
 					}
 					
-					if (! in_array ( $info ['info']->getState (), PEAR_Common::betterStates ( $preferred_state, true ) )) {
+					if (! faster_in_array ( $info ['info']->getState (), PEAR_Common::betterStates ( $preferred_state, true ) )) {
 						if ($optional) {
 							// don't spit out confusing error message
 							return $this->_downloader->_getPackageDownloadUrl ( array (
@@ -1794,7 +1794,7 @@ class PEAR_Downloader_Package {
 						require_once 'PEAR/Common.php';
 					}
 					
-					if (! in_array ( $info ['info']->getState (), PEAR_Common::betterStates ( $preferred_state, true ) )) {
+					if (! faster_in_array ( $info ['info']->getState (), PEAR_Common::betterStates ( $preferred_state, true ) )) {
 						if ($optional) {
 							// don't spit out confusing error message, and don't die on
 							// optional dep failure!
@@ -1843,7 +1843,7 @@ class PEAR_Downloader_Package {
 				// the state against the installed package, this allows upgrades for packages
 				// with lower stability than the preferred_state
 				$stability = $this->_registry->packageInfo ( $pname ['package'], 'stability', $pname ['channel'] );
-				if (! $this->isInstalled ( $info ) || ! in_array ( $info ['info']->getState (), PEAR_Common::betterStates ( $stability ['release'], true ) )) {
+				if (! $this->isInstalled ( $info ) || ! faster_in_array ( $info ['info']->getState (), PEAR_Common::betterStates ( $stability ['release'], true ) )) {
 					$err = PEAR::raiseError ( 'Failed to download ' . $this->_registry->parsedPackageNameToString ( array (
 							'channel' => $pname ['channel'],
 							'package' => $pname ['package'] 

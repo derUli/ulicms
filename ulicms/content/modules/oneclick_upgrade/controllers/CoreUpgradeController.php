@@ -47,11 +47,11 @@ class CoreUpgradeController extends Controller {
 		$tmpDir = Path::resolve ( "ULICMS_TMP/upgrade" );
 		$tmpArchive = Path::resolve ( "$tmpDir/upgrade.zip" );
 		
-		if (file_exists ( $tmpDir )) {
+		if (faster_file_exists ( $tmpDir )) {
 			sureRemoveDir ( $tmpDir, true );
 		}
 		
-		if (! file_exists ( $tmpDir )) {
+		if (! faster_file_exists ( $tmpDir )) {
 			mkdir ( $tmpDir, 0777, true );
 		}
 		

@@ -70,7 +70,7 @@ class PEAR_Installer_Role {
 			PEAR_Installer_Role::registerRoles ();
 		}
 		
-		if (! in_array ( $role, PEAR_Installer_Role::getValidRoles ( $pkg->getPackageType () ) )) {
+		if (! faster_in_array ( $role, PEAR_Installer_Role::getValidRoles ( $pkg->getPackageType () ) )) {
 			$a = false;
 			return $a;
 		}
@@ -112,7 +112,7 @@ class PEAR_Installer_Role {
 		
 		$ret [$release] = array ();
 		foreach ( $GLOBALS ['_PEAR_INSTALLER_ROLES'] as $role => $okreleases ) {
-			if (in_array ( $release, $okreleases ['releasetypes'] )) {
+			if (faster_in_array ( $release, $okreleases ['releasetypes'] )) {
 				$ret [$release] [] = strtolower ( str_replace ( 'PEAR_Installer_Role_', '', $role ) );
 			}
 		}
@@ -249,7 +249,7 @@ class PEAR_Installer_Role {
 			$dir = dirname ( __FILE__ ) . '/Role';
 		}
 		
-		if (! file_exists ( $dir ) || ! is_dir ( $dir )) {
+		if (! faster_file_exists ( $dir ) || ! is_dir ( $dir )) {
 			return PEAR::raiseError ( "registerRoles: opendir($dir) failed: does not exist/is not directory" );
 		}
 		

@@ -14,7 +14,7 @@ setLanguageByDomain ();
 
 $languages = getAllLanguages ();
 
-if (! empty ( $_GET ["language"] ) and in_array ( $_GET ["language"], $languages )) {
+if (! empty ( $_GET ["language"] ) and faster_in_array ( $_GET ["language"], $languages )) {
 	$_SESSION ["language"] = Database::escapeValue ( $_GET ["language"], DB_TYPE_STRING );
 }
 
@@ -26,9 +26,9 @@ setLocaleByLanguage ();
 
 require_once "templating.php";
 
-if (in_array ( $_SESSION ["language"], $languages ) && file_exists ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
-	include_once getLanguageFilePath ( $_SESSION ["language"] );
-} else if (file_exists ( getLanguageFilePath ( "en" ) )) {
+if (faster_in_array ( $_SESSION ["language"], $languages ) && faster_file_exists ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
+		include_once getLanguageFilePath ( $_SESSION ["language"] );
+} else if (faster_file_exists ( getLanguageFilePath ( "en" ) )) {
 	include getLanguageFilePath ( "en" );
 }
 
@@ -69,7 +69,7 @@ if (strtolower ( Settings::get ( "maintenance_mode" ) ) == "on" || strtolower ( 
 	header ( 'Status: 503 Service Temporarily Unavailable' );
 	header ( 'Retry-After: 60' );
 	header ( "Content-Type: text/html; charset=utf-8" );
-	if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )) {
+	if (faster_file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )) {
 		require_once getTemplateDirPath ( $theme ) . "maintenance.php";
 	} else {
 		die ( get_translation ( "UNDER_MAINTENANCE" ) );
@@ -105,7 +105,7 @@ if (isset ( $_GET ["goid"] )) {
 
 if (isset ( $_GET ["submit-cms-form"] ) and ! empty ( $_GET ["submit-cms-form"] ) and get_request_method () === "POST") {
 	$form_id = intval ( $_GET ["submit-cms-form"] );
-	
+
 	require_once ULICMS_ROOT . "/classes/objects/content/forms.php";
 	Forms::submitForm ( $form_id );
 }
@@ -141,7 +141,7 @@ if (! is_dir ( getTemplateDirPath ( $theme ) )) {
 	throw new Exception ( "Das aktivierte Theme existiert nicht!" );
 }
 
-if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
+if (faster_file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 	include getTemplateDirPath ( $theme ) . "functions.php";
 }
 
@@ -175,7 +175,7 @@ switch ($c) {
 	case "cache_lite" :
 		@include "Cache/Lite.php";
 		$cache_type = "cache_lite";
-		
+
 		break;
 	case "file" :
 	default :
@@ -184,19 +184,19 @@ switch ($c) {
 		break;
 }
 
-if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
+if (faster_file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	$cached_content = file_get_contents ( $cached_page_path );
 	$last_modified = filemtime ( $cached_page_path );
-	
+
 	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! Flags::getNoCache ()) {
 		eTagFromString ( $cached_content );
 		browsercacheOneDay ( $last_modified );
 		echo $cached_content;
-		
+
 		if (Settings::get ( "no_auto_cron" )) {
 			die ();
 		}
-		
+
 		add_hook ( "before_cron" );
 		@include 'cron.php';
 		add_hook ( "after_cron" );
@@ -204,9 +204,9 @@ if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) a
 	}
 }
 
-if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! file_exists ( $cached_page_path ) and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! faster_file_exists ( $cached_page_path ) and $cache_type === "file") {
 	ob_start ();
-} else if (file_exists ( $cached_page_path )) {
+} else if (faster_file_exists ( $cached_page_path )) {
 	$last_modified = filemtime ( $cached_page_path );
 	if (time () - $last_modified < CACHE_PERIOD) {
 		ob_start ();
@@ -218,14 +218,14 @@ $id = md5 ( $_SERVER ['REQUEST_URI'] . $_SESSION ["language"] . strbool ( is_mob
 if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
 	$options = array (
 			'lifeTime' => Settings::get ( "cache_period" ),
-			'cacheDir' => "content/cache/" 
+			'cacheDir' => "content/cache/"
 	);
-	
+
 	if (! class_exists ( "Cache_Lite" )) {
 		throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
 	}
 	$Cache_Lite = new Cache_Lite ( $options );
-	
+
 	if ($data = $Cache_Lite->get ( $id )) {
 		die ( $data );
 	} else {
@@ -236,7 +236,7 @@ if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv (
 $html_file = page_has_html_file ( get_requested_pagename () );
 
 if ($html_file) {
-	if (file_exists ( $html_file )) {
+	if (faster_file_exists ( $html_file )) {
 		echo file_get_contents ( $html_file );
 	} else {
 		echo "File Not Found";
@@ -246,43 +246,43 @@ if ($html_file) {
 			"type/" . get_type () . "/oben.php",
 			"type/" . get_type () . "/top.php",
 			"oben.php",
-			"top.php" 
+			"top.php"
 	);
 	foreach ( $top_files as $file ) {
 		$file = getTemplateDirPath ( $theme ) . $file;
-		if (file_exists ( $file )) {
+		if (faster_file_exists ( $file )) {
 			require $file;
 			break;
 		}
 	}
 	add_hook ( "before_content" );
 	$text_position = get_text_position ();
-	
+
 	if ($text_position == "after") {
 		Template::outputContentElement ();
 	}
-	
+
 	content ();
-	
+
 	if ($text_position == "before") {
 		Template::outputContentElement ();
 	}
-	
+
 	add_hook ( "after_content" );
-	
+
 	add_hook ( "before_edit_button" );
-	
+
 	edit_button ();
 	add_hook ( "after_edit_button" );
 	$bottom_files = array (
 			"type/" . get_type () . "/unten.php",
 			"type/" . get_type () . "/bottom.php",
 			"unten.php",
-			"bottom.php" 
+			"bottom.php"
 	);
 	foreach ( $bottom_files as $file ) {
 		$file = getTemplateDirPath ( $theme ) . $file;
-		if (file_exists ( $file )) {
+		if (faster_file_exists ( $file )) {
 			require $file;
 			break;
 		}
@@ -293,15 +293,15 @@ add_hook ( "after_html" );
 
 if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and $cache_type === "cache_lite") {
 	$data = ob_get_clean ();
-	
+
 	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache ()) {
 		$Cache_Lite->save ( $data, $id );
 	}
-	
+
 	eTagFromString ( $data );
 	browsercacheOneDay ();
 	echo $data;
-	
+
 	if (Settings::get ( "no_auto_cron" )) {
 		die ();
 	}
@@ -313,17 +313,17 @@ if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and $cache_t
 
 if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	$generated_html = ob_get_clean ();
-	
+
 	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache ()) {
 		$handle = fopen ( $cached_page_path, "wb" );
 		fwrite ( $handle, $generated_html );
 		fclose ( $handle );
 	}
-	
+
 	eTagFromString ( $generated_html );
 	browsercacheOneDay ();
 	echo ($generated_html);
-	
+
 	// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 	if (Settings::get ( "no_auto_cron" )) {
 		die ();

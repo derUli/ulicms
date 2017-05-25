@@ -59,7 +59,7 @@ class PEAR_REST {
 	function retrieveCacheFirst($url, $accept = false, $forcestring = false, $channel = false) {
 		$cachefile = $this->config->get ( 'cache_dir' ) . DIRECTORY_SEPARATOR . md5 ( $url ) . 'rest.cachefile';
 		
-		if (file_exists ( $cachefile )) {
+		if (faster_file_exists ( $cachefile )) {
 			return unserialize ( implode ( '', file ( $cachefile ) ) );
 		}
 		
@@ -172,7 +172,7 @@ class PEAR_REST {
 	function useLocalCache($url, $cacheid = null) {
 		if ($cacheid === null) {
 			$cacheidfile = $this->config->get ( 'cache_dir' ) . DIRECTORY_SEPARATOR . md5 ( $url ) . 'rest.cacheid';
-			if (! file_exists ( $cacheidfile )) {
+			if (! faster_file_exists ( $cacheidfile )) {
 				return false;
 			}
 			
@@ -190,7 +190,7 @@ class PEAR_REST {
 	function getCacheId($url) {
 		$cacheidfile = $this->config->get ( 'cache_dir' ) . DIRECTORY_SEPARATOR . md5 ( $url ) . 'rest.cacheid';
 		
-		if (! file_exists ( $cacheidfile )) {
+		if (! faster_file_exists ( $cacheidfile )) {
 			return false;
 		}
 		
@@ -200,7 +200,7 @@ class PEAR_REST {
 	function getCache($url) {
 		$cachefile = $this->config->get ( 'cache_dir' ) . DIRECTORY_SEPARATOR . md5 ( $url ) . 'rest.cachefile';
 		
-		if (! file_exists ( $cachefile )) {
+		if (! faster_file_exists ( $cachefile )) {
 			return PEAR::raiseError ( 'No cached content available for "' . $url . '"' );
 		}
 		
@@ -252,7 +252,7 @@ class PEAR_REST {
 		
 		$result = $this->saveCacheFile ( $cachefile, serialize ( $contents ) );
 		if (PEAR::isError ( $result )) {
-			if (file_exists ( $cacheidfile )) {
+			if (faster_file_exists ( $cacheidfile )) {
 				@unlink ( $cacheidfile );
 			}
 			
@@ -326,7 +326,7 @@ class PEAR_REST {
 		$redirect = 0;
 		
 		$info = parse_url ( $url );
-		if (! isset ( $info ['scheme'] ) || ! in_array ( $info ['scheme'], array (
+		if (! isset ( $info ['scheme'] ) || ! faster_in_array ( $info ['scheme'], array (
 				'http',
 				'https' 
 		) )) {
@@ -430,7 +430,7 @@ class PEAR_REST {
 					return false;
 				}
 				
-				if (! in_array ( $reply, array (
+				if (! faster_in_array ( $reply, array (
 						200,
 						301,
 						302,

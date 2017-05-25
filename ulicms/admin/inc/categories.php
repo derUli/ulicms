@@ -26,7 +26,7 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 	}
 	
 	include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
-	if (isset ( $_GET ["order"] ) and in_array ( $_GET ["order"], array (
+	if (isset ( $_GET ["order"] ) and faster_in_array ( $_GET ["order"], array (
 			"id",
 			"name",
 			"description",

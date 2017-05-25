@@ -167,7 +167,7 @@ class PEAR_Task_Postinstallscript extends PEAR_Task_Common {
 					);
 				}
 				if (isset ( $param [$tasksNamespace . 'name'] )) {
-					if (! in_array ( $param [$tasksNamespace . 'name'], $definedparams )) {
+					if (! faster_in_array ( $param [$tasksNamespace . 'name'], $definedparams )) {
 						return array (
 								PEAR_TASK_ERROR_INVALID,
 								'Post-install script "' . $fileXml ['name'] . '" ' . $tasksNamespace . 'paramgroup> id "' . $param [$tasksNamespace . 'id'] . '" parameter "' . $param [$tasksNamespace . 'name'] . '" has not been previously defined' 
@@ -179,7 +179,7 @@ class PEAR_Task_Postinstallscript extends PEAR_Task_Common {
 								'Post-install script "' . $fileXml ['name'] . '" ' . $tasksNamespace . 'paramgroup> id "' . $param [$tasksNamespace . 'id'] . '" must have a ' . $tasksNamespace . 'conditiontype> tag containing either "=", ' . '"!=", or "preg_match"' 
 						);
 					}
-					if (! in_array ( $param [$tasksNamespace . 'conditiontype'], array (
+					if (! faster_in_array ( $param [$tasksNamespace . 'conditiontype'], array (
 							'=',
 							'!=',
 							'preg_match' 

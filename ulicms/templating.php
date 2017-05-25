@@ -267,7 +267,7 @@ function include_jquery() {
 		$disabled_on_pages = array ();
 	}
 	
-	if (! in_array ( get_requested_pagename (), $disabled_on_pages )) {
+	if (! faster_in_array ( get_requested_pagename (), $disabled_on_pages )) {
 		?>
 <script type="text/javascript" src="<?php echo get_jquery_url();?>"></script>
 <?php
@@ -462,7 +462,7 @@ function logo() {
 	
 	$logo_path = "content/images/" . Settings::get ( "logo_image" );
 	
-	if (Settings::get ( "logo_disabled" ) == "no" and file_exists ( $logo_path )) {
+	if (Settings::get ( "logo_disabled" ) == "no" and faster_file_exists ( $logo_path )) {
 		echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
 	}
 }
@@ -594,7 +594,7 @@ function apply_filter($text, $type) {
 	$modules = getAllModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i < count ( $modules ); $i ++) {
-		if (in_array ( $modules [$i], $disabledModules )) {
+		if (faster_in_array ( $modules [$i], $disabledModules )) {
 			continue;
 		}
 		$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
@@ -608,12 +608,12 @@ function apply_filter($text, $type) {
 		$escapedName = ModuleHelper::underscoreToCamel ( $type . "_filter" );
 		if ($controller and method_exists ( $controller, $escapedName )) {
 			$text = $controller->$escapedName ( $text );
-		} else if (file_exists ( $module_content_filter_file1 )) {
+		} else if (faster_file_exists ( $module_content_filter_file1 )) {
 			include_once $module_content_filter_file1;
 			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
 				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
 			}
-		} else if (file_exists ( $module_content_filter_file2 )) {
+		} else if (faster_file_exists ( $module_content_filter_file2 )) {
 			include_once $module_content_filter_file2;
 			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
 				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
@@ -995,7 +995,7 @@ function get_page($systemname = "") {
 function content() {
 	$status = check_status ();
 	if ($status == "404 Not Found") {
-		if (file_exists ( getTemplateDirPath ( $theme ) . "404.php" )) {
+		if (faster_file_exists ( getTemplateDirPath ( $theme ) . "404.php" )) {
 			$theme = Settings::get ( "theme" );
 			include getTemplateDirPath ( $theme ) . "404.php";
 		} else {
@@ -1005,7 +1005,7 @@ function content() {
 	} else if ($status == "403 Forbidden") {
 		
 		$theme = Settings::get ( "theme" );
-		if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
+		if (faster_file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 			include getTemplateDirPath ( $theme ) . "403.php";
 		} else {
 			translate ( "FORBIDDEN_COTENT" );
@@ -1026,13 +1026,13 @@ function get_content() {
 function checkforAccessForDevice($access) {
 	$access = explode ( ",", $access );
 	$allowed = false;
-	if (in_array ( "mobile", $access ) and is_mobile ()) {
+	if (faster_in_array ( "mobile", $access ) and is_mobile ()) {
 		$allowed = true;
 	}
-	if (in_array ( "desktop", $access ) and ! is_mobile ()) {
+	if (faster_in_array ( "desktop", $access ) and ! is_mobile ()) {
 		$allowed = true;
 	}
-	if (! in_array ( "mobile", $access ) and ! in_array ( "desktop", $access )) {
+	if (! faster_in_array ( "mobile", $access ) and ! faster_in_array ( "desktop", $access )) {
 		$allowed = true;
 	}
 	return $allowed;
@@ -1043,10 +1043,10 @@ function checkAccess($access = "") {
 		return null;
 	}
 	$access = explode ( ",", $access );
-	if (in_array ( "all", $access )) {
+	if (faster_in_array ( "all", $access )) {
 		return "all";
 	}
-	if (in_array ( "registered", $access ) and is_logged_in ()) {
+	if (faster_in_array ( "registered", $access ) and is_logged_in ()) {
 		return "registered";
 	}
 	for($i = 0; $i < count ( $access ); $i ++) {
@@ -1071,7 +1071,7 @@ function check_status() {
 	if (! empty ( $status )) {
 		return $status;
 	}
-	if (file_exists ( $cached_page_path ) and ! is_logged_in ()) {
+	if (faster_file_exists ( $cached_page_path ) and ! is_logged_in ()) {
 		$last_modified = filemtime ( $cached_page_path );
 		if (time () - $last_modified < CACHE_PERIOD) {
 			return "200 OK";

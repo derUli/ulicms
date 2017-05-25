@@ -14,7 +14,7 @@ class ModuleManagerTest extends PHPUnit_Framework_TestCase {
 		
 		$allModules = $manager->getAllModuleNames ();
 		
-		$this->assertTrue ( in_array ( self::sampleName1, $allModules ) );
+		$this->assertTrue ( faster_in_array ( self::sampleName1, $allModules ) );
 		
 		$module = new Module ( self::sampleName1 );
 		$this->assertEquals ( self::sampleName1, $module->getName () );
@@ -44,20 +44,20 @@ class ModuleManagerTest extends PHPUnit_Framework_TestCase {
 		
 		$allModules = $manager->getAllModuleNames ();
 		
-		$this->assertTrue ( in_array ( self::sampleName1, $allModules ) );
-		$this->assertTrue ( in_array ( self::sampleName2, $allModules ) );
+		$this->assertTrue ( faster_in_array ( self::sampleName1, $allModules ) );
+		$this->assertTrue ( faster_in_array ( self::sampleName2, $allModules ) );
 		
 		$module = new Module ( self::sampleName1 );
 		$module->delete ();
 		
 		$allModules = $manager->getAllModuleNames ();
-		$this->assertFalse ( in_array ( self::sampleName1, $allModules ) );
+		$this->assertFalse ( faster_in_array ( self::sampleName1, $allModules ) );
 		
 		$module = new Module ( self::sampleName2 );
 		$module->delete ();
 		
 		$allModules = $manager->getAllModuleNames ();
-		$this->assertFalse ( in_array ( self::sampleName2, $allModules ) );
+		$this->assertFalse ( faster_in_array ( self::sampleName2, $allModules ) );
 	}
 	
 	// TODO: Test für sync() implementieren

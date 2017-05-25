@@ -100,7 +100,7 @@ $(window).load(function(){
 		<?php translate("please_select");?>
 		</option>
 		<?php
-		if (! empty ( $_GET ["filter_language"] ) and in_array ( $_GET ["filter_language"], getAllLanguages () )) {
+		if (! empty ( $_GET ["filter_language"] ) and faster_in_array ( $_GET ["filter_language"], getAllLanguages () )) {
 			$_SESSION ["filter_language"] = $_GET ["filter_language"];
 			$_SESSION ["filter_parent"] = null;
 		}
@@ -170,7 +170,7 @@ $(window).load(function(){
 			$_SESSION ["filter_category"] = intval ( $_GET ["filter_category"] );
 		}
 		
-		if (! empty ( $_GET ["filter_status"] ) and in_array ( $_GET ["filter_status"], array (
+		if (! empty ( $_GET ["filter_status"] ) and faster_in_array ( $_GET ["filter_status"], array (
 				"Standard",
 				"standard",
 				"trash" 
@@ -193,7 +193,7 @@ $(window).load(function(){
 		
 		$sql = "select a.id as id, a.title as title from " . tbname ( "content" ) . " a inner join " . tbname ( "content" ) . " b on a.id = b.parent ";
 		
-		if (in_array ( $_SESSION ["filter_language"], getAllLanguages () )) {
+		if (faster_in_array ( $_SESSION ["filter_language"], getAllLanguages () )) {
 			$sql .= "where b.language='" . $_SESSION ["filter_language"] . "' ";
 		}
 		
@@ -415,7 +415,7 @@ $(window).load(function(){
 		</thead>
 		<tbody>
 	<?php
-		if (in_array ( $_GET ["order"], array (
+		if (faster_in_array ( $_GET ["order"], array (
 				"title",
 				"menu",
 				"position",
