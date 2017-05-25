@@ -18,7 +18,6 @@
   * secure_translate()
   * ArrayHelper::insertBefore($input, $index, $element)
   * ArrayHelper::insertAfter($input, $index, $element)
-  * faster_file_exists()
   * faster_in_array()
 + Geringe Performance Verbesserungen
 + Attribut $newWindow zu MenuEntry hinzugefügt

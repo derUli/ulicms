@@ -44,7 +44,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		$packagesToInstall = explode ( ",", $_REQUEST ["packages"] );
 		
 		$post_install_script = "../post-install.php";
-		if (faster_file_exists ( $post_install_script )) {
+		if (file_exists ( $post_install_script )) {
 			unlink ( $post_install_script );
 		}
 		
@@ -78,7 +78,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 						fwrite ( $handle, $pkgContent );
 						fclose ( $handle );
 						
-						if (faster_file_exists ( $tmpFile )) {
+						if (file_exists ( $tmpFile )) {
 							// Paket installieren
 							if ($pkg->installPackage ( $tmpFile )) {
 								echo "<p style='color:green;'>" . str_ireplace ( "%pkg%", $packagesToInstall [$i], get_translation ( "INSTALLATION_SUCCESSFULL" ) ) . "</p>";

@@ -359,7 +359,7 @@ class PEAR_Downloader extends PEAR_Common {
 						$checkdir = $this->config->get ( 'php_dir', null, $params [$i]->getChannel () );
 					}
 					
-					while ( $checkdir && $checkdir != '/' && ! faster_file_exists ( $checkdir ) ) {
+					while ( $checkdir && $checkdir != '/' && ! file_exists ( $checkdir ) ) {
 						$checkdir = dirname ( $checkdir );
 					}
 					

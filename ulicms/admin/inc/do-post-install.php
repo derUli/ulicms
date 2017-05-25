@@ -10,7 +10,7 @@ if (defined ( "_SECURITY" )) {
 		unlink ( $postinstall );
 		
 		?>
-		<?php if(!faster_file_exists($postinstall)){?>
+		<?php if(!file_exists($postinstall)){?>
 <p><?php translate("finished");?></p>
 <?php } ?>
 <?php

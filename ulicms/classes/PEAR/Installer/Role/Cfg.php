@@ -62,7 +62,7 @@ class PEAR_Installer_Role_Cfg extends PEAR_Installer_Role_Common {
 	}
 	function processInstallation($pkg, $atts, $file, $tmp_path, $layer = null) {
 		$test = parent::processInstallation ( $pkg, $atts, $file, $tmp_path, $layer );
-		if (@faster_file_exists ( $test [2] ) && @faster_file_exists ( $test [3] )) {
+		if (@file_exists ( $test [2] ) && @file_exists ( $test [3] )) {
 			$md5 = md5_file ( $test [2] );
 			// configuration has already been installed, check for mods
 			if ($md5 !== $this->md5 && $md5 !== md5_file ( $test [3] )) {

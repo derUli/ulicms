@@ -28,7 +28,7 @@ if (defined ( "_SECURITY" )) {
 			<td><?php
 		
 		$logo_path = "../content/images/" . Settings::get ( "logo_image" );
-		if (faster_file_exists ( $logo_path ) and is_file ( $logo_path )) {
+		if (file_exists ( $logo_path ) and is_file ( $logo_path )) {
 			echo '<img class="website_logo" src="' . $logo_path . '" alt="' . Settings::get ( "homepage_title" ) . '"/>';
 		}
 		?>

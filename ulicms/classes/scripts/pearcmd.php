@@ -158,7 +158,7 @@ if ($raw) {
 				$packagexml = dirname ( __FILE__ ) . DIRECTORY_SEPARATOR . 'package2.xml';
 				$pearbase = dirname ( __FILE__ );
 			}
-			if (faster_file_exists ( $packagexml )) {
+			if (file_exists ( $packagexml )) {
 				$options [1] = array (
 						'install',
 						$packagexml 

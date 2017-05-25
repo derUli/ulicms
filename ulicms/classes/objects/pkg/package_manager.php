@@ -52,7 +52,7 @@ class PackageManager {
 		}
 		
 		$tmp_dir = ULICMS_TMP . "/" . uniqid () . "/";
-		if (! faster_file_exists ( $tmp_dir )) {
+		if (! file_exists ( $tmp_dir )) {
 			mkdir ( $tmp_dir );
 		}
 		$download = file_get_contents_wrapper ( $url, true );
@@ -68,7 +68,7 @@ class PackageManager {
 			$zip->extractTo ( $tmp_dir );
 			$patch_dir = $tmp_dir . "patch";
 			$zip->close ();
-			if (faster_file_exists ( $patch_dir )) {
+			if (file_exists ( $patch_dir )) {
 				recurse_copy ( $patch_dir, ULICMS_ROOT );
 				$name = db_escape ( $name );
 				$description = db_escape ( $description );
@@ -104,10 +104,10 @@ class PackageManager {
 			
 			// post_install_script ausführen und anschließend
 			// entfernen, sofern vorhanden;
-			if (faster_file_exists ( $post_install_script1 )) {
+			if (file_exists ( $post_install_script1 )) {
 				include_once $post_install_script1;
 				unlink ( $post_install_script1 );
-			} else if (faster_file_exists ( $post_install_script2 )) {
+			} else if (file_exists ( $post_install_script2 )) {
 				include_once $post_install_script2;
 				unlink ( $post_install_script2 );
 			}
@@ -139,7 +139,7 @@ class PackageManager {
 				$module_init_file = $module_folder . $directory_content [$i] . "/" . $directory_content [$i] . "_main.php";
 				$module_init_file2 = $module_folder . $directory_content [$i] . "/" . "main.php";
 				$metadata_file = $module_folder . $directory_content [$i] . "/metadata.json";
-				if (faster_file_exists ( $metadata_file ) and is_file ( $metadata_file )) {
+				if (file_exists ( $metadata_file ) and is_file ( $metadata_file )) {
 					array_push ( $available_modules, $directory_content [$i] );
 				} else if ($directory_content [$i] != ".." and $directory_content [$i] != ".") {
 					if (is_file ( $module_init_file ) or is_file ( $module_init_file2 )) {

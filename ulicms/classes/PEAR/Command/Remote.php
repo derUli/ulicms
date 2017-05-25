@@ -764,7 +764,7 @@ parameter.
 		$cache_dir = $this->config->get ( 'cache_dir' );
 		$verbose = $this->config->get ( 'verbose' );
 		$output = '';
-		if (! faster_file_exists ( $cache_dir ) || ! is_dir ( $cache_dir )) {
+		if (! file_exists ( $cache_dir ) || ! is_dir ( $cache_dir )) {
 			return $this->raiseError ( "$cache_dir does not exist or is not a directory" );
 		}
 		
@@ -780,7 +780,7 @@ parameter.
 		while ( $ent = readdir ( $dp ) ) {
 			if (preg_match ( '/rest.cache(file|id)\\z/', $ent )) {
 				$path = $cache_dir . DIRECTORY_SEPARATOR . $ent;
-				if (faster_file_exists ( $path )) {
+				if (file_exists ( $path )) {
 					$ok = @unlink ( $path );
 				} else {
 					$ok = false;

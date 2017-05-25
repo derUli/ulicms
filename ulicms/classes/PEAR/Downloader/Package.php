@@ -1416,10 +1416,10 @@ class PEAR_Downloader_Package {
 	function _fromFile(& $param) {
 		$saveparam = $param;
 		if (is_string ( $param )) {
-			if (! @faster_file_exists ( $param )) {
+			if (! @file_exists ( $param )) {
 				$test = explode ( '#', $param );
 				$group = array_pop ( $test );
-				if (@faster_file_exists ( implode ( '#', $test ) )) {
+				if (@file_exists ( implode ( '#', $test ) )) {
 					$this->setGroup ( $group );
 					$param = implode ( '#', $test );
 					$this->_explicitGroup = true;
