@@ -17,7 +17,7 @@ class CSVCreator {
 		$hasModul = containsModule ( get_requested_pagename () );
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
 			if (getCacheType () == "file") {
-				if (faster_file_exists ( $this->cached_file )) {
+				if (file_exists ( $this->cached_file )) {
 					$last_modified = filemtime ( $this->cached_file );
 					if (time () - $last_modified < CACHE_PERIOD) {
 						$this->httpHeader ();

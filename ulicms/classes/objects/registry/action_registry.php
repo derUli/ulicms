@@ -82,7 +82,7 @@ class ActionRegistry {
 				if (! endsWith ( $path, ".php" )) {
 					$path .= ".php";
 				}
-				if (faster_file_exists ( $path )) {
+				if (file_exists ( $path )) {
 					$actions [$action] = $file;
 				}
 			}

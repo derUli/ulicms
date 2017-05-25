@@ -356,11 +356,11 @@ class Cache_Lite {
 				}
 			}
 			if (($doNotTestCacheValidity) || (is_null ( $this->_refreshTime ))) {
-				if (faster_file_exists ( $this->_file )) {
+				if (file_exists ( $this->_file )) {
 					$data = $this->_read ();
 				}
 			} else {
-				if ((faster_file_exists ( $this->_file )) && (@filemtime ( $this->_file ) > $this->_refreshTime)) {
+				if ((file_exists ( $this->_file )) && (@filemtime ( $this->_file ) > $this->_refreshTime)) {
 					$data = $this->_read ();
 				}
 			}
@@ -452,7 +452,7 @@ class Cache_Lite {
 			}
 		}
 		if ($checkbeforeunlink) {
-			if (! faster_file_exists ( $this->_file ))
+			if (! file_exists ( $this->_file ))
 				return true;
 		}
 		return $this->_unlink ( $this->_file );

@@ -106,7 +106,7 @@ class Cache {
 			$requestUri = get_request_uri ();
 		}
 		$cacheFile = self::buildCacheFilePath ( $requestUri );
-		if (faster_file_exists ( $cacheFile )) {
+		if (file_exists ( $cacheFile )) {
 			$lastModified = filemtime ( $cacheFile );
 			if (time () - $lastModified < CACHE_PERIOD) {
 				$retval = file_get_contents ( $cacheFile );

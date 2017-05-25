@@ -143,11 +143,11 @@ class PEAR_DependencyDB {
 	}
 	// }}}
 	function hasWriteAccess() {
-		if (! faster_file_exists ( $this->_depdb )) {
+		if (! file_exists ( $this->_depdb )) {
 			$dir = $this->_depdb;
 			while ( $dir && $dir != '.' ) {
 				$dir = dirname ( $dir ); // cd ..
-				if ($dir != '.' && faster_file_exists ( $dir )) {
+				if ($dir != '.' && file_exists ( $dir )) {
 					if (is_writeable ( $dir )) {
 						return true;
 					}
@@ -495,7 +495,7 @@ class PEAR_DependencyDB {
 		$open_mode = 'w';
 		// XXX People reported problems with LOCK_SH and 'w'
 		if ($mode === LOCK_SH) {
-			if (! faster_file_exists ( $this->_lockfile )) {
+			if (! file_exists ( $this->_lockfile )) {
 				touch ( $this->_lockfile );
 			} elseif (! is_file ( $this->_lockfile )) {
 				return PEAR::raiseError ( 'could not create Dependency lock file, ' . 'it exists and is not a regular file' );

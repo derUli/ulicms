@@ -53,9 +53,9 @@ class Template {
 			$ownTemplatePath .= ".php";
 		}
 		ob_start ();
-		if (faster_file_exists ( $ownTemplatePath ) and is_file ( $ownTemplatePath )) {
+		if (file_exists ( $ownTemplatePath ) and is_file ( $ownTemplatePath )) {
 			include $ownTemplatePath;
-		} else if (faster_file_exists ( $originalTemplatePath ) and is_file ( $originalTemplatePath )) {
+		} else if (file_exists ( $originalTemplatePath ) and is_file ( $originalTemplatePath )) {
 			include $originalTemplatePath;
 		} else {
 			$retval = ob_get_clean ();
@@ -78,7 +78,7 @@ class Template {
 			setconfig ( "logo_disabled", "no" );
 		}
 		$logo_path = "content/images/" . Settings::get ( "logo_image" );
-		if (Settings::get ( "logo_disabled" ) == "no" and faster_file_exists ( $logo_path )) {
+		if (Settings::get ( "logo_disabled" ) == "no" and file_exists ( $logo_path )) {
 			echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
 		}
 	}
@@ -109,9 +109,9 @@ class Template {
 		}
 		
 		ob_start ();
-		if (faster_file_exists ( $ownTemplatePath ) and is_file ( $ownTemplatePath )) {
+		if (file_exists ( $ownTemplatePath ) and is_file ( $ownTemplatePath )) {
 			include $ownTemplatePath;
-		} else if (faster_file_exists ( $originalTemplatePath ) and is_file ( $originalTemplatePath )) {
+		} else if (file_exists ( $originalTemplatePath ) and is_file ( $originalTemplatePath )) {
 			include $originalTemplatePath;
 		} else {
 			$retval = ob_get_clean ();

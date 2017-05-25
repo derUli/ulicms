@@ -5,7 +5,7 @@ if (defined ( "_SECURITY" )) {
 		?>
 
 		<?php
-		if (faster_file_exists ( "../update.php" )) {
+		if (file_exists ( "../update.php" )) {
 			?>
 <p>
 	<a href="../update.php"><?php translate("run_update");?></a>

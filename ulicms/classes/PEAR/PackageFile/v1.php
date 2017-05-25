@@ -1132,7 +1132,7 @@ class PEAR_PackageFile_v1 {
 		);
 		$info = $this->getFilelist ();
 		foreach ( $info as $file => $fa ) {
-			if (! faster_file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $file )) {
+			if (! file_exists ( $dir_prefix . DIRECTORY_SEPARATOR . $file )) {
 				$this->_validateError ( PEAR_PACKAGEFILE_ERROR_FILE_NOTFOUND, array (
 						'file' => realpath ( $dir_prefix ) . DIRECTORY_SEPARATOR . $file 
 				) );
@@ -1215,7 +1215,7 @@ class PEAR_PackageFile_v1 {
 					DIRECTORY_SEPARATOR,
 					DIRECTORY_SEPARATOR 
 			), $file );
-			if (faster_file_exists ( $file ) && is_readable ( $file )) {
+			if (file_exists ( $file ) && is_readable ( $file )) {
 				return implode ( '', file ( $file ) );
 			}
 		} else { // tgz

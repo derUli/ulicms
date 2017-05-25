@@ -164,7 +164,7 @@ http://pear.php.net/dtd/package-2.0.xsd'
 		}
 		
 		$file = $where . DIRECTORY_SEPARATOR . 'package.xml';
-		if (faster_file_exists ( $file ) && ! is_file ( $file )) {
+		if (file_exists ( $file ) && ! is_file ( $file )) {
 			return PEAR::raiseError ( 'PEAR_Packagefile_v2::toTgz: unable to save package.xml as' . ' "' . $file . '"' );
 		}
 		
@@ -175,7 +175,7 @@ http://pear.php.net/dtd/package-2.0.xsd'
 		$ext = $compress ? '.tgz' : '.tar';
 		$pkgver = $this->_packagefile->getPackage () . '-' . $this->_packagefile->getVersion ();
 		$dest_package = getcwd () . DIRECTORY_SEPARATOR . $pkgver . $ext;
-		if (faster_file_exists ( $dest_package ) && ! is_file ( $dest_package )) {
+		if (file_exists ( $dest_package ) && ! is_file ( $dest_package )) {
 			return PEAR::raiseError ( 'PEAR_Packagefile_v2::toTgz: cannot create tgz file "' . $dest_package . '"' );
 		}
 		
@@ -204,7 +204,7 @@ http://pear.php.net/dtd/package-2.0.xsd'
 			foreach ( $contents as $i => $package ) {
 				$fname = $package;
 				$file = $pkgdir . DIRECTORY_SEPARATOR . $fname;
-				if (! faster_file_exists ( $file )) {
+				if (! file_exists ( $file )) {
 					return $packager->raiseError ( "File does not exist: $fname" );
 				}
 				
@@ -231,7 +231,7 @@ http://pear.php.net/dtd/package-2.0.xsd'
 				$atts = $file ['attribs'];
 				$orig = $file;
 				$file = $pkgdir . DIRECTORY_SEPARATOR . $fname;
-				if (! faster_file_exists ( $file )) {
+				if (! file_exists ( $file )) {
 					return $packager->raiseError ( "File does not exist: $fname" );
 				}
 				
@@ -272,7 +272,7 @@ http://pear.php.net/dtd/package-2.0.xsd'
 					}
 				}
 				
-				if (! faster_file_exists ( $tfile )) {
+				if (! file_exists ( $tfile )) {
 					System::mkdir ( array (
 							'-p',
 							dirname ( $tfile ) 

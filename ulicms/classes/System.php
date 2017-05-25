@@ -292,7 +292,7 @@ class System {
 		if (isset ( $create_parents )) {
 			foreach ( $opts [1] as $dir ) {
 				$dirstack = array ();
-				while ( (! faster_file_exists ( $dir ) || ! is_dir ( $dir )) && $dir != DIRECTORY_SEPARATOR ) {
+				while ( (! file_exists ( $dir ) || ! is_dir ( $dir )) && $dir != DIRECTORY_SEPARATOR ) {
 					array_unshift ( $dirstack, $dir );
 					$dir = dirname ( $dir );
 				}
@@ -310,7 +310,7 @@ class System {
 			}
 		} else {
 			foreach ( $opts [1] as $dir ) {
-				if ((@faster_file_exists ( $dir ) || ! is_dir ( $dir )) && ! mkdir ( $dir, $mode )) {
+				if ((@file_exists ( $dir ) || ! is_dir ( $dir )) && ! mkdir ( $dir, $mode )) {
 					$ret = false;
 				}
 			}

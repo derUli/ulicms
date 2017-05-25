@@ -26,9 +26,9 @@ setLocaleByLanguage ();
 
 require_once "templating.php";
 
-if (faster_in_array ( $_SESSION ["language"], $languages ) && faster_file_exists ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
+if (faster_in_array ( $_SESSION ["language"], $languages ) && file_exists ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
 		include_once getLanguageFilePath ( $_SESSION ["language"] );
-} else if (faster_file_exists ( getLanguageFilePath ( "en" ) )) {
+} else if (file_exists ( getLanguageFilePath ( "en" ) )) {
 	include getLanguageFilePath ( "en" );
 }
 
@@ -69,7 +69,7 @@ if (strtolower ( Settings::get ( "maintenance_mode" ) ) == "on" || strtolower ( 
 	header ( 'Status: 503 Service Temporarily Unavailable' );
 	header ( 'Retry-After: 60' );
 	header ( "Content-Type: text/html; charset=utf-8" );
-	if (faster_file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )) {
+	if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )) {
 		require_once getTemplateDirPath ( $theme ) . "maintenance.php";
 	} else {
 		die ( get_translation ( "UNDER_MAINTENANCE" ) );
@@ -141,7 +141,7 @@ if (! is_dir ( getTemplateDirPath ( $theme ) )) {
 	throw new Exception ( "Das aktivierte Theme existiert nicht!" );
 }
 
-if (faster_file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
+if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 	include getTemplateDirPath ( $theme ) . "functions.php";
 }
 
@@ -184,7 +184,7 @@ switch ($c) {
 		break;
 }
 
-if (faster_file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
+if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	$cached_content = file_get_contents ( $cached_page_path );
 	$last_modified = filemtime ( $cached_page_path );
 
@@ -204,9 +204,9 @@ if (faster_file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabl
 	}
 }
 
-if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! faster_file_exists ( $cached_page_path ) and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! file_exists ( $cached_page_path ) and $cache_type === "file") {
 	ob_start ();
-} else if (faster_file_exists ( $cached_page_path )) {
+} else if (file_exists ( $cached_page_path )) {
 	$last_modified = filemtime ( $cached_page_path );
 	if (time () - $last_modified < CACHE_PERIOD) {
 		ob_start ();
@@ -236,7 +236,7 @@ if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv (
 $html_file = page_has_html_file ( get_requested_pagename () );
 
 if ($html_file) {
-	if (faster_file_exists ( $html_file )) {
+	if (file_exists ( $html_file )) {
 		echo file_get_contents ( $html_file );
 	} else {
 		echo "File Not Found";
@@ -250,7 +250,7 @@ if ($html_file) {
 	);
 	foreach ( $top_files as $file ) {
 		$file = getTemplateDirPath ( $theme ) . $file;
-		if (faster_file_exists ( $file )) {
+		if (file_exists ( $file )) {
 			require $file;
 			break;
 		}
@@ -282,7 +282,7 @@ if ($html_file) {
 	);
 	foreach ( $bottom_files as $file ) {
 		$file = getTemplateDirPath ( $theme ) . $file;
-		if (faster_file_exists ( $file )) {
+		if (file_exists ( $file )) {
 			require $file;
 			break;
 		}

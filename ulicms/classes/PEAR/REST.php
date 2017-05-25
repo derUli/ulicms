@@ -59,7 +59,7 @@ class PEAR_REST {
 	function retrieveCacheFirst($url, $accept = false, $forcestring = false, $channel = false) {
 		$cachefile = $this->config->get ( 'cache_dir' ) . DIRECTORY_SEPARATOR . md5 ( $url ) . 'rest.cachefile';
 		
-		if (faster_file_exists ( $cachefile )) {
+		if (file_exists ( $cachefile )) {
 			return unserialize ( implode ( '', file ( $cachefile ) ) );
 		}
 		
@@ -172,7 +172,7 @@ class PEAR_REST {
 	function useLocalCache($url, $cacheid = null) {
 		if ($cacheid === null) {
 			$cacheidfile = $this->config->get ( 'cache_dir' ) . DIRECTORY_SEPARATOR . md5 ( $url ) . 'rest.cacheid';
-			if (! faster_file_exists ( $cacheidfile )) {
+			if (! file_exists ( $cacheidfile )) {
 				return false;
 			}
 			
@@ -190,7 +190,7 @@ class PEAR_REST {
 	function getCacheId($url) {
 		$cacheidfile = $this->config->get ( 'cache_dir' ) . DIRECTORY_SEPARATOR . md5 ( $url ) . 'rest.cacheid';
 		
-		if (! faster_file_exists ( $cacheidfile )) {
+		if (! file_exists ( $cacheidfile )) {
 			return false;
 		}
 		
@@ -200,7 +200,7 @@ class PEAR_REST {
 	function getCache($url) {
 		$cachefile = $this->config->get ( 'cache_dir' ) . DIRECTORY_SEPARATOR . md5 ( $url ) . 'rest.cachefile';
 		
-		if (! faster_file_exists ( $cachefile )) {
+		if (! file_exists ( $cachefile )) {
 			return PEAR::raiseError ( 'No cached content available for "' . $url . '"' );
 		}
 		
@@ -252,7 +252,7 @@ class PEAR_REST {
 		
 		$result = $this->saveCacheFile ( $cachefile, serialize ( $contents ) );
 		if (PEAR::isError ( $result )) {
-			if (faster_file_exists ( $cacheidfile )) {
+			if (file_exists ( $cacheidfile )) {
 				@unlink ( $cacheidfile );
 			}
 			

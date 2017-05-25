@@ -462,7 +462,7 @@ function logo() {
 	
 	$logo_path = "content/images/" . Settings::get ( "logo_image" );
 	
-	if (Settings::get ( "logo_disabled" ) == "no" and faster_file_exists ( $logo_path )) {
+	if (Settings::get ( "logo_disabled" ) == "no" and file_exists ( $logo_path )) {
 		echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
 	}
 }
@@ -608,12 +608,12 @@ function apply_filter($text, $type) {
 		$escapedName = ModuleHelper::underscoreToCamel ( $type . "_filter" );
 		if ($controller and method_exists ( $controller, $escapedName )) {
 			$text = $controller->$escapedName ( $text );
-		} else if (faster_file_exists ( $module_content_filter_file1 )) {
+		} else if (file_exists ( $module_content_filter_file1 )) {
 			include_once $module_content_filter_file1;
 			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
 				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
 			}
-		} else if (faster_file_exists ( $module_content_filter_file2 )) {
+		} else if (file_exists ( $module_content_filter_file2 )) {
 			include_once $module_content_filter_file2;
 			if (function_exists ( $modules [$i] . "_" . $type . "_filter" )) {
 				$text = call_user_func ( $modules [$i] . "_" . $type . "_filter", $text );
@@ -995,7 +995,7 @@ function get_page($systemname = "") {
 function content() {
 	$status = check_status ();
 	if ($status == "404 Not Found") {
-		if (faster_file_exists ( getTemplateDirPath ( $theme ) . "404.php" )) {
+		if (file_exists ( getTemplateDirPath ( $theme ) . "404.php" )) {
 			$theme = Settings::get ( "theme" );
 			include getTemplateDirPath ( $theme ) . "404.php";
 		} else {
@@ -1005,7 +1005,7 @@ function content() {
 	} else if ($status == "403 Forbidden") {
 		
 		$theme = Settings::get ( "theme" );
-		if (faster_file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
+		if (file_exists ( getTemplateDirPath ( $theme ) . "403.php" )) {
 			include getTemplateDirPath ( $theme ) . "403.php";
 		} else {
 			translate ( "FORBIDDEN_COTENT" );
@@ -1071,7 +1071,7 @@ function check_status() {
 	if (! empty ( $status )) {
 		return $status;
 	}
-	if (faster_file_exists ( $cached_page_path ) and ! is_logged_in ()) {
+	if (file_exists ( $cached_page_path ) and ! is_logged_in ()) {
 		$last_modified = filemtime ( $cached_page_path );
 		if (time () - $last_modified < CACHE_PERIOD) {
 			return "200 OK";

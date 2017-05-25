@@ -195,7 +195,7 @@ Run regression tests with PHP\'s regression testing script (run-tests.php).'
 					continue;
 				}
 				
-				if (faster_file_exists ( $p ) && preg_match ( '/\.phpt$/', $p )) {
+				if (file_exists ( $p ) && preg_match ( '/\.phpt$/', $p )) {
 					$tests [] = $p;
 					continue;
 				}
@@ -239,7 +239,7 @@ Run regression tests with PHP\'s regression testing script (run-tests.php).'
 		$tests_count = count ( $tests );
 		$this->ui->outputData ( 'Running ' . $tests_count . ' tests', $command );
 		$start = time ();
-		if (isset ( $options ['realtimelog'] ) && faster_file_exists ( 'run-tests.log' )) {
+		if (isset ( $options ['realtimelog'] ) && file_exists ( 'run-tests.log' )) {
 			unlink ( 'run-tests.log' );
 		}
 		
@@ -330,7 +330,7 @@ Run regression tests with PHP\'s regression testing script (run-tests.php).'
 					fclose ( $fp );
 					$this->ui->outputData ( 'wrote log to "' . realpath ( 'run-tests.log' ) . '"', $command );
 				}
-			} elseif (faster_file_exists ( 'run-tests.log' ) && ! is_dir ( 'run-tests.log' )) {
+			} elseif (file_exists ( 'run-tests.log' ) && ! is_dir ( 'run-tests.log' )) {
 				@unlink ( 'run-tests.log' );
 			}
 		}

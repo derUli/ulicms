@@ -55,7 +55,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 	</div>
 <?php
 		$pi = ULICMS_ROOT . "/post-install.php";
-		if (faster_file_exists ( $pi ) and is_writable ( $pi )) {
+		if (file_exists ( $pi ) and is_writable ( $pi )) {
 			?>
 <h2 class="accordion-header"><?php translate("unfinished_package_installations");?></h2>
 

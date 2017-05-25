@@ -442,7 +442,7 @@ Run post-installation scripts in package <package>, if any exist.
 		return true;
 	}
 	function _parseIni($filename) {
-		if (! faster_file_exists ( $filename )) {
+		if (! file_exists ( $filename )) {
 			return PEAR::raiseError ( 'php.ini "' . $filename . '" does not exist' );
 		}
 		
@@ -558,7 +558,7 @@ Run post-installation scripts in package <package>, if any exist.
 				continue;
 			}
 			
-			if (strpos ( $param, 'channel://' ) === false && @faster_file_exists ( $param )) {
+			if (strpos ( $param, 'channel://' ) === false && @file_exists ( $param )) {
 				if (isset ( $options ['force'] )) {
 					$otherpackages [] = $param;
 					continue;

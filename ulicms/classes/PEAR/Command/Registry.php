@@ -278,7 +278,7 @@ installed package.'
 		
 		$reg = & $this->config->getRegistry ();
 		$fp = false;
-		if (! is_dir ( $params [0] ) && (faster_file_exists ( $params [0] ) || $fp = @fopen ( $params [0], 'r' ))) {
+		if (! is_dir ( $params [0] ) && (file_exists ( $params [0] ) || $fp = @fopen ( $params [0], 'r' ))) {
 			if ($fp) {
 				fclose ( $fp );
 			}
@@ -467,7 +467,7 @@ installed package.'
 		
 		$info = $fp = false;
 		$reg = & $this->config->getRegistry ();
-		if (is_file ( $params [0] ) && ! is_dir ( $params [0] ) && (faster_file_exists ( $params [0] ) || $fp = @fopen ( $params [0], 'r' ))) {
+		if (is_file ( $params [0] ) && ! is_dir ( $params [0] ) && (file_exists ( $params [0] ) || $fp = @fopen ( $params [0], 'r' ))) {
 			if ($fp) {
 				fclose ( $fp );
 			}

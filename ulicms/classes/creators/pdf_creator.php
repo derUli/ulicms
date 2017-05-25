@@ -1,6 +1,6 @@
 <?php
 $mpdf = ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "MPDF60" . DIRECTORY_SEPERATOR . "mpdf.php";
-if (faster_file_exists ( $mpdf )) {
+if (file_exists ( $mpdf )) {
 	require_once ($mpdf);
 }
 class PDFCreator {
@@ -21,7 +21,7 @@ class PDFCreator {
 	public function output() {
 		$hasModul = containsModule ( get_requested_pagename () );
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
-			if (faster_file_exists ( $this->cached_file )) {
+			if (file_exists ( $this->cached_file )) {
 				$last_modified = filemtime ( $this->cached_file );
 				if (time () - $last_modified < CACHE_PERIOD) {
 					$this->httpHeader ();

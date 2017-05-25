@@ -11,9 +11,6 @@ function uimport($class) {
 	$path = str_replace ( "\\", "/", ULICMS_ROOT ) . "/" . $class . ".php";
 	return include_once $path;
 }
-function faster_file_exists($file) {
-	return (stream_resolve_include_path ( $file ) !== false);
-}
 function faster_in_array($needle, $haystack) {
 	$flipped = array_flip ( $haystack );
 	return isset ( $flipped [$needle] );
@@ -44,14 +41,14 @@ if (! defined ( "ULICMS_TMP" )) {
 	define ( "ULICMS_TMP", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR );
 }
 
-if (! faster_file_exists ( ULICMS_TMP )) {
+if (! file_exists ( ULICMS_TMP )) {
 	mkdir ( ULICMS_TMP );
 }
 
 if (! defined ( "ULICMS_CACHE" )) {
 	define ( "ULICMS_CACHE", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "cache" . DIRECTORY_SEPERATOR );
 }
-if (! faster_file_exists ( ULICMS_CACHE )) {
+if (! file_exists ( ULICMS_CACHE )) {
 	mkdir ( ULICMS_CACHE );
 }
 include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
@@ -88,7 +85,7 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "exceptions" . DIRECTORY_SEPERATOR . "NotImplementedException.php";
 
 $mobile_detect_as_module = dirname ( __file__ ) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
-if (faster_file_exists ( $mobile_detect_as_module )) {
+if (file_exists ( $mobile_detect_as_module )) {
 	include_once $mobile_detect_as_module;
 }
 
@@ -112,7 +109,7 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 // if config exists require_config else redirect to installer
 $path_to_config = dirname ( __file__ ) . DIRECTORY_SEPERATOR . "cms-config.php";
 
-if (faster_file_exists ( $path_to_config )) {
+if (file_exists ( $path_to_config )) {
 	require_once $path_to_config;
 } else if (is_dir ( "installer" )) {
 	header ( "Location: installer/" );

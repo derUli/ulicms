@@ -338,7 +338,7 @@ and uninstall).
 			$root = str_replace ( '/', '\\', $root );
 		}
 		
-		if (! faster_file_exists ( $params [1] ) && ! @touch ( $params [1] )) {
+		if (! file_exists ( $params [1] ) && ! @touch ( $params [1] )) {
 			return PEAR::raiseError ( 'Could not create "' . $params [1] . '"' );
 		}
 		

@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2017.4 =====
+﻿===== Neues in UliCMS 2017.4 =====
 
 + main_class Direktive wird nun ausgewertet. Methoden (render, admin, Hooks, Filter) in der main_class werden automatisch aufgerufen.
 + settings können nun über die metadata.json eines Moduls initialisiert werden
@@ -18,7 +18,9 @@
   * secure_translate()
   * ArrayHelper::insertBefore($input, $index, $element)
   * ArrayHelper::insertAfter($input, $index, $element)
-  
+  * faster_in_array()
++ Geringe Performance Verbesserungen
++ Attribut $newWindow zu MenuEntry hinzugefügt
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
 # Die Funktionen Template::executeModuleTemplate() und Template::executeDefaultOrOwnTemplate() akzeptieren nun auch Templatenamen mit Dateiendung
 # Funktion getCurrentLanguage() - Der Parameter $current ist nun per Default false

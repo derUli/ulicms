@@ -36,10 +36,14 @@ class AdminMenu {
 		foreach ( $this->children as $child ) {
 			if ($child->userHasPermission ()) {
 				$html .= "<li>";
+				$targetString = '';
+				if ($child->getNewWindow ()) {
+					$targetString = ' target="_blank"';
+				}
 				if ($child->getIdentifier () == get_action ()) {
-					$html .= '<a href="' . $child->getLink () . '" class="active">';
+					$html .= '<a href="' . $child->getLink () . '" class="active"' . $targetString . '>';
 				} else {
-					$html .= '<a href="' . $child->getLink () . '">';
+					$html .= '<a href="' . $child->getLink () . '"' . $targetString . '>';
 				}
 				$html .= $child->getTitle ();
 				$html .= "</a>";

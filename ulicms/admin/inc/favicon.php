@@ -35,7 +35,7 @@ if (defined ( "_SECURITY" )) {
 			<td><?php
 		
 		$favicon_path = "../content/images/favicon.ico";
-		if (faster_file_exists ( $favicon_path ) and is_file ( $favicon_path )) {
+		if (file_exists ( $favicon_path ) and is_file ( $favicon_path )) {
 			echo '<img class="website_favicon" src="' . $favicon_path . '" alt="' . Settings::get ( "homepage_title" ) . '"/>';
 		}
 		?>

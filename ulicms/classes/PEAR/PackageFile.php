@@ -326,7 +326,7 @@ class PEAR_PackageFile {
 		}
 		
 		if (! is_array ( $content )) {
-			if (is_string ( $file ) && strlen ( $file < 255 ) && (! faster_file_exists ( $file ) || ! @is_file ( $file ))) {
+			if (is_string ( $file ) && strlen ( $file < 255 ) && (! file_exists ( $file ) || ! @is_file ( $file ))) {
 				$ret = PEAR::raiseError ( "could not open file \"$file\"" );
 				return $ret;
 			}
@@ -426,7 +426,7 @@ class PEAR_PackageFile {
 	 */
 	function &fromPackageFile($descfile, $state, $archive = false) {
 		$fp = false;
-		if (is_string ( $descfile ) && strlen ( $descfile ) < 255 && (! faster_file_exists ( $descfile ) || ! is_file ( $descfile ) || ! is_readable ( $descfile ) || (! $fp = @fopen ( $descfile, 'r' )))) {
+		if (is_string ( $descfile ) && strlen ( $descfile ) < 255 && (! file_exists ( $descfile ) || ! is_file ( $descfile ) || ! is_readable ( $descfile ) || (! $fp = @fopen ( $descfile, 'r' )))) {
 			$a = PEAR::raiseError ( "Unable to open $descfile" );
 			return $a;
 		}
@@ -458,9 +458,9 @@ class PEAR_PackageFile {
 	function &fromAnyFile($info, $state) {
 		if (is_dir ( $info )) {
 			$dir_name = realpath ( $info );
-			if (faster_file_exists ( $dir_name . '/package.xml' )) {
+			if (file_exists ( $dir_name . '/package.xml' )) {
 				$info = PEAR_PackageFile::fromPackageFile ( $dir_name . '/package.xml', $state );
-			} elseif (faster_file_exists ( $dir_name . '/package2.xml' )) {
+			} elseif (file_exists ( $dir_name . '/package2.xml' )) {
 				$info = PEAR_PackageFile::fromPackageFile ( $dir_name . '/package2.xml', $state );
 			} else {
 				$info = PEAR::raiseError ( "No package definition found in '$info' directory" );
@@ -470,7 +470,7 @@ class PEAR_PackageFile {
 		}
 		
 		$fp = false;
-		if (is_string ( $info ) && strlen ( $info ) < 255 && (faster_file_exists ( $info ) || ($fp = @fopen ( $info, 'r' )))) {
+		if (is_string ( $info ) && strlen ( $info ) < 255 && (file_exists ( $info ) || ($fp = @fopen ( $info, 'r' )))) {
 			
 			if ($fp) {
 				fclose ( $fp );

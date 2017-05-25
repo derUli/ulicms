@@ -249,7 +249,7 @@ configuration.'
 					$contents = implode ( '', file ( $loc ) );
 				}
 			} else {
-				if (! faster_file_exists ( $params [0] )) {
+				if (! file_exists ( $params [0] )) {
 					return $this->raiseError ( 'Unknown channel "' . $channel . '"' );
 				}
 				
@@ -446,7 +446,7 @@ configuration.'
 		if (strpos ( $params [0], '://' )) {
 			$downloader = & $this->getDownloader ();
 			$tmpdir = $this->config->get ( 'temp_dir' );
-			if (! faster_file_exists ( $tmpdir )) {
+			if (! file_exists ( $tmpdir )) {
 				require_once 'System.php';
 				PEAR::staticPushErrorHandling ( PEAR_ERROR_RETURN );
 				$err = System::mkdir ( array (
@@ -474,7 +474,7 @@ configuration.'
 			$contents = implode ( '', file ( $loc ) );
 		} else {
 			$lastmodified = $fp = false;
-			if (faster_file_exists ( $params [0] )) {
+			if (file_exists ( $params [0] )) {
 				$fp = fopen ( $params [0], 'r' );
 			}
 			
@@ -536,7 +536,7 @@ configuration.'
 		}
 		
 		$tmpdir = $this->config->get ( 'temp_dir' );
-		if (! faster_file_exists ( $tmpdir )) {
+		if (! file_exists ( $tmpdir )) {
 			require_once 'System.php';
 			PEAR::staticPushErrorHandling ( PEAR_ERROR_RETURN );
 			$err = System::mkdir ( array (
@@ -555,7 +555,7 @@ configuration.'
 		
 		$reg = & $this->config->getRegistry ();
 		$lastmodified = false;
-		if ((! faster_file_exists ( $params [0] ) || is_dir ( $params [0] )) && $reg->channelExists ( strtolower ( $params [0] ) )) {
+		if ((! file_exists ( $params [0] ) || is_dir ( $params [0] )) && $reg->channelExists ( strtolower ( $params [0] ) )) {
 			$c = $reg->getChannel ( strtolower ( $params [0] ) );
 			if (PEAR::isError ( $c )) {
 				return $this->raiseError ( $c );
@@ -617,7 +617,7 @@ configuration.'
 				$contents = implode ( '', file ( $loc ) );
 			} else {
 				$fp = false;
-				if (faster_file_exists ( $params [0] )) {
+				if (file_exists ( $params [0] )) {
 					$fp = fopen ( $params [0], 'r' );
 				}
 				
