@@ -1,5 +1,5 @@
 <?php
-class ArrayHelper extends Helper {
+class ArrayHelper {
 	public static function insertBefore($input, $index, $element) {
 		if (! array_key_exists ( $index, $input )) {
 			throw new Exception ( "Index not found" );
