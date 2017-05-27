@@ -951,7 +951,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = preg_replace ( '/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string );
 		$string = preg_replace ( '/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
 	}
-	$allModules = getAllModules ();
+	$allModules = ModuleHelper::getAllEmbedModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i <= count ( $allModules ); $i ++) {
 		$thisModule = $allModules [$i];
