@@ -44,4 +44,11 @@ class Module_Page extends Page {
 		}
 		return $retval;
 	}
+	public function getEmbeddedModules() {
+		$result = parent::getEmbeddedModules ();
+		if (StringHelper::isNotNullOrEmpty ( $this->module ) and ! faster_in_array ( $this->module, $result )) {
+			$result [] = $this->module;
+		}
+		return $result;
+	}
 }

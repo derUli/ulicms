@@ -291,4 +291,15 @@ class Page extends Content {
 			return preg_match ( "/\[module=\".+\"\]/", $content );
 		}
 	}
+	public function getEmbeddedModules() {
+		$result = array ();
+		preg_match_all ( "/\[module=\"([a-z_\-0-9]+)\"]/i", $this->content, $match );
+		if (count ( $match ) > 0) {
+			for($i = 0; $i < count ( $match ); $i ++) {
+				$id = unhtmlspecialchars ( $match [1] [$i] );
+				$result [] = $id;
+			}
+		}
+		return $result;
+	}
 }
