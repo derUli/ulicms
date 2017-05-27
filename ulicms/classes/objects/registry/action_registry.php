@@ -100,7 +100,7 @@ class ActionRegistry {
 							$path .= ".php";
 						}
 						
-						if (faster_file_exists ( $path ) and is_file ( $path )) {
+						if (file_exists ( $path ) and is_file ( $path )) {
 							$actions [$key] = $path;
 						}
 					}
