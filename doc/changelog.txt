@@ -19,6 +19,7 @@
   * ArrayHelper::insertBefore($input, $index, $element)
   * ArrayHelper::insertAfter($input, $index, $element)
   * faster_in_array()
+  * Page->getEmbeddedModules()
 + Geringe Performance Verbesserungen
 + Attribut $newWindow zu MenuEntry hinzugefügt
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
