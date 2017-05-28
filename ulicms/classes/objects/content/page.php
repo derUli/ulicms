@@ -293,11 +293,14 @@ class Page extends Content {
 	}
 	public function getEmbeddedModules() {
 		$result = array ();
-		preg_match_all ( "/\[module=\"([a-z_\-0-9]+)\"]/i", $this->content, $match );
+		$content = str_ireplace ( "&quot;", '"', $this->content );
+		preg_match_all ( "/\[module=\"([a-z_\-0-9]+)\"]/i", $content, $match );
 		if (count ( $match ) > 0) {
-			for($i = 0; $i < count ( $match ); $i ++) {
+			for($i = 0; $i <= count ( $match ); $i ++) {
 				$id = unhtmlspecialchars ( $match [1] [$i] );
-				$result [] = $id;
+				if (! faster_in_array ( $id, $result )) {
+					$result [] = $id;
+				}
 			}
 		}
 		return $result;

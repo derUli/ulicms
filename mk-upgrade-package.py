@@ -11,16 +11,16 @@ def zipdir(basedir, archivename):
     assert os.path.isdir(basedir)
     with closing(ZipFile(archivename, "w", ZIP_DEFLATED)) as z:
         for root, dirs, files in os.walk(basedir):
-            #NOTE: ignore empty directories
+            # NOTE: ignore empty directories
             for fn in files:
                 absfn = os.path.join(root, fn)
-                zfn = absfn[len(basedir)+len(os.sep):] #XXX: relative path
+                zfn = absfn[len(basedir) + len(os.sep):]  # XXX: relative path
                 z.write(absfn, zfn)
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-z", "--zip", help="Compress with zip", action="store_true")
-    parser.add_argument('-t', '--target', action ="store", dest="target", required = True, help="Target directory")
+    parser.add_argument('-t', '--target', action="store", dest="target", required=True, help="Target directory")
     args = parser.parse_args()
     target = os.path.expanduser(args.target)
     target = os.path.abspath(args.target)
@@ -31,7 +31,7 @@ def main():
                        ".gitignore", ".htaccess", "installer.aus", "installer",
               "modules", "templates", "contents.css",
               "config.js", "comments", "*~", ".settings", ".project", ".buildpath",
-              "tests", "run-tests.sh")
+              "tests", "run-tests.sh", "run-tests.bat")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     print("copying files")
