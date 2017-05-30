@@ -1109,7 +1109,6 @@ function getAllLanguages($filtered = false) {
 		$group = new Group ();
 		$group->getCurrentGroup ();
 		$languages = $group->getLanguages ();
-		var_dump ( $languages );
 		if (count ( $languages ) > 0) {
 			$result = array ();
 			foreach ( $languages as $lang ) {

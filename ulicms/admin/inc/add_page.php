@@ -69,7 +69,7 @@
 			<strong><?php translate("language");?>
 	</strong> <br /> <select name="language">
 	<?php
-			$languages = getAllLanguages ();
+			$languages = getAllLanguages (true);
 			if (! empty ( $_SESSION ["filter_language"] )) {
 				$default_language = $_SESSION ["filter_language"];
 			} else {

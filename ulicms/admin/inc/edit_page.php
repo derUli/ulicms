@@ -131,7 +131,7 @@ if (defined ( "_SECURITY" )) {
 			<strong><?php translate("language");?></strong> <br /> <select
 				name="language">
 			<?php
-				$languages = getAllLanguages ();
+				$languages = getAllLanguages (true);
 				
 				$page_language = $row->language;
 				
