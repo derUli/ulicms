@@ -76,8 +76,8 @@ class MenuEntry {
 		if (is_string ( $this->permissions ) and ! empty ( $this->permissions )) {
 			return $acl->hasPermission ( $this->permissions );
 		} else if (is_array ( $this->permissions ) and count ( $this->permissions ) > 0) {
+			$isPermitted = false;
 			foreach ( $this->permissions as $permission ) {
-				$isPermitted = false;
 				if (is_string ( $permission ) and ! empty ( $permission ) and $acl->hasPermission ( $permission )) {
 					$isPermitted = true;
 				}
