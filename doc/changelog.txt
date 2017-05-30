@@ -28,6 +28,7 @@
 # Funktion getCurrentLanguage() - Der Parameter $current ist nun per Default false
 # getCurrentURL() fügt nun nicht mehr den Port an die Domain bei https://
 # Auf Fehlerseiten wird der "Bearbeiten" Button nicht mehr angezeigt
+# Bugfix: Ein Fehler bei dem ein Menüpunkt im Backend fälschlicherweise nicht angezeigt wurde behoben.
 
 ===== Neues in UliCMS 2017.3 =====
 
