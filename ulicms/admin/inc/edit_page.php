@@ -68,6 +68,11 @@ if (defined ( "_SECURITY" )) {
 				}
 			}
 			
+			$languageAssignment = getAllLanguages ( true );
+			if (count ( $languageAssignment ) > 0 and ! in_array ( $row->language, $languageAssignment )) {
+				$can_edit_this = false;
+			}
+			
 			if (! $can_edit_this) {
 				noperms ();
 			} else {
@@ -131,7 +136,7 @@ if (defined ( "_SECURITY" )) {
 			<strong><?php translate("language");?></strong> <br /> <select
 				name="language">
 			<?php
-				$languages = getAllLanguages (true);
+				$languages = getAllLanguages ( true );
 				
 				$page_language = $row->language;
 				
