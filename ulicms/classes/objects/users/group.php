@@ -11,6 +11,11 @@ class Group {
 			$this->loadById ( $id );
 		}
 	}
+	public function getCurrentGroup() {
+		if (isset ( $_SESSION ["group_id"] )) {
+			$this->loadById ( $_SESSION ["group_id"] );
+		}
+	}
 	public function loadById($id) {
 		$sql = "select * from `{prefix}groups` where id = ?";
 		$args = array (
@@ -32,9 +37,13 @@ class Group {
 		}
 		$this->languages = array ();
 		$sql = "select `language_id` from `{prefix}group_languages` where `group_id` = ?";
-		while ( $row = Database::fetchobject ( $sql ) ) {
+		$args = array (
+				$this->getId () 
+		);
+		$query = Database::pQuery ( $sql, $args, true );
+		while ( $row = Database::fetchobject ( $query ) ) {
 			$lang = new Language ();
-			$lang->getById ( $row->language_id );
+			$lang->loadById ( $row->language_id );
 			if (! is_null ( $lang->getID () )) {
 				$this->languages [] = $lang;
 			}

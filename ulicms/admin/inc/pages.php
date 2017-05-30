@@ -480,7 +480,22 @@ $(window).load(function(){
 		}
 		
 		if (isset ( $_SESSION ["filter_title"] ) and ! empty ( $_SESSION ["filter_title"] )) {
-			$filter_sql .= "AND (title LIKE '" . db_escape ( $_SESSION ["filter_title"] ) . "%' or title LIKE '%" . db_escape ( $_SESSION ["filter_title"] ) . "' or title LIKE '%" . db_escape ( $_SESSION ["filter_title"] ) . "%' or title LIKE '" . db_escape ( $_SESSION ["filter_title"] ) . "' )";
+			$filter_sql .= "AND (title LIKE '" . db_escape ( $_SESSION ["filter_title"] ) . "%' or title LIKE '%" . db_escape ( $_SESSION ["filter_title"] ) . "' or title LIKE '%" . db_escape ( $_SESSION ["filter_title"] ) . "%' or title LIKE '" . db_escape ( $_SESSION ["filter_title"] ) . "' ) ";
+		}
+		
+		$group = new Group ();
+		$group->getCurrentGroup ();
+		
+		$userLanguage = $group->getLanguages ();
+		$joined = "";
+		foreach ( $userLanguage as $lang ) {
+			$joined = "'" . Database::escapeValue ( $lang->getLanguageCode () ) . "',";
+		}
+		$joined = trim ( $joined, "," );
+		if (count ( $userLanguage ) > 0) {
+			$filter_sql .= " AND language in (";
+			$filter_sql .= $joined;
+			$filter_sql .= ")";
 		}
 		
 		$filter_sql .= " ";
