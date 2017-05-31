@@ -5,6 +5,7 @@
 + settings können nun über die metadata.json eines Moduls initialisiert werden
 + Model Klasse für 'Language' hinzugefügt
 + Bei fehlenden Sprachdateien erfolgt ein Fallback auf Englisch
++ Es wird nun ein Hinweis angezeigt, wenn man ein "Design für Mobilgeräte" festlegt und Mobile_Detect nicht installiert ist.
 + Neue Funktionen
   * Request::getMethod()
   * Request::isGet()
