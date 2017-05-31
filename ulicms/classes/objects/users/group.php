@@ -16,6 +16,15 @@ class Group {
 			$this->loadById ( $_SESSION ["group_id"] );
 		}
 	}
+	public static function getAll() {
+		$sql = "select id from `{prefix}groups` order by id";
+		$query = Database::query ( $sql, true );
+		$data = array ();
+		while ( $row = Database::fetchobject ( $query ) ) {
+			$data [] = new Group ( $row->id );
+		}
+		return $data;
+	}
 	public function loadById($id) {
 		$sql = "select * from `{prefix}groups` where id = ?";
 		$args = array (
