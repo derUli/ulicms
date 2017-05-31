@@ -712,4 +712,6 @@ define ( "TRANSLATION_THIS_MODULE_HAS_NO_SETTINGS", "Dieses Modul hat keine Eins
 define ( "TRANSLATION_CANT_DELETE_CATEGORY_GENERAL", "Die Allgemeine Kategorie kann nicht gelöscht werden!" );
 define ( "TRANSLATION_GROUP_WAS_DELETED", "Die Gruppe wurde erfolgreich gelöscht." );
 
+define ( "TRANSLATION_MOBILE_DETECT_INSTALL_NOTICE", "Um dieses Feature zu nutzen müssen Sie <a href=\"https://extend.ulicms.de/mobile_detect.html\" target=\"_blank\">Mobile_Detect</a> installieren." );
+
 add_hook ( "lang_de" );
