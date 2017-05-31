@@ -31,12 +31,12 @@ def main():
                        ".gitignore", ".htaccess", "installer.aus", "installer",
               "modules", "templates", "contents.css",
               "config.js", "comments", "*~", ".settings", ".project", ".buildpath",
-              "tests", "run-tests.sh", "run-tests.bat")
+              "tests", "run-tests.sh", "run-tests.bat", ".pydevproject")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
-    
+
     update_script = os.path.join(target, "ulicms", "update.php")
 
     content_dir_from = os.path.join(source_dir, "ulicms", "classes", "objects", "content")
@@ -57,7 +57,7 @@ def main():
                 if "unlink" in line and line.startswith("//"):
                     line = line.replace("//", "")
                     line = line.lstrip()
-                    
+
                 print(line)
                 f.write(line)
     else:

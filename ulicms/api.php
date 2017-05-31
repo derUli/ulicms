@@ -1104,7 +1104,19 @@ function getAllSystemNames($lang = null) {
 }
 
 // Sprachcodes abfragen und als Array zurück geben
-function getAllLanguages() {
+function getAllLanguages($filtered = false) {
+	if ($filtered) {
+		$group = new Group ();
+		$group->getCurrentGroup ();
+		$languages = $group->getLanguages ();
+		if (count ( $languages ) > 0) {
+			$result = array ();
+			foreach ( $languages as $lang ) {
+				$result [] = $lang->getLanguageCode ();
+			}
+			return $result;
+		}
+	}
 	if (! is_null ( Vars::get ( "all_languages" ) )) {
 		return Vars::get ( "all_languages" );
 	}

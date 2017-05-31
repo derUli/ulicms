@@ -1,5 +1,6 @@
 ﻿===== Neues in UliCMS 2017.4 =====
 
++ Gruppen können nun Sprachen zugeordnet bekommen
 + main_class Direktive wird nun ausgewertet. Methoden (render, admin, Hooks, Filter) in der main_class werden automatisch aufgerufen.
 + settings können nun über die metadata.json eines Moduls initialisiert werden
 + Model Klasse für 'Language' hinzugefügt
@@ -27,6 +28,7 @@
 # Funktion getCurrentLanguage() - Der Parameter $current ist nun per Default false
 # getCurrentURL() fügt nun nicht mehr den Port an die Domain bei https://
 # Auf Fehlerseiten wird der "Bearbeiten" Button nicht mehr angezeigt
+# Bugfix: Ein Fehler bei dem ein Menüpunkt im Backend fälschlicherweise nicht angezeigt wurde behoben.
 
 ===== Neues in UliCMS 2017.3 =====
 

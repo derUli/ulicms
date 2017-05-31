@@ -1,11 +1,7 @@
 <?php
-if (! defined ( "ULICMS_ROOT" )) {
-	die ( "Dummer Hacker!" );
-}
-
 $acl = new ACL ();
 $all_permissions = $acl->getDefaultACL ( true, true );
-
+$languages = Language::getAllLanguages ();
 ?>
 <form action="?action=groups" method="post">
 <?php
@@ -16,9 +12,8 @@ csrf_token_html ();
 		<strong><?php translate("name");?> </strong> <input type="text"
 			required="required" name="name" value="">
 	</p>
-	<p>
-		<strong><?php translate("permissions");?> </strong>
-	</p>
+	<h3><?php translate("permissions");?></h3>
+
 	<fieldset>
 		<p>
 			<input id="checkall" type="checkbox" class="checkall"> <label
@@ -51,8 +46,23 @@ csrf_token_html ();
 		?>
 		</p>
 	</fieldset>
-	<br /> <input type="submit" value="<?php translate("create_group");?>"
+	<h4><?php translate("languages");?></h4>
+	<fieldset>
+		<p>
+		<?php foreach($languages as $lang){?>
+			
+			<input type="checkbox" name="restrict_edit_access_language[]"
+				value="<?php echo $lang->getID();?>"
+				id="lang-<?php echo $lang->getID();?>"> <label
+				for="lang-<?php echo $lang->getID();?>"><?php Template::escape($lang->getName());?></label>
+			<br />
+			 
+		<?php }?></p>
+	</fieldset>
+
+	<input type="submit" value="<?php translate("create_group");?>"
 		name="add_group">
+
 </form>
 
 <script type="text/javascript">

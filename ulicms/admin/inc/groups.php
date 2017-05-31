@@ -20,7 +20,16 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 		
 		$name = trim ( $_POST ["name"] );
 		if (! empty ( $name )) {
-			$acl->createGroup ( $name, $all_permissions );
+			$id = $acl->createGroup ( $name, $all_permissions );
+			$group = new Group ( $id );
+			$languages = array ();
+			if (count ( $_POST ["restrict_edit_access_language"] ) > 0) {
+				foreach ( $_POST ["restrict_edit_access_language"] as $lang ) {
+					$languages [] = new Language ( $lang );
+				}
+			}
+			$group->setLanguages ( $languages );
+			$group->save ();
 			$created = true;
 			$name = real_htmlspecialchars ( $name );
 		}
@@ -37,6 +46,17 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 		$all_permissions = $acl->getDefaultACL ( false, true );
 		
 		$id = $_POST ["id"];
+		
+		$group = new Group ();
+		$group->loadById ( $id );
+		$languages = array ();
+		if (count ( $_POST ["restrict_edit_access_language"] ) > 0) {
+			foreach ( $_POST ["restrict_edit_access_language"] as $lang ) {
+				$languages [] = new Language ( $lang );
+			}
+		}
+		$group->setLanguages ( $languages );
+		$group->save ();
 		
 		if (count ( $_POST ["user_permissons"] ) > 0) {
 			foreach ( $_POST ["user_permissons"] as $permission_name ) {
