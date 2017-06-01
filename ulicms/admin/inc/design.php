@@ -107,6 +107,8 @@ if (! $acl->hasPermission ( "design" )) {
 	
 	$no_mobile_design_on_tablet = Settings::get ( "no_mobile_design_on_tablet" );
 	
+	$modManager = new ModuleManager ();
+	$mobileDetectInstalled = in_array ( "Mobile_Detect", $modManager->getEnabledModuleNames () );
 	?>
 	<?php
 	
@@ -177,9 +179,11 @@ div#google-fonts {
 
 		<tr>
 			<td><strong><?php translate("mobile_design");?> </strong></td>
-			<td><select name="mobile_theme" size=1>
-					<option value=""
-						<?php
+			<td>
+				<p>
+					<select name="mobile_theme" size=1>
+						<option value=""
+							<?php
 	
 	if (! $mobile_theme) {
 		echo " selected";
@@ -197,7 +201,7 @@ div#google-fonts {
 		
 		echo $th;
 		?>"
-						<?php
+							<?php
 		if ($th === $mobile_theme) {
 			echo " selected";
 		}
@@ -210,7 +214,15 @@ div#google-fonts {
 					<?php
 	}
 	?>
-			</select></td>
+			</select>
+				</p>
+				<div class="alert alert-warning fade in"
+					id="mobile_detect_notice"
+					data-installed="<?php echo strbool($mobileDetectInstalled);?>">
+					
+  <?php translate("mobile_detect_install_notice");?>
+</div>
+			</td>
 		</tr>
 		<tr>
 			<td><strong><?php
@@ -341,7 +353,8 @@ div#google-fonts {
 		</tr>
 		<tr>
 			<td><strong><?php translate("font_color");?> </strong></td>
-			<td><input name="body-text-color" class="jscolor {hash:true,caps:true}"
+			<td><input name="body-text-color"
+				class="jscolor {hash:true,caps:true}"
 				value="<?php
 	
 	echo real_htmlspecialchars ( Settings::get ( "body-text-color" ) );
@@ -406,6 +419,8 @@ div#google-fonts {
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+</script>
+	<script type="text/javascript" src="scripts/design.js">
 </script>
 <?php
 	}
