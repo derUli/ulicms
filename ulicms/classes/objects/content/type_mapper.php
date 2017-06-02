@@ -2,6 +2,7 @@
 class TypeMapper {
 	private static $mapping = array (
 			"page" => "Page",
+			"snippet" => "Page",
 			"list" => "Content_List",
 			"node" => "Node",
 			"link" => "Link",
@@ -9,7 +10,7 @@ class TypeMapper {
 			"video" => "Video_Page",
 			"audio" => "Audio_Page",
 			"image" => "Image_Page",
-			"article" => "Article" 
+			"article" => "Article"
 	);
 	public static function getMappings() {
 		return self::$mapping;

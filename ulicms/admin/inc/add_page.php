@@ -63,13 +63,14 @@
 			<?php }?>
 
 		</div>
+
 		<h2 class="accordion-header"><?php translate("menu_entry");?></h2>
 
 		<div class="accordion-content">
 			<strong><?php translate("language");?>
 	</strong> <br /> <select name="language">
 	<?php
-			$languages = getAllLanguages (true);
+			$languages = getAllLanguages ( true );
 			if (! empty ( $_SESSION ["filter_language"] )) {
 				$default_language = $_SESSION ["filter_language"];
 			} else {
@@ -149,14 +150,19 @@
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
 		<?php translate("disabled");?>
 		</option>
-			</select> <br /> <br /> <strong><?php translate("hidden");?>
+			</select> <br /> <br />
+			<div id="hidden-attrib">
+				<strong><?php translate("hidden");?>
 	</strong><br /> <select name="hidden" size="1"><option value="1">
 		<?php translate("yes");?>
 		</option>
-				<option value="0" selected>
+					<option value="0" selected>
 		<?php translate("no");?>
 		</option>
-			</select> <br /> <br /> <strong><?php translate("category");?>
+				</select> <br /> <br />
+
+			</div>
+			<strong><?php translate("category");?>
 	</strong><br />
 	<?php echo categories :: getHTMLSelect();?>
 	

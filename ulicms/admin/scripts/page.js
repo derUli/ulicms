@@ -129,6 +129,17 @@ function showAndHideFieldsByType() {
 			$("#article-image").slideUp();
 		}
 	}
+
+	if ($("#type_snippet").is(":checked")) {
+		$("select[name='hidden']").val("1");
+		$("select[name='hidden']").prop("disabled", true);
+		$("#hidden-attrib").slideUp();
+	} else {
+		$("select[name='hidden']").val("0");
+		$("select[name='hidden']").prop("disabled", false);
+		$("#hidden-attrib").slideDown();
+	}
+
 	$(".custom-field-tab").each(function(index, el) {
 		if ($(el).data("type") == $("input[name='type']:checked").val()) {
 			$(el).slideDown();

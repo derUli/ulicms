@@ -69,7 +69,7 @@ if (defined ( "_SECURITY" )) {
 			<strong><?php translate("language");?></strong> <br /> <select
 				name="language">
 			<?php
-			$languages = getAllLanguages (true);
+			$languages = getAllLanguages ( true );
 			
 			$page_language = $row->language;
 			
@@ -171,15 +171,20 @@ if (defined ( "_SECURITY" )) {
 				<option value="0" <?php if(!$pages_activate_own) echo "selected";?>>
 				<?php translate("disabled");?>
 				</option>
-			</select> <br /> <br /> <strong><?php translate("hidden");?>
+			</select> <br /> <br />
+
+			<div id="hidden-attrib">
+				<strong><?php translate("hidden");?>
 	</strong><br /> <select name="hidden" size="1"><option value="1"
-					<?php if($row->hidden == 1) echo "selected";?>>
+						<?php if($row->hidden == 1) echo "selected";?>>
 		<?php translate("yes");?>
 		</option>
-				<option value="0" <?php if($row->hidden == 0) echo "selected";?>>
+					<option value="0" <?php if($row->hidden == 0) echo "selected";?>>
 		<?php translate("no");?>
 		</option>
-			</select> <br /> <br /> <strong><?php translate("category");?> </strong><br />
+				</select> <br /> <br />
+			</div>
+			<strong><?php translate("category");?> </strong><br />
 	<?php
 			echo categories::getHTMLSelect ( $row->category );
 			?>
