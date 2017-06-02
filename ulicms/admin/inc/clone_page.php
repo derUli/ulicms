@@ -38,8 +38,7 @@ if (defined ( "_SECURITY" )) {
 				type="text" required="required" name="system_title"
 				id="system_title" value="">
 			<div class="hide-on-snippet">
-				<br />
-				<strong><?php translate("page_title");?> </strong><br /> <input
+				<br /> <strong><?php translate("page_title");?> </strong><br /> <input
 					type="text" required="required" name="page_title" value=""
 					onkeyup="systemname_vorschlagen(this.value)"> <br /> <br /> <strong><?php translate("alternate_title");?> </strong><br />
 				<input type="text" name="alternate_title"
@@ -383,30 +382,32 @@ function openMenuImageSelectWindow(field) {
 		</div>
 
 		<div class="menu-stuff">
-			<h2 class="accordion-header"><?php translate("open_in");?></h2>
+			<div id="tab-target">
+				<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
-			<div class="accordion-content">
-				<strong><?php translate("open_in");?></strong><br /> <select
-					name="target" size=1>
-					<option
-						<?php
+				<div class="accordion-content">
+					<strong><?php translate("open_in");?></strong><br /> <select
+						name="target" size=1>
+						<option
+							<?php
 			
 			if ($row->target == "_self") {
 				echo 'selected="selected" ';
 			}
 			?>
-						value="_self">
+							value="_self">
 				<?php translate("target_self");?></option>
-					<option
-						<?php
+						<option
+							<?php
 			
 			if ($row->target == "_blank") {
 				echo 'selected="selected" ';
 			}
 			?>
-						value="_blank">
+							value="_blank">
 				<?php translate("target_blank");?></option>
-				</select>
+					</select>
+				</div>
 			</div>
 		</div>
 		<div id="tab-cache-control" style="display: none;">

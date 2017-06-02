@@ -313,21 +313,23 @@ function openMenuImageSelectWindow(field) {
 		<?php }?>
 		</div>
 		<div class="menu-stuff">
-			<h2 class="accordion-header"><?php translate("open_in");?></h2>
+			<div id="tab-target">
+				<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
-			<div class="accordion-content">
-				<strong><?php
+				<div class="accordion-content">
+					<strong><?php
 			
 			translate ( "open_in" );
 			?>
 		</strong><br /> <select name="target" size=1>
-					<option value="_self">
+						<option value="_self">
 			<?php translate("target_self");?>
 			</option>
-					<option value="_blank">
+						<option value="_blank">
 			<?php translate("target_blank");?>
 			</option>
-				</select>
+					</select>
+				</div>
 			</div>
 		</div>
 		<div id="tab-og" style="display: none;">
