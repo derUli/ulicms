@@ -36,21 +36,25 @@ if (defined ( "_SECURITY" )) {
 		<div class="accordion-content">
 			<strong><?php translate("permalink");?></strong><br /> <input
 				type="text" required="required" name="system_title"
-				id="system_title" value=""> <br /> <br /> <strong><?php translate("page_title");?> </strong><br />
-			<input type="text" required="required" name="page_title" value=""
-				onkeyup="systemname_vorschlagen(this.value)"> <br /> <br /> <strong><?php translate("alternate_title");?> </strong><br />
-			<input type="text" name="alternate_title"
-				value="<?php
+				id="system_title" value="">
+			<div class="hide-on-snippet">
+				<br />
+				<strong><?php translate("page_title");?> </strong><br /> <input
+					type="text" required="required" name="page_title" value=""
+					onkeyup="systemname_vorschlagen(this.value)"> <br /> <br /> <strong><?php translate("alternate_title");?> </strong><br />
+				<input type="text" name="alternate_title"
+					value="<?php
 			echo htmlspecialchars ( $row->alternate_title );
 			
 			?>"><br /> <small><?php translate("ALTERNATE_TITLE_INFO");?> </small>
-			<br /> <br /> <strong><?php translate("show_headline");?></strong> <br />
-			<select name="show_headline">
-				<option value="1"
-					<?php if($row->show_headline == 1) echo "selected";?>><?php translate("yes");?></option>
-				<option value="0"
-					<?php if($row->show_headline == 0) echo "selected";?>><?php translate("no");?></option>
-			</select>
+				<br /> <br /> <strong><?php translate("show_headline");?></strong> <br />
+				<select name="show_headline">
+					<option value="1"
+						<?php if($row->show_headline == 1) echo "selected";?>><?php translate("yes");?></option>
+					<option value="0"
+						<?php if($row->show_headline == 0) echo "selected";?>><?php translate("no");?></option>
+				</select>
+			</div>
 		</div>
 		<h2 class="accordion-header"><?php translate("type");?></h2>
 
@@ -206,12 +210,13 @@ if (defined ( "_SECURITY" )) {
 			?>">
 			</div>
 		</div>
-		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
+		<div id="tab-menu-image">
+			<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
 
-		<div class="accordion-content">
-			<strong><?php translate("menu_image");?> </strong><br />
+			<div class="accordion-content">
+				<strong><?php translate("menu_image");?> </strong><br />
 
-			<script type="text/javascript">
+				<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -225,17 +230,17 @@ function openMenuImageSelectWindow(field) {
     );
 }
 </script>
-			<input type="text" id="menu_image" name="menu_image"
-				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-				value="<?php
+				<input type="text" id="menu_image" name="menu_image"
+					readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+					value="<?php
 			
 			echo $row->menu_image;
 			?>"
-				style="cursor: pointer" /><br /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
-			<br /> <br /> <strong><?php translate("design");?></strong><br /> <select
-				name="theme" size=1>
-				<option value="">
+					style="cursor: pointer" /><br /> <a href="#"
+					onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
+				<br /> <br /> <strong><?php translate("design");?></strong><br /> <select
+					name="theme" size=1>
+					<option value="">
 				[
 				<?php translate("standard");?>
 				]
@@ -248,7 +253,7 @@ function openMenuImageSelectWindow(field) {
 				
 				echo $th;
 				?>"
-					<?php
+						<?php
 				
 				if (! is_null ( $row->theme ) and ! empty ( $row->theme ) and $row->theme == $th) {
 					echo "selected";
@@ -263,11 +268,12 @@ function openMenuImageSelectWindow(field) {
 			}
 			?>
 		</select> <br /> <br /> <strong><?php translate("html_file");?></strong>
-			<br /> <input type="text" name="html_file"
-				value="<?php
+				<br /> <input type="text" name="html_file"
+					value="<?php
 			
 			echo $row->html_file;
 			?>">
+			</div>
 		</div>
 		<h2 class="accordion-header"><?php translate("visibility");?></h2>
 

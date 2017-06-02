@@ -39,17 +39,20 @@
 			?>
 	</strong><br /> <input type="text" required="required"
 				name="page_title" value=""
-				onkeyup="systemname_vorschlagen(this.value)"> <br /> <br /> <strong><?php
+				onkeyup="systemname_vorschlagen(this.value)">
+			<div class="hide-on-snippet">
+				<br /> <strong><?php
 			
 			translate ( "alternate_title" );
 			?>
 	</strong><br /> <input type="text" name="alternate_title" value=""><br />
-			<small><?php translate ( "ALTERNATE_TITLE_INFO" );?>
+				<small><?php translate ( "ALTERNATE_TITLE_INFO" );?>
 	</small> <br /> <br /> <strong><?php translate("show_headline");?></strong>
-			<br /> <select name="show_headline">
-				<option value="1" selected><?php translate("yes");?></option>
-				<option value="0"><?php translate("no");?></option>
-			</select>
+				<br /> <select name="show_headline">
+					<option value="1" selected><?php translate("yes");?></option>
+					<option value="0"><?php translate("no");?></option>
+				</select>
+			</div>
 		</div>
 		<h2 class="accordion-header"><?php translate("type");?></h2>
 
@@ -278,8 +281,8 @@ function openMenuImageSelectWindow(field) {
 					<strong><?php translate("article_date");?></strong><br /> <input
 						name="article_date" type="datetime-local"
 						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
-					<strong><?php translate("excerpt");?></strong>
-					<textarea name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
+					<strong><?php translate("excerpt");?></strong> <textarea
+						name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
 				</div>
 			</div>
 

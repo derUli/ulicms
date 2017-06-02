@@ -142,6 +142,7 @@ function showAndHideFieldsByType() {
 		$(".menu-stuff").slideUp();
 		$("#tab-metadata").slideUp();
 		$("#tab-cache-control").slideUp();
+		$(".hide-on-snippet").slideUp();
 	} else {
 		$("select[name='hidden']").prop("disabled", false);
 		$("select[name='hidden']").prop("disabled", false);
@@ -152,6 +153,7 @@ function showAndHideFieldsByType() {
 		$(".menu-stuff").slideDown();
 		$("#tab-metadata").slideDown();
 		$("#tab-cache-control").slideDown();
+		$(".hide-on-snippet").slideDown();
 	}
 
 	$(".custom-field-tab").each(function(index, el) {
