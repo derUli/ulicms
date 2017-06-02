@@ -963,7 +963,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 				$page = ContentFactory::getByID ( $id );
 				if ($page) {
 					$content = "";
-					if ($page->active) {
+					if ($page->active and checkAccess($page->access)) {
 						$content = $page->content;
 					}
 					$string = str_ireplace ( $placeholder, $content, $string );

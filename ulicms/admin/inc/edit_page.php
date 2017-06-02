@@ -121,6 +121,10 @@ if (defined ( "_SECURITY" )) {
 						<?php if($row->show_headline == 0) echo "selected";?>><?php translate("no");?></option>
 				</select>
 			</div>
+			<br /> <strong><?php translate("snippet_code")?></strong> <br /> <input
+				type="text"
+				value="<?php Template::escape("[include=".$row->id."]")?>" readonly
+				onclick="this.select();">
 		</div>
 		<h2 class="accordion-header"><?php translate("type");?></h2>
 

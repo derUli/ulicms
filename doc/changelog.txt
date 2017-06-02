@@ -1,11 +1,13 @@
 ﻿===== Neues in UliCMS 2017.4 =====
 
 + Gruppen können nun Sprachen zugeordnet bekommen
++ Andere Seiten können per Shortcode eingebunden werden. [include=123]
++ Neuer Inhaltstyp "Snippet
++ Es wird nun ein Hinweis angezeigt, wenn man ein "Design für Mobilgeräte" festlegt und Mobile_Detect nicht installiert ist.
 + main_class Direktive wird nun ausgewertet. Methoden (render, admin, Hooks, Filter) in der main_class werden automatisch aufgerufen.
 + settings können nun über die metadata.json eines Moduls initialisiert werden
 + Model Klasse für 'Language' hinzugefügt
 + Bei fehlenden Sprachdateien erfolgt ein Fallback auf Englisch
-+ Es wird nun ein Hinweis angezeigt, wenn man ein "Design für Mobilgeräte" festlegt und Mobile_Detect nicht installiert ist.
 + Neue Funktionen
   * Request::getMethod()
   * Request::isGet()
@@ -24,7 +26,7 @@
   * Page->getEmbeddedModules()
 + Geringe Performance Verbesserungen
 + Attribut $newWindow zu MenuEntry hinzugefügt
-+ Andere Seiten können per Shortcode eingebunden werden. [include=123]
+"
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
 # Die Funktionen Template::executeModuleTemplate() und Template::executeDefaultOrOwnTemplate() akzeptieren nun auch Templatenamen mit Dateiendung
 # Funktion getCurrentLanguage() - Der Parameter $current ist nun per Default false

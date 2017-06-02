@@ -715,5 +715,5 @@ define ( "TRANSLATION_GROUP_WAS_DELETED", "Die Gruppe wurde erfolgreich gelösch
 define ( "TRANSLATION_MOBILE_DETECT_INSTALL_NOTICE", "Um dieses Feature zu nutzen müssen Sie <a href=\"https://extend.ulicms.de/mobile_detect.html\" target=\"_blank\">Mobile_Detect</a> installieren." );
 
 define ( "TRANSLATION_SNIPPET", "Schnipsel" );
-
+define ( "TRANSLATION_SNIPPET_CODE", "Schnipsel Code" );
 add_hook ( "lang_de" );
