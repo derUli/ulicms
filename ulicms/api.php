@@ -954,7 +954,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		preg_match_all ( "/\[include=([0-9]+)]/i", $string, $match );
 		
 		if (count ( $match ) > 0) {
-			
+			// @FIXME: Potenzial zur Endlosschleife (Seite die sich selbst einbindet)
 			for($i = 0; $i < count ( $match [0] ); $i ++) {
 				$placeholder = $match [0] [$i];
 				$id = unhtmlspecialchars ( $match [1] [$i] );
