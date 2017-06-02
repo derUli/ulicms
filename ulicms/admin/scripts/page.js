@@ -133,11 +133,21 @@ function showAndHideFieldsByType() {
 	if ($("#type_snippet").is(":checked")) {
 		$("select[name='hidden']").val("1");
 		$("select[name='hidden']").prop("disabled", true);
+		$("select[name='menu']").val("none");
+		$("select[name='menu']").prop("disabled", true);
 		$("#hidden-attrib").slideUp();
+		$("#tab-menu-image").slideUp();
+		$("#tab-og").slideUp();
+		$("#custom_data_json").slideUp();
+		$(".menu-stuff").slideUp();
 	} else {
-		$("select[name='hidden']").val("0");
+		$("select[name='hidden']").prop("disabled", false);
 		$("select[name='hidden']").prop("disabled", false);
 		$("#hidden-attrib").slideDown();
+		$("#tab-menu-image").slideDown();
+		$("#tab-og").slideDown();
+		$("#custom_data_json").slideDown();
+		$(".menu-stuff").slideDown();
 	}
 
 	$(".custom-field-tab").each(function(index, el) {

@@ -150,20 +150,23 @@ if (defined ( "_SECURITY" )) {
 				
 				$pages = getAllPages ( $page_language, "title", false );
 				?>
-	</select> <br /> <br /> <strong><?php translate("menu");?> </strong> <span
-				style="cursor: help;" onclick="$('div#menu_help').slideToggle()">[?]</span><br />
-			<select name="menu" size=1>
+	</select> <br /> <br />
+
+			<div class="menu-stuff">
+				<strong><?php translate("menu");?> </strong> <span
+					style="cursor: help;" onclick="$('div#menu_help').slideToggle()">[?]</span><br />
+				<select name="menu" size=1>
 		<?php
 				foreach ( getAllMenus () as $menu ) {
 					?>
 		<option
-					<?php
+						<?php
 					
 					if ($row->menu == $menu) {
 						echo 'selected="selected" ';
 					}
 					?>
-					value="<?php echo $menu?>">
+						value="<?php echo $menu?>">
 			<?php
 					
 					translate ( $menu );
@@ -173,30 +176,31 @@ if (defined ( "_SECURITY" )) {
 				}
 				?>
 	</select>
-			<div id="menu_help" class="help" style="display: none">
+				<div id="menu_help" class="help" style="display: none">
 	<?php
 				
 				echo nl2br ( get_translation ( "help_menu" ) );
 				?>
 	</div>
-			<br /> <br /> <strong><?php translate("position");?> </strong> <span
-				style="cursor: help;" onclick="$('div#position_help').slideToggle()">[?]</span><br />
-			<input type="number" name="position" required="required" min="0"
-				step="1" value="<?php
+				<br /> <br /> <strong><?php translate("position");?> </strong> <span
+					style="cursor: help;"
+					onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
+					type="number" name="position" required="required" min="0" step="1"
+					value="<?php
 				
 				echo $row->position;
 				?>">
 
-			<div id="position_help" class="help" style="display: none">
+				<div id="position_help" class="help" style="display: none">
 	<?php
 				
 				echo nl2br ( get_translation ( "help_position" ) );
 				?>
 	</div>
 
-			<br /> <br /> <strong><?php translate("parent");?> </strong><br /> <select
-				name="parent" size=1>
-				<option value="NULL">
+				<br /> <br /> <strong><?php translate("parent");?> </strong><br /> <select
+					name="parent" size=1>
+					<option value="NULL">
 			[
 			<?php translate("none");?>
 			]
@@ -209,7 +213,7 @@ if (defined ( "_SECURITY" )) {
 					
 					echo $page ["id"];
 					?>"
-					<?php
+						<?php
 					
 					if ($page ["id"] == $row->parent) {
 						echo " selected='selected'";
@@ -229,8 +233,11 @@ if (defined ( "_SECURITY" )) {
 		<?php
 				}
 				?>
-	</select> <br /> <br /> <strong><?php translate("activated");?> </strong><br />
-			<select name="activated" size=1
+	</select> <br /> <br />
+
+			</div>
+			<strong><?php translate("activated");?> </strong><br /> <select
+				name="activated" size=1
 				<?php if(!$can_active_this) echo "disabled";?>>
 				<option value="1"
 					<?php
@@ -251,7 +258,6 @@ if (defined ( "_SECURITY" )) {
 		<?php translate("disabled");?>
 		</option>
 			</select> <br /> <br />
-
 			<div id="hidden-attrib">
 				<strong><?php translate("hidden");?>
 	</strong><br /> <select name="hidden" size="1"><option value="1"
@@ -862,20 +868,22 @@ function openArticleImageSelectWindow(field) {
 				<?php if($row->only_others_can_edit) echo "checked";?>> <label
 				for="only_others_can_edit"><?php translate("others");?></label>
 		</div>
+
+		<div id="custom_data_json">
 <?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
-		<div class="accordion-content">
+			<div class="accordion-content">
 
-			<textarea name="custom_data" style="width: 100%; height: 200px;"
-				cols=80 rows=10><?php
+				<textarea name="custom_data" style="width: 100%; height: 200px;"
+					cols=80 rows=10><?php
 				
 				echo htmlspecialchars ( $row->custom_data );
 				?></textarea>
+			</div>
+
 		</div>
-
 	</div>
-
 	<br /> <br />
 	<?php
 				

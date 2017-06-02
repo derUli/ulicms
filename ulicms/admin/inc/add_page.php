@@ -87,34 +87,36 @@
 			
 			$pages = getAllPages ( $default_language, "title", false );
 			?>
-	</select><br /> <br /> <strong><?php translate("menu");?>
+	</select><br /> <br />
+			<div class="menu-stuff">
+				<strong><?php translate("menu");?>
 	</strong> <span style="cursor: help;"
-				onclick="$('div#menu_help').slideToggle()">[?]</span><br /> <select
-				name="menu" size=1>
+					onclick="$('div#menu_help').slideToggle()">[?]</span><br /> <select
+					name="menu" size=1>
 		<?php
 			foreach ( getAllMenus () as $menu ) {
 				?>
 		<option value="<?php echo $menu?>"
-					<?php if($menu == "top") echo "selected";?>>
+						<?php if($menu == "top") echo "selected";?>>
 		<?php translate ( $menu );?></option>
 		<?php
 			}
 			?>
 	</select>
-			<div id="menu_help" class="help" style="display: none">
+				<div id="menu_help" class="help" style="display: none">
 	<?php echo nl2br ( get_translation("help_menu") );?>
 	</div>
-			<br /> <br /> <strong><?php translate("position");?>
+				<br /> <br /> <strong><?php translate("position");?>
 	</strong> <span style="cursor: help;"
-				onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
-				type="number" required="required" name="position" value="0" min="0"
-				step="1">
-			<div id="position_help" class="help" style="display: none">
+					onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
+					type="number" required="required" name="position" value="0" min="0"
+					step="1">
+				<div id="position_help" class="help" style="display: none">
 	<?php echo nl2br ( get_translation ( "help_position" ) );?>
 	</div>
-			<br /> <br /> <strong><?php translate("parent");?></strong><br /> <select
-				name="parent" size=1>
-				<option selected="selected" value="NULL">
+				<br /> <br /> <strong><?php translate("parent");?></strong><br /> <select
+					name="parent" size=1>
+					<option selected="selected" value="NULL">
 			[
 			<?php translate("none");?>
 			]
@@ -141,7 +143,9 @@
 		<?php
 			}
 			?>
-	</select> <br /> <br /> <strong><?php translate("activated");?>
+	</select> <br /> <br />
+			</div>
+			<strong><?php translate("activated");?>
 	</strong><br /> <select name="activated" size=1
 				<?php if(!$pages_activate_own) echo "disabled";?>>
 				<option value="1">
@@ -175,14 +179,14 @@
 		</strong><br /> <input type="text" name="redirection" value="">
 			</div>
 		</div>
+		<div id="tab-menu-image">
+			<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
 
-		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
-
-		<div class="accordion-content">
-			<strong><?php translate("menu_image");?>
+			<div class="accordion-content">
+				<strong><?php translate("menu_image");?>
 		</strong><br />
 
-			<script type="text/javascript">
+				<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -196,13 +200,13 @@ function openMenuImageSelectWindow(field) {
     );
 }
 </script>
-			<input type="text" id="menu_image" name="menu_image"
-				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-				value="" style="cursor: pointer" /><br /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?>
+				<input type="text" id="menu_image" name="menu_image"
+					readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+					value="" style="cursor: pointer" /><br /> <a href="#"
+					onclick="$('#menu_image').val('');return false;"><?php translate("clear");?>
 		</a> <br /> <br /> <strong><?php translate("design");?></strong><br />
-			<select name="theme" size=1>
-				<option value="">
+				<select name="theme" size=1>
+					<option value="">
 				[
 				<?php translate("standard");?>
 				]
@@ -224,6 +228,7 @@ function openMenuImageSelectWindow(field) {
 			?>
 		</select> <br /> <br /> <strong><?php translate("html_file");?>
 		</strong> <br /> <input type="text" name="html_file" value="">
+			</div>
 		</div>
 		<h2 class="accordion-header"><?php translate("visibility");?></h2>
 
@@ -570,15 +575,17 @@ function openArticleImageSelectWindow(field) {
 					href="#" onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 			</div>
 		</div>
+		<div id="custom_data_json">
 		<?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 
-		<div class="accordion-content">
+			<div class="accordion-content">
 
 
-			<textarea name="custom_data" style="width: 100%; height: 200px;"
-				cols=80 rows=10>{}</textarea>
+				<textarea name="custom_data" style="width: 100%; height: 200px;"
+					cols=80 rows=10>{}</textarea>
 
+			</div>
 		</div>
 	</div>
 	<br /> <br />
