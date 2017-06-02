@@ -1,7 +1,6 @@
 ﻿===== Neues in UliCMS 2017.4 =====
 
 + Gruppen können nun Sprachen zugeordnet bekommen
-+ Andere Seiten können per Shortcode eingebunden werden. [include=123]
 + Neuer Inhaltstyp "Snippet"
 + Es wird nun ein Hinweis angezeigt, wenn man ein "Design für Mobilgeräte" festlegt und Mobile_Detect nicht installiert ist.
 + main_class Direktive wird nun ausgewertet. Methoden (render, admin, Hooks, Filter) in der main_class werden automatisch aufgerufen.
