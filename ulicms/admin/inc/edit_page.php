@@ -358,6 +358,7 @@ function openMenuImageSelectWindow(field) {
 				echo $row->html_file;
 				?>">
 			</div>
+			</div>
 			<h2 class="accordion-header"><?php translate("visibility");?></h2>
 
 			<div class="accordion-content">
