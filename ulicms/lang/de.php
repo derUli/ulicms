@@ -716,4 +716,5 @@ define ( "TRANSLATION_MOBILE_DETECT_INSTALL_NOTICE", "Um dieses Feature zu nutze
 
 define ( "TRANSLATION_SNIPPET", "Schnipsel" );
 define ( "TRANSLATION_SNIPPET_CODE", "Schnipsel Code" );
+define ( "TRANSLATION_SNIPPET_CODE_HELP", "Mit diesem Shortcode können Sie diesen Schnipsel in eine andere Seite einbinden." );
 add_hook ( "lang_de" );
