@@ -842,7 +842,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	} // Backend Directory
+	}  // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
@@ -934,22 +934,37 @@ function no_anti_csrf() {
 // replace Shortcodes with modules
 function replaceShortcodesWithModules($string, $replaceOther = true) {
 	if ($replaceOther) {
-		$string = str_replace ( '[title]', get_title (), $string );
+		$string = str_ireplace ( '[title]', get_title (), $string );
 		ob_start ();
 		logo ();
-		$string = str_replace ( '[logo]', ob_get_clean (), $string );
+		$string = str_ireplace ( '[logo]', ob_get_clean (), $string );
 		ob_start ();
 		motto ();
-		$string = str_replace ( '[motto]', ob_get_clean (), $string );
+		$string = str_ireplace ( '[motto]', ob_get_clean (), $string );
 		ob_start ();
 		motto ();
-		$string = str_replace ( '[slogan]', ob_get_clean (), $string );
+		$string = str_ireplace ( '[slogan]', ob_get_clean (), $string );
 		$current_page = get_page ();
-		$string = str_replace ( '[category]', get_category (), $string );
-		$string = str_replace ( '[csrf_token_html]', get_csrf_token_html (), $string );
+		$string = str_ireplace ( '[category]', get_category (), $string );
+		$string = str_ireplace ( '[csrf_token_html]', get_csrf_token_html (), $string );
 		// [tel] Links for tel Tags
 		$string = preg_replace ( '/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string );
 		$string = preg_replace ( '/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
+		
+		preg_match_all ( "/\[include=([0-9]+)]/i", $string, $match );
+		
+		if (count ( $match ) > 0) {
+			
+			for($i = 0; $i < count ( $match [0] ); $i ++) {
+				$placeholder = $match [0] [$i];
+				$id = unhtmlspecialchars ( $match [1] [$i] );
+				$id = intval ( $id );
+				$page = ContentFactory::getByID ( $id );
+				if ($page) {
+					$string = str_ireplace ( $placeholder, $page->content, $string );
+				}
+			}
+		}
 	}
 	$allModules = ModuleHelper::getAllEmbedModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
