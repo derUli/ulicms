@@ -376,32 +376,33 @@ function openMenuImageSelectWindow(field) {
 		<?php }?>
 		</div>
 
-		<h2 class="accordion-header"><?php translate("open_in");?></h2>
+		<div class="menu-stuff">
+			<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
-		<div class="accordion-content">
-			<strong><?php translate("open_in");?></strong><br /> <select
-				name="target" size=1>
-				<option
-					<?php
+			<div class="accordion-content">
+				<strong><?php translate("open_in");?></strong><br /> <select
+					name="target" size=1>
+					<option
+						<?php
 			
 			if ($row->target == "_self") {
 				echo 'selected="selected" ';
 			}
 			?>
-					value="_self">
+						value="_self">
 				<?php translate("target_self");?></option>
-				<option
-					<?php
+					<option
+						<?php
 			
 			if ($row->target == "_blank") {
 				echo 'selected="selected" ';
 			}
 			?>
-					value="_blank">
+						value="_blank">
 				<?php translate("target_blank");?></option>
-			</select>
+				</select>
+			</div>
 		</div>
-
 		<div id="tab-cache-control" style="display: none;">
 			<h2 class="accordion-header"><?php translate("cache_control");?></h2>
 
