@@ -149,11 +149,8 @@ function showAndHideFieldsByType() {
 		$("select[name='hidden']").prop("disabled", false);
 		$("#hidden-attrib").slideDown();
 		$("#tab-menu-image").slideDown();
-		$("#tab-og").slideDown();
 		$("#custom_data_json").slideDown();
 		$(".menu-stuff").slideDown();
-		$("#tab-metadata").slideDown();
-		$("#tab-cache-control").slideDown();
 		$(".hide-on-snippet").slideDown();
 		$(".show-on-snippet").slideUp();
 	}
