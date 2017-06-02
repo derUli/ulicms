@@ -616,9 +616,11 @@ function openMenuImageSelectWindow(field) {
 			<div class="accordion-content">
 				<strong><?php translate("module");?></strong><br /> <select
 					name="module">
-					<option value="null">[<?php translate("none");?>]</option>
+					<option value="null"
+						<?php if($module == null or empty($module)) echo " selected";?>>[<?php translate("none");?>]</option>
 				<?php foreach(ModuleHelper::getAllEmbedModules() as $module){?>
-				<option value="<?php echo $module;?>"><?php echo $module;?></option>
+				<option value="<?php echo $module;?>"
+						<?php if($module == $row->module) echo " selected";?>><?php echo $module;?></option>
 				<?php }?>
 				</select>
 			</div>
