@@ -99,7 +99,6 @@ $allowedTags = array (
 		"<section>" 
 );
 natcasesort ( $allowedTags );
-
 $allowedTags = implode ( "", $allowedTags );
 define ( "HTML5_ALLOWED_TAGS", $allowedTags );
 ?>
