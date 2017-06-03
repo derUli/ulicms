@@ -4,6 +4,7 @@ class Group {
 	private $name = "";
 	private $permissions = array ();
 	private $languages = array ();
+	private $allowable_tags = null;
 	public function __construct($id = null) {
 		$acl = new ACL ();
 		$this->permissions = $acl->getDefaultACLAsJSON ( false, true );
@@ -36,6 +37,7 @@ class Group {
 			$this->id = $result->id;
 			$this->name = $result->name;
 			$this->permissions = json_decode ( $result->permissions, true );
+			$this->allowable_tags = $result->allowable_tags;
 			$acl = new ACL ();
 			$allPermissions = $acl->getDefaultACLAsJSON ( false, true );
 			foreach ( $allPermissions as $name => $value ) {
@@ -82,10 +84,11 @@ class Group {
 		}
 	}
 	protected function insert() {
-		$sql = "insert into `{prefix}groups` (name, permissions) values (?,?)";
+		$sql = "insert into `{prefix}groups` (name, permissions, allowable_tags) values (?,?,?)";
 		$args = array (
 				$this->getName (),
-				json_encode ( $this->getPermissions () ) 
+				json_encode ( $this->getPermissions () ),
+				$this->allowable_tags 
 		);
 		$query = Database::pQuery ( $sql, $args, true );
 		if ($query) {
@@ -95,11 +98,12 @@ class Group {
 		}
 	}
 	protected function update() {
-		$sql = "update `{prefix}groups` set name = ?, permissions = ? where id = ?";
+		$sql = "update `{prefix}groups` set name = ?, permissions = ?, allowable_tags = ? where id = ?";
 		$args = array (
 				$this->getName (),
 				json_encode ( $this->getPermissions () ),
-				$this->id 
+				$this->id,
+				$this->allowable_tags 
 		);
 		$retval = Database::pQuery ( $sql, $args, true );
 		$this->saveLanguages ();
@@ -153,5 +157,11 @@ class Group {
 	}
 	public function setLanguages($val) {
 		$this->languages = $val;
+	}
+	public function getAllowableTags() {
+		return $this->allowable_tags;
+	}
+	public function setAllowableTags($val) {
+		$this->allowable_tags = (Stringhelper::isNotNullOrWhitespace ( $val )) ? strval ( $val ) : null;
 	}
 }
