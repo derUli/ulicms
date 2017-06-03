@@ -88,7 +88,7 @@ class Group {
 		$args = array (
 				$this->getName (),
 				json_encode ( $this->getPermissions () ),
-				$this->allowable_tags 
+				$this->getAllowableTags () 
 		);
 		$query = Database::pQuery ( $sql, $args, true );
 		if ($query) {
@@ -102,8 +102,8 @@ class Group {
 		$args = array (
 				$this->getName (),
 				json_encode ( $this->getPermissions () ),
-				$this->id,
-				$this->allowable_tags 
+				$this->getAllowableTags (),
+				$this->id 
 		);
 		$retval = Database::pQuery ( $sql, $args, true );
 		$this->saveLanguages ();
@@ -162,6 +162,6 @@ class Group {
 		return $this->allowable_tags;
 	}
 	public function setAllowableTags($val) {
-		$this->allowable_tags = (Stringhelper::isNotNullOrWhitespace ( $val )) ? strval ( $val ) : null;
+		$this->allowable_tags = Stringhelper::isNotNullOrWhitespace ( $val ) ? strval ( $val ) : null;
 	}
 }

@@ -29,6 +29,8 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 				}
 			}
 			$group->setLanguages ( $languages );
+			$allowed_tags = StringHelper::isNotNullOrWhitespace ( $_POST ["allowable_tags"] ) ? strval ( $_POST ["allowable_tags"] ) : null;
+			$group->setAllowableTags ( $allowed_tags );
 			$group->save ();
 			$created = true;
 			$name = real_htmlspecialchars ( $name );
@@ -49,6 +51,8 @@ if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
 		
 		$group = new Group ();
 		$group->loadById ( $id );
+		$allowed_tags = StringHelper::isNotNullOrWhitespace ( $_POST ["allowable_tags"] ) ? strval ( $_POST ["allowable_tags"] ) : null;
+		$group->setAllowableTags ( $allowed_tags );
 		$languages = array ();
 		if (count ( $_POST ["restrict_edit_access_language"] ) > 0) {
 			foreach ( $_POST ["restrict_edit_access_language"] as $lang ) {
