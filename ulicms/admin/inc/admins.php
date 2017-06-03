@@ -55,19 +55,12 @@ if (defined ( "_SECURITY" )) {
 	<table class="tablesorter">
 		<thead>
 			<tr style="font-weight: bold;">
-				<th style="width: 40px;"><a href="index.php?action=admins&order=id">ID</a>
-				</th>
-				<th><span><a href="index.php?action=admins&order=username"><?php translate("username");?> </a>
-				</span></th>
-				<th class="hide-on-mobile"><a
-					href="index.php?action=admins&order=lastname"><?php translate("lastname");?> </a></th>
-				<th class="hide-on-mobile"><a
-					href="index.php?action=admins&order=firstname"><?php translate("firstname");?> </a></th>
-				<th class="hide-on-mobile"><a
-					href="index.php?action=admins&order=email"><?php translate("email");?> </a></th>
-				<th class="hide-on-mobile"><a
-					href="index.php?action=admins&order=group_id"><?php translate("group");?> </a></th>
-
+				<th style="width: 40px;">ID</th>
+				<th><span><?php translate("username");?></span></th>
+				<th class="hide-on-mobile"><?php translate("lastname");?></th>
+				<th class="hide-on-mobile"><?php translate("firstname");?></th>
+				<th class="hide-on-mobile"><?php translate("email");?></th>
+				<th class="hide-on-mobile"><?php translate("group");?></th>
 <?php if($acl->hasPermission("users_edit")){?>
 			<td><?php translate ( "edit" );?></td>
 				<td><span><?php translate("delete");?> </span></td>
