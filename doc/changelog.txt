@@ -26,7 +26,6 @@
   * Page->getEmbeddedModules()
 + Geringe Performance Verbesserungen
 + Attribut $newWindow zu MenuEntry hinzugefügt
-"
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
 # Die Funktionen Template::executeModuleTemplate() und Template::executeDefaultOrOwnTemplate() akzeptieren nun auch Templatenamen mit Dateiendung
 # Funktion getCurrentLanguage() - Der Parameter $current ist nun per Default false
