@@ -694,7 +694,7 @@ define ( "TRANSLATION_RESTRICT_EDIT_ACCESS", "Restrict Edit Access" );
 define ( "TRANSLATION_OTHERS", "Others" );
 
 define ( "TRANSLATION_HIDDEN", "Hidden" );
-define ( "TRANSLATION_NODE", "Knotenpunkt" );
+define ( "TRANSLATION_NODE", "Node" );
 
 define ( "TRANSLATION_GOTO_FRONTEND", "Goto Frontend" );
 
@@ -720,5 +720,9 @@ define ( "TRANSLATION_CANT_DELETE_CATEGORY_GENERAL", "Can\'t delete this categor
 define ( "TRANSLATION_GROUP_WAS_DELETED", "The group was deleted." );
 
 define ( "TRANSLATION_MOBILE_DETECT_INSTALL_NOTICE", "In order to use this feature you must install <a href=\"https://extend.ulicms.de/mobile_detect.html\" target=\"_blank\">Mobile_Detect</a>." );
+
+define ( "TRANSLATION_SNIPPET", "Snippet" );
+define ( "TRANSLATION_SNIPPET_CODE", "Snippet Code" );
+define ( "TRANSLATION_SNIPPET_CODE_HELP", "Use this Shortcode to insert this snippet into a page" );
 
 add_hook ( "lang_en" );

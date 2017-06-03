@@ -524,7 +524,7 @@ $(window).load(function(){
 					echo "<td class=\"hide-on-mobile\">" . get_translation ( "no" ) . "</td>";
 				}
 				
-				if (startsWith ( $row->redirection, "#" )) {
+				if (startsWith ( $row->redirection, "#" ) or $row->type == "node" or $row->type == "snippet") {
 					echo "<td style='text-align:center'></td>";
 				} else {
 					$domain = getDomainByLanguage ( $row->language );

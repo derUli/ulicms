@@ -172,6 +172,7 @@ function get_article_meta($page = null) {
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = Database::fetchObject ( $query );
+		$result->excerpt = replaceShortcodesWithModules ( $result->excerpt );
 	}
 	$result = apply_filter ( $result, "get_article_meta" );
 	return $result;
@@ -705,7 +706,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 	$html = "";
 	$name = db_escape ( $name );
 	$language = $_SESSION ["language"];
-	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and parent ";
+	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent ";
 	
 	if (is_null ( $parent )) {
 		$sql .= " IS NULL ";
@@ -1060,6 +1061,9 @@ function checkAccess($access = "") {
 	return null;
 }
 function check_status() {
+	if (get_type () == "snippet") {
+		return "403 Forbidden";
+	}
 	if ($_GET ["seite"] == "") {
 		$_GET ["seite"] = get_frontpage ();
 	}
