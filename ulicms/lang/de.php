@@ -717,4 +717,8 @@ define ( "TRANSLATION_MOBILE_DETECT_INSTALL_NOTICE", "Um dieses Feature zu nutze
 define ( "TRANSLATION_SNIPPET", "Schnipsel" );
 define ( "TRANSLATION_SNIPPET_CODE", "Schnipsel Code" );
 define ( "TRANSLATION_SNIPPET_CODE_HELP", "Mit diesem Shortcode können Sie diesen Schnipsel in eine andere Seite einbinden." );
+define ( "TRANSLATION_ALLOWABLE_TAGS", "Zulässige Tags" );
+define ( "TRANSLATION_ALLOWABLE_TAGS_HELP", "Leer = alle Tags erlaubt" );
+
+
 add_hook ( "lang_de" );
