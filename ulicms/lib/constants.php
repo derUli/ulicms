@@ -1,5 +1,5 @@
 <?php
-define ( "HTML5_ALLOWED_TAGS", implode ( "", array (
+$allowedTags = array (
 		"<menu>",
 		"<command>",
 		"<summary>",
@@ -97,5 +97,9 @@ define ( "HTML5_ALLOWED_TAGS", implode ( "", array (
 		"<article>",
 		"<nav>",
 		"<section>" 
-) ) );
+);
+natcasesort ( $allowedTags );
+
+$allowedTags = implode ( "", $allowedTags );
+define ( "HTML5_ALLOWED_TAGS", $allowedTags );
 ?>
