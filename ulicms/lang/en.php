@@ -724,5 +724,7 @@ define ( "TRANSLATION_MOBILE_DETECT_INSTALL_NOTICE", "In order to use this featu
 define ( "TRANSLATION_SNIPPET", "Snippet" );
 define ( "TRANSLATION_SNIPPET_CODE", "Snippet Code" );
 define ( "TRANSLATION_SNIPPET_CODE_HELP", "Use this Shortcode to insert this snippet into a page" );
+define ( "TRANSLATION_ALLOWABLE_TAGS", "Allowable Tags" );
+define ( "TRANSLATION_ALLOWABLE_TAGS_HELP", "Empty = all Tags allowed" );
 
 add_hook ( "lang_en" );

@@ -182,7 +182,13 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$alternate_title = db_escape ( $_POST ["alternate_title"] );
 		$activated = intval ( $_POST ["activated"] );
 		$hidden = intval ( $_POST ["hidden"] );
-		$page_content = Database::escapeValue ( $_POST ["page_content"] );
+		$page_content = $_POST ["page_content"];
+		$group = new Group ();
+		$group->getCurrentGroup ();
+		if (Stringhelper::isNotNullOrWhitespace ( $group->getAllowableTags () )) {
+			$page_content = strip_tags ( $page_content, $group->getAllowableTags () );
+		}
+		$page_content = Database::escapeValue ( $page_content );
 		$category = intval ( $_POST ["category"] );
 		$redirection = db_escape ( $_POST ["redirection"] );
 		$html_file = db_escape ( $_POST ["html_file"] );
@@ -408,7 +414,13 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$page_title = db_escape ( $_POST ["page_title"] );
 	$activated = intval ( $_POST ["activated"] );
 	$unescaped_content = $_POST ["page_content"];
-	$page_content = db_escape ( $_POST ["page_content"] );
+	$page_content = $_POST ["page_content"];
+	$group = new Group ();
+	$group->getCurrentGroup ();
+	if (Stringhelper::isNotNullOrWhitespace ( $group->getAllowableTags () )) {
+		$page_content = strip_tags ( $page_content, $group->getAllowableTags () );
+	}
+	$page_content = Database::escapeValue ( $page_content );
 	$category = intval ( $_POST ["category"] );
 	$redirection = db_escape ( $_POST ["redirection"] );
 	$menu = db_escape ( $_POST ["menu"] );

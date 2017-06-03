@@ -96,8 +96,12 @@ if (! $acl->hasPermission ( "groups" )) {
 			 
 		<?php }?></p>
 	</fieldset>
-	<br /> <input type="submit" value="<?php translate("save_changes");?>"
-		name="edit_group">
+	<h4><?php translate("allowable_tags");?></h4>
+	<input type="text" name="allowable_tags"
+		value="<?php Template::escape($group->getAllowableTags());?>"><br /> <small><?php translate("allowable_tags_help");?></small>
+
+	<br /> <br /> <input type="submit"
+		value="<?php translate("save_changes");?>" name="edit_group">
 </form>
 
 <script type="text/javascript">

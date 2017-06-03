@@ -59,9 +59,14 @@ csrf_token_html ();
 			 
 		<?php }?></p>
 	</fieldset>
-
-	<input type="submit" value="<?php translate("create_group");?>"
-		name="add_group">
+	<h4><?php translate("allowable_tags");?></h4>
+	<input type="text" name="allowable_tags"
+		value="<?php Template::escape(HTML5_ALLOWED_TAGS);?>"><br /> <small><?php translate("allowable_tags_help");?></small>
+	<br /> <br />
+	<p>
+		<input type="submit" value="<?php translate("create_group");?>"
+			name="add_group">
+	</p>
 
 </form>
 
