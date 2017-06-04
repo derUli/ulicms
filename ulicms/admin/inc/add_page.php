@@ -117,7 +117,9 @@
 				<div id="position_help" class="help" style="display: none">
 	<?php echo nl2br ( get_translation ( "help_position" ) );?>
 	</div>
-				<br /> <br /> <strong><?php translate("parent");?></strong><br /> <select
+				<br /> <br /> 
+				<div id="parent-div">
+				<strong><?php translate("parent");?></strong><br /> <select
 					name="parent" size=1>
 					<option selected="selected" value="NULL">
 			[
@@ -146,7 +148,7 @@
 		<?php
 			}
 			?>
-	</select> <br /> <br />
+	</select> <br /> <br /></div>
 			</div>
 			<strong><?php translate("activated");?>
 	</strong><br /> <select name="activated" size=1

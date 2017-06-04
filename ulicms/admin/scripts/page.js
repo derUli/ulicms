@@ -148,9 +148,7 @@ function showAndHideFieldsByType() {
 
 	if ($("#type_snippet").is(":checked")) {
 		$("select[name='hidden']").val("1");
-		$("select[name='hidden']").prop("disabled", true);
 		$("select[name='menu']").val("none");
-		$("select[name='menu']").prop("disabled", true);
 		$("#hidden-attrib").slideUp();
 		$("#tab-menu-image").slideUp();
 		$("#tab-og").slideUp();
@@ -161,8 +159,6 @@ function showAndHideFieldsByType() {
 		$(".hide-on-snippet").slideUp();
 		$(".show-on-snippet").slideDown();
 	} else {
-		$("select[name='hidden']").prop("disabled", false);
-		$("select[name='hidden']").prop("disabled", false);
 		$("#hidden-attrib").slideDown();
 		$("#tab-menu-image").slideDown();
 		$(".menu-stuff").slideDown();
@@ -178,9 +174,18 @@ function showAndHideFieldsByType() {
 		}
 
 	});
+
+	if ($("select[name='menu']").val() == "none") {
+		$("#parent-div").slideUp();
+	} else {
+
+		$("#parent-div").slideDown();
+	}
 }
 
 $("input[name=\"type\"]").change(showAndHideFieldsByType);
+$("select[name='menu']").change(showAndHideFieldsByType);
+
 $(document).ready(showAndHideFieldsByType);
 
 function systemname_vorschlagen(txt) {

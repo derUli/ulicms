@@ -133,9 +133,11 @@ if (defined ( "_SECURITY" )) {
 			?>
 	</div>
 
-				<br /> <br /> <strong><?php translate("parent");?> </strong><br /> <select
-					name="parent" size=1>
-					<option value="NULL">
+				<br /> <br />
+				<div id="parent-div">
+					<strong><?php translate("parent");?> </strong><br /> <select
+						name="parent" size=1>
+						<option value="NULL">
 			[
 			<?php translate("none");?>
 			]
@@ -148,7 +150,7 @@ if (defined ( "_SECURITY" )) {
 				
 				echo $page ["id"];
 				?>"
-						<?php
+							<?php
 				
 				if ($page ["id"] == $row->parent) {
 					echo " selected='selected'";
@@ -169,6 +171,7 @@ if (defined ( "_SECURITY" )) {
 			}
 			?>
 	</select> <br /> <br />
+				</div>
 			</div>
 			<strong><?php translate("activated");?> </strong><br /> <select
 				name="activated" size=1
