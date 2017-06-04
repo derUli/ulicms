@@ -12,6 +12,15 @@ class UserManager {
 		}
 		return $users;
 	}
+	public function getAllUsers() {
+		$users = array ();
+		$sql = "select id from {prefix}users";
+		$query = Database::Query ( $sql, true );
+		while ( $row = Database::fetchObject ( $query ) ) {
+			$users [] = new User ( $row->id );
+		}
+		return $users;
+	}
 	public function getLockedUsers($locked = true) {
 		$users = array ();
 		$sql = "select id from {prefix}users where `locked` = ?";

@@ -719,6 +719,6 @@ define ( "TRANSLATION_SNIPPET_CODE", "Schnipsel Code" );
 define ( "TRANSLATION_SNIPPET_CODE_HELP", "Mit diesem Shortcode können Sie diesen Schnipsel in eine andere Seite einbinden." );
 define ( "TRANSLATION_ALLOWABLE_TAGS", "Zulässige Tags" );
 define ( "TRANSLATION_ALLOWABLE_TAGS_HELP", "Leer = alle Tags erlaubt" );
-
+define ( "TRANSLATION_SHOW_USERS", "Benutzer anzeigen" );
 
 add_hook ( "lang_de" );

@@ -51,15 +51,11 @@ if (count ( $groups ) > 0) {
 	<table class="tablesorter">
 		<thead>
 			<tr>
-				<th style="min-width: 100px;"><a
-					href="?action=groups&sort=id&sort_direction=change"><strong><?php translate("id");?> </strong>
-				</a></th>
-				<th style="min-width: 200px;"><a
-					href="?action=groups&sort=name&sort_direction=change"><strong><?php translate("name");?> </strong>
-				</a></th>
+				<th style="min-width: 100px;"><strong><?php translate("id");?></strong></th>
+				<th style="min-width: 200px;"><strong><?php translate("name");?> </strong></th>
 			<?php if($acl->hasPermission("groups_edit")){?>
 			<th><strong><?php translate("standard");?> </strong></th>
-
+				<td></td>
 				<td></td>
 				<td></td>
 			<?php }?>
@@ -89,7 +85,8 @@ if (count ( $groups ) > 0) {
 			if ($default_acl_group === $id) {
 				?> <span style="color: green; font-weight: bold;"><?php translate("yes");?> </span> <?php
 			} else {
-				?> <a href="?action=groups&standard=<?php
+				?> <a
+					href="?action=groups&standard=<?php
 				
 				echo $id;
 				?>"><span style="color: red; font-weight: bold;"
@@ -100,7 +97,10 @@ if (count ( $groups ) > 0) {
 			}
 			?>
 			</td>
-
+				<td><a
+					href="<?php echo ModuleHelper::buildActionURL("admins", "admins_filter_group=".$id)?>"><img
+						src="gfx/preview.gif" title="<?php translate("show_users");?>"
+						alt="<?php translate("show_users");?>"></a></td>
 				<td><a href="?action=groups&edit=<?php
 			
 			echo $id;
