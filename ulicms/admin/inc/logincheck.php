@@ -22,8 +22,13 @@ if (isset ( $_REQUEST ["reset_password_token"] )) {
 }
 
 if (isset ( $_POST ["login"] )) {
-	if (isset ( $_POST ["system_language"] )) {
+	if (StringHelper::isNotNullOrWhitespace ( $_POST ["system_language"] )) {
 		$_SESSION ["system_language"] = basename ( $_POST ["system_language"] );
+	} else {
+		$user = new User ();
+		$user->loadByUsername ( $_POST ["user"] );
+		$_SESSION ["system_language"] = $user->getDefaultLanguage () ? $user->getDefaultLanguage () : Settings::get ( "system_language" );
+		
 	}
 	
 	$confirmation_code = null;

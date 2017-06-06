@@ -62,13 +62,10 @@ csrf_token_html ();
 		<tr>
 			<td><strong><?php translate("language");?></strong></td>
 			<td><select name="system_language">
+					<option value="" selected>[<?php translate("standard");?>]</option>
 			<?php
 			for($i = 0; $i < count ( $languages ); $i ++) {
-				if ($default_language == $languages [$i]) {
-					echo '<option value="' . $languages [$i] . '" selected>' . getLanguageNameByCode ( $languages [$i] ) . '</option>';
-				} else {
-					echo '<option value="' . $languages [$i] . '">' . getLanguageNameByCode ( $languages [$i] ) . '</option>';
-				}
+				echo '<option value="' . $languages [$i] . '">' . getLanguageNameByCode ( $languages [$i] ) . '</option>';
 			}
 			?>
 			</select></td>
