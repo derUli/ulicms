@@ -743,10 +743,12 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$require_password_change = intval ( isset ( $_POST ["require_password_change"] ) );
 	$locked = intval ( isset ( $_POST ["locked"] ) );
 	
+	$default_language = StringHelper::isNotNullOrWhitespace ( $_POST ["default_language"] ) ? "'" . Database::escapeValue ( $_POST ["default_language"] ) . "'" : "NULL";
+	
 	add_hook ( "before_edit_user" );
 	$sql = "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', skype_id = '$skype_id',
-about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked', `twitter` = '$twitter', `homepage` = '$homepage'  WHERE id=$id";
+about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked', `twitter` = '$twitter', `homepage` = '$homepage' , `default_language` = $default_language WHERE id=$id";
 	
 	db_query ( $sql );
 	
