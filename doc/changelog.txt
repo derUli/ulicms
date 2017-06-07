@@ -5,6 +5,7 @@
 + Zulässige Tags können nun beschränkt werden
 + Es wird nun ein Hinweis angezeigt, wenn man ein "Design für Mobilgeräte" festlegt und Mobile_Detect nicht installiert ist.
 + Benutzer können nach Gruppe gefiltert werden
++ Es kann nun eine Standardsprache je Benutzer ausgewählt werden.
 + main_class Direktive wird nun ausgewertet. Methoden (render, admin, Hooks, Filter) in der main_class werden automatisch aufgerufen.
 + settings können nun über die metadata.json eines Moduls initialisiert werden
 + Model Klasse für 'Language' hinzugefügt
