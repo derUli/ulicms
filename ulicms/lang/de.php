@@ -720,5 +720,6 @@ define ( "TRANSLATION_SNIPPET_CODE_HELP", "Mit diesem Shortcode können Sie dies
 define ( "TRANSLATION_ALLOWABLE_TAGS", "Zulässige Tags" );
 define ( "TRANSLATION_ALLOWABLE_TAGS_HELP", "Leer = alle Tags erlaubt" );
 define ( "TRANSLATION_SHOW_USERS", "Benutzer anzeigen" );
+define ( "TRANSLATION_DEFAULT_LANGUAGE", "Standardsprache" );
 
 add_hook ( "lang_de" );

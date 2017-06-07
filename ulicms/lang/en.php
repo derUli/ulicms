@@ -727,5 +727,6 @@ define ( "TRANSLATION_SNIPPET_CODE_HELP", "Use this Shortcode to insert this sni
 define ( "TRANSLATION_ALLOWABLE_TAGS", "Allowable Tags" );
 define ( "TRANSLATION_ALLOWABLE_TAGS_HELP", "Empty = all Tags allowed" );
 define ( "TRANSLATION_SHOW_USERS", "Show Users" );
+define ( "TRANSLATION_DEFAULT_LANGUAGE", "Default Language" );
 
 add_hook ( "lang_en" );
