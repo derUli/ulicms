@@ -396,6 +396,7 @@ if ($_POST ["add_admin"] == "add_admin" && (is_admin () or $acl->hasPermission (
 	$firstname = $_POST ["admin_firstname"];
 	$password = $_POST ["admin_password"];
 	$email = $_POST ["admin_email"];
+	$default_language = StringHelper::isNotNullOrWhitespace ( $_POST ["default_language"] ) ? $_POST ["default_language"] : null;
 	$sendMail = isset ( $_POST ["send_mail"] );
 	$admin = intval ( isset ( $_POST ["admin"] ) );
 	$locked = intval ( isset ( $_POST ["locked"] ) );
@@ -404,7 +405,7 @@ if ($_POST ["add_admin"] == "add_admin" && (is_admin () or $acl->hasPermission (
 		$group_id = null;
 	}
 	$require_password_change = intval ( isset ( $_POST ["require_password_change"] ) );
-	adduser ( $username, $lastname, $firstname, $email, $password, $sendMail, $group_id, $require_password_change, $admin, $locked );
+	adduser ( $username, $lastname, $firstname, $email, $password, $sendMail, $group_id, $require_password_change, $admin, $locked, $default_language );
 	header ( "Location: index.php?action=admins" );
 	exit ();
 }
