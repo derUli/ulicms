@@ -26,6 +26,10 @@
   * ArrayHelper::insertAfter($input, $index, $element)
   * faster_in_array()
   * Page->getEmbeddedModules()
+  * Template::doctype()
+  * Template::getDoctype()
+  * Template::ogHTMLPrefix()
+  * Template::getOgHTMLPrefix()
 + Geringe Performance Verbesserungen
 + Attribut $newWindow zu MenuEntry hinzugefügt
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
