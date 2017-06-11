@@ -138,5 +138,21 @@ class Template {
 		}
 		return $html;
 	}
+	public static function doctype() {
+		echo self::getDoctype ();
+	}
+	public static function getDoctype() {
+		$html = '<!doctype html>';
+		$html .= "\r\n";
+		return $html;
+	}
+	public static function ogHTMLPrefix() {
+		echo self::getOgHTMLPrefix ();
+	}
+	public static function getOgHTMLPrefix() {
+		$html = '<html prefix="og: http://ogp.me/ns#" lang="' . getCurrentLanguage () . '">';
+		$html .= "\r\n";
+		return $html;
+	}
 	// @TODO Restliche Funktionen aus templating.php implementieren
 }
