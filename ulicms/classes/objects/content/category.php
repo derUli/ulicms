@@ -1,8 +1,8 @@
 <?php
 class Category {
 	private $id = null;
-	private $name = "";
-	private $description = "";
+	private $name = null;
+	private $description = null;
 	public function __construct($id = null) {
 		if ($id) {
 			$this->loadByID ( $id );
@@ -22,6 +22,7 @@ class Category {
 		$this->description = null;
 		
 		if ($query and Database::getNumRows ( $query ) > 0) {
+			$result = Database::fetchObject ( $query );
 			$this->id = $result->id;
 			$this->name = $result->name;
 			$this->description = $result->description;

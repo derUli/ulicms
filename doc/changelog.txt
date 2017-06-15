@@ -9,6 +9,7 @@
 + main_class Direktive wird nun ausgewertet. Methoden (render, admin, Hooks, Filter) in der main_class werden automatisch aufgerufen.
 + settings können nun über die metadata.json eines Moduls initialisiert werden
 + Model Klasse für 'Language' hinzugefügt
++ Model Klasse für 'Category' hinzugefügt
 + Bei fehlenden Sprachdateien erfolgt ein Fallback auf Englisch
 + Neue Funktionen
   * Request::getMethod()
