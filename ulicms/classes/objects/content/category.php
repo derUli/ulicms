@@ -4,7 +4,7 @@ class Category {
 	private $name = "";
 	private $description = "";
 	public function __construct($id = null) {
-		if ($this->id) {
+		if ($id) {
 			$this->loadByID ( $id );
 		}
 	}
