@@ -8,4 +8,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}banner` (
 `html` text DEFAULT '',
 `language` VARCHAR( 255 ) NULL DEFAULT  'all',
 PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT charset={db_encoding} AUTO_INCREMENT=1 ;

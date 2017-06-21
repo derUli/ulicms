@@ -7,4 +7,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}audio` (
 `created` bigint(20) NOT NULL,
 `updated` bigint(20) NOT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT charset={db_encoding} AUTO_INCREMENT=1 ;

@@ -3,17 +3,6 @@
 function db_query($query) {
 	return Database::query ( $query );
 }
-function getPDOConnectionString() {
-	$retval = "mysql://";
-	$cfg = new config ();
-	$retval .= $cfg->db_user;
-	if (! empty ( $cfg->db_password ))
-		$retval .= ":" . $cfg->db_password;
-	$retval .= "@" . $cfg->db_server;
-	$retval .= "/" . $cfg->db_database;
-	$retval .= "?charset=utf8";
-	return $retval;
-}
 function db_get_server_info() {
 	return mysqli_get_server_info ( Database::getConnection () );
 }
@@ -112,8 +101,8 @@ function db_fetch_assoc($result) {
 function db_fetch_all($result, $resulttype = MYSQLI_NUM) {
 	if (function_exists ( "mysqli_fetch_all" ))
 		return mysqli_fetch_all ( $result, $resulttype );
-		
-		// @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
+	
+	// @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
 	$retval = array ();
 	while ( $row = db_fetch_assoc ( $result ) ) {
 		$retval [] = $row;

@@ -8,4 +8,5 @@ class config extends baseConfig {
 	var $db_type = "mysql";
 	var $debug = false;
 	var $log_requests = false;
+	var $db_encoding = "{db_encoding}";
 }

@@ -5,4 +5,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}history` (
 `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 `user_id` int(11) NULL,
 PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT charset={db_encoding} AUTO_INCREMENT=1 ;

@@ -4,4 +4,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}languages` (
 `language_code` varchar(6) NOT NULL,
 UNIQUE(`language_code`),
 PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=3;
+) ENGINE=InnoDB DEFAULT charset={db_encoding} AUTO_INCREMENT=3;

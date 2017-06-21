@@ -5,4 +5,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}installed_patches` (
 `url` varchar(255) NOT NULL,
 `date` DATETIME NOT NULL,
 PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT charset={db_encoding};
