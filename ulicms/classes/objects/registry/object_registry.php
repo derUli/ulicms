@@ -10,7 +10,7 @@ class ObjectRegistry {
 				if (faster_in_array ( $module, $disabledModules )) {
 					continue;
 				}
-				$objects = getModuleMeta ( $module, "objects" );
+				$objects = getModuleMeta ( $module, "models" ) ? getModuleMeta ( $module, "models" ) : getModuleMeta ( $module, "objects" );
 				if ($objects) {
 					foreach ( $objects as $key => $value ) {
 						$path = getModulePath ( $module, true ) . trim ( $value, "/" );
