@@ -7,6 +7,8 @@ class Database {
 		if ($replacePrefix) {
 			$cfg = new config ();
 			$sql = str_replace ( "{prefix}", $cfg->db_prefix, $sql );
+			$encoding == "utf8mb4" ? "utf8mb4" : "utf8";
+			$sql = str_replace ( "{db_encoding}", $encoding, $sql );
 		}
 		return mysqli_query ( self::$connection, $sql );
 	}
@@ -42,18 +44,6 @@ class Database {
 		}
 		log_db_query ( $preparedQuery );
 		return Database::query ( $preparedQuery, $replacePrefix );
-	}
-	public static function getPDOConnectionString() {
-		$retval = "mysql://";
-		$cfg = new config ();
-		$retval .= $cfg->db_user;
-		if (! empty ( $cfg->db_password )) {
-			$retval .= ":" . $cfg->db_password;
-		}
-		$retval .= "@" . $cfg->db_server;
-		$retval .= "/" . $cfg->db_database;
-		$retval .= "?charset=utf8";
-		return $retval;
 	}
 	public static function getServerVersion() {
 		return mysqli_get_server_info ( self::$connection );
@@ -204,7 +194,8 @@ class Database {
 		if (! self::$connection) {
 			return false;
 		}
-		self::query ( "SET NAMES 'utf8'" );
+		$encoding == "utf8mb4" ? "utf8mb4" : "utf8";
+		self::query ( "SET NAMES '$encoding'" );
 		// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 		self::query ( "SET SESSION sql_mode = '';" );
 		
