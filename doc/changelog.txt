@@ -41,6 +41,7 @@
 # Bugfix: Ein Fehler bei dem ein Menüpunkt im Backend fälschlicherweise nicht angezeigt wurde behoben.
 # Bugfix: Das Feld "Modul" wird nun beim Klonen einer Seite korrekt ausgefüllt.
 # Bugfix: $user->update() überschreibt die ID nicht mehr
+# Parameter $query von Database::query() und Database::pQuery() in $sql umbenannt
 
 ===== Neues in UliCMS 2017.3 =====
 
