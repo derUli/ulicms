@@ -1,9 +1,9 @@
 <?php
 class CategoryTest extends PHPUnit_Framework_TestCase {
-	private const name1 = "Name 1";
-	private const name2 = "Name 2";
-	private const description1 = "Description 1";
-	private const description2 = "Description 2";
+	const name1 = "Name 1";
+	const name2 = "Name 2";
+	const description1 = "Description 1";
+	const description2 = "Description 2";
 	public function setUp() {
 		Database::pQuery ( "delete from `{prefix}categories`
 							where name = ? or name = ?", array (
