@@ -843,7 +843,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	} // Backend Directory
+	}  // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
@@ -963,7 +963,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 				$page = ContentFactory::getByID ( $id );
 				if ($page) {
 					$content = "";
-					if ($page->active and checkAccess($page->access)) {
+					if ($page->active and checkAccess ( $page->access )) {
 						$content = $page->content;
 					}
 					$string = str_ireplace ( $placeholder, $content, $string );
@@ -1298,7 +1298,10 @@ function uninstall_module($name, $type = "module") {
 			$uninstall_script = getModuleUninstallScriptPath ( $name, true );
 			$uninstall_script2 = getModuleUninstallScriptPath2 ( $name, true );
 			// Uninstall Script ausführen, sofern vorhanden
-			if (is_file ( $uninstall_script )) {
+			$mainController = ModuleHelper::getMainController ( $name );
+			if ($mainController and method_exists ( $mainController, "uninstall" )) {
+				$mainController->uninstall ();
+			} else if (is_file ( $uninstall_script )) {
 				include $uninstall_script;
 			} else if (is_file ( $uninstall_script2 )) {
 				include $uninstall_script2;
