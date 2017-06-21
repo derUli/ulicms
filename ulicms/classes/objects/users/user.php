@@ -116,10 +116,7 @@ class User {
 				$this->default_language,
 				$this->id 
 		);
-		$result = Database::pQuery ( $sql, $args, true ) or die ( Database::getError () );
-		if ($result) {
-			$this->id = Database::getLastInsertID ();
-		}
+		Database::pQuery ( $sql, $args, true ) or die ( Database::getError () );
 	}
 	public function getId() {
 		return $this->id;
