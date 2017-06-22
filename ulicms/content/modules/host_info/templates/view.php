@@ -1,5 +1,7 @@
 <?php
 $version = new ulicms_version ();
+$vars = $_SERVER;
+ksort($vars);
 ?>
 <p>
 	<strong><?php translate("uptime");?></strong><br />
@@ -51,7 +53,7 @@ $version = new ulicms_version ();
 		</tr>
 	</thead>
 	<tbody>            
-            <?php foreach ( $_SERVER as $key => $value ) {
+            <?php foreach ( $vars as $key => $value ) {
 				if(is_string($value)){
 				?>
             <tr>
