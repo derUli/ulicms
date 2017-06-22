@@ -1,0 +1,11 @@
+{
+	"source" : "extend",
+	"version" : "1.0",
+	"embed" : false,
+	"custom_acl" : ["host_info"],
+	"admin_permission" : "host_info",
+	"controllers" : {
+		"HostInfo" : "HostInfo.php"
+	},
+	"main_class" : "HostInfo"
+}
