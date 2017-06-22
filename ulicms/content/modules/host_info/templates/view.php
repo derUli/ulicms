@@ -1,7 +1,7 @@
 <?php
 $version = new ulicms_version ();
 $vars = $_SERVER;
-ksort($vars);
+ksort ( $vars );
 ?>
 <p>
 	<strong><?php translate("uptime");?></strong><br />
@@ -40,7 +40,8 @@ ksort($vars);
 	<strong><?php translate("ulicms_version");?></strong><br />
 <pre><?php Template::escape($version->getInternalVersionAsString()); ?></pre>
 </p>
-<strong><?php translate("server_vars")?></strong><br/>
+<strong><?php translate("server_vars")?></strong>
+<br />
 <table class="tablesorter">
 	<thead>
 		<tr>
@@ -53,9 +54,11 @@ ksort($vars);
 		</tr>
 	</thead>
 	<tbody>            
-            <?php foreach ( $vars as $key => $value ) {
-				if(is_string($value)){
-				?>
+            <?php
+												
+foreach ( $vars as $key => $value ) {
+													if (is_string ( $value )) {
+														?>
             <tr>
 			<td><?php Template::escape($key);?></td>
 			<td><?php echo nl2br(Template::getEscape($value));?></td>
