@@ -38,7 +38,7 @@ $version = new ulicms_version ();
 	<strong><?php translate("ulicms_version");?></strong><br />
 <pre><?php Template::escape($version->getInternalVersionAsString()); ?></pre>
 </p>
-<?php translate("server_vars")?>
+<strong><?php translate("server_vars")?></strong><br/>
 <table class="tablesorter">
 	<thead>
 		<tr>
