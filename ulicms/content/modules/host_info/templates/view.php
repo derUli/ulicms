@@ -2,7 +2,9 @@
 $version = new ulicms_version ();
 $vars = $_SERVER;
 ksort ( $vars );
-?>
+$acl = new ACL ();
+if ($acl->hasPermission ( "host_info" )) {
+	?>
 <p>
 	<strong><?php translate("uptime");?></strong><br />
 <pre><?php system("uptime");?></pre>
@@ -42,27 +44,36 @@ ksort ( $vars );
 </p>
 <strong><?php translate("server_vars")?></strong>
 <br />
-<table class="tablesorter">
-	<thead>
-		<tr>
-			<th>
+<div class="scroll">
+	<table class="tablesorter">
+		<thead>
+			<tr>
+				<th>
                     <?php translate("name");?>
                 </th>
-			<th>
+				<th>
                     <?php translate("value");?>
                 </th>
-		</tr>
-	</thead>
-	<tbody>            
+			</tr>
+		</thead>
+		<tbody>            
             <?php
-												
-foreach ( $vars as $key => $value ) {
-													if (is_string ( $value )) {
-														?>
+	
+	foreach ( $vars as $key => $value ) {
+		if (is_string ( $value )) {
+			?>
             <tr>
-			<td><?php Template::escape($key);?></td>
-			<td><?php echo nl2br(Template::getEscape($value));?></td>
-		</tr>		
-                <?php }}?>
+				<td><?php Template::escape($key);?></td>
+				<td><?php echo nl2br(Template::getEscape($value));?></td>
+			</tr>		
+                <?php } else if(is_array($value)) {?>
+                
+            <tr>
+				<td><?php Template::escape($key);?></td>
+				<td><?php echo nl2br(Template::getEscape(implode(", ", $value)));?></td>
+			</tr>	
+                <?php } }?>
         </tbody>
-</table>
+	</table>
+</div>
+<?php } else { noperms();}?>
