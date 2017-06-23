@@ -12,9 +12,6 @@ abstract class Controller {
 			
 			if (method_exists ( $this, $sMethodWithRequestType ) and ! startsWith ( $reflectionWithRequestType, "_" ) and $reflectionWithRequestType->isPublic ()) {
 				$this->$sMethodWithRequestType ();
-			}
-			if (method_exists ( $this, $sMethod ) and ! startsWith ( $sMethod, "_" ) and $reflection->isPublic ()) {
-				$this->$sMethod ();
 			} else if (method_exists ( $this, $sMethod ) and ! startsWith ( $sMethod, "_" ) and $reflection->isPublic ()) {
 				$this->$sMethod ();
 			} else {
