@@ -6,7 +6,7 @@ abstract class Controller {
 	public function runCommand() {
 		if (isset ( $_REQUEST ["sMethod"] ) and StringHelper::isNotNullOrEmpty ( $_REQUEST ["sMethod"] ) and ! faster_in_array ( $_REQUEST ["sMethod"], $this->blacklist )) {
 			$sMethod = $_REQUEST ["sMethod"];
-			$sMethodWithRequestType = $_REQUEST ["sMethod"] . ucfirst ( Request::getMethod () );
+			$sMethodWithRequestType = $sMethod . ucfirst ( Request::getMethod () );
 			$reflection = new ReflectionMethod ( $this, $sMethod );
 			$reflectionWithRequestType = new ReflectionMethod ( $this, $sMethodWithRequestType );
 			
