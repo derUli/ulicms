@@ -10,10 +10,11 @@ abstract class Controller {
 			
 			$reflection = null;
 			$reflectionWithRequestType = null;
-			if(method_exists ( $this, $sMethod )){
+			
+			if (method_exists ( $this, $sMethod )) {
 				$reflection = new ReflectionMethod ( $this, $sMethod );
 			}
-			if(method_exists ( $this, $sMethodWithRequestType )){
+			if (method_exists ( $this, $sMethodWithRequestType )) {
 				$reflectionWithRequestType = new ReflectionMethod ( $this, $sMethodWithRequestType );
 			}
 			
