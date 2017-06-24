@@ -1,7 +1,7 @@
 <?php
-class ObjectRegistry {
+class ModelRegistry {
 	private static $objects = array ();
-	public static function loadModuleObjects() {
+	public static function loadModuleModels() {
 		if (! defined ( "KCFINDER_PAGE" )) {
 			$objectRegistry = array ();
 			$modules = getAllModules ();
