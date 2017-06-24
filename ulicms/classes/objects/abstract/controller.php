@@ -17,7 +17,7 @@ abstract class Controller {
 				$reflectionWithRequestType = new ReflectionMethod ( $this, $sMethodWithRequestType );
 			}
 			
-			if (method_exists ( $this, $sMethodWithRequestType ) and ! startsWith ( $sMethodWithRequestType, "_" ) and reflectionWithRequestType and $reflectionWithRequestType->isPublic ()) {
+			if (method_exists ( $this, $sMethodWithRequestType ) and ! startsWith ( $sMethodWithRequestType, "_" ) and $reflectionWithRequestType and $reflectionWithRequestType->isPublic ()) {
 				$this->$sMethodWithRequestType ();
 			} else if (method_exists ( $this, $sMethod ) and ! startsWith ( $sMethod, "_" ) and $reflection and $reflection->isPublic ()) {
 				$this->$sMethod ();
