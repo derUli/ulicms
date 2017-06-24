@@ -9,10 +9,10 @@ abstract class Controller {
 			$sMethodWithRequestType = $sMethod . ucfirst ( Request::getMethod () );
 			
 			$reflection = null;
+			$reflectionWithRequestType = null;
 			if(method_exists ( $this, $sMethod )){
 				$reflection = new ReflectionMethod ( $this, $sMethod );
 			}
-			$reflectionWithRequestType = null;
 			if(method_exists ( $this, $sMethodWithRequestType )){
 				$reflectionWithRequestType = new ReflectionMethod ( $this, $sMethodWithRequestType );
 			}
