@@ -10,9 +10,9 @@ class ModelRegistry {
 				if (faster_in_array ( $module, $disabledModules )) {
 					continue;
 				}
-				$objects = getModuleMeta ( $module, "models" ) ? getModuleMeta ( $module, "models" ) : getModuleMeta ( $module, "objects" );
-				if ($objects) {
-					foreach ( $objects as $key => $value ) {
+				$models = getModuleMeta ( $module, "models" ) ? getModuleMeta ( $module, "models" ) : getModuleMeta ( $module, "objects" );
+				if ($models) {
+					foreach ( $models as $key => $value ) {
 						$path = getModulePath ( $module, true ) . trim ( $value, "/" );
 						if (! endsWith ( $path, ".php" )) {
 							$path .= ".php";
