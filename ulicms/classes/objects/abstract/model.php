@@ -16,7 +16,7 @@ abstract class Model {
 			$this->update ();
 		}
 	}
-	protected function fillVars() {
+	protected function fillVars($query = null) {
 		throw new NotImplementedException ( "fillVars not implemented" );
 	}
 	protected function insert() {
