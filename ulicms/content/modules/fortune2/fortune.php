@@ -22,7 +22,7 @@ class Fortune extends Controller {
 	}
 	// settings page content below headline
 	public function settings() {
-		return get_translation ( "hello_world" );
+		return Template::executeModuleTemplate ( $this->moduleName, "admin" );
 	}
 	
 	// get a random fortune cookie from files
@@ -52,5 +52,14 @@ class Fortune extends Controller {
 		$text = array_rand ( $fortunes, 1 );
 		$text = $fortunes [$text];
 		return $text;
+	}
+	public function doSomething() {
+		ViewBag::set ( "sample_text", get_translation ( "unknown_request_type" ) );
+	}
+	public function doSomethingPost() {
+		ViewBag::set ( "sample_text", get_translation ( "post_request_type" ) );
+	}
+	public function doSomethingGet() {
+		ViewBag::set ( "sample_text", get_translation ( "get_request_type" ) );
 	}
 }
