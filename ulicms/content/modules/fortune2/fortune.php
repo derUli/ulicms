@@ -20,6 +20,10 @@ class Fortune extends Controller {
 	public function getSettingsHeadline() {
 		return get_translation ( "my_settings_page" );
 	}
+	// Text für den Link auf die Einstellungen des Moduls, Default ist "Einstellungen"
+	public function getSettingsLinkText() {
+		return get_translation ( "show_samples" );
+	}
 	// settings page content below headline
 	public function settings() {
 		return Template::executeModuleTemplate ( $this->moduleName, "admin" );
