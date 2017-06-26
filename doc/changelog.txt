@@ -18,6 +18,7 @@
   * Request::isHead()
   * Request::hasVar()
   * ModuleHelper::buildModuleRessourcePath($module, $path)
+  * ModuleHelper::buildMethodCall($sClass, $sMethod)
   * CustomData::getCustomDataOrSetting($name)
   * ModuleHelper::underscoreToCamel($str)
   * get_secure_translation()

@@ -125,4 +125,7 @@ class ModuleHelper {
 		// Remove underscores, capitalize words, squash, lowercase first.
 		return lcfirst ( str_replace ( ' ', '', ucwords ( str_replace ( '_', ' ', $str ) ) ) );
 	}
+	public static function buildMethodCall($sClass, $sMethod) {
+		return "sClass=" . urlencode ( $sClass ) . "&sMethod=" . urlencode ( $sMethod );
+	}
 }
