@@ -1,5 +1,5 @@
 <?php
-abstract class Model {
+class Model {
 	protected $id = null;
 	public function __construct($id = null) {
 		if (! is_null ( $id )) {

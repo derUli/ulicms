@@ -34,7 +34,7 @@ class List_Data extends Content {
 	public function loadBySystemnameAndLanguage($name, $language) {
 		throw new NotImplementedException ( "not implemented for list" );
 	}
-	public function fillVars($data) {
+	public function fillVars($data = null) {
 		$this->content_id = $data->content_id;
 		$this->language = $data->language;
 		$this->category_id = $data->category_id;
