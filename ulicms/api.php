@@ -14,6 +14,14 @@ if (! function_exists ( 'boolval' )) {
 	}
 }
 
+// lcfirst() is only contained in PHP >= 5.3
+if(function_exists('lcfirst') === false) {
+    function lcfirst($str) {
+        $str[0] = strtolower($str[0]);
+        return $str;
+    }
+}
+
 // sind wir gerade im Adminordner?
 function is_admin_dir() {
 	return basename ( getcwd () ) === "admin";
