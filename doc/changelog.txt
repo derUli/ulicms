@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2017.4 =====
+﻿===== Neues in UliCMS 2017.4 =====
 
 + Gruppen können nun Sprachen zugeordnet bekommen
 + Neuer Inhaltstyp "Snippet"
