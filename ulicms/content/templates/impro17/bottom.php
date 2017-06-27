@@ -18,7 +18,7 @@
 	</p>
 		</div>
 		<div class="col-sm-6">
-		<!--
+			<!--
 			<p class="imprint-right">
 			
 				<a href="#"><?php translate("imprint");?></a>

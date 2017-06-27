@@ -324,6 +324,7 @@ class PEAR_PackageFile_v1 {
 	
 	/**
 	 * path to package .
+	 *
 	 * tgz or false if this is a local/extracted package.xml
 	 *
 	 * @var string

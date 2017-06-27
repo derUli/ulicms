@@ -565,6 +565,7 @@ class PEAR_RunTest {
 				 * DEBUG YOUR REGEX HERE
 				 * var_dump($wanted_re);
 				 * print(str_repeat('=', 80) .
+				 *
 				 * "\n");
 				 * var_dump($output);
 				 */

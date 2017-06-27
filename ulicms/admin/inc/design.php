@@ -216,8 +216,7 @@ div#google-fonts {
 	?>
 			</select>
 				</p>
-				<div class="alert alert-warning fade in"
-					id="mobile_detect_notice"
+				<div class="alert alert-warning fade in" id="mobile_detect_notice"
 					data-installed="<?php echo strbool($mobileDetectInstalled);?>">
 					
   <?php translate("mobile_detect_install_notice");?>

@@ -237,6 +237,5 @@ class PHPGangsta_GoogleAuthenticator {
 				'7', // 31
 				'=' 
 		); // padding char
-
 	}
 }

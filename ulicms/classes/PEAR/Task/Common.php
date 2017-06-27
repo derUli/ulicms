@@ -47,7 +47,7 @@ define ( 'PEAR_TASK_PACKAGEANDINSTALL', 3 );
  * @data -dir@ in the test.php file
  * with the path to the current data directory. Then, it will include the
  * test.php file and run the script it contains to configure the package post-installation.
- * 
+ *
  * @category pear
  * @package PEAR
  * @author Greg Beaver <cellog@php.net>

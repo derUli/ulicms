@@ -125,7 +125,11 @@ class ModuleHelper {
 		// Remove underscores, capitalize words, squash, lowercase first.
 		return lcfirst ( str_replace ( ' ', '', ucwords ( str_replace ( '_', ' ', $str ) ) ) );
 	}
-	public static function buildMethodCall($sClass, $sMethod) {
-		return "sClass=" . urlencode ( $sClass ) . "&sMethod=" . urlencode ( $sMethod );
+	public static function buildMethodCall($sClass, $sMethod, $suffix = null) {
+		$result = "sClass=" . urlencode ( $sClass ) . "&sMethod=" . urlencode ( $sMethod );
+		if (StringHelper::isNotNullOrWhitespace ( $suffix )) {
+			$result .= "&" . trim ( $suffix );
+		}
+		return $result;
 	}
 }

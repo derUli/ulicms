@@ -205,7 +205,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	}
 	?>
 <?php
-	
+
 	if ($acl->hasPermission ( "patch_management" )) {
 		?>
 <a name="installed_patches_a" id="installed_patches_a"></a>

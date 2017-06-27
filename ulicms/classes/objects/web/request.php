@@ -25,7 +25,7 @@ class Request {
 	public static function hasVar($name) {
 		return (isset ( $_POST [$name] ) or isset ( $_GET [$name] ));
 	}
-
+	
 	// Übersetzung HTTP Status Code => Name
 	public static function getStatusCodeByNumber($nr) {
 		$http_codes = array (
@@ -83,7 +83,7 @@ class Request {
 				506 => 'Variant Also Negotiates',
 				507 => 'Insufficient Storage',
 				509 => 'Bandwidth Limit Exceeded',
-				510 => 'Not Extended'
+				510 => 'Not Extended' 
 		);
 		return $nr . " " . $http_codes [$nr];
 	}

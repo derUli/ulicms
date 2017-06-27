@@ -53,6 +53,7 @@ class PEAR_DependencyDB {
 	var $_registry;
 	/**
 	 * Filename of the dependency DB (usually .
+	 *
 	 * depdb)
 	 *
 	 * @var string
@@ -61,6 +62,7 @@ class PEAR_DependencyDB {
 	var $_depdb = false;
 	/**
 	 * File name of the lockfile (usually .
+	 *
 	 * depdblock)
 	 *
 	 * @var string

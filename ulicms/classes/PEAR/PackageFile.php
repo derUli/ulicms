@@ -441,6 +441,7 @@ class PEAR_PackageFile {
 	
 	/**
 	 * Create a PEAR_PackageFile_v* from a .
+	 *
 	 * tgz archive or package.xml file.
 	 *
 	 * This method is able to extract information about a package from a .tgz

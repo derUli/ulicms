@@ -239,7 +239,7 @@ http://pear.php.net/dtd/package-2.0.xsd'
 				$tfile = $packageDir . DIRECTORY_SEPARATOR . $fname;
 				unset ( $orig ['attribs'] );
 				if (count ( $orig )) { // file with tasks
-				                   // run any package-time tasks
+				                       // run any package-time tasks
 					$contents = file_get_contents ( $file );
 					foreach ( $orig as $tag => $raw ) {
 						$tag = str_replace ( array (
@@ -292,7 +292,7 @@ http://pear.php.net/dtd/package-2.0.xsd'
 		if ($packagexml) {
 			$tar = & new Archive_Tar ( $dest_package, $compress );
 			$tar->setErrorHandling ( PEAR_ERROR_RETURN ); // XXX Don't print errors
-			                                             // ----- Creates with the package.xml file
+			                                              // ----- Creates with the package.xml file
 			$ok = $tar->createModify ( array (
 					$packagexml 
 			), '', $where );

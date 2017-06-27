@@ -10,7 +10,7 @@ if ($acl->hasPermission ( "motd" )) {
 	?>
 	</h2>
 	<?php
-	$languages = getAllLanguages (true);
+	$languages = getAllLanguages ( true );
 	if (isset ( $_POST ["motd"] )) {
 		if (StringHelper::isNullOrEmpty ( Request::getVar ( "language" ) )) {
 			Settings::set ( "motd", $_POST ["motd"] );
