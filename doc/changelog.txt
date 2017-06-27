@@ -17,6 +17,8 @@
   * Request::isPost()
   * Request::isHead()
   * Request::hasVar()
+  * Request::isSSL()
+  * Request::getIp()
   * ModuleHelper::buildModuleRessourcePath($module, $path)
   * ModuleHelper::buildMethodCall($sClass, $sMethod, $suffix = null)
   * CustomData::getCustomDataOrSetting($name)
