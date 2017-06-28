@@ -14,4 +14,6 @@ UliCMS requires some special modules for PHP
    * json
    * mbstring
    * openssl   
-For secure access to UliCMS services (e.G. package source) you will also need
+For secure access to UliCMS services (e.G. package source) you will also need ca-certificates installed on your server
+
+UliCMS should work on common shared webhosting environment.
