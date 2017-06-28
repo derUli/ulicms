@@ -14,6 +14,7 @@ IF ($this->opener ['name'] == "tinymce") :
 	type="text/javascript"></script>
 
 
+
 <?php
      ENDIF;
 
@@ -21,6 +22,7 @@ IF (file_exists ( "themes/{$this->config['theme']}/js.php" )) :
 	?>
 <script src="themes/<?php echo $this -> config['theme'] ?>/js.php"
 	type="text/javascript"></script>
+
 
 
 <?php

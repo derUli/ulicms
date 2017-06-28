@@ -318,7 +318,7 @@ class Cache_Lite {
 				'readControlType',
 				'pearErrorMode' 
 		);
-		if (in_array ( $name, $availableOptions )) {
+		if (faster_in_array ( $name, $availableOptions )) {
 			$property = '_' . $name;
 			$this->$property = $value;
 		}

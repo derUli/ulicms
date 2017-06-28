@@ -19,6 +19,7 @@ class User {
 	private $last_login = null;
 	private $twitter = "";
 	private $homepage = "";
+	private $default_language = null;
 	public function __construct($id = null) {
 		if ($id) {
 			$this->loadById ( $id );
@@ -61,37 +62,7 @@ class User {
 		$sql = "insert into {prefix}users (username, lastname, firstname, email, password,
 				old_encryption, skype_id, about_me, group_id, notify_on_login, html_editor, 
 				require_password_change, admin, password_changed, locked, last_login, 
-				twitter, homepage) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		$args = array (
-				$this->username,
-				$this->lastname,
-				$this->firstname,
-				$this->email,
-				$this->password,
-				$this->old_encryption,
-				$this->skype_id,
-				$this->about_me,
-				$this->group_id,
-				$this->notify_on_login,
-				$this->html_editor,
-				$this->require_password_change,
-				$this->admin,
-				$this->password_changed,
-				$this->locked,
-				$this->last_login,
-				$this->twitter,
-				$this->homepage 
-		);
-		$result = Database::pQuery ( $sql, $args, true ) or die ( Database::getError () );
-		if ($result) {
-			$this->id = Database::getLastInsertID ();
-		}
-	}
-	protected function update() {
-		$sql = "update {prefix}users set username = ?, lastname = ?, firstname = ?, email = ?, password = ?,
-				old_encryption = ?, skype_id = ?, about_me = ?, group_id = ?, notify_on_login = ?, html_editor = ?,
-				require_password_change = ?, admin = ?, password_changed = ?, locked = ?, last_login = ?,
-				twitter = ?, homepage = ? where id = ?";
+				twitter, homepage, default_language) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$args = array (
 				$this->username,
 				$this->lastname,
@@ -111,12 +82,41 @@ class User {
 				$this->last_login,
 				$this->twitter,
 				$this->homepage,
-				$this->id 
+				$this->default_language 
 		);
 		$result = Database::pQuery ( $sql, $args, true ) or die ( Database::getError () );
 		if ($result) {
 			$this->id = Database::getLastInsertID ();
 		}
+	}
+	protected function update() {
+		$sql = "update {prefix}users set username = ?, lastname = ?, firstname = ?, email = ?, password = ?,
+				old_encryption = ?, skype_id = ?, about_me = ?, group_id = ?, notify_on_login = ?, html_editor = ?,
+				require_password_change = ?, admin = ?, password_changed = ?, locked = ?, last_login = ?,
+				twitter = ?, homepage = ?, default_language = ? where id = ?";
+		$args = array (
+				$this->username,
+				$this->lastname,
+				$this->firstname,
+				$this->email,
+				$this->password,
+				$this->old_encryption,
+				$this->skype_id,
+				$this->about_me,
+				$this->group_id,
+				$this->notify_on_login,
+				$this->html_editor,
+				$this->require_password_change,
+				$this->admin,
+				$this->password_changed,
+				$this->locked,
+				$this->last_login,
+				$this->twitter,
+				$this->homepage,
+				$this->default_language,
+				$this->id 
+		);
+		Database::pQuery ( $sql, $args, true ) or die ( Database::getError () );
 	}
 	public function getId() {
 		return $this->id;
@@ -242,7 +242,7 @@ class User {
 				"ckeditor",
 				"codemirror" 
 		);
-		if (! in_array ( $editor, $allowedEditors )) {
+		if (! faster_in_array ( $editor, $allowedEditors )) {
 			$editor = "ckeditor";
 		}
 		$this->html_editor = $editor;
@@ -333,5 +333,11 @@ class User {
 	}
 	public function setHomepage($val) {
 		$this->homepage = strval ( $val );
+	}
+	public function getDefaultLanguage() {
+		return $this->default_language;
+	}
+	public function setDefaultLanguage($val) {
+		$this->default_language = StringHelper::isNotNullOrWhitespace ( $val ) ? strval ( $val ) : null;
 	}
 }

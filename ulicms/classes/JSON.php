@@ -679,7 +679,7 @@ class Services_JSON {
 							// odd number of backslashes at the end of the string so far
 							array_pop ( $stk );
 							// print("Found end of string at {$c}: ".substr($chrs, $top['where'], (1 + 1 + $c - $top['where']))."\n");
-						} elseif (($chrs {$c} == '[') && in_array ( $top ['what'], array (
+						} elseif (($chrs {$c} == '[') && faster_in_array ( $top ['what'], array (
 								SERVICES_JSON_SLICE,
 								SERVICES_JSON_IN_ARR,
 								SERVICES_JSON_IN_OBJ 
@@ -695,7 +695,7 @@ class Services_JSON {
 							// found a right-bracket, and we're in an array
 							array_pop ( $stk );
 							// print("Found end of array at {$c}: ".substr($chrs, $top['where'], (1 + $c - $top['where']))."\n");
-						} elseif (($chrs {$c} == '{') && in_array ( $top ['what'], array (
+						} elseif (($chrs {$c} == '{') && faster_in_array ( $top ['what'], array (
 								SERVICES_JSON_SLICE,
 								SERVICES_JSON_IN_ARR,
 								SERVICES_JSON_IN_OBJ 
@@ -711,7 +711,7 @@ class Services_JSON {
 							// found a right-brace, and we're in an object
 							array_pop ( $stk );
 							// print("Found end of object at {$c}: ".substr($chrs, $top['where'], (1 + $c - $top['where']))."\n");
-						} elseif (($substr_chrs_c_2 == '/*') && in_array ( $top ['what'], array (
+						} elseif (($substr_chrs_c_2 == '/*') && faster_in_array ( $top ['what'], array (
 								SERVICES_JSON_SLICE,
 								SERVICES_JSON_IN_ARR,
 								SERVICES_JSON_IN_OBJ 

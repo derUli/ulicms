@@ -182,7 +182,13 @@ if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
 		$alternate_title = db_escape ( $_POST ["alternate_title"] );
 		$activated = intval ( $_POST ["activated"] );
 		$hidden = intval ( $_POST ["hidden"] );
-		$page_content = Database::escapeValue ( $_POST ["page_content"] );
+		$page_content = $_POST ["page_content"];
+		$group = new Group ();
+		$group->getCurrentGroup ();
+		if (Stringhelper::isNotNullOrWhitespace ( $group->getAllowableTags () )) {
+			$page_content = strip_tags ( $page_content, $group->getAllowableTags () );
+		}
+		$page_content = Database::escapeValue ( $page_content );
 		$category = intval ( $_POST ["category"] );
 		$redirection = db_escape ( $_POST ["redirection"] );
 		$html_file = db_escape ( $_POST ["html_file"] );
@@ -390,6 +396,7 @@ if ($_POST ["add_admin"] == "add_admin" && (is_admin () or $acl->hasPermission (
 	$firstname = $_POST ["admin_firstname"];
 	$password = $_POST ["admin_password"];
 	$email = $_POST ["admin_email"];
+	$default_language = StringHelper::isNotNullOrWhitespace ( $_POST ["default_language"] ) ? $_POST ["default_language"] : null;
 	$sendMail = isset ( $_POST ["send_mail"] );
 	$admin = intval ( isset ( $_POST ["admin"] ) );
 	$locked = intval ( isset ( $_POST ["locked"] ) );
@@ -398,7 +405,7 @@ if ($_POST ["add_admin"] == "add_admin" && (is_admin () or $acl->hasPermission (
 		$group_id = null;
 	}
 	$require_password_change = intval ( isset ( $_POST ["require_password_change"] ) );
-	adduser ( $username, $lastname, $firstname, $email, $password, $sendMail, $group_id, $require_password_change, $admin, $locked );
+	adduser ( $username, $lastname, $firstname, $email, $password, $sendMail, $group_id, $require_password_change, $admin, $locked, $default_language );
 	header ( "Location: index.php?action=admins" );
 	exit ();
 }
@@ -408,7 +415,13 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	$page_title = db_escape ( $_POST ["page_title"] );
 	$activated = intval ( $_POST ["activated"] );
 	$unescaped_content = $_POST ["page_content"];
-	$page_content = db_escape ( $_POST ["page_content"] );
+	$page_content = $_POST ["page_content"];
+	$group = new Group ();
+	$group->getCurrentGroup ();
+	if (Stringhelper::isNotNullOrWhitespace ( $group->getAllowableTags () )) {
+		$page_content = strip_tags ( $page_content, $group->getAllowableTags () );
+	}
+	$page_content = Database::escapeValue ( $page_content );
 	$category = intval ( $_POST ["category"] );
 	$redirection = db_escape ( $_POST ["redirection"] );
 	$menu = db_escape ( $_POST ["menu"] );
@@ -730,10 +743,12 @@ if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) o
 	$require_password_change = intval ( isset ( $_POST ["require_password_change"] ) );
 	$locked = intval ( isset ( $_POST ["locked"] ) );
 	
+	$default_language = StringHelper::isNotNullOrWhitespace ( $_POST ["default_language"] ) ? "'" . Database::escapeValue ( $_POST ["default_language"] ) . "'" : "NULL";
+	
 	add_hook ( "before_edit_user" );
 	$sql = "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', skype_id = '$skype_id',
-about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked', `twitter` = '$twitter', `homepage` = '$homepage'  WHERE id=$id";
+about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked', `twitter` = '$twitter', `homepage` = '$homepage' , `default_language` = $default_language WHERE id=$id";
 	
 	db_query ( $sql );
 	

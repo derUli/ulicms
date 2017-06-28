@@ -134,7 +134,7 @@ class PHPGangsta_GoogleAuthenticator {
 				1,
 				0 
 		);
-		if (! in_array ( $paddingCharCount, $allowedValues ))
+		if (! faster_in_array ( $paddingCharCount, $allowedValues ))
 			return false;
 		for($i = 0; $i < 4; $i ++) {
 			if ($paddingCharCount == $allowedValues [$i] && substr ( $secret, - ($allowedValues [$i]) ) != str_repeat ( $base32chars [32], $allowedValues [$i] ))
@@ -145,7 +145,7 @@ class PHPGangsta_GoogleAuthenticator {
 		$binaryString = "";
 		for($i = 0; $i < count ( $secret ); $i = $i + 8) {
 			$x = "";
-			if (! in_array ( $secret [$i], $base32chars ))
+			if (! faster_in_array ( $secret [$i], $base32chars ))
 				return false;
 			for($j = 0; $j < 8; $j ++) {
 				$x .= str_pad ( base_convert ( @$base32charsFlipped [@$secret [$i + $j]], 10, 2 ), 5, '0', STR_PAD_LEFT );
@@ -237,6 +237,5 @@ class PHPGangsta_GoogleAuthenticator {
 				'7', // 31
 				'=' 
 		); // padding char
-
 	}
 }

@@ -104,7 +104,7 @@ class PEAR_REST_13 extends PEAR_REST_10 {
 				
 				// see if there is something newer and more stable
 				// bug #7221
-				if (in_array ( $release ['s'], $this->betterStates ( $state ), true )) {
+				if (faster_in_array ( $release ['s'], $this->betterStates ( $state ), true )) {
 					if (! isset ( $version ) && version_compare ( $release ['m'], phpversion (), '>' )) {
 						// skip releases that require a PHP version newer than our PHP version
 						$skippedphp = $release;
@@ -124,7 +124,7 @@ class PEAR_REST_13 extends PEAR_REST_10 {
 					break;
 				}
 			} else {
-				if (in_array ( $release ['s'], $states )) {
+				if (faster_in_array ( $release ['s'], $states )) {
 					if (version_compare ( $release ['m'], phpversion (), '>' )) {
 						// skip releases that require a PHP version newer than our PHP version
 						$skippedphp = $release;
@@ -222,7 +222,7 @@ class PEAR_REST_13 extends PEAR_REST_10 {
 				continue;
 			}
 			
-			if (in_array ( $release ['v'], $exclude )) { // skip excluded versions
+			if (faster_in_array ( $release ['v'], $exclude )) { // skip excluded versions
 				continue;
 			}
 			
@@ -243,7 +243,7 @@ class PEAR_REST_13 extends PEAR_REST_10 {
 						$entry ['x'] = array ();
 					}
 					
-					if ($entry ['c'] == $deppackage ['channel'] && strtolower ( $entry ['p'] ) == strtolower ( $deppackage ['package'] ) && version_compare ( $deppackage ['version'], $entry ['min'], '>=' ) && version_compare ( $deppackage ['version'], $entry ['max'], '<=' ) && ! in_array ( $release ['v'], $entry ['x'] )) {
+					if ($entry ['c'] == $deppackage ['channel'] && strtolower ( $entry ['p'] ) == strtolower ( $deppackage ['package'] ) && version_compare ( $deppackage ['version'], $entry ['min'], '>=' ) && version_compare ( $deppackage ['version'], $entry ['max'], '<=' ) && ! faster_in_array ( $release ['v'], $entry ['x'] )) {
 						if (version_compare ( $release ['m'], phpversion (), '>' )) {
 							// skip dependency releases that require a PHP version
 							// newer than our PHP version
@@ -259,11 +259,11 @@ class PEAR_REST_13 extends PEAR_REST_10 {
 			
 			if ($recommended) {
 				if ($release ['v'] != $recommended) { // if we want a specific
-				                                    // version, then skip all others
+				                                      // version, then skip all others
 					continue;
 				}
 				
-				if (! in_array ( $release ['s'], $states )) {
+				if (! faster_in_array ( $release ['s'], $states )) {
 					// the stability is too low, but we must return the
 					// recommended version if possible
 					return $this->_returnDownloadURL ( $base, $package, $release, $info, true, false, $channel );
@@ -282,7 +282,7 @@ class PEAR_REST_13 extends PEAR_REST_10 {
 				continue;
 			}
 			
-			if (in_array ( $release ['s'], $states )) { // if in the preferred state...
+			if (faster_in_array ( $release ['s'], $states )) { // if in the preferred state...
 				if (version_compare ( $release ['m'], phpversion (), '>' )) {
 					// skip dependency releases that require a PHP version
 					// newer than our PHP version

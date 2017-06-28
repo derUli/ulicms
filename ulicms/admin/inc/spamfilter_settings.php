@@ -41,9 +41,11 @@ function spamFilterEnabledcheckboxChanged(checked){
 	?>>
 		<br />
 		<?php translate("blacklist");?>
-		<br /> <textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php
+		<br />
+		<textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php
 	echo htmlspecialchars ( implode ( explode ( "||", Settings::get ( "spamfilter_words_blacklist" ) ), "\n" ), ENT_QUOTES, "UTF-8" );
-	?></textarea> <br /> <br />
+	?></textarea>
+		<br /> <br />
 
 		<?php translate("spam_countries");?>
 		<br /> <input type="text" name="country_blacklist"

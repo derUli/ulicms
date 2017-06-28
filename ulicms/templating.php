@@ -114,7 +114,10 @@ function get_edit_button() {
 		$acl = new ACL ();
 		if ($acl->hasPermission ( "pages" ) and Flags::getNoCache () && is_200 ()) {
 			$id = get_ID ();
-			$html .= "<div class=\"ulicms_edit\">[<a href=\"admin/index.php?action=pages_edit&page=$id\">" . get_translation ( "edit" ) . "</a>]</div>";
+			$page = ContentFactory::getById ( $id );
+			if (in_array ( $page->language, getAllLanguages ( true ) )) {
+				$html .= "<div class=\"ulicms_edit\">[<a href=\"admin/index.php?action=pages_edit&page=$id\">" . get_translation ( "edit" ) . "</a>]</div>";
+			}
 		}
 	}
 	return $html;
@@ -169,6 +172,7 @@ function get_article_meta($page = null) {
 	$query = db_query ( $sql );
 	if (db_num_rows ( $query ) > 0) {
 		$result = Database::fetchObject ( $query );
+		$result->excerpt = replaceShortcodesWithModules ( $result->excerpt );
 	}
 	$result = apply_filter ( $result, "get_article_meta" );
 	return $result;
@@ -267,7 +271,7 @@ function include_jquery() {
 		$disabled_on_pages = array ();
 	}
 	
-	if (! in_array ( get_requested_pagename (), $disabled_on_pages )) {
+	if (! faster_in_array ( get_requested_pagename (), $disabled_on_pages )) {
 		?>
 <script type="text/javascript" src="<?php echo get_jquery_url();?>"></script>
 <?php
@@ -343,7 +347,7 @@ function delete_custom_data($var = null, $page = null) {
 		if (isset ( $data [$var] )) {
 			unset ( $data [$var] );
 		}
-	}  // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
+	} // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
 else {
 		$data = array ();
 	}
@@ -594,7 +598,7 @@ function apply_filter($text, $type) {
 	$modules = getAllModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i < count ( $modules ); $i ++) {
-		if (in_array ( $modules [$i], $disabledModules )) {
+		if (faster_in_array ( $modules [$i], $disabledModules )) {
 			continue;
 		}
 		$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
@@ -702,7 +706,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 	$html = "";
 	$name = db_escape ( $name );
 	$language = $_SESSION ["language"];
-	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and parent ";
+	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent ";
 	
 	if (is_null ( $parent )) {
 		$sql .= " IS NULL ";
@@ -1026,13 +1030,13 @@ function get_content() {
 function checkforAccessForDevice($access) {
 	$access = explode ( ",", $access );
 	$allowed = false;
-	if (in_array ( "mobile", $access ) and is_mobile ()) {
+	if (faster_in_array ( "mobile", $access ) and is_mobile ()) {
 		$allowed = true;
 	}
-	if (in_array ( "desktop", $access ) and ! is_mobile ()) {
+	if (faster_in_array ( "desktop", $access ) and ! is_mobile ()) {
 		$allowed = true;
 	}
-	if (! in_array ( "mobile", $access ) and ! in_array ( "desktop", $access )) {
+	if (! faster_in_array ( "mobile", $access ) and ! faster_in_array ( "desktop", $access )) {
 		$allowed = true;
 	}
 	return $allowed;
@@ -1043,10 +1047,10 @@ function checkAccess($access = "") {
 		return null;
 	}
 	$access = explode ( ",", $access );
-	if (in_array ( "all", $access )) {
+	if (faster_in_array ( "all", $access )) {
 		return "all";
 	}
-	if (in_array ( "registered", $access ) and is_logged_in ()) {
+	if (faster_in_array ( "registered", $access ) and is_logged_in ()) {
 		return "registered";
 	}
 	for($i = 0; $i < count ( $access ); $i ++) {
@@ -1057,6 +1061,9 @@ function checkAccess($access = "") {
 	return null;
 }
 function check_status() {
+	if (get_type () == "snippet") {
+		return "403 Forbidden";
+	}
 	if ($_GET ["seite"] == "") {
 		$_GET ["seite"] = get_frontpage ();
 	}

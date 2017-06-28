@@ -35,7 +35,7 @@ $allowedTypes = array (
 		"theme" 
 );
 
-if (! in_array ( $type, $allowedTypes )) {
+if (! faster_in_array ( $type, $allowedTypes )) {
 	sremove_usage ();
 }
 

@@ -26,7 +26,7 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 	}
 	
 	include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
-	if (isset ( $_GET ["order"] ) and in_array ( $_GET ["order"], array (
+	if (isset ( $_GET ["order"] ) and faster_in_array ( $_GET ["order"], array (
 			"id",
 			"name",
 			"description",
@@ -194,7 +194,8 @@ $("form.delete-form").ajaxForm(ajax_options);
 
 	<p>
 	<?php translate("description");?>
-		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
+		<br />
+		<textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
 	</p>
 	<p>
 		<input type="submit" name="create"
@@ -233,7 +234,8 @@ $("form.delete-form").ajaxForm(ajax_options);
 
 	<p>
 	<?php translate("description");?>
-		<br /> <textarea cols="50" name="description" rows="5" maxlength="255"><?php
+		<br />
+		<textarea cols="50" name="description" rows="5" maxlength="255"><?php
 			echo htmlspecialchars ( categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
 			?></textarea>
 	</p>

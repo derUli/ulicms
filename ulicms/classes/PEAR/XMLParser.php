@@ -219,9 +219,9 @@ class PEAR_XMLParser {
 		
 		if (! empty ( $value ['name'] )) {
 			// there already has been a tag with this name
-			if (in_array ( $value ['name'], $parent ['childrenKeys'] )) {
+			if (faster_in_array ( $value ['name'], $parent ['childrenKeys'] )) {
 				// no aggregate has been created for this tag
-				if (! in_array ( $value ['name'], $parent ['aggregKeys'] )) {
+				if (! faster_in_array ( $value ['name'], $parent ['aggregKeys'] )) {
 					if (isset ( $parent ['children'] [$value ['name']] )) {
 						$parent ['children'] [$value ['name']] = array (
 								$parent ['children'] [$value ['name']] 

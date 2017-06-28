@@ -15,7 +15,7 @@ if (isset ( $_POST ["register_user"] )) {
 		add_hook ( "before_user_registration" );
 		adduser ( $_POST ["admin_username"], $_POST ["admin_lastname"], $_POST ["admin_firstname"], $_POST ["admin_email"], $_POST ["admin_password"], false );
 		add_hook ( "after_user_registration" );
-
+		
 		echo "<p style='color:green;'>" . get_translation ( "REGISTRATION_SUCCESSFUL" ) . "</p>";
 		if (! empty ( $_REQUEST ["go"] )) {
 			$go = htmlspecialchars ( $_REQUEST ["go"] );

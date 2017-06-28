@@ -103,7 +103,7 @@ class PEAR_REST_10 {
 				}
 				// see if there is something newer and more stable
 				// bug #7221
-				if (in_array ( $release ['s'], $this->betterStates ( $state ), true )) {
+				if (faster_in_array ( $release ['s'], $this->betterStates ( $state ), true )) {
 					$found = true;
 					break;
 				}
@@ -113,7 +113,7 @@ class PEAR_REST_10 {
 					break;
 				}
 			} else {
-				if (in_array ( $release ['s'], $states )) {
+				if (faster_in_array ( $release ['s'], $states )) {
 					$found = true;
 					break;
 				}
@@ -196,7 +196,7 @@ class PEAR_REST_10 {
 			if (! isset ( $this->_rest->_options ['force'] ) && ($installed && version_compare ( $release ['v'], $installed, '<' ))) {
 				continue;
 			}
-			if (in_array ( $release ['v'], $exclude )) { // skip excluded versions
+			if (faster_in_array ( $release ['v'], $exclude )) { // skip excluded versions
 				continue;
 			}
 			// allow newer releases to say "I'm OK with the dependent package"
@@ -214,7 +214,7 @@ class PEAR_REST_10 {
 					} elseif (! isset ( $entry ['x'] )) {
 						$entry ['x'] = array ();
 					}
-					if ($entry ['c'] == $deppackage ['channel'] && strtolower ( $entry ['p'] ) == strtolower ( $deppackage ['package'] ) && version_compare ( $deppackage ['version'], $entry ['min'], '>=' ) && version_compare ( $deppackage ['version'], $entry ['max'], '<=' ) && ! in_array ( $release ['v'], $entry ['x'] )) {
+					if ($entry ['c'] == $deppackage ['channel'] && strtolower ( $entry ['p'] ) == strtolower ( $deppackage ['package'] ) && version_compare ( $deppackage ['version'], $entry ['min'], '>=' ) && version_compare ( $deppackage ['version'], $entry ['max'], '<=' ) && ! faster_in_array ( $release ['v'], $entry ['x'] )) {
 						$recommended = $release ['v'];
 						break;
 					}
@@ -222,10 +222,10 @@ class PEAR_REST_10 {
 			}
 			if ($recommended) {
 				if ($release ['v'] != $recommended) { // if we want a specific
-				                                    // version, then skip all others
+				                                      // version, then skip all others
 					continue;
 				} else {
-					if (! in_array ( $release ['s'], $states )) {
+					if (! faster_in_array ( $release ['s'], $states )) {
 						// the stability is too low, but we must return the
 						// recommended version if possible
 						return $this->_returnDownloadURL ( $base, $package, $release, $info, true, false, $channel );
@@ -241,7 +241,7 @@ class PEAR_REST_10 {
 			if ($installed && version_compare ( $release ['v'], $installed, '<' )) {
 				continue;
 			}
-			if (in_array ( $release ['s'], $states )) { // if in the preferred state...
+			if (faster_in_array ( $release ['s'], $states )) { // if in the preferred state...
 				$found = true; // ... then use it
 				break;
 			}
@@ -728,13 +728,13 @@ class PEAR_REST_10 {
 				} else {
 					$new_state = $release ['s'];
 					// if new state >= installed state: go
-					if (in_array ( $new_state, $this->betterStates ( $inst_state, true ) )) {
+					if (faster_in_array ( $new_state, $this->betterStates ( $inst_state, true ) )) {
 						$found = true;
 						break;
 					} else {
 						// only allow to lower the state of package,
 						// if new state >= preferred state: go
-						if (in_array ( $new_state, $this->betterStates ( $pref_state, true ) )) {
+						if (faster_in_array ( $new_state, $this->betterStates ( $pref_state, true ) )) {
 							$found = true;
 							break;
 						}

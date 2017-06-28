@@ -134,8 +134,8 @@ input[type="button"], input[type="submit"], button {
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="number"],
-	input[type="phone"], input[type="color"], input.color, input.jscolor, select, textarea,
-	input[type="url"] {
+	input[type="phone"], input[type="color"], input.color, input.jscolor,
+	select, textarea, input[type="url"] {
 	background-color: rgb(253, 253, 253);
 	width: 100%;
 }

@@ -6,7 +6,7 @@ if (defined ( "_SECURITY" )) {
 	if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) or ($_GET ["admin"] == $_SESSION ["login_id"])) {
 		
 		$admin = intval ( $_GET ["admin"] );
-		
+		$languages = getAvailableBackendLanguages ();
 		$query = db_query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE id='$admin'" );
 		while ( $row = db_fetch_object ( $query ) ) {
 			?>
@@ -202,8 +202,20 @@ if (defined ( "_SECURITY" )) {
 				}
 			}
 			?>
-	<br /> <br /> <strong><?php translate("about_me");?></strong><br />
-	<textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row -> about_me)?></textarea>
+			<br /> <br /> <strong><?php translate("default_language");?></strong><br />
+	<select name="default_language">
+		<option value="" <?php if(!$row->default_language) echo " selected";?>>[<?php translate("standard");?>]</option>
+		<?php
+			for($i = 0; $i < count ( $languages ); $i ++) {
+				if ($row->default_language == $languages [$i]) {
+					echo '<option value="' . $languages [$i] . '" selected>' . getLanguageNameByCode ( $languages [$i] ) . '</option>';
+				} else {
+					echo '<option value="' . $languages [$i] . '">' . getLanguageNameByCode ( $languages [$i] ) . '</option>';
+				}
+			}
+			?>
+	</select> <br /> <br /> <strong><?php translate("about_me");?></strong><br />
+	<textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row->about_me)?></textarea>
 
 
 

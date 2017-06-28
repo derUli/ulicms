@@ -16,6 +16,10 @@ if (! $acl->hasPermission ( "groups" )) {
 		}
 	}
 	
+	$languages = Language::getAllLanguages ();
+	$group = new Group ( $id );
+	$selectedLanguages = $group->getLanguages ();
+	
 	ksort ( $all_permissions );
 	
 	if ($all_permissions) {
@@ -38,9 +42,8 @@ if (! $acl->hasPermission ( "groups" )) {
 		echo $groupName;
 		?>">
 	</p>
-	<p>
-		<strong><?php translate("permissions");?>
-		</strong>
+	<h3><?php translate("permissions");?>
+		</h3>
 	</p>
 	<fieldset>
 		<p>
@@ -79,8 +82,26 @@ if (! $acl->hasPermission ( "groups" )) {
 		?>
 		</p>
 	</fieldset>
-	<br /> <input type="submit" value="<?php translate("save_changes");?>"
-		name="edit_group">
+	<h4><?php translate("languages");?></h4>
+	<fieldset>
+		<p>
+		<?php foreach($languages as $lang){?>
+			
+			<input type="checkbox" name="restrict_edit_access_language[]"
+				value="<?php echo $lang->getID();?>"
+				<?php if(in_array($lang, $selectedLanguages)){ echo "checked";}?>
+				id="lang-<?php echo $lang->getID();?>"> <label
+				for="lang-<?php echo $lang->getID();?>"><?php Template::escape($lang->getName());?></label>
+			<br />
+			 
+		<?php }?></p>
+	</fieldset>
+	<h4><?php translate("allowable_tags");?></h4>
+	<input type="text" name="allowable_tags"
+		value="<?php Template::escape($group->getAllowableTags());?>"><br /> <small><?php translate("allowable_tags_help");?></small>
+
+	<br /> <br /> <input type="submit"
+		value="<?php translate("save_changes");?>" name="edit_group">
 </form>
 
 <script type="text/javascript">
@@ -101,9 +122,7 @@ $(function () {
 		?>
 
 	<?php
-	} 
-
-	else {
+	} else {
 		?>
 <p style="color: red">Diese Gruppe ist nicht vorhanden.</p>
 <?php

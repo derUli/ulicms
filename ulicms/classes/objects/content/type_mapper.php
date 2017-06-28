@@ -2,6 +2,7 @@
 class TypeMapper {
 	private static $mapping = array (
 			"page" => "Page",
+			"snippet" => "Snippet",
 			"list" => "Content_List",
 			"node" => "Node",
 			"link" => "Link",

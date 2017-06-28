@@ -415,7 +415,7 @@ and uninstall).
 	function _checkLayer($layer = null) {
 		if (! empty ( $layer ) && $layer != 'default') {
 			$layers = $this->config->getLayers ();
-			if (! in_array ( $layer, $layers )) {
+			if (! faster_in_array ( $layer, $layers )) {
 				return " only the layers: \"" . implode ( '" or "', $layers ) . "\" are supported";
 			}
 		}

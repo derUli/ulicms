@@ -230,7 +230,7 @@ class PEAR_Dependency2 {
 						'aix' 
 				);
 				if ($not) {
-					if (in_array ( $this->getSysname (), $unices )) {
+					if (faster_in_array ( $this->getSysname (), $unices )) {
 						if (! isset ( $this->_options ['nodeps'] ) && ! isset ( $this->_options ['force'] )) {
 							return $this->raiseError ( "Cannot install %s on any Unix system" );
 						}
@@ -238,7 +238,7 @@ class PEAR_Dependency2 {
 						return $this->warning ( "warning: Cannot install %s on any Unix system" );
 					}
 				} else {
-					if (! in_array ( $this->getSysname (), $unices )) {
+					if (! faster_in_array ( $this->getSysname (), $unices )) {
 						if (! isset ( $this->_options ['nodeps'] ) && ! isset ( $this->_options ['force'] )) {
 							return $this->raiseError ( "Can only install %s on a Unix system" );
 						}

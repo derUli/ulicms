@@ -712,4 +712,14 @@ define ( "TRANSLATION_THIS_MODULE_HAS_NO_SETTINGS", "Dieses Modul hat keine Eins
 define ( "TRANSLATION_CANT_DELETE_CATEGORY_GENERAL", "Die Allgemeine Kategorie kann nicht gelöscht werden!" );
 define ( "TRANSLATION_GROUP_WAS_DELETED", "Die Gruppe wurde erfolgreich gelöscht." );
 
+define ( "TRANSLATION_MOBILE_DETECT_INSTALL_NOTICE", "Um dieses Feature zu nutzen müssen Sie <a href=\"https://extend.ulicms.de/mobile_detect.html\" target=\"_blank\">Mobile_Detect</a> installieren." );
+
+define ( "TRANSLATION_SNIPPET", "Schnipsel" );
+define ( "TRANSLATION_SNIPPET_CODE", "Schnipsel Code" );
+define ( "TRANSLATION_SNIPPET_CODE_HELP", "Mit diesem Shortcode können Sie diesen Schnipsel in eine andere Seite einbinden." );
+define ( "TRANSLATION_ALLOWABLE_TAGS", "Zulässige Tags" );
+define ( "TRANSLATION_ALLOWABLE_TAGS_HELP", "Leer = alle Tags erlaubt" );
+define ( "TRANSLATION_SHOW_USERS", "Benutzer anzeigen" );
+define ( "TRANSLATION_DEFAULT_LANGUAGE", "Standardsprache" );
+
 add_hook ( "lang_de" );

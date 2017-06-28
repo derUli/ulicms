@@ -370,13 +370,13 @@ class PEAR_Frontend_CLI extends PEAR_Frontend {
 		if (empty ( $answer )) {
 			$answer = $default;
 		}
-		if (in_array ( $answer, $positives )) {
+		if (faster_in_array ( $answer, $positives )) {
 			return true;
 		}
-		if (in_array ( $answer, $negatives )) {
+		if (faster_in_array ( $answer, $negatives )) {
 			return false;
 		}
-		if (in_array ( $default, $positives )) {
+		if (faster_in_array ( $default, $positives )) {
 			return true;
 		}
 		return false;

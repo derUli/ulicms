@@ -5,7 +5,7 @@ class Language {
 	private $language_code = null;
 	public function __construct($id = null) {
 		if (! is_null ( $id )) {
-			$this->loadById($id);
+			$this->loadById ( $id );
 		}
 	}
 	public function fillVars($query) {

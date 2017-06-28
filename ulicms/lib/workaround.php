@@ -34,7 +34,7 @@ function unregister_globals() {
 		);
 		foreach ( $GLOBALS as $key => $value ) {
 			// Überprüfung, ob die Variablen/Arrays zu den Superglobals gehören, andernfalls löschen
-			if (! in_array ( $key, $superglobals ) && $key != "GLOBALS") {
+			if (! faster_in_array ( $key, $superglobals ) && $key != "GLOBALS") {
 				unset ( $GLOBALS [$key] );
 			}
 		}

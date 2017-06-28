@@ -75,7 +75,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 	</div>
 	<?php
 		
-if (! Settings::get ( "disable_ulicms_newsfeed" )) {
+		if (! Settings::get ( "disable_ulicms_newsfeed" )) {
 			?>
 	<h2 class="accordion-header">
 	<?php translate("ulicms_news");?></h2>

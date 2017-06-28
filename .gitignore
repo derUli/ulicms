@@ -4,6 +4,7 @@ ulicms/content/avatars
 ulicms/content/cache
 ulicms/backup
 ulicms/content/log
+ulicms/content/tmp
 !ulicms/content/log/.htaccess
 cms-config.php
 ulicms/packages

@@ -15,8 +15,7 @@ if ($main_class) {
 }
 
 $disabledModules = Vars::get ( "disabledModules" );
-
-if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ) and ! ($controller and method_exists ( $controller, "settings" )) or in_array ( $module, $disabledModules ))) {
+if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ) and ! ($controller and method_exists ( $controller, "settings" )) or faster_in_array ( $module, $disabledModules ))) {
 	?>
 <p class='ulicms_error'><?php translate("this_module_has_no_settings")?></p>
 <?php

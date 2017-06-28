@@ -93,7 +93,7 @@ class System {
 	 * with prefixing a "@" sign to the function call:
 	 *
 	 * @System ::mkdir(..);
-	 * 
+	 *
 	 * @param mixed $error
 	 *        	a PEAR error or a string with the error message
 	 * @return bool false
@@ -198,7 +198,7 @@ class System {
 				$tmp = System::_dirToStruct ( $file, 0 );
 				$struct = array_merge_recursive ( $tmp, $struct );
 			} else {
-				if (! in_array ( $file, $struct ['files'] )) {
+				if (! faster_in_array ( $file, $struct ['files'] )) {
 					$struct ['files'] [] = $file;
 				}
 			}
@@ -617,7 +617,7 @@ class System {
 		for($i = 0; $i < $args_count; $i ++) {
 			switch ($args [$i]) {
 				case '-type' :
-					if (in_array ( $args [$i + 1], array (
+					if (faster_in_array ( $args [$i + 1], array (
 							'd',
 							'f' 
 					) )) {
