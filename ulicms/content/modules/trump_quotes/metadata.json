@@ -1,9 +1,0 @@
-{
-	"source" : "extend",
-	"version" : "1.0",
-	"embed" : true,
-	"controllers" : {
-		"TrumpQuotes" : "TrumpQuotes.php"
-	},
-	"main_class" : "TrumpQuotes"
-}
