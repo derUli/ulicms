@@ -1,6 +1,6 @@
 <?php
 class Language_Link extends Page {
-	public $link_to_language = "";
+	public $link_to_language = null;
 	public $type = "link";
 	public function save() {
 		$retval = null;
