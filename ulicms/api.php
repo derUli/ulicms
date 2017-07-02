@@ -15,11 +15,11 @@ if (! function_exists ( 'boolval' )) {
 }
 
 // lcfirst() is only contained in PHP >= 5.3
-if(function_exists('lcfirst') === false) {
-    function lcfirst($str) {
-        $str[0] = strtolower($str[0]);
-        return $str;
-    }
+if (function_exists ( 'lcfirst' ) === false) {
+	function lcfirst($str) {
+		$str [0] = strtolower ( $str [0] );
+		return $str;
+	}
 }
 
 // sind wir gerade im Adminordner?
@@ -313,6 +313,7 @@ function get_available_post_types() {
 			"snippet",
 			"list",
 			"link",
+			"language_link",
 			"node",
 			"image",
 			"module",

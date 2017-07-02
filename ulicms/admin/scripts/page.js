@@ -16,9 +16,14 @@ function showAndHideFieldsByType() {
 		$("#article-image").slideUp();
 		$("#comment-fields").slideUp();
 		$("#custom_data_json").slideDown();
-	} else if ($("#type_link").is(":checked")) {
+	} else if ($("#type_link").is(":checked")
+			|| $("#type_language_link").is(":checked")) {
 		$("#tab-list").slideUp();
-		$("#tab-link").slideDown();
+		if ($("#type_language_link").is(":checked")) {
+			$("#tab-link").slideUp();
+		} else {
+			$("#tab-link").slideDown();
+		}
 		$("#tab-metadata").slideUp();
 		$("#tab-og").slideUp();
 		$("#tab-image").slideUp();
