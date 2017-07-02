@@ -35,6 +35,7 @@
   * Template::getDoctype()
   * Template::ogHTMLPrefix()
   * Template::getOgHTMLPrefix()
+  * ContentFactory::getAllRegular($order = "id")
 + Attribut $newWindow zu MenuEntry hinzugefügt
 + "Gruppe" in der Benutzerliste verlinkt auf "Gruppe bearbeiten"
 + metadata.json: Attribut "objects" umbenannt in "models"
