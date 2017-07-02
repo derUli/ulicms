@@ -44,6 +44,7 @@
 + Link zu der Settings-Seite eines Moduls können nun angepasst werden
 + Abstrakte Klasse "Model" erweitert
 + Neuer Inhaltstyp "Link zu Sprache"
++ Berechtigungsabfrage für Controller-Funktionsaufrufe eingebaut
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
 # Die Funktionen Template::executeModuleTemplate() und Template::executeDefaultOrOwnTemplate() akzeptieren nun auch Templatenamen mit Dateiendung
 # Funktion getCurrentLanguage() - Der Parameter $current ist nun per Default false
