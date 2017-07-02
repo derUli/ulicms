@@ -175,6 +175,12 @@ function showAndHideFieldsByType() {
 
 	});
 
+	if ($("#type_node").is(":checked")) {
+		$("#btn-view-page").slideUp();
+	} else {
+		$("#btn-view-page").slideDown();
+	}
+
 	if ($("select[name='menu']").val() == "none") {
 		$("#parent-div").slideUp();
 	} else {
