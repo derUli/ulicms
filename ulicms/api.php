@@ -15,11 +15,11 @@ if (! function_exists ( 'boolval' )) {
 }
 
 // lcfirst() is only contained in PHP >= 5.3
-if(function_exists('lcfirst') === false) {
-    function lcfirst($str) {
-        $str[0] = strtolower($str[0]);
-        return $str;
-    }
+if (function_exists ( 'lcfirst' ) === false) {
+	function lcfirst($str) {
+		$str [0] = strtolower ( $str [0] );
+		return $str;
+	}
 }
 
 // sind wir gerade im Adminordner?
@@ -313,6 +313,7 @@ function get_available_post_types() {
 			"snippet",
 			"list",
 			"link",
+			"language_link",
 			"node",
 			"image",
 			"module",
@@ -851,7 +852,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	}  // Backend Directory
+	} // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
@@ -1107,7 +1108,7 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
 	}
 	$returnvalues = Array ();
 	while ( $row = db_fetch_assoc ( $query ) ) {
-		if (! ($exclude_hash_links and startsWith ( $row ["redirection"], "#" ))) {
+		if (! ($exclude_hash_links and startsWith ( $row ["redirection"], "#" )) and $row ["type"] != "link" and $row ["type"] != "node" and $row["type"] <> "language_link") {
 			array_push ( $returnvalues, $row );
 		}
 	}

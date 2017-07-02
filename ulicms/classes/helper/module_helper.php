@@ -105,6 +105,11 @@ class ModuleHelper {
 		if (is_null ( $page->id )) {
 			return null;
 		}
+		if ($page instanceof Language_Link) {
+			$language = new Language ( $page->link_to_language );
+			if (! is_null ( $language->getID () ) and StringHelper::isNotNullOrWhitespace ( $language->getLanguageLink () ))
+				return $language->getLanguageLink();
+		}
 		$domain = getDomainByLanguage ( $page->language );
 		if (! $domain) {
 			if ($page->language != getCurrentLanguage ()) {
