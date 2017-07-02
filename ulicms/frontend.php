@@ -91,16 +91,15 @@ $redirection = get_redirection ();
 if ($redirection) {
 	Request::redirect ( $redirection, 302 );
 }
-try{
-$page = ContentFactory::getByID ( get_ID () );
-if (! is_null ( $page->id ) and $page instanceof Language_Link) {
-	$language = new Language ( $page->link_to_language );
-	if (! is_null ( $language->getID () ) and StringHelper::isNotNullOrWhitespace ( $language->getLanguageLink () )) {
-		Request::redirect ( $language->getLanguageLink () );
+try {
+	$page = ContentFactory::getByID ( get_ID () );
+	if (! is_null ( $page->id ) and $page instanceof Language_Link) {
+		$language = new Language ( $page->link_to_language );
+		if (! is_null ( $language->getID () ) and StringHelper::isNotNullOrWhitespace ( $language->getLanguageLink () )) {
+			Request::redirect ( $language->getLanguageLink () );
+		}
 	}
-}
-}catch(Exception $e){
-	
+} catch ( Exception $e ) {
 }
 
 if (isset ( $_GET ["goid"] )) {
