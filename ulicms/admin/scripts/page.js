@@ -175,7 +175,7 @@ function showAndHideFieldsByType() {
 
 	});
 
-	if ($("#type_node").is(":checked")) {
+	if ($("#type_node").is(":checked") || $("#type_snippet").is(":checked")) {
 		$("#btn-view-page").slideUp();
 	} else {
 		$("#btn-view-page").slideDown();
