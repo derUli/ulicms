@@ -1,5 +1,15 @@
 <?php
 class Request {
+	public static function getProtocol($suffix = null) {
+		$protocol = "http://";
+		if (self::isSSL ()) {
+			$protocol = "https://";
+		}
+		if (StringHelper::isNotNullOrWhitespace ( $suffix )) {
+			$protocol .= $suffix;
+		}
+		return $protocol;
+	}
 	public static function getVar($name, $default = null, $convert = "") {
 		$value = $default;
 		if (isset ( $_POST [$name] )) {
