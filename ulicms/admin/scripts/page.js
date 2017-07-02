@@ -21,8 +21,10 @@ function showAndHideFieldsByType() {
 		$("#tab-list").slideUp();
 		if ($("#type_language_link").is(":checked")) {
 			$("#tab-link").slideUp();
+			$("#tab-language-link").slideDown();
 		} else {
 			$("#tab-link").slideDown();
+			$("#tab-language-link").slideUp();
 		}
 		$("#tab-metadata").slideUp();
 		$("#tab-og").slideUp();

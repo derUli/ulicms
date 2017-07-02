@@ -296,7 +296,25 @@ if (defined ( "_SECURITY" )) {
 				?>">
 			</div>
 		</div>
+		<div id="tab-language-link" style="display: none;">
+			<h2 class="accordion-header"><?php translate("language_link");?></h2>
 
+			<div class="accordion-content">
+				<strong><?php translate("language_link");?>
+		</strong><br /> 
+		<?php
+				$languages = Language::getAllLanguages ();
+				?>
+<select name="link_to_language">
+					<option value=""
+						<?php if(is_null($row->link_to_language)){ echo "selected";}?>><?php translate("none");?></option>
+<?php foreach($languages as $language){?>
+<option value="<?php Template::escape($language->getID());?>"
+						<?php if($language->getID() == $row->link_to_language) echo " selected";?>><?php Template::escape($language->getName());?></option>
+<?php }?>
+</select>
+			</div>
+		</div>
 		<div id="tab-menu-image">
 			<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
 

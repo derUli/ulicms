@@ -8,7 +8,6 @@
 			$cols = Database::getColumnNames ( "content" );
 			$sql = "SELECT id, name FROM " . tbname ( "videos" );
 			$videos = Database::query ( $sql );
-			
 			$sql = "SELECT id, name FROM " . tbname ( "audio" );
 			$audios = Database::query ( $sql );
 			
@@ -183,6 +182,23 @@
 			<div class="accordion-content">
 				<strong><?php translate("EXTERNAL_REDIRECT");?>
 		</strong><br /> <input type="text" name="redirection" value="">
+			</div>
+		</div>
+		<div id="tab-language-link" style="display: none;">
+			<h2 class="accordion-header"><?php translate("language_link");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("language_link");?>
+		</strong><br /> 
+		<?php
+			$languages = Language::getAllLanguages ();
+			?>
+<select name="link_to_language">
+					<option value=""><?php translate("none");?></option>
+<?php foreach($languages as $language){?>
+<option value="<?php Template::escape($language->getID());?>"><?php Template::escape($language->getName());?></option>
+<?php }?>
+</select>
 			</div>
 		</div>
 		<div id="tab-menu-image">
