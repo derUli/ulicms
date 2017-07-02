@@ -51,6 +51,7 @@
 # Bugfix: $user->update() überschreibt die ID nicht mehr
 # Parameter $query von Database::query() und Database::pQuery() in $sql umbenannt
 # uninstall() Methode in main_class wird nun aufgerufen
+# Der "Anzeigen" Button beim Bearbeiten vom Inhaltstyp "Knotenpunkt" wird nicht mehr angezeigt
 
 ===== Neues in UliCMS 2017.3 =====
 
