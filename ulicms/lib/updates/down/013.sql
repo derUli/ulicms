@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}content` DROP COLUMN `link_to_language`;
