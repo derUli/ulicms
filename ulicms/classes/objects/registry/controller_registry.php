@@ -23,7 +23,7 @@ class ControllerRegistry {
 				}
 				
 				$controller_function_permissions = getModuleMeta ( $module, "controller_function_permissions" );
-				if ($controller_function_permissions and is_array ( $controller_function_permissions )) {
+				if ($controller_function_permissions) {
 					foreach ( $controller_function_permissions as $key => $value ) {
 						self::$controller_function_permissions [$key] = $value;
 					}
