@@ -4,6 +4,7 @@ abstract class Controller {
 			"runCommand" 
 	);
 	public function runCommand() {
+		$sClass = Request::getVar ( "sClass" );
 		if (isset ( $_REQUEST ["sMethod"] ) and StringHelper::isNotNullOrEmpty ( $_REQUEST ["sMethod"] ) and ! faster_in_array ( $_REQUEST ["sMethod"], $this->blacklist )) {
 			$sMethod = $_REQUEST ["sMethod"];
 			$sMethodWithRequestType = $sMethod . ucfirst ( Request::getMethod () );
@@ -19,9 +20,17 @@ abstract class Controller {
 			}
 			
 			if (method_exists ( $this, $sMethodWithRequestType ) and ! startsWith ( $sMethodWithRequestType, "_" ) and $reflectionWithRequestType and $reflectionWithRequestType->isPublic ()) {
-				$this->$sMethodWithRequestType ();
+				if (ControllerRegistry::userCanCall ( $sClass, $sMethodWithRequestType )) {
+					$this->$sMethodWithRequestType ();
+				} else {
+					throw new AccessDeniedException ( get_translation ( "forbidden" ) );
+				}
 			} else if (method_exists ( $this, $sMethod ) and ! startsWith ( $sMethod, "_" ) and $reflection and $reflection->isPublic ()) {
-				$this->$sMethod ();
+				if (ControllerRegistry::userCanCall ( $sClass, $sMethod )) {
+					$this->$sMethod ();
+				} else {
+					throw new AccessDeniedException ( get_translation ( "forbidden" ) );
+				}
 			} else {
 				throw new BadMethodCallException ( "method " . htmlspecialchars ( $sMethod ) . " is not callable" );
 			}
