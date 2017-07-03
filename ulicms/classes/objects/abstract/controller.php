@@ -23,13 +23,13 @@ abstract class Controller {
 				if (ControllerRegistry::userCanCall ( $sClass, $sMethodWithRequestType )) {
 					$this->$sMethodWithRequestType ();
 				} else {
-					throw new Exception ( get_translation ( "forbidden" ) );
+					throw new AccessDeniedException ( get_translation ( "forbidden" ) );
 				}
 			} else if (method_exists ( $this, $sMethod ) and ! startsWith ( $sMethod, "_" ) and $reflection and $reflection->isPublic ()) {
 				if (ControllerRegistry::userCanCall ( $sClass, $sMethod )) {
 					$this->$sMethod ();
 				} else {
-					throw new Exception ( get_translation ( "forbidden" ) );
+					throw new AccessDeniedException ( get_translation ( "forbidden" ) );
 				}
 			} else {
 				throw new BadMethodCallException ( "method " . htmlspecialchars ( $sMethod ) . " is not callable" );
