@@ -2,6 +2,7 @@ function showAndHideFieldsByType() {
 	if ($("#type_list").is(":checked")) {
 		$("#tab-list").slideDown();
 		$("#tab-link").slideUp();
+		$("#tab-language-link").slideUp();
 		$("#tab-metadata").slideDown();
 		$("#tab-og").slideDown();
 		$("#content-editor").slideDown();
@@ -43,6 +44,7 @@ function showAndHideFieldsByType() {
 	} else if ($("#type_node").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
+		$("#tab-language-link").slideUp();
 		$("#tab-metadata").slideUp();
 		$("#tab-og").slideUp();
 		$("#tab-image").slideUp();
@@ -60,6 +62,7 @@ function showAndHideFieldsByType() {
 	} else if ($("#type_module").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
+		$("#tab-language-link").slideUp();
 		$("#tab-metadata").slideDown();
 		$("#tab-og").slideDown();
 		$("#content-editor").slideDown();
@@ -77,6 +80,7 @@ function showAndHideFieldsByType() {
 	} else if ($("#type_video").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
+		$("#tab-language-link").slideUp();
 		$("#tab-metadata").slideDown();
 		$("#tab-image").slideUp();
 		$("#tab-og").slideDown();
@@ -94,6 +98,7 @@ function showAndHideFieldsByType() {
 	} else if ($("#type_audio").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
+		$("#tab-language-link").slideUp();
 		$("#tab-metadata").slideDown();
 		$("#tab-og").slideDown();
 		$("#content-editor").slideDown();
@@ -111,6 +116,7 @@ function showAndHideFieldsByType() {
 	} else if ($("#type_image").is(":checked")) {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
+		$("#tab-language-link").slideUp();
 		$("#tab-metadata").slideDown();
 		$("#tab-og").slideDown();
 		$("#content-editor").slideDown();
@@ -128,6 +134,7 @@ function showAndHideFieldsByType() {
 	} else {
 		$("#tab-list").slideUp();
 		$("#tab-link").slideUp();
+		$("#tab-language-link").slideUp();
 		$("#tab-metadata").slideDown();
 		$("#tab-og").slideDown();
 		$("#tab-image").slideUp();
