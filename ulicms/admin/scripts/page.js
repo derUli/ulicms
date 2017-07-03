@@ -187,6 +187,13 @@ function showAndHideFieldsByType() {
 	} else {
 		$("#btn-view-page").slideDown();
 	}
+	if ($("#type_node").is(":checked") || $("#type_snippet").is(":checked")
+			|| $("#type_link").is(":checked")
+			|| $("#type_language_link").is(":checked")) {
+		$(".hide-on-non-regular").slideUp();
+	} else {
+		$(".hide-on-non-regular").slideDown();
+	}
 
 	if ($("select[name='menu']").val() == "none") {
 		$("#parent-div").slideUp();

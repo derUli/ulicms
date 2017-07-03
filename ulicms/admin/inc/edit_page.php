@@ -102,7 +102,7 @@ if (defined ( "_SECURITY" )) {
 				echo htmlspecialchars ( $row->title );
 				?>"
 				required>
-			<div class="hide-on-snippet">
+			<div class="hide-on-snippet hide-on-non-regular">
 				<br /> <strong><?php
 				
 				translate ( "ALTERNATE_TITLE" );
