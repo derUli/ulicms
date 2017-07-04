@@ -37,7 +37,7 @@ if (defined ( "_SECURITY" )) {
 			<strong><?php translate("permalink");?></strong><br /> <input
 				type="text" required="required" name="system_title"
 				id="system_title" value="">
-			<div class="hide-on-snippet">
+			<div class="hide-on-snippet hide-on-non-regular">
 				<br /> <strong><?php translate("page_title");?> </strong><br /> <input
 					type="text" required="required" name="page_title" value=""
 					onkeyup="systemname_vorschlagen(this.value)"> <br /> <br /> <strong><?php translate("alternate_title");?> </strong><br />
