@@ -192,7 +192,7 @@ class Database {
 		if (! self::$connection) {
 			return false;
 		}
-		self::query ( "SET NAMES 'utf8'" );
+		self::query ( "SET NAMES 'utf8mb4'" );
 		// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 		self::query ( "SET SESSION sql_mode = '';" );
 		

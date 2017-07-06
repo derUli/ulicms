@@ -46,6 +46,7 @@
 + Neuer Inhaltstyp "Link zu Sprache"
 + Berechtigungsabfrage für Controller-Funktionsaufrufe eingebaut
 + Neue Hook "admin_footer" hinzugefügt
++ Encoding auf utf8mb4 umgestellt, UliCMS benötigt mindestens MySQL bzw. MariaDB 5.5
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
 # Die Funktionen Template::executeModuleTemplate() und Template::executeDefaultOrOwnTemplate() akzeptieren nun auch Templatenamen mit Dateiendung
 # Funktion getCurrentLanguage() - Der Parameter $current ist nun per Default false
