@@ -43,18 +43,6 @@ class Database {
 		log_db_query ( $preparedQuery );
 		return Database::query ( $preparedQuery, $replacePrefix );
 	}
-	public static function getPDOConnectionString() {
-		$retval = "mysql://";
-		$cfg = new config ();
-		$retval .= $cfg->db_user;
-		if (! empty ( $cfg->db_password )) {
-			$retval .= ":" . $cfg->db_password;
-		}
-		$retval .= "@" . $cfg->db_server;
-		$retval .= "/" . $cfg->db_database;
-		$retval .= "?charset=utf8";
-		return $retval;
-	}
 	public static function getServerVersion() {
 		return mysqli_get_server_info ( self::$connection );
 	}
