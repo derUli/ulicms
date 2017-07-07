@@ -68,14 +68,22 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 -webkit-transform
 
 
+
+
 :rotate(360deg)
+
+
 
 
 ;
 transform
 
 
+
+
 :rotate(360deg)
+
+
 
 
 }
@@ -90,14 +98,22 @@ keyframes dialog_spinner { 0%{
 -webkit-transform
 
 
+
+
 :rotate(360deg)
+
+
 
 
 ;
 transform
 
 
+
+
 :rotate(360deg)
+
+
 
 
 }
@@ -255,33 +271,55 @@ a.cke_dialog_close_button {
 }
 
 .cke_hc
+
  
+
 a
+
+
 .cke_dialog_tab
 
+
 	
+
 :hover
 ,
 .cke_hc
+
   
+
 a
+
  
+
 .cke_dialog_tab
+
  
+
 :focus
 ,
 .cke_hc
-;
 
-	 
+
+;
 a
+
  
+
 .cke_dialog_tab_selected
+
  
+
 ursor
+
+
 :
+
  
+
 pointer
+
+
 
 
 }

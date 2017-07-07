@@ -93,7 +93,7 @@ class System {
 	 * with prefixing a "@" sign to the function call:
 	 *
 	 * @System ::mkdir(..);
-	 * 
+	 *
 	 * @param mixed $error
 	 *        	a PEAR error or a string with the error message
 	 * @return bool false

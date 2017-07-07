@@ -107,6 +107,8 @@ if (! $eingeloggt) {
 	}
 }
 
+add_hook ( "admin_footer" );
+
 require_once "inc/footer.php";
 
 add_hook ( "before_admin_cron" );

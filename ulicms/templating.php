@@ -347,7 +347,7 @@ function delete_custom_data($var = null, $page = null) {
 		if (isset ( $data [$var] )) {
 			unset ( $data [$var] );
 		}
-	} // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
+	}  // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
 else {
 		$data = array ();
 	}
@@ -706,7 +706,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 	$html = "";
 	$name = db_escape ( $name );
 	$language = $_SESSION ["language"];
-	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent ";
+	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target, type, link_to_language FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent ";
 	
 	if (is_null ( $parent )) {
 		$sql .= " IS NULL ";
@@ -752,10 +752,17 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 			} else {
 				$title = $row->title;
 			}
+			
+			$redirection = $row->redirection;
+			if ($row->type == "language_link" && ! is_null ( $row->link_to_language )) {
+				$language = new Language ( $row->link_to_language );
+				$redirection = $language->getLanguageLink ();
+			}
+			
 			if (get_requested_pagename () != $row->systemname) {
-				$html .= "<a href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "' class='" . trim ( $additional_classes ) . "'>";
+				$html .= "<a href='" . buildSEOUrl ( $row->systemname, $redirection ) . "' target='" . $row->target . "' class='" . trim ( $additional_classes ) . "'>";
 			} else {
-				$html .= "<a class='menu_active_link" . rtrim ( $additional_classes ) . "' href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "'>";
+				$html .= "<a class='menu_active_link" . rtrim ( $additional_classes ) . "' href='" . buildSEOUrl ( $row->systemname, $redirection ) . "' target='" . $row->target . "'>";
 			}
 			if (! is_null ( $row->menu_image ) and ! empty ( $row->menu_image )) {
 				$html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities ( $row->title, ENT_QUOTES, "UTF-8" ) . '"/>';

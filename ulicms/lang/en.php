@@ -729,4 +729,7 @@ define ( "TRANSLATION_ALLOWABLE_TAGS_HELP", "Empty = all Tags allowed" );
 define ( "TRANSLATION_SHOW_USERS", "Show Users" );
 define ( "TRANSLATION_DEFAULT_LANGUAGE", "Default Language" );
 
+// Link to language
+define ( "TRANSLATION_LANGUAGE_LINK", "Link to Language" );
+
 add_hook ( "lang_en" );

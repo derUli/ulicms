@@ -37,8 +37,8 @@ class Article extends Page {
 				$this->article_image,
 				$this->article_date,
 				$this->excerpt,
-				$this->id
+				$this->id 
 		);
-		Database::pQuery($sql, $args, true);
+		Database::pQuery ( $sql, $args, true );
 	}
 }

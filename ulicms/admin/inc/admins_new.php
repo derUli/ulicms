@@ -57,7 +57,8 @@ if (defined ( "_SECURITY" )) {
 	</div>
 
 	<br /> <input type="checkbox" value="1" name="locked" id="locked"> <label
-		for="locked"><?php translate ( "locked" );?> </label> <br /> <br /> <strong><?php translate("default_language");?></strong><br /> <select name="default_language">
+		for="locked"><?php translate ( "locked" );?> </label> <br /> <br /> <strong><?php translate("default_language");?></strong><br />
+	<select name="default_language">
 		<option value="" selected>[<?php translate("standard");?>]</option>
 		<?php
 		for($i = 0; $i < count ( $languages ); $i ++) {

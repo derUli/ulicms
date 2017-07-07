@@ -222,7 +222,7 @@ class PEAR_REST_10 {
 			}
 			if ($recommended) {
 				if ($release ['v'] != $recommended) { // if we want a specific
-				                                    // version, then skip all others
+				                                      // version, then skip all others
 					continue;
 				} else {
 					if (! faster_in_array ( $release ['s'], $states )) {

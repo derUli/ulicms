@@ -592,9 +592,9 @@ class PEAR_Config extends PEAR {
 					'prompt' => 'Signature Key Directory',
 					'group' => 'Maintainers' 
 			) 
-	)
+	);
 	// __channels is reserved - used for channel-specific configuration
-	;
+	
 	
 	/**
 	 * Constructor.

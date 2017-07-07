@@ -6,4 +6,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}mails` (
 `body` mediumtext NOT NULL,
 `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT charset={db_encoding} AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT charset=utf8mb4 AUTO_INCREMENT=1 ;

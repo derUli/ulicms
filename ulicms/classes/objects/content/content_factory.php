@@ -41,6 +41,15 @@ class ContentFactory {
 		}
 		return $result;
 	}
+	public static function getAllRegular($order = "id") {
+		$result = array ();
+		$sql = "SELECT id, `type` FROM " . tbname ( "content" ) . " where type not in ('link', 'language_link', 'node') ORDER BY $order";
+		$query = DB::query ( $sql );
+		while ( $row = DB::fetchObject ( $query ) ) {
+			$result [] = self::getContentObjectByID ( $row );
+		}
+		return $result;
+	}
 	public static function getAllByLanguage($language, $order = "id") {
 		$language = DB::escapeValue ( $language );
 		$result = array ();

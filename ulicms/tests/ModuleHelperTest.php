@@ -51,4 +51,9 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertNull ( ModuleHelper::getMainController ( "slicknav" ) );
 		$this->assertNull ( ModuleHelper::getMainController ( "not_a_module" ) );
 	}
+	public function testBuildMethodCall() {
+		$this->assertEquals ( "sClass=MyClass&sMethod=MyMethod", ModuleHelper::buildMethodCall ( "MyClass", "MyMethod" ) );
+		$this->assertEquals ( "sClass=My_Class&sMethod=My_Method", ModuleHelper::buildMethodCall ( "My_Class", "My_Method" ) );
+		$this->assertEquals ( "sClass=My_Class&sMethod=My_Method&var1=hello&var2=world", ModuleHelper::buildMethodCall ( "My_Class", "My_Method", "var1=hello&var2=world" ) );
+	}
 }

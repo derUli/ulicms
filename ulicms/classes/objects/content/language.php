@@ -112,4 +112,13 @@ class Language {
 		}
 		return $result;
 	}
+	public function getLanguageLink() {
+		$domain = getDomainByLanguage ( $this->language_code );
+		if ($domain) {
+			$url = Request::getProtocol ( $domain );
+		} else {
+			$url = "./?language=" . $this->language_code;
+		}
+		return $url;
+	}
 }

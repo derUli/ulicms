@@ -38,12 +38,6 @@ if (defined ( "_SECURITY" )) {
 			<?php if($group->getId() == $_SESSION ["admins_filter_group"]) echo "selected ";?>
 			value="<?php Template::escape($group->getId());?>"><?php Template::escape($group->getName());?></option>
 		<?php }?>
-	
-	
-	
-	
-	
-	
 	</select>
 </form>
 <br />
@@ -83,7 +77,18 @@ if (defined ( "_SECURITY" )) {
 				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getLastName () ) . "</td>";
 				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getFirstname () ) . "</td>";
 				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getEmail () ) . "</td>";
-				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $group ) . "</td>";
+				echo "<td class=\"hide-on-mobile\">";
+				$id = $row->getGroupId ();
+				if ($id and $acl->hasPermission ( "groups_edit" )) {
+					$url = ModuleHelper::buildActionURL ( "groups", "edit=$id" );
+					echo '<a href="' . Template::getEscape ( $url ) . '">';
+				}
+				echo real_htmlspecialchars ( $group );
+				
+				if ($id and $acl->hasPermission ( "groups_edit" )) {
+					echo "</a>";
+				}
+				echo "</td>";
 				if ($acl->hasPermission ( "users_edit" )) {
 					echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->getId () . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
 					

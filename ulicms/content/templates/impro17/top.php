@@ -66,7 +66,7 @@ echo getconfig ( "header-background-color" );
 			<div id="mobile-nav"></div>
         <?php
 								
-if ((! containsModule ( null, "extended_search" ) and ! containsModule ( null, "search" )) and $hasSearch and $searchPage) {
+								if ((! containsModule ( null, "extended_search" ) and ! containsModule ( null, "search" )) and $hasSearch and $searchPage) {
 									?>
 		<form id="search-form-head" method="get"
 				action="<?php Template::escape(buildSEOURL($searchPage->systemname));?>">

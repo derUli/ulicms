@@ -8,7 +8,6 @@
 			$cols = Database::getColumnNames ( "content" );
 			$sql = "SELECT id, name FROM " . tbname ( "videos" );
 			$videos = Database::query ( $sql );
-			
 			$sql = "SELECT id, name FROM " . tbname ( "audio" );
 			$audios = Database::query ( $sql );
 			
@@ -40,7 +39,7 @@
 	</strong><br /> <input type="text" required="required"
 				name="page_title" value=""
 				onkeyup="systemname_vorschlagen(this.value)">
-			<div class="hide-on-snippet">
+			<div class="hide-on-snippet hide-on-non-regular">
 				<br /> <strong><?php
 			
 			translate ( "alternate_title" );
@@ -117,11 +116,11 @@
 				<div id="position_help" class="help" style="display: none">
 	<?php echo nl2br ( get_translation ( "help_position" ) );?>
 	</div>
-				<br /> <br /> 
+				<br /> <br />
 				<div id="parent-div">
-				<strong><?php translate("parent");?></strong><br /> <select
-					name="parent" size=1>
-					<option selected="selected" value="NULL">
+					<strong><?php translate("parent");?></strong><br /> <select
+						name="parent" size=1>
+						<option selected="selected" value="NULL">
 			[
 			<?php translate("none");?>
 			]
@@ -148,7 +147,8 @@
 		<?php
 			}
 			?>
-	</select> <br /> <br /></div>
+	</select> <br /> <br />
+				</div>
 			</div>
 			<strong><?php translate("activated");?>
 	</strong><br /> <select name="activated" size=1
@@ -182,6 +182,23 @@
 			<div class="accordion-content">
 				<strong><?php translate("EXTERNAL_REDIRECT");?>
 		</strong><br /> <input type="text" name="redirection" value="">
+			</div>
+		</div>
+		<div id="tab-language-link" style="display: none;">
+			<h2 class="accordion-header"><?php translate("language_link");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("language_link");?>
+		</strong><br /> 
+		<?php
+			$languages = Language::getAllLanguages ();
+			?>
+<select name="link_to_language">
+					<option value=""><?php translate("none");?></option>
+<?php foreach($languages as $language){?>
+<option value="<?php Template::escape($language->getID());?>"><?php Template::escape($language->getName());?></option>
+<?php }?>
+</select>
 			</div>
 		</div>
 		<div id="tab-menu-image">
@@ -283,8 +300,8 @@ function openMenuImageSelectWindow(field) {
 					<strong><?php translate("article_date");?></strong><br /> <input
 						name="article_date" type="datetime-local"
 						value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
-					<strong><?php translate("excerpt");?></strong> <textarea
-						name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
+					<strong><?php translate("excerpt");?></strong>
+					<textarea name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
 				</div>
 			</div>
 

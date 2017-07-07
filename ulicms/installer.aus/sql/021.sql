@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}lists` (
 `use_pagination` tinyint(1) NOT NULL DEFAULT '0',
 `type` varchar(50) DEFAULT NULL,
 UNIQUE KEY `content_id` (`content_id`)
-) ENGINE=InnoDB DEFAULT charset={db_encoding};
+) ENGINE=InnoDB DEFAULT charset=utf8mb4;

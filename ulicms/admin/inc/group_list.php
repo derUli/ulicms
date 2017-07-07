@@ -85,8 +85,7 @@ if (count ( $groups ) > 0) {
 			if ($default_acl_group === $id) {
 				?> <span style="color: green; font-weight: bold;"><?php translate("yes");?> </span> <?php
 			} else {
-				?> <a
-					href="?action=groups&standard=<?php
+				?> <a href="?action=groups&standard=<?php
 				
 				echo $id;
 				?>"><span style="color: red; font-weight: bold;"

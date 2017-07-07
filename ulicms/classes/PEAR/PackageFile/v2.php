@@ -40,6 +40,7 @@ class PEAR_PackageFile_v2 {
 	
 	/**
 	 * path to package .
+	 *
 	 * tgz or false if this is a local/extracted package.xml
 	 *
 	 * @var string |false
@@ -49,6 +50,7 @@ class PEAR_PackageFile_v2 {
 	
 	/**
 	 * path to package .
+	 *
 	 * xml or false if this is an abstract parsed-from-string xml
 	 *
 	 * @var string |false

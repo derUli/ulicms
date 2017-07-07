@@ -22,4 +22,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}users` (
 `admin` tinyint(1) NULL DEFAULT '0',
 `failed_logins` int(11) DEFAULT '0',
 PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT charset={db_encoding} AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT charset=utf8mb4 AUTO_INCREMENT=2 ;

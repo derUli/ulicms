@@ -28,7 +28,6 @@ if (isset ( $_POST ["login"] )) {
 		$user = new User ();
 		$user->loadByUsername ( $_POST ["user"] );
 		$_SESSION ["system_language"] = $user->getDefaultLanguage () ? $user->getDefaultLanguage () : Settings::get ( "system_language" );
-		
 	}
 	
 	$confirmation_code = null;

@@ -37,7 +37,7 @@ if (defined ( "_SECURITY" )) {
 			<strong><?php translate("permalink");?></strong><br /> <input
 				type="text" required="required" name="system_title"
 				id="system_title" value="">
-			<div class="hide-on-snippet">
+			<div class="hide-on-snippet hide-on-non-regular">
 				<br /> <strong><?php translate("page_title");?> </strong><br /> <input
 					type="text" required="required" name="page_title" value=""
 					onkeyup="systemname_vorschlagen(this.value)"> <br /> <br /> <strong><?php translate("alternate_title");?> </strong><br />
@@ -210,6 +210,25 @@ if (defined ( "_SECURITY" )) {
 			
 			echo $row->redirection;
 			?>">
+			</div>
+		</div>
+		<div id="tab-language-link" style="display: none;">
+			<h2 class="accordion-header"><?php translate("language_link");?></h2>
+
+			<div class="accordion-content">
+				<strong><?php translate("language_link");?>
+		</strong><br /> 
+		<?php
+			$languages = Language::getAllLanguages ();
+			?>
+<select name="link_to_language">
+					<option value=""
+						<?php if(is_null($row->link_to_language)){ echo "selected";}?>><?php translate("none");?></option>
+<?php foreach($languages as $language){?>
+<option value="<?php Template::escape($language->getID());?>"
+						<?php if($language->getID() == $row->link_to_language) echo " selected";?>><?php Template::escape($language->getName());?></option>
+<?php }?>
+</select>
 			</div>
 		</div>
 		<div id="tab-menu-image">

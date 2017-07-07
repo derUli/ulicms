@@ -105,6 +105,11 @@ class ModuleHelper {
 		if (is_null ( $page->id )) {
 			return null;
 		}
+		if ($page instanceof Language_Link) {
+			$language = new Language ( $page->link_to_language );
+			if (! is_null ( $language->getID () ) and StringHelper::isNotNullOrWhitespace ( $language->getLanguageLink () ))
+				return $language->getLanguageLink();
+		}
 		$domain = getDomainByLanguage ( $page->language );
 		if (! $domain) {
 			if ($page->language != getCurrentLanguage ()) {
@@ -124,5 +129,12 @@ class ModuleHelper {
 	public static function underscoreToCamel($str) {
 		// Remove underscores, capitalize words, squash, lowercase first.
 		return lcfirst ( str_replace ( ' ', '', ucwords ( str_replace ( '_', ' ', $str ) ) ) );
+	}
+	public static function buildMethodCall($sClass, $sMethod, $suffix = null) {
+		$result = "sClass=" . urlencode ( $sClass ) . "&sMethod=" . urlencode ( $sMethod );
+		if (StringHelper::isNotNullOrWhitespace ( $suffix )) {
+			$result .= "&" . trim ( $suffix );
+		}
+		return $result;
 	}
 }

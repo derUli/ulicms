@@ -1248,7 +1248,7 @@ legend .cke_voice_label {
 .cke_rtl .cke_button__paste_icon, .cke_mixed_dir_content
  .cke_rtl .cke_button__paste_icon {
 	background: url(icons.png?t=3876e73) no-repeat 0 -120pxent .cke_rtl
-		.cke_button__numberedlist_icon{ 
+		.cke_button__numberedlist_icon{  
 	background: url(icons_hidpi.png?t=3876e73) no-repeat 0 -1392px
 		!important;
 	background-size: 16px !important;

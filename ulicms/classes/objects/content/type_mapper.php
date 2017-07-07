@@ -10,7 +10,8 @@ class TypeMapper {
 			"video" => "Video_Page",
 			"audio" => "Audio_Page",
 			"image" => "Image_Page",
-			"article" => "Article"
+			"article" => "Article",
+			"language_link" => "Language_Link" 
 	);
 	public static function getMappings() {
 		return self::$mapping;

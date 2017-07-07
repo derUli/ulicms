@@ -1,6 +1,7 @@
 <?php
 class ControllerRegistry {
 	private static $controllers = array ();
+	private static $controller_function_permissions = array ();
 	public static function loadModuleControllers() {
 		if (! defined ( "KCFINDER_PAGE" )) {
 			$controllerRegistry = array ();
@@ -18,6 +19,13 @@ class ControllerRegistry {
 							$path .= ".php";
 						}
 						$controllerRegistry [$key] = $path;
+					}
+				}
+				
+				$controller_function_permissions = getModuleMeta ( $module, "controller_function_permissions" );
+				if ($controller_function_permissions) {
+					foreach ( $controller_function_permissions as $key => $value ) {
+						self::$controller_function_permissions [$key] = $value;
 					}
 				}
 			}
@@ -50,5 +58,13 @@ class ControllerRegistry {
 		} else {
 			return null;
 		}
+	}
+	public static function userCanCall($sClass, $sMethod) {
+		$allowed = true;
+		$acl = new ACL ();
+		if (isset ( self::$controller_function_permissions [$sClass . "::" . $sMethod] ) and StringHelper::isNotNullOrWhitespace ( self::$controller_function_permissions [$sClass . "::" . $sMethod] )) {
+			$allowed = $acl->hasPermission ( self::$controller_function_permissions [$sClass . "::" . $sMethod] );
+		}
+		return $allowed;
 	}
 }
