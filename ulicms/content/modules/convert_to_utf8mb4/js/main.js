@@ -15,7 +15,7 @@ function convertNextTable() {
 		if (!text.contains("<!--finish-->")) {
 			convertNextTable();
 		} else {
-			// Todo: Meldung anzeigen, wenn Konvertierung durchgeführt wurde
+			location.replace($("#url").data("finish-url"));
 		}
 	});
 }

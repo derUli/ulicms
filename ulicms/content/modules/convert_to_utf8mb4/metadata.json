@@ -11,5 +11,8 @@
 	"admin_permission" : "convert_to_utf8mb4",
 	"controller_function_permissions" : {
         "ConvertToUTF8MB4::convertTable" : "convert_to_utf8mb4"
+   },
+   "actions" : {
+   	"conversion_finished" : "templates/finish.php"
    }
 }
