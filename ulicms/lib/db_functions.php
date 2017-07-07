@@ -50,7 +50,7 @@ function db_connect($server, $user, $password) {
 	Database::setConnection ( mysqli_connect ( $server, $user, $password ) );
 	if (! Database::getConnection ())
 		return false;
-	db_query ( "SET NAMES 'utf8'" );
+	db_query ( "SET NAMES 'utf8mb4'" );
 	// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 	db_query ( "SET SESSION sql_mode = '';" );
 	
