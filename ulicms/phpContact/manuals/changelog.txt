@@ -1,0 +1,201 @@
+----------------------------------------------------------------
+---[ 2.0.3 - 01.02.2015 ] -> [ 2.0.4 - 25.07.2015 ]-------------
+----------------------------------------------------------------
+- Bugfix: Umlaute beim Absendername
+- new Feature: Success Datei (Aufruf nach Sendung des Formulars)
+
+
+
+----------------------------------------------------------------
+---[ 2.0.2 - 03.08.2014 ] -> [ 2.0.3 - 01.02.2015 ]-------------
+----------------------------------------------------------------
+- Fix: weiße Seite (ohne Fehlermeldung) nach Verzeichniswechsel
+- Fix: unschöne Errormeldung "...funktionsfählig"
+- Kompatibilität mit GHKit ermöglicht
+- aktuelle Lizenzdatei hinzugefügt
+
+
+
+----------------------------------------------------------------
+---[ 2.0.1 - 11.08.2013 ] -> [ 2.0.2 - 03.08.2014 ]-------------
+----------------------------------------------------------------
+
+- Bugfix: groß geschriebene Extentions als Attachement
+- Bugfix: deaktivierte Funktion ini_set()
+- Fix: CSS Tabellenspalten Crash im Admin (word-wrap)
+
+
+
+----------------------------------------------------------------
+---[ 2.0.0 - 30.05.2013 ] -> [ 2.0.1 - 11.08.2013 ]-------------
+----------------------------------------------------------------
+
+- Ausgabecodebreiniger & -> &amp; entfernt
+- stripslashes() beim Parameterinhalt hinzugefügt
+
+
+
+----------------------------------------------------------------
+---[ 1.2.0 - 14.01.2012 ] -> [ 2.0.0 - 30.05.2013 ]-------------
+----------------------------------------------------------------
+
+- Bugfix: Betreff wird überschrieben
+- Bugfix: Autoresponder im Joomla
+- Bugfix: Captcha Anzeige
+- new Feature: TNG-Framework Schnittstelle
+- new Feature: E-Mail Check bei der Installation deaktivieren
+- neue Parametertypen ('color', 'selectdir' und 'selectfile')
+- alle Sprachdateien als einfache .ini
+- beim Laden der Parameter Grundeinstellung kannn die gewünschte
+  Sprache gewählt werden
+
+- Template Default v4.5:
+  - TNG Framework Stable 1.0
+  - Sprachdateien als .ini Dateien
+  - keine portugisische Sprache mehr
+  - Bugfix: Logo-URL bei der Integration in Joomla
+  - erweiterte Parameter (Pflichtfeld - optionales Eingabefeld)
+  - Parametertyp "color", als Colorpicker für alle Farbeinstellungen
+
+- Template B4YFormmailer2 v2.5:
+  - TNG Framework Stable 1.0
+  - Sprachdateien als .ini Dateien
+  - erweiterte Parameter (Pflichtfeld - optionales Eingabefeld)
+  - Parametertyp "color", als Colorpicker für alle Farbeinstellungen
+
+
+- Template Dataload v2.5:
+  - TNG Framework Stable 1.0
+  - Sprachdateien als .ini Dateien
+  - Parametertyp "color", als Colorpicker für alle Farbeinstellungen
+
+
+
+----------------------------------------------------------------
+---[ 1.2.0b1 - 21.05.2011 ] -> [ 1.2.0 - 14.01.2012 ]-----------
+----------------------------------------------------------------
+
+- Bugfix: Vorschaufunktion
+- new Feature: Overrides - Systemcodes der Eingabefelder
+- verbesserte englische Sprachdatei der Installationsroutine
+- Texte der Templatekonfiguration ausgelagert
+- Template Default v4.1: Templatekonfigurationstexte
+- Template B4YFormmailer2 v2.2: Templatekonfigurationstexte
+- Template Dataload v2.2: Templatekonfigurationstexte
+
+----------------------------------------------------------------
+---[ 1.1.0b2 - 19.03.2011 ] -> [ 1.2.0b1 - 21.05.2011 ]---------
+----------------------------------------------------------------
+
+- Bugfix: Installationsroutine
+- new Feature: Autoresponder hinzugefügt
+- new Feature: 2 Sprachig (deutsch und englisch)
+- wichtigste Texte direkt im Administrationsbereich änderbar
+- Template-Parameter: Felder aktivieren (nicht deaktivieren)
+- Zeichencodierung aller Templates ab sofort nur mehr UTF-8
+  iso-8859-1 kann per Parametereinstellung gewählt werden
+- Template Default v4.0: 2 Sprachig (deutsch und englisch),
+  CSS (komprimierte PHP Datei), viele Parameter
+- Template B4YFormmailer2 v2.1: viele Erweiterungen
+- Template Dataload v2.1: Parametersteuerung
+- einige kleine Verbesserungen im Adminbereiches
+
+
+----------------------------------------------------------------
+---[ 1.1.0b1 - 18.02.2011 ] -> [ 1.1.0b2 - 19.03.2011 ]---------
+----------------------------------------------------------------
+
+- Bugfix: mehrere Templates mit Parametersteuerung im Admin
+- Tempate B4YFormmailer2 v2.0: mit sehr vielen Parametern
+- Sicherheitsüberprüfung vor dem Laden der Grundeinstellungen
+- Parameter Seperator jetzt mit Infotext
+- Warnmeldung bei automatisch geleertem File-Feld möglich
+
+----------------------------------------------------------------
+---[ 1.0.2 - 28.09.2010 ] -> [ 1.1.0b1 - 18.02.2011 ]-----------
+----------------------------------------------------------------
+
+- new Feature: Template-Parameter im Admin konfigurierbar
+- Template Defalut v3.0: mit Parametersteuerung
+- Fix: HOSTEUROPE Patch eingebaut (Patch v1.0.2.2)
+- Fix: bei falscher Eingabe wird das Captcha-Eingabefeld geleert
+  und zusätzlich eine Warnmeldung ausgegeben
+- Fix: & bzw. &amp; Problem beseitigt
+- Fix: Installationsroutine: 2 keine Fehlausgaben gelöscht
+- Fix: Adminbereich: 1 kleine Fehlausgabe gelöscht
+
+
+----------------------------------------------------------------
+---[ 1.0.1 - 18.06.2010 ] -> [ 1.0.2 - 28.09.2010 ]-------------
+----------------------------------------------------------------
+
+- Bugfix: mail() Funktioon auf einem Microsoft IIS6.0 Server
+- Bugfix: E-Mail Überprüfung bei deaktivierter Funktion exec()
+- Fix: Informationsanzeige bei deaktivierter Funktion phpinfo()
+- Fix: Zeichencodierung des Empfängernamens beim Outlook
+- FIX: Zeichencodierung der Textzeile im Betreff
+- Fix: Einbindungscodeanzeige bei "include" im Admin
+
+
+----------------------------------------------------------------
+---[ 1.0.0 - 24.05.2010 ] -> [ 1.0.1 - 18.06.2010 ]-------------
+----------------------------------------------------------------
+
+- Bugfix: Zeichencodierung bei der Empfängerauswahl
+- Fix: Selectfeld der Templateauswahl im Adminbereich
+- Installationsroutine für IE6 optimiert
+- kleine Optimierungen am Admin-Template "Default"
+
+
+----------------------------------------------------------------
+---[ 1.0.0 BETA - 08.02.2010 ] -> [ 1.0.0 - 24.05.2010 ]--------
+----------------------------------------------------------------
+
+- notice: undeffinierte Variable
+  index.php[Zeile88]:$b4yf_lang
+  captcha/maker.php[Zeile60]:$b4yf_codestring
+- Bugfix: Tippfehler
+  functions/templates.fnc.php[Zeile425]: "next4"
+- Fix: captcha Attribut color
+- captcha-Attribute erweitert
+  (background, font, stellen)
+- Templatestruktur um den (optionalen) Ordner "captcha" erweitert
+- E-Mail Template replaces hinzugefügt
+- Attribut "placeholder"
+- Feldtype "email" und "url" hinzugefügt
+- Darstellungsfehler im Adminmenüs IE Kompatibilitätsmodus gefixt
+- Template: Default v2.1 (neu Version)
+- Template: B4YFormmailer2 ersetzt B4YFormmailer
+- Template: Dataload ersetzt firstOne
+- Manual: Felder Konfiguration v1.2
+
+
+----------------------------------------------------------------
+---[ 0.0.2 BETA - 03.11.2009 ] -> [ 1.0.0 BETA - 08.02.2010 ]---
+----------------------------------------------------------------
+
+- Installationsroutine komplett überarbeitet
+- Bugfix: 'allow_url_fopen' deaktiviert
+- Adminbereich komplett überarbeitet
+- Neues Admin-Template (Default)
+- Templateadministrierung hinzugefügt
+- mehrere Empfänger im Konfigurationsfeld jetzt möglich
+- Programmcode optimiert
+- Templates "Default", "B4YFormmailer" und "firstOne" includiert
+- alle Templates überarbeitet
+- Bugfix: Captcha
+- Anleitungen hinzugefügt
+
+
+----------------------------------------------------------------
+---[ 0.0.1 BETA - 13.09.2009 ] -> [ 0.0.2 BETA - 03.11.2009 ]---
+----------------------------------------------------------------
+
+- Logdatei "/manuals/changelog.txt" hinzugefügt
+- Bugfix: "Template-Default include Downcounter"
+- Fix: "Notice-Warnungen anderer Scripte"
+- Bugfix: "UTF-8 BOM Problem bei Templates mit iso-8859-1"
+- Bugfix: "Undefined offset mit select und radio"
+- Bugfix: "include Problem"
+
+----------------------------------------------------------------

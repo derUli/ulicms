@@ -1,0 +1,1872 @@
+<!--
+/**
+ * @version   v2.0.5 - 11.07.2016
+ * @package   phpContact
+ * @author    Günther Hörandl <info@phpcontact.net>
+ * @copyright Copyright (c) 2009 - 2016 by Günther Hörandl
+ * @license   http://www.phpcontact.net/license.html, see LICENSE.txt
+ * @link      http://www.phpcontact.net/
+ */
+ 
+_____________________________________
+
+WICHTIG: Bitte sorgfälltig lesen!
+
+Dieses Template darf nach folgenden Regeln beliebig geändert werden:
+- Alle Kommentare müssen bestehen bleiben!
+- Zusätzlich hinzugefüge Kommentare werden automatisch herausgelöscht.
+- Der Copyrighthinweis %%COPYRIGHT%% darf NICHT entfernt werden!!!
+  Er muss so gestaltet werden das er im Browser bei der Formularansicht gut sichtbar ist!!!
+  Auf der Homepage www.phpcontact.net ist es möglich eine Lizenz für die Entfernung
+  des sichtbaren Copyrights kauflich zu erwerben.
+
+ ACHTUNG: Charset ist UTF-8 ohne BOM !!!
+ 
+ 
+NEU seit v1.2 der phpContact-Version 1.2.x ist der Zubau des Autoresponders
+-->
+
+
+
+<!-- Start: Header --><?xml version='1.0' encoding='{encoding}'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{XML-lang}">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset={encoding}" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" href="templates/{admintemplate}/css/style.css" type="text/css" />
+  <script type="text/javascript" src="templates/{admintemplate}/js/jscolor/jscolor.js"></script>
+  <link href="templates/{admintemplate}/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <title>{pagetitle} - {adminarea}</title>
+  <!--[if IE 6]>
+    <style type="text/css">
+      img{ behavior: url(templates/{admintemplate}/iepngfix/iepngfix.htc) }
+    </style>
+  <![endif]--> 
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="head">{version}<h1>{adminarea}</h1></div>
+<!-- End: Header -->
+
+
+
+<!-- Start: Menue -->
+  <div class="block">
+    <div id="menue">
+      <ul>
+        <li><a href="index.php?do=home"><img src="templates/{admintemplate}/images/home.png" alt="{menue-home}" width="32" height="32" /><br />{menue-home}</a></li>
+        <li><a href="index.php?do=config"><img src="templates/{admintemplate}/images/config.png" alt="{menue-config}" width="32" height="32" /><br />{menue-config}</a></li>
+        <li><a href="index.php?do=spezials"><img src="templates/{admintemplate}/images/config.png" alt="{menue-spezial}" width="32" height="32" /><br />{menue-spezial}</a></li>
+        <li><a href="index.php?do=templates"><img src="templates/{admintemplate}/images/templates.png" alt="{menue-templates}" width="32" height="32" /><br />{menue-templates}</a></li>
+        <li><a href="index.php?do=system"><img src="templates/{admintemplate}/images/system.png" alt="{menue-system}" width="32" height="32" /><br />{menue-system}</a></li>
+        <li><a href="index.php?do=license"><img src="templates/{admintemplate}/images/license.png" alt="{menue-lizenz}" width="32" height="32" /><br />{menue-lizenz}</a></li>
+        <li><a href="index.php?do=help"><img src="templates/{admintemplate}/images/help.png" alt="{menue-help}" width="32" height="32" /><br />{menue-help}</a></li>
+      </ul>
+      <ul class="right">
+        <li><a href="../" target="_blank" class="no-link-marker"><img src="templates/{admintemplate}/images/preview.png" alt="{menue-preview}" width="32" height="32" /><br />{menue-preview}</a></li>
+        <li><a href="index.php?do=logout"><img src="templates/{admintemplate}/images/logout.png" alt="{menue-logout}" width="32" height="32" /><br />{menue-logout}</a></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>
+<!-- End: Menue -->
+
+
+
+<!-- Start: Suportermenue -->
+  <div class="block">
+    <div id="menue">
+      <ul>
+        <li><a href="index.php?do=home"><img src="templates/{admintemplate}/images/home.png" alt="{menue-home}" width="32" height="32" /><br />{menue-home}</a></li>
+        <li><a href="index.php?do=templates"><img src="templates/{admintemplate}/images/templates.png" alt="{menue-templates}" width="32" height="32" /><br />{menue-templates}</a></li>
+        <li><a href="index.php?do=system"><img src="templates/{admintemplate}/images/system.png" alt="{menue-system}" width="32" height="32" /><br />{menue-system}</a></li>
+        <li><a href="index.php?do=license"><img src="templates/{admintemplate}/images/license.png" alt="{menue-lizenz}" width="32" height="32" /><br />{menue-lizenz}</a></li>
+        <li><a href="index.php?do=help"><img src="templates/{admintemplate}/images/help.png" alt="{menue-help}" width="32" height="32" /><br />{menue-help}</a></li>
+      </ul>
+      <ul class="right">
+        <li><a href="../" target="_blank" class="no-link-marker"><img src="templates/{admintemplate}/images/preview.png" alt="{menue-preview}" width="32" height="32" /><br />{menue-preview}</a></li>
+        <li><a href="index.php?do=logout"><img src="templates/{admintemplate}/images/logout.png" alt="{menue-logout}" width="32" height="32" /><br />{menue-logout}</a></li>
+      </ul>
+      <div class="clear"></div>
+    </div>
+  </div>
+<!-- End: Suportermenue -->
+
+
+
+<!-- Start: Installordner -->
+  <div class="block">
+    <div class="feld">
+      <div class="error-message">{install-error-folder}</div>
+    </div>
+  </div>
+<!-- End: Installordner -->
+
+
+<!-- Start: Login -->
+  <div class="block">
+    <form action="index.php" enctype="multipart/form-data" method="post" class="start-feld">
+      <div id="login">
+        <div id="loginbox" class="loginbox {login-box-class}">
+          <h2>{login-h2}</h2>
+          <!-- <label for="password"><strong>{login-label-pw}: </strong></label> -->
+          <input name="password" id="password" type="password" class="login {login-input-class}" />
+          <input value="{login-button}" name="b4yf_submit" class="button" type="submit" />
+          <!-- {login-errormessage} -->
+        </div>
+      </div>
+    </form>
+    <a href="http://www.gh-webdesign.at/"><img src="templates/{admintemplate}/images/gh-webdesign.png" alt="GH-Webdesign" class="align-right" /></a>
+  </div>
+<!-- End: Login -->
+
+
+
+<!-- Start: Footer -->
+      <div class="clear"><br /></div>
+    </div>
+    <div id="footer">
+      <a href="http://www.phpcontact.net/">{scriptname}</a> powered by <a href="http://www.gh-webdesign.at/">GH-Webdesign</a>
+    </div>
+    <p><br /></p>
+  </body>
+</html>
+<!-- End: Footer -->
+
+
+
+<!-- Start: Home -->
+  <div class="block">
+    <div class="start-feld">
+     <h2>{home-h2}</h2>
+     <p>{home-info}</p>
+    </div>
+    <a href="http://www.gh-webdesign.at/"><img src="templates/{admintemplate}/images/gh-webdesign.png" alt="GH-Webdesign" align="right" /></a>
+  </div>
+<!-- End: Home -->
+
+
+
+<!-- Start: Config -->
+  <a name="Konfig"></a>
+  <div class="block">
+    <h2>{konfig-h2}</h2>
+    {konfig-message}
+    <div id="config">
+      <form action="index.php#Konfig" enctype="multipart/form-data" method="post">
+        <h3 class="boxhead">{konfig-main-legend}</h3>
+        <fieldset>
+          <legend>{konfig-main-legend}</legend>
+          <div class="feld">
+            <table summary="{konfig-main-legend}">
+              <tr>
+                <td class="col1">{konfig-absolutepath-label}:<input type="hidden" name="absolutepath" id="absolutepath" value="{konfig-absolutepath-value}" /></td>
+                <td colspan="2"><span class="input noedit">{konfig-absolutepath-value}</span><small>{konfig-absolutepath-info}</small></td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-url-label}:<input type="hidden" name="url" id="url" value="{konfig-url-value}" /></td>
+                <td colspan="2"><span class="input noedit">{konfig-url-value}</span><small>{konfig-url-info}</small></td>
+              </tr>
+               <tr>
+                <td class="col1">{konfig-reloadlogdatei-label}:</td>
+                <td class="col2">
+                  <input name="reloadlogdatei" id="reloadlogdatei" value="{konfig-reloadlogdatei-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-reloadlogdatei-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-captchalogdatei-label}:</td>
+                <td class="col2">
+                  <input name="captchalogdatei" id="captchalogdatei" value="{konfig-captchalogdatei-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-captchalogdatei-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-pw-admin-label}:</td>
+                <td class="col2">
+                  <input name="pw-admin" id="pw-admin" value="{konfig-pw-admin-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-pw-admin-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-pw-supporter-label}:</td>
+                <td>
+                  <input name="pw-supporter" id="pw-supporter" value="{konfig-pw-supporter-value}" class="inputfeld" />
+                </td>
+                <td>
+                  <small>{konfig-pw-supporter-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-lizenz-label}:</td>
+                <td class="col2">
+                  <input name="lizenz" id="lizenz" value="{konfig-lizenz-value}" class="inputfeld" />
+                </td>
+                <td>
+                  <small>{konfig-lizenz-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-adminlanguage-label}:</td>
+                <td class="col2">
+                  <select name="adminlanguage" id="adminlanguage" class="inputfeld">{konfig-adminlanguage-selectoptions}</select>
+                </td>
+                <td class="col3">
+                  <small>{konfig-adminlanguage-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-admintemplate-label}:</td>
+                <td class="col2">
+                  <select name="admintemplate" id="admintemplate" class="inputfeld">{konfig-admintemplate-selectoptions}</select>
+                </td>
+                <td class="col3">
+                  <small>{konfig-admintemplate-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-template-label}:</td>
+                <td class="col2">
+                  <select name="template" id="template" class="inputfeld">{konfig-template-selectoptions}</select>
+                </td>
+                <td class="col3">
+                  <small>{konfig-template-info}</small>
+                </td>
+              </tr>
+            </table>
+          {konfig-reloadlogdatei-iswriteable}
+          {konfig-captchalogdatei-iswriteable}
+          </div>
+        </fieldset>
+        <!--
+        <p class="buttons">
+          <input value="{button-save}" name="submit" class="b4yf_button" type="submit" />
+        </p>
+        -->
+        <a name="Formulare"></a>
+        <h3 class="boxhead">{konfig-formular-legend}</h3>
+        <fieldset>
+          <legend>{konfig-formular-legend}</legend>
+          <div class="feld">
+            <table summary="{konfig-formular-legend}">
+              <tr>
+                <td class="col1">
+                  <label for="testmodus">{konfig-testmodus-label}:</label>
+                </td>
+                <td colspan="2">
+                  <small><input name="testmodus" id="testmodus" type="checkbox" value="on" {konfig-testmodus-checked} /> {konfig-testmodus-info}</small>
+                </td>
+              </tr>              
+              <tr>
+                <td class="col1">{konfig-work-label}:</td>
+                <td class="col2">
+                  <input type="radio" name="work" id="work-self" value="self" {konfig-work-self-checked} /><label for="work-self">{konfig-work-self-label}</label><br />
+                  <input type="radio" name="work" id="work-include" value="include" {konfig-work-include-checked} /><label for="work-include">{konfig-work-include-label}</label>
+                </td>
+                <td class="col3">
+                  <small>{konfig-work-info}</small>
+                </td>
+              </tr>
+            </table>
+            <!-- <h3>{work-empfaenger-legend}</h3> -->
+            <br />
+            <table summary="{konfig-empfaenger-legend}">
+              <tr>
+                <td class="col1">{konfig-empfaenger-mail-label}:</td>
+                <td class="col2">
+                  <input name="empfaenger-mail" id="empfaenger-mail" value="{konfig-empfaenger-mail-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-empfaenger-mail-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-empfaenger-name-label}:</td>
+                <td class="col2">
+                  <input name="empfaenger-name" id="empfaenger-name" value="{konfig-empfaenger-name-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-empfaenger-name-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-empfaenger-blindcopy-mail-label}:</td>
+                <td class="col2">
+                  <input name="empfaenger-blindcopy-mail" id="empfaenger-blindcopy-mail" value="{konfig-empfaenger-blindcopy-mail-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-empfaenger-blindcopy-mail-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-empfaenger-blindcopy-name-label}:</td>
+                <td class="col2">
+                  <input name="empfaenger-blindcopy-name" id="empfaenger-blindcopy-name" value="{konfig-empfaenger-blindcopy-name-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-empfaenger-blindcopy-name-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-empfaenger-replyto-mail-label}:</td>
+                <td class="col2">
+                  <input name="empfaenger-replyto-mail" id="empfaenger-replyto-mail" value="{konfig-empfaenger-replyto-mail-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-empfaenger-replyto-mail-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-empfaenger-replyto-name-label}:</td>
+                <td class="col2">
+                  <input name="empfaenger-replyto-name" id="empfaenger-replyto-name" value="{konfig-empfaenger-replyto-name-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-empfaenger-replyto-name-info}</small>
+                </td>
+              </tr>
+            </table>
+            <!-- <h3>{konfig-subject-legend}</h3> -->
+            <br />
+            <table summary="{konfig-subject-legend}">
+              <tr>
+                <td class="col1">{konfig-subject-label}:</td>
+                <td colspan="2">
+                  <input name="subject" id="subject" value="{konfig-subject-value}" class="inputfeld width670" />
+                  <small>{konfig-subject-info}</small>
+                </td>
+              </tr>
+            </table>
+            <!-- <h3>{konfig-contenttype-legend}</h3> -->
+            <br />
+            <table summary="{konfig-contenttype-legend}">
+              <tr>
+                <td class="col1">{konfig-contenttype-label}:</td>
+                <td class="col2">
+                  <input type="radio" name="contenttype" id="contenttype-text" value="text" {konfig-contenttype-text-checked} />
+                  <label for="contenttype-text">{konfig-contenttype-text-label}</label><br />
+                  <input type="radio" name="contenttype" id="contenttype-html" value="html" {konfig-contenttype-html-checked} />
+                  <label for="contenttype-html">{konfig-contenttype-html-label}</label><br />
+                  <input type="radio" name="contenttype" id="contenttype-both" value="both" {konfig-contenttype-both-checked} />
+                  <label for="contenttype-both">{konfig-contenttype-both-label}</label>
+                </td>
+                <td class="col3">
+                  <small>{konfig-contenttype-info}</small>
+                </td>
+              </tr>
+            </table>
+            <!-- <h3>{konfig-iplock-legend}</h3> -->
+            <br />
+            <table summary="{konfig-iplock-legend}">
+              <tr>
+                <td class="col1">{konfig-iplock-label}:</td>
+                <td colspan="2">
+                  <input name="iplock" id="iplock" type="checkbox" value="on" {konfig-iplock-checked} class="checkbox" /> <small>{konfig-iplock-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-locktime-label}:</td>
+                <td class="col2">
+                  <input name="locktime" id="locktime" value="{konfig-locktime-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-locktime-info}</small>
+                </td>
+              </tr>
+            </table>
+
+            <br />
+            <!-- <h3>{konfig-errormessage-legend}</h3>-->
+            <table summary="{konfig-errormessage-legend}">
+              <tr>
+                <td class="col1">{konfig-errormessage-label}:</td>
+                <td class="col2">
+                  <input type="radio" name="func_errormessage" id="errormessage-all" value="all" {konfig-errormessage-all-checked} />
+                  <label for="errormessage-all">{konfig-errormessage-all-label}</label><br />
+                  <input type="radio" name="func_errormessage" id="errormessage-master" value="master" {konfig-errormessage-master-checked} />
+                  <label for="func_errormessage">{konfig-errormessage-master-label}</label>
+                </td>
+                <td class="col3">
+                  <small>{konfig-errormessage-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-mastererrormessage-label}:</td>
+                <td colspan="2">
+                  <input name="mastererrormessage" id="mastererrormessage" value="{konfig-mastererrormessage-value}" class="inputfeld width670" />
+                  <small>{konfig-mastererrormessage-info}</small>
+                </td>
+              </tr>
+            </table>
+
+            <br />
+            <!-- <h3>{konfig-htmls-legend}</h3>-->
+            <table summary="{konfig-htmls-legend}">
+              <tr>
+                <td class="col1">{konfig-htmls-label}:</td>
+                <td colspan="2">
+                  <input name="htmls" id="htmls" value="{konfig-htmls-value-tags}" class="inputfeld width670" />
+                  <small>{konfig-htmls-info}</small>
+                </td>
+              </tr>
+            </table>
+            
+            <br />
+            <!-- <h3>{konfig-thxmessage-legend}</h3>-->
+            <table summary="{konfig-thxmessage-legend}">
+              <tr>
+                <td class="col1">
+                  <label for="thxmessage">{konfig-thxmessage-label}:</label>
+                </td>
+                <td colspan="2">
+                  <textarea name="thxmessage" id="thxmessage" class="inputfeld width670" rows="8">{konfig-thxmessage-value}</textarea>
+                  <small>{konfig-thxmessage-info}</small>
+                </td>
+              </tr>              
+            </table>
+            
+            <br />
+            <!-- <h3>{konfig-autoresponder-legend}</h3>-->
+            <table summary="{konfig-autoresponder-legend}">
+              <tr>
+                <td class="col1">
+                  <label for="autoresponder">{konfig-autoresponder-label}:</label>
+                </td>
+                <td colspan="2">
+                  <small><input name="autoresponder" id="autoresponder" type="checkbox" value="on" {konfig-autoresponder-checked} /> {konfig-autoresponder-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">
+                  <label for="autoresponderbetreff">{konfig-autoresponderbetreff-label}:</label>
+                </td>
+                <td colspan="2">
+                  <input name="autoresponderbetreff" id="autoresponderbetreff" value="{konfig-autoresponderbetreff-value}" class="inputfeld width670" />
+                  <small>{konfig-autoresponderbetreff-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">
+                  <label for="autorespondermessage">{konfig-autorespondermessage-label}:</label>
+                </td>
+                <td colspan="2">
+                  <textarea name="autorespondermessage" id="autorespondermessage" class="inputfeld width670" rows="8">{konfig-autorespondermessage-value}</textarea>
+                  <small>{konfig-autorespondermessage-info}</small>
+                </td>
+              </tr>              
+            </table>
+          </div>
+        </fieldset>
+        
+        <h3 class="boxhead">{konfig-special-legend}</h3>
+        <p>{konfig-special-info}</p>
+        <fieldset>
+          <legend>{konfig-special-legend}</legend>
+          <div class="feld">
+            <table summary="{konfig-main-legend}">
+              <tr>
+                <td class="col1">{konfig-special-email-absender}:</td>
+                <td class="col2">
+                  <input name="specialemailabsender" id="specialemailabsender" value="{konfig-special-email-absender-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-special-email-absender-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1">{konfig-special-name-absender}:</td>
+                <td class="col2">
+                  <input name="specialnameabsender" id="specialnameabsender" value="{konfig-special-name-absender-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{konfig-special-name-absender-info}</small>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </fieldset>
+        
+        <p class="buttons">
+          <input value="config" name="do" type="hidden" />
+          <input value="{konfig-button-save}" name="submit-konfig-save" class="b4yf_button" type="submit" />
+        </p>
+      </form>
+    </div>
+  </div>
+<!-- End: Config -->
+
+
+
+<!-- Start: Spezials -->
+  <a name="Spezials"></a>
+  <div class="block">
+    <h2>{spezials-h2}</h2>
+    {spezials-message}
+    <div id="config">
+      <form action="index.php#Spezials" enctype="multipart/form-data" method="post">
+        <a name="Empfaengerauswahl"></a>
+        <h3 class="boxhead">{spezials-title-empfaengerauswahl}</h3>
+        <fieldset>
+          <legend>{spezials-title-empfaengerauswahl}</legend>
+          <div class="feld">
+            <table summary="{spezials-title-empfaengerauswahl}">
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-name01">{spezials-empfaenger-name01-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-name01" id="empfaengerauswahl-name01" value="{spezials-empfaenger-name01-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-name01-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-mail01">{spezials-empfaenger-mail01-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-mail01" id="empfaengerauswahl-mail01" value="{spezials-empfaenger-mail01-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-mail01-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-name02">{spezials-empfaenger-name02-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-name02" id="empfaengerauswahl-name02" value="{spezials-empfaenger-name02-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-name02-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-mail02">{spezials-empfaenger-mail02-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-mail02" id="empfaengerauswahl-mail02" value="{spezials-empfaenger-mail02-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-mail02-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-name03">{spezials-empfaenger-name03-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-name03" id="empfaengerauswahl-name03" value="{spezials-empfaenger-name03-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-name03-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-mail03">{spezials-empfaenger-mail03-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-mail03" id="empfaengerauswahl-mail03" value="{spezials-empfaenger-mail03-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-mail03-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-name04">{spezials-empfaenger-name04-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-name04" id="empfaengerauswahl-name04" value="{spezials-empfaenger-name04-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-name04-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-mail04">{spezials-empfaenger-mail04-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-mail04" id="empfaengerauswahl-mail04" value="{spezials-empfaenger-mail04-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-mail04-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-name05">{spezials-empfaenger-name05-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-name05" id="empfaengerauswahl-name05" value="{spezials-empfaenger-name05-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-name05-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-mail05">{spezials-empfaenger-mail05-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-mail05" id="empfaengerauswahl-mail05" value="{spezials-empfaenger-mail05-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-mail05-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-name06">{spezials-empfaenger-name06-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-name06" id="empfaengerauswahl-name06" value="{spezials-empfaenger-name06-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-name06-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-mail06">{spezials-empfaenger-mail06-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-mail06" id="empfaengerauswahl-mail06" value="{spezials-empfaenger-mail06-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-mail06-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-name07">{spezials-empfaenger-name07-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-name07" id="empfaengerauswahl-name07" value="{spezials-empfaenger-name07-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-name07-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-mail07">{spezials-empfaenger-mail07-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-mail07" id="empfaengerauswahl-mail07" value="{spezials-empfaenger-mail07-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-mail07-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-name08">{spezials-empfaenger-name08-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-name08" id="empfaengerauswahl-name08" value="{spezials-empfaenger-name08-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-name08-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-mail08">{spezials-empfaenger-mail08-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-mail08" id="empfaengerauswahl-mail08" value="{spezials-empfaenger-mail08-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-mail08-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-name09">{spezials-empfaenger-name09-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-name09" id="empfaengerauswahl-name09" value="{spezials-empfaenger-name09-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-name09-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-mail09">{spezials-empfaenger-mail09-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-mail09" id="empfaengerauswahl-mail09" value="{spezials-empfaenger-mail09-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-mail09-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-name10">{spezials-empfaenger-name10-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-name10" id="empfaengerauswahl-name10" value="{spezials-empfaenger-name10-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-name10-info}</small>
+                </td>
+              </tr>
+              <tr>
+                <td class="col1"><label for="empfaengerauswahl-mail10">{spezials-empfaenger-mail10-label}:</label></td>
+                <td class="col2">
+                  <input name="empfaengerauswahl-mail10" id="empfaengerauswahl-mail10" value="{spezials-empfaenger-mail10-value}" class="inputfeld" />
+                </td>
+                <td class="col3">
+                  <small>{spezials-empfaenger-mail10-info}</small>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </fieldset>
+        <p class="buttons">
+          <input value="spezials" name="do" type="hidden" />
+          <input value="{spezials-button-save}" name="submit" class="b4yf_button" type="submit" />
+        </p>
+      </form>
+    </div>
+  </div>
+<!-- End: Spezials -->
+
+
+
+<!-- Start: MakeFormfields -->
+
+<!-- End: MakeFormfields -->
+
+
+
+<!-- Start: Templates -->
+  <div class="block">
+    <h2>{templates-h2}</h2>
+    <h3 class="boxhead">{templates-title}</h3>
+    <div class="information feld">
+      {templates-output}
+      <div class="clear"></div>
+      <div class="links">
+        <a href="http://www.phpcontact.net/de/template-galerie.html">{templates-galerie-link}</a>
+      </div>
+    </div>
+  </div>
+<!-- End: Templates -->
+
+
+
+<!-- Start: Templates Single -->
+  <div class="thumbnail_block">
+    {templates-single-thumbnail}
+    <h4>{templates-single-head}</h4>
+    {templates-single-button-konfig} | {templates-single-button-preview}
+  </div>
+<!-- End: Templates Single -->
+
+
+
+<!-- Start: Template -->
+  <div class="block">
+  <h2>{template-h2}</h2>
+    <h3 class="boxhead">{template-title}</h3>
+    {template-standardformular}
+    <div class="information feld">
+      <div>
+      <!-- <a href="../index.php?b4yf_va_template={template-name}" target="_blank"> -->{template-thumbnail} <!-- </a> -->
+      <table class="templateinfo" summary="{template-title}">
+        <tr>
+          <td class="col1">{template-label-name}:</td>
+          <td>{template-name}</td>
+        </tr>
+        <tr>
+          <td class="col1">{template-label-version}:</td>
+          <td>{template-version}</td>
+        </tr>
+        <tr>
+          <td class="col1">{template-label-datum}:</td>
+          <td>{template-datum}</td>
+        </tr>
+        <tr>
+          <td class="col1">{template-label-type}:</td>
+          <td>{template-type}</td>
+        </tr>
+        <tr>
+          <td class="col1">{template-label-package}:</td>
+          <td>{template-package}</td>
+        </tr>
+        <tr>
+          <td class="col1">{template-label-language}:</td>
+          <td>{template-language}</td>
+        </tr>
+        <tr>
+          <td class="col1">{template-label-charset}:</td>
+          <td>{template-charset}</td>
+        </tr>
+        <tr>
+          <td class="col1">{template-label-autor}:</td>
+          <td>{template-autor}</td>
+        </tr>
+        <tr>
+          <td class="col1">{template-label-web}:</td>
+          <td><a href="http://{template-web}" target="_blank">{template-web}</a></td>
+        </tr>
+      </table>
+      </div>
+      <div class="clear"></div>
+      <div class="links">
+        <a href="../index.php?b4yf_va_template={template-name}&amp;b4yf_va_work=self" target="_blank">{template-preview-link}</a>
+      </div>
+    </div>
+    
+    <a name="KonfigForm"></a>
+    <h3 class="boxhead">{template-konfig-title}</h3>
+    {template-konfig-info}
+    <br />
+    <div class="information feld">
+      {template-konfig}
+      <div class="clear"></div>
+    </div>
+
+    <a name="ParamsForm"></a>
+    <h3 class="boxhead">{template-params-title}</h3>
+    {template-params-info}
+    <br />
+    <div class="information feld">
+      {template-params}
+      <div class="clear"></div>
+    </div>
+
+    <a name="SpezialsForm"></a>
+    <h3 class="boxhead">{template-spezials-title}</h3>
+    {template-spezials-info}
+    <br />
+    <div class="information feld">
+       {template-spezials}
+      <div class="clear"></div>
+    </div>
+        
+    <h3 class="boxhead">{templates-title-einbaucodes}</h3>
+    <div class="information feld">
+      {templates-output-einbaucodes}
+      <div class="clear"></div>
+    </div>
+    
+  </div>
+<!-- End: Template -->
+
+
+
+<!-- Start: Template Params Tabelle -->
+<form action="index.php?do=template&amp;temp={template-params-templatename}#ParamsForm" enctype="multipart/form-data" method="post">
+  <table summary="Parameter Konfiguration">
+  {template-params-tabelle}
+  </table>
+  <p class="buttons">
+    <input name="b4yf_countParams" type="hidden" value="{b4yf_countParams}" />
+    <input value="{template-params-templatename}" name="temp" type="hidden" />
+    <input value="{template-params-button-save}" name="submit" class="b4yf_button" type="submit" />
+    <input value="{template-params-button-original}" name="submit" class="b4yf_button" type="submit" />
+  </p>
+</form>
+<!-- End: Template Params Tabelle -->
+
+
+
+<!-- Start: Template Params Tabelle LOAD -->
+<form action="index.php?do=template&amp;temp={template-params-templatename}#ParamsForm" enctype="multipart/form-data" method="post">
+  {template-params-tabelle-load}
+  {template-params-load-language}
+  <p class="buttons">
+    <input name="b4yf_countParams" type="hidden" value="{b4yf_countParams}" />
+    <input value="{template-params-templatename}" name="temp" type="hidden" />
+    <input value="{template-params-button-back}" name="submit" class="b4yf_button" type="submit" />
+    <input value="{template-params-button-next}" name="submit" class="b4yf_button" type="submit" />
+  </p>
+</form>
+<!-- End: Template Params Tabelle LOAD -->
+
+
+
+<!-- Start: Template Params Tabelle Text -->
+  <tr>
+    <td class="col1"><label for="{template-params-text-id}">{template-params-text-label}</label></td>
+    <td class="col2"><input type="text" name="{template-params-text-id}" id="{template-params-text-id}" value="{template-params-text-value}" class="inputfeld" /></td>
+    <td class="col3">{template-params-text-info}<br /><pre>{template-params-text-name}</pre></td>
+  </tr>
+<!-- End: Template Params Tabelle Text -->
+
+
+
+<!-- Start: Template Params Tabelle Textarea -->
+  <tr>
+    <td class="col1"><label for="{template-params-textarea-id}">{template-params-textarea-label}</label></td>
+    <td class="col2"><textarea name="{template-params-textarea-id}" id="{template-params-textarea-id}" rows="6" class="inputfeld">{template-params-textarea-value}</textarea></td>
+    <td class="col3">{template-params-textarea-info}<br /><pre>{template-params-textarea-name}</pre></td>
+  </tr>
+<!-- End: Template Params Tabelle Textarea -->
+
+
+
+<!-- Start: Template Params Tabelle Checkbox -->
+  <tr>
+    <td class="col1" style="width:50%"><label for="{template-params-checkbox-id}">{template-params-checkbox-label}</label></td>
+    <td class="col2"><input name="{template-params-checkbox-id}" id="{template-params-checkbox-id}" type="checkbox" value="{template-params-checkbox-value}" {template-params-checkbox-checked} /> {template-params-checkbox-info}</td>
+    <td class="col3"><pre>{template-params-checkbox-name}</pre></td>
+  </tr>
+<!-- End: Template Params Tabelle Checkbox -->
+
+
+
+<!-- Start: Template Params Tabelle Felder1 -->
+  <tr>
+    <td class="col1" style="width:50%"><label for="{template-params-checkbox-id}">{template-params-checkbox-label}</label></td>
+    <td class="col2">
+    <input name="{template-params-checkbox-id}" id="{template-params-checkbox-id}" type="checkbox" value="{template-params-checkbox-value}" {template-params-checkbox-checked} /> {template-params-checkbox-info}
+<!-- End: Template Params Tabelle Felder1 -->
+
+<!-- Start: Template Params Tabelle Felder2 -->
+    <input name="{template-params-checkbox-id}" id="{template-params-checkbox-id}" type="checkbox" value="{template-params-checkbox-value}" {template-params-checkbox-checked} /> {template-params-checkbox-info}</td>
+    <td class="col3"><pre>{template-params-checkbox-name}</pre></td>
+  </tr>
+<!-- End: Template Params Tabelle Felder2 -->
+
+
+
+<!-- Start: Template Params Tabelle Select -->
+  <tr>
+    <td class="col1"><label for="{template-params-select-id}">{template-params-select-label}</label></td>
+    <td class="col2">{template-params-select-input}</td>
+    <td class="col3">{template-params-select-info}<br /><pre>{template-params-select-name}</pre></td>
+  </tr>
+<!-- End: Template Params Tabelle Select -->
+
+
+
+<!-- Start: Template Params Tabelle Seperator -->
+  <tr>
+    <td colspan="3" class="th">{template-params-seperator-label}</td>
+  </tr>
+  <tr>
+    <td colspan="3">{template-params-seperator-info}<input name="{template-params-seperator-id}" type="hidden" value="{template-params-seperator-value}" /></td>
+  </tr>
+<!-- End: Template Params Tabelle Seperator -->
+
+
+
+<!-- Start: Template Params Tabelle Color -->
+  <tr>
+    <td class="col1"><label for="{template-params-color-id}">{template-params-color-label}</label></td>
+    <td class="col2"><input type="text" name="{template-params-color-id}" id="{template-params-color-id}" value="{template-params-color-value}" class="inputfeld color {hash:true,adjust:false}" /></td>
+    <td class="col3">{template-params-color-info}<br /><pre>{template-params-color-name}</pre></td>
+  </tr>
+<!-- End: Template Params Tabelle Color -->
+
+
+
+<!-- Start: Template Params Tabelle Select-FILE -->
+  <tr>
+    <td class="col1"><label for="{template-params-selectfile-id}">{template-params-selectfile-label}</label></td>
+    <td class="col2">{template-params-selectfile-input}</td>
+    <td class="col3">{template-params-selectfile-info}<br /><pre>{template-params-selectfile-name}</pre></td>
+  </tr>
+<!-- End: Template Params Tabelle Select-FILE -->
+
+
+
+<!-- Start: Template Params Tabelle Select-DIR -->
+  <tr>
+    <td class="col1"><label for="{template-params-selectdir-id}">{template-params-selectdir-label}</label></td>
+    <td class="col2">{template-params-selectdir-input}</td>
+    <td class="col3">{template-params-selectdir-info}<br /><pre>{template-params-selectdir-name}</pre></td>
+  </tr>
+<!-- End: Template Params Tabelle Select-DIR -->
+
+
+
+<!-- Start: Template Config-Preview -->
+  <table summary="{template-preview-legend-empfaenger}">  
+    <tr>
+      <td class="col1">{konfig-testmodus-label}:</td>
+      <td>{template-preview-value-testmodus}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-work-label}:</td>
+      <td>{template-preview-value-work}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-empfaenger-mail-label}:</td>
+      <td>{konfig-empfaenger-mail-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-empfaenger-name-label}:</td>
+      <td>{konfig-empfaenger-name-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-empfaenger-blindcopy-mail-label}:</td>
+      <td>{konfig-empfaenger-blindcopy-mail-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-empfaenger-blindcopy-name-label}:</td>
+      <td>{konfig-empfaenger-blindcopy-name-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-empfaenger-replyto-mail-label}:</td>
+      <td>{konfig-empfaenger-replyto-mail-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-empfaenger-replyto-name-label}:</td>
+      <td>{konfig-empfaenger-replyto-name-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-subject-label}:</td>
+      <td>{konfig-subject-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-contenttype-label}:</td>
+      <td>{template-preview-value-contenttype}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-iplock-label}:</td>
+      <td>{template-preview-value-iplock}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-locktime-label}:</td>
+      <td>{konfig-locktime-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-errormessage-label}:</td>
+      <td>{template-preview-value-errormessage-type}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-mastererrormessage-label}:</td>
+       <td>{konfig-mastererrormessage-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-htmls-label}:</td>
+       <td>{konfig-htmls-value-tags}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-thxmessage-label}:</td>
+       <td>{konfig-thxmessage-value-tags}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-autoresponder-label}:</td>
+       <td>{template-autoresponder-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-autoresponderbetreff-label}:</td>
+       <td>{konfig-autoresponderbetreff-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-autorespondermessage-label}:</td>
+       <td>{konfig-autorespondermessage-value-tags}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-special-email-absender}:</td>
+       <td>{konfig-special-email-absender-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{konfig-special-name-absender}:</td>
+       <td>{konfig-special-name-absender-value}</td>
+    </tr>
+  </table>
+  <br />
+  <form action="index.php#KonfigForm" enctype="multipart/form-data" method="post">
+    <p><strong>{template-konfig-global-konfig-info}</strong><br /><br /></p>
+    <p class="buttons">
+      <input value="template" name="do" type="hidden" />
+      <input value="{template-konfig-templatename}" name="temp" type="hidden" />
+      <input value="{template-konfig-button-edit-global-konfig}" class="b4yf_button" type="button" onclick="location.href='{konfig-url-value}admin/index.php?do=config#Formulare'" />
+      <input value="{template-konfig-button-make-own-konfig}" name="submit" class="b4yf_button" type="submit" />
+    </p>
+  </form>
+<!-- End: Template Config-Preview -->
+
+
+
+<!-- Start: Template Config-Form -->
+  <form action="index.php#KonfigForm" enctype="multipart/form-data" method="post">
+  <p><strong>{template-konfig-own-konfig-info}</strong><br /><br /></p>
+    <fieldset>
+      <legend>{template-konfig-formular-legend}</legend>
+        <table summary="{template-konfig-formular-legend}">
+          <tr>
+            <td class="col1">
+              {konfig-testmodus-label}:
+            </td>
+            <td colspan="2">
+              <input name="template-testmodus" id="template-testmodus" type="checkbox" value="on" {template-konfig-testmodus-checked} /> <label for="template-testmodus"><small>{konfig-testmodus-info}</small></label>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1">{konfig-work-label}:</td>
+            <td class="col2">
+              <input type="radio" name="template-work" id="template-work-self" value="self" {template-konfig-work-self-checked} /><label for="template-work-self">{konfig-work-self-label}</label><br />
+              <input type="radio" name="template-work" id="template-work-include" value="include" {template-konfig-work-include-checked} /><label for="template-work-include">{konfig-work-include-label}</label>
+            </td>
+            <td class="col3">
+              <small>{konfig-work-info}</small>
+            </td>
+          </tr>
+        </table>
+        <br />
+        <table summary="{template-konfig-empfaenger-legend}">
+          <tr>
+            <td class="col1">{konfig-empfaenger-mail-label}:</td>
+            <td class="col2">
+              <input name="template-empfaenger-mail" id="template-empfaenger_mail" value="{template-konfig-empfaenger-mail-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+               <small>{konfig-empfaenger-mail-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1">{konfig-empfaenger-name-label}:</td>
+            <td class="col2">
+              <input name="template-empfaenger-name" id="template-empfaenge-name" value="{template-konfig-empfaenger-name-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{konfig-empfaenger-name-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1">{konfig-empfaenger-blindcopy-mail-label}:</td>
+            <td class="col2">
+              <input name="template-empfaenger-blindcopy-mail" id="template-empfaenger-blindcopy-mail" value="{template-konfig-empfaenger-blindcopy-mail-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{konfig-empfaenger-blindcopy-mail-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1">{konfig-empfaenger-blindcopy-name-label}:</td>
+            <td class="col2">
+              <input name="template-empfaenger-blindcopy-name" id="template-empfaenger-blindcopy-name" value="{template-konfig-empfaenger-blindcopy-name-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{konfig-empfaenger-blindcopy-name-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1">{konfig-empfaenger-replyto-mail-label}:</td>
+            <td class="col2">
+              <input name="template-empfaenger-replyto-mail" id="template-empfaenger-replyto-mail" value="{template-konfig-empfaenger-replyto-mail-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{konfig-empfaenger-replyto-mail-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1">{konfig-empfaenger-replyto-name-label}:</td>
+            <td class="col2">
+              <input name="template-empfaenger-replyto-name" id="template-empfaenger-replyto-name" value="{template-konfig-empfaenger-replyto-name-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{konfig-empfaenger-replyto-name-info}</small>
+            </td>
+          </tr>
+        </table>
+        <br />
+        <table summary="{template-konfig-subject-legend}">
+          <tr>
+            <td class="col1">{konfig-subject-label}:</td>
+            <td colspan="2">
+              <input name="template-subject" id="template-subject" value="{template-konfig-subject-value}" class="inputfeld width670" />
+              <small>{konfig-subject-info}</small>
+            </td>
+          </tr>
+        </table>
+        <br />
+        <table summary="{template-konfig-contenttype-legend}">
+          <tr>
+            <td class="col1">{konfig-contenttype-label}:</td>
+            <td class="col2">
+              <input type="radio" name="template-contenttype" id="template-contenttype-text" value="text" {template-konfig-contenttype-text-checked} />
+              <label for="template-contenttype-text">{konfig-contenttype-text-label}</label><br />
+              <input type="radio" name="template-contenttype" id="template-contenttype-html" value="html" {template-konfig-contenttype-html-checked} />
+              <label for="template-contenttype-html">{konfig-contenttype-html-label}</label><br />
+              <input type="radio" name="template-contenttype" id="template-contenttype-both" value="both" {template-konfig-contenttype-both-checked} />
+              <label for="template-contenttype-both">{konfig-contenttype-both-label}</label>
+            </td>
+            <td class="col3">
+              <small>{konfig-contenttype-info}</small>
+            </td>
+          </tr>
+        </table>
+        <br />
+        <table summary="{template-konfig-iplock-legend}">
+          <tr>
+            <td class="col1">{konfig-iplock-label}:</td>
+            <td colspan="2">
+              <input name="template-iplock" id="template-iplock" type="checkbox" value="on" {template-konfig-iplock-checked} class="checkbox" /> <label for="template-iplock"><small>{konfig-iplock-info}</small></label>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1">{konfig-locktime-label}:</td>
+            <td class="col2">
+              <input name="template-locktime" id="template-locktime" value="{template-konfig-locktime-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{konfig-locktime-info}</small>
+            </td>
+          </tr>
+        </table>
+        <br />
+        <table summary="{template-konfig-errormessage-legend}">
+          <tr>
+            <td class="col1">{konfig-errormessage-label}:</td>
+            <td class="col2">
+              <input type="radio" name="template-func_errormessage" id="template-errormessage-all" value="all" {template-konfig-errormessage-all-checked} />
+              <label for="template-errormessage-all">{konfig-errormessage-all-label}</label><br />
+              <input type="radio" name="template-func_errormessage" id="template-errormessage-master" value="master" {template-konfig-errormessage-master-checked} />
+              <label for="template-errormessage-master">{konfig-errormessage-master-label}</label>
+            </td>
+            <td class="col3">
+              <small>{konfig-errormessage-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1">{konfig-mastererrormessage-label}:</td>
+            <td colspan="2">
+              <input name="template-mastererrormessage" id="template-mastererrormessage" value="{template-konfig-mastererrormessage-value}" class="inputfeld width670" />
+              <small>{konfig-mastererrormessage-info}</small>
+            </td>
+          </tr>
+        </table>
+        <br />
+        <table summary="{konfig-htmls-legend}">
+          <tr>
+            <td class="col1">{konfig-htmls-label}:</td>
+            <td colspan="2">
+              <input name="template-htmls" id="template-htmls" value="{konfig-htmls-value}" class="inputfeld width670" />
+              <small>{konfig-htmls-info}</small>
+            </td>
+          </tr>
+        </table>
+        <br />
+        <table summary="{konfig-thxmessage-legend}">
+          <tr>
+            <td class="col1">
+              <label for="thxmessage">{konfig-thxmessage-label}:</label>
+              </td>
+              <td colspan="2">
+              <textarea name="template-thxmessage" id="template-thxmessage" class="inputfeld width670" rows="8">{konfig-thxmessage-value}</textarea>
+              <small>{konfig-thxmessage-info}</small>
+            </td>
+          </tr>              
+        </table>
+        <br />
+        <table summary="{konfig-autoresponder-legend}">
+          <tr>
+            <td class="col1">
+              <label for="autoresponder">{konfig-autoresponder-label}:</label>
+            </td>
+            <td colspan="2">
+              <small><input name="template-autoresponder" id="template-autoresponder" type="checkbox" value="on" {template-konfig-autoresponder-checked} /> {konfig-autoresponder-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1">
+              <label for="autoresponderbetreff">{konfig-autoresponderbetreff-label}:</label>
+            </td>
+            <td colspan="2">
+              <input name="template-autoresponderbetreff" id="template-autoresponderbetreff" value="{konfig-autoresponderbetreff-value}" class="inputfeld width670" />
+              <small>{konfig-autoresponderbetreff-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1">
+              <label for="autorespondermessage">{konfig-autorespondermessage-label}:</label>
+            </td>
+            <td colspan="2">
+              <textarea name="template-autorespondermessage" id="template-autorespondermessage" class="inputfeld width670" rows="8">{konfig-autorespondermessage-value}</textarea>
+              <small>{konfig-autorespondermessage-info}</small>
+            </td>
+          </tr>
+        </table>
+    </fieldset>
+    
+    <h3 class="boxhead">{konfig-special-legend}</h3>
+    <p>{konfig-special-info}</p>
+    <fieldset>
+      <legend>{konfig-special-legend}</legend>
+      <table summary="{konfig-main-legend}">
+        <tr>
+          <td class="col1">{konfig-special-email-absender}:</td>
+          <td class="col2">
+            <input name="specialemailabsender" id="specialemailabsender" value="{konfig-special-email-absender-value}" class="inputfeld" />
+          </td>
+          <td class="col3">
+            <small>{konfig-special-email-absender-info}</small>
+          </td>
+        </tr>
+        <tr>
+          <td class="col1">{konfig-special-name-absender}:</td>
+          <td class="col2">
+            <input name="specialnameabsender" id="specialnameabsender" value="{konfig-special-name-absender-value}" class="inputfeld" />
+          </td>
+          <td class="col3">
+            <small>{konfig-special-name-absender-info}</small>
+          </td>
+        </tr>
+      </table>
+    </fieldset>
+ 
+    <p class="buttons">
+      <input value="template" name="do" type="hidden" />
+      <input value="{template-konfig-templatename}" name="temp" type="hidden" />
+      <input value="{template-konfig-button-save}" name="submit" class="b4yf_button" type="submit" />
+    </p>
+  </form>
+<!-- End: Template Config-Form -->
+
+
+
+<!-- Start: Template Spezials-Form -->
+  {spezials-message}
+  <div id="config">
+    <form action="index.php#SpezialsForm" enctype="multipart/form-data" method="post">
+      <p><strong>{template-konfig-own-spezials-info}</strong><br /><br /></p>
+      <h4 class="boxhead">{spezials-title-empfaengerauswahl}</h4>
+      <fieldset>
+        <legend>{spezials-title-empfaengerauswahl}</legend>
+        <table summary="{spezials-title-empfaengerauswahl}">
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-name01">{spezials-empfaenger-name01-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-name01" id="empfaengerauswahl-name01" value="{spezials-empfaenger-name01-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-name01-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-mail01">{spezials-empfaenger-mail01-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-mail01" id="empfaengerauswahl-mail01" value="{spezials-empfaenger-mail01-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-mail01-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-name02">{spezials-empfaenger-name02-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-name02" id="empfaengerauswahl-name02" value="{spezials-empfaenger-name02-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-name02-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-mail02">{spezials-empfaenger-mail02-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-mail02" id="empfaengerauswahl-mail02" value="{spezials-empfaenger-mail02-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-mail02-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-name03">{spezials-empfaenger-name03-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-name03" id="empfaengerauswahl-name03" value="{spezials-empfaenger-name03-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-name03-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-mail03">{spezials-empfaenger-mail03-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-mail03" id="empfaengerauswahl-mail03" value="{spezials-empfaenger-mail03-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-mail03-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-name04">{spezials-empfaenger-name04-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-name04" id="empfaengerauswahl-name04" value="{spezials-empfaenger-name04-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-name04-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-mail04">{spezials-empfaenger-mail04-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-mail04" id="empfaengerauswahl-mail04" value="{spezials-empfaenger-mail04-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-mail04-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-name05">{spezials-empfaenger-name05-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-name05" id="empfaengerauswahl-name05" value="{spezials-empfaenger-name05-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-name05-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-mail05">{spezials-empfaenger-mail05-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-mail05" id="empfaengerauswahl-mail05" value="{spezials-empfaenger-mail05-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-mail05-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-name06">{spezials-empfaenger-name06-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-name06" id="empfaengerauswahl-name06" value="{spezials-empfaenger-name06-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-name06-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-mail06">{spezials-empfaenger-mail06-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-mail06" id="empfaengerauswahl-mail06" value="{spezials-empfaenger-mail06-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-mail06-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-name07">{spezials-empfaenger-name07-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-name07" id="empfaengerauswahl-name07" value="{spezials-empfaenger-name07-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-name07-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-mail07">{spezials-empfaenger-mail07-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-mail07" id="empfaengerauswahl-mail07" value="{spezials-empfaenger-mail07-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-mail07-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-name08">{spezials-empfaenger-name08-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-name08" id="empfaengerauswahl-name08" value="{spezials-empfaenger-name08-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-name08-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-mail08">{spezials-empfaenger-mail08-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-mail08" id="empfaengerauswahl-mail08" value="{spezials-empfaenger-mail08-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-mail08-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-name09">{spezials-empfaenger-name09-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-name09" id="empfaengerauswahl-name09" value="{spezials-empfaenger-name09-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-name09-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-mail09">{spezials-empfaenger-mail09-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-mail09" id="empfaengerauswahl-mail09" value="{spezials-empfaenger-mail09-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-mail09-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-name10">{spezials-empfaenger-name10-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-name10" id="empfaengerauswahl-name10" value="{spezials-empfaenger-name10-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-name10-info}</small>
+            </td>
+          </tr>
+          <tr>
+            <td class="col1"><label for="empfaengerauswahl-mail10">{spezials-empfaenger-mail10-label}:</label></td>
+            <td class="col2">
+              <input name="empfaengerauswahl-mail10" id="empfaengerauswahl-mail10" value="{spezials-empfaenger-mail10-value}" class="inputfeld" />
+            </td>
+            <td class="col3">
+              <small>{spezials-empfaenger-mail10-info}</small>
+            </td>
+          </tr>
+        </table>
+      </fieldset>
+      <p class="buttons">
+        <input value="template" name="do" type="hidden" />
+        <input value="{template-konfig-templatename}" name="temp" type="hidden" />
+        <input value="{template-spezials-button-save}" name="submit" class="b4yf_button" type="submit" />
+      </p>
+    </form>
+  </div>
+<!-- End: Template Spezials-Form -->
+
+
+
+<!-- Start: Template Spezials-Preview -->
+  <h4>{spezials-title-empfaengerauswahl}</h4>
+  <table summary="{template-preview-legend-empfaenger}">  
+    <tr>
+      <td class="col1">{spezials-empfaenger-name01-label}:</td>
+      <td>{spezials-empfaenger-name01-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-mail01-label}:</td>
+      <td>{spezials-empfaenger-mail01-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-name02-label}:</td>
+      <td>{spezials-empfaenger-name02-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-mail02-label}:</td>
+      <td>{spezials-empfaenger-mail02-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-name03-label}:</td>
+      <td>{spezials-empfaenger-name03-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-mail03-label}:</td>
+      <td>{spezials-empfaenger-mail03-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-name04-label}:</td>
+      <td>{spezials-empfaenger-name04-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-mail04-label}:</td>
+      <td>{spezials-empfaenger-mail04-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-name05-label}:</td>
+      <td>{spezials-empfaenger-name05-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-mail05-label}:</td>
+      <td>{spezials-empfaenger-mail05-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-name06-label}:</td>
+      <td>{spezials-empfaenger-name06-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-mail06-label}:</td>
+      <td>{spezials-empfaenger-mail06-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-name07-label}:</td>
+      <td>{spezials-empfaenger-name07-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-mail07-label}:</td>
+      <td>{spezials-empfaenger-mail07-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-name08-label}:</td>
+      <td>{spezials-empfaenger-name08-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-mail08-label}:</td>
+      <td>{spezials-empfaenger-mail08-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-name09-label}:</td>
+      <td>{spezials-empfaenger-name09-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-mail09-label}:</td>
+      <td>{spezials-empfaenger-mail09-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-name10-label}:</td>
+      <td>{spezials-empfaenger-name10-value}</td>
+    </tr>
+    <tr>
+      <td class="col1">{spezials-empfaenger-mail10-label}:</td>
+      <td>{spezials-empfaenger-mail10-value}</td>
+    </tr>
+  </table>
+  <br />
+  <form action="index.php#SpezialsForm" enctype="multipart/form-data" method="post">
+    <p><strong>{template-konfig-global-spezials-info}</strong><br /><br /></p>
+    <p class="buttons">
+      <input value="template" name="do" type="hidden" />
+      <input value="{template-konfig-templatename}" name="temp" type="hidden" />
+      <input value="{template-konfig-button-edit-global-spezials}" class="b4yf_button" type="button" onclick="location.href='{konfig-url-value}admin/index.php?do=spezials#Empfaengerauswahl'" />
+      <input value="{template-konfig-button-make-own-spezials}" name="submit" class="b4yf_button" type="submit" />
+    </p>
+  </form>
+<!-- End: Template Spezials-Preview -->
+
+
+
+<!-- Start: Template Einbaucodes -->
+  <h4>{template-einbaucode-head}</h4>
+  <p>{template-einbaucode-info}</p>
+  {template-einbaucode-code}
+  <p>{template-einbaucode-info2}</p>
+  {template-einbaucode-code2}
+  {template-einbaucode-message}
+  <br />
+  <div class="links">
+    <a href="http://www.phpcontact.net/de/anleitungen/70-einbauvarianten.html">{template-einbaucode_infolink}</a>
+  </div>
+<!-- End: Template Einbaucodes -->
+
+
+
+<!-- Start: System -->
+  <div class="block">
+    <h2>{system-h2}</h2>
+    <h3 class="boxhead">{system-title-softwareinfo}</h3>
+    <div class="information feld">
+      <table summary="{system-title-softwareinfo}">
+        <tr>
+          <td class="col1">{system-label-name}:</td>
+          <td>{system-name}</td>
+        </tr>
+        <tr>
+          <td class="col1">{system-label-version}:</td>
+          <td>{system-version}</td>
+        </tr>
+        <tr>
+          <td class="col1">{system-label-art}:</td>
+          <td>{system-art}</td>
+        </tr>
+        <tr>
+          <td class="col1">{system-label-edited}:</td>
+          <td>{system-edited}</td>
+        </tr>
+      </table>
+      {system-versionscheck-message}
+    </div>
+    <h3 class="boxhead">{system-title-configdatei}</h3>
+    <div class="information feld">
+    <h4>{system-table-allgemein}</h4>
+      <table summary="{system-table-allgemein}">
+        <tr>
+          <th>{system-th-variable}</th>
+          <th>{system-th-wert}</th>
+        </tr>
+        <tr>
+          <td>$b4yf_absolute_path</td>
+          <td>{b4yf_absolute_path}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_url</td>
+          <td>{b4yf_url}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_reloadlogdatei</td>
+          <td>{b4yf_reloadlogdatei}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_captchalogdatei</td>
+          <td>{b4yf_captchalogdatei}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_admin_password</td>
+          <td>{b4yf_admin_password}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_supporter_password</td>
+          <td>{b4yf_supporter_password}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_lizenz</td>
+          <td>{b4yf_lizenz}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_adminlang</td>
+          <td>{b4yf_adminlang}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_admintemplate</td>
+          <td>{b4yf_admintemplate}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_template</td>
+          <td>{b4yf_template}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_specials_absender_mail</td>
+          <td>{b4yf_specials_absender_mail}</td>
+        </tr>
+      </table>
+      <h4>{system-table-formular}</h4>
+      <table summary="{system-table-formular}">
+        <tr>
+          <th>{system-th-variable}</th>
+          <th>{system-th-wert}</th>
+        </tr>
+        <tr>
+          <td>$b4yf_testmodus</td>
+          <td>{b4yf_testmodus}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_work</td>
+          <td>{b4yf_work}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_empfaenger_name</td>
+          <td>{b4yf_empfaenger_name}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_empfaenger_mail</td>
+          <td>{b4yf_empfaenger_mail}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_empfaenger_blindcopy_name</td>
+          <td>{b4yf_empfaenger_blindcopy_name}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_empfaenger_blindcopy_mail</td>
+          <td>{b4yf_empfaenger_blindcopy_mail}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_empfaenger_replyto_name</td>
+          <td>{b4yf_empfaenger_replyto_name}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_empfaenger_replyto_mail</td>
+          <td>{b4yf_empfaenger_replyto_mail}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_betreff</td>
+          <td>{b4yf_betreff}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_contenttype</td>
+          <td>{b4yf_contenttype}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_func_iplock</td>
+          <td>{b4yf_func_iplock}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_zeitlimit</td>
+          <td>{b4yf_zeitlimit}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_func_errormessage</td>
+          <td>{b4yf_func_errormessage}</td>
+        </tr>
+        <tr>
+          <td>$b4yf_mastererrormessage</td>
+          <td>{b4yf_mastererrormessage}</td>
+        </tr>
+      </table>
+    </div>
+    <h3 class="boxhead">{system-title-verzeichnisrechte}</h3>
+    <div class="information feld">
+      <table summary="{system-title-verzeichnisrechte}">
+        <tr>
+          <th>{system-label_dir}</th>
+          <th>{system-label_status}</th>
+        </tr>
+{system-tabelle-verzeichnisrechte}
+      </table>
+    </div>
+    <h3 class="boxhead">{system-title-phpinfo}</h3>
+    <div id="phpinfo" class="information feld">
+      {system-phpinfo}
+    </div>
+  </div>
+<!-- End: System -->
+
+
+
+<!-- Start: Lizenz -->
+  <div class="block">
+    <h2>{lizenz-h2}</h2>
+    <h3 class="boxhead">{lizenz-title}</h3>
+    <div class="information feld">
+      <table summary="{lizenz-title}">  
+        <tr>
+          <td class="col1"><strong>{lizenz-label-domain}:</strong></td>
+          <td>{lizenz-value-domain}</td>
+        </tr>
+        <tr>
+          <td class="col1"><strong>{lizenz-label-user}:</strong></td>
+          <td>{lizenz-value-user}</td>
+        </tr>
+        <tr>
+          <td class="col1"><strong>{lizenz-label-key}:</strong></td>
+          <td>{lizenz-value-key}</td>
+        </tr>
+        <tr>
+          <td class="col1"><strong>{lizenz-label-date}:</strong></td>
+          <td>{lizenz-value-date}</td>
+        </tr>
+      </table>
+      {lizenz-daten-info}
+    </div>
+    <h3 class="boxhead"><br />{lizenz-text-title}</h3>
+    <div class="information pre feld">{lizenz-text}</div>
+    <h3 class="boxhead"><br />{lizenz-online-title}</h3>
+    <div class="feld">
+      {lizenz-online-info}
+      <div class="links">
+        <a href="http://www.phpcontact.net/de/lizenz.html">{lizenz-online-link}</a>
+      </div>
+    </div>
+  </div>
+<!-- End: Lizenz -->
+
+
+
+<!-- Start: Help -->
+  <div class="block">
+    <h2>{help-h2}</h2>
+
+    <h3 class="boxhead">{help-title-step1}</h3>
+    <div class="information feld">
+      <p>{help-info}</p>
+      <div class="links">
+        <a href="http://www.phpcontact.net/de/support" target="_blank">{help-info-link1}</a>
+      </div>
+    </div>
+  </div>
+<!-- End: Help -->
+  <div class="block">
+    <h2>{help-h2}</h2>
+	
+    <div class="notice-message">{help-info}</div>
+	
+    <h3 class="boxhead">{help-title-step1}</h3>
+    <div class="information feld">
+      {help-info-step1}
+      <br />
+      {help-list-manuals}
+      <div class="links">
+        <a href="http://www.phpcontact.net/de/anleitungen.html">{help-info-link1}</a>
+      </div>
+    </div>
+
+    <h3 class="boxhead">{help-title-step2}</h3>
+    <div class="information feld">
+      {help-info-step2}
+      <div class="links">
+        <a href="http://www.phpcontact.net/de/faq.html">{help-info-link2}</a>
+      </div>
+    </div>
+
+    <h3 class="boxhead">{help-title-step3}</h3>
+    <div class="information feld">
+      {help-info-step3}
+      <div class="links">
+	      <a href="http://www.phpcontact.net/de/forum.html">{help-info-link3}</a>
+      </div>
+    </div>
+
+    <h3 class="boxhead">{help-title-step4}</h3>
+    <div class="information feld">
+      {help-info-step4}
+      <div class="links">
+        <a href="http://www.phpcontact.net/de/kontakt-mit-dem-entwickler.html">{help-info-link4}</a>
+      </div>
+    </div>
+
+  </div>

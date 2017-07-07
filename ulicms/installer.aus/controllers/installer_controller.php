@@ -145,7 +145,7 @@ class InstallerController {
 			if (! mysqli_select_db ( $connection, $_SESSION ["mysql_database"] )) {
 				die ( TRANSLATION_CANT_OPEN_SCHEMA );
 			}
-			mysqli_query ( $connection, "SET NAMES 'utf8'" ) or die ( mysqli_error ( $connection ) );
+			mysqli_query ( $connection, "SET NAMES 'utf8mb4'" ) or die ( mysqli_error ( $connection ) );
 			
 			// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 			mysqli_query ( $connection, "SET SESSION sql_mode = '';" );

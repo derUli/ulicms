@@ -1,0 +1,194 @@
+<!--
+/**
+ * @version   v2.5 - 26.05.2013
+ * @package   phpContact 1.3.0 - Template: Dataload
+ * @author    Günther Hörandl <info@phpcontact.net>
+ * @copyright Copyright (c) 2009 - 2013 by Günther Hörandl
+ * @license   http://www.phpcontact.net/license.html, see LICENSE.txt
+ * @link      http://www.phpcontact.net/
+ */
+_____________________________________
+
+WICHTIG: Bitte sorgfälltig lesen!
+
+Dieses Template darf nach folgenden Regeln beliebig geändert werden:
+- Alle Kommentare müssen bestehen bleiben!
+- Zusätzlich hinzugefüge Kommentare werden automatisch herausgelöscht.
+- Der Copyrighthinweis %%COPYRIGHT%% darf NICHT entfernt werden!!!
+  Er muss so gestaltet werden das er im Browser bei der Formularansicht gut sichtbar ist!!!
+  Auf der Homepage www.phpcontact.net ist es möglich eine Lizenz für die Entfernung
+  des sichtbaren Copyrights kauflich zu erwerben.
+
+ ACHTUNG: Charset ist UTF-8 !!!
+-->
+
+
+
+<!-- Start: Header --><?xml version='1.0' encoding='{encoding}'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{XML-lang}">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset={encoding}" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <link rel="stylesheet" href="templates/{template}/css/style.css" type="text/css" />
+  <title>{titel}</title>
+  <!--[if IE 6]>
+  <style type="text/css">
+    img{ behavior: url(templates/{template}/iepngfix/iepngfix.htc) }
+  </style>
+  <![endif]-->
+</head>
+<body>
+{Support}
+<!-- End: Header -->
+
+
+
+
+<!-- Start: Formular -->
+<div id="phpContact">
+<script type="text/javascript">
+  /* <![CDATA[ */
+    var i = 0;
+    var done = 0;
+    var totalSecs = %%TIME-TO-UNLOCK%%;
+    function downCount() {
+      if(totalSecs != null) timerId = setTimeout("downCount()", 1000);
+      if(i < totalSecs) {
+        i += 1;
+        document.getElementById('seconds').innerHTML = totalSecs - i;
+        if(i == totalSecs) {
+          document.getElementById('b4yf_reloadblock').innerHTML = '';
+        }
+      }
+    }
+    function showLoader() {
+      document.getElementById('loader').style.display="block";
+    }
+  /* ]]> */
+</script>
+
+  <h1>%%H1%%</h1>
+  <div class="headertext">%%HEADER%%</div>
+  
+  <form action="#" enctype="multipart/form-data" method="post" class="b4yf_rahmen" onsubmit="showLoader()">
+    {Notice}
+    {Error}
+    <div id="b4yf_reloadblock">{Error-Reload}</div>
+
+    <div id="block1">
+      <h2 class="titel"><span>%%H2_1%%</span></h2>
+      <fieldset class="b4yf_fieldset" id="b4yf_persoenliches">
+        <legend>%%H2_1%%</legend>
+        <p>
+        {feld:1;type:input;name:name;id:name;label:<strong>%%NAME%%</strong>:;value:;class:b4yf_inputfeld;error:%%ERROR_NAME%%}
+        {feld:2;type:input;name:absendermail;id:absender;label:<strong>%%EMAIL%%</strong>:;value:;class:b4yf_inputfeld;error:%%ERROR_EMAIL%%;emailcheck:yes}
+        </p>
+      </fieldset>
+    </div>
+
+    <div id="block2">
+      <h2 class="titel"><span>%%H2_2%%</span></h2>
+      <fieldset class="b4yf_fieldset" id="b4yf_dateien">
+        <legend>%%H2_2%%</legend>
+        <p>
+        {feld:3;type:file;name:anhang1;id:anhang1;label:§§DATEI1§§:;class:b4yf_filefeld;filesize:§§DATEI1_FILESIZE§§;allowed:§§ERROR_DATEI1_FILEALLOWED§§;error:§§ERROR_DATEI1§§;error-filesize:%%ERROR_DATEI1_FILESIZE%%;error-disallowed:%%ERROR_DATEI1_DISSALLOWED%%}
+        {feld:4;type:file;name:anhang2;id:anhang2;label:%%DATEI2%%:;class:b4yf_filefeld;filesize:§§DATEI2_FILESIZE§§;allowed:§§ERROR_DATEI2_FILEALLOWED§§;error-filesize:%%ERROR_DATEI2_FILESIZE%%;error-disallowed:%%ERROR_DATEI2_DISSALLOWED%%}
+        {feld:5;type:file;name:anhang3;id:anhang3;label:%%DATEI3%%:;class:b4yf_filefeld;filesize:§§DATEI2_FILESIZE§§;allowed:§§ERROR_DATEI2_FILEALLOWED§§;error-filesize:%%ERROR_DATEI3_FILESIZE%%;error-disallowed:%%ERROR_DATEI3_DISSALLOWED%%}
+        {feld:6;type:file;name:anhang4;id:anhang4;label:%%DATEI4%%:;class:b4yf_filefeld;filesize:§§DATEI2_FILESIZE§§;allowed:§§ERROR_DATEI2_FILEALLOWED§§;error-filesize:%%ERROR_DATEI4_FILESIZE%%;error-disallowed:%%ERROR_DATEI4_DISSALLOWED%%}
+        {feld:7;type:file;name:anhang5;id:anhang5;label:%%DATEI5%%:;class:b4yf_filefeld;filesize:§§DATEI2_FILESIZE§§;allowed:§§ERROR_DATEI2_FILEALLOWED§§;error-filesize:%%ERROR_DATEI5_FILESIZE%%;error-disallowed:%%ERROR_DATEI5_DISSALLOWED%%}
+        {feld:8;type:file;name:anhang6;id:anhang6;label:%%DATEI6%%:;class:b4yf_filefeld;filesize:§§DATEI2_FILESIZE§§;allowed:§§ERROR_DATEI2_FILEALLOWED§§;error-filesize:%%ERROR_DATEI1_FILESIZE%%;error-disallowed:%%ERROR_DATEI1_DISSALLOWED%%}
+        {feld:9;type:file;name:anhang7;id:anhang7;label:%%DATEI7%%:;class:b4yf_filefeld;filesize:§§DATEI2_FILESIZE§§;allowed:§§ERROR_DATEI2_FILEALLOWED§§;error-filesize:%%ERROR_DATEI2_FILESIZE%%;error-disallowed:%%ERROR_DATEI2_DISSALLOWED%%}
+        {feld:10;type:file;name:anhang8;id:anhang8;label:%%DATEI8%%:;class:b4yf_filefeld;filesize:§§DATEI2_FILESIZE§§;allowed:§§ERROR_DATEI2_FILEALLOWED§§;error-filesize:%%ERROR_DATEI3_FILESIZE%%;error-disallowed:%%ERROR_DATEI3_DISSALLOWED%%}
+        {feld:11;type:file;name:anhang9;id:anhang9;label:%%DATEI9%%:;class:b4yf_filefeld;filesize:§§DATEI2_FILESIZE§§;allowed:§§ERROR_DATEI2_FILEALLOWED§§;error-filesize:%%ERROR_DATEI4_FILESIZE%%;error-disallowed:%%ERROR_DATEI4_DISSALLOWED%%}
+        {feld:12;type:file;name:anhang10;id:anhang10;label:%%DATEI10%%:;class:b4yf_filefeld;filesize:§§DATEI2_FILESIZE§§;§§ERROR_DATEI2_FILEALLOWED§§;error-filesize:%%ERROR_DATEI5_FILESIZE%%;error-disallowed:%%ERROR_DATEI5_DISSALLOWED%%}
+        </p>
+      </fieldset>
+    </div>
+
+    <div id="block3">
+      <h2 class="titel b4yf_%%BLOCK1%%"><span>%%H2_3%%</span></h2>
+      <fieldset class="b4yf_fieldset">
+        <legend>%%H2_3%%</legend>
+        <div class="b4yf_captcha">
+          {feld:13;type:captcha;name:captcha-img;label:;width:100;height:30;color:AAAAAA}<br />
+          {feld:14;type:input;name:captcha-input;id:captcha-input;label:;value:;class:b4yf_inputfeld b4yf_captcha-input;error:%%ERROR_CAPTCHA%%}
+        </div>
+        <div class="b4yf_captcha_info">%%CAPTCHA_INFO%%</div>
+      </fieldset>
+    </div>
+
+    <div class="footertext">%%FOOTER%%</div>
+    
+    <div class="b4yf_align_center">
+      <div id="loader">
+        <img src="{url}/templates/{template}/images/ajax-loader.gif" height="32" width="32" alt="loading" />
+      </div>
+      {feld:15;type:button;name:b4yf_submit;class:b4yf_button;value:%%BUTTON_SENDEN%%;label:submit}
+    </div>
+
+  </form>
+  <p><br /></p>
+  {%%COPYRIGHT%%}
+</div>
+
+<script type="text/javascript">
+  /* <![CDATA[ */
+    downCount(); // erst hier starten, da sonst der IE meckert!
+  /* ]]> */
+</script>
+
+<!-- End: Formular -->
+
+
+
+<!-- Start: Next 1 -->
+<!-- End: Next 1 -->
+
+
+
+<!-- Start: Next 2 -->
+<!-- End: Next 2 -->
+
+
+
+<!-- Start: Next 3 -->
+<!-- End: Next 3 -->
+
+
+
+<!-- Start: Next 4 -->
+<!-- End: Next 4 -->
+
+
+
+<!-- Start: Next 5 -->
+<!-- End: Next 5 -->
+
+
+
+<!-- Start: Vorschau -->
+<!-- End: Vorschau -->
+
+
+
+<!-- Start: THX-Message -->
+<div id="phpContact">
+  <div class="b4yf_rahmen">
+    {erfolgreich-oder-nicht}
+    <div class="titel"><span>Bestätigung</span></div>
+    <fieldset class="b4yf_fieldset">
+      %%ERFOLGSMELDUNG%%
+    </fieldset>
+  </div>
+  {%%COPYRIGHT%%}
+</div>
+<!-- End: THX-Message -->
+
+
+
+<!-- Start: Footer -->
+</body>
+</html>
+<!-- End: Footer -->
