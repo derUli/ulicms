@@ -7,8 +7,6 @@ class Database {
 		if ($replacePrefix) {
 			$cfg = new config ();
 			$sql = str_replace ( "{prefix}", $cfg->db_prefix, $sql );
-			$encoding == "utf8mb4" ? "utf8mb4" : "utf8";
-			$sql = str_replace ( "{db_encoding}", $encoding, $sql );
 		}
 		return mysqli_query ( self::$connection, $sql );
 	}
