@@ -40,10 +40,13 @@ class ConvertToUTF8MB4 extends Controller {
 				unset ( $_SESSION ["current_conversion"] );
 			}
 		}
-		die ();
+		exit ();
 	}
 	protected function showPercent($percent, $table) {
-		echo '<!--ok--><div style="background-color:green;height:50px; width:' . intval ( $percent ) . '%"></div>';
+		if ($percent >= 100) {
+			echo '<!--finish-->';
+		}
+		echo '<div style="background-color:green;height:50px; width:' . intval ( $percent ) . '%"></div>';
 		echo "<div class='info-text-progress'>" . Template::getEscape ( $table ) . "</div>";
 	}
 }
