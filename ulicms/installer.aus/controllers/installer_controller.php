@@ -22,8 +22,7 @@ class InstallerController {
 				"admin_lastname",
 				"admin_firstname",
 				"install_demodata",
-				"add_fk",
-				"db_encoding" 
+				"add_fk" 
 		);
 		foreach ( $vars as $var ) {
 			if (! isset ( $_SESSION [$var] )) {
@@ -42,9 +41,6 @@ class InstallerController {
 						break;
 					case "admin_user" :
 						$_SESSION [$var] = "admin";
-						break;
-					case "db_encoding" :
-						$_SESSION [$var] = "utf8";
 						break;
 				}
 			}
@@ -175,9 +171,7 @@ class InstallerController {
 			$admin_firstname = mysqli_real_escape_string ( $connection, $_SESSION ["admin_firstname"] );
 			$admin_email = mysqli_real_escape_string ( $connection, $_SESSION ["admin_email"] );
 			$salt = mysqli_real_escape_string ( $connection, $_SESSION ["salt"] );
-			$db_encoding = $_SESSION ["db_encoding"] == "utf8mb4" ? "utf8mb4" : "utf8";
 			$script = str_ireplace ( "{prefix}", $prefix, $script );
-			$script = str_replace ( "{db_encoding}", $db_encoding, $script );
 			$script = str_ireplace ( "{language}", $language, $script );
 			$script = str_ireplace ( "{admin_user}", $admin_user, $script );
 			$script = str_ireplace ( "{encrypted_password}", $encrypted_password, $script );
@@ -197,15 +191,12 @@ class InstallerController {
 	}
 	public static function submitCreateConfig() {
 		$template_path = "templates/cms-config.tpl";
-		$db_encoding = $_SESSION ["db_encoding"] == "utf8mb4" ? "utf8mb4" : "utf8";
-		
 		$content = file_get_contents ( $template_path );
 		$content = str_replace ( "{prefix}", $_SESSION ["mysql_prefix"], $content );
 		$content = str_replace ( "{mysql_host}", $_SESSION ["mysql_host"], $content );
 		$content = str_replace ( "{mysql_user}", $_SESSION ["mysql_user"], $content );
 		$content = str_replace ( "{mysql_password}", $_SESSION ["mysql_password"], $content );
 		$content = str_replace ( "{mysql_database}", $_SESSION ["mysql_database"], $content );
-		$content = str_replace ( "{db_encoding}", $db_encoding, $content );
 		$filled_file = "../cms-config.php";
 		
 		if (file_put_contents ( $filled_file, $content )) {
