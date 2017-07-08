@@ -419,11 +419,10 @@ div#google-fonts {
 		?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
-	<script type="text/javascript" src="scripts/design.js">
-</script>
 <?php
 	}
 	?>
+	
 </form>
 <script type="text/javascript">
 $("#designForm").ajaxForm({beforeSubmit: function(e){
@@ -448,6 +447,8 @@ function onChangeDefaultFont(){
 
 $("select#default-font").change(onChangeDefaultFont);
 
+</script>
+<script type="text/javascript" src="scripts/design.js">
 </script>
 <?php
 }
