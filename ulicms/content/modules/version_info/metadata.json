@@ -1,0 +1,10 @@
+{
+	"source" : "extend",
+	"version" : "1.0",
+	"embed" : false,
+	"custom_acl" : ["version_info"],
+	"controllers" : {
+		"VersionInfo" : "VersionInfo.php"
+	},
+	"main_class" : "VersionInfo"
+}
