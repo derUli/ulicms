@@ -38,4 +38,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}content` (
 `image_url` text default null,
 `show_headline` tinyint(1) NOT NULL DEFAULT '1',
 PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT charset=utf8mb4 AUTO_INCREMENT=22 ;

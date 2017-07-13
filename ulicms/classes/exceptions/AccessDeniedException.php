@@ -1,3 +1,3 @@
 <?php
-class AccessDeniedException extends BadMethodCallException {
+class AccessDeniedException extends Exception {
 }
