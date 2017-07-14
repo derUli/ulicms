@@ -21,17 +21,14 @@ class InstallerController {
 				"admin_email",
 				"admin_lastname",
 				"admin_firstname",
-				"install_demodata",
-				"add_fk" 
+				"install_demodata" 
 		);
 		foreach ( $vars as $var ) {
 			if (! isset ( $_SESSION [$var] )) {
 				$_SESSION [$var] = "";
 				switch ($var) {
 					case "install_demodata" :
-					case "add_fk" :
 						$_SESSION [$var] = "yes";
-						break;
 						break;
 					case "mysql_host" :
 						$_SESSION [$var] = "localhost";
@@ -117,10 +114,8 @@ class InstallerController {
 			$files [] = "sql/opt/democontent.min.sql";
 		}
 		
-		if (! empty ( $_SESSION ["add_fk"] )) {
-			foreach ( glob ( "sql/fk/*.sql" ) as $file ) {
-				$files [] = $file;
-			}
+		foreach ( glob ( "sql/fk/*.sql" ) as $file ) {
+			$files [] = $file;
 		}
 		
 		$onefile = 100 / floatval ( count ( $files ) );
@@ -213,11 +208,6 @@ class InstallerController {
 			$_SESSION ["install_demodata"] = "";
 		}
 		
-		if (isset ( $_REQUEST ["add_fk"] )) {
-			$_SESSION ["add_fk"] = "yes";
-		} else {
-			$_SESSION ["add_fk"] = "";
-		}
 		header ( "Location: index.php?step=6" );
 	}
 	public static function SureRemoveDir($dir, $DeleteMe) {

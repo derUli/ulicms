@@ -1,1 +1,1 @@
-CREATE TABLE `{prefix}group_languages` ( `group_id` INT NOT NULL , `language_id` INT NOT NULL );
+CREATE TABLE `{prefix}group_languages` ( `group_id` INT NOT NULL , `language_id` INT NOT NULL ) ENGINE=InnoDB DEFAULT charset=utf8mb4;
