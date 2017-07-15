@@ -260,7 +260,6 @@ define ( "TRANSLATION_REALLY_MAKE_DEFAULT_LANGUAGE", "Really make %name% to the 
 
 // Sonstige Einstellungen
 define ( "TRANSLATION_SHORTCUTS", "Shortcuts" );
-define ( "TRANSLATION_MOVE_MENU_ITEMS", "Move menu entries" );
 define ( "TRANSLATION_DOMAIN2LANGUAGE_MAPPING", "Domain2Language Mapping" );
 define ( "TRANSLATION_ADDITIONAL_META_TAGS", "Additional Metatags" );
 define ( "TRANSLATION_EMAIL_DELIVERY", "E-Mail Delivery" );
@@ -270,10 +269,6 @@ define ( "TRANSLATION_CACHE_VALIDATION_DURATION", "Cache validation duration" );
 define ( "TRANSLATION_CACHE_ENGINE", "Caching Engine" );
 define ( "TRANSLATION_REPLACE_SHORTCUTS", "Replace shortcuts" );
 define ( "TRANSLATION_REPLACE_SHORTCUTS_INFO", "Default shortcuts of your browser will be replace. So you can save a page by pressing ctrl + s for example." );
-
-define ( "TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM", "Move all menu entries from " );
-define ( "TRANSLATION_MOVE_ALL_MENU_ITEMS_TO", "to" );
-
 define ( "TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO", "<p>You can map domains to languages.</p>
 <p>
 The mappings must be in the following format:<br/>
