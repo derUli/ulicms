@@ -7,7 +7,7 @@ class MoveMenuItemsController extends Controller {
 	public function getSettingsLinkText() {
 		return $this->getSettingsHeadline ();
 	}
-	public function _moveEntries($from, $to) {
+	protected function moveEntries($from, $to) {
 		$sql = "update {prefix}content set menu = ? where menu = ?";
 		$args = array (
 				$to,
