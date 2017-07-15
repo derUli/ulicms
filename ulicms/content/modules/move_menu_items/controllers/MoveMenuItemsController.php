@@ -22,6 +22,7 @@ class MoveMenuItemsController extends Controller {
 			$move_to = Request::getVar ( "move_to" );
 			if (StringHelper::isNotNullOrWhitespace ( $move_from ) and StringHelper::isNotNullOrEmpty ( $move_to )) {
 				$this->_moveEntries ( $move_from, $move_to );
+				ViewBag::set ( "affected_rows", Database::getAffectedRows () );
 				ViewBag::set ( "done", true );
 			}
 		}

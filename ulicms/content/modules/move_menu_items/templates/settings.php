@@ -1,7 +1,13 @@
 <?php if(ViewBag::get("done")){?>
 <div class="alert alert-success alert-dismissable fade in">
 	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<?php translate("changes_was_saved")?>
+	<?php
+	$translation = "x_datasets_moved";
+	if (ViewBag::get ( "affected_rows" ) == 1) {
+		$translation = "x_dataset_moved";
+	}
+	?>
+		<?php translate($translation, array("%count%" => ViewBag::get("affected_rows"))); ?>
 		</div>
 <?php }?>
 <form method="post"
