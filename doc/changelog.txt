@@ -42,7 +42,7 @@
 + metadata.json: Alias für "actions" eingeführt "views"
 + REQUEST_METHOD spezifische Controller-Funktionen
 + Link zu der Settings-Seite eines Moduls können nun angepasst werden
-+ Abstrakte Klasse "Model" erweitert
++ Klasse "Model" erweitert
 + Neuer Inhaltstyp "Link zu Sprache"
 + Berechtigungsabfrage für Controller-Funktionsaufrufe eingebaut
 + Neue Hooks hinzugefügt

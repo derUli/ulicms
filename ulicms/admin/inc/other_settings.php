@@ -213,15 +213,12 @@ if (! $acl->hasPermission ( "other" )) {
 		<h2 class="accordion-header">
 		<?php translate("move_menu_items");?>
 		</h2>
-
-
 		<div class="accordion-content">
 			<p>
 			<?php translate("move_all_menu_items_from");?>
 				<select name="move_from" size="1">
 					<option value="-" selected>-</option>
 					<?php
-	
 	foreach ( $menus as $menu ) {
 		?>
 					<option value="<?php echo $menu?>">
