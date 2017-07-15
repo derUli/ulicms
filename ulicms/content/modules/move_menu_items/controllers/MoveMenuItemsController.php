@@ -7,7 +7,7 @@ class MoveMenuItemsController extends Controller {
 	public function getSettingsLinkText() {
 		return $this->getSettingsHeadline ();
 	}
-	protected function moveEntries($from, $to) {
+	private function moveEntries($from, $to) {
 		$sql = "update {prefix}content set menu = ? where menu = ?";
 		$args = array (
 				$to,
@@ -21,7 +21,7 @@ class MoveMenuItemsController extends Controller {
 			$move_from = Request::getVar ( "move_from" );
 			$move_to = Request::getVar ( "move_to" );
 			if (StringHelper::isNotNullOrWhitespace ( $move_from ) and StringHelper::isNotNullOrEmpty ( $move_to )) {
-				$this->_moveEntries ( $move_from, $move_to );
+				$this->moveEntries ( $move_from, $move_to );
 				ViewBag::set ( "affected_rows", Database::getAffectedRows () );
 				ViewBag::set ( "done", true );
 			}
