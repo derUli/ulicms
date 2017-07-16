@@ -97,10 +97,6 @@ if (! $acl->hasPermission ( "other" )) {
 		if (isset ( $_POST ["smtp_password"] )) {
 			setconfig ( "smtp_password", db_escape ( $_POST ["smtp_password"] ) );
 		}
-		
-		if ($_POST ["move_from"] != "-" and $_POST ["move_to"] != "-") {
-			db_query ( "UPDATE " . tbname ( "content" ) . " SET menu='" . db_escape ( $_POST ["move_to"] ) . "' WHERE menu='" . db_escape ( $_POST ["move_from"] ) . "'" );
-		}
 	}
 	
 	$cache_type = Settings::get ( "cache_type" );
@@ -210,41 +206,6 @@ if (! $acl->hasPermission ( "other" )) {
 			</div>
 
 		</div>
-		<h2 class="accordion-header">
-		<?php translate("move_menu_items");?>
-		</h2>
-		<div class="accordion-content">
-			<p>
-			<?php translate("move_all_menu_items_from");?>
-				<select name="move_from" size="1">
-					<option value="-" selected>-</option>
-					<?php
-	foreach ( $menus as $menu ) {
-		?>
-					<option value="<?php echo $menu?>">
-					<?php echo $menu?>
-					</option>
-					<?php
-	}
-	?>
-				</select>
-				<?php translate("move_all_menu_items_to");?>
-				<select name="move_to" size="1">
-					<option value="-" selected>-</option>
-					<?php
-	
-	foreach ( $menus as $menu ) {
-		?>
-					<option value="<?php echo $menu?>">
-					<?php echo $menu?>
-					</option>
-					<?php
-	}
-	?>
-				</select>
-			</p>
-		</div>
-
 		<h2 class="accordion-header">
 		<?php translate("DOMAIN2LANGUAGE_MAPPING");?>
 		</h2>

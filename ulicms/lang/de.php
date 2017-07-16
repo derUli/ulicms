@@ -264,7 +264,6 @@ define ( "TRANSLATION_REALLY_MAKE_DEFAULT_LANGUAGE", "Möchten Sie %name% zur St
 
 // Sonstige Einstellungen
 define ( "TRANSLATION_SHORTCUTS", "Tastenkombinationen" );
-define ( "TRANSLATION_MOVE_MENU_ITEMS", "Menüeinträge verschieben" );
 define ( "TRANSLATION_DOMAIN2LANGUAGE_MAPPING", "Domain2Language Mapping" );
 define ( "TRANSLATION_ADDITIONAL_META_TAGS", "Zusätzliche Metatags" );
 define ( "TRANSLATION_EMAIL_DELIVERY", "E-Mail Versand" );
@@ -274,9 +273,6 @@ define ( "TRANSLATION_CACHE_VALIDATION_DURATION", "Cache Gültigkeitsdauer" );
 define ( "TRANSLATION_CACHE_ENGINE", "Caching Engine" );
 define ( "TRANSLATION_REPLACE_SHORTCUTS", "Shortcuts ersetzen" );
 define ( "TRANSLATION_REPLACE_SHORTCUTS_INFO", "Standard-Tastenkombinationen des Browsers werden ersetzt, so dass Sie z.B. durch Drücken von Strg+S ebenfalls speichern können." );
-
-define ( "TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM", "Verschiebe alle Menüeinträge von" );
-define ( "TRANSLATION_MOVE_ALL_MENU_ITEMS_TO", "nach" );
 
 define ( "TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO", "<p>Hier können Sie Domains auf Sprachen mappen.</p>
 <p>
