@@ -194,7 +194,7 @@
 			$languages = Language::getAllLanguages ();
 			?>
 <select name="link_to_language">
-					<option value=""><?php translate("none");?></option>
+					<option value="">[<?php translate("none");?>]</option>
 <?php foreach($languages as $language){?>
 <option value="<?php Template::escape($language->getID());?>"><?php Template::escape($language->getName());?></option>
 <?php }?>

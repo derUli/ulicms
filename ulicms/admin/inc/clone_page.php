@@ -223,7 +223,7 @@ if (defined ( "_SECURITY" )) {
 			?>
 <select name="link_to_language">
 					<option value=""
-						<?php if(is_null($row->link_to_language)){ echo "selected";}?>><?php translate("none");?></option>
+						<?php if(is_null($row->link_to_language)){ echo "selected";}?>>[<?php translate("none");?>]</option>
 <?php foreach($languages as $language){?>
 <option value="<?php Template::escape($language->getID());?>"
 						<?php if($language->getID() == $row->link_to_language) echo " selected";?>><?php Template::escape($language->getName());?></option>
