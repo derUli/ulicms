@@ -61,6 +61,8 @@
 # Parameter $query von Database::query() und Database::pQuery() in $sql umbenannt
 # uninstall() Methode in main_class wird nun aufgerufen
 # Der "Anzeigen" Button beim Bearbeiten vom Inhaltstyp "Knotenpunkt" wird nicht mehr angezeigt
+# Bugfix "Letzte Änderungen" wenn lastchangeby nicht gesetzt ist, wird nun
+  der Ersteller der Seite als Durchführender der letzten Änderung angezeigt 
 - Funktion "Menüeinträge verschieben" wurde in ein optionales Modul augelagert.
   https://extend.ulicms.de/move_menu_items.html
 
