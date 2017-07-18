@@ -1,9 +1,0 @@
-{
-	"source": "extend",
-	"version": "1.0.0",
-	"embed": false,
-	"controllers": {
-		"UpdateMyBrowser": "UpdateMyBrowser.php"
-	},
-	"main_class": "UpdateMyBrowser"
-}
