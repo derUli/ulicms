@@ -72,7 +72,7 @@ class ContentFactory {
 	}
 	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc", $type = null, $limit = null) {
 		$result = array ();
-		$sql = "select id, `type` from " . tbname ( "content" ) . " where 1=1 and ";
+		$sql = "select id, `type` from " . tbname ( "content" ) . " where active=1 and ";
 		if ($language !== null and $language !== "") {
 			$language = Database::escapeValue ( $language );
 			$sql .= "language = '$language' and ";
