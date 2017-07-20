@@ -63,7 +63,8 @@
 # Der "Anzeigen" Button beim Bearbeiten vom Inhaltstyp "Knotenpunkt" wird nicht mehr angezeigt
 # Bugfix: "Letzte Änderungen" wenn lastchangeby nicht gesetzt ist, wird nun
 # Bugfix: Listen zeigen nun nur noch aktive Datensätze
-  der Ersteller der Seite als Durchführender der letzten Änderung angezeigt 
+  der Ersteller der Seite als Durchführender der letzten Änderung angezeigt
+# Bugfix: Die globale Funktion getAllPages() gab nicht alle Seiten zurück wenn $exclude_hash_links = false ist.
 - Funktion "Menüeinträge verschieben" wurde in ein optionales Modul augelagert.
   https://extend.ulicms.de/move_menu_items.html
 

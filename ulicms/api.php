@@ -1106,7 +1106,7 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
 	}
 	$returnvalues = Array ();
 	while ( $row = db_fetch_assoc ( $query ) ) {
-		if (! ($exclude_hash_links and startsWith ( $row ["redirection"], "#" )) and $row ["type"] != "link" and $row ["type"] != "node" and $row ["type"] != "language_link") {
+		if (! $exclude_hash_links or ($exclude_hash_links and $row ["type"] != "link" and $row ["type"] != "node" and $row ["type"] != "language_link")) {
 			array_push ( $returnvalues, $row );
 		}
 	}
