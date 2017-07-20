@@ -722,5 +722,6 @@ define ( "TRANSLATION_DEFAULT_LANGUAGE", "Standardsprache" );
 define ( "TRANSLATION_LANGUAGE_LINK", "Link zu Sprache" );
 
 define ( "TRANSLATION_BACK", "Zurück" );
+define ( "TRANSLATION_OPEN", "Öffnen" );
 
 add_hook ( "lang_de" );
