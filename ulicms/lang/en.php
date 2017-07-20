@@ -727,4 +727,6 @@ define ( "TRANSLATION_DEFAULT_LANGUAGE", "Default Language" );
 // Link to language
 define ( "TRANSLATION_LANGUAGE_LINK", "Link to Language" );
 
+define ( "TRANSLATION_BACK", "Back" );
+
 add_hook ( "lang_en" );
