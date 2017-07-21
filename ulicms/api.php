@@ -1189,7 +1189,7 @@ function getAllMenus($only_used = false) {
 			"top",
 			"right",
 			"bottom",
-			"none" 
+			"not_in_menu" 
 	);
 	$additional_menus = Settings::get ( "additional_menus" );
 	
@@ -1227,8 +1227,8 @@ function getAllMenus($only_used = false) {
 		$menus = $allThemeMenus;
 	}
 	
-	if (! faster_in_array ( "none", $menus )) {
-		$menus [] = "none";
+	if (! faster_in_array ( "not_in_menu", $menus )) {
+		$menus [] = "not_in_menu";
 	}
 	
 	sort ( $menus );

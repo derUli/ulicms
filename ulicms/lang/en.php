@@ -729,5 +729,6 @@ define ( "TRANSLATION_LANGUAGE_LINK", "Link to Language" );
 
 define ( "TRANSLATION_BACK", "Back" );
 define ( "TRANSLATION_OPEN", "Open" );
+define ( "TRANSLATION_NOT_IN_MENU", "Not in menu" );
 
 add_hook ( "lang_en" );

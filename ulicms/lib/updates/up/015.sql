@@ -1,0 +1,1 @@
+update `{prefix}content` set menu='not_in_menu' where menu='none'

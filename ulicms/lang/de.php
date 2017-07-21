@@ -723,5 +723,6 @@ define ( "TRANSLATION_LANGUAGE_LINK", "Link zu Sprache" );
 
 define ( "TRANSLATION_BACK", "Zurück" );
 define ( "TRANSLATION_OPEN", "Öffnen" );
+define ( "TRANSLATION_NOT_IN_MENU", "Nicht im Menü" );
 
 add_hook ( "lang_de" );
