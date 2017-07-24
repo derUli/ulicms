@@ -731,5 +731,6 @@ define ( "TRANSLATION_BACK", "Back" );
 define ( "TRANSLATION_OPEN", "Open" );
 define ( "TRANSLATION_NOT_IN_MENU", "Not in menu" );
 define ( "TRANSLATION_NEW", "New" );
+define ( "TRANSLATION_CODE_TO_EMBED", "Code to Embed" );
 
 add_hook ( "lang_en" );
