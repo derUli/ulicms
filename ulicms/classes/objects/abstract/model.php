@@ -32,6 +32,6 @@ class Model {
 		$this->id = is_int ( $id ) ? intval ( $id ) : null;
 	}
 	public function getID() {
-		return $id;
+		return $this->id;
 	}
 }
