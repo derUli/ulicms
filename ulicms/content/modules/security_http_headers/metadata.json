@@ -1,0 +1,9 @@
+{
+	"source" : "extend",
+	"embed" : false,
+	"version" : "1.0",
+		"controllers" : {
+		"SecurityHTTPHeaders" : "SecurityHTTPHeaders.php"
+	},
+	"main_class" : "SecurityHTTPHeaders"
+}
