@@ -1,0 +1,22 @@
+{
+	"source": "extend",
+	"embed": false,
+	"version": "0.5",
+	"controllers": {
+		"MetadataViewer": "MetadataViewer.php"
+	},
+	"main_class": "MetadataViewer",
+	"custom_acl": [
+		"metadata_viewer"
+	],
+	"admin_permission": "metadata_viewer",
+	"actions": {
+		"show_metadata": "templates/show.php"
+	},
+	"controller_function_permissions": {
+		"MetadataViewer::show": "metadata_viewer"
+	},
+	"action_controllers": {
+		"show_metadata": "MetadataViewer"
+	}
+}
