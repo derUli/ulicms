@@ -1,2 +1,2 @@
 <?php
-define("TRANSLATION_SHOW_METADATA", "Show Metadata");
+define ( "TRANSLATION_SHOW_METADATA", "Metadaten anzeigen" );

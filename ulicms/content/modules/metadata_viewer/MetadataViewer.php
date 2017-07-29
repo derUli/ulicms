@@ -14,13 +14,13 @@ class MetadataViewer extends Controller {
 		$module = Request::getVar ( "module" );
 		$theme = Request::getVar ( "theme" );
 		if ($module) {
-			$path = ModuleHelper::buildModuleRessourcePath ( $this->moduleName, "metadata.json" );
+			$path = ModuleHelper::buildModuleRessourcePath ( basename ( $this->moduleName ), "metadata.json" );
 			if (file_exists ( $path )) {
 				ViewBag::set ( "title", $module );
 				ViewBag::set ( "content", file_get_contents ( $path ) );
 			}
 		} else if ($theme) {
-			$path = getTemplateDirPath ( $theme ) . "metadata.json";
+			$path = getTemplateDirPath ( basename ( $theme ) ) . "metadata.json";
 			if (file_exists ( $path )) {
 				ViewBag::set ( "title", "theme-" . $theme );
 				ViewBag::set ( "content", file_get_contents ( $path ) );
