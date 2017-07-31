@@ -11,6 +11,11 @@ function uimport($class) {
 	$path = str_replace ( "\\", "/", ULICMS_ROOT ) . "/" . $class . ".php";
 	return include_once $path;
 }
+function idefine($key, $value) {
+	if (! defined ( $key )) {
+		define ( $key, $value );
+	}
+}
 function faster_in_array($needle, $haystack) {
 	$flipped = array_flip ( $haystack );
 	return isset ( $flipped [$needle] );
