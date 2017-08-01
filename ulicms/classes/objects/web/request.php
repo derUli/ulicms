@@ -140,4 +140,17 @@ class Request {
 		
 		return $ip;
 	}
+	public static function isHeaderSent($header) {
+		$headers = headers_list ();
+		$header = trim ( $header, ': ' );
+		$result = false;
+		
+		foreach ( $headers as $hdr ) {
+			if (stripos ( $hdr, $header ) !== false) {
+				$result = true;
+			}
+		}
+		
+		return $result;
+	}
 }
