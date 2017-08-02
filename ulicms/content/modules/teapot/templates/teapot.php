@@ -5,7 +5,7 @@
 	name="viewport">
 <title>Error 418 (I’m a teapot)!?</title>
 <link href="//www.gstatic.com/teapot/teapot.min.css" rel="stylesheet">
-<h2><?php get_homepage_title();?></h2>
+<h2><?php homepage_title();?></h2>
 <p>
 	<b>418.</b>
 	<ins>I’m a teapot.</ins>
