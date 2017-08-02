@@ -21,6 +21,9 @@ if (function_exists ( 'lcfirst' ) === false) {
 		return $str;
 	}
 }
+function getStringLengthInBytes($data) {
+	return ini_get ( 'mbstring.func_overload' ) ? mb_strlen ( $data, '8bit' ) : strlen ( $data );
+}
 
 // sind wir gerade im Adminordner?
 function is_admin_dir() {
@@ -850,7 +853,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	} // Backend Directory
+	}  // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
