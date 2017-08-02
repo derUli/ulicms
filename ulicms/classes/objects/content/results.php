@@ -17,3 +17,19 @@ function RawJSONResult($data, $status = 200) {
 	echo $data;
 	exit ();
 }
+function HTMLResult($data, $status = 200) {
+	header ( "HTTP/1.0 " . Request::getStatusCodeByNumber ( $status ) );
+	$size = getStringLengthInBytes ( $data );
+	header ( 'Content-Type: text/html; charset=UTF-8' );
+	header ( "Content-length: $size" );
+	echo $data;
+	exit ();
+}
+function TextResult($data, $status = 200) {
+	header ( "HTTP/1.0 " . Request::getStatusCodeByNumber ( $status ) );
+	$size = getStringLengthInBytes ( $data );
+	header ( 'Content-Type: text/txt' );
+	header ( "Content-length: $size" );
+	echo $data;
+	exit ();
+}
