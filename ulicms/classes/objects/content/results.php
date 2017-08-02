@@ -28,7 +28,7 @@ function HTMLResult($data, $status = 200) {
 function TextResult($data, $status = 200) {
 	header ( "HTTP/1.0 " . Request::getStatusCodeByNumber ( $status ) );
 	$size = getStringLengthInBytes ( $data );
-	header ( 'Content-Type: text/txt' );
+	header ( 'Content-Type: text/plain; charset=utf-8' );
 	header ( "Content-length: $size" );
 	echo $data;
 	exit ();
