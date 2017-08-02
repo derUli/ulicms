@@ -40,6 +40,8 @@
   * idefine($key, $value)
   * JSONResult($data, $status = 200)
   * RawJSONResult($data, $status = 200)
+  * HTMLResult($data, $status = 200)
+  * TextResult($data, $status = 200)
   * getStringLengthInBytes($data)
   * HttpStatusCode Konstanten
 + Attribut $newWindow zu MenuEntry hinzugefügt
