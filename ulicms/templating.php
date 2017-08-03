@@ -347,7 +347,7 @@ function delete_custom_data($var = null, $page = null) {
 		if (isset ( $data [$var] )) {
 			unset ( $data [$var] );
 		}
-	}  // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
+	} // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
 else {
 		$data = array ();
 	}
@@ -388,7 +388,7 @@ function get_category() {
 	return categories::getCategoryById ( $current_page ["category"] );
 }
 function category() {
-	echo get_category ();
+	Template::escapape ( get_category () );
 }
 function get_body_classes() {
 	$str = "page-id-" . get_ID () . " ";

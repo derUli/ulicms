@@ -38,6 +38,12 @@
   * Template::getOgHTMLPrefix()
   * ContentFactory::getAllRegular($order = "id")
   * idefine($key, $value)
+  * JSONResult($data, $status = 200)
+  * RawJSONResult($data, $status = 200)
+  * HTMLResult($data, $status = 200)
+  * TextResult($data, $status = 200)
+  * getStringLengthInBytes($data)
+  * HttpStatusCode Konstanten
 + Attribut $newWindow zu MenuEntry hinzugefügt
 + "Gruppe" in der Benutzerliste verlinkt auf "Gruppe bearbeiten"
 + metadata.json: Attribut "objects" umbenannt in "models"

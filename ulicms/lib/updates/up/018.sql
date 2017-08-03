@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}settings` modify `value` text NOT NULL;
