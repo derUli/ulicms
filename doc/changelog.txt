@@ -44,6 +44,7 @@
   * TextResult($data, $status = 200)
   * HTTPStatusCodeResult($code, $description = null)
   * getStringLengthInBytes($data)
+  * preparePlainTextforHTMLOutput($text)
   * HttpStatusCode Konstanten
 + Attribut $newWindow zu MenuEntry hinzugefügt
 + "Gruppe" in der Benutzerliste verlinkt auf "Gruppe bearbeiten"

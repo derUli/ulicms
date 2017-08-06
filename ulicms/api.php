@@ -1,4 +1,7 @@
 <?php
+function preparePlainTextforHTMLOutput($text) {
+	return nl2br ( htmlspecialchars ( $text ) );
+}
 function get_action() {
 	if (isset ( $_REQUEST ["action"] )) {
 		return $_REQUEST ["action"];
@@ -853,7 +856,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	}  // Backend Directory
+	} // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
