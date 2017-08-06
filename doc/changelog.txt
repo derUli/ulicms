@@ -42,6 +42,7 @@
   * RawJSONResult($data, $status = 200)
   * HTMLResult($data, $status = 200)
   * TextResult($data, $status = 200)
+  * HTTPStatusCodeResult($code, $description = null)
   * getStringLengthInBytes($data)
   * HttpStatusCode Konstanten
 + Attribut $newWindow zu MenuEntry hinzugefügt

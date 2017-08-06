@@ -1,0 +1,10 @@
+{
+	"source": "extend",
+	"version": "2.6",
+	"embed": false,
+	"controllers": {
+		"GoSquaredFlags": "GoSquaredFlags.php"
+	},
+	"main_class": "GoSquaredFlags",
+	"admin_permission": "info"
+}
