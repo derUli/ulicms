@@ -93,6 +93,7 @@ class PackageManager {
 		return $retval;
 	}
 	public function installPackage($file) {
+		@set_time_limit ( 0 );
 		try {
 			// Paket entpacken
 			$phar = new PharData ( $file );
