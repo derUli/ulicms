@@ -37,3 +37,6 @@ deny from all
 order allow,deny
 deny from all
 </files>
+
+php_value upload_max_filesize 40M
+php_value post_max_size 42M

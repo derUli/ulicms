@@ -105,6 +105,11 @@ class ModuleHelper {
 		if (is_null ( $page->id )) {
 			return null;
 		}
+		if ($page instanceof Language_Link) {
+			$language = new Language ( $page->link_to_language );
+			if (! is_null ( $language->getID () ) and StringHelper::isNotNullOrWhitespace ( $language->getLanguageLink () ))
+				return $language->getLanguageLink ();
+		}
 		$domain = getDomainByLanguage ( $page->language );
 		if (! $domain) {
 			if ($page->language != getCurrentLanguage ()) {
@@ -119,10 +124,29 @@ class ModuleHelper {
 	/**
 	 * Convert underscore_strings to camelCase.
 	 *
-	 * @param {string} $str        	
+	 * @param {string} $str
 	 */
 	public static function underscoreToCamel($str) {
 		// Remove underscores, capitalize words, squash, lowercase first.
 		return lcfirst ( str_replace ( ' ', '', ucwords ( str_replace ( '_', ' ', $str ) ) ) );
+	}
+	public static function buildMethodCall($sClass, $sMethod, $suffix = null) {
+		$result = "sClass=" . urlencode ( $sClass ) . "&sMethod=" . urlencode ( $sMethod );
+		if (StringHelper::isNotNullOrWhitespace ( $suffix )) {
+			$result .= "&" . trim ( $suffix );
+		}
+		return $result;
+	}
+	public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post") {
+		$html = "";
+		$html .= '<form action="index.php" method="' . $requestMethod . '">';
+		$html .= get_csrf_token_html ();
+		$args = $otherVars;
+		$args ["sClass"] = $sClass;
+		$args ["sMethod"] = $sMethod;
+		foreach ( $args as $key => $value ) {
+			$html .= '<input type="hidden" name="' . Template::getEscape ( $key ) . '" value="' . Template::getEscape ( $value ) . '">';
+		}
+		return $html;
 	}
 }

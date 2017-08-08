@@ -312,7 +312,7 @@ class PEAR_RunTest {
 		if (empty ( $this->_options ['cgi'] )) {
 			// try to see if php-cgi is in the path
 			$res = $this->system_with_timeout ( 'php-cgi -v' );
-			if (false !== $res && ! (is_array ( $res ) && in_array ( $res [0], array (
+			if (false !== $res && ! (is_array ( $res ) && faster_in_array ( $res [0], array (
 					- 1,
 					127 
 			) ))) {
@@ -565,6 +565,7 @@ class PEAR_RunTest {
 				 * DEBUG YOUR REGEX HERE
 				 * var_dump($wanted_re);
 				 * print(str_repeat('=', 80) .
+				 *
 				 * "\n");
 				 * var_dump($output);
 				 */

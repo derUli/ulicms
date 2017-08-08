@@ -66,7 +66,7 @@ class minifier {
 		
 		// GET SOURCE CODE FROM SERVER-SIDE CACHE
 		if (($cacheFile !== null) && file_exists ( $cacheFile ) && ((filemtime ( $cacheFile ) >= $mtime) || ! is_writable ( $cacheFile ))) // if cache file cannot be modified
-		                                                                                                                                  // the script will output it always
+		                                                                                                                                   // the script will output it always
 		{ // with its distribution content
 			readfile ( $cacheFile );
 			die ();

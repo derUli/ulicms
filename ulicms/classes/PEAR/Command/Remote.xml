@@ -18,8 +18,10 @@
 			</channelinfo>
 		</options>
 		<doc>[preferred_state]
-			List releases on the server of packages you have installed where
-			a newer version is available with the same release state (stable etc.)
+			List releases on the server of packages you have
+			installed where
+			a newer version is available with the same release
+			state (stable etc.)
 			or the state passed as the second parameter.</doc>
 	</list-upgrades>
 	<remote-list>
@@ -34,7 +36,8 @@
 			</channel>
 		</options>
 		<doc>
-			Lists the packages available on the configured server along with the
+			Lists the packages available on the configured server along with
+			the
 			latest stable release of each package.</doc>
 	</remote-list>
 	<search>
@@ -57,10 +60,14 @@
 			</channelinfo>
 		</options>
 		<doc>[packagename] [packageinfo]
-			Lists all packages which match the search parameters. The first
-			parameter is a fragment of a packagename. The default channel
-			will be used unless explicitly overridden. The second parameter
-			will be used to match any portion of the summary/description</doc>
+			Lists all packages which match the
+			search parameters. The first
+			parameter is a fragment of a packagename.
+			The default channel
+			will be used unless explicitly overridden. The
+			second parameter
+			will be used to match any portion of the
+			summary/description</doc>
 	</search>
 	<list-all>
 		<summary>List All Packages</summary>
@@ -78,7 +85,8 @@
 			</channelinfo>
 		</options>
 		<doc>
-			Lists the packages available on the configured server along with the
+			Lists the packages available on the configured server along with
+			the
 			latest stable release of each package.</doc>
 	</list-all>
 	<download>
@@ -92,10 +100,13 @@
 			</nocompress>
 		</options>
 		<doc>&lt;package&gt;...
-			Download package tarballs. The files will be named as suggested by the
-			server, for example if you download the DB package and the latest
+			Download package tarballs. The files will be
+			named as suggested by the
+			server, for example if you download the DB
+			package and the latest
 			stable
-			version of DB is 1.6.5, the downloaded file will be DB-1.6.5.tgz.</doc>
+			version of DB is 1.6.5, the downloaded
+			file will be DB-1.6.5.tgz.</doc>
 	</download>
 	<clear-cache>
 		<summary>Clear Web Services Cache</summary>
@@ -103,7 +114,8 @@
 		<shortcut>cc</shortcut>
 		<options />
 		<doc>
-			Clear the XML-RPC/REST cache. See also the cache_ttl configuration
+			Clear the XML-RPC/REST cache. See also the cache_ttl
+			configuration
 			parameter.
 		</doc>
 	</clear-cache>

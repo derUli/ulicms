@@ -32,9 +32,6 @@ if (! $acl->hasPermission ( "other" )) {
 			setconfig ( "domain_to_language", db_escape ( $domain_to_language ) );
 		}
 		
-		if (isset ( $_POST ["override_shortcuts"] ))
-			setconfig ( "override_shortcuts", db_escape ( $_POST ["override_shortcuts"] ) );
-		
 		if (isset ( $_POST ["cache_enabled"] )) {
 			Settings::delete ( "cache_disabled" );
 		} else {
@@ -100,16 +97,11 @@ if (! $acl->hasPermission ( "other" )) {
 		if (isset ( $_POST ["smtp_password"] )) {
 			setconfig ( "smtp_password", db_escape ( $_POST ["smtp_password"] ) );
 		}
-		
-		if ($_POST ["move_from"] != "-" and $_POST ["move_to"] != "-") {
-			db_query ( "UPDATE " . tbname ( "content" ) . " SET menu='" . db_escape ( $_POST ["move_to"] ) . "' WHERE menu='" . db_escape ( $_POST ["move_from"] ) . "'" );
-		}
 	}
 	
 	$cache_type = Settings::get ( "cache_type" );
 	$cache_enabled = ! Settings::get ( "cache_disabled" );
 	$cache_period = round ( Settings::get ( "cache_period" ) / 60 );
-	$override_shortcuts = Settings::get ( "override_shortcuts" );
 	$email_mode = Settings::get ( "email_mode" );
 	$menus = getAllMenus ();
 	$force_password_change_every_x_days = intval ( Settings::get ( "force_password_change_every_x_days" ) );
@@ -214,83 +206,6 @@ if (! $acl->hasPermission ( "other" )) {
 			</div>
 
 		</div>
-
-
-		<h2 class="accordion-header">
-		<?php translate("shortcuts");?>
-		</h2>
-
-		<div class="accordion-content">
-			<div class="label">
-			<?php translate("replace_shortcuts");?>
-			</div>
-			<div class="inputWrapper">
-				<select name="override_shortcuts" size=1>
-					<option value="off"
-						<?php if($override_shortcuts == "off" or !$override_shortcuts) echo " selected=\"selected\""?>>
-						<?php translate("off");?>
-					</option>
-					<option value="frontend"
-						<?php if($override_shortcuts == "frontend") echo " selected=\"selected\""?>>
-						<?php translate("only_in_frontend");?>
-					</option>
-					<option value="backend"
-						<?php if($override_shortcuts == "backend") echo " selected=\"selected\""?>>
-						<?php translate("only_in_backend");?>
-					</option>
-					<option value="on"
-						<?php if($override_shortcuts == "on") echo " selected=\"selected\""?>>
-						<?php translate("BOOTH_BACKEND_AND_FRONTEND");?>
-					</option>
-				</select>
-			</div>
-			<p>
-			<?php translate("replace_shortcuts_info");?>
-			</p>
-		</div>
-
-
-
-
-
-		<h2 class="accordion-header">
-		<?php translate("move_menu_items");?>
-		</h2>
-
-
-		<div class="accordion-content">
-			<p>
-			<?php translate("move_all_menu_items_from");?>
-				<select name="move_from" size="1">
-					<option value="-" selected>-</option>
-					<?php
-	
-	foreach ( $menus as $menu ) {
-		?>
-					<option value="<?php echo $menu?>">
-					<?php echo $menu?>
-					</option>
-					<?php
-	}
-	?>
-				</select>
-				<?php translate("move_all_menu_items_to");?>
-				<select name="move_to" size="1">
-					<option value="-" selected>-</option>
-					<?php
-	
-	foreach ( $menus as $menu ) {
-		?>
-					<option value="<?php echo $menu?>">
-					<?php echo $menu?>
-					</option>
-					<?php
-	}
-	?>
-				</select>
-			</p>
-		</div>
-
 		<h2 class="accordion-header">
 		<?php translate("DOMAIN2LANGUAGE_MAPPING");?>
 		</h2>

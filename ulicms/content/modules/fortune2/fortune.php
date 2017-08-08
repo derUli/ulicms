@@ -20,9 +20,13 @@ class Fortune extends Controller {
 	public function getSettingsHeadline() {
 		return get_translation ( "my_settings_page" );
 	}
+	// Text für den Link auf die Einstellungen des Moduls, Default ist "Einstellungen"
+	public function getSettingsLinkText() {
+		return get_translation ( "show_samples" );
+	}
 	// settings page content below headline
 	public function settings() {
-		return get_translation ( "hello_world" );
+		return Template::executeModuleTemplate ( $this->moduleName, "admin" );
 	}
 	
 	// get a random fortune cookie from files
@@ -52,5 +56,14 @@ class Fortune extends Controller {
 		$text = array_rand ( $fortunes, 1 );
 		$text = $fortunes [$text];
 		return $text;
+	}
+	public function doSomething() {
+		ViewBag::set ( "sample_text", get_translation ( "unknown_request_type" ) );
+	}
+	public function doSomethingPost() {
+		ViewBag::set ( "sample_text", get_translation ( "post_request_type" ) );
+	}
+	public function doSomethingGet() {
+		ViewBag::set ( "sample_text", get_translation ( "get_request_type" ) );
 	}
 }

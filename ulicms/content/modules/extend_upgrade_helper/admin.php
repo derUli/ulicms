@@ -1,8 +1,12 @@
 <?php
-define ( "MODULE_ADMIN_HEADLINE", "eXtend Upgrade Helper" );
+define ( "MODULE_ADMIN_HEADLINE", get_translation ( "extend_upgrade_helper" ) );
 function extend_upgrade_helper_admin() {
 	$controller = ControllerRegistry::get ( "ExtendUpgradeHelper" );
 	$modules = $controller->getModules ();
+	?>
+<div class="alert alert-info">
+	<?php translate("EXTEND_UPGRADE_HELPER_INSTRUCTION");?></div>
+<?php
 	if (count ( $modules ) > 0) {
 		?>
 <ol>

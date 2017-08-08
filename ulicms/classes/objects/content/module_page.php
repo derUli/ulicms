@@ -34,11 +34,21 @@ class Module_Page extends Page {
 	}
 	public function containsModule($module = false) {
 		$retval = false;
+		if (parent::containsModule ( $module )) {
+			$retval = true;
+		}
 		if ($this->module !== null and ! empty ( $this->module )) {
 			if (($module and $this->module == $module) or ! $module) {
 				$retval = true;
 			}
 		}
 		return $retval;
+	}
+	public function getEmbeddedModules() {
+		$result = parent::getEmbeddedModules ();
+		if (StringHelper::isNotNullOrEmpty ( $this->module ) and ! faster_in_array ( $this->module, $result )) {
+			$result [] = $this->module;
+		}
+		return $result;
 	}
 }

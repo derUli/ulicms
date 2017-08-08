@@ -14,12 +14,18 @@
 			</showname>
 		</options>
 		<doc>[descfile] [descfile2]
-			Creates a PEAR package from its description file (usually called
-			package.xml). If a second packagefile is passed in, then
-			the packager will check to make sure that one is a package.xml
-			version 1.0, and the other is a package.xml version 2.0. The
-			package.xml version 1.0 will be saved as &quot;package.xml&quot; in the archive,
-			and the other as &quot;package2.xml&quot; in the archive&quot; </doc>
+			Creates a PEAR package from its description
+			file (usually called
+			package.xml). If a second packagefile is passed
+			in, then
+			the packager will check to make sure that one is a
+			package.xml
+			version 1.0, and the other is a package.xml version 2.0.
+			The
+			package.xml version 1.0 will be saved as &quot;package.xml&quot;
+			in the archive,
+			and the other as &quot;package2.xml&quot; in the
+			archive&quot; </doc>
 	</package>
 	<package-validate>
 		<summary>Validate Package Consistency</summary>
@@ -87,9 +93,12 @@
 			</dry-run>
 		</options>
 		<doc>&lt;package.xml&gt;
-			Compares all the files in a package. Without any options, this
-			command will compare the current code with the last checked-in code.
-			Using the -r or -R option you may compare the current code with that
+			Compares all the files in a package. Without
+			any options, this
+			command will compare the current code with the last
+			checked-in code.
+			Using the -r or -R option you may compare the current
+			code with that
 			of a specific release.
 		</doc>
 	</cvsdiff>
@@ -116,16 +125,22 @@
 			</dry-run>
 		</options>
 		<doc>&lt;package.xml&gt; [files...]
-			Sets a SVN tag on all files in a package. Use this command after you have
-			packaged a distribution tarball with the &quot;package&quot; command
+			Sets a SVN tag on all files in a
+			package. Use this command after you have
+			packaged a distribution
+			tarball with the &quot;package&quot; command
 			to tag what
-			revisions of what files were in that release. If need to fix something
-			after running svntag once, but before the tarball is released to the
+			revisions of
+			what files were in that release. If need to fix something
+			after
+			running svntag once, but before the tarball is released to the
 			public,
 			use the &quot;slide&quot; option to move the release tag.
 
-			to include files (such as a second package.xml, or tests not included
-			in the
+			to
+			include files (such as a second package.xml, or tests not included
+			in
+			the
 			release), pass them as additional parameters.
 		</doc>
 	</svntag>
@@ -156,16 +171,22 @@
 			</dry-run>
 		</options>
 		<doc>&lt;package.xml&gt; [files...]
-			Sets a CVS tag on all files in a package. Use this command after you have
-			packaged a distribution tarball with the &quot;package&quot; command
+			Sets a CVS tag on all files in a
+			package. Use this command after you have
+			packaged a distribution
+			tarball with the &quot;package&quot; command
 			to tag what
-			revisions of what files were in that release. If need to fix something
-			after running cvstag once, but before the tarball is released to the
+			revisions of
+			what files were in that release. If need to fix something
+			after
+			running cvstag once, but before the tarball is released to the
 			public,
 			use the &quot;slide&quot; option to move the release tag.
 
-			to include files (such as a second package.xml, or tests not included
-			in the
+			to
+			include files (such as a second package.xml, or tests not included
+			in
+			the
 			release), pass them as additional parameters.
 		</doc>
 	</cvstag>
@@ -177,7 +198,8 @@
 		<doc>&lt;package-file&gt; or &lt;package.xml&gt; or
 			&lt;install-package-name&gt;
 			List all dependencies the package has.
-			Can take a tgz / tar file, package.xml or a package name of an installed
+			Can take a tgz / tar file, package.xml or a package name of an
+			installed
 			package.</doc>
 	</package-dependencies>
 	<sign>
@@ -191,7 +213,8 @@
 			</verbose>
 		</options>
 		<doc>&lt;package-file&gt;
-			Signs a package distribution (.tar or .tgz) file with GnuPG.</doc>
+			Signs a package distribution (.tar or .tgz)
+			file with GnuPG.</doc>
 	</sign>
 	<makerpm>
 		<summary>Builds an RPM spec file from a PEAR package</summary>
@@ -213,15 +236,20 @@
 		</options>
 		<doc>&lt;package-file&gt;
 
-			Creates an RPM .spec file for wrapping a PEAR package inside an RPM
-			package. Intended to be used from the SPECS directory, with the PEAR
+			Creates an RPM .spec file for wrapping a PEAR
+			package inside an RPM
+			package. Intended to be used from the SPECS
+			directory, with the PEAR
 			package tarball in the SOURCES directory:
 
-			$ pear makerpm ../SOURCES/Net_Socket-1.0.tgz
-			Wrote RPM spec file PEAR::Net_Geo-1.0.spec
+			$
+			pear makerpm ../SOURCES/Net_Socket-1.0.tgz
+			Wrote RPM spec file
+			PEAR::Net_Geo-1.0.spec
 			$ rpm -bb PEAR::Net_Socket-1.0.spec
 			...
-			Wrote: /usr/src/redhat/RPMS/i386/PEAR::Net_Socket-1.0-1.i386.rpm
+			Wrote:
+			/usr/src/redhat/RPMS/i386/PEAR::Net_Socket-1.0-1.i386.rpm
 		</doc>
 	</makerpm>
 	<convert>
@@ -235,11 +263,15 @@
 			</flat>
 		</options>
 		<doc>[descfile] [descfile2]
-			Converts a package.xml in 1.0 format into a package.xml
-			in 2.0 format. The new file will be named package2.xml by default,
+			Converts a package.xml in 1.0 format into a
+			package.xml
+			in 2.0 format. The new file will be named package2.xml by
+			default,
 			and package.xml will be used as the old file by default.
-			This is not the most intelligent conversion, and should only be
-			used for automated conversion or learning the format.
+			This
+			is not the most intelligent conversion, and should only be
+			used for
+			automated conversion or learning the format.
 		</doc>
 	</convert>
 </commands>

@@ -41,6 +41,15 @@ class ContentFactory {
 		}
 		return $result;
 	}
+	public static function getAllRegular($order = "id") {
+		$result = array ();
+		$sql = "SELECT id, `type` FROM " . tbname ( "content" ) . " where type not in ('link', 'language_link', 'node') ORDER BY $order";
+		$query = DB::query ( $sql );
+		while ( $row = DB::fetchObject ( $query ) ) {
+			$result [] = self::getContentObjectByID ( $row );
+		}
+		return $result;
+	}
 	public static function getAllByLanguage($language, $order = "id") {
 		$language = DB::escapeValue ( $language );
 		$result = array ();
@@ -63,7 +72,7 @@ class ContentFactory {
 	}
 	public static function getForFilter($language = null, $category_id = null, $menu = null, $parent_id = null, $order_by = "title", $order_direction = "asc", $type = null, $limit = null) {
 		$result = array ();
-		$sql = "select id, `type` from " . tbname ( "content" ) . " where 1=1 and ";
+		$sql = "select id, `type` from " . tbname ( "content" ) . " where active=1 and ";
 		if ($language !== null and $language !== "") {
 			$language = Database::escapeValue ( $language );
 			$sql .= "language = '$language' and ";

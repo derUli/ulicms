@@ -43,12 +43,17 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 	}
 	public function testGetAllEmbedModule() {
 		$embedModules = ModuleHelper::getAllEmbedModules ();
-		$this->assertTrue ( in_array ( "fortune2", $embedModules ) );
-		$this->assertFalse ( in_array ( "slicknav", $embedModules ) );
+		$this->assertTrue ( faster_in_array ( "fortune2", $embedModules ) );
+		$this->assertFalse ( faster_in_array ( "slicknav", $embedModules ) );
 	}
 	public function testGetMainController() {
 		$this->assertInstanceOf ( "Fortune", ModuleHelper::getMainController ( "fortune2" ) );
 		$this->assertNull ( ModuleHelper::getMainController ( "slicknav" ) );
 		$this->assertNull ( ModuleHelper::getMainController ( "not_a_module" ) );
+	}
+	public function testBuildMethodCall() {
+		$this->assertEquals ( "sClass=MyClass&sMethod=MyMethod", ModuleHelper::buildMethodCall ( "MyClass", "MyMethod" ) );
+		$this->assertEquals ( "sClass=My_Class&sMethod=My_Method", ModuleHelper::buildMethodCall ( "My_Class", "My_Method" ) );
+		$this->assertEquals ( "sClass=My_Class&sMethod=My_Method&var1=hello&var2=world", ModuleHelper::buildMethodCall ( "My_Class", "My_Method", "var1=hello&var2=world" ) );
 	}
 }

@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS `{prefix}forms` (
 `created` bigint(20) DEFAULT NULL,
 `updated` bigint(20) DEFAULT NULL,
 PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT charset=utf8mb4 AUTO_INCREMENT=1 ;

@@ -1717,41 +1717,55 @@ a.cke_path_item:hover, a.cke_path_item:focus, a.cke_path_item:active {
 
 .cke_rtl
 
+
  
+
 
 .cke_toolgroup
 ,
 .cke_rtl
 
+
  
+
 
 .cke_toolbar_separator
 ,
 .cke_rtl
 
+
  
+
 
 .cke_combo_button
 ,
 .cke_rtl
 
+
  
+
 
 .cke_combo_button
 
+
  
+
 
 *
 ,
 .cke_rtl
 
+
  
+
 
 .cke_button
 ,
 .cke_rtl
 
+
  
+
 
 .cke_button_icon
 ,
@@ -1759,14 +1773,22 @@ a.cke_path_item:hover, a.cke_path_item:focus, a.cke_path_item:active {
 display
 
 
+
+
 :inline-block
+
+
 
 
 ;
 vertical-align
 
 
+
+
 :top
+
+
 
 
 }
@@ -1898,21 +1920,37 @@ a.cke_button {
 
 {
 background
+
+
 :
+
  
+
 url
-(icons_hidpi
+
+
+(
+icons_hidpi
+
+
 .png
+
+
 )
- 
 no-repeat
+
  
+
 0
 -2240
 px
+
  
+
 !
 important
+
+
 
 
 }
@@ -2063,41 +2101,55 @@ a.cke_path_item:hover, a.cke_path_item:focus, a.cke_path_item:active {
 
 .cke_rtl
 
+
  
+
 
 .cke_toolgroup
 ,
 .cke_rtl
 
+
  
+
 
 .cke_toolbar_separator
 ,
 .cke_rtl
 
+
  
+
 
 .cke_combo_button
 ,
 .cke_rtl
 
+
  
+
 
 .cke_combo_button
 
+
  
+
 
 *
 ,
 .cke_rtl
 
+
  
+
 
 .cke_button
 ,
 .cke_rtl
 
+
  
+
 
 .cke_button_icon
 ,
@@ -2105,14 +2157,22 @@ a.cke_path_item:hover, a.cke_path_item:focus, a.cke_path_item:active {
 display
 
 
+
+
 :inline-block
+
+
 
 
 ;
 vertical-align
 
 
+
+
 :top
+
+
 
 
 }

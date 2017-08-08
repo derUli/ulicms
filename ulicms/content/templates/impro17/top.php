@@ -11,7 +11,7 @@ if (isset ( $_GET ["q"] )) {
 	$q = $_GET ["q"];
 }
 $modules = getAllModules ();
-$hasSearch = (in_array ( "search", $modules ) || in_array ( "extended_search", $modules ));
+$hasSearch = (faster_in_array ( "search", $modules ) || faster_in_array ( "extended_search", $modules ));
 $searchPage = ModuleHelper::getFirstPageWithModule ( "extended_search" );
 if (! $searchPage) {
 	$searchPage = ModuleHelper::getFirstPageWithModule ( "search" );
@@ -66,7 +66,7 @@ echo getconfig ( "header-background-color" );
 			<div id="mobile-nav"></div>
         <?php
 								
-if ((! containsModule ( null, "extended_search" ) and ! containsModule ( null, "search" )) and $hasSearch and $searchPage) {
+								if ((! containsModule ( null, "extended_search" ) and ! containsModule ( null, "search" )) and $hasSearch and $searchPage) {
 									?>
 		<form id="search-form-head" method="get"
 				action="<?php Template::escape(buildSEOURL($searchPage->systemname));?>">

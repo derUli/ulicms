@@ -2519,7 +2519,9 @@ label.sh-uniform {
 	position: relative;
 	margin-left: 5px;
 	top: 1px;
-}* {
+}
+
+* {
 	font-size: 13px;
 }
 

@@ -1,0 +1,1 @@
+update `{prefix}users` set default_language = (select `value` from `{prefix}settings` where name = 'system_language') where default_language is null;

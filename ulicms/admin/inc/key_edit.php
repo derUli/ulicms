@@ -23,7 +23,7 @@ if (defined ( "_SECURITY" )) {
 			
 			echo htmlspecialchars ( $row->name, ENT_QUOTES, "UTF-8" );
 			?>"
-		readonly="readonly"> <br /> <br /> <strong><?php translate("option");?></strong><br />
+		readonly="readonly"> <br /> <br /> <strong><?php translate("value");?></strong><br />
 	<textarea name="value" rows=15 cols=80><?php
 			
 			echo htmlspecialchars ( $row->value, ENT_QUOTES, "UTF-8" );

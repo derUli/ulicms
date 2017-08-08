@@ -2,13 +2,13 @@
 class Database {
 	private static $connection = null;
 	// Abstraktion für Ausführen von SQL Strings
-	public static function query($query, $replacePrefix = false) {
-		log_db_query ( $query );
+	public static function query($sql, $replacePrefix = false) {
+		log_db_query ( $sql );
 		if ($replacePrefix) {
 			$cfg = new config ();
-			$query = str_replace ( "{prefix}", $cfg->db_prefix, $query );
+			$sql = str_replace ( "{prefix}", $cfg->db_prefix, $sql );
 		}
-		return mysqli_query ( self::$connection, $query );
+		return mysqli_query ( self::$connection, $sql );
 	}
 	public static function getConnection() {
 		return self::$connection;
@@ -16,9 +16,9 @@ class Database {
 	public static function setConnection($con) {
 		self::$connection = $con;
 	}
-	public static function pQuery($query, $args = array(), $replacePrefix = false) {
+	public static function pQuery($sql, $args = array(), $replacePrefix = false) {
 		$preparedQuery = "";
-		$chars = mb_str_split ( $query );
+		$chars = mb_str_split ( $sql );
 		$i = 0;
 		foreach ( $chars as $char ) {
 			if ($char != "?") {
@@ -42,18 +42,6 @@ class Database {
 		}
 		log_db_query ( $preparedQuery );
 		return Database::query ( $preparedQuery, $replacePrefix );
-	}
-	public static function getPDOConnectionString() {
-		$retval = "mysql://";
-		$cfg = new config ();
-		$retval .= $cfg->db_user;
-		if (! empty ( $cfg->db_password )) {
-			$retval .= ":" . $cfg->db_password;
-		}
-		$retval .= "@" . $cfg->db_server;
-		$retval .= "/" . $cfg->db_database;
-		$retval .= "?charset=utf8";
-		return $retval;
 	}
 	public static function getServerVersion() {
 		return mysqli_get_server_info ( self::$connection );
@@ -204,7 +192,7 @@ class Database {
 		if (! self::$connection) {
 			return false;
 		}
-		self::query ( "SET NAMES 'utf8'" );
+		self::query ( "SET NAMES 'utf8mb4'" );
 		// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 		self::query ( "SET SESSION sql_mode = '';" );
 		

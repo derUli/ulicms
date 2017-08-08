@@ -1,6 +1,8 @@
 <?php
 if (defined ( "_SECURITY" )) {
 	if ($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_create" )) {
+		$languages = getAvailableBackendLanguages ();
+		$default_language = getSystemLanguage ();
 		?>
 <form action="index.php?action=admins" method="post" autocomplete="off"
 	id="edit_user">
@@ -53,11 +55,17 @@ if (defined ( "_SECURITY" )) {
 		echo nl2br ( get_translation ( "HELP_IS_ADMIN" ) );
 		?>
 	</div>
+
 	<br /> <input type="checkbox" value="1" name="locked" id="locked"> <label
-		for="locked"><?php
-		
-		translate ( "locked" );
-		?> </label> <br /> <br /> <input type="submit"
+		for="locked"><?php translate ( "locked" );?> </label> <br /> <br /> <strong><?php translate("default_language");?></strong><br />
+	<select name="default_language">
+		<option value="" selected>[<?php translate("standard");?>]</option>
+		<?php
+		for($i = 0; $i < count ( $languages ); $i ++) {
+			echo '<option value="' . $languages [$i] . '">' . getLanguageNameByCode ( $languages [$i] ) . '</option>';
+		}
+		?>
+	</select><br /> <br /> <input type="submit"
 		value="<?php translate ( "create_user" );?>">
 			<?php
 		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
@@ -67,6 +75,10 @@ if (defined ( "_SECURITY" )) {
 <?php
 		}
 		?>
+
+
+
+
 </form>
 
 <?php

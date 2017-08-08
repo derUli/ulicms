@@ -356,7 +356,7 @@ generate both package.xml.
 				}
 			}
 			
-			if (! in_array ( $file ['attribs'] ['role'], PEAR_Common::getFileRoles () )) {
+			if (! faster_in_array ( $file ['attribs'] ['role'], PEAR_Common::getFileRoles () )) {
 				return $this->raiseError ( 'Cannot safely convert "' . $packagexml . '", contains custom roles.  Using a PEAR_PackageFileManager-based script ' . 'or the convert command is an option' );
 			}
 			

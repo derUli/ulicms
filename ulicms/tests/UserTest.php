@@ -20,6 +20,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$user->setEmail ( "max@muster.de" );
 		$user->setHomepage ( "http://www.google.de" );
 		$user->setSkypeId ( "deruliimnetz" );
+		$user->setDefaultLanguage ( "fr" );
 		$user->setHTMLEditor ( "ckeditor" );
 		$user->setTwitter ( "ulicms" );
 		$user->setAboutMe ( "hello world" );
@@ -31,6 +32,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$user->loadByUsername ( "max_muster" );
 		$this->assertEquals ( "max_muster", $user->getUsername () );
 		$this->assertEquals ( "Max", $user->getFirstname () );
+		$this->assertEquals ( "fr", $user->getDefaultLanguage());
 		$this->assertEquals ( "Muster", $user->getLastname () );
 		$this->assertEquals ( "max@muster.de", $user->getEmail () );
 		$this->assertEquals ( 1, $user->getGroupId () );

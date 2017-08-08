@@ -47,7 +47,7 @@ class PackageManager {
 	public function installPatch($name, $description, $url) {
 		@set_time_limit ( 0 );
 		$test = $this->getInstalledPatchNames ();
-		if (in_array ( $name, $test )) {
+		if (faster_in_array ( $name, $test )) {
 			return false;
 		}
 		
@@ -93,6 +93,7 @@ class PackageManager {
 		return $retval;
 	}
 	public function installPackage($file) {
+		@set_time_limit ( 0 );
 		try {
 			// Paket entpacken
 			$phar = new PharData ( $file );

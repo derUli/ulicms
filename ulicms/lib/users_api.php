@@ -42,7 +42,7 @@ function getUserById($id) {
 		return false;
 	}
 }
-function adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0) {
+function adduser($username, $lastname, $firstname, $email, $password, $sendMessage = true, $acl_group = null, $require_password_change = 0, $admin = 0, $locked = 0, $default_language = null) {
 	$username = db_escape ( $username );
 	$lastname = db_escape ( $lastname );
 	$firstname = db_escape ( $firstname );
@@ -65,9 +65,16 @@ function adduser($username, $lastname, $firstname, $email, $password, $sendMessa
 	
 	add_hook ( "before_create_user" );
 	
+	if (StringHelper::isNullOrWhitespace ( $default_language )) {
+		$default_language = "NULL";
+	} else {
+		$default_language = "'" . Database::escapeValue ( $default_language ) . "'";
+	}
+	
 	Database::query ( "INSERT INTO " . tbname ( "users" ) . "
-(username,lastname, firstname, email, password, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`) 
-			VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( Encryption::hashPassword ( $password ) ) . "', " . $acl_group . ", $require_password_change, NOW(), $admin, $locked)" ) or die ( db_error () );
+(username,lastname, firstname, email, password, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`, `default_language`) 
+			VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( Encryption::hashPassword ( $password ) ) . "', " . $acl_group . ", $require_password_change, NOW(), $admin, $locked, 
+			$default_language)" ) or die ( db_error () );
 	$message = "Hallo $firstname,\n\n" . "Ein Administrator hat auf http://" . $_SERVER ["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" . "Die Zugangsdaten lauten:\n\n" . "Benutzername: $username\n" . "Passwort: $password\n";
 	$header = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
 	

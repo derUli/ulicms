@@ -12,7 +12,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 		$pages_count = $result->amount;
 		
 		$topPages = db_query ( "SELECT language, systemname, title, `views` FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY views DESC LIMIT 5" );
-		$lastModfiedPages = db_query ( "SELECT language, systemname, title, lastmodified, lastchangeby FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY lastmodified DESC LIMIT 5" );
+		$lastModfiedPages = db_query ( "SELECT language, systemname, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else autor end as lastchangeby FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY lastmodified DESC LIMIT 5" );
 		
 		$admins_query = db_query ( "SELECT id, username FROM " . tbname ( "users" ) );
 		
@@ -75,7 +75,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 	</div>
 	<?php
 		
-if (! Settings::get ( "disable_ulicms_newsfeed" )) {
+		if (! Settings::get ( "disable_ulicms_newsfeed" )) {
 			?>
 	<h2 class="accordion-header">
 	<?php translate("ulicms_news");?></h2>

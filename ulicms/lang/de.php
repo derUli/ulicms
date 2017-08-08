@@ -264,7 +264,6 @@ define ( "TRANSLATION_REALLY_MAKE_DEFAULT_LANGUAGE", "Möchten Sie %name% zur St
 
 // Sonstige Einstellungen
 define ( "TRANSLATION_SHORTCUTS", "Tastenkombinationen" );
-define ( "TRANSLATION_MOVE_MENU_ITEMS", "Menüeinträge verschieben" );
 define ( "TRANSLATION_DOMAIN2LANGUAGE_MAPPING", "Domain2Language Mapping" );
 define ( "TRANSLATION_ADDITIONAL_META_TAGS", "Zusätzliche Metatags" );
 define ( "TRANSLATION_EMAIL_DELIVERY", "E-Mail Versand" );
@@ -274,9 +273,6 @@ define ( "TRANSLATION_CACHE_VALIDATION_DURATION", "Cache Gültigkeitsdauer" );
 define ( "TRANSLATION_CACHE_ENGINE", "Caching Engine" );
 define ( "TRANSLATION_REPLACE_SHORTCUTS", "Shortcuts ersetzen" );
 define ( "TRANSLATION_REPLACE_SHORTCUTS_INFO", "Standard-Tastenkombinationen des Browsers werden ersetzt, so dass Sie z.B. durch Drücken von Strg+S ebenfalls speichern können." );
-
-define ( "TRANSLATION_MOVE_ALL_MENU_ITEMS_FROM", "Verschiebe alle Menüeinträge von" );
-define ( "TRANSLATION_MOVE_ALL_MENU_ITEMS_TO", "nach" );
 
 define ( "TRANSLATION_DOMAIN2LANGUAGE_MAPPING_INFO", "<p>Hier können Sie Domains auf Sprachen mappen.</p>
 <p>
@@ -711,5 +707,25 @@ define ( "TRANSLATION_REGISTRATION_SUCCESSFUL", "Registrierung erfolgreich!" );
 define ( "TRANSLATION_THIS_MODULE_HAS_NO_SETTINGS", "Dieses Modul hat keine Einstellungen." );
 define ( "TRANSLATION_CANT_DELETE_CATEGORY_GENERAL", "Die Allgemeine Kategorie kann nicht gelöscht werden!" );
 define ( "TRANSLATION_GROUP_WAS_DELETED", "Die Gruppe wurde erfolgreich gelöscht." );
+
+define ( "TRANSLATION_MOBILE_DETECT_INSTALL_NOTICE", "Um dieses Feature zu nutzen müssen Sie <a href=\"https://extend.ulicms.de/mobile_detect.html\" target=\"_blank\">Mobile_Detect</a> installieren." );
+
+define ( "TRANSLATION_SNIPPET", "Schnipsel" );
+define ( "TRANSLATION_SNIPPET_CODE", "Schnipsel Code" );
+define ( "TRANSLATION_SNIPPET_CODE_HELP", "Mit diesem Shortcode können Sie diesen Schnipsel in eine andere Seite einbinden." );
+define ( "TRANSLATION_ALLOWABLE_TAGS", "Zulässige Tags" );
+define ( "TRANSLATION_ALLOWABLE_TAGS_HELP", "Leer = alle Tags erlaubt" );
+define ( "TRANSLATION_SHOW_USERS", "Benutzer anzeigen" );
+define ( "TRANSLATION_DEFAULT_LANGUAGE", "Standardsprache" );
+
+// Link to language
+define ( "TRANSLATION_LANGUAGE_LINK", "Link zu Sprache" );
+
+define ( "TRANSLATION_BACK", "Zurück" );
+define ( "TRANSLATION_OPEN", "Öffnen" );
+define ( "TRANSLATION_NOT_IN_MENU", "Nicht im Menü" );
+define ( "TRANSLATION_NEW", "Neu" );
+
+define ( "TRANSLATION_CODE_TO_EMBED", "Code zum Einbetten" );
 
 add_hook ( "lang_de" );

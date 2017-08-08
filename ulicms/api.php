@@ -1,4 +1,7 @@
 <?php
+function preparePlainTextforHTMLOutput($text) {
+	return nl2br ( htmlspecialchars ( $text ) );
+}
 function get_action() {
 	if (isset ( $_REQUEST ["action"] )) {
 		return $_REQUEST ["action"];
@@ -12,6 +15,17 @@ if (! function_exists ( 'boolval' )) {
 	function boolval($my_value) {
 		return ( bool ) $my_value;
 	}
+}
+
+// lcfirst() is only contained in PHP >= 5.3
+if (function_exists ( 'lcfirst' ) === false) {
+	function lcfirst($str) {
+		$str [0] = strtolower ( $str [0] );
+		return $str;
+	}
+}
+function getStringLengthInBytes($data) {
+	return ini_get ( 'mbstring.func_overload' ) ? mb_strlen ( $data, '8bit' ) : strlen ( $data );
 }
 
 // sind wir gerade im Adminordner?
@@ -291,7 +305,7 @@ function get_used_post_types() {
 		$used_types [] = $row->type;
 	}
 	foreach ( $types as $type ) {
-		if (in_array ( $type, $used_types )) {
+		if (faster_in_array ( $type, $used_types )) {
 			$return_types [] = $type;
 		}
 	}
@@ -302,8 +316,10 @@ function get_available_post_types() {
 			"page",
 			"article",
 			// "comment",
+			"snippet",
 			"list",
 			"link",
+			"language_link",
 			"node",
 			"image",
 			"module",
@@ -313,13 +329,13 @@ function get_available_post_types() {
 	$modules = getAllModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	foreach ( $modules as $module ) {
-		if (in_array ( $module, $disabledModules )) {
+		if (faster_in_array ( $module, $disabledModules )) {
 			continue;
 		}
 		$custom_types = getModuleMeta ( $module, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
-				if (! in_array ( $key, $post_types )) {
+				if (! faster_in_array ( $key, $post_types )) {
 					$post_types [] = $key;
 				}
 			}
@@ -328,13 +344,13 @@ function get_available_post_types() {
 	
 	$themes = getAllModules ();
 	foreach ( $themes as $theme ) {
-		if (in_array ( $module, $disabledModules )) {
+		if (faster_in_array ( $module, $disabledModules )) {
 			continue;
 		}
 		$custom_types = getThemeMeta ( $theme, "custom_types" );
 		if ($custom_types) {
 			foreach ( $custom_types as $key => $value ) {
-				if (! in_array ( $key, $post_types )) {
+				if (! faster_in_array ( $key, $post_types )) {
 					$post_types [] = $key;
 				}
 			}
@@ -434,11 +450,9 @@ function getSystemLanguage() {
 	} else {
 		$lang = "de";
 	}
-	
 	if (! file_exists ( getLanguageFilePath ( $lang ) )) {
 		$lang = "de";
 	}
-	
 	return $lang;
 }
 function getDomainByLanguage($language) {
@@ -478,7 +492,7 @@ function setLanguageByDomain() {
 					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
 						$domain = $_SERVER ["HTTP_HOST"];
 						
-						if ($line [0] == $domain and in_array ( $line [1], getAllLanguages () )) {
+						if ($line [0] == $domain and faster_in_array ( $line [1], getAllLanguages () )) {
 							$_SESSION ["language"] = $line [1];
 							return true;
 						}
@@ -583,7 +597,7 @@ function add_hook($name) {
 	$modules = getAllModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
-		if (in_array ( $modules [$hook_i], $disabledModules )) {
+		if (faster_in_array ( $modules [$hook_i], $disabledModules )) {
 			continue;
 		}
 		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
@@ -908,7 +922,7 @@ function fcflush() {
 	}
 }
 function isModuleInstalled($name) {
-	return in_array ( $name, getAllModules () );
+	return faster_in_array ( $name, getAllModules () );
 }
 function getAllModules() {
 	if (Vars::get ( "allModules" )) {
@@ -934,28 +948,47 @@ function no_anti_csrf() {
 // replace Shortcodes with modules
 function replaceShortcodesWithModules($string, $replaceOther = true) {
 	if ($replaceOther) {
-		$string = str_replace ( '[title]', get_title (), $string );
+		$string = str_ireplace ( '[title]', get_title (), $string );
 		ob_start ();
 		logo ();
-		$string = str_replace ( '[logo]', ob_get_clean (), $string );
+		$string = str_ireplace ( '[logo]', ob_get_clean (), $string );
 		ob_start ();
 		motto ();
-		$string = str_replace ( '[motto]', ob_get_clean (), $string );
+		$string = str_ireplace ( '[motto]', ob_get_clean (), $string );
 		ob_start ();
 		motto ();
-		$string = str_replace ( '[slogan]', ob_get_clean (), $string );
+		$string = str_ireplace ( '[slogan]', ob_get_clean (), $string );
 		$current_page = get_page ();
-		$string = str_replace ( '[category]', get_category (), $string );
-		$string = str_replace ( '[csrf_token_html]', get_csrf_token_html (), $string );
+		$string = str_ireplace ( '[category]', get_category (), $string );
+		$string = str_ireplace ( '[csrf_token_html]', get_csrf_token_html (), $string );
 		// [tel] Links for tel Tags
 		$string = preg_replace ( '/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string );
 		$string = preg_replace ( '/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
+		
+		preg_match_all ( "/\[include=([0-9]+)]/i", $string, $match );
+		
+		if (count ( $match ) > 0) {
+			// @FIXME: Potenzial zur Endlosschleife (Seite die sich selbst einbindet)
+			for($i = 0; $i < count ( $match [0] ); $i ++) {
+				$placeholder = $match [0] [$i];
+				$id = unhtmlspecialchars ( $match [1] [$i] );
+				$id = intval ( $id );
+				$page = ContentFactory::getByID ( $id );
+				if ($page) {
+					$content = "";
+					if ($page->active and checkAccess ( $page->access )) {
+						$content = $page->content;
+					}
+					$string = str_ireplace ( $placeholder, $content, $string );
+				}
+			}
+		}
 	}
-	$allModules = getAllModules ();
+	$allModules = ModuleHelper::getAllEmbedModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($i = 0; $i <= count ( $allModules ); $i ++) {
 		$thisModule = $allModules [$i];
-		if (in_array ( $thisModule, $disabledModules )) {
+		if (faster_in_array ( $thisModule, $disabledModules )) {
 			continue;
 		}
 		$stringToReplace1 = '[module="' . $thisModule . '"]';
@@ -1079,7 +1112,7 @@ function getAllPages($lang = null, $order = "systemname", $exclude_hash_links = 
 	}
 	$returnvalues = Array ();
 	while ( $row = db_fetch_assoc ( $query ) ) {
-		if (! ($exclude_hash_links and startsWith ( $row ["redirection"], "#" ))) {
+		if (! $exclude_hash_links or ($exclude_hash_links and $row ["type"] != "link" and $row ["type"] != "node" and $row ["type"] != "language_link")) {
 			array_push ( $returnvalues, $row );
 		}
 	}
@@ -1104,7 +1137,19 @@ function getAllSystemNames($lang = null) {
 }
 
 // Sprachcodes abfragen und als Array zurück geben
-function getAllLanguages() {
+function getAllLanguages($filtered = false) {
+	if ($filtered) {
+		$group = new Group ();
+		$group->getCurrentGroup ();
+		$languages = $group->getLanguages ();
+		if (count ( $languages ) > 0) {
+			$result = array ();
+			foreach ( $languages as $lang ) {
+				$result [] = $lang->getLanguageCode ();
+			}
+			return $result;
+		}
+	}
 	if (! is_null ( Vars::get ( "all_languages" ) )) {
 		return Vars::get ( "all_languages" );
 	}
@@ -1150,7 +1195,7 @@ function getAllMenus($only_used = false) {
 			"top",
 			"right",
 			"bottom",
-			"none" 
+			"not_in_menu" 
 	);
 	$additional_menus = Settings::get ( "additional_menus" );
 	
@@ -1164,7 +1209,7 @@ function getAllMenus($only_used = false) {
 		$used = get_all_used_menus ();
 		$new_menus = array ();
 		for($i = 0; $i <= count ( $menus ); $i ++) {
-			if (in_array ( $menus [$i], $used )) {
+			if (faster_in_array ( $menus [$i], $used )) {
 				$new_menus [] = $menus [$i];
 			}
 		}
@@ -1177,7 +1222,7 @@ function getAllMenus($only_used = false) {
 		$themeMenus = getThemeMeta ( $theme, "menus" );
 		if ($themeMenus and is_array ( $themeMenus )) {
 			foreach ( $themeMenus as $m ) {
-				if (! in_array ( $m, $allThemeMenus )) {
+				if (! faster_in_array ( $m, $allThemeMenus )) {
 					$allThemeMenus [] = $m;
 				}
 			}
@@ -1188,8 +1233,8 @@ function getAllMenus($only_used = false) {
 		$menus = $allThemeMenus;
 	}
 	
-	if (! in_array ( "none", $menus )) {
-		$menus [] = "none";
+	if (! faster_in_array ( "not_in_menu", $menus )) {
+		$menus [] = "not_in_menu";
 	}
 	
 	sort ( $menus );
@@ -1266,7 +1311,10 @@ function uninstall_module($name, $type = "module") {
 			$uninstall_script = getModuleUninstallScriptPath ( $name, true );
 			$uninstall_script2 = getModuleUninstallScriptPath2 ( $name, true );
 			// Uninstall Script ausführen, sofern vorhanden
-			if (is_file ( $uninstall_script )) {
+			$mainController = ModuleHelper::getMainController ( $name );
+			if ($mainController and method_exists ( $mainController, "uninstall" )) {
+				$mainController->uninstall ();
+			} else if (is_file ( $uninstall_script )) {
 				include $uninstall_script;
 			} else if (is_file ( $uninstall_script2 )) {
 				include $uninstall_script2;
@@ -1278,7 +1326,7 @@ function uninstall_module($name, $type = "module") {
 	} else if ($type === "theme") {
 		$cTheme = Settings::get ( "theme" );
 		$allThemes = getThemeList ();
-		if (in_array ( $name, $allThemes ) and $cTheme !== $name) {
+		if (faster_in_array ( $name, $allThemes ) and $cTheme !== $name) {
 			$theme_path = getTemplateDirPath ( $name, true );
 			sureRemoveDir ( $theme_path, true );
 			clearCache ();
@@ -1325,7 +1373,7 @@ function func_enabled($func) {
 	foreach ( $disabled as $disableFunction ) {
 		$is_disabled [] = trim ( $disableFunction );
 	}
-	if (in_array ( $func, $is_disabled )) {
+	if (faster_in_array ( $func, $is_disabled )) {
 		$it_is_disabled ["m"] = $func . '() has been disabled for security reasons in php.ini';
 		$it_is_disabled ["s"] = 0;
 	} else {

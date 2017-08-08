@@ -14,7 +14,7 @@ setLanguageByDomain ();
 
 $languages = getAllLanguages ();
 
-if (! empty ( $_GET ["language"] ) and in_array ( $_GET ["language"], $languages )) {
+if (! empty ( $_GET ["language"] ) and faster_in_array ( $_GET ["language"], $languages )) {
 	$_SESSION ["language"] = Database::escapeValue ( $_GET ["language"], DB_TYPE_STRING );
 }
 
@@ -26,7 +26,7 @@ setLocaleByLanguage ();
 
 require_once "templating.php";
 
-if (in_array ( $_SESSION ["language"], $languages ) && file_exists ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
+if (faster_in_array ( $_SESSION ["language"], $languages ) && file_exists ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
 	include_once getLanguageFilePath ( $_SESSION ["language"] );
 } else if (file_exists ( getLanguageFilePath ( "en" ) )) {
 	include getLanguageFilePath ( "en" );
@@ -90,6 +90,16 @@ $redirection = get_redirection ();
 
 if ($redirection) {
 	Request::redirect ( $redirection, 302 );
+}
+try {
+	$page = ContentFactory::getByID ( get_ID () );
+	if (! is_null ( $page->id ) and $page instanceof Language_Link) {
+		$language = new Language ( $page->link_to_language );
+		if (! is_null ( $language->getID () ) and StringHelper::isNotNullOrWhitespace ( $language->getLanguageLink () )) {
+			Request::redirect ( $language->getLanguageLink () );
+		}
+	}
+} catch ( Exception $e ) {
 }
 
 if (isset ( $_GET ["goid"] )) {

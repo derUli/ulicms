@@ -69,7 +69,7 @@ class PEAR_Task_Replace extends PEAR_Task_Common {
 			);
 		}
 		if ($xml ['attribs'] ['type'] == 'pear-config') {
-			if (! in_array ( $xml ['attribs'] ['to'], $config->getKeys () )) {
+			if (! faster_in_array ( $xml ['attribs'] ['to'], $config->getKeys () )) {
 				return array (
 						PEAR_TASK_ERROR_WRONG_ATTRIB_VALUE,
 						'to',
@@ -91,7 +91,7 @@ class PEAR_Task_Replace extends PEAR_Task_Common {
 				);
 			}
 		} elseif ($xml ['attribs'] ['type'] == 'package-info') {
-			if (in_array ( $xml ['attribs'] ['to'], array (
+			if (faster_in_array ( $xml ['attribs'] ['to'], array (
 					'name',
 					'summary',
 					'channel',

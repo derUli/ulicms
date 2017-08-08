@@ -36,7 +36,7 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2 {
 	 * @return bool success of operation
 	 */
 	function setProvidesExtension($extension) {
-		if (in_array ( $this->getPackageType (), array (
+		if (faster_in_array ( $this->getPackageType (), array (
 				'extsrc',
 				'extbin',
 				'zendextsrc',
@@ -298,7 +298,7 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2 {
 	 * updatemaintainer for that purpose.
 	 */
 	function addMaintainer($role, $handle, $name, $email, $active = 'yes') {
-		if (! in_array ( $role, array (
+		if (! faster_in_array ( $role, array (
 				'lead',
 				'developer',
 				'contributor',
@@ -1493,7 +1493,7 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2 {
 	 *        	|false optional excluded versions
 	 */
 	function addPackageDepWithChannel($type, $name, $channel, $min = false, $max = false, $recommended = false, $exclude = false, $providesextension = false, $nodefault = false) {
-		if (! in_array ( $type, array (
+		if (! faster_in_array ( $type, array (
 				'optional',
 				'required' 
 		), true )) {
@@ -1824,7 +1824,7 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2 {
 	 */
 	function setPackageType($type) {
 		$this->_isValid = 0;
-		if (! in_array ( $type, array (
+		if (! faster_in_array ( $type, array (
 				'php',
 				'extbin',
 				'extsrc',
@@ -1835,7 +1835,7 @@ class PEAR_PackageFile_v2_rw extends PEAR_PackageFile_v2 {
 			return false;
 		}
 		
-		if (in_array ( $type, array (
+		if (faster_in_array ( $type, array (
 				'zendextsrc',
 				'zendextbin' 
 		) )) {

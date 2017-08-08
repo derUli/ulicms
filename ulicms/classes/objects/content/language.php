@@ -5,7 +5,7 @@ class Language {
 	private $language_code = null;
 	public function __construct($id = null) {
 		if (! is_null ( $id )) {
-			$this->loadById($id);
+			$this->loadById ( $id );
 		}
 	}
 	public function fillVars($query) {
@@ -111,5 +111,14 @@ class Language {
 			$result [] = new Language ( $row->id );
 		}
 		return $result;
+	}
+	public function getLanguageLink() {
+		$domain = getDomainByLanguage ( $this->language_code );
+		if ($domain) {
+			$url = Request::getProtocol ( $domain );
+		} else {
+			$url = "./?language=" . $this->language_code;
+		}
+		return $url;
 	}
 }

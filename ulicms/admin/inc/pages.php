@@ -100,7 +100,7 @@ $(window).load(function(){
 		<?php translate("please_select");?>
 		</option>
 		<?php
-		if (! empty ( $_GET ["filter_language"] ) and in_array ( $_GET ["filter_language"], getAllLanguages () )) {
+		if (! empty ( $_GET ["filter_language"] ) and faster_in_array ( $_GET ["filter_language"], getAllLanguages ( true ) )) {
 			$_SESSION ["filter_language"] = $_GET ["filter_language"];
 			$_SESSION ["filter_parent"] = null;
 		}
@@ -170,7 +170,7 @@ $(window).load(function(){
 			$_SESSION ["filter_category"] = intval ( $_GET ["filter_category"] );
 		}
 		
-		if (! empty ( $_GET ["filter_status"] ) and in_array ( $_GET ["filter_status"], array (
+		if (! empty ( $_GET ["filter_status"] ) and faster_in_array ( $_GET ["filter_status"], array (
 				"Standard",
 				"standard",
 				"trash" 
@@ -178,7 +178,7 @@ $(window).load(function(){
 			$_SESSION ["filter_status"] = $_GET ["filter_status"];
 		}
 		
-		$languages = getAllLanguages ();
+		$languages = getAllLanguages ( true );
 		for($j = 0; $j < count ( $languages ); $j ++) {
 			if ($languages [$j] == $_SESSION ["filter_language"]) {
 				echo "<option value='" . $languages [$j] . "' selected>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
@@ -193,7 +193,7 @@ $(window).load(function(){
 		
 		$sql = "select a.id as id, a.title as title from " . tbname ( "content" ) . " a inner join " . tbname ( "content" ) . " b on a.id = b.parent ";
 		
-		if (in_array ( $_SESSION ["filter_language"], getAllLanguages () )) {
+		if (faster_in_array ( $_SESSION ["filter_language"], getAllLanguages ( true ) )) {
 			$sql .= "where b.language='" . $_SESSION ["filter_language"] . "' ";
 		}
 		
@@ -415,7 +415,7 @@ $(window).load(function(){
 		</thead>
 		<tbody>
 	<?php
-		if (in_array ( $_GET ["order"], array (
+		if (faster_in_array ( $_GET ["order"], array (
 				"title",
 				"menu",
 				"position",
@@ -480,7 +480,22 @@ $(window).load(function(){
 		}
 		
 		if (isset ( $_SESSION ["filter_title"] ) and ! empty ( $_SESSION ["filter_title"] )) {
-			$filter_sql .= "AND (title LIKE '" . db_escape ( $_SESSION ["filter_title"] ) . "%' or title LIKE '%" . db_escape ( $_SESSION ["filter_title"] ) . "' or title LIKE '%" . db_escape ( $_SESSION ["filter_title"] ) . "%' or title LIKE '" . db_escape ( $_SESSION ["filter_title"] ) . "' )";
+			$filter_sql .= "AND (title LIKE '" . db_escape ( $_SESSION ["filter_title"] ) . "%' or title LIKE '%" . db_escape ( $_SESSION ["filter_title"] ) . "' or title LIKE '%" . db_escape ( $_SESSION ["filter_title"] ) . "%' or title LIKE '" . db_escape ( $_SESSION ["filter_title"] ) . "' ) ";
+		}
+		
+		$group = new Group ();
+		$group->getCurrentGroup ();
+		
+		$userLanguage = $group->getLanguages ();
+		$joined = "";
+		foreach ( $userLanguage as $lang ) {
+			$joined = "'" . Database::escapeValue ( $lang->getLanguageCode () ) . "',";
+		}
+		$joined = trim ( $joined, "," );
+		if (count ( $userLanguage ) > 0) {
+			$filter_sql .= " AND language in (";
+			$filter_sql .= $joined;
+			$filter_sql .= ")";
 		}
 		
 		$filter_sql .= " ";
@@ -509,7 +524,7 @@ $(window).load(function(){
 					echo "<td class=\"hide-on-mobile\">" . get_translation ( "no" ) . "</td>";
 				}
 				
-				if (startsWith ( $row->redirection, "#" )) {
+				if (startsWith ( $row->redirection, "#" ) or $row->type == "node" or $row->type == "snippet") {
 					echo "<td style='text-align:center'></td>";
 				} else {
 					$domain = getDomainByLanguage ( $row->language );
