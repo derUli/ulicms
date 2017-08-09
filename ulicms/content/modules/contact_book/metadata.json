@@ -1,0 +1,16 @@
+{
+	"source": "extend",
+	"version": "0.1",
+	"embed": true,
+	"controllers": {
+		"ContactBook": "controllers/ContactBook.php"
+	},
+	"objects": {
+		"Contact": "models/Contact.php"
+	},
+	"main_class": "ContactBook",
+	"custom_acl": [
+		"contact_book_edit"
+	],
+	"admin_permission": "contact_book_edit"
+}
