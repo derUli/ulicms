@@ -57,7 +57,23 @@ class Contact extends Model {
 		Database::pQuery ( $sql, $args, true );
 	}
 	public static function search($subject) {
-		throw new NotImplementedException ();
+		$result = array ();
+		$subject = strval ( $subject );
+		$sql = "SELECT id, MATCH (name, firstname, phone, email) AGAINST (?) AS relevance
+		FROM `{prefix}contact_book`
+		WHERE MATCH (name, firstname, phone, email) AGAINST (?) and public = ?
+		ORDER BY relevance DESC";
+		$args = array (
+				$subject,
+				$subject,
+				true 
+		);
+		
+		$query = Database::pQuery ( $sql, $args, true );
+		while ( $row = Database::fetchObject ( $query ) ) {
+			$result [] = new Contact ( $row->id );
+		}
+		return $result;
 	}
 	public static function getAll($order = "id") {
 		$result = array ();
