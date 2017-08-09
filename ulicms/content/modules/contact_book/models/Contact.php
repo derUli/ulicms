@@ -31,7 +31,28 @@ class Contact extends Model {
 			$this->public = ! is_null ( $data->public ) ? boolval ( $data->public ) : 1;
 		}
 	}
-	// @TODO insert() und update() implementieren
+	public function insert() {
+		$sql = "insert into `{prefix}contact_book` 
+                (name, firstname, phone, email) values
+                (?, ?, ?, ?)";
+		$args = array($this->getName(), $this->getFirstname(), $this->getPhone(),
+				$this->getEmail();
+		);
+		Database::pQuery ( $sql, $args, true );
+		$this->setID ( Database::getLastInsertID () );
+	}
+	public function update() {
+		$sql = "update `{prefix}contact_book` set name=?, 
+				firstname=?, phone=?, email=? where id=?";
+		$args = array (
+				$this->getName (),
+				$this->getFirstname (),
+				$this->getPhone (),
+				$this->getEmail (),
+				$this->getID () 
+		);
+		Database::pQuery ( $sql, $args, true );
+	}
 	public static function search($subject) {
 		throw new NotImplementedException ();
 	}
