@@ -35,8 +35,11 @@ class Contact extends Model {
 		$sql = "insert into `{prefix}contact_book` 
                 (name, firstname, phone, email) values
                 (?, ?, ?, ?)";
-		$args = array($this->getName(), $this->getFirstname(), $this->getPhone(),
-				$this->getEmail();
+		$args = array (
+				$this->getName (),
+				$this->getFirstname (),
+				$this->getPhone (),
+				$this->getEmail () 
 		);
 		Database::pQuery ( $sql, $args, true );
 		$this->setID ( Database::getLastInsertID () );
@@ -57,7 +60,12 @@ class Contact extends Model {
 		throw new NotImplementedException ();
 	}
 	public static function getAll($order = "id") {
-		throw new NotImplementedException ();
+		$result = array ();
+		$query = Database::query ( "select id from `{prefix}contact_book` order by $order" );
+		while ( $row = Database::fetchObject ( $query ) ) {
+			$result [] = new Contact ( $row->id );
+		}
+		return $result;
 	}
 	public function getName() {
 		return $this->name;
