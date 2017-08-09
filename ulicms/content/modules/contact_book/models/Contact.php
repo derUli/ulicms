@@ -31,7 +31,11 @@ class Contact extends Model {
 			$this->public = ! is_null ( $data->public ) ? boolval ( $data->public ) : 1;
 		}
 	}
+	// @TODO insert() und update() implementieren
 	public static function search($subject) {
+		throw new NotImplementedException ();
+	}
+	public static function getAll($order = "id") {
 		throw new NotImplementedException ();
 	}
 	public function getName() {
@@ -55,5 +59,19 @@ class Contact extends Model {
 		), true );
 		$this->fillVars ( null );
 	}
-	// @TODO Setter implementieren
+	public function setName($val) {
+		$this->name = ! is_null ( $val ) ? strval ( $val ) : null;
+	}
+	public function setFirstname($val) {
+		$this->firstname = ! is_null ( $val ) ? strval ( $val ) : null;
+	}
+	public function setPhone($val) {
+		$this->phone = ! is_null ( $val ) ? strval ( $val ) : null;
+	}
+	public function setEmail($val) {
+		$this->email = ! is_null ( $val ) ? strval ( $val ) : null;
+	}
+	public function setPublic($val) {
+		$this->public = boolval ( $val );
+	}
 }
