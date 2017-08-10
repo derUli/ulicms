@@ -1,0 +1,9 @@
+{
+	"source" : "extend",
+	"version" : "1.0",
+	"embed" : true,
+	"controllers" : {
+		"HttpCat" : "HttpCat.php"
+	},
+	"main_class" : "HttpCat"
+}
