@@ -142,6 +142,23 @@ function get_ID() {
 	Vars::set ( "id", $result );
 	return $result;
 }
+function is_active() {
+	if (! is_null ( Vars::get ( "active" ) )) {
+		return Vars::get ( "active" );
+	}
+	if (! $page) {
+		$page = get_requested_pagename ();
+	}
+	$result = 1;
+	$sql = "SELECT `active` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
+	$query = db_query ( $sql );
+	if (db_num_rows ( $query ) > 0) {
+		$result = db_fetch_object ( $query );
+		$result = $result->active;
+	}
+	Vars::set ( "active", $result );
+	return $result;
+}
 function get_type() {
 	if (Vars::get ( "type" )) {
 		return Vars::get ( "type" );
@@ -347,7 +364,7 @@ function delete_custom_data($var = null, $page = null) {
 		if (isset ( $data [$var] )) {
 			unset ( $data [$var] );
 		}
-	} // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
+	}  // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
 else {
 		$data = array ();
 	}
@@ -1068,9 +1085,10 @@ function checkAccess($access = "") {
 	return null;
 }
 function check_status() {
-	if (get_type () == "snippet") {
-		return "403 Forbidden";
-	}
+	if (isMaintenanceMode ())
+		if (get_type () == "snippet") {
+			return "403 Forbidden";
+		}
 	if ($_GET ["seite"] == "") {
 		$_GET ["seite"] = get_frontpage ();
 	}
@@ -1091,12 +1109,16 @@ function check_status() {
 			return "200 OK";
 		}
 	}
+	if (! is_active () and ! is_logged_in ()) {
+		return "403 Forbidden";
+	}
 	
 	$test = get_page ( $_GET ["seite"] );
 	if (! $test or ! is_null ( $test ["deleted_at"] )) {
 		no_cache ();
 		return "404 Not Found";
 	}
+	
 	$access = checkAccess ( $test ["access"] );
 	if ($access) {
 		if ($access != "all") {

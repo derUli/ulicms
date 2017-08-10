@@ -9,6 +9,9 @@ function get_action() {
 		return "home";
 	}
 }
+function isMaintenanceMode() {
+	return (strtolower ( Settings::get ( "maintenance_mode" ) ) == "on" || strtolower ( Settings::get ( "maintenance_mode" ) ) == "true" || Settings::get ( "maintenance_mode" ) == "1");
+}
 
 // boolval PHP 5.4 Implementation with checking version
 if (! function_exists ( 'boolval' )) {
@@ -856,7 +859,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	} // Backend Directory
+	}  // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
