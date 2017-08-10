@@ -10,6 +10,9 @@ class HttpCat extends Controller {
 			HTMLResult ( Template::executeModuleTemplate ( $this->moduleName, "fullcat.php" ), intval ( $status ) );
 		}
 	}
+	public function beforeMaintenanceMessage() {
+		$this->beforeHtml ();
+	}
 	public function render() {
 		return Template::executeModuleTemplate ( $this->moduleName, "cat.php" );
 	}

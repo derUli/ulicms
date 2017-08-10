@@ -45,6 +45,7 @@
   * HTTPStatusCodeResult($code, $description = null)
   * getStringLengthInBytes($data)
   * preparePlainTextforHTMLOutput($text)
+  * isMaintenanceMode()
   * HttpStatusCode Konstanten
 + Attribut $newWindow zu MenuEntry hinzugefügt
 + "Gruppe" in der Benutzerliste verlinkt auf "Gruppe bearbeiten"
@@ -76,6 +77,7 @@
   der Ersteller der Seite als Durchführender der letzten Änderung angezeigt
 # Bugfix: Die globale Funktion getAllPages() gab nicht alle Seiten zurück wenn $exclude_hash_links = false ist.
 # Bugfix: Deaktivierte Seiten wurden angezeigt
+# Bugfix: Wenn der Wartungsmodus aktiviert ist, gibt check_status() "503 Unavailable" zurück
 - Funktion "Menüeinträge verschieben" wurde in ein optionales Modul augelagert.
   https://extend.ulicms.de/move_menu_items.html
 

@@ -1085,24 +1085,28 @@ function checkAccess($access = "") {
 	return null;
 }
 function check_status() {
-	if (isMaintenanceMode ())
-		if (get_type () == "snippet") {
-			return "403 Forbidden";
-		}
+	$status = apply_filter ( "", "status" );
+	if (! empty ( $status )) {
+		return $status;
+	}
+	
+	if (isMaintenanceMode ()) {
+		return "503 Service Unavailable";
+	}
+	if (get_type () == "snippet") {
+		return "403 Forbidden";
+	}
 	if ($_GET ["seite"] == "") {
 		$_GET ["seite"] = get_frontpage ();
 	}
 	
 	$page = $_GET ["seite"];
 	$cached_page_path = buildCacheFilePath ( $page );
-	$status = apply_filter ( "", "status" );
 	if (isset ( $_SERVER ["ulicms_send_304"] )) {
 		header ( "HTTP/1.1 304 Not Modified" );
 		exit ();
 	}
-	if (! empty ( $status )) {
-		return $status;
-	}
+	
 	if (file_exists ( $cached_page_path ) and ! is_logged_in ()) {
 		$last_modified = filemtime ( $cached_page_path );
 		if (time () - $last_modified < CACHE_PERIOD) {
