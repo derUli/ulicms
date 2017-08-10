@@ -46,6 +46,8 @@
   * getStringLengthInBytes($data)
   * preparePlainTextforHTMLOutput($text)
   * isMaintenanceMode()
+  * is_500()
+  * is_503()
   * HttpStatusCode Konstanten
 + Attribut $newWindow zu MenuEntry hinzugefügt
 + "Gruppe" in der Benutzerliste verlinkt auf "Gruppe bearbeiten"

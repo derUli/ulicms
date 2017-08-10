@@ -680,11 +680,17 @@ function is_frontpage() {
 function is_200() {
 	return check_status () == "200 OK";
 }
+function is_403() {
+	return check_status () == "403 Forbidden";
+}
 function is_404() {
 	return check_status () == "404 Not Found";
 }
-function is_403() {
-	return check_status () == "403 Forbidden";
+function is_500() {
+	return check_status () == "500 Internal Server Error";
+}
+function is_503() {
+	return check_status () == "503 Service Unavailable";
 }
 function buildtree($src_arr, $parent_id = 0, $tree = array()) {
 	foreach ( $src_arr as $idx => $row ) {
