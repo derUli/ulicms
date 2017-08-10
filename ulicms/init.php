@@ -330,6 +330,11 @@ if (isset ( $_SESSION ["session_begin"] )) {
 		$_SESSION ["session_begin"] = time ();
 	}
 }
+function shutdown_function() {
+	add_hook ( "shutdown" );
+}
+
+register_shutdown_function ( "shutdown_function" );
 
 $enforce_https = Settings::get ( "enforce_https" );
 

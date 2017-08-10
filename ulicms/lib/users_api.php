@@ -124,11 +124,12 @@ function register_session($user, $redirect = true) {
 	if (! $redirect) {
 		return;
 	}
-	
+	$login_url = apply_filter ( "index.php", "login_url" );
 	if (isset ( $_REQUEST ["go"] )) {
 		header ( "Location: " . $_REQUEST ["go"] );
 	} else {
-		header ( "Location: index.php" );
+		$login_url = apply_filter ( "index.php", "login_url" );
+		header ( "Location: $login_url" );
 	}
 	
 	return;
