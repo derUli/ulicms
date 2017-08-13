@@ -1,6 +1,7 @@
 <?php
 function count_by_category_render() {
-	$sql = "select c.name as Kategorie, count(e.id) as Anzahl from {prefix}content e inner join {prefix}categories c on c.id = category where type = 'article'  group by e.category order by Kategorie desc;";
+	ob_start();
+	$sql = "select c.name as Kategorie, count(e.id) as Anzahl from {prefix}content e inner join {prefix}categories c on c.id = category where type = 'article'  group by e.category order by Kategorie asc;";
 	$query = Database::query ( $sql, true );
 	?>
 <table class="tablesorter">
@@ -23,5 +24,5 @@ function count_by_category_render() {
 </table>
 
 <?php
-
+    return ob_get_clean();
 }
