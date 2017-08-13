@@ -142,6 +142,23 @@ function get_ID() {
 	Vars::set ( "id", $result );
 	return $result;
 }
+function is_active() {
+	if (! is_null ( Vars::get ( "active" ) )) {
+		return Vars::get ( "active" );
+	}
+	if (! $page) {
+		$page = get_requested_pagename ();
+	}
+	$result = 1;
+	$sql = "SELECT `active` FROM " . tbname ( "content" ) . " WHERE systemname='" . db_escape ( $page ) . "'  AND language='" . db_escape ( $_SESSION ["language"] ) . "'";
+	$query = db_query ( $sql );
+	if (db_num_rows ( $query ) > 0) {
+		$result = db_fetch_object ( $query );
+		$result = $result->active;
+	}
+	Vars::set ( "active", $result );
+	return $result;
+}
 function get_type() {
 	if (Vars::get ( "type" )) {
 		return Vars::get ( "type" );
@@ -347,7 +364,7 @@ function delete_custom_data($var = null, $page = null) {
 		if (isset ( $data [$var] )) {
 			unset ( $data [$var] );
 		}
-	} // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
+	}  // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
 else {
 		$data = array ();
 	}
@@ -663,11 +680,17 @@ function is_frontpage() {
 function is_200() {
 	return check_status () == "200 OK";
 }
+function is_403() {
+	return check_status () == "403 Forbidden";
+}
 function is_404() {
 	return check_status () == "404 Not Found";
 }
-function is_403() {
-	return check_status () == "403 Forbidden";
+function is_500() {
+	return check_status () == "500 Internal Server Error";
+}
+function is_503() {
+	return check_status () == "503 Service Unavailable";
 }
 function buildtree($src_arr, $parent_id = 0, $tree = array()) {
 	foreach ( $src_arr as $idx => $row ) {
@@ -1068,6 +1091,14 @@ function checkAccess($access = "") {
 	return null;
 }
 function check_status() {
+	$status = apply_filter ( "", "status" );
+	if (! empty ( $status )) {
+		return $status;
+	}
+	
+	if (isMaintenanceMode ()) {
+		return "503 Service Unavailable";
+	}
 	if (get_type () == "snippet") {
 		return "403 Forbidden";
 	}
@@ -1077,19 +1108,19 @@ function check_status() {
 	
 	$page = $_GET ["seite"];
 	$cached_page_path = buildCacheFilePath ( $page );
-	$status = apply_filter ( "", "status" );
 	if (isset ( $_SERVER ["ulicms_send_304"] )) {
 		header ( "HTTP/1.1 304 Not Modified" );
 		exit ();
 	}
-	if (! empty ( $status )) {
-		return $status;
-	}
+	
 	if (file_exists ( $cached_page_path ) and ! is_logged_in ()) {
 		$last_modified = filemtime ( $cached_page_path );
 		if (time () - $last_modified < CACHE_PERIOD) {
 			return "200 OK";
 		}
+	}
+	if (! is_active () and ! is_logged_in ()) {
+		return "403 Forbidden";
 	}
 	
 	$test = get_page ( $_GET ["seite"] );
@@ -1097,6 +1128,7 @@ function check_status() {
 		no_cache ();
 		return "404 Not Found";
 	}
+	
 	$access = checkAccess ( $test ["access"] );
 	if ($access) {
 		if ($access != "all") {

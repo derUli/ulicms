@@ -1,7 +1,8 @@
 <?php
 if (isset ( $_GET ["destroy"] ) or $_GET ["action"] == "destroy") {
 	db_query ( "UPDATE " . tbname ( "users" ) . " SET last_action = 0 WHERE id = " . $_SESSION ["login_id"] );
-	header ( "Location: index.php" );
+	$url = apply_filter ( "index.php", "logout_url" );
+	header ( "Location: $url" );
 	session_destroy ();
 	exit ();
 }

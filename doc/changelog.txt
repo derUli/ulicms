@@ -45,6 +45,9 @@
   * HTTPStatusCodeResult($code, $description = null)
   * getStringLengthInBytes($data)
   * preparePlainTextforHTMLOutput($text)
+  * isMaintenanceMode()
+  * is_500()
+  * is_503()
   * HttpStatusCode Konstanten
 + Attribut $newWindow zu MenuEntry hinzugefügt
 + "Gruppe" in der Benutzerliste verlinkt auf "Gruppe bearbeiten"
@@ -58,7 +61,11 @@
 + Neue Hooks hinzugefügt
   * admin_footer
   * admin_copyright_footer_left
-  * admin_copyright_footer_right  
+  * admin_copyright_footer_right
+  * shutdown  
++ Neue Filter hinzugefügt
+  * login_url
+  * logout_url
 + Encoding auf utf8mb4 umgestellt, UliCMS benötigt mindestens MySQL bzw. MariaDB 5.5
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
 # Die Funktionen Template::executeModuleTemplate() und Template::executeDefaultOrOwnTemplate() akzeptieren nun auch Templatenamen mit Dateiendung
@@ -75,6 +82,8 @@
 # Bugfix: Listen zeigen nun nur noch aktive Datensätze
   der Ersteller der Seite als Durchführender der letzten Änderung angezeigt
 # Bugfix: Die globale Funktion getAllPages() gab nicht alle Seiten zurück wenn $exclude_hash_links = false ist.
+# Bugfix: Deaktivierte Seiten wurden angezeigt
+# Bugfix: Wenn der Wartungsmodus aktiviert ist, gibt check_status() "503 Unavailable" zurück
 - Funktion "Menüeinträge verschieben" wurde in ein optionales Modul augelagert.
   https://extend.ulicms.de/move_menu_items.html
 
