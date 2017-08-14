@@ -125,12 +125,12 @@ function get_canonical() {
 	$canonical = apply_filter ( $canonical, "canonical" );
 	return $canonical;
 }
-function is_crawler($userAgent = null) {
-	if (is_null ( $userAgent )) {
-		$userAgent = $_SERVER ['HTTP_USER_AGENT'];
+function is_crawler($useragent = null) {
+	if (is_null ( $useragent )) {
+		$useragent = $_SERVER ['HTTP_USER_AGENT'];
 	}
 	$crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' . 'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' . 'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby';
-	$isCrawler = (preg_match ( "/$crawlers/", $userAgent ) > 0);
+	$isCrawler = (preg_match ( "/$crawlers/", $useragent ) > 0);
 	return $isCrawler;
 }
 function get_lang_config($name, $lang) {
