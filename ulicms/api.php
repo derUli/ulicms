@@ -1403,13 +1403,6 @@ function is_admin() {
 	return $retval;
 }
 
-// Tabellenname zusammensetzen
-function tbname($name) {
-	require_once "cms-config.php";
-	$config = new config ();
-	return $config->db_prefix . $name;
-}
-
 // Mimetypen einer Datei ermitteln
 function get_mime($file) {
 	if (function_exists ( "finfo_file" )) {
