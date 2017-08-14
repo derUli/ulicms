@@ -98,7 +98,7 @@ if (file_exists ( $mobile_detect_as_module )) {
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "version.php";
 function exception_handler($exception) {
-	echo $exception->getMessage (), "\n";
+	echo nl2br ( htmlspecialchars ( $exception ) ) . "\n";
 	if (! defined ( "EXCEPTION_OCCURRED" )) {
 		define ( "EXCEPTION_OCCURRED", true );
 	}

@@ -79,6 +79,7 @@
 # Parameter $query von Database::query() und Database::pQuery() in $sql umbenannt
 # uninstall() Methode in main_class wird nun aufgerufen
 # Der "Anzeigen" Button beim Bearbeiten vom Inhaltstyp "Knotenpunkt" wird nicht mehr angezeigt
+# exception_handler() gibt nun einen vollständigen StackTrace zurück
 # Bugfix: "Letzte Änderungen" wenn lastchangeby nicht gesetzt ist, wird nun
 # Bugfix: Listen zeigen nun nur noch aktive Datensätze
   der Ersteller der Seite als Durchführender der letzten Änderung angezeigt
