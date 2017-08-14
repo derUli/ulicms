@@ -1,0 +1,13 @@
+{
+  "source" : "extend",
+  "version" : "1.2.51",
+  "embed" : false,
+  "objects" : {
+      "AbstractProvider" : "Fixtures/AbstractProvider.php",
+      "Exclusions" : "Fixtures/Exclusions.php",
+      "Crawlers" : "Fixtures/Crawlers.php",
+      "AbstractProvider" : "Fixtures/AbstractProvider.php",
+      "Headers" : "Fixtures/Headers.php",
+      "CrawlerDetect" : "CrawlerDetect.php"
+  }
+}
