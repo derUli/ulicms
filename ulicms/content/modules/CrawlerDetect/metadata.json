@@ -9,5 +9,9 @@
       "AbstractProvider" : "Fixtures/AbstractProvider.php",
       "Headers" : "Fixtures/Headers.php",
       "CrawlerDetect" : "CrawlerDetect.php"
-  }
+  },
+  "controllers" : {
+    "CrawlerDetect_Main" : "CrawlerDetect_Main"
+  },
+  "main_class" : "CrawlerDetect_Main"
 }

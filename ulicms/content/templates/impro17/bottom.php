@@ -1,3 +1,4 @@
+<?php var_dump(is_crawler());?>
 <div class="advertisement">
 <?php random_banner();?>
 </div>
@@ -8,9 +9,9 @@
 	<div class="row">
 
 		<div class="col-sm-6">
-			<p>&copy; 
+			<p>&copy;
     <?php if(date("Y") > 2016){?>
-    2016 - 
+    2016 -
     <?php
 				}
 				?>
@@ -20,7 +21,7 @@
 		<div class="col-sm-6">
 			<!--
 			<p class="imprint-right">
-			
+
 				<a href="#"><?php translate("imprint");?></a>
 			</p>
 			-->
