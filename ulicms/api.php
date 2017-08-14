@@ -131,7 +131,7 @@ function is_crawler($useragent = null) {
 	}
 	$isCrawler = apply_filter($useragent, "is_crawler");
 	if(is_bool($isCrawler) or is_int($isCrawler)){
-		return boolva($isCrawler);
+		return boolval($isCrawler);
 	}
 
 	$crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' . 'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' . 'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby';

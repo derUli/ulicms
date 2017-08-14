@@ -1,4 +1,3 @@
-<?php var_dump(is_crawler());?>
 <div class="advertisement">
 <?php random_banner();?>
 </div>
