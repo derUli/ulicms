@@ -364,7 +364,7 @@ function delete_custom_data($var = null, $page = null) {
 		if (isset ( $data [$var] )) {
 			unset ( $data [$var] );
 		}
-	}  // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
+	} // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
 else {
 		$data = array ();
 	}
