@@ -13,20 +13,6 @@ function isMaintenanceMode() {
 	return (strtolower ( Settings::get ( "maintenance_mode" ) ) == "on" || strtolower ( Settings::get ( "maintenance_mode" ) ) == "true" || Settings::get ( "maintenance_mode" ) == "1");
 }
 
-// boolval PHP 5.4 Implementation with checking version
-if (! function_exists ( 'boolval' )) {
-	function boolval($my_value) {
-		return ( bool ) $my_value;
-	}
-}
-
-// lcfirst() is only contained in PHP >= 5.3
-if (function_exists ( 'lcfirst' ) === false) {
-	function lcfirst($str) {
-		$str [0] = strtolower ( $str [0] );
-		return $str;
-	}
-}
 function getStringLengthInBytes($data) {
 	return ini_get ( 'mbstring.func_overload' ) ? mb_strlen ( $data, '8bit' ) : strlen ( $data );
 }
