@@ -62,10 +62,11 @@
   * admin_footer
   * admin_copyright_footer_left
   * admin_copyright_footer_right
-  * shutdown  
+  * shutdown
 + Neue Filter hinzugefügt
   * login_url
   * logout_url
+  * is_crawler
 + Encoding auf utf8mb4 umgestellt, UliCMS benötigt mindestens MySQL bzw. MariaDB 5.5
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
 # Die Funktionen Template::executeModuleTemplate() und Template::executeDefaultOrOwnTemplate() akzeptieren nun auch Templatenamen mit Dateiendung
@@ -84,6 +85,7 @@
 # Bugfix: Die globale Funktion getAllPages() gab nicht alle Seiten zurück wenn $exclude_hash_links = false ist.
 # Bugfix: Deaktivierte Seiten wurden angezeigt
 # Bugfix: Wenn der Wartungsmodus aktiviert ist, gibt check_status() "503 Unavailable" zurück
+# Bugfix: Wegen eines Schreibfehlers in einem Variablennamen gab is_crawler() immer false zurück.
 - Funktion "Menüeinträge verschieben" wurde in ein optionales Modul augelagert.
   https://extend.ulicms.de/move_menu_items.html
 
