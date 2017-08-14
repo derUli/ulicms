@@ -129,6 +129,11 @@ function is_crawler($useragent = null) {
 	if (is_null ( $useragent )) {
 		$useragent = $_SERVER ['HTTP_USER_AGENT'];
 	}
+	$isCrawler = apply_filter($useragent, "is_crawler");
+	if(is_bool($isCrawler) or is_int($isCrawler)){
+		return boolva($isCrawler);
+	}
+
 	$crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' . 'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' . 'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby';
 	$isCrawler = (preg_match ( "/$crawlers/", $useragent ) > 0);
 	return $isCrawler;
