@@ -104,7 +104,9 @@ function exception_handler($exception) {
 	}
 }
 
-set_exception_handler ( 'exception_handler' );
+if (php_sapi_name () != "cli") {
+	set_exception_handler ( 'exception_handler' );
+}
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "pdf_creator.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "csv_creator.php";
