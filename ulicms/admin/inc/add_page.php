@@ -282,9 +282,10 @@ function openMenuImageSelectWindow(field) {
 
 			<div class="accordion-content">
 				<strong><?php translate("meta_description");?>
-		</strong><br /> <input type="text" name="meta_description" value=''> <br />
-				<br /> <strong><?php translate("meta_keywords");?>
-		</strong><br /> <input type="text" name="meta_keywords" value=''>
+		</strong><br /> <input type="text" name="meta_description" value=''
+					maxlength="200"> <br /> <br /> <strong><?php translate("meta_keywords");?>
+		</strong><br /> <input type="text" name="meta_keywords" value=''
+					maxlength="200">
 				<div id="article-metadata">
 					<br /> <strong><?php translate("author_name");?></strong><br /> <input
 						type="text" name="article_author_name" value="" maxlength="80"> <br />

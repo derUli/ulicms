@@ -429,11 +429,11 @@ function openMenuImageSelectWindow(field) {
 					type="text" name="meta_description"
 					value="<?php
 				echo htmlspecialchars ( $row->meta_description );
-				?>"> <br /> <br /> <strong><?php translate("meta_keywords");?></strong><br />
+				?>" maxlength="200"> <br /> <br /> <strong><?php translate("meta_keywords");?></strong><br />
 				<input type="text" name="meta_keywords"
 					value="<?php
 				echo htmlspecialchars ( $row->meta_keywords );
-				?>">
+				?>" maxlength="200">
 				<div id="article-metadata">
 					<br /> <strong><?php translate("author_name");?></strong><br /> <input
 						type="text" name="article_author_name"
