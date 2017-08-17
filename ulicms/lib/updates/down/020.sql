@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}content` modify `meta_keywords` text not null;
