@@ -3,7 +3,7 @@ include_once Path::Resolve ( "ULICMS_ROOT/templating.php" );
 class ApiTest extends PHPUnit_Framework_TestCase {
 	public function testIsCrawler() {
 		$useragents = array (
-				"Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html) => true, 
+				"Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" => true, 
 				"Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)" => true,
 				"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36" => false,
 				"Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)" => true,
