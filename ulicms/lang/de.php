@@ -727,5 +727,6 @@ define ( "TRANSLATION_NOT_IN_MENU", "Nicht im Menü" );
 define ( "TRANSLATION_NEW", "Neu" );
 
 define ( "TRANSLATION_CODE_TO_EMBED", "Code zum Einbetten" );
+define ( "TRANSLATION_JSREDIRECT_NOSCRIPT", "Wenn Sie nicht automatisch weitergeleitet werden <a href=\"%url%\">klicken Sie hier</a>." );
 
 add_hook ( "lang_de" );
