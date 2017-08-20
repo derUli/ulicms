@@ -1,0 +1,13 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": true,
+	"controllers": {
+		"XKCDModule": "XKCDModule.php"
+	},
+	"main_class": "XKCDModule",
+	"objects": {
+		"xkcd": "xkcd.php",
+		"xkcdcomic": "xkcdcomic.php"
+	}
+}
