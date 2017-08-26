@@ -14,4 +14,10 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 			$this->assertEquals ( $value, is_crawler ( $key ) );
 		}
 	}
+	public function testGetAllUsedLanguages(){
+		$languages = getAllUsedLanguages();
+		$this->assertEquals(2, count($languages));
+		$this->assertTrue(in_array("de", $languages));
+		$this->assertTrue(in_array("en", $languages));
+	}
 }

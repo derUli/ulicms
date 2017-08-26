@@ -48,6 +48,7 @@
   * isMaintenanceMode()
   * is_500()
   * is_503()
+  * getAllUsedLanguages()
   * Settings::convertVar($value, $type)
   * HttpStatusCode Konstanten
 + Attribut $newWindow zu MenuEntry hinzugefügt
