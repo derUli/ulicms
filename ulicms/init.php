@@ -331,7 +331,9 @@ if (isset ( $_SESSION ["session_begin"] )) {
 	}
 }
 function shutdown_function() {
-	add_hook ( "shutdown" );
+	if (! defined ( "KCFINDER_PAGE" )) {
+		add_hook ( "shutdown" );
+	}
 }
 
 register_shutdown_function ( "shutdown_function" );
