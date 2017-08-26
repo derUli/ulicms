@@ -89,6 +89,8 @@
 # Bugfix: Deaktivierte Seiten wurden angezeigt
 # Bugfix: Wenn der Wartungsmodus aktiviert ist, gibt check_status() "503 Unavailable" zurück
 # Bugfix: Wegen eines Schreibfehlers in einem Variablennamen gab is_crawler() immer false zurück.
+# Bugfix: Stylesheet im Installer wurde nicht geladen, wenn die Installation mit https://
+erfolgt.
 - Funktion "Menüeinträge verschieben" wurde in ein optionales Modul augelagert.
   https://extend.ulicms.de/move_menu_items.html
 
