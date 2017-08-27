@@ -596,6 +596,9 @@ function clearCache() {
 	add_hook ( "after_clear_cache" );
 }
 function add_hook($name) {
+	if (defined ( "KCFINDER_PAGE" )) {
+		return;
+	}
 	$modules = getAllModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
