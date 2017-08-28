@@ -5,5 +5,8 @@
 	"controllers": {
 		"HighlightPHPCode": "HighlightPHPCode.php"
 	},
+	"objects": {
+		"PHPCode": "objects/PHPCode.php"
+	},
 	"main_class": "HighlightPHPCode"
 }
