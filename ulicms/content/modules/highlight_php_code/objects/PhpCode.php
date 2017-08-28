@@ -17,6 +17,14 @@ class PHPCode extends Model {
 			$this->fillVars ( null );
 		}
 	}
+	public static function getAll($order = "name") {
+		$query = Database::query ( "select id from `{prefix}php_code` order by $order", true );
+		$datasets = array ();
+		while ( $row = Database::fetchObject ( $query ) ) {
+			$datasets [] = new PHPCode ( $row->id );
+		}
+		return $datasets;
+	}
 	protected function fillVars($query = null) {
 		if ($query) {
 			$data = Database::fetchSingle ( $query );
