@@ -14,7 +14,8 @@
 	"admin_permission": "highlight_php_code",
 	"main_class": "HighlightPHPCode",
 	"controller_function_permissions": {
-		"HighlightPHPCode::deleteCode": "highlight_php_code"
+		"HighlightPHPCode::deleteCode": "highlight_php_code",
+		"HighlightPHPCode::createCode": "highlight_php_code"
 	},
 	"actions": {
 		"code_new": "templates/new.php"
