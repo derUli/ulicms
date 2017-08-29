@@ -15,5 +15,8 @@
 	"main_class": "HighlightPHPCode",
 	"controller_function_permissions": {
 		"HighlightPHPCode::deleteCode": "highlight_php_code"
+	},
+	"actions": {
+		"code_new": "templates/new.php"
 	}
 }
