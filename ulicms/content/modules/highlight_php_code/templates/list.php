@@ -27,7 +27,7 @@
 				<!--  @FIXME: Sicherheitsabfrage beim Löschen einbauen -->
 				<?php
 		
-ModuleHelper::buildMethodCallForm ( "HighlightPHPCode", "deleteCode" );
+		echo ModuleHelper::buildMethodCallForm ( "HighlightPHPCode", "deleteCode" );
 		?> <input type="hidden" name="id"
 				value="<?php Template::escape($ds->getId())?>"> <input type="image"
 				alt="<?php translate("delete")?>" src="gfx/delete.gif">
