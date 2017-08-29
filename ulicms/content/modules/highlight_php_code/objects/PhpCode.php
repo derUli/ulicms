@@ -17,22 +17,22 @@ class PHPCode extends Model {
 			$this->fillVars ( null );
 		}
 	}
-	public static function getAll($order = "name") {
+	public static function getAll($order = "id") {
 		$query = Database::query ( "select id from `{prefix}php_code` order by $order", true );
 		$datasets = array ();
 		while ( $row = Database::fetchObject ( $query ) ) {
-			$datasets [] = new PHPCode ( $row->id );
+			$datasets [] = new PHPCode ( intval ( $row->id ) );
 		}
 		return $datasets;
 	}
 	protected function fillVars($query = null) {
 		if ($query) {
 			$data = Database::fetchSingle ( $query );
-			$this->id = $data->id;
+			$this->setId ( intval ( $data->id ) );
 			$this->name = $data->name;
 			$this->code = $data->code;
 		} else {
-			$this->id = null;
+			$this->setId ( null );
 			$this->name = null;
 			$this->code = null;
 		}
@@ -51,7 +51,7 @@ class PHPCode extends Model {
 				$this->name,
 				$this->code 
 		), true );
-		$this->id = Database::getLastInsertID ();
+		$this->setId ( Database::getLastInsertID () );
 	}
 	protected function update() {
 		Database::pQuery ( "update `{prefix}php_code` set name = ?, code = ? where id = ?", array (
@@ -59,5 +59,17 @@ class PHPCode extends Model {
 				$this->code,
 				$this->id 
 		), true );
+	}
+	public function setName($val) {
+		$this->name = StringHelper::isNotNullOrWhitespace ( $val ) ? strval ( $val ) : null;
+	}
+	public function setCode($val) {
+		$this->code = StringHelper::isNotNullOrWhitespace ( $val ) ? strval ( $val ) : null;
+	}
+	public function getName() {
+		return $this->name;
+	}
+	public function getCode() {
+		return $this->code;
 	}
 }
