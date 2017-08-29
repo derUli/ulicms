@@ -11,4 +11,11 @@ class HighlightPHPCode extends Controller {
 		ViewBag::set ( "datasets", PHPCode::getAll () );
 		return Template::executeModuleTemplate ( $this->moduleName, "list.php" );
 	}
+	public function deleteCode() {
+		if (Request::hasVar ( "id" )) {
+			$code = new PHPCode ( Request::getVar ( "id", null, "int" ) );
+			$code->delete ();
+		}
+		Request::redirect ( ModuleHelper::buildAdminURL ( $this->moduleName ) );
+	}
 }

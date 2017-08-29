@@ -8,5 +8,12 @@
 	"objects": {
 		"PHPCode": "objects/PHPCode.php"
 	},
-	"main_class": "HighlightPHPCode"
+	"custom_acl": [
+		"highlight_php_code"
+	],
+	"admin_permission": "highlight_php_code",
+	"main_class": "HighlightPHPCode",
+	"controller_function_permissions": {
+		"HighlightPHPCode::deleteCode": "highlight_php_code"
+	}
 }
