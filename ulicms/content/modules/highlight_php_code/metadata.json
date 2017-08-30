@@ -15,9 +15,11 @@
 	"main_class": "HighlightPHPCode",
 	"controller_function_permissions": {
 		"HighlightPHPCode::deleteCode": "highlight_php_code",
-		"HighlightPHPCode::createCode": "highlight_php_code"
+		"HighlightPHPCode::createCode": "highlight_php_code",
+		"HighlightPHPCode::editCode": "highlight_php_code"
 	},
 	"actions": {
-		"code_new": "templates/new.php"
+		"code_new": "templates/new.php",
+		"code_edit": "templates/edit.php"
 	}
 }

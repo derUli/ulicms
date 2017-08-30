@@ -20,6 +20,17 @@ class HighlightPHPCode extends Controller {
 		}
 		Request::redirect ( ModuleHelper::buildAdminURL ( $this->moduleName ) );
 	}
+	public function editCode() {
+		if (Request::hasVar ( "name" ) and Request::hasVar ( "code" ) and Request::hasVar ( "name" )) {
+			$ds = new PHPCode ( Request::getVar ( "id", null, "int" ) );
+			if ($ds->getID ()) {
+				$ds->setName ( Request::getVar ( "name" ) );
+				$ds->setCode ( Request::getVar ( "code" ) );
+				$ds->save ();
+			}
+		}
+		Request::redirect ( ModuleHelper::buildAdminURL ( $this->moduleName ) );
+	}
 	public function deleteCode() {
 		if (Request::hasVar ( "id" )) {
 			$code = new PHPCode ( Request::getVar ( "id", null, "int" ) );

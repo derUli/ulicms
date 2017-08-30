@@ -14,4 +14,9 @@ if ($acl->hasPermission ( getModuleMeta ( "highlight_php_code", "admin_permissio
 </p>
 <button type="submit" class="btn btn-success"><?php translate("save");?></button>
 </form>
-<?php }?>
+<?php
+
+} else {
+	noperms ();
+}
+?>
