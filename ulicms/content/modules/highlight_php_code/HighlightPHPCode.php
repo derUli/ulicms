@@ -5,7 +5,7 @@ class HighlightPHPCode extends Controller {
 		return get_translation ( "edit" );
 	}
 	public function getSettingsHeadline() {
-		return "Highlighting PHP Code";
+		return "Highlight PHP Code";
 	}
 	public function settings() {
 		ViewBag::set ( "datasets", PHPCode::getAll () );
@@ -53,5 +53,9 @@ class HighlightPHPCode extends Controller {
 			$code->delete ();
 		}
 		Request::redirect ( ModuleHelper::buildAdminURL ( $this->moduleName ) );
+	}
+	public function uninstall() {
+		$migrator = new DBMigrator ( "module/" . $this->moduleName, ModuleHelper::buildModuleRessourcePath ( $this->moduleName, "sql/down" ) );
+		$migrator->rollback ();
 	}
 }
