@@ -19,10 +19,10 @@ class HighlightPHPCode extends Controller {
 				$id = intval ( unhtmlspecialchars ( $match [1] [$i] ) );
 				$code = new PHPCode ( $id );
 				$code = $code->getCode ();
-				$codeHTML = '<div class="highlighted-php-code" id="' . $id . '">';
-				$codeHTML .= highlight_string ( $code );
+				$codeHTML = '<div class="highlighted-php-code" id="highlighted-php-code-' . $id . '">';
+				$codeHTML .= highlight_string ( $code, true );
 				$codeHTML .= '</div>';
-				$text = str_replace ( $placeholder, $codeHTML, $html );
+				$html = str_replace ( $placeholder, $codeHTML, $html );
 			}
 		}
 		return $html;
