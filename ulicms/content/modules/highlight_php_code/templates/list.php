@@ -20,7 +20,7 @@
 			<td><?php Template::escape($ds->getId());?></td>
 			<td><?php Template::escape($ds->getName());?></td>
 			<td><input type="text" onclick="this.select();"
-				value="[code id=<?php Template::escape($ds->getId());?>]" readonly</td>
+				value="[code id=<?php Template::escape($ds->getId());?>]" readonly></td>
 			<td class="text-center"><a
 				href="<?php echo ModuleHelper::buildActionURL("code_edit", "id=".$ds->getId());?>"><img
 					src="gfx/edit.png" alt="<?php translate("edit");?>"></a></td>
