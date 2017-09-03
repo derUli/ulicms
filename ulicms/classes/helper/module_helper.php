@@ -137,9 +137,10 @@ class ModuleHelper {
 		}
 		return $result;
 	}
-	public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post") {
+	public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post", $htmlAttributes = array()) {
 		$html = "";
-		$html .= '<form action="index.php" method="' . $requestMethod . '">';
+		$attribhtml = StringHelper::isNotNullOrWhitespace ( self::buildHTMLAttributesFromArray ( $htmlAttributes ) ) ? " " . self::buildHTMLAttributesFromArray ( $htmlAttributes ) : "";
+		$html .= '<form action="index.php" method="' . $requestMethod . '"' . $attribhtml . '>';
 		$html .= get_csrf_token_html ();
 		$args = $otherVars;
 		$args ["sClass"] = $sClass;
@@ -147,6 +148,14 @@ class ModuleHelper {
 		foreach ( $args as $key => $value ) {
 			$html .= '<input type="hidden" name="' . Template::getEscape ( $key ) . '" value="' . Template::getEscape ( $value ) . '">';
 		}
+		return $html;
+	}
+	public static function buildHTMLAttributesFromArray($attributes = array()) {
+		$html = "";
+		foreach ( $attributes as $key => $value ) {
+			$html .= Template::getEscape ( $key ) . '="' . Template::getEscape ( $value ) . '" ';
+		}
+		$html = trim ( $html );
 		return $html;
 	}
 }
