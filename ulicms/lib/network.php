@@ -172,9 +172,6 @@ function get_useragent() {
 function get_request_method() {
 	return $_SERVER ["REQUEST_METHOD"];
 }
-function is_ajax_request() {
-	return (! empty ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) && strtolower ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest');
-}
 
 // Check for Secure HTTP Connection (SSL)
 function is_ssl() {

@@ -106,7 +106,7 @@ class Request {
 	public static function javascriptRedirect($url = "http://www.ulicms.de") {
 		echo "<script type=\"text/javascript\">location.replace(\"$url\");</script>";
 		echo "<noscript><p>" . get_translation ( "jsredirect_noscript", array (
-				"%url%" => Template::getEscape($url) 
+				"%url%" => Template::getEscape ( $url ) 
 		) ) . "</p></noscript>";
 		exit ();
 	}
@@ -155,5 +155,8 @@ class Request {
 		}
 		
 		return $result;
+	}
+	public static function isAjaxRequest() {
+		return (! empty ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) && strtolower ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest');
 	}
 }
