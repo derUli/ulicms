@@ -56,4 +56,18 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "sClass=My_Class&sMethod=My_Method", ModuleHelper::buildMethodCall ( "My_Class", "My_Method" ) );
 		$this->assertEquals ( "sClass=My_Class&sMethod=My_Method&var1=hello&var2=world", ModuleHelper::buildMethodCall ( "My_Class", "My_Method", "var1=hello&var2=world" ) );
 	}
+	public function testBuildHTMLAttributesFromArray() {
+		$this->assertEquals ( 'class="myclass" id="myid" style="border:0"', ModuleHelper::buildHTMLAttributesFromArray ( array (
+				"class" => "myclass",
+				"id" => "myid",
+				"style" => "border:0" 
+		) ) );
+	}
+	public function testBuildMethodCallFormWithHtmlAttributes() {
+		$html = ModuleHelper::buildMethodCallForm ( "MyClass", "MyMethod", array (), "post", array (
+				"class" => "myclass",
+				"onsubmit" => "return confirm('Do you really want to do that')" 
+		) );
+		$this->assertEquals ( '<form action="index.php" method="post" class="myclass" onsubmit="return confirm(&#039;Do you really want to do that&#039;)">' . get_csrf_token_html () . '<input type="hidden" name="sClass" value="MyClass">' . '<input type="hidden" name="sMethod" value="MyMethod">', $html );
+	}
 }
