@@ -176,13 +176,6 @@ function is_ajax_request() {
 	return (! empty ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) && strtolower ( $_SERVER ['HTTP_X_REQUESTED_WITH'] ) == 'xmlhttprequest');
 }
 
-// Weiterleitung per Location header;
-function ulicms_redirect($url = "http://www.ulicms.de", $status = 302) {
-	header ( "HTTP/1.0 " . getStatusCodeByNumber ( $status ) );
-	header ( "Location: " . $url );
-	exit ();
-}
-
 // Check for Secure HTTP Connection (SSL)
 function is_ssl() {
 	return (! empty ( $_SERVER ['HTTPS'] ) && $_SERVER ['HTTPS'] !== 'off' || $_SERVER ['SERVER_PORT'] == 443);
