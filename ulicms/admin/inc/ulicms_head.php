@@ -34,7 +34,8 @@ $enq = array (
 		"scripts/util.js",
 		"scripts/users.js",
 		"scripts/global.js",
-		"scripts/bootstrap.min.js" 
+		"scripts/bootstrap.min.js",
+		"../lib/js/global.js" 
 );
 ?>
 <?php
