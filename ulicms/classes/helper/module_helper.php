@@ -153,6 +153,22 @@ class ModuleHelper {
 		}
 		return $html;
 	}
+	public static function deleteButton($url, $otherVars = array(), $htmlAttributes = array()) {
+		$html = "";
+		$htmlAttributes ["class"] = trim ( "delete-form " . $htmlAttributes ["class"] );
+		
+		$attribhtml = StringHelper::isNotNullOrWhitespace ( self::buildHTMLAttributesFromArray ( $htmlAttributes ) ) ? " " . self::buildHTMLAttributesFromArray ( $htmlAttributes ) : "";
+		
+		$html .= '<form action="' . _esc ( $url ) . '" method="post"' . $attribhtml . '>';
+		$html .= get_csrf_token_html ();
+		foreach ( $otherVars as $key => $value ) {
+			$html .= '<input type="hidden" name="' . Template::getEscape ( $key ) . '" value="' . Template::getEscape ( $value ) . '">';
+		}
+		$imgFile = is_admin_dir () ? "gfx/delete.gif" : "admin/gfx/delete.gif";
+		$html .= '<input type="image" src="' . $imgFile . '" alt="' . get_translation ( "delete" ) . '" title="' . get_translation ( "delete" ) . '">';
+		$html .= "</form>";
+		return $html;
+	}
 	public static function buildHTMLAttributesFromArray($attributes = array()) {
 		$html = "";
 		foreach ( $attributes as $key => $value ) {

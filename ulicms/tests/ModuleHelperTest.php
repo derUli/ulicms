@@ -2,10 +2,13 @@
 class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 	private $default_language = null;
 	public function setUp() {
+		@session_start ();
 		$this->default_language = Settings::get ( "default_language" );
 	}
 	public function tearDown() {
 		Settings::set ( "default_language", $this->default_language );
+		
+		@session_destroy ();
 	}
 	public function testUnderscoreToCamel() {
 		$this->assertEquals ( "myModuleName", ModuleHelper::underscoreToCamel ( "my_module_name" ) );
@@ -69,5 +72,10 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 				"onsubmit" => "return confirm('Do you really want to do that')" 
 		) );
 		$this->assertEquals ( '<form action="index.php" method="post" class="myclass" onsubmit="return confirm(&#039;Do you really want to do that&#039;)">' . get_csrf_token_html () . '<input type="hidden" name="sClass" value="MyClass">' . '<input type="hidden" name="sMethod" value="MyMethod">', $html );
+	}
+	public function testDeleteButton() {
+		$this->assertEquals ( '<form action="index.php?action=contacts" method="post" class="delete-form"><input type="hidden" name="csrf_token" value="' . get_csrf_token () . '"><input type="hidden" name="delete" value="123"><input type="image" src="admin/gfx/delete.gif" alt="delete" title="delete"></form>', ModuleHelper::deleteButton ( "index.php?action=contacts", array (
+				"delete" => "123" 
+		) ) );
 	}
 }
