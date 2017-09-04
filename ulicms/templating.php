@@ -1,4 +1,10 @@
 <?php
+function esc($value) {
+	Template::escape ( $value );
+}
+function _esc($value) {
+	return Template::getEscape ( $value );
+}
 function html5_doctype() {
 	echo get_html5_doctype ();
 }

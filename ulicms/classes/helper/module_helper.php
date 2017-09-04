@@ -137,6 +137,9 @@ class ModuleHelper {
 		}
 		return $result;
 	}
+	public static function buildMethodCallUrl($sClass, $sMethod, $suffix = null) {
+		return "index.php?" . self::buildMethodCall ( $sClass, $sMethod, $suffix );
+	}
 	public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post", $htmlAttributes = array()) {
 		$html = "";
 		$attribhtml = StringHelper::isNotNullOrWhitespace ( self::buildHTMLAttributesFromArray ( $htmlAttributes ) ) ? " " . self::buildHTMLAttributesFromArray ( $htmlAttributes ) : "";
