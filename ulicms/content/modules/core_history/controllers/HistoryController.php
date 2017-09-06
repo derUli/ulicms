@@ -1,13 +1,13 @@
 <?php
 class HistoryController extends Controller {
 	public function doRestore() {
-		if (isset ( $_GET ["do_restore_version"] )) {
-			$do_restore_version = intval ( $_GET ["do_restore_version"] );
-			$rev = VCS::getRevisionByID ( $do_restore_version );
+		if (isset ( $_GET ["version_id"] )) {
+			$version_id = intval ( $_GET ["version_id"] );
+			$rev = VCS::getRevisionByID ( $version_id );
 			if ($rev) {
-				VCS::restoreRevision ( $do_restore_version );
+				VCS::restoreRevision ( $version_id );
 			}
-			Request::redirect ( ModuleHelper::buildActionURL ( $action, "&page=" . $rev->content_id ) );
+			Request::redirect ( ModuleHelper::buildActionURL ( "pages_edit", "page=" . $rev->content_id ) );
 		}
 	}
 }

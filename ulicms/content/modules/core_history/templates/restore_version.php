@@ -38,7 +38,8 @@ if (defined ( "_SECURITY" )) {
 			?></td>
 				<td><?php echo $revision->date;?></td>
 				<td><a
-					href="<?php echo ModuleHelper::buildMethodCallUrl("HistoryController", "doRestore", "do_restore_version=".$revision->id);?>"
+					href="<?php echo ModuleHelper::buildMethodCallUrl("HistoryController", "doRestore", "version_id=".$revision->id);?>"
+					class="btn btn-danger voffset3"
 					onclick="return confirm('<?php translate("ask_for_restore");?>');"><?php translate("restore");?></a>
 				</td>
 			</tr>
