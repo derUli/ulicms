@@ -89,14 +89,17 @@ if (! $acl->hasPermission ( "info" )) {
 </div>
 <br />
 
-<input type="button" value="UliCMS Portal"
-	onclick='window.open("http://www.ulicms.de");' />
 
-<input type="button" value="<?php translate("license");?>"
-	onclick='location.href="index.php?action=license";' />
 
-<input type="button" value="Feedback"
-	onclick='location.replace("http://www.ulicms.de/kontakt.html");'>
+<a href="http://www.ulicms.de" target="_blank" class="btn btn-info"
+	role="button">UliCMS Portal</a>
+
+
+<a href="index.php?action=license" class="btn btn-info" role="button"><?php translate("license")?></a>
+
+<a href="http://www.ulicms.de/kontakt.html" target="_blank"
+	class="btn btn-info" role="button">Feedback</a>
+
 
 
 <br />
