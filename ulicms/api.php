@@ -1,4 +1,7 @@
 <?php
+function array_keep($array, $keys) {
+	return array_intersect_key($array, array_fill_keys($keys, null));
+}
 function getAllUsedLanguages() {
 	$sql = "select language from `{prefix}content` where active = 1 group by language order by language";
 	$query = Database::query ( $sql, true );

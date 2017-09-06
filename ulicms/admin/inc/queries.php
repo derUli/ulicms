@@ -4,6 +4,12 @@ add_hook ( "query" );
 
 include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 
+if ($acl->hasPermission ( "pages" ) and Request::getVar ( "toggle-show-core-modules" )) {
+	
+	$_SESSION ["show_core_modules"] = ! $_SESSION ["show_core_modules"];
+	Request::redirect ( ModuleHelper::buildActionURL ( Request::getVar ( "action" ) ) );
+}
+
 if ($_REQUEST ["action"] == "install-sin-package" and StringHelper::isNotNullOrEmpty ( $_REQUEST ["file"] ) and $acl->hasPermission ( "install_packages" )) {
 	$file = basename ( $_POST ["file"] );
 	$path = Path::resolve ( "ULICMS_TMP/$file" );

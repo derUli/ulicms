@@ -734,4 +734,7 @@ define ( "TRANSLATION_NEW", "New" );
 define ( "TRANSLATION_CODE_TO_EMBED", "Code to Embed" );
 define ( "TRANSLATION_JSREDIRECT_NOSCRIPT", "If you are not automatically redirected, <a href=\"%url%\">click here</a>." );
 
+define ( "TRANSLATION_SHOW_CORE_MODULES", "Show Core Modules" );
+
+
 add_hook ( "lang_en" );

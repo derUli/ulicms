@@ -1,14 +1,14 @@
 {
-	"source" : "core",
-	"version" : "2018.1",
-	"embed" : false,
-	"actions" : {
-		"favicon" : "templates/favicon.php"
+	"source": "core",
+	"version": "2018.1",
+	"embed": false,
+	"actions": {
+		"favicon": "templates/favicon.php"
 	},
-	"controllers" : {
-	"FaviconController" : "controllers/FaviconController.php"
-},
-	"controller_function_permissions" : {
-  	"FaviconController::doUpload" : "favicon"
+	"controllers": {
+		"FaviconController": "controllers/FaviconController.php"
+	},
+	"controller_function_permissions": {
+		"FaviconController::doUpload": "favicon"
 	}
 }
