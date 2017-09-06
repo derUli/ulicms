@@ -2,7 +2,7 @@
 class FaviconController extends Controller {
 	public function doUpload() {
 		// Favicon Upload
-		if (! empty ( $_FILES ['favicon_upload_file'] ['name'] ) and $acl->hasPermission ( "favicon" )) {
+		if (! empty ( $_FILES ['favicon_upload_file'] ['name'] )) {
 			if (! file_exists ( "../content/images" )) {
 				@mkdir ( "../content/images" );
 				@chmod ( "../content/images", 0777 );
