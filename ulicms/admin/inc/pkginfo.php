@@ -19,6 +19,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			$compatible_to = $pkg->getProperty ( "compatible_to" );
 			$dependencies = $pkg->getProperty ( "dependencies" );
 			$license = $pkg->getProperty ( "license" );
+			$screenshot = $pkg->getProperty ( "screenshot" );
 			$size = intval ( $pkg->getSize () );
 			$size = formatSizeUnits ( $size );
 			?>
@@ -45,6 +46,17 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		<td><?php Template::escape($size)?></td>
 	</tr>	
 	
+			<?php
+			
+			if ($screenshot) {
+				?>
+				<tr>
+		<td></td>
+		<td><img src="data:<?php Template::escape($screenshot);?>"
+			alt="Screenshot" class="responsive-image"></td>
+	</tr>
+				<?php } ?>
+			
 			<?php
 			if ($description) {
 				?>
@@ -100,7 +112,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 				echo nl2br ( Template::getEscape ( $license ) )?></div>
 <?php }?>
 <?php
-
+			
 			if (! $installable) {
 				?>
 <h2><?php translate("errors");?></h2>
@@ -109,7 +121,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			}
 			?>
 <?php
-
+			
 			if ($installable) {
 				?>
 
