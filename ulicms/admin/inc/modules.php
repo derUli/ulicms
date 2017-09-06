@@ -66,7 +66,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 				if ($source != "extend") {
 					$status = $pkg->checkForNewerVersionOfPackage ( $modules [$i] );
 				}
-				if ($source == "extend") {
+				if ($source == "extend" or $source == "core") {
 					$color = "blue";
 				} else if ($status) {
 					if (version_compare ( $status, $version, '>' )) {
