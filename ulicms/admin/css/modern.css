@@ -63,6 +63,10 @@ html {
 	color: #335599;
 }
 
+.main-content a.btn-info {
+	color: white;
+}
+
 .menu a, .menu a:visited {
 	font-weight: bold;
 	color: #e7e5e5;
