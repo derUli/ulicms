@@ -59,6 +59,10 @@ html {
 	list-style: none;
 }
 
+.main-content a {
+	color: #335599;
+}
+
 .menu a, .menu a:visited {
 	font-weight: bold;
 	color: #e7e5e5;
@@ -105,17 +109,6 @@ div#root-container {
 	width: 96%;
 	margin: auto;
 	position: relative;
-}
-
-a, a:visited, a:focus {
-	color: rgb(30, 30, 30);
-	text-decoration: none;
-	font-weight: 500;
-}
-
-a:hover, a:active {
-	color: rgb(30, 30, 30);
-	text-decoration: underline;
 }
 
 p#footer {

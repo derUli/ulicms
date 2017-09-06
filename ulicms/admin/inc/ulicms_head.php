@@ -87,6 +87,7 @@ $(".menu li:has(ul)").doubleTapToGo();
 <?php include "inc/ulicms_touch_icons.php";?>
 <?php
 
+$styles [] = "css/modern.css";
 $styles [] = "css/bootstrap.min.css";
 $styles [] = "codemirror/lib/codemirror.css";
 $styles [] = "codemirror/mode/xml/xml.css";
@@ -94,7 +95,6 @@ $styles [] = "codemirror/mode/javascript/javascript.css";
 $styles [] = "codemirror/mode/clike/clike.css";
 $styles [] = "codemirror/lib/codemirror.css";
 $styles [] = "codemirror/mode/css/css.css";
-$styles [] = "css/modern.css";
 
 foreach ( $styles as $style ) {
 	enqueueStylesheet ( $style );
