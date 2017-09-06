@@ -1,4 +1,5 @@
 <?php
+// @FIXME: Das hier in core_history auslagern.
 include_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
 include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 if (defined ( "_SECURITY" )) {
@@ -6,7 +7,6 @@ if (defined ( "_SECURITY" )) {
 	if ($acl->hasPermission ( "pages" )) {
 		$content_id = intval ( $_GET ["content_id"] );
 		$revisions = VCS::getRevisionsByContentID ( $content_id );
-		
 		?>
 <h1><?php translate("versions");?></h1>
 <div class="scroll">
@@ -38,7 +38,7 @@ if (defined ( "_SECURITY" )) {
 			?></td>
 				<td><?php echo $revision->date;?></td>
 				<td><a
-					href="index.php?action?pages&do_restore_version=<?php echo $revision->id;?>"
+					href="<?php echo ModuleHelper::buildMethodCallUrl("HistoryController", "doRestore", "do_restore_version=".$revision->id);?>"
 					onclick="return confirm('<?php translate("ask_for_restore");?>');"><?php translate("restore");?></a>
 				</td>
 			</tr>

@@ -1,4 +1,5 @@
 <?php
+// @FIXME: Das hier in core_history auslagern.
 include_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
 include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 if (defined ( "_SECURITY" )) {
