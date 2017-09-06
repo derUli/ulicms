@@ -1,22 +1,22 @@
 <?php
-	$version = new ulicms_version ();
-	$acl = new ACL ();
-	if (! $acl->hasPermission ( "info" )) {
-		noperms ();
-	} else {
-
-		$admin_logo = Settings::get ( "admin_logo" );
-		if (! $admin_logo) {
-			$admin_logo = "gfx/logo.png";
-		}
-		?>
+$version = new ulicms_version ();
+$acl = new ACL ();
+if (! $acl->hasPermission ( "info" )) {
+	noperms ();
+} else {
+	
+	$admin_logo = Settings::get ( "admin_logo" );
+	if (! $admin_logo) {
+		$admin_logo = "gfx/logo.png";
+	}
+	?>
 <strong>Release <?php
-
-		echo cms_version ();
-		?> "<?php
-
-		echo $version->getVersion ();
-		?>"</strong>
+	
+	echo cms_version ();
+	?> "<?php
+	
+	echo $version->getVersion ();
+	?>"</strong>
 <br />
 
 <p>
@@ -102,4 +102,4 @@
 <br />
 
 <?php
-	}
+}

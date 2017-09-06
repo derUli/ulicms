@@ -1,0 +1,8 @@
+{
+	"source" : "core",
+	"version" : "2018.1",
+	"embed" : false,
+	"actions" : {
+		"home" : "templates/home.php"
+	}
+}

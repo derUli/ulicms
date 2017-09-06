@@ -2,7 +2,6 @@
 class ActionRegistry {
 	private static $assignedControllers = array ();
 	private static $defaultCoreActions = array (
-			"home" => "inc/dashboard.php",
 			"help" => "inc/help.php",
 			"contents" => "inc/contents.php",
 			"pages" => "inc/pages.php",
@@ -67,7 +66,7 @@ class ActionRegistry {
 			"do-post-install" => "inc/do-post-install.php",
 			"pkginfo" => "inc/pkginfo.php",
 			"sin_package_install_ok" => "inc/sin_package_install_ok.php",
-			"default_access_restrictions" => "inc/default_access_restrictions.php"
+			"default_access_restrictions" => "inc/default_access_restrictions.php" 
 	);
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;
@@ -98,7 +97,7 @@ class ActionRegistry {
 						if (! endsWith ( $path, ".php" )) {
 							$path .= ".php";
 						}
-
+						
 						if (file_exists ( $path ) and is_file ( $path )) {
 							$actions [$key] = $path;
 						}

@@ -1,4 +1,5 @@
 <?php
+// @FIXME: Alle SQLs die in dieser Datei stehen, müssen in einen Controller oder ein Model ("HomeViewModel" anlegen) ausgelagert werden.
 $acl = new ACL ();
 include_once ULICMS_ROOT . "/lib/formatter.php";
 
@@ -199,8 +200,7 @@ $(document).ready(function() {
 
 	</div>
 
-	<h2 class="accordion-header">
-	<?php translate("last_changes");?>
+	<h2 class="accordion-header"><?php translate("last_changes");?>
 	</h2>
 	<div class="accordion-content">
 		<table cellpadding="2">
