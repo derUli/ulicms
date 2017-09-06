@@ -2,7 +2,7 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "settings_simple" )) {
-		
+		// @FIXME: Dieses SQL gehört hier nicht her. In neue Funktion Settings::getAll() auslagern.
 		$query = db_query ( "SELECT * FROM " . tbname ( "settings" ) . " ORDER BY name", $connection );
 		$settings = Array ();
 		while ( $row = db_fetch_object ( $query ) ) {
