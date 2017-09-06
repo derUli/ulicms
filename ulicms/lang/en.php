@@ -407,12 +407,6 @@ define ( "TRANSLATION_INSTALL_PATCHES", "Install Patches" );
 
 define ( "TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches are available" );
 
-// Hilfetexte
-define ( "TRANSLATION_HELP", "Help" );
-define ( "TRANSLATION_PATCH_INSTALL_HELP", file_get_contents ( ULICMS_ROOT . "/lang/longtxt/en/patch_install_help.html" ) );
-
-define ( "TRANSLATION_HELP_IS_ADMIN", "This option disables all access restrictions. The user have full access to the system.." );
-
 // Videos
 define ( "TRANSLATION_VIDEOS", "Videos" );
 define ( "TRANSLATION_UPLOAD_VIDEO", "Upload a Video" );
