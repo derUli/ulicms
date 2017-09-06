@@ -93,7 +93,7 @@ if (! $acl->hasPermission ( "info" )) {
 	onclick='window.open("http://www.ulicms.de");' />
 
 <input type="button" value="<?php translate("license");?>"
-	onclick='window.open("license.html");' />
+	onclick='location.href="index.php?action=license";' />
 
 <input type="button" value="Feedback"
 	onclick='location.replace("http://www.ulicms.de/kontakt.html");'>
