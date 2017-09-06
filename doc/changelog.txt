@@ -1,6 +1,11 @@
-﻿===== Neues in UliCMS 2018.1 =====
+===== Neues in UliCMS 2018.1 =====
 + Neuer Parameter $htmlAttributes (Array) zu Funktion ModuleHelper::buildMethodCallForm() hinzugefügt
 + Der Confirm-Dialog "Wirklich löschen?" kann über eine CSS-Klasse an einem Formular ausgelöst werden.
++ Neue Funktionen:
+  * esc()
+  * _esc()
+  * ModuleHelper::buildMethodCallUrl()
+  * ModuleHelper::deleteButton()
 + CodeMirror kann per CSS-Klasse auf eine Textarea angewenden werden.
 # Funktion is_ajax_request() verschoben nach Request::isAjaxRequest()
 - Funktion ulicms_redirect() entfernt.
