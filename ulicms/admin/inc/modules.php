@@ -16,7 +16,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	if ($acl->hasPermission ( "remove_packages" )) {
 		
 		// Modul deinstallieren
-		if (isset ( $_GET ["remove"] )) {
+		if (isset ( $_GET ["remove"] ) and getModuleMeta ( $_GET ["remove"], "source" ) != "core") {
 			$remove = basename ( $_GET ["remove"] );
 			
 			$type = $_GET ["type"];
@@ -47,8 +47,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 				type="hidden" name="action" value="modules"> <input type="checkbox"
 				id="show_core_modules" value="1"
 				onclick="$(this).closest('form').submit();"
-				<?php if($_SESSION ["show_core_modules"]) echo "checked";?>>
-				<label for="show_core_modules"><?php translate("show_core_modules");?></label>
+				<?php if($_SESSION ["show_core_modules"]) echo "checked";?>> <label
+				for="show_core_modules"><?php translate("show_core_modules");?></label>
 		</form>
 	</div>
 </div>
