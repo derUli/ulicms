@@ -41,7 +41,6 @@ class ActionRegistry {
 			"forms" => "inc/forms.php",
 			"forms_new" => "inc/forms_new.php",
 			"forms_edit" => "inc/forms_edit.php",
-			"system_update" => "inc/system_update.php",
 			"motd" => "inc/motd.php",
 			"edit_profile" => "inc/edit_profile.php",
 			"logo_upload" => "inc/logo.php",

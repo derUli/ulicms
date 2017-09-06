@@ -41,6 +41,10 @@ if (isset ( $_POST ["login"] )) {
 	
 	$sessionData = validate_login ( $_POST ["user"], $_POST ["password"], $confirmation_code );
 	if ($sessionData) {
+		if (! Settings::get ( "sys_initialized" )) {
+			clearCache ();
+			Settings::set ( "sys_initialized", "true" );
+		}
 		add_hook ( "login_ok" );
 		register_session ( $sessionData, true );
 	} else {
