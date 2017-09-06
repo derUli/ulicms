@@ -1,22 +1,20 @@
 <?php
-if (defined ( "_SECURITY" )) {
-	include_once "../version.php";
 	$version = new ulicms_version ();
 	$acl = new ACL ();
 	if (! $acl->hasPermission ( "info" )) {
 		noperms ();
 	} else {
-		
+
 		$admin_logo = Settings::get ( "admin_logo" );
 		if (! $admin_logo) {
 			$admin_logo = "gfx/logo.png";
 		}
 		?>
 <strong>Release <?php
-		
+
 		echo cms_version ();
 		?> "<?php
-		
+
 		echo $version->getVersion ();
 		?>"</strong>
 <br />
@@ -103,9 +101,5 @@ if (defined ( "_SECURITY" )) {
 
 <br />
 
-
-
 <?php
 	}
-}
-?>
