@@ -44,7 +44,6 @@ class ActionRegistry {
 			"motd" => "inc/motd.php",
 			"edit_profile" => "inc/edit_profile.php",
 			"logo_upload" => "inc/logo.php",
-			"favicon" => "inc/favicon.php",
 			"languages" => "inc/languages.php",
 			"cache" => "inc/cache_settings.php",
 			"install_method" => "inc/install_method.php",

@@ -1,0 +1,11 @@
+{
+	"source" : "core",
+	"version" : "2018.1",
+	"embed" : false,
+	"actions" : {
+		"favicon" : "templates/favicon.php"
+	},
+	"controllers" : {
+	"FaviconController" : "controllers/FaviconController.php"
+}
+}
