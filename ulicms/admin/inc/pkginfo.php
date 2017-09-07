@@ -45,7 +45,16 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		<td><strong><?php translate("size")?></strong></td>
 		<td><?php Template::escape($size)?></td>
 	</tr>	
-	
+	<?php
+			
+			if ($screenshot) {
+				?>
+				<tr>
+		<td></td>
+		<td><img src="data:<?php Template::escape($screenshot);?>"
+			alt="Screenshot" class="responsive-image"></td>
+	</tr>
+				<?php } ?>
 			<?php
 			
 			if ($screenshot) {
