@@ -22,7 +22,6 @@ if ($_REQUEST ["action"] == "install-sin-package" and StringHelper::isNotNullOrE
 }
 if ($_GET ["action"] == "save_settings" && isset ( $_POST ["save_settings"] ) && $acl->hasPermission ( "settings_simple" )) {
 	add_hook ( "before_safe_simple_settings" );
-	setconfig ( "registered_user_default_level", intval ( $_POST ["registered_user_default_level"] ) );
 	setconfig ( "homepage_owner", db_escape ( $_POST ["homepage_owner"] ) );
 	setconfig ( "language", db_escape ( $_POST ["language"] ) );
 	setconfig ( "visitors_can_register", intval ( isset ( $_POST ["visitors_can_register"] ) ) );
