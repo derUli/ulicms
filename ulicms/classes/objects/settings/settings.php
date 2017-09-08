@@ -96,4 +96,11 @@ class Settings {
 		}
 		return $value;
 	}
+	public static function getAll($order = "name") {
+		$result = array ();
+		$query = Database::query ( "SELECT * FROM `{prefix}settings` order by $order", true );
+		while ( $result [] = Database::fetchObject ( $query ) ) {
+		}
+		return $result;
+	}
 }

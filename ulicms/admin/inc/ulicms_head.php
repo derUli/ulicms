@@ -113,7 +113,14 @@ $(document).ready(function(){
 add_hook ( "admin_head" );
 ?>
 </head>
-<div class="fluid-container main">
+<div
+	class="fluid-container main <?php
+	
+	if (get_action ()) {
+		echo 'action-' . Template::getEscape ( get_action () );
+	}
+	
+	?>">
 
 	<div class="row">
 		<div class="col-xs-8">
