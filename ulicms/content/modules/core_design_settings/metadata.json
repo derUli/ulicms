@@ -8,6 +8,9 @@
 	"actions": {
 		"design": "templates/form.php"
 	},
+	"action_controllers" : {
+		"design" : "DesignSettingsController"
+	},
 	"controller_function_permissions": {
 		"ExpertSettingsController::savePost": "design"
 	}

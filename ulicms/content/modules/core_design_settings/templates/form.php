@@ -1,4 +1,5 @@
 <?php
+$controller = ControllerRegistry::get ();
 $acl = new ACL ();
 if (! $acl->hasPermission ( "design" )) {
 	noperms ();
@@ -7,9 +8,8 @@ if (! $acl->hasPermission ( "design" )) {
 	$additional_menus = Settings::get ( "additional_menus" );
 	$mobile_theme = Settings::get ( "mobile_theme" );
 	$allThemes = getThemesList ();
-	include_once "inc/fonts.php";
-	$fonts = getFontFamilys ();
-	$google_fonts = get_google_fonts ();
+	$fonts = $controller->getFontFamilys ();
+	$google_fonts = $controller->getGoogleFonts ();
 	$theme = Settings::get ( "theme" );
 	$additional_menus = Settings::get ( "additional_menus" );
 	$mobile_theme = Settings::get ( "mobile_theme" );
@@ -26,7 +26,6 @@ if (! $acl->hasPermission ( "design" )) {
 	$mobileDetectInstalled = in_array ( "Mobile_Detect", $modManager->getEnabledModuleNames () );
 	?>
 	<?php
-	
 	if ($default_font != "google") {
 		?>
 <style type="text/css">
@@ -359,7 +358,6 @@ function onChangeDefaultFont(){
 }
 
 $("select#default-font").change(onChangeDefaultFont);
-
 </script>
 <script type="text/javascript" src="scripts/design.js">
 </script>

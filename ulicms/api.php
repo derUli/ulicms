@@ -1,6 +1,6 @@
 <?php
 function array_keep($array, $keys) {
-	return array_intersect_key($array, array_fill_keys($keys, null));
+	return array_intersect_key ( $array, array_fill_keys ( $keys, null ) );
 }
 function getAllUsedLanguages() {
 	$sql = "select language from `{prefix}content` where active = 1 group by language order by language";
@@ -74,17 +74,6 @@ function get_prefered_language(array $available_languages, $http_accept_language
 	arsort ( $langs );
 	
 	return $langs;
-}
-function get_google_fonts() {
-	$retval = array ();
-	$file = ULICMS_ROOT . "/lib/webFontNames.opml";
-	$content = file_get_contents ( $file );
-	$xml = new SimpleXMLElement ( $content );
-	foreach ( $xml->body->outline as $outline ) {
-		$retval [] = $outline ["text"];
-	}
-	;
-	return $retval;
 }
 function get_all_used_menus() {
 	$retval = array ();
