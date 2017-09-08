@@ -21,9 +21,7 @@ if (! $acl->hasPermission ( "design" )) {
 	$ckeditor_skin = Settings::get ( "ckeditor_skin" );
 	$video_width_100_percent = Settings::get ( "video_width_100_percent" );
 	$font_sizes = getFontSizes ();
-	
 	$no_mobile_design_on_tablet = Settings::get ( "no_mobile_design_on_tablet" );
-	
 	$modManager = new ModuleManager ();
 	$mobileDetectInstalled = in_array ( "Mobile_Detect", $modManager->getEnabledModuleNames () );
 	?>
@@ -31,7 +29,6 @@ if (! $acl->hasPermission ( "design" )) {
 	
 	if ($default_font != "google") {
 		?>
-
 <style type="text/css">
 div#google-fonts {
 	display: none;
@@ -326,12 +323,10 @@ div#google-fonts {
 	echo real_htmlspecialchars ( $additional_menus );
 	?>"></td>
 	</tr>
-
 </table>
 <p>
 	<button type="submit" class="btn btn-success voffset3" name="submit"><?php translate("save_changes");?></button>
 </p>
-
 <?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>
