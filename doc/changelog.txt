@@ -8,6 +8,7 @@
   * ModuleHelper::deleteButton()
 + CodeMirror kann per CSS-Klasse auf eine Textarea angewenden werden.
 + Beim Upload eines SimpleInstall v2 Pakets werden nun ein Screenshot angezeigt, sofern vorhanden.
+# wenn möglich wird bei PHP Fehlern der HTTP Status "500 Internal Server Error" gesendet.
 # Funktion is_ajax_request() verschoben nach Request::isAjaxRequest()
 - Funktion ulicms_redirect() entfernt.
   Nutzen Sie stattdessen Request::redirect()
