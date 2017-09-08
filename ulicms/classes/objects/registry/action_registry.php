@@ -48,7 +48,6 @@ class ActionRegistry {
 			"other_settings" => "inc/other_settings.php",
 			"frontpage_settings" => "inc/frontpage.php",
 			"pkg_settings" => "inc/pkg_settings.php",
-			"design" => "inc/design.php",
 			"available_patches" => "inc/available_patches.php",
 			"install_patches" => "inc/install_patches.php",
 			"videos" => "inc/videos.php",
