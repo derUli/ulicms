@@ -1,8 +1,4 @@
 <?php
-if (! defined ( "ULICMS_ROOT" )) {
-	die ( "schlechter Hacker" );
-}
-
 $acl = new ACL ();
 
 if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl->hasPermission ( "categories" ) or $acl->hasPermission ( "export" ) or $acl->hasPermission ( "forms" )) {

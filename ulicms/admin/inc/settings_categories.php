@@ -1,7 +1,4 @@
 <?php
-if (! defined ( "ULICMS_ROOT" ))
-	die ( "Schlechter Hacker" );
-
 $acl = new ACL ();
 ?>
 <h1>
@@ -32,7 +29,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	}
 	?>
 <?php
-
+	
 	if ($acl->hasPermission ( "spam_filter" )) {
 		?>
 	<a href="index.php?action=spam_filter"><?php translate("spamfilter");?>
@@ -41,7 +38,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	}
 	?>
 <?php
-
+	
 	if ($acl->hasPermission ( "cache" )) {
 		?>
 	<a href="index.php?action=cache&clear_cache=yes"><?php
@@ -52,7 +49,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	}
 	?>
 <?php
-
+	
 	if ($acl->hasPermission ( "motd" )) {
 		?>
 	<a href="index.php?action=motd"><?php translate("motd");?>
@@ -61,7 +58,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	}
 	?>
 <?php
-
+	
 	if ($acl->hasPermission ( "pkg_settings" )) {
 		?>
 	<a href="?action=pkg_settings"><?php
@@ -72,7 +69,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	}
 	?>
 <?php
-
+	
 	if ($acl->hasPermission ( "logo" )) {
 		?>
 	<a href="index.php?action=logo_upload"><?php translate("logo");?>
@@ -81,7 +78,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	}
 	?>
 <?php
-
+	
 	if ($acl->hasPermission ( "languages" )) {
 		?>
 	<a href="index.php?action=languages"><?php translate("languages");?>
@@ -90,7 +87,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	}
 	?>
 <?php
-
+	
 	if ($acl->hasPermission ( "other" )) {
 		?>
 	<a href="?action=other_settings"><?php translate("other");?>

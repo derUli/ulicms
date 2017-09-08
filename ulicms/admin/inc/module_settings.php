@@ -1,8 +1,4 @@
 <?php
-if (! defined ( "ULICMS_ROOT" )) {
-	die ( "Schlechter Hacker!" );
-}
-
 $module = basename ( $_GET ["module"] );
 
 $admin_file_path = getModuleAdminFilePath ( $module );
