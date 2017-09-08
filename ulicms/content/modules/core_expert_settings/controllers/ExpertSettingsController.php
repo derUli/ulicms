@@ -11,7 +11,7 @@ class ExpertSettingsController extends Controller {
 	}
 	public function delete() {
 		$name = Request::getVar ( "name" );
-		if ($name) {
+		if (! is_null ( $name )) {
 			Settings::delete ( $name );
 		}
 		Request::redirect ( ModuleHelper::buildActionURL ( self::LIST_ACTION ) );
