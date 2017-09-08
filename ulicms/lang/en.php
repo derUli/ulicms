@@ -362,10 +362,6 @@ define ( "TRANSLATION_ONLY_IN_BACKEND", "Only at Backend" );
 define ( "TRANSLATION_ONLY_IN_FRONTEND", "Only at Frontend" );
 define ( "TRANSLATION_BOOTH_BACKEND_AND_FRONTEND", "Booth Backend and Frontend" );
 
-define ( "TRANSLATION_CREATE_OPTION", "Create configuration variable" );
-define ( "TRANSLATION_OPTION", "Variable" );
-define ( "TRANSLATION_VALUE", "Value" );
-
 define ( "TRANSLATION_UPDATE_AVAILABLE", "Update available" );
 
 define ( "TRANSLATION_CUSTOM_DATA_JSON", "User defined values (JSON)" );

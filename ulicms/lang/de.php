@@ -361,11 +361,6 @@ define ( "TRANSLATION_ONLY_IN_BACKEND", "Nur im Backend" );
 define ( "TRANSLATION_ONLY_IN_FRONTEND", "Nur im Frontend" );
 define ( "TRANSLATION_BOOTH_BACKEND_AND_FRONTEND", "Im Backend und im Frontend" );
 
-// Expertenmodus (Einstellungen)
-define ( "TRANSLATION_CREATE_OPTION", "Konfigurationsvariable erstellen" );
-define ( "TRANSLATION_OPTION", "Option" );
-define ( "TRANSLATION_VALUE", "Wert" );
-
 define ( "TRANSLATION_UPDATE_AVAILABLE", "Update verfügbar" );
 
 define ( "TRANSLATION_CUSTOM_DATA_JSON", "Benutzerdefinierte Werte (JSON)" );
