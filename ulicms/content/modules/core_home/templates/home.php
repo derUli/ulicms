@@ -152,10 +152,10 @@ $(document).ready(function() {
 	</h2>
 	<div class="accordion-content">
 		<ul id="users_online">
-		<?php
-		
-		include_once "inc/users_online_dashboard.php";
-		?>
+<?php foreach ( getOnlineUsers () as $user ) {
+	?>
+<li><?php Template::escape($user);?></li>
+<?php } ?>
 		</ul>
 	</div>
 	<h2 class="accordion-header">
@@ -212,11 +212,8 @@ $(document).ready(function() {
 				<td><?php translate("done_by");?>
 				</td>
 			</tr>
-
 			<?php
-		
 		while ( $row = db_fetch_object ( $lastModfiedPages ) ) {
-			
 			$domain = getDomainByLanguage ( $row->language );
 			if (! $domain) {
 				$url = "../" . $row->systemname . ".html";
@@ -266,4 +263,3 @@ $(document).ready(function() {
 } else {
 	noperms ();
 }
-?>

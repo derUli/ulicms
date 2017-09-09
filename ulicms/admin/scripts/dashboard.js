@@ -16,5 +16,4 @@ $(function() {
 			$("#core-update-check").slideDown();
 		}
 	});
-
 });
