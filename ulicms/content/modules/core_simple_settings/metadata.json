@@ -1,0 +1,14 @@
+{
+	"source": "core",
+	"version": "2018.1",
+	"embed": false,
+	"actions": {
+		"settings_simple": "templates/form.php"
+	},
+	"controllers": {
+		"SimpleSettingsController": "controllers/SimpleSettingsController"
+	},
+	"controller_function_permissions": {
+		"SimpleSettingsController::savePost": "settings_simple"
+	}
+}

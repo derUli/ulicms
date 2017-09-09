@@ -1,0 +1,11 @@
+{
+	"source": "core",
+	"version": "2018.1",
+	"embed": false,
+	"actions": {
+		"media": "templates/media.php",
+		"images": "templates/filemanager.php",
+		"files": "templates/filemanager.php",
+		"flash": "templates/filemanager.php"
+	}
+}
