@@ -2,9 +2,7 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "settings_simple" )) {
-		
 		$languages = getAllLanguages ();
-		
 		if (isset ( $_POST ["submit"] )) {
 			for($i = 0; $i < count ( $languages ); $i ++) {
 				
