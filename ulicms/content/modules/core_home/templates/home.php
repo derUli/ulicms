@@ -65,11 +65,6 @@ if ($acl->hasPermission ( "dashboard" )) {
 	<div class="accordion-content" id="ulicms-feed">
 		<img src="gfx/loading.gif" alt="Feed wird geladen..." />
 	</div>
-	<script type="text/javascript">
-$(document).ready(function() {
- $('#ulicms-feed').load('?action=ulicms_news');
-});
-</script>
 <?php } ?>
 	<h2 class="accordion-header">
 	<?php translate("statistics");?>
@@ -179,7 +174,6 @@ $(document).ready(function() {
 			</tr>
 		</table>
 	</div>
-
 	<h2 class="accordion-header"><?php translate("last_changes");?>
 	</h2>
 	<div class="accordion-content">
@@ -229,7 +223,7 @@ $(document).ready(function() {
 	add_hook ( "accordion_layout" );
 	?>
 </div>
-<script src="scripts/dashboard.js" type="text/javascript"></script>
+<script src="<?php esc(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));?>" type="text/javascript"></script>
 <?php
 } else {
 	noperms ();

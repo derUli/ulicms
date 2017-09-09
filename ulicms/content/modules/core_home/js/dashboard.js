@@ -1,4 +1,5 @@
 $(function() {
+	$('#ulicms-feed').load('?action=ulicms_news');
 	$.post("index.php", {
 		ajax_cmd : "ajax_patch_check"
 	}, function(data, status) {
