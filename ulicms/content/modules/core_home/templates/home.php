@@ -44,7 +44,6 @@ if ($acl->hasPermission ( "dashboard" )) {
 	if (file_exists ( $pi ) and is_writable ( $pi )) {
 		?>
 <h2 class="accordion-header"><?php translate("unfinished_package_installations");?></h2>
-
 	<div class="accordion-content">
 		<a href="index.php?action=do-post-install">
 			<?php translate("there_are_unfinished_package_installations");?></a>
@@ -57,7 +56,6 @@ if ($acl->hasPermission ( "dashboard" )) {
 		<div class="accordion-content" id="core-update-message"></div>
 	</div>
 	<?php
-	
 	if (! Settings::get ( "disable_ulicms_newsfeed" )) {
 		?>
 	<h2 class="accordion-header">
