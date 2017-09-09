@@ -109,13 +109,11 @@ if ($acl->hasPermission ( "dashboard" )) {
 	}
 	?>
 			<?php
-	// @FIXME: Das hier gehört ins Guestbook Modul
-	$test = db_query ( "SELECT id FROM " . tbname ( "guestbook_entries" ) );
-	if ($test) {
+	if (! is_null ( $model->guestbookEntryCount )) {
 		?>
 			<tr>
 				<td><?php translate("GUESTBOOK_ENTRIES");?></td>
-				<td><?php echo db_num_rows($test)?></td>
+				<td><?php echo $model->guestbookEntryCount;?></td>
 			</tr>
 			<?php
 	}
@@ -203,7 +201,6 @@ if ($acl->hasPermission ( "dashboard" )) {
 		
 		echo htmlspecialchars ( $row->title, ENT_QUOTES, "UTF-8" );
 		?></a></td>
-
 				<td><?php echo strftime("%x %X", $row -> lastmodified)?></td>
 				<td><?php
 		$autorName = $model->admins [$row->lastchangeby];
@@ -223,7 +220,9 @@ if ($acl->hasPermission ( "dashboard" )) {
 	add_hook ( "accordion_layout" );
 	?>
 </div>
-<script src="<?php esc(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));?>" type="text/javascript"></script>
+<script
+	src="<?php esc(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));?>"
+	type="text/javascript"></script>
 <?php
 } else {
 	noperms ();
