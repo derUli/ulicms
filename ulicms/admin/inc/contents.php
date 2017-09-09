@@ -3,7 +3,6 @@ $acl = new ACL ();
 
 if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl->hasPermission ( "categories" ) or $acl->hasPermission ( "export" ) or $acl->hasPermission ( "forms" )) {
 	?>
-
 <h2>
 <?php translate("contents");?>
 </h2>

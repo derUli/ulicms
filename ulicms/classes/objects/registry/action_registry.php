@@ -53,8 +53,7 @@ class ActionRegistry {
 			"edit_audio" => "inc/edit_audio.php",
 			"do-post-install" => "inc/do-post-install.php",
 			"pkginfo" => "inc/pkginfo.php",
-			"sin_package_install_ok" => "inc/sin_package_install_ok.php",
-			"default_access_restrictions" => "inc/default_access_restrictions.php" 
+			"sin_package_install_ok" => "inc/sin_package_install_ok.php" 
 	);
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;
