@@ -4,5 +4,14 @@
 	"embed": false,
 	"actions": {
 		"home": "templates/home.php"
+	},
+	"controllers": {
+		"HomeController": "controllers/HomeController.php"
+	},
+	"action_controllers": {
+		"home": "HomeController"
+	},
+	"objects": {
+		"HomeViewModel": "models/HomeViewModel.php"
 	}
 }

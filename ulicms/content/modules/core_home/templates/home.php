@@ -3,21 +3,11 @@
 $acl = new ACL ();
 include_once ULICMS_ROOT . "/lib/formatter.php";
 
+$controller = ControllerRegistry::get ();
+$model = $controller->getModel ();
+
 if ($acl->hasPermission ( "dashboard" )) {
-	$query = db_query ( "SELECT count(id) as amount FROM " . tbname ( "content" ) );
-	$result = Database::fetchObject ( $query );
-	$pages_count = $result->amount;
 	
-	$topPages = db_query ( "SELECT language, systemname, title, `views` FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY views DESC LIMIT 5" );
-	$lastModfiedPages = db_query ( "SELECT language, systemname, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else autor end as lastchangeby FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY lastmodified DESC LIMIT 5" );
-	
-	$admins_query = db_query ( "SELECT id, username FROM " . tbname ( "users" ) );
-	
-	$admins = Array ();
-	
-	while ( $row = db_fetch_object ( $admins_query ) ) {
-		$admins [$row->id] = $row->username;
-	}
 	?>
 <p>
 <?php
@@ -39,7 +29,6 @@ if ($acl->hasPermission ( "dashboard" )) {
 	<?php translate("motd");?></h2>
 	<div class="accordion-content">
 	<?php
-		
 		echo $motd;
 		?>
 	</div>
@@ -59,11 +48,8 @@ if ($acl->hasPermission ( "dashboard" )) {
 	<div class="accordion-content">
 		<a href="index.php?action=do-post-install">
 			<?php translate("there_are_unfinished_package_installations");?></a>
-
 	</div>
-
 	<?php } ?>
-
 				<div id="core-update-check" style="display: none">
 		<h2 class="accordion-header">
 	<?php translate("update_available");?>
@@ -76,7 +62,6 @@ if ($acl->hasPermission ( "dashboard" )) {
 		?>
 	<h2 class="accordion-header">
 	<?php translate("ulicms_news");?></h2>
-
 	<div class="accordion-content" id="ulicms-feed">
 		<img src="gfx/loading.gif" alt="Feed wird geladen..." />
 	</div>
@@ -110,14 +95,13 @@ $(document).ready(function() {
 			<tr>
 				<td><?php translate("pages_count");?>
 				</td>
-				<td><?php echo $pages_count?></td>
+				<td><?php echo $model->contentCount;?></td>
 			</tr>
 			<tr>
 				<td><?php translate("REGISTERED_USERS_COUNT");?>
 				</td>
 				<td><?php echo count(getUsers())?></td>
 			</tr>
-
 			<?php
 	
 	if (Settings::get ( "contact_form_refused_spam_mails" ) !== false) {
@@ -130,7 +114,7 @@ $(document).ready(function() {
 	}
 	?>
 			<?php
-	
+	// @FIXME: Das hier gehört ins Guestbook Modul
 	$test = db_query ( "SELECT id FROM " . tbname ( "guestbook_entries" ) );
 	if ($test) {
 		?>
@@ -168,8 +152,7 @@ $(document).ready(function() {
 				</td>
 			</tr>
 			<?php
-	
-	while ( $row = db_fetch_object ( $topPages ) ) {
+	foreach ( $model->topPages as $row ) {
 		
 		$domain = getDomainByLanguage ( $row->language );
 		if (! $domain) {
@@ -195,7 +178,6 @@ $(document).ready(function() {
 	?>
 			</tr>
 		</table>
-
 	</div>
 
 	<h2 class="accordion-header"><?php translate("last_changes");?>
@@ -211,7 +193,7 @@ $(document).ready(function() {
 				</td>
 			</tr>
 			<?php
-	while ( $row = db_fetch_object ( $lastModfiedPages ) ) {
+	foreach ( $model->lastModfiedPages as $row ) {
 		$domain = getDomainByLanguage ( $row->language );
 		if (! $domain) {
 			$url = "../" . $row->systemname . ".html";
@@ -222,7 +204,6 @@ $(document).ready(function() {
 		?>
 			<tr>
 				<td><a href="<?php
-		
 		echo $url;
 		?>" target="_blank"><?php
 		
@@ -231,15 +212,13 @@ $(document).ready(function() {
 
 				<td><?php echo strftime("%x %X", $row -> lastmodified)?></td>
 				<td><?php
-		$autorName = $admins [$row->lastchangeby];
+		$autorName = $model->admins [$row->lastchangeby];
 		if (! empty ( $autorName )) {
 		} else {
-			$autorName = $admins [$row->autor];
+			$autorName = $model->admins [$row->autor];
 		}
-		
 		echo $autorName;
 		?></td>
-
 			</tr>
 			<?php
 	}
@@ -247,7 +226,6 @@ $(document).ready(function() {
 		</table>
 	</div>
 	<?php
-	
 	add_hook ( "accordion_layout" );
 	?>
 </div>
