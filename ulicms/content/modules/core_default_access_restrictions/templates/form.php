@@ -30,7 +30,7 @@ if ($acl->hasPermission ( "default_access_restrictions_edit" )) {
 <?php
 	if (Request::getVar ( "submit_form" )) {
 		?>
-	<p style="color: green">
+	<p style="color: green" class="voffset3">
 	<?php translate("changes_was_saved"); ?>
 	</p>
 <?php 	}?>
