@@ -1,8 +1,6 @@
 <?php
 $acl = new ACL ();
 if ($acl->hasPermission ( "default_access_restrictions_edit" )) {
-	if (Request::getVar ( "submit_form" )) {
-	}
 	$only_admins_can_edit = intval ( Settings::get ( "only_admins_can_edit" ) );
 	$only_group_can_edit = intval ( Settings::get ( "only_group_can_edit" ) );
 	$only_owner_can_edit = intval ( Settings::get ( "only_owner_can_edit" ) );

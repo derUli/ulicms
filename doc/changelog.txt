@@ -6,6 +6,7 @@
   * _esc()
   * ModuleHelper::buildMethodCallUrl()
   * ModuleHelper::deleteButton()
+  * ModuleHelper::buildQueryString()
 + CodeMirror kann per CSS-Klasse auf eine Textarea angewenden werden.
 + Beim Upload eines SimpleInstall v2 Pakets werden nun ein Screenshot angezeigt, sofern vorhanden.
 # wenn möglich wird bei PHP Fehlern der HTTP Status "500 Internal Server Error" gesendet.

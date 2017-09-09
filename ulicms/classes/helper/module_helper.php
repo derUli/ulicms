@@ -177,4 +177,8 @@ class ModuleHelper {
 		$html = trim ( $html );
 		return $html;
 	}
+	public static function buildQueryString($data, $forHtml = true) {
+		$seperator = $forHtml ? "&amp;" : "&";
+		return http_build_query ( $data, '', $seperator );
+	}
 }

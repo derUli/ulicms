@@ -78,4 +78,14 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 				"delete" => "123" 
 		) ) );
 	}
+	public function testBuildQueryString() {
+		$data = array (
+				'foo' => 'bar',
+				'baz' => 'boom',
+				'kuh' => 'milch',
+				'php' => 'hypertext processor' 
+		);
+		$this->assertEquals ( "foo=bar&baz=boom&kuh=milch&php=hypertext+processor", ModuleHelper::buildQueryString ( $data, false ) );
+		$this->assertEquals ( "foo=bar&amp;baz=boom&amp;kuh=milch&amp;php=hypertext+processor", ModuleHelper::buildQueryString ( $data, true ) );
+	}
 }
