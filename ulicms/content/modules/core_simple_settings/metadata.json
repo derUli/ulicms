@@ -3,12 +3,15 @@
 	"version": "2018.1",
 	"embed": false,
 	"actions": {
-		"settings_simple": "templates/form.php"
+		"settings_simple": "templates/settings_simple/form.php",
+		"homepage_title": "templates/homepage_title/form.php"
 	},
 	"controllers": {
-		"SimpleSettingsController": "controllers/SimpleSettingsController"
+		"SimpleSettingsController": "controllers/SimpleSettingsController",
+		"HomepageTitleController": "controllers/HomepageTitleController.php"
 	},
 	"controller_function_permissions": {
-		"SimpleSettingsController::savePost": "settings_simple"
+		"SimpleSettingsController::savePost": "settings_simple",
+		"HomepageTitleController::savePost": "settings_simple"
 	}
 }

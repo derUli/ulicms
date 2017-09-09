@@ -8,7 +8,6 @@ if ($acl->hasPermission ( "settings_simple" )) {
 		$settings [$option->name] = Template::getEscape ( $option->value );
 	}
 	?>
-
 <h2><?php translate("general_settings");?></h2>
 <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
 <?php
