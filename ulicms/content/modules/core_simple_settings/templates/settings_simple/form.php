@@ -16,10 +16,6 @@ if ($acl->hasPermission ( "settings_simple" )) {
 	echo ModuleHelper::buildMethodCallForm ( "SimpleSettingsController", "save", array (), "post", array (
 			"id" => "settings_simple" 
 	) )?>
-<?php
-	
-	csrf_token_html ();
-	?>
 <table>
 	<tr>
 		<td><strong><?php translate("homepage_title");?></strong></td>
@@ -145,7 +141,6 @@ if ($acl->hasPermission ( "settings_simple" )) {
 	$current_timezone = trim ( $current_timezone );
 	sort ( $timezones );
 	for($i = 0; $i < count ( $timezones ); $i ++) {
-		
 		$thisTimezone = $timezones [$i];
 		$thisTimezone = trim ( $thisTimezone );
 		if ($thisTimezone === $current_timezone) {
