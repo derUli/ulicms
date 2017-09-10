@@ -4,7 +4,8 @@
 	"embed": false,
 	"actions": {
 		"sin_package_install_ok": "templates/sin_package_install_ok.php",
-		"pkginfo": "templates/pkginfo.php"
+		"pkginfo": "templates/pkginfo.php",
+		"install_method": "templates/install_method.php"
 	},
 	"controllers": {
 		"PkgInfoController": "controllers/PkgInfoController.php"

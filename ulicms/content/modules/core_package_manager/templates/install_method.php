@@ -16,5 +16,3 @@ if (! $acl->hasPermission ( "install_packages" )) {
 
 <?php
 }
-
-?>
