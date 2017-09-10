@@ -23,7 +23,6 @@ class ActionRegistry {
 			"available_modules" => "inc/available_modules.php",
 			"install_modules" => "inc/install_modules.php",
 			"upload_patches" => "inc/upload_patches.php",
-			"open_graph" => "inc/open_graph.php",
 			"forms" => "inc/forms.php",
 			"forms_new" => "inc/forms_new.php",
 			"forms_edit" => "inc/forms_edit.php",
