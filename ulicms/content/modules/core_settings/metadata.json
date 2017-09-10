@@ -18,7 +18,8 @@
 		"default_access_restrictions": "templates/default_access_restrictions/form.php",
 		"settings": "templates/expert_settings/list.php",
 		"settings_edit": "templates/expert_settings/form.php",
-		"design": "templates/design/form.php"
+		"design": "templates/design/form.php",
+		"favicon": "templates/favicon/form.php"
 	},
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
@@ -34,7 +35,8 @@
 		"OtherSettingsController": "controllers/OtherSettingsController.php",
 		"DefaultAccessRestrictionsController": "controllers/DefaultAccessRestrictionsController.php",
 		"ExpertSettingsController": "controllers/ExpertSettingsController.php",
-		"DesignSettingsController": "controllers/DesignSettingsController.php"
+		"DesignSettingsController": "controllers/DesignSettingsController.php",
+		"FaviconController": "controllers/FaviconController.php"
 	},
 	"action_controllers": {
 		"settings_simple": "SimpleSettingsController",
@@ -55,6 +57,7 @@
 		"DefaultAccessRestrictionsController::savePost": "default_access_restrictions_edit",
 		"ExpertSettingsController::save": "expert_settings_edit",
 		"ExpertSettingsController::delete": "expert_settings_edit",
-		"ExpertSettingsController::savePost": "design"
+		"ExpertSettingsController::savePost": "design",
+		"FaviconController::doUpload": "favicon"
 	}
 }
