@@ -41,7 +41,8 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	
 	if ($acl->hasPermission ( "cache" )) {
 		?>
-	<a href="index.php?action=cache&clear_cache=yes"><?php
+	<a
+		href="<?php echo ModuleHelper::buildMethodCallUrl("CacheSettingsController", "clearCache");?>"><?php
 		translate ( "clear_cache" );
 		?>
 	</a> <br /> <br />

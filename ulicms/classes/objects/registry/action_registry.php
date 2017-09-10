@@ -34,7 +34,6 @@ class ActionRegistry {
 			"edit_profile" => "inc/edit_profile.php",
 			"logo_upload" => "inc/logo.php",
 			"languages" => "inc/languages.php",
-			"cache" => "inc/cache_settings.php",
 			"install_method" => "inc/install_method.php",
 			"upload_package" => "inc/upload_package.php",
 			"module_settings" => "inc/module_settings.php",

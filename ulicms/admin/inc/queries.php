@@ -26,10 +26,6 @@ if ($_GET ["action"] == "view_website" or $_GET ["action"] == "frontpage") {
 	exit ();
 }
 
-if (isset ( $_GET ["clear_cache"] )) {
-	clearCache ();
-}
-
 if ($_GET ["action"] == "undelete_page" && $acl->hasPermission ( "pages" ) && get_request_method () == "POST") {
 	$page = intval ( $_GET ["page"] );
 	add_hook ( "before_undelete_page" );

@@ -5,12 +5,14 @@
 	"actions": {
 		"settings_simple": "templates/settings_simple/form.php",
 		"homepage_title": "templates/homepage_title/form.php",
-		"motto": "templates/motto/form.php"
+		"motto": "templates/motto/form.php",
+		"cache": "templates/cache/form.php"
 	},
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
 		"HomepageTitleController": "controllers/HomepageTitleController.php",
-		"MottoController": "controllers/MottoController.php"
+		"MottoController": "controllers/MottoController.php",
+		"CacheSettingsController": "controllers/CacheSettingsController.php"
 	},
 	"controller_function_permissions": {
 		"SimpleSettingsController::savePost": "settings_simple",

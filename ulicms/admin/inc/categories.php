@@ -3,7 +3,6 @@ $acl = new ACL ();
 if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 	noperms ();
 } else {
-	
 	// Create
 	if (isset ( $_REQUEST ["create"] )) {
 		if (! empty ( $_REQUEST ["name"] )) {
