@@ -1,29 +1,19 @@
 <?php
-if (defined ( "_SECURITY" )) {
-	$acl = new ACL ();
-	if (is_admin () or $acl->hasPermission ( "update_system" )) {
+$acl = new ACL ();
+if (is_admin () or $acl->hasPermission ( "update_system" )) {
+	if (file_exists ( Path::resolve ( "ULICMS_ROOT/update.php" ) )) {
 		?>
-
-		<?php
-		if (file_exists ( "../update.php" )) {
-			?>
 <p>
 	<a href="../update.php"><?php translate("run_update");?></a>
 </p>
-<?php translate("update_notice");?>
+<p><?php translate("update_notice");?>
 	<?php
-		} else {
-			?>
-			<?php translate("update_information_text");	?>
-<p>
-
-<?php
-		}
-		?>
-
-		<?php
 	} else {
-		noperms ();
+		translate ( "update_information_text" );
+		?>
+</p>
+<?php
 	}
+} else {
+	noperms ();
 }
-?>
