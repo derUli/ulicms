@@ -35,7 +35,6 @@ class ActionRegistry {
 			"add_audio" => "inc/add_audio.php",
 			"edit_audio" => "inc/edit_audio.php",
 			"do-post-install" => "inc/do-post-install.php",
-			"pkginfo" => "inc/pkginfo.php"
 	);
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;
