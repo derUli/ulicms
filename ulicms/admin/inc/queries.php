@@ -93,7 +93,7 @@ if ($_GET ["action"] == "empty_trash") {
 }
 
 if ($_GET ["action"] == "banner_delete" && $acl->hasPermission ( "banners" ) && get_request_method () == "POST") {
-	$banner = intval ( $_GET ["banner"] );	
+	$banner = intval ( $_GET ["banner"] );
 	add_hook ( "before_banner_delete" );
 	$query = db_query ( "DELETE FROM " . tbname ( "banner" ) . " WHERE id='$banner'", $connection );
 	add_hook ( "after_banner_delete" );
@@ -314,19 +314,6 @@ if ($_POST ["add_banner"] == "add_banner" && $acl->hasPermission ( "banners" )) 
 	exit ();
 }
 
-if ($_POST ["add_key"] == "add_key" and $acl->hasPermission ( "expert_settings" )) {
-	
-	$name = db_escape ( $_POST ["name"] );
-	$value = db_escape ( $_POST ["value"] );
-	add_hook ( "before_add_key" );
-	$query = db_query ( "INSERT INTO " . tbname ( "settings" ) . "
-(name,value) VALUES('$name','$value')", $connection );
-	
-	add_hook ( "after_add_key" );
-	header ( "Location: index.php?action=settings" );
-	exit ();
-}
-
 if ($_POST ["add_admin"] == "add_admin" && (is_admin () or $acl->hasPermission ( "users" ))) {
 	$username = $_POST ["admin_username"];
 	$lastname = $_POST ["admin_lastname"];
@@ -520,37 +507,6 @@ if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
 	exit ();
 }
 
-// Resize image
-function resize_image($file, $target, $w, $h, $crop = FALSE) {
-	list ( $width, $height ) = getimagesize ( $file );
-	$r = $width / $height;
-	if ($crop) {
-		if ($width > $height) {
-			$width = ceil ( $width - ($width * ($r - $w / $h)) );
-		} else {
-			$height = ceil ( $height - ($height * ($r - $w / $h)) );
-		}
-		$newwidth = $w;
-		$newheight = $h;
-	} else {
-		if ($w / $h > $r) {
-			$newwidth = $h * $r;
-			$newheight = $h;
-		} else {
-			$newheight = $w / $r;
-			$newwidth = $w;
-		}
-	}
-	
-	$src = imagecreatefromjpeg ( $file );
-	
-	$dst = imagecreatetruecolor ( $newwidth, $newheight );
-	
-	imagecopyresampled ( $dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height );
-	
-	imagejpeg ( $dst, $target, 100 );
-}
-
 if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) or ($_POST ["edit_admin"] == "edit_admin" and logged_in () and $_POST ["id"] == $_SESSION ["login_id"])) {
 	
 	$id = intval ( $_POST ["id"] );
@@ -631,19 +587,5 @@ SET name='$name', link_url='$link_url', image_url='$image_url', category='$categ
 	
 	add_hook ( "after_edit_banner" );
 	header ( "Location: index.php?action=banner" );
-	exit ();
-}
-
-if ($_POST ["edit_key"] == "edit_key" && $acl->hasPermission ( "expert_settings" )) {
-	$name = db_escape ( $_POST ["name"] );
-	$value = db_escape ( $_POST ["value"] );
-	$id = intval ( $_POST ["id"] );
-	add_hook ( "before_edit_key" );
-	$query = db_query ( "UPDATE " . tbname ( "settings" ) . "
-SET name='$name',value='$value' WHERE id=$id" );
-	
-	add_hook ( "after_edit_key" );
-	
-	header ( "Location: index.php?action=settings" );
 	exit ();
 }
