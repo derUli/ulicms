@@ -14,7 +14,6 @@ class ActionRegistry {
 			"groups" => "inc/groups.php",
 			"admin_new" => "inc/admins_new.php",
 			"admin_edit" => "inc/admins_edit.php",
-			"spam_filter" => "inc/spamfilter_settings.php",
 			"modules" => "inc/modules.php",
 			"available_modules" => "inc/available_modules.php",
 			"install_modules" => "inc/install_modules.php",
@@ -34,7 +33,7 @@ class ActionRegistry {
 			"audio" => "inc/audio.php",
 			"add_audio" => "inc/add_audio.php",
 			"edit_audio" => "inc/edit_audio.php",
-			"do-post-install" => "inc/do-post-install.php",
+			"do-post-install" => "inc/do-post-install.php" 
 	);
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;

@@ -21,7 +21,8 @@
 		"design": "templates/design/form.php",
 		"favicon": "templates/favicon/form.php",
 		"pkg_settings": "templates/pkg_settings/form.php",
-		"languages": "templates/languages/form.php"
+		"languages": "templates/languages/form.php",
+		"spam_filter": "templates/spam_filter/form.php"
 	},
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
@@ -40,7 +41,8 @@
 		"DesignSettingsController": "controllers/DesignSettingsController.php",
 		"FaviconController": "controllers/FaviconController.php",
 		"PkgSettingsController": "controllers/PkgSettingsController.php",
-		"LanguageController": "controllers/LanguageController.php"
+		"LanguageController": "controllers/LanguageController.php",
+		"SpamFilterController": "controllers/SpamFilterController.php"
 	},
 	"action_controllers": {
 		"settings_simple": "SimpleSettingsController",
@@ -66,6 +68,7 @@
 		"PkgSettingsController::savePost": "pkg_settings",
 		"LanguageController::createPost": "languages",
 		"LanguageController::deletePost": "languages",
-		"LanguageController::setDefaultLanguage": "languages"
+		"LanguageController::setDefaultLanguage": "languages",
+		"SpamFilterController::savePost": "spam_filter"
 	}
 }

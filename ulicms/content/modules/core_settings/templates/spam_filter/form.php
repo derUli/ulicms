@@ -1,14 +1,10 @@
 <h1><?php translate("spamfilter");?></h1>
-
 <?php
-
+$acl = new ACL ();
 if ($acl->hasPermission ( "spam_filter" )) {
 	?>
 <form id="spamfilter_settings" name="?action=spam_filter" method="post">
-<?php
-	
-	csrf_token_html ();
-	?>
+<?php echo ModuleHelper::buildMethodCallForm("SpamFilterController", "save");?>
 	<input type="checkbox" id="spamfilter_enabled"
 		name="spamfilter_enabled"
 		<?php
