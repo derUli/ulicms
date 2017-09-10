@@ -45,9 +45,7 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] ) and $acl->hasPermission ( "categories_create" )) {
 		?>
 
-<h2>
-<?php translate("categories");?>
-</h2>
+<h2><?php translate("categories");?></h2>
 <p>
 <?php translate("categories_infotext");?>
 </p>
@@ -65,7 +63,6 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 		?>
 <div class="scroll">
 	<table class="tablesorter">
-
 		<thead>
 			<tr>
 				<th style="min-width: 50px;"><a href="?action=categories&order=id"><?php translate("id");?> </a></th>
@@ -245,7 +242,6 @@ $("form.delete-form").ajaxForm(ajax_options);
 			?>">
 	</p>
 </form>
-
 <?php
 		} else {
 			noperms ();
