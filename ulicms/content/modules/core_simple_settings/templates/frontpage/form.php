@@ -24,7 +24,7 @@ if ($acl->hasPermission ( "settings_simple" )) {
 	?>
 <table border="0">
 	<tr>
-		<td style="min-width: 100px;"><strong><?php translate("language");?>
+		<td><strong><?php translate("language");?>
 			</strong></td>
 		<td><strong><?php translate("frontpage");?>
 			</strong></td>
@@ -41,8 +41,7 @@ if ($acl->hasPermission ( "settings_simple" )) {
 		<td><select name="frontpage_<?php
 		
 		echo $lang;
-		?>" size=1
-			style="width: 400px">
+		?>" size="1">
 				<?php
 		
 		$pages = getAllPages ( $lang, "title", true );
@@ -56,10 +55,10 @@ if ($acl->hasPermission ( "settings_simple" )) {
 		}
 		?>
 			</select></td>
+	</tr>
 			<?php
 	}
 	?>
-</tr>
 	<tr>
 		<td></td>
 		<td style="text-align: center"><input type="submit" name="submit"
