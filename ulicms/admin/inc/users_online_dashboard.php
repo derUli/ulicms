@@ -9,4 +9,3 @@ while ( $row = db_fetch_object ( $users_online ) ) {
 </li>
 <?php
 }
-?>

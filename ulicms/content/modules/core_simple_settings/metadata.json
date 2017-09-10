@@ -6,7 +6,8 @@
 		"settings_simple": "templates/settings_simple/form.php",
 		"homepage_title": "templates/homepage_title/form.php",
 		"motto": "templates/motto/form.php",
-		"cache": "templates/cache/form.php"
+		"cache": "templates/cache/form.php",
+		"settings_categories": "templates/categories/menu.php"
 	},
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",

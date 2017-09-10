@@ -17,7 +17,6 @@ class ActionRegistry {
 			"groups" => "inc/groups.php",
 			"admin_new" => "inc/admins_new.php",
 			"admin_edit" => "inc/admins_edit.php",
-			"settings_categories" => "inc/settings_categories.php",
 			"meta_description" => "inc/meta_description.php",
 			"meta_keywords" => "inc/meta_keywords.php",
 			"spam_filter" => "inc/spamfilter_settings.php",
