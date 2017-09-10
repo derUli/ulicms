@@ -4,8 +4,6 @@ class ActionRegistry {
 	private static $defaultCoreActions = array (
 			"contents" => "inc/contents.php",
 			"pages" => "inc/pages.php",
-			"restore_version" => "inc/restore_version.php",
-			"view_diff" => "inc/view_diff.php",
 			"categories" => "inc/categories.php",
 			"pages_edit" => "inc/edit_page.php",
 			"pages_new" => "inc/add_page.php",
@@ -18,7 +16,6 @@ class ActionRegistry {
 			"admin_new" => "inc/admins_new.php",
 			"admin_edit" => "inc/admins_edit.php",
 			"spam_filter" => "inc/spamfilter_settings.php",
-			"customize_menu" => "inc/customize_menu.php",
 			"modules" => "inc/modules.php",
 			"available_modules" => "inc/available_modules.php",
 			"install_modules" => "inc/install_modules.php",
