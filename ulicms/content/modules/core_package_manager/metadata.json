@@ -5,5 +5,11 @@
 	"actions": {
 		"sin_package_install_ok": "templates/sin_package_install_ok.php",
 		"pkginfo": "templates/pkginfo.php"
+	},
+	"controllers": {
+		"PkgInfoController": "controllers/PkgInfoController.php"
+	},
+	"controller_function_permissions": {
+		"PkgInfoController::install": "install_packages"
 	}
 }

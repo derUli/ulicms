@@ -121,7 +121,6 @@ if (! $acl->hasPermission ( "install_packages" )) {
 				echo nl2br ( Template::getEscape ( $license ) )?></div>
 <?php }?>
 <?php
-			
 			if (! $installable) {
 				?>
 <h2><?php translate("errors");?></h2>
@@ -130,17 +129,18 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			}
 			?>
 <?php
-			
 			if ($installable) {
 				?>
 
 <div style="text-align: right; margin-top: 30px;">
-	<form action="index.php" method="post">
-		<input type="hidden" name="action" value="install-sin-package"> <input
-			type="hidden" name="file"
-			value="<?php Template::escape(basename($tempfile));?>"> <input
-			type="submit" value="<?php translate("install");?>">
-				<?php csrf_token_html();?></form>
+<?php
+				
+				echo ModuleHelper::buildMethodCallForm ( "PkgInfoController", "install", array (
+						"file" => basename ( $tempfile ) 
+				) );
+				?>
+<input type="submit" value="<?php translate("install");?>">
+	</form>
 </div>
 <?php
 			}

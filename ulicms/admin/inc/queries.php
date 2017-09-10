@@ -9,17 +9,6 @@ if ($acl->hasPermission ( "pages" ) and Request::getVar ( "toggle-show-core-modu
 	Request::redirect ( ModuleHelper::buildActionURL ( Request::getVar ( "action" ) ) );
 }
 
-if ($_REQUEST ["action"] == "install-sin-package" and StringHelper::isNotNullOrEmpty ( $_REQUEST ["file"] ) and $acl->hasPermission ( "install_packages" )) {
-	$file = basename ( $_POST ["file"] );
-	$path = Path::resolve ( "ULICMS_TMP/$file" );
-	$pkg = new SinPackageInstaller ( $path );
-	if (file_exists ( $path )) {
-		$pkg->installPackage ();
-		@unlink ( $path );
-	}
-	Request::redirect ( "index.php?action=sin_package_install_ok&file=$file" );
-}
-
 if ($_GET ["action"] == "view_website" or $_GET ["action"] == "frontpage") {
 	add_hook ( "before_view_website" );
 	header ( "Location: ../" );
