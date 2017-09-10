@@ -31,7 +31,6 @@ class ActionRegistry {
 			"forms_edit" => "inc/forms_edit.php",
 			"motd" => "inc/motd.php",
 			"edit_profile" => "inc/edit_profile.php",
-			"logo_upload" => "inc/logo.php",
 			"languages" => "inc/languages.php",
 			"install_method" => "inc/install_method.php",
 			"upload_package" => "inc/upload_package.php",

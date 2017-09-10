@@ -15,12 +15,14 @@ if (defined ( "_SECURITY" )) {
 <p>
 <?php translate("logo_infotext");?>
 </p>
-<form enctype="multipart/form-data"
-	action="index.php?action=logo_upload" method="post">
+<form enctype="multipart/form-data" action="index.php" method="post">
 	<?php
 		
 		csrf_token_html ();
 		?>
+		<input type="hidden" name="sClass" value="LogoUploadController" /> <input
+		type="hidden" name="sMethod" value="upload" />
+
 	<table border="0" height="250">
 		<tr>
 			<td><strong><?php translate("your_logo");?>
