@@ -2,7 +2,6 @@
 class ActionRegistry {
 	private static $assignedControllers = array ();
 	private static $defaultCoreActions = array (
-			"contents" => "inc/contents.php",
 			"pages" => "inc/pages.php",
 			"categories" => "inc/categories.php",
 			"pages_edit" => "inc/edit_page.php",
@@ -23,7 +22,6 @@ class ActionRegistry {
 			"forms" => "inc/forms.php",
 			"forms_new" => "inc/forms_new.php",
 			"forms_edit" => "inc/forms_edit.php",
-			"motd" => "inc/motd.php",
 			"edit_profile" => "inc/edit_profile.php",
 			"install_method" => "inc/install_method.php",
 			"upload_package" => "inc/upload_package.php",
@@ -37,8 +35,7 @@ class ActionRegistry {
 			"add_audio" => "inc/add_audio.php",
 			"edit_audio" => "inc/edit_audio.php",
 			"do-post-install" => "inc/do-post-install.php",
-			"pkginfo" => "inc/pkginfo.php",
-			"sin_package_install_ok" => "inc/sin_package_install_ok.php" 
+			"pkginfo" => "inc/pkginfo.php"
 	);
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;

@@ -7,7 +7,6 @@ if (is_admin () or $acl->hasPermission ( "update_system" )) {
 	$postinstall = ULICMS_ROOT . "/post-install.php";
 	include $postinstall;
 	unlink ( $postinstall );
-	
 	?>
 		<?php if(!file_exists($postinstall)){?>
 <p><?php translate("finished");?></p>

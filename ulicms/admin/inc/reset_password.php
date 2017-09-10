@@ -50,4 +50,6 @@ if (Settings::get ( "disable_password_reset" )) {
 	}
 	?>
 </form>
-<?php } ?>
+<?php
+
+} 

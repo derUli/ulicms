@@ -1,0 +1,8 @@
+{
+	"source": "core",
+	"version": "2018.1",
+	"embed": false,
+	"actions": {
+		"sin_package_install_ok": "templates/sin_package_install_ok.php"
+	}
+}
