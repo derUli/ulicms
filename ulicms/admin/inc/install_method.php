@@ -11,7 +11,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	<a href="?action=upload_package"><?php translate("upload_file");?>
 	</a> <br /> <a href="?action=available_modules"><?php translate ( "from_the_package_source" );?>
 	</a> <br /> <a href="http://extend.ulicms.de" target="_blank">UliCMS
-		eXtend</a> </a>
+		eXtend</a>
 </p>
 
 <?php

@@ -15,7 +15,7 @@ if (defined ( "_SECURITY" )) {
 		csrf_token_html ();
 		?>
 		<div class="scroll">
-		<table border=0>
+		<table style="border: 0">
 			<tr>
 				<td><strong><?php translate("shortcode");?>
 			</strong></td>
@@ -36,6 +36,7 @@ if (defined ( "_SECURITY" )) {
 			</tr>
 
 		</table>
+	</div>
 
 </form>
 <br>
@@ -121,7 +122,6 @@ if (defined ( "_SECURITY" )) {
 
 </tbody>
 </table>
-</div>
 <script type="text/javascript">
 
 var ajax_options = {

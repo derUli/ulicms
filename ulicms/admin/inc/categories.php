@@ -221,7 +221,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 		value="<?php echo intval($_GET["edit"])?>">
 	<p>
 	<?php translate("name");?>
-		<input type="text" name="name" required="true"
+		<input type="text" name="name" required
 			value="<?php
 			
 			echo categories::getCategoryById ( intval ( $_GET ["edit"] ) );

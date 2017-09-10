@@ -335,6 +335,7 @@ $(window).load(function(){
 		
 		translate ( "approved" );
 		?>
+		<p>
 <select name="filter_approved" onchange="filter_by_approved(this);">
 	<option value="null"
 		<?php

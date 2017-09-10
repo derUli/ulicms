@@ -42,9 +42,7 @@ if (! $acl->hasPermission ( "groups" )) {
 		echo $groupName;
 		?>">
 	</p>
-	<h3><?php translate("permissions");?>
-		</h3>
-	</p>
+	<h3><?php translate("permissions");?></h3>
 	<fieldset>
 		<p>
 			<input id="checkall" type="checkbox" class="checkall"> <label

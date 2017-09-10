@@ -120,7 +120,7 @@ if (defined ( "_SECURITY" )) {
 				<br /> <br /> <strong><?php translate("position");?> </strong> <span
 					style="cursor: help;"
 					onclick="$('div#position_help').slideToggle()">[?]</span><br /> <input
-					type="number" name="position" required="true" min="0" step="1"
+					type="number" name="position" required min="0" step="1"
 					value="<?php
 			
 			echo $row->position;

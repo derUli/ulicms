@@ -117,7 +117,7 @@ if (defined ( "_SECURITY" )) {
 				<br /> <select name="show_headline">
 					<option value="1"
 						<?php if($row->show_headline == 1) echo "selected";?>><?php translate("yes");?></option>
-					<option vlaue="0"
+					<option value="0"
 						<?php if($row->show_headline == 0) echo "selected";?>><?php translate("no");?></option>
 				</select>
 			</div>
@@ -429,11 +429,13 @@ function openMenuImageSelectWindow(field) {
 					type="text" name="meta_description"
 					value="<?php
 				echo htmlspecialchars ( $row->meta_description );
-				?>" maxlength="200"> <br /> <br /> <strong><?php translate("meta_keywords");?></strong><br />
+				?>"
+					maxlength="200"> <br /> <br /> <strong><?php translate("meta_keywords");?></strong><br />
 				<input type="text" name="meta_keywords"
 					value="<?php
 				echo htmlspecialchars ( $row->meta_keywords );
-				?>" maxlength="200">
+				?>"
+					maxlength="200">
 				<div id="article-metadata">
 					<br /> <strong><?php translate("author_name");?></strong><br /> <input
 						type="text" name="article_author_name"

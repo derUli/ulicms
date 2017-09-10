@@ -32,7 +32,6 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	<?php translate ( "phardata_not_available" );?></p>
 <?php
 	} 
-
 	else {
 		
 		include_once "../version.php";
@@ -52,7 +51,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			?>
 <p>
 	<strong><?php translate("error");?></strong> <br /> <?php translate("nothing_to_do");?>
-</strong>
+
 </p>
 
 <?php
