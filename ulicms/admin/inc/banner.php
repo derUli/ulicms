@@ -1,4 +1,5 @@
 <?php
+// @FIXME: Das SQL hier muss in einen Controller verschoben werden.
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "banners" )) {
