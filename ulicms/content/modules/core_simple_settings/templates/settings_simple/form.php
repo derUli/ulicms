@@ -1,6 +1,7 @@
 <?php
 $acl = new ACL ();
 if ($acl->hasPermission ( "settings_simple" )) {
+	$controller = ControllerRegistry::get ();
 	// @FIXME: Dieses SQL gehört hier nicht her. In neue Funktion Settings::getAll() auslagern.
 	$allSettings = Settings::getAll ();
 	$settings = array ();
@@ -139,8 +140,7 @@ if ($acl->hasPermission ( "settings_simple" )) {
 		<td><strong><?php translate ( "timezone" );?></strong></td>
 		<td><select name="timezone" size="1">
 <?php
-	$timezones = file ( "inc/timezones.txt" );
-	
+	$timezones = $controller->getTimezones ();
 	$current_timezone = Settings::get ( "timezone" );
 	$current_timezone = trim ( $current_timezone );
 	sort ( $timezones );

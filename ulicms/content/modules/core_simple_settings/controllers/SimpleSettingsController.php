@@ -1,5 +1,6 @@
 <?php
 class SimpleSettingsController extends Controller {
+	private $moduleName = "core_simple_settings";
 	public function savePost() {
 		add_hook ( "before_safe_simple_settings" );
 		setconfig ( "homepage_owner", db_escape ( $_POST ["homepage_owner"] ) );
@@ -19,5 +20,8 @@ class SimpleSettingsController extends Controller {
 		}
 		add_hook ( "after_safe_simple_settings" );
 		Request::redirect ( ModuleHelper::buildActionURL ( "settings_simple" ) );
+	}
+	public function getTimezones() {
+		return file ( ModuleHelper::buildModuleRessourcePath ( $this->moduleName, "data/timezones.txt" ) );
 	}
 }

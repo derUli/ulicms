@@ -15,6 +15,9 @@
 		"MottoController": "controllers/MottoController.php",
 		"CacheSettingsController": "controllers/CacheSettingsController.php"
 	},
+	"action_controllers": {
+		"settings_simple": "SimpleSettingsController"
+	},
 	"controller_function_permissions": {
 		"SimpleSettingsController::savePost": "settings_simple",
 		"HomepageTitleController::savePost": "settings_simple",

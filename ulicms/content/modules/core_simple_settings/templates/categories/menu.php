@@ -1,9 +1,7 @@
 <?php
 $acl = new ACL ();
 ?>
-<h1>
-<?php translate("settings");?>
-</h1>
+<h1><?php translate("settings");?></h1>
 <?php
 
 if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" ) or $acl->hasPermission ( "spam_filter" ) or $acl->hasPermission ( "cache" ) or $acl->hasPermission ( "motd" ) or $acl->hasPermission ( "pkg_settings" ) or $acl->hasPermission ( "logo" ) or $acl->hasPermission ( "languages" ) or $acl->hasPermission ( "other" )) {
@@ -18,9 +16,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	<?php
 	}
 	?>
-
 <?php
-	
 	if ($acl->hasPermission ( "design" )) {
 		?>
 	<a href="index.php?action=design"><?php translate("design");?>
