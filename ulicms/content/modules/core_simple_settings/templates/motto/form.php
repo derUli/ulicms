@@ -15,9 +15,7 @@ if ($acl->hasPermission ( "settings_simple" )) {
 <h1>
 <?php translate("motto");?>
 </h1>
-
 <?php
-	
 	echo ModuleHelper::buildMethodCallForm ( "MottoController", "save", array (), "post", array (
 			"id" => "motto_settings" 
 	) );

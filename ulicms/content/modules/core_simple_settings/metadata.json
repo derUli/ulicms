@@ -12,7 +12,8 @@
 		"logo_upload": "templates/logo/form.php",
 		"meta_description": "templates/meta_description/form.php",
 		"meta_keywords": "templates/meta_keywords/form.php",
-		"open_graph": "templates/open_graph/form.php"
+		"open_graph": "templates/open_graph/form.php",
+		"motd": "templates/motd/form.php"
 	},
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
@@ -23,7 +24,8 @@
 		"LogoUploadController": "controllers/LogoUploadController.php",
 		"MetaDescriptionController": "controllers/MetaDescriptionController.php",
 		"MetaKeywordsController": "controllers/MetaKeywordsController.php",
-		"OpenGraphController": "controllers/OpenGraphController.php"
+		"OpenGraphController": "controllers/OpenGraphController.php",
+		"MOTDController": "controllers/MOTDController.php"
 	},
 	"action_controllers": {
 		"settings_simple": "SimpleSettingsController"
@@ -36,6 +38,7 @@
 		"LogoUploadController::upload": "logo",
 		"MetaDescriptionController::savePost": "settings_simple",
 		"MetaKeywordsController::savePost": "settings_simple",
-		"OpenGraphController::savePost": "open_graph"
+		"OpenGraphController::savePost": "open_graph",
+		"MOTDController::savePost": "motd"
 	}
 }
