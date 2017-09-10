@@ -92,14 +92,6 @@ if ($_GET ["action"] == "empty_trash") {
 	exit ();
 }
 
-if ($_GET ["action"] == "key_delete" and $acl->hasPermission ( "expert_settings" ) and get_request_method () == "POST") {
-	add_hook ( "before_delete_key" );
-	Settings::delete ( $_GET ["key"] );
-	add_hook ( "after_delete_key" );
-	header ( "Location: index.php?action=settings" );
-	exit ();
-}
-
 if ($_GET ["action"] == "languages" and ! empty ( $_GET ["delete"] ) and $acl->hasPermission ( "languages" ) and get_request_method () == "POST") {
 	add_hook ( "before_delete_language" );
 	db_query ( "DELETE FROM " . tbname ( "languages" ) . " WHERE id = " . intval ( $_GET ["delete"] ) );
@@ -141,16 +133,6 @@ if ($_GET ["action"] == "admin_delete" && (is_admin () or $acl->hasPermission ( 
 	add_hook ( "after_admin_delete" );
 	header ( "Location: index.php?action=admins" );
 	exit ();
-}
-
-if (isset ( $_GET ["do_restore_version"] ) and $acl->hasPermission ( "pages" )) {
-	$do_restore_version = intval ( $_GET ["do_restore_version"] );
-	$rev = VCS::getRevisionByID ( $do_restore_version );
-	if ($rev) {
-		VCS::restoreRevision ( $do_restore_version );
-	}
-	
-	Request::redirect ( "index.php?action=pages_edit&page=" . $rev->content_id );
 }
 
 if ($_POST ["add_page"] == "add_page" && $acl->hasPermission ( "pages" )) {
@@ -593,8 +575,6 @@ function resize_image($file, $target, $w, $h, $crop = FALSE) {
 	
 	imagejpeg ( $dst, $target, 100 );
 }
-
-
 
 if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) or ($_POST ["edit_admin"] == "edit_admin" and logged_in () and $_POST ["id"] == $_SESSION ["login_id"])) {
 	
