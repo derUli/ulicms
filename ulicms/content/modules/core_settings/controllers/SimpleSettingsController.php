@@ -1,6 +1,6 @@
 <?php
 class SimpleSettingsController extends Controller {
-	private $moduleName = "core_simple_settings";
+	private $moduleName = "core_settings";
 	public function savePost() {
 		add_hook ( "before_safe_simple_settings" );
 		setconfig ( "homepage_owner", db_escape ( $_POST ["homepage_owner"] ) );
