@@ -15,7 +15,10 @@
 		"open_graph": "templates/open_graph/form.php",
 		"motd": "templates/motd/form.php",
 		"other_settings": "templates/other_settings/form.php",
-		"default_access_restrictions": "templates/default_access_restrictions/form.php"
+		"default_access_restrictions": "templates/default_access_restrictions/form.php",
+		"settings": "templates/expert_settings/list.php",
+		"settings_edit": "templates/expert_settings/form.php",
+		"design": "templates/design/form.php"
 	},
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
@@ -29,11 +32,14 @@
 		"OpenGraphController": "controllers/OpenGraphController.php",
 		"MOTDController": "controllers/MOTDController.php",
 		"OtherSettingsController": "controllers/OtherSettingsController.php",
-		"DefaultAccessRestrictionsController": "controllers/DefaultAccessRestrictionsController.php"
+		"DefaultAccessRestrictionsController": "controllers/DefaultAccessRestrictionsController.php",
+		"ExpertSettingsController": "controllers/ExpertSettingsController.php",
+		"DesignSettingsController": "controllers/DesignSettingsController.php"
 	},
 	"action_controllers": {
 		"settings_simple": "SimpleSettingsController",
-		"default_access_restrictions": "DefaultAccessRestrictionsController"
+		"default_access_restrictions": "DefaultAccessRestrictionsController",
+		"design": "DesignSettingsController"
 	},
 	"controller_function_permissions": {
 		"SimpleSettingsController::savePost": "settings_simple",
@@ -46,6 +52,9 @@
 		"OpenGraphController::savePost": "open_graph",
 		"MOTDController::savePost": "motd",
 		"OtherSettingsController::savePost": "other",
-		"DefaultAccessRestrictionsController::savePost": "default_access_restrictions_edit"
+		"DefaultAccessRestrictionsController::savePost": "default_access_restrictions_edit",
+		"ExpertSettingsController::save": "expert_settings_edit",
+		"ExpertSettingsController::delete": "expert_settings_edit",
+		"ExpertSettingsController::savePost": "design"
 	}
 }
