@@ -32,8 +32,6 @@ class ActionRegistry {
 			"install_method" => "inc/install_method.php",
 			"upload_package" => "inc/upload_package.php",
 			"module_settings" => "inc/module_settings.php",
-			"frontpage_settings" => "inc/frontpage.php",
-			"pkg_settings" => "inc/pkg_settings.php",
 			"available_patches" => "inc/available_patches.php",
 			"install_patches" => "inc/install_patches.php",
 			"videos" => "inc/videos.php",

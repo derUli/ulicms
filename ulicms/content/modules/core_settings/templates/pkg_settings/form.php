@@ -3,85 +3,66 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "pkg_settings" )) {
 	noperms ();
 } else {
-	
-	// Wenn Formular abgesendet wurde, Wert Speichern
-	if (isset ( $_REQUEST ["pkg_src"] )) {
-		$new_pkg_src = trim ( $_REQUEST ["pkg_src"] );
-		if (! endsWith ( $new_pkg_src, "/" )) {
-			$new_pkg_src .= "/";
-		}
-		
-		if ($new_pkg_src == "/") {
-			Settings::delete ( "pkg_src" );
-		} else {
-			$new_pkg_src = db_escape ( $new_pkg_src );
-			setconfig ( "pkg_src", $new_pkg_src );
-		}
-	}
-	
 	$default_pkg_src = "https://packages.ulicms.de/{version}/";
-	
 	$version = new ulicms_version ();
 	$version = $version->getInternalVersion ();
 	$version = implode ( ".", $version );
-	
 	$local_pkg_dir = "../packages/";
 	$local_pkg_dir_value = "../packages/";
 	$pkg_src = Settings::get ( "pkg_src" );
-	
 	$is_other = ($pkg_src !== $default_pkg_src and $pkg_src !== $local_pkg_dir and $pkg_src !== $local_pkg_dir_value);
-	
-	include_once "../lib/file_get_contents_wrapper.php";
 	?>
 <h1>Paketquelle</h1>
-<form id="pkg_settings" action="index.php?action=pkg_settings"
-	method="post">
+<?php
+	echo ModuleHelper::buildMethodCallForm ( "PkgSettingsController", "save", array (), "post", array (
+			"id" => "pkg_settings" 
+	) );
+	?>
 	<?php
 	
 	csrf_token_html ();
 	?>
-	<fieldset>
-		<input type="radio" id="pkgsrc1" name="radioButtonSRC"
-			<?php
+<fieldset>
+	<input type="radio" id="pkgsrc1" name="radioButtonSRC"
+		<?php
 	
 	if ($pkg_src === $default_pkg_src)
 		echo " checked";
 	?>
-			onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $default_pkg_src?>');">
-		<label for="pkgsrc1"><?php translate("official_package_source");?>
+		onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $default_pkg_src?>');">
+	<label for="pkgsrc1"><?php translate("official_package_source");?>
 		</label><br> <input type="radio" id="pkgsrc2" name="radioButtonSRC"
-			<?php
+		<?php
 	
 	if ($pkg_src === $local_pkg_dir or $pkg_src === $local_pkg_dir_value)
 		echo " checked";
 	?>
-			onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $local_pkg_dir_value?>');">
-		<label for="pkgsrc2"><?php translate("from_filesystem");?>
+		onclick="$('#sonstigePaketQuelle').slideUp(); $('#pkg_src').val('<?php echo $local_pkg_dir_value?>');">
+	<label for="pkgsrc2"><?php translate("from_filesystem");?>
 		</label><br> <input type="radio" id="pkgsrc3" name="radioButtonSRC"
-			<?php
+		<?php
 	
 	if ($is_other) {
 		echo " checked";
 	}
 	?>
-			onclick="$('#sonstigePaketQuelle').slideDown();"> <label
-			for="pkgsrc3"><?php translate("other_package_source");?>
+		onclick="$('#sonstigePaketQuelle').slideDown();"> <label for="pkgsrc3"><?php translate("other_package_source");?>
 		</label><br>
-		<div id="sonstigePaketQuelle"
-			<?php
+	<div id="sonstigePaketQuelle"
+		<?php
 	if ($is_other)
 		echo 'style="display:block"';
 	else
 		echo 'style="display:none"';
 	?>>
-			<input type="text" id="pkg_src" name="pkg_src"
-				value="<?php
+		<input type="text" id="pkg_src" name="pkg_src"
+			value="<?php
 	
 	echo htmlspecialchars ( $pkg_src );
 	?>">
-		</div>
+	</div>
 
-		<br /> <input type="submit" value="<?php translate("save_changes");?>" />
+	<br /> <input type="submit" value="<?php translate("save_changes");?>" />
 
 	<?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
@@ -111,4 +92,3 @@ $("#pkg_settings").ajaxForm({beforeSubmit: function(e){
 
 <?php
 }
-?>
