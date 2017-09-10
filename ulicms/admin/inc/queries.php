@@ -92,33 +92,8 @@ if ($_GET ["action"] == "empty_trash") {
 	exit ();
 }
 
-if ($_GET ["action"] == "languages" and ! empty ( $_GET ["delete"] ) and $acl->hasPermission ( "languages" ) and get_request_method () == "POST") {
-	add_hook ( "before_delete_language" );
-	db_query ( "DELETE FROM " . tbname ( "languages" ) . " WHERE id = " . intval ( $_GET ["delete"] ) );
-	add_hook ( "after_delete_language" );
-}
-
-if ($_GET ["action"] == "languages" and ! empty ( $_GET ["default"] ) and $acl->hasPermission ( "languages" )) {
-	add_hook ( "before_set_default_language" );
-	setconfig ( "default_language", db_escape ( $_GET ["default"] ) );
-	setconfig ( "system_language", db_escape ( $_GET ["default"] ) );
-	add_hook ( "after_set_default_language" );
-}
-
-if (isset ( $_POST ["add_language"] ) and $acl->hasPermission ( "languages" )) {
-	if (! empty ( $_POST ["name"] ) and ! empty ( $_POST ["language_code"] )) {
-		$name = db_escape ( $_POST ["name"] );
-		$language_code = db_escape ( $_POST ["language_code"] );
-		add_hook ( "before_create_language" );
-		db_query ( "INSERT INTO " . tbname ( "languages" ) . "(name, language_code)
-      VALUES('$name', '$language_code')" );
-		add_hook ( "after_create_language" );
-	}
-}
-
 if ($_GET ["action"] == "banner_delete" && $acl->hasPermission ( "banners" ) && get_request_method () == "POST") {
-	$banner = intval ( $_GET ["banner"] );
-	
+	$banner = intval ( $_GET ["banner"] );	
 	add_hook ( "before_banner_delete" );
 	$query = db_query ( "DELETE FROM " . tbname ( "banner" ) . " WHERE id='$banner'", $connection );
 	add_hook ( "after_banner_delete" );

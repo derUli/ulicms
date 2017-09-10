@@ -20,7 +20,8 @@
 		"settings_edit": "templates/expert_settings/form.php",
 		"design": "templates/design/form.php",
 		"favicon": "templates/favicon/form.php",
-		"pkg_settings": "templates/pkg_settings/form.php"
+		"pkg_settings": "templates/pkg_settings/form.php",
+		"languages": "templates/languages/form.php"
 	},
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
@@ -38,7 +39,8 @@
 		"ExpertSettingsController": "controllers/ExpertSettingsController.php",
 		"DesignSettingsController": "controllers/DesignSettingsController.php",
 		"FaviconController": "controllers/FaviconController.php",
-		"PkgSettingsController": "controllers/PkgSettingsController.php"
+		"PkgSettingsController": "controllers/PkgSettingsController.php",
+		"LanguageController": "controllers/LanguageController.php"
 	},
 	"action_controllers": {
 		"settings_simple": "SimpleSettingsController",
@@ -61,6 +63,9 @@
 		"ExpertSettingsController::delete": "expert_settings_edit",
 		"ExpertSettingsController::savePost": "design",
 		"FaviconController::doUpload": "favicon",
-		"PkgSettingsController::savePost": "pkg_settings"
+		"PkgSettingsController::savePost": "pkg_settings",
+		"LanguageController::createPost": "languages",
+		"LanguageController::deletePost": "languages",
+		"LanguageController::setDefaultLanguage": "languages"
 	}
 }

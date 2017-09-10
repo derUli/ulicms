@@ -1,24 +1,16 @@
 <?php
-$version = new ulicms_version ();
 $acl = new ACL ();
 if (! $acl->hasPermission ( "info" )) {
 	noperms ();
 } else {
-	
+	$version = new ulicms_version ();
 	$admin_logo = Settings::get ( "admin_logo" );
 	if (! $admin_logo) {
 		$admin_logo = "gfx/logo.png";
 	}
 	?>
-<strong>Release <?php
-	
-	echo cms_version ();
-	?> "<?php
-	
-	echo $version->getVersion ();
-	?>"</strong>
+<strong>Release <?php echo cms_version ();?> "<?php	echo $version->getVersion ();?>"</strong>
 <br />
-
 <p>
 	<a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2011 -
 	<?php cms_release_year();?> by Ulrich Schmidt<br /> <a
@@ -89,18 +81,13 @@ if (! $acl->hasPermission ( "info" )) {
 </div>
 <br />
 
-
-
 <a href="http://www.ulicms.de" target="_blank" class="btn btn-info"
 	role="button">UliCMS Portal</a>
-
 
 <a href="index.php?action=license" class="btn btn-info" role="button"><?php translate("license")?></a>
 
 <a href="http://www.ulicms.de/kontakt.html" target="_blank"
 	class="btn btn-info" role="button">Feedback</a>
-
-
 
 <br />
 
