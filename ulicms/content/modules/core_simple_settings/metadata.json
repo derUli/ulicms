@@ -4,14 +4,17 @@
 	"embed": false,
 	"actions": {
 		"settings_simple": "templates/settings_simple/form.php",
-		"homepage_title": "templates/homepage_title/form.php"
+		"homepage_title": "templates/homepage_title/form.php",
+		"motto": "templates/motto/form.php"
 	},
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
-		"HomepageTitleController": "controllers/HomepageTitleController.php"
+		"HomepageTitleController": "controllers/HomepageTitleController.php",
+		"MottoController": "controllers/MottoController.php"
 	},
 	"controller_function_permissions": {
 		"SimpleSettingsController::savePost": "settings_simple",
-		"HomepageTitleController::savePost": "settings_simple"
+		"HomepageTitleController::savePost": "settings_simple",
+		"MottoController::savePost": "settings_simple"
 	}
 }

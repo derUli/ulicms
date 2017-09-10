@@ -18,8 +18,6 @@ class ActionRegistry {
 			"admin_new" => "inc/admins_new.php",
 			"admin_edit" => "inc/admins_edit.php",
 			"settings_categories" => "inc/settings_categories.php",
-			"homepage_title" => "inc/homepage_title.php",
-			"motto" => "inc/motto.php",
 			"meta_description" => "inc/meta_description.php",
 			"meta_keywords" => "inc/meta_keywords.php",
 			"spam_filter" => "inc/spamfilter_settings.php",
