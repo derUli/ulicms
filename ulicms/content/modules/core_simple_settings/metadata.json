@@ -9,7 +9,8 @@
 		"cache": "templates/cache/form.php",
 		"settings_categories": "templates/categories/menu.php",
 		"frontpage_settings": "templates/frontpage/form.php",
-		"logo_upload" : "templates/logo/form.php"
+		"logo_upload": "templates/logo/form.php",
+		"meta_description": "templates/meta_description/form.php"
 	},
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
@@ -17,7 +18,8 @@
 		"MottoController": "controllers/MottoController.php",
 		"CacheSettingsController": "controllers/CacheSettingsController.php",
 		"FrontPageSettingsController": "controllers/FrontPageSettingsController.php",
-		"LogoUploadController": "controllers/LogoUploadController.php"
+		"LogoUploadController": "controllers/LogoUploadController.php",
+		"MetaDescriptionController": "controllers/MetaDescriptionController"
 	},
 	"action_controllers": {
 		"settings_simple": "SimpleSettingsController"
@@ -27,6 +29,7 @@
 		"HomepageTitleController::savePost": "settings_simple",
 		"MottoController::savePost": "settings_simple",
 		"FrontPageSettingsController::savePost": "settings_simple",
-		"LogoUploadController::upload": "logo"
+		"LogoUploadController::upload": "logo",
+		"MetaDescriptionController::savePost": "settings_simple"
 	}
 }
