@@ -3,7 +3,6 @@ class FrontPageSettingsController extends Controller {
 	public function savePost() {
 		$languages = getAllLanguages ();
 		for($i = 0; $i < count ( $languages ); $i ++) {
-			
 			$lang = $languages [$i];
 			if (isset ( $_POST ["frontpage_" . $lang] )) {
 				$page = db_escape ( $_POST ["frontpage_" . $lang] );
@@ -13,6 +12,6 @@ class FrontPageSettingsController extends Controller {
 				}
 			}
 		}
-		Request::redirect(ModuleHelper::buildActionURL("frontpage_settings"));
+		Request::redirect ( ModuleHelper::buildActionURL ( "frontpage_settings" ) );
 	}
 }
