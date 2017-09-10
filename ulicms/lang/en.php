@@ -237,14 +237,6 @@ define ( "TRANSLATION_CACHE_WAS_CLEARED", "Der Cache wurde erfolgreich geleert."
 define ( "TRANSLATION_ALLOWED_HTML_TAGS", "allowed HTML-Tags" );
 define ( "TRANSLATION_MOTD_WAS_CHANGED", "The message of the day was changed" );
 
-// Logo
-define ( "TRANSLATION_YOUR_LOGO", "Your Logo" );
-define ( "TRANSLATION_UPLOAD_NEW_LOGO", "Upload new logo" );
-define ( "TRANSLATION_UPLOAD", "Upload" );
-define ( "TRANSLATION_LOGO_INFOTEXT", "You can upload logo here.<br/>
-The image should have a size of maximal 500 x 100 pixel." );
-define ( "TRANSLATION_UPLOADED_IMAGE_TO_BIG", "Your uploaded image was to big." );
-
 // Paketquelle
 define ( "TRANSLATION_OFFICIAL_PACKAGE_SOURCE", "official package source [packages.ulicms.de]" );
 define ( "TRANSLATION_FROM_FILESYSTEM", "from filesystem" );
@@ -725,6 +717,5 @@ define ( "TRANSLATION_CODE_TO_EMBED", "Code to Embed" );
 define ( "TRANSLATION_JSREDIRECT_NOSCRIPT", "If you are not automatically redirected, <a href=\"%url%\">click here</a>." );
 
 define ( "TRANSLATION_SHOW_CORE_MODULES", "Show Core Modules" );
-
 
 add_hook ( "lang_en" );
