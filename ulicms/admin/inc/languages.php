@@ -5,6 +5,7 @@ if (defined ( "_SECURITY" )) {
 	
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "languages" )) {
+		// @FIXME: Language::getAllLanguages() verwenden
 		$languages = db_query ( "SELECT * FROM " . tbname ( "languages" ) . " ORDER BY language_code ASC" );
 		
 		?>
