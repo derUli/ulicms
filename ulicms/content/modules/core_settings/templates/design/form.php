@@ -25,17 +25,13 @@ if (! $acl->hasPermission ( "design" )) {
 	$modManager = new ModuleManager ();
 	$mobileDetectInstalled = in_array ( "Mobile_Detect", $modManager->getEnabledModuleNames () );
 	?>
-	<?php
-	if ($default_font != "google") {
-		?>
+	<?php if ($default_font != "google") {?>
 <style type="text/css">
 div#google-fonts {
 	display: none;
 }
 </style>
-<?php
-	}
-	?>
+<?php }?>
 <h1>
 <?php translate("design");?>
 </h1>
@@ -44,10 +40,6 @@ div#google-fonts {
 	echo ModuleHelper::buildMethodCallForm ( "DesignSettingsController", "save", array (), "post", array (
 			"id" => "designForm" 
 	) );
-	?>
-<?php
-	
-	csrf_token_html ();
 	?>
 <table style="width: 100%;">
 	<tr>

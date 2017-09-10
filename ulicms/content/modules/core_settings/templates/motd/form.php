@@ -76,8 +76,8 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("motd"),
 <?php
 	}
 	?>
-	<input type="submit" name="motd_submit"
-		value="<?php translate("save_changes");?>">
+	<button type="submit" name="motd_submit"
+		class="btn btn-success voffset2"><?php translate("save_changes");?></button>
 		<?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>

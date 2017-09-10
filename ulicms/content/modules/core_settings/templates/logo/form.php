@@ -38,15 +38,14 @@ if (defined ( "_SECURITY" )) {
 		
 		
 		<tr>
-			<td width=480><strong><?php translate("upload_new_logo");?>
+			<td width="480"><strong><?php translate("upload_new_logo");?>
 			</strong></td>
-			<td><input name="logo_upload_file" type="file"> <br /></td>
-		
-		
+			<td><input name="logo_upload_file" type="file"></td>
+		</tr>
 		<tr>
 			<td></td>
-			<td style="text-align: center"><input type="submit"
-				value="<?php translate("upload");?>"></td>
+			<td class="text-center"><button type="submit"
+					class="btn btn-success voffset2"><?php translate("upload");?></button></td>
 		</tr>
 	</table>
 

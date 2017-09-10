@@ -14,15 +14,10 @@ if ($acl->hasPermission ( "languages" )) {
 		<tr>
 			<td style="width: 100px;"><strong><?php translate("full_name");?>
 			</strong></td>
-			<td><input type="text" name="name" maxlength=100 size=40></td>
+			<td><input type="text" name="name" maxlength="100" size="40"></td>
 		</tr>
-		<tr>
-			<td></td>
-			<td><input type="submit" name="add_language"
-				value="<?php translate ( "add_language" );?>"></td>
-		</tr>
-
 	</table>
+	<button type="submit" class="btn btn-success voffset2"><?php translate("add_language");?></button>
 </div>
 
 </form>

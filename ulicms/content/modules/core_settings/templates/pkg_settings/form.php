@@ -62,7 +62,8 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 	?>">
 	</div>
 
-	<br /> <input type="submit" value="<?php translate("save_changes");?>" />
+	<br />
+	<button type="submit" class="btn btn-success voffset2"><?php translate("save_changes");?></button>
 
 	<?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {

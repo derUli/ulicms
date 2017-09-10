@@ -3,7 +3,7 @@ $acl = new ACL ();
 if ($acl->hasPermission ( "favicon" )) {
 	?>
 <?php
-
+	
 	if (isset ( $_GET ["error"] )) {
 		?>
 <p class="ulicms_error">
@@ -14,7 +14,7 @@ if ($acl->hasPermission ( "favicon" )) {
 
 <h1><?php translate("favicon");?></h1>
 <p><?php
-
+	
 	translate ( "favicon_infotext" );
 	?>
 </p>
@@ -23,18 +23,18 @@ if ($acl->hasPermission ( "favicon" )) {
 	<input type="hidden" name="sClass" value="FaviconController"> <input
 		type="hidden" name="sMethod" value="doUpload">
 	<?php
-
+	
 	csrf_token_html ();
 	?>
 	<table border=0 height="250">
 		<tr>
 			<td><strong><?php
-
+	
 	translate ( "current_favicon" );
 	?>
 			</strong></td>
 			<td><?php
-
+	
 	$favicon_path = "../content/images/favicon.ico";
 	if (file_exists ( $favicon_path ) and is_file ( $favicon_path )) {
 		echo '<img class="website_favicon" src="' . $favicon_path . '" alt="' . Settings::get ( "homepage_title" ) . '"/>';
@@ -52,7 +52,7 @@ if ($acl->hasPermission ( "favicon" )) {
 		</tr>
 		<tr>
 			<td width=480><strong><?php
-
+	
 	translate ( "upload_new_favicon" );
 	?>
 			</strong></td>
@@ -61,9 +61,9 @@ if ($acl->hasPermission ( "favicon" )) {
 		</tr>
 		<tr>
 			<td></td>
-			<td style="text-align: center"><input type="submit"
-				value="<?php translate("upload");?>"></td>
-
+			<td style="text-align: center"><button type="submit"
+					class="btn btn-success"><?php translate("upload");?></td>
+		</tr>
 	</table>
 
 	<?php

@@ -50,12 +50,7 @@ if (! $acl->hasPermission ( "other" )) {
 	) );
 	?>
 <div id="accordion-container">
-	<h2 class="accordion-header">
-		<?php
-	
-	translate ( "page_cache" );
-	?>
-		</h2>
+	<h2 class="accordion-header"><?php translate ( "page_cache" );?></h2>
 
 	<div class="accordion-content">
 
@@ -459,9 +454,8 @@ if($('#email_mode').val() == "pear_mail"){
 		</p>
 	</div>
 </div>
-<br />
-<input name="submit" type="submit"
-	value="<?php translate("save_changes");?>" />
+
+<button type="submit" name="submit" class="btn btn-success voffset3"><?php translate("save_changes");?></button>
 
 <?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
