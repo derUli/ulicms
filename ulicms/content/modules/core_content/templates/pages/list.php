@@ -605,7 +605,6 @@ $(window).load(function(){
 	</table>
 </div>
 <script type="text/javascript">
-
 var ajax_options_undelete = {
   success : function(responseText, statusText, xhr, $form){
   var action =$($form).attr("action");
@@ -613,7 +612,6 @@ var ajax_options_undelete = {
   $($form).closest("tr").fadeOut();
   }
 }
-
 
 var ajax_options_delete = {
   beforeSubmit: function () {
@@ -632,6 +630,7 @@ $("form.undelete-form").ajaxForm(ajax_options_undelete);
 
 });
 function ajaxEmptyTrash(url){
+// @FIXME: Das hier muss in eine Sprachdatei verschoben werden.
    if(confirm("Papierkorb leeren?")){
    $.ajax({
       url: url,
