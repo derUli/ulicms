@@ -45,7 +45,8 @@ if ($acl->hasPermission ( "dashboard" )) {
 		?>
 <h2 class="accordion-header"><?php translate("unfinished_package_installations");?></h2>
 	<div class="accordion-content">
-		<a href="index.php?action=do-post-install">
+		<a
+			href="<?php echo ModuleHelper::buildActionURL("do_post_install");?>">
 			<?php translate("there_are_unfinished_package_installations");?></a>
 	</div>
 	<?php } ?>

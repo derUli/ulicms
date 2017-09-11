@@ -9,7 +9,7 @@
 		"sin_package_install_ok": "templates/sin_package_install_ok.php",
 		"pkginfo": "templates/pkginfo.php",
 		"install_method": "templates/install_method.php",
-		"do-post-install": "templates/do-post-install.php"
+		"do_post_install": "templates/do_post_install.php"
 	},
 	"controller_function_permissions": {
 		"PkgInfoController::install": "install_packages"
