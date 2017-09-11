@@ -1,6 +1,10 @@
+function askForDelete(){
+    return confirm(Translation.ASK_FOR_DELETE);
+}
+
 $(function() {
     $("form.delete-form").submit(function() {
-        return confirm(Translation.ASK_FOR_DELETE);
+    	return askForDelete();
     });
     $('textarea.codemirror').each(function(index, elem) {
         var mode = "text/html";

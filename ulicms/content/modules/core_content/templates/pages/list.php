@@ -575,7 +575,7 @@ $(window).load(function(){
 				
 				if ($_SESSION ["filter_status"] == "trash") {
 					echo "<td style='text-align:center'>";
-					echo ModuleHelper::buildMethodCallForm ( "PageController", "undeletePost", array (
+					echo ModuleHelper::buildMethodCallForm ( "PageController", "undelete", array (
 							"page" => $row->id 
 					), "post", array (
 							"class" => "undelete-form",
@@ -585,7 +585,16 @@ $(window).load(function(){
 					get_csrf_token_html ();
 					echo '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . get_translation ( "recover" ) . '" title="' . get_translation ( "recover" ) . '"></form></td>';
 				} else {
-					echo "<td style='text-align:center'>" . '<form action="index.php?action=pages_delete&page=' . $row->id . '" method="post" class="delete-form" onsubmit="return confirm(\'Wirklich löschen?\');">' . get_csrf_token_html () . '<input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . get_translation ( "delete" ) . '" title="' . get_translation ( "delete" ) . '"></form></td>';
+					echo "<td style='text-align:center'>";
+					echo ModuleHelper::deleteButton ( "index.php", array (
+							"page" => $row->id,
+							"sClass" => "PageController",
+							"sMethod" => "delete" 
+					), array (
+							"data-id" => $row->id,
+							"class" => "page-delete-form" 
+					) );
+					echo "</td>";
 				}
 			}
 			echo '</tr>';
@@ -597,7 +606,7 @@ $(window).load(function(){
 </div>
 <script type="text/javascript">
 
-var ajax_options = {
+var ajax_options_undelete = {
   success : function(responseText, statusText, xhr, $form){
   var action =$($form).attr("action");
   var id = $($form).data("id");
@@ -605,9 +614,23 @@ var ajax_options = {
   }
 }
 
-$("form.delete-form").ajaxForm(ajax_options);
-$("form.undelete-form").ajaxForm(ajax_options);
 
+var ajax_options_delete = {
+  beforeSubmit: function () {
+	  return askForDelete();
+  },
+  success : function(responseText, statusText, xhr, $form){
+  var action =$($form).attr("action");
+  var id = $($form).data("id");
+  $($form).closest("tr").fadeOut();
+  }
+}
+$(function(){
+$("form.page-delete-form").off("submit");
+$("form.page-delete-form").ajaxForm(ajax_options_delete);
+$("form.undelete-form").ajaxForm(ajax_options_undelete);
+
+});
 function ajaxEmptyTrash(url){
    if(confirm("Papierkorb leeren?")){
    $.ajax({
@@ -619,9 +642,13 @@ function ajaxEmptyTrash(url){
 }
   return false;
 }
-
 </script>
-
+<?php
+	
+	$translation = new JSTranslation ();
+	$translation->addKey ( "ask_for_delete" );
+	$translation->renderJS ();
+	?>
 
 <br />
 

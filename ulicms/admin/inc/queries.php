@@ -14,15 +14,6 @@ if ($_GET ["action"] == "view_website" or $_GET ["action"] == "frontpage") {
 	Request::redirect ( "../" );
 }
 
-if ($_GET ["action"] == "pages_delete" && $acl->hasPermission ( "pages" ) && get_request_method () == "POST") {
-	$page = intval ( $_GET ["page"] );
-	add_hook ( "before_delete_page" );
-	db_query ( "UPDATE " . tbname ( "content" ) . " SET `deleted_at` = " . time () . " WHERE id=$page" );
-	add_hook ( "after_delete_page" );
-	header ( "Location: index.php?action=pages" );
-	exit ();
-}
-
 if ($_GET ["action"] == "empty_trash") {
 	add_hook ( "before_empty_trash" );
 	db_query ( "DELETE FROM " . tbname ( "content" ) . " WHERE deleted_at IS NOT NULL" );

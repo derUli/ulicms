@@ -362,4 +362,11 @@ class PageController extends Controller {
 		add_hook ( "after_undelete_page" );
 		Request::redirect ( ModuleHelper::buildActionURL ( "pages" ) );
 	}
+	public function deletePost() {
+		$page = Request::getVar ( "page" );
+		add_hook ( "before_delete_page" );
+		db_query ( "UPDATE " . tbname ( "content" ) . " SET `deleted_at` = " . time () . " WHERE id=$page" );
+		add_hook ( "after_delete_page" );
+		Request::redirect ( ModuleHelper::buildActionURL ( "pages" ) );
+	}
 }
