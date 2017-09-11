@@ -574,7 +574,16 @@ $(window).load(function(){
 				echo "<td style='text-align:center'>" . '<a href="index.php?action=pages_edit&page=' . $row->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
 				
 				if ($_SESSION ["filter_status"] == "trash") {
-					echo "<td style='text-align:center'>" . '<form action="index.php?action=undelete_page&page=' . $row->id . '" method="post" class="undelete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . get_translation ( "recover" ) . '" title="' . get_translation ( "recover" ) . '"></form></td>';
+					echo "<td style='text-align:center'>";
+					echo ModuleHelper::buildMethodCallForm ( "PageController", "undeletePost", array (
+							"page" => $row->id 
+					), "post", array (
+							"class" => "undelete-form",
+							"data->id" => $row->id 
+					) );
+					
+					get_csrf_token_html ();
+					echo '<input type="image" class="mobile-big-image" src="gfx/undelete.png" alt="' . get_translation ( "recover" ) . '" title="' . get_translation ( "recover" ) . '"></form></td>';
 				} else {
 					echo "<td style='text-align:center'>" . '<form action="index.php?action=pages_delete&page=' . $row->id . '" method="post" class="delete-form" onsubmit="return confirm(\'Wirklich löschen?\');">' . get_csrf_token_html () . '<input type="image" src="gfx/delete.gif" class="mobile-big-image" alt="' . get_translation ( "delete" ) . '" title="' . get_translation ( "delete" ) . '"></form></td>';
 				}
@@ -591,14 +600,9 @@ $(window).load(function(){
 var ajax_options = {
   success : function(responseText, statusText, xhr, $form){
   var action =$($form).attr("action");
-  var id = url('?page', action);
-  var list_item_id = "dataset-" + id
-  var tr = $("tr#" + list_item_id);
-  $(tr).fadeOut();
-
+  var id = $($form).data("id");
+  $($form).closest("tr").fadeOut();
   }
-
-
 }
 
 $("form.delete-form").ajaxForm(ajax_options);

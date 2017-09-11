@@ -11,17 +11,7 @@ if ($acl->hasPermission ( "pages" ) and Request::getVar ( "toggle-show-core-modu
 
 if ($_GET ["action"] == "view_website" or $_GET ["action"] == "frontpage") {
 	add_hook ( "before_view_website" );
-	header ( "Location: ../" );
-	exit ();
-}
-
-if ($_GET ["action"] == "undelete_page" && $acl->hasPermission ( "pages" ) && get_request_method () == "POST") {
-	$page = intval ( $_GET ["page"] );
-	add_hook ( "before_undelete_page" );
-	db_query ( "UPDATE " . tbname ( "content" ) . " SET `deleted_at` = NULL" . " WHERE id=$page" );
-	add_hook ( "after_undelete_page" );
-	header ( "Location: index.php?action=pages" );
-	exit ();
+	Request::redirect ( "../" );
 }
 
 if ($_GET ["action"] == "pages_delete" && $acl->hasPermission ( "pages" ) && get_request_method () == "POST") {
@@ -97,10 +87,6 @@ if ($_POST ["add_admin"] == "add_admin" && (is_admin () or $acl->hasPermission (
 	adduser ( $username, $lastname, $firstname, $email, $password, $sendMail, $group_id, $require_password_change, $admin, $locked, $default_language );
 	header ( "Location: index.php?action=admins" );
 	exit ();
-}
-
-if ($_POST ["edit_page"] == "edit_page" && $acl->hasPermission ( "pages" )) {
-	
 }
 
 if (($_POST ["edit_admin"] == "edit_admin" && $acl->hasPermission ( "users" )) or ($_POST ["edit_admin"] == "edit_admin" and logged_in () and $_POST ["id"] == $_SESSION ["login_id"])) {

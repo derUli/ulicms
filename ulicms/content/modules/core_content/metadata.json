@@ -14,6 +14,7 @@
 	},
 	"controller_function_permissions": {
 		"PageController::savePost": "pages_create",
-		"PageController::editPost": "pages"
+		"PageController::editPost": "pages",
+		"PageController::undeletePost": "pages"
 	}
 }
