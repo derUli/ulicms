@@ -631,7 +631,7 @@ $("form.undelete-form").ajaxForm(ajax_options_undelete);
 });
 function ajaxEmptyTrash(url){
 // @FIXME: Das hier muss in eine Sprachdatei verschoben werden.
-   if(confirm("Papierkorb leeren?")){
+   if(confirm(Translation.WANNA_EMPTY_TRASH)){
    $.ajax({
       url: url,
       success: function(){
@@ -646,6 +646,7 @@ function ajaxEmptyTrash(url){
 	
 	$translation = new JSTranslation ();
 	$translation->addKey ( "ask_for_delete" );
+	$translation->addKey ( "wanna_empty_trash" );
 	$translation->renderJS ();
 	?>
 
