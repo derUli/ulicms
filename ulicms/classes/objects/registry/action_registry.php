@@ -3,9 +3,6 @@ class ActionRegistry {
 	private static $assignedControllers = array ();
 	private static $defaultCoreActions = array (
 			"categories" => "inc/categories.php",
-			"pages_edit" => "inc/edit_page.php",
-			"pages_new" => "inc/add_page.php",
-			"clone_page" => "inc/clone_page.php",
 			"banner" => "inc/banner.php",
 			"banner_new" => "inc/banner_new.php",
 			"banner_edit" => "inc/banner_edit.php",

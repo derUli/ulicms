@@ -4,6 +4,16 @@
 	"embed": false,
 	"actions": {
 		"contents": "templates/contents.php",
-		"pages": "templates/pages/list.php"
+		"pages": "templates/pages/list.php",
+		"pages_new": "templates/pages/new.php",
+		"pages_edit": "templates/pages/edit.php",
+		"clone_page": "templates/pages/clone.php"
+	},
+	"controllers": {
+		"PageController": "controllers/PageController.php"
+	},
+	"controller_function_permissions": {
+		"PageController::savePost": "pages_create",
+		"PageController::editPost": "pages"
 	}
 }
