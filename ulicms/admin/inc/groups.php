@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL ();
-if (! is_admin () and ! $acl->hasPermission ( "groups" )) {
+if (! $acl->hasPermission ( "groups" )) {
 	noperms ();
 } else {
 	include_once "../lib/string_functions.php";

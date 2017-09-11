@@ -31,8 +31,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	</strong> <br />
 	<?php translate ( "phardata_not_available" );?></p>
 <?php
-	} 
-	else {
+	} else {
 		
 		include_once "../version.php";
 		$version = new ulicms_version ();
@@ -97,11 +96,5 @@ if (! $acl->hasPermission ( "install_packages" )) {
 
 <?php
 		}
-		
-		?>
-
-
-		<?php
 	}
 }
-?>

@@ -1,22 +1,20 @@
 <?php
-if (defined ( "_SECURITY" )) {
-	include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
-	$acl = new ACL ();
-	if (is_admin () or $acl->hasPermission ( "users" )) {
-		if (! isset ( $_SESSION ["admins_filter_group"] )) {
-			$_SESSION ["admins_filter_group"] = 0;
-		}
-		if (! is_null ( Request::getVar ( "admins_filter_group" ) )) {
-			$_SESSION ["admins_filter_group"] = Request::getVar ( "admins_filter_group", 0, "int" );
-		}
-		$manager = new UserManager ();
-		if ($_SESSION ["admins_filter_group"] > 0) {
-			$users = $manager->getUsersByGroupId ( $_SESSION ["admins_filter_group"] );
-		} else {
-			$users = $manager->getAllUsers ();
-		}
-		$groups = Group::getAll ();
-		?>
+$acl = new ACL ();
+if ($acl->hasPermission ( "users" )) {
+	if (! isset ( $_SESSION ["admins_filter_group"] )) {
+		$_SESSION ["admins_filter_group"] = 0;
+	}
+	if (! is_null ( Request::getVar ( "admins_filter_group" ) )) {
+		$_SESSION ["admins_filter_group"] = Request::getVar ( "admins_filter_group", 0, "int" );
+	}
+	$manager = new UserManager ();
+	if ($_SESSION ["admins_filter_group"] > 0) {
+		$users = $manager->getUsersByGroupId ( $_SESSION ["admins_filter_group"] );
+	} else {
+		$users = $manager->getAllUsers ();
+	}
+	$groups = Group::getAll ();
+	?>
 <h2><?php translate("users");?></h2>
 
 <?php if($acl->hasPermission("users_create")){?>
@@ -63,45 +61,45 @@ if (defined ( "_SECURITY" )) {
 		</thead>
 		<tbody>
 	<?php
-			foreach ( $users as $row ) {
-				$group = $acl->getPermissionQueryResult ( $row->getGroupId () );
-				$group = $group ["name"];
-				?>
-		<?php
-				
-				echo '<tr id="dataset-' . $row->getId () . '">';
-				echo "<td style=\"width:40px;\">" . $row->getId () . "</td>";
-				echo "<td>";
-				echo '<img src="' . get_gravatar ( $row->getEmail (), 26 ) . '" alt="Avatar von ' . real_htmlspecialchars ( $row->getUsername () ) . '"> ';
-				echo real_htmlspecialchars ( $row->getUsername () ) . "</td>";
-				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getLastName () ) . "</td>";
-				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getFirstname () ) . "</td>";
-				echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getEmail () ) . "</td>";
-				echo "<td class=\"hide-on-mobile\">";
-				$id = $row->getGroupId ();
-				if ($id and $acl->hasPermission ( "groups_edit" )) {
-					$url = ModuleHelper::buildActionURL ( "groups", "edit=$id" );
-					echo '<a href="' . Template::getEscape ( $url ) . '">';
-				}
-				echo real_htmlspecialchars ( $group );
-				
-				if ($id and $acl->hasPermission ( "groups_edit" )) {
-					echo "</a>";
-				}
-				echo "</td>";
-				if ($acl->hasPermission ( "users_edit" )) {
-					echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->getId () . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
-					
-					if ($row->getId () == $_SESSION ["login_id"]) {
-						echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . get_translation ( "CANT_DELETE_ADMIN" ) . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . get_translation ( "edit" ) . "\" title=\"" . get_translation ( "edit" ) . "\"></a></td>";
-					} else {
-						echo "<td style='text-align:center;'>" . '<form action="index.php?action=admin_delete&admin=' . $row->getId () . '" method="post" onsubmit="return confirm(\'' . get_translation ( "ask_for_delete" ) . '\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
-					}
-				}
-				echo '</tr>';
-			}
-			
+		foreach ( $users as $row ) {
+			$group = $acl->getPermissionQueryResult ( $row->getGroupId () );
+			$group = $group ["name"];
 			?>
+		<?php
+			
+			echo '<tr id="dataset-' . $row->getId () . '">';
+			echo "<td style=\"width:40px;\">" . $row->getId () . "</td>";
+			echo "<td>";
+			echo '<img src="' . get_gravatar ( $row->getEmail (), 26 ) . '" alt="Avatar von ' . real_htmlspecialchars ( $row->getUsername () ) . '"> ';
+			echo real_htmlspecialchars ( $row->getUsername () ) . "</td>";
+			echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getLastName () ) . "</td>";
+			echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getFirstname () ) . "</td>";
+			echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getEmail () ) . "</td>";
+			echo "<td class=\"hide-on-mobile\">";
+			$id = $row->getGroupId ();
+			if ($id and $acl->hasPermission ( "groups_edit" )) {
+				$url = ModuleHelper::buildActionURL ( "groups", "edit=$id" );
+				echo '<a href="' . Template::getEscape ( $url ) . '">';
+			}
+			echo real_htmlspecialchars ( $group );
+			
+			if ($id and $acl->hasPermission ( "groups_edit" )) {
+				echo "</a>";
+			}
+			echo "</td>";
+			if ($acl->hasPermission ( "users_edit" )) {
+				echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->getId () . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
+				
+				if ($row->getId () == $_SESSION ["login_id"]) {
+					echo "<td style='text-align:center;'><a href=\"#\" onclick=\"alert('" . get_translation ( "CANT_DELETE_ADMIN" ) . "')\"><img class=\"mobile-big-image\" src=\"gfx/delete.gif\" alt=\"" . get_translation ( "edit" ) . "\" title=\"" . get_translation ( "edit" ) . "\"></a></td>";
+				} else {
+					echo "<td style='text-align:center;'>" . '<form action="index.php?action=admin_delete&admin=' . $row->getId () . '" method="post" onsubmit="return confirm(\'' . get_translation ( "ask_for_delete" ) . '\');" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif"></form></td>';
+				}
+			}
+			echo '</tr>';
+		}
+		
+		?>
 		</tbody>
 	</table>
 	<?php }?>
@@ -124,7 +122,6 @@ $("form.delete-form").ajaxForm(ajax_options);
 <br />
 <br />
 <?php
-	} else {
-		noperms ();
-	}
+} else {
+	noperms ();
 }

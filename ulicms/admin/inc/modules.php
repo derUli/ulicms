@@ -14,7 +14,6 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	}
 	
 	if ($acl->hasPermission ( "remove_packages" )) {
-		
 		// Modul deinstallieren
 		if (isset ( $_GET ["remove"] ) and getModuleMeta ( $_GET ["remove"], "source" ) != "core") {
 			$remove = basename ( $_GET ["remove"] );
