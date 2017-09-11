@@ -356,7 +356,7 @@ class PageController extends Controller {
 		Request::redirect ( ModuleHelper::buildActionURL ( "pages" ) );
 	}
 	public function undeletePost() {
-		$page = intval ( $_GET ["page"] );
+		$page = Request::getVar ( "page" );
 		add_hook ( "before_undelete_page" );
 		db_query ( "UPDATE " . tbname ( "content" ) . " SET `deleted_at` = NULL" . " WHERE id=$page" );
 		add_hook ( "after_undelete_page" );
