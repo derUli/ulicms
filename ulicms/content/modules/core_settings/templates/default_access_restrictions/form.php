@@ -9,26 +9,30 @@ if ($acl->hasPermission ( "default_access_restrictions_edit" )) {
 <h1><?php translate("DEFAULT_ACCESS_RESTRICTIONS");?></h1>
 <?= ModuleHelper::buildMethodCallForm("DefaultAccessRestrictionsController", "save");?>
 <input type="checkbox" name="only_admins_can_edit"
-		id="only_admins_can_edit" value="1"
-		<?php if($only_admins_can_edit) echo "checked";?>> <label
-		for="only_admins_can_edit"><?php translate("admins");?></label> <br />
-	<input type="checkbox" name="only_group_can_edit"
-		id="only_group_can_edit" value="1"
-		<?php if($only_group_can_edit) echo "checked";?>> <label
-		for="only_group_can_edit"><?php translate("group");?></label> <br /> <input
-		type="checkbox" name="only_owner_can_edit" id="only_owner_can_edit"
-		value="1" <?php if($only_owner_can_edit) echo "checked";?>> <label
-		for="only_owner_can_edit"><?php translate("owner");?></label> <br /> <input
-		type="checkbox" name="only_others_can_edit" id="only_others_can_edit"
-		value="1" <?php if($only_others_can_edit) echo "checked";?>> <label
-		for="only_others_can_edit"><?php translate("others");?></label>
-	</p>
-	<input type="submit" name="submit_form"
-		value="<?php translate("save_changes");?>">
+	id="only_admins_can_edit" value="1"
+	<?php if($only_admins_can_edit) echo "checked";?>>
+<label for="only_admins_can_edit"><?php translate("admins");?></label>
+<br />
+<input type="checkbox" name="only_group_can_edit"
+	id="only_group_can_edit" value="1"
+	<?php if($only_group_can_edit) echo "checked";?>>
+<label for="only_group_can_edit"><?php translate("group");?></label>
+<br />
+<input type="checkbox" name="only_owner_can_edit"
+	id="only_owner_can_edit" value="1"
+	<?php if($only_owner_can_edit) echo "checked";?>>
+<label for="only_owner_can_edit"><?php translate("owner");?></label>
+<br />
+<input type="checkbox" name="only_others_can_edit"
+	id="only_others_can_edit" value="1"
+	<?php if($only_others_can_edit) echo "checked";?>>
+<label for="only_others_can_edit"><?php translate("others");?></label>
+</p>
+<button type="submit" name="submit_form" class="btn btn-success"><?php translate("save_changes");?></button>
 <?php
 	if (Request::getVar ( "submit_form" )) {
 		?>
-	<p style="color: green" class="voffset3">
+<p style="color: green" class="voffset3">
 	<?php translate("changes_was_saved"); ?>
 	</p>
 <?php 	}?>

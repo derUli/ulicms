@@ -63,8 +63,8 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_edit" ))
 		</select>
 	</p>
 	<p>
-		<input name="edit_form" value="<?php translate("save");?>"
-			type="submit">
+		<button name="edit_form" type="submit" class="btn btn-success"><?php translate("save");?></button>
+
 	</p>
 </form>
 <?php

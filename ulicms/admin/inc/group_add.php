@@ -64,8 +64,7 @@ csrf_token_html ();
 		value="<?php Template::escape(HTML5_ALLOWED_TAGS);?>"><br /> <small><?php translate("allowable_tags_help");?></small>
 	<br /> <br />
 	<p>
-		<input type="submit" value="<?php translate("create_group");?>"
-			name="add_group">
+		<button name="add_group" type="submit" class="btn btn-success"><?php translate("create_group");?></button>
 	</p>
 
 </form>

@@ -187,8 +187,9 @@ if ($acl->hasPermission ( "settings_simple" )) {
 <tr>
 		<td>
 		
-		<td align="center"><input type="submit" value="OK"
-			style="width: 100%;"></td>
+		<td align="center">
+			<button type="submit" class="btn btn-success"><?php translate("OK")?></button>
+		</td>
 	</tr>
 </table>
 <input type="hidden" name="save_settings" value="save_settings">

@@ -202,7 +202,9 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 		?>
 	</select> <br /> <br /> <strong><?php translate("about_me");?></strong><br />
 	<textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row->about_me)?></textarea>
-	<br /> <br /> <input type="submit" value="OK">
+	<br /> <br />
+	<button type="submit" class="btn btn-success"><?php translate ( "OK" );?></button>
+
 	<?php
 		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 			?>

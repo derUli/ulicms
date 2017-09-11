@@ -48,9 +48,9 @@ if (defined ( "_SECURITY" )) {
 	</strong><br />
 	<?php echo categories :: getHTMLSelect()?>
 
-	<br /> <br /> <input type="submit"
-		value="<?php translate("add_banner");?>">
-		<?php
+	<br /> <br />
+	<button type="submit" class="btn btn-success"><?php translate("add_banner");?></button>
+				<?php
 		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 			?>
 	<script type="text/javascript" src="scripts/ctrl-s-submit.js">

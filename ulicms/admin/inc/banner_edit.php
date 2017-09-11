@@ -118,8 +118,8 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 	<?php
 		echo categories::getHTMLSelect ( $row->category );
 		?>
-	<br /> <br /> <input type="submit"
-		value="<?php translate("save_changes");?>">
+	<br /> <br />
+	<button type="submit" class="btn btn-success"><?php translate("save_changes");?></button>
 			<?php
 		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 			?>

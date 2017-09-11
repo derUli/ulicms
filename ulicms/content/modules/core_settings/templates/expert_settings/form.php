@@ -24,7 +24,7 @@ if ($acl->hasPermission ( "expert_settings" ) and $acl->hasPermission ( "expert_
 <textarea name="value" rows=15 cols=80><?php Template::escape($value);?></textarea>
 <br />
 <br />
-<input type="submit" value="<?php translate("create_option");?>">
+<button type="submit" class="btn btn-success"><?php translate("create_option");?></button>
 <?php
 	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 		?>

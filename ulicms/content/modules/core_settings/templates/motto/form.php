@@ -24,7 +24,7 @@ if ($acl->hasPermission ( "settings_simple" )) {
 	<tr>
 		<td style="min-width: 100px;"><strong><?php
 	
-translate ( "language" );
+	translate ( "language" );
 	?>
 </strong></td>
 		<td><strong><?php translate("motto");?>
@@ -54,8 +54,11 @@ translate ( "language" );
 </tr>
 	<tr>
 		<td></td>
-		<td style="text-align: center"><input type="submit" name="submit"
-			value="Einstellungen Speichern"></td>
+		<td style="text-align: center">
+
+			<button type="submit" name="submit" class="btn btn-success">Einstellungen
+				Speichern</button>
+		</td>
 	</tr>
 </table>
 </form>

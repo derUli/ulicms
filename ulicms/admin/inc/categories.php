@@ -194,8 +194,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 		<textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
 	</p>
 	<p>
-		<input type="submit" name="create"
-			value="<?php translate("create");?>">
+		<button type="submit" name="create" class="btn btn-success"><?php translate("create");?></button>
 	</p>
 
 
@@ -236,10 +235,9 @@ $("form.delete-form").ajaxForm(ajax_options);
 			?></textarea>
 	</p>
 	<p>
-		<input type="submit" name="update"
-			value="<?php
+		<button type="submit" name="update" class="btn btn-success"><?php
 			translate ( "save" );
-			?>">
+			?></button>
 	</p>
 </form>
 <?php
