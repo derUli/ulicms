@@ -120,7 +120,7 @@ class DesignSettingsController extends Controller {
 	}
 	public function getGoogleFonts() {
 		$retval = array ();
-		$file = ModuleHelper::buildModuleRessourcePath ( $this->moduleName, "data/webFontNames.opml" )
+		$file = ModuleHelper::buildModuleRessourcePath ( $this->moduleName, "data/webFontNames.opml" );
 		$content = file_get_contents ( $file );
 		$xml = new SimpleXMLElement ( $content );
 		foreach ( $xml->body->outline as $outline ) {
