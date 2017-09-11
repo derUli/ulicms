@@ -8,7 +8,6 @@ if (! is_dir ( $video_folder )) {
 if ($acl->hasPermission ( "videos" ) and isset ( $_REQUEST ["delete"] ) and get_request_method () == "POST") {
 	$query = db_query ( "select ogg_file, webm_file, mp4_file from " . tbname ( "videos" ) . " where id = " . intval ( $_REQUEST ["delete"] ) );
 	if (db_num_rows ( $query ) > 0) {
-		
 		// OGG
 		$result = db_fetch_object ( $query );
 		$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->ogg_file );
