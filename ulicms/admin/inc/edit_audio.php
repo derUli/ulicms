@@ -6,13 +6,10 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_edit" )) {
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
 		?>
-<h1>
-<?php translate ( "UPLOAD_AUDIO" );?>
-</h1>
+<h1><?php translate ( "UPLOAD_AUDIO" );?></h1>
 <form action="index.php?action=audio" method="post">
 <?php csrf_token_html ();?>
-	<input type="hidden" name="id" value="<?php echo $result->id;?>"> <input
-		type="hidden" name="update" value="update"> <strong><?php	translate ( "name" );?>
+	<input type="hidden" name="id" value="<?php echo $result->id;?>"> <input type="hidden" name="update" value="update"> <strong><?php	translate ( "name" );?>
 	</strong><br /> <input type="text" name="name"
 		value="<?php echo htmlspecialchars ( $result->name );?>"
 		maxlength="255" required /> <br /> <br /> <strong><?php translate("category");?>
@@ -32,7 +29,7 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_edit" )) {
 </form>
 <?php
 	} else {
-		echo "audio not found!";
+		translate("audio_not_found");
 	}
 } else {
 	noperms ();

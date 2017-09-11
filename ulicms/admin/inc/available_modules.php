@@ -15,18 +15,14 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	</div>
 </div>
 <div id="pkglist"></div>
-
 <script type="text/javascript">
 $(window).load(function(){
-
-$("div#loadpkg").slideDown();
-
-$.get("index.php?ajax_cmd=available_modules", function(result){
-   $("div#loadpkg").slideUp();
-   $("div#pkglist").html(result);
-   $("div#pkglist").slideDown();
-});
-
+	$("div#loadpkg").slideDown();
+	$.get("index.php?ajax_cmd=available_modules", function(result){
+		$("div#loadpkg").slideUp();
+		$("div#pkglist").html(result);
+		$("div#pkglist").slideDown();
+	});
 });
 </script>
 

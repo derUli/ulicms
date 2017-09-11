@@ -14,7 +14,6 @@ if ($acl->hasPermission ( "audio" ) and isset ( $_REQUEST ["delete"] ) and get_r
 		
 		$filepath = ULICMS_ROOT . "/content/audio/" . basename ( $result->mp3_file );
 		if (! empty ( $result->mp3_file ) and is_file ( $filepath )) {
-			
 			@unlink ( $filepath );
 		}
 		
@@ -117,10 +116,7 @@ $(window).load(function(){
 	?>
 </h1>
 <?php translate("category");?>
-<?php
-
-	echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
-	?>
+<?php echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );?>
 <br />
 <br />
 <?php if($acl->hasPermission("audio_create")){?>
@@ -204,37 +200,21 @@ $(window).load(function(){
 			translate ( "edit" );
 			?>"> </a></td>
 				<td><form
-						action="index.php?action=audio&delete=<?php
-			
-			echo $row->id;
-			?>"
+						action="index.php?action=audio&delete=<?php echo $row->id;?>"
 						method="post"
-						onsubmit="return confirm('<?php
-			
-			translate ( "ASK_FOR_DELETE" );
-			?>')"
+						onsubmit="return confirm('<?php translate ( "ASK_FOR_DELETE" );?>')"
 						class="delete-form"><?php csrf_token_html();?><input type="image"
 							src="gfx/delete.png" class="mobile-big-image"
-							alt="<?php
-			
-			translate ( "delete" );
-			?>"
-							title="<?php
-			
-			translate ( "delete" );
-			?>">
+							alt="<?php translate ( "delete" );?>"
+							title="<?php translate ( "delete" );?>">
 					</form></td>
 				<?php }?>
 		</tr>
-		<?php
-	}
-	?>
+		<?php }	?>
 	</tbody>
-
 	</table>
 </div>
 <script type="text/javascript">
-
 var ajax_options = {
   success : function(responseText, statusText, xhr, $form){
   var action = $($form).attr("action");
@@ -242,9 +222,7 @@ var ajax_options = {
   var list_item_id = "dataset-" + id
   var tr = $("tr#" + list_item_id);
   $(tr).fadeOut();
-
   }
-
 }
 
 $("form.delete-form").ajaxForm(ajax_options);

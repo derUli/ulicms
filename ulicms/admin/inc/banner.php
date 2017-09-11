@@ -3,11 +3,9 @@
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "banners" )) {
-		
 		if (! isset ( $_SESSION ["filter_category"] )) {
 			$_SESSION ["filter_category"] = 0;
 		}
-		
 		if (isset ( $_GET ["filter_category"] )) {
 			$_SESSION ["filter_category"] = intval ( $_GET ["filter_category"] );
 		}
@@ -32,9 +30,7 @@ $(window).load(function(){
 });
 </script>
 
-<h2>
-<?php translate("advertisements"); ?>
-</h2>
+<h2><?php translate("advertisements"); ?></h2>
 <p>
 <?php translate("advertisement_infotext");?>
 	<?php
@@ -43,8 +39,7 @@ $(window).load(function(){
 	</a><br />
 	<?php }?>
 </p>
-<p>
-<?php translate("category");?>
+<p><?php translate("category");?>
 <?php
 
 		echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
@@ -79,12 +74,10 @@ $(window).load(function(){
 		</thead>
 		<tbody>
 	<?php
-		
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
 				?>
 			<?php
-				
 				echo '<tr id="dataset-' . $row->id . '">';
 				if ($row->type == "gif") {
 					$link_url = Template::getEscape ( $row->link_url );
