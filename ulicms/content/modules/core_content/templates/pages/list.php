@@ -1,6 +1,5 @@
 <?php
 $acl = new ACL ();
-
 if ($acl->hasPermission ( "pages" )) {
 	?>
 <h2><?php translate("pages");?></h2>
@@ -189,7 +188,7 @@ $(window).load(function(){
 	$menus = getAllMenus ( true );
 	
 	array_unshift ( $menus, "null" );
-	
+	// @FIXME: Das SQL hier in einen Controller auslagern
 	$sql = "select a.id as id, a.title as title from " . tbname ( "content" ) . " a inner join " . tbname ( "content" ) . " b on a.id = b.parent ";
 	
 	if (faster_in_array ( $_SESSION ["filter_language"], getAllLanguages ( true ) )) {

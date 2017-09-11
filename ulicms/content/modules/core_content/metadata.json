@@ -3,6 +3,7 @@
 	"version": "2018.1",
 	"embed": false,
 	"actions": {
-		"contents": "templates/contents.php"}
-		
+		"contents": "templates/contents.php",
+		"pages": "templates/pages/list.php"
+	}
 }

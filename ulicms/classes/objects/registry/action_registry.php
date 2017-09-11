@@ -2,7 +2,6 @@
 class ActionRegistry {
 	private static $assignedControllers = array ();
 	private static $defaultCoreActions = array (
-			"pages" => "inc/pages.php",
 			"categories" => "inc/categories.php",
 			"pages_edit" => "inc/edit_page.php",
 			"pages_new" => "inc/add_page.php",
