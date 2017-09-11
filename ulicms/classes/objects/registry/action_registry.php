@@ -28,8 +28,7 @@ class ActionRegistry {
 			"edit_video" => "inc/edit_video.php",
 			"audio" => "inc/audio.php",
 			"add_audio" => "inc/add_audio.php",
-			"edit_audio" => "inc/edit_audio.php",
-			"do-post-install" => "inc/do-post-install.php" 
+			"edit_audio" => "inc/edit_audio.php"
 	);
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;

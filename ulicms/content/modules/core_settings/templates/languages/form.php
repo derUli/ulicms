@@ -9,17 +9,16 @@ if ($acl->hasPermission ( "languages" )) {
 	<table style="border: 0">
 		<tr>
 			<td><strong><?php translate("shortcode");?></strong></td>
-			<td><input type="text" name="language_code" maxlength=6 size=6></td>
+			<td><input type="text" name="language_code" maxlength="6" required></td>
 		</tr>
 		<tr>
 			<td style="width: 100px;"><strong><?php translate("full_name");?>
 			</strong></td>
-			<td><input type="text" name="name" maxlength="100" size="40"></td>
+			<td><input type="text" name="name" maxlength="100" required></td>
 		</tr>
 	</table>
 	<button type="submit" class="btn btn-success voffset2"><?php translate("add_language");?></button>
 </div>
-
 </form>
 <br>
 <div class="seperator"></div>
@@ -79,10 +78,7 @@ if ($acl->hasPermission ( "languages" )) {
 						title="<?php translate("delete");?>"><?php csrf_token_html();?></form>  <?php } ?>
 		</td>
 		</tr>
-
 		<?php }?>
-
-
 </tbody>
 </table>
 <?php

@@ -2,13 +2,14 @@
 	"source": "core",
 	"version": "2018.1",
 	"embed": false,
+	"controllers": {
+		"PkgInfoController": "controllers/PkgInfoController.php"
+	},
 	"actions": {
 		"sin_package_install_ok": "templates/sin_package_install_ok.php",
 		"pkginfo": "templates/pkginfo.php",
-		"install_method": "templates/install_method.php"
-	},
-	"controllers": {
-		"PkgInfoController": "controllers/PkgInfoController.php"
+		"install_method": "templates/install_method.php",
+		"do-post-install": "templates/do-post-install.php"
 	},
 	"controller_function_permissions": {
 		"PkgInfoController::install": "install_packages"
