@@ -32,11 +32,11 @@ if (Settings::get ( "disable_password_reset" )) {
 	
 	translate ( "username" );
 	?>
-	</strong> <br /> <input type="text" name="username" value=""> <br /> <br />
-	<input type="submit"
-		value="<?php
+	</strong> <br /> <input type="text" name="username" value="" required>
+	<br /> <br />
+	<button type="submit" class="btn btn-warning"><?php
 	translate ( "reset_password" );
-	?>">
+	?></button>
 		<?php
 	if ($message) {
 		?>
@@ -51,5 +51,4 @@ if (Settings::get ( "disable_password_reset" )) {
 	?>
 </form>
 <?php
-
 } 

@@ -20,8 +20,7 @@ if (! $_SESSION ["require_password_change"]) {
 	<strong><?php translate ( "password" );?></strong> <input
 		name="password" id="password" type="password"> <br /> <br /> <strong><?php translate ( "password_repeat" );?> </strong>
 	<input name="password_repeat" id="password_repeat" type="password"> <br /></br>
-	<input type="submit" value="<?php translate ( "save_changes" );?>"
-		name="change_password">
+	<button type="submit" name="change_password" class="btn btn-warning"><?php translate ( "save_changes" );?></button>
 </form>
 <br />
 <br />
