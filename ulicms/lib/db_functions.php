@@ -106,6 +106,13 @@ define ( "DB_TYPE_FLOAT", 2 );
 define ( "DB_TYPE_STRING", 3 );
 define ( "DB_TYPE_BOOL", 4 );
 
+// Tabellenname zusammensetzen
+function tbname($name) {
+	require_once ULICMS_ROOT."/cms-config.php";
+	$config = new config ();
+	return $config->db_prefix . $name;
+}
+
 // Abstraktion für Escapen von Werten
 function db_escape($value, $type = null) {
 	if (is_null ( $type )) {

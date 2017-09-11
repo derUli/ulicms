@@ -187,7 +187,7 @@ define ( "TRANSLATION_HOMEPAGE_OWNER", "Inhaber der Website" );
 define ( "TRANSLATION_HIDE_LOGO", "Logo ausblenden" );
 define ( "TRANSLATION_OWNER_MAILADRESS", "E-Mail Adresse des Administrators" );
 define ( "TRANSLATION_FRONTPAGE", "Startseite" );
-define ( "TRANSLATION_MAINTENANCE_MODE_ENABLED", "Wartungsmododus aktiviert" );
+define ( "TRANSLATION_MAINTENANCE_MODE_ENABLED", "Wartungsmodus aktiviert" );
 define ( "TRANSLATION_GUEST_MAY_REGISTER", "Gäste dürfen sich registrieren" );
 define ( "TRANSLATION_DESCRIPTION", "Beschreibung" );
 define ( "TRANSLATION_KEYWORDS", "Keywords" );
@@ -727,5 +727,6 @@ define ( "TRANSLATION_NOT_IN_MENU", "Nicht im Menü" );
 define ( "TRANSLATION_NEW", "Neu" );
 
 define ( "TRANSLATION_CODE_TO_EMBED", "Code zum Einbetten" );
+define ( "TRANSLATION_JSREDIRECT_NOSCRIPT", "Wenn Sie nicht automatisch weitergeleitet werden <a href=\"%url%\">klicken Sie hier</a>." );
 
 add_hook ( "lang_de" );

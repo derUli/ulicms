@@ -98,16 +98,16 @@ if (file_exists ( $mobile_detect_as_module )) {
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "version.php";
 function exception_handler($exception) {
-	echo $exception->getMessage (), "\n";
+	echo nl2br ( htmlspecialchars ( $exception ) ) . "\n";
 	if (! defined ( "EXCEPTION_OCCURRED" )) {
 		define ( "EXCEPTION_OCCURRED", true );
 	}
 }
 
-set_exception_handler ( 'exception_handler' );
+if (php_sapi_name () != "cli") {
+	set_exception_handler ( 'exception_handler' );
+}
 
-// Workaround für Magic Quotes und Register Globals
-include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "workaround.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "pdf_creator.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "csv_creator.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "json_creator.php";
@@ -330,6 +330,13 @@ if (isset ( $_SESSION ["session_begin"] )) {
 		$_SESSION ["session_begin"] = time ();
 	}
 }
+function shutdown_function() {
+	if (! defined ( "KCFINDER_PAGE" )) {
+		add_hook ( "shutdown" );
+	}
+}
+
+register_shutdown_function ( "shutdown_function" );
 
 $enforce_https = Settings::get ( "enforce_https" );
 

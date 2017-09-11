@@ -4,8 +4,8 @@ It runs on an LAMP Stack and includes an MVC inspired development framework.
 
 ## Requirements to run UliCMS
    * Apache Webserver (other webservers may work but are not officially supported)
-   * PHP 5.3 or newer
-   * MySQL 5 or newer / MariaDB
+   * PHP 5.5 or newer
+   * MySQL 5.5 or newer / MariaDB
    
 #### PHP Modules
 UliCMS requires some special modules for PHP

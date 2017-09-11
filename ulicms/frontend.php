@@ -62,7 +62,7 @@ if (Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != 
 
 $theme = get_theme ();
 
-if (strtolower ( Settings::get ( "maintenance_mode" ) ) == "on" || strtolower ( Settings::get ( "maintenance_mode" ) ) == "true" || Settings::get ( "maintenance_mode" ) == "1") {
+if (isMaintenanceMode ()) {
 	add_hook ( "before_maintenance_message" );
 	// Sende HTTP Status 503 und Retry-After im Wartungsmodus
 	header ( 'HTTP/1.0 503 Service Temporarily Unavailable' );
@@ -88,7 +88,7 @@ add_hook ( "before_http_header" );
 
 $redirection = get_redirection ();
 
-if ($redirection) {
+if ($redirection and (is_active () or is_logged_in ())) {
 	Request::redirect ( $redirection, 302 );
 }
 try {

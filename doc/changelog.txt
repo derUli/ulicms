@@ -45,6 +45,11 @@
   * HTTPStatusCodeResult($code, $description = null)
   * getStringLengthInBytes($data)
   * preparePlainTextforHTMLOutput($text)
+  * isMaintenanceMode()
+  * is_500()
+  * is_503()
+  * getAllUsedLanguages()
+  * Settings::convertVar($value, $type)
   * HttpStatusCode Konstanten
 + Attribut $newWindow zu MenuEntry hinzugefügt
 + "Gruppe" in der Benutzerliste verlinkt auf "Gruppe bearbeiten"
@@ -58,7 +63,12 @@
 + Neue Hooks hinzugefügt
   * admin_footer
   * admin_copyright_footer_left
-  * admin_copyright_footer_right  
+  * admin_copyright_footer_right
+  * shutdown
++ Neue Filter hinzugefügt
+  * login_url
+  * logout_url
+  * is_crawler
 + Encoding auf utf8mb4 umgestellt, UliCMS benötigt mindestens MySQL bzw. MariaDB 5.5
 # Nach dem Erstellen einer Seite wird nun auf die Bearbeiten-Ansicht statt auf die Listenansicht weitergeleitet
 # Die Funktionen Template::executeModuleTemplate() und Template::executeDefaultOrOwnTemplate() akzeptieren nun auch Templatenamen mit Dateiendung
@@ -71,10 +81,16 @@
 # Parameter $query von Database::query() und Database::pQuery() in $sql umbenannt
 # uninstall() Methode in main_class wird nun aufgerufen
 # Der "Anzeigen" Button beim Bearbeiten vom Inhaltstyp "Knotenpunkt" wird nicht mehr angezeigt
+# exception_handler() gibt nun einen vollständigen StackTrace zurück
 # Bugfix: "Letzte Änderungen" wenn lastchangeby nicht gesetzt ist, wird nun
 # Bugfix: Listen zeigen nun nur noch aktive Datensätze
   der Ersteller der Seite als Durchführender der letzten Änderung angezeigt
 # Bugfix: Die globale Funktion getAllPages() gab nicht alle Seiten zurück wenn $exclude_hash_links = false ist.
+# Bugfix: Deaktivierte Seiten wurden angezeigt
+# Bugfix: Wenn der Wartungsmodus aktiviert ist, gibt check_status() "503 Unavailable" zurück
+# Bugfix: Wegen eines Schreibfehlers in einem Variablennamen gab is_crawler() immer false zurück.
+# Bugfix: Stylesheet im Installer wurde nicht geladen, wenn die Installation mit https://
+erfolgt.
 - Funktion "Menüeinträge verschieben" wurde in ein optionales Modul augelagert.
   https://extend.ulicms.de/move_menu_items.html
 

@@ -27,21 +27,8 @@ class Settings {
 		$query = db_query ( "SELECT value FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
-				$value = $row->value;
-				switch ($type) {
-					case 'str' :
-						$value = strval ( $value );
-						break;
-					case 'int' :
-						$value = intval ( $value );
-						break;
-					case 'float' :
-						$value = floatval ( $value );
-						break;
-					case 'bool' :
-						$value = intval ( boolval ( $value ) );
-						break;
-				}
+				$value = self::convertVar ( $row->value, $type );
+				
 				SettingsCache::set ( $key, $value, $type );
 				return $value;
 			}
@@ -75,20 +62,7 @@ class Settings {
 	// Set a configuration Variable;
 	public static function set($key, $value, $type = 'str') {
 		$key = db_escape ( $key );
-		switch ($type) {
-			case 'str' :
-				$value = strval ( $value );
-				break;
-			case 'int' :
-				$value = intval ( $value );
-				break;
-			case 'float' :
-				$value = floatval ( $value );
-				break;
-			case 'bool' :
-				$value = intval ( boolval ( $value ) );
-				break;
-		}
+		$value = self::convertVar ( $value, $type );
 		$value = db_escape ( $value );
 		$query = db_query ( "SELECT id FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 		if (db_num_rows ( $query ) > 0) {
@@ -104,5 +78,22 @@ class Settings {
 		db_query ( "DELETE FROM " . tbname ( "settings" ) . " WHERE name='$key'" );
 		SettingsCache::set ( $key, null );
 		return db_affected_rows () > 0;
+	}
+	public static function convertVar($value, $type) {
+		switch ($type) {
+			case 'str' :
+				$value = strval ( $value );
+				break;
+			case 'int' :
+				$value = intval ( $value );
+				break;
+			case 'float' :
+				$value = floatval ( $value );
+				break;
+			case 'bool' :
+				$value = intval ( boolval ( $value ) );
+				break;
+		}
+		return $value;
 	}
 }

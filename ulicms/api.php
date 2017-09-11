@@ -1,4 +1,13 @@
 <?php
+function getAllUsedLanguages() {
+	$sql = "select language from `{prefix}content` where active = 1 group by language order by language";
+	$query = Database::query ( $sql, true );
+	$languages = array ();
+	while ( $row = Database::fetchobject ( $query ) ) {
+		$languages [] = $row->language;
+	}
+	return $languages;
+}
 function preparePlainTextforHTMLOutput($text) {
 	return nl2br ( htmlspecialchars ( $text ) );
 }
@@ -9,20 +18,8 @@ function get_action() {
 		return "home";
 	}
 }
-
-// boolval PHP 5.4 Implementation with checking version
-if (! function_exists ( 'boolval' )) {
-	function boolval($my_value) {
-		return ( bool ) $my_value;
-	}
-}
-
-// lcfirst() is only contained in PHP >= 5.3
-if (function_exists ( 'lcfirst' ) === false) {
-	function lcfirst($str) {
-		$str [0] = strtolower ( $str [0] );
-		return $str;
-	}
+function isMaintenanceMode() {
+	return (strtolower ( Settings::get ( "maintenance_mode" ) ) == "on" || strtolower ( Settings::get ( "maintenance_mode" ) ) == "true" || Settings::get ( "maintenance_mode" ) == "1");
 }
 function getStringLengthInBytes($data) {
 	return ini_get ( 'mbstring.func_overload' ) ? mb_strlen ( $data, '8bit' ) : strlen ( $data );
@@ -122,12 +119,17 @@ function get_canonical() {
 	$canonical = apply_filter ( $canonical, "canonical" );
 	return $canonical;
 }
-function is_crawler($userAgent = null) {
+function is_crawler($useragent = null) {
 	if (is_null ( $useragent )) {
 		$useragent = $_SERVER ['HTTP_USER_AGENT'];
 	}
+	$isCrawler = apply_filter ( $useragent, "is_crawler" );
+	if (is_bool ( $isCrawler ) or is_int ( $isCrawler )) {
+		return boolval ( $isCrawler );
+	}
+	
 	$crawlers = 'Google|msnbot|Rambler|Yahoo|AbachoBOT|accoona|' . 'AcioRobot|ASPSeek|CocoCrawler|Dumbot|FAST-WebCrawler|' . 'GeonaBot|Gigabot|Lycos|MSRBOT|Scooter|AltaVista|IDBot|eStyle|Scrubby';
-	$isCrawler = (preg_match ( "/$crawlers/", $userAgent ) > 0);
+	$isCrawler = (preg_match ( "/$crawlers/", $useragent ) > 0);
 	return $isCrawler;
 }
 function get_lang_config($name, $lang) {
@@ -594,6 +596,9 @@ function clearCache() {
 	add_hook ( "after_clear_cache" );
 }
 function add_hook($name) {
+	if (defined ( "KCFINDER_PAGE" )) {
+		return;
+	}
 	$modules = getAllModules ();
 	$disabledModules = Vars::get ( "disabledModules" );
 	for($hook_i = 0; $hook_i < count ( $modules ); $hook_i ++) {
@@ -1393,13 +1398,6 @@ function is_admin() {
 	}
 	
 	return $retval;
-}
-
-// Tabellenname zusammensetzen
-function tbname($name) {
-	require_once "cms-config.php";
-	$config = new config ();
-	return $config->db_prefix . $name;
 }
 
 // Mimetypen einer Datei ermitteln

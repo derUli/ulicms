@@ -33,11 +33,11 @@ function TextResult($data, $status = 200) {
 	echo $data;
 	exit ();
 }
-function HTTPStatusCodeResult($code, $description = null) {
-	$header = "HTTP/1.0 " . getStatusCodeByNumber ( intval ( $code ) );
+function HTTPStatusCodeResult($status, $description = null) {
+	$header = "HTTP/1.0 " . getStatusCodeByNumber ( intval ( $status ) );
 	
 	if ($description != null and $description != "") {
-		$header = "HTTP/1.0 " . intval ( $code ) . " " . $description;
+		$header = "HTTP/1.0 " . intval ( $status ) . " " . $description;
 	}
 	header ( $header );
 	exit ();
