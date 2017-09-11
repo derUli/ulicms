@@ -373,9 +373,8 @@ $(window).load(function(){
 	if ($_SESSION ["filter_status"] == "trash" and $acl->hasPermission ( "pages" )) {
 		?>
 
-&nbsp;&nbsp;
 <a href="index.php?action=empty_trash"
-	onclick="return ajaxEmptyTrash(this.href);">Papierkorb leeren</a>
+	onclick="return ajaxEmptyTrash(this.href);"><?php translate("empty_recycle_bin");?></a>
 <?php
 	}
 	?>
