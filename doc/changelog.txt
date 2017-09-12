@@ -14,6 +14,7 @@
 - Funktion ulicms_redirect() entfernt.
   Nutzen Sie stattdessen Request::redirect()
 
+Bugfix: Die Gruppe "Administratoren" wird bei der Installation wieder erstellt
 ===== Neues in UliCMS 2017.4 =====
 
 + Gruppen können nun Sprachen zugeordnet bekommen
