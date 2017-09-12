@@ -2,13 +2,12 @@
 class SelectGoogleFontsController extends Controller {
   private $moduleName = "select_google_fonts";
    public function adminHead(){
-        // @FIXME: Das hier darf nur eingebunden werden, wenn man sich
-        // auf der SettingsPage des Moduls befindet.
-        echo Template::executeModuleTemplate($this->moduleName, "head.php");
+        if(Request::getVar("action") == "module_settings" and
+           Request::getVar("module") == $this->moduleName){
+          echo Template::executeModuleTemplate($this->moduleName, "head.php");
+        }
    }
    public function settings(){
-        // @FIXME: Das hier darf nur eingebunden werden, wenn man sich
-        // auf der SettingsPage des Moduls befindet.
         echo Template::executeModuleTemplate($this->moduleName, "settings.php");
    }
 }
