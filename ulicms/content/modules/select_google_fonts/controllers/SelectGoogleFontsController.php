@@ -12,7 +12,7 @@ class SelectGoogleFontsController extends Controller {
    }
 
    public function getSettingsHeadline(){
-       return get_translation("Google Fonts");
+       return "Google Fonts";
    }
 
    public function save(){
