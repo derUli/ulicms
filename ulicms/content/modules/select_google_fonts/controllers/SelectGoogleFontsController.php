@@ -6,4 +6,9 @@ class SelectGoogleFontsController extends Controller {
         // auf der SettingsPage des Moduls befindet.
         echo Template::executeModuleTemplate($this->moduleName, "head.php");
    }
+   public function settings(){
+        // @FIXME: Das hier darf nur eingebunden werden, wenn man sich
+        // auf der SettingsPage des Moduls befindet.
+        echo Template::executeModuleTemplate($this->moduleName, "settings.php");
+   }
 }
