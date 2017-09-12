@@ -1,6 +1,6 @@
 <?php
 if (Settings::get ( "visitors_can_register" ) == "off" or ! Settings::get ( "visitors_can_register" )) {
-	translate ( "FUNCTION_IS_DISABLED" ) );
+	translate ( "FUNCTION_IS_DISABLED" );
 } else {
 	
 	$errors = false;
