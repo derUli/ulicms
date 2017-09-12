@@ -6,7 +6,8 @@ $fonts = $controller->getGoogleFonts();
 <ol style="list-style:none">
 <?php foreach($fonts as $font){
   ?>
-<li><input type="checkbox" name="fonts"> <span style="font-family:<?php echo Template::escape($font);?>; font-size:110%;">Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</span></li>
+<li><input type="radio" name="google_font" id="label-<?php echo md5($font);?>">
+  <label for="label-<?php echo md5($font);?>" style="font-family:<?php echo Template::escape($font);?>; font-size:110%;">Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</label></li>
 <?php
 }
 ?>
