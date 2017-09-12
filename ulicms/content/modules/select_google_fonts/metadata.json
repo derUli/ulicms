@@ -5,5 +5,8 @@
   "controllers" : {
       "SelectGoogleFontsController" : "controllers/SelectGoogleFontsController.php"
   },
-  "main_class" : "SelectGoogleFontsController"
+  "main_class" : "SelectGoogleFontsController",
+  "controller_function_permissions": {
+      "SelectGoogleFontsController::save" : "design"
+  }
 }
