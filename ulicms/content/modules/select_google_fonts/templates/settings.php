@@ -3,6 +3,13 @@ $controller = ControllerRegistry::get("DesignSettingsController");
 $fonts = $controller->getGoogleFonts();
 $currentGoogleFont = Settings::get("google-font");
 ?>
+<?php if(Request::hasVar("save")){
+  ?>
+  <div class="alert alert-success">
+  <?php translate("changes_was_saved");?>
+</div>
+
+  <?php }?>
 <?php echo ModuleHelper::buildMethodCallForm("SelectGoogleFontsController", "save");?>
 <!-- @TODO: CSS in Datei auslagern-->
 <ol class="google-fonts">
