@@ -4,6 +4,9 @@ ol.google-fonts{
 }
 
 ol.google-fonts > li > input[type="radio"]{
-   margin-right:5px;
+    margin-right:5px;
+}
 
+ol.google-fonts > li{
+    margin-bottom:10px;
 }
