@@ -5,7 +5,7 @@ $currentGoogleFont = Settings::get("google-font");
 ?>
 <?php echo ModuleHelper::buildMethodCallForm("SelectGoogleFontsController", "save");?>
 <!-- @TODO: CSS in Datei auslagern-->
-<ol style="list-style:none">
+<ol class="google-fonts">
 <?php foreach($fonts as $font){
   ?>
 <li><input type="radio" name="google-font" id="label-<?php echo md5($font);?>" value="<?php Template::escape($font);?>"
