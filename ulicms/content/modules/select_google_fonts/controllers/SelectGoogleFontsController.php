@@ -10,4 +10,10 @@ class SelectGoogleFontsController extends Controller {
    public function settings(){
         echo Template::executeModuleTemplate($this->moduleName, "settings.php");
    }
+   public function save(){
+     if(Request::getVar("google-font")){
+       Settings::set ( "default-font", "google" );
+       Settings::set ( "google-font", Request::getVar("google-font") );
+     }
+   }
 }
