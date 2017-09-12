@@ -14,6 +14,7 @@ $currentGoogleFont = Settings::get("google-font");
     checked
     <?php
   }
+  ?>>
   <label for="label-<?php echo md5($font);?>" style="font-family:<?php echo Template::escape($font);?>; font-size:110%;">Franz jagt im komplett verwahrlosten Taxi quer durch Bayern.</label></li>
 <?php
 }
