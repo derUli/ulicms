@@ -55,18 +55,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			alt="Screenshot" class="responsive-image"></td>
 	</tr>
 				<?php } ?>
-			<?php
-			
-			if ($screenshot) {
-				?>
-				<tr>
-		<td></td>
-		<td><img src="data:<?php Template::escape($screenshot);?>"
-			alt="Screenshot" class="responsive-image"></td>
-	</tr>
-				<?php } ?>
-			
-			<?php
+<?php
 			if ($description) {
 				?>
 			<tr>
