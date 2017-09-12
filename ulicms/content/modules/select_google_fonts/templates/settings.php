@@ -20,5 +20,5 @@ $currentGoogleFont = Settings::get("google-font");
 }
 ?>
 </ol>
-<button type="submit" class="btn btn-warning"><?php translate("change_font");?></button>
+<button type="submit" class="btn btn-warning"><?php translate("use_this_font");?></button>
 </form>
