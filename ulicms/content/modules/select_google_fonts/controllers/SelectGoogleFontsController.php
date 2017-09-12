@@ -15,5 +15,6 @@ class SelectGoogleFontsController extends Controller {
        Settings::set ( "default-font", "google" );
        Settings::set ( "google-font", Request::getVar("google-font") );
      }
+     Request::redirect(ModuleHelper::buildAdminURL($this->moduleName, "save=1"));
    }
 }
