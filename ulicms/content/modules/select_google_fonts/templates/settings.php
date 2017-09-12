@@ -2,7 +2,7 @@
 $controller = ControllerRegistry::get("DesignSettingsController");
 $fonts = $controller->getGoogleFonts();
 ?>
-<?php ModuleHelper::buildMethodCallForm("SelectGoogleFontsController", "save");?>
+<?php echo ModuleHelper::buildMethodCallForm("SelectGoogleFontsController", "save");?>
 <!-- @TODO: CSS in Datei auslagern-->
 <ol style="list-style:none">
 <?php foreach($fonts as $font){
