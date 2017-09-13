@@ -23,7 +23,6 @@ class ActionRegistry {
 			"module_settings" => "inc/module_settings.php",
 			"available_patches" => "inc/available_patches.php",
 			"install_patches" => "inc/install_patches.php",
-			"add_video" => "inc/add_video.php",
 			"edit_video" => "inc/edit_video.php",
 			"audio" => "inc/audio.php",
 			"add_audio" => "inc/add_audio.php",

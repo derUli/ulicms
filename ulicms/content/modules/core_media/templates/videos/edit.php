@@ -7,10 +7,11 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_edit" )) 
 		$result = db_fetch_object ( $query );
 		?>
 <h1><?php translate ( "UPLOAD_VIDEO" );?></h1>
-<form action="index.php?action=videos" method="post">
+<form action="index.php?sClass=VideoController&sMethod=update"
+	method="post">
 <?php csrf_token_html ();?>
-	<input type="hidden" name="id"
-		value="<?php echo $result->id;?>"> <input type="hidden" name="update" value="update"> <strong><?php translate ( "name" );?>
+	<input type="hidden" name="id" value="<?php echo $result->id;?>"> <input
+		type="hidden" name="update" value="update"> <strong><?php translate ( "name" );?>
 	</strong><br /> <input type="text" name="name" required="required"
 		value="<?php echo htmlspecialchars ( $result->name );?>" maxlength=255 />
 	<br /> <br /> <strong><?php translate("category");?>
@@ -40,7 +41,7 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_edit" )) 
 </form>
 <?php
 	} else {
-		translate("video_not_found");
+		translate ( "video_not_found" );
 	}
 } else {
 	noperms ();
