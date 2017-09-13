@@ -6,6 +6,7 @@
 		"media": "templates/media.php",
 		"images": "templates/filemanager.php",
 		"files": "templates/filemanager.php",
-		"flash": "templates/filemanager.php"
+		"flash": "templates/filemanager.php",
+		"videos": "templates/videos/list.php"
 	}
 }
