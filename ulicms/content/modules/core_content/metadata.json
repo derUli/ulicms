@@ -13,7 +13,7 @@
 		"PageController": "controllers/PageController.php"
 	},
 	"controller_function_permissions": {
-		"PageController::savePost": "pages_create",
+		"PageController::createPost": "pages_create",
 		"PageController::editPost": "pages",
 		"PageController::undeletePost": "pages"
 	}

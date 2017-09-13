@@ -2,6 +2,7 @@
 class PageController extends Controller {
 	// @FIXME: Content-Model statt SQL verwenden
 	public function createPost() {
+		$acl = new ACL ();
 		if ($_POST ["system_title"] != "") {
 			$system_title = db_escape ( $_POST ["system_title"] );
 			$page_title = db_escape ( $_POST ["page_title"] );
@@ -184,6 +185,7 @@ class PageController extends Controller {
 		}
 	}
 	public function editPost() {
+		$acl = new ACL ();
 		// @FIXME: Berechtigungen pages_edit_own und pages_edit_others prüfen.
 		$system_title = db_escape ( $_POST ["system_title"] );
 		$page_title = db_escape ( $_POST ["page_title"] );
