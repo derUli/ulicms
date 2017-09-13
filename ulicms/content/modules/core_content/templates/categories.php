@@ -23,17 +23,13 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 		?>
 
 <h2><?php translate("categories");?></h2>
-<p>
-<?php translate("categories_infotext");?>
-</p>
+<p><?php translate("categories_infotext");?></p>
+<p><a href="?action=categories&add"><?php translate("create_category");?></a></p>
 
-<p>
-	<a href="?action=categories&add"><?php translate("create_category");?> </a>
-</p>
+<p><?php BackendHelper::formatDatasetCount(count($categories));?></p>
 <?php
 	}
 	?>
-<p><?php BackendHelper::formatDatasetCount(count($categories));?></p>
 
 <?php
 	if (count ( $categories ) > 0 and ! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] )) {
