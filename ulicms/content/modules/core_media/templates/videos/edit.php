@@ -16,7 +16,7 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_edit" )) 
 		value="<?php echo htmlspecialchars ( $result->name );?>" maxlength=255 />
 	<br /> <br /> <strong><?php translate("category");?>
 	</strong><br />
-	<?php echo categories::getHTMLSelect ( $result->category_id );?>
+	<?php echo Categories::getHTMLSelect ( $result->category_id );?>
 
 	<br /> <br /> <strong><?php	translate ( "video_ogg" );?>
 	</strong><br /> <input name="ogg_file" type="text"

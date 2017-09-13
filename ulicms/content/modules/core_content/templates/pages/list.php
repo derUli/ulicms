@@ -248,7 +248,7 @@ $(window).load(function(){
 </select>
 <?php translate("category");?>
 	<?php
-	echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
+	echo Categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
 	?>
 	<?php translate("menu");?>
 <select name="filter_menu" onchange="filter_by_menu(this);">

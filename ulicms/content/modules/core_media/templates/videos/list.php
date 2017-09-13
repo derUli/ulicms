@@ -43,7 +43,7 @@ $(window).load(function(){
 <?php translate("category");?>
 <?php
 	
-	echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
+	echo Categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
 	?>
 <br />
 <br />

@@ -175,7 +175,7 @@
 		</div>
 		<strong><?php translate("category");?>
 	</strong><br />
-	<?php echo categories :: getHTMLSelect();?>
+	<?php echo Categories :: getHTMLSelect();?>
 	
 		</div>
 	<div id="tab-link" style="display: none;">
@@ -433,7 +433,7 @@ function openMenuImageSelectWindow(field) {
 			?>
 	</select> <br /> <br /> <strong><?php translate ( "category" );?>
 	</strong><br />
-	<?php echo categories :: getHTMLSelect(-1, true, "list_category")?>
+	<?php echo Categories :: getHTMLSelect(-1, true, "list_category")?>
 	<br /> <br /> <strong><?php
 			
 			translate ( "menu" );

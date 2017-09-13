@@ -116,7 +116,7 @@ $(window).load(function(){
 	?>
 </h1>
 <?php translate("category");?>
-<?php echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );?>
+<?php echo Categories::getHTMLSelect ( $_SESSION ["filter_category"], true );?>
 <br />
 <br />
 <?php if($acl->hasPermission("audio_create")){?>

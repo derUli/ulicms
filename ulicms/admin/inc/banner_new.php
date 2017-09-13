@@ -46,7 +46,7 @@ if (defined ( "_SECURITY" )) {
 	</select> <br /> <br /> <strong><?php translate("category");?>
 		
 	</strong><br />
-	<?php echo categories :: getHTMLSelect()?>
+	<?php echo Categories :: getHTMLSelect()?>
 
 	<br /> <br />
 	<button type="submit" class="btn btn-success"><?php translate("add_banner");?></button>

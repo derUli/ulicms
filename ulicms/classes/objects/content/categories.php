@@ -1,5 +1,5 @@
 <?php
-class categories {
+class Categories {
 	public static function updateCategory($id, $name, $description = '') {
 		$sql = "UPDATE " . tbname ( "categories" ) . " SET name='" . db_escape ( $name ) . "', description = '" . db_escape ( $description ) . "' WHERE id=" . $id;
 		return db_query ( $sql );

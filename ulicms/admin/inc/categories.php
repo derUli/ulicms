@@ -6,14 +6,14 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 	// Create
 	if (isset ( $_REQUEST ["create"] )) {
 		if (! empty ( $_REQUEST ["name"] )) {
-			categories::addCategory ( $_REQUEST ["name"], $_REQUEST ["description"] );
+			Categories::addCategory ( $_REQUEST ["name"], $_REQUEST ["description"] );
 		}
 	}
 	
 	// Create
 	if (isset ( $_REQUEST ["update"] )) {
 		if (! empty ( $_REQUEST ["name"] ) and ! empty ( $_REQUEST ["id"] )) {
-			categories::updateCategory ( intval ( $_REQUEST ["id"] ), $_REQUEST ["name"], $_REQUEST ["description"] );
+			Categories::updateCategory ( intval ( $_REQUEST ["id"] ), $_REQUEST ["name"], $_REQUEST ["description"] );
 		}
 	}
 	
@@ -21,7 +21,7 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 	if (isset ( $_GET ["del"] ) && get_request_method () == "POST") {
 		$del = intval ( $_GET ["del"] );
 		if ($del != 1)
-			categories::deleteCategory ( $del );
+			Categories::deleteCategory ( $del );
 	}
 	
 	include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
@@ -37,7 +37,7 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 		$order = "id";
 	}
 	
-	$categories = categories::getAllCategories ( $order );
+	$categories = Categories::getAllCategories ( $order );
 	
 	?>
 
@@ -223,7 +223,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 		<input type="text" name="name" required
 			value="<?php
 			
-			echo categories::getCategoryById ( intval ( $_GET ["edit"] ) );
+			echo Categories::getCategoryById ( intval ( $_GET ["edit"] ) );
 			?>">
 	</p>
 
@@ -231,7 +231,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 	<?php translate("description");?>
 		<br />
 		<textarea cols="50" name="description" rows="5" maxlength="255"><?php
-			echo htmlspecialchars ( categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
+			echo htmlspecialchars ( Categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
 			?></textarea>
 	</p>
 	<p>

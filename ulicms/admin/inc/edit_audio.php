@@ -14,7 +14,7 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_edit" )) {
 		value="<?php echo htmlspecialchars ( $result->name );?>"
 		maxlength="255" required /> <br /> <br /> <strong><?php translate("category");?>
 	</strong><br />
-	<?php echo categories::getHTMLSelect ( $result->category_id );?>
+	<?php echo Categories::getHTMLSelect ( $result->category_id );?>
 	<br /> <br /> <strong><?php	echo translate ( "audio_ogg" );?>
 	</strong><br /> <input name="ogg_file" type="text"
 		value="<?php echo htmlspecialchars ( $result->ogg_file );?>"><br /> <br />

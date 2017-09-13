@@ -12,7 +12,7 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_create" )) 
 		type="text" name="name" required value="" maxlength=255 /> <br /> <br />
 	<strong><?php translate("category");?></strong><br />
 	<?php
-	echo categories::getHTMLSelect ();
+	echo Categories::getHTMLSelect ();
 	?>
 	<br /> <br /> <strong><?php echo translate ( "audio_ogg" );?>
 	</strong><br /> <input name="ogg_file" type="file"><br /> <br /> <strong><?php echo translate ( "audio_mp3" );?>

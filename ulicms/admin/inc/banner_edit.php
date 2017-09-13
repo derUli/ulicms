@@ -116,7 +116,7 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 		?>
 	</select> <br /> <br /> <strong><?php translate("category");?></strong><br />
 	<?php
-		echo categories::getHTMLSelect ( $row->category );
+		echo Categories::getHTMLSelect ( $row->category );
 		?>
 	<br /> <br />
 	<button type="submit" class="btn btn-success"><?php translate("save_changes");?></button>

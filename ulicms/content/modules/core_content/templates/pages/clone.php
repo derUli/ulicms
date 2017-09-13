@@ -198,7 +198,7 @@ if (defined ( "_SECURITY" )) {
 		</div>
 		<strong><?php translate("category");?> </strong><br />
 	<?php
-			echo categories::getHTMLSelect ( $row->category );
+			echo Categories::getHTMLSelect ( $row->category );
 			?>
 		</div>
 	<div id="tab-link">
@@ -559,7 +559,7 @@ function openMenuImageSelectWindow(field) {
 				$lcat = - 1;
 			}
 			?>
-	<?php echo categories :: getHTMLSelect($lcat, true, "list_category")?>
+	<?php echo Categories :: getHTMLSelect($lcat, true, "list_category")?>
 	<br /> <br /> <strong><?php
 			
 			translate ( "menu" );

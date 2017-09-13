@@ -27,7 +27,7 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" 
 	<p>
 		<strong><?php translate("category");?></strong><br />
 	<?php
-	echo categories::getHTMLSelect ();
+	echo Categories::getHTMLSelect ();
 	?></p>
 
 	<p>

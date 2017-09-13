@@ -35,7 +35,7 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_edit" ))
 	<p>
 		<strong><?php translate("category");?></strong><br />
 	<?php
-		echo categories::getHTMLSelect ( $form ["category_id"] );
+		echo Categories::getHTMLSelect ( $form ["category_id"] );
 		?></p>
 
 	<p>
