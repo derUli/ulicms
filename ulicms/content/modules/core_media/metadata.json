@@ -8,5 +8,14 @@
 		"files": "templates/filemanager.php",
 		"flash": "templates/filemanager.php",
 		"videos": "templates/videos/list.php"
+	},
+	"controllers": {
+		"VideoController": "controllers/VideoController.php"
+	},
+	"action_controllers": {
+		"videos": "VideoController"
+	},
+	"controller_function_permissions": {
+		"VideoController::deletePost": "videos"
 	}
 }

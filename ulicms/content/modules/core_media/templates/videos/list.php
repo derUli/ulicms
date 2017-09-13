@@ -5,33 +5,7 @@ $video_folder = ULICMS_ROOT . "/content/videos";
 if (! is_dir ( $video_folder )) {
 	mkdir ( $video_folder );
 }
-if ($acl->hasPermission ( "videos" ) and isset ( $_REQUEST ["delete"] ) and get_request_method () == "POST") {
-	$query = db_query ( "select ogg_file, webm_file, mp4_file from " . tbname ( "videos" ) . " where id = " . intval ( $_REQUEST ["delete"] ) );
-	if (db_num_rows ( $query ) > 0) {
-		// OGG
-		$result = db_fetch_object ( $query );
-		$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->ogg_file );
-		if (! empty ( $result->ogg_file ) and is_file ( $filepath )) {
-			@unlink ( $filepath );
-		}
-		
-		// WebM
-		$result = db_fetch_object ( $query );
-		$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->webm_file );
-		if (! empty ( $result->webm_file ) and is_file ( $filepath )) {
-			@unlink ( $filepath );
-		}
-		
-		// MP4
-		$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->mp4_file );
-		if (! empty ( $result->mp4_file ) and is_file ( $filepath )) {
-			
-			@unlink ( $filepath );
-		}
-		
-		db_query ( "DELETE FROM " . tbname ( "videos" ) . " where id = " . $_REQUEST ["delete"] );
-	}
-} else if ($acl->hasPermission ( "videos" ) and isset ( $_REQUEST ["update"] )) {
+if ($acl->hasPermission ( "videos" ) and isset ( $_REQUEST ["update"] )) {
 	$name = db_escape ( $_POST ["name"] );
 	$id = intval ( $_POST ["id"] );
 	$ogg_file = db_escape ( basename ( $_POST ["ogg_file"] ) );
@@ -43,9 +17,7 @@ if ($acl->hasPermission ( "videos" ) and isset ( $_REQUEST ["delete"] ) and get_
 	$category_id = intval ( $_POST ["category"] );
 	
 	db_query ( "UPDATE " . tbname ( "videos" ) . " SET name='$name', ogg_file='$ogg_file', mp4_file='$mp4_file', webm_file='$webm_file', width=$width, height=$height, category_id = $category_id, `updated` = $updated where id = $id" ) or die ( db_error () );
-} 
-
-else if ($acl->hasPermission ( "videos" ) and isset ( $_FILES ) and isset ( $_REQUEST ["add"] )) {
+} else if ($acl->hasPermission ( "videos" ) and isset ( $_FILES ) and isset ( $_REQUEST ["add"] )) {
 	$mp4_file_value = "";
 	// MP4
 	if (! empty ( $_FILES ['mp4_file'] ['name'] )) {
@@ -150,7 +122,7 @@ $(window).load(function(){
 </h1>
 <?php translate("category");?>
 <?php
-
+	
 	echo categories::getHTMLSelect ( $_SESSION ["filter_category"], true );
 	?>
 <br />
@@ -243,15 +215,9 @@ $(window).load(function(){
 			translate ( "edit" );
 			?>"> </a></td>
 			<td><form
-					action="index.php?action=videos&delete=<?php
-			
-			echo $row->id;
-			?>"
+					action="?sClass=VideoController&sMethod=delete&delete=<?php echo $row->id;?>"
 					method="post"
-					onsubmit="return confirm('<?php
-			
-			translate ( "ASK_FOR_DELETE" );
-			?>')"
+					onsubmit="return confirm('<?php translate ( "ASK_FOR_DELETE" );?>')"
 					class="delete-form"><?php csrf_token_html();?><input type="image"
 						src="gfx/delete.png" class="mobile-big-image"
 						alt="<?php
