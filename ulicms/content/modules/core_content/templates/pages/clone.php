@@ -23,8 +23,7 @@ if (defined ( "_SECURITY" )) {
 			$pages_activate_own = $acl->hasPermission ( "pages_activate_own" );
 			?>
 		<?php
-			
-echo ModuleHelper::buildMethodCallForm ( "PageController", "create", array (), "post", array (
+			echo ModuleHelper::buildMethodCallForm ( "PageController", "create", array (), "post", array (
 					"id" => "editpageform",
 					"name" => "editpageform" 
 			) );

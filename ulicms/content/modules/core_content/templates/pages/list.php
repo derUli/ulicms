@@ -5,7 +5,6 @@ if ($acl->hasPermission ( "pages" )) {
 <h2><?php translate("pages");?></h2>
 <p><?php translate ( "pages_infotext" );?></p>
 <?php
-	
 	if ($acl->hasPermission ( "pages_create" )) {
 		?>
 <p>
@@ -487,7 +486,6 @@ $(window).load(function(){
 				<td style="text-align: center"><?php translate("view");?>
 			</td>
 			<?php
-	
 	if ($acl->hasPermission ( "pages_create" )) {
 		?>
 			<td style="text-align: center"><?php translate ( "clone" );?>
@@ -501,7 +499,6 @@ $(window).load(function(){
 			</tr>
 		</thead>
 		<tbody>
-	
 				<?php
 	if (db_num_rows ( $query ) > 0) {
 		while ( $row = db_fetch_object ( $query ) ) {
@@ -642,15 +639,12 @@ function ajaxEmptyTrash(url){
 }
 </script>
 <?php
-	
 	$translation = new JSTranslation ();
 	$translation->addKey ( "ask_for_delete" );
 	$translation->addKey ( "wanna_empty_trash" );
 	$translation->renderJS ();
 	?>
-
 <br />
-
 <?php
 } else {
 	noperms ();
