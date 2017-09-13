@@ -2,7 +2,6 @@
 class ActionRegistry {
 	private static $assignedControllers = array ();
 	private static $defaultCoreActions = array (
-			"categories" => "inc/categories.php",
 			"banner" => "inc/banner.php",
 			"banner_new" => "inc/banner_new.php",
 			"banner_edit" => "inc/banner_edit.php",
@@ -25,7 +24,7 @@ class ActionRegistry {
 			"install_patches" => "inc/install_patches.php",
 			"audio" => "inc/audio.php",
 			"add_audio" => "inc/add_audio.php",
-			"edit_audio" => "inc/edit_audio.php"
+			"edit_audio" => "inc/edit_audio.php" 
 	);
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;

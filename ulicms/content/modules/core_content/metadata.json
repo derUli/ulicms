@@ -7,14 +7,19 @@
 		"pages": "templates/pages/list.php",
 		"pages_new": "templates/pages/new.php",
 		"pages_edit": "templates/pages/edit.php",
-		"clone_page": "templates/pages/clone.php"
+		"clone_page": "templates/pages/clone.php",
+		"categories": "templates/categories.php"
 	},
 	"controllers": {
-		"PageController": "controllers/PageController.php"
+		"PageController": "controllers/PageController.php",
+		"CategoryController": "controllers/CategoryController.php"
 	},
 	"controller_function_permissions": {
 		"PageController::createPost": "pages_create",
 		"PageController::editPost": "pages",
-		"PageController::undeletePost": "pages"
+		"PageController::undeletePost": "pages",
+		"CategoryController::createPost": "categories_create",
+		"CategoryController::updatePost": "categories_edit",
+		"CategoryController::deletePost": "categories"
 	}
 }

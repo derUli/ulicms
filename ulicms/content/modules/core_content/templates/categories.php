@@ -3,27 +3,6 @@ $acl = new ACL ();
 if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 	noperms ();
 } else {
-	// Create
-	if (isset ( $_REQUEST ["create"] )) {
-		if (! empty ( $_REQUEST ["name"] )) {
-			Categories::addCategory ( $_REQUEST ["name"], $_REQUEST ["description"] );
-		}
-	}
-	
-	// Create
-	if (isset ( $_REQUEST ["update"] )) {
-		if (! empty ( $_REQUEST ["name"] ) and ! empty ( $_REQUEST ["id"] )) {
-			Categories::updateCategory ( intval ( $_REQUEST ["id"] ), $_REQUEST ["name"], $_REQUEST ["description"] );
-		}
-	}
-	
-	// Delete
-	if (isset ( $_GET ["del"] ) && get_request_method () == "POST") {
-		$del = intval ( $_GET ["del"] );
-		if ($del != 1)
-			Categories::deleteCategory ( $del );
-	}
-	
 	include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
 	if (isset ( $_GET ["order"] ) and faster_in_array ( $_GET ["order"], array (
 			"id",
@@ -38,10 +17,8 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 	}
 	
 	$categories = Categories::getAllCategories ( $order );
-	
 	?>
-
-			<?php
+<?php
 	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] ) and $acl->hasPermission ( "categories_create" )) {
 		?>
 
@@ -110,9 +87,9 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 				
 				if ($category ["id"] != 1) {
 					?>
-
-			<td style="text-align: center;"><form
-						action="?action=categories&del=<?php
+<!-- @FIXME. "Wirklich löschen?" ist hart gecodet -->
+				<td style="text-align: center;"><form
+						action="?sClass=CategoryController&sMethod=delete&del=<?php
 					
 					echo $category ["id"];
 					?>"
@@ -174,28 +151,22 @@ $("form.delete-form").ajaxForm(ajax_options);
 	} else if (isset ( $_GET ["add"] )) {
 		if ($acl->hasPermission ( "categories_create" )) {
 			?>
-<h2>
-<?php translate("create_category");?>
-</h2>
-<form action="?action=categories" method="post">
-<?php
-			
-			csrf_token_html ();
-			?>
-	<p>
+<h2><?php translate("create_category");?></h2>
+<?php echo ModuleHelper::buildMethodCallForm("CategoryController", "create");?>
+<p>
 	<?php translate("name");?>
 		<input type="text" name="name" value="" required>
 
-	</p>
+</p>
 
-	<p>
+<p>
 	<?php translate("description");?>
 		<br />
-		<textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
-	</p>
-	<p>
-		<button type="submit" name="create" class="btn btn-success"><?php translate("create");?></button>
-	</p>
+	<textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
+</p>
+<p>
+	<button type="submit" name="create" class="btn btn-success"><?php translate("create");?></button>
+</p>
 
 
 </form>
@@ -205,40 +176,33 @@ $("form.delete-form").ajaxForm(ajax_options);
 			noperms ();
 		}
 	} else if (isset ( $_GET ["edit"] )) {
-		
 		if ($acl->hasPermission ( "categories_edit" )) {
 			?>
-<h2>
-<?php translate("edit_category");?>
-</h2>
-<form action="?action=categories" method="post">
-<?php
-			
-			csrf_token_html ();
-			?>
-	<input type="hidden" name="id"
-		value="<?php echo intval($_GET["edit"])?>">
-	<p>
+<h2><?php translate("edit_category");?></h2>
+<?php echo ModuleHelper::buildMethodCallForm("CategoryController", "update");?>
+<input type="hidden" name="id"
+	value="<?php echo intval($_GET["edit"])?>">
+<p>
 	<?php translate("name");?>
 		<input type="text" name="name" required
-			value="<?php
+		value="<?php
 			
 			echo Categories::getCategoryById ( intval ( $_GET ["edit"] ) );
 			?>">
-	</p>
+</p>
 
-	<p>
+<p>
 	<?php translate("description");?>
 		<br />
-		<textarea cols="50" name="description" rows="5" maxlength="255"><?php
+	<textarea cols="50" name="description" rows="5" maxlength="255"><?php
 			echo htmlspecialchars ( Categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
 			?></textarea>
-	</p>
-	<p>
-		<button type="submit" name="update" class="btn btn-success"><?php
+</p>
+<p>
+	<button type="submit" name="update" class="btn btn-success"><?php
 			translate ( "save" );
 			?></button>
-	</p>
+</p>
 </form>
 <?php
 		} else {
