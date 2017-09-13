@@ -1,0 +1,12 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": true,
+	"controllers": {
+		"CasperQuotes": "CasperQuotes"
+	},
+	"main_class": "CasperQuotes",
+	"custom_acl": [
+		"casper_quotes"
+	]
+}
