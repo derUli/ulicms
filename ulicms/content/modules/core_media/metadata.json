@@ -9,13 +9,16 @@
 		"flash": "templates/filemanager.php",
 		"videos": "templates/videos/list.php",
 		"add_video": "templates/videos/new.php",
-		"edit_video": "templates/videos/edit.php"
+		"edit_video": "templates/videos/edit.php",
+		"audio": "templates/audio/list.php"
 	},
 	"controllers": {
-		"VideoController": "controllers/VideoController.php"
+		"VideoController": "controllers/VideoController.php",
+		"AudioController": "controllers/AudioController.php"
 	},
 	"action_controllers": {
-		"videos": "VideoController"
+		"videos": "VideoController",
+		"audio": "AudioController"
 	},
 	"controller_function_permissions": {
 		"VideoController::deletePost": "videos",
