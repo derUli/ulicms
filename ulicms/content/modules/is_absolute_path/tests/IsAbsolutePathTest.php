@@ -12,6 +12,9 @@ class isAbsolutePathTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse ( is_absolute_path ( "mein/test.html" ) );
 	}
 	public function testIsAbsolutePathWindows() {
+		$this->assertTrue ( is_absolute_path ( "c:\\" ) );
+		$this->assertTrue ( is_absolute_path ( "c:\\windows" ) );
+		$this->assertTrue ( is_absolute_path ( "c:\\windows\\notepad.exe" ) );
 		$this->assertFalse ( is_absolute_path ( "test.html" ) );
 		$this->assertFalse ( is_absolute_path ( ".\\test.html" ) );
 		$this->assertFalse ( is_absolute_path ( "..\\test.html" ) );
