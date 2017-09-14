@@ -1,0 +1,12 @@
+{
+  "source" : "extend",
+  "version" : "1.0",
+  "embed" : false,
+  "controllers" : {
+      "SelectGoogleFontsController" : "controllers/SelectGoogleFontsController.php"
+  },
+  "main_class" : "SelectGoogleFontsController",
+  "controller_function_permissions": {
+      "SelectGoogleFontsController::save" : "design"
+  }
+}
