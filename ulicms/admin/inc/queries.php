@@ -4,22 +4,9 @@ add_hook ( "query" );
 
 include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 
-if ($acl->hasPermission ( "pages" ) and Request::getVar ( "toggle-show-core-modules" )) {
+if ($acl->hasPermission ( "modules" ) and Request::getVar ( "toggle-show-core-modules" )) {
 	$_SESSION ["show_core_modules"] = ! $_SESSION ["show_core_modules"];
 	Request::redirect ( ModuleHelper::buildActionURL ( Request::getVar ( "action" ) ) );
-}
-
-if ($_GET ["action"] == "view_website" or $_GET ["action"] == "frontpage") {
-	add_hook ( "before_view_website" );
-	Request::redirect ( "../" );
-}
-
-if ($_GET ["action"] == "empty_trash") {
-	add_hook ( "before_empty_trash" );
-	db_query ( "DELETE FROM " . tbname ( "content" ) . " WHERE deleted_at IS NOT NULL" );
-	add_hook ( "after_empty_trash" );
-	header ( "Location: index.php?action=pages" );
-	exit ();
 }
 
 if ($_GET ["action"] == "banner_delete" && $acl->hasPermission ( "banners" ) && get_request_method () == "POST") {

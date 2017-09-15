@@ -371,4 +371,10 @@ class PageController extends Controller {
 		add_hook ( "after_delete_page" );
 		Request::redirect ( ModuleHelper::buildActionURL ( "pages" ) );
 	}
+	public function emptyTrash() {
+		add_hook ( "before_empty_trash" );
+		db_query ( "DELETE FROM " . tbname ( "content" ) . " WHERE deleted_at IS NOT NULL" );
+		add_hook ( "after_empty_trash" );
+		Request::redirect ( ModuleHelper::buildActionURL ( "pages" ) );
+	}
 }

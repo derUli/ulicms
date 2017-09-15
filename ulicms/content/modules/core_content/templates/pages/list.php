@@ -372,7 +372,8 @@ $(window).load(function(){
 	if ($_SESSION ["filter_status"] == "trash" and $acl->hasPermission ( "pages" )) {
 		?>
 
-<a href="index.php?action=empty_trash"
+<a
+	href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "emptyTrash");?>"
 	onclick="return ajaxEmptyTrash(this.href);"><?php translate("empty_recycle_bin");?></a>
 <?php
 	}

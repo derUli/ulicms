@@ -18,6 +18,7 @@
 		"PageController::createPost": "pages_create",
 		"PageController::editPost": "pages",
 		"PageController::undeletePost": "pages",
+		"PageController::empyTrash": "pages",
 		"CategoryController::createPost": "categories_create",
 		"CategoryController::updatePost": "categories_edit",
 		"CategoryController::deletePost": "categories"
