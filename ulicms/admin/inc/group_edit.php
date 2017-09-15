@@ -23,24 +23,13 @@ if (! $acl->hasPermission ( "groups" )) {
 	ksort ( $all_permissions );
 	
 	if ($all_permissions) {
-		
 		?>
 <form action="?action=groups" method="post">
-<?php
-		
-		csrf_token_html ();
-		?>
-	<input type="hidden" name="id" value="<?php
-		
-		echo $id;
-		?>">
+<?php csrf_token_html ();?>
+	<input type="hidden" name="id" value="<?php	echo $id;?>">
 	<p>
 		<strong><?php translate("name");?></strong> <input type="text"
-			required="required" name="name"
-			value="<?php
-		
-		echo $groupName;
-		?>">
+			required="required" name="name" value="<?php echo $groupName;?>">
 	</p>
 	<h3><?php translate("permissions");?></h3>
 	<fieldset>
@@ -51,29 +40,16 @@ if (! $acl->hasPermission ( "groups" )) {
 		</p>
 		<p>
 		<?php
-		
 		foreach ( $all_permissions as $key => $value ) {
 			?>
-			<input type="checkbox" id="<?php
-			
-			echo $key;
-			?>"
-				name="user_permissons[]" value="<?php
-			
-			echo $key;
-			?>"
+			<input type="checkbox" id="<?php echo $key;?>"
+				name="user_permissons[]" value="<?php echo $key;?>"
 				<?php
 			
 			if ($value) {
 				echo "checked='checked'";
 			}
-			?>> <label for="<?php
-			
-			echo $key;
-			?>"><?php
-			
-			echo $key;
-			?>
+			?>> <label for="<?php echo $key;?>"><?php echo $key;?>
 			</label><br />
 			<?php
 		}
@@ -91,17 +67,14 @@ if (! $acl->hasPermission ( "groups" )) {
 				id="lang-<?php echo $lang->getID();?>"> <label
 				for="lang-<?php echo $lang->getID();?>"><?php Template::escape($lang->getName());?></label>
 			<br />
-			 
 		<?php }?></p>
 	</fieldset>
 	<h4><?php translate("allowable_tags");?></h4>
 	<input type="text" name="allowable_tags"
 		value="<?php Template::escape($group->getAllowableTags());?>"><br /> <small><?php translate("allowable_tags_help");?></small>
-
 	<br /> <br />
 	<button name="edit_group" type="submit" class="btn btn-success"><?php translate("save_changes");?></button>
 </form>
-
 <script type="text/javascript">
 $(function () {
     $('.checkall').on('click', function () {
@@ -109,16 +82,11 @@ $(function () {
     });
 });
 </script>
-
-<?php
-		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-			?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
+<?php if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {?>
+<script type="text/javascript" src="scripts/ctrl-s-submit.js"></script>
 <?php
 		}
 		?>
-
 	<?php
 	} else {
 		?>

@@ -4,16 +4,12 @@ $all_permissions = $acl->getDefaultACL ( true, true );
 $languages = Language::getAllLanguages ();
 ?>
 <form action="?action=groups" method="post">
-<?php
-
-csrf_token_html ();
-?>
+<?php csrf_token_html ();?>
 	<p>
 		<strong><?php translate("name");?> </strong> <input type="text"
 			required="required" name="name" value="">
 	</p>
 	<h3><?php translate("permissions");?></h3>
-
 	<fieldset>
 		<p>
 			<input id="checkall" type="checkbox" class="checkall"> <label
@@ -24,26 +20,19 @@ csrf_token_html ();
 		</p>
 		<p>
 		<?php
-		
 		foreach ( $all_permissions as $key => $value ) {
 			?>
 			<input type="checkbox" id="<?php
-			
 			echo $key;
 			?>"
 				name="user_permissons[]" value="<?php
-			
 			echo $key;
 			?>"> <label for="<?php
-			
 			echo $key;
 			?>"><?php
-			
 			echo $key;
 			?> </label> <br />
-<?php
-		}
-		?>
+<?php }?>
 		</p>
 	</fieldset>
 	<h4><?php translate("languages");?></h4>
@@ -56,7 +45,6 @@ csrf_token_html ();
 				id="lang-<?php echo $lang->getID();?>"> <label
 				for="lang-<?php echo $lang->getID();?>"><?php Template::escape($lang->getName());?></label>
 			<br />
-			 
 		<?php }?></p>
 	</fieldset>
 	<h4><?php translate("allowable_tags");?></h4>
@@ -66,9 +54,7 @@ csrf_token_html ();
 	<p>
 		<button name="add_group" type="submit" class="btn btn-success"><?php translate("create_group");?></button>
 	</p>
-
 </form>
-
 <script type="text/javascript">
 $(function () {
     $('.checkall').on('click', function () {
@@ -76,12 +62,10 @@ $(function () {
     });
 });
 </script>
-
 <?php
 if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 	?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
+<script type="text/javascript" src="scripts/ctrl-s-submit.js"></script>
 <?php
 }
 ?>

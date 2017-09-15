@@ -39,9 +39,7 @@ if ($_SESSION ["grp_sort"] == "id") {
 </p>
 <?php }?>
 <p><?php BackendHelper::formatDatasetCount(count($groups));?></p>
-
 <?php
-
 if (count ( $groups ) > 0) {
 	?>
 <div class="scroll">
@@ -59,21 +57,13 @@ if (count ( $groups ) > 0) {
 		</tr>
 		</thead>
 		<tbody>
-
 	<?php
-	
 	foreach ( $groups as $id => $name ) {
 		?>
 		<tr id="dataset-<?php echo $id;?>">
-				<td><?php
-		
-		echo $id;
-		?>
+				<td><?php echo $id;?>
 			</td>
-				<td><?php
-		
-		echo $name;
-		?>
+				<td><?php echo $name;?>
 			</td>
 
 <?php if($acl->hasPermission("groups_edit")){?>

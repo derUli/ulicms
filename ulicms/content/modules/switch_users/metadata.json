@@ -1,0 +1,12 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": false,
+	"controllers": {
+		"SwitchUsers": "SwitchUsers.php"
+	},
+	"main_class": "SwitchUsers",
+	"custom_acl": [
+		"switch_users"
+	]
+}
