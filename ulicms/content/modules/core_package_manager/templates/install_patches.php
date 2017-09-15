@@ -6,7 +6,6 @@ if ($acl->hasPermission ( "update_system" )) {
 	
 	?>
 <h1><?php translate ( "install_patches" );?></h1>
-
 <?php
 	$patches = $_POST ["patches"];
 	$pkg = new PackageManager ();

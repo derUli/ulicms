@@ -4,9 +4,6 @@ if (! $acl->hasPermission ( "install_packages" )) {
 } else {
 	?>
 <h1><?php translate("available_packages")?></h1>
-<noscript>
-	<p>Bitte aktivieren Sie Javascript!</p>
-</noscript>
 <div id="loadpkg">
 	<img style="margin-right: 15px; float: left;" src="gfx/loading.gif"
 		alt="Bitte warten...">
@@ -25,7 +22,4 @@ $(window).load(function(){
 	});
 });
 </script>
-
-<?php
-}
-?>
+<?php }?>

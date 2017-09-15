@@ -12,23 +12,14 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	if (! $pkg_src) {
 		?>
 <p>
-	<strong><?php
-		
-		translation ( "error" );
-		?>
+	<strong><?php translation ( "error" );?>
 	</strong> <br />
-	<?php
-		translate ( "pkgsrc_not_defined" );
-		?></p>
+	<?php translate ( "pkgsrc_not_defined" );?></p>
 <?php
 	} else if (! class_exists ( "PharData" )) {
 		?>
 <p>
-	<strong><?php
-		
-		translate ( "error" );
-		?>
-	</strong> <br />
+	<strong><?php translate ( "error" );?></strong> <br />
 	<?php translate ( "phardata_not_available" );?></p>
 <?php
 	} else {
@@ -49,8 +40,8 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		if (count ( $packagesToInstall ) === 0 or empty ( $_REQUEST ["packages"] )) {
 			?>
 <p>
-	<strong><?php translate("error");?></strong> <br /> <?php translate("nothing_to_do");?>
-
+	<strong><?php translate("error");?></strong> <br />
+	 <?php translate("nothing_to_do");?>
 </p>
 
 <?php
@@ -93,7 +84,6 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	[ <a
 		href="<?php echo ModuleHelper::buildActionURL("available_modules");?>"><?php translate("install_another_package")?></a>]
 </p>
-
 <?php
 		}
 	}
