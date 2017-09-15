@@ -1,0 +1,18 @@
+{
+	"source": "core",
+	"version": "2018.1",
+	"embed": false,
+	"actions": {
+		"admins": "templates/users/list.php",
+		"admin_new": "templates/users/new.php",
+		"admin_edit": "templates/users/edit.php"
+	},
+	"controllers": {
+		"UserController": "controllers/UserController.php"
+	},
+	"controllers_function_permissions": {
+		"UserController::deletePost": "users",
+		"UserController::createPost": "users_create",
+		"UserController::updatePost": "users_edit"
+	}
+}

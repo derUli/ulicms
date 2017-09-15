@@ -6,9 +6,9 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 	$query = db_query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE id='$admin'" );
 	while ( $row = db_fetch_object ( $query ) ) {
 		?>
-<form action="index.php?action=admins" name="userdata_form"
-	method="post" enctype="multipart/form-data" id="edit_user"
-	autocomplete="off">
+<form action="index.php?sClass=UserController&sMethod=update"
+	name="userdata_form" method="post" enctype="multipart/form-data"
+	id="edit_user" autocomplete="off">
 	<?php csrf_token_html ();?>
 	<img src="<?php
 		echo get_gravatar ( $row->email, 200 );
