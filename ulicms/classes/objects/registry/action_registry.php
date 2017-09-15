@@ -21,9 +21,7 @@ class ActionRegistry {
 			"upload_package" => "inc/upload_package.php",
 			"module_settings" => "inc/module_settings.php",
 			"available_patches" => "inc/available_patches.php",
-			"install_patches" => "inc/install_patches.php",
-			"add_audio" => "inc/add_audio.php",
-			"edit_audio" => "inc/edit_audio.php" 
+			"install_patches" => "inc/install_patches.php" 
 	);
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;

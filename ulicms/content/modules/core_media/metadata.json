@@ -10,7 +10,9 @@
 		"videos": "templates/videos/list.php",
 		"add_video": "templates/videos/new.php",
 		"edit_video": "templates/videos/edit.php",
-		"audio": "templates/audio/list.php"
+		"audio": "templates/audio/list.php",
+		"add_audio": "templates/audio/new.php",
+		"edit_audio": "templates/audio/edit.php"
 	},
 	"controllers": {
 		"VideoController": "controllers/VideoController.php",
@@ -23,6 +25,9 @@
 	"controller_function_permissions": {
 		"VideoController::deletePost": "videos",
 		"VideoController::updatePost": "videos_edit",
-		"VideoController::createPost": "videos_create"
+		"VideoController::createPost": "videos_create",
+		"AudioController::deletePost": "audio",
+		"AudioController::createPost": "audio_create",
+		"AudioController::updatePost": "audio_edit"
 	}
 }
