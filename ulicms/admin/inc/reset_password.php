@@ -1,6 +1,6 @@
 <?php
 if (Settings::get ( "disable_password_reset" )) {
-	translate ( "function_is_diabled" );
+	translate ( "function_is_disabled" );
 } else {
 	?>
 <?php
