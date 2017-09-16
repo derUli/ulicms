@@ -9,7 +9,9 @@
 		"pages_edit": "templates/pages/edit.php",
 		"clone_page": "templates/pages/clone.php",
 		"categories": "templates/categories.php",
-		"banner": "templates/banners/list.php"
+		"banner": "templates/banners/list.php",
+		"banner_new": "templates/banners/new.php",
+		"banner_edit": "templates/banners/edit.php"
 	},
 	"controllers": {
 		"PageController": "controllers/PageController.php",
