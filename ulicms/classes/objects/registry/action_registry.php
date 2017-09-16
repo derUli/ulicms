@@ -2,7 +2,6 @@
 class ActionRegistry {
 	private static $assignedControllers = array ();
 	private static $defaultCoreActions = array (
-			"banner" => "inc/banner.php",
 			"banner_new" => "inc/banner_new.php",
 			"banner_edit" => "inc/banner_edit.php",
 			"groups" => "inc/groups.php",

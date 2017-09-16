@@ -8,7 +8,8 @@
 		"pages_new": "templates/pages/new.php",
 		"pages_edit": "templates/pages/edit.php",
 		"clone_page": "templates/pages/clone.php",
-		"categories": "templates/categories.php"
+		"categories": "templates/categories.php",
+		"banner": "templates/banners/list.php"
 	},
 	"controllers": {
 		"PageController": "controllers/PageController.php",
