@@ -6,94 +6,96 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 	while ( $row = db_fetch_object ( $query ) ) {
 		?>
 
-<form action="index.php?action=banner" method="post">
-<?php csrf_token_html ();?>
-	<h4><?php translate("preview");?></h4>
-	<?php
+<?php echo ModuleHelper::buildMethodCallForm("BannerController", "update");?>
+<h4><?php translate("preview");?></h4>
+<?php
 		
 		if ($row->type == "gif") {
 			?>
-				<p>
-		<a href="<?php
+<p>
+	<a href="<?php
 			
 			Template::escape ( $row->link_url );
 			?>"
-			target="_blank"><img
-			src="<?php
+		target="_blank"><img
+		src="<?php
 			
 			Template::escape ( $row->image_url );
 			?>"
-			title="<?php
+		title="<?php
 			
 			Template::escape ( $row->name );
 			?>"
-			alt="<?php
+		alt="<?php
 			
 			Template::escape ( $row->name );
 			?>" border=0> </a>
-	</p>
+</p>
 
-	<?php
+<?php
 		} else {
 			echo $row->html;
 		}
 		?>
-	<input type="hidden" name="edit_banner" value="edit_banner"> <input
-		type="hidden" name="id" value="<?php echo $row->id;?>">
-	<p>
-		<input type="radio"
-			<?php
+<input type="hidden" name="edit_banner" value="edit_banner">
+<input type="hidden" name="id" value="<?php echo $row->id;?>">
+<p>
+	<input type="radio"
+		<?php
 		if ($row->type == "gif") {
 			echo 'checked="checked"';
 		}
 		?>
-			id="radio_gif" name="type" value="gif"
-			onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label
-			for="radio_gif"><?php translate("gif_banner");?></label>
-	</p>
-	<fieldset id="type_gif" style="<?php
+		id="radio_gif" name="type" value="gif"
+		onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label
+		for="radio_gif"><?php translate("gif_banner");?></label>
+</p>
+<fieldset id="type_gif" style="<?php
 		
 		if ($row->type != "gif") {
 			echo "display:none";
 		}
 		?>">
 
-		<strong><?php
+	<strong><?php
 		translate ( "bannertext" );
 		?></strong><br /> <input type="text" name="banner_name"
-			value="<?php
+		value="<?php
 		Template::escape ( $row->name );
 		?>"> <br /> <br /> <strong><?php
 		translate ( "IMAGE_URL" );
 		?></strong><br /> <input type="text" name="image_url"
-			value="<?php
+		value="<?php
 		Template::escape ( $row->image_url );
 		?>"> <br /> <br /> <strong><?php translate("link_url");?></strong><br />
-		<input type="text" name="link_url"
-			value="<?php
+	<input type="text" name="link_url"
+		value="<?php
 		Template::escape ( $row->link_url );
 		?>">
-	</fieldset>
-	<br /> <input type="radio"
-		<?php
+</fieldset>
+<br />
+<input type="radio"
+	<?php
 		if ($row->type == "html") {
 			echo 'checked="checked"';
 		}
 		?>
-		id="radio_html" name="type" value="html"
-		onclick="$('#type_html').slideDown();$('#type_gif').slideUp();"><label
-		for="radio_html">HTML</label>
-	<fieldset id="type_html" style="<?php
+	id="radio_html" name="type" value="html"
+	onclick="$('#type_html').slideDown();$('#type_gif').slideUp();">
+<label for="radio_html">HTML</label>
+<fieldset id="type_html" style="<?php
 		if ($row->type != "html") {
 			echo "display:none";
 		}
 		?>">
-		<textarea name="html" cols=40 rows=10><?php
+	<textarea name="html" cols=40 rows=10><?php
 		echo htmlspecialchars ( $row->html );
 		?></textarea>
-	</fieldset>
-	<br /> <strong><?php translate("language");?></strong><br /> <select
-		name="language">
+</fieldset>
+<br />
+<strong><?php translate("language");?></strong>
+<br />
+<select name="language">
 	<?php
 		$languages = getAllLanguages ();
 		$page_language = $row->language;
@@ -114,16 +116,21 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 		
 		$pages = getAllPages ( $page_language, "title" );
 		?>
-	</select> <br /> <br /> <strong><?php translate("category");?></strong><br />
-	<?php
+	</select>
+<br />
+<br />
+<strong><?php translate("category");?></strong>
+<br />
+<?php
 		echo Categories::getHTMLSelect ( $row->category );
 		?>
-	<br /> <br />
-	<button type="submit" class="btn btn-success"><?php translate("save_changes");?></button>
-			<?php
+<br />
+<br />
+<button type="submit" class="btn btn-success"><?php translate("save_changes");?></button>
+<?php
 		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
 			?>
-	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
+<script type="text/javascript" src="scripts/ctrl-s-submit.js">
 </script>
 <?php
 		}

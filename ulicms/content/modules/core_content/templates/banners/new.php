@@ -4,11 +4,7 @@ if (defined ( "_SECURITY" )) {
 	if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_create" )) {
 		?>
 
-<form action="index.php?action=banner" method="post">
-<?php
-		
-		csrf_token_html ();
-		?>
+<?php echo ModuleHelper::buildMethodCallForm("BannerController", "create");?>
 	<p>
 		<input type="radio" checked="checked" id="radio_gif" name="type"
 			value="gif"

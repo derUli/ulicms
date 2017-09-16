@@ -15,7 +15,8 @@
 	},
 	"controllers": {
 		"PageController": "controllers/PageController.php",
-		"CategoryController": "controllers/CategoryController.php"
+		"CategoryController": "controllers/CategoryController.php",
+		"BannerController": "controllers/BannerController.php"
 	},
 	"controller_function_permissions": {
 		"PageController::createPost": "pages_create",
@@ -24,6 +25,9 @@
 		"PageController::empyTrash": "pages",
 		"CategoryController::createPost": "categories_create",
 		"CategoryController::updatePost": "categories_edit",
-		"CategoryController::deletePost": "categories"
+		"CategoryController::deletePost": "categories",
+		"BannerController::deletePost": "banners",
+		"BannerController::createPost": "banners",
+		"BannerController::updatePost": "banners"
 	}
 }
