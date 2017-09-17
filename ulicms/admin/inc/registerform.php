@@ -73,16 +73,7 @@ if (Settings::get ( "visitors_can_register" ) == "off" or ! Settings::get ( "vis
 	</strong><br /> <input type="password" required="required"
 		name="admin_password_repeat" value=""><br /> <br />
 		<?php add_hook ( "register_form_field" );?>
-	<br />
-<?php
-	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-		?>
-	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php
-	}
-	?>
-	<input type="submit" value="<?php translate("register");?>">
+	<br /> <input type="submit" value="<?php translate("register");?>">
 </form>
 <?php
 	add_hook ( "after_register_form" );

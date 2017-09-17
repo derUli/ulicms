@@ -23,14 +23,6 @@ if ($acl->hasPermission ( "cache" )) {
 <?php translate("cache_text3");?>
 <?php echo ModuleHelper::buildMethodCallForm("CacheSettingsController", "clearCache")?>
 <button type="submit" class="btn btn-success"><?php translate("clear_cache");?></button>
-<?php
-		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-			?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php
-		}
-		?>
 </form>
 
 <?php

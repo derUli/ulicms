@@ -21,7 +21,8 @@
 			echo ModuleHelper::buildMethodCallForm ( "PageController", "create", array (), "post", array (
 					"name" => "newpageform",
 					"id" => "pageform" 
-			) );?>
+			) );
+			?>
 <input type="hidden" name="add" value="add">
 
 <div id="accordion-container">
@@ -731,16 +732,6 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 <div class="inPageMessage"></div>
 <input type="hidden" name="add_page" value="add_page">
 <input type="submit" value="<?php translate("save");?>">
-<?php
-			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-				?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-
-<?php
-			}
-			?>
-
 <script src="scripts/page.js" type="text/javascript">
 </script>
 

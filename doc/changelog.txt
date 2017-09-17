@@ -12,9 +12,11 @@
 # wenn möglich wird bei PHP Fehlern der HTTP Status "500 Internal Server Error" gesendet.
 # Funktion is_ajax_request() verschoben nach Request::isAjaxRequest()
 - Funktion ulicms_redirect() entfernt.
-  Nutzen Sie stattdessen Request::redirect()
+  Nutzen Sie stattdessen Request::redirect(
+  
+Bugfixes:
+* Die Gruppe "Administratoren" wird bei der Installation wieder erstellt
 
-Bugfix: Die Gruppe "Administratoren" wird bei der Installation wieder erstellt
 ===== Neues in UliCMS 2017.4 =====
 
 + Gruppen können nun Sprachen zugeordnet bekommen

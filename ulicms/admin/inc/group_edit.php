@@ -82,12 +82,7 @@ $(function () {
     });
 });
 </script>
-<?php if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js"></script>
 <?php
-		}
-		?>
-	<?php
 	} else {
 		?>
 <p style="color: red">Diese Gruppe ist nicht vorhanden.</p>

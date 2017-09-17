@@ -25,14 +25,6 @@ if ($acl->hasPermission ( "expert_settings" ) and $acl->hasPermission ( "expert_
 <br />
 <br />
 <button type="submit" class="btn btn-success"><?php translate("create_option");?></button>
-<?php
-	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-		?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php
-	}
-	?>
 </form>
 
 <?php

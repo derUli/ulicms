@@ -204,15 +204,6 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 	<textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row->about_me)?></textarea>
 	<br /> <br />
 	<button type="submit" class="btn btn-success"><?php translate ( "OK" );?></button>
-
-	<?php
-		if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-			?>
-	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php
-		}
-		?>
 </form>
 
 <?php

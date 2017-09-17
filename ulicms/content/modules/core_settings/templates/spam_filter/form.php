@@ -76,17 +76,8 @@ function spamFilterEnabledcheckboxChanged(checked){
 	<p>
 		<button type="submit" name="submit_spamfilter_settings"
 			class="btn btn-success voffset3"><?php translate("save_changes");?></button>
-	</p>	
-	<?php
-	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-		?>
-	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php
-	}
-	?>
+	</p>
 </form>
-
 <script type="text/javascript">
 $("#spamfilter_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");

@@ -48,11 +48,6 @@ if (defined ( "_SECURITY" )) {
 					class="btn btn-success voffset2"><?php translate("upload");?></button></td>
 		</tr>
 	</table>
-
-	<?php if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {?>
-	<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php } ?>
 </form>
 <?php
 	} else {

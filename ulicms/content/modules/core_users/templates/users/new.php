@@ -67,13 +67,6 @@ if ($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_create" )) 
 	?>
 	</select><br /> <br />
 	<button type="submit" class="btn btn-success"><?php translate ( "create_user" );?></button>
-			<?php
-	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-		?>
-	<script type="text/javascript" src="scripts/ctrl-s-submit.js"></script>
-<?php
-	}
-	?>
 </form>
 <?php
 } else {

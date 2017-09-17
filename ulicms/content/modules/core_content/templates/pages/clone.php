@@ -905,17 +905,6 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </div>
 
 <input type="submit" value="<?php translate("save_changes");?>">
-
-
-<?php
-			if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-				?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php
-			}
-			?>
-
 <script src="scripts/page.js" type="text/javascript">
 </script>
 <input type="hidden" name="add_page" value="add_page">

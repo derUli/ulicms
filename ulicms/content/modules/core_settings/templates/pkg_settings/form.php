@@ -64,16 +64,7 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 
 	<br />
 	<button type="submit" class="btn btn-success voffset2"><?php translate("save_changes");?></button>
-
-	<?php
-	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-		?>
-		<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php
-	}
-	?>
-	</fieldset>
+</fieldset>
 </form>
 
 <script type="text/javascript">

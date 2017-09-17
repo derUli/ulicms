@@ -456,15 +456,6 @@ if($('#email_mode').val() == "pear_mail"){
 </div>
 
 <button type="submit" name="submit" class="btn btn-success voffset3"><?php translate("save_changes");?></button>
-
-<?php
-	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-		?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php
-	}
-	?>
 </form>
 <script type="text/javascript">
 $("#other_settings").ajaxForm({beforeSubmit: function(e){

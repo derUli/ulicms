@@ -193,14 +193,6 @@ if ($acl->hasPermission ( "settings_simple" )) {
 	</tr>
 </table>
 <input type="hidden" name="save_settings" value="save_settings">
-<?php
-	if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-		?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php
-	}
-	?>
 </form>
 <script type="text/javascript">
 $("#settings_simple").ajaxForm({beforeSubmit: function(e){
