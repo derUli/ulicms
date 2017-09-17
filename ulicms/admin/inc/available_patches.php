@@ -10,12 +10,8 @@ if (is_admin () or $acl->hasPermission ( "update_system" )) {
 	} else {
 		?>
 <form action="index.php?action=install_patches" method="post">
+<?php csrf_token_html ();?>
 <?php
-		
-		csrf_token_html ();
-		?>
-<?php
-		
 		$lines = explode ( "\n", $patches );
 		foreach ( $lines as $line ) {
 			if (! empty ( $line )) {
@@ -40,14 +36,10 @@ if (is_admin () or $acl->hasPermission ( "update_system" )) {
 	<?php
 			}
 		}
-		
 		?>
 	<input type="submit"
 		value="<?php translate ( "install_selected_patches" );?>"> <input
-		type="button" value="<?php
-		
-		translate ( "help" );
-		?>"
+		type="button" value="<?php translate ( "help" );?>"
 		onclick="window.open('?action=help&help=patch_install');">
 </form>
 <?php

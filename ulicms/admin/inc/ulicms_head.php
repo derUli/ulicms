@@ -45,27 +45,22 @@ if (is_logged_in ()) {
 	$enq [] = "scripts/jquery-shiftclick.js";
 	$enq [] = "scripts/shift_checkbox.js";
 }
-
 if (! is_mobile ()) {
 	$enq [] = "scripts/doubletaptogo/doubletaptogo.min.js";
 }
 ?>
 <?php
-
 foreach ( $enq as $script ) {
 	enqueueScriptFile ( $script );
 }
 ?>
 <?php combined_script_html();?>
-
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   $.ajaxSetup({ cache: false });
-
 <?php
-
 if (! is_mobile ()) {
 	?>
   $(window).scroll(function() {
@@ -86,7 +81,6 @@ $(".menu li:has(ul)").doubleTapToGo();
 	href="scripts/vallenato/vallenato.css" />
 <?php include "inc/ulicms_touch_icons.php";?>
 <?php
-
 $styles [] = "css/bootstrap.min.css";
 $styles [] = "codemirror/lib/codemirror.css";
 $styles [] = "codemirror/mode/xml/xml.css";

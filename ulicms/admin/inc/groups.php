@@ -98,9 +98,7 @@ if (! $acl->hasPermission ( "groups" )) {
 <?php
 	}
 	?>
-
 <?php
-	
 	if ($modified) {
 		?>
 <p style='color: green;'>
@@ -109,18 +107,14 @@ if (! $acl->hasPermission ( "groups" )) {
 <?php
 	}
 	?>
-
 <?php
-	
 	if ($removed) {
 		?>
 <p style='color: green;'><?php translate("group_was_deleted")?></p>
 <?php
 	}
 	?>
-
 <?php
-	
 	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] )) {
 		include "inc/group_list.php";
 	} else if (isset ( $_GET ["add"] )) {
@@ -137,7 +131,6 @@ if (! $acl->hasPermission ( "groups" )) {
 		}
 	}
 	?>
-
 <?php
 }
 ?>

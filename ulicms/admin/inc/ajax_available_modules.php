@@ -10,10 +10,6 @@ $pkg_src = Settings::get ( "pkg_src" );
 @set_time_limit ( 0 );
 
 include_once "../lib/file_get_contents_wrapper.php";
-
-?>
-<?php
-
 if (! $pkg_src) {
 	?>
 <p>
@@ -54,7 +50,6 @@ if (! $pkg_src) {
 	<strong><?php translate("error");?> </strong> <br />
 	<?php translate("no_packages_available");?>
 </p>
-
 <?php
 	} else {
 		for($i = 0; $i < count ( $packageList ); $i ++) {

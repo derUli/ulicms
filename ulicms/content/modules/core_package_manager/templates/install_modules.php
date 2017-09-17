@@ -12,8 +12,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	if (! $pkg_src) {
 		?>
 <p>
-	<strong><?php translation ( "error" );?>
-	</strong> <br />
+	<strong><?php translation ( "error" );?></strong> <br />
 	<?php translate ( "pkgsrc_not_defined" );?></p>
 <?php
 	} else if (! class_exists ( "PharData" )) {
@@ -23,7 +22,6 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	<?php translate ( "phardata_not_available" );?></p>
 <?php
 	} else {
-		
 		include_once "../version.php";
 		$version = new ulicms_version ();
 		$internalVersion = implode ( ".", $version->getInternalVersion () );

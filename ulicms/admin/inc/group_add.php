@@ -13,10 +13,7 @@ $languages = Language::getAllLanguages ();
 	<fieldset>
 		<p>
 			<input id="checkall" type="checkbox" class="checkall"> <label
-				for="checkall"><?php
-				
-				translate ( "select_all" );
-				?> </label>
+				for="checkall"><?php translate ( "select_all" );?> </label>
 		</p>
 		<p>
 		<?php
