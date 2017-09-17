@@ -5,5 +5,4 @@ $(function() {
 						+ $("select#language option:selected").val();
 				location.replace(url);
 			});
-
 });
