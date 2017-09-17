@@ -1,0 +1,13 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": false,
+	"controllers": {
+		"SysStatistics": "SysStatistics.php"
+	},
+	"main_class": "SysStatistics",
+	"custom_acl": [
+		"sys_statistics"
+	],
+	"admin_permission": "sys_statistics"
+}

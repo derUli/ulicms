@@ -714,4 +714,6 @@ define ( "TRANSLATION_JSREDIRECT_NOSCRIPT", "Wenn Sie nicht automatisch weiterge
 
 define ( "TRANSLATION_SHOW_CORE_MODULES", "Core-Module anzeigen" );
 
+define ( "TRANSLATION_COUNT", "Anzahl" );
+
 add_hook ( "lang_de" );
