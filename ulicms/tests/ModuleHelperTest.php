@@ -73,6 +73,13 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 		) );
 		$this->assertEquals ( '<form action="index.php" method="post" class="myclass" onsubmit="return confirm(&#039;Do you really want to do that&#039;)">' . get_csrf_token_html () . '<input type="hidden" name="sClass" value="MyClass">' . '<input type="hidden" name="sMethod" value="MyMethod">', $html );
 	}
+	public function testBuildMethodCallUploadFormWithHtmlAttributes() {
+		$html = ModuleHelper::buildMethodCallUploadForm ( "MyClass", "MyMethod", array (), "post", array (
+				"class" => "myclass",
+				"onsubmit" => "return confirm('Do you really want to do that')" 
+		) );
+		$this->assertEquals ( '<form action="index.php" method="post" class="myclass" onsubmit="return confirm(&#039;Do you really want to do that&#039;)" enctype="multipart/form-data">' . get_csrf_token_html () . '<input type="hidden" name="sClass" value="MyClass">' . '<input type="hidden" name="sMethod" value="MyMethod">', $html );
+	}
 	public function testDeleteButton() {
 		$this->assertEquals ( '<form action="index.php?action=contacts" method="post" class="delete-form"><input type="hidden" name="csrf_token" value="' . get_csrf_token () . '"><input type="hidden" name="delete" value="123"><input type="image" src="admin/gfx/delete.gif" alt="delete" title="delete"></form>', ModuleHelper::deleteButton ( "index.php?action=contacts", array (
 				"delete" => "123" 
