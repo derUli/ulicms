@@ -22,16 +22,7 @@ if (is_admin () or $acl->hasPermission ( "update_system" )) {
 				?>
 	<p>
 		<label> <input name="patches[]" type="checkbox" checked="checked"
-			value="<?php
-				
-				echo htmlspecialchars ( $line );
-				?>"> <strong><?php
-				
-				echo htmlspecialchars ( $name );
-				?></strong><br /> <?php
-				
-				echo htmlspecialchars ( $description );
-				?> </label>
+			value="<?php echo htmlspecialchars ( $line );?>"> <strong><?php	echo htmlspecialchars ( $name );?></strong><br /> <?php echo htmlspecialchars ( $description );?> </label>
 	</p>
 	<?php
 			}

@@ -9,9 +9,7 @@ class ActionRegistry {
 			"forms" => "inc/forms.php",
 			"forms_new" => "inc/forms_new.php",
 			"forms_edit" => "inc/forms_edit.php",
-			"edit_profile" => "inc/edit_profile.php",
-			"module_settings" => "inc/module_settings.php",
-			"available_patches" => "inc/available_patches.php",
+			"module_settings" => "inc/module_settings.php" 
 	);
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;
