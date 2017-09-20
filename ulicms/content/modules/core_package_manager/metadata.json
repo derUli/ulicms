@@ -13,7 +13,8 @@
 		"install_patches": "templates/install_patches.php",
 		"install_modules": "templates/install_modules.php",
 		"upload_package": "templates/upload_package.php",
-		"available_patches": "templates/available_patches.php"
+		"available_patches": "templates/available_patches.php",
+		"upload_patches": "templates/upload_patches.php"
 	},
 	"controller_function_permissions": {
 		"PkgInfoController::install": "install_packages"
