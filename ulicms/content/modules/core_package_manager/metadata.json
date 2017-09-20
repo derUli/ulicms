@@ -11,7 +11,8 @@
 		"install_method": "templates/install_method.php",
 		"do_post_install": "templates/do_post_install.php",
 		"install_patches": "templates/install_patches.php",
-		"install_modules": "templates/install_modules.php"
+		"install_modules": "templates/install_modules.php",
+		"upload_package": "templates/upload_package.php"
 	},
 	"controller_function_permissions": {
 		"PkgInfoController::install": "install_packages"

@@ -10,7 +10,6 @@ class ActionRegistry {
 			"forms_new" => "inc/forms_new.php",
 			"forms_edit" => "inc/forms_edit.php",
 			"edit_profile" => "inc/edit_profile.php",
-			"upload_package" => "inc/upload_package.php",
 			"module_settings" => "inc/module_settings.php",
 			"available_patches" => "inc/available_patches.php",
 	);
