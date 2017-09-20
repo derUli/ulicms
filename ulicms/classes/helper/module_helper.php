@@ -12,6 +12,9 @@ class ModuleHelper {
 		$path = trim ( $path, "/" );
 		return getModulePath ( $module ) . $path;
 	}
+	public static function buildRessourcePath($module, $path) {
+		return self::buildModuleRessourcePath ( $module, $path );
+	}
 	public static function getFirstPageWithModule($module = null, $language = null) {
 		if (is_null ( $language )) {
 			$language = getCurrentLanguage ();
