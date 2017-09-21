@@ -5,7 +5,7 @@ Damit verliert man einen der Vorteile eines CMS.
 
 - Es gibt eine Portal Seite wo sich User eine Webseite erstellen können.
 -- Der Kunde gibt seine Kundendaten, Zahlungsdaten, usw. ein
---- wählt eine Preisstufe oder die Testversion (mit starken Einschränkungen)
+--- wählt eine Preisstufe oder die kostenlose Testversion
 -- klickt auf einen Button
 - Es wird ein Script ausgeführt, welches dem Kunden innerhalb weniger Minuten,
 eine Webseite als Subdomain bereit stellt (auf Bestellung gibt es ein Upgrade
