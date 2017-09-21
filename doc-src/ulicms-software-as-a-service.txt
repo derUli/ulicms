@@ -9,7 +9,8 @@ Damit verliert man einen der Vorteile eines CMS.
 -- klickt auf einen Button
 - Es wird ein Script ausgeführt, welches dem Kunden innerhalb weniger Minuten,
 eine Webseite als Subdomain bereit stellt (auf Bestellung gibt es ein Upgrade
-auf eine Toplevel Domain). Sobald die Webseite bereit steht,
+auf eine Toplevel Domain).
+Sobald die Webseite bereit steht,
 bekommt er die URL zur Webseite und die URL zum Admin-Bereich (per E-Mail?)
 zugestellt.
 -- Das Script erstellt eine neue Datenbank, eine Subdomain und einen Unterordner
