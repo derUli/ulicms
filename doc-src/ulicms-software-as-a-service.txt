@@ -14,8 +14,7 @@ bekommt er die URL zur Webseite und die URL zum Admin-Bereich (per E-Mail?)
 zugestellt.
 -- Das Script erstellt eine neue Datenbank, eine Subdomain
 (die auf Wunsch natürlich zu einer Top-Level Domain konvertiert werden kann)
-und einen Unterordner
-und installiert darin die aktuelle UliCMS Version.
+und einen Unterordner und installiert darin die aktuelle UliCMS Version.
 Dabei werden die Dateirechte so gesetzt, dass andere Kunden nicht auf den Ordner
 zugreifen können. Sicherheit!
 -- In dieser Installation sind Module eingebunden,
