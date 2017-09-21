@@ -1,5 +1,5 @@
 - Multisites zu implementieren halte ich nicht für sinnvoll.
-Um den Dienst sicher zu machen, müsste man dem Kunden verbieten. eigenen Code
+Um den Dienst sicher zu machen, müsste man dem Kunden verbieten, eigenen Code
 auszuführen. Das heißt, er dürfte keine Module installieren.
 Damit verliert man einen der Vorteile eines CMS.
 
