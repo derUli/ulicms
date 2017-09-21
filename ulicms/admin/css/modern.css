@@ -59,6 +59,12 @@ html {
 	list-style: none;
 }
 
+.main-content a:not (.btn ) {
+	color: #335599;
+}
+.main-content a.btn-default {
+	color: #333;
+}
 .menu a, .menu a:visited {
 	font-weight: bold;
 	color: #e7e5e5;
@@ -105,17 +111,6 @@ div#root-container {
 	width: 96%;
 	margin: auto;
 	position: relative;
-}
-
-a, a:visited, a:focus {
-	color: rgb(30, 30, 30);
-	text-decoration: none;
-	font-weight: 500;
-}
-
-a:hover, a:active {
-	color: rgb(30, 30, 30);
-	text-decoration: underline;
 }
 
 p#footer {
@@ -438,4 +433,44 @@ div#message {
 
 #msgcontainer {
 	padding-top: 16px;
+}
+
+.voffset {
+	margin-top: 2px;
+}
+
+.voffset1 {
+	margin-top: 5px;
+}
+
+.voffset2 {
+	margin-top: 10px;
+}
+
+.voffset3 {
+	margin-top: 15px;
+}
+
+.voffset4 {
+	margin-top: 30px;
+}
+
+.voffset5 {
+	margin-top: 40px;
+}
+
+.voffset6 {
+	margin-top: 60px;
+}
+
+.voffset7 {
+	margin-top: 80px;
+}
+
+.voffset8 {
+	margin-top: 100px;
+}
+
+.voffset9 {
+	margin-top: 150px;
 }

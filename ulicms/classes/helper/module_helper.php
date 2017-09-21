@@ -12,6 +12,9 @@ class ModuleHelper {
 		$path = trim ( $path, "/" );
 		return getModulePath ( $module ) . $path;
 	}
+	public static function buildRessourcePath($module, $path) {
+		return self::buildModuleRessourcePath ( $module, $path );
+	}
 	public static function getFirstPageWithModule($module = null, $language = null) {
 		if (is_null ( $language )) {
 			$language = getCurrentLanguage ();
@@ -140,6 +143,10 @@ class ModuleHelper {
 	public static function buildMethodCallUrl($sClass, $sMethod, $suffix = null) {
 		return "index.php?" . self::buildMethodCall ( $sClass, $sMethod, $suffix );
 	}
+	public static function buildMethodCallUploadForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post", $htmlAttributes = array()) {
+		$htmlAttributes ["enctype"] = "multipart/form-data";
+		return self::buildMethodCallForm ( $sClass, $sMethod, $otherVars, $requestMethod, $htmlAttributes );
+	}
 	public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post", $htmlAttributes = array()) {
 		$html = "";
 		$attribhtml = StringHelper::isNotNullOrWhitespace ( self::buildHTMLAttributesFromArray ( $htmlAttributes ) ) ? " " . self::buildHTMLAttributesFromArray ( $htmlAttributes ) : "";
@@ -176,5 +183,9 @@ class ModuleHelper {
 		}
 		$html = trim ( $html );
 		return $html;
+	}
+	public static function buildQueryString($data, $forHtml = true) {
+		$seperator = $forHtml ? "&amp;" : "&";
+		return http_build_query ( $data, '', $seperator );
 	}
 }

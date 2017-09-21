@@ -98,6 +98,10 @@ if (file_exists ( $mobile_detect_as_module )) {
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "version.php";
 function exception_handler($exception) {
+	if (! headers_sent ()) {
+		header ( "HTTP/1.0 500 Internal Server Error" );
+	}
+	
 	echo nl2br ( htmlspecialchars ( $exception ) ) . "\n";
 	if (! defined ( "EXCEPTION_OCCURRED" )) {
 		define ( "EXCEPTION_OCCURRED", true );

@@ -1,0 +1,30 @@
+- Multisites zu implementieren halte ich nicht für sinnvoll.
+Um den Dienst sicher zu machen, müsste man dem Kunden verbieten, eigenen Code
+auszuführen. Das heißt, er dürfte keine Module installieren.
+Damit verliert man einen der Vorteile eines CMS.
+
+- Es gibt eine Portal Seite wo sich User eine Webseite erstellen können.
+-- Der Kunde gibt seine Kundendaten, Zahlungsdaten, usw. ein
+--- wählt eine Preisstufe oder die kostenlose Testversion
+-- klickt auf einen Button
+- Es wird ein Script ausgeführt, welches dem Kunden innerhalb weniger Minuten,
+eine Webseite bereit stellt
+Sobald die Webseite bereit steht,
+bekommt er die URL zur Webseite und die URL zum Admin-Bereich (per E-Mail?)
+zugestellt.
+-- Das Script erstellt eine neue Datenbank, eine Subdomain
+(die auf Wunsch natürlich zu einer Top-Level Domain konvertiert werden kann)
+und einen Unterordner und installiert darin die aktuelle UliCMS Version.
+Dabei werden die Dateirechte so gesetzt, dass andere Kunden nicht auf den Ordner
+zugreifen können. Sicherheit!
+-- In dieser Installation sind Module eingebunden,
+die es uns ermöglichen Wartungs-Tätigkeiten wie die Installation von Updates
+durchzuführen. Diese Module werden dem Benutzer in der Modulverwaltung
+nicht angezeigt
+
+Nice-to-have
+- Falls der Kunde sein CMS zerstört haben sollte
+(z.B. durch Installation eines fehlerhaften Moduls),
+gibt es im Kundenbereich eine Funktion, um das System zurückzusetzen,
+bzw. in eine Art abgesicherten
+Modus zu befördern, wo alle nicht zwingend benötigten Module  deaktiviert sind.

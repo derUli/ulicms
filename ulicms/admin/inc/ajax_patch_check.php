@@ -6,8 +6,7 @@ if ($acl->hasPermission ( "update_system" ) and ! Settings::get ( "disable_core_
 	if (! empty ( $data )) {
 		?>
 
-<a href="?action=available_patches"><strong><?php translate ( "install_patches" );?></strong>
-</a>
+<a href="?action=available_patches"><strong><?php translate ( "install_patches" );?></strong></a>
 <?php
 	}
 }

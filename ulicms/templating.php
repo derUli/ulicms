@@ -408,7 +408,7 @@ function language_selection() {
 }
 function get_category() {
 	$current_page = get_page ();
-	return categories::getCategoryById ( $current_page ["category"] );
+	return Categories::getCategoryById ( $current_page ["category"] );
 }
 function category() {
 	Template::escapape ( get_category () );

@@ -1,0 +1,22 @@
+{
+	"source": "core",
+	"version": "2018.1",
+	"embed": false,
+	"controllers": {
+		"PkgInfoController": "controllers/PkgInfoController.php"
+	},
+	"actions": {
+		"sin_package_install_ok": "templates/sin_package_install_ok.php",
+		"pkginfo": "templates/pkginfo.php",
+		"install_method": "templates/install_method.php",
+		"do_post_install": "templates/do_post_install.php",
+		"install_patches": "templates/install_patches.php",
+		"install_modules": "templates/install_modules.php",
+		"upload_package": "templates/upload_package.php",
+		"available_patches": "templates/available_patches.php",
+		"upload_patches": "templates/upload_patches.php"
+	},
+	"controller_function_permissions": {
+		"PkgInfoController::install": "install_packages"
+	}
+}
