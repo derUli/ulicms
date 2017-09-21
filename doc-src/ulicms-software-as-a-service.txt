@@ -13,4 +13,9 @@ zugreifen können.
 -- In dieser Installation sind Module eingebunden,
 die es uns ermöglichen Wartungs-Tätigkeiten wie die Installation von Updates
 durchzuführen. Diese Module werden dem Benutzer in der Modulverwaltung
-nicht angezeigt.
+nicht angezeigt
+
+Nice-to-have
+- Falls der Kunde sein CMS zerstört haben sollte  (z.B. durch Installation eines fehlerhaften Moduls),
+gibt es eine Funktion, um das System zurückzusetzen, bzw. in eine Art abgesicherten
+Modus zu befördern, wo alle nicht zwingend benötigten Module  deaktiviert sind.
