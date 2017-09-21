@@ -8,15 +8,16 @@ Damit verliert man einen der Vorteile eines CMS.
 --- wählt eine Preisstufe oder die kostenlose Testversion
 -- klickt auf einen Button
 - Es wird ein Script ausgeführt, welches dem Kunden innerhalb weniger Minuten,
-eine Webseite als Subdomain bereit stellt (auf Bestellung gibt es ein Upgrade
-auf eine Toplevel Domain).
+eine Webseite bereit stellt
 Sobald die Webseite bereit steht,
 bekommt er die URL zur Webseite und die URL zum Admin-Bereich (per E-Mail?)
 zugestellt.
--- Das Script erstellt eine neue Datenbank, eine Subdomain und einen Unterordner
+-- Das Script erstellt eine neue Datenbank, eine Subdomain
+(die auf Wunsch natürlich zu einer Top-Level Domain konvertiert werden kann)
+und einen Unterordner
 und installiert darin die aktuelle UliCMS Version.
 Dabei werden die Dateirechte so gesetzt, dass andere Kunden nicht auf den Ordner
-zugreifen können.
+zugreifen können. Sicherheit!
 -- In dieser Installation sind Module eingebunden,
 die es uns ermöglichen Wartungs-Tätigkeiten wie die Installation von Updates
 durchzuführen. Diese Module werden dem Benutzer in der Modulverwaltung
