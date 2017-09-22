@@ -43,6 +43,23 @@ class Audio extends Model {
 			$this->updated = null;
 		}
 	}
+	protected function insert() {
+		$this->created = time ();
+		$this->updated = $this->created;
+		$args = array (
+				$this->name,
+				$this->mp3_file,
+				$this->ogg_file,
+				$this->category_id,
+				$this->created,
+				$this->updated 
+		);
+		$sql = "insert into `{prefix}audio` 
+				(name, mp3_file, ogg_file, category_id, created, updated)
+				values (?, ?, ?, ?, ?, ?)";
+		Database::pQuery ( $sql, $args, true );
+		$this->setID ( Database::getLastInsertID () );
+	}
 	public function getName() {
 		return $this->name;
 	}
