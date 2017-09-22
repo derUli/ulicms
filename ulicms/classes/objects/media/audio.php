@@ -60,6 +60,21 @@ class Audio extends Model {
 		Database::pQuery ( $sql, $args, true );
 		$this->setID ( Database::getLastInsertID () );
 	}
+	protected function update() {
+		$this->updated = time();
+		$args = array (
+				$this->name,
+				$this->mp3_file,
+				$this->ogg_file,
+				$this->category_id,
+				$this->updated,
+				$this->getID()
+		);
+		$sql = "update `{prefix}audio` set
+				name = ?, mp3_file = ?, ogg_file = ?, category_id = ?, updated = ?
+				where id = ?";
+		Database::pQuery ( $sql, $args, true );
+	}
 	public function getName() {
 		return $this->name;
 	}
