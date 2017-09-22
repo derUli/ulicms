@@ -14,6 +14,12 @@ class Audio extends Model {
 			$this->updated = time ();
 		}
 	}
+	public function loadById($id) {
+		$query = Database::pQuery ( "select * from `{prefix}audio` where id = ?", array (
+				intval ( $id ) 
+		), true );
+		$this->fillVars ( $query );
+	}
 	public function getName() {
 		return $this->name;
 	}
