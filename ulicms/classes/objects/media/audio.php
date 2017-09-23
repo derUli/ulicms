@@ -109,10 +109,16 @@ class Audio extends Model {
 		if ($this->get_ID ()) {
 			if ($deletePhysical) {
 				if ($this->getMP3File ()) {
-					@unlink ( Path::resolve ( "ULICMS_ROOT/content/audio/" . basename ( $this->getMP3File () ) ) );
+					$file = Path::resolve ( "ULICMS_ROOT/content/audio/" . basename ( $this->getMP3File () ) );
+					if (file_exists ( $file )) {
+						@unlink ( $file );
+					}
 				}
 				if ($this->getOggFile ()) {
-					@unlink ( Path::resolve ( "ULICMS_ROOT/content/audio/" . basename ( $this->getOggFile () ) ) );
+					$file = Path::resolve ( "ULICMS_ROOT/content/audio/" . basename ( $this->getOggFile () ) );
+					if (file_exists ( $file )) {
+						@unlink ( $file );
+					}
 				}
 			}
 			Database::pQuery ( "delete from `{prefix}audio` where id = ?", array (
