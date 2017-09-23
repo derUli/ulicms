@@ -106,7 +106,7 @@ class Audio extends Model {
 		$this->category_id = is_numeric ( $val ) ? intval ( $val ) : null;
 	}
 	public function delete($deletePhysical = true) {
-		if ($this->get_ID ()) {
+		if ($this->getId ()) {
 			if ($deletePhysical) {
 				if ($this->getMP3File ()) {
 					$file = Path::resolve ( "ULICMS_ROOT/content/audio/" . basename ( $this->getMP3File () ) );
