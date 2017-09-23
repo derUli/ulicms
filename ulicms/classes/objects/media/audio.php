@@ -8,7 +8,7 @@ class Audio extends Model {
 	private $updated;
 	public function __construct($id = null) {
 		if (! is_null ( $id )) {
-			parent::__construct ( $id );
+			$this->loadById ( $id );
 		} else {
 			$this->created = time ();
 			$this->updated = time ();
