@@ -127,4 +127,23 @@ class Audio extends Model {
 			$this->fillVars ( null );
 		}
 	}
+	public function getHtml() {
+		$html = '<audio controls>';
+		if (! empty ( $this->mp3_file )) {
+			$html .= '<source src="content/audio/' . htmlspecialchars ( $this->mp3_file ) . '" type="audio/mp3">';
+		}
+		if (! empty ( $this->ogg_file )) {
+			$html .= '<source src="content/audio/' . htmlspecialchars ( $this->ogg_file ) . '" type="audio/ogg">';
+		}
+		$html .= get_translation ( "no_html5" );
+		if (! empty ( $this->mp3_file ) or ! empty ( $this->ogg_file )) {
+			$html .= '<br/><a href="content/audio/' . $preferred . '">' . TRANSLATION_DOWNLOAD_AUDIO_INSTEAD . '</a>';
+		}
+		
+		$html .= '</audio>';
+		return $html;
+	}
+	public function html() {
+		echo $this->getHtml ();
+	}
 }
