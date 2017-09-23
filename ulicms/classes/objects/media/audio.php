@@ -61,14 +61,14 @@ class Audio extends Model {
 		$this->setID ( Database::getLastInsertID () );
 	}
 	protected function update() {
-		$this->updated = time();
+		$this->updated = time ();
 		$args = array (
 				$this->name,
 				$this->mp3_file,
 				$this->ogg_file,
 				$this->category_id,
 				$this->updated,
-				$this->getID()
+				$this->getID () 
 		);
 		$sql = "update `{prefix}audio` set
 				name = ?, mp3_file = ?, ogg_file = ?, category_id = ?, updated = ?
@@ -104,5 +104,21 @@ class Audio extends Model {
 	}
 	public function setCategoryId($val) {
 		$this->category_id = is_numeric ( $val ) ? intval ( $val ) : null;
+	}
+	public function delete($deletePhysical = true) {
+		if ($this->get_ID ()) {
+			if ($deletePhysical) {
+				if ($this->getMP3File ()) {
+					@unlink ( Path::resolve ( "ULICMS_ROOT/content/audio/" . basename ( $this->getMP3File () ) ) );
+				}
+				if ($this->getOggFile ()) {
+					@unlink ( Path::resolve ( "ULICMS_ROOT/content/audio/" . basename ( $this->getOggFile () ) ) );
+				}
+			}
+			Database::pQuery ( "delete from `{prefix}audio` where id = ?", array (
+					$this->getID () 
+			), true );
+			$this->fillVars ( null );
+		}
 	}
 }
