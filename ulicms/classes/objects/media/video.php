@@ -59,7 +59,7 @@ class Video extends Model {
 				$this->updated 
 		);
 		$sql = "insert into `{prefix}videos` 
-				(name, mp4_file, ogg_file, category_id, created, updated)
+				(name, mp4_file, ogg_file, webm_file, category_id, created, updated)
 				values (?, ?, ?, ?, ?, ?, ?)";
 		Database::pQuery ( $sql, $args, true );
 		$this->setID ( Database::getLastInsertID () );
@@ -93,13 +93,13 @@ class Video extends Model {
 		return $this->webm_file;
 	}
 	public function setMp4File($val) {
-		$this->mp4_file = is_str ( $val ) ? $val : null;
+		$this->mp4_file = is_string ( $val ) ? $val : null;
 	}
 	public function setOggFile($val) {
-		$this->ogg_file = is_str ( $val ) ? $val : null;
+		$this->ogg_file = is_string ( $val ) ? $val : null;
 	}
 	public function setWebmFile($val) {
-		$this->webm_file = is_str ( $val ) ? $val : null;
+		$this->webm_file = is_string ( $val ) ? $val : null;
 	}
 	public function getCategoryId() {
 		return $this->category_id;
@@ -157,8 +157,9 @@ class Video extends Model {
 		}
 		$html .= get_translation ( "no_html5" );
 		if (! empty ( $this->mp4_file ) or ! empty ( $this->ogg_file ) or ! empty ( $this->webm_file )) {
-			$html .= '<br/><a href="content/videos/' . $preferred . '">' . TRANSLATION_DOWNLOAD_VIDEO_INSTEAD . '</a>';
+			$html .= '<br/><a href="content/videos/' . $preferred . '">' . get_translation ( "DOWNLOAD_VIDEO_INSTEAD" ) . '</a>';
 		}
+		$html.="</video>";
 		return $html;
 	}
 	public function html() {
