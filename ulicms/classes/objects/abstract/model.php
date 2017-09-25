@@ -29,7 +29,7 @@ class Model {
 		throw new NotImplementedException ( "delete not implemented" );
 	}
 	public function setID($id) {
-		$this->id = is_int ( $id ) ? intval ( $id ) : null;
+		$this->id = is_numeric( $id ) ? intval ( $id ) : null;
 	}
 	public function getID() {
 		return $this->id;
