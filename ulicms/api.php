@@ -1,4 +1,8 @@
 <?php
+// returns true if $needle is a substring of $haystack
+function str_contains($needle, $haystack) {
+	return strpos ( $haystack, $needle ) !== false;
+}
 function array_keep($array, $keys) {
 	return array_intersect_key ( $array, array_fill_keys ( $keys, null ) );
 }
