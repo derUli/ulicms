@@ -35,6 +35,18 @@ class TodoListModule extends Controller {
 		}
 		HTMLResult ( get_translation ( "no_permissions" ), 403 );
 	}
+	public function deleteItem() {
+		$acl = new ACL ();
+		if ($acl->hasPermission ( getModuleMeta ( $this->moduleName, "admin_permission" ) ) and Request::getVar ( "id" )) {
+			$item = new TodoListItem ( Request::getVar ( "id" ) );
+			if ($item->getUserID () == get_user_id ()) {
+				$item->delete ();
+				HTMLResult ( "ok", 200 );
+			}
+			HTMLResult ( get_translation ( "no_permissions" ), 403 );
+		}
+		HTMLResult ( get_translation ( "no_permissions" ), 403 );
+	}
 	public function checkItem() {
 		if (! get_user_id ()) {
 			HTMLResult ( get_translation ( "no_permissions" ), 403 );

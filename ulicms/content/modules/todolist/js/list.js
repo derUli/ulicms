@@ -18,7 +18,6 @@ $(function(e) {
 	});
 	$(".btn-edit").click(function() {
 		textTitle = $("span.title[data-id='" + $(this).data("id") + "']");
-
 		var oldTitle = textTitle.text();
 		var title = window.prompt(Translation.TITLE + ":", oldTitle);
 		if (title && title != "") {
@@ -35,6 +34,20 @@ $(function(e) {
 				}
 			});
 		}
+	});
+	$(".btn-delete").click(function() {
+		element = $(this);
+		$.ajax({
+			url : $(this).data("url"),
+			method : "POST",
+			data : {
+				"id" : $(this).data("id"),
+				"csrf_token" : $("input[name='csrf_token']").val()
+			},
+			success : function(result) {
+				$(element).closest("td").closest("tr").remove();
+			}
+		});
 	});
 	$(".checkbox-done").change(function() {
 		var isChecked = $(this).is(":checked") ? 1 : 0;
