@@ -1,6 +1,6 @@
 $(function(e) {
 	$("#btn-new").click(function() {
-		var title = window.prompt("Title:", "");
+		var title = window.prompt(Translation.TITLE + ":", "");
 		if (title && title != "") {
 			$.ajax({
 				url : $(this).data("url"),
@@ -20,7 +20,7 @@ $(function(e) {
 		textTitle = $("span.title[data-id='" + $(this).data("id") + "']");
 
 		var oldTitle = textTitle.text();
-		var title = window.prompt("Title:", oldTitle);
+		var title = window.prompt(Translation.TITLE + ":", oldTitle);
 		if (title && title != "") {
 			$.ajax({
 				url : $(this).data("url"),

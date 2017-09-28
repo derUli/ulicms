@@ -5,14 +5,15 @@
 		data-url="<?php echo ModuleHelper::buildMethodCallURL("TodoListModule", "addItem");?>"
 		class="btn btn-info" id="btn-new" role="button"><?php translate("new");?></a>
 </p>
-<table class="tablesorter" id="todolist">
-	<thead>
-		<th></th>
-		<th><?php translate("title");?></th>
-		<td class="text-center"><?php translate("edit");?></td>
-		<td class="text-center"><?php translate("delete");?></td>
-	</thead>
-	<tbody>
+<div class="scroll">
+	<table class="tablesorter" id="todolist">
+		<thead>
+			<th></th>
+			<th><?php translate("title");?></th>
+			<td class="text-center"><?php translate("edit");?></td>
+			<td class="text-center"><?php translate("delete");?></td>
+		</thead>
+		<tbody>
 	<?php
 	foreach ( $data as $item ) {
 		ViewBag::set ( "item", $item );
@@ -20,6 +21,12 @@
 	}
 	?>
 	</tbody>
-</table>
+	</table>
+</div>
 <script type="text/javascript"
 	src="<?php echo ModuleHelper::buildModuleRessourcePath("todolist", "js/list.js")?>"></script>
+<?php
+$translation = new JSTranslation ();
+$translation->addKey ( "title" );
+$translation->renderJS ();
+?>
