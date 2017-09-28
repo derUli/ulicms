@@ -5,6 +5,9 @@
 	"controllers": {
 		"TodoListModule": "TodoListModule.php"
 	},
+	"objects": {
+		"TodoListItem": "TodoListItem.php"
+	},
 	"main_class": "TodoListModule",
 	"custom_acl": [
 		"todolist"
