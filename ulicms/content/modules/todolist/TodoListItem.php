@@ -26,6 +26,19 @@ class TodoListItem extends Model {
 			$this->setUserId ( null );
 		}
 	}
+	public static function getAllbyUser($user = null) {
+		if (! $user) {
+			$user = get_user_id ();
+		}
+		$result = array ();
+		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where user_id = ?", array (
+				$user 
+		), true );
+		while ( $row = Database::fetchObject ( $query ) ) {
+			$result [] = new TodoListItem ( $row->id );
+		}
+		return $result;
+	}
 	protected function insert() {
 		Database::pQuery ( "INSERT INTO `{prefix}todolist_items`
 						  (title, `done`, user_id)
@@ -75,4 +88,5 @@ class TodoListItem extends Model {
 		), true );
 		$this->fillVars ( null );
 	}
+
 }
