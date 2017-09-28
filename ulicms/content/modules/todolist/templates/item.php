@@ -3,7 +3,8 @@ $item = ViewBag::get ( "item" );
 if ($item) {
 	?>
 <tr>
-	<td><input class="checkbox-done" data-id="<?php echo $item->getID();?>"
+	<td class="text-center"><input class="checkbox-done"
+		data-id="<?php echo $item->getID();?>"
 		data-url="<?php echo ModuleHelper::buildMethodCallURL("TodoListModule", "checkItem");?>"
 		type="checkbox" <?php if($item->isDone()){ echo "checked";}?>></td>
 	<td><span class="title" data-id="<?php echo $item->getID();?>"><?php Template::escape($item->getTitle());?></span></td>
