@@ -16,6 +16,26 @@ $(function(e) {
 			});
 		}
 	});
+	$(".btn-edit").click(function() {
+		textTitle = $("span.title[data-id='" + $(this).data("id") + "']");
+
+		var oldTitle = textTitle.text();
+		var title = window.prompt("Title:", oldTitle);
+		if (title && title != "") {
+			$.ajax({
+				url : $(this).data("url"),
+				method : "POST",
+				data : {
+					"title" : title,
+					"csrf_token" : $("input[name='csrf_token']").val(),
+					"id" : $(this).data("id")
+				},
+				success : function(result) {
+					textTitle.text(title);
+				}
+			});
+		}
+	});
 	$(".checkbox-done").change(function() {
 		var isChecked = $(this).is(":checked") ? 1 : 0;
 		element = $(this);

@@ -22,6 +22,19 @@ class TodoListModule extends Controller {
 		}
 		HTMLResult ( get_translation ( "no_permissions" ), 403 );
 	}
+	public function updateItem() {
+		$acl = new ACL ();
+		if ($acl->hasPermission ( getModuleMeta ( $this->moduleName, "admin_permission" ) ) and Request::getVar ( "title" ) and Request::getVar ( "id" )) {
+			$item = new TodoListItem ( Request::getVar ( "id" ) );
+			if ($item->getUserID () == get_user_id ()) {
+				$item->setTitle ( Request::getVar ( "title" ) );
+				$item->save ();
+				HTMLResult ( "ok", 200 );
+			}
+			HTMLResult ( get_translation ( "no_permissions" ), 403 );
+		}
+		HTMLResult ( get_translation ( "no_permissions" ), 403 );
+	}
 	public function checkItem() {
 		if (! get_user_id ()) {
 			HTMLResult ( get_translation ( "no_permissions" ), 403 );
@@ -29,7 +42,7 @@ class TodoListModule extends Controller {
 		$acl = new ACL ();
 		if (! $acl->hasPermission ( getModuleMeta ( $this->moduleName, "admin_permission" ) )) {
 			HTMLResult ( get_translation ( "no_permissions" ), 403 );
-		}		
+		}
 		$item = new TodoListItem ( Request::GetVar ( "id" ) );
 		if ($item->getUserId () == get_user_id ()) {
 			$item->setDone ( Request::getVar ( "done" ) );
