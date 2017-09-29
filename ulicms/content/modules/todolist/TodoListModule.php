@@ -63,4 +63,54 @@ class TodoListModule extends Controller {
 		}
 		HTMLResult ( get_translation ( "no_permissions" ), 403 );
 	}
+	public function up() {
+		if (! get_user_id ()) {
+			HTMLResult ( get_translation ( "no_permissions" ), 403 );
+		}
+		$acl = new ACL ();
+		if (! $acl->hasPermission ( getModuleMeta ( $this->moduleName, "admin_permission" ) )) {
+			HTMLResult ( get_translation ( "no_permissions" ), 403 );
+		}
+		$item = new TodoListItem ( Request::GetVar ( "id" ) );
+		if ($item->getUserId () == get_user_id ()) {
+			$otherItem = $item->getNext ();
+			if ($otherItem) {
+				$position1 = $item->getPosition ();
+				$position2 = $otherItem->getPosition ();
+				$item->setPosition ( $position2 );
+				$otherItem->setPosition ( $position1 );
+				$item->save ();
+				$otherItem->save ();
+				HTMLResult ( get_translation ( "ok" ), 200 );
+			}
+			
+			HTMLResult ( get_translation ( "not_found" ), 404 );
+		}
+		HTMLResult ( get_translation ( "no_permissions" ), 403 );
+	}
+	public function down() {
+		if (! get_user_id ()) {
+			HTMLResult ( get_translation ( "no_permissions" ), 403 );
+		}
+		$acl = new ACL ();
+		if (! $acl->hasPermission ( getModuleMeta ( $this->moduleName, "admin_permission" ) )) {
+			HTMLResult ( get_translation ( "no_permissions" ), 403 );
+		}
+		$item = new TodoListItem ( Request::GetVar ( "id" ) );
+		if ($item->getUserId () == get_user_id ()) {
+			$otherItem = $item->getPrevious ();
+			if ($otherItem) {
+				$position1 = $item->getPosition ();
+				$position2 = $otherItem->getPosition ();
+				$item->setPosition ( $position2 );
+				$otherItem->setPosition ( $position1 );
+				$item->save ();
+				$otherItem->save ();
+				HTMLResult ( get_translation ( "ok" ), 200 );
+			}
+				
+			HTMLResult ( get_translation ( "not_found" ), 404 );
+		}
+		HTMLResult ( get_translation ( "no_permissions" ), 403 );
+	}
 }
