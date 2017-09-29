@@ -49,6 +49,7 @@ $(function(e) {
 			}
 		});
 	});
+	
 	$(".checkbox-done").change(function() {
 		var isChecked = $(this).is(":checked") ? 1 : 0;
 		element = $(this);
