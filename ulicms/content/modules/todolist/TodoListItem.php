@@ -3,6 +3,7 @@ class TodoListItem extends Model {
 	private $title = null;
 	private $done = false;
 	private $user_id = null;
+	private $position = null;
 	public function loadByID($id) {
 		$query = Database::pQuery ( "select * from `{prefix}todolist_items` where id = ?", array (
 				intval ( $id ) 
@@ -19,11 +20,13 @@ class TodoListItem extends Model {
 			$this->setTitle ( $result->title );
 			$this->setDone ( $result->done );
 			$this->setUserId ( $result->user_id );
+			$this->setPosition ( $result->position );
 		} else {
 			$this->setID ( null );
 			$this->setTitle ( null );
 			$this->setDone ( null );
 			$this->setUserId ( null );
+			$this->setPosition ( null );
 		}
 	}
 	public static function getAllbyUser($user = null) {
@@ -40,24 +43,30 @@ class TodoListItem extends Model {
 		return $result;
 	}
 	protected function insert() {
+		if (! $this->getPosition ()) {
+			$this->setPosition ( PositionHelper::getNextFreePosition () );
+		}
 		Database::pQuery ( "INSERT INTO `{prefix}todolist_items`
-						  (title, `done`, user_id)
-						   values (?,?,?)", array (
+						  (title, `done`, user_id, position)
+						   values (?,?,?,?)", array (
 				$this->getTitle (),
 				$this->isDone (),
-				$this->getUserID () 
+				$this->getUserID (),
+				$this->getPosition () 
 		), true );
 		$this->setID ( Database::getLastInsertID () );
 	}
 	protected function update() {
 		Database::pQuery ( "update `{prefix}todolist_items`
-						 set title = ?,
-					     done = ?,
-						 user_id = ?
-						 where id = ?", array (
+						set title = ?,
+					    done = ?,
+						user_id = ?,
+						position = ?
+						where id = ?", array (
 				$this->getTitle (),
 				$this->isDone (),
 				$this->getUserID (),
+				$this->getPosition (),
 				$this->getID () 
 		), true );
 	}
@@ -69,6 +78,12 @@ class TodoListItem extends Model {
 	}
 	public function getUserID() {
 		return $this->user_id;
+	}
+	public function getPosition() {
+		return $this->position;
+	}
+	public function setPosition($val) {
+		$this->position = is_numeric ( $val ) ? intval ( $val ) : null;
 	}
 	public function setTitle($val) {
 		$this->title = ! is_null ( $val ) ? strval ( $val ) : null;
@@ -88,5 +103,4 @@ class TodoListItem extends Model {
 		), true );
 		$this->fillVars ( null );
 	}
-
 }

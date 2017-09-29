@@ -8,6 +8,9 @@
 	"objects": {
 		"TodoListItem": "TodoListItem.php"
 	},
+	"helpers": {
+		"PositionHelper": "PositionHelper.php"
+	},
 	"main_class": "TodoListModule",
 	"custom_acl": [
 		"todolist"

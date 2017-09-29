@@ -1,10 +1,19 @@
 <?php
 class TodoListItemTest extends PHPUnit_Framework_TestCase {
+	public function setUp() {
+		Database::query ( "delete from `{prefix}todolist_items`
+ 						where title = 'Do Homework' or title = 'Clean the bathroom'", true );
+	}
+	public function tearDown() {
+		$this->setUp ();
+	}
 	public function testCreateUpdateAndDelete() {
+		$this->assertEquals ( 1, PositionHelper::getNextFreePosition ( 1 ) );
 		$item = new TodoListItem ();
 		$item->setTitle ( "Do Homework" );
 		$item->setUserId ( 1 );
 		$item->save ();
+		$this->assertEquals ( 2, PositionHelper::getNextFreePosition ( 1 ) );
 		$this->assertNotNull ( $item->getID () );
 		$id = $item->getID ();
 		$item = new TodoListItem ( $id );
@@ -25,5 +34,6 @@ class TodoListItemTest extends PHPUnit_Framework_TestCase {
 		$this->assertNull ( $item->getID () );
 		$item = new TodoListItem ( $id );
 		$this->assertNull ( $item->getID () );
+		$this->assertEquals ( 1, PositionHelper::getNextFreePosition () );
 	}
 }
