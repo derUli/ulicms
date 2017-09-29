@@ -95,7 +95,7 @@ class TodoListItem extends Model {
 		$this->user_id = is_numeric ( $val ) ? intval ( $val ) : null;
 	}
 	public function getPrevious() {
-		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where position < ? and user_id = ? order by position limit 1", array (
+		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where position < ? and user_id = ? order by position desc limit 1", array (
 				$this->getPosition (),
 				$this->getUserID () 
 		), true );
@@ -106,7 +106,7 @@ class TodoListItem extends Model {
 		return null;
 	}
 	public function getNext() {
-		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where position > ? and user_id = ? order by position limit 1", array (
+		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where position > ? and user_id = ? order by position asc limit 1", array (
 				$this->getPosition (),
 				$this->getUserID () 
 		), true );
