@@ -94,6 +94,28 @@ class TodoListItem extends Model {
 	public function setUserId($val) {
 		$this->user_id = is_numeric ( $val ) ? intval ( $val ) : null;
 	}
+	public function getPrevious() {
+		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where position < ? and user_id = ? order by position limit 1", array (
+				$this->getID (),
+				$this->getUserID () 
+		), true );
+		if (Database::any ( $query )) {
+			$data = Database::fetchSingle ( $query );
+			return new TodoListItem ( $data->id );
+		}
+		return null;
+	}
+	public function getNext() {
+		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where position > ? and user_id = ? order by position limit 1", array (
+				$this->getID (),
+				$this->getUserID () 
+		), true );
+		if (Database::any ( $query )) {
+			$data = Database::fetchSingle ( $query );
+			return new TodoListItem ( $data->id );
+		}
+		return null;
+	}
 	public function delete() {
 		if (! $this->getID ()) {
 			return;
