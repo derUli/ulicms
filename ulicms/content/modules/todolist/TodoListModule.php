@@ -63,7 +63,7 @@ class TodoListModule extends Controller {
 		}
 		HTMLResult ( get_translation ( "no_permissions" ), 403 );
 	}
-	public function up() {
+	public function down() {
 		if (! get_user_id ()) {
 			HTMLResult ( get_translation ( "no_permissions" ), 403 );
 		}
@@ -88,7 +88,7 @@ class TodoListModule extends Controller {
 		}
 		HTMLResult ( get_translation ( "no_permissions" ), 403 );
 	}
-	public function down() {
+	public function up() {
 		if (! get_user_id ()) {
 			HTMLResult ( get_translation ( "no_permissions" ), 403 );
 		}
@@ -108,7 +108,7 @@ class TodoListModule extends Controller {
 				$otherItem->save ();
 				HTMLResult ( get_translation ( "ok" ), 200 );
 			}
-				
+			
 			HTMLResult ( get_translation ( "not_found" ), 404 );
 		}
 		HTMLResult ( get_translation ( "no_permissions" ), 403 );
