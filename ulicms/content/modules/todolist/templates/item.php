@@ -8,6 +8,17 @@ if ($item) {
 		data-url="<?php echo ModuleHelper::buildMethodCallURL("TodoListModule", "checkItem");?>"
 		type="checkbox" <?php if($item->isDone()){ echo "checked";}?>></td>
 	<td><span class="title" data-id="<?php echo $item->getID();?>"><?php Template::escape($item->getTitle());?></span></td>
+
+	<td class="text-center"><a href="#"
+		data-id="<?php echo $item->getID();?>" class="btn-up"
+		data-url="<?php echo ModuleHelper::buildMethodCallURL("TodoListModule", "up");?>"><img
+			src="gfx/up.png" alt="<?php translate("up")?>"
+			title="<?php translate("up");?>"></a></td>
+	<td class="text-center"><a href="#"
+		data-id="<?php echo $item->getID();?>" class="btn-down"
+		data-url="<?php echo ModuleHelper::buildMethodCallURL("TodoListModule", "down");?>"><img
+			src="gfx/down.png" alt="<?php translate("down")?>"
+			title="<?php translate("down");?>"></a></td>
 	<td class="text-center"><a href="#"
 		data-id="<?php echo $item->getID();?>" class="btn-edit"
 		data-url="<?php echo ModuleHelper::buildMethodCallURL("TodoListModule", "updateItem");?>"><img

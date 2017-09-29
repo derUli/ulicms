@@ -63,7 +63,7 @@ class TodoListModule extends Controller {
 		}
 		HTMLResult ( get_translation ( "no_permissions" ), 403 );
 	}
-	public function down() {
+	public function up() {
 		if (! get_user_id ()) {
 			HTMLResult ( get_translation ( "no_permissions" ), 403 );
 		}
@@ -73,7 +73,7 @@ class TodoListModule extends Controller {
 		}
 		$item = new TodoListItem ( Request::GetVar ( "id" ) );
 		if ($item->getUserId () == get_user_id ()) {
-			$otherItem = $item->getNext ();
+			$otherItem = $item->getPrevious ();
 			if ($otherItem) {
 				$position1 = $item->getPosition ();
 				$position2 = $otherItem->getPosition ();
@@ -88,7 +88,7 @@ class TodoListModule extends Controller {
 		}
 		HTMLResult ( get_translation ( "no_permissions" ), 403 );
 	}
-	public function up() {
+	public function down() {
 		if (! get_user_id ()) {
 			HTMLResult ( get_translation ( "no_permissions" ), 403 );
 		}
@@ -98,7 +98,7 @@ class TodoListModule extends Controller {
 		}
 		$item = new TodoListItem ( Request::GetVar ( "id" ) );
 		if ($item->getUserId () == get_user_id ()) {
-			$otherItem = $item->getPrevious ();
+			$otherItem = $item->getNext ();
 			if ($otherItem) {
 				$position1 = $item->getPosition ();
 				$position2 = $otherItem->getPosition ();

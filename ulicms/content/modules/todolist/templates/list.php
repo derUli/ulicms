@@ -6,10 +6,12 @@
 		class="btn btn-info" id="btn-new" role="button"><?php translate("new");?></a>
 </p>
 <div class="scroll">
-	<table class="tablesorter" id="todolist">
+	<table id="todolist">
 		<thead>
 			<th></th>
 			<th><?php translate("title");?></th>
+			<td></td>
+			<td></td>
 			<td class="text-center"><?php translate("edit");?></td>
 			<td class="text-center"><?php translate("delete");?></td>
 		</thead>
