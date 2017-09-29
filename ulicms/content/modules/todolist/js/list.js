@@ -7,13 +7,18 @@ jQuery.fn.swapWith = function(to) {
 	});
 };
 
-$(function(e) {
-	$("#btn-new").click(function() {
+function rebindEvents() {
+	$("#btn-new").off("click");
+	$(".btn-edit").off("click");
+	$(".btn-delete").off("click");
+	$(".btn-up").off("click");
+	$(".btn-down").off("click");
+
+	$("#btn-new").on("click", function() {
 		var title = window.prompt(Translation.TITLE + ":", "");
 		if (title && title != "") {
 			$.ajax({
 				url : $(this).data("url"),
-
 				method : "POST",
 				data : {
 					"title" : title,
@@ -21,11 +26,12 @@ $(function(e) {
 				},
 				success : function(result) {
 					$("table#todolist tbody").append(result);
+					rebindEvents();
 				}
 			});
 		}
 	});
-	$(".btn-edit").click(function() {
+	$(".btn-edit").on("click", function() {
 		textTitle = $("span.title[data-id='" + $(this).data("id") + "']");
 		var oldTitle = textTitle.text();
 		var title = window.prompt(Translation.TITLE + ":", oldTitle);
@@ -40,25 +46,29 @@ $(function(e) {
 				},
 				success : function(result) {
 					textTitle.text(title);
+					rebindEvents();
 				}
 			});
 		}
 	});
-	$(".btn-delete").click(function() {
+	$(".btn-delete").on("click", function() {
 		element = $(this);
-		$.ajax({
-			url : $(this).data("url"),
-			method : "POST",
-			data : {
-				"id" : $(this).data("id"),
-				"csrf_token" : $("input[name='csrf_token']").val()
-			},
-			success : function(result) {
-				$(element).closest("td").closest("tr").remove();
-			}
-		});
+		if (window.confirm(Translation.ASK_FOR_DELETE)) {
+			$.ajax({
+				url : $(this).data("url"),
+				method : "POST",
+				data : {
+					"id" : $(this).data("id"),
+					"csrf_token" : $("input[name='csrf_token']").val()
+				},
+				success : function(result) {
+					$(element).closest("td").closest("tr").remove();
+					rebindEvents();
+				}
+			});
+		}
 	});
-	$(".btn-up").click(function() {
+	$(".btn-up").on("click", function() {
 		element = $(this);
 		$.ajax({
 			url : $(this).data("url"),
@@ -73,10 +83,11 @@ $(function(e) {
 				if (firstTr.length && otherTr.length) {
 					$(firstTr).swapWith(otherTr);
 				}
+				rebindEvents();
 			}
 		});
 	});
-	$(".btn-down").click(function() {
+	$(".btn-down").on("click", function() {
 		element = $(this);
 		$.ajax({
 			url : $(this).data("url"),
@@ -91,10 +102,11 @@ $(function(e) {
 				if (firstTr.length && otherTr.length) {
 					$(firstTr).swapWith(otherTr);
 				}
+				rebindEvents();
 			}
 		});
 	});
-	$(".checkbox-done").change(function() {
+	$(".checkbox-done").on("click", function() {
 		var isChecked = $(this).is(":checked") ? 1 : 0;
 		element = $(this);
 		$.ajax({
@@ -106,8 +118,12 @@ $(function(e) {
 				"csrf_token" : $("input[name='csrf_token']").val()
 			},
 			success : function(result) {
-				// do nothing
+				rebindEvents();
 			}
 		});
 	});
+}
+
+$(function(e) {
+	rebindEvents();
 });

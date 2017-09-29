@@ -38,5 +38,6 @@
 <?php
 $translation = new JSTranslation ();
 $translation->addKey ( "title" );
+$translation->addKey ( "ask_for_delete" );
 $translation->renderJS ();
 ?>
