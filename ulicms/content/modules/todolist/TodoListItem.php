@@ -96,7 +96,7 @@ class TodoListItem extends Model {
 	}
 	public function getPrevious() {
 		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where position < ? and user_id = ? order by position limit 1", array (
-				$this->getID (),
+				$this->getPosition (),
 				$this->getUserID () 
 		), true );
 		if (Database::any ( $query )) {
@@ -107,7 +107,7 @@ class TodoListItem extends Model {
 	}
 	public function getNext() {
 		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where position > ? and user_id = ? order by position limit 1", array (
-				$this->getID (),
+				$this->getPosition (),
 				$this->getUserID () 
 		), true );
 		if (Database::any ( $query )) {
