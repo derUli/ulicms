@@ -34,7 +34,7 @@ class TodoListItem extends Model {
 			$user = get_user_id ();
 		}
 		$result = array ();
-		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where user_id = ?", array (
+		$query = Database::pQuery ( "select id from `{prefix}todolist_items` where user_id = ? order by position", array (
 				$user 
 		), true );
 		while ( $row = Database::fetchObject ( $query ) ) {
