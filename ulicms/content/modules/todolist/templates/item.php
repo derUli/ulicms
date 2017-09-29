@@ -12,13 +12,14 @@ if ($item) {
 	<td class="text-center"><a href="#"
 		data-id="<?php echo $item->getID();?>" class="btn-up"
 		data-url="<?php echo ModuleHelper::buildMethodCallURL("TodoListModule", "up");?>"><img
-			src="gfx/up.png" alt="<?php translate("up")?>"
-			title="<?php translate("up");?>"></a></td>
-	<td class="text-center"><a href="#"
-		data-id="<?php echo $item->getID();?>" class="btn-down"
+			src="<?php echo ModuleHelper::buildModuleRessourcePath("todolist", "gfx/up.png");?>"
+			alt="<?php translate("up")?>" title="<?php translate("up");?>"></a> <a
+		href="#" data-id="<?php echo $item->getID();?>" class="btn-down"
 		data-url="<?php echo ModuleHelper::buildMethodCallURL("TodoListModule", "down");?>"><img
-			src="gfx/down.png" alt="<?php translate("down")?>"
-			title="<?php translate("down");?>"></a></td>
+			src="<?php echo ModuleHelper::buildModuleRessourcePath("todolist", "gfx/down.png");?>"
+			alt="<?php translate("down")?>" title="<?php translate("down");?>"></a>
+		</zd>
+	
 	<td class="text-center"><a href="#"
 		data-id="<?php echo $item->getID();?>" class="btn-edit"
 		data-url="<?php echo ModuleHelper::buildMethodCallURL("TodoListModule", "updateItem");?>"><img
