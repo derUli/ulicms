@@ -25,9 +25,10 @@ class FirstInCategory extends Controller {
 		if (! $language) {
 			$language = getCurrentLanguage ();
 		}
-		$query = Database::pQuery ( "select n.content_id as id, c.access as access from `{prefix}extend_lists` n inner join `{prefix}extend_content` c 
+		$query = Database::pQuery ( "select n.content_id as id, c.access as access from `{prefix}lists` n 
+						inner join `{prefix}content` c 
 						on c.id = n.content_id where c.type = ? and 
-						c.active = ? and c.language = ?' and 
+						c.active = ? and c.language = ? and 
 						n.category_id = ?", array (
 				"list",
 				1,
