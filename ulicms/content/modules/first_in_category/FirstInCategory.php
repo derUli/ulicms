@@ -6,7 +6,11 @@ class FirstInCategory extends Controller {
 			$language = getCurrentLanguage ();
 		}
 		Database::pQuery ( "select id, access from `{prefix}content` where active = ? 
-						  and category = ? " );
+						  and category = ? and language = ? ", array (
+				1,
+				intval ( $category_id ),
+				$language 
+		), true );
 		if (Database::any ( $query )) {
 			$result = Database::fetchSingleOrDefault ( $query );
 			if (checkAccess ( $result->access )) {
