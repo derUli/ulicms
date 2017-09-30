@@ -1,17 +1,13 @@
 <?php
-function getURLForCategory($category_id) {
-	$query = Database::pQuery ( "select systemname from {prefix}content c inner join {prefix}lists l on l.content_id = c.id where c.language = ? and c.active = ? and c.type = ? and l.category_id = ?", array (
-			getCurrentLanguage (),
-			1,
-			"list",
-			intval ( $category_id ) 
-	
-	), true );
-	if (Database::any ( $query )) {
-		$data = Database::fetchFirst ( $query );
-		return buildSEOUrl ( $data->systemname );
-	} else {
-		return null;
+if (! function_exists ( "getURLForCategory" )) {
+	function getURLForCategory($category_id) {
+		$firstInCategory = ModuleHelper::getMainController ( "first_in_category" );
+		$data = $firstInCategory->getFirstListWithCategory ( intval ( $category_id ), "de" );
+		if ($data->id) {
+			return buildSEOUrl ( $data->systemname );
+		} else {
+			return null;
+		}
 	}
 }
 function count_by_category_render() {
