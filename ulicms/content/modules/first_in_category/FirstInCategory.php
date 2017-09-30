@@ -1,16 +1,17 @@
 <?php
+include_once Path::resolve ( "ULICMS_ROOT/templating.php" );
 class FirstInCategory extends Controller {
 	// gibt die erste Seite in der Kategorie $category_id zurück oder null
 	public function getFirstPageInCategory($category_id, $language = null) {
 		if (! $language) {
 			$language = getCurrentLanguage ();
 		}
-		Database::pQuery ( "select id, access from `{prefix}content` where active = ? 
-						  and category = ? and language = ? ", array (
+		$query = Database::pQuery ( "select id, access from `{prefix}content` where active = ? 
+						  and category = ? and language = ? limit 1", array (
 				1,
 				intval ( $category_id ),
 				$language 
-		), true );
+		), true ) or die ( Database::error () );
 		if (Database::any ( $query )) {
 			$result = Database::fetchSingleOrDefault ( $query );
 			if (checkAccess ( $result->access )) {
