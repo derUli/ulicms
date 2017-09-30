@@ -2,7 +2,7 @@
 class ApiTest extends PHPUnit_Framework_TestCase {
 	public function setUp() {
 		Database::query ( "delete from `{prefix}categories` where name = 'my_category'", true );
-		Database::query ( "delete from `{prefix}content` where systemname = 'my_title' or systemname = 'my_list'", true );
+		Database::query ( "delete from `{prefix}content` where systemname = 'my_title' or systemname = 'my_list' or systemname = 'systemname'", true );
 	}
 	public function tearDown() {
 		$this->setUp ();
@@ -60,7 +60,7 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 		$listPage = new Content_List ();
 		
 		$listPage->title = "my_list";
-		$listPage->systemname = "systemname";
+		$listPage->systemname = "my_title";
 		$listPage->menu = "my_list";
 		$listPage->access = "all";
 		$listPage->language = "de";
