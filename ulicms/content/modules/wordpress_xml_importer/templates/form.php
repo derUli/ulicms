@@ -106,7 +106,8 @@ echo ModuleHelper::buildMethodCallUploadForm ( "WordpressXmlImporterHooks", "doI
 	</p>
 </div>
 <p>
-	<button type="submit" class="btn btn-warning"><?php translate("import");?></button>
-	<script type="text/javascript"
-		src="<?php echo ModuleHelper::buildRessourcePath("wordpress_xml_importer", "js/general.js");?>"></script>
+	<button type="submit" class="btn btn-warning voffset3"><?php translate("import");?></button>
+</p>
+<script type="text/javascript"
+	src="<?php echo ModuleHelper::buildRessourcePath("wordpress_xml_importer", "js/general.js");?>"></script>
 </form>
