@@ -25,19 +25,19 @@ class WordpressXmlImporter {
 			
 			$content = $item->children ( 'http://purl.org/rss/1.0/modules/content/' );
 			$excerpt = $item->children ( 'http://wordpress.org/export/1.2/excerpt/' );
-			$wpNS = $item->children ( 'http://wordpress.org/export/1.2/' );
+			$wpNs = $item->children ( 'http://wordpress.org/export/1.2/' );
 			
 			$post = array (
 					"postTitle" => strval ( $item [0]->title ),
-					"postSlug" => ! $wpnNS->post_name ? $this->_slug ( strval ( $item [0]->title ) ) : $wpNS->post_name,
+					"postSlug" => ! $wpnNS->post_name ? $this->_slug ( strval ( $item [0]->title ) ) : $wpNs->post_name,
 					"postCont" => nl2br ( strval ( $content->encoded ) ),
 					"postDesc" => nl2br ( strval ( $excerpt->encoded ) ),
 					"postDate" => strftime ( "%Y-%m-%d %H:%M:%S", strtotime ( $item [0]->pubDate ) ),
 					"postCategories" => implode ( ", ", $categories ),
-					"commentStatus" => strval ( $wpNS->comment_status ) == "open",
-					"menuOrder" => intval ( $wpNS->menu_order ),
-					"postParent" => intval ( $wpNS->post_parent ),
-					"postId" => intval ( $wpNS->post_id ) 
+					"commentStatus" => strval ( $wpNs->comment_status ) == "open",
+					"menuOrder" => intval ( $wpNs->menu_order ),
+					"postParent" => intval ( $wpNs->post_parent ),
+					"postId" => intval ( $wpNs->post_id ) 
 			);
 			$posts [] = ( object ) $post;
 		}
