@@ -2,7 +2,16 @@
 $languages = getAllLanguages ();
 $pkg = new PackageManager ();
 $manager = new UserManager ();
+$menus = getAllMenus ( true );
+$default_menu = in_array ( "top", getAllMenus ( true ) ) ? "top" : null;
 $users = $manager->getAllUsers ();
+if (! empty ( $_SESSION ["filter_language"] )) {
+	$default_language = $_SESSION ["filter_language"];
+} else {
+	$default_language = Settings::get ( "default_language" );
+}
+$pages = getAllPages ( $default_language, "title", false );
+
 echo ModuleHelper::buildMethodCallUploadForm ( "WordpressXmlImporterHooks", "doImport" );
 ?>
 <h3><?php translate("from")?></h3>
@@ -38,7 +47,8 @@ echo ModuleHelper::buildMethodCallUploadForm ( "WordpressXmlImporterHooks", "doI
 		<strong><?php translate("language")?></strong><br /> <select
 			name="language">
 <?php foreach($languages as $language){?>
-<option value="<?php Template::escape($language)?>"><?php Template::escape(getLanguageNameByCode($language));?></option>
+<option value="<?php Template::escape($language)?>"
+				<?php if($default_language == $language) echo "selected";?>><?php Template::escape(getLanguageNameByCode($language));?></option>
 <?php }?>
 </select>
 	</p>
@@ -54,8 +64,49 @@ echo ModuleHelper::buildMethodCallUploadForm ( "WordpressXmlImporterHooks", "doI
 		<strong><?php translate("default_category");?></strong><br />
 	<?php echo  Categories::getHTMLSelect();?></p>
 	</p>
+	<p>
+		<strong><?php translate("menu");?></strong><br /> <select name="menu">
+		<?php foreach($menus as $menu){?>
+		<option value="<?php Template::escape($menu)?>"
+				<?php if($default_menu == $menu) echo "selected";?>><?php translate($menu);?></option>
+		<?php }?>
+		</select>
+	</p>
+	<p>
+		<strong><?php translate("parent");?></strong><br /> <select
+			name="parent">
+			<option selected="selected" value="NULL">
+			[
+			<?php translate("none");?>
+			]
+		</option>
+		<?php
+		
+		foreach ( $pages as $key => $page ) {
+			?>
+		<option value="<?php
+			
+			echo $page ["id"];
+			?>">
+			<?php
+			
+			echo $page ["title"];
+			?>
+			(ID:
+			<?php
+			
+			echo $page ["id"];
+			?>
+			)
+		</option>
+		<?php
+		}
+		?>
+		</select>
+	</p>
 </div>
 <p>
-	<button type="submit submit-warning"><?php translate("import");?></button>
+	<button type="submit" class="btn btn-warning"><?php translate("import");?></button>
 	<script type="text/javascript"
-		src="<?php echo ModuleHelper::buildRessourcePath("wordpress_xml_importer", "js/general.js");?>"></script></form>
+		src="<?php echo ModuleHelper::buildRessourcePath("wordpress_xml_importer", "js/general.js");?>"></script>
+</form>
