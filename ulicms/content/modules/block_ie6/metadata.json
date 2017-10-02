@@ -1,0 +1,9 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": false,
+	"controllers": {
+		"BlockIE6": "BlockIE6.php"
+	},
+	"main_class": "BlockIE6"
+}
