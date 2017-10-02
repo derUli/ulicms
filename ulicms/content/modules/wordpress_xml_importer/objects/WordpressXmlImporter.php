@@ -1,9 +1,8 @@
 <?php
 /**
- * WordPress class - Manages the WordPress XML file and gets all data from that.
+ * WordpressXmlImporter class - Manages the WordPress XML file and gets all data from that.
  */
-include_once "init.php";
-class Wordpress {
+class WordpressXmlImporter {
 	public $wpXML;
 	public $db;
 	function __construct($wpXML) {
@@ -39,6 +38,3 @@ class Wordpress {
 		return $posts;
 	}
 }
-$wp = new Wordpress ( "wordpressdemoinstall.wordpress.2017-10-02.xml" );
-$posts = $wp->getPosts ();
-var_dump ( $posts );
