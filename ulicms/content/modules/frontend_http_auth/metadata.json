@@ -1,0 +1,13 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": false,
+	"controllers": {
+		"FrontendHttpAuth": "FrontendHttpAuth.php"
+	},
+	"main_class": "FrontendHttpAuth",
+	"custom_acl": [
+		"frontend_http_auth"
+	],
+	"admin_permission": "frontend_http_auth"
+}
