@@ -4,13 +4,13 @@
 	?>"
 	method="post" autocomplete="off">
 	<?php
-if (Request::hasVar("save")) {
-    ?>
+	if (Request::hasVar ( "save" )) {
+		?>
 <div class="alert alert-success alert-dismissible fade in" role="alert">
-	<button type="button" class="close" data-dismiss="alert"
-		aria-label="Close">
-		<span aria-hidden="true">&times;</span>
-	</button>
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
   <?php translate("changes_was_saved");?>
 </div>
 
@@ -41,7 +41,7 @@ if (Request::hasVar("save")) {
 			value="<?php Template::escape(Settings::get("frontend_http_auth_password"));?>"
 			maxlength=200 autocomplete="new-password">
 	</p>
-	<p>
+	<p class="voffset3">
 		<button type="submit" class="btn btn-warning"><?php translate("save");?></button>
 	</p>
 </form>
