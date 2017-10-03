@@ -32,6 +32,9 @@ class FrontendHttpAuth extends Controller {
 			}
 		}
 	}
+	public function getSettingsHeadline() {
+		return get_translation ( "frontend_http_auth" );
+	}
 	public function settings() {
 		if (Request::isPost ()) {
 			Settings::set ( "frontend_http_auth_enable", intval ( $_POST ["frontend_http_auth_enable"] ) );
