@@ -3,6 +3,18 @@
 	echo ModuleHelper::buildAdminURL ( "frontend_http_auth" );
 	?>"
 	method="post" autocomplete="off">
+	<?php
+if (Request::hasVar("save")) {
+    ?>
+<div class="alert alert-success alert-dismissible fade in" role="alert">
+	<button type="button" class="close" data-dismiss="alert"
+		aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+  <?php translate("changes_was_saved");?>
+</div>
+
+<?php }?>
 <?php csrf_token_html();?>
 	<div class="checkbox">
 		<label> <input type="checkbox" name="frontend_http_auth_enable"

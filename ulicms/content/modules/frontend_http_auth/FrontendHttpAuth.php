@@ -33,6 +33,13 @@ class FrontendHttpAuth extends Controller {
 		}
 	}
 	public function settings() {
+		if (Request::isPost ()) {
+			Settings::set ( "frontend_http_auth_enable", intval ( $_POST ["frontend_http_auth_enable"] ) );
+			Settings::set ( "frontend_http_auth_dialog_message ", Request::getVar ( "frontend_http_auth_dialog_message" ) );
+			Settings::set ( "frontend_http_auth_user", Request::getVar ( "frontend_http_auth_user" ) );
+			Settings::set ( "frontend_http_auth_password", Request::getVar ( "frontend_http_auth_password" ) );
+			Request::javascriptRedirect ( ModuleHelper::buildAdminURL ( $this->moduleName, "save=1" ) );
+		}
 		return Template::executeModuleTemplate ( $this->moduleName, "settings.php" );
 	}
 }
