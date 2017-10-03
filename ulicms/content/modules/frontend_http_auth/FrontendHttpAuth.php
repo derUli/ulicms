@@ -32,4 +32,7 @@ class FrontendHttpAuth extends Controller {
 			}
 		}
 	}
+	public function settings() {
+		return Template::executeModuleTemplate ( $this->moduleName, "settings.php" );
+	}
 }
