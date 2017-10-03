@@ -16,6 +16,8 @@
 + Modelklassen hinzugefügt
   * Audio
   * Video
++ Neue Filter hinzugefügt
+  * session_data
 # wenn möglich wird bei PHP Fehlern der HTTP Status "500 Internal Server Error" gesendet.
 # Funktion is_ajax_request() verschoben nach Request::isAjaxRequest()
 - Funktion ulicms_redirect() entfernt.

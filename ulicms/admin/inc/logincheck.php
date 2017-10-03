@@ -40,6 +40,8 @@ if (isset ( $_POST ["login"] )) {
 	}
 	
 	$sessionData = validate_login ( $_POST ["user"], $_POST ["password"], $confirmation_code );
+	$sessionData = apply_filter($sessionData, "session_data");
+	
 	if ($sessionData) {
 		// sync modules folder with database at first login
 		if (! Settings::get ( "sys_initialized" )) {
