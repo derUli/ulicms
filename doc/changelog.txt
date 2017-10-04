@@ -11,6 +11,7 @@
   * ModuleHelper::buildMethodCallUploadForm()
   * ModuleHelper::buildRessourcePath()
   * str_contains()
+  * register_translation()
 + CodeMirror kann per CSS-Klasse auf eine Textarea angewenden werden.
 + Beim Upload eines SimpleInstall v2 Pakets wird nun ein Screenshot angezeigt, sofern vorhanden.
 + Modelklassen hinzugefügt
@@ -18,6 +19,9 @@
   * Video
 + Neue Filter hinzugefügt
   * session_data
++ Neue Hooks hinzugefügt
+  * before_functions
+  * after_functions
 # wenn möglich wird bei PHP Fehlern der HTTP Status "500 Internal Server Error" gesendet.
 # Funktion is_ajax_request() verschoben nach Request::isAjaxRequest()
 - Funktion ulicms_redirect() entfernt.

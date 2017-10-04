@@ -151,9 +151,13 @@ if (! is_dir ( getTemplateDirPath ( $theme ) )) {
 	throw new Exception ( "Das aktivierte Theme existiert nicht!" );
 }
 
+add_hook ( "before_functions" );
+
 if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 	include getTemplateDirPath ( $theme ) . "functions.php";
 }
+
+add_hook ( "after_functions" );
 
 $cached_page_path = buildCacheFilePath ( $_SERVER ['REQUEST_URI'] );
 $hasModul = containsModule ( get_requested_pagename () );

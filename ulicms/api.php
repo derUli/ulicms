@@ -1,4 +1,12 @@
 <?php
+function register_translation($key, $value) {
+	$key = strtoupper ( $key );
+	if (! startswith ( $key, "TRANSLATION_" )) {
+		$key = "TRANSLATION_" . $key;
+	}
+	idefine ( $key, $value );
+}
+
 // returns true if $needle is a substring of $haystack
 function str_contains($needle, $haystack) {
 	return strpos ( $haystack, $needle ) !== false;
