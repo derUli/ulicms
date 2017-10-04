@@ -64,8 +64,11 @@ class WordpressXmlImporterHooks extends Controller {
 				$data->position = $post->menuOrder;
 				// Todo map ids from import to our ids.
 				$data->parent = $parent;
+				$data->created = $post->postDate;
+				$data->lastmodified = $post->postDate;
 				if ($data instanceof Article or $data->type == "article") {
 					$data->excerpt = $post->postDesc;
+					$data->article_date = date ( 'Y-m-d H:i:s', $post->postDate );
 				}
 				$data->save ();
 				if ($post->postId > 0) {
