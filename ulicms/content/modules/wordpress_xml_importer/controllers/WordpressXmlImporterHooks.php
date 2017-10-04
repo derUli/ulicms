@@ -11,6 +11,9 @@ class WordpressXmlImporterHooks extends Controller {
 		return Template::executeModuleTemplate ( $this->moduleName, "form.php" );
 	}
 	public function doImport() {
+		@set_time_limit ( 0 );
+		$idMapping = array ();
+		
 		$import_from = Request::getVar ( "import_from", "file", "str" );
 		// TODO: Handle Upload
 		$replace = Request::hasVar ( "replace" );
@@ -65,6 +68,20 @@ class WordpressXmlImporterHooks extends Controller {
 					$data->excerpt = $post->postDesc;
 				}
 				$data->save ();
+				if ($post->postId > 0) {
+					$idMapping [$post->postId] = $data->id;
+				}
+			}
+			foreach ( $posts as $post ) {
+				try {
+					$data = ContentFactory::loadBySystemnameAndLanguage ( $post->postSlug, $language );
+					if ($post->postParent > 0) {
+						$data->parent = $idMapping [$post->postParent];
+						$data->save ();
+					}
+				} catch ( Exception $e ) {
+					continue;
+				}
 			}
 		}
 		
