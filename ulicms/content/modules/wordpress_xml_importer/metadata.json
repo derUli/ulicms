@@ -6,6 +6,9 @@
 		"WordpressXmlImporterHooks": "controllers/WordpressXmlImporterHooks.php"
 	},
 	"main_class": "WordpressXmlImporterHooks",
+	"controller_function_permissions": {
+		"WordpressXmlImporterHooks::doImport": "import_content"
+	},
 	"objects": {
 		"WordpressXmlImporter": "objects/WordpressXmlImporter.php"
 	},
