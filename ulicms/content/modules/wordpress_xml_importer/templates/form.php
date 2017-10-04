@@ -38,7 +38,7 @@ echo ModuleHelper::buildMethodCallUploadForm ( "WordpressXmlImporterHooks", "doI
 			<option value="article"><?php translate("article")?></option>
 			<option value="page"><?php translate("page")?></option>
 	<?php if(in_array("blog", getAllModules())){?>
-	<option value="blog">
+	<option value="blog" disabled>
 		<?php translate("blog")?></option>
 		<?php }?>
 </select>
@@ -53,8 +53,7 @@ echo ModuleHelper::buildMethodCallUploadForm ( "WordpressXmlImporterHooks", "doI
 </select>
 	</p>
 	<p>
-		<strong><?php translate("owner")?></strong><br /> <select
-			name="language">
+		<strong><?php translate("owner")?></strong><br /> <select name="autor">
 <?php foreach($users as $user){?>
 <option value="<?php Template::escape($user->getId())?>"><?php Template::escape($user->getUsername());?></option>
 <?php }?>
@@ -75,7 +74,7 @@ echo ModuleHelper::buildMethodCallUploadForm ( "WordpressXmlImporterHooks", "doI
 	<p>
 		<strong><?php translate("parent");?></strong><br /> <select
 			name="parent">
-			<option selected="selected" value="NULL">
+			<option selected="selected" value="">
 			[
 			<?php translate("none");?>
 			]

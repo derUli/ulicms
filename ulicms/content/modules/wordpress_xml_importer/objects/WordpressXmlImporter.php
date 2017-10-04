@@ -30,7 +30,7 @@ class WordpressXmlImporter {
 			$post = array (
 					"postTitle" => strval ( $item [0]->title ),
 					"postSlug" => ! $wpnNS->post_name ? $this->_slug ( strval ( $item [0]->title ) ) : $wpNs->post_name,
-					"postCont" => nl2br ( strval ( $content->encoded ) ),
+					"postContent" => nl2br ( strval ( $content->encoded ) ),
 					"postDesc" => nl2br ( strval ( $excerpt->encoded ) ),
 					"postDate" => strftime ( "%Y-%m-%d %H:%M:%S", strtotime ( $item [0]->pubDate ) ),
 					"postCategories" => implode ( ", ", $categories ),
@@ -43,6 +43,7 @@ class WordpressXmlImporter {
 		}
 		return $posts;
 	}
+
 }
 
 // $importer = new WordpressXmlImporter ( "../wordpressdemoinstall.wordpress.2017-10-02.xml" );
