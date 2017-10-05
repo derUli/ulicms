@@ -1,8 +1,9 @@
 <?php
 function CheckSyntax($fileName, $checkIncludes = true) {
 	// If it is not a file or we can't read it throw an exception
-	if (! is_file ( $fileName ) || ! is_readable ( $fileName ))
+	if (! is_file ( $fileName ) || ! is_readable ( $fileName )) {
 		throw new Exception ( "Cannot read file " . $fileName );
+	}
 	
 	// Sort out the formatting of the filename
 	$fileName = realpath ( $fileName );
@@ -73,4 +74,12 @@ function GetIncludes($fileName) {
 	
 	return $includes;
 }
-?>
+if (! function_exists ( "php_check_syntax" )) {
+	function php_check_syntax($filename, &$error_message = null) {
+		try {
+			CheckSyntax ( $filename, true );
+		} catch ( Exception $e ) {
+			$error_message = $e->getMessage ();
+		}
+	}
+}

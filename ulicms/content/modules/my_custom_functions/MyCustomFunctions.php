@@ -17,12 +17,15 @@ class MyCustomFunctions extends Controller {
 		// Fehlerbehandlung mit try/catch und eigenem error_handler
 		// var_dump ( $this->path );
 		if (file_exists ( $this->path )) {
-			try {
-				CheckSyntax ( $this->path, true );
-			} catch ( Exception $e ) {
-				trigger_error ( "Syntax error in {$this->path}", E_USER_WARNING );
-				return;
+			
+			if (function_exists ( "php_check_syntax" )) {
+				php_check_syntax ( $this->path, $error_message );
+				if ($error_message) {
+					trigger_error ( $error_message, E_USER_WARNING );
+					return;
+				}
 			}
+			
 			include_once $this->path;
 		}
 	}

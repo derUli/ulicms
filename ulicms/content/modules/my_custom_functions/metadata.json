@@ -9,9 +9,6 @@
 	"custom_acl": [
 		"my_custom_functions"
 	],
-	"objects": {
-		"CheckSyntax": "objects/CheckSyntax.php"
-	},
 	"admin_permission": "my_custom_functions",
 	"controller_function_permissions": {
 		"MyCustomFunctions::save": "my_custom_functions"
