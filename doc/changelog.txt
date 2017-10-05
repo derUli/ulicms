@@ -29,6 +29,7 @@
 
 Bugfixes:
 * Die Gruppe "Administratoren" wird bei der Installation wieder erstellt
+* Auf einigen Systemen wurde beim Klick auf das Icon "Cache leeren" die Ladeanimation nicht angezeigt
 
 ===== Neues in UliCMS 2017.4 =====
 

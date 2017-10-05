@@ -3,9 +3,11 @@ $(function() {
 		$(".mainmenu").slideToggle();
 	});
 	$("#menu-clear-cache").click(function() {
-		$(this).attr("src", "gfx/loading2.gif");
+		$(this).hide();
+		$("#menu-clear-cache-loading").show();
 		$.get("index.php?clear_cache=clear_cache", function(result) {
-			$("#menu-clear-cache").attr("src", "gfx/clear-cache.png");
+				$("#menu-clear-cache").show();
+				$("#menu-clear-cache-loading").hide();
 		});
 	});
 });
