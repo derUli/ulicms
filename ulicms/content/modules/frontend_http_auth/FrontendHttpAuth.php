@@ -4,7 +4,7 @@ class FrontendHttpAuth extends Controller {
 	protected function prompt() {
 		$message = stripslashes ( Settings::get ( "frontend_http_auth_dialog_message" ) );
 		header ( 'WWW-Authenticate: Basic realm="' . $message . '"' );
-		header ( 'HTTP/1.0 401 Unauthorized' );
+		header ( $_SERVER ["SERVER_PROTOCOL"] . " 401 Unauthorized" );
 		ViewBag::set ( "message", get_translation ( "http_auth_required" ) );
 		$_SESSION ["logged"] = false;
 		HTMLResult ( Template::executeModuleTemplate ( $this->moduleName, "error.php" ), 401 );

@@ -99,7 +99,7 @@ class Request {
 	}
 	// Weiterleitung per Location header;
 	public static function redirect($url = "http://www.ulicms.de", $status = 302) {
-		header ( "HTTP/1.0 " . self::getStatusCodeByNumber ( $status ) );
+		header ( $_SERVER ["SERVER_PROTOCOL"] . " " . self::getStatusCodeByNumber ( $status ) );
 		header ( "Location: " . $url );
 		exit ();
 	}

@@ -46,7 +46,7 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
 if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 	$txt = get_translation ( "IP_BLOCKED_BY_SPAMHAUS" );
 	$txt = str_replace ( "%ip", get_ip (), $txt );
-	header ( "HTTP/1.0 403 Forbidden" );
+	header ( $_SERVER ["SERVER_PROTOCOL"] . " 403 Forbidden" );
 	header ( "Content-Type: text/html; charset=UTF-8" );
 	echo $txt;
 	exit ();
@@ -65,7 +65,7 @@ $theme = get_theme ();
 if (isMaintenanceMode ()) {
 	add_hook ( "before_maintenance_message" );
 	// Sende HTTP Status 503 und Retry-After im Wartungsmodus
-	header ( 'HTTP/1.0 503 Service Temporarily Unavailable' );
+	header ( $_SERVER ["SERVER_PROTOCOL"] . " 503 Service Temporarily Unavailable" );
 	header ( 'Status: 503 Service Temporarily Unavailable' );
 	header ( 'Retry-After: 60' );
 	header ( "Content-Type: text/html; charset=utf-8" );
@@ -121,7 +121,7 @@ if (isset ( $_GET ["submit-cms-form"] ) and ! empty ( $_GET ["submit-cms-form"] 
 }
 ControllerRegistry::runMethods ();
 
-header ( "HTTP/1.0 " . $status );
+header ( $_SERVER ["SERVER_PROTOCOL"] . " " . $status );
 
 if ($format == "html") {
 	header ( "Content-Type: text/html; charset=utf-8" );
