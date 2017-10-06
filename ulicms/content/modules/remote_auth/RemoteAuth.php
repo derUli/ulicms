@@ -1,6 +1,6 @@
 <?php
 class RemoteAuth extends Controller {
-	public function beforeBackendHeader() {
+	public function beforeBackendRunMethods() {
 		if (! is_logged_in ()) {
 			$authenticator = ControllerRegistry::get ( "HttpAuthenticator" );
 			$cfg = $authenticator->getConfig ();
@@ -19,6 +19,8 @@ class RemoteAuth extends Controller {
 		}
 	}
 	public function logoutUrlFilter($url) {
+		$authenticator = ControllerRegistry::get ( "HttpAuthenticator" );
+		
 		$cfg = $authenticator->getConfig ();
 		if (isset ( $cfg ["logout_url"] ) and StringHelper::isNotNullOrWhitespace ( $cfg ["logout_url"] )) {
 			$url = $cfg ["logout_url"];

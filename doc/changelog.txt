@@ -28,6 +28,8 @@
   * after_login_form
   * before_reset_password_form
   * after_after_password_form
+  * before_backend_run_methods
+  * after_backend_run_methods
 # wenn möglich wird bei PHP Fehlern der HTTP Status "500 Internal Server Error" gesendet.
 # Funktion is_ajax_request() verschoben nach Request::isAjaxRequest()
 - Funktion ulicms_redirect() entfernt.

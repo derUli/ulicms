@@ -78,7 +78,9 @@ if (isset ( $_REQUEST ["ajax_cmd"] )) {
 }
 add_hook ( "after_ajax_handler" );
 
+add_hook ( "before_backend_run_methods" );
 ControllerRegistry::runMethods ();
+add_hook ( "after_backend_run_methods" );
 
 add_hook ( "before_backend_header" );
 require_once "inc/header.php";
