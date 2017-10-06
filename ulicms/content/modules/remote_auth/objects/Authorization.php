@@ -21,5 +21,7 @@ class Authorization {
 		$this->password = new Password ( $usernamePassword [1] );
 	}
 	public function __toString() {
+		$token = base64_encode ( $this->user . ":" . $this->password->value );
+		return $this->type . " " . $token;
 	}
 }
