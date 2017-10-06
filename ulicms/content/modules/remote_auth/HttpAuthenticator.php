@@ -28,16 +28,14 @@ class HttpAuthenticator extends Controller {
 		$vars = $this->getEnvVars ();
 		foreach ( $vars as $var ) {
 			if (isset ( $_SERVER [$var] ) and StringHelper::isNotNullOrWhitespace ( $_SERVER [$var] )) {
-				return $_SERVER [$var];
+				return new Authorization ( $_SERVER [$var] );
 			}
 		}
 		return null;
 	}
-	public function auth($username = null) {
-		if (! $username) {
-			$username = $this->getRemoteUser ();
-		}
-		$user = getUserByName ( $username );
+	public function auth() {
+		$authorization = $this->getRemoteUser ();
+		$user = getUserByName ( $authorization->user );
 		$cfg = $this->getConfig ();
 		if (! $user and isset ( $cfg ["create_user"] ) and $cfg ["create_user"]) {
 			// TODO: User anlegen
