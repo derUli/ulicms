@@ -22,6 +22,12 @@
 + Neue Hooks hinzugefügt
   * before_functions
   * after_functions
+  * before_backend_header
+  * after_backend_header
+  * before_login_form
+  * after_login_form
+  * before_reset_password_form
+  * after_after_password_form
 # wenn möglich wird bei PHP Fehlern der HTTP Status "500 Internal Server Error" gesendet.
 # Funktion is_ajax_request() verschoben nach Request::isAjaxRequest()
 - Funktion ulicms_redirect() entfernt.
