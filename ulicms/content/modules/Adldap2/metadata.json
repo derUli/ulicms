@@ -1,8 +1,0 @@
-{
-	"source": "extend",
-	"version": "8.0.1",
-	"embed": false,
-	"objects": {
-		"Adldap2": "vendor/autoload.php"
-	}
-}

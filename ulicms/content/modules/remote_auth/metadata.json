@@ -6,5 +6,9 @@
 		"HttpAuthenticator": "HttpAuthenticator.php",
 		"RemoteAuth": "RemoteAuth.php"
 	},
-	"main_class": "RemoteAuth"
+	"main_class": "RemoteAuth",
+	"objects" : {
+		"Password" : "objects/password/Password.php",
+		"PlainTextPassword" : "objects/password/PlainTextPassword.php"
+	}
 }
