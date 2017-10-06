@@ -40,3 +40,5 @@ deny from all
 
 php_value upload_max_filesize 40M
 php_value post_max_size 42M
+
+RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization},L]
