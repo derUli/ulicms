@@ -8,6 +8,7 @@
 	},
 	"main_class": "RemoteAuth",
 	"objects" : {
+		"Authorization" : "objects/password/Authorization.php",
 		"Password" : "objects/password/Password.php",
 		"PlainTextPassword" : "objects/password/PlainTextPassword.php"
 	}
