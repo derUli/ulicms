@@ -20,7 +20,6 @@ class RemoteAuth extends Controller {
 	}
 	public function logoutUrlFilter($url) {
 		$authenticator = ControllerRegistry::get ( "HttpAuthenticator" );
-		
 		$cfg = $authenticator->getConfig ();
 		if (isset ( $cfg ["logout_url"] ) and StringHelper::isNotNullOrWhitespace ( $cfg ["logout_url"] )) {
 			$url = $cfg ["logout_url"];
