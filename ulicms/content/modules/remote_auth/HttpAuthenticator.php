@@ -25,10 +25,15 @@ class HttpAuthenticator extends Controller {
 		return $env_vars;
 	}
 	public function getRemoteUser() {
+		$config = $this->getConfig;
+		$remove_realm = (isset ( $config ["remove_realm"] ) and $config ["remove_realm"]);
 		$vars = $this->getEnvVars ();
 		foreach ( $vars as $var ) {
 			if (isset ( $_SERVER [$var] ) and StringHelper::isNotNullOrWhitespace ( $_SERVER [$var] )) {
-				return $_SERVER ["var"];
+				$user = $_SERVER ["var"];
+				if ($remove_realm) {
+					$user = substr ( $user, 0, strpos ( $str, '@' ) );
+				}
 				// return new Authorization ( $_SERVER [$var] );
 			}
 		}
