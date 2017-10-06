@@ -8,7 +8,7 @@ class Authorization {
 			$this->fromHeader ( $header );
 		}
 	}
-	public function fromHeader($header = null) {
+	public function fromHeader($header) {
 	}
 	public function __toString() {
 	}
