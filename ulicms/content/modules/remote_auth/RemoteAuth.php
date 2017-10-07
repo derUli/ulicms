@@ -27,4 +27,19 @@ class RemoteAuth extends Controller {
 		}
 		return $url;
 	}
+	public function adminMenuEntriesFilter($items) {
+		$authenticator = ControllerRegistry::get ( "HttpAuthenticator" );
+		$cfg = $authenticator->getConfig ();
+		
+		if (! (isset ( $cfg ["hide_logout_link"] ) and $cfg ["hide_logout_link"])) {
+			return $items;
+		}
+		$filteredItems = array ();
+		for($i = 0; $i < count ( $items ); $i ++) {
+			if ($items [$i]->getIdentifier () != "destroy") {
+				$filteredItems [] = $items [$i];
+			}
+		}
+		return $filteredItems;
+	}
 }
