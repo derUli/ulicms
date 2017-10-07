@@ -12,7 +12,8 @@ class RemoteAuth extends Controller {
 					Settings::set ( "sys_initialized", "true" );
 				}
 				add_hook ( "login_ok" );
-				register_session ( $sessionData, true );
+				
+				register_session ( $user, true );
 			} else if (isset ( $cfg ["login_url"] ) and StringHelper::isNotNullOrWhitespace ( $cfg ["login_url"] )) {
 				Request::redirect ( $cfg ["login_url"] );
 			}
