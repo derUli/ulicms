@@ -67,7 +67,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	if (count ( $modules ) > 0) {
 		echo "<ol style=\"margin-bottom:30px;\">";
 		for($i = 0; $i < count ( $modules ); $i ++) {
-			if (getModuleMeta ( $modules [$i], "source" ) !== "core" or $_SESSION ["show_core_modules"]) {
+			if ((getModuleMeta ( $modules [$i], "source" ) !== "core" or $_SESSION ["show_core_modules"]) && ! getModuleMeta ( $modules [$i], "shy" )) {
 				echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
 				$disabledModules = Vars::get ( "disabledModules" );
 				$controller = null;
@@ -171,6 +171,9 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	if (count ( $themes ) > 0) {
 		echo "<ol>";
 		for($i = 0; $i < count ( $themes ); $i ++) {
+			if (getThemeMeta ( $themes [$i], "shy" )) {
+				continue;
+			}
 			echo "<li style=\"margin-bottom:20px;padding-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-theme-" . $themes [$i] . "\"><strong>";
 			
 			echo $themes [$i];
