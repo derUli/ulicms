@@ -4,9 +4,7 @@
 </main>
 </div>
 <footer class="footer">
-
 	<div class="row">
-
 		<div class="col-sm-6">
 			<p>&copy;
     <?php if(date("Y") > 2016){?>

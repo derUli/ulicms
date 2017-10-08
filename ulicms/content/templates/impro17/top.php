@@ -96,5 +96,4 @@ echo getconfig ( "header-background-color" );
 		<?php Template::escape($motto);?></blockquote>
 		<?php }?>
 			<main>
-<?php fuck();?>
 		<?php Template::headline();?>
