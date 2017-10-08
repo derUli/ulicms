@@ -44,8 +44,3 @@ class WordpressXmlImporter {
 		return $posts;
 	}
 }
-
-// $importer = new WordpressXmlImporter ( "../wordpressdemoinstall.wordpress.2017-10-02.xml" );
-
-// $posts = $importer->getPosts ();
-// //var_dump ( $posts );
