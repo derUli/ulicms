@@ -37,5 +37,3 @@ deny from all
 order allow,deny
 deny from all
 </files>
-
-RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization},L]
