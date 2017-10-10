@@ -20,6 +20,7 @@
   * Video
 + Neue Filter hinzugefügt
   * session_data
+  * body_classes
 + Neue Hooks hinzugefügt
   * before_functions
   * after_functions

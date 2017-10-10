@@ -443,6 +443,7 @@ function get_body_classes() {
 		$str .= "containsModule ";
 	}
 	$str = trim ( $str );
+	$str = apply_filter ( $str, "body_classes" );
 	return $str;
 }
 function body_classes() {
