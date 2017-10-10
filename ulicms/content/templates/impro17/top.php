@@ -51,7 +51,7 @@ echo getconfig ( "header-background-color" );
 }
 </style>
 </head>
-<body>
+<body class="<?php body_classes();?>">
 	<div class="container" id="root">
 		<div class="header clearfix">
 			<nav>
