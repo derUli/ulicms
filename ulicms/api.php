@@ -1,4 +1,7 @@
 <?php
+function add_translation($key, $value) {
+	register_translation ( $key, $value );
+}
 function register_translation($key, $value) {
 	$key = strtoupper ( $key );
 	if (! startswith ( $key, "TRANSLATION_" )) {

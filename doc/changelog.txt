@@ -13,6 +13,7 @@
   * ModuleHelper::buildRessourcePath()
   * str_contains()
   * register_translation()
+  * add_translation()
 + CodeMirror kann per CSS-Klasse auf eine Textarea angewenden werden.
 + Beim Upload eines SimpleInstall v2 Pakets wird nun ein Screenshot angezeigt, sofern vorhanden.
 + Modelklassen hinzugefügt
