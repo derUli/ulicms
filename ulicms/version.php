@@ -5,9 +5,9 @@ if (! class_exists ( "ulicms_version" )) {
 			$this->version = "Sockenreißer";
 			$this->releaseYear = 2018;
 			$this->internalVersion = Array (
-					2017,
-					4,
+					2018,
 					1
+					
 			);
 			$this->update = "";
 			$this->developmentVersion = false;
