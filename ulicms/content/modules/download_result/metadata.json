@@ -2,5 +2,7 @@
 	"source": "extend",
 	"version": "1.0",
 	"embed": false,
-	"shy": true
+	"objects": {
+		"DownloadResult": "DownloadResult.php"
+	}
 }

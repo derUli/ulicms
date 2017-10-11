@@ -78,16 +78,27 @@ if (isset ( $_REQUEST ["ajax_cmd"] )) {
 }
 add_hook ( "after_ajax_handler" );
 
+add_hook ( "before_backend_run_methods" );
 ControllerRegistry::runMethods ();
+add_hook ( "after_backend_run_methods" );
 
+add_hook ( "before_backend_header" );
 require_once "inc/header.php";
+add_hook ( "after_backend_header" );
+
 if (! $eingeloggt) {
 	if (isset ( $_GET ["register"] )) {
+		add_hook("before_register_form");
 		require_once "inc/registerform.php";
+		add_hook("after_register_form");
 	} else if (isset ( $_GET ["reset_password"] )) {
+		add_hook ( "before_reset_password_form" );
 		require_once "inc/reset_password.php";
+		add_hook ( "before_after_password_form" );
 	} else {
+		add_hook ( "before_login_form" );
 		require_once "inc/loginform.php";
+		add_hook ( "after_login_form" );
 	}
 } else {
 	require_once "inc/adminmenu.php";

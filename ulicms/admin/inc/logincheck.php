@@ -40,6 +40,8 @@ if (isset ( $_POST ["login"] )) {
 	}
 	
 	$sessionData = validate_login ( $_POST ["user"], $_POST ["password"], $confirmation_code );
+	$sessionData = apply_filter($sessionData, "session_data");
+	
 	if ($sessionData) {
 		// sync modules folder with database at first login
 		if (! Settings::get ( "sys_initialized" )) {
@@ -49,7 +51,7 @@ if (isset ( $_POST ["login"] )) {
 		add_hook ( "login_ok" );
 		register_session ( $sessionData, true );
 	} else {
-		@header ( 'HTTP/1.0 403 Forbidden' );
+		@header ( $_SERVER ["SERVER_PROTOCOL"] . " 403 Forbidden" );
 		add_hook ( "login_failed" );
 	}
 }

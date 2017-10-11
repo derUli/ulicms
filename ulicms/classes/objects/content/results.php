@@ -1,6 +1,6 @@
 <?php
 function JSONResult($data, $status = 200) {
-	header ( "HTTP/1.0 " . Request::getStatusCodeByNumber ( $status ) );
+	header ( $_SERVER ["SERVER_PROTOCOL"] . " " . Request::getStatusCodeByNumber ( $status ) );
 	$json = json_encode ( $data );
 	// get string size in Byte
 	$size = getStringLengthInBytes ( $json );
@@ -10,7 +10,7 @@ function JSONResult($data, $status = 200) {
 	exit ();
 }
 function RawJSONResult($data, $status = 200) {
-	header ( "HTTP/1.0 " . Request::getStatusCodeByNumber ( $status ) );
+	header ( $_SERVER ["SERVER_PROTOCOL"] . " " . Request::getStatusCodeByNumber ( $status ) );
 	$size = getStringLengthInBytes ( $data );
 	header ( 'Content-Type: application/json' );
 	header ( "Content-length: $size" );
@@ -18,7 +18,7 @@ function RawJSONResult($data, $status = 200) {
 	exit ();
 }
 function HTMLResult($data, $status = 200) {
-	header ( "HTTP/1.0 " . Request::getStatusCodeByNumber ( $status ) );
+	header ( $_SERVER ["SERVER_PROTOCOL"] . " " . Request::getStatusCodeByNumber ( $status ) );
 	$size = getStringLengthInBytes ( $data );
 	header ( 'Content-Type: text/html; charset=UTF-8' );
 	header ( "Content-length: $size" );
@@ -26,7 +26,7 @@ function HTMLResult($data, $status = 200) {
 	exit ();
 }
 function TextResult($data, $status = 200) {
-	header ( "HTTP/1.0 " . Request::getStatusCodeByNumber ( $status ) );
+	header ( $_SERVER ["SERVER_PROTOCOL"] . " " . Request::getStatusCodeByNumber ( $status ) );
 	$size = getStringLengthInBytes ( $data );
 	header ( 'Content-Type: text/plain; charset=utf-8' );
 	header ( "Content-length: $size" );
@@ -34,10 +34,10 @@ function TextResult($data, $status = 200) {
 	exit ();
 }
 function HTTPStatusCodeResult($status, $description = null) {
-	$header = "HTTP/1.0 " . getStatusCodeByNumber ( intval ( $status ) );
+	$header = $_SERVER ["SERVER_PROTOCOL"] . " " . getStatusCodeByNumber ( intval ( $status ) );
 	
 	if ($description != null and $description != "") {
-		$header = "HTTP/1.0 " . intval ( $status ) . " " . $description;
+		$header = $_SERVER ["SERVER_PROTOCOL"] . " " . intval ( $status ) . " " . $description;
 	}
 	header ( $header );
 	exit ();
