@@ -1,5 +1,6 @@
 <?php
 class CustomData {
+	private static $defaults = array ();
 	public static function get($page = null) {
 		if (! $page) {
 			$page = get_requested_pagename ();
@@ -50,5 +51,17 @@ class CustomData {
 			return $data [$name];
 		}
 		return Settings::get ( $name );
+	}
+	public static function setDefault($key, $value) {
+		self::$defaults [$key] = $value;
+	}
+	public static function getDefault($key) {
+		if (! isset ( self::$defaults [$key] )) {
+			return null;
+		}
+		return self::$defaults [$key];
+	}
+	public static function getDefaultJSON() {
+		return json_readable_encode ( self::$defaults );
 	}
 }

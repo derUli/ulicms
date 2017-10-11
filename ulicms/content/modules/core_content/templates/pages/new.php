@@ -613,7 +613,7 @@ function openArticleImageSelectWindow(field) {
 
 
 			<textarea name="custom_data" style="width: 100%; height: 200px;"
-				cols=80 rows=10>{}</textarea>
+				cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
 
 		</div>
 	</div>
