@@ -11,6 +11,11 @@ function showAndHideFieldsByType() {
 		$(hide[i]).slideUp();
 	}
 	
+	if ($("#type_snippet").is(":checked")) {
+		$("select[name='hidden']").val("1");
+		$("select[name='menu']").val("none");
+	}
+	
 	$(".custom-field-tab").each(function(index, el) {
 		if ($(el).data("type") == $("input[name='type']:checked").val()) {
 			$(el).slideDown();

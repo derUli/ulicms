@@ -5,14 +5,39 @@ class DefaultContentTypes {
 		self::$types = array ();
 		self::$types ["page"] = self::getPageType ();
 		self::$types ["article"] = self::getPageType ();
+		self::$types ["snippet"] = self::getPageType ();
 		self::$types = apply_filter ( self::$types, "content_types" );
+	}
+	public static function getSnippetType() {
+		$type = self::getPageType ();
+		$hideItems = array (
+				"#hidden-attrib",
+				"#tab-menu-image",
+				"#tab-og",
+				"#custom_data_json",
+				".menu-stuff",
+				"#tab-metadata",
+				"#tab-cache-control",
+				".hide-on-snippet",
+				"#btn-view-page"
+		);
+		$filteredItems = array ();
+		foreach ( $type->show as $field ) {
+			if (! in_array ( $field, $hideItems )) {
+				$filteredItems [] = $field;
+			}
+			$type->hide [] = $field;
+		}
+		$type->show [] = ".show-on-snippet";
+		return $type;
 	}
 	public static function getArticleType() {
 		$type = self::getPageType ();
 		$filteredShow = array ();
 		$itemsToRemove = array (
 				"#article-metadata",
-				"#article-image" 
+				"#article-image",
+				"#btn-view-page" 
 		);
 		$filteredItems = array ();
 		foreach ( $type->hide as $value ) {
