@@ -4,9 +4,70 @@ class DefaultContentTypes {
 	public static function initTypes() {
 		self::$types = array ();
 		self::$types ["page"] = self::getPageType ();
-		self::$types ["article"] = self::getPageType ();
-		self::$types ["snippet"] = self::getPageType ();
+		self::$types ["article"] = self::getArticleType ();
+		self::$types ["snippet"] = self::getSnippetType ();
+		self::$types ["node"] = self::getNodeType ();
+		self::$types ["link"] = self::getLinkType ();
 		self::$types = apply_filter ( self::$types, "content_types" );
+	}
+	public static function getLinkType() {
+		$type = self::getNodeType ();
+		$hideItems = array (
+				".hide-on-non-regular",
+				"#hidden-attrib",
+				"#tab-menu-image",
+				"#tab-og",
+				"#custom_data_json",
+				".menu-stuff",
+				"#tab-metadata",
+				"#tab-cache-control",
+				".hide-on-snippet",
+				"#btn-view-page",
+				".show-on-snippet",
+				".hide-on-non-regular",
+				"#content-editor",
+				"#tab-list",
+				"#tab-language-link",
+				"#content-editor" 
+		);
+		$filteredItems = array ();
+		foreach ( $type->show as $field ) {
+			if (! in_array ( $field, $hideItems )) {
+				$filteredItems [] = $field;
+			}
+		}
+		$type->hide = $filteredItems;
+		$type->show [] = "#tab-link";
+		return $type;
+	}
+	public static function getNodeType() {
+		$type = self::getSnippetType ();
+		$hideItems = array (
+				".hide-on-non-regular",
+				"#hidden-attrib",
+				"#tab-menu-image",
+				"#tab-og",
+				"#custom_data_json",
+				".menu-stuff",
+				"#tab-metadata",
+				"#tab-cache-control",
+				".hide-on-snippet",
+				"#btn-view-page",
+				".show-on-snippet",
+				".hide-on-non-regular",
+				"#tab-link",
+				"#content-editor" 
+		
+		);
+		$filteredItems = array ();
+		foreach ( $type->show as $field ) {
+			if (! in_array ( $field, $hideItems )) {
+				$filteredItems [] = $field;
+			}
+		}
+		$type->show = $filteredItems;
+		$type->hide = $hideItems;
+		return $type;
 	}
 	public static function getSnippetType() {
 		$type = self::getPageType ();
@@ -19,16 +80,17 @@ class DefaultContentTypes {
 				"#tab-metadata",
 				"#tab-cache-control",
 				".hide-on-snippet",
-				"#btn-view-page"
+				"#btn-view-page",
+				".hide-on-non-regular" 
 		);
 		$filteredItems = array ();
 		foreach ( $type->show as $field ) {
 			if (! in_array ( $field, $hideItems )) {
 				$filteredItems [] = $field;
 			}
-			$type->hide [] = $field;
 		}
-		$type->show [] = ".show-on-snippet";
+		$type->hide = $filteredItems;
+		$type->show = $filteredItems;
 		return $type;
 	}
 	public static function getArticleType() {
@@ -64,7 +126,8 @@ class DefaultContentTypes {
 				".menu-stuff",
 				".hide-on-snippet",
 				".hide-on-non-regular",
-				"#btn-view-page" 
+				"#btn-view-page",
+				"#content-editor" 
 		
 		);
 		$type->hide = array (

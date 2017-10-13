@@ -3,19 +3,19 @@ function showAndHideFieldsByType() {
 	var typeData = AllTypes[type];
 	var show = typeData["show"];
 	var hide = typeData["hide"];
-	
-	for(i=0; i < show.length; i++){
-		$(show[i]).slideDown();
-	}	
-	for(i=0; i < hide.length; i++){
+	for (i = 0; i < hide.length; i++) {
 		$(hide[i]).slideUp();
 	}
-	
+
+	for (i = 0; i < show.length; i++) {
+		$(show[i]).slideDown();
+	}
+
 	if ($("#type_snippet").is(":checked")) {
 		$("select[name='hidden']").val("1");
 		$("select[name='menu']").val("none");
 	}
-	
+
 	$(".custom-field-tab").each(function(index, el) {
 		if ($(el).data("type") == $("input[name='type']:checked").val()) {
 			$(el).slideDown();
@@ -30,13 +30,6 @@ function showAndHideFieldsByType() {
 	} else {
 		$("#btn-view-page").slideDown();
 	}
-	if ($("#type_node").is(":checked") || $("#type_snippet").is(":checked")
-			|| $("#type_link").is(":checked")
-			|| $("#type_language_link").is(":checked")) {
-		$(".hide-on-non-regular").slideUp();
-	} else {
-		$(".hide-on-non-regular").slideDown();
-	}
 
 	if ($("select[name='menu']").val() == "none") {
 		$("#parent-div").slideUp();
@@ -49,20 +42,17 @@ function showAndHideFieldsByType() {
 $("input[name=\"type\"]").change(showAndHideFieldsByType);
 $("select[name='menu']").change(showAndHideFieldsByType);
 
-$(document).ready(function(){
-	
+$(document).ready(function() {
 	var data = {
-			ajax_cmd : "getContentTypes"
-		};
+		ajax_cmd : "getContentTypes"
+	};
 
-		$.post("index.php", data, function(response, status) {
-			AllTypes = response;
-			showAndHideFieldsByType();
-		});
-	
-		}
-);
-		}
+	$.get("index.php", data, function(response, status) {
+		AllTypes = response;
+		showAndHideFieldsByType();
+	});
+
+});
 
 function systemname_vorschlagen(txt) {
 	var systemname = txt.toLowerCase();
