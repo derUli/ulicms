@@ -1,0 +1,16 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": false,
+	"controllers": {
+		"MyCustomFunctions": "MyCustomFunctions.php"
+	},
+	"main_class": "MyCustomFunctions",
+	"custom_acl": [
+		"my_custom_functions"
+	],
+	"admin_permission": "my_custom_functions",
+	"controller_function_permissions": {
+		"MyCustomFunctions::save": "my_custom_functions"
+	}
+}

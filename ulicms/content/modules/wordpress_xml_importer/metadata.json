@@ -1,0 +1,19 @@
+{
+	"source": "extend",
+	"version": "0.1",
+	"embed": false,
+	"controllers": {
+		"WordpressXmlImporterHooks": "controllers/WordpressXmlImporterHooks.php"
+	},
+	"main_class": "WordpressXmlImporterHooks",
+	"controller_function_permissions": {
+		"WordpressXmlImporterHooks::doImport": "import_content"
+	},
+	"objects": {
+		"WordpressXmlImporter": "objects/WordpressXmlImporter.php"
+	},
+	"custom_acl": [
+		"import_content"
+	],
+	"admin_permission": "import_content"
+}

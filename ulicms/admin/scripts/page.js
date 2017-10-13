@@ -1,185 +1,16 @@
 function showAndHideFieldsByType() {
-	if ($("#type_list").is(":checked")) {
-		$("#tab-list").slideDown();
-		$("#tab-link").slideUp();
-		$("#tab-language-link").slideUp();
-		$("#tab-metadata").slideDown();
-		$("#tab-og").slideDown();
-		$("#content-editor").slideDown();
-		$("#tab-module").slideUp();
-		$("#tab-video").slideUp();
-		$("#tab-audio").slideUp();
-		$("#tab-image").slideUp();
-		$("#tab-text-position").slideDown();
-		$("#tab-cache-control").slideDown();
-		$("#tab-target").slideDown();
-		$("#article-metadata").slideUp();
-		$("#article-image").slideUp();
-		$("#comment-fields").slideUp();
-		$("#custom_data_json").slideDown();
-	} else if ($("#type_link").is(":checked")
-			|| $("#type_language_link").is(":checked")) {
-		$("#tab-list").slideUp();
-		if ($("#type_language_link").is(":checked")) {
-			$("#tab-link").slideUp();
-			$("#tab-language-link").slideDown();
-		} else {
-			$("#tab-link").slideDown();
-			$("#tab-language-link").slideUp();
-		}
-		$("#tab-metadata").slideUp();
-		$("#tab-og").slideUp();
-		$("#tab-image").slideUp();
-		$("#content-editor").slideUp();
-		$("#tab-module").slideUp();
-		$("#tab-video").slideUp();
-		$("#tab-audio").slideUp();
-		$("#tab-text-position").slideUp();
-		$("#tab-cache-control").slideUp();
-		$("#article-metadata").slideUp();
-		$("#article-image").slideUp();
-		$("#comment-fields").slideUp();
-		$("#custom_data_json").slideUp();
-		$("#tab-target").slideDown();
-	} else if ($("#type_node").is(":checked")) {
-		$("#tab-list").slideUp();
-		$("#tab-link").slideUp();
-		$("#tab-language-link").slideUp();
-		$("#tab-metadata").slideUp();
-		$("#tab-og").slideUp();
-		$("#tab-image").slideUp();
-		$("#content-editor").slideUp();
-		$("#tab-module").slideUp();
-		$("#tab-video").slideUp();
-		$("#tab-audio").slideUp();
-		$("#tab-text-position").slideUp();
-		$("#tab-cache-control").slideUp();
-		$("#article-metadata").slideUp();
-		$("#article-image").slideUp();
-		$("#comment-fields").slideUp();
-		$("#custom_data_json").slideUp();
-		$("#tab-target").slideUp();
-	} else if ($("#type_module").is(":checked")) {
-		$("#tab-list").slideUp();
-		$("#tab-link").slideUp();
-		$("#tab-language-link").slideUp();
-		$("#tab-metadata").slideDown();
-		$("#tab-og").slideDown();
-		$("#content-editor").slideDown();
-		$("#tab-module").slideDown();
-		$("#tab-video").slideUp();
-		$("#tab-image").slideUp();
-		$("#tab-audio").slideUp();
-		$("#tab-text-position").slideDown();
-		$("#tab-cache-control").slideDown();
-		$("#article-metadata").slideUp();
-		$("#article-image").slideUp();
-		$("#comment-fields").slideUp();
-		$("#custom_data_json").slideDown();
-		$("#tab-target").slideDown();
-	} else if ($("#type_video").is(":checked")) {
-		$("#tab-list").slideUp();
-		$("#tab-link").slideUp();
-		$("#tab-language-link").slideUp();
-		$("#tab-metadata").slideDown();
-		$("#tab-image").slideUp();
-		$("#tab-og").slideDown();
-		$("#content-editor").slideDown();
-		$("#tab-module").slideUp();
-		$("#tab-video").slideDown();
-		$("#tab-audio").slideUp();
-		$("#tab-text-position").slideDown();
-		$("#tab-cache-control").slideDown();
-		$("#article-metadata").slideUp();
-		$("#article-image").slideUp();
-		$("#comment-fields").slideUp();
-		$("#custom_data_json").slideDown();
-		$("#tab-target").slideDown();
-	} else if ($("#type_audio").is(":checked")) {
-		$("#tab-list").slideUp();
-		$("#tab-link").slideUp();
-		$("#tab-language-link").slideUp();
-		$("#tab-metadata").slideDown();
-		$("#tab-og").slideDown();
-		$("#content-editor").slideDown();
-		$("#tab-module").slideUp();
-		$("#tab-image").slideUp();
-		$("#tab-video").slideUp();
-		$("#tab-audio").slideDown();
-		$("#tab-cache-control").slideDown();
-		$("#tab-text-position").slideDown();
-		$("#article-metadata").slideUp();
-		$("#article-image").slideUp();
-		$("#comment-fields").slideUp();
-		$("#custom_data_json").slideDown();
-		$("#tab-target").slideDown();
-	} else if ($("#type_image").is(":checked")) {
-		$("#tab-list").slideUp();
-		$("#tab-link").slideUp();
-		$("#tab-language-link").slideUp();
-		$("#tab-metadata").slideDown();
-		$("#tab-og").slideDown();
-		$("#content-editor").slideDown();
-		$("#tab-module").slideUp();
-		$("#tab-video").slideUp();
-		$("#tab-audio").slideUp();
-		$("#tab-image").slideDown();
-		$("#tab-text-position").slideDown();
-		$("#tab-cache-control").slideDown();
-		$("#article-metadata").slideUp();
-		$("#article-image").slideUp();
-		$("#comment-fields").slideUp();
-		$("#custom_data_json").slideDown();
-		$("#tab-target").slideDown();
-	} else {
-		$("#tab-list").slideUp();
-		$("#tab-link").slideUp();
-		$("#tab-language-link").slideUp();
-		$("#tab-metadata").slideDown();
-		$("#tab-og").slideDown();
-		$("#tab-image").slideUp();
-		$("#content-editor").slideDown();
-		$("#tab-module").slideUp();
-		$("#tab-video").slideUp();
-		$("#tab-audio").slideUp();
-		$("#tab-text-position").slideUp();
-		$("#tab-cache-control").slideDown();
-		$("#custom_data_json").slideDown();
-		$("#tab-target").slideDown();
-		$("#comment-fields").slideUp();
-		if ($("#type_article").is(":checked")) {
-			$("#article-metadata").slideDown();
-			$("#article-image").slideDown();
-		} else if ($("#type_comment").is(":checked")) {
-			$("#article-metadata").slideDown();
-			$("#article-image").slideUp();
-			$("#comment-fields").slideDown();
-		} else {
-			$("#article-metadata").slideUp();
-			$("#article-image").slideUp();
-		}
+	var type = $('input[name=type]:checked').val()
+	var typeData = AllTypes[type];
+	var show = typeData["show"];
+	var hide = typeData["hide"];
+	
+	for(i=0; i < show.length; i++){
+		$(show[i]).slideDown();
+	}	
+	for(i=0; i < hide.length; i++){
+		$(hide[i]).slideUp();
 	}
-
-	if ($("#type_snippet").is(":checked")) {
-		$("select[name='hidden']").val("1");
-		$("select[name='menu']").val("none");
-		$("#hidden-attrib").slideUp();
-		$("#tab-menu-image").slideUp();
-		$("#tab-og").slideUp();
-		$("#custom_data_json").slideUp();
-		$(".menu-stuff").slideUp();
-		$("#tab-metadata").slideUp();
-		$("#tab-cache-control").slideUp();
-		$(".hide-on-snippet").slideUp();
-		$(".show-on-snippet").slideDown();
-	} else {
-		$("#hidden-attrib").slideDown();
-		$("#tab-menu-image").slideDown();
-		$(".menu-stuff").slideDown();
-		$(".hide-on-snippet").slideDown();
-		$(".show-on-snippet").slideUp();
-	}
-
+	
 	$(".custom-field-tab").each(function(index, el) {
 		if ($(el).data("type") == $("input[name='type']:checked").val()) {
 			$(el).slideDown();
@@ -213,7 +44,20 @@ function showAndHideFieldsByType() {
 $("input[name=\"type\"]").change(showAndHideFieldsByType);
 $("select[name='menu']").change(showAndHideFieldsByType);
 
-$(document).ready(showAndHideFieldsByType);
+$(document).ready(function(){
+	
+	var data = {
+			ajax_cmd : "getContentTypes"
+		};
+
+		$.post("index.php", data, function(response, status) {
+			AllTypes = response;
+			showAndHideFieldsByType();
+		});
+	
+		}
+);
+		}
 
 function systemname_vorschlagen(txt) {
 	var systemname = txt.toLowerCase();
