@@ -1,11 +1,8 @@
 function showAndHideFieldsByType() {
 	var type = $('input[name=type]:checked').val()
+	$(".typedep").slideUp();
 	var typeData = AllTypes[type];
 	var show = typeData["show"];
-	var hide = typeData["hide"];
-	for (i = 0; i < hide.length; i++) {
-		$(hide[i]).slideUp();
-	}
 
 	for (i = 0; i < show.length; i++) {
 		$(show[i]).slideDown();
