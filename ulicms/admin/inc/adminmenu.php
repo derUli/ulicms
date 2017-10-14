@@ -19,7 +19,7 @@ $entries [] = new MenuEntry ( get_translation ( "groups" ), "?action=groups", "g
 $entries [] = new MenuEntry ( get_translation ( "packages" ), "?action=modules", "modules", "list_packages" );
 
 if (file_exists ( Path::resolve ( "ULICMS_ROOT/update.php" ) )) {
-	$entries [] = new MenuEntry ( get_translation ( "update" ), "?action=system_update", "system_update", "system_update" );
+	$entries [] = new MenuEntry ( get_translation ( "update" ), "?action=system_update", "update_system", "update_system" );
 }
 
 $entries [] = new MenuEntry ( get_translation ( "settings" ), "?action=settings_categories", "settings_categories", array (
