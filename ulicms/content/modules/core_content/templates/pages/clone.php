@@ -403,7 +403,6 @@ function openMenuImageSelectWindow(field) {
 		<?php }?>
 		</div>
 
-	<div class="typedep menu-stuff">
 		<div class="typedep" id="tab-target">
 			<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
@@ -431,7 +430,6 @@ function openMenuImageSelectWindow(field) {
 				</select>
 			</div>
 		</div>
-	</div>
 	<div class="typedep" id="tab-cache-control" style="display: none;">
 		<h2 class="accordion-header"><?php translate("cache_control");?></h2>
 
