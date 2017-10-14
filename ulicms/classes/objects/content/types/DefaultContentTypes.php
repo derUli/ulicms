@@ -19,6 +19,10 @@ class DefaultContentTypes {
 				"#btn-view-page" 
 		
 		);
+		self::$types ["article"] = clone self::$types ["page"];
+		self::$types ["article"]->show [] = "#article-metadata";
+		self::$types ["article"]->show [] = "#article-image";
+		
 		self::$types = apply_filter ( self::$types, "content_types" );
 	}
 	public static function getAll() {
