@@ -23,6 +23,40 @@ class DefaultContentTypes {
 		self::$types ["article"]->show [] = "#article-metadata";
 		self::$types ["article"]->show [] = "#article-image";
 		
+		self::$types ["snippet"] = new ContentType ();
+		self::$types ["snippet"]->show = array (
+				".show-on-snippet",
+				"#content-editor" 
+		);
+		
+		self::$types ["list"] = clone self::$types ["page"];
+		self::$types ["list"]->show [] = ".list-show";
+		self::$types ["list"]->show [] = "#tab-text-position";
+		
+		self::$types ["link"] = new ContentType ();
+		self::$types ["link"]->show [] = "#tab-link";
+		self::$types ["link"]->show [] = "#tab-target";
+		self::$types ["link"]->show [] = ".menu-stuff";
+		self::$types ["link"]->show [] = "#hidden-attrib";
+		
+		self::$types ["link"]->show [] = "#tab-menu-image";
+		
+		self::$types ["audio"] = clone self::$types ["page"];
+		self::$types ["audio"]->show [] = "#tab-audio";
+		self::$types ["audio"]->show [] = "#tab-text-position";
+		
+		self::$types ["video"] = clone self::$types ["page"];
+		self::$types ["video"]->show [] = "#tab-video";
+		self::$types ["video"]->show [] = "#tab-text-position";
+		
+		self::$types ["module"] = clone self::$types ["page"];
+		self::$types ["module"]->show [] = "#tab-module";
+		self::$types ["module"]->show [] = "#tab-text-position";
+		
+		self::$types ["image"] = clone self::$types ["page"];
+		self::$types ["image"]->show [] = "#tab-image";
+		self::$types ["image"]->show [] = "#tab-text-position";
+		
 		self::$types = apply_filter ( self::$types, "content_types" );
 	}
 	public static function getAll() {
