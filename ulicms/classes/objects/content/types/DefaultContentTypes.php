@@ -31,6 +31,7 @@ class DefaultContentTypes {
 		
 		self::$types ["list"] = clone self::$types ["page"];
 		self::$types ["list"]->show [] = ".list-show";
+		self::$types ["list"]->show [] = "#tab-list";
 		self::$types ["list"]->show [] = "#tab-text-position";
 		
 		self::$types ["link"] = new ContentType ();
@@ -38,7 +39,6 @@ class DefaultContentTypes {
 		self::$types ["link"]->show [] = "#tab-target";
 		self::$types ["link"]->show [] = ".menu-stuff";
 		self::$types ["link"]->show [] = "#hidden-attrib";
-		
 		
 		self::$types ["language_link"] = new ContentType ();
 		self::$types ["language_link"]->show [] = "#tab-language-link";
