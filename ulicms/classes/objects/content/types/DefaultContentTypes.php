@@ -39,6 +39,7 @@ class DefaultContentTypes {
 		self::$types ["link"]->show [] = "#tab-target";
 		self::$types ["link"]->show [] = ".menu-stuff";
 		self::$types ["link"]->show [] = "#hidden-attrib";
+		self::$types ["link"]->show [] = "#tab-menu-image";
 		
 		self::$types ["language_link"] = new ContentType ();
 		self::$types ["language_link"]->show [] = "#tab-language-link";
@@ -50,8 +51,6 @@ class DefaultContentTypes {
 		self::$types ["node"] = new ContentType ();
 		self::$types ["node"]->show [] = ".menu-stuff";
 		self::$types ["node"]->show [] = "#hidden-attrib";
-		
-		self::$types ["link"]->show [] = "#tab-menu-image";
 		
 		self::$types ["image"] = clone self::$types ["page"];
 		self::$types ["image"]->show [] = "#tab-image";
@@ -68,8 +67,9 @@ class DefaultContentTypes {
 		self::$types ["audio"] = clone self::$types ["page"];
 		self::$types ["audio"]->show [] = "#tab-audio";
 		self::$types ["audio"]->show [] = "#tab-text-position";
-		
-		self::$types = apply_filter ( self::$types, "content_types" );
+		if (function_exists ( "apply_filter" )) {
+			self::$types = apply_filter ( self::$types, "content_types" );
+		}
 	}
 	public static function getAll() {
 		return self::$types;
