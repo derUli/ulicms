@@ -1,8 +1,0 @@
-{
-	"source": "extend",
-	"version": "1.0",
-	"embed": false,
-	"objects": {
-		"CheckSyntax": "CheckSyntax.php"
-	}
-}
