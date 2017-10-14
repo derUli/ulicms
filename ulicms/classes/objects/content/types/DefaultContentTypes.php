@@ -39,23 +39,35 @@ class DefaultContentTypes {
 		self::$types ["link"]->show [] = ".menu-stuff";
 		self::$types ["link"]->show [] = "#hidden-attrib";
 		
+		
+		self::$types ["language_link"] = new ContentType ();
+		self::$types ["language_link"]->show [] = "#tab-language-link";
+		self::$types ["language_link"]->show [] = "#tab-target";
+		self::$types ["language_link"]->show [] = ".menu-stuff";
+		self::$types ["language_link"]->show [] = "#hidden-attrib";
+		self::$types ["language_link"]->show [] = "#tab-menu-image";
+		
+		self::$types ["node"] = new ContentType ();
+		self::$types ["node"]->show [] = ".menu-stuff";
+		self::$types ["node"]->show [] = "#hidden-attrib";
+		
 		self::$types ["link"]->show [] = "#tab-menu-image";
 		
-		self::$types ["audio"] = clone self::$types ["page"];
-		self::$types ["audio"]->show [] = "#tab-audio";
-		self::$types ["audio"]->show [] = "#tab-text-position";
-		
-		self::$types ["video"] = clone self::$types ["page"];
-		self::$types ["video"]->show [] = "#tab-video";
-		self::$types ["video"]->show [] = "#tab-text-position";
+		self::$types ["image"] = clone self::$types ["page"];
+		self::$types ["image"]->show [] = "#tab-image";
+		self::$types ["image"]->show [] = "#tab-text-position";
 		
 		self::$types ["module"] = clone self::$types ["page"];
 		self::$types ["module"]->show [] = "#tab-module";
 		self::$types ["module"]->show [] = "#tab-text-position";
 		
-		self::$types ["image"] = clone self::$types ["page"];
-		self::$types ["image"]->show [] = "#tab-image";
-		self::$types ["image"]->show [] = "#tab-text-position";
+		self::$types ["video"] = clone self::$types ["page"];
+		self::$types ["video"]->show [] = "#tab-video";
+		self::$types ["video"]->show [] = "#tab-text-position";
+		
+		self::$types ["audio"] = clone self::$types ["page"];
+		self::$types ["audio"]->show [] = "#tab-audio";
+		self::$types ["audio"]->show [] = "#tab-text-position";
 		
 		self::$types = apply_filter ( self::$types, "content_types" );
 	}
