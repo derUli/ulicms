@@ -611,7 +611,7 @@ function openMenuImageSelectWindow(field) {
 	</div>
 
 
-	<div class="typedep" id="tab-list" class="list-show">
+	<div class="typedep list-show" id="tab-list">
 		<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
 		<div class="accordion-content">
