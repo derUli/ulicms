@@ -89,7 +89,7 @@ if (defined ( "_SECURITY" )) {
 			$pages = getAllPages ( $page_language, "title", false );
 			?>
 	</select> <br /> <br />
-		<div class="menu-stuff">
+		<div class="typedep menu-stuff">
 			<strong><?php translate("menu");?> </strong> <span
 				style="cursor: help;" onclick="$('div#menu_help').slideToggle()">[?]</span><br />
 			<select name="menu" size=1>
@@ -135,7 +135,7 @@ if (defined ( "_SECURITY" )) {
 	</div>
 
 			<br /> <br />
-			<div id="parent-div">
+			<div class="typedep" id="parent-div">
 				<strong><?php translate("parent");?> </strong><br /> <select
 					name="parent" size=1>
 					<option value="NULL">
@@ -185,7 +185,7 @@ if (defined ( "_SECURITY" )) {
 				</option>
 		</select> <br /> <br />
 
-		<div id="hidden-attrib">
+		<div class="typedep" id="hidden-attrib">
 			<strong><?php translate("hidden");?>
 	</strong><br /> <select name="hidden" size="1"><option value="1"
 					<?php if($row->hidden == 1) echo "selected";?>>
@@ -201,7 +201,7 @@ if (defined ( "_SECURITY" )) {
 			echo Categories::getHTMLSelect ( $row->category );
 			?>
 		</div>
-	<div id="tab-link">
+	<div class="typedep" id="tab-link">
 		<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
 
 		<div class="accordion-content">
@@ -213,7 +213,7 @@ if (defined ( "_SECURITY" )) {
 			?>">
 		</div>
 	</div>
-	<div id="tab-language-link" style="display: none;">
+	<div class="typedep" id="tab-language-link" style="display: none;">
 		<h2 class="accordion-header"><?php translate("language_link");?></h2>
 
 		<div class="accordion-content">
@@ -232,7 +232,7 @@ if (defined ( "_SECURITY" )) {
 </select>
 		</div>
 	</div>
-	<div id="tab-menu-image">
+	<div class="typedep" id="tab-menu-image">
 		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
 
 		<div class="accordion-content">
@@ -335,7 +335,7 @@ function openMenuImageSelectWindow(field) {
 		</select>
 	</div>
 
-	<div id="tab-metadata" style="display: none">
+	<div class="typedep" id="tab-metadata" style="display: none">
 		<h2 class="accordion-header"><?php translate("metadata");?></h2>
 
 		<div class="accordion-content">
@@ -350,7 +350,7 @@ function openMenuImageSelectWindow(field) {
 			echo htmlspecialchars ( $row->meta_keywords );
 			?>"
 				maxlength="200">
-			<div id="article-metadata">
+			<div class="typedep" id="article-metadata">
 				<br /> <strong><?php translate("author_name");?></strong><br /> <input
 					type="text" name="article_author_name"
 					value="<?php echo real_htmlspecialchars($row->article_author_name);?>"
@@ -373,14 +373,12 @@ function openMenuImageSelectWindow(field) {
 				echo date ( "Y-m-d\TH:i:s", strtotime ( $row->article_date ) );
 			}
 			?>"
-					step=any> <br /> <br /> <strong><?php translate("excerpt");?></strong>
+					step="any"> <br /> <br /> <strong><?php translate("excerpt");?></strong>
 				<textarea name="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt);?></textarea>
 			</div>
 		</div>
 	</div>
-
-
-	<div id="custom_fields_container">
+	<div class="typedep" id="custom_fields_container">
 		<?php
 			foreach ( $types as $type ) {
 				$fields = getFieldsForCustomType ( $type );
@@ -402,40 +400,37 @@ function openMenuImageSelectWindow(field) {
 		</div>
 		</div>
 		<?php }?>
-		
 		<?php }?>
 		</div>
 
-	<div class="menu-stuff">
-		<div id="tab-target">
-			<h2 class="accordion-header"><?php translate("open_in");?></h2>
+	<div class="typedep" id="tab-target">
+		<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
-			<div class="accordion-content">
-				<strong><?php translate("open_in");?></strong><br /> <select
-					name="target" size=1>
-					<option
-						<?php
+		<div class="accordion-content">
+			<strong><?php translate("open_in");?></strong><br /> <select
+				name="target" size=1>
+				<option
+					<?php
 			
 			if ($row->target == "_self") {
 				echo 'selected="selected" ';
 			}
 			?>
-						value="_self">
+					value="_self">
 				<?php translate("target_self");?></option>
-					<option
-						<?php
+				<option
+					<?php
 			
 			if ($row->target == "_blank") {
 				echo 'selected="selected" ';
 			}
 			?>
-						value="_blank">
+					value="_blank">
 				<?php translate("target_blank");?></option>
-				</select>
-			</div>
+			</select>
 		</div>
 	</div>
-	<div id="tab-cache-control" style="display: none;">
+	<div class="typedep" id="tab-cache-control" style="display: none;">
 		<h2 class="accordion-header"><?php translate("cache_control");?></h2>
 
 		<div class="accordion-content">
@@ -448,7 +443,7 @@ function openMenuImageSelectWindow(field) {
 		</div>
 	</div>
 
-	<div id="tab-og" style="display: none">
+	<div class="typedep" id="tab-og" style="display: none">
 		<h2 class="accordion-header"><?php translate("open_graph");?></h2>
 
 		<div class="accordion-content">
@@ -505,7 +500,7 @@ function openMenuImageSelectWindow(field) {
 				</div>
 		</div>
 	</div>
-	<div id="tab-list" class="list-show">
+	<div class="typedep" id="tab-list" class="list-show">
 		<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
 		<div class="accordion-content">
@@ -650,10 +645,7 @@ function openMenuImageSelectWindow(field) {
 			</select>
 		</div>
 	</div>
-
-
-
-	<div id="tab-module" style="display: none;">
+	<div class="typedep" id="tab-module" style="display: none;">
 		<h2 class="accordion-header"><?php translate("module");?></h2>
 
 		<div class="accordion-content">
@@ -670,7 +662,7 @@ function openMenuImageSelectWindow(field) {
 
 	</div>
 
-	<div id="tab-video" style="display: none;">
+	<div class="typedep" id="tab-video" style="display: none;">
 		<h2 class="accordion-header"><?php translate("video");?></h2>
 
 		<div class="accordion-content">
@@ -686,7 +678,7 @@ function openMenuImageSelectWindow(field) {
 		</div>
 	</div>
 
-	<div id="tab-audio" style="display: none;">
+	<div class="typedep" id="tab-audio" style="display: none;">
 		<h2 class="accordion-header"><?php translate("audio");?></h2>
 
 		<div class="accordion-content">
@@ -702,7 +694,7 @@ function openMenuImageSelectWindow(field) {
 		</div>
 
 	</div>
-	<div id="tab-image" style="display: none;">
+	<div class="typedep" id="tab-image" style="display: none;">
 		<h2 class="accordion-header"><?php translate("image");?></h2>
 
 		<div class="accordion-content">
@@ -717,7 +709,7 @@ function openMenuImageSelectWindow(field) {
 		</a>
 		</div>
 	</div>
-	<div id="tab-text-position" style="display: none">
+	<div class="typedep" id="tab-text-position" style="display: none">
 		<h2 class="accordion-header"><?php translate("position_of_description");?></h2>
 		<div class="accordion-content">
 			<strong><?php translate("position_of_description");?>
@@ -731,7 +723,7 @@ function openMenuImageSelectWindow(field) {
 		</div>
 	</div>
 
-	<div id="article-image">
+	<div class="typedep" id="article-image">
 		<h2 class="accordion-header"><?php translate("article_image");?></h2>
 
 		<div class="accordion-content">
@@ -760,7 +752,7 @@ function openArticleImageSelectWindow(field) {
 		</div>
 	</div>
 
-	<div id="custom_data_json"><?php add_hook("before_custom_data_json");?>
+	<div class="typedep" id="custom_data_json"><?php add_hook("before_custom_data_json");?>
 		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
 		<div class="accordion-content">
 
@@ -776,12 +768,9 @@ function openArticleImageSelectWindow(field) {
 <br />
 <br />
 <?php
-			
 			add_hook ( "page_option" );
 			?>
-
-
-<div id="content-editor">
+<div class="typedep" id="content-editor">
 	<textarea name="page_content" id="page_content" cols=60 rows=20><?php
 			
 			echo htmlspecialchars ( $row->content );

@@ -1146,3 +1146,6 @@ function check_status() {
 	no_cache ();
 	return "403 Forbidden";
 }
+
+// load default content types;
+DefaultContentTypes::initTypes ();

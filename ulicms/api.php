@@ -1,51 +1,38 @@
 <?php
-function json_readable_encode($in, $indent = 0, $from_array = false)
-{
+function json_readable_encode($in, $indent = 0, $from_array = false) {
 	$_myself = __FUNCTION__;
-	$_escape = function ($str)
-	{
-		return preg_replace("!([\b\t\n\r\f\"\\'])!", "\\\\\\1", $str);
+	$_escape = function ($str) {
+		return preg_replace ( "!([\b\t\n\r\f\"\\'])!", "\\\\\\1", $str );
 	};
 	
 	$out = '';
 	
-	foreach ($in as $key=>$value)
-	{
-		$out .= str_repeat("\t", $indent + 1);
-		$out .= "\"".$_escape((string)$key)."\": ";
+	foreach ( $in as $key => $value ) {
+		$out .= str_repeat ( "\t", $indent + 1 );
+		$out .= "\"" . $_escape ( ( string ) $key ) . "\": ";
 		
-		if (is_object($value) || is_array($value))
-		{
+		if (is_object ( $value ) || is_array ( $value )) {
 			$out .= "\n";
-			$out .= $_myself($value, $indent + 1);
-		}
-		elseif (is_bool($value))
-		{
+			$out .= $_myself ( $value, $indent + 1 );
+		} elseif (is_bool ( $value )) {
 			$out .= $value ? 'true' : 'false';
-		}
-		elseif (is_null($value))
-		{
+		} elseif (is_null ( $value )) {
 			$out .= 'null';
-		}
-		elseif (is_string($value))
-		{
-			$out .= "\"" . $_escape($value) ."\"";
-		}
-		else
-		{
+		} elseif (is_string ( $value )) {
+			$out .= "\"" . $_escape ( $value ) . "\"";
+		} else {
 			$out .= $value;
 		}
 		
 		$out .= ",\n";
 	}
 	
-	if (!empty($out))
-	{
-		$out = substr($out, 0, -2);
+	if (! empty ( $out )) {
+		$out = substr ( $out, 0, - 2 );
 	}
 	
-	$out = str_repeat("\t", $indent) . "{\n" . $out;
-	$out .= "\n" . str_repeat("\t", $indent) . "}";
+	$out = str_repeat ( "\t", $indent ) . "{\n" . $out;
+	$out .= "\n" . str_repeat ( "\t", $indent ) . "}";
 	
 	return $out;
 }
@@ -371,53 +358,9 @@ function get_used_post_types() {
 	return $return_types;
 }
 function get_available_post_types() {
-	$post_types = array (
-			"page",
-			"article",
-			// "comment",
-			"snippet",
-			"list",
-			"link",
-			"language_link",
-			"node",
-			"image",
-			"module",
-			"video",
-			"audio" 
-	);
-	$modules = getAllModules ();
-	$disabledModules = Vars::get ( "disabledModules" );
-	foreach ( $modules as $module ) {
-		if (faster_in_array ( $module, $disabledModules )) {
-			continue;
-		}
-		$custom_types = getModuleMeta ( $module, "custom_types" );
-		if ($custom_types) {
-			foreach ( $custom_types as $key => $value ) {
-				if (! faster_in_array ( $key, $post_types )) {
-					$post_types [] = $key;
-				}
-			}
-		}
-	}
-	
-	$themes = getAllModules ();
-	foreach ( $themes as $theme ) {
-		if (faster_in_array ( $module, $disabledModules )) {
-			continue;
-		}
-		$custom_types = getThemeMeta ( $theme, "custom_types" );
-		if ($custom_types) {
-			foreach ( $custom_types as $key => $value ) {
-				if (! faster_in_array ( $key, $post_types )) {
-					$post_types [] = $key;
-				}
-			}
-		}
-	}
-	
-	$post_types = apply_filter ( $post_types, "custom_post_types" );
-	return $post_types;
+	$types = DefaultContentTypes::getAll ();
+	$types = array_keys ( $types );
+	return $types;
 }
 
 // Schriftgrößen zurückgeben
