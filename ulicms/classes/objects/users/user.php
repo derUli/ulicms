@@ -174,7 +174,9 @@ class User {
 		return $this->password_changed;
 	}
 	public function resetPassword() {
-		throw new NotImplementedException ();
+		$passwordReset = new PasswordReset ();
+		$token = $passwordReset->addToken ( $this->getId () );
+		$passwordReset->sendMail ( $token, $this->getEmail (), "xxx.xxx.xxx.xxx", $this->getFirstname (), $this->getLastname () );
 	}
 	public function getOldEncryption() {
 		return $this->old_encryption;

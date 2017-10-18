@@ -4,6 +4,7 @@
 + Der Confirm-Dialog "Wirklich löschen?" kann über eine CSS-Klasse an einem Formular ausgelöst werden.
 + Durch das booleanische "shy" Attribut in einer Metadatendatei können Module und Themes im Paketmanager versteckt werden.
 + Es können nun Standardwerte für benutzerdefinierte Werte gesetzt werden
++ User->resetPassword() implementiert
 + Neue Funktionen:
   * esc()
   * _esc()
@@ -48,6 +49,7 @@ Bugfixes:
 * Die Gruppe "Administratoren" wird bei der Installation wieder erstellt
 * Auf einigen Systemen wurde beim Klick auf das Icon "Cache leeren" die Ladeanimation nicht angezeigt
 * Der Menüpunkt "Update" wurde nicht angezeigt, wenn der Benutzer zwar zu update_system berechtigt ist, aber "Ist Admin" nicht gesetzt ist.
+* Bei einigen Mailservern funktionierte der Versand von "Passwort zurücksetzen" E-Mails nicht.
 
 ===== Neues in UliCMS 2017.4 =====
 

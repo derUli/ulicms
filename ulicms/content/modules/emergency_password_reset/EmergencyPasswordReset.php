@@ -13,7 +13,7 @@ class EmergencyPasswordReset extends Controller {
 		foreach ( $users as $user ) {
 			$user->setPassword ( md5 ( uniqid () ) );
 			$user->save ();
-			// User->resetPassword isn't implemented yet (UliCMS 2018.1)
+			// User->resetPassword isn't implemented yet (UliCMS 2017.4)
 			try {
 				$user->resetPassword ();
 				$user->save ();
