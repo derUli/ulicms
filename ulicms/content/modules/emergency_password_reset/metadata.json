@@ -1,0 +1,16 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": false,
+	"controllers": {
+		"EmergencyPasswordReset": "EmergencyPasswordReset.php"
+	},
+	"main_class": "EmergencyPasswordReset",
+	"actions": {
+		"emergency_password_reset_success": "templates/emergency_password_reset.php"
+	},
+	"custom_acl": [
+		"emergency_password_reset"
+	],
+	"admin_permission": "emergency_password_reset"
+}
