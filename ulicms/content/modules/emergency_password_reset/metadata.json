@@ -12,5 +12,8 @@
 	"custom_acl": [
 		"emergency_password_reset"
 	],
-	"admin_permission": "emergency_password_reset"
+	"admin_permission": "emergency_password_reset",
+	"controller_function_permissions": {
+		"EmergencyPasswordReset::resetAllPasswords": "emergency_password_reset"
+	}
 }
