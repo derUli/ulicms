@@ -18,7 +18,7 @@ if (isset ( $_REQUEST ["reset_password_token"] )) {
 		register_session ( getUserById ( $user_id ) );
 		$token = $reset->deleteToken ( $_REQUEST ["reset_password_token"] );
 	} else {
-		// @FIXME Fehler anzeigen "Token ungültig"
+		TextResult(get_translation("invalid_token"), 404);
 	}
 }
 
@@ -35,7 +35,6 @@ if (isset ( $_POST ["login"] )) {
 	$twofactor_authentication = Settings::get ( "twofactor_authentication" );
 	
 	if ($twofactor_authentication) {
-		// @TODO: Confirmation Code nur Prüfen, wenn 2-Faktor Authentifizerung aktiviert ist
 		$confirmation_code = $_POST ["confirmation_code"];
 	}
 	
@@ -56,4 +55,3 @@ if (isset ( $_POST ["login"] )) {
 	}
 }
 
-?>

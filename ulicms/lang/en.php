@@ -719,4 +719,6 @@ define ( "TRANSLATION_JSREDIRECT_NOSCRIPT", "If you are not automatically redire
 define ( "TRANSLATION_SHOW_CORE_MODULES", "Show Core Modules" );
 define ( "TRANSLATION_COUNT", "Count" );
 
+define ( "TRANSLATION_INVALID_TOKEN", "Invalid Token" );
+
 add_hook ( "lang_en" );
