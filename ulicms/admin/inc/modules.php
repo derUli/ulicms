@@ -146,7 +146,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 					
 					echo "<input type='text' value='[module=\"" . $modules [$i] . "\"]' readonly='readonly' " . $disabled . " onclick='this.focus(); this.select()'>";
 				} else {
-					echo "Kein Embed Modul";
+					translate("NOT_AN_EMBED_MODULE");
 				}
 				echo "<br/><br/>";
 				echo "</li>";

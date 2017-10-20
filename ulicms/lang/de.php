@@ -717,5 +717,6 @@ define ( "TRANSLATION_SHOW_CORE_MODULES", "Core-Module anzeigen" );
 define ( "TRANSLATION_COUNT", "Anzahl" );
 
 define ( "TRANSLATION_INVALID_TOKEN", "Ungültiger Token" );
+define ( "TRANSLATION_NOT_AN_EMBED_MODULE", "Kein Embed Modul" );
 
 add_hook ( "lang_de" );
