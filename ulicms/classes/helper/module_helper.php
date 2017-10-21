@@ -162,8 +162,8 @@ class ModuleHelper {
 	}
 	public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class"=>"btn btn-default", "type"=>"submit"), $otherVars = array(), $formAttributes = array(), $requestMethod = "post") {
 		$html = self::buildMethodCallForm ( $sClass, $sMethod, $otherVars, $requestMethod, $formAttributes );
-		$html .= '<button ' . self::buildHTMLAttributesFromArray ( $buttonAttributes );
-		$html .= ">" . get_translation ( $buttonText ) . "</button>";
+		$html .= '<button ' . self::buildHTMLAttributesFromArray ( $buttonAttributes ) . ">";
+		$html .= $buttonText . "</button>";
 		$html .= "</form>";
 		return $html;
 	}
