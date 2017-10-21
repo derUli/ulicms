@@ -1,7 +1,8 @@
 <?php
-// @FIXME: Das hier in core_history auslagern.
+// @FIXME: Diese beiden Includes nach core_history verschieben.
 include_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
 include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
+
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "pages" )) {
@@ -22,7 +23,6 @@ if (defined ( "_SECURITY" )) {
 		</thead>
 		<tbody>
 <?php
-		
 		foreach ( $revisions as $revision ) {
 			$view_diff_link = "index.php?action=view_diff&content_id=" . $revision->content_id . "&history_id=" . $revision->id;
 			?>
