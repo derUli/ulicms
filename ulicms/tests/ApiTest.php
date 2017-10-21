@@ -16,7 +16,7 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 	}
 	public function testGetAllUsedLanguages() {
 		$languages = getAllUsedLanguages ();
-		$this->assertEquals ( 2, count ( $languages ) );
+		$this->assertGreaterThanOrEqual( 2, count ( $languages ) );
 		$this->assertTrue ( in_array ( "de", $languages ) );
 		$this->assertTrue ( in_array ( "en", $languages ) );
 	}
