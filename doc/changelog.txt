@@ -43,6 +43,7 @@
 # wenn möglich wird bei PHP Fehlern der HTTP Status "500 Internal Server Error" gesendet.
 # Funktion is_ajax_request() verschoben nach Request::isAjaxRequest()
 # Die Logik, welche Felder abhängig vom ausgewählten Inhaltstyp ein- und ausblendet wurde neu implementiert
+# Benutzer bei denen "Ist Admin" gesetzt ist, dürfen nun alle Seiten bearbeiten, unabhängig von den gesetzten Berechtigungen
 - Funktion ulicms_redirect() entfernt.
   Nutzen Sie stattdessen Request::redirect()
 
@@ -53,6 +54,7 @@ Bugfixes:
 * Bei einigen Mailservern funktionierte der Versand von "Passwort zurücksetzen" E-Mails nicht.
 * Ein Problem, bei dem die Datenbanktabelle password_reset bei der Installation und bei einem Update nicht erstellt wurde, wurde behoben.
 * Model-Klasse "Banner" speichert nun korrekt
+
 
 ===== Neues in UliCMS 2017.4 =====
 

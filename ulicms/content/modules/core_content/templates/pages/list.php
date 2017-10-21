@@ -187,7 +187,7 @@ $(window).load(function(){
 	$menus = getAllMenus ( true );
 	
 	array_unshift ( $menus, "null" );
-	// @FIXME: Das SQL hier in einen Controller auslagern
+	// FIXME: Das SQL hier in einen Controller auslagern
 	$sql = "select a.id as id, a.title as title from " . tbname ( "content" ) . " a inner join " . tbname ( "content" ) . " b on a.id = b.parent ";
 	
 	if (faster_in_array ( $_SESSION ["filter_language"], getAllLanguages ( true ) )) {
@@ -563,6 +563,11 @@ $(window).load(function(){
 				} else if ($is_owner and $pages_edit_own) {
 					$can_edit_this = true;
 				}
+			}
+			
+			// admins are gods
+			if(is_admin()){
+				$can_edit_this = true;
 			}
 			
 			if (! $can_edit_this) {
