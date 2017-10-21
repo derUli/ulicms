@@ -14,8 +14,7 @@
   * ModuleHelper::buildMethodCallUploadForm()
   * ModuleHelper::buildRessourcePath()
   * CustomData::setDefault()
-  * CustomData::getDefault()
-  * CustomData::getDefaultAsJSON()
+  * Custom  * CustomData::getDefaultAsJSON()
   * Banners::getByCategory()
   * str_contains()
   * register_translation()
@@ -52,6 +51,7 @@ Bugfixes:
 * Der Menüpunkt "Update" wurde nicht angezeigt, wenn der Benutzer zwar zu update_system berechtigt ist, aber "Ist Admin" nicht gesetzt ist.
 * Bei einigen Mailservern funktionierte der Versand von "Passwort zurücksetzen" E-Mails nicht.
 * Ein Problem, bei dem die Datenbanktabelle password_reset bei der Installation und bei einem Update nicht erstellt wurde, wurde behoben.
+* Model-Klasse "Banner" speichert nun korrekt
 
 ===== Neues in UliCMS 2017.4 =====
 
