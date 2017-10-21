@@ -3,12 +3,11 @@
 include_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
 include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
 
-if (defined ( "_SECURITY" )) {
-	$acl = new ACL ();
-	if ($acl->hasPermission ( "pages" )) {
-		$content_id = intval ( $_GET ["content_id"] );
-		$revisions = VCS::getRevisionsByContentID ( $content_id );
-		?>
+$acl = new ACL ();
+if ($acl->hasPermission ( "pages" )) {
+	$content_id = intval ( $_GET ["content_id"] );
+	$revisions = VCS::getRevisionsByContentID ( $content_id );
+	?>
 <h1><?php translate("versions");?></h1>
 <div class="scroll">
 	<table class="tablesorter">
@@ -23,19 +22,19 @@ if (defined ( "_SECURITY" )) {
 		</thead>
 		<tbody>
 <?php
-		foreach ( $revisions as $revision ) {
-			$view_diff_link = "index.php?action=view_diff&content_id=" . $revision->content_id . "&history_id=" . $revision->id;
-			?>
+	foreach ( $revisions as $revision ) {
+		$view_diff_link = "index.php?action=view_diff&content_id=" . $revision->content_id . "&history_id=" . $revision->id;
+		?>
 <tr>
 				<td><?php echo intval($revision->id);?></td>
 				<td><a href="<?php echo $view_diff_link;?>" target="_blank"><?php translate("view_diff");?></a></td>
 				<td><?php
-			
-			$user = getUserById ( $revision->user_id );
-			if ($user and isset ( $user ["username"] )) {
-				echo htmlspecialchars ( $user ["username"] );
-			}
-			?></td>
+		
+		$user = getUserById ( $revision->user_id );
+		if ($user and isset ( $user ["username"] )) {
+			echo htmlspecialchars ( $user ["username"] );
+		}
+		?></td>
 				<td><?php echo $revision->date;?></td>
 				<td><a
 					href="<?php echo ModuleHelper::buildMethodCallUrl("HistoryController", "doRestore", "version_id=".$revision->id);?>"
@@ -48,8 +47,8 @@ if (defined ( "_SECURITY" )) {
 	</table>
 </div>
 <?php
-	} else {
-		noperms ();
-	}
+} else {
+	noperms ();
 }
+
 ?>
