@@ -1,16 +1,17 @@
 <?php
 $acl = new ACL ();
 if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )) {
-	$banner = db_escape ( $_GET ["banner"] );
-	$query = db_query ( "SELECT * FROM " . tbname ( "banner" ) . " WHERE id='$banner'" );
-	while ( $row = db_fetch_object ( $query ) ) {
+	$banner = intval ( $_GET ["banner"] );
+	$row = new Banner ();
+	$row->loadByID ( $banner );
+	if ($row->id) {
 		?>
 
 <?php echo ModuleHelper::buildMethodCallForm("BannerController", "update");?>
 <h4><?php translate("preview");?></h4>
 <?php
 		
-		if ($row->type == "gif") {
+		if ($row->getType () == "gif") {
 			?>
 <p>
 	<a href="<?php
@@ -42,7 +43,7 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 <p>
 	<input type="radio"
 		<?php
-		if ($row->type == "gif") {
+		if ($row->getType () == "gif") {
 			echo 'checked="checked"';
 		}
 		?>
@@ -52,7 +53,7 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 </p>
 <fieldset id="type_gif" style="<?php
 		
-		if ($row->type != "gif") {
+		if ($row->getType() != "gif") {
 			echo "display:none";
 		}
 		?>">
@@ -76,7 +77,7 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 <br />
 <input type="radio"
 	<?php
-		if ($row->type == "html") {
+		if ($row->getType () == "html") {
 			echo 'checked="checked"';
 		}
 		?>
@@ -84,7 +85,7 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 	onclick="$('#type_html').slideDown();$('#type_gif').slideUp();">
 <label for="radio_html">HTML</label>
 <fieldset id="type_html" style="<?php
-		if ($row->type != "html") {
+		if ($row->getType() != "html") {
 			echo "display:none";
 		}
 		?>">
@@ -129,7 +130,6 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 <button type="submit" class="btn btn-success"><?php translate("save_changes");?></button>
 </form>
 <?php
-		break;
 	}
 	?>
 		<?php
