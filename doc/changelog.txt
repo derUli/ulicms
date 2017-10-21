@@ -16,6 +16,7 @@
   * CustomData::setDefault()
   * CustomData::getDefault()
   * CustomData::getDefaultAsJSON()
+  * Banners::getByCategory()
   * str_contains()
   * register_translation()
   * add_translation()
