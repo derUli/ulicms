@@ -479,6 +479,28 @@ function getDomainByLanguage($language) {
 	}
 	return null;
 }
+function getLanguageByDomain($domain) {
+	$domainMapping = Settings::get ( "domain_to_language" );
+	if (! empty ( $domainMapping )) {
+		$domainMapping = explode ( "\n", $domainMapping );
+		for($i = 0; $i < count ( $domainMapping ); $i ++) {
+			$line = trim ( $domainMapping [$i] );
+			if (! empty ( $line )) {
+				$line = explode ( "=>", $line );
+				if (count ( $line ) > 1) {
+					$line [0] = trim ( $line [0] );
+					$line [1] = trim ( $line [1] );
+					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
+						if ($line [0] == $domain) {
+							return $line [1];
+						}
+					}
+				}
+			}
+		}
+	}
+	return null;
+}
 function setLanguageByDomain() {
 	$domainMapping = Settings::get ( "domain_to_language" );
 	if (! empty ( $domainMapping )) {
@@ -861,7 +883,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	} // Backend Directory
+	}  // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
