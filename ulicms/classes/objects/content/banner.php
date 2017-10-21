@@ -7,7 +7,7 @@ class Banner {
 	public $category = 1;
 	private $type = "gif";
 	public $html = "";
-	public $language = "";
+	public $language = null;
 	public function __construct($id = null){
 		if($id){
 			$this->loadByID($id);
@@ -101,7 +101,7 @@ class Banner {
 		} else {
 			$sql .= "'" . DB::escapeValue ( $this->html ) . "',";
 		}
-		if ($this->langage === null) {
+		if ($this->language === null) {
 			$sql .= "NULL ";
 		} else {
 			$sql .= "'" . DB::escapeValue ( $this->language ) . "'";
@@ -110,9 +110,8 @@ class Banner {
 		$sql .= ")";
 		
 		$result = DB::query ( $sql );
-		if ($result) {
-			$this->id = DB::getLastInsertID ();
-		}
+		$this->id = DB::getLastInsertID ();
+		
 		return $result;
 	}
 	public function update() {
