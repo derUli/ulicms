@@ -1,4 +1,5 @@
 <?php
+// TODO: Diese Funktionalität in ein Modul verschieben
 class SpellChecker {
 	/**
 	 * Häufige Rechtschreibfehler korrigieren

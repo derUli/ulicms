@@ -127,7 +127,7 @@ class ModuleHelper {
 	/**
 	 * Convert underscore_strings to camelCase.
 	 *
-	 * @param {string} $str
+	 * @param {string} $str        	
 	 */
 	public static function underscoreToCamel($str) {
 		// Remove underscores, capitalize words, squash, lowercase first.
@@ -158,6 +158,13 @@ class ModuleHelper {
 		foreach ( $args as $key => $value ) {
 			$html .= '<input type="hidden" name="' . Template::getEscape ( $key ) . '" value="' . Template::getEscape ( $value ) . '">';
 		}
+		return $html;
+	}
+	public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class"=>"btn btn-default", "type"=>"submit"), $otherVars = array(), $formAttributes = array(), $requestMethod = "post") {
+		$html = self::buildMethodCallForm ( $sClass, $sMethod, $otherVars, $requestMethod, $formAttributes );
+		$html .= '<button ' . self::buildHTMLAttributesFromArray ( $buttonAttributes ) . ">";
+		$html .= $buttonText . "</button>";
+		$html .= "</form>";
 		return $html;
 	}
 	public static function deleteButton($url, $otherVars = array(), $htmlAttributes = array()) {

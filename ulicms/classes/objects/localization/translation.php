@@ -1,5 +1,5 @@
 <?php
-// This class is currently a work in progress
+// This class is a work in progress
 // It's currently only used for overriding of translation
 class Translation {
 	private static $translations = null;
