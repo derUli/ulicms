@@ -5,7 +5,7 @@
 + Durch das booleanische "shy" Attribut in einer Metadatendatei können Module und Themes im Paketmanager versteckt werden.
 + Es können nun Standardwerte für benutzerdefinierte Werte gesetzt werden
 + User->resetPassword() implementiert
-+ Neue Direktive action_permissions in den Metadaten eiens Moduls wird nun ausgewertet
++ Neue Direktive action_permissions in den Metadaten eines Moduls wird nun ausgewertet
 + Neue Funktionen:
   * esc()
   * _esc()
