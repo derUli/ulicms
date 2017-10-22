@@ -10,6 +10,7 @@ class ActionRegistry {
 			"forms_edit" => "inc/forms_edit.php",
 			"module_settings" => "inc/module_settings.php" 
 	);
+	private static $actionPermissions = array();
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;
 	}
@@ -47,7 +48,30 @@ class ActionRegistry {
 				}
 			}
 			self::loadModuleActionAssignment ();
+			self::loadActionPermissions();
 		}
+	}
+	private static function loadActionPermissions(){
+		$modules = getAllModules ();
+		$disabledModules = Vars::get ( "disabledModules" );
+		foreach ( $modules as $module ) {
+			if (faster_in_array ( $module, $disabledModules )) {
+				continue;
+			}
+			$action_permissions = getModuleMeta($module, "action_permissions");
+			if($action_permissions){
+				foreach($action_permissions as $action=>$permission){
+					self::$actionPermissions[$action] = $permission;
+				}
+			}
+		}
+	}
+	public static function getActionpermission($action){
+		$permission = null;
+		if(isset(self::$actionPermissions[$action]) and is_string(self::$actionPermissions[$action])){
+			$permission = self::$actionPermissions[$action];
+		}
+		return $permission;
 	}
 	public static function loadModuleActionAssignment() {
 		$modules = getAllModules ();

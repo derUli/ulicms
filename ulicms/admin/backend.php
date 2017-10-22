@@ -88,9 +88,9 @@ add_hook ( "after_backend_header" );
 
 if (! $eingeloggt) {
 	if (isset ( $_GET ["register"] )) {
-		add_hook("before_register_form");
+		add_hook ( "before_register_form" );
 		require_once "inc/registerform.php";
-		add_hook("after_register_form");
+		add_hook ( "after_register_form" );
 	} else if (isset ( $_GET ["reset_password"] )) {
 		add_hook ( "before_reset_password_form" );
 		require_once "inc/reset_password.php";
@@ -112,7 +112,12 @@ if (! $eingeloggt) {
 	if ($_SESSION ["require_password_change"]) {
 		require_once "inc/change_password.php";
 	} else if (isset ( $actions [get_action ()] )) {
-		include_once $actions [get_action ()];
+		$requiredPermission = ActionRegistry::getActionpermission ( get_action () );
+		if ((! $requiredPermission) or ($requiredPermission and $acl->hasPermission ( $requiredPermission ))) {
+			include_once $actions [get_action ()];
+		} else {
+			noperms ();
+		}
 	} else {
 		translate ( "action_not_found" );
 	}
