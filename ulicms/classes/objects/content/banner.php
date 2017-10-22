@@ -7,7 +7,12 @@ class Banner {
 	public $category = 1;
 	private $type = "gif";
 	public $html = "";
-	public $language = "";
+	public $language = null;
+	public function __construct($id = null){
+		if($id){
+			$this->loadByID($id);
+		}
+	}
 	public function loadByID($id) {
 		$id = intval ( $id );
 		$query = DB::query ( "SELECT * FROM `" . tbname ( "banner" ) . "` where id = $id" );
@@ -34,7 +39,7 @@ class Banner {
 		$this->category = $result->category;
 		$this->type = $result->type;
 		$this->html = $result->html;
-		$this->langauge = $result->language;
+		$this->language = $result->language;
 	}
 	public function setType($type) {
 		$allowedTypes = array (
@@ -53,7 +58,7 @@ class Banner {
 	}
 	public function save() {
 		$retval = false;
-		if ($this->id !== null) {
+		if ($this->id != null) {
 			$retval = $this->update ();
 		}
 		{
@@ -62,7 +67,7 @@ class Banner {
 		return $retval;
 	}
 	public function create() {
-		if ($this->id !== null) {
+		if ($this->id != null) {
 			return $this->update ();
 		}
 		$sql = "INSERT INTO " . tbname ( "banner" ) . "(name, link_url, image_url, category, type, html, language) values (";
@@ -96,7 +101,7 @@ class Banner {
 		} else {
 			$sql .= "'" . DB::escapeValue ( $this->html ) . "',";
 		}
-		if ($this->langage === null) {
+		if ($this->language === null) {
 			$sql .= "NULL ";
 		} else {
 			$sql .= "'" . DB::escapeValue ( $this->language ) . "'";
@@ -105,16 +110,15 @@ class Banner {
 		$sql .= ")";
 		
 		$result = DB::query ( $sql );
-		if ($result) {
-			$this->id = DB::getLastInsertID ();
-		}
+		$this->id = DB::getLastInsertID ();
+		
 		return $result;
 	}
 	public function update() {
 		if ($this->id === null) {
 			return $this->create ();
 		}
-		$sql = "UPDATE " . tbname ( "content" ) . " ";
+		$sql = "UPDATE " . tbname ( "banner" ) . " set ";
 		
 		if ($this->name === null) {
 			$sql .= "name=NULL, ";
@@ -122,7 +126,7 @@ class Banner {
 			$sql .= "name='" . DB::escapeValue ( $this->name ) . "',";
 		}
 		if ($this->link_url === null) {
-			$sql .= "link_url=NULL, ";
+			$sql .= "link_url = NULL, ";
 		} else {
 			$sql .= "link_url='" . DB::escapeValue ( $this->link_url ) . "',";
 		}
@@ -139,17 +143,17 @@ class Banner {
 		if ($this->type === null) {
 			$sql .= "`type`=NULL, ";
 		} else {
-			$sql .= "`type=`'" . DB::escapeValue ( $this->type ) . "',";
+			$sql .= "`type`='" . DB::escapeValue ( $this->type ) . "',";
 		}
 		if ($this->html === null) {
 			$sql .= "html=NULL, ";
 		} else {
 			$sql .= "html='" . DB::escapeValue ( $this->html ) . "',";
 		}
-		if ($this->langage === null) {
-			$sql .= "langage=NULL ";
+		if ($this->language === null) {
+			$sql .= "language=NULL ";
 		} else {
-			$sql .= "langage='" . DB::escapeValue ( $this->language ) . "'";
+			$sql .= "language='" . DB::escapeValue ( $this->language ) . "'";
 		}
 		
 		$sql .= " where id = " . intval ( $this->id );
