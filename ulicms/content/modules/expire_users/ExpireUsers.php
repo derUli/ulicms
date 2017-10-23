@@ -10,7 +10,7 @@ class ExpireUsers extends controller {
 			foreach ( $users as $user ) {
 				// expire_date is a timestamp
 				// when expire_date is set and the timestamp is in the past
-				// user will be locked
+				// user will get locked
 				$expire_date = UserSettings::get ( "expire_date", "int", $user->getId () );
 				if ($expire_date and time () >= $expire_date and ! $user->getLocked ()) {
 					$user->setLocked ( true );
