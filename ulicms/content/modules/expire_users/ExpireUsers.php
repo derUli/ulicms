@@ -1,9 +1,9 @@
 <?php
 class ExpireUsers extends controller {
 	// lock all expired users in a pseudo cronjob
-	// expire_users executes this every 12 hours
+	// expire_users executes this every 6 hours
 	public function cron() {
-		BetterCron::hours ( "module/expire_users/lock_expired_users", 12, function () {
+		BetterCron::hours ( "module/expire_users/lock_expired_users", 6, function () {
 			$manager = new UserManager ();
 			// OPTIMIZE: Load only not locked users to improve performance
 			$users = $manager->getAllUsers ();
