@@ -1,0 +1,1 @@
+CREATE TABLE `{prefix}user_settings` ( `user_id` INT NOT NULL , `name` VARCHAR(255) NOT NULL , `value` TEXT NOT NULL , PRIMARY KEY (`user_id`, `name`)) ENGINE = InnoDB;
