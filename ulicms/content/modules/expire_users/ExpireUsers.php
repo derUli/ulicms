@@ -27,6 +27,6 @@ class ExpireUsers extends controller {
 		return get_translation ( "edit" );
 	}
 	public function settings() {
-		throw new NotImplementedException ();
+		return Template::executeModuleTemplate ( $this->moduleName, "list.php" );
 	}
 }
