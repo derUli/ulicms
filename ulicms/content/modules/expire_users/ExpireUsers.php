@@ -1,5 +1,6 @@
 <?php
 class ExpireUsers extends controller {
+	private $moduleName = "expire_users";
 	// lock all expired users in a pseudo cronjob
 	// expire_users executes this every 6 hours
 	public function cron() {
@@ -18,5 +19,14 @@ class ExpireUsers extends controller {
 				}
 			}
 		} );
+	}
+	public function getSettingsHeadline() {
+		return get_translation ( "users" );
+	}
+	public function getSettingsLinkText() {
+		return get_translation ( "edit" );
+	}
+	public function settings() {
+		throw new NotImplementedException ();
 	}
 }
