@@ -36,7 +36,21 @@ class ExpireUsers extends controller {
 		return Template::executeModuleTemplate ( $this->moduleName, "list.php" );
 	}
 	public function savePost() {
-		throw new NotImplementedException ();
+		$id = Request::getVar ( "id", null, "int" );
+		if ($id) {
+			$user = new User ( $id );
+			$user->setLocked ( Request::hasVar ( "locked" ) );
+			$user->save ();
+			
+			$expire_date = Request::getVar ( "expire_date" );
+			if (StringHelper::isNotNullOrWhitespace ( $expire_date )) {
+				$expire_date = strtotime ( $expire_date );
+				UserSettings::set ( "expire_date", $expire_date, "int", $id );
+			} else {
+				UserSettings::delete ( "expire_date" );
+			}
+		}
+		Request::redirect ( ModuleHelper::buildAdminURL ( $this->moduleName ) );
 	}
 	public static function getDateFormat() {
 		return "Y-m-d H:i:s";
