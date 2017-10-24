@@ -6,8 +6,7 @@ class ExpireUsers extends controller {
 	public function cron() {
 		BetterCron::hours ( "module/expire_users/lock_expired_users", 6, function () {
 			$manager = new UserManager ();
-			// OPTIMIZE: Load only not locked users to improve performance
-			$users = $manager->getAllUsers ();
+			$users = $manager->getLockedUsers ( false );
 			foreach ( $users as $user ) {
 				// expire_date is a timestamp
 				// when expire_date is set and the timestamp is in the past
