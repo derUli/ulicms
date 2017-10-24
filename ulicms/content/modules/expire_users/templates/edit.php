@@ -30,6 +30,8 @@ if ($acl->hasPermission ( $permission ) and $user->getId ()) {
 	<input type="text" name="expire_date" id="expire_date"
 		value="<?php Template::escape($expire_date);?>"> <br /> <small><?php translate("expected_date_format", array("%format%"=> ExpireUsers::formatDate(time())));?></small>
 </p>
+
+<div class="alert alert-info"><?php translate("expire_date_help");?></div>
 <button type="submit" class="btn btn-success"><?php translate("save");?></button>
 </form>
 <?php }?>
