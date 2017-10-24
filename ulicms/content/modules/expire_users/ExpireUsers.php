@@ -35,6 +35,9 @@ class ExpireUsers extends controller {
 		Viewbag::set ( "can_edit", $acl->hasPermission ( $permission ) );
 		return Template::executeModuleTemplate ( $this->moduleName, "list.php" );
 	}
+	public function savePost() {
+		throw new NotImplementedException ();
+	}
 	public static function getDateFormat() {
 		return "Y-m-d H:i:s";
 	}

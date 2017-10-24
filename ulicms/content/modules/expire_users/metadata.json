@@ -15,5 +15,8 @@
 	"admin_permission": "users",
 	"action_permissions": {
 		"edit_expire_user": "users_edit"
+	},
+	"controller_function_permissions": {
+		"ExpireUsers::savePost": "users_edit"
 	}
 }
