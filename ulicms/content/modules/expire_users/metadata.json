@@ -5,12 +5,15 @@
 	"controllers": {
 		"ExpireUsers": "ExpireUsers.php"
 	},
-	"actions" : {
-		"edit_expire_user" : "templates/edit.php"
+	"actions": {
+		"edit_expire_user": "templates/edit.php"
 	},
-	"action_controllers" : {
-		"edit_expire_user" : "ExpireUsers"
+	"action_controllers": {
+		"edit_expire_user": "ExpireUsers"
 	},
 	"main_class": "ExpireUsers",
-	"admin_permission" : "users_edit"
+	"admin_permission": "users",
+	"action_permissions": {
+		"edit_expire_user": "users_edit"
+	}
 }

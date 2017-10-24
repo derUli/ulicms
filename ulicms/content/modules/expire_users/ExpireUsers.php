@@ -27,6 +27,19 @@ class ExpireUsers extends controller {
 		return get_translation ( "edit" );
 	}
 	public function settings() {
+		$manager = new UserManager ();
+		ViewBag::set ( "users", $manager->getAllUsers () );
+		$permission = ( array ) getModuleMeta ( $this->moduleName, "action_permissions" );
+		$permission = $permission ["edit_expire_user"];
+		$acl = new ACL ();
+		Viewbag::set ( "can_edit", $acl->hasPermission ( $permission ) );
 		return Template::executeModuleTemplate ( $this->moduleName, "list.php" );
+	}
+	public static function getDateFormat() {
+		return "Y-m-d H:i:s";
+	}
+	public static function formatDate($time) {
+		$format = self::getDateFormat ();
+		return date ( $format, $time );
 	}
 }
