@@ -12,5 +12,5 @@
 		"edit_expire_user" : "ExpireUsers"
 	},
 	"main_class": "ExpireUsers",
-	"admin_permission" : "users"
+	"admin_permission" : "users_edit"
 }
