@@ -46,7 +46,7 @@ class ExpireUsers extends controller {
 				$expire_date = strtotime ( $expire_date );
 				UserSettings::set ( "expire_date", $expire_date, "int", $id );
 			} else {
-				UserSettings::delete ( "expire_date" );
+				UserSettings::delete ( "expire_date", $id );
 			}
 		}
 		Request::redirect ( ModuleHelper::buildAdminURL ( $this->moduleName ) );
