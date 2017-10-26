@@ -1,8 +1,8 @@
 <?php
 class UserManager {
-	public function getUsersByGroupId($gid) {
+	public function getUsersByGroupId($gid, $order = "id") {
 		$users = array ();
-		$sql = "select id from {prefix}users where `group_id` = ?";
+		$sql = "select id from {prefix}users where `group_id` = ? order by $order";
 		$args = array (
 				intval ( $gid ) 
 		);
@@ -12,18 +12,18 @@ class UserManager {
 		}
 		return $users;
 	}
-	public function getAllUsers() {
+	public function getAllUsers($order = "id") {
 		$users = array ();
-		$sql = "select id from {prefix}users";
+		$sql = "select id from {prefix}users order by $order";
 		$query = Database::Query ( $sql, true );
 		while ( $row = Database::fetchObject ( $query ) ) {
 			$users [] = new User ( $row->id );
 		}
 		return $users;
 	}
-	public function getLockedUsers($locked = true) {
+	public function getLockedUsers($locked = true, $order = "id") {
 		$users = array ();
-		$sql = "select id from {prefix}users where `locked` = ?";
+		$sql = "select id from {prefix}users where `locked` = ? order by $order";
 		$args = array (
 				intval ( $locked ) 
 		);
