@@ -4,6 +4,7 @@ class Audio extends Model {
 	private $mp3_file = null;
 	private $ogg_file = null;
 	private $category_id = null;
+	private $category = null;
 	private $created;
 	private $updated;
 	public function __construct($id = null) {
@@ -87,6 +88,9 @@ class Audio extends Model {
 	public function getCategoryId() {
 		return $this->category_id;
 	}
+	public function getCategory() {
+		return $this->category;
+	}
 	public function getCreated() {
 		return $this->created;
 	}
@@ -104,6 +108,11 @@ class Audio extends Model {
 	}
 	public function setCategoryId($val) {
 		$this->category_id = is_numeric ( $val ) ? intval ( $val ) : null;
+		$this->category = is_numeric ( $val ) ? new Category ( $val ) : null;
+	}
+	public function setCategory($val) {
+		$this->category = ! is_null ( $val ) ? new Category ( $val ) : null;
+		$this->category_id = $this->category->getID ();
 	}
 	public function delete($deletePhysical = true) {
 		if ($this->getId ()) {

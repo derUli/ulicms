@@ -15,6 +15,7 @@ class AudioTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "music.mp3", $audio->getMP3File () );
 		$this->assertEquals ( "music.ogg", $audio->getOggFile () );
 		$this->assertEquals ( 1, $audio->getCategoryId () );
+		$this->assertEquals ( 1, $audio->getCategory ()->getID () );
 		
 		$audio->setName ( "New Name" );
 		$audio->setMP3File ( "not-music.mp3" );
@@ -27,6 +28,14 @@ class AudioTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "not-music.mp3", $audio->getMP3File () );
 		$this->assertEquals ( "not-music.ogg", $audio->getOggFile () );
 		$this->assertEquals ( null, $audio->getCategoryId () );
+		
+		$audio->setCategory ( new Group ( 1 ) );
+		$audio->save ();
+		
+		$audio = new Audio ( $id );
+		
+		$this->assertEquals ( 1, $audio->getCategoryId () );
+		$this->assertEquals ( 1, $audio->getCategory ()->getID () );
 		
 		$audio->delete ();
 		$this->assertNull ( $audio->getID () );
