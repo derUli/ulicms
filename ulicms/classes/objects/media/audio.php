@@ -7,6 +7,7 @@ class Audio extends Model {
 	private $category = null;
 	private $created;
 	private $updated;
+	private const AUDIO_DIR = "content/audio/";
 	public function __construct($id = null) {
 		if (! is_null ( $id )) {
 			$this->loadById ( $id );
@@ -139,14 +140,15 @@ class Audio extends Model {
 	public function getHtml() {
 		$html = '<audio controls>';
 		if (! empty ( $this->mp3_file )) {
-			$html .= '<source src="content/audio/' . htmlspecialchars ( $this->mp3_file ) . '" type="audio/mp3">';
+			$html .= '<source src="' . self::AUDIO_DIR . htmlspecialchars ( $this->mp3_file ) . '" type="audio/mp3">';
 		}
 		if (! empty ( $this->ogg_file )) {
-			$html .= '<source src="content/audio/' . htmlspecialchars ( $this->ogg_file ) . '" type="audio/ogg">';
+			$html .= '<source src="' . self::AUDIO_DIR . htmlspecialchars ( $this->ogg_file ) . '" type="audio/ogg">';
 		}
 		$html .= get_translation ( "no_html5" );
 		if (! empty ( $this->mp3_file ) or ! empty ( $this->ogg_file )) {
-			$html .= '<br/><a href="content/audio/' . $preferred . '">' . TRANSLATION_DOWNLOAD_AUDIO_INSTEAD . '</a>';
+			$preferred = ! empty ( $this->mp3_file ) ? $this->mp3_file : $this->ogg_file;
+			$html .= '<br/><a href="' . self::AUDIO_DIR . $preferred . '">' . TRANSLATION_DOWNLOAD_AUDIO_INSTEAD . '</a>';
 		}
 		
 		$html .= '</audio>';

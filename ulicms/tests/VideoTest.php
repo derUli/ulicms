@@ -55,6 +55,6 @@ class VideoTest extends PHPUnit_Framework_TestCase {
 		$Video->setOGGFile ( "video.ogv" );
 		$Video->setWebmFile ( "video.webm" );
 		$Video->setCategoryId ( 1 );
-		$this->assertEquals ( '<video width="" height="" controls><source src="content/videos/video.mp4" type="video/mp4"><source src="content/videos/video.ogv" type="video/ogg"><source src="content/videos/video.webm" type="video/webm">no_html5<br/><a href="content/videos/">DOWNLOAD_VIDEO_INSTEAD</a></video>', $Video->getHtml () );
+		$this->assertEquals ( '<video width="" height="" controls><source src="content/videos/video.mp4" type="video/mp4"><source src="content/videos/video.ogv" type="video/ogg"><source src="content/videos/video.webm" type="video/webm">no_html5<br/><a href="content/videos/video.mp4">DOWNLOAD_VIDEO_INSTEAD</a></video>', $Video->getHtml () );
 	}
 }

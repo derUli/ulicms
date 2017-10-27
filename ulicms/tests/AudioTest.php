@@ -48,6 +48,6 @@ class AudioTest extends PHPUnit_Framework_TestCase {
 		$audio->setMP3File ( "music.mp3" );
 		$audio->setOGGFile ( "music.ogg" );
 		$audio->setCategoryId ( 1 );
-		$this->assertEquals ( '<audio controls><source src="content/audio/music.mp3" type="audio/mp3"><source src="content/audio/music.ogg" type="audio/ogg">no_html5<br/><a href="content/audio/">TRANSLATION_DOWNLOAD_AUDIO_INSTEAD</a></audio>', $audio->getHtml () );
+		$this->assertEquals ( '<audio controls><source src="content/audio/music.mp3" type="audio/mp3"><source src="content/audio/music.ogg" type="audio/ogg">no_html5<br/><a href="content/audio/music.mp3">TRANSLATION_DOWNLOAD_AUDIO_INSTEAD</a></audio>', $audio->getHtml () );
 	}
 }

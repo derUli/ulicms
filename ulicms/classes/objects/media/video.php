@@ -8,6 +8,7 @@ class Video extends Model {
 	private $category = null;
 	private $created;
 	private $updated;
+	private const VIDEO_DIR = "content/videos/";
 	public function __construct($id = null) {
 		if (! is_null ( $id )) {
 			$this->loadById ( $id );
@@ -156,17 +157,19 @@ class Video extends Model {
 	public function getHtml() {
 		$html = '<video width="' . $this->width . '" height="' . $this->height . '" controls>';
 		if (! empty ( $this->mp4_file )) {
-			$html .= '<source src="content/videos/' . htmlspecialchars ( $this->mp4_file ) . '" type="video/mp4">';
+			$html .= '<source src="' . self::VIDEO_DIR . htmlspecialchars ( $this->mp4_file ) . '" type="video/mp4">';
 		}
 		if (! empty ( $this->ogg_file )) {
-			$html .= '<source src="content/videos/' . htmlspecialchars ( $this->ogg_file ) . '" type="video/ogg">';
+			$html .= '<source src="' . self::VIDEO_DIR . htmlspecialchars ( $this->ogg_file ) . '" type="video/ogg">';
 		}
 		if (! empty ( $this->webm_file )) {
-			$html .= '<source src="content/videos/' . htmlspecialchars ( $this->webm_file ) . '" type="video/webm">';
+			$html .= '<source src="' . self::VIDEO_DIR . htmlspecialchars ( $this->webm_file ) . '" type="video/webm">';
 		}
 		$html .= get_translation ( "no_html5" );
 		if (! empty ( $this->mp4_file ) or ! empty ( $this->ogg_file ) or ! empty ( $this->webm_file )) {
-			$html .= '<br/><a href="content/videos/' . $preferred . '">' . get_translation ( "DOWNLOAD_VIDEO_INSTEAD" ) . '</a>';
+			$preferred = (! empty ( $this->mp4_file ) ? $this->mp4_file : (! empty ( $this->ogg_file ) ? $this->ogg_file : $this->webm_file));
+			
+			$html .= '<br/><a href="' . self::VIDEO_DIR . $preferred . '">' . get_translation ( "DOWNLOAD_VIDEO_INSTEAD" ) . '</a>';
 		}
 		$html .= "</video>";
 		return $html;
