@@ -17,7 +17,7 @@ class VideoTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "video.ogv", $Video->getOggFile () );
 		$this->assertEquals ( "video.webm", $Video->getWebmFile () );
 		$this->assertEquals ( 1, $Video->getCategoryId () );
-		$this->assertEquals ( 1, $$Video->getCategory ()->getID () );
+		$this->assertEquals ( 1, $Video->getCategory ()->getID () );
 		
 		$Video->setName ( "New Name" );
 		$Video->setMP4File ( "not-video.mp4" );
@@ -33,7 +33,7 @@ class VideoTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "not-video.webm", $Video->getWebmFile () );
 		$this->assertEquals ( null, $Video->getCategoryId () );
 		
-		$Video = new Video ( $id );
+		$video = new Video ( $id );
 		
 		$video->setCategory ( new Group ( 1 ) );
 		$video->save ();

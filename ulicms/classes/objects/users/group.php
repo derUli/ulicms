@@ -164,4 +164,8 @@ class Group {
 	public function setAllowableTags($val) {
 		$this->allowable_tags = Stringhelper::isNotNullOrWhitespace ( $val ) ? strval ( $val ) : null;
 	}
+	public function getUsers($order = null) {
+		$manager = new UserManager ();
+		return $manager->getUsersByGroupId ( $gid, $order );
+	}
 }
