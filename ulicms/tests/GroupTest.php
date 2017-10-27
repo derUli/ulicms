@@ -25,4 +25,8 @@ class GroupTest extends PHPUnit_Framework_TestCase {
 		$group = new Group ( $oldID );
 		$this->assertNull ( $group->getId () );
 	}
+	public function testGetUsers() {
+		$group = new Group ( 1 );
+		$this->assertTrue ( count ( $group->getUsers () ) >= 1 );
+	}
 }

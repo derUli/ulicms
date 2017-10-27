@@ -7,7 +7,7 @@ class Audio extends Model {
 	private $category = null;
 	private $created;
 	private $updated;
-	private const AUDIO_DIR = "content/audio/";
+	const AUDIO_DIR = "content/audio/";
 	public function __construct($id = null) {
 		if (! is_null ( $id )) {
 			$this->loadById ( $id );

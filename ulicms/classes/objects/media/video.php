@@ -8,7 +8,7 @@ class Video extends Model {
 	private $category = null;
 	private $created;
 	private $updated;
-	private const VIDEO_DIR = "content/videos/";
+	const VIDEO_DIR = "content/videos/";
 	public function __construct($id = null) {
 		if (! is_null ( $id )) {
 			$this->loadById ( $id );
