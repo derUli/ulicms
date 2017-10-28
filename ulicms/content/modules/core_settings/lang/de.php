@@ -6,7 +6,6 @@ define ( "TRANSLATION_LOGO_INFOTEXT", "Laden Sie ein beliebiges Logo hoch, welch
 Sie können das Logo in den Grundeinstellungen deaktivieren.<br/>
 Das Bild darf maximal 500 x 100 Pixel haben." );
 define ( "TRANSLATION_UPLOADED_IMAGE_TOO_BIG", "Die von Ihnen hochgeladene Grafik ist zu groß." );
-
 define ( "TRANSLATION_CREATE_OPTION", "Konfigurationsvariable erstellen" );
 define ( "TRANSLATION_OPTION", "Option" );
 define ( "TRANSLATION_VALUE", "Wert" );

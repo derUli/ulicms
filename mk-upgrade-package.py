@@ -63,7 +63,6 @@ def main():
                 if "unlink" in line and line.startswith("//"):
                     line = line.replace("//", "")
                     line = line.lstrip()
-
                 print(line)
                 f.write(line)
     else:

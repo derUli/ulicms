@@ -48,7 +48,7 @@ class UserController extends Controller {
 					$group_id = "NULL";
 				}
 			}
-			
+			// FIXME: Das SQL muss raus. Stattdessen das User-Model zum Speichern nutzen.
 			$notify_on_login = intval ( isset ( $_POST ["notify_on_login"] ) );
 			$twitter = db_escape ( $_POST ["twitter"] );
 			$homepage = db_escape ( $_POST ["homepage"] );

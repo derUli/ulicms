@@ -9,7 +9,7 @@ class PkgInfoController extends Controller {
 				$pkg->installPackage ();
 				@unlink ( $path );
 			}
-			Request::redirect ( "index.php?action=sin_package_install_ok&file=$file" );
+			Request::redirect ( ModuleHelper::buildActionURL ( "sin_package_install_ok", "file=$file" ) );
 		}
 	}
 }

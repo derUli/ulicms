@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL ();
-if (is_admin () or $acl->hasPermission ( "update_system" )) {
+if ($acl->hasPermission ( "update_system" )) {
 	if (file_exists ( Path::resolve ( "ULICMS_ROOT/update.php" ) )) {
 		?>
 <p>
