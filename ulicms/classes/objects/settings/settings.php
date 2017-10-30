@@ -103,4 +103,20 @@ class Settings {
 		}
 		return $result;
 	}
+	public static function mappingStringToArray($str) {
+		$str = trim ( $str );
+		$str = normalizeLN ( $str, "\n" );
+		$lines = explode ( "\n", $str );
+		$lines = array_map ( 'trim', $lines );
+		$lines = array_filter ( $lines, 'strlen' );
+		$result = array ();
+		foreach ( $lines as $line ) {
+			$splitted = explode ( "=>", $line );
+			$splitted = array_map ( 'trim', $splitted );
+			$key = $splitted [0];
+			$value = $splitted [1];
+			$result [$key] = $value;
+		}
+		return $result;
+	}
 }
