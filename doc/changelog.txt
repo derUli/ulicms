@@ -50,6 +50,8 @@
 # Benutzer bei denen "Ist Admin" gesetzt ist, dürfen nun alle Seiten bearbeiten, unabhängig von den gesetzten Berechtigungen
 - Funktion ulicms_redirect() entfernt.
   Nutzen Sie stattdessen Request::redirect()
+- Feature "Benutzerdefinierte Felder" entfernt, dieses Feature wird mit erweiterter
+Funktionalität in einem zukünftigen Release wieder implementiert werden
 
 Bugfixes:
 * Die Gruppe "Administratoren" wird bei der Installation wieder erstellt
