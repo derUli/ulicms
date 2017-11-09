@@ -11,7 +11,6 @@ function checkIfSystemnameIsFree($systemname, $language, $id) {
 		$sql .= "and id <> $id";
 	}
 	$result = Database::query ( $sql );
-	var_dump ( $sql );
 	return (Database::getNumRows ( $result ) <= 0);
 }
 function ajaxOnChangeLanguage($lang, $menu, $parent) {
