@@ -1,4 +1,7 @@
 <?php
+// required because my local XAMPP is sometimes in wrong folder, so includes will fail
+chdir ( dirname ( __FILE__ ) );
+
 require_once "../init.php";
 require_once "../templating.php";
 @session_start ();
