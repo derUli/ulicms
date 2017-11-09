@@ -27,6 +27,12 @@ class ProductContentType extends Controller {
 		$field3->defaultValue = "";
 		$product->customFields [] = $field3;
 		
+		$field4 = new EmailField ();
+		$field4->name = "customer_service";
+		$field4->title = "customer_service";
+		$field4->defaultValue = "service@company.de";
+		$product->customFields [] = $field4;
+		
 		$types ["product"] = $product;
 		return $types;
 	}
