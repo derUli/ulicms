@@ -33,6 +33,11 @@ class ProductContentType extends Controller {
 		$field4->defaultValue = "service@company.de";
 		$product->customFields [] = $field4;
 		
+		$field5 = new MonthField ();
+		$field5->name = "available_until";
+		$field5->title = "available_until";
+		$product->customFields [] = $field5;
+		
 		$types ["product"] = $product;
 		return $types;
 	}
