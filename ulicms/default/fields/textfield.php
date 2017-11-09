@@ -5,14 +5,17 @@ if (is_null ( $value )) {
 	$value = $field->defaultValue;
 }
 ?>
-<p>
-	<strong><?php Template::escape($field->title);?> <?php if($field->required) echo "*";?></strong><br />
-	<input type="text" name="<?php Template::escape($field->name);?>"
-		value="<?php Template::escape($value);?>"
-		<?php if($field->required) echo "required";?>
-		<?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes);?>>
+<div class="custom-field"
+	data-field-name="<?php Template::escape($field->name);?>">
+	<p>
+		<strong><?php translate($field->title);?> <?php if($field->required) echo "*";?></strong><br />
+		<input type="text"
+			name="<?php Template::escape(ViewBag::get("field_name"));?>"
+			value="<?php Template::escape($value);?>"
+			<?php if($field->required) echo "required";?>
+			<?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes);?>>
 		<?php if($field->helpText){?>
-	<br /> <small><?php echo $field->helpText;?></small>
-
+	<br /> <small><?php translate($field->helpText);?></small>
 <?php }?>
 </p>
+</div>

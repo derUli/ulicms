@@ -66,4 +66,5 @@ class Fortune extends Controller {
 	public function doSomethingGet() {
 		ViewBag::set ( "sample_text", get_translation ( "get_request_type" ) );
 	}
+
 }

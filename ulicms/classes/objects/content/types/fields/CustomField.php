@@ -6,6 +6,7 @@ class CustomField {
 	public $helpText;
 	public $defaultValue = "";
 	public $htmlAttributes = array ();
+	public $contentType;
 	public function render() {
 		throw new NotImplementedException ();
 	}
