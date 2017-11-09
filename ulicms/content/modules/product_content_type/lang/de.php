@@ -10,3 +10,4 @@ add_translation ( "available_until", "Verfügbar bis" );
 add_translation ( "storage_amount", "Lagermenge" );
 add_translation ( "product_color", "Farbe" );
 add_translation ( "product_available", "Produkt verfügbar" );
+add_translation ( "hold_ctrl_to_select_multiple", "Strg + Klick für eine Mehrfachauswahl" );

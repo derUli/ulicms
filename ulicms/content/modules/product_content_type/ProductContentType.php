@@ -67,11 +67,22 @@ class ProductContentType extends Controller {
 		$field10->title = "product_available";
 		$field10->translateOptions = false;
 		$field10->options = array (
-				"enabled" => get_translation("enabled"),
+				"enabled" => get_translation ( "enabled" ),
 				"disabled" => get_translation ( "disabled" ) 
 		);
-		
-		$product->customFields [] = $field10;
+		$field11 = new MultiSelectField ();
+		$field11->name = "zip_codes";
+		$field11->title = "zip_codes";
+		$field11->helpText = "hold_ctrl_to_select_multiple";
+		$field11->translateOptions = false;
+		$field11->options = array (
+				"38102" => "Braunschweig",
+				"38104" => "Gliesmarode",
+				"38124" => "Heidburg",
+				"38100" => "Innenstadt",
+				"38116" => "Kanzlerfeld" 
+		);
+		$product->customFields [] = $field11;
 		
 		$types ["product"] = $product;
 		return $types;

@@ -347,7 +347,6 @@ class PageController extends Controller {
 			if (isset ( $_POST [$field->name] )) {
 				$value = $_POST [$field->name];
 			}
-			
 			CustomFields::set ( $field->name, $value, $content_id );
 		}
 		
