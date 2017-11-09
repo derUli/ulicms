@@ -32,6 +32,8 @@ if (faster_in_array ( $_SESSION ["language"], $languages ) && file_exists ( getL
 
 Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
 Translation::includeCustomLangFile ( $_SESSION ["language"] );
+
+require_once "templating.php";
 Translation::loadCurrentThemeLanguageFiles ( $_SESSION ["language"] );
 add_hook ( "custom_lang_" . $_SESSION ["language"] );
 
@@ -40,8 +42,6 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
 		die ( "This is probably a CSRF attack!" );
 	}
 }
-
-require_once "templating.php";
 
 if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 	$txt = get_translation ( "IP_BLOCKED_BY_SPAMHAUS" );
