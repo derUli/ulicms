@@ -36,6 +36,7 @@ class ProductContentType extends Controller {
 		$field5 = new MonthField ();
 		$field5->name = "available_until";
 		$field5->title = "available_until";
+		$field5->defaultValue = "2019-12";
 		$product->customFields [] = $field5;
 		
 		$types ["product"] = $product;
