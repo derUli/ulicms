@@ -20,6 +20,13 @@ class ProductContentType extends Controller {
 		$field2->defaultValue = "";
 		
 		$product->customFields [] = $field2;
+		
+		$field3 = new MultilineTextField ();
+		$field3->name = "teaser_text";
+		$field3->title = "teaser_text";
+		$field3->defaultValue = "";
+		$product->customFields [] = $field3;
+		
 		$types ["product"] = $product;
 		return $types;
 	}

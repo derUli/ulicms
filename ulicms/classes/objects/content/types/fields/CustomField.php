@@ -7,7 +7,7 @@ class CustomField {
 	public $defaultValue = "";
 	public $htmlAttributes = array ();
 	public $contentType;
-	public function render() {
+	public function render($value = null) {
 		throw new NotImplementedException ();
 	}
 }
