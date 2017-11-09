@@ -1,5 +1,6 @@
 <?php
-class ProductContentType extends Controller {
+// this module demonstrates the new "Custom Fields" feature of UliCMS 2018.1
+class CustomTypesExample extends Controller {
 	public function contentTypesFilter($types) {
 		$product = clone $types ["page"];
 		$product->customFieldTabTitle = "product_properties";

@@ -1,9 +1,0 @@
-{
-	"source": "extend",
-	"version": "0.1",
-	"embed": false,
-	"controllers": {
-		"ProductContentType": "ProductContentType.php"
-	},
-	"main_class": "ProductContentType"
-}
