@@ -39,6 +39,12 @@ class ProductContentType extends Controller {
 		$field5->defaultValue = "2019-12";
 		$product->customFields [] = $field5;
 		
+		$field6 = new DatetimeField ();
+		$field6->name = "date";
+		$field6->title = "date";
+		$field6->defaultValue = date ( "Y-m-d\TH:i:s" );
+		$product->customFields [] = $field6;
+		
 		$types ["product"] = $product;
 		return $types;
 	}
