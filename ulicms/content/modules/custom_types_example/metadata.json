@@ -1,0 +1,9 @@
+{
+	"source": "extend",
+	"version": "0.1",
+	"embed": false,
+	"controllers": {
+		"CustomTypesExample": "CustomTypesExample.php"
+	},
+	"main_class": "CustomTypesExample"
+}

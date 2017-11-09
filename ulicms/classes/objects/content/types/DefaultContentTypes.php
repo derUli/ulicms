@@ -74,7 +74,7 @@ class DefaultContentTypes {
 	public static function getAll() {
 		return self::$types;
 	}
-	public function get($name) {
+	public static function get($name) {
 		if (isset ( self::$types [$name] )) {
 			return self::$types [$name];
 		}

@@ -24,8 +24,6 @@ if (! isset ( $_SESSION ["language"] )) {
 
 setLocaleByLanguage ();
 
-require_once "templating.php";
-
 if (faster_in_array ( $_SESSION ["language"], $languages ) && file_exists ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
 	include_once getLanguageFilePath ( $_SESSION ["language"] );
 } else if (file_exists ( getLanguageFilePath ( "en" ) )) {
@@ -34,6 +32,8 @@ if (faster_in_array ( $_SESSION ["language"], $languages ) && file_exists ( getL
 
 Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
 Translation::includeCustomLangFile ( $_SESSION ["language"] );
+
+require_once "templating.php";
 Translation::loadCurrentThemeLanguageFiles ( $_SESSION ["language"] );
 add_hook ( "custom_lang_" . $_SESSION ["language"] );
 

@@ -1,5 +1,6 @@
 ﻿===== Neues in UliCMS 2018.1 =====
 + Teile des Backends wurden in Core-Module verschoben und in ein MVC-Pattern umstrukturiert
++ Module können nun Inhaltstypen mit eigenen Formularfeldern erstellen
 + Neuer Parameter $htmlAttributes (Array) zu der Funktion ModuleHelper::buildMethodCallForm() hinzugefügt
 + Der Confirm-Dialog "Wirklich löschen?" kann über eine CSS-Klasse an einem Formular ausgelöst werden.
 + Durch das booleanische "shy" Attribut in einer Metadatendatei können Module und Themes im Paketmanager versteckt werden.

@@ -311,22 +311,16 @@ function openMenuImageSelectWindow(field) {
 	</div>
 	<div id="custom_fields_container">
 		<?php
-			
-			foreach ( $types as $type ) {
-				$fields = getFieldsForCustomType ( $type );
+			foreach ( DefaultContentTypes::getAll () as $name => $type ) {
+				$fields = $type->customFields;
 				if (count ( $fields ) > 0) {
 					?>
-		<div class="custom-field-tab" data-type="<?php echo $type;?>">
-			<h2 class="accordion-header"><?php translate($type);?></h2>
+		<div class="custom-field-tab" data-type="<?php echo $name;?>">
+			<h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name);?></h2>
 
 			<div class="accordion-content">
 		<?php foreach($fields as $field){?>
-		<p>
-					<strong><?php translate($field);?></strong> <br /> <input
-						type="text"
-						name="cf_<?php echo Template::escape($type);?>_<?php echo Template::escape($field);?>"
-						value="">
-				</p>					
+		<?php echo $field->render(null);?>				
 		<?php }?>
 		</div>
 		</div>
@@ -334,24 +328,24 @@ function openMenuImageSelectWindow(field) {
 		
 		<?php }?>
 		</div>
-		<div class="typedep" id="tab-target">
-			<h2 class="accordion-header"><?php translate("open_in");?></h2>
+	<div class="typedep" id="tab-target">
+		<h2 class="accordion-header"><?php translate("open_in");?></h2>
 
-			<div class="accordion-content">
-				<strong><?php
+		<div class="accordion-content">
+			<strong><?php
 			
 			translate ( "open_in" );
 			?>
 		</strong><br /> <select name="target" size=1>
-					<option value="_self">
+				<option value="_self">
 			<?php translate("target_self");?>
 			</option>
-					<option value="_blank">
+				<option value="_blank">
 			<?php translate("target_blank");?>
 			</option>
-				</select>
-			</div>
+			</select>
 		</div>
+	</div>
 	<div class="typedep" id="tab-og" style="display: none;">
 		<h2 class="accordion-header"><?php translate("open_graph");?></h2>
 
@@ -624,8 +618,8 @@ function openArticleImageSelectWindow(field) {
 <div class="typedep" id="content-editor">
 	<textarea name="page_content" id="page_content" cols=60 rows=20></textarea>
 		<?php
-		$editor = get_html_editor ();
-		?>
+			$editor = get_html_editor ();
+			?>
 
 		<?php
 			if ($editor === "ckeditor") {

@@ -380,26 +380,21 @@ function openMenuImageSelectWindow(field) {
 	</div>
 	<div class="typedep" id="custom_fields_container">
 		<?php
-			foreach ( $types as $type ) {
-				$fields = getFieldsForCustomType ( $type );
+			foreach ( DefaultContentTypes::getAll () as $name => $type ) {
+				$fields = $type->customFields;
 				if (count ( $fields ) > 0) {
 					?>
-		<div class="custom-field-tab" data-type="<?php echo $type;?>">
-			<h2 class="accordion-header"><?php translate($type);?></h2>
+		<div class="custom-field-tab" data-type="<?php echo $name;?>">
+			<h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name);?></h2>
 
 			<div class="accordion-content">
 		<?php foreach($fields as $field){?>
-		<p>
-					<strong><?php translate($field);?></strong> <br /> <input
-						type="text"
-						name="cf_<?php echo Template::escape($type);?>_<?php echo Template::escape($field);?>"
-						value="<?php
-						echo Template::escape ( CustomFields::get ( $field, $row->id ) )?>">
-				</p>					
+			<?php echo $field->render(CustomFields::get($field->name, $row->id));?>				
 		<?php }?>
 		</div>
 		</div>
 		<?php }?>
+		
 		<?php }?>
 		</div>
 
