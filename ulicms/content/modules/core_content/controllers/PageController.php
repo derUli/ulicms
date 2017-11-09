@@ -164,15 +164,14 @@ class PageController extends Controller {
 			$content = $unescaped_content;
 			VCS::createRevision ( $content_id, $content, $user_id );
 			
-			$fields = getFieldsForCustomType ( $type );
-			foreach ( $fields as $field ) {
-				if (isset ( $_POST ["cf_" . $type . "_" . $field] )) {
-					$value = $_POST ["cf_" . $type . "_" . $field];
-					if (empty ( $value )) {
-						$value = null;
-					}
-					CustomFields::set ( $field, $value, $content_id );
+			$type = DefaultContentTypes::get ( $type );
+			foreach ( $type->customFields as $field ) {
+				$value = null;
+				if (isset ( $_POST [$field->name] )) {
+					$value = $_POST [$field->name];
 				}
+				
+				CustomFields::set ( $field->name, $value, $content_id );
 			}
 			
 			add_hook ( "after_create_page" );
