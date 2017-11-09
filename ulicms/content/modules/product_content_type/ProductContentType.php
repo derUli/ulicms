@@ -57,6 +57,11 @@ class ProductContentType extends Controller {
 		$field8->defaultValue = "#69B9FF";
 		$product->customFields [] = $field8;
 		
+		$field9 = new HtmlField ();
+		$field9->name = "html_field";
+		$field9->title = "html_editor";
+		$product->customFields [] = $field9;
+		
 		$types ["product"] = $product;
 		return $types;
 	}
