@@ -24,8 +24,6 @@ if (! isset ( $_SESSION ["language"] )) {
 
 setLocaleByLanguage ();
 
-require_once "templating.php";
-
 if (faster_in_array ( $_SESSION ["language"], $languages ) && file_exists ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
 	include_once getLanguageFilePath ( $_SESSION ["language"] );
 } else if (file_exists ( getLanguageFilePath ( "en" ) )) {
@@ -42,6 +40,8 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
 		die ( "This is probably a CSRF attack!" );
 	}
 }
+
+require_once "templating.php";
 
 if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
 	$txt = get_translation ( "IP_BLOCKED_BY_SPAMHAUS" );

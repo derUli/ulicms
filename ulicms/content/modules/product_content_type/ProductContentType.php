@@ -65,9 +65,10 @@ class ProductContentType extends Controller {
 		$field10 = new SelectField ();
 		$field10->name = "product_available";
 		$field10->title = "product_available";
+		$field10->translateOptions = false;
 		$field10->options = array (
-				"enabled" => "enabled",
-				"disabled" => "disabled" 
+				"enabled" => get_translation("enabled"),
+				"disabled" => get_translation ( "disabled" ) 
 		);
 		
 		$product->customFields [] = $field10;

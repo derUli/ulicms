@@ -13,7 +13,7 @@ if (is_null ( $value )) {
 		<select name="<?php Template::escape(ViewBag::get("field_name"));?>"
 			<?php if($field->required) echo "required";?>
 			<?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes);?>>
-		<?php foreach($options as $optionTitle=>$optionValue){?>
+		<?php foreach($options as $optionValue=>$optionTitle){?>
 		<option value="<?php Template::escape($optionValue);?>"
 				<?php
 			if ($optionValue == $value) {
