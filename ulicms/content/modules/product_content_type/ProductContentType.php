@@ -45,6 +45,12 @@ class ProductContentType extends Controller {
 		$field6->defaultValue = date ( "Y-m-d\TH:i:s" );
 		$product->customFields [] = $field6;
 		
+		$field7 = new NumberField ();
+		$field7->name = "storage_amount";
+		$field7->title = "storage_amount";
+		$field7->defaultValue = 159;
+		$product->customFields [] = $field7;
+		
 		$types ["product"] = $product;
 		return $types;
 	}
