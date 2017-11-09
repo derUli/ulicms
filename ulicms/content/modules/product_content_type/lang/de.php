@@ -9,3 +9,4 @@ add_translation ( "customer_service", "Kundendienst" );
 add_translation ( "available_until", "Verfügbar bis" );
 add_translation ( "storage_amount", "Lagermenge" );
 add_translation ( "product_color", "Farbe" );
+add_translation ( "product_available", "Produkt verfügbar" );

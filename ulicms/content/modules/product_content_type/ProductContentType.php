@@ -62,6 +62,16 @@ class ProductContentType extends Controller {
 		$field9->title = "html_editor";
 		$product->customFields [] = $field9;
 		
+		$field10 = new SelectField ();
+		$field10->name = "product_available";
+		$field10->title = "product_available";
+		$field10->options = array (
+				"enabled" => "enabled",
+				"disabled" => "disabled" 
+		);
+		
+		$product->customFields [] = $field10;
+		
 		$types ["product"] = $product;
 		return $types;
 	}
