@@ -84,6 +84,10 @@ class CustomTypesExample extends Controller {
 				"38116" => "Kanzlerfeld" 
 		);
 		$product->customFields [] = $field11;
+		$field12 = new CheckboxField ();
+		$field12->name = "product_locked";
+		$field12->title = "locked";
+		$product->customFields [] = $field12;
 		
 		$types ["product"] = $product;
 		return $types;
