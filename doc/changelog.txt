@@ -60,6 +60,7 @@ Bugfixes:
 * Ein Problem, bei dem die Datenbanktabelle password_reset bei der Installation und bei einem Update nicht erstellt wurde, wurde behoben.
 * Model-Klasse "Banner" speichert nun korrekt
 * Der Fallback-Link zu HTML5-Medien für nicht unterstützte Browser wird nun korrekt erstellt
+* "Anzeigen" Link in der Seitenliste war fehlerhaft, wenn Domain2Language Mapping aktiv ist und UliCMS in einem Unterordner installiert ist.
 
 ===== Neues in UliCMS 2017.4 =====
 

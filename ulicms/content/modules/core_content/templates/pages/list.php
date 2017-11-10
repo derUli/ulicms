@@ -528,7 +528,18 @@ $(window).load(function(){
 				if (! $domain) {
 					$url = "../" . $row->systemname . ".html";
 				} else {
-					$url = "http://" . $domain . "/" . $row->systemname . ".html";
+					$dirname = dirname ( get_request_uri () );
+					if (is_admin_dir ()) {
+						$dirname = dirname ( dirname ( $dirname . "/.." ) );
+					}
+					if (! startsWith ( $dirname, "/" )) {
+						$dirname = "/" . $dirname;
+					}
+					if (! endsWith ( $dirname, "/" )) {
+						$dirname = $dirname . "/";
+					}
+					
+					$url = "http://" . $domain . $dirname . $row->systemname . ".html";
 				}
 				echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation ( "view" ) . "\" title=\"" . get_translation ( "view" ) . "\"></a></td>";
 			}
@@ -566,7 +577,7 @@ $(window).load(function(){
 			}
 			
 			// admins are gods
-			if(is_admin()){
+			if (is_admin ()) {
 				$can_edit_this = true;
 			}
 			
