@@ -4,7 +4,7 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 	noperms ();
 } else {
 	$default_pkg_src = "https://packages.ulicms.de/{version}/";
-	$version = new ulicms_version ();
+	$version = new UliCMSVersion ();
 	$version = $version->getInternalVersion ();
 	$version = implode ( ".", $version );
 	$local_pkg_dir = "../packages/";

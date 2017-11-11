@@ -3,7 +3,7 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "info" )) {
 	noperms ();
 } else {
-	$version = new ulicms_version ();
+	$version = new UliCMSVersion ();
 	$admin_logo = Settings::get ( "admin_logo" );
 	if (! $admin_logo) {
 		$admin_logo = "gfx/logo.png";

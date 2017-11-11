@@ -380,7 +380,7 @@ if (! defined ( "KCFINDER_PAGE" )) {
 	add_hook ( "after_init" );
 }
 
-$version = new ulicms_version ();
+$version = new UliCMSVersion ();
 if (! defined ( "UPDATE_CHECK_URL" )) {
 	define ( "UPDATE_CHECK_URL", "https://update.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&update=" . urlencode ( $version->getUpdate () ) );
 }

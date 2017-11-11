@@ -59,7 +59,7 @@ class InstallerController {
 		return constant ( "TRANSLATION_TITLE_STEP_" . self::getStep () );
 	}
 	public static function getFooter() {
-		$version = new ulicms_version ();
+		$version = new UliCMSVersion ();
 		return "&copy; 2011 - " . $version->getReleaseYear () . " by <a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS</a>";
 	}
 	public static function submitAdminData() {

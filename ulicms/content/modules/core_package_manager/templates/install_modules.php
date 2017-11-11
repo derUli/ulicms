@@ -23,7 +23,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 <?php
 	} else {
 		include_once "../version.php";
-		$version = new ulicms_version ();
+		$version = new UliCMSVersion ();
 		$internalVersion = implode ( ".", $version->getInternalVersion () );
 		$pkg_src = str_replace ( "{version}", $internalVersion, $pkg_src );
 		

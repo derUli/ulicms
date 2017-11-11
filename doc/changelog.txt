@@ -26,6 +26,7 @@
   * add_translation()
   * json_readable_encode()
   * getLanguageByDomain()
+  * multi_explode()
 + CodeMirror kann per CSS-Klasse auf eine Textarea angewenden werden.
 + Beim Upload eines SimpleInstall v2 Pakets wird nun ein Screenshot angezeigt, sofern vorhanden.
 + Modelklassen hinzugefügt

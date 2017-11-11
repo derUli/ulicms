@@ -60,7 +60,7 @@ class SinPackageInstaller {
 					) );
 				}
 			}
-			$version = new ulicms_version ();
+			$version = new UliCMSVersion ();
 			$version = $version->getInternalVersionAsString ();
 			$version_not_supported = false;
 			if (StringHelper::isNotNullOrEmpty ( $data ["compatible_from"] ) and is_string ( $data ["compatible_from"] )) {

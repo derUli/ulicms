@@ -1,4 +1,9 @@
 <?php
+function multi_explode($delimiters, $string) {
+	$ready = str_replace ( $delimiters, $delimiters [0], $string );
+	$launch = explode ( $delimiters [0], $ready );
+	return $launch;
+}
 function json_readable_encode($in, $indent = 0, $from_array = false) {
 	$_myself = __FUNCTION__;
 	$_escape = function ($str) {
@@ -645,7 +650,7 @@ function add_hook($name) {
 	}
 }
 function cms_release_year() {
-	$v = new ulicms_version ();
+	$v = new UliCMSVersion ();
 	echo $v->getReleaseYear ();
 }
 function splitAndTrim($str) {
@@ -883,7 +888,7 @@ function getModulePath($module, $abspath = false) {
 	// Frontend Directory
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
-	}  // Backend Directory
+	} // Backend Directory
 else {
 		$module_folder = "../content/modules/";
 	}
@@ -1367,7 +1372,7 @@ function uninstall_module($name, $type = "module") {
 // returns version number of UliCMS Core
 function cms_version() {
 	require_once "version.php";
-	$v = new ulicms_version ();
+	$v = new UliCMSVersion ();
 	return implode ( ".", $v->getInternalVersion () );
 }
 function is_tablet() {
