@@ -1,9 +1,4 @@
 <?php
-function multi_explode($delimiters, $string) {
-	$ready = str_replace ( $delimiters, $delimiters [0], $string );
-	$launch = explode ( $delimiters [0], $ready );
-	return $launch;
-}
 function json_readable_encode($in, $indent = 0, $from_array = false) {
 	$_myself = __FUNCTION__;
 	$_escape = function ($str) {
@@ -462,6 +457,9 @@ function getSystemLanguage() {
 	}
 	return $lang;
 }
+// Todo:
+// Remove duplicate code
+// Use Settings::mappingStringToArray() for parsing assignment string
 function getDomainByLanguage($language) {
 	$domainMapping = Settings::get ( "domain_to_language" );
 	if (! empty ( $domainMapping )) {
@@ -484,6 +482,9 @@ function getDomainByLanguage($language) {
 	}
 	return null;
 }
+// Todo:
+// Remove duplicate code
+// Use Settings::mappingStringToArray() for parsing assignment string
 function getLanguageByDomain($domain) {
 	$domainMapping = Settings::get ( "domain_to_language" );
 	if (! empty ( $domainMapping )) {
@@ -506,6 +507,9 @@ function getLanguageByDomain($domain) {
 	}
 	return null;
 }
+// Todo:
+// Remove duplicate code
+// Use Settings::mappingStringToArray() for parsing assignment string
 function setLanguageByDomain() {
 	$domainMapping = Settings::get ( "domain_to_language" );
 	if (! empty ( $domainMapping )) {
