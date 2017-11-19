@@ -33,7 +33,8 @@ window.location.replace("index.php?action=modules#installed_patches_a");
 		<strong><?php translate("file");?></strong> <br /> <input name="file"
 			type="file" required />
 	</p>
-	<input type="submit" name="upload_patch"
-		value="<?php translate("install_patch");?>" />
+	<p>
+		<button type="submit" class="btn btn-warning" name="upload_patch"><?php translate("install_patch");?></button>
+	</p>
 </form>
 <?php }?>
