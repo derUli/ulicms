@@ -1,4 +1,68 @@
-﻿===== Neues in UliCMS 2017.4 =====
+﻿===== Neues in UliCMS 2018.1 =====
++ Teile des Backends wurden in Core-Module verschoben und in ein MVC-Pattern umstrukturiert
++ Module können nun Inhaltstypen mit eigenen Formularfeldern erstellen
++ Neuer Parameter $htmlAttributes (Array) zu der Funktion ModuleHelper::buildMethodCallForm() hinzugefügt
++ Der Confirm-Dialog "Wirklich löschen?" kann über eine CSS-Klasse an einem Formular ausgelöst werden.
++ Durch das booleanische "shy" Attribut in einer Metadatendatei können Module und Themes im Paketmanager versteckt werden.
++ Es können nun Standardwerte für benutzerdefinierte Werte gesetzt werden
++ User->resetPassword() implementiert
++ Neue Direktive action_permissions in den Metadaten eines Moduls wird nun ausgewertet
++ Parameter $order zu allen Funktionen im User-Manager hinzugefügt
++ Neue Funktionen:
+  * esc()
+  * _esc()
+  * ModuleHelper::buildMethodCallUrl()
+  * ModuleHelper::deleteButton()
+  * ModuleHelper::buildQueryString()
+  * ModuleHelper::buildMethodCallUploadForm()
+  * ModuleHelper::buildRessourcePath()
+  * ModuleHelper::buildMethodCallButton()
+  * CustomData::setDefault()
+  * CustomData::getDefaultAsJSON()
+  * Settings::mappingStringToArray()
+  * Banners::getByCategory()
+  * str_contains()
+  * register_translation()
+  * add_translation()
+  * json_readable_encode()
+  * getLanguageByDomain()
++ CodeMirror kann per CSS-Klasse auf eine Textarea angewenden werden.
++ Beim Upload eines SimpleInstall v2 Pakets wird nun ein Screenshot angezeigt, sofern vorhanden.
++ Modelklassen hinzugefügt
+  * Audio
+  * Video
++ Neue Filter hinzugefügt
+  * session_data
+  * body_classes
++ Neue Hooks hinzugefügt
+  * before_functions
+  * after_functions
+  * before_backend_header
+  * after_backend_header
+  * before_login_form
+  * after_login_form
+  * before_reset_password_form
+  * after_after_password_form
+  * before_backend_run_methods
+  * after_backend_run_methods
+# wenn möglich wird bei PHP Fehlern der HTTP Status "500 Internal Server Error" gesendet.
+# Funktion is_ajax_request() verschoben nach Request::isAjaxRequest()
+# Die Logik, welche Felder abhängig vom ausgewählten Inhaltstyp ein- und ausblendet wurde neu implementiert
+# Benutzer bei denen "Ist Admin" gesetzt ist, dürfen nun alle Seiten bearbeiten, unabhängig von den gesetzten Berechtigungen
+- Funktion ulicms_redirect() entfernt.
+  Nutzen Sie stattdessen Request::redirect()
+
+Bugfixes:
+* Die Gruppe "Administratoren" wird bei der Installation wieder erstellt
+* Auf einigen Systemen wurde beim Klick auf das Icon "Cache leeren" die Ladeanimation nicht angezeigt
+* Der Menüpunkt "Update" wurde nicht angezeigt, wenn der Benutzer zwar zu update_system berechtigt ist, aber "Ist Admin" nicht gesetzt ist.
+* Bei einigen Mailservern funktionierte der Versand von "Passwort zurücksetzen" E-Mails nicht.
+* Ein Problem, bei dem die Datenbanktabelle password_reset bei der Installation und bei einem Update nicht erstellt wurde, wurde behoben.
+* Model-Klasse "Banner" speichert nun korrekt
+* Der Fallback-Link zu HTML5-Medien für nicht unterstützte Browser wird nun korrekt erstellt
+* "Anzeigen" Link in der Seitenliste war fehlerhaft, wenn Domain2Language Mapping aktiv ist und UliCMS in einem Unterordner installiert ist.
+
+===== Neues in UliCMS 2017.4 =====
 
 + Gruppen können nun Sprachen zugeordnet bekommen
 + Neuer Inhaltstyp "Snippet"

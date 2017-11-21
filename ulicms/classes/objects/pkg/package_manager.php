@@ -122,7 +122,7 @@ class PackageManager {
 	}
 	private function replacePlaceHolders($url) {
 		$cfg = new config ();
-		$version = new ulicms_version ();
+		$version = new UliCMSVersion ();
 		$internalVersion = $version->getInternalVersion ();
 		$internalVersion = implode ( ".", $internalVersion );
 		$url = str_replace ( "{version}", $internalVersion, $url );

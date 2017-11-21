@@ -1,14 +1,20 @@
 <?php
 class UserTest extends PHPUnit_Framework_TestCase {
+	private $otherGroup;
 	public function setUp() {
 		$user = new User ();
 		$user->loadByUsername ( "max_muster" );
 		if (! is_null ( $user->getId () )) {
 			$user->delete ();
 		}
+		$group = new Group ();
+		$group->setName ( "Other Group" );
+		$group->save ();
+		$this->otherGroup = $group;
 	}
 	public function tearDown() {
 		$this->setUp ();
+		$this->otherGroup->delete ();
 	}
 	public function testCreateAndDeleteUser() {
 		$user = new User ();
@@ -32,10 +38,12 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$user->loadByUsername ( "max_muster" );
 		$this->assertEquals ( "max_muster", $user->getUsername () );
 		$this->assertEquals ( "Max", $user->getFirstname () );
-		$this->assertEquals ( "fr", $user->getDefaultLanguage());
+		$this->assertEquals ( "fr", $user->getDefaultLanguage () );
 		$this->assertEquals ( "Muster", $user->getLastname () );
 		$this->assertEquals ( "max@muster.de", $user->getEmail () );
 		$this->assertEquals ( 1, $user->getGroupId () );
+		$this->assertEquals ( 1, $user->getGroup ()->getId () );
+		$this->assertEquals ( "Administrator", $user->getGroup ()->getName () );
 		$this->assertEquals ( Encryption::hashPassword ( "password123" ), $user->getPassword () );
 		$this->assertEquals ( $lastLogin, $user->getLastLogin () );
 		$this->assertEquals ( "http://www.google.de", $user->getHomepage () );
@@ -53,6 +61,9 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$user->setLocked ( true );
 		$user->setAdmin ( true );
 		$user->setAboutMe ( "bye" );
+		$user->setGroup ( $this->otherGroup );
+		$this->assertEquals ( "Other Group", $user->getGroup ()->getName () );
+		$this->assertEquals ( $user->getGroupId (), $user->getGroup ()->getId() );
 		$user->save ();
 		
 		$user = new User ();

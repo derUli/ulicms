@@ -2,74 +2,15 @@
 class ActionRegistry {
 	private static $assignedControllers = array ();
 	private static $defaultCoreActions = array (
-			"home" => "inc/dashboard.php",
-			"help" => "inc/help.php",
-			"contents" => "inc/contents.php",
-			"pages" => "inc/pages.php",
-			"restore_version" => "inc/restore_version.php",
-			"view_diff" => "inc/view_diff.php",
-			"categories" => "inc/categories.php",
-			"pages_edit" => "inc/edit_page.php",
-			"pages_new" => "inc/add_page.php",
-			"clone_page" => "inc/clone_page.php",
-			"banner" => "inc/banner.php",
-			"banner_new" => "inc/banner_new.php",
-			"banner_edit" => "inc/banner_edit.php",
-			"admins" => "inc/admins.php",
 			"groups" => "inc/groups.php",
-			"admin_new" => "inc/admins_new.php",
-			"admin_edit" => "inc/admins_edit.php",
-			"settings_categories" => "inc/settings_categories.php",
-			"settings" => "inc/settings.php",
-			"settings_simple" => "inc/settings_simple.php",
-			"homepage_title" => "inc/homepage_title.php",
-			"motto" => "inc/motto.php",
-			"meta_description" => "inc/meta_description.php",
-			"meta_keywords" => "inc/meta_keywords.php",
-			"spam_filter" => "inc/spamfilter_settings.php",
-			"customize_menu" => "inc/customize_menu.php",
-			"key_new" => "inc/key_new.php",
-			"key_edit" => "inc/key_edit.php",
-			"media" => "inc/media.php",
-			"images" => "inc/filemanager.php",
-			"files" => "inc/filemanager.php",
-			"flash" => "inc/filemanager.php",
 			"modules" => "inc/modules.php",
 			"available_modules" => "inc/available_modules.php",
-			"install_modules" => "inc/install_modules.php",
-			"upload_patches" => "inc/upload_patches.php",
-			"open_graph" => "inc/open_graph.php",
 			"forms" => "inc/forms.php",
 			"forms_new" => "inc/forms_new.php",
 			"forms_edit" => "inc/forms_edit.php",
-			"info" => "inc/info.php",
-			"system_update" => "inc/system_update.php",
-			"motd" => "inc/motd.php",
-			"edit_profile" => "inc/edit_profile.php",
-			"logo_upload" => "inc/logo.php",
-			"favicon" => "inc/favicon.php",
-			"languages" => "inc/languages.php",
-			"cache" => "inc/cache_settings.php",
-			"install_method" => "inc/install_method.php",
-			"upload_package" => "inc/upload_package.php",
-			"module_settings" => "inc/module_settings.php",
-			"other_settings" => "inc/other_settings.php",
-			"frontpage_settings" => "inc/frontpage.php",
-			"pkg_settings" => "inc/pkg_settings.php",
-			"design" => "inc/design.php",
-			"available_patches" => "inc/available_patches.php",
-			"install_patches" => "inc/install_patches.php",
-			"videos" => "inc/videos.php",
-			"add_video" => "inc/add_video.php",
-			"edit_video" => "inc/edit_video.php",
-			"audio" => "inc/audio.php",
-			"add_audio" => "inc/add_audio.php",
-			"edit_audio" => "inc/edit_audio.php",
-			"do-post-install" => "inc/do-post-install.php",
-			"pkginfo" => "inc/pkginfo.php",
-			"sin_package_install_ok" => "inc/sin_package_install_ok.php",
-			"default_access_restrictions" => "inc/default_access_restrictions.php" 
+			"module_settings" => "inc/module_settings.php" 
 	);
+	private static $actionPermissions = array();
 	public static function getDefaultCoreActions() {
 		return self::$defaultCoreActions;
 	}
@@ -107,7 +48,30 @@ class ActionRegistry {
 				}
 			}
 			self::loadModuleActionAssignment ();
+			self::loadActionPermissions();
 		}
+	}
+	private static function loadActionPermissions(){
+		$modules = getAllModules ();
+		$disabledModules = Vars::get ( "disabledModules" );
+		foreach ( $modules as $module ) {
+			if (faster_in_array ( $module, $disabledModules )) {
+				continue;
+			}
+			$action_permissions = getModuleMeta($module, "action_permissions");
+			if($action_permissions){
+				foreach($action_permissions as $action=>$permission){
+					self::$actionPermissions[$action] = $permission;
+				}
+			}
+		}
+	}
+	public static function getActionpermission($action){
+		$permission = null;
+		if(isset(self::$actionPermissions[$action]) and is_string(self::$actionPermissions[$action])){
+			$permission = self::$actionPermissions[$action];
+		}
+		return $permission;
 	}
 	public static function loadModuleActionAssignment() {
 		$modules = getAllModules ();

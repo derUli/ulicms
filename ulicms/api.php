@@ -1,4 +1,59 @@
 <?php
+function json_readable_encode($in, $indent = 0, $from_array = false) {
+	$_myself = __FUNCTION__;
+	$_escape = function ($str) {
+		return preg_replace ( "!([\b\t\n\r\f\"\\'])!", "\\\\\\1", $str );
+	};
+	
+	$out = '';
+	
+	foreach ( $in as $key => $value ) {
+		$out .= str_repeat ( "\t", $indent + 1 );
+		$out .= "\"" . $_escape ( ( string ) $key ) . "\": ";
+		
+		if (is_object ( $value ) || is_array ( $value )) {
+			$out .= "\n";
+			$out .= $_myself ( $value, $indent + 1 );
+		} elseif (is_bool ( $value )) {
+			$out .= $value ? 'true' : 'false';
+		} elseif (is_null ( $value )) {
+			$out .= 'null';
+		} elseif (is_string ( $value )) {
+			$out .= "\"" . $_escape ( $value ) . "\"";
+		} else {
+			$out .= $value;
+		}
+		
+		$out .= ",\n";
+	}
+	
+	if (! empty ( $out )) {
+		$out = substr ( $out, 0, - 2 );
+	}
+	
+	$out = str_repeat ( "\t", $indent ) . "{\n" . $out;
+	$out .= "\n" . str_repeat ( "\t", $indent ) . "}";
+	
+	return $out;
+}
+function add_translation($key, $value) {
+	register_translation ( $key, $value );
+}
+function register_translation($key, $value) {
+	$key = strtoupper ( $key );
+	if (! startswith ( $key, "TRANSLATION_" )) {
+		$key = "TRANSLATION_" . $key;
+	}
+	idefine ( $key, $value );
+}
+
+// returns true if $needle is a substring of $haystack
+function str_contains($needle, $haystack) {
+	return strpos ( $haystack, $needle ) !== false;
+}
+function array_keep($array, $keys) {
+	return array_intersect_key ( $array, array_fill_keys ( $keys, null ) );
+}
 function getAllUsedLanguages() {
 	$sql = "select language from `{prefix}content` where active = 1 group by language order by language";
 	$query = Database::query ( $sql, true );
@@ -71,17 +126,6 @@ function get_prefered_language(array $available_languages, $http_accept_language
 	arsort ( $langs );
 	
 	return $langs;
-}
-function get_google_fonts() {
-	$retval = array ();
-	$file = ULICMS_ROOT . "/lib/webFontNames.opml";
-	$content = file_get_contents ( $file );
-	$xml = new SimpleXMLElement ( $content );
-	foreach ( $xml->body->outline as $outline ) {
-		$retval [] = $outline ["text"];
-	}
-	;
-	return $retval;
 }
 function get_all_used_menus() {
 	$retval = array ();
@@ -314,53 +358,9 @@ function get_used_post_types() {
 	return $return_types;
 }
 function get_available_post_types() {
-	$post_types = array (
-			"page",
-			"article",
-			// "comment",
-			"snippet",
-			"list",
-			"link",
-			"language_link",
-			"node",
-			"image",
-			"module",
-			"video",
-			"audio" 
-	);
-	$modules = getAllModules ();
-	$disabledModules = Vars::get ( "disabledModules" );
-	foreach ( $modules as $module ) {
-		if (faster_in_array ( $module, $disabledModules )) {
-			continue;
-		}
-		$custom_types = getModuleMeta ( $module, "custom_types" );
-		if ($custom_types) {
-			foreach ( $custom_types as $key => $value ) {
-				if (! faster_in_array ( $key, $post_types )) {
-					$post_types [] = $key;
-				}
-			}
-		}
-	}
-	
-	$themes = getAllModules ();
-	foreach ( $themes as $theme ) {
-		if (faster_in_array ( $module, $disabledModules )) {
-			continue;
-		}
-		$custom_types = getThemeMeta ( $theme, "custom_types" );
-		if ($custom_types) {
-			foreach ( $custom_types as $key => $value ) {
-				if (! faster_in_array ( $key, $post_types )) {
-					$post_types [] = $key;
-				}
-			}
-		}
-	}
-	
-	$post_types = apply_filter ( $post_types, "custom_post_types" );
-	return $post_types;
+	$types = DefaultContentTypes::getAll ();
+	$types = array_keys ( $types );
+	return $types;
 }
 
 // Schriftgrößen zurückgeben
@@ -457,6 +457,9 @@ function getSystemLanguage() {
 	}
 	return $lang;
 }
+// Todo:
+// Remove duplicate code
+// Use Settings::mappingStringToArray() for parsing assignment string
 function getDomainByLanguage($language) {
 	$domainMapping = Settings::get ( "domain_to_language" );
 	if (! empty ( $domainMapping )) {
@@ -479,6 +482,34 @@ function getDomainByLanguage($language) {
 	}
 	return null;
 }
+// Todo:
+// Remove duplicate code
+// Use Settings::mappingStringToArray() for parsing assignment string
+function getLanguageByDomain($domain) {
+	$domainMapping = Settings::get ( "domain_to_language" );
+	if (! empty ( $domainMapping )) {
+		$domainMapping = explode ( "\n", $domainMapping );
+		for($i = 0; $i < count ( $domainMapping ); $i ++) {
+			$line = trim ( $domainMapping [$i] );
+			if (! empty ( $line )) {
+				$line = explode ( "=>", $line );
+				if (count ( $line ) > 1) {
+					$line [0] = trim ( $line [0] );
+					$line [1] = trim ( $line [1] );
+					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
+						if ($line [0] == $domain) {
+							return $line [1];
+						}
+					}
+				}
+			}
+		}
+	}
+	return null;
+}
+// Todo:
+// Remove duplicate code
+// Use Settings::mappingStringToArray() for parsing assignment string
 function setLanguageByDomain() {
 	$domainMapping = Settings::get ( "domain_to_language" );
 	if (! empty ( $domainMapping )) {
@@ -623,7 +654,7 @@ function add_hook($name) {
 	}
 }
 function cms_release_year() {
-	$v = new ulicms_version ();
+	$v = new UliCMSVersion ();
 	echo $v->getReleaseYear ();
 }
 function splitAndTrim($str) {
@@ -1345,7 +1376,7 @@ function uninstall_module($name, $type = "module") {
 // returns version number of UliCMS Core
 function cms_version() {
 	require_once "version.php";
-	$v = new ulicms_version ();
+	$v = new UliCMSVersion ();
 	return implode ( ".", $v->getInternalVersion () );
 }
 function is_tablet() {

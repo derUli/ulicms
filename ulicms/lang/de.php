@@ -240,15 +240,6 @@ define ( "TRANSLATION_CACHE_WAS_CLEARED", "Der Cache wurde erfolgreich geleert."
 define ( "TRANSLATION_ALLOWED_HTML_TAGS", "Erlaubte HTML-Tags" );
 define ( "TRANSLATION_MOTD_WAS_CHANGED", "Die Message Of the Day wurde geändert." );
 
-// Logo
-define ( "TRANSLATION_YOUR_LOGO", "Ihr Logo" );
-define ( "TRANSLATION_UPLOAD_NEW_LOGO", "Neues Logo hochladen" );
-define ( "TRANSLATION_UPLOAD", "Hochladen" );
-define ( "TRANSLATION_LOGO_INFOTEXT", "Laden Sie ein beliebiges Logo hoch, welches im Head Bereich Ihrer Homepage angezeigt wird.<br/>
-Sie können das Logo in den Grundeinstellungen deaktivieren.<br/>
-Das Bild darf maximal 500 x 100 Pixel haben." );
-define ( "TRANSLATION_UPLOADED_IMAGE_TO_BIG", "Die von Ihnen hochgeladene Grafik ist zu groß." );
-
 // Paketquelle
 define ( "TRANSLATION_OFFICIAL_PACKAGE_SOURCE", "Offizielle Paketquelle [packages.ulicms.de]" );
 define ( "TRANSLATION_FROM_FILESYSTEM", "Aus dem Dateisystem" );
@@ -361,11 +352,6 @@ define ( "TRANSLATION_ONLY_IN_BACKEND", "Nur im Backend" );
 define ( "TRANSLATION_ONLY_IN_FRONTEND", "Nur im Frontend" );
 define ( "TRANSLATION_BOOTH_BACKEND_AND_FRONTEND", "Im Backend und im Frontend" );
 
-// Expertenmodus (Einstellungen)
-define ( "TRANSLATION_CREATE_OPTION", "Konfigurationsvariable erstellen" );
-define ( "TRANSLATION_OPTION", "Option" );
-define ( "TRANSLATION_VALUE", "Wert" );
-
 define ( "TRANSLATION_UPDATE_AVAILABLE", "Update verfügbar" );
 
 define ( "TRANSLATION_CUSTOM_DATA_JSON", "Benutzerdefinierte Werte (JSON)" );
@@ -403,9 +389,6 @@ define ( "TRANSLATION_INSTALL_PATCHES", "Patches installieren" );
 define ( "TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches sind verfügbar" );
 
 // Hilfetexte
-define ( "TRANSLATION_HELP", "Hilfe" );
-define ( "TRANSLATION_PATCH_INSTALL_HELP", file_get_contents ( ULICMS_ROOT . "/lang/longtxt/de/patch_install_help.html" ) );
-define ( "TRANSLATION_HELP_IS_ADMIN", "Diese Option deaktiviert alle Zugriffsbeschränkungen für diesen Nutzer. Er hat somit vollen Zugriff auf das System." );
 
 // Videos
 define ( "TRANSLATION_VIDEOS", "Videos" );
@@ -728,5 +711,12 @@ define ( "TRANSLATION_NEW", "Neu" );
 
 define ( "TRANSLATION_CODE_TO_EMBED", "Code zum Einbetten" );
 define ( "TRANSLATION_JSREDIRECT_NOSCRIPT", "Wenn Sie nicht automatisch weitergeleitet werden <a href=\"%url%\">klicken Sie hier</a>." );
+
+define ( "TRANSLATION_SHOW_CORE_MODULES", "Core-Module anzeigen" );
+
+define ( "TRANSLATION_COUNT", "Anzahl" );
+
+define ( "TRANSLATION_INVALID_TOKEN", "Ungültiger Token" );
+define ( "TRANSLATION_NOT_AN_EMBED_MODULE", "Kein Embed Modul" );
 
 add_hook ( "lang_de" );

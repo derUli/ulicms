@@ -1,0 +1,15 @@
+{
+	"source" : "core",
+	"version" : "2018.1",
+	"embed" : false,
+	"actions" : {
+		"view_diff" : "templates/view_diff.php",
+		"restore_version" : "templates/restore_version.php"
+	},
+	"controllers" : {
+	"HistoryController" : "controllers/HistoryController.php"
+},
+	"controller_function_permissions" : {
+  	"FaviconController::doRestore" : "pages"
+	}
+}

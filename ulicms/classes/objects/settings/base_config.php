@@ -1,3 +1,3 @@
 <?php
-class baseConfig {
+class BaseConfig {
 }

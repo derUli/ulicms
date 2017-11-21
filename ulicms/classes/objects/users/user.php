@@ -10,6 +10,7 @@ class User {
 	private $skype_id = "";
 	private $about_me = "";
 	private $group_id = null;
+	private $group = null;
 	private $notify_on_login = false;
 	private $html_editor = "ckeditor";
 	private $require_password_change = false;
@@ -55,6 +56,11 @@ class User {
 				if (isset ( $this->$key ) || property_exists ( $this, $key )) {
 					$this->$key = $value;
 				}
+			}
+			if (! is_null ( $this->group_id )) {
+				$this->group = new Group ( $this->group_id );
+			} else {
+				$this->group = null;
 			}
 		}
 	}
@@ -174,7 +180,9 @@ class User {
 		return $this->password_changed;
 	}
 	public function resetPassword() {
-		throw new NotImplementedException ();
+		$passwordReset = new PasswordReset ();
+		$token = $passwordReset->addToken ( $this->getId () );
+		$passwordReset->sendMail ( $token, $this->getEmail (), "xxx.xxx.xxx.xxx", $this->getFirstname (), $this->getLastname () );
 	}
 	public function getOldEncryption() {
 		return $this->old_encryption;
@@ -227,6 +235,14 @@ class User {
 	}
 	public function setGroupId($gid) {
 		$this->group_id = ! is_null ( $gid ) ? $gid : null;
+		$this->group = ! is_null ( $gid ) ? new Group ( $gid ) : null;
+	}
+	public function getGroup() {
+		return $this->group;
+	}
+	public function setGroup($group) {
+		$this->group = $group;
+		$this->group_id = ! is_null ( $group ) ? $group->getId () : null;
 	}
 	public function getNotifyOnLogin() {
 		return boolval ( $this->notify_on_login );

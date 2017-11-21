@@ -3,7 +3,7 @@ include_once Path::Resolve ( "ULICMS_ROOT/templating.php" );
 class ApiTest extends PHPUnit_Framework_TestCase {
 	public function testIsCrawler() {
 		$useragents = array (
-				"Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" => true, 
+				"Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" => true,
 				"Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html)" => true,
 				"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36" => false,
 				"Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)" => true,
@@ -14,10 +14,23 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 			$this->assertEquals ( $value, is_crawler ( $key ) );
 		}
 	}
-	public function testGetAllUsedLanguages(){
-		$languages = getAllUsedLanguages();
-		$this->assertEquals(2, count($languages));
-		$this->assertTrue(in_array("de", $languages));
-		$this->assertTrue(in_array("en", $languages));
+	public function testGetAllUsedLanguages() {
+		$languages = getAllUsedLanguages ();
+		$this->assertGreaterThanOrEqual( 2, count ( $languages ) );
+		$this->assertTrue ( in_array ( "de", $languages ) );
+		$this->assertTrue ( in_array ( "en", $languages ) );
+	}
+	public function testAddTranslation() {
+		$key1 = uniqid ();
+		$key2 = "TRANSLATION_" . uniqid ();
+		$value1 = uniqid ();
+		$value2 = uniqid ();
+		$this->assertEquals ( $key1, get_translation ( $key1 ) );
+		add_translation ( $key1, $value1 );
+		$this->assertEquals ( $value1, get_translation ( $key1 ) );
+		add_translation ( $key1, $value2 );
+		$this->assertEquals ( $value1, get_translation ( $key1 ) );
+		add_translation ( $key2, $value2 );
+		$this->assertEquals ( $value2, constant(strtoupper($key2)) );
 	}
 }

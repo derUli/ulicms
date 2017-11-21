@@ -1,4 +1,4 @@
 <?php
 include_once "../version.php";
-$version = new ulicms_version ();
+$version = new UliCMSVersion ();
 define ( "APPLICATION_TITLE", "UliCMS " . $version->getInternalVersionAsString () . " Installation wizard" );

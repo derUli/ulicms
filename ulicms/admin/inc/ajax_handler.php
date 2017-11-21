@@ -1,5 +1,8 @@
 <?php
 function checkIfSystemnameIsFree($systemname, $language, $id) {
+	if (StringHelper::isNullOrWhitespace ( $systemanme )) {
+		return true;
+	}
 	$systemname = Database::escapeValue ( $systemname );
 	$language = Database::escapeValue ( $language );
 	$id = intval ( $id );
@@ -47,6 +50,9 @@ function ajaxOnChangeLanguage($lang, $menu, $parent) {
 $ajax_cmd = $_REQUEST ["ajax_cmd"];
 
 switch ($ajax_cmd) {
+	case "getContentTypes" :
+		JSONResult ( DefaultContentTypes::getAll () );
+		break;
 	case "check_if_systemname_is_free" :
 		if (checkIfSystemnameIsFree ( $_REQUEST ["systemname"], $_REQUEST ["language"], intval ( $_REQUEST ["id"] ) )) {
 			echo "yes";

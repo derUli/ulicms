@@ -46,6 +46,12 @@ def main():
     modules_dir_to = os.path.join(target, "ulicms", "classes", "objects", "modules")
     shutil.copytree(modules_dir_from, modules_dir_to, ignore=IGNORE_PATTERNS)
 
+    modules_dir_from = os.path.join(source_dir, "ulicms", "content", "modules")
+    modules_dir_to = os.path.join(target, "ulicms", "content", "modules")
+    os.makedirs(modules_dir_to)
+    prefixed = [filename for filename in os.listdir(modules_dir_from) if filename.startswith("core_")]
+    for prefix in prefixed:
+        shutil.copytree(os.path.join(modules_dir_from, prefix), os.path.join(modules_dir_to, prefix))
 
     if os.path.exists(update_script):
         print("preparing update Script")
@@ -57,7 +63,6 @@ def main():
                 if "unlink" in line and line.startswith("//"):
                     line = line.replace("//", "")
                     line = line.lstrip()
-
                 print(line)
                 f.write(line)
     else:

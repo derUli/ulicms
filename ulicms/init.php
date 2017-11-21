@@ -76,6 +76,22 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "web" . DIRECTORY_SEPERATOR . "request.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "antispam-features.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "categories.php";
+
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "ContentType.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "DefaultContentTypes.php";
+
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "CustomField.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "TextField.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "MultilineTextField.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "EmailField.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "MonthField.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "DatetimeField.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "NumberField.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "ColorField.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "HtmlField.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "SelectField.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "CheckboxField.php";
+
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "pkg" . DIRECTORY_SEPERATOR . "package_manager.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "security" . DIRECTORY_SEPERATOR . "acl.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "pkg" . DIRECTORY_SEPERATOR . "sin_package_installer.php";
@@ -98,6 +114,10 @@ if (file_exists ( $mobile_detect_as_module )) {
 
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "version.php";
 function exception_handler($exception) {
+	if (! headers_sent ()) {
+		header ( $_SERVER ["SERVER_PROTOCOL"] . " 500 Internal Server Error" );
+	}
+	
 	echo nl2br ( htmlspecialchars ( $exception ) ) . "\n";
 	if (! defined ( "EXCEPTION_OCCURRED" )) {
 		define ( "EXCEPTION_OCCURRED", true );
@@ -203,6 +223,8 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "custom_fields.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "language.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "results.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "media" . DIRECTORY_SEPERATOR . "audio.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "media" . DIRECTORY_SEPERATOR . "video.php";
 
 Translation::init ();
 
@@ -353,13 +375,12 @@ if (! defined ( "KCFINDER_PAGE" )) {
 	TypeMapper::loadMapping ();
 	HelperRegistry::loadModuleHelpers ();
 	ControllerRegistry::loadModuleControllers ();
-	
 	add_hook ( "before_init" );
 	add_hook ( "init" );
 	add_hook ( "after_init" );
 }
 
-$version = new ulicms_version ();
+$version = new UliCMSVersion ();
 if (! defined ( "UPDATE_CHECK_URL" )) {
 	define ( "UPDATE_CHECK_URL", "https://update.ulicms.de/?v=" . urlencode ( implode ( ".", $version->getInternalVersion () ) ) . "&update=" . urlencode ( $version->getUpdate () ) );
 }

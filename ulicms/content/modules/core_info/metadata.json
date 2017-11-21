@@ -1,0 +1,9 @@
+{
+	"source": "core",
+	"version": "2018.1",
+	"embed": false,
+	"actions": {
+		"info": "templates/info.php",
+		"license": "templates/license.php"
+	}
+}

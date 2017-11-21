@@ -237,14 +237,6 @@ define ( "TRANSLATION_CACHE_WAS_CLEARED", "Der Cache wurde erfolgreich geleert."
 define ( "TRANSLATION_ALLOWED_HTML_TAGS", "allowed HTML-Tags" );
 define ( "TRANSLATION_MOTD_WAS_CHANGED", "The message of the day was changed" );
 
-// Logo
-define ( "TRANSLATION_YOUR_LOGO", "Your Logo" );
-define ( "TRANSLATION_UPLOAD_NEW_LOGO", "Upload new logo" );
-define ( "TRANSLATION_UPLOAD", "Upload" );
-define ( "TRANSLATION_LOGO_INFOTEXT", "You can upload logo here.<br/>
-The image should have a size of maximal 500 x 100 pixel." );
-define ( "TRANSLATION_UPLOADED_IMAGE_TO_BIG", "Your uploaded image was to big." );
-
 // Paketquelle
 define ( "TRANSLATION_OFFICIAL_PACKAGE_SOURCE", "official package source [packages.ulicms.de]" );
 define ( "TRANSLATION_FROM_FILESYSTEM", "from filesystem" );
@@ -362,10 +354,6 @@ define ( "TRANSLATION_ONLY_IN_BACKEND", "Only at Backend" );
 define ( "TRANSLATION_ONLY_IN_FRONTEND", "Only at Frontend" );
 define ( "TRANSLATION_BOOTH_BACKEND_AND_FRONTEND", "Booth Backend and Frontend" );
 
-define ( "TRANSLATION_CREATE_OPTION", "Create configuration variable" );
-define ( "TRANSLATION_OPTION", "Variable" );
-define ( "TRANSLATION_VALUE", "Value" );
-
 define ( "TRANSLATION_UPDATE_AVAILABLE", "Update available" );
 
 define ( "TRANSLATION_CUSTOM_DATA_JSON", "User defined values (JSON)" );
@@ -406,12 +394,6 @@ define ( "TRANSLATION_AVAILABLE_PATCHES", "Available Patches" );
 define ( "TRANSLATION_INSTALL_PATCHES", "Install Patches" );
 
 define ( "TRANSLATION_THERE_ARE_PATCHES_AVAILABLE", "Patches are available" );
-
-// Hilfetexte
-define ( "TRANSLATION_HELP", "Help" );
-define ( "TRANSLATION_PATCH_INSTALL_HELP", file_get_contents ( ULICMS_ROOT . "/lang/longtxt/en/patch_install_help.html" ) );
-
-define ( "TRANSLATION_HELP_IS_ADMIN", "This option disables all access restrictions. The user have full access to the system.." );
 
 // Videos
 define ( "TRANSLATION_VIDEOS", "Videos" );
@@ -733,5 +715,11 @@ define ( "TRANSLATION_NOT_IN_MENU", "Not in menu" );
 define ( "TRANSLATION_NEW", "New" );
 define ( "TRANSLATION_CODE_TO_EMBED", "Code to Embed" );
 define ( "TRANSLATION_JSREDIRECT_NOSCRIPT", "If you are not automatically redirected, <a href=\"%url%\">click here</a>." );
+
+define ( "TRANSLATION_SHOW_CORE_MODULES", "Show Core Modules" );
+define ( "TRANSLATION_COUNT", "Count" );
+
+define ( "TRANSLATION_INVALID_TOKEN", "Invalid Token" );
+define ( "TRANSLATION_NOT_AN_EMBED_MODULE", "Not an embed module" );
 
 add_hook ( "lang_en" );

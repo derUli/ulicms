@@ -12,6 +12,9 @@ class ModuleHelper {
 		$path = trim ( $path, "/" );
 		return getModulePath ( $module ) . $path;
 	}
+	public static function buildRessourcePath($module, $path) {
+		return self::buildModuleRessourcePath ( $module, $path );
+	}
 	public static function getFirstPageWithModule($module = null, $language = null) {
 		if (is_null ( $language )) {
 			$language = getCurrentLanguage ();
@@ -124,7 +127,7 @@ class ModuleHelper {
 	/**
 	 * Convert underscore_strings to camelCase.
 	 *
-	 * @param {string} $str
+	 * @param {string} $str        	
 	 */
 	public static function underscoreToCamel($str) {
 		// Remove underscores, capitalize words, squash, lowercase first.
@@ -137,9 +140,17 @@ class ModuleHelper {
 		}
 		return $result;
 	}
-	public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post") {
+	public static function buildMethodCallUrl($sClass, $sMethod, $suffix = null) {
+		return "index.php?" . self::buildMethodCall ( $sClass, $sMethod, $suffix );
+	}
+	public static function buildMethodCallUploadForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post", $htmlAttributes = array()) {
+		$htmlAttributes ["enctype"] = "multipart/form-data";
+		return self::buildMethodCallForm ( $sClass, $sMethod, $otherVars, $requestMethod, $htmlAttributes );
+	}
+	public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post", $htmlAttributes = array()) {
 		$html = "";
-		$html .= '<form action="index.php" method="' . $requestMethod . '">';
+		$attribhtml = StringHelper::isNotNullOrWhitespace ( self::buildHTMLAttributesFromArray ( $htmlAttributes ) ) ? " " . self::buildHTMLAttributesFromArray ( $htmlAttributes ) : "";
+		$html .= '<form action="index.php" method="' . $requestMethod . '"' . $attribhtml . '>';
 		$html .= get_csrf_token_html ();
 		$args = $otherVars;
 		$args ["sClass"] = $sClass;
@@ -148,5 +159,40 @@ class ModuleHelper {
 			$html .= '<input type="hidden" name="' . Template::getEscape ( $key ) . '" value="' . Template::getEscape ( $value ) . '">';
 		}
 		return $html;
+	}
+	public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class"=>"btn btn-default", "type"=>"submit"), $otherVars = array(), $formAttributes = array(), $requestMethod = "post") {
+		$html = self::buildMethodCallForm ( $sClass, $sMethod, $otherVars, $requestMethod, $formAttributes );
+		$html .= '<button ' . self::buildHTMLAttributesFromArray ( $buttonAttributes ) . ">";
+		$html .= $buttonText . "</button>";
+		$html .= "</form>";
+		return $html;
+	}
+	public static function deleteButton($url, $otherVars = array(), $htmlAttributes = array()) {
+		$html = "";
+		$htmlAttributes ["class"] = trim ( "delete-form " . $htmlAttributes ["class"] );
+		
+		$attribhtml = StringHelper::isNotNullOrWhitespace ( self::buildHTMLAttributesFromArray ( $htmlAttributes ) ) ? " " . self::buildHTMLAttributesFromArray ( $htmlAttributes ) : "";
+		
+		$html .= '<form action="' . _esc ( $url ) . '" method="post"' . $attribhtml . '>';
+		$html .= get_csrf_token_html ();
+		foreach ( $otherVars as $key => $value ) {
+			$html .= '<input type="hidden" name="' . Template::getEscape ( $key ) . '" value="' . Template::getEscape ( $value ) . '">';
+		}
+		$imgFile = is_admin_dir () ? "gfx/delete.gif" : "admin/gfx/delete.gif";
+		$html .= '<input type="image" src="' . $imgFile . '" alt="' . get_translation ( "delete" ) . '" title="' . get_translation ( "delete" ) . '">';
+		$html .= "</form>";
+		return $html;
+	}
+	public static function buildHTMLAttributesFromArray($attributes = array()) {
+		$html = "";
+		foreach ( $attributes as $key => $value ) {
+			$html .= Template::getEscape ( $key ) . '="' . Template::getEscape ( $value ) . '" ';
+		}
+		$html = trim ( $html );
+		return $html;
+	}
+	public static function buildQueryString($data, $forHtml = true) {
+		$seperator = $forHtml ? "&amp;" : "&";
+		return http_build_query ( $data, '', $seperator );
 	}
 }

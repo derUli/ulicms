@@ -1,7 +1,4 @@
 <?php
-if (! defined ( "ULICMS_ROOT" )) {
-	die ( "Dummer Hacker!" );
-}
 if (isset ( $_REQUEST ["standard"] )) {
 	$standard = intval ( $_REQUEST ["standard"] );
 	setconfig ( "default_acl_group", $standard );
@@ -42,9 +39,7 @@ if ($_SESSION ["grp_sort"] == "id") {
 </p>
 <?php }?>
 <p><?php BackendHelper::formatDatasetCount(count($groups));?></p>
-
 <?php
-
 if (count ( $groups ) > 0) {
 	?>
 <div class="scroll">
@@ -62,21 +57,13 @@ if (count ( $groups ) > 0) {
 		</tr>
 		</thead>
 		<tbody>
-
 	<?php
-	
 	foreach ( $groups as $id => $name ) {
 		?>
 		<tr id="dataset-<?php echo $id;?>">
-				<td><?php
-		
-		echo $id;
-		?>
+				<td><?php echo $id;?>
 			</td>
-				<td><?php
-		
-		echo $name;
-		?>
+				<td><?php echo $name;?>
 			</td>
 
 <?php if($acl->hasPermission("groups_edit")){?>
@@ -85,7 +72,8 @@ if (count ( $groups ) > 0) {
 			if ($default_acl_group === $id) {
 				?> <span style="color: green; font-weight: bold;"><?php translate("yes");?> </span> <?php
 			} else {
-				?> <a href="?action=groups&standard=<?php
+				?> <a
+					href="?action=groups&standard=<?php
 				
 				echo $id;
 				?>"><span style="color: red; font-weight: bold;"

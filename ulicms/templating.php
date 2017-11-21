@@ -1,4 +1,10 @@
 <?php
+function esc($value) {
+	Template::escape ( $value );
+}
+function _esc($value) {
+	return Template::getEscape ( $value );
+}
 function html5_doctype() {
 	echo get_html5_doctype ();
 }
@@ -402,7 +408,7 @@ function language_selection() {
 }
 function get_category() {
 	$current_page = get_page ();
-	return categories::getCategoryById ( $current_page ["category"] );
+	return Categories::getCategoryById ( $current_page ["category"] );
 }
 function category() {
 	Template::escapape ( get_category () );
@@ -437,6 +443,7 @@ function get_body_classes() {
 		$str .= "containsModule ";
 	}
 	$str = trim ( $str );
+	$str = apply_filter ( $str, "body_classes" );
 	return $str;
 }
 function body_classes() {
@@ -1139,3 +1146,6 @@ function check_status() {
 	no_cache ();
 	return "403 Forbidden";
 }
+
+// load default content types;
+DefaultContentTypes::initTypes ();

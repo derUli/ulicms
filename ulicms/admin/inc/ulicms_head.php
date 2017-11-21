@@ -34,7 +34,8 @@ $enq = array (
 		"scripts/util.js",
 		"scripts/users.js",
 		"scripts/global.js",
-		"scripts/bootstrap.min.js" 
+		"scripts/bootstrap.min.js",
+		"../lib/js/global.js"
 );
 ?>
 <?php
@@ -44,27 +45,22 @@ if (is_logged_in ()) {
 	$enq [] = "scripts/jquery-shiftclick.js";
 	$enq [] = "scripts/shift_checkbox.js";
 }
-
 if (! is_mobile ()) {
 	$enq [] = "scripts/doubletaptogo/doubletaptogo.min.js";
 }
 ?>
 <?php
-
 foreach ( $enq as $script ) {
 	enqueueScriptFile ( $script );
 }
 ?>
 <?php combined_script_html();?>
-
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   $.ajaxSetup({ cache: false });
-
 <?php
-
 if (! is_mobile ()) {
 	?>
   $(window).scroll(function() {
@@ -85,7 +81,6 @@ $(".menu li:has(ul)").doubleTapToGo();
 	href="scripts/vallenato/vallenato.css" />
 <?php include "inc/ulicms_touch_icons.php";?>
 <?php
-
 $styles [] = "css/bootstrap.min.css";
 $styles [] = "codemirror/lib/codemirror.css";
 $styles [] = "codemirror/mode/xml/xml.css";
@@ -112,7 +107,14 @@ $(document).ready(function(){
 add_hook ( "admin_head" );
 ?>
 </head>
-<div class="fluid-container main">
+<div
+	class="fluid-container main <?php
+
+	if (get_action ()) {
+		echo 'action-' . Template::getEscape ( get_action () );
+	}
+
+	?>">
 
 	<div class="row">
 		<div class="col-xs-8">
@@ -122,13 +124,15 @@ add_hook ( "admin_head" );
 		</div>
 		<div class="col-xs-4 menu-container">
 		<?php
-		
+
 		if (is_logged_in ()) {
 			?>
 			<div class="row pull-right">
 				<div class="col-xs-6">
 					<img src="gfx/clear-cache.png" id="menu-clear-cache"
 						alt="<?php translate("clear_cache");?>">
+							<img src="gfx/loading2.gif" id="menu-clear-cache-loading" style="display:none"
+								alt="<?php translate("loading");?>">
 				</div>
 				<div class="col-xs-6">
 					<img src="gfx/menu-icon.png" id="menu-toggle"

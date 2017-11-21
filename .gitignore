@@ -16,3 +16,6 @@ releases/
 .settings
 .project
 .buildpath
+Thumbs.db
+ulicms/content/custom_code/functions.php
+.htpasswd

@@ -1,12 +1,13 @@
 <?php
 if (! class_exists ( "ulicms_version" )) {
-	class ulicms_version {
+	class UliCMSVersion {
 		function __construct() {
-			$this->version = "Futzelkönig";
-			$this->releaseYear = 2017;
+			$this->version = "Sockenreißer";
+			$this->releaseYear = 2018;
 			$this->internalVersion = Array (
-					2017,
-					4 
+					2018,
+					1 
+			
 			);
 			$this->update = "";
 			$this->developmentVersion = false;
@@ -32,5 +33,8 @@ if (! class_exists ( "ulicms_version" )) {
 		public function getInternalVersionAsString() {
 			return implode ( ".", $this->internalVersion );
 		}
+	}
+	// For Backwards compatiblity
+	class ulicms_version extends UliCMSVersion {
 	}
 }

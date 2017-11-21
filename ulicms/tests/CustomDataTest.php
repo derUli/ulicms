@@ -2,7 +2,7 @@
 include_once ULICMS_ROOT . "/templating.php";
 class CustomDataTest extends PHPUnit_Framework_TestCase {
 	public function tearDown() {
-		Settings::set ( "my_value", null );
+		Settings::delete ( "my_value", null );
 		unset ( $_GET ["seite"] );
 	}
 	public function testGetCustomDataOrSetting() {

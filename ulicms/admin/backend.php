@@ -1,6 +1,8 @@
 <?php
+// required because my local XAMPP is sometimes in wrong folder, so includes will fail
+chdir ( dirname ( __FILE__ ) );
+
 require_once "../init.php";
-require_once "../templating.php";
 @session_start ();
 $acl = new acl ();
 
@@ -43,6 +45,8 @@ add_hook ( "before_set_locale_by_language" );
 setLocaleByLanguage ();
 add_hook ( "after_set_locale_by_language" );
 
+require_once "../templating.php";
+
 $cfg = new config ();
 if (isset ( $cfg->ip_whitelist ) and is_array ( $cfg->ip_whitelist ) and count ( $cfg->ip_whitelist ) > 0 and ! faster_in_array ( get_ip (), $cfg->ip_whitelist )) {
 	translate ( "login_from_ip_not_allowed" );
@@ -78,16 +82,27 @@ if (isset ( $_REQUEST ["ajax_cmd"] )) {
 }
 add_hook ( "after_ajax_handler" );
 
+add_hook ( "before_backend_run_methods" );
 ControllerRegistry::runMethods ();
+add_hook ( "after_backend_run_methods" );
 
+add_hook ( "before_backend_header" );
 require_once "inc/header.php";
+add_hook ( "after_backend_header" );
+
 if (! $eingeloggt) {
 	if (isset ( $_GET ["register"] )) {
+		add_hook ( "before_register_form" );
 		require_once "inc/registerform.php";
+		add_hook ( "after_register_form" );
 	} else if (isset ( $_GET ["reset_password"] )) {
+		add_hook ( "before_reset_password_form" );
 		require_once "inc/reset_password.php";
+		add_hook ( "before_after_password_form" );
 	} else {
+		add_hook ( "before_login_form" );
 		require_once "inc/loginform.php";
+		add_hook ( "after_login_form" );
 	}
 } else {
 	require_once "inc/adminmenu.php";
@@ -101,7 +116,12 @@ if (! $eingeloggt) {
 	if ($_SESSION ["require_password_change"]) {
 		require_once "inc/change_password.php";
 	} else if (isset ( $actions [get_action ()] )) {
-		include_once $actions [get_action ()];
+		$requiredPermission = ActionRegistry::getActionpermission ( get_action () );
+		if ((! $requiredPermission) or ($requiredPermission and $acl->hasPermission ( $requiredPermission ))) {
+			include_once $actions [get_action ()];
+		} else {
+			noperms ();
+		}
 	} else {
 		translate ( "action_not_found" );
 	}

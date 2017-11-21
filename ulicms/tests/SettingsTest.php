@@ -32,4 +32,11 @@ class SettingsTest extends PHPUnit_Framework_TestCase {
 		Settings::delete ( "example_setting" );
 		$this->assertEquals ( false, Settings::get ( "example_setting" ) );
 	}
+	public function testMappingStringToArray() {
+		$mappingString = "company.de => de\r\n" . "company.co.uk => en \r\n" . "company.fr=>fr";
+		$mapped = Settings::mappingStringToArray ( $mappingString );
+		$this->assertEquals ( "de", $mapped ["company.de"] );
+		$this->assertEquals ( "en", $mapped ["company.co.uk"] );
+		$this->assertEquals ( "fr", $mapped ["company.fr"] );
+	}
 }

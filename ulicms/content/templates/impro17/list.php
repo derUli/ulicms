@@ -29,7 +29,6 @@ if ($id !== null) {
 			}
 			
 			?>
-
 <div class="container">
 	<?php
 			

@@ -1,8 +1,4 @@
 <?php
-if (! defined ( "ULICMS_ROOT" )) {
-	die ( "Schlechter Hacker!" );
-}
-
 $module = basename ( $_GET ["module"] );
 
 $admin_file_path = getModuleAdminFilePath ( $module );
@@ -70,14 +66,5 @@ if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ) 
 	} else {
 		echo "<p>" . get_translation ( "this_module_has_no_settings" ) . "</p>";
 	}
-}
-?>
-<?php
-
-if (Settings::get ( "override_shortcuts" ) == "on" || Settings::get ( "override_shortcuts" ) == "backend") {
-	?>
-<script type="text/javascript" src="scripts/ctrl-s-submit.js">
-</script>
-<?php
 }
 ?>

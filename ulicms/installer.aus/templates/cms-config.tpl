@@ -1,5 +1,5 @@
 <?php
-class config extends baseConfig {
+class config extends BaseConfig {
 	var $db_server = "{mysql_host}";
 	var $db_user = "{mysql_user}";
 	var $db_password = "{mysql_password}";

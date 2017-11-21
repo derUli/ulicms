@@ -4,7 +4,7 @@ class GroupTest extends PHPUnit_Framework_TestCase {
 		$this->tearDown ();
 	}
 	public function tearDown() {
-		Database::query ( "delete from `{prefix}` where name = 'bla'", true );
+		Database::query ( "delete from `{prefix}groups` where name = 'bla'", true );
 	}
 	public function testCreateGroup() {
 		$group = new Group ();
@@ -24,5 +24,9 @@ class GroupTest extends PHPUnit_Framework_TestCase {
 		$this->assertNull ( $group->getId () );
 		$group = new Group ( $oldID );
 		$this->assertNull ( $group->getId () );
+	}
+	public function testGetUsers() {
+		$group = new Group ( 1 );
+		$this->assertTrue ( count ( $group->getUsers () ) >= 1 );
 	}
 }

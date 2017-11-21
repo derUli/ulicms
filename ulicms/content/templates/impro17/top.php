@@ -16,7 +16,6 @@ $searchPage = ModuleHelper::getFirstPageWithModule ( "extended_search" );
 if (! $searchPage) {
 	$searchPage = ModuleHelper::getFirstPageWithModule ( "search" );
 }
-
 ?>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,7 +51,7 @@ echo getconfig ( "header-background-color" );
 }
 </style>
 </head>
-<body>
+<body class="<?php body_classes();?>">
 	<div class="container" id="root">
 		<div class="header clearfix">
 			<nav>
