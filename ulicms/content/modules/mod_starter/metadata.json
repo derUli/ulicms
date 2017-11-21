@@ -5,5 +5,8 @@
 	"controllers": {
 		"ModStarter": "ModStarter.php"
 	},
+	"objects": {
+		"ModStarterProjectManager": "ModStarterProjectManager.php"
+	},
 	"main_class": "ModStarter"
 }
