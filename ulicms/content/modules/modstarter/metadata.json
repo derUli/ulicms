@@ -1,12 +1,22 @@
 {
 	"source": "extend",
 	"version": "0.1",
+	"custom_acl": [
+		"modstarter"
+	],
+	"admin_permission": "modstarter",
 	"embed": false,
 	"controllers": {
 		"ModStarter": "ModStarter.php"
 	},
 	"objects": {
 		"ModStarterProjectManager": "ModStarterProjectManager.php"
+	},
+	"actions": {
+		"modstarter_new": "templates/new.php"
+	},
+	"action_permissions": {
+		"modstarter_new": "modstarter"
 	},
 	"main_class": "ModStarter"
 }
