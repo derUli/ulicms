@@ -15,6 +15,10 @@ $hooks = array (
 <h1><?php translate("create_module");?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("ModStarter", "save");?>
 <p>
+	<strong><?php translate("module_folder")?></strong> <br /> <input type="text"
+		name="module_folder" maxlength="20" value="" required>
+</p>
+<p>
 	<a href="<?php echo ModuleHelper::buildAdminURL("modstarter");?>"
 		class="btn btn-default"><?php translate("cancel");?></a>
 </p>
