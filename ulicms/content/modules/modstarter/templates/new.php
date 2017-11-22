@@ -4,12 +4,12 @@ $sources = array (
 		"pkgsrc",
 		"extend",
 		"local",
-		"core" 
+		"core"
 );
 // TODO: List of all hooks
 $hooks = array (
 		"uninstall",
-		"clearCache" 
+		"clearCache"
 );
 ?>
 <h1><?php translate("create_module");?></h1>
@@ -45,6 +45,15 @@ $hooks = array (
 	<input type="checkbox" name="create_post_install_script"
 		id="create_post_install_script" value=""> <label
 		for="create_post_install_script"><?php translate("create_post_install_script");?></label>
+</p>
+<p><strong><?php translate("hooks");?></strong>
+<br/>
+<select name="hooks" multiple>
+<?php foreach($hooks as $hook){
+	?>
+	<option value="<?php esc($hook);?>"><?php esc($hook);?></option>
+<?php }?>
+</select>
 </p>
 <p>
 	<button type="submit" class="btn btn-success"><?php translate("save")?></button>
