@@ -52,7 +52,7 @@ $hooks = array (
 </p>
 <p><strong><?php translate("hooks");?></strong>
 <br/>
-<select name="hooks" multiple>
+<select name="hooks[]" multiple>
 <?php foreach($hooks as $hook){
 	?>
 	<option value="<?php esc($hook);?>"><?php esc($hook);?></option>
