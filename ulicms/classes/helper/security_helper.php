@@ -1,5 +1,5 @@
 <?php
-class securityHelper {
+class SecurityHelper {
 	public static function securePath($path) {
 		$securedPath = array ();
 		$path = explode ( "/", $path );
