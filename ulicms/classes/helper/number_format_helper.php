@@ -1,5 +1,5 @@
 <?php
-class numberFormatHelper {
+class NumberFormatHelper {
 	// Snippet from PHP Share: http://www.phpshare.org
 	public static function formatSizeUnits($bytes) {
 		if ($bytes >= 1073741824) {

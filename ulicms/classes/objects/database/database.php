@@ -3,7 +3,7 @@ class Database {
 	private static $connection = null;
 	// Abstraktion für Ausführen von SQL Strings
 	public static function query($sql, $replacePrefix = false) {
-		log_db_query ( $sql );
+		Logger::logDbQuery ( $sql );
 		if ($replacePrefix) {
 			$cfg = new config ();
 			$sql = str_replace ( "{prefix}", $cfg->db_prefix, $sql );
@@ -40,7 +40,7 @@ class Database {
 				$i ++;
 			}
 		}
-		log_db_query ( $preparedQuery );
+		Logger::logDbQuery ( $preparedQuery );
 		return Database::query ( $preparedQuery, $replacePrefix );
 	}
 	public static function getServerVersion() {
