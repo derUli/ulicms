@@ -34,4 +34,12 @@ class ArrayHelper {
 		array_splice ( $input, 0, $originalIndex, $tmpArray );
 		return $input;
 	}
+	public static function take($count, $data) {
+		if (is_array ( $data )) {
+			return array_slice ( $data, 0, $count );
+		} else if (is_string ( $data )) {
+			return mb_substr ( $data, 0, $count );
+		}
+		return null;
+	}
 }

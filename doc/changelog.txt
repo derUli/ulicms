@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.1 =====
+﻿===== Neues in UliCMS 2018.1 =====
 + Teile des Backends wurden in Core-Module verschoben und in ein MVC-Pattern umstrukturiert
 + Module können nun Inhaltstypen mit eigenen Formularfeldern erstellen
 + Neuer Parameter $htmlAttributes (Array) zu der Funktion ModuleHelper::buildMethodCallForm() hinzugefügt
@@ -11,6 +11,7 @@
 + Neue Funktionen:
   * esc()
   * _esc()
+  * ArrayHelper::take($count, $data)
   * ModuleHelper::buildMethodCallUrl()
   * ModuleHelper::deleteButton()
   * ModuleHelper::buildQueryString()
