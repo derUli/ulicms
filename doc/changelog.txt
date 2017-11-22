@@ -17,6 +17,7 @@
   * ModuleHelper::buildMethodCallUploadForm()
   * ModuleHelper::buildRessourcePath()
   * ModuleHelper::buildMethodCallButton()
+  * ModuleHelper::endForm()
   * CustomData::setDefault()
   * CustomData::getDefaultAsJSON()
   * Settings::mappingStringToArray()

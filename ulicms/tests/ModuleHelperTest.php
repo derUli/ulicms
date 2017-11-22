@@ -98,4 +98,8 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 	public function testBuildMethodCallButton() {
 		$this->assertEquals ( '<form action="index.php" method="post">' . get_csrf_token_html () . '<input type="hidden" name="sClass" value="MyClass"><input type="hidden" name="sMethod" value="myMethod"><button class="btn btn-default" type="submit">Say Hello</button></form>', ModuleHelper::buildMethodCallButton ( "MyClass", "myMethod", "Say Hello" ) );
 	}
+	
+	public function testEndForm(){
+		$this->assertEquals("</form>", ModuleHelper::endForm());
+	}
 }

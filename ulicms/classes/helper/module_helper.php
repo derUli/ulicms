@@ -127,7 +127,7 @@ class ModuleHelper {
 	/**
 	 * Convert underscore_strings to camelCase.
 	 *
-	 * @param {string} $str        	
+	 * @param {string} $str
 	 */
 	public static function underscoreToCamel($str) {
 		// Remove underscores, capitalize words, squash, lowercase first.
@@ -194,5 +194,8 @@ class ModuleHelper {
 	public static function buildQueryString($data, $forHtml = true) {
 		$seperator = $forHtml ? "&amp;" : "&";
 		return http_build_query ( $data, '', $seperator );
+	}
+	public static function endForm() {
+		return "</form>";
 	}
 }
