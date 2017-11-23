@@ -1,0 +1,6 @@
+www.domain.de=>de
+domain.de=>de
+domain.com=>en
+
+domain.fr=>fr
+domain.it=>it
