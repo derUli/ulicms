@@ -457,81 +457,37 @@ function getSystemLanguage() {
 	}
 	return $lang;
 }
-// Todo:
-// Remove duplicate code
-// Use Settings::mappingStringToArray() for parsing assignment string
-function getDomainByLanguage($language) {
+function getDomainByLanguage($givenLanguage) {
 	$domainMapping = Settings::get ( "domain_to_language" );
-	if (! empty ( $domainMapping )) {
-		$domainMapping = explode ( "\n", $domainMapping );
-		for($i = 0; $i < count ( $domainMapping ); $i ++) {
-			$line = trim ( $domainMapping [$i] );
-			if (! empty ( $line )) {
-				$line = explode ( "=>", $line );
-				if (count ( $line ) > 1) {
-					$line [0] = trim ( $line [0] );
-					$line [1] = trim ( $line [1] );
-					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
-						if ($line [1] == $language) {
-							return $line [0];
-						}
-					}
-				}
-			}
+	$domainMapping = Settings::mappingStringToArray ( $domainMapping );
+	foreach ( $domainMapping as $domain => $language ) {
+		if ($givenLanguage == $language) {
+			return $domain;
 		}
 	}
+	
 	return null;
 }
-// Todo:
-// Remove duplicate code
-// Use Settings::mappingStringToArray() for parsing assignment string
-function getLanguageByDomain($domain) {
+function getLanguageByDomain($givenDomain) {
 	$domainMapping = Settings::get ( "domain_to_language" );
-	if (! empty ( $domainMapping )) {
-		$domainMapping = explode ( "\n", $domainMapping );
-		for($i = 0; $i < count ( $domainMapping ); $i ++) {
-			$line = trim ( $domainMapping [$i] );
-			if (! empty ( $line )) {
-				$line = explode ( "=>", $line );
-				if (count ( $line ) > 1) {
-					$line [0] = trim ( $line [0] );
-					$line [1] = trim ( $line [1] );
-					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
-						if ($line [0] == $domain) {
-							return $line [1];
-						}
-					}
-				}
-			}
+	$domainMapping = Settings::mappingStringToArray ( $domainMapping );
+	foreach ( $domainMapping as $domain => $language ) {
+		if ($givenDomain == $domain) {
+			return $language;
 		}
 	}
+	
 	return null;
 }
-// Todo:
-// Remove duplicate code
-// Use Settings::mappingStringToArray() for parsing assignment string
 function setLanguageByDomain() {
 	$domainMapping = Settings::get ( "domain_to_language" );
-	if (! empty ( $domainMapping )) {
-		$domainMapping = explode ( "\n", $domainMapping );
-		for($i = 0; $i < count ( $domainMapping ); $i ++) {
-			$line = trim ( $domainMapping [$i] );
-			if (! empty ( $line )) {
-				$line = explode ( "=>", $line );
-				if (count ( $line ) > 1) {
-					$line [0] = trim ( $line [0] );
-					$line [1] = trim ( $line [1] );
-					
-					if (! empty ( $line [0] ) and ! empty ( $line [1] )) {
-						$domain = $_SERVER ["HTTP_HOST"];
-						
-						if ($line [0] == $domain and faster_in_array ( $line [1], getAllLanguages () )) {
-							$_SESSION ["language"] = $line [1];
-							return true;
-						}
-					}
-				}
-			}
+	$domainMapping = Settings::mappingStringToArray ( $domainMapping );
+	foreach ( $domainMapping as $domain => $language ) {
+		$givenDomain = $_SERVER ["HTTP_HOST"];
+		
+		if ($domain == $givenDomain and faster_in_array ( $language, getAllLanguages () )) {
+			$_SESSION ["language"] = $language;
+			return true;
 		}
 	}
 	return false;
