@@ -10,6 +10,7 @@
 		"ModStarter": "ModStarter.php"
 	},
 	"objects": {
+		"ModStarterProjectViewModel": "ModStarterProjectViewModel.php",
 		"ModStarterProjectManager": "ModStarterProjectManager.php"
 	},
 	"actions": {
