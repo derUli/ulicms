@@ -51,7 +51,7 @@ class ModStarter extends Controller {
 			$hooksCode = "";
 			if (is_array ( $hooks )) {
 				foreach ( $hooks as $hook ) {
-					$hooksCode .= "function $hook(){\r\n}\r\\r\n";
+					$hooksCode .= "function $hook(){\r\n}\r\n\r\n";
 				}
 			}
 			$mainClassCode = $manager->prepareMainClass ( array (
