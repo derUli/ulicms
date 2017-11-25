@@ -15,8 +15,10 @@ class ModStarter extends Controller {
 		if (! Request::hasVar ( "module_folder" ) or ! Request::hasVar ( "version" ) or ! Request::hasVar ( "main_class" )) {
 			Request::redirect ( ModuleHelper::buildActionURL ( "modstarter_new" ) );
 		}
-		// TODO: Check if module_folder contains only valid chars
-		$module_folder = Request::getVar ( "module_folder" );
+		$module_folder = basename ( Request::getVar ( "module_folder" ) );
+		if ($module_folder == "." or $module_folder == "..") {
+			Request::redirect ( ModuleHelper::buildActionURL ( "modstarter_new" ) );
+		}
 		$version = Request::getVar ( "version" );
 		$source = Request::getVar ( "source" );
 		$embeddable = Request::hasVar ( "embeddable" );
@@ -88,5 +90,9 @@ class ModStarter extends Controller {
 		}
 		File::write ( $metadataFile, json_readable_encode ( $metadata, 0, true ) );
 		File::write ( ModuleHelper::buildRessourcePath ( $module_folder, ".modstarter" ), "" );
+		if ($create_post_install_script) {
+			$script = Path::resolve ( "ULICMS_ROOT/post-install.php" );
+			File::write ( $script, "<?php\r\n" );
+		}
 	}
 }

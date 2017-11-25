@@ -4,25 +4,24 @@ $sources = array (
 		"pkgsrc",
 		"extend",
 		"local",
-		"core"
+		"core" 
 );
 // TODO: List of all hooks
 $hooks = array (
 		"uninstall",
-		"clearCache"
+		"clearCache" 
 );
 ?>
 <h1><?php translate("create_module");?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("ModStarter", "save");?>
 <p>
-	<strong><?php translate("module_folder")?></strong> <br /> <input type="text"
-		name="module_folder" maxlength="20" value="" required>
-</p>
-<p>
 	<a href="<?php echo ModuleHelper::buildAdminURL("modstarter");?>"
 		class="btn btn-default"><?php translate("cancel");?></a>
 </p>
-
+<p>
+	<strong><?php translate("module_folder")?></strong> <br /> <input
+		type="text" name="module_folder" maxlength="20" value="" required>
+</p>
 <p>
 	<strong><?php translate("source");?></strong><br /> <select
 		name="source">
@@ -50,10 +49,12 @@ $hooks = array (
 		id="create_post_install_script" value=""> <label
 		for="create_post_install_script"><?php translate("create_post_install_script");?></label>
 </p>
-<p><strong><?php translate("hooks");?></strong>
-<br/>
-<select name="hooks[]" multiple>
-<?php foreach($hooks as $hook){
+<p>
+	<strong><?php translate("hooks");?></strong> <br /> <select
+		name="hooks[]" multiple>
+<?php
+
+foreach ( $hooks as $hook ) {
 	?>
 	<option value="<?php esc($hook);?>"><?php esc($hook);?></option>
 <?php }?>
