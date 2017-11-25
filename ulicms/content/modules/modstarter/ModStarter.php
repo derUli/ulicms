@@ -26,14 +26,31 @@ class ModStarter extends Controller {
 		$hooks = Request::hasVar ( "hooks" ) ? Request::getVar ( "hooks" ) : array ();
 		// Modul erstellen oder updaten, sofern es schon existiert und eine modstarter Datei hat
 		
-		$moduleFolderPath = getModulePath ( $module_folder, true );
-		if (! is_dir ( $moduleFolderpath )) {
+		$moduleFolderPath = getModulePath ( $module_folder, false );
+		if (! file_exists ( $moduleFolderPath )) {
 			mkdir ( $moduleFolderPath );
 		}
+		$baseDirs = array (
+				ModuleHelper::buildRessourcePath ( $module_folder, "controllers" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "objects" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "templates" ) 
+		);
+		foreach ( $baseDirs as $dir ) {
+			if (! file_exists ( $dir )) {
+				mkdir ( $dir );
+			}
+			/*
+			 * $keepFile = $dir . "/.keep";
+			 * if (! file_exists ( $keepFile )) {
+			 * File::write ( $keepFile, "" );
+			 * }
+			 */
+		}
+		
 		$metadataFile = ModuleHelper::buildRessourcePath ( $module_folder, "metadata.json" );
 		$metadata = array ();
 		if (file_exists ( $metadataFile )) {
-			$metadata = getModuleMeta ( $module_folder );
+			$metadata = getModuleMeta ( $metadataFile );
 		}
 		if (StringHelper::isNotNullOrWhitespace ( $version )) {
 			$metadata ["version"] = $version;
@@ -48,17 +65,28 @@ class ModStarter extends Controller {
 		
 		if (StringHelper::isNotNullOrWhitespace ( $main_class )) {
 			$metadata ["main_class"] = $main_class;
+			$metadata ["controllers"] = array (
+					$main_class => "controllers/" . $main_class . ".php" 
+			);
 			$hooksCode = "";
+			if ($embeddable) {
+				$hooksCode .= "public function render(){\r\n\t\treturn \"\";\r\n\t}\r\n";
+			}
 			if (is_array ( $hooks )) {
 				foreach ( $hooks as $hook ) {
-					$hooksCode .= "function $hook(){\r\n}\r\n\r\n";
+					$hooksCode .= "\tpublic function $hook(){\r\n\t\t\r\n\t}\r\n";
 				}
 			}
+			
 			$mainClassCode = $manager->prepareMainClass ( array (
 					"MainClass" => $main_class,
 					"ModuleName" => str_replace ( "\"", "\\\"", $module_folder ),
 					"Hooks" => $hooksCode 
 			) );
+			$mainClassFile = ModuleHelper::buildRessourcePath ( $module_folder, "controllers/" . $main_class . ".php" );
+			File::write ( $mainClassFile, $mainClassCode );
 		}
+		File::write ( $metadataFile, json_readable_encode ( $metadata, 0, true ) );
+		File::write ( ModuleHelper::buildRessourcePath ( $module_folder, ".modstarter" ), "" );
 	}
 }
