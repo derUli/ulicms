@@ -35,7 +35,11 @@ class ModStarter extends Controller {
 		$baseDirs = array (
 				ModuleHelper::buildRessourcePath ( $module_folder, "controllers" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "objects" ),
-				ModuleHelper::buildRessourcePath ( $module_folder, "templates" ) 
+				ModuleHelper::buildRessourcePath ( $module_folder, "templates" ),
+				
+				ModuleHelper::buildRessourcePath ( $module_folder, "sql" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "sql/up" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "sql/down" ) 
 		);
 		foreach ( $baseDirs as $dir ) {
 			if (! file_exists ( $dir )) {

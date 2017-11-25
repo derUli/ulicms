@@ -13,7 +13,8 @@
 		"ModStarterProjectManager": "ModStarterProjectManager.php"
 	},
 	"actions": {
-		"modstarter_new": "templates/new.php"
+		"modstarter_new": "templates/new.php",
+		"modstarter_edit": "templates/new.php"
 	},
 	"action_permissions": {
 		"modstarter_new": "modstarter"
