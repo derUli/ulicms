@@ -94,5 +94,6 @@ class ModStarter extends Controller {
 			$script = Path::resolve ( "ULICMS_ROOT/post-install.php" );
 			File::write ( $script, "<?php\r\n" );
 		}
+		Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
 	}
 }
