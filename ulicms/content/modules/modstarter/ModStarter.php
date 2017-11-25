@@ -11,6 +11,29 @@ class ModStarter extends Controller {
 	public function getSettingsLinkText() {
 		return get_translation ( "open" );
 	}
+	public function edit() {
+		$name = Request::getVar ( "name" );
+		$model = new ModStarterProjectViewModel ();
+		
+		ViewBag::set ( "model", $model );
+		if (! $name) {
+			Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
+		}
+		$metadata = getModuleMeta ( $name );
+		if (! $metadata) {
+			Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
+		}
+		$model->module_folder = $name;
+		$model->source = isset ( $metadata ["source"] ) ? $metadata ["source"] : "";
+		$model->version = $metadata ["version"];
+		$model->embeddable = (isset ( $metadata ["embed"] ) and $metadata ["embed"]);
+		$model->shy = (isset ( $metadata ["shy"] ) and $metadata ["shy"]);
+		$model->main_class = $metadata ["main_class"];
+		$model->create_post_install_script = (isset ( $metadata ["create_post_install_script"] ) and $metadata ["create_post_install_script"]);
+		$model->hooks = is_array ( $metadata ["hooks"] ) ? $metadata ["hooks"] : array ();
+		
+		ViewBag::set ( "model", $model );
+	}
 	public function savePost() {
 		if (! Request::hasVar ( "module_folder" ) or ! Request::hasVar ( "version" ) or ! Request::hasVar ( "main_class" )) {
 			Request::redirect ( ModuleHelper::buildActionURL ( "modstarter_new" ) );

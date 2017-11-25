@@ -11,6 +11,7 @@ $hooks = array (
 		"uninstall",
 		"clearCache" 
 );
+$model = ViewBag::get ( "model" ) ? ViewBag::get ( "model" ) : new ModStarterProjectViewModel ();
 ?>
 <h1><?php translate("create_module");?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("ModStarter", "save");?>
@@ -20,7 +21,8 @@ $hooks = array (
 </p>
 <p>
 	<strong><?php translate("module_folder")?></strong> <br /> <input
-		type="text" name="module_folder" maxlength="20" value="" required>
+		type="text" name="module_folder" maxlength="20"
+		value="<?php esc($model->module_folder);?>" required>
 </p>
 <p>
 	<strong><?php translate("source");?></strong><br /> <select
