@@ -14,8 +14,9 @@ $hooks = array (
 $model = ViewBag::get ( "model" ) ? ViewBag::get ( "model" ) : new ModStarterProjectViewModel ();
 
 $action = $model->edit ? "update" : "create";
+$headline = $model->edit ? "edit_module" : "create_module";
 ?>
-<h1><?php translate("create_module");?></h1>
+<h1><?php translate($headline);?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("ModStarter", $action);?>
 <p>
 	<a href="<?php echo ModuleHelper::buildAdminURL("modstarter");?>"
@@ -47,12 +48,12 @@ $action = $model->edit ? "update" : "create";
 </p>
 <p>
 	<input type="checkbox" name="shy" id="shy" value="1"
-		<?php if($model->shy){ echo "checked";};?><label for="shy"><?php translate("shy");?></label>
+		<?php if($model->shy){ echo "checked";};?>> <label for="shy"> <?php translate("shy");?></label>
 </p>
 <p>
 	<strong><?php translate("main_class")?></strong><br /> <input
 		type="text" name="main_class"
-		<?php if($model->edit) { echo "disabled";}?>
+		<?php if($model->edit) { echo "readonly";}?>
 		value="<?php esc($model->main_class);?>" required>
 </p>
 <p>
@@ -60,7 +61,7 @@ $action = $model->edit ? "update" : "create";
 		id="create_post_install_script"
 		<?php if($model->edit and $model->create_post_install_script) { echo "disabled";}?>
 		value="1"
-		<?php if($model->create_post_install_script){ echo "checked";};?>><label
+		<?php if($model->create_post_install_script){ echo "checked";};?>> <label
 		for="create_post_install_script"><?php translate("create_post_install_script");?></label>
 </p>
 <p>

@@ -1,5 +1,6 @@
 <?php
 add_translation ( "create_module", "Create Module" );
+add_translation ( "edit_module", "Edit Module" );
 add_translation ( "cancel", "Cancel" );
 add_translation ( "source", "Source" );
 add_translation ( "embeddable", "Embeddable" );

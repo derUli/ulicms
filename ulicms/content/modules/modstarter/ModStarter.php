@@ -37,7 +37,66 @@ class ModStarter extends Controller {
 		ViewBag::set ( "model", $model );
 	}
 	public function updatePost() {
-		throw new NotImplementedException ( "Update not implemented" );
+		if (! Request::hasVar ( "module_folder" ) or ! Request::hasVar ( "version" ) or ! Request::hasVar ( "main_class" )) {
+			Request::redirect ( ModuleHelper::buildActionURL ( "modstarter_new" ) );
+		}
+		$module_folder = basename ( Request::getVar ( "module_folder" ) );
+		if ($module_folder == "." or $module_folder == "..") {
+			Request::redirect ( ModuleHelper::buildActionURL ( "modstarter_new" ) );
+		}
+		$version = Request::getVar ( "version" );
+		$source = Request::getVar ( "source" );
+		$embeddable = Request::hasVar ( "embeddable" );
+		$shy = Request::hasVar ( "shy" );
+		$create_post_install_script = (Request::hasVar ( "create_post_install_script" ) and ! file_exists ( Path::resolve ( "ULICMS_ROOT/post-install.php" ) ));
+		
+		$moduleFolderPath = getModulePath ( $module_folder, false );
+		if (! file_exists ( $moduleFolderPath )) {
+			Request::redirect ( ModuleHelper::buildActionURL ( "modstarter_new" ) );
+		}
+		$baseDirs = array (
+				ModuleHelper::buildRessourcePath ( $module_folder, "controllers" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "objects" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "templates" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "sql" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "sql/up" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "sql/down" ) 
+		);
+		foreach ( $baseDirs as $dir ) {
+			if (! file_exists ( $dir )) {
+				mkdir ( $dir );
+			}
+			/*
+			 * $keepFile = $dir . "/.keep";
+			 * if (! file_exists ( $keepFile )) {
+			 * File::write ( $keepFile, "" );
+			 * }
+			 */
+		}
+		
+		$metadataFile = ModuleHelper::buildRessourcePath ( $module_folder, "metadata.json" );
+		$metadata = array ();
+		if (file_exists ( $metadataFile )) {
+			$metadata = getModuleMeta ( $module_folder );
+		}
+		if (StringHelper::isNotNullOrWhitespace ( $version )) {
+			$metadata ["version"] = $version;
+		}
+		if (StringHelper::isNotNullOrWhitespace ( $source )) {
+			$metadata ["source"] = $source;
+		}
+		$metadata ["embed"] = $embeddable;
+		$metadata ["shy"] = $shy;
+		
+		$manager = new ModStarterProjectManager ();
+		
+		File::write ( $metadataFile, json_readable_encode ( $metadata, 0, true ) );
+		File::write ( ModuleHelper::buildRessourcePath ( $module_folder, ".modstarter" ), "" );
+		if ($create_post_install_script) {
+			$script = Path::resolve ( "ULICMS_ROOT/post-install.php" );
+			File::write ( $script, "<?php\r\n" );
+		}
+		Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
 	}
 	public function createPost() {
 		if (! Request::hasVar ( "module_folder" ) or ! Request::hasVar ( "version" ) or ! Request::hasVar ( "main_class" )) {

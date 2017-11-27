@@ -5,5 +5,8 @@ class ExampleOrg extends Controller{
 	public function render(){
 		return "";
 	}
+	public function clearCache(){
+		
+	}
 
 }
