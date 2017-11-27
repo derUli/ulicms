@@ -12,9 +12,11 @@ $hooks = array (
 		"clearCache" 
 );
 $model = ViewBag::get ( "model" ) ? ViewBag::get ( "model" ) : new ModStarterProjectViewModel ();
+
+$action = $model->edit ? "update" : "create";
 ?>
 <h1><?php translate("create_module");?></h1>
-<?php echo ModuleHelper::buildMethodCallForm("ModStarter", "save");?>
+<?php echo ModuleHelper::buildMethodCallForm("ModStarter", $action);?>
 <p>
 	<a href="<?php echo ModuleHelper::buildAdminURL("modstarter");?>"
 		class="btn btn-default"><?php translate("cancel");?></a>
@@ -22,7 +24,8 @@ $model = ViewBag::get ( "model" ) ? ViewBag::get ( "model" ) : new ModStarterPro
 <p>
 	<strong><?php translate("module_folder")?></strong> <br /> <input
 		type="text" name="module_folder" maxlength="20"
-		value="<?php esc($model->module_folder);?>" required>
+		value="<?php esc($model->module_folder);?>"
+		<?php if($model->edit){echo "readonly";}?> required>
 </p>
 <p>
 	<strong><?php translate("source");?></strong><br /> <select
@@ -55,7 +58,8 @@ $model = ViewBag::get ( "model" ) ? ViewBag::get ( "model" ) : new ModStarterPro
 <p>
 	<input type="checkbox" name="create_post_install_script"
 		id="create_post_install_script"
-		<?php if($model->edit) { echo "disabled";}?> value="1"
+		<?php if($model->edit and $model->create_post_install_script) { echo "disabled";}?>
+		value="1"
 		<?php if($model->create_post_install_script){ echo "checked";};?>><label
 		for="create_post_install_script"><?php translate("create_post_install_script");?></label>
 </p>
