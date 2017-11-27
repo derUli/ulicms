@@ -14,7 +14,9 @@ class UserTest extends PHPUnit_Framework_TestCase {
 	}
 	public function tearDown() {
 		$this->setUp ();
-		$this->otherGroup->delete ();
+		Database::pQuery ( "delete from `{prefix}groups` where name = ?", array (
+				"Other Group" 
+		), true );
 	}
 	public function testCreateAndDeleteUser() {
 		$user = new User ();
@@ -63,7 +65,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$user->setAboutMe ( "bye" );
 		$user->setGroup ( $this->otherGroup );
 		$this->assertEquals ( "Other Group", $user->getGroup ()->getName () );
-		$this->assertEquals ( $user->getGroupId (), $user->getGroup ()->getId() );
+		$this->assertEquals ( $user->getGroupId (), $user->getGroup ()->getId () );
 		$user->save ();
 		
 		$user = new User ();
