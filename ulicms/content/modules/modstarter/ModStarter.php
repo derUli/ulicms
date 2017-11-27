@@ -36,7 +36,10 @@ class ModStarter extends Controller {
 		$model->edit = true;
 		ViewBag::set ( "model", $model );
 	}
-	public function savePost() {
+	public function updatePost() {
+		throw new NotImplementedException ( "Update not implemented" );
+	}
+	public function createPost() {
 		if (! Request::hasVar ( "module_folder" ) or ! Request::hasVar ( "version" ) or ! Request::hasVar ( "main_class" )) {
 			Request::redirect ( ModuleHelper::buildActionURL ( "modstarter_new" ) );
 		}
