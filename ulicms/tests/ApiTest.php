@@ -38,5 +38,8 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 		$meta = getModuleMeta ( "core_home" );
 		$this->assertEquals ( "models/HomeViewModel.php", $meta ["objects"] ["HomeViewModel"] );
 		$this->assertFalse ( $meta ["embed"] );
+		$this->assertNull ( getModuleMeta ( "not_a_module" ) );
+		$this->assertNull ( getModuleMeta ( "not_a_module", "version" ) );
+		$this->assertNull ( getModuleMeta ( "core_home", "not_here" ) );
 	}
 }
