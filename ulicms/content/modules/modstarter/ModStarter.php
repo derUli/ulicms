@@ -26,7 +26,6 @@ class ModStarter extends Controller {
 		
 		$model->module_folder = $name;
 		$model->source = isset ( $metadata ["source"] ) ? $metadata ["source"] : "";
-		
 		$model->version = $metadata ["version"];
 		$model->embeddable = (isset ( $metadata ["embed"] ) and $metadata ["embed"]);
 		$model->shy = (isset ( $metadata ["shy"] ) and $metadata ["shy"]);
