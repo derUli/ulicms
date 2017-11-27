@@ -58,6 +58,7 @@ class ModStarter extends Controller {
 				ModuleHelper::buildRessourcePath ( $module_folder, "controllers" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "objects" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "templates" ),
+				ModuleHelper::buildRessourcePath ( $module_folder, "lang" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "sql" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "sql/up" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "sql/down" ) 
@@ -123,7 +124,7 @@ class ModStarter extends Controller {
 				ModuleHelper::buildRessourcePath ( $module_folder, "controllers" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "objects" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "templates" ),
-				
+				ModuleHelper::buildRessourcePath ( $module_folder, "lang" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "sql" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "sql/up" ),
 				ModuleHelper::buildRessourcePath ( $module_folder, "sql/down" ) 
