@@ -1,5 +1,5 @@
 <?php
-class html_helper {
+class HtmlHelper {
 	public static function htmlRemoveTagByName($html, $tag) {
 		$doc = new DOMDocument ();
 		// load the HTML string we want to strip
