@@ -9,6 +9,7 @@
 	"controllers": {
 		"ModStarter": "ModStarter.php"
 	},
+	"main_class": "ModStarter",
 	"objects": {
 		"ModStarterProjectViewModel": "ModStarterProjectViewModel.php",
 		"ModStarterProjectManager": "ModStarterProjectManager.php"
@@ -18,7 +19,12 @@
 		"modstarter_edit": "templates/form.php"
 	},
 	"action_permissions": {
-		"modstarter_new": "modstarter"
+		"modstarter_new": "modstarter",
+		"modstarter_edit": "modstarter"
 	},
-	"main_class": "ModStarter"
+	"controller_function_permissions": {
+		"ModStarter::editGet": "modstarter",
+		"ModStarter::updatePost": "modstarter",
+		"ModStarter::createPost": "modstarter"
+	}
 }
