@@ -8,4 +8,5 @@ class ModStarterProjectViewModel {
 	public $main_class = "";
 	public $create_post_install_script = false;
 	public $hooks = array ();
+	public $edit = false;
 }

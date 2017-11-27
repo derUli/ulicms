@@ -28,37 +28,46 @@ $model = ViewBag::get ( "model" ) ? ViewBag::get ( "model" ) : new ModStarterPro
 	<strong><?php translate("source");?></strong><br /> <select
 		name="source">
 		<?php foreach($sources as $source){?>
-		<option value="<?php esc($source);?>"><?php esc($source);?></option>
+		<option value="<?php esc($source);?>"
+			<?php if($source == $model->source) echo "selected";?>><?php esc($source);?></option>
 		<?php }?></select>
 </p>
 <p>
 	<strong><?php translate("version")?></strong> <br /> <input type="text"
-		name="version" maxlength="20" value="" required>
+		name="version" maxlength="20" value="<?php esc($model->version);?>"
+		required>
 </p>
 <p>
-	<input type="checkbox" name="embeddable" id="embeddable" value=""> <label
+	<input type="checkbox" name="embeddable" id="embeddable" value="1"
+		<?php if($model->embeddable){ echo "checked";};?>> <label
 		for="embeddable"><?php translate("embeddable");?></label>
 </p>
 <p>
-	<input type="checkbox" name="shy" id="shy" value=""> <label for="shy"><?php translate("shy");?></label>
+	<input type="checkbox" name="shy" id="shy" value="1"
+		<?php if($model->shy){ echo "checked";};?><label for="shy"><?php translate("shy");?></label>
 </p>
 <p>
 	<strong><?php translate("main_class")?></strong><br /> <input
-		type="text" name="main_class" value="" required>
+		type="text" name="main_class"
+		<?php if($model->edit) { echo "disabled";}?>
+		value="<?php esc($model->main_class);?>" required>
 </p>
 <p>
 	<input type="checkbox" name="create_post_install_script"
-		id="create_post_install_script" value=""> <label
+		id="create_post_install_script"
+		<?php if($model->edit) { echo "disabled";}?> value="1"
+		<?php if($model->create_post_install_script){ echo "checked";};?>><label
 		for="create_post_install_script"><?php translate("create_post_install_script");?></label>
 </p>
 <p>
 	<strong><?php translate("hooks");?></strong> <br /> <select
-		name="hooks[]" multiple>
+		name="hooks[]" multiple <?php if($model->edit) { echo "disabled";}?>>
 <?php
 
 foreach ( $hooks as $hook ) {
 	?>
-	<option value="<?php esc($hook);?>"><?php esc($hook);?></option>
+	<option value="<?php esc($hook);?>"
+			<?php if(in_array($hook, $model->hooks))?>><?php esc($hook);?></option>
 <?php }?>
 </select>
 </p>

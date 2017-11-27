@@ -11,7 +11,7 @@ class ModStarter extends Controller {
 	public function getSettingsLinkText() {
 		return get_translation ( "open" );
 	}
-	public function edit() {
+	public function editGet() {
 		$name = Request::getVar ( "name" );
 		$model = new ModStarterProjectViewModel ();
 		
@@ -23,15 +23,17 @@ class ModStarter extends Controller {
 		if (! $metadata) {
 			Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
 		}
+		
 		$model->module_folder = $name;
 		$model->source = isset ( $metadata ["source"] ) ? $metadata ["source"] : "";
+		
 		$model->version = $metadata ["version"];
 		$model->embeddable = (isset ( $metadata ["embed"] ) and $metadata ["embed"]);
 		$model->shy = (isset ( $metadata ["shy"] ) and $metadata ["shy"]);
 		$model->main_class = $metadata ["main_class"];
-		$model->create_post_install_script = (isset ( $metadata ["create_post_install_script"] ) and $metadata ["create_post_install_script"]);
+		$model->create_post_install_script = file_exists ( Path::resolve ( "ULICMS_ROOT/post-install.php" ) );
 		$model->hooks = is_array ( $metadata ["hooks"] ) ? $metadata ["hooks"] : array ();
-		
+		$model->edit = true;
 		ViewBag::set ( "model", $model );
 	}
 	public function savePost() {

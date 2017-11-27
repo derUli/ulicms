@@ -1,0 +1,11 @@
+{
+	"version": "1.0.0",
+	"source": "extend",
+	"embed": true,
+	"shy": false,
+	"main_class": "ExampleOrg",
+	"controllers": 
+	{
+		"ExampleOrg": "controllers/ExampleOrg.php"
+	}
+}

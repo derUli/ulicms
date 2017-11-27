@@ -18,7 +18,7 @@ $projects = $manager->getAllProjects ();
 <tr>
 			<td><?php esc($project);?></td>
 			<td class="text-center"><a
-				href="<?php echo ModuleHelper::buildActionURL("modstarter_edit", ModuleHelper::buildMethodCallUrl("ModStarter", "edit", "name=".$project));?>"><img
+				href="<?php echo ModuleHelper::buildMethodCallUrl("ModStarter", "edit", "name=".$project."&action=modstarter_edit");?>"><img
 					src="gfx/edit.png" alt="<?php translate("edit");?>"
 					title="<?php translate("edit");?>"></a></td>
 		</tr>
