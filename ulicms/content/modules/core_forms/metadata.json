@@ -1,0 +1,21 @@
+{
+	"version": "2018.1",
+	"source": "core",
+	"embed": false,
+	"shy": false,
+	"main_class": "Core",
+	"controllers": {
+		"Core": "controllers/Core.php",
+		"FormController": "controllers/FormController.php"
+	},
+	"actions": {
+		"forms": "templates/list.php",
+		"forms_new": "templates/new.php",
+		"forms_edit": "templates/edit.php"
+	},
+	"controller_function_permissions": {
+		"FormController::createPost": "forms_create",
+		"FormController::updatePost": "forms_edit",
+		"FormController::deletePost": "forms_edit"
+	}
+}
