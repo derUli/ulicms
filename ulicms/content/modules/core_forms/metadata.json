@@ -13,6 +13,9 @@
 		"forms_new": "templates/new.php",
 		"forms_edit": "templates/edit.php"
 	},
+	"objects": {
+		"Forms": "objects/forms.php"
+	},
 	"controller_function_permissions": {
 		"FormController::createPost": "forms_create",
 		"FormController::updatePost": "forms_edit",
