@@ -378,13 +378,16 @@ function getModuleMeta($module, $attrib = null) {
 	$retval = null;
 	$metadata_file = getModulePath ( $module, true ) . "metadata.json";
 	if (file_exists ( $metadata_file )) {
-		$data = file_get_contents ( $metadata_file );
-		$data = json_decode ( $data );
+		
 		if ($attrib != null) {
+			$data = file_get_contents ( $metadata_file );
+			$data = json_decode ( $data );
 			if (isset ( $data->$attrib )) {
 				$retval = $data->$attrib;
 			}
 		} else {
+			$data = file_get_contents ( $metadata_file );
+			$data = json_decode ( $data, true );
 			$retval = $data;
 		}
 	}

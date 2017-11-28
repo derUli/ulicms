@@ -16,7 +16,7 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 	}
 	public function testGetAllUsedLanguages() {
 		$languages = getAllUsedLanguages ();
-		$this->assertGreaterThanOrEqual( 2, count ( $languages ) );
+		$this->assertGreaterThanOrEqual ( 2, count ( $languages ) );
 		$this->assertTrue ( in_array ( "de", $languages ) );
 		$this->assertTrue ( in_array ( "en", $languages ) );
 	}
@@ -31,6 +31,15 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 		add_translation ( $key1, $value2 );
 		$this->assertEquals ( $value1, get_translation ( $key1 ) );
 		add_translation ( $key2, $value2 );
-		$this->assertEquals ( $value2, constant(strtoupper($key2)) );
+		$this->assertEquals ( $value2, constant ( strtoupper ( $key2 ) ) );
+	}
+	public function testGetModuleMeta() {
+		$this->assertEquals ( "core", getModuleMeta ( "core_home", "source" ) );
+		$meta = getModuleMeta ( "core_home" );
+		$this->assertEquals ( "models/HomeViewModel.php", $meta ["objects"] ["HomeViewModel"] );
+		$this->assertFalse ( $meta ["embed"] );
+		$this->assertNull ( getModuleMeta ( "not_a_module" ) );
+		$this->assertNull ( getModuleMeta ( "not_a_module", "version" ) );
+		$this->assertNull ( getModuleMeta ( "core_home", "not_here" ) );
 	}
 }
