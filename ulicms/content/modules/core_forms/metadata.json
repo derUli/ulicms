@@ -3,9 +3,9 @@
 	"source": "core",
 	"embed": false,
 	"shy": false,
-	"main_class": "Core",
+	"main_class": "CoreForms",
 	"controllers": {
-		"Core": "controllers/Core.php",
+		"CoreForms": "controllers/CoreForms.php",
 		"FormController": "controllers/FormController.php"
 	},
 	"actions": {
