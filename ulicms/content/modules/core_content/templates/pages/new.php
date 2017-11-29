@@ -718,7 +718,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </div>
 <div class="inPageMessage"></div>
 <input type="hidden" name="add_page" value="add_page">
-<input type="submit" value="<?php translate("save");?>">
+<button type="submit" class="btn btn-success"><?php translate("save");?></button>
 <script src="scripts/page.js" type="text/javascript">
 </script>
 

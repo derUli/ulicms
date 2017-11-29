@@ -1047,13 +1047,12 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </div>
 <div class="row">
 	<div class="col-xs-6">
-		<input type="submit" value="<?php translate("save_changes");?>">
+		<button type="submit" class="btn btn-success"><?php translate("save_changes");?></button>
 
 	</div>
 
 	<div class="col-xs-6 text-right">
-		<input class="typedep" type="button" id="btn-view-page"
-			value="<?php translate("view");?>">
+		<button class="typedep btn btn-info" type="button" id="btn-view-page"><?php translate("view");?></button>
 	</div>
 </div>
 <script src="scripts/page.js" type="text/javascript">
