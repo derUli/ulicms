@@ -21,7 +21,7 @@ class ModuleHelper {
 		}
 		$args = array (
 				1,
-				$language 
+				$language
 		);
 		$sql = "select * from {prefix}content where active = ? and language = ?";
 		$query = Database::pQuery ( $sql, $args, true );
@@ -58,14 +58,14 @@ class ModuleHelper {
 		foreach ( $modules as $module ) {
 			$noembedfile1 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/.noembed" );
 			$noembedfile2 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/noembed.txt" );
-			
+
 			$embed_attrib = true;
-			
+
 			$meta_attr = getModuleMeta ( $module, "embed" );
 			if (! is_null ( $meta_attr ) and is_bool ( $meta_attr )) {
 				$embed_attrib = $meta_attr;
 			}
-			
+
 			if (! file_exists ( $noembedfile1 ) and ! file_exists ( $noembedfile2 ) and $embed_attrib) {
 				$retval [] = $module;
 			}
@@ -84,14 +84,14 @@ class ModuleHelper {
 		$retval = true;
 		$noembedfile1 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/.noembed" );
 		$noembedfile2 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/noembed.txt" );
-		
+
 		$embed_attrib = true;
-		
+
 		$meta_attr = getModuleMeta ( $module, "embed" );
 		if (! is_null ( $meta_attr ) and is_bool ( $meta_attr )) {
 			$embed_attrib = $meta_attr;
 		}
-		
+
 		if (file_exists ( $noembedfile1 ) or file_exists ( $noembedfile2 ) or ! $embed_attrib) {
 			$retval = false;
 		}
@@ -114,14 +114,24 @@ class ModuleHelper {
 				return $language->getLanguageLink ();
 		}
 		$domain = getDomainByLanguage ( $page->language );
+		$dirname = dirname ( get_request_uri () );
+		if (is_admin_dir ()) {
+			$dirname = dirname ( dirname ( $dirname . "/.." ) );
+		}
+		if (! startsWith ( $dirname, "/" )) {
+			$dirname = "/" . $dirname;
+		}
+		if (! endsWith ( $dirname, "/" )) {
+			$dirname = $dirname . "/";
+		}
 		if (! $domain) {
 			if ($page->language != getCurrentLanguage ()) {
-				return get_protocol_and_domain () . "/" . $page->systemname . ".html" . "?language=" . $page->language;
+				return get_protocol_and_domain () . $dirname. $page->systemname . ".html" . "?language=" . $page->language;
 			} else {
-				return get_protocol_and_domain () . "/" . $page->systemname . ".html";
+				return get_protocol_and_domain () . $dirname . $page->systemname . ".html";
 			}
 		} else {
-			return get_site_protocol () . $domain . "/" . $page->systemname . ".html";
+			return get_protocol_and_domain() . $dirname . $row->systemname . ".html";
 		}
 	}
 	/**
@@ -170,9 +180,9 @@ class ModuleHelper {
 	public static function deleteButton($url, $otherVars = array(), $htmlAttributes = array()) {
 		$html = "";
 		$htmlAttributes ["class"] = trim ( "delete-form " . $htmlAttributes ["class"] );
-		
+
 		$attribhtml = StringHelper::isNotNullOrWhitespace ( self::buildHTMLAttributesFromArray ( $htmlAttributes ) ) ? " " . self::buildHTMLAttributesFromArray ( $htmlAttributes ) : "";
-		
+
 		$html .= '<form action="' . _esc ( $url ) . '" method="post"' . $attribhtml . '>';
 		$html .= get_csrf_token_html ();
 		foreach ( $otherVars as $key => $value ) {
