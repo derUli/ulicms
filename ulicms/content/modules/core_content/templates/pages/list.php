@@ -524,23 +524,7 @@ $(window).load(function(){
 			if (startsWith ( $row->redirection, "#" ) or $row->type == "node" or $row->type == "snippet") {
 				echo "<td style='text-align:center'></td>";
 			} else {
-				$domain = getDomainByLanguage ( $row->language );
-				if (! $domain) {
-					$url = "../" . $row->systemname . ".html";
-				} else {
-					$dirname = dirname ( get_request_uri () );
-					if (is_admin_dir ()) {
-						$dirname = dirname ( dirname ( $dirname . "/.." ) );
-					}
-					if (! startsWith ( $dirname, "/" )) {
-						$dirname = "/" . $dirname;
-					}
-					if (! endsWith ( $dirname, "/" )) {
-						$dirname = $dirname . "/";
-					}
-
-					$url = get_protocol_and_domain() . $dirname . $row->systemname . ".html";
-				}
+				$url = ModuleHelper::getFullPageURLByID($row->id);
 				echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation ( "view" ) . "\" title=\"" . get_translation ( "view" ) . "\"></a></td>";
 			}
 			if ($acl->hasPermission ( "pages_create" )) {

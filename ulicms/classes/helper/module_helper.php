@@ -115,6 +115,8 @@ class ModuleHelper {
 		}
 		$domain = getDomainByLanguage ( $page->language );
 		$dirname = dirname ( get_request_uri () );
+
+
 		if (is_admin_dir ()) {
 			$dirname = dirname ( dirname ( $dirname . "/.." ) );
 		}
@@ -131,7 +133,7 @@ class ModuleHelper {
 				return get_protocol_and_domain () . $dirname . $page->systemname . ".html";
 			}
 		} else {
-			return get_site_protocol() . $domain . $dirname . $row->systemname . ".html";
+			return get_site_protocol() . $domain . $dirname . $page->systemname . ".html";
 		}
 	}
 	/**
