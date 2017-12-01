@@ -131,7 +131,7 @@ class ModuleHelper {
 				return get_protocol_and_domain () . $dirname . $page->systemname . ".html";
 			}
 		} else {
-			return get_protocol_and_domain() . $dirname . $row->systemname . ".html";
+			return get_site_protocol() . $domain . $dirname . $row->systemname . ".html";
 		}
 	}
 	/**

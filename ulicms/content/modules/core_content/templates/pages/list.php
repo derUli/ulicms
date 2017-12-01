@@ -539,7 +539,7 @@ $(window).load(function(){
 						$dirname = $dirname . "/";
 					}
 
-					$url = "http://" . $domain . $dirname . $row->systemname . ".html";
+					$url = get_protocol_and_domain() . $dirname . $row->systemname . ".html";
 				}
 				echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation ( "view" ) . "\" title=\"" . get_translation ( "view" ) . "\"></a></td>";
 			}
