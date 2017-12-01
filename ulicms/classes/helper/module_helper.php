@@ -126,8 +126,9 @@ class ModuleHelper {
 		if (! endsWith ( $dirname, "/" )) {
 			$dirname = $dirname . "/";
 		}
+		$currentLanguage = isset($_SESSION ["language"]) ? $_SESSION ["language"]  : Settings::get ( "default_language" );
 		if (! $domain) {
-			if ($page->language != getCurrentLanguage ()) {
+			if ($page->language != $currentLanguage) {
 				return get_protocol_and_domain () . $dirname. $page->systemname . ".html" . "?language=" . $page->language;
 			} else {
 				return get_protocol_and_domain () . $dirname . $page->systemname . ".html";

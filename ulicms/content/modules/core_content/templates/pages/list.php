@@ -524,7 +524,7 @@ $(window).load(function(){
 			if (startsWith ( $row->redirection, "#" ) or $row->type == "node" or $row->type == "snippet") {
 				echo "<td style='text-align:center'></td>";
 			} else {
-				$url = ModuleHelper::getFullPageURLByID($row->id);
+				$url = "../?goid={$row->id}";
 				echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation ( "view" ) . "\" title=\"" . get_translation ( "view" ) . "\"></a></td>";
 			}
 			if ($acl->hasPermission ( "pages_create" )) {
