@@ -42,4 +42,16 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 		$this->assertNull ( getModuleMeta ( "not_a_module", "version" ) );
 		$this->assertNull ( getModuleMeta ( "core_home", "not_here" ) );
 	}
+	public function testBool2YesNo() {
+		$this->assertEquals ( get_translation ( "yes" ), bool2YesNo ( 1 ) );
+		$this->assertEquals ( get_translation ( "no" ), bool2YesNo ( 0 ) );
+		$this->assertEquals ( get_translation ( "yes" ), bool2YesNo ( true ) );
+		$this->assertEquals ( get_translation ( "no" ), bool2YesNo ( false ) );
+		
+		$this->assertEquals ( "cool", bool2YesNo ( 1, "cool", "doof" ) );
+		$this->assertEquals ( "doof", bool2YesNo ( 0, "cool", "doof" ) );
+		$this->assertEquals ( "cool", bool2YesNo ( true, "cool", "doof" ) );
+		$this->assertEquals ( "doof", bool2YesNo ( false, "cool", "doof" ) );
+		
+	}
 }

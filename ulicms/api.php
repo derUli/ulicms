@@ -1,4 +1,13 @@
 <?php
+function bool2YesNo($value, $yesString = null, $noString = null) {
+	if (! $yesString) {
+		$yesString = get_translation ( "yes" );
+	}
+	if(!$noString){
+		$noString = get_translation("no");
+	}
+	return ($value ? $yesString : $noString);
+}
 function json_readable_encode($in, $indent = 0, $from_array = false) {
 	$_myself = __FUNCTION__;
 	$_escape = function ($str) {
