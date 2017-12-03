@@ -35,7 +35,7 @@ $enq = array (
 		"scripts/users.js",
 		"scripts/global.js",
 		"scripts/bootstrap.min.js",
-		"../lib/js/global.js"
+		"../lib/js/global.js" 
 );
 ?>
 <?php
@@ -109,11 +109,11 @@ add_hook ( "admin_head" );
 </head>
 <div
 	class="fluid-container main <?php
-
+	
 	if (get_action ()) {
 		echo 'action-' . Template::getEscape ( get_action () );
 	}
-
+	
 	?>">
 
 	<div class="row">
@@ -124,15 +124,16 @@ add_hook ( "admin_head" );
 		</div>
 		<div class="col-xs-4 menu-container">
 		<?php
-
+		
 		if (is_logged_in ()) {
 			?>
 			<div class="row pull-right">
 				<div class="col-xs-6">
 					<img src="gfx/clear-cache.png" id="menu-clear-cache"
-						alt="<?php translate("clear_cache");?>">
-							<img src="gfx/loading2.gif" id="menu-clear-cache-loading" style="display:none"
-								alt="<?php translate("loading");?>">
+						data-url="<?php echo ModuleHelper::buildMethodCallUrl("CacheSettingsController", "clearCache");?>"
+						alt="<?php translate("clear_cache");?>"> <img
+						src="gfx/loading2.gif" id="menu-clear-cache-loading"
+						style="display: none" alt="<?php translate("loading");?>">
 				</div>
 				<div class="col-xs-6">
 					<img src="gfx/menu-icon.png" id="menu-toggle"
