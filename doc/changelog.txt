@@ -1,4 +1,7 @@
 ﻿===== Neues in UliCMS 2018.2 =====
++ Neue Funktionen:
+bool2YesNo($value, $yesString = null, $noString = null)
+
 Bugfixes:
 * Icon zum Cache leeren war nicht funktional
 * Unnötige Debug Ausgabe entfernt
