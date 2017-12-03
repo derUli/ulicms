@@ -3,8 +3,8 @@ function bool2YesNo($value, $yesString = null, $noString = null) {
 	if (! $yesString) {
 		$yesString = get_translation ( "yes" );
 	}
-	if(!$noString){
-		$noString = get_translation("no");
+	if (! $noString) {
+		$noString = get_translation ( "no" );
 	}
 	return ($value ? $yesString : $noString);
 }
@@ -390,9 +390,9 @@ function getModuleMeta($module, $attrib = null) {
 		
 		if ($attrib != null) {
 			$data = file_get_contents ( $metadata_file );
-			$data = json_decode ( $data );
-			if (isset ( $data->$attrib )) {
-				$retval = $data->$attrib;
+			$data = json_decode ( $data, true );
+			if (isset ( $data [$attrib] )) {
+				$retval = $data [$attrib];
 			}
 		} else {
 			$data = file_get_contents ( $metadata_file );
