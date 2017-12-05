@@ -113,12 +113,6 @@ if (isset ( $_GET ["goid"] )) {
 	}
 }
 
-if (isset ( $_GET ["submit-cms-form"] ) and ! empty ( $_GET ["submit-cms-form"] ) and get_request_method () === "POST") {
-	$form_id = intval ( $_GET ["submit-cms-form"] );
-	
-	require_once ULICMS_ROOT . "/classes/objects/content/forms.php";
-	Forms::submitForm ( $form_id );
-}
 ControllerRegistry::runMethods ();
 
 header ( $_SERVER ["SERVER_PROTOCOL"] . " " . $status );

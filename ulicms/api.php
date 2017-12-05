@@ -1,4 +1,13 @@
 <?php
+function bool2YesNo($value, $yesString = null, $noString = null) {
+	if (! $yesString) {
+		$yesString = get_translation ( "yes" );
+	}
+	if (! $noString) {
+		$noString = get_translation ( "no" );
+	}
+	return ($value ? $yesString : $noString);
+}
 function json_readable_encode($in, $indent = 0, $from_array = false) {
 	$_myself = __FUNCTION__;
 	$_escape = function ($str) {
@@ -378,13 +387,16 @@ function getModuleMeta($module, $attrib = null) {
 	$retval = null;
 	$metadata_file = getModulePath ( $module, true ) . "metadata.json";
 	if (file_exists ( $metadata_file )) {
-		$data = file_get_contents ( $metadata_file );
-		$data = json_decode ( $data );
+		
 		if ($attrib != null) {
-			if (isset ( $data->$attrib )) {
-				$retval = $data->$attrib;
+			$data = file_get_contents ( $metadata_file );
+			$data = json_decode ( $data, true );
+			if (isset ( $data [$attrib] )) {
+				$retval = $data [$attrib];
 			}
 		} else {
+			$data = file_get_contents ( $metadata_file );
+			$data = json_decode ( $data, true );
 			$retval = $data;
 		}
 	}

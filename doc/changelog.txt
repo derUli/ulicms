@@ -1,4 +1,12 @@
-﻿===== Neues in UliCMS 2018.1 =====
+===== Neues in UliCMS 2018.1.1 =====
++ Neue Funktionen:
+  * bool2YesNo($value, $yesString = null, $noString = null)
+
+Bugfixes:
+* Icon zum Cache leeren war nicht funktional
+* Unnötige Debug Ausgabe entfernt
+
+===== Neues in UliCMS 2018.1 =====
 + Teile des Backends wurden in Core-Module verschoben und in ein MVC-Pattern umstrukturiert
 + Module können nun Inhaltstypen mit eigenen Formularfeldern erstellen
 + Neuer Parameter $htmlAttributes (Array) zu der Funktion ModuleHelper::buildMethodCallForm() hinzugefügt

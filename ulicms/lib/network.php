@@ -2,10 +2,10 @@
 // returns site protocl
 // http:// or https://
 function get_site_protocol() {
-	if (isset ( $_SERVER ['HTTPS'] ) && ($_SERVER ['HTTPS'] == 'on' || $_SERVER ['HTTPS'] == 1) || isset ( $_SERVER ['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER ['HTTP_X_FORWARDED_PROTO'] == 'https')
-		return $protocol = 'https://';
-	else
-		return $protocol = 'http://';
+	if (isset ( $_SERVER ['HTTPS'] ) && ($_SERVER ['HTTPS'] == 'on' || $_SERVER ['HTTPS'] == 1) || isset ( $_SERVER ['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER ['HTTP_X_FORWARDED_PROTO'] == 'https'){
+		return 'https://';
+	}
+	return 'http://';
 }
 function site_protocol() {
 	echo get_site_protocol ();
@@ -40,7 +40,7 @@ function get_ip() {
 			'HTTP_XROXY_CONNECTION',
 			'VIA',
 			'X_FORWARDED',
-			'X_FORWARDED_FOR' 
+			'X_FORWARDED_FOR'
 	);
 	$regEx = "/^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])(\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$/";
 	foreach ( $proxy_headers as $proxy_header ) {
@@ -56,7 +56,7 @@ function get_ip() {
 			/**
 			 * Teile in einzelne IPs, gib die letzte zurück und entferne Leerzeichen
 			 */
-			
+
 			// if IPv4 address remove port if exists
 			if (preg_match ( $regEx, $proxy_header_temp ) && ($pos_temp = stripos ( $proxy_header_temp, ':' )) !== false) {
 				$proxy_header_temp = substr ( $proxy_header_temp, 0, $pos_temp );
@@ -71,7 +71,7 @@ if (! function_exists ( "get_host" )) {
 	function get_host() {
 		if ($host = $_SERVER ['HTTP_X_FORWARDED_HOST']) {
 			$elements = explode ( ',', $host );
-			
+
 			$host = trim ( end ( $elements ) );
 		} else {
 			if (! $host = $_SERVER ['HTTP_HOST']) {
@@ -80,10 +80,10 @@ if (! function_exists ( "get_host" )) {
 				}
 			}
 		}
-		
+
 		// Remove port number from host
 		$host = preg_replace ( '/:\d+$/', '', $host );
-		
+
 		return trim ( $host );
 	}
 }
@@ -145,9 +145,9 @@ function getStatusCodeByNumber($nr) {
 			506 => 'Variant Also Negotiates',
 			507 => 'Insufficient Storage',
 			509 => 'Bandwidth Limit Exceeded',
-			510 => 'Not Extended' 
+			510 => 'Not Extended'
 	);
-	
+
 	return $nr . " " . $http_codes [$nr];
 }
 function get_request_uri() {

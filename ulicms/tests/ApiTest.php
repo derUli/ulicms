@@ -16,7 +16,7 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 	}
 	public function testGetAllUsedLanguages() {
 		$languages = getAllUsedLanguages ();
-		$this->assertGreaterThanOrEqual( 2, count ( $languages ) );
+		$this->assertGreaterThanOrEqual ( 2, count ( $languages ) );
 		$this->assertTrue ( in_array ( "de", $languages ) );
 		$this->assertTrue ( in_array ( "en", $languages ) );
 	}
@@ -31,6 +31,27 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 		add_translation ( $key1, $value2 );
 		$this->assertEquals ( $value1, get_translation ( $key1 ) );
 		add_translation ( $key2, $value2 );
-		$this->assertEquals ( $value2, constant(strtoupper($key2)) );
+		$this->assertEquals ( $value2, constant ( strtoupper ( $key2 ) ) );
+	}
+	public function testGetModuleMeta() {
+		$this->assertEquals ( "core", getModuleMeta ( "core_home", "source" ) );
+		$meta = getModuleMeta ( "core_home" );
+		$this->assertEquals ( "models/HomeViewModel.php", $meta ["objects"] ["HomeViewModel"] );
+		$this->assertFalse ( $meta ["embed"] );
+		$this->assertNull ( getModuleMeta ( "not_a_module" ) );
+		$this->assertNull ( getModuleMeta ( "not_a_module", "version" ) );
+		$this->assertNull ( getModuleMeta ( "core_home", "not_here" ) );
+	}
+	public function testBool2YesNo() {
+		$this->assertEquals ( get_translation ( "yes" ), bool2YesNo ( 1 ) );
+		$this->assertEquals ( get_translation ( "no" ), bool2YesNo ( 0 ) );
+		$this->assertEquals ( get_translation ( "yes" ), bool2YesNo ( true ) );
+		$this->assertEquals ( get_translation ( "no" ), bool2YesNo ( false ) );
+		
+		$this->assertEquals ( "cool", bool2YesNo ( 1, "cool", "doof" ) );
+		$this->assertEquals ( "doof", bool2YesNo ( 0, "cool", "doof" ) );
+		$this->assertEquals ( "cool", bool2YesNo ( true, "cool", "doof" ) );
+		$this->assertEquals ( "doof", bool2YesNo ( false, "cool", "doof" ) );
+		
 	}
 }

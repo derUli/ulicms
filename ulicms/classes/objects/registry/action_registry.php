@@ -5,9 +5,6 @@ class ActionRegistry {
 			"groups" => "inc/groups.php",
 			"modules" => "inc/modules.php",
 			"available_modules" => "inc/available_modules.php",
-			"forms" => "inc/forms.php",
-			"forms_new" => "inc/forms_new.php",
-			"forms_edit" => "inc/forms_edit.php",
 			"module_settings" => "inc/module_settings.php" 
 	);
 	private static $actionPermissions = array();
