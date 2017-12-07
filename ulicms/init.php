@@ -2,6 +2,7 @@
 /**
  * Diese Datei initalisiert das System
  */
+include_once dirname ( __FILE__ ) . "/vendor/autoload.php";
 
 // root directory of UliCMS
 if (! defined ( "ULICMS_ROOT" )) {
