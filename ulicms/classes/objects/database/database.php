@@ -187,8 +187,8 @@ class Database {
 	}
 	
 	// Connect with database server
-	public static function connect($server, $user, $password) {
-		self::$connection = mysqli_connect ( $server, $user, $password );
+	public static function connect($server, $user, $password, $socket = null) {
+		self::$connection = mysqli_connect ( $server, $user, $password, $socket );
 		if (! self::$connection) {
 			return false;
 		}

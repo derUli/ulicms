@@ -277,7 +277,8 @@ if ($config->db_server == "" or $config->db_user == "") {
 	exit ();
 }
 
-@$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password );
+$socket = isset($config->socket) ? $config->socket : null;
+@$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password, $socket );
 
 if ($connection === false) {
 	throw new Exception ( "<h1>Can't connect to Database.</h1>" );
