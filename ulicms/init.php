@@ -272,7 +272,7 @@ function is_in_include_path($find) {
 global $config;
 $config = new config ();
 
-$db_socket = isset ( $config->db_socket ) ? $config->db_socket : null;
+$db_socket = isset ( $config->db_socket ) ? $config->db_socket : ini_get("mysqli.default_socket");
 
 if (($config->db_server == "" or $config->db_user == "") or (! $config->db_server and empty ( $db_socket ))) {
 	header ( "Location: installer/" );
