@@ -42,6 +42,13 @@ class RequestClassTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "404 Not Found", Request::getStatusCodeByNumber ( 404 ) );
 		$this->assertEquals ( '418 I\'m a teapot', Request::getStatusCodeByNumber ( 418 ) );
 	}
+	public function testIsAjaxRequest() {
+		unset ( $_SERVER ['HTTP_X_REQUESTED_WITH'] );
+		$this->assertFalse ( Request::isAjaxRequest () );
+		$_SERVER ['HTTP_X_REQUESTED_WITH'] = "XMLHttpRequest";
+		$this->assertTrue ( Request::isAjaxRequest () );
+		unset ( $_SERVER ['HTTP_X_REQUESTED_WITH'] );
+	}
 }
 
 
