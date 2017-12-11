@@ -1,3 +1,17 @@
+# geeignete Google Cloud Komponenten
+
+* App Engine & Cloud SQL (Vorteil: minimaler Wartungsaufwand, Nachteil: Upload von Dateien schwierig)
+* LAMP Stack (Falls die App Engine zu eingeschränkt ist, das wäre dann ein richtiger VServer, wo liegen die Vorteile gegenüber einem VServer z.B. bei all-inkl.com?)
+
+# Deploy
+
+* Bereitstellung von UliCMS Core Code
+* Eine Config je Site (yaml Datei)
+* Shellscript um ein Deploy aller Sites durchzuführen.
+* Wie update.php Script automatisch beim Deploy ausführen?
+* Automatische Updates und Patches des Cores deaktivieren, da wir das selber erledigen.
+* Optional: Automatische Updates für vom Anwender installierte Module aus der Paketquelle durch uns. Wie?
+
 # Datenbanken
 
 * Damit das Socket für die Verbindung mit der Datenbank angelegt wird, muss die Datenbankverbindung wie folgt in der app.yaml eingetragen werden.
@@ -23,6 +37,8 @@ File System Zugriff Google Cloud App Engine / PHP
 * Damit Funktionen wie der Upload von Medien und Installation von Modulen durch den Anwender durchgeführt werden können, müssen alle Stellen im Code, an denen Schreibzugriffe auf das Dateisystem erfolgen, angepasst werden, die Pfade müssen durch Storage URLs ersetzt werden.
 * Ich halte es für sinnvoll, statt einfach nur die Pfade anzupassen, eine Abstraktions-Klasse für Dateizugriffe zu machen, so dass zukünftige Anpassungen schneller durchführbar sind.
 Ein "FileSystemDriver" Interface und auf Basis dessen Klassen, die verschiedene Zugriffsmethoden implementieren. z.B. Dateizugriff per FTP, per NFS oder für andere Clouds, ....
+* Beim Erstellen einer neuen Datei muss diese über den public-readable gemacht werden, dass geht in PHP über den Stream Context. Siehe auch https://cloud.google.com/appengine/docs/standard/php/googlestorage/public_access
+* Append funktioniert nicht, stattdessen auslesen und überschreiben.
 
 # Sprachcode in URL statt im Filesystem
 
