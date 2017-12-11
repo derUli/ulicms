@@ -1,3 +1,8 @@
+# Deploy
+* Bereitstellung von UliCMS Core Code
+* Eine Config je Site (yaml Datei)
+* Shellscript um ein Deploy aller Sites durchzuführen.
+
 # Datenbanken
 
 * Damit das Socket für die Verbindung mit der Datenbank angelegt wird, muss die Datenbankverbindung wie folgt in der app.yaml eingetragen werden.
