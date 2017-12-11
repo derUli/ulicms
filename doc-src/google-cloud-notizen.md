@@ -33,6 +33,8 @@ File System Zugriff Google Cloud App Engine / PHP
 * Damit Funktionen wie der Upload von Medien und Installation von Modulen durch den Anwender durchgeführt werden können, müssen alle Stellen im Code, an denen Schreibzugriffe auf das Dateisystem erfolgen, angepasst werden, die Pfade müssen durch Storage URLs ersetzt werden.
 * Ich halte es für sinnvoll, statt einfach nur die Pfade anzupassen, eine Abstraktions-Klasse für Dateizugriffe zu machen, so dass zukünftige Anpassungen schneller durchführbar sind.
 Ein "FileSystemDriver" Interface und auf Basis dessen Klassen, die verschiedene Zugriffsmethoden implementieren. z.B. Dateizugriff per FTP, per NFS oder für andere Clouds, ....
+* Beim Erstellen einer neuen Datei muss diese über den public-readable gemacht werden, dass geht in PHP über den Stream Context. Siehe auch https://cloud.google.com/appengine/docs/standard/php/googlestorage/public_access
+* Append funktioniert nicht, stattdessen auslesen und überschreiben.
 
 # Sprachcode in URL statt im Filesystem
 
