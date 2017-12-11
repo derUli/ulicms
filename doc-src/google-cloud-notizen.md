@@ -7,6 +7,8 @@
 * Eine Config je Site (yaml Datei)
 * Shellscript um ein Deploy aller Sites durchzuführen.
 * Wie update.php Script automatisch beim Deploy ausführen?
+* Automatische Updates und Patches des Cores deaktivieren, da wir das selber erledigen.
+* Optional: Automatische Updates für vom Anwender installierte Module aus der Paketquelle durch uns. Wie?
 
 # Datenbanken
 
