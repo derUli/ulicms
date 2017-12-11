@@ -103,6 +103,7 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "</form>", ModuleHelper::endForm () );
 	}
 	public function testGetFullPageURLByID() {
+		$_SESSION ["language"] = "de";
 		$_SERVER ['SERVER_NAME'] = "company.com";
 		$this->assertEquals ( "http://company.com/willkommen.html", ModuleHelper::getFullPageURLByID ( 1 ) );
 		
