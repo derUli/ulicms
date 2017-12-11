@@ -1,4 +1,4 @@
-# Mögliche Google Cloud Komponenten
+# geeignete Google Cloud Komponenten
 * App Engine & Cloud SQL (Vorteil, minimaler Wartungsaufwand)
 * LAMP Stack (Falls die App Engine zu eingeschränkt ist, das wäre dann ein richtiger VServer, wo liegen die Vorteile gegenüber einem VServer z.B. bei all-inkl.com?)
 
