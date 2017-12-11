@@ -1,8 +1,10 @@
 # geeignete Google Cloud Komponenten
+
 * App Engine & Cloud SQL (Vorteil: minimaler Wartungsaufwand, Nachteil: Upload von Dateien schwierig)
 * LAMP Stack (Falls die App Engine zu eingeschränkt ist, das wäre dann ein richtiger VServer, wo liegen die Vorteile gegenüber einem VServer z.B. bei all-inkl.com?)
 
 # Deploy
+
 * Bereitstellung von UliCMS Core Code
 * Eine Config je Site (yaml Datei)
 * Shellscript um ein Deploy aller Sites durchzuführen.
