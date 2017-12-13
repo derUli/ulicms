@@ -41,10 +41,10 @@ class AntispamHelper {
 		return false;
 	}
 	public static function isChinese($str) {
-		return preg_match ( "/\p{Han}+/u", $str );
+		return ( bool ) preg_match ( "/\p{Han}+/u", $str );
 	}
 	public static function isCyrillic($str) {
-		return ( bool ) preg_match ( '/\p{Cyrillic+/u', $str );
+		return ( bool ) preg_match ( '/\p{Cyrillic}+/u', $str );
 	}
 	public static function checkForSpamhaus($host = null) {
 		if (is_null ( $host )) {
