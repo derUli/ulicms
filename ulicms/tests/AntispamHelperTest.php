@@ -40,7 +40,7 @@ class AntispamHelperTest extends PHPUnit_Framework_TestCase {
 	
 	// TODO: Implement test for isCountryBlocked
 	public function testIsCountryBlocked() {
-		Settings::set ( "country_blacklist", "vn,jp, at" );
+		Settings::set ( "country_blacklist", "vn,jp, at,tr" );
 		
 		// Germany
 		$_SERVER ["REMOTE_ADDR"] = "178.254.29.67";
@@ -64,6 +64,10 @@ class AntispamHelperTest extends PHPUnit_Framework_TestCase {
 		
 		// Austria
 		$_SERVER ["REMOTE_ADDR"] = "194.116.243.20";
+		$this->assertTrue ( AntispamHelper::isCountryBlocked () );
+		
+		// Turkey
+		$_SERVER ["REMOTE_ADDR"] = "88.255.55.110";
 		$this->assertTrue ( AntispamHelper::isCountryBlocked () );
 	}
 }
