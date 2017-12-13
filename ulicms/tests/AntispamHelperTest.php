@@ -1,5 +1,13 @@
 <?php
 class AntispamHelperTest extends PHPUnit_Framework_TestCase {
+	private $initialCountryBlacklist;
+	public function setUp() {
+		$this->initialCountryBlacklist = Settings::get ( "country_blacklist" );
+	}
+	public function tearDown() {
+		Settings::set ( "country_blacklist", $this->initialCountryBlacklist );
+		unset ( $_SERVER ["REMOTE_ADDR"] );
+	}
 	public function testIsChinese() {
 		// Only Latin
 		$this->assertFalse ( AntispamHelper::isChinese ( "Deutsche Büchstäben" ) );
@@ -32,7 +40,31 @@ class AntispamHelperTest extends PHPUnit_Framework_TestCase {
 	
 	// TODO: Implement test for isCountryBlocked
 	public function testIsCountryBlocked() {
-		throw new NotImplementedException ();
+		Settings::set ( "country_blacklist", "vn,jp, at" );
+		
+		// Germany
+		$_SERVER ["REMOTE_ADDR"] = "178.254.29.67";
+		$this->assertFalse ( AntispamHelper::isCountryBlocked () );
+		
+		// Italy
+		$_SERVER ["REMOTE_ADDR"] = "40.84.199.233";
+		$this->assertFalse ( AntispamHelper::isCountryBlocked () );
+		
+		// United Kingdom
+		$_SERVER ["REMOTE_ADDR"] = "52.222.250.185";
+		$this->assertFalse ( AntispamHelper::isCountryBlocked () );
+		
+		// Vietnam
+		$_SERVER ["REMOTE_ADDR"] = "123.30.54.106";
+		$this->assertTrue ( AntispamHelper::isCountryBlocked () );
+		
+		// Japan
+		$_SERVER ["REMOTE_ADDR"] = "183.79.23.196";
+		$this->assertTrue ( AntispamHelper::isCountryBlocked () );
+		
+		// Austria
+		$_SERVER ["REMOTE_ADDR"] = "194.116.243.20";
+		$this->assertTrue ( AntispamHelper::isCountryBlocked () );
 	}
 }
 	
