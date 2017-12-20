@@ -1,4 +1,10 @@
 <?php
+function is_true($var) {
+	return (isset ( $var ) and $var);
+}
+function is_false($var) {
+	return ! (isset ( $var ) and $var);
+}
 function bool2YesNo($value, $yesString = null, $noString = null) {
 	if (! $yesString) {
 		$yesString = get_translation ( "yes" );

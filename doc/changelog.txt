@@ -1,5 +1,9 @@
 ===== Neues in UliCMS 2018.2 =====
 
+Neue Funktionen:
++ is_true($var)
++ is_false($var)
+
 Verbesserungen:
 * Action pkginfo in core_package_manager: Button nun mit Bootstrap Style
 
