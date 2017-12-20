@@ -1,8 +1,14 @@
 ===== Neues in UliCMS 2018.2 =====
+
+Verbesserungen:
+* Action pkginfo in core_package_manager: Button nun mit Bootstrap Style
+
 Bugfixes:
 * Fehlerhafte Berechtigungsprüfung in core_settings korrigiert
+* Favicon-Metatag wird auch ausgegeben wenn "hide_meta_generator" gesetzt ist
 
 ===== Neues in UliCMS 2018.1.1 =====
+
 + Neue Funktionen:
   * bool2YesNo($value, $yesString = null, $noString = null)
 
@@ -11,6 +17,7 @@ Bugfixes:
 * Unnötige Debug Ausgabe entfernt
 
 ===== Neues in UliCMS 2018.1 =====
+
 + Teile des Backends wurden in Core-Module verschoben und in ein MVC-Pattern umstrukturiert
 + Module können nun Inhaltstypen mit eigenen Formularfeldern erstellen
 + Neuer Parameter $htmlAttributes (Array) zu der Funktion ModuleHelper::buildMethodCallForm() hinzugefügt
