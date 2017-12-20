@@ -128,7 +128,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 						"file" => basename ( $tempfile ) 
 				) );
 				?>
-<input type="submit" value="<?php translate("install");?>">
+<button type="submit" class="btn btn-warning"><?php translate("install");?></button>
 	</form>
 </div>
 <?php
