@@ -562,8 +562,9 @@ function meta_description($dummy = null) {
 	}
 }
 function get_title($ipage = null, $headline = false) {
-	if (Vars::get ( "title" )) {
-		return Vars::get ( "title" );
+	$cacheVar = $headline ? "headline" : "title";
+	if (Vars::get ( $cacheVar)) {
+		return Vars::get ( $cacheVar );
 	}
 	$status = check_status ();
 	if ($status == "404 Not Found") {
@@ -586,7 +587,7 @@ function get_title($ipage = null, $headline = false) {
 			}
 
 			$title = apply_filter ( $title, "title" );
-			Vars::set ( "title", $title );
+			Vars::set ( $cacheVar, $title );
 			return $title;
 		}
 	}

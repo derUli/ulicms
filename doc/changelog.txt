@@ -10,6 +10,7 @@ Verbesserungen:
 Bugfixes:
 * Fehlerhafte Berechtigungsprüfung in core_settings korrigiert
 * Favicon-Metatag wird auch ausgegeben wenn "hide_meta_generator" gesetzt ist
+* Alternative Überschrift wurde nicht im Frontend angezeigt
 
 ===== Neues in UliCMS 2018.1.1 =====
 
