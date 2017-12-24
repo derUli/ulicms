@@ -7,7 +7,6 @@ if (! class_exists ( "ulicms_version" )) {
 			$this->internalVersion = Array (
 					2018,
 					2
-			
 			);
 			$this->update = "";
 			$this->developmentVersion = true;

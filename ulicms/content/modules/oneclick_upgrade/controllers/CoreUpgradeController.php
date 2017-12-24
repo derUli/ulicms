@@ -43,13 +43,13 @@ class CoreUpgradeController extends Controller
         return null;
     }
 
-    public function runUpgrade()
+    public function runUpgrade($skipPermissions = false)
     {
         @set_time_limit(0);
         @ignore_user_abort(1);
         $acl = new ACL();
         
-        if (! $acl->hasPermission("update_system") or is_admin_dir() or ! $this->checkForUpgrades() or get_request_method() != "POST") {
+        if (! $skipPermissions and (! $acl->hasPermission("update_system") or is_admin_dir() or ! $this->checkForUpgrades() or get_request_method() != "POST")) {
             return false;
         }
         
