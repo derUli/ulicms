@@ -41,7 +41,7 @@ function update_manager_admin() {
 		
 		?>
 	<p>
-		<input type="submit" value="<?php translate("install_updates");?>">
+		<button type="submit" class="btn btn-warning"><?php translate("install_updates");?></button>
 	</p>
 	<?php
 	} else {

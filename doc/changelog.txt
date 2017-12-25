@@ -3,6 +3,7 @@
 Neue Features:
 + oneclick_upgrade auf Version 1.5 aktualisiert
 + Mobile_Detect auf Version 2.8.30 aktualisiert
++ update_manager auf Version 1.0.5 aktualisiert
 
 Neue Funktionen:
 + is_true($var)
@@ -10,6 +11,7 @@ Neue Funktionen:
 
 Verbesserungen:
 * Action pkginfo in core_package_manager: Button nun mit Bootstrap Style
+* Button "Liste zurücksetzen" unter "Installierte Patches" nun mit Bootstrap Style
 
 Bugfixes:
 * Fehlerhafte Berechtigungsprüfung in core_settings korrigiert

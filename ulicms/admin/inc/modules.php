@@ -268,9 +268,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		method="post"
 		onsubmit='return confirm("<?php translate("TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM");?>");'>
 <?php csrf_token_html(); ?>
-<input type="submit" id="truncate_installed_patches"
-			name="truncate_installed_patches"
-			value="<?php translate("TRUNCATE_INSTALLED_PATCHES_LIST");?>">
+<button type="submit" id="truncate_installed_patches"
+			name="truncate_installed_patches" class="btn btn-danger"><?php translate("TRUNCATE_INSTALLED_PATCHES_LIST");?></button>
 	</form>
 </div>
 <script type="text/javascript">
