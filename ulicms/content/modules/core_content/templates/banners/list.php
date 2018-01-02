@@ -8,9 +8,9 @@ if ($acl->hasPermission ( "banners" )) {
 		$_SESSION ["filter_category"] = intval ( $_GET ["filter_category"] );
 	}
 	if ($_SESSION ["filter_category"] == 0) {
-		$banners = Banners::getAll();
+		$banners = Banners::getAll ();
 	} else {
-		$banners = Banners::getByCategory($_SESSION ["filter_category"]);
+		$banners = Banners::getByCategory ( $_SESSION ["filter_category"] );
 	}
 	?>
 <script type="text/javascript">
@@ -37,7 +37,7 @@ $(window).load(function(){
 	?>
 </p>
 
-<p><?php BackendHelper::formatDatasetCount(Database::getNumRows($query));?></p>
+<p><?php BackendHelper::formatDatasetCount(count ( $banners ));?></p>
 <div class="scroll">
 	<table class="tablesorter">
 		<thead>
@@ -57,11 +57,11 @@ $(window).load(function(){
 		<tbody>
 	<?php
 	if (count ( $banners ) > 0) {
-		foreach($banners as $banner){
+		foreach ( $banners as $banner ) {
 			?>
 			<?php
 			echo '<tr id="dataset-' . $banner->id . '">';
-			if ($banner->getType() == "gif") {
+			if ($banner->getType () == "gif") {
 				$link_url = Template::getEscape ( $banner->link_url );
 				$image_url = Template::getEscape ( $banner->image_url );
 				$name = Template::getEscape ( $banner->name );
