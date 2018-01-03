@@ -18,6 +18,7 @@ Bugfixes:
 * Favicon-Metatag wird auch ausgegeben wenn "hide_meta_generator" gesetzt ist
 * Alternative Überschrift wurde nicht im Frontend angezeigt
 * core_content - Werbebanner Liste: Anzahl der Ergebnisse wird wieder angezeigt
+* core_content - Werbebanner: Neu erstellte Werbebanner mit der Sprache "Alle" wurden nicht angezeig
 
 ===== Neues in UliCMS 2018.1.1 =====
 

@@ -69,7 +69,7 @@ $(window).load(function(){
 			} else {
 				echo '<td>' . Template::getEscape ( $banner->html ) . '</td>';
 			}
-			if ($banner->language == "all") {
+			if (! $banner->language) {
 				echo '<td>Alle</td>';
 			} else {
 				echo '<td>' . getLanguageNameByCode ( $banner->language ) . "</td>";
