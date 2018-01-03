@@ -1,5 +1,26 @@
 <?php
 class Template {
+	public static function randomBanner() {
+		$query = db_query ( "SELECT name, link_url, image_url, `type`, html FROM " . tbname ( "banner" ) . " WHERE language IS NULL OR language='" . db_escape ( $_SESSION ["language"] ) . "'ORDER BY RAND() LIMIT 1" );
+		if (db_num_rows ( $query ) > 0) {
+			while ( $row = db_fetch_object ( $query ) ) {
+				$type = "gif";
+				if (isset ( $row->type )) {
+					if (! empty ( $row->type )) {
+						$type = $row->type;
+					}
+				}
+				if ($type == "gif") {
+					$title = Template::getEscape ( $row->name );
+					$link_url = Template::getEscape ( $row->link_url );
+					$image_url = Template::getEscape ( $row->image_url );
+					echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' alt='$title' border=0></a>";
+				} else if ($type == "html") {
+					echo $row->html;
+				}
+			}
+		}
+	}
 	public static function outputContentElement() {
 		$type = get_type ();
 		$output = "";
@@ -44,7 +65,7 @@ class Template {
 		echo self::getHomepageOwner ();
 	}
 	public static function footer() {
-		echo apply_filter('<script type="text/javascript" src="lib/js/global.js"></script>', "global_js_script_tag");
+		echo apply_filter ( '<script type="text/javascript" src="lib/js/global.js"></script>', "global_js_script_tag" );
 		add_hook ( "frontend_footer" );
 	}
 	public static function executeModuleTemplate($module, $template) {
