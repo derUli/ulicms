@@ -477,7 +477,7 @@ function logo() {
 	}
 }
 function year() {
-	echo date ( "Y" );
+	Template::year ();
 }
 function homepage_owner() {
 	echo Settings::get ( "homepage_owner" );

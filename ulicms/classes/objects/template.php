@@ -107,8 +107,12 @@ class Template {
 			echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
 		}
 	}
+	public static function getYear() {
+		return date ( "Y" );
+	}
+	
 	public static function year() {
-		echo date ( "Y" );
+		echo self::getYear ();
 	}
 	public static function getMotto() {
 		// Existiert ein Motto für diese Sprache? z.B. motto_en
