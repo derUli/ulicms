@@ -70,7 +70,7 @@ $(window).load(function(){
 				echo '<td>' . Template::getEscape ( $banner->html ) . '</td>';
 			}
 			if (! $banner->language) {
-				echo '<td>Alle</td>';
+				echo '<td>' . get_translation ( "every" ) . '</td>';
 			} else {
 				echo '<td>' . getLanguageNameByCode ( $banner->language ) . "</td>";
 			}
