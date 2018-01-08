@@ -16,7 +16,7 @@ UliCMS requires some special modules for PHP
    * openssl   
    * dom
    * xml
-For secure access to UliCMS services (for example package source) you will also need ca-certificates installed on your server
+For secure access to UliCMS services (for example package source) you will also need ca-certificates installed on your server.
 
 UliCMS should work on common shared webhosting environment.
 
