@@ -4,8 +4,14 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 	$admin = intval ( $_GET ["admin"] );
 	$languages = getAvailableBackendLanguages ();
 	$query = db_query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE id='$admin'" );
+	$ref = _esc ( Request::getVar ( "ref", "home" ) );
+	
 	while ( $row = db_fetch_object ( $query ) ) {
 		?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("admins");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <form action="index.php?sClass=UserController&sMethod=update"
 	name="userdata_form" method="post" enctype="multipart/form-data"
 	id="edit_user" autocomplete="off">

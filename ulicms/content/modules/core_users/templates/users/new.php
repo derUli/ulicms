@@ -3,7 +3,12 @@ $acl = new ACL ();
 if ($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_create" )) {
 	$languages = getAvailableBackendLanguages ();
 	$default_language = getSystemLanguage ();
+	$ref = _esc ( Request::getVar ( "ref", "home" ) );
 	?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("admins");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <form action="index.php?sClass=UserController&sMethod=create"
 	method="post" autocomplete="off" id="edit_user">
 <?php csrf_token_html();?>
