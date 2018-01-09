@@ -31,6 +31,10 @@ if (defined ( "_SECURITY" )) {
 <input type="hidden" name="add" value="add">
 <input type="hidden" name="edit_page" value="edit_page">
 <input type="hidden" name="page_id" value="<?php echo $row -> id?>">
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("pages");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <div id="accordion-container">
 
 	<h2 class="accordion-header"><?php translate("title_and_headline");?></h2>

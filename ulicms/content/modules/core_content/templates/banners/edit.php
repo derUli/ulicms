@@ -6,7 +6,10 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 	$row->loadByID ( $banner );
 	if ($row->id) {
 		?>
-
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("banner");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <?php echo ModuleHelper::buildMethodCallForm("BannerController", "update");?>
 <h4><?php translate("preview");?></h4>
 <?php
@@ -53,7 +56,7 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 </p>
 <fieldset id="type_gif" style="<?php
 		
-		if ($row->getType() != "gif") {
+		if ($row->getType () != "gif") {
 			echo "display:none";
 		}
 		?>">
@@ -85,7 +88,7 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 	onclick="$('#type_html').slideDown();$('#type_gif').slideUp();">
 <label for="radio_html">HTML</label>
 <fieldset id="type_html" style="<?php
-		if ($row->getType() != "html") {
+		if ($row->getType () != "html") {
 			echo "display:none";
 		}
 		?>">
