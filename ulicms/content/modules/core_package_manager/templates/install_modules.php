@@ -7,7 +7,8 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	$pkg_src = Settings::get ( "pkg_src" );
 	@set_time_limit ( 0 );
 	?>
-<h1>Pakete installieren</h1>
+
+<h1><?php translate("install_packages");?></h1>
 <?php
 	if (! $pkg_src) {
 		?>

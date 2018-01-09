@@ -35,7 +35,7 @@ if ($_SESSION ["grp_sort"] == "id") {
 ?>
 <?php if($acl->hasPermission("groups_create")){?>
 <p>
-	<a href="?action=groups&add=add"><?php translate("create_group");?> </a>
+	<a href="?action=groups&add=add" class="btn btn-default"><?php translate("create_group");?> </a>
 </p>
 <?php }?>
 <p><?php BackendHelper::formatDatasetCount(count($groups));?></p>
