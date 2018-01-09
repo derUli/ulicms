@@ -1,7 +1,10 @@
 <?php
 $acl = new ACL ();
 if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_create" )) {
-	?>
+	?><p>
+	<a href="<?php echo ModuleHelper::buildActionURL("videos");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate ( "UPLOAD_VIDEO" );?></h1>
 <form action="index.php?sClass=VideoController&sMethod=create"
 	method="post" enctype="multipart/form-data">
@@ -19,8 +22,8 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_create" )
 	</strong><br /> <input name="mp4_file" type="file"><br /> <br /> <strong><?php translate ( "width" );?>
 	</strong><br /> <input type="number" name="width" value="1280" step="1">
 	<br /> <br /> <strong><?php translate ( "height" );?></strong><br /> <input
-		type="number" name="height" value="720" step="1"> <br /> <br /> <input
-		type="submit" value="<?php translate ( "UPLOAD_VIDEO" );?>">
+		type="number" name="height" value="720" step="1"> <br /> <br />
+	<button type="submit" class="btn btn-success"><?php translate ( "UPLOAD_VIDEO" );?></button>
 </form>
 <?php
 } else {

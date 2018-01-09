@@ -5,7 +5,10 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_edit" )) 
 	$query = db_query ( "SELECT * FROM " . tbname ( "videos" ) . " WHERE id = $id" );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
-		?>
+		?><p>
+	<a href="<?php echo ModuleHelper::buildActionURL("videos");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate ( "UPLOAD_VIDEO" );?></h1>
 <form action="index.php?sClass=VideoController&sMethod=update"
 	method="post">
@@ -36,8 +39,10 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_edit" )) 
 		value="<?php echo $result->height;?>" step="1"> <br /> <br /> <strong><?php translate ( "insert_this_code_into_a_page" );?>
 	</strong><br /> <input type="text" name="code"
 		value="[video id=<?php echo $result->id;?>]"
-		onclick="this.focus();this.select();" readonly> <br /> <br /> <input
-		type="submit" value="<?php translate ( "save_changes" );?>">
+		onclick="this.focus();this.select();" readonly> <br /> <br />
+	<button type="submit" class="btn btn-success"><?php translate ( "save_changes" );?></button>
+
+
 </form>
 <?php
 	} else {
