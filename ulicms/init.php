@@ -272,12 +272,9 @@ function is_in_include_path($find) {
 global $config;
 $config = new config ();
 
-if ($config->db_server == "" or $config->db_user == "") {
-	header ( "Location: installer/" );
-	exit ();
-}
+$db_socket = isset ( $config->db_socket ) ? $config->db_socket : ini_get("mysqli.default_socket");
 
-@$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password );
+@$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password, $db_socket );
 
 if ($connection === false) {
 	throw new Exception ( "<h1>Can't connect to Database.</h1>" );

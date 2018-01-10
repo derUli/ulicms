@@ -21,3 +21,5 @@ ulicms/content/custom_code/functions.php
 .htpasswd
 ulicms/content/modules/modstarter
 .modstarter
+composer.lock
+app.yaml
