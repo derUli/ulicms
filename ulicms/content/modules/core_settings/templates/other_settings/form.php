@@ -49,6 +49,11 @@ if (! $acl->hasPermission ( "other" )) {
 			"id" => "other_settings" 
 	) );
 	?>
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <div id="accordion-container">
 	<h2 class="accordion-header"><?php translate ( "page_cache" );?></h2>
 

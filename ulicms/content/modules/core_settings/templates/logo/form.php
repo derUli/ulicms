@@ -13,6 +13,11 @@ if (defined ( "_SECURITY" )) {
 		}
 		?>
 <p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
+<p>
 <?php translate("logo_infotext");?>
 </p>
 <form enctype="multipart/form-data" action="index.php" method="post">

@@ -2,6 +2,11 @@
 $acl = new ACL ();
 if ($acl->hasPermission ( "cache" )) {
 	?>
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1>Cache</h1>
 <?php
 	if (isset ( $_GET ["clear_cache"] )) {
