@@ -7,8 +7,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	$pkg_src = Settings::get ( "pkg_src" );
 	@set_time_limit ( 0 );
 	?>
-
-<h1><?php translate("install_packages");?></h1>
+<h1><?php translate("install");?></h1>
 <?php
 	if (! $pkg_src) {
 		?>
@@ -80,8 +79,9 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			}
 			?>
 <p>
-	[ <a
-		href="<?php echo ModuleHelper::buildActionURL("available_modules");?>"><?php translate("install_another_package")?></a>]
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("available_modules");?>"
+		class="btn btn-default"><?php translate("install_another_package")?></a>
 </p>
 <?php
 		}
