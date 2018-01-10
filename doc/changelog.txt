@@ -1,6 +1,7 @@
 ===== Neues in UliCMS 2018.2 =====
 
 Neue Features:
++ Verbindung zur Datenbank per Socket möglich
 + oneclick_upgrade auf Version 1.5 aktualisiert
 + Mobile_Detect auf Version 2.8.30 aktualisiert
 + update_manager auf Version 1.0.5 aktualisiert

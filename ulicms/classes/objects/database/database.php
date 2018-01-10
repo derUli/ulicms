@@ -1,6 +1,23 @@
 <?php
 class Database {
 	private static $connection = null;
+	
+	// Connect with database server
+	public static function connect($server, $user, $password, $socket = null) {
+		self::$connection = mysqli_connect ( $server, $user, $password, "", ini_get ( "mysqli.default_port" ), $socket );
+		if (! self::$connection) {
+			return false;
+		}
+		self::query ( "SET NAMES 'utf8mb4'" );
+		// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
+		self::query ( "SET SESSION sql_mode = '';" );
+		
+		return self::$connection;
+	}
+	public static function close() {
+		mysqli_close ( self::$connection );
+	}
+	
 	// Abstraktion für Ausführen von SQL Strings
 	public static function query($sql, $replacePrefix = false) {
 		Logger::logDbQuery ( $sql );
@@ -181,22 +198,6 @@ class Database {
 		}
 		
 		return $retval;
-	}
-	public static function close() {
-		mysqli_close ( self::$connection );
-	}
-	
-	// Connect with database server
-	public static function connect($server, $user, $password) {
-		self::$connection = mysqli_connect ( $server, $user, $password );
-		if (! self::$connection) {
-			return false;
-		}
-		self::query ( "SET NAMES 'utf8mb4'" );
-		// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
-		self::query ( "SET SESSION sql_mode = '';" );
-		
-		return self::$connection;
 	}
 	// Datenbank auswählen
 	public static function select($schema) {
