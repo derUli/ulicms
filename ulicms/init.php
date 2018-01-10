@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Diese Datei initalisiert das System
  */
 include_once dirname ( __FILE__ ) . "/vendor/autoload.php";
@@ -272,12 +272,11 @@ function is_in_include_path($find) {
 global $config;
 $config = new config ();
 
-if ($config->db_server == "" or $config->db_user == "") {
-	header ( "Location: installer/" );
-	exit ();
-}
+$db_socket = isset ( $config->db_socket ) ? $config->db_socket : ini_get ( "mysqli.default_socket" );
 
-@$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password );
+$db_port = isset($config->db_port) ? $config->db_port : ini_get ( "mysqli.default_port" );
+
+@$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket );
 
 if ($connection === false) {
 	throw new Exception ( "<h1>Can't connect to Database.</h1>" );
