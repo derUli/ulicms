@@ -455,7 +455,7 @@ if($('#email_mode').val() == "pear_mail"){
 
 	<div class="accordion-content">
 		<p>
-			[<a href="index.php?action=settings"><?php translate("view");?></a>]
+			<a href="index.php?action=settings" class="btn btn-danger"><?php translate("view");?></a>
 		</p>
 	</div>
 </div>
