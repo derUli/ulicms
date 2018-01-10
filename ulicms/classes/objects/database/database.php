@@ -3,8 +3,8 @@ class Database {
 	private static $connection = null;
 	
 	// Connect with database server
-	public static function connect($server, $user, $password, $socket = null) {
-		self::$connection = mysqli_connect ( $server, $user, $password, "", ini_get ( "mysqli.default_port" ), $socket );
+	public static function connect($server, $user, $password, $port, $socket = null) {
+		self::$connection = mysqli_connect ( $server, $user, $password, "", $port, $socket );
 		if (! self::$connection) {
 			return false;
 		}

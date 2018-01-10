@@ -272,9 +272,11 @@ function is_in_include_path($find) {
 global $config;
 $config = new config ();
 
-$db_socket = isset ( $config->db_socket ) ? $config->db_socket : ini_get("mysqli.default_socket");
+$db_socket = isset ( $config->db_socket ) ? $config->db_socket : ini_get ( "mysqli.default_socket" );
 
-@$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password, $db_socket );
+$db_port = isset($config->db_port) ? $config->db_port : ini_get ( "mysqli.default_port" );
+
+@$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket );
 
 if ($connection === false) {
 	throw new Exception ( "<h1>Can't connect to Database.</h1>" );
