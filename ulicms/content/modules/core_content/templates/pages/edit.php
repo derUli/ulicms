@@ -927,7 +927,8 @@ function openArticleImageSelectWindow(field) {
 
 
 <div class="typedep" id="content-editor">
-	<textarea name="page_content" id="page_content" cols=60 rows=20><?php
+	<p>
+		<textarea name="page_content" id="page_content" cols=60 rows=20><?php
 				
 				echo htmlspecialchars ( $row->content );
 				?></textarea>
@@ -1023,21 +1024,26 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		        tabMode: "shift"});
 </script>
 <?php }?>
-		<noscript>
+		
+	
+	
+	<noscript>
 		<p style="color: red;">
 			Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
 				href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
 		</p>
 
 	</noscript>
+	</p>
 		<?php
 				
 				$rev = vcs::getRevisionsByContentID ( $row->id );
 				if (count ( $rev ) > 0) {
 					?>
 		<p>
-		[<a
-			href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"><?php translate("restore_older_version");?></a>]
+		<a
+			href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"
+			class="btn btn-warning"><?php translate("restore_older_version");?></a>
 	</p>
 		<?php }?>	</div>
 <div class="inPageMessage">
