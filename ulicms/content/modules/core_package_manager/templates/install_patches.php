@@ -5,6 +5,11 @@ if ($acl->hasPermission ( "update_system" )) {
 	@set_time_limit ( 0 );
 	
 	?>
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("available_patches");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate ( "install_patches" );?></h1>
 <?php
 	$patches = $_POST ["patches"];

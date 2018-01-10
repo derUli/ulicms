@@ -7,6 +7,10 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	$pkg_src = Settings::get ( "pkg_src" );
 	@set_time_limit ( 0 );
 	?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("modules");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("install");?></h1>
 <?php
 	if (! $pkg_src) {
