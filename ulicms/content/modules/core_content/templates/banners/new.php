@@ -6,6 +6,10 @@ if (defined ( "_SECURITY" )) {
 
 <?php echo ModuleHelper::buildMethodCallForm("BannerController", "create");?>
 <p>
+	<a href="<?php echo ModuleHelper::buildActionURL("banner");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
+<p>
 	<input type="radio" checked="checked" id="radio_gif" name="type"
 		value="gif"
 		onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label

@@ -21,11 +21,14 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 <?php
 	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] ) and $acl->hasPermission ( "categories_create" )) {
 		?>
-
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h2><?php translate("categories");?></h2>
 <p><?php translate("categories_infotext");?></p>
 <p>
-	<a href="?action=categories&add"><?php translate("create_category");?></a>
+	<a href="?action=categories&add" class="btn btn-default"><?php translate("create_category");?></a>
 </p>
 <p><?php BackendHelper::formatDatasetCount(count($categories));?></p>
 <?php
@@ -147,6 +150,10 @@ $("form.delete-form").ajaxForm(ajax_options);
 	} else if (isset ( $_GET ["add"] )) {
 		if ($acl->hasPermission ( "categories_create" )) {
 			?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h2><?php translate("create_category");?></h2>
 <?php echo ModuleHelper::buildMethodCallForm("CategoryController", "create");?>
 <p>
@@ -173,7 +180,10 @@ $("form.delete-form").ajaxForm(ajax_options);
 		}
 	} else if (isset ( $_GET ["edit"] )) {
 		if ($acl->hasPermission ( "categories_edit" )) {
-			?>
+			?><p>
+	<a href="<?php echo ModuleHelper::buildActionURL("categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h2><?php translate("edit_category");?></h2>
 <?php echo ModuleHelper::buildMethodCallForm("CategoryController", "update");?>
 <input type="hidden" name="id"

@@ -33,8 +33,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		?>
 <div class="row">
 	<div class="col-xs-6">
-		<p style="margin-bottom: 30px;">
-			<a href="?action=install_method">[<?php translate("install_package");?>]</a>
+		<p>
+			<a href="?action=install_method" class="btn btn-warning"><?php translate("install_package");?></a>
 		</p>
 	</div>
 
@@ -146,7 +146,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 					
 					echo "<input type='text' value='[module=\"" . $modules [$i] . "\"]' readonly='readonly' " . $disabled . " onclick='this.focus(); this.select()'>";
 				} else {
-					translate("NOT_AN_EMBED_MODULE");
+					translate ( "NOT_AN_EMBED_MODULE" );
 				}
 				echo "<br/><br/>";
 				echo "</li>";
@@ -249,7 +249,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		if ($acl->hasPermission ( "upload_patches" )) {
 			?>
 <p>
-	<a href="index.php?action=upload_patches">[<?php translate("INSTALL_PATCH_FROM_FILE");?>]</a>
+	<a href="index.php?action=upload_patches" class="btn btn-warning"><?php translate("INSTALL_PATCH_FROM_FILE");?></a>
 </p>
 <?php }?>
 <div id="inst_patch_slide_container">

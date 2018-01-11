@@ -49,6 +49,11 @@ if (! $acl->hasPermission ( "other" )) {
 			"id" => "other_settings" 
 	) );
 	?>
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <div id="accordion-container">
 	<h2 class="accordion-header"><?php translate ( "page_cache" );?></h2>
 
@@ -450,7 +455,7 @@ if($('#email_mode').val() == "pear_mail"){
 
 	<div class="accordion-content">
 		<p>
-			[<a href="index.php?action=settings"><?php translate("view");?></a>]
+			<a href="index.php?action=settings" class="btn btn-danger"><?php translate("view");?></a>
 		</p>
 	</div>
 </div>

@@ -34,6 +34,10 @@ $(window).load(function(){
 
 });
 </script>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("media");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1>
 <?php
 	
@@ -49,10 +53,10 @@ $(window).load(function(){
 <br />
 <?php if($acl->hasPermission("videos_create")){?>
 <p>
-	<a href="index.php?action=add_video">[<?php
+	<a href="index.php?action=add_video" class="btn btn-default"><?php
 		
 		translate ( "upload_video" );
-		?>]</a>
+		?></a>
 </p>
 <?php }?>
 <table class="tablesorter">

@@ -20,7 +20,8 @@ if ($acl->hasPermission ( "users" )) {
 <?php if($acl->hasPermission("users_create")){?>
 <p>
 <?php translate("users_infotext");?>
-	<br /> <br /> <a href="index.php?action=admin_new"><?php translate("create_user");?></a><br />
+	<br /> <br /> <a href="index.php?action=admin_new&ref=admins"
+		class="btn btn-default"><?php translate("create_user");?></a><br />
 </p>
 <?php }?>
 <strong><?php translate("group");?></strong>

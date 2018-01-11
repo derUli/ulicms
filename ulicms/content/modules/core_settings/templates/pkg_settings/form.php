@@ -12,6 +12,12 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 	$pkg_src = Settings::get ( "pkg_src" );
 	$is_other = ($pkg_src !== $default_pkg_src and $pkg_src !== $local_pkg_dir and $pkg_src !== $local_pkg_dir_value);
 	?>
+
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1>Paketquelle</h1>
 <?php
 	echo ModuleHelper::buildMethodCallForm ( "PkgSettingsController", "save", array (), "post", array (

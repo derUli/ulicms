@@ -8,6 +8,10 @@ if ($acl->hasPermission ( "open_graph" )) {
 		$og_url = get_protocol_and_domain () . $og_image;
 	}
 	?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("settings_simple");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("open_graph");?></h1>
 <p><?php translate("og_defaults_help");?></p>
 <?php

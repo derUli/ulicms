@@ -32,6 +32,11 @@ div#google-fonts {
 }
 </style>
 <?php }?>
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1>
 <?php translate("design");?>
 </h1>

@@ -23,6 +23,10 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			$size = intval ( $pkg->getSize () );
 			$size = formatSizeUnits ( $size );
 			?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("upload_package");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php
 			
 			Template::escape ( $id );

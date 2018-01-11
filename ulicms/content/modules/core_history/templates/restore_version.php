@@ -8,6 +8,11 @@ if ($acl->hasPermission ( "pages" )) {
 	$content_id = intval ( $_GET ["content_id"] );
 	$revisions = VCS::getRevisionsByContentID ( $content_id );
 	?>
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("pages_edit", "page=".$content_id);?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("versions");?></h1>
 <div class="scroll">
 	<table class="tablesorter">
@@ -27,7 +32,8 @@ if ($acl->hasPermission ( "pages" )) {
 		?>
 <tr>
 				<td><?php echo intval($revision->id);?></td>
-				<td><a href="<?php echo $view_diff_link;?>" target="_blank"><?php translate("view_diff");?></a></td>
+				<td><a href="<?php echo $view_diff_link;?>" class="btn btn-info"
+					target="_blank"><?php translate("view_diff");?></a></td>
 				<td><?php
 		
 		$user = getUserById ( $revision->user_id );

@@ -21,13 +21,17 @@ $(window).load(function(){
    });
 });
 </script>
-
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h2><?php translate("advertisements"); ?></h2>
 <p>
 <?php translate("advertisement_infotext");?>
 	<?php
 	if ($acl->hasPermission ( "banners_create" )) {
-		?><br /> <br /> <a href="index.php?action=banner_new"><?php translate("add_advertisement");?>
+		?><br /> <br /> <a href="index.php?action=banner_new"
+		class="btn btn-default"><?php translate("add_advertisement");?>
 	</a><br />
 	<?php }?>
 </p>

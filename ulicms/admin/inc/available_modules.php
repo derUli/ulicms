@@ -3,6 +3,10 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	noperms ();
 } else {
 	?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("install_method");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("available_packages")?></h1>
 <div id="loadpkg">
 	<img style="margin-right: 15px; float: left;" src="gfx/loading.gif"

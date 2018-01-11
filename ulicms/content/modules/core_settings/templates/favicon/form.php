@@ -2,6 +2,11 @@
 $acl = new ACL ();
 if ($acl->hasPermission ( "favicon" )) {
 	?>
+
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("design");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <?php
 	
 	if (isset ( $_GET ["error"] )) {

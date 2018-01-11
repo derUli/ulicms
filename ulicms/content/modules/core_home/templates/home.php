@@ -14,9 +14,13 @@ if ($acl->hasPermission ( "dashboard" )) {
 	$str = get_translation ( "hello_name" );
 	$str = str_ireplace ( "%firstname%", $_SESSION ["firstname"], $str );
 	$str = str_ireplace ( "%lastname%", $_SESSION ["lastname"], $str );
-	echo $str;
-	?>
-	[<a href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>"><?php translate("edit_profile");?></a>]
+	esc ( $str );
+	?> </p>
+<p>
+	<a
+		href="?action=admin_edit&admin=<?php echo $_SESSION["login_id"]?>&ref=home"
+		class="btn btn-default"><?php translate("edit_profile");?></a>
+</p>
 </p>
 <?php
 	$motd = get_lang_config ( "motd", getSystemLanguage () );

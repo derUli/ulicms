@@ -23,6 +23,11 @@ if ($acl->hasPermission ( "pages" )) {
 	$html = FineDiff::renderDiffToHTMLFromOpcodes ( $from_text, $opcodes );
 	
 	?>
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("restore_version", "content_id=".$content_id);?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("diff");?></h1>
 <p><?php translate("COMPARE_VERSION_FROM_TO", array("%current%" => $current_version_date, "%old_version%" => $old_version_date));?></p>
 
