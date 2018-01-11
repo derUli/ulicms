@@ -49,6 +49,9 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
 	if (! check_csrf_token ()) {
 		die ( "This is probably a CSRF attack!" );
 	}
+	if (Settings::get ( "min_time_to_fill_form", "int" ) > 0) {
+		check_form_timestamp ();
+	}
 }
 
 if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {

@@ -12,6 +12,8 @@ Settings::set ( "db_schema_version", "2017.4" );
 $migrator = new DBMigrator ( "core", "lib/updates/up" );
 $migrator->migrate ();
 
+Settings::register ( "min_time_to_fill_form", "4" );
+
 // Patch Manager zurücksetzen
 $pkg = new PackageManager ();
 $pkg->truncateInstalledPatches ();
