@@ -1,6 +1,8 @@
 ===== Neues in UliCMS 2018.2 =====
 
 Neue Features:
++ Zurück-Buttons im Backend eingefügt
++ Weitere Verbesserungen in der Backend-Navigation 
 + Verbindung zur Datenbank per Socket möglich
 + Port zu Datenbank-Server kann nun angegeben werden
 + oneclick_upgrade auf Version 1.5 aktualisiert
