@@ -111,6 +111,10 @@ class Settings {
 		$lines = array_filter ( $lines, 'strlen' );
 		$result = array ();
 		foreach ( $lines as $line ) {
+			// if a line starts with a hash skip it (comment)
+			if (startsWith ( $line, "#" )) {
+				continue;
+			}
 			$splitted = explode ( "=>", $line );
 			$splitted = array_map ( 'trim', $splitted );
 			$key = $splitted [0];
