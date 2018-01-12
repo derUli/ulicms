@@ -7,26 +7,25 @@ class IpLogin extends MainClass {
 		
 		@session_start ();
 		
-		if (! isset ( $_REQUEST ["login_by_ip"] )) {
-			$_REQUEST ["login_by_ip"] = false;
+		if (! isset ( $_SESSION ["login_by_ip"] )) {
+			$_SESSION ["login_by_ip"] = false;
 		}
 		foreach ( $assignment as $ip => $userName ) {
-			if ($ip === Request::getIp ()) {
-				$user = getUserByName ( $userName );
-				$_REQUEST ["login_by_ip"] = true;
-				register_session ( $user, false );
-			}
 			// log out if ip change since login
-			if ($userName === $_SESSION ["ulicms_login"] and $ip !== Request::getIp ()) {
+			if ($_SESSION ["login_by_ip"] and $userName === $_SESSION ["ulicms_login"] and $ip !== Request::getIp ()) {
 				@session_destroy ();
 				@session_start ();
-				$_REQUEST ["login_by_ip"] = false;
+				$_SESSION ["login_by_ip"] = false;
+			} else if ($ip === Request::getIp ()) {
+				$user = getUserByName ( $userName );
+				$_SESSION ["login_by_ip"] = true;
+				register_session ( $user, false );
 			}
 		}
 		// die ( get_ip () . '=>' . "admin" );
 	}
 	public function adminMenuEntriesFilter($entries) {
-		if (is_false ( $_REQUEST ["login_by_ip"] )) {
+		if (is_false ( $_SESSION ["login_by_ip"] )) {
 			return $entries;
 		}
 		$filteredEntries = array ();
