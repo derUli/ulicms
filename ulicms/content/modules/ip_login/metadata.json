@@ -1,0 +1,9 @@
+{
+	"source": "extend",
+	"embed": false,
+	"version": "1.0",
+	"controllers": {
+		"IpLogin": "controllers/IpLogin.php"
+	},
+	"main_class": "IpLogin"
+}
