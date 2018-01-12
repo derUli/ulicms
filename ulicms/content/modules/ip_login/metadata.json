@@ -3,7 +3,15 @@
 	"embed": false,
 	"version": "1.0",
 	"controllers": {
-		"IpLogin": "controllers/IpLogin.php"
+		"IpLogin": "controllers/IpLogin.php",
+		"IpLoginSettings": "controllers/IpLoginSettings.php"
 	},
-	"main_class": "IpLogin"
+	"main_class": "IpLogin",
+	"custom_acl": [
+		"ip_login"
+	],
+	"admin_permission": "ip_login",
+	"controller_function_permissions": {
+		"IpLoginSettings::savePost": "ip_login"
+	}
 }
