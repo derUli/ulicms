@@ -326,6 +326,10 @@ function check_csrf_token() {
 	return $_REQUEST ["csrf_token"] == $_SESSION ["csrf_token"];
 }
 function check_form_timestamp() {
+	if (Settings::get ( "spamfilter_enabled" ) != "yes") {
+		return;
+	}
+	
 	$original_timestamp = Request::getVar ( "form_timestamp", 0, "int" );
 	$min_time_to_fill_form = Settings::get ( "min_time_to_fill_form", "int" );
 	if (time () - $original_timestamp < $min_time_to_fill_form) {
