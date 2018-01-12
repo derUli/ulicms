@@ -250,7 +250,7 @@ function isCLI() {
  *        	Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
  * @param string $r
  *        	Maximum rating (inclusive) [ g | pg | r | x ]
- * @param boole $img
+ * @param bool $img
  *        	True to return a complete IMG tag False for just the URL
  * @param array $atts
  *        	Optional, additional key/value attributes to include in the IMG tag
@@ -325,11 +325,27 @@ function check_csrf_token() {
 	}
 	return $_REQUEST ["csrf_token"] == $_SESSION ["csrf_token"];
 }
+function check_form_timestamp() {
+	if (Settings::get ( "spamfilter_enabled" ) != "yes") {
+		return;
+	}
+	
+	$original_timestamp = Request::getVar ( "form_timestamp", 0, "int" );
+	$min_time_to_fill_form = Settings::get ( "min_time_to_fill_form", "int" );
+	if (time () - $original_timestamp < $min_time_to_fill_form) {
+		setconfig ( "contact_form_refused_spam_mails", getconfig ( "contact_form_refused_spam_mails" ) + 1 );
+		HTMLResult ( "Spam detected based on timestamp.", 400 );
+	}
+}
 
 // HTML Code für Anti CSRF Token zurückgeben
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
 function get_csrf_token_html() {
-	return '<input type="hidden" name="csrf_token" value="' . get_csrf_token () . '">';
+	$html = '<input type="hidden" name="csrf_token" value="' . get_csrf_token () . '">';
+	if (Settings::get ( "min_time_to_fill_form", "int" ) > 0) {
+		$html .= '<input type="hidden" name="form_timestamp" value="' . time () . '">';
+	}
+	return $html;
 }
 function csrf_token_html() {
 	echo get_csrf_token_html ();
@@ -867,7 +883,7 @@ function getModulePath($module, $abspath = false) {
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
 	} // Backend Directory
-else {
+	else {
 		$module_folder = "../content/modules/";
 	}
 	$available_modules = Array ();
