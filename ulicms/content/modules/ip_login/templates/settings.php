@@ -7,7 +7,7 @@
 <?php echo ModuleHelper::buildMethodCallForm("IpLoginSettings", "save");?>
 <p>
 	<strong><?php translate("ip_user_mapping");?></strong><br /> <br />
-<?php translate("ip_user_mapping_help");?>
+<?php echo nl2br(get_translation("ip_user_mapping_help", array("%example%"=>'<code>'.ViewBag::get("example").'</code>')));;?>
 <br />
 	<textarea name="ip_user_login" rows="8"><?php esc(Settings::get ( "ip_user_login" ));?></textarea>
 </p>

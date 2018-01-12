@@ -36,6 +36,9 @@ class IpLogin extends MainClass {
 		}
 		return $filteredEntries;
 	}
+	public function getSettingsHeadline() {
+		return get_translation ( "ip_login_settings" );
+	}
 	public function settings() {
 		Viewbag::set ( "example", Request::getIp () . "=>" . $_SESSION ["ulicms_login"] );
 		return Template::executeModuleTemplate ( self::MODULE_NAME, "settings.php" );
