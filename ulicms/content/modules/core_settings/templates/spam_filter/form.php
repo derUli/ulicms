@@ -75,21 +75,19 @@ function spamFilterEnabledcheckboxChanged(checked){
 		echo " checked=\"checked\"";
 	}
 	?>> <label for="check_for_spamhaus"><?php translate("check_for_spamhaus");?>
-		</label>
-
-	</div>
-	<br />
-	<p>
-		<label for="min_time_to_fill_form"><?php translate("min_time_to_fill_form");?></label><br />
-		<input type="number" name="min_time_to_fill_form"
-			id="min_time_to_fill_form" step="any" min="0"
-			max="<?php esc(PHP_INT_MAX );?>"
-			value="<?php
+		</label> <br /> <br />
+		<p>
+			<label for="min_time_to_fill_form"><?php translate("min_time_to_fill_form");?></label><br />
+			<input type="number" name="min_time_to_fill_form"
+				id="min_time_to_fill_form" step="any" min="0"
+				max="<?php esc(PHP_INT_MAX );?>"
+				value="<?php
 	
 	esc ( Settings::get ( "min_time_to_fill_form", "int" ) );
 	?>">
-	</p>
+		</p>
 
+	</div>
 
 	<p>
 		<button type="submit" name="submit_spamfilter_settings"
@@ -99,7 +97,7 @@ function spamFilterEnabledcheckboxChanged(checked){
 	?></button>
 
 </form>
-<script t ype="text/javascript">
+<script type="text/javascript">
 $("#spamfilter_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");
   $("#loading").show();
@@ -109,8 +107,6 @@ $("#spamfilter_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("<span style=\"color:green;\"><?php
 	translate ( "changes_was_saved" )?></span>");
   }
-  
-
 });
 </script>
 
