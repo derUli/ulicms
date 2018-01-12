@@ -2,7 +2,9 @@
 
 Neue Features:
 + Zurück-Buttons im Backend eingefügt
-+ Weitere Verbesserungen in der Backend-Navigation 
++ Weitere Verbesserungen in der Backend-Navigation
++ Neue Methode gegen Formularspam
++ Settings::mappingStringToArray($str) unterstützt nun Kommentare
 + Verbindung zur Datenbank per Socket möglich
 + Port zu Datenbank-Server kann nun angegeben werden
 + oneclick_upgrade auf Version 1.5 aktualisiert
