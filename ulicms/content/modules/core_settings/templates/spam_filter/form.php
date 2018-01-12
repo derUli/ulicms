@@ -78,13 +78,28 @@ function spamFilterEnabledcheckboxChanged(checked){
 		</label>
 
 	</div>
+	<br />
+	<p>
+		<label for="min_time_to_fill_form"><?php translate("min_time_to_fill_form");?></label><br />
+		<input type="number" name="min_time_to_fill_form"
+			id="min_time_to_fill_form" step="any" min="0"
+			max="<?php esc(PHP_INT_MAX );?>"
+			value="<?php
+	
+	esc ( Settings::get ( "min_time_to_fill_form", "int" ) );
+	?>">
+	</p>
+
 
 	<p>
 		<button type="submit" name="submit_spamfilter_settings"
-			class="btn btn-success voffset3"><?php translate("save_changes");?></button>
-	</p>
+			class="btn btn-success voffset3"><?php
+	
+	translate ( "save_changes" );
+	?></button>
+
 </form>
-<script type="text/javascript">
+<script t ype="text/javascript">
 $("#spamfilter_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");
   $("#loading").show();
