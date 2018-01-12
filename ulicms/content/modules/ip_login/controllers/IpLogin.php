@@ -17,7 +17,7 @@ class IpLogin extends MainClass {
 				register_session ( $user, false );
 			}
 			// log out if ip change since login
-			if (is_true ( $_REQUEST ["login_by_ip"] ) and $userName === $_SESSION ["ulicms_login"] and $ip !== Request::getIp ()) {
+			if ($userName === $_SESSION ["ulicms_login"] and $ip !== Request::getIp ()) {
 				@session_destroy ();
 				@session_start ();
 				$_REQUEST ["login_by_ip"] = false;
