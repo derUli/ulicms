@@ -7,6 +7,7 @@ import codecs
 from contextlib import closing
 from zipfile import ZipFile, ZIP_DEFLATED
 
+
 def zipdir(basedir, archivename):
     assert os.path.isdir(basedir)
     with closing(ZipFile(archivename, "w", ZIP_DEFLATED)) as z:
@@ -17,9 +18,11 @@ def zipdir(basedir, archivename):
                 zfn = absfn[len(basedir) + len(os.sep):]  # XXX: relative path
                 z.write(absfn, zfn)
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-z", "--zip", help="Compress with zip", action="store_true")
+    parser.add_argument("-d", "--delete", help="empty folder if exists", action="store_true")
     parser.add_argument('-t', '--target', action="store", dest="target", required=True, help="Target directory")
     args = parser.parse_args()
     target = os.path.expanduser(args.target)
@@ -34,6 +37,10 @@ def main():
               "tests", "run-tests.sh", "run-tests.bat", ".pydevproject")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
+    if args.delete and os.path.exists(target):
+        print("Folder exists. Truncating.")
+        shutil.rmtree(target)
+        
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
 
@@ -48,6 +55,7 @@ def main():
 
     modules_dir_from = os.path.join(source_dir, "ulicms", "content", "modules")
     modules_dir_to = os.path.join(target, "ulicms", "content", "modules")
+
     os.makedirs(modules_dir_to)
     prefixed = [filename for filename in os.listdir(modules_dir_from) if filename.startswith("core_")]
     for prefix in prefixed:
@@ -73,6 +81,8 @@ def main():
         zipdir(target, archive_name)
         print("removing target folder...")
         shutil.rmtree(target)
+
+
 try:
     main()
 except KeyboardInterrupt:
