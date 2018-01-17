@@ -19,6 +19,11 @@ Verbesserungen:
 * Action pkginfo in core_package_manager: Button nun mit Bootstrap Style
 * Button "Liste zurücksetzen" unter "Installierte Patches" nun mit Bootstrap Style
 
+Entfernte Features:
+* E-Mail Versandmethode "PEAR Mail" entfernt.
+  In einer zukünftigen Version wird stattdessen PHPMailer integriert
+  Dies geschieht voraussichtlich im Release 2018.3 
+
 Bugfixes:
 * Fehlerhafte Berechtigungsprüfung in core_settings korrigiert
 * Favicon-Metatag wird auch ausgegeben wenn "hide_meta_generator" gesetzt ist

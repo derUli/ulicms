@@ -323,20 +323,7 @@ if (! $acl->hasPermission ( "other" )) {
 		echo ' selected="selected"';
 	}
 	?>>PHP</option>
-					<?php
-	
-	if (! defined ( "NO_PEAR_MAIL" )) {
-		?>
-					<option value="pear_mail"
-					<?php
-		if ($email_mode == "pear_mail") {
-			echo ' selected="selected"';
-		}
-		?>>PEAR Mail</option>
-					<?php
-	}
-	?>
-				</select>
+			</select>
 		</div>
 		<div class="smtp_settings" id="smtp_settings" style="display: none">
 			<h3>
@@ -410,8 +397,10 @@ if (! $acl->hasPermission ( "other" )) {
 
 		</div>
 	</div>
+
 	<script type="text/javascript">
 <?php
+	// FIXME: Extract this code to an external script
 	if ($smtp_auth) {
 		?>
 $('#smtp_auth_div').show();
@@ -430,6 +419,8 @@ if($('#smtp_auth').prop('checked')){
 </script>
 	<script type="text/javascript">
 <?php
+	
+	// FIXME: Extract this code to an external script
 	if ($email_mode == "pear_mail") {
 		?>
 $('#smtp_settings').show();
