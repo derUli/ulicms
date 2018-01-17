@@ -156,7 +156,7 @@ if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 
 add_hook ( "after_functions" );
 
-$cached_page_path = Cache::buildCacheFilePath ( get_request_uri() );
+$cached_page_path = Cache::buildCacheFilePath ( get_request_uri () );
 
 $hasModul = containsModule ( get_requested_pagename () );
 
@@ -187,11 +187,9 @@ $cache_type = Settings::get ( "cache_type" );
 // FIXME: Hier ist doppelter Code
 // Alles was mit Cache zu tun hat, sollte als Methode in der Cache Klasse aufgerufen werden.
 // Außerdem sollten die Cache Typen in eine Konstante refaktoriert werden.
-
 if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === "file") {
 	$cached_content = file_get_contents ( $cached_page_path );
 	$last_modified = filemtime ( $cached_page_path );
-	
 	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! Flags::getNoCache ()) {
 		eTagFromString ( $cached_content );
 		browsercacheOneDay ( $last_modified );
@@ -208,7 +206,7 @@ if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) a
 	}
 }
 
-if (! Settings::get ( "cache_disabled" ) and Request::isGet () and ! file_exists ( $cached_page_path ) and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === "file") {
 	ob_start ();
 } else if (file_exists ( $cached_page_path )) {
 	$last_modified = filemtime ( $cached_page_path );
