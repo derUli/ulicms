@@ -29,19 +29,6 @@ class PlainTextCreator {
 						@unlink ( $this->cached_file );
 					}
 				}
-			} else if (getCacheType () == "cache_lite") {
-				$id = md5 ( $_SESSION ["REQUEST_URI"] );
-				$options = array (
-						'lifeTime' => Settings::get ( "cache_period" ) 
-				);
-				if (! class_exists ( "Cache_Lite" )) {
-					throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
-				}
-				$Cache_Lite = new Cache_Lite ( $options );
-				if ($data = $Cache_Lite->get ( $id )) {
-					$this->httpHeader ();
-					die ( $data );
-				}
 			}
 		}
 		ob_start ();
@@ -67,8 +54,6 @@ class PlainTextCreator {
 				$handle = fopen ( $this->cached_file, "w" );
 				fwrite ( $handle, $this->content );
 				fclose ( $handle );
-			} else if (getCacheType () == "cache_lite") {
-				$Cache_Lite->save ( $this->content, $id );
 			}
 		}
 		$this->httpHeader ();

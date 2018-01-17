@@ -529,11 +529,6 @@ function setLanguageByDomain() {
 function getCacheType() {
 	$c = Settings::get ( "cache_type" );
 	switch ($c) {
-		case "cache_lite" :
-			@include "Cache/Lite.php";
-			$cache_type = "cache_lite";
-			
-			break;
 		case "file" :
 		default :
 			$cache_type = "file";
@@ -590,30 +585,28 @@ function clearAPCCache() {
 function clearCache() {
 	add_hook ( "before_clear_cache" );
 	$cache_type = Settings::get ( "cache_type" );
-	// Es gibt zwei verschiedene Cache Modi
-	// Cache_Lite und File
-	// Cache_Lite leeren
-	if ($cache_type === "cache_lite" and class_exists ( "Cache_Lite" )) {
-		$Cache_Lite = new Cache_Lite ( $options );
-		$Cache_Lite->clean ();
-	} else {
-		// File leeren
-		if (is_admin_dir ()) {
-			SureRemoveDir ( "../content/cache", false );
-		} else {
-			SureRemoveDir ( "content/cache", false );
-		}
+	
+	switch ($cache_type) {
+		case "file" :
+		default :
+			SureRemoveDir ( PATH::Resolve ( "ULICMS_CACHE" ), false );
+			break;
+			break;
 	}
 	
+	// clear apc cache if available
 	if (function_exists ( "apc_clear_cache" )) {
 		clearAPCCache ();
 	}
+	// clear opcache if available
 	if (function_exists ( "opcache_reset" )) {
 		opcache_reset ();
 	}
 	
+	// Sync modules table in database with modules folder
 	$moduleManager = new ModuleManager ();
 	$moduleManager->sync ();
+	
 	add_hook ( "after_clear_cache" );
 }
 function add_hook($name) {

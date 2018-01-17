@@ -100,16 +100,7 @@ if (! $acl->hasPermission ( "other" )) {
 	}
 	?>>
 					<?php translate("file");?></option>
-				<option value="cache_lite"
-					<?php
-	
-	if ($cache_type === "cache_lite") {
-		echo " selected";
-	}
-	?>>
-						Cache_Lite
-						<?php if(!class_exists("Cache_Lite")) echo " (nicht verfügbar)"?>
-					</option>
+
 			</select>
 		</div>
 	</div>

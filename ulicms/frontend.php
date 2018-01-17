@@ -181,19 +181,7 @@ if (is_logged_in () and get_cache_control () == "auto") {
 
 add_hook ( "before_html" );
 
-$c = Settings::get ( "cache_type" );
-switch ($c) {
-	case "cache_lite" :
-		@include "Cache/Lite.php";
-		$cache_type = "cache_lite";
-		
-		break;
-	case "file" :
-	default :
-		$cache_type = "file";
-		break;
-		break;
-}
+$cache_type = Settings::get ( "cache_type" );
 
 if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	$cached_content = file_get_contents ( $cached_page_path );
@@ -225,24 +213,6 @@ if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET
 }
 
 $id = md5 ( $_SERVER ['REQUEST_URI'] . $_SESSION ["language"] . strbool ( is_mobile () ) );
-
-if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
-	$options = array (
-			'lifeTime' => Settings::get ( "cache_period" ),
-			'cacheDir' => "content/cache/" 
-	);
-	
-	if (! class_exists ( "Cache_Lite" )) {
-		throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
-	}
-	$Cache_Lite = new Cache_Lite ( $options );
-	
-	if ($data = $Cache_Lite->get ( $id )) {
-		die ( $data );
-	} else {
-		ob_start ();
-	}
-}
 
 $html_file = page_has_html_file ( get_requested_pagename () );
 
@@ -301,26 +271,6 @@ if ($html_file) {
 }
 
 add_hook ( "after_html" );
-
-if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and $cache_type === "cache_lite") {
-	$data = ob_get_clean ();
-	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache ()) {
-		$Cache_Lite->save ( $data, $id );
-	}
-	
-	eTagFromString ( $data );
-	browsercacheOneDay ();
-	echo $data;
-	
-	if (Settings::get ( "no_auto_cron" )) {
-		die ();
-	}
-	add_hook ( "before_cron" );
-	@include 'cron.php';
-	add_hook ( "after_cron" );
-	die ();
-}
 
 if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
 	$generated_html = ob_get_clean ();

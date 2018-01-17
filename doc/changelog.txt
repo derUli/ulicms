@@ -18,6 +18,7 @@ Neue Funktionen:
 Verbesserungen:
 * Action pkginfo in core_package_manager: Button nun mit Bootstrap Style
 * Button "Liste zurücksetzen" unter "Installierte Patches" nun mit Bootstrap Style
+* Der Caching-Code wurde aufgeräumt. Doppelter Code entfernt.
 
 Bugfixes:
 * Fehlerhafte Berechtigungsprüfung in core_settings korrigiert
@@ -29,7 +30,10 @@ Bugfixes:
 Entfernte Features:
 * E-Mail Versandmethode "PEAR Mail" entfernt.
   In einer zukünftigen Version wird stattdessen PHPMailer integriert
-  Dies geschieht voraussichtlich im Release 2018.3 
+  Dies geschieht voraussichtlich im Release 2018.3
+* Die Caching Methode "cache_lite" wurde entfernt, um alle PEAR Klassen aus dem Projekt los zu werden.
+  Bisher war "cache_lite" schneller als die "file" Caching-Methode.
+  In zukünftigen Releases wird die Geschwindigkeit des Seitencaches jedoch optimiert werden.
 
 
 ===== Neues in UliCMS 2018.1.1 =====
