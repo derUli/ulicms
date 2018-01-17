@@ -4,12 +4,15 @@ if (! class_exists ( "Mail" ) and ! defined ( "NO_PEAR_MAIL" )) {
 	define ( "NO_PEAR_MAIL", true );
 }
 class Mailer {
-	private static function splitHeaders($headers) {
+	public static function splitHeaders($headers) {
 		$header_array = array ();
-		$lines = explode ( "\n", $headers );
+		$lines = normalizeLN ( $headers, "\n" );
+		$lines = explode ( "\n", $lines );
 		foreach ( $lines as $line ) {
 			$kv = explode ( ":", $line, 2 );
-			if (! empty ( $kv [1] )) {
+			$kv = array_map ( "trim", $kv );
+			$kv = array_filter ( $kv, "strlen" );
+			if (count ( $kv ) == 2) {
 				$header_array [trim ( $kv [0] )] = trim ( $kv [1] );
 			}
 		}
