@@ -1096,7 +1096,7 @@ function check_status() {
 	}
 	
 	$page = $_GET ["seite"];
-	$cached_page_path = buildCacheFilePath ( $page );
+	$cached_page_path = Cache::buildCacheFilePath ( $page );
 	if (isset ( $_SERVER ["ulicms_send_304"] )) {
 		header ( "HTTP/1.1 304 Not Modified" );
 		exit ();

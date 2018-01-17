@@ -809,15 +809,7 @@ function getCurrentURL() {
 	return $protocol . "://" . $_SERVER ['SERVER_NAME'] . $port . $_SERVER ['REQUEST_URI'];
 }
 function buildCacheFilePath($request_uri) {
-	$language = $_SESSION ["language"];
-	if (! $language) {
-		$language = Settings::get ( "default_language" );
-	}
-	$unique_identifier = $request_uri . $language . strbool ( is_mobile () );
-	if (function_exists ( "apply_filter" )) {
-		$unique_identifier = apply_filter ( $unique_identifier, "unique_identifier" );
-	}
-	return "content/cache/" . md5 ( $unique_identifier ) . ".tmp";
+	return Cache::buildCacheFilePath ( $request_uri );
 }
 function SureRemoveDir($dir, $DeleteMe) {
 	if (! $dh = @opendir ( $dir ))

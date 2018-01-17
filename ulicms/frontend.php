@@ -156,7 +156,8 @@ if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 
 add_hook ( "after_functions" );
 
-$cached_page_path = buildCacheFilePath ( $_SERVER ['REQUEST_URI'] );
+$cached_page_path = Cache::buildCacheFilePath ( get_request_uri() );
+
 $hasModul = containsModule ( get_requested_pagename () );
 
 $cache_control = get_cache_control ();
@@ -183,7 +184,11 @@ add_hook ( "before_html" );
 
 $cache_type = Settings::get ( "cache_type" );
 
-if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
+// FIXME: Hier ist doppelter Code
+// Alles was mit Cache zu tun hat, sollte als Methode in der Cache Klasse aufgerufen werden.
+// Außerdem sollten die Cache Typen in eine Konstante refaktoriert werden.
+
+if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === "file") {
 	$cached_content = file_get_contents ( $cached_page_path );
 	$last_modified = filemtime ( $cached_page_path );
 	
@@ -203,7 +208,7 @@ if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) a
 	}
 }
 
-if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! file_exists ( $cached_page_path ) and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and Request::isGet () and ! file_exists ( $cached_page_path ) and $cache_type === "file") {
 	ob_start ();
 } else if (file_exists ( $cached_page_path )) {
 	$last_modified = filemtime ( $cached_page_path );
@@ -211,8 +216,6 @@ if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET
 		ob_start ();
 	}
 }
-
-$id = md5 ( $_SERVER ['REQUEST_URI'] . $_SESSION ["language"] . strbool ( is_mobile () ) );
 
 $html_file = page_has_html_file ( get_requested_pagename () );
 
@@ -272,10 +275,10 @@ if ($html_file) {
 
 add_hook ( "after_html" );
 
-if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and Request::isGet () and $cache_type === "file") {
 	$generated_html = ob_get_clean ();
 	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache ()) {
+	if (! defined ( "EXCEPTION_OCCURRED" )) {
 		$handle = fopen ( $cached_page_path, "wb" );
 		fwrite ( $handle, $generated_html );
 		fclose ( $handle );
