@@ -5,7 +5,7 @@ class Cache {
 	// als auch den APC Bytecode Cache
 	public static function clear() {
 		add_hook ( "before_clear_cache" );
-		$cache_type = Settings::get ( "cache_type" );
+		$cache_type = self::getCacheType ();
 		
 		switch ($cache_type) {
 			case "file" :
@@ -50,7 +50,15 @@ class Cache {
 		}
 	}
 	public static function get($requestUri = null) {
-		self::clear ();
+		$type = self::getCacheType ();
+		switch ($type) {
+			case "file" :
+			default :
+				return self::getFile ( $requestUri );
+				break;
+				break;
+		}
+		return null;
 	}
 	private static function storeFile($data, $requestUri = null) {
 		if (! $request_uri) {
@@ -78,7 +86,7 @@ class Cache {
 		if (! $language) {
 			$language = Settings::get ( "default_language" );
 		}
-		$unique_identifier = $request_uri . $language . strbool ( is_mobile () . get_useragent () );
+		$unique_identifier = $request_uri . $language . strbool ( is_mobile () );
 		if (function_exists ( "apply_filter" )) {
 			$unique_identifier = apply_filter ( $unique_identifier, "unique_identifier" );
 		}
