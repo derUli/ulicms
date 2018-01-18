@@ -177,6 +177,8 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "abstract" . DIRECTORY_SEPERATOR . "model.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "abstract" . DIRECTORY_SEPERATOR . "controller.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "abstract" . DIRECTORY_SEPERATOR . "main_class.php";
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "constants" . DIRECTORY_SEPERATOR . "load.php";
+
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "spellchecker.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "registry" . DIRECTORY_SEPERATOR . "helper_registry.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "registry" . DIRECTORY_SEPERATOR . "controller_registry.php";
@@ -274,7 +276,7 @@ $config = new config ();
 
 $db_socket = isset ( $config->db_socket ) ? $config->db_socket : ini_get ( "mysqli.default_socket" );
 
-$db_port = isset($config->db_port) ? $config->db_port : ini_get ( "mysqli.default_port" );
+$db_port = isset ( $config->db_port ) ? $config->db_port : ini_get ( "mysqli.default_port" );
 
 @$connection = Database::connect ( $config->db_server, $config->db_user, $config->db_password, $db_port, $db_socket );
 

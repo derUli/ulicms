@@ -8,7 +8,7 @@ class Cache {
 		$cache_type = self::getCacheType ();
 		
 		switch ($cache_type) {
-			case "file" :
+			case CACHE_TYPE_FILE :
 			default :
 				SureRemoveDir ( PATH::Resolve ( "ULICMS_CACHE" ), false );
 				break;
@@ -42,7 +42,7 @@ class Cache {
 	public static function store($data, $requestUri = null) {
 		$type = self::getCacheType ();
 		switch ($type) {
-			case "file" :
+			case CACHE_TYPE_FILE :
 			default :
 				self::storeFile ( $data, $requestUri );
 				break;
@@ -52,7 +52,7 @@ class Cache {
 	public static function get($requestUri = null) {
 		$type = self::getCacheType ();
 		switch ($type) {
-			case "file" :
+			case CACHE_TYPE_FILE :
 			default :
 				return self::getFile ( $requestUri );
 				break;

@@ -94,12 +94,11 @@ if (! $acl->hasPermission ( "other" )) {
 			<select name="cache_type" size=1>
 				<option value="file"
 					<?php
-	
-	if ($cache_type === "file" or ! $cache_type) {
+	if ($cache_type === CACHE_TYPE_FILE or ! $cache_type) {
 		echo " selected";
 	}
 	?>>
-					<?php translate("file");?></option>
+	<?php translate("file");?></option>
 
 			</select>
 		</div>

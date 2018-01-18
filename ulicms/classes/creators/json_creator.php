@@ -17,7 +17,7 @@ class JSONCreator {
 		$hasModul = containsModule ( get_requested_pagename () );
 		
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
-			if (getCacheType () == "file") {
+			if (getCacheType () == CACHE_TYPE_FILE) {
 				if (file_exists ( $this->cached_file )) {
 					$last_modified = filemtime ( $this->cached_file );
 					if (time () - $last_modified < CACHE_PERIOD) {
@@ -44,7 +44,7 @@ class JSONCreator {
 		$data ["author"] = $author;
 		$json_string = json_encode ( $data );
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
-			if (getCacheType () == "file") {
+			if (getCacheType () == CACHE_TYPE_FILE) {
 				$handle = fopen ( $this->cached_file, "w" );
 				fwrite ( $handle, $json_string );
 				fclose ( $handle );

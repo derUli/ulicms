@@ -18,7 +18,7 @@ class PlainTextCreator {
 	public function output() {
 		$hasModul = containsModule ( get_requested_pagename () );
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
-			if (getCacheType () == "file") {
+			if (getCacheType () == CACHE_TYPE_FILE) {
 				if (file_exists ( $this->cached_file )) {
 					$last_modified = filemtime ( $this->cached_file );
 					if (time () - $last_modified < CACHE_PERIOD) {
@@ -50,7 +50,7 @@ class PlainTextCreator {
 		$this->content = unhtmlspecialchars ( $this->content );
 		$this->content = preg_replace_callback ( '/&#([0-9a-fx]+);/mi', 'replace_num_entity', $this->content );
 		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
-			if (getCacheType () == "file") {
+			if (getCacheType () == CACHE_TYPE_FILE) {
 				$handle = fopen ( $this->cached_file, "w" );
 				fwrite ( $handle, $this->content );
 				fclose ( $handle );

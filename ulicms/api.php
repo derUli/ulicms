@@ -527,16 +527,7 @@ function setLanguageByDomain() {
 	return false;
 }
 function getCacheType() {
-	$c = Settings::get ( "cache_type" );
-	switch ($c) {
-		case "file" :
-		default :
-			$cache_type = "file";
-			break;
-			break;
-	}
-	
-	return $cache_type;
+	return Cache::getCacheType ();
 }
 function getOnlineUsers() {
 	$users_online = db_query ( "SELECT username FROM " . tbname ( "users" ) . " WHERE last_action > " . (time () - 300) . " ORDER BY username" );
@@ -584,10 +575,10 @@ function clearAPCCache() {
 // als auch den APC Bytecode Cache
 function clearCache() {
 	add_hook ( "before_clear_cache" );
-	$cache_type = Settings::get ( "cache_type" );
+	$cache_type = Cache::getCacheType ();
 	
 	switch ($cache_type) {
-		case "file" :
+		case CACHE_TYPE_FILE :
 		default :
 			SureRemoveDir ( PATH::Resolve ( "ULICMS_CACHE" ), false );
 			break;

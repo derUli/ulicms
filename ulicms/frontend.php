@@ -187,7 +187,7 @@ $cache_type = Settings::get ( "cache_type" );
 // FIXME: Hier ist doppelter Code
 // Alles was mit Cache zu tun hat, sollte als Methode in der Cache Klasse aufgerufen werden.
 // Außerdem sollten die Cache Typen in eine Konstante refaktoriert werden.
-if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === "file") {
+if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === CACHE_TYPE_FILE) {
 	$cached_content = file_get_contents ( $cached_page_path );
 	$last_modified = filemtime ( $cached_page_path );
 	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! Flags::getNoCache ()) {
@@ -206,7 +206,7 @@ if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) a
 	}
 }
 
-if (! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === CACHE_TYPE_FILE) {
 	ob_start ();
 } else if (file_exists ( $cached_page_path )) {
 	$last_modified = filemtime ( $cached_page_path );
@@ -273,7 +273,7 @@ if ($html_file) {
 
 add_hook ( "after_html" );
 
-if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and Request::isGet () and $cache_type === "file") {
+if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and Request::isGet () and $cache_type === CACHE_TYPE_FILE) {
 	$generated_html = ob_get_clean ();
 	
 	if (! defined ( "EXCEPTION_OCCURRED" )) {
