@@ -7,6 +7,7 @@ Neue Features:
 + Settings::mappingStringToArray($str) unterstützt nun Kommentare
 + Verbindung zur Datenbank per Socket möglich
 + Port zu Datenbank-Server kann nun angegeben werden
++ Zeige Positionen im Menü für eingeloggte Benutzer
 + oneclick_upgrade auf Version 1.5 aktualisiert
 + Mobile_Detect auf Version 2.8.30 aktualisiert
 + update_manager auf Version 1.0.5 aktualisiert
