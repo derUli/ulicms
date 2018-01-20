@@ -186,9 +186,9 @@ class ACL {
 		$acl_data ["pages_activate_others"] = null;
 		$acl_data ["pages_edit_own"] = null;
 		$acl_data ["pages_edit_others"] = null;
-		
 		$acl_data ["pages_change_owner"] = null;
 		$acl_data ["pages_create"] = null;
+		$acl_data ["pages_show_positions"] = null;
 		
 		$acl_data ["default_access_restrictions_edit"] = null;
 		
