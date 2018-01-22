@@ -264,9 +264,18 @@ add_hook ( "after_html" );
 
 if ($cacheAdapter and ! defined ( "EXCEPTION_OCCURRED" )) {
 	$generatedHtml = ob_get_clean ();
-	if(!Settings::get("not_remove_empty_lines")){
-		$generatedHtml = preg_replace('/^\h*\v+/m', '', $generatedHtml);
+	$generatedHtml = normalizeLN ( $generatedHtml, "\n" );
+	if (Settings::get ( "minify_html" )) {
+		$generatedHtml = preg_replace ( '/^\h*\v+/m', '', $generatedHtml );
 		
+		$posBegin = strpos ( $generatedHtml, "<html" );
+		$posEnd = strpos ( $generatedHtml, "</head>" );
+		$posLength = $posEnd - $posBegin;
+		$head = substr ( $generatedHtml, $posBegin, $posLength + strlen ( "</head>" ) );
+		$head = str_replace ( "\n", "", $head );
+		
+		$generatedHtml = $head . substr ( $generatedHtml, $posEnd + strlen ( "</head>" ) + 1 );
+		$generatedHtml = str_replace ( "</body>\n</html>", "</body></html>", $generatedHtml );
 	}
 	echo $generatedHtml;
 	$cacheAdapter->set ( $uid, $generatedHtml, CacheUtil::getCachePeriod () );
