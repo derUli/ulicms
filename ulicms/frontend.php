@@ -262,7 +262,7 @@ add_hook ( "after_html" );
 
 // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 
-if ($cacheAdapter) {
+if ($cacheAdapter and ! defined ( "EXCEPTION_OCCURRED" )) {
 	$generatedHtml = ob_get_clean ();
 	echo $generatedHtml;
 	$cacheAdapter->set ( $uid, $generatedHtml, CacheUtil::getCachePeriod () );
