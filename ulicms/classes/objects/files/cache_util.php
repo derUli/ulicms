@@ -24,7 +24,7 @@ class CacheUtil {
 	public static function clearCache() {
 		add_hook ( "before_clear_cache" );
 		
-		trigger ( E_USER_WARNING, "FIXME: Reimplement Page Caching using PhpFastCache" );
+		trigger_error ( E_USER_WARNING, "FIXME: Reimplement Page Caching using PhpFastCache" );
 		
 		// clear apc cache if available
 		if (function_exists ( "apc_clear_cache" )) {
@@ -39,6 +39,8 @@ class CacheUtil {
 		if ($adapter) {
 			$adapter->clear ();
 		}
+		
+		SureRemoveDir ( PATH::resolve ( "ULICMS_CACHE" ), false );
 		
 		// Sync modules table in database with modules folder
 		$moduleManager = new ModuleManager ();
