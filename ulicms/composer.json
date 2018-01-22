@@ -24,7 +24,7 @@
 		"ext-openssl": "*",
 		"ext-dom": "*",
 		"ext-libxml": "*",
-		"ext-ldap": "*"
+		"ext-ldap": "*",
+		"phpFastCache/phpFastCache": "^6.0"
 	}
 }
-    

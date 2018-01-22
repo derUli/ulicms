@@ -1,5 +1,4 @@
 <?php
-use phpFastCache\CacheManager;
 use phpFastCache\Helper\Psr16Adapter;
 class CacheUtil {
 	public static function getAdapter() {
@@ -19,17 +18,15 @@ class CacheUtil {
 			$driver = "sqlite";
 		}
 		
-		$Psr16Adapter = new Psr16Adapter ( $driver, $cacheConfig );
+		$Psr16Adapter = new phpFastCache\Helper\Psr16Adapter ( $driver, $cacheConfig );
 		
 		return $Psr16Adapter;
 	}
 	public static function isCacheEnabled() {
-		return (is_null ( Settings::get ( "cache_disabled" ) ));
+		return (! Settings::get ( "cache_disabled" ));
 	}
 	public static function clearCache() {
 		add_hook ( "before_clear_cache" );
-		
-		trigger_error ( E_USER_WARNING, "FIXME: Reimplement Page Caching using PhpFastCache" );
 		
 		// clear apc cache if available
 		if (function_exists ( "apc_clear_cache" )) {

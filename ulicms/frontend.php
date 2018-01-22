@@ -181,11 +181,9 @@ if (is_logged_in () and get_cache_control () == "auto") {
 add_hook ( "before_html" );
 
 $cacheAdapter = null;
-
 if (CacheUtil::isCacheEnabled () and Request::isGet () and ! Flags::getNoCache ()) {
 	$cacheAdapter = CacheUtil::getAdapter ();
 }
-
 $uid = CacheUtil::getCurrentUid ();
 if ($cacheAdapter and $cacheAdapter->get ( $uid )) {
 	echo $cacheAdapter->get ( $uid );
