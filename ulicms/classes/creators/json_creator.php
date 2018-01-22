@@ -4,7 +4,6 @@ class JSONCreator {
 	var $content = null;
 	var $title = null;
 	public function __construct() {
-		$this->cached_file = Cache::buildCacheFilePath ( get_request_uri () );
 		$this->title = get_title ();
 		ob_start ();
 		content ();
@@ -14,7 +13,11 @@ class JSONCreator {
 		header ( "Content-type: application/json; charset=UTF-8" );
 	}
 	public function output() {
-		$hasModul = containsModule ( get_requested_pagename () );
+		$uid = CacheUtil::getCurrentUid ();
+		$adapter = CacheUtil::getAdapter ();
+		if ($adapter and $adapter->has ( $uid )) {
+			$adapter->get ( $uid );
+		}
 		
 		ob_start ();
 		autor ();
@@ -31,6 +34,9 @@ class JSONCreator {
 		$json_string = json_encode ( $data );
 		$this->httpHeader ();
 		echo $json_string;
+		if ($adapter) {
+			$adapter->set ( $uid, $json_string, CacheUtil::getCachePeriod () );
+		}
 		exit ();
 	}
 }

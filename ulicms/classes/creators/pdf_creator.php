@@ -24,11 +24,13 @@ class PDFCreator {
 			echo "mPDF is not installed. Please install <a href=\"http://www.ulicms.de/mpdf_supplement.html\" target=\"_blank\">mPDF supplement</a>.";
 			die ();
 		}
+		
+		// TODO: Reimplement Caching of generated pdf files
+		
 		$mpdf = new mPDF ( getCurrentLanguage ( true ), 'A4' );
 		$mpdf->WriteHTML ( $this->content );
-		$mpdf->Output ( $this->cached_file );
 		$this->httpHeader ();
-		readfile ( $this->cached_file );
+		$mpdf->output ();
 		exit ();
 	}
 }

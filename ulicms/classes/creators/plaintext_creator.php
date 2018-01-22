@@ -15,7 +15,11 @@ class PlainTextCreator {
 		header ( "Content-type: text/plain; charset=UTF-8" );
 	}
 	public function output() {
-		$hasModul = containsModule ( get_requested_pagename () );
+		$uid = CacheUtil::getCurrentUid ();
+		$adapter = CacheUtil::getAdapter ();
+		if ($adapter and $adapter->has ( $uid )) {
+			$adapter->get ( $uid );
+		}
 		
 		ob_start ();
 		autor ();
@@ -38,6 +42,9 @@ class PlainTextCreator {
 		
 		$this->httpHeader ();
 		echo $this->content;
+		if ($adapter) {
+			$adapter->set ( $uid, $this->content, CacheUtil::getCachePeriod () );
+		}
 		exit ();
 	}
 }

@@ -13,7 +13,12 @@ class CSVCreator {
 		header ( "Content-type: text/csv; charset=UTF-8" );
 	}
 	public function output() {
-		$hasModul = containsModule ( get_requested_pagename () );
+		$uid = CacheUtil::getCurrentUid ();
+		$adapter = CacheUtil::getAdapter ();
+		if ($adapter and $adapter->has ( $uid )) {
+			$adapter->get ( $uid );
+		}
+		
 		ob_start ();
 		autor ();
 		$author = ob_get_clean ();
@@ -40,6 +45,9 @@ class CSVCreator {
 		
 		$this->httpHeader ();
 		echo $csv_string;
+		if ($adapter) {
+			$adapter->set ( $uid, $csv_string, CacheUtil::getCachePeriod () );
+		}
 		exit ();
 	}
 }
