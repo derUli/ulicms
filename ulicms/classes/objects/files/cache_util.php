@@ -52,4 +52,7 @@ class CacheUtil {
 	public static function getCachePeriod() {
 		return Settings::get ( "cache_period", "int" );
 	}
+	public static function getCurrentUid() {
+		return md5 ( get_request_uri () . getCurrentLanguage () . boolval ( is_mobile () ) );
+	}
 }

@@ -180,21 +180,27 @@ if (is_logged_in () and get_cache_control () == "auto") {
 
 add_hook ( "before_html" );
 
-// FIXME: Hier ist doppelter Code
-// Alles was mit Cache zu tun hat, sollte als Methode in der Cache Klasse aufgerufen werden.
-// Außerdem sollten die Cache Typen in eine Konstante refaktoriert werden.
+if (Request::isGet () and ! Flags::getNoCache ()) {
+	$cacheAdapter = CacheUtil::getAdapter ();
+}
 
-// TODO: Wenn ein gültiger Cache-Eintrag für diese Seite existiert, diesen hier ausgeben, cron hooks ausführen und das Script sterben lassen.
-// if (Settings::get ( "no_auto_cron" )) {
-// die ();
-// }
+$uid = CacheUtil::getCurrentUid ();
+if (CacheUtil::isCacheEnabled () and $cacheAdapter and $cacheAdapter->get ( $uid )) {
+	echo $cacheAdapter->get ( $uid );
+	
+	if (Settings::get ( "no_auto_cron" )) {
+		die ();
+	}
+	
+	add_hook ( "before_cron" );
+	@include 'cron.php';
+	add_hook ( "after_cron" );
+	die ();
+}
 
-// add_hook ( "before_cron" );
-// @include 'cron.php';
-// add_hook ( "after_cron" );
-// die ();
-
-// TOOD: Wenn Caching aktiviert ist, hier Output Buffering starten
+if (CacheUtil::isCacheEnabled () and $cacheAdapter) {
+	ob_start ();
+}
 
 $html_file = page_has_html_file ( get_requested_pagename () );
 
@@ -256,8 +262,11 @@ add_hook ( "after_html" );
 
 // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 
-// Todo: Wenn Caching aktiv ist, hier Output Buffer leeren, generiertes HTML ausgeben und im Cache speichern.
-
+if (CacheUtil::isCacheEnabled () and $cacheAdapter) {
+	$generatedHtml = ob_get_clean ();
+	echo $generatedHtml;
+	$cacheAdapter->set ( $uid, $generatedHtml, CacheUtil::getCachePeriod () );
+}
 if (Settings::get ( "no_auto_cron" )) {
 	die ();
 }
