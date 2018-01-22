@@ -19,11 +19,6 @@ if (Settings::get ( "email_mode" ) === "pear_mail") {
 	Settings::set ( "email_mode", "internal" );
 }
 
-// Cache_Lite removed from UliCMS Core. Change to "file".
-if (Settings::get ( "cache_type" ) === "cache_lite") {
-	Settings::set ( "cache_type", "file" );
-}
-
 // Patch Manager zurücksetzen
 $pkg = new PackageManager ();
 $pkg->truncateInstalledPatches ();

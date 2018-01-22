@@ -180,8 +180,6 @@ if (is_logged_in () and get_cache_control () == "auto") {
 
 add_hook ( "before_html" );
 
-$cache_type = Settings::get ( "cache_type" );
-
 // FIXME: Hier ist doppelter Code
 // Alles was mit Cache zu tun hat, sollte als Methode in der Cache Klasse aufgerufen werden.
 // Außerdem sollten die Cache Typen in eine Konstante refaktoriert werden.
