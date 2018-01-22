@@ -16,20 +16,6 @@ class JSONCreator {
 	public function output() {
 		$hasModul = containsModule ( get_requested_pagename () );
 		
-		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
-			if (getCacheType () == CACHE_TYPE_FILE) {
-				if (file_exists ( $this->cached_file )) {
-					$last_modified = filemtime ( $this->cached_file );
-					if (time () - $last_modified < CACHE_PERIOD) {
-						$this->httpHeader ();
-						readfile ( $this->cached_file );
-						exit ();
-					} else {
-						@unlink ( $this->cached_file );
-					}
-				}
-			}
-		}
 		ob_start ();
 		autor ();
 		$author = ob_get_clean ();
@@ -43,13 +29,6 @@ class JSONCreator {
 		$data ["meta_keywords"] = get_meta_keywords ();
 		$data ["author"] = $author;
 		$json_string = json_encode ( $data );
-		if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! $hasModul) {
-			if (getCacheType () == CACHE_TYPE_FILE) {
-				$handle = fopen ( $this->cached_file, "w" );
-				fwrite ( $handle, $json_string );
-				fclose ( $handle );
-			}
-		}
 		$this->httpHeader ();
 		echo $json_string;
 		exit ();

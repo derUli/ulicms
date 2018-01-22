@@ -156,8 +156,6 @@ if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 
 add_hook ( "after_functions" );
 
-$cached_page_path = Cache::buildCacheFilePath ( get_request_uri () );
-
 $hasModul = containsModule ( get_requested_pagename () );
 
 $cache_control = get_cache_control ();
@@ -187,33 +185,18 @@ $cache_type = Settings::get ( "cache_type" );
 // FIXME: Hier ist doppelter Code
 // Alles was mit Cache zu tun hat, sollte als Methode in der Cache Klasse aufgerufen werden.
 // Außerdem sollten die Cache Typen in eine Konstante refaktoriert werden.
-if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === CACHE_TYPE_FILE) {
-	$cached_content = file_get_contents ( $cached_page_path );
-	$last_modified = filemtime ( $cached_page_path );
-	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! Flags::getNoCache ()) {
-		eTagFromString ( $cached_content );
-		browsercacheOneDay ( $last_modified );
-		echo $cached_content;
-		
-		if (Settings::get ( "no_auto_cron" )) {
-			die ();
-		}
-		
-		add_hook ( "before_cron" );
-		@include 'cron.php';
-		add_hook ( "after_cron" );
-		die ();
-	}
-}
 
-if (! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === CACHE_TYPE_FILE) {
-	ob_start ();
-} else if (file_exists ( $cached_page_path )) {
-	$last_modified = filemtime ( $cached_page_path );
-	if (time () - $last_modified < CACHE_PERIOD) {
-		ob_start ();
-	}
-}
+// TODO: Wenn ein gültiger Cache-Eintrag für diese Seite existiert, diesen hier ausgeben, cron hooks ausführen und das Script sterben lassen.
+// if (Settings::get ( "no_auto_cron" )) {
+// die ();
+// }
+
+// add_hook ( "before_cron" );
+// @include 'cron.php';
+// add_hook ( "after_cron" );
+// die ();
+
+// TOOD: Wenn Caching aktiviert ist, hier Output Buffering starten
 
 $html_file = page_has_html_file ( get_requested_pagename () );
 
@@ -273,33 +256,15 @@ if ($html_file) {
 
 add_hook ( "after_html" );
 
-if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and Request::isGet () and $cache_type === CACHE_TYPE_FILE) {
-	$generated_html = ob_get_clean ();
-	
-	if (! defined ( "EXCEPTION_OCCURRED" )) {
-		$handle = fopen ( $cached_page_path, "wb" );
-		fwrite ( $handle, $generated_html );
-		fclose ( $handle );
-	}
-	
-	eTagFromString ( $generated_html );
-	browsercacheOneDay ();
-	echo ($generated_html);
-	
-	// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
-	if (Settings::get ( "no_auto_cron" )) {
-		die ();
-	}
-	add_hook ( "before_cron" );
-	@include 'cron.php';
-	add_hook ( "after_cron" );
-	die ();
-} else {
-	if (Settings::get ( "no_auto_cron" )) {
-		die ();
-	}
-	add_hook ( "before_cron" );
-	@include 'cron.php';
-	add_hook ( "after_cron" );
+// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
+
+// Todo: Wenn Caching aktiv ist, hier Output Buffer leeren, generiertes HTML ausgeben und im Cache speichern.
+
+if (Settings::get ( "no_auto_cron" )) {
 	die ();
 }
+add_hook ( "before_cron" );
+@include 'cron.php';
+add_hook ( "after_cron" );
+die ();
+
