@@ -180,12 +180,14 @@ if (is_logged_in () and get_cache_control () == "auto") {
 
 add_hook ( "before_html" );
 
-if (Request::isGet () and ! Flags::getNoCache ()) {
+$cacheAdapter = null;
+
+if (CacheUtil::isCacheEnabled () and Request::isGet () and ! Flags::getNoCache ()) {
 	$cacheAdapter = CacheUtil::getAdapter ();
 }
 
 $uid = CacheUtil::getCurrentUid ();
-if (CacheUtil::isCacheEnabled () and $cacheAdapter and $cacheAdapter->get ( $uid )) {
+if ($cacheAdapter and $cacheAdapter->get ( $uid )) {
 	echo $cacheAdapter->get ( $uid );
 	
 	if (Settings::get ( "no_auto_cron" )) {
@@ -198,7 +200,7 @@ if (CacheUtil::isCacheEnabled () and $cacheAdapter and $cacheAdapter->get ( $uid
 	die ();
 }
 
-if (CacheUtil::isCacheEnabled () and $cacheAdapter) {
+if ($cacheAdapter) {
 	ob_start ();
 }
 
@@ -262,7 +264,7 @@ add_hook ( "after_html" );
 
 // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 
-if (CacheUtil::isCacheEnabled () and $cacheAdapter) {
+if ($cacheAdapter) {
 	$generatedHtml = ob_get_clean ();
 	echo $generatedHtml;
 	$cacheAdapter->set ( $uid, $generatedHtml, CacheUtil::getCachePeriod () );
