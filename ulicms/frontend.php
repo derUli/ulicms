@@ -198,7 +198,7 @@ if ($cacheAdapter and $cacheAdapter->get ( $uid )) {
 	die ();
 }
 
-if ($cacheAdapter) {
+if ($cacheAdapter or Settings::get ( "minify_html" )) {
 	ob_start ();
 }
 
@@ -262,7 +262,7 @@ add_hook ( "after_html" );
 
 // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 
-if ($cacheAdapter and ! defined ( "EXCEPTION_OCCURRED" )) {
+if ($cacheAdapter or Settings::get ( "minify_html" )) {
 	$generatedHtml = ob_get_clean ();
 	$generatedHtml = normalizeLN ( $generatedHtml, "\n" );
 	if (Settings::get ( "minify_html" )) {
@@ -278,8 +278,12 @@ if ($cacheAdapter and ! defined ( "EXCEPTION_OCCURRED" )) {
 		$generatedHtml = str_replace ( "</body>\n</html>", "</body></html>", $generatedHtml );
 	}
 	echo $generatedHtml;
-	$cacheAdapter->set ( $uid, $generatedHtml, CacheUtil::getCachePeriod () );
+	
+	if ($cacheAdapter and ! defined ( "EXCEPTION_OCCURRED" )) {
+		$cacheAdapter->set ( $uid, $generatedHtml, CacheUtil::getCachePeriod () );
+	}
 }
+
 if (Settings::get ( "no_auto_cron" )) {
 	die ();
 }
