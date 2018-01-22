@@ -571,24 +571,7 @@ function clearAPCCache() {
 // Sowohl den Seiten-Cache, den Download/Paketmanager Cache
 // als auch den APC Bytecode Cache
 function clearCache() {
-	add_hook ( "before_clear_cache" );
-	
-	trigger ( E_USER_WARNING, "FIXME: Reimplement Page Caching using PhpFastCache" );
-	
-	// clear apc cache if available
-	if (function_exists ( "apc_clear_cache" )) {
-		clearAPCCache ();
-	}
-	// clear opcache if available
-	if (function_exists ( "opcache_reset" )) {
-		opcache_reset ();
-	}
-	
-	// Sync modules table in database with modules folder
-	$moduleManager = new ModuleManager ();
-	$moduleManager->sync ();
-	
-	add_hook ( "after_clear_cache" );
+	CacheUtil::clearCache();
 }
 function add_hook($name) {
 	if (defined ( "KCFINDER_PAGE" )) {
