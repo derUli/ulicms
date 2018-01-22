@@ -11,10 +11,15 @@ class CacheUtil {
 				"path" => PATH::resolve ( "ULICMS_CACHE" ) 
 		);
 		
-		// Until now caching method is always "files"
-		// TODO: Implement Other Caching Methods
+		// If SQLite available use it
+		// else use file
+		// TODO: Add other fallback methods
+		$driver = "files";
+		if (function_exists ( 'sqlite_open' )) {
+			$driver = "sqlite";
+		}
 		
-		$Psr16Adapter = new Psr16Adapter ( "files", $cacheConfig );
+		$Psr16Adapter = new Psr16Adapter ( $driver, $cacheConfig );
 		
 		return $Psr16Adapter;
 	}
