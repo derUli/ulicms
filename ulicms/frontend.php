@@ -264,6 +264,10 @@ add_hook ( "after_html" );
 
 if ($cacheAdapter and ! defined ( "EXCEPTION_OCCURRED" )) {
 	$generatedHtml = ob_get_clean ();
+	if(!Settings::get("not_remove_empty_lines")){
+		$generatedHtml = preg_replace('/^\h*\v+/m', '', $generatedHtml);
+		
+	}
 	echo $generatedHtml;
 	$cacheAdapter->set ( $uid, $generatedHtml, CacheUtil::getCachePeriod () );
 }
