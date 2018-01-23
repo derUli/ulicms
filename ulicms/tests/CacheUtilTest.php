@@ -38,17 +38,17 @@ class CacheUtilTest extends PHPUnit_Framework_TestCase {
 	}
 	public function testGetCurrentUid() {
 		$_SERVER ["REQUEST_URI"] = "/my-url.html";
-		$_SERVER ["HTTP_USERAGENT"] = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1";
+		$_SERVER ["HTTP_USER_AGENT"] = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1";
 		$_SESSION ["language"] = "de";
 		$this->assertEquals ( "47d665610afb1110eb8d992c39815bab", CacheUtil::getCurrentUid () );
 		
 		$_SESSION ["language"] = "en";
 		$this->assertEquals ( "f187b0bf3f93fbd42313457bfad5a644", CacheUtil::getCurrentUid () );
 		
-		$_SERVER ["HTTP_USERAGENT"] = "Mozilla/5.0 (iPad; U; CPU OS 4_3_3 like Mac OS X; en-us AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5";
-		$this->assertEquals ( "f187b0bf3f93fbd42313457bfad5a644", CacheUtil::getCurrentUid () );
+		$_SERVER ["HTTP_USER_AGENT"] = "Mozilla/5.0 (iPad; U; CPU OS 4_3_3 like Mac OS X; en-us AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5";
+		$this->assertEquals ( "ea6bc2d5c2086ae1db091523f6f0e197", CacheUtil::getCurrentUid () );
 		
 		$_SERVER ["REQUEST_URI"] = "/other-url.html?param=value";
-		$this->assertEquals ( "35c811e452fd08614cbcde449bdceb37", CacheUtil::getCurrentUid () );
+		$this->assertEquals ( "3dfcaf39f9916a423e91dc4addfaa0ba", CacheUtil::getCurrentUid () );
 	}
 }
