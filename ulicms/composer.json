@@ -16,7 +16,7 @@
 		"rss": "https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en"
 	},
 	"require": {
-		"php": "^7.1",
+		"php": ">=5.6",
 		"ext-mysqli": "*",
 		"ext-gd": "*",
 		"ext-json": "*",
@@ -25,6 +25,7 @@
 		"ext-dom": "*",
 		"ext-libxml": "*",
 		"ext-ldap": "*",
-		"phpFastCache/phpFastCache": "^6.0"
+		"phpFastCache/phpFastCache": "^6.0",
+		"athari/yalinqo": "^2.4"
 	}
 }

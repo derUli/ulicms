@@ -4,12 +4,20 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit689cc2a2426edae815fc04afcc5c0ce9
+class ComposerStaticInitcb8b523ab784124d0e85c6bdf0211f47
 {
+    public static $files = array (
+        'f9e61f18f0291090ecf3f67a829046de' => __DIR__ . '/..' . '/athari/yalinqo/YaLinqo/Linq.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'p' => 
         array (
             'phpFastCache\\' => 13,
+        ),
+        'Y' => 
+        array (
+            'YaLinqo\\' => 8,
         ),
         'P' => 
         array (
@@ -22,6 +30,10 @@ class ComposerStaticInit689cc2a2426edae815fc04afcc5c0ce9
         'phpFastCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpfastcache/phpfastcache/src/phpFastCache',
+        ),
+        'YaLinqo\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/athari/yalinqo/YaLinqo',
         ),
         'Psr\\SimpleCache\\' => 
         array (
@@ -36,8 +48,8 @@ class ComposerStaticInit689cc2a2426edae815fc04afcc5c0ce9
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit689cc2a2426edae815fc04afcc5c0ce9::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit689cc2a2426edae815fc04afcc5c0ce9::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitcb8b523ab784124d0e85c6bdf0211f47::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitcb8b523ab784124d0e85c6bdf0211f47::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }
