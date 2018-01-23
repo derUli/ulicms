@@ -23,15 +23,15 @@
 // PHP VERSION CHECK
 if (substr ( PHP_VERSION, 0, strpos ( PHP_VERSION, '.' ) ) < 5)
 	die ( "You are using PHP " . PHP_VERSION . " when KCFinder require at least version 5! Some systems has an option to change the active PHP version. Please refer to your hosting provider or upgrade your PHP distribution." );
-	
+
 	// GD EXTENSION CHECK
 if (! function_exists ( "imagecopyresampled" ))
 	die ( "The GD PHP extension is not available! It's required to run KCFinder." );
-	
+
 	// SAFE MODE CHECK
 if (ini_get ( "safe_mode" ))
 	die ( "The \"safe_mode\" PHP ini setting is turned on! You cannot run KCFinder in safe mode." );
-	
+
 	// CMS INTEGRATION
 if (isset ( $_GET ['cms'] )) {
 	switch ($_GET ['cms']) {
@@ -41,7 +41,7 @@ if (isset ( $_GET ['cms'] )) {
 }
 
 // MAGIC AUTOLOAD CLASSES FUNCTION
-function __autoload($class) {
+spl_autoload_register( function($class) {
 	if ($class == "uploader")
 		require "core/uploader.php";
 	elseif ($class == "browser")
@@ -52,7 +52,7 @@ function __autoload($class) {
 		require "lib/class_$class.php";
 	elseif (file_exists ( "lib/helper_$class.php" ))
 		require "lib/helper_$class.php";
-}
+} );
 
 // json_encode() IMPLEMENTATION IF JSON EXTENSION IS MISSING
 if (! function_exists ( "json_encode" )) {
@@ -62,32 +62,32 @@ if (! function_exists ( "json_encode" )) {
 	function json_encode($data) {
 		if (is_array ( $data )) {
 			$ret = array ();
-			
+
 			// OBJECT
 			if (array_keys ( $data ) !== range ( 0, count ( $data ) - 1 )) {
 				foreach ( $data as $key => $val )
 					$ret [] = kcfinder_json_string_encode ( $key ) . ':' . json_encode ( $val );
 				return "{" . implode ( ",", $ret ) . "}";
-				
+
 				// ARRAY
 			} else {
 				foreach ( $data as $val )
 					$ret [] = json_encode ( $val );
 				return "[" . implode ( ",", $ret ) . "]";
 			}
-			
+
 			// BOOLEAN OR NULL
 		} elseif (is_bool ( $data ) || ($data === null))
 			return ($data === null) ? "null" : ($data ? "true" : "false");
-			
+
 			// FLOAT
 		elseif (is_float ( $data ))
 			return rtrim ( rtrim ( number_format ( $data, 14, ".", "" ), "0" ), "." );
-			
+
 			// INTEGER
 		elseif (is_int ( $data ))
 			return $data;
-			
+
 			// STRING
 		return kcfinder_json_string_encode ( $data );
 	}
