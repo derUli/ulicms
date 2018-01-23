@@ -11,6 +11,7 @@ Neue Features:
 + oneclick_upgrade auf Version 1.5 aktualisiert
 + Mobile_Detect auf Version 2.8.30 aktualisiert
 + update_manager auf Version 1.0.5 aktualisiert
++ YaLinqo hinzugefügt (Yet Another LINQ to Objects for PHP)
 
 Neue Funktionen:
 + is_true($var)
