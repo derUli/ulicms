@@ -11,6 +11,7 @@ Neue Features:
 + oneclick_upgrade auf Version 1.5 aktualisiert
 + Mobile_Detect auf Version 2.8.30 aktualisiert
 + update_manager auf Version 1.0.5 aktualisiert
++ YaLinqo hinzugefügt (Yet Another LINQ to Objects for PHP)
 
 Neue Funktionen:
 + is_true($var)
@@ -20,6 +21,7 @@ Verbesserungen:
 * Action pkginfo in core_package_manager: Button nun mit Bootstrap Style
 * Button "Liste zurücksetzen" unter "Installierte Patches" nun mit Bootstrap Style
 * Der Caching-Code wurde aufgeräumt. Doppelter Code entfernt.
+* Caching erfolgt nun durch PhpFastCache
 
 Bugfixes:
 * Fehlerhafte Berechtigungsprüfung in core_settings korrigiert
@@ -32,10 +34,6 @@ Entfernte Features:
 * E-Mail Versandmethode "PEAR Mail" entfernt.
   In einer zukünftigen Version wird stattdessen PHPMailer integriert
   Dies geschieht voraussichtlich im Release 2018.3
-* Die Caching Methode "cache_lite" wurde entfernt, um alle PEAR Klassen aus dem Projekt los zu werden.
-  Bisher war "cache_lite" schneller als die "file" Caching-Methode.
-  In zukünftigen Releases wird die Geschwindigkeit des Seitencaches jedoch optimiert werden.
-
 
 ===== Neues in UliCMS 2018.1.1 =====
 

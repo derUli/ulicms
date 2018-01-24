@@ -9,7 +9,6 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "other" )) {
 	noperms ();
 } else {
-	$cache_type = Settings::get ( "cache_type" );
 	$cache_enabled = ! Settings::get ( "cache_disabled" );
 	$cache_period = round ( Settings::get ( "cache_period" ) / 60 );
 	$email_mode = Settings::get ( "email_mode" );
@@ -86,22 +85,6 @@ if (! $acl->hasPermission ( "other" )) {
 	?>">
 	<?php translate("minutes");?>
 			</div>
-
-		<div class="label">
-			<?php translate("cache_engine");?>
-			</div>
-		<div class="inputWrapper">
-			<select name="cache_type" size=1>
-				<option value="file"
-					<?php
-	if ($cache_type === CACHE_TYPE_FILE or ! $cache_type) {
-		echo " selected";
-	}
-	?>>
-	<?php translate("file");?></option>
-
-			</select>
-		</div>
 	</div>
 	<h2 class="accordion-header">
 		<?php translate("DOMAIN2LANGUAGE_MAPPING");?>

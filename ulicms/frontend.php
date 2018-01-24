@@ -156,8 +156,6 @@ if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 
 add_hook ( "after_functions" );
 
-$cached_page_path = Cache::buildCacheFilePath ( get_request_uri () );
-
 $hasModul = containsModule ( get_requested_pagename () );
 
 $cache_control = get_cache_control ();
@@ -182,37 +180,26 @@ if (is_logged_in () and get_cache_control () == "auto") {
 
 add_hook ( "before_html" );
 
-$cache_type = Settings::get ( "cache_type" );
-
-// FIXME: Hier ist doppelter Code
-// Alles was mit Cache zu tun hat, sollte als Methode in der Cache Klasse aufgerufen werden.
-// Außerdem sollten die Cache Typen in eine Konstante refaktoriert werden.
-if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === CACHE_TYPE_FILE) {
-	$cached_content = file_get_contents ( $cached_page_path );
-	$last_modified = filemtime ( $cached_page_path );
-	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! Flags::getNoCache ()) {
-		eTagFromString ( $cached_content );
-		browsercacheOneDay ( $last_modified );
-		echo $cached_content;
-		
-		if (Settings::get ( "no_auto_cron" )) {
-			die ();
-		}
-		
-		add_hook ( "before_cron" );
-		@include 'cron.php';
-		add_hook ( "after_cron" );
+$cacheAdapter = null;
+if (CacheUtil::isCacheEnabled () and Request::isGet () and ! Flags::getNoCache ()) {
+	$cacheAdapter = CacheUtil::getAdapter ();
+}
+$uid = CacheUtil::getCurrentUid ();
+if ($cacheAdapter and $cacheAdapter->get ( $uid )) {
+	echo $cacheAdapter->get ( $uid );
+	
+	if (Settings::get ( "no_auto_cron" )) {
 		die ();
 	}
+	
+	add_hook ( "before_cron" );
+	@include 'cron.php';
+	add_hook ( "after_cron" );
+	die ();
 }
 
-if (! Settings::get ( "cache_disabled" ) and Request::isGet () and $cache_type === CACHE_TYPE_FILE) {
+if ($cacheAdapter or Settings::get ( "minify_html" )) {
 	ob_start ();
-} else if (file_exists ( $cached_page_path )) {
-	$last_modified = filemtime ( $cached_page_path );
-	if (time () - $last_modified < CACHE_PERIOD) {
-		ob_start ();
-	}
 }
 
 $html_file = page_has_html_file ( get_requested_pagename () );
@@ -273,33 +260,35 @@ if ($html_file) {
 
 add_hook ( "after_html" );
 
-if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and Request::isGet () and $cache_type === CACHE_TYPE_FILE) {
-	$generated_html = ob_get_clean ();
-	
-	if (! defined ( "EXCEPTION_OCCURRED" )) {
-		$handle = fopen ( $cached_page_path, "wb" );
-		fwrite ( $handle, $generated_html );
-		fclose ( $handle );
+// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
+
+if ($cacheAdapter or Settings::get ( "minify_html" )) {
+	$generatedHtml = ob_get_clean ();
+	$generatedHtml = normalizeLN ( $generatedHtml, "\n" );
+	if (Settings::get ( "minify_html" )) {
+		$generatedHtml = preg_replace ( '/^\h*\v+/m', '', $generatedHtml );
+		
+		$posBegin = strpos ( $generatedHtml, "<html" );
+		$posEnd = strpos ( $generatedHtml, "</head>" );
+		$posLength = $posEnd - $posBegin;
+		$head = substr ( $generatedHtml, $posBegin, $posLength + strlen ( "</head>" ) );
+		$head = str_replace ( "\n", "", $head );
+		
+		$generatedHtml = $head . substr ( $generatedHtml, $posEnd + strlen ( "</head>" ) + 1 );
+		$generatedHtml = str_replace ( "</body>\n</html>", "</body></html>", $generatedHtml );
 	}
+	echo $generatedHtml;
 	
-	eTagFromString ( $generated_html );
-	browsercacheOneDay ();
-	echo ($generated_html);
-	
-	// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
-	if (Settings::get ( "no_auto_cron" )) {
-		die ();
+	if ($cacheAdapter and ! defined ( "EXCEPTION_OCCURRED" )) {
+		$cacheAdapter->set ( $uid, $generatedHtml, CacheUtil::getCachePeriod () );
 	}
-	add_hook ( "before_cron" );
-	@include 'cron.php';
-	add_hook ( "after_cron" );
-	die ();
-} else {
-	if (Settings::get ( "no_auto_cron" )) {
-		die ();
-	}
-	add_hook ( "before_cron" );
-	@include 'cron.php';
-	add_hook ( "after_cron" );
+}
+
+if (Settings::get ( "no_auto_cron" )) {
 	die ();
 }
+add_hook ( "before_cron" );
+@include 'cron.php';
+add_hook ( "after_cron" );
+die ();
+

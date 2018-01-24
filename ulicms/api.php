@@ -526,9 +526,6 @@ function setLanguageByDomain() {
 	}
 	return false;
 }
-function getCacheType() {
-	return Cache::getCacheType ();
-}
 function getOnlineUsers() {
 	$users_online = db_query ( "SELECT username FROM " . tbname ( "users" ) . " WHERE last_action > " . (time () - 300) . " ORDER BY username" );
 	$users = array ();
@@ -574,31 +571,7 @@ function clearAPCCache() {
 // Sowohl den Seiten-Cache, den Download/Paketmanager Cache
 // als auch den APC Bytecode Cache
 function clearCache() {
-	add_hook ( "before_clear_cache" );
-	$cache_type = Cache::getCacheType ();
-	
-	switch ($cache_type) {
-		case CACHE_TYPE_FILE :
-		default :
-			SureRemoveDir ( PATH::Resolve ( "ULICMS_CACHE" ), false );
-			break;
-			break;
-	}
-	
-	// clear apc cache if available
-	if (function_exists ( "apc_clear_cache" )) {
-		clearAPCCache ();
-	}
-	// clear opcache if available
-	if (function_exists ( "opcache_reset" )) {
-		opcache_reset ();
-	}
-	
-	// Sync modules table in database with modules folder
-	$moduleManager = new ModuleManager ();
-	$moduleManager->sync ();
-	
-	add_hook ( "after_clear_cache" );
+	CacheUtil::clearCache();
 }
 function add_hook($name) {
 	if (defined ( "KCFINDER_PAGE" )) {
@@ -798,9 +771,6 @@ function getCurrentURL() {
 	$protocol = substr ( $sp, 0, strpos ( $sp, "/" ) ) . $s;
 	$port = ($_SERVER ["SERVER_PORT"] == "80" || $_SERVER ["SERVER_PORT"] == "443") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
 	return $protocol . "://" . $_SERVER ['SERVER_NAME'] . $port . $_SERVER ['REQUEST_URI'];
-}
-function buildCacheFilePath($request_uri) {
-	return Cache::buildCacheFilePath ( $request_uri );
 }
 function SureRemoveDir($dir, $DeleteMe) {
 	if (! $dh = @opendir ( $dir ))
