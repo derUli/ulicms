@@ -1027,6 +1027,9 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		
 	
 	
+	
+	
+	
 	<noscript>
 		<p style="color: red;">
 			Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
@@ -1082,7 +1085,6 @@ $("#pageform").ajaxForm({beforeSubmit: function(e){
   $("#message_page_edit").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
   $("#message_page_edit").show();
   }
-
 });
 </script>
 <?php

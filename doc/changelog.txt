@@ -22,6 +22,8 @@ Verbesserungen:
 * Button "Liste zurücksetzen" unter "Installierte Patches" nun mit Bootstrap Style
 * Der Caching-Code wurde aufgeräumt. Doppelter Code entfernt.
 * Caching erfolgt nun durch PhpFastCache
+* "Anzeigen" unter "Seite bearbeiten" öffnet in neuem Tab, wenn ungespeicherte Änderungen vorhanden sind,
+ansonsten im selben Tab
 
 Bugfixes:
 * Fehlerhafte Berechtigungsprüfung in core_settings korrigiert
