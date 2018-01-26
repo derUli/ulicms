@@ -17,6 +17,8 @@ Neue Funktionen:
 + is_true($var)
 + is_false($var)
 + StringHelper::linesFromString($str, $trim = true, $removeEmpty = true, $removeComments = true)
++ StringHelper::linesFromFile($file, $trim = true, $removeEmpty = true, $removeComments = true)
+
 
 Verbesserungen:
 * Action pkginfo in core_package_manager: Button nun mit Bootstrap Style

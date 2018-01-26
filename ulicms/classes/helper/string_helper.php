@@ -192,4 +192,12 @@ class StringHelper {
 		$lines = array_values ( $lines );
 		return $lines;
 	}
+	public static function linesFromFile($file, $trim = true, $removeEmpty = true, $removeComments = true) {
+		$lines = null;
+		if (file_exists ( $file )) {
+			$str = file_get_contents ( $file );
+			$lines = self::linesFromString ( $str, $trim, $removeEmpty, $removeComments );
+		}
+		return $lines;
+	}
 }
