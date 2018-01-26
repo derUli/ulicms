@@ -120,7 +120,13 @@ $(function() {
 
 	$("#btn-view-page").click(function() {
 		var url = "../?goid=" + $("#page_id").val();
-		window.open(url);
+		// if page has unsaved changes open it in new window/tab
+		// else open it in the same window/tab
+		if (formchanged && !submitted) {
+			window.open(url);
+		} else {
+			location.href = url;
+		}
 	})
 
 	systemnameOrLanguageChanged($("input[name='system_title']"));

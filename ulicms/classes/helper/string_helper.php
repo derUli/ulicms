@@ -175,4 +175,21 @@ class StringHelper {
 		// array zurückgeben
 		return $return;
 	}
+	public static function linesFromString($str, $trim = true, $removeEmpty = true, $removeComments = true) {
+		$str = normalizeLN ( $str, "\n" );
+		$lines = explode ( "\n", $str );
+		if ($trim) {
+			$lines = array_map ( "trim", $lines );
+		}
+		if ($removeEmpty) {
+			$lines = array_filter ( $lines, "strlen" );
+		}
+		if ($removeComments) {
+			$lines = array_filter ( $lines, function ($line) {
+				return ! startsWith ( $line, "#" );
+			} );
+		}
+		$lines = array_values ( $lines );
+		return $lines;
+	}
 }
