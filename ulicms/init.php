@@ -54,6 +54,9 @@ if (! file_exists ( ULICMS_TMP )) {
 if (! defined ( "ULICMS_CACHE" )) {
 	define ( "ULICMS_CACHE", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "cache" . DIRECTORY_SEPERATOR );
 }
+if (! defined ( "ULICMS_CONTENT" )) {
+	define ( "ULICMS_CONTENT", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR );
+}
 if (! file_exists ( ULICMS_CACHE )) {
 	mkdir ( ULICMS_CACHE );
 }
