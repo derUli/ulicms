@@ -1,4 +1,5 @@
 <?php
+require_once "../vendor/autoload.php";
 class InstallerController {
 	public static function getStep() {
 		if (isset ( $_REQUEST ["step"] ) and ! empty ( $_REQUEST ["step"] )) {
@@ -147,7 +148,6 @@ class InstallerController {
 			}
 			
 			if (! isset ( $_SESSION ["ga_secret"] )) {
-				require_once "../classes/objects/security/GoogleAuthenticator.php";
 				$ga = new PHPGangsta_GoogleAuthenticator ();
 				$ga_secret = $ga->createSecret ();
 				$_SESSION ["ga_secret"] = $ga_secret;

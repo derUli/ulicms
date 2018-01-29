@@ -26,6 +26,7 @@
 		"ext-libxml": "*",
 		"ext-ldap": "*",
 		"phpFastCache/phpFastCache": "^6.0",
-		"athari/yalinqo": "^2.4"
+		"athari/yalinqo": "^2.4",
+		"phpgangsta/googleauthenticator": "dev-master"
 	}
 }

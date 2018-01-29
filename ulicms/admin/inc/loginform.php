@@ -1,5 +1,4 @@
 <?php
-require_once ULICMS_ROOT . "/classes/objects/security/GoogleAuthenticator.php";
 $ga = new PHPGangsta_GoogleAuthenticator ();
 $ga_secret = Settings::get ( "ga_secret" );
 $qrCodeUrl = $ga->getQRCodeGoogleUrl ( "UliCMS Login auf " . get_domain (), $ga_secret );
