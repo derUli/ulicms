@@ -289,10 +289,16 @@ if (! $acl->hasPermission ( "other" )) {
 			<select id='email_mode' name="email_mode" size="1">
 				<option value="internal"
 					<?php
-	if ($email_mode == "internal") {
+	if ($email_mode == EmailModes::INTERNAL) {
 		echo ' selected="selected"';
 	}
 	?>>PHP</option>
+				<option value="phpmailer" disabled
+					<?php
+	if ($email_mode == EmailModes::PHPMAILER) {
+		echo ' selected="selected"';
+	}
+	?>>PHPMailer</option>
 			</select>
 		</div>
 		<div class="smtp_settings" id="smtp_settings" style="display: none">

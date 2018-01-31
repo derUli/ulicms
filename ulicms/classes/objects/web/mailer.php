@@ -17,7 +17,7 @@ class Mailer {
 	public static function send($to, $subject, $message, $headers = "") {
 		$mode = Settings::get ( "email_mode" );
 		if (! $mode) {
-			$mode = "internal";
+			$mode = EmailModes::INTERNAL;
 		}
 		
 		// UliCMS speichert seit UliCMs 9.0.1 E-Mails, die das System versendet hat
@@ -27,7 +27,9 @@ class Mailer {
 		
 		// Damit Umlaute auch im Betreff korrekt dargestellt werden, diese mit UTF-8 kodieren
 		$subject = "=?UTF-8?B?" . base64_encode ( $subject ) . "?=";
-		if ($mode == "internal") {
+		
+		// TODO: Hieraus einen Switch machen
+		if ($mode == EmailModes::INTERNAL) {
 			return mail ( $to, $subject, $message, $headers );
 		} else {
 			throw new NotImplementedException ( "E-Mail Mode \"$message\" not implemented." );

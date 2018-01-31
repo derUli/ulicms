@@ -58,11 +58,12 @@ function pear_mail($to, $subject, $message, $headers = "") {
 }
 function ulicms_mail($to, $subject, $message, $headers = "") {
 	$mode = Settings::get ( "email_mode" );
-	if (! $mode)
-		$mode = "internal";
-		
-		// UliCMS speichert seit UliCMs 9.0.1 E-Mails, die das System versendet hat
-		// in der Datenbank
+	if (! $mode) {
+		$mode = EmailModes::INTERNAL;
+	}
+	
+	// UliCMS speichert seit UliCMs 9.0.1 E-Mails, die das System versendet hat
+	// in der Datenbank
 	$insert_sql = "INSERT INTO " . tbname ( "mails" ) . " (headers, `to`, subject, body) VALUES (
      '" . db_escape ( $headers ) . "', '" . db_escape ( $to ) . "', '" . db_escape ( $subject ) . "', '" . db_escape ( $message ) . "')";
 	db_query ( $insert_sql );
