@@ -11,4 +11,10 @@ $(function() {
 			$("#menu-clear-cache-loading").hide();
 		});
 	});
+	
+		// dynamically add class form-control to all form elements
+		// Todo: add class to all HTML-Tags to make this code useless
+	    $('input, select, textarea').not("input[type=checkbox]").
+		not("input[type=radio]").
+		addClass('form-control');
 });
