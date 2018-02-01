@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitcb8b523ab784124d0e85c6bdf0211f47
+class ComposerStaticInitdb495ad66cc276de52f0336c0e2286c1
 {
     public static $files = array (
         'f9e61f18f0291090ecf3f67a829046de' => __DIR__ . '/..' . '/athari/yalinqo/YaLinqo/Linq.php',
@@ -52,9 +52,9 @@ class ComposerStaticInitcb8b523ab784124d0e85c6bdf0211f47
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitcb8b523ab784124d0e85c6bdf0211f47::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitcb8b523ab784124d0e85c6bdf0211f47::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitcb8b523ab784124d0e85c6bdf0211f47::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitdb495ad66cc276de52f0336c0e2286c1::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitdb495ad66cc276de52f0336c0e2286c1::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitdb495ad66cc276de52f0336c0e2286c1::$classMap;
 
         }, null, ClassLoader::class);
     }
