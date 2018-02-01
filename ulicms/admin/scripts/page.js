@@ -9,8 +9,8 @@ function showAndHideFieldsByType() {
 	}
 
 	if ($("#type_snippet").is(":checked")) {
-		$("select[name='hidden']").val("1");
-		$("select[name='menu']").val("not_in_menu");
+		$("select[name='hidden']").val("1").trigger("change");
+		$("select[name='menu']").val("none").trigger("change");
 	}
 
 	$(".custom-field-tab").each(function(index, el) {
