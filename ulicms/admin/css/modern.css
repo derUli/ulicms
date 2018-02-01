@@ -59,28 +59,6 @@ html {
 	list-style: none;
 }
 
-.main-content
- 
-a
-:not
- 
-(
-.btn
- 
-)
-{
-color
-:
- 
-#335599
-;
-
-
-}
-.main-content a.btn-default {
-	color: #333;
-}
-
 .menu a, .menu a:visited {
 	font-weight: bold;
 	color: #e7e5e5;
@@ -129,6 +107,17 @@ div#root-container {
 	position: relative;
 }
 
+a, a:visited, a:focus {
+	color: rgb(30, 30, 30);
+	text-decoration: none;
+	font-weight: 500;
+}
+
+a:hover, a:active {
+	color: rgb(30, 30, 30);
+	text-decoration: underline;
+}
+
 p#footer {
 	text-align: center;
 	margin-top: 20px;
@@ -145,8 +134,9 @@ input[type="button"], input[type="submit"], button {
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="number"],
-	input[type="phone"], input[type="color"], input.color, input.jscolor,
-	select, textarea, input[type="url"] {
+	input[type="phone"], input[type="color"], input.color, select, textarea,
+	input[type="url"] {
+	background-color: rgb(253, 253, 253);
 	width: 100%;
 }
 
@@ -268,10 +258,10 @@ div.help {
 label, .label {
 	font-weight: bold;
 	color: black;
-	white-space: normal;
-	text-align: left;
-	padding: 0;
-	font-size: inherit;
+  white-space: normal;
+	text-align:left;
+	padding:0;
+	font-size:inherit;
 }
 
 table tr:nth-child(odd) {
@@ -395,7 +385,7 @@ h2.accordion-header {
 	padding: 0;
 }
 
-#menu-toggle, #menu-clear-cache {
+#menu-toggle {
 	cursor: pointer;
 }
 
@@ -412,12 +402,6 @@ h2.accordion-header {
 .mainmenu ul a:hover, .mainmenu ul a.active {
 	text-decoration: none;
 	background-color: #335599;
-}
-
-@media ( max-width : 500px) {
-	.hide-on-mobile {
-		display: none;
-	}
 }
 
 @media ( min-width : 1200px) {
@@ -437,55 +421,19 @@ h2.accordion-header {
 	}
 }
 
-h1, h2, h3, h4, h5, h6 {
-	margin-bottom: 20px;
-	word-break: break-word;
+h1, h2, h3, h4, h5, h6{
+	margin-bottom:20px;
 }
 
-div#message {
-	margin-top: 20px;
+div#message{
+		margin-top:20px;
 }
 
-#msgcontainer {
-	padding-top: 16px;
+#msgcontainer{
+	padding-top:16px;
 }
 
-.voffset {
-	margin-top: 2px;
-}
-
-.voffset1 {
-	margin-top: 5px;
-}
-
-.voffset2 {
-	margin-top: 10px;
-}
-
-.voffset3 {
-	margin-top: 15px;
-}
-
-.voffset4 {
-	margin-top: 30px;
-}
-
-.voffset5 {
-	margin-top: 40px;
-}
-
-.voffset6 {
-	margin-top: 60px;
-}
-
-.voffset7 {
-	margin-top: 80px;
-}
-
-.voffset8 {
-	margin-top: 100px;
-}
-
-.voffset9 {
-	margin-top: 150px;
+button,
+input[type=button], input[type=submit], input[type=reset], input[type=image]{
+	cursor: pointer;
 }
