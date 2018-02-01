@@ -47,10 +47,9 @@ if (defined ( "_SECURITY" )) {
 			onkeyup="systemname_vorschlagen(this.value)">
 		<div class="typedep hide-on-snippet hide-on-non-regular">
 			<br /> <strong><?php translate ( "alternate_title" );?>
-	</strong><br /> <input type="text" name="alternate_title" value=""><br />
-			<small><?php translate ( "ALTERNATE_TITLE_INFO" );?>
-	</small> <br /> <strong><?php translate("show_headline");?></strong> <br />
-			<select name="show_headline">
+	</strong><br /> <input type="text" name="alternate_title" value=""> <small><?php translate ( "ALTERNATE_TITLE_INFO" );?>
+	</small> <br /> <br /> <strong><?php translate("show_headline");?></strong>
+			<br /> <select name="show_headline">
 				<option value="1" selected><?php translate("yes");?></option>
 				<option value="0"><?php translate("no");?></option>
 			</select>
@@ -227,7 +226,7 @@ function openMenuImageSelectWindow(field) {
 </script>
 			<input type="text" id="menu_image" name="menu_image"
 				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-				value="" style="cursor: pointer" /><br /> <a href="#"
+				value="" style="cursor: pointer" /> <a href="#"
 				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?>
 		</a> <br /> <br /> <strong><?php translate("design");?></strong><br />
 			<select name="theme" size=1>
@@ -286,15 +285,14 @@ function openMenuImageSelectWindow(field) {
 		<div class="accordion-content">
 			<strong><?php translate("meta_description");?>
 		</strong><br /> <input type="text" name="meta_description" value=''
-				maxlength="200"> <br /> <br /> <strong><?php translate("meta_keywords");?>
+				maxlength="200"> <br /> <strong><?php translate("meta_keywords");?>
 		</strong><br /> <input type="text" name="meta_keywords" value=''
 				maxlength="200">
 			<div class="typedep" id="article-metadata">
 				<br /> <strong><?php translate("author_name");?></strong><br /> <input
 					type="text" name="article_author_name" value="" maxlength="80"> <br />
-				<br /> <strong><?php translate("author_email");?></strong><br /> <input
+				<strong><?php translate("author_email");?></strong><br /> <input
 					type="email" name="article_author_email" value="" maxlength="80"> <br />
-				<br />
 				<div class="typedep" id="comment-fields">
 					<strong><?php translate("homepage");?></strong><br /> <input
 						type="url" name="comment_homepage" value="" maxlength="255"> <br />
@@ -303,8 +301,7 @@ function openMenuImageSelectWindow(field) {
 
 				<strong><?php translate("article_date");?></strong><br /> <input
 					name="article_date" type="datetime-local"
-					value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step=any> <br /> <br />
-				<strong><?php translate("excerpt");?></strong>
+					value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step="any"> <br /> <strong><?php translate("excerpt");?></strong>
 				<textarea name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
 			</div>
 		</div>
@@ -354,13 +351,11 @@ function openMenuImageSelectWindow(field) {
 			<p><?php translate("og_help");?></p>
 			<div style="margin-left: 20px;">
 				<strong><?php translate("title");?>
-		</strong><br /> <input type="text" name="og_title" value=""> <br /> <br />
-
-				<strong><?php translate("description");?>
+		</strong><br /> <input type="text" name="og_title" value=""> <br /> <strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description" value=""> <br />
-				<br /> <strong><?php translate("type");?>
-		</strong><br /> <input type="text" name="og_type" value=""> <br /> <br />
-				<strong><?php translate("image");?></strong> <br />
+				<strong><?php translate("type");?>
+		</strong><br /> <input type="text" name="og_type" value=""> <br /> <strong><?php translate("image");?></strong>
+				<br />
 				<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
@@ -378,7 +373,7 @@ function openMenuImageSelectWindow(field) {
 				<input type="text" id="og_image" name="og_image" readonly="readonly"
 					onclick="openMenuImageSelectWindow(this)"
 					value="<?php echo htmlspecialchars($og_image);?>"
-					style="cursor: pointer" /><br /> <a href="#"
+					style="cursor: pointer" /> <a href="#"
 					onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
 			</div>
 		</div>
@@ -590,8 +585,8 @@ function openArticleImageSelectWindow(field) {
 </script>
 			<input type="text" id="article_image" name="article_image"
 				readonly="readonly" onclick="openArticleImageSelectWindow(this)"
-				value="" style="cursor: pointer" maxlength="255" /><br /> <a
-				href="#" onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
+				value="" style="cursor: pointer" maxlength="255" /> <a href="#"
+				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 		</div>
 	</div>
 	<div class="typedep" id="custom_data_json">
