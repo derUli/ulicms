@@ -10,7 +10,7 @@ function showAndHideFieldsByType() {
 
 	if ($("#type_snippet").is(":checked")) {
 		$("select[name='hidden']").val("1");
-		$("select[name='menu']").val("none");
+		$("select[name='menu']").val("not_in_menu");
 	}
 
 	$(".custom-field-tab").each(function(index, el) {

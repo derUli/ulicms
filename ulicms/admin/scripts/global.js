@@ -23,7 +23,7 @@ $(function() {
 			.not("input[type=image]")
 			.addClass('form-control');
 
-// better select-boxes
-$("select").select2({width: '100%'});
+	// better select-boxes
+    $("select").select2({width: '100%'});
 
 });
