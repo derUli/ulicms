@@ -38,7 +38,7 @@ if (defined ( "_SECURITY" )) {
 		translate ( "permalink" );
 		?>
 	</strong><br /> <input type="text" name="system_title"
-			id="system_title" required="required" value=""> <br /> <br /> <strong><?php
+			id="system_title" required="required" value=""> <br /> <strong><?php
 		
 		translate ( "page_title" );
 		?>
@@ -46,14 +46,11 @@ if (defined ( "_SECURITY" )) {
 			name="page_title" value=""
 			onkeyup="systemname_vorschlagen(this.value)">
 		<div class="typedep hide-on-snippet hide-on-non-regular">
-			<br /> <strong><?php
-		
-		translate ( "alternate_title" );
-		?>
+			<br /> <strong><?php translate ( "alternate_title" );?>
 	</strong><br /> <input type="text" name="alternate_title" value=""><br />
 			<small><?php translate ( "ALTERNATE_TITLE_INFO" );?>
-	</small> <br /> <br /> <strong><?php translate("show_headline");?></strong>
-			<br /> <select name="show_headline">
+	</small> <br /> <strong><?php translate("show_headline");?></strong> <br />
+			<select name="show_headline">
 				<option value="1" selected><?php translate("yes");?></option>
 				<option value="0"><?php translate("no");?></option>
 			</select>

@@ -46,14 +46,14 @@ if (defined ( "_SECURITY" )) {
 		<div class="hide-on-snippet hide-on-non-regular">
 			<br /> <strong><?php translate("page_title");?> </strong><br /> <input
 				type="text" required="required" name="page_title" value=""
-				onkeyup="systemname_vorschlagen(this.value)"> <br /> <br /> <strong><?php translate("alternate_title");?> </strong><br />
+				onkeyup="systemname_vorschlagen(this.value)"> <br /> <strong><?php translate("alternate_title");?> </strong><br />
 			<input type="text" name="alternate_title"
 				value="<?php
 			echo htmlspecialchars ( $row->alternate_title );
 			
-			?>"><br /> <small><?php translate("ALTERNATE_TITLE_INFO");?> </small>
-			<br /> <br /> <strong><?php translate("show_headline");?></strong> <br />
-			<select name="show_headline">
+			?>"><small><?php translate("ALTERNATE_TITLE_INFO");?> </small> <br />
+			<br /> <strong><?php translate("show_headline");?></strong> <br /> <select
+				name="show_headline">
 				<option value="1"
 					<?php if($row->show_headline == 1) echo "selected";?>><?php translate("yes");?></option>
 				<option value="0"

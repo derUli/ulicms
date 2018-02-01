@@ -105,7 +105,7 @@ if (defined ( "_SECURITY" )) {
 			value="<?php
 				
 				echo htmlspecialchars ( $row->systemname );
-				?>"> <br /> <br /> <strong><?php translate("page_title");?> </strong><br />
+				?>"> <br /> <strong><?php translate("page_title");?> </strong><br />
 		<input type="text" name="page_title"
 			value="<?php
 				echo htmlspecialchars ( $row->title );
@@ -119,7 +119,7 @@ if (defined ( "_SECURITY" )) {
 				value="<?php
 				echo htmlspecialchars ( $row->alternate_title );
 				
-				?>"><br /> <small><?php
+				?>"> <small><?php
 				
 				echo translate ( "ALTERNATE_TITLE_INFO" );
 				?> </small> <br /> <br /> <strong><?php translate("show_headline");?></strong>
