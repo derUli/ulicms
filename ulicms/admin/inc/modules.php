@@ -68,7 +68,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		echo "<ol style=\"margin-bottom:30px;\">";
 		for($i = 0; $i < count ( $modules ); $i ++) {
 			if ((getModuleMeta ( $modules [$i], "source" ) !== "core" or $_SESSION ["show_core_modules"]) && ! getModuleMeta ( $modules [$i], "shy" )) {
-				echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
+				echo "<li style=\"margin-top:10px;padding-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
 				$disabledModules = Vars::get ( "disabledModules" );
 				$controller = null;
 				$main_class = getModuleMeta ( $modules [$i], "main_class" );
@@ -148,7 +148,6 @@ if (! $acl->hasPermission ( "list_packages" )) {
 				} else {
 					translate ( "NOT_AN_EMBED_MODULE" );
 				}
-				echo "<br/><br/>";
 				echo "</li>";
 			}
 		}
@@ -174,7 +173,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			if (getThemeMeta ( $themes [$i], "shy" )) {
 				continue;
 			}
-			echo "<li style=\"margin-bottom:20px;padding-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-theme-" . $themes [$i] . "\"><strong>";
+			echo "<li style=\"margin-top:10px;padding-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-theme-" . $themes [$i] . "\"><strong>";
 			
 			echo $themes [$i];
 			
