@@ -122,7 +122,7 @@ if (defined ( "_SECURITY" )) {
 			<div id="position_help" class="help" style="display: none">
 	<?php echo nl2br ( get_translation ( "help_position" ) );?>
 	</div>
-			<br /> <br />
+			<br />
 			<div id="parent-div">
 				<strong><?php translate("parent");?></strong><br /> <select
 					name="parent" size=1>

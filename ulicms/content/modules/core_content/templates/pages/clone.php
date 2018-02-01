@@ -138,7 +138,7 @@ if (defined ( "_SECURITY" )) {
 			?>
 	</div>
 
-			<br /> <br />
+			<br />
 			<div class="typedep" id="parent-div">
 				<strong><?php translate("parent");?> </strong><br /> <select
 					name="parent" size=1>
