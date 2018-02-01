@@ -24,6 +24,6 @@ $(function() {
 			.addClass('form-control');
 
 // better select-boxes
-$("select").select2();
+$("select").select2({width: '100%'});
 
 });
