@@ -22,4 +22,8 @@ $(function() {
 			.not("input[type=reset]")
 			.not("input[type=image]")
 			.addClass('form-control');
+
+// better select-boxes
+$("select").select2();
+
 });
