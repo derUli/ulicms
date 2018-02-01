@@ -543,7 +543,7 @@ function openMenuImageSelectWindow(field) {
 		<div class="accordion-content">
 			<input type="text" id="image_url" name="image_url"
 				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-				value="" style="cursor: pointer" /><br /> <a href="#"
+				value="" style="cursor: pointer" /> <a href="#"
 				onclick="$('#menu_image').val('');return false;"><?php
 		
 		translate ( "clear" );
