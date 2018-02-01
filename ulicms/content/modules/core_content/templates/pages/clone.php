@@ -262,7 +262,7 @@ function openMenuImageSelectWindow(field) {
 			
 			echo $row->menu_image;
 			?>"
-				style="cursor: pointer" /><br /> <a href="#"
+				style="cursor: pointer" /> <a href="#"
 				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
 			<br /> <br /> <strong><?php translate("design");?></strong><br /> <select
 				name="theme" size=1>
@@ -348,7 +348,7 @@ function openMenuImageSelectWindow(field) {
 				value="<?php
 			echo htmlspecialchars ( $row->meta_description );
 			?>"
-				maxlength="200"> <br /> <br /> <strong><?php translate("meta_keywords");?> </strong><br />
+				maxlength="200"> <br /> <strong><?php translate("meta_keywords");?> </strong><br />
 			<input type="text" name="meta_keywords"
 				value="<?php
 			echo htmlspecialchars ( $row->meta_keywords );
@@ -453,15 +453,15 @@ function openMenuImageSelectWindow(field) {
 		</strong><br /> <input type="text" name="og_title"
 					value="<?php
 			echo htmlspecialchars ( $row->og_title );
-			?>"> <br /> <br /> <strong><?php translate("description");?>
+			?>"> <br /> <strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description"
 					value="<?php
 			echo htmlspecialchars ( $row->og_description );
-			?>"> <br /> <br /> <strong><?php translate("type");?>
+			?>"> <br /> <strong><?php translate("type");?>
 		</strong><br /> <input type="text" name="og_type"
 					value="<?php
 			echo htmlspecialchars ( $row->og_type );
-			?>"> <br /> <br /> <strong><?php translate("image");?></strong> <br />
+			?>"> <br /> <strong><?php translate("image");?></strong> <br />
 				<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
@@ -481,7 +481,7 @@ function openMenuImageSelectWindow(field) {
 					value="<?php
 			echo htmlspecialchars ( $row->og_image );
 			?>"
-					style="cursor: pointer" /><br /> <a href="#"
+					style="cursor: pointer" /> <a href="#"
 					onclick="$('#og_image').val('');return false;"><?php translate("clear");?>
 		</a>
 		<?php
@@ -635,7 +635,7 @@ function openMenuImageSelectWindow(field) {
 					<?php if($list_data->order_direction=== "desc") echo ' selected';?>><?php translate("desc");?></option>
 			</select> <br /> <br /> <strong><?php translate("limit");?></strong>
 			<input type="number" name="limit" min="0" step="1"
-				value="<?php echo intval($list_data->limit);?>"> <br /> <br /> <strong><?php translate ( "use_pagination" );?></strong><br />
+				value="<?php echo intval($list_data->limit);?>"> <br /> <strong><?php translate ( "use_pagination" );?></strong><br />
 			<select name="list_use_pagination">
 				<option value="1"
 					<?php if($list_data->use_pagination) echo "selected";?>><?php translate("yes")?></option>
@@ -700,7 +700,7 @@ function openMenuImageSelectWindow(field) {
 			<input type="text" id="image_url" name="image_url"
 				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 				value="<?php Template::escape($row->image_url);?>"
-				style="cursor: pointer" /><br /> <a href="#"
+				style="cursor: pointer" /> <a href="#"
 				onclick="$('#menu_image').val('');return false;"><?php
 			
 			translate ( "clear" );
