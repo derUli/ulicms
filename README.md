@@ -18,6 +18,9 @@ UliCMS requires some special modules for PHP
    * dom
    * xml
 
+For development you require the "composer" package manager.
+You have to run "composer install" to install dependencies.
+
 UliCMS should work on common shared webhosting environment.
 
 ## Extras
