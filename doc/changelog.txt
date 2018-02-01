@@ -4,6 +4,7 @@ Neue Features:
 + Zurück-Buttons im Backend eingefügt
 + Weitere Verbesserungen in der Backend-Navigation
 + Neue Methode gegen Formularspam
++ Steuerelemente mit Bootstrap und Select2 modernisiert
 + Settings::mappingStringToArray($str) unterstützt nun Kommentare
 + Verbindung zur Datenbank per Socket möglich
 + Port zu Datenbank-Server kann nun angegeben werden
