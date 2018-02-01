@@ -51,7 +51,7 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 		}
 		?>
 		id="radio_gif" name="type" value="gif"
-		onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label
+		onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"> <label
 		for="radio_gif"><?php translate("gif_banner");?></label>
 </p>
 <fieldset id="type_gif" style="<?php
@@ -66,13 +66,13 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 		?></strong><br /> <input type="text" name="banner_name"
 		value="<?php
 		Template::escape ( $row->name );
-		?>"> <br /> <br /> <strong><?php
+		?>"> <br /> <strong><?php
 		translate ( "IMAGE_URL" );
 		?></strong><br /> <input type="text" name="image_url"
 		value="<?php
 		Template::escape ( $row->image_url );
-		?>"> <br /> <br /> <strong><?php translate("link_url");?></strong><br />
-	<input type="text" name="link_url"
+		?>"> <br /> <strong><?php translate("link_url");?></strong><br /> <input
+		type="text" name="link_url"
 		value="<?php
 		Template::escape ( $row->link_url );
 		?>">
