@@ -9,9 +9,9 @@ function showAndHideFieldsByType() {
 	}
 
 	if ($("#type_snippet").is(":checked")) {
-		$("select[name='hidden']").val("1").trigger("change");
-		$("select[name='menu']").val("none").trigger("change");
-	}
+		$("select[name='hidden']").val("1");
+		$("select[name='menu']").val("not_in_menu");
+	} 
 
 	$(".custom-field-tab").each(function(index, el) {
 		if ($(el).data("type") == $("input[name='type']:checked").val()) {
@@ -28,7 +28,7 @@ function showAndHideFieldsByType() {
 		$("#btn-view-page").slideDown();
 	}
 
-	if ($("select[name='menu']").val() == "none") {
+	if ($("select[name='menu']").val() == "not_in_menu") {
 		$("#parent-div").slideUp();
 	} else {
 
