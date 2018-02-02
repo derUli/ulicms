@@ -9,9 +9,11 @@ function showAndHideFieldsByType() {
 	}
 
 	if ($("#type_snippet").is(":checked")) {
-		$("select[name='hidden']").val("1");
-		$("select[name='menu']").val("not_in_menu");
-	} 
+		unbindEvents();
+		$("select[name='hidden']").val("1").trigger("change");
+		$("select[name='menu']").val("not_in_menu").trigger("change");
+		bindEvents();
+	}
 
 	$(".custom-field-tab").each(function(index, el) {
 		if ($(el).data("type") == $("input[name='type']:checked").val()) {
@@ -36,8 +38,18 @@ function showAndHideFieldsByType() {
 	}
 }
 
-$("input[name=\"type\"]").change(showAndHideFieldsByType);
-$("select[name='menu']").change(showAndHideFieldsByType);
+function bindEvents() {
+	$("input[name=\"type\"]").change(showAndHideFieldsByType);
+	$("select[name='menu']").change(showAndHideFieldsByType);
+}
+
+function unbindEvents() {
+	$("input[name=\"type\"]").off("change");
+	$("select[name='menu']").off("change");
+
+}
+
+bindEvents();
 
 $(document).ready(function() {
 	var data = {
