@@ -6,7 +6,7 @@ class VongConverter extends Controller{
    public function frontendFooter(){
       return Template::executeModuleTemplate("vong_converter", "vong.php");
   }
-  public function backendFooter(){
+  public function adminFooter(){
     return $this->frontendFooter();
   }
 }
