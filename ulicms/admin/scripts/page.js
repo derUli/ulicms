@@ -41,6 +41,10 @@ function showAndHideFieldsByType() {
 function bindEvents() {
 	$("input[name=\"type\"]").change(showAndHideFieldsByType);
 	$("select[name='menu']").change(showAndHideFieldsByType);
+	$("select[name='menu']").select2("destroy").select2({
+		"width" : "100%"
+	});
+
 }
 
 function unbindEvents() {
@@ -48,8 +52,6 @@ function unbindEvents() {
 	$("select[name='menu']").off("change");
 
 }
-
-bindEvents();
 
 $(document).ready(function() {
 	var data = {
@@ -61,6 +63,7 @@ $(document).ready(function() {
 		showAndHideFieldsByType();
 	});
 
+	bindEvents();
 });
 
 function systemname_vorschlagen(txt) {
