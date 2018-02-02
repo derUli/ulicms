@@ -1,7 +1,6 @@
 <?php
 class VongConverter extends Controller{
-   // Todo: Nur deutsch übersetzen
-   // Übersetzung soll seperat für Frontend und Backend
+   // Todo: Übersetzung soll seperat für Frontend und Backend
    // eingeschalten und deaktiviert werden können.
    public function frontendFooter(){
      if(getCurrentLanguage() !== "de"){
