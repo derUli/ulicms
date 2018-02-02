@@ -1,8 +1,0 @@
-{
-	"source" : "extend",
-	"version" : "1.0",
-	"controllers" : {
-		"VongConverter" : "VongConverter.php"
-	},
-	"main_class" : "VongConverter"
-}
