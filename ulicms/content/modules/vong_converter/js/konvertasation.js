@@ -1,7 +1,7 @@
 var VONG = {
   timer: 500,
   className: "itsVONG",
-  matchList: ['h1', 'h2', 'h3', 'h4', 'h5', 'p', 'button', 'a'],
+  matchList: ['h1', 'h2', 'h3', 'h4', 'h5', 'p', 'button', 'a', 'div', 'main', 'blockquote'],
   VONGliste: [
     {deutsch: "einem", vong: "1"},
     {deutsch: "einen", vong: "1"},
@@ -81,7 +81,7 @@ var VONG = {
     {deutsch: "display", vong: "dissplay"},
     {deutsch: "gehe", vong: "walk"},
     {deutsch: "gingen", vong: "walkten"},
-    {deutsch: "ging", vong: "walkte"},    
+    {deutsch: "ging", vong: "walkte"},
     {deutsch: "nutzen", vong: "nützen"},
     {deutsch: "nutzen", vong: "nützen"},
     {deutsch: "nächst", vong: "näschd"},
