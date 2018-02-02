@@ -257,10 +257,10 @@ div.help {
 label, .label {
 	font-weight: bold;
 	color: black;
-  white-space: normal;
-	text-align:left;
-	padding:0;
-	font-size:inherit;
+	white-space: normal;
+	text-align: left;
+	padding: 0;
+	font-size: inherit;
 }
 
 table tr:nth-child(odd) {
@@ -420,19 +420,23 @@ h2.accordion-header {
 	}
 }
 
-h1, h2, h3, h4, h5, h6{
-	margin-bottom:20px;
+h1, h2, h3, h4, h5, h6 {
+	margin-bottom: 20px;
 }
 
-div#message{
-		margin-top:20px;
+div#message {
+	margin-top: 20px;
 }
 
-#msgcontainer{
-	padding-top:16px;
+#msgcontainer {
+	padding-top: 16px;
 }
 
-button,
-input[type=button], input[type=submit], input[type=reset], input[type=image]{
+button, input[type=button], input[type=submit], input[type=reset], input[type=image]
+	{
 	cursor: pointer;
+}
+
+a.btn-warning {
+	color: #fff;
 }
