@@ -293,10 +293,10 @@ if (defined ( "_SECURITY" )) {
 
 		</div>
 	<div class="typedep" id="tab-link">
-		<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
+		<h2 class="accordion-header"><?php translate("link_url");?></h2>
 
 		<div class="accordion-content">
-			<strong><?php translate("external_redirect");?></strong><br /> <input
+			<strong><?php translate("link_url");?></strong><br /> <input
 				type="text" name="redirection"
 				value="<?php
 				
