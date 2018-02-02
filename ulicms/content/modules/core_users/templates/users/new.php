@@ -17,7 +17,7 @@ if ($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_create" )) 
 	<br /> <strong><?php translate("lastname");?></strong><br /> <input
 		type="text" name="admin_lastname" value=""> <br /> <strong><?php translate("firstname");?></strong><br />
 	<input type="text" name="admin_firstname" value=""><br /> <strong><?php translate("email");?></strong><br />
-	<input type="email" name="admin_email" value=""><br /> <br /> <strong><?php translate("password");?></strong><br />
+	<input type="email" name="admin_email" value=""><br />  <strong><?php translate("password");?></strong><br />
 	<input type="password" required="required" name="admin_password"
 		id="admin_password" value="" autocomplete="off"> <br /> <strong><?php translate("password_repeat");?></strong><br />
 	<input type="password" required="required" name="admin_password_repeat"
