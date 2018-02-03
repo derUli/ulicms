@@ -10,6 +10,8 @@ function enqueueScriptFile($path) {
 	$_SERVER ["script_queue"] [] = $path;
 }
 function getCombinedScripts() {
+	$commentPattern = '/(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/';
+	
 	$lastmod = 0;
 	$output = "";
 	if (isset ( $_GET ["output_scripts"] )) {
@@ -22,10 +24,12 @@ function getCombinedScripts() {
 					$content = @file_get_contents ( $script );
 					
 					if ($content) {
-						$content = str_replace ( "\r\n", "\n", $content );
-						$content = str_replace ( "\r", "\n", $content );
-						$content = str_replace ( "\n", "\r\n", $content );
+						$content = normalizeLN ( $content, "\n" );
+						$content = preg_replace ( $commentPattern, '', $content );
+						
 						$content = trim ( $content );
+						$lines = StringHelper::linesFromString ( $content, true, true, false );
+						$content = implode ( "\n", $lines );
 						$output .= "// Script " . $script . "\r\n";
 						$output .= $content;
 						$output .= "\r\n";
