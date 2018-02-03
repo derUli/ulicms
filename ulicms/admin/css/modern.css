@@ -384,8 +384,30 @@ h2.accordion-header {
 	padding: 0;
 }
 
-#menu-toggle {
+#menu-toggle, #menu-clear-cache {
 	cursor: pointer;
+}
+
+.main-content
+ 
+a
+:not
+ 
+(
+.btn
+ 
+)
+{
+color
+:
+ 
+#335599
+;
+		
+
+}
+.main-content a.btn-default {
+	color: #333;
 }
 
 .mainmenu ul a, .mainmenu ul a:visited, .mainmenu ul a:active {
@@ -401,6 +423,12 @@ h2.accordion-header {
 .mainmenu ul a:hover, .mainmenu ul a.active {
 	text-decoration: none;
 	background-color: #335599;
+}
+
+@media ( max-width : 500px) {
+	.hide-on-mobile {
+		display: none;
+	}
 }
 
 @media ( min-width : 1200px) {
@@ -437,6 +465,42 @@ button, input[type=button], input[type=submit], input[type=reset], input[type=im
 	cursor: pointer;
 }
 
-a.btn-warning {
-	color: #fff;
+.voffset {
+	margin-top: 2px;
+}
+
+.voffset1 {
+	margin-top: 5px;
+}
+
+.voffset2 {
+	margin-top: 10px;
+}
+
+.voffset3 {
+	margin-top: 15px;
+}
+
+.voffset4 {
+	margin-top: 30px;
+}
+
+.voffset5 {
+	margin-top: 40px;
+}
+
+.voffset6 {
+	margin-top: 60px;
+}
+
+.voffset7 {
+	margin-top: 80px;
+}
+
+.voffset8 {
+	margin-top: 100px;
+}
+
+.voffset9 {
+	margin-top: 150px;
 }
