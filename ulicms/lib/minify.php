@@ -10,8 +10,6 @@ function enqueueScriptFile($path) {
 	$_SERVER ["script_queue"] [] = $path;
 }
 function getCombinedScripts() {
-	$commentPattern = '/(?:(?:\/\*(?:[^*]|(?:\*+[^*\/]))*\*+\/)|(?:(?<!\:|\\\|\')\/\/.*))/';
-	
 	$lastmod = 0;
 	$output = "";
 	if (isset ( $_GET ["output_scripts"] )) {
@@ -25,15 +23,14 @@ function getCombinedScripts() {
 					
 					if ($content) {
 						$content = normalizeLN ( $content, "\n" );
-						$content = preg_replace ( $commentPattern, '', $content );
-						
 						$content = trim ( $content );
 						$lines = StringHelper::linesFromString ( $content, true, true, false );
 						$content = implode ( "\n", $lines );
-						$output .= "// Script " . $script . "\r\n";
+						if (! endsWith ( $content, ";" )) {
+							$content .= ";";
+						}
 						$output .= $content;
-						$output .= "\r\n";
-						$output .= "\r\n";
+						$output .= "\n";
 						if (filemtime ( $script ) > $lastmod)
 							$lastmod = filemtime ( $script );
 					}
@@ -107,11 +104,9 @@ function getCombinedStylesheets() {
 					$content = @file_get_contents ( $stylesheet );
 					
 					if ($content) {
-						$content = str_replace ( "\r\n", "\n", $content );
-						$content = str_replace ( "\r", "\n", $content );
-						$content = str_replace ( "\n", "\r\n", $content );
+						$content = normalizeLN ( $content, "\n" );
 						$content = trim ( $content );
-						$output .= "/* Stylesheet " . $stylesheet . " */\r\n";
+						
 						$output .= $content;
 						$output .= "\r\n";
 						$output .= "\r\n";
