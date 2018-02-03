@@ -62,19 +62,19 @@ if (Settings::get ( "visitors_can_register" ) == "off" or ! Settings::get ( "vis
 	?>
 	<strong><?php translate("username");?>
 	</strong><br /> <input type="text" required="required"
-		name="admin_username" value=""> <br /> <br /> <strong><?php translate("lastname")?>
+		name="admin_username" value=""> <br /> <strong><?php translate("lastname")?>
 	</strong><br /> <input type="text" required="required"
-		name="admin_lastname" value=""> <br /> <br /> <strong><?php translate("firstname");?>
+		name="admin_lastname" value=""> <br /> <strong><?php translate("firstname");?>
 	</strong><br /> <input type="text" required="required"
-		name="admin_firstname" value=""><br /> <br /> <strong><?php translate("email");?>
+		name="admin_firstname" value=""><br /> <strong><?php translate("email");?>
 	</strong><br /> <input type="email" required="required"
-		name="admin_email" value=""><br /> <br /> <strong><?php translate("password");?>
+		name="admin_email" value=""><br /> <strong><?php translate("password");?>
 	</strong><br /> <input type="password" required="required"
-		name="admin_password" value=""><br /> <br /> <strong><?php translate("password_repeat");?>
+		name="admin_password" value=""><br /> <strong><?php translate("password_repeat");?>
 	</strong><br /> <input type="password" required="required"
-		name="admin_password_repeat" value=""><br /> <br />
+		name="admin_password_repeat" value=""><br />
 		<?php add_hook ( "register_form_field" );?>
-	<br />
+
 	<button type="submit" class="btn btn-success"><?php translate("register");?></button>
 </form>
 <?php
