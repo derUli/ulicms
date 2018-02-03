@@ -26,9 +26,6 @@ function getCombinedScripts() {
 						$content = trim ( $content );
 						$lines = StringHelper::linesFromString ( $content, true, true, false );
 						$content = implode ( "\n", $lines );
-						if (! endsWith ( $content, ";" )) {
-							$content .= ";";
-						}
 						$output .= $content;
 						$output .= "\n";
 						if (filemtime ( $script ) > $lastmod)
