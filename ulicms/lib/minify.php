@@ -43,8 +43,6 @@ function getCombinedScripts() {
 	header ( "Content-Type: text/javascript" );
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
-	eTagFromString ( $output );
-	browsercacheOneDay ( $lastmod );
 	echo $output;
 	exit ();
 }
@@ -60,12 +58,22 @@ function get_combined_script_html() {
 }
 function getCombinedScriptURL() {
 	$output = "";
+	
+	$lastmod = 0;
+	foreach ( $_SERVER ["script_queue"] as $file ) {
+		if (file_exists ( $file ) and endsWith ( $file, ".js", $needle ) and filemtime ( $file ) > $lastmod) {
+			$lastmod = filemtime ( $file );
+		}
+	}
+	
 	if (isset ( $_SERVER ["script_queue"] ) and is_array ( $_SERVER ["script_queue"] )) {
 		$files = implode ( ";", $_SERVER ["script_queue"] );
 		$url = "?output_scripts=" . $files;
 	} else {
 		$url = "index.php?scripts=";
 	}
+	
+	$url .= "&time=" . $lastmod;
 	
 	return $url;
 }
@@ -83,6 +91,7 @@ function enqueueStylesheet($path) {
 function getCombinedStylesheets() {
 	$output = "";
 	$lastmod = 0;
+	
 	if (isset ( $_GET ["output_stylesheets"] )) {
 		$stylesheets = explode ( ";", $_GET ["output_stylesheets"] );
 		
@@ -147,6 +156,13 @@ function get_combined_stylesheet_html() {
 	return $html;
 }
 function getCombinedStylesheetURL() {
+	$lastmod = 0;
+	foreach ( $_SERVER ["stylesheet_queue"] as $file ) {
+		if (file_exists ( $file ) and endsWith ( $file, ".css", $needle ) and filemtime ( $file ) > $lastmod) {
+			$lastmod = filemtime ( $file );
+		}
+	}
+	
 	$output = "";
 	if (isset ( $_SERVER ["stylesheet_queue"] ) and is_array ( $_SERVER ["stylesheet_queue"] )) {
 		$files = implode ( ";", $_SERVER ["stylesheet_queue"] );
@@ -154,6 +170,6 @@ function getCombinedStylesheetURL() {
 	} else {
 		$url = "index.php?stylesheets=";
 	}
-	
+	$url .= "&time=$lastmod";
 	return $url;
 }
