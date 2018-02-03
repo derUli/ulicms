@@ -20,7 +20,6 @@ Neue Funktionen:
 + StringHelper::linesFromString($str, $trim = true, $removeEmpty = true, $removeComments = true)
 + StringHelper::linesFromFile($file, $trim = true, $removeEmpty = true, $removeComments = true)
 
-
 Verbesserungen:
 * Action pkginfo in core_package_manager: Button nun mit Bootstrap Style
 * Button "Liste zurücksetzen" unter "Installierte Patches" nun mit Bootstrap Style
@@ -35,6 +34,7 @@ Bugfixes:
 * Alternative Überschrift wurde nicht im Frontend angezeigt
 * core_content - Werbebanner Liste: Anzahl der Ergebnisse wird wieder angezeigt
 * core_content - Werbebanner: Neu erstellte Werbebanner mit der Sprache "Alle" wurden nicht angezeigt
+* core_users - Es ist nun wieder möglich einen User ohne Gruppe anzulegen.
 
 Entfernte Features:
 * E-Mail Versandmethode "PEAR Mail" entfernt.

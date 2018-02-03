@@ -17,7 +17,7 @@ if ($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_create" )) 
 	<br /> <strong><?php translate("lastname");?></strong><br /> <input
 		type="text" name="admin_lastname" value=""> <br /> <strong><?php translate("firstname");?></strong><br />
 	<input type="text" name="admin_firstname" value=""><br /> <strong><?php translate("email");?></strong><br />
-	<input type="email" name="admin_email" value=""><br />  <strong><?php translate("password");?></strong><br />
+	<input type="email" name="admin_email" value=""><br /> <strong><?php translate("password");?></strong><br />
 	<input type="password" required="required" name="admin_password"
 		id="admin_password" value="" autocomplete="off"> <br /> <strong><?php translate("password_repeat");?></strong><br />
 	<input type="password" required="required" name="admin_password_repeat"
@@ -29,6 +29,13 @@ if ($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_create" )) 
 	?>
 	<br /> <strong><?php translate("usergroup");?></strong> <br /> <select
 		name="group_id">
+		<option value="-"
+			<?php
+	
+	if ($row->group_id === null) {
+		echo "selected";
+	}
+	?>>[<?php translate("none");?>]</option>
 		<?php
 	
 	foreach ( $allGroups as $key => $value ) {

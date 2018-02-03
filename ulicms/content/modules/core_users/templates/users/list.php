@@ -63,8 +63,11 @@ if ($acl->hasPermission ( "users" )) {
 		<tbody>
 	<?php
 		foreach ( $users as $row ) {
-			$group = $acl->getPermissionQueryResult ( $row->getGroupId () );
-			$group = $group ["name"];
+			$group = "[" . get_translation ( "none" ) . "]";
+			if ($row->getGroupId ()) {
+				$group = $acl->getPermissionQueryResult ( $row->getGroupId () );
+				$group = $group ["name"];
+			}
 			?>
 		<?php
 			
