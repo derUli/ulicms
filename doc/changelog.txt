@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.2 =====
+﻿===== Neues in UliCMS 2018.2 =====
 
 Neue Features:
 + Zurück-Buttons im Backend eingefügt
@@ -35,6 +35,7 @@ Bugfixes:
 * core_content - Werbebanner Liste: Anzahl der Ergebnisse wird wieder angezeigt
 * core_content - Werbebanner: Neu erstellte Werbebanner mit der Sprache "Alle" wurden nicht angezeigt
 * core_users - Es ist nun wieder möglich einen User ohne Gruppe anzulegen.
+* Seiten vom Typ "Liste" zeigen nun keine gelöschten Datensätze mehr an.
 
 Entfernte Features:
 * E-Mail Versandmethode "PEAR Mail" entfernt.
