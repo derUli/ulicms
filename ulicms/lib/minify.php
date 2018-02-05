@@ -41,7 +41,7 @@ function getCombinedScripts() {
 	header ( "Content-Type: text/javascript" );
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
-	$expires = 60 * 60 * 24 * 7; // 1 Week
+	$expires = 60 * 60 * 24 * 30; // 1 Month
 	header ( "Expires: " . gmdate ( "D, d M Y H:i:s", time () + $expires ) . "GMT" );
 	echo $output;
 	exit ();
@@ -139,7 +139,7 @@ function getCombinedStylesheets() {
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
 	
-	$expires = 60 * 60 * 24 * 7; // 1 Week
+	$expires = 60 * 60 * 24 * 30; // 1 Month
 	header ( "Expires: " . gmdate ( "D, d M Y H:i:s", time () + $expires ) . "GMT" );
 	
 	echo $output;
