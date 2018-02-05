@@ -26,7 +26,7 @@ class CoreForms extends Controller {
 								$badwordsCheck = AntispamHelper::containsBadwords($_POST[$key]);
 								if($badwordsCheck){
 									  $this->incSpamCount();
-								   	HTMLResult(get_translation( "request_contains_badword", array("%word%"=>$badWordsCheck) ), 403);
+								   	HTMLResult(get_translation( "request_contains_badword", array("%word%"=>$badwordsCheck) ), 403);
 								}
 						}
 
