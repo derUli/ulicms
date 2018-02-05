@@ -41,8 +41,7 @@ function getCombinedScripts() {
 	header ( "Content-Type: text/javascript" );
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
-	$expires = 60 * 60 * 24 * 365; // 1 Year
-	header ( "Expires: " . gmdate ( "D, d M Y H:i:s", time () + $expires ) . "GMT" );
+	set_eTagHeaders ( $_GET ["output_scripts"], $lastmod);
 	echo $output;
 	exit ();
 }
@@ -139,8 +138,8 @@ function getCombinedStylesheets() {
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
 	
-	$expires = 60 * 60 * 24 * 365; // 1 Year
-	header ( "Expires: " . gmdate ( "D, d M Y H:i:s", time () + $expires ) . "GMT" );
+	
+	set_eTagHeaders ( $_GET ["output_stylesheets"] , $lastmod );
 	
 	echo $output;
 	exit ();
