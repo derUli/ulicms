@@ -70,5 +70,9 @@ class AntispamHelperTest extends PHPUnit_Framework_TestCase {
 		$_SERVER ["REMOTE_ADDR"] = "88.255.55.110";
 		$this->assertTrue ( AntispamHelper::isCountryBlocked () );
 	}
+	public function testContainsBadWords() {
+		$this->assertNull ( AntispamHelper::containsBadwords ( "This is a clean text without spammy words" ) );
+		$this->assertEquals ( "viagra", AntispamHelper::containsBadwords ( "Buy cheap Viagra pills." ) );
+	}
 }
 	
