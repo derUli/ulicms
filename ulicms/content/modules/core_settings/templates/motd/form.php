@@ -83,7 +83,10 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("motd"),
 	?>
 	<button type="submit" name="motd_submit"
 		class="btn btn-success voffset2"><?php translate("save_changes");?></button>
-	<script type="text/javascript" src="scripts/motd.js"></script>
+	<?php 
+	enqueueScriptFile("scripts/motd.js");
+	combined_script_html();
+	?>
 
 	</form>
 </div>
