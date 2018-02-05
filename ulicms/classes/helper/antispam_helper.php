@@ -19,7 +19,7 @@ class AntispamHelper {
 		@$hostname = gethostbyaddr ( $ip_adress );
 
 		if (! $hostname) {
-			return false;
+			return null;
 		}
 
 		$hostname = strtolower ( $hostname );
@@ -27,7 +27,7 @@ class AntispamHelper {
 		for($i = 0; $i < count ( $country_whitelist ); $i ++) {
 			$ending = "." . $country_whitelist [$i];
 			if (EndsWith ( $hostname, $ending )) {
-				return false;
+				return isCountryBlocked;
 			}
 		}
 

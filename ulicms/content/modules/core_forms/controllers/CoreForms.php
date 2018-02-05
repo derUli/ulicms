@@ -30,7 +30,10 @@ class CoreForms extends Controller {
 								}
 						}
 
-				// TODO: Vollständigen Spamfilter implementieren
+							if (isCountryBlocked ()) {
+								$this->incSpamCount();
+								HTMLResult(get_translation("your_country_is_blocked"), 403);
+						}
 			}
 			$form_id = Request::getVar ( "submit-cms-form", null, "int" );
 			Forms::submitForm ( $form_id );
