@@ -41,6 +41,8 @@ function getCombinedScripts() {
 	header ( "Content-Type: text/javascript" );
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
+	$expires = 60 * 60 * 24 * 7; // 1 Week
+	header ( "Expires: " . gmdate ( "D, d M Y H:i:s", time () + $expires ) . "GMT" );
 	echo $output;
 	exit ();
 }
@@ -136,8 +138,10 @@ function getCombinedStylesheets() {
 	header ( "Content-Type: text/css" );
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
-	eTagFromString ( $output );
-	browsercacheOneDay ( $lastmod );
+	
+	$expires = 60 * 60 * 24 * 7; // 1 Week
+	header ( "Expires: " . gmdate ( "D, d M Y H:i:s", time () + $expires ) . "GMT" );
+	
 	echo $output;
 	exit ();
 }
@@ -150,7 +154,7 @@ function get_combined_stylesheet_html() {
 	if (isset ( $_SERVER ["stylesheet_queue"] ) and is_array ( $_SERVER ["stylesheet_queue"] ) and count ( $_SERVER ["stylesheet_queue"] ) > 0) {
 		$html = '<link rel="stylesheet" type="text/css" href="' . getCombinedStylesheetURL () . '"/>';
 	}
-	resetStylesheetQueue();
+	resetStylesheetQueue ();
 	return $html;
 }
 function getCombinedStylesheetURL() {
