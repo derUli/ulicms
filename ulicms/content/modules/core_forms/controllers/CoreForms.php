@@ -30,7 +30,7 @@ class CoreForms extends Controller {
 								}
 						}
 
-							if (isCountryBlocked ()) {
+							if (AntispamHelper::isCountryBlocked ()) {
 								$this->incSpamCount();
 								$hostname = @gethostbyaddr(get_ip());
 								HTMLResult(get_translation("your_country_is_blocked", array("%hostname%"=>$hostname)), 403);
