@@ -32,7 +32,8 @@ class CoreForms extends Controller {
 
 							if (isCountryBlocked ()) {
 								$this->incSpamCount();
-								HTMLResult(get_translation("your_country_is_blocked", array("%hostname%"=>gethostbyaddr(get_ip()))), 403);
+								$hostname = @gethostbyaddr(get_ip());
+								HTMLResult(get_translation("your_country_is_blocked", array("%hostname%"=>$hostname)), 403);
 						}
 			}
 			$form_id = Request::getVar ( "submit-cms-form", null, "int" );
