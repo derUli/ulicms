@@ -14,6 +14,19 @@ class FileGetContentsWrapperTest extends PHPUnit_Framework_TestCase {
 			$this->assertEquals ( "Download of " . self::EXAMPLE_URL_INVALID . " - Checksum validation failed", $ex->getMessage () );
 		}
 	}
+	public function testIsURL() {
+		$this->assertTrue ( is_url ( "http://example.org" ) );
+		$this->assertTrue ( is_url ( "https://www.ulicms.de" ) );
+		$this->assertTrue ( is_url ( "ftp://ftp.hostserver.de/pub/OpenBSD/" ) );
+		$this->assertFalse ( is_url ( "/var/www/html" ) );
+		$this->assertFalse ( is_url ( "C:\\xampp\\htdocs" ) );
+	}
+	public function testUrlExists() {
+		$this->assertTrue ( url_exists ( "http://example.org" ) );
+		$this->assertTrue ( url_exists ( "https://www.ulicms.de/content/images/67cc042b9ee9eb28cdc81ae7d7420d8a.png" ) );
+		$this->assertFalse ( url_exists ( "http://www.gibtsnicht.de/" ) );
+		$this->assertFalse ( url_exists ( "https://www.ulicms.de/gibtsnicht.html" ) );
+	}
 	// TODO:
 	// Tests für Downloads ohne Checksum mit Cache und ohne Cache implementieren
 }

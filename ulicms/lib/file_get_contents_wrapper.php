@@ -45,7 +45,7 @@ function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
 		$content = file_get_contents ( $url );
 	}
 	
-	if ($content and StringHelper::isNotNullOrWhitespace ( $checksum ) and md5 ( $content ) !== $checksum) {
+	if ($content and StringHelper::isNotNullOrWhitespace ( $checksum ) and md5 ( $content ) !== strtolower ( $checksum )) {
 		throw new CorruptDownloadException ( "Download of $url - Checksum validation failed" );
 	}
 	
@@ -54,7 +54,6 @@ function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
 	}
 	
 	return $content;
-
 }
 function url_exists($url) {
 	if (@file_get_contents ( $url, FALSE, NULL, 0, 0 ) === false)
