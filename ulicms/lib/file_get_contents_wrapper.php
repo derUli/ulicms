@@ -27,7 +27,8 @@ function is_url($url) {
 
 // Nutze curl zum Download der Datei, sofern verfügbar
 // Ansonsten Fallback auf file_get_contents
-function file_get_contents_wrapper($url, $no_cache = false) {
+function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
+	$content = false;
 	if (! is_url ( $url )) {
 		return file_get_contents ( $url );
 	}
@@ -43,13 +44,17 @@ function file_get_contents_wrapper($url, $no_cache = false) {
 	} else if (ini_get ( "allow_url_fopen" )) {
 		$content = file_get_contents ( $url );
 	}
-	if ($content) {
-		if (is_dir ( $cache_folder ) and is_url ( $url ) and ! $no_cache)
-			file_put_contents ( $cache_path, $content );
-		
-		return $content;
+	
+	if ($content and StringHelper::isNotNullOrWhitespace ( $checksum ) and md5 ( $content ) !== $checksum) {
+		throw new CorruptDownloadException ( "Download of $url - Checksum validation failed" );
 	}
-	return false;
+	
+	if (is_dir ( $cache_folder ) and is_url ( $url ) and ! $no_cache) {
+		file_put_contents ( $cache_path, $content );
+	}
+	
+	return $content;
+
 }
 function url_exists($url) {
 	if (@file_get_contents ( $url, FALSE, NULL, 0, 0 ) === false)
