@@ -571,7 +571,7 @@ function clearAPCCache() {
 // Sowohl den Seiten-Cache, den Download/Paketmanager Cache
 // als auch den APC Bytecode Cache
 function clearCache() {
-	CacheUtil::clearCache();
+	CacheUtil::clearCache ();
 }
 function add_hook($name) {
 	if (defined ( "KCFINDER_PAGE" )) {
@@ -932,7 +932,10 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = str_ireplace ( '[slogan]', ob_get_clean (), $string );
 		$current_page = get_page ();
 		$string = str_ireplace ( '[category]', get_category (), $string );
-		$string = str_ireplace ( '[csrf_token_html]', get_csrf_token_html (), $string );
+		$token = get_csrf_token_html ();
+		
+		$token .= '<input type="tel" name="business_fax" class="antispam_honeypot" value="">';
+		$string = str_ireplace ( '[csrf_token_html]', $token, $string );
 		// [tel] Links for tel Tags
 		$string = preg_replace ( '/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string );
 		$string = preg_replace ( '/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
@@ -1383,5 +1386,19 @@ function get_mime($file) {
 		return $mime;
 	} else {
 		return false;
+	}
+}
+function set_eTagHeaders($identifier, $timestamp) {
+	$gmt_mTime = gmdate ( 'r', $timestamp );
+	
+	header ( 'Cache-Control: public' );
+	header ( 'ETag: "' . md5 ( $timestamp . $identifier ) . '"' );
+	header ( 'Last-Modified: ' . $gmt_mTime );
+	
+	if (isset ( $_SERVER ['HTTP_IF_MODIFIED_SINCE'] ) || isset ( $_SERVER ['HTTP_IF_NONE_MATCH'] )) {
+		if ($_SERVER ['HTTP_IF_MODIFIED_SINCE'] == $gmt_mtime || str_replace ( '"', '', stripslashes ( $_SERVER ['HTTP_IF_NONE_MATCH'] ) ) == md5 ( $timestamp . $identifier )) {
+			header ( 'HTTP/1.1 304 Not Modified' );
+			exit ();
+		}
 	}
 }

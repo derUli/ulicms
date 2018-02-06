@@ -107,7 +107,7 @@ div#root-container {
 	position: relative;
 }
 
-a, a:visited, a:focus {
+a:not(.btn), a:visited:not(.btn),, a:focus:not(.btn), {
 	color: rgb(30, 30, 30);
 	text-decoration: none;
 	font-weight: 500;
@@ -388,24 +388,6 @@ h2.accordion-header {
 	cursor: pointer;
 }
 
-.main-content
- 
-a
-:not
- 
-(
-.btn
- 
-)
-{
-color
-:
- 
-#335599
-;
-		
-
-}
 .main-content a.btn-default {
 	color: #333;
 }

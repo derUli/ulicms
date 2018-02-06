@@ -41,6 +41,7 @@ function getCombinedScripts() {
 	header ( "Content-Type: text/javascript" );
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
+	set_eTagHeaders ( $_GET ["output_scripts"], $lastmod);
 	echo $output;
 	exit ();
 }
@@ -52,6 +53,7 @@ function get_combined_script_html() {
 	if (isset ( $_SERVER ["script_queue"] ) and is_array ( $_SERVER ["script_queue"] ) and count ( $_SERVER ["script_queue"] ) > 0) {
 		$html = '<script src="' . getCombinedScriptURL () . '" type="text/javascript"></script>';
 	}
+	resetScriptQueue ();
 	return $html;
 }
 function getCombinedScriptURL() {
@@ -135,8 +137,10 @@ function getCombinedStylesheets() {
 	header ( "Content-Type: text/css" );
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
-	eTagFromString ( $output );
-	browsercacheOneDay ( $lastmod );
+	
+	
+	set_eTagHeaders ( $_GET ["output_stylesheets"] , $lastmod );
+	
 	echo $output;
 	exit ();
 }
@@ -149,6 +153,7 @@ function get_combined_stylesheet_html() {
 	if (isset ( $_SERVER ["stylesheet_queue"] ) and is_array ( $_SERVER ["stylesheet_queue"] ) and count ( $_SERVER ["stylesheet_queue"] ) > 0) {
 		$html = '<link rel="stylesheet" type="text/css" href="' . getCombinedStylesheetURL () . '"/>';
 	}
+	resetStylesheetQueue ();
 	return $html;
 }
 function getCombinedStylesheetURL() {

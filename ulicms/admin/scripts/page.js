@@ -148,4 +148,27 @@ $(function() {
 	systemnameOrLanguageChanged($("select[name='language']"));
 
 	filterParentPages();
+	$("#pageform-edit")
+			.ajaxForm(
+					{
+						beforeSubmit : function(e) {
+							$("#message_page_edit").html("");
+							$("#message_page_edit").hide();
+							$(".loading").show();
+						},
+						beforeSerialize : function($Form, options) {
+							/* Before serialize */
+							for (instance in CKEDITOR.instances) {
+								CKEDITOR.instances[instance].updateElement();
+							}
+							return true;
+						},
+						success : function(e) {
+							$(".loading").hide();
+							$("#message_page_edit")
+									.html(
+											"<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
+							$("#message_page_edit").show();
+						}
+					});
 });

@@ -60,4 +60,23 @@ class AntispamHelper {
 		$lookup = implode ( '.', $rev ) . '.' . $rbl;
 		return $lookup != gethostbyname ( $lookup );
 	}
+	public static function containsBadwords($str) {
+		$words_blacklist = Settings::get ( "spamfilter_words_blacklist" );
+		$str = strtolower ( $str );
+		
+		if ($words_blacklist) {
+			$words_blacklist = explode ( "||", $words_blacklist );
+		} else {
+			return null;
+		}
+		
+		for($i = 0; $i < count ( $words_blacklist ); $i ++) {
+			$word = strtolower ( $words_blacklist [$i] );
+			if (strpos ( $str, $word ) !== false) {
+				return $words_blacklist [$i];
+			}
+		}
+		
+		return null;
+	}
 }

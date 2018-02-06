@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 2018.2 =====
+===== Neues in UliCMS 2018.2 =====
 
 Neue Features:
 + Zurück-Buttons im Backend eingefügt

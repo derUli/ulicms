@@ -85,7 +85,7 @@ if (defined ( "_SECURITY" )) {
 				?>
 		<?php
 				echo ModuleHelper::buildMethodCallForm ( "PageController", "edit", array (), "post", array (
-						"id" => "pageform" 
+						"id" => "pageform-edit" 
 				) );
 				?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("pages");?>"
@@ -1053,6 +1053,12 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 	
 	
 	
+	
+	
+	
+	
+	
+	
 	<noscript>
 		<p style="color: red;">
 			Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
@@ -1086,30 +1092,12 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		<button class="typedep btn btn-info" type="button" id="btn-view-page"><?php translate("view");?></button>
 	</div>
 </div>
-<script src="scripts/page.js" type="text/javascript">
 </script>
-
+<?php
+				enqueueScriptFile ( "scripts/page.js" );
+				combined_script_html ();
+				?>
 </form>
-
-<script type="text/javascript">
-$("#pageform").ajaxForm({beforeSubmit: function(e){
-  $("#message_page_edit").html("");
-  $("#message_page_edit").hide();
-  $(".loading").show();
-  }, beforeSerialize:function($Form, options){
-        /* Before serialize */
-        for ( instance in CKEDITOR.instances ) {
-            CKEDITOR.instances[instance].updateElement();
-        }
-        return true;
-    },
-  success:function(e){
-  $(".loading").hide();
-  $("#message_page_edit").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
-  $("#message_page_edit").show();
-  }
-});
-</script>
 <?php
 				break;
 			}

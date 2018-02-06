@@ -129,7 +129,6 @@ if ($acl->hasPermission ( "dashboard" )) {
 	<div class="accordion-content">
 		<ul id="users_online">
 <?php
-	
 	foreach ( getOnlineUsers () as $user ) {
 		?>
 <li><?php Template::escape($user);?></li>
@@ -223,9 +222,10 @@ if ($acl->hasPermission ( "dashboard" )) {
 	add_hook ( "accordion_layout" );
 	?>
 </div>
-<script
-	src="<?php esc(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));?>"
-	type="text/javascript"></script>
+<?php 
+enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));
+combined_script_html();
+?>
 <?php
 } else {
 	noperms ();
