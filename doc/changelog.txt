@@ -5,6 +5,7 @@ Neue Features:
 + Weitere Verbesserungen in der Backend-Navigation
 + Neue Methode gegen Formularspam
 + Steuerelemente mit Bootstrap und Select2 modernisiert
++ core_forms: Spamfilter integriert
 + Settings::mappingStringToArray($str) unterstützt nun Kommentare
 + Verbindung zur Datenbank per Socket möglich
 + Port zu Datenbank-Server kann nun angegeben werden
