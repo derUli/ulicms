@@ -6,7 +6,8 @@
 		"CoreUpgradeController" : "controllers/CoreUpgradeController"
 	},
 	"actions" : {
-		"UpgradeCheck" : "templates/UpgradeCheck"
+		"UpgradeCheck" : "templates/UpgradeCheck.php",
+			"CorruptedDownloadError" : "templates/errors/CorruptedDownloadError.php"
 	},
 	"action_controllers" : {
 		"UpgradeCheck" : "CoreUpgradeController"
