@@ -56,9 +56,10 @@ class SinPackageInstaller {
 			foreach ( $dependencies as $dependency ) {
 				if (! faster_in_array ( $dependency, $installed_modules )) {
 					$this->errors [] = get_translation ( "dependency_x_is_not_installed", array (
-							"%x%" => $dependency 
+							"%x%" => $dependency
 					) );
 				}
+			}
 			}
 			$version = new UliCMSVersion ();
 			$version = $version->getInternalVersionAsString ();
@@ -68,7 +69,7 @@ class SinPackageInstaller {
 					$version_not_supported = true;
 				}
 			}
-			
+
 			if (StringHelper::isNotNullOrEmpty ( $data ["compatible_to"] ) and is_string ( $data ["compatible_to"] )) {
 				if (! version_compare ( $version, $data ["compatible_to"], "<=" )) {
 					$version_not_supported = true;
@@ -77,13 +78,13 @@ class SinPackageInstaller {
 			if ($version_not_supported) {
 				$this->errors [] = get_translation ( "this_ulicms_version_is_not_supported" );
 			}
-			
+
 			$decoded = base64_decode ( $data ["data"] );
 			$sha_hash = sha1 ( $decoded );
 			if ($sha_hash != $data ["checksum"]) {
 				$this->errors [] = get_translation ( "sha1_checksum_not_equal" );
 			}
-		}
+
 		return (count ( $this->errors ) <= 0);
 	}
 }
