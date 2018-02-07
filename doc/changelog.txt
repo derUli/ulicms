@@ -37,6 +37,7 @@ Bugfixes:
 * core_content - Werbebanner: Neu erstellte Werbebanner mit der Sprache "Alle" wurden nicht angezeigt
 * core_users - Es ist nun wieder möglich einen User ohne Gruppe anzulegen.
 * Seiten vom Typ "Liste" zeigen nun keine gelöschten Datensätze mehr an.
+* Bei der Installation von SimpleInstall v2 Paketen ohne Abhängigkeiten funktionierte die Prüfung, ob die UliCMS Version unterstützt wird nicht.
 
 Entfernte Features:
 * E-Mail Versandmethode "PEAR Mail" entfernt.
