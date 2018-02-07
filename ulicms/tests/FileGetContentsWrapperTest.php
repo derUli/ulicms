@@ -24,12 +24,12 @@ class FileGetContentsWrapperTest extends PHPUnit_Framework_TestCase {
 	public function testUrlExists() {
 		$this->assertTrue ( url_exists ( "http://example.org" ) );
 		$this->assertTrue ( url_exists ( "https://www.ulicms.de/content/images/67cc042b9ee9eb28cdc81ae7d7420d8a.png" ) );
-		$this->assertFalse ( url_exists ( "http://www.gibtsnicht.de/" ) );
+		$this->assertFalse ( url_exists ( "http://www.gibtsnicht.ch/" ) );
 		$this->assertFalse ( url_exists ( "https://www.ulicms.de/gibtsnicht.html" ) );
 	}
 	public function testFileGetContentsCurl() {
 		$this->assertTrue ( is_string ( file_get_contents_curl ( "http://example.org" ) ) );
-		$this->assertTrue ( is_string ( file_get_contents_curl ( "http://www.gibtsnicht.de" ) ) );
+		$this->assertFalse ( file_get_contents_curl ( "http://www.gibtsnicht.ch" ) );
 	}
 	
 	// TODO:
