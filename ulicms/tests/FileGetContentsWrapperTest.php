@@ -27,12 +27,11 @@ class FileGetContentsWrapperTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse ( url_exists ( "http://www.gibtsnicht.de/" ) );
 		$this->assertFalse ( url_exists ( "https://www.ulicms.de/gibtsnicht.html" ) );
 	}
-
-  public function testFileGetContentsCurl(){
-		  $this->assertTrue ( is_string ( file_get_contents_curl( "http://example.org" ) ));
-			$this->assertTrue ( is_string ( file_get_contents_curl( "http://www.gibtsnicht.de" ) ));
+	public function testFileGetContentsCurl() {
+		$this->assertTrue ( is_string ( file_get_contents_curl ( "http://example.org" ) ) );
+		$this->assertTrue ( is_string ( file_get_contents_curl ( "http://www.gibtsnicht.de" ) ) );
 	}
-
+	
 	// TODO:
 	// Tests für Downloads ohne Checksum mit Cache und ohne Cache implementieren
 }

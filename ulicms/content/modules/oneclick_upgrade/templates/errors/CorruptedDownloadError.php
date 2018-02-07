@@ -1,9 +1,9 @@
 <?php
 $acl = new ACL ();
 if ($acl->hasPermission ( "update_system" )) {
-  ?>
+	?>
 <div class="alert alert-danger">
-  <strong><?php translate("error");?>!</strong> <?php translate("corrupted_download")?>
+	<strong><?php translate("error");?>!</strong> <?php translate("corrupted_download")?>
 </div>
 <form action="../?sClass=CoreUpgradeController&sMethod=runUpgrade"
 	method="post">
@@ -12,6 +12,8 @@ if ($acl->hasPermission ( "update_system" )) {
 		<button type="submit" class="btn btn-danger"><?php translate("retry");?></button>
 	</p>
 </form>
-<?php } else {
-  noPerms();
-}?>
+<?php
+} else {
+	noPerms ();
+}
+?>
