@@ -1,6 +1,7 @@
 <?php
 $classes = array (
-		"EmailModes" 
+		"Module",
+		"ModuleManager" 
 );
 foreach ( $classes as $class ) {
 	require_once dirname ( __FILE__ ) . "/$class.php";
