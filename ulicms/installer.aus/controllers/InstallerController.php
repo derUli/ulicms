@@ -2,11 +2,14 @@
 require_once "../vendor/autoload.php";
 class InstallerController {
 	public static function getStep() {
+		$step = 1;
 		if (isset ( $_REQUEST ["step"] ) and ! empty ( $_REQUEST ["step"] )) {
 			$step = intval ( $_REQUEST ["step"] );
-		} else {
-			$step = 1;
 		}
+		if ($step > 8) {
+			Request::redirect ( "index.php?step=8" );
+		}
+		
 		return $step;
 	}
 	public static function initSessionVars() {
