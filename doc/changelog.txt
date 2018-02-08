@@ -6,6 +6,8 @@ Neue Features:
 + Neue Methode gegen Formularspam
 + Steuerelemente mit Bootstrap und Select2 modernisiert
 + core_forms: Spamfilter integriert
++ file_get_contents_wrapper: Checksum-Prüfung implementiert
++ Eigenes Template für Fehlerseiten (Exceptions) möglich
 + Settings::mappingStringToArray($str) unterstützt nun Kommentare
 + Verbindung zur Datenbank per Socket möglich
 + Port zu Datenbank-Server kann nun angegeben werden
