@@ -1,1 +1,1 @@
-<?= htmlspecialchars( $_SERVER['HTTP_USER_AGENT'] );
+<?=htmlspecialchars ( $_SERVER ['HTTP_USER_AGENT'] ); ?>
