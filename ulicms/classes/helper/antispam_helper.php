@@ -1,6 +1,6 @@
 <?php
-class AntispamHelper {
-
+class AntiSpamHelper {
+	
 	// checking if this Country is blocked by spamfilter
 	public static function isCountryBlocked() {
 		$country_blacklist = Settings::get ( "country_blacklist" );
