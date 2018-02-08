@@ -4,6 +4,7 @@ class FileGetContentsWrapperTest extends PHPUnit_Framework_TestCase {
 	const EXAMPLE_URL_INVALID = "http://www.google.de";
 	const EXAMPLE_HASH = "09b9c392dc1f6e914cea287cb6be34b0";
 	const UNIQID_URL = "http://test.ulicms.de/uniqid.php";
+	const USER_AGENT_URL = "http://test.ulicms.de/useragent.php";
 	public function testDownloadUrlWithChecksumValid() {
 		$this->assertTrue ( is_string ( file_get_contents_wrapper ( self::EXAMPLE_URL_OK, true, self::EXAMPLE_HASH ) ) );
 	}
@@ -46,5 +47,12 @@ class FileGetContentsWrapperTest extends PHPUnit_Framework_TestCase {
 		$first = file_get_contents_wrapper ( self::UNIQID_URL, false, null );
 		$second = file_get_contents_wrapper ( self::UNIQID_URL, false, md5 ( $first ) );
 		$this->assertEquals ( $second, $first );
+	}
+	public function testUserAgent() {
+		$this->assertTrue ( defined ( "ULICMS_USERAGENT" ) );
+		$expectedUseragent = "UliCMS Release " . cms_version ();
+		$this->assertEquals ( $expectedUseragent, ULICMS_USERAGENT );
+		$useragent = file_get_contents_wrapper ( self::USER_AGENT_URL, true );
+		$this->assertEquals ( $expectedUseragent, $useragent );
 	}
 }
