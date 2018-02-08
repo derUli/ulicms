@@ -12,3 +12,5 @@ define ( "TRANSLATION_SKIP_KCFINDER", "kcfinder überspringen" );
 define ( "TRANSLATION_CHANNEL", "Kanal" );
 define ( "TRANSLATION_FAST", "Schnell" );
 define ( "TRANSLATION_SLOW", "Langsam" );
+define ( "TRANSLATION_CORRUPTED_DOWNLOAD", "Integritätsprüfung des Downloads fehlgeschlagen." );
+define ( "TRANSLATION_RETRY", "Erneut versuchen" );
