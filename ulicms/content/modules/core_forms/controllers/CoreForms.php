@@ -23,14 +23,14 @@ class CoreForms extends Controller {
  										HTMLResult(get_translation( "cyrillic_charts_not_allowed" ), 403);
  								}
 
-								$badwordsCheck = AntispamHelper::containsBadwords($_POST[$key]);
+								$badwordsCheck = AntiSpamHelper::containsBadwords($_POST[$key]);
 								if($badwordsCheck){
 									  $this->incSpamCount();
 								   	HTMLResult(get_translation( "request_contains_badword", array("%word%"=>$badwordsCheck) ), 403);
 								}
 						}
 
-							if (AntispamHelper::isCountryBlocked ()) {
+							if (AntiSpamHelper::isCountryBlocked ()) {
 								$this->incSpamCount();
 								$hostname = @gethostbyaddr(get_ip());
 								HTMLResult(get_translation("your_country_is_blocked", array("%hostname%"=>$hostname)), 403);

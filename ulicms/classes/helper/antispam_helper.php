@@ -1,5 +1,6 @@
 <?php
 class AntispamHelper {
+
 	// checking if this Country is blocked by spamfilter
 	public static function isCountryBlocked() {
 		$country_blacklist = Settings::get ( "country_blacklist" );
@@ -78,5 +79,8 @@ class AntispamHelper {
 		}
 		
 		return null;
+	}
+	public static function isSpamFilterEnabled() {
+		return Settings::get ( "spamfilter_enabled" ) == "yes";
 	}
 }

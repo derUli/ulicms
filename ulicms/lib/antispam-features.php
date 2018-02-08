@@ -2,13 +2,13 @@
 
 // String contains chinese chars?
 function is_chinese($str) {
-	return AntispamHelper::isChinese ( $str );
+	return AntiSpamHelper::isChinese ( $str );
 }
 
 // checking if this Country is blocked by spamfilter
 function isCountryBlocked() {
-	return AntispamHelper::isCountryBlocked ();
+	return AntiSpamHelper::isCountryBlocked ();
 }
 function checkForSpamhaus($host = null) {
-	return AntispamHelper::checkForSpamhaus ( $host );
+	return AntiSpamHelper::checkForSpamhaus ( $host );
 }
