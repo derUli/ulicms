@@ -3,6 +3,7 @@ class FileGetContentsWrapperTest extends PHPUnit_Framework_TestCase {
 	const EXAMPLE_URL_OK = "http://example.org/";
 	const EXAMPLE_URL_INVALID = "http://www.google.de";
 	const EXAMPLE_HASH = "09b9c392dc1f6e914cea287cb6be34b0";
+	const UNIQID_URL = "http://test.ulicms.de/uniqid.php";
 	public function testDownloadUrlWithChecksumValid() {
 		$this->assertTrue ( is_string ( file_get_contents_wrapper ( self::EXAMPLE_URL_OK, true, self::EXAMPLE_HASH ) ) );
 	}
@@ -31,7 +32,19 @@ class FileGetContentsWrapperTest extends PHPUnit_Framework_TestCase {
 		$this->assertTrue ( is_string ( file_get_contents_curl ( "http://example.org" ) ) );
 		$this->assertFalse ( file_get_contents_curl ( "http://www.gibtsnicht.ch" ) );
 	}
-	
-	// TODO:
-	// Tests für Downloads ohne Checksum mit Cache und ohne Cache implementieren
+	public function testFileGetContentsWrapperNoCache() {
+		$first = file_get_contents_wrapper ( self::UNIQID_URL, true, null );
+		$second = file_get_contents_wrapper ( self::UNIQID_URL, true, null );
+		$this->assertNotEquals ( $second, $first );
+	}
+	public function testFileGetContentsWrapperCache() {
+		$first = file_get_contents_wrapper ( self::UNIQID_URL, false, null );
+		$second = file_get_contents_wrapper ( self::UNIQID_URL, false, null );
+		$this->assertEquals ( $second, $first );
+	}
+	public function testFileGetContentsWrapperCacheAndChecksum() {
+		$first = file_get_contents_wrapper ( self::UNIQID_URL, false, null );
+		$second = file_get_contents_wrapper ( self::UNIQID_URL, false, md5 ( $first ) );
+		$this->assertEquals ( $second, $first );
+	}
 }
