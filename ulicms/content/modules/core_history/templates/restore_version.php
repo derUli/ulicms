@@ -1,7 +1,7 @@
 <?php
 // @FIXME: Diese beiden Includes nach core_history verschieben.
 include_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
-include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
+include_once ULICMS_ROOT . "/classes/objects/content/VCS.php";
 
 $acl = new ACL ();
 if ($acl->hasPermission ( "pages" )) {
@@ -35,7 +35,7 @@ if ($acl->hasPermission ( "pages" )) {
 				<td><a href="<?php echo $view_diff_link;?>" class="btn btn-info"
 					target="_blank"><?php translate("view_diff");?></a></td>
 				<td><?php
-		
+
 		$user = getUserById ( $revision->user_id );
 		if ($user and isset ( $user ["username"] )) {
 			echo htmlspecialchars ( $user ["username"] );

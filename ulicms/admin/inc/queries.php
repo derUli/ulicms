@@ -2,7 +2,7 @@
 $acl = new ACL ();
 add_hook ( "query" );
 
-include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
+include_once ULICMS_ROOT . "/classes/objects/content/VCS.php";
 
 if ($acl->hasPermission ( "module_settings" ) and Request::getVar ( "toggle-show-core-modules" )) {
 	$_SESSION ["show_core_modules"] = ! $_SESSION ["show_core_modules"];
