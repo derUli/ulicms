@@ -33,9 +33,21 @@ function TextResult($data, $status = 200) {
 	echo $data;
 	exit ();
 }
+
+function Result($data, $status = 200, $type = null){
+	header ( $_SERVER ["SERVER_PROTOCOL"] . " " . Request::getStatusCodeByNumber ( $status ) );
+	$size = getStringLengthInBytes ( $data );
+	if($type){
+		header ( 'Content-Type: $type' );
+	}
+	header ( "Content-length: $size" );
+	echo $data;
+	exit ();
+}
+
 function HTTPStatusCodeResult($status, $description = null) {
 	$header = $_SERVER ["SERVER_PROTOCOL"] . " " . getStatusCodeByNumber ( intval ( $status ) );
-	
+
 	if ($description != null and $description != "") {
 		$header = $_SERVER ["SERVER_PROTOCOL"] . " " . intval ( $status ) . " " . $description;
 	}
