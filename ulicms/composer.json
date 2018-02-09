@@ -29,5 +29,8 @@
 		"athari/yalinqo": "^2.4",
 		"phpgangsta/googleauthenticator": "dev-master",
 		"katzgrau/klogger": "dev-master"
-	}
+	},
+	"require-dev": {
+        	"phpunit/phpunit": "3.7.*"
+    }
 }
