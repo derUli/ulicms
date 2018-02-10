@@ -1,4 +1,4 @@
-	Bevor ein neues Release von UliCMS veröffentlicht werden kann, müssen folgende Punkte sichergestellt werden.
+Bevor ein neues Release von UliCMS veröffentlicht werden kann, müssen folgende Punkte sichergestellt werden.
 * Die Versionsnummer wurde angepasst.
 * Es existiert ein Branch in der Paketquelle für das neue Release.
 * Es wurden alle Features, Bugfixes und sonstige Änderungen im Changelog und sofern notwendig auch detailreicher in den Release Notes ("Neue Features in UliCMS X.X").
