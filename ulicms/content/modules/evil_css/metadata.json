@@ -1,0 +1,9 @@
+{
+	"source": "extend",
+	"version": "2014.3.31",
+	"embed": false,
+	"controllers": {
+		"EvilCss": "EvilCss.php"
+	},
+	"main_class": "EvilCss"
+}
