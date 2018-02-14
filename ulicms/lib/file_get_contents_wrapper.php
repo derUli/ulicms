@@ -21,7 +21,6 @@ function is_url($url) {
 	if (substr_compare ( $url, 'http://', 0, 7 ) > 0 or substr_compare ( $url, 'https://', 0, 8 ) > 0 or substr_compare ( $url, 'ftp://', 0, 8 ) > 0) {
 		return true;
 	}
-	
 	return false;
 }
 
@@ -56,7 +55,8 @@ function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
 	return $content;
 }
 function url_exists($url) {
-	if (@file_get_contents ( $url, FALSE, NULL, 0, 0 ) === false)
+	if (@file_get_contents ( $url, FALSE, NULL, 0, 0 ) === false){
 		return false;
+	}
 	return true;
 }

@@ -20,7 +20,6 @@ function getCombinedScripts() {
 				$ext = pathinfo ( $script, PATHINFO_EXTENSION );
 				if ($ext == "js") {
 					$content = @file_get_contents ( $script );
-					
 					if ($content) {
 						$content = normalizeLN ( $content, "\n" );
 						$content = trim ( $content );
@@ -28,8 +27,9 @@ function getCombinedScripts() {
 						$content = implode ( "\n", $lines );
 						$output .= $content;
 						$output .= "\n";
-						if (filemtime ( $script ) > $lastmod)
+						if (filemtime ( $script ) > $lastmod){
 							$lastmod = filemtime ( $script );
+						}
 					}
 				}
 			}
@@ -101,7 +101,6 @@ function getCombinedStylesheets() {
 				$ext = pathinfo ( $stylesheet, PATHINFO_EXTENSION );
 				if ($ext == "css") {
 					$content = @file_get_contents ( $stylesheet );
-					
 					if ($content) {
 						$content = normalizeLN ( $content, "\n" );
 						$content = trim ( $content );
@@ -109,8 +108,9 @@ function getCombinedStylesheets() {
 						$output .= $content;
 						$output .= "\r\n";
 						$output .= "\r\n";
-						if (filemtime ( $script ) > $lastmod)
+						if (filemtime ( $script ) > $lastmod){
 							$lastmod = filemtime ( $script );
+						}
 					}
 				}
 			}
