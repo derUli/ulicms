@@ -3,7 +3,7 @@ class FooterHtml extends Controller {
 	const MODULE_NAME = "footer_html";
 	public function frontendFooter() {
 		Settings::register ( "footer_html", "" );
-		return Settings::get ( "footer_html" );
+		return trim(Settings::get ( "footer_html" ));
 	}
 	public function getSettingsHeadline() {
 		return get_translation ( "footer_html" );
