@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# coding: utf8
+
 import shutil
 import argparse
 import os
@@ -40,7 +42,7 @@ def main():
     if args.delete and os.path.exists(target):
         print("Folder exists. Truncating.")
         shutil.rmtree(target)
-        
+
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
 
@@ -76,6 +78,12 @@ def main():
     else:
         print("No update.php found")
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
+
+    main_dir = os.path.join(target, "ulicms")
+
+    # Composer packages zu Deploy hinzufügen
+    os.system("ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
+
     if args.zip:
         print("zipping folder...")
         zipdir(target, archive_name)
