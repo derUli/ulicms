@@ -1,0 +1,16 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": false,
+	"custom_acl": [
+		"footer_html"
+	],
+	"admin_permission": "footer_html",
+	"controllers": {
+		"FooterHtml": "FooterHtml.php"
+	},
+	"main_class": "FooterHtml",
+	"controller_function_permissions": {
+		"FooterHtml::savePost": "footer_html"
+	}
+}

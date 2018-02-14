@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# coding: utf8
+
 import shutil
 import argparse
 import os
@@ -45,13 +47,18 @@ def main():
 
     if os.path.exists(installer_aus_folder):
         os.rename(installer_aus_folder, installer_folder)
+
+    main_dir = os.path.join(target, "ulicms")
+
+    # Composer packages zu Deploy hinzufügen
+    os.system("ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
+
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
     if args.zip:
         print("zipping folder...")
         zipdir(target, archive_name)
         print("removing target folder...")
         shutil.rmtree(target)
-
 
 try:
     main()
