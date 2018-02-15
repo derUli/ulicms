@@ -1095,7 +1095,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </script>
 <?php
 				enqueueScriptFile ( "scripts/page.js" );
-				combined_script_html ();
+				combinedScriptHtml ();
 				?>
 </form>
 <?php

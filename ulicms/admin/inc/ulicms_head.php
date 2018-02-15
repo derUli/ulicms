@@ -55,7 +55,7 @@ foreach ( $enq as $script ) {
 	enqueueScriptFile ( $script );
 }
 ?>
-<?php combined_script_html();?>
+<?php combinedScriptHtml();?>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.min.js"></script>
 <script type="text/javascript">
@@ -96,7 +96,7 @@ foreach ( $styles as $style ) {
 	enqueueStylesheet ( $style );
 }
 
-combined_stylesheet_html ();
+combinedStylesheetHtml ();
 ?>
 <script type="text/javascript">
 $(document).ready(function(){
