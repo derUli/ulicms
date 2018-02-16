@@ -22,3 +22,4 @@ ulicms/content/custom_code/functions.php
 ulicms/content/modules/modstarter
 .modstarter
 ulicms/vendor/*
+.thumbs
