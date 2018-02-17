@@ -66,14 +66,14 @@ class AntiSpamHelper {
 		$str = strtolower ( $str );
 		
 		if ($words_blacklist) {
-			$words_blacklist = explode ( "||", $words_blacklist );
+			$words_blacklist = StringHelper::linesFromString($words_blacklist, false, true, true);
 		} else {
 			return null;
 		}
 		
 		for($i = 0; $i < count ( $words_blacklist ); $i ++) {
 			$word = strtolower ( $words_blacklist [$i] );
-			if (strpos ( $str, $word ) !== false) {
+			if (strpos ( strtolower ( $str ), $word ) !== false) {
 				return $words_blacklist [$i];
 			}
 		}
