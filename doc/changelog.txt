@@ -1,3 +1,8 @@
+===== Neues in UliCMS 2018.2.1 =====
+Verbesserungen:
++ Formularsystem verwendet nun die E-Mail Adresse aus den Grundeinstellungen als Absender,
+falls kein Feld für die E-Mail Adresse gesetzt ist.
+
 ===== Neues in UliCMS 2018.2 =====
 
 Neue Features:
