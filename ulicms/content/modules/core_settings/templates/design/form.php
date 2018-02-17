@@ -350,7 +350,7 @@ $("select#default-font").change(onChangeDefaultFont);
 
 <?php
 	enqueueScriptFile ( "scripts/design.js" );
-	combined_script_html ();
+	combinedScriptHtml ();
 	$_COOKIE?>
 <?php
 }

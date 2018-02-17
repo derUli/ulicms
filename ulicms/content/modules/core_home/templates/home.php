@@ -224,7 +224,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 </div>
 <?php 
 enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));
-combined_script_html();
+combinedScriptHtml();
 ?>
 <?php
 } else {

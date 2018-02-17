@@ -27,7 +27,7 @@ function getCombinedScripts() {
 						$content = implode ( "\n", $lines );
 						$output .= $content;
 						$output .= "\n";
-						if (filemtime ( $script ) > $lastmod){
+						if (filemtime ( $script ) > $lastmod) {
 							$lastmod = filemtime ( $script );
 						}
 					}
@@ -41,20 +41,28 @@ function getCombinedScripts() {
 	header ( "Content-Type: text/javascript" );
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
-	set_eTagHeaders ( $_GET ["output_scripts"], $lastmod);
+	set_eTagHeaders ( $_GET ["output_scripts"], $lastmod );
 	echo $output;
 	exit ();
 }
-function combined_script_html() {
-	echo get_combined_script_html ();
+function combinedScriptHtml() {
+	echo getCombinedScriptHtml ();
 }
-function get_combined_script_html() {
+function combined_script_html() {
+	trigger ( E_USER_DEPRECATED, "combined_script_html is deprecated" );
+	echo getCombinedScriptHtml ();
+}
+function getCombinedScriptHtml() {
 	$html = "";
 	if (isset ( $_SERVER ["script_queue"] ) and is_array ( $_SERVER ["script_queue"] ) and count ( $_SERVER ["script_queue"] ) > 0) {
 		$html = '<script src="' . getCombinedScriptURL () . '" type="text/javascript"></script>';
 	}
 	resetScriptQueue ();
 	return $html;
+}
+function get_combined_script_html() {
+	trigger ( E_USER_DEPRECATED, "combined_script_html is deprecated" );
+	return getCombinedScriptHtml ();
 }
 function getCombinedScriptURL() {
 	$output = "";
@@ -108,7 +116,7 @@ function getCombinedStylesheets() {
 						$output .= $content;
 						$output .= "\r\n";
 						$output .= "\r\n";
-						if (filemtime ( $script ) > $lastmod){
+						if (filemtime ( $script ) > $lastmod) {
 							$lastmod = filemtime ( $script );
 						}
 					}
@@ -138,16 +146,19 @@ function getCombinedStylesheets() {
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
 	
-	
-	set_eTagHeaders ( $_GET ["output_stylesheets"] , $lastmod );
+	set_eTagHeaders ( $_GET ["output_stylesheets"], $lastmod );
 	
 	echo $output;
 	exit ();
 }
-function combined_stylesheet_html() {
-	echo get_combined_stylesheet_html ();
+function combinedStylesheetHtml() {
+	echo getCombinedStylesheetHtml ();
 }
-function get_combined_stylesheet_html() {
+function combined_stylesheet_html() {
+	trigger ( E_USER_DEPRECATED, "combined_stylesheel_html is deprecated" );
+	echo combinedStylesheetHtml ();
+}
+function getCombinedStylesheetHtml() {
 	$html = "";
 	
 	if (isset ( $_SERVER ["stylesheet_queue"] ) and is_array ( $_SERVER ["stylesheet_queue"] ) and count ( $_SERVER ["stylesheet_queue"] ) > 0) {
@@ -155,6 +166,10 @@ function get_combined_stylesheet_html() {
 	}
 	resetStylesheetQueue ();
 	return $html;
+}
+function get_combined_stylesheet_html() {
+	trigger ( E_USER_DEPRECATED, "get_combined_stylesheet_html is deprecated" );
+	return getCombinedStylesheetHtml ();
 }
 function getCombinedStylesheetURL() {
 	$lastmod = 0;
