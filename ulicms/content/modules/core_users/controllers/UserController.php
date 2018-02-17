@@ -10,7 +10,7 @@ class UserController extends Controller {
 		$sendMail = isset ( $_POST ["send_mail"] );
 		$admin = intval ( isset ( $_POST ["admin"] ) );
 		$locked = intval ( isset ( $_POST ["locked"] ) );
-		$group_id = intval ( $_POST ["group_id"] );
+		$group_id = is_numeric ( $_POST ["group_id"] ) ? intval ( $_POST ["group_id"] ) : null;
 		if ($group_id <= 0) {
 			$group_id = null;
 		}
@@ -32,7 +32,7 @@ class UserController extends Controller {
 				$admin = intval ( isset ( $_POST ["admin"] ) );
 				if (isset ( $_POST ["group_id"] )) {
 					$group_id = $_POST ["group_id"];
-					if ($group_id == "-") {
+					if (! is_numeric ( $group_id )) {
 						$group_id = "NULL";
 					} else {
 						$group_id = intval ( $group_id );

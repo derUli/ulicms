@@ -1,12 +1,13 @@
 {
 	"source" : "extend",
-	"version" : "1.3",
+	"version" : "1.6",
 	"embed" : false,
 	"controllers" : {
 		"CoreUpgradeController" : "controllers/CoreUpgradeController"
 	},
 	"actions" : {
-		"UpgradeCheck" : "templates/UpgradeCheck"
+		"UpgradeCheck" : "templates/UpgradeCheck.php",
+			"CorruptedDownloadError" : "templates/errors/CorruptedDownloadError.php"
 	},
 	"action_controllers" : {
 		"UpgradeCheck" : "CoreUpgradeController"

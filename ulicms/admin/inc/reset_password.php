@@ -18,25 +18,30 @@ if (Settings::get ( "disable_password_reset" )) {
 		}
 	}
 	?>
+<p>
+	<a href="./" class="btn btn-default btn-back"><?php
+	
+	translate ( "back_to_login" );
+	?></a>
+</p>
 <h1>
 <?php translate("reset_password");?>
 </h1>
-<p>
-	<a href="./">[<?php	translate ( "back_to_login" );?>]</a>
-</p>
 <form action="index.php?reset_password" method="post">
 <?php
 	csrf_token_html ();
-	?>
+	?><p>
 		<strong><?php
 	
 	translate ( "username" );
 	?>
 	</strong> <br /> <input type="text" name="username" value="" required>
-	<br /> <br />
-	<button type="submit" class="btn btn-warning"><?php
+	</p>
+	<p>
+		<button type="submit" class="btn btn-warning"><?php
 	translate ( "reset_password" );
 	?></button>
+	</p>
 		<?php
 	if ($message) {
 		?>

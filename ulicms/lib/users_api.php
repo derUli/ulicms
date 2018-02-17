@@ -135,7 +135,6 @@ function register_session($user, $redirect = true) {
 	return;
 }
 function validate_login($user, $password, $token = null) {
-	require_once ULICMS_ROOT . "/classes/objects/security/GoogleAuthenticator.php";
 	$user = getUserByName ( $user );
 	
 	if ($user) {

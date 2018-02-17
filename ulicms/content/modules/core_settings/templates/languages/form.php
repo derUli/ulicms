@@ -3,6 +3,11 @@ $acl = new ACL ();
 if ($acl->hasPermission ( "languages" )) {
 	$languages = Language::getAllLanguages ();
 	?>
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h2><?php translate("languages");?></h2>
 <?php echo ModuleHelper::buildMethodCallForm("LanguageController", "create");?>
 <div class="scroll">

@@ -4,8 +4,15 @@ if ($acl->hasPermission ( "expert_settings" )) {
 	$data = Settings::getAll ();
 	if ($acl->hasPermission ( "expert_settings_edit" )) {
 		?>
+		
 <p>
-	<a href="<?php echo ModuleHelper::buildActionURL("settings_edit");?>"><?php translate("create_option");?></a>
+	<a href="<?php echo ModuleHelper::buildActionURL("settings_simple");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
+<h1><?php translate("settings")?></h1>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("settings_edit");?>"
+		class="btn btn-default"><?php translate("create_option");?></a>
 </p>
 <?php }?>
 <p><?php BackendHelper::formatDatasetCount(count($data));?></p>
@@ -40,7 +47,7 @@ if ($acl->hasPermission ( "expert_settings" )) {
 				<td>
 				<?php
 				
-echo ModuleHelper::deleteButton ( ModuleHelper::buildMethodCallUrl ( "ExpertSettingsController", "delete" ), array (
+				echo ModuleHelper::deleteButton ( ModuleHelper::buildMethodCallUrl ( "ExpertSettingsController", "delete" ), array (
 						"name" => $row->name 
 				) );
 				?>

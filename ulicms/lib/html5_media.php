@@ -11,10 +11,12 @@ function replaceAudioTags($txt) {
 			$code1 = "[audio id=\"" . $row->id . "\"]";
 			$code2 = "[audio id=$quot;" . $row->id . "$quot;]";
 			$code3 = "[audio id=" . $row->id . "]";
-			if (! empty ( $row->mp3_file ))
+			if (! empty ( $row->mp3_file )){
 				$preferred = $row->mp3_file;
-			else
+			}
+			else{
 				$preferred = $row->ogg_file;
+			}
 			
 			$html = '<audio controls>';
 			if (! empty ( $row->mp3_file )) {
@@ -34,7 +36,6 @@ function replaceAudioTags($txt) {
 			$txt = str_replace ( $code3, $html, $txt );
 		}
 	}
-	
 	return $txt;
 }
 function replaceVideoTags($txt) {
@@ -49,12 +50,15 @@ function replaceVideoTags($txt) {
 			$code1 = "[video id=\"" . $row->id . "\"]";
 			$code2 = "[video id=$quot;" . $row->id . "$quot;]";
 			$code3 = "[video id=" . $row->id . "]";
-			if (! empty ( $row->mp4_file ))
+			if (! empty ( $row->mp4_file )){
 				$preferred = $row->mp4_file;
-			else if (! empty ( $row->ogg_file ))
+			}
+			else if (! empty ( $row->ogg_file )){
 				$preferred = $row->ogg_file;
-			else
+			}
+			else{
 				$preferred = $row->webm_file;
+			}
 			
 			$html = '<video width="' . $row->width . '" height="' . $row->height . '" controls>';
 			if (! empty ( $row->mp4_file )) {

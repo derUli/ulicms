@@ -4,8 +4,14 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 	$admin = intval ( $_GET ["admin"] );
 	$languages = getAvailableBackendLanguages ();
 	$query = db_query ( "SELECT * FROM " . tbname ( "users" ) . " WHERE id='$admin'" );
+	$ref = _esc ( Request::getVar ( "ref", "home" ) );
+	
 	while ( $row = db_fetch_object ( $query ) ) {
 		?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("admins");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <form action="index.php?sClass=UserController&sMethod=update"
 	name="userdata_form" method="post" enctype="multipart/form-data"
 	id="edit_user" autocomplete="off">
@@ -13,11 +19,12 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 	<img src="<?php
 		echo get_gravatar ( $row->email, 200 );
 		?>"
-		alt="Avatar Image" /> <br /> <br /> <input type="hidden"
-		name="edit_admin" value="edit_admin"> <input type="hidden" name="id"
+		alt="Avatar Image" /> <br /> <input type="hidden" name="edit_admin"
+		value="edit_admin"> <input type="hidden" name="id"
 		value="<?php
 		echo $row->id;
-		?>"> <strong><?php translate("username");?></strong><br /> <input
+		?>"> <br /> <br />
+	<strong><?php translate("username");?></strong><br /> <input
 		type="text" name="admin_username"
 		value="<?php echo real_htmlspecialchars($row->username);?>"
 		<?php
@@ -25,23 +32,23 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 			?>
 		readonly="readonly" <?php
 		}
-		?>> <br /> <br /> <strong><?php translate("lastname");?></strong><br />
-	<input type="text" name="admin_lastname"
+		?>> <br /> <strong><?php translate("lastname");?></strong><br /> <input
+		type="text" name="admin_lastname"
 		value="<?php
 		
 		echo real_htmlspecialchars ( $row->lastname );
-		?>"> <br /> <br /> <strong><?php translate("firstname");?></strong><br />
-	<input type="text" name="admin_firstname"
+		?>"> <br /> <strong><?php translate("firstname");?></strong><br /> <input
+		type="text" name="admin_firstname"
 		value="<?php
 		
 		echo real_htmlspecialchars ( $row->firstname );
 		?>"
-		required="required"><br /> <br /> <strong><?php translate("email");?></strong><br />
+		required="required"><br /> <strong><?php translate("email");?></strong><br />
 	<input type="email" name="admin_email"
 		value="<?php
 		
 		echo real_htmlspecialchars ( $row->email );
-		?>"><br /> <br /> <strong><?php translate("last_login");?></strong><br />
+		?>"><br /> <strong><?php translate("last_login");?></strong><br />
 			<?php
 		if (is_null ( $row->last_login )) {
 			translate ( "never" );
@@ -49,9 +56,10 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 			echo strftime ( "%x %X", $row->last_login );
 		}
 		
-		?><br /> <br /> <strong><?php translate("new_password");?></strong><br />
-	<input type="password" name="admin_password" id="admin_password"
-		value="" autocomplete="off"><br /> <br /> <strong><?php translate("password_repeat");?></strong><br />
+		?><br /> <br />
+	<strong><?php translate("new_password");?></strong><br /> <input
+		type="password" name="admin_password" id="admin_password" value=""
+		autocomplete="off"><br /> <strong><?php translate("password_repeat");?></strong><br />
 	<input type="password" name="admin_password_repeat"
 		id="admin_password_repeat" value="" autocomplete="off"> <br />
 	<?php
@@ -59,8 +67,7 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 		if ($acl->hasPermission ( "users" )) {
 			$allGroups = $acl->getAllGroups ();
 			asort ( $allGroups );
-			?>
-	<br> <strong><?php translate("usergroup");?></strong> <br /> <select
+			?> <strong><?php translate("usergroup");?></strong> <br /> <select
 		name="group_id">
 		<option value="-"
 			<?php
@@ -115,14 +122,14 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 		translate ( "homepage" );
 		?></strong> <br /> <input type="url" name="homepage"
 		value="<?php echo real_htmlspecialchars($row -> homepage);?>"> <br />
-	<br /> <strong><?php
+	<strong><?php
 		
 		translate ( "twitter_profile" );
 		?></strong> <br /> <input type="text" name="twitter"
-		value="<?php echo real_htmlspecialchars($row -> twitter);?>"> <br /> <br />
+		value="<?php echo real_htmlspecialchars($row -> twitter);?>"> <br />
 	<strong><?php translate("skype");?></strong> <br /> <input type="text"
 		name="skype_id"
-		value="<?php echo real_htmlspecialchars($row -> skype_id);?>"> <br />
+		value="<?php echo real_htmlspecialchars($row -> skype_id);?>">
 	<br /> <strong><?php translate("html_editor");?></strong> <br /> <select
 		name="html_editor">
 		<option value="ckeditor"
@@ -202,7 +209,7 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 		?>
 	</select> <br /> <br /> <strong><?php translate("about_me");?></strong><br />
 	<textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row->about_me)?></textarea>
-	<br /> <br />
+	<br /> 
 	<button type="submit" class="btn btn-success"><?php translate ( "OK" );?></button>
 </form>
 

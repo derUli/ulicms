@@ -719,4 +719,6 @@ define ( "TRANSLATION_COUNT", "Anzahl" );
 define ( "TRANSLATION_INVALID_TOKEN", "Ungültiger Token" );
 define ( "TRANSLATION_NOT_AN_EMBED_MODULE", "Kein Embed Modul" );
 
+define ( "TRANSLATION_MIN_TIME_TO_FILL_FORM", "Minimale Zeit um ein Formular auszufüllen (Sekunden, 0 = aus)" );
+
 add_hook ( "lang_de" );

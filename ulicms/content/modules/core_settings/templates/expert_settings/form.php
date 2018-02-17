@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL ();
-if ($acl->hasPermission ( "expert_settings" ) and $acl->hasPermission ( "expert_settings_create" )) {
+if ($acl->hasPermission ( "expert_settings" ) and $acl->hasPermission ( "expert_settings_edit" )) {
 	$name = "";
 	$value = "";
 	if (Request::hasVar ( "name" )) {
@@ -12,6 +12,11 @@ if ($acl->hasPermission ( "expert_settings" ) and $acl->hasPermission ( "expert_
 	}
 	?>
 <?php echo ModuleHelper::buildMethodCallForm("ExpertSettingsController", "save");?>
+
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("settings");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <strong><?php translate("option");?></strong>
 <br />
 <input type="text" name="name" value="<?php Template::escape($name)?>"

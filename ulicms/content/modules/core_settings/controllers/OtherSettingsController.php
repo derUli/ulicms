@@ -5,10 +5,6 @@ class OtherSettingsController extends Controller {
 			setconfig ( "cache_period", intval ( $_POST ["cache_period"] ) * 60 );
 		}
 		
-		if (isset ( $_POST ["cache_type"] )) {
-			setconfig ( "cache_type", db_escape ( $_POST ["cache_type"] ) );
-		}
-		
 		if (isset ( $_POST ["email_mode"] ))
 			setconfig ( "email_mode", db_escape ( $_POST ["email_mode"] ) );
 		

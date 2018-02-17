@@ -1,2 +1,2 @@
 @echo off
-phpunit --bootstrap .\init.php tests/
+vendor/bin/phpunit --bootstrap .\init.php tests/

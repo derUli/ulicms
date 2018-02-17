@@ -3,7 +3,10 @@ if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( $_GET ["action"] )) {
 		?>
-
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("media");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h2>
 <?php translate("media"); ?>
 </h2>

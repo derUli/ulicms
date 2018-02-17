@@ -36,6 +36,9 @@ class SpamFilterController extends Controller {
 		} else {
 			Settings::delete ( "disallow_cyrillic_chars" );
 		}
+		
+		Settings::set ( "min_time_to_fill_form", Request::getVar ( "min_time_to_fill_form", 0, "int" ) );
+		
 		add_hook ( "after_save_spamfilter_settings" );
 		Request::redirect ( ModuleHelper::buildActionURL ( "spam_filter" ) );
 	}

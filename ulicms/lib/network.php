@@ -71,7 +71,6 @@ if (! function_exists ( "get_host" )) {
 	function get_host() {
 		if ($host = $_SERVER ['HTTP_X_FORWARDED_HOST']) {
 			$elements = explode ( ',', $host );
-
 			$host = trim ( end ( $elements ) );
 		} else {
 			if (! $host = $_SERVER ['HTTP_HOST']) {

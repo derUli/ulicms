@@ -41,6 +41,9 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
 	if (! check_csrf_token ()) {
 		die ( "This is probably a CSRF attack!" );
 	}
+	if (Settings::get ( "min_time_to_fill_form", "int" ) > 0) {
+		check_form_timestamp ();
+	}
 }
 
 if (Settings::get ( "check_for_spamhaus" ) and checkForSpamhaus ()) {
@@ -153,7 +156,6 @@ if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
 
 add_hook ( "after_functions" );
 
-$cached_page_path = buildCacheFilePath ( $_SERVER ['REQUEST_URI'] );
 $hasModul = containsModule ( get_requested_pagename () );
 
 $cache_control = get_cache_control ();
@@ -178,67 +180,26 @@ if (is_logged_in () and get_cache_control () == "auto") {
 
 add_hook ( "before_html" );
 
-$c = Settings::get ( "cache_type" );
-switch ($c) {
-	case "cache_lite" :
-		@include "Cache/Lite.php";
-		$cache_type = "cache_lite";
-		
-		break;
-	case "file" :
-	default :
-		$cache_type = "file";
-		break;
-		break;
+$cacheAdapter = null;
+if (CacheUtil::isCacheEnabled () and Request::isGet () and ! Flags::getNoCache ()) {
+	$cacheAdapter = CacheUtil::getAdapter ();
 }
-
-if (file_exists ( $cached_page_path ) and ! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
-	$cached_content = file_get_contents ( $cached_page_path );
-	$last_modified = filemtime ( $cached_page_path );
+$uid = CacheUtil::getCurrentUid ();
+if ($cacheAdapter and $cacheAdapter->get ( $uid )) {
+	echo $cacheAdapter->get ( $uid );
 	
-	if ($cached_content and (time () - $last_modified < CACHE_PERIOD) and ! Flags::getNoCache ()) {
-		eTagFromString ( $cached_content );
-		browsercacheOneDay ( $last_modified );
-		echo $cached_content;
-		
-		if (Settings::get ( "no_auto_cron" )) {
-			die ();
-		}
-		
-		add_hook ( "before_cron" );
-		@include 'cron.php';
-		add_hook ( "after_cron" );
+	if (Settings::get ( "no_auto_cron" )) {
 		die ();
 	}
+	
+	add_hook ( "before_cron" );
+	@include 'cron.php';
+	add_hook ( "after_cron" );
+	die ();
 }
 
-if (! Settings::get ( "cache_disabled" ) and getenv ( 'REQUEST_METHOD' ) == "GET" and ! file_exists ( $cached_page_path ) and $cache_type === "file") {
+if ($cacheAdapter or Settings::get ( "minify_html" )) {
 	ob_start ();
-} else if (file_exists ( $cached_page_path )) {
-	$last_modified = filemtime ( $cached_page_path );
-	if (time () - $last_modified < CACHE_PERIOD) {
-		ob_start ();
-	}
-}
-
-$id = md5 ( $_SERVER ['REQUEST_URI'] . $_SESSION ["language"] . strbool ( is_mobile () ) );
-
-if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "cache_lite") {
-	$options = array (
-			'lifeTime' => Settings::get ( "cache_period" ),
-			'cacheDir' => "content/cache/" 
-	);
-	
-	if (! class_exists ( "Cache_Lite" )) {
-		throw new Exception ( "Fehler:<br/>Cache_Lite ist nicht installiert. Bitte stellen Sie den Cache bitte wieder auf Datei-Modus um." );
-	}
-	$Cache_Lite = new Cache_Lite ( $options );
-	
-	if ($data = $Cache_Lite->get ( $id )) {
-		die ( $data );
-	} else {
-		ob_start ();
-	}
 }
 
 $html_file = page_has_html_file ( get_requested_pagename () );
@@ -299,53 +260,35 @@ if ($html_file) {
 
 add_hook ( "after_html" );
 
-if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and $cache_type === "cache_lite") {
-	$data = ob_get_clean ();
-	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache ()) {
-		$Cache_Lite->save ( $data, $id );
+// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
+
+if ($cacheAdapter or Settings::get ( "minify_html" )) {
+	$generatedHtml = ob_get_clean ();
+	$generatedHtml = normalizeLN ( $generatedHtml, "\n" );
+	if (Settings::get ( "minify_html" )) {
+		$generatedHtml = preg_replace ( '/^\h*\v+/m', '', $generatedHtml );
+		
+		$posBegin = strpos ( $generatedHtml, "<html" );
+		$posEnd = strpos ( $generatedHtml, "</head>" );
+		$posLength = $posEnd - $posBegin;
+		$head = substr ( $generatedHtml, $posBegin, $posLength + strlen ( "</head>" ) );
+		$head = str_replace ( "\n", "", $head );
+		
+		$generatedHtml = $head . substr ( $generatedHtml, $posEnd + strlen ( "</head>" ) + 1 );
+		$generatedHtml = str_replace ( "</body>\n</html>", "</body></html>", $generatedHtml );
 	}
+	echo $generatedHtml;
 	
-	eTagFromString ( $data );
-	browsercacheOneDay ();
-	echo $data;
-	
-	if (Settings::get ( "no_auto_cron" )) {
-		die ();
+	if ($cacheAdapter and ! defined ( "EXCEPTION_OCCURRED" )) {
+		$cacheAdapter->set ( $uid, $generatedHtml, CacheUtil::getCachePeriod () );
 	}
-	add_hook ( "before_cron" );
-	@include 'cron.php';
-	add_hook ( "after_cron" );
-	die ();
 }
 
-if (! Settings::get ( "cache_disabled" ) and ! Flags::getNoCache () and getenv ( 'REQUEST_METHOD' ) == "GET" and $cache_type === "file") {
-	$generated_html = ob_get_clean ();
-	
-	if (! defined ( "EXCEPTION_OCCURRED" ) and ! Flags::getNoCache ()) {
-		$handle = fopen ( $cached_page_path, "wb" );
-		fwrite ( $handle, $generated_html );
-		fclose ( $handle );
-	}
-	
-	eTagFromString ( $generated_html );
-	browsercacheOneDay ();
-	echo ($generated_html);
-	
-	// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
-	if (Settings::get ( "no_auto_cron" )) {
-		die ();
-	}
-	add_hook ( "before_cron" );
-	@include 'cron.php';
-	add_hook ( "after_cron" );
-	die ();
-} else {
-	if (Settings::get ( "no_auto_cron" )) {
-		die ();
-	}
-	add_hook ( "before_cron" );
-	@include 'cron.php';
-	add_hook ( "after_cron" );
+if (Settings::get ( "no_auto_cron" )) {
 	die ();
 }
+add_hook ( "before_cron" );
+@include 'cron.php';
+add_hook ( "after_cron" );
+die ();
+

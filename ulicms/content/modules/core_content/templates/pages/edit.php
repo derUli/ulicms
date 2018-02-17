@@ -1,5 +1,5 @@
 <?php
-include_once ULICMS_ROOT . "/classes/objects/content/vcs.php";
+include_once ULICMS_ROOT . "/classes/objects/content/VCS.php";
 if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "pages" )) {
@@ -85,9 +85,12 @@ if (defined ( "_SECURITY" )) {
 				?>
 		<?php
 				echo ModuleHelper::buildMethodCallForm ( "PageController", "edit", array (), "post", array (
-						"id" => "pageform"
+						"id" => "pageform-edit"
 				) );
-				?>
+				?><p>
+	<a href="<?php echo ModuleHelper::buildActionURL("pages");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <input type="hidden" name="edit_page" value="edit_page">
 <input type="hidden" name="page_id" id="page_id"
 	value="<?php echo $row -> id?>">
@@ -102,7 +105,7 @@ if (defined ( "_SECURITY" )) {
 			value="<?php
 
 				echo htmlspecialchars ( $row->systemname );
-				?>"> <br /> <br /> <strong><?php translate("page_title");?> </strong><br />
+				?>"> <br /> <strong><?php translate("page_title");?> </strong><br />
 		<input type="text" name="page_title"
 			value="<?php
 				echo htmlspecialchars ( $row->title );
@@ -116,7 +119,7 @@ if (defined ( "_SECURITY" )) {
 				value="<?php
 				echo htmlspecialchars ( $row->alternate_title );
 
-				?>"><br /> <small><?php
+				?>"> <small><?php
 
 				echo translate ( "ALTERNATE_TITLE_INFO" );
 				?> </small> <br /> <br /> <strong><?php translate("show_headline");?></strong>
@@ -212,7 +215,7 @@ if (defined ( "_SECURITY" )) {
 				?>
 	</div>
 
-			<br /> <br />
+			<br />
 			<div class="typedep" id="parent-div">
 				<strong><?php translate("parent");?> </strong><br /> <select
 					name="parent" size=1>
@@ -290,10 +293,10 @@ if (defined ( "_SECURITY" )) {
 
 		</div>
 	<div class="typedep" id="tab-link">
-		<h2 class="accordion-header"><?php translate("external_redirect");?></h2>
+		<h2 class="accordion-header"><?php translate("link_url");?></h2>
 
 		<div class="accordion-content">
-			<strong><?php translate("external_redirect");?></strong><br /> <input
+			<strong><?php translate("link_url");?></strong><br /> <input
 				type="text" name="redirection"
 				value="<?php
 
@@ -325,7 +328,6 @@ if (defined ( "_SECURITY" )) {
 
 		<div class="accordion-content">
 			<strong><?php translate("menu_image");?> </strong><br />
-
 			<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
@@ -346,7 +348,7 @@ function openMenuImageSelectWindow(field) {
 
 				echo $row->menu_image;
 				?>"
-				style="cursor: pointer" /><br /> <a href="#"
+				style="cursor: pointer" /> <a href="#"
 				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
 			<br /> <br /> <strong><?php translate("design");?></strong><br /> <select
 				name="theme" size=1>
@@ -435,7 +437,7 @@ function openMenuImageSelectWindow(field) {
 				value="<?php
 				echo htmlspecialchars ( $row->meta_description );
 				?>"
-				maxlength="200"> <br /> <br /> <strong><?php translate("meta_keywords");?></strong><br />
+				maxlength="200"> <br /> <strong><?php translate("meta_keywords");?></strong><br />
 			<input type="text" name="meta_keywords"
 				value="<?php
 				echo htmlspecialchars ( $row->meta_keywords );
@@ -445,15 +447,15 @@ function openMenuImageSelectWindow(field) {
 				<br /> <strong><?php translate("author_name");?></strong><br /> <input
 					type="text" name="article_author_name"
 					value="<?php echo real_htmlspecialchars($row->article_author_name);?>"
-					maxlength="80"> <br /> <br /> <strong><?php translate("author_email");?></strong><br />
+					maxlength="80"> <br /> <strong><?php translate("author_email");?></strong><br />
 				<input type="email" name="article_author_email"
 					value="<?php echo real_htmlspecialchars($row->article_author_email);?>"
-					maxlength="80"> <br /> <br />
+					maxlength="80"> <br />
 				<div id="comment-fields">
 					<strong><?php translate("homepage");?></strong><br /> <input
 						type="url" name="comment_homepage"
 						value="<?php echo real_htmlspecialchars($row->comment_homepage);?>"
-						maxlength="255"> <br /> <br />
+						maxlength="255"> <br />
 				</div>
 				<strong><?php translate("article_date");?></strong><br /> <input
 					name="article_date" type="datetime-local"
@@ -560,15 +562,15 @@ function openMenuImageSelectWindow(field) {
 		</strong><br /> <input type="text" name="og_title"
 					value="<?php
 				echo htmlspecialchars ( $row->og_title );
-				?>"> <br /> <br /> <strong><?php translate("description");?>
+				?>"> <br /> <strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description"
 					value="<?php
 				echo htmlspecialchars ( $row->og_description );
-				?>""> <br /> <br /> <strong><?php translate("type");?>
+				?>""> <br /> <strong><?php translate("type");?>
 		</strong><br /> <input type="text" name="og_type"
 					value="<?php
 				echo htmlspecialchars ( $row->og_type );
-				?>"> <br /> <br /> <strong><?php translate("image");?></strong> <br />
+				?>"> <br /> <strong><?php translate("image");?></strong> <br />
 				<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
@@ -588,7 +590,7 @@ function openMenuImageSelectWindow(field) {
 					value="<?php
 				echo htmlspecialchars ( $row->og_image );
 				?>"
-					style="cursor: pointer" /><br /> <a href="#"
+					style="cursor: pointer" /> <a href="#"
 					onclick="$('#og_image').val('');return false;"><?php translate("clear");?>
 		</a>
 		<?php
@@ -747,7 +749,7 @@ function openMenuImageSelectWindow(field) {
 					<?php if($list_data->order_direction=== "desc") echo ' selected';?>><?php translate("desc");?></option>
 			</select> <br /> <br /> <strong><?php translate("limit");?></strong>
 			<input type="number" name="limit" min="0" step="1"
-				value="<?php echo intval($list_data->limit);?>"> <br /> <br /> <strong><?php translate ( "use_pagination" );?></strong><br />
+				value="<?php echo intval($list_data->limit);?>"> <br /> <strong><?php translate ( "use_pagination" );?></strong><br />
 			<select name="list_use_pagination">
 				<option value="1"
 					<?php if($list_data->use_pagination) echo "selected";?>><?php translate("yes")?></option>
@@ -811,7 +813,7 @@ function openMenuImageSelectWindow(field) {
 			<input type="text" id="image_url" name="image_url"
 				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 				value="<?php Template::escape($row->image_url);?>"
-				style="cursor: pointer" /><br /> <a href="#"
+				style="cursor: pointer" /> <a href="#"
 				onclick="$('#menu_image').val('');return false;"><?php translate ( "clear" );?>
 		</a>
 		</div>
@@ -861,7 +863,7 @@ function openArticleImageSelectWindow(field) {
 			<input type="text" id="article_image" name="article_image"
 				readonly="readonly" onclick="openArticleImageSelectWindow(this)"
 				value="<?php echo real_htmlspecialchars($row->article_image);?>"
-				style="cursor: pointer" maxlength="255" /><br /> <a href="#"
+				style="cursor: pointer" maxlength="255" /> <a href="#"
 				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 		</div>
 	</div>
@@ -924,13 +926,14 @@ function openArticleImageSelectWindow(field) {
 
 
 <div class="typedep" id="content-editor">
-	<textarea name="page_content" id="page_content" cols=60 rows=20><?php
+	<p>
+		<textarea name="page_content" id="page_content" cols=60 rows=20><?php
 
 				echo htmlspecialchars ( $row->content );
 				?></textarea>
 		<?php
 				$editor = get_html_editor ();
-   			if ($editor === "ckeditor") {
+				if ($editor === "ckeditor") {
 					?>
 		<script type="text/javascript">
 var editor = CKEDITOR.replace( 'page_content',
@@ -1020,21 +1023,59 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		        tabMode: "shift"});
 </script>
 <?php }?>
-		<noscript>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<noscript>
 		<p style="color: red;">
 			Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
 				href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
 		</p>
 
 	</noscript>
+	</p>
 		<?php
 
 				$rev = vcs::getRevisionsByContentID ( $row->id );
 				if (count ( $rev ) > 0) {
 					?>
 		<p>
-		[<a
-			href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"><?php translate("restore_older_version");?></a>]
+		<a
+			href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"
+			class="btn btn-warning"><?php translate("restore_older_version");?></a>
 	</p>
 		<?php }?>	</div>
 <div class="inPageMessage">
@@ -1051,31 +1092,12 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		<button class="typedep btn btn-info" type="button" id="btn-view-page"><?php translate("view");?></button>
 	</div>
 </div>
-<script src="scripts/page.js" type="text/javascript">
 </script>
-
+<?php
+				enqueueScriptFile ( "scripts/page.js" );
+				combined_script_html ();
+				?>
 </form>
-
-<script type="text/javascript">
-$("#pageform").ajaxForm({beforeSubmit: function(e){
-  $("#message_page_edit").html("");
-  $("#message_page_edit").hide();
-  $(".loading").show();
-  }, beforeSerialize:function($Form, options){
-        /* Before serialize */
-        for ( instance in CKEDITOR.instances ) {
-            CKEDITOR.instances[instance].updateElement();
-        }
-        return true;
-    },
-  success:function(e){
-  $(".loading").hide();
-  $("#message_page_edit").html("<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
-  $("#message_page_edit").show();
-  }
-
-});
-</script>
 <?php
 				break;
 			}

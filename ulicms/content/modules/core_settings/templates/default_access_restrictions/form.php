@@ -6,6 +6,11 @@ if ($acl->hasPermission ( "default_access_restrictions_edit" )) {
 	$only_owner_can_edit = intval ( Settings::get ( "only_owner_can_edit" ) );
 	$only_others_can_edit = intval ( Settings::get ( "only_others_can_edit" ) );
 	?>
+
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("other_settings");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("DEFAULT_ACCESS_RESTRICTIONS");?></h1>
 <?= ModuleHelper::buildMethodCallForm("DefaultAccessRestrictionsController", "save");?>
 <input type="checkbox" name="only_admins_can_edit"

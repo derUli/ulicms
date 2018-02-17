@@ -3,7 +3,7 @@ function jumbotron_get_menu($name = "top", $parent = null, $recursive = true, $o
 	$html = "";
 	$name = db_escape ( $name );
 	$language = $_SESSION ["language"];
-	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent ";
+	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target, position FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND parent ";
 	
 	if (is_null ( $parent )) {
 		$sql .= " IS NULL ";
@@ -44,20 +44,25 @@ function jumbotron_get_menu($name = "top", $parent = null, $recursive = true, $o
 			} else {
 				$html .= "  <li class='active" . rtrim ( $additional_classes ) . "'>";
 			}
-			if (! empty ( $row->alternate_title )) {
-				$title = $row->alternate_title;
-			} else {
-				$title = $row->title;
+			
+			$title = $row->title;
+			// Show page positions in menu if user has the "pages_show_positions" permission.
+			if (is_logged_in ()) {
+				$acl = new ACL ();
+				if ($acl->hasPermission ( "pages_show_positions" )) {
+					$title .= " ({$row->position})";
+				}
 			}
+			
 			if (get_requested_pagename () != $row->systemname) {
 				$html .= "<a href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "' class='" . trim ( $additional_classes ) . "'>";
 			} else {
 				$html .= "<a class='active" . rtrim ( $additional_classes ) . "' href='" . buildSEOUrl ( $row->systemname, $row->redirection ) . "' target='" . $row->target . "'>";
 			}
 			if (! is_null ( $row->menu_image ) and ! empty ( $row->menu_image )) {
-				$html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities ( $row->title, ENT_QUOTES, "UTF-8" ) . '"/>';
+				$html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities ( $title, ENT_QUOTES, "UTF-8" ) . '"/>';
 			} else {
-				$html .= htmlentities ( $row->title, ENT_QUOTES, "UTF-8" );
+				$html .= htmlentities ( $title, ENT_QUOTES, "UTF-8" );
 			}
 			$html .= "</a>\n";
 			

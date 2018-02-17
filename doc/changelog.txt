@@ -1,4 +1,55 @@
+===== Neues in UliCMS 2018.2 =====
+
+Neue Features:
++ Zurück-Buttons im Backend eingefügt
++ Weitere Verbesserungen in der Backend-Navigation
++ Neue Methode gegen Formularspam
++ Steuerelemente mit Bootstrap und Select2 modernisiert
++ core_forms: Spamfilter integriert
++ file_get_contents_wrapper: Checksum-Prüfung implementiert
++ Eigenes Template für Fehlerseiten (Exceptions) möglich
++ Settings::mappingStringToArray($str) unterstützt nun Kommentare
++ Verbindung zur Datenbank per Socket möglich
++ Port zu Datenbank-Server kann nun angegeben werden
++ Zeige Positionen im Menü für Benutzer mit der Berechtigung "pages_show_positions"
++ oneclick_upgrade auf Version 1.6 aktualisiert
++ Mobile_Detect auf Version 2.8.30 aktualisiert
++ update_manager auf Version 1.0.5 aktualisiert
++ YaLinqo hinzugefügt (Yet Another LINQ to Objects for PHP)
+
+Neue Funktionen:
++ is_true($var)
++ is_false($var)
++ StringHelper::linesFromString($str, $trim = true, $removeEmpty = true, $removeComments = true)
++ StringHelper::linesFromFile($file, $trim = true, $removeEmpty = true, $removeComments = true)
++ AntiSpamHelper::isSpamFilterEnabled()
++ Result($data, $status = 200, $type = null)
+
+Verbesserungen:
+* Action pkginfo in core_package_manager: Button nun mit Bootstrap Style
+* Button "Liste zurücksetzen" unter "Installierte Patches" nun mit Bootstrap Style
+* Der Caching-Code wurde aufgeräumt. Doppelter Code entfernt.
+* Caching erfolgt nun durch PhpFastCache
+* "Anzeigen" unter "Seite bearbeiten" öffnet in neuem Tab, wenn ungespeicherte Änderungen vorhanden sind,
+ansonsten im selben Tab
+
+Bugfixes:
+* Fehlerhafte Berechtigungsprüfung in core_settings korrigiert
+* Favicon-Metatag wird auch ausgegeben wenn "hide_meta_generator" gesetzt ist
+* Alternative Überschrift wurde nicht im Frontend angezeigt
+* core_content - Werbebanner Liste: Anzahl der Ergebnisse wird wieder angezeigt
+* core_content - Werbebanner: Neu erstellte Werbebanner mit der Sprache "Alle" wurden nicht angezeigt
+* core_users - Es ist nun wieder möglich einen User ohne Gruppe anzulegen.
+* Seiten vom Typ "Liste" zeigen nun keine gelöschten Datensätze mehr an.
+* Bei der Installation von SimpleInstall v2 Paketen ohne Abhängigkeiten funktionierte die Prüfung, ob die UliCMS Version unterstützt wird nicht.
+
+Entfernte Features:
+* E-Mail Versandmethode "PEAR Mail" entfernt.
+  In einer zukünftigen Version wird stattdessen PHPMailer integriert
+  Dies geschieht voraussichtlich im Release 2018.3
+
 ===== Neues in UliCMS 2018.1.1 =====
+
 + Neue Funktionen:
   * bool2YesNo($value, $yesString = null, $noString = null)
 
@@ -7,6 +58,7 @@ Bugfixes:
 * Unnötige Debug Ausgabe entfernt
 
 ===== Neues in UliCMS 2018.1 =====
+
 + Teile des Backends wurden in Core-Module verschoben und in ein MVC-Pattern umstrukturiert
 + Module können nun Inhaltstypen mit eigenen Formularfeldern erstellen
 + Neuer Parameter $htmlAttributes (Array) zu der Funktion ModuleHelper::buildMethodCallForm() hinzugefügt

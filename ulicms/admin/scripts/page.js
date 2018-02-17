@@ -9,8 +9,10 @@ function showAndHideFieldsByType() {
 	}
 
 	if ($("#type_snippet").is(":checked")) {
-		$("select[name='hidden']").val("1");
-		$("select[name='menu']").val("none");
+		unbindEvents();
+		$("select[name='hidden']").val("1").trigger("change");
+		$("select[name='menu']").val("not_in_menu").trigger("change");
+		bindEvents();
 	}
 
 	$(".custom-field-tab").each(function(index, el) {
@@ -28,7 +30,7 @@ function showAndHideFieldsByType() {
 		$("#btn-view-page").slideDown();
 	}
 
-	if ($("select[name='menu']").val() == "none") {
+	if ($("select[name='menu']").val() == "not_in_menu") {
 		$("#parent-div").slideUp();
 	} else {
 
@@ -36,8 +38,20 @@ function showAndHideFieldsByType() {
 	}
 }
 
-$("input[name=\"type\"]").change(showAndHideFieldsByType);
-$("select[name='menu']").change(showAndHideFieldsByType);
+function bindEvents() {
+	$("input[name=\"type\"]").change(showAndHideFieldsByType);
+	$("select[name='menu']").change(showAndHideFieldsByType);
+	$("select[name='menu']").select2("destroy").select2({
+		"width" : "100%"
+	});
+
+}
+
+function unbindEvents() {
+	$("input[name=\"type\"]").off("change");
+	$("select[name='menu']").off("change");
+
+}
 
 $(document).ready(function() {
 	var data = {
@@ -49,6 +63,7 @@ $(document).ready(function() {
 		showAndHideFieldsByType();
 	});
 
+	bindEvents();
 });
 
 function systemname_vorschlagen(txt) {
@@ -120,11 +135,40 @@ $(function() {
 
 	$("#btn-view-page").click(function() {
 		var url = "../?goid=" + $("#page_id").val();
-		window.open(url);
+		// if page has unsaved changes open it in new window/tab
+		// else open it in the same window/tab
+		if (formchanged && !submitted) {
+			window.open(url);
+		} else {
+			location.href = url;
+		}
 	})
 
 	systemnameOrLanguageChanged($("input[name='system_title']"));
 	systemnameOrLanguageChanged($("select[name='language']"));
 
 	filterParentPages();
+	$("#pageform-edit")
+			.ajaxForm(
+					{
+						beforeSubmit : function(e) {
+							$("#message_page_edit").html("");
+							$("#message_page_edit").hide();
+							$(".loading").show();
+						},
+						beforeSerialize : function($Form, options) {
+							/* Before serialize */
+							for (instance in CKEDITOR.instances) {
+								CKEDITOR.instances[instance].updateElement();
+							}
+							return true;
+						},
+						success : function(e) {
+							$(".loading").hide();
+							$("#message_page_edit")
+									.html(
+											"<span style=\"color:green;\">Die Seite wurde gespeichert</span>");
+							$("#message_page_edit").show();
+						}
+					});
 });

@@ -3,27 +3,39 @@ $acl = new ACL ();
 if ($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_create" )) {
 	$languages = getAvailableBackendLanguages ();
 	$default_language = getSystemLanguage ();
+	$ref = _esc ( Request::getVar ( "ref", "home" ) );
 	?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("admins");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <form action="index.php?sClass=UserController&sMethod=create"
 	method="post" autocomplete="off" id="edit_user">
 <?php csrf_token_html();?>
 	<input type="hidden" name="add_admin" value="add_admin"> <strong><?php translate("username");?></strong><br />
 	<input type="text" required="required" name="admin_username" value="">
-	<br /> <br /> <strong><?php translate("lastname");?></strong><br /> <input
-		type="text" name="admin_lastname" value=""> <br /> <br /> <strong><?php translate("firstname");?></strong><br />
-	<input type="text" name="admin_firstname" value=""><br /> <br /> <strong><?php translate("email");?></strong><br />
-	<input type="email" name="admin_email" value=""><br /> <br /> <strong><?php translate("password");?></strong><br />
+	<br /> <strong><?php translate("lastname");?></strong><br /> <input
+		type="text" name="admin_lastname" value=""> <br /> <strong><?php translate("firstname");?></strong><br />
+	<input type="text" name="admin_firstname" value=""><br /> <strong><?php translate("email");?></strong><br />
+	<input type="email" name="admin_email" value=""><br /> <strong><?php translate("password");?></strong><br />
 	<input type="password" required="required" name="admin_password"
-		id="admin_password" value="" autocomplete="off"> <br /> <br /> <strong><?php translate("password_repeat");?></strong><br />
+		id="admin_password" value="" autocomplete="off"> <br /> <strong><?php translate("password_repeat");?></strong><br />
 	<input type="password" required="required" name="admin_password_repeat"
-		id="admin_password_repeat" value="" autocomplete="off"> <br /> 
+		id="admin_password_repeat" value="" autocomplete="off">
 		<?php
 	$acl = new ACL ();
 	$allGroups = $acl->getAllGroups ();
 	asort ( $allGroups );
 	?>
-	<br> <strong><?php translate("usergroup");?></strong> <br /> <select
+	<br /> <strong><?php translate("usergroup");?></strong> <br /> <select
 		name="group_id">
+		<option value="-"
+			<?php
+	
+	if ($row->group_id === null) {
+		echo "selected";
+	}
+	?>>[<?php translate("none");?>]</option>
 		<?php
 	
 	foreach ( $allGroups as $key => $value ) {

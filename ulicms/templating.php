@@ -371,7 +371,7 @@ function delete_custom_data($var = null, $page = null) {
 			unset ( $data [$var] );
 		}
 	} // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
-else {
+	else {
 		$data = array ();
 	}
 	
@@ -457,25 +457,7 @@ function poweredByUliCMS() {
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
 function random_banner() {
-	$query = db_query ( "SELECT name, link_url, image_url, `type`, html FROM " . tbname ( "banner" ) . " WHERE language='all' OR language='" . db_escape ( $_SESSION ["language"] ) . "'ORDER BY RAND() LIMIT 1" );
-	if (db_num_rows ( $query ) > 0) {
-		while ( $row = db_fetch_object ( $query ) ) {
-			$type = "gif";
-			if (isset ( $row->type )) {
-				if (! empty ( $row->type )) {
-					$type = $row->type;
-				}
-			}
-			if ($type == "gif") {
-				$title = Template::getEscape ( $row->name );
-				$link_url = Template::getEscape ( $row->link_url );
-				$image_url = Template::getEscape ( $row->image_url );
-				echo "<a href='$link_url' target='_blank'><img src='$image_url' title='$title' alt='$title' border=0></a>";
-			} else if ($type == "html") {
-				echo $row->html;
-			}
-		}
-	}
+	Template::randomBanner ();
 }
 function logo() {
 	if (Settings::get ( "logo_disabled" ) != "no") {
@@ -495,7 +477,7 @@ function logo() {
 	}
 }
 function year() {
-	echo date ( "Y" );
+	Template::year ();
 }
 function homepage_owner() {
 	echo Settings::get ( "homepage_owner" );
@@ -562,8 +544,9 @@ function meta_description($dummy = null) {
 	}
 }
 function get_title($ipage = null, $headline = false) {
-	if (Vars::get ( "title" )) {
-		return Vars::get ( "title" );
+	$cacheVar = $headline ? "headline" : "title";
+	if (Vars::get ( $cacheVar )) {
+		return Vars::get ( $cacheVar );
 	}
 	$status = check_status ();
 	if ($status == "404 Not Found") {
@@ -586,7 +569,7 @@ function get_title($ipage = null, $headline = false) {
 			}
 			
 			$title = apply_filter ( $title, "title" );
-			Vars::set ( "title", $title );
+			Vars::set ( $cacheVar, $title );
 			return $title;
 		}
 	}
@@ -736,7 +719,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 	$html = "";
 	$name = db_escape ( $name );
 	$language = $_SESSION ["language"];
-	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target, type, link_to_language FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent ";
+	$sql = "SELECT id, systemname, access, redirection, title, alternate_title, menu_image, target, type, link_to_language, position FROM " . tbname ( "content" ) . " WHERE menu='$name' AND language = '$language' AND active = 1 AND `deleted_at` IS NULL AND hidden = 0 and type <> 'snippet' and parent ";
 	
 	if (is_null ( $parent )) {
 		$sql .= " IS NULL ";
@@ -777,10 +760,14 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 			} else {
 				$html .= "  <li class='menu_active_list_item" . rtrim ( $additional_classes ) . "'>";
 			}
-			if (! empty ( $row->alternate_title )) {
-				$title = $row->alternate_title;
-			} else {
-				$title = $row->title;
+			
+			$title = $row->title;
+			// Show page positions in menu if user has the "pages_show_positions" permission.
+			if (is_logged_in ()) {
+				$acl = new ACL ();
+				if ($acl->hasPermission ( "pages_show_positions" )) {
+					$title .= " ({$row->position})";
+				}
 			}
 			
 			$redirection = $row->redirection;
@@ -795,9 +782,9 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
 				$html .= "<a class='menu_active_link" . rtrim ( $additional_classes ) . "' href='" . buildSEOUrl ( $row->systemname, $redirection ) . "' target='" . $row->target . "'>";
 			}
 			if (! is_null ( $row->menu_image ) and ! empty ( $row->menu_image )) {
-				$html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities ( $row->title, ENT_QUOTES, "UTF-8" ) . '"/>';
+				$html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities ( $title, ENT_QUOTES, "UTF-8" ) . '"/>';
 			} else {
-				$html .= htmlentities ( $row->title, ENT_QUOTES, "UTF-8" );
+				$html .= htmlentities ( $title, ENT_QUOTES, "UTF-8" );
 			}
 			$html .= "</a>\n";
 			
@@ -871,10 +858,9 @@ function base_metas() {
 		echo Template::executeDefaultOrOwnTemplate ( "powered-by" );
 		echo '<meta name="generator" content="UliCMS ' . cms_version () . '"/>';
 		echo "\r\n";
-		
-		output_favicon_code ();
-		echo "\r\n";
 	}
+	output_favicon_code ();
+	echo "\r\n";
 	
 	if (! Settings::get ( "hide_shortlink" ) and (is_200 () or is_403 ())) {
 		$shortlink = get_shortlink ();
@@ -1114,18 +1100,7 @@ function check_status() {
 	}
 	
 	$page = $_GET ["seite"];
-	$cached_page_path = buildCacheFilePath ( $page );
-	if (isset ( $_SERVER ["ulicms_send_304"] )) {
-		header ( "HTTP/1.1 304 Not Modified" );
-		exit ();
-	}
 	
-	if (file_exists ( $cached_page_path ) and ! is_logged_in ()) {
-		$last_modified = filemtime ( $cached_page_path );
-		if (time () - $last_modified < CACHE_PERIOD) {
-			return "200 OK";
-		}
-	}
 	if (! is_active () and ! is_logged_in ()) {
 		return "403 Forbidden";
 	}

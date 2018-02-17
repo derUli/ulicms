@@ -1,14 +1,18 @@
 <?php
 $acl = new ACL ();
 if ($acl->hasPermission ( "pages" )) {
-	?>
+	?><p>
+	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h2><?php translate("pages");?></h2>
+
 <p><?php translate ( "pages_infotext" );?></p>
 <?php
 	if ($acl->hasPermission ( "pages_create" )) {
 		?>
 <p>
-	<a href="index.php?action=pages_new"><?php translate("create_page");?>
+	<a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?>
 	</a>
 </p>
 <?php } ?>
@@ -525,7 +529,7 @@ $(window).load(function(){
 				echo "<td style='text-align:center'></td>";
 			} else {
 				$url = "../?goid={$row->id}";
-				echo "<td style='text-align:center'><a href=\"" . $url . "\" target=\"_blank\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation ( "view" ) . "\" title=\"" . get_translation ( "view" ) . "\"></a></td>";
+				echo "<td style='text-align:center'><a href=\"" . $url . "\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation ( "view" ) . "\" title=\"" . get_translation ( "view" ) . "\"></a></td>";
 			}
 			if ($acl->hasPermission ( "pages_create" )) {
 				echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation ( "clone" ) . "\" title=\"" . get_translation ( "clone" ) . "\"></a></td>";

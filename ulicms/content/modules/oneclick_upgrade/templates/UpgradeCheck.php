@@ -17,7 +17,7 @@ if ($acl->hasPermission ( "update_system" )) {
 <p><?php translate("no_new_version_available");?></p>
 <?php }?>
 <form action="../?sClass=CoreUpgradeController&sMethod=runUpgrade"
-	method=post>
+	method="post">
 	<?php csrf_token_html();?>
 	<div class="row">
 		<div class="col-xs-6 text-left">
@@ -45,7 +45,7 @@ if ($acl->hasPermission ( "update_system" )) {
 <?php translate("upgrade_warning_notice");?>
 </div>
 	<p>
-		<input type="submit" value="<?php translate("do_core_upgrade");?>">
+		<button type="submit" class="btn btn-danger"><?php translate("do_core_upgrade");?></button>
 	</p>
 <?php }?>
 </form>
