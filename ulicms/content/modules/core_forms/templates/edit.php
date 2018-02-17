@@ -9,6 +9,10 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_edit" ))
 	$form = Forms::getFormByID ( $id );
 	if ($form) {
 		?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("forms");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("edit_form");?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("FormController", "update");?>
 <input type="hidden" name="id" value="<?php echo $id;?>" />

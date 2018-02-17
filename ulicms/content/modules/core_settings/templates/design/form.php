@@ -32,6 +32,11 @@ div#google-fonts {
 }
 </style>
 <?php }?>
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1>
 <?php translate("design");?>
 </h1>
@@ -342,7 +347,10 @@ function onChangeDefaultFont(){
 
 $("select#default-font").change(onChangeDefaultFont);
 </script>
-<script type="text/javascript" src="scripts/design.js">
-</script>
+
+<?php
+	enqueueScriptFile ( "scripts/design.js" );
+	combined_script_html ();
+	$_COOKIE?>
 <?php
 }

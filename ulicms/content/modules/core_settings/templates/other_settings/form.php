@@ -1,7 +1,4 @@
 <?php
-@include_once "Cache/Lite.php";
-
-require_once ULICMS_ROOT . "/classes/objects/security/GoogleAuthenticator.php";
 $ga = new PHPGangsta_GoogleAuthenticator ();
 $ga_secret = Settings::get ( "ga_secret" );
 $qrCodeUrl = $ga->getQRCodeGoogleUrl ( get_translation ( "ULICMS_LOGIN_AT" ) . " " . get_domain (), $ga_secret );
@@ -9,7 +6,6 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "other" )) {
 	noperms ();
 } else {
-	$cache_type = Settings::get ( "cache_type" );
 	$cache_enabled = ! Settings::get ( "cache_disabled" );
 	$cache_period = round ( Settings::get ( "cache_period" ) / 60 );
 	$email_mode = Settings::get ( "email_mode" );
@@ -49,6 +45,11 @@ if (! $acl->hasPermission ( "other" )) {
 			"id" => "other_settings" 
 	) );
 	?>
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <div id="accordion-container">
 	<h2 class="accordion-header"><?php translate ( "page_cache" );?></h2>
 
@@ -81,32 +82,6 @@ if (! $acl->hasPermission ( "other" )) {
 	?>">
 	<?php translate("minutes");?>
 			</div>
-
-		<div class="label">
-			<?php translate("cache_engine");?>
-			</div>
-		<div class="inputWrapper">
-			<select name="cache_type" size=1>
-				<option value="file"
-					<?php
-	
-	if ($cache_type === "file" or ! $cache_type) {
-		echo " selected";
-	}
-	?>>
-					<?php translate("file");?></option>
-				<option value="cache_lite"
-					<?php
-	
-	if ($cache_type === "cache_lite") {
-		echo " selected";
-	}
-	?>>
-						Cache_Lite
-						<?php if(!class_exists("Cache_Lite")) echo " (nicht verfügbar)"?>
-					</option>
-			</select>
-		</div>
 	</div>
 	<h2 class="accordion-header">
 		<?php translate("DOMAIN2LANGUAGE_MAPPING");?>
@@ -314,24 +289,17 @@ if (! $acl->hasPermission ( "other" )) {
 			<select id='email_mode' name="email_mode" size="1">
 				<option value="internal"
 					<?php
-	if ($email_mode == "internal") {
+	if ($email_mode == EmailModes::INTERNAL) {
 		echo ' selected="selected"';
 	}
 	?>>PHP</option>
+				<option value="phpmailer" disabled
 					<?php
-	
-	if (! defined ( "NO_PEAR_MAIL" )) {
-		?>
-					<option value="pear_mail"
-					<?php
-		if ($email_mode == "pear_mail") {
-			echo ' selected="selected"';
-		}
-		?>>PEAR Mail</option>
-					<?php
+	if ($email_mode == EmailModes::PHPMAILER) {
+		echo ' selected="selected"';
 	}
-	?>
-				</select>
+	?>>PHPMailer</option>
+			</select>
 		</div>
 		<div class="smtp_settings" id="smtp_settings" style="display: none">
 			<h3>
@@ -405,8 +373,10 @@ if (! $acl->hasPermission ( "other" )) {
 
 		</div>
 	</div>
+
 	<script type="text/javascript">
 <?php
+	// FIXME: Extract this code to an external script
 	if ($smtp_auth) {
 		?>
 $('#smtp_auth_div').show();
@@ -425,6 +395,8 @@ if($('#smtp_auth').prop('checked')){
 </script>
 	<script type="text/javascript">
 <?php
+	
+	// FIXME: Extract this code to an external script
 	if ($email_mode == "pear_mail") {
 		?>
 $('#smtp_settings').show();
@@ -450,7 +422,7 @@ if($('#email_mode').val() == "pear_mail"){
 
 	<div class="accordion-content">
 		<p>
-			[<a href="index.php?action=settings"><?php translate("view");?></a>]
+			<a href="index.php?action=settings" class="btn btn-danger"><?php translate("view");?></a>
 		</p>
 	</div>
 </div>

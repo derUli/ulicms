@@ -35,7 +35,8 @@ $enq = array (
 		"scripts/users.js",
 		"scripts/global.js",
 		"scripts/bootstrap.min.js",
-		"../lib/js/global.js" 
+		"scripts/js/select2.min.js",
+		"../lib/js/global.js"
 );
 ?>
 <?php
@@ -89,6 +90,7 @@ $styles [] = "codemirror/mode/clike/clike.css";
 $styles [] = "codemirror/lib/codemirror.css";
 $styles [] = "codemirror/mode/css/css.css";
 $styles [] = "css/modern.css";
+$styles [] = "scripts/css/select2.min.css";
 
 foreach ( $styles as $style ) {
 	enqueueStylesheet ( $style );
@@ -109,11 +111,11 @@ add_hook ( "admin_head" );
 </head>
 <div
 	class="fluid-container main <?php
-	
+
 	if (get_action ()) {
 		echo 'action-' . Template::getEscape ( get_action () );
 	}
-	
+
 	?>">
 
 	<div class="row">
@@ -124,7 +126,7 @@ add_hook ( "admin_head" );
 		</div>
 		<div class="col-xs-4 menu-container">
 		<?php
-		
+
 		if (is_logged_in ()) {
 			?>
 			<div class="row pull-right">

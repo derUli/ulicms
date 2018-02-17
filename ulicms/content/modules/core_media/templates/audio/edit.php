@@ -5,7 +5,10 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_edit" )) {
 	$query = db_query ( "SELECT * FROM " . tbname ( "audio" ) . " WHERE id = $id" );
 	if (db_num_rows ( $query ) > 0) {
 		$result = db_fetch_object ( $query );
-		?>
+		?><p>
+	<a href="<?php echo ModuleHelper::buildActionURL("audio");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate ( "UPLOAD_AUDIO" );?></h1>
 <form action="index.php?sClass=AudioController&sMethod=update"
 	method="post">
@@ -26,8 +29,8 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_edit" )) {
 	<strong><?php translate ( "insert_this_code_into_a_page" );?>
 	</strong><br /> <input type="text" name="code"
 		value="[audio id=<?php echo $result->id;?>]"
-		onclick="this.focus();this.select();" readonly> <br /> <br /> <input
-		type="submit" value="<?php translate ( "SAVE_CHANGES" );?>">
+		onclick="this.focus();this.select();" readonly> <br /> <br />
+	<button type="submit" class="btn btn-success"><?php translate ( "SAVE_CHANGES" );?></button>
 </form>
 <?php
 	} else {

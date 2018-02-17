@@ -30,8 +30,9 @@ function db_fetch_assoc($result) {
 	return mysqli_fetch_assoc ( $result );
 }
 function db_fetch_all($result, $resulttype = MYSQLI_NUM) {
-	if (function_exists ( "mysqli_fetch_all" ))
+	if (function_exists ( "mysqli_fetch_all" )){
 		return mysqli_fetch_all ( $result, $resulttype );
+	}
 	
 	// @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
 	$retval = array ();
@@ -48,8 +49,9 @@ function db_close() {
 // Connect with database server
 function db_connect($server, $user, $password) {
 	Database::setConnection ( mysqli_connect ( $server, $user, $password ) );
-	if (! Database::getConnection ())
+	if (! Database::getConnection ()){
 		return false;
+	}
 	db_query ( "SET NAMES 'utf8mb4'" );
 	// sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
 	db_query ( "SET SESSION sql_mode = '';" );

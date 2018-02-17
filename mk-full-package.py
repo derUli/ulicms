@@ -1,4 +1,6 @@
 #!/usr/bin/python
+# coding: utf8
+
 import shutil
 import argparse
 import os
@@ -6,6 +8,7 @@ import codecs
 import platform
 from contextlib import closing
 from zipfile import ZipFile, ZIP_DEFLATED
+
 
 def zipdir(basedir, archivename):
     assert os.path.isdir(basedir)
@@ -17,9 +20,11 @@ def zipdir(basedir, archivename):
                 zfn = absfn[len(basedir) + len(os.sep):]  # XXX: relative path
                 z.write(absfn, zfn)
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-z", "--zip", help="Compress with zip", action="store_true")
+    parser.add_argument("-d", "--delete", help="empty folder if exists", action="store_true")
     parser.add_argument('-t', '--target', action="store", dest="target", required=True, help="Target directory")
     args = parser.parse_args()
     target = os.path.expanduser(args.target)
@@ -29,9 +34,13 @@ def main():
     ignore = ('.git', "doc-src", "press", "phpCB-1.0.1-linux", "*.py", "*.pyc",
               "Releases", "cms-config.php", "services", "update.php",
               ".gitignore", "cache", "*~", ".settings", ".project",
-              ".buildpath", "tests", "run-tests.sh", "run-tests.bat", ".pydevproject")
+              ".buildpath", "tests", "run-tests.sh", "run-tests.bat",
+              "run-tests.xampp.mac.sh", ".pydevproject")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
+    if args.delete and os.path.exists(target):
+        print("Folder exists. Truncating.")
+        shutil.rmtree(target)
     print("copying files")
     shutil.copytree(source_dir, target, ignore=IGNORE_PATTERNS)
     installer_aus_folder = os.path.join(target, "ulicms", "installer.aus")
@@ -39,12 +48,19 @@ def main():
 
     if os.path.exists(installer_aus_folder):
         os.rename(installer_aus_folder, installer_folder)
+
+    main_dir = os.path.join(target, "ulicms")
+
+    # Composer packages zu Deploy hinzufügen
+    os.system("ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
+
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
     if args.zip:
         print("zipping folder...")
         zipdir(target, archive_name)
         print("removing target folder...")
         shutil.rmtree(target)
+
 try:
     main()
 except KeyboardInterrupt:

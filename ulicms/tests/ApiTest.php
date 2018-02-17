@@ -52,6 +52,24 @@ class ApiTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "doof", bool2YesNo ( 0, "cool", "doof" ) );
 		$this->assertEquals ( "cool", bool2YesNo ( true, "cool", "doof" ) );
 		$this->assertEquals ( "doof", bool2YesNo ( false, "cool", "doof" ) );
-		
+	}
+	public function testGetMime() {
+		$this->assertEquals ( "text/plain", get_mime ( Path::resolve ( "ULICMS_ROOT/.htaccess" ) ) );
+		$this->assertEquals ( "image/gif", get_mime ( Path::resolve ( "ULICMS_ROOT/admin/gfx/edit.gif" ) ) );
+		$this->assertEquals ( "image/png", get_mime ( Path::resolve ( "ULICMS_ROOT/admin/gfx/edit.png" ) ) );
+	}
+	public function testIsTrue() {
+		$this->assertTrue ( is_true ( true ) );
+		$this->assertTrue ( is_true ( 1 ) );
+		$this->assertFalse ( is_true ( $nothing ) );
+		$this->assertFalse ( is_true ( false ) );
+		$this->assertFalse ( is_true ( 0 ) );
+	}
+	public function testIsFalse() {
+		$this->assertFalse ( is_false ( true ) );
+		$this->assertFalse ( is_false ( 1 ) );
+		$this->assertTrue ( is_false ( $nothing ) );
+		$this->assertTrue ( is_false ( false ) );
+		$this->assertTrue ( is_false ( 0 ) );
 	}
 }

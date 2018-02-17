@@ -19,10 +19,14 @@ tr.even input.form-submit-url {
 	background-color: #fff !important;
 }
 </style>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("forms"); ?></h1>
 <?php if($acl->hasPermission ( "forms_create" )){ ?>
 <p>
-	<a href="index.php?action=forms_new"><?php translate("create_form");?></a>
+	<a href="index.php?action=forms_new" class="btn btn-default"><?php translate("create_form");?></a>
 </p>
 <?php }?>
 <p><?php BackendHelper::formatDatasetCount(count($forms));?></p>

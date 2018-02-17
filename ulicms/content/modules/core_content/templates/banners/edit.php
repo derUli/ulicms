@@ -6,7 +6,10 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 	$row->loadByID ( $banner );
 	if ($row->id) {
 		?>
-
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("banner");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <?php echo ModuleHelper::buildMethodCallForm("BannerController", "update");?>
 <h4><?php translate("preview");?></h4>
 <?php
@@ -48,12 +51,12 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 		}
 		?>
 		id="radio_gif" name="type" value="gif"
-		onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"><label
+		onclick="$('#type_gif').slideDown();$('#type_html').slideUp();"> <label
 		for="radio_gif"><?php translate("gif_banner");?></label>
 </p>
 <fieldset id="type_gif" style="<?php
 		
-		if ($row->getType() != "gif") {
+		if ($row->getType () != "gif") {
 			echo "display:none";
 		}
 		?>">
@@ -63,13 +66,13 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 		?></strong><br /> <input type="text" name="banner_name"
 		value="<?php
 		Template::escape ( $row->name );
-		?>"> <br /> <br /> <strong><?php
+		?>"> <br /> <strong><?php
 		translate ( "IMAGE_URL" );
 		?></strong><br /> <input type="text" name="image_url"
 		value="<?php
 		Template::escape ( $row->image_url );
-		?>"> <br /> <br /> <strong><?php translate("link_url");?></strong><br />
-	<input type="text" name="link_url"
+		?>"> <br /> <strong><?php translate("link_url");?></strong><br /> <input
+		type="text" name="link_url"
 		value="<?php
 		Template::escape ( $row->link_url );
 		?>">
@@ -85,7 +88,7 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 	onclick="$('#type_html').slideDown();$('#type_gif').slideUp();">
 <label for="radio_html">HTML</label>
 <fieldset id="type_html" style="<?php
-		if ($row->getType() != "html") {
+		if ($row->getType () != "html") {
 			echo "display:none";
 		}
 		?>">

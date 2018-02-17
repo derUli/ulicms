@@ -1,0 +1,36 @@
+{
+	"license": "BSD",
+	"authors": [
+		{
+			"name": "Ulrich Schmidt",
+			"email": "support@ulicms.de",
+			"homepage": "http://www.ulicms.de",
+			"role": "Lead Developer"
+		}
+	],
+	"support": {
+		"email": "support@ulicms.de",
+		"issues": "https://github.com/derUli/ulicms/issues",
+		"source": "https://github.com/derUli/ulicms",
+		"docs": "https://www.ulicms.de/handbuecher.html",
+		"rss": "https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en"
+	},
+	"require": {
+		"php": ">=5.6",
+		"ext-mysqli": "*",
+		"ext-gd": "*",
+		"ext-json": "*",
+		"ext-mbstring": "*",
+		"ext-openssl": "*",
+		"ext-dom": "*",
+		"ext-libxml": "*",
+		"ext-ldap": "*",
+		"phpFastCache/phpFastCache": "^6.0",
+		"athari/yalinqo": "^2.4",
+		"phpgangsta/googleauthenticator": "dev-master",
+		"katzgrau/klogger": "dev-master"
+	},
+	"require-dev": {
+        	"phpunit/phpunit": "3.7.*"
+    }
+}

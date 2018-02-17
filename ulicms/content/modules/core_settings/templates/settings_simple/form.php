@@ -9,6 +9,10 @@ if ($acl->hasPermission ( "settings_simple" )) {
 		$settings [$option->name] = Template::getEscape ( $option->value );
 	}
 	?>
+	<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h2><?php translate("general_settings");?></h2>
 <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
 <?php

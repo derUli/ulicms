@@ -5,7 +5,10 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" 
 } else {
 	$forms = Forms::getAllForms ();
 	$pages = getAllPages ();
-	?>
+	?><p>
+	<a href="<?php echo ModuleHelper::buildActionURL("forms");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("create_form");?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("FormController", "create");?>
 <p>

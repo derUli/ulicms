@@ -21,18 +21,18 @@ function is_url($url) {
 	if (substr_compare ( $url, 'http://', 0, 7 ) > 0 or substr_compare ( $url, 'https://', 0, 8 ) > 0 or substr_compare ( $url, 'ftp://', 0, 8 ) > 0) {
 		return true;
 	}
-	
 	return false;
 }
 
 // Nutze curl zum Download der Datei, sofern verfügbar
 // Ansonsten Fallback auf file_get_contents
-function file_get_contents_wrapper($url, $no_cache = false) {
+function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
+	$content = false;
 	if (! is_url ( $url )) {
 		return file_get_contents ( $url );
 	}
 	$cache_name = md5 ( $url ) . "-" . basename ( $url );
-	$cache_folder = ULICMS_ROOT . "/content/cache";
+	$cache_folder = PATH::resolve ( "ULICMS_CACHE" );
 	$cache_path = $cache_folder . "/" . $cache_name;
 	if (file_exists ( $cache_path ) && is_url ( $url ) && ! $no_cache) {
 		return file_get_contents ( $cache_path );
@@ -43,16 +43,20 @@ function file_get_contents_wrapper($url, $no_cache = false) {
 	} else if (ini_get ( "allow_url_fopen" )) {
 		$content = file_get_contents ( $url );
 	}
-	if ($content) {
-		if (is_dir ( $cache_folder ) and is_url ( $url ) and ! $no_cache)
-			file_put_contents ( $cache_path, $content );
-		
-		return $content;
+	
+	if ($content and StringHelper::isNotNullOrWhitespace ( $checksum ) and md5 ( $content ) !== strtolower ( $checksum )) {
+		throw new CorruptDownloadException ( "Download of $url - Checksum validation failed" );
 	}
-	return false;
+	
+	if (is_dir ( $cache_folder ) and is_url ( $url ) and ! $no_cache) {
+		file_put_contents ( $cache_path, $content );
+	}
+	
+	return $content;
 }
 function url_exists($url) {
-	if (@file_get_contents ( $url, FALSE, NULL, 0, 0 ) === false)
+	if (@file_get_contents ( $url, FALSE, NULL, 0, 0 ) === false){
 		return false;
+	}
 	return true;
 }

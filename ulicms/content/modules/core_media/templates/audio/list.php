@@ -33,6 +33,10 @@ $(window).load(function(){
 
 });
 </script>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("media");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1>
 <?php
 	
@@ -45,10 +49,10 @@ $(window).load(function(){
 <br />
 <?php if($acl->hasPermission("audio_create")){?>
 <p>
-	<a href="index.php?action=add_audio">[<?php
+	<a href="index.php?action=add_audio" class="btn btn-default"><?php
 		
 		translate ( "upload_audio" );
-		?>]</a>
+		?></a>
 </p>
 <?php }?>
 <div class="scroll">

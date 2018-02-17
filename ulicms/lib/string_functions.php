@@ -195,7 +195,6 @@ if (! function_exists ( "decodeHTMLEntities" )) {
 }
 
 if (! function_exists ( "keywordsFromString" )) {
-	
 	// Häufigste Wörter in String ermitteln und als Assoziatives Array zurückgeben.
 	// z.B. für automatisches ausfüllen der Meta-Keywords nutzbar
 	function keywordsFromString($text) {

@@ -3,6 +3,13 @@ $acl = new ACL ();
 if (! $acl->hasPermission ( "install_packages" )) {
 	noperms ();
 } else {
+	?>
+
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("install_method");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
+<?php
 	$temp_folder = ULICMS_ROOT . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "tmp";
 	if (! empty ( $_POST )) {
 		if (count ( $_FILES ) > 0) {

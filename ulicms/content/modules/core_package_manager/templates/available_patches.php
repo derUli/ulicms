@@ -3,6 +3,10 @@ $acl = new ACL ();
 if (is_admin () or $acl->hasPermission ( "update_system" )) {
 	$patches = file_get_contents_wrapper ( PATCH_CHECK_URL, true );
 	?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("home");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate ( "available_patches" );?></h1>
 <?php
 	if (! $patches or empty ( $patches )) {
@@ -28,10 +32,10 @@ if (is_admin () or $acl->hasPermission ( "update_system" )) {
 			}
 		}
 		?>
-	<input type="submit"
-		value="<?php translate ( "install_selected_patches" );?>"> <input
-		type="button" value="<?php translate ( "help" );?>"
-		onclick="window.open('?action=help&help=patch_install');">
+	<button type="submit" class="btn btn-warning"><?php translate ( "install_selected_patches" );?></button>
+	<button type="button"
+		onclick="window.open('?action=help&help=patch_install');"
+		class="btn btn-info"><?php translate ( "help" );?></button>
 </form>
 <?php
 	}

@@ -36,3 +36,4 @@ $translation->renderJS ();
 	src="<?php echo getTemplateDirPath(get_theme());?>main.js"></script>
 </body>
 </html>
+<!--  <?php echo date("r"); ?>-->

@@ -13,6 +13,10 @@ if ($acl->hasPermission ( "settings_simple" )) {
 	}
 	
 	?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("settings_simple");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("homepage_title");?></h1>
 <?php
 	echo ModuleHelper::buildMethodCallForm ( "HomepageTitleController", "save", array (), "post", array (

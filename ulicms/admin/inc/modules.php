@@ -33,8 +33,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		?>
 <div class="row">
 	<div class="col-xs-6">
-		<p style="margin-bottom: 30px;">
-			<a href="?action=install_method">[<?php translate("install_package");?>]</a>
+		<p>
+			<a href="?action=install_method" class="btn btn-warning"><?php translate("install_package");?></a>
 		</p>
 	</div>
 
@@ -68,7 +68,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		echo "<ol style=\"margin-bottom:30px;\">";
 		for($i = 0; $i < count ( $modules ); $i ++) {
 			if ((getModuleMeta ( $modules [$i], "source" ) !== "core" or $_SESSION ["show_core_modules"]) && ! getModuleMeta ( $modules [$i], "shy" )) {
-				echo "<li style=\"margin-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
+				echo "<li style=\"margin-top:10px;padding-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-module-" . $modules [$i] . "\"><strong>";
 				$disabledModules = Vars::get ( "disabledModules" );
 				$controller = null;
 				$main_class = getModuleMeta ( $modules [$i], "main_class" );
@@ -146,9 +146,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 					
 					echo "<input type='text' value='[module=\"" . $modules [$i] . "\"]' readonly='readonly' " . $disabled . " onclick='this.focus(); this.select()'>";
 				} else {
-					translate("NOT_AN_EMBED_MODULE");
+					translate ( "NOT_AN_EMBED_MODULE" );
 				}
-				echo "<br/><br/>";
 				echo "</li>";
 			}
 		}
@@ -174,7 +173,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			if (getThemeMeta ( $themes [$i], "shy" )) {
 				continue;
 			}
-			echo "<li style=\"margin-bottom:20px;padding-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-theme-" . $themes [$i] . "\"><strong>";
+			echo "<li style=\"margin-top:10px;padding-bottom:10px;border-bottom:solid #cdcdcd 1px;\" id=\"dataset-theme-" . $themes [$i] . "\"><strong>";
 			
 			echo $themes [$i];
 			
@@ -249,7 +248,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		if ($acl->hasPermission ( "upload_patches" )) {
 			?>
 <p>
-	<a href="index.php?action=upload_patches">[<?php translate("INSTALL_PATCH_FROM_FILE");?>]</a>
+	<a href="index.php?action=upload_patches" class="btn btn-warning"><?php translate("INSTALL_PATCH_FROM_FILE");?></a>
 </p>
 <?php }?>
 <div id="inst_patch_slide_container">
@@ -268,9 +267,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 		method="post"
 		onsubmit='return confirm("<?php translate("TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM");?>");'>
 <?php csrf_token_html(); ?>
-<input type="submit" id="truncate_installed_patches"
-			name="truncate_installed_patches"
-			value="<?php translate("TRUNCATE_INSTALLED_PATCHES_LIST");?>">
+<button type="submit" id="truncate_installed_patches"
+			name="truncate_installed_patches" class="btn btn-danger"><?php translate("TRUNCATE_INSTALLED_PATCHES_LIST");?></button>
 	</form>
 </div>
 <script type="text/javascript">

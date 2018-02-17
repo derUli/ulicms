@@ -1,3 +1,9 @@
+
+<p>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("spamfilter");?></h1>
 <?php
 $acl = new ACL ();
@@ -69,14 +75,27 @@ function spamFilterEnabledcheckboxChanged(checked){
 		echo " checked=\"checked\"";
 	}
 	?>> <label for="check_for_spamhaus"><?php translate("check_for_spamhaus");?>
-		</label>
+		</label> <br /> <br />
+		<p>
+			<label for="min_time_to_fill_form"><?php translate("min_time_to_fill_form");?></label><br />
+			<input type="number" name="min_time_to_fill_form"
+				id="min_time_to_fill_form" step="any" min="0"
+				max="<?php esc(PHP_INT_MAX );?>"
+				value="<?php
+	
+	esc ( Settings::get ( "min_time_to_fill_form", "int" ) );
+	?>">
+		</p>
 
 	</div>
 
 	<p>
 		<button type="submit" name="submit_spamfilter_settings"
-			class="btn btn-success voffset3"><?php translate("save_changes");?></button>
-	</p>
+			class="btn btn-success voffset3"><?php
+	
+	translate ( "save_changes" );
+	?></button>
+
 </form>
 <script type="text/javascript">
 $("#spamfilter_settings").ajaxForm({beforeSubmit: function(e){
@@ -88,8 +107,6 @@ $("#spamfilter_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("<span style=\"color:green;\"><?php
 	translate ( "changes_was_saved" )?></span>");
   }
-  
-
 });
 </script>
 

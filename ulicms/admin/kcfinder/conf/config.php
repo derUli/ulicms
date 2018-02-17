@@ -18,12 +18,15 @@
  * even if you are using session configuration.
  * See http://kcfinder.sunhater.com/install for setting descriptions
  */
+define ( "KCFINDER_PAGE", true );
+include_once "../../init.php";
+
 $_CONFIG = array (
 		
 		// GENERAL SETTINGS
 		'disabled' => true,
 		'uploadURL' => "/content",
-		'uploadDir' => "",
+		'uploadDir' => ULICMS_CONTENT,
 		'theme' => "default",
 		
 		'types' => array (
@@ -111,9 +114,6 @@ $_CONFIG = array (
 // '_sessionPath' => "/my/path",
 // '_cssMinCmd' => "java -jar /path/to/yuicompressor.jar --type css {file}",
 // '_jsMinCmd' => "java -jar /path/to/yuicompressor.jar --type js {file}",
-
-define ( "KCFINDER_PAGE", true );
-include_once "../../init.php";
 
 @session_start ();
 

@@ -16,6 +16,10 @@ if (! $acl->hasPermission ( "upload_patches" )) {
 window.location.replace("index.php?action=modules#installed_patches_a");
 </script>
 <?php }?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("modules");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
 <h1><?php translate("install_patch_from_file"); ?></h1>
 <form enctype="multipart/form-data"
 	action="index.php?action=upload_patches" method="POST">

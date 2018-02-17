@@ -31,7 +31,9 @@ if (! $acl->hasPermission ( "info" )) {
 		href="http://www.websanova.com" target="_blank">Websanova</a> <br /> <a
 		href="http://www.phpgangsta.de/2-faktor-authentifizierung-mit-dem-google-authenticator"
 		target="_blank">GoogleAuthenticator</a> Copyright (c) 2012, Michael
-	Kliewe All rights reserved.
+	Kliewe<br /> <a href="http://www.phpfastcache.com/" target="_blank">phpFastCache</a>
+	Copyright (c) 2016 <br /> <a href="https://github.com/Athari/YaLinqo"
+		target="_blank">YaLinqo</a> Copyright © 2012–2016, Alexander Prokhorov
 </p>
 
 <div>

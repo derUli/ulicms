@@ -1,4 +1,10 @@
 <?php
+function is_true($var) {
+	return (isset ( $var ) and $var);
+}
+function is_false($var) {
+	return ! (isset ( $var ) and $var);
+}
 function bool2YesNo($value, $yesString = null, $noString = null) {
 	if (! $yesString) {
 		$yesString = get_translation ( "yes" );
@@ -244,7 +250,7 @@ function isCLI() {
  *        	Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
  * @param string $r
  *        	Maximum rating (inclusive) [ g | pg | r | x ]
- * @param boole $img
+ * @param bool $img
  *        	True to return a complete IMG tag False for just the URL
  * @param array $atts
  *        	Optional, additional key/value attributes to include in the IMG tag
@@ -319,11 +325,27 @@ function check_csrf_token() {
 	}
 	return $_REQUEST ["csrf_token"] == $_SESSION ["csrf_token"];
 }
+function check_form_timestamp() {
+	if (Settings::get ( "spamfilter_enabled" ) != "yes") {
+		return;
+	}
+	
+	$original_timestamp = Request::getVar ( "form_timestamp", 0, "int" );
+	$min_time_to_fill_form = Settings::get ( "min_time_to_fill_form", "int" );
+	if (time () - $original_timestamp < $min_time_to_fill_form) {
+		setconfig ( "contact_form_refused_spam_mails", getconfig ( "contact_form_refused_spam_mails" ) + 1 );
+		HTMLResult ( "Spam detected based on timestamp.", 400 );
+	}
+}
 
 // HTML Code für Anti CSRF Token zurückgeben
 // Siehe http://de.wikipedia.org/wiki/Cross-Site-Request-Forgery
 function get_csrf_token_html() {
-	return '<input type="hidden" name="csrf_token" value="' . get_csrf_token () . '">';
+	$html = '<input type="hidden" name="csrf_token" value="' . get_csrf_token () . '">';
+	if (Settings::get ( "min_time_to_fill_form", "int" ) > 0) {
+		$html .= '<input type="hidden" name="form_timestamp" value="' . time () . '">';
+	}
+	return $html;
 }
 function csrf_token_html() {
 	echo get_csrf_token_html ();
@@ -504,23 +526,6 @@ function setLanguageByDomain() {
 	}
 	return false;
 }
-function getCacheType() {
-	$c = Settings::get ( "cache_type" );
-	switch ($c) {
-		case "cache_lite" :
-			@include "Cache/Lite.php";
-			$cache_type = "cache_lite";
-			
-			break;
-		case "file" :
-		default :
-			$cache_type = "file";
-			break;
-			break;
-	}
-	
-	return $cache_type;
-}
 function getOnlineUsers() {
 	$users_online = db_query ( "SELECT username FROM " . tbname ( "users" ) . " WHERE last_action > " . (time () - 300) . " ORDER BY username" );
 	$users = array ();
@@ -566,33 +571,7 @@ function clearAPCCache() {
 // Sowohl den Seiten-Cache, den Download/Paketmanager Cache
 // als auch den APC Bytecode Cache
 function clearCache() {
-	add_hook ( "before_clear_cache" );
-	$cache_type = Settings::get ( "cache_type" );
-	// Es gibt zwei verschiedene Cache Modi
-	// Cache_Lite und File
-	// Cache_Lite leeren
-	if ($cache_type === "cache_lite" and class_exists ( "Cache_Lite" )) {
-		$Cache_Lite = new Cache_Lite ( $options );
-		$Cache_Lite->clean ();
-	} else {
-		// File leeren
-		if (is_admin_dir ()) {
-			SureRemoveDir ( "../content/cache", false );
-		} else {
-			SureRemoveDir ( "content/cache", false );
-		}
-	}
-	
-	if (function_exists ( "apc_clear_cache" )) {
-		clearAPCCache ();
-	}
-	if (function_exists ( "opcache_reset" )) {
-		opcache_reset ();
-	}
-	
-	$moduleManager = new ModuleManager ();
-	$moduleManager->sync ();
-	add_hook ( "after_clear_cache" );
+	CacheUtil::clearCache ();
 }
 function add_hook($name) {
 	if (defined ( "KCFINDER_PAGE" )) {
@@ -793,17 +772,6 @@ function getCurrentURL() {
 	$port = ($_SERVER ["SERVER_PORT"] == "80" || $_SERVER ["SERVER_PORT"] == "443") ? "" : (":" . $_SERVER ["SERVER_PORT"]);
 	return $protocol . "://" . $_SERVER ['SERVER_NAME'] . $port . $_SERVER ['REQUEST_URI'];
 }
-function buildCacheFilePath($request_uri) {
-	$language = $_SESSION ["language"];
-	if (! $language) {
-		$language = Settings::get ( "default_language" );
-	}
-	$unique_identifier = $request_uri . $language . strbool ( is_mobile () );
-	if (function_exists ( "apply_filter" )) {
-		$unique_identifier = apply_filter ( $unique_identifier, "unique_identifier" );
-	}
-	return "content/cache/" . md5 ( $unique_identifier ) . ".tmp";
-}
 function SureRemoveDir($dir, $DeleteMe) {
 	if (! $dh = @opendir ( $dir ))
 		return;
@@ -861,7 +829,7 @@ function getModulePath($module, $abspath = false) {
 	if (is_file ( "cms-config.php" )) {
 		$module_folder = "content/modules/";
 	} // Backend Directory
-else {
+	else {
 		$module_folder = "../content/modules/";
 	}
 	$available_modules = Array ();
@@ -964,7 +932,10 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = str_ireplace ( '[slogan]', ob_get_clean (), $string );
 		$current_page = get_page ();
 		$string = str_ireplace ( '[category]', get_category (), $string );
-		$string = str_ireplace ( '[csrf_token_html]', get_csrf_token_html (), $string );
+		$token = get_csrf_token_html ();
+		
+		$token .= '<input type="tel" name="business_fax" class="antispam_honeypot" value="">';
+		$string = str_ireplace ( '[csrf_token_html]', $token, $string );
 		// [tel] Links for tel Tags
 		$string = preg_replace ( '/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string );
 		$string = preg_replace ( '/\[skype\]([^\[\]]+)\[\/skype\]/i', '<a href="skye:$1?call" class="skype">$1</a>', $string );
@@ -1415,5 +1386,19 @@ function get_mime($file) {
 		return $mime;
 	} else {
 		return false;
+	}
+}
+function set_eTagHeaders($identifier, $timestamp) {
+	$gmt_mTime = gmdate ( 'r', $timestamp );
+	
+	header ( 'Cache-Control: public' );
+	header ( 'ETag: "' . md5 ( $timestamp . $identifier ) . '"' );
+	header ( 'Last-Modified: ' . $gmt_mTime );
+	
+	if (isset ( $_SERVER ['HTTP_IF_MODIFIED_SINCE'] ) || isset ( $_SERVER ['HTTP_IF_NONE_MATCH'] )) {
+		if ($_SERVER ['HTTP_IF_MODIFIED_SINCE'] == $gmt_mtime || str_replace ( '"', '', stripslashes ( $_SERVER ['HTTP_IF_NONE_MATCH'] ) ) == md5 ( $timestamp . $identifier )) {
+			header ( 'HTTP/1.1 304 Not Modified' );
+			exit ();
+		}
 	}
 }
