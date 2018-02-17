@@ -1,4 +1,10 @@
 ===== Neues in UliCMS 2018.2.1 =====
+Neue API-Funktionen:
+* combinedScriptHtml() (statt combined_script_html())
+* combinedStylesheetHtml (statt combined_stylesheet_html())
+* Die Funktionen im alten Namensschema bleiben aus 
+Kompatiblitätsgründen erhalten, sind jedoch als Deprecated (veraltet) gekennzeichnet
+
 Verbesserungen:
 + Formularsystem verwendet nun die E-Mail Adresse aus den Grundeinstellungen als Absender,
 falls kein Feld für die E-Mail Adresse gesetzt ist.
