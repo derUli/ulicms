@@ -47,14 +47,14 @@ function spamFilterEnabledcheckboxChanged(checked){
 		<textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php
 	echo htmlspecialchars ( implode ( explode ( "||", Settings::get ( "spamfilter_words_blacklist" ) ), "\n" ), ENT_QUOTES, "UTF-8" );
 	?></textarea>
-		<br /> <br />
+		<br /> 
 
 		<?php translate("spam_countries");?>
 		<br /> <input type="text" name="country_blacklist"
 			value="<?php
 	
 	echo htmlspecialchars ( Settings::get ( "country_blacklist" ) );
-	?>"> <br /> <br /> <input type="checkbox" name="disallow_chinese_chars"
+	?>"> <br /> <input type="checkbox" name="disallow_chinese_chars"
 			id="disallow_chinese_chars"
 			<?php
 	if (Settings::get ( "disallow_chinese_chars" )) {
@@ -68,13 +68,6 @@ function spamFilterEnabledcheckboxChanged(checked){
 		echo " checked=\"checked\"";
 	}
 	?>> <label for="disallow_cyrillic_chars"><?php translate("disallow_cyrillic_chars");?>
-		</label> <br /> <br /> <input type="checkbox"
-			name="check_for_spamhaus" value="yes" id="check_for_spamhaus"
-			<?php
-	if (Settings::get ( "check_for_spamhaus" )) {
-		echo " checked=\"checked\"";
-	}
-	?>> <label for="check_for_spamhaus"><?php translate("check_for_spamhaus");?>
 		</label> <br /> <br />
 		<p>
 			<label for="min_time_to_fill_form"><?php translate("min_time_to_fill_form");?></label><br />

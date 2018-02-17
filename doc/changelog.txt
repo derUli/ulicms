@@ -10,6 +10,9 @@ Verbesserungen:
 falls kein Feld für die E-Mail Adresse gesetzt ist.
 + Einstellungen zum E-Mail Versand ausgeblendet, da es dort nichts zum Auswählen gibt, bis PHPMailer ins System integriert wird.
 
+Entfernte Features:
+- Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.  
+
 ===== Neues in UliCMS 2018.2 =====
 
 Neue Features:
