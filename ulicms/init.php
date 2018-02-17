@@ -2,8 +2,13 @@
 /*
  * Diese Datei initalisiert das System
  */
-include_once dirname ( __FILE__ ) . "/vendor/autoload.php";
+$composerAutoloadFile = dirname ( __FILE__ ) . "/vendor/autoload.php";
 
+if(file_exists($composerAutoloadFile)){
+	include_once $composerAutoloadFile;
+} else {
+	throw new Exception("autoload.php not found. Please run \"./composer install\” to install dependecies.");
+}
 // root directory of UliCMS
 if (! defined ( "ULICMS_ROOT" )) {
 	define ( "ULICMS_ROOT", dirname ( __file__ ) );
@@ -107,12 +112,12 @@ function exception_handler($exception) {
 		define ( "EXCEPTION_OCCURRED", true );
 	}
 	$error = nl2br ( htmlspecialchars ( $exception ) );
-	
+
 	$cfg = class_exists ( "config" ) ? new config () : null;
 	// TODO: Sinnvolle Fehlermessage wenn $debug deaktiviert ist.
 	// Exception in Textdatei loggen
 	$message = is_true ( $cfg->debug ) ? $exception : "Something happened! 😞";
-	
+
 	if (function_exists ( "HTMLResult" ) and class_exists ( "Template" ) and ! headers_sent ()) {
 		ViewBag::set ( "exception", $message );
 		HTMLResult ( Template::executeDefaultOrOwnTemplate ( "exception.php" ), 500 );

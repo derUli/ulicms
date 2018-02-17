@@ -717,7 +717,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 <button type="submit" class="btn btn-success"><?php translate("save");?></button>
 <?php
 		enqueueScriptFile ( "scripts/page.js" );
-		combined_script_html ();
+		combinedScriptHtml ();
 		?>
 </form>
 <?php

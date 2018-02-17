@@ -278,12 +278,12 @@ if (! $acl->hasPermission ( "other" )) {
 	?>>
 		</div>
 	</div>
-	<h2 class="accordion-header">
+	<h2 class="accordion-header hide">
 		<?php translate("EMAIL_DELIVERY");?>
 		</h2>
 
 
-	<div class="accordion-content">
+	<div class="accordion-content hide">
 		<div class="label">Modus:</div>
 		<div class="inputWrapper">
 			<select id='email_mode' name="email_mode" size="1">
