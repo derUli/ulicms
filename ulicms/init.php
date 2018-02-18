@@ -4,10 +4,10 @@
  */
 $composerAutoloadFile = dirname ( __FILE__ ) . "/vendor/autoload.php";
 
-if(file_exists($composerAutoloadFile)){
+if (file_exists ( $composerAutoloadFile )) {
 	include_once $composerAutoloadFile;
 } else {
-	throw new Exception("autoload.php not found. Please run \"./composer install\” to install dependecies.");
+	throw new Exception ( "autoload.php not found. Please run \"./composer install\” to install dependecies." );
 }
 // root directory of UliCMS
 if (! defined ( "ULICMS_ROOT" )) {
@@ -59,11 +59,17 @@ if (! file_exists ( ULICMS_TMP )) {
 if (! defined ( "ULICMS_CACHE" )) {
 	define ( "ULICMS_CACHE", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "cache" . DIRECTORY_SEPERATOR );
 }
+if (! defined ( "ULICMS_LOG" )) {
+	define ( "ULICMS_LOG", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "log" . DIRECTORY_SEPERATOR );
+}
 if (! defined ( "ULICMS_CONTENT" )) {
 	define ( "ULICMS_CONTENT", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR );
 }
 if (! file_exists ( ULICMS_CACHE )) {
 	mkdir ( ULICMS_CACHE );
+}
+if (! file_exists ( ULICMS_LOG )) {
+	mkdir ( ULICMS_LOG );
 }
 include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "constants.php";
 include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "logger.php";
@@ -112,12 +118,12 @@ function exception_handler($exception) {
 		define ( "EXCEPTION_OCCURRED", true );
 	}
 	$error = nl2br ( htmlspecialchars ( $exception ) );
-
+	
 	$cfg = class_exists ( "config" ) ? new config () : null;
-	// TODO: Sinnvolle Fehlermessage wenn $debug deaktiviert ist.
-	// Exception in Textdatei loggen
+	// TODO: useful error message if $debug is disabled
+	// Log exception into a text file
 	$message = is_true ( $cfg->debug ) ? $exception : "Something happened! 😞";
-
+	
 	if (function_exists ( "HTMLResult" ) and class_exists ( "Template" ) and ! headers_sent ()) {
 		ViewBag::set ( "exception", $message );
 		HTMLResult ( Template::executeDefaultOrOwnTemplate ( "exception.php" ), 500 );
