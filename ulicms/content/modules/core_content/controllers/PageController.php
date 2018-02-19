@@ -94,7 +94,7 @@ class PageController extends Controller {
 			$show_headline = intval ( $_POST ["show_headline"] );
 			
 			add_hook ( "before_create_page" );
-			db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname,title,content,parent, active,created,lastmodified,autor,
+			db_query ( "INSERT INTO " . tbname ( "content" ) . " (systemname, title, content, parent, active, created, lastmodified, autor, `group_id`,
   redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`,
   `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`,
@@ -102,7 +102,7 @@ class PageController extends Controller {
 				`only_admins_can_edit`, `only_group_can_edit`, `only_owner_can_edit`, `only_others_can_edit`,
 				`comment_homepage`, `link_to_language` )
 					
-  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
+  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time () . ", " . time () . "," . $_SESSION ["login_id"] . "," . $_SESSION ["group_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
