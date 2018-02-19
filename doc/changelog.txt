@@ -1,4 +1,7 @@
 ===== Neues in UliCMS 2018.2.1 =====
+Neue Features:
++ Seiten haben nun auch eine Gruppe (group_id)
+
 Neue API-Funktionen:
 * combinedScriptHtml() (statt combined_script_html())
 * combinedStylesheetHtml (statt combined_stylesheet_html())
