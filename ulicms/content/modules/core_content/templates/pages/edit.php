@@ -44,9 +44,8 @@ if (defined ( "_SECURITY" )) {
 			} else if (! $is_owner and $pages_activate_others) {
 				$can_active_this = true;
 			}
-
-			$owner_data = getUserById ( $autor );
-			$owner_group = $owner_data ["group_id"];
+			
+			$owner_group = $row->group_id;
 			$current_group = $_SESSION ["group_id"];
 
 			$can_edit_this = false;
