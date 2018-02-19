@@ -254,6 +254,7 @@ class PageController extends Controller {
 		$actived_sql = "";
 		
 		$autor = intval ( $_POST ["autor"] );
+		$group_id = intval ( $_POST ["group_id"] );
 		$approved_sql = "";
 		
 		if ($activated) {
@@ -284,7 +285,7 @@ class PageController extends Controller {
 		
 		add_hook ( "before_edit_page" );
 		$sql = "UPDATE " . tbname ( "content" ) . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time () . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
-	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
+	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, `group_id` = $group_id, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
 	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = $article_date, excerpt = '$excerpt',
 	only_admins_can_edit = $only_admins_can_edit, `only_group_can_edit` = $only_group_can_edit,
 	only_owner_can_edit = $only_owner_can_edit, only_others_can_edit = $only_others_can_edit,
