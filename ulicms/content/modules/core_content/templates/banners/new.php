@@ -55,7 +55,7 @@ if (defined ( "_SECURITY" )) {
 <?php echo Categories :: getHTMLSelect()?></p>
 </p><br />
 <p>
-	<button type="submit" class="btn btn-success"><?php translate("add_banner");?></button>
+	<button type="submit" class="btn btn-primary"><?php translate("add_banner");?></button>
 </p>
 </form>
 <?php

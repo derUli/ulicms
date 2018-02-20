@@ -40,7 +40,7 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_edit" )) 
 	</strong><br /> <input type="text" name="code"
 		value="[video id=<?php echo $result->id;?>]"
 		onclick="this.focus();this.select();" readonly> <br /> <br />
-	<button type="submit" class="btn btn-success"><?php translate ( "save_changes" );?></button>
+	<button type="submit" class="btn btn-primary"><?php translate ( "save_changes" );?></button>
 
 
 </form>

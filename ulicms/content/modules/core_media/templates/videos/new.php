@@ -23,7 +23,7 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_create" )
 	</strong><br /> <input type="number" name="width" value="1280" step="1">
 	<br /> <br /> <strong><?php translate ( "height" );?></strong><br /> <input
 		type="number" name="height" value="720" step="1"> <br /> <br />
-	<button type="submit" class="btn btn-success"><?php translate ( "UPLOAD_VIDEO" );?></button>
+	<button type="submit" class="btn btn-primary"><?php translate ( "UPLOAD_VIDEO" );?></button>
 </form>
 <?php
 } else {

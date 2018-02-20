@@ -427,7 +427,7 @@ if($('#email_mode').val() == "pear_mail"){
 	</div>
 </div>
 
-<button type="submit" name="submit" class="btn btn-success voffset3"><?php translate("save_changes");?></button>
+<button type="submit" name="submit" class="btn btn-primary voffset3"><?php translate("save_changes");?></button>
 </form>
 <script type="text/javascript">
 $("#other_settings").ajaxForm({beforeSubmit: function(e){

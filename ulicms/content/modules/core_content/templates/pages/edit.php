@@ -1097,7 +1097,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </div>
 <div class="row">
 	<div class="col-xs-6">
-		<button type="submit" class="btn btn-success"><?php translate("save_changes");?></button>
+		<button type="submit" class="btn btn-primary"><?php translate("save_changes");?></button>
 
 	</div>
 

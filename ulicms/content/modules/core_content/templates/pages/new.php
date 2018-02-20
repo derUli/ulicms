@@ -714,7 +714,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </div>
 <div class="inPageMessage"></div>
 <input type="hidden" name="add_page" value="add_page">
-<button type="submit" class="btn btn-success"><?php translate("save");?></button>
+<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 <?php
 		enqueueScriptFile ( "scripts/page.js" );
 		combinedScriptHtml ();

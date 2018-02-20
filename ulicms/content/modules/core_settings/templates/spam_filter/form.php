@@ -84,7 +84,7 @@ function spamFilterEnabledcheckboxChanged(checked){
 
 	<p>
 		<button type="submit" name="submit_spamfilter_settings"
-			class="btn btn-success voffset3"><?php
+			class="btn btn-primary voffset3"><?php
 	
 	translate ( "save_changes" );
 	?></button>
