@@ -2,6 +2,8 @@
 Neue Features:
 + Seiten haben nun auch eine Gruppe (group_id)
 + Minifying von Scripts und Stylesheets kann durch Config-Variable $no_minify deaktiviert werden.
++ Exception Logging implementiert
++ Logging von SQL Queries nutzt nun auch KLogger
 
 Neue API-Funktionen:
 * combinedScriptHtml() (statt combined_script_html())
