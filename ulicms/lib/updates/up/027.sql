@@ -1,0 +1,1 @@
+update `{prefix}content` c set `group_id` = (select `group_id` from `{prefix}users` where id = c.autor ) where c.`group_id` is null;
