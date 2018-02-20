@@ -1,5 +1,5 @@
 <?php
-class TextLogger {
+class Logger {
 	private $path;
 	private $enabled = false;
 	private $logger;

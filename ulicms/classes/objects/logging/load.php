@@ -1,6 +1,6 @@
 <?php
 $classes = array (
-		"TextLogger" 
+		"Logger" 
 );
 foreach ( $classes as $class ) {
 	require_once dirname ( __FILE__ ) . "/$class.php";
