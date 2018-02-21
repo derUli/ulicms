@@ -4,6 +4,7 @@ Neue Features:
 + Minifying von Scripts und Stylesheets kann durch Config-Variable $no_minify deaktiviert werden.
 + Exception Logging implementiert
 + Logging von SQL Queries nutzt nun auch KLogger
++ Log-Ordner wird automatisch per .htaccess geschützt
 
 Neue API-Funktionen:
 * combinedScriptHtml() (statt combined_script_html())
