@@ -15,9 +15,10 @@ class LoggerTest extends PHPUnit_Framework_TestCase {
 		LoggerRegistry::unregister ( "test_log" );
 		$this->assertNull ( LoggerRegistry::get ( "test_log" ) );
 	}
-	// TODO: Testfall implementieren, der mit info(), debug() und error() loggt.
 	public function testLogFolderIsProtected() {
-		$this->assertTrue ( file_exists ( Path::resolve ( "ULICMS_LOG/.htaccess" ) ) );
-		$this->assertContains ( "deny from all", array_map ( "strtolower", StringHelper::linesFromFile ( Path::resolve ( "ULICMS_LOG/.htaccess" ) ) ) );
+		$htaccessFile = Path::resolve ( "ULICMS_LOG/.htaccess" );
+		$this->assertTrue ( file_exists ( $htaccessFile ) );
+		$this->assertContains ( "deny from all", array_map ( "strtolower", StringHelper::linesFromFile ( $htaccessFile ) ) );
 	}
+	// TODO: Testfall implementieren, der mit info(), debug() und error() loggt.
 }
