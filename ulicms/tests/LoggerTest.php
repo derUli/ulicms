@@ -6,7 +6,7 @@ class LoggerTest extends PHPUnit_Framework_TestCase {
 	public function tearDown() {
 		SureRemoveDir ( Path::resolve ( "ULICMS_LOG/test_log" ), true );
 	}
-	public function testRegisterLogger() {
+	public function testRegisterAndUnregisterLogger() {
 		$logger = new Logger ( Path::resolve ( "ULICMS_LOG/test_log" ) );
 		$this->assertTrue ( is_dir ( Path::resolve ( "ULICMS_LOG/test_log" ) ) );
 		LoggerRegistry::register ( "test_log", $logger );
@@ -16,5 +16,8 @@ class LoggerTest extends PHPUnit_Framework_TestCase {
 		$this->assertNull ( LoggerRegistry::get ( "test_log" ) );
 	}
 	// TODO: Testfall implementieren, der mit info(), debug() und error() loggt.
+	public function testLogFolderIsProtected() {
+		$this->assertTrue ( file_exists ( Path::resolve ( "ULICMS_LOG/.htaccess" ) ) );
+		$this->assertContains ( "deny from all", array_map ( "strtolower", StringHelper::linesFromFile ( Path::resolve ( "ULICMS_LOG/.htaccess" ) ) ) );
+	}
 }
-	
