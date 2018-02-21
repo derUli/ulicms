@@ -20,10 +20,13 @@ class Database {
 	
 	// Abstraktion für Ausführen von SQL Strings
 	public static function query($sql, $replacePrefix = false) {
-		Logger::logDbQuery ( $sql );
+		$cfg = new config ();
 		if ($replacePrefix) {
-			$cfg = new config ();
 			$sql = str_replace ( "{prefix}", $cfg->db_prefix, $sql );
+		}
+		$logger = LoggerRegistry::get ( "sql_log" );
+		if ($logger) {
+			$logger->info ( $sql );
 		}
 		return mysqli_query ( self::$connection, $sql );
 	}
@@ -57,7 +60,12 @@ class Database {
 				$i ++;
 			}
 		}
-		Logger::logDbQuery ( $preparedQuery );
+		
+		$cfg = new config ();
+		$logger = LoggerRegistry::get ( "sql_log" );
+		if ($logger) {
+			$logger->info ( $preparedQuery );
+		}
 		return Database::query ( $preparedQuery, $replacePrefix );
 	}
 	public static function getServerVersion() {
