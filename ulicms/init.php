@@ -74,8 +74,8 @@ if (! file_exists ( ULICMS_LOG )) {
 
 $htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
 $htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
-if(!file_exists($htaccessLogFolderTarget)){
-	copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
+if (! file_exists ( $htaccessLogFolderTarget )) {
+	copy ( $htaccessForLogFolderSource, $htaccessLogFolderTarget );
 }
 
 include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "constants.php";
@@ -114,6 +114,8 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "registry" . DIRECTORY_SEPERATOR . "load.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "files" . DIRECTORY_SEPERATOR . "load.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "logging" . DIRECTORY_SEPERATOR . "load.php";
+
+include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "HTML" . DIRECTORY_SEPERATOR . "load.php";
 
 $mobile_detect_as_module = dirname ( __file__ ) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
 if (file_exists ( $mobile_detect_as_module )) {
