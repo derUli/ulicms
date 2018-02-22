@@ -24,7 +24,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase {
 			enqueueScriptFile ( $file );
 		}
 		
-		$this->assertEquals ( '<script src="?output_scripts=admin/scripts/jquery.min.js;admin/scripts/global.js;admin/scripts/url.min.js&time=' . $filemtime . '" type="text/javascript"></script>', getCombinedScriptHtml () );
+		$this->assertEquals ( '<script src="?output_scripts=admin/scripts/jquery.min.js;admin/scripts/global.js;admin/scripts/url.min.js&amp;time=' . $filemtime . '" type="text/javascript"></script>', getCombinedScriptHtml () );
 		$this->assertCount ( 0, $_SERVER ["script_queue"] );
 	}
 	public function testStylesheetQueue() {

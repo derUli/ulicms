@@ -9,6 +9,9 @@ Neue Features:
 Neue API-Funktionen:
 * UliCMS\HTML\Style\FromExternalFile($href, $media = null, $htmlAttributes = array())
 * UliCMS\HTML\Style\FromString($code, $media = null, $htmlAttributes = array())
+* UliCMS\HTML\Script::FromExternalFile($src, $async = false, $defer = false, $htmlAttributes = array())
+* UliCMS\HTML\Script::FromString($code, $async = false, $defer = false, $htmlAttributes = array())
+
 * combinedScriptHtml() (statt combined_script_html())
 * combinedStylesheetHtml (statt combined_stylesheet_html())
 * Die Funktionen im alten Namensschema bleiben aus 
