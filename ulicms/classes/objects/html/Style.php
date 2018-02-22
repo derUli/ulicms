@@ -34,7 +34,7 @@ class Style {
 		}
 		$attribHTML = ModuleHelper::buildHTMLAttributesFromArray ( $attributes );
 		
-		return "<style $attribHTML>" . Template::getEscape ( $code ) . "</style>";
+		return "<style $attribHTML>" . $code . "</style>";
 	}
 }
 

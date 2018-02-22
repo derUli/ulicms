@@ -1,6 +1,7 @@
 <?php
 $classes = array (
-		"Style" 
+		"Style",
+		"Script" 
 );
 foreach ( $classes as $class ) {
 	require_once dirname ( __FILE__ ) . "/$class.php";
