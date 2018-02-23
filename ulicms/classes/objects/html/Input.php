@@ -27,6 +27,12 @@ class Input {
 		if ($checked) {
 			$htmlAttributes ["checked"] = "checked";
 		}
-		return self::TextBox ( $name, $value, "checkbox, $htmlAttributes" );
+		return self::TextBox ( $name, $value, "checkbox", $htmlAttributes );
+	}
+	public static function RadioButton($name, $checked = false, $value = "1", $htmlAttributes = array()) {
+		if ($checked) {
+			$htmlAttributes ["checked"] = "checked";
+		}
+		return self::TextBox ( $name, $value, "radio", $htmlAttributes );
 	}
 }
