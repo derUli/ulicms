@@ -18,7 +18,7 @@ class Input {
 		return "<input {$attribHTML}>";
 	}
 	public static function Password($name, $value, $htmlAttributes = array()) {
-		return self::TextBox ( $name, $value, "password, $htmlAttributes" );
+		return self::TextBox ( $name, $value, "password", $htmlAttributes );
 	}
 	public static function Hidden($name, $value, $htmlAttributes = array()) {
 		return self::TextBox ( $name, $value, "hidden", $htmlAttributes );
