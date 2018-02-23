@@ -1,6 +1,6 @@
 <?php
 use UliCMS\HTML\Script as Script;
-class HTMLSCriptTest extends PHPUnit_Framework_TestCase {
+class HTMLScriptTest extends PHPUnit_Framework_TestCase {
 	public function testInlineScript() {
 		$this->assertEquals ( "<script type=\"text/javascript\">alert(\"Hello world!\");</script>", Script::FromString ( "alert(\"Hello world!\");" ) );
 	}
