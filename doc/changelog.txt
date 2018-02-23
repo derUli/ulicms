@@ -13,6 +13,9 @@ Neue API-Funktionen:
 * UliCMS\HTML\Script::FromString($code, $async = false, $defer = false, $htmlAttributes = array())
 * UliCMS\HTML\Link\Link($href, $text, $htmlAttributes = array())
 * UliCMS\HTML\Link\ActionLink($action, $text, $suffix = null, $htmlAttributes = array())
+* UliCMS\HTML\Input\TextBox($name, $value, $type = "text", $htmlAttributes = array())
+* UliCMS\HTML\Input\ PasswordField($name, $value, $htmlAttributes = array())
+
 
 * combinedScriptHtml() (statt combined_script_html())
 * combinedStylesheetHtml (statt combined_stylesheet_html())
