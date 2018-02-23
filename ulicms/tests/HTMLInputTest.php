@@ -6,6 +6,11 @@ class HTMLInputTest extends PHPUnit_Framework_TestCase {
 				"required" => "required" 
 		) ) );
 	}
+	public function testTextArea() {
+		$this->assertEquals ( '<textarea name="my_field" rows="25" cols="80" required="required">&lt;h2&gt;Hello World!&lt;/h2&gt;</textarea>', Input::TextArea ( "my_field", "<h2>Hello World!</h2>", 25, 80, array (
+				"required" => "required" 
+		) ) );
+	}
 	public function testPassword() {
 		$this->assertEquals ( '<input type="password" name="my_field" value="Hello World" required="required">', Input::Password ( "my_field", "Hello World", array (
 				"required" => "required" 

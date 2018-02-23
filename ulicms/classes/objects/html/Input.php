@@ -3,6 +3,7 @@
 namespace UliCMS\HTML;
 
 use ModuleHelper;
+use Template;
 
 class Input {
 	public static function TextBox($name, $value, $type = "text", $htmlAttributes = array()) {
@@ -11,11 +12,26 @@ class Input {
 				"name" => $name,
 				"value" => $value 
 		);
-		foreach ( $htmlAttributes as $key => $value ) {
-			$attributes [$key] = $value;
+		foreach ( $htmlAttributes as $key => $val ) {
+			$attributes [$key] = $val;
 		}
 		$attribHTML = ModuleHelper::buildHTMLAttributesFromArray ( $attributes );
 		return "<input {$attribHTML}>";
+	}
+	public static function TextArea($name, $value, $rows = 25, $cols = 80, $htmlAttributes = array()) {
+		$attributes = array (
+				"name" => $name,
+				"rows" => $rows,
+				"cols" => $cols 
+		);
+		foreach ( $htmlAttributes as $key => $val ) {
+			$attributes [$key] = $val;
+		}
+		$attribHTML = ModuleHelper::buildHTMLAttributesFromArray ( $attributes );
+		
+		$escapedValue = Template::getEscape ( $value );
+		
+		return "<textarea {$attribHTML}>{$escapedValue}</textarea>";
 	}
 	public static function Password($name, $value, $htmlAttributes = array()) {
 		return self::TextBox ( $name, $value, "password", $htmlAttributes );
