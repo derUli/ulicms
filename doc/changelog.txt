@@ -25,7 +25,6 @@ Neue HTML-Helper:
 * UliCMS\HTML\Input\ MultiSelect($name, $value = null, $options = array(), $size = 5, $htmlAttributes = array())
 * UliCMS\HTML\ListItem (Klasse)
 
-
 Minifying:
 * combinedScriptHtml() (statt combined_script_html())
 * combinedStylesheetHtml (statt combined_stylesheet_html())
