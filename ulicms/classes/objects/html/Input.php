@@ -71,4 +71,24 @@ class Input {
 		$html .= '</select>';
 		return $html;
 	}
+	public static function MultiSelect($name, $value = null, $options = array(), $size = 5, $htmlAttributes = array()) {
+		$attributes = array (
+				"name" => $name,
+				"size" => $size 
+		);
+		foreach ( $htmlAttributes as $key => $val ) {
+			$attributes [$key] = $val;
+		}
+		$attribHTML = ModuleHelper::buildHTMLAttributesFromArray ( $attributes );
+		
+		$html = "<select $attribHTML multiple>";
+		foreach ( $options as $option ) {
+			if (is_array ( $value ) and in_array ( $option->getValue (), $value )) {
+				$option->setSelected ( true );
+			}
+			$html .= $option;
+		}
+		$html .= '</select>';
+		return $html;
+	}
 }

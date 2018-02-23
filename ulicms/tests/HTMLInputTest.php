@@ -53,4 +53,23 @@ class HTMLInputTest extends PHPUnit_Framework_TestCase {
 		);
 		$this->assertEquals ( '<select name="operating_system" size="5"><option value="windows">Windows</option><option value="linux" selected>Linux</option><option value="mac">macOS</option></select>', Input::SingleSelect ( "operating_system", "linux", $options, 5 ) );
 	}
+	public function testMultiSelect() {
+		$options = array (
+				new ListItem ( "windows", "Windows" ),
+				new ListItem ( "linux", "Linux" ),
+				new ListItem ( "mac", "macOS" ) 
+		);
+		$this->assertEquals ( '<select name="operating_system" size="5" multiple><option value="windows">Windows</option><option value="linux">Linux</option><option value="mac">macOS</option></select>', Input::MultiSelect ( "operating_system", null, $options ) );
+	}
+	public function testMultiSelectWithSelected() {
+		$options = array (
+				new ListItem ( "windows", "Windows" ),
+				new ListItem ( "linux", "Linux" ),
+				new ListItem ( "mac", "macOS" ) 
+		);
+		$this->assertEquals ( '<select name="operating_system" size="5" multiple><option value="windows" selected>Windows</option><option value="linux">Linux</option><option value="mac" selected>macOS</option></select>', Input::MultiSelect ( "operating_system", array (
+				"windows",
+				"mac" 
+		), $options ) );
+	}
 }
