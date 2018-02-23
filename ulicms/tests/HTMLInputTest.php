@@ -7,12 +7,12 @@ class HTMLInputTest extends PHPUnit_Framework_TestCase {
 		) ) );
 	}
 	public function testPassword() {
-		$this->assertEquals ( '<input type="password" name="my_field" value="Hello World" required="required">', Input::Password ( "my_field", "Hello World", "text", array (
+		$this->assertEquals ( '<input type="password" name="my_field" value="Hello World" required="required">', Input::Password ( "my_field", "Hello World", array (
 				"required" => "required" 
 		) ) );
 	}
 	public function testHidden() {
-		$this->assertEquals ( '<input type="hidden" name="my_field" value="Hello World" required="required">', Input::Hidden ( "my_field", "Hello World", "text", array (
+		$this->assertEquals ( '<input type="hidden" name="my_field" value="Hello World" required="required">', Input::Hidden ( "my_field", "Hello World", array (
 				"required" => "required" 
 		) ) );
 	}
