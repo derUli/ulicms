@@ -51,4 +51,24 @@ class Input {
 		}
 		return self::TextBox ( $name, $value, "radio", $htmlAttributes );
 	}
+	public static function SingleSelect($name, $value = null, $options = array(), $size = 1, $htmlAttributes = array()) {
+		$attributes = array (
+				"name" => $name,
+				"size" => $size 
+		);
+		foreach ( $htmlAttributes as $key => $val ) {
+			$attributes [$key] = $val;
+		}
+		$attribHTML = ModuleHelper::buildHTMLAttributesFromArray ( $attributes );
+		
+		$html = "<select $attribHTML>";
+		foreach ( $options as $option ) {
+			if ($value == $option->getValue ()) {
+				$option->setSelected ( true );
+			}
+			$html .= $option;
+		}
+		$html .= '</select>';
+		return $html;
+	}
 }

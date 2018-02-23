@@ -3,6 +3,7 @@ $classes = array (
 		"Style",
 		"Script",
 		"Link",
+		"ListItem",
 		"Input" 
 );
 foreach ( $classes as $class ) {
