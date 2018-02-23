@@ -24,7 +24,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase {
 			enqueueScriptFile ( $file );
 		}
 		
-		$this->assertEquals ( '<script src="?output_scripts=admin/scripts/jquery.min.js;admin/scripts/global.js;admin/scripts/url.min.js&time=' . $filemtime . '" type="text/javascript"></script>', getCombinedScriptHtml () );
+		$this->assertEquals ( '<script src="?output_scripts=admin/scripts/jquery.min.js;admin/scripts/global.js;admin/scripts/url.min.js&amp;time=' . $filemtime . '" type="text/javascript"></script>', getCombinedScriptHtml () );
 		$this->assertCount ( 0, $_SERVER ["script_queue"] );
 	}
 	public function testStylesheetQueue() {
@@ -52,7 +52,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase {
 			enqueueStylesheet ( $file );
 		}
 		
-		$this->assertEquals ( '<link rel="stylesheet" type="text/css" href="?output_stylesheets=core.min.css;admin/css/bootstrap.css;admin/css/bootstrap-theme.css;admin/css/modern.css&time=' . $filemtime . '"/>', getCombinedStylesheetHtml () );
+		$this->assertEquals ( '<link rel="stylesheet" href="?output_stylesheets=core.min.css;admin/css/bootstrap.css;admin/css/bootstrap-theme.css;admin/css/modern.css&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml () );
 		$this->assertCount ( 0, $_SERVER ["stylesheet_queue"] );
 	}
 }

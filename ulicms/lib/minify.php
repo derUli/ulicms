@@ -1,4 +1,7 @@
 <?php
+use UliCMS\HTML\Style;
+use UliCMS\HTML\Script;
+
 // Javascript Minify Funktionen
 function resetScriptQueue() {
 	$_SERVER ["script_queue"] = array ();
@@ -57,14 +60,14 @@ function getCombinedScriptHtml() {
 	$cfg = new config ();
 	if (is_true ( $cfg->no_minify )) {
 		foreach ( $_SERVER ["script_queue"] as $script ) {
-			$html .= "<script src=\"$script\" type=\"text/javascript\"></script>";
+			$html .= Script::fromFile ( $script );
 		}
 		resetScriptQueue ();
 		return $html;
 	}
 	
 	if (isset ( $_SERVER ["script_queue"] ) and is_array ( $_SERVER ["script_queue"] ) and count ( $_SERVER ["script_queue"] ) > 0) {
-		$html = '<script src="' . getCombinedScriptURL () . '" type="text/javascript"></script>';
+		$html = Script::fromFile ( getCombinedScriptURL () );
 	}
 	resetScriptQueue ();
 	return $html;
@@ -173,14 +176,14 @@ function getCombinedStylesheetHtml() {
 	$cfg = new config ();
 	if (is_true ( $cfg->no_minify )) {
 		foreach ( $_SERVER ["stylesheet_queue"] as $stylesheet ) {
-			$html .= '<link rel="stylesheet" type="text/css" href="' . $stylesheet . '"/>';
+			$html .= Style::FromExternalFile ( $stylesheet );
 		}
 		resetStylesheetQueue ();
 		return $html;
 	}
 	
 	if (isset ( $_SERVER ["stylesheet_queue"] ) and is_array ( $_SERVER ["stylesheet_queue"] ) and count ( $_SERVER ["stylesheet_queue"] ) > 0) {
-		$html = '<link rel="stylesheet" type="text/css" href="' . getCombinedStylesheetURL () . '"/>';
+		$html = Style::FromExternalFile ( getCombinedStylesheetURL () );
 	}
 	resetStylesheetQueue ();
 	return $html;
