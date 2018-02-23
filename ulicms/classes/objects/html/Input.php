@@ -15,7 +15,7 @@ class Input {
 			$attributes [$key] = $value;
 		}
 		$attribHTML = ModuleHelper::buildHTMLAttributesFromArray ( $attributes );
-		return "<input {$attribHTML}/>";
+		return "<input {$attribHTML}>";
 	}
 	public static function Password($name, $value, $htmlAttributes = array()) {
 		return self::TextBox ( $name, $value, "password, $htmlAttributes" );
