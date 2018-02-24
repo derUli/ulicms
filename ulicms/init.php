@@ -135,9 +135,11 @@ function exception_handler($exception) {
 	$message = is_true ( $cfg->debug ) ? $exception : "Something happened! 😞";
 	
 	$logger = LoggerRegistry::get ( "exception_log" );
-	$logger->error ( $exception );
+	if ($logger) {
+		$logger->error ( $exception );
+	}
 	
-	if (function_exists ( "HTMLResult" ) and class_exists ( "Template" ) and ! headers_sent ()) {
+	if (function_exists ( "HTMLResult" ) and class_exists ( "Template" ) and ! headers_sent () and function_exists ( "get_theme" )) {
 		ViewBag::set ( "exception", $message );
 		HTMLResult ( Template::executeDefaultOrOwnTemplate ( "exception.php" ), 500 );
 	}
@@ -230,10 +232,12 @@ include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_
 
 Translation::init ();
 
-LoggerRegistry::register ( "exception_log", new Logger ( Path::resolve ( "ULICMS_LOG/exception_log" ) ) );
-
-if (is_true ( $config->query_logging )) {
-	LoggerRegistry::register ( "sql_log", new Logger ( Path::resolve ( "ULICMS_LOG/sql_log" ) ) );
+if (class_exists ( "Path" )) {
+	LoggerRegistry::register ( "exception_log", new Logger ( Path::resolve ( "ULICMS_LOG/exception_log" ) ) );
+	
+	if (is_true ( $config->query_logging )) {
+		LoggerRegistry::register ( "sql_log", new Logger ( Path::resolve ( "ULICMS_LOG/sql_log" ) ) );
+	}
 }
 
 require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib/minify.php";
