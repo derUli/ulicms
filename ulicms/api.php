@@ -823,34 +823,39 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 }
 function getModulePath($module, $abspath = false) {
 	if ($abspath) {
-		return Path::resolve ( "ULICMS_ROOT/content/modules/$module" ) . "/";
+		return Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/modules/$module" ) . "/";
 	}
-	// Frontend Directory
-	if (is_file ( "cms-config.php" )) {
-		$module_folder = "content/modules/";
-	} // Backend Directory
-	else {
-		$module_folder = "../content/modules/";
+	if (ULICMS_ROOT == ULICMS_DATA_STORAGE_ROOT and ! defined ( "ULICMS_DATA_STORAGE_URL" )) {
+		// Frontend Directory
+		if (is_file ( "cms-config.php" )) {
+			$module_folder = "content/modules/";
+		} // Backend Directory
+		else {
+			$module_folder = "../content/modules/";
+		}
+	} else {
+		$module_folder = Path::resolve ( "ULICMS_DATA_STORAGE_URL/content/modules" ) . "/";
 	}
-	$available_modules = Array ();
+	
+	$available_modules = array ();
 	return $module_folder . $module . "/";
 }
 function getModuleAdminFilePath($module) {
-	return getModulePath ( $module ) . $module . "_admin.php";
+	return getModulePath ( $module, true ) . $module . "_admin.php";
 }
 function getModuleAdminFilePath2($module) {
-	return getModulePath ( $module ) . "admin.php";
+	return getModulePath ( $module, true ) . "admin.php";
 }
 function getModuleMainFilePath($module) {
-	return getModulePath ( $module ) . $module . "_main.php";
+	return getModulePath ( $module, true ) . $module . "_main.php";
 }
 function getModuleMainFilePath2($module) {
-	return getModulePath ( $module ) . "main.php";
+	return getModulePath ( $module, true ) . "main.php";
 }
-function getModuleUninstallScriptPath($module, $abspath = false) {
+function getModuleUninstallScriptPath($module, $abspath = true) {
 	return getModulePath ( $module, $abspath ) . $module . "_uninstall.php";
 }
-function getModuleUninstallScriptPath2($module, $abspath = false) {
+function getModuleUninstallScriptPath2($module, $abspath = true) {
 	return getModulePath ( $module, $abspath ) . "uninstall.php";
 }
 /**

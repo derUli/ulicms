@@ -175,6 +175,16 @@ if ((defined ( "ULICMS_DEBUG" ) and ULICMS_DEBUG) or (isset ( $config->debug ) a
 	error_reporting ( 0 );
 }
 
+if (isset ( $config->data_storage_root ) and ! is_null ( $config->data_storage_root )) {
+	define ( "ULICMS_DATA_STORAGE_ROOT", $config->data_storage_root );
+} else {
+	define ( "ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT );
+}
+
+if (isset ( $config->data_storage_url ) and ! is_null ( $config->data_storage_url )) {
+	define ( "ULICMS_DATA_STORAGE_URL", $config->data_storage_url );
+}
+
 // umask setzen
 // Die umask legt die Standarddateirechte für neue Dateien auf Unix Systemen fest
 // Die Variable $umask sollte nur gesetzt werden, sofern es zu Berechtigungsproblemen bei durch UliCMS generierten Dateien kommt.

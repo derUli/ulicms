@@ -56,8 +56,8 @@ class ModuleHelper {
 		$retval = array ();
 		$modules = getAllModules ();
 		foreach ( $modules as $module ) {
-			$noembedfile1 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/.noembed" );
-			$noembedfile2 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/noembed.txt" );
+			$noembedfile1 = Path::Resolve ( "ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed" );
+			$noembedfile2 = Path::Resolve ( "ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt" );
 			
 			$embed_attrib = true;
 			
@@ -82,8 +82,8 @@ class ModuleHelper {
 	}
 	public static function isEmbedModule($module) {
 		$retval = true;
-		$noembedfile1 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/.noembed" );
-		$noembedfile2 = Path::Resolve ( "ULICMS_ROOT/content/modules/$module/noembed.txt" );
+		$noembedfile1 = Path::Resolve ( "ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed" );
+		$noembedfile2 = Path::Resolve ( "ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt" );
 		
 		$embed_attrib = true;
 		

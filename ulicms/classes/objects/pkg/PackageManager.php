@@ -129,7 +129,7 @@ class PackageManager {
 		return $url;
 	}
 	public function getInstalledModules() {
-		$module_folder = ULICMS_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "modules" . DIRECTORY_SEPERATOR;
+		$module_folder = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/modules" ) . "/";
 		
 		$available_modules = Array ();
 		$directory_content = scandir ( $module_folder );
@@ -154,7 +154,7 @@ class PackageManager {
 	}
 	public function getInstalledThemes() {
 		$themes = Array ();
-		$templateDir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "templates" . DIRECTORY_SEPERATOR;
+		$templateDir = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/templates" ) . "/";
 		
 		$folders = scanDir ( $templateDir );
 		natcasesort ( $folders );

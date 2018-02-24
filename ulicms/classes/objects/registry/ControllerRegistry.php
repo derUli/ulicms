@@ -46,6 +46,8 @@ class ControllerRegistry {
 				$sClass = $_REQUEST ["sClass"];
 				self::get ( $sClass )->runCommand ();
 			} else {
+				
+				$sClass = $_REQUEST ["sClass"];
 				throw new BadMethodCallException ( "class " . htmlspecialchars ( $sClass ) . " not found" );
 			}
 		}

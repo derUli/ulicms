@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+	<loc>http://localhost/ulicms/wordpress_commits.html</loc>
+	<lastmod>2018-02-19</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/github_commits.html</loc>
+	<lastmod>2018-02-19</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/foobar.html</loc>
+	<lastmod>2018-02-19</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/hardcore_foo.html</loc>
+	<lastmod>2018-02-19</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/lorem_ipsum.html</loc>
+	<lastmod>2016-07-29</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/lorem_ipsum.html</loc>
+	<lastmod>2016-07-29</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/pfbc.html</loc>
+	<lastmod>2016-06-25</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/pfbc_sample.html</loc>
+	<lastmod>2016-06-25</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/glueckskeks.html</loc>
+	<lastmod>2016-06-25</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/fortune.html</loc>
+	<lastmod>2016-06-25</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/welcome.html</loc>
+	<lastmod>2013-03-25</lastmod>
+</url>
+
+<url>
+	<loc>http://localhost/ulicms/willkommen.html</loc>
+	<lastmod>2013-03-25</lastmod>
+</url>
+
+</urlset>
