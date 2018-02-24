@@ -70,8 +70,8 @@ class Template {
 	}
 	public static function executeModuleTemplate($module, $template) {
 		$retval = "";
-		$originalTemplatePath = getModulePath ( $module ) . "templates/" . $template;
-		$ownTemplatePath = getTemplateDirPath ( get_theme () ) . $module . "/" . $template;
+		$originalTemplatePath = getModulePath ( $module, true ) . "templates/" . $template;
+		$ownTemplatePath = getTemplateDirPath ( get_theme (), true ) . $module . "/" . $template;
 		
 		if (! endsWith ( $template, ".php" )) {
 			$originalTemplatePath .= ".php";

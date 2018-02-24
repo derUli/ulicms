@@ -883,11 +883,12 @@ function base_metas() {
 	}
 	
 	$min_style_file = getTemplateDirPath ( get_theme () ) . "style.min.css";
+	$min_style_file_realpath = getTemplateDirPath ( get_theme (), true ) . "style.min.css";
 	$style_file = getTemplateDirPath ( get_theme () ) . "style.css";
-	
-	if (is_file ( $min_style_file )) {
+	$style_file_realpath = getTemplateDirPath ( get_theme (), true ) . "style.css";
+	if (is_file ( $min_style_file_realpath )) {
 		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
-	} else if (is_file ( $style_file )) {
+	} else if (is_file ( $style_file_realpath )) {
 		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
 	}
 	echo "\r\n";

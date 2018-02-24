@@ -674,7 +674,9 @@ function getThemesList() {
 }
 function getTemplateDirPath($sub = "default", $abspath = false) {
 	if ($abspath) {
-		$templateDir = Path::resolve ( "ULICMS_ROOT/content/templates/" ) . "/";
+		$templateDir = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/templates/" ) . "/";
+	} else if (ULICMS_ROOT != ULICMS_DATA_STORAGE_ROOT and defined ( "ULICMS_DATA_STORAGE_URL" )) {
+		$templateDir = Path::resolve ( "ULICMS_DATA_STORAGE_URL/content/templates" ) . "/";
 	} else if (is_admin_dir ()) {
 		$templateDir = "../content/templates/";
 	} else {
