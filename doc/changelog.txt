@@ -7,11 +7,25 @@ Neue Features:
 + Log-Ordner wird automatisch per .htaccess geschützt
 
 Neue API-Funktionen:
+
+Neue HTML-Helper:
 * UliCMS\HTML\Style\FromExternalFile($href, $media = null, $htmlAttributes = array())
 * UliCMS\HTML\Style\FromString($code, $media = null, $htmlAttributes = array())
 * UliCMS\HTML\Script::FromExternalFile($src, $async = false, $defer = false, $htmlAttributes = array())
 * UliCMS\HTML\Script::FromString($code, $async = false, $defer = false, $htmlAttributes = array())
+* UliCMS\HTML\Link\Link($href, $text, $htmlAttributes = array())
+* UliCMS\HTML\Link\ActionLink($action, $text, $suffix = null, $htmlAttributes = array())
+* UliCMS\HTML\Input\TextBox($name, $value, $type = "text", $htmlAttributes = array())
+* UliCMS\HTML\Input\TextArea($name, $value, $rows = 25, $cols = 80, $htmlAttributes = array())
+* UliCMS\HTML\Input\Password($name, $value, $htmlAttributes = array())
+* UliCMS\HTML\Input\Hidden($name, $value, $htmlAttributes = array())
+* UliCMS\HTML\Input\CheckBox($name, $checked = false, $value = "1", $htmlAttributes = array())
+* UliCMS\HTML\Input\RadioButton($name, $checked = false, $value = "1", $htmlAttributes = array())
+* UliCMS\HTML\Input\SingleSelect($name, $value = null, $options = array(), $size = 1, $htmlAttributes = array()) 
+* UliCMS\HTML\Input\ MultiSelect($name, $value = null, $options = array(), $size = 5, $htmlAttributes = array())
+* UliCMS\HTML\ListItem (Klasse)
 
+Minifying:
 * combinedScriptHtml() (statt combined_script_html())
 * combinedStylesheetHtml (statt combined_stylesheet_html())
 * Die Funktionen im alten Namensschema bleiben aus 
