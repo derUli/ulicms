@@ -583,8 +583,8 @@ function add_hook($name) {
 		if (faster_in_array ( $modules [$hook_i], $disabledModules )) {
 			continue;
 		}
-		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
-		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
+		$file1 = getModulePath ( $modules [$hook_i], true ) . $modules [$hook_i] . "_" . $name . ".php";
+		$file2 = getModulePath ( $modules [$hook_i], true ) . "hooks/" . $name . ".php";
 		$main_class = getModuleMeta ( $modules [$hook_i], "main_class" );
 		$controller = null;
 		if ($main_class) {

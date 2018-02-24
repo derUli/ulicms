@@ -608,8 +608,8 @@ function apply_filter($text, $type) {
 		if (faster_in_array ( $modules [$i], $disabledModules )) {
 			continue;
 		}
-		$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
-		$module_content_filter_file2 = getModulePath ( $modules [$i] ) . "filters/" . $type . ".php";
+		$module_content_filter_file1 = getModulePath ( $modules [$i], true ) . $modules [$i] . "_" . $type . "_filter.php";
+		$module_content_filter_file2 = getModulePath ( $modules [$i], true ) . "filters/" . $type . ".php";
 		
 		$main_class = getModuleMeta ( $modules [$i], "main_class" );
 		$controller = null;
