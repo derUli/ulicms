@@ -12,17 +12,17 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_create" )
 	<?php csrf_token_html ();?>
 	<strong><?php translate ( "name" );?>
 	</strong><br /> <input type="text" name="name" value="" maxlength="255"
-		required /> <br /> <br /> <strong><?php translate("category");?>
+		required /> <br /> <strong><?php translate("category");?>
 	</strong><br />
 	<?php echo Categories::getHTMLSelect ();?>
 
 	<br /> <br /> <strong><?php echo translate ( "video_ogg" );?>
-	</strong><br /> <input name="ogg_file" type="file"><br /> <br /> <strong><?php echo translate ( "video_webm" );?>
-	</strong><br /> <input name="webm_file" type="file"><br /> <br /> <strong><?php echo translate ( "video_mp4" );?>
-	</strong><br /> <input name="mp4_file" type="file"><br /> <br /> <strong><?php translate ( "width" );?>
+	</strong><br /> <input name="ogg_file" type="file"><br /> <strong><?php echo translate ( "video_webm" );?>
+	</strong><br /> <input name="webm_file" type="file"><br /> <strong><?php echo translate ( "video_mp4" );?>
+	</strong><br /> <input name="mp4_file" type="file"><br /> <strong><?php translate ( "width" );?>
 	</strong><br /> <input type="number" name="width" value="1280" step="1">
-	<br /> <br /> <strong><?php translate ( "height" );?></strong><br /> <input
-		type="number" name="height" value="720" step="1"> <br /> <br />
+	<br /> <strong><?php translate ( "height" );?></strong><br /> <input
+		type="number" name="height" value="720" step="1"> <br />
 	<button type="submit" class="btn btn-primary"><?php translate ( "UPLOAD_VIDEO" );?></button>
 </form>
 <?php
