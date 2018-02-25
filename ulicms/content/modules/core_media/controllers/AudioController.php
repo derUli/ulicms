@@ -36,6 +36,10 @@ class AudioController extends Controller {
 			if (faster_in_array ( $mp3_type, $mp3_allowed_mime_type )) {
 				$target = $audio_folder . "/" . $mp3_file;
 				if (move_uploaded_file ( $_FILES ['mp3_file'] ['tmp_name'], $target )) {
+					// Google Cloud: make file public
+					if (startsWith ( ULICMS_DATA_STORAGE_ROOT, "gs://" ) and class_exists ( "GoogleCloudHelper" )) {
+						GoogleCloudHelper::changeFileVisiblity ( $target, true );
+					}
 					$mp3_file_value = basename ( $mp3_file );
 				}
 			}
@@ -54,6 +58,10 @@ class AudioController extends Controller {
 			if (faster_in_array ( $ogg_type, $ogg_allowed_mime_type )) {
 				$target = $audio_folder . "/" . $ogg_file;
 				if (move_uploaded_file ( $_FILES ['ogg_file'] ['tmp_name'], $target )) {
+					// Google Cloud: make file public
+					if (startsWith ( ULICMS_DATA_STORAGE_ROOT, "gs://" ) and class_exists ( "GoogleCloudHelper" )) {
+						GoogleCloudHelper::changeFileVisiblity ( $target, true );
+					}
 					$ogg_file_value = basename ( $ogg_file );
 				}
 			}
