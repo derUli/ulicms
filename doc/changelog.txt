@@ -39,6 +39,9 @@ falls kein Feld für die E-Mail Adresse gesetzt ist.
 Entfernte Features:
 - Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.  
 
+Bugfixes:
+* Hochgeladene Videos wurden im Root-Ordner des Dateisystems gespeichert
+
 ===== Neues in UliCMS 2018.2 =====
 
 Neue Features:
