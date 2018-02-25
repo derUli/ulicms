@@ -1,10 +1,14 @@
 <?php
-// @FIXME: Alle SQLs die in dieser Datei stehen, müssen in einen Controller oder ein Model ("HomeViewModel" anlegen) ausgelagert werden.
 $acl = new ACL ();
 include_once ULICMS_ROOT . "/lib/formatter.php";
 
 $controller = ControllerRegistry::get ();
 $model = $controller->getModel ();
+
+
+// no patch check in google cloud
+$runningInGoogleCloud = class_exists ( "GoogleCloudHelper" ) ? GoogleCloudHelper::isProduction () : false;
+
 
 if ($acl->hasPermission ( "dashboard" )) {
 	
@@ -44,7 +48,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 		<div class="accordion-content" id="patch-message"></div>
 	</div>
 <?php
-	$pi = ULICMS_ROOT . "/post-install.php";
+	$pi = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
 	if (file_exists ( $pi ) and is_writable ( $pi )) {
 		?>
 <h2 class="accordion-header"><?php translate("unfinished_package_installations");?></h2>
@@ -222,10 +226,12 @@ if ($acl->hasPermission ( "dashboard" )) {
 	add_hook ( "accordion_layout" );
 	?>
 </div>
-<?php 
-enqueueScriptFile(ModuleHelper::buildModuleRessourcePath("core_home", "js/dashboard.js"));
-combinedScriptHtml();
-?>
+<?php
+	if (! $runningInGoogleCloud) {
+		enqueueScriptFile ( ModuleHelper::buildModuleRessourcePath ( "core_home", "js/dashboard.js" ) );
+		combinedScriptHtml ();
+	}
+	?>
 <?php
 } else {
 	noperms ();

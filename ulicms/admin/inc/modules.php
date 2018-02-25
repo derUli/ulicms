@@ -228,8 +228,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 	}
 	?>
 <?php
-	
-	if ($acl->hasPermission ( "patch_management" )) {
+	$isGoogleCloud = (class_exists ( "GoogleCloudHelper" ) && GoogleCloudHelper::isProduction ());
+	if ($acl->hasPermission ( "patch_management" ) and ! $isGoogleCloud) {
 		?>
 <a id="installed_patches_a"></a>
 <p>
