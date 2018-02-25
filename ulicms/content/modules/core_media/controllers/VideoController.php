@@ -11,7 +11,6 @@ class VideoController extends Controller {
 			}
 			
 			// WebM
-			$result = db_fetch_object ( $query );
 			$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->webm_file );
 			if (! empty ( $result->webm_file ) and is_file ( $filepath )) {
 				@unlink ( $filepath );
