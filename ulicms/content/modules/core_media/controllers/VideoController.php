@@ -41,6 +41,8 @@ class VideoController extends Controller {
 		Request::redirect ( ModuleHelper::buildActionURL ( "videos" ) );
 	}
 	public function createPost() {
+		$video_folder = ULICMS_ROOT . "/content/videos";
+		
 		if (isset ( $_FILES )) {
 			$mp4_file_value = "";
 			// MP4
