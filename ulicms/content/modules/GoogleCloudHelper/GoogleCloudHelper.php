@@ -36,4 +36,21 @@ class GoogleCloudHelper {
 		self::writeCloudFile ( $filename, $content, $public ? "public-read" : "private" );
 		return true;
 	}
+	// php files should not be served from Google Cloud Storage
+	public static function getProtectedFileExtensions() {
+		$extensions = array (
+				".php",
+				".phps" 
+		);
+		$extensions = apply_filter ( $extensions, "protected_extensions" );
+		return $extensions;
+	}
+	// Make all files public except forbidden extensions
+	public static function makeFilesPublic($folder) {
+		$extensions = self::getProtectedFileExtensions ();
+		$files = find_all_files ( $folder );
+		foreach ( $files as $file ) {
+			self::changeFileVisiblity ( $file, ! endsWith ( strtolower ( $file ), ".php" ) );
+		}
+	}
 }
