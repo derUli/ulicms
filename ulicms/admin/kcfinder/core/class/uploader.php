@@ -168,7 +168,7 @@ class uploader {
 	/**
 	 * * Magic method which allows read-only access to protected or private class properties
 	 *
-	 * @param string $property        	
+	 * @param string $property
 	 * @return mixed
 	 */
 	public function __get($property) {
@@ -179,12 +179,12 @@ class uploader {
 		// SET CMS INTEGRATION PROPERTY
 		if (isset ( $_GET ['cms'] ) && $this->checkFilename ( $_GET ['cms'] ) && is_file ( "integration/{$_GET['cms']}.php" ))
 			$this->cms = $_GET ['cms'];
-			
-			// LINKING UPLOADED FILE
+		
+		// LINKING UPLOADED FILE
 		if (count ( $_FILES ))
 			$this->file = & $_FILES [key ( $_FILES )];
-			
-			// LOAD DEFAULT CONFIGURATION
+		
+		// LOAD DEFAULT CONFIGURATION
 		require "conf/config.php";
 		
 		// SETTING UP SESSION
@@ -223,8 +223,8 @@ class uploader {
 			$this->session = & $sessVar ['self'];
 		} else
 			$this->session = & $_SESSION;
-			
-			// SECURING THE SESSION
+		
+		// SECURING THE SESSION
 		$stamp = array (
 				'ip' => $_SERVER ['REMOTE_ADDR'],
 				'agent' => md5 ( $_SERVER ['HTTP_USER_AGENT'] ) 
@@ -248,14 +248,14 @@ class uploader {
 				$this->imageDriver 
 		) ) === false))
 			die ( "Cannot find any of the supported PHP image extensions!" );
-			
-			// WATERMARK INIT
+		
+		// WATERMARK INIT
 		if (isset ( $this->config ['watermark'] ) && is_string ( $this->config ['watermark'] ))
 			$this->config ['watermark'] = array (
 					'file' => $this->config ['watermark'] 
 			);
-			
-			// GET TYPE DIRECTORY
+		
+		// GET TYPE DIRECTORY
 		$this->types = & $this->config ['types'];
 		$firstType = array_keys ( $this->types );
 		$firstType = $firstType [0];
@@ -283,9 +283,9 @@ class uploader {
 			$this->config ['cookieDomain'] = $_SERVER ['HTTP_HOST'];
 		if (! strlen ( $this->config ['cookiePath'] ))
 			$this->config ['cookiePath'] = "/";
-			
-			// UPLOAD FOLDER INIT
-			// FULL URL
+		
+		// UPLOAD FOLDER INIT
+		// FULL URL
 		if (preg_match ( '/^([a-z]+)\:\/\/([^\/^\:]+)(\:(\d+))?\/(.+)\/?$/', $this->config ['uploadURL'], $patt )) {
 			list ( $unused, $protocol, $domain, $unused, $port, $path ) = $patt;
 			$path = path::normalize ( $path );
@@ -330,8 +330,8 @@ class uploader {
 			}
 		} else
 			$this->opener ['name'] = false;
-			
-			// LOCALIZATION
+		
+		// LOCALIZATION
 		foreach ( $this->langInputNames as $key )
 			if (isset ( $_GET [$key] ) && preg_match ( '/^[a-z][a-z\._\-]*$/i', $_GET [$key] ) && file_exists ( "lang/" . strtolower ( $_GET [$key] ) . ".php" )) {
 				$this->lang = $_GET [$key];
@@ -345,8 +345,8 @@ class uploader {
 			// TRY TO CREATE UPLOAD DIRECTORY IF NOT EXISTS
 			if (! $this->config ['disabled'] && ! is_dir ( $this->config ['uploadDir'] ))
 				@mkdir ( $this->config ['uploadDir'], $this->config ['dirPerms'] );
-				
-				// CHECK & MAKE DEFAULT .htaccess
+			
+			// CHECK & MAKE DEFAULT .htaccess
 			if (isset ( $this->config ['_check4htaccess'] ) && $this->config ['_check4htaccess']) {
 				$htaccess = "{$this->config['uploadDir']}/.htaccess";
 				$original = $this->get_htaccess ();
@@ -402,11 +402,15 @@ class uploader {
 				$filename = $this->normalizeFilename ( $file ['name'] );
 				$target = file::getInexistantFilename ( $dir . $filename );
 				
-				if (! @move_uploaded_file ( $file ['tmp_name'], $target ) && ! @rename ( $file ['tmp_name'], $target ) && ! @copy ( $file ['tmp_name'], $target ))
+				if (! @move_uploaded_file ( $file ['tmp_name'], $target ) && ! @rename ( $file ['tmp_name'], $target ) && ! @copy ( $file ['tmp_name'], $target )) {
 					$message = $this->label ( "Cannot move uploaded file to target folder." );
-				else {
+				} else {
 					if (function_exists ( 'chmod' ))
 						@chmod ( $target, $this->config ['filePerms'] );
+					// Google Cloud: make file public
+					if (startsWith ( ULICMS_DATA_STORAGE_ROOT, "gs://" ) and class_exists ( "\GoogleCloudHelper" )) {
+						\GoogleCloudHelper::changeFileVisiblity ( $target, true );
+					}
 					$this->makeThumb ( $target );
 					$url = $this->typeURL;
 					if (isset ( $udir ))
@@ -490,16 +494,16 @@ class uploader {
 			) ) : (($file ['error'] == UPLOAD_ERR_FORM_SIZE) ? $this->label ( "The uploaded file exceeds {size} bytes.", array (
 					'size' => $_GET ['MAX_FILE_SIZE'] 
 			) ) : (($file ['error'] == UPLOAD_ERR_PARTIAL) ? $this->label ( "The uploaded file was only partially uploaded." ) : (($file ['error'] == UPLOAD_ERR_NO_FILE) ? $this->label ( "No file was uploaded." ) : (($file ['error'] == UPLOAD_ERR_NO_TMP_DIR) ? $this->label ( "Missing a temporary folder." ) : (($file ['error'] == UPLOAD_ERR_CANT_WRITE) ? $this->label ( "Failed to write file." ) : $this->label ( "Unknown error." ))))));
-			
-			// HIDDEN FILENAMES CHECK
+		
+		// HIDDEN FILENAMES CHECK
 		elseif (substr ( $file ['name'], 0, 1 ) == ".")
 			return $this->label ( "File name shouldn't begins with '.'" );
-			
-			// EXTENSION CHECK
+		
+		// EXTENSION CHECK
 		elseif ((substr ( $file ['name'], - 1 ) == ".") || ! $this->validateExtension ( $extension, $this->type ))
 			return $this->label ( "Denied file extension." );
-			
-			// SPECIAL DIRECTORY TYPES CHECK (e.g. *img)
+		
+		// SPECIAL DIRECTORY TYPES CHECK (e.g. *img)
 		elseif (preg_match ( '/^\*([^ ]+)(.*)?$/s', $typePatt, $patt )) {
 			list ( $typePatt, $type, $params ) = $patt;
 			$class = __NAMESPACE__ . "\\type_$type";
@@ -598,8 +602,8 @@ class uploader {
 		// IMAGE WILL NOT BE RESIZED WHEN NO WATERMARK AND SIZE IS ACCEPTABLE
 		if ((! isset ( $this->config ['watermark'] ['file'] ) || (! strlen ( trim ( $this->config ['watermark'] ['file'] ) ))) && ((! $this->config ['maxImageWidth'] && ! $this->config ['maxImageHeight']) || (($img->width <= $this->config ['maxImageWidth']) && ($img->height <= $this->config ['maxImageHeight']))) && ($orientation == 1))
 			return true;
-			
-			// PROPORTIONAL RESIZE
+		
+		// PROPORTIONAL RESIZE
 		if ((! $this->config ['maxImageWidth'] || ! $this->config ['maxImageHeight'])) {
 			
 			if ($this->config ['maxImageWidth'] && ($this->config ['maxImageWidth'] < $img->width)) {
@@ -616,8 +620,8 @@ class uploader {
 			// RESIZE TO FIT
 		} elseif ($this->config ['maxImageWidth'] && $this->config ['maxImageHeight'] && ! $img->resizeFit ( $this->config ['maxImageWidth'], $this->config ['maxImageHeight'] ))
 			return false;
-			
-			// AUTO FLIP AND ROTATE FROM EXIF
+		
+		// AUTO FLIP AND ROTATE FROM EXIF
 		if ((($orientation == 2) && ! $img->flipHorizontal ()) || (($orientation == 3) && ! $img->rotate ( 180 )) || (($orientation == 4) && ! $img->flipVertical ()) || (($orientation == 5) && (! $img->flipVertical () || ! $img->rotate ( 90 ))) || (($orientation == 6) && ! $img->rotate ( 90 )) || (($orientation == 7) && (! $img->flipHorizontal () || ! $img->rotate ( 90 ))) || (($orientation == 8) && ! $img->rotate ( 270 )))
 			return false;
 		if (($orientation >= 2) && ($orientation <= 8) && ($this->imageDriver == "imagick"))
@@ -625,8 +629,8 @@ class uploader {
 				$img->image->setImageProperty ( 'exif:Orientation', "1" );
 			} catch ( \Exception $e ) {
 			}
-			
-			// WATERMARK
+		
+		// WATERMARK
 		if (isset ( $this->config ['watermark'] ['file'] ) && is_file ( $this->config ['watermark'] ['file'] )) {
 			$left = isset ( $this->config ['watermark'] ['left'] ) ? $this->config ['watermark'] ['left'] : false;
 			$top = isset ( $this->config ['watermark'] ['top'] ) ? $this->config ['watermark'] ['top'] : false;
@@ -662,8 +666,8 @@ class uploader {
 		
 		if (! $overwrite && is_file ( $thumb ))
 			return true;
-			
-			// Images with smaller resolutions than thumbnails
+		
+		// Images with smaller resolutions than thumbnails
 		if (($img->width <= $this->config ['thumbWidth']) && ($img->height <= $this->config ['thumbHeight'])) {
 			// Drop only browsable types
 			if (in_array ( $type, array (
@@ -676,8 +680,8 @@ class uploader {
 			// Resize image
 		} elseif (! $img->resizeFit ( $this->config ['thumbWidth'], $this->config ['thumbHeight'] ))
 			return false;
-			
-			// Save thumbnail
+		
+		// Save thumbnail
 		$options = array (
 				'file' => $thumb 
 		);
