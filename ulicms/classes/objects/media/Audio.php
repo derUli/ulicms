@@ -119,13 +119,13 @@ class Audio extends Model {
 		if ($this->getId ()) {
 			if ($deletePhysical) {
 				if ($this->getMP3File ()) {
-					$file = Path::resolve ( "ULICMS_ROOT/content/audio/" . basename ( $this->getMP3File () ) );
+					$file = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/audio/" . basename ( $this->getMP3File () ) );
 					if (file_exists ( $file )) {
 						@unlink ( $file );
 					}
 				}
 				if ($this->getOggFile ()) {
-					$file = Path::resolve ( "ULICMS_ROOT/content/audio/" . basename ( $this->getOggFile () ) );
+					$file = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/audio/" . basename ( $this->getOggFile () ) );
 					if (file_exists ( $file )) {
 						@unlink ( $file );
 					}
@@ -138,12 +138,16 @@ class Audio extends Model {
 		}
 	}
 	public function getHtml() {
+		$audio_dir = self::AUDIO_DIR;
+		if (defined ( "ULICMS_DATA_STORAGE_URL" )) {
+			$audio_dir = Path::resolve ( "ULICMS_DATA_STORAGE_URL/$audio_dir" ) . "/";
+		}
 		$html = '<audio controls>';
 		if (! empty ( $this->mp3_file )) {
-			$html .= '<source src="' . self::AUDIO_DIR . htmlspecialchars ( $this->mp3_file ) . '" type="audio/mp3">';
+			$html .= '<source src="' . $audio_dir . htmlspecialchars ( $this->mp3_file ) . '" type="audio/mp3">';
 		}
 		if (! empty ( $this->ogg_file )) {
-			$html .= '<source src="' . self::AUDIO_DIR . htmlspecialchars ( $this->ogg_file ) . '" type="audio/ogg">';
+			$html .= '<source src="' . $audio_dir . htmlspecialchars ( $this->ogg_file ) . '" type="audio/ogg">';
 		}
 		$html .= get_translation ( "no_html5" );
 		if (! empty ( $this->mp3_file ) or ! empty ( $this->ogg_file )) {
