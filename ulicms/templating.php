@@ -460,21 +460,7 @@ function random_banner() {
 	Template::randomBanner ();
 }
 function logo() {
-	if (Settings::get ( "logo_disabled" ) != "no") {
-		return;
-	}
-	if (! Settings::get ( "logo_image" )) {
-		setconfig ( "logo_image", "" );
-	}
-	if (! Settings::get ( "logo_disabled" )) {
-		setconfig ( "logo_disabled", "no" );
-	}
-	
-	$logo_path = "content/images/" . Settings::get ( "logo_image" );
-	
-	if (Settings::get ( "logo_disabled" ) == "no" and file_exists ( $logo_path )) {
-		echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
-	}
+	Template::logo ();
 }
 function year() {
 	Template::year ();

@@ -96,21 +96,27 @@ class Template {
 		return htmlspecialchars ( $value, ENT_QUOTES, "UTF-8" );
 	}
 	public static function logo() {
+		if (Settings::get ( "logo_disabled" ) != "no") {
+			return;
+		}
 		if (! Settings::get ( "logo_image" )) {
 			setconfig ( "logo_image", "" );
 		}
 		if (! Settings::get ( "logo_disabled" )) {
 			setconfig ( "logo_disabled", "no" );
 		}
-		$logo_path = "content/images/" . Settings::get ( "logo_image" );
-		if (Settings::get ( "logo_disabled" ) == "no" and file_exists ( $logo_path )) {
-			echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
+		
+		$logo_storage_url = defined ( "ULICMS_DATA_STORAGE_URL" ) ? ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get ( "logo_image" ) : "content/images/" . Settings::get ( "logo_image" );
+		
+		$logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get ( "logo_image" );
+		
+		if (Settings::get ( "logo_disabled" ) == "no" and file_exists ( $logo_storage_path )) {
+			echo '<img class="website_logo" src="' . $logo_storage_url . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
 		}
 	}
 	public static function getYear() {
 		return date ( "Y" );
 	}
-	
 	public static function year() {
 		echo self::getYear ();
 	}
