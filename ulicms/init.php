@@ -48,36 +48,6 @@ switch ($os) {
 $classes_dir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "classes";
 @set_include_path ( get_include_path () . PATH_SEPARATOR . $classes_dir );
 
-if (! defined ( "ULICMS_TMP" )) {
-	define ( "ULICMS_TMP", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR );
-}
-
-if (! file_exists ( ULICMS_TMP )) {
-	mkdir ( ULICMS_TMP );
-}
-
-if (! defined ( "ULICMS_CACHE" )) {
-	define ( "ULICMS_CACHE", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "cache" . DIRECTORY_SEPERATOR );
-}
-if (! defined ( "ULICMS_LOG" )) {
-	define ( "ULICMS_LOG", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "log" . DIRECTORY_SEPERATOR );
-}
-if (! defined ( "ULICMS_CONTENT" )) {
-	define ( "ULICMS_CONTENT", dirname ( __file__ ) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR );
-}
-if (! file_exists ( ULICMS_CACHE )) {
-	mkdir ( ULICMS_CACHE );
-}
-if (! file_exists ( ULICMS_LOG )) {
-	mkdir ( ULICMS_LOG );
-}
-
-$htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
-$htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
-if (! file_exists ( $htaccessLogFolderTarget )) {
-	copy ( $htaccessForLogFolderSource, $htaccessLogFolderTarget );
-}
-
 include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "constants.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "users_api.php";
 include_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
@@ -189,6 +159,36 @@ if (isset ( $config->data_storage_root ) and ! is_null ( $config->data_storage_r
 // stored in ULICMS_DATA_STORAGE_ROOT
 if (isset ( $config->data_storage_url ) and ! is_null ( $config->data_storage_url )) {
 	define ( "ULICMS_DATA_STORAGE_URL", $config->data_storage_url );
+}
+
+if (! defined ( "ULICMS_TMP" )) {
+	define ( "ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR );
+}
+
+if (! file_exists ( ULICMS_TMP )) {
+	mkdir ( ULICMS_TMP );
+}
+
+if (! defined ( "ULICMS_CACHE" )) {
+	define ( "ULICMS_CACHE", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "cache" . DIRECTORY_SEPERATOR );
+}
+if (! defined ( "ULICMS_LOG" )) {
+	define ( "ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "log" . DIRECTORY_SEPERATOR );
+}
+if (! defined ( "ULICMS_CONTENT" )) {
+	define ( "ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR );
+}
+if (! file_exists ( ULICMS_CACHE )) {
+	mkdir ( ULICMS_CACHE );
+}
+if (! file_exists ( ULICMS_LOG )) {
+	mkdir ( ULICMS_LOG );
+}
+
+$htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
+$htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
+if (! file_exists ( $htaccessLogFolderTarget )) {
+	copy ( $htaccessForLogFolderSource, $htaccessLogFolderTarget );
 }
 
 // umask setzen
