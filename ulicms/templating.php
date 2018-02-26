@@ -797,7 +797,11 @@ function output_favicon_code() {
 }
 function get_output_favicon_code() {
 	$url = "content/images/favicon.ico";
-	$path = ULICMS_ROOT . "/" . $url;
+	if (defined ( "ULICMS_DATA_STORAGE_URL" )) {
+		$url = ULICMS_DATA_STORAGE_URL . "/" . $url;
+	}
+	$path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
+	
 	$html = "";
 	if (is_file ( $path )) {
 		$html = '<link rel="icon" href="' . $url . '" type="image/x-icon" />' . "\r\n" . '<link rel="shortcut icon" href="' . $url . '" type="image/x-icon" />';
