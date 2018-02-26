@@ -9,7 +9,6 @@
 2. Datenbank als SQL Dump exportieren
 
 3. CMS-Config anpassen
-
     * Datenbank-Verbindung (per $db_socket)
     * $data\_storage\_root setzen (z.B. gs://my\_bucket) (ohne abschließendes Slash)
     * $data\_storage\_url setzen(z.B. http://my\_bucket.appspot.com) (ohne abschließendes Slash)
