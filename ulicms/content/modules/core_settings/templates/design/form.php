@@ -321,7 +321,7 @@ div#google-fonts {
 	</tr>
 </table>
 <p>
-	<button type="submit" class="btn btn-success voffset3" name="submit"><?php translate("save_changes");?></button>
+	<button type="submit" class="btn btn-primary voffset3" name="submit"><?php translate("save_changes");?></button>
 </p>
 </form>
 <script type="text/javascript">
@@ -350,7 +350,7 @@ $("select#default-font").change(onChangeDefaultFont);
 
 <?php
 	enqueueScriptFile ( "scripts/design.js" );
-	combined_script_html ();
+	combinedScriptHtml ();
 	$_COOKIE?>
 <?php
 }

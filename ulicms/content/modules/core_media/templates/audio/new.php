@@ -21,7 +21,7 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_create" )) 
 	<br /> <br /> <strong><?php echo translate ( "audio_ogg" );?>
 	</strong><br /> <input name="ogg_file" type="file"><br /> <br /> <strong><?php echo translate ( "audio_mp3" );?>
 	</strong><br /> <input name="mp3_file" type="file"><br /> <br />
-	<button type="submit" class="btn btn-success"><?php translate ( "UPLOAD_audio" );?></button>
+	<button type="submit" class="btn btn-primary"><?php translate ( "UPLOAD_audio" );?></button>
 </form>
 <?php
 } else {

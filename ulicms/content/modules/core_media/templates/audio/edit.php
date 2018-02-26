@@ -30,7 +30,7 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_edit" )) {
 	</strong><br /> <input type="text" name="code"
 		value="[audio id=<?php echo $result->id;?>]"
 		onclick="this.focus();this.select();" readonly> <br /> <br />
-	<button type="submit" class="btn btn-success"><?php translate ( "SAVE_CHANGES" );?></button>
+	<button type="submit" class="btn btn-primary"><?php translate ( "SAVE_CHANGES" );?></button>
 </form>
 <?php
 	} else {

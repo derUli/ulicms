@@ -27,7 +27,7 @@ if ($acl->hasPermission ( "cache" )) {
 </p>
 <?php translate("cache_text3");?>
 <?php echo ModuleHelper::buildMethodCallForm("CacheSettingsController", "clearCache")?>
-<button type="submit" class="btn btn-success"><?php translate("clear_cache");?></button>
+<button type="submit" class="btn btn-primary"><?php translate("clear_cache");?></button>
 </form>
 
 <?php

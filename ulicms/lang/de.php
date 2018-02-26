@@ -375,8 +375,6 @@ define ( "TRANSLATION_ULICMS_NEWS", "Neuigkeiten zu UliCMS" );
 define ( "TRANSLATION_POSTED_ON_DATE", "Gepostet am %s" );
 define ( "TRANSLATION_POWERED_BY_ULICMS", "<p class=\"powered-by-ulicms\">Diese Seite läuft mit " . "<a href=\"http://www.ulicms.de\" target=\"_blank\">UliCMS " . cms_version () . "</a></p>" );
 define ( "TRANSLATION_UNDER_MAINTENANCE", "<h1>Wegen geplanter Wartungsarbeiten kurzzeitig nicht verfügbar. Schau gleich noch einmal vorbei.</h1>" );
-define ( "TRANSLATION_IP_BLOCKED_BY_SPAMHAUS", "Ihre IP-Adresse %ip befindet sich auf der Blacklist von spamhaus.org.<br/>Der Zugriff wurde verweigert." );
-define ( "TRANSLATION_CHECK_FOR_SPAMHAUS", 'Zugriff von IP-Adressen die auf der Blacklist von <a href="https://www.spamhaus.org/" target="_blank">spamhaus.org</a> gelistet sind verweigern.' );
 
 // Patches
 define ( "TRANSLATION_NO_PATCHES_AVAILABLE", "Keine Patches verfügbar" );

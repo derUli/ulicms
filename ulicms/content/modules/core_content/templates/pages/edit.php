@@ -19,6 +19,8 @@ if (defined ( "_SECURITY" )) {
 		$audios = Database::query ( $sql );
 
 		$users = getAllUsers ();
+		
+		$groups = Group::getAll();
 
 		$pages_change_owner = $acl->hasPermission ( "pages_change_owner" );
 
@@ -44,9 +46,8 @@ if (defined ( "_SECURITY" )) {
 			} else if (! $is_owner and $pages_activate_others) {
 				$can_active_this = true;
 			}
-
-			$owner_data = getUserById ( $autor );
-			$owner_group = $owner_data ["group_id"];
+			
+			$owner_group = $row->group_id;
 			$current_group = $_SESSION ["group_id"];
 
 			$can_edit_this = false;
@@ -871,7 +872,7 @@ function openArticleImageSelectWindow(field) {
 	<h2 class="accordion-header"><?php translate("permissions");?></h2>
 
 	<div class="accordion-content">
-		<strong><?php translate("owner");?></strong> <select name="autor"
+		<strong><?php translate("owner");?> <?php translate("user");?></strong> <select name="autor"
 			<?php
 				if (! $pages_change_owner) {
 					echo "disabled";
@@ -882,6 +883,18 @@ function openArticleImageSelectWindow(field) {
 					?>
 	<option value="<?php Template::escape($user->id);?>"
 				<?php if($user->id == $row->autor) echo "selected";?>><?php Template::escape($user->username);?></option>
+	<?php } ?>
+</select> <br /> <br /> <strong><?php translate("owner");?> <?php translate("group");?></strong> <select name="group_id"
+			<?php
+				if (! $pages_change_owner) {
+					echo "disabled";
+				}
+				?>>
+<?php
+				foreach ( $groups as $group ) {
+					?>
+	<option value="<?php Template::escape($group->getId());?>"
+	<?php if($group->getId() == $row->group_id) echo "selected";?>><?php Template::escape($group->getName());?></option>
 	<?php } ?>
 </select> <br /> <br /> <strong><?php translate("restrict_edit_access");?></strong><br />
 		<input type="checkbox" name="only_admins_can_edit"
@@ -1084,7 +1097,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </div>
 <div class="row">
 	<div class="col-xs-6">
-		<button type="submit" class="btn btn-success"><?php translate("save_changes");?></button>
+		<button type="submit" class="btn btn-primary"><?php translate("save_changes");?></button>
 
 	</div>
 
@@ -1095,7 +1108,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </script>
 <?php
 				enqueueScriptFile ( "scripts/page.js" );
-				combined_script_html ();
+				combinedScriptHtml ();
 				?>
 </form>
 <?php

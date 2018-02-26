@@ -54,7 +54,7 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" 
 		</select>
 </p>
 <p>
-	<button name="create_form" type="submit" class="btn btn-success"><?php translate("create");?></button>
+	<button name="create_form" type="submit" class="btn btn-primary"><?php translate("create");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?>
 <?php

@@ -1,4 +1,7 @@
 <?php
+use UliCMS\HTML\Style;
+use UliCMS\HTML\Script;
+
 // Javascript Minify Funktionen
 function resetScriptQueue() {
 	$_SERVER ["script_queue"] = array ();
@@ -27,7 +30,7 @@ function getCombinedScripts() {
 						$content = implode ( "\n", $lines );
 						$output .= $content;
 						$output .= "\n";
-						if (filemtime ( $script ) > $lastmod){
+						if (filemtime ( $script ) > $lastmod) {
 							$lastmod = filemtime ( $script );
 						}
 					}
@@ -41,20 +44,37 @@ function getCombinedScripts() {
 	header ( "Content-Type: text/javascript" );
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
-	set_eTagHeaders ( $_GET ["output_scripts"], $lastmod);
+	set_eTagHeaders ( $_GET ["output_scripts"], $lastmod );
 	echo $output;
 	exit ();
 }
-function combined_script_html() {
-	echo get_combined_script_html ();
+function combinedScriptHtml() {
+	echo getCombinedScriptHtml ();
 }
-function get_combined_script_html() {
+function combined_script_html() {
+	trigger ( E_USER_DEPRECATED, "combined_script_html is deprecated" );
+	echo getCombinedScriptHtml ();
+}
+function getCombinedScriptHtml() {
 	$html = "";
+	$cfg = new config ();
+	if (is_true ( $cfg->no_minify )) {
+		foreach ( $_SERVER ["script_queue"] as $script ) {
+			$html .= Script::fromFile ( $script );
+		}
+		resetScriptQueue ();
+		return $html;
+	}
+	
 	if (isset ( $_SERVER ["script_queue"] ) and is_array ( $_SERVER ["script_queue"] ) and count ( $_SERVER ["script_queue"] ) > 0) {
-		$html = '<script src="' . getCombinedScriptURL () . '" type="text/javascript"></script>';
+		$html = Script::fromFile ( getCombinedScriptURL () );
 	}
 	resetScriptQueue ();
 	return $html;
+}
+function get_combined_script_html() {
+	trigger ( E_USER_DEPRECATED, "combined_script_html is deprecated" );
+	return getCombinedScriptHtml ();
 }
 function getCombinedScriptURL() {
 	$output = "";
@@ -108,7 +128,7 @@ function getCombinedStylesheets() {
 						$output .= $content;
 						$output .= "\r\n";
 						$output .= "\r\n";
-						if (filemtime ( $script ) > $lastmod){
+						if (filemtime ( $script ) > $lastmod) {
 							$lastmod = filemtime ( $script );
 						}
 					}
@@ -138,23 +158,39 @@ function getCombinedStylesheets() {
 	$len = mb_strlen ( $output, 'binary' );
 	header ( "Content-Length: " . $len );
 	
-	
-	set_eTagHeaders ( $_GET ["output_stylesheets"] , $lastmod );
+	set_eTagHeaders ( $_GET ["output_stylesheets"], $lastmod );
 	
 	echo $output;
 	exit ();
 }
-function combined_stylesheet_html() {
-	echo get_combined_stylesheet_html ();
+function combinedStylesheetHtml() {
+	echo getCombinedStylesheetHtml ();
 }
-function get_combined_stylesheet_html() {
+function combined_stylesheet_html() {
+	trigger ( E_USER_DEPRECATED, "combined_stylesheel_html is deprecated" );
+	echo combinedStylesheetHtml ();
+}
+function getCombinedStylesheetHtml() {
 	$html = "";
 	
+	$cfg = new config ();
+	if (is_true ( $cfg->no_minify )) {
+		foreach ( $_SERVER ["stylesheet_queue"] as $stylesheet ) {
+			$html .= Style::FromExternalFile ( $stylesheet );
+		}
+		resetStylesheetQueue ();
+		return $html;
+	}
+	
 	if (isset ( $_SERVER ["stylesheet_queue"] ) and is_array ( $_SERVER ["stylesheet_queue"] ) and count ( $_SERVER ["stylesheet_queue"] ) > 0) {
-		$html = '<link rel="stylesheet" type="text/css" href="' . getCombinedStylesheetURL () . '"/>';
+		$html = Style::FromExternalFile ( getCombinedStylesheetURL () );
 	}
 	resetStylesheetQueue ();
 	return $html;
+}
+function get_combined_stylesheet_html() {
+	trigger ( E_USER_DEPRECATED, "get_combined_stylesheet_html is deprecated" );
+	return getCombinedStylesheetHtml ();
 }
 function getCombinedStylesheetURL() {
 	$lastmod = 0;

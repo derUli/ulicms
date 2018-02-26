@@ -105,9 +105,9 @@ function get_og_data($systemname = "") {
 }
 function get_all_combined_html() {
 	$html = "";
-	$html .= get_combined_stylesheet_html ();
+	$html .= getCombinedStylesheetHtml ();
 	$html .= "\r\n";
-	$html .= combined_script_html ();
+	$html .= combinedScriptHtml ();
 	$html .= "\r\n";
 	return $html;
 }

@@ -29,7 +29,7 @@ if ($acl->hasPermission ( "expert_settings" ) and $acl->hasPermission ( "expert_
 <textarea name="value" rows=15 cols=80><?php Template::escape($value);?></textarea>
 <br />
 <br />
-<button type="submit" class="btn btn-success"><?php translate("create_option");?></button>
+<button type="submit" class="btn btn-primary"><?php translate("create_option");?></button>
 </form>
 
 <?php
