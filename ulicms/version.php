@@ -2,12 +2,11 @@
 if (! class_exists ( "ulicms_version" )) {
 	class UliCMSVersion {
 		function __construct() {
-			$this->version = "Krümelprofi";
+			$this->version = "Yellowstone";
 			$this->releaseYear = 2018;
 			$this->internalVersion = Array (
 					2018,
-					2,
-					1
+					3
 			);
 			$this->update = "";
 			$this->developmentVersion = false;

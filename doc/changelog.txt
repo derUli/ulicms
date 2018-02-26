@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.2.1 =====
+===== Neues in UliCMS 2018.3 =====
 Neue Features:
 + Seiten haben nun auch eine Gruppe (group_id)
 + Minifying von Scripts und Stylesheets kann durch Config-Variable $no_minify deaktiviert werden.
