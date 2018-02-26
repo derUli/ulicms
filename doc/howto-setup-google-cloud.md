@@ -7,7 +7,7 @@
 1. UliCMS Installation lokal durchführen (z.B. auf XAMPP)
 2. Datenbank als SQL Dump exportieren
 3. CMS-Config anpassen
-3.1 Datenbank-Verbindung (per db_socket)
+3.1 Datenbank-Verbindung (per $db_socket)
 3.2 $data_storage_root setzen (z.B. gs://my_bucket) (ohne abschließendes Slash
 3.3 $data_storage_url setzen(z.B. http://my_bucket.appspot.com)
 4. SQL Dump bei Google importieren
