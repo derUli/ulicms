@@ -12,7 +12,7 @@
 3.3 $data_storage_url setzen(z.B. http://my_bucket.appspot.com) (ohne abschließendes Slash)
 4. SQL Dump bei Google importieren
 5. "content" Ordner in das Google Cloud Storage hochladen, alle Dateien außer *.php öffentlich machen (ACL: public-read)
-7. Konfiguration anpassen (php.ini, Abhängigkeiten in composer.json, etc.)
+7. Konfiguration erstellen bzw. anpassen (php.ini, Abhängigkeiten in composer.json, etc.)
 ```
 # auf jeden Fall notwendig in der php.ini
 google_app_engine.allow_include_gs_buckets = On
