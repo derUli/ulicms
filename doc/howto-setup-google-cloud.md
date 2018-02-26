@@ -8,8 +8,8 @@
 2. Datenbank als SQL Dump exportieren
 3. CMS-Config anpassen
 3.1 Datenbank-Verbindung (per $db_socket)
-3.2 $data_storage_root setzen (z.B. gs://my_bucket) (ohne abschließendes Slash
-3.3 $data_storage_url setzen(z.B. http://my_bucket.appspot.com)
+3.2 $data_storage_root setzen (z.B. gs://my_bucket) (ohne abschließendes Slash)
+3.3 $data_storage_url setzen(z.B. http://my_bucket.appspot.com) (ohne abschließendes Slash)
 4. SQL Dump bei Google importieren
 5. "content" Ordner in das Google Cloud Storage hochladen, alle Dateien außer *.php öffentlich machen (public-read)
 7. alle anderen Dateien und Ordner des UliCMS in die App Engine deployen ("$ gcloud app deploy")
