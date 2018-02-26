@@ -4,7 +4,7 @@
 * Google Cloud Storage
 
 **Zum Aufsetzen einer Google Cloud Instanz:**
-1. Normale Installation lokal durchführen (z.B. auf XAMPP)
+1. UliCMS Installation lokal durchführen (z.B. auf XAMPP)
 2. Datenbank als SQL Dump exportieren
 3. CMS-Config anpassen
 3.1 Datenbank-Verbindung (per db_socket)
