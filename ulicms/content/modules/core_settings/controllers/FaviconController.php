@@ -40,6 +40,11 @@ class FaviconController extends Controller {
 				$ico_lib = new PHP_ICO ( $source, $sizes );
 				$ico_lib->save_ico ( $destination );
 				
+				// Google Cloud: make file public
+				if (startsWith ( ULICMS_DATA_STORAGE_ROOT, "gs://" ) and class_exists ( "GoogleCloudHelper" )) {
+					GoogleCloudHelper::changeFileVisiblity ( $destination, true );
+				}
+				
 				add_hook ( "after_upload_favicon" );
 				Request::redirect ( ModuleHelper::buildActionURL ( "favicon" ) );
 			} else {
