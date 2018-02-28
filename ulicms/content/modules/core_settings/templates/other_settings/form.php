@@ -278,12 +278,12 @@ if (! $acl->hasPermission ( "other" )) {
 	?>>
 		</div>
 	</div>
-	<h2 class="accordion-header hide">
+	<h2 class="accordion-header">
 		<?php translate("EMAIL_DELIVERY");?>
 		</h2>
 
 
-	<div class="accordion-content hide">
+	<div class="accordion-content">
 		<div class="label">Modus:</div>
 		<div class="inputWrapper">
 			<select id='email_mode' name="email_mode" size="1">
@@ -293,7 +293,7 @@ if (! $acl->hasPermission ( "other" )) {
 		echo ' selected="selected"';
 	}
 	?>>PHP</option>
-				<option value="phpmailer" disabled
+				<option value="phpmailer"
 					<?php
 	if ($email_mode == EmailModes::PHPMAILER) {
 		echo ' selected="selected"';
@@ -397,7 +397,7 @@ if($('#smtp_auth').prop('checked')){
 <?php
 	
 	// FIXME: Extract this code to an external script
-	if ($email_mode == "pear_mail") {
+	if ($email_mode == EmailModes::PHPMAILER) {
 		?>
 $('#smtp_settings').show();
 <?php
@@ -405,7 +405,7 @@ $('#smtp_settings').show();
 	?>
 
 $('#email_mode').change(function(){
-if($('#email_mode').val() == "pear_mail"){
+if($('#email_mode').val() == "phpmailer"){
    $('#smtp_settings').slideDown();
 
 } else {

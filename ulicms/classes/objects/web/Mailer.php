@@ -37,9 +37,28 @@ class Mailer {
 	}
 	public static function getPHPMailer() {
 		$mailer = new PHPMailer ();
+		$mailer->SMTPDebug = 4;
 		
-		// TODO: Implement transfer by SMTP
+		$mailer->SMTPOptions = array(
+				'ssl' => array(
+						'verify_peer' => false,
+						'verify_peer_name' => false,
+						'allow_self_signed' => true
+				)
+		);
 		
+		if (Settings::get ( "smtp_host" )) {
+			$mailer->isSMTP ();
+			$mailer->Host = Settings::get ( "smtp_host" );
+			$mailer->SMTPAuth = (Settings::get ( "smtp_auth" ) === "auth");
+			if (Settings::get ( "smtp_user" )) {
+				$mailer->Username = Settings::get ( "smtp_user" );
+			}
+			if (Settings::get ( "smtp_password" )) {
+				$mailer->Password = Settings::get ( "smtp_password" );
+			}
+			$mailer->Port = Settings::get ( "smtp_port", "int" );
+		}
 		$mailer->XMailer = Settings::get ( "show_meta_generator" ) ? "UliCMS" : "";
 		
 		$mailer = apply_filter ( $mailer, "php_mailer_instance" );
