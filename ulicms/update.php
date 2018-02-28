@@ -14,6 +14,8 @@ $migrator->migrate ();
 
 Settings::register ( "min_time_to_fill_form", "0" );
 
+Settings::register ( "smtp_encryption", "" );
+
 // PEAR Mail Feature is removed change to default email mode
 if (Settings::get ( "email_mode" ) === "pear_mail") {
 	Settings::set ( "email_mode", "internal" );

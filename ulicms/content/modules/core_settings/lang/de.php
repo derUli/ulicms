@@ -9,3 +9,7 @@ define ( "TRANSLATION_UPLOADED_IMAGE_TOO_BIG", "Die von Ihnen hochgeladene Grafi
 define ( "TRANSLATION_CREATE_OPTION", "Konfigurationsvariable erstellen" );
 define ( "TRANSLATION_OPTION", "Option" );
 define ( "TRANSLATION_VALUE", "Wert" );
+
+// translations for smtp_encryption select field
+add_translation ( "smtp_encryption", "Verschlüsselung" );
+add_translation ( "unencrypted", "Unverschlüsselt" );

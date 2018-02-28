@@ -15,6 +15,8 @@ if (! $acl->hasPermission ( "other" )) {
 	
 	$hide_meta_generator = Settings::get ( "hide_meta_generator" );
 	
+	$smtp_encryption = Settings::get ( "smtp_encryption" );
+	
 	$smtp_host = Settings::get ( "smtp_host" );
 	if (! $smtp_host) {
 		$smtp_host = "127.0.0.1";
@@ -328,6 +330,20 @@ if (! $acl->hasPermission ( "other" )) {
 	echo real_htmlspecialchars ( $smtp_port );
 	?>">
 
+			</div>
+
+			<div class="label">
+				<label for="smtp_auth"> <?php translate("smtp_encryption");?>
+			</label>
+			</div>
+			<div class="inputWrapper">
+				<select name="smtp_encryption">
+					<option value="" <?php if(empty($smtp_encryption)) echo "checked"?>><?php translate("unencrypted");?></option>
+					<option value="ssl"
+						<?php if($smtp_encryption == "ssl") echo "checked"?>>SSL</option>
+					<option value="tls"
+						<?php if($smtp_encryption == "tls") echo "checked"?>>TLS</option>
+				</select>
 			</div>
 
 			<div class="label">

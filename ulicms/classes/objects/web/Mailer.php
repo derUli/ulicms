@@ -37,15 +37,22 @@ class Mailer {
 	}
 	public static function getPHPMailer() {
 		$mailer = new PHPMailer ();
-		$mailer->SMTPDebug = 4;
+		// $mailer->SMTPDebug = 4;
 		
-		$mailer->SMTPOptions = array(
-				'ssl' => array(
-						'verify_peer' => false,
-						'verify_peer_name' => false,
-						'allow_self_signed' => true
-				)
-		);
+		$mailer->SMTPSecure = Settings::get ( "smtp_encryption" );
+		
+		// disable verification of ssl certificates
+		// this option makes the mail transfer insecure
+		// use this only if it's unavoidable
+		if (Settings::get ( "smtp_no_verify_certificate" )) {
+			$mailer->SMTPOptions = array (
+					'ssl' => array (
+							'verify_peer' => false,
+							'verify_peer_name' => false,
+							'allow_self_signed' => true 
+					) 
+			);
+		}
 		
 		if (Settings::get ( "smtp_host" )) {
 			$mailer->isSMTP ();
