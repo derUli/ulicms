@@ -4,7 +4,7 @@
 	"Fortune" : "fortune.php"
 	},
 	"main_class" : "Fortune",
-	"version" : "0.1.3",
+	"version" : "0.1.4",
 	"embed" : true,
 	"admin_permission" : "fortune_settings",
 	"custom_acl" : ["fortune_settings", "fortune2_post", "fortune2_get"],

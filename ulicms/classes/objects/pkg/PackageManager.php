@@ -97,10 +97,14 @@ class PackageManager {
 		try {
 			// Paket entpacken
 			$phar = new PharData ( $file );
-			$phar->extractTo ( ULICMS_ROOT, null, true );
+			$phar->extractTo ( ULICMS_DATA_STORAGE_ROOT, null, true );
 			
-			$post_install_script1 = ULICMS_ROOT . DIRECTORY_SEPARATOR . "post-install.php";
+			// make asset files of the package public
+			if (startsWith ( ULICMS_DATA_STORAGE_ROOT, "gs://" ) and class_exists ( "GoogleCloudHelper" )) {
+				GoogleCloudHelper::makeFilesPublic ( ULICMS_DATA_STORAGE_ROOT );
+			}
 			
+			$post_install_script1 = ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPARATOR . "post-install.php";
 			$post_install_script2 = ULICMS_TMP . DIRECTORY_SEPARATOR . "post-install.php";
 			
 			// post_install_script ausführen und anschließend
@@ -129,7 +133,7 @@ class PackageManager {
 		return $url;
 	}
 	public function getInstalledModules() {
-		$module_folder = ULICMS_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "modules" . DIRECTORY_SEPERATOR;
+		$module_folder = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/modules" ) . "/";
 		
 		$available_modules = Array ();
 		$directory_content = scandir ( $module_folder );
@@ -154,7 +158,7 @@ class PackageManager {
 	}
 	public function getInstalledThemes() {
 		$themes = Array ();
-		$templateDir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "templates" . DIRECTORY_SEPERATOR;
+		$templateDir = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/templates" ) . "/";
 		
 		$folders = scanDir ( $templateDir );
 		natcasesort ( $folders );

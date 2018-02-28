@@ -25,8 +25,8 @@ $_CONFIG = array (
 		
 		// GENERAL SETTINGS
 		'disabled' => true,
-		'uploadURL' => "/content",
-		'uploadDir' => ULICMS_CONTENT,
+		'uploadURL' => defined ( "ULICMS_DATA_STORAGE_URL" ) ? ULICMS_DATA_STORAGE_URL . "/content" : "/content",
+		'uploadDir' => ULICMS_DATA_STORAGE_ROOT . "/content",
 		'theme' => "default",
 		
 		'types' => array (

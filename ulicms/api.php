@@ -583,8 +583,8 @@ function add_hook($name) {
 		if (faster_in_array ( $modules [$hook_i], $disabledModules )) {
 			continue;
 		}
-		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
-		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
+		$file1 = getModulePath ( $modules [$hook_i], true ) . $modules [$hook_i] . "_" . $name . ".php";
+		$file2 = getModulePath ( $modules [$hook_i], true ) . "hooks/" . $name . ".php";
 		$main_class = getModuleMeta ( $modules [$hook_i], "main_class" );
 		$controller = null;
 		if ($main_class) {
@@ -674,7 +674,9 @@ function getThemesList() {
 }
 function getTemplateDirPath($sub = "default", $abspath = false) {
 	if ($abspath) {
-		$templateDir = Path::resolve ( "ULICMS_ROOT/content/templates/" ) . "/";
+		$templateDir = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/templates/" ) . "/";
+	} else if (ULICMS_ROOT != ULICMS_DATA_STORAGE_ROOT and defined ( "ULICMS_DATA_STORAGE_URL" )) {
+		$templateDir = Path::resolve ( "ULICMS_DATA_STORAGE_URL/content/templates" ) . "/";
 	} else if (is_admin_dir ()) {
 		$templateDir = "../content/templates/";
 	} else {
@@ -823,34 +825,39 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 }
 function getModulePath($module, $abspath = false) {
 	if ($abspath) {
-		return Path::resolve ( "ULICMS_ROOT/content/modules/$module" ) . "/";
+		return Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/modules/$module" ) . "/";
 	}
-	// Frontend Directory
-	if (is_file ( "cms-config.php" )) {
-		$module_folder = "content/modules/";
-	} // Backend Directory
-	else {
-		$module_folder = "../content/modules/";
+	if (ULICMS_ROOT == ULICMS_DATA_STORAGE_ROOT and ! defined ( "ULICMS_DATA_STORAGE_URL" )) {
+		// Frontend Directory
+		if (is_file ( "cms-config.php" )) {
+			$module_folder = "content/modules/";
+		} // Backend Directory
+		else {
+			$module_folder = "../content/modules/";
+		}
+	} else {
+		$module_folder = Path::resolve ( "ULICMS_DATA_STORAGE_URL/content/modules" ) . "/";
 	}
-	$available_modules = Array ();
+	
+	$available_modules = array ();
 	return $module_folder . $module . "/";
 }
 function getModuleAdminFilePath($module) {
-	return getModulePath ( $module ) . $module . "_admin.php";
+	return getModulePath ( $module, true ) . $module . "_admin.php";
 }
 function getModuleAdminFilePath2($module) {
-	return getModulePath ( $module ) . "admin.php";
+	return getModulePath ( $module, true ) . "admin.php";
 }
 function getModuleMainFilePath($module) {
-	return getModulePath ( $module ) . $module . "_main.php";
+	return getModulePath ( $module, true ) . $module . "_main.php";
 }
 function getModuleMainFilePath2($module) {
-	return getModulePath ( $module ) . "main.php";
+	return getModulePath ( $module, true ) . "main.php";
 }
-function getModuleUninstallScriptPath($module, $abspath = false) {
+function getModuleUninstallScriptPath($module, $abspath = true) {
 	return getModulePath ( $module, $abspath ) . $module . "_uninstall.php";
 }
-function getModuleUninstallScriptPath2($module, $abspath = false) {
+function getModuleUninstallScriptPath2($module, $abspath = true) {
 	return getModulePath ( $module, $abspath ) . "uninstall.php";
 }
 /**

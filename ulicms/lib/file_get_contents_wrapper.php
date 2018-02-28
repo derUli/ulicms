@@ -38,7 +38,10 @@ function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
 		return file_get_contents ( $cache_path );
 	}
 	
-	if (function_exists ( "curl_init" ) and is_url ( $url )) {
+	// use file_get_contents() on Google Cloud Platform since it's optimized by Google
+	$runningInGoogleCloud = class_exists ( "GoogleCloudHelper" ) ? GoogleCloudHelper::isProduction () : false;
+	
+	if (function_exists ( "curl_init" ) and is_url ( $url ) and ! $runningInGoogleCloud) {
 		$content = file_get_contents_curl ( $url );
 	} else if (ini_get ( "allow_url_fopen" )) {
 		$content = file_get_contents ( $url );
@@ -55,7 +58,7 @@ function file_get_contents_wrapper($url, $no_cache = false, $checksum = null) {
 	return $content;
 }
 function url_exists($url) {
-	if (@file_get_contents ( $url, FALSE, NULL, 0, 0 ) === false){
+	if (@file_get_contents ( $url, FALSE, NULL, 0, 0 ) === false) {
 		return false;
 	}
 	return true;

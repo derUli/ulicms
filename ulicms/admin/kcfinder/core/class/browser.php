@@ -37,9 +37,7 @@ class browser extends uploader {
 		}
 		
 		$thumbsDir = $this->config ['uploadDir'] . "/" . $this->config ['thumbsDir'];
-		if (! $this->config ['disabled'] && ((! is_dir ( $thumbsDir ) && ! @mkdir ( $thumbsDir, $this->config ['dirPerms'] )) || 
-
-		! is_readable ( $thumbsDir ) || ! dir::isWritable ( $thumbsDir ) || (! is_dir ( "$thumbsDir/{$this->type}" ) && ! @mkdir ( "$thumbsDir/{$this->type}", $this->config ['dirPerms'] ))))
+		if (! $this->config ['disabled'] && ((! is_dir ( $thumbsDir ) && ! @mkdir ( $thumbsDir, $this->config ['dirPerms'] )) || ! is_readable ( $thumbsDir ) || ! dir::isWritable ( $thumbsDir ) || (! is_dir ( "$thumbsDir/{$this->type}" ) && ! @mkdir ( "$thumbsDir/{$this->type}", $this->config ['dirPerms'] ))))
 			$this->errorMsg ( "Cannot access or create thumbnails folder." );
 		
 		$this->thumbsDir = $thumbsDir;
@@ -561,8 +559,8 @@ class browser extends uploader {
 			return json_encode ( array (
 					'version' => false 
 			) );
-			
-			// Caching HTTP request for 6 hours
+		
+		// Caching HTTP request for 6 hours
 		if (isset ( $this->session ['checkVersion'] ) && isset ( $this->session ['checkVersionTime'] ) && ((time () - $this->session ['checkVersionTime']) < 21600))
 			return json_encode ( array (
 					'version' => $this->session ['checkVersion'] 
@@ -626,8 +624,13 @@ class browser extends uploader {
 		if (! @move_uploaded_file ( $file ['tmp_name'], $target ) && ! @rename ( $file ['tmp_name'], $target ) && ! @copy ( $file ['tmp_name'], $target )) {
 			@unlink ( $file ['tmp_name'] );
 			return $this->htmlData ( $file ['name'] ) . ": " . $this->label ( "Cannot move uploaded file to target folder." );
-		} elseif (function_exists ( 'chmod' ))
+		} elseif (function_exists ( 'chmod' )) {
 			chmod ( $target, $this->config ['filePerms'] );
+			// Google Cloud: make file public
+			if (startsWith ( ULICMS_DATA_STORAGE_ROOT, "gs://" ) and class_exists ( "\GoogleCloudHelper" )) {
+				\GoogleCloudHelper::changeFileVisiblity ( $target, true );
+			}
+		}
 		
 		$this->makeThumb ( $target );
 		return "/" . basename ( $target );

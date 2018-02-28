@@ -37,9 +37,9 @@ class Fortune extends Controller {
 		} else {
 			$lang = getCurrentLanguage ( true );
 		}
-		$fortuneDir = getModulePath ( $this->moduleName ) . "cookies/" . $lang . "/";
+		$fortuneDir = getModulePath ( $this->moduleName, true ) . "cookies/" . $lang . "/";
 		if (! is_dir ( $fortuneDir )) {
-			$fortuneDir = getModulePath ( $this->moduleName ) . "cookies/en/";
+			$fortuneDir = getModulePath ( $this->moduleName, true ) . "cookies/en/";
 		}
 		$fortuneFiles = scandir ( $fortuneDir );
 		do {
@@ -66,5 +66,4 @@ class Fortune extends Controller {
 	public function doSomethingGet() {
 		ViewBag::set ( "sample_text", get_translation ( "get_request_type" ) );
 	}
-
 }
