@@ -1,4 +1,5 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
 class Mailer {
 	public static function splitHeaders($headers) {
 		$header_array = array ();
@@ -15,10 +16,7 @@ class Mailer {
 		return $header_array;
 	}
 	public static function send($to, $subject, $message, $headers = "") {
-		$mode = Settings::get ( "email_mode" );
-		if (! $mode) {
-			$mode = EmailModes::INTERNAL;
-		}
+		$mode = Settings::get ( "email_mode" ) ? Settings::get ( "email_mode" ) : EmailModes::INTERNAL;
 		
 		// UliCMS speichert seit UliCMs 9.0.1 E-Mails, die das System versendet hat
 		// in der Datenbank
@@ -31,8 +29,32 @@ class Mailer {
 		// TODO: Hieraus einen Switch machen
 		if ($mode == EmailModes::INTERNAL) {
 			return mail ( $to, $subject, $message, $headers );
+		} else if ($mode == EmailModes::PHPMAILER) {
+			return self::sendWithPhpMailer ( $to, $subject, $message, $headers );
 		} else {
 			throw new NotImplementedException ( "E-Mail Mode \"$message\" not implemented." );
 		}
+	}
+	public static function sendWithPhpMailer($to, $subject, $message, $headers = "") {
+		$headers = self::splitHeaders ( $headers );
+		$headersLower = array_change_key_case ( $headers, CASE_LOWER );
+		
+		$mailer = new PHPMailer ();
+		
+		// TODO: Implement transfer by SMTP
+		
+		$mailer->XMailer = Settings::get ( "show_meta_generator" ) ? "UliCMS" : "";
+		
+		if (isset ( $headersLower ["x-mailer"] )) {
+			$mailer->XMailer = $headersLower ["x-mailer"];
+		}
+		$mailer->setFrom ( StringHelper::isNotNullOrWhitespace ( $headers ["From"] ) ? $headers ["From"] : Settings::get ( "email" ) );
+		
+		$mailer->addAddress ( $to );
+		$mailer->Subject = $subject;
+		$mailer->isHTML ( isset ( $headersLower ["content-type"] ) and $headersLower ["content-type"] == "text/html" );
+		$mailer->Body = $message;
+		
+		return $mailer->send ();
 	}
 }
