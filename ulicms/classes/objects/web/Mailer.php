@@ -37,7 +37,14 @@ class Mailer {
 	}
 	public static function getPHPMailer() {
 		$mailer = new PHPMailer ();
-		// $mailer->SMTPDebug = 4;
+		$mailer->SMTPDebug = 3;
+		
+		$mailer->Debugoutput = function ($str, $level) {
+			$logger = LoggerRegistry::get ( "phpmailer_log" );
+			if ($logger) {
+				$logger->debug ( $str );
+			}
+		};
 		
 		$mailer->SMTPSecure = Settings::get ( "smtp_encryption" );
 		
