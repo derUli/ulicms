@@ -1,6 +1,7 @@
 ===== Neues in UliCMS 2018.3 =====
+
 Neue Features:
-+ 
++ Neue Mailversandmethode "PHPMailer", Mailversand per SMTP
 + Vorbereitungen zur Ausführung von UliCMS in der Google Cloud durchgeführt
 + Seiten haben nun auch eine Gruppe (group_id)
 + Minifying von Scripts und Stylesheets kann durch Config-Variable $no_minify deaktiviert werden.
