@@ -1,5 +1,5 @@
 [ ] Option "Täglich Nachts alle vefügbaren Patches installieren" hinzufügen
-[ ] Möglichkeit, Module zu deaktivieren (eventuell durch .disable Datei oder durch 'modules' Datenbanktabelle)
+[X] Möglichkeit, Module zu deaktivieren (eventuell durch .disable Datei oder durch 'modules' Datenbanktabelle)
 [ ] Button "Speichern und Anzeigen" in Seitenbearbeitung
 [ ] File Backup Solution (FTP, Cloud providers?)
 [X] Option Menüeintrag anzeigen auf "Allen Medien" oder "nur Mobile Geräte" oder  "nur PC"
@@ -8,7 +8,7 @@
 [ ] KCFinder durch eigene Medienverwaltung ersetzen
 [ ] UliCMS Android App
 [ ] Kommandozeilentool für Blog (wie wpcmd)
-[ ] Seiten/Datensätze kopieren
+[X] Seiten/Datensätze kopieren
 [ ] Wiedereinführung der integrierten Newsfunktion
 [ ] Admin GUI für Einstellungen von facebook_like entwickeln
 [ ] Multisite Fähigkeit.
@@ -16,23 +16,23 @@
     Tabellen mehrfach mit verschiebenen prefixen z.B. ulicms_2_content für Content von Site 2
 [X] IP Whitelist für Backend Login
 [ ] Cache automatisch bei Änderungen leeren (Optional, per Default aktiviert)
-[ ] Übersetzungen in Datenbank statt in Sprachdateien bzw. "TRANSLATION_OVERRIDES"
+[X] Übersetzungen in Datenbank statt in Sprachdateien bzw. "TRANSLATION_OVERRIDES"
 Export der angepassten Übersetzungsdatei möglich
-[ ] Backend besser erweiterbar machen
-[ ] Cronjobs monatlich, stündlich, täglich, bei jedem Request (crontab)
+[X] Backend besser erweiterbar machen
+[X] Cronjobs monatlich, stündlich, täglich, bei jedem Request (crontab)
 [ ] Implementation von ActiveRecord
 [ ] SlickNav auf mobile_devices im Backend
 [ ] Möglichkeit, eigene Font-Dateien hochzuladen und dann unter Einstellungen > Schriftart ("Custom" bzw. "Benutzerdefiniert")
-[ ] Zweifaktor Authentifizierung
+[X] Zweifaktor Authentifizierung
 [ ] In-Page Editing
 [ ] Menü-Verwaltung von den Seiten lösen (wie z.B. in Joomla)
 [ ] Blacklist für bereits verwendete Passwörter (optional)
 [ ] Einführung a la "Erste Schritte" wie z.B. in Windows 2000 bei erster Anmeldung.
-[ ] Zeitsteuerung (Seiten aktiv von ... bis ...)
-[ ] Ein schönerer Paketmanager (Meta-Daten, Dependency Check, Auto-Update)
+[X] Zeitsteuerung (Seiten aktiv von ... bis ...)
+[O] Ein schönerer Paketmanager (Meta-Daten, Dependency Check, Auto-Update)
 [ ] Slider Plugins implementieren - Soll ohne JSON Code schreiben zu müssen funktionieren, vielleicht Bedienung per Drag & Drop?
 [ ] Grafischer Formbuilder der die PHP Form Builder Class nutzt
-[ ] Ein einfaches "db_viewer" Modul für Anzeigen (nicht bearbeiten) der Datenbankinhalte
+[X] Ein einfaches "db_viewer" Modul für Anzeigen (nicht bearbeiten) der Datenbankinhalte
 [ ] Installationsfunktion von Installer GUI getrennt, Installation von UliCMS soll auch per Shell möglich sein.
     Kommandozeilen Argumente parsen in PHP siehe https://github.com/CHH/optparse
 [ ] Gästebuch, Blog -> Nur registrierte Nutzer dürfen Kommentare schreiben
