@@ -30,31 +30,42 @@ class Mailer {
 		if ($mode == EmailModes::INTERNAL) {
 			return mail ( $to, $subject, $message, $headers );
 		} else if ($mode == EmailModes::PHPMAILER) {
-			return self::sendWithPhpMailer ( $to, $subject, $message, $headers );
+			return self::sendWithPHPMailer ( $to, $subject, $message, $headers );
 		} else {
 			throw new NotImplementedException ( "E-Mail Mode \"$message\" not implemented." );
 		}
 	}
-	public static function sendWithPhpMailer($to, $subject, $message, $headers = "") {
-		$headers = self::splitHeaders ( $headers );
-		$headersLower = array_change_key_case ( $headers, CASE_LOWER );
-		
+	public static function getPHPMailer() {
 		$mailer = new PHPMailer ();
 		
 		// TODO: Implement transfer by SMTP
 		
 		$mailer->XMailer = Settings::get ( "show_meta_generator" ) ? "UliCMS" : "";
 		
+		$mailer = apply_filter ( $mailer, "php_mailer_instance" );
+		return $mailer;
+	}
+	public static function sendWithPHPMailer($to, $subject, $message, $headers = "") {
+		$headers = self::splitHeaders ( $headers );
+		$headersLower = array_change_key_case ( $headers, CASE_LOWER );
+		
+		$mailer = self::getPHPMailer ();
+		
 		if (isset ( $headersLower ["x-mailer"] )) {
 			$mailer->XMailer = $headersLower ["x-mailer"];
 		}
 		$mailer->setFrom ( StringHelper::isNotNullOrWhitespace ( $headers ["From"] ) ? $headers ["From"] : Settings::get ( "email" ) );
 		
+		if (isset ( $headersLower ["reply-to"] )) {
+			
+			$mailer->addReplyTo ( $headersLower ["reply-to"] );
+		}
 		$mailer->addAddress ( $to );
 		$mailer->Subject = $subject;
 		$mailer->isHTML ( isset ( $headersLower ["content-type"] ) and $headersLower ["content-type"] == "text/html" );
 		$mailer->Body = $message;
 		
+		$mailer = apply_filter ( $mailer, "php_mailer_send" );
 		return $mailer->send ();
 	}
 }
