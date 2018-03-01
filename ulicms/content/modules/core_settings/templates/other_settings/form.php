@@ -17,6 +17,8 @@ if (! $acl->hasPermission ( "other" )) {
 	
 	$smtp_encryption = Settings::get ( "smtp_encryption" );
 	
+	$smtp_no_verify_certificate = Settings::get ( "smtp_no_verify_certificate" );
+	
 	$smtp_host = Settings::get ( "smtp_host" );
 	if (! $smtp_host) {
 		$smtp_host = "127.0.0.1";
@@ -345,6 +347,22 @@ if (! $acl->hasPermission ( "other" )) {
 						<?php if($smtp_encryption == "tls") echo "checked"?>>TLS</option>
 				</select>
 			</div>
+			<div class="label">
+				<label for="smtp_no_verify_certificate"> <?php translate("smtp_no_verify_certificate");?>
+			</label>
+			</div>
+			<div class="inputWrapper">
+				<p>
+					<input type="checkbox" id="smtp_no_verify_certificate"
+						name="smtp_no_verify_certificate"
+						<?php
+	if ($smtp_no_verify_certificate) {
+		echo ' checked="checked"';
+	}
+	?>
+						value="smtp_no_verify_certificate"> <br /> <small><?php translate("smtp_no_verify_certificate_warning");?></small>
+				</p>
+			</div>
 
 			<div class="label">
 				<label for="smtp_auth"> <?php translate("AUTHENTIFACTION_REQUIRED");?>
@@ -354,7 +372,7 @@ if (! $acl->hasPermission ( "other" )) {
 				<input type="checkbox" id="smtp_auth" name="smtp_auth"
 					<?php
 	if ($smtp_auth) {
-		echo ' checked="check ed"';
+		echo ' checked="checked"';
 	}
 	?>
 					value="auth">

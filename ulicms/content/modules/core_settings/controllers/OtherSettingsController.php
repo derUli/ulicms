@@ -31,6 +31,12 @@ class OtherSettingsController extends Controller {
 			Settings::set ( "smtp_encryption", $_POST ["smtp_encryption"] );
 		}
 		
+		if (isset ( $_POST ["smtp_no_verify_certificate"] )) {
+			Settings::set ( "smtp_no_verify_certificate", "smtp_no_verify_certificate" );
+		} else {
+			Settings::delete ( "smtp_no_verify_certificate" );
+		}
+		
 		if (isset ( $_POST ["show_meta_generator"] )) {
 			Settings::delete ( "hide_meta_generator" );
 		} else {
