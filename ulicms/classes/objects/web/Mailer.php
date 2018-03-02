@@ -1,4 +1,5 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
 class Mailer {
 	public static function splitHeaders($headers) {
 		$header_array = array ();
@@ -15,10 +16,7 @@ class Mailer {
 		return $header_array;
 	}
 	public static function send($to, $subject, $message, $headers = "") {
-		$mode = Settings::get ( "email_mode" );
-		if (! $mode) {
-			$mode = EmailModes::INTERNAL;
-		}
+		$mode = Settings::get ( "email_mode" ) ? Settings::get ( "email_mode" ) : EmailModes::INTERNAL;
 		
 		// UliCMS speichert seit UliCMs 9.0.1 E-Mails, die das System versendet hat
 		// in der Datenbank
@@ -31,8 +29,76 @@ class Mailer {
 		// TODO: Hieraus einen Switch machen
 		if ($mode == EmailModes::INTERNAL) {
 			return mail ( $to, $subject, $message, $headers );
+		} else if ($mode == EmailModes::PHPMAILER) {
+			return self::sendWithPHPMailer ( $to, $subject, $message, $headers );
 		} else {
 			throw new NotImplementedException ( "E-Mail Mode \"$message\" not implemented." );
 		}
+	}
+	public static function getPHPMailer() {
+		$mailer = new PHPMailer ();
+		$mailer->SMTPDebug = 3;
+		
+		$mailer->Debugoutput = function ($str, $level) {
+			$logger = LoggerRegistry::get ( "phpmailer_log" );
+			if ($logger) {
+				$logger->debug ( $str );
+			}
+		};
+		
+		$mailer->SMTPSecure = Settings::get ( "smtp_encryption" );
+		
+		// disable verification of ssl certificates
+		// this option makes the mail transfer insecure
+		// use this only if it's unavoidable
+		if (Settings::get ( "smtp_no_verify_certificate" )) {
+			$mailer->SMTPOptions = array (
+					'ssl' => array (
+							'verify_peer' => false,
+							'verify_peer_name' => false,
+							'allow_self_signed' => true 
+					) 
+			);
+		}
+		
+		if (Settings::get ( "smtp_host" )) {
+			$mailer->isSMTP ();
+			$mailer->Host = Settings::get ( "smtp_host" );
+			$mailer->SMTPAuth = (Settings::get ( "smtp_auth" ) === "auth");
+			if (Settings::get ( "smtp_user" )) {
+				$mailer->Username = Settings::get ( "smtp_user" );
+			}
+			if (Settings::get ( "smtp_password" )) {
+				$mailer->Password = Settings::get ( "smtp_password" );
+			}
+			$mailer->Port = Settings::get ( "smtp_port", "int" );
+		}
+		$mailer->XMailer = Settings::get ( "show_meta_generator" ) ? "UliCMS" : "";
+		
+		$mailer = apply_filter ( $mailer, "php_mailer_instance" );
+		return $mailer;
+	}
+	public static function sendWithPHPMailer($to, $subject, $message, $headers = "") {
+		$headers = self::splitHeaders ( $headers );
+		$headersLower = array_change_key_case ( $headers, CASE_LOWER );
+		
+		$mailer = self::getPHPMailer ();
+		
+		if (isset ( $headersLower ["x-mailer"] )) {
+			$mailer->XMailer = $headersLower ["x-mailer"];
+		}
+		$mailer->setFrom ( StringHelper::isNotNullOrWhitespace ( $headers ["From"] ) ? $headers ["From"] : Settings::get ( "email" ) );
+		
+		if (isset ( $headersLower ["reply-to"] )) {
+			
+			$mailer->addReplyTo ( $headersLower ["reply-to"] );
+		}
+		$mailer->addAddress ( $to );
+		$mailer->Subject = $subject;
+		$mailer->isHTML ( isset ( $headersLower ["content-type"] ) and $headersLower ["content-type"] == "text/html" );
+		$mailer->Body = $message;
+		
+		$mailer = apply_filter ( $mailer, "php_mailer_send" );
+		return $mailer->send ();
 	}
 }

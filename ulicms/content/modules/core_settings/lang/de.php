@@ -9,3 +9,10 @@ define ( "TRANSLATION_UPLOADED_IMAGE_TOO_BIG", "Die von Ihnen hochgeladene Grafi
 define ( "TRANSLATION_CREATE_OPTION", "Konfigurationsvariable erstellen" );
 define ( "TRANSLATION_OPTION", "Option" );
 define ( "TRANSLATION_VALUE", "Wert" );
+
+// translations for smtp_encryption select field
+add_translation ( "smtp_encryption", "Verschlüsselung" );
+add_translation ( "unencrypted", "Unverschlüsselt" );
+
+add_translation ( "smtp_no_verify_certificate", "Zertifikate nicht validieren" );
+add_translation ( "smtp_no_verify_certificate_warning", "Nutzen Sie diese Option nur, wenn es unvermeidlich ist. Damit verringern Sie die Sicherheit der verschlüsselten Verbindung erheblich." );

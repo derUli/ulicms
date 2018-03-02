@@ -1,5 +1,7 @@
 ===== Neues in UliCMS 2018.3 =====
+
 Neue Features:
++ Neue Mailversandmethode "PHPMailer", Mailversand per SMTP
 + Vorbereitungen zur Ausführung von UliCMS in der Google Cloud durchgeführt
 + Seiten haben nun auch eine Gruppe (group_id)
 + Minifying von Scripts und Stylesheets kann durch Config-Variable $no_minify deaktiviert werden.
@@ -23,7 +25,7 @@ Neue HTML-Helper:
 * UliCMS\HTML\Input\CheckBox($name, $checked = false, $value = "1", $htmlAttributes = array())
 * UliCMS\HTML\Input\RadioButton($name, $checked = false, $value = "1", $htmlAttributes = array())
 * UliCMS\HTML\Input\SingleSelect($name, $value = null, $options = array(), $size = 1, $htmlAttributes = array()) 
-* UliCMS\HTML\Input\ MultiSelect($name, $value = null, $options = array(), $size = 5, $htmlAttributes = array())
+* UliCMS\HTML\Input\MultiSelect($name, $value = null, $options = array(), $size = 5, $htmlAttributes = array())
 * UliCMS\HTML\ListItem (Klasse)
 
 Minifying:

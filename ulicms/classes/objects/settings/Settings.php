@@ -28,7 +28,6 @@ class Settings {
 		if (db_num_rows ( $query ) > 0) {
 			while ( $row = db_fetch_object ( $query ) ) {
 				$value = self::convertVar ( $row->value, $type );
-				
 				SettingsCache::set ( $key, $value, $type );
 				return $value;
 			}

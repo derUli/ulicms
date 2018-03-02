@@ -1,4 +1,5 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
 class MailerTest extends PHPUnit_Framework_TestCase {
 	public function testSplitHeaders() {
 		$headers = "";
@@ -16,7 +17,18 @@ class MailerTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( "reply@company.com", $parsed ["Reply-To"] );
 		$this->assertEquals ( "My Cool Mailer", $parsed ["X-Mailer"] );
 	}
-	
-	// TODO: Implement Unit Tests für Sending mails with all available mail delivery methods
-	// Use fake a fake smtp server
+	public function testGetPHPMailer() {
+		$mailer = Mailer::getPHPMailer ();
+		$this->assertInstanceOf ( PHPMailer::class, $mailer );
+		$this->assertTrue ( in_array ( $mailer->SMTPSecure, array (
+				"",
+				"tls",
+				"ssl" 
+		) ) );
+		$this->assertEquals ( Settings::get ( "show_meta_generator" ) ? "UliCMS" : "", $mailer->XMailer );
+	}
+	public function testEmailModes() {
+		$this->assertEquals ( "internal", EmailModes::INTERNAL );
+		$this->assertEquals ( "phpmailer", EmailModes::PHPMAILER );
+	}
 }

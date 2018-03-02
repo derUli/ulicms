@@ -254,8 +254,10 @@ if (class_exists ( "Path" )) {
 	if (is_true ( $config->query_logging )) {
 		LoggerRegistry::register ( "sql_log", new Logger ( Path::resolve ( "ULICMS_LOG/sql_log" ) ) );
 	}
+	if (is_true ( $config->phpmailer_logging )) {
+		LoggerRegistry::register ( "phpmailer_log", new Logger ( Path::resolve ( "ULICMS_LOG/phpmailer_log" ) ) );
+	}
 }
-
 require_once dirname ( __file__ ) . DIRECTORY_SEPERATOR . "lib/minify.php";
 
 // define Constants

@@ -8,3 +8,11 @@ define ( "TRANSLATION_UPLOADED_IMAGE_TOO_BIG", "Your uploaded image was to big."
 define ( "TRANSLATION_CREATE_OPTION", "Create configuration variable" );
 define ( "TRANSLATION_OPTION", "Variable" );
 define ( "TRANSLATION_VALUE", "Value" );
+
+// translations for smtp_encryption select field
+add_translation ( "smtp_encryption", "Encryption" );
+add_translation ( "unencrypted", "unencrypted" );
+
+// translations for smtp_no_verify_certificate checkbox field
+add_translation ( "smtp_no_verify_certificate", "Disable certificate validation" );
+add_translation ( "smtp_no_verify_certificate_warning", "Use this only if it's unavoidable. This will decrease the security of the connection." );
