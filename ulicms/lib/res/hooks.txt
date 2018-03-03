@@ -83,7 +83,7 @@ after_safe_simple_settings
 before_save_spamfilter_settings
 after_save_spamfilter_settings
 settings_simple
-before_edit_user
+"before_edit_user
 after_edit_user
 before_admin_delete
 after_admin_delete
@@ -119,3 +119,4 @@ before_session_start
 after_session_start
 after_jquery_include
 head
+uninstall

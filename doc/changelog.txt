@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3 =====
+﻿===== Neues in UliCMS 2018.3 =====
 
 Neue Features:
 + Neue Mailversandmethode "PHPMailer", Mailversand per SMTP
@@ -44,6 +44,7 @@ Entfernte Features:
 
 Bugfixes:
 * Hochgeladene Videos wurden im Root-Ordner des Dateisystems gespeichert
+* Sicherheit: Hook-Funktionen in Controllern können nicht mehr direkt per HTTP Request ausgeführt werden.
 
 ===== Neues in UliCMS 2018.2 =====
 

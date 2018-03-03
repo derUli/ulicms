@@ -1,9 +1,18 @@
 <?php
 abstract class Controller {
 	protected $blacklist = array (
-			"runCommand",
-			"uninstall" 
+			"runCommand" 
 	);
+	public function __construct() {
+		$file = Path::resolve ( "ULICMS_ROOT/lib/hooks.txt" );
+		if (file_exists ( $file )) {
+			$lines = StringHelper::linesFromFile ( $file );
+			$lines = array_unique ( $lines );
+			foreach($lines as $line){
+				$blacklist[] = ModuleHelper::underscoreToCamel($line);
+			}
+		}
+	}
 	public function runCommand() {
 		$sClass = Request::getVar ( "sClass" );
 		if (isset ( $_REQUEST ["sMethod"] ) and StringHelper::isNotNullOrEmpty ( $_REQUEST ["sMethod"] ) and ! faster_in_array ( $_REQUEST ["sMethod"], $this->blacklist )) {
