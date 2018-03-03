@@ -1,7 +1,8 @@
 <?php
 abstract class Controller {
 	protected $blacklist = array (
-			"runCommand" 
+			"runCommand",
+			"uninstall" 
 	);
 	public function runCommand() {
 		$sClass = Request::getVar ( "sClass" );
