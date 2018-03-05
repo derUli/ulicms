@@ -8,6 +8,7 @@ Neue Features:
 + Exception Logging implementiert
 + Logging von SQL Queries nutzt nun auch KLogger
 + Log-Ordner wird automatisch per .htaccess geschützt
++ neue CustomField Types "FileFile" und "FileImage" (Auswahl einer Datei)
 
 Neue API-Funktionen:
 
