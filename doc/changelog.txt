@@ -24,14 +24,14 @@ Neue HTML-Helper:
 * UliCMS\HTML\Input\Hidden($name, $value, $htmlAttributes = array())
 * UliCMS\HTML\Input\CheckBox($name, $checked = false, $value = "1", $htmlAttributes = array())
 * UliCMS\HTML\Input\RadioButton($name, $checked = false, $value = "1", $htmlAttributes = array())
-* UliCMS\HTML\Input\SingleSelect($name, $value = null, $options = array(), $size = 1, $htmlAttributes = array()) 
+* UliCMS\HTML\Input\SingleSelect($name, $value = null, $options = array(), $size = 1, $htmlAttributes = array())
 * UliCMS\HTML\Input\MultiSelect($name, $value = null, $options = array(), $size = 5, $htmlAttributes = array())
 * UliCMS\HTML\ListItem (Klasse)
 
 Minifying:
 * combinedScriptHtml() (statt combined_script_html())
 * combinedStylesheetHtml (statt combined_stylesheet_html())
-* Die Funktionen im alten Namensschema bleiben aus 
+* Die Funktionen im alten Namensschema bleiben aus
 Kompatiblitätsgründen erhalten, sind jedoch als Deprecated (veraltet) gekennzeichnet
 
 Verbesserungen:
@@ -40,9 +40,10 @@ falls kein Feld für die E-Mail Adresse gesetzt ist.
 + Einstellungen zum E-Mail Versand ausgeblendet, da es dort nichts zum Auswählen gibt, bis PHPMailer ins System integriert wird.
 
 Entfernte Features:
-- Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.  
+- Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.
 
 Bugfixes:
++ "Custom Types" Feature war defekt
 * Hochgeladene Videos wurden im Root-Ordner des Dateisystems gespeichert
 * Sicherheit: Hook-Funktionen in Controllern können nicht mehr direkt per HTTP Request ausgeführt werden.
 
