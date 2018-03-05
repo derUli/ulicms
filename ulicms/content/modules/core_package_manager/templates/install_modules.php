@@ -30,15 +30,15 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		$version = new UliCMSVersion ();
 		$internalVersion = implode ( ".", $version->getInternalVersion () );
 		$pkg_src = str_replace ( "{version}", $internalVersion, $pkg_src );
-		
+
 		$packageArchiveFolder = $pkg_src . "archives/";
 		$packagesToInstall = explode ( ",", $_REQUEST ["packages"] );
-		
-		$post_install_script = "../post-install.php";
+
+		$post_install_script = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
 		if (file_exists ( $post_install_script )) {
 			unlink ( $post_install_script );
 		}
-		
+
 		if (count ( $packagesToInstall ) === 0 or empty ( $_REQUEST ["packages"] )) {
 			?>
 <p>
@@ -52,7 +52,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 				if (! empty ( $packagesToInstall [$i] )) {
 					$pkgURL = $packageArchiveFolder . basename ( $packagesToInstall [$i] ) . ".tar.gz";
 					$pkgContent = @file_get_contents_wrapper ( $pkgURL );
-					
+
 					// Wenn Paket nicht runtergeladen werden konnte
 					if (! $pkgContent or strlen ( $pkgContent ) < 1) {
 						echo "<p style='color:red;'>" . str_ireplace ( "%pkg%", $packagesToInstall [$i], get_translation ( "download_failed" ) ) . "</p>";
@@ -61,14 +61,14 @@ if (! $acl->hasPermission ( "install_packages" )) {
 						if (! is_dir ( $tmpdir )) {
 							mkdir ( $tmpdir, 0777 );
 						}
-						
+
 						$tmpFile = $tmpdir . $packagesToInstall [$i] . ".tar.gz";
-						
+
 						// write downloaded tarball to file
 						$handle = fopen ( $tmpFile, "wb" );
 						fwrite ( $handle, $pkgContent );
 						fclose ( $handle );
-						
+
 						if (file_exists ( $tmpFile )) {
 							// Paket installieren
 							if ($pkg->installPackage ( $tmpFile )) {
