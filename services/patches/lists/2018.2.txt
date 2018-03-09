@@ -1,0 +1,1 @@
+CacheUtilFix|Fixes a bug and an performance issue in the Caching System|http://patches.ulicms.de/downloads/2018.2/CacheUtilFix.zip
