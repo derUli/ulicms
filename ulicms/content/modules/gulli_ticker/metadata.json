@@ -1,0 +1,8 @@
+{
+	"version": "1.0",
+	"embed": true,
+	"controllers": {
+		"GulliTicker": "GulliTicker.php"
+	},
+	"main_class": "GulliTicker"
+}
