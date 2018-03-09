@@ -29,7 +29,7 @@ class CacheUtil {
 		return self::$adapter;
 	}
 	public static function isCacheEnabled() {
-		return (! Settings::get ( "cache_disabled" ));
+		return (! Settings::get ( "cache_disabled" ) && !is_logged_in());
 	}
 	public static function clearCache() {
 		add_hook ( "before_clear_cache" );

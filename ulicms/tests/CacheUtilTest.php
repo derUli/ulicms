@@ -14,6 +14,7 @@ class CacheUtilTest extends PHPUnit_Framework_TestCase {
 		} else {
 			Settings::delete ( "cache_disabled" );
 		}
+		unset($_SESSION ["logged_in"]);
 		Settings::set ( "cache_period", $this->cachePeriodOriginal );
 	}
 	public function testIsCacheEnabled() {
@@ -23,6 +24,16 @@ class CacheUtilTest extends PHPUnit_Framework_TestCase {
 		Settings::set ( "cache_disabled", "yes" );
 		$this->assertFalse ( CacheUtil::isCacheEnabled () );
 		
+		Settings::delete ( "cache_disabled" );
+	}
+	public function testIsCacheEnabledLoggedIn() {
+		$_SESSION ["logged_in"] = true;
+		Settings::delete ( "cache_disabled" );
+		$this->assertFalse ( CacheUtil::isCacheEnabled () );
+		
+		Settings::set ( "cache_disabled", "yes" );
+		$this->assertFalse ( CacheUtil::isCacheEnabled () );
+		unset($_SESSION ["logged_in"]);
 		Settings::delete ( "cache_disabled" );
 	}
 	public function testGetAdapter() {

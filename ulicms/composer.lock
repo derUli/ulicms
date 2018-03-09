@@ -114,16 +114,16 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "6.1.0",
+            "version": "6.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "42e5a69ac7bb99a6145726306d9d40b402d3e311"
+                "reference": "75af62255ea43caec38e376c53734f06885a7b6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/42e5a69ac7bb99a6145726306d9d40b402d3e311",
-                "reference": "42e5a69ac7bb99a6145726306d9d40b402d3e311",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/75af62255ea43caec38e376c53734f06885a7b6e",
+                "reference": "75af62255ea43caec38e376c53734f06885a7b6e",
                 "shasum": ""
             },
             "require": {
@@ -206,7 +206,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2018-01-30T19:51:46+00:00"
+            "time": "2018-03-01T22:15:40+00:00"
         },
         {
             "name": "phpgangsta/googleauthenticator",
@@ -412,16 +412,16 @@
         },
         {
             "name": "psr/simple-cache",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/simple-cache.git",
-                "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24"
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/753fa598e8f3b9966c886fe13f370baa45ef0e24",
-                "reference": "753fa598e8f3b9966c886fe13f370baa45ef0e24",
+                "url": "https://api.github.com/repos/php-fig/simple-cache/zipball/408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
+                "reference": "408d5eafb83c57f6365a3ca330ff23aa4a5fa39b",
                 "shasum": ""
             },
             "require": {
@@ -456,7 +456,7 @@
                 "psr-16",
                 "simple-cache"
             ],
-            "time": "2017-01-02T13:31:39+00:00"
+            "time": "2017-10-23T01:57:42+00:00"
         }
     ],
     "packages-dev": [
@@ -832,7 +832,7 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.8.34",
+            "version": "v2.8.36",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
