@@ -25,6 +25,16 @@ class CacheUtilTest extends PHPUnit_Framework_TestCase {
 		
 		Settings::delete ( "cache_disabled" );
 	}
+	public function testIsCacheEnabledLoggedIn() {
+		$_SESSION ["logged_in"] = true;
+		Settings::delete ( "cache_disabled" );
+		$this->assertFalse ( CacheUtil::isCacheEnabled () );
+		
+		Settings::set ( "cache_disabled", "yes" );
+		$this->assertFalse ( CacheUtil::isCacheEnabled () );
+		unset($_SESSION ["logged_in"]);
+		Settings::delete ( "cache_disabled" );
+	}
 	public function testGetAdapter() {
 		$this->assertInstanceOf ( Psr16Adapter::class, CacheUtil::getAdapter () );
 	}

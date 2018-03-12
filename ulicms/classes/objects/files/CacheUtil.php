@@ -12,8 +12,8 @@ class CacheUtil {
 		}
 		
 		$cacheConfig = array (
-				"path" => PATH::resolve ( "ULICMS_CACHE" ),
-				"defaultTtl" => self::getCachePeriod () 
+				"path" => Path::resolve ( "ULICMS_CACHE" ),
+				"defaultTtl" => self::getCachePeriod ()
 		);
 		
 		// If SQLite available use it
@@ -29,7 +29,7 @@ class CacheUtil {
 		return self::$adapter;
 	}
 	public static function isCacheEnabled() {
-		return (! Settings::get ( "cache_disabled" ));
+		return (! Settings::get ( "cache_disabled" ) && !is_logged_in());
 	}
 	public static function clearCache() {
 		add_hook ( "before_clear_cache" );
@@ -48,8 +48,8 @@ class CacheUtil {
 			$adapter->clear ();
 		}
 		
-		SureRemoveDir ( PATH::resolve ( "ULICMS_CACHE" ), false );
-		
+		SureRemoveDir ( Path::resolve ( "ULICMS_CACHE" ), false );
+				
 		// Sync modules table in database with modules folder
 		$moduleManager = new ModuleManager ();
 		$moduleManager->sync ();
