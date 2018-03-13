@@ -58,7 +58,7 @@ class CustomData
     public static function getCustomDataOrSetting($name)
     {
         $data = CustomData::get();
-        if (! is_null($data) and is_array($data) and isset($data[$name]) and ! is_null($data[$name])) {
+        if (! is_null($data) and is_array($data) and isset($data[$name])) {
             return $data[$name];
         }
         return Settings::get($name);
