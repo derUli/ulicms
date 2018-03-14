@@ -1,2 +1,3 @@
 translation-2016-09-26|Fix some missing translations|http://patches.ulicms.de/downloads/9.8.5/translation-2016-09-26.zip
 fix_user_edit_xss|Fix XSS in User Edit Form|http://patches.ulicms.de/downloads/9.8.5/fix_user_edit_xss.zip
+fix-register_actions-hook|Bugfix: register_actions Hook was broken|http://patches.ulicms.de/downloads/9.8.5/fix-register_actions-hook.zip

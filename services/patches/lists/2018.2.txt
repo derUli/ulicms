@@ -1,0 +1,3 @@
+CacheUtilFix|Fixes a bug and an performance issue in the Caching System|http://patches.ulicms.de/downloads/2018.2/CacheUtilFix.zip
+CustomTypesFix|Fixes custom types field objects|http://patches.ulicms.de/downloads/2018.2/CustomTypesFix.zip
+GetFullPageURLByIDWindowsFix|Fixes a function which generates invalid paths on Windows|http://patches.ulicms.de/downloads/2018.2/GetFullPageURLByIDWindowsFix.zip

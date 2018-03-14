@@ -1,0 +1,1 @@
+banner-model-fix|Fix save function of the banner data model|http://patches.ulicms.de/downloads/2017.4/banner-model-fix.zip
