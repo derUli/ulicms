@@ -116,7 +116,9 @@ class ModuleHelper {
 		$domain = getDomainByLanguage ( $page->language );
 		$dirname = dirname ( get_request_uri () );
 
-
+        // Replace backslashes with slashes (Windows)
+        $dirname = str_replace("\\", "/", $dirname);
+		
 		if (is_admin_dir ()) {
 			$dirname = dirname ( dirname ( $dirname . "/.." ) );
 		}
@@ -126,6 +128,9 @@ class ModuleHelper {
 		if (! endsWith ( $dirname, "/" )) {
 			$dirname = $dirname . "/";
 		}
+		// Replace backslashes with slashes (Windows)
+        $dirname = str_replace("\\", "/", $dirname);
+		
 		$currentLanguage = isset($_SESSION ["language"]) ? $_SESSION ["language"]  : Settings::get ( "default_language" );
 		if (! $domain) {
 			if ($page->language != $currentLanguage) {
