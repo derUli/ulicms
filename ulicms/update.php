@@ -21,9 +21,6 @@ if (Settings::get ( "email_mode" ) === "pear_mail") {
 	Settings::set ( "email_mode", "internal" );
 }
 
-// TODO: words_blacklist konvertieren
-// || durch \n ersetzen
-
 // Patch Manager zurücksetzen
 $pkg = new PackageManager ();
 $pkg->truncateInstalledPatches ();
