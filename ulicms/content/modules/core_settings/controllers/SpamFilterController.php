@@ -15,8 +15,6 @@ class SpamFilterController extends Controller {
 		
 		if (isset ( $_POST ["spamfilter_words_blacklist"] )) {
 			$blacklist = $_POST ["spamfilter_words_blacklist"];
-			$blacklist = str_replace ( "\r\n", "||", $blacklist );
-			$blacklist = str_replace ( "\n", "||", $blacklist );
 			Settings::set ( "spamfilter_words_blacklist", $blacklist );
 		}
 		

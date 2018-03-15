@@ -83,7 +83,8 @@ class CommentManager {
 		$str = strtolower ( $str );
 		
 		if ($words_blacklist !== false) {
-			$words_blacklist = explode ( "||", $words_blacklist );
+		    $words_blacklist = StringHelper::linesFromString ( $words_blacklist, false, true, true );
+		    
 		} else {
 			return false;
 		}
