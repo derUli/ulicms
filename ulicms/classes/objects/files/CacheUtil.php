@@ -12,8 +12,8 @@ class CacheUtil {
 		}
 		
 		$cacheConfig = array (
-				"path" => PATH::resolve ( "ULICMS_CACHE" ),
-				"defaultTtl" => self::getCachePeriod () 
+				"path" => Path::resolve ( "ULICMS_CACHE" ),
+				"defaultTtl" => self::getCachePeriod ()
 		);
 		
 		// If SQLite available use it
@@ -48,8 +48,8 @@ class CacheUtil {
 			$adapter->clear ();
 		}
 		
-		SureRemoveDir ( PATH::resolve ( "ULICMS_CACHE" ), false );
-		
+		SureRemoveDir ( Path::resolve ( "ULICMS_CACHE" ), false );
+				
 		// Sync modules table in database with modules folder
 		$moduleManager = new ModuleManager ();
 		$moduleManager->sync ();
