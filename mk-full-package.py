@@ -52,7 +52,7 @@ def main():
     main_dir = os.path.join(target, "ulicms")
 
     # Composer packages zu Deploy hinzufügen
-    os.system("ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
+    os.system("php ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
 
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
     if args.zip:
