@@ -22,7 +22,7 @@ if ($acl->hasPermission ( "languages" )) {
 			<td><input type="text" name="name" maxlength="100" required></td>
 		</tr>
 	</table>
-	<button type="submit" class="btn btn-success voffset2"><?php translate("add_language");?></button>
+	<button type="submit" class="btn btn-primary voffset2"><?php translate("add_language");?></button>
 </div>
 </form>
 <br>

@@ -486,7 +486,7 @@ function openMenuImageSelectWindow(field) {
 				<option value="asc"><?php translate("asc");?></option>
 				<option value="desc"><?php translate("desc");?></option>
 			</select> <br /> <br /> <strong><?php translate("limit");?></strong>
-			<input type="number" min="0" name="limit" step="1" value="0"> <br />
+			<input type="number" min="0" name="limit" step="1" value="0"> 
 			<br /> <strong><?php translate ( "use_pagination" );?></strong><br />
 			<select name="list_use_pagination">
 				<option value="1"><?php translate("yes")?></option>
@@ -714,10 +714,10 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </div>
 <div class="inPageMessage"></div>
 <input type="hidden" name="add_page" value="add_page">
-<button type="submit" class="btn btn-success"><?php translate("save");?></button>
+<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 <?php
 		enqueueScriptFile ( "scripts/page.js" );
-		combined_script_html ();
+		combinedScriptHtml ();
 		?>
 </form>
 <?php

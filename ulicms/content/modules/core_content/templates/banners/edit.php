@@ -130,7 +130,7 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 		?>
 <br />
 <br />
-<button type="submit" class="btn btn-success"><?php translate("save_changes");?></button>
+<button type="submit" class="btn btn-primary"><?php translate("save_changes");?></button>
 </form>
 <?php
 	}

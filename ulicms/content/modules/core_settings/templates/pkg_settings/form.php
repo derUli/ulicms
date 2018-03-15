@@ -69,7 +69,7 @@ if (! $acl->hasPermission ( "pkg_settings" )) {
 	</div>
 
 	<br />
-	<button type="submit" class="btn btn-success voffset2"><?php translate("save_changes");?></button>
+	<button type="submit" class="btn btn-primary voffset2"><?php translate("save_changes");?></button>
 </fieldset>
 </form>
 

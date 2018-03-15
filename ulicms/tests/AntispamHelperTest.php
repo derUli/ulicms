@@ -36,14 +36,7 @@ class AntispamHelperTest extends PHPUnit_Framework_TestCase {
 		// Ukrainian
 		$this->assertTrue ( AntiSpamHelper::isCyrillic ( "Це просто текст" ) );
 	}
-	public function testCheckForSpamhaus() {
-		// ip of ulicms.de webserver - clean
-		$this->assertFalse ( AntiSpamHelper::checkForSpamhaus ( "85.13.143.60" ) );
-		
-		// known spam ip
-		$this->assertTrue ( AntiSpamHelper::checkForSpamhaus ( "185.36.102.114" ) );
-	}
-	
+
 	// TODO: Implement test for isCountryBlocked
 	public function testIsCountryBlocked() {
 		Settings::set ( "country_blacklist", "vn,jp, at,tr" );

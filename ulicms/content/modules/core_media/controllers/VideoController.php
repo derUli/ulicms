@@ -11,7 +11,6 @@ class VideoController extends Controller {
 			}
 			
 			// WebM
-			$result = db_fetch_object ( $query );
 			$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->webm_file );
 			if (! empty ( $result->webm_file ) and is_file ( $filepath )) {
 				@unlink ( $filepath );
@@ -41,6 +40,8 @@ class VideoController extends Controller {
 		Request::redirect ( ModuleHelper::buildActionURL ( "videos" ) );
 	}
 	public function createPost() {
+		$video_folder = ULICMS_ROOT . "/content/videos";
+		
 		if (isset ( $_FILES )) {
 			$mp4_file_value = "";
 			// MP4

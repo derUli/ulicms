@@ -75,7 +75,7 @@ if (Settings::get ( "visitors_can_register" ) == "off" or ! Settings::get ( "vis
 		name="admin_password_repeat" value=""><br />
 		<?php add_hook ( "register_form_field" );?>
 
-	<button type="submit" class="btn btn-success"><?php translate("register");?></button>
+	<button type="submit" class="btn btn-primary"><?php translate("register");?></button>
 </form>
 <?php
 	add_hook ( "after_register_form" );
