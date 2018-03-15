@@ -9,6 +9,7 @@ Neue Features:
 + Logging von SQL Queries nutzt nun auch KLogger
 + Log-Ordner wird automatisch per .htaccess geschützt
 + neue CustomField Types "FileFile" und "FileImage" (Auswahl einer Datei)
++ shell/sinstall.php kann nun Pakete von einer URL als Quelle installieren.
 
 Neue API-Funktionen:
 
