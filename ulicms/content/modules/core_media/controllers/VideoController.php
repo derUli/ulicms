@@ -7,19 +7,19 @@ class VideoController extends Controller {
 			$result = db_fetch_object ( $query );
 			$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->ogg_file );
 			if (! empty ( $result->ogg_file ) and is_file ( $filepath )) {
-				@unlink ( $filepath );
+				unlink ( $filepath );
 			}
 			
 			// WebM
 			$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->webm_file );
 			if (! empty ( $result->webm_file ) and is_file ( $filepath )) {
-				@unlink ( $filepath );
+				unlink ( $filepath );
 			}
 			
 			// MP4
 			$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->mp4_file );
 			if (! empty ( $result->mp4_file ) and is_file ( $filepath )) {
-				@unlink ( $filepath );
+				unlink ( $filepath );
 			}
 			
 			db_query ( "DELETE FROM " . tbname ( "videos" ) . " where id = " . intval ( $_REQUEST ["delete"] ) );
