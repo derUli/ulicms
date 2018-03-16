@@ -10,6 +10,7 @@ Neue Features:
 + Log-Ordner wird automatisch per .htaccess geschützt
 + neue CustomField Types "FileFile" und "FileImage" (Auswahl einer Datei)
 + shell/sinstall.php kann nun Pakete von einer URL als Quelle installieren.
+* CodeMirror auf Version 5.35.0 aktualisiert
 
 Neue API-Funktionen:
 
@@ -46,7 +47,7 @@ Entfernte Features:
 - Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.
 
 Bugfixes:
-+ "Custom Types" Feature war defekt
+* "Custom Types" Feature war defekt
 * Hochgeladene Videos wurden im Root-Ordner des Dateisystems gespeichert
 * Sicherheit: Hook-Funktionen in Controllern können nicht mehr direkt per HTTP Request ausgeführt werden.
 * ModuleHelper::getFullPageURLByID() gibt fehlerhafte URl aus unter Windows
