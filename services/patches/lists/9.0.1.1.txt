@@ -1,4 +1,0 @@
-security-fix-spamfilter-settings|Fixed some security issues in spamfilter settings|http://patches.ulicms.de/downloads/9.0.1/security-fix-spamfilter-settings.zip
-ckeditor-4.5.9|CKEditor 4.5.9 Update|http://patches.ulicms.de/downloads/9.x.x/ckeditor_4.5.9.zip
-secfix_settings_simple|Added missing permissions check to basic settings|http://patches.ulicms.de/downloads/9.0.1/secfix_settings_simple.zip
-fix_user_edit_xss|Fix XSS in User Edit Form|http://patches.ulicms.de/downloads/9.0.1/fix_user_edit_xss.zip
