@@ -54,7 +54,7 @@ if ($acl->hasPermission ( "settings_simple" )) {
 		<tr>
 		<td></td>
 		<td style="text-align: center"><button type="submit" name="submit"
-				class="btn btn-primary"><?php translate("save_changes");?></button></td>
+				class="btn btn-success"><?php translate("save_changes");?></button></td>
 	</tr>
 </table>
 </form>

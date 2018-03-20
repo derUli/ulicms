@@ -67,7 +67,7 @@ if ($acl->hasPermission ( "favicon" )) {
 		<tr>
 			<td></td>
 			<td style="text-align: center"><button type="submit"
-					class="btn btn-primary"><?php translate("upload");?></td>
+					class="btn btn-success"><?php translate("upload");?></td>
 		</tr>
 	</table>
 </form>

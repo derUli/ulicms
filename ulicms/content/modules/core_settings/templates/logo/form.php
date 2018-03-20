@@ -50,7 +50,7 @@ if (defined ( "_SECURITY" )) {
 		<tr>
 			<td></td>
 			<td class="text-center"><button type="submit"
-					class="btn btn-primary voffset2"><?php translate("upload");?></button></td>
+					class="btn btn-success voffset2"><?php translate("upload");?></button></td>
 		</tr>
 	</table>
 </form>

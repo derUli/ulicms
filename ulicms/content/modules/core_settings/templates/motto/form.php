@@ -59,7 +59,7 @@ if ($acl->hasPermission ( "settings_simple" )) {
 		<td></td>
 		<td style="text-align: center">
 
-			<button type="submit" name="submit" class="btn btn-primary">Einstellungen
+			<button type="submit" name="submit" class="btn btn-success">Einstellungen
 				Speichern</button>
 		</td>
 	</tr>

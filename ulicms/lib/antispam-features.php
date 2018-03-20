@@ -9,3 +9,6 @@ function is_chinese($str) {
 function isCountryBlocked() {
 	return AntiSpamHelper::isCountryBlocked ();
 }
+function checkForSpamhaus($host = null) {
+	return AntiSpamHelper::checkForSpamhaus ( $host );
+}

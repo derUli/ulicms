@@ -5,7 +5,6 @@ if (! defined ( "KCFINDER_PAGE" )) {
 			$path = str_ireplace ( "ULICMS_ROOT", rtrim ( ULICMS_ROOT, "/" ), $path );
 			$path = str_ireplace ( "ULICMS_TMP", rtrim ( ULICMS_TMP, "/" ), $path );
 			$path = str_ireplace ( "ULICMS_CACHE", rtrim ( ULICMS_CACHE, "/" ), $path );
-			$path = str_ireplace ( "ULICMS_LOG", rtrim ( ULICMS_LOG, "/" ), $path );
 			$path = str_ireplace ( "\\", "/", $path );
 			$path = rtrim ( $path, "/" );
 			return $path;

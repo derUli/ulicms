@@ -83,7 +83,7 @@ if ($twofactor_authentication) {
 		<tr>
 			<td></td>
 			<td style="padding-top: 10px; text-align: center;">
-				<button type="submit" class="btn btn-primary"><?php translate("login");?></button>
+				<button type="submit" class="btn btn-success"><?php translate("login");?></button>
 			</td>
 		</tr>
 	</table>

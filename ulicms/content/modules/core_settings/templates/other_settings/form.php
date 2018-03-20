@@ -278,12 +278,12 @@ if (! $acl->hasPermission ( "other" )) {
 	?>>
 		</div>
 	</div>
-	<h2 class="accordion-header hide">
+	<h2 class="accordion-header">
 		<?php translate("EMAIL_DELIVERY");?>
 		</h2>
 
 
-	<div class="accordion-content hide">
+	<div class="accordion-content">
 		<div class="label">Modus:</div>
 		<div class="inputWrapper">
 			<select id='email_mode' name="email_mode" size="1">
@@ -427,7 +427,7 @@ if($('#email_mode').val() == "pear_mail"){
 	</div>
 </div>
 
-<button type="submit" name="submit" class="btn btn-primary voffset3"><?php translate("save_changes");?></button>
+<button type="submit" name="submit" class="btn btn-success voffset3"><?php translate("save_changes");?></button>
 </form>
 <script type="text/javascript">
 $("#other_settings").ajaxForm({beforeSubmit: function(e){

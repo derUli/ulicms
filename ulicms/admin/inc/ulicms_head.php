@@ -55,7 +55,7 @@ foreach ( $enq as $script ) {
 	enqueueScriptFile ( $script );
 }
 ?>
-<?php combinedScriptHtml();?>
+<?php combined_script_html();?>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 <script type="text/javascript" src="scripts/jscolor/jscolor.min.js"></script>
 <script type="text/javascript">
@@ -84,7 +84,11 @@ $(".menu li:has(ul)").doubleTapToGo();
 <?php
 $styles [] = "css/bootstrap.min.css";
 $styles [] = "codemirror/lib/codemirror.css";
+$styles [] = "codemirror/mode/xml/xml.css";
+$styles [] = "codemirror/mode/javascript/javascript.css";
+$styles [] = "codemirror/mode/clike/clike.css";
 $styles [] = "codemirror/lib/codemirror.css";
+$styles [] = "codemirror/mode/css/css.css";
 $styles [] = "css/modern.css";
 $styles [] = "scripts/css/select2.min.css";
 
@@ -92,7 +96,7 @@ foreach ( $styles as $style ) {
 	enqueueStylesheet ( $style );
 }
 
-combinedStylesheetHtml ();
+combined_stylesheet_html ();
 ?>
 <script type="text/javascript">
 $(document).ready(function(){

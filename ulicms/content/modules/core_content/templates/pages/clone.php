@@ -892,7 +892,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 	<img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
 </div>
 
-<button type="submit" class="btn btn-primary"><?php translate("save_changes");?></button>
+<button type="submit" class="btn btn-success"><?php translate("save_changes");?></button>
 <script src="scripts/page.js" type="text/javascript">
 </script>
 <input type="hidden" name="add_page" value="add_page">

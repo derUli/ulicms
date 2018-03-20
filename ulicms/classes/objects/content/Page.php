@@ -12,8 +12,7 @@ class Page extends Content {
 	public $active = 1;
 	public $created = 0;
 	public $lastmodified = 0;
-	public $autor = null;
-	public $group_id = null;
+	public $autor = 1;
 	public $lastchangeby = 1;
 	public $views = 0;
 	public $menu = "top";
@@ -109,8 +108,7 @@ class Page extends Content {
 	}
 	public function create() {
 		$sql = "INSERT INTO `" . tbname ( "content" ) . "` (systemname, title, alternate_title, target, category,
-				content, language, menu_image, active, created, lastmodified, autor, 
-				`group_id`, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
+				content, language, menu_image, active, created, lastmodified, autor, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
 				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden) VALUES (";
 		
 		$sql .= "'" . DB::escapeValue ( $this->systemname ) . "',";
@@ -133,7 +131,6 @@ class Page extends Content {
 		$sql .= intval ( $this->created ) . ",";
 		$sql .= intval ( $this->lastmodified ) . ",";
 		$sql .= intval ( $this->autor ) . ",";
-		$sql .= intval ( $this->group_id ) . ",";
 		$sql .= intval ( $this->lastchangeby ) . ",";
 		// Views
 		$sql .= "0,";
@@ -221,7 +218,6 @@ class Page extends Content {
 		$sql .= "active=" . intval ( $this->active ) . ",";
 		$sql .= "lastmodified=" . intval ( $this->lastmodified ) . ",";
 		$sql .= "autor=" . intval ( $this->autor ) . ",";
-		$sql .= "`group_id`=" . intval ( $this->group_id ) . ",";
 		$sql .= "lastchangeby=" . intval ( $this->lastchangeby ) . ",";
 		
 		$sql .= "menu='" . DB::escapeValue ( $this->menu ) . "',";

@@ -33,7 +33,7 @@ if ($acl->hasPermission ( "default_access_restrictions_edit" )) {
 	<?php if($only_others_can_edit) echo "checked";?>>
 <label for="only_others_can_edit"><?php translate("others");?></label>
 </p>
-<button type="submit" name="submit_form" class="btn btn-primary"><?php translate("save_changes");?></button>
+<button type="submit" name="submit_form" class="btn btn-success"><?php translate("save_changes");?></button>
 <?php
 	if (Request::getVar ( "submit_form" )) {
 		?>

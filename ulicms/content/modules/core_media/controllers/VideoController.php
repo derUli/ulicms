@@ -7,19 +7,20 @@ class VideoController extends Controller {
 			$result = db_fetch_object ( $query );
 			$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->ogg_file );
 			if (! empty ( $result->ogg_file ) and is_file ( $filepath )) {
-				unlink ( $filepath );
+				@unlink ( $filepath );
 			}
 			
 			// WebM
+			$result = db_fetch_object ( $query );
 			$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->webm_file );
 			if (! empty ( $result->webm_file ) and is_file ( $filepath )) {
-				unlink ( $filepath );
+				@unlink ( $filepath );
 			}
 			
 			// MP4
 			$filepath = ULICMS_ROOT . "/content/videos/" . basename ( $result->mp4_file );
 			if (! empty ( $result->mp4_file ) and is_file ( $filepath )) {
-				unlink ( $filepath );
+				@unlink ( $filepath );
 			}
 			
 			db_query ( "DELETE FROM " . tbname ( "videos" ) . " where id = " . intval ( $_REQUEST ["delete"] ) );
@@ -40,8 +41,6 @@ class VideoController extends Controller {
 		Request::redirect ( ModuleHelper::buildActionURL ( "videos" ) );
 	}
 	public function createPost() {
-		$video_folder = ULICMS_ROOT . "/content/videos";
-		
 		if (isset ( $_FILES )) {
 			$mp4_file_value = "";
 			// MP4

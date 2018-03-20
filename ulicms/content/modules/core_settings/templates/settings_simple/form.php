@@ -192,7 +192,7 @@ if ($acl->hasPermission ( "settings_simple" )) {
 		<td>
 		
 		<td align="center">
-			<button type="submit" class="btn btn-primary"><?php translate("OK")?></button>
+			<button type="submit" class="btn btn-success"><?php translate("OK")?></button>
 		</td>
 	</tr>
 </table>

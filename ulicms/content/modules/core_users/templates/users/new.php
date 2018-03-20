@@ -78,7 +78,7 @@ if ($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_create" )) 
 	}
 	?>
 	</select><br /> <br />
-	<button type="submit" class="btn btn-primary"><?php translate ( "create_user" );?></button>
+	<button type="submit" class="btn btn-success"><?php translate ( "create_user" );?></button>
 </form>
 <?php
 } else {

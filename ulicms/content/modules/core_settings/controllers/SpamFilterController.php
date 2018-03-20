@@ -13,6 +13,12 @@ class SpamFilterController extends Controller {
 			Settings::set ( "country_blacklist", $_POST ["country_blacklist"] );
 		}
 		
+		if (isset ( $_POST ["check_for_spamhaus"] )) {
+			Settings::set ( "check_for_spamhaus", "check" );
+		} else {
+			Settings::delete ( "check_for_spamhaus" );
+		}
+		
 		if (isset ( $_POST ["spamfilter_words_blacklist"] )) {
 			$blacklist = $_POST ["spamfilter_words_blacklist"];
 			$blacklist = str_replace ( "\r\n", "||", $blacklist );

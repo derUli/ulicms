@@ -47,19 +47,33 @@ class AntiSpamHelper {
 	public static function isCyrillic($str) {
 		return ( bool ) preg_match ( '/\p{Cyrillic}+/u', $str );
 	}
+	public static function checkForSpamhaus($host = null) {
+		if (is_null ( $host )) {
+			if (function_exists ( "get_ip" )) {
+				$host = get_ip ();
+			} else {
+				$host = $_SERVER ["REMOTE_ADDR"];
+			}
+		}
+		$rbl = 'sbl-xbl.spamhaus.org';
+		// valid query format is: 156.200.53.64.sbl-xbl.spamhaus.org
+		$rev = array_reverse ( explode ( '.', $host ) );
+		$lookup = implode ( '.', $rev ) . '.' . $rbl;
+		return $lookup != gethostbyname ( $lookup );
+	}
 	public static function containsBadwords($str) {
 		$words_blacklist = Settings::get ( "spamfilter_words_blacklist" );
 		$str = strtolower ( $str );
 		
 		if ($words_blacklist) {
-			$words_blacklist = StringHelper::linesFromString ( $words_blacklist, false, true, true );
+			$words_blacklist = explode ( "||", $words_blacklist );
 		} else {
 			return null;
 		}
 		
 		for($i = 0; $i < count ( $words_blacklist ); $i ++) {
 			$word = strtolower ( $words_blacklist [$i] );
-			if (strpos ( strtolower ( $str ), $word ) !== false) {
+			if (strpos ( $str, $word ) !== false) {
 				return $words_blacklist [$i];
 			}
 		}

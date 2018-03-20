@@ -57,7 +57,7 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_edit" ))
 		</select>
 </p>
 <p>
-	<button name="edit_form" type="submit" class="btn btn-primary"><?php translate("save");?></button>
+	<button name="edit_form" type="submit" class="btn btn-success"><?php translate("save");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?>
 

@@ -210,7 +210,7 @@ if (($acl->hasPermission ( "users" ) and $acl->hasPermission ( "users_edit" )) o
 	</select> <br /> <br /> <strong><?php translate("about_me");?></strong><br />
 	<textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row->about_me)?></textarea>
 	<br /> 
-	<button type="submit" class="btn btn-primary"><?php translate ( "OK" );?></button>
+	<button type="submit" class="btn btn-success"><?php translate ( "OK" );?></button>
 </form>
 
 <?php
