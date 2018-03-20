@@ -20,7 +20,7 @@ if ($acl->hasPermission ( "update_system" )) {
 	} else {
 		foreach ( $patches as $patch ) {
 			$splitted = explode ( "|", $patch );
-			$success = $pkg->installPatch ( $splitted [0], $splitted [1], $splitted [2] );
+			$success = $pkg->installPatch ( $splitted [0], $splitted [1], $splitted [2], false );
 			if ($success) {
 				echo '<p style="color:green">' . htmlspecialchars ( $splitted [0] ) . " " . get_translation ( "was_successfully_installed" ) . '</p>';
 			} else {
@@ -28,6 +28,7 @@ if ($acl->hasPermission ( "update_system" )) {
 			}
 			fcflush ();
 		}
+		clearCache();
 	}
 } else {
 	noperms ();
