@@ -9,6 +9,8 @@ Neue Features:
 + Logging von SQL Queries nutzt nun auch KLogger
 + Log-Ordner wird automatisch per .htaccess geschützt
 + neue CustomField Types "FileFile" und "FileImage" (Auswahl einer Datei)
++ shell/sinstall.php kann nun Pakete von einer URL als Quelle installieren.
+* CodeMirror auf Version 5.35.0 aktualisiert
 
 Neue API-Funktionen:
 
@@ -39,12 +41,13 @@ Verbesserungen:
 + Formularsystem verwendet nun die E-Mail Adresse aus den Grundeinstellungen als Absender,
 falls kein Feld für die E-Mail Adresse gesetzt ist.
 + Einstellungen zum E-Mail Versand ausgeblendet, da es dort nichts zum Auswählen gibt, bis PHPMailer ins System integriert wird.
++ Performance der Installation von mehrere Paketen und Patches optimiert
 
 Entfernte Features:
 - Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.
 
 Bugfixes:
-+ "Custom Types" Feature war defekt
+* "Custom Types" Feature war defekt
 * Hochgeladene Videos wurden im Root-Ordner des Dateisystems gespeichert
 * Sicherheit: Hook-Funktionen in Controllern können nicht mehr direkt per HTTP Request ausgeführt werden.
 * ModuleHelper::getFullPageURLByID() gibt fehlerhafte URl aus unter Windows

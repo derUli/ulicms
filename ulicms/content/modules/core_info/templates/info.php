@@ -19,7 +19,7 @@ if (! $acl->hasPermission ( "info" )) {
 		target="_blank">KCFinder</a> Copyright ©2010 - 2014 Pavel Tzonkov<br />
 	Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors <br />
 	<a href="http://codemirror.net/" target="_blank">CodeMirror</a> &copy;
-	2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others <br /> <a
+	2017 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others <br /> <a
 		href="http://www.raymondhill.net/finediff/viewdiff-ex.php"
 		target="_blank">PHP Fine Diff</a> Copyright 2011 (c) Raymond Hill <br />
 	<a href="http://mobiledetect.net/" target="_blank">Mobile_Detect</a>
