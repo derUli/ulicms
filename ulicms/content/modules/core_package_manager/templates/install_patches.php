@@ -20,7 +20,10 @@ if ($acl->hasPermission ( "update_system" )) {
 	} else {
 		foreach ( $patches as $patch ) {
 			$splitted = explode ( "|", $patch );
-			$success = $pkg->installPatch ( $splitted [0], $splitted [1], $splitted [2], false );
+
+			$checksum = count($splitted) >= 4 ?  $splitted [3] : null;
+			$success = $pkg->installPatch ( $splitted [0], $splitted [1], $splitted [2], false, $checksum );
+			
 			if ($success) {
 				echo '<p style="color:green">' . htmlspecialchars ( $splitted [0] ) . " " . get_translation ( "was_successfully_installed" ) . '</p>';
 			} else {

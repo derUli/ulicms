@@ -57,7 +57,7 @@ class PackageManager
     }
 
     // @FIXME : Delete temporary files after install a patch
-    public function installPatch($name, $description, $url, $clear_cache = true)
+    public function installPatch($name, $description, $url, $clear_cache = true, $checksum = null)
     {
         @set_time_limit(0);
         $test = $this->getInstalledPatchNames();
@@ -69,7 +69,7 @@ class PackageManager
         if (! file_exists($tmp_dir)) {
             mkdir($tmp_dir);
         }
-        $download = file_get_contents_wrapper($url, true);
+        $download = file_get_contents_wrapper($url, true, $checksum);
         
         $download_tmp = $tmp_dir . "patch.zip";
         
