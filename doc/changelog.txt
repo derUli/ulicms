@@ -10,7 +10,8 @@ Neue Features:
 + Log-Ordner wird automatisch per .htaccess geschützt
 + neue CustomField Types "FileFile" und "FileImage" (Auswahl einer Datei)
 + shell/sinstall.php kann nun Pakete von einer URL als Quelle installieren.
-* CodeMirror auf Version 5.35.0 aktualisiert
++ CodeMirror auf Version 5.35.0 aktualisiert
++ Die Sicherheit des Downloads von Patches und Paketen wurde verbessert (Checksum-Prüfung und SSL)
 
 Neue API-Funktionen:
 
