@@ -52,6 +52,7 @@ Bugfixes:
 * Hochgeladene Videos wurden im Root-Ordner des Dateisystems gespeichert
 * Sicherheit: Hook-Funktionen in Controllern können nicht mehr direkt per HTTP Request ausgeführt werden.
 * ModuleHelper::getFullPageURLByID() gibt fehlerhafte URl aus unter Windows
+* Kompatiblitätsproblem mit dem mPDF Modul behoben
 
 ===== Neues in UliCMS 2018.2 =====
 

@@ -131,8 +131,6 @@ if (php_sapi_name() != "cli") {
     set_exception_handler('exception_handler');
 }
 
-include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "load.php";
-
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__file__) . DIRECTORY_SEPERATOR . "cms-config.php";
 
@@ -171,6 +169,8 @@ if (isset($config->data_storage_root) and ! is_null($config->data_storage_root))
 if (isset($config->data_storage_url) and ! is_null($config->data_storage_url)) {
     define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
 }
+
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "load.php";
 
 if (! defined("ULICMS_TMP")) {
     define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR);
