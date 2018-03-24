@@ -110,8 +110,7 @@ define ( "DB_TYPE_BOOL", 4 );
 
 // Tabellenname zusammensetzen
 function tbname($name) {
-	require_once ULICMS_ROOT."/cms-config.php";
-	$config = new config ();
+	$config = new CMSConfig ();
 	return $config->db_prefix . $name;
 }
 

@@ -195,7 +195,7 @@ class InstallerController {
 		$content = str_replace ( "{mysql_user}", $_SESSION ["mysql_user"], $content );
 		$content = str_replace ( "{mysql_password}", $_SESSION ["mysql_password"], $content );
 		$content = str_replace ( "{mysql_database}", $_SESSION ["mysql_database"], $content );
-		$filled_file = "../cms-config.php";
+		$filled_file = "../CMSConfig.php";
 		
 		if (file_put_contents ( $filled_file, $content )) {
 			echo "<!--ok-->";

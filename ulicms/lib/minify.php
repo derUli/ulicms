@@ -57,7 +57,7 @@ function combined_script_html() {
 }
 function getCombinedScriptHtml() {
 	$html = "";
-	$cfg = new config ();
+	$cfg = new CMSConfig ();
 	if (is_true ( $cfg->no_minify )) {
 		foreach ( $_SERVER ["script_queue"] as $script ) {
 			$html .= Script::fromFile ( $script );
@@ -173,7 +173,7 @@ function combined_stylesheet_html() {
 function getCombinedStylesheetHtml() {
 	$html = "";
 	
-	$cfg = new config ();
+	$cfg = new CMSConfig ();
 	if (is_true ( $cfg->no_minify )) {
 		foreach ( $_SERVER ["stylesheet_queue"] as $stylesheet ) {
 			$html .= Style::FromExternalFile ( $stylesheet );

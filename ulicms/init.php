@@ -110,7 +110,8 @@ function exception_handler($exception)
     }
     $error = nl2br(htmlspecialchars($exception));
     
-    $cfg = class_exists("config") ? new config() : null;
+    // FIXME: what if there is no config class?
+    $cfg = class_exists("CMSConfig") ? new CMSConfig() : null;
     // TODO: useful error message if $debug is disabled
     // Log exception into a text file
     $message = is_true($cfg->debug) ? $exception : "Something happened! 😞";
@@ -132,7 +133,7 @@ if (php_sapi_name() != "cli") {
 }
 
 // if config exists require_config else redirect to installer
-$path_to_config = dirname(__file__) . DIRECTORY_SEPERATOR . "cms-config.php";
+$path_to_config = dirname(__file__) . DIRECTORY_SEPERATOR . "CMSConfig.php";
 
 if (file_exists($path_to_config)) {
     require_once $path_to_config;
@@ -140,11 +141,11 @@ if (file_exists($path_to_config)) {
     header("Location: installer/");
     exit();
 } else {
-    throw new Exception("Can't include cms-config.php. Starting installer failed, too.");
+    throw new Exception("Can't include CMSConfig.php. Starting installer failed, too.");
 }
 
 global $config;
-$config = new config();
+$config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else use default error_reporting from php.ini
@@ -317,7 +318,7 @@ function is_in_include_path($find)
 }
 
 global $config;
-$config = new config();
+$config = new CMSConfig();
 
 $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
 
