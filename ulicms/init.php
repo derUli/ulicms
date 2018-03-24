@@ -128,10 +128,6 @@ function exception_handler($exception)
     echo "{$message}\n";
 }
 
-if (php_sapi_name() != "cli") {
-    set_exception_handler('exception_handler');
-}
-
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__file__) . DIRECTORY_SEPERATOR . "CMSConfig.php";
 
@@ -141,7 +137,11 @@ if (file_exists($path_to_config)) {
     header("Location: installer/");
     exit();
 } else {
-    throw new Exception("Can't include CMSConfig.php. Starting installer failed, too.");
+    die("Can't include CMSConfig.php. Starting installer failed, too.");
+}
+
+if (php_sapi_name() != "cli") {
+    set_exception_handler('exception_handler');
 }
 
 global $config;
@@ -453,12 +453,11 @@ session_name(Settings::get("session_name"));
 // PHPUnit 6 introduced a breaking change that
 // removed PHPUnit_Framework_TestCase as a base class,
 // and replaced it with \PHPUnit\Framework\TestCase
-if (! class_exists('\PHPUnit_Framework_TestCase') && class_exists('\PHPUnit\Framework\TestCase')){
+if (! class_exists('\PHPUnit_Framework_TestCase') && class_exists('\PHPUnit\Framework\TestCase')) {
     class_alias('\PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
 }
 
 // Backwards compatiblity for modules using the old config class name
-if(class_exists("CMSConfig") and !class_exists("config")){
+if (class_exists("CMSConfig") and ! class_exists("config")) {
     class_alias("CMSConfig", "config");
 }
-   

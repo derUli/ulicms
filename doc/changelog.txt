@@ -53,6 +53,7 @@ Bugfixes:
 * Sicherheit: Hook-Funktionen in Controllern können nicht mehr direkt per HTTP Request ausgeführt werden.
 * ModuleHelper::getFullPageURLByID() gibt fehlerhafte URl aus unter Windows
 * Kompatiblitätsproblem mit dem mPDF Modul behoben
+* Weiterleitung zum Installer wenn keine Konfigurationsdatei vorhanden funktioniert wieder.
 
 ===== Neues in UliCMS 2018.2 =====
 
