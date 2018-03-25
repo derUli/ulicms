@@ -117,6 +117,7 @@ class Page extends Content
         $this->og_description = $result->og_description;
         $this->cache_control = $result->cache_control;
         $this->hidden = $result->hidden;
+        // fill page permissions object
         $resultArray = (array) $result;
         foreach ($resultArray as $key => $value) {
             preg_match("/only_([a-z]+)_can_edit/", $key, $matches);
@@ -376,5 +377,15 @@ class Page extends Content
             }
         }
         return $result;
+    }
+
+    public function getPermissions()
+    {
+        return $this->permissions;
+    }
+
+    public function setPermissions($permissions)
+    {
+        $this->permissions = $permissions;
     }
 }
