@@ -49,7 +49,21 @@ class PagePermissions
         }
         return $result;
     }
-    public function save($id){
-        throw new NotImplementedException("save permissions not implemented yet.");
+
+    public function save($id)
+    {
+        $all = $this->getAll();
+        
+        $sql = "update `{prefix}content` ";
+        $args = array();
+        foreach ($all as $key => $value) {
+            $sql .= "set only_{$key}_can_edit = ?, ";
+            $args[] = $value;
+        }
+        $sql = trim($sql);
+        $sql = rtrim($sql, ",");
+        $args[] = intval($id);
+        $sql .= " where id = ?";
+        Database::pQuery($sql, $args, true);
     }
 }

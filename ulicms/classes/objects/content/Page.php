@@ -69,7 +69,7 @@ class Page extends Content
 
     public $hidden = 0;
 
-    public $permissions;
+    private $permissions;
 
     public function __construct()
     {
@@ -94,6 +94,7 @@ class Page extends Content
         $this->created = $result->created;
         $this->lastmodified = $result->lastmodified;
         $this->autor = $result->autor;
+        $this->group_id = $result->group_id;
         $this->lastchangeby = $result->lastchangeby;
         $this->views = $result->views;
         $this->menu = $result->menu;
@@ -247,6 +248,7 @@ class Page extends Content
         
         $result = DB::Query($sql) or die(DB::error());
         $this->id = DB::getLastInsertID();
+        $this->permissions->save($this->id);
         return $result;
     }
 
@@ -335,6 +337,9 @@ class Page extends Content
         $sql .= " WHERE id = " . $this->id;
         
         $result = DB::query($sql) or die(DB::getLastError());
+        
+        $this->permissions->save($this->id);
+        
         return $result;
     }
 

@@ -46,6 +46,6 @@ class MobileDetectTest extends PHPUnit_Framework_TestCase
 
     public function testOptionNoMobileDesignOnTablet()
     {
-        $this->fail("Test not Implemented Yet");
+        $this->fail("Test not implemented Yet");
     }
 }
