@@ -49,4 +49,7 @@ class PagePermissions
         }
         return $result;
     }
+    public function save($id){
+        throw new NotImplementedException("save permissions not implemented yet.");
+    }
 }
