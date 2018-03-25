@@ -5,9 +5,11 @@ class PagePermissionsTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        Database::pQuery("delete from `{prefix}` where systemname = ?", array(
+        $sql = "delete from `{prefix}content` where systemname = ?";
+        $args = array(
             "page_permission_test"
-        ), true);
+        );
+        Database::pQuery($sql, $args, true);
     }
 
     public function testPagePermissionsConstructorDefault()
