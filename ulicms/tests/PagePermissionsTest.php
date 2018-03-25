@@ -34,4 +34,17 @@ class PagePermissionsTest extends PHPUnit_Framework_TestCase
         $this->assertFalse($permissions->getEditRestriction("owner"));
         $this->assertTrue($permissions->getEditRestriction("others"));
     }
+
+    public function testPagePermissionsgetAll()
+    {
+        $permissions = new PagePermissions(array(
+            "group" => true,
+            "others" => false,
+            "owner" => true
+        ));
+        $all = $permissions->getAll();
+        $this->assertEquals(4, count($all));
+        $this->assertTrue($all["group"]);
+        $this->assertFalse($all["others"]);
+    }
 }

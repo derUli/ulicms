@@ -35,4 +35,18 @@ class PagePermissions
         }
         $this->$varName = boolval($restricted);
     }
+
+    public function getAll()
+    {
+        $result = array();
+        $classArray = (array) $this;
+        foreach ($classArray as $key => $value) {
+            preg_match("/only_([a-z]+)_can_edit/", $key, $matches);
+            if (count($matches) >= 2) {
+                $object = $matches[1];
+                $result[$object] = $value;
+            }
+        }
+        return $result;
+    }
 }
