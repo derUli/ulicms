@@ -18,6 +18,7 @@ class MobileDetectTest extends PHPUnit_Framework_TestCase
         } else {
             Settings::delete("no_mobile_design_on_tablet");
         }
+        unset($_SERVER["HTTP_USER_AGENT"]);
     }
 
     public function testIsInstalled()
@@ -46,6 +47,14 @@ class MobileDetectTest extends PHPUnit_Framework_TestCase
 
     public function testOptionNoMobileDesignOnTablet()
     {
-        $this->fail("Test not implemented Yet");
+        Settings::set("no_mobile_design_on_tablet", 1);
+        
+        $_SERVER["HTTP_USER_AGENT"] = "Mozilla/5.0 (Linux; U; Android 4.2.2; de-de; A1-811 Build/JDQ39) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Safari/534.30";
+        $this->assertFalse(is_mobile());
+        $this->assertTrue(is_tablet());
+        
+        Settings::delete("no_mobile_design_on_tablet");
+        $this->assertTrue(is_mobile());
+        $this->assertTrue(is_tablet());
     }
 }
