@@ -579,17 +579,7 @@ $(function(){
 	$("form.page-delete-form").ajaxForm(ajax_options_delete);
 	$("form.undelete-form").ajaxForm(ajax_options_undelete);
 });
-function ajaxEmptyTrash(url){
-   if(confirm(Translation.WANNA_EMPTY_TRASH)){
-   $.ajax({
-      url: url,
-      success: function(){
-         $("table.dataset-list tbody tr").fadeOut();
-      }
-});
-}
-  return false;
-}
+
 </script>
 
 <?php

@@ -269,3 +269,15 @@ function filter_by_language(element){
 	  location.replace("index.php?action=pages&filter_status=" + element.options[index].value)
 	}
  }
+
+ function ajaxEmptyTrash(url){
+	if(confirm(Translation.WANNA_EMPTY_TRASH)){
+	$.ajax({
+	   url: url,
+	   success: function(){
+		  $("table.dataset-list tbody tr").fadeOut();
+	   }
+ });
+ }
+   return false;
+ }
