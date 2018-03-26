@@ -220,6 +220,17 @@ $(function() {
 							$("#message_page_edit").show();
 						}
 					});
+	$('#page-list #category').on(
+			'change',
+			function(e) {
+				var valueSelected = $('#category').val();
+				location.replace("index.php?action=pages&filter_category="
+						+ valueSelected)
+			});
+	$("#page-list form.page-delete-form").off("submit");
+	$("#page-listform.page-delete-form").ajaxForm(ajax_options_delete);
+	$("#page-list form.undelete-form").ajaxForm(ajax_options_undelete);
+
 });
 
 function filter_by_language(element) {
@@ -308,23 +319,3 @@ var ajax_options_delete = {
 		$($form).closest("tr").fadeOut();
 	}
 }
-$(function() {
-	$("#page-list form.page-delete-form").off("submit");
-	$("#page-listform.page-delete-form").ajaxForm(ajax_options_delete);
-	$("#page-list form.undelete-form").ajaxForm(ajax_options_undelete);
-});
-
-$(window)
-		.load(
-				function() {
-					$('#page-list')
-							.on(
-									'change',
-									function(e) {
-										var valueSelected = $('#category')
-												.val();
-										location
-												.replace("index.php?action=pages&filter_category="
-														+ valueSelected)
-									});
-				});
