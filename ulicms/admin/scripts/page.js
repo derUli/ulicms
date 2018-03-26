@@ -101,16 +101,18 @@ function unbindEvents() {
 }
 
 $(document).ready(function() {
-	var data = {
-		ajax_cmd : "getContentTypes"
-	};
+	if ($("#page-list").length <= 0) {
+		var data = {
+			ajax_cmd : "getContentTypes"
+		};
 
-	$.get("index.php", data, function(response, status) {
-		AllTypes = response;
-		showAndHideFieldsByType();
-	});
+		$.get("index.php", data, function(response, status) {
+			AllTypes = response;
+			showAndHideFieldsByType();
+		});
 
-	bindEvents();
+		bindEvents();
+	}
 });
 
 function systemname_vorschlagen(txt) {
@@ -220,64 +222,109 @@ $(function() {
 					});
 });
 
-function filter_by_language(element){
+function filter_by_language(element) {
 	var index = element.selectedIndex
-	if(element.options[index].value != ""){
-	  location.replace("index.php?action=pages&filter_language=" + element.options[index].value)
+	if (element.options[index].value != "") {
+		location.replace("index.php?action=pages&filter_language="
+				+ element.options[index].value)
 	}
- }
- 
- function filter_by_type(element){
-		var index = element.selectedIndex
-		if(element.options[index].value != ""){
-		  location.replace("index.php?action=pages&filter_type=" + element.options[index].value)
-		}
-	 }
- 
- 
- function filter_by_menu(element){
-	var index = element.selectedIndex
-	if(element.options[index].value != ""){
-	  location.replace("index.php?action=pages&filter_menu=" + element.options[index].value)
-	}
- }
- 
- function filter_by_active(element){
-	var index = element.selectedIndex
-	if(element.options[index].value != ""){
-	  location.replace("index.php?action=pages&filter_active=" + element.options[index].value)
-	}
- }
- 
- function filter_by_approved(element){
-	var index = element.selectedIndex
-	if(element.options[index].value != ""){
-	  location.replace("index.php?action=pages&filter_approved=" + element.options[index].value)
-	}
- }
- 
- function filter_by_parent(element){
-	var index = element.selectedIndex
-	if(element.options[index].value != ""){
-	  location.replace("index.php?action=pages&filter_parent=" + element.options[index].value)
-	}
- }
- 
- function filter_by_status(element){
-	var index = element.selectedIndex
-	if(element.options[index].value != ""){
-	  location.replace("index.php?action=pages&filter_status=" + element.options[index].value)
-	}
- }
+}
 
- function ajaxEmptyTrash(url){
-	if(confirm(Translation.WANNA_EMPTY_TRASH)){
-	$.ajax({
-	   url: url,
-	   success: function(){
-		  $("table.dataset-list tbody tr").fadeOut();
-	   }
- });
- }
-   return false;
- }
+function filter_by_type(element) {
+	var index = element.selectedIndex
+	if (element.options[index].value != "") {
+		location.replace("index.php?action=pages&filter_type="
+				+ element.options[index].value)
+	}
+}
+
+function filter_by_menu(element) {
+	var index = element.selectedIndex
+	if (element.options[index].value != "") {
+		location.replace("index.php?action=pages&filter_menu="
+				+ element.options[index].value)
+	}
+}
+
+function filter_by_active(element) {
+	var index = element.selectedIndex
+	if (element.options[index].value != "") {
+		location.replace("index.php?action=pages&filter_active="
+				+ element.options[index].value)
+	}
+}
+
+function filter_by_approved(element) {
+	var index = element.selectedIndex
+	if (element.options[index].value != "") {
+		location.replace("index.php?action=pages&filter_approved="
+				+ element.options[index].value)
+	}
+}
+
+function filter_by_parent(element) {
+	var index = element.selectedIndex
+	if (element.options[index].value != "") {
+		location.replace("index.php?action=pages&filter_parent="
+				+ element.options[index].value)
+	}
+}
+
+function filter_by_status(element) {
+	var index = element.selectedIndex
+	if (element.options[index].value != "") {
+		location.replace("index.php?action=pages&filter_status="
+				+ element.options[index].value)
+	}
+}
+
+function ajaxEmptyTrash(url) {
+	if (confirm(Translation.WANNA_EMPTY_TRASH)) {
+		$.ajax({
+			url : url,
+			success : function() {
+				$("table.dataset-list tbody tr").fadeOut();
+			}
+		});
+	}
+	return false;
+}
+
+var ajax_options_undelete = {
+	success : function(responseText, statusText, xhr, $form) {
+		var action = $($form).attr("action");
+		var id = $($form).data("id");
+		$($form).closest("tr").fadeOut();
+	}
+}
+
+var ajax_options_delete = {
+	beforeSubmit : function() {
+		return askForDelete();
+	},
+	success : function(responseText, statusText, xhr, $form) {
+		var action = $($form).attr("action");
+		var id = $($form).data("id");
+		$($form).closest("tr").fadeOut();
+	}
+}
+$(function() {
+	$("#page-list form.page-delete-form").off("submit");
+	$("#page-listform.page-delete-form").ajaxForm(ajax_options_delete);
+	$("#page-list form.undelete-form").ajaxForm(ajax_options_undelete);
+});
+
+$(window)
+		.load(
+				function() {
+					$('#page-list')
+							.on(
+									'change',
+									function(e) {
+										var valueSelected = $('#category')
+												.val();
+										location
+												.replace("index.php?action=pages&filter_category="
+														+ valueSelected)
+									});
+				});
