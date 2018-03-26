@@ -18,17 +18,12 @@ if ($acl->hasPermission ( "pages" )) {
 <?php } ?>
 
 <script type="text/javascript">
-
-
 $(window).load(function(){
    $('#category').on('change', function (e) {
    var valueSelected = $('#category').val();
      location.replace("index.php?action=pages&filter_category=" + valueSelected)
-
    });
-
 });
-
 </script>
 <?php
 	if (! isset ( $_SESSION ["filter_title"] )) {
@@ -580,10 +575,9 @@ var ajax_options_delete = {
   }
 }
 $(function(){
-$("form.page-delete-form").off("submit");
-$("form.page-delete-form").ajaxForm(ajax_options_delete);
-$("form.undelete-form").ajaxForm(ajax_options_undelete);
-
+	$("form.page-delete-form").off("submit");
+	$("form.page-delete-form").ajaxForm(ajax_options_delete);
+	$("form.undelete-form").ajaxForm(ajax_options_undelete);
 });
 function ajaxEmptyTrash(url){
    if(confirm(Translation.WANNA_EMPTY_TRASH)){
