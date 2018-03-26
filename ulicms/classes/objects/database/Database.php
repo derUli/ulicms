@@ -20,7 +20,7 @@ class Database {
 	
 	// Abstraktion für Ausführen von SQL Strings
 	public static function query($sql, $replacePrefix = false) {
-		$cfg = new config ();
+		$cfg = new CMSConfig ();
 		if ($replacePrefix) {
 			$sql = str_replace ( "{prefix}", $cfg->db_prefix, $sql );
 		}
@@ -61,7 +61,7 @@ class Database {
 			}
 		}
 		
-		$cfg = new config ();
+		$cfg = new CMSConfig ();
 		$logger = LoggerRegistry::get ( "sql_log" );
 		if ($logger) {
 			$logger->info ( $preparedQuery );

@@ -232,7 +232,7 @@ function initPFBC() {
 	add_hook ( "init_pfbc" );
 }
 function is_debug_mode() {
-	$config = new config ();
+	$config = new CMSConfig ();
 	return (defined ( "ULICMS_DEBUG" ) and ULICMS_DEBUG) or (isset ( $config->debug ) and $config->debug);
 }
 function isCLI() {
@@ -829,7 +829,7 @@ function getModulePath($module, $abspath = false) {
 	}
 	if (ULICMS_ROOT == ULICMS_DATA_STORAGE_ROOT and ! defined ( "ULICMS_DATA_STORAGE_URL" )) {
 		// Frontend Directory
-		if (is_file ( "cms-config.php" )) {
+		if (is_file ( "CMSConfig.php" )) {
 			$module_folder = "content/modules/";
 		} // Backend Directory
 		else {

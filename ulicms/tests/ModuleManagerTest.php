@@ -70,6 +70,6 @@ class ModuleManagerTest extends PHPUnit_Framework_TestCase
 
     public function testSync()
     {
-        $this->fail("Test not Implemented Yet");
+        $this->fail("Test not implemented Yet");
     }
 }

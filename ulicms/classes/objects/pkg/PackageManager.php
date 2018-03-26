@@ -7,7 +7,7 @@ class PackageManager
 
     public function __construct()
     {
-        $cfg = new config();
+        $cfg = new CMSConfig();
         $this->package_source = Settings::get("pkg_src");
         $this->package_source = $this->replacePlaceHolders($this->package_source);
     }
@@ -152,7 +152,7 @@ class PackageManager
 
     private function replacePlaceHolders($url)
     {
-        $cfg = new config();
+        $cfg = new CMSConfig();
         $version = new UliCMSVersion();
         $internalVersion = $version->getInternalVersion();
         $internalVersion = implode(".", $internalVersion);
