@@ -115,7 +115,7 @@ $(document).ready(function() {
 	}
 });
 
-function systemname_vorschlagen(txt) {
+function suggestSystemname(txt) {
 	var systemname = txt.toLowerCase();
 	systemname = systemname.replace(/ü/g, "ue");
 	systemname = systemname.replace(/ö/g, "oe");
@@ -229,8 +229,7 @@ $(function() {
 			});
 	$("#page-list form.page-delete-form").off("submit");
 	$("#page-listform.page-delete-form").ajaxForm(ajax_options_delete);
-	$("#page-list form.undelete-form").ajaxForm(ajax_options_undelete);
-
+	$("#page-list form.undelete-form").ajaxForm(ajaxOptionsUndelete);
 });
 
 function filterByLanguage(element) {
@@ -301,7 +300,7 @@ function ajaxEmptyTrash(url) {
 	return false;
 }
 
-var ajax_options_undelete = {
+var ajaxOptionsUndelete = {
 	success : function(responseText, statusText, xhr, $form) {
 		var action = $($form).attr("action");
 		var id = $($form).data("id");
@@ -309,7 +308,7 @@ var ajax_options_undelete = {
 	}
 }
 
-var ajax_options_delete = {
+var ajaxOptionsDelete = {
 	beforeSubmit : function() {
 		return askForDelete();
 	},

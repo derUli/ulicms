@@ -44,7 +44,7 @@ if (defined ( "_SECURITY" )) {
 		?>
 	</strong><br /> <input type="text" required="required"
 			name="page_title" value=""
-			onkeyup="systemname_vorschlagen(this.value)">
+			onkeyup="suggestSystemname(this.value)">
 		<div class="typedep hide-on-snippet hide-on-non-regular">
 			<br /> <strong><?php translate ( "alternate_title" );?>
 	</strong><br /> <input type="text" name="alternate_title" value=""> <small><?php translate ( "ALTERNATE_TITLE_INFO" );?>
