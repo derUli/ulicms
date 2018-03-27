@@ -228,7 +228,7 @@ $(function() {
 						+ valueSelected)
 			});
 	$("#page-list form.page-delete-form").off("submit");
-	$("#page-listform.page-delete-form").ajaxForm(ajaxOptionsDelete);
+	$("#page-list form.page-delete-form").ajaxForm(ajaxOptionsDelete);
 	$("#page-list form.undelete-form").ajaxForm(ajaxOptionsUndelete);
 });
 
