@@ -233,7 +233,7 @@ $(function() {
 
 });
 
-function filter_by_language(element) {
+function filterByLanguage(element) {
 	var index = element.selectedIndex
 	if (element.options[index].value != "") {
 		location.replace("index.php?action=pages&filter_language="
@@ -241,7 +241,7 @@ function filter_by_language(element) {
 	}
 }
 
-function filter_by_type(element) {
+function filterByType(element) {
 	var index = element.selectedIndex
 	if (element.options[index].value != "") {
 		location.replace("index.php?action=pages&filter_type="
@@ -249,7 +249,7 @@ function filter_by_type(element) {
 	}
 }
 
-function filter_by_menu(element) {
+function filterByMenu(element) {
 	var index = element.selectedIndex
 	if (element.options[index].value != "") {
 		location.replace("index.php?action=pages&filter_menu="
@@ -257,7 +257,7 @@ function filter_by_menu(element) {
 	}
 }
 
-function filter_by_active(element) {
+function filterByActive(element) {
 	var index = element.selectedIndex
 	if (element.options[index].value != "") {
 		location.replace("index.php?action=pages&filter_active="
@@ -265,7 +265,7 @@ function filter_by_active(element) {
 	}
 }
 
-function filter_by_approved(element) {
+function filterByApproved(element) {
 	var index = element.selectedIndex
 	if (element.options[index].value != "") {
 		location.replace("index.php?action=pages&filter_approved="
@@ -273,7 +273,7 @@ function filter_by_approved(element) {
 	}
 }
 
-function filter_by_parent(element) {
+function filterByParent(element) {
 	var index = element.selectedIndex
 	if (element.options[index].value != "") {
 		location.replace("index.php?action=pages&filter_parent="
@@ -281,7 +281,7 @@ function filter_by_parent(element) {
 	}
 }
 
-function filter_by_status(element) {
+function filterByStatus(element) {
 	var index = element.selectedIndex
 	if (element.options[index].value != "") {
 		location.replace("index.php?action=pages&filter_status="

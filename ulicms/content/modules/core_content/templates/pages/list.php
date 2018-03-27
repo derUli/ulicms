@@ -37,7 +37,7 @@ if ($acl->hasPermission("pages")) {
 	</form>
 
 <?php translate("filter_by_language");?>
-<select name="filter_language" onchange="filter_by_language(this)">
+<select name="filter_language" onchange="filterByLanguage(this)">
 		<option value="">
 		<?php translate("please_select");?>
 		</option>
@@ -148,7 +148,7 @@ if ($acl->hasPermission("pages")) {
 
 <?php translate("type")?>
 <?php $types = get_used_post_types();?>
-<select name="filter_type" onchange="filter_by_type(this);">
+<select name="filter_type" onchange="filterByType(this);">
 		<option value="null"
 			<?php
     
@@ -173,7 +173,7 @@ if ($acl->hasPermission("pages")) {
 
 <?php
     translate("status")?>
-<select name="filter_status" onchange="filter_by_status(this)">
+<select name="filter_status" onchange="filterByStatus(this)">
 		<option value="Standard"
 			<?php
     if ($_SESSION["filter_status"] == "standard") {
@@ -196,7 +196,7 @@ if ($acl->hasPermission("pages")) {
     echo Categories::getHTMLSelect($_SESSION["filter_category"], true);
     ?>
 	<?php translate("menu");?>
-<select name="filter_menu" onchange="filter_by_menu(this);">
+<select name="filter_menu" onchange="filterByMenu(this);">
 
 	<?php
     foreach ($menus as $menu) {
@@ -216,7 +216,7 @@ if ($acl->hasPermission("pages")) {
     ?>
 	</select>
 <?php translate("parent");?>
-<select name="filter_parent" onchange="filter_by_parent(this);">
+<select name="filter_parent" onchange="filterByParent(this);">
 		<option value="null"
 			<?php
     
@@ -247,7 +247,7 @@ if ($acl->hasPermission("pages")) {
     ?>
 	</select>
 <?php translate("enabled");?>
-<select name="filter_active" onchange="filter_by_active(this);">
+<select name="filter_active" onchange="filterByActive(this);">
 		<option value="null"
 			<?php
     
@@ -278,7 +278,7 @@ if ($acl->hasPermission("pages")) {
     translate("approved");
     ?>
 <p>
-		<select name="filter_approved" onchange="filter_by_approved(this);">
+		<select name="filter_approved" onchange="filterByApproved(this);">
 			<option value="null"
 				<?php
     
