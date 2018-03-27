@@ -44,7 +44,6 @@ $enq = array (
 if (is_logged_in ()) {
 	$enq [] = "scripts/cookie.js";
 	$enq [] = "scripts/jquery-shiftclick.js";
-	$enq [] = "scripts/shift_checkbox.js";
 }
 if (! is_mobile ()) {
 	$enq [] = "scripts/doubletaptogo/doubletaptogo.min.js";
