@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3 =====
+﻿===== Neues in UliCMS 2018.3 =====
 
 Neue Features:
 + Neue Mailversandmethode "PHPMailer", Mailversand per SMTP
@@ -13,6 +13,7 @@ Neue Features:
 + CodeMirror auf Version 5.35.0 aktualisiert
 + Die Sicherheit des Downloads von Patches und Paketen wurde verbessert (Checksum-Prüfung und SSL)
 + jQuery auf Version 1.12.4 aktualisiert
++ CrawlerDetect auf Version 1.2.62 aktualisiert
 
 Neue API-Funktionen:
 
