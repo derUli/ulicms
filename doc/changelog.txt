@@ -46,6 +46,7 @@ falls kein Feld für die E-Mail Adresse gesetzt ist.
 
 Entfernte Features:
 - Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.
+- YaLinqo entfernt
 
 Bugfixes:
 * "Custom Types" Feature war defekt
