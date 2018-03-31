@@ -358,15 +358,15 @@ function openMenuImageSelectWindow(field) {
 				<br /> <strong><?php translate("author_name");?></strong><br /> <input
 					type="text" name="article_author_name"
 					value="<?php echo real_htmlspecialchars($row->article_author_name);?>"
-					maxlength="80"> <br /> <br /> <strong><?php translate("author_email");?></strong><br />
+					maxlength="80"> <br /><strong><?php translate("author_email");?></strong><br />
 				<input type="email" name="article_author_email"
 					value="<?php echo real_htmlspecialchars($row->article_author_email);?>"
-					maxlength="80"> <br /> <br />
+					maxlength="80"> <br />
 				<div id="comment-fields">
 					<strong><?php translate("homepage");?></strong><br /> <input
 						type="url" name="comment_homepage"
 						value="<?php echo real_htmlspecialchars($row->comment_homepage);?>"
-						maxlength="255"> <br /> <br />
+						maxlength="255"> <br />
 				</div>
 
 				<strong><?php translate("article_date");?></strong><br /> <input
@@ -377,7 +377,7 @@ function openMenuImageSelectWindow(field) {
 				echo date ( "Y-m-d\TH:i:s", strtotime ( $row->article_date ) );
 			}
 			?>"
-					step="any"> <br /> <br /> <strong><?php translate("excerpt");?></strong>
+					step="any"> <br /> <strong><?php translate("excerpt");?></strong>
 				<textarea name="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt);?></textarea>
 			</div>
 		</div>
