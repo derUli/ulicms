@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3 =====
+﻿===== Neues in UliCMS 2018.3 =====
 
 Neue Features:
 + Neue Mailversandmethode "PHPMailer", Mailversand per SMTP
@@ -12,6 +12,8 @@ Neue Features:
 + shell/sinstall.php kann nun Pakete von einer URL als Quelle installieren.
 + CodeMirror auf Version 5.35.0 aktualisiert
 + Die Sicherheit des Downloads von Patches und Paketen wurde verbessert (Checksum-Prüfung und SSL)
++ jQuery auf Version 1.12.4 aktualisiert
++ CrawlerDetect auf Version 1.2.62 aktualisiert
 
 Neue API-Funktionen:
 
@@ -46,6 +48,7 @@ falls kein Feld für die E-Mail Adresse gesetzt ist.
 
 Entfernte Features:
 - Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.
+- YaLinqo entfernt
 
 Bugfixes:
 * "Custom Types" Feature war defekt

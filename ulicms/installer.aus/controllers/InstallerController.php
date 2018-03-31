@@ -188,7 +188,7 @@ class InstallerController {
 		}
 	}
 	public static function submitCreateConfig() {
-		$template_path = "templates/cms-config.tpl";
+		$template_path = "templates/CMSConfig.tpl";
 		$content = file_get_contents ( $template_path );
 		$content = str_replace ( "{prefix}", $_SESSION ["mysql_prefix"], $content );
 		$content = str_replace ( "{mysql_host}", $_SESSION ["mysql_host"], $content );

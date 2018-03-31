@@ -68,8 +68,14 @@ class ModuleManagerTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(faster_in_array(self::sampleName2, $allModules));
     }
 
-    public function testSync()
+    public function testInitialSync()
     {
-        $this->fail("Test not implemented Yet");
+        $manager = new ModuleManager();
+        
+        Database::query("truncate table {prefix}modules", true);
+        $this->assertEquals(0, count($manager->getAllModules()));
+        $manager->sync();
+        $this->assertGreaterThanOrEqual(20, count($manager->getAllModules()));
+        $this->assertEquals(count(getAllModules()), count($manager->getAllModules()));
     }
 }

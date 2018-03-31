@@ -46,7 +46,7 @@ if (defined ( "_SECURITY" )) {
 		<div class="hide-on-snippet hide-on-non-regular">
 			<br /> <strong><?php translate("page_title");?> </strong><br /> <input
 				type="text" required="required" name="page_title" value=""
-				onkeyup="systemname_vorschlagen(this.value)"> <br /> <strong><?php translate("alternate_title");?> </strong><br />
+				onkeyup="suggestSystemname(this.value)"> <br /> <strong><?php translate("alternate_title");?> </strong><br />
 			<input type="text" name="alternate_title"
 				value="<?php
 			echo htmlspecialchars ( $row->alternate_title );

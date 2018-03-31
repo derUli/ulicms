@@ -4,64 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "12860e6211ab59ba22ac1cb7014a2eb1",
+    "content-hash": "0401399e64abca586ac963de6dbfce20",
     "packages": [
-        {
-            "name": "athari/yalinqo",
-            "version": "v2.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Athari/YaLinqo.git",
-                "reference": "d973f13b906a9d006b4d76b1542f7e6083f7bfc3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Athari/YaLinqo/zipball/d973f13b906a9d006b4d76b1542f7e6083f7bfc3",
-                "reference": "d973f13b906a9d006b4d76b1542f7e6083f7bfc3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5"
-            },
-            "require-dev": {
-                "phpdocumentor/phpdocumentor": "^2.8",
-                "phpunit/phpunit": "^4.6",
-                "satooshi/php-coveralls": "^2.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "YaLinqo\\": "YaLinqo/"
-                },
-                "files": [
-                    "YaLinqo/Linq.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Prokhorov",
-                    "homepage": "https://github.com/Athari/"
-                }
-            ],
-            "description": "YaLinqo, a LINQ-to-objects library for PHP",
-            "homepage": "http://athari.github.io/YaLinqo",
-            "keywords": [
-                "linq",
-                "linqo",
-                "query",
-                "statistic"
-            ],
-            "time": "2018-02-25T17:32:19+00:00"
-        },
         {
             "name": "katzgrau/klogger",
             "version": "dev-master",
@@ -114,16 +58,16 @@
         },
         {
             "name": "phpfastcache/phpfastcache",
-            "version": "6.1.1",
+            "version": "6.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPSocialNetwork/phpfastcache.git",
-                "reference": "75af62255ea43caec38e376c53734f06885a7b6e"
+                "reference": "0a8acb7d6e80b84a6bfdd7f8fb011097b0ce2a15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/75af62255ea43caec38e376c53734f06885a7b6e",
-                "reference": "75af62255ea43caec38e376c53734f06885a7b6e",
+                "url": "https://api.github.com/repos/PHPSocialNetwork/phpfastcache/zipball/0a8acb7d6e80b84a6bfdd7f8fb011097b0ce2a15",
+                "reference": "0a8acb7d6e80b84a6bfdd7f8fb011097b0ce2a15",
                 "shasum": ""
             },
             "require": {
@@ -206,7 +150,7 @@
                 "zend memory cache",
                 "zend server"
             ],
-            "time": "2018-03-01T22:15:40+00:00"
+            "time": "2018-03-23T20:31:49+00:00"
         },
         {
             "name": "phpgangsta/googleauthenticator",
@@ -253,16 +197,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.0.3",
+            "version": "v6.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "44d49bab5ab1fef721d3ee07e75dc0865ddf4cc6"
+                "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/44d49bab5ab1fef721d3ee07e75dc0865ddf4cc6",
-                "reference": "44d49bab5ab1fef721d3ee07e75dc0865ddf4cc6",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/cb3ea134d4d3729e7857737d5f320cce9caf4d32",
+                "reference": "cb3ea134d4d3729e7857737d5f320cce9caf4d32",
                 "shasum": ""
             },
             "require": {
@@ -315,7 +259,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2018-01-05T13:19:58+00:00"
+            "time": "2018-03-27T13:49:45+00:00"
         },
         {
             "name": "psr/cache",
@@ -1127,16 +1071,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.0.2",
+            "version": "7.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9"
+                "reference": "536f4d853c12d8189963435088e8ff7c0daeab2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9",
-                "reference": "e2f8aa21bc54b6ba218bdd4f9e0dac1e9bc3b4e9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/536f4d853c12d8189963435088e8ff7c0daeab2e",
+                "reference": "536f4d853c12d8189963435088e8ff7c0daeab2e",
                 "shasum": ""
             },
             "require": {
@@ -1150,7 +1094,7 @@
                 "phar-io/version": "^1.0",
                 "php": "^7.1",
                 "phpspec/prophecy": "^1.7",
-                "phpunit/php-code-coverage": "^6.0",
+                "phpunit/php-code-coverage": "^6.0.1",
                 "phpunit/php-file-iterator": "^1.4.3",
                 "phpunit/php-text-template": "^1.2.1",
                 "phpunit/php-timer": "^2.0",
@@ -1203,7 +1147,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-02-26T07:03:12+00:00"
+            "time": "2018-03-26T07:36:48+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

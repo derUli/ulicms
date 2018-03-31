@@ -1,6 +1,6 @@
 {
 	"source": "extend",
-	"version": "1.2.54",
+	"version": "1.2.62",
 	"embed": false,
 	"objects": {
 		"AbstractProvider": "Fixtures/AbstractProvider.php",
