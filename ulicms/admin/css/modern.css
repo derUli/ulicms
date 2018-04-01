@@ -498,3 +498,7 @@ button, input[type=button], input[type=submit], input[type=reset], input[type=im
 input.kcfinder {
 	cursor: pointer;
 }
+
+.normal-weight {
+	font-weight: normal;
+}
