@@ -14,6 +14,7 @@ Neue Features:
 + Die Sicherheit des Downloads von Patches und Paketen wurde verbessert (Checksum-Prüfung und SSL)
 + jQuery auf Version 1.12.4 aktualisiert
 + CrawlerDetect auf Version 1.2.62 aktualisiert
++ Mobile_Detect aktualisiert auf Version 2.8.31
 
 Neue API-Funktionen:
 
@@ -57,6 +58,7 @@ Bugfixes:
 * ModuleHelper::getFullPageURLByID() gibt fehlerhafte URl aus unter Windows
 * Kompatiblitätsproblem mit dem mPDF Modul behoben
 * Weiterleitung zum Installer wenn keine Konfigurationsdatei vorhanden funktioniert wieder.
+* Mehrere Fehler beim Speichern von Gruppen korrigiert
 
 ===== Neues in UliCMS 2018.2 =====
 
