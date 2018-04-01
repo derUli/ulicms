@@ -8,8 +8,6 @@ $model = $controller->getModel ();
 
 // no patch check in google cloud
 $runningInGoogleCloud = class_exists ( "GoogleCloudHelper" ) ? GoogleCloudHelper::isProduction () : false;
-
-
 if ($acl->hasPermission ( "dashboard" )) {
 	
 	?>
@@ -143,7 +141,7 @@ if ($acl->hasPermission ( "dashboard" )) {
 	<?php translate("top_pages");?>
 	</h2>
 	<div class="accordion-content">
-		<table cellpadding="2">
+		<table>
 			<tr style="font-weight: bold;">
 				<td><?php translate("title");?>
 				</td>
