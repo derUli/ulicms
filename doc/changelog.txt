@@ -59,6 +59,7 @@ Bugfixes:
 * Kompatiblitätsproblem mit dem mPDF Modul behoben
 * Weiterleitung zum Installer wenn keine Konfigurationsdatei vorhanden funktioniert wieder.
 * Mehrere Fehler beim Speichern von Gruppen korrigiert
+* Gelöschte Seiten werden nicht mehr angezeigt bei "Letzte Änderungen" und "Top Seiten"
 
 ===== Neues in UliCMS 2018.2 =====
 
