@@ -44,7 +44,6 @@ Kompatiblitätsgründen erhalten, sind jedoch als Deprecated (veraltet) gekennze
 Verbesserungen:
 + Formularsystem verwendet nun die E-Mail Adresse aus den Grundeinstellungen als Absender,
 falls kein Feld für die E-Mail Adresse gesetzt ist.
-+ Einstellungen zum E-Mail Versand ausgeblendet, da es dort nichts zum Auswählen gibt, bis PHPMailer ins System integriert wird.
 + Performance der Installation von mehrere Paketen und Patches optimiert
 + cms-config.php in CMSConfig.php umbenannt
 
