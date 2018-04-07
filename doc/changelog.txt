@@ -15,6 +15,7 @@ Neue Features:
 + jQuery auf Version 1.12.4 aktualisiert
 + CrawlerDetect auf Version 1.2.62 aktualisiert
 + Mobile_Detect aktualisiert auf Version 2.8.31
++ Build Datum von Paketen wird angezeigt
 
 Neue API-Funktionen:
 

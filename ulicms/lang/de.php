@@ -719,4 +719,7 @@ define ( "TRANSLATION_NOT_AN_EMBED_MODULE", "Kein Embed Modul" );
 
 define ( "TRANSLATION_MIN_TIME_TO_FILL_FORM", "Minimale Zeit um ein Formular auszufüllen (Sekunden, 0 = aus)" );
 
+define ( "TRANSLATION_BUILD_DATE", "Build Datum" );
+
+
 add_hook ( "lang_de" );

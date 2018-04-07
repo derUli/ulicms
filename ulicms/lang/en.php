@@ -720,4 +720,6 @@ define ( "TRANSLATION_NOT_AN_EMBED_MODULE", "Not an embed module" );
 
 define ( "TRANSLATION_MIN_TIME_TO_FILL_FORM", "Minimal time to fill a form (seconds, 0 = off)" );
 
+define ( "TRANSLATION_BUILD_DATE", "Build Date" );
+
 add_hook ( "lang_en" );

@@ -19,6 +19,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			$compatible_to = $pkg->getProperty ( "compatible_to" );
 			$dependencies = $pkg->getProperty ( "dependencies" );
 			$license = $pkg->getProperty ( "license" );
+			$build_date = $pkg->getProperty ( "build_date" );
 			$screenshot = $pkg->getProperty ( "screenshot" );
 			$size = intval ( $pkg->getSize () );
 			$size = formatSizeUnits ( $size );
@@ -49,6 +50,16 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		<td><strong><?php translate("size")?></strong></td>
 		<td><?php Template::escape($size)?></td>
 	</tr>	
+		<?php
+			
+			if ($build_date) {
+				?>
+	<tr>
+		<td><strong><?php translate("build_date")?></strong></td>
+		<td><?php Template::escape(strftime ( "%x %X", $build_date));?></td>
+	</tr>	
+	
+		<?php } ?>
 	<?php
 			
 			if ($screenshot) {
