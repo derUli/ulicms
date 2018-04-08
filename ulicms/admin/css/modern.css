@@ -365,6 +365,7 @@ div#login-welcome-text {
 
 .main-content {
 	margin-top: 20px;
+	word-break: break-word;
 }
 
 h2.accordion-header {
