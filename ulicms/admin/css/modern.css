@@ -321,6 +321,7 @@ div#google-fonts select {
 
 .accordion-content, .accordion-header {
 	width: auto !important;
+    word-wrap: break-word;
 }
 
 div#login-welcome-text {
@@ -365,7 +366,6 @@ div#login-welcome-text {
 
 .main-content {
 	margin-top: 20px;
-	word-break: break-word;
 }
 
 h2.accordion-header {
