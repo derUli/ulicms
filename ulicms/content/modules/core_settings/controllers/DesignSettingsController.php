@@ -63,7 +63,6 @@ class DesignSettingsController extends Controller {
 			setconfig ( "google-font", $font );
 		}
 
-		setconfig ( "zoom", intval ( $_REQUEST ["zoom"] ) );
 		setconfig ( "font-size", db_escape ( $_REQUEST ["font-size"] ) );
 		setconfig ( "ckeditor_skin", db_escape ( $_REQUEST ["ckeditor_skin"] ) );
 

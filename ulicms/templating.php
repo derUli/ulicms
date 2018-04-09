@@ -906,12 +906,7 @@ function base_metas() {
 			echo "\r\n";
 		}
 	}
-	$zoom = Settings::get ( "zoom" );
-	if ($zoom === false) {
-		setconfig ( "zoom", 100 );
-		$zoom = 100;
-	}
-	
+
 	if (! Settings::get ( "disable_custom_layout_options" )) {
 		$font = Settings::get ( "default-font" );
 		if ($font == "google") {
@@ -925,7 +920,6 @@ function base_metas() {
 		echo "
 <style type=\"text/css\">
 body{
-zoom:" . $zoom . "%;
 font-family:" . $font . ";
 font-size:" . Settings::get ( "font-size" ) . ";
 background-color:" . Settings::get ( "body-background-color" ) . ";

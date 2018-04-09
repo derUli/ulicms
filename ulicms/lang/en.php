@@ -207,7 +207,6 @@ define ( "TRANSLATION_FRONTEND_DESIGN", "Frontend Design" );
 define ( "TRANSLATION_BACKEND_DESIGN", "Backend Design" );
 define ( "TRANSLATION_EDITOR_SKIN", "Editor Skin" );
 define ( "TRANSLATION_FONT_FAMILY", "Font Family" );
-define ( "TRANSLATION_ZOOM", "Zoom" );
 define ( "TRANSLATION_FONT_SIZE", "Font Size" );
 define ( "TRANSLATION_HEADER_BACKGROUNDCOLOR", "Header background color" );
 define ( "TRANSLATION_FONT_COLOR", "Font Color" );
