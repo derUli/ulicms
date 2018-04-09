@@ -16,7 +16,6 @@ if (! $acl->hasPermission ( "design" )) {
 	$default_font = Settings::get ( "default-font" );
 	$google_font = Settings::get ( "google-font" );
 	$title_format = htmlspecialchars ( Settings::get ( "title_format" ), ENT_QUOTES, "UTF-8" );
-	$zoom = intval ( Settings::get ( "zoom" ) );
 	$font_size = Settings::get ( "font-size" );
 	$ckeditor_skin = Settings::get ( "ckeditor_skin" );
 	$video_width_100_percent = Settings::get ( "video_width_100_percent" );
@@ -209,34 +208,6 @@ div#google-fonts {
 	?>
 			</select>
 			</div></td>
-	</tr>
-	<tr>
-		<td><strong><?php translate("zoom");?> </strong>
-		
-		<td><select name="zoom">
-			<?php
-	for($i = 10; $i <= 200; $i += 10) {
-		?>
-					<option
-					<?php
-		if ($i === $zoom or ($i === 100 and $zoom === 0)) {
-			echo " selected";
-		}
-		?>
-					value="<?php
-		
-		echo $i;
-		?>">
-		<?php
-		
-		echo $i;
-		?>
-						%
-					</option>
-					<?php
-	}
-	?>
-			</select></td>
 	</tr>
 	<tr>
 		<td><strong><?php translate("font_size");?> </strong>
