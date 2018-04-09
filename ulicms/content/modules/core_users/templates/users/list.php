@@ -24,7 +24,7 @@ if ($acl->hasPermission("users")) {
 		class="btn btn-default"><?php translate("create_user");?></a><br />
 </p>
 <?php }?>
-<strong><?php translate("group");?></strong>
+<strong><?php translate("primary_group");?></strong>
 <br />
 <form action="index.php" method="get">
 	<input type="hidden" name="action" value="admins"> <select
