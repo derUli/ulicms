@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 2018.3 =====
+===== Neues in UliCMS 2018.3 =====
 
 Neue Features:
 + Neue Mailversandmethode "PHPMailer", Mailversand per SMTP
@@ -51,6 +51,7 @@ falls kein Feld für die E-Mail Adresse gesetzt ist.
 Entfernte Features:
 - Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.
 - YaLinqo entfernt
+- Design Option "Zoom" entfernt
 
 Bugfixes:
 * "Custom Types" Feature war defekt
