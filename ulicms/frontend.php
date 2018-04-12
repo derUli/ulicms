@@ -7,7 +7,7 @@ add_hook("before_session_start");
 // initialize session
 @session_start();
 $cfg = new CMSConfig();
-$cookie_expires = (isset($cfg->cookie_expires) and $cfg->cookie_expires > 0) ? time() + intval($cfg->cookie_expires) : 0;
+$cookie_expires = (isset($cfg->cookie_expires) and $cfg->cookie_expires > 0) ? (time() + intval($cfg->cookie_expires)) : 0;
 if (! isset($_COOKIE[session_name()])) {
     setcookie(session_name(), session_id(), $cookie_expires);
 }
