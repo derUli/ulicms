@@ -6,17 +6,17 @@ class HomeController extends Controller {
 		$result = Database::fetchObject ( $query );
 		$model->contentCount = $result->amount;
 		
-		$topPages = Database::query ( "SELECT language, systemname, title, `views` FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY `views` DESC LIMIT 5", false );
+		$topPages = Database::query ( "SELECT language, systemname, title, `views` FROM " . tbname ( "content" ) . " WHERE deleted_at is null and type <> 'node' ORDER BY `views` DESC LIMIT 5", false );
 		while ( $row = Database::fetchObject ( $topPages ) ) {
 			$model->topPages [] = $row;
 		}
 		
-		$lastModfiedPages = Database::query ( "SELECT language, systemname, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else autor end as lastchangeby FROM " . tbname ( "content" ) . " WHERE redirection NOT LIKE '#%' ORDER BY lastmodified DESC LIMIT 5", false );
+		$lastModfiedPages = Database::query ( "SELECT language, systemname, title, lastmodified, case when lastchangeby is not null and lastchangeby > 0 then lastchangeby else autor end as lastchangeby FROM " . tbname ( "content" ) . "  WHERE deleted_at is null and type <> 'node'  ORDER BY lastmodified DESC LIMIT 5", false );
 		while ( $row = Database::fetchObject ( $lastModfiedPages ) ) {
 			$model->lastModfiedPages [] = $row;
 		}
-		$admins_query = Database::query ( "SELECT id, username FROM " . tbname ( "users" ) );
-		while ( $row = Database::fetchObject ( $admins_query ) ) {
+		$adminsQuery = Database::query ( "SELECT id, username FROM " . tbname ( "users" ) );
+		while ( $row = Database::fetchObject ( $adminsQuery ) ) {
 			$admins [$row->id] = $row->username;
 		}
 		$model->admins = $admins;
