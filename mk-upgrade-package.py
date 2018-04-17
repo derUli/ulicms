@@ -8,7 +8,7 @@ import platform
 import codecs
 from contextlib import closing
 from zipfile import ZipFile, ZIP_DEFLATED
-
+import time
 
 def zipdir(basedir, archivename):
     assert os.path.isdir(basedir)
@@ -78,6 +78,22 @@ def main():
                 f.write(line)
     else:
         print("No update.php found")
+
+    version_file = os.path.join(target, "ulicms", "UliCMSVersion.php")
+
+    if os.path.exists(version_file):
+        print("set build date...")
+        with codecs.open(version_file, 'r+', "utf-8") as f:
+            lines = f.readlines()
+            f.seek(0)
+            f.truncate()
+            for line in lines:
+                if "{InsertBuildDate}" in line:
+                    timestamp = str(int(time.time()))
+                    line = "            $this->buildDate = " + timestamp + "; // {InsertBuildDate}"
+                print(line)
+                f.write(line)
+    
     archive_name = os.path.join(target, "..", os.path.basename(target) + ".zip")
 
     main_dir = os.path.join(target, "ulicms")
@@ -90,8 +106,6 @@ def main():
         zipdir(target, archive_name)
         print("removing target folder...")
         shutil.rmtree(target)
-
-
 try:
     main()
 except KeyboardInterrupt:

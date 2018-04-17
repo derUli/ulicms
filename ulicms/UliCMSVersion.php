@@ -8,6 +8,7 @@ if (! class_exists("ulicms_version")) {
         {
             $this->version = "Yellowstone";
             $this->releaseYear = 2018;
+            $this->buildDate = 0; // {InsertBuildDate}
             $this->internalVersion = Array(
                 2018,
                 3
@@ -47,6 +48,16 @@ if (! class_exists("ulicms_version")) {
         public function getInternalVersionAsString()
         {
             return implode(".", $this->internalVersion);
+        }
+
+        public function getBuildTimestamp()
+        {
+            return $this->buildDate;
+        }
+
+        public function getBuildDate()
+        {
+            return strftime("%x %X", $this->getBuildTimestamp());
         }
     }
 }
