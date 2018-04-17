@@ -1321,7 +1321,6 @@ function uninstall_module($name, $type = "module") {
 
 // returns version number of UliCMS Core
 function cms_version() {
-	require_once "version.php";
 	$v = new UliCMSVersion ();
 	return implode ( ".", $v->getInternalVersion () );
 }
