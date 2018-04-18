@@ -8,7 +8,7 @@ import codecs
 import platform
 from contextlib import closing
 from zipfile import ZipFile, ZIP_DEFLATED
-
+import time
 
 def zipdir(basedir, archivename):
     assert os.path.isdir(basedir)
@@ -19,7 +19,6 @@ def zipdir(basedir, archivename):
                 absfn = os.path.join(root, fn)
                 zfn = absfn[len(basedir) + len(os.sep):]  # XXX: relative path
                 z.write(absfn, zfn)
-
 
 def main():
     parser = argparse.ArgumentParser()
@@ -50,6 +49,21 @@ def main():
         os.rename(installer_aus_folder, installer_folder)
 
     main_dir = os.path.join(target, "ulicms")
+
+    version_file = os.path.join(target, "ulicms", "UliCMSVersion.php")
+
+    if os.path.exists(version_file):
+        print("set build date...")
+        with codecs.open(version_file, 'r+', "utf-8") as f:
+            lines = f.readlines()
+            f.seek(0)
+            f.truncate()
+            for line in lines:
+                if "{InsertBuildDate}" in line:
+                    timestamp = str(int(time.time()))
+                    line = "            $this->buildDate = " + timestamp + "; // {InsertBuildDate}\r\n"
+                print(line)
+                f.write(line)
 
     # Composer packages zu Deploy hinzufügen
     os.system("php ulicms/composer install --working-dir=" + main_dir + "/ --no-dev")
