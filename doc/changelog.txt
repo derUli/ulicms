@@ -16,6 +16,7 @@ Neue Features:
 + CrawlerDetect auf Version 1.2.62 aktualisiert
 + Mobile_Detect aktualisiert auf Version 2.8.31
 + Build Datum von Paketen wird angezeigt
++ Build Datum von UliCMS wird unter "Info" angezeigt
 
 Neue API-Funktionen:
 
