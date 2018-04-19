@@ -160,7 +160,7 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase
         $_SERVER['HTTP_HOST'] = "company.com";
         $this->assertEquals("http://company.com/", ModuleHelper::getBaseUrl());
         $this->assertEquals("http://company.com/admin/gfx/logo.png", ModuleHelper::getBaseUrl("/admin/gfx/logo.png"));
-        $_SERVER["REQUEST_URI"] = "/subdir";
+        $_SERVER["REQUEST_URI"] = "/subdir/foo.png";
         $this->assertEquals("http://company.com/subdir/", ModuleHelper::getBaseUrl());
         $this->assertEquals("http://company.com/subdir/admin/gfx/logo.png", ModuleHelper::getBaseUrl("/admin/gfx/logo.png"));
     }
