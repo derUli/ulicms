@@ -5,7 +5,15 @@ if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_G
     $languages = getAvailableBackendLanguages();
     $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$admin'");
     $ref = _esc(Request::getVar("ref", "home"));
+    $groupData = Group::getAll();
+    $groups = array();
+    foreach ($groupData as $group) {
+        $selectItem = new \UliCMS\HTML\ListItem($group->getId(), $group->getName());
+        $groups[] = $selectItem;
+    }
     
+    $user = new User($admin);
+    $selectedGroups = $user->getSecondaryGroupIds();
     while ($row = db_fetch_object($query)) {
         ?>
 <p>
@@ -115,7 +123,12 @@ if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_G
 		<?php
         }
         ?>
-	<br /> <strong><?php
+	<br /> 
+	 <strong><?php translate("secondary_groups");?></strong><br />
+	<?php echo \UliCMS\HTML\Input::MultiSelect("group_ids[]", $selectedGroups, $groups, 1);?>
+	 <br /> <br /> 
+	
+	<strong><?php
         
         translate("homepage");
         ?></strong> <br /> <input type="url" name="homepage"

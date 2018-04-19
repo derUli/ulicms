@@ -4,6 +4,12 @@ if ($acl->hasPermission("users") and $acl->hasPermission("users_create")) {
     $languages = getAvailableBackendLanguages();
     $default_language = getSystemLanguage();
     $ref = _esc(Request::getVar("ref", "home"));
+    $groupData = Group::getAll();
+    $groups = array();
+    foreach ($groupData as $group) {
+        $selectItem = new \UliCMS\HTML\ListItem($group->getId(), $group->getName());
+        $groups[] = $selectItem;
+    }
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("admins");?>"
@@ -54,7 +60,9 @@ if ($acl->hasPermission("users") and $acl->hasPermission("users_create")) {
 		<?php
     }
     ?>
-	</select> <br /> <br /> <input type="checkbox" value="1"
+	</select> <br /> <br /> <strong><?php translate("secondary_groups");?></strong><br />
+	<?php echo \UliCMS\HTML\Input::MultiSelect("group_ids[]", null, $groups, 1);?>
+	 <br /> <br /> <input type="checkbox" value="1"
 		name="require_password_change" id="require_password_change"> <label
 		for="require_password_change"><?php translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );?> </label>
 	<br /> <br /> <input type="checkbox" id="send_mail" name="send_mail"

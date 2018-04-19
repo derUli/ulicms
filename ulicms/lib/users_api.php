@@ -75,6 +75,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $sendMessa
 (username,lastname, firstname, email, password, `group_id`, `require_password_change`, `password_changed`, `admin`, `locked`, `default_language`) 
 			VALUES ('$username', '$lastname','$firstname','$email','" . db_escape ( Encryption::hashPassword ( $password ) ) . "', " . $acl_group . ", $require_password_change, NOW(), $admin, $locked, 
 			$default_language)" ) or die ( db_error () );
+	$id = Database::getLastInsertID();
 	$message = "Hallo $firstname,\n\n" . "Ein Administrator hat auf http://" . $_SERVER ["SERVER_NAME"] . " für dich ein neues Benutzerkonto angelegt.\n\n" . "Die Zugangsdaten lauten:\n\n" . "Benutzername: $username\n" . "Passwort: $password\n";
 	$header = "From: " . Settings::get ( "email" ) . "\n" . "Content-type: text/plain; charset=utf-8";
 	
@@ -83,6 +84,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $sendMessa
 	}
 	
 	add_hook ( "after_create_user" );
+	return $id;
 }
 function get_user_id() {
 	if (isset ( $_SESSION ["login_id"] )) {
