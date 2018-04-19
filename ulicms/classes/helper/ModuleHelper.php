@@ -131,7 +131,7 @@ class ModuleHelper
 		// Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
 		
-		$dirname = rtrim($dirname, ",");
+		$dirname = trim($dirname, "/");
 		
 		return get_site_protocol() . $domain . $dirname . $suffix;
 	}
