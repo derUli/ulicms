@@ -258,9 +258,12 @@ function isCLI() {
  *         @source http://gravatar.com/site/implement/images/php/
  */
 function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array()) {
-	$url = 'http://www.gravatar.com/avatar/';
-	$url .= md5 ( strtolower ( trim ( $email ) ) );
-	$url .= "?s=$s&d=$d&r=$r";
+    // Nach dem in Kraft treten, der Datenschutz-Grundverordnung 2018
+    // wird die Nutzung von Gravatar in Deutschland illegal
+    // daher wird an dieser Stelle die Gravatar-Integration gekappt
+    // und stattdessen wird ein statisches Platzhalter-Bild angezeigt
+    // Bis ein integrierter Avatar-Upload in UliCMS implementiert ist.
+	$url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
 	if ($img) {
 		$url = '<img src="' . $url . '"';
 		foreach ( $atts as $key => $val )

@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3 =====
+﻿===== Neues in UliCMS 2018.3 =====
 
 Neue Features:
 + Neue Mailversandmethode "PHPMailer", Mailversand per SMTP
@@ -19,6 +19,7 @@ Neue Features:
 + Build Datum von UliCMS wird unter "Info" angezeigt
 
 Neue API-Funktionen:
+* ModuleHelper::getBaseUrl($suffix)
 
 Neue HTML-Helper:
 * UliCMS\HTML\Style\FromExternalFile($href, $media = null, $htmlAttributes = array())
@@ -53,6 +54,7 @@ Entfernte Features:
 - Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.
 - YaLinqo entfernt
 - Design Option "Zoom" entfernt
+- Gravatar Feature deaktiviert wegen Datenschutz-Grundverordnung 2018
 
 Bugfixes:
 * "Custom Types" Feature war defekt

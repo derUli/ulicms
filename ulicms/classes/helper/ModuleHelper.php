@@ -116,6 +116,28 @@ class ModuleHelper
         return $retval;
     }
 
+	public static function getBaseUrl($suffix = "/"){
+		$domain = get_http_host();
+		
+		$dirname = dirname(get_request_uri());
+        
+        // Replace backslashes with slashes (Windows)
+        $dirname = str_replace("\\", "/", $dirname);
+        
+        if (is_admin_dir()) {
+            $dirname = dirname(dirname($dirname . "/.."));
+        }
+        
+		
+		
+		// Replace backslashes with slashes (Windows)
+        $dirname = str_replace("\\", "/", $dirname);
+		
+		$dirname = rtrim($dirname, ",");
+		
+		return get_site_protocol() . $domain . $dirname . $suffix;
+	}
+	
     public static function getFullPageURLByID($page_id = null)
     {
         if (! $page_id) {

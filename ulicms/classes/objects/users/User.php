@@ -356,4 +356,7 @@ class User {
 	public function setDefaultLanguage($val) {
 		$this->default_language = StringHelper::isNotNullOrWhitespace ( $val ) ? strval ( $val ) : null;
 	}
+	public function getAvatar(){
+		return (is_admin_dir() ? "gfx/no_profile.png" : "admin/gfx/no_profile.png");
+	}
 }
