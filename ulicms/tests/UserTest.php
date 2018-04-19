@@ -81,7 +81,6 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		// This always returns the URL of an placeholder image
 		// since the new avatar feature is not implemented yet
 		$this->assertTrue(endsWith($user->getAvatar(), "/admin/gfx/no_avatar.png"));
-		$this->assertTrue(url_exists($user->getAvatar()));
 		
 		$user->delete ();
 		
