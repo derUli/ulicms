@@ -127,13 +127,11 @@ class ModuleHelper
         if (is_admin_dir()) {
             $dirname = dirname(dirname($dirname . "/.."));
         }
-        
-		
-		
+        				
 		// Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
 		
-		$dirname = rtrim($dirname, ",");
+		$dirname = trim($dirname, ",");
 		
 		return get_site_protocol() . $domain . $dirname . $suffix;
 	}

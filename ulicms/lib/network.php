@@ -14,7 +14,7 @@ function get_protocol_and_domain() {
 	return get_site_protocol () . get_domain ();
 }
 function get_domain() {
-	return $_SERVER ['SERVER_NAME'];
+	return $_SERVER ['HTTP_HOST'];
 }
 
 // Die IP-Adresse des Clients zurückgeben
