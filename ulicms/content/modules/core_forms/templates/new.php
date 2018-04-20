@@ -35,7 +35,10 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" 
 	<strong><?php translate("fields");?></strong><br />
 	<textarea name="fields" rows="10"></textarea>
 </p>
-
+<p>
+	<strong><?php translate("required_fields");?></strong><br />
+	<textarea name="required_fields" rows="10"></textarea>
+</p>
 
 <p>
 	<strong><?php translate("mail_from_field");?></strong><br /> <input
