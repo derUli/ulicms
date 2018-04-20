@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}forms` DROP COLUMN `required_fields`
