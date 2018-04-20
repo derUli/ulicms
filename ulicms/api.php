@@ -112,7 +112,7 @@ function set_format($format) {
 	$_GET ["format"] = trim ( $format, "." );
 }
 function get_jquery_url() {
-	$url = "//code.jquery.com/jquery-1.11.3.min.js";
+	$url = "admin/scripts/jquery.min.js";
 	$url = apply_filter ( $url, "jquery_url" );
 	return $url;
 }
