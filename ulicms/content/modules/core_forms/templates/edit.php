@@ -1,14 +1,14 @@
 <?php
-$acl = new ACL ();
-if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_edit" )) {
-	noperms ();
+$acl = new ACL();
+if (! $acl->hasPermission("forms") or ! $acl->hasPermission("forms_edit")) {
+    noperms();
 } else {
-	$forms = Forms::getAllForms ();
-	$pages = getAllPages ();
-	$id = intval ( $_GET ["id"] );
-	$form = Forms::getFormByID ( $id );
-	if ($form) {
-		?>
+    $forms = Forms::getAllForms();
+    $pages = getAllPages();
+    $id = intval($_GET["id"]);
+    $form = Forms::getFormByID($id);
+    if ($form) {
+        ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("forms");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
@@ -34,12 +34,16 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_edit" ))
 <p>
 	<strong><?php translate("category");?></strong><br />
 	<?php
-		echo Categories::getHTMLSelect ( $form ["category_id"] );
-		?></p>
+        echo Categories::getHTMLSelect($form["category_id"]);
+        ?></p>
 
 <p>
 	<strong><?php translate("fields");?></strong><br />
 	<textarea name="fields" rows="10"><?php echo htmlspecialchars($form["fields"]);?></textarea>
+</p>
+<p>
+	<strong><?php translate("required_fields");?></strong><br />
+	<textarea name="required_fields" rows="10"><?php echo htmlspecialchars($form["required_fields"]);?></textarea>
 </p>
 <p>
 	<strong><?php translate("mail_from_field");?></strong><br /> <input
@@ -62,6 +66,6 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_edit" ))
 <?php echo ModuleHelper::endForm();?>
 
 <?php
-	}
+    }
 }
 ?>
