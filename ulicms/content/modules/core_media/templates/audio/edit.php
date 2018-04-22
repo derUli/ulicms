@@ -14,22 +14,22 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_edit" )) {
 	method="post">
 <?php csrf_token_html ();?>
 	<input type="hidden" name="id" value="<?php echo $result->id;?>"> <input
-		type="hidden" name="update" value="update"> <strong><?php	translate ( "name" );?>
+		type="hidden" name="update" value="update"> <strong><?php	translate ( "name" );?>*
 	</strong><br /> <input type="text" name="name"
 		value="<?php echo htmlspecialchars ( $result->name );?>"
-		maxlength="255" required /> <br /> <br /> <strong><?php translate("category");?>
+		maxlength="255" required /> <br /> <strong><?php translate("category");?>
 	</strong><br />
 	<?php echo Categories::getHTMLSelect ( $result->category_id );?>
 	<br /> <br /> <strong><?php	echo translate ( "audio_ogg" );?>
 	</strong><br /> <input name="ogg_file" type="text"
-		value="<?php echo htmlspecialchars ( $result->ogg_file );?>"><br /> <br />
+		value="<?php echo htmlspecialchars ( $result->ogg_file );?>"><br />
 	<strong><?php translate ( "audio_mp3" );?>
 	</strong><br /> <input name="mp3_file" type="text"
-		value="<?php echo htmlspecialchars ( $result->mp3_file );?>"><br /> <br />
+		value="<?php echo htmlspecialchars ( $result->mp3_file );?>"><br />
 	<strong><?php translate ( "insert_this_code_into_a_page" );?>
 	</strong><br /> <input type="text" name="code"
 		value="[audio id=<?php echo $result->id;?>]"
-		onclick="this.focus();this.select();" readonly> <br /> <br />
+		onclick="this.focus();this.select();" readonly> <br />
 	<button type="submit" class="btn btn-primary"><?php translate ( "SAVE_CHANGES" );?></button>
 </form>
 <?php

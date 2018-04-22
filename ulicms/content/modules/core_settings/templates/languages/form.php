@@ -13,12 +13,11 @@ if ($acl->hasPermission ( "languages" )) {
 <div class="scroll">
 	<table style="border: 0">
 		<tr>
-			<td><strong><?php translate("shortcode");?></strong></td>
+			<td><strong><?php translate("shortcode");?>*</strong></td>
 			<td><input type="text" name="language_code" maxlength="6" required></td>
 		</tr>
 		<tr>
-			<td style="width: 100px;"><strong><?php translate("full_name");?>
-			</strong></td>
+			<td style="width: 100px;"><strong><?php translate("full_name");?>*</strong></td>
 			<td><input type="text" name="name" maxlength="100" required></td>
 		</tr>
 	</table>

@@ -40,11 +40,11 @@ if (defined ( "_SECURITY" )) {
 	<h2 class="accordion-header"><?php translate("title_and_headline");?></h2>
 
 	<div class="accordion-content">
-		<strong><?php translate("permalink");?></strong><br /> <input
+		<strong><?php translate("permalink");?>*</strong><br /> <input
 			type="text" required="required" name="system_title" id="system_title"
 			value="">
 		<div class="hide-on-snippet hide-on-non-regular">
-			<br /> <strong><?php translate("page_title");?> </strong><br /> <input
+			<br /> <strong><?php translate("page_title");?>* </strong><br /> <input
 				type="text" required="required" name="page_title" value=""
 				onkeyup="suggestSystemname(this.value)"> <br /> <strong><?php translate("alternate_title");?> </strong><br />
 			<input type="text" name="alternate_title"

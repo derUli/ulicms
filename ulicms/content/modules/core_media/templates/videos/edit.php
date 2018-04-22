@@ -14,7 +14,7 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_edit" )) 
 	method="post">
 <?php csrf_token_html ();?>
 	<input type="hidden" name="id" value="<?php echo $result->id;?>"> <input
-		type="hidden" name="update" value="update"> <strong><?php translate ( "name" );?>
+		type="hidden" name="update" value="update"> <strong><?php translate ( "name" );?>*
 	</strong><br /> <input type="text" name="name" required="required"
 		value="<?php echo htmlspecialchars ( $result->name );?>" maxlength=255 />
 	<br /> <strong><?php translate("category");?>
