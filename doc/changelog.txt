@@ -50,6 +50,7 @@ Verbesserungen:
 falls kein Feld für die E-Mail Adresse gesetzt ist.
 + Performance der Installation von mehrere Paketen und Patches optimiert
 + cms-config.php in CMSConfig.php umbenannt
+* JsTranslation Übersetzungsnamen nun in CamelCase (z.B. Translation.AskForDelete, statt Translation.ASK_FOR_DELETE)
 
 Entfernte Features:
 - Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.
