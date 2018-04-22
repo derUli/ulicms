@@ -289,7 +289,7 @@ function filterByStatus(element) {
 }
 
 function ajaxEmptyTrash(url) {
-	if (confirm(Translation.WANNA_EMPTY_TRASH)) {
+	if (confirm(Translation.WannaEmptyTrash)) {
 		$.ajax({
 			url : url,
 			success : function() {

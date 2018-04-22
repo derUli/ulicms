@@ -34,10 +34,11 @@ class JSTranslation {
 			if (startsWith ( $key, "TRANSLATION_" )) {
 				$key = substr ( $key, 12 );
 			}
-			$key = strtoupper ( $key );
+			$jsName = ucfirst(ModuleHelper::underscoreToCamel($key));
+			$key = strtoupper( $key );
 			$value = get_translation ( $key );
 			$value = str_replace ( "\"", "\\\"", $value );
-			$line = "Translation." . $key . " = \"" . $value . "\";";
+			$line = "Translation." .  $jsName . " = \"" . $value . "\";";
 			$js [] = $line;
 		}
 		$jsString = implode ( "", $js );
@@ -46,5 +47,8 @@ class JSTranslation {
 	}
 	public function renderJS($wrap = "<script type=\"text/javascript\">{code}</script>") {
 		echo $this->getJS ( $wrap );
+	}
+	public function render($wrap = "<script type=\"text/javascript\">{code}</script>"){
+	    $this->renderJS($wrap);
 	}
 }

@@ -1,5 +1,5 @@
 function askForDelete() {
-	return confirm(Translation.ASK_FOR_DELETE);
+	return confirm(Translation.AskForDelete);
 }
 
 $(function() {
