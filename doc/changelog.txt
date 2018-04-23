@@ -19,6 +19,7 @@ Neue Features:
 + Build Datum von UliCMS wird unter "Info" angezeigt
 + Formular System: Pflichtfelder können festgelegt werden
 + Pflichtfelder im Backend sind nun mit Sternchen als solche markiert
++ "Auto Embed" ist nun per Default deaktiviert
 
 Neue API-Funktionen:
 * ModuleHelper::getBaseUrl($suffix)
