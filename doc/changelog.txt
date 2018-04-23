@@ -18,6 +18,7 @@ Neue Features:
 + Build Datum von Paketen wird angezeigt
 + Build Datum von UliCMS wird unter "Info" angezeigt
 + Formular System: Pflichtfelder können festgelegt werden
++ Pflichtfelder im Backend sind nun mit Sternchen als solche markiert
 
 Neue API-Funktionen:
 * ModuleHelper::getBaseUrl($suffix)

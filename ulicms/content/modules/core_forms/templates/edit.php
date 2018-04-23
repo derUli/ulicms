@@ -17,17 +17,17 @@ if (! $acl->hasPermission("forms") or ! $acl->hasPermission("forms_edit")) {
 <?php echo ModuleHelper::buildMethodCallForm("FormController", "update");?>
 <input type="hidden" name="id" value="<?php echo $id;?>" />
 <p>
-	<strong><?php translate("name");?></strong><br /> <input type="text"
+	<strong><?php translate("name");?>*</strong><br /> <input type="text"
 		value="<?php echo htmlspecialchars($form["name"]);?>" name="name"
 		required />
 </p>
 <p>
-	<strong><?php translate("email_to");?></strong><br /> <input
+	<strong><?php translate("email_to");?>*</strong><br /> <input
 		type="email" value="<?php echo htmlspecialchars($form["email_to"]);?>"
 		name="email_to" required />
 </p>
 <p>
-	<strong><?php translate("subject");?></strong><br /> <input type="text"
+	<strong><?php translate("subject");?>*</strong><br /> <input type="text"
 		value="<?php echo htmlspecialchars($form["subject"]);?>"
 		name="subject" required />
 </p>

@@ -101,12 +101,12 @@ if (defined ( "_SECURITY" )) {
 	<h2 class="accordion-header"><?php translate("title_and_headline");?></h2>
 
 	<div class="accordion-content">
-		<strong><?php translate("permalink");?></strong><br /> <input
+		<strong><?php translate("permalink");?>*</strong><br /> <input
 			type="text" required="required" name="system_title"
 			value="<?php
 
 				echo htmlspecialchars ( $row->systemname );
-				?>"> <br /> <strong><?php translate("page_title");?> </strong><br />
+				?>"> <br /> <strong><?php translate("page_title");?>* </strong><br />
 		<input type="text" name="page_title"
 			value="<?php
 				echo htmlspecialchars ( $row->title );
