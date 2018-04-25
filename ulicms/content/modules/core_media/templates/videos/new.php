@@ -10,7 +10,7 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_create" )
 	method="post" enctype="multipart/form-data">
 	<input type="hidden" name="add" value="add">
 	<?php csrf_token_html ();?>
-	<strong><?php translate ( "name" );?>
+	<strong><?php translate ( "name" );?>*
 	</strong><br /> <input type="text" name="name" value="" maxlength="255"
 		required /> <br /> <strong><?php translate("category");?>
 	</strong><br />

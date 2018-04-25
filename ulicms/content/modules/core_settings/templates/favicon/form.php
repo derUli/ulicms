@@ -40,9 +40,10 @@ if ($acl->hasPermission ( "favicon" )) {
 			</strong></td>
 			<td><?php
 	
-	$favicon_path = "../content/images/favicon.ico";
+	$favicon_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
+	$favicon_url = defined ( "ULICMS_DATA_STORAGE_URL" ) ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
 	if (file_exists ( $favicon_path ) and is_file ( $favicon_path )) {
-		echo '<img class="website_favicon" src="' . $favicon_path . '" alt="' . Settings::get ( "homepage_title" ) . '"/>';
+		echo '<img class="website_favicon" src="' . $favicon_url . '" alt="' . Settings::get ( "homepage_title" ) . '"/>';
 	}
 	?>
 			</td>

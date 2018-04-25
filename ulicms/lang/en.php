@@ -207,7 +207,6 @@ define ( "TRANSLATION_FRONTEND_DESIGN", "Frontend Design" );
 define ( "TRANSLATION_BACKEND_DESIGN", "Backend Design" );
 define ( "TRANSLATION_EDITOR_SKIN", "Editor Skin" );
 define ( "TRANSLATION_FONT_FAMILY", "Font Family" );
-define ( "TRANSLATION_ZOOM", "Zoom" );
 define ( "TRANSLATION_FONT_SIZE", "Font Size" );
 define ( "TRANSLATION_HEADER_BACKGROUNDCOLOR", "Header background color" );
 define ( "TRANSLATION_FONT_COLOR", "Font Color" );
@@ -719,5 +718,7 @@ define ( "TRANSLATION_INVALID_TOKEN", "Invalid Token" );
 define ( "TRANSLATION_NOT_AN_EMBED_MODULE", "Not an embed module" );
 
 define ( "TRANSLATION_MIN_TIME_TO_FILL_FORM", "Minimal time to fill a form (seconds, 0 = off)" );
+
+define ( "TRANSLATION_BUILD_DATE", "Build Date" );
 
 add_hook ( "lang_en" );

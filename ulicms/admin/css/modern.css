@@ -321,6 +321,7 @@ div#google-fonts select {
 
 .accordion-content, .accordion-header {
 	width: auto !important;
+    word-wrap: break-word;
 }
 
 div#login-welcome-text {
@@ -493,4 +494,12 @@ button, input[type=button], input[type=submit], input[type=reset], input[type=im
 
 .btn-primary {
 	background-color:#335599;
+}
+
+input.kcfinder {
+	cursor: pointer;
+}
+
+.normal-weight {
+	font-weight: normal;
 }

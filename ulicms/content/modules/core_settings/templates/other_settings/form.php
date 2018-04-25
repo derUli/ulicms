@@ -15,6 +15,10 @@ if (! $acl->hasPermission ( "other" )) {
 	
 	$hide_meta_generator = Settings::get ( "hide_meta_generator" );
 	
+	$smtp_encryption = Settings::get ( "smtp_encryption" );
+	
+	$smtp_no_verify_certificate = Settings::get ( "smtp_no_verify_certificate" );
+	
 	$smtp_host = Settings::get ( "smtp_host" );
 	if (! $smtp_host) {
 		$smtp_host = "127.0.0.1";
@@ -278,12 +282,12 @@ if (! $acl->hasPermission ( "other" )) {
 	?>>
 		</div>
 	</div>
-	<h2 class="accordion-header hide">
+	<h2 class="accordion-header">
 		<?php translate("EMAIL_DELIVERY");?>
 		</h2>
 
 
-	<div class="accordion-content hide">
+	<div class="accordion-content">
 		<div class="label">Modus:</div>
 		<div class="inputWrapper">
 			<select id='email_mode' name="email_mode" size="1">
@@ -293,7 +297,7 @@ if (! $acl->hasPermission ( "other" )) {
 		echo ' selected="selected"';
 	}
 	?>>PHP</option>
-				<option value="phpmailer" disabled
+				<option value="phpmailer"
 					<?php
 	if ($email_mode == EmailModes::PHPMAILER) {
 		echo ' selected="selected"';
@@ -331,6 +335,36 @@ if (! $acl->hasPermission ( "other" )) {
 			</div>
 
 			<div class="label">
+				<label for="smtp_auth"> <?php translate("smtp_encryption");?>
+			</label>
+			</div>
+			<div class="inputWrapper">
+				<select name="smtp_encryption">
+					<option value="" <?php if(empty($smtp_encryption)) echo "checked"?>><?php translate("unencrypted");?></option>
+					<option value="ssl"
+						<?php if($smtp_encryption == "ssl") echo "checked"?>>SSL</option>
+					<option value="tls"
+						<?php if($smtp_encryption == "tls") echo "checked"?>>TLS</option>
+				</select>
+			</div>
+			<div class="label">
+				<label for="smtp_no_verify_certificate"> <?php translate("smtp_no_verify_certificate");?>
+			</label>
+			</div>
+			<div class="inputWrapper">
+				<p>
+					<input type="checkbox" id="smtp_no_verify_certificate"
+						name="smtp_no_verify_certificate"
+						<?php
+	if ($smtp_no_verify_certificate) {
+		echo ' checked="checked"';
+	}
+	?>
+						value="smtp_no_verify_certificate"> <br /> <small><?php translate("smtp_no_verify_certificate_warning");?></small>
+				</p>
+			</div>
+
+			<div class="label">
 				<label for="smtp_auth"> <?php translate("AUTHENTIFACTION_REQUIRED");?>
 			</label>
 			</div>
@@ -338,7 +372,7 @@ if (! $acl->hasPermission ( "other" )) {
 				<input type="checkbox" id="smtp_auth" name="smtp_auth"
 					<?php
 	if ($smtp_auth) {
-		echo ' checked="check ed"';
+		echo ' checked="checked"';
 	}
 	?>
 					value="auth">
@@ -397,7 +431,7 @@ if($('#smtp_auth').prop('checked')){
 <?php
 	
 	// FIXME: Extract this code to an external script
-	if ($email_mode == "pear_mail") {
+	if ($email_mode == EmailModes::PHPMAILER) {
 		?>
 $('#smtp_settings').show();
 <?php
@@ -405,7 +439,7 @@ $('#smtp_settings').show();
 	?>
 
 $('#email_mode').change(function(){
-if($('#email_mode').val() == "pear_mail"){
+if($('#email_mode').val() == "phpmailer"){
    $('#smtp_settings').slideDown();
 
 } else {

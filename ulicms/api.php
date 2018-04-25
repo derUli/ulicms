@@ -112,7 +112,7 @@ function set_format($format) {
 	$_GET ["format"] = trim ( $format, "." );
 }
 function get_jquery_url() {
-	$url = "//code.jquery.com/jquery-1.11.3.min.js";
+	$url = "admin/scripts/jquery.min.js";
 	$url = apply_filter ( $url, "jquery_url" );
 	return $url;
 }
@@ -232,7 +232,7 @@ function initPFBC() {
 	add_hook ( "init_pfbc" );
 }
 function is_debug_mode() {
-	$config = new config ();
+	$config = new CMSConfig ();
 	return (defined ( "ULICMS_DEBUG" ) and ULICMS_DEBUG) or (isset ( $config->debug ) and $config->debug);
 }
 function isCLI() {
@@ -258,9 +258,12 @@ function isCLI() {
  *         @source http://gravatar.com/site/implement/images/php/
  */
 function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array()) {
-	$url = 'http://www.gravatar.com/avatar/';
-	$url .= md5 ( strtolower ( trim ( $email ) ) );
-	$url .= "?s=$s&d=$d&r=$r";
+    // Nach dem in Kraft treten, der Datenschutz-Grundverordnung 2018
+    // wird die Nutzung von Gravatar in Deutschland illegal
+    // daher wird an dieser Stelle die Gravatar-Integration gekappt
+    // und stattdessen wird ein statisches Platzhalter-Bild angezeigt
+    // Bis ein integrierter Avatar-Upload in UliCMS implementiert ist.
+	$url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
 	if ($img) {
 		$url = '<img src="' . $url . '"';
 		foreach ( $atts as $key => $val )
@@ -518,7 +521,6 @@ function setLanguageByDomain() {
 	$domainMapping = Settings::mappingStringToArray ( $domainMapping );
 	foreach ( $domainMapping as $domain => $language ) {
 		$givenDomain = $_SERVER ["HTTP_HOST"];
-		
 		if ($domain == $givenDomain and faster_in_array ( $language, getAllLanguages () )) {
 			$_SESSION ["language"] = $language;
 			return true;
@@ -583,8 +585,8 @@ function add_hook($name) {
 		if (faster_in_array ( $modules [$hook_i], $disabledModules )) {
 			continue;
 		}
-		$file1 = getModulePath ( $modules [$hook_i] ) . $modules [$hook_i] . "_" . $name . ".php";
-		$file2 = getModulePath ( $modules [$hook_i] ) . "hooks/" . $name . ".php";
+		$file1 = getModulePath ( $modules [$hook_i], true ) . $modules [$hook_i] . "_" . $name . ".php";
+		$file2 = getModulePath ( $modules [$hook_i], true ) . "hooks/" . $name . ".php";
 		$main_class = getModuleMeta ( $modules [$hook_i], "main_class" );
 		$controller = null;
 		if ($main_class) {
@@ -674,7 +676,9 @@ function getThemesList() {
 }
 function getTemplateDirPath($sub = "default", $abspath = false) {
 	if ($abspath) {
-		$templateDir = Path::resolve ( "ULICMS_ROOT/content/templates/" ) . "/";
+		$templateDir = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/templates/" ) . "/";
+	} else if (ULICMS_ROOT != ULICMS_DATA_STORAGE_ROOT and defined ( "ULICMS_DATA_STORAGE_URL" )) {
+		$templateDir = Path::resolve ( "ULICMS_DATA_STORAGE_URL/content/templates" ) . "/";
 	} else if (is_admin_dir ()) {
 		$templateDir = "../content/templates/";
 	} else {
@@ -823,34 +827,39 @@ function buildSEOUrl($page = false, $redirection = null, $format = "html") {
 }
 function getModulePath($module, $abspath = false) {
 	if ($abspath) {
-		return Path::resolve ( "ULICMS_ROOT/content/modules/$module" ) . "/";
+		return Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/modules/$module" ) . "/";
 	}
-	// Frontend Directory
-	if (is_file ( "cms-config.php" )) {
-		$module_folder = "content/modules/";
-	} // Backend Directory
-	else {
-		$module_folder = "../content/modules/";
+	if (ULICMS_ROOT == ULICMS_DATA_STORAGE_ROOT and ! defined ( "ULICMS_DATA_STORAGE_URL" )) {
+		// Frontend Directory
+		if (is_file ( "CMSConfig.php" )) {
+			$module_folder = "content/modules/";
+		} // Backend Directory
+		else {
+			$module_folder = "../content/modules/";
+		}
+	} else {
+		$module_folder = Path::resolve ( "ULICMS_DATA_STORAGE_URL/content/modules" ) . "/";
 	}
-	$available_modules = Array ();
+	
+	$available_modules = array ();
 	return $module_folder . $module . "/";
 }
 function getModuleAdminFilePath($module) {
-	return getModulePath ( $module ) . $module . "_admin.php";
+	return getModulePath ( $module, true ) . $module . "_admin.php";
 }
 function getModuleAdminFilePath2($module) {
-	return getModulePath ( $module ) . "admin.php";
+	return getModulePath ( $module, true ) . "admin.php";
 }
 function getModuleMainFilePath($module) {
-	return getModulePath ( $module ) . $module . "_main.php";
+	return getModulePath ( $module, true ) . $module . "_main.php";
 }
 function getModuleMainFilePath2($module) {
-	return getModulePath ( $module ) . "main.php";
+	return getModulePath ( $module, true ) . "main.php";
 }
-function getModuleUninstallScriptPath($module, $abspath = false) {
+function getModuleUninstallScriptPath($module, $abspath = true) {
 	return getModulePath ( $module, $abspath ) . $module . "_uninstall.php";
 }
-function getModuleUninstallScriptPath2($module, $abspath = false) {
+function getModuleUninstallScriptPath2($module, $abspath = true) {
 	return getModulePath ( $module, $abspath ) . "uninstall.php";
 }
 /**
@@ -1314,7 +1323,6 @@ function uninstall_module($name, $type = "module") {
 
 // returns version number of UliCMS Core
 function cms_version() {
-	require_once "version.php";
 	$v = new UliCMSVersion ();
 	return implode ( ".", $v->getInternalVersion () );
 }

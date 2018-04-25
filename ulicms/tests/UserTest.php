@@ -77,6 +77,11 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals ( true, $user->getAdmin () );
 		$this->assertEquals ( true, $user->getRequirePasswordChange () );
 		$this->assertEquals ( "bye", $user->getAboutMe () );
+		
+		// This always returns the URL of an placeholder image
+		// since the new avatar feature is not implemented yet
+		$this->assertTrue(endsWith($user->getAvatar(), "/admin/gfx/no_avatar.png"));
+		
 		$user->delete ();
 		
 		$user = new User ();

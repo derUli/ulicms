@@ -356,4 +356,11 @@ class User {
 	public function setDefaultLanguage($val) {
 		$this->default_language = StringHelper::isNotNullOrWhitespace ( $val ) ? strval ( $val ) : null;
 	}
+	public function getAvatar(){
+		return ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
+	}
+	
+	public function setAvatar(){
+		throw new NotImplementedException("Avatar feature is not implemented yet.");
+	}
 }

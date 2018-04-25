@@ -21,7 +21,7 @@ class DBMigrator {
 				if (Database::getNumRows ( $result ) == 0) {
 					$path = $this->folder . "/" . $file;
 					$sql = file_get_contents ( $path );
-					$cfg = new config ();
+					$cfg = new CMSConfig ();
 					$sql = str_ireplace ( "{prefix}", $cfg->db_prefix, $sql );
 					Database::query ( $sql, true );
 					$sql = "INSERT INTO {prefix}dbtrack (component, name) values (?,?)";
@@ -49,7 +49,7 @@ class DBMigrator {
 				if (Database::getNumRows ( $result ) > 0) {
 					$path = $this->folder . "/" . $file;
 					$sql = file_get_contents ( $path );
-					$cfg = new config ();
+					$cfg = new CMSConfig ();
 					$sql = str_ireplace ( "{prefix}", $cfg->db_prefix, $sql );
 					Database::query ( $sql, true );
 					$sql = "DELETE FROM {prefix}dbtrack where component = ? and name = ?";

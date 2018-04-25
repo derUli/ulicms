@@ -54,36 +54,6 @@ switch ($os) {
 $classes_dir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "classes";
 @set_include_path(get_include_path() . PATH_SEPARATOR . $classes_dir);
 
-if (! defined("ULICMS_TMP")) {
-    define("ULICMS_TMP", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR);
-}
-
-if (! file_exists(ULICMS_TMP)) {
-    mkdir(ULICMS_TMP);
-}
-
-if (! defined("ULICMS_CACHE")) {
-    define("ULICMS_CACHE", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "cache" . DIRECTORY_SEPERATOR);
-}
-if (! defined("ULICMS_LOG")) {
-    define("ULICMS_LOG", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "log" . DIRECTORY_SEPERATOR);
-}
-if (! defined("ULICMS_CONTENT")) {
-    define("ULICMS_CONTENT", dirname(__file__) . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR);
-}
-if (! file_exists(ULICMS_CACHE)) {
-    mkdir(ULICMS_CACHE);
-}
-if (! file_exists(ULICMS_LOG)) {
-    mkdir(ULICMS_LOG);
-}
-
-$htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
-$htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
-if (! file_exists($htaccessLogFolderTarget)) {
-    copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
-}
-
 include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "constants.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "users_api.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
@@ -98,6 +68,7 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEP
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "antispam-features.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Categories.php";
 
+// TODO: Alle includes die mit Feldern und Custom Types zu tun haben in eine load.php verschieben.
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "ContentType.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "DefaultContentTypes.php";
 
@@ -112,6 +83,8 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEP
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "HtmlField.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "SelectField.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "CheckboxField.php";
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "FileFile.php";
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "FileImage.php";
 
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "pkg" . DIRECTORY_SEPERATOR . "load.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "load.php";
@@ -128,7 +101,7 @@ if (file_exists($mobile_detect_as_module)) {
     include_once $mobile_detect_as_module;
 }
 
-include_once dirname(__file__) . DIRECTORY_SEPERATOR . "version.php";
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "UliCMSVersion.php";
 
 function exception_handler($exception)
 {
@@ -137,7 +110,8 @@ function exception_handler($exception)
     }
     $error = nl2br(htmlspecialchars($exception));
     
-    $cfg = class_exists("config") ? new config() : null;
+    // FIXME: what if there is no config class?
+    $cfg = class_exists("CMSConfig") ? new CMSConfig() : null;
     // TODO: useful error message if $debug is disabled
     // Log exception into a text file
     $message = is_true($cfg->debug) ? $exception : "Something happened! 😞";
@@ -154,14 +128,8 @@ function exception_handler($exception)
     echo "{$message}\n";
 }
 
-if (php_sapi_name() != "cli") {
-    set_exception_handler('exception_handler');
-}
-
-include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "load.php";
-
 // if config exists require_config else redirect to installer
-$path_to_config = dirname(__file__) . DIRECTORY_SEPERATOR . "cms-config.php";
+$path_to_config = dirname(__file__) . DIRECTORY_SEPERATOR . "CMSConfig.php";
 
 if (file_exists($path_to_config)) {
     require_once $path_to_config;
@@ -169,11 +137,15 @@ if (file_exists($path_to_config)) {
     header("Location: installer/");
     exit();
 } else {
-    throw new Exception("Can't include cms-config.php. Starting installer failed, too.");
+    die("Can't include CMSConfig.php. Starting installer failed, too.");
+}
+
+if (php_sapi_name() != "cli") {
+    set_exception_handler('exception_handler');
 }
 
 global $config;
-$config = new config();
+$config = new CMSConfig();
 
 // IF ULICMS_DEBUG is defined then display all errors except E_NOTICE,
 // else use default error_reporting from php.ini
@@ -181,6 +153,54 @@ if ((defined("ULICMS_DEBUG") and ULICMS_DEBUG) or (isset($config->debug) and $co
     error_reporting(E_ALL ^ E_NOTICE);
 } else {
     error_reporting(0);
+}
+
+// UliCMS has support to define an alternative root folder
+// to seperate it's core files from variable data such as modules and media
+// this enables us to use stuff like Docker containers where data gets lost
+// after stopping the container
+if (isset($config->data_storage_root) and ! is_null($config->data_storage_root)) {
+    define("ULICMS_DATA_STORAGE_ROOT", $config->data_storage_root);
+} else {
+    define("ULICMS_DATA_STORAGE_ROOT", ULICMS_ROOT);
+}
+
+// this enables us to set an base url for statis ressources such as images
+// stored in ULICMS_DATA_STORAGE_ROOT
+if (isset($config->data_storage_url) and ! is_null($config->data_storage_url)) {
+    define("ULICMS_DATA_STORAGE_URL", $config->data_storage_url);
+}
+
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "creators" . DIRECTORY_SEPERATOR . "load.php";
+
+if (! defined("ULICMS_TMP")) {
+    define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR);
+}
+
+if (! file_exists(ULICMS_TMP)) {
+    mkdir(ULICMS_TMP);
+}
+
+if (! defined("ULICMS_CACHE")) {
+    define("ULICMS_CACHE", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "cache" . DIRECTORY_SEPERATOR);
+}
+if (! defined("ULICMS_LOG")) {
+    define("ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "log" . DIRECTORY_SEPERATOR);
+}
+if (! defined("ULICMS_CONTENT")) {
+    define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR);
+}
+if (! file_exists(ULICMS_CACHE)) {
+    mkdir(ULICMS_CACHE);
+}
+if (! file_exists(ULICMS_LOG)) {
+    mkdir(ULICMS_LOG);
+}
+
+$htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
+$htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
+if (! file_exists($htaccessLogFolderTarget)) {
+    copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 
 // umask setzen
@@ -216,6 +236,7 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEP
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "localization" . DIRECTORY_SEPERATOR . "load.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "CustomData.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Category.php";
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "PagePermissions.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Content.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Page.php";
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Snippet.php";
@@ -246,8 +267,10 @@ if (class_exists("Path")) {
     if (is_true($config->query_logging)) {
         LoggerRegistry::register("sql_log", new Logger(Path::resolve("ULICMS_LOG/sql_log")));
     }
+    if (is_true($config->phpmailer_logging)) {
+        LoggerRegistry::register("phpmailer_log", new Logger(Path::resolve("ULICMS_LOG/phpmailer_log")));
+    }
 }
-
 require_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib/minify.php";
 
 // define Constants
@@ -296,7 +319,7 @@ function is_in_include_path($find)
 }
 
 global $config;
-$config = new config();
+$config = new CMSConfig();
 
 $db_socket = isset($config->db_socket) ? $config->db_socket : ini_get("mysqli.default_socket");
 
@@ -431,5 +454,11 @@ session_name(Settings::get("session_name"));
 // PHPUnit 6 introduced a breaking change that
 // removed PHPUnit_Framework_TestCase as a base class,
 // and replaced it with \PHPUnit\Framework\TestCase
-if (! class_exists('\PHPUnit_Framework_TestCase') && class_exists('\PHPUnit\Framework\TestCase'))
+if (! class_exists('\PHPUnit_Framework_TestCase') && class_exists('\PHPUnit\Framework\TestCase')) {
     class_alias('\PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
+}
+
+// Backwards compatiblity for modules using the old config class name
+if (class_exists("CMSConfig") and ! class_exists("config")) {
+    class_alias("CMSConfig", "config");
+}

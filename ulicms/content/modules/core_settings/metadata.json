@@ -1,6 +1,6 @@
 {
 	"source": "core",
-	"version": "2018.2",
+	"version": "2018.3",
 	"embed": false,
 	"actions": {
 		"settings_simple": "templates/settings_simple/form.php",

@@ -4,12 +4,12 @@ class AudioController extends Controller {
 		$query = db_query ( "select ogg_file, mp3_file from " . tbname ( "audio" ) . " where id = " . intval ( $_REQUEST ["delete"] ) );
 		if (db_num_rows ( $query ) > 0) {
 			$result = db_fetch_object ( $query );
-			$filepath = ULICMS_ROOT . "/content/audio/" . basename ( $result->ogg_file );
+			$filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" . basename ( $result->ogg_file );
 			if (! empty ( $result->ogg_file ) and is_file ( $filepath )) {
 				@unlink ( $filepath );
 			}
 			
-			$filepath = ULICMS_ROOT . "/content/audio/" . basename ( $result->mp3_file );
+			$filepath = ULICMS_DATA_STORAGE_ROOT . "/content/audio/" . basename ( $result->mp3_file );
 			if (! empty ( $result->mp3_file ) and is_file ( $filepath )) {
 				@unlink ( $filepath );
 			}
@@ -20,7 +20,7 @@ class AudioController extends Controller {
 	}
 	public function createPost() {
 		$mp3_file_value = "";
-		$audio_folder = ULICMS_ROOT . "/content/audio";
+		$audio_folder = ULICMS_DATA_STORAGE_ROOT . "/content/audio";
 		// mp3
 		if (! empty ( $_FILES ['mp3_file'] ['name'] )) {
 			$mp3_file = time () . "-" . basename ( $_FILES ['mp3_file'] ['name'] );
@@ -36,6 +36,10 @@ class AudioController extends Controller {
 			if (faster_in_array ( $mp3_type, $mp3_allowed_mime_type )) {
 				$target = $audio_folder . "/" . $mp3_file;
 				if (move_uploaded_file ( $_FILES ['mp3_file'] ['tmp_name'], $target )) {
+					// Google Cloud: make file public
+					if (startsWith ( ULICMS_DATA_STORAGE_ROOT, "gs://" ) and class_exists ( "GoogleCloudHelper" )) {
+						GoogleCloudHelper::changeFileVisiblity ( $target, true );
+					}
 					$mp3_file_value = basename ( $mp3_file );
 				}
 			}
@@ -54,6 +58,10 @@ class AudioController extends Controller {
 			if (faster_in_array ( $ogg_type, $ogg_allowed_mime_type )) {
 				$target = $audio_folder . "/" . $ogg_file;
 				if (move_uploaded_file ( $_FILES ['ogg_file'] ['tmp_name'], $target )) {
+					// Google Cloud: make file public
+					if (startsWith ( ULICMS_DATA_STORAGE_ROOT, "gs://" ) and class_exists ( "GoogleCloudHelper" )) {
+						GoogleCloudHelper::changeFileVisiblity ( $target, true );
+					}
 					$ogg_file_value = basename ( $ogg_file );
 				}
 			}

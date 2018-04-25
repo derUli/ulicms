@@ -1,16 +1,25 @@
 <?php
-$acl = new ACL ();
-if (! $acl->hasPermission ( "info" )) {
-	noperms ();
+$acl = new ACL();
+if (! $acl->hasPermission("info")) {
+    noperms();
 } else {
-	$version = new UliCMSVersion ();
-	$admin_logo = Settings::get ( "admin_logo" );
-	if (! $admin_logo) {
-		$admin_logo = "gfx/logo.png";
-	}
-	?>
-<strong>Release <?php echo cms_version ();?> "<?php	echo $version->getVersion ();?>"</strong>
-<br />
+    $version = new UliCMSVersion();
+    $admin_logo = Settings::get("admin_logo");
+    if (! $admin_logo) {
+        $admin_logo = "gfx/logo.png";
+    }
+    ?>
+<p>
+	<strong>Release <?php echo cms_version ();?> "<?php	echo $version->getVersion ();?>"</strong>
+	
+    <?php if($version->getBuildTimestamp() > 0){?>
+    
+    <br /> <small><?php translate("build_date");?>: <?php echo $version->getBuildDate()?></small>
+	<?php
+    
+}
+    ?>
+</p>
 <p>
 	<a href="http://www.ulicms.de" target="_blank">UliCMS</a> &copy; 2011 -
 	<?php cms_release_year();?> by Ulrich Schmidt<br /> <a
@@ -19,7 +28,7 @@ if (! $acl->hasPermission ( "info" )) {
 		target="_blank">KCFinder</a> Copyright ©2010 - 2014 Pavel Tzonkov<br />
 	Copyright 2005, 2014 jQuery Foundation, Inc. and other contributors <br />
 	<a href="http://codemirror.net/" target="_blank">CodeMirror</a> &copy;
-	2014 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others <br /> <a
+	2017 by Marijn Haverbeke &lt;marijnh@gmail.com&gt; and others <br /> <a
 		href="http://www.raymondhill.net/finediff/viewdiff-ex.php"
 		target="_blank">PHP Fine Diff</a> Copyright 2011 (c) Raymond Hill <br />
 	<a href="http://mobiledetect.net/" target="_blank">Mobile_Detect</a>

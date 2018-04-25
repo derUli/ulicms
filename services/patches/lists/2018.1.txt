@@ -1,1 +1,0 @@
-CustomTypesFix|Fixes custom types field objects|http://patches.ulicms.de/downloads/2018.1/CustomTypesFix.zip

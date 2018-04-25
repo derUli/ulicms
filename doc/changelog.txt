@@ -1,12 +1,28 @@
-===== Neues in UliCMS 2018.2.1 =====
+﻿===== Neues in UliCMS 2018.3 =====
+
 Neue Features:
++ Neue Mailversandmethode "PHPMailer", Mailversand per SMTP
++ Vorbereitungen zur Ausführung von UliCMS in der Google Cloud durchgeführt
 + Seiten haben nun auch eine Gruppe (group_id)
 + Minifying von Scripts und Stylesheets kann durch Config-Variable $no_minify deaktiviert werden.
 + Exception Logging implementiert
 + Logging von SQL Queries nutzt nun auch KLogger
 + Log-Ordner wird automatisch per .htaccess geschützt
++ neue CustomField Types "FileFile" und "FileImage" (Auswahl einer Datei)
++ shell/sinstall.php kann nun Pakete von einer URL als Quelle installieren.
++ CodeMirror auf Version 5.35.0 aktualisiert
++ Die Sicherheit des Downloads von Patches und Paketen wurde verbessert (Checksum-Prüfung und SSL)
++ jQuery auf Version 1.12.4 aktualisiert
++ CrawlerDetect auf Version 1.2.62 aktualisiert
++ Mobile_Detect aktualisiert auf Version 2.8.31
++ Build Datum von Paketen wird angezeigt
++ Build Datum von UliCMS wird unter "Info" angezeigt
++ Formular System: Pflichtfelder können festgelegt werden
++ Pflichtfelder im Backend sind nun mit Sternchen als solche markiert
++ "Auto Embed" ist nun per Default deaktiviert
 
 Neue API-Funktionen:
+* ModuleHelper::getBaseUrl($suffix)
 
 Neue HTML-Helper:
 * UliCMS\HTML\Style\FromExternalFile($href, $media = null, $htmlAttributes = array())
@@ -21,26 +37,38 @@ Neue HTML-Helper:
 * UliCMS\HTML\Input\Hidden($name, $value, $htmlAttributes = array())
 * UliCMS\HTML\Input\CheckBox($name, $checked = false, $value = "1", $htmlAttributes = array())
 * UliCMS\HTML\Input\RadioButton($name, $checked = false, $value = "1", $htmlAttributes = array())
-* UliCMS\HTML\Input\SingleSelect($name, $value = null, $options = array(), $size = 1, $htmlAttributes = array()) 
-* UliCMS\HTML\Input\ MultiSelect($name, $value = null, $options = array(), $size = 5, $htmlAttributes = array())
+* UliCMS\HTML\Input\SingleSelect($name, $value = null, $options = array(), $size = 1, $htmlAttributes = array())
+* UliCMS\HTML\Input\MultiSelect($name, $value = null, $options = array(), $size = 5, $htmlAttributes = array())
 * UliCMS\HTML\ListItem (Klasse)
 
 Minifying:
 * combinedScriptHtml() (statt combined_script_html())
 * combinedStylesheetHtml (statt combined_stylesheet_html())
-* Die Funktionen im alten Namensschema bleiben aus 
+* Die Funktionen im alten Namensschema bleiben aus
 Kompatiblitätsgründen erhalten, sind jedoch als Deprecated (veraltet) gekennzeichnet
 
 Verbesserungen:
 + Formularsystem verwendet nun die E-Mail Adresse aus den Grundeinstellungen als Absender,
 falls kein Feld für die E-Mail Adresse gesetzt ist.
-+ Einstellungen zum E-Mail Versand ausgeblendet, da es dort nichts zum Auswählen gibt, bis PHPMailer ins System integriert wird.
++ Performance der Installation von mehrere Paketen und Patches optimiert
++ cms-config.php in CMSConfig.php umbenannt
+* JsTranslation Übersetzungsnamen nun in CamelCase (z.B. Translation.AskForDelete, statt Translation.ASK_FOR_DELETE)
 
 Entfernte Features:
-- Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.  
+- Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.
+- YaLinqo entfernt
+- Design Option "Zoom" entfernt
+- Gravatar Feature deaktiviert wegen Datenschutz-Grundverordnung 2018
 
 Bugfixes:
+* "Custom Types" Feature war defekt
 * Hochgeladene Videos wurden im Root-Ordner des Dateisystems gespeichert
+* Sicherheit: Hook-Funktionen in Controllern können nicht mehr direkt per HTTP Request ausgeführt werden.
+* ModuleHelper::getFullPageURLByID() gibt fehlerhafte URl aus unter Windows
+* Kompatiblitätsproblem mit dem mPDF Modul behoben
+* Weiterleitung zum Installer wenn keine Konfigurationsdatei vorhanden funktioniert wieder.
+* Mehrere Fehler beim Speichern von Gruppen korrigiert
+* Gelöschte Seiten werden nicht mehr angezeigt bei "Letzte Änderungen" und "Top Seiten"
 
 ===== Neues in UliCMS 2018.2 =====
 

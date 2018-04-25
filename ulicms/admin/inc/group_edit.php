@@ -28,7 +28,7 @@ if (! $acl->hasPermission ( "groups" )) {
 <?php csrf_token_html ();?>
 	<input type="hidden" name="id" value="<?php	echo $id;?>">
 	<p>
-		<strong><?php translate("name");?></strong> <input type="text"
+		<strong><?php translate("name");?>*</strong> <input type="text"
 			required="required" name="name" value="<?php echo $groupName;?>">
 	</p>
 	<h3><?php translate("permissions");?></h3>

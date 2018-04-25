@@ -460,21 +460,7 @@ function random_banner() {
 	Template::randomBanner ();
 }
 function logo() {
-	if (Settings::get ( "logo_disabled" ) != "no") {
-		return;
-	}
-	if (! Settings::get ( "logo_image" )) {
-		setconfig ( "logo_image", "" );
-	}
-	if (! Settings::get ( "logo_disabled" )) {
-		setconfig ( "logo_disabled", "no" );
-	}
-	
-	$logo_path = "content/images/" . Settings::get ( "logo_image" );
-	
-	if (Settings::get ( "logo_disabled" ) == "no" and file_exists ( $logo_path )) {
-		echo '<img class="website_logo" src="' . $logo_path . '" alt="' . htmlspecialchars ( Settings::get ( "homepage_title" ), ENT_QUOTES, "UTF-8" ) . '"/>';
-	}
+	Template::logo ();
 }
 function year() {
 	Template::year ();
@@ -608,8 +594,8 @@ function apply_filter($text, $type) {
 		if (faster_in_array ( $modules [$i], $disabledModules )) {
 			continue;
 		}
-		$module_content_filter_file1 = getModulePath ( $modules [$i] ) . $modules [$i] . "_" . $type . "_filter.php";
-		$module_content_filter_file2 = getModulePath ( $modules [$i] ) . "filters/" . $type . ".php";
+		$module_content_filter_file1 = getModulePath ( $modules [$i], true ) . $modules [$i] . "_" . $type . "_filter.php";
+		$module_content_filter_file2 = getModulePath ( $modules [$i], true ) . "filters/" . $type . ".php";
 		
 		$main_class = getModuleMeta ( $modules [$i], "main_class" );
 		$controller = null;
@@ -811,7 +797,11 @@ function output_favicon_code() {
 }
 function get_output_favicon_code() {
 	$url = "content/images/favicon.ico";
-	$path = ULICMS_ROOT . "/" . $url;
+	if (defined ( "ULICMS_DATA_STORAGE_URL" )) {
+		$url = ULICMS_DATA_STORAGE_URL . "/" . $url;
+	}
+	$path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
+	
 	$html = "";
 	if (is_file ( $path )) {
 		$html = '<link rel="icon" href="' . $url . '" type="image/x-icon" />' . "\r\n" . '<link rel="shortcut icon" href="' . $url . '" type="image/x-icon" />';
@@ -883,11 +873,12 @@ function base_metas() {
 	}
 	
 	$min_style_file = getTemplateDirPath ( get_theme () ) . "style.min.css";
+	$min_style_file_realpath = getTemplateDirPath ( get_theme (), true ) . "style.min.css";
 	$style_file = getTemplateDirPath ( get_theme () ) . "style.css";
-	
-	if (is_file ( $min_style_file )) {
+	$style_file_realpath = getTemplateDirPath ( get_theme (), true ) . "style.css";
+	if (is_file ( $min_style_file_realpath )) {
 		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
-	} else if (is_file ( $style_file )) {
+	} else if (is_file ( $style_file_realpath )) {
 		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
 	}
 	echo "\r\n";
@@ -915,12 +906,7 @@ function base_metas() {
 			echo "\r\n";
 		}
 	}
-	$zoom = Settings::get ( "zoom" );
-	if ($zoom === false) {
-		setconfig ( "zoom", 100 );
-		$zoom = 100;
-	}
-	
+
 	if (! Settings::get ( "disable_custom_layout_options" )) {
 		$font = Settings::get ( "default-font" );
 		if ($font == "google") {
@@ -934,7 +920,6 @@ function base_metas() {
 		echo "
 <style type=\"text/css\">
 body{
-zoom:" . $zoom . "%;
 font-family:" . $font . ";
 font-size:" . Settings::get ( "font-size" ) . ";
 background-color:" . Settings::get ( "body-background-color" ) . ";

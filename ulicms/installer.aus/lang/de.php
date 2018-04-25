@@ -35,8 +35,8 @@ define ( "TRANSLATION_MYSQL_PREFIX", "MySQL Präfix" );
 define ( "TRANSLATION_INSTALL_DEMO_DATA", "Installiere zusätzliche Demodaten" );
 define ( "TRANSLATION_INSTALL_X_OF_Y", "Installiere Datei %x% von %y%" );
 define ( "TRANSLATION_BUILD_DATABASE", "Datenbank aufbauen" );
-define ( "TRANSLATION_CREATE_CMS_CONFIG_PHP", "Erstelle cms-config.php" );
-define ( "TRANSLATION_WRITE_CMS_CONFIG_FAILED", "Speichern der cms-config.php fehlgeschlagen.<br/>" . "Bitte erstellen Sie die Datei cms-config.php und fügen Sie den folgenden Code darin ein." );
+define ( "TRANSLATION_CREATE_CMS_CONFIG_PHP", "Erstelle CMSConfig.php" );
+define ( "TRANSLATION_WRITE_CMS_CONFIG_FAILED", "Speichern der CMSConfig.php fehlgeschlagen.<br/>" . "Bitte erstellen Sie die Datei CMSConfig.php und fügen Sie den folgenden Code darin ein." );
 define ( "TRANSLATION_LAST_STEP", "Dies ist der letzte Schritt der Installation. Bitte löschen Sie den \"installer\" Ordner von ihrem Server.<br/>
 		Danach können Sie sich in UliCMS ausloggen..<br/><br/>
 		<a href=\"index.php?submit_form=LoginToBackend\">Gehe zur Anmeldung</a>" );

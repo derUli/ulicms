@@ -47,7 +47,7 @@ add_hook ( "after_set_locale_by_language" );
 
 require_once "../templating.php";
 
-$cfg = new config ();
+$cfg = new CMSConfig ();
 if (isset ( $cfg->ip_whitelist ) and is_array ( $cfg->ip_whitelist ) and count ( $cfg->ip_whitelist ) > 0 and ! faster_in_array ( get_ip (), $cfg->ip_whitelist )) {
 	translate ( "login_from_ip_not_allowed" );
 	die ();
@@ -55,7 +55,6 @@ if (isset ( $cfg->ip_whitelist ) and is_array ( $cfg->ip_whitelist ) and count (
 require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 
-require_once "../version.php";
 require_once "inc/logincheck.php";
 
 define ( "_SECURITY", true );

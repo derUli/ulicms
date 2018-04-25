@@ -6,10 +6,11 @@ class FormController extends Controller {
 		$subject = $_POST ["subject"];
 		$category_id = $_POST ["category"];
 		$fields = $_POST ["fields"];
+		$required_fields = $_POST ["required_fields"];
 		$mail_from_field = $_POST ["mail_from_field"];
 		$target_page_id = $_POST ["target_page_id"];
 		
-		Forms::createForm ( $name, $email_to, $subject, $category_id, $fields, $mail_from_field, $target_page_id );
+		Forms::createForm ( $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id );
 		Request::redirect ( ModuleHelper::buildActionURL ( "forms" ) );
 	}
 	public function updatePost() {
@@ -19,10 +20,12 @@ class FormController extends Controller {
 		$subject = $_POST ["subject"];
 		$category_id = $_POST ["category"];
 		$fields = $_POST ["fields"];
+		
+		$required_fields = $_POST ["required_fields"];
 		$mail_from_field = $_POST ["mail_from_field"];
 		$target_page_id = $_POST ["target_page_id"];
 		
-		Forms::editForm ( $id, $name, $email_to, $subject, $category_id, $fields, $mail_from_field, $target_page_id );
+		Forms::editForm ( $id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id );
 		Request::redirect ( ModuleHelper::buildActionURL ( "forms" ) );
 	}
 	public function deletePost() {

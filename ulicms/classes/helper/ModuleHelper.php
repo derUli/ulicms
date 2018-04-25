@@ -70,8 +70,8 @@ class ModuleHelper
         $retval = array();
         $modules = getAllModules();
         foreach ($modules as $module) {
-            $noembedfile1 = Path::Resolve("ULICMS_ROOT/content/modules/$module/.noembed");
-            $noembedfile2 = Path::Resolve("ULICMS_ROOT/content/modules/$module/noembed.txt");
+            $noembedfile1 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed");
+            $noembedfile2 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt");
             
             $embed_attrib = true;
             
@@ -100,8 +100,8 @@ class ModuleHelper
     public static function isEmbedModule($module)
     {
         $retval = true;
-        $noembedfile1 = Path::Resolve("ULICMS_ROOT/content/modules/$module/.noembed");
-        $noembedfile2 = Path::Resolve("ULICMS_ROOT/content/modules/$module/noembed.txt");
+        $noembedfile1 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/.noembed");
+        $noembedfile2 = Path::Resolve("ULICMS_DATA_STORAGE_ROOT/content/modules/$module/noembed.txt");
         
         $embed_attrib = true;
         
@@ -116,6 +116,26 @@ class ModuleHelper
         return $retval;
     }
 
+	public static function getBaseUrl($suffix = "/"){
+		$domain = get_http_host();
+		
+		$dirname = dirname(get_request_uri());
+        
+        // Replace backslashes with slashes (Windows)
+        $dirname = str_replace("\\", "/", $dirname);
+        
+        if (is_admin_dir()) {
+            $dirname = dirname(dirname($dirname . "/.."));
+        }
+        				
+		// Replace backslashes with slashes (Windows)
+        $dirname = str_replace("\\", "/", $dirname);
+		
+		$dirname = rtrim($dirname, "/");
+		
+		return get_site_protocol() . $domain . $dirname . $suffix;
+	}
+	
     public static function getFullPageURLByID($page_id = null)
     {
         if (! $page_id) {
@@ -148,10 +168,10 @@ class ModuleHelper
         if (! endsWith($dirname, "/")) {
             $dirname = $dirname . "/";
         }
-                
-        // Replace backslashes with slashes (Windows)
+		
+		// Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
-        
+		
         $currentLanguage = isset($_SESSION["language"]) ? $_SESSION["language"] : Settings::get("default_language");
         if (! $domain) {
             if ($page->language != $currentLanguage) {

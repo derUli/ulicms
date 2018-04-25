@@ -7,6 +7,7 @@ ulicms/content/log
 ulicms/content/tmp
 !ulicms/content/log/.htaccess
 cms-config.php
+CMSConfig.php
 ulicms/packages
 ulicms/cms-config.php
 *#

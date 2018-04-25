@@ -130,19 +130,19 @@ class Video extends Model {
 		if ($this->getId ()) {
 			if ($deletePhysical) {
 				if ($this->getMp4File ()) {
-					$file = Path::resolve ( "ULICMS_ROOT/content/videos/" . basename ( $this->getMP4File () ) );
+					$file = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename ( $this->getMP4File () ) );
 					if (file_exists ( $file )) {
 						@unlink ( $file );
 					}
 				}
 				if ($this->getOggFile ()) {
-					$file = Path::resolve ( "ULICMS_ROOT/content/videos/" . basename ( $this->getOggFile () ) );
+					$file = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename ( $this->getOggFile () ) );
 					if (file_exists ( $file )) {
 						@unlink ( $file );
 					}
 				}
 				if ($this->getWebmFile ()) {
-					$file = Path::resolve ( "ULICMS_ROOT/content/videos/" . basename ( $this->getWebmFile () ) );
+					$file = Path::resolve ( "ULICMS_DATA_STORAGE_ROOT/content/videos/" . basename ( $this->getWebmFile () ) );
 					if (file_exists ( $file )) {
 						@unlink ( $file );
 					}
@@ -155,26 +155,29 @@ class Video extends Model {
 		}
 	}
 	public function getHtml() {
+		$video_dir = self::VIDEO_DIR;
+		if (defined ( "ULICMS_DATA_STORAGE_URL" )) {
+			$video_dir = Path::resolve ( "ULICMS_DATA_STORAGE_URL/$video_dir" ) . "/";
+		}
 		$html = '<video width="' . $this->width . '" height="' . $this->height . '" controls>';
 		if (! empty ( $this->mp4_file )) {
-			$html .= '<source src="' . self::VIDEO_DIR . htmlspecialchars ( $this->mp4_file ) . '" type="video/mp4">';
+			$html .= '<source src="' . $video_dir . htmlspecialchars ( $this->mp4_file ) . '" type="video/mp4">';
 		}
 		if (! empty ( $this->ogg_file )) {
-			$html .= '<source src="' . self::VIDEO_DIR . htmlspecialchars ( $this->ogg_file ) . '" type="video/ogg">';
+			$html .= '<source src="' . $video_dir . htmlspecialchars ( $this->ogg_file ) . '" type="video/ogg">';
 		}
 		if (! empty ( $this->webm_file )) {
-			$html .= '<source src="' . self::VIDEO_DIR . htmlspecialchars ( $this->webm_file ) . '" type="video/webm">';
+			$html .= '<source src="' . $video_dir . htmlspecialchars ( $this->webm_file ) . '" type="video/webm">';
 		}
 		$html .= get_translation ( "no_html5" );
 		if (! empty ( $this->mp4_file ) or ! empty ( $this->ogg_file ) or ! empty ( $this->webm_file )) {
 			$preferred = (! empty ( $this->mp4_file ) ? $this->mp4_file : (! empty ( $this->ogg_file ) ? $this->ogg_file : $this->webm_file));
-			
-			$html .= '<br/><a href="' . self::VIDEO_DIR . $preferred . '">' . get_translation ( "DOWNLOAD_VIDEO_INSTEAD" ) . '</a>';
+			$html .= '<br/><a href="' . $video_dir . $preferred . '">' . get_translation ( "DOWNLOAD_VIDEO_INSTEAD" ) . '</a>';
 		}
 		$html .= "</video>";
 		return $html;
 	}
-	public function html() {
+	public function render() {
 		echo $this->getHtml ();
 	}
 }

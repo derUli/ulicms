@@ -135,14 +135,14 @@ if (count ( getThemeList () ) === 0) {
 	throw new Exception ( "Keine Themes vorhanden!" );
 }
 
-if (! is_dir ( getTemplateDirPath ( $theme ) )) {
-	throw new Exception ( "Das aktivierte Theme existiert nicht!" );
+if (! is_dir ( getTemplateDirPath ( $theme, true ) )) {
+	throw new Exception ( "The selected theme doesn't exists!" );
 }
 
 add_hook ( "before_functions" );
 
-if (file_exists ( getTemplateDirPath ( $theme ) . "functions.php" )) {
-	include getTemplateDirPath ( $theme ) . "functions.php";
+if (file_exists ( getTemplateDirPath ( $theme, true ) . "functions.php" )) {
+	include getTemplateDirPath ( $theme, true ) . "functions.php";
 }
 
 add_hook ( "after_functions" );
@@ -209,7 +209,7 @@ if ($html_file) {
 			"top.php" 
 	);
 	foreach ( $top_files as $file ) {
-		$file = getTemplateDirPath ( $theme ) . $file;
+		$file = getTemplateDirPath ( $theme, true ) . $file;
 		if (file_exists ( $file )) {
 			require $file;
 			break;
@@ -241,7 +241,7 @@ if ($html_file) {
 			"bottom.php" 
 	);
 	foreach ( $bottom_files as $file ) {
-		$file = getTemplateDirPath ( $theme ) . $file;
+		$file = getTemplateDirPath ( $theme, true ) . $file;
 		if (file_exists ( $file )) {
 			require $file;
 			break;
