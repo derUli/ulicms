@@ -41,12 +41,10 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 	<table class="tablesorter">
 		<thead>
 			<tr>
-				<th style="min-width: 50px;"><a href="?action=categories&order=id"><?php translate("id");?> </a></th>
+				<th style="min-width: 50px;"><?php translate("id");?></th>
 
-				<th style="min-width: 200px;"><a
-					href="?action=categories&order=name"><?php translate("name");?></a></th>
-				<th style="min-width: 200px;" class="hide-on-mobile"><a
-					href="?action=categories&order=description"><?php translate("description");?> </a></th>
+				<th style="min-width: 200px;"><?php translate("name");?></th>
+				<th style="min-width: 200px;" class="hide-on-mobile"><?php translate("description");?></th>
 				<?php
 		if ($acl->hasPermission ( "categories_edit" )) {
 			?>
@@ -86,7 +84,7 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 				
 				if ($category ["id"] != 1) {
 					?>
-<!-- @FIXME. "Wirklich löschen?" ist hart gecodet -->
+<!-- FIXME. "Wirklich löschen?" ist hart gecodet -->
 				<td style="text-align: center;"><form
 						action="?sClass=CategoryController&sMethod=delete&del=<?php
 					
@@ -157,13 +155,13 @@ $("form.delete-form").ajaxForm(ajax_options);
 <h2><?php translate("create_category");?></h2>
 <?php echo ModuleHelper::buildMethodCallForm("CategoryController", "create");?>
 <p>
-	<?php translate("name");?>
+	<strong><?php translate("name");?>*</strong>
 		<input type="text" name="name" value="" required>
 
 </p>
 
 <p>
-	<?php translate("description");?>
+	<strong><?php translate("description");?></strong>
 		<br />
 	<textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
 </p>
@@ -189,7 +187,7 @@ $("form.delete-form").ajaxForm(ajax_options);
 <input type="hidden" name="id"
 	value="<?php echo intval($_GET["edit"])?>">
 <p>
-	<?php translate("name");?>
+	<strong><?php translate("name");?>*</strong>
 		<input type="text" name="name" required
 		value="<?php
 			
@@ -197,7 +195,8 @@ $("form.delete-form").ajaxForm(ajax_options);
 			?>">
 </p>
 <p>
-	<?php translate("description");?>
+	
+	<strong><?php translate("description");?></strong>
 		<br />
 	<textarea cols="50" name="description" rows="5" maxlength="255"><?php
 			echo htmlspecialchars ( Categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );

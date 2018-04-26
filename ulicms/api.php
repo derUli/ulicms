@@ -112,7 +112,7 @@ function set_format($format) {
 	$_GET ["format"] = trim ( $format, "." );
 }
 function get_jquery_url() {
-	$url = "//code.jquery.com/jquery-1.11.3.min.js";
+	$url = "admin/scripts/jquery.min.js";
 	$url = apply_filter ( $url, "jquery_url" );
 	return $url;
 }
@@ -258,9 +258,12 @@ function isCLI() {
  *         @source http://gravatar.com/site/implement/images/php/
  */
 function get_gravatar($email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array()) {
-	$url = 'http://www.gravatar.com/avatar/';
-	$url .= md5 ( strtolower ( trim ( $email ) ) );
-	$url .= "?s=$s&d=$d&r=$r";
+    // Nach dem in Kraft treten, der Datenschutz-Grundverordnung 2018
+    // wird die Nutzung von Gravatar in Deutschland illegal
+    // daher wird an dieser Stelle die Gravatar-Integration gekappt
+    // und stattdessen wird ein statisches Platzhalter-Bild angezeigt
+    // Bis ein integrierter Avatar-Upload in UliCMS implementiert ist.
+	$url = ModuleHelper::getBaseUrl("/admin/gfx/no_avatar.png");
 	if ($img) {
 		$url = '<img src="' . $url . '"';
 		foreach ( $atts as $key => $val )
@@ -518,7 +521,6 @@ function setLanguageByDomain() {
 	$domainMapping = Settings::mappingStringToArray ( $domainMapping );
 	foreach ( $domainMapping as $domain => $language ) {
 		$givenDomain = $_SERVER ["HTTP_HOST"];
-		
 		if ($domain == $givenDomain and faster_in_array ( $language, getAllLanguages () )) {
 			$_SESSION ["language"] = $language;
 			return true;
@@ -1321,7 +1323,6 @@ function uninstall_module($name, $type = "module") {
 
 // returns version number of UliCMS Core
 function cms_version() {
-	require_once "version.php";
 	$v = new UliCMSVersion ();
 	return implode ( ".", $v->getInternalVersion () );
 }

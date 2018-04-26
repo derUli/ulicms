@@ -26,7 +26,6 @@ if (! $acl->hasPermission("install_packages")) {
 	<?php translate ( "phardata_not_available" );?></p>
 <?php
     } else {
-        include_once "../version.php";
         $version = new UliCMSVersion();
         $internalVersion = implode(".", $version->getInternalVersion());
         $pkg_src = str_replace("{version}", $internalVersion, $pkg_src);

@@ -23,9 +23,9 @@ if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_G
 		value="edit_admin"> <input type="hidden" name="id"
 		value="<?php
         echo $row->id;
-        ?>"> <br /> <br /> <strong><?php translate("username");?></strong><br />
+        ?>"> <br /> <strong><?php translate("username");?>*</strong><br />
 	<input type="text" name="admin_username"
-		value="<?php echo real_htmlspecialchars($row->username);?>"
+		value="<?php echo real_htmlspecialchars($row->username);?>" required
 		<?php
         if (! $acl->hasPermission("users")) {
             ?>

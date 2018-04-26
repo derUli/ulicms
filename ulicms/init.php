@@ -101,7 +101,7 @@ if (file_exists($mobile_detect_as_module)) {
     include_once $mobile_detect_as_module;
 }
 
-include_once dirname(__file__) . DIRECTORY_SEPERATOR . "version.php";
+include_once dirname(__file__) . DIRECTORY_SEPERATOR . "UliCMSVersion.php";
 
 function exception_handler($exception)
 {

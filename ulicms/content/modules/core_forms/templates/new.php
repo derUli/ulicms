@@ -12,17 +12,17 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" 
 <h1><?php translate("create_form");?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("FormController", "create");?>
 <p>
-	<strong><?php translate("name");?></strong><br /> <input type="text"
+	<strong><?php translate("name");?>*</strong><br /> <input type="text"
 		value="" name="name" required />
 </p>
 
 <p>
-	<strong><?php translate("email_to");?></strong><br /> <input
+	<strong><?php translate("email_to");?>*</strong><br /> <input
 		type="email" value="" name="email_to" required />
 </p>
 
 <p>
-	<strong><?php translate("subject");?></strong><br /> <input type="text"
+	<strong><?php translate("subject");?>*</strong><br /> <input type="text"
 		value="" name="subject" required />
 </p>
 <p>
@@ -35,7 +35,10 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" 
 	<strong><?php translate("fields");?></strong><br />
 	<textarea name="fields" rows="10"></textarea>
 </p>
-
+<p>
+	<strong><?php translate("required_fields");?></strong><br />
+	<textarea name="required_fields" rows="10"></textarea>
+</p>
 
 <p>
 	<strong><?php translate("mail_from_field");?></strong><br /> <input

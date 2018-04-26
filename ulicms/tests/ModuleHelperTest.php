@@ -14,9 +14,10 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         Settings::set("default_language", $this->default_language);
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['HTTPS']);
         unset($_SERVER[$_SESSION["language"]]);
+        unset($_SERVER["REQUEST_URI"]);
         @session_destroy();
     }
 
@@ -144,13 +145,24 @@ class ModuleHelperTest extends PHPUnit_Framework_TestCase
     public function testGetFullPageURLByID()
     {
         $_SESSION["language"] = "de";
-        $_SERVER['SERVER_NAME'] = "company.com";
+        $_SERVER['HTTP_HOST'] = "company.com";
         $this->assertEquals("http://company.com/willkommen.html", ModuleHelper::getFullPageURLByID(1));
         
         $_SERVER['HTTPS'] = "on";
         $this->assertEquals("https://company.com/willkommen.html", ModuleHelper::getFullPageURLByID(1));
         
-        unset($_SERVER['SERVER_NAME']);
+        unset($_SERVER['HTTP_HOST']);
         unset($_SERVER['HTTPS']);
+    }
+
+    public function testGetBaseUrl()
+    {
+        $_SERVER['HTTP_HOST'] = "company.com";
+        $_SERVER["REQUEST_URI"] = "/foo.png";
+        $this->assertEquals("http://company.com/", ModuleHelper::getBaseUrl());
+        $this->assertEquals("http://company.com/admin/gfx/logo.png", ModuleHelper::getBaseUrl("/admin/gfx/logo.png"));
+        $_SERVER["REQUEST_URI"] = "/subdir/foo.png";
+        $this->assertEquals("http://company.com/subdir/", ModuleHelper::getBaseUrl());
+        $this->assertEquals("http://company.com/subdir/admin/gfx/logo.png", ModuleHelper::getBaseUrl("/admin/gfx/logo.png"));
     }
 }

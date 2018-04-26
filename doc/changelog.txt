@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3 =====
+﻿===== Neues in UliCMS 2018.3 =====
 
 Neue Features:
 + Neue Mailversandmethode "PHPMailer", Mailversand per SMTP
@@ -16,8 +16,13 @@ Neue Features:
 + CrawlerDetect auf Version 1.2.62 aktualisiert
 + Mobile_Detect aktualisiert auf Version 2.8.31
 + Build Datum von Paketen wird angezeigt
++ Build Datum von UliCMS wird unter "Info" angezeigt
++ Formular System: Pflichtfelder können festgelegt werden
++ Pflichtfelder im Backend sind nun mit Sternchen als solche markiert
++ "Auto Embed" ist nun per Default deaktiviert
 
 Neue API-Funktionen:
+* ModuleHelper::getBaseUrl($suffix)
 
 Neue HTML-Helper:
 * UliCMS\HTML\Style\FromExternalFile($href, $media = null, $htmlAttributes = array())
@@ -47,11 +52,13 @@ Verbesserungen:
 falls kein Feld für die E-Mail Adresse gesetzt ist.
 + Performance der Installation von mehrere Paketen und Patches optimiert
 + cms-config.php in CMSConfig.php umbenannt
+* JsTranslation Übersetzungsnamen nun in CamelCase (z.B. Translation.AskForDelete, statt Translation.ASK_FOR_DELETE)
 
 Entfernte Features:
 - Zugriff von IP-Adressen die auf der Blacklist von spamhaus.org gelistet sind verweigern.
 - YaLinqo entfernt
 - Design Option "Zoom" entfernt
+- Gravatar Feature deaktiviert wegen Datenschutz-Grundverordnung 2018
 
 Bugfixes:
 * "Custom Types" Feature war defekt

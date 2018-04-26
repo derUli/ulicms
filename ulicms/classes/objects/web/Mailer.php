@@ -74,6 +74,8 @@ class Mailer {
 			$mailer->Port = Settings::get ( "smtp_port", "int" );
 		}
 		$mailer->XMailer = Settings::get ( "show_meta_generator" ) ? "UliCMS" : "";
+		$mailer->CharSet = "UTF-8";
+		
 		
 		$mailer = apply_filter ( $mailer, "php_mailer_instance" );
 		return $mailer;

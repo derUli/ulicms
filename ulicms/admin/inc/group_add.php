@@ -6,7 +6,7 @@ $languages = Language::getAllLanguages ();
 <form action="?action=groups" method="post">
 <?php csrf_token_html ();?>
 	<p>
-		<strong><?php translate("name");?> </strong> <input type="text"
+		<strong><?php translate("name");?>*</strong> <input type="text"
 			required="required" name="name" value="">
 	</p>
 	<h3><?php translate("permissions");?></h3>

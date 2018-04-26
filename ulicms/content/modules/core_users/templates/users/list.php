@@ -74,7 +74,7 @@ if ($acl->hasPermission("users")) {
             echo '<tr id="dataset-' . $row->getId() . '">';
             echo "<td style=\"width:40px;\">" . $row->getId() . "</td>";
             echo "<td>";
-            echo '<img src="' . get_gravatar($row->getEmail(), 26) . '" alt="Avatar von ' . real_htmlspecialchars($row->getUsername()) . '"> ';
+            echo '<img src="' . get_gravatar($row->getEmail(), 26) . '" alt="Avatar von ' . real_htmlspecialchars($row->getUsername()) . '" style="width:26px;"> ';
             echo real_htmlspecialchars($row->getUsername()) . "</td>";
             echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars($row->getLastName()) . "</td>";
             echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars($row->getFirstname()) . "</td>";

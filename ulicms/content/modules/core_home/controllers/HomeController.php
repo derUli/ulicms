@@ -15,8 +15,8 @@ class HomeController extends Controller {
 		while ( $row = Database::fetchObject ( $lastModfiedPages ) ) {
 			$model->lastModfiedPages [] = $row;
 		}
-		$admins_query = Database::query ( "SELECT id, username FROM " . tbname ( "users" ) );
-		while ( $row = Database::fetchObject ( $admins_query ) ) {
+		$adminsQuery = Database::query ( "SELECT id, username FROM " . tbname ( "users" ) );
+		while ( $row = Database::fetchObject ( $adminsQuery ) ) {
 			$admins [$row->id] = $row->username;
 		}
 		$model->admins = $admins;
