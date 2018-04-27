@@ -2,6 +2,7 @@
 
 Neue Features:
 + CLI-Tools zur Verwaltung der Settings
++ CLI-Tool zur Anwendung von Datenbank-Migrationen
 
 ===== Neues in UliCMS 2018.3 =====
 
