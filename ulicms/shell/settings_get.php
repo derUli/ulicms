@@ -26,9 +26,10 @@ if (count($argv) != 1) {
     usage();
 } else {
     $setting = Settings::get($argv[0]);
-    if ($setting) {
+    if ($setting !== false) {
         echo $setting;
     } else {
         echo "[NULL]";
     }
+	echo "\n";
 }
