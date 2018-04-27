@@ -1,4 +1,9 @@
-﻿===== Neues in UliCMS 2018.3 =====
+﻿===== Neues in UliCMS 2018.3.1 =====
+
+Neue Features:
++ CLI-Tools zur Verwaltung der Settings
+
+===== Neues in UliCMS 2018.3 =====
 
 Neue Features:
 + Neue Mailversandmethode "PHPMailer", Mailversand per SMTP
