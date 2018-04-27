@@ -24,7 +24,8 @@ if (count($argv) == 0) {
 }
 
 $command = $argv[0];
-$component = count($argv) > 1 ? $argv[1] : null;
+$component = count($argv) >= 2 ? $argv[1] : null;
+$directory = count($argv) >= 3 ? $argv[2] : null;
 $stop = count($argv) >= 4 ? $argv[3] : null;
 
 if ($command == "list") {
@@ -36,7 +37,6 @@ if ($command == "list") {
     exit();
 }
 if ($command == "reset") {
-    
     $migrator = new DBMigrator($component, getcwd());
     if ($component) {
         $migrator->resetDBTrack();
@@ -46,20 +46,20 @@ if ($command == "reset") {
     exit();
 }
 if ($command == "up") {
-    if (! $component) {
+    if (! $component or ! $directory) {
         usage();
     }
-    $folder = Path::resolve($argv[2] . "/up");
+    $folder = Path::resolve($directory . "/up");
     $migrator = new DBMigrator($component, $folder);
     $migrator->migrate($stop);
     exit();
 }
 
 if ($command == "down") {
-    if (! $component) {
+    if (! $component or ! $directory) {
         usage();
     }
-    $folder = Path::resolve($argv[2] . "/down");
+    $folder = Path::resolve($directory . "/down");
     $migrator = new DBMigrator($component, $folder);
     $migrator->rollback($stop);
     exit();
