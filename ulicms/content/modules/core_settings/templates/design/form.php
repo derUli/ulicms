@@ -207,6 +207,7 @@ div#google-fonts {
     }
     ?>
 			</select>
+			<div class="voffset3 alert alert-warning"><?php translate("google_fonts_privacy_warning");?></div>
 			</div></td>
 	</tr>
 	<tr>
@@ -294,7 +295,7 @@ div#google-fonts {
 <p>
 	<button type="submit" class="btn btn-primary voffset3" name="submit"><?php translate("save_changes");?></button>
 </p>
-</form>
+<?php echo ModuleHelper::endForm();?>
 
 <?php
     $translation = new JSTranslation();

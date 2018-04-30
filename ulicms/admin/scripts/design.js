@@ -12,7 +12,6 @@ function onChangeDefaultFont() {
 	if (value == "google") {
 		$("div#google-fonts").slideDown();
 	} else {
-
 		$("div#google-fonts").slideUp();
 	}
 }
