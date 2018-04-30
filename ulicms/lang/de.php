@@ -276,7 +276,7 @@ define ( "TRANSLATION_SMTP_SETTINGS", "SMTP Einstellungen" );
 define ( "TRANSLATION_HOSTNAME", "Hostname" );
 define ( "TRANSLATION_PORT", "Port" );
 define ( "TRANSLATION_AUTHENTIFACTION_REQUIRED", "Authentifizierung benötigt" );
-define ( "TRANSLATION_USER", "User" );
+define ( "TRANSLATION_USER", "Benutzer" );
 define ( "TRANSLATION_PASSWORD", "Passwort" );
 
 // Update
