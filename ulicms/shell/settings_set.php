@@ -28,7 +28,7 @@ if (count($argv) != 2) {
 } else {
     $name = trim($argv[0]);
     $value = trim($argv[1]);
-    if($value === "[NULL]"){
+    if(strtoupper($value) === "[NULL]"){
         Settings::delete($name);
     } else {
         Settings::set($name, $value);
