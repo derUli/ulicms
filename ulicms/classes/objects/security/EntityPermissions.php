@@ -13,7 +13,7 @@ class EntityPermissions
 
     private $only_admins_can_edit = false;
 
-    private $only_groups_can_edit = false;
+    private $only_group_can_edit = false;
 
     private $only_owner_can_edit = false;
 
@@ -95,7 +95,8 @@ class EntityPermissions
             $this->owner_group_id,
             $this->only_admins_can_edit,
             $this->only_group_can_edit,
-            $this->only_owner_can_edit
+            $this->only_owner_can_edit,
+            $this->only_others_can_edit
         ), true);
     }
 

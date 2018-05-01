@@ -1,9 +1,10 @@
 <?php
-$classes = array (
-		"ACL",
-		"Encryption" 
+$classes = array(
+    "ACL",
+    "Encryption",
+    "EntityPermissions"
 );
-foreach ( $classes as $class ) {
-	require_once dirname ( __FILE__ ) . "/$class.php";
+foreach ($classes as $class) {
+    require_once dirname(__FILE__) . "/$class.php";
 }
 
