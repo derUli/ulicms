@@ -19,10 +19,21 @@ class EntityPermissions
 
     private $only_others_can_edit = false;
 
-    public function __construct($entityName = null, $entityId = null)
+    public function __construct($entityName = null, $entityId = null, $user_id = null, $group_id = null)
     {
         if ($entityName !== null and entityId !== null) {
             $this->loadByEntityNameAndId($entityName, $entityId);
+            // if there is no dataset create a new one
+            if (! $this->entity_id) {
+                $this->entity_name = $entityName;
+                $this->entity_id = $entityId;
+                if ($user_id) {
+                    $this->owner_user_id = $user_id;
+                }
+                if ($group_id) {
+                    $this->owner_group_id = $group_id;
+                }
+            }
         }
     }
 
@@ -47,10 +58,10 @@ class EntityPermissions
             $this->owner_user_id = $data->owner_user_id;
             $this->owner_group_id = $data->owner_group_id;
             
-            $this->only_admins_can_edit = $data->only_admins_can_edit;
-            $this->only_group_can_edit = $data->only_group_can_edit;
-            $this->only_owner_can_edit = $data->only_owner_can_edit;
-            $this->only_others_can_edit = $data->only_others_can_edit;
+            $this->only_admins_can_edit = boolval($data->only_admins_can_edit);
+            $this->only_group_can_edit = boolval($data->only_group_can_edit);
+            $this->only_owner_can_edit = boolval($data->only_owner_can_edit);
+            $this->only_others_can_edit = boolval($data->only_others_can_edit);
         }
     }
 
@@ -64,29 +75,90 @@ class EntityPermissions
         $this->fillVars($query);
     }
 
+    // Alias for loadByEntityNameAndId()
+    public function load($entityName, $entityId)
+    {
+        $this->loadByEntityNameAndId($entityName, $entityId);
+    }
+
     public function save()
     {
-        if (is_null($this->id)) {
-            $this->insert();
-        } else {
-            $this->update();
-        }
-    }
-
-    protected function insert()
-    {
-        throw new NotImplementedException("insert not implemented");
-    }
-
-    protected function update()
-    {
-        throw new NotImplementedException("update not implemented");
+        Database::pQuery("REPLACE INTO `{prefix}entity_permissions`
+                        (entity_name, entity_id, owner_user_id, 
+                         owner_group_id, only_admins_can_edit, 
+                         only_group_can_edit, only_owner_can_edit, 
+                         only_others_can_edit) 
+                        values(?, ?, ?, ?, ?, ?, ?, ?)", array(
+            $this->entity_name,
+            $this->entity_id,
+            $this->owner_user_id,
+            $this->owner_group_id,
+            $this->only_admins_can_edit,
+            $this->only_group_can_edit,
+            $this->only_owner_can_edit
+        ), true);
     }
 
     public function delete()
     {
-        throw new NotImplementedException("delete not implemented");
+        if (is_null($this->entity_name) or is_null($this->entity_id)) {
+            return;
+        }
+        Database::pQuery("DELETE FROM `{prefix}entity_permissions` where entity_name = ? and entity_id = ?", array(
+            $this->entity_name,
+            $this->entity_id
+        ), true);
     }
-    
-    // TODO: Implement Getter and Setter
+
+    public function getEntityName()
+    {
+        return $this->entity_name;
+    }
+
+    public function getEntityId()
+    {
+        return $this->entity_id;
+    }
+
+    public function getOwnerUserId()
+    {
+        return $this->owner_user_id;
+    }
+
+    public function getOwnerGroupId()
+    {
+        return $this->owner_group_id;
+    }
+
+    public function getEditRestriction($object)
+    {
+        $varName = "only_{$object}_can_edit";
+        return (isset($this->$varName) ? $this->$varName : false);
+    }
+
+    public function setEntityName($value)
+    {
+        $this->entity_name = strval($value);
+    }
+
+    public function setEntityId($value)
+    {
+        $this->entity_id = intval($value);
+    }
+
+    public function setOwnerUserId($value)
+    {
+        $this->owner_user_id = intval($value);
+    }
+
+    public function setOwnerGroupId($value)
+    {
+        $this->owner_group_id = intval($value);
+    }
+
+    public function setEditRestriction($object, $value)
+    {
+        $varName = "only_{$object}_can_edit";
+        $this->$varName = boolval($value);
+    }
 }
