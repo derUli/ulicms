@@ -47,17 +47,14 @@ if (defined("_SECURITY")) {
             } else if (! $is_owner and $pages_activate_others) {
                 $can_active_this = true;
             }
-                        
+            
             $owner_group = $permissions->getOwnerGroupId();
             $current_group = $_SESSION["group_id"];
             
             $can_edit_this = false;
             
             // TODO: extract this to a method
-            if ($permissions->getEditRestriction("group") or
-                $permissions->getEditRestriction("admins") or
-                $permissions->getEditRestriction("owner") or
-                $permissions->getEditRestriction("other")) {
+            if ($permissions->getEditRestriction("group") or $permissions->getEditRestriction("admins") or $permissions->getEditRestriction("owner") or $permissions->getEditRestriction("other")) {
                 if ($permissions->getEditRestriction("group") and $owner_group == $current_group) {
                     $can_edit_this = true;
                 } else if ($permissions->getEditRestriction("admins") and is_admin()) {
@@ -75,7 +72,7 @@ if (defined("_SECURITY")) {
                 }
             }
             
-            // admins are gods
+            // admins are flying spaghetti monsters
             if (is_admin()) {
                 $can_edit_this = true;
             }
@@ -958,6 +955,7 @@ function openArticleImageSelectWindow(field) {
                 echo htmlspecialchars($row->content);
                 ?></textarea>
 		<?php
+                // FIXME: move the javascript code below into a *.js file
                 $editor = get_html_editor();
                 if ($editor === "ckeditor") {
                     ?>
@@ -1049,42 +1047,9 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		        tabMode: "shift"});
 </script>
 <?php }?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	
 	
 	
 	
@@ -1137,6 +1102,6 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
         ?>
 		<?php
     } else {
-        noperms ();
+        noperms();
 	}
 }

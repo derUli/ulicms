@@ -476,24 +476,27 @@ if ($acl->hasPermission("pages")) {
                 echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone") . "\" title=\"" . get_translation("clone") . "\"></a></td>";
             }
             $autor = $row->autor;
-            $is_owner = $autor == get_user_id();
+            
+            $permissions = new EntityPermissions("content", $row->id);
+            $is_owner = $permissions->getOwnerUserId() == get_user_id();
             
             $pages_edit_own = $acl->hasPermission("pages_edit_own");
             $pages_edit_others = $acl->hasPermission("pages_edit_others");
             
-            $owner_group = $row->group_id;
+            $owner_group = $permissions->getOwnerGroupId();
             $current_group = $_SESSION["group_id"];
             
             $can_edit_this = false;
             
-            if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit or $row->only_others_can_edit) {
-                if ($row->only_group_can_edit and $owner_group == $current_group) {
+            // TODO: extract this to a method
+            if ($permissions->getEditRestriction("group") or $permissions->getEditRestriction("admins") or $permissions->getEditRestriction("owner") or $permissions->getEditRestriction("other")) {
+                if ($permissions->getEditRestriction("group") and $owner_group == $current_group) {
                     $can_edit_this = true;
-                } else if ($row->only_admins_can_edit and is_admin()) {
+                } else if ($permissions->getEditRestriction("admins") and is_admin()) {
                     $can_edit_this = true;
-                } else if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
+                } else if ($permissions->getEditRestriction("owner") and $is_owner and $pages_edit_own) {
                     $can_edit_this = true;
-                } else if ($row->only_others_can_edit and $owner_group != $current_group and ! is_admin() and ! $is_owner) {
+                } else if ($permissions->getEditRestriction("others") and $owner_group != $current_group and ! is_admin() and ! $is_owner) {
                     $can_edit_this = true;
                 }
             } else {
@@ -504,7 +507,7 @@ if ($acl->hasPermission("pages")) {
                 }
             }
             
-            // admins are gods
+            // admins are flying spaghetti monsters  
             if (is_admin()) {
                 $can_edit_this = true;
             }
