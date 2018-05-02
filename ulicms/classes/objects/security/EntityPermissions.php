@@ -26,7 +26,7 @@ class EntityPermissions
             // if there is no dataset create a new one
             if (! $this->entity_id) {
                 $this->entity_name = $entityName;
-                $this->entity_id = $entityId;
+                $this->entity_id = intval($entityId);
                 if ($user_id) {
                     $this->owner_user_id = $user_id;
                 }
@@ -46,17 +46,17 @@ class EntityPermissions
             $this->owner_user_id = null;
             $this->owner_group_id = null;
             
-            $this->only_admins_can_edit = false;
-            $this->only_group_can_edit = false;
-            $this->only_owner_can_edit = false;
-            $this->only_others_can_edit = false;
+            $this->only_admins_can_edit = Settings::get("only_admins_can_edit", "bool");
+            $this->only_group_can_edit = Settings::get("only_group_can_edit", "bool");
+            $this->only_owner_can_edit = Settings::get("only_owner_can_edit", "bool");
+            $this->only_others_can_edit = Settings::get("only_others_can_edit", "bool");
         } else {
             $data = Database::fetchObject($result);
             $this->entity_name = $data->entity_name;
-            $this->entity_id = $data->entity_id;
+            $this->entity_id = intval($data->entity_id);
             
-            $this->owner_user_id = $data->owner_user_id;
-            $this->owner_group_id = $data->owner_group_id;
+            $this->owner_user_id = intval($data->owner_user_id);
+            $this->owner_group_id = intval($data->owner_group_id);
             
             $this->only_admins_can_edit = boolval($data->only_admins_can_edit);
             $this->only_group_can_edit = boolval($data->only_group_can_edit);
@@ -96,8 +96,7 @@ class EntityPermissions
             $this->only_admins_can_edit,
             $this->only_group_can_edit,
             $this->only_owner_can_edit,
-            $this->only_others_can_edit
-        ), true);
+            $this->only_others_can_edit), true);
     }
 
     public function delete()
@@ -161,5 +160,24 @@ class EntityPermissions
     {
         $varName = "only_{$object}_can_edit";
         $this->$varName = boolval($value);
+    }
+
+    public function getAll()
+    {
+        return $this->getAllEditRestrictions();
+    }
+
+    public function getAllEditRestrictions()
+    {
+        $result = array();
+        $classArray = (array) $this;
+        foreach ($classArray as $key => $value) {
+            preg_match("/only_([a-z]+)_can_edit/", $key, $matches);
+            if (count($matches) >= 2) {
+                $object = $matches[1];
+                $result[$object] = $value;
+            }
+        }
+        return $result;
     }
 }

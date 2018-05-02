@@ -64,7 +64,6 @@ class Page extends Content
     public $og_type = "";
 
     public $og_image = "";
-
     public $og_description = "";
 
     public $hidden = 0;
@@ -76,7 +75,7 @@ class Page extends Content
         if ($this->custom_data === null) {
             $this->custom_data = array();
         }
-        $this->permissions = new PagePermissions();
+        $this->permissions = new EntityPermissions("content");
     }
 
     protected function fillVarsByResult($result)
