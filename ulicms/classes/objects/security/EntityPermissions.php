@@ -46,10 +46,10 @@ class EntityPermissions
             $this->owner_user_id = null;
             $this->owner_group_id = null;
             
-            $this->only_admins_can_edit = Settings::get("only_admins_can_edit", "bool");
-            $this->only_group_can_edit = Settings::get("only_group_can_edit", "bool");
-            $this->only_owner_can_edit = Settings::get("only_owner_can_edit", "bool");
-            $this->only_others_can_edit = Settings::get("only_others_can_edit", "bool");
+            $this->only_admins_can_edit = boolval(Settings::get("only_admins_can_edit", "bool"));
+            $this->only_group_can_edit = boolval(Settings::get("only_group_can_edit", "bool"));
+            $this->only_owner_can_edit = boolval(Settings::get("only_owner_can_edit", "bool"));
+            $this->only_others_can_edit = boolval(Settings::get("only_others_can_edit", "bool"));
         } else {
             $data = Database::fetchObject($result);
             $this->entity_name = $data->entity_name;
