@@ -47,11 +47,14 @@ if (defined ( "_SECURITY" )) {
 				$can_active_this = true;
 			}
 			
-			$owner_group = $row->group_id;
+			$permissions = new EntityPermissions("content", $row->id);
+			
+			$owner_group = $permissions->getOwnerGroupId();
 			$current_group = $_SESSION ["group_id"];
 
 			$can_edit_this = false;
-
+			
+			// TODO: extract this to a method
 			if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit or $row->only_others_can_edit) {
 				if ($row->only_group_can_edit and $owner_group == $current_group) {
 					$can_edit_this = true;
@@ -79,6 +82,7 @@ if (defined ( "_SECURITY" )) {
 			if (count ( $languageAssignment ) > 0 and ! in_array ( $row->language, $languageAssignment )) {
 				$can_edit_this = false;
 			}
+			
 
 			if (! $can_edit_this) {
 				noperms ();
