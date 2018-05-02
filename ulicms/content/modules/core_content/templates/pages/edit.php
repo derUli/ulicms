@@ -886,7 +886,7 @@ function openArticleImageSelectWindow(field) {
 				foreach ( $users as $user ) {
 					?>
 	<option value="<?php Template::escape($user->id);?>"
-				<?php if($user->id == $row->autor) echo "selected";?>><?php Template::escape($user->username);?></option>
+				<?php if($user->id == $permissions->getOwnerUserId()) echo "selected";?>><?php Template::escape($user->username);?></option>
 	<?php } ?>
 </select> <br /> <br /> <strong><?php translate("owner");?> <?php translate("group");?></strong> <select name="group_id"
 			<?php
@@ -898,24 +898,24 @@ function openArticleImageSelectWindow(field) {
 				foreach ( $groups as $group ) {
 					?>
 	<option value="<?php Template::escape($group->getId());?>"
-	<?php if($group->getId() == $row->group_id) echo "selected";?>><?php Template::escape($group->getName());?></option>
+	<?php if($group->getId() == $permissions->getOwnerGroupId()) echo "selected";?>><?php Template::escape($group->getName());?></option>
 	<?php } ?>
 </select> <br /> <br /> <strong><?php translate("restrict_edit_access");?></strong><br />
 		<input type="checkbox" name="only_admins_can_edit"
 			id="only_admins_can_edit" value="1"
-			<?php if($row->only_admins_can_edit) echo "checked";?>> <label
+			<?php if($permissions->getEditRestriction("admins")) echo "checked";?>> <label
 			for="only_admins_can_edit"><?php translate("admins");?></label> <br />
 		<input type="checkbox" name="only_group_can_edit"
 			id="only_group_can_edit" value="1"
-			<?php if($row->only_group_can_edit) echo "checked";?>> <label
+			<?php if($permissions->getEditRestriction("group")) echo "checked";?>> <label
 			for="only_group_can_edit"><?php translate("group");?></label> <br />
 		<input type="checkbox" name="only_owner_can_edit"
 			id="only_owner_can_edit" value="1"
-			<?php if($row->only_owner_can_edit) echo "checked";?>> <label
+			<?php if($permissions->getEditRestriction("owner")) echo "checked";?>> <label
 			for="only_owner_can_edit"><?php translate("owner");?></label> <br />
 		<input type="checkbox" name="only_others_can_edit"
 			id="only_others_can_edit" value="1"
-			<?php if($row->only_others_can_edit) echo "checked";?>> <label
+			<?php if($permissions->getEditRestriction("others")) echo "checked";?>> <label
 			for="only_others_can_edit"><?php translate("others");?></label>
 	</div>
 
