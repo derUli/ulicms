@@ -94,14 +94,14 @@ class PageController extends Controller
             $show_headline = intval($_POST["show_headline"]);
             
             add_hook("before_create_page");
-            db_query("INSERT INTO " . tbname("content") . " (systemname, title, content, parent, active, created, lastmodified, autor, `group_id`,
+            db_query("INSERT INTO " . tbname("content") . " (systemname, title, content, parent, active, created, lastmodified, autor,
   redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`,
   `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`,
 				`article_date`, `article_image`, `excerpt`, `hidden`,
 				`comment_homepage`, `link_to_language` )
 					
-  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time() . ", " . time() . "," . $_SESSION["login_id"] . "," . $_SESSION["group_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
+  VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time() . ", " . time() . "," . $_SESSION["login_id"] . ", " . "'$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
@@ -116,6 +116,8 @@ class PageController extends Controller
             $content_id = db_insert_id();
             
             $permissions = new EntityPermissions("content", $content_id);
+            $permissions->setOwnerUserId($user_id);
+            $permissions->setOwnerGroupId($group->getId());
             $permissions->save();
             
             if ($type == "list") {
@@ -284,7 +286,7 @@ class PageController extends Controller
         
         add_hook("before_edit_page");
         $sql = "UPDATE " . tbname("content") . " SET `html_file` = '$html_file', systemname = '$system_title' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
-	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, `group_id` = $group_id, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
+	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
 	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = $article_date, excerpt = '$excerpt',
 	hidden = $hidden, comment_homepage = '$comment_homepage',
 	link_to_language = $link_to_language WHERE id=$id";
@@ -294,6 +296,8 @@ class PageController extends Controller
         $content_id = $id;
         
         $permissions = new EntityPermissions("content", $content_id);
+        $permissions->setOwnerUserId($autor);
+        $permissions->setOwnerGroupId($group_id);
         $permissionObjects = array(
             "admins",
             "owner",

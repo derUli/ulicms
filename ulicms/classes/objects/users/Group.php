@@ -34,7 +34,7 @@ class Group {
 		$query = Database::pQuery ( $sql, $args, true );
 		if (Database::any ( $query )) {
 			$result = Database::fetchObject ( $query );
-			$this->id = $result->id;
+			$this->id = intval($result->id);
 			$this->name = $result->name;
 			$this->permissions = json_decode ( $result->permissions, true );
 			$this->allowable_tags = $result->allowable_tags;
