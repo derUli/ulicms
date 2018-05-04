@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 2018.3.1 =====
+===== Neues in UliCMS 2018.3.1 =====
 
 Neue Features:
 + CLI-Tools zur Verwaltung der Settings
