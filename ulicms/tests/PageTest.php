@@ -6,12 +6,16 @@ class PageTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         @session_start();
+        $this->cleanUp();
     }
 
     public function tearDown()
     {
-        Database::query("delete from {prefix}content where systemname = 'testdisableshortcodes'", true);
         @session_destroy();
+        $this->cleanUp();
+    }
+    private function cleanUp(){
+        Database::query("delete from {prefix}content where systemname = 'testdisableshortcodes'", true);
     }
 
     private $ipsum = 'Lorem ipsum dolor sit amet,
@@ -56,9 +60,8 @@ class PageTest extends PHPUnit_Framework_TestCase
 
         $this->assertFalse(str_contains(get_csrf_token_html(), get_content()));
         $this->assertTrue(str_contains("[csrf_token_html]", get_content()));
-        $page->delete();
-        $pageController = ControllerRegistry::get("PageController");
-        $pageController->emptyTrash();
+       
+        $this->cleanUp();
 
         unset($_SESSION["language"]);
         unset($_GET["seite"]);
@@ -82,9 +85,29 @@ class PageTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(str_contains(get_csrf_token_html(), get_content()));
         $this->assertFalse(str_contains("[csrf_token_html]", get_content()));
 
-        $page->delete();
-        $pageController = ControllerRegistry::get("PageController");
-        $pageController->emptyTrash();
+       
+        $this->cleanUp();
+
+        unset($_SESSION["language"]);
+        unset($_GET["seite"]);
+    } 
+    public function testDisableShortcodesNull()
+    {
+        $page = new Page();
+        $page->title = 'testDisableShortcodesNull';
+        $page->systemname = 'testdisableshortcodes';
+        $page->language = 'de';
+        $page->content = "foo [csrf_token_html] bar";
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+
+        $_SESSION["language"] = 'de';
+        $_GET["seite"] = "testdisableshortcodes";
+
+        $this->assertTrue(str_contains(get_csrf_token_html(), get_content()));
+        $this->assertFalse(str_contains("[csrf_token_html]", get_content()));
+        $this->cleanUp();
 
         unset($_SESSION["language"]);
         unset($_GET["seite"]);
