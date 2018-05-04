@@ -10,7 +10,7 @@ class PageTest extends PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        // TODO: delete "page testdisableshortcodes" with SQL
+        Database::query("delete from {prefix}content where systemname = 'testdisableshortcodes'", true);
         @session_destroy();
     }
 
@@ -50,11 +50,16 @@ class PageTest extends PHPUnit_Framework_TestCase
         $page->group_id = 1;
         $page->custom_data["disable_shortcodes"] = true;
         $page->save();
+
         $_SESSION["language"] = 'de';
         $_GET["seite"] = "testdisableshortcodes";
+
         $this->assertFalse(str_contains(get_csrf_token_html(), get_content()));
         $this->assertTrue(str_contains("[csrf_token_html]", get_content()));
         $page->delete();
+        $pageController = ControllerRegistry::get("PageController");
+        $pageController->emptyTrash();
+
         unset($_SESSION["language"]);
         unset($_GET["seite"]);
     }
@@ -62,7 +67,7 @@ class PageTest extends PHPUnit_Framework_TestCase
     public function testDisableShortcodesFalse()
     {
         $page = new Page();
-        $page->title = 'testDisableShortcodesTrue';
+        $page->title = 'testDisableShortcodesFalse';
         $page->systemname = 'testdisableshortcodes';
         $page->language = 'de';
         $page->content = "foo [csrf_token_html] bar";
@@ -70,12 +75,17 @@ class PageTest extends PHPUnit_Framework_TestCase
         $page->group_id = 1;
         $page->custom_data["disable_shortcodes"] = false;
         $page->save();
+
         $_SESSION["language"] = 'de';
         $_GET["seite"] = "testdisableshortcodes";
-        echo get_content();
+
         $this->assertTrue(str_contains(get_csrf_token_html(), get_content()));
         $this->assertFalse(str_contains("[csrf_token_html]", get_content()));
+
         $page->delete();
+        $pageController = ControllerRegistry::get("PageController");
+        $pageController->emptyTrash();
+
         unset($_SESSION["language"]);
         unset($_GET["seite"]);
     }
