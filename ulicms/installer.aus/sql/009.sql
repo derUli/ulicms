@@ -11,7 +11,7 @@ INSERT INTO `{prefix}settings` (`id`, `name`, `value`) VALUES
 (10, 'meta_keywords', 'Stichwort 1, Stichwort 2, Stichwort 3'),
 (11, 'meta_description', 'Eine kurzer Beschreibungstext'),
 (12, 'logo_disabled', 'no'),
-(13, 'logo_image', '67cc042b9ee9eb28cdc81ae7d7420d8a.png'),
+(13, 'logo_image', '1c7fc60b8ac709a661598ea1a236c155.png'),
 (14, 'motd', '<p>Willkommen bei <strong>UliCMS</strong>!<br/>
 Eine Dokumentation finden Sie unter <a href=\"http://www.ulicms.de\" target=\"_blank\">www.ulicms.de</a>.</p>'),
 (15, 'visitors_can_register', 'off'),

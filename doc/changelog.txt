@@ -1,9 +1,11 @@
-﻿===== Neues in UliCMS 2018.3.1 =====
+===== Neues in UliCMS 2018.3.1 =====
 
 Neue Features:
 + CLI-Tools zur Verwaltung der Settings
 + CLI-Tool zur Anwendung von Datenbank-Migrationen
 + Bei Nutzung von Google Fonts wird eine Datenschutz-Warnung angezeigt
++ Das Ersetzen von Shortcodes kann für einzelne Seiten deaktiviert werden
++ Neues Logo
 
 ===== Neues in UliCMS 2018.3 =====
 

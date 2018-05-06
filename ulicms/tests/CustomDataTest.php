@@ -7,6 +7,7 @@ class CustomDataTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $_GET["seite"] = "welcome";
+        $_SESSION["language"] = "en";
     }
 
     public function tearDown()
@@ -14,6 +15,7 @@ class CustomDataTest extends PHPUnit_Framework_TestCase
         Settings::delete("my_value");
         CustomData::delete("my_value");
         unset($_GET["seite"]);
+        unset( $_SESSION["language"]);
     }
 
     public function testGetCustomDataOrSetting()
