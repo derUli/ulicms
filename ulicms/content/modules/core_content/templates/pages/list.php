@@ -4,17 +4,10 @@
 $acl = new ACL();
 if ($acl->hasPermission("pages")) {
     ?>
-<div class="row">
-	<div class="col-xs-6">
+<p>
 		<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-			class="btn btn-default btn-back"><?php translate("back")?></a>
-	</div>
-	<div class="col-xs-6 text-right">
-		<a
-			href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
-			class="btn btn-default btn-back" id="btn-reset-filters"><?php translate("reset_filters")?></a>
-	</div>
-</div>
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+		</p>
 <h2><?php translate("pages");?></h2>
 
 <p><?php translate ( "pages_infotext" );?></p>
@@ -22,8 +15,15 @@ if ($acl->hasPermission("pages")) {
 <?php
     if ($acl->hasPermission("pages_create")) {
         ?>
-<p>
-		<a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?>
+<div class="row">
+<div class="col-xs-6"><a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?></a>
+</div>
+<div class="col-xs-6 text-right">
+		<a
+			href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
+			class="btn btn-default btn-back" id="btn-reset-filters"><?php translate("reset_filters")?></a>
+	</div>
+</div>
 	</a>
 	</p>
 <?php } ?>
