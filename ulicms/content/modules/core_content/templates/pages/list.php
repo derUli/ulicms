@@ -3,10 +3,18 @@
 // This should be rewritten with MVC pattern
 $acl = new ACL();
 if ($acl->hasPermission("pages")) {
-    ?><p>
-	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
-</p>
+    ?>
+<div class="row">
+	<div class="col-xs-6">
+		<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
+			class="btn btn-default btn-back"><?php translate("back")?></a>
+	</div>
+	<div class="col-xs-6 text-right">
+		<a
+			href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
+			class="btn btn-default btn-back" id="btn-reset-filters"><?php translate("reset_filters")?></a>
+	</div>
+</div>
 <h2><?php translate("pages");?></h2>
 
 <p><?php translate ( "pages_infotext" );?></p>
@@ -554,6 +562,7 @@ if ($acl->hasPermission("pages")) {
     $translation = new JSTranslation();
     $translation->addKey("ask_for_delete");
     $translation->addKey("wanna_empty_trash");
+    $translation->addKey("reset_filters");
     $translation->renderJS();
     ?>
 <br />
