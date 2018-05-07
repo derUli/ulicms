@@ -34,7 +34,7 @@ class Response
         $host = parse_url($url, PHP_URL_HOST);
         if (! in_array($host, $safeHosts)) {
             try {
-                $page = ContentFactory::loadBySystemnameAndLanguage(Settings::getLang("frontpage", getCurrentLanguage()), $_SESSION["language"]);
+                $page = ContentFactory::loadBySystemnameAndLanguage(Settings::getLang("frontpage", getCurrentLanguage()),getCurrentLanguage());
                 $url = ModuleHelper::getFullPageURLByID($page->id);
             } catch (Exception $e) {
                 $url = ModuleHelper::getBaseUrl();
