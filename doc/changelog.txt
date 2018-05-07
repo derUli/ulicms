@@ -7,6 +7,13 @@ Neue Features:
 + Das Ersetzen von Shortcodes kann für einzelne Seiten deaktiviert werden
 + Neues Logo
 + "Filter zurücksetzen" Button hinzugefügt
++ Sichere Redirects
+
+Neue API-Funktionen
+* Response::redirect($url = "http://www.ulicms.de", $status = 302)
+* Response::javascriptRedirect($url = "http://www.ulicms.de")
+* Response::safeRedirect($url, $status = 302, $safeHosts = null)
+* Response::getStatusCodeByNumber($nr)
 
 ===== Neues in UliCMS 2018.3 =====
 

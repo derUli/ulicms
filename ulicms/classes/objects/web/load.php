@@ -1,10 +1,11 @@
 <?php
-$classes = array (
-		"HttpStatusCode",
-		"Mailer",
-		"Request" 
+$classes = array(
+    "HttpStatusCode",
+    "Mailer",
+    "Request",
+    "Response"
 );
-foreach ( $classes as $class ) {
-	require_once dirname ( __FILE__ ) . "/$class.php";
+foreach ($classes as $class) {
+    require_once dirname(__FILE__) . "/$class.php";
 }
 
