@@ -21,7 +21,7 @@ if ($acl->hasPermission("pages")) {
 <div class="col-xs-6 text-right">
 		<a
 			href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
-			class="btn btn-default btn-back" id="btn-reset-filters"><?php translate("reset_filters")?></a>
+			class="btn btn-default" id="btn-reset-filters"><?php translate("reset_filters")?></a>
 	</div>
 </div>
 	</a>
