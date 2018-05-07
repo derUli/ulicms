@@ -7,12 +7,14 @@ class ResponseTest extends PHPUnit_Framework_TestCase
     {
         $_SERVER["HTTP_HOST"] = "ulicms.de";
         $_SERVER["REQUEST_URI"] = "/";
+        $_SESSION["language"] = "en";
     }
 
     public function tearDown()
     {
         unset($_SERVER["HTTP_HOST"]);
         unset($_SERVER["REQUEST_URI"]);
+        unset($_SESSION["language"]);
     }
 
     public function testGetStatusCodeByNumber()
@@ -28,9 +30,12 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testGetSafeRedirectURL()
     {
-        $this->assertEquals("http://ulicms.de/", Response::getSafeRedirectURL("https://google.de"));
+        $this->assertEquals("http://ulicms.de/lorem_ipsum.html", Response::getSafeRedirectURL("http://ulicms.de/lorem_ipsum.html"));
+        
+        $this->assertEquals("http://ulicms.de/welcome.html", Response::getSafeRedirectURL("https://google.de"));
         $this->assertEquals("https://google.de", Response::getSafeRedirectURL("https://google.de", array(
             "google.de"
-        )));
+        )));        
+        
     }
 }
