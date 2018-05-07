@@ -20,8 +20,7 @@ class Response
         exit();
     }
 
-    public static function safeRedirect($url, $status = 302, $safeHosts = null)
-    {
+    public static function getSafeRedirectURL($url, $safeHosts = null){
         $cfg = new CMSConfig();
         if (is_array($safeHosts) and count($safeHosts) >= 1) {
             $safeHosts = $safeHosts;
@@ -41,6 +40,12 @@ class Response
                 $url = ModuleHelper::getBaseUrl();
             }
         }
+        return $url;
+    }
+    
+    public static function getSafeRedirectURL($url, $status = 302, $safeHosts = null)
+    {
+        $url = self::getSafeRedirectUrl($url, $safeHosts);
         Request::redirect($url, $status);
     }
 
