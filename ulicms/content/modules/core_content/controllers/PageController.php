@@ -2,7 +2,7 @@
 
 class PageController extends Controller
 {
-
+    
     // @FIXME: Content-Model statt SQL verwenden
     public function createPost()
     {
@@ -100,7 +100,7 @@ class PageController extends Controller
   `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`,
 				`article_date`, `article_image`, `excerpt`, `hidden`,
 				`comment_homepage`, `link_to_language` )
-					
+                
   VALUES('$system_title','$page_title','$page_content',$parent, $activated," . time() . ", " . time() . "," . $_SESSION["login_id"] . ", " . "'$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
   '$language', '$target', '$category', '$html_file', '$alternate_title',
@@ -111,82 +111,82 @@ class PageController extends Controller
    '$article_author_name', '$article_author_email',
    $article_date, '$article_image', '$excerpt',
    $hidden, '$comment_homepage', $link_to_language)") or die(db_error());
-            
-            $user_id = get_user_id();
-            $content_id = db_insert_id();
-            
-            $permissions = new EntityPermissions("content", $content_id);
-            $permissions->setOwnerUserId($user_id);
-            $permissions->setOwnerGroupId($group->getId());
-            $permissions->save();
-            
-            if ($type == "list") {
-                $list_language = $_POST["list_language"];
-                if (empty($list_language)) {
-                    $list_language = null;
-                }
-                $list_category = $_POST["list_category"];
-                if (empty($list_category)) {
-                    $list_category = null;
-                }
-                
-                $list_menu = $_POST["list_menu"];
-                if (empty($list_menu)) {
-                    $list_menu = null;
-                }
-                
-                $list_parent = $_POST["list_parent"];
-                if (empty($list_parent)) {
-                    $list_parent = null;
-                }
-                
-                $list_order_by = Database::escapeValue($_POST["list_order_by"]);
-                $list_order_direction = Database::escapeValue($_POST["list_order_direction"]);
-                
-                $list_use_pagination = intval($_POST["list_use_pagination"]);
-                
-                $limit = intval($_POST["limit"]);
-                
-                $list_type = $_POST["list_type"];
-                if (empty($list_type) or $list_type == "null") {
-                    $list_type = null;
-                }
-                
-                $list = new List_Data($content_id);
-                $list->language = $list_language;
-                $list->category_id = $list_category;
-                $list->menu = $list_menu;
-                $list->parent_id = $list_parent;
-                $list->order_by = $list_order_by;
-                $list->order_direction = $list_order_direction;
-                $list->limit = $limit;
-                $list->use_pagination = $list_use_pagination;
-                $list->type = $list_type;
-                $list->save();
-            }
-            $content = $unescaped_content;
-            VCS::createRevision($content_id, $content, $user_id);
-            
-            $type = DefaultContentTypes::get($type);
-            foreach ($type->customFields as $field) {
-                $value = null;
-                if (isset($_POST[$field->name])) {
-                    $value = $_POST[$field->name];
-                }
-                
-                CustomFields::set($field->name, $value, $content_id);
-            }
-            
-            add_hook("after_create_page");
-            // header("Location: index.php?action=pages_edit&page=".db_insert_id()."#bottom");
-            
-            if ($acl->hasPermission("pages_edit_own") and $content_id) {
-                Request::redirect(ModuleHelper::buildActionURL("pages_edit", "page=$content_id"));
-            }
-            Request::redirect(ModuleHelper::buildActionURL("pages"));
+   
+   $user_id = get_user_id();
+   $content_id = db_insert_id();
+   
+   $permissions = new EntityPermissions("content", $content_id);
+   $permissions->setOwnerUserId($user_id);
+   $permissions->setOwnerGroupId($group->getId());
+   $permissions->save();
+   
+   if ($type == "list") {
+       $list_language = $_POST["list_language"];
+       if (empty($list_language)) {
+           $list_language = null;
+       }
+       $list_category = $_POST["list_category"];
+       if (empty($list_category)) {
+           $list_category = null;
+       }
+       
+       $list_menu = $_POST["list_menu"];
+       if (empty($list_menu)) {
+           $list_menu = null;
+       }
+       
+       $list_parent = $_POST["list_parent"];
+       if (empty($list_parent)) {
+           $list_parent = null;
+       }
+       
+       $list_order_by = Database::escapeValue($_POST["list_order_by"]);
+       $list_order_direction = Database::escapeValue($_POST["list_order_direction"]);
+       
+       $list_use_pagination = intval($_POST["list_use_pagination"]);
+       
+       $limit = intval($_POST["limit"]);
+       
+       $list_type = $_POST["list_type"];
+       if (empty($list_type) or $list_type == "null") {
+           $list_type = null;
+       }
+       
+       $list = new List_Data($content_id);
+       $list->language = $list_language;
+       $list->category_id = $list_category;
+       $list->menu = $list_menu;
+       $list->parent_id = $list_parent;
+       $list->order_by = $list_order_by;
+       $list->order_direction = $list_order_direction;
+       $list->limit = $limit;
+       $list->use_pagination = $list_use_pagination;
+       $list->type = $list_type;
+       $list->save();
+   }
+   $content = $unescaped_content;
+   VCS::createRevision($content_id, $content, $user_id);
+   
+   $type = DefaultContentTypes::get($type);
+   foreach ($type->customFields as $field) {
+       $value = null;
+       if (isset($_POST[$field->name])) {
+           $value = $_POST[$field->name];
+       }
+       
+       CustomFields::set($field->name, $value, $content_id);
+   }
+   
+   add_hook("after_create_page");
+   // header("Location: index.php?action=pages_edit&page=".db_insert_id()."#bottom");
+   
+   if ($acl->hasPermission("pages_edit_own") and $content_id) {
+       Request::redirect(ModuleHelper::buildActionURL("pages_edit", "page=$content_id"));
+   }
+   Request::redirect(ModuleHelper::buildActionURL("pages"));
         }
     }
-
+    
     public function editPost()
     {
         $acl = new ACL();
@@ -368,7 +368,7 @@ class PageController extends Controller
         
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
-
+    
     public function undeletePost()
     {
         $page = Request::getVar("page");
@@ -377,7 +377,7 @@ class PageController extends Controller
         add_hook("after_undelete_page");
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
-
+    
     public function deletePost()
     {
         $page = Request::getVar("page");
@@ -386,12 +386,23 @@ class PageController extends Controller
         add_hook("after_delete_page");
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
-
+    
     public function emptyTrash()
     {
         add_hook("before_empty_trash");
         db_query("DELETE FROM " . tbname("content") . " WHERE deleted_at IS NOT NULL");
         add_hook("after_empty_trash");
+        Request::redirect(ModuleHelper::buildActionURL("pages"));
+    }
+    public function resetFilters()
+    {
+        // reset all filters
+        foreach ($_SESSION as $key => $value) {
+            if (startsWith($key, "filter_")) {
+                unset($_SESSION[$key]);
+            }
+        }
+        
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 }
