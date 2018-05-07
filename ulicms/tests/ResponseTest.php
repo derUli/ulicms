@@ -28,7 +28,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testGetSafeRedirectURL()
     {
-        $this->assertEquals("http://ulicms.de/", Response::getSafeRedirectURL("httpS://google.de"));
+        $this->assertEquals("http://ulicms.de/", Response::getSafeRedirectURL("https://google.de"));
         $this->assertEquals("https://google.de", Response::getSafeRedirectURL("https://google.de", array(
             "google.de"
         )));
