@@ -148,7 +148,7 @@ function register_session($user, $redirect = true)
         Response::safeRedirect($_REQUEST["go"]);
     } else {
         $login_url = apply_filter("index.php", "login_url");
-        Response::safeRedirect($login_url);
+        Response::redirect($login_url);
     }
     
     return;
