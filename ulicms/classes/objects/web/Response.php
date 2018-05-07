@@ -43,7 +43,7 @@ class Response
         return $url;
     }
     
-    public static function getSafeRedirectURL($url, $status = 302, $safeHosts = null)
+    public static function safeRedirect($url, $status = 302, $safeHosts = null)
     {
         $url = self::getSafeRedirectUrl($url, $safeHosts);
         Request::redirect($url, $status);
