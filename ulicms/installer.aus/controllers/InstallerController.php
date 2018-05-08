@@ -141,8 +141,10 @@ class InstallerController
         foreach (glob("sql/fk/*.sql") as $file) {
             $files[] = $file;
         }
+		
+		$updateSqlDir = "../lib/updates/up";
         
-        foreach (glob("sql/patches/*.sql") as $file) {
+        foreach (glob("{$updateSqlDir}/*.sql") as $file) {
             $files[] = $file;
         }
         
@@ -164,7 +166,7 @@ class InstallerController
             if (! mysqli_select_db($connection, $_SESSION["mysql_database"])) {
                 die(TRANSLATION_CANT_OPEN_SCHEMA);
             }
-            mysqli_query($connection, "SET NAMES 'utf8mb4'") or die(mysqli_error($connection));
+            mysqli_query($connection, "SET NAMES 'utf8mb4'");
             
             // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
             mysqli_query($connection, "SET SESSION sql_mode = '';");
@@ -205,6 +207,11 @@ class InstallerController
             $script = str_ireplace("{time}", time(), $script);
             
             mysqli_query($connection, $script);
+				if (strpos($sql_file, $updateSqlDir) === 0) {
+				$sql = "INSERT INTO {prefix}dbtrack (component, name) values ('core', '".basename($sql_file)."')";
+				$sql = str_ireplace("{prefix}", $prefix, $sql);
+				mysqli_query($connection, $sql);
+			}
             echo '<!--ok--><div style="background-color:green;height:50px; width:' . intval($currentPercent) . '%"></div>';
             echo "<div class='info-text-progress'>" . $str . "</div>";
             
