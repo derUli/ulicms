@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}content` DROP FOREIGN KEY `fk_link_to_language`;

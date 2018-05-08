@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}history` modify `content` longtext NOT NULL;
