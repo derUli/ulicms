@@ -76,6 +76,7 @@
 		"LanguageController::createPost": "languages",
 		"LanguageController::deletePost": "languages",
 		"LanguageController::setDefaultLanguage": "languages",
-		"SpamFilterController::savePost": "spam_filter"
+		"SpamFilterController::savePost": "spam_filter",
+		"PrivacyController::savePost" : "privacy_settings"
 	}
 }
