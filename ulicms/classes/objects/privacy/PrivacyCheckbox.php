@@ -5,6 +5,9 @@ class PrivacyCheckbox{
         $this->language = $language;
     }
     public function isEnabled(){
-        
+        throw new NotImplementedException();
+    }
+    public function render(){
+        throw new NotImplementedException();
     }
 }
