@@ -41,15 +41,19 @@ if ($acl->hasPermission ( "privacy_settings" )) {
 	<?php
 
 	csrf_token_html ();
-	?>	<?php
+	?>
+<p><input type="checkbox" id="privacy_policy_checkbox_enable" name="privacy_policy_checkbox_enable" value="1">
+   <label for="privacy_policy_checkbox_enable"><?php translate("privacy_policy_checkbox_enable");?></label>
+</p>
+	<?php
 	$editor = get_html_editor ();
 	?>
-		<p>
+		<div id="privacy_policy_checkbox_text_container">
 		<strong><?php translate("privacy_policy_checkbox_text")?></strong><br/>
 		<textarea name="privacy_policy_checkbox_text" class="<?php esc($editor);?>" data-mimetype="text/html" id="privacy_policy_checkbox_text" cols=60 rows=15><?php
 	echo htmlspecialchars ( Request::getVar ( "language" ) ? Settings::get ( "privacy_policy_checkbox_text_" . Request::getVar ( "language" ) ) : Settings::get ( "privacy_policy_checkbox_text" ) );
 	?></textarea>
-	</p>
+	</div>
 
 	<button type="submit" class="btn btn-primary voffset2"><?php translate("save_changes");?></button>
 	<?php
