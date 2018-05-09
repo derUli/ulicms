@@ -6,7 +6,7 @@ class PrivacyCheckbox
 
     private $language;
 
-    const CHECKBOX_NAME = "privacy_policy_checkbox";
+    const CHECKBOX_NAME = "accept_privacy_policy";
 
     public function __construct($language)
     {

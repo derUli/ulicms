@@ -60,8 +60,8 @@ class PrivacyCheckboxTest extends PHPUnit_Framework_TestCase
             "en" => '<div class="checkbox"><label>[checkbox] Sit dor amet</label></div>'
         );
         $expectedResults = array(
-            "de" => '<div class="checkbox"><label><input type="checkbox" name="privacy_policy_checkbox" value="1" required="required" id="privacy_policy_checkbox"> Lorem Ipsum</label></div>',
-            "en" => '<div class="checkbox"><label><input type="checkbox" name="privacy_policy_checkbox" value="1" required="required" id="privacy_policy_checkbox"> Sit dor amet</label></div>'
+            "de" => '<div class="checkbox"><label><input type="checkbox" name="accept_privacy_policy" value="1" required="required" id="accept_privacy_policy"> Lorem Ipsum</label></div>',
+            "en" => '<div class="checkbox"><label><input type="checkbox" name="accept_privacy_policy" value="1" required="required" id="accept_privacy_policy"> Sit dor amet</label></div>'
         );
         foreach ($values as $language => $html) {
             Settings::delete("privacy_policy_checkbox_text_{$language}");
