@@ -45,9 +45,9 @@ if ($acl->hasPermission ( "privacy_settings" )) {
 	$editor = get_html_editor ();
 	?>
 		<p>
-		<strong><?php translate("privacy_checkbox_text")?></strong><br/>
-		<textarea name="privacy_checkbox_text" class="<?php esc($editor);?>" data-mimetype="text/html" id="privacy_checkbox_text" cols=60 rows=15><?php
-	echo htmlspecialchars ( Request::getVar ( "language" ) ? Settings::get ( "privacy_checkbox_text_" . Request::getVar ( "language" ) ) : Settings::get ( "privacy_checkbox_text" ) );
+		<strong><?php translate("privacy_policy_checkbox_text")?></strong><br/>
+		<textarea name="privacy_policy_checkbox_text" class="<?php esc($editor);?>" data-mimetype="text/html" id="privacy_policy_checkbox_text" cols=60 rows=15><?php
+	echo htmlspecialchars ( Request::getVar ( "language" ) ? Settings::get ( "privacy_policy_checkbox_text_" . Request::getVar ( "language" ) ) : Settings::get ( "privacy_policy_checkbox_text" ) );
 	?></textarea>
 	</p>
 
