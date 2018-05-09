@@ -8,6 +8,7 @@ Neue Features:
 + Neues Logo
 + "Filter zurücksetzen" Button hinzugefügt
 + Sichere Redirects
++ Datenschutz-Einstellungen hinzugefügt
 
 Neue API-Funktionen
 * Response::redirect($url = "http://www.ulicms.de", $status = 302)
