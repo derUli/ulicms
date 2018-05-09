@@ -88,10 +88,17 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	if ($acl->hasPermission ( "languages" )) {
 		?>
 	<a href="index.php?action=languages"><?php translate("languages");?>
-	</a> 
+	</a> <br /> <br />
 	<?php
 	}
 	?>
+	<?php if ($acl->hasPermission ( "other" )) {
+		?>
+	<a href="?action=other_settings"><?php translate("other");?>
+	</a>
+ 	<?php
+ 	}
+ 	?>
 </p>
 <?php
 } else {
