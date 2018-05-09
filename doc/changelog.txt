@@ -15,6 +15,7 @@ Neue API-Funktionen
 * Response::javascriptRedirect($url = "http://www.ulicms.de")
 * Response::safeRedirect($url, $status = 302, $safeHosts = null)
 * Response::getStatusCodeByNumber($nr)
+* Neue Klasse PrivacyCheckbox zur Anzeige einer DSGVO Checkbox
 
 ===== Neues in UliCMS 2018.3 =====
 

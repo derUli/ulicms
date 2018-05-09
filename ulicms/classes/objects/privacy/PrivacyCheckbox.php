@@ -35,7 +35,7 @@ class PrivacyCheckbox
                 $success();
             }
         } else {
-            if ($fail) {
+            if ($fail != null) {
                 $fail();
             } else {
                 ViewBag::set("exception", get_translation("please_accept_privacy_conditions"));
