@@ -19,7 +19,8 @@ class PrivacyCheckbox
     public function render()
     {
         $checkboxHtml = Input::CheckBox("privacy_policy_checkbox", false, "1", array(
-            "required" => "required"
+            "required" => "required",
+            "id" => "privacy_policy_checkbox"
         ));
         $fullHtml = Settings::get("privacy_policy_checkbox_text_{$this->language}}");
         if (! $this->isEnabled || StringHelper::isNullOrWhitespace($fullHtml)) {
