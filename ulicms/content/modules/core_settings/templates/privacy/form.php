@@ -41,46 +41,16 @@ if ($acl->hasPermission ( "privacy_settings" )) {
 	<?php
 
 	csrf_token_html ();
+	?>	<?php
+	$editor = get_html_editor ();
 	?>
 		<p>
-		<textarea name="privacy_checkbox_text" id="privacy_checkbox_text" cols=60 rows=15><?php
+		<strong><?php translate("privacy_checkbox_text")?></strong><br/>
+		<textarea name="privacy_checkbox_text" class="<?php esc($editor);?>" data-mimetype="text/html" id="privacy_checkbox_text" cols=60 rows=15><?php
 	echo htmlspecialchars ( Request::getVar ( "language" ) ? Settings::get ( "privacy_checkbox_text_" . Request::getVar ( "language" ) ) : Settings::get ( "privacy_checkbox_text" ) );
 	?></textarea>
 	</p>
-		<?php
-	$editor = get_html_editor ();
-	?>
 
-		<?php
-	if ($editor === "ckeditor") {
-		?>
-		<script type="text/javascript">
-var editor = CKEDITOR.replace( 'privacy_checkbox_text',
-					{
-						skin : '<?php
-
-		echo Settings::get ( "ckeditor_skin" );
-		?>'
-					});
-</script>
-<?php
-	} else if ($editor == "codemirror") {
-		?>
-		<script type="text/javascript">
-var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("privacy_checkbox_text"),
-
-{lineNumbers: true,
-        matchBrackets: true,
-        mode : "text/html",
-
-        indentUnit: 0,
-        indentWithTabs: false,
-        enterMode: "keep",
-        tabMode: "shift"});
-</script>
-<?php
-	}
-	?>
 	<button type="submit" class="btn btn-primary voffset2"><?php translate("save_changes");?></button>
 	<?php
 	enqueueScriptFile("scripts/privacy.js");
