@@ -1,9 +1,12 @@
 <?php
 $acl = new ACL();
 if ($acl->hasPermission("privacy_settings")) {
-    $language = Request::getVar("language", null);
-    $privacy_policy_checkbox_enable = $language ? Settings::get("privacy_policy_checkbox_enable_{$language}"): Settings::get("privacy_policy_checkbox_enable");
-       ?>
+    $currentLanguage = Request::getVar("language");
+    if (! $currentLanguage) {
+        $currentLanguage = Settings::get("default_language");
+    }
+    $privacy_policy_checkbox_enable = $currentLanguage ? Settings::get("privacy_policy_checkbox_enable_{$currentLanguage}") : Settings::get("privacy_policy_checkbox_enable");
+    ?>
 <div>
 	<p>
 		<a
@@ -28,14 +31,12 @@ if ($acl->hasPermission("privacy_settings")) {
 		<p>
 		<strong><?php translate("language");?></strong> <br /> <select
 			name="language" id="language">
-			<option value=""
-				<?php if(!Request::getVar ( "language" )){ echo "selected";}?>>[<?php translate("no_language");?>]</option>
-	<?php
+			<?php
     
     foreach ($languages as $language) {
         ?>
 		<option value="<?php Template::escape($language);?>"
-				<?php if(Request::getVar ( "language" ) == $language){ echo "selected";}?>><?php Template::escape(getLanguageNameByCode($language));?></option>
+				<?php if($currentLanguage == $language){ echo "selected";}?>><?php Template::escape(getLanguageNameByCode($language));?></option>
 		<?php }?>
 
 		</select>
@@ -59,7 +60,7 @@ if ($acl->hasPermission("privacy_settings")) {
 		<textarea name="privacy_policy_checkbox_text"
 			class="<?php esc($editor);?>" data-mimetype="text/html"
 			id="privacy_policy_checkbox_text" cols=60 rows=15><?php
-    echo htmlspecialchars(Request::getVar("language") ? Settings::get("privacy_policy_checkbox_text_" . Request::getVar("language")) : Settings::get("privacy_policy_checkbox_text"));
+    echo htmlspecialchars(Settings::get("privacy_policy_checkbox_text_{$currentLanguage}"));
     ?></textarea>
 	</div>
 	<p>
