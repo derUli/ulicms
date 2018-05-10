@@ -1,6 +1,6 @@
 {
 	"source": "core",
-	"version": "2018.3",
+	"version": "2018.3.1",
 	"embed": false,
 	"actions": {
 		"settings_simple": "templates/settings_simple/form.php",
@@ -14,6 +14,7 @@
 		"meta_keywords": "templates/meta_keywords/form.php",
 		"open_graph": "templates/open_graph/form.php",
 		"motd": "templates/motd/form.php",
+		"privacy_settings": "templates/privacy/form.php",
 		"other_settings": "templates/other_settings/form.php",
 		"default_access_restrictions": "templates/default_access_restrictions/form.php",
 		"settings": "templates/expert_settings/list.php",
@@ -24,6 +25,10 @@
 		"languages": "templates/languages/form.php",
 		"spam_filter": "templates/spam_filter/form.php"
 	},
+	"action_permissions" : {
+		"privacy_settings" : "privacy_settings"
+	},
+	"custom_acl" : ["privacy_settings"],
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
 		"HomepageTitleController": "controllers/HomepageTitleController.php",
@@ -42,12 +47,14 @@
 		"FaviconController": "controllers/FaviconController.php",
 		"PkgSettingsController": "controllers/PkgSettingsController.php",
 		"LanguageController": "controllers/LanguageController.php",
-		"SpamFilterController": "controllers/SpamFilterController.php"
+		"SpamFilterController": "controllers/SpamFilterController.php",
+		"PrivacyController" : "controllers/PrivacyController.php"
 	},
 	"action_controllers": {
 		"settings_simple": "SimpleSettingsController",
 		"default_access_restrictions": "DefaultAccessRestrictionsController",
-		"design": "DesignSettingsController"
+		"design": "DesignSettingsController",
+		"privacy" : "PrivacyController"
 	},
 	"controller_function_permissions": {
 		"SimpleSettingsController::savePost": "settings_simple",
@@ -69,6 +76,7 @@
 		"LanguageController::createPost": "languages",
 		"LanguageController::deletePost": "languages",
 		"LanguageController::setDefaultLanguage": "languages",
-		"SpamFilterController::savePost": "spam_filter"
+		"SpamFilterController::savePost": "spam_filter",
+		"PrivacyController::savePost" : "privacy_settings"
 	}
 }

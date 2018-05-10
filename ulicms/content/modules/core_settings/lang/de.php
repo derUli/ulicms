@@ -18,3 +18,7 @@ add_translation("smtp_no_verify_certificate", "Zertifikate nicht validieren");
 add_translation("smtp_no_verify_certificate_warning", "Nutzen Sie diese Option nur, wenn es unvermeidlich ist. Damit verringern Sie die Sicherheit der verschlüsselten Verbindung erheblich.");
 
 add_translation("google_fonts_privacy_warning", "<strong>Achtung</strong> " . "Sie haben eine Google Font ausgewählt. Die Nutzung von Google Fonts kann mitunter einen Verstoß gegen den Datenschutz darstellen.");
+
+add_translation("privacy", "Datenschutz");
+add_translation("privacy_policy_checkbox_enable", "Aktiviere DSGVO Checkbox für Formulare");
+add_translation("privacy_policy_checkbox_text", "Text für DSGVO Checkbox");

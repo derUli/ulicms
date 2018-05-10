@@ -33,6 +33,15 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	<?php
 	}
 	?>
+	<?php
+	
+	if ($acl->hasPermission ( "privacy_settings" )) {
+		?>
+	<a href="?action=privacy_settings"><?php translate("privacy");?>
+	</a><br /> <br />
+	<?php
+	}
+	?>
 <?php
 	
 	if ($acl->hasPermission ( "cache" )) {
@@ -83,15 +92,13 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 	<?php
 	}
 	?>
-<?php
-	
-	if ($acl->hasPermission ( "other" )) {
+	<?php if ($acl->hasPermission ( "other" )) {
 		?>
 	<a href="?action=other_settings"><?php translate("other");?>
 	</a>
-	<?php
-	}
-	?>
+ 	<?php
+ 	}
+ 	?>
 </p>
 <?php
 } else {
