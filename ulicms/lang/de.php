@@ -276,7 +276,7 @@ define ( "TRANSLATION_SMTP_SETTINGS", "SMTP Einstellungen" );
 define ( "TRANSLATION_HOSTNAME", "Hostname" );
 define ( "TRANSLATION_PORT", "Port" );
 define ( "TRANSLATION_AUTHENTIFACTION_REQUIRED", "Authentifizierung benötigt" );
-define ( "TRANSLATION_USER", "User" );
+define ( "TRANSLATION_USER", "Benutzer" );
 define ( "TRANSLATION_PASSWORD", "Passwort" );
 
 // Update
@@ -720,5 +720,6 @@ define ( "TRANSLATION_MIN_TIME_TO_FILL_FORM", "Minimale Zeit um ein Formular aus
 
 define ( "TRANSLATION_BUILD_DATE", "Build Datum" );
 
+add_translation("please_accept_privacy_conditions", "Bitte akzeptieren Sie die Datenschutz-Hinweise!");
 
 add_hook ( "lang_de" );

@@ -170,6 +170,11 @@ function filterParentPages() {
 }
 
 $(function() {
+	$("#btn-reset-filters").click(function(e) {
+		if (!window.confirm(Translation.ResetFilters + "?")) {
+			e.preventDefault();
+		}
+	})
 	$("input[name='system_title']").keyup(function() {
 		systemnameOrLanguageChanged($(this));
 	});

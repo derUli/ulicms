@@ -61,34 +61,4 @@ class MinifyTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('<link rel="stylesheet" href="?output_stylesheets=core.min.css;admin/css/bootstrap.css;admin/css/bootstrap-theme.css;admin/css/modern.css&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml());
         $this->assertCount(0, $_SERVER["stylesheet_queue"]);
     }
-
-    public function testDeprecatedFunctions()
-    {
-        try {
-            combined_script_html();
-            $this->fail("expected deprecation warning not thrown");
-        } catch (Exception $e) {
-            $this->assertTrue(str_contains("is deprecated", $e->getMessage()));
-        }
-        
-        try {
-            combined_stylesheet_html();
-            $this->fail("expected deprecation warning not thrown");
-        } catch (Exception $e) {
-            $this->assertTrue(str_contains("is deprecated", $e->getMessage()));
-        }
-        
-        try {
-            get_combined_script_html();
-            $this->fail("expected deprecation warning not thrown");
-        } catch (Exception $e) {
-            $this->assertTrue(str_contains("is deprecated", $e->getMessage()));
-        }
-        try {
-            get_combined_stylesheet_html();
-            $this->fail("expected deprecation warning not thrown");
-        } catch (Exception $e) {
-            $this->assertTrue(str_contains("is deprecated", $e->getMessage()));
-        }
-    }
 }

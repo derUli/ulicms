@@ -933,6 +933,9 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		ob_start ();
 		logo ();
 		$string = str_ireplace ( '[logo]', ob_get_clean (), $string );
+        $language = getCurrentLanguage(true);
+        $checkbox = new PrivacyCheckbox($language);
+        $string = str_ireplace("[accept_privacy_policy]", $checkbox->render(), $string);
 		ob_start ();
 		motto ();
 		$string = str_ireplace ( '[motto]', ob_get_clean (), $string );
