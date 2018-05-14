@@ -19,6 +19,7 @@ Database::query("CREATE TABLE `{prefix}dbtrack` ( `id` INT NOT NULL AUTO_INCREME
 Settings::set("db_schema_version", "2018.3");
 
 $migrator = new DBMigrator("core", "lib/updates/up");
+$migrator->disableStrictMode();
 $migrator->migrate();
 
 Settings::register("min_time_to_fill_form", "0");
