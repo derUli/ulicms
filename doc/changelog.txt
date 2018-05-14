@@ -1,3 +1,14 @@
+===== Neues in UliCMS 2018.3.2 =====
+
+Neue Features:
++ Strict Mode zum DBMigrator hinzugefügt
++ Performance der "Pakete" Seite im Backend verbessert
+
+Neue API-Funktionen:
+* DBMigrator->enableStrictMode()
+* DBMigrator->disableStrictMode()
+* SQLException
+
 ===== Neues in UliCMS 2018.3.1 =====
 
 Neue Features:
