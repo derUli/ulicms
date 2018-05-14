@@ -21,7 +21,8 @@ class PackageManager
         }
         $url = $this->package_source . "newest_version.php";
         $url .= "?q=" . urlencode($package);
-        $response = @file_get_contents_wrapper($url, true);
+        
+        $response = @file_get_contents_wrapper($url, false);
         if ($response and ! empty($response)) {
             $result = $response;
         }
