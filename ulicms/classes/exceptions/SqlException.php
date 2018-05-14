@@ -1,3 +1,3 @@
 <?php
-class SqlException extends UnexpectedValueException {
+class SqlException extends Exception {
 }
