@@ -2,6 +2,7 @@
 
 Neue Features:
 + Strict Mode zum DBMigrator hinzugefügt
++ Performance der "Pakete" Seite im Backend verbessert
 
 Neue API-Funktionen:
 * DBMigrator->enableStrictMode()
