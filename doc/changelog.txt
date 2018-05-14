@@ -3,6 +3,11 @@
 Neue Features:
 + Strict Mode zum DBMigrator hinzugefügt
 
+Neue API-Funktionen:
+* DBMigrator->enableStrictMode()
+* DBMigrator->disableStrictMode()
+* SQLException
+
 ===== Neues in UliCMS 2018.3.1 =====
 
 Neue Features:
