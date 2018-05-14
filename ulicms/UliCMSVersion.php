@@ -1,18 +1,18 @@
 <?php
-if (! class_exists("ulicms_version")) {
+if (! class_exists("UliCMSVersion")) {
 
     class UliCMSVersion
     {
 
         function __construct()
         {
-            $this->version = "Kaffeestinker";
+            $this->version = "Lügenbug";
             $this->releaseYear = 2018;
             $this->buildDate = 0; // {InsertBuildDate}
             $this->internalVersion = Array(
                 2018,
                 3,
-                1
+                2
             );
             $this->update = "";
             $this->developmentVersion = false;
