@@ -36,6 +36,7 @@ if ($command == "list") {
     while ($row = Database::fetchObject($result)) {
         echo "{$row->component} | {$row->name} | {$row->date}\n";
     }
+    echo "\n";
     exit();
 }
 if ($command == "reset") {
@@ -53,7 +54,11 @@ if ($command == "up") {
     }
     $folder = Path::resolve($directory . "/up");
     $migrator = new DBMigrator($component, $folder);
-    $migrator->migrate($stop);
+    try{
+         $migrator->migrate($stop);
+    } catch(Exception $e){
+        echo $e->getMessage(). "\n";
+    }
     exit();
 }
 
@@ -63,7 +68,11 @@ if ($command == "down") {
     }
     $folder = Path::resolve($directory . "/down");
     $migrator = new DBMigrator($component, $folder);
-    $migrator->rollback($stop);
+    try{
+       $migrator->rollback($stop);
+    } catch(Exception $e){
+        echo $e->getMessage(). "\n";
+    }
     exit();
 }
 
