@@ -15,8 +15,8 @@ class PrivacyCheckboxTest extends PHPUnit_Framework_TestCase
     {
         $this->privacy_policy_checkbox_enable_de = Settings::get("privacy_policy_checkbox_enable_de");
         $this->privacy_policy_checkbox_enable_en = Settings::get("privacy_policy_checkbox_enable_en");
-        $this->$privacy_policy_checkbox_text_de = Settings::get("privacy_policy_checkbox_text_de");
-        $this->$privacy_policy_checkbox_text_en = Settings::get("privacy_policy_checkbox_text_en");
+        $this->privacy_policy_checkbox_text_de = Settings::get("privacy_policy_checkbox_text_de");
+        $this->privacy_policy_checkbox_text_en = Settings::get("privacy_policy_checkbox_text_en");
     }
 
     public function tearDown()
@@ -44,7 +44,7 @@ class PrivacyCheckboxTest extends PHPUnit_Framework_TestCase
             "de",
             "en"
         );
-        foreach ($langauges as $langauge) {
+        foreach ($languages as $language) {
             Settings::set("privacy_policy_checkbox_enable_{$language}", 1);
             $checkbox = new PrivacyCheckbox($language);
             $this->assertTrue($checkbox->isEnabled());
