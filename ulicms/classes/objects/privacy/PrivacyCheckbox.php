@@ -25,7 +25,7 @@ class PrivacyCheckbox
 
     Public function isChecked()
     {
-        return boolval(Request::getVar($this->getCheckboxName(), 0, "bool"));
+        return StringHelper::isNotNullOrWhitespace(Request::getVar($this->getCheckboxName(), "", "str"));
     }
 
     public function check($success = null, $failed = null)
@@ -46,7 +46,7 @@ class PrivacyCheckbox
 
     public function render()
     {
-        $checkboxHtml = Input::CheckBox($this->getCheckboxName(), false, "1", array(
+        $checkboxHtml = Input::CheckBox($this->getCheckboxName(), false, "✔", array(
             "required" => "required",
             "id" => $this->getCheckboxName()
         ));
