@@ -1,5 +1,6 @@
 <?php
 namespace MailQueue;
+use NotImplementedException;
 class MailQueue{
     private static $instance;
     public static function getInstance(){
