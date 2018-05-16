@@ -1,0 +1,9 @@
+{
+	"source": "extend",
+	"version": "0.1",
+	"embed": false,
+	"custom_acl": [
+		"mail_queue"
+	],
+	"admin_permission": "mail_queue"
+}
