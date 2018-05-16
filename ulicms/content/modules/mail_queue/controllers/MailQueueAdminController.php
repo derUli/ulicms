@@ -10,4 +10,8 @@ class MailQueueAdminController extends MainClass{
     public function getSettingsLinkText(){
         return get_translation("open");
     }
+    public function uninstall(){
+        $migrator = new DBMigrator("module/mail_queue", ModuleHelper::buildRessourcePath("mail_queue", "sql/down"));
+        $migrator->rollback();
+    }
 }
