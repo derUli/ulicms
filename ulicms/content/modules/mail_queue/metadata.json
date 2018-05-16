@@ -6,7 +6,8 @@
 		"mail_queue"
 	],
 	"objects" : {
-		"\\MailQueue\\MailQueue" : "objects/MailQueue.php"
+		"\\MailQueue\\MailQueue" : "objects/MailQueue.php",
+		"\\MailQueue\\Mail" : "objects/Mail.php"
 	},
 	"admin_permission": "mail_queue"
 }
