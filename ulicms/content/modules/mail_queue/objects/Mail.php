@@ -3,7 +3,7 @@ namespace MailQueue;
 
 use Database;
 use Exception;
-use NotImplementedException;
+use Mailer;
 
 class Mail extends \Model
 {
@@ -14,7 +14,7 @@ class Mail extends \Model
 
     private $subject;
 
-    private $content;
+    private $message;
 
     private $created;
 
@@ -40,13 +40,13 @@ class Mail extends \Model
             ;
             $this->headers = $result->headers;
             $this->subject = $result->subject;
-            $this->content = $result->content;
+            $this->message = $result->message;
             $this->created = strtotime($result->created);
         } else {
             $this->recipient = null;
             $this->headers = null;
             $this->subject = null;
-            $this->content = null;
+            $this->message = null;
             $this->created = null;
         }
     }
@@ -54,12 +54,12 @@ class Mail extends \Model
     public function insert()
     {
         $sql = "insert into `{prefix}mail_queue` (recipient, headers, subject,
-                content, created) values (?, ?, ?, ?, from_unixtime(?))";
+                message, created) values (?, ?, ?, ?, from_unixtime(?))";
         $args = array(
             $this->recipient,
             $this->headers,
             $this->subject,
-            $this->content,
+            $this->message,
             $this->created
         );
         Database::pQuery($sql, $args, true);
@@ -68,7 +68,20 @@ class Mail extends \Model
 
     public function update()
     {
-        throw new NotImplementedException();
+        if ($this->getID()) {
+            $sql = "update `{prefix}mail_queue` set recipient = ?, 
+                     headers = ?, subject = ?, message = ?, created = ?
+                     where id = ?";
+            $args = array(
+                $this->recipient,
+                $this->headers,
+                $this->subject,
+                $this->message,
+                $this->created,
+                $this->getID()
+            );
+            Database::pQuery($sql, $args, true);
+        }
     }
 
     public function delete()
@@ -83,7 +96,9 @@ class Mail extends \Model
 
     public function send()
     {
-        throw new NotImplementedException();
+        if (Mailer::send($this->recipient, $this->subject, $this->message, $this->headers)) {
+            $this->delete();
+        }
     }
 
     public function getRecipient()
@@ -101,9 +116,9 @@ class Mail extends \Model
         return $this->subject;
     }
 
-    public function getContent()
+    public function getMessage()
     {
-        return $this->content;
+        return $this->message;
     }
 
     public function getCreated()
