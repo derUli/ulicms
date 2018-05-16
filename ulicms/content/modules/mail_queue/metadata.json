@@ -5,5 +5,8 @@
 	"custom_acl": [
 		"mail_queue"
 	],
+	"objects" : {
+		"\\MailQueue\\MailQueue" : "objects/MailQueue.php"
+	},
 	"admin_permission": "mail_queue"
 }
