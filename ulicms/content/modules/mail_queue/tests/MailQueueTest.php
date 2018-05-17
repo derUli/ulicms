@@ -1,5 +1,5 @@
 <?php
-use MailQueue;
+
 use PHPUnit_Framework_TestCase;
 class MailQueueTest extends PHPUnit_Framework_TestCase {
 	public function setUp(){
@@ -18,6 +18,11 @@ class MailQueueTest extends PHPUnit_Framework_TestCase {
 		}
 		$mails = $queue->getAllMails();
 		$this->assertEquals(100, count($mails));
-		$mail3 = 
+		$mail3 = $mails[2];
+		$this->assertEquals("Subject 3", $mail3->getSubject()); 
+
+
+		$mail97 = $mails[96];
+		$this->assertEquals("Subject 97", $mail97->getSubject()); 
 	}
 }
