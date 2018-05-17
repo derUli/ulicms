@@ -53,6 +53,7 @@ class Mail extends \Model
 
     public function insert()
     {
+        $this->created = time();
         $sql = "insert into `{prefix}mail_queue` (recipient, headers, subject,
                 message, created) values (?, ?, ?, ?, from_unixtime(?))";
         $args = array(
