@@ -4,7 +4,7 @@ $queue = MailQueue::getInstance();
 
 $mails = $queue->getAllMails();
 ?>
-<table>
+<table class="tablesorter">
 <thead>
 <tr>
 <th><?php translate("id");?></th>
@@ -20,8 +20,8 @@ $mails = $queue->getAllMails();
 <tr>
 <td><?php esc($mail->getId());?></td>
 <td><?php esc($mail->getRecipient());?></td>
-<td><?php esc($mail->getHeaders());?></td>
-<td><?php esc($mail->getMessage());?></td>
+<td><?php nl2br(esc($mail->getHeaders()));?></td>
+<td><?php nl2br(esc($mail->getMessage()));?></td>
 <td><?php esc(date('Y-m-d H:i:s', $mail->getCreated()));?></td>
 </tr>
     <?php
