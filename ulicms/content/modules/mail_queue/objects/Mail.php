@@ -125,5 +125,29 @@ class Mail extends \Model
     {
         return $this->created;
     }
-    // TODO: Setter implementieren
+
+    public function setRecipient($val)
+    {
+        $this->recipient = ! is_null($val) ? strval($val) : null;
+    }
+
+    public function setHeaders($val)
+    {
+        $this->headers = ! is_null($val) ? strval($val) : null;
+    }
+
+    public function setSubject($val)
+    {
+        $this->subject = ! is_null($val) ? strval($val) : null;
+    }
+
+    public function setMessage($val)
+    {
+        $this->message = ! is_null($val) ? strval($val) : null;
+    }
+
+    public function setCreated($val)
+    {
+        $this->created = ! is_null($val) ? intval($val) : null;
+    }
 }
