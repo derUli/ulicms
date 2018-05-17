@@ -20,7 +20,7 @@ class MailQueue
     {
         $mails = array();
         
-        $query = Database::query("select id from `{prefix}mail_queue` order by created asc", true);
+        $query = Database::query("select id from `{prefix}mail_queue` order by id asc", true);
         
         while ($row = Database::fetchObject($query)) {
             $mails[] = new Mail($row->id);
@@ -30,7 +30,7 @@ class MailQueue
 
     public function getNextMail()
     {
-        $query = Database::query("select id from `{prefix}mail_queue` order by created asc limit 1", true);
+        $query = Database::query("select id from `{prefix}mail_queue` order by id asc limit 1", true);
         if (Database::getNumRows($query) == 0) {
             return null;
         }

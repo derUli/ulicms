@@ -36,13 +36,14 @@ class Mail extends \Model
     public function fillVars($result = null)
     {
         if ($result) {
+            $this->setID($result->id);
             $this->recipient = $result->recipient;
-            ;
             $this->headers = $result->headers;
             $this->subject = $result->subject;
             $this->message = $result->message;
             $this->created = strtotime($result->created);
         } else {
+            $this->setID(null);
             $this->recipient = null;
             $this->headers = null;
             $this->subject = null;

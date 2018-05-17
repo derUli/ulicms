@@ -16,5 +16,8 @@ class MailQueueTest extends PHPUnit_Framework_TestCase {
 			$mail->setHeaders("From: foo@bar.de");
 			$queue->addMail($mail);
 		}
+		$mails = $queue->getAllMails();
+		$this->assertEquals(100, count($mails));
+		$mail3 = 
 	}
 }
