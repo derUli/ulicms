@@ -1,6 +1,6 @@
 <?php
 
-use PHPUnit_Framework_TestCase;
+
 class MailQueueTest extends PHPUnit_Framework_TestCase {
 	public function setUp(){
 		$queue = MailQueue\MailQueue::getInstance();
