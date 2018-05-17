@@ -24,5 +24,11 @@ class MailQueueTest extends PHPUnit_Framework_TestCase {
 
 		$mail97 = $mails[96];
 		$this->assertEquals("Subject 97", $mail97->getSubject()); 
+		for($i=100; $i > 0; $i--){
+			$nextMail = $queue->getNextMail();
+			$this->assertNotNull($nextMail);
+			$nextMail->send();
+			$this->assertEquals($i - 1, count($queue->getAllMails()));
+		}	
 	}
 }
