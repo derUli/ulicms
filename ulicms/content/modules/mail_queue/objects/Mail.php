@@ -100,7 +100,9 @@ class Mail extends \Model
     {
         if (Mailer::send($this->recipient, $this->subject, $this->message, $this->headers)) {
             $this->delete();
+            return true;
         }
+        return false;
     }
 
     public function getRecipient()
