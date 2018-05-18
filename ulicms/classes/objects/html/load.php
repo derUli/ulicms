@@ -4,7 +4,8 @@ $classes = array (
 		"Script",
 		"Link",
 		"ListItem",
-		"Input" 
+		"Input",
+		"functions" 
 );
 foreach ( $classes as $class ) {
 	require_once dirname ( __FILE__ ) . "/$class.php";
