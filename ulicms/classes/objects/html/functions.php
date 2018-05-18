@@ -2,5 +2,5 @@
 namespace UliCMS\HTML;
 
 function text($str){
-    return n2lbr(_esc($str));
+    return \nl2br(\_esc($str));
 }
