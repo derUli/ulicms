@@ -8,6 +8,4 @@ class ResponseBlock
 
     public $blockData = array();
 
-    // an identifier string Will be used by deleteData() function
-    public $identifier;
 }
