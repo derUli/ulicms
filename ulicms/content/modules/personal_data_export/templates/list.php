@@ -9,7 +9,7 @@ use GDPR\PersonalData as PersonalData;
 <?php echo UliCMS\HTML\Input::Hidden("module", "personal_data_export");?>
 <p>
 		<strong><?php translate("name_or_email_address");?></strong> <br /> <input
-			type="search" name="search" value="">
+			type="search" name="search" value="<?php esc($search);?>">
 	</p>
 	<button type="submit" class="btn btn-primary"><?php translate("search");?></button>
 </form>
