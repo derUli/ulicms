@@ -20,7 +20,8 @@ use GDPR\PersonalData as PersonalData;
     ?>
    <?php if(count($results) > 0){?>
 <div class="voffset2 alert alert-success">Hier werden dann die
-	Ergebnisse angezeigt</div>
+	Ergebnisse angezeigt in einer Tabelle angezeigt.</div>
+<?php var_dump($results);?>
 <?php
     } else {
         ?>

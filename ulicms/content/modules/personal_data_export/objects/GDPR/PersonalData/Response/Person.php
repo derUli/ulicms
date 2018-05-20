@@ -8,7 +8,7 @@ class Person
     public $name;
 
     // Array of ResponseBlock
-    public $blocks;
+    public $blocks = array();
 
     // an identifier string Will be used by deleteData() function
     public $identifier;
