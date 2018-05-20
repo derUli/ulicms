@@ -3,13 +3,58 @@ namespace GDPR\PersonalData;
 
 use Database;
 use StringHelper;
+use GDPR\PersonalData\Response\ResponseBlock;
+use GDPR\PersonalData\Response\BlockData;
 
 class CorePersonalDataResponder implements Responder
 {
 
     public function getData($query)
     {
-        throw new \NotImplementedException();
+        $person = new \Person();
+        
+        $userQuery = Database::pQuery("select * from `{prefix}users` where email = ?", array(
+            trim($query)
+        ), true);
+        if (Database::getNumRows($userQuery)) {
+            $userData = Database::fetchObject($userQuery);
+            $person->email = $row->email;
+            if (StringHelper::IsNotNullOrWhitespace($row->lastname) and StringHelper::IsNotNullOrWhitespace($row->firstname)) {
+                $person->name = "{$row->lastname}, {$row->firstname}";
+            } else if (StringHelper::IsNotNullOrWhitespace($row->lastname)) {
+                $person->name = $row->lastname;
+            } else {
+                $person->name = $row->username;
+            }
+            $person->identifier = "{$row->email}";
+            $block = new ResponseBlock();
+            $block->title = get_translation("data_export");
+            foreach ((array) $userData as $key => $value) {
+                $data = new BlockData();
+                $data->title = get_translation("user_profile");
+                $data->data[$key] = $value;
+                $block[] = $data;
+            }
+        }
+        $mailQuery = Database::pQuery("select * as email
+                            from {prefix}mails where `to` = ?", array(
+            trim($query)
+        
+        ), true);
+        if (Database::getNumRows($mailQuery)) {
+            $block = new ResponseBlock();
+            $block->title = get_translation("emails");
+            while ($mail = Database::fetchObject($mailQuery)) {
+                foreach ((array) $mail as $key => $value) {
+                    $data = new BlockData();
+                    $data->title = get_translation("user_profile");
+                    $data->data[$key] = $value;
+                    $block[] = $data;
+                }
+            }
+        }
+        
+        return $person;
     }
 
     public function deleteData($query)
@@ -27,7 +72,6 @@ class CorePersonalDataResponder implements Responder
                 $query,
                 $query
             ), true);
-            // TODO: search in the {prefix}mails table
         } else if (str_contains(", ", $query)) {
             $splitted = explode(", ", $query);
             $dbResult = Database::pQuery("select id, username, lastname, firstname, email
@@ -64,7 +108,7 @@ class CorePersonalDataResponder implements Responder
                 $row = Database::fetchObject($dbResult);
                 $person = new \Person();
                 $person->email = $row->email;
-				$person->name = "-";
+                $person->name = "-";
                 $person->identifier = "{$row->email}";
                 $results[] = $person;
             }
