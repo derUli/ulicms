@@ -53,8 +53,20 @@ class CorePersonalDataResponder implements Responder
             } else {
                 $person->name = $row->username;
             }
-            $person->identifier = "user_id={$row->id}=";
+            $person->identifier = "{$row->email}";
             $results[] = $person;
+        } else if (str_contains("@", $query)) {
+            $dbResult = Database::pQuery("select `to` as email
+                            from {prefix}mails where `to` = ?", array(
+                trim($query)
+            ), true);
+            if (Database::getNumRows($dbResult)) {
+                $row = Database::fetchObject($dbResult);
+                $person = new \Person();
+                $person->email = $row->email;
+                $person->identifier = "{$row->email}";
+                $results[] = $person;
+            }
         }
         
         return $results;
