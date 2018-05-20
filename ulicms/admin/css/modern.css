@@ -515,3 +515,7 @@ input.kcfinder {
 		float:none !important;
 	}
 }
+
+.delete-form{
+	display:inline-block;
+}

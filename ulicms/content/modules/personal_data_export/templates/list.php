@@ -34,7 +34,28 @@ $acl = new ACL();
 <tr>
 			<td><?php esc($person->email);?></td>
 			<td><?php esc($person->name);?></td>
-			<td></td>
+			<td>
+				<div class="button-group">
+			<?php if($acl->hasPermission("personal_data_export")){?>
+			<a href="#" class="btn btn-primary btn-margin pull-left"><?php translate("export_data");?></a>
+			<?php }?>
+			<?php
+                if ($acl->hasPermission("personal_data_delete")) {
+                    ?>
+        <?php
+                    echo ModuleHelper::buildMethodCallForm("PersonalDataDeletion", "delete", array(
+                        "query" => $person->identifier
+                    ), "post", array(
+                        "class" => "delete-form"
+                    ));
+                    ?>
+        <button type="submit" class="btn btn-danger"><?php translate("delete_data");?></button>
+        <?php
+                }
+                echo ModuleHelper::endForm();
+                ?>
+			</div>
+			</td>
 		</tr>
 		<?php }?>
 <?php }?>
@@ -47,6 +68,9 @@ $acl = new ACL();
 <?php
     }
     ?>
-
-
 <?php }?>
+<?php
+$translation = new JSTranslation();
+$translation->addKey("ask_for_delete");
+$translation->render();
+?>
