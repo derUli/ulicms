@@ -25,7 +25,7 @@ $acl = new ACL();
 		<tr>
 			<th><?php translate("email");?></th>
 			<th><?php translate("name");?></th>
-			<th><?php translate("actions");?></th>
+			<td><strong><?php translate("actions");?></strong></td>
 		</tr>
 	</thead>
 	<tbody>
