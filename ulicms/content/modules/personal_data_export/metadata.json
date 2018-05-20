@@ -9,7 +9,10 @@
 	],
 	"admin_permission": "personal_data_list",
 	"controllers": {
-		"PersonalData": "controllers/PersonalData.php"
+		"PersonalDataController": "controllers/PersonalDataController.php"
+	},
+	"controller_function_permissions": {
+		"PersonalDataController::exportData": "personal_data_export"
 	},
 	"objects": {
 		"GDPR\\PersonalData\\Query": "objects/GDPR/PersonalData/Query.php",
@@ -19,6 +22,6 @@
 		"GDPR\\PersonalData\\Response\\ResponseBlock": "objects/GDPR/PersonalData/Response/ResponseBlock.php",
 		"GDPR\\PersonalData\\Response\\BlockData": "objects/GDPR/PersonalData/Response/BlockData.php"
 	},
-	"main_class": "PersonalData",
+	"main_class": "PersonalDataController",
 	"personal_data_query_responder": "GDPR\\PersonalData\\CorePersonalDataResponder"
 }

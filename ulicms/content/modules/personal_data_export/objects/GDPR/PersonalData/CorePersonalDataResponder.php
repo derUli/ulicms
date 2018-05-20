@@ -17,7 +17,7 @@ class CorePersonalDataResponder implements Responder
             trim($query)
         ), true);
         if (Database::getNumRows($userQuery)) {
-            $userData = Database::fetchObject($userQuery);
+            $row = Database::fetchObject($userQuery);
             $person->email = $row->email;
             if (StringHelper::IsNotNullOrWhitespace($row->lastname) and StringHelper::IsNotNullOrWhitespace($row->firstname)) {
                 $person->name = "{$row->lastname}, {$row->firstname}";
@@ -29,15 +29,17 @@ class CorePersonalDataResponder implements Responder
             $person->identifier = "{$row->email}";
             $block = new ResponseBlock();
             $block->title = get_translation("data_export");
-            foreach ((array) $userData as $key => $value) {
+            // TODO: Output only human readable fields (about_me, skype_id, etc.)
+            foreach ((array) $row as $key => $value) {
                 $data = new BlockData();
                 $data->title = get_translation("user_profile");
-                $data->data[$key] = $value;
-                $block[] = $data;
+                $translatedKey = get_translation($key);
+                $data->data[$translatedKey] = $value;
+                $block->blockData[] = $data;
             }
+            $person->blocks[] = $block;
         }
-        $mailQuery = Database::pQuery("select * as email
-                            from {prefix}mails where `to` = ?", array(
+        $mailQuery = Database::pQuery("select * from {prefix}mails where `to` = ?", array(
             trim($query)
         
         ), true);
@@ -49,7 +51,7 @@ class CorePersonalDataResponder implements Responder
                     $data = new BlockData();
                     $data->title = get_translation("user_profile");
                     $data->data[$key] = $value;
-                    $block[] = $data;
+                    $block->blockData[] = $data;
                 }
             }
         }

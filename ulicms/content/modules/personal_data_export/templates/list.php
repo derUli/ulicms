@@ -21,24 +21,26 @@ $acl = new ACL();
     ?>
    <?php if(count($results) > 0){?>
 <div class="scroll">
-   <table class="tablesorter">
-	<thead>
-		<tr>
-			<th><?php translate("email");?></th>
-			<th><?php translate("name");?></th>
-			<td><strong><?php translate("actions");?></strong></td>
-		</tr>
-	</thead>
-	<tbody>
+	<table class="tablesorter">
+		<thead>
+			<tr>
+				<th><?php translate("email");?></th>
+				<th><?php translate("name");?></th>
+				<td><strong><?php translate("actions");?></strong></td>
+			</tr>
+		</thead>
+		<tbody>
 <?php foreach($results as $persons){?>
 <?php foreach($persons as $person){?>
 <tr>
-			<td><?php esc($person->email);?></td>
-			<td><?php esc($person->name);?></td>
-			<td>
-				<div class="button-group">
+				<td><?php esc($person->email);?></td>
+				<td><?php esc($person->name);?></td>
+				<td>
+					<div class="button-group">
 			<?php if($acl->hasPermission("personal_data_export")){?>
-			<a href="#" class="btn btn-primary btn-margin"><?php translate("export_data");?></a>
+			<a
+							href="<?php echo ModuleHelper::buildMethodCallUrl("PersonalDataController", "exportData", "query=".urlencode($person->email));?>"
+							class="btn btn-primary btn-margin"><?php translate("export_data");?></a>
 			<?php }?>
 			<?php
                 if ($acl->hasPermission("personal_data_delete")) {
@@ -56,12 +58,12 @@ $acl = new ACL();
                 echo ModuleHelper::endForm();
                 ?>
 			</div>
-			</td>
-		</tr>
+				</td>
+			</tr>
 		<?php }?>
 <?php }?>
 </tbody>
-</table>
+	</table>
 </div>
 <?php
     } else {
