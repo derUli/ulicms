@@ -27,6 +27,7 @@ class CorePersonalDataResponder implements Responder
                 $query,
                 $query
             ), true);
+            // TODO: search in the {prefix}mails table
         } else if (str_contains(", ", $query)) {
             $splitted = explode(", ", $query);
             $dbResult = Database::pQuery("select id, username, lastname, firstname, email
@@ -45,10 +46,9 @@ class CorePersonalDataResponder implements Responder
             $row = Database::fetchObject($dbResult);
             $person = new \Person();
             $person->email = $row->email;
-            if(StringHelper::IsNotNullOrWhitespace($row->lastname) and StringHelper::IsNotNullOrWhitespace($row->firstname)){
+            if (StringHelper::IsNotNullOrWhitespace($row->lastname) and StringHelper::IsNotNullOrWhitespace($row->firstname)) {
                 $person->name = "{$row->lastname}, {$row->firstname}";
-            }
-            else if(StringHelper::IsNotNullOrWhitespace($row->lastname)){
+            } else if (StringHelper::IsNotNullOrWhitespace($row->lastname)) {
                 $person->name = $row->lastname;
             } else {
                 $person->name = $row->username;
