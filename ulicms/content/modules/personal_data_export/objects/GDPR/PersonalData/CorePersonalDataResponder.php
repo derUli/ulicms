@@ -43,9 +43,11 @@ class CorePersonalDataResponder implements Responder
             trim($query)
         
         ), true);
+        $block = new ResponseBlock();
+        $block->title = get_translation("emails");
         if (Database::getNumRows($mailQuery)) {
             $block = new ResponseBlock();
-            $block->title = get_translation("emails");
+            $block->title = get_translation("email");
             while ($mail = Database::fetchObject($mailQuery)) {
                 foreach ((array) $mail as $key => $value) {
                     $data = new BlockData();
@@ -54,6 +56,7 @@ class CorePersonalDataResponder implements Responder
                     $block->blockData[] = $data;
                 }
             }
+            $person->blocks[] = $block;
         }
         
         return $person;
