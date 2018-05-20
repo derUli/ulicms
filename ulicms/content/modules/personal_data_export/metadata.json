@@ -1,0 +1,15 @@
+{
+	"source": "extend",
+	"version": "0.1",
+	"embed": false,
+	"custom_acl": [
+		"personal_data_list",
+		"personal_data_export",
+		"personal_data_delete"
+	],
+	"admin_permission": "personal_data_list",
+	"controllers": {
+		"PersonalData": "controllers/PersonalData.php"
+	},
+	"main_class": "PersonalData"
+}
