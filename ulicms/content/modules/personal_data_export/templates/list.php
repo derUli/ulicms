@@ -19,8 +19,9 @@ use GDPR\PersonalData as PersonalData;
     $results = $query->searchPerson($search);
     ?>
    <?php if(count($results) > 0){?>
-   Hier würden dann die Ergebnisse angezeigt
-   <?php
+<div class="voffset2 alert alert-success">Hier werden dann die
+	Ergebnisse angezeigt</div>
+<?php
     } else {
         ?>
 <div class="voffset2 alert alert-warning vspacing2"><?php translate("no_results_found");?></div>

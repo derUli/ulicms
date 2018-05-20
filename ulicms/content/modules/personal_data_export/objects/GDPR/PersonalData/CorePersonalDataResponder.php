@@ -16,6 +16,7 @@ class CorePersonalDataResponder implements Responder
 
     public function searchPerson($query)
     {
-        throw new \NotImplementedException();
+        $results = array();
+        return $result;
     }
 }
