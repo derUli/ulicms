@@ -42,17 +42,18 @@ class CorePersonalDataResponder implements Responder
             trim($query)
         
         ), true);
-        $block = new ResponseBlock();
-        $block->title = get_translation("emails");
         if (Database::getNumRows($mailQuery)) {
             while ($mail = Database::fetchObject($mailQuery)) {
+                $block = new ResponseBlock();
+                $block->title = get_translation("email");
                 foreach ((array) $mail as $key => $value) {
                     $data = new BlockData();
-                    $data->data[$key] = $value;
+                    $translatedKey = get_translation($key);
+                    $data->data[$translatedKey] = $value;
                     $block->blockData[] = $data;
                 }
+                $person->blocks[] = $block;
             }
-            $person->blocks[] = $block;
         }
         
         return $person;

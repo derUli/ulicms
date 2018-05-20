@@ -26,12 +26,8 @@ class PersonalDataController extends MainClass
         $qString = Request::getVar("query", null, "str");
         if ($qString) {
             $query = new Query();
-            ob_start();
-            var_dump($query->getData($qString));
-            $data = ob_get_clean();
-            // TODO: Export as HTML
-            TextResult($data);
-            exit();
+            ViewBag::set("person", $query->getData($qString));
+            HTMLResult(Template::executeModuleTemplate(self::MODULE_NAME, "export.php"));
         }
     }
 }
