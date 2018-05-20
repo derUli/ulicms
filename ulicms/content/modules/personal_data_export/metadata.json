@@ -14,8 +14,8 @@
 	"objects": {
 		"GDPR\\PersonalData\\Query": "objects/GDPR/PersonalData/Query.php",
 		"GDPR\\PersonalData\\Responder": "objects/GDPR/PersonalData/Responder.php",
-		"GDPR\\PersonalData\\Response\\Response": "objects/GDPR/PersonalData/Response/Response.php",
-		"GDPR\\PersonalData\\Response\\Block": "objects/GDPR/PersonalData/Response/Block.php"
+		"GDPR\\PersonalData\\Response\\ResponseBlock": "objects/GDPR/PersonalData/Response/ResponseBlock.php",
+		"GDPR\\PersonalData\\Response\\BlockData": "objects/GDPR/PersonalData/Response/BlockData.php"
 	},
 	"main_class": "PersonalData"
 }
