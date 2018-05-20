@@ -20,7 +20,8 @@ $acl = new ACL();
     $results = $query->searchPerson($search);
     ?>
    <?php if(count($results) > 0){?>
-<table class="tablesorter">
+<div class="scroll">
+   <table class="tablesorter">
 	<thead>
 		<tr>
 			<th><?php translate("email");?></th>
@@ -61,6 +62,7 @@ $acl = new ACL();
 <?php }?>
 </tbody>
 </table>
+</div>
 <?php
     } else {
         ?>
