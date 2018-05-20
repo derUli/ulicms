@@ -64,6 +64,7 @@ class CorePersonalDataResponder implements Responder
                 $row = Database::fetchObject($dbResult);
                 $person = new \Person();
                 $person->email = $row->email;
+				$person->name = "-";
                 $person->identifier = "{$row->email}";
                 $results[] = $person;
             }
