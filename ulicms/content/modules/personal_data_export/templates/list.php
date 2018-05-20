@@ -1,5 +1,6 @@
 <?php
 use GDPR\PersonalData as PersonalData;
+$acl = new ACL();
 ?>
 <?php $search = Request::getVar("search", null, "str");?>
 <form
@@ -19,9 +20,26 @@ use GDPR\PersonalData as PersonalData;
     $results = $query->searchPerson($search);
     ?>
    <?php if(count($results) > 0){?>
-<div class="voffset2 alert alert-success">Hier werden dann die
-	Ergebnisse angezeigt in einer Tabelle angezeigt.</div>
-<?php var_dump($results);?>
+<table class="tablesorter">
+	<thead>
+		<tr>
+			<th><?php translate("email");?></th>
+			<th><?php translate("name");?></th>
+			<th><?php translate("actions");?></th>
+		</tr>
+	</thead>
+	<tbody>
+<?php foreach($results as $persons){?>
+<?php foreach($persons as $person){?>
+<tr>
+			<td><?php esc($person->email);?></td>
+			<td><?php esc($person->name);?></td>
+			<td></td>
+		</tr>
+		<?php }?>
+<?php }?>
+</tbody>
+</table>
 <?php
     } else {
         ?>
