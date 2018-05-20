@@ -28,11 +28,10 @@ class CorePersonalDataResponder implements Responder
             }
             $person->identifier = "{$row->email}";
             $block = new ResponseBlock();
-            $block->title = get_translation("data_export");
+            $block->title = get_translation("user_profile");
             // TODO: Output only human readable fields (about_me, skype_id, etc.)
             foreach ((array) $row as $key => $value) {
                 $data = new BlockData();
-                $data->title = get_translation("user_profile");
                 $translatedKey = get_translation($key);
                 $data->data[$translatedKey] = $value;
                 $block->blockData[] = $data;
@@ -46,12 +45,9 @@ class CorePersonalDataResponder implements Responder
         $block = new ResponseBlock();
         $block->title = get_translation("emails");
         if (Database::getNumRows($mailQuery)) {
-            $block = new ResponseBlock();
-            $block->title = get_translation("email");
             while ($mail = Database::fetchObject($mailQuery)) {
                 foreach ((array) $mail as $key => $value) {
                     $data = new BlockData();
-                    $data->title = get_translation("user_profile");
                     $data->data[$key] = $value;
                     $block->blockData[] = $data;
                 }
