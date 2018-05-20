@@ -37,7 +37,7 @@ $acl = new ACL();
 			<td>
 				<div class="button-group">
 			<?php if($acl->hasPermission("personal_data_export")){?>
-			<a href="#" class="btn btn-primary btn-margin pull-left"><?php translate("export_data");?></a>
+			<a href="#" class="btn btn-primary btn-margin"><?php translate("export_data");?></a>
 			<?php }?>
 			<?php
                 if ($acl->hasPermission("personal_data_delete")) {
@@ -49,7 +49,7 @@ $acl = new ACL();
                         "class" => "delete-form"
                     ));
                     ?>
-        <button type="submit" class="btn btn-danger"><?php translate("delete_data");?></button>
+        <button type="submit" class="btn btn-danger btn-margin"><?php translate("delete_data");?></button>
         <?php
                 }
                 echo ModuleHelper::endForm();
