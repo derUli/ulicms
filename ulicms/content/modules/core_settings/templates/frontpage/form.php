@@ -1,19 +1,19 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "settings_simple" )) {
-	$languages = getAllLanguages ();
-	$frontpages = array ();
-	
-	for($i = 0; $i < count ( $languages ); $i ++) {
-		$lang = $languages [$i];
-		$frontpages [$lang] = Settings::get ( "frontpage_" . $lang );
-		
-		if (! $frontpages [$lang]) {
-			$frontpages [$lang] = Settings::get ( "frontpage" );
-		}
-	}
-	
-	?>
+$acl = new ACL();
+if ($acl->hasPermission("settings_simple")) {
+    $languages = getAllLanguages();
+    $frontpages = array();
+    
+    for ($i = 0; $i < count($languages); $i ++) {
+        $lang = $languages[$i];
+        $frontpages[$lang] = Settings::get("frontpage_" . $lang);
+        
+        if (! $frontpages[$lang]) {
+            $frontpages[$lang] = Settings::get("frontpage");
+        }
+    }
+    
+    ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("settings_simple");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
@@ -22,10 +22,10 @@ if ($acl->hasPermission ( "settings_simple" )) {
 <?php translate("frontpage");?>
 </h1>
 <?php
-	echo ModuleHelper::buildMethodCallForm ( "FrontPageSettingsController", "save", array (), "post", array (
-			"id" => "frontpage_settings" 
-	) );
-	?>
+    echo ModuleHelper::buildMethodCallForm("FrontPageSettingsController", "save", array(), "post", array(
+        "id" => "frontpage_settings"
+    ));
+    ?>
 <table border="0">
 	<tr>
 		<td><strong><?php translate("language");?>
@@ -34,35 +34,35 @@ if ($acl->hasPermission ( "settings_simple" )) {
 			</strong></td>
 	</tr>
 		<?php
-	for($n = 0; $n < count ( $languages ); $n ++) {
-		$lang = $languages [$n];
-		?>
+    for ($n = 0; $n < count($languages); $n ++) {
+        $lang = $languages[$n];
+        ?>
 		<tr>
 		<td><?php
-		
-		echo $lang;
-		?></td>
+        
+        echo $lang;
+        ?></td>
 		<td><select name="frontpage_<?php
-		
-		echo $lang;
-		?>" size="1">
+        
+        echo $lang;
+        ?>" size="1">
 				<?php
-		
-		$pages = getAllPages ( $lang, "title", true );
-		
-		for($i = 0; $i < count ( $pages ); $i ++) {
-			if ($pages [$i] ["systemname"] == $frontpages [$lang]) {
-				echo "<option value='" . $pages [$i] ["systemname"] . "' selected='selected'>" . $pages [$i] ["title"] . " (ID: " . $pages [$i] ["id"] . ")</option>";
-			} else {
-				echo "<option value='" . $pages [$i] ["systemname"] . "'>" . $pages [$i] ["title"] . " (ID: " . $pages [$i] ["id"] . ")</option>";
-			}
-		}
-		?>
+        
+        $pages = getAllPages($lang, "title", true);
+        
+        for ($i = 0; $i < count($pages); $i ++) {
+            if ($pages[$i]["systemname"] == $frontpages[$lang]) {
+                echo "<option value='" . _esc($pages[$i]["systemname"]) . "' selected='selected'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
+            } else {
+                echo "<option value='" . _esc($pages[$i]["systemname"]) . "'>" . _esc($pages[$i]["title"]) . " (ID: " . $pages[$i]["id"] . ")</option>";
+            }
+        }
+        ?>
 			</select></td>
 	</tr>
 			<?php
-	}
-	?>
+    }
+    ?>
 	<tr>
 		<td></td>
 		<td style="text-align: center">
@@ -89,5 +89,5 @@ $("#frontpage_settings").ajaxForm({beforeSubmit: function(e){
 
 <?php
 } else {
-	noperms ();
+    noperms();
 }
