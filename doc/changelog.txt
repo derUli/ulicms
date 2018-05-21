@@ -10,6 +10,9 @@ Neue API-Funktionen:
 * DBMigrator->disableStrictMode()
 * SQLException
 
+Sicherheit:
+* XSS in "Übergeordnete Seite" behoben
+
 ===== Neues in UliCMS 2018.3.1 =====
 
 Neue Features:
