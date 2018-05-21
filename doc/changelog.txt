@@ -1,8 +1,9 @@
-===== Neues in UliCMS 2018.3.2 =====
+﻿===== Neues in UliCMS 2018.3.2 =====
 
 Neue Features:
 + Strict Mode zum DBMigrator hinzugefügt
 + Performance der "Pakete" Seite im Backend verbessert
++ Neue Option "fix_log_permissions"
 
 Neue API-Funktionen:
 * UliCMS\HTML\text($str);

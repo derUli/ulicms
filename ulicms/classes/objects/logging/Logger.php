@@ -11,6 +11,14 @@ class Logger {
 		}
 		if (is_dir ( $this->path )) {
 			$this->logger = new Katzgrau\KLogger\Logger ( $this->path );
+			$cfg = new CMSConfig();
+			if(is_true($cfg->fix_log_permissions)){
+				$files = glob($this->path."/log_*.txt");
+				foreach($files as $file){
+					chmod($file, 0777);
+				}
+			}
+			
 		}
 	}
 	public function debug($message) {
