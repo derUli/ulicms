@@ -19,9 +19,8 @@
 		"GDPR\\PersonalData\\Responder": "objects/GDPR/PersonalData/Responder.php",
 		"GDPR\\PersonalData\\CorePersonalDataResponder": "objects/GDPR/PersonalData/CorePersonalDataResponder.php",
 		"GDPR\\PersonalData\\Response\\Person": "objects/GDPR/PersonalData/Response/Person.php",
-		"GDPR\\PersonalData\\Response\\ResponseBlock": "objects/GDPR/PersonalData/Response/ResponseBlock.php",
-		"GDPR\\PersonalData\\Response\\BlockData": "objects/GDPR/PersonalData/Response/BlockData.php"
-	},
+		"GDPR\\PersonalData\\Response\\ResponseBlock": "objects/GDPR/PersonalData/Response/ResponseBlock.php"	
+		},
 	"main_class": "PersonalDataController",
 	"personal_data_query_responder": "GDPR\\PersonalData\\CorePersonalDataResponder"
 }

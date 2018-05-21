@@ -43,11 +43,9 @@ class CorePersonalDataResponder implements Responder
             $block->title = get_translation("user_profile");
             // TODO: Output only human readable fields (about_me, skype_id, etc.)
             foreach ($this->profileFields as $field) {
-                $data = new BlockData();
                 $translatedKey = get_translation($field);
                 if (isset($row->$field)) {
-                    $data->data[$translatedKey] = StringHelper::isNotNullOrWhitespace($row->$field) ? $row->$field : "-";
-                    $block->blockData[] = $data;
+                    $block->blockData[$translatedKey] = StringHelper::isNotNullOrWhitespace($row->$field) ? $row->$field : "-";
                 }
             }
             $person->blocks[] = $block;
@@ -62,10 +60,8 @@ class CorePersonalDataResponder implements Responder
                 $block = new ResponseBlock();
                 $block->title = get_translation("email");
                 foreach ((array) $mail as $key => $value) {
-                    $data = new BlockData();
                     $translatedKey = get_translation($key);
-                    $data->data[$translatedKey] = $value;
-                    $block->blockData[] = $data;
+                    $block->blockData[$translatedKey] = $value;
                 }
                 $person->blocks[] = $block;
             }

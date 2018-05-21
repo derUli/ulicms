@@ -40,27 +40,21 @@ foreach ($person as $data) {
     foreach ($blocks as $block) {
         ?>
     <h2><?php esc($block->title);?></h2>
-<table>
+	<table>
 		<tbody>
-        <?php
-        
-        foreach ($block->blockData as $data) {
-            ?>
             	
-            <?php 
-            foreach ($data->data as $key => $value) {
-                ?>
+            <?php
+            foreach ($block->blockData as $key => $value) {
+            ?>
     <tr>
 				<td><strong><?php esc($key);?></strong></td>
 				<td><?php echo HTML\text($value);?></td>
 			</tr>
     <?php
-            }
-            ?>
-            
-            <?php 
         }
         ?>
+            
+       
     </tbody>
 	</table>
     
