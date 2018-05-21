@@ -17,7 +17,8 @@ class CorePersonalDataResponder implements Responder
         "skype_id",
         "twitter",
         "homepage",
-        "about_me"
+        "about_me",
+        "notice"
     );
 
     public function getData($query)
