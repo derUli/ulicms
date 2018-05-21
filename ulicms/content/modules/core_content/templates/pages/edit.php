@@ -241,7 +241,7 @@ if (defined ( "_SECURITY" )) {
 					?>>
 				<?php
 
-					echo $page ["title"];
+					esc( $page ["title"]);
 					?>
 			(ID:
 			<?php
@@ -721,7 +721,7 @@ function openMenuImageSelectWindow(field) {
 					?>>
 			<?php
 
-					echo $page ["title"];
+					esc($page ["title"]);
 					?>
 			(ID:
 			<?php
