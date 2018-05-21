@@ -27,7 +27,9 @@ class PersonalDataController extends MainClass
         if ($qString) {
             $query = new Query();
             ViewBag::set("person", $query->getData($qString));
-            HTMLResult(Template::executeModuleTemplate(self::MODULE_NAME, "export.php"));
+            $escapedQString = str_replace("@", "_at_", trim($qString));
+            $fileName = "data_export-" . date('Y-m-d_h-i') . "-" . $escapedQString . ".html";
+            DownloadResultFromString(Template::executeModuleTemplate(self::MODULE_NAME, "export.php"), $fileName);
         }
     }
 }

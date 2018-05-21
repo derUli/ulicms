@@ -10,3 +10,6 @@ add_translation("user_profile", "Benutzerprofil");
 add_translation("data_export", "Daten Export");
 add_translation("skype_id", "Skype ID");
 add_translation("twitter", "Twitter");
+add_translation("to", "An");
+add_translation("headers", "Kopfzeilen");
+add_translation("body", "Körper");
