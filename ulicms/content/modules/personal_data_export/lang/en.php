@@ -6,3 +6,7 @@ add_translation("no_results_found", "No results found.");
 add_translation("actions", "Actions");
 add_translation("export_data", "Export Data");
 add_translation("delete_data", "Delete Data");
+add_translation("user_profile", "User Profile");
+add_translation("data_export", "Data Export");
+add_translation("skype_id", "Skype ID");
+add_translation("twitter", "Twitter");

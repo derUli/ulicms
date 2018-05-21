@@ -9,6 +9,17 @@ use GDPR\PersonalData\Response\BlockData;
 class CorePersonalDataResponder implements Responder
 {
 
+    protected $profileFields = array(
+        "username",
+        "lastname",
+        "firstname",
+        "email",
+        "skype_id",
+        "twitter",
+        "homepage",
+        "about_me"
+    );
+
     public function getData($query)
     {
         $person = new \Person();
@@ -30,16 +41,19 @@ class CorePersonalDataResponder implements Responder
             $block = new ResponseBlock();
             $block->title = get_translation("user_profile");
             // TODO: Output only human readable fields (about_me, skype_id, etc.)
-            foreach ((array) $row as $key => $value) {
+            foreach ($this->profileFields as $field) {
                 $data = new BlockData();
-                $translatedKey = get_translation($key);
-                $data->data[$translatedKey] = $value;
-                $block->blockData[] = $data;
+                $translatedKey = get_translation($field);
+                if (isset($row->$field)) {
+                    $data->data[$translatedKey] = StringHelper::isNotNullOrWhitespace($row->$field) ? $row->$field : "-";
+                    $block->blockData[] = $data;
+                }
             }
             $person->blocks[] = $block;
         }
-        $mailQuery = Database::pQuery("select * from {prefix}mails where `to` = ?", array(
-            trim($query)
+        $mailQuery = Database::pQuery("select * from {prefix}mails where `to` = ? or headers like ?", array(
+            trim($query),
+            "%" . trim($query) . "%"
         
         ), true);
         if (Database::getNumRows($mailQuery)) {
