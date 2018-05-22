@@ -11,6 +11,9 @@ Neue API-Funktionen:
 * DBMigrator->disableStrictMode()
 * SQLException
 
+BugFixes:
+* Wenn einer Gruppe mehrere Sprachen zugewiesen sind, werden die Seiten nun korrekt gefilter
+
 Sicherheit:
 * XSS in "Übergeordnete Seite" behoben
 
