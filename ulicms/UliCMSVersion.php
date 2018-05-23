@@ -6,13 +6,13 @@ if (! class_exists("UliCMSVersion")) {
 
         function __construct()
         {
-            $this->version = "Lügenbug";
+            $this->version = "Gnampf";
             $this->releaseYear = 2018;
             $this->buildDate = 0; // {InsertBuildDate}
             $this->internalVersion = Array(
                 2018,
                 3,
-                2
+                3
             );
             $this->update = "";
             $this->developmentVersion = false;
