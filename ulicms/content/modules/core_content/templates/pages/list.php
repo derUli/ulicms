@@ -408,7 +408,7 @@ if ($acl->hasPermission("pages")) {
     $userLanguage = $group->getLanguages();
     $joined = "";
     foreach ($userLanguage as $lang) {
-        $joined = "'" . Database::escapeValue($lang->getLanguageCode()) . "',";
+        $joined .= "'" . Database::escapeValue($lang->getLanguageCode()) . "',";
     }
     $joined = trim($joined, ",");
     if (count($userLanguage) > 0) {

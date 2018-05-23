@@ -115,7 +115,7 @@ function exception_handler($exception)
     $cfg = class_exists("CMSConfig") ? new CMSConfig() : null;
     // TODO: useful error message if $debug is disabled
     // Log exception into a text file
-    $message = is_true($cfg->debug) ? $exception : "Something happened! 😞";
+    $message = is_true($cfg->debug) ? $exception : "An error occurred! See exception_log for details. 😞";
     
     $logger = LoggerRegistry::get("exception_log");
     if ($logger) {

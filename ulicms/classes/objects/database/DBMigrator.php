@@ -7,10 +7,23 @@ class DBMigrator
 
     private $folder = null;
 
+    private $strictMode = true;
+
     public function __construct($component, $folder)
     {
         $this->component = $component;
         $this->folder = $folder;
+        $cfg = new CMSConfig();
+        if(isset($cfg->dbmigrator_strict_mode)){
+            $this->strictMode = boolval($cfg->dbmigrator_strict_mode);
+        }
+    }
+
+    public function enableStrictMode(){
+        $this->strictMode = true;
+    } 
+    public function disableStrictMode(){
+        $this->strictMode = false;
     }
 
     public function migrate($stop = null)
@@ -31,11 +44,15 @@ class DBMigrator
                     $sql = file_get_contents($path);
                     $cfg = new CMSConfig();
                     $sql = str_ireplace("{prefix}", $cfg->db_prefix, $sql);
-                    Database::query($sql, true);
-                    $sql = "INSERT INTO {prefix}dbtrack (component, name) values (?,?)";
-                    Database::pQuery($sql, $args, true);
-                }
+                    $success = Database::query($sql, true);
+                    if($success or !$this->strictMode){
+                        $sql = "INSERT INTO {prefix}dbtrack (component, name) values (?,?)";
+                        Database::pQuery($sql, $args, true);
+                    } else if($this->strictMode){
+                        throw new SqlException("{$this->component} - {$file}: " . Database::getLastError());
+                    }
             }
+        }
             if ($file === $stop) {
                 return;
             }
@@ -61,9 +78,13 @@ class DBMigrator
                     $sql = file_get_contents($path);
                     $cfg = new CMSConfig();
                     $sql = str_ireplace("{prefix}", $cfg->db_prefix, $sql);
-                    Database::query($sql, true);
-                    $sql = "DELETE FROM {prefix}dbtrack where component = ? and name = ?";
-                    Database::pQuery($sql, $args, true);
+                    $success = Database::query($sql, true);
+                    if($success or !$this->strictMode){
+                        $sql = "DELETE FROM {prefix}dbtrack where component = ? and name = ?";
+                        Database::pQuery($sql, $args, true);
+                    } else if($this->strictMode){
+                        throw new SqlException("{$this->component} - {$file}: " . Database::getLastError());
+                    }
                 }
             }
             if ($file === $stop) {

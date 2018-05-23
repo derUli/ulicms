@@ -644,7 +644,8 @@ function get_title($ipage = null, $headline = false)
                 $title = $row->title;
             }
             
-            $title = apply_filter($title, "title");
+			$title = apply_filter($title, "title");
+			$title = Template::getEscape($title);
             Vars::set($cacheVar, $title);
             return $title;
         }

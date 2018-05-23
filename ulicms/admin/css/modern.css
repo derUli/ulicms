@@ -503,3 +503,19 @@ input.kcfinder {
 .normal-weight {
 	font-weight: normal;
 }
+
+.btn-margin{
+	margin-right: 10px;
+}
+
+@media only screen and (max-width: 780px) {
+    .btn-margin{
+		margin-right: unset;
+		margin-bottom:10px;
+		float:none !important;
+	}
+}
+
+.delete-form{
+	display:inline-block;
+}
