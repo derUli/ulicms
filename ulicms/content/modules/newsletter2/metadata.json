@@ -7,5 +7,7 @@
 	"controllers": 
 	{
 		"NewsletterController": "controllers/NewsletterController.php"
-	}
+	},
+	"custom_acl" : ["newsletter"],
+	"admin_permission" : "newsletter"
 }
