@@ -1,4 +1,9 @@
-﻿===== Neues in UliCMS 2018.3.2 =====
+﻿===== Neues in UliCMS 2018.3.3 =====
+
+Neue Features:
+* CKEditor 4 auf Version 4.9.2 aktualisiert
+
+===== Neues in UliCMS 2018.3.2 =====
 
 Neue Features:
 + Strict Mode zum DBMigrator hinzugefügt
