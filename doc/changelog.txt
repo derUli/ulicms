@@ -1,8 +1,9 @@
 ﻿===== Neues in UliCMS 2018.3.3 =====
 
 Neue Features:
-* CKEditor 4 auf Version 4.9.2 aktualisiert
-* CKEditor 4 Plugin "Form Field Label" integriert
++ CKEditor 4 auf Version 4.9.2 aktualisiert
++ CKEditor 4 Plugin "Form Field Label" integriert
++ Einstellungen: E-Mail Modi sind nun aussagekräftiger beschriftet
 
 ===== Neues in UliCMS 2018.3.2 =====
 
