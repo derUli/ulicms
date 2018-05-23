@@ -1,0 +1,11 @@
+{
+	"version": "2.0",
+	"source": "extend",
+	"embed": true,
+	"shy": false,
+	"main_class": "NewsletterController",
+	"controllers": 
+	{
+		"NewsletterController": "controllers/NewsletterController.php"
+	}
+}
