@@ -5,6 +5,9 @@ Neue Features:
 + CKEditor 4 Plugin "Form Field Label" integriert
 + Einstellungen: E-Mail Modi sind nun aussagekräftiger beschriftet
 
+Neue API-Funktionen:
+* ExceptionResult($message, $status = 500)
+
 ===== Neues in UliCMS 2018.3.2 =====
 
 Neue Features:
