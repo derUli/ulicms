@@ -19,17 +19,12 @@ class LogoUploadController extends Controller {
 				if (startsWith ( ULICMS_DATA_STORAGE_ROOT, "gs://" ) and class_exists ( "GoogleCloudHelper" )) {
 					GoogleCloudHelper::changeFileVisiblity ( $new_filename, true );
 				}
-				$image_size = getimagesize ( $new_filename );
-				if ($image_size [0] <= 500 and $image_size [1] <= 100) {
+			
 					setconfig ( "logo_image", $logo_upload_filename );
 					add_hook ( "after_upload_logo_successfull" );
 					Request::redirect ( ModuleHelper::buildActionURL ( "logo_upload" ) );
-				} else {
-					add_hook ( "after_upload_logo_failed" );
-					Request::redirect ( ModuleHelper::buildActionURL ( "logo_upload", "error=to_big" ) );
-					exit ();
 				}
-			}
+			
 			
 			add_hook ( "after_upload_logo" );
 			Request::redirect ( ModuleHelper::buildActionURL ( "logo_upload" ) );
