@@ -3,15 +3,6 @@ if (defined ( "_SECURITY" )) {
 	$acl = new ACL ();
 	if ($acl->hasPermission ( "logo" )) {
 		?>
-		<?php
-		
-		if ($_GET ["error"] == "to_big") {
-			?>
-<p style="color: red; font-size: 1.2em">
-<?php translate("uploaded_image_too_big");?></p>
-<?php
-		}
-		?>
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
