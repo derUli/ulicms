@@ -9,6 +9,9 @@ Neue Features:
 Neue API-Funktionen:
 * ExceptionResult($message, $status = 500)
 
+Bugfixes:
+* Wenn cron.php direkt aufgerufen wird, wird nun eine Sprachdatei geladen
+
 ===== Neues in UliCMS 2018.3.2 =====
 
 Neue Features:
@@ -23,7 +26,7 @@ Neue API-Funktionen:
 * SQLException
 
 BugFixes:
-* Wenn einer Gruppe mehrere Sprachen zugewiesen sind, werden die Seiten nun korrekt gefilter
+* Wenn einer Gruppe mehrere Sprachen zugewiesen sind, werden die Seiten nun korrekt gefiltert
 
 Sicherheit:
 * XSS in "Übergeordnete Seite" behoben

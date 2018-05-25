@@ -1,4 +1,5 @@
 <?php
+define ( "LOADED_LANGUAGE_FILE", "en" );
 // Dashboard (Willkommen)
 define("TRANSLATION_MOTD", "Message of the Day");
 define("TRANSLATION_STATISTICS", "Statistics");
