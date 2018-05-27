@@ -1,5 +1,6 @@
 <?php
 // Dashboard (Willkommen)
+define ( "LOADED_LANGUAGE_FILE", "de" );
 define ( "TRANSLATION_MOTD", "Nachricht des Tages" );
 define ( "TRANSLATION_STATISTICS", "Statistiken" );
 define ( "TRANSLATION_ONLINE_NOW", "Jetzt online sind" );
