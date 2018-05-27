@@ -68,10 +68,18 @@ function HTTPStatusCodeResult($status, $description = null)
 function ExceptionResult($message, $status = 500)
 {
     ViewBag::set("exception", $message);
+    $content = Template::executeDefaultOrOwnTemplate("exception.php");
     
-    $header = $_SERVER["SERVER_PROTOCOL"] . " " . getStatusCodeByNumber(intval($status));
-    header($header);
-    
-    echo Template::executeDefaultOrOwnTemplate("exception.php");
+	$size = getStringLengthInBytes($content);
+	
+    $headers = $_SERVER["SERVER_PROTOCOL"] . " " . getStatusCodeByNumber(intval($status)) . "\n";
+	$headers .= "Content-Type: text/html; charset=UTF-8";
+	    
+    if ($type) {
+        header('Content-Type: $type');
+    }
+    header("Content-length: $size");
+	
+	echo $content;
     exit();
 }
