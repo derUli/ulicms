@@ -946,7 +946,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = str_ireplace ( '[category]', get_category (), $string );
 		$token = get_csrf_token_html ();
 		
-		$token .= '<input type="tel" name="business_fax" class="antispam_honeypot" value="">';
+		$token .= '<input type="url" name="my_homepage_url" class="antispam_honeypot" value="" autocomplete="off">';
 		$string = str_ireplace ( '[csrf_token_html]', $token, $string );
 		// [tel] Links for tel Tags
 		$string = preg_replace ( '/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string );
