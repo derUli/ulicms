@@ -340,11 +340,11 @@ if (! $acl->hasPermission("other")) {
 			</div>
 			<div class="inputWrapper">
 				<select name="smtp_encryption">
-					<option value="" <?php if(empty($smtp_encryption)) echo "checked"?>><?php translate("unencrypted");?></option>
+					<option value="" <?php if(empty($smtp_encryption)) echo "selected"?>><?php translate("unencrypted");?></option>
 					<option value="ssl"
-						<?php if($smtp_encryption == "ssl") echo "checked"?>>SSL</option>
+						<?php if($smtp_encryption == "ssl") echo "selected"?>>SSL</option>
 					<option value="tls"
-						<?php if($smtp_encryption == "tls") echo "checked"?>>TLS</option>
+						<?php if($smtp_encryption == "tls") echo "selected"?>>TLS</option>
 				</select>
 			</div>
 			<div class="label">
