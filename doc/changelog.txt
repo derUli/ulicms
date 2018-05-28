@@ -11,6 +11,7 @@ Neue API-Funktionen:
 
 Bugfixes:
 * Wenn cron.php direkt aufgerufen wird, wird nun eine Sprachdatei geladen
+* Das Feld "Verschlüsselung" in den Einstellungen zum E-Mail Versand verliert nicht mehr seine Auswahl
 
 ===== Neues in UliCMS 2018.3.2 =====
 
