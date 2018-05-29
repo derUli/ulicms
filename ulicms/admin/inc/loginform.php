@@ -1,27 +1,27 @@
 <?php
-$ga = new PHPGangsta_GoogleAuthenticator ();
-$ga_secret = Settings::get ( "ga_secret" );
-$qrCodeUrl = $ga->getQRCodeGoogleUrl ( "UliCMS Login auf " . get_domain (), $ga_secret );
+$ga = new PHPGangsta_GoogleAuthenticator();
+$ga_secret = Settings::get("ga_secret");
+$qrCodeUrl = $ga->getQRCodeGoogleUrl("UliCMS Login auf " . get_domain(), $ga_secret);
 
-$twofactor_authentication = Settings::get ( "twofactor_authentication" );
+$twofactor_authentication = Settings::get("twofactor_authentication");
 
-$languages = getAvailableBackendLanguages ();
-$default_language = getSystemLanguage ();
-if (isset ( $_SESSION ["language"] ) and faster_in_array ( $_SESSION ["language"], $languages )) {
-	$default_language = $_SESSION ["language"];
+$languages = getAvailableBackendLanguages();
+$default_language = getSystemLanguage();
+if (isset($_SESSION["language"]) and faster_in_array($_SESSION["language"], $languages)) {
+    $default_language = $_SESSION["language"];
 }
 
-$admin_logo = Settings::get ( "admin_logo" );
+$admin_logo = Settings::get("admin_logo");
 if (! $admin_logo) {
-	$admin_logo = "gfx/logo.png";
+    $admin_logo = "gfx/logo.png";
 }
 
-$login_welcome_text = get_lang_config ( "login_welcome_text", $default_language );
+$login_welcome_text = get_lang_config("login_welcome_text", $default_language);
 ?>
 <?php
 
 if ($login_welcome_text) {
-	?>
+    ?>
 <div id="login-welcome-text">
 <?php echo nl2br($login_welcome_text);?>
 </div>
@@ -32,19 +32,19 @@ if ($login_welcome_text) {
 <form id="login-form" action="index.php" method="post">
 <?php
 
-csrf_token_html ();
+csrf_token_html();
 ?>
 	<input type="hidden" name="login" value="login">
 	<?php
-	
-	if (! empty ( $_REQUEST ["go"] )) {
-		?>
+
+if (! empty($_REQUEST["go"])) {
+    ?>
 	<input type="hidden" name="go"
 		value='<?php
-		echo htmlspecialchars ( $_REQUEST ["go"] )?>'>
+    echo htmlspecialchars($_REQUEST["go"])?>'>
 	<?php
-	}
-	?>
+}
+?>
 	<table>
 		<tr>
 			<td><strong><?php translate("username");?></strong></td>
@@ -63,19 +63,20 @@ csrf_token_html ();
 			<td><select name="system_language">
 					<option value="" selected>[<?php translate("standard");?>]</option>
 			<?php
-			for($i = 0; $i < count ( $languages ); $i ++) {
-				echo '<option value="' . $languages [$i] . '">' . getLanguageNameByCode ( $languages [$i] ) . '</option>';
-			}
-			?>
+for ($i = 0; $i < count($languages); $i ++) {
+    echo '<option value="' . $languages[$i] . '">' . getLanguageNameByCode($languages[$i]) . '</option>';
+}
+?>
 			</select></td>
 		</tr>
 <?php
 
 if ($twofactor_authentication) {
-	?>
+    ?>
 		<tr>
 			<td><strong><?php translate("confirmation_code");?></strong></td>
-			<td><input type="text" name="confirmation_code" value=""></td>
+			<td><input type="text" name="confirmation_code" value=""
+				autocomplete="off"></td>
 		</tr>
 <?php
 }
@@ -95,8 +96,8 @@ $(document).ready(function(){
 </script>
 <?php
 
-if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {
-	?>
+if (isset($_REQUEST["error"]) and ! empty($_REQUEST["error"])) {
+    ?>
 <script type="text/javascript">
 	$(window).load(function(){
 	   shake("form#login-form");
@@ -105,39 +106,39 @@ if (isset ( $_REQUEST ["error"] ) and ! empty ( $_REQUEST ["error"] )) {
 	</script>
 <p class="ulicms_error">
 <?php
-	
-	echo htmlspecialchars ( $_REQUEST ["error"] );
-	?>
+    
+    echo htmlspecialchars($_REQUEST["error"]);
+    ?>
 </p>
 <?php
 }
 ?>
 				<?php
-				
-				if (Settings::get ( "visitors_can_register" ) === "on" or Settings::get ( "visitors_can_register" ) === "1") {
-					
-					?>
+    
+    if (Settings::get("visitors_can_register") === "on" or Settings::get("visitors_can_register") === "1") {
+        
+        ?>
 <a
 	href="?register=register&<?php
-					if (! empty ( $_REQUEST ["go"] )) {
-						echo "go=" . real_htmlspecialchars ( $_REQUEST ["go"] );
-					}
-					?>"
+        if (! empty($_REQUEST["go"])) {
+            echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
+        }
+        ?>"
 	class="btn btn-default"><?php
-					
-					translate ( "register" );
-					?></a>
+        
+        translate("register");
+        ?></a>
 <?php
-				}
-				?>
+    }
+    ?>
 				<?php
-				
-				if (! Settings::get ( "disable_password_reset" )) {
-					?>
+    
+    if (! Settings::get("disable_password_reset")) {
+        ?>
 <a href="?reset_password" class="btn btn-default pull-right"><?php
-					
-					translate ( "reset_password" );
-					?></a>
+        
+        translate("reset_password");
+        ?></a>
 <?php
-				}
-				?>
+    }
+    ?>
