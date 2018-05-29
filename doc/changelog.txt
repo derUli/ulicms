@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3.3 =====
+﻿===== Neues in UliCMS 2018.3.3 =====
 
 Neue Features:
 + CKEditor 4 auf Version 4.9.2 aktualisiert
@@ -11,6 +11,7 @@ Neue API-Funktionen:
 
 Bugfixes:
 * Wenn cron.php direkt aufgerufen wird, wird nun eine Sprachdatei geladen
+
 * Das Feld "Verschlüsselung" in den Einstellungen zum E-Mail Versand verliert nicht mehr seine Auswahl
 * Spamfilter: Auto-Completion für das Honeypot-Feld deaktiviert.
 Typ des Felds in "url" geändert, damit mehr bösärtige Bots in die Falle tappen.
