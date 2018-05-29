@@ -14,7 +14,7 @@ class Settings {
 	}
 	public static function preloadAll() {
 		$query = db_query ( "SELECT name, value FROM " . tbname ( "settings" ) );
-		while ( $result = Database::fetchObject ( $result ) ) {
+		while ( $result = Database::fetchObject ( $query ) ) {
 			SettingsCache::set ( $result->name, $result->value );
 		}
 	}
