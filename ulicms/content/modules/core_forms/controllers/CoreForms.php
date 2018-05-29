@@ -9,7 +9,7 @@ class CoreForms extends Controller {
 			// apply spam filter if disabled
 			if(Settings::get("spamfilter_enabled") == "yes"){
 				// check if honeypot field is filled
-				if(!empty($_POST["business_fax"])){
+				if(!empty($_POST["my_homepage_url"])){
 					$this->incSpamCount();
 					HTMLResult(get_translation( "honeypot_is_not_empty" ), 403);
 				}
