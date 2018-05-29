@@ -129,7 +129,6 @@ class Forms
                 Request::redirect($redirect_url);
                 $retval = true;
             } else {
-                // TODO: Add this translation
                 translate("error_send_mail_form_failed");
                 die();
             }
