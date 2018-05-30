@@ -32,7 +32,7 @@ class Settings {
 				return $value;
 			}
 		} else {
-			SettingsCache::set ( $key, null );
+			SettingsCache::set ( $key, false );
 			return false;
 		}
 	}
