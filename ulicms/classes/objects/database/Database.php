@@ -60,12 +60,6 @@ class Database {
 				$i ++;
 			}
 		}
-		
-		$cfg = new CMSConfig ();
-		$logger = LoggerRegistry::get ( "sql_log" );
-		if ($logger) {
-			$logger->info ( $preparedQuery );
-		}
 		return Database::query ( $preparedQuery, $replacePrefix );
 	}
 	public static function getServerVersion() {
