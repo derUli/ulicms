@@ -339,7 +339,6 @@ $select = Database::select($config->db_database);
 if (! $select) {
     throw new Exception("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
 }
-Settings::preloadAll();
 
 $useragent = Settings::get("useragent");
 
