@@ -1369,6 +1369,9 @@ function func_enabled($func) {
 	return $it_is_disabled;
 }
 function is_admin() {
+	if(!is_null(Vars::get("is_admin"))){
+		return Vars::get("is_admin");
+	}
 	$retval = false;
 	$user_id = get_user_id ();
 	if (! $user_id) {
@@ -1376,8 +1379,9 @@ function is_admin() {
 	} else {
 		$query = db_query ( "SELECT `admin` FROM " . tbname ( "users" ) . " where id = " . $user_id . " and admin = 1" );
 		$retval = db_num_rows ( $query );
-	}
 	
+		return Vars::set("is_admin", db_num_rows($query));
+	}
 	return $retval;
 }
 
