@@ -14,13 +14,13 @@ class Settings {
 	}
 	public static function preloadAll() {
 		$query = db_query ( "SELECT name, value FROM " . tbname ( "settings" ) );
-		while ( $result = Database::fetchObject ( $query ) ) {
+		while ( $result = Database::fetchObject ( $result ) ) {
 			SettingsCache::set ( $result->name, $result->value );
 		}
 	}
 	// get a config variable
 	public static function get($key, $type = 'str') {
-		if (SettingsCache::get ( $key )) {
+		if (!is_null(SettingsCache::get ( $key ))) {
 			return SettingsCache::get ( $key );
 		}
 		$key = db_escape ( $key );
