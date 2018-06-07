@@ -654,7 +654,7 @@ function get_title($ipage = null, $headline = false)
 
 function title($ipage = null)
 {
-    echo StringHelper::real_htmlspecialchars(get_title($ipage));
+    echo get_title($ipage);
 }
 
 function get_headline($ipage = null)
@@ -664,7 +664,7 @@ function get_headline($ipage = null)
 
 function headline($ipage = null)
 {
-    echo StringHelper::real_htmlspecialchars(get_headline($ipage));
+    echo get_headline($ipage);
 }
 
 function import($ipage)
