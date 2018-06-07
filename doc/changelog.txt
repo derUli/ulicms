@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3.3 =====
+﻿===== Neues in UliCMS 2018.3.3 =====
 
 Neue Features:
 + CKEditor 4 auf Version 4.9.2 aktualisiert
@@ -17,6 +17,7 @@ Bugfixes:
 Typ des Felds in "url" geändert, damit mehr bösärtige Bots in die Falle tappen.
 * sql_log: bei Nutzung von Prepared Statements wird die query nicht mehr doppelt geloggt
 * Command Line Scripts funktionieren nun auch wenn die php executable unter einem anderen Pfad als /usr/bin/php liegt
+* title() und headline() kodieren HTML-Entites nicht mehr doppelt
 
 ===== Neues in UliCMS 2018.3.2 =====
 
