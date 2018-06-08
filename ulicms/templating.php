@@ -956,7 +956,6 @@ function base_metas()
         $title = str_ireplace("%title%", get_title(), $title);
         $title = str_ireplace("%motto%", get_motto(), $title);
         $title = apply_filter($title, "title_tag");
-        $title = htmlentities($title, ENT_QUOTES, "UTF-8");
         echo "<title>" . $title . "</title>\r\n";
     }
     
@@ -1070,7 +1069,7 @@ color:" . Settings::get("body-text-color") . ";
         
         if (Settings::get("video_width_100_percent")) {
             echo "<style type=\"text/css\">
-video {
+  video {
   width: 100% !important;
   height: auto !important;
   }
