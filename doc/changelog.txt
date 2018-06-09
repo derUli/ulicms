@@ -1,14 +1,17 @@
-===== Neues in UliCMS 2018.3.3 =====
+﻿===== Neues in UliCMS 2018.3.3 =====
 
 Neue Features:
 + CKEditor 4 auf Version 4.9.2 aktualisiert
 + CKEditor 4 Plugin "Form Field Label" integriert
 + Einstellungen: E-Mail Modi sind nun aussagekräftiger beschriftet
 + Einstellungen: Größenbeschränkung für Logo-Upload entfernt
++ Performance-Optimierung der Datenbank durchgeführt
 
 Neue API-Funktionen:
 * ExceptionResult($message, $status = 500)
 * UrlHelper::getUrlWithoutGetParameters($url)
+* Database::multiQuery($sql, $replacePrefix = false)
+* Response::sendStatusHeader($nr)
 
 Bugfixes:
 * Wenn cron.php direkt aufgerufen wird, wird nun eine Sprachdatei geladen
