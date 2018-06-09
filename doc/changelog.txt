@@ -6,6 +6,7 @@ Neue Features:
 + Einstellungen: E-Mail Modi sind nun aussagekräftiger beschriftet
 + Einstellungen: Größenbeschränkung für Logo-Upload entfernt
 + Performance-Optimierung der Datenbank durchgeführt
++ DBMigrator hat nun Support für Multi-Query
 
 Neue API-Funktionen:
 * ExceptionResult($message, $status = 500)
