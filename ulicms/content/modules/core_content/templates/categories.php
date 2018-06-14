@@ -130,7 +130,7 @@ if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 </div>
 <script type="text/javascript">
 
-var ajax_options = {
+var ajaxOptions = {
   success : function(responseText, statusText, xhr, $form){
   var action = $($form).attr("action");
   var id = url('?del', action);
@@ -142,7 +142,7 @@ var ajax_options = {
 
 }
 
-$("form.delete-form").ajaxForm(ajax_options);
+$("form.delete-form").ajaxForm(ajaxOptions);
 </script>
 <?php
 	} else if (isset ( $_GET ["add"] )) {
