@@ -37,8 +37,8 @@ if (defined ( "_SECURITY" )) {
 		
 		translate ( "permalink" );
 		?>*
-	</strong><br /> <input type="text" name="system_title"
-			id="system_title" required="required" value=""> <br /> <strong><?php
+	</strong><br /> <input type="text" name="systemname"
+			id="systemname" required="required" value=""> <br /> <strong><?php
 		
 		translate ( "page_title" );
 		?>*

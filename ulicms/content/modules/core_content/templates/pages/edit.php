@@ -102,7 +102,7 @@ if (defined ( "_SECURITY" )) {
 
 	<div class="accordion-content">
 		<strong><?php translate("permalink");?>*</strong><br /> <input
-			type="text" required="required" name="system_title"
+			type="text" required="required" name="systemname"
 			value="<?php
 
 				echo htmlspecialchars ( $row->systemname );

@@ -134,7 +134,7 @@ function suggestSystemname(txt) {
 	systemname = systemname.replace(/\+/g, "");
 	systemname = systemname.replace(/\&/g, "");
 	systemname = systemname.replace(/\#/g, "");
-	$("#system_title").val(systemname);
+	$("#systemname").val(systemname);
 }
 
 // this checks if a systemname is free within the selected language
@@ -147,16 +147,16 @@ function systemnameOrLanguageChanged(item) {
 	}
 	var data = {
 		ajax_cmd : "check_if_systemname_is_free",
-		systemname : $("input[name='system_title']").val(),
+		systemname : $("input[name='systemname']").val(),
 		language : $("select[name='language']").val(),
 		id : myid
 	};
 	$.post("index.php", data, function(text, status) {
 		if (text == "yes") {
-			$("input[name='system_title']").removeClass("error-field");
+			$("input[name='systemname']").removeClass("error-field");
 			$("select[name='language']").removeClass("error-field");
 		} else {
-			$("input[name='system_title']").addClass("error-field");
+			$("input[name='systemname']").addClass("error-field");
 			$("select[name='language']").addClass("error-field");
 		}
 	});
@@ -185,7 +185,7 @@ $(function() {
 	})
 	// check if a systemname is free on changing system title or menu
 	// XXX: this field should be named systemname everywhere in the code
-	$("input[name='system_title']").keyup(function() {
+	$("input[name='systemname']").keyup(function() {
 		systemnameOrLanguageChanged($(this));
 	});
 	$("select[name='menu']").change(function() {
@@ -209,7 +209,7 @@ $(function() {
 		}
 	})
 
-	systemnameOrLanguageChanged($("input[name='system_title']"));
+	systemnameOrLanguageChanged($("input[name='systemname']"));
 	systemnameOrLanguageChanged($("select[name='language']"));
 
 	filterParentPages();

@@ -41,7 +41,7 @@ if (defined ( "_SECURITY" )) {
 
 	<div class="accordion-content">
 		<strong><?php translate("permalink");?>*</strong><br /> <input
-			type="text" required="required" name="system_title" id="system_title"
+			type="text" required="required" name="systemname" id="systemname"
 			value="">
 		<div class="hide-on-snippet hide-on-non-regular">
 			<br /> <strong><?php translate("page_title");?>* </strong><br /> <input
