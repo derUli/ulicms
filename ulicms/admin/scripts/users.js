@@ -1,8 +1,8 @@
-$(function() {
-	// check if password field and password repeat are equal
+// This file contains the code for the user profil edit page
+
+// check if password field and password repeat are equal
 	// then colorize the inputs
 	function validatePasswords(event) {
-
 		var field1 = $("#admin_password");
 		var field2 = $("#admin_password_repeat");
 
@@ -38,11 +38,10 @@ $(function() {
 		} else {
 			$("#admin_password").focus();
 		}
-
 	}
 
+$(function() {
 	$("#admin_password").keyup(validatePasswords);
 	$("#admin_password_repeat").keyup(validatePasswords);
 	$("form#edit_user").on("submit", submitPasswordForm);
-
 });
