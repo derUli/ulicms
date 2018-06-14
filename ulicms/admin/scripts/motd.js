@@ -1,3 +1,4 @@
+// this the javascript for the "Message of the day" edit function
 $(function() {
 	$("select#language").change(
 			function() {
