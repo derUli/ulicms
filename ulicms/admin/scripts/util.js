@@ -27,7 +27,8 @@ function shake(div) {
 
 }// shake
 
-// this bind an event to a checkbox to toggle a password field between clear text and stars
+// this bind an event to a checkbox to toggle a password field between clear
+// text and stars
 function bindTogglePassword(input, checkbox) {
 	var input = $(input);
 	var checkbox = $(checkbox);

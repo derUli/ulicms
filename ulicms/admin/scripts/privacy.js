@@ -9,8 +9,7 @@ $(function() {
 				location.replace(url);
 			});
 	// expand privacy policy checkbox options when enabled
-	$("#privacy_policy_checkbox_enable").change(function(e)
-	{
+	$("#privacy_policy_checkbox_enable").change(function(e) {
 		var checked = $(this).is(":checked");
 		if (checked) {
 			$("#privacy_policy_checkbox_text_container").slideDown();
@@ -18,5 +17,5 @@ $(function() {
 			$("#privacy_policy_checkbox_text_container").slideUp();
 		}
 	});
-	
+
 });

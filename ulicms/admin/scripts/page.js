@@ -1,3 +1,4 @@
+// this function shows and hides areas for the selected content type
 function showAndHideFieldsByType() {
 	var type = $('input[name=type]:checked').val()
 	$(".typedep").slideUp();
@@ -38,6 +39,8 @@ function showAndHideFieldsByType() {
 	}
 }
 
+// this shows a thumbnail of the selected file on text inputs with
+// kcfinder image uploader attached
 function refreshFieldThumbnails() {
 	$("input.kcfinder[data-kcfinder-type=images]").each(
 			function(index, element) {
@@ -51,6 +54,7 @@ function refreshFieldThumbnails() {
 			});
 }
 
+// Bind events for dependend fields, clear-buttons, and file inputs
 function bindEvents() {
 	$("input[name=\"type\"]").change(showAndHideFieldsByType);
 	$("select[name='menu']").change(showAndHideFieldsByType);
@@ -92,7 +96,7 @@ function bindEvents() {
 
 					});
 }
-
+// undbindEvents to prevent endless loop when selecting specific content types
 function unbindEvents() {
 	$("input[name=\"type\"]").off("change");
 	$("select[name='menu']").off("change");
@@ -115,6 +119,7 @@ $(document).ready(function() {
 	}
 });
 
+// this suggest a systemname which may be used as the url for a page
 function suggestSystemname(txt) {
 	var systemname = txt.toLowerCase();
 	systemname = systemname.replace(/ü/g, "ue");
@@ -132,6 +137,8 @@ function suggestSystemname(txt) {
 	$("#system_title").val(systemname);
 }
 
+// this checks if a systemname is free within the selected language
+// the combination of systemname + language must be unique
 function systemnameOrLanguageChanged(item) {
 	var id_field = $("input[name='page_id']");
 	var myid = 0;
@@ -155,7 +162,7 @@ function systemnameOrLanguageChanged(item) {
 	});
 
 }
-
+// filter parent pages by selected language and menu
 function filterParentPages() {
 	var data = {
 		ajax_cmd : "getPageListByLang",
@@ -170,11 +177,14 @@ function filterParentPages() {
 }
 
 $(function() {
+	// bind event to reset filters button
 	$("#btn-reset-filters").click(function(e) {
 		if (!window.confirm(Translation.ResetFilters + "?")) {
 			e.preventDefault();
 		}
 	})
+	// check if a systemname is free on changing system title or menu
+	// XXX: this field should be named systemname everywhere in the code
 	$("input[name='system_title']").keyup(function() {
 		systemnameOrLanguageChanged($(this));
 	});
@@ -182,11 +192,12 @@ $(function() {
 		filterParentPages();
 	});
 
+	// check if systemname is free and update parent page options
 	$("select[name='language']").change(function() {
 		systemnameOrLanguageChanged($(this));
 		filterParentPages();
 	});
-
+	// bind event to "View" button at the bottom of page edit form
 	$("#btn-view-page").click(function() {
 		var url = "../?goid=" + $("#page_id").val();
 		// if page has unsaved changes open it in new window/tab
@@ -202,6 +213,8 @@ $(function() {
 	systemnameOrLanguageChanged($("select[name='language']"));
 
 	filterParentPages();
+
+	// AJAX submit page edit form
 	$("#pageform-edit")
 			.ajaxForm(
 					{
@@ -225,6 +238,8 @@ $(function() {
 							$("#message_page_edit").show();
 						}
 					});
+
+	// filter by category
 	$('#page-list #category').on(
 			'change',
 			function(e) {
@@ -237,6 +252,8 @@ $(function() {
 	$("#page-list form.undelete-form").ajaxForm(ajaxOptionsUndelete);
 });
 
+// various filter functions
+// XXX: this functions should be binded unobstrusive
 function filterByLanguage(element) {
 	var index = element.selectedIndex
 	if (element.options[index].value != "") {
@@ -293,6 +310,7 @@ function filterByStatus(element) {
 	}
 }
 
+// empty recycle bin without reloading the page
 function ajaxEmptyTrash(url) {
 	if (confirm(Translation.WannaEmptyTrash)) {
 		$.ajax({
@@ -305,6 +323,7 @@ function ajaxEmptyTrash(url) {
 	return false;
 }
 
+// undelete action
 var ajaxOptionsUndelete = {
 	success : function(responseText, statusText, xhr, $form) {
 		var action = $($form).attr("action");
@@ -313,6 +332,7 @@ var ajaxOptionsUndelete = {
 	}
 }
 
+// handling delete action
 var ajaxOptionsDelete = {
 	beforeSubmit : function() {
 		return askForDelete();
