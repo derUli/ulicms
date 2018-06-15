@@ -57,17 +57,10 @@ if ($acl->hasPermission ( "settings_simple" )) {
 	</tr>
 </table>
 </form>
-<script type="text/javascript">
-$("#homepage_title_settings").ajaxForm({beforeSubmit: function(e){
-  $("#message").html("");
-  $("#loading").show();
-  }, 
-  success:function(e){
-  $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
-  }
-}); 
-</script>
+<?php
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/homepage_title.js"));
+    combinedScriptHtml();
+    ?>
 <?php
 } else {
 	noperms ();
