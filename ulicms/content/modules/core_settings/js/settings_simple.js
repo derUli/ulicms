@@ -1,3 +1,4 @@
+// Scripts for simple settings page
 $(function() {
 	$("#settings_simple")
 			.ajaxForm(
