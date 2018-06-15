@@ -1,21 +1,20 @@
 <?php
-$acl = new ACL ();
-if (! $acl->hasPermission ( "upload_patches" )) {
-	noperms ();
+$acl = new ACL();
+if (! $acl->hasPermission("upload_patches")) {
+    noperms();
 } else {
-	$redirect = false;
-	if (isset ( $_POST ["upload_patch"] ) and isset ( $_FILES ['file'] ['tmp_name'] ) and endsWith ( $_FILES ['file'] ['name'], ".zip" )) {
-		$pkg = new PackageManager ();
-		if ($pkg->installPatch ( $_POST ["name"], $_POST ["description"], $_FILES ['file'] ['tmp_name'] )) {
-			$redirect = true;
-		}
-	}
-	?>
-<?php if($redirect){ ?>
-<script type="text/javascript">
-window.location.replace("index.php?action=modules#installed_patches_a");
-</script>
-<?php }?>
+    $redirect = false;
+    if (isset($_POST["upload_patch"]) and isset($_FILES['file']['tmp_name']) and endsWith($_FILES['file']['name'], ".zip")) {
+        $pkg = new PackageManager();
+        if ($pkg->installPatch($_POST["name"], $_POST["description"], $_FILES['file']['tmp_name'])) {
+            $redirect = true;
+        }
+    }
+    
+    if ($redirect) {
+        Response::javascriptRedirect("index.php?action=modules#installed_patches_a");
+    }
+    ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("modules");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
