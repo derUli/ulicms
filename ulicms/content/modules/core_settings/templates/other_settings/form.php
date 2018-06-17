@@ -340,7 +340,8 @@ if (! $acl->hasPermission("other")) {
 			</div>
 			<div class="inputWrapper">
 				<select name="smtp_encryption">
-					<option value="" <?php if(empty($smtp_encryption)) echo "selected"?>><?php translate("unencrypted");?></option>
+					<option value=""
+						<?php if(empty($smtp_encryption)) echo "selected"?>><?php translate("unencrypted");?></option>
 					<option value="ssl"
 						<?php if($smtp_encryption == "ssl") echo "selected"?>>SSL</option>
 					<option value="tls"
@@ -422,9 +423,7 @@ if($('#smtp_auth').prop('checked')){
    $('#smtp_auth_div').slideDown();
 } else {
    $('#smtp_auth_div').slideUp();
-
 }
-
 });
 </script>
 	<script type="text/javascript">
@@ -472,8 +471,6 @@ $("#other_settings").ajaxForm({beforeSubmit: function(e){
   $("#loading").hide();
   $("#message").html("<span style=\"color:green;\"><?php translate("CHANGES_WAS_SAVED");?></span>");
   }
-
-
 });
 </script>
 <?php
