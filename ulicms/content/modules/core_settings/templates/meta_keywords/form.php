@@ -1,27 +1,27 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "settings_simple" )) {
-	$languages = getAllLanguages ();
-	$metaKeywords = array ();
-	for($i = 0; $i < count ( $languages ); $i ++) {
-		$lang = $languages [$i];
-		$metaKeywords [$lang] = Settings::get ( "meta_keywords_" . $lang );
-		
-		if (! $metaKeywords [$lang])
-			$metaKeywords [$lang] = Settings::get ( "meta_keywords" );
-	}
-	
-	?>
+$acl = new ACL();
+if ($acl->hasPermission("settings_simple")) {
+    $languages = getAllLanguages();
+    $metaKeywords = array();
+    for ($i = 0; $i < count($languages); $i ++) {
+        $lang = $languages[$i];
+        $metaKeywords[$lang] = Settings::get("meta_keywords_" . $lang);
+        
+        if (! $metaKeywords[$lang])
+            $metaKeywords[$lang] = Settings::get("meta_keywords");
+    }
+    
+    ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("settings_simple");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
 <h1><?php translate("meta_keywords");?></h1>
 <?php
-	echo ModuleHelper::buildMethodCallForm ( "MetaKeywordsController", "save", array (), "post", array (
-			"id" => "meta_keywords_settings" 
-	) );
-	?>
+    echo ModuleHelper::buildMethodCallForm("MetaKeywordsController", "save", array(), "post", array(
+        "id" => "meta_keywords_settings"
+    ));
+    ?>
 <table border="0">
 	<tr>
 		<td style="min-width: 100px;"><strong>
@@ -32,27 +32,27 @@ if ($acl->hasPermission ( "settings_simple" )) {
 			</strong></td>
 	</tr>
 		<?php
-	for($n = 0; $n < count ( $languages ); $n ++) {
-		$lang = $languages [$n];
-		?>
+    for ($n = 0; $n < count($languages); $n ++) {
+        $lang = $languages[$n];
+        ?>
 		<tr>
 		<td><?php
-		
-		echo $lang;
-		?></td>
+        
+        echo $lang;
+        ?></td>
 		<td><input name="meta_keywords_<?php
-		
-		echo $lang;
-		?>"
+        
+        echo $lang;
+        ?>"
 			style="width: 400px"
 			value="<?php
-		
-		echo StringHelper::real_htmlspecialchars ( $metaKeywords [$lang] );
-		?>"></td>
+        
+        echo StringHelper::real_htmlspecialchars($metaKeywords[$lang]);
+        ?>"></td>
 	</tr>
 			<?php
-	}
-	?>	
+    }
+    ?>	
 		<tr>
 		<td></td>
 		<td style="text-align: center">
@@ -62,22 +62,12 @@ if ($acl->hasPermission ( "settings_simple" )) {
 </table>
 </form>
 
-<script type="text/javascript">
-$("#meta_keywords_settings").ajaxForm({beforeSubmit: function(e){
-  $("#message").html("");
-  $("#loading").show();
-  }, 
-  success:function(e){
-  $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
-  }
-  
-
-}); 
-
-</script>
+<?php
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/meta_keywords.js"));
+    combinedScriptHtml();
+    ?>
 
 <?php
 } else {
-	noperms ();
+    noperms();
 }

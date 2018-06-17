@@ -436,16 +436,12 @@ $('#smtp_settings').show();
 <?php
     }
     ?>
-
 $('#email_mode').change(function(){
 if($('#email_mode').val() == "phpmailer"){
    $('#smtp_settings').slideDown();
-
 } else {
    $('#smtp_settings').slideUp();
-
 }
-
 });
 
 </script>
