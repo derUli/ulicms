@@ -42,10 +42,12 @@ if ($acl->hasPermission("settings_simple")) {
         
         echo $lang;
         ?></td>
-		<td><select name="frontpage_<?php
+		<td><select
+			name="frontpage_<?php
         
         echo $lang;
-        ?>" size="1">
+        ?>"
+			size="1">
 				<?php
         
         $pages = getAllPages($lang, "title", true);
@@ -71,22 +73,10 @@ if ($acl->hasPermission("settings_simple")) {
 	</tr>
 </table>
 </form>
-
-<script type="text/javascript">
-$("#frontpage_settings").ajaxForm({beforeSubmit: function(e){
-  $("#message").html("");
-  $("#loading").show();
-  }, 
-  success:function(e){
-  $("#loading").hide();  
-  $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
-  }
-  
-
-}); 
-
-</script>
-
+<?php
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/frontpage.js"));
+    combinedScriptHtml();
+    ?>
 <?php
 } else {
     noperms();
