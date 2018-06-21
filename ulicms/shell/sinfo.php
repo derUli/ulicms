@@ -1,4 +1,4 @@
-#!/usr/bin/php -q
+#!/usr/bin/env php
 <?php
 function sinfo_usage() {
 	echo "sinfo - List installed UliCMS packages\n";

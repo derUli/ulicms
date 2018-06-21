@@ -1,3 +1,4 @@
+// scrolls to an anchor with animation
 function scrollToAnchor(aid) {
 	var aTag = $("a[name='" + aid + "']");
 	$('html,body').animate({
@@ -5,6 +6,8 @@ function scrollToAnchor(aid) {
 	}, 'slow');
 }
 
+// shakes a div (animation)
+// This is used when login fails
 function shake(div) {
 	var interval = 100;
 	var distance = 10;
@@ -24,6 +27,8 @@ function shake(div) {
 
 }// shake
 
+// this bind an event to a checkbox to toggle a password field between clear
+// text and stars
 function bindTogglePassword(input, checkbox) {
 	var input = $(input);
 	var checkbox = $(checkbox);
@@ -32,8 +37,6 @@ function bindTogglePassword(input, checkbox) {
 			$(input).attr('type', 'text');
 		} else {
 			$(input).attr('type', 'password');
-
 		}
-
 	});
 }

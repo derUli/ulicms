@@ -6,7 +6,7 @@ class Response
     // Weiterleitung per Location header;
     public static function redirect($url = "http://www.ulicms.de", $status = 302)
     {
-        header($_SERVER["SERVER_PROTOCOL"] . " " . self::getStatusCodeByNumber($status));
+        Response::sendStatusHeader(self::getStatusCodeByNumber($status));
         header("Location: " . $url);
         exit();
     }
@@ -20,7 +20,8 @@ class Response
         exit();
     }
 
-    public static function getSafeRedirectURL($url, $safeHosts = null){
+    public static function getSafeRedirectURL($url, $safeHosts = null)
+    {
         $cfg = new CMSConfig();
         if (is_array($safeHosts) and count($safeHosts) >= 1) {
             $safeHosts = $safeHosts;
@@ -34,7 +35,7 @@ class Response
         $host = parse_url($url, PHP_URL_HOST);
         if (! in_array($host, $safeHosts)) {
             try {
-                $page = ContentFactory::loadBySystemnameAndLanguage(Settings::getLang("frontpage", getCurrentLanguage()),getCurrentLanguage());
+                $page = ContentFactory::loadBySystemnameAndLanguage(Settings::getLang("frontpage", getCurrentLanguage()), getCurrentLanguage());
                 $url = ModuleHelper::getFullPageURLByID($page->id);
             } catch (Exception $e) {
                 $url = ModuleHelper::getBaseUrl();
@@ -42,11 +43,20 @@ class Response
         }
         return $url;
     }
-    
+
     public static function safeRedirect($url, $status = 302, $safeHosts = null)
     {
         $url = self::getSafeRedirectUrl($url, $safeHosts);
         Request::redirect($url, $status);
+    }
+
+    public static function sendStatusHeader($nr)
+    {
+        if (headers_sent()) {
+            return false;
+        }
+        header($_SERVER["SERVER_PROTOCOL"] . self::getStatusCodeByNumber($nr));
+        return true;
     }
 
     // Übersetzung HTTP Status Code => Name

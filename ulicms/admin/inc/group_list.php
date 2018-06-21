@@ -128,7 +128,7 @@ if (count ( $groups ) > 0) {
 	</table>
 </div>
 <script type="text/javascript">
-var ajax_options = {
+var ajaxOptions = {
   success : function(responseText, statusText, xhr, $form){
   var action = $($form).attr("action");
   var id = url('?delete', action);
@@ -140,7 +140,7 @@ var ajax_options = {
 
 }
 
-$("form.delete-form").ajaxForm(ajax_options);
+$("form.delete-form").ajaxForm(ajaxOptions);
 </script>
 <?php
 }

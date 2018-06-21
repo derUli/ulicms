@@ -273,7 +273,7 @@ if (! $acl->hasPermission("list_packages")) {
 	</form>
 </div>
 <script type="text/javascript">
-var ajax_options = {
+var ajaxOptions = {
   success : function(responseText, statusText, xhr, $form){
   $("div#inst_patch_slide_container").slideUp();
 
@@ -282,7 +282,7 @@ var ajax_options = {
 
 }
 
-$("form#truncate_installed_patches").ajaxForm(ajax_options);
+$("form#truncate_installed_patches").ajaxForm(ajaxOptions);
 </script>
 
 <?php

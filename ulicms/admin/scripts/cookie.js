@@ -1,3 +1,5 @@
+// Some helper function to handle cookies more comfortable
+
 function createCookie(name, value, days) {
 	if (days) {
 		var date = new Date();

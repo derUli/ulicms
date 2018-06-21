@@ -108,21 +108,10 @@ if ($acl->hasPermission("users")) {
 	</table>
 	<?php }?>
 </div>
-<script type="text/javascript">
-var ajax_options = {
-  success : function(responseText, statusText, xhr, $form){
-  var action = $($form).attr("action");
-  var id = url('?admin', action);
-  var list_item_id = "dataset-" + id
-  var tr = $("tr#" + list_item_id);
-  $(tr).fadeOut();
-
-  }
-
-}
-
-$("form.delete-form").ajaxForm(ajax_options);
-</script>
+<?php
+    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/users.js"));
+    combinedScriptHtml();
+    ?>
 <br />
 <br />
 <?php

@@ -1,7 +1,9 @@
 $(function() {
+	// toggle hamburger menu
 	$("#menu-toggle").click(function() {
 		$(".mainmenu").slideToggle();
 	});
+	// clear-cache shortcut icon
 	$("#menu-clear-cache").click(function() {
 		$(this).hide();
 		$("#menu-clear-cache-loading").show()
@@ -12,18 +14,16 @@ $(function() {
 		});
 	});
 
-		// dynamically add class form-control to all form elements
-		// Todo: add class to all HTML-Tags to make this code useless
-	    $('input, select, textarea')
-			.not("input[type=checkbox]")
-			.not("input[type=radio]")
-			.not("input[type=button]")
-			.not("input[type=submit]")
-			.not("input[type=reset]")
-			.not("input[type=image]")
-			.addClass('form-control');
+	// dynamically add class form-control to all form elements to
+	// make inputs prettier
+	$('input, select, textarea').not("input[type=checkbox]").not(
+			"input[type=radio]").not("input[type=button]").not(
+			"input[type=submit]").not("input[type=reset]").not(
+			"input[type=image]").addClass('form-control');
 
-	// better select-boxes
-    $("select").select2({width: '100%'});
+	// prettier select-boxes
+	$("select").select2({
+		width : '100%'
+	});
 
 });

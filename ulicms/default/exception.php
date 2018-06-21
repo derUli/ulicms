@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head>  
+<meta charset="UTF-8">
 <title><?php translate("error");?></title>
 <style>
 <?php 

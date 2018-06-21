@@ -1,4 +1,4 @@
-#!/usr/bin/php -q
+#!/usr/bin/env php
 <?php
 function patchck_usage() {
 	echo "patchck - Command Line Patch Management Tool for UliCMS\n";

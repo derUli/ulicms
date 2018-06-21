@@ -1,4 +1,4 @@
-#!/usr/bin/php -q
+#!/usr/bin/env php
 <?php
 function sremove_usage() {
 	echo "sremove - Remove an UliCMS package\n";

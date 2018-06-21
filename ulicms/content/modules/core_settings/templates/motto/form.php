@@ -1,17 +1,17 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "settings_simple" )) {
-	$languages = getAllLanguages ();
-	$mottos = array ();
-	for($i = 0; $i < count ( $languages ); $i ++) {
-		$lang = $languages [$i];
-		$mottos [$lang] = Settings::get ( "motto_" . $lang );
-		
-		if (! $mottos [$lang]) {
-			$mottos [$lang] = Settings::get ( "motto" );
-		}
-	}
-	?><p>
+$acl = new ACL();
+if ($acl->hasPermission("settings_simple")) {
+    $languages = getAllLanguages();
+    $mottos = array();
+    for ($i = 0; $i < count($languages); $i ++) {
+        $lang = $languages[$i];
+        $mottos[$lang] = Settings::get("motto_" . $lang);
+        
+        if (! $mottos[$lang]) {
+            $mottos[$lang] = Settings::get("motto");
+        }
+    }
+    ?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("settings_simple");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
@@ -19,41 +19,41 @@ if ($acl->hasPermission ( "settings_simple" )) {
 <?php translate("motto");?>
 </h1>
 <?php
-	echo ModuleHelper::buildMethodCallForm ( "MottoController", "save", array (), "post", array (
-			"id" => "motto_settings" 
-	) );
-	?>
+    echo ModuleHelper::buildMethodCallForm("MottoController", "save", array(), "post", array(
+        "id" => "motto_settings"
+    ));
+    ?>
 <table border=0>
 	<tr>
 		<td style="min-width: 100px;"><strong><?php
-	
-	translate ( "language" );
-	?>
+    
+    translate("language");
+    ?>
 </strong></td>
 		<td><strong><?php translate("motto");?>
 			</strong></td>
 	</tr>
 <?php
-	for($n = 0; $n < count ( $languages ); $n ++) {
-		$lang = $languages [$n];
-		?>
+    for ($n = 0; $n < count($languages); $n ++) {
+        $lang = $languages[$n];
+        ?>
 <tr>
 		<td><?php
-		
-		echo $lang;
-		?></td>
+        
+        echo $lang;
+        ?></td>
 		<td><input name="motto_<?php
-		
-		echo $lang;
-		?>"
+        
+        echo $lang;
+        ?>"
 			style="width: 400px"
 			value="<?php
-		
-		echo StringHelper::real_htmlspecialchars ( $mottos [$lang] );
-		?>"></td>
+        
+        echo StringHelper::real_htmlspecialchars($mottos[$lang]);
+        ?>"></td>
 			<?php
-	}
-	?>
+    }
+    ?>
 </tr>
 	<tr>
 		<td></td>
@@ -75,13 +75,11 @@ $("#motto_settings").ajaxForm({beforeSubmit: function(e){
   $("#loading").hide();  
   $("#message").html("<span style=\"color:green;\">Die Einstellungen wurden gespeichert.</span>");
   }
-  
-
 }); 
 
 </script>
 
 <?php
 } else {
-	noperms ();
+    noperms();
 }

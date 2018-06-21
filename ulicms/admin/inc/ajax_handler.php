@@ -2,7 +2,7 @@
 
 function checkIfSystemnameIsFree($systemname, $language, $id)
 {
-    if (StringHelper::isNullOrWhitespace($systemanme)) {
+    if (StringHelper::isNullOrWhitespace($systemname)) {
         return true;
     }
     $systemname = Database::escapeValue($systemname);

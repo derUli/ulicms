@@ -20,7 +20,7 @@ class Settings {
 	}
 	// get a config variable
 	public static function get($key, $type = 'str') {
-		if (SettingsCache::get ( $key )) {
+		if (!is_null(SettingsCache::get ( $key ))) {
 			return SettingsCache::get ( $key );
 		}
 		$key = db_escape ( $key );
@@ -32,7 +32,7 @@ class Settings {
 				return $value;
 			}
 		} else {
-			SettingsCache::set ( $key, null );
+			SettingsCache::set ( $key, false );
 			return false;
 		}
 	}

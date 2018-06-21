@@ -6,3 +6,4 @@ add_translation("request_contains_badword", "Die Anfrage enthalt ein nicht erlau
 add_translation("your_country_is_blocked", "Der Zugriff auf diese Funktion ist aus Ihrem Land nicht erlaubt.\nIhr Hostname: %hostname%");
 add_translation("required_fields", "Pflichtfelder");
 add_translation("please_fill_all_required_fields", "Bitte füllen Sie alle Pflichtfelder aus: %field%");
+add_translation("error_send_mail_form_failed", "Das Senden der E-Mail ist fehlgeschlagen.");

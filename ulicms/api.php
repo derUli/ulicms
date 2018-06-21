@@ -946,7 +946,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true) {
 		$string = str_ireplace ( '[category]', get_category (), $string );
 		$token = get_csrf_token_html ();
 		
-		$token .= '<input type="tel" name="business_fax" class="antispam_honeypot" value="">';
+		$token .= '<input type="url" name="my_homepage_url" class="antispam_honeypot" value="" autocomplete="off">';
 		$string = str_ireplace ( '[csrf_token_html]', $token, $string );
 		// [tel] Links for tel Tags
 		$string = preg_replace ( '/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string );
@@ -1369,6 +1369,9 @@ function func_enabled($func) {
 	return $it_is_disabled;
 }
 function is_admin() {
+	if(!is_null(Vars::get("is_admin"))){
+		return Vars::get("is_admin");
+	}
 	$retval = false;
 	$user_id = get_user_id ();
 	if (! $user_id) {
@@ -1376,8 +1379,9 @@ function is_admin() {
 	} else {
 		$query = db_query ( "SELECT `admin` FROM " . tbname ( "users" ) . " where id = " . $user_id . " and admin = 1" );
 		$retval = db_num_rows ( $query );
-	}
 	
+		return Vars::set("is_admin", db_num_rows($query));
+	}
 	return $retval;
 }
 

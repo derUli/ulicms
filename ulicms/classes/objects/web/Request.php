@@ -3,6 +3,11 @@
 class Request
 {
 
+    public static function getPort()
+    {
+        return $_SERVER['SERVER_PORT'];
+    }
+
     public static function getProtocol($suffix = null)
     {
         $protocol = "http://";

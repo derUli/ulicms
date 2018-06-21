@@ -1,3 +1,6 @@
+// This script contains the code for the "design settings" page
+
+// show a message if a "design for mobile devices" is set but Mobile_Detect is not installed
 function initMobileDetectNotice() {
 	if ($("select[name='mobile_theme']").val() != ""
 			&& $("#mobile_detect_notice").data("installed") == false) {
@@ -7,6 +10,7 @@ function initMobileDetectNotice() {
 	}
 }
 
+// show a privacy warning if a google font is selected
 function onChangeDefaultFont() {
 	var value = $("select#default-font").val();
 	if (value == "google") {
@@ -24,6 +28,8 @@ $(function() {
 	});
 
 	$("select#default-font").change(onChangeDefaultFont);
+
+	// ajax form submit
 	$("#designForm").ajaxForm(
 			{
 				beforeSubmit : function(e) {
