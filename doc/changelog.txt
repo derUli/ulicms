@@ -6,6 +6,7 @@ Neue API-Funktionen:
 Bugfixes:
 * Bei Dateiuploads per Drag and Drop werden nun keine Duplikate mehr erzeugt.
 * Deprecation Warning bei Upload einer Datei unter PHP 7.2 behoben
+* Das aufklappen von Feldern bei AUswahl eines Inhaltstyps funktioniert nun wieder
 
 ===== Neues in UliCMS 2018.3.3 =====
 
