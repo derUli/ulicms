@@ -1,37 +1,37 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "motd" )) {
-	?>
+$acl = new ACL();
+if ($acl->hasPermission("motd")) {
+    $editor = get_html_editor();
+    ?>
 <div>
 	<p>
 		<a
 			href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
 			class="btn btn-default btn-back"><?php translate("back")?></a>
 	</p>
-	<h2><?php translate ( "motd" );?>
-	</h2>
+	<h2><?php translate ( "motd" );?></h2>
 	<?php
-	$languages = getAllLanguages ( true );
-	if (Request::getVar ( "save" )) {
-		?>
+    $languages = getAllLanguages(true);
+    if (Request::getVar("save")) {
+        ?>
 	<p>
 	<?php translate("motd_was_changed");?>
 	</p>
 	<?php }?>
 	<?php
-	echo ModuleHelper::buildMethodCallForm ( "MOTDController", "save", array (), "post", array (
-			"id" => "motd_form" 
-	) );
-	?>
+    echo ModuleHelper::buildMethodCallForm("MOTDController", "save", array(), "post", array(
+        "id" => "motd_form"
+    ));
+    ?>
 		<p>
 		<strong><?php translate("language");?></strong> <br /> <select
 			name="language" id="language">
 			<option value=""
 				<?php if(!Request::getVar ( "language" )){ echo "selected";}?>>[<?php translate("no_language");?>]</option>
 	<?php
-	
-	foreach ( $languages as $language ) {
-		?>
+    
+    foreach ($languages as $language) {
+        ?>
 		<option value="<?php Template::escape($language);?>"
 				<?php if(Request::getVar ( "language" ) == $language){ echo "selected";}?>><?php Template::escape(getLanguageNameByCode($language));?></option>
 		<?php }?>
@@ -39,61 +39,29 @@ if ($acl->hasPermission ( "motd" )) {
 		</select>
 	</p>
 	<?php
-	
-	csrf_token_html ();
-	?>
+    
+    csrf_token_html();
+    ?>
 		<p>
-		<textarea name="motd" id="motd" cols=60 rows=15><?php
-	echo htmlspecialchars ( Request::getVar ( "language" ) ? Settings::get ( "motd_" . Request::getVar ( "language" ) ) : Settings::get ( "motd" ) );
-	?></textarea>
+		<textarea class="<?php esc($editor);?>" data-mimetype="text/html"
+			name="motd" id="motd" cols=60 rows=15><?php
+    echo htmlspecialchars(Request::getVar("language") ? Settings::get("motd_" . Request::getVar("language")) : Settings::get("motd"));
+    ?></textarea>
 	</p>
-		<?php
-	$editor = get_html_editor ();
-	?>
 
-		<?php
-	if ($editor === "ckeditor") {
-		?>
-		<script type="text/javascript">
-var editor = CKEDITOR.replace( 'motd',
-					{
-						skin : '<?php
-		
-		echo Settings::get ( "ckeditor_skin" );
-		?>'
-					});
-</script>
-<?php
-	} else if ($editor == "codemirror") {
-		?>
-		<script type="text/javascript">
-var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("motd"),
-
-{lineNumbers: true,
-        matchBrackets: true,
-        mode : "text/html",
-
-        indentUnit: 0,
-        indentWithTabs: false,
-        enterMode: "keep",
-        tabMode: "shift"});
-</script>
-<?php
-	}
-	?>
 	<button type="submit" name="motd_submit"
 		class="btn btn-primary voffset2"><?php translate("save_changes");?></button>
-	<?php 
-	enqueueScriptFile("scripts/motd.js");
-	combinedScriptHtml();
-	?>
+	<?php
+    enqueueScriptFile("scripts/motd.js");
+    combinedScriptHtml();
+    ?>
 
-	</form>
+	<?php echo ModuleHelper::endForm();?>
 </div>
 
 
 <?php
 } else {
-	noperms ();
+    noperms();
 }
 
