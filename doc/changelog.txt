@@ -1,6 +1,6 @@
 ﻿===== Neues in UliCMS 2018.3.4 =====
 
-Neue API_Funktionen:
+Neue API-Funktionen:
 * myEach(&$arr)
 
 Bugfixes:

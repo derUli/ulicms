@@ -15,9 +15,10 @@ function myEach(&$arr)
 }
 
 if (! function_exists("each")) {
+
     function each(&$arr)
     {
-        myEach($arr);
+        return myEach($arr);
     }
 }
 
