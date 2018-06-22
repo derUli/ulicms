@@ -1,5 +1,8 @@
 ﻿===== Neues in UliCMS 2018.3.4 =====
 
+Neue Features:
+* Wenn kein Open Graph Bild festgelegt ist, aber ein Artikelbild vorhandne ist, wird dieses als Open Graph Bild eingebunden.
+
 Neue API-Funktionen:
 * myEach(&$arr)
 
