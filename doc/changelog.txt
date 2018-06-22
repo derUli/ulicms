@@ -1,4 +1,9 @@
-﻿===== Neues in UliCMS 2018.3.3 =====
+﻿===== Neues in UliCMS 2018.3.4 =====
+
+Bugfixes:
+* Bei Dateiuploads per Drag and Drop werden nun keine Duplikate mehr erzeugt.
+
+===== Neues in UliCMS 2018.3.3 =====
 
 Neue Features:
 + CKEditor 4 auf Version 4.9.2 aktualisiert
