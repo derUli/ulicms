@@ -14,6 +14,13 @@ function myEach(&$arr)
     return $result;
 }
 
+if (! function_exists("each")) {
+    function each(&$arr)
+    {
+        myEach($arr);
+    }
+}
+
 function is_true($var)
 {
     return (isset($var) and $var);
