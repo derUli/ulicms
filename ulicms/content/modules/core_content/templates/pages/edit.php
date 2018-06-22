@@ -10,7 +10,6 @@ if (defined ( "_SECURITY" )) {
 		$allThemes = getThemesList ();
 
 		$cols = Database::getColumnNames ( "content" );
-		$groups = db_query ( "SELECT id, name from " . tbname ( "groups" ) );
 
 		$sql = "SELECT id, name FROM " . tbname ( "videos" );
 		$videos = Database::query ( $sql );

@@ -20,7 +20,7 @@ function ajaxOnChangeLanguage($lang, $menu, $parent)
 {
     ?>
 <option selected="selected" value="NULL">
-			[
+			[ 
 			<?php
     
     translate("none");
