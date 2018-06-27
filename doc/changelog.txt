@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 2018.3.4 =====
+===== Neues in UliCMS 2018.3.4 =====
 
 Neue Features:
 * Wenn kein Open Graph Bild festgelegt ist, aber ein Artikelbild vorhanden ist, wird dieses als Open Graph Bild eingebunden.
