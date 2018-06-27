@@ -1,3 +1,8 @@
+﻿===== Neues in UliCMS 2018.3.5 =====
+
+Neue API-Funktionen:
+* Javascript-Mechanismus um eine "Alle auswählen" Checkbox zu implementieren
+
 ===== Neues in UliCMS 2018.3.4 =====
 
 Neue Features:
