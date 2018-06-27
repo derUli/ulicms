@@ -1,0 +1,8 @@
+CREATE TABLE `{prefix}mail_queue` 
+( `id` INT NOT NULL AUTO_INCREMENT , 
+`recipient` VARCHAR(255) NOT NULL , 
+`headers` VARCHAR(255) NOT NULL , 
+`subject` VARCHAR(255) NOT NULL , 
+`message` MEDIUMTEXT NOT NULL , 
+`created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , 
+PRIMARY KEY (`id`)) ENGINE = InnoDB;

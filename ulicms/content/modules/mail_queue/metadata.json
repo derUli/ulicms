@@ -1,0 +1,17 @@
+{
+	"source": "extend",
+	"version": "1.2",
+	"embed": false,
+	"custom_acl": [
+		"mail_queue_list"
+	],
+	"admin_permission": "mail_queue_list",
+	"objects": {
+		"\\MailQueue\\MailQueue": "objects/MailQueue.php",
+		"\\MailQueue\\Mail": "objects/Mail.php"
+	},
+	"controllers": {
+		"MailQueueAdminController": "controllers/MailQueueAdminController.php"
+	},
+	"main_class": "MailQueueAdminController"
+}
