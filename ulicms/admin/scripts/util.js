@@ -40,3 +40,14 @@ function bindTogglePassword(input, checkbox) {
 		}
 	});
 }
+
+$(function(){
+   $(".select-all").change(selectAll);
+});
+
+function selectAll(event){
+	var selectAllCheckbox = $(event.target);
+	var target = $(selectAllCheckbox).data("target");
+	console.log(target);
+	$(target).prop("checked", $(selectAllCheckbox).is(":checked"));
+}
