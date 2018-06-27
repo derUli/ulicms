@@ -14,6 +14,18 @@ class PrivacyController extends Controller
             Settings::delete($varName);
         }
         
+        if (! isset($_POST["log_ip"])) {
+            Settings::delete("log_ip");
+        } else {
+            setconfig("log_ip", "log_ip");
+        }
+        
+        if (! isset($_POST["delete_ips_after_48_hours"])) {
+            Settings::delete("delete_ips_after_48_hours");
+        } else {
+            setconfig("delete_ips_after_48_hours", "delete_ips_after_48_hours");
+        }
+        
         $varName = StringHelper::isNotNullOrWhitespace($language) ? "privacy_policy_checkbox_text_{$language}" : "privacy_policy_checkbox_text";
         Settings::set($varName, Request::getVar("privacy_policy_checkbox_text", ""));
         Response::redirect(ModuleHelper::buildActionURL("privacy_settings", "save=1&language={$language}"));

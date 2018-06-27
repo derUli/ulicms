@@ -20,5 +20,6 @@ add_translation("google_fonts_privacy_warning", "<strong>Warning</strong> " . "Y
 
 add_translation("privacy", "Privacy");
 
-add_translation("privacy_policy_checkbox_enable", "Enable DSGVO Checkbox for forms");
-add_translation("privacy_policy_checkbox_text", "Text for  DSGVO Checkbox");
+add_translation("privacy_policy_checkbox_enable", "Enable GDPR Checkbox for forms");
+add_translation("privacy_policy_checkbox_text", "Text for  GDPR Checkbox");
+add_translation("dsgvo_checkbox", "GDPR Checkbox");

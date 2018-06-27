@@ -39,8 +39,6 @@ if (! $acl->hasPermission("other")) {
     }
     
     $smtp_auth = Settings::get("smtp_auth");
-    $log_ip = Settings::get("log_ip");
-    $delete_ips_after_48_hours = Settings::get("delete_ips_after_48_hours");
     $no_auto_cron = Settings::get("no_auto_cron");
     $twofactor_authentication = Settings::get("twofactor_authentication");
     ?>
@@ -102,56 +100,7 @@ if (! $acl->hasPermission("other")) {
     ?></textarea>
 		</p>
 	</div>
-	<h2 class="accordion-header">
-		<?php translate("log");?>
-		</h2>
-
-	<div class="accordion-content">
-		<p>
-			<?php
-    
-    translate("LOG_IP_INFORMATION");
-    ?>
-			</p>
-		<div class="label">
-			<label for="log_ip"> <?php
-    
-    translate("LOG_IP_ADDRESSES");
-    ?>
-				</label>
-		</div>
-		<div class="inputWrapper">
-			<input type="checkbox" id="log_ip" name="log_ip"
-				<?php
-    
-    if ($log_ip) {
-        echo "checked ";
-    }
-    ?>>
-		</div>
-			<?php
-    
-    translate("LOG_IP_ADDRESSES_NOTICE");
-    ?>
-	<hr />
-		<div class="label">
-			<label for="delete_ips_after_48_hours">
-	<?php translate("DELETE_IPS_AFTER_48_HOURS");?>
-				</label>
-		</div>
-		<div class="inputWrapper">
-			<input type="checkbox" id="delete_ips_after_48_hours"
-				name="delete_ips_after_48_hours"
-				<?php
-    
-    if ($delete_ips_after_48_hours) {
-        echo "checked ";
-    }
-    ?>>
-		</div>
-	</div>
-
-
+	
 	<h2 class="accordion-header">
 		<?php translate("cronjobs");?>
 		</h2>

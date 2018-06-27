@@ -21,3 +21,4 @@ add_translation("google_fonts_privacy_warning", "<strong>Achtung</strong> " . "S
 add_translation("privacy", "Datenschutz");
 add_translation("privacy_policy_checkbox_enable", "Aktiviere DSGVO Checkbox für Formulare");
 add_translation("privacy_policy_checkbox_text", "Text für DSGVO Checkbox");
+add_translation("dsgvo_checkbox", "DSGVO Checkbox");

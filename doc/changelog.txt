@@ -1,4 +1,18 @@
-﻿===== Neues in UliCMS 2018.3.3 =====
+﻿===== Neues in UliCMS 2018.3.4 =====
+
+Neue Features:
+* Wenn kein Open Graph Bild festgelegt ist, aber ein Artikelbild vorhanden ist, wird dieses als Open Graph Bild eingebunden.
+* Option zum "Protokoll" in Datenschutz-Einstellungen verschoben
+
+Neue API-Funktionen:
+* myEach(&$arr)
+
+Bugfixes:
+* Bei Dateiuploads per Drag and Drop werden nun keine Duplikate mehr erzeugt.
+* Deprecation Warning bei Upload einer Datei unter PHP 7.2 behoben
+* Das aufklappen von Feldern bei AUswahl eines Inhaltstyps funktioniert nun wieder
+
+===== Neues in UliCMS 2018.3.3 =====
 
 Neue Features:
 + CKEditor 4 auf Version 4.9.2 aktualisiert

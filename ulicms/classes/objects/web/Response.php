@@ -55,7 +55,7 @@ class Response
         if (headers_sent()) {
             return false;
         }
-        header($_SERVER["SERVER_PROTOCOL"] . self::getStatusCodeByNumber($nr));
+        header($_SERVER["SERVER_PROTOCOL"] . " " . self::getStatusCodeByNumber($nr));
         return true;
     }
 
