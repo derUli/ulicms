@@ -9,27 +9,28 @@ class MailQueueAdminController extends MainClass
     {
         return Template::executeModuleTemplate(self::MODULE_NAME, "admin.php");
     }
-	
-	public function doActionPost(){
-		$action = Request::getVar("action");
-		$ids = Request::getVar("ids");
-		if(!$ids or !is_array($ids) or StringHelper::isNullOrWhitespace($action)){
-			Response::redirect(ModuleHelper::buildAdminUrl(self::MODULE_NAME));
-		}
-		
-		switch($action){
-			case "delete":
-		foreach($ids as $id){
-			$mail = new \MailQueue\Mail($id);
-			$mail->delete();
-		}
-		break;
-		default:
-			throw new BadMethodCallException("Action '$action' is not implemented");
-		break;
-		}
-		Response::redirect(ModuleHelper::buildAdminUrl(self::MODULE_NAME));
-	}
+
+    public function doActionPost()
+    {
+        $action = Request::getVar("action");
+        $ids = Request::getVar("ids");
+        if (! $ids or ! is_array($ids) or StringHelper::isNullOrWhitespace($action)) {
+            Response::redirect(ModuleHelper::buildAdminUrl(self::MODULE_NAME));
+        }
+        
+        switch ($action) {
+            case "delete":
+                foreach ($ids as $id) {
+                    $mail = new \MailQueue\Mail($id);
+                    $mail->delete();
+                }
+                break;
+            default:
+                throw new BadMethodCallException("Action '$action' is not implemented");
+                break;
+        }
+        Response::redirect(ModuleHelper::buildAdminUrl(self::MODULE_NAME));
+    }
 
     public function getSettingsHeadline()
     {
@@ -83,5 +84,15 @@ class MailQueueAdminController extends MainClass
     {
         $migrator = new DBMigrator("module/mail_queue", ModuleHelper::buildRessourcePath("mail_queue", "sql/down"));
         $migrator->rollback();
+        
+        $files = array(
+            "ULICMS_ROOT/shell/mail_queue.php"
+        );
+        foreach ($files as $file) {
+            $path = Path::resolve($file);
+            if (file_exists($path)) {
+                @unlink($path);
+            }
+        }
     }
 }
