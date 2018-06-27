@@ -5,3 +5,4 @@ add_translation("headers", "Kopfzeilen");
 add_translation("message", "Nachricht");
 add_translation("created", "Erstellt");
 add_translation("subject", "Betreff");
+add_translation("do_action", "Aktion ausführen");

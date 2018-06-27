@@ -3,7 +3,8 @@
 	"version": "1.2",
 	"embed": false,
 	"custom_acl": [
-		"mail_queue_list"
+		"mail_queue_list",
+		"mail_queue_manage"
 	],
 	"admin_permission": "mail_queue_list",
 	"objects": {
@@ -12,6 +13,9 @@
 	},
 	"controllers": {
 		"MailQueueAdminController": "controllers/MailQueueAdminController.php"
+	},
+	"controller_function_permissions" : {
+	"MailQueueAdminController::doActionPost" : "mail_queue_manage"
 	},
 	"main_class": "MailQueueAdminController"
 }
