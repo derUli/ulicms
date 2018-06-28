@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2018.3.5 =====
 
+Neue Features:
+* Neue Option "preload_all_settings"
+
 Neue API-Funktionen:
 * Javascript-Mechanismus um eine "Alle auswählen" Checkbox zu implementieren
 

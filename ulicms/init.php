@@ -7,7 +7,7 @@ $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
 if (file_exists($composerAutoloadFile)) {
     include_once $composerAutoloadFile;
 } else {
-    throw new Exception("autoload.php not found. Please run \"./composer install\” to install dependecies.");
+    throw new Exception("autoload.php not found. Please run \"./composer install\" to install dependecies.");
 }
 // root directory of UliCMS
 if (! defined("ULICMS_ROOT")) {
@@ -338,6 +338,10 @@ $select = Database::select($config->db_database);
 
 if (! $select) {
     throw new Exception("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
+}
+
+if(is_true($cfg->preload_all_settings)){
+	Settings::preloadAll();
 }
 
 $useragent = Settings::get("useragent");
