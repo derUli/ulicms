@@ -514,14 +514,19 @@ function getModuleMeta($module, $attrib = null)
     if (is_file($metadata_file)) {
         
         if ($attrib != null) {
-            $data = file_get_contents($metadata_file);
-            $data = json_decode($data, true);
+            $data = !Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) :  Vars::get("module_{$module}_meta");
+			if(is_string($data)){
+				$data = json_decode($data, true);
+			}
+			Vars::set("module_{$module}_meta", $data);
             if (isset($data[$attrib])) {
                 $retval = $data[$attrib];
             }
         } else {
-            $data = file_get_contents($metadata_file);
-            $data = json_decode($data, true);
+            $data = !Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) :  Vars::get("module_{$module}_meta");
+            $data = json_decode($data, true);			
+			Vars::set("module_{$module}_meta", $data);
+
             $retval = $data;
         }
     }
@@ -533,8 +538,13 @@ function getThemeMeta($theme, $attrib = null)
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
     if (is_file($metadata_file)) {
-        $data = file_get_contents($metadata_file);
-        $data = json_decode($data);
+         $data = !Vars::get("theme_{$module}_meta") ? file_get_contents($metadata_file) :  Vars::get("theme_{$module}_meta");
+
+		if(is_string($data)){
+			$data = json_decode($data);
+		}
+		
+		Vars::set("module_{$module}_meta", $data);
         if ($attrib != null) {
             if (isset($data->$attrib)) {
                 $retval = $data->$attrib;
@@ -720,9 +730,9 @@ function add_hook($name)
         if ($controller and method_exists($controller, $escapedName)) {
             echo $controller->$escapedName();
         } else if (is_file($file1)) {
-            @include $file1;
+            @include_once $file1;
         } else if (is_file($file2)) {
-            @include $file2;
+            @include_once $file2;
         }
     }
 }

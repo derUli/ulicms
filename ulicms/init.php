@@ -29,6 +29,9 @@ function idefine($key, $value)
 
 function faster_in_array($needle, $haystack)
 {
+	if(!$flipped){
+		return false;
+	}
     $flipped = array_flip($haystack);
     return isset($flipped[$needle]);
 }
