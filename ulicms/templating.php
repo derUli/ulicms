@@ -70,14 +70,14 @@ function get_og_tags($systemname = null)
         if (! empty($og_image) and ! startsWith($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
-		if (empty($og_image)) {
-			$page = get_page($systemname);
-			if($page["type"] == "article" && !StringHelper::isNullOrWhitespace($page["article_image"]));
-			$og_image = ltrim($page["article_image"], "/");
-		}
-        if(!empty($og_image) and ! startsWith($og_image, "http")){
-				$og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
-		}
+        if (empty($og_image)) {
+            $page = get_page($systemname);
+            if ($page["type"] == "article" && ! StringHelper::isNullOrWhitespace($page["article_image"]));
+            $og_image = ltrim($page["article_image"], "/");
+        }
+        if (! empty($og_image) and ! startsWith($og_image, "http")) {
+            $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
+        }
         if (is_null($og_description) or empty($og_description)) {
             $og_description = get_meta_description();
         }
@@ -651,8 +651,8 @@ function get_title($ipage = null, $headline = false)
                 $title = $row->title;
             }
             
-			$title = apply_filter($title, "title");
-			$title = Template::getEscape($title);
+            $title = apply_filter($title, "title");
+            $title = Template::getEscape($title);
             Vars::set($cacheVar, $title);
             return $title;
         }

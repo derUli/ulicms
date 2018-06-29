@@ -122,12 +122,16 @@ function exception_handler($exception)
     if ($logger) {
         $logger->error($exception);
     }
-    
+    $httpStatus = $exception instanceof AccessDeniedException ? HttpStatusCode::FORBIDDEN : HttpStatusCode::INTERNAL_SERVER_ERROR;
     if (function_exists("HTMLResult") and class_exists("Template") and ! headers_sent() and function_exists("get_theme")) {
         ViewBag::set("exception", $message);
-        HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), 500);
+        HTMLResult(Template::executeDefaultOrOwnTemplate("exception.php"), $httpStatus);
     }
-    echo "{$message}\n";
+    if (function_exists("HTMLResult") and ! headers_sent()) {
+        HTMLResult($message, $httpStatus);
+    } else {
+        echo "{$message}\n";
+    }
 }
 
 // if config exists require_config else redirect to installer
