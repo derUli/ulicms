@@ -1,4 +1,5 @@
 <?php
+define("START_TIME", microtime(true));
 /*
  * Diese Datei initalisiert das System
  */
@@ -29,9 +30,6 @@ function idefine($key, $value)
 
 function faster_in_array($needle, $haystack)
 {
-	if(!$flipped){
-		return false;
-	}
     $flipped = array_flip($haystack);
     return isset($flipped[$needle]);
 }
@@ -416,7 +414,12 @@ function shutdown_function()
     if (! defined("KCFINDER_PAGE")) {
         add_hook("shutdown");
     }
+    $cfg = new CMSConfig();
+    if (is_true($cfg->show_render_time)) {
+        echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
+    }
 }
+
 
 register_shutdown_function("shutdown_function");
 
