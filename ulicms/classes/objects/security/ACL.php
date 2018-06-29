@@ -196,7 +196,7 @@ class ACL {
 		// Temporäres globales Array zum hinzufügen eigener Objekte
 		global $acl_array;
 		$acl_array = $acl_data;
-		add_hook ( "custom_acl" );
+		do_event ( "custom_acl" );
 		$acl_data = $acl_array;
 		unset ( $acl_array );
 		

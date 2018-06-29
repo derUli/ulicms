@@ -1,7 +1,7 @@
 <?php
 class BannerController extends Controller {
 	public function createPost() {
-		add_hook ( "before_create_banner" );
+		do_event ( "before_create_banner" );
 		
 		$banner = new Banner ();
 		$banner->name = strval ( $_POST ["banner_name"] );
@@ -13,19 +13,19 @@ class BannerController extends Controller {
 		$banner->language = $_POST ["language"] != "all" ? strval ( $_POST ["language"] ) : null;
 		$banner->save ();
 		
-		add_hook ( "after_create_banner" );
+		do_event ( "after_create_banner" );
 		
 		Request::redirect ( ModuleHelper::buildActionURL ( "banner" ) );
 	}
 	public function deletePost() {
 		$banner = new Banner ( intval ( $_GET ["banner"] ) );
-		add_hook ( "before_banner_delete" );
+		do_event ( "before_banner_delete" );
 		$banner->delete ();
-		add_hook ( "after_banner_delete" );
+		do_event ( "after_banner_delete" );
 		Request::redirect ( ModuleHelper::buildActionURL ( "banner" ) );
 	}
 	public function updatePost() {
-		add_hook ( "before_edit_banner" );
+		do_event ( "before_edit_banner" );
 		
 		$banner = new Banner ( intval ( $_POST ["id"] ) );
 		$banner->name = strval ( $_POST ["banner_name"] );
@@ -37,7 +37,7 @@ class BannerController extends Controller {
 		$banner->language = $_POST ["language"] != "all" ? strval ( $_POST ["language"] ) : null;
 		$banner->save ();
 		
-		add_hook ( "after_edit_banner" );
+		do_event ( "after_edit_banner" );
 		Request::redirect ( ModuleHelper::buildActionURL ( "banner" ) );
 	}
 }

@@ -32,7 +32,7 @@ class CacheUtil {
 		return (! Settings::get ( "cache_disabled" ) && !is_logged_in());
 	}
 	public static function clearCache() {
-		add_hook ( "before_clear_cache" );
+		do_event ( "before_clear_cache" );
 		
 		// clear apc cache if available
 		if (function_exists ( "apc_clear_cache" )) {
@@ -54,7 +54,7 @@ class CacheUtil {
 		$moduleManager = new ModuleManager ();
 		$moduleManager->sync ();
 		
-		add_hook ( "after_clear_cache" );
+		do_event ( "after_clear_cache" );
 	}
 	// Return cache period in seconds
 	public static function getCachePeriod() {

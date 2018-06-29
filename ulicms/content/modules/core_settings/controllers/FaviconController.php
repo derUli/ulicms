@@ -15,7 +15,7 @@ class FaviconController extends Controller {
 			if (startsWith ( $type, "image/" )) {
 				$new_filename = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
 				
-				add_hook ( "before_upload_favicon" );
+				do_event ( "before_upload_favicon" );
 				// move_uploaded_file ( $favicon_upload_file ['tmp_name'], $new_filename );
 				require_once ULICMS_ROOT . '/classes/3rdparty/class-php-ico.php';
 				$source = $favicon_upload_file ['tmp_name'];
@@ -45,7 +45,7 @@ class FaviconController extends Controller {
 					GoogleCloudHelper::changeFileVisiblity ( $destination, true );
 				}
 				
-				add_hook ( "after_upload_favicon" );
+				do_event ( "after_upload_favicon" );
 				Request::redirect ( ModuleHelper::buildActionURL ( "favicon" ) );
 			} else {
 				Request::redirect ( ModuleHelper::buildActionURL ( "favicon", "error=UPLOAD_WRONG_FILE_FORMAT" ) );

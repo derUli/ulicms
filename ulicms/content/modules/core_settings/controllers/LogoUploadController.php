@@ -13,7 +13,7 @@ class LogoUploadController extends Controller {
 				$new_filename = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . $hash . "." . $extension;
 				$logo_upload_filename = $hash . "." . $extension;
 				
-				add_hook ( "before_upload_logo" );
+				do_event ( "before_upload_logo" );
 				move_uploaded_file ( $logo_upload ['tmp_name'], $new_filename );
 				// Google Cloud: make file public
 				if (startsWith ( ULICMS_DATA_STORAGE_ROOT, "gs://" ) and class_exists ( "GoogleCloudHelper" )) {
@@ -21,12 +21,12 @@ class LogoUploadController extends Controller {
 				}
 			
 					setconfig ( "logo_image", $logo_upload_filename );
-					add_hook ( "after_upload_logo_successfull" );
+					do_event ( "after_upload_logo_successfull" );
 					Request::redirect ( ModuleHelper::buildActionURL ( "logo_upload" ) );
 				}
 			
 			
-			add_hook ( "after_upload_logo" );
+			do_event ( "after_upload_logo" );
 			Request::redirect ( ModuleHelper::buildActionURL ( "logo_upload" ) );
 		}
 	}

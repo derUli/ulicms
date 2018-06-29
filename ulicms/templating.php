@@ -353,7 +353,7 @@ function include_jquery()
         ?>
 <script type="text/javascript" src="<?php echo get_jquery_url();?>"></script>
 <?php
-        add_hook("after_jquery_include");
+        do_event("after_jquery_include");
     }
 }
 
@@ -1085,7 +1085,7 @@ color:" . Settings::get("body-text-color") . ";
         }
     }
     include_jquery();
-    add_hook("head");
+    do_event("head");
 }
 
 function head()

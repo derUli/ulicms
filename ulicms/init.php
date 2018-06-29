@@ -419,7 +419,7 @@ function shutdown_function()
     // since the "Path" class has a naming conflict with the same named
     // class of KCFinder
     if (! defined("KCFINDER_PAGE")) {
-        add_hook("shutdown");
+        do_event("shutdown");
     }
     $cfg = new CMSConfig();
     if (is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
@@ -446,9 +446,9 @@ if (! defined("KCFINDER_PAGE")) {
     TypeMapper::loadMapping();
     HelperRegistry::loadModuleHelpers();
     ControllerRegistry::loadModuleControllers();
-    add_hook("before_init");
-    add_hook("init");
-    add_hook("after_init");
+    do_event("before_init");
+    do_event("init");
+    do_event("after_init");
 }
 
 $version = new UliCMSVersion();

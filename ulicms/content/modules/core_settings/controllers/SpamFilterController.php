@@ -1,7 +1,7 @@
 <?php
 class SpamFilterController extends Controller {
 	public function savePost() {
-		add_hook ( "before_save_spamfilter_settings" );
+		do_event ( "before_save_spamfilter_settings" );
 		
 		if ($_POST ["spamfilter_enabled"] == "yes") {
 			Settings::set ( "spamfilter_enabled", "yes" );
@@ -31,7 +31,7 @@ class SpamFilterController extends Controller {
 		
 		Settings::set ( "min_time_to_fill_form", Request::getVar ( "min_time_to_fill_form", 0, "int" ) );
 		
-		add_hook ( "after_save_spamfilter_settings" );
+		do_event ( "after_save_spamfilter_settings" );
 		Request::redirect ( ModuleHelper::buildActionURL ( "spam_filter" ) );
 	}
 }

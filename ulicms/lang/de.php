@@ -723,4 +723,4 @@ define ( "TRANSLATION_BUILD_DATE", "Build Datum" );
 
 add_translation("please_accept_privacy_conditions", "Bitte akzeptieren Sie die Datenschutz-Hinweise!");
 
-add_hook ( "lang_de" );
+do_event ( "lang_de" );

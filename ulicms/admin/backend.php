@@ -14,11 +14,11 @@ if ($acl->hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or
 
 $_COOKIE[session_name()] = session_id();
 
-add_hook("after_session_start");
+do_event("after_session_start");
 
-add_hook("before_set_language_by_domain");
+do_event("before_set_language_by_domain");
 setLanguageByDomain();
-add_hook("after_set_language_by_domain");
+do_event("after_set_language_by_domain");
 
 $syslang = getSystemLanguage();
 if (is_file(getLanguageFilePath($syslang))) {
@@ -27,13 +27,13 @@ if (is_file(getLanguageFilePath($syslang))) {
     include_once getLanguageFilePath("en");
 }
 Translation::loadAllModuleLanguageFiles($syslang);
-add_hook("before_include_custom_lang_file");
+do_event("before_include_custom_lang_file");
 Translation::includeCustomLangFile($syslang);
-add_hook("after_include_custom_lang_file");
-add_hook("before_custom_lang");
-add_hook("custom_lang_" . $syslang);
+do_event("after_include_custom_lang_file");
+do_event("before_custom_lang");
+do_event("custom_lang_" . $syslang);
 
-add_hook("after_custom_lang");
+do_event("after_custom_lang");
 
 if (logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and ! isset($_REQUEST["ajax_cmd"]) and ! defined("NO_ANTI_CSRF")) {
     if (! check_csrf_token()) {
@@ -41,9 +41,9 @@ if (logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and ! isset($_REQUEST["
     }
 }
 
-add_hook("before_set_locale_by_language");
+do_event("before_set_locale_by_language");
 setLocaleByLanguage();
-add_hook("after_set_locale_by_language");
+do_event("after_set_locale_by_language");
 
 require_once "../templating.php";
 
@@ -56,8 +56,6 @@ require_once "inc/queries.php";
 @include_once "inc/sort_direction.php";
 
 require_once "inc/logincheck.php";
-
-define("_SECURITY", true);
 
 if ($_GET["action"] == "ulicms_news") {
     require_once "inc/ulicms_news.php";
@@ -73,35 +71,35 @@ if (isset($_SESSION["ulicms_login"])) {
 
 header("Content-Type: text/html; charset=UTF-8");
 
-add_hook("before_ajax_handler");
+do_event("before_ajax_handler");
 
 if (isset($_REQUEST["ajax_cmd"])) {
     include_once "inc/ajax_handler.php";
     exit();
 }
-add_hook("after_ajax_handler");
+do_event("after_ajax_handler");
 
-add_hook("before_backend_run_methods");
+do_event("before_backend_run_methods");
 ControllerRegistry::runMethods();
-add_hook("after_backend_run_methods");
+do_event("after_backend_run_methods");
 
-add_hook("before_backend_header");
+do_event("before_backend_header");
 require_once "inc/header.php";
-add_hook("after_backend_header");
+do_event("after_backend_header");
 
 if (! $eingeloggt) {
     if (isset($_GET["register"])) {
-        add_hook("before_register_form");
+        do_event("before_register_form");
         require_once "inc/registerform.php";
-        add_hook("after_register_form");
+        do_event("after_register_form");
     } else if (isset($_GET["reset_password"])) {
-        add_hook("before_reset_password_form");
+        do_event("before_reset_password_form");
         require_once "inc/reset_password.php";
-        add_hook("before_after_password_form");
+        do_event("before_after_password_form");
     } else {
-        add_hook("before_login_form");
+        do_event("before_login_form");
         require_once "inc/loginform.php";
-        add_hook("after_login_form");
+        do_event("after_login_form");
     }
 } else {
     require_once "inc/adminmenu.php";
@@ -110,7 +108,7 @@ if (! $eingeloggt) {
     
     ActionRegistry::loadModuleActions();
     
-    add_hook("register_actions");
+    do_event("register_actions");
     
     if ($_SESSION["require_password_change"]) {
         require_once "inc/change_password.php";
@@ -126,13 +124,13 @@ if (! $eingeloggt) {
     }
 }
 
-add_hook("admin_footer");
+do_event("admin_footer");
 
 require_once "inc/footer.php";
 
-add_hook("before_admin_cron");
+do_event("before_admin_cron");
 require_once "inc/cron.php";
-add_hook("after_admin_cron");
+do_event("after_admin_cron");
 
 db_close($connection);
 exit();

@@ -725,4 +725,4 @@ define("TRANSLATION_BUILD_DATE", "Build Date");
 
 add_translation("please_accept_privacy_conditions", "Please accept the privacy conditions!");
 
-add_hook("lang_en");
+do_event("lang_en");

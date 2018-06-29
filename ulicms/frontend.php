@@ -2,13 +2,13 @@
 require_once "init.php";
 global $connection;
 
-add_hook ( "before_session_start" );
+do_event ( "before_session_start" );
 
 // initialize session
 @session_start ();
 $_COOKIE [session_name ()] = session_id ();
 
-add_hook ( "after_session_start" );
+do_event ( "after_session_start" );
 
 setLanguageByDomain ();
 
@@ -35,7 +35,7 @@ Translation::includeCustomLangFile ( $_SESSION ["language"] );
 
 require_once "templating.php";
 Translation::loadCurrentThemeLanguageFiles ( $_SESSION ["language"] );
-add_hook ( "custom_lang_" . $_SESSION ["language"] );
+do_event ( "custom_lang_" . $_SESSION ["language"] );
 
 if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
 	if (! check_csrf_token ()) {
@@ -49,7 +49,7 @@ if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
 $status = check_status ();
 
 if (Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != false) {
-	add_hook ( "before_global_redirection" );
+	do_event ( "before_global_redirection" );
 	header ( "Location: " . Settings::get ( "redirection" ) );
 	exit ();
 }
@@ -57,7 +57,7 @@ if (Settings::get ( "redirection" ) != "" && Settings::get ( "redirection" ) != 
 $theme = get_theme ();
 
 if (isMaintenanceMode ()) {
-	add_hook ( "before_maintenance_message" );
+	do_event ( "before_maintenance_message" );
 	// Sende HTTP Status 503 und Retry-After im Wartungsmodus
 	header ( $_SERVER ["SERVER_PROTOCOL"] . " 503 Service Temporarily Unavailable" );
 	header ( 'Status: 503 Service Temporarily Unavailable' );
@@ -68,7 +68,7 @@ if (isMaintenanceMode ()) {
 	} else {
 		die ( get_translation ( "UNDER_MAINTENANCE" ) );
 	}
-	add_hook ( "after_maintenance_message" );
+	do_event ( "after_maintenance_message" );
 	die ();
 }
 
@@ -78,7 +78,7 @@ if (isset ( $_GET ["format"] ) and ! empty ( $_GET ["format"] )) {
 	$format = "html";
 }
 
-add_hook ( "before_http_header" );
+do_event ( "before_http_header" );
 
 $redirection = get_redirection ();
 
@@ -129,7 +129,7 @@ if ($format == "html") {
 	$format = "html";
 }
 
-add_hook ( "after_http_header" );
+do_event ( "after_http_header" );
 
 if (count ( getThemeList () ) === 0) {
 	throw new Exception ( "Keine Themes vorhanden!" );
@@ -139,13 +139,13 @@ if (! is_dir ( getTemplateDirPath ( $theme, true ) )) {
 	throw new Exception ( "The selected theme doesn't exists!" );
 }
 
-add_hook ( "before_functions" );
+do_event ( "before_functions" );
 
 if (is_file ( getTemplateDirPath ( $theme, true ) . "functions.php" )) {
 	include getTemplateDirPath ( $theme, true ) . "functions.php";
 }
 
-add_hook ( "after_functions" );
+do_event ( "after_functions" );
 
 $hasModul = containsModule ( get_requested_pagename () );
 
@@ -169,7 +169,7 @@ if (is_logged_in () and get_cache_control () == "auto") {
 	no_cache ();
 }
 
-add_hook ( "before_html" );
+do_event ( "before_html" );
 
 $cacheAdapter = null;
 if (CacheUtil::isCacheEnabled () and Request::isGet () and ! Flags::getNoCache ()) {
@@ -183,9 +183,9 @@ if ($cacheAdapter and $cacheAdapter->get ( $uid )) {
 		die ();
 	}
 	
-	add_hook ( "before_cron" );
+	do_event ( "before_cron" );
 	@include 'cron.php';
-	add_hook ( "after_cron" );
+	do_event ( "after_cron" );
 	die ();
 }
 
@@ -215,7 +215,7 @@ if ($html_file) {
 			break;
 		}
 	}
-	add_hook ( "before_content" );
+	do_event ( "before_content" );
 	$text_position = get_text_position ();
 	
 	if ($text_position == "after") {
@@ -228,12 +228,12 @@ if ($html_file) {
 		Template::outputContentElement ();
 	}
 	
-	add_hook ( "after_content" );
+	do_event ( "after_content" );
 	
-	add_hook ( "before_edit_button" );
+	do_event ( "before_edit_button" );
 	
 	edit_button ();
-	add_hook ( "after_edit_button" );
+	do_event ( "after_edit_button" );
 	$bottom_files = array (
 			"type/" . get_type () . "/unten.php",
 			"type/" . get_type () . "/bottom.php",
@@ -249,7 +249,7 @@ if ($html_file) {
 	}
 }
 
-add_hook ( "after_html" );
+do_event ( "after_html" );
 
 // Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 
@@ -278,8 +278,8 @@ if ($cacheAdapter or Settings::get ( "minify_html" )) {
 if (Settings::get ( "no_auto_cron" )) {
 	die ();
 }
-add_hook ( "before_cron" );
+do_event ( "before_cron" );
 @include 'cron.php';
-add_hook ( "after_cron" );
+do_event ( "after_cron" );
 die ();
 

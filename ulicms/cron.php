@@ -47,4 +47,4 @@ $empty_trash_timestamp = $empty_trash_days * (60 * 60 * 24);
 Database::query("DELETE FROM " . tbname("content") . " WHERE " . time() . " -  `deleted_at` > $empty_trash_timestamp") or die(db_error());
 
 // Cronjobs der Module
-add_hook("cron");
+do_event("cron");

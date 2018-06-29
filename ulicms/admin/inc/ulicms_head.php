@@ -102,7 +102,7 @@ $(document).ready(function(){
 </script>
 <?php
 
-add_hook ( "admin_head" );
+do_event ( "admin_head" );
 ?>
 </head>
 <div

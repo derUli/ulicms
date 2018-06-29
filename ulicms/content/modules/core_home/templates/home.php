@@ -219,7 +219,7 @@ if ($acl->hasPermission("dashboard")) {
 		</table>
 	</div>
 	<?php
-    add_hook("accordion_layout");
+    do_event("accordion_layout");
     ?>
 </div>
 <?php

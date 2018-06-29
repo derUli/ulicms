@@ -300,7 +300,7 @@ function browsercacheOneDay($modified = null)
 // PHP Formbuilder Class initialisieren
 function initPFBC()
 {
-    add_hook("init_pfbc");
+    do_event("init_pfbc");
 }
 
 function is_debug_mode()
@@ -384,7 +384,7 @@ function get_html_editor()
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false)
 {
-    add_hook("before_log_request");
+    do_event("before_log_request");
     if ($save_ip) {
         $ip = get_ip();
     } else {
@@ -400,7 +400,7 @@ function log_request($save_ip = false)
     
     db_query("INSERT INTO " . tbname("log") . " (ip, request_method, useragent, request_uri, http_host, referrer) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host', '$referrer')");
     
-    add_hook("after_log_request");
+    do_event("after_log_request");
 }
 
 // Prüfen, ob Anti CSRF Token vorhanden ist
@@ -503,7 +503,7 @@ function getFontSizes()
     for ($i = 6; $i <= 80; $i ++) {
         $sizes[] = $i . "px";
     }
-    add_hook("custom_font_sizes");
+    do_event("custom_font_sizes");
     return $sizes;
 }
 
@@ -708,7 +708,16 @@ function clearCache()
     CacheUtil::clearCache();
 }
 
+// DEPRECATED:
+// This function may be removed in future releases of UliCMS
+// Use do_event()
 function add_hook($name)
+{
+    trigger_error("add_hook() is deprecated. Please use do_event().", E_USER_DEPRECATED);
+    do_event($name);
+}
+
+function do_event($name)
 {
     // don't run this code on kcfinder page (media)
     // since the "Path" class has a naming conflict with the same named

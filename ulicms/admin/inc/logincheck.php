@@ -47,7 +47,7 @@ if (isset($_POST["login"])) {
             clearCache();
             Settings::set("sys_initialized", "true");
         }
-        add_hook("login_ok");
+        do_event("login_ok");
         register_session($sessionData, true);
     } else {
         Response::sendStatusHeader(HttpStatusCode::UNAUTHORIZED);
