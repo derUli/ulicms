@@ -18,95 +18,97 @@
  * even if you are using session configuration.
  * See http://kcfinder.sunhater.com/install for setting descriptions
  */
-define ( "KCFINDER_PAGE", true );
+
+// define constant to prevent code from running which has a class naming conflict with "Path" class of KCFinder
+define("KCFINDER_PAGE", true);
 include_once "../../init.php";
 
-$_CONFIG = array (
-		
-		// GENERAL SETTINGS
-		'disabled' => true,
-		'uploadURL' => defined ( "ULICMS_DATA_STORAGE_URL" ) ? ULICMS_DATA_STORAGE_URL . "/content" : "/content",
-		'uploadDir' => ULICMS_DATA_STORAGE_ROOT . "/content",
-		'theme' => "default",
-		
-		'types' => array (
-				
-				// (F)CKEditor types
-				'files' => "",
-				'flash' => "swf",
-				'images' => "*img",
-				
-				// TinyMCE types
-				'file' => "",
-				'media' => "swf flv avi mpg mpeg qt mov wmv asf rm",
-				'image' => "*img" 
-		),
-		
-		// IMAGE SETTINGS
-		'imageDriversPriority' => "gd",
-		'jpegQuality' => 90,
-		'thumbsDir' => ".thumbs",
-		
-		'maxImageWidth' => 0,
-		'maxImageHeight' => 0,
-		
-		'thumbWidth' => 100,
-		'thumbHeight' => 100,
-		
-		'watermark' => "",
-		
-		// DISABLE / ENABLE SETTINGS
-		'denyZipDownload' => false,
-		'denyUpdateCheck' => false,
-		'denyExtensionRename' => false,
-		
-		// PERMISSION SETTINGS
-		'dirPerms' => 0755,
-		'filePerms' => 0644,
-		
-		'access' => array (
-				
-				'files' => array (
-						'upload' => true,
-						'delete' => true,
-						'copy' => true,
-						'move' => true,
-						'rename' => true 
-				),
-				
-				'dirs' => array (
-						'create' => true,
-						'delete' => true,
-						'rename' => true 
-				) 
-		),
-		
-		'deniedExts' => "exe com msi bat cgi pl php phps phtml php3 php4 php5 php6 py pyc pyo pcgi pcgi3 pcgi4 pcgi5 pchi6",
-		
-		// MISC SETTINGS
-		'filenameChangeChars' => array (),
-		/**
-		 * ' ' => "_",
-		 * ':' => "."
-		 */
-		
-		'dirnameChangeChars' => array (),
-		/**
-		 * ' ' => "_",
-		 * ':' => "."
-		 */
-		
-		'mime_magic' => "",
-		
-		'cookieDomain' => "",
-		'cookiePath' => "",
-		'cookiePrefix' => 'KCFINDER_',
-		
-		// THE FOLLOWING SETTINGS CANNOT BE OVERRIDED WITH SESSION SETTINGS
-		'_normalizeFilenames' => false,
-		'_check4htaccess' => false,
-		// '_tinyMCEPath' => "/tiny_mce",
-		'_sessionVar' => "KCFINDER" 
+$_CONFIG = array(
+    
+    // GENERAL SETTINGS
+    'disabled' => true,
+    'uploadURL' => defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content" : "/content",
+    'uploadDir' => ULICMS_DATA_STORAGE_ROOT . "/content",
+    'theme' => "default",
+    
+    'types' => array(
+        
+        // (F)CKEditor types
+        'files' => "",
+        'flash' => "swf",
+        'images' => "*img",
+        
+        // TinyMCE types
+        'file' => "",
+        'media' => "swf flv avi mpg mpeg qt mov wmv asf rm",
+        'image' => "*img"
+    ),
+    
+    // IMAGE SETTINGS
+    'imageDriversPriority' => "gd",
+    'jpegQuality' => 90,
+    'thumbsDir' => ".thumbs",
+    
+    'maxImageWidth' => 0,
+    'maxImageHeight' => 0,
+    
+    'thumbWidth' => 100,
+    'thumbHeight' => 100,
+    
+    'watermark' => "",
+    
+    // DISABLE / ENABLE SETTINGS
+    'denyZipDownload' => false,
+    'denyUpdateCheck' => false,
+    'denyExtensionRename' => false,
+    
+    // PERMISSION SETTINGS
+    'dirPerms' => 0755,
+    'filePerms' => 0644,
+    
+    'access' => array(
+        
+        'files' => array(
+            'upload' => true,
+            'delete' => true,
+            'copy' => true,
+            'move' => true,
+            'rename' => true
+        ),
+        
+        'dirs' => array(
+            'create' => true,
+            'delete' => true,
+            'rename' => true
+        )
+    ),
+    
+    'deniedExts' => "exe com msi bat cgi pl php phps phtml php3 php4 php5 php6 py pyc pyo pcgi pcgi3 pcgi4 pcgi5 pchi6",
+    
+    // MISC SETTINGS
+    'filenameChangeChars' => array(),
+    /**
+     * ' ' => "_",
+     * ':' => "."
+     */
+    
+    'dirnameChangeChars' => array(),
+    /**
+     * ' ' => "_",
+     * ':' => "."
+     */
+    
+    'mime_magic' => "",
+    
+    'cookieDomain' => "",
+    'cookiePath' => "",
+    'cookiePrefix' => 'KCFINDER_',
+    
+    // THE FOLLOWING SETTINGS CANNOT BE OVERRIDED WITH SESSION SETTINGS
+    '_normalizeFilenames' => false,
+    '_check4htaccess' => false,
+    // '_tinyMCEPath' => "/tiny_mce",
+    '_sessionVar' => "KCFINDER"
 );
 // '_sessionLifetime' => 30,
 // '_sessionDir' => "/full/directory/path",
@@ -115,11 +117,12 @@ $_CONFIG = array (
 // '_cssMinCmd' => "java -jar /path/to/yuicompressor.jar --type css {file}",
 // '_jsMinCmd' => "java -jar /path/to/yuicompressor.jar --type js {file}",
 
-@session_start ();
+@session_start();
 
-$acl = new ACL ();
-if (($_REQUEST ["type"] == "images" or $_REQUEST ["type"] == "files" or $_REQUEST ["type"] == "flash") and $acl->hasPermission ( $_REQUEST ["type"] )) {
-	$_CONFIG ["disabled"] = false;
+// check if user is permitted to upload media and enable the file manager
+$acl = new ACL();
+if (($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files") and $acl->hasPermission($_REQUEST["type"])) {
+    $_CONFIG["disabled"] = false;
 }
 
 ?>

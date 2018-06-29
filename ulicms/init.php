@@ -411,15 +411,17 @@ if (isset($_SESSION["session_begin"])) {
 
 function shutdown_function()
 {
+    // don't execute shutdown hook on kcfinder page (media)
+    // since the "Path" class has a naming conflict with the same named
+    // class of KCFinder
     if (! defined("KCFINDER_PAGE")) {
         add_hook("shutdown");
     }
     $cfg = new CMSConfig();
-    if (is_true($cfg->show_render_time)) {
+    if (is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
     }
 }
-
 
 register_shutdown_function("shutdown_function");
 
@@ -432,7 +434,9 @@ if (! is_ssl() and $enforce_https !== false) {
 
 $moduleManager = new ModuleManager();
 Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
-
+// don't load module stuff on kcfinder page (media)
+// since the "Path" class has a naming conflict with the same named
+// class of KCFinder
 if (! defined("KCFINDER_PAGE")) {
     ModelRegistry::loadModuleModels();
     TypeMapper::loadMapping();

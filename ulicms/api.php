@@ -514,19 +514,19 @@ function getModuleMeta($module, $attrib = null)
     if (is_file($metadata_file)) {
         
         if ($attrib != null) {
-            $data = !Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) :  Vars::get("module_{$module}_meta");
-			if(is_string($data)){
-				$data = json_decode($data, true);
-			}
-			Vars::set("module_{$module}_meta", $data);
+            $data = ! Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
+            if (is_string($data)) {
+                $data = json_decode($data, true);
+            }
+            Vars::set("module_{$module}_meta", $data);
             if (isset($data[$attrib])) {
                 $retval = $data[$attrib];
             }
         } else {
-            $data = !Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) :  Vars::get("module_{$module}_meta");
-            $data = json_decode($data, true);			
-			Vars::set("module_{$module}_meta", $data);
-
+            $data = ! Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
+            $data = json_decode($data, true);
+            Vars::set("module_{$module}_meta", $data);
+            
             $retval = $data;
         }
     }
@@ -538,13 +538,13 @@ function getThemeMeta($theme, $attrib = null)
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
     if (is_file($metadata_file)) {
-         $data = !Vars::get("theme_{$module}_meta") ? file_get_contents($metadata_file) :  Vars::get("theme_{$module}_meta");
-
-		if(is_string($data)){
-			$data = json_decode($data);
-		}
-		
-		Vars::set("module_{$module}_meta", $data);
+        $data = ! Vars::get("theme_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("theme_{$module}_meta");
+        
+        if (is_string($data)) {
+            $data = json_decode($data);
+        }
+        
+        Vars::set("module_{$module}_meta", $data);
         if ($attrib != null) {
             if (isset($data->$attrib)) {
                 $retval = $data->$attrib;
@@ -710,6 +710,9 @@ function clearCache()
 
 function add_hook($name)
 {
+    // don't run this code on kcfinder page (media)
+    // since the "Path" class has a naming conflict with the same named
+    // class of KCFinder
     if (defined("KCFINDER_PAGE")) {
         return;
     }
