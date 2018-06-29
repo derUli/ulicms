@@ -20,7 +20,7 @@ class ActionRegistry {
 				if (! endsWith ( $path, ".php" )) {
 					$path .= ".php";
 				}
-				if (file_exists ( $path )) {
+				if (is_file ( $path )) {
 					$actions [$action] = $file;
 				}
 			}
@@ -38,7 +38,7 @@ class ActionRegistry {
 							$path .= ".php";
 						}
 						
-						if (file_exists ( $path ) and is_file ( $path )) {
+						if (is_file ( $path )) {
 							$actions [$key] = $path;
 						}
 					}

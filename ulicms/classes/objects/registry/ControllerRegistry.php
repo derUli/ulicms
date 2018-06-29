@@ -30,7 +30,7 @@ class ControllerRegistry {
 				}
 			}
 			foreach ( $controllerRegistry as $key => $value ) {
-				include_once $value;
+				include $value;
 				if (class_exists ( $key )) {
 					$classInstance = new $key ();
 					if ($classInstance instanceof Controller) {

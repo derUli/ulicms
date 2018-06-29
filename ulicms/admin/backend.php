@@ -21,9 +21,9 @@ setLanguageByDomain ();
 add_hook ( "after_set_language_by_domain" );
 
 $syslang = getSystemLanguage ();
-if (file_exists ( getLanguageFilePath ( $syslang ) )) {
+if (is_file ( getLanguageFilePath ( $syslang ) )) {
 	include_once getLanguageFilePath ( $syslang );
-} else if (file_exists ( getLanguageFilePath ( "en" ) )) {
+} else if (is_file ( getLanguageFilePath ( "en" ) )) {
 	include_once getLanguageFilePath ( "en" );
 }
 Translation::loadAllModuleLanguageFiles ( $syslang );

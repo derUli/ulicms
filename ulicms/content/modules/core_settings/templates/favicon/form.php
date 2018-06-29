@@ -1,16 +1,16 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "favicon" )) {
-	?>
+$acl = new ACL();
+if ($acl->hasPermission("favicon")) {
+    ?>
 
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("design");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
 <?php
-	
-	if (isset ( $_GET ["error"] )) {
-		?>
+    
+    if (isset($_GET["error"])) {
+        ?>
 <p class="ulicms_error">
 <?php echo translate($_GET["error"]);?>
 </p>
@@ -19,33 +19,33 @@ if ($acl->hasPermission ( "favicon" )) {
 
 <h1><?php translate("favicon");?></h1>
 <p><?php
-	
-	translate ( "favicon_infotext" );
-	?>
+    
+    translate("favicon_infotext");
+    ?>
 </p>
 <form enctype="multipart/form-data" action="index.php?action=favicon"
 	method="post">
 	<input type="hidden" name="sClass" value="FaviconController"> <input
 		type="hidden" name="sMethod" value="doUpload">
 	<?php
-	
-	csrf_token_html ();
-	?>
+    
+    csrf_token_html();
+    ?>
 	<table border=0 height="250">
 		<tr>
 			<td><strong><?php
-	
-	translate ( "current_favicon" );
-	?>
+    
+    translate("current_favicon");
+    ?>
 			</strong></td>
 			<td><?php
-	
-	$favicon_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
-	$favicon_url = defined ( "ULICMS_DATA_STORAGE_URL" ) ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
-	if (file_exists ( $favicon_path ) and is_file ( $favicon_path )) {
-		echo '<img class="website_favicon" src="' . $favicon_url . '" alt="' . Settings::get ( "homepage_title" ) . '"/>';
-	}
-	?>
+    
+    $favicon_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
+    $favicon_url = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
+    if (is_file($favicon_path)) {
+        echo '<img class="website_favicon" src="' . $favicon_url . '" alt="' . Settings::get("homepage_title") . '"/>';
+    }
+    ?>
 			</td>
 
 		</tr>
@@ -58,9 +58,9 @@ if ($acl->hasPermission ( "favicon" )) {
 		</tr>
 		<tr>
 			<td width=480><strong><?php
-	
-	translate ( "upload_new_favicon" );
-	?>
+    
+    translate("upload_new_favicon");
+    ?>
 			</strong></td>
 			<td><input name="favicon_upload_file" type="file"> <br /></td>
 
@@ -75,7 +75,7 @@ if ($acl->hasPermission ( "favicon" )) {
 
 <?php
 } else {
-	noperms ();
+    noperms();
 }
 
 ?>

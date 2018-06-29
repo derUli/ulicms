@@ -22,7 +22,7 @@ class ModelRegistry {
 				}
 			}
 			foreach ( $modelRegistry as $key => $value ) {
-				include_once $value;
+				include $value;
 			}
 		}
 	}

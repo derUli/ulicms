@@ -1,8 +1,8 @@
 <?php
-if (defined ( "_SECURITY" )) {
-	$acl = new ACL ();
-	if ($acl->hasPermission ( "logo" )) {
-		?>
+if (defined("_SECURITY")) {
+    $acl = new ACL();
+    if ($acl->hasPermission("logo")) {
+        ?>
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
@@ -13,9 +13,9 @@ if (defined ( "_SECURITY" )) {
 </p>
 <form enctype="multipart/form-data" action="index.php" method="post">
 	<?php
-		
-		csrf_token_html ();
-		?>
+        
+        csrf_token_html();
+        ?>
 		<input type="hidden" name="sClass" value="LogoUploadController" /> <input
 		type="hidden" name="sMethod" value="upload" />
 
@@ -24,18 +24,18 @@ if (defined ( "_SECURITY" )) {
 			<td><strong><?php translate("your_logo");?>
 			</strong></td>
 			<td><?php
-		
-		if (defined ( "ULICMS_DATA_STORAGE_URL" )) {
-			$logo_path = ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get ( "logo_image" );
-		} else {
-			$logo_path = "../content/images/" . Settings::get ( "logo_image" );
-		}
-		$logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get ( "logo_image" );
-		
-		if (file_exists ( $logo_storage_path ) and is_file ( $logo_storage_path )) {
-			echo '<img class="website_logo" src="' . $logo_path . '" alt="' . Settings::get ( "homepage_title" ) . '"/>';
-		}
-		?>
+        
+        if (defined("ULICMS_DATA_STORAGE_URL")) {
+            $logo_path = ULICMS_DATA_STORAGE_URL . "/content/images/" . Settings::get("logo_image");
+        } else {
+            $logo_path = "../content/images/" . Settings::get("logo_image");
+        }
+        $logo_storage_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/" . Settings::get("logo_image");
+        
+        if (is_file($logo_storage_path)) {
+            echo '<img class="website_logo" src="' . $logo_path . '" alt="' . Settings::get("homepage_title") . '"/>';
+        }
+        ?>
 			</td>
 		
 		
@@ -52,9 +52,9 @@ if (defined ( "_SECURITY" )) {
 	</table>
 </form>
 <?php
-	} else {
-		noperms ();
-	}
+    } else {
+        noperms();
+    }
 }
 
 ?>

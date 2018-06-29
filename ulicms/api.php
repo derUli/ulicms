@@ -511,7 +511,7 @@ function getModuleMeta($module, $attrib = null)
 {
     $retval = null;
     $metadata_file = getModulePath($module, true) . "metadata.json";
-    if (file_exists($metadata_file)) {
+    if (is_file($metadata_file)) {
         
         if ($attrib != null) {
             $data = file_get_contents($metadata_file);
@@ -532,7 +532,7 @@ function getThemeMeta($theme, $attrib = null)
 {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
-    if (file_exists($metadata_file)) {
+    if (is_file($metadata_file)) {
         $data = file_get_contents($metadata_file);
         $data = json_decode($data);
         if ($attrib != null) {
@@ -549,7 +549,7 @@ function getThemeMeta($theme, $attrib = null)
 function getModuleName($module)
 {
     $name_file = getModulePath($module) . $module . "_name.php";
-    if (! file_exists($name_file)) {
+    if (! is_file($name_file)) {
         return $module;
     }
     include_once $name_file;
@@ -599,7 +599,7 @@ function getSystemLanguage()
     } else {
         $lang = "de";
     }
-    if (! file_exists(getLanguageFilePath($lang))) {
+    if (! is_file(getLanguageFilePath($lang))) {
         $lang = "de";
     }
     return $lang;
@@ -719,9 +719,9 @@ function add_hook($name)
         $escapedName = ModuleHelper::underscoreToCamel($name);
         if ($controller and method_exists($controller, $escapedName)) {
             echo $controller->$escapedName();
-        } else if (file_exists($file1)) {
+        } else if (is_file($file1)) {
             @include $file1;
-        } else if (file_exists($file2)) {
+        } else if (is_file($file2)) {
             @include $file2;
         }
     }

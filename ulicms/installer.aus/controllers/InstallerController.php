@@ -258,7 +258,7 @@ class InstallerController
     public static function submitLoginToBackend()
     {
         $installerDir = "../installer";
-        if (file_exists($installerDir)) {
+        if (is_dir($installerDir)) {
             @SureRemoveDir($installerDir, true);
         }
         @session_destroy();

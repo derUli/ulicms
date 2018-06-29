@@ -4,7 +4,7 @@
  */
 $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
 
-if (file_exists($composerAutoloadFile)) {
+if (is_file($composerAutoloadFile)) {
     include_once $composerAutoloadFile;
 } else {
     throw new Exception("autoload.php not found. Please run \"./composer install\" to install dependecies.");
@@ -98,7 +98,7 @@ include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEP
 include_once dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "html" . DIRECTORY_SEPERATOR . "load.php";
 
 $mobile_detect_as_module = dirname(__file__) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
-if (file_exists($mobile_detect_as_module)) {
+if (is_file($mobile_detect_as_module)) {
     include_once $mobile_detect_as_module;
 }
 
@@ -132,7 +132,7 @@ function exception_handler($exception)
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__file__) . DIRECTORY_SEPERATOR . "CMSConfig.php";
 
-if (file_exists($path_to_config)) {
+if (is_file($path_to_config)) {
     require_once $path_to_config;
 } else if (is_dir("installer")) {
     header("Location: installer/");
@@ -178,7 +178,7 @@ if (! defined("ULICMS_TMP")) {
     define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "tmp" . DIRECTORY_SEPERATOR);
 }
 
-if (! file_exists(ULICMS_TMP)) {
+if (! is_dir(ULICMS_TMP)) {
     mkdir(ULICMS_TMP);
 }
 
@@ -191,16 +191,16 @@ if (! defined("ULICMS_LOG")) {
 if (! defined("ULICMS_CONTENT")) {
     define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR);
 }
-if (! file_exists(ULICMS_CACHE)) {
+if (! is_dir(ULICMS_CACHE)) {
     mkdir(ULICMS_CACHE);
 }
-if (! file_exists(ULICMS_LOG)) {
+if (! is_dir(ULICMS_LOG)) {
     mkdir(ULICMS_LOG);
 }
 
 $htaccessForLogFolderSource = ULICMS_ROOT . "/lib/htaccess-deny-all.txt";
 $htaccessLogFolderTarget = ULICMS_LOG . "/.htaccess";
-if (! file_exists($htaccessLogFolderTarget)) {
+if (! is_file($htaccessLogFolderTarget)) {
     copy($htaccessForLogFolderSource, $htaccessLogFolderTarget);
 }
 
@@ -340,8 +340,8 @@ if (! $select) {
     throw new Exception("<h1>Database " . $config->db_database . " doesn't exist.</h1>");
 }
 
-if(is_true($cfg->preload_all_settings)){
-	Settings::preloadAll();
+if (is_true($cfg->preload_all_settings)) {
+    Settings::preloadAll();
 }
 
 $useragent = Settings::get("useragent");

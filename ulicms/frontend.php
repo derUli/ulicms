@@ -24,9 +24,9 @@ if (! isset ( $_SESSION ["language"] )) {
 
 setLocaleByLanguage ();
 
-if (faster_in_array ( $_SESSION ["language"], $languages ) && file_exists ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
+if (faster_in_array ( $_SESSION ["language"], $languages ) && is_file ( getLanguageFilePath ( $_SESSION ["language"] ) )) {
 	include_once getLanguageFilePath ( $_SESSION ["language"] );
-} else if (file_exists ( getLanguageFilePath ( "en" ) )) {
+} else if (is_file ( getLanguageFilePath ( "en" ) )) {
 	include getLanguageFilePath ( "en" );
 }
 
@@ -63,7 +63,7 @@ if (isMaintenanceMode ()) {
 	header ( 'Status: 503 Service Temporarily Unavailable' );
 	header ( 'Retry-After: 60' );
 	header ( "Content-Type: text/html; charset=utf-8" );
-	if (file_exists ( getTemplateDirPath ( $theme ) . "maintenance.php" )) {
+	if (is_file ( getTemplateDirPath ( $theme ) . "maintenance.php" )) {
 		require_once getTemplateDirPath ( $theme ) . "maintenance.php";
 	} else {
 		die ( get_translation ( "UNDER_MAINTENANCE" ) );
@@ -141,7 +141,7 @@ if (! is_dir ( getTemplateDirPath ( $theme, true ) )) {
 
 add_hook ( "before_functions" );
 
-if (file_exists ( getTemplateDirPath ( $theme, true ) . "functions.php" )) {
+if (is_file ( getTemplateDirPath ( $theme, true ) . "functions.php" )) {
 	include getTemplateDirPath ( $theme, true ) . "functions.php";
 }
 
@@ -196,7 +196,7 @@ if ($cacheAdapter or Settings::get ( "minify_html" )) {
 $html_file = page_has_html_file ( get_requested_pagename () );
 
 if ($html_file) {
-	if (file_exists ( $html_file )) {
+    if (is_file ( $html_file )) {
 		echo file_get_contents ( $html_file );
 	} else {
 		echo "File Not Found";
@@ -210,7 +210,7 @@ if ($html_file) {
 	);
 	foreach ( $top_files as $file ) {
 		$file = getTemplateDirPath ( $theme, true ) . $file;
-		if (file_exists ( $file )) {
+		if (is_file ( $file )) {
 			require $file;
 			break;
 		}
@@ -242,7 +242,7 @@ if ($html_file) {
 	);
 	foreach ( $bottom_files as $file ) {
 		$file = getTemplateDirPath ( $theme, true ) . $file;
-		if (file_exists ( $file )) {
+		if (is_file ( $file )) {
 			require $file;
 			break;
 		}
