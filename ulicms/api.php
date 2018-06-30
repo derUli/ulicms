@@ -512,7 +512,6 @@ function getModuleMeta($module, $attrib = null)
     $retval = null;
     $metadata_file = getModulePath($module, true) . "metadata.json";
     if (is_file($metadata_file)) {
-        
         if ($attrib != null) {
             $data = ! Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
             if (is_string($data)) {
@@ -524,7 +523,9 @@ function getModuleMeta($module, $attrib = null)
             }
         } else {
             $data = ! Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
-            $data = json_decode($data, true);
+			if(is_string($data)){
+				$data = json_decode($data, true);
+			}
             Vars::set("module_{$module}_meta", $data);
             
             $retval = $data;
