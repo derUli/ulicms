@@ -1181,7 +1181,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true)
         $module_mainfile_path = getModuleMainFilePath($thisModule);
         $module_mainfile_path2 = getModuleMainFilePath2($thisModule);
         
-        if (is_file($module_mainfile_path) and (strstr($string, $stringToReplace1) or strstr($string, $stringToReplace2))) {
+        if (is_file($module_mainfile_path) and (str_contains($stringToReplace1, $string) or str_contains($stringToReplace2, $string))) {
             require_once $module_mainfile_path;
         } else if (is_file($module_mainfile_path2)) {
             require_once $module_mainfile_path2;

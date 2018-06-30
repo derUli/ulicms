@@ -1139,7 +1139,7 @@ function get_autor()
     }
 }
 
-function get_page($systemname = "")
+function get_page($systemname = '')
 {
     if (empty($systemname)) {
         $systemname = $_GET["seite"];
@@ -1164,21 +1164,21 @@ function get_page($systemname = "")
 function content()
 {
     $status = check_status();
-    if ($status == "404 Not Found") {
+    if ($status == '404 Not Found') {
         if (is_file(getTemplateDirPath($theme) . "404.php")) {
             $theme = Settings::get("theme");
             include getTemplateDirPath($theme) . "404.php";
         } else {
-            translate("PAGE_NOT_FOUND_CONTENT");
+            translate('PAGE_NOT_FOUND_CONTENT');
         }
         return false;
-    } else if ($status == "403 Forbidden") {
+    } else if ($status == '403 Forbidden') {
         
         $theme = Settings::get("theme");
-        if (is_file(getTemplateDirPath($theme) . "403.php")) {
-            include getTemplateDirPath($theme) . "403.php";
+        if (is_file(getTemplateDirPath($theme) . '403.php')) {
+            include getTemplateDirPath($theme) . '403.php';
         } else {
-            translate("FORBIDDEN_COTENT");
+            translate('FORBIDDEN_COTENT');
         }
         return false;
     }

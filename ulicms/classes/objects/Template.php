@@ -39,21 +39,21 @@ class Template
                 break;
             case "module":
                 $page = get_page();
-                if ($page["module"] != null and strlen($page["module"]) > 0) {
+                if ($page["module"] != null and strlen($page['module']) > 0) {
                     no_cache();
                     $output = replaceShortcodesWithModules("[module=\"" . $page["module"] . "\"]");
                 }
                 break;
             case "video":
                 $page = get_page();
-                if ($page["video"] != null and strlen($page["video"]) > 0) {
-                    $output = replaceVideoTags("[video id=" . $page["video"] . "]");
+                if ($page["video"] != null and strlen($page['video']) > 0) {
+                    $output = replaceVideoTags("[video id=" . $page['video'] . "]");
                 }
                 break;
             case "audio":
                 $page = get_page();
                 if ($page["audio"] != null and strlen($page["audio"]) > 0) {
-                    $output = replaceAudioTags("[audio id=" . $page["audio"] . "]");
+                    $output = replaceAudioTags("[audio id=" . $page['audio'] . "]");
                 }
                 break;
         }

@@ -199,7 +199,7 @@ if ($html_file) {
     if (is_file ( $html_file )) {
 		echo file_get_contents ( $html_file );
 	} else {
-		echo "File Not Found";
+		echo 'File Not Found';
 	}
 } else {
 	$top_files = array (
