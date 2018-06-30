@@ -2,7 +2,7 @@
 
 Neue Features:
 * Neue Option "preload_all_settings"
-* Performance Verbesserungen am Modulsystem vorgenommen
+* Diverse Performance-Verbesserungen
 * Bei einer AccessDeniedException wird HTTP-Status 403 Forbidden statt 500 Internal Server Error zurück gegeben
 
 Neue API-Funktionen:
