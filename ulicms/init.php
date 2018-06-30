@@ -93,7 +93,6 @@ include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATO
 
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "exceptions" . DIRECTORY_SEPERATOR . "load.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "registry" . DIRECTORY_SEPERATOR . "load.php";
-include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "files" . DIRECTORY_SEPERATOR . "load.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "logging" . DIRECTORY_SEPERATOR . "load.php";
 
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "html" . DIRECTORY_SEPERATOR . "load.php";
