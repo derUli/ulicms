@@ -56,6 +56,7 @@ $classes_dir = ULICMS_ROOT . DIRECTORY_SEPERATOR . "classes";
 @set_include_path(get_include_path() . PATH_SEPARATOR . $classes_dir);
 
 include ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "constants.php";
+include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "privacy" . DIRECTORY_SEPERATOR . "load.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "users_api.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "network.php";
@@ -88,7 +89,6 @@ include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATO
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "types" . DIRECTORY_SEPERATOR . "fields" . DIRECTORY_SEPERATOR . "FileImage.php";
 
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "pkg" . DIRECTORY_SEPERATOR . "load.php";
-include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "privacy" . DIRECTORY_SEPERATOR . "load.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "helper" . DIRECTORY_SEPERATOR . "load.php";
 
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "exceptions" . DIRECTORY_SEPERATOR . "load.php";
