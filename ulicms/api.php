@@ -43,6 +43,7 @@ function bool2YesNo($value, $yesString = null, $noString = null)
     return ($value ? $yesString : $noString);
 }
 
+// like json_encode() but human readable
 function json_readable_encode($in, $indent = 0, $from_array = false)
 {
     $_myself = __FUNCTION__;
@@ -102,6 +103,7 @@ function str_contains($needle, $haystack)
     return strpos($haystack, $needle) !== false;
 }
 
+// Get a subset of an associative array by providing the keys.
 function array_keep($array, $keys)
 {
     return array_intersect_key($array, array_fill_keys($keys, null));
@@ -118,6 +120,8 @@ function getAllUsedLanguages()
     return $languages;
 }
 
+// prepares a text / code for html output
+// replaces new lines with <br> tags
 function preparePlainTextforHTMLOutput($text)
 {
     return nl2br(htmlspecialchars($text));
@@ -523,9 +527,9 @@ function getModuleMeta($module, $attrib = null)
             }
         } else {
             $data = ! Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
-			if(is_string($data)){
-				$data = json_decode($data, true);
-			}
+            if (is_string($data)) {
+                $data = json_decode($data, true);
+            }
             Vars::set("module_{$module}_meta", $data);
             
             $retval = $data;
@@ -791,12 +795,15 @@ function setLocaleByLanguage()
 // else it returns $_SESSION["language"];
 function getCurrentLanguage($current = false)
 {
+    if (Vars::get("current_language_" . strbool($current))) {
+        return Vars::get("current_language_" . strbool($current));
+    }
     if ($current) {
         $query = db_query("SELECT language FROM " . tbname("content") . " WHERE systemname='" . get_requested_pagename() . "'");
-        
         if (db_num_rows($query) > 0) {
             $fetch = db_fetch_object($query);
-            return $fetch->language;
+            $language = $fetch->language;
+            Vars::set("current_language_" . strbool($current), $language);
         }
     }
     
@@ -858,6 +865,7 @@ function getModuleAdminSelfPath()
     return $self_path;
 }
 
+// replace num entity with the character
 function replace_num_entity($ord)
 {
     $ord = $ord[1];
@@ -1448,7 +1456,6 @@ function containsModule($page = null, $module = false)
     if (! is_null(Vars::get("page_" . $page . "_contains_" . $module))) {
         return Vars::get("page_" . $page . "_contains_" . $module);
     }
-    ;
     $query = db_query("SELECT content, module, `type` FROM " . tbname("content") . " WHERE systemname = '" . db_escape($page) . "'");
     $dataset = db_fetch_assoc($query);
     $content = $dataset["content"];

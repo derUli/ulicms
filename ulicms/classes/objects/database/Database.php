@@ -38,7 +38,7 @@ class Database
         return mysqli_query(self::$connection, $sql);
     }
 
-    // Abstraktion für Ausführen von SQL Strings
+    // execute a sql string with multiple statements
     public static function multiQuery($sql, $replacePrefix = false)
     {
         $cfg = new CMSConfig();

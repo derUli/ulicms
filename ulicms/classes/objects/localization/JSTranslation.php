@@ -5,8 +5,10 @@ class JSTranslation
 
     private $keys = array();
 
-    public function __construct()
-    {}
+    public function __construct($keys = array())
+    {
+        $this->addKeys($keys);
+    }
 
     public function addKey($name)
     {
