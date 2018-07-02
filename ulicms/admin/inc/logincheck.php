@@ -1,4 +1,7 @@
 <?php
+
+$logger = LoggerRegistry::get("audit_log");
+
 if (isset($_GET["destroy"]) or $_GET["action"] == "destroy") {
     db_query("UPDATE " . tbname("users") . " SET last_action = 0 WHERE id = " . $_SESSION["login_id"]);
     $url = apply_filter("index.php", "logout_url");
@@ -37,6 +40,7 @@ if (isset($_POST["login"])) {
     if ($twofactor_authentication) {
         $confirmation_code = $_POST["confirmation_code"];
     }
+
     
     $sessionData = validate_login($_POST["user"], $_POST["password"], $confirmation_code);
     $sessionData = apply_filter($sessionData, "session_data");
@@ -48,9 +52,10 @@ if (isset($_POST["login"])) {
             Settings::set("sys_initialized", "true");
         }
         do_event("login_ok");
+		
         register_session($sessionData, true);
     } else {
         Response::sendStatusHeader(HttpStatusCode::UNAUTHORIZED);
+		add_hook ( "login_failed" );
     }
 }
-

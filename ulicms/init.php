@@ -274,6 +274,10 @@ if (class_exists("Path")) {
     if (is_true($config->phpmailer_logging)) {
         LoggerRegistry::register("phpmailer_log", new Logger(Path::resolve("ULICMS_LOG/phpmailer_log")));
     }
+	if(is_true($config->audit_log)){
+		LoggerRegistry::register("audit_log", new Logger(Path::resolve("ULICMS_LOG/audit_log")));
+
+	}
 }
 require_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib/minify.php";
 
