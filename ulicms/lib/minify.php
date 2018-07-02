@@ -96,7 +96,7 @@ function getCombinedScriptURL()
     
     $lastmod = 0;
     foreach ($_SERVER["script_queue"] as $file) {
-        if (file_exists($file) and endsWith($file, ".js", $needle) and filemtime($file) > $lastmod) {
+        if (is_file($file) and endsWith($file, ".js", $needle) and filemtime($file) > $lastmod) {
             $lastmod = filemtime($file);
         }
     }
@@ -225,7 +225,7 @@ function getCombinedStylesheetURL()
 {
     $lastmod = 0;
     foreach ($_SERVER["stylesheet_queue"] as $file) {
-        if (file_exists($file) and endsWith($file, ".css", $needle) and filemtime($file) > $lastmod) {
+        if (is_file($file) and endsWith($file, ".css", $needle) and filemtime($file) > $lastmod) {
             $lastmod = filemtime($file);
         }
     }

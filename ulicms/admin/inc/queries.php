@@ -1,6 +1,6 @@
 <?php
 $acl = new ACL ();
-add_hook ( "query" );
+do_event ( "query" );
 
 include_once ULICMS_ROOT . "/classes/objects/content/VCS.php";
 

@@ -166,13 +166,13 @@ class Audio extends Model
             if ($deletePhysical) {
                 if ($this->getMP3File()) {
                     $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/audio/" . basename($this->getMP3File()));
-                    if (file_exists($file)) {
+                    if (is_file($file)) {
                         @unlink($file);
                     }
                 }
                 if ($this->getOggFile()) {
                     $file = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/audio/" . basename($this->getOggFile()));
-                    if (file_exists($file)) {
+                    if (is_file($file)) {
                         @unlink($file);
                     }
                 }

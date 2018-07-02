@@ -1,8 +1,7 @@
 <?php
-if (defined ( "_SECURITY" )) {
-	$acl = new ACL ();
-	if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_create" )) {
-		?>
+$acl = new ACL();
+if ($acl->hasPermission("banners") and $acl->hasPermission("banners_create")) {
+    ?>
 
 <?php echo ModuleHelper::buildMethodCallForm("BannerController", "create");?>
 <p>
@@ -20,8 +19,8 @@ if (defined ( "_SECURITY" )) {
 	<input type="hidden" name="add_banner" value="add_banner"> <strong><?php translate("bannertext");?>
 		</strong><br /> <input type="text" name="banner_name" value=""> <br />
 	<strong><?php
-		translate ( "IMAGE_URL" );
-		?></strong><br /> <input type="text" name="image_url" value=""> <br />
+    translate("IMAGE_URL");
+    ?></strong><br /> <input type="text" name="image_url" value=""> <br />
 	<strong><?php translate("link_url");?>
 		</strong><br /> <input type="text" name="link_url" value=""> <br />
 </fieldset>
@@ -40,12 +39,12 @@ if (defined ( "_SECURITY" )) {
 	<strong><?php translate("language");?>
 	</strong> <br /> <select name="language">
 	<?php
-		$languages = getAllLanguages ();
-		echo "<option value='all'>" . get_translation ( "every" ) . "</option>";
-		for($j = 0; $j < count ( $languages ); $j ++) {
-			echo "<option value='" . $languages [$j] . "'>" . getLanguageNameByCode ( $languages [$j] ) . "</option>";
-		}
-		?>
+    $languages = getAllLanguages();
+    echo "<option value='all'>" . get_translation("every") . "</option>";
+    for ($j = 0; $j < count($languages); $j ++) {
+        echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
+    }
+    ?>
 	</select>
 </p>
 <p>
@@ -53,13 +52,13 @@ if (defined ( "_SECURITY" )) {
 	</strong>
 
 <?php echo Categories :: getHTMLSelect()?></p>
-</p><br />
+</p>
+<br />
 <p>
 	<button type="submit" class="btn btn-primary"><?php translate("add_banner");?></button>
 </p>
 </form>
 <?php
-	} else {
-		noperms ();
-	}
+} else {
+    noperms();
 }

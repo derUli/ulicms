@@ -18,7 +18,7 @@ $entries [] = new MenuEntry ( get_translation ( "users" ), "?action=admins", "ad
 $entries [] = new MenuEntry ( get_translation ( "groups" ), "?action=groups", "groups", "groups" );
 $entries [] = new MenuEntry ( get_translation ( "packages" ), "?action=modules", "modules", "list_packages" );
 
-if (file_exists ( Path::resolve ( "ULICMS_ROOT/update.php" ) )) {
+if (is_file ( Path::resolve ( "ULICMS_ROOT/update.php" ) )) {
 	$entries [] = new MenuEntry ( get_translation ( "update" ), "?action=system_update", "update_system", "update_system" );
 }
 

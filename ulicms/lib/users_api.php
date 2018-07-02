@@ -76,7 +76,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $sendMessa
         $acl_group = "NULL";
     }
     
-    add_hook("before_create_user");
+    do_event("before_create_user");
     
     if (StringHelper::isNullOrWhitespace($default_language)) {
         $default_language = "NULL";
@@ -95,7 +95,7 @@ function adduser($username, $lastname, $firstname, $email, $password, $sendMessa
         @Mailer::send($email, "Dein Benutzer-Account bei " . $_SERVER["SERVER_NAME"], $message, $header);
     }
     
-    add_hook("after_create_user");
+    do_event("after_create_user");
 }
 
 function get_user_id()

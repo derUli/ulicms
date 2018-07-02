@@ -2,7 +2,7 @@
 class SimpleSettingsController extends Controller {
 	private $moduleName = "core_settings";
 	public function savePost() {
-		add_hook ( "before_safe_simple_settings" );
+		do_event ( "before_safe_simple_settings" );
 		setconfig ( "homepage_owner", db_escape ( $_POST ["homepage_owner"] ) );
 		setconfig ( "language", db_escape ( $_POST ["language"] ) );
 		setconfig ( "visitors_can_register", intval ( isset ( $_POST ["visitors_can_register"] ) ) );
@@ -18,7 +18,7 @@ class SimpleSettingsController extends Controller {
 		} else {
 			Settings::delete ( "disable_password_reset" );
 		}
-		add_hook ( "after_safe_simple_settings" );
+		do_event ( "after_safe_simple_settings" );
 		Request::redirect ( ModuleHelper::buildActionURL ( "settings_simple" ) );
 	}
 	public function getTimezones() {

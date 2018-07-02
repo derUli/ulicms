@@ -32,7 +32,7 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	<br />
 	<?php
 	}
-	add_hook ( "content_type_list_entry" );
+	do_event ( "content_type_list_entry" );
 	?>
 	<?php
 } else {

@@ -5,7 +5,7 @@ class PkgInfoController extends Controller {
 			$file = basename ( $_POST ["file"] );
 			$path = Path::resolve ( "ULICMS_TMP/$file" );
 			$pkg = new SinPackageInstaller ( $path );
-			if (file_exists ( $path )) {
+			if (is_file ( $path )) {
 				$pkg->installPackage ();
 				@unlink ( $path );
 			}

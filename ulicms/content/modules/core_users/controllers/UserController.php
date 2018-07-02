@@ -60,7 +60,7 @@ class UserController extends Controller {
 			
 			$default_language = StringHelper::isNotNullOrWhitespace ( $_POST ["default_language"] ) ? "'" . Database::escapeValue ( $_POST ["default_language"] ) . "'" : "NULL";
 			
-			add_hook ( "before_edit_user" );
+			do_event ( "before_edit_user" );
 			$sql = "UPDATE " . tbname ( "users" ) . " SET username = '$username', `group_id` = " . $group_id . ", `admin` = $admin, firstname='$firstname',
 lastname='$lastname', notify_on_login='$notify_on_login', email='$email', skype_id = '$skype_id',
 about_me = '$about_me', html_editor='$html_editor', require_password_change='$require_password_change', `locked`='$locked', `twitter` = '$twitter', `homepage` = '$homepage' , `default_language` = $default_language WHERE id=$id";
@@ -71,7 +71,7 @@ about_me = '$about_me', html_editor='$html_editor', require_password_change='$re
 				changePassword ( $password, $id );
 			}
 			
-			add_hook ( "after_edit_user" );
+			do_event ( "after_edit_user" );
 			;
 			if (! $acl->hasPermission ( "users" )) {
 				Request::redirect ( "index.php" );
@@ -82,9 +82,9 @@ about_me = '$about_me', html_editor='$html_editor', require_password_change='$re
 	}
 	public function deletePost() {
 		$admin = intval ( $_GET ["admin"] );
-		add_hook ( "before_admin_delete" );
+		do_event ( "before_admin_delete" );
 		$query = db_query ( "DELETE FROM " . tbname ( "users" ) . " WHERE id='$admin'", $connection );
-		add_hook ( "after_admin_delete" );
+		do_event ( "after_admin_delete" );
 		Request::redirect ( ModuleHelper::buildActionURL ( "admins" ) );
 	}
 }

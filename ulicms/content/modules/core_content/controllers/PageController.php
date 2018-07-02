@@ -97,7 +97,7 @@ class PageController extends Controller
             $link_to_language = StringHelper::isNotNullOrWhitespace(Request::getVar("link_to_language")) ? intval(Request::getVar("link_to_language")) : "NULL";
             $show_headline = intval($_POST["show_headline"]);
             
-            add_hook("before_create_page");
+            do_event("before_create_page");
             db_query("INSERT INTO " . tbname("content") . " (systemname, title, content, parent, active, created, lastmodified, autor, `group_id`,
   redirection,menu,position,
   access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`,
@@ -178,7 +178,7 @@ class PageController extends Controller
                 CustomFields::set($field->name, $value, $content_id);
             }
             
-            add_hook("after_create_page");
+            do_event("after_create_page");
             // header("Location: index.php?action=pages_edit&page=".db_insert_id()."#bottom");
             
             if ($acl->hasPermission("pages_edit_own") and $content_id) {
@@ -289,7 +289,7 @@ class PageController extends Controller
         $comment_homepage = Database::escapeValue($_POST["comment_homepage"]);
         $link_to_language = StringHelper::isNotNullOrWhitespace(Request::getVar("link_to_language")) ? intval(Request::getVar("link_to_language")) : "NULL";
         
-        add_hook("before_edit_page");
+        do_event("before_edit_page");
         $sql = "UPDATE " . tbname("content") . " SET `html_file` = '$html_file', systemname = '$systemname' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
 	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, `group_id` = $group_id, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
 	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = $article_date, excerpt = '$excerpt',
@@ -357,7 +357,7 @@ class PageController extends Controller
             CustomFields::set($field->name, $value, $content_id);
         }
         
-        add_hook("after_edit_page");
+        do_event("after_edit_page");
         
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
@@ -365,26 +365,26 @@ class PageController extends Controller
     public function undeletePost()
     {
         $page = Request::getVar("page");
-        add_hook("before_undelete_page");
+        do_event("before_undelete_page");
         db_query("UPDATE " . tbname("content") . " SET `deleted_at` = NULL" . " WHERE id=$page");
-        add_hook("after_undelete_page");
+        do_event("after_undelete_page");
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 
     public function deletePost()
     {
         $page = Request::getVar("page");
-        add_hook("before_delete_page");
+        do_event("before_delete_page");
         db_query("UPDATE " . tbname("content") . " SET `deleted_at` = " . time() . " WHERE id=$page");
-        add_hook("after_delete_page");
+        do_event("after_delete_page");
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 
     public function emptyTrash()
     {
-        add_hook("before_empty_trash");
+        do_event("before_empty_trash");
         db_query("DELETE FROM " . tbname("content") . " WHERE deleted_at IS NOT NULL");
-        add_hook("after_empty_trash");
+        do_event("after_empty_trash");
         Request::redirect(ModuleHelper::buildActionURL("pages"));
     }
 

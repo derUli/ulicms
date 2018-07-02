@@ -5,6 +5,6 @@ $classes = array (
 		"Path" 
 );
 foreach ( $classes as $class ) {
-	require_once dirname ( __FILE__ ) . "/$class.php";
+    require dirname ( __FILE__ ) . "/$class.php";
 }
 

@@ -30,7 +30,7 @@ class ControllerRegistry {
 				}
 			}
 			foreach ( $controllerRegistry as $key => $value ) {
-				include_once $value;
+				include $value;
 				if (class_exists ( $key )) {
 					$classInstance = new $key ();
 					if ($classInstance instanceof Controller) {
@@ -61,6 +61,7 @@ class ControllerRegistry {
 			return null;
 		}
 	}
+	// check if user is permitted to call controller method $sMethod in Class $sClass 
 	public static function userCanCall($sClass, $sMethod) {
 		$allowed = true;
 		$acl = new ACL ();

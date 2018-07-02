@@ -2,9 +2,14 @@
 
 Neue Features:
 * Neue Option "preload_all_settings"
+* Diverse Performance-Verbesserungen
+* Bei einer AccessDeniedException wird HTTP-Status 403 Forbidden statt 500 Internal Server Error zurück gegeben
 
 Neue API-Funktionen:
 * Javascript-Mechanismus um eine "Alle auswählen" Checkbox zu implementieren
+* do_event()
+* add_hook() ist nun deprecated
+* Der Konstruktur von JSTranslation nimmt nun ein Array als optionalen Parameter an 
 
 ===== Neues in UliCMS 2018.3.4 =====
 

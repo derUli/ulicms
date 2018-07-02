@@ -76,11 +76,11 @@ class ModuleHelper
             $embed_attrib = true;
             
             $meta_attr = getModuleMeta($module, "embed");
-            if (! is_null($meta_attr) and is_bool($meta_attr)) {
+            if (is_bool($meta_attr)) {
                 $embed_attrib = $meta_attr;
             }
             
-            if (! file_exists($noembedfile1) and ! file_exists($noembedfile2) and $embed_attrib) {
+            if (! is_file($noembedfile1) and ! is_file($noembedfile2) and $embed_attrib) {
                 $retval[] = $module;
             }
         }
@@ -106,20 +106,21 @@ class ModuleHelper
         $embed_attrib = true;
         
         $meta_attr = getModuleMeta($module, "embed");
-        if (! is_null($meta_attr) and is_bool($meta_attr)) {
+        if (is_bool($meta_attr)) {
             $embed_attrib = $meta_attr;
         }
         
-        if (file_exists($noembedfile1) or file_exists($noembedfile2) or ! $embed_attrib) {
+        if (is_file($noembedfile1) or is_file($noembedfile2) or ! $embed_attrib) {
             $retval = false;
         }
         return $retval;
     }
 
-	public static function getBaseUrl($suffix = "/"){
-		$domain = get_http_host();
-		
-		$dirname = dirname(get_request_uri());
+    public static function getBaseUrl($suffix = "/")
+    {
+        $domain = get_http_host();
+        
+        $dirname = dirname(get_request_uri());
         
         // Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
@@ -127,15 +128,15 @@ class ModuleHelper
         if (is_admin_dir()) {
             $dirname = dirname(dirname($dirname . "/.."));
         }
-        				
-		// Replace backslashes with slashes (Windows)
+        
+        // Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
-		
-		$dirname = rtrim($dirname, "/");
-		
-		return get_site_protocol() . $domain . $dirname . $suffix;
-	}
-	
+        
+        $dirname = rtrim($dirname, "/");
+        
+        return get_site_protocol() . $domain . $dirname . $suffix;
+    }
+
     public static function getFullPageURLByID($page_id = null)
     {
         if (! $page_id) {
@@ -168,10 +169,10 @@ class ModuleHelper
         if (! endsWith($dirname, "/")) {
             $dirname = $dirname . "/";
         }
-		
-		// Replace backslashes with slashes (Windows)
+        
+        // Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
-		
+        
         $currentLanguage = isset($_SESSION["language"]) ? $_SESSION["language"] : Settings::get("default_language");
         if (! $domain) {
             if ($page->language != $currentLanguage) {

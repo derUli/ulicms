@@ -16,13 +16,13 @@ if (get_request_method () != "POST") {
 	exit ();
 }
 
-add_hook ( "before_session_start" );
+do_event ( "before_session_start" );
 
 // initialize session
 @session_start ();
 $_COOKIE [session_name ()] = session_id ();
 
-add_hook ( "after_session_start" );
+do_event ( "after_session_start" );
 
 setLanguageByDomain ();
 
@@ -42,7 +42,7 @@ if (faster_in_array ( $_SESSION ["language"], $languages )) {
 	include getLanguageFilePath ( $_SESSION ["language"] );
 	Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
 	Translation::includeCustomLangFile ( $_SESSION ["language"] );
-	add_hook ( "custom_lang_" . $_SESSION ["language"] );
+	do_event ( "custom_lang_" . $_SESSION ["language"] );
 }
 
 if ($_SERVER ["REQUEST_METHOD"] == "POST" and ! defined ( "NO_ANTI_CSRF" )) {
