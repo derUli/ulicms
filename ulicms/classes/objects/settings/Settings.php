@@ -79,8 +79,8 @@ class Settings
     public static function set($key, $value, $type = 'str')
     {
         $key = db_escape($key);
-        $value = self::convertVar($value, $type);
-        $value = db_escape($value);
+        $originalValue = self::convertVar($value, $type);
+        $value = db_escape($originalValue);
         $query = db_query("SELECT id FROM " . tbname("settings") . " WHERE name='$key'");
         if (db_num_rows($query) > 0) {
             db_query("UPDATE " . tbname("settings") . " SET value='$value' WHERE name='$key'");
@@ -94,13 +94,13 @@ class Settings
             if ($userId) {
                 $user = getUserById($userId);
                 $username = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
-                $logger->debug("User $username - Changed setting $key to '$value'");
+                $logger->debug("User $username - Changed setting $key to '$originalValue'");
             } else {
                 $username = AuditLog::UNKNOWN;
-                $logger->debug("User $username - Changed setting $key to '$value'");
+                $logger->debug("User $username - Changed setting $key to '$originalValue'");
             }
         }
-        SettingsCache::set($key, $value);
+        SettingsCache::set($key, $originalValue);
     }
 
     // Remove an configuration variable
