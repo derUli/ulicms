@@ -2,7 +2,7 @@
 $controller = ControllerRegistry::get();
 $acl = new ACL();
 if (! $acl->hasPermission("design")) {
-    noperms();
+    noPerms();
 } else {
     $theme = Settings::get("theme");
     $additional_menus = Settings::get("additional_menus");

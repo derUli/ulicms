@@ -13,5 +13,5 @@ if ($acl->hasPermission ( "install_packages" )) {
 <?php
 	}
 } else {
-	noperms ();
+	noPerms ();
 }

@@ -230,5 +230,5 @@ if ($acl->hasPermission("dashboard")) {
     ?>
 <?php
 } else {
-    noperms();
+    noPerms();
 }

@@ -1,7 +1,7 @@
 <?php
 $acl = new ACL();
 if (! $acl->hasPermission("list_packages")) {
-    noperms();
+    noPerms();
 } else {
     // FIXME: Hartgecodete Texte in Sprachdateien auslagern.
     // Das hier sollte am besten gleichzeitig mit dem Redesign der Paketverwaltung geschehen.

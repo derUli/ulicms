@@ -18,7 +18,7 @@ if ($acl->hasPermission($_GET["action"])) {
 
 <?php
 } else {
-    noperms();
+    noPerms();
 }
 
 ?>

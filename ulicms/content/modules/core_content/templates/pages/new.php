@@ -720,5 +720,5 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </form>
 <?php
 } else {
-    noperms();
+    noPerms();
 }

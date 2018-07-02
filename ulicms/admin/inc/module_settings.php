@@ -55,13 +55,13 @@ if ((! is_file ( $admin_file_path ) and ! is_file ( $admin_file_path2 ) and ! ($
 		if (MODULE_ACCESS_PERMITTED) {
 			echo $controller->settings ();
 		} else {
-			noperms ();
+			noPerms ();
 		}
 	} else if (function_exists ( $admin_func )) {
 		if (MODULE_ACCESS_PERMITTED) {
 			call_user_func ( $admin_func );
 		} else {
-			noperms ();
+			noPerms ();
 		}
 	} else {
 		echo "<p>" . get_translation ( "this_module_has_no_settings" ) . "</p>";

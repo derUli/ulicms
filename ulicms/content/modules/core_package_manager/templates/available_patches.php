@@ -43,5 +43,5 @@ if ($acl->hasPermission ( "update_system" ) and ! $runningInGoogleCloud) {
 <?php
 	}
 } else {
-	noperms ();
+	noPerms ();
 }

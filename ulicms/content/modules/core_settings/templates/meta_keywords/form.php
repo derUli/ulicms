@@ -69,5 +69,5 @@ if ($acl->hasPermission("settings_simple")) {
 
 <?php
 } else {
-    noperms();
+    noPerms();
 }

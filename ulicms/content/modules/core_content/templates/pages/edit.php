@@ -79,7 +79,7 @@ if ($acl->hasPermission("pages")) {
         }
         
         if (! $can_edit_this) {
-            noperms();
+            noPerms();
         } else {
             ?>
 		<?php
@@ -1121,5 +1121,5 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
     ?>
 		<?php
 } else {
-		noperms ();
+		noPerms ();
 	}

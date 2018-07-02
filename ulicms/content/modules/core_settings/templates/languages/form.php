@@ -88,6 +88,6 @@ if ($acl->hasPermission ( "languages" )) {
 <?php
 	}
 } else {
-	noperms ();
+	noPerms ();
 }
 	

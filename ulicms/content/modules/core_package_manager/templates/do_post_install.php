@@ -19,5 +19,5 @@ if ($acl->hasPermission ( "update_system" )) {
 <?php
 	}
 } else {
-	noperms ();
+	noPerms ();
 }

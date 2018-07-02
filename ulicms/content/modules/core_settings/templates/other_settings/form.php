@@ -4,7 +4,7 @@ $ga_secret = Settings::get("ga_secret");
 $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation("ULICMS_LOGIN_AT") . " " . get_domain(), $ga_secret);
 $acl = new ACL();
 if (! $acl->hasPermission("other")) {
-    noperms();
+    noPerms();
 } else {
     $cache_enabled = ! Settings::get("cache_disabled");
     $cache_period = round(Settings::get("cache_period") / 60);

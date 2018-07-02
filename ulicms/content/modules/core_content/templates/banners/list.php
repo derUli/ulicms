@@ -89,5 +89,5 @@ if ($acl->hasPermission("banners")) {
 <br />
 <?php
 } else {
-    noperms();
+    noPerms();
 }

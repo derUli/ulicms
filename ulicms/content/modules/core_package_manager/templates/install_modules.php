@@ -2,7 +2,7 @@
 $acl = new ACL();
 $pkg = new PackageManager();
 if (! $acl->hasPermission("install_packages")) {
-    noperms();
+    noPerms();
 } else {
     $pkg_src = Settings::get("pkg_src");
     @set_time_limit(0);

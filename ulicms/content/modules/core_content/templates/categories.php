@@ -1,7 +1,7 @@
 <?php
 $acl = new ACL();
 if (! is_admin() and ! $acl->hasPermission("categories")) {
-    noperms();
+    noPerms();
 } else {
     include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
     if (isset($_GET["order"]) and faster_in_array($_GET["order"], array(
@@ -161,7 +161,7 @@ if (! is_admin() and ! $acl->hasPermission("categories")) {
 
 <?php
         } else {
-            noperms();
+            noPerms();
         }
     } else if (isset($_GET["edit"])) {
         if ($acl->hasPermission("categories_edit")) {
@@ -196,7 +196,7 @@ if (! is_admin() and ! $acl->hasPermission("categories")) {
 </form>
 <?php
         } else {
-            noperms();
+            noPerms();
         }
     }
 }

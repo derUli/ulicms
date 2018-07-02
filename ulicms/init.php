@@ -274,10 +274,9 @@ if (class_exists("Path")) {
     if (is_true($config->phpmailer_logging)) {
         LoggerRegistry::register("phpmailer_log", new Logger(Path::resolve("ULICMS_LOG/phpmailer_log")));
     }
-	if(is_true($config->audit_log)){
-		LoggerRegistry::register("audit_log", new Logger(Path::resolve("ULICMS_LOG/audit_log")));
-
-	}
+    if (is_true($config->audit_log)) {
+        LoggerRegistry::register("audit_log", new Logger(Path::resolve("ULICMS_LOG/audit_log")));
+    }
 }
 require_once dirname(__file__) . DIRECTORY_SEPERATOR . "lib/minify.php";
 
@@ -291,9 +290,20 @@ define("ONE_DAY_IN_SECONDS", 60 * 60 * 24);
 global $actions;
 $actions = array();
 
-function noperms()
+function noPerms()
 {
     echo "<p class=\"ulicms_error\">" . get_translation("no_permissions") . "</p>";
+    $logger = LoggerRegistry::get("audit_log");
+    if ($logger) {
+        $userId = get_user_id();
+        $name = AuditLog::UNKNOWN;
+        if ($userId) {
+            $user = getUserById($userId);
+            $name = $user["username"];
+        }
+        $url = get_request_uri();
+        $logger->error("User $name - No Permission on URL ($url)");
+    }
     return false;
 }
 

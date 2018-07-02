@@ -36,5 +36,5 @@ if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl
 	?>
 	<?php
 } else {
-	noperms ();
+	noPerms ();
 }

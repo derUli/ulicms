@@ -133,5 +133,5 @@ if ($acl->hasPermission("privacy_settings")) {
 
 <?php
 } else {
-    noperms();
+    noPerms();
 }

@@ -117,7 +117,7 @@ if (! $eingeloggt) {
         if ((! $requiredPermission) or ($requiredPermission and $acl->hasPermission($requiredPermission))) {
             include_once $actions[get_action()];
         } else {
-            noperms();
+            noPerms();
         }
     } else {
         translate("action_not_found");

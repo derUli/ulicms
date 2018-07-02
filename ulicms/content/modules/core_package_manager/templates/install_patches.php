@@ -39,5 +39,5 @@ if ($acl->hasPermission("update_system")) {
         }
     }
 } else {
-    noperms();
+    noPerms();
 }

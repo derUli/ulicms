@@ -52,6 +52,6 @@ if ($acl->hasPermission("logo")) {
 </form>
 <?php
 } else {
-    noperms();
+    noPerms();
 }
 ?>

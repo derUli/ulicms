@@ -60,5 +60,5 @@ if ($acl->hasPermission("banners") and $acl->hasPermission("banners_create")) {
 </form>
 <?php
 } else {
-    noperms();
+    noPerms();
 }

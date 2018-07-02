@@ -156,5 +156,5 @@ if ($acl->hasPermission("videos")) {
     ?>
 <?php
 } else {
-    noperms();
+    noPerms();
 }

@@ -1,7 +1,7 @@
 <?php
 $acl = new ACL ();
 if (! $acl->hasPermission ( "pkg_settings" )) {
-	noperms ();
+	noPerms ();
 } else {
 	$default_pkg_src = "https://packages.ulicms.de/{version}/";
 	$version = new UliCMSVersion ();

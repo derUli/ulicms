@@ -2,7 +2,7 @@
 $acl = new ACL ();
 
 if (! $acl->hasPermission ( "groups" )) {
-	noperms ();
+	noPerms ();
 } else {
 	$id = intval ( $_REQUEST ["edit"] );
 	$acl = new ACL ();

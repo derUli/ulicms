@@ -27,5 +27,5 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_create" )
 </form>
 <?php
 } else {
-	noperms ();
+	noPerms ();
 }

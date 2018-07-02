@@ -216,5 +216,5 @@ if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_G
     ?>
 		<?php
 } else {
-    noperms();
+    noPerms();
 }

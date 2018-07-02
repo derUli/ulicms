@@ -75,7 +75,7 @@ if ($acl->hasPermission("favicon")) {
 
 <?php
 } else {
-    noperms();
+    noPerms();
 }
 
 ?>

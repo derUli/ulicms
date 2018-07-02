@@ -65,5 +65,5 @@ if ($acl->hasPermission ( "expert_settings" )) {
 	?>
 <?php
 } else {
-	noperms ();
+	noPerms ();
 }
