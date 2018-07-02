@@ -1,9 +1,11 @@
 <?php
 $acl = new ACL();
 if (! $acl->hasPermission("groups")) {
-    noperms();
+    noPerms();
 } else {
     include_once "../lib/string_functions.php";
+    
+    $logger = LoggerRegistry::get("audit_log");
     
     $modified = false;
     $created = false;
@@ -33,6 +35,11 @@ if (! $acl->hasPermission("groups")) {
             $group->setAllowableTags($allowed_tags);
             $group->save();
             $created = true;
+            if ($logger) {
+                $user = getUserById(get_user_id());
+                $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
+                $logger->debug("User $userName - Created new group ({$name})\nPermissions: " . json_readable_encode($all_permissions));
+            }
             $name = real_htmlspecialchars($name);
         }
     } else if (isset($_GET["delete"]) and get_request_method() == "POST") {
@@ -42,6 +49,11 @@ if (! $acl->hasPermission("groups")) {
         $removed = true;
         if (isset($GLOBALS["permissions"])) {
             unset($GLOBALS["permissions"]);
+        }
+        if ($logger) {
+            $user = getUserById(get_user_id());
+            $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
+            $logger->debug("User $name - Delete group with id ($id)");
         }
     } else if (isset($_POST["edit_group"])) {
         $acl = new ACL();
@@ -69,11 +81,17 @@ if (! $acl->hasPermission("groups")) {
         }
         
         $name = trim($_POST["name"]);
-        $all_permissions = json_encode($all_permissions);
+        $json_permissions = json_encode($all_permissions);
         if (! empty($name)) {
-            $acl->updateGroup($id, $name, $all_permissions);
+            $acl->updateGroup($id, $name, $json_permissions);
             $modified = true;
             $name = real_htmlspecialchars($name);
+        }
+        
+        if ($logger) {
+            $user = getUserById(get_user_id());
+            $userName = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
+            $logger->debug("User $userName - Created new group ({$name})\nPermissions: " . json_readable_encode($all_permissions));
         }
         if (isset($GLOBALS["permissions"])) {
             unset($GLOBALS["permissions"]);
@@ -121,13 +139,13 @@ if (! $acl->hasPermission("groups")) {
         if ($acl->hasPermission("groups_create")) {
             include "inc/group_add.php";
         } else {
-            noperms();
+            noPerms();
         }
     } else if (isset($_GET["edit"])) {
         if ($acl->hasPermission("groups_edit")) {
             include "inc/group_edit.php";
         } else {
-            noperms();
+            noPerms();
         }
     }
     ?>
