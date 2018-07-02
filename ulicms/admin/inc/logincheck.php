@@ -25,12 +25,12 @@ if (isset($_REQUEST["reset_password_token"])) {
         $user->save();
         register_session(getUserById($user_id));
         $token = $reset->deleteToken($_REQUEST["reset_password_token"]);
-        if($logger){
+        if ($logger) {
             $name = $user->getUsername() ? $user->getUsername() : AuditLog::UNKNOWN;
-            $logger->error("Password reset $name - OK");
+            $logger->debug("Password reset $name - OK");
         }
     } else {
-        if ($logger){
+        if ($logger) {
             $logger->error("Password reset - Invalid token");
         }
         TextResult(get_translation("invalid_token"), 404);
