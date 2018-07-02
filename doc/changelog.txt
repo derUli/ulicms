@@ -11,6 +11,9 @@ Neue API-Funktionen:
 * add_hook() ist nun deprecated
 * Der Konstruktur von JSTranslation nimmt nun ein Array als optionalen Parameter an 
 
+Sonstige Änderungen:
+* Logdateien haben nun .log als Dateiendung
+
 ===== Neues in UliCMS 2018.3.4 =====
 
 Neue Features:
