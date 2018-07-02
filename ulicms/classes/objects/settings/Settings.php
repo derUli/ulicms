@@ -87,6 +87,19 @@ class Settings
         } else {
             db_query("INSERT INTO " . tbname("settings") . " (name, value) VALUES('$key', '$value')");
         }
+        
+        $logger = LoggerRegistry::get("audit_log");
+        $userId = get_user_id();
+        if ($logger) {
+            if ($userId) {
+                $user = getUserById($userId);
+                $username = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
+                $logger->debug("User $username - Changed setting $key to '$value'");
+            } else {
+                $username = AuditLog::UNKNOWN;
+                $logger->debug("User $username - Changed setting $key to '$value'");
+            }
+        }
         SettingsCache::set($key, $value);
     }
 
