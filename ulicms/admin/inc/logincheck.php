@@ -52,10 +52,15 @@ if (isset($_POST["login"])) {
             Settings::set("sys_initialized", "true");
         }
         do_event("login_ok");
-		
-        register_session($sessionData, true);
+		if($logger){
+			$logger->debug("User {$_POST['user']} - Login OK");
+		}
+		register_session($sessionData, true);
     } else {
+		if($logger){
+			$logger->error("User {$_POST['user']} - Login Failed");
+		}
         Response::sendStatusHeader(HttpStatusCode::UNAUTHORIZED);
-		add_hook ( "login_failed" );
+		do_event ( "login_failed" );
     }
 }
