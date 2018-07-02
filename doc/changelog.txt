@@ -4,6 +4,7 @@ Neue Features:
 * Neue Option "preload_all_settings"
 * Diverse Performance-Verbesserungen
 * Bei einer AccessDeniedException wird HTTP-Status 403 Forbidden statt 500 Internal Server Error zurück gegeben
+* Audit Log
 
 Neue API-Funktionen:
 * Javascript-Mechanismus um eine "Alle auswählen" Checkbox zu implementieren
