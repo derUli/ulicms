@@ -1,9 +1,14 @@
 <?php
-
 $logger = LoggerRegistry::get("audit_log");
 
 if (isset($_GET["destroy"]) or $_GET["action"] == "destroy") {
-    db_query("UPDATE " . tbname("users") . " SET last_action = 0 WHERE id = " . $_SESSION["login_id"]);
+    $id = intval($_SESSION["login_id"]);
+    if ($logger) {
+        $user = getUserById($id);
+        $name = isset($user["username"]) ? $user["username"] : "[unknown]";
+        $logger->debug("User $name - Logout");
+    }
+    db_query("UPDATE " . tbname("users") . " SET last_action = 0 WHERE id = $id");
     $url = apply_filter("index.php", "logout_url");
     header("Location: $url");
     session_destroy();
@@ -40,7 +45,6 @@ if (isset($_POST["login"])) {
     if ($twofactor_authentication) {
         $confirmation_code = $_POST["confirmation_code"];
     }
-
     
     $sessionData = validate_login($_POST["user"], $_POST["password"], $confirmation_code);
     $sessionData = apply_filter($sessionData, "session_data");
@@ -52,15 +56,15 @@ if (isset($_POST["login"])) {
             Settings::set("sys_initialized", "true");
         }
         do_event("login_ok");
-		if($logger){
-			$logger->debug("User {$_POST['user']} - Login OK");
-		}
-		register_session($sessionData, true);
+        if ($logger) {
+            $logger->debug("User {$_POST['user']} - Login OK");
+        }
+        register_session($sessionData, true);
     } else {
-		if($logger){
-			$logger->error("User {$_POST['user']} - Login Failed");
-		}
+        if ($logger) {
+            $logger->error("User {$_POST['user']} - Login Failed");
+        }
         Response::sendStatusHeader(HttpStatusCode::UNAUTHORIZED);
-		do_event ( "login_failed" );
+        do_event("login_failed");
     }
 }
