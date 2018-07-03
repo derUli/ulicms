@@ -12,6 +12,9 @@ Neue API-Funktionen:
 * add_hook() ist nun deprecated
 * Der Konstruktur von JSTranslation nimmt nun ein Array als optionalen Parameter an 
 
+Bugfixes:
+* Einige potentielle Caching-Probleme durch Anhängen eines Timestamps behoben
+
 Sonstige Änderungen:
 * Logdateien haben nun .log als Dateiendung
 
