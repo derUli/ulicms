@@ -5,7 +5,7 @@ class TemplateTest extends PHPUnit_Framework_TestCase
 
     public function testRenderPartialSuccess()
     {
-        throw new NotImplementedException("Test not implemented yet");
+        $this->assertEquals("Hello World!", Template::renderPartial("hello", "impro17"));
     }
 
     public function testRenderPartialNotFound()
