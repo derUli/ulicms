@@ -244,7 +244,10 @@ class Template
         if (! is_file($file)) {
             throw new FileNotFoundException("Partial Template {$template} of Theme {$theme} not found.");
         }
+        ob_start();
         include $file;
+        $result = trim(ob_get_clean());
+        return $result;
     }
     // @TODO Restliche Funktionen aus templating.php implementieren
 }
