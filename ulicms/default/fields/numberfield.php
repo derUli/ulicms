@@ -11,7 +11,7 @@ if (is_null ( $value )) {
 		<strong><?php translate($field->title);?> <?php if($field->required) echo "*";?></strong><br />
 		<input type="number"
 			name="<?php Template::escape(ViewBag::get("field_name"));?>"
-			value="<?php Template::escape($value);?>"
+			value="<?php Template::escape($value);?>" step="any"
 			<?php if($field->required) echo "required";?>
 			<?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes);?>>
 		<?php if($field->helpText){?>
