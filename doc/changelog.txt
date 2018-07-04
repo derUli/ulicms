@@ -15,6 +15,8 @@ Neue API-Funktionen:
 
 Bugfixes:
 * Einige potentielle Caching-Probleme durch Anhängen eines Timestamps behoben
+* Wenn ein Inhaltstyp vom Typ "Link" oder "Knotenpunkt" in einen anderen Typ geändert wird,
+  wird nun das Menü korrekt aktualisiert
 * in CustomFields vom Typ Nummer können nun auch Kommazeilen eingegeben werden.
 
 Sonstige Änderungen:

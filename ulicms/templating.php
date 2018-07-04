@@ -898,11 +898,14 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
                 $language = new Language($row->link_to_language);
                 $redirection = $language->getLanguageLink();
             }
+            // if content has type link or node url is the target url else build seo url
+            $url = ($row->type == "link" or $row->type == "node") ? $row->redirection : buildSEOUrl($row->systemname);
+            $url = Template::getEscape($url);
             
             if (get_requested_pagename() != $row->systemname) {
-                $html .= "<a href='" . buildSEOUrl($row->systemname, $redirection) . "' target='" . $row->target . "' class='" . trim($additional_classes) . "'>";
+                $html .= "<a href='" . $url . "' target='" . $row->target . "' class='" . trim($additional_classes) . "'>";
             } else {
-                $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . buildSEOUrl($row->systemname, $redirection) . "' target='" . $row->target . "'>";
+                $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
             }
             if (! is_null($row->menu_image) and ! empty($row->menu_image)) {
                 $html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities($title, ENT_QUOTES, "UTF-8") . '"/>';
