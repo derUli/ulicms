@@ -22,3 +22,5 @@ add_translation("privacy", "Datenschutz");
 add_translation("privacy_policy_checkbox_enable", "Aktiviere DSGVO Checkbox für Formulare");
 add_translation("privacy_policy_checkbox_text", "Text für DSGVO Checkbox");
 add_translation("dsgvo_checkbox", "DSGVO Checkbox");
+
+add_translation("no_auto_cron_help", "Aktivieren Sie diese Option, wenn Sie einen richtigen Cronjob einrichten möchten.\nWenn diese Option nicht aktiviert ist, werden Cronjobs beim Laden einer Seite ausgefürt, was die Ladezeiten verschlechtert.");
