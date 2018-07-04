@@ -232,5 +232,22 @@ class Template
         $html .= "\r\n";
         return $html;
     }
+
+    public static function renderPartial($template, $theme = null)
+    {
+        if (! $theme) {
+            $theme = get_theme();
+        }
+        
+        $file = getTemplateDirPath($theme, true) . "partials/{$template}";
+        $file = ! endsWith($file, ".php") ? $file . ".php" : $file;
+        if (! is_file($file)) {
+            throw new FileNotFoundException("Partial Template {$template} of Theme {$theme} not found.");
+        }
+        ob_start();
+        include $file;
+        $result = trim(ob_get_clean());
+        return $result;
+    }
     // @TODO Restliche Funktionen aus templating.php implementieren
 }

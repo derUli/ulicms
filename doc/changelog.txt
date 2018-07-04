@@ -11,6 +11,10 @@ Neue API-Funktionen:
 * do_event()
 * add_hook() ist nun deprecated
 * Der Konstruktur von JSTranslation nimmt nun ein Array als optionalen Parameter an 
+* Template::renderPartial($template, $theme = null)
+
+Bugfixes:
+* Einige potentielle Caching-Probleme durch Anhängen eines Timestamps behoben
 
 Sonstige Änderungen:
 * Logdateien haben nun .log als Dateiendung

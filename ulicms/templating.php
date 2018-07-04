@@ -949,9 +949,9 @@ function get_output_favicon_code()
         $url = ULICMS_DATA_STORAGE_URL . "/" . $url;
     }
     $path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
-    
     $html = "";
     if (is_file($path)) {
+        $url .= "?time=" . File::getLastChanged($path);
         $html = '<link rel="icon" href="' . $url . '" type="image/x-icon" />' . "\r\n" . '<link rel="shortcut icon" href="' . $url . '" type="image/x-icon" />';
     }
     return $html;
@@ -1017,7 +1017,11 @@ function base_metas()
         }
     }
     if (! Settings::get("no_autoembed_core_css")) {
-        echo '<link rel="stylesheet" type="text/css" href="core.min.css"/>';
+        $coreCssFile = ULICMS_ROOT . "/core.min.css";
+        
+        $coreCssFileURL = basename($coreCssFile) . "?time=" . File::getLastChanged($coreCssFile);
+        
+        echo '<link rel="stylesheet" type="text/css" href="' . $coreCssFileURL . '"/>';
         echo "\r\n";
     }
     
@@ -1025,6 +1029,7 @@ function base_metas()
     $min_style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.min.css";
     $style_file = getTemplateDirPath(get_theme()) . "style.css";
     $style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.css";
+    $style_file .= "?time=" . File::getLastChanged($style_file_realpath);
     if (is_file($min_style_file_realpath)) {
         echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
     } else if (is_file($style_file_realpath)) {
