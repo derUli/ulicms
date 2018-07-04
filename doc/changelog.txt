@@ -15,6 +15,7 @@ Neue API-Funktionen:
 
 Bugfixes:
 * Einige potentielle Caching-Probleme durch Anhängen eines Timestamps behoben
+* in CustomFields vom Typ Nummer können nun auch Kommazeilen eingegeben werden.
 
 Sonstige Änderungen:
 * Logdateien haben nun .log als Dateiendung
