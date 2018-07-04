@@ -100,7 +100,7 @@ if (! $acl->hasPermission("other")) {
     ?></textarea>
 		</p>
 	</div>
-	
+
 	<h2 class="accordion-header">
 		<?php translate("cronjobs");?>
 		</h2>
@@ -122,7 +122,11 @@ if (! $acl->hasPermission("other")) {
     }
     ?>>
 		</div>
+		<p>
+			<small><?php translate("no_auto_cron_help", array("\n", "<br/>"));?></small>
+		</p>
 	</div>
+
 	<h2 class="accordion-header">
 		<?php
     
