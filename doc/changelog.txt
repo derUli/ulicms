@@ -1,3 +1,8 @@
+===== Neues in UliCMS 2018.3.6 =====
+
+Neue Features:
+* Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezegit werden sollen.
+
 ===== Neues in UliCMS 2018.3.5 =====
 
 Neue Features:
@@ -5,7 +10,6 @@ Neue Features:
 * Diverse Performance-Verbesserungen
 * Bei einer AccessDeniedException wird HTTP-Status 403 Forbidden statt 500 Internal Server Error zurück gegeben
 * Audit Log
-* Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezegit werden sollen.
 
 Neue API-Funktionen:
 * Javascript-Mechanismus um eine "Alle auswählen" Checkbox zu implementieren
