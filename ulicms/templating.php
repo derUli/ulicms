@@ -888,7 +888,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
             // Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
                 $acl = new ACL();
-                if ($acl->hasPermission("pages_show_positions")) {
+                if ($acl->hasPermission("pages_show_positions") and Settings::get("user/". get_user_id() ."/show_positions")) {
                     $title .= " ({$row->position})";
                 }
             }
