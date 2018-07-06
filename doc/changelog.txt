@@ -1,7 +1,8 @@
-===== Neues in UliCMS 2018.3.6 =====
+﻿===== Neues in UliCMS 2018.3.6 =====
 
 Neue Features:
 * Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezegit werden sollen.
+* Neue Direktive "disable_functions" für Theme-Metadaten eingeführt
 
 ===== Neues in UliCMS 2018.3.5 =====
 
