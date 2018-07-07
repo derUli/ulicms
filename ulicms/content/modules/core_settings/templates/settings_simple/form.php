@@ -187,7 +187,7 @@ if ($acl->hasPermission("settings_simple")) {
 	</tr>
 <?php
     
-    add_hook("settings_simple");
+    do_event("settings_simple");
     ?>
 <tr>
 		<td>
@@ -205,5 +205,5 @@ if ($acl->hasPermission("settings_simple")) {
     ?>
 <?php
 } else {
-    noperms();
+    noPerms();
 }

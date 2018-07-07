@@ -46,5 +46,5 @@ if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_edit" )) 
 		translate ( "video_not_found" );
 	}
 } else {
-	noperms ();
+	noPerms ();
 }

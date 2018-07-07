@@ -102,7 +102,7 @@ if ($acl->hasPermission ( "settings_simple" ) or $acl->hasPermission ( "design" 
 </p>
 <?php
 } else {
-	noperms ();
+	noPerms ();
 }
 
 ?>

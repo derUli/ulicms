@@ -25,5 +25,5 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_create" )) 
 </form>
 <?php
 } else {
-	noperms ();
+	noPerms ();
 }

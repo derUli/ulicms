@@ -4,7 +4,7 @@ $ga_secret = Settings::get("ga_secret");
 $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation("ULICMS_LOGIN_AT") . " " . get_domain(), $ga_secret);
 $acl = new ACL();
 if (! $acl->hasPermission("other")) {
-    noperms();
+    noPerms();
 } else {
     $cache_enabled = ! Settings::get("cache_disabled");
     $cache_period = round(Settings::get("cache_period") / 60);
@@ -100,7 +100,7 @@ if (! $acl->hasPermission("other")) {
     ?></textarea>
 		</p>
 	</div>
-	
+
 	<h2 class="accordion-header">
 		<?php translate("cronjobs");?>
 		</h2>
@@ -122,7 +122,11 @@ if (! $acl->hasPermission("other")) {
     }
     ?>>
 		</div>
+		<p>
+			<small><?php translate("no_auto_cron_help", array("\n", "<br/>"));?></small>
+		</p>
 	</div>
+
 	<h2 class="accordion-header">
 		<?php
     

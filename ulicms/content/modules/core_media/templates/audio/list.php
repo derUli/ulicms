@@ -138,5 +138,5 @@ if ($acl->hasPermission("audio")) {
     ?>
 <?php
 } else {
-    noperms();
+    noPerms();
 }

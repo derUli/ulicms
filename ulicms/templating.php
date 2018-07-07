@@ -70,14 +70,14 @@ function get_og_tags($systemname = null)
         if (! empty($og_image) and ! startsWith($og_image, "http")) {
             $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
         }
-		if (empty($og_image)) {
-			$page = get_page($systemname);
-			if($page["type"] == "article" && !StringHelper::isNullOrWhitespace($page["article_image"]));
-			$og_image = ltrim($page["article_image"], "/");
-		}
-        if(!empty($og_image) and ! startsWith($og_image, "http")){
-				$og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
-		}
+        if (empty($og_image)) {
+            $page = get_page($systemname);
+            if ($page["type"] == "article" && ! StringHelper::isNullOrWhitespace($page["article_image"]));
+            $og_image = ltrim($page["article_image"], "/");
+        }
+        if (! empty($og_image) and ! startsWith($og_image, "http")) {
+            $og_image = ModuleHelper::getBaseUrl() . ltrim($og_image, "/");
+        }
         if (is_null($og_description) or empty($og_description)) {
             $og_description = get_meta_description();
         }
@@ -353,7 +353,7 @@ function include_jquery()
         ?>
 <script type="text/javascript" src="<?php echo get_jquery_url();?>"></script>
 <?php
-        add_hook("after_jquery_include");
+        do_event("after_jquery_include");
     }
 }
 
@@ -651,8 +651,8 @@ function get_title($ipage = null, $headline = false)
                 $title = $row->title;
             }
             
-			$title = apply_filter($title, "title");
-			$title = Template::getEscape($title);
+            $title = apply_filter($title, "title");
+            $title = Template::getEscape($title);
             Vars::set($cacheVar, $title);
             return $title;
         }
@@ -716,12 +716,12 @@ function apply_filter($text, $type)
         $escapedName = ModuleHelper::underscoreToCamel($type . "_filter");
         if ($controller and method_exists($controller, $escapedName)) {
             $text = $controller->$escapedName($text);
-        } else if (file_exists($module_content_filter_file1)) {
+        } else if (is_file($module_content_filter_file1)) {
             include_once $module_content_filter_file1;
             if (function_exists($modules[$i] . "_" . $type . "_filter")) {
                 $text = call_user_func($modules[$i] . "_" . $type . "_filter", $text);
             }
-        } else if (file_exists($module_content_filter_file2)) {
+        } else if (is_file($module_content_filter_file2)) {
             include_once $module_content_filter_file2;
             if (function_exists($modules[$i] . "_" . $type . "_filter")) {
                 $text = call_user_func($modules[$i] . "_" . $type . "_filter", $text);
@@ -898,11 +898,14 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
                 $language = new Language($row->link_to_language);
                 $redirection = $language->getLanguageLink();
             }
+            // if content has type link or node url is the target url else build seo url
+            $url = ($row->type == "link" or $row->type == "node") ? $row->redirection : buildSEOUrl($row->systemname);
+            $url = Template::getEscape($url);
             
             if (get_requested_pagename() != $row->systemname) {
-                $html .= "<a href='" . buildSEOUrl($row->systemname, $redirection) . "' target='" . $row->target . "' class='" . trim($additional_classes) . "'>";
+                $html .= "<a href='" . $url . "' target='" . $row->target . "' class='" . trim($additional_classes) . "'>";
             } else {
-                $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . buildSEOUrl($row->systemname, $redirection) . "' target='" . $row->target . "'>";
+                $html .= "<a class='menu_active_link" . rtrim($additional_classes) . "' href='" . $url . "' target='" . $row->target . "'>";
             }
             if (! is_null($row->menu_image) and ! empty($row->menu_image)) {
                 $html .= '<img src="' . $row->menu_image . '" alt="' . htmlentities($title, ENT_QUOTES, "UTF-8") . '"/>';
@@ -946,9 +949,9 @@ function get_output_favicon_code()
         $url = ULICMS_DATA_STORAGE_URL . "/" . $url;
     }
     $path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
-    
     $html = "";
     if (is_file($path)) {
+        $url .= "?time=" . File::getLastChanged($path);
         $html = '<link rel="icon" href="' . $url . '" type="image/x-icon" />' . "\r\n" . '<link rel="shortcut icon" href="' . $url . '" type="image/x-icon" />';
     }
     return $html;
@@ -1014,7 +1017,11 @@ function base_metas()
         }
     }
     if (! Settings::get("no_autoembed_core_css")) {
-        echo '<link rel="stylesheet" type="text/css" href="core.min.css"/>';
+        $coreCssFile = ULICMS_ROOT . "/core.min.css";
+        
+        $coreCssFileURL = basename($coreCssFile) . "?time=" . File::getLastChanged($coreCssFile);
+        
+        echo '<link rel="stylesheet" type="text/css" href="' . $coreCssFileURL . '"/>';
         echo "\r\n";
     }
     
@@ -1022,6 +1029,7 @@ function base_metas()
     $min_style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.min.css";
     $style_file = getTemplateDirPath(get_theme()) . "style.css";
     $style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.css";
+    $style_file .= "?time=" . File::getLastChanged($style_file_realpath);
     if (is_file($min_style_file_realpath)) {
         echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
     } else if (is_file($style_file_realpath)) {
@@ -1085,7 +1093,7 @@ color:" . Settings::get("body-text-color") . ";
         }
     }
     include_jquery();
-    add_hook("head");
+    do_event("head");
 }
 
 function head()
@@ -1139,7 +1147,7 @@ function get_autor()
     }
 }
 
-function get_page($systemname = "")
+function get_page($systemname = '')
 {
     if (empty($systemname)) {
         $systemname = $_GET["seite"];
@@ -1164,21 +1172,21 @@ function get_page($systemname = "")
 function content()
 {
     $status = check_status();
-    if ($status == "404 Not Found") {
-        if (file_exists(getTemplateDirPath($theme) . "404.php")) {
+    if ($status == '404 Not Found') {
+        if (is_file(getTemplateDirPath($theme) . "404.php")) {
             $theme = Settings::get("theme");
             include getTemplateDirPath($theme) . "404.php";
         } else {
-            translate("PAGE_NOT_FOUND_CONTENT");
+            translate('PAGE_NOT_FOUND_CONTENT');
         }
         return false;
-    } else if ($status == "403 Forbidden") {
+    } else if ($status == '403 Forbidden') {
         
         $theme = Settings::get("theme");
-        if (file_exists(getTemplateDirPath($theme) . "403.php")) {
-            include getTemplateDirPath($theme) . "403.php";
+        if (is_file(getTemplateDirPath($theme) . '403.php')) {
+            include getTemplateDirPath($theme) . '403.php';
         } else {
-            translate("FORBIDDEN_COTENT");
+            translate('FORBIDDEN_COTENT');
         }
         return false;
     }

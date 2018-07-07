@@ -2,7 +2,7 @@
 $acl = new ACL();
 $pkg = new PackageManager();
 if (! $acl->hasPermission("install_packages")) {
-    noperms();
+    noPerms();
 } else {
     $pkg_src = Settings::get("pkg_src");
     @set_time_limit(0);
@@ -34,7 +34,7 @@ if (! $acl->hasPermission("install_packages")) {
         $packagesToInstall = explode(",", $_REQUEST["packages"]);
         
         $post_install_script = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
-        if (file_exists($post_install_script)) {
+        if (is_file($post_install_script)) {
             unlink($post_install_script);
         }
         
@@ -68,7 +68,7 @@ if (! $acl->hasPermission("install_packages")) {
                         fwrite($handle, $pkgContent);
                         fclose($handle);
                         
-                        if (file_exists($tmpFile)) {
+                        if (is_file($tmpFile)) {
                             // Paket installieren
                             if ($pkg->installPackage($tmpFile, false)) {
                                 echo "<p style='color:green;'>" . str_ireplace("%pkg%", $packagesToInstall[$i], get_translation("INSTALLATION_SUCCESSFULL")) . "</p>";

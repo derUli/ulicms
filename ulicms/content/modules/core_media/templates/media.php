@@ -60,5 +60,5 @@ if ($acl->hasPermission ( "images" ) or $acl->hasPermission ( "videos" ) or $acl
 <?php
 	}
 } else {
-	noperms ();
+	noPerms ();
 }

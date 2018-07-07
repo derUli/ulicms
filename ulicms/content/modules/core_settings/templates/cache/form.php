@@ -40,7 +40,7 @@ if ($acl->hasPermission ( "cache" )) {
 		<?php
 	}
 } else {
-	noperms ();
+	noPerms ();
 }
 
 ?>

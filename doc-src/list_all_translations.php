@@ -18,7 +18,7 @@ if (in_array ( $_SESSION ["language"], $languages )) {
 	include getLanguageFilePath ( $_SESSION ["language"] );
 	Translation::loadAllModuleLanguageFiles ( $_SESSION ["language"] );
 	Translation::includeCustomLangFile ( $_SESSION ["language"] );
-	add_hook ( "custom_lang_" . $_SESSION ["language"] );
+	do_event ( "custom_lang_" . $_SESSION ["language"] );
 }
 
 $cons = get_defined_constants();

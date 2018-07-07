@@ -82,5 +82,5 @@ if ($acl->hasPermission("users") and $acl->hasPermission("users_create")) {
 </form>
 <?php
 } else {
-    noperms();
+    noPerms();
 }

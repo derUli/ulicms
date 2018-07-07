@@ -116,5 +116,5 @@ if ($acl->hasPermission("users")) {
 <br />
 <?php
 } else {
-    noperms();
+    noPerms();
 }

@@ -62,6 +62,6 @@ if ($acl->hasPermission("motd")) {
 
 <?php
 } else {
-    noperms();
+    noPerms();
 }
 

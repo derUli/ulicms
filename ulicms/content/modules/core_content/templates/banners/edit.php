@@ -137,6 +137,6 @@ if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )
 	?>
 		<?php
 } else {
-	noperms ();
+	noPerms ();
 }
 	

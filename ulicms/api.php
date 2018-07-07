@@ -43,6 +43,7 @@ function bool2YesNo($value, $yesString = null, $noString = null)
     return ($value ? $yesString : $noString);
 }
 
+// like json_encode() but human readable
 function json_readable_encode($in, $indent = 0, $from_array = false)
 {
     $_myself = __FUNCTION__;
@@ -102,6 +103,7 @@ function str_contains($needle, $haystack)
     return strpos($haystack, $needle) !== false;
 }
 
+// Get a subset of an associative array by providing the keys.
 function array_keep($array, $keys)
 {
     return array_intersect_key($array, array_fill_keys($keys, null));
@@ -118,6 +120,8 @@ function getAllUsedLanguages()
     return $languages;
 }
 
+// prepares a text / code for html output
+// replaces new lines with <br> tags
 function preparePlainTextforHTMLOutput($text)
 {
     return nl2br(htmlspecialchars($text));
@@ -300,7 +304,7 @@ function browsercacheOneDay($modified = null)
 // PHP Formbuilder Class initialisieren
 function initPFBC()
 {
-    add_hook("init_pfbc");
+    do_event("init_pfbc");
 }
 
 function is_debug_mode()
@@ -384,7 +388,7 @@ function get_html_editor()
 // Den aktuellen HTTP Request in der `log` Tabelle protokollieren
 function log_request($save_ip = false)
 {
-    add_hook("before_log_request");
+    do_event("before_log_request");
     if ($save_ip) {
         $ip = get_ip();
     } else {
@@ -400,7 +404,7 @@ function log_request($save_ip = false)
     
     db_query("INSERT INTO " . tbname("log") . " (ip, request_method, useragent, request_uri, http_host, referrer) VALUES('$ip', '$request_method', '$useragent', '$request_uri','$http_host', '$referrer')");
     
-    add_hook("after_log_request");
+    do_event("after_log_request");
 }
 
 // Prüfen, ob Anti CSRF Token vorhanden ist
@@ -503,7 +507,7 @@ function getFontSizes()
     for ($i = 6; $i <= 80; $i ++) {
         $sizes[] = $i . "px";
     }
-    add_hook("custom_font_sizes");
+    do_event("custom_font_sizes");
     return $sizes;
 }
 
@@ -511,17 +515,23 @@ function getModuleMeta($module, $attrib = null)
 {
     $retval = null;
     $metadata_file = getModulePath($module, true) . "metadata.json";
-    if (file_exists($metadata_file)) {
-        
+    if (is_file($metadata_file)) {
         if ($attrib != null) {
-            $data = file_get_contents($metadata_file);
-            $data = json_decode($data, true);
+            $data = ! Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
+            if (is_string($data)) {
+                $data = json_decode($data, true);
+            }
+            Vars::set("module_{$module}_meta", $data);
             if (isset($data[$attrib])) {
                 $retval = $data[$attrib];
             }
         } else {
-            $data = file_get_contents($metadata_file);
-            $data = json_decode($data, true);
+            $data = ! Vars::get("module_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("module_{$module}_meta");
+            if (is_string($data)) {
+                $data = json_decode($data, true);
+            }
+            Vars::set("module_{$module}_meta", $data);
+            
             $retval = $data;
         }
     }
@@ -532,9 +542,14 @@ function getThemeMeta($theme, $attrib = null)
 {
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
-    if (file_exists($metadata_file)) {
-        $data = file_get_contents($metadata_file);
-        $data = json_decode($data);
+    if (is_file($metadata_file)) {
+        $data = ! Vars::get("theme_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("theme_{$module}_meta");
+        
+        if (is_string($data)) {
+            $data = json_decode($data);
+        }
+        
+        Vars::set("module_{$module}_meta", $data);
         if ($attrib != null) {
             if (isset($data->$attrib)) {
                 $retval = $data->$attrib;
@@ -549,7 +564,7 @@ function getThemeMeta($theme, $attrib = null)
 function getModuleName($module)
 {
     $name_file = getModulePath($module) . $module . "_name.php";
-    if (! file_exists($name_file)) {
+    if (! is_file($name_file)) {
         return $module;
     }
     include_once $name_file;
@@ -599,7 +614,7 @@ function getSystemLanguage()
     } else {
         $lang = "de";
     }
-    if (! file_exists(getLanguageFilePath($lang))) {
+    if (! is_file(getLanguageFilePath($lang))) {
         $lang = "de";
     }
     return $lang;
@@ -698,8 +713,20 @@ function clearCache()
     CacheUtil::clearCache();
 }
 
+// DEPRECATED:
+// This function may be removed in future releases of UliCMS
+// Use do_event()
 function add_hook($name)
 {
+    trigger_error("add_hook() is deprecated. Please use do_event().", E_USER_DEPRECATED);
+    do_event($name);
+}
+
+function do_event($name)
+{
+    // don't run this code on kcfinder page (media)
+    // since the "Path" class has a naming conflict with the same named
+    // class of KCFinder
     if (defined("KCFINDER_PAGE")) {
         return;
     }
@@ -719,10 +746,10 @@ function add_hook($name)
         $escapedName = ModuleHelper::underscoreToCamel($name);
         if ($controller and method_exists($controller, $escapedName)) {
             echo $controller->$escapedName();
-        } else if (file_exists($file1)) {
-            @include $file1;
-        } else if (file_exists($file2)) {
-            @include $file2;
+        } else if (is_file($file1)) {
+            @include_once $file1;
+        } else if (is_file($file2)) {
+            @include_once $file2;
         }
     }
 }
@@ -768,12 +795,15 @@ function setLocaleByLanguage()
 // else it returns $_SESSION["language"];
 function getCurrentLanguage($current = false)
 {
+    if (Vars::get("current_language_" . strbool($current))) {
+        return Vars::get("current_language_" . strbool($current));
+    }
     if ($current) {
         $query = db_query("SELECT language FROM " . tbname("content") . " WHERE systemname='" . get_requested_pagename() . "'");
-        
         if (db_num_rows($query) > 0) {
             $fetch = db_fetch_object($query);
-            return $fetch->language;
+            $language = $fetch->language;
+            Vars::set("current_language_" . strbool($current), $language);
         }
     }
     
@@ -835,6 +865,7 @@ function getModuleAdminSelfPath()
     return $self_path;
 }
 
+// replace num entity with the character
 function replace_num_entity($ord)
 {
     $ord = $ord[1];
@@ -1159,7 +1190,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true)
         $module_mainfile_path = getModuleMainFilePath($thisModule);
         $module_mainfile_path2 = getModuleMainFilePath2($thisModule);
         
-        if (is_file($module_mainfile_path) and (strstr($string, $stringToReplace1) or strstr($string, $stringToReplace2))) {
+        if (is_file($module_mainfile_path) and (str_contains($stringToReplace1, $string) or str_contains($stringToReplace2, $string))) {
             require_once $module_mainfile_path;
         } else if (is_file($module_mainfile_path2)) {
             require_once $module_mainfile_path2;
@@ -1425,7 +1456,6 @@ function containsModule($page = null, $module = false)
     if (! is_null(Vars::get("page_" . $page . "_contains_" . $module))) {
         return Vars::get("page_" . $page . "_contains_" . $module);
     }
-    ;
     $query = db_query("SELECT content, module, `type` FROM " . tbname("content") . " WHERE systemname = '" . db_escape($page) . "'");
     $dataset = db_fetch_assoc($query);
     $content = $dataset["content"];

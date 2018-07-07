@@ -81,5 +81,5 @@ $("#motto_settings").ajaxForm({beforeSubmit: function(e){
 
 <?php
 } else {
-    noperms();
+    noPerms();
 }

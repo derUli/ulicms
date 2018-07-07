@@ -19,9 +19,9 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
         } else if ($_POST["admin_password"] != $_POST["admin_password_repeat"]) {
             echo "<p style='color:red;'>" . get_translation("PASSWORD_REPEAT_IS_WRONG") . "</p>";
         } else {
-            add_hook("before_user_registration");
+            do_event("before_user_registration");
             adduser($_POST["admin_username"], $_POST["admin_lastname"], $_POST["admin_firstname"], $_POST["admin_email"], $_POST["admin_password"], false);
-            add_hook("after_user_registration");
+            do_event("after_user_registration");
             
             echo "<p style='color:green;'>" . get_translation("REGISTRATION_SUCCESSFUL") . "</p>";
             if (! empty($_REQUEST["go"])) {
@@ -35,7 +35,7 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
     ?>
 <?php
     
-    add_hook("before_register_form_title");
+    do_event("before_register_form_title");
     ?>
 <p>
 	<a href="./" class="btn btn-default btn-back"><?php
@@ -49,7 +49,7 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
 
 <?php
     
-    add_hook("before_register_form");
+    do_event("before_register_form");
     ?>
 <form action="index.php?register=register" method="post">
 <?php
@@ -80,7 +80,7 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
 		name="admin_password" value=""><br /> <strong><?php translate("password_repeat");?>
 	</strong><br /> <input type="password" required="required"
 		name="admin_password_repeat" value="">
-		<?php add_hook ( "register_form_field" );?>
+		<?php do_event ( "register_form_field" );?>
 		<div class="privacy-checkbox">
 		<?php
     echo $checkbox->render();
@@ -88,5 +88,5 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
 	<button type="submit" class="btn btn-primary"><?php translate("register");?></button>
 </form>
 <?php
-    add_hook("after_register_form");
+    do_event("after_register_form");
 }

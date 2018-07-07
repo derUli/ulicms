@@ -1,8 +1,9 @@
 <?php
-$classes = array (
-		"EmailModes" 
+$classes = array(
+    "AuditLog",
+    "EmailModes"
 );
-foreach ( $classes as $class ) {
-	require_once dirname ( __FILE__ ) . "/$class.php";
+foreach ($classes as $class) {
+    require dirname(__FILE__) . "/$class.php";
 }
 

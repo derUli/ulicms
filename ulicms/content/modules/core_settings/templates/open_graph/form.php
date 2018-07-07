@@ -57,5 +57,5 @@ if ($acl->hasPermission ( "open_graph" )) {
     ?>
 <?php
 } else {
-	noperms ();
+	noPerms ();
 }

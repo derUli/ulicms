@@ -1,7 +1,7 @@
 <?php
 $acl = new ACL();
 if (! $acl->hasPermission("info")) {
-    noperms();
+    noPerms();
 } else {
     $version = new UliCMSVersion();
     $admin_logo = Settings::get("admin_logo");

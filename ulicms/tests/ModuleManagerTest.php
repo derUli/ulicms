@@ -75,7 +75,7 @@ class ModuleManagerTest extends PHPUnit_Framework_TestCase
         Database::query("truncate table {prefix}modules", true);
         $this->assertEquals(0, count($manager->getAllModules()));
         $manager->sync();
-        $this->assertGreaterThanOrEqual(20, count($manager->getAllModules()));
+        $this->assertGreaterThanOrEqual(19, count($manager->getAllModules()));
         $this->assertEquals(count(getAllModules()), count($manager->getAllModules()));
     }
 }

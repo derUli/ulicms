@@ -17,11 +17,15 @@ class Logger
             @mkdir($path, 0777, true);
         }
         if (is_dir($this->path)) {
-            $this->logger = new Katzgrau\KLogger\Logger($this->path);
+            $this->logger = new Katzgrau\KLogger\Logger($this->path, Psr\Log\LogLevel::DEBUG,
+			array(
+				"extension" => "log"
+			)
+			);
             $cfg = new CMSConfig();
             // Option fix_log_permissions
             if (is_true($cfg->fix_log_permissions)) {
-                $files = glob($this->path . "/log_*.txt");
+                $files = glob($this->path . "/log_*.log");
                 foreach ($files as $file) {
                     @chmod($file, 0777);
                 }

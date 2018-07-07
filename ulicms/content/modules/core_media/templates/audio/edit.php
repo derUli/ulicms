@@ -37,5 +37,5 @@ if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_edit" )) {
 		translate ( "audio_not_found" );
 	}
 } else {
-	noperms ();
+	noPerms ();
 }

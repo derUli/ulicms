@@ -1,6 +1,14 @@
 <?php
+$logger = LoggerRegistry::get("audit_log");
+
 if (isset($_GET["destroy"]) or $_GET["action"] == "destroy") {
-    db_query("UPDATE " . tbname("users") . " SET last_action = 0 WHERE id = " . $_SESSION["login_id"]);
+    $id = intval($_SESSION["login_id"]);
+    if ($logger) {
+        $user = getUserById($id);
+        $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
+        $logger->debug("User $name - Logout");
+    }
+    db_query("UPDATE " . tbname("users") . " SET last_action = 0 WHERE id = $id");
     $url = apply_filter("index.php", "logout_url");
     header("Location: $url");
     session_destroy();
@@ -17,7 +25,14 @@ if (isset($_REQUEST["reset_password_token"])) {
         $user->save();
         register_session(getUserById($user_id));
         $token = $reset->deleteToken($_REQUEST["reset_password_token"]);
+        if ($logger) {
+            $name = $user->getUsername() ? $user->getUsername() : AuditLog::UNKNOWN;
+            $logger->debug("Password reset $name - OK");
+        }
     } else {
+        if ($logger) {
+            $logger->error("Password reset - Invalid token");
+        }
         TextResult(get_translation("invalid_token"), 404);
     }
 }
@@ -47,10 +62,16 @@ if (isset($_POST["login"])) {
             clearCache();
             Settings::set("sys_initialized", "true");
         }
-        add_hook("login_ok");
+        do_event("login_ok");
+        if ($logger) {
+            $logger->debug("User {$_POST['user']} - Login OK");
+        }
         register_session($sessionData, true);
     } else {
+        if ($logger) {
+            $logger->error("User {$_POST['user']} - Login Failed");
+        }
         Response::sendStatusHeader(HttpStatusCode::UNAUTHORIZED);
+        do_event("login_failed");
     }
 }
-

@@ -43,6 +43,23 @@ class CustomFields {
 			return Database::pQuery ( $sql, $args, true );
 		}
 	}
+	public static function getAll($content_id = null) {
+	    $fields = array();
+	    if (is_null ( $content_id )) {
+	        $content_id = get_ID ();
+	    }
+	    $content_id = intval ( $content_id );
+	    $args = array (
+	        $content_id
+	    );
+	    $sql = "Select name, value from {prefix}custom_fields where content_id = ?";
+	    $query = Database::pQuery ( $sql, $args, true );
+	    while($row = Database::fetchObject($query)){
+	        $fields[$row->name] = $row->value; 
+	    }
+	    return $fields;
+	    
+	}
 	public static function get($name, $content_id = null) {
 		if (is_null ( $content_id )) {
 			$content_id = get_ID ();

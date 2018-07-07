@@ -1,4 +1,29 @@
-﻿===== Neues in UliCMS 2018.3.4 =====
+===== Neues in UliCMS 2018.3.5 =====
+
+Neue Features:
+* Neue Option "preload_all_settings"
+* Diverse Performance-Verbesserungen
+* Bei einer AccessDeniedException wird HTTP-Status 403 Forbidden statt 500 Internal Server Error zurück gegeben
+* Audit Log
+
+Neue API-Funktionen:
+* Javascript-Mechanismus um eine "Alle auswählen" Checkbox zu implementieren
+* do_event()
+* add_hook() ist nun deprecated
+* Der Konstruktur von JSTranslation nimmt nun ein Array als optionalen Parameter an 
+* Template::renderPartial($template, $theme = null)
+* CustomFields::getAll($id = null)
+
+Bugfixes:
+* Einige potentielle Caching-Probleme durch Anhängen eines Timestamps behoben
+* Wenn ein Inhaltstyp vom Typ "Link" oder "Knotenpunkt" in einen anderen Typ geändert wird,
+  wird nun das Menü korrekt aktualisiert
+* in CustomFields vom Typ Nummer können nun auch Kommazeilen eingegeben werden.
+
+Sonstige Änderungen:
+* Logdateien haben nun .log als Dateiendung
+
+===== Neues in UliCMS 2018.3.4 =====
 
 Neue Features:
 * Wenn kein Open Graph Bild festgelegt ist, aber ein Artikelbild vorhanden ist, wird dieses als Open Graph Bild eingebunden.

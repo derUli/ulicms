@@ -54,7 +54,7 @@ if ($acl->hasPermission ( "pages" )) {
 </div>
 <?php
 } else {
-	noperms ();
+	noPerms ();
 }
 
 ?>

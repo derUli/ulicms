@@ -1,7 +1,7 @@
 <?php
 $acl = new ACL ();
 if (! $acl->hasPermission ( "forms" )) {
-	noperms ();
+	noPerms ();
 } else {
 	
 	$forms = Forms::getAllForms ();

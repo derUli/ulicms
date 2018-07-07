@@ -11,7 +11,7 @@ if ($main_class) {
 }
 
 $disabledModules = Vars::get ( "disabledModules" );
-if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ) and ! ($controller and method_exists ( $controller, "settings" )) or faster_in_array ( $module, $disabledModules ))) {
+if ((! is_file ( $admin_file_path ) and ! is_file ( $admin_file_path2 ) and ! ($controller and method_exists ( $controller, "settings" )) or faster_in_array ( $module, $disabledModules ))) {
 	?>
 <p class='ulicms_error'><?php translate("this_module_has_no_settings")?></p>
 <?php
@@ -20,7 +20,7 @@ if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ) 
 		if (method_exists ( $controller, "getSettingsHeadline" )) {
 			define ( "MODULE_ADMIN_HEADLINE", $controller->getSettingsHeadline () );
 		}
-	} else if (file_exists ( $admin_file_path2 )) {
+	} else if (is_file ( $admin_file_path2 )) {
 		include $admin_file_path2;
 	} else {
 		include $admin_file_path;
@@ -55,13 +55,13 @@ if ((! file_exists ( $admin_file_path ) and ! file_exists ( $admin_file_path2 ) 
 		if (MODULE_ACCESS_PERMITTED) {
 			echo $controller->settings ();
 		} else {
-			noperms ();
+			noPerms ();
 		}
 	} else if (function_exists ( $admin_func )) {
 		if (MODULE_ACCESS_PERMITTED) {
 			call_user_func ( $admin_func );
 		} else {
-			noperms ();
+			noPerms ();
 		}
 	} else {
 		echo "<p>" . get_translation ( "this_module_has_no_settings" ) . "</p>";

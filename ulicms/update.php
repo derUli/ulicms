@@ -1,6 +1,6 @@
 <?php
 // the config class has a new name
-if (file_exists("cms-config.php") and ! file_exists("CMSConfig.php")) {
+if (is_file("cms-config.php") and ! is_file("CMSConfig.php")) {
     // update config file
     $content = file_get_contents("cms-config.php");
     $content = str_replace("class config", "class CMSConfig", $content);
