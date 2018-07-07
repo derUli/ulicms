@@ -1,0 +1,1 @@
+update {prefix}custom_fields set name = concat((select type from {prefix}content where id = content_id), '_', name)
