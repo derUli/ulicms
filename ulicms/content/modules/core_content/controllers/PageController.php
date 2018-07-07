@@ -170,6 +170,7 @@ class PageController extends Controller
             
             $type = DefaultContentTypes::get($type);
             foreach ($type->customFields as $field) {
+			$field->name = "{$_POST['type']}_{$field->name}";
                 $value = null;
                 if (isset($_POST[$field->name])) {
                     $value = $_POST[$field->name];
@@ -350,6 +351,7 @@ class PageController extends Controller
         
         $type = DefaultContentTypes::get($type);
         foreach ($type->customFields as $field) {
+			$field->name = "{$_POST['type']}_{$field->name}";
             $value = null;
             if (isset($_POST[$field->name])) {
                 $value = $_POST[$field->name];
