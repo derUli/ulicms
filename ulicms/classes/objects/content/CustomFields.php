@@ -3,12 +3,12 @@
 class CustomFields
 {
 
-    public static function set($name, $value, $content_id = null, $addSuffix = false)
+    public static function set($name, $value, $content_id = null, $addPrefix = false)
     {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
-        if ($addSuffix) {
+        if ($addPrefix) {
             $page = ContentFactory::getByID($content_id);
             $name = "{$page->type}_{$name}";
         }
@@ -52,7 +52,7 @@ class CustomFields
         }
     }
 
-    public static function getAll($content_id = null, $removeSuffix = true)
+    public static function getAll($content_id = null, $removePrefix = true)
     {
         $fields = array();
         if (is_null($content_id)) {
@@ -69,24 +69,22 @@ class CustomFields
         while ($row = Database::fetchObject($query)) {
             $name = $row->name;
             
-            if ($removeSuffix) {
+            if ($removePrefix) {
                 $page = ContentFactory::getByID($content_id);
                 $prefix = "{$page->type}_";
-                if (substr($name, 0, strlen($prefix)) == $prefix) {
-                    $name = substr($name, strlen($prefix));
-                }
+                $name = remove_prefix($name, $prefix);
             }
             $fields[$name] = $row->value;
         }
         return $fields;
     }
 
-    public static function get($name, $content_id = null, $addSuffix = true)
+    public static function get($name, $content_id = null, $addPrefix = true)
     {
         if (is_null($content_id)) {
             $content_id = get_ID();
         }
-        if ($addSuffix) {
+        if ($addPrefix) {
             $page = ContentFactory::getByID($content_id);
             $name = "{$page->type}_{$name}";
         }
