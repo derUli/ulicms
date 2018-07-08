@@ -482,7 +482,6 @@ function openMenuImageSelectWindow(field) {
 
 			<div class="accordion-content">
 		<?php foreach($fields as $field){
-			$field->name = "{$name}_{$field->name}";
 			?>
 			<?php echo $field->render(CustomFields::get($field->name, $row->id));?>
 		<?php }?>
