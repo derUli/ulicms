@@ -4,6 +4,9 @@ Neue Features:
 * Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezegit werden sollen.
 * Neue Direktive "disable_functions" für Theme-Metadaten eingeführt
 
+Neue API-Funktionen:
+remove_prefix($text, $prefix) 
+
 ===== Neues in UliCMS 2018.3.5 =====
 
 Neue Features:

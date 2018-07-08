@@ -4,6 +4,12 @@ include_once Path::Resolve("ULICMS_ROOT/templating.php");
 class ApiTest extends PHPUnit_Framework_TestCase
 {
 
+    public function testRemovePrefix()
+    {
+        $this->assertEquals("my_bar", remove_prefix("foo_my_bar", "foo_"));
+        $this->assertEquals("my_foo_bar", remove_prefix("foo_my_foo_bar", "foo_"));
+    }
+
     public function testIsCrawler()
     {
         $pkg = new PackageManager();

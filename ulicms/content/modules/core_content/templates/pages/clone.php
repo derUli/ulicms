@@ -410,7 +410,6 @@ function openMenuImageSelectWindow(field) {
 				name="target" size=1>
 				<option
 					<?php
-        
         if ($row->target == "_self") {
             echo 'selected="selected" ';
         }
