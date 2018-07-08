@@ -176,7 +176,7 @@ class PageController extends Controller
                     $value = $_POST[$field->name];
                 }
                 
-                CustomFields::set($field->name, $value, $content_id);
+                CustomFields::set($field->name, $value, $content_id, false);
             }
             
             do_event("after_create_page");
@@ -356,7 +356,7 @@ class PageController extends Controller
             if (isset($_POST[$field->name])) {
                 $value = $_POST[$field->name];
             }
-            CustomFields::set($field->name, $value, $content_id);
+            CustomFields::set($field->name, $value, $content_id, false);
         }
         
         do_event("after_edit_page");
