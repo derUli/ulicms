@@ -5,7 +5,10 @@ Neue Features:
 * Neue Direktive "disable_functions" für Theme-Metadaten eingeführt
 
 Neue API-Funktionen:
-* remove_prefix($text, $prefix) 
+* remove_prefix($text, $prefix)
+
+Verbesserungen:
+* Keine Aufklapp-Animationen mehr, wenn man eine Seite zur Bearbeitung öffnet
 
 ===== Neues in UliCMS 2018.3.5 =====
 

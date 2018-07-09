@@ -1,5 +1,50 @@
+function showAndHideFieldsByTypeWithoutEffects() {
+	var type = $('input[name=type]:checked').val()
+	if (typeof AllTypes[type] === "undefined") {
+		type = "page";
+	}
+	$(".typedep").hide();
+	var typeData = AllTypes[type];
+	var show = typeData["show"];
+
+	for (i = 0; i < show.length; i++) {
+		$(show[i]).show();
+	}
+
+	if ($("#type_snippet").is(":checked")) {
+		unbindEvents();
+		$("select[name='hidden']").val("1").trigger("change");
+		$("select[name='menu']").val("not_in_menu").trigger("change");
+		bindEvents();
+	}
+
+	$(".custom-field-tab").each(function(index, el) {
+		if ($(el).data("type") == $("input[name='type']:checked").val()) {
+			$(el).show();
+		} else {
+			$(el).hide();
+		}
+
+	});
+
+	if ($("#type_node").is(":checked") || $("#type_snippet").is(":checked")) {
+		$("#btn-view-page").hide();
+	} else {
+		$("#btn-view-page").show();
+	}
+
+	if ($("select[name='menu']").val() == "not_in_menu") {
+		$("#parent-div").hide();
+	} else {
+
+		$("#parent-div").show();
+	}
+}
 // this function shows and hides areas for the selected content type
 function showAndHideFieldsByType() {
+	if (typeof AllTypes[type] === "undefined") {
+		type = "page";
+	}
 	var type = $('input[name=type]:checked').val()
 	$(".typedep").slideUp();
 	var typeData = AllTypes[type];
@@ -104,6 +149,8 @@ function unbindEvents() {
 	$(".clear-field").off("click");
 }
 
+AllTypes = {}
+
 $(document).ready(function() {
 	if ($("#page-list").length <= 0) {
 		var data = {
@@ -112,7 +159,9 @@ $(document).ready(function() {
 
 		$.get("index.php", data, function(response, status) {
 			AllTypes = response;
-			showAndHideFieldsByType();
+			showAndHideFieldsByTypeWithoutEffects();
+			$(".loadspinner").hide();
+			$(".pageform").show();
 		});
 
 		bindEvents();

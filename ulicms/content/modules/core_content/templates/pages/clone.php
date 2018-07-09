@@ -21,10 +21,15 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
         $list_data = new List_Data($row->id);
         $pages_activate_own = $acl->hasPermission("pages_activate_own");
         ?>
-		<?php
+        <div class="loadspinner">
+	<img src="gfx/loading.gif" alt="Loading...">
+</div>
+<?php
         echo ModuleHelper::buildMethodCallForm("PageController", "create", array(), "post", array(
             "id" => "editpageform",
-            "name" => "editpageform"
+            "name" => "editpageform",
+            "style" => "display:none",
+            "class" => "pageform"
         ));
         ?>
 <input type="hidden" name="add" value="add">
@@ -150,7 +155,8 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
         
         foreach ($pages as $key => $page) {
             ?>
-		<option value="<?php
+		<option
+						value="<?php
             
             echo $page["id"];
             ?>"
@@ -274,7 +280,8 @@ function openMenuImageSelectWindow(field) {
         
         foreach ($allThemes as $th) {
             ?>
-			<option value="<?php
+			<option
+					value="<?php
             
             echo $th;
             ?>"
@@ -357,9 +364,8 @@ function openMenuImageSelectWindow(field) {
 				<br /> <strong><?php translate("author_name");?></strong><br /> <input
 					type="text" name="article_author_name"
 					value="<?php echo real_htmlspecialchars($row->article_author_name);?>"
-					maxlength="80"> <br />
-				<strong><?php translate("author_email");?></strong><br /> <input
-					type="email" name="article_author_email"
+					maxlength="80"> <br /> <strong><?php translate("author_email");?></strong><br />
+				<input type="email" name="article_author_email"
 					value="<?php echo real_htmlspecialchars($row->article_author_email);?>"
 					maxlength="80"> <br />
 				<div id="comment-fields">
@@ -391,8 +397,10 @@ function openMenuImageSelectWindow(field) {
 		<div class="custom-field-tab" data-type="<?php echo $name;?>">
 			<h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name);?></h2>
 			<div class="accordion-content">
-		<?php foreach($fields as $field){
-			?>
+		<?php
+                
+                foreach ($fields as $field) {
+                    ?>
 			<?php echo $field->render(CustomFields::get($field->name, $row->id));?>
 		<?php }?>
 		</div>
@@ -593,7 +601,8 @@ function openMenuImageSelectWindow(field) {
         
         foreach ($pages as $key => $page) {
             ?>
-		<option value="<?php
+		<option
+					value="<?php
             
             echo $page["id"];
             ?>"
@@ -904,5 +913,5 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		<?php
 } else {
     noPerms();
-	}
-	?>
+}
+?>

@@ -15,10 +15,15 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
     $types = get_available_post_types();
     
     ?>
-	<?php
+<div class="loadspinner">
+	<img src="gfx/loading.gif" alt="Loading...">
+</div>
+<?php
     echo ModuleHelper::buildMethodCallForm("PageController", "create", array(), "post", array(
         "name" => "newpageform",
-        "id" => "pageform"
+        "id" => "pageform",
+        "style" => "display:none",
+        "class" => "pageform"
     ));
     ?>
 <p>
@@ -315,9 +320,11 @@ function openMenuImageSelectWindow(field) {
 			<h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name);?></h2>
 
 			<div class="accordion-content">
-		<?php foreach($fields as $field){
-			$field->name = "{$name}_{$field->name}";
-			?>
+		<?php
+            
+            foreach ($fields as $field) {
+                $field->name = "{$name}_{$field->name}";
+                ?>
 		<?php echo $field->render(null);?>				
 		<?php }?>
 		</div>

@@ -82,9 +82,14 @@ if ($acl->hasPermission("pages")) {
             noPerms();
         } else {
             ?>
-		<?php
+<div class="loadspinner">
+	<img src="gfx/loading.gif" alt="Loading...">
+</div>
+<?php
             echo ModuleHelper::buildMethodCallForm("PageController", "edit", array(), "post", array(
-                "id" => "pageform-edit"
+                "id" => "pageform-edit",
+                "style" => "display:none",
+                "class" => "pageform"
             ));
             ?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("pages");?>"
@@ -202,7 +207,8 @@ if ($acl->hasPermission("pages")) {
 			<br /> <br /> <strong><?php translate("position");?> </strong> <span
 				style="cursor: help;" onclick="$('div#position_help').slideToggle()">[?]</span><br />
 			<input type="number" name="position" required="required" min="0"
-				step="1" value="<?php
+				step="1"
+				value="<?php
             
             echo $row->position;
             ?>">
@@ -227,7 +233,8 @@ if ($acl->hasPermission("pages")) {
             
             foreach ($pages as $key => $page) {
                 ?>
-		<option value="<?php
+		<option
+						value="<?php
                 
                 echo $page["id"];
                 ?>"
@@ -360,7 +367,8 @@ function openMenuImageSelectWindow(field) {
             
             foreach ($allThemes as $th) {
                 ?>
-			<option value="<?php
+			<option
+					value="<?php
                 
                 echo $th;
                 ?>"
@@ -481,8 +489,10 @@ function openMenuImageSelectWindow(field) {
 			<h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name);?></h2>
 
 			<div class="accordion-content">
-		<?php foreach($fields as $field){
-			?>
+		<?php
+                    
+                    foreach ($fields as $field) {
+                        ?>
 			<?php echo $field->render(CustomFields::get($field->name, $row->id));?>
 		<?php }?>
 		</div>
@@ -708,7 +718,8 @@ function openMenuImageSelectWindow(field) {
             
             foreach ($pages as $key => $page) {
                 ?>
-		<option value="<?php
+		<option
+					value="<?php
                 
                 echo $page["id"];
                 ?>"
@@ -1076,6 +1087,15 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<noscript>
 		<p style="color: red;">
 			Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
@@ -1122,5 +1142,5 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
     ?>
 		<?php
 } else {
-		noPerms ();
-	}
+    noPerms();
+}
