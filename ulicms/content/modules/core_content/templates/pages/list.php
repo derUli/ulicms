@@ -19,9 +19,11 @@ if ($acl->hasPermission("pages")) {
 <div class="col-xs-6"><a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?></a>
 </div>
 <div class="col-xs-6 text-right">
+<div class="page-list-filters">
 		<a
 			href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
 			class="btn btn-default" id="btn-reset-filters"><?php translate("reset_filters")?></a>
+	</div>
 	</div>
 </div>
 	</a>
@@ -36,13 +38,12 @@ if ($acl->hasPermission("pages")) {
         $_SESSION["filter_title"] = $_GET["filter_title"];
     }
     ?>
-<form method="get" action="index.php">
+<form method="get" action="index.php" class="page-list-filters">
 	<?php translate("title");?>
 	<input type="hidden" name="action" value="pages"> <input type="text"
 			name="filter_title"
 			value="<?php echo htmlspecialchars($_SESSION["filter_title"]);?>">
 
-	</form>
 
 <?php translate("filter_by_language");?>
 <select name="filter_language" onchange="filterByLanguage(this)">
@@ -320,6 +321,7 @@ if ($acl->hasPermission("pages")) {
     ?></option>
 		</select>
 	</p>
+	</form>
 
 <?php
     if ($_SESSION["filter_status"] == "trash" and $acl->hasPermission("pages")) {
