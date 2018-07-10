@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3.6 =====
+﻿===== Neues in UliCMS 2018.3.6 =====
 
 Neue Features:
 * Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezegit werden sollen.
@@ -9,6 +9,7 @@ Neue API-Funktionen:
 
 Verbesserungen:
 * Keine Aufklapp-Animationen mehr, wenn man eine Seite zur Bearbeitung öffnet
+* Seitenverwaltung: Selten genutze Optionen im Tab "Sonstiges" zusammengefasst
 
 Bugfixes:
 * Wenn man über PHPMailer eine Mail versendet und im Content-Type ein Encoding angibt, wird die Mail nun nicht mehr als Plain Text Mail versandt

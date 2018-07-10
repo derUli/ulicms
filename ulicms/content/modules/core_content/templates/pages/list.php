@@ -439,11 +439,12 @@ if ($acl->hasPermission("pages")) {
 			</th>
 					<td style="text-align: center"><?php translate("view");?>
 			</td>
+			<!-- 
 			<?php
     if ($acl->hasPermission("pages_create")) {
         ?>
 			<td style="text-align: center"><?php translate ( "clone" );?>
-			</td>
+			</td> -->
 			<?php }?>
 			<td style="text-align: center"><?php translate("edit");?>
 			</td>
@@ -480,9 +481,9 @@ if ($acl->hasPermission("pages")) {
                 $url = "../?goid={$row->id}";
                 echo "<td style='text-align:center'><a href=\"" . $url . "\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation("view") . "\" title=\"" . get_translation("view") . "\"></a></td>";
             }
-            if ($acl->hasPermission("pages_create")) {
-                echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone") . "\" title=\"" . get_translation("clone") . "\"></a></td>";
-            }
+            // if ($acl->hasPermission("pages_create")) {
+            //    echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone") . "\" title=\"" . get_translation("clone") . "\"></a></td>";
+            // }
             $autor = $row->autor;
             $is_owner = $autor == get_user_id();
             
