@@ -9,7 +9,7 @@ Neue API-Funktionen:
 
 Verbesserungen:
 * Keine Aufklapp-Animationen mehr, wenn man eine Seite zur Bearbeitung öffnet
-* Seitenverwaltung: Selten genutze Optionen im Tab "Sonstiges" zusammengefasst
+* Seitenverwaltung: Selten genutze Optionen im Tab "Sonstiges" zusammengefasst, Klonen-Funktion ist vorerst deaktiviert
 
 Bugfixes:
 * Wenn man über PHPMailer eine Mail versendet und im Content-Type ein Encoding angibt, wird die Mail nun nicht mehr als Plain Text Mail versandt
