@@ -296,7 +296,31 @@ if ($acl->hasPermission("pages")) {
 		</div>
 		<strong><?php translate("category");?> </strong><br />
 	<?php echo Categories::getHTMLSelect ( $row->category );?>
-
+<br/><br/>
+<strong><?php translate("menu_image");?> </strong><br />
+			<script type="text/javascript">
+function openMenuImageSelectWindow(field) {
+    window.KCFinder = {
+        callBack: function(url) {
+            field.value = url;
+            window.KCFinder = null;
+        }
+    };
+    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'menu_image',
+        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+        'resizable=1, scrollbars=0, width=800, height=600'
+    );
+}
+</script>
+			<input type="text" id="menu_image" name="menu_image"
+				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+				value="<?php
+            
+            echo $row->menu_image;
+            ?>"
+				style="cursor: pointer" /> <a href="#"
+				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
+			
 		</div>
 	<div class="typedep" id="tab-link">
 		<h2 class="accordion-header"><?php translate("link_url");?></h2>
@@ -330,33 +354,10 @@ if ($acl->hasPermission("pages")) {
 		</div>
 	</div>
 	<div class="typedep" id="tab-menu-image">
-		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
+		<h2 class="accordion-header"><?php translate("design");?></h2>
 
 		<div class="accordion-content">
-			<strong><?php translate("menu_image");?> </strong><br />
-			<script type="text/javascript">
-function openMenuImageSelectWindow(field) {
-    window.KCFinder = {
-        callBack: function(url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'menu_image',
-        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-        'resizable=1, scrollbars=0, width=800, height=600'
-    );
-}
-</script>
-			<input type="text" id="menu_image" name="menu_image"
-				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-				value="<?php
-            
-            echo $row->menu_image;
-            ?>"
-				style="cursor: pointer" /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
-			<br /> <br /> <strong><?php translate("design");?></strong><br /> <select
+			<strong><?php translate("design");?></strong><br /> <select
 				name="theme" size=1>
 				<option value="">
 				[
