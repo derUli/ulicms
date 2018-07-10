@@ -765,55 +765,55 @@ function openArticleImageSelectWindow(field) {
 				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 		</div>
 	</div>
+	<div style="<?php echo !$acl->hasPermission("pages_edit_permissions") ? "display:none" : ""?>">
+		<h2 class="accordion-header"><?php translate("permissions");?></h2>
 
-	<h2 class="accordion-header"><?php translate("permissions");?></h2>
-
-	<div class="accordion-content">
-		<strong><?php translate("owner");?> <?php translate("user");?></strong>
-		<select name="autor"
-			<?php
-            if (! $pages_change_owner) {
-                echo "disabled";
-            }
-            ?>>
-<?php
-            foreach ($users as $user) {
-                ?>
-	<option value="<?php Template::escape($user->id);?>"
-				<?php if($user->id == $row->autor) echo "selected";?>><?php Template::escape($user->username);?></option>
-	<?php } ?>
-</select> <br /> <br /> <strong><?php translate("owner");?> <?php translate("group");?></strong>
-		<select name="group_id"
-			<?php
-            if (! $pages_change_owner) {
-                echo "disabled";
-            }
-            ?>>
-<?php
-            foreach ($groups as $group) {
-                ?>
-	<option value="<?php Template::escape($group->getId());?>"
-				<?php if($group->getId() == $row->group_id) echo "selected";?>><?php Template::escape($group->getName());?></option>
-	<?php } ?>
-</select> <br /> <br /> <strong><?php translate("restrict_edit_access");?></strong><br />
-		<input type="checkbox" name="only_admins_can_edit"
-			id="only_admins_can_edit" value="1"
-			<?php if($row->only_admins_can_edit) echo "checked";?>> <label
-			for="only_admins_can_edit"><?php translate("admins");?></label> <br />
-		<input type="checkbox" name="only_group_can_edit"
-			id="only_group_can_edit" value="1"
-			<?php if($row->only_group_can_edit) echo "checked";?>> <label
-			for="only_group_can_edit"><?php translate("group");?></label> <br />
-		<input type="checkbox" name="only_owner_can_edit"
-			id="only_owner_can_edit" value="1"
-			<?php if($row->only_owner_can_edit) echo "checked";?>> <label
-			for="only_owner_can_edit"><?php translate("owner");?></label> <br />
-		<input type="checkbox" name="only_others_can_edit"
-			id="only_others_can_edit" value="1"
-			<?php if($row->only_others_can_edit) echo "checked";?>> <label
-			for="only_others_can_edit"><?php translate("others");?></label>
+		<div class="accordion-content">
+			<strong><?php translate("owner");?> <?php translate("user");?></strong>
+			<select name="autor"
+				<?php
+				if (! $pages_change_owner) {
+					echo "disabled";
+				}
+				?>>
+	<?php
+				foreach ($users as $user) {
+					?>
+		<option value="<?php Template::escape($user->id);?>"
+					<?php if($user->id == $row->autor) echo "selected";?>><?php Template::escape($user->username);?></option>
+		<?php } ?>
+	</select> <br /> <br /> <strong><?php translate("owner");?> <?php translate("group");?></strong>
+			<select name="group_id"
+				<?php
+				if (! $pages_change_owner) {
+					echo "disabled";
+				}
+				?>>
+	<?php
+				foreach ($groups as $group) {
+					?>
+		<option value="<?php Template::escape($group->getId());?>"
+					<?php if($group->getId() == $row->group_id) echo "selected";?>><?php Template::escape($group->getName());?></option>
+		<?php } ?>
+	</select> <br /> <br /> <strong><?php translate("restrict_edit_access");?></strong><br />
+			<input type="checkbox" name="only_admins_can_edit"
+				id="only_admins_can_edit" value="1"
+				<?php if($row->only_admins_can_edit) echo "checked";?>> <label
+				for="only_admins_can_edit"><?php translate("admins");?></label> <br />
+			<input type="checkbox" name="only_group_can_edit"
+				id="only_group_can_edit" value="1"
+				<?php if($row->only_group_can_edit) echo "checked";?>> <label
+				for="only_group_can_edit"><?php translate("group");?></label> <br />
+			<input type="checkbox" name="only_owner_can_edit"
+				id="only_owner_can_edit" value="1"
+				<?php if($row->only_owner_can_edit) echo "checked";?>> <label
+				for="only_owner_can_edit"><?php translate("owner");?></label> <br />
+			<input type="checkbox" name="only_others_can_edit"
+				id="only_others_can_edit" value="1"
+				<?php if($row->only_others_can_edit) echo "checked";?>> <label
+				for="only_others_can_edit"><?php translate("others");?></label>
+		</div>
 	</div>
-
 		<h2 class="accordion-header"><?php translate("other");?></h2>
 
 		<div class="accordion-content">
