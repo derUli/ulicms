@@ -10,6 +10,9 @@ Neue API-Funktionen:
 Verbesserungen:
 * Keine Aufklapp-Animationen mehr, wenn man eine Seite zur Bearbeitung öffnet
 
+Bugfixes:
+* Wenn man über PHPMailer eine Mail versendet und im Content-Type ein Encoding angibt, wird die Mail nun nicht mehr als Plain Text Mail versandt
+
 ===== Neues in UliCMS 2018.3.5 =====
 
 Neue Features:
