@@ -1,5 +1,6 @@
 <?php include "inc/ulicms_head.php";?>
-<?php $cssClasses = "";
+<?php 
+$cssClasses = "";
 if(get_user_id()){
 	$cssClasses .= "user-" . get_user_id() . "-logged-in ";
 } else {
