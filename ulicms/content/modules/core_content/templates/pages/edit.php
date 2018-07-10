@@ -454,7 +454,6 @@ function openMenuImageSelectWindow(field) {
 		<div class="accordion-content">
 
 			<p><?php translate("og_help");?></p>
-			<div style="margin-left: 20px;">
 				<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title"
 					value="<?php
@@ -502,7 +501,6 @@ function openMenuImageSelectWindow(field) {
                 ?>" />
 				</div>
 <?php }?>
-				</div>
 		</div>
 	</div>
 

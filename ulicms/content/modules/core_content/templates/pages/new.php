@@ -304,7 +304,6 @@ function openMenuImageSelectWindow(field) {
 
 		<div class="accordion-content">
 			<p><?php translate("og_help");?></p>
-			<div style="margin-left: 20px;">
 				<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title" value=""> <br /> <strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description" value=""> <br />
@@ -330,7 +329,7 @@ function openMenuImageSelectWindow(field) {
 					value="<?php echo htmlspecialchars($og_image);?>"
 					style="cursor: pointer" /> <a href="#"
 					onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
-			</div>
+		
 		</div>
 	</div>
 
