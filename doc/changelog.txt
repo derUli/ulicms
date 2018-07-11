@@ -6,6 +6,7 @@ Neue Features:
 
 Neue API-Funktionen:
 * remove_prefix($text, $prefix)
+* is_home()
 
 Verbesserungen:
 * Keine Aufklapp-Animationen mehr, wenn man eine Seite zur Bearbeitung öffnet
