@@ -46,7 +46,8 @@ function showAndHideFieldsByType() {
 		type = "page";
 	}
 	var type = $('input[name=type]:checked').val()
-	$(".typedep").slideUp();
+	var showSelector = AllTypes[type]["show"].join(",")
+	$(".typedep").not(showSelector).slideUp();
 	var typeData = AllTypes[type];
 	var show = typeData["show"];
 
