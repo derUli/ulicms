@@ -1,0 +1,9 @@
+{
+	"source": "extend",
+	"controllers": {
+		"YoutubeEmbed": "YoutubeEmbed.php"
+	},
+	"main_class": "YoutubeEmbed",
+	"version": "1.0",
+	"embed": false
+}
