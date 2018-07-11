@@ -531,6 +531,7 @@ input.kcfinder {
     min-height: 34px !important;
 }
 
-form.page-list-filters {
+form.page-list-filters,
+.x-results-found {
     margin-top: 10px;
 }

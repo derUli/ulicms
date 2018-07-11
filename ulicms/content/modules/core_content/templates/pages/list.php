@@ -1,35 +1,13 @@
 <?php
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern
+
+$show_filters = Settings::get("user/".get_user_id()."/show_filters");
+
 $acl = new ACL();
 if ($acl->hasPermission("pages")) {
     ?>
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
-</p>
-<h2><?php translate("pages");?></h2>
-
-<p><?php translate ( "pages_infotext" );?></p>
-<div id="page-list">
-<?php
-    if ($acl->hasPermission("pages_create")) {
-        ?>
-<div class="row">
-		<div class="col-xs-6">
-			<a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?></a>
-		</div>
-		<div class="col-xs-6 text-right">
-			<div class="page-list-filters">
-				<a
-					href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
-					class="btn btn-default" id="btn-reset-filters"><?php translate("reset_filters")?></a>
-			</div>
-		</div>
-	</div>
-
-<?php } ?>
-<?php
+	<?php
     if (! isset($_SESSION["filter_title"])) {
         $_SESSION["filter_title"] = "";
     }
@@ -129,7 +107,39 @@ if ($acl->hasPermission("pages")) {
     $sql .= " order by a.title";
     $parents = db_query($sql);
     ?>
-<form method="get" action="index.php" class="page-list-filters">
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
+<h2><?php translate("pages");?></h2>
+
+<p><?php translate ( "pages_infotext" );?></p>
+<div id="page-list">
+<?php
+    if ($acl->hasPermission("pages_create")) {
+        ?>
+<form action="#" method="get">
+	<div class="checkbox">
+		<label><input type="checkbox" name="show_filters" id="show_filters" value="1" data-url="index.php?ajax_cmd=toggle_show_filters"
+		<?php if($show_filters) echo "checked";?>><?php translate("show_filters");?></label>
+	</div>
+</form>
+<div class="row">
+		<div class="col-xs-6">
+			<a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?></a>
+		</div>
+		<div class="col-xs-6 text-right">
+			<div class="page-list-filters" style="<?php if(!$show_filters) echo "display:none";?>">
+				<a
+					href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
+					class="btn btn-default" id="btn-reset-filters"><?php translate("reset_filters")?></a>
+			</div>
+		</div>
+	</div>
+
+<?php } ?>
+
+<form method="get" action="index.php" class="page-list-filters" style="<?php if(!$show_filters) echo "display:none";?>">
 		<div class="row">
 			<div class="col-xs-6">
     	<?php translate("title");?>

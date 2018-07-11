@@ -300,6 +300,22 @@ $(function() {
 	$("#page-list form.page-delete-form").off("submit");
 	$("#page-list form.page-delete-form").ajaxForm(ajaxOptionsDelete);
 	$("#page-list form.undelete-form").ajaxForm(ajaxOptionsUndelete);
+
+	$("#show_filters").change(function(event){
+		var url = $(event.target).data("url");
+		$.ajax({
+			method : "get",
+			url: url,
+			success: function(){
+				$(".page-list-filters").slideToggle();
+			},
+			error: function(xhr, status, error) {
+				alert(xhr.responseText);
+			}
+		});
+		
+});	
+
 });
 
 // various filter functions
