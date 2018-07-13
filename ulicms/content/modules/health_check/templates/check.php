@@ -46,8 +46,17 @@ $yesNo = $success ? get_translation("yes") : get_translation("no");
 <td><?php translate("ulicms_services_reachable");?></td>
 <td><?php translate("yes");?></td>
 <td><?php esc($yesNo);?></td>
-
 </tr>
-			
+<?php 
+$success = file_get_contents_wrapper(ModuleHelper::getBaseUrl("/.txt"), true);
+$symbol = $success ? $checkOk : $checkFailed;;
+$yesNo = $success ? get_translation("yes") : get_translation("no");
+?>
+<tr>
+<td><?php echo $symbol;?></td>
+<td><?php translate("url_rewriting_working");?></td>
+<td><?php translate("yes");?></td>
+<td><?php esc($yesNo);?></td>
+</tr>
 		</tbody>
 	</table>
