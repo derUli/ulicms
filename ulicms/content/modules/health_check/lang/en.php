@@ -1,4 +1,5 @@
 <?php
-add_translation("object", "Objekt");
-add_translation("expected", "Erwartet");
-add_translation("actual", "Tatsächlich");
+add_translation("object", "Object");
+add_translation("expected", "Expected");
+add_translation("actual", "Actual");
+add_translation("ulicms_services_reachable", "UliCMS Services Reachable");

@@ -34,8 +34,20 @@ $symbol = version_compare($controller->getMySQLVersion(), "5.5.3", '>=') ? $chec
 <td><?php echo $symbol;?></td>
 				<td>MySQL Version</td>
 				<td>5.5.3</td>
-				<td><?php esc($controller->getMySQLVersion);?></td>
+				<td><?php esc($controller->getMySQLVersion());?></td>
 			</tr>
+<?php 
+$success = file_get_contents_wrapper("https://www.ulicms.de/", true) ? $checkOk : $checkFailed;
+$symbol = $success ? $checkOk : $checkFailed;;
+$yesNo = $success ? get_translation("yes") : get_translation("no");
+?>
+<tr>
+<td><?php echo $symbol;?></td>
+<td><?php translate("ulicms_services_reachable");?></td>
+<td><?php translate("yes");?></td>
+<td><?php esc($yesNo);?></td>
 
+</tr>
+			
 		</tbody>
 	</table>
