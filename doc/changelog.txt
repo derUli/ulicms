@@ -3,12 +3,19 @@
 Neue Features:
 * Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezegit werden sollen.
 * Neue Direktive "disable_functions" für Theme-Metadaten eingeführt
+* Seitenverwaltung: Filter können ein- und ausgeblendet werden
 
 Neue API-Funktionen:
 * remove_prefix($text, $prefix)
+* is_home()
 
 Verbesserungen:
 * Keine Aufklapp-Animationen mehr, wenn man eine Seite zur Bearbeitung öffnet
+* Seitenverwaltung: Selten genutze Optionen im Tab "Sonstiges" zusammengefasst, Klonen-Funktion ist vorerst deaktiviert
+* Seitenverwaltung: Weitere Usability Verbesserungen
+
+Bugfixes:
+* Überschriften in die erlaubten HTML-Tags aufgenommen
 
 Bugfixes:
 * Wenn man über PHPMailer eine Mail versendet und im Content-Type ein Encoding angibt, wird die Mail nun nicht mehr als Plain Text Mail versandt

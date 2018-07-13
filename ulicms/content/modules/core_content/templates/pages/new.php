@@ -229,59 +229,6 @@ function openMenuImageSelectWindow(field) {
 		</div>
 		
 	</div>
-	<div class="typedep" id="tab-menu-image">
-		<h2 class="accordion-header"><?php translate("design");?></h2>
-
-		<div class="accordion-content"><strong><?php translate("design");?></strong><br />
-			<select name="theme" size=1>
-				<option value="">
-				[
-				<?php translate("standard");?>
-				]
-			</option>
-			<?php
-    
-    foreach ($allThemes as $th) {
-        ?>
-			<option value="<?php
-        
-        echo $th;
-        ?>">
-			<?php
-        
-        echo $th;
-        ?></option>
-			<?php
-    }
-    ?>
-		</select> <br /> <br /> <strong><?php translate("html_file");?>
-		</strong> <br /> <input type="text" name="html_file" value="">
-		</div>
-	</div>
-	<h2 class="accordion-header"><?php translate("visibility");?></h2>
-
-	<div class="accordion-content">
-		<strong><?php translate("visible_for");?>
-		</strong><br /> <select name="access[]" size=4 multiple>
-			<option value="all" selected>
-			<?php translate("everyone");?>
-			</option>
-			<option value="registered">
-			<?php
-    
-    translate("registered_users");
-    ?>
-			</option>
-			<option value="mobile"><?php translate("mobile_devices");?></option>
-			<option value="desktop"><?php translate("desktop_computers");?></option>
-			<?php
-    while ($row = db_fetch_object($groups)) {
-        echo '<option value="' . $row->id . '">' . real_htmlspecialchars($row->name) . '</option>';
-    }
-    ?>
-
-		</select>
-	</div>
 	<div class="typedep" id="tab-metadata">
 
 		<h2 class="accordion-header"><?php translate("metadata");?></h2>
@@ -357,7 +304,6 @@ function openMenuImageSelectWindow(field) {
 
 		<div class="accordion-content">
 			<p><?php translate("og_help");?></p>
-			<div style="margin-left: 20px;">
 				<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title" value=""> <br /> <strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description" value=""> <br />
@@ -383,19 +329,7 @@ function openMenuImageSelectWindow(field) {
 					value="<?php echo htmlspecialchars($og_image);?>"
 					style="cursor: pointer" /> <a href="#"
 					onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
-			</div>
-		</div>
-	</div>
-	<div class="typedep" id="tab-cache-control" style="display: none;">
-		<h2 class="accordion-header"><?php translate("cache_control");?></h2>
-
-		<div class="accordion-content">
-			<strong><?php translate("cache_control");?></strong> <br /> <select
-				name="cache_control">
-				<option value="auto" selected><?php translate("auto");?></option>
-				<option value="force"><?php translate("force");?></option>
-				<option value="no_cache"><?php translate("no_cache");?></option>
-			</select>
+		
 		</div>
 	</div>
 
@@ -597,14 +531,75 @@ function openArticleImageSelectWindow(field) {
 				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 		</div>
 	</div>
-	<div class="typedep" id="custom_data_json">
-		<?php do_event("before_custom_data_json");?>
-		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
+		<h2 class="accordion-header"><?php translate("other");?></h2>
 
 		<div class="accordion-content">
+				
+				<div class="typedep" id="tab-cache-control" style="display: none;">
+		
+				<strong><?php translate("cache_control");?></strong> <br /> <select
+					name="cache_control">
+					<option value="auto" selected><?php translate("auto");?></option>
+					<option value="force"><?php translate("force");?></option>
+					<option value="no_cache"><?php translate("no_cache");?></option>
+				</select>
+			<br/><br/>
+		</div>
+			<div class="typedep" id="tab-menu-image">
+		<strong><?php translate("design");?></strong><br />
+			<select name="theme" size=1>
+				<option value="">
+				[
+				<?php translate("standard");?>
+				]
+			</option>
+			<?php
+    
+    foreach ($allThemes as $th) {
+        ?>
+			<option value="<?php
+        
+        echo $th;
+        ?>">
+			<?php
+        
+        echo $th;
+        ?></option>
+			<?php
+    }
+    ?>
+		</select> <br />  <br /> <strong><?php translate("html_file");?>
+		</strong> <br /> <input type="text" name="html_file" value="">
+				</div><br/>
+		<strong><?php translate("visible_for");?>
+		</strong><br /> 
+		<select name="access[]" size=4 multiple>
+			<option value="all" selected>
+			<?php translate("everyone");?>
+			</option>
+			<option value="registered">
+			<?php
+    
+    translate("registered_users");
+    ?>
+			</option>
+			<option value="mobile"><?php translate("mobile_devices");?></option>
+			<option value="desktop"><?php translate("desktop_computers");?></option>
+			<?php
+    while ($row = db_fetch_object($groups)) {
+        echo '<option value="' . $row->id . '">' . real_htmlspecialchars($row->name) . '</option>';
+    }
+    ?>
 
-
-			<textarea name="custom_data" style="width: 100%; height: 200px;"
+		</select>
+				
+			<br/><br/>
+			
+			<div class="typedep" id="custom_data_json">
+			
+		<?php do_event("before_custom_data_json");?>
+			<strong><?php translate("custom_data_json");?>
+				<textarea name="custom_data" style="width: 100%; height: 200px;"
 				cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
 
 		</div>
