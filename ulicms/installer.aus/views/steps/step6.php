@@ -1,4 +1,15 @@
-<form id="setup-database" action="#" method="get">
-	<input type="submit" class="btn btn-default"
-		value="<?php echo TRANSLATION_BUILD_DATABASE;?>">
+<form role="form" method="post" action="index.php?submit_form=Demodata">
+
+	<div class="form-group">
+		<div class="checkbox">
+			<label><input type="checkbox" value="yes" name="install_demodata"
+				id="install_demodata"
+				<?php
+				if (! empty ( $_SESSION ["install_demodata"] )) {
+					echo "checked";
+				}
+				?>><?php echo TRANSLATION_INSTALL_DEMO_DATA;?></label>
+		</div>
+	</div>
+	<button type="submit" class="btn btn-default"><?php echo TRANSLATION_APPLY;?></button>
 </form>

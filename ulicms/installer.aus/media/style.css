@@ -5,6 +5,10 @@ body {
 	font-size: 15px;
 }
 
+#license{
+	width:100%;
+}
+
 #header {
 	padding-top: 10px;
 	border: 1px solid #b7b7b7;

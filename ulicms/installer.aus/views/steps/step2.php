@@ -1,17 +1,7 @@
-
+<?php $license = htmlspecialchars(file_get_contents("license.txt"));?>
+<p>You have to read and accept the license conditions to use this software:</p>
 <p>
-	<?php echo TRANSLATION_FOLLOW_INSTRUCTIONS;?>
-	</p>
-<?php echo TRANSLATION_CHMOD;?>
-<h3>
-	<?php echo TRANSLATION_PERMISSION;?>
-	</h3>
-<p>
-	<img
-		src="media/chmod_<?php
-		
-		echo htmlspecialchars ( InstallerController::getLanguage () );
-		?>.png"
-		alt="<?php echo TRANSLATION_PERMISSIONS2;?>"
-		title="<?php echo TRANSLATION_PERMISSIONS2;?>" border="1" />
+	<textarea id="license" rows="10" cols="80"><?php echo $license;?></textarea>
 </p>
+
+<p><a href="?step=3" class="btn btn-default"><?php echo TRANSLATION_ACCEPT_LICNSE;?></a></p>
