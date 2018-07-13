@@ -34,7 +34,7 @@ if ((! is_file ( $admin_file_path ) and ! is_file ( $admin_file_path2 ) and ! ($
 	}
 	
 	$acl = new ACL ();
-	$admin_permission = getModuleMeta ( $module);
+	$admin_permission = getModuleMeta ( $module, "admin_permission" );
 
 	if ($admin_permission) {
 		if ($acl->hasPermission ( $admin_permission )) {
