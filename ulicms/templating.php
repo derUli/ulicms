@@ -770,9 +770,12 @@ function get_requested_pagename()
     return $value;
 }
 
-function is_frontpage()
+function is_home()
 {
     return get_requested_pagename() === get_frontpage();
+}
+function is_frontpage(){
+    return is_home();
 }
 
 function is_200()

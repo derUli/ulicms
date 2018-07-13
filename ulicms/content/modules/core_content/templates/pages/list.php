@@ -1,33 +1,13 @@
 <?php
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern
+
+$show_filters = Settings::get("user/".get_user_id()."/show_filters");
+
 $acl = new ACL();
 if ($acl->hasPermission("pages")) {
     ?>
-<p>
-		<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
-		</p>
-<h2><?php translate("pages");?></h2>
-
-<p><?php translate ( "pages_infotext" );?></p>
-<div id="page-list">
-<?php
-    if ($acl->hasPermission("pages_create")) {
-        ?>
-<div class="row">
-<div class="col-xs-6"><a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?></a>
-</div>
-<div class="col-xs-6 text-right">
-		<a
-			href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
-			class="btn btn-default" id="btn-reset-filters"><?php translate("reset_filters")?></a>
-	</div>
-</div>
-	</a>
-	</p>
-<?php } ?>
-<?php
+	<?php
     if (! isset($_SESSION["filter_title"])) {
         $_SESSION["filter_title"] = "";
     }
@@ -35,21 +15,6 @@ if ($acl->hasPermission("pages")) {
     if (isset($_GET["filter_title"])) {
         $_SESSION["filter_title"] = $_GET["filter_title"];
     }
-    ?>
-<form method="get" action="index.php">
-	<?php translate("title");?>
-	<input type="hidden" name="action" value="pages"> <input type="text"
-			name="filter_title"
-			value="<?php echo htmlspecialchars($_SESSION["filter_title"]);?>">
-
-	</form>
-
-<?php translate("filter_by_language");?>
-<select name="filter_language" onchange="filterByLanguage(this)">
-		<option value="">
-		<?php translate("please_select");?>
-		</option>
-		<?php
     if (! empty($_GET["filter_language"]) and faster_in_array($_GET["filter_language"], getAllLanguages(true))) {
         $_SESSION["filter_language"] = $_GET["filter_language"];
         $_SESSION["filter_parent"] = null;
@@ -128,15 +93,6 @@ if ($acl->hasPermission("pages")) {
         $_SESSION["filter_status"] = $_GET["filter_status"];
     }
     
-    $languages = getAllLanguages(true);
-    for ($j = 0; $j < count($languages); $j ++) {
-        if ($languages[$j] == $_SESSION["filter_language"]) {
-            echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
-        } else {
-            echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
-        }
-    }
-    
     $menus = getAllMenus(true);
     
     array_unshift($menus, "null");
@@ -151,14 +107,79 @@ if ($acl->hasPermission("pages")) {
     $sql .= " order by a.title";
     $parents = db_query($sql);
     ?>
+<p>
+	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
+		class="btn btn-default btn-back"><?php translate("back")?></a>
+</p>
+<h2><?php translate("pages");?></h2>
+
+<p><?php translate ( "pages_infotext" );?></p>
+<div id="page-list">
+<?php
+    if ($acl->hasPermission("pages_create")) {
+        ?>
+<form action="#" method="get">
+	<div class="checkbox">
+		<label><input type="checkbox" name="show_filters" id="show_filters" value="1" data-url="index.php?ajax_cmd=toggle_show_filters"
+		<?php if($show_filters) echo "checked";?>><?php translate("show_filters");?></label>
+	</div>
+</form>
+<div class="row">
+		<div class="col-xs-6">
+			<a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?></a>
+		</div>
+		<div class="col-xs-6 text-right">
+			<div class="page-list-filters" style="<?php if(!$show_filters) echo "display:none";?>">
+				<a
+					href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
+					class="btn btn-default" id="btn-reset-filters"><?php translate("reset_filters")?></a>
+			</div>
+		</div>
+	</div>
+
+<?php } ?>
+
+<form method="get" action="index.php" class="page-list-filters" style="<?php if(!$show_filters) echo "display:none";?>">
+		<div class="row">
+			<div class="col-xs-6">
+    	<?php translate("title");?>
+    	<input type="hidden" name="action" value="pages"> <input
+					type="text" name="filter_title"
+					value="<?php echo htmlspecialchars($_SESSION["filter_title"]);?>">
+			</div>
+
+			<div class="col-xs-6">
+<?php translate("filter_by_language");?>
+<select name="filter_language" onchange="filterByLanguage(this)">
+					<option value="">
+		<?php translate("please_select");?>
+		
+		</option>
+		<?php
+    $languages = getAllLanguages(true);
+    for ($j = 0; $j < count($languages); $j ++) {
+        if ($languages[$j] == $_SESSION["filter_language"]) {
+            echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
+        } else {
+            echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
+        }
+    }
+    ?>
+		<?php
+    
+    ?>
 
 	</select>
+			</div>
+		</div>
 
+		<div class="row">
+			<div class="col-xs-6">
 <?php translate("type")?>
 <?php $types = get_used_post_types();?>
 <select name="filter_type" onchange="filterByType(this);">
-		<option value="null"
-			<?php
+					<option value="null"
+						<?php
     
     if ("null" == $_SESSION["filter_type"])
         echo "selected";
@@ -178,31 +199,39 @@ if ($acl->hasPermission("pages")) {
     ?>
 	</select>
 
-
+			</div>
+			<div class="col-xs-6">
 <?php
     translate("status")?>
 <select name="filter_status" onchange="filterByStatus(this)">
-		<option value="Standard"
-			<?php
+					<option value="Standard"
+						<?php
     if ($_SESSION["filter_status"] == "standard") {
         echo " selected";
     }
     ?>>
 		<?php translate("standard");?>
 		</option>
-		<option value="trash"
-			<?php
+					<option value="trash"
+						<?php
     if ($_SESSION["filter_status"] == "trash") {
         echo " selected";
     }
     ?>>
 		<?php translate("recycle_bin");?>
 		</option>
-	</select>
+				</select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-6">
 <?php translate("category");?>
 	<?php
     echo Categories::getHTMLSelect($_SESSION["filter_category"], true);
     ?>
+	</div>
+			<div class="col-xs-6">
 	<?php translate("menu");?>
 <select name="filter_menu" onchange="filterByMenu(this);">
 
@@ -223,18 +252,22 @@ if ($acl->hasPermission("pages")) {
     
     ?>
 	</select>
+			</div>
+			</div>
+			<div class="row">
+			<div class="col-xs-6">
 <?php translate("parent");?>
 <select name="filter_parent" onchange="filterByParent(this);">
-		<option value="null"
-			<?php
+					<option value="null"
+						<?php
     
     if ("null" == $_SESSION["filter_parent"])
         echo "selected";
     ?>>
 			[<?php translate ( "every" );?>]
 		</option>
-		<option value="-"
-			<?php
+					<option value="-"
+						<?php
     
     if ("-" == $_SESSION["filter_parent"])
         echo "selected";
@@ -254,10 +287,12 @@ if ($acl->hasPermission("pages")) {
     }
     ?>
 	</select>
+			</div>
+			<div class="col-xs-6">
 <?php translate("enabled");?>
 <select name="filter_active" onchange="filterByActive(this);">
-		<option value="null"
-			<?php
+			<option value="null"
+				<?php
     
     if (null == $_SESSION["filter_active"]) {
         echo "selected";
@@ -265,30 +300,34 @@ if ($acl->hasPermission("pages")) {
     ?>>
 			[<?php translate("every"); ?>]
 		</option>
-		<option value="1"
-			<?php
+			<option value="1"
+				<?php
     
     if (1 === $_SESSION["filter_active"]) {
         echo "selected";
     }
     ?>><?php translate("enabled");?></option>
-		<option value="0"
-			<?php
+			<option value="0"
+				<?php
     
     if (0 === $_SESSION["filter_active"]) {
         echo "selected";
     }
     ?>><?php translate("disabled");?></option>
-	</select>
+		</select>
+	</div>
+	</div>
+	<div class="row">
+	<div class="col-xs-6">
 
 <?php
     
     translate("approved");
     ?>
 <p>
-		<select name="filter_approved" onchange="filterByApproved(this);">
-			<option value="null"
-				<?php
+			<select name="filter_approved" onchange="filterByApproved(this);">
+				<option value="null"
+					<?php
     
     if (null == $_SESSION["filter_approved"]) {
         echo "selected";
@@ -298,8 +337,8 @@ if ($acl->hasPermission("pages")) {
     
     translate("every");
     ?>]</option>
-			<option value="1"
-				<?php
+				<option value="1"
+					<?php
     
     if (1 === $_SESSION["filter_approved"]) {
         echo "selected";
@@ -308,8 +347,8 @@ if ($acl->hasPermission("pages")) {
     
     translate("yes");
     ?></option>
-			<option value="0"
-				<?php
+				<option value="0"
+					<?php
     
     if (0 === $_SESSION["filter_approved"]) {
         echo "selected";
@@ -318,8 +357,11 @@ if ($acl->hasPermission("pages")) {
     
     translate("no");
     ?></option>
-		</select>
-	</p>
+			</select>
+		</p>
+		</div>
+	</div>
+	</form>
 
 <?php
     if ($_SESSION["filter_status"] == "trash" and $acl->hasPermission("pages")) {
@@ -332,7 +374,6 @@ if ($acl->hasPermission("pages")) {
     }
     ?>
 
-<br />
 <?php
     if (faster_in_array($_GET["order"], array(
         "title",
@@ -421,7 +462,7 @@ if ($acl->hasPermission("pages")) {
     
     $query = db_query("SELECT * FROM " . tbname("content") . " " . $filter_sql . " ORDER BY $order,position, systemname ASC") or die(db_error());
     ?>
-<p><?php BackendHelper::formatDatasetCount(Database::getNumRows($query));?></p>
+<div class="x-results-found"><?php BackendHelper::formatDatasetCount(Database::getNumRows($query));?></div>
 	<div class="scroll">
 		<table class="tablesorter dataset-list">
 			<thead>
@@ -439,11 +480,12 @@ if ($acl->hasPermission("pages")) {
 			</th>
 					<td style="text-align: center"><?php translate("view");?>
 			</td>
+					<!-- 
 			<?php
     if ($acl->hasPermission("pages_create")) {
         ?>
 			<td style="text-align: center"><?php translate ( "clone" );?>
-			</td>
+			</td> -->
 			<?php }?>
 			<td style="text-align: center"><?php translate("edit");?>
 			</td>
@@ -480,9 +522,9 @@ if ($acl->hasPermission("pages")) {
                 $url = "../?goid={$row->id}";
                 echo "<td style='text-align:center'><a href=\"" . $url . "\"><img class=\"mobile-big-image\" src=\"gfx/preview.png\" alt=\"" . get_translation("view") . "\" title=\"" . get_translation("view") . "\"></a></td>";
             }
-            if ($acl->hasPermission("pages_create")) {
-                echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone") . "\" title=\"" . get_translation("clone") . "\"></a></td>";
-            }
+            // if ($acl->hasPermission("pages_create")) {
+            // echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone") . "\" title=\"" . get_translation("clone") . "\"></a></td>";
+            // }
             $autor = $row->autor;
             $is_owner = $autor == get_user_id();
             
