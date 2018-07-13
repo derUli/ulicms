@@ -17,6 +17,15 @@ img.responsive-image {
 	margin-bottom: 20px;
 }
 
+.text-red{
+	color:red;
+}
+
+
+.text-green{
+	color:green;
+}
+
 img {
 	border: 0px;
 }
