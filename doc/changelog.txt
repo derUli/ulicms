@@ -16,6 +16,7 @@ Verbesserungen:
 
 Bugfixes:
 * Überschriften in die erlaubten HTML-Tags aufgenommen
+* Potentielle Sicherheitslücke in file_get_contents_wrapper behoben
 
 Bugfixes:
 * Wenn man über PHPMailer eine Mail versendet und im Content-Type ein Encoding angibt, wird die Mail nun nicht mehr als Plain Text Mail versandt
