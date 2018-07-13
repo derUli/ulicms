@@ -25,8 +25,8 @@ $css = version_compare(phpversion(), "5.6", ">=") ? $cssOk : $cssFailed;
 ?>
 <td class="<?php esc($css)?>" style="width: 30px;"><?php echo $symbol;?></td>
 				<td>PHP Version</td>
-				<td><?php esc(phpversion());?></td>
 				<td>5.6</td>
+				<td><?php esc(phpversion());?></td>
 			</tr>
 			<tr>
 <?php
@@ -35,7 +35,7 @@ $css = version_compare($controller->getMySQLVersion(), "5.5.3", '>=') ? $cssOk :
 ?>
 	    
 
-<td class="<?php esc($css);?>"><?php echo $symbol;?></td>
+				<td class="<?php esc($css);?>"><?php echo $symbol;?></td>
 				<td>MySQL Version</td>
 				<td>5.5.3</td>
 				<td><?php esc($controller->getMySQLVersion());?></td>
