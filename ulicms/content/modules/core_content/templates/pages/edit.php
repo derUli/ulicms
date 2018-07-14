@@ -283,6 +283,32 @@ if ($acl->hasPermission("pages")) {
 		<?php translate("disabled");?>
 		</option>
 		</select> <br /> <br />
+
+		<div class="typedep" id="tab-target">
+			<strong><?php translate("open_in");?></strong><br /> <select
+				name="target" size=1>
+				<option
+					<?php
+            
+            if ($row->target == "_self") {
+                echo 'selected="selected" ';
+            }
+            ?>
+					value="_self">
+				<?php translate("target_self");?></option>
+				<option
+					<?php
+            
+            if ($row->target == "_blank") {
+                echo 'selected="selected" ';
+            }
+            ?>
+					value="_blank">
+				<?php translate ( "target_blank" );?></option>
+			</select> <br />
+			<br />
+		</div>
+
 		<div class="typedep" id="hidden-attrib">
 			<strong><?php translate("hidden");?>
 	</strong><br /> <select name="hidden" size="1"><option value="1"
@@ -472,34 +498,6 @@ function openMenuImageSelectWindow(field) {
 
 		<?php }?>
 		</div>
-
-	<div class="typedep" id="tab-target">
-		<h2 class="accordion-header"><?php translate("open_in");?></h2>
-
-		<div class="accordion-content">
-			<strong><?php translate("open_in");?></strong><br /> <select
-				name="target" size=1>
-				<option
-					<?php
-            
-            if ($row->target == "_self") {
-                echo 'selected="selected" ';
-            }
-            ?>
-					value="_self">
-				<?php translate("target_self");?></option>
-				<option
-					<?php
-            
-            if ($row->target == "_blank") {
-                echo 'selected="selected" ';
-            }
-            ?>
-					value="_blank">
-				<?php translate ( "target_blank" );?></option>
-			</select>
-		</div>
-	</div>
 	<div class="typedep list-show" id="tab-list">
 		<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
@@ -1065,6 +1063,9 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 
 
 
+	
+	
+	
 	
 	
 	

@@ -155,6 +155,23 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
 	</select> <br /> <br />
 			</div>
 		</div>
+
+		<div class="typedep" id="tab-target">
+
+			<strong><?php
+    
+    translate("open_in");
+    ?>
+		</strong><br /> <select name="target" size=1>
+				<option value="_self">
+			<?php translate("target_self");?>
+			</option>
+				<option value="_blank">
+			<?php translate("target_blank");?>
+			</option>
+			</select><br/><br/>
+		</div>
+
 		<strong><?php translate("activated");?>
 	</strong><br /> <select name="activated" size=1
 			<?php if(!$pages_activate_own) echo "disabled";?>>
@@ -254,17 +271,17 @@ function openMenuImageSelectWindow(field) {
 					value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step="any"> <br /> <strong><?php translate("excerpt");?></strong>
 				<textarea name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
 			</div>
-		<div class="typedep" id="tab-og" style="display: none;">
-			<h3><?php translate("open_graph");?></h3>
+			<div class="typedep" id="tab-og" style="display: none;">
+				<h3><?php translate("open_graph");?></h3>
 
-			<p><?php translate("og_help");?></p>
-			<strong><?php translate("title");?>
+				<p><?php translate("og_help");?></p>
+				<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title" value=""> <br /> <strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description" value=""> <br />
-			<strong><?php translate("type");?>
+				<strong><?php translate("type");?>
 		</strong><br /> <input type="text" name="og_type" value=""> <br /> <strong><?php translate("image");?></strong>
-			<br />
-			<script type="text/javascript">
+				<br />
+				<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -278,15 +295,15 @@ function openMenuImageSelectWindow(field) {
     );
 }
 </script>
-			<input type="text" id="og_image" name="og_image" readonly="readonly"
-				onclick="openMenuImageSelectWindow(this)"
-				value="<?php echo htmlspecialchars($og_image);?>"
-				style="cursor: pointer" /> <a href="#"
-				onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
+				<input type="text" id="og_image" name="og_image" readonly="readonly"
+					onclick="openMenuImageSelectWindow(this)"
+					value="<?php echo htmlspecialchars($og_image);?>"
+					style="cursor: pointer" /> <a href="#"
+					onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
 
+			</div>
 		</div>
 	</div>
-		</div>
 	<div id="custom_fields_container">
 		<?php
     foreach (DefaultContentTypes::getAll() as $name => $type) {
@@ -310,25 +327,6 @@ function openMenuImageSelectWindow(field) {
 		
 		<?php }?>
 		</div>
-	<div class="typedep" id="tab-target">
-		<h2 class="accordion-header"><?php translate("open_in");?></h2>
-
-		<div class="accordion-content">
-			<strong><?php
-    
-    translate("open_in");
-    ?>
-		</strong><br /> <select name="target" size=1>
-				<option value="_self">
-			<?php translate("target_self");?>
-			</option>
-				<option value="_blank">
-			<?php translate("target_blank");?>
-			</option>
-			</select>
-		</div>
-	</div>
-
 	<div class="typedep" id="tab-list" style="display: none">
 		<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
