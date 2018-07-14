@@ -552,7 +552,7 @@ function getThemeMeta($theme, $attrib = null)
         $data = ! Vars::get("theme_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("theme_{$module}_meta");
         
         if (is_string($data)) {
-            $data = json_decode($data);
+            $data = json_decode($data, true);
         }
         
         Vars::set("module_{$module}_meta", $data);
