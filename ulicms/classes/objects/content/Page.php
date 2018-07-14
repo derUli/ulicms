@@ -232,7 +232,7 @@ class Page extends Content
             $this->custom_data = array();
         }
         
-        $json = json_encode($this->custom_data);
+        $json = json_encode($this->custom_data, JSON_PRETTY_PRINT);
         
         $sql .= "'" . DB::escapeValue($json) . "',";
         
@@ -321,7 +321,7 @@ class Page extends Content
             $this->custom_data = array();
         }
         
-        $json = json_encode($this->custom_data);
+        $json = json_encode($this->custom_data, JSON_PRETTY_PRINT);
         
         $sql .= "custom_data='" . DB::escapeValue($json) . "',";
         

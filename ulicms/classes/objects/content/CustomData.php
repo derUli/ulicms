@@ -29,7 +29,7 @@ class CustomData
             $data = array();
         }
         $data[$var] = $value;
-        $json = json_encode($data);
+        $json = json_encode($data, JSON_PRETTY_PRINT);
         return Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE systemname='" . Database::escapeValue($page) . "'");
     }
 
@@ -51,7 +51,7 @@ class CustomData
             // Wenn $var nicht gesetzt ist, alle Werte von custom_data löschen
             $data = array();
         }
-        $json = json_encode($data);
+        $json = json_encode($data, JSON_PRETTY_PRINT);
         return Database::query("UPDATE " . tbname("content") . " SET custom_data = '" . Database::escapeValue($json) . "' WHERE systemname='" . Database::escapeValue($page) . "'");
     }
 
@@ -79,6 +79,6 @@ class CustomData
 
     public static function getDefaultJSON()
     {
-        return json_readable_encode(self::$defaults);
+        return json_encode(self::$defaults, JSON_PRETTY_PRINT);
     }
 }

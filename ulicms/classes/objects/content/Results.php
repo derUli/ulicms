@@ -3,7 +3,7 @@
 function JSONResult($data, $status = 200)
 {
     Response::sendStatusHeader(Response::getStatusCodeByNumber($status));
-    $json = json_encode($data);
+    $json = json_encode($data, JSON_PRETTY_PRINT);
     // get string size in Byte
     $size = getStringLengthInBytes($json);
     header('Content-Type: application/json');

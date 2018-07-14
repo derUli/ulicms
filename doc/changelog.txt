@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3.6 =====
+﻿===== Neues in UliCMS 2018.3.6 =====
 
 Neue Features:
 * Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezegit werden sollen.
@@ -13,6 +13,7 @@ Verbesserungen:
 * Keine Aufklapp-Animationen mehr, wenn man eine Seite zur Bearbeitung öffnet
 * Seitenverwaltung: Selten genutze Optionen im Tab "Sonstiges" zusammengefasst, Klonen-Funktion ist vorerst deaktiviert
 * Seitenverwaltung: Weitere Usability Verbesserungen
+* JSON-Serialisierungen werden vom System nun mit JSON_PRETTY_PRINT generiert
 
 Bugfixes:
 * Überschriften in die erlaubten HTML-Tags aufgenommen
