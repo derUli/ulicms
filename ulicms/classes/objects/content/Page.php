@@ -109,7 +109,7 @@ class Page extends Content
         if ($this->customData === null) {
             $this->custom_data = array();
         }
-        $this->custom_data = json_decode($result->custom_data, true);
+        $this->custom_data = json_decode($result->custom_data, false);
         
         $this->type = $result->type;
         $this->og_title = $result->og_title;
@@ -232,7 +232,7 @@ class Page extends Content
             $this->custom_data = array();
         }
         
-        $json = json_encode($this->custom_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        $json = json_encode($this->custom_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT);
         
         $sql .= "'" . DB::escapeValue($json) . "',";
         
