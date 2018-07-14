@@ -179,11 +179,10 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
 		<strong><?php translate("category");?>
 	</strong><br />
 	<?php echo Categories :: getHTMLSelect();?>
-	<br/><br/>
-	<strong><?php translate("menu_image");?>
+	<br /> <br /> <strong><?php translate("menu_image");?>
 		</strong><br />
 
-			<script type="text/javascript">
+		<script type="text/javascript">
 function openMenuImageSelectWindow(field) {
     window.KCFinder = {
         callBack: function(url) {
@@ -197,12 +196,12 @@ function openMenuImageSelectWindow(field) {
     );
 }
 </script>
-			<input type="text" id="menu_image" name="menu_image"
-				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-				value="" style="cursor: pointer" /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?>
-		</a> 
-		</div>
+		<input type="text" id="menu_image" name="menu_image"
+			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+			value="" style="cursor: pointer" /> <a href="#"
+			onclick="$('#menu_image').val('');return false;"><?php translate("clear");?>
+		</a>
+	</div>
 	<div class="typedep" id="tab-link" style="display: none;">
 		<h2 class="accordion-header"><?php translate("link_url");?></h2>
 
@@ -227,7 +226,7 @@ function openMenuImageSelectWindow(field) {
 <?php }?>
 </select>
 		</div>
-		
+
 	</div>
 	<div class="typedep" id="tab-metadata">
 
@@ -255,9 +254,39 @@ function openMenuImageSelectWindow(field) {
 					value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step="any"> <br /> <strong><?php translate("excerpt");?></strong>
 				<textarea name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
 			</div>
-		</div>
+		<div class="typedep" id="tab-og" style="display: none;">
+			<h3><?php translate("open_graph");?></h3>
 
+			<p><?php translate("og_help");?></p>
+			<strong><?php translate("title");?>
+		</strong><br /> <input type="text" name="og_title" value=""> <br /> <strong><?php translate("description");?>
+		</strong><br /> <input type="text" name="og_description" value=""> <br />
+			<strong><?php translate("type");?>
+		</strong><br /> <input type="text" name="og_type" value=""> <br /> <strong><?php translate("image");?></strong>
+			<br />
+			<script type="text/javascript">
+function openMenuImageSelectWindow(field) {
+    window.KCFinder = {
+        callBack: function(url) {
+            field.value = url;
+            window.KCFinder = null;
+        }
+    };
+    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'og_image',
+        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+        'resizable=1, scrollbars=0, width=800, height=600'
+    );
+}
+</script>
+			<input type="text" id="og_image" name="og_image" readonly="readonly"
+				onclick="openMenuImageSelectWindow(this)"
+				value="<?php echo htmlspecialchars($og_image);?>"
+				style="cursor: pointer" /> <a href="#"
+				onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
+
+		</div>
 	</div>
+		</div>
 	<div id="custom_fields_container">
 		<?php
     foreach (DefaultContentTypes::getAll() as $name => $type) {
@@ -297,39 +326,6 @@ function openMenuImageSelectWindow(field) {
 			<?php translate("target_blank");?>
 			</option>
 			</select>
-		</div>
-	</div>
-	<div class="typedep" id="tab-og" style="display: none;">
-		<h2 class="accordion-header"><?php translate("open_graph");?></h2>
-
-		<div class="accordion-content">
-			<p><?php translate("og_help");?></p>
-				<strong><?php translate("title");?>
-		</strong><br /> <input type="text" name="og_title" value=""> <br /> <strong><?php translate("description");?>
-		</strong><br /> <input type="text" name="og_description" value=""> <br />
-				<strong><?php translate("type");?>
-		</strong><br /> <input type="text" name="og_type" value=""> <br /> <strong><?php translate("image");?></strong>
-				<br />
-				<script type="text/javascript">
-function openMenuImageSelectWindow(field) {
-    window.KCFinder = {
-        callBack: function(url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'og_image',
-        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-        'resizable=1, scrollbars=0, width=800, height=600'
-    );
-}
-</script>
-				<input type="text" id="og_image" name="og_image" readonly="readonly"
-					onclick="openMenuImageSelectWindow(this)"
-					value="<?php echo htmlspecialchars($og_image);?>"
-					style="cursor: pointer" /> <a href="#"
-					onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
-		
 		</div>
 	</div>
 
@@ -531,23 +527,22 @@ function openArticleImageSelectWindow(field) {
 				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 		</div>
 	</div>
-		<h2 class="accordion-header"><?php translate("other");?></h2>
+	<h2 class="accordion-header"><?php translate("other");?></h2>
 
-		<div class="accordion-content">
-				
-				<div class="typedep" id="tab-cache-control" style="display: none;">
-		
-				<strong><?php translate("cache_control");?></strong> <br /> <select
-					name="cache_control">
-					<option value="auto" selected><?php translate("auto");?></option>
-					<option value="force"><?php translate("force");?></option>
-					<option value="no_cache"><?php translate("no_cache");?></option>
-				</select>
-			<br/><br/>
+	<div class="accordion-content">
+
+		<div class="typedep" id="tab-cache-control" style="display: none;">
+
+			<strong><?php translate("cache_control");?></strong> <br /> <select
+				name="cache_control">
+				<option value="auto" selected><?php translate("auto");?></option>
+				<option value="force"><?php translate("force");?></option>
+				<option value="no_cache"><?php translate("no_cache");?></option>
+			</select> <br /> <br />
 		</div>
-			<div class="typedep" id="tab-menu-image">
-		<strong><?php translate("design");?></strong><br />
-			<select name="theme" size=1>
+		<div class="typedep" id="tab-menu-image">
+			<strong><?php translate("design");?></strong><br /> <select
+				name="theme" size=1>
 				<option value="">
 				[
 				<?php translate("standard");?>
@@ -568,12 +563,11 @@ function openArticleImageSelectWindow(field) {
 			<?php
     }
     ?>
-		</select> <br />  <br /> <strong><?php translate("html_file");?>
+		</select> <br /> <br /> <strong><?php translate("html_file");?>
 		</strong> <br /> <input type="text" name="html_file" value="">
-				</div><br/>
-		<strong><?php translate("visible_for");?>
-		</strong><br /> 
-		<select name="access[]" size=4 multiple>
+		</div>
+		<br /> <strong><?php translate("visible_for");?>
+		</strong><br /> <select name="access[]" size=4 multiple>
 			<option value="all" selected>
 			<?php translate("everyone");?>
 			</option>
@@ -591,17 +585,15 @@ function openArticleImageSelectWindow(field) {
     }
     ?>
 
-		</select>
-				
-			<br/><br/>
-			
-			<div class="typedep" id="custom_data_json">
+		</select> <br /> <br />
+
+		<div class="typedep" id="custom_data_json">
 			
 		<?php do_event("before_custom_data_json");?>
 			<strong><?php translate("custom_data_json");?>
 				<textarea name="custom_data" style="width: 100%; height: 200px;"
-				cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
-
+					cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
+		
 		</div>
 	</div>
 </div>
