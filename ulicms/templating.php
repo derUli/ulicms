@@ -438,7 +438,7 @@ function delete_custom_data($var = null, $page = null)
         $data = array();
     }
     
-    $json = json_encode($data, JSON_PRETTY_PRINT);
+    $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     
     return db_query("UPDATE " . tbname("content") . " SET custom_data = '" . db_escape($json) . "' WHERE systemname='" . db_escape($page) . "'");
 }
@@ -454,7 +454,7 @@ function set_custom_data($var, $value, $page = null)
     }
     
     $data[$var] = $value;
-    $json = json_encode($data, JSON_PRETTY_PRINT);
+    $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     
     return db_query("UPDATE " . tbname("content") . " SET custom_data = '" . db_escape($json) . "' WHERE systemname='" . db_escape($page) . "'");
 }

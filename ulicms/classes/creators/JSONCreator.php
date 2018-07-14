@@ -42,7 +42,7 @@ class JSONCreator
         $data["meta_description"] = get_meta_description();
         $data["meta_keywords"] = get_meta_keywords();
         $data["author"] = $author;
-        $json_string = json_encode($data, JSON_PRETTY_PRINT);
+        $json_string = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         $this->httpHeader();
         echo $json_string;
         if ($adapter) {

@@ -21,7 +21,7 @@ class ACL
         
         $permissionData[$name] = $value;
         
-        $newJSON = json_encode($permissionData, JSON_PRETTY_PRINT);
+        $newJSON = json_encode($permissionData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         
         $updateSQLString = "UPDATE `" . tbname("groups") . "` SET `permissions`='" . db_escape($newJSON) . "' WHERE id=" . $group_id;
     }

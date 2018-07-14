@@ -108,7 +108,7 @@ class Group
         $sql = "insert into `{prefix}groups` (name, permissions, allowable_tags) values (?,?,?)";
         $args = array(
             $this->getName(),
-            json_encode($this->getPermissions(), JSON_PRETTY_PRINT),
+            json_encode($this->getPermissions(), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES),
             $this->getAllowableTags()
         );
         $query = Database::pQuery($sql, $args, true);
