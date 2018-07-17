@@ -50,7 +50,7 @@ function bool2YesNo($value, $yesString = null, $noString = null)
 }
 
 // like json_encode() but human readable
-function json_readable_encode($in, $indent = 0, $from_array = false)
+function json_readable_encode($in, $indent = 0)
 {
     $_myself = __FUNCTION__;
     $_escape = function ($str) {

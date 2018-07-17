@@ -79,6 +79,6 @@ class CustomData
 
     public static function getDefaultJSON()
     {
-        return json_encode(self::$defaults, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+        return json_readable_encode(self::$defaults);
     }
 }
