@@ -1484,20 +1484,6 @@ function containsModule($page = null, $module = false)
     return false;
 }
 
-function page_has_html_file($page)
-{
-    $query = db_query("SELECT `html_file` FROM " . tbname("content") . " WHERE systemname = '" . db_escape($page) . "'");
-    $dataset = db_fetch_assoc($query);
-    $html_file = $dataset["html_file"];
-    if (empty($html_file) or is_null($html_file))
-        return null;
-    $html_file = dirname(__file__) . "/content/files/" . $html_file;
-    if (! endsWith($html_file, ".html") && ! endsWith($html_file, ".htm")) {
-        $html_file = $html_file . ".html";
-    }
-    return $html_file;
-}
-
 // API-Aufruf zur Deinstallation eines Moduls
 // Ruft uninstall Script auf, falls vorhanden
 // Löscht anschließend den Ordner modules/$name
