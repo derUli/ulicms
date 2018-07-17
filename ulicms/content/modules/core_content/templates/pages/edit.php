@@ -305,8 +305,7 @@ if ($acl->hasPermission("pages")) {
             ?>
 					value="_blank">
 				<?php translate ( "target_blank" );?></option>
-			</select> <br />
-			<br />
+			</select> <br /> <br />
 		</div>
 
 		<div class="typedep" id="hidden-attrib">
@@ -865,12 +864,7 @@ function openArticleImageSelectWindow(field) {
 			<?php
             }
             ?>
-		</select> <br /> <br /> <strong><?php translate("html_file");?></strong>
-			<br /> <input type="text" name="html_file"
-				value="<?php
-            
-            echo $row->html_file;
-            ?>">
+		</select>
 		</div>
 		<br /> <strong><?php translate("visible_for");?> </strong><br />
 			<?php
@@ -1063,6 +1057,9 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 
 
 
+	
+	
+	
 	
 	
 	

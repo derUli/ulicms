@@ -51,8 +51,6 @@ class Page extends Content
 
     private $deleted_at = null;
 
-    public $html_file = null;
-
     public $theme = null;
 
     public $custom_data = null;
@@ -104,7 +102,6 @@ class Page extends Content
         $this->meta_description = $result->meta_description;
         $this->meta_keywords = $result->meta_keywords;
         $this->deleted_at = $result->deleted_at;
-        $this->html_file = $result->html_file;
         $this->theme = $result->theme;
         if ($this->customData === null) {
             $this->custom_data = array();
@@ -171,7 +168,7 @@ class Page extends Content
         $sql = "INSERT INTO `" . tbname("content") . "` (systemname, title, alternate_title, target, category,
 				content, language, menu_image, active, created, lastmodified, autor, 
 				`group_id`, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
-				html_file, theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden) VALUES (";
+				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden) VALUES (";
         
         $sql .= "'" . DB::escapeValue($this->systemname) . "',";
         $sql .= "'" . DB::escapeValue($this->title) . "',";
@@ -215,13 +212,7 @@ class Page extends Content
         } else {
             $sql .= intval($this->deleted_at) . ",";
         }
-        
-        if ($this->html_file === null) {
-            $sql .= " NULL ,";
-        } else {
-            $sql .= "'" . DB::escapeValue($this->html_file) . "',";
-        }
-        
+                
         if ($this->theme === null) {
             $sql .= " NULL ,";
         } else {
@@ -303,12 +294,6 @@ class Page extends Content
             $sql .= "deleted_at=NULL ,";
         } else {
             $sql .= "deleted_at=" . intval($this->deleted_at) . ",";
-        }
-        
-        if ($this->html_file === null) {
-            $sql .= "html_file=NULL ,";
-        } else {
-            $sql .= "html_file='" . DB::escapeValue($this->html_file) . "',";
         }
         
         if ($this->theme === null) {

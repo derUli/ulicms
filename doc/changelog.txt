@@ -21,6 +21,7 @@ Bugfixes:
 * Speichern einer Liste schlug fehl (SQL-Fehler), wenn man bei "Eigenschaften der Liste" als Sprache "Alle" ausgewählt hat.
 * Erst CKEditor und dann die weiteren scripts einbinden, da es bei CodeMirror auf mobilen Geräten zu Konflikten mit dem CKEditor kam
 * Wenn man über PHPMailer eine Mail versendet und im Content-Type ein Charset angibt, wird die Mail nun nicht mehr als Plain Text Mail versandt
+* Fehler beim Ausführen der Migrations "Commands out of sync; you can't run this command now"
 
 ===== Neues in UliCMS 2018.3.5 =====
 

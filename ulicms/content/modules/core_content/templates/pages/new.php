@@ -561,8 +561,7 @@ function openArticleImageSelectWindow(field) {
 			<?php
     }
     ?>
-		</select> <br /> <br /> <strong><?php translate("html_file");?>
-		</strong> <br /> <input type="text" name="html_file" value="">
+		</select>
 		</div>
 		<br /> <strong><?php translate("visible_for");?>
 		</strong><br /> <select name="access[]" size=4 multiple>

@@ -22,7 +22,6 @@ class PageController extends Controller
             $page_content = Database::escapeValue($page_content);
             $category = intval($_POST["category"]);
             $redirection = db_escape($_POST["redirection"]);
-            $html_file = db_escape($_POST["html_file"]);
             $menu = db_escape($_POST["menu"]);
             $position = (int) $_POST["position"];
             $menu_image = db_escape($_POST["menu_image"]);
@@ -100,7 +99,7 @@ class PageController extends Controller
             do_event("before_create_page");
             db_query("INSERT INTO " . tbname("content") . " (systemname, title, content, parent, active, created, lastmodified, autor, `group_id`,
   redirection,menu,position,
-  access, meta_description, meta_keywords, language, target, category, `html_file`, `alternate_title`, `menu_image`, `custom_data`, `theme`,
+  access, meta_description, meta_keywords, language, target, category, `alternate_title`, `menu_image`, `custom_data`, `theme`,
   `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`,
 				`article_date`, `article_image`, `excerpt`, `hidden`,
 				`only_admins_can_edit`, `only_group_can_edit`, `only_owner_can_edit`, `only_others_can_edit`,
@@ -108,7 +107,7 @@ class PageController extends Controller
 					
   VALUES('$systemname','$page_title','$page_content',$parent, $activated," . time() . ", " . time() . "," . $_SESSION["login_id"] . "," . $_SESSION["group_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
-  '$language', '$target', '$category', '$html_file', '$alternate_title',
+  '$language', '$target', '$category', '$alternate_title',
   '$menu_image', '$custom_data', '$theme', '$og_title',
   '$og_description', '$og_type', '$og_image',
   '$type', $module, $video, $audio, '$text_position',
@@ -170,7 +169,7 @@ class PageController extends Controller
             
             $type = DefaultContentTypes::get($type);
             foreach ($type->customFields as $field) {
-			$field->name = "{$_POST['type']}_{$field->name}";
+                $field->name = "{$_POST['type']}_{$field->name}";
                 $value = null;
                 if (isset($_POST[$field->name])) {
                     $value = $_POST[$field->name];
@@ -208,7 +207,6 @@ class PageController extends Controller
         $redirection = db_escape($_POST["redirection"]);
         $menu = db_escape($_POST["menu"]);
         $position = (int) $_POST["position"];
-        $html_file = db_escape($_POST["html_file"]);
         
         $type = db_escape($_POST["type"]);
         if ($type == "node") {
@@ -291,7 +289,7 @@ class PageController extends Controller
         $link_to_language = StringHelper::isNotNullOrWhitespace(Request::getVar("link_to_language")) ? intval(Request::getVar("link_to_language")) : "NULL";
         
         do_event("before_edit_page");
-        $sql = "UPDATE " . tbname("content") . " SET `html_file` = '$html_file', systemname = '$systemname' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
+        $sql = "UPDATE " . tbname("content") . " SET systemname = '$systemname' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
 	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, `group_id` = $group_id, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
 	article_author_name='$article_author_name', article_author_email = '$article_author_email', article_image = '$article_image',  article_date = $article_date, excerpt = '$excerpt',
 	only_admins_can_edit = $only_admins_can_edit, `only_group_can_edit` = $only_group_can_edit,
@@ -351,7 +349,7 @@ class PageController extends Controller
         
         $type = DefaultContentTypes::get($type);
         foreach ($type->customFields as $field) {
-			$field->name = "{$_POST['type']}_{$field->name}";
+            $field->name = "{$_POST['type']}_{$field->name}";
             $value = null;
             if (isset($_POST[$field->name])) {
                 $value = $_POST[$field->name];
