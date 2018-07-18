@@ -17,5 +17,6 @@
 </div>
 </div>
 </div>
+<?php do_event("backend_footer");?>
 </body>
 </html>

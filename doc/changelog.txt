@@ -9,6 +9,9 @@ Neue API-Funktionen:
 * remove_prefix($text, $prefix)
 * is_home()
 
+Neue Events:
+* backend_footer
+
 Verbesserungen:
 * Keine Aufklapp-Animationen mehr, wenn man eine Seite zur Bearbeitung öffnet
 * Seitenverwaltung: Selten genutze Optionen im Tab "Sonstiges" zusammengefasst, Klonen-Funktion ist vorerst deaktiviert.
