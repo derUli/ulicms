@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 2018.3.6 =====
+===== Neues in UliCMS 2018.3.6 =====
 
 Neue Features:
 * Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezeigt werden sollen
@@ -25,6 +25,9 @@ Bugfixes:
 * Erst CKEditor und dann die weiteren scripts einbinden, da es bei CodeMirror auf mobilen Geräten zu Konflikten mit dem CKEditor kam
 * Wenn man über PHPMailer eine Mail versendet und im Content-Type ein Charset angibt, wird die Mail nun nicht mehr als Plain Text Mail versandt
 * Fehler beim Ausführen der Migrations "Commands out of sync; you can't run this command now"
+
+Entfernte Funktionen:
+* Option "HTML-Datei als Inhalt" entfernt
 
 ===== Neues in UliCMS 2018.3.5 =====
 
