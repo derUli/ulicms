@@ -1,0 +1,10 @@
+{
+	"version": "1.0",
+	"source": "extend",
+	"embed": false,
+	"shy": false,
+	"main_class": "BotTrapController",
+	"controllers": {
+		"BotTrapController": "controllers/BotTrapController.php"
+	}
+}
