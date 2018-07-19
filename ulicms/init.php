@@ -149,6 +149,11 @@ if (php_sapi_name() != "cli") {
     set_exception_handler('exception_handler');
 }
 
+// Backwards compatiblity for modules using the old config class name
+if (class_exists("CMSConfig") and ! class_exists("config")) {
+    class_alias("CMSConfig", "config");
+}
+
 global $config;
 $config = new CMSConfig();
 
@@ -487,9 +492,4 @@ session_name(Settings::get("session_name"));
 // and replaced it with \PHPUnit\Framework\TestCase
 if (! class_exists('\PHPUnit_Framework_TestCase') && class_exists('\PHPUnit\Framework\TestCase')) {
     class_alias('\PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
-}
-
-// Backwards compatiblity for modules using the old config class name
-if (class_exists("CMSConfig") and ! class_exists("config")) {
-    class_alias("CMSConfig", "config");
 }
