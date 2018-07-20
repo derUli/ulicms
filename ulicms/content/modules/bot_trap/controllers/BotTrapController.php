@@ -12,7 +12,9 @@ class BotTrapController extends Controller
 
     public function beforeInit()
     {
-        Settings::register("trapped_bots", "");
+        if (Settings::get("trapped_bots") === false) {
+            Settings::register("trapped_bots", "");
+        }
         $trappedBots = trim(Settings::get("trapped_bots"));
         $trappedBotsArray = Settings::mappingStringToArray($trappedBots);
         $ip = get_ip();
@@ -24,7 +26,6 @@ class BotTrapController extends Controller
         }
         
         if (Request::getVar("trap_me")) {
-            
             $trappedBots .= "\n";
             $trappedBots .= get_ip() . "=>" . get_useragent();
             Settings::set("trapped_bots", trim($trappedBots));
