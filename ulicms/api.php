@@ -1,5 +1,21 @@
 <?php
 
+function var_dump_str()
+{
+    $argc = func_num_args();
+    $argv = func_get_args();
+
+    if ($argc > 0) {
+        ob_start();
+        call_user_func_array('var_dump', $argv);
+        $result = ob_get_contents();
+        ob_end_clean();
+        return $result;
+    }
+
+    return '';
+}
+
 function remove_prefix($text, $prefix) {
     if(0 === strpos($text, $prefix))
         $text = substr($text, strlen($prefix));

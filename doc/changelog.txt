@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3.6 =====
+﻿===== Neues in UliCMS 2018.3.6 =====
 
 Neue Features:
 * Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezeigt werden sollen
@@ -8,6 +8,7 @@ Neue Features:
 Neue API-Funktionen:
 * remove_prefix($text, $prefix)
 * is_home()
+* var_dump_str()
 
 Neue Events:
 * backend_footer
