@@ -1,15 +1,26 @@
 <?php
 // the config class has a new name
-if (is_file("cms-config.php") and ! is_file("CMSConfig.php")) {
+$configFile = "CMSConfig.php";
+
+if (is_file("cms-config.php") and ! is_file($configFile)) {
     // update config file
     $content = file_get_contents("cms-config.php");
     $content = str_replace("class config", "class CMSConfig", $content);
     file_put_contents("cms-config.php", $content);
     // rename config file
-    rename("cms-config.php", "CMSConfig.php");
+    rename("cms-config.php", $configFile);
 }
 
 include_once "init.php";
+
+if (is_writable($configFile)) {
+    $configContent = file_get_contents($configFile);
+    if (str_contains('var $', $configContent)) {
+        $configContent = str_ireplace('var $', 'public $', $configContent);
+        file_put_contents($configFile, $configContent);
+    }
+}
+
 @set_time_limit(0);
 
 Database::query("ALTER TABLE `{prefix}users` DROP COLUMN `avatar_file`", true);
