@@ -52,5 +52,9 @@ if (Settings::get("email_mode") === "pear_mail") {
 $pkg = new PackageManager();
 $pkg->truncateInstalledPatches();
 
+// The line below will be uncommented by the mk-upgrade-package.py deploy script
+// The script will delete itself after execution.
 // @unlink ("update.php");
-Request::redirect("admin/");
+
+// Redirect to Admin backend after running the update script
+Response::redirect("admin/");
