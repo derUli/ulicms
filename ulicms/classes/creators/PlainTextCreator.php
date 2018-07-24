@@ -1,8 +1,8 @@
 <?php
 class PlainTextCreator {
-	var $target_file = null;
-	var $content = null;
-	var $title = null;
+	public $target_file = null;
+	public $content = null;
+	public $title = null;
 	public function __construct() {
 		ob_start ();
 		echo get_title ();

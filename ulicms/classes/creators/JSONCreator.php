@@ -3,11 +3,11 @@
 class JSONCreator
 {
 
-    var $target_file = null;
+    public $target_file = null;
 
-    var $content = null;
+    public $content = null;
 
-    var $title = null;
+    public $title = null;
 
     public function __construct()
     {
