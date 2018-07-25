@@ -4,7 +4,7 @@ function var_dump_str()
 {
     $argc = func_num_args();
     $argv = func_get_args();
-
+    
     if ($argc > 0) {
         ob_start();
         call_user_func_array('var_dump', $argv);
@@ -12,14 +12,15 @@ function var_dump_str()
         ob_end_clean();
         return $result;
     }
-
+    
     return '';
 }
 
-function remove_prefix($text, $prefix) {
-    if(0 === strpos($text, $prefix))
+function remove_prefix($text, $prefix)
+{
+    if (0 === strpos($text, $prefix))
         $text = substr($text, strlen($prefix));
-        return $text;
+    return $text;
 }
 
 // replacement for the each() function which is deprecated since PHP 7.2.0
@@ -521,7 +522,6 @@ function get_available_post_types()
 }
 
 // Schriftgrößen zurückgeben
-// @TODO : Filter implementieren
 function getFontSizes()
 {
     global $sizes;
@@ -530,6 +530,8 @@ function getFontSizes()
         $sizes[] = $i . "px";
     }
     do_event("custom_font_sizes");
+    
+    $sizes = apply_filter($sizes, "font_sizes");
     return $sizes;
 }
 

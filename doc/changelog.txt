@@ -12,6 +12,9 @@ Neue API-Funktionen:
 * is_home()
 * var_dump_str()
 
++ Neue Filter:
+* font_sizes
+
 Neue Events:
 * backend_footer
 
