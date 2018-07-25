@@ -77,6 +77,10 @@ class Model
             throw new InvalidArgumentException("Required field not filled");
         }
         $isXyzFunction = "is_" . $type;
+        // if it's null and not required it's ok
+        if ($type === null) {
+            return;
+        }
         if (function_exists($isXyzFunction) and ! $isXyzFunction($value)) {
             throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
         } else if (class_exists($type) and $value instanceof $type) {
