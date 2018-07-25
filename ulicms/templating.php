@@ -542,9 +542,9 @@ function logo()
     Template::logo();
 }
 
-function year()
+function year($format = "Y")
 {
-    Template::year();
+    Template::year($format);
 }
 
 function homepage_owner()

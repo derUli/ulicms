@@ -1505,7 +1505,7 @@ function containsModule($page = null, $module = false)
 // API-Aufruf zur Deinstallation eines Moduls
 // Ruft uninstall Script auf, falls vorhanden
 // Löscht anschließend den Ordner modules/$name
-// @TODO dies in die PackageManager Klasse verschieben
+// TODO: dies in die PackageManager Klasse verschieben
 function uninstall_module($name, $type = "module")
 {
     $acl = new ACL();
