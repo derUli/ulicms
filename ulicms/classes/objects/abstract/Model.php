@@ -56,23 +56,29 @@ class Model
         return $this->id;
     }
 
+    // bind values from associative array $values to class properties
     public function bindValues($values = array())
     {
         foreach ($values as $key => $value) {
             $camelCaseVar = ModuleHelper::underscoreToCamel($key);
             $method = "set" . ucfirst($camelCaseVar);
+            // if a setter method exists, call it
             if (method_exists($this, $method)) {
                 $this->$method($value);
+                // if there is a class property in snake_case set it
             } else if (isset($this->$value)) {
                 $this->value = $value;
+                // if there is a class property in camelcase set it
             } else if (isset($this->$camelCaseVar)) {
                 $this->$camelCaseVar = $value;
             }
         }
     }
 
+    // check if $value is a variable of $type
     public static function checkValueType($value, $type, $required = false)
     {
+        // if it's required and $value is null throw exception
         if ($required and $value === null) {
             throw new InvalidArgumentException("Required field not filled");
         }
