@@ -71,8 +71,11 @@ class Model
         }
     }
 
-    public static function checkValueType($value, $type)
+    public static function checkValueType($value, $type, $required = false)
     {
+        if ($required and $value === null) {
+            throw new InvalidArgumentException("Required field not filled");
+        }
         $isXyzFunction = "is_" . $type;
         if (function_exists($isXyzFunction) and ! $isXyzFunction($value)) {
             throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
