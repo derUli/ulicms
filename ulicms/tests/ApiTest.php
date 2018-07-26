@@ -123,4 +123,13 @@ class ApiTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(is_numeric_array(42));
         $this->assertFalse(is_numeric_array(9.1));
     }
+
+    public function testVarIsType()
+    {
+        $this->assertTrue(var_is_type(123, "numeric", true));
+        $this->assertTrue(var_is_type(null, "numeric", false));
+        $this->assertFalse(var_is_type(null, "numeric", true));
+        $this->assertFalse(var_is_type("", "numeric", true));
+        $this->assertTrue(var_is_type("", "numeric", false));
+    }
 }

@@ -12,6 +12,7 @@ Neue API-Funktionen:
 * is_home()
 * var_dump_str()
 * is_numeric_array($var)
+* var_is_type($var, $type, $required = false)
 
 Neue Filter:
 * font_sizes

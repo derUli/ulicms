@@ -13,6 +13,20 @@ function is_numeric_array($var)
     return true;
 }
 
+function var_is_type($var, $type, $required = false)
+{
+    $methodName = "is_{$type}";
+    
+    if ($var === null or $var === "") {
+        return ! $required;
+    }
+    
+    if (function_exists($methodName)) {
+        return $methodName($var);
+    }
+    return false;
+}
+
 function var_dump_str()
 {
     $argc = func_num_args();
