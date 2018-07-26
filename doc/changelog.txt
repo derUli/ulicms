@@ -11,8 +11,9 @@ Neue API-Funktionen:
 * remove_prefix($text, $prefix)
 * is_home()
 * var_dump_str()
+* is_numeric_array($var)
 
-+ Neue Filter:
+Neue Filter:
 * font_sizes
 
 Neue Events:

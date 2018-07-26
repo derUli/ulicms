@@ -1,5 +1,18 @@
 <?php
 
+function is_numeric_array($var)
+{
+    if (! is_array($var)) {
+        return false;
+    }
+    foreach ($var as $key => $value) {
+        if (! is_numeric($value)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 function var_dump_str()
 {
     $argc = func_num_args();
