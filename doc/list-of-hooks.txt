@@ -50,8 +50,9 @@ before_banner_delete
 after_banner_delete
 before_edit_banner
 after_edit_banner
-"before_create_page;
-add_hook ( "after_create_page
+before_create_page
+add_hook
+after_create_page
 before_edit_page
 after_edit_page
 before_undelete_page
@@ -119,3 +120,4 @@ before_session_start
 after_session_start
 after_jquery_include
 head
+backend_footer
