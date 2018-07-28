@@ -31,6 +31,7 @@ if (is_file ( $script )) {
 		echo "chmod +x \"{$script}\"\n";
 		exit ();
 	}
+	// execute the script with the given arguments and output it to the command line
 	passthru ( "\"" . $script . "\" $fullArgv" );
 	exit ();
 }
@@ -47,8 +48,8 @@ foreach ( $scripts as $script ) {
 }
 
 // Show some example usage commands
-
-echo "\nExamples:\n";
+echo "\n";
+echo "Examples:\n";
 echo "./" . basename ( __FILE__ ) . " sinfo themes\n";
 echo "./" . basename ( __FILE__ ) . " settings_get email\n";
 echo "./" . basename ( __FILE__ ) . ' settings_set foo "My Foobar"' . "\n";
