@@ -71,9 +71,6 @@ if ($acl->hasPermission ( "languages" )) {
 					<?php
 			} else {
 				?> <form
-					onsubmit="return confirm('<?php
-				echo str_ireplace ( "%name%", $language->getName (), get_translation ( "DELETE_LANGUAGE_REALLY" ) );
-				?>')"
 					action="<?php echo ModuleHelper::buildMethodCallUrl("LanguageController", "delete", "id=".$language->getID());?>"
 					class="delete-form" method="post">
 
@@ -90,4 +87,8 @@ if ($acl->hasPermission ( "languages" )) {
 } else {
 	noPerms ();
 }
-	
+
+$translation = new JSTranslation ( array (
+		"ask_for_delete" 
+) );
+$translation->render ();

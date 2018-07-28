@@ -1,26 +1,26 @@
 <?php
-$acl = new ACL();
-if (! is_admin() and ! $acl->hasPermission("categories")) {
-    noPerms();
+$acl = new ACL ();
+if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
+	noPerms ();
 } else {
-    include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
-    if (isset($_GET["order"]) and faster_in_array($_GET["order"], array(
-        "id",
-        "name",
-        "description",
-        "created",
-        "updated"
-    ))) {
-        $order = db_escape($_GET["order"]);
-    } else {
-        $order = "id";
-    }
-    
-    $categories = Categories::getAllCategories($order);
-    ?>
+	include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
+	if (isset ( $_GET ["order"] ) and faster_in_array ( $_GET ["order"], array (
+			"id",
+			"name",
+			"description",
+			"created",
+			"updated" 
+	) )) {
+		$order = db_escape ( $_GET ["order"] );
+	} else {
+		$order = "id";
+	}
+	
+	$categories = Categories::getAllCategories ( $order );
+	?>
 <?php
-    if (! isset($_GET["add"]) and ! isset($_GET["edit"]) and $acl->hasPermission("categories_create")) {
-        ?>
+	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] ) and $acl->hasPermission ( "categories_create" )) {
+		?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
@@ -32,11 +32,11 @@ if (! is_admin() and ! $acl->hasPermission("categories")) {
 </p>
 <p><?php BackendHelper::formatDatasetCount(count($categories));?></p>
 <?php
-    }
-    ?>
+	}
+	?>
 <?php
-    if (count($categories) > 0 and ! isset($_GET["add"]) and ! isset($_GET["edit"])) {
-        ?>
+	if (count ( $categories ) > 0 and ! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] )) {
+		?>
 <div class="scroll">
 	<table class="tablesorter">
 		<thead>
@@ -46,8 +46,8 @@ if (! is_admin() and ! $acl->hasPermission("categories")) {
 				<th style="min-width: 200px;"><?php translate("name");?></th>
 				<th style="min-width: 200px;" class="hide-on-mobile"><?php translate("description");?></th>
 				<?php
-        if ($acl->hasPermission("categories_edit")) {
-            ?>
+		if ($acl->hasPermission ( "categories_edit" )) {
+			?>
 			<td></td>
 				<td></td>
 			<?php }?>
@@ -56,86 +56,84 @@ if (! is_admin() and ! $acl->hasPermission("categories")) {
 		</thead>
 		<tbody>
 	<?php
-        
-        foreach ($categories as $category) {
-            ?>
+		
+		foreach ( $categories as $category ) {
+			?>
 		<tr id="dataset-<?php echo $category["id"];?>">
 				<td><?php
-            
-            echo $category["id"];
-            ?></td>
+			
+			echo $category ["id"];
+			?></td>
 				<td style="padding-right: 20px;"><?php
-            
-            echo real_htmlspecialchars($category["name"]);
-            ?></td>
+			
+			echo real_htmlspecialchars ( $category ["name"] );
+			?></td>
 				<td style="padding-right: 20px;" class="hide-on-mobile"><?php
-            
-            echo nl2br(real_htmlspecialchars($category["description"]));
-            ?></td>
+			
+			echo nl2br ( real_htmlspecialchars ( $category ["description"] ) );
+			?></td>
 			<?php
-            if ($acl->hasPermission("categories_edit")) {
-                ?>
+			if ($acl->hasPermission ( "categories_edit" )) {
+				?>
 			<td style="text-align: center;"><a
 					href="?action=categories&edit=<?php echo $category ["id"];?>"><img
 						src="gfx/edit.png" class="mobile-big-image"
 						alt="<?php translate("edit");?>"
 						title="<?php translate("edit");?>"></a></td>
 			<?php
-                
-                if ($category["id"] != 1) {
-                    ?>
-<!-- FIXME. "Wirklich löschen?" ist hart gecodet -->
+				
+				if ($category ["id"] != 1) {
+					?>
 				<td style="text-align: center;"><form
 						action="?sClass=CategoryController&sMethod=delete&del=<?php
-                    
-                    echo $category["id"];
-                    ?>"
-						method="post" onsubmit="return confirm('Wirklich Löschen?')"
-						class="delete-form"><?php csrf_token_html();?><input type="image"
-							class="mobile-big-image" src="gfx/delete.gif"
+					
+					echo $category ["id"];
+					?>"
+						method="post" class="delete-form"><?php csrf_token_html();?><input
+							type="image" class="mobile-big-image" src="gfx/delete.gif"
 							alt="<?php
-                    
-                    translate("delete");
-                    ?>"
+					
+					translate ( "delete" );
+					?>"
 							title="<?php
-                    
-                    translate("delete");
-                    ?>">
+					
+					translate ( "delete" );
+					?>">
 					</form></td>
 
 				<?php
-                } else {
-                    ?>
+				} else {
+					?>
 			<td style="text-align: center;"><a href="#"
 					onclick="alert('<?php translate("CANT_DELETE_CATEGORY_GENERAL");?>')"><img
 						class="mobile-big-image" src="gfx/delete.gif"
 						alt="<?php
-                    
-                    translate("delete");
-                    ?>"
+					
+					translate ( "delete" );
+					?>"
 						title="<?php
-                    
-                    translate("delete");
-                    ?>"> </a></td>
+					
+					translate ( "delete" );
+					?>"> </a></td>
 				<?php
-                }
-                ?>
+				}
+				?>
 <?php }?>
 		</tr>
 		<?php
-        }
-        ?>
+		}
+		?>
 	</tbody>
 	</table>
 </div>
 <?php
-        enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/categories.js"));
-        combinedScriptHtml();
-        ?>
+		enqueueScriptFile ( ModuleHelper::buildRessourcePath ( "core_content", "js/categories.js" ) );
+		combinedScriptHtml ();
+		?>
 <?php
-    } else if (isset($_GET["add"])) {
-        if ($acl->hasPermission("categories_create")) {
-            ?>
+	} else if (isset ( $_GET ["add"] )) {
+		if ($acl->hasPermission ( "categories_create" )) {
+			?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("categories");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
@@ -160,12 +158,12 @@ if (! is_admin() and ! $acl->hasPermission("categories")) {
 </form>
 
 <?php
-        } else {
-            noPerms();
-        }
-    } else if (isset($_GET["edit"])) {
-        if ($acl->hasPermission("categories_edit")) {
-            ?><p>
+		} else {
+			noPerms ();
+		}
+	} else if (isset ( $_GET ["edit"] )) {
+		if ($acl->hasPermission ( "categories_edit" )) {
+			?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("categories");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
@@ -177,26 +175,33 @@ if (! is_admin() and ! $acl->hasPermission("categories")) {
 	<strong><?php translate("name");?>*</strong> <input type="text"
 		name="name" required
 		value="<?php
-            
-            echo Categories::getCategoryById(intval($_GET["edit"]));
-            ?>">
+			
+			echo Categories::getCategoryById ( intval ( $_GET ["edit"] ) );
+			?>">
 </p>
 <p>
 
 	<strong><?php translate("description");?></strong> <br />
 	<textarea cols="50" name="description" rows="5" maxlength="255"><?php
-            echo htmlspecialchars(Categories::getCategoryDescriptionById(intval($_GET["edit"])));
-            ?></textarea>
+			echo htmlspecialchars ( Categories::getCategoryDescriptionById ( intval ( $_GET ["edit"] ) ) );
+			?></textarea>
 </p>
 <p>
 	<button type="submit" name="update" class="btn btn-primary"><?php
-            translate("save");
-            ?></button>
+			translate ( "save" );
+			?></button>
 </p>
 </form>
+
 <?php
-        } else {
-            noPerms();
-        }
-    }
+		} else {
+			noPerms ();
+		}
+	}
 }
+
+$translation = new JSTranslation ( array (
+		"ask_for_delete" 
+) );
+$translation->render ();
+?>
