@@ -22,6 +22,12 @@ $fullArgv = implode ( " ", $argv );
 $script = $rootDir . "/shell/" . basename ( $command ) . ".php";
 // if there is a script for this command execute it and passthru it's output to the command line
 if (is_file ( $script )) {
+	if (! defined ( 'PHP_WINDOWS_VERSION_MAJOR' ) and ! is_executable ( $script )) {
+		echo "Error: " . basename ( $script ) . " is not executable.\n\n";
+		echo "Please run this command to make the file executable:\n";
+		echo "chmod +x \"{$script}\"\n";
+		exit ();
+	}
 	passthru ( "php \"" . $script . "\" $fullArgv" );
 	exit ();
 }
@@ -31,12 +37,6 @@ echo "Usage:\n./" . basename ( __FILE__ ) . " [command] [arguments]\n\n";
 echo "Available commands:\n\n";
 
 $scripts = glob ( $rootDir . "/shell/*.php" );
-
-// if we are on Unix / Linux show only scripts which have the executable-bit set
-// Windows doesn't have an execute permission so we skip this on windows
-if (! defined ( 'PHP_WINDOWS_VERSION_MAJOR' )) {
-	$scripts = array_filter ( $scripts, "is_executable" );
-}
 
 foreach ( $scripts as $script ) {
 	$cmd = trim ( str_replace ( ".php", "", basename ( $script ) ) );
