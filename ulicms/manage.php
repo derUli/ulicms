@@ -9,16 +9,23 @@ if (! (php_sapi_name () === 'cli' or defined ( 'STDIN' ))) {
 
 $rootDir = dirname ( __FILE__ );
 
+// first element of $argv is always the name of this script
+// we don't need it, so remove it
 array_shift ( $argv );
 
+// remove the command (e.g. "sinfo") from the string and put it into a variable
 $command = array_shift ( $argv );
 
+// add quotes to the arguments
+// to prevent issues with spaces
 foreach ( $argv as $key => $value ) {
 	$argv [$key] = '"' . $value . '"';
 }
 
+// join all arguments to a string;
 $fullArgv = implode ( " ", $argv );
 
+// path to the given script file
 $script = $rootDir . "/shell/" . basename ( $command ) . ".php";
 
 // if there is a script for this command execute it and passthru it's output to the command line
@@ -31,11 +38,12 @@ if (is_file ( $script )) {
 		echo "chmod +x \"{$script}\"\n";
 		exit ();
 	}
-	// execute the script with the given arguments and output it to the command line
+	// execute the script with the given arguments and print its outputs to the command line
 	passthru ( "\"" . $script . "\" $fullArgv" );
 	exit ();
 }
 
+// Print usage help
 echo "Usage:\n./" . basename ( __FILE__ ) . " [command] [arguments]\n\n";
 
 echo "Available commands:\n\n";

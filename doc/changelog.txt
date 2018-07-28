@@ -3,6 +3,9 @@
 Neue Features:
 * Wrapper für Kommandozeilen-Scripts hinzugefügt "manage.php"
 
+Bugfixes:
+* Versionsnummern von Themes werden nun wieder angezeigt
+
 ===== Neues in UliCMS 2018.3.6 =====
 
 Neue Features:
