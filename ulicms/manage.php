@@ -20,6 +20,7 @@ foreach ( $argv as $key => $value ) {
 $fullArgv = implode ( " ", $argv );
 
 $script = $rootDir . "/shell/" . basename ( $command ) . ".php";
+
 // if there is a script for this command execute it and passthru it's output to the command line
 if (is_file ( $script )) {
 	// if we are are not on windows and the executable bit for the script file is not set
