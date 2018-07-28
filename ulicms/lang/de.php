@@ -245,7 +245,7 @@ define ( "TRANSLATION_FROM_FILESYSTEM", "Aus dem Dateisystem" );
 define ( "TRANSLATION_OTHER_PACKAGE_SOURCE", "Andere Paketquelle [URL]" );
 
 // Sprachen verwalten
-define ( "TRANSLATION_SHORTCODE", "Kürzel" );
+define ( "TRANSLATION_SHORTCODE", "Shortcode" );
 define ( "TRANSLATION_FULL_NAME", "Volle Bezeichnung" );
 define ( "TRANSLATION_ADD_LANGUAGE", "Sprache hinzufügen" );
 define ( "TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE", "Die Standardsprache kann nicht gelöscht werden." );
