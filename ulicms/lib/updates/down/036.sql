@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}content` add `html_file` varchar(255) DEFAULT NULL;

@@ -97,7 +97,7 @@ class Mailer {
 		}
 		$mailer->addAddress ( $to );
 		$mailer->Subject = $subject;
-		$mailer->isHTML ( isset ( $headersLower ["content-type"] ) and $headersLower ["content-type"] == "text/html" );
+		$mailer->isHTML ( isset ( $headersLower ["content-type"] ) and startsWith($headersLower ["content-type"], "text/html") );
 		$mailer->Body = $message;
 		
 		$mailer = apply_filter ( $mailer, "php_mailer_send" );

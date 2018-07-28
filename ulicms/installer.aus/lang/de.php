@@ -1,13 +1,14 @@
 <?php
 define ( "TRANSLATION_INSTALLATION", "Installation" );
 define ( "TRANSLATION_TITLE_STEP_1", "Sprache auswählen" );
-define ( "TRANSLATION_TITLE_STEP_2", "Dateiberechtigungen setzen" );
-define ( "TRANSLATION_TITLE_STEP_3", "Verbinden mit der Datenbank" );
-define ( "TRANSLATION_TITLE_STEP_4", "Administrator Account erstellen" );
-define ( "TRANSLATION_TITLE_STEP_5", "Optionale Komponenten auswählen" );
-define ( "TRANSLATION_TITLE_STEP_6", "Datenbank aufbauen" );
-define ( "TRANSLATION_TITLE_STEP_7", "Erstelle Konfigurationsdatei" );
-define ( "TRANSLATION_TITLE_STEP_8", "Installer Ordner löschen" );
+define ( "TRANSLATION_TITLE_STEP_2", "Lizenzbedingungen akzeptieren" );
+define ( "TRANSLATION_TITLE_STEP_3", "Dateiberechtigungen setzen" );
+define ( "TRANSLATION_TITLE_STEP_4", "Verbinden mit der Datenbank" );
+define ( "TRANSLATION_TITLE_STEP_5", "Administrator Account erstellen" );
+define ( "TRANSLATION_TITLE_STEP_6", "Optionale Komponenten auswählen" );
+define ( "TRANSLATION_TITLE_STEP_7", "Datenbank aufbauen" );
+define ( "TRANSLATION_TITLE_STEP_8", "Erstelle Konfigurationsdatei" );
+define ( "TRANSLATION_TITLE_STEP_9", "Installer Ordner löschen" );
 define ( "TRANSLATION_SELECT_LANGUAGE", "Bitte wählen Sie Ihre Sprache aus." );
 define ( "TRANSLATION_FOLLOW_INSTRUCTIONS", "Bitte folgen Sie den Anweisungen um UliCMS zu installieren" );
 define ( "TRANSLATION_CHMOD", "<p>Bitte setzen Sie die Berechtigungen der folgenden Dateien auf 0755.<br/>
@@ -41,3 +42,4 @@ define ( "TRANSLATION_LAST_STEP", "Dies ist der letzte Schritt der Installation.
 		Danach können Sie sich in UliCMS ausloggen..<br/><br/>
 		<a href=\"index.php?submit_form=LoginToBackend\">Gehe zur Anmeldung</a>" );
 define ( "TRANSLATION_ADD_FK", "Fremdschlüssel hinzufügen" );
+define("TRANSLATION_ACCEPT_LICNSE", "Lizenz akzeptieren");

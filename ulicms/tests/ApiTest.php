@@ -4,6 +4,12 @@ include_once Path::Resolve("ULICMS_ROOT/templating.php");
 class ApiTest extends PHPUnit_Framework_TestCase
 {
 
+    public function testRemovePrefix()
+    {
+        $this->assertEquals("my_bar", remove_prefix("foo_my_bar", "foo_"));
+        $this->assertEquals("my_foo_bar", remove_prefix("foo_my_foo_bar", "foo_"));
+    }
+
     public function testIsCrawler()
     {
         $pkg = new PackageManager();
@@ -94,5 +100,36 @@ class ApiTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_false($nothing));
         $this->assertTrue(is_false(false));
         $this->assertTrue(is_false(0));
+    }
+
+    public function testIsNumericArray()
+    {
+        $this->assertTrue(is_numeric_array(array(
+            "42",
+            1337,
+            0x539,
+            02471,
+            0b10100111001,
+            1337e0,
+            9.1
+        )));
+        $this->assertFalse(is_numeric_array(array(
+            "42",
+            "foo",
+            "not numeric",
+            1337
+        )));
+        $this->assertFalse(is_numeric_array("Not an array"));
+        $this->assertFalse(is_numeric_array(42));
+        $this->assertFalse(is_numeric_array(9.1));
+    }
+
+    public function testVarIsType()
+    {
+        $this->assertTrue(var_is_type(123, "numeric", true));
+        $this->assertTrue(var_is_type(null, "numeric", false));
+        $this->assertFalse(var_is_type(null, "numeric", true));
+        $this->assertFalse(var_is_type("", "numeric", true));
+        $this->assertTrue(var_is_type("", "numeric", false));
     }
 }

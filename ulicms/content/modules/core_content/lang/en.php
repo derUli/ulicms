@@ -5,3 +5,4 @@ define ( "TRANSLATION_WANNA_EMPTY_TRASH", "Would you like to empty the recycle b
 add_translation("reset_filters", "Reset filters");
 add_translation("helper_utils", "Helper Utils");
 add_translation("show_positions_in_menus", "Show positions in menus");
+add_translation("show_filters", "Show Filters");

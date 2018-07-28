@@ -152,7 +152,6 @@ define("TRANSLATION_LANGUAGE", "Language");
 define("TRANSLATION_EXTERNAL_REDIRECT", "external redirect");
 define("TRANSLATION_ADDITIONAL_SETTINGS", "additional options &gt;&gt;");
 define("TRANSLATION_MENU_IMAGE", "menu entry as image");
-define("TRANSLATION_HTML_FILE", "html file as content");
 define("TRANSLATION_META_DESCRIPTION", "Meta Description");
 define("TRANSLATION_META_KEYWORDS", "Meta Keywords");
 define("TRANSLATION_COMMENTS", "Comments");

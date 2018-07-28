@@ -5,9 +5,12 @@ class JSTranslation
 
     private $keys = array();
 
-    public function __construct($keys = array())
+    private $varName = "Translation";
+
+    public function __construct($keys = array(), $varName = "Translation")
     {
         $this->addKeys($keys);
+        $this->setVarName($varName);
     }
 
     public function addKey($name)
@@ -43,10 +46,20 @@ class JSTranslation
         return $this->keys;
     }
 
+    public function setVarName($val)
+    {
+        $this->varName = $val;
+    }
+
+    public function getVarName()
+    {
+        return $this->varName;
+    }
+
     public function getJS($wrap = "<script type=\"text/javascript\">{code}</script>")
     {
         $js = array(
-            "Translation = {};"
+            "{$this->varName} = {};"
         );
         foreach ($this->keys as $key) {
             if (startsWith($key, "TRANSLATION_")) {
@@ -56,7 +69,7 @@ class JSTranslation
             $key = strtoupper($key);
             $value = get_translation($key);
             $value = str_replace("\"", "\\\"", $value);
-            $line = "Translation." . $jsName . " = \"" . $value . "\";";
+            $line = "{$this->varName}." . $jsName . " = \"" . $value . "\";";
             $js[] = $line;
         }
         $jsString = implode("", $js);

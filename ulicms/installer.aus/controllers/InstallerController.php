@@ -10,8 +10,8 @@ class InstallerController
         if (isset($_REQUEST["step"]) and ! empty($_REQUEST["step"])) {
             $step = intval($_REQUEST["step"]);
         }
-        if ($step > 8) {
-            Request::redirect("index.php?step=8");
+        if ($step > 9) {
+            Request::redirect("index.php?step=9");
         }
         
         return $step;
@@ -88,7 +88,7 @@ class InstallerController
         $_SESSION["admin_email"] = $_POST["admin_email"];
         $_SESSION["admin_lastname"] = $_POST["admin_lastname"];
         $_SESSION["admin_firstname"] = $_POST["admin_firstname"];
-        header("Location: index.php?step=5");
+        header("Location: index.php?step=6");
     }
 
     public static function submitTryConnect()
@@ -235,7 +235,7 @@ class InstallerController
             $_SESSION["install_demodata"] = "";
         }
         
-        header("Location: index.php?step=6");
+        header("Location: index.php?step=7");
     }
 
     public static function SureRemoveDir($dir, $DeleteMe)

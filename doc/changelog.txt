@@ -1,8 +1,41 @@
-﻿===== Neues in UliCMS 2018.3.6 =====
+===== Neues in UliCMS 2018.3.6 =====
 
 Neue Features:
-* Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezegit werden sollen.
+* Es kann nun auf User-Ebene eingestellt werden, ob Positionen in Menüs angezeigt werden sollen
 * Neue Direktive "disable_functions" für Theme-Metadaten eingeführt
+* Seitenverwaltung: Filter können ein- und ausgeblendet werden
+* Bei JSTranslation kann nun der Name des Javascript-Objekts festgelegt werden
+* ModelBinder
+
+Neue API-Funktionen:
+* remove_prefix($text, $prefix)
+* is_home()
+* var_dump_str()
+* is_numeric_array($var)
+* var_is_type($var, $type, $required = false)
+
+Neue Filter:
+* font_sizes
+
+Neue Events:
+* backend_footer
+
+Verbesserungen:
+* Keine Aufklapp-Animationen mehr, wenn man eine Seite zur Bearbeitung öffnet
+* Seitenverwaltung: Selten genutze Optionen im Tab "Sonstiges" zusammengefasst, Klonen-Funktion ist vorerst deaktiviert.
+* Seitenverwaltung: Weitere Usability Verbesserungen
+* JSON-Serialisierungen werden vom System nun mit JSON_PRETTY_PRINT generiert
+
+Bugfixes:
+* Überschriften in die erlaubten HTML-Tags aufgenommen
+* Potentielle Sicherheitslücke in file_get_contents_wrapper behoben
+* Speichern einer Liste schlug fehl (SQL-Fehler), wenn man bei "Eigenschaften der Liste" als Sprache "Alle" ausgewählt hat.
+* Erst CKEditor und dann die weiteren scripts einbinden, da es bei CodeMirror auf mobilen Geräten zu Konflikten mit dem CKEditor kam
+* Wenn man über PHPMailer eine Mail versendet und im Content-Type ein Charset angibt, wird die Mail nun nicht mehr als Plain Text Mail versandt
+* Fehler beim Ausführen der Migrations "Commands out of sync; you can't run this command now"
+
+Entfernte Funktionen:
+* Option "HTML-Datei als Inhalt" entfernt
 
 ===== Neues in UliCMS 2018.3.5 =====
 

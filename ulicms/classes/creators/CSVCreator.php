@@ -1,8 +1,8 @@
 <?php
 class CSVCreator {
-	var $target_file = null;
-	var $content = null;
-	var $title = null;
+	public $target_file = null;
+	public $content = null;
+	public $title = null;
 	public function __construct() {
 		$this->title = get_title ();
 		ob_start ();

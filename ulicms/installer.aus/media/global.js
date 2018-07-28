@@ -22,7 +22,7 @@ $("form#database-login").on("submit", function(e) {
 	$.post("index.php?submit_form=TryConnect", data, function(text, status) {
 		$("#error-message").html(text);
 		if (text.length <= 0) {
-			location.replace("index.php?step=4")
+			location.replace("index.php?step=5")
 			return true;
 		} else {
 			$("#loading").hide();
@@ -44,7 +44,7 @@ function installNextDBScript() {
 		if (text.contains("<!--finish-->")) {
 			$("form#setup-database").html(text);
 			setTimeout(function() {
-				location.replace("index.php?step=7");
+				location.replace("index.php?step=8");
 			}, 500);
 		} else if (text.contains("<!--ok-->")) {
 			$("form#setup-database").html(text);
@@ -66,7 +66,7 @@ $("form#create-cms-config").on("submit", function(e) {
 	$("form#create-cms-config").html(progress_indicator_html);
 	$.post("index.php?submit_form=CreateConfig", function(text, status) {
 		if (text.contains("<!--ok-->")) {
-			location.replace("index.php?step=8");
+			location.replace("index.php?step=9");
 		} else {
 			$("form#create-cms-config").html(text);
 		}

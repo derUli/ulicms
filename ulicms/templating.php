@@ -438,7 +438,7 @@ function delete_custom_data($var = null, $page = null)
         $data = array();
     }
     
-    $json = json_encode($data);
+    $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     
     return db_query("UPDATE " . tbname("content") . " SET custom_data = '" . db_escape($json) . "' WHERE systemname='" . db_escape($page) . "'");
 }
@@ -454,7 +454,7 @@ function set_custom_data($var, $value, $page = null)
     }
     
     $data[$var] = $value;
-    $json = json_encode($data);
+    $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     
     return db_query("UPDATE " . tbname("content") . " SET custom_data = '" . db_escape($json) . "' WHERE systemname='" . db_escape($page) . "'");
 }
@@ -542,9 +542,9 @@ function logo()
     Template::logo();
 }
 
-function year()
+function year($format = "Y")
 {
-    Template::year();
+    Template::year($format);
 }
 
 function homepage_owner()
@@ -770,9 +770,14 @@ function get_requested_pagename()
     return $value;
 }
 
-function is_frontpage()
+function is_home()
 {
     return get_requested_pagename() === get_frontpage();
+}
+
+function is_frontpage()
+{
+    return is_home();
 }
 
 function is_200()
@@ -888,7 +893,7 @@ function get_menu($name = "top", $parent = null, $recursive = true, $order = "po
             // Show page positions in menu if user has the "pages_show_positions" permission.
             if (is_logged_in()) {
                 $acl = new ACL();
-                if ($acl->hasPermission("pages_show_positions") and Settings::get("user/". get_user_id() ."/show_positions")) {
+                if ($acl->hasPermission("pages_show_positions") and Settings::get("user/" . get_user_id() . "/show_positions")) {
                     $title .= " ({$row->position})";
                 }
             }

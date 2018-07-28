@@ -15,10 +15,15 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
     $types = get_available_post_types();
     
     ?>
-	<?php
+<div class="loadspinner">
+	<img src="gfx/loading.gif" alt="Loading...">
+</div>
+<?php
     echo ModuleHelper::buildMethodCallForm("PageController", "create", array(), "post", array(
         "name" => "newpageform",
-        "id" => "pageform"
+        "id" => "pageform",
+        "style" => "display:none",
+        "class" => "pageform"
     ));
     ?>
 <p>
@@ -150,6 +155,23 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
 	</select> <br /> <br />
 			</div>
 		</div>
+
+		<div class="typedep" id="tab-target">
+
+			<strong><?php
+    
+    translate("open_in");
+    ?>
+		</strong><br /> <select name="target" size=1>
+				<option value="_self">
+			<?php translate("target_self");?>
+			</option>
+				<option value="_blank">
+			<?php translate("target_blank");?>
+			</option>
+			</select><br/><br/>
+		</div>
+
 		<strong><?php translate("activated");?>
 	</strong><br /> <select name="activated" size=1
 			<?php if(!$pages_activate_own) echo "disabled";?>>
@@ -174,8 +196,29 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
 		<strong><?php translate("category");?>
 	</strong><br />
 	<?php echo Categories :: getHTMLSelect();?>
-	
-		</div>
+	<br /> <br /> <strong><?php translate("menu_image");?>
+		</strong><br />
+
+		<script type="text/javascript">
+function openMenuImageSelectWindow(field) {
+    window.KCFinder = {
+        callBack: function(url) {
+            field.value = url;
+            window.KCFinder = null;
+        }
+    };
+    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'menu_image',
+        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+        'resizable=1, scrollbars=0, width=800, height=600'
+    );
+}
+</script>
+		<input type="text" id="menu_image" name="menu_image"
+			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+			value="" style="cursor: pointer" /> <a href="#"
+			onclick="$('#menu_image').val('');return false;"><?php translate("clear");?>
+		</a>
+	</div>
 	<div class="typedep" id="tab-link" style="display: none;">
 		<h2 class="accordion-header"><?php translate("link_url");?></h2>
 
@@ -200,81 +243,7 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
 <?php }?>
 </select>
 		</div>
-	</div>
-	<div class="typedep" id="tab-menu-image">
-		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
 
-		<div class="accordion-content">
-			<strong><?php translate("menu_image");?>
-		</strong><br />
-
-			<script type="text/javascript">
-function openMenuImageSelectWindow(field) {
-    window.KCFinder = {
-        callBack: function(url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'menu_image',
-        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-        'resizable=1, scrollbars=0, width=800, height=600'
-    );
-}
-</script>
-			<input type="text" id="menu_image" name="menu_image"
-				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-				value="" style="cursor: pointer" /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?>
-		</a> <br /> <br /> <strong><?php translate("design");?></strong><br />
-			<select name="theme" size=1>
-				<option value="">
-				[
-				<?php translate("standard");?>
-				]
-			</option>
-			<?php
-    
-    foreach ($allThemes as $th) {
-        ?>
-			<option value="<?php
-        
-        echo $th;
-        ?>">
-			<?php
-        
-        echo $th;
-        ?></option>
-			<?php
-    }
-    ?>
-		</select> <br /> <br /> <strong><?php translate("html_file");?>
-		</strong> <br /> <input type="text" name="html_file" value="">
-		</div>
-	</div>
-	<h2 class="accordion-header"><?php translate("visibility");?></h2>
-
-	<div class="accordion-content">
-		<strong><?php translate("visible_for");?>
-		</strong><br /> <select name="access[]" size=4 multiple>
-			<option value="all" selected>
-			<?php translate("everyone");?>
-			</option>
-			<option value="registered">
-			<?php
-    
-    translate("registered_users");
-    ?>
-			</option>
-			<option value="mobile"><?php translate("mobile_devices");?></option>
-			<option value="desktop"><?php translate("desktop_computers");?></option>
-			<?php
-    while ($row = db_fetch_object($groups)) {
-        echo '<option value="' . $row->id . '">' . real_htmlspecialchars($row->name) . '</option>';
-    }
-    ?>
-
-		</select>
 	</div>
 	<div class="typedep" id="tab-metadata">
 
@@ -302,52 +271,10 @@ function openMenuImageSelectWindow(field) {
 					value="<?php echo date ( "Y-m-d\TH:i:s" );?>" step="any"> <br /> <strong><?php translate("excerpt");?></strong>
 				<textarea name="excerpt" id="excerpt" rows="5" cols="80"></textarea>
 			</div>
-		</div>
+			<div class="typedep" id="tab-og" style="display: none;">
+				<h3><?php translate("open_graph");?></h3>
 
-	</div>
-	<div id="custom_fields_container">
-		<?php
-    foreach (DefaultContentTypes::getAll() as $name => $type) {
-        $fields = $type->customFields;
-        if (count($fields) > 0) {
-            ?>
-		<div class="custom-field-tab" data-type="<?php echo $name;?>">
-			<h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name);?></h2>
-
-			<div class="accordion-content">
-		<?php foreach($fields as $field){?>
-		<?php echo $field->render(null);?>				
-		<?php }?>
-		</div>
-		</div>
-		<?php }?>
-		
-		<?php }?>
-		</div>
-	<div class="typedep" id="tab-target">
-		<h2 class="accordion-header"><?php translate("open_in");?></h2>
-
-		<div class="accordion-content">
-			<strong><?php
-    
-    translate("open_in");
-    ?>
-		</strong><br /> <select name="target" size=1>
-				<option value="_self">
-			<?php translate("target_self");?>
-			</option>
-				<option value="_blank">
-			<?php translate("target_blank");?>
-			</option>
-			</select>
-		</div>
-	</div>
-	<div class="typedep" id="tab-og" style="display: none;">
-		<h2 class="accordion-header"><?php translate("open_graph");?></h2>
-
-		<div class="accordion-content">
-			<p><?php translate("og_help");?></p>
-			<div style="margin-left: 20px;">
+				<p><?php translate("og_help");?></p>
 				<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title" value=""> <br /> <strong><?php translate("description");?>
 		</strong><br /> <input type="text" name="og_description" value=""> <br />
@@ -373,22 +300,33 @@ function openMenuImageSelectWindow(field) {
 					value="<?php echo htmlspecialchars($og_image);?>"
 					style="cursor: pointer" /> <a href="#"
 					onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
+
 			</div>
 		</div>
 	</div>
-	<div class="typedep" id="tab-cache-control" style="display: none;">
-		<h2 class="accordion-header"><?php translate("cache_control");?></h2>
+	<div id="custom_fields_container">
+		<?php
+    foreach (DefaultContentTypes::getAll() as $name => $type) {
+        $fields = $type->customFields;
+        if (count($fields) > 0) {
+            ?>
+		<div class="custom-field-tab" data-type="<?php echo $name;?>">
+			<h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name);?></h2>
 
-		<div class="accordion-content">
-			<strong><?php translate("cache_control");?></strong> <br /> <select
-				name="cache_control">
-				<option value="auto" selected><?php translate("auto");?></option>
-				<option value="force"><?php translate("force");?></option>
-				<option value="no_cache"><?php translate("no_cache");?></option>
-			</select>
+			<div class="accordion-content">
+		<?php
+            
+            foreach ($fields as $field) {
+                $field->name = "{$name}_{$field->name}";
+                ?>
+		<?php echo $field->render(null);?>				
+		<?php }?>
 		</div>
-	</div>
-
+		</div>
+		<?php }?>
+		
+		<?php }?>
+		</div>
 	<div class="typedep" id="tab-list" style="display: none">
 		<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
@@ -587,16 +525,72 @@ function openArticleImageSelectWindow(field) {
 				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 		</div>
 	</div>
-	<div class="typedep" id="custom_data_json">
+	<h2 class="accordion-header"><?php translate("other");?></h2>
+
+	<div class="accordion-content">
+
+		<div class="typedep" id="tab-cache-control" style="display: none;">
+
+			<strong><?php translate("cache_control");?></strong> <br /> <select
+				name="cache_control">
+				<option value="auto" selected><?php translate("auto");?></option>
+				<option value="force"><?php translate("force");?></option>
+				<option value="no_cache"><?php translate("no_cache");?></option>
+			</select> <br /> <br />
+		</div>
+		<div class="typedep" id="tab-menu-image">
+			<strong><?php translate("design");?></strong><br /> <select
+				name="theme" size=1>
+				<option value="">
+				[
+				<?php translate("standard");?>
+				]
+			</option>
+			<?php
+    
+    foreach ($allThemes as $th) {
+        ?>
+			<option value="<?php
+        
+        echo $th;
+        ?>">
+			<?php
+        
+        echo $th;
+        ?></option>
+			<?php
+    }
+    ?>
+		</select>
+		</div>
+		<br /> <strong><?php translate("visible_for");?>
+		</strong><br /> <select name="access[]" size=4 multiple>
+			<option value="all" selected>
+			<?php translate("everyone");?>
+			</option>
+			<option value="registered">
+			<?php
+    
+    translate("registered_users");
+    ?>
+			</option>
+			<option value="mobile"><?php translate("mobile_devices");?></option>
+			<option value="desktop"><?php translate("desktop_computers");?></option>
+			<?php
+    while ($row = db_fetch_object($groups)) {
+        echo '<option value="' . $row->id . '">' . real_htmlspecialchars($row->name) . '</option>';
+    }
+    ?>
+
+		</select> <br /> <br />
+
+		<div class="typedep" id="custom_data_json">
+			
 		<?php do_event("before_custom_data_json");?>
-		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
-
-		<div class="accordion-content">
-
-
-			<textarea name="custom_data" style="width: 100%; height: 200px;"
-				cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
-
+			<strong><?php translate("custom_data_json");?>
+				<textarea name="custom_data" style="width: 100%; height: 200px;"
+					cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
+		
 		</div>
 	</div>
 </div>

@@ -191,63 +191,52 @@ if ($cacheAdapter and $cacheAdapter->get($uid)) {
 if ($cacheAdapter or Settings::get("minify_html")) {
     ob_start();
 }
+$top_files = array(
+    "type/" . get_type() . "/oben.php",
+    "type/" . get_type() . "/top.php",
+    "oben.php",
+    "top.php"
+);
+foreach ($top_files as $file) {
+    $file = getTemplateDirPath($theme, true) . $file;
+    if (is_file($file)) {
+        require $file;
+        break;
+    }
+}
+do_event("before_content");
+$text_position = get_text_position();
 
-$html_file = page_has_html_file(get_requested_pagename());
+if ($text_position == "after") {
+    Template::outputContentElement();
+}
 
-if ($html_file) {
-    if (is_file($html_file)) {
-        echo file_get_contents($html_file);
-    } else {
-        echo 'File Not Found';
-    }
-} else {
-    $top_files = array(
-        "type/" . get_type() . "/oben.php",
-        "type/" . get_type() . "/top.php",
-        "oben.php",
-        "top.php"
-    );
-    foreach ($top_files as $file) {
-        $file = getTemplateDirPath($theme, true) . $file;
-        if (is_file($file)) {
-            require $file;
-            break;
-        }
-    }
-    do_event("before_content");
-    $text_position = get_text_position();
-    
-    if ($text_position == "after") {
-        Template::outputContentElement();
-    }
-    
-    $disable_functions = getThemeMeta(get_theme(), "disable_functions");
-    
-    if (! (is_array($disable_functions) and faster_in_array("output_content", $disable_functions)))
-        content();
-    
-    if ($text_position == "before") {
-        Template::outputContentElement();
-    }
-    
-    do_event("after_content");
-    
-    do_event("before_edit_button");
-    
-    edit_button();
-    do_event("after_edit_button");
-    $bottom_files = array(
-        "type/" . get_type() . "/unten.php",
-        "type/" . get_type() . "/bottom.php",
-        "unten.php",
-        "bottom.php"
-    );
-    foreach ($bottom_files as $file) {
-        $file = getTemplateDirPath($theme, true) . $file;
-        if (is_file($file)) {
-            require $file;
-            break;
-        }
+$disable_functions = getThemeMeta(get_theme(), "disable_functions");
+
+if (! (is_array($disable_functions) and faster_in_array("output_content", $disable_functions)))
+    content();
+
+if ($text_position == "before") {
+    Template::outputContentElement();
+}
+
+do_event("after_content");
+
+do_event("before_edit_button");
+
+edit_button();
+do_event("after_edit_button");
+$bottom_files = array(
+    "type/" . get_type() . "/unten.php",
+    "type/" . get_type() . "/bottom.php",
+    "unten.php",
+    "bottom.php"
+);
+foreach ($bottom_files as $file) {
+    $file = getTemplateDirPath($theme, true) . $file;
+    if (is_file($file)) {
+        require $file;
+        break;
     }
 }
 

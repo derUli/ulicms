@@ -66,6 +66,18 @@ switch ($ajax_cmd) {
 			Settings::set($settingsName, "1");
 	}
 	break;
+	case "toggle_show_filters":
+		$acl = new ACL();
+		if(!$acl->hasPermission("pages")){
+			TextResult("Access Denied", HttpStatusCode::FORBIDDEN);
+		}
+		$settingsName = "user/". get_user_id() ."/show_filters";
+		if(Settings::get( $settingsName )){
+			Settings::delete($settingsName);
+		} else {
+			Settings::set($settingsName, "1");
+	}
+	break;
     case "getContentTypes":
         JSONResult(DefaultContentTypes::getAll());
         break;

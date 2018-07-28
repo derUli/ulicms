@@ -1,0 +1,2 @@
+<?php
+echo TRANSLATION_LAST_STEP;

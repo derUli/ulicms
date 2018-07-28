@@ -82,9 +82,14 @@ if ($acl->hasPermission("pages")) {
             noPerms();
         } else {
             ?>
-		<?php
+<div class="loadspinner">
+	<img src="gfx/loading.gif" alt="Loading...">
+</div>
+<?php
             echo ModuleHelper::buildMethodCallForm("PageController", "edit", array(), "post", array(
-                "id" => "pageform-edit"
+                "id" => "pageform-edit",
+                "style" => "display:none",
+                "class" => "pageform"
             ));
             ?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("pages");?>"
@@ -202,7 +207,8 @@ if ($acl->hasPermission("pages")) {
 			<br /> <br /> <strong><?php translate("position");?> </strong> <span
 				style="cursor: help;" onclick="$('div#position_help').slideToggle()">[?]</span><br />
 			<input type="number" name="position" required="required" min="0"
-				step="1" value="<?php
+				step="1"
+				value="<?php
             
             echo $row->position;
             ?>">
@@ -227,7 +233,8 @@ if ($acl->hasPermission("pages")) {
             
             foreach ($pages as $key => $page) {
                 ?>
-		<option value="<?php
+		<option
+						value="<?php
                 
                 echo $page["id"];
                 ?>"
@@ -276,6 +283,31 @@ if ($acl->hasPermission("pages")) {
 		<?php translate("disabled");?>
 		</option>
 		</select> <br /> <br />
+
+		<div class="typedep" id="tab-target">
+			<strong><?php translate("open_in");?></strong><br /> <select
+				name="target" size=1>
+				<option
+					<?php
+            
+            if ($row->target == "_self") {
+                echo 'selected="selected" ';
+            }
+            ?>
+					value="_self">
+				<?php translate("target_self");?></option>
+				<option
+					<?php
+            
+            if ($row->target == "_blank") {
+                echo 'selected="selected" ';
+            }
+            ?>
+					value="_blank">
+				<?php translate ( "target_blank" );?></option>
+			</select> <br /> <br />
+		</div>
+
 		<div class="typedep" id="hidden-attrib">
 			<strong><?php translate("hidden");?>
 	</strong><br /> <select name="hidden" size="1"><option value="1"
@@ -289,8 +321,31 @@ if ($acl->hasPermission("pages")) {
 		</div>
 		<strong><?php translate("category");?> </strong><br />
 	<?php echo Categories::getHTMLSelect ( $row->category );?>
+<br /> <br /> <strong><?php translate("menu_image");?> </strong><br />
+		<script type="text/javascript">
+function openMenuImageSelectWindow(field) {
+    window.KCFinder = {
+        callBack: function(url) {
+            field.value = url;
+            window.KCFinder = null;
+        }
+    };
+    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'menu_image',
+        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+        'resizable=1, scrollbars=0, width=800, height=600'
+    );
+}
+</script>
+		<input type="text" id="menu_image" name="menu_image"
+			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
+			value="<?php
+            
+            echo $row->menu_image;
+            ?>"
+			style="cursor: pointer" /> <a href="#"
+			onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
 
-		</div>
+	</div>
 	<div class="typedep" id="tab-link">
 		<h2 class="accordion-header"><?php translate("link_url");?></h2>
 
@@ -321,110 +376,6 @@ if ($acl->hasPermission("pages")) {
 <?php }?>
 </select>
 		</div>
-	</div>
-	<div class="typedep" id="tab-menu-image">
-		<h2 class="accordion-header"><?php translate("menu_image");?> &amp; <?php translate("design");?></h2>
-
-		<div class="accordion-content">
-			<strong><?php translate("menu_image");?> </strong><br />
-			<script type="text/javascript">
-function openMenuImageSelectWindow(field) {
-    window.KCFinder = {
-        callBack: function(url) {
-            field.value = url;
-            window.KCFinder = null;
-        }
-    };
-    window.open('kcfinder/browse.php?type=images&dir=images&lang=<?php echo htmlspecialchars(getSystemLanguage());?>', 'menu_image',
-        'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
-        'resizable=1, scrollbars=0, width=800, height=600'
-    );
-}
-</script>
-			<input type="text" id="menu_image" name="menu_image"
-				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
-				value="<?php
-            
-            echo $row->menu_image;
-            ?>"
-				style="cursor: pointer" /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
-			<br /> <br /> <strong><?php translate("design");?></strong><br /> <select
-				name="theme" size=1>
-				<option value="">
-				[
-				<?php translate("standard");?>
-				]
-			</option>
-			<?php
-            
-            foreach ($allThemes as $th) {
-                ?>
-			<option value="<?php
-                
-                echo $th;
-                ?>"
-					<?php
-                
-                if (! is_null($row->theme) and ! empty($row->theme) and $row->theme == $th)
-                    echo "selected";
-                ?>>
-				<?php
-                
-                echo $th;
-                ?>
-			</option>
-			<?php
-            }
-            ?>
-		</select> <br /> <br /> <strong><?php translate("html_file");?></strong>
-			<br /> <input type="text" name="html_file"
-				value="<?php
-            
-            echo $row->html_file;
-            ?>">
-		</div>
-	</div>
-	<h2 class="accordion-header"><?php translate("visibility");?></h2>
-
-	<div class="accordion-content">
-		<strong><?php translate("visible_for");?> </strong><br />
-			<?php
-            
-            $access = explode(",", $row->access);
-            ?>
-		<select name="access[]" size=4 multiple>
-			<option value="all"
-				<?php
-            
-            if (faster_in_array("all", $access)) {
-                echo " selected";
-            }
-            ?>>
-				<?php translate("everyone");?></option>
-			<option value="registered"
-				<?php
-            if (faster_in_array("registered", $access)) {
-                echo " selected";
-            }
-            ?>>
-				<?php translate("registered_users");?></option>
-
-
-			<option value="mobile"
-				<?php if(faster_in_array("mobile", $access)) echo " selected"?>><?php translate("mobile_devices");?></option>
-			<option value="desktop"
-				<?php if(faster_in_array("desktop", $access)) echo " selected"?>><?php translate("desktop_computers");?></option>
-				<?php
-            while ($row2 = db_fetch_object($groups)) {
-                if (faster_in_array(strval($row2->id), $access)) {
-                    echo '<option value="' . $row2->id . '" selected>' . real_htmlspecialchars($row2->name) . '</option>';
-                } else {
-                    echo '<option value="' . $row2->id . '">' . real_htmlspecialchars($row2->name) . '</option>';
-                }
-            }
-            ?>
-		</select>
 	</div>
 
 	<div class="typedep" id="tab-metadata" style="display: none">
@@ -467,96 +418,11 @@ function openMenuImageSelectWindow(field) {
 					step=any> <br /> <br /> <strong><?php translate("excerpt");?></strong>
 				<textarea name="excerpt" id="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt);?></textarea>
 			</div>
-		</div>
-	</div>
+			<div class="typedep" id="tab-og" style="display: none">
+				<h3><?php translate("open_graph");?></h3>
 
 
-	<div class="typedep" id="custom_fields_container">
-		<?php
-            foreach (DefaultContentTypes::getAll() as $name => $type) {
-                $fields = $type->customFields;
-                if (count($fields) > 0) {
-                    ?>
-		<div class="custom-field-tab" data-type="<?php echo $name;?>">
-			<h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name);?></h2>
-
-			<div class="accordion-content">
-		<?php foreach($fields as $field){?>
-			<?php echo $field->render(CustomFields::get($field->name, $row->id));?>
-		<?php }?>
-		</div>
-		</div>
-		<?php }?>
-
-		<?php }?>
-		</div>
-
-	<div class="typedep" id="tab-target">
-		<h2 class="accordion-header"><?php translate("open_in");?></h2>
-
-		<div class="accordion-content">
-			<strong><?php translate("open_in");?></strong><br /> <select
-				name="target" size=1>
-				<option
-					<?php
-            
-            if ($row->target == "_self") {
-                echo 'selected="selected" ';
-            }
-            ?>
-					value="_self">
-				<?php translate("target_self");?></option>
-				<option
-					<?php
-            
-            if ($row->target == "_blank") {
-                echo 'selected="selected" ';
-            }
-            ?>
-					value="_blank">
-				<?php translate ( "target_blank" );?></option>
-			</select>
-		</div>
-	</div>
-	<div class="typedep" id="tab-cache-control" style="display: none;">
-		<h2 class="accordion-header"><?php translate("cache_control");?></h2>
-
-		<div class="accordion-content">
-			<strong><?php translate("cache_control");?></strong> <br /> <select
-				name="cache_control">
-				<option value="auto"
-					<?php
-            
-            if ($row->cache_control == "auto") {
-                echo "selected";
-            }
-            ?>><?php translate("auto");?></option>
-				<option value="force"
-					<?php
-            
-            if ($row->cache_control == "force") {
-                echo "selected";
-            }
-            ?>><?php translate("force");?></option>
-				<option value="no_cache"
-					<?php
-            
-            if ($row->cache_control == "no_cache") {
-                echo "selected";
-            }
-            ?>><?php translate("no_cache");?></option>
-			</select>
-		</div>
-	</div>
-
-
-	<div class="typedep" id="tab-og" style="display: none">
-		<h2 class="accordion-header"><?php translate("open_graph");?></h2>
-
-		<div class="accordion-content">
-
-			<p><?php translate("og_help");?></p>
-			<div style="margin-left: 20px;">
+				<p><?php translate("og_help");?></p>
 				<strong><?php translate("title");?>
 		</strong><br /> <input type="text" name="og_title"
 					value="<?php
@@ -604,11 +470,33 @@ function openMenuImageSelectWindow(field) {
                 ?>" />
 				</div>
 <?php }?>
-				</div>
+	</div>
 		</div>
+
 	</div>
 
+	<div class="typedep" id="custom_fields_container">
+		<?php
+            foreach (DefaultContentTypes::getAll() as $name => $type) {
+                $fields = $type->customFields;
+                if (count($fields) > 0) {
+                    ?>
+		<div class="custom-field-tab" data-type="<?php echo $name;?>">
+			<h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name);?></h2>
 
+			<div class="accordion-content">
+		<?php
+                    
+                    foreach ($fields as $field) {
+                        ?>
+			<?php echo $field->render(CustomFields::get($field->name, $row->id));?>
+		<?php }?>
+		</div>
+		</div>
+		<?php }?>
+
+		<?php }?>
+		</div>
 	<div class="typedep list-show" id="tab-list">
 		<h2 class="accordion-header"><?php translate("list_properties");?></h2>
 
@@ -707,7 +595,8 @@ function openMenuImageSelectWindow(field) {
             
             foreach ($pages as $key => $page) {
                 ?>
-		<option value="<?php
+		<option
+					value="<?php
                 
                 echo $page["id"];
                 ?>"
@@ -866,68 +755,164 @@ function openArticleImageSelectWindow(field) {
 				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 		</div>
 	</div>
-
-	<h2 class="accordion-header"><?php translate("permissions");?></h2>
-
-	<div class="accordion-content">
-		<strong><?php translate("owner");?> <?php translate("user");?></strong>
-		<select name="autor"
-			<?php
-            if (! $pages_change_owner) {
-                echo "disabled";
-            }
-            ?>>
-<?php
-            foreach ($users as $user) {
-                ?>
-	<option value="<?php Template::escape($user->id);?>"
-				<?php if($user->id == $row->autor) echo "selected";?>><?php Template::escape($user->username);?></option>
-	<?php } ?>
-</select> <br /> <br /> <strong><?php translate("owner");?> <?php translate("group");?></strong>
-		<select name="group_id"
-			<?php
-            if (! $pages_change_owner) {
-                echo "disabled";
-            }
-            ?>>
-<?php
-            foreach ($groups as $group) {
-                ?>
-	<option value="<?php Template::escape($group->getId());?>"
-				<?php if($group->getId() == $row->group_id) echo "selected";?>><?php Template::escape($group->getName());?></option>
-	<?php } ?>
-</select> <br /> <br /> <strong><?php translate("restrict_edit_access");?></strong><br />
-		<input type="checkbox" name="only_admins_can_edit"
-			id="only_admins_can_edit" value="1"
-			<?php if($row->only_admins_can_edit) echo "checked";?>> <label
-			for="only_admins_can_edit"><?php translate("admins");?></label> <br />
-		<input type="checkbox" name="only_group_can_edit"
-			id="only_group_can_edit" value="1"
-			<?php if($row->only_group_can_edit) echo "checked";?>> <label
-			for="only_group_can_edit"><?php translate("group");?></label> <br />
-		<input type="checkbox" name="only_owner_can_edit"
-			id="only_owner_can_edit" value="1"
-			<?php if($row->only_owner_can_edit) echo "checked";?>> <label
-			for="only_owner_can_edit"><?php translate("owner");?></label> <br />
-		<input type="checkbox" name="only_others_can_edit"
-			id="only_others_can_edit" value="1"
-			<?php if($row->only_others_can_edit) echo "checked";?>> <label
-			for="only_others_can_edit"><?php translate("others");?></label>
-	</div>
-
-	<div class="typedep" id="custom_data_json">
-<?php do_event("before_custom_data_json");?>
-		<h2 class="accordion-header"><?php translate("custom_data_json");?></h2>
+	<div style="<?php echo !$acl->hasPermission("pages_edit_permissions") ? "display:none" : ""?>">
+		<h2 class="accordion-header"><?php translate("permissions");?></h2>
 
 		<div class="accordion-content">
+			<strong><?php translate("owner");?> <?php translate("user");?></strong>
+			<select name="autor"
+				<?php
+            if (! $pages_change_owner) {
+                echo "disabled";
+            }
+            ?>>
+	<?php
+            foreach ($users as $user) {
+                ?>
+		<option value="<?php Template::escape($user->id);?>"
+					<?php if($user->id == $row->autor) echo "selected";?>><?php Template::escape($user->username);?></option>
+		<?php } ?>
+	</select> <br /> <br /> <strong><?php translate("owner");?> <?php translate("group");?></strong>
+			<select name="group_id"
+				<?php
+            if (! $pages_change_owner) {
+                echo "disabled";
+            }
+            ?>>
+	<?php
+            foreach ($groups as $group) {
+                ?>
+		<option value="<?php Template::escape($group->getId());?>"
+					<?php if($group->getId() == $row->group_id) echo "selected";?>><?php Template::escape($group->getName());?></option>
+		<?php } ?>
+	</select> <br /> <br /> <strong><?php translate("restrict_edit_access");?></strong><br />
+			<input type="checkbox" name="only_admins_can_edit"
+				id="only_admins_can_edit" value="1"
+				<?php if($row->only_admins_can_edit) echo "checked";?>> <label
+				for="only_admins_can_edit"><?php translate("admins");?></label> <br />
+			<input type="checkbox" name="only_group_can_edit"
+				id="only_group_can_edit" value="1"
+				<?php if($row->only_group_can_edit) echo "checked";?>> <label
+				for="only_group_can_edit"><?php translate("group");?></label> <br />
+			<input type="checkbox" name="only_owner_can_edit"
+				id="only_owner_can_edit" value="1"
+				<?php if($row->only_owner_can_edit) echo "checked";?>> <label
+				for="only_owner_can_edit"><?php translate("owner");?></label> <br />
+			<input type="checkbox" name="only_others_can_edit"
+				id="only_others_can_edit" value="1"
+				<?php if($row->only_others_can_edit) echo "checked";?>> <label
+				for="only_others_can_edit"><?php translate("others");?></label>
+		</div>
+	</div>
+	<h2 class="accordion-header"><?php translate("other");?></h2>
 
+	<div class="accordion-content">
+		<div class="typedep" id="tab-cache-control" style="display: none;">
+
+			<strong><?php translate("cache_control");?></strong> <br /> <select
+				name="cache_control">
+				<option value="auto"
+					<?php
+            
+            if ($row->cache_control == "auto") {
+                echo "selected";
+            }
+            ?>><?php translate("auto");?></option>
+				<option value="force"
+					<?php
+            
+            if ($row->cache_control == "force") {
+                echo "selected";
+            }
+            ?>><?php translate("force");?></option>
+				<option value="no_cache"
+					<?php
+            
+            if ($row->cache_control == "no_cache") {
+                echo "selected";
+            }
+            ?>><?php translate("no_cache");?></option>
+			</select> <br /> <br />
+		</div>
+		<div class="typedep" id="tab-menu-image">
+			<strong><?php translate("design");?></strong><br /> <select
+				name="theme" size=1>
+				<option value="">
+				[
+				<?php translate("standard");?>
+				]
+			</option>
+			<?php
+            
+            foreach ($allThemes as $th) {
+                ?>
+			<option
+					value="<?php
+                
+                echo $th;
+                ?>"
+					<?php
+                
+                if (! is_null($row->theme) and ! empty($row->theme) and $row->theme == $th)
+                    echo "selected";
+                ?>>
+				<?php
+                
+                echo $th;
+                ?>
+			</option>
+			<?php
+            }
+            ?>
+		</select>
+		</div>
+		<br /> <strong><?php translate("visible_for");?> </strong><br />
+			<?php
+            
+            $access = explode(",", $row->access);
+            ?>
+		<select name="access[]" size=4 multiple>
+			<option value="all"
+				<?php
+            
+            if (faster_in_array("all", $access)) {
+                echo " selected";
+            }
+            ?>>
+				<?php translate("everyone");?></option>
+			<option value="registered"
+				<?php
+            if (faster_in_array("registered", $access)) {
+                echo " selected";
+            }
+            ?>>
+				<?php translate("registered_users");?></option>
+
+
+			<option value="mobile"
+				<?php if(faster_in_array("mobile", $access)) echo " selected"?>><?php translate("mobile_devices");?></option>
+			<option value="desktop"
+				<?php if(faster_in_array("desktop", $access)) echo " selected"?>><?php translate("desktop_computers");?></option>
+				<?php
+            while ($row2 = db_fetch_object($groups)) {
+                if (faster_in_array(strval($row2->id), $access)) {
+                    echo '<option value="' . $row2->id . '" selected>' . real_htmlspecialchars($row2->name) . '</option>';
+                } else {
+                    echo '<option value="' . $row2->id . '">' . real_htmlspecialchars($row2->name) . '</option>';
+                }
+            }
+            ?>
+		</select> <br /> <br />
+		<div class="typedep" id="custom_data_json">
+		<?php do_event("before_custom_data_json");?>
+		<strong><?php translate("custom_data_json");?></strong><br />
 			<textarea name="custom_data" style="width: 100%; height: 200px;"
 				cols=80 rows=10><?php
             
             echo htmlspecialchars($row->custom_data);
             ?></textarea>
-		</div>
 
+		</div>
 	</div>
 </div>
 <br />
@@ -1075,6 +1060,30 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<noscript>
 		<p style="color: red;">
 			Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
@@ -1121,5 +1130,5 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
     ?>
 		<?php
 } else {
-		noPerms ();
-	}
+    noPerms();
+}

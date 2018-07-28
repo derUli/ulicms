@@ -136,14 +136,15 @@ class Template
         }
     }
 
-    public static function getYear()
+    // get current year
+    public static function getYear($format = "Y")
     {
-        return date("Y");
+        return date($format);
     }
 
-    public static function year()
+    public static function year($format = "Y")
     {
-        echo self::getYear();
+        echo self::getYear($format);
     }
 
     public static function getMotto()
@@ -249,5 +250,5 @@ class Template
         $result = trim(ob_get_clean());
         return $result;
     }
-    // @TODO Restliche Funktionen aus templating.php implementieren
+    // TODO Restliche Funktionen aus templating.php implementieren
 }

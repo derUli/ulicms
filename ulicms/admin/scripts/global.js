@@ -25,5 +25,10 @@ $(function() {
 	$("select").select2({
 		width : '100%'
 	});
+	$("a.backend-menu-item-destroy").click(function(event) {
+		if (!window.confirm(MenuTranslation.Logout + "?")) {
+			event.preventDefault();
+		}
 
+	});
 });

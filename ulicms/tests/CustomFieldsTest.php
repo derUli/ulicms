@@ -6,9 +6,10 @@ class CustomFieldsTest extends PHPUnit_Framework_TestCase
     public function tearDown()
     {
         $id = $this->getFirstPage()->id;
+        $type = $this->getFirstPage()->type;
         Database::pQuery("delete from {prefix}custom_fields where name in (?, ?) and content_id = ?", array(
-            "foo",
-            "hello",
+            "{$type}_foo",
+            "{$type}_hello",
             intval($id)
         ), true);
     }
@@ -22,11 +23,12 @@ class CustomFieldsTest extends PHPUnit_Framework_TestCase
     public function testSetAndGetField()
     {
         $id = $this->getFirstPage()->id;
+        $type = $this->getFirstPage()->type;
         
-        CustomFields::set("foo", "bar", $id);
+        CustomFields::set("foo", "bar", $id, true);
         $this->assertEquals("bar", CustomFields::get("foo", $id));
         
-        CustomFields::set("hello", "world", $id);
+        CustomFields::set("hello", "world", $id, true);
         $this->assertEquals("world", CustomFields::get("hello", $id));
         
         $all = CustomFields::getAll($id);
@@ -35,14 +37,13 @@ class CustomFieldsTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("world", $all["hello"]);
         $this->assertEquals("bar", $all["foo"]);
         
-        CustomFields::set("foo", "other_value", $id);
+        CustomFields::set("foo", "other_value", $id, true);
         $this->assertEquals("other_value", CustomFields::get("foo", $id));
         
-        CustomFields::set("foo", null, $id);
+        CustomFields::set("foo", null, $id, true);
         $this->assertNull(CustomFields::get("foo", $id));
         
-        
-        CustomFields::set("hello", null, $id);
+        CustomFields::set("hello", null, $id, true);
         $this->assertNull(CustomFields::get("hello", $id));
         
         $all = CustomFields::getAll($id);
