@@ -1,13 +1,14 @@
 <?php
 define("TRANSLATION_INSTALLATION", "Installation");
 define("TRANSLATION_TITLE_STEP_1", "Select Language");
-define("TRANSLATION_TITLE_STEP_2", "Change File Permissions");
-define("TRANSLATION_TITLE_STEP_3", "Connect to Database");
-define("TRANSLATION_TITLE_STEP_4", "Create Administrator Account");
-define("TRANSLATION_TITLE_STEP_5", "Select optional Components");
-define("TRANSLATION_TITLE_STEP_6", "Build Database");
-define("TRANSLATION_TITLE_STEP_7", "Create Config File");
-define("TRANSLATION_TITLE_STEP_8", "Remove Installer Folder");
+define("TRANSLATION_TITLE_STEP_2", "Accept License Conditions" );
+define("TRANSLATION_TITLE_STEP_3", "Change File Permissions");
+define("TRANSLATION_TITLE_STEP_4", "Connect to Database");
+define("TRANSLATION_TITLE_STEP_5", "Create Administrator Account");
+define("TRANSLATION_TITLE_STEP_6", "Select optional Components");
+define("TRANSLATION_TITLE_STEP_7", "Build Database");
+define("TRANSLATION_TITLE_STEP_8", "Create Config File");
+define("TRANSLATION_TITLE_STEP_9", "Remove Installer Folder");
 define("TRANSLATION_SELECT_LANGUAGE", "Please select your language.");
 define("TRANSLATION_FOLLOW_INSTRUCTIONS", "Please follow instructions, to install UliCMS on this Server.");
 define("TRANSLATION_CHMOD", "<p>Please chmod the following files to 0755.<br/>
@@ -41,3 +42,4 @@ define("TRANSLATION_LAST_STEP", "This is the last step of the installation. Now,
 		Then you can login to UliCMS.<br/><br/>
 		<a href=\"index.php?submit_form=LoginToBackend\">Goto login</a>");
 define("TRANSLATION_ADD_FK", "Add Foreign Keys");
+define("TRANSLATION_ACCEPT_LICNSE", "Accept License");

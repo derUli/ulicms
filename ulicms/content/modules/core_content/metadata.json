@@ -1,13 +1,12 @@
 {
 	"source": "core",
-	"version": "2018.3.2",
+	"version": "2018.3.6",
 	"embed": false,
 	"actions": {
 		"contents": "templates/contents.php",
 		"pages": "templates/pages/list.php",
 		"pages_new": "templates/pages/new.php",
 		"pages_edit": "templates/pages/edit.php",
-		"clone_page": "templates/pages/clone.php",
 		"categories": "templates/categories.php",
 		"banner": "templates/banners/list.php",
 		"banner_new": "templates/banners/new.php",

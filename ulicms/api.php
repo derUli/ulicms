@@ -1,5 +1,55 @@
 <?php
 
+function is_numeric_array($var)
+{
+    if (! is_array($var)) {
+        return false;
+    }
+    foreach ($var as $key => $value) {
+        if (! is_numeric($value)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function var_is_type($var, $type, $required = false)
+{
+    $methodName = "is_{$type}";
+    
+    if ($var === null or $var === "") {
+        return ! $required;
+    }
+    
+    if (function_exists($methodName)) {
+        return $methodName($var);
+    }
+    return false;
+}
+
+function var_dump_str()
+{
+    $argc = func_num_args();
+    $argv = func_get_args();
+    
+    if ($argc > 0) {
+        ob_start();
+        call_user_func_array('var_dump', $argv);
+        $result = ob_get_contents();
+        ob_end_clean();
+        return $result;
+    }
+    
+    return '';
+}
+
+function remove_prefix($text, $prefix)
+{
+    if (0 === strpos($text, $prefix))
+        $text = substr($text, strlen($prefix));
+    return $text;
+}
+
 // replacement for the each() function which is deprecated since PHP 7.2.0
 function myEach(&$arr)
 {
@@ -44,7 +94,7 @@ function bool2YesNo($value, $yesString = null, $noString = null)
 }
 
 // like json_encode() but human readable
-function json_readable_encode($in, $indent = 0, $from_array = false)
+function json_readable_encode($in, $indent = 0)
 {
     $_myself = __FUNCTION__;
     $_escape = function ($str) {
@@ -499,7 +549,6 @@ function get_available_post_types()
 }
 
 // Schriftgrößen zurückgeben
-// @TODO : Filter implementieren
 function getFontSizes()
 {
     global $sizes;
@@ -508,6 +557,8 @@ function getFontSizes()
         $sizes[] = $i . "px";
     }
     do_event("custom_font_sizes");
+    
+    $sizes = apply_filter($sizes, "font_sizes");
     return $sizes;
 }
 
@@ -546,7 +597,7 @@ function getThemeMeta($theme, $attrib = null)
         $data = ! Vars::get("theme_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("theme_{$module}_meta");
         
         if (is_string($data)) {
-            $data = json_decode($data);
+            $data = json_decode($data, true);
         }
         
         Vars::set("module_{$module}_meta", $data);
@@ -1478,24 +1529,10 @@ function containsModule($page = null, $module = false)
     return false;
 }
 
-function page_has_html_file($page)
-{
-    $query = db_query("SELECT `html_file` FROM " . tbname("content") . " WHERE systemname = '" . db_escape($page) . "'");
-    $dataset = db_fetch_assoc($query);
-    $html_file = $dataset["html_file"];
-    if (empty($html_file) or is_null($html_file))
-        return null;
-    $html_file = dirname(__file__) . "/content/files/" . $html_file;
-    if (! endsWith($html_file, ".html") && ! endsWith($html_file, ".htm")) {
-        $html_file = $html_file . ".html";
-    }
-    return $html_file;
-}
-
 // API-Aufruf zur Deinstallation eines Moduls
 // Ruft uninstall Script auf, falls vorhanden
 // Löscht anschließend den Ordner modules/$name
-// @TODO dies in die PackageManager Klasse verschieben
+// TODO: dies in die PackageManager Klasse verschieben
 function uninstall_module($name, $type = "module")
 {
     $acl = new ACL();

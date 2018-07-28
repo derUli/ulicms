@@ -24,7 +24,7 @@
 		<div class="row" id="my-container">
 			<div class="col-sm-4" id="steps">
 				<ol id="navigation">
-				<?php for($i=1; $i <= 8; $i++){?>
+				<?php for($i=1; $i <= 9; $i++){?>
 					<li><a href="index.php?step=<?php echo $i;?>"
 						class="<?php if($i == InstallerController::getStep()) echo "current-item";?>">
 						<?php echo constant("TRANSLATION_TITLE_STEP_".$i);?></a></li>

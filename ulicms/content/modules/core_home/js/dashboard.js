@@ -17,4 +17,16 @@ $(function() {
 			$("#core-update-check").slideDown();
 		}
 	});
+	
+	$("#show_positions").change(function(event){
+		var url = $(event.target).data("url");
+		$.ajax({
+			method : "get",
+			url: url,
+			error: function(xhr, status, error) {
+				alert(xhr.responseText);
+			}
+		});
+		
+});
 });

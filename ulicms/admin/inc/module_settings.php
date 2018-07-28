@@ -35,6 +35,7 @@ if ((! is_file ( $admin_file_path ) and ! is_file ( $admin_file_path2 ) and ! ($
 	
 	$acl = new ACL ();
 	$admin_permission = getModuleMeta ( $module, "admin_permission" );
+
 	if ($admin_permission) {
 		if ($acl->hasPermission ( $admin_permission )) {
 			define ( "MODULE_ACCESS_PERMITTED", true );
@@ -52,7 +53,7 @@ if ((! is_file ( $admin_file_path ) and ! is_file ( $admin_file_path2 ) and ! ($
 	$admin_func = $module . "_admin";
 	
 	if ($controller and method_exists ( $controller, "settings" )) {
-		if (MODULE_ACCESS_PERMITTED) {
+		if (defined("MODULE_ACCESS_PERMITTED") and MODULE_ACCESS_PERMITTED) {
 			echo $controller->settings ();
 		} else {
 			noPerms ();

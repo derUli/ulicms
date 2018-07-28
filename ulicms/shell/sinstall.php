@@ -34,7 +34,7 @@ if (count($argv) == 0) {
     if (is_url($file) and is_false($cfg->sinstall_allow_url)) {
         echo "Package installation from URLs is disabled.\n";
         echo "Add this to your CMSConfig.php to allow installations from URL.\n";
-        echo 'var $sinstall_allow_url = true;';
+        echo 'public $sinstall_allow_url = true;';
     } else if (is_dir($file)) {
         echo "$file is a directory.";
     } else if (is_file($file) or is_url($file)) {

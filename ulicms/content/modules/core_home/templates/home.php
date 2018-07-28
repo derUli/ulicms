@@ -70,6 +70,15 @@ if ($acl->hasPermission("dashboard")) {
 		<img src="gfx/loading.gif" alt="Feed wird geladen..." />
 	</div>
 <?php } ?>
+<?php if($acl->hasPermission("pages_show_positions")){?>
+	<h2 class="accordion-header"><?php translate("helper_utils");?></h2>
+		<div class="accordion-content">
+		<form action="#">
+			<input name="show_positions" id="show_positions" type="checkbox" data-url="index.php?ajax_cmd=toggle_show_positions" value="1" <?php if(Settings::get("user/". get_user_id() ."/show_positions")) echo "checked";?> >
+			<label for="show_positions"><?php translate("show_positions_in_menus");?></label>
+		</div>
+		</form>
+	<?php }?>
 	<h2 class="accordion-header">
 	<?php translate("statistics");?>
 	</h2>

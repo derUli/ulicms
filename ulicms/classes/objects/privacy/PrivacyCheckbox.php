@@ -1,6 +1,7 @@
 <?php
 use UliCMS\HTML\Input as Input;
 
+// Class with DSGVO / GDPR related functions
 class PrivacyCheckbox
 {
 

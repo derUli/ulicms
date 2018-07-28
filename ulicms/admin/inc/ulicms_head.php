@@ -55,8 +55,9 @@ foreach ( $enq as $script ) {
 	enqueueScriptFile ( $script );
 }
 ?>
-<?php combinedScriptHtml();?>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+
+<?php combinedScriptHtml();?>
 <script type="text/javascript" src="scripts/jscolor/jscolor.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {

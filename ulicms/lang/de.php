@@ -154,7 +154,6 @@ define ( "TRANSLATION_LANGUAGE", "Sprache" );
 define ( "TRANSLATION_EXTERNAL_REDIRECT", "Weiterleitung auf externen Link" );
 define ( "TRANSLATION_ADDITIONAL_SETTINGS", "Zusätzliche Optionen &gt;&gt;" );
 define ( "TRANSLATION_MENU_IMAGE", "Menüpunkt als Grafik" );
-define ( "TRANSLATION_HTML_FILE", "HTML-Datei als Inhalt" );
 define ( "TRANSLATION_META_DESCRIPTION", "Meta Description" );
 define ( "TRANSLATION_META_KEYWORDS", "Meta Keywords" );
 define ( "TRANSLATION_COMMENTS", "Kommentare" );

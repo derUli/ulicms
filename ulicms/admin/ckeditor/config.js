@@ -7,7 +7,8 @@
 CKEDITOR.editorConfig = function(config) {
 	// config.language = 'de';
 	// Bootstrap soll eingebunden werden
-	config.contentsCss = [CKEDITOR.basePath + 'contents.css', '//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css']
+	config.contentsCss = [ CKEDITOR.basePath + 'contents.css',
+			'//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' ]
 	config.ShiftEnterMode = 'p';
 	config.height = '300px';
 	if (window.location.href.indexOf("admin/") != -1) {

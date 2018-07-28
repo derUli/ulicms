@@ -1,3 +1,7 @@
+<?php 
+$translation = new JsTranslation(array("logout"), "MenuTranslation");
+$translation->render();
+?>
 <div id="msgcontainer">
 	<img id="loading" src="gfx/loading.gif" alt="Bitte warten..."
 		style="display: none;">
@@ -17,5 +21,6 @@
 </div>
 </div>
 </div>
+<?php do_event("backend_footer");?>
 </body>
 </html>
