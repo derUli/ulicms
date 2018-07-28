@@ -1,7 +1,8 @@
 ===== Neues in UliCMS 2018.3.7 =====
 
 Neue Features:
-* Wrapper für Kommandozeilen-Scripts hinzugefügt "manage.php"
+* Wrapper für Kommandozeilen-Scripts hinzugefügt "manage"
+* Neues CLI-Script "settings_list.php"
 
 Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt
