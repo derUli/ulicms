@@ -6,6 +6,7 @@ Neue Features:
 
 Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt
+* Einige Meldungen Confirm-Dialogen sind nun per Sprachdatei lokalisiert
 
 ===== Neues in UliCMS 2018.3.6 =====
 
