@@ -22,7 +22,7 @@ $fullArgv = implode ( " ", $argv );
 $script = $rootDir . "/shell/" . basename ( $command ) . ".php";
 // if there is a script for this command execute it and passthru it's output to the command line
 if (is_file ( $script )) {
-	// if wer are not on windows and the executable bit for the script file is not set
+	// if we are are not on windows and the executable bit for the script file is not set
 	// we stop here with an error.
 	if (! defined ( 'PHP_WINDOWS_VERSION_MAJOR' ) and ! is_executable ( $script )) {
 		echo "Error: " . basename ( $script ) . " is not executable.\n\n";
