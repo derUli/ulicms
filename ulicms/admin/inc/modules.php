@@ -266,7 +266,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			?>
 <form id="truncate_installed_patches" action="index.php?action=modules"
 		method="post"
-		onsubmit='return confirm("<?php translate("TRUNCATE_INSTALLED_PATCHES_LIST_CONFIRM");?>");'>
+		onsubmit='return confirm(Translation.TruncateInstalledPatchesListConfirm);'>
 <?php csrf_token_html(); ?>
 <button type="submit" id="truncate_installed_patches"
 			name="truncate_installed_patches" class="btn btn-danger"><?php translate("TRUNCATE_INSTALLED_PATCHES_LIST");?></button>
@@ -283,7 +283,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 }
 
 $translation = new JSTranslation ( array (
-		"ask_for_uninstall_package" 
+		"ask_for_uninstall_package",
+		"truncate_installed_patches_list_confirm" 
 ) );
 $translation->render ();
 
