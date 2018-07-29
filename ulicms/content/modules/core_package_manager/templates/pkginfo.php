@@ -17,6 +17,8 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			$description = $pkg->getProperty ( "description" );
 			$compatible_from = $pkg->getProperty ( "compatible_from" );
 			$compatible_to = $pkg->getProperty ( "compatible_to" );
+			$min_php_version = $pkg->getProperty ( "min_php_version" );
+			$max_php_version = $pkg->getProperty ( "max_php_version" );
 			$dependencies = $pkg->getProperty ( "dependencies" );
 			$license = $pkg->getProperty ( "license" );
 			$build_date = $pkg->getProperty ( "build_date" );
@@ -98,6 +100,25 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			<tr>
 		<td><strong><?php translate("compatible_to")?></strong></td>
 		<td>UliCMS <?php Template::escape($compatible_to);?></td>
+
+	</tr>			
+			<?php }?>
+			<?php
+			if ($min_php_version) {
+				?>
+			<tr>
+		<td><strong><?php translate("min_php_version")?></strong></td>
+		<td><?php Template::escape($min_php_version);?></td>
+
+	</tr>		
+			<?php }?>
+			
+						<?php
+			if ($max_php_version) {
+				?>
+			<tr>
+		<td><strong><?php translate("max_php_version")?></strong></td>
+		<td><?php Template::escape($max_php_version);?></td>
 
 	</tr>		
 			<?php }?>

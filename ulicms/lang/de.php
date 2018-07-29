@@ -726,4 +726,8 @@ add_translation ( "cannot_uninstall_theme", "Dieses Theme kann nicht deinstallie
 add_translation ( "package_name_was_removed", "Das Paket \"%name%\" wurde entfernt." );
 add_translation ( "removing_package_failed", "Das Paket \"%name%\" konnte nicht entfernt werden.\nBitte entfernen Sie das Modul manuell vom Server." );
 
+add_translation ( "php_version_x_not_supported", "Die PHP-Version %version% wird nicht unterstützt." );
+add_translation ( "min_php_version", "Minimale unterstützte PHP-Version" );
+add_translation ( "max_php_version", "Neueste unterstützte PHP-Version" );
+
 do_event ( "lang_de" );
