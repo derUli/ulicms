@@ -731,6 +731,10 @@ add_translation ( "php_version_x_not_supported", "The PHP version %version% is n
 add_translation ( "min_php_version", "Minimum supported PHP-Version" );
 add_translation ( "max_php_version", "Latest supported PHP-Version" );
 
+add_translation ( "mysql_version_x_not_supported", "The MySQL version %version% is not supported." );
+add_translation ( "min_mysql_version", "Minimum supported MySQL-Version" );
+add_translation ( "max_mysql_version", "Latest supported MySQL-Version" );
+
 add_translation ( "php_extension_x_not_installed", "The required php extension %extension% is not installed." );
 add_translation ( "required_php_extensions", "Required php extensions" );
 

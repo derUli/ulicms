@@ -19,6 +19,8 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			$compatible_to = $pkg->getProperty ( "compatible_to" );
 			$min_php_version = $pkg->getProperty ( "min_php_version" );
 			$max_php_version = $pkg->getProperty ( "max_php_version" );
+			$min_mysql_version = $pkg->getProperty ( "min_mysql_version" );
+			$max_mysql_version = $pkg->getProperty ( "max_mysql_version" );
 			$required_php_extensions = $pkg->getProperty ( "required_php_extensions" );
 			$dependencies = $pkg->getProperty ( "dependencies" );
 			$license = $pkg->getProperty ( "license" );
@@ -138,6 +140,25 @@ if (! $acl->hasPermission ( "install_packages" )) {
 <?php
 			}
 			?>
+				<?php
+			if ($min_mysql_version) {
+				?>
+			<tr>
+		<td><strong><?php translate("min_mysql_version")?></strong></td>
+		<td><?php Template::escape($min_mysql_version);?></td>
+
+	</tr>		
+			<?php }?>
+			
+						<?php
+			if ($max_mysql_version) {
+				?>
+			<tr>
+		<td><strong><?php translate("max_mysql_version")?></strong></td>
+		<td><?php Template::escape($max_mysql_version);?></td>
+
+	</tr>		
+			<?php }?>
 			<?php
 			if ($dependencies) {
 				?>

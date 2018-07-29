@@ -96,6 +96,30 @@ class SinPackageInstaller {
 			) );
 		}
 		
+		$mysqlVersion = Database::getServerVersion ();
+		$mysqlVersion = preg_replace ( '/[^0-9.].*/', '', $mysqlVersion );
+	
+		$mysqlVersionSupported = true;
+		
+		// if package requires a specific mysql version check it
+		if (isset ( $data ["min_mysql_version"] ) and StringHelper::isNotNullOrEmpty ( $data ["min_mysql_version"] )) {
+			if (! version_compare ( $mysqlVersion, $data ["min_mysql_version"], ">=" )) {
+				$mysqlVersionSupported = false;
+			}
+		}
+		
+		if (isset ( $data ["max_mysql_version"] ) and StringHelper::isNotNullOrEmpty ( $data ["max_mysql_version"] )) {
+			if (! version_compare ( $mysqlVersion, $data ["max_mysql_version"], "<=" )) {
+				$mysqlVersionSupported = false;
+			}
+		}
+		
+		if (! $mysqlVersionSupported) {
+			$this->errors [] = get_translation ( "mysql_version_x_not_supported", array (
+					"%version%" => $mysqlVersion 
+			) );
+		}
+		
 		if (isset ( $data ["required_php_extensions"] ) and is_array ( $data ["required_php_extensions"] )) {
 			$loadedExtensions = get_loaded_extensions ();
 			foreach ( $data ["required_php_extensions"] as $extension ) {
