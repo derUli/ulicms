@@ -3,9 +3,12 @@
 Neue Features:
 * Wrapper für Kommandozeilen-Scripts hinzugefügt "manage"
 * Neues CLI-Script "settings_list.php"
+* CLI-Befehl zum Anzeigen von Informationen über eine SimpleInstall v2 Paketdatei hinzugefügt 
+    $ ./manage sinfo examine /path/to/package-1.0.sin
 * Pakete können nun eine bestimmte PHP-Version bei der Installation vorausetzen
 * Pakete können nun vorausetzen, dass bestimmte PHP-Erweiterungen installiert sein müssen
 * Pakete können nun eine bestimmte MySQL-Version bei der Installation vorausetzen
+
 
 Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt

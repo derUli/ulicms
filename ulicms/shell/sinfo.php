@@ -5,7 +5,7 @@ function sinfo_usage() {
 	echo "UliCMS Version " . cms_version () . "\n";
 	echo "Copyright (C) 2016 by Ulrich Schmidt";
 	echo "\n\n";
-	echo "Usage php -f sinfo.php [all|modules|themes]\n\n";
+	echo "Usage php -f sinfo.php [all|modules|themes|examine] [package to examine]\n\n";
 	exit ();
 }
 function sinfo_list_modules() {
@@ -52,7 +52,7 @@ array_shift ( $argv );
 // No time limit
 @set_time_limit ( 0 );
 
-if (count ( $argv ) > 1) {
+if (count ( $argv ) > 2) {
 	sinfo_usage ();
 } else {
 	$type = "";
@@ -68,6 +68,36 @@ if (count ( $argv ) > 1) {
 			break;
 		case "themes" :
 			sinfo_list_themes ();
+			break;
+		
+		case "examine" :
+			if (count ( $argv ) < 2) {
+				sinfo_usage ();
+			}
+			$file = $argv [1];
+			if (! is_file ( $file )) {
+				echo "File " . basename ( $file ) . " not found!\n";
+				exit ();
+			}
+			$json = json_decode ( file_get_contents ( $file ), true );
+			ksort ( $json );
+			$skipAttributes = array (
+					"data",
+					"screenshot" 
+			);
+			foreach ( $json as $key => $value ) {
+				if (in_array ( $key, $skipAttributes )) {
+					continue;
+				}
+				if (is_array ( $value )) {
+					$processedValue = implode ( ", ", $value );
+				} else {
+					$processedValue = $value;
+				}
+				echo "$key: $processedValue\n";
+			}
+			echo $file;
+			exit ();
 			break;
 		case "all" :
 			echo "Modules:\n";
