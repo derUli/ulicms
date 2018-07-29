@@ -21,10 +21,17 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			
 			$type = $_GET ["type"];
 			$uninstalled = uninstall_module ( $remove, $type );
+			
+			$displayName = $type == "theme" ?  "theme-{$remove}" : $remove;
+			
 			if ($uninstalled) {
-				echo "<p style=\"color:green;\">" . htmlspecialchars ( $remove ) . " wurde erfolgreich deinstalliert.</p>";
+				echo "<p style=\"color:green;\">" . get_translation ( "package_name_was_removed", array (
+						"%name%" => $displayName
+				) ) . "</p>";
 			} else {
-				echo "<p style=\"color:red;\">" . htmlspecialchars ( $remove ) . " konnte nicht deinstalliert werden.<br/>Bitte löschen Sie das Modul manuell vom Server.</p>";
+				echo "<p style=\"color:red;\">" . nl2br(get_translation ( "removing_package_failed", array (
+						"%name%" => $displayName
+				) )) . "</p>";
 			}
 		}
 	}
@@ -285,7 +292,9 @@ if (! $acl->hasPermission ( "list_packages" )) {
 $translation = new JSTranslation ( array (
 		"ask_for_uninstall_package",
 		"truncate_installed_patches_list_confirm",
-		"cannot_uninstall_theme" 
+		"cannot_uninstall_theme",
+		"package_name_was_removed",
+		"removing_package_failed" 
 ) );
 $translation->render ();
 
