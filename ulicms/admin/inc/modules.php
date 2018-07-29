@@ -22,16 +22,16 @@ if (! $acl->hasPermission ( "list_packages" )) {
 			$type = $_GET ["type"];
 			$uninstalled = uninstall_module ( $remove, $type );
 			
-			$displayName = $type == "theme" ?  "theme-{$remove}" : $remove;
+			$displayName = $type == "theme" ? "theme-{$remove}" : $remove;
 			
 			if ($uninstalled) {
 				echo "<p style=\"color:green;\">" . get_translation ( "package_name_was_removed", array (
-						"%name%" => $displayName
+						"%name%" => $displayName 
 				) ) . "</p>";
 			} else {
-				echo "<p style=\"color:red;\">" . nl2br(get_translation ( "removing_package_failed", array (
-						"%name%" => $displayName
-				) )) . "</p>";
+				echo "<p style=\"color:red;\">" . nl2br ( get_translation ( "removing_package_failed", array (
+						"%name%" => $displayName 
+				) ) ) . "</p>";
 			}
 		}
 	}
@@ -223,7 +223,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
 			} else if ($acl->hasPermission ( "remove_packages" )) {
-				echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert(Translation.CannotUninstallTheme)\">";
+				echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert(Translation.CannotUninstallTheme); return false\">";
 				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
 			}
