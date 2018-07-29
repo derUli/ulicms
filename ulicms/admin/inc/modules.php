@@ -216,7 +216,7 @@ if (! $acl->hasPermission ( "list_packages" )) {
 				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
 			} else if ($acl->hasPermission ( "remove_packages" )) {
-				echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert('Das Theme kann nicht gelöscht werden, da es gerade aktiv ist.')\">";
+				echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert(Translation.CannotUninstallTheme)\">";
 				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
 			}
@@ -284,7 +284,8 @@ if (! $acl->hasPermission ( "list_packages" )) {
 
 $translation = new JSTranslation ( array (
 		"ask_for_uninstall_package",
-		"truncate_installed_patches_list_confirm" 
+		"truncate_installed_patches_list_confirm",
+		"cannot_uninstall_theme" 
 ) );
 $translation->render ();
 

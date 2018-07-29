@@ -722,5 +722,5 @@ define ( "TRANSLATION_BUILD_DATE", "Build Datum" );
 
 add_translation ( "please_accept_privacy_conditions", "Bitte akzeptieren Sie die Datenschutz-Hinweise!" );
 add_translation ( "ask_for_uninstall_package", "Möchten Sie das Paket \"%name%\" wirklich deinstallieren?" );
-
+add_translation ( "cannot_uninstall_theme", "Dieses Theme kann nicht deinstalliert werden, da es verwendet wird." );
 do_event ( "lang_de" );

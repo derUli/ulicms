@@ -723,5 +723,6 @@ define ( "TRANSLATION_BUILD_DATE", "Build Date" );
 
 add_translation ( "please_accept_privacy_conditions", "Please accept the privacy conditions!" );
 add_translation ( "ask_for_uninstall_package", "Uninstall package \"%name%\"?" );
+add_translation ( "cannot_uninstall_theme", "Can not remove this theme because it is in use." );
 
 do_event ( "lang_en" );
