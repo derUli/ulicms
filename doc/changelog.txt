@@ -4,6 +4,7 @@ Neue Features:
 * Wrapper für Kommandozeilen-Scripts hinzugefügt "manage"
 * Neues CLI-Script "settings_list.php"
 * Pakete können nun eine bestimmte PHP-Version bei der Installation vorausetzen
+* Pakete können nun vorausetzen, dass bestimmte PHP-Erweiterungen installiert sein müssen
 
 Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt

@@ -19,6 +19,7 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			$compatible_to = $pkg->getProperty ( "compatible_to" );
 			$min_php_version = $pkg->getProperty ( "min_php_version" );
 			$max_php_version = $pkg->getProperty ( "max_php_version" );
+			$required_php_extensions = $pkg->getProperty ( "required_php_extensions" );
 			$dependencies = $pkg->getProperty ( "dependencies" );
 			$license = $pkg->getProperty ( "license" );
 			$build_date = $pkg->getProperty ( "build_date" );
@@ -123,6 +124,20 @@ if (! $acl->hasPermission ( "install_packages" )) {
 	</tr>		
 			<?php }?>
 
+<?php if($required_php_extensions){?>
+	<tr>
+		<td><strong><?php translate("required_php_extensions")?></strong></td>
+		<td><?php
+				
+				foreach ( $required_php_extensions as $extension ) {
+					?>
+		<?php Template::escape($extension);?><br />
+		<?php }?></td>
+
+	</tr>		
+<?php
+			}
+			?>
 			<?php
 			if ($dependencies) {
 				?>

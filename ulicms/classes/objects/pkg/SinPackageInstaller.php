@@ -96,6 +96,17 @@ class SinPackageInstaller {
 			) );
 		}
 		
+		if (isset ( $data ["required_php_extensions"] ) and is_array ( $data ["required_php_extensions"] )) {
+			$loadedExtensions = get_loaded_extensions ();
+			foreach ( $data ["required_php_extensions"] as $extension ) {
+				if (! in_array ( $extension, $loadedExtensions )) {
+					$this->errors [] = get_translation ( "php_extension_x_not_installed", array (
+							"%extension%" => $extension 
+					) );
+				}
+			}
+		}
+		
 		if ($version_not_supported) {
 			$this->errors [] = get_translation ( "this_ulicms_version_is_not_supported" );
 		}
