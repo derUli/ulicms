@@ -725,6 +725,6 @@ add_translation ( "please_accept_privacy_conditions", "Please accept the privacy
 add_translation ( "ask_for_uninstall_package", "Uninstall package \"%name%\"?" );
 add_translation ( "cannot_uninstall_theme", "Can not remove this theme because it is in use." );
 add_translation ( "package_name_was_removed", "The package \"%name%\" was removed." );
-add_translation ( "removing_package_failed", "The package \"%name%\" could not be removed.\nPlease remove the package manually from the server" );
+add_translation ( "removing_package_failed", "The package \"%name%\" could not be removed.\nPlease remove the package manually from the server." );
 
 do_event ( "lang_en" );
