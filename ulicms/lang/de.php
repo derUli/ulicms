@@ -720,6 +720,7 @@ define ( "TRANSLATION_MIN_TIME_TO_FILL_FORM", "Minimale Zeit um ein Formular aus
 
 define ( "TRANSLATION_BUILD_DATE", "Build Datum" );
 
-add_translation("please_accept_privacy_conditions", "Bitte akzeptieren Sie die Datenschutz-Hinweise!");
+add_translation ( "please_accept_privacy_conditions", "Bitte akzeptieren Sie die Datenschutz-Hinweise!" );
+add_translation ( "ask_for_uninstall_package", "Möchten Sie das Paket \"%name%\" wirklich deinstallieren?" );
 
 do_event ( "lang_de" );
