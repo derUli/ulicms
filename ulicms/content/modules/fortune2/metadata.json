@@ -8,7 +8,7 @@
 	"embed" : true,
 	"admin_permission" : "fortune_settings",
 	"custom_acl" : ["fortune_settings", "fortune2_post", "fortune2_get"],
-	 "controller_function_permissions" : {
+	"controller_function_permissions" : {
         "Fortune::doSomethingPost" : "fortune2_post",
         "Fortune::doSomethingGet" : "fortune2_get"
    }

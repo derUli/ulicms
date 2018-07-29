@@ -37,9 +37,9 @@ class Fortune extends Controller {
 		} else {
 			$lang = getCurrentLanguage ( true );
 		}
-		$fortuneDir = getModulePath ( $this->moduleName, true ) . "cookies/" . $lang . "/";
+		$fortuneDir = getModulePath ( $this->moduleName ) . "cookies/" . $lang . "/";
 		if (! is_dir ( $fortuneDir )) {
-			$fortuneDir = getModulePath ( $this->moduleName, true ) . "cookies/en/";
+			$fortuneDir = getModulePath ( $this->moduleName ) . "cookies/en/";
 		}
 		$fortuneFiles = scandir ( $fortuneDir );
 		do {
