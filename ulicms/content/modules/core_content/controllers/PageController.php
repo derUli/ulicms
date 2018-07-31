@@ -349,7 +349,7 @@ class PageController extends Controller
         
         $type = DefaultContentTypes::get($type);
         foreach ($type->customFields as $field) {
-			$postName = $field->name;
+            $postName = $field->name;
             $field->name = "{$_POST['type']}_{$field->name}";
             $value = null;
             if (isset($postName)) {
