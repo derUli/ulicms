@@ -488,8 +488,9 @@ function openMenuImageSelectWindow(field) {
 		<?php
                     
                     foreach ($fields as $field) {
+						$field->name = "{$name}_{$field->name}";
                         ?>
-			<?php echo $field->render(CustomFields::get($field->name, $row->id));?>
+			<?php echo $field->render(CustomFields::get($field->name, $row->id, false));?>
 		<?php }?>
 		</div>
 		</div>
