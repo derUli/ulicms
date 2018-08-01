@@ -8,7 +8,7 @@ Neue Features:
 * Pakete können nun eine bestimmte PHP-Version bei der Installation vorausetzen
 * Pakete können nun vorausetzen, dass bestimmte PHP-Erweiterungen installiert sein müssen
 * Pakete können nun eine bestimmte MySQL-Version bei der Installation vorausetzen
-
+* Slicknav Paket aktualisiert
 
 Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt
