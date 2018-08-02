@@ -13,6 +13,7 @@ Neue Features:
 Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt
 * Einige Meldungen Confirm-Dialogen sind nun per Sprachdatei lokalisiert
+* Beim Generieren der SEO-URL aus dem Titel wird nun "/" durch Unterstrich ersetzt
 
 ===== Neues in UliCMS 2018.3.6 =====
 

@@ -177,6 +177,7 @@ function suggestSystemname(txt) {
 	systemname = systemname.replace(/ä/g, "ae");
 	systemname = systemname.replace(/Ã/g, "ss");
 	systemname = systemname.replace(/\040/g, "_");
+	systemname = systemname.replace(/\//g, "_");
 	systemname = systemname.replace(/\?/g, "");
 	systemname = systemname.replace(/\!/g, "");
 	systemname = systemname.replace(/\"/g, "");
