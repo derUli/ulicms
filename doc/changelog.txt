@@ -9,6 +9,7 @@ Neue Features:
 * Pakete können nun vorausetzen, dass bestimmte PHP-Erweiterungen installiert sein müssen
 * Pakete können nun eine bestimmte MySQL-Version bei der Installation vorausetzen
 * Slicknav Paket aktualisiert auf Version 1.0.10
+* oneclick_upgrade Paket aktualisiert auf Version 1.7
 
 Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt

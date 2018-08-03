@@ -94,7 +94,7 @@ class CoreUpgradeController extends Controller
                 
                 sureRemoveDir($tmpDir, true);
                 
-                include_once Path::resolve("ULICMS_ROOT/update.php");
+                response::redirect("../update.php");
                 return true;
             } else {
                 return false;
