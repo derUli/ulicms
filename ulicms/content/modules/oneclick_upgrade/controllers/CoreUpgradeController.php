@@ -35,7 +35,7 @@ class CoreUpgradeController extends Controller
             return null;
         }
         $version = $data->version;
-        $cfg = new ulicms_version();
+        $cfg = new UliCMSVersion();
         $oldVersion = $cfg->getInternalVersionAsString();
         if (version_compare($oldVersion, $data->version, "<")) {
             return $data->version;
