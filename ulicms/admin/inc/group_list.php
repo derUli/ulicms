@@ -72,8 +72,7 @@ if (count ( $groups ) > 0) {
 			if ($default_acl_group === $id) {
 				?> <span style="color: green; font-weight: bold;"><?php translate("yes");?> </span> <?php
 			} else {
-				?> <a
-					href="?action=groups&standard=<?php
+				?> <a href="?action=groups&standard=<?php
 				
 				echo $id;
 				?>"><span style="color: red; font-weight: bold;"
@@ -103,10 +102,8 @@ if (count ( $groups ) > 0) {
 				<td><form action="?action=groups&delete=<?php
 			echo $id;
 			?>"
-						method="post"
-						onsubmit="return confirm('<?php translate("ask_for_delete")?>');"
-						class="delete-form"><?php csrf_token_html();?><input type="image"
-							class="mobile-big-image" src="gfx/delete.gif"
+						method="post" class="delete-form"><?php csrf_token_html();?><input
+							type="image" class="mobile-big-image" src="gfx/delete.gif"
 							alt="<?php
 			
 			translate ( "delete" );
@@ -127,21 +124,11 @@ if (count ( $groups ) > 0) {
 	</tbody>
 	</table>
 </div>
-<script type="text/javascript">
-var ajaxOptions = {
-  success : function(responseText, statusText, xhr, $form){
-  var action = $($form).attr("action");
-  var id = url('?delete', action);
-  var list_item_id = "dataset-" + id
-  var tr = $("tr#" + list_item_id);
-  $(tr).fadeOut();
 
-  }
-
-}
-
-$("form.delete-form").ajaxForm(ajaxOptions);
-</script>
 <?php
 }
-?>
+
+$translation = new JSTranslation ( array (
+		"ask_for_delete" 
+) );
+$translation->render ();

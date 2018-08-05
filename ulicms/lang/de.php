@@ -245,7 +245,7 @@ define ( "TRANSLATION_FROM_FILESYSTEM", "Aus dem Dateisystem" );
 define ( "TRANSLATION_OTHER_PACKAGE_SOURCE", "Andere Paketquelle [URL]" );
 
 // Sprachen verwalten
-define ( "TRANSLATION_SHORTCODE", "Kürzel" );
+define ( "TRANSLATION_SHORTCODE", "Shortcode" );
 define ( "TRANSLATION_FULL_NAME", "Volle Bezeichnung" );
 define ( "TRANSLATION_ADD_LANGUAGE", "Sprache hinzufügen" );
 define ( "TRANSLATION_CANT_DELETE_DEFAULT_LANGUAGE", "Die Standardsprache kann nicht gelöscht werden." );
@@ -720,6 +720,21 @@ define ( "TRANSLATION_MIN_TIME_TO_FILL_FORM", "Minimale Zeit um ein Formular aus
 
 define ( "TRANSLATION_BUILD_DATE", "Build Datum" );
 
-add_translation("please_accept_privacy_conditions", "Bitte akzeptieren Sie die Datenschutz-Hinweise!");
+add_translation ( "please_accept_privacy_conditions", "Bitte akzeptieren Sie die Datenschutz-Hinweise!" );
+add_translation ( "ask_for_uninstall_package", "Möchten Sie das Paket \"%name%\" wirklich deinstallieren?" );
+add_translation ( "cannot_uninstall_theme", "Dieses Theme kann nicht deinstalliert werden, da es verwendet wird." );
+add_translation ( "package_name_was_removed", "Das Paket \"%name%\" wurde entfernt." );
+add_translation ( "removing_package_failed", "Das Paket \"%name%\" konnte nicht entfernt werden.\nBitte entfernen Sie das Modul manuell vom Server." );
+
+add_translation ( "php_version_x_not_supported", "Die PHP-Version %version% wird nicht unterstützt." );
+add_translation ( "min_php_version", "Minimale unterstützte PHP-Version" );
+add_translation ( "max_php_version", "Neueste unterstützte PHP-Version" );
+
+add_translation ( "mysql_version_x_not_supported", "Die MySQL-Version %version% wird nicht unterstützt." );
+add_translation ( "min_mysql_version", "Minimale unterstützte MySQL-Version" );
+add_translation ( "max_mysql_version", "Neueste unterstützte MySQL-Version" );
+
+add_translation ( "php_extension_x_not_installed", "Die benötigte PHP-Erweiterung %extension% ist nicht installed." );
+add_translation ( "required_php_extensions", "Benötigte PHP-Erweiterungen" );
 
 do_event ( "lang_de" );

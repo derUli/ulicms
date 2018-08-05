@@ -13,7 +13,7 @@ if ($acl->hasPermission ( "languages" )) {
 <div class="scroll">
 	<table style="border: 0">
 		<tr>
-			<td><strong><?php translate("shortcode");?>*</strong></td>
+			<td><strong><?php translate("language_shortcode");?>*</strong></td>
 			<td><input type="text" name="language_code" maxlength="6" required></td>
 		</tr>
 		<tr>
@@ -35,7 +35,7 @@ if ($acl->hasPermission ( "languages" )) {
 <table class="tablesorter">
 	<thead>
 		<tr>
-			<th><strong><?php translate("shortcode");?></strong></th>
+			<th><strong><?php translate("language_shortcode");?></strong></th>
 			<th><strong><?php translate("full_name");?></strong></th>
 			<th class="text-center"><strong><?php translate("standard");?></strong></th>
 			<td></td>
@@ -71,9 +71,6 @@ if ($acl->hasPermission ( "languages" )) {
 					<?php
 			} else {
 				?> <form
-					onsubmit="return confirm('<?php
-				echo str_ireplace ( "%name%", $language->getName (), get_translation ( "DELETE_LANGUAGE_REALLY" ) );
-				?>')"
 					action="<?php echo ModuleHelper::buildMethodCallUrl("LanguageController", "delete", "id=".$language->getID());?>"
 					class="delete-form" method="post">
 
@@ -90,4 +87,8 @@ if ($acl->hasPermission ( "languages" )) {
 } else {
 	noPerms ();
 }
-	
+
+$translation = new JSTranslation ( array (
+		"ask_for_delete" 
+) );
+$translation->render ();

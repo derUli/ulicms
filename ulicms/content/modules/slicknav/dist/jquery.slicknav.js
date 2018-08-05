@@ -1,8 +1,8 @@
 /*!
-    SlickNav Responsive Mobile Menu v1.0.2
-    (c) 2015 Josh Cope
-    licensed under MIT
-*/
+ * SlickNav Responsive Mobile Menu v1.0.10
+ * (c) 2016 Josh Cope
+ * licensed under MIT
+ */
 ;(function ($, document, window) {
     var
     // default settings object.
@@ -15,18 +15,36 @@
             closedSymbol: '&#9658;',
             openedSymbol: '&#9660;',
             prependTo: 'body',
+            appendTo: '',
             parentTag: 'a',
             closeOnClick: false,
             allowParentLinks: false,
             nestedParentLinks: true,
             showChildren: false,
+            removeIds: true,
+            removeClasses: false,
+            removeStyles: false,
 			brand: '',
+            animations: 'jquery',
             init: function () {},
-            open: function () {},
-            close: function () {}
+            beforeOpen: function () {},
+            beforeClose: function () {},
+            afterOpen: function () {},
+            afterClose: function () {}
         },
         mobileMenu = 'slicknav',
         prefix = 'slicknav';
+
+        Keyboard = {
+            DOWN: 40,
+            ENTER: 13,
+            ESCAPE: 27,
+            LEFT: 37,
+            RIGHT: 39,
+            SPACE: 32,
+            TAB: 9,
+            UP: 38,
+        };
 
     function Plugin(element, options) {
         this.element = element;
@@ -36,6 +54,11 @@
         // is generally empty as we don't want to alter the default options for
         // future instances of the plugin
         this.settings = $.extend({}, defaults, options);
+
+        // Don't remove IDs by default if duplicate is false
+        if (!this.settings.duplicate && !options.hasOwnProperty("removeIds")) {
+          this.settings.removeIds = false;
+        }
 
         this._defaults = defaults;
         this._name = mobileMenu;
@@ -53,13 +76,32 @@
         // clone menu if needed
         if (settings.duplicate) {
             $this.mobileNav = menu.clone();
-            //remove ids from clone to prevent css issues
-            $this.mobileNav.removeAttr('id');
-            $this.mobileNav.find('*').each(function (i, e) {
-                $(e).removeAttr('id');
-            });
         } else {
             $this.mobileNav = menu;
+        }
+
+        // remove IDs if set
+        if (settings.removeIds) {
+          $this.mobileNav.removeAttr('id');
+          $this.mobileNav.find('*').each(function (i, e) {
+              $(e).removeAttr('id');
+          });
+        }
+
+        // remove classes if set
+        if (settings.removeClasses) {
+            $this.mobileNav.removeAttr('class');
+            $this.mobileNav.find('*').each(function (i, e) {
+                $(e).removeAttr('class');
+            });
+        }
+
+        // remove styles if set
+        if (settings.removeStyles) {
+            $this.mobileNav.removeAttr('style');
+            $this.mobileNav.find('*').each(function (i, e) {
+                $(e).removeAttr('style');
+            });
         }
 
         // styling class for the button
@@ -81,7 +123,7 @@
 			$(menuBar).append(brand);
 		}
         $this.btn = $(
-            ['<' + settings.parentTag + ' aria-haspopup="true" tabindex="0" class="' + prefix + '_btn ' + prefix + '_collapsed">',
+            ['<' + settings.parentTag + ' aria-haspopup="true" role="button" tabindex="0" class="' + prefix + '_btn ' + prefix + '_collapsed">',
                 '<span class="' + prefix + '_menutxt">' + settings.label + '</span>',
                 '<span class="' + iconClass + '">',
                     '<span class="' + prefix + '_icon-bar"></span>',
@@ -92,7 +134,11 @@
             ].join('')
         );
         $(menuBar).append($this.btn);
-        $(settings.prependTo).prepend(menuBar);
+        if(settings.appendTo !== '') {
+            $(settings.appendTo).append(menuBar);
+        } else {
+            $(settings.prependTo).prepend(menuBar);
+        }
         menuBar.append($this.mobileNav);
 
         // iterate over structure adding additional structure
@@ -110,7 +156,7 @@
                 // check for anchors
 
                 var a = item.contents(),
-                    containsAnchor = false;
+                    containsAnchor = false,
                     nodes = [];
 
                 $(a).each(function () {
@@ -136,11 +182,16 @@
                 } else
                     $(nodes).wrapAll('<span class="'+prefix+'_parent-link '+prefix+'_row"/>').parent();
 
-                item.addClass(prefix+'_collapsed');
+                if (!settings.showChildren) {
+                    item.addClass(prefix+'_collapsed');
+                } else {
+                    item.addClass(prefix+'_open');
+                }
+
                 item.addClass(prefix+'_parent');
 
                 // create parent arrow. wrap with link if parent links and separating
-                var arrowElement = $('<span class="'+prefix+'_arrow">'+settings.closedSymbol+'</span>');
+                var arrowElement = $('<span class="'+prefix+'_arrow">'+(settings.showChildren?settings.openedSymbol:settings.closedSymbol)+'</span>');
 
                 if (settings.allowParentLinks && !settings.nestedParentLinks && containsAnchor)
                     arrowElement = arrowElement.wrap(wrapElement).parent();
@@ -211,20 +262,82 @@
             $this._itemClick($(this));
         });
 
-        // check for enter key on menu button and menu parents
+        // check for keyboard events on menu button and menu parents
         $($this.btn).keydown(function (e) {
             var ev = e || event;
-            if(ev.keyCode == 13) {
-                e.preventDefault();
-                $this._menuToggle();
+
+            switch(ev.keyCode) {
+                case Keyboard.ENTER:
+                case Keyboard.SPACE:
+                case Keyboard.DOWN:
+                    e.preventDefault();
+                    if (ev.keyCode !== Keyboard.DOWN || !$($this.btn).hasClass(prefix+'_open')){
+                        $this._menuToggle();
+                    }
+                    
+                    $($this.btn).next().find('[role="menuitem"]').first().focus();
+                    break;
             }
+
+            
         });
 
         $this.mobileNav.on('keydown', '.'+prefix+'_item', function(e) {
             var ev = e || event;
-            if(ev.keyCode == 13) {
-                e.preventDefault();
-                $this._itemClick($(e.target));
+
+            switch(ev.keyCode) {
+                case Keyboard.ENTER:
+                    e.preventDefault();
+                    $this._itemClick($(e.target));
+                    break;
+                case Keyboard.RIGHT:
+                    e.preventDefault();
+                    if ($(e.target).parent().hasClass(prefix+'_collapsed')) {
+                        $this._itemClick($(e.target));
+                    }
+                    $(e.target).next().find('[role="menuitem"]').first().focus();
+                    break;
+            }
+        });
+
+        $this.mobileNav.on('keydown', '[role="menuitem"]', function(e) {
+            var ev = e || event;
+
+            switch(ev.keyCode){
+                case Keyboard.DOWN:
+                    e.preventDefault();
+                    var allItems = $(e.target).parent().parent().children().children('[role="menuitem"]:visible');
+                    var idx = allItems.index( e.target );
+                    var nextIdx = idx + 1;
+                    if (allItems.length <= nextIdx) {
+                        nextIdx = 0;
+                    }
+                    var next = allItems.eq( nextIdx );
+                    next.focus();
+                break;
+                case Keyboard.UP:
+                    e.preventDefault();
+                    var allItems = $(e.target).parent().parent().children().children('[role="menuitem"]:visible');
+                    var idx = allItems.index( e.target );
+                    var next = allItems.eq( idx - 1 );
+                    next.focus();
+                break;
+                case Keyboard.LEFT:
+                    e.preventDefault();
+                    if ($(e.target).parent().parent().parent().hasClass(prefix+'_open')) {
+                        var parent = $(e.target).parent().parent().prev();
+                        parent.focus();
+                        $this._itemClick(parent);
+                    } else if ($(e.target).parent().parent().hasClass(prefix+'_nav')){
+                        $this._menuToggle();
+                        $($this.btn).focus();
+                    }
+                    break;
+                case Keyboard.ESCAPE:
+                    e.preventDefault();
+                    $this._menuToggle();
+                    $($this.btn).focus();
+                    break;    
             }
         });
 
@@ -294,41 +407,78 @@
         if (animate) {
             duration = settings.duration;
         }
+        
+        function afterOpen(trigger, parent) {
+            $(trigger).removeClass(prefix+'_animating');
+            $(parent).removeClass(prefix+'_animating');
+
+            //Fire afterOpen callback
+            if (!init) {
+                settings.afterOpen(trigger);
+            }
+        }
+        
+        function afterClose(trigger, parent) {
+            el.attr('aria-hidden','true');
+            items.attr('tabindex', '-1');
+            $this._setVisAttr(el, true);
+            el.hide(); //jQuery 1.7 bug fix
+
+            $(trigger).removeClass(prefix+'_animating');
+            $(parent).removeClass(prefix+'_animating');
+
+            //Fire init or afterClose callback
+            if (!init){
+                settings.afterClose(trigger);
+            } else if (trigger == 'init'){
+                settings.init();
+            }
+        }
 
         if (el.hasClass(prefix+'_hidden')) {
             el.removeClass(prefix+'_hidden');
-            el.slideDown(duration, settings.easingOpen, function(){
-
-                $(trigger).removeClass(prefix+'_animating');
-                $(parent).removeClass(prefix+'_animating');
-
-                //Fire open callback
-                if (!init) {
-                    settings.open(trigger);
-                }
-            });
+             //Fire beforeOpen callback
+            if (!init) {
+                settings.beforeOpen(trigger);
+            }
+            if (settings.animations === 'jquery') {
+                el.stop(true,true).slideDown(duration, settings.easingOpen, function(){
+                    afterOpen(trigger, parent);
+                });
+            } else if(settings.animations === 'velocity') {
+                el.velocity("finish").velocity("slideDown", {
+                    duration: duration,
+                    easing: settings.easingOpen,
+                    complete: function() {
+                        afterOpen(trigger, parent);
+                    }
+                });
+            }
             el.attr('aria-hidden','false');
             items.attr('tabindex', '0');
             $this._setVisAttr(el, false);
         } else {
             el.addClass(prefix+'_hidden');
-            el.slideUp(duration, this.settings.easingClose, function() {
-                el.attr('aria-hidden','true');
-                items.attr('tabindex', '-1');
-                $this._setVisAttr(el, true);
-                el.hide(); //jQuery 1.7 bug fix
 
-                $(trigger).removeClass(prefix+'_animating');
-                $(parent).removeClass(prefix+'_animating');
+            //Fire init or beforeClose callback
+            if (!init){
+                settings.beforeClose(trigger);
+            }
 
-                //Fire init or close callback
-                if (!init){
-                    settings.close(trigger);
-                }
-                else if (trigger == 'init'){
-                    settings.init();
-                }
-            });
+            if (settings.animations === 'jquery') {
+                el.stop(true,true).slideUp(duration, this.settings.easingClose, function() {
+                    afterClose(trigger, parent)
+                });
+            } else if (settings.animations === 'velocity') {
+                
+                el.velocity("finish").velocity("slideUp", {
+                    duration: duration,
+                    easing: settings.easingClose,
+                    complete: function() {
+                        afterClose(trigger, parent);
+                    }
+                });
+            }
         }
     };
 

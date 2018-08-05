@@ -69,6 +69,7 @@ class JSTranslation
             $key = strtoupper($key);
             $value = get_translation($key);
             $value = str_replace("\"", "\\\"", $value);
+            $value = str_replace("\n", '\n', $value);
             $line = "{$this->varName}." . $jsName . " = \"" . $value . "\";";
             $js[] = $line;
         }

@@ -1,3 +1,21 @@
+===== Neues in UliCMS 2018.3.7 =====
+
+Neue Features:
+* Wrapper für Kommandozeilen-Scripts hinzugefügt "manage"
+* Neues CLI-Script "settings_list.php"
+* CLI-Befehl zum Anzeigen von Informationen über eine SimpleInstall v2 Paketdatei hinzugefügt 
+    $ ./manage sinfo examine /path/to/package-1.0.sin
+* Pakete können nun eine bestimmte PHP-Version bei der Installation vorausetzen
+* Pakete können nun vorausetzen, dass bestimmte PHP-Erweiterungen installiert sein müssen
+* Pakete können nun eine bestimmte MySQL-Version bei der Installation vorausetzen
+* Slicknav Paket aktualisiert auf Version 1.0.10
+* oneclick_upgrade Paket aktualisiert auf Version 1.7
+
+Bugfixes:
+* Versionsnummern von Themes werden nun wieder angezeigt
+* Einige Meldungen Confirm-Dialogen sind nun per Sprachdatei lokalisiert
+* Beim Generieren der SEO-URL aus dem Titel wird nun "/" durch Unterstrich ersetzt
+
 ===== Neues in UliCMS 2018.3.6 =====
 
 Neue Features:
