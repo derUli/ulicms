@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3.7 =====
+﻿===== Neues in UliCMS 2018.3.7 =====
 
 Neue Features:
 * Wrapper für Kommandozeilen-Scripts hinzugefügt "manage"
