@@ -1,0 +1,14 @@
+{
+	"version": "1.0",
+	"source": "extend",
+	"embed": false,
+	"shy": false,
+	"main_class": "ViewLogController",
+	"controllers": {
+		"ViewLogController": "controllers/ViewLogController.php"
+	},
+	"custom_acl": [
+		"view_log"
+	],
+	"admin_permission": "view_log"
+}
