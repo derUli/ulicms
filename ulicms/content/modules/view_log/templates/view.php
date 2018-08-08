@@ -7,5 +7,5 @@ $anchor = "dir-" . md5(basename(dirname(ViewBag::get("file"))));
 	class="btn btn-default"><?php translate("back")?></a>
 <h4><?php esc($path);?></h4>
 <textarea cols="80" rows=20 readonly>
-<?php readfile(ViewBag::get("file"));?>
+<?php esc(File::read(ViewBag::get("file")));?>
 </textarea>
