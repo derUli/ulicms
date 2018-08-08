@@ -12,7 +12,7 @@ $logs = $controller->getLogs();
             "dir" => $dir,
             "file" => $file
         ), true);
-        $url = ModuleHelper::buildAdminURL($module, $queryString);
+        $url = ModuleHelper::buildAdminURL("log_viewer", $queryString);
         
         ?>
 	<li><a href="<?php
