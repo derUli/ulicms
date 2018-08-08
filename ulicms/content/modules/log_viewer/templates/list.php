@@ -1,5 +1,5 @@
 <?php
-$controller = (ModuleHelper::getMainController("view_log"));
+$controller = (ModuleHelper::getMainController("log_viewer"));
 $logs = $controller->getLogs();
 ?>
 <?php foreach($logs as $dir=>$files){?>

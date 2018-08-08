@@ -8,7 +8,7 @@
 		"ViewLogController": "controllers/ViewLogController.php"
 	},
 	"custom_acl": [
-		"view_log"
+		"log_viewer"
 	],
-	"admin_permission": "view_log"
+	"admin_permission": "log_viewer"
 }

@@ -3,7 +3,7 @@
 class ViewLogController extends Controller
 {
 
-    private $moduleName = "view_log";
+    private $moduleName = "log_viewer";
 
     public function settings()
     {
