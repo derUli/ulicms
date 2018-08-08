@@ -9,6 +9,7 @@ class ViewLogController extends Controller
     {
         $dir = Request::getVar("dir");
         $file = Request::getVar("file");
+        // if the user selects a file show it's content
         if ($dir and $file) {
             $dir = basename($dir);
             $file = basename($file);
@@ -23,6 +24,7 @@ class ViewLogController extends Controller
                 ExceptionResult("Can not open log file $path");
             }
         }
+        // show list of log files which have .txt or .log extensions and are not empty
         return Template::executeModuleTemplate($this->moduleName, "list.php");
     }
 
@@ -36,6 +38,7 @@ class ViewLogController extends Controller
         return get_translation("open");
     }
 
+    // get all log files and the containing folders
     public function getLogs()
     {
         $logs = array();
