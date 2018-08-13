@@ -1,4 +1,4 @@
-﻿===== Neues in UliCMS 2018.3.7 =====
+===== Neues in UliCMS 2018.3.7 =====
 
 Neue Features:
 * Wrapper für Kommandozeilen-Scripts hinzugefügt "manage"
@@ -15,6 +15,7 @@ Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt
 * Einige Meldungen Confirm-Dialogen sind nun per Sprachdatei lokalisiert
 * Beim Generieren der SEO-URL aus dem Titel wird nun "/" durch Unterstrich ersetzt
+* Inhaltstyp "Link zu Sprache" funktioniert wieder
 
 ===== Neues in UliCMS 2018.3.6 =====
 

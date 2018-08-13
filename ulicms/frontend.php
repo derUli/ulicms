@@ -93,7 +93,8 @@ try {
             Request::redirect($language->getLanguageLink());
         }
     }
-} catch (Exception $e) {}
+} catch (Exception $e) {
+}
 
 if (isset($_GET["goid"])) {
     $goid = intval($_GET["goid"]);
