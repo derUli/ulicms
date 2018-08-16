@@ -1,5 +1,6 @@
 <?php
 
+// Makes translation strings avaiable for Javascript
 class JSTranslation
 {
 
