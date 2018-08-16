@@ -1,6 +1,6 @@
 <?php
 use phpFastCache\Helper\Psr16Adapter;
-class CacheUtilTest extends PHPUnit_Framework_TestCase {
+class CacheUtilTest extends \PHPUnit\Framework\TestCase {
 	private $cacheDisabledOriginal;
 	private $cachePeriodOriginal;
 	public function setUp() {

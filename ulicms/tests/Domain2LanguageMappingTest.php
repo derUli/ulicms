@@ -1,5 +1,5 @@
 <?php
-class Domain2LanguageMappingTest extends PHPUnit_Framework_TestCase {
+class Domain2LanguageMappingTest extends \PHPUnit\Framework\TestCase {
 	private $originalMapping;
 	private $originalHTTPHost;
 	public function setUp() {

@@ -1,5 +1,5 @@
 <?php
-class CategoryTest extends PHPUnit_Framework_TestCase {
+class CategoryTest extends \PHPUnit\Framework\TestCase {
 	const name1 = "Name 1";
 	const name2 = "Name 2";
 	const description1 = "Description 1";

@@ -1,6 +1,6 @@
 <?php
 
-class ModuleHelperTest extends PHPUnit_Framework_TestCase
+class ModuleHelperTest extends \PHPUnit\Framework\TestCase
 {
 
     private $default_language = null;

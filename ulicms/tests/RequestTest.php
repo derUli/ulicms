@@ -1,5 +1,5 @@
 <?php
-class RequestTest extends PHPUnit_Framework_TestCase {
+class RequestTest extends \PHPUnit\Framework\TestCase {
 	public function testGetVar() {
 		$_POST ["var1"] = "this";
 		$_GET ["var1"] = "that";

@@ -1,5 +1,5 @@
 <?php
-class UserManagerTest extends PHPUnit_Framework_TestCase {
+class UserManagerTest extends \PHPUnit\Framework\TestCase {
 	public function setUp() {
 		$this->tearDown ();
 		for($i = 1; $i < 5; $i ++) {

@@ -1,5 +1,5 @@
 <?php
-class ArrayHelperTest extends PHPUnit_Framework_TestCase {
+class ArrayHelperTest extends \PHPUnit\Framework\TestCase {
 	public function testTake4String() {
 		$this->assertEquals ( "abcd", ArrayHelper::take ( 4, "abcdefghijklmnopqrstuvwxyz" ) );
 	}

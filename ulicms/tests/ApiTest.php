@@ -1,7 +1,7 @@
 <?php
 include_once Path::Resolve("ULICMS_ROOT/templating.php");
 
-class ApiTest extends PHPUnit_Framework_TestCase
+class ApiTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testRemovePrefix()

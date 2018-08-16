@@ -1,6 +1,6 @@
 <?php
 
-class CustomFieldsTest extends PHPUnit_Framework_TestCase
+class CustomFieldsTest extends \PHPUnit\Framework\TestCase
 {
 
     public function tearDown()

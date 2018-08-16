@@ -1,6 +1,6 @@
 <?php
 
-class PagePermissionsTest extends PHPUnit_Framework_TestCase
+class PagePermissionsTest extends \PHPUnit\Framework\TestCase
 {
 
     public function tearDown()

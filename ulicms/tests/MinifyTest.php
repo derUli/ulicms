@@ -1,6 +1,6 @@
 <?php
 
-class MinifyTest extends PHPUnit_Framework_TestCase
+class MinifyTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testScriptQueue()

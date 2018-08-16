@@ -1,6 +1,6 @@
 <?php
 
-class ModuleManagerTest extends PHPUnit_Framework_TestCase
+class ModuleManagerTest extends \PHPUnit\Framework\TestCase
 {
 
     const sampleName1 = "mymodule1";

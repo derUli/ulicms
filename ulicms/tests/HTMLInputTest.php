@@ -1,7 +1,7 @@
 <?php
 use UliCMS\HTML\Input as Input;
 use UliCMS\HTML\ListItem;
-class HTMLInputTest extends PHPUnit_Framework_TestCase {
+class HTMLInputTest extends \PHPUnit\Framework\TestCase {
 	public function testTextBox() {
 		$this->assertEquals ( '<input type="text" name="my_field" value="Hello World" required="required">', Input::TextBox ( "my_field", "Hello World", "text", array (
 				"required" => "required" 

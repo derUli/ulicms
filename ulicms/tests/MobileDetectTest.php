@@ -1,6 +1,6 @@
 <?php
 
-class MobileDetectTest extends PHPUnit_Framework_TestCase
+class MobileDetectTest extends \PHPUnit\Framework\TestCase
 {
 
     private $no_mobile_design_on_tablet = false;

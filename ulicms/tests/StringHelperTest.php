@@ -1,5 +1,5 @@
 <?php
-class StringHelperTest extends PHPUnit_Framework_TestCase {
+class StringHelperTest extends \PHPUnit\Framework\TestCase {
 	private function getTestFilePath() {
 		return dirname ( __FILE__ ) . "/fixtures/lines.txt";
 	}

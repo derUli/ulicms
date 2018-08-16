@@ -1,6 +1,6 @@
 <?php
 
-class PrivacyCheckboxTest extends PHPUnit_Framework_TestCase
+class PrivacyCheckboxTest extends \PHPUnit\Framework\TestCase
 {
 
     private $privacy_policy_checkbox_enable_de;

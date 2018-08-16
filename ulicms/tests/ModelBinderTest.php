@@ -1,7 +1,7 @@
 <?php
 include dirname(__file__) . "/ModelBinderExample.php";
 
-class ModelBinderTest extends PHPUnit_Framework_TestCase
+class ModelBinderTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testModelBind()
