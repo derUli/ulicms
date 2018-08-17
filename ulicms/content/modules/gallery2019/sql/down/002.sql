@@ -1,1 +1,1 @@
-DROP TABLE `prefix}gallery_images`;
+DROP TABLE `{prefix}gallery_images`;
