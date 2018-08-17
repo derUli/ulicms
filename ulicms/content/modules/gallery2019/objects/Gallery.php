@@ -28,8 +28,19 @@ class Gallery extends \Model
 
     protected function fillVars($query)
     {
-        if (Database::getNumRows($query) > 0) {
-            $this->bindValues(Database::fetchArray($query));
+        if ($query and Database::getNumRows($query) > 0) {
+            $result = Database::fetchObject($query);
+            $this->title = $result->title;
+            $this->created = strtotime($result->created);
+            $this->updated = strtotime($result->updated);
+            $this->createdby = $result->createdby;
+            $this->lastchangedby = $result->lastchangedby;
+        } else {
+            $this->title = null;
+            $this->created = null;
+            $this->updated = null;
+            $this->createdby = null;
+            $this->lastchangedby = null;
         }
     }
 
