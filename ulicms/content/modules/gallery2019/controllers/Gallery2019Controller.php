@@ -8,9 +8,21 @@ class Gallery2019Controller extends Controller
     public function uninstall()
     {
         $migrator = new DBMigrator("module/{$this->moduleName}", ModuleHelper::buildModuleRessourcePath($this->moduleName, "sql/down"));
-        $migrator->migrate();
+        $migrator->rollback();
     }
 
-    public function clearCache()
-    {}
+    public function getSettingsLinkText()
+    {
+        return get_translation("edit");
+    }
+
+    public function getSettingsHeadline()
+    {
+        return get_translation("galleries");
+    }
+
+    public function settings()
+    {
+        return Template::executeModuleTemplate($this->moduleName, "list.php");
+    }
 }

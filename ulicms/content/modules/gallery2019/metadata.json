@@ -4,8 +4,13 @@
 	"embed": false,
 	"shy": false,
 	"main_class": "Gallery2019Controller",
-	"controllers": 
-	{
+	"controllers": {
 		"Gallery2019Controller": "controllers/Gallery2019Controller.php"
-	}
+	},
+	"admin_permission": "galleries_list",
+	"custom_acl": [
+		"galleries_list",
+		"galleries_create",
+		"galleries_edit"
+	]
 }
