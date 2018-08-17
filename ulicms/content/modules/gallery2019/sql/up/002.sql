@@ -1,4 +1,4 @@
-CREATE TABLE {prefix}gallery_images` 
+CREATE TABLE `{prefix}gallery_images` 
 ( `id` INT NOT NULL AUTO_INCREMENT , 
 `gallery_id` INT NOT NULL , 
 `path` VARCHAR(255) NOT NULL , 
