@@ -13,7 +13,35 @@ class Image extends Model
 
     private $description;
 
-    private $order;
+    private $order = 0;
+
+    public function loadByID($id)
+    {
+        $sql = "select * from `{prefix}gallery_images` where id = ?";
+        $args = array(
+            intval($id)
+        );
+        $query = Database::pQuery($sql, $args, true);
+        $this->fillVars($query);
+    }
+
+    protected function fillVars($query = null)
+    {
+        if ($query and Database::getNumRows($query) > 0) {
+            $result = Database::fetchObject($query);
+            $this->setID($result->id);
+            $this->gallery_id = $result->gallery_id;
+            $this->path = $result->path;
+            $this->description = $result->description;
+            $this->order = $result->order;
+        } else {
+            $this->setID(null);
+            $this->gallery_id = null;
+            $this->path = null;
+            $this->description = null;
+            $this->order = 0;
+        }
+    }
 
     public function getGalleryId()
     {
@@ -68,7 +96,7 @@ class Image extends Model
         if (! $this->getID()) {
             return;
         }
-        $sql = "delete from `{prefix}gallery` where id = ?";
+        $sql = "delete from `{prefix}gallery_images` where id = ?";
         $args = array(
             $this->getID()
         );

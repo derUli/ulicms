@@ -3,6 +3,7 @@ namespace Gallery2019;
 
 use Model;
 use Database;
+use NotImplementedException;
 
 class Gallery extends Model
 {
@@ -16,11 +17,6 @@ class Gallery extends Model
     private $createdby;
 
     private $lastchangedby;
-
-    public function tearDown()
-    {
-        Database::query("delete from `{prefix}gallery` where title like 'Test - %'", true);
-    }
 
     public function loadByID($id)
     {
@@ -170,5 +166,11 @@ class Gallery extends Model
         );
         Database::pQuery($sql, $args, true);
         $this->fillVars(null);
+    }
+
+    // TODO: Implement function
+    public function getImages()
+    {
+        return array();
     }
 }

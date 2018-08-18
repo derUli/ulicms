@@ -4,6 +4,12 @@ use Gallery2019\Gallery;
 class GalleryModelTest extends \PHPUnit\Framework\TestCase
 {
 
+    public function tearDown()
+    {
+        Database::query("delete from `{prefix}gallery` where title like 'Test - %'", true);
+    }
+    
+
     public function testCreateEditAndDeleteGallery()
     {
         $manager = new UserManager();
