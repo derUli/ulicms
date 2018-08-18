@@ -16,9 +16,14 @@ class Gallery extends \Model
 
     private $lastchangedby;
 
+    public function tearDown()
+    {
+        Database::query("delete from `{prefix}gallery` where title like 'Test - %'", true);
+    }
+
     public function loadByID($id)
     {
-        $sql = "select * from {prefix}galleries where id = ?";
+        $sql = "select * from `{prefix}gallery` where id = ?";
         $args = array(
             intval($id)
         );
@@ -57,7 +62,7 @@ class Gallery extends \Model
                     created, 
                     updated, 
                     createdby, 
-                    lastchangeby
+                    lastchangedby
                 )
                 values
                 (
@@ -72,11 +77,10 @@ class Gallery extends \Model
             $this->getCreated(),
             $this->getUpdated(),
             $this->getCreatedBy(),
-            $this->getLastChangeBy()
+            $this->getlastchangedby()
         );
-        if (Database::pQuery($sql, $args, true)) {
-            $this->setID(Database::getLastInsertID());
-        }
+        Database::pQuery($sql, $args, true);
+        $this->setID(Database::getLastInsertID());
     }
 
     protected function update()
@@ -84,12 +88,13 @@ class Gallery extends \Model
         if (! $this->getID()) {
             return;
         }
-        $sql = "update `{prefix}gallery`
-                title, 
-                created, 
-                updated, 
-                createdby, 
-                lastchangeby
+        $this->setUpdated(time());
+        $sql = "update `{prefix}gallery` set
+                title = ?,
+                created = FROM_UNIXTIME(?),
+                updated = FROM_UNIXTIME(?),
+                createdby = ?,
+                lastchangedby = ?
                 where id = ?
                 ";
         $args = array(
@@ -97,7 +102,7 @@ class Gallery extends \Model
             $this->getCreated(),
             $this->getUpdated(),
             $this->getCreatedBy(),
-            $this->getLastChangeBy(),
+            $this->getlastchangedby(),
             $this->getID()
         );
         Database::pQuery($sql, $args, true);
@@ -143,12 +148,12 @@ class Gallery extends \Model
         $this->createdby = is_numeric($val) ? intval($val) : null;
     }
 
-    public function getLastChangeBy()
+    public function getLastChangedBy()
     {
         return $this->lastchangedby;
     }
 
-    public function setLastChangeBy($val)
+    public function setLastChangedBy($val)
     {
         $this->lastchangedby = is_numeric($val) ? intval($val) : null;
     }
