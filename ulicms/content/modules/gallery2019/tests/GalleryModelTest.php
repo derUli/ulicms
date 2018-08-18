@@ -20,6 +20,7 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
         
         $id = $gallery->getID();
         $createdTime = $gallery->getCreated();
+        
         $this->assertNotNull($id);
         
         $gallery = new Gallery($id);
@@ -31,6 +32,7 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
         
         $newTitle = "Test - Updated at " . time();
         $gallery->setTitle($newTitle);
+        
         $gallery->save();
         
         $gallery = new Gallery($id);
@@ -41,6 +43,7 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($firstUser->getID(), $gallery->getLastChangedBy());
         
         $gallery->delete();
+        
         $gallery = new Gallery($id);
         $this->assertNull($gallery->getID());
     }
