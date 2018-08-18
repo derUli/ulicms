@@ -26,7 +26,7 @@ class Gallery extends \Model
         $this->fillVars($query);
     }
 
-    protected function fillVars($query)
+    protected function fillVars($query = null)
     {
         if ($query and Database::getNumRows($query) > 0) {
             $result = Database::fetchObject($query);

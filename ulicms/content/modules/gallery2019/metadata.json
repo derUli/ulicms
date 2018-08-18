@@ -7,6 +7,9 @@
 	"controllers": {
 		"Gallery2019Controller": "controllers/Gallery2019Controller.php"
 	},
+	"objects": {
+		"Gallery": "objects/Gallery.php"
+	},
 	"admin_permission": "galleries_list",
 	"custom_acl": [
 		"galleries_list",
