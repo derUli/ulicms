@@ -1,9 +1,10 @@
 <?php
 namespace Gallery2019;
 
+use Model;
 use Database;
 
-class Gallery extends \Model
+class Gallery extends Model
 {
 
     private $title;
