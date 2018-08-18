@@ -14,4 +14,4 @@ ALTER TABLE `{prefix}gallery_images`
   ADD CONSTRAINT fk_gallery_images_gallery_id
   FOREIGN KEY (gallery_id) 
   REFERENCES `{prefix}gallery`(id)
-  ON DELETE Set NULL;
+  ON DELETE CASCADE;

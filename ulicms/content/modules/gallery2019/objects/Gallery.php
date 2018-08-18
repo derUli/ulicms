@@ -30,12 +30,14 @@ class Gallery extends \Model
     {
         if ($query and Database::getNumRows($query) > 0) {
             $result = Database::fetchObject($query);
+            $this->setID($result->id);
             $this->title = $result->title;
             $this->created = strtotime($result->created);
             $this->updated = strtotime($result->updated);
             $this->createdby = $result->createdby;
             $this->lastchangedby = $result->lastchangedby;
         } else {
+            $this->setID(null);
             $this->title = null;
             $this->created = null;
             $this->updated = null;
@@ -62,5 +64,18 @@ class Gallery extends \Model
     public function getCreatedBy()
     {
         return $this->createdby;
+    }
+
+    public function delete()
+    {
+        if (! $this->getID()) {
+            return;
+        }
+        $sql = "delete from `{prefix}gallery` where id = ?";
+        $args = array(
+            $this->getID()
+        );
+        Database::pQuery($sql, $args, true);
+        $this->fillVars(null);
     }
 }
