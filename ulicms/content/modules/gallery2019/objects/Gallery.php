@@ -46,9 +46,71 @@ class Gallery extends \Model
         }
     }
 
+    protected function insert()
+    {
+        $time = time();
+        $this->setCreated($time);
+        $this->setUpdated($time);
+        $sql = "insert into `{prefix}gallery` 
+                (
+                    title, 
+                    created, 
+                    updated, 
+                    createdby, 
+                    lastchangeby
+                )
+                values
+                (
+                    ?,
+                    FROM_UNIXTIME(?),
+                    FROM_UNIXTIME(?),
+                    ?,
+                    ?
+                )";
+        $args = array(
+            $this->getTitle(),
+            $this->getCreated(),
+            $this->getUpdated(),
+            $this->getCreatedBy(),
+            $this->getLastChangeBy()
+        );
+        if (Database::pQuery($sql, $args, true)) {
+            $this->setID(Database::getLastInsertID());
+        }
+    }
+
+    protected function update()
+    {
+        if (! $this->getID()) {
+            return;
+        }
+        $sql = "update `{prefix}gallery`
+                title, 
+                created, 
+                updated, 
+                createdby, 
+                lastchangeby
+                where id = ?
+                ";
+        $args = array(
+            $this->getTitle(),
+            $this->getCreated(),
+            $this->getUpdated(),
+            $this->getCreatedBy(),
+            $this->getLastChangeBy(),
+            $this->getID()
+        );
+        Database::pQuery($sql, $args, true);
+    }
+
     public function getTitle()
     {
         return $this->title;
+    }
+
+    public function setTitle($val)
+    {
+        $this->title = ! is_null($val) ? strval($val) : null;
     }
 
     public function getCreated()
@@ -56,14 +118,39 @@ class Gallery extends \Model
         return $this->created;
     }
 
+    public function setCreated($val)
+    {
+        $this->created = is_numeric($val) ? intval($val) : null;
+    }
+
     public function getUpdated()
     {
         return $this->updated;
     }
 
+    public function setUpdated($val)
+    {
+        $this->updated = is_numeric($val) ? intval($val) : null;
+    }
+
     public function getCreatedBy()
     {
         return $this->createdby;
+    }
+
+    public function setCreatedBy($val)
+    {
+        $this->createdby = is_numeric($val) ? intval($val) : null;
+    }
+
+    public function getLastChangeBy()
+    {
+        return $this->lastchangedby;
+    }
+
+    public function setLastChangeBy($val)
+    {
+        $this->lastchangedby = is_numeric($val) ? intval($val) : null;
     }
 
     public function delete()
