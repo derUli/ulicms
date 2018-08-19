@@ -3,6 +3,8 @@ namespace Gallery2019;
 
 use Model;
 use Database;
+use Path;
+use StringHelper;
 
 class Image extends Model
 {
@@ -49,8 +51,8 @@ class Image extends Model
                 (
                     gallery_id,
                     path,
-                    description
-                    order
+                    description,
+                    `order`
                 ) 
                 VALUES 
                 (
@@ -115,6 +117,17 @@ class Image extends Model
     public function setOrder($val)
     {
         $this->order = is_numeric($val) ? intval($val) : null;
+    }
+
+    public function exists()
+    {
+        if (StringHelper::isNullOrWhitespace($this->path)) {
+            return false;
+        }
+        $path = urldecode(remove_prefix($this->path, "/"));
+        
+        $fullPath = Path::resolve("ULICMS_DATA_STORAGE_ROOT/" . $path);
+        return is_file($path);
     }
 
     public function delete()

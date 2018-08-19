@@ -1,5 +1,6 @@
 <?php
 use Gallery2019\Gallery;
+use Gallery2019\Image;
 
 class GalleryModelTest extends \PHPUnit\Framework\TestCase
 {
@@ -74,6 +75,39 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
         $gallery = new Gallery($id);
         
         $this->assertEquals(0, count($gallery->getImages()));
+        
+        $imageOk = new Image();
+        $imageOk->setPath("/admin/gfx/logo.png");
+        $imageOk->setDescription("Test Image");
+        $imageOk->setOrder(10);
+        $gallery->addImage($imageOk);
+        
+        $imageFailed = new Image();
+        $imageFailed->setPath("/content/images/nothing.jpg");
+        $imageFailed->setDescription("Not existing Image");
+        $imageFailed->setOrder(20);
+        $gallery->addImage($imageFailed);
+        
+        $this->assertEquals(2, count($gallery->getImages()));
+        
+        $gallery = new Gallery($id);
+        $this->assertEquals(2, count($gallery->getImages()));
+        
+        $images = $gallery->getImages();
+        $firstImage = $images[0];
+        $lastImage = $images[1];
+        
+        $this->assertEquals("/admin/gfx/logo.png", $firstImage->getPath());
+        $this->assertEquals("Test Image", $firstImage->getDescription());
+        $this->assertEquals(10, $firstImage->getOrder());
+        $this->assertEquals($imageOk->getGalleryId(), $firstImage->getGalleryId());
+        $this->assertTrue($firstImage->exists());
+        
+        $this->assertEquals("/content/images/nothing.jpg", $lastImage->getPath());
+        $this->assertEquals("Not existing Image", $lastImage->getDescription());
+        $this->assertEquals(20, $lastImage->getOrder());
+        $this->assertEquals($imageFailed->getGalleryId(), $lastImage->getGalleryId());
+        $this->assertFalse($lastImage->exists());
         
         $gallery->delete();
     }

@@ -172,7 +172,19 @@ class Gallery extends Model
     // TODO: Implement function
     public function getImages()
     {
-        return array();
+        $result = array();
+        if (! $this->getID()) {
+            return $result;
+        }
+        $sql = "select id from `{prefix}gallery_images` where gallery_id = ? order by id";
+        $args = array(
+            $this->getID()
+        );
+        $query = Database::pQuery($sql, $args, true);
+        while ($row = Database::fetchObject($query)) {
+            $result[] = new Image($row->id);
+        }
+        return $result;
     }
 
     public function addImage($image)
