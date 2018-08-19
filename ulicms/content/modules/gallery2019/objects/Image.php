@@ -5,6 +5,7 @@ use Model;
 use Database;
 use Path;
 use StringHelper;
+use NotImplementedException;
 
 class Image extends Model
 {
@@ -69,6 +70,11 @@ class Image extends Model
         );
         Database::pQuery($sql, $args, true);
         $this->setID(Database::getLastInsertID());
+    }
+
+    protected function update()
+    {
+        throw new NotImplementedException("update not implemented yet.");
     }
 
     public function getGalleryId()

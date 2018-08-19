@@ -169,7 +169,6 @@ class Gallery extends Model
         $this->fillVars(null);
     }
 
-    // TODO: Implement function
     public function getImages()
     {
         $result = array();

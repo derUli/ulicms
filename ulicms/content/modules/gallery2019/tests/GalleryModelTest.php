@@ -103,11 +103,16 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($imageOk->getGalleryId(), $firstImage->getGalleryId());
         $this->assertTrue($firstImage->exists());
         
+        // TODO: Implement test for edit image
+        
         $this->assertEquals("/content/images/nothing.jpg", $lastImage->getPath());
         $this->assertEquals("Not existing Image", $lastImage->getDescription());
         $this->assertEquals(20, $lastImage->getOrder());
         $this->assertEquals($imageFailed->getGalleryId(), $lastImage->getGalleryId());
         $this->assertFalse($lastImage->exists());
+        
+        $lastImage->delete();
+        $this->assertEquals(1, count($gallery->getImages()));
         
         $gallery->delete();
     }
