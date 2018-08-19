@@ -43,6 +43,32 @@ class Image extends Model
         }
     }
 
+    protected function insert()
+    {
+        $sql = "insert into `{prefix}gallery_images`
+                (
+                    gallery_id,
+                    path,
+                    description
+                    order
+                ) 
+                VALUES 
+                (
+                    ?,
+                    ?,
+                    ?,
+                    ?
+                )";
+        $args = array(
+            $this->gallery_id,
+            $this->path,
+            $this->description,
+            $this->order
+        );
+        Database::pQuery($sql, $args, true);
+        $this->setID(Database::getLastInsertID());
+    }
+
     public function getGalleryId()
     {
         return $this->gallery_id;

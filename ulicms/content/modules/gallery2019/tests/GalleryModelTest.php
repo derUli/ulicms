@@ -8,7 +8,6 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
     {
         Database::query("delete from `{prefix}gallery` where title like 'Test - %'", true);
     }
-    
 
     public function testCreateEditAndDeleteGallery()
     {
@@ -52,5 +51,30 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
         
         $gallery = new Gallery($id);
         $this->assertNull($gallery->getID());
+    }
+
+    public function testCreateGalleryAddImages()
+    {
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $firstUser = $users[0];
+        
+        $gallery = new Gallery();
+        $this->assertNull($gallery->getID());
+        $title = "Test - Created at " . time();
+        $gallery->setTitle($title);
+        $gallery->setCreatedBy($firstUser->getId());
+        $gallery->setLastChangedBy($firstUser->getId());
+        $gallery->save();
+        
+        $this->assertEquals(0, count($gallery->getImages()));
+        
+        $id = $gallery->getID();
+        
+        $gallery = new Gallery($id);
+        
+        $this->assertEquals(0, count($gallery->getImages()));
+        
+        $gallery->delete();
     }
 }

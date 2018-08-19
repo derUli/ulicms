@@ -4,6 +4,7 @@ namespace Gallery2019;
 use Model;
 use Database;
 use NotImplementedException;
+use Exception;
 
 class Gallery extends Model
 {
@@ -172,5 +173,14 @@ class Gallery extends Model
     public function getImages()
     {
         return array();
+    }
+
+    public function addImage($image)
+    {
+        if (! $this->getID()) {
+            throw new Exception("The Gallery must be saved before you can add images");
+        }
+        $image->setGalleryId($this->getID());
+        $image->save();
     }
 }
