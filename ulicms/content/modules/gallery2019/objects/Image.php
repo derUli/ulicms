@@ -74,7 +74,21 @@ class Image extends Model
 
     protected function update()
     {
-        throw new NotImplementedException("update not implemented yet.");
+        $sql = "update `{prefix}gallery_images` set 
+                    gallery_id = ?,
+                    path = ?,
+                    description = ?,
+                    `order` = ?
+                    where id = ?
+                    ";
+        $args = array(
+            $this->gallery_id,
+            $this->path,
+            $this->description,
+            $this->order,
+            $this->getID()
+        );
+        Database::pQuery($sql, $args, true);
     }
 
     public function getGalleryId()

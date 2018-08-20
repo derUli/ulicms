@@ -103,7 +103,11 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($imageOk->getGalleryId(), $firstImage->getGalleryId());
         $this->assertTrue($firstImage->exists());
         
-        // TODO: Implement test for edit image
+        $this->assertEquals("/admin/gfx/logo.png", $firstImage->getPath());
+        $this->assertEquals("Test Image", $firstImage->getDescription());
+        $this->assertEquals(10, $firstImage->getOrder());
+        $this->assertEquals($imageOk->getGalleryId(), $firstImage->getGalleryId());
+        $this->assertTrue($firstImage->exists());
         
         $this->assertEquals("/content/images/nothing.jpg", $lastImage->getPath());
         $this->assertEquals("Not existing Image", $lastImage->getDescription());
@@ -113,6 +117,19 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
         
         $lastImage->delete();
         $this->assertEquals(1, count($gallery->getImages()));
+        
+        $firstImage->setDescription("Test New Description");
+        $firstImage->setPath("/new/path.jpg");
+        $firstImage->setOrder(666);
+        $firstImage->save();
+        
+        $images = $gallery->getImages();
+        $firstImage = $images[0];
+        
+        $this->assertEquals("/new/path.jpg", $firstImage->getPath());
+        $this->assertEquals("Test New Description", $firstImage->getDescription());
+        $this->assertEquals(666, $firstImage->getOrder());
+        $this->assertEquals($imageOk->getGalleryId(), $firstImage->getGalleryId());
         
         $gallery->delete();
     }
