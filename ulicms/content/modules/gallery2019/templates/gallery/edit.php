@@ -30,7 +30,9 @@ if ($id and $model->getID()) {
 </p>
 <h2><?php translate("images")?></h2>
 <p>
-	<a href="#" class="btn btn-default"><?php translate("add_image");?></a>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("gallery_image_add", "gallery_id={$model->getId()}");?>"
+		class="btn btn-default"><?php translate("add_image");?></a>
 </p>
 <div class="alert alert-warning">
 	<p>Work in Progress</p>

@@ -6,7 +6,8 @@
 	"main_class": "Gallery2019Controller",
 	"controllers": {
 		"Gallery2019Controller": "controllers/Gallery2019Controller.php",
-		"GalleryController": "controllers/GalleryController.php"
+		"GalleryController": "controllers/GalleryController.php",
+		"GalleryImageController": "controllers/GalleryImageController.php"
 	},
 	"objects": {
 		"Gallery": "objects/Gallery.php",
@@ -14,15 +15,23 @@
 	},
 	"actions": {
 		"gallery_create": "templates/gallery/new.php",
-		"gallery_edit": "templates/gallery/edit.php"
+		"gallery_edit": "templates/gallery/edit.php",
+		"gallery_image_add": "templates/image/form.php",
+		"gallery_image_edit": "templates/image/form.php"
 	},
 	"action_permissions": {
 		"gallery_create": "galleries_create",
-		"gallery_edit": "galleries_edit"
+		"gallery_edit": "galleries_edit",
+		"gallery_image_add": "galleries_edit",
+		"gallery_image_edit": "galleries_edit"
 	},
 	"controller_function_permissions": {
 		"GalleryController::createPost": "galleries_create",
-		"GalleryController::editPost": "galleries_edit"
+		"GalleryController::editPost": "galleries_edit",
+		"GalleryController::deletePost": "galleries_edit",
+		"GalleryImageController::createPost": "galleries_edit",
+		"GalleryImageController::editPost": "galleries_edit",
+		"GalleryImageController::deletePost": "galleries_edit"
 	},
 	"admin_permission": "galleries_list",
 	"custom_acl": [
