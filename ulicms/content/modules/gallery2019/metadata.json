@@ -19,6 +19,10 @@
 		"gallery_create": "galleries_create",
 		"gallery_edit": "galleries_edit"
 	},
+	"controller_function_permissions": {
+		"Gallery2019Controller::createPost": "galleries_create",
+		"Gallery2019Controller::editPost": "galleries_edit"
+	},
 	"admin_permission": "galleries_list",
 	"custom_acl": [
 		"galleries_list",

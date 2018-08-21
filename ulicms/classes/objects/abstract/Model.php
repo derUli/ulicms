@@ -12,6 +12,14 @@ class Model
         }
     }
 
+    public function loadByRequestId()
+    {
+        $id = Request::getVar($id);
+        if (is_numeric($id)) {
+            $this->loadByID(intval($id));
+        }
+    }
+
     public function loadByID($id)
     {
         throw new NotImplementedException("load not implemented");
