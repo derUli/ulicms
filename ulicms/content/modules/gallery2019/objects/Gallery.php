@@ -194,4 +194,15 @@ class Gallery extends Model
         $image->setGalleryId($this->getID());
         $image->save();
     }
+
+    public static function getAll()
+    {
+        $result = array();
+        $sql = "select id from `{prefix}gallery` order by id";
+        $query = Database::query($sql, true);
+        while ($row = Database::fetchObject($query)) {
+            $result[] = new self($row->id);
+        }
+        return $result;
+    }
 }

@@ -12,10 +12,12 @@
 		"GalleryImage": "objects/Image.php"
 	},
 	"actions": {
-		"gallery_create": "templates/new.php"
+		"gallery_create": "templates/new.php",
+		"gallery_edit": "templates/edit.php"
 	},
 	"action_permissions": {
-		"gallery_create": "galleries_create"
+		"gallery_create": "galleries_create",
+		"gallery_edit": "galleries_edit"
 	},
 	"admin_permission": "galleries_list",
 	"custom_acl": [

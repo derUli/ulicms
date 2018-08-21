@@ -12,6 +12,8 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
 
     public function testCreateEditAndDeleteGallery()
     {
+        $this->assertEquals(0, count(Gallery::getAll()));
+        
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $firstUser = $users[0];
@@ -40,6 +42,8 @@ class GalleryModelTest extends \PHPUnit\Framework\TestCase
         $gallery->setTitle($newTitle);
         
         $gallery->save();
+        
+        $this->assertEquals(1, count(Gallery::getAll()));
         
         $gallery = new Gallery($id);
         $this->assertEquals($newTitle, $gallery->getTitle());
