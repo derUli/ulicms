@@ -1,6 +1,10 @@
+<?php $acl = new ACL();?>
+<?php if($acl->hasPermission("gallery_create")){?>
 <p>
-	<a href="#" class="btn btn-primary"><?php translate("create_gallery");?></a>
+	<a href="<?php echo ModuleHelper::buildActionURL("gallery_create");?>"
+		class="btn btn-primary"><?php translate("create_gallery");?></a>
 </p>
+<?php }?>
 
 <table class="tablesorter">
 	<thead>

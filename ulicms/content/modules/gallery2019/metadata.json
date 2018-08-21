@@ -11,6 +11,12 @@
 		"Gallery": "objects/Gallery.php",
 		"GalleryImage": "objects/Image.php"
 	},
+	"actions": {
+		"gallery_create": "templates/new.php"
+	},
+	"action_permissions": {
+		"gallery_create": "galleries_create"
+	},
 	"admin_permission": "galleries_list",
 	"custom_acl": [
 		"galleries_list",
