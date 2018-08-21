@@ -6,7 +6,7 @@ echo ModuleHelper::buildAdminURL("gallery2019");
 ?>"
 		class="btn btn-default"><?php translate("back");?></a>
 </p>
-<?php echo ModuleHelper::buildMethodCallForm("Gallery2019Controller", "create");?>
+<?php echo ModuleHelper::buildMethodCallForm("GalleryController", "create");?>
 <p>
 	<strong><?php translate("title")?></strong> <br /> <input type="text"
 		name="title" maxlength="200" value="" required>

@@ -5,23 +5,24 @@
 	"shy": false,
 	"main_class": "Gallery2019Controller",
 	"controllers": {
-		"Gallery2019Controller": "controllers/Gallery2019Controller.php"
+		"Gallery2019Controller": "controllers/Gallery2019Controller.php",
+		"GalleryController": "controllers/GalleryController.php"
 	},
 	"objects": {
 		"Gallery": "objects/Gallery.php",
 		"GalleryImage": "objects/Image.php"
 	},
 	"actions": {
-		"gallery_create": "templates/new.php",
-		"gallery_edit": "templates/edit.php"
+		"gallery_create": "templates/gallery/new.php",
+		"gallery_edit": "templates/gallery/edit.php"
 	},
 	"action_permissions": {
 		"gallery_create": "galleries_create",
 		"gallery_edit": "galleries_edit"
 	},
 	"controller_function_permissions": {
-		"Gallery2019Controller::createPost": "galleries_create",
-		"Gallery2019Controller::editPost": "galleries_edit"
+		"GalleryController::createPost": "galleries_create",
+		"GalleryController::editPost": "galleries_edit"
 	},
 	"admin_permission": "galleries_list",
 	"custom_acl": [

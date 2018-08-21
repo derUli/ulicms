@@ -42,7 +42,7 @@ $galleries = Gallery::getAll();
 					alt="<?php translate("edit");?>" title="<?php translate("edit");?>"></a></td>
 			<td class="text-center">
     				<?php
-        echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("Gallery2019Controller", "delete"), array(
+        echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("GalleryController", "delete"), array(
             "del" => $gallery->getID()
         ));
         ?>

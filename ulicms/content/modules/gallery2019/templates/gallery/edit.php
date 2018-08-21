@@ -14,7 +14,13 @@ if ($id and $model->getID()) {
     ?>"
 		class="btn btn-default"><?php translate("back");?></a>
 </p>
-<?php echo ModuleHelper::buildMethodCallForm("Gallery2019Controller", "edit");?>
+<?php if(Request::getVar("save")){?>
+<div class="alert alert-success alert-dismissable fade in">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<?php translate("changes_was_saved")?>
+		</div>
+<?php }?>
+<?php echo ModuleHelper::buildMethodCallForm("GalleryController", "edit");?>
 
 <input type="hidden" name="id" value="<?php esc($id);?>">
 <p>
@@ -22,6 +28,13 @@ if ($id and $model->getID()) {
 		name="title" maxlength="200" value="<?php esc($model->getTitle());?>"
 		required>
 </p>
+<h2><?php translate("images")?></h2>
+<p>
+	<a href="#" class="btn btn-default"><?php translate("add_image");?></a>
+</p>
+<div class="alert alert-warning">
+	<p>Work in Progress</p>
+</div>
 <p>
 	<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 </p>
