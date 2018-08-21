@@ -43,7 +43,7 @@ $galleries = Gallery::getAll();
 			<td class="text-center">
     				<?php
         echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("GalleryController", "delete"), array(
-            "del" => $gallery->getID()
+            "id" => $gallery->getID()
         ));
         ?>
     			</td>
@@ -52,3 +52,8 @@ $galleries = Gallery::getAll();
 	<?php }?>
 	</tbody>
 </table>
+<?php 
+$translation = new JSTranslation();
+$translation->addKey("ask_for_delete");
+$translation->render();
+?>

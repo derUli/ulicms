@@ -1,14 +1,13 @@
 <?php
-use Gallery2019\Gallery;
 
 class Gallery2019Controller extends Controller
 {
 
-    private $moduleName = "gallery2019";
+    public const MODULE_NAME = "gallery2019";
 
     public function uninstall()
     {
-        $migrator = new DBMigrator("module/{$this->moduleName}", ModuleHelper::buildModuleRessourcePath($this->moduleName, "sql/down"));
+        $migrator = new DBMigrator("module/{self::MODULE_NAME}", ModuleHelper::buildModuleRessourcePath(self::MODULE_NAME, "sql/down"));
         $migrator->rollback();
     }
 
@@ -24,31 +23,6 @@ class Gallery2019Controller extends Controller
 
     public function settings()
     {
-        return Template::executeModuleTemplate($this->moduleName, "gallery/list.php");
-    }
-
-    public function createPost()
-    {
-        $gallery = new Gallery();
-        $gallery->setTitle(Request::getVar("title"));
-        $gallery->setCreatedBy(get_user_id());
-        $gallery->setLastChangedBy(get_user_id());
-        $gallery->save();
-        $id = $gallery->getID();
-        Response::redirect(ModuleHelper::buildActionURL("gallery_edit", "id={$id}"));
-    }
-
-    public function editPost()
-    {
-        $id = Request::getVar("id", 0, "int");
-        $title = Request::getVar("title", "", "str");
-        $model = new Gallery($id);
-        if ($id and $model->getID()) {
-            $model->setTitle($title);
-            $model->save();
-            Response::redirect(ModuleHelper::buildActionURL("gallery_edit", "id={$id}&save=1"));
-        } else {
-            throw new FileNotFoundException("No gallery with id {$id}");
-        }
+        return Template::executeModuleTemplate(self::MODULE_NAME, "gallery/list.php");
     }
 }

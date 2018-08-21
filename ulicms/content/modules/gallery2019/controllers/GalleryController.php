@@ -28,4 +28,20 @@ class GalleryController extends Controller
             throw new FileNotFoundException("No gallery with id {$id}");
         }
     }
+
+    public function delete()
+    {
+        $id = Request::getVar("id", 0, "int");
+        if (! $id) {
+            throw new Exception("No id set");
+        }
+        
+        $model = new Gallery($id);
+        if ($model->getID()) {
+            $model->delete();
+            Response::redirect(ModuleHelper::buildAdminURL(Gallery2019Controller::MODULE_NAME));
+        } else {
+            throw new FileNotFoundException("No gallery with id {$id}");
+        }
+    }
 }
