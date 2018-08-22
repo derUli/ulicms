@@ -27,9 +27,32 @@ echo ModuleHelper::buildMethodCallForm("GalleryImageController", $isEdit ? "edit
 <input type="hidden" name="gallery_id"
 	value="<?php esc($model->getGalleryId());?>">
 
-<div class="alert alert-warning">
-	<p>Work in Progress</p>
-</div>
+<?php
+$path = new FileImage();
+$path->name = "path";
+$path->title = "file";
+$path->required = true;
+echo $path->render($model->getPath());
+
+$description = new MultilineTextField();
+$description->name = "description";
+$description->title = "description";
+echo $description->render($model->getDescription());
+
+$order = new NumberField();
+$order->name = "position";
+$order->title = "position";
+$order->htmlAttributes = array(
+    "step" => 1
+);
+echo $order->render($model->getOrder());
+?>
+
 <p>
 	<button type="submit" class="btn btn-primary"><?php translate($isEdit ? "edit_image" : "add_image"); ?></button>
 <?php echo ModuleHelper::endForm()?>
+
+<?php
+enqueueScriptFile(ModuleHelper::buildRessourcePath("gallery2019", "js/backend.js"));
+combinedScriptHtml();
+?>
