@@ -25,7 +25,7 @@ echo ModuleHelper::buildMethodCallForm("GalleryImageController", $isEdit ? "edit
 
 <input type="hidden" name="id" value="<?php esc($model->getID());?>">
 <input type="hidden" name="gallery_id"
-	value="<?php esc($model->getGalleryId());?>">
+	value="<?php esc($gallery_id);?>">
 
 <?php
 $path = new FileImage();
