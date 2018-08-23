@@ -49,6 +49,7 @@ echo $order->render($model->getOrder());
 
 <p>
 	<button type="submit" class="btn btn-primary"><?php translate($isEdit ? "edit_image" : "add_image"); ?></button>
+</p>
 <?php echo ModuleHelper::endForm()?>
 
 <?php

@@ -54,4 +54,21 @@ class GalleryImageController extends Controller
         
         Response::redirect(ModuleHelper::buildActionURL("gallery_edit", "id={$gallery_id}"));
     }
+
+    public function delete()
+    {
+        $id = Request::getVar("id", 0, "int");
+        if (! $id) {
+            throw new Exception("No id set");
+        }
+        
+        $model = new Image($id);
+        $gallery_id = $model->getGalleryId();
+        if ($model->getID()) {
+            $model->delete();
+            Response::redirect(ModuleHelper::buildActionURL("gallery_edit", "id={$gallery_id}"));
+        } else {
+            throw new FileNotFoundException("No gallery with id {$id}");
+        }
+    }
 }

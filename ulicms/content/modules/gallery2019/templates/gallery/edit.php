@@ -29,12 +29,17 @@ if ($id and $model->getID()) {
 		name="title" maxlength="200" value="<?php esc($model->getTitle());?>"
 		required>
 </p>
+<p>
+	<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
+</p>
+<?php echo ModuleHelper::endForm()?>
 <h2><?php translate("images")?></h2>
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("gallery_image_add", "gallery_id={$model->getId()}");?>"
 		class="btn btn-default"><?php translate("add_image");?></a>
 </p>
+
 <table class="tablesorter">
 	<thead>
 		<tr>
@@ -68,12 +73,14 @@ if ($id and $model->getID()) {
 	<?php } ?>
 	</tbody>
 </table>
-<p>
-	<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
-</p>
-<?php echo ModuleHelper::endForm()?>
+
 <?php
 } else {
     noperms();
 }
+?>
+<?php
+$translation = new JSTranslation();
+$translation->addKey("ask_for_delete");
+$translation->render();
 ?>

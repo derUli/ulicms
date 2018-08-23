@@ -25,4 +25,9 @@ class Gallery2019Controller extends Controller
     {
         return Template::executeModuleTemplate(self::MODULE_NAME, "gallery/list.php");
     }
+
+    public function contentFilter($htmlInput)
+    {
+        return $htmlInput;
+    }
 }
