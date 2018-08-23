@@ -175,7 +175,7 @@ class Gallery extends Model
         if (! $this->getID()) {
             return $result;
         }
-        $sql = "select id from `{prefix}gallery_images` where gallery_id = ? order by id";
+        $sql = "select id from `{prefix}gallery_images` where gallery_id = ? order by `order`,id";
         $args = array(
             $this->getID()
         );

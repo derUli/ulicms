@@ -5,7 +5,7 @@ $id = Request::getVar("id", null, "int");
 $model = new Image($id);
 
 $isEdit = (bool) $model->getID();
-$gallery_id = Request::getVar("gallery_id", null, "int");
+$gallery_id = $isEdit ? $model->getGalleryId() : Request::getVar("gallery_id", null, "int");
 ?>
 
 <h1><?php translate($isEdit ? "edit_image" : "add_image");?></h1>
@@ -24,8 +24,7 @@ echo ModuleHelper::buildMethodCallForm("GalleryImageController", $isEdit ? "edit
 ?>
 
 <input type="hidden" name="id" value="<?php esc($model->getID());?>">
-<input type="hidden" name="gallery_id"
-	value="<?php esc($gallery_id);?>">
+<input type="hidden" name="gallery_id" value="<?php esc($gallery_id);?>">
 
 <?php
 $path = new FileImage();

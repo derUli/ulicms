@@ -4,6 +4,7 @@ use Gallery2019\Gallery;
 $id = Request::getVar("id", 0, "int");
 $model = new Gallery($id);
 if ($id and $model->getID()) {
+    $images = $model->getImages();
     ?>
 <h1><?php translate("edit_gallery");?></h1>
 <p>
@@ -34,9 +35,39 @@ if ($id and $model->getID()) {
 		href="<?php echo ModuleHelper::buildActionURL("gallery_image_add", "gallery_id={$model->getId()}");?>"
 		class="btn btn-default"><?php translate("add_image");?></a>
 </p>
-<div class="alert alert-warning">
-	<p>Work in Progress</p>
-</div>
+<table class="tablesorter">
+	<thead>
+		<tr>
+			<th><?php translate("position");?></th>
+			<th><?php translate("image");?></th>
+			<th><?php translate("description");?></th>
+			<td></td>
+			<td></td>
+		</tr>
+	</thead>
+	<tbody>
+	<?php foreach($images as $image){?>
+	<tr>
+			<td class="text-right"><?php esc($image->getOrder());?></td>
+			<td data-sort-value="<?php esc($image->getPath());?>"><img
+				class="img-thumbnail" src="<?php esc($image->getPath());?>"
+				title="<?php esc($image->getPath());?>"></td>
+			<td><?php esc($image->getDescription())?></td>
+			<td class="text-center"><a
+				href="<?php echo ModuleHelper::buildActionURL("gallery_image_edit", "id=".$image->getID());?>"><img
+					src="gfx/edit.png" class="mobile-big-image"
+					alt="<?php translate("edit");?>" title="<?php translate("edit");?>"></a></td>
+			<td class="text-center">
+    				<?php
+        echo ModuleHelper::deleteButton(ModuleHelper::buildMethodCallUrl("GalleryImageController", "delete"), array(
+            "id" => $image->getID()
+        ));
+        ?>
+    			</td>
+		</tr>
+	<?php } ?>
+	</tbody>
+</table>
 <p>
 	<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 </p>
