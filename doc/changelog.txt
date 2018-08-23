@@ -32,6 +32,7 @@ Neue API-Funktionen:
 * var_dump_str()
 * is_numeric_array($var)
 * var_is_type($var, $type, $required = false)
+* Model->loadByRequestId()
 
 Neue Filter:
 * font_sizes
