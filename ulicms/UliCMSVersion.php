@@ -11,8 +11,7 @@ if (! class_exists("UliCMSVersion")) {
             $this->buildDate = 0; // {InsertBuildDate}
             $this->internalVersion = Array(
                 2018,
-                3,
-                7
+                4
             );
             $this->update = "";
             $this->developmentVersion = false;
