@@ -15,8 +15,16 @@ class Gallery2019Controller extends Controller
 
     public function frontendFooter()
     {
+        $translation = new JSTranslation(array(), "LightBoxTranslation");
+        $translation->addKey("image_x_of_y");
+        $translation->render();
+        
         $jsFile = ModuleHelper::buildRessourcePath(self::MODULE_NAME, "js/lightbox2/js/lightbox.min.js");
+        $frontendJs = ModuleHelper::buildRessourcePath(self::MODULE_NAME, "js/frontend.js");
+        
         enqueueScriptFile($jsFile);
+        enqueueScriptFile($frontendJs);
+        
         combinedScriptHtml();
     }
 
