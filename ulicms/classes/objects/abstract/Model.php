@@ -14,7 +14,7 @@ class Model
 
     public function loadByRequestId()
     {
-        $id = Request::getVar($id);
+        $id = Request::getVar("id");
         if (is_numeric($id)) {
             $this->loadByID(intval($id));
         }
