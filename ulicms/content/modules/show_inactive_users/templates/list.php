@@ -15,6 +15,7 @@ $users = ViewBag::get("users");
 	</p>
 </form>
 <?php echo ModuleHelper::buildMethodCallForm("ShowInactiveUsersController", "delete");?>
+<div class="scroll">
 <table class="tablesorter">
 	<thead>
 		<tr style="font-weight: bold;">
@@ -54,6 +55,7 @@ foreach ($users as $user) {
 
 </tbody>
 </table>
+</div>
 <div class="checkbox">
 	<label> <input type="checkbox" name="confirm-delete" value="1" required><?php translate("ask_for_delete")?></label>
 </div>
