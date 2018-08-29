@@ -15,7 +15,7 @@ $users = ViewBag::get("users");
 	</p>
 </form>
 <?php echo ModuleHelper::buildMethodCallForm("ShowInactiveUsersController", "delete");?>
-<table>
+<table class="tablesorter">
 	<thead>
 		<tr style="font-weight: bold;">
 			<td><input type="checkbox" class="select-all" data-target=".user"></td>
