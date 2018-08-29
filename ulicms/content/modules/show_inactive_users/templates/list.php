@@ -16,19 +16,19 @@ $users = ViewBag::get("users");
 </form>
 <?php echo ModuleHelper::buildMethodCallForm("ShowInactiveUsersController", "delete");?>
 <div class="scroll">
-<table class="tablesorter">
-	<thead>
-		<tr style="font-weight: bold;">
-			<td><input type="checkbox" class="select-all" data-target=".user"></td>
-			<th><span><?php translate("username");?></span></th>
-			<th><span><?php translate("last_login");?></span></th>
+	<table class="tablesorter">
+		<thead>
+			<tr style="font-weight: bold;">
+				<td><input type="checkbox" class="select-all" data-target=".user"></td>
+				<th><span><?php translate("username");?></span></th>
+				<th><span><?php translate("last_login");?></span></th>
 
-			<th class="hide-on-mobile"><?php translate("lastname");?></th>
-			<th class="hide-on-mobile"><?php translate("firstname");?></th>
-			<th class="hide-on-mobile"><?php translate("email");?></th>
-		</tr>
-	</thead>
-	<tbody>
+				<th class="hide-on-mobile"><?php translate("lastname");?></th>
+				<th class="hide-on-mobile"><?php translate("firstname");?></th>
+				<th class="hide-on-mobile"><?php translate("email");?></th>
+			</tr>
+		</thead>
+		<tbody>
 	<?php
 foreach ($users as $user) {
     $date = $user->getLastLogin() ? date("Y-m-d H:i:s", $user->getLastLogin()) : get_translation("never");
@@ -54,7 +54,7 @@ foreach ($users as $user) {
 ?>
 
 </tbody>
-</table>
+	</table>
 </div>
 <div class="checkbox">
 	<label> <input type="checkbox" name="confirm-delete" value="1" required><?php translate("ask_for_delete")?></label>
