@@ -25,7 +25,6 @@ $users = ViewBag::get("users");
 			<th class="hide-on-mobile"><?php translate("lastname");?></th>
 			<th class="hide-on-mobile"><?php translate("firstname");?></th>
 			<th class="hide-on-mobile"><?php translate("email");?></th>
-			<th class="hide-on-mobile"><?php translate("primary_group");?></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -49,8 +48,7 @@ foreach ($users as $user) {
 			<td class=\"hide-on-mobile\">" . real_htmlspecialchars($user->getFirstname()) . "</td>";
     echo "
 			<td class=\"hide-on-mobile\">" . real_htmlspecialchars($user->getEmail()) . "</td>";
-    echo "
-			<td class=\"hide-on-mobile\">";
+    echo "</tr>";
 }
 ?>
 

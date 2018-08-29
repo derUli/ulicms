@@ -31,9 +31,10 @@ class ShowInactiveUsersController extends Controller
     {
         $manager = new UserManager();
         $allUsers = $manager->getAllUsers("last_action");
+        $allUsers = array_reverse($allUsers);
         $inactiveUsers = array();
         foreach ($allUsers as $user) {
-            if ($user->getLastLogin() and time() - $user->getLastLogin() >= ($days * 60 * 60 * 24)) {
+            if (($user->getLastLogin() and time() - $user->getLastLogin() >= ($days * 60 * 60 * 24)) or ! $user->getLastLogin()) {
                 $inactiveUsers[] = $user;
             }
         }
@@ -46,13 +47,10 @@ class ShowInactiveUsersController extends Controller
             ExceptionResult(get_translation("fill_all_fields"));
         }
         $users = Request::getVar("users");
-        var_dump($users);
         if (is_array($users)) {
             foreach ($users as $user) {
                 $dataset = new User($user);
-                if ($dataset->getLastLogin()) {
-                    $dataset->delete();
-                }
+                $dataset->delete();
             }
         }
         Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME));
