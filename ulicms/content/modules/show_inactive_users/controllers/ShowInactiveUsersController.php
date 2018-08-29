@@ -45,7 +45,8 @@ class ShowInactiveUsersController extends Controller
         if (! Request::getVar("confirm-delete")) {
             ExceptionResult(get_translation("fill_all_fields"));
         }
-        $users = Request::getVar("users[]");
+        $users = Request::getVar("users");
+        var_dump($users);
         if (is_array($users)) {
             foreach ($users as $user) {
                 $dataset = new User($user);
