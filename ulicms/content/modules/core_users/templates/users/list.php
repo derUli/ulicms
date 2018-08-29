@@ -70,7 +70,6 @@ if ($acl->hasPermission ( "users" )) {
 			}
 			?>
 		<?php
-			
 			echo '<tr id="dataset-' . $row->getId () . '">';
 			echo "<td style=\"width:40px;\">" . $row->getId () . "</td>";
 			echo "<td>";

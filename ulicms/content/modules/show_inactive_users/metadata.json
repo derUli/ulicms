@@ -1,0 +1,14 @@
+{
+	"version": "1.0",
+	"source": "extend",
+	"embed": false,
+	"shy": false,
+	"main_class": "ShowInactiveUsersController",
+	"controllers": {
+		"ShowInactiveUsersController": "controllers/ShowInactiveUsersController.php"
+	},
+	"controller_function_permissions": {
+		"ShowInactiveUsersController::deletePost": "users_edit"
+	},
+	"admin_permission": "users"
+}

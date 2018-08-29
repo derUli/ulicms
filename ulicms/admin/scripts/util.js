@@ -52,7 +52,7 @@ function checkboxChecked(event){
 	if(!item){
 		return;
 	}
-	var allSelected = $('.checkbox:checked').length == $("input[type=checkbox][data-checkbox-group=" + group +"]").length;
+	var allSelected = $('.checkbox:checked').length == $("input[type=checkbox][data-checkbox-group='" + group +"']").length;
 	$(item).prop("checked", allSelected);    
 }
 
