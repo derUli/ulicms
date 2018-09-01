@@ -454,8 +454,14 @@ h2.accordion-header {
 	background-color: #335599;
 }
 
-@media ( max-width : 500px) {
+@media ( max-width: 500px) {
 	.hide-on-mobile {
+		display: none;
+	}
+}
+@media(max-width: 650px){
+	.dataTables_length,
+	.dataTables_filter {
 		display: none;
 	}
 }
@@ -580,17 +586,18 @@ input.kcfinder {
 
 form.page-list-filters, .x-results-found {
 	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
-
-
-.dataTable{
+table.dataTable{
 	width:100% !important;
-	margin:0 !important;
+	    position: relative;
+		top: 5px;
 }
 
 .tablesorter{
 	width:100%;
+	margin-top:10px;
 }
 
 .dataTables_wrapper .dataTables_filter input{
