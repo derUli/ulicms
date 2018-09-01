@@ -14,15 +14,12 @@ if (! $admin_logo) {
 <?php
 $styles = array ();
 ?>
-<link rel="stylesheet" type="text/css"
-	href="scripts/tablesorter/style.min.css" />
 <?php
 $enq = array (
 		"scripts/php.js/strip_tags.js",
 		"scripts/php.js/htmlspecialchars.js",
 		"scripts/jquery.min.js",
 		"scripts/jquery.form.min.js",
-		"scripts/jquery.tablesorter.min.js",
 		"scripts/vallenato/vallenato.js",
 		"codemirror/lib/codemirror.js",
 		"codemirror/mode/php/php.js",
@@ -36,6 +33,7 @@ $enq = array (
 		"scripts/global.js",
 		"scripts/bootstrap.min.js",
 		"scripts/js/select2.min.js",
+		"scripts/datatables/datatables.min.js",
 		"../lib/js/global.js"
 );
 ?>
@@ -81,6 +79,7 @@ $(".menu li:has(ul)").doubleTapToGo();
 </script>
 <link rel="stylesheet" type="text/css"
 	href="scripts/vallenato/vallenato.css" />
+	
 <?php include "inc/ulicms_touch_icons.php";?>
 <?php
 $styles [] = "css/bootstrap.min.css";
@@ -95,16 +94,13 @@ foreach ( $styles as $style ) {
 
 combinedStylesheetHtml ();
 ?>
-<script type="text/javascript">
-$(document).ready(function(){
-    $(".tablesorter").tablesorter({widgets: ["zebra"]});
-    }
-);
-</script>
 <?php
 
 do_event ( "admin_head" );
 ?>
+
+<link rel="stylesheet" type="text/css"
+	href="scripts/datatables/datatables.min.css" />
 </head>
 <div
 	class="fluid-container main <?php
