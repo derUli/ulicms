@@ -83,9 +83,7 @@ do_event("before_backend_run_methods");
 ControllerRegistry::runMethods();
 do_event("after_backend_run_methods");
 
-do_event("before_backend_header");
-require_once "inc/header.php";
-do_event("after_backend_header");
+include "inc/ulicms_head.php";
 
 if (! $eingeloggt) {
     if (isset($_GET["register"])) {

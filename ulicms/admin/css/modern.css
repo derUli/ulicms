@@ -35,10 +35,6 @@ img {
 	border: 0px;
 }
 
-#main-content table.tablesorter thead th.header {
-	padding-right: 30px !important;
-}
-
 .ulicms_error {
 	color: red;
 	background-color: rgb(250, 250, 250);
@@ -458,8 +454,14 @@ h2.accordion-header {
 	background-color: #335599;
 }
 
-@media ( max-width : 500px) {
+@media ( max-width: 500px) {
 	.hide-on-mobile {
+		display: none;
+	}
+}
+@media(max-width: 650px){
+	.dataTables_length,
+	.dataTables_filter {
 		display: none;
 	}
 }
@@ -584,4 +586,20 @@ input.kcfinder {
 
 form.page-list-filters, .x-results-found {
 	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+table.dataTable{
+	width:100% !important;
+	    position: relative;
+		top: 5px;
+}
+
+.tablesorter{
+	width:100%;
+	margin-top:10px;
+}
+
+.dataTables_wrapper .dataTables_filter input{
+	margin-left:0 !important;
 }
