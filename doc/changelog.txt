@@ -1,6 +1,7 @@
-===== Neues in UliCMS 2018.3.7 =====
+﻿===== Neues in UliCMS 2018.3.7 =====
 
 Neue Features:
+* Tablesorter durch DataTables ersetzen
 * Wrapper für Kommandozeilen-Scripts hinzugefügt "manage"
 * Neues CLI-Script "settings_list.php"
 * CLI-Befehl zum Anzeigen von Informationen über eine SimpleInstall v2 Paketdatei hinzugefügt 
@@ -10,6 +11,7 @@ Neue Features:
 * Pakete können nun eine bestimmte MySQL-Version bei der Installation vorausetzen
 * Slicknav Paket aktualisiert auf Version 1.0.10
 * oneclick_upgrade Paket aktualisiert auf Version 1.7
+
 
 Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt
