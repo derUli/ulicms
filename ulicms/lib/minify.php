@@ -31,6 +31,7 @@ function getCombinedScripts()
                     if ($content) {
                         $content = normalizeLN($content, "\n");
                         $content = trim($content);
+                        $content =  \JShrink\Minifier::minify($content);
                         $lines = StringHelper::linesFromString($content, true, true, false);
                         $content = implode("\n", $lines);
                         $output .= $content;
