@@ -14,6 +14,9 @@ Neue Features:
 * Javascripts werden besser komprimiert
 * Integriertes HTML-Minifying verbessert
 
+Neue API-Funktionen:
+* is_json($str)
+
 Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt
 * Einige Meldungen Confirm-Dialogen sind nun per Sprachdatei lokalisiert

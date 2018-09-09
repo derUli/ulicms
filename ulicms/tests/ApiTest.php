@@ -102,6 +102,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_false(0));
     }
 
+    public function testIsJson()
+    {
+        $validJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "metadata.json"));
+        $invalidJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "lang/de.php"));
+        
+        $this->assertTrue(is_json($validJson));
+        $this->assertFalse(is_json($invalidJson));
+    }
+
     public function testIsNumericArray()
     {
         $this->assertTrue(is_numeric_array(array(
