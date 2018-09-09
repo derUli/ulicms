@@ -15,7 +15,7 @@
 		"rss" : "https://en.ulicms.de/blog_rss.php?s=aktuelles&lang=en"
 	},
 	"require" : {
-		"php" : ">=5.6",
+		"php" : ">=7.0",
 		"ext-mysqli" : "*",
 		"ext-gd" : "*",
 		"ext-json" : "*",
@@ -28,7 +28,8 @@
 		"phpgangsta/googleauthenticator" : "dev-master",
 		"katzgrau/klogger" : "dev-master",
 		"phpmailer/phpmailer" : "^6.0",
-		"tedivm/jshrink": "~1.0"
+		"tedivm/jshrink": "~1.0",
+		"zaininnari/html-minifier" : "*"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "*"

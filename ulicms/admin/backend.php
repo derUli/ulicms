@@ -3,6 +3,8 @@
 chdir(dirname(__FILE__));
 
 require_once "../init.php";
+use zz\Html\HTMLMinify;
+
 @session_start();
 $acl = new acl();
 
@@ -83,6 +85,10 @@ do_event("before_backend_run_methods");
 ControllerRegistry::runMethods();
 do_event("after_backend_run_methods");
 
+if (Settings::get("minify_html")) {
+    ob_start();
+}
+
 include "inc/ulicms_head.php";
 
 if (! $eingeloggt) {
@@ -125,6 +131,13 @@ if (! $eingeloggt) {
 do_event("admin_footer");
 
 require_once "inc/footer.php";
+
+if (Settings::get("minify_html")) {
+    $generatedHtml = ob_get_clean();
+    $HTMLMinify = new HTMLMinify($generatedHtml);
+    $generatedHtml = $HTMLMinify->process();
+    echo $generatedHtml;
+}
 
 do_event("before_admin_cron");
 require_once "inc/cron.php";

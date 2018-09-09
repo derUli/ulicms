@@ -12,6 +12,7 @@ Neue Features:
 * Slicknav Paket aktualisiert auf Version 1.0.10
 * oneclick_upgrade Paket aktualisiert auf Version 1.7
 * Javascripts werden besser komprimiert
+* Integriertes HTML-Minifying verbessert
 
 Bugfixes:
 * Versionsnummern von Themes werden nun wieder angezeigt

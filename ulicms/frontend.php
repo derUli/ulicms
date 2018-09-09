@@ -1,12 +1,13 @@
 <?php
 require_once "init.php";
 global $connection;
+use zz\Html\HTMLMinify;
 
 do_event("before_session_start");
 
 // initialize session
 @session_start();
-//$_COOKIE[session_name()] = session_id();
+// $_COOKIE[session_name()] = session_id();
 
 do_event("after_session_start");
 
@@ -93,8 +94,7 @@ try {
             Request::redirect($language->getLanguageLink());
         }
     }
-} catch (Exception $e) {
-}
+} catch (Exception $e) {}
 
 if (isset($_GET["goid"])) {
     $goid = intval($_GET["goid"]);
@@ -243,22 +243,12 @@ foreach ($bottom_files as $file) {
 
 do_event("after_html");
 
-// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
-
 if ($cacheAdapter or Settings::get("minify_html")) {
     $generatedHtml = ob_get_clean();
     $generatedHtml = normalizeLN($generatedHtml, "\n");
     if (Settings::get("minify_html")) {
-        $generatedHtml = preg_replace('/^\h*\v+/m', '', $generatedHtml);
-        
-        $posBegin = strpos($generatedHtml, "<html");
-        $posEnd = strpos($generatedHtml, "</head>");
-        $posLength = $posEnd - $posBegin;
-        $head = substr($generatedHtml, $posBegin, $posLength + strlen("</head>"));
-        $head = str_replace("\n", "", $head);
-        
-        $generatedHtml = $head . substr($generatedHtml, $posEnd + strlen("</head>") + 1);
-        $generatedHtml = str_replace("</body>\n</html>", "</body></html>", $generatedHtml);
+        $HTMLMinify = new HTMLMinify($generatedHtml);
+        $generatedHtml = $HTMLMinify->process();
     }
     echo $generatedHtml;
     
@@ -267,6 +257,7 @@ if ($cacheAdapter or Settings::get("minify_html")) {
     }
 }
 
+// Wenn no_auto_cron gesetzt ist, dann muss cron.php manuell ausgeführt bzw. aufgerufen werden
 if (Settings::get("no_auto_cron")) {
     die();
 }
