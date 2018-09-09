@@ -247,7 +247,9 @@ if ($cacheAdapter or Settings::get("minify_html")) {
     $generatedHtml = ob_get_clean();
     $generatedHtml = normalizeLN($generatedHtml, "\n");
     if (Settings::get("minify_html")) {
-        $options = array('optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED);
+        $options = array(
+            'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
+        );
         $HTMLMinify = new HTMLMinify($generatedHtml, $options);
         $generatedHtml = $HTMLMinify->process();
     }

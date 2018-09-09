@@ -134,7 +134,9 @@ require_once "inc/footer.php";
 
 if (Settings::get("minify_html")) {
     $generatedHtml = ob_get_clean();
-	$options = array('optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED);
+    $options = array(
+        'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
+    );
     $HTMLMinify = new HTMLMinify($generatedHtml, $options);
     $generatedHtml = $HTMLMinify->process();
     echo $generatedHtml;
