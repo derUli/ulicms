@@ -79,7 +79,9 @@ class Template
 
     public static function footer()
     {
-        echo apply_filter('<script type="text/javascript" src="lib/js/global.js"></script>', "global_js_script_tag");
+        enqueueScriptFile("lib/js/global.js");
+        combinedScriptHtml();
+        
         do_event("frontend_footer");
     }
 
