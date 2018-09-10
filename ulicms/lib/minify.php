@@ -18,32 +18,40 @@ function enqueueScriptFile($path)
 
 function getCombinedScripts()
 {
-    $lastmod = 0;
+    $lastmod = intval($_GET["time"]);
+    
     $output = "";
     if (isset($_GET["output_scripts"])) {
         $scripts = explode(";", $_GET["output_scripts"]);
-        foreach ($scripts as $script) {
-            $script = ltrim($script, "/");
-            if (is_file($script)) {
-                $ext = pathinfo($script, PATHINFO_EXTENSION);
-                if ($ext == "js") {
-                    $content = @file_get_contents($script);
-                    if ($content) {
-                        $content = normalizeLN($content, "\n");
-                        $content = trim($content);
-                        $content = \JShrink\Minifier::minify($content, array(
-                            'flaggedComments' => false
-                        ));
-                        $lines = StringHelper::linesFromString($content, true, true, false);
-                        $content = implode("\n", $lines);
-                        $output .= $content;
-                        $output .= "\n";
-                        if (filemtime($script) > $lastmod) {
-                            $lastmod = filemtime($script);
+        $adapter = CacheUtil::getAdapter(true);
+        $cacheId = md5(get_request_uri());
+        if ($adapter->has($cacheId)) {
+            $output = $adapter->get($cacheId);
+        } else {
+            foreach ($scripts as $script) {
+                $script = ltrim($script, "/");
+                if (is_file($script)) {
+                    $ext = pathinfo($script, PATHINFO_EXTENSION);
+                    if ($ext == "js") {
+                        $content = @file_get_contents($script);
+                        if ($content) {
+                            $content = normalizeLN($content, "\n");
+                            $content = trim($content);
+                            $content = \JShrink\Minifier::minify($content, array(
+                                'flaggedComments' => false
+                            ));
+                            $lines = StringHelper::linesFromString($content, true, true, false);
+                            $content = implode("\n", $lines);
+                            $output .= $content;
+                            $output .= "\n";
+                            if (filemtime($script) > $lastmod) {
+                                $lastmod = filemtime($script);
+                            }
                         }
                     }
                 }
             }
+            $adapter->set($cacheId, $output);
         }
     }
     
@@ -133,29 +141,36 @@ function enqueueStylesheet($path)
 function getCombinedStylesheets()
 {
     $output = "";
-    $lastmod = 0;
+    
+    $lastmod = intval($_GET["time"]);
     
     if (isset($_GET["output_stylesheets"])) {
         $stylesheets = explode(";", $_GET["output_stylesheets"]);
-        
-        foreach ($stylesheets as $stylesheet) {
-            $stylesheet = ltrim($stylesheet, "/");
-            if (is_file($stylesheet)) {
-                $ext = pathinfo($stylesheet, PATHINFO_EXTENSION);
-                if ($ext == "css") {
-                    $content = @file_get_contents($stylesheet);
-                    if ($content) {
-                        $content = normalizeLN($content, "\n");
-                        $content = minifyCss($content);
-                        $output .= $content;
-                        $output .= "\r\n";
-                        $output .= "\r\n";
-                        if (filemtime($script) > $lastmod) {
-                            $lastmod = filemtime($script);
+        $adapter = CacheUtil::getAdapter(true);
+        $cacheId = md5(get_request_uri());
+        if ($adapter->has($cacheId)) {
+            $output = $adapter->get($cacheId);
+        } else {
+            foreach ($stylesheets as $stylesheet) {
+                $stylesheet = ltrim($stylesheet, "/");
+                if (is_file($stylesheet)) {
+                    $ext = pathinfo($stylesheet, PATHINFO_EXTENSION);
+                    if ($ext == "css") {
+                        $content = @file_get_contents($stylesheet);
+                        if ($content) {
+                            $content = normalizeLN($content, "\n");
+                            $content = minifyCss($content);
+                            $output .= $content;
+                            $output .= "\r\n";
+                            $output .= "\r\n";
+                            if (filemtime($script) > $lastmod) {
+                                $lastmod = filemtime($script);
+                            }
                         }
                     }
                 }
             }
+            $adapter->set($cacheId, $output);
         }
     }
     
