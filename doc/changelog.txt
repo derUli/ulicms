@@ -13,6 +13,7 @@ Neue Features:
 * oneclick_upgrade Paket aktualisiert auf Version 1.7
 * Javascripts werden besser komprimiert
 * Integriertes HTML-Minifying verbessert
+* Mobile_Detect aktualisiert auf Version 2.8.33
 
 Neue API-Funktionen:
 * is_json($str)
