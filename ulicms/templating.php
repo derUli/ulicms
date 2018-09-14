@@ -1024,11 +1024,8 @@ function base_metas()
         }
     }
     if (! Settings::get("no_autoembed_core_css")) {
-        $coreCssFile = ULICMS_ROOT . "/core.min.css";
-        
-        $coreCssFileURL = basename($coreCssFile) . "?time=" . File::getLastChanged($coreCssFile);
-        
-        echo '<link rel="stylesheet" type="text/css" href="' . $coreCssFileURL . '"/>';
+        enqueueStylesheet("core.css");
+        combinedStylesheetHtml();
         echo "\r\n";
     }
     

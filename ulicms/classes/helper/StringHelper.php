@@ -225,4 +225,11 @@ class StringHelper
         }
         return $lines;
     }
+
+    public static function trimLines($str, $newline = "\r\n")
+    {
+        $str = StringHelper::linesFromString($str);
+        $str = implode($newline, $str);
+        return $str;
+    }
 }
