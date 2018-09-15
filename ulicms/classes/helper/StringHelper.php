@@ -228,7 +228,7 @@ class StringHelper
 
     public static function trimLines($str, $newline = "\r\n")
     {
-        $str = StringHelper::linesFromString($str);
+        $str = StringHelper::linesFromString($str, true, true, false);
         $str = implode($newline, $str);
         return $str;
     }
