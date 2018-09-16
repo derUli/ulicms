@@ -1,3 +1,8 @@
 <?php
-class SqlException extends Exception {
+namespace UliCMS\Exceptions;
+
+use Exception;
+
+class SqlException extends Exception
+{
 }
