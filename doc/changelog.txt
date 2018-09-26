@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.3.7 =====
+===== Neues in UliCMS 2018.4 =====
 
 Neue Features:
 * Tablesorter durch DataTables ersetzen
