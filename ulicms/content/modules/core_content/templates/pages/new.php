@@ -663,7 +663,7 @@ window.onbeforeunload = confirmExit;
 function confirmExit()
 {
 	if(formchanged == 1 && submitted == 0)
-		return "Wenn Sie diese Seite verlassen gehen nicht gespeicherte Änderungen verloren.";
+		return PageTranslation.ConfirmExitWithoutSave;
 	else
 		return;
 }
@@ -708,6 +708,10 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 <input type="hidden" name="add_page" value="add_page">
 <button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 <?php
+	$translation = new JSTranslation(array(), "PageTranslation");
+	$translation->addKey("confirm_exit_without_save");
+	$translation->render();
+
     enqueueScriptFile("scripts/page.js");
     combinedScriptHtml();
     ?>
@@ -716,3 +720,4 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 } else {
     noPerms();
 }
+ 
