@@ -1,6 +1,6 @@
 <?php
 use UliCMS\HTML\Link as Link;
-class HTMLLinkTest extends PHPUnit_Framework_TestCase {
+class HTMLLinkTest extends \PHPUnit\Framework\TestCase {
 	public function testLink() {
 		$this->assertEquals ( "<a href=\"https://www.google.com\">Google</a>", Link::Link ( "https://www.google.com", "Google" ) );
 	}

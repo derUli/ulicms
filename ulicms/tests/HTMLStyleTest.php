@@ -1,6 +1,6 @@
 <?php
 use UliCMS\HTML\Style as Style;
-class HTMLStyleTest extends PHPUnit_Framework_TestCase {
+class HTMLStyleTest extends \PHPUnit\Framework\TestCase {
 	public function testInlineCSS() {
 		$this->assertEquals ( "<style type=\"text/css\">body{background-color:red;}</style>", Style::FromString ( "body{background-color:red;}" ) );
 	}

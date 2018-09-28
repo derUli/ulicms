@@ -18,29 +18,40 @@ function enqueueScriptFile($path)
 
 function getCombinedScripts()
 {
-    $lastmod = 0;
+    $lastmod = intval($_GET["time"]);
+    
     $output = "";
     if (isset($_GET["output_scripts"])) {
         $scripts = explode(";", $_GET["output_scripts"]);
-        foreach ($scripts as $script) {
-            $script = ltrim($script, "/");
-            if (is_file($script)) {
-                $ext = pathinfo($script, PATHINFO_EXTENSION);
-                if ($ext == "js") {
-                    $content = @file_get_contents($script);
-                    if ($content) {
-                        $content = normalizeLN($content, "\n");
-                        $content = trim($content);
-                        $lines = StringHelper::linesFromString($content, true, true, false);
-                        $content = implode("\n", $lines);
-                        $output .= $content;
-                        $output .= "\n";
-                        if (filemtime($script) > $lastmod) {
-                            $lastmod = filemtime($script);
+        $adapter = CacheUtil::getAdapter(true);
+        $cacheId = md5(get_request_uri());
+        if ($adapter->has($cacheId)) {
+            $output = $adapter->get($cacheId);
+        } else {
+            foreach ($scripts as $script) {
+                $script = ltrim($script, "/");
+                if (is_file($script)) {
+                    $ext = pathinfo($script, PATHINFO_EXTENSION);
+                    if ($ext == "js") {
+                        $content = @file_get_contents($script);
+                        if ($content) {
+                            $content = normalizeLN($content, "\n");
+                            $content = trim($content);
+                            $content = \JShrink\Minifier::minify($content, array(
+                                'flaggedComments' => false
+                            ));
+                            $lines = StringHelper::linesFromString($content, true, true, false);
+                            $content = implode("\n", $lines);
+                            $output .= $content;
+                            $output .= "\n";
+                            if (filemtime($script) > $lastmod) {
+                                $lastmod = filemtime($script);
+                            }
                         }
                     }
                 }
             }
+            $adapter->set($cacheId, $output);
         }
     }
     
@@ -130,30 +141,36 @@ function enqueueStylesheet($path)
 function getCombinedStylesheets()
 {
     $output = "";
-    $lastmod = 0;
+    
+    $lastmod = intval($_GET["time"]);
     
     if (isset($_GET["output_stylesheets"])) {
         $stylesheets = explode(";", $_GET["output_stylesheets"]);
-        
-        foreach ($stylesheets as $stylesheet) {
-            $stylesheet = ltrim($stylesheet, "/");
-            if (is_file($stylesheet)) {
-                $ext = pathinfo($stylesheet, PATHINFO_EXTENSION);
-                if ($ext == "css") {
-                    $content = @file_get_contents($stylesheet);
-                    if ($content) {
-                        $content = normalizeLN($content, "\n");
-                        $content = trim($content);
-                        
-                        $output .= $content;
-                        $output .= "\r\n";
-                        $output .= "\r\n";
-                        if (filemtime($script) > $lastmod) {
-                            $lastmod = filemtime($script);
+        $adapter = CacheUtil::getAdapter(true);
+        $cacheId = md5(get_request_uri());
+        if ($adapter->has($cacheId)) {
+            $output = $adapter->get($cacheId);
+        } else {
+            foreach ($stylesheets as $stylesheet) {
+                $stylesheet = ltrim($stylesheet, "/");
+                if (is_file($stylesheet)) {
+                    $ext = pathinfo($stylesheet, PATHINFO_EXTENSION);
+                    if ($ext == "css") {
+                        $content = @file_get_contents($stylesheet);
+                        if ($content) {
+                            $content = normalizeLN($content, "\n");
+                            $content = minifyCss($content);
+                            $output .= $content;
+                            $output .= "\r\n";
+                            $output .= "\r\n";
+                            if (filemtime($script) > $lastmod) {
+                                $lastmod = filemtime($script);
+                            }
                         }
                     }
                 }
             }
+            $adapter->set($cacheId, $output);
         }
     }
     
@@ -182,6 +199,56 @@ function getCombinedStylesheets()
     
     echo $output;
     exit();
+}
+
+/**
+ * This function takes a css-string and compresses it, removing
+ * unneccessary whitespace, colons, removing unneccessary px/em
+ * declarations etc.
+ *
+ * @param string $css
+ * @return string compressed css content
+ * @author Steffen Becker
+ */
+function minifyCss($css)
+{
+    // some of the following functions to minimize the css-output are directly taken
+    // from the awesome CSS JS Booster: https://github.com/Schepp/CSS-JS-Booster
+    // all credits to Christian Schaefer: http://twitter.com/derSchepp
+    // remove comments
+    $css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
+    // backup values within single or double quotes
+    preg_match_all('/(\'[^\']*?\'|"[^"]*?")/ims', $css, $hit, PREG_PATTERN_ORDER);
+    for ($i = 0; $i < count($hit[1]); $i ++) {
+        $css = str_replace($hit[1][$i], '##########' . $i . '##########', $css);
+    }
+    // remove traling semicolon of selector's last property
+    $css = preg_replace('/;[\s\r\n\t]*?}[\s\r\n\t]*/ims', "}\r\n", $css);
+    // remove any whitespace between semicolon and property-name
+    $css = preg_replace('/;[\s\r\n\t]*?([\r\n]?[^\s\r\n\t])/ims', ';$1', $css);
+    // remove any whitespace surrounding property-colon
+    $css = preg_replace('/[\s\r\n\t]*:[\s\r\n\t]*?([^\s\r\n\t])/ims', ':$1', $css);
+    // remove any whitespace surrounding selector-comma
+    $css = preg_replace('/[\s\r\n\t]*,[\s\r\n\t]*?([^\s\r\n\t])/ims', ',$1', $css);
+    // remove any whitespace surrounding opening parenthesis
+    $css = preg_replace('/[\s\r\n\t]*{[\s\r\n\t]*?([^\s\r\n\t])/ims', '{$1', $css);
+    // remove any whitespace between numbers and units
+    $css = preg_replace('/([\d\.]+)[\s\r\n\t]+(px|em|pt|%)/ims', '$1$2', $css);
+    // shorten zero-values
+    $css = preg_replace('/([^\d\.]0)(px|em|pt|%)/ims', '$1', $css);
+    // constrain multiple whitespaces
+    $css = preg_replace('/\p{Zs}+/ims', ' ', $css);
+    // remove newlines
+    $css = str_replace(array(
+        "\r\n",
+        "\r",
+        "\n"
+    ), '', $css);
+    // Restore backupped values within single or double quotes
+    for ($i = 0; $i < count($hit[1]); $i ++) {
+        $css = str_replace('##########' . $i . '##########', $hit[1][$i], $css);
+    }
+    return $css;
 }
 
 function combinedStylesheetHtml()

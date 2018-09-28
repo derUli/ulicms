@@ -35,7 +35,7 @@ class CoreUpgradeController extends Controller
             return null;
         }
         $version = $data->version;
-        $cfg = new ulicms_version();
+        $cfg = new UliCMSVersion();
         $oldVersion = $cfg->getInternalVersionAsString();
         if (version_compare($oldVersion, $data->version, "<")) {
             return $data->version;
@@ -94,7 +94,7 @@ class CoreUpgradeController extends Controller
                 
                 sureRemoveDir($tmpDir, true);
                 
-                include_once Path::resolve("ULICMS_ROOT/update.php");
+                response::redirect("../update.php");
                 return true;
             } else {
                 return false;

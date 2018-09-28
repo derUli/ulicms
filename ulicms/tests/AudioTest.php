@@ -1,5 +1,5 @@
 <?php
-class AudioTest extends PHPUnit_Framework_TestCase {
+class AudioTest extends \PHPUnit\Framework\TestCase {
 	public function testCreateUpdateAndDelete() {
 		$audio = new Audio ();
 		$audio->setName ( "My Name" );

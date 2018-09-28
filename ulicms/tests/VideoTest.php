@@ -1,5 +1,5 @@
 <?php
-class VideoTest extends PHPUnit_Framework_TestCase {
+class VideoTest extends \PHPUnit\Framework\TestCase {
 	public function testCreateUpdateAndDelete() {
 		$Video = new Video ();
 		$Video->setName ( "My Name" );

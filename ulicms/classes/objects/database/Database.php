@@ -408,9 +408,22 @@ class Database
     {
         return (Database::getNumRows($result) > 0);
     }
+
+    public static function hasMoreResults()
+    {
+        return mysqli_more_results(self::$connection);
+    }
+
+    public static function loadNextResult()
+    {
+        return mysqli_next_result(self::$connection);
+    }
+
+    public static function storeResult()
+    {
+        return mysqli_store_result(self::$connection);
+    }
 }
 
 // Alias für Database
-class DB extends Database
-{
-}
+class_alias("Database", "DB");

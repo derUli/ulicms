@@ -16,7 +16,7 @@ if ($acl->hasPermission ( "update_system" )) {
 <h1><?php translate("oneclick_upgrade")?></h1>
 <p><?php translate("no_new_version_available");?></p>
 <?php }?>
-<form action="../?sClass=CoreUpgradeController&sMethod=runUpgrade"
+<form action="?sClass=CoreUpgradeController&sMethod=runUpgrade"
 	method="post">
 	<?php csrf_token_html();?>
 	<div class="row">

@@ -687,6 +687,8 @@ function import($ipage)
     } else {
         while ($row = db_fetch_object($query)) {
             $data = CustomData::get();
+            // it's possible to disable shortcodes for a page
+            // define "disable_shortcodes in custom data / json
             if (is_false($data["disable_shortcodes"])) {
                 $row->content = replaceShortcodesWithModules($row->content);
                 $row->content = apply_filter($row->content, "content");
@@ -1022,11 +1024,8 @@ function base_metas()
         }
     }
     if (! Settings::get("no_autoembed_core_css")) {
-        $coreCssFile = ULICMS_ROOT . "/core.min.css";
-        
-        $coreCssFileURL = basename($coreCssFile) . "?time=" . File::getLastChanged($coreCssFile);
-        
-        echo '<link rel="stylesheet" type="text/css" href="' . $coreCssFileURL . '"/>';
+        enqueueStylesheet("core.css");
+        combinedStylesheetHtml();
         echo "\r\n";
     }
     

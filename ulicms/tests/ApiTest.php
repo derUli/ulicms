@@ -1,7 +1,7 @@
 <?php
 include_once Path::Resolve("ULICMS_ROOT/templating.php");
 
-class ApiTest extends PHPUnit_Framework_TestCase
+class ApiTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testRemovePrefix()
@@ -100,6 +100,15 @@ class ApiTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(is_false($nothing));
         $this->assertTrue(is_false(false));
         $this->assertTrue(is_false(0));
+    }
+
+    public function testIsJson()
+    {
+        $validJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "metadata.json"));
+        $invalidJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "lang/de.php"));
+        
+        $this->assertTrue(is_json($validJson));
+        $this->assertFalse(is_json($invalidJson));
     }
 
     public function testIsNumericArray()

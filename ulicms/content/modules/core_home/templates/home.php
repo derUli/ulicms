@@ -23,13 +23,11 @@ if ($acl->hasPermission("dashboard")) {
 		class="btn btn-default"><?php translate("edit_profile");?></a>
 </p>
 </p>
+<div id="accordion-container">
 <?php
     $motd = get_lang_config("motd", getSystemLanguage());
     if ($motd or strlen($motd) > 10) {
         ?>
-
-<div id="accordion-container">
-
 	<h2 class="accordion-header">
 	<?php translate("motd");?></h2>
 	<div class="accordion-content">

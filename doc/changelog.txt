@@ -1,3 +1,31 @@
+===== Neues in UliCMS 2018.4 =====
+
+Neue Features:
+* Tablesorter durch DataTables ersetzen
+* Wrapper für Kommandozeilen-Scripts hinzugefügt "manage"
+* Neues CLI-Script "settings_list.php"
+* CLI-Befehl zum Anzeigen von Informationen über eine SimpleInstall v2 Paketdatei hinzugefügt 
+    $ ./manage sinfo examine /path/to/package-1.0.sin
+* Pakete können nun eine bestimmte PHP-Version bei der Installation vorausetzen
+* Pakete können nun vorausetzen, dass bestimmte PHP-Erweiterungen installiert sein müssen
+* Pakete können nun eine bestimmte MySQL-Version bei der Installation vorausetzen
+* Slicknav Paket aktualisiert auf Version 1.0.10
+* oneclick_upgrade Paket aktualisiert auf Version 1.7
+* Javascripts werden besser komprimiert
+* Integriertes HTML-Minifying verbessert
+* Mobile_Detect aktualisiert auf Version 2.8.33
+* jscolor aktualisiert auf Version 2.0.5
+
+Neue API-Funktionen:
+* is_json($str)
+* StringHelper::trimLines($input)
+
+Bugfixes:
+* Versionsnummern von Themes werden nun wieder angezeigt
+* Einige Meldungen Confirm-Dialogen sind nun per Sprachdatei lokalisiert
+* Beim Generieren der SEO-URL aus dem Titel wird nun "/" durch Unterstrich ersetzt
+* Inhaltstyp "Link zu Sprache" funktioniert wieder
+
 ===== Neues in UliCMS 2018.3.6 =====
 
 Neue Features:
@@ -13,6 +41,7 @@ Neue API-Funktionen:
 * var_dump_str()
 * is_numeric_array($var)
 * var_is_type($var, $type, $required = false)
+* Model->loadByRequestId()
 
 Neue Filter:
 * font_sizes
@@ -57,7 +86,7 @@ Bugfixes:
 * Einige potentielle Caching-Probleme durch Anhängen eines Timestamps behoben
 * Wenn ein Inhaltstyp vom Typ "Link" oder "Knotenpunkt" in einen anderen Typ geändert wird,
   wird nun das Menü korrekt aktualisiert
-* in CustomFields vom Typ Nummer können nun auch Kommazeilen eingegeben werden.
+* in CustomFields vom Typ Nummer können nun auch Kommazeichen eingegeben werden.
 
 Sonstige Änderungen:
 * Logdateien haben nun .log als Dateiendung
@@ -98,7 +127,7 @@ Bugfixes:
 * Das Feld "Verschlüsselung" in den Einstellungen zum E-Mail Versand verliert nicht mehr seine Auswahl
 * Spamfilter: Auto-Completion für das Honeypot-Feld deaktiviert.
 Typ des Felds in "url" geändert, damit mehr bösärtige Bots in die Falle tappen.
-* sql_log: bei Nutzung von Prepared Statements wird die query nicht mehr doppelt geloggt
+* sql_log: bei Nutzung von Prepared Statements wird die Query nicht mehr doppelt geloggt
 * Command Line Scripts funktionieren nun auch wenn die php executable unter einem anderen Pfad als /usr/bin/php liegt
 * title() und headline() kodieren HTML-Entites nicht mehr doppelt
 

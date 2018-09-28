@@ -1,5 +1,5 @@
 <?php
-class FileGetContentsWrapperTest extends PHPUnit_Framework_TestCase {
+class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase {
 	const EXAMPLE_URL_OK = "http://example.org/";
 	const EXAMPLE_URL_INVALID = "http://www.google.de";
 	const EXAMPLE_HASH = "09b9c392dc1f6e914cea287cb6be34b0";

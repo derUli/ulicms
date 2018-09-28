@@ -14,6 +14,12 @@ $(function() {
 		});
 	});
 
+	$(".tablesorter").DataTable({
+		language : {
+			url : $("body").data("datatables-translation")
+		}
+	});
+
 	// dynamically add class form-control to all form elements to
 	// make inputs prettier
 	$('input, select, textarea').not("input[type=checkbox]").not(
@@ -31,4 +37,5 @@ $(function() {
 		}
 
 	});
+
 });

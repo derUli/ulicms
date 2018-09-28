@@ -1,5 +1,10 @@
 <?php
 
+function is_json($str)
+{
+    return json_decode($str) != null;
+}
+
 function is_numeric_array($var)
 {
     if (! is_array($var)) {
@@ -594,16 +599,15 @@ function getThemeMeta($theme, $attrib = null)
     $retval = null;
     $metadata_file = getTemplateDirPath($theme, true) . "metadata.json";
     if (is_file($metadata_file)) {
-        $data = ! Vars::get("theme_{$module}_meta") ? file_get_contents($metadata_file) : Vars::get("theme_{$module}_meta");
+        $data = ! Vars::get("theme_{$theme}_meta") ? file_get_contents($metadata_file) : Vars::get("theme_{$theme}_meta");
         
         if (is_string($data)) {
             $data = json_decode($data, true);
         }
-        
-        Vars::set("module_{$module}_meta", $data);
+        Vars::set("theme_{$theme}_meta", $data);
         if ($attrib != null) {
-            if (isset($data->$attrib)) {
-                $retval = $data->$attrib;
+            if (isset($data[$attrib])) {
+                $retval = $data[$attrib];
             }
         } else {
             $retval = $data;
@@ -1203,7 +1207,7 @@ function replaceShortcodesWithModules($string, $replaceOther = true)
         $string = str_ireplace('[category]', get_category(), $string);
         $token = get_csrf_token_html();
         
-        $token .= '<input type="url" name="my_homepage_url" class="antispam_honeypot" value="" autocomplete="off">';
+        $token .= '<input type="url" name="my_homepage_url" class="antispam_honeypot" value="" autocomplete="nope">';
         $string = str_ireplace('[csrf_token_html]', $token, $string);
         // [tel] Links for tel Tags
         $string = preg_replace('/\[tel\]([^\[\]]+)\[\/tel\]/i', '<a href="tel:$1" class="tel">$1</a>', $string);

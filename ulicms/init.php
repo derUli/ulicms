@@ -251,6 +251,7 @@ include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATO
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Page.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Snippet.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Link.php";
+include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Language_Link.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Language.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "Node.php";
 include dirname(__file__) . DIRECTORY_SEPERATOR . "classes" . DIRECTORY_SEPERATOR . "objects" . DIRECTORY_SEPERATOR . "content" . DIRECTORY_SEPERATOR . "List_Data.php";
@@ -486,10 +487,3 @@ if (! Settings::get("session_name")) {
 }
 
 session_name(Settings::get("session_name"));
-
-// PHPUnit 6 introduced a breaking change that
-// removed PHPUnit_Framework_TestCase as a base class,
-// and replaced it with \PHPUnit\Framework\TestCase
-if (! class_exists('\PHPUnit_Framework_TestCase') && class_exists('\PHPUnit\Framework\TestCase')) {
-    class_alias('\PHPUnit\Framework\TestCase', '\PHPUnit_Framework_TestCase');
-}

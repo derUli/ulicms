@@ -1,5 +1,5 @@
 <?php
-
+// Wrapper for KLogger
 class Logger
 {
 
@@ -12,7 +12,7 @@ class Logger
     public function __construct($path)
     {
         $this->path = $path;
-        
+        // if the directory doesn't exist, create it.
         if (! is_dir($this->path)) {
             @mkdir($path, 0777, true);
         }

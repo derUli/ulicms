@@ -1,5 +1,5 @@
 <?php
-class UserTest extends PHPUnit_Framework_TestCase {
+class UserTest extends \PHPUnit\Framework\TestCase {
 	private $otherGroup;
 	public function setUp() {
 		$user = new User ();

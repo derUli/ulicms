@@ -1,6 +1,6 @@
 <?php
 
-class MinifyTest extends PHPUnit_Framework_TestCase
+class MinifyTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testScriptQueue()
@@ -36,7 +36,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase
     {
         $filemtime = 0;
         $files = array(
-            "core.min.css",
+            "core.css",
             "admin/css/bootstrap.css",
             "admin/css/bootstrap-theme.css",
             "admin/css/modern.css"
@@ -58,7 +58,7 @@ class MinifyTest extends PHPUnit_Framework_TestCase
             enqueueStylesheet($file);
         }
         
-        $this->assertEquals('<link rel="stylesheet" href="?output_stylesheets=core.min.css;admin/css/bootstrap.css;admin/css/bootstrap-theme.css;admin/css/modern.css&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml());
+        $this->assertEquals('<link rel="stylesheet" href="?output_stylesheets=core.css;admin/css/bootstrap.css;admin/css/bootstrap-theme.css;admin/css/modern.css&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml());
         $this->assertCount(0, $_SERVER["stylesheet_queue"]);
     }
 }

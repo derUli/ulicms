@@ -1,5 +1,5 @@
 <?php
-class SettingsTest extends PHPUnit_Framework_TestCase {
+class SettingsTest extends \PHPUnit\Framework\TestCase {
 	public function testSettingsOld() {
 		deleteconfig ( "example_setting" );
 		$this->assertEquals ( false, getconfig ( "example_setting" ) );

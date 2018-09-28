@@ -76,7 +76,7 @@ if ($twofactor_authentication) {
 		<tr>
 			<td><strong><?php translate("confirmation_code");?></strong></td>
 			<td><input type="text" name="confirmation_code" value=""
-				autocomplete="off"></td>
+				autocomplete="nope"></td>
 		</tr>
 <?php
 }

@@ -1,5 +1,5 @@
 <?php
-class BannerTest extends PHPUnit_Framework_TestCase {
+class BannerTest extends \PHPUnit\Framework\TestCase {
 	const HTML_TEXT1 = "My first Banner HTML";
 	const HTML_TEXT2 = "My second Banner HTML";
 	const NAME_TEXT1 = "My first Gif Banner";

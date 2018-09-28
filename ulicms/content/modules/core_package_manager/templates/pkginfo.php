@@ -17,6 +17,11 @@ if (! $acl->hasPermission ( "install_packages" )) {
 			$description = $pkg->getProperty ( "description" );
 			$compatible_from = $pkg->getProperty ( "compatible_from" );
 			$compatible_to = $pkg->getProperty ( "compatible_to" );
+			$min_php_version = $pkg->getProperty ( "min_php_version" );
+			$max_php_version = $pkg->getProperty ( "max_php_version" );
+			$min_mysql_version = $pkg->getProperty ( "min_mysql_version" );
+			$max_mysql_version = $pkg->getProperty ( "max_mysql_version" );
+			$required_php_extensions = $pkg->getProperty ( "required_php_extensions" );
 			$dependencies = $pkg->getProperty ( "dependencies" );
 			$license = $pkg->getProperty ( "license" );
 			$build_date = $pkg->getProperty ( "build_date" );
@@ -99,9 +104,61 @@ if (! $acl->hasPermission ( "install_packages" )) {
 		<td><strong><?php translate("compatible_to")?></strong></td>
 		<td>UliCMS <?php Template::escape($compatible_to);?></td>
 
+	</tr>			
+			<?php }?>
+			<?php
+			if ($min_php_version) {
+				?>
+			<tr>
+		<td><strong><?php translate("min_php_version")?></strong></td>
+		<td><?php Template::escape($min_php_version);?></td>
+
+	</tr>		
+			<?php }?>
+			
+						<?php
+			if ($max_php_version) {
+				?>
+			<tr>
+		<td><strong><?php translate("max_php_version")?></strong></td>
+		<td><?php Template::escape($max_php_version);?></td>
+
 	</tr>		
 			<?php }?>
 
+<?php if($required_php_extensions){?>
+	<tr>
+		<td><strong><?php translate("required_php_extensions")?></strong></td>
+		<td><?php
+				
+				foreach ( $required_php_extensions as $extension ) {
+					?>
+		<?php Template::escape($extension);?><br />
+		<?php }?></td>
+
+	</tr>		
+<?php
+			}
+			?>
+				<?php
+			if ($min_mysql_version) {
+				?>
+			<tr>
+		<td><strong><?php translate("min_mysql_version")?></strong></td>
+		<td><?php Template::escape($min_mysql_version);?></td>
+
+	</tr>		
+			<?php }?>
+			
+						<?php
+			if ($max_mysql_version) {
+				?>
+			<tr>
+		<td><strong><?php translate("max_mysql_version")?></strong></td>
+		<td><?php Template::escape($max_mysql_version);?></td>
+
+	</tr>		
+			<?php }?>
 			<?php
 			if ($dependencies) {
 				?>

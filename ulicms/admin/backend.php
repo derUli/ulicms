@@ -3,6 +3,8 @@
 chdir(dirname(__FILE__));
 
 require_once "../init.php";
+use zz\Html\HTMLMinify;
+
 @session_start();
 $acl = new acl();
 
@@ -12,7 +14,7 @@ if ($acl->hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or
     $_SESSION['KCFINDER']['disabled'] = false;
 }
 
-$_COOKIE[session_name()] = session_id();
+// $_COOKIE[session_name()] = session_id();
 
 do_event("after_session_start");
 
@@ -83,9 +85,11 @@ do_event("before_backend_run_methods");
 ControllerRegistry::runMethods();
 do_event("after_backend_run_methods");
 
-do_event("before_backend_header");
-require_once "inc/header.php";
-do_event("after_backend_header");
+if (Settings::get("minify_html")) {
+    ob_start();
+}
+
+include "inc/ulicms_head.php";
 
 if (! $eingeloggt) {
     if (isset($_GET["register"])) {
@@ -127,6 +131,16 @@ if (! $eingeloggt) {
 do_event("admin_footer");
 
 require_once "inc/footer.php";
+
+if (Settings::get("minify_html")) {
+    $generatedHtml = ob_get_clean();
+    $options = array(
+        'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
+    );
+    $HTMLMinify = new HTMLMinify($generatedHtml, $options);
+    $generatedHtml = $HTMLMinify->process();
+    echo $generatedHtml;
+}
 
 do_event("before_admin_cron");
 require_once "inc/cron.php";

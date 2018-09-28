@@ -1,7 +1,7 @@
 <?php
-$admin_logo = Settings::get ( "admin_logo" );
+$admin_logo = Settings::get("admin_logo");
 if (! $admin_logo) {
-	$admin_logo = "gfx/logo.png";
+    $admin_logo = "gfx/logo.png";
 }
 ?>
 <!DOCTYPE html>
@@ -12,47 +12,45 @@ if (! $admin_logo) {
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>[<?php Template::escape(Settings::get("homepage_title"));?>] - UliCMS</title>
 <?php
-$styles = array ();
+$styles = array();
 ?>
-<link rel="stylesheet" type="text/css"
-	href="scripts/tablesorter/style.min.css" />
 <?php
-$enq = array (
-		"scripts/php.js/strip_tags.js",
-		"scripts/php.js/htmlspecialchars.js",
-		"scripts/jquery.min.js",
-		"scripts/jquery.form.min.js",
-		"scripts/jquery.tablesorter.min.js",
-		"scripts/vallenato/vallenato.js",
-		"codemirror/lib/codemirror.js",
-		"codemirror/mode/php/php.js",
-		"codemirror/mode/xml/xml.js",
-		"codemirror/mode/javascript/javascript.js",
-		"codemirror/mode/clike/clike.js",
-		"codemirror/mode/css/css.js",
-		"scripts/url.min.js",
-		"scripts/util.js",
-		"scripts/users.js",
-		"scripts/global.js",
-		"scripts/bootstrap.min.js",
-		"scripts/js/select2.min.js",
-		"../lib/js/global.js"
+$enq = array(
+    "scripts/php.js/strip_tags.js",
+    "scripts/php.js/htmlspecialchars.js",
+    "scripts/jquery.min.js",
+    "scripts/jquery.form.min.js",
+    "scripts/vallenato/vallenato.js",
+    "codemirror/lib/codemirror.js",
+    "codemirror/mode/php/php.js",
+    "codemirror/mode/xml/xml.js",
+    "codemirror/mode/javascript/javascript.js",
+    "codemirror/mode/clike/clike.js",
+    "codemirror/mode/css/css.js",
+    "scripts/url.min.js",
+    "scripts/util.js",
+    "scripts/users.js",
+    "scripts/global.js",
+    "scripts/bootstrap.min.js",
+    "scripts/js/select2.min.js",
+    "scripts/datatables/datatables.min.js",
+    "../lib/js/global.js"
 );
 ?>
 <?php
 
-if (is_logged_in ()) {
-	$enq [] = "scripts/cookie.js";
-	$enq [] = "scripts/jquery-shiftclick.js";
-	$enq [] = "scripts/shift_checkbox.js";
+if (is_logged_in()) {
+    $enq[] = "scripts/cookie.js";
+    $enq[] = "scripts/jquery-shiftclick.js";
+    $enq[] = "scripts/shift_checkbox.js";
 }
-if (! is_mobile ()) {
-	$enq [] = "scripts/doubletaptogo/doubletaptogo.min.js";
+if (! is_mobile()) {
+    $enq[] = "scripts/doubletaptogo/doubletaptogo.min.js";
 }
 ?>
 <?php
-foreach ( $enq as $script ) {
-	enqueueScriptFile ( $script );
+foreach ($enq as $script) {
+    enqueueScriptFile($script);
 }
 ?>
 <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
@@ -63,8 +61,8 @@ foreach ( $enq as $script ) {
 $(document).ready(function() {
   $.ajaxSetup({ cache: false });
 <?php
-if (! is_mobile ()) {
-	?>
+if (! is_mobile()) {
+    ?>
   $(window).scroll(function() {
     if ($(this).scrollTop()) {
         $('a.scrollup:hidden').stop(true, true).fadeIn();
@@ -81,66 +79,87 @@ $(".menu li:has(ul)").doubleTapToGo();
 </script>
 <link rel="stylesheet" type="text/css"
 	href="scripts/vallenato/vallenato.css" />
+	
 <?php include "inc/ulicms_touch_icons.php";?>
 <?php
-$styles [] = "css/bootstrap.min.css";
-$styles [] = "codemirror/lib/codemirror.css";
-$styles [] = "codemirror/lib/codemirror.css";
-$styles [] = "css/modern.css";
-$styles [] = "scripts/css/select2.min.css";
+$styles[] = "css/bootstrap.min.css";
+$styles[] = "codemirror/lib/codemirror.css";
+$styles[] = "codemirror/lib/codemirror.css";
+$styles[] = "css/modern.css";
+$styles[] = "scripts/css/select2.min.css";
 
-foreach ( $styles as $style ) {
-	enqueueStylesheet ( $style );
+foreach ($styles as $style) {
+    enqueueStylesheet($style);
 }
 
-combinedStylesheetHtml ();
+combinedStylesheetHtml();
 ?>
-<script type="text/javascript">
-$(document).ready(function(){
-    $(".tablesorter").tablesorter({widgets: ["zebra"]});
-    }
-);
-</script>
 <?php
 
-do_event ( "admin_head" );
+do_event("admin_head");
 ?>
+
+<link rel="stylesheet" type="text/css"
+	href="scripts/datatables/datatables.min.css" />
 </head>
+<?php
+do_event("before_backend_header");
+?>
+<?php
+$cssClasses = "";
+if (get_user_id()) {
+    $cssClasses .= "user-" . get_user_id() . "-logged-in ";
+} else {
+    $cssClasses .= "not-logged-in ";
+}
+if (get_action()) {
+    $cssClasses .= "action-" . get_action();
+} else {
+    $cssClasses .= "no-action";
+}
+?>
+
+<body class="<?php esc($cssClasses);?>"
+	data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage());?>">
+<?php
+
+do_event("after_backend_header");
+?>
 <div
-	class="fluid-container main <?php
+		class="fluid-container main <?php
 
-	if (get_action ()) {
-		echo 'action-' . Template::getEscape ( get_action () );
-	}
+if (get_action()) {
+    echo 'action-' . Template::getEscape(get_action());
+}
 
-	?>">
+?>">
 
-	<div class="row">
-		<div class="col-xs-8">
-			<a href="../" title="<?php translate("goto_frontend");?>"><img
-				src="<?php Template::escape($admin_logo);?>" alt="UliCMS"
-				class="ulicms-logo"></a>
-		</div>
-		<div class="col-xs-4 menu-container">
+		<div class="row">
+			<div class="col-xs-8">
+				<a href="../" title="<?php translate("goto_frontend");?>"><img
+					src="<?php Template::escape($admin_logo);?>" alt="UliCMS"
+					class="ulicms-logo"></a>
+			</div>
+			<div class="col-xs-4 menu-container">
 		<?php
 
-		if (is_logged_in ()) {
-			?>
+if (is_logged_in()) {
+    ?>
 			<div class="row pull-right">
-				<div class="col-xs-6">
-					<img src="gfx/clear-cache.png" id="menu-clear-cache"
-						data-url="<?php echo ModuleHelper::buildMethodCallUrl("CacheSettingsController", "clearCache");?>"
-						alt="<?php translate("clear_cache");?>"> <img
-						src="gfx/loading2.gif" id="menu-clear-cache-loading"
-						style="display: none" alt="<?php translate("loading");?>">
+					<div class="col-xs-6">
+						<img src="gfx/clear-cache.png" id="menu-clear-cache"
+							data-url="<?php echo ModuleHelper::buildMethodCallUrl("CacheSettingsController", "clearCache");?>"
+							alt="<?php translate("clear_cache");?>"> <img
+							src="gfx/loading2.gif" id="menu-clear-cache-loading"
+							style="display: none" alt="<?php translate("loading");?>">
+					</div>
+					<div class="col-xs-6">
+						<img src="gfx/menu-icon.png" id="menu-toggle"
+							alt="<?php translate("toggle_menu");?>">
+					</div>
 				</div>
-				<div class="col-xs-6">
-					<img src="gfx/menu-icon.png" id="menu-toggle"
-						alt="<?php translate("toggle_menu");?>">
-				</div>
-			</div>
 			<?php }?>
 		</div>
-	</div>
-	<div class="row main-content">
-		<div class="col-xs-12">
+		</div>
+		<div class="row main-content">
+			<div class="col-xs-12">

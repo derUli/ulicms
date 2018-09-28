@@ -1,5 +1,5 @@
 <?php
-class AntispamHelperTest extends PHPUnit_Framework_TestCase {
+class AntispamHelperTest extends \PHPUnit\Framework\TestCase {
 	private $initialCountryBlacklist;
 	public function setUp() {
 		$this->initialCountryBlacklist = Settings::get ( "country_blacklist" );

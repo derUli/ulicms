@@ -1,6 +1,6 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
-class MailerTest extends PHPUnit_Framework_TestCase {
+class MailerTest extends \PHPUnit\Framework\TestCase {
 	public function testSplitHeaders() {
 		$headers = "";
 		$headers .= "From: info@company.com\n";
