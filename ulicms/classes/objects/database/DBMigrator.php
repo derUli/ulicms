@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Exceptions\SqlException;
 
 class DBMigrator
 {

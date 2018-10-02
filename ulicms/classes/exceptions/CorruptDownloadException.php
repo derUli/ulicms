@@ -1,3 +1,8 @@
 <?php
-class CorruptDownloadException extends UnexpectedValueException {
+namespace UliCMS\Exceptions;
+
+use UnexpectedValueException;
+
+class CorruptDownloadException extends UnexpectedValueException
+{
 }
