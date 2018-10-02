@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2019.1 =====
 
+API-Änderungen:
+* Exceptions in den Namespace UliCMS\Exceptions verschoben
+
 Bugfixes:
 * Warnung beim Verlassen der Bearbeiten-Ansicht ohne Speichern war nicht lokalisiert
 
