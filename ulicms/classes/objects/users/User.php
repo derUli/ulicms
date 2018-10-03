@@ -1,5 +1,8 @@
 <?php
 
+
+use UliCMS\Exceptions\NotImplementedException;
+
 class User
 {
 
