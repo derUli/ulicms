@@ -27,6 +27,21 @@ class UserController extends Controller
         }
         $require_password_change = intval(isset($_POST["require_password_change"]));
         adduser($username, $lastname, $firstname, $email, $password, $sendMail, $group_id, $require_password_change, $admin, $locked, $default_language);
+        
+        // save secondary groups
+        $user = new User();
+        $user->loadByUsername($username);
+        $secondary_groups = $_POST["secondary_groups"];
+        
+        $user->setSecondaryGroups(array());
+        if (is_array($secondary_groups)) {
+            foreach ($secondary_groups as $group) {
+                $user->addSecondaryGroup(new Group($group));
+            }
+        }
+        
+        $user->save();
+        
         if ($this->logger) {
             $user = getUserById(get_user_id());
             $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
@@ -85,9 +100,9 @@ about_me = '$about_me', html_editor='$html_editor', require_password_change='$re
             
             db_query($sql);
             
+            // save secondary groups
             $user = new User($id);
             $secondary_groups = $_POST["secondary_groups"];
-         
             
             $user->setSecondaryGroups(array());
             if (is_array($secondary_groups)) {
@@ -95,7 +110,7 @@ about_me = '$about_me', html_editor='$html_editor', require_password_change='$re
                     $user->addSecondaryGroup(new Group($group));
                 }
             }
-        
+            
             $user->save();
             
             $user = getUserById(get_user_id());

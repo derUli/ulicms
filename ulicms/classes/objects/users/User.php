@@ -82,6 +82,7 @@ class User
         } else {
             $this->insert();
         }
+        $this->saveGroups();
     }
 
     public function fillVars($query)
@@ -167,7 +168,6 @@ class User
             $this->id
         );
         Database::pQuery($sql, $args, true) or die(Database::getError());
-        $this->saveGroups();
     }
 
     public function getId()
