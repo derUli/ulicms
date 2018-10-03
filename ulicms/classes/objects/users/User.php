@@ -1,6 +1,4 @@
 <?php
-
-
 use UliCMS\Exceptions\NotImplementedException;
 
 class User
@@ -101,7 +99,7 @@ class User
                 $this->group = null;
             }
             // load secondary groups
-            $this->loadGroups($user_id);
+            $this->loadGroups($result["id"]);
         } else {
             $this->setSecondaryGroups(array());
         }

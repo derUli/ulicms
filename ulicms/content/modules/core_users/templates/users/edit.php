@@ -4,6 +4,12 @@ if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_G
     $admin = intval($_GET["admin"]);
     $languages = getAvailableBackendLanguages();
     $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$admin'");
+    $user = new User($admin);
+    $secondaryGroups = $user->getSecondaryGroups();
+    $secondaryGroupIds = array();
+    foreach ($secondaryGroups as $group) {
+        $secondaryGroupIds[] = $group->getID();
+    }
     $ref = _esc(Request::getVar("ref", "home"));
     
     while ($row = db_fetch_object($query)) {
@@ -101,17 +107,22 @@ if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_G
             
             foreach ($allGroups as $key => $value) {
                 ?>
-		<option value="<?php
+		<option
+			value="<?php
                 
                 echo $key;
-                ?>">		
+                ?>"
+			<?php
+                
+                echo in_array($key, $secondaryGroupIds) ? "selected" : "";
+                
+                ?>>		
 					<?php echo real_htmlspecialchars($value)?>
 		</option>
 		<?php
             }
             ?>
-	</select> <br />
-	<br />
+	</select> <br /> <br />
 	<!-- Legacy Rechtesystem -->
 	<input type="hidden" name="admin_rechte"
 		value="<?php
