@@ -85,6 +85,19 @@ about_me = '$about_me', html_editor='$html_editor', require_password_change='$re
             
             db_query($sql);
             
+            $user = new User($id);
+            $secondary_groups = $_POST["secondary_groups"];
+         
+            
+            $user->setSecondaryGroups(array());
+            if (is_array($secondary_groups)) {
+                foreach ($secondary_groups as $group) {
+                    $user->addSecondaryGroup(new Group($group));
+                }
+            }
+        
+            $user->save();
+            
             $user = getUserById(get_user_id());
             $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
             

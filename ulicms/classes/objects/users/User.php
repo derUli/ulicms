@@ -167,6 +167,7 @@ class User
             $this->id
         );
         Database::pQuery($sql, $args, true) or die(Database::getError());
+        $this->saveGroups();
     }
 
     public function getId()
@@ -561,7 +562,7 @@ class User
                               (?,?)", array(
                 $this->getID(),
                 $group->getID()
-            ));
+            ), true);
         }
     }
 }

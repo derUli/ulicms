@@ -101,7 +101,7 @@ if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_G
             }
             ?>
 	</select> <br /> <br /> <strong><?php translate("secondary_groups");?></strong>
-	<br /> <select name="secondary_groups" multiple disabled>
+	<br /> <select name="secondary_groups[]" multiple>
 		
 		<?php
             
