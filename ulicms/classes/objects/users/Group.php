@@ -186,7 +186,7 @@ class Group
 
     public function hasPermission($name)
     {
-        return (faster_in_array($name, $this->permissions) and $this->permissions[$name]);
+        return (in_array($name, $this->permissions) and $this->permissions[$name]);
     }
 
     public function removePermission($name)

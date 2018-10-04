@@ -23,9 +23,20 @@ class PermissionChecker
        if($user->getAdmin()){
            return true;
        }
-       // TODO: get the primary and the secondary groups of the user
-       // construct an associative permission array
-       // and check permission
+       $groups = array();
+       if($user->getGroup()){
+           $groups[] = $user->getGroup();
+       }
+
+       $secondaryGroups = $user->getSecondaryGroups();
+       $groups = array_merge($groups, $secondaryGroups);
+
+       foreach($groups as $group){
+           if($group->hasPermission($permission)){
+               return true;
+           }
+       }
+
        return false;
     }
 
