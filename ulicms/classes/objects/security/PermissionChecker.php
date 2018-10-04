@@ -16,13 +16,17 @@ class PermissionChecker
 
     public function hasPermission($permission)
     {
+        // If the user is not logged in he has no permissions on anything
         if(!$this->user_id){
             return false;
         }
        $user = new User($this->user_id);
+       // If the "Is Admin" flag is set the user has full access to the whole system
        if($user->getAdmin()){
            return true;
        }
+
+       // Collect primary group and secondary groups of the user
        $groups = array();
        if($user->getGroup()){
            $groups[] = $user->getGroup();
@@ -30,13 +34,15 @@ class PermissionChecker
 
        $secondaryGroups = $user->getSecondaryGroups();
        $groups = array_merge($groups, $secondaryGroups);
-
+    
+       // if at least one group of the user has the required permission return true 
        foreach($groups as $group){
            if($group->hasPermission($permission)){
                return true;
            }
        }
 
+       // No group has the required permission, so return false
        return false;
     }
 
