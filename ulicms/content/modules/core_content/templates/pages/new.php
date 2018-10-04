@@ -1,7 +1,7 @@
 <?php
-$acl = new ACL();
+$permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname("groups"));
-if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
+if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermission("pages_create")) {
     
     $allThemes = getThemesList();
     $cols = Database::getColumnNames("content");
@@ -10,7 +10,7 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
     $sql = "SELECT id, name FROM " . tbname("audio");
     $audios = Database::query($sql);
     
-    $pages_activate_own = $acl->hasPermission("pages_activate_own");
+    $pages_activate_own = $permissionChecker->hasPermission("pages_activate_own");
     
     $types = get_available_post_types();
     

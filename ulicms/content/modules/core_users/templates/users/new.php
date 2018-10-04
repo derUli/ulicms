@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("users") and $acl->hasPermission("users_create")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_create")) {
     $languages = getAvailableBackendLanguages();
     $default_language = getSystemLanguage();
     $ref = _esc(Request::getVar("ref", "home"));
@@ -23,8 +23,8 @@ if ($acl->hasPermission("users") and $acl->hasPermission("users_create")) {
 	<input type="password" required="required" name="admin_password_repeat"
 		id="admin_password_repeat" value="" autocomplete="off">
 		<?php
-    $acl = new ACL();
-    $allGroups = $acl->getAllGroups();
+    $permissionChecker = new ACL();
+    $allGroups = $permissionChecker->getAllGroups();
     asort($allGroups);
     ?>
 	<br /> <strong><?php translate("primary_group");?></strong> <br /> <select

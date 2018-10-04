@@ -104,8 +104,8 @@ define("KCFINDER_PAGE", true);
 include_once "../../init.php";
 
 @session_start ();
-$acl = new ACL ();
-if (($_REQUEST ["type"] == "images" or $_REQUEST ["type"] == "files" or $_REQUEST ["type"] == "flash") and $acl->hasPermission ( $_REQUEST ["type"] )) {
+$permissionChecker = new ACL ();
+if (($_REQUEST ["type"] == "images" or $_REQUEST ["type"] == "files" or $_REQUEST ["type"] == "flash") and $permissionChecker->hasPermission ( $_REQUEST ["type"] )) {
 	$_CONFIG ["disabled"] = false;
 }
 

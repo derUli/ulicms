@@ -1,7 +1,7 @@
 <?php
 use UliCMS\Exceptions\CorruptDownloadException;
-$acl = new ACL();
-if ($acl->hasPermission("update_system")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("update_system")) {
     // No time limit
     @set_time_limit(0);
     

@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("favicon")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("favicon")) {
     ?>
 
 <p>

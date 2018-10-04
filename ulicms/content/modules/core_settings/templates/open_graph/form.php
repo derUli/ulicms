@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "open_graph" )) {
+$permissionChecker = new ACL ();
+if ($permissionChecker->hasPermission ( "open_graph" )) {
 	$og_type = Settings::get ( "og_type" );
 	$og_image = Settings::get ( "og_image" );
 	$og_url = "";

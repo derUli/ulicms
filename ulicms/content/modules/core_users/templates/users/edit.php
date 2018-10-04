@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_GET["admin"] == $_SESSION["login_id"])) {
+$permissionChecker = new ACL();
+if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_edit")) or ($_GET["admin"] == $_SESSION["login_id"])) {
     $admin = intval($_GET["admin"]);
     $languages = getAvailableBackendLanguages();
     $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$admin'");
@@ -34,7 +34,7 @@ if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_G
 	<input type="text" name="admin_username"
 		value="<?php echo real_htmlspecialchars($row->username);?>" required
 		<?php
-        if (! $acl->hasPermission("users")) {
+        if (! $permissionChecker->hasPermission("users")) {
             ?>
 		readonly="readonly" <?php
         }
@@ -68,9 +68,9 @@ if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_G
 	<input type="password" name="admin_password_repeat"
 		id="admin_password_repeat" value="" autocomplete="off"> <br />
 	<?php
-        $acl = new ACL();
-        if ($acl->hasPermission("users")) {
-            $allGroups = $acl->getAllGroups();
+        $permissionChecker = new ACL();
+        if ($permissionChecker->hasPermission("users")) {
+            $allGroups = $permissionChecker->getAllGroups();
             asort($allGroups);
             ?> <strong><?php translate("primary_group");?></strong> <br />
 	<select name="group_id">
@@ -184,7 +184,7 @@ if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_G
         ?> </label>
 		<?php
         
-        if ($acl->hasPermission("users")) {
+        if ($permissionChecker->hasPermission("users")) {
             ?>
 	<br /> <br /> <input type="checkbox" value="1" name="admin" id="admin"
 		<?php

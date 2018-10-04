@@ -6,9 +6,9 @@ require_once "../init.php";
 use zz\Html\HTMLMinify;
 
 @session_start();
-$acl = new acl();
+$permissionChecker = new acl();
 
-if ($acl->hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash")) {
+if ($permissionChecker->hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash")) {
     $_CONFIG["disabled"] = false;
     $_SESSION['KCFINDER'] = array();
     $_SESSION['KCFINDER']['disabled'] = false;
@@ -118,7 +118,7 @@ if (! $eingeloggt) {
         require_once "inc/change_password.php";
     } else if (isset($actions[get_action()])) {
         $requiredPermission = ActionRegistry::getActionpermission(get_action());
-        if ((! $requiredPermission) or ($requiredPermission and $acl->hasPermission($requiredPermission))) {
+        if ((! $requiredPermission) or ($requiredPermission and $permissionChecker->hasPermission($requiredPermission))) {
             include_once $actions[get_action()];
         } else {
             noPerms();

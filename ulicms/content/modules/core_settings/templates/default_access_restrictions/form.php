@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "default_access_restrictions_edit" )) {
+$permissionChecker = new ACL ();
+if ($permissionChecker->hasPermission ( "default_access_restrictions_edit" )) {
 	$only_admins_can_edit = intval ( Settings::get ( "only_admins_can_edit" ) );
 	$only_group_can_edit = intval ( Settings::get ( "only_group_can_edit" ) );
 	$only_owner_can_edit = intval ( Settings::get ( "only_owner_can_edit" ) );
