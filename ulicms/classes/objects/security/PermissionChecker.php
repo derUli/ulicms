@@ -15,7 +15,17 @@ class PermissionChecker
 
     public function hasPermission($permission)
     {
-        throw new NotImplementedException();
+        if(!$this->user_id){
+            return false;
+        }
+       $user = new User($this->user_id);
+       if($user->getAdmin()){
+           return true;
+       }
+       // TODO: get the primary and the secondary groups of the user
+       // construct an associative permission array
+       // and check permission
+       return false;
     }
 
     public function getUserId()
