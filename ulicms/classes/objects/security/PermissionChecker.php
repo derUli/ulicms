@@ -13,7 +13,7 @@ class PermissionChecker
         $this->user_id = $user_id;
     }
 
-    public function hasPermission()
+    public function hasPermission($permission)
     {
         throw new NotImplementedException();
     }
