@@ -4,8 +4,8 @@ if (isset ( $_REQUEST ["standard"] )) {
 	setconfig ( "default_acl_group", $standard );
 }
 
-$acl = new ACL ();
-$groups = $acl->getAllGroups ();
+$permissionChecker = new ACL ();
+$groups = $permissionChecker->getAllGroups ();
 
 $default_acl_group = intval ( Settings::get ( "default_acl_group" ) );
 
@@ -33,7 +33,7 @@ if ($_SESSION ["grp_sort"] == "id") {
 }
 
 ?>
-<?php if($acl->hasPermission("groups_create")){?>
+<?php if($permissionChecker->hasPermission("groups_create")){?>
 <p>
 	<a href="?action=groups&add=add" class="btn btn-default"><?php translate("create_group");?> </a>
 </p>
@@ -48,7 +48,7 @@ if (count ( $groups ) > 0) {
 			<tr>
 				<th style="min-width: 100px;"><strong><?php translate("id");?></strong></th>
 				<th style="min-width: 200px;"><strong><?php translate("name");?> </strong></th>
-			<?php if($acl->hasPermission("groups_edit")){?>
+			<?php if($permissionChecker->hasPermission("groups_edit")){?>
 			<th><strong><?php translate("standard");?> </strong></th>
 				<td></td>
 				<td></td>
@@ -66,7 +66,7 @@ if (count ( $groups ) > 0) {
 				<td><?php echo $name;?>
 			</td>
 
-<?php if($acl->hasPermission("groups_edit")){?>
+<?php if($permissionChecker->hasPermission("groups_edit")){?>
 			<td><?php
 			
 			if ($default_acl_group === $id) {

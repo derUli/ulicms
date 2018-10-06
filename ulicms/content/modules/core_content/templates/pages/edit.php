@@ -1,7 +1,7 @@
 <?php
 include_once ULICMS_ROOT . "/classes/objects/content/VCS.php";
-$acl = new ACL();
-if ($acl->hasPermission("pages")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("pages")) {
     // FIXME: Die SQL Statements in einen Controller bzw. Model auslagern.
     $page = intval($_GET["page"]);
     $query = db_query("SELECT * FROM " . tbname("content") . " WHERE id='$page'");
@@ -20,15 +20,15 @@ if ($acl->hasPermission("pages")) {
     
     $groups = Group::getAll();
     
-    $pages_change_owner = $acl->hasPermission("pages_change_owner");
+    $pages_change_owner = $permissionChecker->hasPermission("pages_change_owner");
     
     $types = get_available_post_types();
     
-    $pages_activate_own = $acl->hasPermission("pages_activate_own");
-    $pages_activate_others = $acl->hasPermission("pages_activate_others");
+    $pages_activate_own = $permissionChecker->hasPermission("pages_activate_own");
+    $pages_activate_others = $permissionChecker->hasPermission("pages_activate_others");
     
-    $pages_edit_own = $acl->hasPermission("pages_edit_own");
-    $pages_edit_others = $acl->hasPermission("pages_edit_others");
+    $pages_edit_own = $permissionChecker->hasPermission("pages_edit_own");
+    $pages_edit_others = $permissionChecker->hasPermission("pages_edit_others");
     
     while ($row = db_fetch_object($query)) {
         $list_data = new List_Data($row->id);
@@ -756,7 +756,7 @@ function openArticleImageSelectWindow(field) {
 				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 		</div>
 	</div>
-	<div style="<?php echo !$acl->hasPermission("pages_edit_permissions") ? "display:none" : ""?>">
+	<div style="<?php echo !$permissionChecker->hasPermission("pages_edit_permissions") ? "display:none" : ""?>">
 		<h2 class="accordion-header"><?php translate("permissions");?></h2>
 
 		<div class="accordion-content">

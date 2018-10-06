@@ -1,9 +1,9 @@
 <?php
-$acl = new ACL ();
+$permissionChecker = new ACL ();
 // no patch check in google cloud
 $runningInGoogleCloud = class_exists ( "GoogleCloudHelper" ) ? GoogleCloudHelper::isProduction () : false;
 
-if ($acl->hasPermission ( "update_system" ) and ! $runningInGoogleCloud) {
+if ($permissionChecker->hasPermission ( "update_system" ) and ! $runningInGoogleCloud) {
 	$patches = file_get_contents_wrapper ( PATCH_CHECK_URL, true );
 	?>
 <p>

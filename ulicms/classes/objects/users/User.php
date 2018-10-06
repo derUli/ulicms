@@ -24,6 +24,8 @@ class User
 
     private $group_id = null;
 
+    private $secondary_groups = array();
+
     private $group = null;
 
     private $notify_on_login = false;
@@ -80,6 +82,7 @@ class User
         } else {
             $this->insert();
         }
+        $this->saveGroups();
     }
 
     public function fillVars($query)
@@ -96,6 +99,10 @@ class User
             } else {
                 $this->group = null;
             }
+            // load secondary groups
+            $this->loadGroups($result["id"]);
+        } else {
+            $this->setSecondaryGroups(array());
         }
     }
 
@@ -501,5 +508,61 @@ class User
     public function setAvatar()
     {
         throw new NotImplementedException("Avatar feature is not implemented yet.");
+    }
+
+    public function getSecondaryGroups()
+    {
+        return $this->secondary_groups;
+    }
+
+    public function setSecondaryGroups($val)
+    {
+        $this->secondary_groups = $val;
+    }
+
+    public function addSecondaryGroup($val)
+    {
+        $this->secondary_groups[] = $val;
+    }
+
+    public function removeSecondaryGroup($val)
+    {
+        $filtered = array();
+        foreach ($this->secondary_groups as $group) {
+            if ($group->getID() != $val->getID()) {
+                $filtered[] = $group;
+            }
+        }
+        return $filtered;
+    }
+
+    private function loadGroups($user_id)
+    {
+        $groups = array();
+        $sql = "select `group_id` from `{prefix}user_groups` where user_id = ?";
+        $args = array(
+            $user_id
+        );
+        $query = Database::pQuery($sql, $args, true);
+        while ($row = Database::fetchObject($query)) {
+            $groups[] = new Group($row->group_id);
+        }
+        $this->setSecondaryGroups($groups);
+    }
+
+    private function saveGroups()
+    {
+        Database::pQuery("delete from {prefix}user_groups where user_id = ?", array(
+            $this->getId()
+        ), true);
+        foreach ($this->secondary_groups as $group) {
+            Database::pQuery("insert into {prefix}user_groups 
+                              (user_id, group_id)
+                              VALUES
+                              (?,?)", array(
+                $this->getID(),
+                $group->getID()
+            ), true);
+        }
     }
 }

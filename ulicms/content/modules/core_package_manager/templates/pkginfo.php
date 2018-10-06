@@ -1,7 +1,7 @@
 <?php
 include_once Path::resolve ( "ULICMS_ROOT/lib/formatter.php" );
-$acl = new ACL ();
-if (! $acl->hasPermission ( "install_packages" )) {
+$permissionChecker = new ACL ();
+if (! $permissionChecker->hasPermission ( "install_packages" )) {
 	noPerms ();
 } else {
 	if (StringHelper::isNotNullOrEmpty ( $_REQUEST ["file"] ) and endsWith ( $_REQUEST ["file"], ".sin" )) {
