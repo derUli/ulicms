@@ -101,6 +101,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($permissionChecker->hasPermission("settings_simple"));
         $this->assertFalse($permissionChecker->hasPermission("other"));
         $this->assertFalse($permissionChecker->hasPermission("audio"));
+        $this->assertFalse($permissionChecker->hasPermission("non_eixsting_permission"));
     }
 
     public function testGetLanguages()
