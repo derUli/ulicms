@@ -1,6 +1,5 @@
 <?php
 use UliCMS\Security\PermissionChecker;
-use UliCMS\Exceptions\NotImplementedException;
 
 class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
 {
@@ -24,12 +23,21 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $group2 = new Group();
         $group2->setName("TestGroup2");
         $group2->addPermission("pages", true);
+        $group2->addPermission("design", true);
         $group2->save();
         $this->testGroup2 = $group2;
         
         $group3 = new Group();
         $group3->setName("TestGroup3");
         $group3->addPermission("images", true);
+        
+        $lang = new Language();
+        $lang->loadByLanguageCode("en");
+        
+        $group3->setLanguages(array(
+            $lang
+        ));
+        
         $group3->save();
         $this->testGroup3 = $group3;
         
@@ -84,6 +92,7 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($permissionChecker->hasPermission("info"));
         $this->assertTrue($permissionChecker->hasPermission("pages"));
         $this->assertTrue($permissionChecker->hasPermission("images"));
+        $this->assertTrue($permissionChecker->hasPermission("design"));
     }
 
     public function testHasPermissionWithUserReturnsFalse()
@@ -92,6 +101,16 @@ class PermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($permissionChecker->hasPermission("settings_simple"));
         $this->assertFalse($permissionChecker->hasPermission("other"));
         $this->assertFalse($permissionChecker->hasPermission("audio"));
+    }
+
+    public function testGetLanguages()
+    {
+        $permissionChecker = new PermissionChecker($this->testUser->getId());
+        $languages = $permissionChecker->getLanguages();
+        $language = $languages[0];
+        
+        $this->assertEquals(1, count($languages));
+        $this->assertEquals("en", $language->getLanguageCode());
     }
 
     public function testHasPermissionWithoutUser()
