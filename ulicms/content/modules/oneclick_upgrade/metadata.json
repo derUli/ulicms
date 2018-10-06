@@ -1,20 +1,22 @@
 {
-	"source" : "extend",
-	"version" : "1.7",
-	"embed" : false,
-	"controllers" : {
-		"CoreUpgradeController" : "controllers/CoreUpgradeController"
+	"source": "extend",
+	"version": "1.8",
+	"embed": false,
+	"controllers": {
+		"CoreUpgradeController": "controllers/CoreUpgradeController"
 	},
-	"actions" : {
-		"UpgradeCheck" : "templates/UpgradeCheck.php",
-			"CorruptedDownloadError" : "templates/errors/CorruptedDownloadError.php"
+	"actions": {
+		"UpgradeCheck": "templates/UpgradeCheck.php",
+		"CorruptedDownloadError": "templates/errors/CorruptedDownloadError.php"
 	},
-	"action_controllers" : {
-		"UpgradeCheck" : "CoreUpgradeController"
+	"action_controllers": {
+		"UpgradeCheck": "CoreUpgradeController"
 	},
-	"custom_acl" : ["oneclick_upgrade_settings"],
-	"admin_permission" : "oneclick_upgrade_settings",
+	"custom_acl": [
+		"oneclick_upgrade_settings"
+	],
+	"admin_permission": "oneclick_upgrade_settings",
 	"settings": {
-		"oneclick_upgrade_channel" : "slow"
+		"oneclick_upgrade_channel": "slow"
 	}
 }

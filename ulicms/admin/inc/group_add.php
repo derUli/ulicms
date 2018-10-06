@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL ();
-$all_permissions = $acl->getDefaultACL ( true, true );
+$permissionChecker = new ACL ();
+$all_permissions = $permissionChecker->getDefaultACL ( true, true );
 $languages = Language::getAllLanguages ();
 ?>
 <form action="?action=groups" method="post">

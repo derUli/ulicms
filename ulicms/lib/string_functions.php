@@ -103,7 +103,6 @@ if (! function_exists ( "sanitize" )) {
 
 if (! function_exists ( "unhtmlspecialchars" )) {
 	function unhtmlspecialchars($string) {
-		$string = str_replace ( '&amp;', '&', $string );
 		$string = str_replace ( '&#039;', '\'', $string );
 		$string = str_replace ( '&quot;', '"', $string );
 		$string = str_replace ( '&lt;', '<', $string );
@@ -115,6 +114,7 @@ if (! function_exists ( "unhtmlspecialchars" )) {
 		$string = str_replace ( '&ouml;', 'ö', $string );
 		$string = str_replace ( '&Ouml;', 'Ö', $string );
 		$string = str_replace ( '&nbsp;', ' ', $string );
+		$string = str_replace ( '&amp;', '&', $string );
 		return $string;
 	}
 }

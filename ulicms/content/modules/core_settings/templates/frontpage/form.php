@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("settings_simple")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
     $frontpages = array();
     

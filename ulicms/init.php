@@ -1,4 +1,6 @@
 <?php
+use UliCMS\Exceptions\AccessDeniedException;
+
 define("START_TIME", microtime(true));
 /*
  * Diese Datei initalisiert das System

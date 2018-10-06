@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL ();
-if (! $acl->hasPermission ( "forms" )) {
+$permissionChecker = new ACL ();
+if (! $permissionChecker->hasPermission ( "forms" )) {
 	noPerms ();
 } else {
 	
@@ -24,7 +24,7 @@ tr.even input.form-submit-url {
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
 <h1><?php translate("forms"); ?></h1>
-<?php if($acl->hasPermission ( "forms_create" )){ ?>
+<?php if($permissionChecker->hasPermission ( "forms_create" )){ ?>
 <p>
 	<a href="index.php?action=forms_new" class="btn btn-default"><?php translate("create_form");?></a>
 </p>
@@ -38,7 +38,7 @@ tr.even input.form-submit-url {
 				<th><?php translate("name");?></th>
 				<th class="hide-on-mobile"><?php translate("email_to");?></th>
 				<th><?php translate("submit_form_url");?></th>
-			<?php if($acl->hasPermission ( "forms_edit" )){ ?>
+			<?php if($permissionChecker->hasPermission ( "forms_edit" )){ ?>
 			<td style="font-weight: bold; text-align: center"><?php translate("edit");?></td>
 				<td style="font-weight: bold; text-align: center"><?php translate("delete");?></td>
 			<?php }?>
@@ -57,7 +57,7 @@ tr.even input.form-submit-url {
 					value="<?php echo htmlspecialchars($submit_form_url);?>"
 					onclick="this.select();"></td>
 
-			<?php if($acl->hasPermission ( "forms_edit" )){ ?>
+			<?php if($permissionChecker->hasPermission ( "forms_edit" )){ ?>
 			<td style="text-align: center;"><a
 					href="?action=forms_edit&id=<?php
 			echo $form ["id"];

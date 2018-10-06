@@ -2,8 +2,8 @@
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get("ga_secret");
 $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation("ULICMS_LOGIN_AT") . " " . get_domain(), $ga_secret);
-$acl = new ACL();
-if (! $acl->hasPermission("other")) {
+$permissionChecker = new ACL();
+if (! $permissionChecker->hasPermission("other")) {
     noPerms();
 } else {
     $cache_enabled = ! Settings::get("cache_disabled");
@@ -202,7 +202,7 @@ if (! $acl->hasPermission("other")) {
 			
 			<?php
     
-    if ($acl->hasPermission("default_access_restrictions_edit")) {
+    if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
         ?>
 				<h2><?php translate("DEFAULT_ACCESS_RESTRICTIONS");?></h2>
 		<p>

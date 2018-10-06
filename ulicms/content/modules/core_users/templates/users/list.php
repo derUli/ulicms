@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "users" )) {
+$permissionChecker = new ACL ();
+if ($permissionChecker->hasPermission ( "users" )) {
 	if (! isset ( $_SESSION ["admins_filter_group"] )) {
 		$_SESSION ["admins_filter_group"] = 0;
 	}
@@ -17,7 +17,7 @@ if ($acl->hasPermission ( "users" )) {
 	?>
 <h2><?php translate("users");?></h2>
 
-<?php if($acl->hasPermission("users_create")){?>
+<?php if($permissionChecker->hasPermission("users_create")){?>
 <p>
 <?php translate("users_infotext");?>
 	<br /> <br /> <a href="index.php?action=admin_new&ref=admins"
@@ -54,7 +54,7 @@ if ($acl->hasPermission ( "users" )) {
 				<th class="hide-on-mobile"><?php translate("firstname");?></th>
 				<th class="hide-on-mobile"><?php translate("email");?></th>
 				<th class="hide-on-mobile"><?php translate("primary_group");?></th>
-<?php if($acl->hasPermission("users_edit")){?>
+<?php if($permissionChecker->hasPermission("users_edit")){?>
 			<td><?php translate ( "edit" );?></td>
 				<td><span><?php translate("delete");?> </span></td>
 			<?php }?>
@@ -65,7 +65,7 @@ if ($acl->hasPermission ( "users" )) {
 		foreach ( $users as $row ) {
 			$group = "[" . get_translation ( "none" ) . "]";
 			if ($row->getGroupId ()) {
-				$group = $acl->getPermissionQueryResult ( $row->getGroupId () );
+				$group = $permissionChecker->getPermissionQueryResult ( $row->getGroupId () );
 				$group = $group ["name"];
 			}
 			?>
@@ -80,17 +80,17 @@ if ($acl->hasPermission ( "users" )) {
 			echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getEmail () ) . "</td>";
 			echo "<td class=\"hide-on-mobile\">";
 			$id = $row->getGroupId ();
-			if ($id and $acl->hasPermission ( "groups_edit" )) {
+			if ($id and $permissionChecker->hasPermission ( "groups_edit" )) {
 				$url = ModuleHelper::buildActionURL ( "groups", "edit=$id" );
 				echo '<a href="' . Template::getEscape ( $url ) . '">';
 			}
 			echo real_htmlspecialchars ( $group );
 			
-			if ($id and $acl->hasPermission ( "groups_edit" )) {
+			if ($id and $permissionChecker->hasPermission ( "groups_edit" )) {
 				echo "</a>";
 			}
 			echo "</td>";
-			if ($acl->hasPermission ( "users_edit" )) {
+			if ($permissionChecker->hasPermission ( "users_edit" )) {
 				echo "<td style='text-align:center;'>" . '<a href="index.php?action=admin_edit&admin=' . $row->getId () . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
 				
 				if ($row->getId () == $_SESSION ["login_id"]) {

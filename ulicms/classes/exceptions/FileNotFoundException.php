@@ -1,3 +1,8 @@
 <?php
-class FileNotFoundException extends Exception {
+namespace UliCMS\Exceptions;
+
+use Exception;
+
+class FileNotFoundException extends Exception
+{
 }

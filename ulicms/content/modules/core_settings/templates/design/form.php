@@ -1,7 +1,7 @@
 <?php
 $controller = ControllerRegistry::get();
-$acl = new ACL();
-if (! $acl->hasPermission("design")) {
+$permissionChecker = new ACL();
+if (! $permissionChecker->hasPermission("design")) {
     noPerms();
 } else {
     $theme = Settings::get("theme");
@@ -256,7 +256,7 @@ div#google-fonts {
 	</tr>
 		<?php
     
-    if ($acl->hasPermission("favicon")) {
+    if ($permissionChecker->hasPermission("favicon")) {
         ?>
 		<tr>
 		<td><strong><?php translate("favicon");?></strong></td>

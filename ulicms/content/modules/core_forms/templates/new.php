@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL ();
-if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" )) {
+$permissionChecker = new ACL ();
+if (! $permissionChecker->hasPermission ( "forms" ) or ! $permissionChecker->hasPermission ( "forms_create" )) {
 	noPerms ();
 } else {
 	$forms = Forms::getAllForms ();

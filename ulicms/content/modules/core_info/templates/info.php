@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if (! $acl->hasPermission("info")) {
+$permissionChecker = new ACL();
+if (! $permissionChecker->hasPermission("info")) {
     noPerms();
 } else {
     $version = new UliCMSVersion();

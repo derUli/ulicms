@@ -1,3 +1,14 @@
+===== Neues in UliCMS 2019.1 =====
+
+Neue Features:
+* Ein Benutzer kann nun mehrere Gruppen zugewiesen bekommen
+
+API-Änderungen:
+* Exceptions in den Namespace UliCMS\Exceptions verschoben
+
+Bugfixes:
+* Warnung beim Verlassen der Bearbeiten-Ansicht ohne Speichern war nicht lokalisiert
+
 ===== Neues in UliCMS 2018.4 =====
 
 Neue Features:

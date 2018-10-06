@@ -1,7 +1,7 @@
 <?php
-$acl = new ACL();
+$permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname("groups"));
-if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
+if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermission("pages_create")) {
     
     $allThemes = getThemesList();
     $cols = Database::getColumnNames("content");
@@ -10,7 +10,7 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
     $sql = "SELECT id, name FROM " . tbname("audio");
     $audios = Database::query($sql);
     
-    $pages_activate_own = $acl->hasPermission("pages_activate_own");
+    $pages_activate_own = $permissionChecker->hasPermission("pages_activate_own");
     
     $types = get_available_post_types();
     
@@ -663,7 +663,7 @@ window.onbeforeunload = confirmExit;
 function confirmExit()
 {
 	if(formchanged == 1 && submitted == 0)
-		return "Wenn Sie diese Seite verlassen gehen nicht gespeicherte Änderungen verloren.";
+		return PageTranslation.ConfirmExitWithoutSave;
 	else
 		return;
 }
@@ -708,6 +708,10 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 <input type="hidden" name="add_page" value="add_page">
 <button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 <?php
+	$translation = new JSTranslation(array(), "PageTranslation");
+	$translation->addKey("confirm_exit_without_save");
+	$translation->render();
+
     enqueueScriptFile("scripts/page.js");
     combinedScriptHtml();
     ?>
@@ -716,3 +720,4 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 } else {
     noPerms();
 }
+ 
