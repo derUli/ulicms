@@ -1,5 +1,4 @@
 <?php
-use UliCMS\Exceptions\AccessDeniedException;
 abstract class Controller {
 	protected $blacklist = array (
 			"runCommand" 

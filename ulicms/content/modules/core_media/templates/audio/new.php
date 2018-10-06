@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "audio" ) and $permissionChecker->hasPermission ( "audio_create" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "audio" ) and $acl->hasPermission ( "audio_create" )) {
 	?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("audio");?>"

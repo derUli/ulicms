@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_create")) {
+$acl = new ACL();
+if ($acl->hasPermission("users") and $acl->hasPermission("users_create")) {
     $languages = getAvailableBackendLanguages();
     $default_language = getSystemLanguage();
     $ref = _esc(Request::getVar("ref", "home"));
@@ -23,8 +23,8 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
 	<input type="password" required="required" name="admin_password_repeat"
 		id="admin_password_repeat" value="" autocomplete="off">
 		<?php
-    $permissionChecker = new ACL();
-    $allGroups = $permissionChecker->getAllGroups();
+    $acl = new ACL();
+    $allGroups = $acl->getAllGroups();
     asort($allGroups);
     ?>
 	<br /> <strong><?php translate("primary_group");?></strong> <br /> <select
@@ -54,26 +54,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
 		<?php
     }
     ?>
-	</select> <br /> <br /> 
-	
-	<strong><?php translate("secondary_groups");?></strong> <br /> <select
-		name="secondary_groups[]" multiple>
-		
-		<?php
-    
-    foreach ($allGroups as $key => $value) {
-        ?>
-		<option value="<?php
-        
-        echo $key;
-        ?>">		
-					<?php echo real_htmlspecialchars($value)?>
-		</option>
-		<?php
-    }
-    ?>
-	</select> <br /> <br /> 
-	<input type="checkbox" value="1"
+	</select> <br /> <br /> <input type="checkbox" value="1"
 		name="require_password_change" id="require_password_change"> <label
 		for="require_password_change"><?php translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );?> </label>
 	<br /> <br /> <input type="checkbox" id="send_mail" name="send_mail"

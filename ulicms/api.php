@@ -1,5 +1,4 @@
 <?php
-use UliCMS\Security\PermissionChecker;
 
 function is_json($str)
 {
@@ -1399,8 +1398,9 @@ function getAllSystemNames($lang = null)
 function getAllLanguages($filtered = false)
 {
     if ($filtered) {
-        $permissionChecker = new PermissionChecker(get_user_id());
-        $languages = $permissionChecker->getLanguages();
+        $group = new Group();
+        $group->getCurrentGroup();
+        $languages = $group->getLanguages();
         if (count($languages) > 0) {
             $result = array();
             foreach ($languages as $lang) {

@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "videos" ) and $permissionChecker->hasPermission ( "videos_create" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "videos" ) and $acl->hasPermission ( "videos_create" )) {
 	?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("videos");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>

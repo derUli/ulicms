@@ -1,5 +1,5 @@
 <?php
-$permissionChecker = new ACL ();
+$acl = new ACL ();
 $audio_folder = ULICMS_DATA_STORAGE_ROOT . "/content/audio";
 if (! is_dir ( $audio_folder )) {
 	mkdir ( $audio_folder );
@@ -21,7 +21,7 @@ $sql .= " ORDER by id";
 
 $all_audio = db_query ( $sql );
 
-if ($permissionChecker->hasPermission ( "audio" )) {
+if ($acl->hasPermission ( "audio" )) {
 	?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("media");?>"
@@ -37,7 +37,7 @@ if ($permissionChecker->hasPermission ( "audio" )) {
 <?php echo Categories::getHTMLSelect ( $_SESSION ["filter_category"], true );?>
 <br />
 <br />
-<?php if($permissionChecker->hasPermission("audio_create")){?>
+<?php if($acl->hasPermission("audio_create")){?>
 <p>
 	<a href="index.php?action=add_audio" class="btn btn-default"><?php
 		
@@ -70,7 +70,7 @@ if ($permissionChecker->hasPermission ( "audio" )) {
 	?>
 			</th>
 
-<?php if($permissionChecker->hasPermission("audio_edit")){?>
+<?php if($acl->hasPermission("audio_edit")){?>
 			<td></td>
 				<td></td>
 			<?php }?>
@@ -103,7 +103,7 @@ if ($permissionChecker->hasPermission ( "audio" )) {
 		?>
 			</td>
 
-	<?php if($permissionChecker->hasPermission("audio_edit")){?>
+	<?php if($acl->hasPermission("audio_edit")){?>
 			<td><a
 					href="index.php?action=edit_audio&id=<?php
 			

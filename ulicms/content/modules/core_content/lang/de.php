@@ -7,5 +7,3 @@ add_translation("helper_utils", "Hilfswerkzeuge");
 add_translation("show_positions_in_menus", "Zeige Positionen in Menüs");
 
 add_translation("show_filters", "Filter anzeigen");
-
-add_translation("confirm_exit_without_save", "Wenn Sie diese Seite verlassen gehen nicht gespeicherte Änderungen verloren.");

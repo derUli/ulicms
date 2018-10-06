@@ -1,5 +1,4 @@
 <?php
-use UliCMS\Exceptions\CorruptDownloadException;
 
 class CoreUpgradeController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL();
-if (! $permissionChecker->hasPermission("upload_patches")) {
+$acl = new ACL();
+if (! $acl->hasPermission("upload_patches")) {
     noPerms();
 } else {
     $redirect = false;

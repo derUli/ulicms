@@ -1,12 +1,12 @@
 <?php
-$permissionChecker = new ACL ();
-if (! $permissionChecker->hasPermission ( "list_packages" )) {
+$acl = new ACL ();
+if (! $acl->hasPermission ( "list_packages" )) {
 	noPerms ();
 } else {
 	// FIXME: Hartgecodete Texte in Sprachdateien auslagern.
 	// Das hier sollte am besten gleichzeitig mit dem Redesign der Paketverwaltung geschehen.
 	// TODO: truncate_installed_patches sollte in einen Controller
-	if (isset ( $_POST ["truncate_installed_patches"] ) and $permissionChecker->hasPermission ( "patch_management" )) {
+	if (isset ( $_POST ["truncate_installed_patches"] ) and $acl->hasPermission ( "patch_management" )) {
 		Database::truncateTable ( "installed_patches" );
 	}
 	
@@ -14,7 +14,7 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 		$_SESSION ["show_core_modules"] = false;
 	}
 	
-	if ($permissionChecker->hasPermission ( "remove_packages" )) {
+	if ($acl->hasPermission ( "remove_packages" )) {
 		// Modul deinstallieren
 		if (isset ( $_GET ["remove"] ) and getModuleMeta ( $_GET ["remove"], "source" ) != "core") {
 			$remove = basename ( $_GET ["remove"] );
@@ -37,7 +37,7 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	}
 	?>
 	<?php
-	if ($permissionChecker->hasPermission ( "install_packages" )) {
+	if ($acl->hasPermission ( "install_packages" )) {
 		?>
 <div class="row">
 	<div class="col-xs-6">
@@ -129,7 +129,7 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 					echo "</a>";
 				}
 				
-				if ($permissionChecker->hasPermission ( "remove_packages" ) and $source != "core") {
+				if ($acl->hasPermission ( "remove_packages" ) and $source != "core") {
 					echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $modules [$i] . "&type=module\" onclick=\"return uninstallModule(this.href, '" . $modules [$i] . "');\">";
 					echo " [" . get_translation ( "delete" ) . "]";
 					echo "</a>";
@@ -218,11 +218,11 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 			
 			echo "<div style=\"float:right\">";
 			
-			if ($permissionChecker->hasPermission ( "remove_packages" ) and $themes [$i] != $ctheme) {
+			if ($acl->hasPermission ( "remove_packages" ) and $themes [$i] != $ctheme) {
 				echo " <a style=\"font-size:0.8em;\" href=\"?action=modules&remove=" . $themes [$i] . "&type=theme\" onclick=\"return uninstallTheme(this.href, '" . $themes [$i] . "');\">";
 				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
-			} else if ($permissionChecker->hasPermission ( "remove_packages" )) {
+			} else if ($acl->hasPermission ( "remove_packages" )) {
 				echo " <a style=\"font-size:0.8em;\" href=\"#\" onclick=\"alert(Translation.CannotUninstallTheme); return false\">";
 				echo " [" . get_translation ( "delete" ) . "]";
 				echo "</a>";
@@ -237,7 +237,7 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	?>
 <?php
 	$isGoogleCloud = (class_exists ( "GoogleCloudHelper" ) && GoogleCloudHelper::isProduction ());
-	if ($permissionChecker->hasPermission ( "patch_management" ) and ! $isGoogleCloud) {
+	if ($acl->hasPermission ( "patch_management" ) and ! $isGoogleCloud) {
 		?>
 <a id="installed_patches_a"></a>
 <p>
@@ -253,7 +253,7 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	</p>
 <?php
 		
-		if ($permissionChecker->hasPermission ( "upload_patches" )) {
+		if ($acl->hasPermission ( "upload_patches" )) {
 			?>
 <p>
 	<a href="index.php?action=upload_patches" class="btn btn-warning"><?php translate("INSTALL_PATCH_FROM_FILE");?></a>

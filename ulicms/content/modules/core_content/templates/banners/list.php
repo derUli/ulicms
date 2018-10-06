@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "banners" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "banners" )) {
 	if (! isset ( $_SESSION ["filter_category"] )) {
 		$_SESSION ["filter_category"] = 0;
 	}
@@ -21,7 +21,7 @@ if ($permissionChecker->hasPermission ( "banners" )) {
 <p>
 <?php translate("advertisement_infotext");?>
 	<?php
-	if ($permissionChecker->hasPermission ( "banners_create" )) {
+	if ($acl->hasPermission ( "banners_create" )) {
 		?><br /> <br /> <a href="index.php?action=banner_new"
 		class="btn btn-default"><?php translate("add_advertisement");?>
 	</a><br />
@@ -42,7 +42,7 @@ if ($permissionChecker->hasPermission ( "banners" )) {
 			</th>
 				<th><?php translate("language");?>
 			</th>
-			<?php if ($permissionChecker->hasPermission ( "banners_edit" )) {?>
+			<?php if ($acl->hasPermission ( "banners_edit" )) {?>
 			<td><?php translate ( "edit" );?>
 			</td>
 				<td><?php translate ( "delete" );?>
@@ -70,7 +70,7 @@ if ($permissionChecker->hasPermission ( "banners" )) {
 			} else {
 				echo '<td>' . getLanguageNameByCode ( $banner->language ) . "</td>";
 			}
-			if ($permissionChecker->hasPermission ( "banners_edit" )) {
+			if ($acl->hasPermission ( "banners_edit" )) {
 				echo "<td style='text-align:center;'>" . '<a href="index.php?action=banner_edit&banner=' . $banner->id . '"><img class="mobile-big-image" src="gfx/edit.png" alt="' . get_translation ( "edit" ) . '" title="' . get_translation ( "edit" ) . '"></a></td>';
 				echo "<td style='text-align:center;'>" . '<form action="index.php?sClass=BannerController&sMethod=delete&banner=' . $banner->id . '" method="post" class="delete-form">' . get_csrf_token_html () . '<input type="image" class="mobile-big-image" src="gfx/delete.gif" title="' . get_translation ( "delete" ) . '"></form></td>';
 			}

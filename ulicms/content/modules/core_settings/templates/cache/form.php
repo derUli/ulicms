@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "cache" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "cache" )) {
 	?>
 <p>
 	<a

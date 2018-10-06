@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("motd")) {
+$acl = new ACL();
+if ($acl->hasPermission("motd")) {
     $editor = get_html_editor();
     ?>
 <div>

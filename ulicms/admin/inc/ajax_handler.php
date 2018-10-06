@@ -55,8 +55,8 @@ $ajax_cmd = $_REQUEST["ajax_cmd"];
 
 switch ($ajax_cmd) {
 	case "toggle_show_positions":
-		$permissionChecker = new ACL();
-		if(!$permissionChecker->hasPermission("pages_show_positions")){
+		$acl = new ACL();
+		if(!$acl->hasPermission("pages_show_positions")){
 			TextResult("Access Denied", HttpStatusCode::FORBIDDEN);
 		}
 		$settingsName = "user/". get_user_id() ."/show_positions";
@@ -67,8 +67,8 @@ switch ($ajax_cmd) {
 	}
 	break;
 	case "toggle_show_filters":
-		$permissionChecker = new ACL();
-		if(!$permissionChecker->hasPermission("pages")){
+		$acl = new ACL();
+		if(!$acl->hasPermission("pages")){
 			TextResult("Access Denied", HttpStatusCode::FORBIDDEN);
 		}
 		$settingsName = "user/". get_user_id() ."/show_filters";

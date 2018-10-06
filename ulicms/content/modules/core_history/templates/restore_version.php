@@ -3,8 +3,8 @@
 include_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
 include_once ULICMS_ROOT . "/classes/objects/content/VCS.php";
 
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "pages" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "pages" )) {
 	$content_id = intval ( $_GET ["content_id"] );
 	$revisions = VCS::getRevisionsByContentID ( $content_id );
 	?>
