@@ -1,8 +1,8 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "expert_settings" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "expert_settings" )) {
 	$data = Settings::getAll ();
-	if ($permissionChecker->hasPermission ( "expert_settings_edit" )) {
+	if ($acl->hasPermission ( "expert_settings_edit" )) {
 		?>
 		
 <p>
@@ -26,7 +26,7 @@ if ($permissionChecker->hasPermission ( "expert_settings" )) {
 			<tr style="font-weight: bold;">
 				<th><?php translate("option");?></th>
 				<th><?php translate("value");?></th>
-			<?php if($permissionChecker->hasPermission("expert_settings_edit")){?>
+			<?php if($acl->hasPermission("expert_settings_edit")){?>
 			<td><?php translate("edit");?></td>
 				<td><?php translate("delete");?></td>
 			<?php }?>
@@ -39,7 +39,7 @@ if ($permissionChecker->hasPermission ( "expert_settings" )) {
 			<tr>
 				<td><?php Template::escape($row->name);?></td>
 				<td><?php Template::escape($row->value);?></td>
-				<?php if($permissionChecker->hasPermission("expert_settings_edit")){?>
+				<?php if($acl->hasPermission("expert_settings_edit")){?>
 				<td class="text-center"><a
 					href="<?php echo ModuleHelper::buildActionURL("settings_edit", "name=".Template::getEscape($row->name));?>"><img
 						src="gfx/edit.png" alt="<?php translate("edit");?>"

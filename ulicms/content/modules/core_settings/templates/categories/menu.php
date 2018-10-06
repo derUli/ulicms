@@ -1,15 +1,15 @@
 <?php
-$permissionChecker = new ACL();
+$acl = new ACL();
 ?>
 <h1><?php translate("settings");?></h1>
 <?php
 
-if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->hasPermission("design") or $permissionChecker->hasPermission("spam_filter") or $permissionChecker->hasPermission("cache") or $permissionChecker->hasPermission("motd") or $permissionChecker->hasPermission("pkg_settings") or $permissionChecker->hasPermission("logo") or $permissionChecker->hasPermission("languages") or $permissionChecker->hasPermission("other")) {
+if ($acl->hasPermission("settings_simple") or $acl->hasPermission("design") or $acl->hasPermission("spam_filter") or $acl->hasPermission("cache") or $acl->hasPermission("motd") or $acl->hasPermission("pkg_settings") or $acl->hasPermission("logo") or $acl->hasPermission("languages") or $acl->hasPermission("other")) {
     ?>
 <p>
 <?php
     
-    if ($permissionChecker->hasPermission("settings_simple")) {
+    if ($acl->hasPermission("settings_simple")) {
         ?>
 	<a href="index.php?action=settings_simple"><?php translate("general_settings");?></a>
 	<br /> <br />
@@ -17,7 +17,7 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     }
     ?>
 <?php
-    if ($permissionChecker->hasPermission("design")) {
+    if ($acl->hasPermission("design")) {
         ?>
 	<a href="index.php?action=design"><?php translate("design");?></a> <br />
 	<br />
@@ -26,7 +26,7 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     ?>
 <?php
     
-    if ($permissionChecker->hasPermission("spam_filter")) {
+    if ($acl->hasPermission("spam_filter")) {
         ?>
 	<a href="index.php?action=spam_filter"><?php translate("spamfilter");?></a>
 	<br /> <br />
@@ -35,7 +35,7 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     ?>
 	<?php
     
-    if ($permissionChecker->hasPermission("privacy_settings")) {
+    if ($acl->hasPermission("privacy_settings")) {
         ?>
 	<a href="?action=privacy_settings"><?php translate("privacy");?></a><br />
 	<br />
@@ -44,7 +44,7 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     ?>
 <?php
     
-    if ($permissionChecker->hasPermission("cache")) {
+    if ($acl->hasPermission("cache")) {
         ?>
 	<a
 		href="<?php echo ModuleHelper::buildMethodCallUrl("CacheSettingsController", "clearCache");?>"><?php
@@ -55,7 +55,7 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     ?>
 <?php
     
-    if ($permissionChecker->hasPermission("motd")) {
+    if ($acl->hasPermission("motd")) {
         ?>
 	<a href="index.php?action=motd"><?php translate("motd");?></a> <br /> <br />
 	<?php
@@ -63,7 +63,7 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     ?>
 <?php
     
-    if ($permissionChecker->hasPermission("pkg_settings")) {
+    if ($acl->hasPermission("pkg_settings")) {
         ?>
 	<a href="?action=pkg_settings"><?php
         translate("package_source");
@@ -73,7 +73,7 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     ?>
 <?php
     
-    if ($permissionChecker->hasPermission("logo")) {
+    if ($acl->hasPermission("logo")) {
         ?>
 	<a href="index.php?action=logo_upload"><?php translate("logo");?></a> <br />
 	<br />
@@ -82,7 +82,7 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     ?>
 <?php
     
-    if ($permissionChecker->hasPermission("languages")) {
+    if ($acl->hasPermission("languages")) {
         ?>
 	<a href="index.php?action=languages"><?php translate("languages");?></a>
 	<br /> <br />
@@ -91,7 +91,7 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     ?>
 	<?php
     
-    if ($permissionChecker->hasPermission("other")) {
+    if ($acl->hasPermission("other")) {
         ?>
 	<a href="?action=other_settings"><?php translate("other");?></a>
  	<?php

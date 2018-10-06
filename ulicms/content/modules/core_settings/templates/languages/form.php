@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "languages" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "languages" )) {
 	$languages = Language::getAllLanguages ();
 	?>
 <p>

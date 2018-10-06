@@ -1,15 +1,9 @@
 <?php
-$permissionChecker = new ACL();
-if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermission("users_edit")) or ($_GET["admin"] == $_SESSION["login_id"])) {
+$acl = new ACL();
+if (($acl->hasPermission("users") and $acl->hasPermission("users_edit")) or ($_GET["admin"] == $_SESSION["login_id"])) {
     $admin = intval($_GET["admin"]);
     $languages = getAvailableBackendLanguages();
     $query = db_query("SELECT * FROM " . tbname("users") . " WHERE id='$admin'");
-    $user = new User($admin);
-    $secondaryGroups = $user->getSecondaryGroups();
-    $secondaryGroupIds = array();
-    foreach ($secondaryGroups as $group) {
-        $secondaryGroupIds[] = $group->getID();
-    }
     $ref = _esc(Request::getVar("ref", "home"));
     
     while ($row = db_fetch_object($query)) {
@@ -22,8 +16,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 	name="userdata_form" method="post" enctype="multipart/form-data"
 	id="edit_user" autocomplete="off">
 	<?php csrf_token_html ();?>
-	<img
-		src="<?php
+	<img src="<?php
         echo get_gravatar($row->email, 200);
         ?>"
 		alt="Avatar Image" /> <br /> <input type="hidden" name="edit_admin"
@@ -34,17 +27,17 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 	<input type="text" name="admin_username"
 		value="<?php echo real_htmlspecialchars($row->username);?>" required
 		<?php
-        if (! $permissionChecker->hasPermission("users")) {
+        if (! $acl->hasPermission("users")) {
             ?>
 		readonly="readonly" <?php
         }
-        ?>> <br /> <strong><?php translate("lastname");?></strong><br />
-	<input type="text" name="admin_lastname"
+        ?>> <br /> <strong><?php translate("lastname");?></strong><br /> <input
+		type="text" name="admin_lastname"
 		value="<?php
         
         echo real_htmlspecialchars($row->lastname);
-        ?>"> <br /> <strong><?php translate("firstname");?></strong><br />
-	<input type="text" name="admin_firstname"
+        ?>"> <br /> <strong><?php translate("firstname");?></strong><br /> <input
+		type="text" name="admin_firstname"
 		value="<?php
         
         echo real_htmlspecialchars($row->firstname);
@@ -68,12 +61,12 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 	<input type="password" name="admin_password_repeat"
 		id="admin_password_repeat" value="" autocomplete="off"> <br />
 	<?php
-        $permissionChecker = new ACL();
-        if ($permissionChecker->hasPermission("users")) {
-            $allGroups = $permissionChecker->getAllGroups();
+        $acl = new ACL();
+        if ($acl->hasPermission("users")) {
+            $allGroups = $acl->getAllGroups();
             asort($allGroups);
-            ?> <strong><?php translate("primary_group");?></strong> <br />
-	<select name="group_id">
+            ?> <strong><?php translate("primary_group");?></strong> <br /> <select
+		name="group_id">
 		<option value="-"
 			<?php
             
@@ -85,8 +78,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
             
             foreach ($allGroups as $key => $value) {
                 ?>
-		<option
-			value="<?php
+		<option value="<?php
                 
                 echo $key;
                 ?>"
@@ -100,29 +92,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 		<?php
             }
             ?>
-	</select> <br /> <br /> <strong><?php translate("secondary_groups");?></strong>
-	<br /> <select name="secondary_groups[]" multiple>
-		
-		<?php
-            
-            foreach ($allGroups as $key => $value) {
-                ?>
-		<option
-			value="<?php
-                
-                echo $key;
-                ?>"
-			<?php
-                
-                echo in_array($key, $secondaryGroupIds) ? "selected" : "";
-                
-                ?>>		
-					<?php echo real_htmlspecialchars($value)?>
-		</option>
-		<?php
-            }
-            ?>
-	</select> <br /> <br />
+	</select> <br />
 	<!-- Legacy Rechtesystem -->
 	<input type="hidden" name="admin_rechte"
 		value="<?php
@@ -145,7 +115,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 		<?php
         }
         ?>
-	 <strong><?php
+	<br /> <strong><?php
         
         translate("homepage");
         ?></strong> <br /> <input type="url" name="homepage"
@@ -184,7 +154,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
         ?> </label>
 		<?php
         
-        if ($permissionChecker->hasPermission("users")) {
+        if ($acl->hasPermission("users")) {
             ?>
 	<br /> <br /> <input type="checkbox" value="1" name="admin" id="admin"
 		<?php

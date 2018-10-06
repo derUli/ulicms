@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "update_system" ) and ! Settings::get ( "disable_core_patch_check" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "update_system" ) and ! Settings::get ( "disable_core_patch_check" )) {
 	$data = file_get_contents_wrapper ( PATCH_CHECK_URL, true );
 	$data = trim ( $data );
 	if (! empty ( $data )) {

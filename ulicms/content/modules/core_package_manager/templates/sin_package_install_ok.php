@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "install_packages" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "install_packages" )) {
 	if (isset ( $_REQUEST ["file"] )) {
 		$file = Template::getEscape ( $_REQUEST ["file"] );
 		?>

@@ -1,5 +1,5 @@
 <?php
-$permissionChecker = new ACL();
+$acl = new ACL();
 include_once ULICMS_ROOT . "/lib/formatter.php";
 
 $controller = ControllerRegistry::get();
@@ -7,7 +7,7 @@ $model = $controller->getModel();
 
 // no patch check in google cloud
 $runningInGoogleCloud = class_exists("GoogleCloudHelper") ? GoogleCloudHelper::isProduction() : false;
-if ($permissionChecker->hasPermission("dashboard")) {
+if ($acl->hasPermission("dashboard")) {
     
     ?>
 <p>
@@ -68,7 +68,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
 		<img src="gfx/loading.gif" alt="Feed wird geladen..." />
 	</div>
 <?php } ?>
-<?php if($permissionChecker->hasPermission("pages_show_positions")){?>
+<?php if($acl->hasPermission("pages_show_positions")){?>
 	<h2 class="accordion-header"><?php translate("helper_utils");?></h2>
 		<div class="accordion-content">
 		<form action="#">

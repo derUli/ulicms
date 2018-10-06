@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL();
-if (! $permissionChecker->hasPermission("groups")) {
+$acl = new ACL();
+if (! $acl->hasPermission("groups")) {
     noPerms();
 } else {
     include_once "../lib/string_functions.php";
@@ -12,8 +12,8 @@ if (! $permissionChecker->hasPermission("groups")) {
     $removed = false;
     
     if (isset($_POST["add_group"])) {
-        $permissionChecker = new ACL();
-        $all_permissions = $permissionChecker->getDefaultACL(false, true);
+        $acl = new ACL();
+        $all_permissions = $acl->getDefaultACL(false, true);
         if (isset($_POST["user_permissons"]) and count($_POST["user_permissons"]) > 0) {
             foreach ($_POST["user_permissons"] as $permission_name) {
                 $all_permissions[$permission_name] = true;
@@ -22,7 +22,7 @@ if (! $permissionChecker->hasPermission("groups")) {
         
         $name = trim($_POST["name"]);
         if (! empty($name)) {
-            $id = $permissionChecker->createGroup($name, $all_permissions);
+            $id = $acl->createGroup($name, $all_permissions);
             $group = new Group($id);
             $languages = array();
             if (isset($_POST["restrict_edit_access_language"]) and count($_POST["restrict_edit_access_language"]) > 0) {
@@ -44,8 +44,8 @@ if (! $permissionChecker->hasPermission("groups")) {
         }
     } else if (isset($_GET["delete"]) and get_request_method() == "POST") {
         $id = intval($_GET["delete"]);
-        $permissionChecker = new ACL();
-        $permissionChecker->deleteGroup($id);
+        $acl = new ACL();
+        $acl->deleteGroup($id);
         $removed = true;
         if (isset($GLOBALS["permissions"])) {
             unset($GLOBALS["permissions"]);
@@ -56,8 +56,8 @@ if (! $permissionChecker->hasPermission("groups")) {
             $logger->debug("User $name - Delete group with id ($id)");
         }
     } else if (isset($_POST["edit_group"])) {
-        $permissionChecker = new ACL();
-        $all_permissions = $permissionChecker->getDefaultACL(false, true);
+        $acl = new ACL();
+        $all_permissions = $acl->getDefaultACL(false, true);
         
         $id = $_POST["id"];
         
@@ -83,7 +83,7 @@ if (! $permissionChecker->hasPermission("groups")) {
         $name = trim($_POST["name"]);
         $json_permissions = json_encode($all_permissions);
         if (! empty($name)) {
-            $permissionChecker->updateGroup($id, $name, $json_permissions);
+            $acl->updateGroup($id, $name, $json_permissions);
             $modified = true;
             $name = real_htmlspecialchars($name);
         }
@@ -136,13 +136,13 @@ if (! $permissionChecker->hasPermission("groups")) {
     if (! isset($_GET["add"]) and ! isset($_GET["edit"])) {
         include "inc/group_list.php";
     } else if (isset($_GET["add"])) {
-        if ($permissionChecker->hasPermission("groups_create")) {
+        if ($acl->hasPermission("groups_create")) {
             include "inc/group_add.php";
         } else {
             noPerms();
         }
     } else if (isset($_GET["edit"])) {
-        if ($permissionChecker->hasPermission("groups_edit")) {
+        if ($acl->hasPermission("groups_edit")) {
             include "inc/group_edit.php";
         } else {
             noPerms();

@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("logo")) {
+$acl = new ACL();
+if ($acl->hasPermission("logo")) {
     ?>
 <p>
 	<a

@@ -120,8 +120,6 @@ class Forms
             ) : array(
                 Settings::get("email")
             );
-            // remove newlines and nullbytes from mail address to prevent
-            // header injection
             sanitize($mail_from);
             $headers .= "\n";
             $headers .= "From: " . $mail_from[0] . "\n";

@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if (! is_admin () and ! $permissionChecker->hasPermission ( "categories" )) {
+$acl = new ACL ();
+if (! is_admin () and ! $acl->hasPermission ( "categories" )) {
 	noPerms ();
 } else {
 	include_once ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "string_functions.php";
@@ -19,7 +19,7 @@ if (! is_admin () and ! $permissionChecker->hasPermission ( "categories" )) {
 	$categories = Categories::getAllCategories ( $order );
 	?>
 <?php
-	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] ) and $permissionChecker->hasPermission ( "categories_create" )) {
+	if (! isset ( $_GET ["add"] ) and ! isset ( $_GET ["edit"] ) and $acl->hasPermission ( "categories_create" )) {
 		?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
@@ -46,7 +46,7 @@ if (! is_admin () and ! $permissionChecker->hasPermission ( "categories" )) {
 				<th style="min-width: 200px;"><?php translate("name");?></th>
 				<th style="min-width: 200px;" class="hide-on-mobile"><?php translate("description");?></th>
 				<?php
-		if ($permissionChecker->hasPermission ( "categories_edit" )) {
+		if ($acl->hasPermission ( "categories_edit" )) {
 			?>
 			<td></td>
 				<td></td>
@@ -73,7 +73,7 @@ if (! is_admin () and ! $permissionChecker->hasPermission ( "categories" )) {
 			echo nl2br ( real_htmlspecialchars ( $category ["description"] ) );
 			?></td>
 			<?php
-			if ($permissionChecker->hasPermission ( "categories_edit" )) {
+			if ($acl->hasPermission ( "categories_edit" )) {
 				?>
 			<td style="text-align: center;"><a
 					href="?action=categories&edit=<?php echo $category ["id"];?>"><img
@@ -132,7 +132,7 @@ if (! is_admin () and ! $permissionChecker->hasPermission ( "categories" )) {
 		?>
 <?php
 	} else if (isset ( $_GET ["add"] )) {
-		if ($permissionChecker->hasPermission ( "categories_create" )) {
+		if ($acl->hasPermission ( "categories_create" )) {
 			?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("categories");?>"
@@ -162,7 +162,7 @@ if (! is_admin () and ! $permissionChecker->hasPermission ( "categories" )) {
 			noPerms ();
 		}
 	} else if (isset ( $_GET ["edit"] )) {
-		if ($permissionChecker->hasPermission ( "categories_edit" )) {
+		if ($acl->hasPermission ( "categories_edit" )) {
 			?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("categories");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>

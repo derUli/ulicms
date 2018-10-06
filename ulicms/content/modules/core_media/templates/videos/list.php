@@ -1,5 +1,5 @@
 <?php
-$permissionChecker = new ACL ();
+$acl = new ACL ();
 
 $video_folder = ULICMS_DATA_STORAGE_ROOT . "/content/videos";
 if (! is_dir ( $video_folder )) {
@@ -22,7 +22,7 @@ $sql .= " ORDER by id";
 
 $all_videos = db_query ( $sql );
 
-if ($permissionChecker->hasPermission ( "videos" )) {
+if ($acl->hasPermission ( "videos" )) {
 	?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("media");?>"
@@ -41,7 +41,7 @@ if ($permissionChecker->hasPermission ( "videos" )) {
 	?>
 <br />
 <br />
-<?php if($permissionChecker->hasPermission("videos_create")){?>
+<?php if($acl->hasPermission("videos_create")){?>
 <p>
 	<a href="index.php?action=add_video" class="btn btn-default"><?php
 		
@@ -77,7 +77,7 @@ if ($permissionChecker->hasPermission ( "videos" )) {
 	translate ( "mp4_file" );
 	?>
 			</th>
-			<?php if($permissionChecker->hasPermission("videos_edit")){?>
+			<?php if($acl->hasPermission("videos_edit")){?>
 			<td></td>
 			<td></td>
 			<?php }?>
@@ -114,7 +114,7 @@ if ($permissionChecker->hasPermission ( "videos" )) {
 		?>
 			</td>
 			
-			<?php if($permissionChecker->hasPermission("videos_edit")){?>
+			<?php if($acl->hasPermission("videos_edit")){?>
 			<td><a
 				href="index.php?action=edit_video&id=<?php
 			

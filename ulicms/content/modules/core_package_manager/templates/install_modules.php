@@ -1,7 +1,7 @@
 <?php
-$permissionChecker = new ACL();
+$acl = new ACL();
 $pkg = new PackageManager();
-if (! $permissionChecker->hasPermission("install_packages")) {
+if (! $acl->hasPermission("install_packages")) {
     noPerms();
 } else {
     $pkg_src = Settings::get("pkg_src");

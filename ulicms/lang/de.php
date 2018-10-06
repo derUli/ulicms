@@ -737,6 +737,4 @@ add_translation ( "max_mysql_version", "Neueste unterstützte MySQL-Version" );
 add_translation ( "php_extension_x_not_installed", "Die benötigte PHP-Erweiterung %extension% ist nicht installed." );
 add_translation ( "required_php_extensions", "Benötigte PHP-Erweiterungen" );
 
-add_translation("secondary_groups", "Sekundäre Gruppen");
-
 do_event ( "lang_de" );

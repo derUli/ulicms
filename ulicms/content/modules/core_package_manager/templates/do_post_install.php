@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "update_system" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "update_system" )) {
 	?>
 <h1><?php translate("run_post_install_script");?></h1>
 <?php

@@ -6,8 +6,8 @@
 </p>
 <h1><?php translate("spamfilter");?></h1>
 <?php
-$permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("spam_filter")) {
+$acl = new ACL();
+if ($acl->hasPermission("spam_filter")) {
     ?>
 <form id="spamfilter_settings" name="?action=spam_filter" method="post">
 <?php echo ModuleHelper::buildMethodCallForm("SpamFilterController", "save");?>

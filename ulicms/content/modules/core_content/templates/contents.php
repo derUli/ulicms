@@ -1,32 +1,32 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "pages" ) or $permissionChecker->hasPermission ( "banners" ) or $permissionChecker->hasPermission ( "categories" ) or $permissionChecker->hasPermission ( "export" ) or $permissionChecker->hasPermission ( "forms" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "pages" ) or $acl->hasPermission ( "banners" ) or $acl->hasPermission ( "categories" ) or $acl->hasPermission ( "export" ) or $acl->hasPermission ( "forms" )) {
 	?>
 <h2><?php translate("contents");?></h2>
 <p>
 	<strong><?php translate("select_content_type");?> </strong><br /> <br />
 	<?php
 	
-	if ($permissionChecker->hasPermission ( "pages" )) {
+	if ($acl->hasPermission ( "pages" )) {
 		?>
 	<a href="index.php?action=pages"><?php translate("pages");?></a><br />
 	<br />
 	<?php
 	}
-	if ($permissionChecker->hasPermission ( "forms" )) {
+	if ($acl->hasPermission ( "forms" )) {
 		?><a href='?action=forms'><?php
 		
 		translate ( "forms" );
 		?></a> <br />
 				<?php
 	}
-	if ($permissionChecker->hasPermission ( "banners" )) {
+	if ($acl->hasPermission ( "banners" )) {
 		?>
 	<a href="index.php?action=banner"><?php translate("advertisements");?></a><br />
 
 	<?php
 	}
-	if ($permissionChecker->hasPermission ( "categories" )) {
+	if ($acl->hasPermission ( "categories" )) {
 		?>
 	<a href="index.php?action=categories"><?php translate("categories");?></a><br />
 	<br />

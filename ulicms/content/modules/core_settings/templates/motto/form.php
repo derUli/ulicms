@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL();
-if ($permissionChecker->hasPermission("settings_simple")) {
+$acl = new ACL();
+if ($acl->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
     $mottos = array();
     for ($i = 0; $i < count($languages); $i ++) {

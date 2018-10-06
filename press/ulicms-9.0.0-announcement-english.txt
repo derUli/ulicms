@@ -1,0 +1,10 @@
+Release of UliCMS 9.0.0 scheduled for first quarter of 2016
+
+The release of UliCMS 9.0.0 is scheduled for the first quarter of 2016. 
+This new version of UliCMS will introduce support for the newest web technologies,
+including an improved template engine, an updated jQuery, HTML5 video and audio.
+
+Other improvements will include better security, easier configurability and the
+introduction of an one-click patch management utility, which will make it much easier to keep your system up-to-date.
+
+Starting with this release UliCMS will follow a slower release cycle than before, releasing a new version every 1 to 3 years, since you should spend your time to manage your content and not to maintain your CMS.

@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "settings_simple" )) {
+$acl = new ACL ();
+if ($acl->hasPermission ( "settings_simple" )) {
 	$languages = getAllLanguages ();
 	$homepage_titles = array ();
 	for($i = 0; $i < count ( $languages ); $i ++) {

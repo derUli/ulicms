@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL();
-if ($permissionChecker->hasPermission($_GET["action"])) {
+$acl = new ACL();
+if ($acl->hasPermission($_GET["action"])) {
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("media");?>"

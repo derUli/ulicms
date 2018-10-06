@@ -1,6 +1,6 @@
 <?php
-$permissionChecker = new ACL ();
-if (! $permissionChecker->hasPermission ( "pkg_settings" )) {
+$acl = new ACL ();
+if (! $acl->hasPermission ( "pkg_settings" )) {
 	noPerms ();
 } else {
 	$default_pkg_src = "https://packages.ulicms.de/{version}/";

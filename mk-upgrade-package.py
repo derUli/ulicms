@@ -20,6 +20,7 @@ def zipdir(basedir, archivename):
                 zfn = absfn[len(basedir) + len(os.sep):]  # XXX: relative path
                 z.write(absfn, zfn)
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-z", "--zip", help="Compress with zip", action="store_true")

@@ -2,9 +2,9 @@
 if (! defined ( "ULICMS_ROOT" ))
 	die ( "Bad Hacker!" );
 
-$permissionChecker = new ACL ();
+$acl = new ACL ();
 
-if ($permissionChecker->hasPermission ( "images" ) or $permissionChecker->hasPermission ( "videos" ) or $permissionChecker->hasPermission ( "audio" ) or $permissionChecker->hasPermission ( "files" )) {
+if ($acl->hasPermission ( "images" ) or $acl->hasPermission ( "videos" ) or $acl->hasPermission ( "audio" ) or $acl->hasPermission ( "files" )) {
 	
 	?>
 
@@ -17,7 +17,7 @@ if ($permissionChecker->hasPermission ( "images" ) or $permissionChecker->hasPer
 <br />
 <?php
 	
-	if ($permissionChecker->hasPermission ( "images" )) {
+	if ($acl->hasPermission ( "images" )) {
 		?>
 <a href="index.php?action=images"><?php translate("images");?>
 </a>
@@ -28,7 +28,7 @@ if ($permissionChecker->hasPermission ( "images" ) or $permissionChecker->hasPer
 	?>
 <?php
 
-	if ($permissionChecker->hasPermission ( "files" )) {
+	if ($acl->hasPermission ( "files" )) {
 		?>
 <a href="index.php?action=files"><?php translate("files");?>
 </a>
@@ -41,7 +41,7 @@ if ($permissionChecker->hasPermission ( "images" ) or $permissionChecker->hasPer
 
 <?php
 	
-	if ($permissionChecker->hasPermission ( "videos" )) {
+	if ($acl->hasPermission ( "videos" )) {
 		?>
 <a href="index.php?action=videos"><?php translate("videos");?>
 </a>
@@ -53,7 +53,7 @@ if ($permissionChecker->hasPermission ( "images" ) or $permissionChecker->hasPer
 
 <?php
 	
-	if ($permissionChecker->hasPermission ( "audio" )) {
+	if ($acl->hasPermission ( "audio" )) {
 		?>
 <a href="index.php?action=audio"><?php translate("audio");?>
 </a>
