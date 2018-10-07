@@ -26,3 +26,5 @@ add_translation("dsgvo_checkbox", "DSGVO Checkbox");
 add_translation("no_auto_cron_help", "Aktivieren Sie diese Option, wenn Sie einen richtigen Cronjob einrichten möchten.\nWenn diese Option nicht aktiviert ist, werden Cronjobs beim Laden einer Seite ausgefürt, was die Ladezeiten verschlechtert.");
 
 add_translation("language_shortcode", "Kürzel");
+
+add_translation("reject_requests_from_bots", "Anfragen von Bots blockieren");
