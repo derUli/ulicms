@@ -96,9 +96,6 @@ function spamFilterEnabledcheckboxChanged(checked){
     esc(Settings::get("min_time_to_fill_form", "int"));
     ?>">
 		</p>
-
-
-
 	</div>
 
 	<p>
