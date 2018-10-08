@@ -14,7 +14,7 @@ foreach (ViewBag::get("data") as $label => $value) {
     ?>
 	  <tr>
 				<td><strong><?php esc($label);?></strong></td>
-				<td><strong><?php esc($value);?></strong></td>
+				<td><?php echo nl2br(_esc($value));?></td>
 			</tr>
 	  <?php
 }
