@@ -13,7 +13,6 @@
 				<td><strong><?php esc($value);?></strong></td>
 			</tr>
 	  <?php }?>
-	
 	</tbody>
 	</table>
 </body>
