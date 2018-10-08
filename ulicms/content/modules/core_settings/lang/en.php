@@ -27,3 +27,5 @@ add_translation("dsgvo_checkbox", "GDPR Checkbox");
 add_translation("no_auto_cron_help", "Enable this option if you wan't to setup a real cronjob.\nIf this option is disabled cronjobs will be executed while page load. This may decrease the site performance.");
 
 add_translation("language_shortcode", "Shortcode");
+
+add_translation("reject_requests_from_bots", "Reject Requests From Bots");

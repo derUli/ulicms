@@ -46,6 +46,11 @@ class CoreForms extends Controller
                         "%hostname%" => $hostname
                     )), 403);
                 }
+                if (Settings::get("reject_requests_from_bots") and AntiSpamHelper::checkForBot(get_useragent())) {
+                    HTMLResult(get_translation("bots_are_not_allowed", array(
+                        "%hostname%" => $hostname
+                    )), 403);
+                }
             }
             $form_id = Request::getVar("submit-cms-form", null, "int");
             Forms::submitForm($form_id);
