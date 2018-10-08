@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 </head>
 <body>
-	<!--  TODO: Output Table with fields -->
 	<table border="1">
 		<tbody>
 	<?php
