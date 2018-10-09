@@ -438,9 +438,8 @@ function shutdown_function()
     // don't execute shutdown hook on kcfinder page (media)
     // since the "Path" class has a naming conflict with the same named
     // class of KCFinder
-    if (! defined("KCFINDER_PAGE")) {
-        do_event("shutdown");
-    }
+    do_event("shutdown");
+    
     $cfg = new CMSConfig();
     if (is_true($cfg->show_render_time) and ! Request::isAjaxRequest()) {
         echo "\n\n<!--" . (microtime(true) - START_TIME) . "-->";
@@ -461,7 +460,6 @@ Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
 // don't load module stuff on kcfinder page (media)
 // since the "Path" class has a naming conflict with the same named
 // class of KCFinder
-if (! defined("KCFINDER_PAGE")) {
     ModelRegistry::loadModuleModels();
     TypeMapper::loadMapping();
     HelperRegistry::loadModuleHelpers();
@@ -469,7 +467,7 @@ if (! defined("KCFINDER_PAGE")) {
     do_event("before_init");
     do_event("init");
     do_event("after_init");
-}
+
 
 $version = new UliCMSVersion();
 if (! defined("UPDATE_CHECK_URL")) {

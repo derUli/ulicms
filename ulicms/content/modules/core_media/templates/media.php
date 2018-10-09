@@ -1,6 +1,5 @@
 <?php
-if (! defined ( "ULICMS_ROOT" ))
-	die ( "Bad Hacker!" );
+
 
 $permissionChecker = new ACL ();
 
