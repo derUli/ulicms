@@ -6,22 +6,26 @@
 </p>
 <h1><?php translate("spamfilter");?></h1>
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("spam_filter")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("spam_filter")) {
     ?>
 <form id="spamfilter_settings" name="?action=spam_filter" method="post">
 <?php echo ModuleHelper::buildMethodCallForm("SpamFilterController", "save");?>
-	<input type="checkbox" id="spamfilter_enabled"
-		name="spamfilter_enabled"
-		<?php
+
+
+		<div class="checkbox">
+		<label for="spamfilter_enabled"> <input type="checkbox"
+			id="spamfilter_enabled" name="spamfilter_enabled"
+			<?php
     
     if (Settings::get("spamfilter_enabled") == "yes") {
         echo " checked";
     }
     ?>
-		value="yes" onChange="spamFilterEnabledcheckboxChanged(this.checked)">
-	<label for="spamfilter_enabled"><?php translate("spamfilter_enabled");?>
+			value="yes" onChange="spamFilterEnabledcheckboxChanged(this.checked)">
+<?php translate("spamfilter_enabled");?>
 	</label>
+	</div>
 	<script type="text/javascript">
 function spamFilterEnabledcheckboxChanged(checked){
     if(checked){
@@ -41,34 +45,47 @@ function spamFilterEnabledcheckboxChanged(checked){
         echo " style='display:none;'";
     }
     ?>>
-		<br />
-		<?php translate("blacklist");?>
-		<br />
-		<textarea name="spamfilter_words_blacklist" rows=10 cols=40><?php
+		<label for="spamfilter_words_blacklist"><?php translate("blacklist");?></label><br />
+		<textarea name="spamfilter_words_blacklist"
+			id="spamfilter_words_blacklist" rows=10 cols=40><?php
     echo htmlspecialchars(Settings::get("spamfilter_words_blacklist"), ENT_QUOTES, "UTF-8");
     ?></textarea>
-		<br /> 
-
-		<?php translate("spam_countries");?>
-		<br /> <input type="text" name="country_blacklist"
+		<br /> <label for="country_blacklist"><?php translate("spam_countries");?></label>
+		<input type="text" name="country_blacklist" id="country_blacklist"
 			value="<?php
     
     echo htmlspecialchars(Settings::get("country_blacklist"));
-    ?>"> <br /> <input type="checkbox" name="disallow_chinese_chars"
-			id="disallow_chinese_chars"
-			<?php
+    ?>">
+
+		<div class="checkbox">
+			<label for="disallow_chinese_chars"> <input type="checkbox"
+				name="disallow_chinese_chars" id="disallow_chinese_chars"
+				<?php
     if (Settings::get("disallow_chinese_chars")) {
         echo " checked=\"checked\"";
     }
-    ?>> <label for="disallow_chinese_chars"><?php translate("disallow_chinese_chars");?>
-		</label> <br /> <br /> <input type="checkbox"
-			name="disallow_cyrillic_chars" id="disallow_cyrillic_chars"
-			<?php
+    ?>> <?php translate("disallow_chinese_chars");?>
+		</label>
+		</div>
+		<div class="checkbox">
+			<label for="disallow_cyrillic_chars"> <input type="checkbox"
+				name="disallow_cyrillic_chars" id="disallow_cyrillic_chars"
+				<?php
     if (Settings::get("disallow_cyrillic_chars")) {
         echo " checked=\"checked\"";
     }
-    ?>> <label for="disallow_cyrillic_chars"><?php translate("disallow_cyrillic_chars");?>
-		</label> <br /> <br />
+    ?>> <?php translate("disallow_cyrillic_chars");?>
+		</label>
+		</div>
+		<div class="checkbox">
+			<label><input name="reject_requests_from_bots" type="checkbox"
+				value=""
+				<?php
+    
+    echo Settings::get("reject_requests_from_bots") ? "checked" : "";
+    ?>><?php translate("reject_requests_from_bots");?></label>
+		</div>
+
 		<p>
 			<label for="min_time_to_fill_form"><?php translate("min_time_to_fill_form");?></label><br />
 			<input type="number" name="min_time_to_fill_form"
@@ -79,7 +96,6 @@ function spamFilterEnabledcheckboxChanged(checked){
     esc(Settings::get("min_time_to_fill_form", "int"));
     ?>">
 		</p>
-
 	</div>
 
 	<p>
@@ -88,7 +104,7 @@ function spamFilterEnabledcheckboxChanged(checked){
     
     translate("save_changes");
     ?></button>
-
+	</p>
 </form>
 <script type="text/javascript">
 $("#spamfilter_settings").ajaxForm({beforeSubmit: function(e){

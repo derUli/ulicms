@@ -87,23 +87,13 @@ class Forms
                     HTMLResult($html, HttpStatusCode::BAD_REQUEST);
                 }
             }
-            $html = "<!DOCTYPE html>";
-            $html .= "<html>";
-            $html .= "<head>";
-            $html .= '<meta http-equiv="content-type" content="text/html; charset=utf-8">';
-            $html .= '<meta charset="utf-8">';
-            $html .= "</head>";
-            $html .= "<body>";
-            $html .= "<table border=\"1\"";
+            
+            $data = array();
             foreach ($fields as $name => $label) {
-                $html .= "<tr>";
-                $html .= "<td><strong>" . _esc($label) . "</strong></td>";
-                $html .= "<td>" . nl2br(_esc($_POST[$name])) . "</td>";
-                $html .= "</tr>";
+                $data[$label] = $_POST[$name];
             }
-            $html .= "</table>";
-            $html .= "</body>";
-            $html .= "</html>";
+            ViewBag::set("data", $data);
+            $html = Template::executeModuleTemplate("core_forms", "mails/message.php");
             
             $email_to = $form["email_to"];
             $subject = $form["subject"];
@@ -120,6 +110,8 @@ class Forms
             ) : array(
                 Settings::get("email")
             );
+            // remove newlines and nullbytes from mail address to prevent
+            // header injection
             sanitize($mail_from);
             $headers .= "\n";
             $headers .= "From: " . $mail_from[0] . "\n";

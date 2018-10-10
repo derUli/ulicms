@@ -1,5 +1,4 @@
 <?php
-if (! defined ( "KCFINDER_PAGE" )) {
 	class Path {
 		public static function resolve($path) {
 			$path = str_ireplace ( "ULICMS_ROOT", rtrim ( ULICMS_ROOT, "/" ), $path );
@@ -32,4 +31,3 @@ if (! defined ( "KCFINDER_PAGE" )) {
 			}
 		}
 	}
-}

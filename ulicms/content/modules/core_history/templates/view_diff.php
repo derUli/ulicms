@@ -2,8 +2,8 @@
 // @FIXME: Das hier in core_history auslagern.
 include_once ULICMS_ROOT . "/classes/3rdparty/finediff.php";
 include_once ULICMS_ROOT . "/classes/objects/content/VCS.php";
-$acl = new ACL ();
-if ($acl->hasPermission ( "pages" )) {
+$permissionChecker = new ACL ();
+if ($permissionChecker->hasPermission ( "pages" )) {
 	$history_id = intval ( $_GET ["history_id"] );
 	$content_id = intval ( $_GET ["content_id"] );
 

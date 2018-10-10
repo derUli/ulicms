@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "update_system" )) {
+$permissionChecker = new ACL ();
+if ($permissionChecker->hasPermission ( "update_system" )) {
 	$version = ControllerRegistry::get ( "CoreUpgradeController" )->checkForUpgrades ();
 	if ($version) {
 		?>

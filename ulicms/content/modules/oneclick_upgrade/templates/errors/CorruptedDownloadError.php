@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "update_system" )) {
+$permissionChecker = new ACL ();
+if ($permissionChecker->hasPermission ( "update_system" )) {
 	?>
 <div class="alert alert-danger">
 	<strong><?php translate("error");?>!</strong> <?php translate("corrupted_download")?>

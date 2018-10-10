@@ -1,14 +1,14 @@
 <?php
-$acl = new ACL ();
+$permissionChecker = new ACL ();
 
-if (! $acl->hasPermission ( "groups" )) {
+if (! $permissionChecker->hasPermission ( "groups" )) {
 	noPerms ();
 } else {
 	$id = intval ( $_REQUEST ["edit"] );
-	$acl = new ACL ();
-	$all_permissions = $acl->getPermissionQueryResult ( $id );
+	$permissionChecker = new ACL ();
+	$all_permissions = $permissionChecker->getPermissionQueryResult ( $id );
 	$groupName = real_htmlspecialchars ( $all_permissions ["name"] );
-	$all_permissions_all = $acl->getDefaultACL ( false, true );
+	$all_permissions_all = $permissionChecker->getDefaultACL ( false, true );
 	$all_permissions = json_decode ( $all_permissions ["permissions"], true );
 	foreach ( $all_permissions_all as $name => $value ) {
 		if (! isset ( $all_permissions [$name] )) {

@@ -120,8 +120,8 @@ $_CONFIG = array(
 @session_start();
 
 // check if user is permitted to upload media and enable the file manager
-$acl = new ACL();
-if (($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files") and $acl->hasPermission($_REQUEST["type"])) {
+$permissionChecker = new ACL();
+if (($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files") and $permissionChecker->hasPermission($_REQUEST["type"])) {
     $_CONFIG["disabled"] = false;
 }
 

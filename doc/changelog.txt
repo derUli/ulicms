@@ -1,3 +1,16 @@
+===== Neues in UliCMS 2019.1 =====
+
+Neue Features:
+* Ein Benutzer kann nun mehrere Gruppen zugewiesen bekommen
+* Funktion "Anfragen von Bots blockieren" zum Spamfilter hinzugefügt
+* HTML der Formular E-Mails können nun per Template angepasst werden
+
+API-Änderungen:
+* Exceptions in den Namespace UliCMS\Exceptions verschoben
+
+Bugfixes:
+* Warnung beim Verlassen der Bearbeiten-Ansicht ohne Speichern war nicht lokalisiert
+
 ===== Neues in UliCMS 2018.4 =====
 
 Neue Features:

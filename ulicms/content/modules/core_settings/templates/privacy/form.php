@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("privacy_settings")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("privacy_settings")) {
     $currentLanguage = Request::getVar("language");
     if (! $currentLanguage) {
         $currentLanguage = Settings::get("default_language");

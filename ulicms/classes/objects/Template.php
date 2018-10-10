@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Exceptions\FileNotFoundException;
 
 class Template
 {

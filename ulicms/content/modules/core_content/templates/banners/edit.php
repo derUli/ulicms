@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "banners" ) and $acl->hasPermission ( "banners_edit" )) {
+$permissionChecker = new ACL ();
+if ($permissionChecker->hasPermission ( "banners" ) and $permissionChecker->hasPermission ( "banners_edit" )) {
 	$banner = intval ( $_GET ["banner"] );
 	$row = new Banner ();
 	$row->loadByID ( $banner );
