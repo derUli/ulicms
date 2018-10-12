@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2019.1 =====
+===== Neues in UliCMS 2018.4.1 =====
 
 Neue Features:
 * Ein Benutzer kann nun mehrere Gruppen zugewiesen bekommen
@@ -11,6 +11,9 @@ API-Änderungen:
 
 Bugfixes:
 * Warnung beim Verlassen der Bearbeiten-Ansicht ohne Speichern war nicht lokalisiert
+
+Bekannte Probleme:
+* Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertet die sekundären Gruppen nicht aus. Die Vearbeitung der sekundären Gruppen wird in einem zukünftigen Release implementiert werden.
 
 ===== Neues in UliCMS 2018.4 =====
 
