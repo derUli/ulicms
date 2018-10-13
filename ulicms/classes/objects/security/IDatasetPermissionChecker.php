@@ -1,4 +1,5 @@
 <?php
+namespace UliCMS\Security;
 
 interface IDatasetPermissionChecker
 {
