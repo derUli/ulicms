@@ -1,3 +1,9 @@
+
+===== Neues in UliCMS 2018.4.1 =====
+
+Bugfix:
+* Der Text "No Results Found" in den Select2 Dropdown-Boxen war nicht lokalisiert 
+
 ===== Neues in UliCMS 2018.4.1 =====
 
 Neue Features:
