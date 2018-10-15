@@ -1,6 +1,10 @@
 
 ===== Neues in UliCMS 2018.4.1 =====
 
+Neue API-Funktionen:
+* Template::getHtml5Doctype()
+* Template::html5Doctype()
+
 Bugfix:
 * Der Text "No Results Found" in den Select2 Dropdown-Boxen war nicht lokalisiert 
 

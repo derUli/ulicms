@@ -232,8 +232,8 @@ class Template
 
     public static function getOgHTMLPrefix()
     {
-        $html = '<html prefix="og: http://ogp.me/ns#" lang="' . getCurrentLanguage() . '">';
-        $html .= "\r\n";
+        $language = getCurrentLanguage();
+        $html = "<html prefix=\"og: http://ogp.me/ns#\" lang=\"$language\">\r\n";
         return $html;
     }
 
@@ -252,6 +252,16 @@ class Template
         include $file;
         $result = trim(ob_get_clean());
         return $result;
+    }
+
+    public static function getHtml5Doctype()
+    {
+        return "<!doctype html>\r\n";
+    }
+
+    public static function html5Doctype()
+    {
+        echo self::getHtml5Doctype();
     }
     // TODO Restliche Funktionen aus templating.php implementieren
 }

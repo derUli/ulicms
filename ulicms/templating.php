@@ -12,26 +12,22 @@ function _esc($value)
 
 function html5_doctype()
 {
-    echo get_html5_doctype();
+    echo Template::getHtml5Doctype();
 }
 
 function get_html5_doctype()
 {
-    $html = '<!doctype html>';
-    $html .= "\r\n";
-    return $html;
+    return Template::getHtml5Doctype();
 }
 
 function og_html_prefix()
 {
-    echo get_og_html_prefix();
+    echo Template::getOgHTMLPrefix();
 }
 
 function get_og_html_prefix()
 {
-    $html = '<html prefix="og: http://ogp.me/ns#" lang="' . getCurrentLanguage() . '">';
-    $html .= "\r\n";
-    return $html;
+    return Template::getOgHTMLPrefix();
 }
 
 function og_tags()
