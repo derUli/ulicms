@@ -1,5 +1,6 @@
 <?php
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\NotImplementedException;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {
@@ -44,5 +45,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $_SESSION["language"] = "de";
         $this->assertEquals("<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">\r\n", Template::getOgHTMLPrefix());
         unset($_SESSION["language"]);
+    }
+    public function testGetBaseMetas(){
+        throw new NotImplementedException();
     }
 }

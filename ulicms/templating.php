@@ -933,13 +933,6 @@ function menu($name = "top", $parent = null, $recursive = true, $order = 'positi
     echo get_menu($name, $parent, $recursive, $order);
 }
 
-function get_base_metas()
-{
-    ob_start();
-    base_metas();
-    return ob_get_clean();
-}
-
 function output_favicon_code()
 {
     echo get_output_favicon_code();
@@ -962,138 +955,12 @@ function get_output_favicon_code()
 
 function base_metas()
 {
-    $title_format = Settings::get("title_format");
-    if ($title_format) {
-        $title = $title_format;
-        $title = str_ireplace("%homepage_title%", get_homepage_title(), $title);
-        $title = str_ireplace("%title%", get_title(), $title);
-        $title = str_ireplace("%motto%", get_motto(), $title);
-        $title = apply_filter($title, "title_tag");
-        echo "<title>" . $title . "</title>\r\n";
-    }
-    
-    echo '<meta http-equiv="content-type" content="text/html; charset=utf-8"/>';
-    echo "\r\n";
-    
-    echo '<meta charset="utf-8"/>';
-    echo "\r\n";
-    
-    if (! Settings::get("disable_no_format_detection")) {
-        echo '<meta name="format-detection" content="telephone=no"/>';
-        echo "\r\n";
-    }
-    
-    $dir = dirname($_SERVER["SCRIPT_NAME"]);
-    $dir = str_replace("\\", "/", $dir);
-    
-    if (endsWith($dir, "/") == false) {
-        $dir .= "/";
-    }
-    
-    $robots = Settings::get("robots");
-    if ($robots) {
-        $robots = apply_filter($robots, "meta_robots");
-        echo '<meta name="robots" content="' . $robots . '"/>';
-        echo "\r\n";
-    }
-    if (! Settings::get("hide_meta_generator")) {
-        echo Template::executeDefaultOrOwnTemplate("powered-by");
-        echo '<meta name="generator" content="UliCMS ' . cms_version() . '"/>';
-        echo "\r\n";
-    }
-    output_favicon_code();
-    echo "\r\n";
-    
-    if (! Settings::get("hide_shortlink") and (is_200() or is_403())) {
-        $shortlink = get_shortlink();
-        if ($shortlink) {
-            echo '<link rel="shortlink" href="' . $shortlink . '"/>';
-            echo "\r\n";
-        }
-    }
-    
-    if (! Settings::get("hide_canonical") and (is_200() or is_403())) {
-        $canonical = get_canonical();
-        if ($canonical) {
-            echo '<link rel="canonical"  href="' . $canonical . '"/>';
-            echo "\r\n";
-        }
-    }
-    if (! Settings::get("no_autoembed_core_css")) {
-        enqueueStylesheet("core.css");
-        combinedStylesheetHtml();
-        echo "\r\n";
-    }
-    
-    $min_style_file = getTemplateDirPath(get_theme()) . "style.min.css";
-    $min_style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.min.css";
-    $style_file = getTemplateDirPath(get_theme()) . "style.css";
-    $style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.css";
-    $style_file .= "?time=" . File::getLastChanged($style_file_realpath);
-    if (is_file($min_style_file_realpath)) {
-        echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
-    } else if (is_file($style_file_realpath)) {
-        echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
-    }
-    echo "\r\n";
-    $keywords = get_meta_keywords();
-    if (! $keywords) {
-        $keywords = Settings::get("meta_keywords");
-    }
-    if ($keywords != "" && $keywords != false) {
-        if (! Settings::get("hide_meta_keywords")) {
-            $keywords = apply_filter($keywords, "meta_keywords");
-            $keywords = htmlentities($keywords, ENT_QUOTES, "UTF-8");
-            echo '<meta name="keywords" content="' . $keywords . '"/>';
-            echo "\r\n";
-        }
-    }
-    $description = get_meta_description();
-    if (! $description) {
-        $description = Settings::get("meta_description");
-    }
-    if ($description != "" && $description != false) {
-        $description = apply_filter($description, "meta_description");
-        $$description = htmlentities($description, ENT_QUOTES, "UTF-8");
-        if (! Settings::get("hide_meta_description")) {
-            echo '<meta name="description" content="' . $description . '"/>';
-            echo "\r\n";
-        }
-    }
-    
-    if (! Settings::get("disable_custom_layout_options")) {
-        $font = Settings::get("default-font");
-        if ($font == "google") {
-            $google_font = Settings::get("google-font");
-            if ($google_font) {
-                echo '<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=' . urlencode($google_font) . '"/>';
-                echo "\r\n";
-                $font = "'$google_font'";
-            }
-        }
-        echo "
-<style type=\"text/css\">
-body{
-font-family:" . $font . ";
-font-size:" . Settings::get("font-size") . ";
-background-color:" . Settings::get("body-background-color") . ";
-color:" . Settings::get("body-text-color") . ";
+    Template::baseMetas();
 }
-</style>
-";
-        
-        if (Settings::get("video_width_100_percent")) {
-            echo "<style type=\"text/css\">
-  video {
-  width: 100% !important;
-  height: auto !important;
-  }
-           </style>
-        ";
-        }
-    }
-    include_jquery();
-    do_event("head");
+
+function get_base_metas()
+{
+    Template::getBaseMetas();
 }
 
 function head()
