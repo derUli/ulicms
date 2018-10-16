@@ -373,7 +373,7 @@ class Template
         }
         
         if (! Settings::get("disable_custom_layout_options")) {
-            $font = Settings::get("default-font");
+            $font = Settings::get("default_font");
             if ($font == "google") {
                 $google_font = Settings::get("google-font");
                 if ($google_font) {
