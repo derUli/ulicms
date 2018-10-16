@@ -732,19 +732,12 @@ function apply_filter($text, $type)
 
 function get_motto()
 {
-    // Existiert ein Motto für diese Sprache? z.B. motto_en
-    $motto = Settings::get("motto_" . $_SESSION["language"]);
-    
-    // Ansonsten Standard Motto
-    if (! $motto) {
-        $motto = Settings::get("motto");
-    }
-    return htmlspecialchars($motto, ENT_QUOTES, "UTF-8");
+    return Template::getMotto();
 }
 
 function motto()
 {
-    echo get_motto();
+    echo Template::motto();
 }
 
 function get_frontpage()

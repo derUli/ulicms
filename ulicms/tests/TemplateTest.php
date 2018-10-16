@@ -1,5 +1,6 @@
 <?php
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\NotImplementedException;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {
@@ -110,6 +111,20 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $baseMetas = Template::getBaseMetas();
         $this->assertTrue(str_contains($expected, $baseMetas));
     }
-    
+
+    public function testGetMottoWithoutLanguage()
+    {
+        throw new NotImplementedException();
+    }
+
+    public function testGetMottoWithExistingLanguage()
+    {
+        throw new NotImplementedException();
+    }
+
+    public function testGetMottoWithNotExistingLanguage()
+    {
+        throw new NotImplementedException();
+    }
     // TODO: Test für die optionalen Blöcke im <head>
 }
