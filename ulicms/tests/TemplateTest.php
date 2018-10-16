@@ -18,6 +18,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         unset($_SESSION["language"]);
         Settings::delete("video_width_100_percent");
+        Settings::delete("hide_meta_generator");
+        Settings::delete("disable_no_format_detection");
     }
 
     public function testRenderPartialSuccess()
@@ -82,5 +84,32 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $baseMetas = Template::getBaseMetas();
         $this->assertFalse(str_contains($expected, $baseMetas));
     }
+
+    public function testGetBaseMetasHideMetaGenerator()
+    {
+        Settings::set("hide_meta_generator", "1");
+        $expected = '<meta name="generator" content="UliCMS ' . cms_version() . '"/>';
+        
+        $baseMetas = Template::getBaseMetas();
+        $this->assertFalse(str_contains($expected, $baseMetas));
+        
+        Settings::delete("hide_meta_generator");
+        $baseMetas = Template::getBaseMetas();
+        $this->assertTrue(str_contains($expected, $baseMetas));
+    }
+
+    public function testGetBaseMetasDisableNoFormatDetection()
+    {
+        Settings::set("disable_no_format_detection", "1");
+        $expected = '<meta name="format-detection" content="telephone=no"/>';
+        
+        $baseMetas = Template::getBaseMetas();
+        $this->assertFalse(str_contains($expected, $baseMetas));
+        
+        Settings::delete("disable_no_format_detection");
+        $baseMetas = Template::getBaseMetas();
+        $this->assertTrue(str_contains($expected, $baseMetas));
+    }
+    
     // TODO: Test für die optionalen Blöcke im <head>
 }
