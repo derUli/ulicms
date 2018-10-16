@@ -46,7 +46,12 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("<html prefix=\"og: http://ogp.me/ns#\" lang=\"de\">\r\n", Template::getOgHTMLPrefix());
         unset($_SESSION["language"]);
     }
-    public function testGetBaseMetas(){
-        throw new NotImplementedException();
+
+    public function testGetBaseMetas()
+    {
+        $baseMetas = Template::getBaseMetas();
+        $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
+        $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
     }
+    // TODO: Test für die optionalen Blöcke im <head>
 }
