@@ -1,13 +1,23 @@
 <?php
 use UliCMS\Exceptions\FileNotFoundException;
-use UliCMS\Exceptions\NotImplementedException;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {
 
+    public function setUp()
+    {
+        $this->cleanUp();
+    }
+
     public function tearDown()
     {
+        $this->cleanUp();
+    }
+
+    private function cleanUp()
+    {
         unset($_SESSION["language"]);
+        Settings::delete("video_width_100_percent");
     }
 
     public function testRenderPartialSuccess()
@@ -52,6 +62,25 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $baseMetas = Template::getBaseMetas();
         $this->assertTrue(str_contains('<meta http-equiv="content-type" content="text/html; charset=utf-8"/>', $baseMetas));
         $this->assertTrue(str_contains('<meta charset="utf-8"/>', $baseMetas));
+    }
+
+    public function testGetBaseMetasVideoWidth100Percent()
+    {
+        Settings::set("video_width_100_percent", "1");
+        $baseMetas = Template::getBaseMetas();
+        
+        $expected = "<style type=\"text/css\">
+  video {
+  width: 100% !important;
+  height: auto !important;
+  }
+           </style>
+        ";
+        $this->assertTrue(str_contains($expected, $baseMetas));
+        
+        Settings::delete("video_width_100_percent");
+        $baseMetas = Template::getBaseMetas();
+        $this->assertFalse(str_contains($expected, $baseMetas));
     }
     // TODO: Test für die optionalen Blöcke im <head>
 }
