@@ -5,14 +5,31 @@ use UliCMS\Exceptions\NotImplementedException;
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {
 
+    private $savedSettings = array();
+
     public function setUp()
     {
         $this->cleanUp();
+        
+        $settings = array(
+            "motto",
+            "motto_de",
+            "motto_en",
+            "motto_fr"
+        );
+        foreach ($settings as $setting) {
+            $this->savedSettings[$setting] = Settings::get($setting);
+        }
+        $this->setMotto();
     }
 
     public function tearDown()
     {
         $this->cleanUp();
+        
+        foreach ($this->savedSettings as $key => $value) {
+            Settings::set($key, $this->savedSettings[$key]);
+        }
     }
 
     private function cleanUp()
@@ -112,19 +129,34 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(str_contains($expected, $baseMetas));
     }
 
+    private function setMotto()
+    {
+        Settings::set("motto", "Motto General");
+        Settings::set("motto_de", "Motto Deutsch");
+        Settings::set("motto_en", "Motto English");
+        Settings::delete("motto_fr");
+    }
+
     public function testGetMottoWithoutLanguage()
     {
-        throw new NotImplementedException();
+        $_SESSION["language"] = "de";
+        $this->assertEquals("Motto Deutsch", Template::getMotto());
+        
+        $_SESSION["language"] = "en";
+        $this->assertEquals("Motto English", Template::getMotto());
+        $this->cleanUp();
     }
 
     public function testGetMottoWithExistingLanguage()
     {
-        throw new NotImplementedException();
+        $_SESSION["language"] = "fr";
+        $this->assertEquals("Motto General", Template::getMotto());
+        $this->cleanUp();
     }
 
     public function testGetMottoWithNotExistingLanguage()
     {
-        throw new NotImplementedException();
+        $this->assertEquals("Motto General", Template::getMotto());
     }
     // TODO: Test für die optionalen Blöcke im <head>
 }
