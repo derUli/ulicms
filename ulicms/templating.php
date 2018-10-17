@@ -1015,37 +1015,12 @@ function get_page($systemname = '')
 
 function content()
 {
-    $status = check_status();
-    if ($status == '404 Not Found') {
-        if (is_file(getTemplateDirPath($theme) . "404.php")) {
-            $theme = Settings::get("theme");
-            include getTemplateDirPath($theme) . "404.php";
-        } else {
-            translate('PAGE_NOT_FOUND_CONTENT');
-        }
-        return false;
-    } else if ($status == '403 Forbidden') {
-        
-        $theme = Settings::get("theme");
-        if (is_file(getTemplateDirPath($theme) . '403.php')) {
-            include getTemplateDirPath($theme) . '403.php';
-        } else {
-            translate('FORBIDDEN_COTENT');
-        }
-        return false;
-    }
-    
-    if (! is_logged_in()) {
-        db_query("UPDATE " . tbname("content") . " SET views = views + 1 WHERE systemname='" . Database::escapeValue($_GET["seite"]) . "' AND language='" . db_escape($_SESSION["language"]) . "'");
-    }
-    return import($_GET["seite"]);
+    Template::content();
 }
 
 function get_content()
 {
-    ob_start();
-    content();
-    return ob_get_clean();
+    return Template::getContent();
 }
 
 function checkforAccessForDevice($access)

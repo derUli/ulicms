@@ -1,6 +1,5 @@
 <?php
 use UliCMS\Exceptions\FileNotFoundException;
-use UliCMS\Exceptions\NotImplementedException;
 
 class TemplateTest extends \PHPUnit\Framework\TestCase
 {
@@ -9,6 +8,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function setUp()
     {
+        Flags::setNoCache(true);
         $this->cleanUp();
         
         $settings = array(
@@ -25,6 +25,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
 
     public function tearDown()
     {
+        Flags::setNoCache(false);
         $this->cleanUp();
         
         foreach ($this->savedSettings as $key => $value) {
@@ -35,6 +36,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     private function cleanUp()
     {
         unset($_SESSION["language"]);
+        unset($_GET["seite"]);
         Settings::delete("video_width_100_percent");
         Settings::delete("hide_meta_generator");
         Settings::delete("disable_no_format_detection");
@@ -162,5 +164,17 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testGetjQueryScript()
     {
         $this->assertEquals('<script src="admin/scripts/jquery.min.js" type="text/javascript"></script>', Template::getjQueryScript());
+    }
+
+    public function testGetContent()
+    {
+        $_GET["seite"] = "lorem_ipsum";
+        $_SESSION["language"] = "de";
+        $_GET["REQUEST_URI"] = "/lorem_ipsum.html";
+        
+        $content = Template::getContent();
+        
+        $this->assertTrue(str_contains("Lorem ipsum dolor sit amet, consetetur sadipscing elitr", $content));
+        $this->cleanUp();
     }
 }
