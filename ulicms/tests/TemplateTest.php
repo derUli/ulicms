@@ -158,5 +158,4 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals("Motto General", Template::getMotto());
     }
-    // TODO: Test für die optionalen Blöcke im <head>
 }
