@@ -158,4 +158,9 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     {
         $this->assertEquals("Motto General", Template::getMotto());
     }
+
+    public function testGetjQueryScript()
+    {
+        $this->assertEquals('<script src="admin/scripts/jquery.min.js" type="text/javascript"></script>', Template::getjQueryScript());
+    }
 }

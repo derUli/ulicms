@@ -334,23 +334,7 @@ function get_custom_data($page = null)
 
 function include_jquery()
 {
-    if (Settings::get("disable_auto_include_jquery")) {
-        return;
-    }
-    $disabled_on_pages = Settings::get("jquery_disabled_on");
-    if ($disabled_on_pages) {
-        $disabled_on_pages = trim($disabled_on_pages);
-        $disabled_on_pages = explode(";", $disabled_on_pages);
-    } else {
-        $disabled_on_pages = array();
-    }
-    
-    if (! faster_in_array(get_requested_pagename(), $disabled_on_pages)) {
-        ?>
-<script type="text/javascript" src="<?php echo get_jquery_url();?>"></script>
-<?php
-        do_event("after_jquery_include");
-    }
+    Template::jQueryScript();
 }
 
 function get_access($page = null)

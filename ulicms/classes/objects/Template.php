@@ -1,5 +1,6 @@
 <?php
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\HTML\Script;
 
 class Template
 {
@@ -406,5 +407,20 @@ color:" . Settings::get("body-text-color") . ";
         include_jquery();
         do_event("head");
     }
+
+    public static function jQueryScript()
+    {
+        $jQueryurl = get_jquery_url();
+        echo Script::FromFile($jQueryurl);
+        do_event("after_jquery_include");
+    }
+
+    public static function getjQueryScript()
+    {
+        ob_start();
+        self::jQueryScript();
+        return ob_get_clean();
+    }
+    
     // TODO Restliche Funktionen aus templating.php implementieren
 }
