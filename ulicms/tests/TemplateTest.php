@@ -177,4 +177,15 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(str_contains("Lorem ipsum dolor sit amet, consetetur sadipscing elitr", $content));
         $this->cleanUp();
     }
+
+    public function testGetLanguageSelection()
+    {
+        $html = Template::getLanguageSelection();
+        $this->assertTrue("<ul class='language_selection'>", $html);
+        
+        // By default there should be at least 2 languages
+        // german and english
+        $this->assertGreaterThanOrEqual(2, substr_count($html, "<li>"));
+        // TODO: Check if there are links in the returned html
+    }
 }
