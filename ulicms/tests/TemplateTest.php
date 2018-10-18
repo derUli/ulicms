@@ -181,7 +181,7 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
     public function testGetLanguageSelection()
     {
         $html = Template::getLanguageSelection();
-        $this->assertTrue("<ul class='language_selection'>", $html);
+        $this->assertTrue(str_contains("<ul class='language_selection'>", $html));
         
         // By default there should be at least 2 languages
         // german and english
