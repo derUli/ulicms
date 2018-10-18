@@ -63,11 +63,6 @@ class Template
         echo $output;
     }
 
-    public static function poweredByUliCMS()
-    {
-        translation("POWERED_BY_ULICMS");
-    }
-
     public static function getHomepageOwner()
     {
         $homepage_title = Settings::getLang("homepage_title", $_SESSION["language"]);
@@ -478,6 +473,16 @@ color:" . Settings::get("body-text-color") . ";
         self::languageSelection();
         return ob_get_clean();
     }
-    
+
+    public static function getPoweredByUliCMS()
+    {
+        return get_translation("powered_by_ulicms");
+    }
+
+    // Gibt "Diese Seite läuft mit UliCMS" aus
+    public static function poweredByUliCMS()
+    {
+        echo self::getPoweredByUliCMS();
+    }
     // TODO Restliche Funktionen aus templating.php implementieren
 }

@@ -21,6 +21,8 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
             $this->savedSettings[$setting] = Settings::get($setting);
         }
         $this->setMotto();
+        
+        include_once getLanguageFilePath("en");
     }
 
     public function tearDown()
@@ -187,5 +189,10 @@ class TemplateTest extends \PHPUnit\Framework\TestCase
         // german and english
         $this->assertGreaterThanOrEqual(2, substr_count($html, "<li>"));
         // TODO: Check if there are links in the returned html
+    }
+
+    public function testGetPoweredBy()
+    {
+        $this->assertTrue(str_contains("This page is powered by", Template::getPoweredByUliCMS()));
     }
 }
