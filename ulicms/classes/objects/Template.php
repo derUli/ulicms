@@ -65,7 +65,7 @@ class Template
 
     public static function getHomepageOwner()
     {
-        $homepage_title = Settings::getLang("homepage_title", $_SESSION["language"]);
+        $homepage_title = Settings::getLang("homepage_owner", $_SESSION["language"]);
         return htmlspecialchars($homepage_title, ENT_QUOTES, "UTF-8");
     }
 

@@ -519,7 +519,7 @@ function year($format = "Y")
 
 function homepage_owner()
 {
-    echo Settings::get("homepage_owner");
+    Template::homepageOwner();
 }
 
 function get_homepage_title()
