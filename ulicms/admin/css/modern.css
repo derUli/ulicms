@@ -117,12 +117,50 @@ div#root-container {
 	position: relative;
 }
 
-a:not (.btn ), a:visited:not (.btn ), a:focus:not (.btn ) {
-	color: rgb(30, 30, 30);
-	text-decoration: none;
-	font-weight: 500;
-}
+a
+:not
+ 
+(
+.btn
+ 
+),
+a
+:visited
+:not
+ 
+(
+.btn
+ 
+),
+a
+:focus
+:not
+ 
+(
+.btn
+ 
+)
+{
+color
+:
+ 
+rgb
+(30
+,
+30,
+30);
+text-decoration
+:
+ 
+none
+;
 
+	
+font-weight
+:
+ 
+500;
+}
 a:hover, a:active {
 	color: rgb(30, 30, 30);
 	text-decoration: underline;
@@ -145,7 +183,7 @@ input[type="button"], input[type="submit"], button {
 
 input[type="text"], input[type="password"], input[type="email"], input[type="number"],
 	input[type="phone"], input[type="color"], input.color, select, textarea,
-	input[type="url"] {
+	input[type="url"], input:not ([type] ){
 	width: 100%;
 }
 

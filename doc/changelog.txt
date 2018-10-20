@@ -15,7 +15,8 @@ Neue API-Funktionen:
 * Template::poweredByUliCMS()
 
 Bugfix:
-* Der Text "No Results Found" in den Select2 Dropdown-Boxen war nicht lokalisiert 
+* Der Text "No Results Found" in den Select2 Dropdown-Boxen war nicht lokalisiert
+* Die Seite "Verfügbare Pakete" wurde repariert
 
 ===== Neues in UliCMS 2018.4.1 =====
 
@@ -32,6 +33,8 @@ Bugfixes:
 * Warnung beim Verlassen der Bearbeiten-Ansicht ohne Speichern war nicht lokalisiert
 
 Bekannte Probleme:
+* Die Funktion "Paket installieren" > "Aus der Paketquelle" ist in diesem Release defekt. Die verfügbaren Pakete nicht angezeigt.
+  Der Workaround für den Bug ist, Pakete direkt von ulicms.de herunterzuladen und diese über die Funktion "Datei hochladen" zu installieren.
 * Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertet die sekundären Gruppen nicht aus. Die Vearbeitung der sekundären Gruppen wird in einem zukünftigen Release implementiert werden.
 
 ===== Neues in UliCMS 2018.4 =====

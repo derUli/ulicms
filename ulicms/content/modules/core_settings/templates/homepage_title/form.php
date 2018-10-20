@@ -1,28 +1,28 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "settings_simple" )) {
-	$languages = getAllLanguages ();
-	$homepage_titles = array ();
-	for($i = 0; $i < count ( $languages ); $i ++) {
-		$lang = $languages [$i];
-		$homepage_titles [$lang] = Settings::get ( "homepage_title_" . $lang );
-		
-		if (! $homepage_titles [$lang]) {
-			$homepage_titles [$lang] = Settings::get ( "homepage_title" );
-		}
-	}
-	
-	?>
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("settings_simple")) {
+    $languages = getAllLanguages();
+    $homepage_titles = array();
+    for ($i = 0; $i < count($languages); $i ++) {
+        $lang = $languages[$i];
+        $homepage_titles[$lang] = Settings::get("homepage_title_" . $lang);
+        
+        if (! $homepage_titles[$lang]) {
+            $homepage_titles[$lang] = Settings::get("homepage_title");
+        }
+    }
+    
+    ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("settings_simple");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
 <h1><?php translate("homepage_title");?></h1>
 <?php
-	echo ModuleHelper::buildMethodCallForm ( "HomepageTitleController", "save", array (), "post", array (
-			"id" => "homepage_title_settings" 
-	) );
-	?>
+    echo ModuleHelper::buildMethodCallForm("HomepageTitleController", "save", array(), "post", array(
+        "id" => "homepage_title_settings"
+    ));
+    ?>
 <table border="0">
 	<tr>
 		<td style="min-width: 100px;"><strong><?php translate("language");?>
@@ -31,24 +31,23 @@ if ($permissionChecker->hasPermission ( "settings_simple" )) {
 			</strong></td>
 	</tr>
 		<?php
-	for($n = 0; $n < count ( $languages ); $n ++) {
-		$lang = $languages [$n];
-		?>
+    for ($n = 0; $n < count($languages); $n ++) {
+        $lang = $languages[$n];
+        ?>
 		<tr>
 		<td><?php
-		echo $lang;
-		?></td>
+        echo $lang;
+        ?></td>
 		<td><input name="homepage_title_<?php
-		echo $lang;
-		?>"
-			style="width: 400px"
+        echo $lang;
+        ?>"
 			value="<?php
-		echo StringHelper::real_htmlspecialchars ( $homepage_titles [$lang] );
-		?>"></td>
+        echo StringHelper::real_htmlspecialchars($homepage_titles[$lang]);
+        ?>"></td>
 	</tr>
 			<?php
-	}
-	?>
+    }
+    ?>
 	<tr>
 		<td></td>
 		<td style="text-align: center">
@@ -63,5 +62,5 @@ if ($permissionChecker->hasPermission ( "settings_simple" )) {
     ?>
 <?php
 } else {
-	noPerms ();
+    noPerms();
 }

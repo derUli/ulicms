@@ -42,11 +42,11 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         
         echo $lang;
         ?></td>
-		<td><input name="motto_<?php
+		<td><input
+			name="motto_<?php
         
         echo $lang;
         ?>"
-			style="width: 400px"
 			value="<?php
         
         echo StringHelper::real_htmlspecialchars($mottos[$lang]);

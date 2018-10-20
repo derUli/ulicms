@@ -1,6 +1,6 @@
 {
 	"source": "core",
-	"version": "2018.3.3",
+	"version": "2018.4.2",
 	"embed": false,
 	"actions": {
 		"settings_simple": "templates/settings_simple/form.php",
@@ -25,10 +25,12 @@
 		"languages": "templates/languages/form.php",
 		"spam_filter": "templates/spam_filter/form.php"
 	},
-	"action_permissions" : {
-		"privacy_settings" : "privacy_settings"
+	"action_permissions": {
+		"privacy_settings": "privacy_settings"
 	},
-	"custom_acl" : ["privacy_settings"],
+	"custom_acl": [
+		"privacy_settings"
+	],
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
 		"HomepageTitleController": "controllers/HomepageTitleController.php",
@@ -48,13 +50,13 @@
 		"PkgSettingsController": "controllers/PkgSettingsController.php",
 		"LanguageController": "controllers/LanguageController.php",
 		"SpamFilterController": "controllers/SpamFilterController.php",
-		"PrivacyController" : "controllers/PrivacyController.php"
+		"PrivacyController": "controllers/PrivacyController.php"
 	},
 	"action_controllers": {
 		"settings_simple": "SimpleSettingsController",
 		"default_access_restrictions": "DefaultAccessRestrictionsController",
 		"design": "DesignSettingsController",
-		"privacy" : "PrivacyController"
+		"privacy": "PrivacyController"
 	},
 	"controller_function_permissions": {
 		"SimpleSettingsController::savePost": "settings_simple",
@@ -77,6 +79,6 @@
 		"LanguageController::deletePost": "languages",
 		"LanguageController::setDefaultLanguage": "languages",
 		"SpamFilterController::savePost": "spam_filter",
-		"PrivacyController::savePost" : "privacy_settings"
+		"PrivacyController::savePost": "privacy_settings"
 	}
 }
