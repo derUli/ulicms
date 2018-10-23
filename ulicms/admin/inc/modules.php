@@ -3,6 +3,7 @@ $permissionChecker = new ACL ();
 if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	noPerms ();
 } else {
+	$greenHex = "#04d004";
 	// FIXME: Hartgecodete Texte in Sprachdateien auslagern.
 	// Das hier sollte am besten gleichzeitig mit dem Redesign der Paketverwaltung geschehen.
 	// TODO: truncate_installed_patches sollte in einen Controller
@@ -25,7 +26,7 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 			$displayName = $type == "theme" ? "theme-{$remove}" : $remove;
 			
 			if ($uninstalled) {
-				echo "<p style=\"color:green;\">" . get_translation ( "package_name_was_removed", array (
+				echo "<p style=\"color:$greenHex;\">" . get_translation ( "package_name_was_removed", array (
 						"%name%" => $displayName 
 				) ) . "</p>";
 			} else {
@@ -100,7 +101,7 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 						if (version_compare ( $status, $version, '>' )) {
 							$color = "red";
 						} else {
-							$color = "green";
+							$color = $greenHex;
 						}
 					}
 					
@@ -199,7 +200,7 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 					if (version_compare ( $status, $version, '>' )) {
 						$color = "red";
 					} else {
-						$color = "green";
+						$color = $greenHex;
 					}
 				}
 				
