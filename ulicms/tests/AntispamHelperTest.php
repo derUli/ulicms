@@ -107,9 +107,21 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testCheckMailDomainMx()
     {
+        // some mail addresses by common freemail providers
+        $this->assertTrue(AntiSpamHelper::checkMailDomain("mymail@web.de"));
+        $this->assertTrue(AntiSpamHelper::checkMailDomain("mymail@gmx.net"));
+        $this->assertTrue(AntiSpamHelper::checkMailDomain("mymail@1und1.de"));
+        $this->assertTrue(AntiSpamHelper::checkMailDomain("mymail@yahoo.com"));
+        
+        // some special mail adddresses
         $this->assertTrue(AntiSpamHelper::checkMailDomain("support@ulicms.de"));
         $this->assertTrue(AntiSpamHelper::checkMailDomain("spiegel_online@spiegel.de"));
+        
+        // non existing domain
         $this->assertFalse(AntiSpamHelper::checkMailDomain("john.doe@thisisnotadomain.de"));
+        
+        // Valid domain without an MX entry
+        $this->assertFalse(AntispamHelper::checkMailDomain("shittyspammer@example.org"));
     }
 }
 	
