@@ -136,4 +136,14 @@ class AntiSpamHelper
         }
         return false;
     }
+
+    public static function checkMailDomain($email)
+    {
+        $domain = strstr($email, '@');
+        $domain = remove_prefix($domain, "@");
+        $domain = ! endsWith($domain, ".") ? $domain . "." : $domain;
+        $result = array();
+        getmxrr($domain, $result);
+        return count($result) > 0;
+    }
 }

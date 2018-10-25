@@ -105,6 +105,10 @@ class Forms
             
             $mail_from_field = $form["mail_from_field"];
             
+            if (! StringHelper::isNullOrEmpty($mail_from_field) and Settings::get("check_mx_of_mail_address") and ! AntiSpamHelper::checkMailDomain($email)) {
+                ExceptionResult(get_translation("mail_address_has_invalid_mx_entry"), HttpStatusCode::BAD_REQUEST);
+            }
+            
             $mail_from = StringHelper::isNotNullOrWhitespace($mail_from_field) ? array(
                 $_POST[$mail_from_field]
             ) : array(

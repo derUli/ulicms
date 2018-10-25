@@ -39,6 +39,12 @@ class SpamFilterController extends Controller
             Settings::delete("reject_requests_from_bots");
         }
         
+        if (isset($_POST["check_mx_of_mail_address"])) {
+            Settings::set("check_mx_of_mail_address", "1");
+        } else {
+            Settings::delete("check_mx_of_mail_address");
+        }
+        
         Settings::set("min_time_to_fill_form", Request::getVar("min_time_to_fill_form", 0, "int"));
         
         do_event("after_save_spamfilter_settings");
