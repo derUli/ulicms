@@ -113,7 +113,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(AntiSpamHelper::checkMailDomain("mymail@1und1.de"));
         $this->assertTrue(AntiSpamHelper::checkMailDomain("mymail@yahoo.com"));
         
-        // some special mail adddresses
+        // some valid mail addresses
         $this->assertTrue(AntiSpamHelper::checkMailDomain("support@ulicms.de"));
         $this->assertTrue(AntiSpamHelper::checkMailDomain("spiegel_online@spiegel.de"));
         
