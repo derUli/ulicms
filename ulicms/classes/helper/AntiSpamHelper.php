@@ -137,12 +137,21 @@ class AntiSpamHelper
         return false;
     }
 
+    // This function checks if the domain of an email address has a mx nds entry
+    // if it is invalid there is a high chance, that this is not valid email address
+    // please note that this function returns also true if
+    // you send an email to a nonexisting user on a valid domain.
+    // Use this function with care
     public static function checkMailDomain($email)
     {
         $domain = strstr($email, '@');
         $domain = remove_prefix($domain, "@");
+        // In some cases getmxrr() would return a result for an invalid domain if there is no additional dot at the end
         $domain = ! endsWith($domain, ".") ? $domain . "." : $domain;
         $result = array();
+        
+        // sometimes getmxrr returns true even if the result is empty
+        // so check the count of $result
         getmxrr($domain, $result);
         return count($result) > 0;
     }
