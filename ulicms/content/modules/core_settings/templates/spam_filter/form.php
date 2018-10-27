@@ -85,7 +85,16 @@ function spamFilterEnabledcheckboxChanged(checked){
     echo Settings::get("reject_requests_from_bots") ? "checked" : "";
     ?>><?php translate("reject_requests_from_bots");?></label>
 		</div>
-
+		<div class="checkbox">
+			<label for="check_mx_of_mail_address"> <input type="checkbox"
+				name="check_mx_of_mail_address" id="check_mx_of_mail_address"
+				<?php
+    if (Settings::get("check_mx_of_mail_address")) {
+        echo " checked=\"checked\"";
+    }
+    ?>> <?php translate("check_mx_of_mail_address");?>
+		</label>
+		</div>
 		<p>
 			<label for="min_time_to_fill_form"><?php translate("min_time_to_fill_form");?></label><br />
 			<input type="number" name="min_time_to_fill_form"
@@ -97,7 +106,6 @@ function spamFilterEnabledcheckboxChanged(checked){
     ?>">
 		</p>
 	</div>
-
 	<p>
 		<button type="submit" name="submit_spamfilter_settings"
 			class="btn btn-primary voffset3"><?php

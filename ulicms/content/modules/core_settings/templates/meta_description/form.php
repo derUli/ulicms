@@ -38,11 +38,11 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         
         echo $lang;
         ?></td>
-		<td><input name="meta_description_<?php
+		<td><input
+			name="meta_description_<?php
         
         echo $lang;
         ?>"
-			style="width: 400px"
 			value="<?php
         
         echo StringHelper::real_htmlspecialchars($meta_descriptions[$lang]);

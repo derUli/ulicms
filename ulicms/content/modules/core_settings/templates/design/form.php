@@ -13,7 +13,7 @@ if (! $permissionChecker->hasPermission("design")) {
     $theme = Settings::get("theme");
     $additional_menus = Settings::get("additional_menus");
     $mobile_theme = Settings::get("mobile_theme");
-    $default_font = Settings::get("default-font");
+    $default_font = Settings::get("default_font");
     $google_font = Settings::get("google-font");
     $title_format = htmlspecialchars(Settings::get("title_format"), ENT_QUOTES, "UTF-8");
     $font_size = Settings::get("font-size");
@@ -169,7 +169,7 @@ div#google-fonts {
 	</tr>
 	<tr>
 		<td><strong><?php translate("font_family");?> </strong></td>
-		<td><select name="default-font" id="default-font" size=1>
+		<td><select name="default_font" id="default_font" size=1>
 			<?php
     $font_amount = count($fonts);
     $i = 1;

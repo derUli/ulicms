@@ -45,16 +45,16 @@ class DesignSettingsController extends Controller {
 			} // if faster_in_array mobile_theme zu
 		} // if mobile_theme zu
 
-		if ($_REQUEST ["default-font"] != Settings::get ( "default-font" )) {
+		if ($_REQUEST ["default_font"] != Settings::get ( "default_font" )) {
 			if (! empty ( $_REQUEST ["custom-font"] )) {
 				$font = $_REQUEST ["custom-font"];
 			} else {
-				$font = $_REQUEST ["default-font"];
+				$font = $_REQUEST ["default_font"];
 			}
 
 			$font = db_escape ( $font );
 
-			setconfig ( "default-font", $font );
+			setconfig ( "default_font", $font );
 		}
 
 		if (! empty ( $_REQUEST ["google-font"] )) {

@@ -1,0 +1,1 @@
+update {prefix}settings set name = 'default_font' where name = 'default-font'

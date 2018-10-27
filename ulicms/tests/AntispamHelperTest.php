@@ -104,5 +104,24 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(AntiSpamHelper::checkForBot("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"));
         $this->assertFalse(AntiSpamHelper::checkForBot("Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:62.0) Gecko/20100101 Firefox/62.0"));
     }
+
+    public function testCheckMailDomainMx()
+    {
+        // some mail addresses by common freemail providers
+        $this->assertTrue(AntiSpamHelper::checkMailDomain("mymail@web.de"));
+        $this->assertTrue(AntiSpamHelper::checkMailDomain("mymail@gmx.net"));
+        $this->assertTrue(AntiSpamHelper::checkMailDomain("mymail@1und1.de"));
+        $this->assertTrue(AntiSpamHelper::checkMailDomain("mymail@yahoo.com"));
+        
+        // some valid mail addresses
+        $this->assertTrue(AntiSpamHelper::checkMailDomain("support@ulicms.de"));
+        $this->assertTrue(AntiSpamHelper::checkMailDomain("spiegel_online@spiegel.de"));
+        
+        // non existing domain
+        $this->assertFalse(AntiSpamHelper::checkMailDomain("john.doe@thisisnotadomain.de"));
+        
+        // Valid domain without an MX entry
+        $this->assertFalse(AntispamHelper::checkMailDomain("shittyspammer@example.org"));
+    }
 }
 	
