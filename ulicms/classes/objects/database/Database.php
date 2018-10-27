@@ -426,4 +426,6 @@ class Database
 }
 
 // Alias für Database
-class_alias("Database", "DB");
+class DB extends Database
+{
+}

@@ -1,7 +1,6 @@
 <?php
 namespace UliCMS\Security;
 
-use UliCMS\Exceptions\NotImplementedException;
 use ContentFactory;
 use User;
 use Group;
@@ -16,21 +15,23 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
         $this->user_id = $user_id;
     }
 
-    public function canRead($dataset)
+    // currently canRead() returns always true
+    // FIXME: Check content visibility
+    public function canRead($contentId)
     {
-        throw new NotImplementedException();
+        return true;
     }
 
-    public function canWrite($dataset)
+    public function canWrite($contentId)
     {
-        $content = ContentFactory::getByID($id);
+        $content = ContentFactory::getByID($contentId);
         $permissions = $content->getPermissions();
         
         $contentOwner = $content->autor;
         $contentGroup = $content->group_id;
         
         $user = new User($this->user_id);
-        $permissionChecker = new PermissionChecker($user_id);
+        $permissionChecker = new PermissionChecker($this->user_id);
         $userGroups = array();
         $primaryGroup = $user->getGroupId();
         
@@ -83,7 +84,7 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
         return $canEditThis;
     }
 
-    public function canDelete($dataset)
+    public function canDelete($contentId)
     {
         return $this->canWrite($dataset);
     }

@@ -1,0 +1,148 @@
+<?php
+use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Security\ContentPermissionChecker;
+
+class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
+{
+
+    private $testUser1;
+
+    private $testUser2;
+
+    private $testUser3;
+
+    private $testGroup1;
+
+    private $testGroup2;
+
+    public function setUp()
+    {
+        $this->testGroup1 = new Group();
+        $this->testGroup1->setName("testgroup1");
+        $this->testGroup1->addPermission("pages", true);
+        $this->testGroup1->addPermission("pages_activate_others", true);
+        $this->testGroup1->addPermission("pages_activate_own", true);
+        $this->testGroup1->addPermission("pages_change_owner", true);
+        $this->testGroup1->addPermission("pages_create", true);
+        $this->testGroup1->addPermission("pages_edit_others", true);
+        $this->testGroup1->addPermission("pages_edit_own", true);
+        $this->testGroup1->addPermission("pages_edit_permissions", true);
+        $this->testGroup1->addPermission("pages_show_positions", true);
+        $this->testGroup1->save();
+        
+        $this->testGroup2 = new Group();
+        $this->testGroup2->setName("testgroup2");
+        $this->testGroup2->addPermission("pages", true);
+        $this->testGroup2->addPermission("pages_activate_others", true);
+        $this->testGroup2->addPermission("pages_activate_own", true);
+        $this->testGroup2->addPermission("pages_change_owner", true);
+        $this->testGroup2->addPermission("pages_create", true);
+        $this->testGroup2->addPermission("pages_edit_others", true);
+        $this->testGroup2->addPermission("pages_edit_own", true);
+        $this->testGroup2->addPermission("pages_edit_permissions", true);
+        $this->testGroup2->addPermission("pages_show_positions", true);
+        $this->testGroup2->save();
+        
+        $this->testUser1 = new User();
+        $this->testUser1->setUsername("testuser1");
+        $this->testUser1->setLastname("Doe");
+        $this->testUser1->setFirstname("John");
+        $this->testUser1->setPassword("foobar");
+        $this->testUser1->setGroup($this->testGroup1);
+        $this->testUser1->save();
+        
+        $this->testUser2 = new User();
+        $this->testUser2->setUsername("testuser2");
+        $this->testUser2->setLastname("Doe");
+        $this->testUser2->setFirstname("Jane");
+        $this->testUser2->setPassword("foobar");
+        $this->testUser2->setGroup($this->testGroup1);
+        $this->testUser2->save();
+        
+        $this->testUser3 = new User();
+        $this->testUser3->setUsername("testuser3");
+        $this->testUser3->setLastname("Doe");
+        $this->testUser3->setFirstname("Simon");
+        $this->testUser3->setPassword("foobar");
+        $this->testUser3->setGroup($this->testGroup2);
+        $this->testUser3->save();
+    }
+
+    public function tearDown()
+    {
+        Database::query("delete from `{prefix}users` where username like 'testuser%'", true);
+        Database::query("delete from `{prefix}groups` where username like 'testgroup%'", true);
+        Database::query("delete from `{prefix}content` where systemname like 'testpage%'", true);
+    }
+
+    // TODO: we need test cases for any combination of edit restrictions and user and group permissions
+    // maybe write a permission matrix table for reference?
+    
+    // Can read currently returns always true
+    public function testCanRead()
+    {
+        $pages = ContentFactory::getAll();
+        $checker = new ContentPermissionChecker($this->testUser1->getId());
+        foreach ($pages as $page) {
+            $this->assertTrue($checker->canRead($page->getID()));
+        }
+    }
+
+    // No edit restrictions
+    public function testCanWriteWithNoEditRestrictionsReturnsTrue()
+    {
+        $checker = new ContentPermissionChecker($this->testUser1->getId());
+        
+        $page = new Page();
+        $page->systemname = "testpage1";
+        $page->language = "de";
+        $page->group_id = $this->testGroup1->getId();
+        $page->autor = $this->testUser2->getId();
+        
+        $page->save();
+        
+        $this->assertTrue($checker->canWrite($page->getID()));
+        
+        $page->delete();
+    }
+
+    public function testCanWriteWithEditRestrictionsReturnsTrue()
+    {
+        $checker = new ContentPermissionChecker($this->testUser1->getId());
+        
+        $page = new Page();
+        $page->systemname = "testpage2";
+        $page->language = "de";
+        $page->group_id = $this->testGroup2->getId();
+        $page->autor = $this->testUser1->getId();
+        $page->getPermissions()->setEditRestriction("group", true);
+        $page->getPermissions()->setEditRestriction("owner", true);
+        $page->save();
+        
+        $this->assertTrue($checker->canWrite($page->getID()));
+        
+        $page->delete();
+    }
+
+    // content has edit restrictions, we can edit the content
+    public function testCanWriteWithEditRestrictionsReturnsFalse()
+    {
+        $checker = new ContentPermissionChecker($this->testUser1->getId());
+        
+        $page = new Page();
+        $page->systemname = "testpage3";
+        $page->language = "de";
+        $page->group_id = $this->testGroup2->getId();
+        $page->autor = $this->testUser2->getId();
+        $page->getPermissions()->setEditRestriction("group", true);
+        $page->getPermissions()->setEditRestriction("owner", true);
+        $page->save();
+        $this->assertFalse($checker->canWrite($page->getID()));
+        
+        $page->delete();
+    }
+    
+    // canDelete() is currently an alias for canWrite
+    // so we don't need test cases for delete
+}
+
