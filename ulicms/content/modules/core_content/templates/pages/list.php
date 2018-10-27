@@ -2,6 +2,7 @@
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern
 use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\ContentPermissionChecker;
 
 $show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
 
@@ -528,38 +529,9 @@ if ($permissionChecker->hasPermission("pages")) {
             // echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone") . "\" title=\"" . get_translation("clone") . "\"></a></td>";
             // }
             $autor = $row->autor;
-            $is_owner = $autor == get_user_id();
             
-            $pages_edit_own = $permissionChecker->hasPermission("pages_edit_own");
-            $pages_edit_others = $permissionChecker->hasPermission("pages_edit_others");
-            
-            $owner_group = $row->group_id;
-            $current_group = $_SESSION["group_id"];
-            
-            $can_edit_this = false;
-            
-            if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit or $row->only_others_can_edit) {
-                if ($row->only_group_can_edit and $owner_group == $current_group) {
-                    $can_edit_this = true;
-                } else if ($row->only_admins_can_edit and is_admin()) {
-                    $can_edit_this = true;
-                } else if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
-                    $can_edit_this = true;
-                } else if ($row->only_others_can_edit and $owner_group != $current_group and ! is_admin() and ! $is_owner) {
-                    $can_edit_this = true;
-                }
-            } else {
-                if (! $is_owner and $pages_edit_others) {
-                    $can_edit_this = true;
-                } else if ($is_owner and $pages_edit_own) {
-                    $can_edit_this = true;
-                }
-            }
-            
-            // admins are gods
-            if (is_admin()) {
-                $can_edit_this = true;
-            }
+            $checker = new ContentPermissionChecker(get_user_id());
+            $can_edit_this = $checker->canWrite($row->id);
             
             if (! $can_edit_this) {
                 echo "<td></td><td></td>";

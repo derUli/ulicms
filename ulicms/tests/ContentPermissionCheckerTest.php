@@ -1,5 +1,4 @@
 <?php
-use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Security\ContentPermissionChecker;
 
 class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
@@ -8,8 +7,6 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
     private $testUser1;
 
     private $testUser2;
-
-    private $testUser3;
 
     private $testGroup1;
 
@@ -43,12 +40,17 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->testGroup2->addPermission("pages_show_positions", true);
         $this->testGroup2->save();
         
+        $this->testGroup3 = new Group();
+        $this->testGroup3->setName("testgroup3");
+        $this->testGroup3->save();
+        
         $this->testUser1 = new User();
         $this->testUser1->setUsername("testuser1");
         $this->testUser1->setLastname("Doe");
         $this->testUser1->setFirstname("John");
         $this->testUser1->setPassword("foobar");
-        $this->testUser1->setGroup($this->testGroup1);
+        $this->testUser1->setGroup($this->testGroup3);
+        $this->testUser1->addSecondaryGroup($this->testGroup1);
         $this->testUser1->save();
         
         $this->testUser2 = new User();
@@ -58,14 +60,6 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         $this->testUser2->setPassword("foobar");
         $this->testUser2->setGroup($this->testGroup1);
         $this->testUser2->save();
-        
-        $this->testUser3 = new User();
-        $this->testUser3->setUsername("testuser3");
-        $this->testUser3->setLastname("Doe");
-        $this->testUser3->setFirstname("Simon");
-        $this->testUser3->setPassword("foobar");
-        $this->testUser3->setGroup($this->testGroup2);
-        $this->testUser3->save();
     }
 
     public function tearDown()
