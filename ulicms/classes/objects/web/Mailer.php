@@ -41,7 +41,7 @@ class Mailer
                 break;
                 break;
             default:
-                throw new NotImplementedException("E-Mail Mode \"$message\" not implemented.");
+                throw new NotImplementedException("E-Mail Mode \"$mode\" not implemented.");
                 break;
         }
     }
