@@ -51,8 +51,17 @@ function var_dump_str()
 
 function remove_prefix($text, $prefix)
 {
-    if (0 === strpos($text, $prefix))
+    if (0 === strpos($text, $prefix)) {
         $text = substr($text, strlen($prefix));
+    }
+    return $text;
+}
+
+function remove_suffix($text, $suffix)
+{
+    if (endsWith($text, $suffix)) {
+        $text = substr($text, 0, strlen($text) - strlen($suffix));
+    }
     return $text;
 }
 

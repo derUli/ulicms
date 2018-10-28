@@ -10,6 +10,16 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("my_foo_bar", remove_prefix("foo_my_foo_bar", "foo_"));
     }
 
+    public function testRemoveSuffix()
+    {
+        $this->assertEquals("Hello", remove_suffix("Hello World!", " World!"));
+        $this->assertEquals("Foo", remove_suffix("FooBar", "Bar"));
+        $this->assertEquals("file", remove_suffix("file.txt", ".txt"));
+        $this->assertEquals("FooBar", remove_suffix("FooBar", "Foo"));
+        $this->assertEquals("", remove_suffix("Foo", "Foo"));
+        $this->assertEquals("Foo", remove_suffix("Foo", "Hello"));
+    }
+
     public function testIsCrawler()
     {
         $pkg = new PackageManager();

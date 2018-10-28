@@ -24,6 +24,7 @@ Neue API-Funktionen:
 * Template::getPoweredByUliCMS()
 * Template::poweredByUliCMS()
 * AntispamHelper::checkMailDomain($email)
+* remove_suffix($text, $suffix)
 
 Bugfixes:
 * Warnung beim Verlassen der Bearbeiten-Ansicht ohne Speichern war nicht lokalisiert
