@@ -34,16 +34,14 @@ class Mailer
         $subject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
         
         // TODO: Hieraus einen Switch machen
-        if ($mode == EmailModes::INTERNAL) {
-            return mail($to, $subject, $message, $headers);
-        } else if ($mode == EmailModes::PHPMAILER) {
-            return self::sendWithPHPMailer($to, $subject, $message, $headers);
+        if ($mode == EmailModes::INTERNAL || $mode == EmailModes::PHPMAILER) {
+            return self::sendWithPHPMailer($to, $subject, $message, $headers, $mode);
         } else {
             throw new NotImplementedException("E-Mail Mode \"$message\" not implemented.");
         }
     }
 
-    public static function getPHPMailer()
+    public static function getPHPMailer($mode = EmailModes::Internal)
     {
         $mailer = new PHPMailer();
         $mailer->SMTPDebug = 3;
@@ -54,33 +52,36 @@ class Mailer
                 $logger->debug($str);
             }
         };
-        
-        $mailer->SMTPSecure = Settings::get("smtp_encryption");
-        
-        // disable verification of ssl certificates
-        // this option makes the mail transfer insecure
-        // use this only if it's unavoidable
-        if (Settings::get("smtp_no_verify_certificate")) {
-            $mailer->SMTPOptions = array(
-                'ssl' => array(
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                    'allow_self_signed' => true
-                )
-            );
-        }
-        
-        if (Settings::get("smtp_host")) {
-            $mailer->isSMTP();
-            $mailer->Host = Settings::get("smtp_host");
-            $mailer->SMTPAuth = (Settings::get("smtp_auth") === "auth");
-            if (Settings::get("smtp_user")) {
-                $mailer->Username = Settings::get("smtp_user");
+        // If we use SMTP setup PHPMailer with a SMTP connection
+        // else PHPMailer will use the mail() function of PHP.
+        if ($mode == EmailModes::PHPMAILER) {
+            $mailer->SMTPSecure = Settings::get("smtp_encryption");
+            
+            // disable verification of ssl certificates
+            // this option makes the mail transfer insecure
+            // use this only if it's unavoidable
+            if (Settings::get("smtp_no_verify_certificate")) {
+                $mailer->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
             }
-            if (Settings::get("smtp_password")) {
-                $mailer->Password = Settings::get("smtp_password");
+            
+            if (Settings::get("smtp_host")) {
+                $mailer->isSMTP();
+                $mailer->Host = Settings::get("smtp_host");
+                $mailer->SMTPAuth = (Settings::get("smtp_auth") === "auth");
+                if (Settings::get("smtp_user")) {
+                    $mailer->Username = Settings::get("smtp_user");
+                }
+                if (Settings::get("smtp_password")) {
+                    $mailer->Password = Settings::get("smtp_password");
+                }
+                $mailer->Port = Settings::get("smtp_port", "int");
             }
-            $mailer->Port = Settings::get("smtp_port", "int");
         }
         $mailer->XMailer = Settings::get("show_meta_generator") ? "UliCMS" : "";
         $mailer->CharSet = "UTF-8";
@@ -89,12 +90,12 @@ class Mailer
         return $mailer;
     }
 
-    public static function sendWithPHPMailer($to, $subject, $message, $headers = "")
+    public static function sendWithPHPMailer($to, $subject, $message, $headers = "", $mode = EmailModes::Internal)
     {
         $headers = self::splitHeaders($headers);
         $headersLower = array_change_key_case($headers, CASE_LOWER);
         
-        $mailer = self::getPHPMailer();
+        $mailer = self::getPHPMailer($mode);
         
         if (isset($headersLower["x-mailer"])) {
             $mailer->XMailer = $headersLower["x-mailer"];
