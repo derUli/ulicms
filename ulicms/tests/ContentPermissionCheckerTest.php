@@ -67,7 +67,7 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         Database::query("delete from `{prefix}content` where systemname like 'testpage%'", true);
         
         Database::query("delete from `{prefix}users` where username like 'testuser%'", true);
-        Database::query("delete from `{prefix}groups` where name like 'testgroup%'", true) or die(DB::error());
+        Database::query("delete from `{prefix}groups` where name like 'testgroup%'", true);
     }
 
     // TODO: we need test cases for any combination of edit restrictions and user and group permissions
