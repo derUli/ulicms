@@ -169,7 +169,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
 				<option value="_blank">
 			<?php translate("target_blank");?>
 			</option>
-			</select><br/><br/>
+			</select><br /> <br />
 		</div>
 
 		<strong><?php translate("activated");?>
@@ -587,10 +587,10 @@ function openArticleImageSelectWindow(field) {
 		<div class="typedep" id="custom_data_json">
 			
 		<?php do_event("before_custom_data_json");?>
-			<strong><?php translate("custom_data_json");?>
-				<textarea name="custom_data" style="width: 100%; height: 200px;"
-					cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
-		
+		<strong><?php translate("custom_data_json");?></strong>
+			<textarea name="custom_data" style="width: 100%; height: 200px;"
+				cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
+
 		</div>
 	</div>
 </div>
@@ -697,25 +697,19 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 <?php
     }
     ?>
-		<noscript>
-		<p style="color: red;">
-			Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
-				href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
-		</p>
-	</noscript>
 </div>
 <div class="inPageMessage"></div>
 <input type="hidden" name="add_page" value="add_page">
 <button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 <?php
-	$translation = new JSTranslation(array(), "PageTranslation");
-	$translation->addKey("confirm_exit_without_save");
-	$translation->render();
-
+    $translation = new JSTranslation(array(), "PageTranslation");
+    $translation->addKey("confirm_exit_without_save");
+    $translation->render();
+    
     enqueueScriptFile("scripts/page.js");
     combinedScriptHtml();
     ?>
-</form>
+<?php echo ModuleHelper::endForm(); ?>
 <?php
 } else {
     noPerms();

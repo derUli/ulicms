@@ -22,6 +22,7 @@ if ($permissionChecker->hasPermission("pages")) {
     $users = getAllUsers();
     
     $groups = Group::getAll();
+    $groupsSql = db_query("SELECT id, name from " . tbname("groups"));
     
     $pages_change_owner = $permissionChecker->hasPermission("pages_change_owner");
     
@@ -873,7 +874,7 @@ function openArticleImageSelectWindow(field) {
 			<option value="desktop"
 				<?php if(faster_in_array("desktop", $access)) echo " selected"?>><?php translate("desktop_computers");?></option>
 				<?php
-            while ($row2 = db_fetch_object($groups)) {
+            while ($row2 = db_fetch_object($groupsSql)) {
                 if (faster_in_array(strval($row2->id), $access)) {
                     echo '<option value="' . $row2->id . '" selected>' . real_htmlspecialchars($row2->name) . '</option>';
                 } else {
@@ -1000,20 +1001,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		        tabMode: "shift"});
 </script>
 <?php }?>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<noscript>
+		<noscript>
 		<p style="color: red;">
 			Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
 				href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
@@ -1053,8 +1041,8 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
             
             enqueueScriptFile("scripts/page.js");
             combinedScriptHtml();
+            echo ModuleHelper::endForm();
             ?>
-</form>
 <?php
             break;
         }
