@@ -20,8 +20,19 @@ Neue API-Funktionen:
 * remove_suffix($text, $suffix)
 
 Bugfixes:
-* Warnung beim Verlassen der Bearbeiten-Ansicht ohne Speichern war nicht lokalisiert
+* Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertete die sekundären Gruppen nicht aus.  
 * Der Text "No Results Found" in den Select2 Dropdown-Boxen war nicht lokalisiert
+
+===== Neues in UliCMS 2018.4.1 =====
+
+Neue Features:
+* Ein Benutzer kann nun mehrere Gruppen zugewiesen bekommen
+* Funktion "Anfragen von Bots blockieren" zum Spamfilter hinzugefügt
+* HTML der Formular E-Mails können nun per Template angepasst werden
+* CKEditor auf Version 4.10.1 aktualisiert
+
+API-Änderungen:
+* Exceptions in den Namespace UliCMS\Exceptions verschoben
 
 Bugfixes:
 * Warnung beim Verlassen der Bearbeiten-Ansicht ohne Speichern war nicht lokalisiert
