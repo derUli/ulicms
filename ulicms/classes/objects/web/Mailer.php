@@ -34,14 +34,19 @@ class Mailer
         $subject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
         
         // TODO: Hieraus einen Switch machen
-        if ($mode == EmailModes::INTERNAL || $mode == EmailModes::PHPMAILER) {
-            return self::sendWithPHPMailer($to, $subject, $message, $headers, $mode);
-        } else {
-            throw new NotImplementedException("E-Mail Mode \"$message\" not implemented.");
+        switch ($mode) {
+            case EmailModes::INTERNAL:
+            case EmailModes::PHPMAILER:
+                return self::sendWithPHPMailer($to, $subject, $message, $headers, $mode);
+                break;
+                break;
+            default:
+                throw new NotImplementedException("E-Mail Mode \"$message\" not implemented.");
+                break;
         }
     }
 
-    public static function getPHPMailer($mode = EmailModes::Internal)
+    public static function getPHPMailer($mode = EmailModes::INTERNAL)
     {
         $mailer = new PHPMailer();
         $mailer->SMTPDebug = 3;
@@ -90,7 +95,7 @@ class Mailer
         return $mailer;
     }
 
-    public static function sendWithPHPMailer($to, $subject, $message, $headers = "", $mode = EmailModes::Internal)
+    public static function sendWithPHPMailer($to, $subject, $message, $headers = "", $mode = EmailModes::INTERNAL)
     {
         $headers = self::splitHeaders($headers);
         $headersLower = array_change_key_case($headers, CASE_LOWER);
