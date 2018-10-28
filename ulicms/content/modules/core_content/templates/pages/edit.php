@@ -1,6 +1,9 @@
 <?php
+use UliCMS\Security\ContentPermissionChecker;
+use UliCMS\Security\PermissionChecker;
+
 include_once ULICMS_ROOT . "/classes/objects/content/VCS.php";
-$permissionChecker = new ACL();
+$permissionChecker = new PermissionChecker(get_user_id());
 if ($permissionChecker->hasPermission("pages")) {
     // FIXME: Die SQL Statements in einen Controller bzw. Model auslagern.
     $page = intval($_GET["page"]);
@@ -19,6 +22,7 @@ if ($permissionChecker->hasPermission("pages")) {
     $users = getAllUsers();
     
     $groups = Group::getAll();
+    $groupsSql = db_query("SELECT id, name from " . tbname("groups"));
     
     $pages_change_owner = $permissionChecker->hasPermission("pages_change_owner");
     
@@ -26,9 +30,6 @@ if ($permissionChecker->hasPermission("pages")) {
     
     $pages_activate_own = $permissionChecker->hasPermission("pages_activate_own");
     $pages_activate_others = $permissionChecker->hasPermission("pages_activate_others");
-    
-    $pages_edit_own = $permissionChecker->hasPermission("pages_edit_own");
-    $pages_edit_others = $permissionChecker->hasPermission("pages_edit_others");
     
     while ($row = db_fetch_object($query)) {
         $list_data = new List_Data($row->id);
@@ -48,30 +49,8 @@ if ($permissionChecker->hasPermission("pages")) {
         $owner_group = $row->group_id;
         $current_group = $_SESSION["group_id"];
         
-        $can_edit_this = false;
-        
-        if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit or $row->only_others_can_edit) {
-            if ($row->only_group_can_edit and $owner_group == $current_group) {
-                $can_edit_this = true;
-            } else if ($row->only_admins_can_edit and is_admin()) {
-                $can_edit_this = true;
-            } else if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
-                $can_edit_this = true;
-            } else if ($row->only_others_can_edit and $owner_group != $current_group and ! is_admin() and ! $is_owner) {
-                $can_edit_this = true;
-            }
-        } else {
-            if (! $is_owner and $pages_edit_others) {
-                $can_edit_this = true;
-            } else if ($is_owner and $pages_edit_own) {
-                $can_edit_this = true;
-            }
-        }
-        
-        // admins are gods
-        if (is_admin()) {
-            $can_edit_this = true;
-        }
+        $checker = new ContentPermissionChecker(get_user_id());
+        $can_edit_this = $checker->canWrite($row->id);
         
         $languageAssignment = getAllLanguages(true);
         if (count($languageAssignment) > 0 and ! in_array($row->language, $languageAssignment)) {
@@ -431,7 +410,7 @@ function openMenuImageSelectWindow(field) {
 		</strong><br /> <input type="text" name="og_description"
 					value="<?php
             echo htmlspecialchars($row->og_description);
-            ?>""> <br /> <strong><?php translate("type");?>
+            ?>"> <br /> <strong><?php translate("type");?>
 		</strong><br /> <input type="text" name="og_type"
 					value="<?php
             echo htmlspecialchars($row->og_type);
@@ -488,7 +467,7 @@ function openMenuImageSelectWindow(field) {
 		<?php
                     
                     foreach ($fields as $field) {
-						$field->name = "{$name}_{$field->name}";
+                        $field->name = "{$name}_{$field->name}";
                         ?>
 			<?php echo $field->render(CustomFields::get($field->name, $row->id, false));?>
 		<?php }?>
@@ -895,7 +874,7 @@ function openArticleImageSelectWindow(field) {
 			<option value="desktop"
 				<?php if(faster_in_array("desktop", $access)) echo " selected"?>><?php translate("desktop_computers");?></option>
 				<?php
-            while ($row2 = db_fetch_object($groups)) {
+            while ($row2 = db_fetch_object($groupsSql)) {
                 if (faster_in_array(strval($row2->id), $access)) {
                     echo '<option value="' . $row2->id . '" selected>' . real_htmlspecialchars($row2->name) . '</option>';
                 } else {
@@ -1022,8 +1001,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		        tabMode: "shift"});
 </script>
 <?php }?>
-	
-	<noscript>
+		<noscript>
 		<p style="color: red;">
 			Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
 				href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
@@ -1057,14 +1035,14 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 	</div>
 </div>
 <?php
-			$translation = new JSTranslation(array(), "PageTranslation");
-			$translation->addKey("confirm_exit_without_save");
-			$translation->render();
-
+            $translation = new JSTranslation(array(), "PageTranslation");
+            $translation->addKey("confirm_exit_without_save");
+            $translation->render();
+            
             enqueueScriptFile("scripts/page.js");
             combinedScriptHtml();
+            echo ModuleHelper::endForm();
             ?>
-</form>
 <?php
             break;
         }

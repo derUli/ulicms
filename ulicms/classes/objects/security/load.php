@@ -2,9 +2,10 @@
 $classes = array(
     "ACL",
     "Encryption",
-    "PermissionChecker"
+    "PermissionChecker",
+    "IDatasetPermissionChecker",
+    "ContentPermissionChecker"
 );
 foreach ($classes as $class) {
     require dirname(__FILE__) . "/$class.php";
 }
-

@@ -1,7 +1,6 @@
 <?php
 namespace UliCMS\Security;
 
-use UliCMS\Exceptions\NotImplementedException;
 use User;
 
 class PermissionChecker

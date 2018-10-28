@@ -54,16 +54,18 @@ class PagePermissions
     {
         $all = $this->getAll();
         
-        $sql = "update `{prefix}content` ";
+        $sql = "update `{prefix}content` set ";
         $args = array();
         foreach ($all as $key => $value) {
-            $sql .= "set only_{$key}_can_edit = ?, ";
+            $sql .= " only_{$key}_can_edit = ?, ";
             $args[] = $value;
         }
+        
+        $sql .= " id = id ";
         $sql = trim($sql);
-        $sql = rtrim($sql, ",");
+        
         $args[] = intval($id);
         $sql .= " where id = ?";
-        Database::pQuery($sql, $args, true);
+        Database::pQuery($sql, $args, true) or die(Database::getError());
     }
 }
