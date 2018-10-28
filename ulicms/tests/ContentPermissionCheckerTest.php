@@ -136,8 +136,40 @@ class ContentPermissionCheckerTest extends \PHPUnit\Framework\TestCase
         
         $page->delete();
     }
-    
-    // canDelete() is currently an alias for canWrite
-    // so we don't need test cases for delete
-}
 
+    public function testCanDeleteWithEditRestrictionsReturnsTrue()
+    {
+        $checker = new ContentPermissionChecker($this->testUser1->getId());
+        
+        $page = new Page();
+        $page->systemname = "testpage2";
+        $page->language = "de";
+        $page->group_id = $this->testGroup2->getId();
+        $page->autor = $this->testUser1->getId();
+        $page->getPermissions()->setEditRestriction("group", true);
+        $page->getPermissions()->setEditRestriction("owner", true);
+        $page->save();
+        
+        $this->assertTrue($checker->canDelete($page->getID()));
+        
+        $page->delete();
+    }
+
+    // content has edit restrictions, we can edit the content
+    public function testCanDeleteWithEditRestrictionsReturnsFalse()
+    {
+        $checker = new ContentPermissionChecker($this->testUser1->getId());
+        
+        $page = new Page();
+        $page->systemname = "testpage3";
+        $page->language = "de";
+        $page->group_id = $this->testGroup2->getId();
+        $page->autor = $this->testUser2->getId();
+        $page->getPermissions()->setEditRestriction("group", true);
+        $page->getPermissions()->setEditRestriction("owner", true);
+        $page->save();
+        $this->assertFalse($checker->canDelete($page->getID()));
+        
+        $page->delete();
+    }
+}

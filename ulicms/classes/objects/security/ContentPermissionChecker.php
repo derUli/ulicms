@@ -86,6 +86,6 @@ class ContentPermissionChecker implements IDatasetPermissionChecker
 
     public function canDelete($contentId)
     {
-        return $this->canWrite($dataset);
+        return $this->canWrite($contentId);
     }
 }
