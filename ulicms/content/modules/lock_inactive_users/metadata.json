@@ -1,0 +1,10 @@
+{
+	"version": "1.0.0",
+	"source": "extend",
+	"embed": false,
+	"shy": false,
+	"main_class": "LockInactiveUsersController",
+	"controllers": {
+		"LockInactiveUsersController": "controllers/LockInactiveUsersController.php"
+	}
+}
