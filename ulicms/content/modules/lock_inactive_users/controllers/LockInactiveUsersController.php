@@ -1,6 +1,6 @@
 <?php
 
-class LockInactiveUsersController extends Controller
+class LockInactiveUsersController extends MainClass
 {
 
     private $moduleName = "lock_inactive_users";
