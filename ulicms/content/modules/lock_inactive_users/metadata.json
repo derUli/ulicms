@@ -6,5 +6,9 @@
 	"main_class": "LockInactiveUsersController",
 	"controllers": {
 		"LockInactiveUsersController": "controllers/LockInactiveUsersController.php"
-	}
+	},
+	"custom_acl": [
+		"lock_inactive_users"
+	],
+	"admin_permission": "lock_inactive_users"
 }
