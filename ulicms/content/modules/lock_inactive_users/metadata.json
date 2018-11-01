@@ -10,5 +10,8 @@
 	"custom_acl": [
 		"lock_inactive_users"
 	],
+	"controller_function_permissions": {
+		"LockInactiveUsersController::savePost": "lock_inactive_users"
+	},
 	"admin_permission": "lock_inactive_users"
 }

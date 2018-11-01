@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Exceptions\NotImplementedException;
 
 class LockInactiveUsersController extends MainClass
 {
@@ -8,6 +9,11 @@ class LockInactiveUsersController extends MainClass
     public function settings()
     {
         return Template::executeModuleTemplate(self::MODULE_NAME, "settings.php");
+    }
+
+    public function savePost()
+    {
+        throw new NotImplementedException();
     }
 
     public function getSettingsHeadline()
