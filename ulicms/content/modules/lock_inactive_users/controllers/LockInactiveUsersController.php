@@ -34,7 +34,6 @@ class LockInactiveUsersController extends MainClass
         $userManager = new UserManager();
         $users = $userManager->getLockedUsers(false);
         foreach ($users as $user) {
-            var_dump($user);
             if (time() - $user->getLastLogin() >= $daysInSeconds) {
                 $user->setLocked(true);
                 $user->save();
