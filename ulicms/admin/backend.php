@@ -55,7 +55,6 @@ if (isset($cfg->ip_whitelist) and is_array($cfg->ip_whitelist) and count($cfg->i
     die();
 }
 require_once "inc/queries.php";
-@include_once "inc/sort_direction.php";
 
 require_once "inc/logincheck.php";
 

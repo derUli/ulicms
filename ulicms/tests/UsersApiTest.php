@@ -5,17 +5,27 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
 
     private $testUser;
 
+    private $testGroup;
+
     public function setUp()
     {
+        @session_destroy();
         @session_start();
         unset($_SESSION["login_id"]);
         unset($_SESSION["logged_in"]);
+        
+        $group = new Group();
+        $group->setName("testgroup");
+        $group->save();
+        $this->testGroup = $group;
         
         $user = new User();
         $user->setUsername("testuser1");
         $user->setLastname("Muster");
         $user->setFirstname("Max");
+        $user->setEmail("max@muster.de");
         $user->setPassword("topsecret");
+        $user->setGroup($this->testGroup);
         $user->save();
         $this->testUser = $user;
         
@@ -32,6 +42,7 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         unset($_SESSION["login_id"]);
         unset($_SESSION["logged_in"]);
         
+        $this->testGroup->delete();
         $this->testUser->delete();
         
         $user = new User();
@@ -41,6 +52,8 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         $user = new User();
         $user->loadByUsername("testuser3");
         $user->delete();
+        
+        @session_destroy();
     }
 
     public function testGetUserIdUserIsLoggedIn()
@@ -192,5 +205,27 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         changePassword("newpassword", $id);
         
         $this->assertTrue(is_array(validate_login("testuser3", "newpassword")));
+    }
+
+    public function testRegisterSession()
+    {
+        $login = validate_login("testuser1", "topsecret");
+        register_session($login, false);
+        
+        $this->assertEquals("testuser1", $_SESSION["ulicms_login"]);
+        $this->assertEquals("Muster", $_SESSION["lastname"]);
+        $this->assertEquals("Max", $_SESSION["firstname"]);
+        $this->assertEquals("max@muster.de", $_SESSION["email"]);
+        
+        $this->assertGreaterThan(0, $this->testUser->getId());
+        $this->assertEquals($this->testUser->getId(), $_SESSION["login_id"]);
+        
+        $this->assertGreaterThan(0, $this->testGroup->getId());
+        $this->assertEquals($this->testGroup->getId(), $_SESSION["group_id"]);
+        
+        $this->assertEquals(0, $_SESSION["require_password_change"]);
+        $this->assertTrue($_SESSION["logged_in"]);
+        
+        $this->assertGreaterThanOrEqual(time() - 100, $_SESSION["session_begin"]);
     }
 }
