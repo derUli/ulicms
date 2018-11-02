@@ -14,7 +14,9 @@ class PageTest extends \PHPUnit\Framework\TestCase
         @session_destroy();
         $this->cleanUp();
     }
-    private function cleanUp(){
+
+    private function cleanUp()
+    {
         Database::query("delete from {prefix}content where systemname = 'testdisableshortcodes'", true);
     }
 
@@ -54,15 +56,15 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->group_id = 1;
         $page->custom_data["disable_shortcodes"] = true;
         $page->save();
-
+        
         $_SESSION["language"] = 'de';
         $_GET["seite"] = "testdisableshortcodes";
-
+        
         $this->assertFalse(str_contains(get_csrf_token_html(), get_content()));
         $this->assertTrue(str_contains("[csrf_token_html]", get_content()));
-       
+        
         $this->cleanUp();
-
+        
         unset($_SESSION["language"]);
         unset($_GET["seite"]);
     }
@@ -78,19 +80,19 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->group_id = 1;
         $page->custom_data["disable_shortcodes"] = false;
         $page->save();
-
+        
         $_SESSION["language"] = 'de';
         $_GET["seite"] = "testdisableshortcodes";
-
+        
         $this->assertTrue(str_contains(get_csrf_token_html(), get_content()));
         $this->assertFalse(str_contains("[csrf_token_html]", get_content()));
-
-       
+        
         $this->cleanUp();
-
+        
         unset($_SESSION["language"]);
         unset($_GET["seite"]);
-    } 
+    }
+
     public function testDisableShortcodesNull()
     {
         $page = new Page();
@@ -101,14 +103,14 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->autor = 1;
         $page->group_id = 1;
         $page->save();
-
+        
         $_SESSION["language"] = 'de';
         $_GET["seite"] = "testdisableshortcodes";
-
+        
         $this->assertTrue(str_contains(get_csrf_token_html(), get_content()));
         $this->assertFalse(str_contains("[csrf_token_html]", get_content()));
         $this->cleanUp();
-
+        
         unset($_SESSION["language"]);
         unset($_GET["seite"]);
     }
