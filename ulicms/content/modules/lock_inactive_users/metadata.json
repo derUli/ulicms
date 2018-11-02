@@ -7,6 +7,9 @@
 	"controllers": {
 		"LockInactiveUsersController": "controllers/LockInactiveUsersController.php"
 	},
+	"objects": {
+		"InactiveUsersLocker": "objects/InactiveUsersLocker.php"
+	},
 	"custom_acl": [
 		"lock_inactive_users"
 	],
