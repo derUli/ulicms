@@ -62,6 +62,7 @@ class PermissionChecker
             $languages = array_merge($languages, $group->getLanguages());
         }
         $languages = array_unique($languages);
+        var_dump($languages);
         return $languages;
     }
 

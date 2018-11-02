@@ -1,7 +1,7 @@
 <?php
 use UliCMS\Security\PermissionChecker;
-$acl = new PermissionChecker(get_user_id());
-if (! $acl->hasPermission ( "install_packages" )) {
+$permissionChecker = new PermissionChecker(get_user_id());
+if (! $permissionChecker->hasPermission ( "install_packages" )) {
 	noPerms ();
 } else {
 	?>
