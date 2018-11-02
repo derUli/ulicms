@@ -12,7 +12,8 @@ class InactiveUsersLockerTest extends \PHPUnit\Framework\TestCase
 
     protected function tearDown()
     {
-        // Todo: Delete test users
+        // delete test users
+        Database::query("delete from `{prefix}users` where username like 'testuser%'", true);
     }
 
     public function testGetDays()
