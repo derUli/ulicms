@@ -25,7 +25,7 @@ class InactiveUsersLocker
         foreach ($users as $user) {
             // lock all users where the time difference between now and the last login
             // is greater than X days
-            if (time() - $user->getLastLogin() >= $daysInSeconds) {
+            if ($user->getLastLogin() and time() - $user->getLastLogin() >= $daysInSeconds) {
                 $user->setLocked(true);
                 $user->save();
                 $locked ++;
