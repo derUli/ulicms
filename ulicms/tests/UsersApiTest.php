@@ -18,13 +18,29 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
         $user->setPassword("topsecret");
         $user->save();
         $this->testUser = $user;
+        
+        $user = new User();
+        $user->setUsername("testuser3");
+        $user->setLastname("Muster");
+        $user->setFirstname("Max");
+        $user->setPassword("oldpassword");
+        $user->save();
     }
 
     public function tearDown()
     {
         unset($_SESSION["login_id"]);
-        $this->testUser->delete();
         unset($_SESSION["logged_in"]);
+        
+        $this->testUser->delete();
+        
+        $user = new User();
+        $user->loadByUsername("testuser2");
+        $user->delete();
+        
+        $user = new User();
+        $user->loadByUsername("testuser3");
+        $user->delete();
     }
 
     public function testGetUserIdUserIsLoggedIn()
@@ -155,5 +171,26 @@ class UsersApiTest extends \PHPUnit\Framework\TestCase
             }
         }
         $this->fail("The testuser is not in the result.");
+    }
+
+    public function testAddUser()
+    {
+        $this->assertFalse(user_exists("testuser2"));
+        
+        adduser("testuser2", "Kolumna", "Karla", "karla.kolumna@presse.de", "oldpassword", false);
+        $this->assertTrue(user_exists("testuser2"));
+    }
+
+    public function testChangePassword()
+    {
+        $user = new User();
+        $user->loadByUsername("testuser3");
+        $id = $user->getId();
+        
+        $this->assertTrue(is_array(validate_login("testuser3", "oldpassword")));
+        
+        changePassword("newpassword", $id);
+        
+        $this->assertTrue(is_array(validate_login("testuser3", "newpassword")));
     }
 }
