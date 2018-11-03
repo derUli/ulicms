@@ -16,22 +16,6 @@ if (isset ( $_REQUEST ["sort"] ) and faster_in_array ( $_REQUEST ["sort"], array
 	$_SESSION ["grp_sort"] = $_REQUEST ["sort"];
 }
 
-if ($_SESSION ["grp_sort"] == "id") {
-	if ($_SESSION ["sortDirection"] == "asc") {
-		ksort ( $groups );
-	} else if ($_SESSION ["sortDirection"] == "asc") {
-		krsort ( $groups );
-	}
-} else if ($_SESSION ["grp_sort"] == "name") {
-	if ($_SESSION ["sortDirection"] == "asc") {
-		asort ( $groups );
-	} else {
-		arsort ( $groups );
-	}
-} else {
-	ksort ( $groups );
-}
-
 ?>
 <?php if($permissionChecker->hasPermission("groups_create")){?>
 <p>

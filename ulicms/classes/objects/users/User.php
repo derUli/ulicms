@@ -134,9 +134,7 @@ class User
             $this->default_language
         );
         $result = Database::pQuery($sql, $args, true) or die(Database::getError());
-        if ($result) {
-            $this->id = Database::getLastInsertID();
-        }
+        $this->id = Database::getLastInsertID();
     }
 
     protected function update()
@@ -324,24 +322,44 @@ class User
 
     public function getGroupId()
     {
+        return $this->getPrimaryGroupId();
+    }
+
+    public function getPrimaryGroupId()
+    {
         return $this->group_id;
     }
 
-    public function setGroupId($gid)
+    public function setPrimaryGroupId($gid)
     {
         $this->group_id = ! is_null($gid) ? $gid : null;
         $this->group = ! is_null($gid) ? new Group($gid) : null;
     }
 
-    public function getGroup()
+    public function setGroupid($gid)
+    {
+        $this->setPrimaryGroupId($gid);
+    }
+
+    public function getPrimaryGroup()
     {
         return $this->group;
     }
 
-    public function setGroup($group)
+    public function getGroup()
+    {
+        return $this->getPrimaryGroup();
+    }
+
+    public function setPrimaryGroup($group)
     {
         $this->group = $group;
         $this->group_id = ! is_null($group) ? $group->getId() : null;
+    }
+
+    public function setGroup($group)
+    {
+        $this->setPrimaryGroup($group);
     }
 
     public function getNotifyOnLogin()

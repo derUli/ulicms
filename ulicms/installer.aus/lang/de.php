@@ -7,7 +7,7 @@ define ( "TRANSLATION_TITLE_STEP_4", "Verbinden mit der Datenbank" );
 define ( "TRANSLATION_TITLE_STEP_5", "Administrator Account erstellen" );
 define ( "TRANSLATION_TITLE_STEP_6", "Optionale Komponenten auswählen" );
 define ( "TRANSLATION_TITLE_STEP_7", "Datenbank aufbauen" );
-define ( "TRANSLATION_TITLE_STEP_8", "Erstelle Konfigurationsdatei" );
+define ( "TRANSLATION_TITLE_STEP_8", "Konfigurationsdatei erstellen" );
 define ( "TRANSLATION_TITLE_STEP_9", "Installer Ordner löschen" );
 define ( "TRANSLATION_SELECT_LANGUAGE", "Bitte wählen Sie Ihre Sprache aus." );
 define ( "TRANSLATION_FOLLOW_INSTRUCTIONS", "Bitte folgen Sie den Anweisungen um UliCMS zu installieren" );

@@ -47,7 +47,6 @@ if ($permissionChecker->hasPermission("pages")) {
         }
         
         $owner_group = $row->group_id;
-        $current_group = $_SESSION["group_id"];
         
         $checker = new ContentPermissionChecker(get_user_id());
         $can_edit_this = $checker->canWrite($row->id);
