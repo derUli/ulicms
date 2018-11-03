@@ -208,7 +208,9 @@ if (! function_exists("keywordsFromString")) {
         $text = str_replace(array(
             "\n",
             ".",
-            ","
+            ",",
+            "!",
+            "?"
         ), " ", $text);
         
         // text an Leerzeichen zerlegen
