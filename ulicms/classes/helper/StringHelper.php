@@ -113,11 +113,11 @@ class StringHelper
 
     public static function real_htmlspecialchars($string)
     {
-        return htmlspecialchars($string, ENT_QUOTES, "UTF-8");
+        echo _esc($string);
     }
 
     // Links klickbar machen
-    public static function make_links_clickable($text)
+    public static function makeLinksClickable($text)
     {
         return preg_replace('!(((f|ht)tp(s)?://)[-a-zA-Zа-яА-Я()0-9@:%_+.~#?&;//=]+)!i', '<a href="$1" rel="nofollow" target="_blank">$1</a>', $text);
     }

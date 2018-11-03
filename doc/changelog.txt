@@ -25,6 +25,10 @@ Bugfixes:
 * Der Text "No Results Found" in den Select2 Dropdown-Boxen war nicht lokalisiert
 * Funktion Database::dropColumn($table, $column, $prefix = true) war nicht funktional
 
+Entfernte Funktionen:
+* encodeURIComponent($str)
+* isEmpty($str)
+
 ===== Neues in UliCMS 2018.4.1 =====
 
 Neue Features:
