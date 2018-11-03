@@ -18,10 +18,12 @@ Neue API-Funktionen:
 * Template::poweredByUliCMS()
 * AntispamHelper::checkMailDomain($email)
 * remove_suffix($text, $suffix)
+* Database::getClientVersion()
 
 Bugfixes:
 * Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertete die sekundären Gruppen nicht aus.  
 * Der Text "No Results Found" in den Select2 Dropdown-Boxen war nicht lokalisiert
+* Funktion Database::dropColumn($table, $column, $prefix = true) war nicht funktional
 
 ===== Neues in UliCMS 2018.4.1 =====
 

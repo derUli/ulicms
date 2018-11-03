@@ -134,9 +134,7 @@ class User
             $this->default_language
         );
         $result = Database::pQuery($sql, $args, true) or die(Database::getError());
-        if ($result) {
-            $this->id = Database::getLastInsertID();
-        }
+        $this->id = Database::getLastInsertID();
     }
 
     protected function update()

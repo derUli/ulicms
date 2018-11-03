@@ -3,6 +3,13 @@
 class DatabaseTest extends \PHPUnit\Framework\TestCase
 {
 
+    public function tearDown()
+    {
+        Database::dropTable("test_table");
+        Settings::delete("foo");
+        Settings::delete("foo2");
+    }
+
     public function testGetAllTables()
     {
         $tables = Database::getAllTables();
@@ -96,6 +103,110 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
     {
         $allSettings = Database::selectAll("settings");
         $this->assertTrue(Database::any($allSettings));
+    }
+
+    public function testDropTable()
+    {
+        Database::query("CREATE TABLE {prefix}test_table (
+                        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                        firstname VARCHAR(30) NOT NULL,
+                        lastname VARCHAR(30) NOT NULL,
+                        email VARCHAR(50),
+                        reg_date TIMESTAMP)", true);
+        
+        $cfg = new CMSConfig();
+        $prefix = $cfg->db_prefix;
+        
+        $this->assertContains("{$prefix}test_table", Database::getAllTables());
+        Database::dropTable("test_table");
+        $this->assertNotContains("{$prefix}test_table", Database::getAllTables());
+    }
+
+    public function testDropColumn()
+    {
+        Database::query("CREATE TABLE {prefix}test_table (
+                        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                        firstname VARCHAR(30) NOT NULL,
+                        lastname VARCHAR(30) NOT NULL,
+                        email VARCHAR(50),
+                        reg_date TIMESTAMP)", true);
+        
+        $this->assertContains("reg_date", Database::getColumnNames("test_table"));
+        
+        Database::dropColumn("test_table", "reg_date");
+        $this->assertNotContains("reg_date", Database::getColumnNames("test_table"));
+        
+        Database::dropTable("test_table");
+    }
+
+    public function testGetClientInfo()
+    {
+        $this->assertStringStartsWith("mysql", Database::getClientInfo());
+    }
+
+    public function testGetClientVersion()
+    {
+        // https://www.w3schools.com/php/func_mysqli_get_client_version.asp
+        $this->assertGreaterThanOrEqual(50000, Database::getClientVersion());
+    }
+
+    public function testDeleteFrom()
+    {
+        Settings::set("foo", "bar");
+        Database::deleteFrom("settings", "name = 'foo'");
+        
+        // clear settings cache
+        SettingsCache::set("foo", null);
+        
+        $this->assertFalse(Settings::get("foo"));
+    }
+
+    public function testEscapeName()
+    {
+        $this->assertEquals("`alter`", Database::escapeName("alter"));
+        $this->assertEquals("`JohnDoe`", Database::escapeName("'JohnDoe'"));
+        $this->assertEquals("`JohnDoe`", Database::escapeName('"JohnDoe"'));
+    }
+
+    public function testGetConnection()
+    {
+        $this->assertInstanceOf("mysqli", Database::getConnection());
+    }
+
+    public function testGetLastInsertID()
+    {
+        Database::query("insert into {prefix}settings (name, value)
+                         values
+                         ('foo2', 'bar')", true);
+        
+        $lastInsertId = Database::getLastInsertID();
+        $this->assertNotNull($lastInsertId);
+        
+        $query = Database::selectAll("settings", array(
+            "id"
+        ), "name = 'foo2'");
+        $result = Database::fetchObject($query);
+        $this->assertEquals($query > id, $lastInsertId);
+        
+        Settings::delete("foo2");
+    }
+
+    public function testGetInsertID()
+    {
+        Database::query("insert into {prefix}settings (name, value)
+                         values
+                         ('foo2', 'bar')", true);
+        
+        $lastInsertId = Database::getInsertID();
+        $this->assertNotNull($lastInsertId);
+        
+        $query = Database::selectAll("settings", array(
+            "id"
+        ), "name = 'foo2'");
+        $result = Database::fetchObject($query);
+        $this->assertEquals($query > id, $lastInsertId);
+        
+        Settings::delete("foo2");
     }
     // TODO: implement tests for other Database functions
 }

@@ -100,6 +100,11 @@ class Database
         return mysqli_get_client_info(self::$connection);
     }
 
+    public static function getClientVersion()
+    {
+        return mysqli_get_client_version(self::$connection);
+    }
+
     public static function dropTable($table, $prefix = true)
     {
         if ($prefix) {
@@ -147,9 +152,10 @@ class Database
         if ($prefix) {
             $table = tbname($table);
         }
-        
         $table = self::escapeName($table);
+        
         $sql = "DELETE FROM $table";
+        
         if (StringHelper::isNotNullOrEmpty($where)) {
             $sql .= " where $where";
         }
@@ -191,7 +197,7 @@ class Database
         
         $column = self::escapeName($column);
         $table = self::escapeName($table);
-        return self::query("ALTER TABLE $table DROP COLUMN $table");
+        return self::query("ALTER TABLE $table DROP COLUMN $column");
     }
 
     public static function selectAll($table, $columns = array(), $where = "", $args = array(), $prefix = true)
@@ -215,9 +221,9 @@ class Database
 
     public static function escapeName($name)
     {
-        $name = "`" . db_escape($name) . "`";
         $name = str_replace("'", "", $name);
         $name = str_replace("\"", "", $name);
+        $name = "`" . db_escape($name) . "`";
         return $name;
     }
 
