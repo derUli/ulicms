@@ -113,7 +113,7 @@ class StringHelper
 
     public static function realHtmlSpecialchars($string)
     {
-        echo _esc($string);
+        return _esc($string);
     }
 
     // Links klickbar machen
