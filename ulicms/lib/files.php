@@ -47,11 +47,8 @@ function find_all_folders($dir)
         }
         if (is_dir("$dir/$value")) {
             $result[] = str_Replace("\\", "/", "$dir/$value");
+            $result = array_merge($result, find_all_folders("$dir/$value"));
             continue;
-        }
-        foreach (find_all_files("$dir/$value") as $value) {
-            $value = str_replace("\\", "/", $value);
-            $result[] = $value;
         }
     }
     return $result;

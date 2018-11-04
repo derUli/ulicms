@@ -186,7 +186,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
             "id"
         ), "name = 'foo2'");
         $result = Database::fetchObject($query);
-        $this->assertEquals($query > id, $lastInsertId);
+        $this->assertEquals($result->id, $lastInsertId);
         
         Settings::delete("foo2");
     }
@@ -204,7 +204,7 @@ class DatabaseTest extends \PHPUnit\Framework\TestCase
             "id"
         ), "name = 'foo2'");
         $result = Database::fetchObject($query);
-        $this->assertEquals($query > id, $lastInsertId);
+        $this->assertEquals($result->id, $lastInsertId);
         
         Settings::delete("foo2");
     }

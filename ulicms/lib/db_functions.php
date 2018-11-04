@@ -1,4 +1,8 @@
 <?php
+define("DB_TYPE_INT", 1);
+define("DB_TYPE_FLOAT", 2);
+define("DB_TYPE_STRING", 3);
+define("DB_TYPE_BOOL", 4);
 
 // database api functions
 // all functions in this file are deprecated you should use the Database class instead.
@@ -9,123 +13,105 @@ function db_query($query)
 
 function db_get_server_info()
 {
-    return mysqli_get_server_info(Database::getConnection());
+    return Database::getServerVersion();
 }
 
 function db_get_client_info()
 {
-    return mysqli_get_client_info(Database::getConnection());
+    return Database::getClientInfo();
 }
 
 function db_name_escape($name)
 {
-    return "`" . db_escape($name) . "`";
+    return Database::escapeName($name);
 }
 
 function db_last_insert_id()
 {
-    return mysqli_insert_id(Database::getConnection());
+    return Database::getLastInsertID();
 }
 
 function db_insert_id()
 {
-    return db_last_insert_id();
+    return Database::getLastInsertID();
 }
 
 // Fetch Row in diversen Datentypen
 function db_fetch_array($result)
 {
-    return mysqli_fetch_array($result);
+    return Database::fetchArray($result);
 }
 
 function db_fetch_field($result)
 {
-    return mysqli_fetch_field($result);
+    return Database::fetchField($result);
 }
 
 function db_fetch_assoc($result)
 {
-    return mysqli_fetch_assoc($result);
+    return Database::fetchAssoc($result);
 }
 
 function db_fetch_all($result, $resulttype = MYSQLI_NUM)
 {
-    if (function_exists("mysqli_fetch_all")) {
-        return mysqli_fetch_all($result, $resulttype);
-    }
-    
-    // @FIXME : $resulttype in alternativer Implementation von fetch_all behandeln
-    $retval = array();
-    while ($row = db_fetch_assoc($result)) {
-        $retval[] = $row;
-    }
-    
-    return $retval;
+    return Database::fetchAll($result, $resulttype);
 }
 
 function db_close()
 {
-    mysqli_close(Database::getConnection());
+    Database::close();
 }
 
 // Connect with database server
-function db_connect($server, $user, $password)
+function db_connect($server, $user, $password, $port = 3306)
 {
-    Database::setConnection(mysqli_connect($server, $user, $password));
-    if (! Database::getConnection()) {
-        return false;
-    }
-    db_query("SET NAMES 'utf8mb4'");
-    // sql_mode auf leer setzen, da sich UliCMS nicht im strict_mode betreiben lässt
-    db_query("SET SESSION sql_mode = '';");
-    
-    return Database::getConnection();
+    return Database::connect($server, $user, $password, $port);
 }
 
 // Datenbank auswählen
 function db_select($schema)
 {
-    return mysqli_select_db(Database::getConnection(), $schema);
+    return Database::select($schema);
 }
 
 function db_num_fields($result)
 {
-    return mysqli_field_count(Database::getConnection());
+    return Database::getNumFieldCount($result);
 }
 
 function db_affected_rows()
 {
-    return mysqli_affected_rows(Database::getConnection());
+    return Database::getAffectedRows();
 }
 
 function schema_select($schema)
 {
-    return db_select($schema);
+    return Database::select($schema);
 }
 
 function db_select_db($schema)
 {
-    return schema_select($schema);
+    return Database::select($schema);
 }
 
 function db_fetch_object($result)
 {
-    return mysqli_fetch_object($result);
+    return Database::fetchObject($result);
 }
 
 function db_fetch_row($result)
 {
-    return mysqli_fetch_row($result);
+    return Database::fetchRow($result);
 }
 
 function db_num_rows($result)
 {
-    return mysqli_num_rows($result);
+    return Database::getNumRows($result);
 }
 
 function db_last_error()
 {
-    return mysqli_error(Database::getConnection());
+    return Database::getLastError();
 }
 
 function db_error()
@@ -147,13 +133,8 @@ function db_get_tables()
 
 function db_real_escape_string($value)
 {
-    return mysqli_real_escape_string(Database::getConnection(), $value);
+    return Database::escapeValue($value, DB_TYPE_STRING);
 }
-
-define("DB_TYPE_INT", 1);
-define("DB_TYPE_FLOAT", 2);
-define("DB_TYPE_STRING", 3);
-define("DB_TYPE_BOOL", 4);
 
 // Tabellenname zusammensetzen
 function tbname($name)
@@ -165,28 +146,5 @@ function tbname($name)
 // Abstraktion für Escapen von Werten
 function db_escape($value, $type = null)
 {
-    if (is_null($type)) {
-        
-        if (is_float($value)) {
-            return floatval($value);
-        } else if (is_int($value)) {
-            return intval($value);
-        } else if (is_bool($value)) {
-            return (int) $value;
-        } else {
-            return mysqli_real_escape_string(Database::getConnection(), $value);
-        }
-    } else {
-        if ($type === DB_TYPE_INT) {
-            return intval($value);
-        } else if ($type === DB_TYPE_FLOAT) {
-            return floatval($value);
-        } else if ($type === DB_TYPE_STRING) {
-            return mysqli_real_escape_string(Database::getConnection(), $value);
-        } else if ($type === DB_TYPE_BOOL) {
-            return intval($value);
-        } else {
-            return $value;
-        }
-    }
+    return Database::escapeValue($value, $type);
 }

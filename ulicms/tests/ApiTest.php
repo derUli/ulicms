@@ -4,6 +4,28 @@ include_once Path::Resolve("ULICMS_ROOT/templating.php");
 class ApiTest extends \PHPUnit\Framework\TestCase
 {
 
+    public function setUp()
+    {
+        $this->cleanUp();
+        @session_start();
+    }
+
+    public function tearDown()
+    {
+        $this->cleanUp();
+        @session_destroy();
+    }
+
+    public function cleanUp()
+    {
+        unset($_REQUEST["action"]);
+        Settings::set("maintenance_mode", "0");
+        chdir(Path::resolve("ULICMS_ROOT"));
+        set_format("html");
+        unseT($_SESSION["csrf_token"]);
+        unset($_REQUEST["csrf_token"]);
+    }
+
     public function testRemovePrefix()
     {
         $this->assertEquals("my_bar", remove_prefix("foo_my_bar", "foo_"));
@@ -112,12 +134,15 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_false(0));
     }
 
-    public function testIsJson()
+    public function testIsJsonTrue()
     {
         $validJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "metadata.json"));
-        $invalidJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "lang/de.php"));
-        
         $this->assertTrue(is_json($validJson));
+    }
+
+    public function testIsJsonFalse()
+    {
+        $invalidJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "lang/de.php"));
         $this->assertFalse(is_json($invalidJson));
     }
 
@@ -150,5 +175,139 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(var_is_type(null, "numeric", true));
         $this->assertFalse(var_is_type("", "numeric", true));
         $this->assertTrue(var_is_type("", "numeric", false));
+    }
+
+    public function testStrContainsTrue()
+    {
+        $this->assertTrue(str_contains("Ananas", "Ich esse gerne Ananas."));
+    }
+
+    public function testStrContainsFalse()
+    {
+        $this->assertFalse(str_contains("Tomaten", "Ich esse gerne Ananas."));
+    }
+
+    public function testGetActionIsSet()
+    {
+        $_REQUEST["action"] = "pages";
+        $this->assertEquals("pages", get_action());
+        unset($_REQUEST["action"]);
+    }
+
+    public function testGetActionIsNotSet()
+    {
+        $this->assertEquals("home", get_action());
+    }
+
+    public function testIsMaintenanceModeOn()
+    {
+        Settings::set("maintenance_mode", "1");
+        $this->assertTrue(isMaintenanceMode());
+    }
+
+    public function testIsMaintenanceModeOff()
+    {
+        Settings::set("maintenance_mode", "0");
+        $this->assertFalse(isMaintenanceMode());
+    }
+
+    public function testGetStringLengthInBytes()
+    {
+        $this->assertEquals(39, getStringLengthInBytes("Das ist die Lösung für die Änderung."));
+    }
+
+    public function testIsAdminDirTrue()
+    {
+        chdir(Path::resolve("ULICMS_ROOT/admin"));
+        $this->assertTrue(is_admin_dir());
+    }
+
+    public function testIsAdminDirFalse()
+    {
+        chdir(Path::resolve("ULICMS_ROOT"));
+        $this->assertFalse(is_admin_dir());
+    }
+
+    public function testSetFormat()
+    {
+        set_format("pdf");
+        $this->assertEquals("pdf", $_GET["format"]);
+        
+        set_format("txt");
+        $this->assertEquals("txt", $_GET["format"]);
+    }
+
+    public function testGetJqueryUrl()
+    {
+        $this->assertEquals("admin/scripts/jquery.min.js", get_jquery_url());
+    }
+
+    public function testCheckCsrfTokenNoToken()
+    {
+        unset($_SESSION["csrf_token"]);
+        $this->assertFalse(check_csrf_token());
+    }
+
+    public function testCheckCsrfTokenValid()
+    {
+        $token = get_csrf_token();
+        $this->assertNotNull($token);
+        
+        $_REQUEST["csrf_token"] = $token;
+        
+        $this->assertTrue(check_csrf_token());
+        
+        unset($_SESSION["csrf_token"]);
+        unset($_REQUEST["csrf_token"]);
+    }
+
+    public function testCheckCsrfTokenInvalid()
+    {
+        $token = get_csrf_token();
+        $_REQUEST["csrf_token"] = "thisisnotthetoken";
+        $this->assertFalse(check_csrf_token());
+        unset($_SESSION["csrf_token"]);
+    }
+
+    public function testPreparePlainTextforHTMLOutput()
+    {
+        $input = "This is\na\n<Textfile>.";
+        $expected = "This is<br />\na<br />\n&lt;Textfile&gt;.";
+        $this->assertEquals($expected, preparePlainTextforHTMLOutput($input));
+    }
+
+    // in the test environment this returns always true
+    // since the tests are running at the command line
+    public function testIsCli()
+    {
+        $this->assertTrue(isCLI());
+    }
+
+    public function testRandStr()
+    {
+        $password1 = rand_string(15);
+        $password2 = rand_string(15);
+        $password3 = rand_string(12);
+        $this->assertEquals(15, strlen($password1));
+        $this->assertEquals(15, strlen($password2));
+        $this->assertEquals(12, strlen($password3));
+        $this->assertNotEquals($password2, $password1);
+    }
+
+    public function testSplitAndTrim()
+    {
+        $input = "Max; Muster; max@muster.de ; Musterstadt";
+        $result = splitAndTrim($input);
+        $this->assertEquals("Max", $result[0]);
+        $this->assertEquals("Muster", $result[1]);
+        $this->assertEquals("max@muster.de", $result[2]);
+        $this->assertEquals("Musterstadt", $result[3]);
+    }
+
+    public function testGetThemesList()
+    {
+        $themes = getThemesList();
+        $this->assertContains("2017", $themes);
+        $this->assertContains("impro17", $themes);
     }
 }

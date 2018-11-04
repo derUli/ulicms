@@ -217,17 +217,6 @@ function is_admin_dir()
     return basename(getcwd()) === "admin";
 }
 
-function initconfig($key, $value)
-{
-    $retval = false;
-    if (! Settings::get($key)) {
-        setconfig($key, $value);
-        $retval = true;
-        SettingsCache::set($key, $value);
-    }
-    return $retval;
-}
-
 function set_format($format)
 {
     $_GET["format"] = trim($format, ".");
@@ -240,7 +229,7 @@ function get_jquery_url()
     return $url;
 }
 
-function get_prefered_language(array $available_languages, $http_accept_language)
+function get_prefered_language($available_languages, $http_accept_language)
 {
     $available_languages = array_flip($available_languages);
     
