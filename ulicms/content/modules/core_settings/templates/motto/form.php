@@ -49,7 +49,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         ?>"
 			value="<?php
         
-        echo StringHelper::real_htmlspecialchars($mottos[$lang]);
+        echo StringHelper::realHtmlSpecialchars($mottos[$lang]);
         ?>"></td>
 			<?php
     }

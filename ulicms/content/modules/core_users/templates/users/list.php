@@ -74,7 +74,7 @@ if ($permissionChecker->hasPermission ( "users" )) {
 			echo "<td style=\"width:40px;\">" . $row->getId () . "</td>";
 			echo "<td>";
 			echo '<img src="' . get_gravatar ( $row->getEmail (), 26 ) . '" alt="Avatar von ' . real_htmlspecialchars ( $row->getUsername () ) . '" style="width:26px;"> ';
-			echo real_htmlspecialchars ( $row->getUsername () ) . "</td>";
+			esc( $row->getUsername () ) . "</td>";
 			echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getLastName () ) . "</td>";
 			echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getFirstname () ) . "</td>";
 			echo "<td class=\"hide-on-mobile\">" . real_htmlspecialchars ( $row->getEmail () ) . "</td>";
@@ -84,7 +84,7 @@ if ($permissionChecker->hasPermission ( "users" )) {
 				$url = ModuleHelper::buildActionURL ( "groups", "edit=$id" );
 				echo '<a href="' . Template::getEscape ( $url ) . '">';
 			}
-			echo real_htmlspecialchars ( $group );
+			esc( $group );
 			
 			if ($id and $permissionChecker->hasPermission ( "groups_edit" )) {
 				echo "</a>";

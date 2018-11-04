@@ -42,7 +42,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         echo $lang;
         ?>"
 			value="<?php
-        echo StringHelper::real_htmlspecialchars($homepage_titles[$lang]);
+        echo StringHelper::realHtmlSpecialchars($homepage_titles[$lang]);
         ?>"></td>
 	</tr>
 			<?php

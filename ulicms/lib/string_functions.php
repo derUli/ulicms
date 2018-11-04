@@ -148,7 +148,7 @@ if (! function_exists("real_htmlspecialchars")) {
 
     function real_htmlspecialchars($string)
     {
-        return StringHelper::real_htmlspecialchars($string);
+        return StringHelper::realHtmlSpecialchars($string);
     }
 }
 

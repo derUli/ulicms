@@ -3,7 +3,6 @@ $classes = array(
     "AntiSpamHelper",
     "ArrayHelper",
     "BackendHelper",
-    "HtmlHelper",
     "ModuleHelper",
     "NumberFormatHelper",
     "SecurityHelper",

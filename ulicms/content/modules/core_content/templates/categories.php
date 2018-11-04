@@ -66,7 +66,7 @@ if (! is_admin () and ! $permissionChecker->hasPermission ( "categories" )) {
 			?></td>
 				<td style="padding-right: 20px;"><?php
 			
-			echo real_htmlspecialchars ( $category ["name"] );
+			esc( $category ["name"] );
 			?></td>
 				<td style="padding-right: 20px;" class="hide-on-mobile"><?php
 			

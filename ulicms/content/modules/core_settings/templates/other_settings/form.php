@@ -267,7 +267,7 @@ if (! $permissionChecker->hasPermission("other")) {
 				</div>
 			<div class="inputWrapper">
 				<input type="text" name="smtp_host"
-					value="<?php echo real_htmlspecialchars ( $smtp_host );?>">
+					value="<?php esc( $smtp_host );?>">
 
 			</div>
 

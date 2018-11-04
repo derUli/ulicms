@@ -111,7 +111,7 @@ class StringHelper
         return $string;
     }
 
-    public static function real_htmlspecialchars($string)
+    public static function realHtmlSpecialchars($string)
     {
         echo _esc($string);
     }
