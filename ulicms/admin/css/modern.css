@@ -605,3 +605,7 @@ table.dataTable {
 .dataTables_wrapper .dataTables_filter input {
 	margin-left: 0 !important;
 }
+
+.top-bar {
+	margin-bottom: 10px;
+}
