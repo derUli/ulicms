@@ -38,7 +38,6 @@
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
 		"HomepageTitleController": "controllers/HomepageTitleController.php",
 		"MottoController": "controllers/MottoController.php",
-		"CacheSettingsController": "controllers/CacheSettingsController.php",
 		"FrontPageSettingsController": "controllers/FrontPageSettingsController.php",
 		"LogoUploadController": "controllers/LogoUploadController.php",
 		"MetaDescriptionController": "controllers/MetaDescriptionController.php",

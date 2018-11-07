@@ -9,11 +9,30 @@ if (! $permissionChecker->hasPermission("performance_settings")) {
     $cache_enabled = ! Settings::get("cache_disabled");
     $cache_period = round(Settings::get("cache_period") / 60);
     ?>
-    <?php ModuleHelper::buildMethodCallForm($sClass, $sMethod);?>
+    <?php
+    if (Request::getVar("clear_cache")) {
+        ?>
+
+<div class="alert alert-success alert-dismissable fade in">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+<?php translate ( "cache_was_cleared" );?>
+</div>
+<?php }?>
+<?php
+    if (Request::getVar("save")) {
+        ?>
+<div class="alert alert-success alert-dismissable fade in">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	<?php translate("changes_was_saved");?>
+	</div>
+<?php }?>
+<?php ModuleHelper::buildMethodCallForm($sClass, $sMethod);?>
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><?php translate("back")?></a> <a
+		href="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache");?>"
+		class="btn btn-warning pull-right"><?php translate("clear_cache");?></a>
 </p>
 <h1><?php translate("performance");?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("PerformanceSettingsController", "save");?>

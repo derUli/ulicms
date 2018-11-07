@@ -26,7 +26,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         "id" => "frontpage_settings"
     ));
     ?>
-<table border="0">
+<table>
 	<tr>
 		<td><strong><?php translate("language");?>
 			</strong></td>

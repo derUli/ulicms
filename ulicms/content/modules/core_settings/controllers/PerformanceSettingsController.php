@@ -15,4 +15,17 @@ class PerformanceSettingsController extends Controller
         }
         Response::redirect(ModuleHelper::buildActionUrl("performance_settings", "save=1"));
     }
+
+    public function clearCache()
+    {
+        if (! is_logged_in()) {
+            Request::redirect("index.php");
+        }
+        clearCache();
+        // No need to redirect on ajax request
+        if (Request::isAjaxRequest()) {
+            HTTPStatusCodeResult(HttpStatusCode::OK);
+        }
+        Request::redirect(ModuleHelper::buildActionURL("performance_settings", "clear_cache=1"));
+    }
 }
