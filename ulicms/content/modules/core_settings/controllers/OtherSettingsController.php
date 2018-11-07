@@ -4,11 +4,7 @@ class OtherSettingsController extends Controller
 {
 
     public function savePost()
-    {
-        if (isset($_POST["cache_period"])) {
-            setconfig("cache_period", intval($_POST["cache_period"]) * 60);
-        }
-        
+    {       
         if (isset($_POST["email_mode"]))
             setconfig("email_mode", db_escape($_POST["email_mode"]));
         
@@ -18,13 +14,7 @@ class OtherSettingsController extends Controller
             $domain_to_language = trim($domain_to_language);
             setconfig("domain_to_language", db_escape($domain_to_language));
         }
-        
-        if (isset($_POST["cache_enabled"])) {
-            Settings::delete("cache_disabled");
-        } else {
-            setconfig("cache_disabled", "disabled");
-        }
-        
+                
         if (isset($_POST["smtp_auth"])) {
             setconfig("smtp_auth", "auth");
         } else {

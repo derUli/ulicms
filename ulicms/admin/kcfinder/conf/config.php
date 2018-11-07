@@ -124,5 +124,3 @@ $permissionChecker = new ACL();
 if (($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files") and $permissionChecker->hasPermission($_REQUEST["type"])) {
     $_CONFIG["disabled"] = false;
 }
-
-?>

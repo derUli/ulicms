@@ -29,3 +29,5 @@ add_translation("no_auto_cron_help", "Enable this option if you wan't to setup a
 add_translation("language_shortcode", "Shortcode");
 
 add_translation("reject_requests_from_bots", "Reject Requests From Bots");
+
+add_translation("performance", "Performance");
