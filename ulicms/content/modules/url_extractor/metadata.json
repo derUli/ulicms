@@ -1,0 +1,8 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": false,
+	"objects": {
+		"UrlExtractor": "UrlExtractor.php"
+	}
+}
