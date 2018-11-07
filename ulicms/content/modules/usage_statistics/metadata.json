@@ -1,0 +1,9 @@
+{
+	"source": "local",
+	"controllers": {
+		"UsageStatisticsController": "UsageStatisticsController.php"
+	},
+	"main_class": "UsageStatisticsController",
+	"embed": false,
+	"version": "0.1"
+}
