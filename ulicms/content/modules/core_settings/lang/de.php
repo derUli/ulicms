@@ -28,3 +28,5 @@ add_translation("no_auto_cron_help", "Aktivieren Sie diese Option, wenn Sie eine
 add_translation("language_shortcode", "Kürzel");
 
 add_translation("reject_requests_from_bots", "Anfragen von Bots blockieren");
+
+add_translation("performance", "Performance");

@@ -156,7 +156,7 @@ if (is_logged_in()) {
 			<div class="row pull-right">
 					<div class="col-xs-6">
 						<img src="gfx/clear-cache.png" id="menu-clear-cache"
-							data-url="<?php echo ModuleHelper::buildMethodCallUrl("CacheSettingsController", "clearCache");?>"
+							data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1");?>"
 							alt="<?php translate("clear_cache");?>"> <img
 							src="gfx/loading2.gif" id="menu-clear-cache-loading"
 							style="display: none" alt="<?php translate("loading");?>">

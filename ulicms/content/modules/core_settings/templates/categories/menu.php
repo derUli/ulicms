@@ -44,11 +44,11 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     ?>
 <?php
     
-    if ($permissionChecker->hasPermission("cache")) {
+    if ($permissionChecker->hasPermission("performance_settings")) {
         ?>
 	<a
-		href="<?php echo ModuleHelper::buildMethodCallUrl("CacheSettingsController", "clearCache");?>"><?php
-        translate("clear_cache");
+		href="<?php echo ModuleHelper::buildActionURL("performance_settings");?>"><?php
+        translate("performance");
         ?></a> <br /> <br />
 	<?php
     }
