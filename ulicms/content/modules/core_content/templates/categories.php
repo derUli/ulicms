@@ -152,11 +152,7 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
 <p>
 	<button type="submit" name="create" class="btn btn-primary"><?php translate("create");?></button>
 </p>
-
-
-</form>
-
-<?php
+<?php echo ModuleHelper::endForm();?><?php
         } else {
             noPerms();
         }

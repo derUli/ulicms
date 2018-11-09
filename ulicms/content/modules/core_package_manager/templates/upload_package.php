@@ -4,7 +4,6 @@ if (! $permissionChecker->hasPermission("install_packages")) {
     noPerms();
 } else {
     ?>
-
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("install_method");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>

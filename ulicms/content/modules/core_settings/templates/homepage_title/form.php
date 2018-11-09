@@ -23,7 +23,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         "id" => "homepage_title_settings"
     ));
     ?>
-<table border="0">
+<table>
 	<tr>
 		<td style="min-width: 100px;"><strong><?php translate("language");?>
 			</strong></td>
@@ -38,7 +38,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 		<td><?php
         echo $lang;
         ?></td>
-		<td><input name="homepage_title_<?php
+		<td><input
+			name="homepage_title_<?php
         echo $lang;
         ?>"
 			value="<?php
@@ -55,7 +56,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 		</td>
 	</tr>
 </table>
-</form>
+<?php echo ModuleHelper::endForm();?>
 <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/homepage_title.js"));
     combinedScriptHtml();

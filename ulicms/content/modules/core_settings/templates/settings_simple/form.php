@@ -198,7 +198,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 	</tr>
 </table>
 <input type="hidden" name="save_settings" value="save_settings">
-</form>
+<?php echo ModuleHelper::endForm();?>
 <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/settings_simple.js"));
     combinedScriptHtml();

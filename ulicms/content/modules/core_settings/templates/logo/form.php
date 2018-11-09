@@ -17,8 +17,7 @@ if ($permissionChecker->hasPermission("logo")) {
     ?>
 		<input type="hidden" name="sClass" value="LogoUploadController" /> <input
 		type="hidden" name="sMethod" value="upload" />
-
-	<table border="0" height="250">
+	<table style="height:250px">
 		<tr>
 			<td><strong><?php translate("your_logo");?>
 			</strong></td>

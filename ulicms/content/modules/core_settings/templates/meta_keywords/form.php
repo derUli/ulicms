@@ -22,7 +22,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         "id" => "meta_keywords_settings"
     ));
     ?>
-<table border="0">
+<table>
 	<tr>
 		<td style="min-width: 100px;"><strong>
 <?php translate("language");?>
@@ -60,7 +60,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 		</td>
 	</tr>
 </table>
-</form>
+<?php echo ModuleHelper::endForm();?>
 
 <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/meta_keywords.js"));

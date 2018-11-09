@@ -57,8 +57,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 				class="btn btn-primary"><?php translate("save_changes");?></button></td>
 	</tr>
 </table>
-</form>
-
+<?php echo ModuleHelper::endForm();?>
 <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/meta_description.js"));
     combinedScriptHtml();

@@ -31,7 +31,7 @@ if ($permissionChecker->hasPermission("favicon")) {
     
     csrf_token_html();
     ?>
-	<table border=0 height="250">
+	<table style="height: 250px">
 		<tr>
 			<td><strong><?php
     
@@ -43,7 +43,7 @@ if ($permissionChecker->hasPermission("favicon")) {
     $favicon_path = ULICMS_DATA_STORAGE_ROOT . "/content/images/favicon.ico";
     $favicon_url = defined("ULICMS_DATA_STORAGE_URL") ? ULICMS_DATA_STORAGE_URL . "/content/images/favicon.ico" : "../content/images/favicon.ico";
     if (is_file($favicon_path)) {
-        $favicon_url.="?time=" . File::getLastChanged($favicon_path); 
+        $favicon_url .= "?time=" . File::getLastChanged($favicon_path);
         echo '<img class="website_favicon" src="' . $favicon_url . '" alt="' . Settings::get("homepage_title") . '"/>';
     }
     ?>

@@ -17,7 +17,8 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         if ($row->getType() == "gif") {
             ?>
 <p>
-	<a href="<?php
+	<a
+		href="<?php
             
             Template::escape($row->link_url);
             ?>"
@@ -33,7 +34,8 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 		alt="<?php
             
             Template::escape($row->name);
-            ?>" border=0> </a>
+            ?>"
+		border=0> </a>
 </p>
 
 <?php
@@ -71,8 +73,8 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         ?></strong><br /> <input type="text" name="image_url"
 		value="<?php
         Template::escape($row->image_url);
-        ?>"> <br /> <strong><?php translate("link_url");?></strong><br /> <input
-		type="text" name="link_url"
+        ?>"> <br /> <strong><?php translate("link_url");?></strong><br />
+	<input type="text" name="link_url"
 		value="<?php
         Template::escape($row->link_url);
         ?>">

@@ -1,10 +1,10 @@
 <?php
-html5_doctype ();
-og_html_prefix ();
-$motto = get_motto ();
-$data = get_custom_data ();
-if (isset ( $data ["motto"] )) {
-	$motto = $data ["motto"];
+html5_doctype();
+og_html_prefix();
+$motto = get_motto();
+$data = get_custom_data();
+if (isset($data["motto"])) {
+    $motto = $data["motto"];
 }
 ?>
 <head>
@@ -13,9 +13,9 @@ if (isset ( $data ["motto"] )) {
 <link rel="stylesheet"
 	href="<?php echo getModulePath("bootstrap");?>css/bootstrap.min.css">
   <?php
-		base_metas ();
-		og_tags ();
-		?>
+base_metas();
+og_tags();
+?>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -26,18 +26,18 @@ if (isset ( $data ["motto"] )) {
 .slicknav_btn, .slicknav_nav, nav .active, nav .sub_menu li:hover, nav .menu_active_link
 	{
 	background: <?php
-	
-echo getconfig ( "header-background-color" );
-	?>
+
+echo getconfig("header-background-color");
+?>
 	!
 	important;
 }
 
 h1, h2, h3, h4, h5, h6 {
 	color: <?php
-	
-echo getconfig ( "header-background-color" );
-	?>;
+
+echo getconfig("header-background-color");
+?>;
 }
 </style>
 </head>
@@ -55,10 +55,10 @@ echo getconfig ( "header-background-color" );
 <?php if(is_frontpage()){?>
 		<div class="jumbotron">
 		<?php
-	if (getconfig ( "logo_disabled" ) == "no") {
-		logo ();
-	}
-	?>
+    if (getconfig("logo_disabled") == "no") {
+        logo();
+    }
+    ?>
 			<p class="lead"><?php echo Settings::get("motd");?></p>
 			<p>
 				<a class="btn btn-lg btn-success" href="admin/" role="button"><?php translate("login");?></a>

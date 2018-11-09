@@ -58,8 +58,6 @@ if ($permissionChecker->hasPermission("motd")) {
 
 	<?php echo ModuleHelper::endForm();?>
 </div>
-
-
 <?php
 } else {
     noPerms();

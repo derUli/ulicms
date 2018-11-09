@@ -23,7 +23,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
         "id" => "motto_settings"
     ));
     ?>
-<table border=0>
+<table>
 	<tr>
 		<td style="min-width: 100px;"><strong><?php
     
@@ -64,8 +64,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 		</td>
 	</tr>
 </table>
-</form>
-
+<?php echo ModuleHelper::endForm();?>
 <script type="text/javascript">
 $("#motto_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");

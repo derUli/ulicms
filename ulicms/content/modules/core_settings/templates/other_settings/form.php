@@ -320,11 +320,8 @@ if (! $permissionChecker->hasPermission("other")) {
     
     echo real_htmlspecialchars($smtp_password);
     ?>">
-
 				</div>
-
 			</div>
-
 		</div>
 	</div>
 
@@ -376,7 +373,7 @@ if($('#email_mode').val() == "phpmailer"){
 </div>
 
 <button type="submit" name="submit" class="btn btn-primary voffset3"><?php translate("save_changes");?></button>
-</form>
+<?php echo ModuleHelper::endForm();?>
 <script type="text/javascript">
 $("#other_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");

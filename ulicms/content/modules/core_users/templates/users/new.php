@@ -54,10 +54,8 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
 		<?php
     }
     ?>
-	</select> <br /> <br /> 
-	
-	<strong><?php translate("secondary_groups");?></strong> <br /> <select
-		name="secondary_groups[]" multiple>
+	</select> <br /> <br /> <strong><?php translate("secondary_groups");?></strong>
+	<br /> <select name="secondary_groups[]" multiple>
 		
 		<?php
     
@@ -72,8 +70,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
 		<?php
     }
     ?>
-	</select> <br /> <br /> 
-	<input type="checkbox" value="1"
+	</select> <br /> <br /> <input type="checkbox" value="1"
 		name="require_password_change" id="require_password_change"> <label
 		for="require_password_change"><?php translate ( "REQUIRE_PASSWORD_CHANGE_ON_NEXT_LOGIN" );?> </label>
 	<br /> <br /> <input type="checkbox" id="send_mail" name="send_mail"

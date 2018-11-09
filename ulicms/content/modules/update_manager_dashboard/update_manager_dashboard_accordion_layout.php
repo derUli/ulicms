@@ -1,7 +1,7 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "install_packages" )) {
-	?>
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("install_packages")) {
+    ?>
 <div id="update-manager-dashboard-container" style="display: none">
 	<h2 class="accordion-header"><?php translate("update_manager");?></h2>
 	<div class="accordion-content">

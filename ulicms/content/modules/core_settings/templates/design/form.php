@@ -207,7 +207,7 @@ div#google-fonts {
     }
     ?>
 			</select>
-			<div class="voffset3 alert alert-warning"><?php translate("google_fonts_privacy_warning");?></div>
+				<div class="voffset3 alert alert-warning"><?php translate("google_fonts_privacy_warning");?></div>
 			</div></td>
 	</tr>
 	<tr>

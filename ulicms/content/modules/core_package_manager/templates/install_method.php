@@ -23,7 +23,6 @@ if (! $permissionChecker->hasPermission("install_packages")) {
 	<a href="http://extend.ulicms.de" class="btn btn-default"
 		target="_blank">UliCMS eXtend</a>
 </p>
-</p>
 
 <?php
 }

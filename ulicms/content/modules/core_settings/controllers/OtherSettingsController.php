@@ -4,7 +4,7 @@ class OtherSettingsController extends Controller
 {
 
     public function savePost()
-    {       
+    {
         if (isset($_POST["email_mode"]))
             setconfig("email_mode", db_escape($_POST["email_mode"]));
         
@@ -14,7 +14,7 @@ class OtherSettingsController extends Controller
             $domain_to_language = trim($domain_to_language);
             setconfig("domain_to_language", db_escape($domain_to_language));
         }
-                
+        
         if (isset($_POST["smtp_auth"])) {
             setconfig("smtp_auth", "auth");
         } else {

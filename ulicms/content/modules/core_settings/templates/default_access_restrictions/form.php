@@ -1,11 +1,11 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "default_access_restrictions_edit" )) {
-	$only_admins_can_edit = intval ( Settings::get ( "only_admins_can_edit" ) );
-	$only_group_can_edit = intval ( Settings::get ( "only_group_can_edit" ) );
-	$only_owner_can_edit = intval ( Settings::get ( "only_owner_can_edit" ) );
-	$only_others_can_edit = intval ( Settings::get ( "only_others_can_edit" ) );
-	?>
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
+    $only_admins_can_edit = intval(Settings::get("only_admins_can_edit"));
+    $only_group_can_edit = intval(Settings::get("only_group_can_edit"));
+    $only_owner_can_edit = intval(Settings::get("only_owner_can_edit"));
+    $only_others_can_edit = intval(Settings::get("only_others_can_edit"));
+    ?>
 
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("other_settings");?>"
@@ -32,11 +32,11 @@ if ($permissionChecker->hasPermission ( "default_access_restrictions_edit" )) {
 	id="only_others_can_edit" value="1"
 	<?php if($only_others_can_edit) echo "checked";?>>
 <label for="only_others_can_edit"><?php translate("others");?></label>
-</p>
+
 <button type="submit" name="submit_form" class="btn btn-primary"><?php translate("save_changes");?></button>
 <?php
-	if (Request::getVar ( "submit_form" )) {
-		?>
+    if (Request::getVar("submit_form")) {
+        ?>
 <p style="color: green" class="voffset3">
 	<?php translate("changes_was_saved"); ?>
 	</p>
@@ -45,5 +45,5 @@ if ($permissionChecker->hasPermission ( "default_access_restrictions_edit" )) {
 
 <?php
 } else {
-	noPerms ();
+    noPerms();
 }
