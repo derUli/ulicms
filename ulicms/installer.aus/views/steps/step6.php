@@ -5,10 +5,10 @@
 			<label><input type="checkbox" value="yes" name="install_demodata"
 				id="install_demodata"
 				<?php
-				if (! empty ( $_SESSION ["install_demodata"] )) {
-					echo "checked";
-				}
-				?>><?php echo TRANSLATION_INSTALL_DEMO_DATA;?></label>
+    if (! empty($_SESSION["install_demodata"])) {
+        echo "checked";
+    }
+    ?>><?php echo TRANSLATION_INSTALL_DEMO_DATA;?></label>
 		</div>
 	</div>
 	<button type="submit" class="btn btn-default"><?php echo TRANSLATION_APPLY;?></button>

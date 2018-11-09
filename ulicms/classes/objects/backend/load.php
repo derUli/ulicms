@@ -1,9 +1,9 @@
 <?php
-$classes = array (
-		"AdminMenu",
-		"MenuEntry" 
+$classes = array(
+    "AdminMenu",
+    "MenuEntry"
 );
-foreach ( $classes as $class ) {
-	require dirname ( __FILE__ ) . "/$class.php";
+foreach ($classes as $class) {
+    require dirname(__FILE__) . "/$class.php";
 }
 

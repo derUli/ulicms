@@ -1,11 +1,11 @@
 <?php
-$classes = array (
-		"Flags",
-		"SettingsCache",
-		"Vars",
-		"ViewBag" 
+$classes = array(
+    "Flags",
+    "SettingsCache",
+    "Vars",
+    "ViewBag"
 );
-foreach ( $classes as $class ) {
-    require dirname ( __FILE__ ) . "/$class.php";
+foreach ($classes as $class) {
+    require dirname(__FILE__) . "/$class.php";
 }
 

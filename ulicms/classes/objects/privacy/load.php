@@ -1,8 +1,8 @@
 <?php
-$classes = array (
+$classes = array(
     "PrivacyCheckbox"
 );
-foreach ( $classes as $class ) {
-    require dirname ( __FILE__ ) . "/$class.php";
+foreach ($classes as $class) {
+    require dirname(__FILE__) . "/$class.php";
 }
 

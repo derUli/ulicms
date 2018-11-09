@@ -1,6 +1,7 @@
 <form action="index.php" method="get">
 	<input type="hidden" name="action" value="module_settings"> <input
-		type="hidden" name="module" value="fortune2"><button type="submit" class="btn btn-default">Reset</button>
+		type="hidden" name="module" value="fortune2">
+	<button type="submit" class="btn btn-default">Reset</button>
 </form>
 <br />
 
@@ -8,7 +9,8 @@
 	<input type="hidden" name="action" value="module_settings"> <input
 		type="hidden" name="module" value="fortune2"> <input type="hidden"
 		name="sClass" value="Fortune"> <input type="hidden" name="sMethod"
-		value="doSomething"> <button type="submit" class="btn btn-default">GET</button>
+		value="doSomething">
+	<button type="submit" class="btn btn-default">GET</button>
 </form>
 <br />
 <form

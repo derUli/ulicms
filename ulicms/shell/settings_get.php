@@ -31,5 +31,5 @@ if (count($argv) != 1) {
     } else {
         echo "[NULL]";
     }
-	echo "\n";
+    echo "\n";
 }

@@ -1,5 +1,4 @@
 <?php
-
 use UliCMS\Security\PermissionChecker;
 
 class ACL
@@ -30,8 +29,8 @@ class ACL
 
     public function hasPermission($name)
     {
-       $checker = new PermissionChecker(get_user_id());
-       return $checker->hasPermission($name);
+        $checker = new PermissionChecker(get_user_id());
+        return $checker->hasPermission($name);
     }
 
     public function createGroup($name, $permissions = null)

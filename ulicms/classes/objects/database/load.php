@@ -1,9 +1,9 @@
 <?php
-$classes = array (
-		"Database",
-		"DBMigrator" 
+$classes = array(
+    "Database",
+    "DBMigrator"
 );
-foreach ( $classes as $class ) {
-    require dirname ( __FILE__ ) . "/$class.php";
+foreach ($classes as $class) {
+    require dirname(__FILE__) . "/$class.php";
 }
 

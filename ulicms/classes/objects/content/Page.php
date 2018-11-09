@@ -212,7 +212,7 @@ class Page extends Content
         } else {
             $sql .= intval($this->deleted_at) . ",";
         }
-                
+        
         if ($this->theme === null) {
             $sql .= " NULL ,";
         } else {

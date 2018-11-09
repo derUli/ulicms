@@ -1,4 +1,5 @@
 <?php
+
 // Wrapper for KLogger
 class Logger
 {
@@ -17,11 +18,9 @@ class Logger
             @mkdir($path, 0777, true);
         }
         if (is_dir($this->path)) {
-            $this->logger = new Katzgrau\KLogger\Logger($this->path, Psr\Log\LogLevel::DEBUG,
-			array(
-				"extension" => "log"
-			)
-			);
+            $this->logger = new Katzgrau\KLogger\Logger($this->path, Psr\Log\LogLevel::DEBUG, array(
+                "extension" => "log"
+            ));
             $cfg = new CMSConfig();
             // Option fix_log_permissions
             if (is_true($cfg->fix_log_permissions)) {

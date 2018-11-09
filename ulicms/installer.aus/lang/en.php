@@ -1,7 +1,7 @@
 <?php
 define("TRANSLATION_INSTALLATION", "Installation");
 define("TRANSLATION_TITLE_STEP_1", "Select Language");
-define("TRANSLATION_TITLE_STEP_2", "Accept License Conditions" );
+define("TRANSLATION_TITLE_STEP_2", "Accept License Conditions");
 define("TRANSLATION_TITLE_STEP_3", "Change File Permissions");
 define("TRANSLATION_TITLE_STEP_4", "Connect to Database");
 define("TRANSLATION_TITLE_STEP_5", "Create Administrator Account");

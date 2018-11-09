@@ -9,9 +9,9 @@
 <p>
 	<img
 		src="media/chmod_<?php
-		
-		echo htmlspecialchars ( InstallerController::getLanguage () );
-		?>.png"
+
+echo htmlspecialchars(InstallerController::getLanguage());
+?>.png"
 		alt="<?php echo TRANSLATION_PERMISSIONS2;?>"
 		title="<?php echo TRANSLATION_PERMISSIONS2;?>" border="1" />
 </p>
