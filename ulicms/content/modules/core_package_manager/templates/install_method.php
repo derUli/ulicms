@@ -1,9 +1,9 @@
 <?php
-$permissionChecker = new ACL ();
-if (! $permissionChecker->hasPermission ( "install_packages" )) {
-	noPerms ();
+$permissionChecker = new ACL();
+if (! $permissionChecker->hasPermission("install_packages")) {
+    noPerms();
 } else {
-	?>
+    ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("modules");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>

@@ -347,17 +347,16 @@ class PageController extends Controller
         $content = $unescaped_content;
         VCS::createRevision($content_id, $content, $user_id);
         
-         $type = DefaultContentTypes::get($type);
-            foreach ($type->customFields as $field) {
-                $field->name = "{$_POST['type']}_{$field->name}";
-                $value = null;
-                if (isset($_POST[$field->name])) {
-                    $value = $_POST[$field->name];
-                }
-                
-                CustomFields::set($field->name, $value, $content_id, false);
+        $type = DefaultContentTypes::get($type);
+        foreach ($type->customFields as $field) {
+            $field->name = "{$_POST['type']}_{$field->name}";
+            $value = null;
+            if (isset($_POST[$field->name])) {
+                $value = $_POST[$field->name];
             }
             
+            CustomFields::set($field->name, $value, $content_id, false);
+        }
         
         do_event("after_edit_page");
         
