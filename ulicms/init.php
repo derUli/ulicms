@@ -460,14 +460,13 @@ Vars::set("disabledModules", $moduleManager->getDisabledModuleNames());
 // don't load module stuff on kcfinder page (media)
 // since the "Path" class has a naming conflict with the same named
 // class of KCFinder
-    ModelRegistry::loadModuleModels();
-    TypeMapper::loadMapping();
-    HelperRegistry::loadModuleHelpers();
-    ControllerRegistry::loadModuleControllers();
-    do_event("before_init");
-    do_event("init");
-    do_event("after_init");
-
+ModelRegistry::loadModuleModels();
+TypeMapper::loadMapping();
+HelperRegistry::loadModuleHelpers();
+ControllerRegistry::loadModuleControllers();
+do_event("before_init");
+do_event("init");
+do_event("after_init");
 
 $version = new UliCMSVersion();
 if (! defined("UPDATE_CHECK_URL")) {

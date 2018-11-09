@@ -3,8 +3,6 @@ $permissionChecker = new ACL();
 if (! $permissionChecker->hasPermission("groups")) {
     noPerms();
 } else {
-    include_once "../lib/string_functions.php";
-    
     $logger = LoggerRegistry::get("audit_log");
     
     $modified = false;
