@@ -4,15 +4,10 @@ chdir(dirname(__FILE__));
 
 require_once "../init.php";
 use zz\Html\HTMLMinify;
+use UliCMS\Security\PermissionChecker;
 
 @session_start();
-$permissionChecker = new acl();
-
-if ($permissionChecker->hasPermission($_REQUEST["type"]) and ($_REQUEST["type"] == "images" or $_REQUEST["type"] == "files" or $_REQUEST["type"] == "flash")) {
-    $_CONFIG["disabled"] = false;
-    $_SESSION['KCFINDER'] = array();
-    $_SESSION['KCFINDER']['disabled'] = false;
-}
+$permissionChecker = new PermissionChecker();
 
 // $_COOKIE[session_name()] = session_id();
 

@@ -3,7 +3,6 @@ function uninstallModule(url, name) {
 		$.ajax({
 			url : url,
 			success : function() {
-
 				$("li#dataset-module-" + name).slideUp();
 
 			}

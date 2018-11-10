@@ -24,7 +24,6 @@ function showAndHideFieldsByTypeWithoutEffects() {
 		} else {
 			$(el).hide();
 		}
-
 	});
 
 	if ($("#type_node").is(":checked") || $("#type_snippet").is(":checked")) {
@@ -36,7 +35,6 @@ function showAndHideFieldsByTypeWithoutEffects() {
 	if ($("select[name='menu']").val() == "not_in_menu") {
 		$("#parent-div").hide();
 	} else {
-
 		$("#parent-div").show();
 	}
 }
@@ -68,7 +66,6 @@ function showAndHideFieldsByType() {
 		} else {
 			$(el).slideUp();
 		}
-
 	});
 
 	if ($("#type_node").is(":checked") || $("#type_snippet").is(":checked")) {
@@ -302,20 +299,20 @@ $(function() {
 	$("#page-list form.page-delete-form").ajaxForm(ajaxOptionsDelete);
 	$("#page-list form.undelete-form").ajaxForm(ajaxOptionsUndelete);
 
-	$("#show_filters").change(function(event){
+	$("#show_filters").change(function(event) {
 		var url = $(event.target).data("url");
 		$.ajax({
 			method : "get",
-			url: url,
-			success: function(){
+			url : url,
+			success : function() {
 				$(".page-list-filters").slideToggle();
 			},
-			error: function(xhr, status, error) {
+			error : function(xhr, status, error) {
 				alert(xhr.responseText);
 			}
 		});
-		
-});	
+
+	});
 
 });
 

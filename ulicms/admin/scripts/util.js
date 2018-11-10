@@ -41,22 +41,23 @@ function bindTogglePassword(input, checkbox) {
 	});
 }
 
-$(function(){
-   $(".select-all").change(selectAll);
-   $(".checkbox").change(checkboxChecked);
+$(function() {
+	$(".select-all").change(selectAll);
+	$(".checkbox").change(checkboxChecked);
 });
 
-function checkboxChecked(event){
+function checkboxChecked(event) {
 	var item = $(event.target).data("select-all-checkbox");
 	var group = $(event.target).data("checkbox-group");
-	if(!item){
+	if (!item) {
 		return;
 	}
-	var allSelected = $('.checkbox:checked').length == $("input[type=checkbox][data-checkbox-group='" + group +"']").length;
-	$(item).prop("checked", allSelected);    
+	var allSelected = $('.checkbox:checked').length == $("input[type=checkbox][data-checkbox-group='"
+			+ group + "']").length;
+	$(item).prop("checked", allSelected);
 }
 
-function selectAll(event){
+function selectAll(event) {
 	var selectAllCheckbox = $(event.target);
 	var target = $(selectAllCheckbox).data("target");
 	console.log(target);

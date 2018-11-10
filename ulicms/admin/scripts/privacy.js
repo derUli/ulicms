@@ -17,5 +17,4 @@ $(function() {
 			$("#privacy_policy_checkbox_text_container").slideUp();
 		}
 	});
-
 });
