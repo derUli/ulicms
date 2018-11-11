@@ -212,4 +212,30 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         
         unset($_POST["my_homepage_url"]);
     }
+
+    public function testNoSpamWithAllOptions()
+    {
+        $configuration = new SpamFilterConfiguration();
+        $configuration->setSpamFilterEnabled(true);
+        $configuration->setBadwords("shit", "fuck", "crap");
+        $configuration->setBlockedCountries("vn", "cn", "ir");
+        $configuration->setCheckMxOfMailAddress(true);
+        $configuration->setDisallowChineseChars(true);
+        $configuration->setDisallowCyrillicChars(true);
+        $configuration->setRejectRequestsFromBots(true);
+        
+        $comment = new Comment();
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setDate(time());
+        
+        $checker = new CommentSpamChecker($comment, $configuration);
+        
+        $this->assertFalse($checker->doSpamCheck());
+        
+        $this->assertCount(0, $checker->getErrors());
+    }
 }
