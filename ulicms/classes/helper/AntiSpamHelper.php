@@ -55,16 +55,15 @@ class AntiSpamHelper
         return (bool) preg_match('/\p{Cyrillic}+/u', $str);
     }
 
-    public static function containsBadwords($str)
+    public static function containsBadwords($str, $words_blacklist = null)
     {
-        $words_blacklist = Settings::get("spamfilter_words_blacklist");
-        $str = strtolower($str);
-        
-        if ($words_blacklist) {
-            $words_blacklist = StringHelper::linesFromString($words_blacklist, false, true, true);
-        } else {
-            return null;
+        if (is_null($words_blacklist)) {
+            $words_blacklist = Settings::get("spamfilter_words_blacklist");
         }
+        if (is_string($words_blacklist)) {
+            $words_blacklist = StringHelper::linesFromString($words_blacklist, false, true, true);
+        }
+        $str = strtolower($str);
         
         for ($i = 0; $i < count($words_blacklist); $i ++) {
             $word = strtolower($words_blacklist[$i]);
