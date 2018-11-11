@@ -34,7 +34,7 @@ class CommentSpamChecker implements ISpamChecker
     {
         $this->clearErrors();
         if (! $this->spamFilterSettings->getSpamFilterEnabled()) {
-            return;
+            return self::isSpam();
         }
         
         $badwords = $this->spamFilterSettings->getBadwords();
@@ -106,6 +106,17 @@ class CommentSpamChecker implements ISpamChecker
                 }
             }
         }
+        
+        $countries = $this->spamFilterSettings->getBlockedCountries();
+        $ip = $this->comment->getIp();
+        
+        if (! is_null($ip) && AntiSpamHelper::isCountryBlocked($ip, $countries)) {
+            $hostname = @gethostbyaddr($ip);
+            $this->errors[] = new SpamDetectionResult(get_translation("ip_address"), get_translation("your_country_is_blocked", array(
+                "%hostname%" => $hostname
+            )));
+        }
+        
         return $this->isSpam();
     }
 

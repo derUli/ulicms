@@ -1,11 +1,10 @@
 <?php
 namespace UliCMS\Data\Content;
 
-use CommentStatus;
-use Model;
-use InvalidArgumentException;
-use UliCMS\Exceptions\NotImplementedException;
 use AntiSpamHelper;
+use CommentStatus;
+use InvalidArgumentException;
+use Model;
 
 class Comment extends Model
 {
@@ -132,9 +131,9 @@ class Comment extends Model
         return $this->ip;
     }
 
-    public function setIp()
+    public function setIp($val)
     {
-        $this->ip = ! is_null($ip) ? strval($ip) : null;
+        $this->ip = ! is_null($val) ? strval($val) : null;
     }
 
     public function getUserAgent()

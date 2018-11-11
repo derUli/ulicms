@@ -13,6 +13,11 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         include_once ModuleHelper::buildModuleRessourcePath("core_forms", "lang/en.php");
     }
 
+    public function tearDown()
+    {
+        unset($_POST["my_homepage_url"]);
+    }
+
     public function testConstructor()
     {
         $configuration = new SpamFilterConfiguration();
@@ -159,5 +164,52 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         
         $this->assertEquals("Cyrillic chars are not allowed!", $error0->message);
         $this->assertEquals("Cyrillic chars are not allowed!", $error1->message);
+    }
+
+    public function testWithBlockedCountries()
+    {
+        $configuration = new SpamFilterConfiguration();
+        
+        $configuration->setBlockedCountries(array(
+            "vn",
+            "cn",
+            "ru"
+        ));
+        
+        $comment = new Comment();
+        $comment->setAuthorName("Гомофобный русский диктатор Путин");
+        $comment->setContent("Yo!Православная Церковь - это Yo!");
+        $comment->setIp("123.30.54.106");
+        
+        $checker = new CommentSpamChecker($comment, $configuration);
+        $this->assertTrue($checker->doSpamCheck());
+        
+        $errors = $checker->getErrors();
+        $this->assertCount(1, $errors);
+        
+        $error = $errors[0];
+        
+        $this->assertEquals('IP Address', $error->field);
+        $this->assertEquals("Access to this function for your country is blocked!\nYour hostname: static.vnpt.vn", $error->message);
+    }
+
+    public function testSpamfilterDisabled()
+    {
+        $configuration = new SpamFilterConfiguration();
+        $configuration->setSpamFilterEnabled(false);
+        
+        $comment = new Comment();
+        $comment->setAuthorName("Motherfucker");
+        $comment->setContent("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
+        
+        $_POST["my_homepage_url"] = "http://www.google.de";
+        
+        $checker = new CommentSpamChecker($comment, $configuration);
+        $this->assertFalse($checker->doSpamCheck());
+        
+        $errors = $checker->getErrors();
+        $this->assertCount(0, $errors);
+        
+        unset($_POST["my_homepage_url"]);
     }
 }

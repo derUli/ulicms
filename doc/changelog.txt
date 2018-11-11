@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.4.2 =====
+===== Neues in UliCMS 2019.1 =====
 
 Neue Features:
 * Funktion "MX DNS-Eintrag von E-Mail Adressen überprüfen" zum Spamfilter hinzugefügt

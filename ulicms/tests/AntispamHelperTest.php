@@ -51,7 +51,7 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
     // TODO: Implement test for isCountryBlocked
     public function testIsCountryBlocked()
     {
-        Settings::set("country_blacklist", "vn,jp, at,tr");
+        Settings::set("country_blacklist", "vn,jp,at,tr");
         
         // Germany
         $_SERVER["REMOTE_ADDR"] = "178.254.29.67";
