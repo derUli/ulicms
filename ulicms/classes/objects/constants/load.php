@@ -1,7 +1,8 @@
 <?php
 $classes = array(
     "AuditLog",
-    "EmailModes"
+    "EmailModes",
+    "CommentStatus"
 );
 foreach ($classes as $class) {
     require dirname(__FILE__) . "/$class.php";
