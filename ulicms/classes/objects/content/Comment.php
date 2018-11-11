@@ -142,8 +142,8 @@ class Comment extends Model
         return $this->useragent;
     }
 
-    public function setUserAgent()
+    public function setUserAgent($val)
     {
-        $this->useragent = ! is_null($ip) ? strval($ip) : null;
+        $this->useragent = ! is_null($val) ? strval($val) : null;
     }
 }

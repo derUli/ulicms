@@ -60,8 +60,8 @@ class CommentSpamChecker implements ISpamChecker
         $rejectRequestsFromBots = $this->spamFilterSettings->getRejectRequestsFromBots();
         if (StringHelper::isNotNullOrWhitespace($useragent) && $rejectRequestsFromBots) {
             if (AntiSpamHelper::checkForBot($useragent)) {
-                $this->errors[] = new SpamDetectionResult(get_translation($field), get_translation("comment_useragent_is_a_bot", array(
-                    "%hostname%" => $useragent
+                $this->errors[] = new SpamDetectionResult(get_translation("useragent"), get_translation("bots_are_not_allowed", array(
+                    "%useragent%" => $useragent
                 )));
             }
         }
@@ -74,6 +74,30 @@ class CommentSpamChecker implements ISpamChecker
                 $this->errors[] = new SpamDetectionResult(get_translation("author_email"), get_translation("mail_address_has_invalid_mx_entry", array(
                     "%hostname%" => $hostname
                 )));
+            }
+        }
+        
+        if ($this->spamFilterSettings->getDisallowChineseChars()) {
+            foreach ($fields as $field => $value) {
+                if ($value != null) {
+                    if (AntiSpamHelper::isChinese($value)) {
+                        $this->errors[] = new SpamDetectionResult(get_translation($field), get_translation("chinese_chars_not_allowed", array(
+                            "%field%" => get_translation($field)
+                        )));
+                    }
+                }
+            }
+        }
+        
+        if ($this->spamFilterSettings->getDisallowCyrillicChars()) {
+            foreach ($fields as $field => $value) {
+                if ($value != null) {
+                    if (AntiSpamHelper::isCyrillic($value)) {
+                        $this->errors[] = new SpamDetectionResult(get_translation($field), get_translation("cyrillic_charts_not_allowed", array(
+                            "%field%" => get_translation($field)
+                        )));
+                    }
+                }
             }
         }
         return $this->isSpam();
