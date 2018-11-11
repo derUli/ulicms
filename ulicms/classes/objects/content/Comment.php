@@ -56,7 +56,7 @@ class Comment extends Model
 
     protected function insert()
     {
-        if ($this->getDate()) {
+        if (! $this->getDate()) {
             $this->date = time();
         }
         Database::pQuery("INSERT INTO `{prefix}comments` 
@@ -93,20 +93,20 @@ VALUES      ( ?,
 
     protected function update()
     {
-        if ($this->getDate()) {
+        if (! $this->getDate()) {
             $this->date = time();
         }
-        Database::pQuery("UPDATE `{prefix}comments`
-             `content_id` = ?,
-             `author_name` = ?,
-             `author_email` = ?,
-             `author_url` = ?,
-             `date` = ?,
-             `content` = ?,
-             `status` = ?,
-             `ip` = ?;
-             `useragent` = ?
-             where id = ?", array(
+        Database::pQuery("UPDATE `{prefix}comments` set
+                         `content_id` = ?,
+                         `author_name` = ?,
+                         `author_email` = ?,
+                         `author_url` = ?,
+                         `date` = FROM_UNIXTIME(?),
+                         `content` = ?,
+                         `status` = ?,
+                         `ip` = ?,
+                         `useragent` = ?
+                          where id = ?", array(
             $this->getContentId(),
             $this->getAuthorName(),
             $this->getAuthorEmail(),
