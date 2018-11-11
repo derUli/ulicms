@@ -43,7 +43,7 @@ class CommentSpamChecker implements ISpamChecker
             "author_name" => $this->comment->getAuthorName(),
             "author_url" => $this->comment->getAuthorUrl(),
             "author_email" => $this->comment->getAuthorEmail(),
-            "comment_text" => $this->comment->getContent()
+            "comment_text" => $this->comment->getText()
         );
         
         // check if Antispam Honeypot is not empty

@@ -116,7 +116,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         $comment->setAuthorUrl("http://john-doe.de");
         $comment->setIp("123.123.123.123");
         $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
-        $comment->setContent("Unit Test 1");
+        $comment->setText("Unit Test 1");
         
         $time = time();
         $comment->setDate($time);
@@ -135,7 +135,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("123.123.123.123", $comment->getIp());
         $this->assertEquals("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36", $comment->getUserAgent());
         $this->assertEquals($time, $comment->getDate());
-        $this->assertEquals("Unit Test 1", $comment->getContent());
+        $this->assertEquals("Unit Test 1", $comment->getText());
         
         $comment->setContentId($second->id);
         $comment->setAuthorName("Max Muster");
@@ -143,7 +143,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         $comment->setAuthorUrl("http://max-muster.de.de");
         $comment->setIp("100.100.100.100");
         $comment->setUserAgent("Mozilla/5.0 (Macintosh; PPC Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0");
-        $comment->setContent("Unit Test 2");
+        $comment->setText("Unit Test 2");
         
         $time = time() + 5;
         
@@ -160,7 +160,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("100.100.100.100", $comment->getIp());
         $this->assertEquals("Mozilla/5.0 (Macintosh; PPC Mac OS X x.y; rv:10.0) Gecko/20100101 Firefox/10.0", $comment->getUserAgent());
         $this->assertEquals($time, $comment->getDate());
-        $this->assertEquals("Unit Test 2", $comment->getContent());
+        $this->assertEquals("Unit Test 2", $comment->getText());
         
         $comment->delete();
         
@@ -170,5 +170,24 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         } catch (FileNotFoundException $e) {
             $this->assertEquals("no comment with id " . intval($id), $e->getMessage());
         }
+    }
+
+    public function testGetContentWithContentId()
+    {
+        $contents = ContentFactory::getAll();
+        $first = $contents[0];
+        
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        
+        $content = $comment->getContent();
+        $this->assertInstanceOf(Content::class, $content);
+        $this->assertEquals($first->id, $content->getId());
+    }
+
+    public function testGetContentWithNull()
+    {
+        $comment = new Comment();
+        $this->assertNull($comment->getContent());
     }
 }

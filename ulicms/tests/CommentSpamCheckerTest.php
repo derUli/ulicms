@@ -32,7 +32,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         
         $comment = new Comment();
         $comment->setAuthorName("Motherfucker");
-        $comment->setContent("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
+        $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
         
         $_POST["my_homepage_url"] = "http://www.google.de";
         
@@ -62,7 +62,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         
         $comment = new Comment();
         $comment->setAuthorName("Motherfucker");
-        $comment->setContent("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
+        $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
         
@@ -86,7 +86,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         
         $comment = new Comment();
         $comment->setAuthorName("Motherfucker");
-        $comment->setContent("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
+        $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
         $comment->setAuthorEmail("shittyspammer@example.org");
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
@@ -105,7 +105,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         
         $comment = new Comment();
         $comment->setAuthorName("Motherfucker");
-        $comment->setContent("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
+        $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
         $comment->setAuthorEmail("shittyspammer@example.org");
         $comment->setUserAgent("libwww-perl/5.805");
         $checker = new CommentSpamChecker($comment, $configuration);
@@ -125,7 +125,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         
         $comment = new Comment();
         $comment->setAuthorName("中國人在科騰 vong China");
-        $comment->setContent("Yo! 中国人在科腾 Yo!");
+        $comment->setText("Yo! 中国人在科腾 Yo!");
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
         
@@ -149,7 +149,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         
         $comment = new Comment();
         $comment->setAuthorName("Гомофобный русский диктатор Путин");
-        $comment->setContent("Yo!Православная Церковь - это Yo!");
+        $comment->setText("Yo!Православная Церковь - это Yo!");
         $checker = new CommentSpamChecker($comment, $configuration);
         $this->assertTrue($checker->doSpamCheck());
         
@@ -178,7 +178,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         
         $comment = new Comment();
         $comment->setAuthorName("Гомофобный русский диктатор Путин");
-        $comment->setContent("Yo!Православная Церковь - это Yo!");
+        $comment->setText("Yo!Православная Церковь - это Yo!");
         $comment->setIp("123.30.54.106");
         
         $checker = new CommentSpamChecker($comment, $configuration);
@@ -200,7 +200,7 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         
         $comment = new Comment();
         $comment->setAuthorName("Motherfucker");
-        $comment->setContent("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
+        $comment->setText("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
         
         $_POST["my_homepage_url"] = "http://www.google.de";
         

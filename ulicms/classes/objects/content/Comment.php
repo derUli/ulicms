@@ -2,6 +2,7 @@
 namespace UliCMS\Data\Content;
 
 use Database;
+use ContentFactory;
 use CommentStatus;
 use InvalidArgumentException;
 use Model;
@@ -22,7 +23,7 @@ class Comment extends Model
 
     private $date;
 
-    private $content;
+    private $text;
 
     private $status = CommentStatus::PENDING;
 
@@ -48,7 +49,7 @@ class Comment extends Model
         $this->setAuthorUrl($data->author_url);
         $this->setAuthorEmail($data->author_email);
         $this->setDate($data->date);
-        $this->setContent($data->content);
+        $this->setText($data->text);
         $this->setStatus($data->status);
         $this->setIp($data->ip);
         $this->setUserAgent($data->useragent);
@@ -65,7 +66,7 @@ class Comment extends Model
              `author_email`, 
              `author_url`, 
              `date`, 
-             `content`, 
+             `text`, 
              `status`, 
              `ip`, 
              `useragent`) 
@@ -83,7 +84,7 @@ VALUES      ( ?,
             $this->getAuthorEmail(),
             $this->getAuthorUrl(),
             $this->getDate(),
-            $this->getContent(),
+            $this->getText(),
             $this->getStatus(),
             $this->getIp(),
             $this->getUseragent()
@@ -102,7 +103,7 @@ VALUES      ( ?,
                          `author_email` = ?,
                          `author_url` = ?,
                          `date` = FROM_UNIXTIME(?),
-                         `content` = ?,
+                         `text` = ?,
                          `status` = ?,
                          `ip` = ?,
                          `useragent` = ?
@@ -112,7 +113,7 @@ VALUES      ( ?,
             $this->getAuthorEmail(),
             $this->getAuthorUrl(),
             $this->getDate(),
-            $this->getContent(),
+            $this->getText(),
             $this->getStatus(),
             $this->getIp(),
             $this->getUseragent(),
@@ -198,14 +199,14 @@ VALUES      ( ?,
         $this->date = intval($val);
     }
 
-    public function getContent()
+    public function getText()
     {
-        return $this->content;
+        return $this->text;
     }
 
-    public function setContent($val)
+    public function setText($val)
     {
-        $this->content = ! is_null($val) ? strval($val) : null;
+        $this->text = ! is_null($val) ? strval($val) : null;
     }
 
     public function getStatus()
@@ -239,5 +240,13 @@ VALUES      ( ?,
     public function setUserAgent($val)
     {
         $this->useragent = ! is_null($val) ? strval($val) : null;
+    }
+
+    public function getContent()
+    {
+        if (! $this->getContentId()) {
+            return null;
+        }
+        return ContentFactory::getByID($this->getContentId());
     }
 }
