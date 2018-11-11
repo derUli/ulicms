@@ -22,6 +22,8 @@ Neue API-Funktionen:
 * AntispamHelper::checkMailDomain($email)
 * remove_suffix($text, $suffix)
 * Database::getClientVersion()
+* ArrayHelper::isSingle($input)
+* ArrayHelper::getSingle($input)
 
 Bugfixes:
 * Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertete die sekundären Gruppen nicht aus.  

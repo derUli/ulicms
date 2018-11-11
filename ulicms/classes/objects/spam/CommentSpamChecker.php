@@ -3,6 +3,7 @@ namespace UliCMS\Security\SpamChecker;
 
 use StringHelper;
 use AntiSpamHelper;
+use Request;
 
 class CommentSpamChecker implements ISpamChecker
 {
@@ -44,6 +45,11 @@ class CommentSpamChecker implements ISpamChecker
             "author_email" => $this->comment->getAuthorEmail(),
             "comment_text" => $this->comment->getContent()
         );
+        
+        // check if Antispam Honeypot is not empty
+        if (Request::hasVar("my_homepage_url")) {
+            $this->errors[] = new SpamDetectionResult(get_translation("honeypot"), get_translation("honeypot_is_not_empty"));
+        }
         
         foreach ($fields as $field => $value) {
             if ($value != null) {

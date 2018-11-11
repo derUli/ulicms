@@ -21,6 +21,30 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(0, $checker->getErrors());
     }
 
+    public function testSpamWithNonEmptyHoneypotField()
+    {
+        $configuration = new SpamFilterConfiguration();
+        
+        $comment = new Comment();
+        $comment->setAuthorName("Motherfucker");
+        $comment->setContent("hey, you motherfucker! You are a shit cock! You need cheap viagra!");
+        
+        $_POST["my_homepage_url"] = "http://www.google.de";
+        
+        $checker = new CommentSpamChecker($comment, $configuration);
+        $this->assertTrue($checker->doSpamCheck());
+        
+        $errors = $checker->getErrors();
+        $this->assertCount(1, $errors);
+        
+        $error = $errors[0];
+        
+        $this->assertEquals('Honeypot', $error->field);
+        $this->assertEquals('Honeypot is not empty!', $error->message);
+        
+        unset($_POST["my_homepage_url"]);
+    }
+
     public function testSpamWithBadwords()
     {
         $configuration = new SpamFilterConfiguration();
