@@ -73,7 +73,7 @@ class Comment extends Model
 
     public function getAuthorEmail()
     {
-        return $this->author_name;
+        return $this->author_email;
     }
 
     public function setAuthorEmail($val)

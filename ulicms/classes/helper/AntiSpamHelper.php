@@ -63,8 +63,6 @@ class AntiSpamHelper
         if (is_string($words_blacklist)) {
             $words_blacklist = StringHelper::linesFromString($words_blacklist, false, true, true);
         }
-        $str = strtolower($str);
-        
         for ($i = 0; $i < count($words_blacklist); $i ++) {
             $word = strtolower($words_blacklist[$i]);
             if (strpos(strtolower($str), $word) !== false) {

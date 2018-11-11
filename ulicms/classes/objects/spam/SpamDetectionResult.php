@@ -1,6 +1,7 @@
 <?php
 
 namespace UliCMS\Security\SpamChecker;
+
 class SpamDetectionResult
 {
 

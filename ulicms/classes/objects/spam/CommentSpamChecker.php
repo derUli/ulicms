@@ -1,9 +1,8 @@
 <?php
 namespace UliCMS\Security\SpamChecker;
 
-use UliCMS\Exceptions\NotImplementedException;
+use StringHelper;
 use AntiSpamHelper;
-use UliCMS\Security\SpamChecker\SpamDetectionResult;
 
 class CommentSpamChecker implements ISpamChecker
 {
@@ -43,17 +42,41 @@ class CommentSpamChecker implements ISpamChecker
             "author_name" => $this->comment->getAuthorName(),
             "author_url" => $this->comment->getAuthorUrl(),
             "author_email" => $this->comment->getAuthorEmail(),
-            "content" => $this->comment->getContent()
+            "comment_text" => $this->comment->getContent()
         );
         
-        foreach ($fields as $field->$value) {
-            $badword = AntispamHelper::containsBadwords($value, $badwords);
-            if ($badword != null) {
-                $this->errors[] = new SpamDetectionResult($field, $badword);
+        foreach ($fields as $field => $value) {
+            if ($value != null) {
+                $badword = AntispamHelper::containsBadwords($value, $badwords);
+                if ($badword != null) {
+                    $this->errors[] = new SpamDetectionResult(get_translation($field), get_translation("comment_contains_badword", array(
+                        "%field%" => get_translation($field),
+                        "%word%" => $badword
+                    )));
+                }
+            }
+        }
+        $useragent = $this->comment->getUserAgent();
+        $rejectRequestsFromBots = $this->spamFilterSettings->getRejectRequestsFromBots();
+        if (StringHelper::isNotNullOrWhitespace($useragent) && $rejectRequestsFromBots) {
+            if (AntiSpamHelper::checkForBot($useragent)) {
+                $this->errors[] = new SpamDetectionResult(get_translation($field), get_translation("comment_useragent_is_a_bot", array(
+                    "%hostname%" => $useragent
+                )));
             }
         }
         
-        throw new NotImplementedException();
+        $email = $this->comment->getAuthorEmail();
+        $checkMxOfEmailAddress = $this->spamFilterSettings->getCheckMxOfMailAddress();
+        
+        if (StringHelper::isNotNullOrWhitespace($email) && $checkMxOfEmailAddress) {
+            if (! AntiSpamHelper::checkMailDomain($email)) {
+                $this->errors[] = new SpamDetectionResult(get_translation("author_email"), get_translation("mail_address_has_invalid_mx_entry", array(
+                    "%hostname%" => $hostname
+                )));
+            }
+        }
+        return $this->isSpam();
     }
 
     public function getErrors()
