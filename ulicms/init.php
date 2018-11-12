@@ -5,7 +5,9 @@ define("START_TIME", microtime(true));
 /*
  * Diese Datei initalisiert das System
  */
-$composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
+
+ // load composer packages
+ $composerAutoloadFile = dirname(__FILE__) . "/vendor/autoload.php";
 
 if (is_file($composerAutoloadFile)) {
     include_once $composerAutoloadFile;
@@ -17,6 +19,7 @@ if (! defined("ULICMS_ROOT")) {
     define("ULICMS_ROOT", dirname(__file__));
 }
 
+// TODO: Diese Methode entfernen, da sie anscheinend nicht genutzt wird
 function uimport($class)
 {
     $path = str_replace("\\", "/", ULICMS_ROOT) . "/" . $class . ".php";
