@@ -1,4 +1,11 @@
 <?php
+use UliCMS\Exceptions\AccessDeniedException;
+
+// root directory of UliCMS
+if (! defined("ULICMS_ROOT")) {
+    define("ULICMS_ROOT", dirname(__file__));
+}
+
 // this is kept for compatiblity reasons
 define("DIRECTORY_SEPERATOR", DIRECTORY_SEPARATOR);
 // shortcut for DIRECTORY_SEPARATOR
@@ -6,13 +13,15 @@ define("DIRECTORY_SEPERATOR", DIRECTORY_SEPARATOR);
 // since PHP normalizes all paths
 // So just always use a forward slash
 
+// Shortcut, but should not be used anymore
+// Just use /
 define("DIRSEP", DIRECTORY_SEPARATOR);
 
+// use this constant at the end
+// of the page load procedure to measure site performance
 define("START_TIME", microtime(true));
 
-require_once dirname(__file__) . "/api.php";
-
-use UliCMS\Exceptions\AccessDeniedException;
+include_once dirname(__file__) . "/api.php";
 
 /*
  * Diese Datei initalisiert das System
@@ -26,62 +35,92 @@ if (is_file($composerAutoloadFile)) {
 } else {
     throw new Exception("autoload.php not found. Please run \"./composer install\" to install dependecies.");
 }
-// root directory of UliCMS
-if (! defined("ULICMS_ROOT")) {
-    define("ULICMS_ROOT", dirname(__file__));
-}
 
 $classes_dir = ULICMS_ROOT . "/" . "classes";
 @set_include_path(get_include_path() . PATH_SEPARATOR . $classes_dir);
 
-include ULICMS_ROOT . "/" . "lib/constants.php";
-include dirname(__file__) . "/classes/objects/privacy/load.php";
-include dirname(__file__) . "/lib/users_api.php";
-include dirname(__file__) . "/lib/string_functions.php";
-include dirname(__file__) . "/lib/network.php";
-include dirname(__file__) . "/lib/settings.php";
-include dirname(__file__) . "/classes/objects/constants/load.php";
-include dirname(__file__) . "/classes/objects/storages/load.php";
-include dirname(__file__) . "/classes/objects/modules/load.php";
-include dirname(__file__) . "/classes/objects/backend/load.php";
-include dirname(__file__) . "/classes/objects/settings/load.php";
-include dirname(__file__) . "/classes/objects/web/load.php";
-include dirname(__file__) . "/lib/antispam-features.php";
-include dirname(__file__) . "/classes/objects/content/Categories.php";
-
-// TODO: Alle includes die mit Feldern und Custom Types zu tun haben in eine load.php verschieben.
-include dirname(__file__) . "/classes/objects/content/types/ContentType.php";
-include dirname(__file__) . "/classes/objects/content/types/DefaultContentTypes.php";
-
-include dirname(__file__) . "/classes/objects/content/types/fields/CustomField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/TextField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/MultilineTextField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/EmailField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/MonthField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/DatetimeField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/NumberField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/ColorField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/HtmlField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/SelectField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/CheckboxField.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/FileFile.php";
-include dirname(__file__) . "/classes/objects/content/types/fields/FileImage.php";
-
-include dirname(__file__) . "/classes/objects/pkg/load.php";
-include dirname(__file__) . "/classes/helper/load.php";
-
-include dirname(__file__) . "/classes/exceptions/load.php";
-include dirname(__file__) . "/classes/objects/registry/load.php";
-include dirname(__file__) . "/classes/objects/logging/load.php";
-
-include dirname(__file__) . "/classes/objects/html/load.php";
+// todo reorganize includes
+include_once ULICMS_ROOT . "/" . "lib/constants.php";
+include_once dirname(__file__) . "/classes/objects/privacy/load.php";
+include_once dirname(__file__) . "/lib/users_api.php";
+include_once dirname(__file__) . "/lib/string_functions.php";
+include_once dirname(__file__) . "/lib/network.php";
+include_once dirname(__file__) . "/lib/settings.php";
+include_once dirname(__file__) . "/classes/objects/constants/load.php";
+include_once dirname(__file__) . "/classes/objects/storages/load.php";
+include_once dirname(__file__) . "/classes/objects/modules/load.php";
+include_once dirname(__file__) . "/classes/objects/backend/load.php";
+include_once dirname(__file__) . "/classes/objects/settings/load.php";
+include_once dirname(__file__) . "/classes/objects/web/load.php";
+include_once dirname(__file__) . "/lib/antispam-features.php";
+include_once dirname(__file__) . "/classes/objects/content/Categories.php";
+include_once dirname(__file__) . "/classes/objects/content/types/ContentType.php";
+include_once dirname(__file__) . "/classes/objects/content/types/DefaultContentTypes.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/CustomField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/TextField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/MultilineTextField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/EmailField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/MonthField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/DatetimeField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/NumberField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/ColorField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/HtmlField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/SelectField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/CheckboxField.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/FileFile.php";
+include_once dirname(__file__) . "/classes/objects/content/types/fields/FileImage.php";
+include_once dirname(__file__) . "/classes/objects/pkg/load.php";
+include_once dirname(__file__) . "/classes/helper/load.php";
+include_once dirname(__file__) . "/classes/exceptions/load.php";
+include_once dirname(__file__) . "/classes/objects/registry/load.php";
+include_once dirname(__file__) . "/classes/objects/logging/load.php";
+include_once dirname(__file__) . "/classes/objects/html/load.php";
+include_once dirname(__file__) . "/classes/objects/abstract/load.php";
+include_once dirname(__file__) . "/classes/objects/SpellChecker.php";
+include_once dirname(__file__) . "/classes/objects/content/TypeMapper.php";
+include_once dirname(__file__) . "/lib/db_functions.php";
+include_once dirname(__file__) . "/lib/files.php";
+include_once dirname(__file__) . "/lib/mailer.php";
+include_once dirname(__file__) . "/lib/file_get_contents_wrapper.php";
+include_once dirname(__file__) . "/lib/translation.php";
+include_once dirname(__file__) . "/lib/html5_media.php";
+include_once dirname(__file__) . "/classes/objects/database/load.php";
+include_once dirname(__file__) . "/classes/objects/Template.php";
+include_once dirname(__file__) . "/classes/objects/security/load.php";
+include_once dirname(__file__) . "/classes/objects/files/load.php";
+include_once dirname(__file__) . "/classes/objects/spam/load.php";
+include_once dirname(__file__) . "/classes/objects/users/load.php";
+include_once dirname(__file__) . "/classes/objects/localization/load.php";
+include_once dirname(__file__) . "/classes/objects/content/CustomData.php";
+include_once dirname(__file__) . "/classes/objects/content/Category.php";
+include_once dirname(__file__) . "/classes/objects/content/PagePermissions.php";
+include_once dirname(__file__) . "/classes/objects/content/Content.php";
+include_once dirname(__file__) . "/classes/objects/content/Page.php";
+include_once dirname(__file__) . "/classes/objects/content/Snippet.php";
+include_once dirname(__file__) . "/classes/objects/content/Link.php";
+include_once dirname(__file__) . "/classes/objects/content/Language_Link.php";
+include_once dirname(__file__) . "/classes/objects/content/Language.php";
+include_once dirname(__file__) . "/classes/objects/content/Node.php";
+include_once dirname(__file__) . "/classes/objects/content/List_Data.php";
+include_once dirname(__file__) . "/classes/objects/content/Content_List.php";
+include_once dirname(__file__) . "/classes/objects/content/Module_Page.php";
+include_once dirname(__file__) . "/classes/objects/content/Video_Page.php";
+include_once dirname(__file__) . "/classes/objects/content/Audio_Page.php";
+include_once dirname(__file__) . "/classes/objects/content/Image_Page.php";
+include_once dirname(__file__) . "/classes/objects/content/Banner.php";
+include_once dirname(__file__) . "/classes/objects/content/Banners.php";
+include_once dirname(__file__) . "/classes/objects/content/Article.php";
+include_once dirname(__file__) . "/classes/objects/content/Comment.php";
+include_once dirname(__file__) . "/classes/objects/content/ContentFactory.php";
+include_once dirname(__file__) . "/classes/objects/content/CustomFields.php";
+include_once dirname(__file__) . "/classes/objects/content/Results.php";
+include_once dirname(__file__) . "/classes/objects/media/load.php";
+include_once dirname(__file__) . "/UliCMSVersion.php";
 
 $mobile_detect_as_module = dirname(__file__) . "/content/modules/Mobile_Detect/Mobile_Detect.php";
 if (is_file($mobile_detect_as_module)) {
     include_once $mobile_detect_as_module;
 }
-
-include_once dirname(__file__) . "/UliCMSVersion.php";
 
 function exception_handler($exception)
 {
@@ -115,6 +154,7 @@ function exception_handler($exception)
 // if config exists require_config else redirect to installer
 $path_to_config = dirname(__file__) . "/CMSConfig.php";
 
+// load config file
 if (is_file($path_to_config)) {
     require_once $path_to_config;
 } else if (is_dir("installer")) {
@@ -207,46 +247,6 @@ if (isset($config->umask)) {
 if (isset($config->memory_limit)) {
     @ini_set("memory_limit", $config->memory_limit);
 }
-include dirname(__file__) . "/classes/objects/abstract/load.php";
-include dirname(__file__) . "/classes/objects/SpellChecker.php";
-include dirname(__file__) . "/classes/objects/content/TypeMapper.php";
-include_once dirname(__file__) . "/lib/db_functions.php";
-include_once dirname(__file__) . "/lib/files.php";
-include_once dirname(__file__) . "/lib/mailer.php";
-include_once dirname(__file__) . "/lib/file_get_contents_wrapper.php";
-require_once dirname(__file__) . "/lib/translation.php";
-require_once dirname(__file__) . "/lib/html5_media.php";
-include dirname(__file__) . "/classes/objects/database/load.php";
-include dirname(__file__) . "/classes/objects/Template.php";
-include dirname(__file__) . "/classes/objects/security/load.php";
-include dirname(__file__) . "/classes/objects/files/load.php";
-include dirname(__file__) . "/classes/objects/spam/load.php";
-include dirname(__file__) . "/classes/objects/users/load.php";
-include dirname(__file__) . "/classes/objects/localization/load.php";
-include dirname(__file__) . "/classes/objects/content/CustomData.php";
-include dirname(__file__) . "/classes/objects/content/Category.php";
-include dirname(__file__) . "/classes/objects/content/PagePermissions.php";
-include dirname(__file__) . "/classes/objects/content/Content.php";
-include dirname(__file__) . "/classes/objects/content/Page.php";
-include dirname(__file__) . "/classes/objects/content/Snippet.php";
-include dirname(__file__) . "/classes/objects/content/Link.php";
-include dirname(__file__) . "/classes/objects/content/Language_Link.php";
-include dirname(__file__) . "/classes/objects/content/Language.php";
-include dirname(__file__) . "/classes/objects/content/Node.php";
-include dirname(__file__) . "/classes/objects/content/List_Data.php";
-include dirname(__file__) . "/classes/objects/content/Content_List.php";
-include dirname(__file__) . "/classes/objects/content/Module_Page.php";
-include dirname(__file__) . "/classes/objects/content/Video_Page.php";
-include dirname(__file__) . "/classes/objects/content/Audio_Page.php";
-include dirname(__file__) . "/classes/objects/content/Image_Page.php";
-include dirname(__file__) . "/classes/objects/content/Banner.php";
-include dirname(__file__) . "/classes/objects/content/Banners.php";
-include dirname(__file__) . "/classes/objects/content/Article.php";
-include dirname(__file__) . "/classes/objects/content/Comment.php";
-include dirname(__file__) . "/classes/objects/content/ContentFactory.php";
-include dirname(__file__) . "/classes/objects/content/CustomFields.php";
-include dirname(__file__) . "/classes/objects/content/Results.php";
-include dirname(__file__) . "/classes/objects/media/load.php";
 
 Translation::init();
 
@@ -263,7 +263,7 @@ if (class_exists("Path")) {
         LoggerRegistry::register("audit_log", new Logger(Path::resolve("ULICMS_LOG/audit_log")));
     }
 }
-require_once dirname(__file__) . "/lib/minify.php";
+include_once dirname(__file__) . "/lib/minify.php";
 
 // define Constants
 define('CR', "\r"); // carriage return; Mac

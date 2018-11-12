@@ -7,5 +7,5 @@ $classes = array(
     "ContentPermissionChecker"
 );
 foreach ($classes as $class) {
-    require dirname(__FILE__) . "/$class.php";
+    include_once dirname(__file__) . "/$class.php";
 }

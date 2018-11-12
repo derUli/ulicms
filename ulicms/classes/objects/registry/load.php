@@ -7,6 +7,6 @@ $classes = array(
     "LoggerRegistry"
 );
 foreach ($classes as $class) {
-    require_once dirname(__FILE__) . "/$class.php";
+    include_once dirname(__file__) . "/$class.php";
 }
 
