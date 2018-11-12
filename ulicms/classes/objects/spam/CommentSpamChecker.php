@@ -10,14 +10,14 @@ class CommentSpamChecker implements ISpamChecker
 
     private $comment;
 
-    private $spamFilterSettings;
+    private $spamFilterConfiguration;
 
-    // Constructor takes the Comment to check and 
+    // Constructor takes the Comment to check and
     // the SpamFilterFonuration
-    public function __construct($comment, $spamFilterSettings)
+    public function __construct($comment, $spamFilterConfiguration)
     {
         $this->comment = $comment;
-        $this->spamFilterSettings = $spamFilterSettings;
+        $this->spamFilterConfiguration = $spamFilterConfiguration;
     }
 
     private $errors = array();
@@ -35,13 +35,13 @@ class CommentSpamChecker implements ISpamChecker
     public function doSpamCheck()
     {
         $this->clearErrors();
-
+        
         // Abort here if the spam filter is disabled
-        if (! $this->spamFilterSettings->getSpamFilterEnabled()) {
+        if (! $this->spamFilterConfiguration->getSpamFilterEnabled()) {
             return self::isSpam();
         }
         
-        $badwords = $this->spamFilterSettings->getBadwords();
+        $badwords = $this->spamFilterConfiguration->getBadwords();
         
         // The fields to check for spam
         $fields = array(
@@ -68,11 +68,11 @@ class CommentSpamChecker implements ISpamChecker
                 }
             }
         }
-
+        
         // If the option "Reject Requests from Bots" is enabled
         // check the useragent
         $useragent = $this->comment->getUserAgent();
-        $rejectRequestsFromBots = $this->spamFilterSettings->getRejectRequestsFromBots();
+        $rejectRequestsFromBots = $this->spamFilterConfiguration->getRejectRequestsFromBots();
         if (StringHelper::isNotNullOrWhitespace($useragent) && $rejectRequestsFromBots) {
             if (AntiSpamHelper::checkForBot($useragent)) {
                 $this->errors[] = new SpamDetectionResult(get_translation("useragent"), get_translation("bots_are_not_allowed", array(
@@ -83,7 +83,7 @@ class CommentSpamChecker implements ISpamChecker
         
         // If the option "Check DNS MX Entry of email addresses" is enabled check the mail domain
         $email = $this->comment->getAuthorEmail();
-        $checkMxOfEmailAddress = $this->spamFilterSettings->getCheckMxOfMailAddress();
+        $checkMxOfEmailAddress = $this->spamFilterConfiguration->getCheckMxOfMailAddress();
         
         if (StringHelper::isNotNullOrWhitespace($email) && $checkMxOfEmailAddress) {
             if (! AntiSpamHelper::checkMailDomain($email)) {
@@ -93,7 +93,7 @@ class CommentSpamChecker implements ISpamChecker
             }
         }
         // If the option "Disallow Chinese Chars" is enabled, check $fields contains chinese chars
-        if ($this->spamFilterSettings->getDisallowChineseChars()) {
+        if ($this->spamFilterConfiguration->getDisallowChineseChars()) {
             foreach ($fields as $field => $value) {
                 if ($value != null) {
                     if (AntiSpamHelper::isChinese($value)) {
@@ -105,7 +105,7 @@ class CommentSpamChecker implements ISpamChecker
             }
         }
         // If the option "Disallow Cyrillic Chars" is enabled, check if $fields contains chinese chars
-        if ($this->spamFilterSettings->getDisallowCyrillicChars()) {
+        if ($this->spamFilterConfiguration->getDisallowCyrillicChars()) {
             foreach ($fields as $field => $value) {
                 if ($value != null) {
                     if (AntiSpamHelper::isCyrillic($value)) {
@@ -117,7 +117,7 @@ class CommentSpamChecker implements ISpamChecker
             }
         }
         // If there are blocked countries set, do a reverse lookup for the ip address of the comment author and check the domain ending.
-        $countries = $this->spamFilterSettings->getBlockedCountries();
+        $countries = $this->spamFilterConfiguration->getBlockedCountries();
         $ip = $this->comment->getIp();
         
         if (! is_null($ip) && AntiSpamHelper::isCountryBlocked($ip, $countries)) {

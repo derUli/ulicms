@@ -40,7 +40,7 @@ $classes_dir = ULICMS_ROOT . "/" . "classes";
 @set_include_path(get_include_path() . PATH_SEPARATOR . $classes_dir);
 
 // todo reorganize includes
-include_once ULICMS_ROOT . "/" . "lib/constants.php";
+include_once dirname(__file__) . "/lib/constants.php";
 include_once dirname(__file__) . "/classes/objects/privacy/load.php";
 include_once dirname(__file__) . "/lib/users_api.php";
 include_once dirname(__file__) . "/lib/string_functions.php";
