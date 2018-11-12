@@ -329,6 +329,9 @@ class Database
     // Abstraktion für Escapen von Werten
     public static function escapeValue($value, $type = null)
     {
+        if (is_null($value)) {
+            return "NULL";
+        }
         if (is_null($type)) {
             if (is_float($value)) {
                 return floatval($value);

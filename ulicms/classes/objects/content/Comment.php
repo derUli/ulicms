@@ -127,6 +127,11 @@ VALUES      ( ?,
         $this->setID(null);
     }
 
+    // check if the comment is spam.
+    // If spam is detected the function returns an array
+    // of SpamDetectionResults
+    // if the comment contains no spam the function
+    // returns null
     public function isSpam()
     {
         $configuration = SpamFilterConfiguration::fromSettings();

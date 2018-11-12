@@ -3,21 +3,37 @@
 class PageTest extends \PHPUnit\Framework\TestCase
 {
 
+    private $user;
+
+    private $commentsInitialEnabled;
+
     public function setUp()
     {
         @session_start();
         $this->cleanUp();
+        
+        $manager = new UserManager();
+        $users = $manager->getAllUsers();
+        $this->user = $users[0];
+        $this->comments_enabled = Settings::get("comments_enabled");
     }
 
     public function tearDown()
     {
         @session_destroy();
         $this->cleanUp();
+        
+        if ($this->commentsInitialEnabled) {
+            Settings::set("comments_enabled", "1");
+        } else {
+            Settings::delete("comments_enabled");
+        }
     }
 
     private function cleanUp()
     {
-        Database::query("delete from {prefix}content where systemname = 'testdisableshortcodes'", true);
+        Database::query("delete from {prefix}content where systemname = 'testdisableshortcodes' or title like 'Unit Test%'", true);
+        Settings::delete("comments_enabled");
     }
 
     private $ipsum = 'Lorem ipsum dolor sit amet,
@@ -102,6 +118,8 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $page->content = "foo [csrf_token_html] bar";
         $page->autor = 1;
         $page->group_id = 1;
+        $page->autor = 1;
+        $page->group_id = 1;
         $page->save();
         
         $_SESSION["language"] = 'de';
@@ -113,5 +131,168 @@ class PageTest extends \PHPUnit\Framework\TestCase
         
         unset($_SESSION["language"]);
         unset($_GET["seite"]);
+    }
+
+    public function testCreatePageWithCommentsEnabledTrue()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $this->assertNotNull($page->id);
+        
+        $page = new Page($page->id);
+        $this->assertTrue($page->comments_enabled);
+        
+        $this->cleanUp();
+    }
+
+    public function testCreatePageWithCommentsEnabledFalse()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = false;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $this->assertNotNull($page->id);
+        
+        $page = new Page($page->id);
+        $this->assertFalse($page->comments_enabled);
+        
+        $this->cleanUp();
+    }
+
+    public function testCreatePageWithCommentsEnabledNull()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = null;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $this->assertNotNull($page->id);
+        
+        $page = new Page($page->id);
+        $this->assertNull($page->comments_enabled);
+        
+        $this->cleanUp();
+    }
+
+    public function testUpdatePageWithCommentsEnabledTrue()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $this->assertNotNull($page->id);
+        
+        $page->comments_enabled = true;
+        $page->save();
+        
+        $page = new Page($page->id);
+        $this->assertTrue($page->comments_enabled);
+        
+        $this->cleanUp();
+    }
+
+    public function testUpdatePageWithCommentsEnabledFalse()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->autor = $this->user->getId();
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $this->assertNotNull($page->id);
+        
+        $page->comments_enabled = false;
+        $page->save();
+        
+        $page = new Page($page->id);
+        $this->assertFalse($page->comments_enabled);
+        
+        $this->cleanUp();
+    }
+
+    public function testUpdatePageWithCommentsEnabledNull()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $this->assertNotNull($page->id);
+        
+        $page->comments_enabled = null;
+        $page->save();
+        
+        $page = new Page($page->id);
+        $this->assertNull($page->comments_enabled);
+        
+        $this->cleanUp();
+    }
+
+    public function testAreCommentsEnabledPageTrue()
+    {
+        $page = new Page();
+        $page->comments_enabled = true;
+        $this->assertTrue($page->areCommentsEnabled());
+    }
+
+    public function testAreCommentsEnabledPageFalse()
+    {
+        $page = new Page();
+        $page->comments_enabled = false;
+        $this->assertFalse($page->areCommentsEnabled());
+    }
+
+    public function testAreCommentsEnabledSettingsTrue()
+    {
+        $page = new Page();
+        $page->comments_enabled = null;
+        
+        Settings::set("comments_enabled", "1");
+        
+        $this->assertTrue($page->areCommentsEnabled());
+        $this->cleanUp();
+    }
+
+    public function testAreCommentsEnabledSettingsFalse()
+    {
+        $page = new Page();
+        $page->comments_enabled = null;
+        
+        Settings::delete("comments_enabled");
+        
+        $this->assertFalse($page->areCommentsEnabled());
     }
 } 

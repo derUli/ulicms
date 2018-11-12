@@ -203,7 +203,7 @@ if (isset($config->data_storage_url) and ! is_null($config->data_storage_url)) {
 include_once dirname(__file__) . "/classes/creators/load.php";
 
 if (! defined("ULICMS_TMP")) {
-    define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . "/" . "content/tmp" . DIRSEP);
+    define("ULICMS_TMP", ULICMS_DATA_STORAGE_ROOT . "/content/tmp/");
 }
 
 if (! is_dir(ULICMS_TMP)) {
@@ -211,13 +211,13 @@ if (! is_dir(ULICMS_TMP)) {
 }
 
 if (! defined("ULICMS_CACHE")) {
-    define("ULICMS_CACHE", ULICMS_DATA_STORAGE_ROOT . "/" . "content/cache" . DIRSEP);
+    define("ULICMS_CACHE", ULICMS_DATA_STORAGE_ROOT . "/content/cache/");
 }
 if (! defined("ULICMS_LOG")) {
-    define("ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . "/" . "content/log" . DIRSEP);
+    define("ULICMS_LOG", ULICMS_DATA_STORAGE_ROOT . "/content/log/");
 }
 if (! defined("ULICMS_CONTENT")) {
-    define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/" . "content" . DIRSEP);
+    define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/content/");
 }
 if (! is_dir(ULICMS_CACHE)) {
     mkdir(ULICMS_CACHE);
