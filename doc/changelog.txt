@@ -33,6 +33,7 @@ Bugfixes:
 Entfernte Funktionen:
 * encodeURIComponent($str)
 * isEmpty($str)
+* uimport($class)
 
 ===== Neues in UliCMS 2018.4.1 =====
 

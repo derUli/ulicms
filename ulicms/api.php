@@ -1,6 +1,19 @@
 <?php
 use UliCMS\Security\PermissionChecker;
 
+function idefine($key, $value)
+{
+    if (! defined($key)) {
+        define($key, $value);
+    }
+}
+
+function faster_in_array($needle, $haystack)
+{
+    $flipped = array_flip($haystack);
+    return isset($flipped[$needle]);
+}
+
 function is_json($str)
 {
     return json_decode($str) != null;
