@@ -104,12 +104,12 @@ class Model
         }
     }
 
-    public static function getAll()
+    public static function getAll($tableName, $orderBy = "id")
     {
         $result = array();
-        $query = Database::selectAll(self::TABLE_NAME, array(
+        $query = Database::selectAll($tableName, array(
             "id"
-        ), "", array(), true, "id");
+        ), "", array(), true, $orderBy);
         while ($row = Database::fetchObject($query)) {
             $result[] = new self($row->id);
         }
