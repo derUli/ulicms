@@ -228,7 +228,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         
         $comment->save();
         
-        $comments = Comment::getAll(Comment::TABLE_NAME, Comment::class);
+        $comments = Comment::getAllDatasets(Comment::TABLE_NAME, Comment::class);
         
         $this->assertGreaterThanOrEqual(2, count($comments));
         

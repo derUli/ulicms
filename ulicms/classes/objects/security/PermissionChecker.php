@@ -10,9 +10,9 @@ class PermissionChecker
 
     public function __construct($user_id = null)
     {
-        if ($user_id == null) {
-            $user_id = get_user_id();
-        }
+        // if ($user_id == null) {
+        // $user_id = get_user_id();
+        // }
         $this->user_id = $user_id;
     }
 

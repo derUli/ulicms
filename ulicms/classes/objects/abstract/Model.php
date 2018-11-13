@@ -104,7 +104,7 @@ class Model
         }
     }
 
-    public static function getAll($tableName, $modelClass, $orderBy = "id", $where = "")
+    public static function getAllDatasets($tableName, $modelClass, $orderBy = "id", $where = "")
     {
         $result = array();
         $query = Database::selectAll($tableName, array(

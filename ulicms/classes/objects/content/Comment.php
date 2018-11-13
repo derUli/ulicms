@@ -259,7 +259,7 @@ VALUES      ( ?,
 
     public static function getAllByContentId($content_id)
     {
-        return self::getAll(self::TABLE_NAME, self::class, "id", "content_id = " . intval($content_id));
+        return self::getAllDatasets(self::TABLE_NAME, self::class, "id", "content_id = " . intval($content_id));
     }
 
     public static function getAllByStatus($status, $content_id = null)
@@ -268,6 +268,6 @@ VALUES      ( ?,
         if ($content_id) {
             $where .= " and content_id = " . intval($content_id);
         }
-        return self::getAll(self::TABLE_NAME, self::class, "id", $where);
+        return self::getAllDatasets(self::TABLE_NAME, self::class, "id", $where);
     }
 }
