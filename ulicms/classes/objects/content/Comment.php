@@ -25,7 +25,7 @@ class Comment extends Model
 
     private $text;
 
-    private $status = CommentStatus::PENDING;
+    private $status = CommentStatus::DEFAULT;
 
     private $ip;
 
@@ -260,5 +260,14 @@ VALUES      ( ?,
     public static function getAllByContentId($content_id)
     {
         return self::getAll(self::TABLE_NAME, self::class, "id", "content_id = " . intval($content_id));
+    }
+
+    public static function getAllByStatus($status, $content_id = null)
+    {
+        $where = "status = '" . Database::escapeValue($status) . "'";
+        if ($content_id) {
+            $where .= " and content_id = " . intval($content_id);
+        }
+        return self::getAll(self::TABLE_NAME, self::class, "id", $where);
     }
 }

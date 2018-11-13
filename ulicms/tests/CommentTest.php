@@ -2,6 +2,7 @@
 use UliCMS\Data\Content\Comment;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Exceptions\NotImplementedException;
+use vendor\project\StatusTest;
 
 class CommentTest extends \PHPUnit\Framework\TestCase
 {
@@ -15,7 +16,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
 
     public function tearDown()
     {
-        Database::deleteFrom("comments", "content like 'Unit Test%'");
+        Database::deleteFrom("comments", "text like 'Unit Test%'");
         unset($_POST["my_homepage_url"]);
     }
 
@@ -303,5 +304,69 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         $comment = array_pop($comments);
         $this->assertNotNull($comment->getID());
         $this->assertEquals("Unit Test 4", $comment->getText());
+    }
+
+    public function testGetAllByStatus()
+    {
+        $contents = ContentFactory::getAll();
+        $last = array_pop($contents);
+        
+        $comment = new Comment();
+        $comment->setContentId($last->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setStatus(CommentStatus::SPAM);
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 7");
+        
+        $time = time();
+        $comment->setDate($time);
+        
+        $comment->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($last->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setStatus(CommentStatus::SPAM);
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 8");
+        
+        $comment->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($last->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setStatus(CommentStatus::PUBLISHED);
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 9");
+        
+        $comment->save();
+        
+        $time = time();
+        $comment->setDate($time);
+        
+        $comment->save();
+        
+        $comments = Comment::getAllByStatus(CommentStatus::SPAM, $last->id);
+        
+        $this->assertCount(2, $comments);
+        
+        foreach ($comments as $comment) {
+            $this->assertEquals(CommentStatus::SPAM, $comment->getStatus());
+        }
+        $comments = Comment::getAllByStatus(CommentStatus::PUBLISHED, $last->id);
+        $this->assertCount(1, $comments);
+        
+        foreach ($comments as $comment) {
+            $this->assertEquals(CommentStatus::PUBLISHED, $comment->getStatus());
+        }
     }
 }
