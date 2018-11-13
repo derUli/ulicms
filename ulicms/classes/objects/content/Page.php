@@ -388,6 +388,10 @@ class Page extends Content
         $this->permissions = $permissions;
     }
 
+    // returns if the comments for the page are enabled
+    // if "Comments enabled" has "[Default]" selected
+    // then it returns if the comments are enabled in
+    // the global settings
     public function areCommentsEnabled()
     {
         $commentsEnabled = false;

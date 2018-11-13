@@ -1,6 +1,7 @@
 <?php
 use UliCMS\Data\Content\Comment;
 use UliCMS\Exceptions\FileNotFoundException;
+use UliCMS\Exceptions\NotImplementedException;
 
 class CommentTest extends \PHPUnit\Framework\TestCase
 {
@@ -189,5 +190,10 @@ class CommentTest extends \PHPUnit\Framework\TestCase
     {
         $comment = new Comment();
         $this->assertNull($comment->getContent());
+    }
+
+    public function testGetAll()
+    {
+        throw new NotImplementedException();
     }
 }

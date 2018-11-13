@@ -30,6 +30,8 @@ class Comment extends Model
     private $ip;
 
     private $useragent;
+    
+    const TABLE_NAME = "comments";
 
     public function loadByID($id)
     {

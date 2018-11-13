@@ -103,4 +103,16 @@ class Model
             throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
         }
     }
+
+    public static function getAll()
+    {
+        $result = array();
+        $query = Database::selectAll(self::TABLE_NAME, array(
+            "id"
+        ), "", array(), true, "id");
+        while ($row = Database::fetchObject($query)) {
+            $result[] = new self($row->id);
+        }
+        return $result;
+    }
 }
