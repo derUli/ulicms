@@ -104,14 +104,14 @@ class Model
         }
     }
 
-    public static function getAll($tableName, $orderBy = "id")
+    public static function getAll($tableName, $modelClass, $orderBy = "id", $where = "")
     {
         $result = array();
         $query = Database::selectAll($tableName, array(
             "id"
-        ), "", array(), true, $orderBy);
+        ), $where, array(), true, $orderBy);
         while ($row = Database::fetchObject($query)) {
-            $result[] = new self($row->id);
+            $result[] = new $modelClass($row->id);
         }
         return $result;
     }

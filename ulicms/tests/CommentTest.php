@@ -194,6 +194,114 @@ class CommentTest extends \PHPUnit\Framework\TestCase
 
     public function testGetAll()
     {
-        throw new NotImplementedException();
+        $contents = ContentFactory::getAll();
+        $first = $contents[0];
+        
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 2");
+        
+        $time = time();
+        $comment->setDate($time);
+        
+        $comment->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 3");
+        
+        $comment->save();
+        
+        $time = time();
+        $comment->setDate($time);
+        
+        $comment->save();
+        
+        $comments = Comment::getAll(Comment::TABLE_NAME, Comment::class);
+        
+        $this->assertGreaterThanOrEqual(2, count($comments));
+        
+        $comment = array_pop($comments);
+        $this->assertNotNull($comment->getID());
+        $this->assertEquals("Unit Test 3", $comment->getText());
+        
+        $comment = array_pop($comments);
+        $this->assertNotNull($comment->getID());
+        $this->assertEquals("Unit Test 2", $comment->getText());
+    }
+
+    public function testGetAllByContentId()
+    {
+        $contents = ContentFactory::getAll();
+        $last = array_pop($contents);
+        
+        $comment = new Comment();
+        $comment->setContentId($last->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 4");
+        
+        $time = time();
+        $comment->setDate($time);
+        
+        $comment->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($last->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 5");
+        
+        $comment->save();
+        
+        $comment->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($last->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 6");
+        
+        $comment->save();
+        
+        $time = time();
+        $comment->setDate($time);
+        
+        $comment->save();
+        
+        $comments = Comment::getAllByContentId($last->id);
+        
+        $this->assertGreaterThanOrEqual(3, count($comments));
+        
+        $comment = array_pop($comments);
+        $this->assertNotNull($comment->getID());
+        $this->assertEquals("Unit Test 6", $comment->getText());
+        
+        $comment = array_pop($comments);
+        $this->assertNotNull($comment->getID());
+        $this->assertEquals("Unit Test 5", $comment->getText());
+        
+        $comment = array_pop($comments);
+        $this->assertNotNull($comment->getID());
+        $this->assertEquals("Unit Test 4", $comment->getText());
     }
 }

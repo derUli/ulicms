@@ -30,7 +30,7 @@ class Comment extends Model
     private $ip;
 
     private $useragent;
-    
+
     const TABLE_NAME = "comments";
 
     public function loadByID($id)
@@ -255,5 +255,10 @@ VALUES      ( ?,
             return null;
         }
         return ContentFactory::getByID($this->getContentId());
+    }
+
+    public static function getAllByContentId($content_id)
+    {
+        return self::getAll(self::TABLE_NAME, self::class, "id", "content_id = " . intval($content_id));
     }
 }
