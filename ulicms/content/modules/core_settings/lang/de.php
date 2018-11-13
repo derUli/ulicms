@@ -30,3 +30,6 @@ add_translation("language_shortcode", "Kürzel");
 add_translation("reject_requests_from_bots", "Anfragen von Bots blockieren");
 
 add_translation("performance", "Performance");
+
+add_translation("community", "Community");
+add_translation("community_settings", "Community Einstellungen");

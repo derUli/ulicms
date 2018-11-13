@@ -31,3 +31,6 @@ add_translation("language_shortcode", "Shortcode");
 add_translation("reject_requests_from_bots", "Reject Requests From Bots");
 
 add_translation("performance", "Performance");
+
+add_translation("community", "Community");
+add_translation("community_settings", "Community Settings");
