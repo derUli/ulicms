@@ -21,7 +21,8 @@ class DefaultContentTypes
             "#tab-og",
             "#custom_data_json",
             "#content-editor",
-            "#btn-view-page"
+            "#btn-view-page",
+            "#tab-comments"
         
         );
         self::$types["article"] = clone self::$types["page"];
