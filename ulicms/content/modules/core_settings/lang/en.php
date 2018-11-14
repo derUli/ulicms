@@ -34,3 +34,4 @@ add_translation("performance", "Performance");
 
 add_translation("community", "Community");
 add_translation("community_settings", "Community Settings");
+add_translation("comments_enabled", "Comments enabled");

@@ -33,3 +33,4 @@ add_translation("performance", "Performance");
 
 add_translation("community", "Community");
 add_translation("community_settings", "Community Einstellungen");
+add_translation("comments_enabled", "Kommentare aktiviert");
