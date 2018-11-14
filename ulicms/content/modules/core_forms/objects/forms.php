@@ -111,8 +111,6 @@ class Forms
             $target_page_systemname = getPageSystemnameByID($target_page_id);
             $redirect_url = buildSEOUrl($target_page_systemname);
             
-            $headers = "Content-Type: text/html; charset=UTF-8";
-            
             $mail_from_field = $form["mail_from_field"];
             
             $mail_from = StringHelper::isNotNullOrWhitespace($mail_from_field) ? array(
@@ -121,9 +119,9 @@ class Forms
                 Settings::get("email")
             );
             sanitize($mail_from);
-            $headers .= "\n";
-            $headers .= "From: " . $mail_from[0] . "\n";
-            $headers .= "Content-Type: text/html";
+            
+            $headers = "From: " . $mail_from[0] . "\n";
+            $headers .= "Content-Type: text/html; charset=utf-8";
             
             if (Mailer::send($email_to, $subject, $html, $headers)) {
                 Request::redirect($redirect_url);
