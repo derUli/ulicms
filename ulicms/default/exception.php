@@ -4,8 +4,7 @@
 <meta charset="UTF-8">
 <title><?php translate("error");?></title>
 <style>
-<?
-php 
+<?php 
 readfile(Path::resolve("ULICMS_ROOT/core.css "));
 readfile(Path::resolve("ULICMS_ROOT/admin/css/modern.css "));
 ?> body {
