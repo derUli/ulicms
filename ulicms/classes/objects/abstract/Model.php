@@ -117,14 +117,4 @@ class Model
         }
         return $result;
     }
-
-    public static function getModel()
-    {
-        return self::$model;
-    }
-
-    public static function setModel($model)
-    {
-        self::$model = $model;
-    }
 }

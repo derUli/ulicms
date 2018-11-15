@@ -28,7 +28,7 @@ Neue API-Funktionen:
 * Model::setModel($model)
 * BackendHelper::getAction();
 * BackendHelper::setAction($action)
-* ActionResult($action, $model);
+* ActionResult($action, $model = null)
 
 Bugfixes:
 * Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertete die sekundären Gruppen nicht aus.  

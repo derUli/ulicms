@@ -5,6 +5,7 @@ chdir(dirname(__FILE__));
 require_once "../init.php";
 use zz\Html\HTMLMinify;
 use UliCMS\Security\PermissionChecker;
+use UliCMS\Backend\BackendPageRenderer;
 
 @session_start();
 $permissionChecker = new PermissionChecker();
@@ -32,6 +33,7 @@ do_event("custom_lang_" . $syslang);
 
 do_event("after_custom_lang");
 
+// Cross-Site-Request-Forgery Protection
 if (logged_in() and $_SERVER["REQUEST_METHOD"] == "POST" and ! isset($_REQUEST["ajax_cmd"]) and ! defined("NO_ANTI_CSRF")) {
     if (! check_csrf_token()) {
         die("This is probably a CSRF attack!");
@@ -58,11 +60,8 @@ if ($_GET["action"] == "ulicms_news") {
     exit();
 }
 
-if (isset($_SESSION["ulicms_login"])) {
-    $eingeloggt = $_SESSION["ulicms_login"];
-    db_query("UPDATE " . tbname("users") . " SET last_action = " . time() . " WHERE id = " . $_SESSION["login_id"]);
-} else {
-    $eingeloggt = false;
+if (is_logged_in()) {
+    db_query("UPDATE " . tbname("users") . " SET last_action = " . time() . " WHERE id = " . get_user_id());
 }
 
 header("Content-Type: text/html; charset=UTF-8");
@@ -79,67 +78,5 @@ do_event("before_backend_run_methods");
 ControllerRegistry::runMethods();
 do_event("after_backend_run_methods");
 
-if (Settings::get("minify_html")) {
-    ob_start();
-}
-
-include "inc/ulicms_head.php";
-
-if (! $eingeloggt) {
-    if (isset($_GET["register"])) {
-        do_event("before_register_form");
-        require_once "inc/registerform.php";
-        do_event("after_register_form");
-    } else if (isset($_GET["reset_password"])) {
-        do_event("before_reset_password_form");
-        require_once "inc/reset_password.php";
-        do_event("before_after_password_form");
-    } else {
-        do_event("before_login_form");
-        require_once "inc/loginform.php";
-        do_event("after_login_form");
-    }
-} else {
-    require_once "inc/adminmenu.php";
-    global $actions;
-    $actions = array();
-    
-    ActionRegistry::loadModuleActions();
-    
-    do_event("register_actions");
-    
-    if ($_SESSION["require_password_change"]) {
-        require_once "inc/change_password.php";
-    } else if (isset($actions[get_action()])) {
-        $requiredPermission = ActionRegistry::getActionpermission(get_action());
-        if ((! $requiredPermission) or ($requiredPermission and $permissionChecker->hasPermission($requiredPermission))) {
-            include_once $actions[get_action()];
-        } else {
-            noPerms();
-        }
-    } else {
-        translate("action_not_found");
-    }
-}
-
-do_event("admin_footer");
-
-require_once "inc/footer.php";
-
-if (Settings::get("minify_html")) {
-    $generatedHtml = ob_get_clean();
-    $options = array(
-        'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
-    );
-    $HTMLMinify = new HTMLMinify($generatedHtml, $options);
-    $generatedHtml = $HTMLMinify->process();
-    echo $generatedHtml;
-}
-
-do_event("before_admin_cron");
-require_once "inc/cron.php";
-do_event("after_admin_cron");
-
-db_close($connection);
-exit();
-?>
+$renderer = new BackendPageRenderer(BackendHelper::getAction());
+$renderer->render();

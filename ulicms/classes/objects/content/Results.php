@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Backend\BackendPageRenderer;
 
 function JSONResult($data, $status = 200)
 {
@@ -84,10 +85,8 @@ function ExceptionResult($message, $status = 500)
     exit();
 }
 
-// FIXME: This function should output the action view
-// and then stop without to add a "return" to the controller action
 function ActionResult($action, $model = null)
 {
-    BackendHelper::setAction($action);
-    Model::setModel($model);
+    $renderer = new BackendPageRenderer($action, $model);
+    $renderer->render();
 }
