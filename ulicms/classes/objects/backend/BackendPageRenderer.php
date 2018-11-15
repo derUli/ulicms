@@ -4,6 +4,7 @@ namespace UliCMS\Backend;
 use ActionRegistry;
 use Settings;
 use zz\Html\HTMLMinify;
+use UliCMS\Security\PermissionChecker;
 
 // This class renders a backend page
 // if you set a model from a model
@@ -45,6 +46,7 @@ class BackendPageRenderer
 
     public function render()
     {
+        $permissionChecker = new PermissionChecker(get_user_id());
         if (Settings::get("minify_html")) {
             ob_start();
         }
@@ -78,8 +80,8 @@ class BackendPageRenderer
             if ($_SESSION["require_password_change"]) {
                 require_once "inc/change_password.php";
             } else if (isset($actions[$this->getAction()])) {
-                $requiredPermission = ActionRegistry::getActionpermission($action);
-                if ((! $requiredPermission) or ($requiredPermission and $permissionChecker->hasPermission($requiredPermission))) {
+                $requiredPermission = ActionRegistry::getActionPermission($this->getAction());
+                if (! $requiredPermission or ($requiredPermission and $permissionChecker->hasPermission($requiredPermission))) {
                     include_once $actions[$this->getAction()];
                 } else {
                     noPerms();

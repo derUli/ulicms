@@ -3,12 +3,9 @@
 chdir(dirname(__FILE__));
 
 require_once "../init.php";
-use zz\Html\HTMLMinify;
-use UliCMS\Security\PermissionChecker;
 use UliCMS\Backend\BackendPageRenderer;
 
 @session_start();
-$permissionChecker = new PermissionChecker();
 
 // $_COOKIE[session_name()] = session_id();
 
