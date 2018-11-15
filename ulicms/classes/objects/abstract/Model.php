@@ -4,6 +4,8 @@ use UliCMS\Exceptions\NotImplementedException;
 class Model
 {
 
+    private static $model = null;
+
     protected $id = null;
 
     public function __construct($id = null)
@@ -114,5 +116,15 @@ class Model
             $result[] = new $modelClass($row->id);
         }
         return $result;
+    }
+
+    public static function getModel()
+    {
+        return self::$model;
+    }
+
+    public static function setModel($model)
+    {
+        self::$model = $model;
     }
 }

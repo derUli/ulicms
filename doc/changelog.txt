@@ -24,6 +24,11 @@ Neue API-Funktionen:
 * Database::getClientVersion()
 * ArrayHelper::isSingle($input)
 * ArrayHelper::getSingle($input)
+* Model::getModel()
+* Model::setModel($model)
+* BackendHelper::getAction();
+* BackendHelper::setAction($action)
+* ActionResult($action, $model);
 
 Bugfixes:
 * Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertete die sekundären Gruppen nicht aus.  

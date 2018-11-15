@@ -207,11 +207,7 @@ function preparePlainTextforHTMLOutput($text)
 
 function get_action()
 {
-    if (isset($_REQUEST["action"])) {
-        return $_REQUEST["action"];
-    } else {
-        return "home";
-    }
+   return BackendHelper::getAction();
 }
 
 function isMaintenanceMode()
