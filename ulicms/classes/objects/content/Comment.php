@@ -6,6 +6,7 @@ use ContentFactory;
 use CommentStatus;
 use InvalidArgumentException;
 use Model;
+use StringHelper;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 use UliCMS\Security\SpamChecker\CommentSpamChecker;
@@ -168,7 +169,7 @@ VALUES      ( ?,
         if (! is_string($val)) {
             throw new InvalidArgumentException("$val is not a string");
         }
-        $this->author_name = strval($val);
+        $this->author_name = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
     public function getAuthorEmail()
@@ -178,7 +179,7 @@ VALUES      ( ?,
 
     public function setAuthorEmail($val)
     {
-        $this->author_email = ! is_null($val) ? strval($val) : null;
+        $this->author_email = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
     public function getAuthorUrl()
@@ -188,7 +189,7 @@ VALUES      ( ?,
 
     public function setAuthorUrl($val)
     {
-        $this->author_url = ! is_null($val) ? strval($val) : null;
+        $this->author_url = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
     public function getDate()
@@ -213,7 +214,7 @@ VALUES      ( ?,
 
     public function setText($val)
     {
-        $this->text = ! is_null($val) ? strval($val) : null;
+        $this->text = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
     public function getStatus()
@@ -236,7 +237,7 @@ VALUES      ( ?,
 
     public function setIp($val)
     {
-        $this->ip = ! is_null($val) ? strval($val) : null;
+        $this->ip = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
     public function getUserAgent()
@@ -246,7 +247,7 @@ VALUES      ( ?,
 
     public function setUserAgent($val)
     {
-        $this->useragent = ! is_null($val) ? strval($val) : null;
+        $this->useragent = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
     }
 
     public function getContent()
