@@ -50,4 +50,17 @@ class ArrayHelper
         }
         return null;
     }
+
+    public static function isSingle($input)
+    {
+        return count($input) == 1;
+    }
+
+    public static function getSingle($input)
+    {
+        if (self::isSingle($input)) {
+            return $input[0];
+        }
+        return null;
+    }
 }

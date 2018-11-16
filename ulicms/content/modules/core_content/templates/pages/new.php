@@ -525,12 +525,19 @@ function openArticleImageSelectWindow(field) {
 				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 		</div>
 	</div>
-	<h2 class="accordion-header"><?php translate("other");?></h2>
-
+	<h2 class="accordion-header"><?php translate("comments");?></h2>
 	<div class="accordion-content">
+		<strong><?php translate("comments_enabled");?></strong> <br /> <select
+			name="comments_enabled">
+			<option value="null" selected>[<?php translate("standard");?>]</option>
+			<option value="1"><?php translate("yes");?></option>
+			<option value="0"><?php translate("no");?></option>
+		</select>
+	</div>
 
+	<h2 class="accordion-header"><?php translate("other");?></h2>
+	<div class="accordion-content">
 		<div class="typedep" id="tab-cache-control" style="display: none;">
-
 			<strong><?php translate("cache_control");?></strong> <br /> <select
 				name="cache_control">
 				<option value="auto" selected><?php translate("auto");?></option>

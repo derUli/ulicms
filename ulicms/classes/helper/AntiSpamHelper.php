@@ -4,36 +4,28 @@ class AntiSpamHelper
 {
 
     // checking if this Country is blocked by spamfilter
-    public static function isCountryBlocked()
+    public static function isCountryBlocked($ip = null, $country_blacklist = null)
     {
-        $country_blacklist = Settings::get("country_blacklist");
-        $country_whitelist = Settings::get("country_whitelist");
+        if (is_null($ip)) {
+            $ip = get_ip();
+        }
+        if (is_null($country_blacklist)) {
+            $country_blacklist = Settings::get("country_blacklist");
+        }
+        if (is_string($country_blacklist)) {
+            $country_blacklist = strtolower($country_blacklist);
+            $country_blacklist = explode(",", $country_blacklist);
+            $country_blacklist = array_map("trim", $country_blacklist);
+            $country_blacklist = array_filter($country_blacklist);
+        }
         
-        $country_blacklist = str_replace(" ", "", $country_blacklist);
-        $country_whitelist = str_replace(" ", "", $country_whitelist);
-        
-        $country_blacklist = strtolower($country_blacklist);
-        $country_whitelist = strtolower($country_whitelist);
-        
-        $country_blacklist = explode(",", $country_blacklist);
-        $country_whitelist = explode(",", $country_whitelist);
-        
-        $ip_adress = $_SERVER["REMOTE_ADDR"];
-        
-        @$hostname = gethostbyaddr($ip_adress);
+        @$hostname = gethostbyaddr($ip);
         
         if (! $hostname) {
             return false;
         }
         
         $hostname = strtolower($hostname);
-        
-        for ($i = 0; $i < count($country_whitelist); $i ++) {
-            $ending = "." . $country_whitelist[$i];
-            if (EndsWith($hostname, $ending)) {
-                return false;
-            }
-        }
         
         for ($i = 0; $i < count($country_blacklist); $i ++) {
             $ending = "." . $country_blacklist[$i];
@@ -55,17 +47,14 @@ class AntiSpamHelper
         return (bool) preg_match('/\p{Cyrillic}+/u', $str);
     }
 
-    public static function containsBadwords($str)
+    public static function containsBadwords($str, $words_blacklist = null)
     {
-        $words_blacklist = Settings::get("spamfilter_words_blacklist");
-        $str = strtolower($str);
-        
-        if ($words_blacklist) {
-            $words_blacklist = StringHelper::linesFromString($words_blacklist, false, true, true);
-        } else {
-            return null;
+        if (is_null($words_blacklist)) {
+            $words_blacklist = Settings::get("spamfilter_words_blacklist");
         }
-        
+        if (is_string($words_blacklist)) {
+            $words_blacklist = StringHelper::linesFromString($words_blacklist, false, true, true);
+        }
         for ($i = 0; $i < count($words_blacklist); $i ++) {
             $word = strtolower($words_blacklist[$i]);
             if (strpos(strtolower($str), $word) !== false) {

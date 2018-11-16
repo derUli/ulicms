@@ -80,5 +80,45 @@ class ArrayHelperTest extends \PHPUnit\Framework\TestCase
             "pineapple"
         ), ArrayHelper::insertAfter($input, 3, "pineapple"));
     }
+
+    public function testIsSingleWithEmptyArray()
+    {
+        $this->assertFalse(ArrayHelper::isSingle(array()));
+    }
+
+    public function testIsSingleWithOneItem()
+    {
+        $this->assertTrue(ArrayHelper::isSingle(array(
+            "foo"
+        )));
+    }
+
+    public function testIsSingleWithTwoItems()
+    {
+        $this->assertFalse(ArrayHelper::isSingle(array(
+            "foo",
+            "bar"
+        )));
+    }
+
+    public function testgetSingleWithEmptyArray()
+    {
+        $this->assertNull(ArrayHelper::getSingle(array()));
+    }
+
+    public function testgetSingleWithOneItem()
+    {
+        $this->assertEquals("foo", ArrayHelper::getSingle(array(
+            "foo"
+        )));
+    }
+
+    public function testgetSingleWithTwoItems()
+    {
+        $this->assertNull(ArrayHelper::getSingle(array(
+            "foo",
+            "bar"
+        )));
+    }
 }
 	

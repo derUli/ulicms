@@ -793,6 +793,21 @@ function openArticleImageSelectWindow(field) {
 					for="only_others_can_edit"><?php translate("others");?></label>
 			</div>
 		</div>
+		<div class="typedep" id="tab-comments">
+			<h2 class="accordion-header"><?php translate("comments");?></h2>
+			<div class="accordion-content">
+				<strong><?php translate("comments_enabled");?></strong> <br /> <select
+					name="comments_enabled">
+					<option value="null"
+						<?php echo $row->comments_enabled === null ? "selected" : "";?>>[<?php translate("standard");?>]</option>
+					<option value="1"
+						<?php echo $row->comments_enabled === "1" ? "selected" : "";?>><?php translate("yes");?></option>
+					<option value="0"
+						<?php echo $row->comments_enabled === "0" ? "selected" : "";?>>
+					<?php translate("no");?></option>
+				</select>
+			</div>
+		</div>
 		<h2 class="accordion-header"><?php translate("other");?></h2>
 
 		<div class="accordion-content">

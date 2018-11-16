@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Backend\BackendPageRenderer;
 
 function JSONResult($data, $status = 200)
 {
@@ -82,4 +83,10 @@ function ExceptionResult($message, $status = 500)
     
     echo $content;
     exit();
+}
+
+function ActionResult($action, $model = null)
+{
+    $renderer = new BackendPageRenderer($action, $model);
+    $renderer->render();
 }

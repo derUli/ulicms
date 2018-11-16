@@ -1,5 +1,5 @@
 <?php
-$mpdf = ULICMS_ROOT . DIRECTORY_SEPERATOR . "lib" . DIRECTORY_SEPERATOR . "MPDF60" . DIRECTORY_SEPERATOR . "mpdf.php";
+$mpdf = ULICMS_ROOT . "/lib/MPDF60/mpdf.php";
 if (is_file($mpdf)) {
     require_once ($mpdf);
 }

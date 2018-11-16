@@ -200,7 +200,7 @@ class Database
         return self::query("ALTER TABLE $table DROP COLUMN $column");
     }
 
-    public static function selectAll($table, $columns = array(), $where = "", $args = array(), $prefix = true)
+    public static function selectAll($table, $columns = array(), $where = "", $args = array(), $prefix = true, $order = "")
     {
         if ($prefix) {
             $table = tbname($table);
@@ -214,7 +214,10 @@ class Database
         
         $sql = "select $columns_sql from $table";
         if (StringHelper::isNotNullOrEmpty($where)) {
-            $sql .= " where $where";
+            $sql .= " where $where ";
+        }
+        if (! empty($order)) {
+            $sql .= " order by {$order}";
         }
         return self::pQuery($sql, $args);
     }
@@ -329,6 +332,9 @@ class Database
     // Abstraktion für Escapen von Werten
     public static function escapeValue($value, $type = null)
     {
+        if (is_null($value)) {
+            return "NULL";
+        }
         if (is_null($type)) {
             if (is_float($value)) {
                 return floatval($value);

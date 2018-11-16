@@ -75,7 +75,7 @@ class ActionRegistry
         }
     }
 
-    public static function getActionpermission($action)
+    public static function getActionPermission($action)
     {
         $permission = null;
         if (isset(self::$actionPermissions[$action]) and is_string(self::$actionPermissions[$action])) {

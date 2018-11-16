@@ -1,0 +1,1 @@
+ALTER TABLE {prefix}comments CHANGE `content` `text` TEXT NOT NULL;

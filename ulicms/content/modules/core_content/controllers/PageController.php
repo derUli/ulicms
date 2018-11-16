@@ -94,6 +94,10 @@ class PageController extends Controller
             
             $comment_homepage = Database::escapeValue($_POST["comment_homepage"]);
             $link_to_language = StringHelper::isNotNullOrWhitespace(Request::getVar("link_to_language")) ? intval(Request::getVar("link_to_language")) : "NULL";
+            
+            $comments_enabled = $_POST["comments_enabled"] !== "null" ? intval($_POST["comments_enabled"]) : null;
+            $comments_enabled = Database::escapeValue($comments_enabled);
+            
             $show_headline = intval($_POST["show_headline"]);
             
             do_event("before_create_page");
@@ -103,7 +107,7 @@ class PageController extends Controller
   `og_title`, `og_description`, `og_type`, `og_image`, `type`, `module`, `video`, `audio`, `text_position`, `image_url`, `approved`, `show_headline`, `cache_control`, `article_author_name`, `article_author_email`,
 				`article_date`, `article_image`, `excerpt`, `hidden`,
 				`only_admins_can_edit`, `only_group_can_edit`, `only_owner_can_edit`, `only_others_can_edit`,
-				`comment_homepage`, `link_to_language` )
+				`comment_homepage`, `link_to_language`, `comments_enabled` )
 					
   VALUES('$systemname','$page_title','$page_content',$parent, $activated," . time() . ", " . time() . "," . $_SESSION["login_id"] . "," . $_SESSION["group_id"] . ", '$redirection', '$menu', $position, '" . $access . "',
   '$meta_description', '$meta_keywords',
@@ -115,7 +119,7 @@ class PageController extends Controller
    '$article_author_name', '$article_author_email',
    $article_date, '$article_image', '$excerpt',
    $hidden, $only_admins_can_edit, $only_group_can_edit, $only_owner_can_edit, $only_others_can_edit,
-				'$comment_homepage', $link_to_language)") or die(db_error());
+				'$comment_homepage', $link_to_language, $comments_enabled)") or die(db_error());
             
             $user_id = get_user_id();
             $content_id = db_insert_id();
@@ -288,6 +292,9 @@ class PageController extends Controller
         $comment_homepage = Database::escapeValue($_POST["comment_homepage"]);
         $link_to_language = StringHelper::isNotNullOrWhitespace(Request::getVar("link_to_language")) ? intval(Request::getVar("link_to_language")) : "NULL";
         
+        $comments_enabled = $_POST["comments_enabled"] !== "null" ? intval($_POST["comments_enabled"]) : null;
+        $comments_enabled = Database::escapeValue($comments_enabled);
+        
         do_event("before_edit_page");
         $sql = "UPDATE " . tbname("content") . " SET systemname = '$systemname' , title='$page_title', `alternate_title`='$alternate_title', parent=$parent, content='$page_content', active=$activated, lastmodified=" . time() . ", redirection = '$redirection', menu = '$menu', position = $position, lastchangeby = $user, language='$language', access = '$access', meta_description = '$meta_description', meta_keywords = '$meta_keywords', target='$target', category='$category', menu_image='$menu_image', custom_data='$custom_data', theme='$theme',
 	og_title = '$og_title', og_type ='$og_type', og_image = '$og_image', og_description='$og_description', `type` = '$type', `module` = $module, `video` = $video, `audio` = $audio, text_position = '$text_position', autor = $autor, `group_id` = $group_id, image_url = $image_url, show_headline = $show_headline, cache_control ='$cache_control' $approved_sql,
@@ -295,7 +302,7 @@ class PageController extends Controller
 	only_admins_can_edit = $only_admins_can_edit, `only_group_can_edit` = $only_group_can_edit,
 	only_owner_can_edit = $only_owner_can_edit, only_others_can_edit = $only_others_can_edit,
 	hidden = $hidden, comment_homepage = '$comment_homepage',
-	link_to_language = $link_to_language WHERE id=$id";
+	link_to_language = $link_to_language, comments_enabled = $comments_enabled WHERE id=$id";
         db_query($sql) or die(DB::error());
         
         $user_id = get_user_id();

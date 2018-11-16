@@ -13,4 +13,22 @@ class BackendHelper
             ));
         }
     }
+
+    public static function getAction()
+    {
+        if (isset($_REQUEST["action"])) {
+            return $_REQUEST["action"];
+        } else {
+            return "home";
+        }
+    }
+
+    public static function setAction($action)
+    {
+        $_REQUEST["action"] = $action;
+        $_GET["action"] = $action;
+        if (Request::isPost()) {
+            $_POST["action"] = $action;
+        }
+    }
 }

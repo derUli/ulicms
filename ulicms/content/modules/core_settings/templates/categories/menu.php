@@ -1,5 +1,7 @@
 <?php
-$permissionChecker = new ACL();
+use UliCMS\Security\PermissionChecker;
+
+$permissionChecker = new PermissionChecker(get_user_id());
 ?>
 <h1><?php translate("settings");?></h1>
 <?php
@@ -49,6 +51,17 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("performance_settings");?>"><?php
         translate("performance");
+        ?></a> <br /> <br />
+	<?php
+    }
+    ?>
+    <?php
+    
+    if ($permissionChecker->hasPermission("community_settings")) {
+        ?>
+	<a
+		href="<?php echo ModuleHelper::buildActionURL("community_settings");?>"><?php
+        translate("community");
         ?></a> <br /> <br />
 	<?php
     }

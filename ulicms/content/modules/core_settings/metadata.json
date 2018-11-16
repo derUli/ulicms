@@ -24,15 +24,18 @@
 		"pkg_settings": "templates/pkg_settings/form.php",
 		"languages": "templates/languages/form.php",
 		"spam_filter": "templates/spam_filter/form.php",
-		"performance_settings": "templates/performance_settings/form.php"
+		"performance_settings": "templates/performance_settings/form.php",
+		"community_settings": "templates/community_settings/form.php"
 	},
 	"action_permissions": {
 		"privacy_settings": "privacy_settings",
-		"performance_settings": "performance_settings"
+		"performance_settings": "performance_settings",
+		"community_settings": "community_settings"
 	},
 	"custom_acl": [
 		"privacy_settings",
-		"performance_settings"
+		"performance_settings",
+		"community_settings"
 	],
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
@@ -53,14 +56,16 @@
 		"LanguageController": "controllers/LanguageController.php",
 		"SpamFilterController": "controllers/SpamFilterController.php",
 		"PrivacyController": "controllers/PrivacyController.php",
-		"PerformanceSettingsController": "controllers/PerformanceSettingsController.php"
+		"PerformanceSettingsController": "controllers/PerformanceSettingsController.php",
+		"CommunitySettingsController": "controllers/CommunitySettingsController.php"
 	},
 	"action_controllers": {
 		"settings_simple": "SimpleSettingsController",
 		"default_access_restrictions": "DefaultAccessRestrictionsController",
 		"design": "DesignSettingsController",
 		"privacy": "PrivacyController",
-		"performance_settings": "PerformanceSettingsController"
+		"performance_settings": "PerformanceSettingsController",
+		"community_settings": "CommunitySettingsController"
 	},
 	"controller_function_permissions": {
 		"SimpleSettingsController::savePost": "settings_simple",
@@ -84,6 +89,7 @@
 		"LanguageController::setDefaultLanguage": "languages",
 		"SpamFilterController::savePost": "spam_filter",
 		"PrivacyController::savePost": "privacy_settings",
-		"PerformanceSettingsController::savePost": "performance_settings"
+		"PerformanceSettingsController::savePost": "performance_settings",
+		"CommunitySettingsController::savePost": "community_settings"
 	}
 }

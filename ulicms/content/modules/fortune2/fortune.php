@@ -87,4 +87,9 @@ class Fortune extends Controller
     {
         ViewBag::set("sample_text", get_translation("get_request_type"));
     }
+
+    public function showFortune()
+    {
+        ActionResult("fortune", $this->getRandomFortune());
+    }
 }

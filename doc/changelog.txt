@@ -1,4 +1,4 @@
-===== Neues in UliCMS 2018.4.2 =====
+===== Neues in UliCMS 2019.1 =====
 
 Neue Features:
 * Funktion "MX DNS-Eintrag von E-Mail Adressen überprüfen" zum Spamfilter hinzugefügt
@@ -22,6 +22,13 @@ Neue API-Funktionen:
 * AntispamHelper::checkMailDomain($email)
 * remove_suffix($text, $suffix)
 * Database::getClientVersion()
+* ArrayHelper::isSingle($input)
+* ArrayHelper::getSingle($input)
+* Model::getModel()
+* Model::setModel($model)
+* BackendHelper::getAction();
+* BackendHelper::setAction($action)
+* ActionResult($action, $model = null)
 
 Bugfixes:
 * Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertete die sekundären Gruppen nicht aus.  
@@ -31,6 +38,7 @@ Bugfixes:
 Entfernte Funktionen:
 * encodeURIComponent($str)
 * isEmpty($str)
+* uimport($class)
 
 ===== Neues in UliCMS 2018.4.1 =====
 
