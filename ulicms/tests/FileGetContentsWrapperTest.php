@@ -14,6 +14,16 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase
 
     const USER_AGENT_URL = "http://test.ulicms.de/useragent.php";
 
+    public function setUp()
+    {
+        CacheUtil::clearCache();
+    }
+
+    public function tearDown()
+    {
+        CacheUtil::clearCache();
+    }
+
     public function testDownloadUrlWithChecksumValid()
     {
         $this->assertTrue(is_string(file_get_contents_wrapper(self::EXAMPLE_URL_OK, true, self::EXAMPLE_HASH)));
@@ -36,6 +46,9 @@ class FileGetContentsWrapperTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_url("ftp://ftp.hostserver.de/pub/OpenBSD/"));
         $this->assertFalse(is_url("/var/www/html"));
         $this->assertFalse(is_url("C:\\xampp\\htdocs"));
+        $this->assertFalse(is_url("http://"));
+        $this->assertFalse(is_url("https://"));
+        $this->assertFalse(is_url("ftp://"));
     }
 
     public function testUrlExists()

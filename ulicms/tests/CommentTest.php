@@ -1,8 +1,6 @@
 <?php
 use UliCMS\Data\Content\Comment;
 use UliCMS\Exceptions\FileNotFoundException;
-use UliCMS\Exceptions\NotImplementedException;
-use vendor\project\StatusTest;
 
 class CommentTest extends \PHPUnit\Framework\TestCase
 {
@@ -18,6 +16,7 @@ class CommentTest extends \PHPUnit\Framework\TestCase
     {
         Database::deleteFrom("comments", "text like 'Unit Test%'");
         unset($_POST["my_homepage_url"]);
+        CacheUtil::clearCache();
     }
 
     public function testSetContentIdInvalidArgument()
@@ -368,5 +367,40 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         foreach ($comments as $comment) {
             $this->assertEquals(CommentStatus::PUBLISHED, $comment->getStatus());
         }
+    }
+
+    public function testSetUrlWithFullUrl()
+    {
+        $comment = new Comment();
+        $comment->setAuthorUrl("https://www.ulicms.de");
+        $this->assertEquals("https://www.ulicms.de", $comment->getAuthorUrl());
+    }
+
+    public function testSetUrlWithNoUrl()
+    {
+        $comment = new Comment();
+        $comment->setAuthorUrl("this is not an url");
+        $this->assertNull($comment->getAuthorUrl());
+    }
+
+    public function testSetUrlWithIncompleteHttpUrl()
+    {
+        $comment = new Comment();
+        $comment->setAuthorUrl("http://");
+        $this->assertNull($comment->getAuthorUrl());
+    }
+
+    public function testSetUrlWithIncompleteHttpsUrl()
+    {
+        $comment = new Comment();
+        $comment->setAuthorUrl("https://");
+        $this->assertNull($comment->getAuthorUrl());
+    }
+
+    public function testSetUrlWithIncompleteFtpUrl()
+    {
+        $comment = new Comment();
+        $comment->setAuthorUrl("ftp://");
+        $this->assertNull($comment->getAuthorUrl());
     }
 }

@@ -29,6 +29,10 @@ class CommentsController extends controller
         
         $status = Settings::get("comments_must_be_approved") ? CommentStatus::PENDING : CommentStatus::PUBLISHED;
         
+        // Todo: Validate input
+        // Required fields: author_name and text
+        // author_url must be a valid URL is_url()
+        
         if ($comment->isSpam()) {
             $status = CommentStatus::SPAM;
         }

@@ -189,7 +189,7 @@ VALUES      ( ?,
 
     public function setAuthorUrl($val)
     {
-        $this->author_url = StringHelper::isNotNullOrWhitespace($val) ? strval($val) : null;
+        $this->author_url = is_url($val) ? strval($val) : null;
     }
 
     public function getDate()

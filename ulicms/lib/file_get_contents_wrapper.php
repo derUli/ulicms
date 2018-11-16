@@ -23,8 +23,8 @@ function file_get_contents_curl($url)
 
 function is_url($url)
 {
-    if (substr_compare($url, 'http://', 0, 7) > 0 or substr_compare($url, 'https://', 0, 8) > 0 or substr_compare($url, 'ftp://', 0, 8) > 0) {
-        return true;
+    if (startsWith($url, "http://") or startsWith($url, "https://") or startsWith($url, "ftp://")) {
+        return ($url != "http://" and $url != "https://" and $url != "ftp://");
     }
     return false;
 }
