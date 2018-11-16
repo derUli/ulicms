@@ -13,7 +13,7 @@ echo Template::executeModuleTemplate("core_comments", "form.php")?>
 <?php
 foreach ($comments as $comment) {
     ?>    <p>
-		<strong><?php translate("date");?>:</strong> <?php strftime("%x %X", $comment->getDate());?>
+		<strong><?php translate("date");?>:</strong> <?php echo strftime("%x %X", $comment->getDate());?>
     <br /> <strong><?php translate("name");?>:</strong> <?php esc($comment->getAuthorName());?>
     <br />
     <?php if($comment->getAuthorUrl()){?>
