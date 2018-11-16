@@ -737,7 +737,7 @@ Neue Features
 + Klasse Cache hinzugefügt
 
 Bugfixes
-# ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
+# ContentFactory::getBySystemnameAndLanguage() ist nun statisch
 
 Entfernte Features
 - cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016

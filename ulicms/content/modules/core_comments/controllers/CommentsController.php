@@ -1,11 +1,35 @@
 <?php
 use UliCMS\Data\Content\Comment;
 
-class CommentsController extends controller
+class CommentsController extends MainClass
 {
 
+    public function beforeHtml()
+    {
+        Vars::set("comments_enabled", false);
+        
+        if (is_200()) {
+            $page = ContentFactory::getCurrentPage();
+            
+            // currently it's not supported to cache pages where comments are enabled
+            // This is a limitation of UliCMS caching system and will get fixed in a future
+            // release of UliCMS
+            if ($page->areCommentsEnabled()) {
+                Flags::setNoCache(true);
+                Vars::set("comments_enabled", true);
+            }
+        }
+        Vars::set("content_id", $page->id);
+    }
+
+    // This method handles posted comments
     public function postComment()
     {
+        $checkbox = new PrivacyCheckbox(getCurrentLanguage(true));
+        if ($checkbox->isEnabled()) {
+            $checkbox->check();
+        }
+        
         $content_id = Request::getVar("content_id", 0, "int");
         $content = null;
         try {
@@ -29,9 +53,10 @@ class CommentsController extends controller
         
         $status = Settings::get("comments_must_be_approved") ? CommentStatus::PENDING : CommentStatus::PUBLISHED;
         
-        // Todo: Validate input
-        // Required fields: author_name and text
-        // author_url must be a valid URL is_url()
+        // show error if not all required fields are filled
+        if (! $comment->getAuthorName() or ! $comment->getText()) {
+            return ExceptionResult(get_translation("fill_all_fields"));
+        }
         
         if ($comment->isSpam()) {
             $status = CommentStatus::SPAM;
@@ -48,6 +73,6 @@ class CommentsController extends controller
         $cacheAdapater = CacheUtil::getAdapter(true);
         $cacheAdapater->clear();
         
-        Response::redirect(ModuleHelper::getFullPageURLByID($content_id), "comment_published=" . $status);
+        Response::redirect(ModuleHelper::getFullPageURLByID($content_id, "comment_published=" . $status));
     }
 }

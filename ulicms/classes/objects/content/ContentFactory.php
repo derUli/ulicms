@@ -3,6 +3,11 @@
 class ContentFactory
 {
 
+    public static function getCurrentPage()
+    {
+        return ContentFactory::getBySystemnameAndLanguage(get_requested_pagename(), getCurrentLanguage(true));
+    }
+
     public static function getByID($id)
     {
         $id = intval($id);
@@ -15,7 +20,7 @@ class ContentFactory
         }
     }
 
-    public static function loadBySystemnameAndLanguage($name, $language)
+    public static function getBySystemnameAndLanguage($name, $language)
     {
         $name = DB::escapeValue($name);
         $language = DB::escapeValue($language);

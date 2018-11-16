@@ -1,5 +1,9 @@
 {
 	"version": "2019.1",
 	"source": "core",
-	"embed": false
+	"embed": false,
+	"controllers": {
+		"CommentsController": "controllers/CommentsController.php"
+	},
+	"main_class": "CommentsController"
 }
