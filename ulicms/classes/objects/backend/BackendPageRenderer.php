@@ -44,6 +44,7 @@ class BackendPageRenderer
         self::$model = $model;
     }
 
+    // renders a backend page, outputs it and do events
     public function render()
     {
         $permissionChecker = new PermissionChecker(get_user_id());
