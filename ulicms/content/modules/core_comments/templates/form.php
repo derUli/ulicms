@@ -5,46 +5,46 @@
 <?php echo UliCMS\HTML\Input::Hidden("content_id", Vars::get("content_id"));?>
 
     <div>
-		<label for="author_name"><?php translate("your_name")?>*</label>
+		<label for="author_name"><?php translate("your_name")?>
+<span class="text-danger">*</span></label>
 		<div>
     <?php
     
-    echo UliCMS\HTML\Input::TextBox("author_name", "", "text", 10, 80, array(
-        "class" => "form-control"
+    echo UliCMS\HTML\Input::TextBox("author_name", "", "text", array(
+        "class" => "form-control",
+        "required" => "required"
     ));
     ?>
     </div>
 	</div>
 	<div>
-		<label for="author_email"><?php translate("your_email")?>*</label>
+		<label for="author_email"><?php translate("your_email")?></label>
 		<div>
     <?php
-    
-    echo UliCMS\HTML\Input::TextBox("author_email", "", "email", 10, 80, array(
+    echo UliCMS\HTML\Input::TextBox("author_email", "", "email", array(
         "class" => "form-control"
     ));
     ?>
     </div>
 	</div>
-	<label for="author_url"><?php translate("your_website")?>*</label>
+	<label for="author_url"><?php translate("your_website")?></label>
 	<div>
     <?php
-    echo UliCMS\HTML\Input::TextBox("author_url", "", "url", 10, 80, array(
+    echo UliCMS\HTML\Input::TextBox("author_url", "", "url", array(
         "class" => "form-control"
     ));
     ?>
     </div>
-</div>
-<div><?php translate("your_website")?></div>
-<div>
-	<div class="comment-text">
-		<label for="text"><?php translate("text")?></label>
+	<div>
+		<div class="comment-text">
+			<label for="text"><?php translate("text")?>
+			<span class="text-danger">*</span></label>
 <?php
     echo UliCMS\HTML\Input::TextArea("text", "", 10, 80, array(
         "required" => "required",
         "class" => "form-control"
     ))?>	</div>
-</div>
+	</div>
 <?php
     $checkbox = new PrivacyCheckbox(getCurrentLanguage(true));
     if ($checkbox->isEnabled()) {
@@ -52,8 +52,8 @@
     }
     ?>
 <p>
-	<button type="submit" class="btn btn-primary"><?php translate("post_comment")?></button>
-</p>
-<?php echo ModuleHelper::endForm();?>
+		<button type="submit" class="btn btn-primary"><?php translate("post_comment")?></button>
+	</p>
 </div>
+<?php echo ModuleHelper::endForm();?>
 <?php }?>

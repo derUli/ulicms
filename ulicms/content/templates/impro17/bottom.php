@@ -1,4 +1,4 @@
-<?php echo Template::executeModuleTemplate("core_comments", "form.php");?>
+<?php echo Template::executeModuleTemplate("core_comments", "comments.php");?>
 <div class="advertisement">
 <?php random_banner();?>
 </div>

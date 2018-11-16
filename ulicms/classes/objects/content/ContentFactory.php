@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Exceptions\FileNotFoundException;
 
 class ContentFactory
 {
@@ -16,7 +17,7 @@ class ContentFactory
             $result = DB::fetchObject($query);
             return self::getContentObjectByID($result);
         } else {
-            throw new Exception("No page with id $id");
+            throw new FileNotFoundException("No page with id $id");
         }
     }
 
@@ -29,7 +30,7 @@ class ContentFactory
             $result = DB::fetchObject($query);
             return self::getContentObjectByID($result);
         } else {
-            throw new Exception("No page with this combination of $name and $language");
+            throw new FileNotFoundException("No page with this combination of $name and $language");
         }
     }
 

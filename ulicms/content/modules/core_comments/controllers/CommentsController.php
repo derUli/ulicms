@@ -1,5 +1,6 @@
 <?php
 use UliCMS\Data\Content\Comment;
+use UliCMS\Exceptions\FileNotFoundException;
 
 class CommentsController extends MainClass
 {
@@ -25,6 +26,7 @@ class CommentsController extends MainClass
     // This method handles posted comments
     public function postComment()
     {
+        // check if DSGVO checkbox is checked
         $checkbox = new PrivacyCheckbox(getCurrentLanguage(true));
         if ($checkbox->isEnabled()) {
             $checkbox->check();
@@ -34,13 +36,10 @@ class CommentsController extends MainClass
         $content = null;
         try {
             $content = ContentFactory::getByID($content_id);
-        } catch (Exception $e) {
+        } catch (FileNotFoundException $e) {
             ExceptionResult(get_translation("no_such_content"));
         }
         
-        if (! $content->areCommentsEnabled()) {
-            ExceptionResult(get_translation("comments_are_disabled"));
-        }
         $comment = new Comment();
         $comment->setContentId($content_id);
         $comment->setDate(time());
@@ -55,7 +54,7 @@ class CommentsController extends MainClass
         
         // show error if not all required fields are filled
         if (! $comment->getAuthorName() or ! $comment->getText()) {
-            return ExceptionResult(get_translation("fill_all_fields"));
+            ExceptionResult(get_translation("fill_all_fields"));
         }
         
         if ($comment->isSpam()) {
