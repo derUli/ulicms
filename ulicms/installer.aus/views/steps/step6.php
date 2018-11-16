@@ -11,5 +11,5 @@
     ?>><?php echo TRANSLATION_INSTALL_DEMO_DATA;?></label>
 		</div>
 	</div>
-	<button type="submit" class="btn btn-default"><?php echo TRANSLATION_APPLY;?></button>
+	<button type="submit" class="btn btn-primary"><?php echo TRANSLATION_APPLY;?></button>
 </form>

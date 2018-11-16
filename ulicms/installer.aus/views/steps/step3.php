@@ -1,4 +1,3 @@
-
 <p>
 	<?php echo TRANSLATION_FOLLOW_INSTRUCTIONS;?>
 	</p>
@@ -14,4 +13,8 @@ echo htmlspecialchars(InstallerController::getLanguage());
 ?>.png"
 		alt="<?php echo TRANSLATION_PERMISSIONS2;?>"
 		title="<?php echo TRANSLATION_PERMISSIONS2;?>" border="1" />
+</p>
+
+<p>
+	<a href="index.php?step=2" class="btn btn-primary"><?php echo TRANSLATION_NEXT;?></a>
 </p>

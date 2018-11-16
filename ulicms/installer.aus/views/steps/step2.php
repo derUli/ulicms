@@ -6,5 +6,5 @@
 </p>
 
 <p>
-	<a href="?step=3" class="btn btn-default"><?php echo TRANSLATION_ACCEPT_LICNSE;?></a>
+	<a href="?step=3" class="btn btn-primary"><?php echo TRANSLATION_ACCEPT_LICNSE;?></a>
 </p>
