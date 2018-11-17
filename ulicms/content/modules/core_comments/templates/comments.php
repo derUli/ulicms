@@ -7,12 +7,12 @@ reset($comments);
 ?>
 <?php
 echo Template::executeModuleTemplate("core_comments", "form.php")?>
-
+<?php if(count($comments) > 0){?>
 <div class="comment-list">
 	<h3><?php translate("comments");?></h3>
 <?php
-foreach ($comments as $comment) {
-    ?>    <p>
+    foreach ($comments as $comment) {
+        ?>    <p>
 		<strong><?php translate("date");?>:</strong> <?php echo strftime("%x %X", $comment->getDate());?>
     <br /> <strong><?php translate("name");?>:</strong> <?php esc($comment->getAuthorName());?>
     <br />
@@ -28,3 +28,4 @@ foreach ($comments as $comment) {
 	<?php }?>
     <?php }?>
 </div>
+<?php }?>
