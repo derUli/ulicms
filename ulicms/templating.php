@@ -498,7 +498,7 @@ function body_classes()
 // Gibt "Diese Seite läuft mit UliCMS" aus
 function poweredByUliCMS()
 {
-    poweredByUliCMS();
+    Template::poweredByUliCMS();
 }
 
 // Einen zufälligen Banner aus der Datenbank ausgeben
@@ -728,11 +728,11 @@ function get_frontpage()
 
 function get_requested_pagename()
 {
-    $value = db_escape($_GET["seite"]);
-    if ($value == "") {
+    $value = $_GET["seite"];
+    if (StringHelper::isNullOrWhitespace($_GET["seite"])) {
         $value = get_frontpage();
     }
-    return $value;
+    return Database::escapeValue($value);
 }
 
 function is_home()
