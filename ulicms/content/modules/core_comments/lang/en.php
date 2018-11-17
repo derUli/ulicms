@@ -12,3 +12,8 @@ add_translation("your_name", "Your Name");
 add_translation("your_email", "Your E-Mail Address");
 add_translation("your_website", "Your Website");
 add_translation("text", "Text");
+
+add_translation("comment_published_published", "Your comment is published.");
+add_translation("comment_published_pending", "Your comment is posted and awaits moderation.");
+add_translation("comment_published_spam", "Your comment is marked as spam. If you think this is an error, please contact
+the webmaster of this website.");

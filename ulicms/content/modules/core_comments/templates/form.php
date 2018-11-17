@@ -1,4 +1,31 @@
 <?php if(Vars::get("comments_enabled")){?>
+<?php
+$comment_published = Request::getVar("comment_published");
+$cssClass = "alert ";
+if($comment_published){
+	switch($comment_published){
+		case CommentStatus::PUBLISHED:
+		case CommentStatus::PENDING:
+			$cssClass .= " alert-success";
+		break;	
+		break;
+		case CommentStatus::SPAM:
+			$cssClass .= " alert-warning";
+		break;
+		default:
+			$cssClass .= " alert-info";
+		break;
+	}
+	$cssClass .= "  alert-dismissable fade in";
+?>
+<div class="<?php esc($cssClass);?>">
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	<?php translate("comment_published_{$comment_published}");?>
+</div>
+<?php
+}
+?>
+
 <h3><?php translate("write_a_comment");?></h3>
 <div class="comments">
 <?php echo ModuleHelper::buildMethodCallForm(CommentsController::class, "postComment");?>
@@ -37,13 +64,15 @@
     </div>
 	<div>
 		<div class="comment-text">
+<p>
 			<label for="text"><?php translate("text")?>
 			<span class="text-danger">*</span></label>
 <?php
     echo UliCMS\HTML\Input::TextArea("text", "", 10, 80, array(
         "required" => "required",
         "class" => "form-control"
-    ))?>	</div>
+    ))?>	
+</p></div>
 	</div>
 <?php
     $checkbox = new PrivacyCheckbox(getCurrentLanguage(true));
