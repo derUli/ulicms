@@ -16,5 +16,5 @@ echo htmlspecialchars(InstallerController::getLanguage());
 </p>
 
 <p>
-	<a href="index.php?step=2" class="btn btn-primary"><?php echo TRANSLATION_NEXT;?></a>
+	<a href="index.php?step=4" class="btn btn-primary"><?php echo TRANSLATION_NEXT;?></a>
 </p>

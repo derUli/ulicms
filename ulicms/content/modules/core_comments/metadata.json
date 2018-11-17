@@ -5,5 +5,14 @@
 	"controllers": {
 		"CommentsController": "controllers/CommentsController.php"
 	},
-	"main_class": "CommentsController"
+	"main_class": "CommentsController",
+	"custom_acl": [
+		"comments_manage"
+	],
+	"actions": {
+		"comments_manage": "templates/admin.php"
+	},
+	"action_permissions": {
+		"comments_manage": "comments_manage"
+	}
 }
