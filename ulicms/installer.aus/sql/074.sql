@@ -65,6 +65,7 @@ SET
    "users_edit":true,
    "videos":true,
    "videos_create":true,
-   "videos_edit":true}'
+   "videos_edit":true
+}'
 WHERE
     id = 1
