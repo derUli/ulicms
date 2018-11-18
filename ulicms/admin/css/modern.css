@@ -373,6 +373,10 @@ div#google-fonts select {
 	word-wrap: break-word;
 }
 
+.accordion-content{
+	padding:15px;
+}
+
 div#login-welcome-text {
 	border: solid 1px #EDEDED;
 	padding: 10px;

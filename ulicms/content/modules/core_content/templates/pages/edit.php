@@ -1,6 +1,7 @@
 <?php
 use UliCMS\Security\ContentPermissionChecker;
 use UliCMS\Security\PermissionChecker;
+use UliCMS\Data\Content\Comment;
 
 include_once ULICMS_ROOT . "/classes/objects/content/VCS.php";
 $permissionChecker = new PermissionChecker(get_user_id());
@@ -796,17 +797,34 @@ function openArticleImageSelectWindow(field) {
 		<div class="typedep" id="tab-comments">
 			<h2 class="accordion-header"><?php translate("comments");?></h2>
 			<div class="accordion-content">
-				<strong><?php translate("comments_enabled");?></strong> <br /> <select
-					name="comments_enabled">
-					<option value="null"
-						<?php echo $row->comments_enabled === null ? "selected" : "";?>>[<?php translate("standard");?>]</option>
-					<option value="1"
-						<?php echo $row->comments_enabled === "1" ? "selected" : "";?>><?php translate("yes");?></option>
-					<option value="0"
-						<?php echo $row->comments_enabled === "0" ? "selected" : "";?>>
+
+				<div class="form-group">
+					<strong><?php translate("comments_enabled");?></strong> <br /> <select
+						name="comments_enabled">
+						<option value="null"
+							<?php echo $row->comments_enabled === null ? "selected" : "";?>>[<?php translate("standard");?>]</option>
+						<option value="1"
+							<?php echo $row->comments_enabled === "1" ? "selected" : "";?>><?php translate("yes");?></option>
+						<option value="0"
+							<?php echo $row->comments_enabled === "0" ? "selected" : "";?>>
 					<?php translate("no");?></option>
-				</select>
+					</select>
+				</div>
+				<?php
+            $hasComments = count(Comment::getAllByContentId($row->id)) >= 1;
+            if ($hasComments and $permissionChecker->hasPermission("comments_manage")) {
+                ?>
+             
+				<p>
+					<a
+						href="<?php esc(ModuleHelper::buildMethodCallUrl(CommentsController::class, "filterComments", "content_id={$row->id}"));?>"
+						class="btn btn-default"><?php translate("comments_manage");?></a>
+				</p>
+                <?php
+            }
+            ?>
 			</div>
+
 		</div>
 		<h2 class="accordion-header"><?php translate("other");?></h2>
 
