@@ -3,7 +3,10 @@ use UliCMS\Backend\BackendPageRenderer;
 use UliCMS\Data\Content\Comment;
 use UliCMS\HTML\Input;
 
-$comments = BackendPageRenderer::getModel () ? BackendPageRenderer::getModel () : Comment::getAll ();
+$controller = ModuleHelper::getMainController("core_comments");
+$defaultStatus = $controller->getDefaultStatus();
+
+$comments = is_array(BackendPageRenderer::getModel()) ? BackendPageRenderer::getModel() : Comment::getAllByStatus($defaultStatus);
 ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
@@ -16,11 +19,11 @@ $comments = BackendPageRenderer::getModel () ? BackendPageRenderer::getModel () 
 <table class="tablesorter table">
 	<thead>
 		<td><?php
-		
-		echo Input::CheckBox ( "select_all", false, "", array (
-				"disabled" => "disabled" 
-		) );
-		?></td>
+
+echo Input::CheckBox("select_all", false, "", array(
+    "disabled" => "disabled"
+));
+?></td>
 		<th><?php translate("date");?></th>
 		<th><?php translate("status");?></th>
 		<th><?php translate("author_name");?></th>
@@ -32,11 +35,11 @@ $comments = BackendPageRenderer::getModel () ? BackendPageRenderer::getModel () 
 	<?php foreach($comments as $comment){?>
 	<tr>
 			<td><?php
-		
-		echo Input::CheckBox ( "comments[]", false, $comment->getId (), array (
-				"disabled" => "disabled" 
-		) );
-		?></td>
+    
+    echo Input::CheckBox("comments[]", false, $comment->getId(), array(
+        "disabled" => "disabled"
+    ));
+    ?></td>
 
 			<td><?php esc(date("Y-m-d H:i:s", $comment->getDate()));?></td>
 			<td><?php translate($comment->getStatus());?></td>
@@ -53,6 +56,6 @@ $comments = BackendPageRenderer::getModel () ? BackendPageRenderer::getModel () 
 	</tbody>
 </table>
 <?php
-enqueueScriptFile ( ModuleHelper::buildRessourcePath ( "core_comments", "js/admin.js" ) );
-combinedScriptHtml ();
+enqueueScriptFile(ModuleHelper::buildRessourcePath("core_comments", "js/admin.js"));
+combinedScriptHtml();
 ?>
