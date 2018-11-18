@@ -5,7 +5,10 @@ $(function() {
 		$.ajax({
 			url : url,
 			success : function(result) {
-				bootbox.alert(result);
+				bootbox.alert({
+					message: result, 
+					size: "large"
+				});
 			}
 		});
 	});

@@ -43,11 +43,12 @@ img {
 }
 
 html {
-	overflow-y: scroll;
+	overflow-y: ;
 }
 
 .scroll {
 	overflow-x: auto;
+	overflow-y:visible;
 }
 
 /* main menu styles */
@@ -406,6 +407,8 @@ div#login-welcome-text {
 
 .main {
 	margin-top: 20px;
+		margin-left: 5px;
+		margin-right: 5px;
 }
 
 .ulicms-logo {
@@ -469,19 +472,11 @@ h2.accordion-header {
 }
 
 @media ( min-width : 1200px) {
-	.main {
-		margin-left: 40px;
-		margin-right: 40px;
-	}
 }
 
 @media ( max-width : 1200px) {
 	table.tablesorter .header {
 		background-image: none !important;
-	}
-	.main {
-		margin-left: 20px;
-		margin-right: 20px;
 	}
 }
 
