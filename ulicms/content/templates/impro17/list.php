@@ -39,39 +39,18 @@ if ($id !== null) {
 				$excerpt = trim ( $excerpt );
 				$excerpt = StringHelper::isNotNullOrEmpty ( $excerpt ) ? $excerpt : $entry->content;
 				?>
-  <div class="row article-list-row">
+  <div class="article-list-row">
 		<p>
 			<strong><a
 				href="<?php Template::escape(buildSEOUrl($entry->systemname, $entry->redirection));?>"><?php Template::escape($entry->title);?></a></strong>
-		</p>
-
-		<div class="col-sm-5">
-		<?php
-				
-				if ($meta and ! empty ( $meta->article_image )) {
-					$article_image = $meta->article_image;
-				}
-				if ($entry instanceof Image_Page and StringHelper::isNotNullOrEmpty ( $entry->image_url )) {
-					$article_image = $entry->image_url;
-				}
-				?>
-		<p>
-				<a href="<?php Template::escape(buildSEOUrl($entry->systemname));?>"
-					class="list-article-image"><img src="<?php echo $article_image;?>"
-					alt="Screenshot <?php Template::escape($entry->title);?>"
-					class="article-image"></a>
-			</p>
-
-		</div>
-
-		<div class="col-sm-7">
-
-	<?php echo $excerpt;?>
+		<br/>
+<small><?php translate("date");?>: <?php echo strftime("%x %X");?></small></p>
+		
+	<p><?php echo $excerpt;?></p>
 	<p>
 				<a
 					href="<?php Template::escape(buildSEOUrl($entry->systemname, $entry->redirection));?>"><?php translate("readmore");?></a>
 			</p>
-		</div>
 	</div>
 	<?php }?>
 
@@ -99,3 +78,4 @@ if ($id !== null) {
 		}
 	}
 }
+
