@@ -814,11 +814,11 @@ function openArticleImageSelectWindow(field) {
             $hasComments = count(Comment::getAllByContentId($row->id)) >= 1;
             if ($hasComments and $permissionChecker->hasPermission("comments_manage")) {
                 ?>
-             
 				<p>
 					<a
 						href="<?php esc(ModuleHelper::buildMethodCallUrl(CommentsController::class, "filterComments", "content_id={$row->id}"));?>"
-						class="btn btn-default"><?php translate("comments_manage");?></a>
+						class="btn btn-default"
+						target="_blank"><?php translate("comments_manage");?></a>
 				</p>
                 <?php
             }
