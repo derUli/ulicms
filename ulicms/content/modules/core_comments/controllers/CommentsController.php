@@ -1,7 +1,6 @@
 <?php
 use UliCMS\Data\Content\Comment;
 use UliCMS\Exceptions\FileNotFoundException;
-use StringHelper;
 use UliCMS\HTML;
 class CommentsController extends MainClass {
 	public function beforeHtml() {
