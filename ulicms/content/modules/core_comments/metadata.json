@@ -14,5 +14,8 @@
 	},
 	"action_permissions": {
 		"comments_manage": "comments_manage"
+	},
+	"controller_function_permissions": {
+		"CommentsController::getCommentText": "comments_manage"
 	}
 }
