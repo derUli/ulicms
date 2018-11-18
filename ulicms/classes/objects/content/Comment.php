@@ -208,6 +208,9 @@ VALUES      ( ?,
 		}
 		return self::getAllDatasets ( self::TABLE_NAME, self::class, "id", $where );
 	}
+	public static function getAll($order = "id desc") {
+		return self::getAllDatasets ( self::TABLE_NAME, self::class, $order );
+	}
 	public static function deleteIpsAfter48Hours() {
 		Database::query ( "update {prefix}comments set ip = null WHERE date < UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY) and ip is not null", true );
 		return Database::getAffectedRows ();

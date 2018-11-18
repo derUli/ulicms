@@ -42,6 +42,7 @@ $enq = array(
     "scripts/global.js",
     "scripts/bootstrap.min.js",
     "scripts/js/select2.min.js",
+    "scripts/bootbox.min.js",
     $select2TranslationFile,
     "scripts/datatables/datatables.min.js",
     "../lib/js/global.js"

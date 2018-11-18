@@ -1,6 +1,8 @@
 <?php
 use UliCMS\Data\Content\Comment;
 use UliCMS\Exceptions\FileNotFoundException;
+use StringHelper;
+use UliCMS\HTML;
 class CommentsController extends MainClass {
 	public function beforeHtml() {
 		Vars::set ( "comments_enabled", false );
@@ -75,5 +77,14 @@ class CommentsController extends MainClass {
 		
 		// Redirect to the page and show a message to the user
 		Response::redirect ( ModuleHelper::getFullPageURLByID ( $content_id, "comment_published=" . $status ) );
+	}
+	public function getCommentText() {
+		$id = Request::getVar ( "id" );
+		try {
+			$comment = new Comment ( $id );
+			HtmlResult ( StringHelper::makeLinksClickable ( HTML\text ( trim($comment->getText () ) )) );
+		} catch ( FileNotFoundException $e ) {
+			HTMLResult ( get_translation ( "not_found" ), 404 );
+		}
 	}
 }

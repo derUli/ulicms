@@ -18,4 +18,6 @@ add_translation ( "comment_published_pending", "Your comment is posted and await
 add_translation ( "comment_published_spam", "Your comment is marked as spam. If you think this is an error, please contact
 the webmaster of this website." );
 
-add_translation("comments_manage", "Manage Comments");
+add_translation ( "comments_manage", "Manage Comments" );
+
+add_translation ( "author_url", "Author URL" );
