@@ -44,7 +44,7 @@ if ($id !== null) {
 			<strong><a
 				href="<?php Template::escape(buildSEOUrl($entry->systemname, $entry->redirection));?>"><?php Template::escape($entry->title);?></a></strong>
 		<br/>
-<small><?php translate("date");?>: <?php echo strftime("%x %X");?></small></p>
+<small><?php translate("date");?>: <?php echo strftime("%x %X", $entry->lastmodified);?></small></p>
 		
 	<p><?php echo $excerpt;?></p>
 	<p>
