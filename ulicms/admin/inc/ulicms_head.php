@@ -135,7 +135,7 @@ if (get_action()) {
 do_event("after_backend_header");
 ?>
 <div
-		class="fluid-container main <?php
+		class="container main <?php
 
 if (get_action()) {
     echo 'action-' . Template::getEscape(get_action());
