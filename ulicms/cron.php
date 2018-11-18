@@ -34,6 +34,7 @@ if (! defined("LOADED_LANGUAGE_FILE")) {
 
 if (Settings::get("delete_ips_after_48_hours")) {
     Database::query("Update " . tbname("log") . " SET ip = NULL WHERE DATEDIFF(NOW(), zeit) >= 2");
+    Comment::deleteIpsAfter48Hours();
 }
 
 $empty_trash_days = Settings::get("empty_trash_days");
