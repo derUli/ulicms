@@ -19,36 +19,39 @@ $comments = is_array(BackendPageRenderer::getModel()) ? BackendPageRenderer::get
 <div class="scroll">
 	<table class="tablesorter table">
 		<thead>
-			<td><?php
-
-	echo Input::CheckBox("select_all", false, "", array(
-		"disabled" => "disabled"
-	));
-	?></td>
-			<th><?php translate("date");?></th>
-			<th><?php translate("status");?></th>
-			<th><?php translate("author_name");?></th>
-			<th><?php translate("author_email");?></th>
-			<th><?php translate("author_url");?></th>
-			<th><?php translate("text")?></th>
+			<tr>
+				<td><?php
+    
+    echo Input::CheckBox("select_all", false, "", array(
+        "disabled" => "disabled"
+    ));
+    ?></td>
+				<th><?php translate("date");?></th>
+				<th><?php translate("status");?></th>
+				<th><?php translate("author_name");?></th>
+				<th><?php translate("author_email");?></th>
+				<th><?php translate("author_url");?></th>
+				<th><?php translate("text")?></th>
+			</tr>
 		</thead>
 		<tbody>
 		<?php foreach($comments as $comment){?>
+		<?php $url = strlen($comment->getAuthorUrl()) > 30 ? substr($comment->getAuthorUrl(),0, 30) ."...": $comment->getAuthorUrl();?>
+		
 		<tr>
 				<td><?php
-		
-		echo Input::CheckBox("comments[]", false, $comment->getId(), array(
-			"disabled" => "disabled"
-		));
-		?></td>
+    
+    echo Input::CheckBox("comments[]", false, $comment->getId(), array(
+        "disabled" => "disabled"
+    ));
+    ?></td>
 
 				<td><?php esc(date("Y-m-d H:i:s", $comment->getDate()));?></td>
 				<td><?php translate($comment->getStatus());?></td>
 				<td><?php esc($comment->getAuthorName());?></td>
 				<td><?php esc($comment->getAuthorEmail());?></td>
 				<td><a href="<?php esc($comment->getAuthorUrl());?>" target="_blank"
-					<?php $url = strlen($comment->getAuthorUrl()) > 30 ? substr($comment->getAuthorUrl(),0, 30) ."...": $comment->getAuthorUrl();?>
-					rel="nofollow"><?php esc($url);?></td>
+					rel="nofollow"><?php esc($url);?></a></td>
 				<td><a href="#"
 					data-url="<?php echo ModuleHelper::buildMethodCallUrl(CommentsController::class, "getCommentText", "id=".$comment->getID());?>"
 					class="ajax-alert"><?php esc(getExcerpt($comment->getText()));?></a></td>

@@ -35,8 +35,39 @@ class CommentsControllerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(CommentStatus::PUBLISHED, $controller->getDefaultStatus());
     }
 
-    public function testGetResults()
+    public function testGetResultsWithoutArguments()
     {
+        $controller = new CommentsController();
         throw new NotImplementedException();
+    }
+
+    public function testGetResultsWithStatus()
+    {
+        $controller = new CommentsController();
+        throw new NotImplementedException();
+    }
+
+    public function testGetResultsWithStatusAndContentId()
+    {
+        $controller = new CommentsController();
+        throw new NotImplementedException();
+    }
+
+    public function testGetResultsWithStatusAndContentIdAndTake0()
+    {
+        $controller = new CommentsController();
+        throw new NotImplementedException();
+    }
+
+    public function testGetResultsWithStatusAndContentIdAndTake3()
+    {
+        $controller = new CommentsController();
+        throw new NotImplementedException();
+    }
+
+    public function testGetResultsNoResults()
+    {
+        $controller = new CommentsController();
+        $this->assertCount(0, $controller->getResults(CommentStatus::SPAM, PHP_INT_MAX));
     }
 }

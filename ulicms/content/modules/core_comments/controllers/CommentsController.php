@@ -42,6 +42,7 @@ class CommentsController extends MainClass
             ExceptionResult(get_translation("no_such_content"));
         }
         
+        // create a comment dataset and fill properties
         $comment = new Comment();
         $comment->setContentId($content_id);
         $comment->setDate(time());
@@ -60,6 +61,7 @@ class CommentsController extends MainClass
             ExceptionResult(get_translation("fill_all_fields"));
         }
         
+        // If the message looks like a spam comment lag it as spam
         if ($comment->isSpam()) {
             $status = CommentStatus::SPAM;
         }
@@ -94,6 +96,7 @@ class CommentsController extends MainClass
         }
     }
 
+    // this returns the default status for new comments
     public function getDefaultStatus()
     {
         $defaultStatus = Settings::get("comments_must_be_approved") ? CommentStatus::PENDING : CommentStatus::PUBLISHED;
@@ -117,13 +120,18 @@ class CommentsController extends MainClass
         return $results;
     }
 
+    // filter and show the comments to the comment moderation
     public function filterComments()
     {
+        // get arguments from the URL
         $status = Request::getVar("status", null, "str");
         $content_id = Request::getVar("content_id", null, "int");
         $limit = Request::getVar("limit", 0, "int");
         
+        // do the search query
         $results = $this->getResults($status, $content_id, $limit);
+        
+        // output the comment backend page to the user
         ActionResult("comments_manage", $results);
     }
 }
