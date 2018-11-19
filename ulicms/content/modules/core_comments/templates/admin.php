@@ -21,40 +21,48 @@ $comments = is_array(BackendPageRenderer::getModel()) ? BackendPageRenderer::get
 		<thead>
 			<tr>
 				<td><?php
-    
     echo Input::CheckBox("select_all", false, "", array(
         "disabled" => "disabled"
     ));
     ?></td>
 				<th><?php translate("date");?></th>
 				<th><?php translate("status");?></th>
-				<th><?php translate("author_name");?></th>
-				<th><?php translate("author_email");?></th>
-				<th><?php translate("author_url");?></th>
-				<th><?php translate("text")?></th>
+				<th><?php translate("author");?></th>
+				<th><?php translate("comment")?></th>
 			</tr>
 		</thead>
 		<tbody>
 		<?php foreach($comments as $comment){?>
 		<?php $url = strlen($comment->getAuthorUrl()) > 30 ? substr($comment->getAuthorUrl(),0, 30) ."...": $comment->getAuthorUrl();?>
-		
-		<tr>
+		<?php $content = $comment->getContent();?>
+			<tr>
 				<td><?php
-    
     echo Input::CheckBox("comments[]", false, $comment->getId(), array(
         "disabled" => "disabled"
     ));
     ?></td>
-
 				<td><?php esc(date("Y-m-d H:i:s", $comment->getDate()));?></td>
 				<td><?php translate($comment->getStatus());?></td>
-				<td><?php esc($comment->getAuthorName());?></td>
-				<td><?php esc($comment->getAuthorEmail());?></td>
-				<td><a href="<?php esc($comment->getAuthorUrl());?>" target="_blank"
-					rel="nofollow"><?php esc($url);?></a></td>
-				<td><a href="#"
-					data-url="<?php echo ModuleHelper::buildMethodCallUrl(CommentsController::class, "getCommentText", "id=".$comment->getID());?>"
-					class="ajax-alert"><?php esc(getExcerpt($comment->getText()));?></a></td>
+				<td><?php esc($comment->getAuthorName());?>
+					<br />
+						<?php if($comment->getAuthorEmail()){?>
+						<?php esc($comment->getAuthorEmail());?>
+					<br />
+						<?php }?>
+					<?php if($comment->getAuthorUrl()){?>
+					<a href="<?php esc($comment->getAuthorUrl());?>" target="_blank"
+					rel="nofollow"><?php esc($url);?></a>
+					<?php }?></td>
+				<td>
+					<p>
+						<strong><?php esc($content->title);?></strong>
+					</p>
+					<p>
+						<a href="#"
+							data-url="<?php echo ModuleHelper::buildMethodCallUrl(CommentsController::class, "getCommentText", "id=".$comment->getID());?>"
+							class="ajax-alert"><?php esc(getExcerpt($comment->getText()));?></a>
+					</p>
+				</td>
 			</tr>
 		<?php }?>
 		</tbody>
