@@ -25,3 +25,4 @@ add_translation("author_url", "Author URL");
 add_translation("published", "Published");
 add_translation("pending", "Pending");
 add_translation("spam", "Spam");
+add_translation("search", "Suchen");

@@ -2,16 +2,38 @@
 use UliCMS\Backend\BackendPageRenderer;
 use UliCMS\Data\Content\Comment;
 use UliCMS\HTML\Input;
+use UliCMS\HTML\ListItem;
 
 $controller = ModuleHelper::getMainController("core_comments");
 $defaultStatus = $controller->getDefaultStatus();
 
 $comments = is_array(BackendPageRenderer::getModel()) ? BackendPageRenderer::getModel() : Comment::getAllByStatus($defaultStatus);
+
+$stati = array(
+    new ListItem(CommentStatus::SPAM, get_translation(CommentStatus::SPAM)),
+    new ListItem(CommentStatus::PENDING, get_translation(CommentStatus::PENDING)),
+    new ListItem(CommentStatus::PUBLISHED, get_translation(CommentStatus::PUBLISHED))
+);
+
+$selectedStatus = Request::getVar("status", defaultStatus, "str");
 ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
+<?php echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComments");?>
+<div class="form-group">
+	<label for="status"><?php translate("status");?></label>
+	<?php
+
+echo Input::SingleSelect("status", $selectedStatus, $stati, 1);
+?>
+</div>
+<p>
+	<button type="submit" class="btn btn-primary"><?php translate("search");?></button>
+</p>
+<?php echo ModuleHelper::endForm();?>
+
 <h1><?php translate("comments_manage");?></h1>
 <div class="alert alert-warning">
 	<p>Work in Progress</p>
