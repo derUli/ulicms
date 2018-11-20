@@ -15,18 +15,39 @@ $stati = array(
     new ListItem(CommentStatus::PUBLISHED, get_translation(CommentStatus::PUBLISHED))
 );
 
-$selectedStatus = Request::getVar("status", defaultStatus, "str");
+$selectedStatus = Request::getVar("status", $defaultStatus, "str");
+$content_id = Request::getVar("content_id", 0, "int");
+
+$contents = ContentFactory::getAllWithComments("title");
+
+$contentSelect = array();
+
+$contentSelect[] = new ListItem(0, "[" . get_translation("every") . "]");
+foreach ($contents as $content) {
+    $language = getLanguageNameByCode($content->language);
+    $type = get_translation($content->type);
+    $contentSelect[] = new ListItem($content->id, "{$content->title} ({$type} - {$language})");
+}
+
 ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
-<?php echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComments");?>
+<?php
+
+echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComments", array(), "get");
+?>
 <div class="form-group">
 	<label for="status"><?php translate("status");?></label>
 	<?php
-
 echo Input::SingleSelect("status", $selectedStatus, $stati, 1);
+?>
+</div>
+<div class="form-group">
+	<label for="status"><?php translate("contents");?></label>
+	<?php
+echo Input::SingleSelect("content_id", $content_id, $contentSelect, 1);
 ?>
 </div>
 <p>
