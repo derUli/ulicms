@@ -418,7 +418,7 @@ class Page extends Content
     {
         // TODO: write a more ressource friendly implementation
         // which doesn't load all comment datasets into the memory
-        return count($this->hasComments()) > 0;
+        return count($this->getComments()) > 0;
     }
 
     // this returns an array of all comments of this content

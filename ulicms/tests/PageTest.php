@@ -1,5 +1,6 @@
 <?php
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Data\Content\Comment;
 
 class PageTest extends \PHPUnit\Framework\TestCase
 {
@@ -311,21 +312,121 @@ class PageTest extends \PHPUnit\Framework\TestCase
 
     public function testHasCommentsReturnTrue()
     {
-        throw new NotImplementedException();
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($page->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($page->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 2");
+        $comment->save();
+        
+        $time = time();
+        $comment->setDate($time);
+        
+        $comment->save();
+        
+        $this->assertTrue($page->hasComments());
+        
+        $this->cleanUp();
     }
 
     public function testHasCommentsReturnFalse()
     {
-        throw new NotImplementedException();
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $this->assertFalse($page->hasComments());
+        
+        $this->cleanUp();
     }
 
     public function testGetCommentsReturnsArrayWithResults()
     {
-        throw new NotImplementedException();
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($page->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Kommentar 1");
+        $comment->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($page->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Kommentar 2");
+        $comment->save();
+        
+        $time = time();
+        $comment->setDate($time);
+        
+        $comment->save();
+        
+        $this->assertCount(2, $page->getComments());
+        $this->assertEquals("Kommentar 1", $page->getComments()[0]->getText());
+        $this->assertEquals("Kommentar 2", $page->getComments()[1]->getText());
+        
+        $this->cleanUp();
     }
 
     public function testGetCommentsReturnsEmptyArray()
     {
-        throw new NotImplementedException();
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $this->assertCount(0, $page->getComments());
+        
+        $this->cleanUp();
     }
 } 
