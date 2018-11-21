@@ -26,5 +26,11 @@ add_translation("published", "Published");
 add_translation("pending", "Pending");
 add_translation("spam", "Spam");
 add_translation("search", "Suchen");
-
 add_translation("limit_results", "Limit Results (0 = Show All)");
+
+add_translation("select_action", "Select Action");
+add_translation("mark_as_spam", "Mark as Spam");
+add_translation("publish", "Publish");
+add_translation("unpublish", "Unpublish");
+
+add_translation("do_action", "Do Action");

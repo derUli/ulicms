@@ -29,6 +29,13 @@ foreach ($contents as $content) {
     $contentSelect[] = new ListItem($content->id, "{$content->title} ({$type} - {$language})");
 }
 
+$actionSelect = array(
+    new ListItem("", "[" . get_translation("select_action") . "]"),
+    new ListItem("mark_as_spam", get_translation("mark_as_spam")),
+    new ListItem("publish", get_translation("publish")),
+    new ListItem("unpublish", get_translation("unpublish")),
+    new ListItem("delete", get_translation("delete"))
+);
 ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
@@ -119,6 +126,25 @@ echo Input::TextBox("limit", $limit, "number", array(
 		</tbody>
 	</table>
 </div>
+<?php
+
+echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", array(
+    "referrer" => getCurrentURL()
+), "post", array(
+    "class" => "voffset3"
+));
+?>
+<div class="row">
+	<div class="col-xs-6">
+<?php
+echo Input::SingleSelect("action", "", $actionSelect, 1);
+?></div>
+
+	<div class="col-xs-6">
+		<button type="submit" class="btn btn-primary"><?php translate("do_action")?></button>
+	</div>
+</div>
+<?php ModuleHelper::endForm();?>
 <?php
 enqueueScriptFile(ModuleHelper::buildRessourcePath("core_comments", "js/admin.js"));
 combinedScriptHtml();

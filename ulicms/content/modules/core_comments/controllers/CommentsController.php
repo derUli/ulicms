@@ -2,6 +2,7 @@
 use UliCMS\Data\Content\Comment;
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML as HTML;
+use UliCMS\Exceptions\NotImplementedException;
 
 class CommentsController extends MainClass
 {
@@ -139,5 +140,10 @@ class CommentsController extends MainClass
             $limit = intval(Settings::get("comments_default_limit"));
         }
         return $limit;
+    }
+
+    public function doAction()
+    {
+        throw new NotImplementedException();
     }
 }

@@ -16,6 +16,8 @@
 		"comments_manage": "comments_manage"
 	},
 	"controller_function_permissions": {
-		"CommentsController::getCommentText": "comments_manage"
+		"CommentsController::getCommentText": "comments_manage",
+		"CommentsController::filterComments": "comments_manage",
+		"CommentsController::doAction": "comments_manage"
 	}
 }
