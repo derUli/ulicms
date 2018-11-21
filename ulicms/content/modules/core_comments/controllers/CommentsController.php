@@ -114,9 +114,6 @@ class CommentsController extends MainClass
             $status = $this->getDefaultStatus();
             $results = Comment::getAllByStatus($status);
         }
-        if ($limit > 0) {
-            $results = ArrayHelper::take($limit, $results);
-        }
         return $results;
     }
 
@@ -126,12 +123,21 @@ class CommentsController extends MainClass
         // get arguments from the URL
         $status = Request::getVar("status", null, "str");
         $content_id = Request::getVar("content_id", null, "int");
-        $limit = Request::getVar("limit", 0, "int");
+        $limit = Request::getVar("limit", $this->getDefaultLimit(), "int");
         
         // do the search query
         $results = $this->getResults($status, $content_id, $limit);
         
         // output the comment backend page to the user
         ActionResult("comments_manage", $results);
+    }
+
+    public function getDefaultLimit()
+    {
+        $limit = 100;
+        if (Settings::get("comments_default_limit") !== false) {
+            $limit = intval(Settings::get("comments_default_limit"));
+        }
+        return $limit;
     }
 }

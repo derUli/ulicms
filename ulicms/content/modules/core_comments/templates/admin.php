@@ -1,22 +1,22 @@
 <?php
 use UliCMS\Backend\BackendPageRenderer;
-use UliCMS\Data\Content\Comment;
 use UliCMS\HTML\Input;
 use UliCMS\HTML\ListItem;
 
 $controller = ModuleHelper::getMainController("core_comments");
 $defaultStatus = $controller->getDefaultStatus();
 
-$comments = is_array(BackendPageRenderer::getModel()) ? BackendPageRenderer::getModel() : Comment::getAllByStatus($defaultStatus);
+$selectedStatus = Request::getVar("status", $defaultStatus, "str");
+$content_id = Request::getVar("content_id", 0, "int");
+$limit = Request::getVar("limit", $controller->getDefaultLimit(), "int");
+
+$comments = is_array(BackendPageRenderer::getModel()) ? BackendPageRenderer::getModel() : $controller->getResults($selectedStatus, $content_id, $limit);
 
 $stati = array(
     new ListItem(CommentStatus::SPAM, get_translation(CommentStatus::SPAM)),
     new ListItem(CommentStatus::PENDING, get_translation(CommentStatus::PENDING)),
     new ListItem(CommentStatus::PUBLISHED, get_translation(CommentStatus::PUBLISHED))
 );
-
-$selectedStatus = Request::getVar("status", $defaultStatus, "str");
-$content_id = Request::getVar("content_id", 0, "int");
 
 $contents = ContentFactory::getAllWithComments("title");
 
@@ -34,6 +34,7 @@ foreach ($contents as $content) {
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
+<h1><?php translate("comments_manage");?></h1>
 <?php
 
 echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComments", array(), "get");
@@ -50,12 +51,19 @@ echo Input::SingleSelect("status", $selectedStatus, $stati, 1);
 echo Input::SingleSelect("content_id", $content_id, $contentSelect, 1);
 ?>
 </div>
+<div class="form-group">
+	<label for="status"><?php translate("limit_results");?></label>
+	<?php
+echo Input::TextBox("limit", $limit, "number", array(
+    "step" => "10",
+    "min" => "0"
+));
+?>
+</div>
 <p>
 	<button type="submit" class="btn btn-primary"><?php translate("search");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?>
-
-<h1><?php translate("comments_manage");?></h1>
 <div class="alert alert-warning">
 	<p>Work in Progress</p>
 </div>
