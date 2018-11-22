@@ -172,7 +172,7 @@ class CommentsController extends MainClass
                         break;
                 }
                 // if action is not delete save it
-                if ($action == "delete") {
+                if ($action != "delete") {
                     $comment->save();
                 }
             }
