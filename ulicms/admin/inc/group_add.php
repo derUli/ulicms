@@ -1,7 +1,7 @@
 <?php
-$permissionChecker = new ACL ();
-$all_permissions = $permissionChecker->getDefaultACL ( true, true );
-$languages = Language::getAllLanguages ();
+$permissionChecker = new ACL();
+$all_permissions = $permissionChecker->getDefaultACL(true, true);
+$languages = Language::getAllLanguages();
 ?>
 <form action="?action=groups" method="post">
 <?php csrf_token_html ();?>
@@ -17,18 +17,17 @@ $languages = Language::getAllLanguages ();
 		</p>
 		<p>
 		<?php
-		foreach ( $all_permissions as $key => $value ) {
-			?>
-			<input type="checkbox" id="<?php
-			echo $key;
-			?>"
-				name="user_permissons[]" value="<?php
-			echo $key;
-			?>"> <label for="<?php
-			echo $key;
-			?>"><?php
-			echo $key;
-			?> </label> <br />
+foreach ($all_permissions as $key => $value) {
+    ?>  <input type="checkbox" id="<?php esc($key);?>"
+				name="user_permissons[]" value="<?php esc($key);?>"
+				data-select-all-checkbox="#checkall"
+				data-checkbox-group=".permission-checkbox"
+				class="permission-checkbox"> <label
+				for="<?php
+    esc($key);
+    ?>"><?php
+    esc($key);
+    ?> </label> <br />
 <?php }?>
 		</p>
 	</fieldset>
@@ -36,7 +35,6 @@ $languages = Language::getAllLanguages ();
 	<fieldset>
 		<p>
 		<?php foreach($languages as $lang){?>
-			
 			<input type="checkbox" name="restrict_edit_access_language[]"
 				value="<?php echo $lang->getID();?>"
 				id="lang-<?php echo $lang->getID();?>"> <label
