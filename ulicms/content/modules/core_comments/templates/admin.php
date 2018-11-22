@@ -37,13 +37,13 @@ $actionSelect = array(
     new ListItem("delete", get_translation("delete"))
 );
 ?>
+
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
 <h1><?php translate("comments_manage");?></h1>
 <?php
-
 echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComments", array(), "get");
 ?>
 <div class="form-group">
@@ -71,16 +71,23 @@ echo Input::TextBox("limit", $limit, "number", array(
 	<button type="submit" class="btn btn-primary"><?php translate("search");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?>
-<div class="alert alert-warning">
-	<p>Work in Progress</p>
-</div>
+<?php
+
+echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", array(
+    "referrer" => getCurrentURL()
+), "post", array(
+    "class" => "voffset3",
+    "id" => "comments"
+));
+?>
 <div class="scroll">
 	<table class="tablesorter table">
 		<thead>
 			<tr>
 				<td><?php
     echo Input::CheckBox("select_all", false, "", array(
-        "disabled" => "disabled"
+        "class" => "select-all",
+        "data-target" => ".comment-checkbox"
     ));
     ?></td>
 				<th><?php translate("date");?></th>
@@ -96,7 +103,9 @@ echo Input::TextBox("limit", $limit, "number", array(
 			<tr>
 				<td><?php
     echo Input::CheckBox("comments[]", false, $comment->getId(), array(
-        "disabled" => "disabled"
+        "class" => "checkbox comment-checkbox",
+        "data-select-all-checkbox" => ".select-all",
+        "data-checkbox-group" => ".comment-checkbox"
     ));
     ?></td>
 				<td><?php esc(date("Y-m-d H:i:s", $comment->getDate()));?></td>
@@ -126,20 +135,11 @@ echo Input::TextBox("limit", $limit, "number", array(
 		</tbody>
 	</table>
 </div>
-<?php
-
-echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", array(
-    "referrer" => getCurrentURL()
-), "post", array(
-    "class" => "voffset3"
-));
-?>
 <div class="row">
 	<div class="col-xs-6">
 <?php
 echo Input::SingleSelect("action", "", $actionSelect, 1);
 ?></div>
-
 	<div class="col-xs-6">
 		<button type="submit" class="btn btn-primary"><?php translate("do_action")?></button>
 	</div>

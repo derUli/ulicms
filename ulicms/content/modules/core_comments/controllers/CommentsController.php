@@ -133,6 +133,7 @@ class CommentsController extends MainClass
         ActionResult("comments_manage", $results);
     }
 
+    // get the configured default limit or if is set the default value
     public function getDefaultLimit()
     {
         $limit = 100;
@@ -144,6 +145,52 @@ class CommentsController extends MainClass
 
     public function doAction()
     {
-        throw new NotImplementedException();
+        // post arguments
+        $comments = Request::getVar("comments", array());
+        $action = Request::getVar("action", null, "str");
+        
+        // if we have comments and an action
+        if (is_array($comments) and ! empty($action)) {
+            // do the selected action for each comment
+            foreach ($comments as $id) {
+                $comment = new Comment($id);
+                switch ($action) {
+                    case "mark_as_spam":
+                        $comment->setStatus(CommentStatus::SPAM);
+                        break;
+                    case "publish":
+                        $comment->setStatus(CommentStatus::PUBLISHED);
+                        break;
+                    case "unpublish":
+                        $comment->setStatus(CommentStatus::PENDING);
+                        break;
+                    case "delete":
+                        $comment->delete();
+                        break;
+                    default:
+                        throw new NotImplementedException("comment action not implemented");
+                        break;
+                }
+                // if action is not delete save it
+                if ($action == "delete") {
+                    $comment->save();
+                }
+            }
+        }
+        
+        // referrer is from a hidden field on the form
+        // Append jumpto=comments to the url to jump to the comment table after redirect
+        // It's inpossible to append an anchor to the url on a http redirect
+        // a javascript in util.js performs the jump to the anchor
+        $referrer = Request::getVar("referrer");
+        if (! str_contains("jumpto=comments", $referrer)) {
+            if (! str_contains("?", $referrer)) {
+                $referrer .= "?";
+            } else {
+                $referrer .= "&";
+            }
+            $referrer .= "jumpto=comments";
+        }
+        Request::redirect($referrer);
     }
 }

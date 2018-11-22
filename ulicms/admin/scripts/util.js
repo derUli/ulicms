@@ -44,6 +44,12 @@ function bindTogglePassword(input, checkbox) {
 $(function() {
 	$(".select-all").change(selectAll);
 	$(".checkbox").change(checkboxChecked);
+	
+	// scroll to the given anchor
+	var jumpTo = url("?jumpto");
+	if (jumpTo !== null && jumpTo.length > 0) {
+		location.href = "#" + jumpTo;
+	}
 });
 
 function checkboxChecked(event) {
