@@ -181,7 +181,7 @@ class Template
             include $originalTemplatePath;
         } else {
             $retval = ob_get_clean();
-            throw new Exception("Template " . $template . " not found!");
+            throw new FileNotFoundException("Template " . $template . " not found!");
         }
         $retval = ob_get_clean();
         return $retval;

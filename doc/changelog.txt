@@ -1,6 +1,7 @@
 ===== Neues in UliCMS 2019.1 =====
 
 Neue Features:
+* Kommentarfunktion
 * Funktion "MX DNS-Eintrag von E-Mail Adressen überprüfen" zum Spamfilter hinzugefügt
 * "Löschen" Button zur "Seite bearbeiten" Ansicht hinzugefügt
 * Neue Einstellungsseite "Performance Einstellungen" hinzugefügt
@@ -737,7 +738,7 @@ Neue Features
 + Klasse Cache hinzugefügt
 
 Bugfixes
-# ContentFactory::loadBySystemnameAndLanguage() ist nun statisch
+# ContentFactory::getBySystemnameAndLanguage() ist nun statisch
 
 Entfernte Features
 - cleanblue Theme aus der Standardinstallation entfernt. Ersatz ist das theme-2016

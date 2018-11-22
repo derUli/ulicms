@@ -1,4 +1,6 @@
 <?php
+use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Data\Content\Comment;
 
 class Page extends Content
 {
@@ -397,9 +399,31 @@ class Page extends Content
         $commentsEnabled = false;
         if (is_null($this->comments_enabled)) {
             $commentsEnabled = boolval(Settings::get("comments_enabled"));
+            
+            $commentable_content_types = Settings::get("commentable_content_types");
+            if ($commentable_content_types) {
+                $commentable_content_types = splitAndTrim($commentable_content_types);
+                
+                if (count($commentable_content_types) > 0 and ! faster_in_array($this->type, $commentable_content_types)) {
+                    $commentsEnabled = false;
+                }
+            }
         } else {
             $commentsEnabled = boolval($this->comments_enabled);
         }
         return $commentsEnabled;
+    }
+
+    public function hasComments()
+    {
+        // TODO: write a more ressource friendly implementation
+        // which doesn't load all comment datasets into the memory
+        return count($this->getComments()) > 0;
+    }
+
+    // this returns an array of all comments of this content
+    public function getComments()
+    {
+        return Comment::getAllByContentId($this->id);
     }
 }

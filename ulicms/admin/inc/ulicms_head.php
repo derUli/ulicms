@@ -42,6 +42,7 @@ $enq = array(
     "scripts/global.js",
     "scripts/bootstrap.min.js",
     "scripts/js/select2.min.js",
+    "scripts/bootbox.min.js",
     $select2TranslationFile,
     "scripts/datatables/datatables.min.js",
     "../lib/js/global.js"
@@ -134,7 +135,7 @@ if (get_action()) {
 do_event("after_backend_header");
 ?>
 <div
-		class="fluid-container main <?php
+		class="container-fluid main <?php
 
 if (get_action()) {
     echo 'action-' . Template::getEscape(get_action());

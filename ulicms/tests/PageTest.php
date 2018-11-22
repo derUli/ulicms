@@ -1,4 +1,6 @@
 <?php
+use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Data\Content\Comment;
 
 class PageTest extends \PHPUnit\Framework\TestCase
 {
@@ -7,15 +9,20 @@ class PageTest extends \PHPUnit\Framework\TestCase
 
     private $commentsInitialEnabled;
 
+    private $initialCommentableContentTypes;
+
     public function setUp()
     {
         @session_start();
-        $this->cleanUp();
         
         $manager = new UserManager();
         $users = $manager->getAllUsers();
         $this->user = $users[0];
-        $this->comments_enabled = Settings::get("comments_enabled");
+        
+        $this->commentsInitialEnabled = Settings::get("comments_enabled");
+        $this->initialCommentableContentTypes = Settings::get("commentable_content_types");
+        
+        $this->cleanUp();
     }
 
     public function tearDown()
@@ -28,12 +35,19 @@ class PageTest extends \PHPUnit\Framework\TestCase
         } else {
             Settings::delete("comments_enabled");
         }
+        if ($this->initialCommentableContentTypes) {
+            Settings::set("commentable_content_types", $this->initialCommentableContentTypes);
+        } else {
+            Settings::delete("commentable_content_types");
+        }
     }
 
     private function cleanUp()
     {
         Database::query("delete from {prefix}content where systemname = 'testdisableshortcodes' or title like 'Unit Test%'", true);
+        
         Settings::delete("comments_enabled");
+        Settings::delete("commentable_content_types");
     }
 
     private $ipsum = 'Lorem ipsum dolor sit amet,
@@ -294,5 +308,125 @@ class PageTest extends \PHPUnit\Framework\TestCase
         Settings::delete("comments_enabled");
         
         $this->assertFalse($page->areCommentsEnabled());
+    }
+
+    public function testHasCommentsReturnTrue()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($page->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($page->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 2");
+        $comment->save();
+        
+        $time = time();
+        $comment->setDate($time);
+        
+        $comment->save();
+        
+        $this->assertTrue($page->hasComments());
+        
+        $this->cleanUp();
+    }
+
+    public function testHasCommentsReturnFalse()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $this->assertFalse($page->hasComments());
+        
+        $this->cleanUp();
+    }
+
+    public function testGetCommentsReturnsArrayWithResults()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($page->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Kommentar 1");
+        $comment->save();
+        
+        $comment = new Comment();
+        $comment->setContentId($page->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("123.123.123.123");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Kommentar 2");
+        $comment->save();
+        
+        $time = time();
+        $comment->setDate($time);
+        
+        $comment->save();
+        
+        $this->assertCount(2, $page->getComments());
+        $this->assertEquals("Kommentar 1", $page->getComments()[0]->getText());
+        $this->assertEquals("Kommentar 2", $page->getComments()[1]->getText());
+        
+        $this->cleanUp();
+    }
+
+    public function testGetCommentsReturnsEmptyArray()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = true;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $this->assertCount(0, $page->getComments());
+        
+        $this->cleanUp();
     }
 } 

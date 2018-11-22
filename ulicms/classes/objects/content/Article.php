@@ -22,7 +22,7 @@ class Article extends Page
         $this->article_author_email = $result->article_author_email;
         $this->article_author_name = $result->article_author_name;
         $this->article_image = $result->article_image;
-        $this->article_date = $result->article_date;
+        $this->article_date = strtotime($result->article_date);
         $this->excerpt = $result->expert;
     }
 
@@ -31,7 +31,7 @@ class Article extends Page
         $retval = null;
         if ($this->id === null) {
             $retval = $this->create();
-            $this->update();
+            $retval = $this->update();
         } else {
             $retval = $this->update();
         }
@@ -44,12 +44,24 @@ class Article extends Page
             return false;
         }
         parent::update();
-        $sql = "update {prefix}content set article_author_email = ?, article_author_name = ?, article_image = ?, article_date = ?, excerpt = ? where id = ?";
+        
+        $article_date = null;
+        if (is_numeric($this->article_date)) {
+            $article_date = intval($this->article_date);
+        } else if (is_string($this->article_date)) {
+            $article_date = strtotime($this->article_date);
+        }
+        
+        $sql = "update {prefix}content set article_author_email = ?, 
+article_author_name = ?, 
+article_image = ?, 
+article_date = from_unixtime(?), 
+excerpt = ? where id = ?";
         $args = array(
             $this->article_author_email,
             $this->article_author_name,
             $this->article_image,
-            $this->article_date,
+            $article_date,
             $this->excerpt,
             $this->id
         );

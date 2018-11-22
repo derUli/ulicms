@@ -137,7 +137,7 @@ class ModuleHelper
         return get_site_protocol() . $domain . $dirname . $suffix;
     }
 
-    public static function getFullPageURLByID($page_id = null)
+    public static function getFullPageURLByID($page_id = null, $suffix = null)
     {
         if (! $page_id) {
             $page_id = get_id();
@@ -174,15 +174,25 @@ class ModuleHelper
         $dirname = str_replace("\\", "/", $dirname);
         
         $currentLanguage = isset($_SESSION["language"]) ? $_SESSION["language"] : Settings::get("default_language");
-        if (! $domain) {
-            if ($page->language != $currentLanguage) {
-                return get_protocol_and_domain() . $dirname . $page->systemname . ".html" . "?language=" . $page->language;
-            } else {
-                return get_protocol_and_domain() . $dirname . $page->systemname . ".html";
+        if ($domain) {
+            $url = get_site_protocol() . $domain . $dirname . $page->systemname . ".html";
+            if (! is_null($suffix)) {
+                $url .= "?{$suffix}";
             }
         } else {
-            return get_site_protocol() . $domain . $dirname . $page->systemname . ".html";
+            if ($page->language != $currentLanguage) {
+                $url = get_protocol_and_domain() . $dirname . $page->systemname . ".html" . "?language=" . $page->language;
+                if (! is_null($suffix)) {
+                    $url .= "&{$suffix}";
+                }
+            } else {
+                $url = get_protocol_and_domain() . $dirname . $page->systemname . ".html";
+                if (! is_null($suffix)) {
+                    $url .= "?{$suffix}";
+                }
+            }
         }
+        return $url;
     }
 
     /**
