@@ -52,7 +52,7 @@ class CommentSpamChecker implements ISpamChecker
         );
         
         // check if Antispam Honeypot is not empty
-        if (Request::hasVar("my_homepage_url")) {
+        if (StringHelper::isNotNullOrEmpty(Request::getVar("my_homepage_url"))) {
             $this->errors[] = new SpamDetectionResult(get_translation("honeypot"), get_translation("honeypot_is_not_empty"));
         }
         
