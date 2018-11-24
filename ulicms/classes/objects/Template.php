@@ -484,5 +484,14 @@ color:" . Settings::get("body-text-color") . ";
     {
         echo self::getPoweredByUliCMS();
     }
-    // TODO Restliche Funktionen aus templating.php implementieren
+
+    public static function getComments()
+    {
+        return Template::executeModuleTemplate("core_comments", "comments.php");
+    }
+
+    public static function comments()
+    {
+        echo self::getComments();
+    }
 }
