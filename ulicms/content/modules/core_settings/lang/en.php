@@ -37,3 +37,5 @@ add_translation("community_settings", "Community Settings");
 add_translation("comments_enabled", "Comments enabled");
 add_translation("comments_must_be_approved", "Comments muste be approved");
 add_translation("commentable_content_types", "Commentable Content Types");
+
+add_translation("keep_spam_ips", "Keep ip addresses of spam comments");

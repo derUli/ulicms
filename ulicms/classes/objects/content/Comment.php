@@ -277,9 +277,13 @@ VALUES      ( ?,
         return self::getAllDatasets(self::TABLE_NAME, self::class, $order);
     }
 
-    public static function deleteIpsAfter48Hours()
+    public static function deleteIpsAfter48Hours($keepSpamIps = false)
     {
-        Database::query("update {prefix}comments set ip = null WHERE date < UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY) and ip is not null", true);
+        $sql = "update {prefix}comments set ip = null WHERE date < FROM_UNIXTIME(UNIX_TIMESTAMP(NOW() - INTERVAL 2 DAY)) and ip is not null";
+        if ($keepSpamIps) {
+            $sql .= " and status <> 'spam'";
+        }
+        Database::query($sql, true);
         return Database::getAffectedRows();
     }
 }
