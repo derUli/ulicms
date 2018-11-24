@@ -28,7 +28,12 @@
 
 <h3><?php translate("write_a_comment");?></h3>
 <div class="comments">
-<?php echo ModuleHelper::buildMethodCallForm(CommentsController::class, "postComment");?>
+<?php
+    
+echo ModuleHelper::buildMethodCallForm(CommentsController::class, "postComment", array(), "post", array(
+        "autocomplete" => "off"
+    ));
+    ?>
 <?php echo UliCMS\HTML\Input::Hidden("content_id", Vars::get("content_id"));?>
 
     <div>
