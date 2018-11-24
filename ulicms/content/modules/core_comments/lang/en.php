@@ -1,5 +1,5 @@
 <?php
-add_translation("comment_contains_badword", "The field \"%field%\" contains the not allowed word \"%word%\"");
+add_translation("comment_contains_badword", "The field \"%field%\" contains the not allowed word \"%word%\".");
 add_translation("comment_text", "Comment Text");
 add_translation("useragent", "User Agent");
 add_translation("honeypot", "Honeypot");
@@ -25,7 +25,7 @@ add_translation("author_url", "Author URL");
 add_translation("published", "Published");
 add_translation("pending", "Pending");
 add_translation("spam", "Spam");
-add_translation("search", "Suchen");
+add_translation("search", "Search");
 add_translation("limit_results", "Limit Results (0 = Show All)");
 
 add_translation("select_action", "Select Action");
