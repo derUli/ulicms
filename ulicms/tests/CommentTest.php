@@ -270,8 +270,6 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         
         $comment->save();
         
-        $comment->save();
-        
         $comment = new Comment();
         $comment->setContentId($last->id);
         $comment->setAuthorName("John Doe");

@@ -75,8 +75,8 @@ class CommentSpamCheckerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Author Name', $error0->field);
         $this->assertEquals('Comment Text', $error1->field);
         
-        $this->assertEquals('The field "Author Name" contains the not allowed word "Fuck"', $error0->message);
-        $this->assertEquals('The field "Comment Text" contains the not allowed word "Shit"', $error1->message);
+        $this->assertEquals('The field "Author Name" contains the not allowed word "Fuck".', $error0->message);
+        $this->assertEquals('The field "Comment Text" contains the not allowed word "Shit".', $error1->message);
     }
 
     public function testSpamWithInvalidMxEntry()

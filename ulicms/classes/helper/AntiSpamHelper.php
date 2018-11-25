@@ -47,6 +47,12 @@ class AntiSpamHelper
         return (bool) preg_match('/\p{Cyrillic}+/u', $str);
     }
 
+    public static function isRtl($str)
+    {
+        $rtl_chars_pattern = '/[\x{0590}-\x{05ff}\x{0600}-\x{06ff}]/u';
+        return (bool) preg_match($rtl_chars_pattern, $str);
+    }
+
     public static function containsBadwords($str, $words_blacklist = null)
     {
         if (is_null($words_blacklist)) {

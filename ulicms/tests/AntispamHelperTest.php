@@ -48,7 +48,17 @@ class AntispamHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(AntiSpamHelper::isCyrillic("Це просто текст"));
     }
 
-    // TODO: Implement test for isCountryBlocked
+    public function testIsRtl()
+    {
+        $this->assertTrue(AntiSpamHelper::isRtl("ایران یک دولت نیست"));
+        $this->assertTrue(AntiSpamHelper::isRtl("אין אלוהים."));
+        $this->assertTrue(AntiSpamHelper::isRtl("لا يوجد إله."));
+        $this->assertFalse(AntiSpamHelper::isRtl("There is no god."));
+        $this->assertFalse(AntiSpamHelper::isRtl("Es gibt keinen Gott."));
+        $this->assertFalse(AntiSpamHelper::isRtl("Немає бога."));
+        $this->assertFalse(AntiSpamHelper::isRtl("没有上帝。"));
+    }
+
     public function testIsCountryBlocked()
     {
         Settings::set("country_blacklist", "vn,jp,at,tr");
