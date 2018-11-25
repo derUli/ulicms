@@ -25,13 +25,10 @@ class Mailer
     {
         $mode = Settings::get("email_mode") ? Settings::get("email_mode") : EmailModes::INTERNAL;
         
-        // UliCMS speichert seit UliCMs 9.0.1 E-Mails, die das System versendet hat
+        // UliCMS speichert seit UliCMS 9.0.1 E-Mails, die das System versendet hat
         // in der Datenbank
         $insert_sql = "INSERT INTO " . tbname("mails") . " (headers, `to`, subject, body) VALUES ('" . db_escape($headers) . "', '" . db_escape($to) . "', '" . db_escape($subject) . "', '" . db_escape($message) . "')";
         db_query($insert_sql);
-        
-        // Damit Umlaute auch im Betreff korrekt dargestellt werden, diese mit UTF-8 kodieren
-        $subject = "=?UTF-8?B?" . base64_encode($subject) . "?=";
         
         // TODO: Hieraus einen Switch machen
         switch ($mode) {
@@ -90,6 +87,7 @@ class Mailer
         }
         $mailer->XMailer = Settings::get("show_meta_generator") ? "UliCMS" : "";
         $mailer->CharSet = "UTF-8";
+		$mailer->Encoding = "base64"; 
         
         $mailer = apply_filter($mailer, "php_mailer_instance");
         return $mailer;
