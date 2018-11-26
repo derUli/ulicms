@@ -124,21 +124,61 @@ a
 
 
 
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
  
+
+
+
+
+
 
 
 (
 .btn
 
 
+
+
+
+
+
  
+
+
+
+
+
 
 
 ),
 a
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -148,21 +188,61 @@ a
 
 
 
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
  
+
+
+
+
+
 
 
 (
 .btn
 
 
+
+
+
+
+
  
+
+
+
+
+
 
 
 ),
 a
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -172,17 +252,47 @@ a
 
 
 
+
+
+
+
+
+
+
+
+
+
 :not
 
 
+
+
+
+
+
  
+
+
+
+
+
 
 
 (
 .btn
 
 
+
+
+
+
+
  
+
+
+
+
+
 
 
 )
@@ -192,13 +302,43 @@ color
 
 
 
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
 
 
  
 
 
+
+
+
+
+
 rgb
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -212,13 +352,43 @@ text-decoration
 
 
 
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
 
 
  
 
 
+
+
+
+
+
 none
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -229,10 +399,30 @@ font-weight
 
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
 
+
+
+
+
+
  
+
+
+
+
+
 
 
 500;
@@ -260,6 +450,16 @@ input[type="button"], input[type="submit"], button {
 input
 
 
+
+
+
+
+
+
+
+
+
+
 [
 type
 =
@@ -267,6 +467,16 @@ type
 ]
 ,
 input
+
+
+
+
+
+
+
+
+
+
 
 
 [
@@ -278,6 +488,16 @@ type
 input
 
 
+
+
+
+
+
+
+
+
+
+
 [
 type
 =
@@ -285,6 +505,16 @@ type
 ]
 ,
 input
+
+
+
+
+
+
+
+
+
+
 
 
 [
@@ -296,6 +526,16 @@ type
 input
 
 
+
+
+
+
+
+
+
+
+
+
 [
 type
 =
@@ -303,6 +543,16 @@ type
 ]
 ,
 input
+
+
+
+
+
+
+
+
+
+
 
 
 [
@@ -314,6 +564,16 @@ type
 input
 
 
+
+
+
+
+
+
+
+
+
+
 .color
 ,
 select
@@ -321,6 +581,16 @@ select
 textarea
 ,
 input
+
+
+
+
+
+
+
+
+
+
 
 
 [
@@ -332,24 +602,74 @@ type
 input
 
 
+
+
+
+
+
+
+
+
+
+
 :not
 
+
+
+
+
+
  
+
+
+
+
+
 
 (
 [
 type
 ]
 
+
+
+
+
+
  
+
+
+
+
+
 
 ){
 width
 
 
+
+
+
+
+
+
+
+
+
+
 :
 
+
+
+
+
+
  
+
+
+
+
+
 
 100%;
 }
@@ -768,6 +1088,10 @@ table.dataTable {
 
 .dataTables_wrapper .dataTables_filter input {
 	margin-left: 0 !important;
+}
+
+.dataTables_wrapper {
+	margin-bottom: 10px;
 }
 
 table.dataTable tbody th, table.dataTable tbody td {
