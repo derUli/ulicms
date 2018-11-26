@@ -11,6 +11,7 @@ use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\Security\SpamChecker\SpamFilterConfiguration;
 use UliCMS\Security\SpamChecker\CommentSpamChecker;
 
+// TODO: Comment public static functions
 class Comment extends Model
 {
 
@@ -285,5 +286,19 @@ VALUES      ( ?,
         }
         Database::query($sql, true);
         return Database::getAffectedRows();
+    }
+
+    public static function checkIfCommentWithIpExists($ip, $status = CommentStatus::SPAM)
+    {
+        $sql = "select ip from {prefix}comments where ip = ?";
+        $args = array(
+            strval($ip)
+        );
+        if ($status) {
+            $sql .= " and status = ?";
+            $args[] = strval($status);
+        }
+        $query = Database::pQuery($sql, $args, true);
+        return Database::any($query);
     }
 }

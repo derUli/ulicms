@@ -401,4 +401,40 @@ class CommentTest extends \PHPUnit\Framework\TestCase
         $comment->setAuthorUrl("ftp://");
         $this->assertNull($comment->getAuthorUrl());
     }
+
+    public function testCheckIfCommentWithIpExistsTrue()
+    {
+		
+        $content = ContentFactory::getAll();
+        $first = $content[0];
+		
+        $comment = new Comment();
+		$comment->setContentId($first->id);
+        $comment->setAuthorName("John Doe");
+        $comment->setAuthorEmail("john@doe.de");
+        $comment->setAuthorUrl("http://john-doe.de");
+        $comment->setIp("222.222.222.222");
+        $comment->setUserAgent("Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36");
+        $comment->setText("Unit Test 1");
+        $comment->setStatus(CommentStatus::SPAM);
+        $comment->save();
+        
+        $this->assertTrue(Comment::checkIfCommentWithIpExists("222.222.222.222", CommentStatus::SPAM));
+        
+        $comment->setStatus(CommentStatus::PUBLISHED);
+        $comment->save();
+        
+        $this->assertFalse(Comment::checkIfCommentWithIpExists("222.222.222.222", CommentStatus::SPAM));
+        
+        $this->assertTrue(Comment::checkIfCommentWithIpExists("222.222.222.222", CommentStatus::PUBLISHED));
+        
+        $comment->delete();
+    }
+
+    public function testCheckIfCommentWithIpExistsFalse()
+    {
+        $this->assertFalse(Comment::checkIfCommentWithIpExists("111.111.111.111", CommentStatus::SPAM));
+        $this->assertFalse(Comment::checkIfCommentWithIpExists("111.111.111.111", CommentStatus::PUBLISHED));
+        $this->assertFalse(Comment::checkIfCommentWithIpExists("111.111.111.111", CommentStatus::PENDING));
+    }
 }
