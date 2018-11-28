@@ -25,6 +25,7 @@ class SessionManager extends Controller
         $sessionData = validate_login($_POST["user"], $_POST["password"], $confirmation_code);
         $sessionData = apply_filter($sessionData, "session_data");
         
+        // if login successful register session
         if ($sessionData) {
             // sync modules folder with database at first login
             if (! Settings::get("sys_initialized")) {
@@ -37,9 +38,11 @@ class SessionManager extends Controller
             }
             register_session($sessionData, true);
         } else {
+            // If login failed
             if ($logger) {
                 $logger->error("User {$_POST['user']} - Login Failed");
             }
+            // send unauthorized header
             Response::sendStatusHeader(HttpStatusCode::UNAUTHORIZED);
             do_event("login_failed");
         }
@@ -55,10 +58,13 @@ class SessionManager extends Controller
             $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
             $logger->debug("User $name - Logout");
         }
+        // set user state to offline
         db_query("UPDATE " . tbname("users") . " SET last_action = 0 WHERE id = $id");
         $url = apply_filter("index.php", "logout_url");
-        header("Location: $url");
+        // throw the session to /dev/null
         session_destroy();
+        // redirect to the logout Url
+        Response::redirect($url, HttpStatusCode::MOVED_TEMPORARILY);
         exit();
     }
 
