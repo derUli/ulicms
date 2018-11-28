@@ -50,8 +50,6 @@ if (isset($cfg->ip_whitelist) and is_array($cfg->ip_whitelist) and count($cfg->i
 }
 require_once "inc/queries.php";
 
-require_once "inc/logincheck.php";
-
 if ($_GET["action"] == "ulicms_news") {
     require_once "inc/ulicms_news.php";
     exit();

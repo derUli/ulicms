@@ -8,7 +8,8 @@
 		"admin_edit": "templates/users/edit.php"
 	},
 	"controllers": {
-		"UserController": "controllers/UserController.php"
+		"UserController": "controllers/UserController.php",
+		"SessionManager": "controllers/SessionManager.php"
 	},
 	"controllers_function_permissions": {
 		"UserController::deletePost": "users",

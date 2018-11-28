@@ -39,7 +39,7 @@ class PasswordReset
         if (! is_admin_dir()) {
             $url .= "/admin";
         }
-        $url .= "/?reset_password_token=" . $token;
+        $url .= "/" . ModuleHelper::buildMethodCallUrl(SessionManager::class, "resetPassword", "token=$token");
         return $url;
     }
 
