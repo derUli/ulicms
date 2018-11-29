@@ -346,6 +346,12 @@ if (is_true($cfg->preload_all_settings)) {
     Settings::preloadAll();
 }
 
+if (! Settings::get("session_name")) {
+    Settings::set("session_name", uniqid() . "_SESSION");
+}
+
+session_name(Settings::get("session_name"));
+
 $useragent = Settings::get("useragent");
 
 if ($useragent) {
@@ -441,6 +447,7 @@ ModelRegistry::loadModuleModels();
 TypeMapper::loadMapping();
 HelperRegistry::loadModuleHelpers();
 ControllerRegistry::loadModuleControllers();
+
 do_event("before_init");
 do_event("init");
 do_event("after_init");
@@ -458,8 +465,4 @@ if (! defined("PATCH_CHECK_URL")) {
     define("PATCH_CHECK_URL", "https://patches.ulicms.de/?v=" . urlencode(implode(".", $version->getInternalVersion())) . "&installed_patches=" . urlencode($installed_patches));
 }
 
-if (! Settings::get("session_name")) {
-    Settings::set("session_name", uniqid() . "_SESSION");
-}
 
-session_name(Settings::get("session_name"));
