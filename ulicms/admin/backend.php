@@ -22,8 +22,10 @@ if (is_file(getLanguageFilePath($syslang))) {
     include_once getLanguageFilePath("en");
 }
 Translation::loadAllModuleLanguageFiles($syslang);
+
 do_event("before_include_custom_lang_file");
 Translation::includeCustomLangFile($syslang);
+
 do_event("after_include_custom_lang_file");
 do_event("before_custom_lang");
 do_event("custom_lang_" . $syslang);
@@ -49,11 +51,6 @@ if (isset($cfg->ip_whitelist) and is_array($cfg->ip_whitelist) and count($cfg->i
     die();
 }
 require_once "inc/queries.php";
-
-if ($_GET["action"] == "ulicms_news") {
-    require_once "inc/ulicms_news.php";
-    exit();
-}
 
 if (is_logged_in()) {
     db_query("UPDATE " . tbname("users") . " SET last_action = " . time() . " WHERE id = " . get_user_id());

@@ -59,7 +59,8 @@ if ($permissionChecker->hasPermission("dashboard")) {
         ?>
 	<h2 class="accordion-header">
 	<?php translate("ulicms_news");?></h2>
-	<div class="accordion-content" id="ulicms-feed">
+	<div class="accordion-content" id="ulicms-feed"
+		data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "newsfeed")?>">
 		<img src="gfx/loading.gif" alt="Feed wird geladen..." />
 	</div>
 <?php } ?>

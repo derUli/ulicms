@@ -1,5 +1,6 @@
 $(function() {
-	$('#ulicms-feed').load('?action=ulicms_news');
+	var url = $("#ulicms-feed").data("url");
+	$('#ulicms-feed').load(url);
 	var url = $("#patch-notification").data("url");
 	$.get(url, function(data, status) {
 		if (data.length > 0) {

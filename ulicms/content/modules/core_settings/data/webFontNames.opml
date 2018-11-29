@@ -4,7 +4,7 @@
 	<head>
 		<title>Names of Google web fonts</title>
 		<dateCreated>Sun, 26 Feb 2012 22:05:31 GMT</dateCreated>
-		</head>
+	</head>
 	<body>
 		<outline text="ABeeZee" />
 		<outline text="Abel" />
@@ -738,5 +738,5 @@
 		<outline text="Yeseva One" />
 		<outline text="Yesteryear" />
 		<outline text="Zeyada" />
-		</body>
-	</opml>
+	</body>
+</opml>

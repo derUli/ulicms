@@ -93,4 +93,3 @@ switch ($ajax_cmd) {
         echo "Unknown Call";
         break;
 }
-?>
