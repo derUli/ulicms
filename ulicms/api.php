@@ -207,7 +207,7 @@ function preparePlainTextforHTMLOutput($text)
 
 function get_action()
 {
-   return BackendHelper::getAction();
+    return BackendHelper::getAction();
 }
 
 function isMaintenanceMode()
@@ -874,22 +874,6 @@ function getCurrentLanguage($current = false)
         return basename($_SESSION["language"]);
     } else {
         return basename(Settings::get("default_language"));
-    }
-}
-
-// Auf automatische aktualisieren prüfen.
-// Rückgabewert: ein String oder False
-function checkForUpdates()
-{
-    if (Settings::get("disable_core_update_check")) {
-        return false;
-    }
-    include_once ULICMS_ROOT . "/lib/file_get_contents_wrapper.php";
-    $info = @file_get_contents_Wrapper(UPDATE_CHECK_URL, true);
-    if (! $info or trim($info) === "") {
-        return false;
-    } else {
-        return $info;
     }
 }
 

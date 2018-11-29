@@ -83,12 +83,6 @@ switch ($ajax_cmd) {
             echo "yes";
         }
         break;
-    case "core_update_check":
-        include "inc/ajax_core_update_check.php";
-        break;
-    case "ajax_patch_check":
-        include "inc/ajax_patch_check.php";
-        break;
     case "available_modules":
         include_once "inc/ajax_available_modules.php";
         break;
