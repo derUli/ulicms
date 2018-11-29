@@ -303,7 +303,7 @@ class PageController extends Controller
 	only_owner_can_edit = $only_owner_can_edit, only_others_can_edit = $only_others_can_edit,
 	hidden = $hidden, comment_homepage = '$comment_homepage',
 	link_to_language = $link_to_language, comments_enabled = $comments_enabled WHERE id=$id";
-        db_query($sql) or die(DB::error());
+        db_query($sql);
         
         $user_id = get_user_id();
         $content_id = $id;
@@ -406,5 +406,10 @@ class PageController extends Controller
         }
         
         Request::redirect(ModuleHelper::buildActionURL("pages"));
+    }
+
+    public function getContentTypes()
+    {
+        JSONResult(DefaultContentTypes::getAll());
     }
 }

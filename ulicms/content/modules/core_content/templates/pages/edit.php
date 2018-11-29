@@ -81,7 +81,9 @@ if ($permissionChecker->hasPermission("pages")) {
             ?>
 <?php
             echo ModuleHelper::buildMethodCallForm("PageController", "edit", array(), "post", array(
-                "id" => "pageform-edit"
+                "id" => "pageform-edit",
+                "class" => "main-form",
+                "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes")
             ));
             ?></div>
 	<input type="hidden" name="edit_page" value="edit_page"> <input
@@ -817,8 +819,7 @@ function openArticleImageSelectWindow(field) {
 				<p>
 					<a
 						href="<?php esc(ModuleHelper::buildMethodCallUrl(CommentsController::class, "filterComments", "content_id={$row->id}"));?>"
-						class="btn btn-default"
-						target="_blank"><?php translate("comments_manage");?></a>
+						class="btn btn-default" target="_blank"><?php translate("comments_manage");?></a>
 				</p>
                 <?php
             }

@@ -23,7 +23,8 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
         "name" => "newpageform",
         "id" => "pageform",
         "style" => "display:none",
-        "class" => "pageform"
+        "class" => "pageform main-form",
+        "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes")
     ));
     ?>
 <p>

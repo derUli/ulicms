@@ -151,16 +151,17 @@ AllTypes = {}
 
 $(document).ready(function() {
 	if ($("#page-list").length <= 0) {
-		var data = {
-			ajax_cmd : "getContentTypes"
-		};
+		var url = $(".main-form").first().data("get-content-types-url");
 
-		$.get("index.php", data, function(response, status) {
+		$.ajax({
+			url, 
+			success: function(response, status) {
+		
 			AllTypes = response;
 			showAndHideFieldsByTypeWithoutEffects();
 			$(".loadspinner").hide();
 			$(".pageform").show();
-		});
+		}});
 
 		bindEvents();
 	}
