@@ -5,7 +5,7 @@ class CommentStatusTest extends \PHPUnit\Framework\TestCase
 
     public function testDefault()
     {
-        $this->assertEquals("pending", CommentStatus::DEFAULT);
+        $this->assertEquals("pending", CommentStatus::DEFAULT_STATUS);
     }
 
     public function testPending()

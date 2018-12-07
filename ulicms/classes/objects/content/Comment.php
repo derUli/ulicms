@@ -27,7 +27,7 @@ class Comment extends Model
 
     private $text;
 
-    private $status = CommentStatus::DEFAULT;
+    private $status = CommentStatus::DEFAULT_STATUS;
 
     private $ip;
 

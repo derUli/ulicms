@@ -9,5 +9,5 @@ class CommentStatus
 
     const SPAM = "spam";
 
-    const DEFAULT = self::PENDING;
+    const DEFAULT_STATUS = self::PENDING;
 }
