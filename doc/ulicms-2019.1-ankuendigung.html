@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UliCMS 2019.1 mit vielen neuen Features</title>
+<style type="text/css">
+body {
+	background-color: white;
+	font-family: "wf_SegoeUI", "Segoe UI", "Segoe", "Segoe WP", "Tahoma",
+		"Verdana", "Arial", "sans-serif";
+	font-size: medium;
+	color: rgb(50, 50, 50);
+	margin: 0;
+	padding: 20px;
+}
+
+li {
+	margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+	<h1>UliCMS 2019.1 mit vielen neuen Features</h1>
+	<p>UliCMS 2019.1 ist das erste UliCMS Release im Jahr 2019.<br /> Dieses
+		Release legt den Hauptfokus auf Community Features, Antispam Features
+		und auf Verbesserungen der Usability.</p>
+	
+	<h2>Major Features in diesem Release</h2>
+	<ul>
+		<li>Kommentarfunktion</li>
+		<li>Zusätzliche Optionen zur Bekämpfung von Spam</li>
+		<li>Mehrere Gruppen einem Benutzer zuweisen</li>
+		<li>"Löschen" Button in der "Seite bearbeiten" Ansicht</li>
+	</ul>
+	
+	<h2>Kommentarfunktion</h2>
+	<p>UliCMS enthält seit diesem Release eine Kommentarfunktion. Diese
+		ist in den Standardeinstellungen deaktiviert und kann in den den
+		Community-Einstellungen aktiviert werden.</p>
+	<p>Die Kommentarfunktion wird bisher nur vom Theme impro17
+		unterstützt. Sie lässt sich jedoch einfach durch den Aufruf einer
+		Funktion in andere Themes integrieren.</p>
+	<p>Die Kommentarfunktion unterstützt alle Features zur Verhinderung
+		von Spam. Als Spam erkannte Kommentare werden als Spam markiert, aber
+		trotzdem gespeichert. In einem zukünftigen UliCMS Release wird das
+		Feature implementiert werden, dass der Spamfilter die vorherigen
+		Spam-Kommentare miteinbezieht, um Spam Kommentare besser erkennen zu
+		können.</p>
+	<p>Details zur Nutzung der neuen Kommentarfunktion erhalten Sie im
+		Dokument "Neue Features in UliCMS 2019.1.pdf".</p>
+		
+	<h2>Zusätzliche Optionen zur Bekämpfung von Spam</h2>
+	<p>Es wurden zwei neue Optionen zur Bekämpfung von Formularspam hinzugefügt.</p>
+	<p>Die Option "MX DNS-Eintrag von E-Mail Adressen überprüfen" führt eine Überprüfung der E-Mail Domain der angegebenen E-Mail Adresse durch.</p>
+	<p>Wenn unter der Domain kein E-Mail Server vorhanden ist, handelt es sich mit hoher Wahrscheinlichkeit um eine ungültige E-Mail Adresse.</p>
+	<p>Die Option "Anfragen von Bots blockieren" überprüft den Useragent des Clients, ob sich dieser als Bot oder Crawler ausgibt und blockiert, falls es sich um einen Bot handelt, die Nachricht.</p>
+	
+	<h2>Zuweisung von mehreren Gruppen zu Usern</h2>
+	<p>Einem User können nun zusätzlich zur primären Gruppe beliebig viele sekundäre Gruppen zugewiesen. Die Berechtigungen aller Gruppen werden zusammengefügt, so dass der User eine Berechtigung hat, sobald mindestens eine Gruppe der er zugewiesen ist, diese Berechtigung gesetzt hat.</p>
+</body>
+</html>

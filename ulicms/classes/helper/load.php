@@ -3,7 +3,6 @@ $classes = array(
     "AntiSpamHelper",
     "ArrayHelper",
     "BackendHelper",
-    "HtmlHelper",
     "ModuleHelper",
     "NumberFormatHelper",
     "SecurityHelper",
@@ -12,5 +11,5 @@ $classes = array(
     "DataTablesHelper"
 );
 foreach ($classes as $class) {
-    require_once dirname(__FILE__) . "/$class.php";
+    include_once dirname(__file__) . "/$class.php";
 }

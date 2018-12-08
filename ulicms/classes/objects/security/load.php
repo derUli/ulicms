@@ -1,9 +1,11 @@
 <?php
-$classes = array (
-		"ACL",
-		"Encryption" 
+$classes = array(
+    "ACL",
+    "Encryption",
+    "PermissionChecker",
+    "IDatasetPermissionChecker",
+    "ContentPermissionChecker"
 );
-foreach ( $classes as $class ) {
-    require dirname ( __FILE__ ) . "/$class.php";
+foreach ($classes as $class) {
+    include_once dirname(__file__) . "/$class.php";
 }
-

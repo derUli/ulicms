@@ -1,3 +1,5 @@
 <?php
-abstract class Helper {
+
+abstract class Helper
+{
 }

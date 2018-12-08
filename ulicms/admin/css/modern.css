@@ -6,8 +6,9 @@
 
 body {
 	background-color: white;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-		Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Emoji",
+		"Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue",
+		sans-serif;
 	font-size: 16px;
 	color: rgb(50, 50, 50);
 	margin: 0;
@@ -43,11 +44,12 @@ img {
 }
 
 html {
-	overflow-y: scroll;
+	overflow-y:;
 }
 
 .scroll {
 	overflow-x: auto;
+	overflow-y: visible;
 }
 
 /* main menu styles */
@@ -118,45 +120,311 @@ div#root-container {
 }
 
 a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :not
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
 (
 .btn
-)
-,
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+),
 a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :visited
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :not
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
 (
 .btn
-)
-,
-,
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+),
 a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :focus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :not
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
 (
 .btn
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
 )
-,
 {
 color
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
  
+
+
+
+
+
+
+
 rgb
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 (30
 ,
 30,
 30);
 text-decoration
-:
- 
-none
-;
 
-	
-font-weight
+
+
+
+
+
+
+
+
+
+
+
+
+
 :
+
+
+
+
+
+
+
  
+
+
+
+
+
+
+
+none
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;
+font-weight
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
 500;
 }
 a:hover, a:active {
@@ -179,12 +447,232 @@ input[type="button"], input[type="submit"], button {
 	padding: 10px;
 }
 
-input[type="text"], input[type="password"], input[type="email"], input[type="number"],
-	input[type="phone"], input[type="color"], input.color, select, textarea,
-	input[type="url"] {
-	width: 100%;
-}
+input
 
+
+
+
+
+
+
+
+
+
+
+
+[
+type
+=
+"text"
+]
+,
+input
+
+
+
+
+
+
+
+
+
+
+
+
+[
+type
+=
+"password"
+]
+,
+input
+
+
+
+
+
+
+
+
+
+
+
+
+[
+type
+=
+"email"
+]
+,
+input
+
+
+
+
+
+
+
+
+
+
+
+
+[
+type
+=
+"number"
+]
+,
+input
+
+
+
+
+
+
+
+
+
+
+
+
+[
+type
+=
+"phone"
+]
+,
+input
+
+
+
+
+
+
+
+
+
+
+
+
+[
+type
+=
+"color"
+]
+,
+input
+
+
+
+
+
+
+
+
+
+
+
+
+.color
+,
+select
+,
+textarea
+,
+input
+
+
+
+
+
+
+
+
+
+
+
+
+[
+type
+=
+"url"
+]
+,
+input
+
+
+
+
+
+
+
+
+
+
+
+
+:not
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+(
+[
+type
+]
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+){
+width
+
+
+
+
+
+
+
+
+
+
+
+
+:
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+100%;
+}
 input, select, table, textarea {
 	border: solid 1px #EDEDED;
 }
@@ -370,6 +858,10 @@ div#google-fonts select {
 	word-wrap: break-word;
 }
 
+.accordion-content {
+	padding: 15px;
+}
+
 div#login-welcome-text {
 	border: solid 1px #EDEDED;
 	padding: 10px;
@@ -404,6 +896,8 @@ div#login-welcome-text {
 
 .main {
 	margin-top: 20px;
+	margin-left: 5px;
+	margin-right: 5px;
 }
 
 .ulicms-logo {
@@ -454,32 +948,24 @@ h2.accordion-header {
 	background-color: #335599;
 }
 
-@media ( max-width: 500px) {
+@media ( max-width : 500px) {
 	.hide-on-mobile {
 		display: none;
 	}
 }
-@media(max-width: 650px){
-	.dataTables_length,
-	.dataTables_filter {
+
+@media ( max-width : 650px) {
+	.dataTables_length, .dataTables_filter {
 		display: none;
 	}
 }
 
 @media ( min-width : 1200px) {
-	.main {
-		margin-left: 40px;
-		margin-right: 40px;
-	}
 }
 
 @media ( max-width : 1200px) {
 	table.tablesorter .header {
 		background-image: none !important;
-	}
-	.main {
-		margin-left: 20px;
-		margin-right: 20px;
 	}
 }
 
@@ -589,17 +1075,29 @@ form.page-list-filters, .x-results-found {
 	margin-bottom: 10px;
 }
 
-table.dataTable{
-	width:100% !important;
-	    position: relative;
-		top: 5px;
+table.dataTable {
+	width: 100% !important;
+	position: relative;
+	top: 5px;
 }
 
-.tablesorter{
-	width:100%;
-	margin-top:10px;
+.tablesorter {
+	width: 100%;
+	margin-top: 10px;
 }
 
-.dataTables_wrapper .dataTables_filter input{
-	margin-left:0 !important;
+.dataTables_wrapper .dataTables_filter input {
+	margin-left: 0 !important;
+}
+
+.dataTables_wrapper {
+	margin-bottom: 10px;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+	padding: 8px 18px !important;
+}
+
+.top-bar {
+	margin-bottom: 10px;
 }

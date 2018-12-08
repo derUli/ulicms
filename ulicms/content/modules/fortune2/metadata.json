@@ -1,15 +1,22 @@
 {
-	"source" : "extend",
-	"controllers" : {
-	"Fortune" : "fortune.php"
+	"source": "extend",
+	"controllers": {
+		"Fortune": "fortune.php"
 	},
-	"main_class" : "Fortune",
-	"version" : "0.1.4",
-	"embed" : true,
-	"admin_permission" : "fortune_settings",
-	"custom_acl" : ["fortune_settings", "fortune2_post", "fortune2_get"],
-	"controller_function_permissions" : {
-        "Fortune::doSomethingPost" : "fortune2_post",
-        "Fortune::doSomethingGet" : "fortune2_get"
-   }
+	"main_class": "Fortune",
+	"version": "0.2.0",
+	"embed": true,
+	"admin_permission": "fortune_settings",
+	"custom_acl": [
+		"fortune_settings",
+		"fortune2_post",
+		"fortune2_get"
+	],
+	"controller_function_permissions": {
+		"Fortune::doSomethingPost": "fortune2_post",
+		"Fortune::doSomethingGet": "fortune2_get"
+	},
+	"actions": {
+		"fortune": "templates/action.php"
+	}
 }

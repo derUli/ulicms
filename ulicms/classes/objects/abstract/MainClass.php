@@ -1,3 +1,5 @@
 <?php
-abstract class MainClass extends Controller {
+
+abstract class MainClass extends Controller
+{
 }

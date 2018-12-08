@@ -1,13 +1,13 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "open_graph" )) {
-	$og_type = Settings::get ( "og_type" );
-	$og_image = Settings::get ( "og_image" );
-	$og_url = "";
-	if (! empty ( $og_image ) and ! startsWith ( $og_image, "http" )) {
-		$og_url = get_protocol_and_domain () . $og_image;
-	}
-	?>
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("open_graph")) {
+    $og_type = Settings::get("og_type");
+    $og_image = Settings::get("og_image");
+    $og_url = "";
+    if (! empty($og_image) and ! startsWith($og_image, "http")) {
+        $og_url = get_protocol_and_domain() . $og_image;
+    }
+    ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("settings_simple");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
@@ -15,10 +15,10 @@ if ($acl->hasPermission ( "open_graph" )) {
 <h1><?php translate("open_graph");?></h1>
 <p><?php translate("og_defaults_help");?></p>
 <?php
-	echo ModuleHelper::buildMethodCallForm ( "OpenGraphController", "save", array (), "post", array (
-			"id" => "open_graph" 
-	) );
-	?>
+    echo ModuleHelper::buildMethodCallForm("OpenGraphController", "save", array(), "post", array(
+        "id" => "open_graph"
+    ));
+    ?>
 <table style="border: 0px;">
 	<tr>
 		<td><strong><?php translate("type");?></strong></td>
@@ -29,8 +29,8 @@ if ($acl->hasPermission ( "open_graph" )) {
 		<td><strong><?php translate("image");?></strong></td>
 		<td>
 <?php
-	if (! empty ( $og_url )) {
-		?>
+    if (! empty($og_url)) {
+        ?>
 <div>
 				<img class="small-preview-image"
 					src="<?php echo htmlspecialchars($og_url);?>" />
@@ -41,7 +41,8 @@ if ($acl->hasPermission ( "open_graph" )) {
 			value="<?php echo htmlspecialchars($og_image);?>"
 			style="cursor: pointer" /><br /> <a href="#"
 			onclick="$('#og_image').val('');return false;"><?php translate("clear");?>
-		</a></td>
+		</a>
+		</td>
 	</tr>
 	<tr>
 		<td></td>
@@ -50,12 +51,12 @@ if ($acl->hasPermission ( "open_graph" )) {
 		</td>
 	</tr>
 </table>
-</form>
+<?php echo ModuleHelper::endForm();?>
 <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/open_graph.js"));
     combinedScriptHtml();
     ?>
 <?php
 } else {
-	noPerms ();
+    noPerms();
 }

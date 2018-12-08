@@ -1,7 +1,7 @@
 <?php
 define("TRANSLATION_INSTALLATION", "Installation");
 define("TRANSLATION_TITLE_STEP_1", "Select Language");
-define("TRANSLATION_TITLE_STEP_2", "Accept License Conditions" );
+define("TRANSLATION_TITLE_STEP_2", "Accept License Conditions");
 define("TRANSLATION_TITLE_STEP_3", "Change File Permissions");
 define("TRANSLATION_TITLE_STEP_4", "Connect to Database");
 define("TRANSLATION_TITLE_STEP_5", "Create Administrator Account");
@@ -40,6 +40,7 @@ define("TRANSLATION_CREATE_CMS_CONFIG_PHP", "Create CMSConfig.php");
 define("TRANSLATION_WRITE_CMS_CONFIG_FAILED", "Writing CMSConfig.php failed.<br/>" . "Please create CMSConfig.php manually and insert the following code:");
 define("TRANSLATION_LAST_STEP", "This is the last step of the installation. Now, please delete the \"installer\" Folder from your web server.<br/>
 		Then you can login to UliCMS.<br/><br/>
-		<a href=\"index.php?submit_form=LoginToBackend\">Goto login</a>");
+		<a href=\"index.php?submit_form=LoginToBackend\" class=\"btn btn-primary\">Goto login</a>");
 define("TRANSLATION_ADD_FK", "Add Foreign Keys");
 define("TRANSLATION_ACCEPT_LICNSE", "Accept License");
+define("TRANSLATION_NEXT", "Next");

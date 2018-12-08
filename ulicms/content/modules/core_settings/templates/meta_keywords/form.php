@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("settings_simple")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
     $metaKeywords = array();
     for ($i = 0; $i < count($languages); $i ++) {
@@ -22,7 +22,7 @@ if ($acl->hasPermission("settings_simple")) {
         "id" => "meta_keywords_settings"
     ));
     ?>
-<table border="0">
+<table>
 	<tr>
 		<td style="min-width: 100px;"><strong>
 <?php translate("language");?>
@@ -40,14 +40,14 @@ if ($acl->hasPermission("settings_simple")) {
         
         echo $lang;
         ?></td>
-		<td><input name="meta_keywords_<?php
+		<td><input
+			name="meta_keywords_<?php
         
         echo $lang;
         ?>"
-			style="width: 400px"
 			value="<?php
         
-        echo StringHelper::real_htmlspecialchars($metaKeywords[$lang]);
+        echo StringHelper::realHtmlSpecialchars($metaKeywords[$lang]);
         ?>"></td>
 	</tr>
 			<?php
@@ -60,7 +60,7 @@ if ($acl->hasPermission("settings_simple")) {
 		</td>
 	</tr>
 </table>
-</form>
+<?php echo ModuleHelper::endForm();?>
 
 <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/meta_keywords.js"));

@@ -1,6 +1,6 @@
 {
 	"source": "core",
-	"version": "2018.3.3",
+	"version": "2019.1",
 	"embed": false,
 	"actions": {
 		"settings_simple": "templates/settings_simple/form.php",
@@ -23,17 +23,24 @@
 		"favicon": "templates/favicon/form.php",
 		"pkg_settings": "templates/pkg_settings/form.php",
 		"languages": "templates/languages/form.php",
-		"spam_filter": "templates/spam_filter/form.php"
+		"spam_filter": "templates/spam_filter/form.php",
+		"performance_settings": "templates/performance_settings/form.php",
+		"community_settings": "templates/community_settings/form.php"
 	},
-	"action_permissions" : {
-		"privacy_settings" : "privacy_settings"
+	"action_permissions": {
+		"privacy_settings": "privacy_settings",
+		"performance_settings": "performance_settings",
+		"community_settings": "community_settings"
 	},
-	"custom_acl" : ["privacy_settings"],
+	"custom_acl": [
+		"privacy_settings",
+		"performance_settings",
+		"community_settings"
+	],
 	"controllers": {
 		"SimpleSettingsController": "controllers/SimpleSettingsController",
 		"HomepageTitleController": "controllers/HomepageTitleController.php",
 		"MottoController": "controllers/MottoController.php",
-		"CacheSettingsController": "controllers/CacheSettingsController.php",
 		"FrontPageSettingsController": "controllers/FrontPageSettingsController.php",
 		"LogoUploadController": "controllers/LogoUploadController.php",
 		"MetaDescriptionController": "controllers/MetaDescriptionController.php",
@@ -48,13 +55,17 @@
 		"PkgSettingsController": "controllers/PkgSettingsController.php",
 		"LanguageController": "controllers/LanguageController.php",
 		"SpamFilterController": "controllers/SpamFilterController.php",
-		"PrivacyController" : "controllers/PrivacyController.php"
+		"PrivacyController": "controllers/PrivacyController.php",
+		"PerformanceSettingsController": "controllers/PerformanceSettingsController.php",
+		"CommunitySettingsController": "controllers/CommunitySettingsController.php"
 	},
 	"action_controllers": {
 		"settings_simple": "SimpleSettingsController",
 		"default_access_restrictions": "DefaultAccessRestrictionsController",
 		"design": "DesignSettingsController",
-		"privacy" : "PrivacyController"
+		"privacy": "PrivacyController",
+		"performance_settings": "PerformanceSettingsController",
+		"community_settings": "CommunitySettingsController"
 	},
 	"controller_function_permissions": {
 		"SimpleSettingsController::savePost": "settings_simple",
@@ -77,6 +88,8 @@
 		"LanguageController::deletePost": "languages",
 		"LanguageController::setDefaultLanguage": "languages",
 		"SpamFilterController::savePost": "spam_filter",
-		"PrivacyController::savePost" : "privacy_settings"
+		"PrivacyController::savePost": "privacy_settings",
+		"PerformanceSettingsController::savePost": "performance_settings",
+		"CommunitySettingsController::savePost": "community_settings"
 	}
 }

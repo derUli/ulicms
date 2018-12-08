@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("settings_simple")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
     $meta_descriptions = array();
     for ($i = 0; $i < count($languages); $i ++) {
@@ -38,14 +38,14 @@ if ($acl->hasPermission("settings_simple")) {
         
         echo $lang;
         ?></td>
-		<td><input name="meta_description_<?php
+		<td><input
+			name="meta_description_<?php
         
         echo $lang;
         ?>"
-			style="width: 400px"
 			value="<?php
         
-        echo StringHelper::real_htmlspecialchars($meta_descriptions[$lang]);
+        echo StringHelper::realHtmlSpecialchars($meta_descriptions[$lang]);
         ?>"></td>
 	</tr>
 			<?php
@@ -57,8 +57,7 @@ if ($acl->hasPermission("settings_simple")) {
 				class="btn btn-primary"><?php translate("save_changes");?></button></td>
 	</tr>
 </table>
-</form>
-
+<?php echo ModuleHelper::endForm();?>
 <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/meta_description.js"));
     combinedScriptHtml();

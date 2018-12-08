@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("privacy_settings")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("privacy_settings")) {
     $currentLanguage = Request::getVar("language");
     if (! $currentLanguage) {
         $currentLanguage = Settings::get("default_language");
@@ -8,6 +8,8 @@ if ($acl->hasPermission("privacy_settings")) {
     $privacy_policy_checkbox_enable = $currentLanguage ? Settings::get("privacy_policy_checkbox_enable_{$currentLanguage}") : Settings::get("privacy_policy_checkbox_enable");
     $log_ip = Settings::get("log_ip");
     $delete_ips_after_48_hours = Settings::get("delete_ips_after_48_hours");
+    $keep_spam_ips = Settings::get("keep_spam_ips");
+    
     $languages = getAllLanguages(true);
     ?>
 <div>
@@ -26,10 +28,7 @@ if ($acl->hasPermission("privacy_settings")) {
 
 	<div id="accordion-container">
 		<h2 class="accordion-header"><?php translate ( "dsgvo_checkbox" );?></h2>
-
 		<div class="accordion-content">
-	
-
 	<?php
     echo ModuleHelper::buildMethodCallForm("PrivacyController", "save", array(), "post", array(
         "id" => "privacy_form"
@@ -118,12 +117,27 @@ if ($acl->hasPermission("privacy_settings")) {
     }
     ?>>
 			</div>
+			<div class="label">
+				<label for="keep_spam_ips">
+	<?php translate("keep_spam_ips");?>
+				</label>
+			</div>
+			<div class="inputWrapper">
+				<input type="checkbox" id="keep_spam_ips" name="keep_spam_ips"
+					<?php
+    
+    if ($keep_spam_ips) {
+        echo "checked ";
+    }
+    ?>>
+			</div>
 		</div>
 	</div>
-	<p>
-		<button type="submit" class="btn btn-primary voffset2"><?php translate("save_changes");?></button>
-	</p>
-	<?php
+</div>
+<p>
+	<button type="submit" class="btn btn-primary voffset2"><?php translate("save_changes");?></button>
+</p>
+<?php
     enqueueScriptFile("scripts/privacy.js");
     combinedScriptHtml();
     ?>

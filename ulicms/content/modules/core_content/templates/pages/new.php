@@ -1,7 +1,7 @@
 <?php
-$acl = new ACL();
+$permissionChecker = new ACL();
 $groups = db_query("SELECT id, name from " . tbname("groups"));
-if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
+if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermission("pages_create")) {
     
     $allThemes = getThemesList();
     $cols = Database::getColumnNames("content");
@@ -10,7 +10,7 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
     $sql = "SELECT id, name FROM " . tbname("audio");
     $audios = Database::query($sql);
     
-    $pages_activate_own = $acl->hasPermission("pages_activate_own");
+    $pages_activate_own = $permissionChecker->hasPermission("pages_activate_own");
     
     $types = get_available_post_types();
     
@@ -23,7 +23,8 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
         "name" => "newpageform",
         "id" => "pageform",
         "style" => "display:none",
-        "class" => "pageform"
+        "class" => "pageform main-form",
+        "data-get-content-types-url" => ModuleHelper::buildMethodCallUrl(PageController::class, "getContentTypes")
     ));
     ?>
 <p>
@@ -169,7 +170,7 @@ if ($acl->hasPermission("pages") and $acl->hasPermission("pages_create")) {
 				<option value="_blank">
 			<?php translate("target_blank");?>
 			</option>
-			</select><br/><br/>
+			</select><br /> <br />
 		</div>
 
 		<strong><?php translate("activated");?>
@@ -525,12 +526,19 @@ function openArticleImageSelectWindow(field) {
 				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
 		</div>
 	</div>
-	<h2 class="accordion-header"><?php translate("other");?></h2>
-
+	<h2 class="accordion-header"><?php translate("comments");?></h2>
 	<div class="accordion-content">
+		<strong><?php translate("comments_enabled");?></strong> <br /> <select
+			name="comments_enabled">
+			<option value="null" selected>[<?php translate("standard");?>]</option>
+			<option value="1"><?php translate("yes");?></option>
+			<option value="0"><?php translate("no");?></option>
+		</select>
+	</div>
 
+	<h2 class="accordion-header"><?php translate("other");?></h2>
+	<div class="accordion-content">
 		<div class="typedep" id="tab-cache-control" style="display: none;">
-
 			<strong><?php translate("cache_control");?></strong> <br /> <select
 				name="cache_control">
 				<option value="auto" selected><?php translate("auto");?></option>
@@ -587,10 +595,10 @@ function openArticleImageSelectWindow(field) {
 		<div class="typedep" id="custom_data_json">
 			
 		<?php do_event("before_custom_data_json");?>
-			<strong><?php translate("custom_data_json");?>
-				<textarea name="custom_data" style="width: 100%; height: 200px;"
-					cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
-		
+		<strong><?php translate("custom_data_json");?></strong>
+			<textarea name="custom_data" style="width: 100%; height: 200px;"
+				cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
+
 		</div>
 	</div>
 </div>
@@ -663,7 +671,7 @@ window.onbeforeunload = confirmExit;
 function confirmExit()
 {
 	if(formchanged == 1 && submitted == 0)
-		return "Wenn Sie diese Seite verlassen gehen nicht gespeicherte Änderungen verloren.";
+		return PageTranslation.ConfirmExitWithoutSave;
 	else
 		return;
 }
@@ -697,22 +705,21 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 <?php
     }
     ?>
-		<noscript>
-		<p style="color: red;">
-			Der Editor benötigt JavaScript. Bitte aktivieren Sie JavaScript. <a
-				href="http://jumk.de/javascript.html" target="_blank">[Anleitung]</a>
-		</p>
-	</noscript>
 </div>
 <div class="inPageMessage"></div>
 <input type="hidden" name="add_page" value="add_page">
 <button type="submit" class="btn btn-primary"><?php translate("save");?></button>
 <?php
+    $translation = new JSTranslation(array(), "PageTranslation");
+    $translation->addKey("confirm_exit_without_save");
+    $translation->render();
+    
     enqueueScriptFile("scripts/page.js");
     combinedScriptHtml();
     ?>
-</form>
+<?php echo ModuleHelper::endForm(); ?>
 <?php
 } else {
     noPerms();
 }
+ 

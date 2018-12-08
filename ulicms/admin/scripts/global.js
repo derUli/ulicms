@@ -29,9 +29,10 @@ $(function() {
 
 	// prettier select-boxes
 	$("select").select2({
-		width : '100%'
+		width : '100%',
+		language : $("html").data("select2-language")
 	});
-	$("a.backend-menu-item-destroy").click(function(event) {
+	$("a.backend-menu-item-logout").click(function(event) {
 		if (!window.confirm(MenuTranslation.Logout + "?")) {
 			event.preventDefault();
 		}

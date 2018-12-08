@@ -1,3 +1,8 @@
 <?php
-class AccessDeniedException extends Exception {
+namespace UliCMS\Exceptions;
+
+use Exception;
+
+class AccessDeniedException extends Exception
+{
 }

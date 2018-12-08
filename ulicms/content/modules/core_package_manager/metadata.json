@@ -3,7 +3,8 @@
 	"version": "2018.3",
 	"embed": false,
 	"controllers": {
-		"PkgInfoController": "controllers/PkgInfoController.php"
+		"PkgInfoController": "controllers/PkgInfoController.php",
+		"UpdateCheckController": "controllers/UpdateCheckController.php"
 	},
 	"actions": {
 		"sin_package_install_ok": "templates/sin_package_install_ok.php",

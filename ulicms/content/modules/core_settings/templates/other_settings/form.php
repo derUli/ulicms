@@ -2,12 +2,10 @@
 $ga = new PHPGangsta_GoogleAuthenticator();
 $ga_secret = Settings::get("ga_secret");
 $qrCodeUrl = $ga->getQRCodeGoogleUrl(get_translation("ULICMS_LOGIN_AT") . " " . get_domain(), $ga_secret);
-$acl = new ACL();
-if (! $acl->hasPermission("other")) {
+$permissionChecker = new ACL();
+if (! $permissionChecker->hasPermission("other")) {
     noPerms();
 } else {
-    $cache_enabled = ! Settings::get("cache_disabled");
-    $cache_period = round(Settings::get("cache_period") / 60);
     $email_mode = Settings::get("email_mode");
     $menus = getAllMenus();
     $force_password_change_every_x_days = intval(Settings::get("force_password_change_every_x_days"));
@@ -53,38 +51,6 @@ if (! $acl->hasPermission("other")) {
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
 <div id="accordion-container">
-	<h2 class="accordion-header"><?php translate ( "page_cache" );?></h2>
-
-	<div class="accordion-content">
-
-		<div class="label">
-			<label for="cache_enabled"><?php translate("cache_enabled");?>
-				</label>
-		</div>
-		<div class="inputWrapper">
-			<input type="checkbox" id="cache_enabled" name="cache_enabled"
-				value="cache_enabled"
-				<?php
-    
-    if ($cache_enabled)
-        echo " checked=\"checked\"";
-    ?>>
-		</div>
-		<div class="label">
-			<?php
-    
-    translate("CACHE_VALIDATION_DURATION");
-    ?>
-			</div>
-		<div class="inputWrapper">
-			<input type="number" name="cache_period" min="1" max="20160"
-				value="<?php
-    
-    echo $cache_period;
-    ?>">
-	<?php translate("minutes");?>
-			</div>
-	</div>
 	<h2 class="accordion-header">
 		<?php translate("DOMAIN2LANGUAGE_MAPPING");?>
 		</h2>
@@ -202,7 +168,7 @@ if (! $acl->hasPermission("other")) {
 			
 			<?php
     
-    if ($acl->hasPermission("default_access_restrictions_edit")) {
+    if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
         ?>
 				<h2><?php translate("DEFAULT_ACCESS_RESTRICTIONS");?></h2>
 		<p>
@@ -267,7 +233,7 @@ if (! $acl->hasPermission("other")) {
 				</div>
 			<div class="inputWrapper">
 				<input type="text" name="smtp_host"
-					value="<?php echo real_htmlspecialchars ( $smtp_host );?>">
+					value="<?php esc( $smtp_host );?>">
 
 			</div>
 
@@ -354,11 +320,8 @@ if (! $acl->hasPermission("other")) {
     
     echo real_htmlspecialchars($smtp_password);
     ?>">
-
 				</div>
-
 			</div>
-
 		</div>
 	</div>
 
@@ -410,7 +373,7 @@ if($('#email_mode').val() == "phpmailer"){
 </div>
 
 <button type="submit" name="submit" class="btn btn-primary voffset3"><?php translate("save_changes");?></button>
-</form>
+<?php echo ModuleHelper::endForm();?>
 <script type="text/javascript">
 $("#other_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");

@@ -1,77 +1,58 @@
 <?php
-$id = get_ID ();
+$id = get_ID();
 if ($id !== null) {
-	$list = new List_Data ( $id );
-	if ($list->content_id !== null) {
-		$entries = $list->filter ();
-		if (count ( $entries ) > 0) {
-			// Pagination
-			$entries_count_total = count ( $entries );
-			$use_pagination = $list->use_pagination;
-			$start = 0;
-			$limit = intval ( $list->limit );
-			if ($limit > 0 and $use_pagination) {
-				if (isset ( $_GET ["start"] )) {
-					$start = intval ( $_GET ["start"] );
-				}
-				$entries = array_slice ( $entries, $start, $limit );
-				$entries_count = count ( $entries );
-			}
-			
-			$previous_start = $start - $limit;
-			if ($previous_start < 0) {
-				$previous_start = 0;
-			}
-			
-			$next_start = $start + $limit;
-			if ($next_start <= $entries_total_count) {
-				$next_start = $start + $limit;
-			}
-			
-			?>
-<div class="container">
+    $list = new List_Data($id);
+    if ($list->content_id !== null) {
+        $entries = $list->filter();
+        if (count($entries) > 0) {
+            // Pagination
+            $entries_count_total = count($entries);
+            $use_pagination = $list->use_pagination;
+            $start = 0;
+            $limit = intval($list->limit);
+            if ($limit > 0 and $use_pagination) {
+                if (isset($_GET["start"])) {
+                    $start = intval($_GET["start"]);
+                }
+                $entries = array_slice($entries, $start, $limit);
+                $entries_count = count($entries);
+            }
+            
+            $previous_start = $start - $limit;
+            if ($previous_start < 0) {
+                $previous_start = 0;
+            }
+            
+            $next_start = $start + $limit;
+            if ($next_start <= $entries_total_count) {
+                $next_start = $start + $limit;
+            }
+            
+            ?>
+<div class="fluid-container">
 	<?php
-			
-			foreach ( $entries as $entry ) {
-				$article_image = getTemplateDirPath ( "impro17" ) . "images/nopic.jpg";
-				$meta = get_article_meta ( $entry->systemname );
-				$excerpt = strip_tags ( $meta->excerpt, "<img><iframe><embed><object>" );
-				$excerpt = trim ( $excerpt );
-				$excerpt = StringHelper::isNotNullOrEmpty ( $excerpt ) ? $excerpt : $entry->content;
-				?>
-  <div class="row article-list-row">
+            
+            foreach ($entries as $entry) {
+                $article_image = getTemplateDirPath("impro17") . "images/nopic.jpg";
+                $meta = get_article_meta($entry->systemname);
+                
+                $article_date = ! is_null($entry->article_date) ? $entry->article_date : $entry->created;
+                $excerpt = strip_tags($meta->excerpt, "<img><iframe><embed><object>");
+                $excerpt = trim($excerpt);
+                $excerpt = StringHelper::isNotNullOrWhitespace($excerpt) ? $meta->excerpt : $entry->content;
+                ?>
+  <div class="article-list-row">
 		<p>
 			<strong><a
 				href="<?php Template::escape(buildSEOUrl($entry->systemname, $entry->redirection));?>"><?php Template::escape($entry->title);?></a></strong>
+			<br /> <small><?php translate("date");?>: <?php echo strftime("%x %X", $article_date);?></small>
 		</p>
 
-		<div class="col-sm-5">
-		<?php
-				
-				if ($meta and ! empty ( $meta->article_image )) {
-					$article_image = $meta->article_image;
-				}
-				if ($entry instanceof Image_Page and StringHelper::isNotNullOrEmpty ( $entry->image_url )) {
-					$article_image = $entry->image_url;
-				}
-				?>
+		<p><?php echo $excerpt;?></p>
 		<p>
-				<a href="<?php Template::escape(buildSEOUrl($entry->systemname));?>"
-					class="list-article-image"><img src="<?php echo $article_image;?>"
-					alt="Screenshot <?php Template::escape($entry->title);?>"
-					class="article-image"></a>
-			</p>
-
-		</div>
-
-		<div class="col-sm-7">
-
-	<?php echo $excerpt;?>
-	<p>
-				<a
-					href="<?php Template::escape(buildSEOUrl($entry->systemname, $entry->redirection));?>"><?php translate("readmore");?></a>
-			</p>
-		</div>
+			<a
+				href="<?php Template::escape(buildSEOUrl($entry->systemname, $entry->redirection));?>"><?php translate("readmore");?></a>
+		</p>
 	</div>
 	<?php }?>
 
@@ -95,7 +76,9 @@ if ($id !== null) {
 			title="Newsfeed"></a>
 	</div>
 <?php }?>
-	<?php
-		}
-	}
+    </div>
+<?php
+        }
+    }
 }
+

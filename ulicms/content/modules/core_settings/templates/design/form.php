@@ -1,7 +1,7 @@
 <?php
 $controller = ControllerRegistry::get();
-$acl = new ACL();
-if (! $acl->hasPermission("design")) {
+$permissionChecker = new ACL();
+if (! $permissionChecker->hasPermission("design")) {
     noPerms();
 } else {
     $theme = Settings::get("theme");
@@ -13,7 +13,7 @@ if (! $acl->hasPermission("design")) {
     $theme = Settings::get("theme");
     $additional_menus = Settings::get("additional_menus");
     $mobile_theme = Settings::get("mobile_theme");
-    $default_font = Settings::get("default-font");
+    $default_font = Settings::get("default_font");
     $google_font = Settings::get("google-font");
     $title_format = htmlspecialchars(Settings::get("title_format"), ENT_QUOTES, "UTF-8");
     $font_size = Settings::get("font-size");
@@ -169,7 +169,7 @@ div#google-fonts {
 	</tr>
 	<tr>
 		<td><strong><?php translate("font_family");?> </strong></td>
-		<td><select name="default-font" id="default-font" size=1>
+		<td><select name="default_font" id="default_font" size=1>
 			<?php
     $font_amount = count($fonts);
     $i = 1;
@@ -207,7 +207,7 @@ div#google-fonts {
     }
     ?>
 			</select>
-			<div class="voffset3 alert alert-warning"><?php translate("google_fonts_privacy_warning");?></div>
+				<div class="voffset3 alert alert-warning"><?php translate("google_fonts_privacy_warning");?></div>
 			</div></td>
 	</tr>
 	<tr>
@@ -256,7 +256,7 @@ div#google-fonts {
 	</tr>
 		<?php
     
-    if ($acl->hasPermission("favicon")) {
+    if ($permissionChecker->hasPermission("favicon")) {
         ?>
 		<tr>
 		<td><strong><?php translate("favicon");?></strong></td>

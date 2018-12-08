@@ -12,7 +12,7 @@ function initMobileDetectNotice() {
 
 // show a privacy warning if a google font is selected
 function onChangeDefaultFont() {
-	var value = $("select#default-font").val();
+	var value = $("select#default_font").val();
 	if (value == "google") {
 		$("div#google-fonts").slideDown();
 	} else {
@@ -27,7 +27,7 @@ $(function() {
 		initMobileDetectNotice();
 	});
 
-	$("select#default-font").change(onChangeDefaultFont);
+	$("select#default_font").change(onChangeDefaultFont);
 
 	// ajax form submit
 	$("#designForm").ajaxForm(

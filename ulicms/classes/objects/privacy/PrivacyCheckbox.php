@@ -36,11 +36,12 @@ class PrivacyCheckbox
                 $success();
             }
         } else {
-            if ($fail != null) {
-                $fail();
+            if ($failed != null) {
+                $failed();
             } else {
                 ViewBag::set("exception", get_translation("please_accept_privacy_conditions"));
                 echo Template::executeDefaultOrOwnTemplate("exception.php");
+                exit();
             }
         }
     }

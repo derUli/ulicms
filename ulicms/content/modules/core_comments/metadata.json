@@ -1,0 +1,23 @@
+{
+	"version": "2019.1",
+	"source": "core",
+	"embed": false,
+	"controllers": {
+		"CommentsController": "controllers/CommentsController.php"
+	},
+	"main_class": "CommentsController",
+	"custom_acl": [
+		"comments_manage"
+	],
+	"actions": {
+		"comments_manage": "templates/admin.php"
+	},
+	"action_permissions": {
+		"comments_manage": "comments_manage"
+	},
+	"controller_function_permissions": {
+		"CommentsController::getCommentText": "comments_manage",
+		"CommentsController::filterComments": "comments_manage",
+		"CommentsController::doAction": "comments_manage"
+	}
+}

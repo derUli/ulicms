@@ -1,5 +1,7 @@
 
 <?php
-function update_manager_dashboard_render() {
-	return "";
+
+function update_manager_dashboard_render()
+{
+    return "";
 }

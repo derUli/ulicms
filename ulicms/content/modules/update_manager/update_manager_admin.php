@@ -14,7 +14,6 @@ function update_manager_admin()
     if (count($updates) > 0) {
         ?>
 <p><?php
-        
         if (count($updates) == 1) {
             translate("UPDATES_AVAILABLE_SINGULAR");
         } else {

@@ -1,8 +1,8 @@
 <?php
-$field = ViewBag::get ( "field" );
-$value = ViewBag::get ( "field_value" );
-if (is_null ( $value )) {
-	$value = $field->defaultValue;
+$field = ViewBag::get("field");
+$value = ViewBag::get("field_value");
+if (is_null($value)) {
+    $value = $field->defaultValue;
 }
 ?>
 <div class="custom-field"

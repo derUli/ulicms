@@ -1,5 +1,5 @@
 <?php
-$acl = new ACL();
+$permissionChecker = new ACL();
 include_once ULICMS_ROOT . "/lib/formatter.php";
 
 $controller = ControllerRegistry::get();
@@ -7,7 +7,7 @@ $model = $controller->getModel();
 
 // no patch check in google cloud
 $runningInGoogleCloud = class_exists("GoogleCloudHelper") ? GoogleCloudHelper::isProduction() : false;
-if ($acl->hasPermission("dashboard")) {
+if ($permissionChecker->hasPermission("dashboard")) {
     
     ?>
 <p>
@@ -36,13 +36,14 @@ if ($acl->hasPermission("dashboard")) {
         ?>
 	</div>
 		<?php }?>
-	<div id="patch-notification" style="display: none;">
+	<div id="patch-notification" style="display: none;"
+		data-url="<?php echo ModuleHelper::buildMethodCallUrl(UpdateCheckController::class, "patchCheck");?>">
 		<h2 class="accordion-header">
 	<?php translate ( "there_are_patches_available" );	?>
 	</h2>
 		<div class="accordion-content" id="patch-message"></div>
 	</div>
-<?php
+	<?php
     $pi = ULICMS_DATA_STORAGE_ROOT . "/post-install.php";
     if (is_writable($pi)) {
         ?>
@@ -53,29 +54,27 @@ if ($acl->hasPermission("dashboard")) {
 			<?php translate("there_are_unfinished_package_installations");?></a>
 	</div>
 	<?php } ?>
-				<div id="core-update-check" style="display: none">
-		<h2 class="accordion-header">
-	<?php translate("update_available");?>
-	</h2>
-		<div class="accordion-content" id="core-update-message"></div>
-	</div>
 	<?php
     if (! Settings::get("disable_ulicms_newsfeed")) {
         ?>
 	<h2 class="accordion-header">
 	<?php translate("ulicms_news");?></h2>
-	<div class="accordion-content" id="ulicms-feed">
+	<div class="accordion-content" id="ulicms-feed"
+		data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "newsfeed")?>">
 		<img src="gfx/loading.gif" alt="Feed wird geladen..." />
 	</div>
 <?php } ?>
-<?php if($acl->hasPermission("pages_show_positions")){?>
+<?php if($permissionChecker->hasPermission("pages_show_positions")){?>
 	<h2 class="accordion-header"><?php translate("helper_utils");?></h2>
-		<div class="accordion-content">
+	<div class="accordion-content">
 		<form action="#">
-			<input name="show_positions" id="show_positions" type="checkbox" data-url="index.php?ajax_cmd=toggle_show_positions" value="1" <?php if(Settings::get("user/". get_user_id() ."/show_positions")) echo "checked";?> >
+			<input name="show_positions" id="show_positions" type="checkbox"
+				data-url="index.php?ajax_cmd=toggle_show_positions" value="1"
+				<?php if(Settings::get("user/". get_user_id() ."/show_positions")) echo "checked";?>>
 			<label for="show_positions"><?php translate("show_positions_in_menus");?></label>
-		</div>
-		</form>
+	
+	</div>
+	</form>
 	<?php }?>
 	<h2 class="accordion-header">
 	<?php translate("statistics");?>
@@ -168,7 +167,8 @@ if ($acl->hasPermission("dashboard")) {
 				<td><a href="<?php
         
         echo $url;
-        ?>" target="_blank"><?php
+        ?>"
+					target="_blank"><?php
         
         echo htmlspecialchars($row->title, ENT_QUOTES, "UTF-8");
         ?></a></td>

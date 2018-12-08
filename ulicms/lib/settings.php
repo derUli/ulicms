@@ -3,34 +3,13 @@
 // get a config variable
 function getconfig($key)
 {
-    if (SettingsCache::get($key)) {
-        return SettingsCache::get($key);
-    }
-    $env_key = "ulicms_" . $key;
-    $env_var = getenv($env_key);
-    if ($env_var) {
-        return $env_var;
-    }
-    $ikey = Database::escapeValue($key);
-    $query = db_query("SELECT value FROM " . tbname("settings") . " WHERE name='$key'");
-    if (db_num_rows($query) > 0) {
-        while ($row = db_fetch_object($query)) {
-            SettingsCache::set($key, $row->value);
-            return $row->value;
-        }
-    } else {
-        SettingsCache::set($key, null);
-        return false;
-    }
+    return Settings::get($key);
 }
 
 // Remove an configuration variable
 function deleteconfig($key)
 {
-    $key = db_escape($key);
-    db_query("DELETE FROM " . tbname("settings") . " WHERE name='$key'");
-    SettingsCache::set($key, null);
-    return db_affected_rows() > 0;
+    return Settings::delete($key);
 }
 
 // Set a configuration Variable;
@@ -54,5 +33,16 @@ function setconfig($key, $value)
             $logger->debug("User $username - Changed setting $key to '$value'");
         }
     }
-    SettingsCache::set($key, null);
+    SettingsCache::set($key, $value);
+}
+
+function initconfig($key, $value)
+{
+    $retval = false;
+    if (! Settings::get($key)) {
+        setconfig($key, $value);
+        $retval = true;
+        SettingsCache::set($key, $value);
+    }
+    return $retval;
 }

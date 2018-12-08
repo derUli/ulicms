@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("motd")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("motd")) {
     $editor = get_html_editor();
     ?>
 <div>
@@ -58,8 +58,6 @@ if ($acl->hasPermission("motd")) {
 
 	<?php echo ModuleHelper::endForm();?>
 </div>
-
-
 <?php
 } else {
     noPerms();

@@ -1,4 +1,6 @@
 <?php
-function update_manager_render() {
-	return "";
+
+function update_manager_render()
+{
+    return "";
 }

@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if (! $acl->hasPermission("forms") or ! $acl->hasPermission("forms_edit")) {
+$permissionChecker = new ACL();
+if (! $permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPermission("forms_edit")) {
     noPerms();
 } else {
     $forms = Forms::getAllForms();
@@ -27,8 +27,8 @@ if (! $acl->hasPermission("forms") or ! $acl->hasPermission("forms_edit")) {
 		name="email_to" required />
 </p>
 <p>
-	<strong><?php translate("subject");?>*</strong><br /> <input type="text"
-		value="<?php echo htmlspecialchars($form["subject"]);?>"
+	<strong><?php translate("subject");?>*</strong><br /> <input
+		type="text" value="<?php echo htmlspecialchars($form["subject"]);?>"
 		name="subject" required />
 </p>
 <p>

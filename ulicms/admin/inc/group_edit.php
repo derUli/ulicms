@@ -1,29 +1,29 @@
 <?php
-$acl = new ACL ();
+$permissionChecker = new ACL();
 
-if (! $acl->hasPermission ( "groups" )) {
-	noPerms ();
+if (! $permissionChecker->hasPermission("groups")) {
+    noPerms();
 } else {
-	$id = intval ( $_REQUEST ["edit"] );
-	$acl = new ACL ();
-	$all_permissions = $acl->getPermissionQueryResult ( $id );
-	$groupName = real_htmlspecialchars ( $all_permissions ["name"] );
-	$all_permissions_all = $acl->getDefaultACL ( false, true );
-	$all_permissions = json_decode ( $all_permissions ["permissions"], true );
-	foreach ( $all_permissions_all as $name => $value ) {
-		if (! isset ( $all_permissions [$name] )) {
-			$all_permissions [$name] = $value;
-		}
-	}
-	
-	$languages = Language::getAllLanguages ();
-	$group = new Group ( $id );
-	$selectedLanguages = $group->getLanguages ();
-	
-	ksort ( $all_permissions );
-	
-	if ($all_permissions) {
-		?>
+    $id = intval($_REQUEST["edit"]);
+    $permissionChecker = new ACL();
+    $all_permissions = $permissionChecker->getPermissionQueryResult($id);
+    $groupName = real_htmlspecialchars($all_permissions["name"]);
+    $all_permissions_all = $permissionChecker->getDefaultACL(false, true);
+    $all_permissions = json_decode($all_permissions["permissions"], true);
+    foreach ($all_permissions_all as $name => $value) {
+        if (! isset($all_permissions[$name])) {
+            $all_permissions[$name] = $value;
+        }
+    }
+    
+    $languages = Language::getAllLanguages();
+    $group = new Group($id);
+    $selectedLanguages = $group->getLanguages();
+    
+    ksort($all_permissions);
+    
+    if ($all_permissions) {
+        ?>
 <form action="?action=groups" method="post">
 <?php csrf_token_html ();?>
 	<input type="hidden" name="id" value="<?php	echo $id;?>">
@@ -40,20 +40,21 @@ if (! $acl->hasPermission ( "groups" )) {
 		</p>
 		<p>
 		<?php
-		foreach ( $all_permissions as $key => $value ) {
-			?>
-			<input type="checkbox" id="<?php echo $key;?>"
-				name="user_permissons[]" value="<?php echo $key;?>"
-				<?php
-			
-			if ($value) {
-				echo "checked='checked'";
-			}
-			?>> <label for="<?php echo $key;?>"><?php echo $key;?>
-			</label><br />
+        foreach ($all_permissions as $key => $value) {
+            ?>
+			<input type="checkbox" id="<?php esc($key);?>"
+				name="user_permissons[]" value="<?php esc($key);?>"
+				data-select-all-checkbox="#checkall"
+				data-checkbox-group=".permission-checkbox"
+				class="permission-checkbox" <?php if($value) echo "checked";?>> <label
+				for="<?php
+            esc($key);
+            ?>"><?php
+            esc($key);
+            ?> </label><br />
 			<?php
-		}
-		?>
+        }
+        ?>
 		</p>
 	</fieldset>
 	<h4><?php translate("languages");?></h4>
@@ -83,9 +84,9 @@ $(function () {
 });
 </script>
 <?php
-	} else {
-		?>
+    } else {
+        ?>
 <p style="color: red">Diese Gruppe ist nicht vorhanden.</p>
 <?php
-	}
+    }
 }

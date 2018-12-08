@@ -1,9 +1,9 @@
 <?php
-$classes = array (
-		"JSTranslation",
-		"Translation" 
+$classes = array(
+    "JSTranslation",
+    "Translation"
 );
-foreach ( $classes as $class ) {
-    require dirname ( __FILE__ ) . "/$class.php";
+foreach ($classes as $class) {
+    include_once dirname(__file__) . "/$class.php";
 }
 

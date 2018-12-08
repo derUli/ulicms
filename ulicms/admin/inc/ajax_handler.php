@@ -54,43 +54,34 @@ function ajaxOnChangeLanguage($lang, $menu, $parent)
 $ajax_cmd = $_REQUEST["ajax_cmd"];
 
 switch ($ajax_cmd) {
-	case "toggle_show_positions":
-		$acl = new ACL();
-		if(!$acl->hasPermission("pages_show_positions")){
-			TextResult("Access Denied", HttpStatusCode::FORBIDDEN);
-		}
-		$settingsName = "user/". get_user_id() ."/show_positions";
-		if(Settings::get( $settingsName )){
-			Settings::delete($settingsName);
-		} else {
-			Settings::set($settingsName, "1");
-	}
-	break;
-	case "toggle_show_filters":
-		$acl = new ACL();
-		if(!$acl->hasPermission("pages")){
-			TextResult("Access Denied", HttpStatusCode::FORBIDDEN);
-		}
-		$settingsName = "user/". get_user_id() ."/show_filters";
-		if(Settings::get( $settingsName )){
-			Settings::delete($settingsName);
-		} else {
-			Settings::set($settingsName, "1");
-	}
-	break;
-    case "getContentTypes":
-        JSONResult(DefaultContentTypes::getAll());
+    case "toggle_show_positions":
+        $permissionChecker = new ACL();
+        if (! $permissionChecker->hasPermission("pages_show_positions")) {
+            TextResult("Access Denied", HttpStatusCode::FORBIDDEN);
+        }
+        $settingsName = "user/" . get_user_id() . "/show_positions";
+        if (Settings::get($settingsName)) {
+            Settings::delete($settingsName);
+        } else {
+            Settings::set($settingsName, "1");
+        }
+        break;
+    case "toggle_show_filters":
+        $permissionChecker = new ACL();
+        if (! $permissionChecker->hasPermission("pages")) {
+            TextResult("Access Denied", HttpStatusCode::FORBIDDEN);
+        }
+        $settingsName = "user/" . get_user_id() . "/show_filters";
+        if (Settings::get($settingsName)) {
+            Settings::delete($settingsName);
+        } else {
+            Settings::set($settingsName, "1");
+        }
         break;
     case "check_if_systemname_is_free":
         if (checkIfSystemnameIsFree($_REQUEST["systemname"], $_REQUEST["language"], intval($_REQUEST["id"]))) {
             echo "yes";
         }
-        break;
-    case "core_update_check":
-        include "inc/ajax_core_update_check.php";
-        break;
-    case "ajax_patch_check":
-        include "inc/ajax_patch_check.php";
         break;
     case "available_modules":
         include_once "inc/ajax_available_modules.php";
@@ -102,4 +93,3 @@ switch ($ajax_cmd) {
         echo "Unknown Call";
         break;
 }
-?>

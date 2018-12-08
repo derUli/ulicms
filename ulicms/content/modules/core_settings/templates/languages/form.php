@@ -1,8 +1,8 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "languages" )) {
-	$languages = Language::getAllLanguages ();
-	?>
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("languages")) {
+    $languages = Language::getAllLanguages();
+    ?>
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
@@ -23,15 +23,15 @@ if ($acl->hasPermission ( "languages" )) {
 	</table>
 	<button type="submit" class="btn btn-primary voffset2"><?php translate("add_language");?></button>
 </div>
-</form>
+<?php echo ModuleHelper::endForm();?>
 <br>
 <div class="seperator"></div>
 <br>
 <p><?php BackendHelper::formatDatasetCount(count($languages));?></p>
 <?php
-	
-	if (count ( $languages ) > 0) {
-		?>
+    
+    if (count($languages) > 0) {
+        ?>
 <table class="tablesorter">
 	<thead>
 		<tr>
@@ -43,34 +43,34 @@ if ($acl->hasPermission ( "languages" )) {
 	</thead>
 	<tbody>
 	<?php
-		foreach ( $languages as $language ) {
-			?>
+        foreach ($languages as $language) {
+            ?>
 	<tr id="dataset-<?php echo $language->getID();?>">
 			<td><?php echo htmlspecialchars($language -> getLanguageCode());?></td>
 			<td><?php echo htmlspecialchars ( $language->getName () );?></td>
 
 			<td align="center" style="font-weight: bold;"><?php
-			if ($language->getLanguageCode () === Settings::get ( "default_language" )) {
-				echo "<span style='color:green !important;'>" . get_translation ( "yes" ) . "</span>";
-			} else {
-				?> <a
+            if ($language->getLanguageCode() === Settings::get("default_language")) {
+                echo "<span style='color:green !important;'>" . get_translation("yes") . "</span>";
+            } else {
+                ?> <a
 				onclick="return confirm('<?php
-				echo str_ireplace ( "%name%", $language->getName (), get_translation ( "REALLY_MAKE_DEFAULT_LANGUAGE" ) );
-				?>')"
+                echo str_ireplace("%name%", $language->getName(), get_translation("REALLY_MAKE_DEFAULT_LANGUAGE"));
+                ?>')"
 				href="<?php echo ModuleHelper::buildMethodCallUrl("LanguageController", "setDefaultLanguage", ModuleHelper::buildQueryString(array("default"=> $language->getLanguageCode())));?>">
 					<span style="color: red !important;"><?php translate ( "no" );?></span>
 			</a> <?php }?>
 		</td>
 			<td class="text-center"><?php
-			if ($language->getLanguageCode () == Settings::get ( "default_language" )) {
-				?> <a
+            if ($language->getLanguageCode() == Settings::get("default_language")) {
+                ?> <a
 				onclick="javascript:alert('<?php translate("CANT_DELETE_DEFAULT_LANGUAGE");?>')"
 				href="#"> <img src="gfx/delete.gif" class="mobile-big-image"
 					alt="<?php translate("delete");?>"
 					title="<?php translate("delete");?>"></a> 
 					<?php
-			} else {
-				?> <form
+            } else {
+                ?> <form
 					action="<?php echo ModuleHelper::buildMethodCallUrl("LanguageController", "delete", "id=".$language->getID());?>"
 					class="delete-form" method="post">
 
@@ -83,12 +83,12 @@ if ($acl->hasPermission ( "languages" )) {
 </tbody>
 </table>
 <?php
-	}
+    }
 } else {
-	noPerms ();
+    noPerms();
 }
 
-$translation = new JSTranslation ( array (
-		"ask_for_delete" 
-) );
-$translation->render ();
+$translation = new JSTranslation(array(
+    "ask_for_delete"
+));
+$translation->render();

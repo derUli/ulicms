@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("banners") and $acl->hasPermission("banners_create")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPermission("banners_create")) {
     ?>
 
 <?php echo ModuleHelper::buildMethodCallForm("BannerController", "create");?>

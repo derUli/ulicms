@@ -41,22 +41,45 @@ function bindTogglePassword(input, checkbox) {
 	});
 }
 
-$(function(){
-   $(".select-all").change(selectAll);
-   $(".checkbox").change(checkboxChecked);
+$(function() {
+	$("input[type=checkbox].select-all").change(selectAllChecked);
+	$("input[type=checkbox]").change(checkboxChecked);
+
+	// check "Select All" checkbox if all checkboxes of this group are checked
+	$("input[type=checkbox]").each(function(index, target) {
+		var item = $(target).data("select-all-checkbox");
+		var group = $(target).data("checkbox-group");
+		if (item != null && group != null) {
+			checkSelectAllIfAllChecked(item, group);
+		}
+	});
+
+	// scroll to the given anchor
+	var jumpTo = url("?jumpto");
+	if (jumpTo !== null && jumpTo.length > 0) {
+		location.href = "#" + jumpTo;
+	}
 });
 
-function checkboxChecked(event){
+function checkboxChecked(event) {
 	var item = $(event.target).data("select-all-checkbox");
 	var group = $(event.target).data("checkbox-group");
-	if(!item){
-		return;
-	}
-	var allSelected = $('.checkbox:checked').length == $("input[type=checkbox][data-checkbox-group='" + group +"']").length;
-	$(item).prop("checked", allSelected);    
+	checkSelectAllIfAllChecked(item, group);
 }
 
-function selectAll(event){
+function checkSelectAllIfAllChecked(item, group) {
+	if (!item) {
+		return;
+	}
+	// if the count of the checked checkboxes in the group is equal to the count of all checkboxes in this group
+	var allSelected = $("input[type=checkbox][data-checkbox-group='" + group
+			+ "']:checked").length == $("input[type=checkbox][data-checkbox-group='"
+			+ group + "']").length;
+	// check the "Select All" Checkbox, else uncheck it
+	$(item).prop("checked", allSelected);
+}
+
+function selectAllChecked(event) {
 	var selectAllCheckbox = $(event.target);
 	var target = $(selectAllCheckbox).data("target");
 	console.log(target);

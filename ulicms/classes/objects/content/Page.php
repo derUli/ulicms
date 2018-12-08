@@ -1,4 +1,6 @@
 <?php
+use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Data\Content\Comment;
 
 class Page extends Content
 {
@@ -67,14 +69,19 @@ class Page extends Content
 
     public $hidden = 0;
 
+    public $comments_enabled = null;
+
     private $permissions;
 
-    public function __construct()
+    public function __construct($id = null)
     {
         if ($this->custom_data === null) {
             $this->custom_data = array();
         }
         $this->permissions = new PagePermissions();
+        if ($id) {
+            $this->loadByID($id);
+        }
     }
 
     protected function fillVarsByResult($result)
@@ -115,6 +122,8 @@ class Page extends Content
         $this->og_description = $result->og_description;
         $this->cache_control = $result->cache_control;
         $this->hidden = $result->hidden;
+        $this->comments_enabled = ! is_null($result->comments_enabled) ? boolval($result->comments_enabled) : null;
+        
         // fill page permissions object
         $resultArray = (array) $result;
         foreach ($resultArray as $key => $value) {
@@ -168,7 +177,7 @@ class Page extends Content
         $sql = "INSERT INTO `" . tbname("content") . "` (systemname, title, alternate_title, target, category,
 				content, language, menu_image, active, created, lastmodified, autor, 
 				`group_id`, lastchangeby, views, menu, position, parent, access, meta_description, meta_keywords, deleted_at,
-				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden) VALUES (";
+				theme, custom_data, `type`, og_title, og_type, og_image, og_description, cache_control, hidden, comments_enabled) VALUES (";
         
         $sql .= "'" . DB::escapeValue($this->systemname) . "',";
         $sql .= "'" . DB::escapeValue($this->title) . "',";
@@ -212,7 +221,7 @@ class Page extends Content
         } else {
             $sql .= intval($this->deleted_at) . ",";
         }
-                
+        
         if ($this->theme === null) {
             $sql .= " NULL ,";
         } else {
@@ -234,10 +243,11 @@ class Page extends Content
         $sql .= "'" . DB::escapeValue($this->og_image) . "',";
         $sql .= "'" . DB::escapeValue($this->og_description) . "', ";
         $sql .= "'" . DB::escapeValue($this->cache_control) . "', ";
-        $sql .= DB::escapeValue($this->hidden);
+        $sql .= DB::escapeValue($this->hidden) . ", ";
+        $sql .= DB::escapeValue($this->comments_enabled);
         $sql .= ")";
         
-        $result = DB::Query($sql) or die(DB::error());
+        $result = DB::query($sql) or die(DB::error());
         $this->id = DB::getLastInsertID();
         $this->permissions->save($this->id);
         return $result;
@@ -317,6 +327,7 @@ class Page extends Content
         $sql .= "og_image='" . DB::escapeValue($this->og_image) . "',";
         $sql .= "og_description='" . DB::escapeValue($this->og_description) . "', ";
         $sql .= "hidden='" . DB::escapeValue($this->hidden) . "', ";
+        $sql .= "comments_enabled=" . DB::escapeValue($this->comments_enabled) . ", ";
         $sql .= "cache_control='" . DB::escapeValue($this->cache_control) . "' ";
         
         $sql .= " WHERE id = " . $this->id;
@@ -377,5 +388,42 @@ class Page extends Content
     public function setPermissions($permissions)
     {
         $this->permissions = $permissions;
+    }
+
+    // returns if the comments for the page are enabled
+    // if "Comments enabled" has "[Default]" selected
+    // then it returns if the comments are enabled in
+    // the global settings
+    public function areCommentsEnabled()
+    {
+        $commentsEnabled = false;
+        if (is_null($this->comments_enabled)) {
+            $commentsEnabled = boolval(Settings::get("comments_enabled"));
+            
+            $commentable_content_types = Settings::get("commentable_content_types");
+            if ($commentable_content_types) {
+                $commentable_content_types = splitAndTrim($commentable_content_types);
+                
+                if (count($commentable_content_types) > 0 and ! faster_in_array($this->type, $commentable_content_types)) {
+                    $commentsEnabled = false;
+                }
+            }
+        } else {
+            $commentsEnabled = boolval($this->comments_enabled);
+        }
+        return $commentsEnabled;
+    }
+
+    public function hasComments()
+    {
+        // TODO: write a more ressource friendly implementation
+        // which doesn't load all comment datasets into the memory
+        return count($this->getComments()) > 0;
+    }
+
+    // this returns an array of all comments of this content
+    public function getComments()
+    {
+        return Comment::getAllByContentId($this->id);
     }
 }

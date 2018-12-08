@@ -8,6 +8,7 @@ function validatePasswords(event) {
 
 	var val1 = $(field1).val();
 	var val2 = $(field2).val();
+
 	// if the password fields are empty then unset background color and text
 	// color
 	if (val1 == "" && val2 == "") {

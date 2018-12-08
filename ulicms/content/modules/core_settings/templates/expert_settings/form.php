@@ -1,16 +1,16 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "expert_settings" ) and $acl->hasPermission ( "expert_settings_edit" )) {
-	$name = "";
-	$value = "";
-	if (Request::hasVar ( "name" )) {
-		$name = Request::getVar ( "name" );
-		$value = Settings::get ( $name );
-		if (is_null ( $value )) {
-			Request::javascriptRedirect ( ModuleHelper::buildActionURL ( "settings" ) );
-		}
-	}
-	?>
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker->hasPermission("expert_settings_edit")) {
+    $name = "";
+    $value = "";
+    if (Request::hasVar("name")) {
+        $name = Request::getVar("name");
+        $value = Settings::get($name);
+        if (is_null($value)) {
+            Request::javascriptRedirect(ModuleHelper::buildActionURL("settings"));
+        }
+    }
+    ?>
 <?php echo ModuleHelper::buildMethodCallForm("ExpertSettingsController", "save");?>
 
 <p>
@@ -30,9 +30,9 @@ if ($acl->hasPermission ( "expert_settings" ) and $acl->hasPermission ( "expert_
 <br />
 <br />
 <button type="submit" class="btn btn-primary"><?php translate("create_option");?></button>
-</form>
+<?php echo ModuleHelper::endForm();?>
 
 <?php
 } else {
-	noPerms ();
+    noPerms();
 }

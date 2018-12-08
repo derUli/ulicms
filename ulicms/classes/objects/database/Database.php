@@ -100,6 +100,11 @@ class Database
         return mysqli_get_client_info(self::$connection);
     }
 
+    public static function getClientVersion()
+    {
+        return mysqli_get_client_version(self::$connection);
+    }
+
     public static function dropTable($table, $prefix = true)
     {
         if ($prefix) {
@@ -147,9 +152,10 @@ class Database
         if ($prefix) {
             $table = tbname($table);
         }
-        
         $table = self::escapeName($table);
+        
         $sql = "DELETE FROM $table";
+        
         if (StringHelper::isNotNullOrEmpty($where)) {
             $sql .= " where $where";
         }
@@ -191,10 +197,10 @@ class Database
         
         $column = self::escapeName($column);
         $table = self::escapeName($table);
-        return self::query("ALTER TABLE $table DROP COLUMN $table");
+        return self::query("ALTER TABLE $table DROP COLUMN $column");
     }
 
-    public static function selectAll($table, $columns = array(), $where = "", $args = array(), $prefix = true)
+    public static function selectAll($table, $columns = array(), $where = "", $args = array(), $prefix = true, $order = "")
     {
         if ($prefix) {
             $table = tbname($table);
@@ -208,16 +214,19 @@ class Database
         
         $sql = "select $columns_sql from $table";
         if (StringHelper::isNotNullOrEmpty($where)) {
-            $sql .= " where $where";
+            $sql .= " where $where ";
+        }
+        if (! empty($order)) {
+            $sql .= " order by {$order}";
         }
         return self::pQuery($sql, $args);
     }
 
     public static function escapeName($name)
     {
-        $name = "`" . db_escape($name) . "`";
         $name = str_replace("'", "", $name);
         $name = str_replace("\"", "", $name);
+        $name = "`" . db_escape($name) . "`";
         return $name;
     }
 
@@ -323,6 +332,9 @@ class Database
     // Abstraktion für Escapen von Werten
     public static function escapeValue($value, $type = null)
     {
+        if (is_null($value)) {
+            return "NULL";
+        }
         if (is_null($type)) {
             if (is_float($value)) {
                 return floatval($value);
@@ -426,4 +438,6 @@ class Database
 }
 
 // Alias für Database
-class_alias("Database", "DB");
+class DB extends Database
+{
+}

@@ -1,11 +1,11 @@
 <?php
-$acl = new ACL ();
-if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" )) {
-	noPerms ();
+$permissionChecker = new ACL();
+if (! $permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPermission("forms_create")) {
+    noPerms();
 } else {
-	$forms = Forms::getAllForms ();
-	$pages = getAllPages ();
-	?><p>
+    $forms = Forms::getAllForms();
+    $pages = getAllPages();
+    ?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("forms");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
@@ -22,14 +22,14 @@ if (! $acl->hasPermission ( "forms" ) or ! $acl->hasPermission ( "forms_create" 
 </p>
 
 <p>
-	<strong><?php translate("subject");?>*</strong><br /> <input type="text"
-		value="" name="subject" required />
+	<strong><?php translate("subject");?>*</strong><br /> <input
+		type="text" value="" name="subject" required />
 </p>
 <p>
 	<strong><?php translate("category");?></strong><br />
 	<?php
-	echo Categories::getHTMLSelect ();
-	?></p>
+    echo Categories::getHTMLSelect();
+    ?></p>
 
 <p>
 	<strong><?php translate("fields");?></strong><br />

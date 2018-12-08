@@ -1,11 +1,14 @@
 <?php
 // TODO: This is old code before the switch to MVC architecture
 // This should be rewritten with MVC pattern
+use UliCMS\Security\PermissionChecker;
+use UliCMS\Security\ContentPermissionChecker;
 
-$show_filters = Settings::get("user/".get_user_id()."/show_filters");
+$show_filters = Settings::get("user/" . get_user_id() . "/show_filters");
 
-$acl = new ACL();
-if ($acl->hasPermission("pages")) {
+$permissionChecker = new PermissionChecker(get_user_id());
+
+if ($permissionChecker->hasPermission("pages")) {
     ?>
 	<?php
     if (! isset($_SESSION["filter_title"])) {
@@ -116,15 +119,16 @@ if ($acl->hasPermission("pages")) {
 <p><?php translate ( "pages_infotext" );?></p>
 <div id="page-list">
 <?php
-    if ($acl->hasPermission("pages_create")) {
+    if ($permissionChecker->hasPermission("pages_create")) {
         ?>
 <form action="#" method="get">
-	<div class="checkbox">
-		<label><input type="checkbox" name="show_filters" id="show_filters" value="1" data-url="index.php?ajax_cmd=toggle_show_filters"
-		<?php if($show_filters) echo "checked";?>><?php translate("show_filters");?></label>
-	</div>
-</form>
-<div class="row">
+		<div class="checkbox">
+			<label><input type="checkbox" name="show_filters" id="show_filters"
+				value="1" data-url="index.php?ajax_cmd=toggle_show_filters"
+				<?php if($show_filters) echo "checked";?>><?php translate("show_filters");?></label>
+		</div>
+	</form>
+	<div class="row">
 		<div class="col-xs-6">
 			<a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?></a>
 		</div>
@@ -253,8 +257,8 @@ if ($acl->hasPermission("pages")) {
     ?>
 	</select>
 			</div>
-			</div>
-			<div class="row">
+		</div>
+		<div class="row">
 			<div class="col-xs-6">
 <?php translate("parent");?>
 <select name="filter_parent" onchange="filterByParent(this);">
@@ -291,8 +295,8 @@ if ($acl->hasPermission("pages")) {
 			<div class="col-xs-6">
 <?php translate("enabled");?>
 <select name="filter_active" onchange="filterByActive(this);">
-			<option value="null"
-				<?php
+					<option value="null"
+						<?php
     
     if (null == $_SESSION["filter_active"]) {
         echo "selected";
@@ -300,34 +304,34 @@ if ($acl->hasPermission("pages")) {
     ?>>
 			[<?php translate("every"); ?>]
 		</option>
-			<option value="1"
-				<?php
+					<option value="1"
+						<?php
     
     if (1 === $_SESSION["filter_active"]) {
         echo "selected";
     }
     ?>><?php translate("enabled");?></option>
-			<option value="0"
-				<?php
+					<option value="0"
+						<?php
     
     if (0 === $_SESSION["filter_active"]) {
         echo "selected";
     }
     ?>><?php translate("disabled");?></option>
-		</select>
-	</div>
-	</div>
-	<div class="row">
-	<div class="col-xs-6">
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-6">
 
 <?php
     
     translate("approved");
     ?>
 <p>
-			<select name="filter_approved" onchange="filterByApproved(this);">
-				<option value="null"
-					<?php
+					<select name="filter_approved" onchange="filterByApproved(this);">
+						<option value="null"
+							<?php
     
     if (null == $_SESSION["filter_approved"]) {
         echo "selected";
@@ -337,8 +341,8 @@ if ($acl->hasPermission("pages")) {
     
     translate("every");
     ?>]</option>
-				<option value="1"
-					<?php
+						<option value="1"
+							<?php
     
     if (1 === $_SESSION["filter_approved"]) {
         echo "selected";
@@ -347,8 +351,8 @@ if ($acl->hasPermission("pages")) {
     
     translate("yes");
     ?></option>
-				<option value="0"
-					<?php
+						<option value="0"
+							<?php
     
     if (0 === $_SESSION["filter_approved"]) {
         echo "selected";
@@ -357,14 +361,14 @@ if ($acl->hasPermission("pages")) {
     
     translate("no");
     ?></option>
-			</select>
-		</p>
+					</select>
+				</p>
+			</div>
 		</div>
-	</div>
 	</form>
 
 <?php
-    if ($_SESSION["filter_status"] == "trash" and $acl->hasPermission("pages")) {
+    if ($_SESSION["filter_status"] == "trash" and $permissionChecker->hasPermission("pages")) {
         ?>
 
 <a
@@ -445,8 +449,7 @@ if ($acl->hasPermission("pages")) {
     
     $group = new Group();
     $group->getCurrentGroup();
-    
-    $userLanguage = $group->getLanguages();
+    $userLanguage = $permissionChecker->getLanguages();
     $joined = "";
     foreach ($userLanguage as $lang) {
         $joined .= "'" . Database::escapeValue($lang->getLanguageCode()) . "',";
@@ -482,7 +485,7 @@ if ($acl->hasPermission("pages")) {
 			</td>
 					<!-- 
 			<?php
-    if ($acl->hasPermission("pages_create")) {
+    if ($permissionChecker->hasPermission("pages_create")) {
         ?>
 			<td style="text-align: center"><?php translate ( "clone" );?>
 			</td> -->
@@ -526,38 +529,9 @@ if ($acl->hasPermission("pages")) {
             // echo "<td style='text-align:center'><a href=\"index.php?action=clone_page&page=" . $row->id . "\"><img class=\"mobile-big-image\" src=\"gfx/clone.png\" alt=\"" . get_translation("clone") . "\" title=\"" . get_translation("clone") . "\"></a></td>";
             // }
             $autor = $row->autor;
-            $is_owner = $autor == get_user_id();
             
-            $pages_edit_own = $acl->hasPermission("pages_edit_own");
-            $pages_edit_others = $acl->hasPermission("pages_edit_others");
-            
-            $owner_group = $row->group_id;
-            $current_group = $_SESSION["group_id"];
-            
-            $can_edit_this = false;
-            
-            if ($row->only_group_can_edit or $row->only_admins_can_edit or $row->only_owner_can_edit or $row->only_others_can_edit) {
-                if ($row->only_group_can_edit and $owner_group == $current_group) {
-                    $can_edit_this = true;
-                } else if ($row->only_admins_can_edit and is_admin()) {
-                    $can_edit_this = true;
-                } else if ($row->only_owner_can_edit and $is_owner and $pages_edit_own) {
-                    $can_edit_this = true;
-                } else if ($row->only_others_can_edit and $owner_group != $current_group and ! is_admin() and ! $is_owner) {
-                    $can_edit_this = true;
-                }
-            } else {
-                if (! $is_owner and $pages_edit_others) {
-                    $can_edit_this = true;
-                } else if ($is_owner and $pages_edit_own) {
-                    $can_edit_this = true;
-                }
-            }
-            
-            // admins are gods
-            if (is_admin()) {
-                $can_edit_this = true;
-            }
+            $checker = new ContentPermissionChecker(get_user_id());
+            $can_edit_this = $checker->canWrite($row->id);
             
             if (! $can_edit_this) {
                 echo "<td></td><td></td>";

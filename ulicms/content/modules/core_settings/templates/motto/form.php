@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("settings_simple")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
     $mottos = array();
     for ($i = 0; $i < count($languages); $i ++) {
@@ -23,7 +23,7 @@ if ($acl->hasPermission("settings_simple")) {
         "id" => "motto_settings"
     ));
     ?>
-<table border=0>
+<table>
 	<tr>
 		<td style="min-width: 100px;"><strong><?php
     
@@ -42,14 +42,14 @@ if ($acl->hasPermission("settings_simple")) {
         
         echo $lang;
         ?></td>
-		<td><input name="motto_<?php
+		<td><input
+			name="motto_<?php
         
         echo $lang;
         ?>"
-			style="width: 400px"
 			value="<?php
         
-        echo StringHelper::real_htmlspecialchars($mottos[$lang]);
+        echo StringHelper::realHtmlSpecialchars($mottos[$lang]);
         ?>"></td>
 			<?php
     }
@@ -64,8 +64,7 @@ if ($acl->hasPermission("settings_simple")) {
 		</td>
 	</tr>
 </table>
-</form>
-
+<?php echo ModuleHelper::endForm();?>
 <script type="text/javascript">
 $("#motto_settings").ajaxForm({beforeSubmit: function(e){
   $("#message").html("");

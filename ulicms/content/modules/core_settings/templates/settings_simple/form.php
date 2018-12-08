@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("settings_simple")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("settings_simple")) {
     $controller = ControllerRegistry::get();
     // @FIXME: Dieses SQL gehört hier nicht her. In neue Funktion Settings::getAll() auslagern.
     $allSettings = Settings::getAll();
@@ -124,7 +124,7 @@ if ($acl->hasPermission("settings_simple")) {
     ?></a></td>
 	</tr>
 		<?php
-    if ($acl->hasPermission("open_graph")) {
+    if ($permissionChecker->hasPermission("open_graph")) {
         ?>
               <tr>
 		<td><strong><?php translate("open_graph");?>
@@ -198,7 +198,7 @@ if ($acl->hasPermission("settings_simple")) {
 	</tr>
 </table>
 <input type="hidden" name="save_settings" value="save_settings">
-</form>
+<?php echo ModuleHelper::endForm();?>
 <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/settings_simple.js"));
     combinedScriptHtml();

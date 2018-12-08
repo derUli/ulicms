@@ -7,7 +7,7 @@
 <?php translate("password_reset2");?>
  
  
-<?php Template::escape(ViewBag::get("url"));?>
+<?php echo ViewBag::get("url");?>
  
  
 <?php translate("password_reset3");?>

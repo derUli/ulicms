@@ -87,23 +87,13 @@ class Forms
                     HTMLResult($html, HttpStatusCode::BAD_REQUEST);
                 }
             }
-            $html = "<!DOCTYPE html>";
-            $html .= "<html>";
-            $html .= "<head>";
-            $html .= '<meta http-equiv="content-type" content="text/html; charset=utf-8">';
-            $html .= '<meta charset="utf-8">';
-            $html .= "</head>";
-            $html .= "<body>";
-            $html .= "<table border=\"1\"";
+            
+            $data = array();
             foreach ($fields as $name => $label) {
-                $html .= "<tr>";
-                $html .= "<td><strong>" . _esc($label) . "</strong></td>";
-                $html .= "<td>" . nl2br(_esc($_POST[$name])) . "</td>";
-                $html .= "</tr>";
+                $data[$label] = $_POST[$name];
             }
-            $html .= "</table>";
-            $html .= "</body>";
-            $html .= "</html>";
+            ViewBag::set("data", $data);
+            $html = Template::executeModuleTemplate("core_forms", "mails/message.php");
             
             $email_to = $form["email_to"];
             $subject = $form["subject"];
@@ -115,11 +105,18 @@ class Forms
             
             $mail_from_field = $form["mail_from_field"];
             
+            // if dns mx check is enabled check the mail domain
+            if (! StringHelper::isNullOrEmpty($mail_from_field) and Settings::get("check_mx_of_mail_address") and ! AntiSpamHelper::checkMailDomain($email)) {
+                ExceptionResult(get_translation("mail_address_has_invalid_mx_entry"), HttpStatusCode::BAD_REQUEST);
+            }
+            
             $mail_from = StringHelper::isNotNullOrWhitespace($mail_from_field) ? array(
                 $_POST[$mail_from_field]
             ) : array(
                 Settings::get("email")
             );
+            // remove newlines and nullbytes from mail address to prevent
+            // header injection
             sanitize($mail_from);
             $headers .= "\n";
             $headers .= "From: " . $mail_from[0] . "\n";

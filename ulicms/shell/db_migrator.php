@@ -54,10 +54,10 @@ if ($command == "up") {
     }
     $folder = Path::resolve($directory . "/up");
     $migrator = new DBMigrator($component, $folder);
-    try{
-         $migrator->migrate($stop);
-    } catch(Exception $e){
-        echo $e->getMessage(). "\n";
+    try {
+        $migrator->migrate($stop);
+    } catch (Exception $e) {
+        echo $e->getMessage() . "\n";
     }
     exit();
 }
@@ -68,10 +68,10 @@ if ($command == "down") {
     }
     $folder = Path::resolve($directory . "/down");
     $migrator = new DBMigrator($component, $folder);
-    try{
-       $migrator->rollback($stop);
-    } catch(Exception $e){
-        echo $e->getMessage(). "\n";
+    try {
+        $migrator->rollback($stop);
+    } catch (Exception $e) {
+        echo $e->getMessage() . "\n";
     }
     exit();
 }

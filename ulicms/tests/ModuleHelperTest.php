@@ -115,7 +115,7 @@ class ModuleHelperTest extends \PHPUnit\Framework\TestCase
 
     public function testDeleteButton()
     {
-        $this->assertEquals('<form action="index.php?action=contacts" method="post" class="delete-form"><input type="hidden" name="csrf_token" value="' . get_csrf_token() . '"><input type="hidden" name="delete" value="123"><input type="image" src="admin/gfx/delete.gif" alt="delete" title="delete"></form>', ModuleHelper::deleteButton("index.php?action=contacts", array(
+        $this->assertEquals('<form action="index.php?action=contacts" method="post" class="delete-form"><input type="hidden" name="csrf_token" value="' . get_csrf_token() . '"><input type="hidden" name="delete" value="123"><input type="image" src="admin/gfx/delete.gif" alt="Delete" title="Delete"></form>', ModuleHelper::deleteButton("index.php?action=contacts", array(
             "delete" => "123"
         )));
     }

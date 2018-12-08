@@ -1,6 +1,6 @@
 <?php
-$acl = new ACL();
-if ($acl->hasPermission("settings_simple")) {
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("settings_simple")) {
     $languages = getAllLanguages();
     $frontpages = array();
     
@@ -26,7 +26,7 @@ if ($acl->hasPermission("settings_simple")) {
         "id" => "frontpage_settings"
     ));
     ?>
-<table border="0">
+<table>
 	<tr>
 		<td><strong><?php translate("language");?>
 			</strong></td>
@@ -72,7 +72,7 @@ if ($acl->hasPermission("settings_simple")) {
 		</td>
 	</tr>
 </table>
-</form>
+<?php echo ModuleHelper::endForm();?>
 <?php
     enqueueScriptFile(ModuleHelper::buildRessourcePath("core_content", "js/frontpage.js"));
     combinedScriptHtml();

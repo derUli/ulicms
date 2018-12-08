@@ -1,4 +1,18 @@
 <?php
+use UliCMS\Security\PermissionChecker;
+
+function idefine($key, $value)
+{
+    if (! defined($key)) {
+        define($key, $value);
+    }
+}
+
+function faster_in_array($needle, $haystack)
+{
+    $flipped = array_flip($haystack);
+    return isset($flipped[$needle]);
+}
 
 function is_json($str)
 {
@@ -50,8 +64,17 @@ function var_dump_str()
 
 function remove_prefix($text, $prefix)
 {
-    if (0 === strpos($text, $prefix))
+    if (startsWith($text, $prefix)) {
         $text = substr($text, strlen($prefix));
+    }
+    return $text;
+}
+
+function remove_suffix($text, $suffix)
+{
+    if (endsWith($text, $suffix)) {
+        $text = substr($text, 0, strlen($text) - strlen($suffix));
+    }
     return $text;
 }
 
@@ -184,11 +207,7 @@ function preparePlainTextforHTMLOutput($text)
 
 function get_action()
 {
-    if (isset($_REQUEST["action"])) {
-        return $_REQUEST["action"];
-    } else {
-        return "home";
-    }
+    return BackendHelper::getAction();
 }
 
 function isMaintenanceMode()
@@ -207,17 +226,6 @@ function is_admin_dir()
     return basename(getcwd()) === "admin";
 }
 
-function initconfig($key, $value)
-{
-    $retval = false;
-    if (! Settings::get($key)) {
-        setconfig($key, $value);
-        $retval = true;
-        SettingsCache::set($key, $value);
-    }
-    return $retval;
-}
-
 function set_format($format)
 {
     $_GET["format"] = trim($format, ".");
@@ -230,7 +238,7 @@ function get_jquery_url()
     return $url;
 }
 
-function get_prefered_language(array $available_languages, $http_accept_language)
+function get_prefered_language($available_languages, $http_accept_language)
 {
     $available_languages = array_flip($available_languages);
     
@@ -869,22 +877,6 @@ function getCurrentLanguage($current = false)
     }
 }
 
-// Auf automatische aktualisieren prüfen.
-// Rückgabewert: ein String oder False
-function checkForUpdates()
-{
-    if (Settings::get("disable_core_update_check")) {
-        return false;
-    }
-    include_once ULICMS_ROOT . "/lib/file_get_contents_wrapper.php";
-    $info = @file_get_contents_Wrapper(UPDATE_CHECK_URL, true);
-    if (! $info or trim($info) === "") {
-        return false;
-    } else {
-        return $info;
-    }
-}
-
 function getThemeList()
 {
     return getThemesList();
@@ -1398,9 +1390,8 @@ function getAllSystemNames($lang = null)
 function getAllLanguages($filtered = false)
 {
     if ($filtered) {
-        $group = new Group();
-        $group->getCurrentGroup();
-        $languages = $group->getLanguages();
+        $permissionChecker = new PermissionChecker(get_user_id());
+        $languages = $permissionChecker->getLanguages();
         if (count($languages) > 0) {
             $result = array();
             foreach ($languages as $lang) {

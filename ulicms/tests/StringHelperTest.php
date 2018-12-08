@@ -78,4 +78,17 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
         $expected = file_get_contents($inputExpected);
         $this->assertEquals($expected, StringHelper::trimLines($input));
     }
+
+    public function testMakeLinksClickable()
+    {
+        $input = "Das hier ist ein Text.
+http://www.google.de
+Noch mehr Text http://www.ulicms.de und so weiter.";
+        
+        $expected = 'Das hier ist ein Text.
+<a href="http://www.google.de" rel="nofollow" target="_blank">http://www.google.de</a>
+Noch mehr Text <a href="http://www.ulicms.de" rel="nofollow" target="_blank">http://www.ulicms.de</a> und so weiter.';
+        
+        $this->assertEquals($expected, StringHelper::makeLinksClickable($input));
+    }
 }

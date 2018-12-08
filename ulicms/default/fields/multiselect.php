@@ -1,14 +1,14 @@
 <?php
-$field = ViewBag::get ( "field" );
-$value = ViewBag::get ( "field_value" ) ? ViewBag::get ( "field_value" ) : array ();
-if (is_string ( $value )) {
-	$value = array (
-			$value 
-	);
+$field = ViewBag::get("field");
+$value = ViewBag::get("field_value") ? ViewBag::get("field_value") : array();
+if (is_string($value)) {
+    $value = array(
+        $value
+    );
 }
-$options = Viewbag::get ( "field_options" ) ? Viewbag::get ( "field_options" ) : array ();
-if (is_null ( $value )) {
-	$value = $field->defaultValue;
+$options = Viewbag::get("field_options") ? Viewbag::get("field_options") : array();
+if (is_null($value)) {
+    $value = $field->defaultValue;
 }
 ?>
 <div class="custom-field"
@@ -21,16 +21,16 @@ if (is_null ( $value )) {
 		<?php foreach($options as $optionValue=>$optionTitle){?>
 		<option value="<?php Template::escape($optionValue);?>"
 				<?php
-			if (in_array ( $optionValue, $value )) {
-				echo "selected";
-			}
-			?>><?php
-			if ($field->translateOptions) {
-				secure_translate ( $optionTitle );
-			} else {
-				Template::escape ( $optionTitle );
-			}
-			?></option>
+    if (in_array($optionValue, $value)) {
+        echo "selected";
+    }
+    ?>><?php
+    if ($field->translateOptions) {
+        secure_translate($optionTitle);
+    } else {
+        Template::escape($optionTitle);
+    }
+    ?></option>
 		<?php }?>
 		</select>
 		<?php if($field->helpText){?>

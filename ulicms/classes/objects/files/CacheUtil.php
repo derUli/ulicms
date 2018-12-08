@@ -28,7 +28,7 @@ class CacheUtil
         if (function_exists('sqlite_open')) {
             $driver = "sqlite";
         }
-       
+        
         self::$adapter = new phpFastCache\Helper\Psr16Adapter($driver, $cacheConfig);
         
         return self::$adapter;

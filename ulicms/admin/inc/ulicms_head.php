@@ -3,9 +3,18 @@ $admin_logo = Settings::get("admin_logo");
 if (! $admin_logo) {
     $admin_logo = "gfx/logo.png";
 }
+
+// translation for select2 dropdown boxes
+$select2TranslationFile = "scripts/js/i18n/" . getSystemLanguage() . ".js";
+$select2Language = getSystemLanguage();
+if (! file_exists($select2TranslationFile)) {
+    $select2TranslationFile = "scripts/js/i18n/en.js";
+    $select2Language = "en";
+}
+
 ?>
 <!DOCTYPE html>
-<html>
+<html data-select2-language="<?php esc($select2Language)?>">
 <head>
 <meta name="viewport"
 	content="width=device-width, user-scalable=yes, initial-scale=1" />
@@ -33,11 +42,11 @@ $enq = array(
     "scripts/global.js",
     "scripts/bootstrap.min.js",
     "scripts/js/select2.min.js",
+    "scripts/bootbox.min.js",
+    $select2TranslationFile,
     "scripts/datatables/datatables.min.js",
     "../lib/js/global.js"
 );
-?>
-<?php
 
 if (is_logged_in()) {
     $enq[] = "scripts/cookie.js";
@@ -126,7 +135,7 @@ if (get_action()) {
 do_event("after_backend_header");
 ?>
 <div
-		class="fluid-container main <?php
+		class="container-fluid main <?php
 
 if (get_action()) {
     echo 'action-' . Template::getEscape(get_action());
@@ -148,7 +157,7 @@ if (is_logged_in()) {
 			<div class="row pull-right">
 					<div class="col-xs-6">
 						<img src="gfx/clear-cache.png" id="menu-clear-cache"
-							data-url="<?php echo ModuleHelper::buildMethodCallUrl("CacheSettingsController", "clearCache");?>"
+							data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1");?>"
 							alt="<?php translate("clear_cache");?>"> <img
 							src="gfx/loading2.gif" id="menu-clear-cache-loading"
 							style="display: none" alt="<?php translate("loading");?>">

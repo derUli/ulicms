@@ -1,7 +1,10 @@
 <?php
+use UliCMS\Exceptions\NotImplementedException;
 
 class Model
 {
+
+    private static $model = null;
 
     protected $id = null;
 
@@ -101,5 +104,17 @@ class Model
         } else if (class_exists($type) and $value instanceof $type) {
             throw new InvalidArgumentException("\"{$value}\" is not of type {$type}.");
         }
+    }
+
+    public static function getAllDatasets($tableName, $modelClass, $orderBy = "id", $where = "")
+    {
+        $result = array();
+        $query = Database::selectAll($tableName, array(
+            "id"
+        ), $where, array(), true, $orderBy);
+        while ($row = Database::fetchObject($query)) {
+            $result[] = new $modelClass($row->id);
+        }
+        return $result;
     }
 }

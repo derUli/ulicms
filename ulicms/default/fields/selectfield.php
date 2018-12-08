@@ -1,9 +1,9 @@
 <?php
-$field = ViewBag::get ( "field" );
-$value = ViewBag::get ( "field_value" );
-$options = Viewbag::get ( "field_options" ) ? Viewbag::get ( "field_options" ) : array ();
-if (is_null ( $value )) {
-	$value = $field->defaultValue;
+$field = ViewBag::get("field");
+$value = ViewBag::get("field_value");
+$options = Viewbag::get("field_options") ? Viewbag::get("field_options") : array();
+if (is_null($value)) {
+    $value = $field->defaultValue;
 }
 ?>
 <div class="custom-field"
@@ -16,16 +16,16 @@ if (is_null ( $value )) {
 		<?php foreach($options as $optionValue=>$optionTitle){?>
 		<option value="<?php Template::escape($optionValue);?>"
 				<?php
-			if ($optionValue == $value) {
-				echo "selected";
-			}
-			?>><?php
-			if ($field->translateOptions) {
-				secure_translate ( $optionTitle );
-			} else {
-				Template::escape ( $optionTitle );
-			}
-			?></option>
+    if ($optionValue == $value) {
+        echo "selected";
+    }
+    ?>><?php
+    if ($field->translateOptions) {
+        secure_translate($optionTitle);
+    } else {
+        Template::escape($optionTitle);
+    }
+    ?></option>
 		<?php }?>
 		</select>
 		<?php if($field->helpText){?>

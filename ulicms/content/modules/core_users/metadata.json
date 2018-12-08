@@ -1,6 +1,6 @@
 {
 	"source": "core",
-	"version": "2018.3.5",
+	"version": "2019.1",
 	"embed": false,
 	"actions": {
 		"admins": "templates/users/list.php",
@@ -8,7 +8,8 @@
 		"admin_edit": "templates/users/edit.php"
 	},
 	"controllers": {
-		"UserController": "controllers/UserController.php"
+		"UserController": "controllers/UserController.php",
+		"SessionManager": "controllers/SessionManager.php"
 	},
 	"controllers_function_permissions": {
 		"UserController::deletePost": "users",

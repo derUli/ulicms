@@ -1,17 +1,17 @@
 <?php
-$acl = new ACL ();
-if ($acl->hasPermission ( "update_system" )) {
-	$version = new ulicms_version ();
-	$currentVersion = $version->getInternalVersionAsString ();
-	$newVersion = ControllerRegistry::get ()->checkForUpgrades () ? ControllerRegistry::get ()->checkForUpgrades () : $currentVersion;
-	$json = ControllerRegistry::get ()->getJSON ();
-	$release_notes = null;
-	if (isset ( $json->release_notes )) {
-		$release_notes = $json->release_notes;
-		$release_notes = isset ( $release_notes [getSystemLanguage ()] ) ? $release_notes [getSystemLanguage ()] : $release_notes ["en"];
-		$release_notes = nl2br ( htmlspecialchars ( $release_notes ) );
-	}
-	?>
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("update_system")) {
+    $version = new UliCMSVersion();
+    $currentVersion = $version->getInternalVersionAsString();
+    $newVersion = ControllerRegistry::get()->checkForUpgrades() ? ControllerRegistry::get()->checkForUpgrades() : $currentVersion;
+    $json = ControllerRegistry::get()->getJSON();
+    $release_notes = null;
+    if (isset($json->release_notes)) {
+        $release_notes = $json->release_notes;
+        $release_notes = isset($release_notes[getSystemLanguage()]) ? $release_notes[getSystemLanguage()] : $release_notes["en"];
+        $release_notes = nl2br(htmlspecialchars($release_notes));
+    }
+    ?>
 	<?php if($currentVersion == $newVersion){?>
 <h1><?php translate("oneclick_upgrade")?></h1>
 <p><?php translate("no_new_version_available");?></p>
@@ -51,5 +51,5 @@ if ($acl->hasPermission ( "update_system" )) {
 </form>
 <?php
 } else {
-	noPerms ();
+    noPerms();
 }
