@@ -217,9 +217,17 @@ class InstallerController
         $content = str_replace("{mysql_user}", $_SESSION["mysql_user"], $content);
         $content = str_replace("{mysql_password}", $_SESSION["mysql_password"], $content);
         $content = str_replace("{mysql_database}", $_SESSION["mysql_database"], $content);
-        $filled_file = "../CMSConfig.php";
         
-        if (file_put_contents($filled_file, $content)) {
+        copy("../lib/CMSConfigSample.php", "../CMSConfig.php");
+        
+        $defaultConfigFile = "../content/configurations/default.php";
+        
+        $configurationDir = dirname($defaultConfigFile);
+        if (! is_dir($configurationDir)) {
+            mkdir($configurationDir);
+        }
+        
+        if (file_put_contents($defaultConfigFile, $content)) {
             echo "<!--ok-->";
         } else {
             echo "<!--failed-->" . TRANSLATION_WRITE_CMS_CONFIG_FAILED;
