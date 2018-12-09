@@ -109,7 +109,19 @@ class CommentSpamChecker implements ISpamChecker
             foreach ($fields as $field => $value) {
                 if ($value != null) {
                     if (AntiSpamHelper::isCyrillic($value)) {
-                        $this->errors[] = new SpamDetectionResult(get_translation($field), get_translation("cyrillic_charts_not_allowed", array(
+                        $this->errors[] = new SpamDetectionResult(get_translation($field), get_translation("cyrillic_chars_not_allowed", array(
+                            "%field%" => get_translation($field)
+                        )));
+                    }
+                }
+            }
+        }
+        // If the option "Disallow Right-To-Left Languages" is enabled, check if $fields contains arabic, hebrew or persian chars
+        if ($this->spamFilterConfiguration->getDisallowRtlChars()) {
+            foreach ($fields as $field => $value) {
+                if ($value != null) {
+                    if (AntiSpamHelper::isRtl($value)) {
+                        $this->errors[] = new SpamDetectionResult(get_translation($field), get_translation("rtl_chars_not_allowed", array(
                             "%field%" => get_translation($field)
                         )));
                     }

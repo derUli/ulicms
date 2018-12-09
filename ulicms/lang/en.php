@@ -219,6 +219,8 @@ define("TRANSLATION_BLACKLIST", "Black list");
 define("TRANSLATION_SPAM_COUNTRIES", "Users from the following countries may <strong>not</strong> write comments.");
 define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Disallow chinese chars");
 define("TRANSLATION_DISALLOW_CYRILLIC_CHARS", "Disallow cyrillic chars");
+define("TRANSLATION_DISALLOW_RTL_CHARS", "Disallow RTL-Languages (Arabic, Hebrew, Persian)");
+
 // Cache
 define("TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern,
 bietet das UliCMS eine Cache-Funktion.<br/>

@@ -33,6 +33,12 @@ class SpamFilterController extends Controller
             Settings::delete("disallow_cyrillic_chars");
         }
         
+        if (isset($_POST["disallow_rtl_chars"])) {
+            Settings::set("disallow_rtl_chars", "disallow");
+        } else {
+            Settings::delete("disallow_rtl_chars");
+        }
+        
         if (isset($_POST["reject_requests_from_bots"])) {
             Settings::set("reject_requests_from_bots", "1");
         } else {
