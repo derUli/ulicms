@@ -221,6 +221,7 @@ define("TRANSLATION_BLACKLIST", "Schwarze Liste");
 define("TRANSLATION_SPAM_COUNTRIES", "Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren");
 define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Chinesische Schriftzeichen verbieten");
 define("TRANSLATION_DISALLOW_CYRILLIC_CHARS", "Kyrillische Schriftzeichen verbieten");
+define("TRANSLATION_DISALLOW_RTL_CHARS", "Verbiete RTL-Sprachen (Arabisch, Hebräisch, Persisch)");
 
 // Cache
 define("TRANSLATION_CACHE_TEXT1", "<p>Um die Performance der Website zu verbessern,

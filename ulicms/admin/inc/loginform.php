@@ -123,7 +123,7 @@ if (isset($_REQUEST["error"]) and ! empty($_REQUEST["error"])) {
             echo "go=" . real_htmlspecialchars($_REQUEST["go"]);
         }
         ?>"
-	class="btn btn-default"><?php
+	class="btn btn-default voffset2"><?php
         
         translate("register");
         ?></a>
@@ -134,7 +134,7 @@ if (isset($_REQUEST["error"]) and ! empty($_REQUEST["error"])) {
     
     if (! Settings::get("disable_password_reset")) {
         ?>
-<a href="?reset_password" class="btn btn-default pull-right"><?php
+<a href="?reset_password" class="btn btn-default pull-right voffset2"><?php
         
         translate("reset_password");
         ?></a>

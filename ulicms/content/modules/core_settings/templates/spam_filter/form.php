@@ -77,6 +77,16 @@ function spamFilterEnabledcheckboxChanged(checked){
 		</label>
 		</div>
 		<div class="checkbox">
+			<label for="disallow_rtl_chars"> <input type="checkbox"
+				name="disallow_rtl_chars" id="disallow_rtl_chars"
+				<?php
+    if (Settings::get("disallow_rtl_chars")) {
+        echo " checked=\"checked\"";
+    }
+    ?>> <?php translate("disallow_rtl_chars");?>
+		</label>
+		</div>
+		<div class="checkbox">
 			<label><input name="reject_requests_from_bots" type="checkbox"
 				value=""
 				<?php
