@@ -23,6 +23,18 @@ if (is_writable($configFile)) {
     }
 }
 
+if (! is_dir(ULICMS_CONFIGURATIONS)) {
+    mkdir(ULICMS_CONFIGURATIONS);
+}
+
+$defaultConfig = Path::resolve("ULICMS_CONFIGURATIONS/default.php");
+
+if (! is_file($defaultConfig)) {
+    rename($configFile, $defaultConfig);
+}
+
+copy(Path::resolve("ULICMS_ROOT/lib/CMSConfigSample.php"), Path::resolve("ULICMS_ROOT/CMSConfig.php"));
+
 // no time limit to prevent a timeout while running sql migrations
 @set_time_limit(0);
 

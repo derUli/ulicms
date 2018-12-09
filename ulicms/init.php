@@ -219,6 +219,10 @@ if (! defined("ULICMS_LOG")) {
 if (! defined("ULICMS_CONTENT")) {
     define("ULICMS_CONTENT", ULICMS_DATA_STORAGE_ROOT . "/content/");
 }
+
+if (! defined("ULICMS_CONFIGURATIONS")) {
+    define("ULICMS_CONFIGURATIONS", ULICMS_CONTENT . "/configurations/");
+}
 if (! is_dir(ULICMS_CACHE)) {
     mkdir(ULICMS_CACHE);
 }

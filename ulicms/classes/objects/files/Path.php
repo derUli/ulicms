@@ -7,6 +7,7 @@ class Path
     {
         $path = str_ireplace("ULICMS_ROOT", rtrim(ULICMS_ROOT, "/"), $path);
         $path = str_ireplace("ULICMS_DATA_STORAGE_ROOT", rtrim(ULICMS_DATA_STORAGE_ROOT, "/"), $path);
+        $path = str_ireplace("ULICMS_CONFIGURATIONS", ULICMS_CONFIGURATIONS, $path);
         if (defined("ULICMS_DATA_STORAGE_URL")) {
             $path = str_ireplace("ULICMS_DATA_STORAGE_URL", rtrim(ULICMS_DATA_STORAGE_URL, "/"), $path);
         }
