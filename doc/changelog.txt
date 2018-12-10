@@ -7,6 +7,7 @@ Neue Features:
 Verbesserungen
 * Benachrichtigung wenn neue Patches verfügbar sind umformuliert
 * In-Page "Bearbeiten" Buttons werden nun mit Bootstrap formatiert
+* "Schwarze Liste" umbenannt in "Verbotene Wörter"
 
 ===== Neues in UliCMS 2019.1 =====
 

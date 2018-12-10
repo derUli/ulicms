@@ -38,3 +38,5 @@ add_translation("comments_must_be_approved", "Kommentare müssen genehmigt werde
 add_translation("commentable_content_types", "Kommentierbare Inhaltstypen");
 
 add_translation("keep_spam_ips", "IP-Adressen von Spamkommentaren nicht löschen");
+
+add_translation("min_time_to_fill_form_help", "Ein Wort je Zeile. Auch Teile einer Zeichenkette werden erkannt.");
