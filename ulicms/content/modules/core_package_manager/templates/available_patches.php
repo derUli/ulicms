@@ -6,11 +6,14 @@ $runningInGoogleCloud = class_exists("GoogleCloudHelper") ? GoogleCloudHelper::i
 if ($permissionChecker->hasPermission("update_system") and ! $runningInGoogleCloud) {
     $patches = file_get_contents_wrapper(PATCH_CHECK_URL, true);
     ?>
+
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("home");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
 <h1><?php translate ( "available_patches" );?></h1>
+<div class="alert alert-info"><?php translate("patches_will_fix_errors");?></div>
+
 <?php
     if (! $patches or empty($patches)) {
         echo "<p class='ulicms_error'>" . get_translation("no_patches_available") . "</p>";

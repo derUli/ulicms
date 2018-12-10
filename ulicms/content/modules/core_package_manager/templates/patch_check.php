@@ -5,8 +5,8 @@ if ($permissionChecker->hasPermission("update_system") and ! Settings::get("disa
     $data = trim($data);
     if (! empty($data)) {
         ?>
-
-<a href="?action=available_patches"><strong><?php translate ( "install_patches" );?></strong></a>
+<div class="alert alert-info"><?php translate("patches_will_fix_errors");?></div>
+<a href="?action=available_patches" class="btn btn-primary"><strong><?php translate ( "show_available_patches" );?></strong></a>
 <?php
     }
 }

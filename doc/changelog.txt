@@ -2,6 +2,11 @@
 
 Neue Features:
 * Option "Verbiete RTL-Sprachen (Arabisch, Hebräisch, Persisch)" zum Spamfilter hinzugefügt
+* Unterstützung für mehrere Konfigurationsumgebungen
+
+Verbesserungen
+* Benachrichtigung wenn neue Patches verfügbar sind umformuliert
+* In-Page "Bearbeiten" Buttons werden nun mit Bootstrap formatiert
 
 ===== Neues in UliCMS 2019.1 =====
 

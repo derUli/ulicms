@@ -494,4 +494,29 @@ color:" . Settings::get("body-text-color") . ";
     {
         echo self::getComments();
     }
+
+    public static function getEditButton()
+    {
+        $html = "";
+        if (is_logged_in() and ! containsModule()) {
+            $acl = new ACL();
+            if ($acl->hasPermission("pages") and Flags::getNoCache() && is_200()) {
+                $id = get_ID();
+                $page = ContentFactory::getById($id);
+                if (in_array($page->language, getAllLanguages(true))) {
+                    $html .= "<div class=\"ulicms_edit\">";
+                    $html .= UliCMS\HTML\Link::ActionLink("pages_edit", get_translation("edit"), "page={$id}", array(
+                        "class" => "btn btn-warning btn-edit"
+                    ));
+                    $html .= "</div>";
+                }
+            }
+        }
+        return $html;
+    }
+
+    public static function editButton()
+    {
+        echo self::getEditButton();
+    }
 }
