@@ -217,7 +217,7 @@ define("TRANSLATION_TITLE_FORMAT", "Seitentitel Format");
 
 // Spamfilter Einstellungen
 define("TRANSLATION_SPAMFILTER_ENABLED", "Spamfilter aktivieren");
-define("TRANSLATION_BLACKLIST", "Schwarze Liste");
+define("TRANSLATION_BLACKLIST", "Verbotene Wörter");
 define("TRANSLATION_SPAM_COUNTRIES", "Besucher aus folgenden Ländern dürfen <strong>nicht</strong> kommentieren");
 define("TRANSLATION_DISALLOW_CHINESE_CHARS", "Chinesische Schriftzeichen verbieten");
 define("TRANSLATION_DISALLOW_CYRILLIC_CHARS", "Kyrillische Schriftzeichen verbieten");

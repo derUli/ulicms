@@ -112,12 +112,13 @@ function spamFilterEnabledcheckboxChanged(checked){
 				value="<?php
     
     esc(Settings::get("min_time_to_fill_form", "int"));
-    ?>">
+    ?>"> <small><?php translate("min_time_to_fill_form_help");?></small>
+
 		</p>
 	</div>
-	<p>
+	<p class="voffset2">
 		<button type="submit" name="submit_spamfilter_settings"
-			class="btn btn-primary voffset3"><?php
+			class="btn btn-primary"><?php
     
     translate("save_changes");
     ?></button>
