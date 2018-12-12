@@ -44,12 +44,15 @@ function spamFilterEnabledcheckboxChanged(checked){
         echo " style='display:none;'";
     }
     ?>>
-		<label for="spamfilter_words_blacklist"><?php translate("blacklist");?></label><br />
-		<textarea name="spamfilter_words_blacklist"
-			id="spamfilter_words_blacklist" rows=10 cols=40><?php
+		<p>
+			<label for="spamfilter_words_blacklist"><?php translate("blacklist");?></label><br />
+			<textarea name="spamfilter_words_blacklist"
+				id="spamfilter_words_blacklist" rows=10 cols=40><?php
     echo htmlspecialchars(Settings::get("spamfilter_words_blacklist"), ENT_QUOTES, "UTF-8");
     ?></textarea>
-		<br /> <label for="country_blacklist"><?php translate("spam_countries");?></label>
+			<small><?php translate("min_time_to_fill_form_help");?></small>
+		</p>
+		<label for="country_blacklist"><?php translate("spam_countries");?></label>
 		<input type="text" name="country_blacklist" id="country_blacklist"
 			value="<?php
     
@@ -112,8 +115,7 @@ function spamFilterEnabledcheckboxChanged(checked){
 				value="<?php
     
     esc(Settings::get("min_time_to_fill_form", "int"));
-    ?>"> <small><?php translate("min_time_to_fill_form_help");?></small>
-
+    ?>">
 		</p>
 	</div>
 	<p class="voffset2">
