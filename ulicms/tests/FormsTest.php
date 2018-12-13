@@ -6,7 +6,7 @@ class FormsTest extends \PHPUnit\Framework\TestCase
 
     public function tearDown()
     {
-        Database::query("delete from {prefix}forms where name like 'Unit Test%'");
+        Database::query("delete from {prefix}forms where name like 'Unit Test%'", true);
     }
 
     public function testCreateAndDeleteWithEnabled()
@@ -30,6 +30,9 @@ class FormsTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThan(time() - 100, $form["updated"]);
         
         Forms::deleteForm($id);
+        
+        $form = Forms::getFormByID($id);
+        $this->assertNull($form);
     }
 
     public function testCreateAndDeleteWithDisabled()
@@ -53,6 +56,9 @@ class FormsTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThan(time() - 100, $form["updated"]);
         
         Forms::deleteForm($id);
+        
+        $form = Forms::getFormByID($id);
+        $this->assertNull($form);
     }
 
     public function testEditAndDeleteWithEnabled()
@@ -60,10 +66,9 @@ class FormsTest extends \PHPUnit\Framework\TestCase
         $pages = ContentFactory::getAllRegular();
         $page1 = $pages[0];
         $page2 = array_pop($pages);
+        
         Forms::createForm("Unit Test 2", "max@muster.de", "Subject 1", 1, "message=>Message", "message", "email", intval($page1->id), false);
         $id = Database::getInsertID();
-        
-        sleep(6);
         
         Forms::editForm($id, "Unit Test 3", "foo@bar.de", "My Subject", 1, "name=>Name", "name", "mail_from", $page2->id, true);
         
@@ -79,8 +84,9 @@ class FormsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("name", $form["required_fields"]);
         $this->assertEquals("mail_from", $form["mail_from_field"]);
         $this->assertEquals($page2->id, $form["target_page_id"]);
+        
         $this->assertGreaterThan(time() - 100, $form["created"]);
-        $this->assertGreaterThan(time() - 10, $form["updated"]);
+        $this->assertGreaterThan(time() - 100, $form["updated"]);
         
         Forms::deleteForm($id);
     }
@@ -93,7 +99,6 @@ class FormsTest extends \PHPUnit\Framework\TestCase
         Forms::createForm("Unit Test 2", "max@muster.de", "Subject 1", 1, "message=>Message", "message", "email", intval($page1->id), true);
         $id = Database::getInsertID();
         
-        sleep(6);
         Forms::editForm($id, "Unit Test 3", "foo@bar.de", "My Subject", 1, "name=>Name", "name", "mail_from", $page2->id, false);
         
         $form = Forms::getFormByID($id);
@@ -108,8 +113,9 @@ class FormsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("name", $form["required_fields"]);
         $this->assertEquals("mail_from", $form["mail_from_field"]);
         $this->assertEquals($page2->id, $form["target_page_id"]);
+        
         $this->assertGreaterThan(time() - 100, $form["created"]);
-        $this->assertGreaterThan(time() - 10, $form["updated"]);
+        $this->assertGreaterThan(time() - 100, $form["updated"]);
         
         Forms::deleteForm($id);
     }
