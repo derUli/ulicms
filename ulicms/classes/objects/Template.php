@@ -504,7 +504,7 @@ color:" . Settings::get("body-text-color") . ";
                 $id = get_ID();
                 $page = ContentFactory::getById($id);
                 if (in_array($page->language, getAllLanguages(true))) {
-                    $html .= "<div class=\"ulicms_edit\">";
+                    $html .= "<div class=\"ulicms-edit\">";
                     $html .= UliCMS\HTML\Link::ActionLink("pages_edit", get_translation("edit"), "page={$id}", array(
                         "class" => "btn btn-warning btn-edit"
                     ));

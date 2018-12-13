@@ -9,6 +9,9 @@ Verbesserungen
 * In-Page "Bearbeiten" Buttons werden nun mit Bootstrap formatiert
 * "Schwarze Liste" umbenannt in "Verbotene Wörter"
 
+Sonstige Änderungen:
+* CSS-Klasse "ulicms_edit" umbenannt in "ulicms-edit"
+
 ===== Neues in UliCMS 2019.1 =====
 
 Neue Features:
