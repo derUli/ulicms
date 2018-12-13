@@ -20,9 +20,10 @@ class Forms
         return db_query("DELETE FROM " . tbname("forms") . " WHERE id = $id");
     }
 
-    public static function createForm($name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id)
+    public static function createForm($name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled = 1)
     {
         $name = db_escape($name);
+        $enabled = intval($enabled);
         $email_to = db_escape($email_to);
         $subject = db_escape($subject);
         $category_id = intval($category_id);
@@ -34,14 +35,15 @@ class Forms
         $updated = time();
         
         return db_query("INSERT INTO `" . tbname("forms") . "` (name, email_to, subject, category_id, `fields`, `required_fields`,
-									 mail_from_field, target_page_id, `created`, `updated`) values ('$name', '$email_to', '$subject', $category_id, '$fields',
+									 mail_from_field, target_page_id, `created`, `updated`, `enabled`) values ('$name', '$email_to', '$subject', $category_id, '$fields',
                                      '$required_fields',
-									 '$mail_from_field', $target_page_id, $created, $updated)");
+									 '$mail_from_field', $target_page_id, $created, $updated, $enabled)");
     }
 
-    public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id)
+    public static function editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled = 1)
     {
         $name = db_escape($name);
+        $enabled = intval($enabled);
         $email_to = db_escape($email_to);
         $subject = db_escape($subject);
         $category_id = intval($category_id);
@@ -53,7 +55,8 @@ class Forms
         $id = intval($id);
         
         return db_query("UPDATE `" . tbname("forms") . "` set name='$name', email_to = '$email_to', subject = '$subject', category_id = $category_id,
-									 fields = '$fields', required_fields = '$required_fields', mail_from_field = '$mail_from_field', target_page_id = $target_page_id, `updated` = $updated WHERE id = $id");
+									 fields = '$fields', required_fields = '$required_fields', mail_from_field = '$mail_from_field', target_page_id = $target_page_id, 
+`updated` = $updated, `enabled` = $enabled WHERE id = $id");
     }
 
     public static function getAllForms()
@@ -74,6 +77,9 @@ class Forms
         $retval = false;
         $form = self::getFormByID($id);
         if ($form) {
+            if (! $form["enabled"]) {
+                ExceptionResult(get_translation("form_is_disabled"), HttpStatusCode::SERVICE_UNAVAILABLE);
+            }
             $fields = $form["fields"];
             $fields = Settings::mappingStringToArray($fields);
             $required_fields = StringHelper::linesFromString($form["required_fields"]);
@@ -126,8 +132,7 @@ class Forms
                 Request::redirect($redirect_url);
                 $retval = true;
             } else {
-                translate("error_send_mail_form_failed");
-                die();
+                ExceptionResult(get_translation("error_send_mail_form_failed"));
             }
         }
         return $retval;

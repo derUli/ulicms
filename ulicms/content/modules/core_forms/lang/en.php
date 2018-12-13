@@ -15,3 +15,5 @@ add_translation("bots_are_not_allowed", "You look like a bot. Bots are not allow
 
 add_translation("mail_address_has_invalid_mx_entry", "The domain of your e-Mail address has no valid MX entry. Please verify that your e-Mail address in valid.");
 add_translation("check_mx_of_mail_address", "Check DNS MX Entry of email addresses");
+
+add_translation("form_is_disabled", "The form is disabled.");

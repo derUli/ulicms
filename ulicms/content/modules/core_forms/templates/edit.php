@@ -22,6 +22,13 @@ if (! $permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPer
 		required />
 </p>
 <p>
+	<strong><?php translate("enabled");?></strong><br /> <select
+		name="enabled">
+		<option value="1" <?php if($form["enabled"]) echo "selected";?>><?php translate("yes");?></option>
+		<option value="0" <?php if(!$form["enabled"]) echo "selected";?>><?php translate("no");?></option>
+	</select>
+</p>
+<p>
 	<strong><?php translate("email_to");?>*</strong><br /> <input
 		type="email" value="<?php echo htmlspecialchars($form["email_to"]);?>"
 		name="email_to" required />
