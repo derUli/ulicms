@@ -3,6 +3,7 @@
 Neue Features:
 * Option "Verbiete RTL-Sprachen (Arabisch, Hebräisch, Persisch)" zum Spamfilter hinzugefügt
 * Unterstützung für mehrere Konfigurationsumgebungen
+* Formulare können nun deaktiviert werden
 
 Verbesserungen
 * Benachrichtigung wenn neue Patches verfügbar sind umformuliert

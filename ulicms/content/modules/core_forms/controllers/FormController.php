@@ -11,6 +11,7 @@ class FormController extends Controller
     public function createPost()
     {
         $name = $_POST["name"];
+        $enabled = $_POST["enabled"];
         $email_to = $_POST["email_to"];
         $subject = $_POST["subject"];
         $category_id = $_POST["category"];
@@ -19,7 +20,7 @@ class FormController extends Controller
         $mail_from_field = $_POST["mail_from_field"];
         $target_page_id = $_POST["target_page_id"];
         
-        Forms::createForm($name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id);
+        Forms::createForm($name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled);
         if ($this->logger) {
             $user = getUserById(get_user_id());
             $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;
@@ -33,6 +34,7 @@ class FormController extends Controller
     {
         $id = $_POST["id"];
         $name = $_POST["name"];
+        $enabled = $_POST["enabled"];
         $email_to = $_POST["email_to"];
         $subject = $_POST["subject"];
         $category_id = $_POST["category"];
@@ -42,7 +44,7 @@ class FormController extends Controller
         $mail_from_field = $_POST["mail_from_field"];
         $target_page_id = $_POST["target_page_id"];
         
-        Forms::editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id);
+        Forms::editForm($id, $name, $email_to, $subject, $category_id, $fields, $required_fields, $mail_from_field, $target_page_id, $enabled);
         if ($this->logger) {
             $user = getUserById(get_user_id());
             $name = isset($user["username"]) ? $user["username"] : AuditLog::UNKNOWN;

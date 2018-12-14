@@ -15,6 +15,13 @@ if (! $permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPer
 	<strong><?php translate("name");?>*</strong><br /> <input type="text"
 		value="" name="name" required />
 </p>
+<p>
+	<strong><?php translate("enabled");?></strong><br /> <select
+		name="enabled">
+		<option value="1" selected><?php translate("yes");?></option>
+		<option value="0"><?php translate("no");?></option>
+	</select>
+</p>
 
 <p>
 	<strong><?php translate("email_to");?>*</strong><br /> <input
