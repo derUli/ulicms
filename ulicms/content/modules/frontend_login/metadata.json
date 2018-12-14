@@ -1,0 +1,9 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": true,
+	"controllers": {
+		"FrontendLoginController": "controllers/FrontendLoginController.php"
+	},
+	"main_class": "FrontendLoginController"
+}
