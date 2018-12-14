@@ -5,6 +5,9 @@ Neue Features:
 * Unterstützung für mehrere Konfigurationsumgebungen
 * Formulare können nun deaktiviert werden
 
+Neue API-Funktionen:
+* Konstanten-Klasse RequestMethods
+
 Verbesserungen
 * Benachrichtigung wenn neue Patches verfügbar sind umformuliert
 * In-Page "Bearbeiten" Buttons werden nun mit Bootstrap formatiert
