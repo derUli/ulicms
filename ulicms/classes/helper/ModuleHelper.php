@@ -157,7 +157,6 @@ class ModuleHelper
         $domain = getDomainByLanguage($page->language);
         $dirname = dirname(get_request_uri());
         
-        // Replace backslashes with slashes (Windows)
         $dirname = str_replace("\\", "/", $dirname);
         
         if (is_admin_dir()) {

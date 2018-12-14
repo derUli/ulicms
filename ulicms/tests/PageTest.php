@@ -434,7 +434,29 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $this->cleanUp();
     }
 
-    public function testGetUrl()
+    public function testGetUrlWithSuffix()
+    {
+        $page = new Page();
+        $page->title = 'Unit Test ' . time();
+        $page->systemname = 'unit-test-' . time();
+        $page->language = 'de';
+        $page->content = "Some Text";
+        $page->comments_enabled = false;
+        $page->autor = 1;
+        $page->group_id = 1;
+        $page->save();
+        
+        $url = $page->getUrl("foo=bar&hello=world");
+        $this->assertStringStartsWith("http", $url);
+        $this->assertStringContainsString("//company.com", $url);
+        
+        $this->assertStringContainsString("{$page->systemname}.html", $url);
+        $this->assertStringEndsWith("foo=bar&hello=world", $url);
+        
+        $this->cleanUp();
+    }
+
+    public function testGetUrlWithoutSuffix()
     {
         $page = new Page();
         $page->title = 'Unit Test ' . time();
