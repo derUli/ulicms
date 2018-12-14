@@ -220,13 +220,13 @@ class ModuleHelper
         return "index.php?" . self::buildMethodCall($sClass, $sMethod, $suffix);
     }
 
-    public static function buildMethodCallUploadForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post", $htmlAttributes = array())
+    public static function buildMethodCallUploadForm($sClass, $sMethod, $otherVars = array(), $requestMethod = RequestMethod::POST, $htmlAttributes = array())
     {
         $htmlAttributes["enctype"] = "multipart/form-data";
         return self::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $htmlAttributes);
     }
 
-    public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = "post", $htmlAttributes = array())
+    public static function buildMethodCallForm($sClass, $sMethod, $otherVars = array(), $requestMethod = RequestMethod::POST, $htmlAttributes = array())
     {
         $html = "";
         $attribhtml = StringHelper::isNotNullOrWhitespace(self::buildHTMLAttributesFromArray($htmlAttributes)) ? " " . self::buildHTMLAttributesFromArray($htmlAttributes) : "";
@@ -241,7 +241,7 @@ class ModuleHelper
         return $html;
     }
 
-    public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class"=>"btn btn-default", "type"=>"submit"), $otherVars = array(), $formAttributes = array(), $requestMethod = "post")
+    public static function buildMethodCallButton($sClass, $sMethod, $buttonText, $buttonAttributes = array("class"=>"btn btn-default", "type"=>"submit"), $otherVars = array(), $formAttributes = array(), $requestMethod = RequestMethod::POST)
     {
         $html = self::buildMethodCallForm($sClass, $sMethod, $otherVars, $requestMethod, $formAttributes);
         $html .= '<button ' . self::buildHTMLAttributesFromArray($buttonAttributes) . ">";
@@ -257,7 +257,7 @@ class ModuleHelper
         
         $attribhtml = StringHelper::isNotNullOrWhitespace(self::buildHTMLAttributesFromArray($htmlAttributes)) ? " " . self::buildHTMLAttributesFromArray($htmlAttributes) : "";
         
-        $html .= '<form action="' . _esc($url) . '" method="post"' . $attribhtml . '>';
+        $html .= '<form action="' . _esc($url) . '" method="' . RequestMethod::POST . '"' . $attribhtml . '>';
         $html .= get_csrf_token_html();
         foreach ($otherVars as $key => $value) {
             $html .= '<input type="hidden" name="' . Template::getEscape($key) . '" value="' . Template::getEscape($value) . '">';
