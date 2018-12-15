@@ -19,6 +19,8 @@ class Banner
 
     public $language = null;
 
+    public $enabled = true;
+
     public function __construct($id = null)
     {
         if ($id) {
@@ -29,9 +31,9 @@ class Banner
     public function loadByID($id)
     {
         $id = intval($id);
-        $query = DB::query("SELECT * FROM `" . tbname("banner") . "` where id = $id");
-        if (DB::getNumRows($query) > 0) {
-            $result = DB::fetchObject($query);
+        $query = Database::query("SELECT * FROM `" . tbname("banner") . "` where id = $id");
+        if (Database::getNumRows($query) > 0) {
+            $result = Database::fetchObject($query);
             $this->fillVarsByResult($result);
         } else {
             throw new Exception("No banner with id $id");
@@ -41,9 +43,9 @@ class Banner
     public function loadRandom()
     {
         $id = intval($id);
-        $query = DB::query("SELECT * FROM `" . tbname("banner") . "` order by rand() LIMIT 1");
-        if (DB::getNumRows($query) > 0) {
-            $result = DB::fetchObject($query);
+        $query = Database::query("SELECT * FROM `" . tbname("banner") . "` order by rand() LIMIT 1");
+        if (Database::getNumRows($query) > 0) {
+            $result = Database::fetchObject($query);
             $this->fillVarsByResult($result);
         }
     }
@@ -58,6 +60,7 @@ class Banner
         $this->type = $result->type;
         $this->html = $result->html;
         $this->language = $result->language;
+        $this->enabled = boolval($result->enabled);
     }
 
     public function setType($type)
@@ -96,21 +99,21 @@ class Banner
         if ($this->id != null) {
             return $this->update();
         }
-        $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, category, type, html, language) values (";
+        $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, category, type, html, language, enabled) values (";
         if ($this->name === null) {
             $sql .= "NULL, ";
         } else {
-            $sql .= "'" . DB::escapeValue($this->name) . "',";
+            $sql .= "'" . Database::escapeValue($this->name) . "',";
         }
         if ($this->link_url === null) {
             $sql .= "NULL, ";
         } else {
-            $sql .= "'" . DB::escapeValue($this->link_url) . "',";
+            $sql .= "'" . Database::escapeValue($this->link_url) . "',";
         }
         if ($this->image_url === null) {
             $sql .= "NULL, ";
         } else {
-            $sql .= "'" . DB::escapeValue($this->image_url) . "',";
+            $sql .= "'" . Database::escapeValue($this->image_url) . "',";
         }
         if ($this->category === null) {
             $sql .= "NULL, ";
@@ -120,23 +123,25 @@ class Banner
         if ($this->type === null) {
             $sql .= "NULL, ";
         } else {
-            $sql .= "'" . DB::escapeValue($this->type) . "',";
+            $sql .= "'" . Database::escapeValue($this->type) . "',";
         }
         if ($this->html === null) {
             $sql .= "NULL, ";
         } else {
-            $sql .= "'" . DB::escapeValue($this->html) . "',";
+            $sql .= "'" . Database::escapeValue($this->html) . "',";
         }
         if ($this->language === null) {
-            $sql .= "NULL ";
+            $sql .= "NULL, ";
         } else {
-            $sql .= "'" . DB::escapeValue($this->language) . "'";
+            $sql .= "'" . Database::escapeValue($this->language) . "',";
         }
+        
+        $sql .= intval($this->enabled);
         
         $sql .= ")";
         
-        $result = DB::query($sql);
-        $this->id = DB::getLastInsertID();
+        $result = Database::query($sql);
+        $this->id = Database::getLastInsertID();
         
         return $result;
     }
@@ -151,17 +156,17 @@ class Banner
         if ($this->name === null) {
             $sql .= "name=NULL, ";
         } else {
-            $sql .= "name='" . DB::escapeValue($this->name) . "',";
+            $sql .= "name='" . Database::escapeValue($this->name) . "',";
         }
         if ($this->link_url === null) {
             $sql .= "link_url = NULL, ";
         } else {
-            $sql .= "link_url='" . DB::escapeValue($this->link_url) . "',";
+            $sql .= "link_url='" . Database::escapeValue($this->link_url) . "',";
         }
         if ($this->image_url === null) {
             $sql .= "image_url=NULL, ";
         } else {
-            $sql .= "image_url='" . DB::escapeValue($this->image_url) . "',";
+            $sql .= "image_url='" . Database::escapeValue($this->image_url) . "',";
         }
         if ($this->category === null) {
             $sql .= "category=NULL, ";
@@ -171,21 +176,22 @@ class Banner
         if ($this->type === null) {
             $sql .= "`type`=NULL, ";
         } else {
-            $sql .= "`type`='" . DB::escapeValue($this->type) . "',";
+            $sql .= "`type`='" . Database::escapeValue($this->type) . "',";
         }
         if ($this->html === null) {
             $sql .= "html=NULL, ";
         } else {
-            $sql .= "html='" . DB::escapeValue($this->html) . "',";
+            $sql .= "html='" . Database::escapeValue($this->html) . "',";
         }
         if ($this->language === null) {
-            $sql .= "language=NULL ";
+            $sql .= "language=NULL, ";
         } else {
-            $sql .= "language='" . DB::escapeValue($this->language) . "'";
+            $sql .= "language='" . Database::escapeValue($this->language) . "', ";
         }
+        $sql .= "enabled = " . intval($this->enabled);
         
         $sql .= " where id = " . intval($this->id);
-        return DB::query($sql);
+        return Database::query($sql);
     }
 
     public function delete()
@@ -193,7 +199,7 @@ class Banner
         $retval = false;
         if ($this->id !== null) {
             $sql = "DELETE from " . tbname("banner") . " where id = " . $this->id;
-            $retval = DB::Query($sql);
+            $retval = Database::Query($sql);
             $this->id = null;
         }
         return $retval;

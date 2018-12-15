@@ -7,7 +7,7 @@ class Template
 
     public static function randomBanner()
     {
-        $query = db_query("SELECT name, link_url, image_url, `type`, html FROM " . tbname("banner") . " WHERE language IS NULL OR language='" . db_escape($_SESSION["language"]) . "'ORDER BY RAND() LIMIT 1");
+        $query = db_query("SELECT name, link_url, image_url, `type`, html FROM " . tbname("banner") . " WHERE enabled = 1 and (language IS NULL OR language='" . db_escape($_SESSION["language"]) . "') ORDER BY RAND() LIMIT 1");
         if (db_num_rows($query) > 0) {
             while ($row = db_fetch_object($query)) {
                 $type = "gif";

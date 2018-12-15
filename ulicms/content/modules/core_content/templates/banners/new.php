@@ -8,6 +8,7 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 	<a href="<?php echo ModuleHelper::buildActionURL("banner");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
+
 <p>
 	<input type="radio" checked="checked" id="radio_gif" name="type"
 		value="gif"
@@ -35,6 +36,13 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 <fieldset id="type_html" style="display: none">
 	<textarea name="html" rows="10" cols="40"></textarea>
 </fieldset>
+<p>
+	<strong><?php translate("enabled");?></strong><br /> <select
+		name="enabled">
+		<option value="1" selected><?php translate("yes");?></option>
+		<option value="0"><?php translate("no");?></option>
+	</select>
+</p>
 <p>
 	<strong><?php translate("language");?>
 	</strong> <br /> <select name="language">

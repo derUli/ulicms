@@ -1,0 +1,1 @@
+ALTER TABLE `{prefix}banner` DROP COLUMN `enabled`

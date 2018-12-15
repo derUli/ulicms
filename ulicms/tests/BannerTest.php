@@ -50,6 +50,34 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $banner = new Banner($id);
         $this->assertNotNull($banner->id);
         $this->assertEquals("html", $banner->getType());
+        $this->assertTrue($banner->enabled);
+        $this->assertEquals(self::HTML_TEXT2, $banner->html);
+        $this->assertNull($banner->language);
+        $banner->delete();
+        $banner = new Banner();
+        $this->assertNull($banner->id);
+    }
+
+    public function testHTMLBannerDisabledWithoutLanguage()
+    {
+        $banner = new Banner();
+        $banner->setType("html");
+        $banner->html = self::HTML_TEXT1;
+        $banner->enabled = false;
+        $banner->save();
+        $this->assertNotNull($banner->id);
+        $id = intval($banner->id);
+        $banner = new Banner($id);
+        $this->assertNotNull($banner->id);
+        $this->assertEquals("html", $banner->getType());
+        $this->assertEquals(self::HTML_TEXT1, $banner->html);
+        $this->assertNull($banner->language);
+        $banner->html = self::HTML_TEXT2;
+        $banner->save();
+        $banner = new Banner($id);
+        $this->assertNotNull($banner->id);
+        $this->assertEquals("html", $banner->getType());
+        $this->assertFalse($banner->enabled);
         $this->assertEquals(self::HTML_TEXT2, $banner->html);
         $this->assertNull($banner->language);
         $banner->delete();

@@ -98,7 +98,15 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         echo htmlspecialchars($row->html);
         ?></textarea>
 </fieldset>
+
 <br />
+<p>
+	<strong><?php translate("enabled");?></strong><br /> <select
+		name="enabled">
+		<option value="1" <?php if($row->enabled) echo "selected";?>><?php translate("yes");?></option>
+		<option value="0" <?php if(!$row->enabled) echo "selected";?>><?php translate("no");?></option>
+	</select>
+</p>
 <strong><?php translate("language");?></strong>
 <br />
 <select name="language">
