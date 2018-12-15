@@ -44,6 +44,14 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 	</select>
 </p>
 <p>
+	<strong><?php translate("date_from");?></strong><br /> <input
+		type="text" class="datepicker" name="time_from" value="">
+</p>
+<p>
+	<strong><?php translate("date_to");?></strong><br /> <input type="text"
+		class="datepicker" name="date_to" value="">
+</p>
+<p>
 	<strong><?php translate("language");?>
 	</strong> <br /> <select name="language">
 	<?php
@@ -65,7 +73,7 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 <p>
 	<button type="submit" class="btn btn-primary"><?php translate("add_banner");?></button>
 </p>
-</form>
+<?php echo ModuleHelper::endForm();?>
 <?php
 } else {
     noPerms();

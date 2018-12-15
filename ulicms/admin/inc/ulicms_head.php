@@ -20,6 +20,8 @@ if (! file_exists($select2TranslationFile)) {
 	content="width=device-width, user-scalable=yes, initial-scale=1" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>[<?php Template::escape(Settings::get("homepage_title"));?>] - UliCMS</title>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <?php
 $styles = array();
 ?>
@@ -28,6 +30,7 @@ $enq = array(
     "scripts/php.js/strip_tags.js",
     "scripts/php.js/htmlspecialchars.js",
     "scripts/jquery.min.js",
+    "scripts/datetimepicker/jquery.datetimepicker.full.js",
     "scripts/jquery.form.min.js",
     "scripts/vallenato/vallenato.js",
     "codemirror/lib/codemirror.js",
@@ -96,6 +99,7 @@ $styles[] = "codemirror/lib/codemirror.css";
 $styles[] = "codemirror/lib/codemirror.css";
 $styles[] = "css/modern.css";
 $styles[] = "scripts/css/select2.min.css";
+$styles[] = "scripts/datetimepicker/jquery.datetimepicker.min.css";
 
 foreach ($styles as $style) {
     enqueueStylesheet($style);

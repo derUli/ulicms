@@ -107,6 +107,15 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 		<option value="0" <?php if(!$row->enabled) echo "selected";?>><?php translate("no");?></option>
 	</select>
 </p>
+<p>
+	<strong><?php translate("date_from");?></strong><br /> <input
+		type="text" class="datepicker" name="time_from"
+		value="<?php esc($row->date_from);?>">
+</p>
+<p>
+	<strong><?php translate("date_to");?></strong><br /> <input type="text"
+		class="datepicker" name="date_to" value="<?php esc($row->date_to);?>">
+</p>
 <strong><?php translate("language");?></strong>
 <br />
 <select name="language">
