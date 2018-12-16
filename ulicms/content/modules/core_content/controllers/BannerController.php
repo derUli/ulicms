@@ -22,6 +22,9 @@ class BannerController extends Controller
         $banner->setType($_POST["type"]);
         $banner->html = strval($_POST["html"]);
         
+        $banner->setDateFrom(strOrNull($_POST["date_from"]));
+        $banner->setDateTo(strOrNull($_POST["date_to"]));
+        
         $banner->enabled = boolval($_POST["enabled"]);
         $banner->language = $_POST["language"] != "all" ? strval($_POST["language"]) : null;
         $banner->save();
@@ -64,6 +67,9 @@ class BannerController extends Controller
         $banner->category = intval($_POST["category"]);
         $banner->setType($_POST["type"]);
         $banner->html = strval($_POST["html"]);
+        
+        $banner->setDateFrom(strOrNull($_POST["date_from"]));
+        $banner->setDateTo(strOrNull($_POST["date_to"]));
         
         $banner->enabled = boolval($_POST["enabled"]);
         $banner->language = $_POST["language"] != "all" ? strval($_POST["language"]) : null;

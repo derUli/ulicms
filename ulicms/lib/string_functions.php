@@ -239,6 +239,11 @@ if (! function_exists("keywordsFromString")) {
     }
 }
 
+function strOrNull($val)
+{
+    return StringHelper::isNotNullOrWhitespace($val) ? $val : null;
+}
+
 // Aus einer Boolean einen String machen ("true" oder "false")
 function strbool($value)
 {

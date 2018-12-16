@@ -3,7 +3,12 @@ $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPermission("banners_create")) {
     ?>
 
-<?php echo ModuleHelper::buildMethodCallForm("BannerController", "create");?>
+<?php
+    
+echo ModuleHelper::buildMethodCallForm("BannerController", "create", array(), RequestMethod::POST, array(
+        "autocomplete" => "off"
+    ));
+    ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("banner");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
@@ -45,7 +50,7 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 </p>
 <p>
 	<strong><?php translate("date_from");?></strong><br /> <input
-		type="text" class="datepicker" name="time_from" value="">
+		type="text" class="datepicker" name="date_from" value="">
 </p>
 <p>
 	<strong><?php translate("date_to");?></strong><br /> <input type="text"

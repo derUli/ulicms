@@ -4,8 +4,10 @@ Neue Features:
 * Option "Verbiete RTL-Sprachen (Arabisch, Hebräisch, Persisch)" zum Spamfilter hinzugefügt
 * Unterstützung für mehrere Konfigurationsumgebungen
 * Formulare und Banner können nun deaktiviert werden
+* Banner können nun zeitlich begrenzt werden
 
 Neue API-Funktionen:
+* strOrNull($val)
 * Konstanten-Klasse RequestMethods
 
 Verbesserungen

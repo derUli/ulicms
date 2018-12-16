@@ -115,4 +115,18 @@ class StringFunctionsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("i", $result[1]);
         $this->assertEquals("ö", $result[22]);
     }
+
+    public function testStrOrNullExpectString()
+    {
+        $this->assertEquals("foo", strOrNull("foo"));
+        $this->assertEquals(" foo ", strOrNull(" foo "));
+    }
+
+    public function testStrOrNullExpectNull()
+    {
+        $this->assertNull(strOrNull("    "));
+        $this->assertNull(strOrNull(""));
+        $this->assertNull(strOrNull(" "));
+        $this->assertNull(strOrNull(null));
+    }
 }
