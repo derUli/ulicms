@@ -21,6 +21,10 @@ class Banner
 
     public $enabled = true;
 
+    private $date_from = null;
+
+    private $date_to = null;
+
     public function __construct($id = null)
     {
         if ($id) {
@@ -61,6 +65,8 @@ class Banner
         $this->html = $result->html;
         $this->language = $result->language;
         $this->enabled = boolval($result->enabled);
+        $this->date_from = $result->date_from;
+        $this->date_to = $result->date_to;
     }
 
     public function setType($type)
@@ -99,7 +105,7 @@ class Banner
         if ($this->id != null) {
             return $this->update();
         }
-        $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, category, type, html, language, enabled) values (";
+        $sql = "INSERT INTO " . tbname("banner") . "(name, link_url, image_url, category, type, html, language, date_from, date_to, enabled) values (";
         if ($this->name === null) {
             $sql .= "NULL, ";
         } else {
@@ -134,6 +140,18 @@ class Banner
             $sql .= "NULL, ";
         } else {
             $sql .= "'" . Database::escapeValue($this->language) . "',";
+        }
+        
+        if ($this->date_from === null) {
+            $sql .= "NULL, ";
+        } else {
+            $sql .= "'" . Database::escapeValue($this->date_from) . "',";
+        }
+        
+        if ($this->date_to === null) {
+            $sql .= "NULL, ";
+        } else {
+            $sql .= "'" . Database::escapeValue($this->date_to) . "',";
         }
         
         $sql .= intval($this->enabled);
@@ -188,10 +206,54 @@ class Banner
         } else {
             $sql .= "language='" . Database::escapeValue($this->language) . "', ";
         }
+        
+        if ($this->date_from === null) {
+            $sql .= "date_from=NULL, ";
+        } else {
+            $sql .= "date_from='" . Database::escapeValue($this->date_from) . "', ";
+        }
+        if ($this->date_to === null) {
+            $sql .= "date_to=NULL, ";
+        } else {
+            $sql .= "date_to='" . Database::escapeValue($this->date_to) . "', ";
+        }
+        
         $sql .= "enabled = " . intval($this->enabled);
         
         $sql .= " where id = " . intval($this->id);
         return Database::query($sql);
+    }
+
+    public function setDateFrom($val)
+    {
+        if (is_null($val) or is_string($val)) {
+            $this->date_from = $val;
+        } else if (is_numeric($val)) {
+            $this->date_from = date("Y-m-d", $val);
+        } else {
+            throw new InvalidArgumentException("not a date and not a timestamp");
+        }
+    }
+
+    public function setDateTo($val)
+    {
+        if (is_null($val) or is_string($val)) {
+            $this->date_to = $val;
+        } else if (is_numeric($val)) {
+            $this->date_to = date("Y-m-d", $val);
+        } else {
+            throw new InvalidArgumentException("not a date and not a timestamp");
+        }
+    }
+
+    public function getDateFrom()
+    {
+        return $this->date_from;
+    }
+
+    public function getDateTo()
+    {
+        return $this->date_to;
     }
 
     public function delete()
