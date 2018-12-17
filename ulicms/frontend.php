@@ -225,7 +225,10 @@ do_event("after_content");
 
 do_event("before_edit_button");
 
-edit_button();
+if (! (is_array($disable_functions) and faster_in_array("edit_button", $disable_functions))) {
+    edit_button();
+}
+
 do_event("after_edit_button");
 $bottom_files = array(
     "type/" . get_type() . "/unten.php",

@@ -1,6 +1,7 @@
 <?php
 use UliCMS\Exceptions\FileNotFoundException;
 use UliCMS\HTML\Script;
+use UliCMS\Security\PermissionChecker;
 
 class Template
 {
@@ -510,13 +511,13 @@ color:" . Settings::get("body-text-color") . ";
     public static function getEditButton()
     {
         $html = "";
-        if (is_logged_in() and ! containsModule()) {
-            $acl = new ACL();
+        if (is_logged_in()) {
+            $acl = new PermissionChecker(get_user_id());
             if ($acl->hasPermission("pages") and Flags::getNoCache() && is_200()) {
                 $id = get_ID();
                 $page = ContentFactory::getById($id);
                 if (in_array($page->language, getAllLanguages(true))) {
-                    $html .= "<div class=\"ulicms-edit\">";
+                    $html .= '<div class="ulicms-edit">';
                     $html .= UliCMS\HTML\Link::ActionLink("pages_edit", get_translation("edit"), "page={$id}", array(
                         "class" => "btn btn-warning btn-edit"
                     ));
