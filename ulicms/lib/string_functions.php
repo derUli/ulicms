@@ -239,7 +239,7 @@ if (! function_exists("keywordsFromString")) {
     }
 }
 
-function strOrNull($val)
+function stringOrNull($val)
 {
     return StringHelper::isNotNullOrWhitespace($val) ? $val : null;
 }

@@ -7,7 +7,7 @@ Neue Features:
 * Banner können nun zeitlich begrenzt werden
 
 Neue API-Funktionen:
-* strOrNull($val)
+* stringOrNull($val)
 * Konstanten-Klasse RequestMethods
 
 Verbesserungen
