@@ -373,7 +373,7 @@ if ($permissionChecker->hasPermission("pages")) {
 
 <a
 		href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "emptyTrash");?>"
-		onclick="return ajaxEmptyTrash(this.href);"><?php translate("empty_recycle_bin");?></a>
+		onclick="return ajaxEmptyTrash(this.href);" class="btn btn-warning"><?php translate("empty_recycle_bin");?></a>
 <?php
     }
     ?>
