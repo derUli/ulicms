@@ -1,4 +1,6 @@
 $(function() {
+	var language = $("html").data("select2-language");
+
 	// toggle hamburger menu
 	$("#menu-toggle").click(function() {
 		$(".mainmenu").slideToggle();
@@ -31,6 +33,12 @@ $(function() {
 	$("select").select2({
 		width : '100%',
 		language : $("html").data("select2-language")
+	});
+	$.datetimepicker.setLocale(language);
+
+	$(".datepicker").datetimepicker({
+		format : 'Y-m-d',
+		timepicker : false
 	});
 	$("a.backend-menu-item-logout").click(function(event) {
 		if (!window.confirm(MenuTranslation.Logout + "?")) {

@@ -9,3 +9,6 @@ add_translation("show_positions_in_menus", "Show positions in menus");
 add_translation("show_filters", "Show Filters");
 
 add_translation("confirm_exit_without_save", "If you leave this page unsaved changes will be lost.");
++ 
+add_translation("date_from", "Date from");
+add_translation("date_to", "Date to");

@@ -50,6 +50,34 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $banner = new Banner($id);
         $this->assertNotNull($banner->id);
         $this->assertEquals("html", $banner->getType());
+        $this->assertTrue($banner->enabled);
+        $this->assertEquals(self::HTML_TEXT2, $banner->html);
+        $this->assertNull($banner->language);
+        $banner->delete();
+        $banner = new Banner();
+        $this->assertNull($banner->id);
+    }
+
+    public function testHTMLBannerDisabledWithoutLanguage()
+    {
+        $banner = new Banner();
+        $banner->setType("html");
+        $banner->html = self::HTML_TEXT1;
+        $banner->enabled = false;
+        $banner->save();
+        $this->assertNotNull($banner->id);
+        $id = intval($banner->id);
+        $banner = new Banner($id);
+        $this->assertNotNull($banner->id);
+        $this->assertEquals("html", $banner->getType());
+        $this->assertEquals(self::HTML_TEXT1, $banner->html);
+        $this->assertNull($banner->language);
+        $banner->html = self::HTML_TEXT2;
+        $banner->save();
+        $banner = new Banner($id);
+        $this->assertNotNull($banner->id);
+        $this->assertEquals("html", $banner->getType());
+        $this->assertFalse($banner->enabled);
         $this->assertEquals(self::HTML_TEXT2, $banner->html);
         $this->assertNull($banner->language);
         $banner->delete();
@@ -71,6 +99,8 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("html", $banner->getType());
         $this->assertEquals(self::HTML_TEXT1, $banner->html);
         $this->assertEquals("de", $banner->language);
+        $this->assertNull($banner->getDateFrom());
+        $this->assertNull($banner->getDateTo());
         $banner->html = self::HTML_TEXT2;
         $banner->language = "en";
         $banner->save();
@@ -151,5 +181,63 @@ class BannerTest extends \PHPUnit\Framework\TestCase
         $banner->delete();
         $banner = new Banner();
         $this->assertNull($banner->id);
+    }
+
+    public function testGifBannerWithDateAsString()
+    {
+        $banner = new Banner();
+        $banner->setType("html");
+        $banner->html = self::HTML_TEXT1;
+        $banner->enabled = false;
+        $banner->setDateFrom("1992-07-27");
+        $banner->setDateTo("2018-12-24");
+        
+        $banner->save();
+        $id = $banner->id;
+        $banner = new Banner($id);
+        
+        $this->assertEquals("1992-07-27", $banner->getDateFrom());
+        $this->assertEquals("2018-12-24", $banner->getDateTo());
+        
+        $banner->setDateFrom("2007-04-01");
+        $banner->setDateTo("2018-05-01");
+        
+        $banner->save();
+        
+        $banner = new Banner($id);
+        
+        $this->assertEquals("2007-04-01", $banner->getDateFrom());
+        $this->assertEquals("2018-05-01", $banner->getDateTo());
+        
+        $banner->delete();
+    }
+
+    public function testGifBannerWithDateAsInteger()
+    {
+        $banner = new Banner();
+        $banner->setType("html");
+        $banner->html = self::HTML_TEXT1;
+        $banner->enabled = false;
+        $banner->setDateFrom(1525348349);
+        $banner->setDateTo(1546084391);
+        
+        $banner->save();
+        $id = $banner->id;
+        $banner = new Banner($id);
+        
+        $this->assertEquals("2018-05-03", $banner->getDateFrom());
+        $this->assertEquals("2018-12-29", $banner->getDateTo());
+        
+        $banner->setDateFrom(1328183616);
+        $banner->setDateTo(1460807642);
+        
+        $banner->save();
+        
+        $banner = new Banner($id);
+        
+        $this->assertEquals("2012-02-02", $banner->getDateFrom());
+        $this->assertEquals("2016-04-16", $banner->getDateTo());
+        
+        $banner->delete();
     }
 }
