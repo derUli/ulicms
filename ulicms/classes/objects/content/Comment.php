@@ -264,13 +264,13 @@ VALUES      ( ?,
         return self::getAllDatasets(self::TABLE_NAME, self::class, "date desc", "content_id = " . intval($content_id));
     }
 
-    public static function getAllByStatus($status, $content_id = null)
+    public static function getAllByStatus($status, $content_id = null, $order = "date desc")
     {
         $where = "status = '" . Database::escapeValue($status) . "'";
         if ($content_id) {
             $where .= " and content_id = " . intval($content_id);
         }
-        return self::getAllDatasets(self::TABLE_NAME, self::class, "date desc", $where);
+        return self::getAllDatasets(self::TABLE_NAME, self::class, $order, $where);
     }
 
     public static function getAll($order = "id desc")

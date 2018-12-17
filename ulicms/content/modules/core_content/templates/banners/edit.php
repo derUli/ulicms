@@ -10,7 +10,12 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 	<a href="<?php echo ModuleHelper::buildActionURL("banner");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
-<?php echo ModuleHelper::buildMethodCallForm("BannerController", "update");?>
+<?php
+        
+echo ModuleHelper::buildMethodCallForm("BannerController", "update", array(), RequestMethod::POST, array(
+            "autocomplete" => "off"
+        ));
+        ?>
 <h4><?php translate("preview");?></h4>
 <?php
         
@@ -98,7 +103,25 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
         echo htmlspecialchars($row->html);
         ?></textarea>
 </fieldset>
+
 <br />
+<p>
+	<strong><?php translate("enabled");?></strong><br /> <select
+		name="enabled">
+		<option value="1" <?php if($row->enabled) echo "selected";?>><?php translate("yes");?></option>
+		<option value="0" <?php if(!$row->enabled) echo "selected";?>><?php translate("no");?></option>
+	</select>
+</p>
+<p>
+	<strong><?php translate("date_from");?></strong><br /> <input
+		type="text" class="datepicker" name="date_from"
+		value="<?php esc($row->getDateFrom());?>">
+</p>
+<p>
+	<strong><?php translate("date_to");?></strong><br /> <input type="text"
+		class="datepicker" name="date_to"
+		value="<?php esc($row->getDateTo());?>">
+</p>
 <strong><?php translate("language");?></strong>
 <br />
 <select name="language">
