@@ -1,6 +1,6 @@
 {
 	"source": "extend",
-	"version": "1.0",
+	"version": "1.0.0",
 	"embed": true,
 	"controllers": {
 		"FrontendLoginController": "controllers/FrontendLoginController.php"
