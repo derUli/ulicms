@@ -85,3 +85,10 @@ function selectAllChecked(event) {
 	console.log(target);
 	$(target).prop("checked", $(selectAllCheckbox).is(":checked"));
 }
+
+function setWaitCursor() {
+    $('*').css('cursor', 'progress');
+  }
+function setDefaultCursor() {
+    $('*').css('cursor', 'default');
+  }

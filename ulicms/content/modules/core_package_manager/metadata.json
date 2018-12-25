@@ -4,7 +4,8 @@
 	"embed": false,
 	"controllers": {
 		"PkgInfoController": "controllers/PkgInfoController.php",
-		"UpdateCheckController": "controllers/UpdateCheckController.php"
+		"UpdateCheckController": "controllers/UpdateCheckController.php",
+		"PackageController": "controllers/PackageController.php"
 	},
 	"actions": {
 		"sin_package_install_ok": "templates/sin_package_install_ok.php",
@@ -18,7 +19,11 @@
 		"upload_patches": "templates/upload_patches.php",
 		"packages": "templates/packages/list.php"
 	},
+	"objects": {
+		"ModuleInfoViewModel": "objects/ModuleInfoViewModel.php"
+	},
 	"controller_function_permissions": {
-		"PkgInfoController::install": "install_packages"
+		"PkgInfoController::install": "install_packages",
+		"PackageController::getModuleInfo": "list_packages"
 	}
 }

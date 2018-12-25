@@ -41,13 +41,18 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	if ($permissionChecker->hasPermission ( "install_packages" )) {
 		?>
 <div class="row">
-	<div class="col-xs-6">
+	<div class="col-xs-4">
 		<p>
 			<a href="?action=install_method" class="btn btn-warning"><?php translate("install_package");?></a>
 		</p>
 	</div>
+	<div class="col-xs-4 text-center">
+		<p>
+			<a href="?action=packages" class="btn btn-default"><?php translate("switch_view");?></a>
+		</p>
+	</div>
 
-	<div class="col-xs-6 text-right">
+	<div class="col-xs-4 text-right">
 		<form action="<?php echo ModuleHelper::buildActionURL("modules");?>"
 			method="post">
 	<?php csrf_token_html()?>
