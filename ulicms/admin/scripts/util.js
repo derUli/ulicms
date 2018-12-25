@@ -71,7 +71,8 @@ function checkSelectAllIfAllChecked(item, group) {
 	if (!item) {
 		return;
 	}
-	// if the count of the checked checkboxes in the group is equal to the count of all checkboxes in this group
+	// if the count of the checked checkboxes in the group is equal to the count
+	// of all checkboxes in this group
 	var allSelected = $("input[type=checkbox][data-checkbox-group='" + group
 			+ "']:checked").length == $("input[type=checkbox][data-checkbox-group='"
 			+ group + "']").length;
@@ -87,8 +88,8 @@ function selectAllChecked(event) {
 }
 
 function setWaitCursor() {
-    $('*').css('cursor', 'progress');
-  }
+	$('body').css('cursor', 'progress');
+}
 function setDefaultCursor() {
-    $('*').css('cursor', 'default');
-  }
+	$('body').css('cursor', 'auto');
+}

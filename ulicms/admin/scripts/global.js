@@ -31,8 +31,8 @@ $(function() {
 		var url = $(event.target).data("url");
 
 		$.get(url, function(result) {
-			bootbox.alert(result);
 			setDefaultCursor();
+			bootbox.alert(result);
 		});
 	});
 
