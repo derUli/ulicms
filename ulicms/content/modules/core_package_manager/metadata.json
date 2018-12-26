@@ -20,7 +20,8 @@
 		"packages": "templates/packages/list.php"
 	},
 	"objects": {
-		"ModuleInfoViewModel": "objects/ModuleInfoViewModel.php"
+		"ModuleInfoViewModel": "objects/ModuleInfoViewModel.php",
+		"ThemeInfoViewModel": "objects/ThemeInfoViewModel.php"
 	},
 	"controller_function_permissions": {
 		"PkgInfoController::install": "install_packages",

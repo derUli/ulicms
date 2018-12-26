@@ -19,4 +19,21 @@ class PackageController extends Controller {
 		$html = Template::executeModuleTemplate ( self::MODULE_NAME, "packages/info/module.php" );
 		HTMLResult ( $html );
 	}
+	public function getThemeInfo() {
+		$name = stringOrNull ( Request::getVar ( "name", null, "str" ) );
+		if (! $name) {
+			return TextResult ( get_translation ( "not_found" ) );
+		}
+		$model = new ThemeInfoViewModel ();
+		$model->name = $name;
+		$model->version = getThemeMeta ( $name, "version" );
+		$model->manufacturerName = getThemeMeta ( $name, "manufacturer_name" );
+		$model->manufacturerUrl = getThemeMeta ( $name, "manufacturer_url" );
+		$model->source = getThemeMeta ( $name, "source" );
+		$model->disableFunctions = is_array ( getThemeMeta ( $name, "disable_functions" ) ) ? getThemeMeta ( $name, "disable_functions" ) : array ();
+		natcasesort ( $model->disableFunctions );
+		ViewBag::set ( "model", $model );
+		$html = Template::executeModuleTemplate ( self::MODULE_NAME, "packages/info/theme.php" );
+		HTMLResult ( $html );
+	}
 }

@@ -19,32 +19,33 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 </div>
 <div class="alert alert-warning">Work in Progress</div>
 <h2><?php translate("installed_modules");?></h2>
-<table class="tablesorter">
-	<thead>
-		<tr>
-			<th><?php translate("module");?></th>
-			<th><?php translate("version");?></th>
+<div class="scroll">
+	<table class="tablesorter">
+		<thead>
+			<tr>
+				<th><?php translate("module");?></th>
+				<th><?php translate("version");?></th>
 			<?php if($anyEmbedModules){?>
 			<th><?php translate("shortcode");?></th>
 			<?php }?>
 		</tr>
-	</thead>
+		</thead>
 
-	<tbody>
+		<tbody>
 <?php
 	foreach ( $modules as $module ) {
 		$hasAdminPage = ($module->hasAdminPage () and $module->isEnabled ());
 		$btnClass = $hasAdminPage ? "btn btn-primary" : "btn btn-default disabled";
 		?>
 <tr>
-			<td><a
-				href="<?php esc(ModuleHelper::buildAdminURL($module->getName()));?>"
-				class="<?php esc($btnClass);?>"><?php esc($module->getName());?></a></td>
-			<td>
+				<td><a
+					href="<?php esc(ModuleHelper::buildAdminURL($module->getName()));?>"
+					class="<?php esc($btnClass);?>"><?php esc($module->getName());?></a></td>
+				<td>
 		<?php esc(getModuleMeta($module->getName(), "version"));?>
 				<a href="#" class="btn btn-info pull-right remote-alert"
-				data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getModuleInfo", "name={$module->getName()}");?>">ⓘ</a>
-			</td>
+					data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getModuleInfo", "name={$module->getName()}");?>">ⓘ</a>
+				</td>
 			
 			<?php if($anyEmbedModules){?>
 			<td><?php
@@ -56,7 +57,34 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 		</tr>
 <?php }?>
 </tbody>
-</table>
+	</table>
+<?php
+	$themes = getThemesList ();
+	?>
+	<h2><?php translate("installed_designs");?></h2>
+	<div class="scroll">
+		<table class="tablesorter">
+			<thead>
+				<tr>
+					<th><?php translate("design");?></th>
+					<th><?php translate("version");?></th>
+
+				</tr>
+			</thead>
+
+			<tbody>
+<?php foreach($themes as $theme){?>
+<tr>
+					<td><?php esc($theme);?></td>
+					<td><?php esc(getThemeMeta($theme, "version"));?>
+<a href="#" class="btn btn-info pull-right remote-alert"
+						data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getThemeInfo", "name={$theme}");?>">ⓘ</a>
+					</td>
+				</tr>
+<?php }?>
+			</tbody>
+		</table>
+	</div>
 <?php
 } else {
 	noPerms ();
