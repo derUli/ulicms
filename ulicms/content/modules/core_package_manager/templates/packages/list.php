@@ -42,9 +42,13 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 					href="<?php esc(ModuleHelper::buildAdminURL($module->getName()));?>"
 					class="<?php esc($btnClass);?>"><?php esc($module->getName());?></a></td>
 				<td>
-		<?php esc(getModuleMeta($module->getName(), "version"));?>
-				<a href="#" class="btn btn-info pull-right remote-alert"
-					data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getModuleInfo", "name={$module->getName()}");?>">ⓘ</a>
+					<div class="row">
+						<div class="col-md-8"><?php esc(getModuleMeta($module->getName(), "version"));?></div>
+						<div class="col-md-4">
+							<a href="#" class="btn btn-info remote-alert"
+								data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getModuleInfo", "name={$module->getName()}");?>">ⓘ</a>
+						</div>
+					</div>
 				</td>
 			
 			<?php if($anyEmbedModules){?>
@@ -76,9 +80,17 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 <?php foreach($themes as $theme){?>
 <tr>
 					<td><?php esc($theme);?></td>
-					<td><?php esc(getThemeMeta($theme, "version"));?>
-<a href="#" class="btn btn-info pull-right remote-alert"
-						data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getThemeInfo", "name={$theme}");?>">ⓘ</a>
+					<td>
+
+						<div class="row">
+							<div class="col-md-8"><?php esc(getThemeMeta($theme, "version"));?>
+						</div>
+
+							<div class="col-md-4">
+								<a href="#" class="btn btn-info remote-alert"
+									data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getThemeInfo", "name={$theme}");?>">ⓘ</a>
+							</div>
+						</div>
 					</td>
 				</tr>
 <?php }?>
