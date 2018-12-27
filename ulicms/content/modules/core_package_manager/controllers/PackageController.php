@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Exceptions\NotImplementedException;
 class PackageController extends Controller {
 	const MODULE_NAME = "core_package_manager";
 	public function getModuleInfo() {
@@ -35,5 +36,11 @@ class PackageController extends Controller {
 		ViewBag::set ( "model", $model );
 		$html = Template::executeModuleTemplate ( self::MODULE_NAME, "packages/info/theme.php" );
 		HTMLResult ( $html );
+	}
+	public function uninstallModule() {
+		throw new NotImplementedException ();
+	}
+	public function uninstallTheme() {
+		throw new NotImplementedException ();
 	}
 }

@@ -35,6 +35,13 @@ $(function() {
 			bootbox.alert(result);
 		});
 	});
+	$("[data-confirm-message]").submit(function(event) {
+		message = $(event.target).data("confirm-message");
+
+		if (!window.confirm(message)) {
+			event.preventDefault();
+		}
+	});
 
 	// dynamically add class form-control to all form elements to
 	// make inputs prettier

@@ -1,7 +1,7 @@
 <?php
 use UliCMS\Security\PermissionChecker;
 
-$_SESSION["package_view"] = "packages";
+$_SESSION ["package_view"] = "packages";
 
 $acl = new PermissionChecker ( get_user_id () );
 
@@ -45,10 +45,24 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 					class="<?php esc($btnClass);?>"><?php esc($module->getName());?></a></td>
 				<td>
 					<div class="row">
-						<div class="col-md-8"><?php esc(getModuleMeta($module->getName(), "version"));?></div>
-						<div class="col-md-4">
-							<a href="#" class="btn btn-info remote-alert"
-								data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getModuleInfo", "name={$module->getName()}");?>">ⓘ</a>
+						<div class="col-md-6"><?php esc(getModuleMeta($module->getName(), "version"));?></div>
+						<div class="col-md-6">
+							<a href="#" class="btn btn-info remote-alert icon"
+								data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "getModuleInfo", "name={$module->getName()}");?>">ⓘ</a>
+		<?php if(getModuleMeta($module->getName(), "source") != "core"){?>
+		<?php
+			echo ModuleHelper::buildMethodCallForm ( PackageController::class, "uninstallModule", array (
+					"data-name" => $module->getName () 
+			), RequestMethod::POST, array (
+					"class" => "inline-block",
+					"data-confirm-message" => get_translation ( "uninstall_module_x", array (
+							"%name%" => $module->getName () 
+					) ) 
+			) );
+			?>
+							<button type="submit" class="btn btn-danger icon">🗑</button>
+							<?php echo ModuleHelper::endForm()?>
+							<?php }?>
 						</div>
 					</div>
 				</td>
@@ -85,12 +99,27 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 					<td>
 
 						<div class="row">
-							<div class="col-md-8"><?php esc(getThemeMeta($theme, "version"));?>
+							<div class="col-md-6"><?php esc(getThemeMeta($theme, "version"));?>
 						</div>
 
-							<div class="col-md-4">
-								<a href="#" class="btn btn-info remote-alert"
+							<div class="col-md-6">
+								<a href="#" class="btn btn-info remote-alert icon"
 									data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getThemeInfo", "name={$theme}");?>">ⓘ</a>
+											<?php if(getModuleMeta($module->getName(), "source") != "core"){?>
+									
+									<?php
+			echo ModuleHelper::buildMethodCallForm ( PackageController::class, "uninstallTheme", array (
+					"data-name" => $module->getName () 
+			), RequestMethod::POST, array (
+					"class" => "inline-block",
+					"data-confirm-message" => get_translation ( "uninstall_theme_x", array (
+							"%name%" => $module->getName () 
+					) ) 
+			) );
+			?>
+							<button type="submit" class="btn btn-danger icon">🗑</button>
+							<?php echo ModuleHelper::endForm()?>
+							<?php }?>
 							</div>
 						</div>
 					</td>
