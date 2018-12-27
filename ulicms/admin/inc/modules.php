@@ -3,6 +3,8 @@ $permissionChecker = new ACL ();
 if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	noPerms ();
 } else {
+	$_SESSION ["package_view"] = "modules";
+	
 	$greenHex = "#04d004";
 	// FIXME: Hartgecodete Texte in Sprachdateien auslagern.
 	// Das hier sollte am besten gleichzeitig mit dem Redesign der Paketverwaltung geschehen.

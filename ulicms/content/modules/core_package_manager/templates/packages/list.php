@@ -1,6 +1,8 @@
 <?php
 use UliCMS\Security\PermissionChecker;
 
+$_SESSION["package_view"] = "packages";
+
 $acl = new PermissionChecker ( get_user_id () );
 
 if ($permissionChecker->hasPermission ( "list_packages" )) {
