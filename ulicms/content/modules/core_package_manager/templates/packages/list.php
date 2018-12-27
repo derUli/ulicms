@@ -110,13 +110,13 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 									data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getThemeInfo", "name={$theme}");?>">ⓘ</a>
 <?php
 		
-if ($permissionChecker->hasPermission ( "remove_packages" ) and getModuleMeta ( $module->getName (), "source" ) != "core") {
+		if ($permissionChecker->hasPermission ( "remove_packages" ) and getModuleMeta ( $module->getName (), "source" ) != "core") {
 			echo ModuleHelper::buildMethodCallForm ( PackageController::class, "uninstallTheme", array (
-					"data-name" => $module->getName () 
+					"data-name" => $theme 
 			), RequestMethod::POST, array (
 					"class" => "inline-block",
 					"data-confirm-message" => get_translation ( "uninstall_theme_x", array (
-							"%name%" => $module->getName () 
+							"%name%" => $theme 
 					) ) 
 			) );
 			?>
