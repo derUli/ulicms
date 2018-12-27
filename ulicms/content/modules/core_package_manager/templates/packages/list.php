@@ -3,7 +3,7 @@ use UliCMS\Security\PermissionChecker;
 
 $_SESSION ["package_view"] = "packages";
 
-$acl = new PermissionChecker ( get_user_id () );
+$permissionChecker = new PermissionChecker ( get_user_id () );
 
 if ($permissionChecker->hasPermission ( "list_packages" )) {
 	$manager = new ModuleManager ();
@@ -49,8 +49,9 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 						<div class="col-md-6">
 							<a href="#" class="btn btn-info remote-alert icon"
 								data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "getModuleInfo", "name={$module->getName()}");?>">ⓘ</a>
-		<?php if(getModuleMeta($module->getName(), "source") != "core"){?>
 		<?php
+		
+		if ($permissionChecker->hasPermission ( "remove_packages" ) and getModuleMeta ( $module->getName (), "source" ) != "core") {
 			echo ModuleHelper::buildMethodCallForm ( PackageController::class, "uninstallModule", array (
 					"data-name" => $module->getName () 
 			), RequestMethod::POST, array (
@@ -61,8 +62,10 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 			) );
 			?>
 							<button type="submit" class="btn btn-danger icon">🗑</button>
-							<?php echo ModuleHelper::endForm()?>
-							<?php }?>
+							<?php
+			echo ModuleHelper::endForm ();
+		}
+		?>
 						</div>
 					</div>
 				</td>
@@ -105,9 +108,9 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 							<div class="col-md-6">
 								<a href="#" class="btn btn-info remote-alert icon"
 									data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getThemeInfo", "name={$theme}");?>">ⓘ</a>
-											<?php if(getModuleMeta($module->getName(), "source") != "core"){?>
-									
-									<?php
+<?php
+		
+if ($permissionChecker->hasPermission ( "remove_packages" ) and getModuleMeta ( $module->getName (), "source" ) != "core") {
 			echo ModuleHelper::buildMethodCallForm ( PackageController::class, "uninstallTheme", array (
 					"data-name" => $module->getName () 
 			), RequestMethod::POST, array (
@@ -118,8 +121,10 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 			) );
 			?>
 							<button type="submit" class="btn btn-danger icon">🗑</button>
-							<?php echo ModuleHelper::endForm()?>
-							<?php }?>
+							<?php
+			echo ModuleHelper::endForm ();
+		}
+		?>
 							</div>
 						</div>
 					</td>

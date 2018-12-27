@@ -25,6 +25,8 @@
 	},
 	"controller_function_permissions": {
 		"PkgInfoController::install": "install_packages",
-		"PackageController::getModuleInfo": "list_packages"
+		"PackageController::getModuleInfo": "list_packages",
+		"PackageController::uninstallModule": "remove_packages",
+		"PackageController::uninstallTheme": "remove_packages"
 	}
 }
