@@ -5,6 +5,7 @@ $permissionChecker = new PermissionChecker ( get_user_id () );
 
 if ($permissionChecker->hasPermission ( "list_packages" )) {
 	$manager = new ModuleManager ();
+	$manager->sync ();
 	$modules = $manager->getAllModules ();
 	$anyEmbedModules = count ( ModuleHelper::getAllEmbedModules () ) > 0;
 	
@@ -53,7 +54,7 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 		
 		if ($permissionChecker->hasPermission ( "remove_packages" ) and getModuleMeta ( $module->getName (), "source" ) != "core") {
 			echo ModuleHelper::buildMethodCallForm ( PackageController::class, "uninstallModule", array (
-					"data-name" => $module->getName () 
+					"name" => $module->getName () 
 			), RequestMethod::POST, array (
 					"class" => "inline-block",
 					"data-confirm-message" => get_translation ( "uninstall_module_x", array (

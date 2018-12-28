@@ -50,7 +50,14 @@ class PackageController extends MainClass {
 		Response::redirect ( ModuleHelper::buildActionURL ( $_SESSION ["package_view"] ) );
 	}
 	public function uninstallModule() {
-		throw new NotImplementedException ();
+		$name = Request::getVar ( "name" );
+		$type = "module";
+		$pkg = new PackageManager ();
+		if (uninstall_module ( $name, $type )) {
+			$this->redirectToPackageView ();
+		} else {
+			ExceptionResult ( "uninstall_failed", HttpStatusCode::INTERNAL_SERVER_ERROR );
+		}
 	}
 	public function uninstallTheme() {
 		throw new NotImplementedException ();
