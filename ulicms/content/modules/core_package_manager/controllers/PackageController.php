@@ -1,7 +1,12 @@
 <?php
 use UliCMS\Exceptions\NotImplementedException;
-class PackageController extends Controller {
+class PackageController extends MainClass {
 	const MODULE_NAME = "core_package_manager";
+	public function afterSessionStart() {
+		if (! isset ( $_SESSION ["package_view"] )) {
+			$_SESSION ["package_view"] = "packages";
+		}
+	}
 	public function getModuleInfo() {
 		$name = stringOrNull ( Request::getVar ( "name", null, "str" ) );
 		if (! $name) {
@@ -36,6 +41,13 @@ class PackageController extends Controller {
 		ViewBag::set ( "model", $model );
 		$html = Template::executeModuleTemplate ( self::MODULE_NAME, "packages/info/theme.php" );
 		HTMLResult ( $html );
+	}
+	public function switchView() {
+		$_SESSION ["package_view"] = $_SESSION ["package_view"] == "packages" ? "modules" : "packages";
+		$this->redirectToPackageView ();
+	}
+	public function redirectToPackageView() {
+		Response::redirect ( ModuleHelper::buildActionURL ( $_SESSION ["package_view"] ) );
 	}
 	public function uninstallModule() {
 		throw new NotImplementedException ();

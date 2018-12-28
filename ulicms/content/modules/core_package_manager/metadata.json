@@ -7,6 +7,7 @@
 		"UpdateCheckController": "controllers/UpdateCheckController.php",
 		"PackageController": "controllers/PackageController.php"
 	},
+	"main_class": "PackageController",
 	"actions": {
 		"sin_package_install_ok": "templates/sin_package_install_ok.php",
 		"pkginfo": "templates/pkginfo.php",

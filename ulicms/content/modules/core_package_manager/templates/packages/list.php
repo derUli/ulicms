@@ -1,8 +1,6 @@
 <?php
 use UliCMS\Security\PermissionChecker;
 
-$_SESSION ["package_view"] = "packages";
-
 $permissionChecker = new PermissionChecker ( get_user_id () );
 
 if ($permissionChecker->hasPermission ( "list_packages" )) {
@@ -13,9 +11,11 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 	?>
 <div class="row">
 	<div class="col-xs-4"></div>
+	
+	<?php $switchViewUrl = ModuleHelper::buildMethodCallUrl ( PackageController::class, "switchView" );?>
 	<div class="col-xs-4 text-center">
 		<p>
-			<a href="?action=modules" class="btn btn-default"><?php translate("switch_view");?></a>
+			<a href="<?php esc($switchViewUrl);?>" class="btn btn-default"><?php translate("switch_view");?></a>
 		</p>
 	</div>
 </div>

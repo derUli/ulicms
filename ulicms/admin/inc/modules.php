@@ -3,10 +3,9 @@ $permissionChecker = new ACL ();
 if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	noPerms ();
 } else {
-	$_SESSION ["package_view"] = "modules";
 	
 	$greenHex = "#04d004";
-
+	
 	// TODO: truncate_installed_patches sollte in einen Controller
 	if (isset ( $_POST ["truncate_installed_patches"] ) and $permissionChecker->hasPermission ( "patch_management" )) {
 		Database::truncateTable ( "installed_patches" );
@@ -47,9 +46,10 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 			<a href="?action=install_method" class="btn btn-warning"><?php translate("install_package");?></a>
 		</p>
 	</div>
+	<?php $switchViewUrl = ModuleHelper::buildMethodCallUrl ( PackageController::class, "switchView" );?>
 	<div class="col-xs-4 text-center">
 		<p>
-			<a href="?action=packages" class="btn btn-default"><?php translate("switch_view");?></a>
+			<a href="<?php esc($switchViewUrl);?>" class="btn btn-default"><?php translate("switch_view");?></a>
 		</p>
 	</div>
 

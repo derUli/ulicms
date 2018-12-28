@@ -16,8 +16,9 @@ $entries [] = new MenuEntry ( get_translation ( "media" ), "?action=media", "med
 ) );
 $entries [] = new MenuEntry ( get_translation ( "users" ), "?action=admins", "admins", "users" );
 $entries [] = new MenuEntry ( get_translation ( "groups" ), "?action=groups", "groups", "groups" );
-$packagesAction = (isset ( $_SESSION ["package_view"] )) ? $_SESSION ["package_view"] : "packages";
-$entries [] = new MenuEntry ( get_translation ( "packages" ), ModuleHelper::buildActionURL ( $packagesAction ), "modules", "list_packages" );
+
+$packagesAction = $_SESSION ["package_view"];
+$entries [] = new MenuEntry ( get_translation ( "packages" ), ModuleHelper::buildActionURL ( $packagesAction), "modules", "list_packages" );
 
 if (is_file ( Path::resolve ( "ULICMS_ROOT/update.php" ) )) {
 	$entries [] = new MenuEntry ( get_translation ( "update" ), "?action=system_update", "update_system", "update_system" );
