@@ -6,8 +6,7 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	$_SESSION ["package_view"] = "modules";
 	
 	$greenHex = "#04d004";
-	// FIXME: Hartgecodete Texte in Sprachdateien auslagern.
-	// Das hier sollte am besten gleichzeitig mit dem Redesign der Paketverwaltung geschehen.
+
 	// TODO: truncate_installed_patches sollte in einen Controller
 	if (isset ( $_POST ["truncate_installed_patches"] ) and $permissionChecker->hasPermission ( "patch_management" )) {
 		Database::truncateTable ( "installed_patches" );
