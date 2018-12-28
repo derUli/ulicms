@@ -1,5 +1,4 @@
 <?php
-use UliCMS\Exceptions\NotImplementedException;
 class PackageController extends MainClass {
 	const MODULE_NAME = "core_package_manager";
 	public function afterSessionStart() {
@@ -56,10 +55,23 @@ class PackageController extends MainClass {
 		if (uninstall_module ( $name, $type )) {
 			$this->redirectToPackageView ();
 		} else {
-			ExceptionResult ( "uninstall_failed", HttpStatusCode::INTERNAL_SERVER_ERROR );
+			$errorMessage = get_translation ( "removing_package_failed", array (
+					"%name%" => $name
+			) );
+			ExceptionResult ( $errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR );
 		}
 	}
 	public function uninstallTheme() {
-		throw new NotImplementedException ();
+		$name = Request::getVar ( "name" );
+		$type = "theme";
+		$pkg = new PackageManager ();
+		if (uninstall_module ( $name, $type )) {
+			$this->redirectToPackageView ();
+		} else {
+			$errorMessage = get_translation ( "removing_package_failed", array (
+					"%name%" => $name 
+			) );
+			ExceptionResult ( $errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR );
+		}
 	}
 }
