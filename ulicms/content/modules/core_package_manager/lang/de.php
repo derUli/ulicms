@@ -9,3 +9,5 @@ add_translation ( "manufacturer", "Hersteller" );
 
 add_translation ( "uninstall_module_x", "Modul %name% deinstallieren?" );
 add_translation ( "uninstall_theme_x", "Theme %name% deinstallieren?" );
+
+add_translation ( "actions", "Aktionen" );

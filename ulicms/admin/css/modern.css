@@ -4,13 +4,16 @@
 	background-color: #fdfdfd;
 }
 
+.btn-toolbar .btn {
+	margin-left: 5px;
+}
+
 .inline-block {
 	display: inline-block;
 }
 
 .icon {
 	font-size: 18px;
-	width: 42px;
 }
 
 body {
@@ -159,6 +162,8 @@ a
 
 
 
+
+
 :not
 
 
@@ -175,7 +180,9 @@ a
 
 
 
+
  
+
 
 
 
@@ -208,7 +215,9 @@ a
 
 
 
+
  
+
 
 
 
@@ -226,6 +235,8 @@ a
 
 ),
 a
+
+
 
 
 
@@ -287,6 +298,8 @@ a
 
 
 
+
+
 :not
 
 
@@ -303,7 +316,9 @@ a
 
 
 
+
  
+
 
 
 
@@ -336,7 +351,9 @@ a
 
 
 
+
  
+
 
 
 
@@ -354,6 +371,8 @@ a
 
 ),
 a
+
+
 
 
 
@@ -415,6 +434,8 @@ a
 
 
 
+
+
 :not
 
 
@@ -431,7 +452,9 @@ a
 
 
 
+
  
+
 
 
 
@@ -464,7 +487,9 @@ a
 
 
 
+
  
+
 
 
 
@@ -513,7 +538,10 @@ color
 
 
 
+
+
 :
+
 
 
 
@@ -545,7 +573,10 @@ color
 
 
 
+
 rgb
+
+
 
 
 
@@ -611,7 +642,10 @@ text-decoration
 
 
 
+
+
 :
+
 
 
 
@@ -643,7 +677,10 @@ text-decoration
 
 
 
+
 none
+
+
 
 
 
@@ -706,6 +743,8 @@ font-weight
 
 
 
+
+
 :
 
 
@@ -722,7 +761,9 @@ font-weight
 
 
 
+
  
+
 
 
 
@@ -789,6 +830,8 @@ input
 
 
 
+
+
 [
 type
 =
@@ -796,6 +839,8 @@ type
 ]
 ,
 input
+
+
 
 
 
@@ -859,6 +904,8 @@ input
 
 
 
+
+
 [
 type
 =
@@ -866,6 +913,8 @@ type
 ]
 ,
 input
+
+
 
 
 
@@ -929,6 +978,8 @@ input
 
 
 
+
+
 [
 type
 =
@@ -936,6 +987,8 @@ type
 ]
 ,
 input
+
+
 
 
 
@@ -999,6 +1052,8 @@ input
 
 
 
+
+
 .color
 ,
 select
@@ -1006,6 +1061,8 @@ select
 textarea
 ,
 input
+
+
 
 
 
@@ -1069,6 +1126,8 @@ input
 
 
 
+
+
 :not
 
 
@@ -1084,7 +1143,9 @@ input
 
 
 
+
  
+
 
 
 
@@ -1117,7 +1178,9 @@ type
 
 
 
+
  
+
 
 
 
@@ -1162,6 +1225,8 @@ width
 
 
 
+
+
 :
 
 
@@ -1177,7 +1242,9 @@ width
 
 
 
+
  
+
 
 
 
