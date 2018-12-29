@@ -20,25 +20,25 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(23, strlen($lines[3]));
     }
 
-    public function testlinesFromFileRemoveEmpty()
+    public function testLinesFromFileRemoveEmpty()
     {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), false, true, false);
         $this->assertCount(5, $lines);
     }
 
-    public function testlinesFromFileRemoveComments()
+    public function testLinesFromFileRemoveComments()
     {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), false, false, true);
         $this->assertCount(7, $lines);
     }
 
-    public function testlinesFromFileRemoveCommentsAndEmpty()
+    public function testLinesFromFileRemoveCommentsAndEmpty()
     {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), false, true, true);
         $this->assertCount(3, $lines);
     }
 
-    public function testlinesFromFileTrim()
+    public function testLinesFromFileTrim()
     {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), true, false, false);
         $this->assertCount(9, $lines);
@@ -50,7 +50,7 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(21, strlen($lines[3]));
     }
 
-    public function testlinesFromFileTrimRemoveCommentsAndEmpty()
+    public function testLinesFromFileTrimRemoveCommentsAndEmpty()
     {
         $lines = StringHelper::linesFromFile($this->getTestFilePath(), true, true, true);
         $this->assertCount(3, $lines);
