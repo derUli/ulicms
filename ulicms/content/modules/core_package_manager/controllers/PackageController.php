@@ -89,6 +89,7 @@ class PackageController extends MainClass {
 		}
 		$module->save ();
 		JSONResult ( array (
+				"name" => $name,
 				"enabled" => $newState 
 		) );
 	}

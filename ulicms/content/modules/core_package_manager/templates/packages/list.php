@@ -41,13 +41,16 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 		<tbody>
 <?php
 	foreach ( $modules as $module ) {
-		$hasAdminPage = ($module->hasAdminPage () and $module->isEnabled ());
-		$btnClass = $hasAdminPage ? "btn btn-primary" : "btn btn-default disabled";
+		$hasAdminPage = ($module->hasAdminPage ());
+		$isEnabled = $module->isEnabled ();
+		$btnClass = $hasAdminPage ? "btn btn-primary" : "btn btn-default disabled has-no-settings";
 		?>
 <tr>
 				<td><a
 					href="<?php esc(ModuleHelper::buildAdminURL($module->getName()));?>"
-					class="<?php esc($btnClass);?>"><?php esc($module->getName());?></a></td>
+					class="<?php esc($btnClass);?>"
+					<?php if(!$hasAdminPage or !$isEnabled ) echo "disabled";?>
+					data-btn-for="<?php esc($module->getName());?>"><?php esc($module->getName());?></a></td>
 				<td><?php esc(getModuleMeta($module->getName(), "version"));?></td>
 				<?php if($anyEmbedModules){?>
 			<td><?php
