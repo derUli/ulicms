@@ -10,10 +10,12 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 	$anyEmbedModules = count ( ModuleHelper::getAllEmbedModules () ) > 0;
 	?>
 <div class="row">
-	<div class="col-xs-4"></div>
+	<div class="col-md-4">
+		<a href="?action=install_method" class="btn btn-warning"><?php translate("install_package");?></a>
+	</div>
 	
 	<?php $switchViewUrl = ModuleHelper::buildMethodCallUrl ( PackageController::class, "switchView" );?>
-	<div class="col-xs-4 text-center">
+	<div class="col-md-4 text-center">
 		<p>
 			<a href="<?php esc($switchViewUrl);?>" class="btn btn-default"><?php translate("switch_view");?></a>
 		</p>
@@ -90,17 +92,25 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 				<tr>
 					<th><?php translate("design");?></th>
 					<th><?php translate("version");?></th>
+					<th><?php translate("in_use");?></th>
 					<th><?php translate("actions");?></th>
 				</tr>
 			</thead>
 
 			<tbody>
-<?php foreach($themes as $theme){?>
+<?php
+	
+	foreach ( $themes as $theme ) {
+		$inUse = (Settings::get ( "theme" ) == $theme or Settings::get ( "mobile_theme" ) == $theme);
+		?>
 <tr>
 					<td><?php esc($theme);?></td>
 					<td>
 <?php esc(getThemeMeta($theme, "version"));?>
 </td>
+					<td><?php if($inUse){?>
+					✓
+					<?php }?></td>
 					<td>
 						<div class="btn-toolbar">
 							<a href="#" class="btn btn-info btn-sm remote-alert icon"
@@ -109,7 +119,7 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 		
 		if ($permissionChecker->hasPermission ( "remove_packages" ) and getModuleMeta ( $module->getName (), "source" ) != "core") {
 			echo ModuleHelper::buildMethodCallForm ( PackageController::class, "uninstallTheme", array (
-					"data-name" => $theme 
+					"name" => $theme 
 			), RequestMethod::POST, array (
 					"class" => "inline-block",
 					"data-confirm-message" => get_translation ( "uninstall_theme_x", array (
@@ -117,7 +127,8 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 					) ) 
 			) );
 			?>
-							<button type="submit" class="btn btn-danger btn-sm icon">🗑</button>
+							<button type="submit" class="btn btn-danger btn-sm icon"
+								<?php if($inUse) echo "disabled";?>>🗑</button>
 							<?php
 			echo ModuleHelper::endForm ();
 		}

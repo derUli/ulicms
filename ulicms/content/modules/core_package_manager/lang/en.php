@@ -11,3 +11,5 @@ add_translation ( "uninstall_module_x", "Uninstall module %name%?" );
 add_translation ( "uninstall_theme_x", "Uninstall theme %name%?" );
 
 add_translation ( "actions", "Actions" );
+
+add_translation ( "in_use", "In Use" );

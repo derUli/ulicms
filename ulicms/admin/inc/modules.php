@@ -41,19 +41,19 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	if ($permissionChecker->hasPermission ( "install_packages" )) {
 		?>
 <div class="row">
-	<div class="col-xs-4">
+	<div class="col-md-4">
 		<p>
 			<a href="?action=install_method" class="btn btn-warning"><?php translate("install_package");?></a>
 		</p>
 	</div>
 	<?php $switchViewUrl = ModuleHelper::buildMethodCallUrl ( PackageController::class, "switchView" );?>
-	<div class="col-xs-4 text-center">
+	<div class="col-md-4 text-center">
 		<p>
 			<a href="<?php esc($switchViewUrl);?>" class="btn btn-default"><?php translate("switch_view");?></a>
 		</p>
 	</div>
 
-	<div class="col-xs-4 text-right">
+	<div class="col-md-4 text-right">
 		<form action="<?php echo ModuleHelper::buildActionURL("modules");?>"
 			method="post">
 	<?php csrf_token_html()?>

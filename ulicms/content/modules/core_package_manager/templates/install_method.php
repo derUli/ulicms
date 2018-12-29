@@ -1,16 +1,15 @@
 <?php
-$permissionChecker = new ACL();
-if (! $permissionChecker->hasPermission("install_packages")) {
-    noPerms();
+$permissionChecker = new ACL ();
+if (! $permissionChecker->hasPermission ( "install_packages" )) {
+	noPerms ();
 } else {
-    ?>
+	?>
 <p>
-	<a href="<?php echo ModuleHelper::buildActionURL("modules");?>"
+	<a
+		href="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "redirectToPackageView");?>"
 		class="btn btn-default btn-back"><?php translate("back")?></a>
 </p>
-<h1>
-<?php translate ( "install_package" );?>
-</h1>
+<h1><?php translate ( "install_package" );?></h1>
 <p>
 	<a href="?action=upload_package" class="btn btn-default"><?php translate("upload_file");?>
 	</a>
