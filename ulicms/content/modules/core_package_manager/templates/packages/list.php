@@ -56,6 +56,7 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 				<td>
 					<div class="btn-toolbar">
 						<a href="#" class="btn btn-info btn-sm remote-alert icon"
+							title="<?php translate("info");?>"
 							data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "getModuleInfo", "name={$module->getName()}");?>">ⓘ</a>
 				
 		<?php
@@ -70,12 +71,14 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 						) ) 
 				) );
 				?>
-							<button type="submit" class="btn btn-danger bt-sm icon">🗑</button>
+							<button type="submit" class="btn btn-danger bt-sm icon"
+							title="<?php translate("uninstall");?>">🗑</button>
 							<?php
 				echo ModuleHelper::endForm ();
 			}
 			?>
-						</div>
+					
+					</div>
 				</td>
 								<?php }?>
 		</tr>
@@ -109,11 +112,12 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 <?php esc(getThemeMeta($theme, "version"));?>
 </td>
 					<td><?php if($inUse){?>
-					✓
+					<div class="text-green bold">✓</div>
 					<?php }?></td>
 					<td>
 						<div class="btn-toolbar">
 							<a href="#" class="btn btn-info btn-sm remote-alert icon"
+								title="<?php translate("info");?>"
 								data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getThemeInfo", "name={$theme}");?>">ⓘ</a>
 <?php
 		
@@ -128,6 +132,7 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 			) );
 			?>
 							<button type="submit" class="btn btn-danger btn-sm icon"
+								title="<?php translate("uninstall");?>"
 								<?php if($inUse) echo "disabled";?>>🗑</button>
 							<?php
 			echo ModuleHelper::endForm ();
