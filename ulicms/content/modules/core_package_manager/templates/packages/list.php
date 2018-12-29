@@ -77,7 +77,24 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 				echo ModuleHelper::endForm ();
 			}
 			?>
-					
+						<?php
+			$canToggleModule = getModuleMeta ( $module->getName (), "source" ) != "core";
+			// FIXME: add permission for enabling and disabling modules
+			echo ModuleHelper::buildMethodCallForm ( PackageController::class, "toggleModule", array (
+					"name" => $module->getName () 
+			), RequestMethod::POST, array (
+					"class" => "inline toggle-module-form",
+					"data-confirm-message" => get_translation ( "uninstall_module_x", array (
+							"%name%" => $module->getName () 
+					) ) 
+			) );
+			?>
+							<button type="submit" <?php if(!$canToggleModule) echo "disabled";?> class="btn btn-success bt-sm icon coming-soon" style="<?php if(!$module->isEnabled()) echo "display:none";?>"><?php translate("on");?></button>
+						<button type="submit"  <?php if(!$canToggleModule) echo "disabled";?> class="btn btn-danger bt-sm icon coming-soon" style="<?php if($module->isEnabled()) echo "display:none";?>"><?php translate("off");?></button>
+							<?php
+			echo ModuleHelper::endForm ();
+			
+			?>
 					</div>
 				</td>
 								<?php }?>

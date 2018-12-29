@@ -13,3 +13,5 @@ add_translation("uninstall", "Deinstallieren");
 
 add_translation ( "actions", "Aktionen" );
 add_translation ( "in_use", "In Verwendung" );
+
+add_translation("on", "An");

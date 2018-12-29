@@ -11,6 +11,9 @@
 .btn-toolbar .btn {
 	margin-left: 5px;
 }
+.toggle-module-form .btn{
+    min-width:55px;
+}
 
 .inline-block {
 	display: inline-block;
