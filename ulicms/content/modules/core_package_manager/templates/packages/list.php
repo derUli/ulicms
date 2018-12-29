@@ -65,7 +65,7 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 				echo ModuleHelper::buildMethodCallForm ( PackageController::class, "uninstallModule", array (
 						"name" => $module->getName () 
 				), RequestMethod::POST, array (
-						"class" => "inline",
+						"class" => "inline uninstall-form",
 						"data-confirm-message" => get_translation ( "uninstall_module_x", array (
 								"%name%" => $module->getName () 
 						) ) 
@@ -125,7 +125,7 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 			echo ModuleHelper::buildMethodCallForm ( PackageController::class, "uninstallTheme", array (
 					"name" => $theme 
 			), RequestMethod::POST, array (
-					"class" => "inline-block",
+					"class" => "inline-block uninstall-form",
 					"data-confirm-message" => get_translation ( "uninstall_theme_x", array (
 							"%name%" => $theme 
 					) ) 
@@ -145,6 +145,10 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 			</tbody>
 		</table>
 	</div>
+	<?php
+	enqueueScriptFile ( ModuleHelper::buildRessourcePath ( PackageController::MODULE_NAME, "js/list.js" ) );
+	combinedScriptHtml ();
+	?>
 <?php
 } else {
 	noPerms ();
