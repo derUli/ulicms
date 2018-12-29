@@ -59,7 +59,7 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 							title="<?php translate("info");?>"
 							data-url="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "getModuleInfo", "name={$module->getName()}");?>">ⓘ</a>
 				<?php
-			$canToggleModule = getModuleMeta ( $module->getName (), "source" ) != "core";
+			$canToggleModule = (getModuleMeta ( $module->getName (), "source" ) != "core" and $permissionChecker->hasPermission ( "enable_disable_module" ));
 			// FIXME: add permission for enabling and disabling modules
 			echo ModuleHelper::buildMethodCallForm ( PackageController::class, "toggleModule", array (
 					"name" => $module->getName () 
@@ -70,8 +70,8 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 					) ) 
 			) );
 			?>
-							<button type="submit" <?php if(!$canToggleModule) echo "disabled";?> class="btn btn-success bt-sm icon coming-soon" style="<?php if(!$module->isEnabled()) echo "display:none";?>"><?php translate("on");?></button>
-						<button type="submit"  <?php if(!$canToggleModule) echo "disabled";?> class="btn btn-danger bt-sm icon coming-soon" style="<?php if($module->isEnabled()) echo "display:none";?>"><?php translate("off");?></button>
+							<button type="submit" <?php if(!$canToggleModule) echo "disabled";?> class="btn btn-success bt-sm icon btn-disable" style="<?php if(!$module->isEnabled()) echo "display:none";?>" title="<?php translate("disable_module");?>"><?php translate("on");?></button>
+						<button type="submit"  <?php if(!$canToggleModule) echo "disabled";?> class="btn btn-danger bt-sm icon btn-enable" style="<?php if($module->isEnabled()) echo "display:none";?>" title="<?php translate("enable_module");?>"><?php translate("off");?></button>
 							<?php
 			echo ModuleHelper::endForm ();
 			

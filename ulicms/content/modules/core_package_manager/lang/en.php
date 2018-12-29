@@ -16,3 +16,5 @@ add_translation ( "actions", "Actions" );
 add_translation ( "in_use", "In Use" );
 
 add_translation ( "on", "On" );
+add_translation("enable_module", "Enable Module");
+add_translation("disable_module", "Disable Module");

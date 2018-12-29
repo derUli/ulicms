@@ -56,7 +56,7 @@ class PackageController extends MainClass {
 			$this->redirectToPackageView ();
 		} else {
 			$errorMessage = get_translation ( "removing_package_failed", array (
-					"%name%" => $name
+					"%name%" => $name 
 			) );
 			ExceptionResult ( $errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR );
 		}
@@ -73,5 +73,23 @@ class PackageController extends MainClass {
 			) );
 			ExceptionResult ( $errorMessage, HttpStatusCode::INTERNAL_SERVER_ERROR );
 		}
+	}
+	public function toggleModule() {
+		$name = Request::getVar ( "name" );
+		
+		$module = new Module ( $name );
+		$oldState = $module->isEnabled ();
+		$newState = false;
+		if ($oldState) {
+			$module->disable ();
+			$newState = false;
+		} else {
+			$module->enable ();
+			$newState = true;
+		}
+		$module->save ();
+		JSONResult ( array (
+				"enabled" => $newState 
+		) );
 	}
 }
