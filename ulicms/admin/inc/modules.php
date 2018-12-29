@@ -41,30 +41,29 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	if ($permissionChecker->hasPermission ( "install_packages" )) {
 		?>
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-xs-6">
 		<p>
 			<a href="?action=install_method" class="btn btn-warning"><?php translate("install_package");?></a>
 		</p>
 	</div>
 	<?php $switchViewUrl = ModuleHelper::buildMethodCallUrl ( PackageController::class, "switchView" );?>
-	<div class="col-md-4 text-center">
+	<div class="col-xs-6 text-right">
 		<p>
 			<a href="<?php esc($switchViewUrl);?>" class="btn btn-default"><?php translate("switch_view");?></a>
 		</p>
 	</div>
-
-	<div class="col-md-4 text-right">
-		<form action="<?php echo ModuleHelper::buildActionURL("modules");?>"
-			method="post">
+</div>
+<div class="text-right">
+	<form action="<?php echo ModuleHelper::buildActionURL("modules");?>"
+		method="post">
 	<?php csrf_token_html()?>
 		<input type="hidden" name="toggle-show-core-modules" value="1"> <input
-				type="hidden" name="action" value="modules"> <input type="checkbox"
-				id="show_core_modules" value="1"
-				onclick="$(this).closest('form').submit();"
-				<?php if($_SESSION ["show_core_modules"]) echo "checked";?>> <label
-				for="show_core_modules"><?php translate("show_core_modules");?></label>
-		</form>
-	</div>
+			type="hidden" name="action" value="modules"> <input type="checkbox"
+			id="show_core_modules" value="1"
+			onclick="$(this).closest('form').submit();"
+			<?php if($_SESSION ["show_core_modules"]) echo "checked";?>> <label
+			for="show_core_modules"><?php translate("show_core_modules");?></label>
+	</form>
 </div>
 
 <?php

@@ -10,12 +10,12 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 	$anyEmbedModules = count ( ModuleHelper::getAllEmbedModules () ) > 0;
 	?>
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-xs-6">
 		<a href="?action=install_method" class="btn btn-warning"><?php translate("install_package");?></a>
 	</div>
 	
 	<?php $switchViewUrl = ModuleHelper::buildMethodCallUrl ( PackageController::class, "switchView" );?>
-	<div class="col-md-4 text-center">
+	<div class="col-xs-6 text-right">
 		<p>
 			<a href="<?php esc($switchViewUrl);?>" class="btn btn-default"><?php translate("switch_view");?></a>
 		</p>
@@ -32,7 +32,7 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 			<?php if($anyEmbedModules){?>
 			<th><?php translate("shortcode");?></th>
 			<?php }?>
-			<th><?php translate("actions");?></th>
+			<th class="actions"><?php translate("actions");?></th>
 			</tr>
 		</thead>
 
@@ -53,7 +53,7 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 				echo "<input type='text' value='[module=\"" . $module->getName () . "\"]' readonly='readonly' onclick='this.focus(); this.select()'>";
 			}
 			?></td>
-				<td>
+				<td class="actions">
 					<div class="btn-toolbar">
 						<a href="#" class="btn btn-info btn-sm remote-alert icon"
 							title="<?php translate("info");?>"
@@ -85,40 +85,41 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 <?php }?>
 </tbody>
 	</table>
+</div>
 <?php
 	$themes = getThemesList ();
 	?>
-	<h2><?php translate("installed_designs");?></h2>
-	<div class="scroll">
-		<table class="tablesorter">
-			<thead>
-				<tr>
-					<th><?php translate("design");?></th>
-					<th><?php translate("version");?></th>
-					<th><?php translate("in_use");?></th>
-					<th><?php translate("actions");?></th>
-				</tr>
-			</thead>
+<h2><?php translate("installed_designs");?></h2>
+<div class="scroll">
+	<table class="tablesorter">
+		<thead>
+			<tr>
+				<th><?php translate("design");?></th>
+				<th><?php translate("version");?></th>
+				<th><?php translate("in_use");?></th>
+				<th class="actions"><?php translate("actions");?></th>
+			</tr>
+		</thead>
 
-			<tbody>
+		<tbody>
 <?php
 	
 	foreach ( $themes as $theme ) {
 		$inUse = (Settings::get ( "theme" ) == $theme or Settings::get ( "mobile_theme" ) == $theme);
 		?>
 <tr>
-					<td><?php esc($theme);?></td>
-					<td>
+				<td><?php esc($theme);?></td>
+				<td>
 <?php esc(getThemeMeta($theme, "version"));?>
 </td>
-					<td><?php if($inUse){?>
+				<td><?php if($inUse){?>
 					<div class="text-green bold">✓</div>
 					<?php }?></td>
-					<td>
-						<div class="btn-toolbar">
-							<a href="#" class="btn btn-info btn-sm remote-alert icon"
-								title="<?php translate("info");?>"
-								data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getThemeInfo", "name={$theme}");?>">ⓘ</a>
+				<td class="actions">
+					<div class="btn-toolbar">
+						<a href="#" class="btn btn-info btn-sm remote-alert icon"
+							title="<?php translate("info");?>"
+							data-url="<?php echo ModuleHelper::buildMethodCallUrl("PackageController", "getThemeInfo", "name={$theme}");?>">ⓘ</a>
 <?php
 		
 		if ($permissionChecker->hasPermission ( "remove_packages" ) and getModuleMeta ( $module->getName (), "source" ) != "core") {
@@ -132,20 +133,20 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 			) );
 			?>
 							<button type="submit" class="btn btn-danger btn-sm icon"
-								title="<?php translate("uninstall");?>"
-								<?php if($inUse) echo "disabled";?>>🗑</button>
+							title="<?php translate("uninstall");?>"
+							<?php if($inUse) echo "disabled";?>>🗑</button>
 							<?php
 			echo ModuleHelper::endForm ();
 		}
 		?>
 					</div>
-					</td>
-				</tr>
+				</td>
+			</tr>
 <?php }?>
 			</tbody>
-		</table>
-	</div>
-	<?php
+	</table>
+</div>
+<?php
 	enqueueScriptFile ( ModuleHelper::buildRessourcePath ( PackageController::MODULE_NAME, "js/list.js" ) );
 	combinedScriptHtml ();
 	?>
