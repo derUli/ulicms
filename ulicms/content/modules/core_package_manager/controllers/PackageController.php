@@ -95,6 +95,7 @@ class PackageController extends MainClass {
 		) );
 	}
 	public function truncatedInstalledPatches() {
-		throw new NotImplementedException ();
+		Database::truncateTable ( "installed_patches" );
+		TextResult ( "ok", HttpStatusCode::OK );
 	}
 }
