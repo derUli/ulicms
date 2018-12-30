@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Exceptions\NotImplementedException;
 class PackageController extends MainClass {
 	const MODULE_NAME = "core_package_manager";
 	public function afterSessionStart() {
@@ -92,5 +93,8 @@ class PackageController extends MainClass {
 				"name" => $name,
 				"enabled" => $newState 
 		) );
+	}
+	public function truncatedInstalledPatches() {
+		throw new NotImplementedException ();
 	}
 }

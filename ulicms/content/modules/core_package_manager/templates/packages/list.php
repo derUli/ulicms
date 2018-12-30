@@ -168,6 +168,55 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 	</table>
 </div>
 <?php
+	$pkg = new PackageManager ();
+	$patches = $pkg->getInstalledPatches ();
+	?>
+	<?php if($permissionChecker->hasPermission("patch_management")){?>
+<h2><?php translate("installed_patches");?></h2>
+<?php
+		
+		echo ModuleHelper::buildMethodCallForm ( PackageController::class, "truncatedInstalledPatches", array (
+				"name" => $theme 
+		), RequestMethod::POST, array (
+				"id" => "truncate-installed-patches",
+				"class" => " coming-soon text-right",
+				"data-confirm-message" => get_translation ( "TRUNCATE_INSTALLED_PATCHES_LIST" ) . "?" 
+		) );
+		?>
+<button type="submit" class="btn btn-danger"
+	<?php if(count($patches) == 0) echo "disabled";?>><?php translate("TRUNCATE_INSTALLED_PATCHES_LIST");?></button>
+<?php echo ModuleHelper::endForm ();?>
+<div class="scroll voffset2">
+	<table class="tablesorter">
+		<thead>
+			<tr>
+				<th><?php
+		
+		translate ( "name" );
+		?></th>
+				<th><?php translate("description");?></th>
+				<th><?php translate("date");?></th>
+				<th><?php translate("actions");?></th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach($patches as $name=>$data){?>
+		<tr>
+				<td><?php esc($data->name);?></td>
+				<td><?php esc($data->description);?></td>
+				<td><?php esc($data->date);?></td>
+				<td>
+				<?php if(StringHelper::isNotNullOrWhitespace($data->url)){?>
+				<a href="<?php esc($data->url)?>" target="_blank"
+					class="btn btn-info icon">🌐</a>
+				<?php }?>
+				</td>
+			</tr>
+		<?php }?></tbody>
+	</table>
+</div>
+<?php }?>
+<?php
 	enqueueScriptFile ( ModuleHelper::buildRessourcePath ( PackageController::MODULE_NAME, "js/list.js" ) );
 	combinedScriptHtml ();
 	?>

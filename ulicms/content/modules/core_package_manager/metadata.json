@@ -32,6 +32,7 @@
 		"PackageController::getModuleInfo": "list_packages",
 		"PackageController::uninstallModule": "remove_packages",
 		"PackageController::uninstallTheme": "remove_packages",
-		"PackageController::toggleModule": "enable_disable_module"
+		"PackageController::toggleModule": "enable_disable_module",
+		"PackageController::truncatedInstalledPatches" : "patch_management"
 	}
 }
