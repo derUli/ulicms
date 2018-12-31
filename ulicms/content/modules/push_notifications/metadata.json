@@ -1,0 +1,16 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": false,
+	"controllers": {
+		"PushNotificationsController": "controllers/PushNotificationsController.php"
+	},
+	"main_class": "PushNotificationsController",
+	"custom_acl": [
+		"push_notifications_settings"
+	],
+	"admin_permission": "push_notifications_settings",
+	"controller_function_permissions": {
+		"PushNotificationsController::saveSettingsPost": "saveSettingsPost"
+	}
+}
