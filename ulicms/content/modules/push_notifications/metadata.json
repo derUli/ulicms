@@ -11,6 +11,6 @@
 	],
 	"admin_permission": "push_notifications_settings",
 	"controller_function_permissions": {
-		"PushNotificationsController::saveSettingsPost": "saveSettingsPost"
+		"PushNotificationsController::saveSettingsPost": "push_notifications_settings"
 	}
 }

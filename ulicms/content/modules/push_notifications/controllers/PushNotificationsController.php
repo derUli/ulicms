@@ -1,7 +1,7 @@
 <?php
-use UliCMS\Exceptions\NotImplementedException;
 class PushNotificationsController extends MainClass {
 	const MODULE_NAME = "push_notifications";
+	const ENGAGESPOT_DASHBOARD_URL = "https://app.engagespot.co";
 	public function afterInit() {
 		Settings::register ( "engagespot/site_key", "" );
 	}
@@ -10,7 +10,8 @@ class PushNotificationsController extends MainClass {
 		return Template::executeModuleTemplate ( self::MODULE_NAME, "script.php" );
 	}
 	public function saveSettingsPost() {
-		throw new NotImplementedException ();
+		Settings::set ( "engagespot/site_key", Request::getVar ( "site_key", "", "str" ) );
+		Request::redirect ( ModuleHelper::buildAdminURL ( self::MODULE_NAME ) );
 	}
 	public function settings() {
 		// show settings page
