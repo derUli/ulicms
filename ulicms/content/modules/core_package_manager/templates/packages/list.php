@@ -23,7 +23,6 @@ if ($permissionChecker->hasPermission ( "list_packages" )) {
 		</p>
 	</div>
 </div>
-<div class="alert alert-warning">Work in Progress.</div>
 <h2><?php translate("installed_modules");?></h2>
 <div class="scroll">
 	<table class="tablesorter">
