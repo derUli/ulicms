@@ -1,0 +1,8 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"objects": {
+		"OddAndEven": "OddAndEven.php"
+	},
+	"embed": false
+}
