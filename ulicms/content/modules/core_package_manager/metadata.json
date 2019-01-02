@@ -1,11 +1,13 @@
 {
 	"source": "core",
-	"version": "2018.3",
+	"version": "2019.2",
 	"embed": false,
 	"controllers": {
 		"PkgInfoController": "controllers/PkgInfoController.php",
-		"UpdateCheckController": "controllers/UpdateCheckController.php"
+		"UpdateCheckController": "controllers/UpdateCheckController.php",
+		"PackageController": "controllers/PackageController.php"
 	},
+	"main_class": "PackageController",
 	"actions": {
 		"sin_package_install_ok": "templates/sin_package_install_ok.php",
 		"pkginfo": "templates/pkginfo.php",
@@ -15,9 +17,22 @@
 		"install_modules": "templates/install_modules.php",
 		"upload_package": "templates/upload_package.php",
 		"available_patches": "templates/available_patches.php",
-		"upload_patches": "templates/upload_patches.php"
+		"upload_patches": "templates/upload_patches.php",
+		"packages": "templates/packages/list.php"
 	},
+	"objects": {
+		"ModuleInfoViewModel": "objects/ModuleInfoViewModel.php",
+		"ThemeInfoViewModel": "objects/ThemeInfoViewModel.php"
+	},
+	"custom_acl": [
+		"enable_disable_module"
+	],
 	"controller_function_permissions": {
-		"PkgInfoController::install": "install_packages"
+		"PkgInfoController::install": "install_packages",
+		"PackageController::getModuleInfo": "list_packages",
+		"PackageController::uninstallModule": "remove_packages",
+		"PackageController::uninstallTheme": "remove_packages",
+		"PackageController::toggleModule": "enable_disable_module",
+		"PackageController::truncatedInstalledPatches" : "patch_management"
 	}
 }

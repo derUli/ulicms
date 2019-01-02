@@ -21,6 +21,20 @@ $(function() {
 			url : $("body").data("datatables-translation")
 		}
 	});
+	$(".coming-soon").click(function(event) {
+		event.preventDefault();
+		bootbox.alert("Coming Soon!");
+	});
+	$(".remote-alert").click(function(event) {
+		event.preventDefault();
+		setWaitCursor();
+		var url = $(event.target).data("url");
+
+		$.get(url, function(result) {
+			setDefaultCursor();
+			bootbox.alert(result);
+		});
+	});
 
 	// dynamically add class form-control to all form elements to
 	// make inputs prettier

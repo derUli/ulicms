@@ -3,9 +3,9 @@ $permissionChecker = new ACL ();
 if (! $permissionChecker->hasPermission ( "list_packages" )) {
 	noPerms ();
 } else {
+	
 	$greenHex = "#04d004";
-	// FIXME: Hartgecodete Texte in Sprachdateien auslagern.
-	// Das hier sollte am besten gleichzeitig mit dem Redesign der Paketverwaltung geschehen.
+	
 	// TODO: truncate_installed_patches sollte in einen Controller
 	if (isset ( $_POST ["truncate_installed_patches"] ) and $permissionChecker->hasPermission ( "patch_management" )) {
 		Database::truncateTable ( "installed_patches" );
@@ -46,19 +46,24 @@ if (! $permissionChecker->hasPermission ( "list_packages" )) {
 			<a href="?action=install_method" class="btn btn-warning"><?php translate("install_package");?></a>
 		</p>
 	</div>
-
+	<?php $switchViewUrl = ModuleHelper::buildMethodCallUrl ( PackageController::class, "switchView" );?>
 	<div class="col-xs-6 text-right">
-		<form action="<?php echo ModuleHelper::buildActionURL("modules");?>"
-			method="post">
+		<p>
+			<a href="<?php esc($switchViewUrl);?>" class="btn btn-default"><?php translate("switch_view");?></a>
+		</p>
+	</div>
+</div>
+<div class="text-right">
+	<form action="<?php echo ModuleHelper::buildActionURL("modules");?>"
+		method="post">
 	<?php csrf_token_html()?>
 		<input type="hidden" name="toggle-show-core-modules" value="1"> <input
-				type="hidden" name="action" value="modules"> <input type="checkbox"
-				id="show_core_modules" value="1"
-				onclick="$(this).closest('form').submit();"
-				<?php if($_SESSION ["show_core_modules"]) echo "checked";?>> <label
-				for="show_core_modules"><?php translate("show_core_modules");?></label>
-		</form>
-	</div>
+			type="hidden" name="action" value="modules"> <input type="checkbox"
+			id="show_core_modules" value="1"
+			onclick="$(this).closest('form').submit();"
+			<?php if($_SESSION ["show_core_modules"]) echo "checked";?>> <label
+			for="show_core_modules"><?php translate("show_core_modules");?></label>
+	</form>
 </div>
 
 <?php

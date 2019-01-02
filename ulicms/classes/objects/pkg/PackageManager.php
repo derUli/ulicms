@@ -165,7 +165,7 @@ class PackageManager
     {
         $module_folder = Path::resolve("ULICMS_DATA_STORAGE_ROOT/content/modules") . "/";
         
-        $available_modules = Array();
+        $available_modules = array();
         $directory_content = scandir($module_folder);
         
         natcasesort($directory_content);

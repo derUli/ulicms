@@ -1,6 +1,7 @@
 ===== Neues in UliCMS 2019.1.1 =====
 
 Neue Features:
+* "Pakete" Backend-Seite neu gestaltet
 * Option "Verbiete RTL-Sprachen (Arabisch, Hebräisch, Persisch)" zum Spamfilter hinzugefügt
 * Unterstützung für mehrere Konfigurationsumgebungen
 * Formulare und Banner können nun deaktiviert werden
