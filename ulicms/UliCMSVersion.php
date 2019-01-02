@@ -7,7 +7,7 @@ if (! class_exists("UliCMSVersion")) {
         function __construct()
         {
             $this->version = "Colourful Chameleon";
-            $this->releaseYear = 2018;
+            $this->releaseYear = 2019;
             $this->buildDate = 0; // {InsertBuildDate}
             $this->internalVersion = Array(
                 2019,

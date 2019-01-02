@@ -1,7 +1,7 @@
 <a href="<?php echo ModuleHelper::buildActionURL("info");?>"
 	class="btn btn-info" role="button"><?php translate("back")?></a>
 <h2><?php translate("license");?></h2>
-Copyright (c) 2011 - 2018, Ulrich Schmidt
+Copyright (c) 2011 - 2019, Ulrich Schmidt
 <br>
 All rights reserved.
 <p>Redistribution and use in source and binary forms, with or without
