@@ -1,7 +1,14 @@
+===== Neues in UliCMS 2019.1.2 =====
+Neue Features:
+* "Pakete" Backend-Seite neu gestaltet
+
+Bugfixes:
+* Die "Bearbeiten" Buttons im Frontend funktionieren wieder
+* Die Icons werden nun auch angezeigt, wenn das System nicht alle Emojis unterstützt.
+
 ===== Neues in UliCMS 2019.1.1 =====
 
 Neue Features:
-* "Pakete" Backend-Seite neu gestaltet
 * Option "Verbiete RTL-Sprachen (Arabisch, Hebräisch, Persisch)" zum Spamfilter hinzugefügt
 * Unterstützung für mehrere Konfigurationsumgebungen
 * Formulare und Banner können nun deaktiviert werden
