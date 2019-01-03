@@ -115,11 +115,7 @@ do_event("admin_head");
 <link rel="stylesheet" type="text/css"
 	href="scripts/datatables/datatables.min.css" />
 <link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-	integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-	crossorigin="anonymous">
-
-
+	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
 </head>
 <?php
 do_event("before_backend_header");
@@ -164,17 +160,16 @@ if (get_action()) {
 
 if (is_logged_in()) {
     ?>
-			<div class="row pull-right">
+			<div class="row pull-right top-right-icons">
 					<div class="col-xs-6">
-						<img src="gfx/clear-cache.png" id="menu-clear-cache"
-							data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1");?>"
-							alt="<?php translate("clear_cache");?>"> <img
-							src="gfx/loading2.gif" id="menu-clear-cache-loading"
-							style="display: none" alt="<?php translate("loading");?>">
+						<a href="#" id="menu-clear-cache"
+							data-url="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache", "clear_cache=1");?>">
+							<i class="fas fa-broom"></i>
+						</a> <a href="#" id="menu-clear-cache-loading"
+							style="display: none;"><i class="fa fa-spinner fa-spin"></i></a>
 					</div>
 					<div class="col-xs-6">
-						<img src="gfx/menu-icon.png" id="menu-toggle"
-							alt="<?php translate("toggle_menu");?>">
+						<a id="menu-toggle"><i class="fa fa-bars"></i> </a>
 					</div>
 				</div>
 			<?php }?>
