@@ -6,6 +6,9 @@ Bugfixes:
 * Die "Bearbeiten" Buttons im Frontend funktionieren wieder
 * Die Icons werden nun auch angezeigt, wenn das System nicht alle Emojis unterstützt.
 
+Sonstige Änderungen:
+* Die vertikale Scrollbar wird nun immer angezeigt
+
 ===== Neues in UliCMS 2019.1.1 =====
 
 Neue Features:
