@@ -1,0 +1,11 @@
+{
+	"source": "extend",
+	"version": "0.1",
+	"embed": false,
+	"controllers": {
+		"FartScrollJs": "FartScrollJs.php"
+	},
+	"main_class": "FartScrollJs",
+	"manufacturer_name": "The Onion",
+	"manufacturer_url": "https://www.theonion.com/"
+}
