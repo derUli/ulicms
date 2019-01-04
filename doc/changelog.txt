@@ -1,5 +1,6 @@
-===== Neues in UliCMS 2019.1.2 =====
+===== Neues in UliCMS 2019.1.3 =====
 
+Bugfixes:
 * Die Icons werden nun auch angezeigt, wenn das System nicht alle Emojis unterstützt.
 
 Sonstige Änderungen:
