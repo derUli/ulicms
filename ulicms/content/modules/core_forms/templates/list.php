@@ -7,12 +7,13 @@ if (! $permissionChecker->hasPermission("forms")) {
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate("forms"); ?></h1>
 <?php if($permissionChecker->hasPermission ( "forms_create" )){ ?>
 <p>
-	<a href="index.php?action=forms_new" class="btn btn-default"><?php translate("create_form");?></a>
+	<a href="index.php?action=forms_new" class="btn btn-default"><i
+		class="fa fa-plus"></i> <?php translate("create_form");?></a>
 </p>
 <?php }?>
 <p><?php BackendHelper::formatDatasetCount(count($forms));?></p>

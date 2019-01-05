@@ -22,12 +22,13 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
         ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h2><?php translate("categories");?></h2>
 <p><?php translate("categories_infotext");?></p>
 <p>
-	<a href="?action=categories&add" class="btn btn-default"><?php translate("create_category");?></a>
+	<a href="?action=categories&add" class="btn btn-default"><i
+		class="fa fa-plus"></i> <?php translate("create_category");?></a>
 </p>
 <p><?php BackendHelper::formatDatasetCount(count($categories));?></p>
 <?php
@@ -135,7 +136,7 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
             ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h2><?php translate("create_category");?></h2>
 <?php echo ModuleHelper::buildMethodCallForm("CategoryController", "create");?>
@@ -160,7 +161,7 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
         if ($permissionChecker->hasPermission("categories_edit")) {
             ?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h2><?php translate("edit_category");?></h2>
 <?php echo ModuleHelper::buildMethodCallForm("CategoryController", "update");?>

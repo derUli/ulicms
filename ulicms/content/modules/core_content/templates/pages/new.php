@@ -29,7 +29,7 @@ if ($permissionChecker->hasPermission("pages") and $permissionChecker->hasPermis
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("pages");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <input type="hidden" name="add" value="add">
 
