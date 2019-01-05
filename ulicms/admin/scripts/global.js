@@ -28,15 +28,10 @@ $(function() {
 	$(".remote-alert").click(function(event) {
 		event.preventDefault();
 		setWaitCursor();
-		var url = $(event.target).data("url");
-
-		$.ajax({
-			method : "GET",
-			url : url,
-			success : function(result) {
-				setDefaultCursor();
-				bootbox.alert(result);
-			}
+		var url = $(this).data("url");
+		$.get(url, function(result) {
+			setDefaultCursor();
+			bootbox.alert(result);
 		});
 	});
 

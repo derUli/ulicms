@@ -6,6 +6,7 @@ Neue Features:
 
 Bugfixes:
 * Die Icons werden nun auch angezeigt, wenn das System nicht alle Emojis unterstützt.
+* Aufruf der Informationen über ein Modul schlagen nicht mehr manchmal fehl
 
 Sonstige Änderungen:
 * Die vertikale Scrollbar im Backend wird nun immer angezeigt
