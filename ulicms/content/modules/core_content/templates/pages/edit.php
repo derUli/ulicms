@@ -70,7 +70,7 @@ if ($permissionChecker->hasPermission("pages")) {
 			class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 <?php
             
-            echo ModuleHelper::buildMethodCallButton("PageController", "delete", '<i class="fas fa-trash"></i>' . get_translation("delete"), array(
+            echo ModuleHelper::buildMethodCallButton("PageController", "delete", '<i class="fas fa-trash"></i> ' . get_translation("delete"), array(
                 "class" => "btn btn-danger",
                 "type" => "submit"
             ), array(
@@ -1053,7 +1053,7 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 		<p>
 			<a
 				href="index.php?action=restore_version&content_id=<?php echo $row->id;?>"
-				class="btn btn-warning"><?php translate("restore_older_version");?></a>
+				class="btn btn-warning"><i class="fas fa-undo"></i> <?php translate("restore_older_version");?></a>
 		</p>
 		<?php }?>	</div>
 	<div class="inPageMessage">
@@ -1062,12 +1062,14 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 	</div>
 	<div class="row">
 		<div class="col-xs-6">
-			<button type="submit" class="btn btn-primary"><?php translate("save_changes");?></button>
+			<button type="submit" class="btn btn-primary">
+				<i class="far fa-save"></i> <?php translate("save_changes");?></button>
 
 		</div>
 
 		<div class="col-xs-6 text-right">
-			<button class="typedep btn btn-info" type="button" id="btn-view-page"><?php translate("view");?></button>
+			<button class="typedep btn btn-info" type="button" id="btn-view-page">
+				<i class="fas fa-eye"></i> <?php translate("view");?></button>
 		</div>
 	</div>
 <?php

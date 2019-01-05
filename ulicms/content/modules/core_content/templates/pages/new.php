@@ -708,7 +708,8 @@ var myCodeMirror2 = CodeMirror.fromTextArea(document.getElementById("excerpt"),
 </div>
 <div class="inPageMessage"></div>
 <input type="hidden" name="add_page" value="add_page">
-<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
+<button type="submit" class="btn btn-primary">
+	<i class="far fa-save"></i> <?php translate("save");?></button>
 <?php
     $translation = new JSTranslation(array(), "PageTranslation");
     $translation->addKey("confirm_exit_without_save");

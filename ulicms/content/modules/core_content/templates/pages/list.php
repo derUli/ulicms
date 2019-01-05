@@ -138,7 +138,8 @@ if ($permissionChecker->hasPermission("pages")) {
 			<div class="page-list-filters" style="<?php if(!$show_filters) echo "display:none";?>">
 				<a
 					href="<?php echo ModuleHelper::buildMethodCallUrl("PageController", "resetFilters");?>"
-					class="btn btn-default" id="btn-reset-filters"><?php translate("reset_filters")?></a>
+					class="btn btn-default" id="btn-reset-filters"><i
+					class="fas fa-undo"></i> <?php translate("reset_filters")?></a>
 			</div>
 		</div>
 	</div>

@@ -11,7 +11,7 @@ if (! $permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPer
         ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("forms");?>"
-		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate("edit_form");?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("FormController", "update");?>
@@ -68,7 +68,8 @@ if (! $permissionChecker->hasPermission("forms") or ! $permissionChecker->hasPer
 		</select>
 </p>
 <p>
-	<button name="edit_form" type="submit" class="btn btn-primary"><?php translate("save");?></button>
+	<button name="edit_form" type="submit" class="btn btn-primary">
+		<i class="fas fa-save"></i>  <?php translate("save");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?>
 
