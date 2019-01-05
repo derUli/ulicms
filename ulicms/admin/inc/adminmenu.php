@@ -24,7 +24,7 @@ if (is_file(Path::resolve("ULICMS_ROOT/update.php"))) {
     $entries[] = new MenuEntry('<i class="fas fa-sync"></i> ' . get_translation("update"), "?action=system_update", "update_system", "update_system");
 }
 
-$entries[] = new MenuEntry('<i class="fas fa-sync"></i> ' . get_translation("settings"), "?action=settings_categories", "settings_categories", array(
+$entries[] = new MenuEntry('<i class="fas fa-tools"></i> ' . get_translation("settings"), "?action=settings_categories", "settings_categories", array(
     "settings_simple",
     "design",
     "spam_filter",
