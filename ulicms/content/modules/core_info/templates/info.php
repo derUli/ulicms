@@ -16,8 +16,7 @@ if (! $permissionChecker->hasPermission("info")) {
     
     <br /> <small><?php translate("build_date");?>: <?php echo $version->getBuildDate()?></small>
 	<?php
-    
-}
+    }
     ?>
 </p>
 <p>
@@ -93,12 +92,16 @@ if (! $permissionChecker->hasPermission("info")) {
 <br />
 
 <a href="http://www.ulicms.de" target="_blank" class="btn btn-info"
-	role="button">UliCMS Portal</a>
+	role="button"><i class="fa fa-globe" aria-hidden="true"></i> UliCMS
+	Portal</a>
 
-<a href="index.php?action=license" class="btn btn-info" role="button"><?php translate("license")?></a>
+<a href="index.php?action=license" class="btn btn-info" role="button"><i
+	class="fa fa-info-circle" aria-hidden="true"></i>
+ <?php translate("license")?></a>
 
 <a href="http://www.ulicms.de/kontakt.html" target="_blank"
-	class="btn btn-info" role="button">Feedback</a>
+	class="btn btn-info" role="button"><i class="fas fa-envelope"></i>
+	Feedback</a>
 
 <br />
 
