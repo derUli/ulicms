@@ -40,7 +40,7 @@ $actionSelect = array(
 
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate("comments_manage");?></h1>
 <?php
@@ -68,7 +68,8 @@ echo Input::TextBox("limit", $limit, "number", array(
 ?>
 </div>
 <p>
-	<button type="submit" class="btn btn-primary"><?php translate("search");?></button>
+	<button type="submit" class="btn btn-primary">
+		<i class="fas fa-search"></i> <?php translate("search");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?>
 <?php
@@ -141,7 +142,8 @@ echo ModuleHelper::buildMethodCallForm(CommentsController::class, "doAction", ar
 echo Input::SingleSelect("action", "", $actionSelect, 1);
 ?></div>
 	<div class="col-xs-6">
-		<button type="submit" class="btn btn-primary"><?php translate("do_action")?></button>
+		<button type="submit" class="btn btn-primary">
+			<i class="fas fa-running"></i> <?php translate("do_action")?></button>
 	</div>
 </div>
 <?php ModuleHelper::endForm();?>

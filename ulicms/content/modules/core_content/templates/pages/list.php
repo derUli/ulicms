@@ -112,7 +112,8 @@ if ($permissionChecker->hasPermission("pages")) {
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
+		<?php translate("back")?></a>
 </p>
 <h2><?php translate("pages");?></h2>
 
@@ -130,7 +131,8 @@ if ($permissionChecker->hasPermission("pages")) {
 	</form>
 	<div class="row">
 		<div class="col-xs-6">
-			<a href="index.php?action=pages_new" class="btn btn-default"><?php translate("create_page");?></a>
+			<a href="index.php?action=pages_new" class="btn btn-default"><i
+				class="fa fa-plus"></i> <?php translate("create_page");?></a>
 		</div>
 		<div class="col-xs-6 text-right">
 			<div class="page-list-filters" style="<?php if(!$show_filters) echo "display:none";?>">
