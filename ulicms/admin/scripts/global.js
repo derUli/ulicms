@@ -30,9 +30,13 @@ $(function() {
 		setWaitCursor();
 		var url = $(event.target).data("url");
 
-		$.get(url, function(result) {
-			setDefaultCursor();
-			bootbox.alert(result);
+		$.ajax({
+			method : "GET",
+			url : url,
+			success : function(result) {
+				setDefaultCursor();
+				bootbox.alert(result);
+			}
 		});
 	});
 
