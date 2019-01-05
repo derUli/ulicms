@@ -1,0 +1,9 @@
+{
+	"version" : "1.0.2",
+	"embed" : false,
+	"source" : "extend",
+	"controllers" : {
+	 "PageSpeedController" : "controllers/google_pagespeed_controller.php"
+	},
+	"main_class" : "PageSpeedController"
+}
