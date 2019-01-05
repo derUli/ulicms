@@ -7,7 +7,7 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("admins");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <form action="index.php?sClass=UserController&sMethod=create"
 	method="post" autocomplete="off" id="edit_user">
@@ -94,7 +94,8 @@ if ($permissionChecker->hasPermission("users") and $permissionChecker->hasPermis
     }
     ?>
 	</select><br /> <br />
-	<button type="submit" class="btn btn-primary"><?php translate ( "create_user" );?></button>
+	<button type="submit" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php translate ( "create_user" );?></button>
 </form>
 <?php
 } else {

@@ -21,7 +21,7 @@ if ($permissionChecker->hasPermission("users")) {
 <p>
 <?php translate("users_infotext");?>
 	<br /> <br /> <a href="index.php?action=admin_new&ref=admins"
-		class="btn btn-default"><?php translate("create_user");?></a><br />
+		class="btn btn-default"><i class="fa fa-plus"></i> <?php translate("create_user");?></a><br />
 </p>
 <?php }?>
 <strong><?php translate("primary_group");?></strong>

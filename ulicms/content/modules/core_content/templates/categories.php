@@ -151,7 +151,8 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
 	<textarea cols="50" name="description" rows="5" maxlength="255"></textarea>
 </p>
 <p>
-	<button type="submit" name="create" class="btn btn-primary"><?php translate("create");?></button>
+	<button type="submit" name="create" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php translate("create");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?><?php
         } else {
@@ -183,7 +184,8 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
             ?></textarea>
 </p>
 <p>
-	<button type="submit" name="update" class="btn btn-primary"><?php
+	<button type="submit" name="update" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php
             translate("save");
             ?></button>
 </p>

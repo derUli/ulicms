@@ -5,13 +5,13 @@ if ($permissionChecker->hasPermission("banners") and $permissionChecker->hasPerm
 
 <?php
     
-echo ModuleHelper::buildMethodCallForm("BannerController", "create", array(), RequestMethod::POST, array(
+    echo ModuleHelper::buildMethodCallForm("BannerController", "create", array(), RequestMethod::POST, array(
         "autocomplete" => "off"
     ));
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("banner");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 
 <p>
@@ -76,7 +76,8 @@ echo ModuleHelper::buildMethodCallForm("BannerController", "create", array(), Re
 </p>
 <br />
 <p>
-	<button type="submit" class="btn btn-primary"><?php translate("add_banner");?></button>
+	<button type="submit" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php translate("add_banner");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?>
 <?php

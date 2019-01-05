@@ -16,7 +16,7 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
         ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("admins");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <form action="index.php?sClass=UserController&sMethod=update"
 	name="userdata_form" method="post" enctype="multipart/form-data"
@@ -237,7 +237,8 @@ if (($permissionChecker->hasPermission("users") and $permissionChecker->hasPermi
 	</select> <br /> <br /> <strong><?php translate("about_me");?></strong><br />
 	<textarea rows=10 cols=50 name="about_me"><?php echo htmlspecialchars($row->about_me)?></textarea>
 	<br />
-	<button type="submit" class="btn btn-primary"><?php translate ( "OK" );?></button>
+	<button type="submit" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php translate ( "OK" );?></button>
 </form>
 
 <?php
