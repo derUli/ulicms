@@ -22,7 +22,8 @@ if (! $permissionChecker->hasPermission("performance_settings")) {
     if (Request::getVar("save")) {
         ?>
 <div class="alert alert-success alert-dismissable fade in">
-	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	<a href="#" class="close" data-dismiss="alert" aria-label="close">
+		&times;</a>
 	<?php translate("changes_was_saved");?>
 	</div>
 <?php }?>
@@ -30,9 +31,10 @@ if (! $permissionChecker->hasPermission("performance_settings")) {
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a> <a
+		class="btn btn-default btn-back"><i class="fas fa-arrow-left"></i> <?php translate("back")?></a>
+	<a
 		href="<?php echo ModuleHelper::buildMethodCallUrl("PerformanceSettingsController", "clearCache");?>"
-		class="btn btn-warning pull-right"><?php translate("clear_cache");?></a>
+		class="btn btn-warning pull-right"><i class="fas fa-broom"></i> <?php translate("clear_cache");?></a>
 </p>
 <h1><?php translate("performance");?></h1>
 <?php echo ModuleHelper::buildMethodCallForm("PerformanceSettingsController", "save");?>
@@ -65,7 +67,8 @@ if (! $permissionChecker->hasPermission("performance_settings")) {
 	<?php translate("minutes");?>
 			</div>
 <p>
-	<button type="submit" name="submit" class="btn btn-primary voffset3"><?php translate("save_changes");?></button>
+	<button type="submit" name="submit" class="btn btn-primary voffset3">
+		<i class="fa fa-save"></i> <?php translate("save_changes");?></button>
 </p>
 <script type="text/javascript">
 $("#form").ajaxForm({beforeSubmit: function(e){

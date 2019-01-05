@@ -15,7 +15,7 @@ if ($commentableContentTypeSettings) {
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <?php if(Request::getVar("save")){?>
 <div class="alert alert-success alert-dismissable fade in">
@@ -40,6 +40,7 @@ echo UliCMS\HTML\Input::MultiSelect("commentable_content_types[]", $commentableC
 ?>
 </div>
 <p>
-	<button type="submit" class="btn btn-primary"><?php translate("save");?></button>
+	<button type="submit" class="btn btn-primary">
+		<i class="fa fa-save"></i> <?php translate("save");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?>

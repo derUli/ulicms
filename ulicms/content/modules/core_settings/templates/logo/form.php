@@ -5,7 +5,7 @@ if ($permissionChecker->hasPermission("logo")) {
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <p>
 <?php translate("logo_infotext");?>
@@ -17,7 +17,7 @@ if ($permissionChecker->hasPermission("logo")) {
     ?>
 		<input type="hidden" name="sClass" value="LogoUploadController" /> <input
 		type="hidden" name="sMethod" value="upload" />
-	<table style="height:250px">
+	<table style="height: 250px">
 		<tr>
 			<td><strong><?php translate("your_logo");?>
 			</strong></td>
@@ -45,7 +45,8 @@ if ($permissionChecker->hasPermission("logo")) {
 		<tr>
 			<td></td>
 			<td class="text-center"><button type="submit"
-					class="btn btn-primary voffset2"><?php translate("upload");?></button></td>
+					class="btn btn-primary voffset2">
+					<i class="fa fa-upload"></i> <?php translate("upload");?></button></td>
 		</tr>
 	</table>
 </form>

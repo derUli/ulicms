@@ -48,7 +48,7 @@ if (! $permissionChecker->hasPermission("other")) {
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <div id="accordion-container">
 	<h2 class="accordion-header">
@@ -163,7 +163,9 @@ if (! $permissionChecker->hasPermission("other")) {
 		</p>
 		<p>
 			<a href="https://support.google.com/accounts/answer/1066447"
-				target="_blank">[<?php translate("help");?>]</a>
+				target="_blank" class="btn btn-info"><i
+				class="fa fa-question-circle" aria-hidden="true"></i>
+<?php translate("help");?></a>
 		</p>
 			
 			<?php
@@ -172,8 +174,9 @@ if (! $permissionChecker->hasPermission("other")) {
         ?>
 				<h2><?php translate("DEFAULT_ACCESS_RESTRICTIONS");?></h2>
 		<p>
-			[<a
-				href="<?php echo ModuleHelper::buildActionURL("default_access_restrictions");?>"><?php translate("view");?></a>]
+			<a
+				href="<?php echo ModuleHelper::buildActionURL("default_access_restrictions");?>"
+				class="btn btn-default"><i class="fas fa-tools"></i> <?php translate("view");?></a>
 		</p>
 				<?php
     }
@@ -367,12 +370,14 @@ if($('#email_mode').val() == "phpmailer"){
 
 	<div class="accordion-content">
 		<p>
-			<a href="index.php?action=settings" class="btn btn-danger"><?php translate("view");?></a>
+			<a href="index.php?action=settings" class="btn btn-danger"><i
+				class="fas fa-tools"></i> <?php translate("view");?></a>
 		</p>
 	</div>
 </div>
 
-<button type="submit" name="submit" class="btn btn-primary voffset3"><?php translate("save_changes");?></button>
+<button type="submit" name="submit" class="btn btn-primary voffset3">
+	<i class="fa fa-save"></i> <?php translate("save_changes");?></button>
 <?php echo ModuleHelper::endForm();?>
 <script type="text/javascript">
 $("#other_settings").ajaxForm({beforeSubmit: function(e){

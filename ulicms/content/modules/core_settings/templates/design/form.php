@@ -34,7 +34,7 @@ div#google-fonts {
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fas fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1>
 <?php translate("design");?>
@@ -260,7 +260,8 @@ div#google-fonts {
         ?>
 		<tr>
 		<td><strong><?php translate("favicon");?></strong></td>
-		<td>[<a href="index.php?action=favicon"><?php translate("upload_new_favicon");?></a>]
+		<td><a href="index.php?action=favicon" class="btn btn-default"><i
+				class="fas fa-file-image"></i> <?php translate("upload_new_favicon");?></a>
 		</td>
 	</tr>		
 		<?php }?>
@@ -293,7 +294,8 @@ div#google-fonts {
 	</tr>
 </table>
 <p>
-	<button type="submit" class="btn btn-primary voffset3" name="submit"><?php translate("save_changes");?></button>
+	<button type="submit" class="btn btn-primary voffset3" name="submit">
+		<i class="fas fa-save"></i> <?php translate("save_changes");?></button>
 </p>
 <?php echo ModuleHelper::endForm();?>
 

@@ -1,7 +1,7 @@
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fas fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h1><?php translate("spamfilter");?></h1>
 <?php
@@ -120,7 +120,8 @@ function spamFilterEnabledcheckboxChanged(checked){
 	</div>
 	<p class="voffset2">
 		<button type="submit" name="submit_spamfilter_settings"
-			class="btn btn-primary"><?php
+			class="btn btn-primary">
+			<i class="fas fa-save"></i> <?php
     
     translate("save_changes");
     ?></button>

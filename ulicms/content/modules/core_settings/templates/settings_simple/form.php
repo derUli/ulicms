@@ -12,7 +12,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <h2><?php translate("general_settings");?></h2>
 <p>Hier können Sie die Einstellungen für Ihre Internetseite verändern.</p>
@@ -24,11 +24,13 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 <table>
 	<tr>
 		<td><strong><?php translate("homepage_title");?></strong></td>
-		<td><a href="index.php?action=homepage_title"><?php translate("edit");?></a></td>
+		<td><a href="index.php?action=homepage_title" class="btn btn-default"><i
+				class="fa fa-edit"></i> <?php translate("edit");?></a></td>
 	</tr>
 	<tr>
 		<td><strong><?php translate("motto");?></strong></td>
-		<td><a href="index.php?action=motto"><?php translate("edit");?></a></td>
+		<td><a href="index.php?action=motto" class="btn btn-default"><i
+				class="fa fa-edit"></i> <?php translate("edit");?></a></td>
 	</tr>
 	<tr>
 		<td><strong><?php translate("homepage_owner");?></strong></td>
@@ -67,7 +69,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 	</tr>
 	<tr>
 		<td><strong><?php translate("frontpage");?></strong></td>
-		<td><a href="index.php?action=frontpage_settings"><?php
+		<td><a href="index.php?action=frontpage_settings"
+			class="btn btn-default"><i class="fa fa-edit"></i> <?php
     
     translate("edit");
     ?></a></td>
@@ -111,14 +114,16 @@ if ($permissionChecker->hasPermission("settings_simple")) {
     
     translate("description");
     ?></strong></td>
-		<td><a href="index.php?action=meta_description"><?php
+		<td><a href="index.php?action=meta_description"
+			class="btn btn-default"><i class="fa fa-edit"></i> <?php
     
     translate("edit");
     ?></a></td>
 	</tr>
 	<tr>
 		<td><strong><?php translate("keywords");?></strong></td>
-		<td><a href="index.php?action=meta_keywords"><?php
+		<td><a href="index.php?action=meta_keywords" class="btn btn-default"><i
+				class="fa fa-edit"></i>  <?php
     
     translate("edit");
     ?></a></td>
@@ -129,7 +134,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
               <tr>
 		<td><strong><?php translate("open_graph");?>
 		</strong></td>
-		<td><a href="index.php?action=open_graph"><?php
+		<td><a href="index.php?action=open_graph" class="btn btn-default"><i
+				class="fa fa-edit"></i> <?php
         
         translate("edit");
         ?></a></td>
@@ -193,7 +199,8 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 		<td>
 		
 		<td align="center">
-			<button type="submit" class="btn btn-primary"><?php translate("OK")?></button>
+			<button type="submit" class="btn btn-primary">
+				<i class="fa fa-save"></i> <?php translate("OK")?></button>
 		</td>
 	</tr>
 </table>
