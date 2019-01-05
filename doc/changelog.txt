@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2019.1.3 =====
 
+Neue Features:
+* Icon-Bar auf Medienseiten hinzugefügt
+
 Bugfixes:
 * Die Icons werden nun auch angezeigt, wenn das System nicht alle Emojis unterstützt.
 
