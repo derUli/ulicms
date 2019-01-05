@@ -543,7 +543,7 @@ define("TRANSLATION_MAIL_FROM_FIELD", "Feld, welches den Absender enthält");
 define("TRANSLATION_TARGET_PAGE_ID", "Erfolgsseite");
 
 // Patch hochladen
-define("TRANSLATION_INSTALL_PATCH_FROM_FILE", "Patch aus Datei installieren");
+define("TRANSLATION_INSTALL_PATCH_FROM_FILE", "Patch hochladen");
 define("TRANSLATION_INSTALL_PATCH", "Patch installieren");
 
 // 2-Faktor Authentifizierung

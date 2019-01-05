@@ -4,9 +4,10 @@ Bugfixes:
 * Die Icons werden nun auch angezeigt, wenn das System nicht alle Emojis unterstützt.
 
 Sonstige Änderungen:
-* Die vertikale Scrollbar wird nun immer angezeigt
+* Die vertikale Scrollbar im Backend wird nun immer angezeigt
 
 ===== Neues in UliCMS 2019.1.2 =====
+
 Neue Features:
 * "Pakete" Backend-Seite neu gestaltet
 
