@@ -12,13 +12,15 @@ if ($permissionChecker->hasPermission("list_packages")) {
 <div class="row">
 	<div class="col-xs-6">
 		<p>
-			<a href="?action=install_method" class="btn btn-warning"><?php translate("install_package");?></a>
+			<a href="?action=install_method" class="btn btn-warning"><i
+				class="fa fa-plus"></i> <?php translate("install_package");?></a>
 		</p>
 	</div>
 	<?php $switchViewUrl = ModuleHelper::buildMethodCallUrl ( PackageController::class, "switchView" );?>
 	<div class="col-xs-6 text-right">
 		<p>
-			<a href="<?php esc($switchViewUrl);?>" class="btn btn-default"><?php translate("switch_view");?></a>
+			<a href="<?php esc($switchViewUrl);?>" class="btn btn-default"><i
+				class="fa fa-table"></i> <?php translate("switch_view");?></a>
 		</p>
 	</div>
 </div>
@@ -48,7 +50,8 @@ if ($permissionChecker->hasPermission("list_packages")) {
 					href="<?php esc(ModuleHelper::buildAdminURL($module->getName()));?>"
 					class="<?php esc($btnClass);?>"
 					<?php if(!$hasAdminPage or !$isEnabled ) echo "disabled";?>
-					data-btn-for="<?php esc($module->getName());?>"><?php esc($module->getName());?></a></td>
+					data-btn-for="<?php esc($module->getName());?>"><i
+						class="fas fa-tools"></i> <?php esc($module->getName());?></a></td>
 				<td><?php esc(getModuleMeta($module->getName(), "version"));?></td>
 				<?php if($anyEmbedModules){?>
 			<td><?php
