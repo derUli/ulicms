@@ -28,9 +28,8 @@ $notSelectedButton = "btn btn-default"?>
 	<?php foreach($icons as $action=>$cssClass){?>
 	  <div class="btn-group" role="group">
 		<a href="<?php echo ModuleHelper::buildActionURL($action);?>"
-			class="<?php echo $action == $currentAction ? $selectedButton : $notSelectedButton; ?>"
-			title="<?php translate($action);?>"> <i
-			class="<?php echo $cssClass?>"></i> <?php translate($action);?>
+			class="<?php echo $action == $currentAction ? $selectedButton : $notSelectedButton; ?>">
+			<i class="<?php echo $cssClass?>"></i> <?php translate($action);?>
 		</a>
 	</div>
 	

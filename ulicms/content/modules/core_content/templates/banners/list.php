@@ -13,11 +13,8 @@ if ($permissionChecker->hasPermission("banners")) {
         $banners = Banners::getByCategory($_SESSION["filter_category"]);
     }
     ?>
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
-		<?php translate("back")?></a>
-</p>
+<?php echo Template::executeModuleTemplate("core_content", "icons.php");?>
+
 <h2><?php translate("advertisements"); ?></h2>
 <p>
 <?php translate("advertisement_infotext");?>

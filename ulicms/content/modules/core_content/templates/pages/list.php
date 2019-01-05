@@ -110,11 +110,9 @@ if ($permissionChecker->hasPermission("pages")) {
     $sql .= " order by a.title";
     $parents = db_query($sql);
     ?>
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i>
-		<?php translate("back")?></a>
-</p>
+
+<?php echo Template::executeModuleTemplate("core_content", "icons.php");?>
+
 <h2><?php translate("pages");?></h2>
 
 <p><?php translate ( "pages_infotext" );?></p>

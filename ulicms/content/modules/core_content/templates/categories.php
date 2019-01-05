@@ -20,10 +20,8 @@ if (! is_admin() and ! $permissionChecker->hasPermission("categories")) {
 <?php
     if (! isset($_GET["add"]) and ! isset($_GET["edit"]) and $permissionChecker->hasPermission("categories_create")) {
         ?>
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
-</p>
+<?php echo Template::executeModuleTemplate("core_content", "icons.php");?>
+
 <h2><?php translate("categories");?></h2>
 <p><?php translate("categories_infotext");?></p>
 <p>

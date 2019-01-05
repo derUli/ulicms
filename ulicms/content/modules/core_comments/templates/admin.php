@@ -38,10 +38,8 @@ $actionSelect = array(
 );
 ?>
 
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
-</p>
+<?php echo Template::executeModuleTemplate("core_content", "icons.php");?>
+
 <h1><?php translate("comments_manage");?></h1>
 <?php
 echo ModuleHelper::buildMethodCallForm(CommentsController::class, "filterComments", array(), "get");

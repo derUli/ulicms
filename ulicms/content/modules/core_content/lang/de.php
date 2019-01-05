@@ -12,3 +12,5 @@ add_translation("confirm_exit_without_save", "Wenn Sie diese Seite verlassen geh
 
 add_translation("date_from", "Datum von");
 add_translation("date_to", "Datum bis");
+
+add_translation("banner", get_translation("advertisements"));

@@ -5,10 +5,8 @@ if (! $permissionChecker->hasPermission("forms")) {
 } else {
     $forms = Forms::getAllForms();
     ?>
-<p>
-	<a href="<?php echo ModuleHelper::buildActionURL("contents");?>"
-		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
-</p>
+<?php echo Template::executeModuleTemplate("core_content", "icons.php");?>
+
 <h1><?php translate("forms"); ?></h1>
 <?php if($permissionChecker->hasPermission ( "forms_create" )){ ?>
 <p>
