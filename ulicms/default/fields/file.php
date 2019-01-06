@@ -20,7 +20,8 @@ if (is_null($value)) {
 			<?php if($field->required) echo "required";?>
 			<?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes);?>
 			readonly> [<a href="#" class="clear-field"
-			data-for="#field-<?php Template::escape(ViewBag::get("field_name"));?>"><?php translate("clear")?></a>]
+			data-for="#field-<?php Template::escape(ViewBag::get("field_name"));?>"
+			class="btn btn-default"><i class="fa fa-eraser"></i> <?php translate("clear")?></a>]
 		<?php if($field->helpText){?>
 	<br /> <small><?php translate($field->helpText);?></small>
 <?php }?>

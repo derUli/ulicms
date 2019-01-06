@@ -217,7 +217,9 @@ function openMenuImageSelectWindow(field) {
 		<input type="text" id="menu_image" name="menu_image"
 			readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 			value="" style="cursor: pointer" /> <a href="#"
-			onclick="$('#menu_image').val('');return false;"><?php translate("clear");?>
+			onclick="$('#menu_image').val('');return false;"
+			class="btn btn-default voffset2" class="btn btn-default"><i
+			class="fa fa-eraser"></i> <?php translate("clear");?>
 		</a>
 	</div>
 	<div class="typedep" id="tab-link" style="display: none;">
@@ -300,7 +302,8 @@ function openMenuImageSelectWindow(field) {
 					onclick="openMenuImageSelectWindow(this)"
 					value="<?php echo htmlspecialchars($og_image);?>"
 					style="cursor: pointer" /> <a href="#"
-					onclick="$('#og_image').val('');return false;"><?php translate("clear");?></a>
+					onclick="$('#og_image').val('');return false;"
+					class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear");?></a>
 
 			</div>
 		</div>
@@ -481,7 +484,8 @@ function openMenuImageSelectWindow(field) {
 			<input type="text" id="image_url" name="image_url"
 				readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 				value="" style="cursor: pointer" /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php
+				onclick="$('#menu_image').val('');return false;"
+				class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php
     
     translate("clear");
     ?>
@@ -523,7 +527,8 @@ function openArticleImageSelectWindow(field) {
 			<input type="text" id="article_image" name="article_image"
 				readonly="readonly" onclick="openArticleImageSelectWindow(this)"
 				value="" style="cursor: pointer" maxlength="255" /> <a href="#"
-				onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
+				onclick="$('#article_image').val('');return false;"
+				class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear");?></a>
 		</div>
 	</div>
 	<h2 class="accordion-header"><?php translate("comments");?></h2>

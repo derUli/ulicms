@@ -334,7 +334,8 @@ function openMenuImageSelectWindow(field) {
             echo $row->menu_image;
             ?>"
 				style="cursor: pointer" /> <a href="#"
-				onclick="$('#menu_image').val('');return false;"><?php translate("clear");?> </a>
+				onclick="$('#menu_image').val('');return false;"
+				class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear");?> </a>
 
 		</div>
 		<div class="typedep" id="tab-link">
@@ -447,7 +448,8 @@ function openMenuImageSelectWindow(field) {
             echo htmlspecialchars($row->og_image);
             ?>"
 						style="cursor: pointer" /> <a href="#"
-						onclick="$('#og_image').val('');return false;"><?php translate("clear");?>
+						onclick="$('#og_image').val('');return false;"
+						class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear");?>
 		</a>
 		<?php
             if (! empty($row->og_image)) {
@@ -694,7 +696,8 @@ function openMenuImageSelectWindow(field) {
 					readonly="readonly" onclick="openMenuImageSelectWindow(this)"
 					value="<?php Template::escape($row->image_url);?>"
 					style="cursor: pointer" /> <a href="#"
-					onclick="$('#menu_image').val('');return false;"><?php translate ( "clear" );?>
+					onclick="$('#menu_image').val('');return false;"
+					class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate ( "clear" );?>
 		</a>
 			</div>
 		</div>
@@ -744,7 +747,8 @@ function openArticleImageSelectWindow(field) {
 					readonly="readonly" onclick="openArticleImageSelectWindow(this)"
 					value="<?php echo real_htmlspecialchars($row->article_image);?>"
 					style="cursor: pointer" maxlength="255" /> <a href="#"
-					onclick="$('#article_image').val('');return false;"><?php translate("clear");?></a>
+					onclick="$('#article_image').val('');return false;"
+					class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear");?></a>
 			</div>
 		</div>
 		<div style="<?php echo !$permissionChecker->hasPermission("pages_edit_permissions") ? "display:none" : ""?>">
@@ -819,7 +823,7 @@ function openArticleImageSelectWindow(field) {
 				<p>
 					<a
 						href="<?php esc(ModuleHelper::buildMethodCallUrl(CommentsController::class, "filterComments", "content_id={$row->id}"));?>"
-						class="btn btn-default" target="_blank"><?php translate("comments_manage");?></a>
+						class="btn btn-default" target="_blank"><i class="fa fa-comments"></i> <?php translate("comments_manage");?></a>
 				</p>
                 <?php
             }
