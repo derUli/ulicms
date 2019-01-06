@@ -14,8 +14,7 @@ $entries[] = new MenuEntry('<i class="fa fa-file-image" aria-hidden="true"></i> 
     "videos",
     "audio"
 ));
-$entries[] = new MenuEntry('<i class="fa fa-user" aria-hidden="true"></i> ' . get_translation("users"), "?action=admins", "admins", "users");
-$entries[] = new MenuEntry('<i class="fa fa-users" aria-hidden="true"></i> ' . get_translation("groups"), "?action=groups", "groups", "groups");
+$entries[] = new MenuEntry('<i class="fa fa-user" aria-hidden="true"></i> ' . get_translation("users_and_groups"), "?action=admins", "admins", "users");
 
 $packagesAction = $_SESSION["package_view"];
 $entries[] = new MenuEntry('<i class="fas fa-box"></i> ' . get_translation("packages"), ModuleHelper::buildActionURL($packagesAction), "modules", "list_packages");

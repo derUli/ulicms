@@ -17,6 +17,7 @@ if (isset($_REQUEST["sort"]) and faster_in_array($_REQUEST["sort"], array(
 }
 
 ?>
+
 <?php if($permissionChecker->hasPermission("groups_create")){?>
 <p>
 	<a href="?action=groups&add=add" class="btn btn-default"> <i
