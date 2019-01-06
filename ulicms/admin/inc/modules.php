@@ -44,7 +44,7 @@ if (! $permissionChecker->hasPermission("list_packages")) {
 	<div class="col-xs-6">
 		<p>
 			<a href="?action=install_method" class="btn btn-warning"> <i
-				class="fa fa-plus"></i><?php translate("install_package");?></a>
+				class="fa fa-plus"></i> <?php translate("install_package");?></a>
 		</p>
 	</div>
 	<?php $switchViewUrl = ModuleHelper::buildMethodCallUrl ( PackageController::class, "switchView" );?>

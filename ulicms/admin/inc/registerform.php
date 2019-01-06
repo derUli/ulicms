@@ -8,11 +8,9 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
     
     $errors = false;
     if (isset($_POST["register_user"])) {
-        if($checkbox->isEnabled() and !$checkbox->isChecked()){
+        if ($checkbox->isEnabled() and ! $checkbox->isChecked()) {
             echo "<p style='color:red;'>" . get_translation("please_accept_privacy_conditions") . "</p>";
-            
-        }
-        else if (empty($_POST["admin_username"]) or empty($_POST["admin_password"]) or empty($_POST["admin_firstname"]) or empty($_POST["admin_lastname"])) {
+        } else if (empty($_POST["admin_username"]) or empty($_POST["admin_password"]) or empty($_POST["admin_firstname"]) or empty($_POST["admin_lastname"])) {
             echo "<p style='color:red;'>" . get_translation("FILL_ALL_FIELDS") . "</p>";
         } else if (user_exists($_POST["admin_username"])) {
             echo "<p style='color:red;'>" . get_translation("USERNAME_ALREADY_EXISTS") . "</p>";
@@ -38,7 +36,8 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
     do_event("before_register_form_title");
     ?>
 <p>
-	<a href="./" class="btn btn-default btn-back"><?php
+	<a href="./" class="btn btn-default btn-back"><i
+		class="fa fa-arrow-left"></i> <?php
     
     translate("back_to_login");
     ?></a>
@@ -85,7 +84,10 @@ if (Settings::get("visitors_can_register") == "off" or ! Settings::get("visitors
 		<?php
     echo $checkbox->render();
     ?></div>
-	<button type="submit" class="btn btn-primary"><?php translate("register");?></button>
+	<p class="voffset3">
+		<button type="submit" class="btn btn-primary">
+			<i class="fas fa-user-plus"></i> <?php translate("register");?></button>
+	</p>
 </form>
 <?php
     do_event("after_register_form");
