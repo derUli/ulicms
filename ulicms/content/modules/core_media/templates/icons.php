@@ -29,7 +29,7 @@ $notSelectedButton = "btn btn-default"?>
 	  <div class="btn-group" role="group">
 		<a href="<?php echo ModuleHelper::buildActionURL($action);?>"
 			class="<?php echo $action == $currentAction ? $selectedButton : $notSelectedButton; ?>">
-			<i class="<?php echo $cssClass?>"></i> <?php translate($action);?>
+			<i class="<?php echo $cssClass?>"></i><span class="hide-on-820"> <?php translate($action);?></span>
 		</a>
 	</div>
 	
