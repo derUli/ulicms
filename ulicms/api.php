@@ -785,7 +785,7 @@ function add_hook($name)
     do_event($name);
 }
 
-function do_event($name)
+function do_event($name, $runs = ModuleEventConstants::RUNS_ONCE)
 {
     // don't run this code on kcfinder page (media)
     // since the "Path" class has a naming conflict with the same named
@@ -810,9 +810,18 @@ function do_event($name)
         if ($controller and method_exists($controller, $escapedName)) {
             echo $controller->$escapedName();
         } else if (is_file($file1)) {
-            @include_once $file1;
+            if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
+                include $file1;
+            } else {
+                include_once $file1;
+            }
         } else if (is_file($file2)) {
-            @include_once $file2;
+            
+            if ($runs === ModuleEventConstants::RUNS_MULTIPLE) {
+                include $file1;
+            } else {
+                include_once $file2;
+            }
         }
     }
 }
