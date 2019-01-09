@@ -19,8 +19,8 @@ if (is_null($value)) {
 			data-kcfinder-type="<?php ViewBag::get("kcfinder_type") ? esc(ViewBag::get("kcfinder_type")) : "files"?>"
 			<?php if($field->required) echo "required";?>
 			<?php echo ModuleHelper::buildHTMLAttributesFromArray($field->htmlAttributes);?>
-			readonly> [<a href="#" class="clear-field"
-			data-for="#field-<?php Template::escape(ViewBag::get("field_name"));?>"><?php translate("clear")?></a>]
+			readonly> <a href="#" class="clear-field btn btn-default voffset2"
+			data-for="#field-<?php Template::escape(ViewBag::get("field_name"));?>"><?php translate("clear")?></a>
 		<?php if($field->helpText){?>
 	<br /> <small><?php translate($field->helpText);?></small>
 <?php }?>
