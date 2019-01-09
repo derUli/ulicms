@@ -45,6 +45,7 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
     {
         $type = get_type();
         $output = "";
+        
         switch ($type) {
             case "list":
                 $output = Template::executeDefaultOrOwnTemplate("list");
@@ -72,7 +73,10 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
                 }
                 break;
         }
+        
+        $output = apply_filter($output, "before_content");
         $output = apply_filter($output, "content");
+        $output = apply_filter($output, "after_content");
         echo $output;
     }
 

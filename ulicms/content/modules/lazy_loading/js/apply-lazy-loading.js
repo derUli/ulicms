@@ -1,3 +1,3 @@
 $(function() {
-	$('.lazy').lazy();
+	$('img[data-lazy]').lazy();
 });

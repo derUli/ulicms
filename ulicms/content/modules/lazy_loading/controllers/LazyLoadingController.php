@@ -49,6 +49,8 @@ class LazyLoadingController extends MainClass
             $newsrc = $placeHolderPic;
             $node->setAttribute('src', $newsrc);
             
+            $node->setAttribute('data-lazy', "true");
+            
             $oldsrcset = $node->getAttribute('srcset');
             $node->setAttribute('data-srcset', $oldsrcset);
             $newsrcset = '';
