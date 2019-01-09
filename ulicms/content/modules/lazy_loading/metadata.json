@@ -1,0 +1,10 @@
+{
+	"version": "1.7.9",
+	"embed": false,
+	"controllers": {
+		"LazyLoadingController": "controllers/LazyLoadingController.php"
+	},
+	"main_class": "LazyLoadingController",
+	"manufacturer_name": "Daniel 'Eisbehr' Kern",
+	"manufacturer_url": "http://jquery.eisbehr.de"
+}

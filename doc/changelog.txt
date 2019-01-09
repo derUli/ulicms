@@ -4,6 +4,10 @@ Neue Features:
 * Icon-Bar auf Medienseiten hinzugefügt
 * Icons zu allen Buttons hinzugefügt
 
+Neue Filter:
+* before_content
+* after_content
+
 Bugfixes:
 * Die Icons werden nun auch angezeigt, wenn das System nicht alle Emojis unterstützt.
 * Aufruf der Informationen über ein Modul schlagen nicht mehr manchmal fehl

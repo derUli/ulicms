@@ -645,6 +645,9 @@ function import($ipage)
         return false;
     } else {
         while ($row = db_fetch_object($query)) {
+						
+			$row->content = apply_filter($row->content, "before_content");
+			
             $data = CustomData::get();
             // it's possible to disable shortcodes for a page
             // define "disable_shortcodes in custom data / json
@@ -652,6 +655,7 @@ function import($ipage)
                 $row->content = replaceShortcodesWithModules($row->content);
                 $row->content = apply_filter($row->content, "content");
             }
+			$row->content = apply_filter($row->content, "after_content");
             echo $row->content;
             return true;
         }
