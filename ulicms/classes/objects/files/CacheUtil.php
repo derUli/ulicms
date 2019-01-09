@@ -74,6 +74,6 @@ class CacheUtil
 
     public static function getCurrentUid()
     {
-        return md5(get_request_uri() . getCurrentLanguage() . boolval(is_mobile()));
+        return md5(get_request_uri() . getCurrentLanguage() . boolval(is_mobile()) . boolval(is_crawler()));
     }
 }
