@@ -31,7 +31,7 @@ if (! $permissionChecker->hasPermission("install_packages")) {
             ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("upload_package");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i><?php translate("back")?></a>
 </p>
 <h1><?php
             
@@ -200,7 +200,7 @@ if (! $permissionChecker->hasPermission("install_packages")) {
                     "file" => basename($tempfile)
                 ));
                 ?>
-<button type="submit" class="btn btn-warning"><?php translate("install");?></button>
+<button type="submit" class="btn btn-warning"><i class="fas fa-box"></i> <?php translate("install");?></button>
 	</form>
 </div>
 <?php

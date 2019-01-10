@@ -7,7 +7,8 @@ if (! $permissionChecker->hasPermission ( "install_packages" )) {
 <p>
 	<a
 		href="<?php echo ModuleHelper::buildMethodCallUrl(PackageController::class, "redirectToPackageView");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+ <?php translate("back")?></a>
 </p>
 <h1><?php translate ( "install_package" );?></h1>
 <p>

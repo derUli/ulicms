@@ -1,5 +1,8 @@
 ===== Neues in UliCMS 2019.1.4 =====
 
+Neue Features:
+* Buttons in der install_method Action haben nun auch Icons
+
 Neue Filter:
 * before_content
 * after_content

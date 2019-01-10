@@ -8,7 +8,7 @@ if ($permissionChecker->hasPermission("install_packages")) {
 <p><?php translate("PACKAGE_SUCCESSFULL_UPLOADED", array("%file%" => $file));?></p>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("upload_package");?>"
-		class="btn btn-warning"><?php translate("install_another_package")?></a>
+		class="btn btn-warning"><i class="fas fa-box"></i> <?php translate("install_another_package")?></a>
 </p>
 <?php
     }

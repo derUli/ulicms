@@ -6,7 +6,8 @@ if (! $permissionChecker->hasPermission("install_packages")) {
     ?>
 <p>
 	<a href="<?php echo ModuleHelper::buildActionURL("install_method");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+ <?php translate("back")?></a>
 </p>
 <?php
     $temp_folder = ULICMS_DATA_STORAGE_ROOT . DIRECTORY_SEPARATOR . "content" . DIRECTORY_SEPARATOR . "tmp";
@@ -47,7 +48,7 @@ if (! $permissionChecker->hasPermission("install_packages")) {
     csrf_token_html();
     ?>
 	<input type="file" name="file"><br /> <br />
-	<button type="submit" class="btn btn-warning"><?php translate("install_package");?></button>
+	<button type="submit" class="btn btn-warning"><i class="fa fa-upload" aria-hidden="true"></i> <?php translate("install_package");?></button>
 </form>
 
 
