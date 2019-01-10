@@ -11,16 +11,17 @@ if (! $permissionChecker->hasPermission ( "install_packages" )) {
 </p>
 <h1><?php translate ( "install_package" );?></h1>
 <p>
-	<a href="?action=upload_package" class="btn btn-default"><?php translate("upload_file");?>
+	<a href="?action=upload_package" class="btn btn-default">
+<i class="fa fa-upload"></i> <?php translate("upload_file");?>
 	</a>
 </p>
 <p>
-	<a href="?action=available_modules" class="btn btn-default"><?php translate ( "from_the_package_source" );?>
+	<a href="?action=available_modules" class="btn btn-default"><i class="fas fa-box"></i> <?php translate ( "from_the_package_source" );?>
 	</a>
 </p>
 <p>
 	<a href="http://extend.ulicms.de" class="btn btn-default"
-		target="_blank">UliCMS eXtend</a>
+		target="_blank"><i class="fas fa-store-alt"></i> UliCMS eXtend</a>
 </p>
 
 <?php
