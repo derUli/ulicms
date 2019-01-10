@@ -2909,6 +2909,11 @@ pre,
 .tooltip-inner,
 .popover,
 .popover-title,
-.carousel-indicators li {
+.carousel-indicators li
+ {
     border-radius:0 !important;
+}
+
+[class^='select2'] {
+  border-radius: 0px !important;
 }
