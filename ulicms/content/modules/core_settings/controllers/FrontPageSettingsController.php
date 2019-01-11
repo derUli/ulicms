@@ -9,10 +9,10 @@ class FrontPageSettingsController extends Controller
         for ($i = 0; $i < count($languages); $i ++) {
             $lang = $languages[$i];
             if (isset($_POST["frontpage_" . $lang])) {
-                $page = db_escape($_POST["frontpage_" . $lang]);
-                setconfig("frontpage_" . $lang, $page);
+                $page = $_POST["frontpage_" . $lang];
+                Settings::set("frontpage_" . $lang, $page);
                 if ($lang == Settings::get("default_language")) {
-                    setconfig("frontpage", $page);
+                    Settings::set("frontpage", $page);
                 }
             }
         }

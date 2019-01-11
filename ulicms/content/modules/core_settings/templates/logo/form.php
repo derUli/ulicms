@@ -38,6 +38,25 @@ if ($permissionChecker->hasPermission("logo")) {
 		
 		
 		<tr>
+			<td><strong><?php translate("hide_logo")?></strong></td>
+			<td><select name="logo_disabled" size=1>
+					<option
+						<?php
+    if (Settings::get("logo_disabled") == "yes") {
+        echo 'selected ';
+    }
+    ?>
+						value="yes"><?php translate("yes");?></option>
+					<option
+						<?php
+    if (Settings::get("logo_disabled") != "yes") {
+        echo 'selected ';
+    }
+    ?>
+						value="no"><?php translate("no");?></option>
+			</select></td>
+		</tr>
+		<tr>
 			<td width="480"><strong><?php translate("upload_new_logo");?>
 			</strong></td>
 			<td><input name="logo_upload_file" type="file"></td>

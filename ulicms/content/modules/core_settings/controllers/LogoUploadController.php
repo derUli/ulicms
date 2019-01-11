@@ -24,13 +24,15 @@ class LogoUploadController extends Controller
                     GoogleCloudHelper::changeFileVisiblity($new_filename, true);
                 }
                 
-                setconfig("logo_image", $logo_upload_filename);
+                Settings::set("logo_image", $logo_upload_filename);
                 do_event("after_upload_logo_successfull");
                 Request::redirect(ModuleHelper::buildActionURL("logo_upload"));
             }
             
             do_event("after_upload_logo");
-            Request::redirect(ModuleHelper::buildActionURL("logo_upload"));
         }
+        
+        Settings::set("logo_disabled", Request::getVar("logo_disabled", "no", "str"));
+        Request::redirect(ModuleHelper::buildActionURL("logo_upload"));
     }
 }

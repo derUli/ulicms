@@ -3,6 +3,9 @@
 Neue Features:
 * Weitere Buttons mit Icons versehen
 
+Verbesserungen:
+* Option "Logo ausblenden" auf die "Logo" Seite verschoben
+
 Neue Filter:
 * before_content
 * after_content

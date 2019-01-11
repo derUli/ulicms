@@ -14,7 +14,6 @@ class SimpleSettingsController extends Controller
         setconfig("maintenance_mode", intval(isset($_POST["maintenance_mode"])));
         setconfig("email", db_escape($_POST["email"]));
         setconfig("max_news", (int) $_POST["max_news"]);
-        setconfig("logo_disabled", db_escape($_POST["logo_disabled"]));
         setconfig("timezone", db_escape($_POST["timezone"]));
         setconfig("robots", db_escape($_POST["robots"]));
         
