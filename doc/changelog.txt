@@ -2,6 +2,7 @@
 
 Neue Features:
 * Weitere Buttons mit Icons versehen
+* Neue Sicherheitsoption "Erlauben diese Webseite in andere Sites einzubinden"
 
 Verbesserungen:
 * Option "Logo ausblenden" auf die "Logo" Seite verschoben

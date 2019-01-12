@@ -72,6 +72,13 @@ class OtherSettingsController extends Controller
         if (isset($_POST["smtp_password"])) {
             setconfig("smtp_password", db_escape($_POST["smtp_password"]));
         }
+        
+        if (Request::getVar("x_frame_options", "", "str")) {
+            Settings::set("x_frame_options", Request::getVar("x_frame_options", "", "str"));
+        } else {
+            Settings::delete("x_frame_options");
+        }
+        
         Request::redirect(ModuleHelper::buildActionURL("other_settings"));
     }
 }

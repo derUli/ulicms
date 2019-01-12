@@ -39,6 +39,13 @@ if (! $permissionChecker->hasPermission("other")) {
     $smtp_auth = Settings::get("smtp_auth");
     $no_auto_cron = Settings::get("no_auto_cron");
     $twofactor_authentication = Settings::get("twofactor_authentication");
+    
+    $x_frame_options = Settings::get("x_frame_options");
+    $xFrameOptionsItems = array(
+        new UliCMS\HTML\ListItem("", get_translation("allow")),
+        new UliCMS\HTML\ListItem("SAMEORIGIN", get_translation("sameorigin")),
+        new UliCMS\HTML\ListItem("DENY", get_translation("deny"))
+    );
     ?>
 <?php
     echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", array(), "post", array(
@@ -137,7 +144,12 @@ if (! $permissionChecker->hasPermission("other")) {
     echo intval($max_failed_logins_items);
     ?>" />
 		</div>
+		<h2><?php translate("http_headers");?></h2>
+		<div class="form-group">
 
+			<label for="x_frame_options"><?php translate("x_frame_options")?></label>
+			<?php echo UliCMS\HTML\Input::SingleSelect("x_frame_options", $x_frame_options, $xFrameOptionsItems);?>
+		</div>
 		<h2><?php translate("google_authenticator");?></h2>
 		<div class="label">
 			<label for="twofactor_authentication"><?php
