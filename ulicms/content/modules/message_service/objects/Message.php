@@ -35,6 +35,29 @@ class Message extends Model
         $this->sender_id = $result->sender_id ? intval($result->sender_id) : null;
     }
 
+    protected function insert()
+    {
+        Database::pQuery("insert into {prefix}messages
+                          (message, receiver_id, sender_id)
+                          values
+                          (?,?,?)", array(
+            $this->message,
+            $this->receiver_id,
+            $this->sender_id
+        ), true);
+        $this->setID(Database::getLastInsertID());
+    }
+
+    protected function update()
+    {
+        Database::pQuery("update {prefix}message set message = ?, receiver_id = ?, sender_id = ? where id = ?", array(
+            $this->message,
+            $this->receiver_id,
+            $this->sender_id,
+            $this->getID()
+        ), true);
+    }
+
     public function getFormattedMessage()
     {
         // TODO: do format
@@ -71,6 +94,31 @@ class Message extends Model
         }
     }
 
+    public function setMessage($val)
+    {
+        $this->message = ! is_null($val) ? strval($val) : null;
+    }
+
+    public function setSenderId($val)
+    {
+        $this->sender_id = ! is_null($val) ? intval($val) : null;
+    }
+
+    public function setSender($val)
+    {
+        $this->sender_id = $val instanceof User ? $val->getID() : null;
+    }
+
+    public function setReceiverId($val)
+    {
+        $this->receiver_id = ! is_null($val) ? intval($val) : null;
+    }
+
+    public function setReceiver($val)
+    {
+        $this->receiver_id = $val instanceof User ? $val->getID() : null;
+    }
+
     public function delete()
     {
         if ($this->getID()) {
@@ -81,7 +129,12 @@ class Message extends Model
 
     public static function getAll()
     {
-        throw new NotImplementedException();
+        $messages = array();
+        $query = Database::pQuery("select id from {prefix}messages", array(), true);
+        while ($row = Database::fetchObject($query)) {
+            $messages[] = new Message($row->id);
+        }
+        return $messages;
     }
 
     public static function getAllWithReceiver($receiver_id)
