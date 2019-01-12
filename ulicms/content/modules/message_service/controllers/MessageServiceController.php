@@ -18,10 +18,10 @@ class MessageServiceController extends MainClass
             $message->delete();
         }
         
-        $js = "$(function(){";
-        $js .= "var messages = " . json_encode($texts) . ";";
-        $js .= "messages.forEach(function(element) {alert(element)});";
-        $js .= "});";
+        $js = '$(function(){';
+        $js .= 'var messages = ' . json_encode($texts) . ';';
+        $js .= 'messages.forEach(function(element){alert(element);});';
+        $js .= '});';
         echo Script::FromString($js);
     }
 }
