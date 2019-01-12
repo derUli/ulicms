@@ -1,0 +1,11 @@
+{
+	"source": "extend",
+	"embed": false,
+	"controllers": {
+		"MessageServiceController": "controllers/MessageServiceController.php"
+	},
+	"objects": {
+		"Message": "objects/Message.php"
+	},
+	"main_class": "MessageServiceController"
+}
