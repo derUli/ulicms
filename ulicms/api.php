@@ -1604,6 +1604,11 @@ function is_tablet()
     return $result;
 }
 
+function is_desktop()
+{
+    return ! is_mobile();
+}
+
 // 21. Februar 2015
 // Nutzt nun die Klasse Mobile_Detect
 function is_mobile()

@@ -6,6 +6,9 @@ Neue Features:
 Verbesserungen:
 * Option "Logo ausblenden" auf die "Logo" Seite verschoben
 
+Neue API-Funktionen:
+* is_desktop()
+
 Neue Filter:
 * before_content
 * after_content
