@@ -1,11 +1,16 @@
 <?php
 use UliCMS\HTML\Script;
+use UliCMS\Security\PermissionChecker;
 
 class MessageServiceController extends MainClass
 {
 
     public function backendFooter()
     {
+        $permissionChecker = new PermissionChecker(get_user_id());
+        if (! $permissionChecker->hasPermission("receive_messages")) {
+            return;
+        }
         $messages = Message::getAllWithReceiver(get_user_id());
         $texts = array();
         foreach ($messages as $message) {

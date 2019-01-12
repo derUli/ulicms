@@ -130,7 +130,7 @@ class Message extends Model
     public static function getAll()
     {
         $messages = array();
-        $query = Database::pQuery("select id from {prefix}messages", array(), true);
+        $query = Database::pQuery("select id from {prefix}messages order by id", array(), true);
         while ($row = Database::fetchObject($query)) {
             $messages[] = new Message($row->id);
         }
@@ -140,7 +140,7 @@ class Message extends Model
     public static function getAllWithReceiver($receiver_id)
     {
         $messages = array();
-        $query = Database::pQuery("select id from {prefix}messages where receiver_id = ?", array(
+        $query = Database::pQuery("select id from {prefix}messages where receiver_id = ? order by id", array(
             intval($receiver_id)
         ), true);
         while ($row = Database::fetchObject($query)) {

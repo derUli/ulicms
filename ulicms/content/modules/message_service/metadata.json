@@ -7,5 +7,10 @@
 	"objects": {
 		"Message": "objects/Message.php"
 	},
-	"main_class": "MessageServiceController"
+	"main_class": "MessageServiceController",
+	"custom_acl": [
+		"receive_messages",
+		"send_messages"
+	],
+	"admin_permission": "send_messages"
 }
