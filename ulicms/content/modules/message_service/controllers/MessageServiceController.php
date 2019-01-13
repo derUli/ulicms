@@ -1,6 +1,8 @@
 <?php
 use UliCMS\HTML\Script;
 use UliCMS\Security\PermissionChecker;
+use UliCMS\HTML\ListItem;
+use UliCMS\Exceptions\NotImplementedException;
 
 class MessageServiceController extends MainClass
 {
@@ -39,16 +41,30 @@ class MessageServiceController extends MainClass
 
     public function settings()
     {
+        $userManager = new UserManager();
+        
+        $userList = array();
+        $users = $userManager->getLockedUsers(false);
+        foreach ($users as $user) {
+            $userList[] = new ListItem($user->getId(), $user->getUsername());
+        }
+        
+        ViewBag::set("users", $userList);
         return Template::executeModuleTemplate(self::MODULE_NAME, "form.php");
     }
 
     public function getSettingsHeadline()
     {
-        return get_translation("messages");
+        return get_translation("write_a_message");
+    }
+
+    public function sendMessage()
+    {
+        throw new NotImplementedException();
     }
 
     public function getSettingsLinkText()
     {
-        return get_translation("messages");
+        return get_translation("write_a_message");
     }
 }

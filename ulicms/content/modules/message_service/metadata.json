@@ -4,6 +4,9 @@
 	"controllers": {
 		"MessageServiceController": "controllers/MessageServiceController.php"
 	},
+	"controller_function_permissions": {
+		"MessageServiceController::sendMessage": "send_messages"
+	},
 	"objects": {
 		"Message": "objects/Message.php"
 	},

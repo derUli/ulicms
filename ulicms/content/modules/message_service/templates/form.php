@@ -1,3 +1,28 @@
-<p>
-	<i class="fas fa-wrench"></i> Coming Soon
-</p>
+<?php echo ModuleHelper::buildMethodCallForm(MessageServiceController::class, "sendMessage");?>
+
+<label for="receivers"><?php translate("receivers")?> <span
+	class="text-red">*</span></label>
+<?php
+echo UliCMS\HTML\Input::MultiSelect("receivers[]", array(), ViewBag::get("users"), 5, array(
+    "required" => "required",
+    "id" => "receivers",
+    "class" => "form-control"
+));
+?>
+<label for="message"><?php translate("message");?> <span
+	class="text-red">*</span></label>
+<?php
+
+echo UliCMS\HTML\Input::TextArea("message", "", 7, 80, array(
+    "required" => "required",
+    "id" => "receivers",
+    "class" => "form-control",
+    "maxlength" => "900"
+));
+?>
+<small><?php translate("max_900_letters")?></small>
+<div class="form-group voffset2">
+	<button type="submit" class="btn btn-primary">
+		<i class="fas fa-envelope"></i> <?php translate("send_message");?></button>
+</div>
+<?php echo ModuleHelper::endForm();?>
