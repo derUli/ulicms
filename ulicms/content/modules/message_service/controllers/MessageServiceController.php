@@ -46,7 +46,10 @@ class MessageServiceController extends MainClass
         $userList = array();
         $users = $userManager->getLockedUsers(false);
         foreach ($users as $user) {
-            $userList[] = new ListItem($user->getId(), $user->getUsername());
+            $permissionChecker = new PermissionChecker($user->getId());
+            if ($permissionChecker->hasPermission("receive_messages")) {
+                $userList[] = new ListItem($user->getId(), $user->getUsername());
+            }
         }
         
         ViewBag::set("users", $userList);

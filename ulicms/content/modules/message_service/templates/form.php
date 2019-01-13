@@ -1,3 +1,9 @@
+<?php if(Request::getVar("sent", 0, "int")){?>
+<div class="alert alert-success alert-dismissible">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<?php translate("message_sent_successfully")?>
+</div>
+<?php }?>
 <?php echo ModuleHelper::buildMethodCallForm(MessageServiceController::class, "sendMessage");?>
 
 <label for="receivers"><?php translate("receivers")?> <span
