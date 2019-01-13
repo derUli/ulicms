@@ -84,4 +84,10 @@ class MessageServiceController extends MainClass
     {
         return get_translation("write_a_message");
     }
+
+    public function uninstall()
+    {
+        $migrator = new DBMigrator("module/message_service", ModuleHelper::buildModuleRessourcePath("message_service", "sql/down"));
+        $migrator->rollback();
+    }
 }
