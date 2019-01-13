@@ -64,7 +64,6 @@ class MessageServiceController extends MainClass
         if (! is_array($receivers) || empty($messageText)) {
             ExceptionResult(get_translation("fill_all_fields"), HttpStatusCode::BAD_REQUEST);
         }
-        var_dump($receivers);
         foreach ($receivers as $receiver) {
             $message = new Message();
             $message->setSenderId(get_user_id());
