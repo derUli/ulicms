@@ -66,6 +66,11 @@ class Message extends Model
         return $message;
     }
 
+    public function send()
+    {
+        $this->save();
+    }
+
     public function getMessage()
     {
         return $this->message;

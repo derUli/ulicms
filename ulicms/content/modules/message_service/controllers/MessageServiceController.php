@@ -70,7 +70,7 @@ class MessageServiceController extends MainClass
             $message->setSenderId(get_user_id());
             $message->setReceiverId($receiver);
             $message->setMessage($messageText);
-            $message->save();
+            $message->send();
         }
         Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME, "sent=1"));
     }

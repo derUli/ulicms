@@ -93,7 +93,7 @@ class ArrayHelperTest extends TestCase
         $message->setSenderId($testUser1->getId());
         $message->setReceiverId($testUser2->getId());
         $message->setMessage("Foo Bar");
-        $message->save();
+        $message->send();
         
         $this->assertNotNull($message->getID());
         
@@ -116,7 +116,7 @@ class ArrayHelperTest extends TestCase
         $message->setSenderId($testUser2->getId());
         $message->setReceiverId($testUser3->getId());
         $message->setMessage("Another Test");
-        $message->save();
+        $message->send();
         
         $message = new Message($id);
         
@@ -157,7 +157,7 @@ class ArrayHelperTest extends TestCase
             $message->setSenderId($testUser1->getId());
             $message->setReceiverId($testUser2->getId());
             $message->setMessage("Message $i");
-            $message->save();
+            $message->send();
         }
         $allMessages = Message::getAll();
         
@@ -179,7 +179,7 @@ class ArrayHelperTest extends TestCase
             $message->setSenderId($testUser1->getId());
             $message->setReceiverId($testUser2->getId());
             $message->setMessage("Message $i");
-            $message->save();
+            $message->send();
         }
         
         for ($i = 1; $i <= 2; $i ++) {
@@ -189,7 +189,7 @@ class ArrayHelperTest extends TestCase
             $message->setSenderId($testUser2->getId());
             $message->setReceiverId($testUser3->getId());
             $message->setMessage("Message $i");
-            $message->save();
+            $message->send();
         }
         $allMessages = Message::getAllWithReceiver($testUser3->getId());
         
