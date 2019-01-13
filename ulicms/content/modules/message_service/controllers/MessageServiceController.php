@@ -53,14 +53,28 @@ class MessageServiceController extends MainClass
         return Template::executeModuleTemplate(self::MODULE_NAME, "form.php");
     }
 
+    public function sendMessage()
+    {
+        $receivers = Request::getVar("receivers", array());
+        $messageText = Request::getVar("message", "", "str");
+        
+        if (! is_array($receivers) || empty($messageText)) {
+            ExceptionResult(get_translation("fill_all_fields"), HttpStatusCode::BAD_REQUEST);
+        }
+        var_dump($receivers);
+        foreach ($receivers as $receiver) {
+            $message = new Message();
+            $message->setSenderId(get_user_id());
+            $message->setReceiverId($receiver);
+            $message->setMessage($messageText);
+            $message->save();
+        }
+        Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME, "sent=1"));
+    }
+
     public function getSettingsHeadline()
     {
         return get_translation("write_a_message");
-    }
-
-    public function sendMessage()
-    {
-        throw new NotImplementedException();
     }
 
     public function getSettingsLinkText()
