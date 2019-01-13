@@ -6,9 +6,12 @@ Neue Features:
 
 Verbesserungen:
 * Option "Logo ausblenden" auf die "Logo" Seite verschoben
+* Automatische Übersetzungsfunktion des Google Chrome Browsers im Backend deaktiviert
 
 Neue API-Funktionen:
 * is_desktop()
+* User->getPermissionChecker()
+* User->hasPermission($permission)
 
 Neue Filter:
 * before_content

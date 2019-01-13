@@ -19,6 +19,8 @@ if (! file_exists($select2TranslationFile)) {
 <meta name="viewport"
 	content="width=device-width, user-scalable=yes, initial-scale=1" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="google" content="notranslate" />
+
 <title>[<?php Template::escape(Settings::get("homepage_title"));?>] - UliCMS</title>
 
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
