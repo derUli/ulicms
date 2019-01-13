@@ -52,7 +52,7 @@ class BackendPageRenderer
             ob_start();
         }
         
-        include "inc/head.php";
+        include "inc/header.php";
         
         if (! is_logged_in()) {
             if (isset($_GET["register"])) {
