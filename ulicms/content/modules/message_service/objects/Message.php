@@ -50,7 +50,7 @@ class Message extends Model
 
     protected function update()
     {
-        Database::pQuery("update {prefix}message set message = ?, receiver_id = ?, sender_id = ? where id = ?", array(
+        Database::pQuery("update {prefix}messages set message = ?, receiver_id = ?, sender_id = ? where id = ?", array(
             $this->message,
             $this->receiver_id,
             $this->sender_id,
