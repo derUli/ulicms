@@ -1,5 +1,6 @@
 {
 	"source": "extend",
+	"version": "1.0.0",
 	"embed": false,
 	"controllers": {
 		"MessageServiceController": "controllers/MessageServiceController.php"

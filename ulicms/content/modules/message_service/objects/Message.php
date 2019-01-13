@@ -60,8 +60,10 @@ class Message extends Model
 
     public function getFormattedMessage()
     {
-        // TODO: do format
-        return $this->getMessage();
+        $message = "Absender: " . $this->getSender()->getUsername() . "\n\n";
+        $message .= normalizeLN($this->getMessage(), "\n");
+        $message = trim($message);
+        return $message;
     }
 
     public function getMessage()
