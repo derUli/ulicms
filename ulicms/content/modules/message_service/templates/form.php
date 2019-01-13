@@ -25,7 +25,7 @@ echo UliCMS\HTML\Input::MultiSelect("receivers[]", array(), ViewBag::get("users"
 <?php
 echo UliCMS\HTML\Input::TextArea("message", "", 7, 80, array(
     "required" => "required",
-    "id" => "receivers",
+    "id" => "message",
     "class" => "form-control",
     "maxlength" => "900"
 ));
