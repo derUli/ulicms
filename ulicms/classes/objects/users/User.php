@@ -1,5 +1,6 @@
 <?php
 use UliCMS\Exceptions\NotImplementedException;
+use UliCMS\Security\PermissionChecker;
 
 class User
 {
@@ -552,6 +553,16 @@ class User
             }
         }
         return $filtered;
+    }
+
+    public function getPermissionChecker()
+    {
+        return new PermissionChecker($this->getId());
+    }
+
+    public function hasPermission($permission)
+    {
+        return $this->getPermissionChecker()->hasPermission($permission);
     }
 
     private function loadGroups($user_id)

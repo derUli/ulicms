@@ -9,6 +9,8 @@ Verbesserungen:
 
 Neue API-Funktionen:
 * is_desktop()
+* User->getPermissionChecker()
+* User->hasPermission($permission)
 
 Neue Filter:
 * before_content
