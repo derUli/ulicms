@@ -29,7 +29,18 @@ class SqlStudioController extends MainClass
 
     public function executeSql()
     {
-        // Mock, TODO: Load Data
+        $sql = Request::getVar("sql_code", "", "str");
+        if (StringHelper::isNullOrWhitespace($sql)) {
+            HtmlResult("");
+        }
+        $result = @Database::query($sql, true);
+        if (! $result || Database::getError($result)) {
+            ViewBag::set("error", Database::getError());
+            $html = Template::executeModuleTemplate(self::MODULE_NAME, "error.php");
+            HTMLResult($html);
+        }
+        ViewBag::set("result", $result);
+        // Mock, TODO: Split sql statements, show multiple tables
         $html = Template::executeModuleTemplate(self::MODULE_NAME, "table.php");
         HtmlResult($html);
     }
