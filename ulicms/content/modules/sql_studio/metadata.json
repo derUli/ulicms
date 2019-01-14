@@ -1,0 +1,13 @@
+{
+	"source": "extend",
+	"version": "0.1",
+	"embed": false,
+	"custom_acl": [
+		"sql_studio"
+	],
+	"admin_permission": "sql_studio",
+	"controllers": {
+		"SqlStudioController": "controllers/SqlStudioController.php"
+	},
+	"main_class": "SqlStudioController"
+}
