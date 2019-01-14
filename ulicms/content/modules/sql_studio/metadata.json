@@ -9,5 +9,8 @@
 	"controllers": {
 		"SqlStudioController": "controllers/SqlStudioController.php"
 	},
+	"controller_function_permissions": {
+		"SqlStudioController::executeSql": "sql_studio"
+	},
 	"main_class": "SqlStudioController"
 }

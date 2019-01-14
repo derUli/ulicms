@@ -1,0 +1,9 @@
+@media only screen and (min-width: 1000px) {
+	.sql-studio-ui .tables ul {
+		max-height: 60vh;
+		overflow: auto;
+	}
+	.sql-studio-ui #result-data {
+		max-height: 50vh;
+	}
+}
