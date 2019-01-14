@@ -5,6 +5,7 @@ $(function() {
 				var sql = $(this).data("sql");
 				$("#sql_code").next('.CodeMirror').get(0).CodeMirror.getDoc()
 						.setValue(sql);
+				$("#btn-execute").click();
 			});
 
 	$("#btn-execute").click(function(event) {
@@ -18,7 +19,14 @@ $(function() {
 			url : url,
 			data : form.serialize(), // serializes the form's elements.
 			success : function(response) {
-				$("#result-data").html(response).slideDown();
+				$("#result-data").html(response)
+				$("#result-data .tablesorter").DataTable({
+					language : {
+						url : $("body").data("datatables-translation")
+					}
+				});
+				$("#result-data").slideDown();
+
 			},
 			error : function(jqXHR, exception) {
 				if (jqXHR.status === 0) {
