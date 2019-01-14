@@ -8,17 +8,17 @@ class SimpleSettingsController extends Controller
     public function savePost()
     {
         do_event("before_safe_simple_settings");
-        setconfig("homepage_owner", db_escape($_POST["homepage_owner"]));
-        setconfig("language", db_escape($_POST["language"]));
-        setconfig("visitors_can_register", intval(isset($_POST["visitors_can_register"])));
-        setconfig("maintenance_mode", intval(isset($_POST["maintenance_mode"])));
-        setconfig("email", db_escape($_POST["email"]));
-        setconfig("max_news", (int) $_POST["max_news"]);
-        setconfig("timezone", db_escape($_POST["timezone"]));
-        setconfig("robots", db_escape($_POST["robots"]));
+        Settings::set("homepage_owner", $_POST["homepage_owner"]);
+        Settings::set("language", $_POST["language"]);
+        Settings::set("visitors_can_register", intval(isset($_POST["visitors_can_register"])));
+        Settings::set("maintenance_mode", intval(isset($_POST["maintenance_mode"])));
+        Settings::set("email", $_POST["email"]);
+        Settings::set("max_news", (int) $_POST["max_news"]);
+        Settings::set("timezone", $_POST["timezone"]);
+        Settings::set("robots", $_POST["robots"]);
         
         if (! isset($_POST["disable_password_reset"])) {
-            setconfig("disable_password_reset", "disable_password_reset");
+            Settings::set("disable_password_reset", "disable_password_reset");
         } else {
             Settings::delete("disable_password_reset");
         }

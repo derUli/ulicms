@@ -12,10 +12,10 @@ class MottoController extends Controller
                 
                 $lang = $languages[$i];
                 if (isset($_POST["motto_" . $lang])) {
-                    $page = db_escape($_POST["motto_" . $lang]);
-                    setconfig("motto_" . $lang, $page);
+                    $page = $_POST["motto_" . $lang];
+                    Settings::set("motto_" . $lang, $page);
                     if ($lang == Settings::get("default_language")) {
-                        setconfig("motto", $page);
+                        Settings::set("motto", $page);
                     }
                 }
             }

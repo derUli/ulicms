@@ -17,13 +17,13 @@ class PrivacyController extends Controller
         if (! isset($_POST["log_ip"])) {
             Settings::delete("log_ip");
         } else {
-            setconfig("log_ip", "log_ip");
+            Settings::set("log_ip", "log_ip");
         }
         
         if (! isset($_POST["delete_ips_after_48_hours"])) {
             Settings::delete("delete_ips_after_48_hours");
         } else {
-            setconfig("delete_ips_after_48_hours", "delete_ips_after_48_hours");
+            Settings::set("delete_ips_after_48_hours", "delete_ips_after_48_hours");
         }
         
         if (isset($_POST["keep_spam_ips"])) {
