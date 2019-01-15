@@ -17,7 +17,7 @@ while ($row = Database::fetchRow($result)) {
     
     foreach ($row as $cell) {
         ?>
-			    <td><?php esc(!is_null($cell) ? $cell : "[NULL]");?></td>
+			    <td><?php echo nl2br(_esc(!is_null($cell) ? $cell : "[NULL]"));?></td>
 			    <?php
     }
     ?>
