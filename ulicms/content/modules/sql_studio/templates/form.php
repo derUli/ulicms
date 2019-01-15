@@ -1,5 +1,6 @@
-<?php $sql = "";?>
 <?php
+$sql = "";
+$execute_select_statements = (Settings::get("sql_studio/table_name_onclick_action") == "generate_and_execute_select_statement");
 
 echo ModuleHelper::buildMethodCallForm(SqlStudioController::class, "executeSql", array(), RequestMethod::POST, array(
     "class" => "sql-studio-ui"
@@ -13,6 +14,7 @@ echo ModuleHelper::buildMethodCallForm(SqlStudioController::class, "executeSql",
 			<?php foreach(ViewBag::get("tables") as $table){?>
 		<li><a href="#"
 					data-sql="select * from <?php esc(Database::escapeName($table));?>;"
+					data-execute="<?php echo strbool($execute_select_statements);?>"
 					class="btn btn-link"><i class="fa fa-table" aria-hidden="true"></i>
 					 <?php esc($table);?></a></li>
 		<?php }?>

@@ -3,9 +3,12 @@ $(function() {
 			function(event) {
 				event.preventDefault();
 				var sql = $(this).data("sql");
+				var execute = $(this).data("execute");
 				$("#sql_code").next('.CodeMirror').get(0).CodeMirror.getDoc()
 						.setValue(sql);
-				$("#btn-execute").click();
+				if (execute) {
+					$("#btn-execute").click();
+				}
 			});
 
 	$("#btn-execute").click(
