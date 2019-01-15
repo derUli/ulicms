@@ -34,9 +34,17 @@ class SqlStudioController extends MainClass
             HtmlResult("");
         }
         $result = @Database::query($sql, true);
-        if (! $result || Database::getError($result)) {
+        if (! $result || Database::getError()) {
             ViewBag::set("error", Database::getError());
             $html = Template::executeModuleTemplate(self::MODULE_NAME, "error.php");
+            HTMLResult($html);
+        }
+        $affectedRows = Database::getAffectedRows();
+        if (is_bool($result) and $result) {
+            ViewBag::set("success", get_translation("x_rows_affected", array(
+                "%x" => $affectedRows
+            )));
+            $html = Template::executeModuleTemplate(self::MODULE_NAME, "success.php");
             HTMLResult($html);
         }
         ViewBag::set("result", $result);
