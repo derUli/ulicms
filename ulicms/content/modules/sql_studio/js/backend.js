@@ -34,6 +34,10 @@ $(function() {
 					error : function(jqXHR, exception) {
 						if (jqXHR.status === 0) {
 							bootbox.alert('Not connect.\n Verify Network.');
+						} else if (jqXHR.status == 401) {
+							bootbox.alert('Unauthorizend. [401]');
+						} else if (jqXHR.status == 403) {
+							bootbox.alert('Forbidden. [403]');
 						} else if (jqXHR.status == 404) {
 							bootbox.alert('Requested page not found. [404]');
 						} else if (jqXHR.status == 500) {
