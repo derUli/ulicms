@@ -1,5 +1,4 @@
 <?php
-use UliCMS\Exceptions\NotImplementedException;
 
 class SqlStudioController extends MainClass
 {
@@ -30,7 +29,13 @@ class SqlStudioController extends MainClass
 
     public function saveSettings()
     {
-        throw new NotImplementedException();
+        $replace_placeholders = intval(Request::getVar("replace_placeholders", 0, "int"));
+        Settings::set("sql_studio/replace_placeholders", $replace_placeholders);
+        
+        $replace_placeholders = Request::getVar("table_name_onclick_action", "generate_and_execute_select_statement", "str");
+        Settings::set("sql_studio/table_name_onclick_action", $replace_placeholders);
+        
+        Response::redirect(ModuleHelper::buildAdminURL(self::MODULE_NAME));
     }
 
     public function executeSql()
