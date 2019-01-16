@@ -3,14 +3,22 @@
 	"version": "0.1",
 	"embed": false,
 	"custom_acl": [
-		"sql_studio"
+		"sql_studio",
+		"sql_studio_settings"
 	],
 	"admin_permission": "sql_studio",
 	"controllers": {
 		"SqlStudioController": "controllers/SqlStudioController.php"
 	},
 	"controller_function_permissions": {
-		"SqlStudioController::executeSql": "sql_studio"
+		"SqlStudioController::executeSql": "sql_studio",
+		"SqlStudioController::saveSettings": "sql_studio_settings"
 	},
-	"main_class": "SqlStudioController"
+	"main_class": "SqlStudioController",
+	"actions": {
+		"sql_studio_settings": "templates/settings.php"
+	},
+	"action_permissions": {
+		"sql_studio_settings": "sql_studio_settings"
+	}
 }

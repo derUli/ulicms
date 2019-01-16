@@ -1,6 +1,10 @@
 <?php
+use UliCMS\Security\PermissionChecker;
+
 $sql = "";
 $execute_select_statements = (Settings::get("sql_studio/table_name_onclick_action") == "generate_and_execute_select_statement");
+
+$permissionChecker = new PermissionChecker(get_user_id());
 
 echo ModuleHelper::buildMethodCallForm(SqlStudioController::class, "executeSql", array(), RequestMethod::POST, array(
     "class" => "sql-studio-ui"
@@ -36,6 +40,13 @@ echo UliCMS\HTML\Input::TextArea("sql_code", $sql, 10, 80, array(
 			<button type="button" id="btn-execute" class="btn btn-primary">
 				<i class="fa fa-bolt" aria-hidden="true"></i>
 			 <?php translate("execute");?></button>
+<?php if($permissionChecker->hasPermission("sql_studio_settings")){?>
+			<a
+				href="<?php echo ModuleHelper::buildActionURL("sql_studio_settings")?>"
+				class="pull-right btn btn-primary"> <i class="fa fa-wrench"
+				aria-hidden="true"></i>
+			 <?php translate("settings");?></a>
+			 <?php }?>
 		</div>
 		<div class="scroll result-table voffset2">
 			<label><?php translate("results")?></label> <i

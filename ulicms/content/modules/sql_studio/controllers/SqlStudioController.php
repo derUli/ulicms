@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Exceptions\NotImplementedException;
 
 class SqlStudioController extends MainClass
 {
@@ -27,13 +28,21 @@ class SqlStudioController extends MainClass
         combinedStylesheetHtml();
     }
 
+    public function saveSettings()
+    {
+        throw new NotImplementedException();
+    }
+
     public function executeSql()
     {
         $sql = Request::getVar("sql_code", "", "str");
         if (StringHelper::isNullOrWhitespace($sql)) {
             HtmlResult("");
         }
-        $result = @Database::query($sql, true);
+        
+        $replacePlaceholders = boolval(Settings::get("sql_studio/replace_placeholders"));
+        
+        $result = @Database::query($sql, $replacePlaceholders);
         if (! $result || Database::getError()) {
             ViewBag::set("error", Database::getError());
             $html = Template::executeModuleTemplate(self::MODULE_NAME, "error.php");
