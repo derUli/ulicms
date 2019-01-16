@@ -5,6 +5,17 @@ set_time_limit(0);
 class SqlUtils
 {
 
+    public function queryToStatements($sql_query)
+    {
+        $sql_query = $this->removeRemarks($sql_query);
+        if (! str_contains(";", $sql_query)) {
+            $sql_query .= ";";
+        }
+        $sql_query = $this->splitSqlFile($sql_query, ';');
+        
+        return $sql_query;
+    }
+
     // remove_remarks will strip the sql comment lines out of an uploaded sql file
     private function removeRemarks($sql)
     {
@@ -112,16 +123,5 @@ class SqlUtils
         }
         
         return $output;
-    }
-
-    public function queryToStatements($sql_query)
-    {
-        $sql_query = $this->removeRemarks($sql_query);
-        if (! str_contains(";", $sql_query)) {
-            $sql_query .= ";";
-        }
-        $sql_query = $this->splitSqlFile($sql_query, ';');
-        
-        return $sql_query;
     }
 }
