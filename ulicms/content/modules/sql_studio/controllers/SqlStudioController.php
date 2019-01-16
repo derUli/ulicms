@@ -57,15 +57,14 @@ class SqlStudioController extends MainClass
             if (! $result || Database::getError()) {
                 ViewBag::set("error", Database::getError());
                 $html .= Template::executeModuleTemplate(self::MODULE_NAME, "error.php");
-            }
-            $affectedRows = Database::getAffectedRows();
-            if (is_bool($result) and $result) {
+            } else if (is_bool($result) and $result) {
+                
+                $affectedRows = Database::getAffectedRows();
                 ViewBag::set("success", get_translation("x_rows_affected", array(
                     "%x" => $affectedRows
                 )));
                 $html .= Template::executeModuleTemplate(self::MODULE_NAME, "success.php");
-            }
-            if ($result and ! is_bool($result)) {
+            } else {
                 ViewBag::set("result", $result);
                 // Mock, TODO: Split sql statements, show multiple tables
                 $html .= Template::executeModuleTemplate(self::MODULE_NAME, "table.php");

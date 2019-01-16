@@ -22,6 +22,6 @@
 		"sql_studio_settings": "sql_studio_settings"
 	},
 	"objects": {
-		"SqlUtils": "objects/SQLUtils.php"
+		"SqlUtils": "objects/SqlUtils.php"
 	}
 }
