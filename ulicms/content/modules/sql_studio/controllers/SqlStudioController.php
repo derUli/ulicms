@@ -45,25 +45,32 @@ class SqlStudioController extends MainClass
             HtmlResult("");
         }
         
+        $html = "";
+        
         $replacePlaceholders = boolval(Settings::get("sql_studio/replace_placeholders"));
         
-        $result = @Database::query($sql, $replacePlaceholders);
-        if (! $result || Database::getError()) {
-            ViewBag::set("error", Database::getError());
-            $html = Template::executeModuleTemplate(self::MODULE_NAME, "error.php");
-            HTMLResult($html);
+        $sqlUtils = new SqlUtils();
+        $statements = $sqlUtils->queryToStatements($sql);
+        
+        foreach ($statements as $statement) {
+            $result = @Database::query($statement, $replacePlaceholders);
+            if (! $result || Database::getError()) {
+                ViewBag::set("error", Database::getError());
+                $html .= Template::executeModuleTemplate(self::MODULE_NAME, "error.php");
+            }
+            $affectedRows = Database::getAffectedRows();
+            if (is_bool($result) and $result) {
+                ViewBag::set("success", get_translation("x_rows_affected", array(
+                    "%x" => $affectedRows
+                )));
+                $html .= Template::executeModuleTemplate(self::MODULE_NAME, "success.php");
+            }
+            if ($result and ! is_bool($result)) {
+                ViewBag::set("result", $result);
+                // Mock, TODO: Split sql statements, show multiple tables
+                $html .= Template::executeModuleTemplate(self::MODULE_NAME, "table.php");
+            }
         }
-        $affectedRows = Database::getAffectedRows();
-        if (is_bool($result) and $result) {
-            ViewBag::set("success", get_translation("x_rows_affected", array(
-                "%x" => $affectedRows
-            )));
-            $html = Template::executeModuleTemplate(self::MODULE_NAME, "success.php");
-            HTMLResult($html);
-        }
-        ViewBag::set("result", $result);
-        // Mock, TODO: Split sql statements, show multiple tables
-        $html = Template::executeModuleTemplate(self::MODULE_NAME, "table.php");
-        HtmlResult($html);
+        HTMLResult($html);
     }
 }
