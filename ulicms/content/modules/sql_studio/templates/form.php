@@ -43,7 +43,7 @@ echo UliCMS\HTML\Input::TextArea("sql_code", $sql, 10, 80, array(
 <?php if($permissionChecker->hasPermission("sql_studio_settings")){?>
 			<a
 				href="<?php echo ModuleHelper::buildActionURL("sql_studio_settings")?>"
-				class="pull-right btn btn-primary"> <i class="fa fa-wrench"
+				class="pull-right btn btn-default"> <i class="fa fa-wrench"
 				aria-hidden="true"></i>
 			 <?php translate("settings");?></a>
 			 <?php }?>
