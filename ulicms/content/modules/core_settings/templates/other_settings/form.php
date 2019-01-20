@@ -46,6 +46,14 @@ if (! $permissionChecker->hasPermission("other")) {
         new UliCMS\HTML\ListItem("SAMEORIGIN", get_translation("sameorigin")),
         new UliCMS\HTML\ListItem("DENY", get_translation("deny"))
     );
+    
+    $x_xss_protection = Settings::get("x_xss_protection");
+    $xXssProtectionOptions = array(
+        new UliCMS\HTML\ListItem("", get_translation("off")),
+        new UliCMS\HTML\ListItem("sanitize", get_translation("on")),
+        new UliCMS\HTML\ListItem("block", get_translation("on_block"))
+    );
+    
     ?>
 <?php
     echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", array(), "post", array(
@@ -149,6 +157,11 @@ if (! $permissionChecker->hasPermission("other")) {
 
 			<label for="x_frame_options"><?php translate("x_frame_options")?></label>
 			<?php echo UliCMS\HTML\Input::SingleSelect("x_frame_options", $x_frame_options, $xFrameOptionsItems);?>
+		</div>
+		<div class="form-group">
+
+			<label for="x_frame_options"><?php translate("x_xss_protection")?></label>
+			<?php echo UliCMS\HTML\Input::SingleSelect("x_xss_protection", $x_xss_protection, $xXssProtectionOptions);?>
 		</div>
 		<h2><?php translate("google_authenticator");?></h2>
 		<div class="label">

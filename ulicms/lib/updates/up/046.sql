@@ -1,5 +1,5 @@
 INSERT INTO `{prefix}settings` 
             (name, 
              value) 
-VALUES      ('x_xss_protection', 
-             'sanitize'); 
+VALUES      ('x_frame_options', 
+             'SAMEORIGIN'); 

@@ -13,5 +13,14 @@ class CoreSecurityController extends MainClass
         if ($x_frame_options and faster_in_array($x_frame_options, $allowedOptions)) {
             header("X-Frame-Options: " . $x_frame_options);
         }
+        $x_xss_protection = Settings::get("x_xss_protection");
+        switch ($x_xss_protection) {
+            case "sanitize":
+                header("X-XSS-Protection: 1");
+                break;
+            case "block":
+                header("X-XSS-Protection: 1; mode=block");
+                break;
+        }
     }
 }

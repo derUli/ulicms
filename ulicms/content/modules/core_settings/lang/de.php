@@ -46,3 +46,6 @@ add_translation("x_frame_options", "Erlauben diese Webseite in andere Sites einz
 add_translation("deny", "Verbieten");
 add_translation("allow", "Erlauben");
 add_translation("sameorigin", "Nur innerhalb der selben Domain");
+
+add_translation("x_xss_protection", "XSS-Schutz");
+add_translation("on_block", "An (Block Modus)");
