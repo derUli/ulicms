@@ -1,0 +1,15 @@
+{
+	"version" : "1.0",
+	"embed" : false,
+	"source" : "extend",
+	"controllers" : {
+	 "SeoCheckController" : "controllers/SeoCheckController.php"
+	},
+	"custom_acl" : [
+		"seo_check"
+	],
+	"admin_permission" : "seo_check",
+	"main_class" : "SeoCheckController",
+	"manufacturer_name" : "seobility", 
+	"manufacturer_url" :  "https://www.seobility.net/de/"
+}
