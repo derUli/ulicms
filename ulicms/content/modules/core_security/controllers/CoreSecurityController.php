@@ -24,5 +24,12 @@ class CoreSecurityController extends MainClass
         }
 		// Disable content type sniffing
 		header("X-Content-Type-Options: nosniff");
+		if(Settings::get("enable_hsts")){
+			header("Strict-Transport-Security: max-age=31536000; includeSubDomains");
+		}
+		$referrer_policy = Settings::get("referrer_policy");
+		if($referrer_policy){
+			header("Referrer-Policy: $referrer_policy");
+		}
     }
 }
