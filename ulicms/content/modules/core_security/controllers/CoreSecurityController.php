@@ -31,5 +31,9 @@ class CoreSecurityController extends MainClass
 		if($referrer_policy){
 			header("Referrer-Policy: $referrer_policy");
 		}
+		$expect_ct = Settings::get("expect_ct");
+		if($expect_ct){
+			header("Expect-CT: max-age=7776000, enforce");
+		}
     }
 }
