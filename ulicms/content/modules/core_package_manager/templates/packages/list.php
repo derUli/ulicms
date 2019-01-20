@@ -55,7 +55,8 @@ if ($permissionChecker->hasPermission("list_packages")) {
 					data-btn-for="<?php esc($module->getName());?>"><i
 						class="fas fa-tools"></i> <?php esc($module->getName());?> </a> 
 						<?php if(!$userIsPermitted and $hasAdminPage){ ?>
-							<i class="fas fa-lock pull-right" title="<?php translate("no_permission");?>"></i>
+							<i class="fas fa-lock pull-right"
+					title="<?php translate("no_permission");?>"></i>
 						<?php } ?>
 							</td>
 				<td><?php esc(getModuleMeta($module->getName(), "version"));?></td>
