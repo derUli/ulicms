@@ -22,5 +22,7 @@ class CoreSecurityController extends MainClass
                 header("X-XSS-Protection: 1; mode=block");
                 break;
         }
+		// Disable content type sniffing
+		header("X-Content-Type-Options: nosniff");
     }
 }
