@@ -1,5 +1,5 @@
 INSERT INTO `{prefix}settings` 
             (name, 
              value) 
-VALUES      ('enable_hsts', 
-             '1'); 
+VALUES      ('referrer_policy', 
+             'no-referrer-when-downgrade'); 

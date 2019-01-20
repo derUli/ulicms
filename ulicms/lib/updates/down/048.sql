@@ -1,1 +1,1 @@
-delete from `{prefix}settings` where name = 'enable_hsts'
+delete from `{prefix}settings` where name = 'referrer_policy'
