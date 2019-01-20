@@ -43,7 +43,9 @@ if ($permissionChecker->hasPermission("list_packages")) {
     foreach ($modules as $module) {
         $hasAdminPage = ($module->hasAdminPage());
         $isEnabled = $module->isEnabled();
-        $btnClass = $hasAdminPage ? "btn btn-primary" : "btn btn-default disabled has-no-settings";
+        $adminPermission = getModuleMeta($module->getName(), "admin_permission");
+        $userIsPermitted = ($adminPermission and $permissionChecker->hasPermission($adminPermission)) or (! $adminPermission);
+        $btnClass = ($hasAdminPage && $userIsPermitted) ? "btn btn-primary" : "btn btn-default disabled has-no-settings";
         ?>
 <tr>
 				<td><a
@@ -51,7 +53,11 @@ if ($permissionChecker->hasPermission("list_packages")) {
 					class="<?php esc($btnClass);?>"
 					<?php if(!$hasAdminPage or !$isEnabled ) echo "disabled";?>
 					data-btn-for="<?php esc($module->getName());?>"><i
-						class="fas fa-tools"></i> <?php esc($module->getName());?></a></td>
+						class="fas fa-tools"></i> <?php esc($module->getName());?> </a> 
+						<?php if(!$userIsPermitted and $hasAdminPage){ ?>
+							<i class="fas fa-lock pull-right" title="<?php translate("no_permission");?>"></i>
+						<?php } ?>
+							</td>
 				<td><?php esc(getModuleMeta($module->getName(), "version"));?></td>
 				<?php if($anyEmbedModules){?>
 			<td><?php
