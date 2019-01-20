@@ -22,6 +22,14 @@ class SeoCheckController extends Controller
 		return "https://freetools.seobility.net/de/seocheck/check?url=".urlencode(get_protocol_and_domain())."&crawltype=1";
 	}
 	
+	public function getSettingsHeadline(){
+		return "SEO Check";
+	}
+	
+	public function getSettingsLinkText(){
+		return get_translation("open");
+	}
+	
 	public function settings(){
 		Response::javascriptRedirect($this->getURL());
 	}
