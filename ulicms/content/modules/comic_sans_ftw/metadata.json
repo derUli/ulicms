@@ -1,0 +1,8 @@
+{
+	"version": "1.0",
+	"controllers": {
+		"ComicSansFtw": "ComicSansFtw.php"
+	},
+	"main_class": "ComicSansFtw",
+	"embed": false
+}
