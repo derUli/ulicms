@@ -41,7 +41,8 @@ if ($permissionChecker->hasPermission("videos")) {
 <br />
 <?php if($permissionChecker->hasPermission("videos_create")){?>
 <p>
-	<a href="index.php?action=add_video" class="btn btn-default"><?php
+	<a href="index.php?action=add_video" class="btn btn-default"> <i
+		class="fas fa-upload"></i> <?php
         
         translate("upload_video");
         ?></a>

@@ -37,7 +37,7 @@ if ($permissionChecker->hasPermission("audio")) {
 <br />
 <?php if($permissionChecker->hasPermission("audio_create")){?>
 <p>
-	<a href="index.php?action=add_audio" class="btn btn-default"><?php
+	<a href="index.php?action=add_audio" class="btn btn-default"><i class="fa fa-upload"></i> <?php
         
         translate("upload_audio");
         ?></a>
