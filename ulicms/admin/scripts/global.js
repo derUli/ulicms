@@ -16,6 +16,12 @@ $(function() {
 		});
 	});
 
+	// Add bootstrap css class to tablesorter
+	$.extend($.fn.dataTableExt.oStdClasses, {
+		"sFilterInput" : "form-control",
+		"sLengthSelect" : "form-control"
+	});
+
 	$(".tablesorter").DataTable({
 		language : {
 			url : $("body").data("datatables-translation")
