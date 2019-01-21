@@ -79,6 +79,11 @@ class OtherSettingsController extends Controller
         } else {
             Settings::delete("x_frame_options");
         }
+        if (Request::getVar("x_xss_protection", null, "str")) {
+            Settings::set("x_xss_protection", Request::getVar("x_xss_protection", null, "str"));
+        } else {
+            Settings::delete("x_xss_protection");
+        }
         
         Request::redirect(ModuleHelper::buildActionURL("other_settings"));
     }

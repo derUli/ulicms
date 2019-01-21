@@ -47,3 +47,6 @@ add_translation("x_frame_options", "Allow embedding this website in other sites"
 add_translation("deny", "Deny");
 add_translation("allow", "Allow");
 add_translation("sameorigin", "Only Same Domain");
+
+add_translation("x_xss_protection", "XSS Protection");
+add_translation("on_block", "On (Block Mode)");

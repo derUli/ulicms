@@ -17,3 +17,5 @@ add_translation ( "in_use", "In Verwendung" );
 add_translation ( "on", "An" );
 add_translation ( "enable_module", "Modul aktivieren" );
 add_translation ( "disable_module", "Modul deaktivieren" );
+
+add_translation("no_permission", "Keine Berechtigung");
