@@ -4,6 +4,7 @@ Neue Features:
 * Sicherheitsoption "XSS-Schutz" hinzugefügt
 * Wenn ein User die admin_permission eines Moduls nicht besitzt, ist der Button mit dem Namen des Moduls deaktiviert und 
   ein Schloss-Icon wird angezeigt.
+* Weitere Seiten mit Icons versehen (core_media)
   
 Verbesserungen:
 * Wende Bootstrap Styling auf Eingabeelemente von dataTables an

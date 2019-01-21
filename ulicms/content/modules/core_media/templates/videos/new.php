@@ -1,9 +1,10 @@
 <?php
-$permissionChecker = new ACL ();
-if ($permissionChecker->hasPermission ( "videos" ) and $permissionChecker->hasPermission ( "videos_create" )) {
-	?><p>
+$permissionChecker = new ACL();
+if ($permissionChecker->hasPermission("videos") and $permissionChecker->hasPermission("videos_create")) {
+    ?><p>
 	<a href="<?php echo ModuleHelper::buildActionURL("videos");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+		class="btn btn-default btn-back"> <i class="fa fa-arrow-left"></i>
+		<?php translate("back")?></a>
 </p>
 <h1><?php translate ( "UPLOAD_VIDEO" );?></h1>
 <form action="index.php?sClass=VideoController&sMethod=create"
@@ -23,9 +24,10 @@ if ($permissionChecker->hasPermission ( "videos" ) and $permissionChecker->hasPe
 	</strong><br /> <input type="number" name="width" value="1280" step="1">
 	<br /> <strong><?php translate ( "height" );?></strong><br /> <input
 		type="number" name="height" value="720" step="1"> <br />
-	<button type="submit" class="btn btn-primary"><?php translate ( "UPLOAD_VIDEO" );?></button>
+	<button type="submit" class="btn btn-primary">
+		<i class="fas fa-upload"></i> <?php translate ( "UPLOAD_VIDEO" );?></button>
 </form>
 <?php
 } else {
-	noPerms ();
+    noPerms();
 }
