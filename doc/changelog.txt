@@ -12,6 +12,10 @@ Verbesserungen:
 Neue API-Funktionen:
 * UliCMS\HTML\Input::File($name, $multiple = false, $accept = null, $htmlAttributes = array())
 
+Entfernte API-Funktionen:
+* is_chinese($str)
+* isCountryBlocked()
+
 ===== Neues in UliCMS 2019.1.4 =====
 
 Neue Features:
