@@ -9,6 +9,9 @@ Neue Features:
 Verbesserungen:
 * Wende Bootstrap Styling auf Eingabeelemente von dataTables an
 
+Neue API-Funktionen:
+* UliCMS\HTML\Input::File($name, $multiple = false, $accept = null, $htmlAttributes = array())
+
 ===== Neues in UliCMS 2019.1.4 =====
 
 Neue Features:

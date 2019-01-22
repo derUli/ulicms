@@ -43,6 +43,28 @@ class Input
         return self::TextBox($name, $value, "password", $htmlAttributes);
     }
 
+    public static function File($name, $multiple = false, $accept = null, $htmlAttributes = array())
+    {
+        $attributes = array(
+            "name" => $name
+        );
+        if (is_string($accept)) {
+            $attributes["accept"] = Template::getEscape($accept);
+        } else if (is_array($accept)) {
+            $accept = join(", ", $accept);
+            $attributes["accept"] = Template::getEscape($accept);
+        }
+        if ($multiple) {
+            $attributes["multiple"] = "multiple";
+        }
+        
+        foreach ($htmlAttributes as $key => $val) {
+            $attributes[$key] = $val;
+        }
+        
+        return self::TextBox($name, "", "file", $attributes);
+    }
+
     public static function Hidden($name, $value, $htmlAttributes = array())
     {
         return self::TextBox($name, $value, "hidden", $htmlAttributes);
