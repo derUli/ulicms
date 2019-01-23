@@ -1,0 +1,15 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"controllers": {
+		"GreyMode": "GreyMode.php"
+	},
+	"main_class": "GreyMode",
+	"controller_function_permissions": {
+		"GreyMode::toggleGreyModePost": "grey_mode"
+	},
+	"embed": false,
+	"custom_acl": [
+		"grey_mode"
+	]
+}
