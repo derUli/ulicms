@@ -52,7 +52,6 @@ include_once dirname(__file__) . "/classes/objects/modules/load.php";
 include_once dirname(__file__) . "/classes/objects/backend/load.php";
 include_once dirname(__file__) . "/classes/objects/settings/load.php";
 include_once dirname(__file__) . "/classes/objects/web/load.php";
-include_once dirname(__file__) . "/lib/antispam-features.php";
 include_once dirname(__file__) . "/classes/objects/content/Categories.php";
 include_once dirname(__file__) . "/classes/objects/content/types/ContentType.php";
 include_once dirname(__file__) . "/classes/objects/content/types/DefaultContentTypes.php";
