@@ -1,6 +1,6 @@
 <?php
 
-class ArrayHelper
+class ArrayHelper extends Helper
 {
 
     public static function insertBefore($input, $index, $element)

@@ -46,6 +46,8 @@ include_once dirname(__file__) . "/lib/users_api.php";
 include_once dirname(__file__) . "/lib/string_functions.php";
 include_once dirname(__file__) . "/lib/network.php";
 include_once dirname(__file__) . "/lib/settings.php";
+
+include_once dirname(__file__) . "/classes/objects/abstract/load.php";
 include_once dirname(__file__) . "/classes/objects/constants/load.php";
 include_once dirname(__file__) . "/classes/objects/storages/load.php";
 include_once dirname(__file__) . "/classes/objects/modules/load.php";
@@ -74,7 +76,6 @@ include_once dirname(__file__) . "/classes/exceptions/load.php";
 include_once dirname(__file__) . "/classes/objects/registry/load.php";
 include_once dirname(__file__) . "/classes/objects/logging/load.php";
 include_once dirname(__file__) . "/classes/objects/html/load.php";
-include_once dirname(__file__) . "/classes/objects/abstract/load.php";
 include_once dirname(__file__) . "/classes/objects/SpellChecker.php";
 include_once dirname(__file__) . "/classes/objects/content/TypeMapper.php";
 include_once dirname(__file__) . "/lib/db_functions.php";

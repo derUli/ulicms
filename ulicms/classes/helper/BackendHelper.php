@@ -1,6 +1,6 @@
 <?php
 
-class BackendHelper
+class BackendHelper extends Helper
 {
 
     public static function formatDatasetCount($count)

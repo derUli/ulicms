@@ -1,6 +1,6 @@
 <?php
 
-class NumberFormatHelper
+class NumberFormatHelper extends Helper
 {
 
     // Snippet from PHP Share: http://www.phpshare.org

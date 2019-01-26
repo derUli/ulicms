@@ -1,6 +1,6 @@
 <?php
 
-class StringHelper
+class StringHelper extends Helper
 {
 
     public static function isNullOrEmpty($variable)

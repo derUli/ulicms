@@ -1,6 +1,6 @@
 <?php
 
-class UrlHelper
+class UrlHelper extends Helper
 {
 
     public static function getUrlWithoutGetParameters($url)
