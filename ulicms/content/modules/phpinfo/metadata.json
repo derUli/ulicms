@@ -1,0 +1,13 @@
+{
+	"source": "extend",
+	"version": "1.0",
+	"embed": true,
+	"custom_acl": [
+		"phpinfo"
+	],
+	"admin_permission": "phpinfo",
+	"controllers": {
+		"PhpInfo": "PhpInfo.php"
+	},
+	"main_class": "PhpInfo"
+}
