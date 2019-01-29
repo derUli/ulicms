@@ -200,13 +200,14 @@ if ($permissionChecker->hasPermission("list_packages")) {
 <div class="row">
 	<div class="col-xs-6">
 		<p>
-			<a href="index.php?action=upload_patches" class="btn btn-warning"><?php translate("INSTALL_PATCH_FROM_FILE");?></a>
+			<a href="index.php?action=upload_patches" class="btn btn-warning"><i
+				class="fa fa-plus"></i> <?php translate("INSTALL_PATCH_FROM_FILE");?></a>
 		</p>
 	</div>
 	<div class="col-xs-6 text-right">
 		<p>
 			<button type="submit" class="btn btn-danger"
-				<?php if(count($patches) == 0) echo "disabled";?>><?php translate("TRUNCATE_INSTALLED_PATCHES_LIST");?></button>
+				<?php if(count($patches) == 0) echo "disabled";?>><i class="fa fa-trash" aria-hidden="true"></i> <?php translate("TRUNCATE_INSTALLED_PATCHES_LIST");?></button>
 		</p>
 	</div>
 </div>
