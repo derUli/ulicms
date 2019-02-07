@@ -9,7 +9,10 @@ Neue Features:
 * Wenn ein User die admin_permission eines Moduls nicht besitzt, ist der Button mit dem Namen des Moduls deaktiviert und 
   ein Schloss-Icon wird angezeigt.
 * Weitere Seiten mit Icons versehen (core_media)
-  
+
+Bugfixes:
+* Unter bestimmten Bedingungen wurde eine falsche Version einer Seite aus dem Cache ausgegeben.
+
 Verbesserungen:
 * Wende Bootstrap Styling auf Eingabeelemente von dataTables an
 
