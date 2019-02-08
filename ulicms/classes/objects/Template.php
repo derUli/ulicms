@@ -353,13 +353,15 @@ ORDER BY RAND() LIMIT 1") or die(Database::getError());
         $min_style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.min.css";
         $style_file = getTemplateDirPath(get_theme()) . "style.css";
         $style_file_realpath = getTemplateDirPath(get_theme(), true) . "style.css";
-        $style_file .= "?time=" . File::getLastChanged($style_file_realpath);
-        if (is_file($min_style_file_realpath)) {
-            echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
-        } else if (is_file($style_file_realpath)) {
-            echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
+        if (is_file($style_file_realpath)) {
+            $style_file .= "?time=" . File::getLastChanged($style_file_realpath);
+            if (is_file($min_style_file_realpath)) {
+                echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$min_style_file\"/>";
+            } else if (is_file($style_file_realpath)) {
+                echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"$style_file\"/>";
+            }
+            echo "\r\n";
         }
-        echo "\r\n";
         $keywords = get_meta_keywords();
         if (! $keywords) {
             $keywords = Settings::get("meta_keywords");
