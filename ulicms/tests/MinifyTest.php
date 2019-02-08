@@ -70,7 +70,12 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
 
     public function testMinifySCSS()
     {
-        $_GET["output_stylesheets"] = "tests/fixtures/scss/style1.scss";
+        $style = array(
+            "tests/fixtures/scss/style1.scss",
+            "tests/fixtures/scss/style1.scss",
+            "core.css"
+        );
+        $_GET["output_stylesheets"] = implode(";", $style);
         $_GET["time"] = time();
         $_SERVER["REQUEST_URI"] = getCombinedStylesheetURL();
         $expected = file_get_contents("tests/fixtures/scss/expected.css");
