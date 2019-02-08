@@ -1,6 +1,8 @@
 <?php
 include_once ULICMS_ROOT . "/api.php";
 
+use UliCMS\Exceptions\SCSSCompileException;
+
 class MinifyTest extends \PHPUnit\Framework\TestCase
 {
 
@@ -68,7 +70,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $this->assertCount(0, $_SERVER["stylesheet_queue"]);
     }
 
-    public function testMinifySCSS()
+    public function testMinifySCSSExpectCSS()
     {
         CacheUtil::getAdapter(true)->clear();
         $style = array(
@@ -84,4 +86,19 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $real = getCombinedStylesheets(true);
         $this->assertEquals($real, $expected);
     }
+	public function testMinifySCSSThrowsException(){
+        CacheUtil::getAdapter(true)->clear();
+		$style = array(
+            "tests/fixtures/scss/fail.scss",
+		);
+		$_GET["output_stylesheets"] = implode(";", $style);
+        $_GET["time"] = time();
+        $_SERVER["REQUEST_URI"] = getCombinedStylesheetURL();
+		try{
+			getCombinedStylesheets(true);
+			$this->fail("Expected exception not thrown");
+		} catch(SCSSCompileException $e){
+			$this->assertEquals("Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at `wid012321:56z754654$$` line: 5", $e->getMessage());
+		}
+	}
 }

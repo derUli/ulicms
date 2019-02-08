@@ -2,6 +2,8 @@
 use UliCMS\HTML\Style;
 use UliCMS\HTML\Script;
 
+use UliCMS\Exceptions\SCSSCompileException;
+
 // FIXME: don't modify $_SERVER use the Vars class as replacement
 
 // Javascript Minify Funktionen
@@ -185,7 +187,12 @@ function getCombinedStylesheets($doReturn = false)
                                 } else {
                                     $scss->setImportPaths(dirname($stylesheet));
                                 }
+								try{
                                 $content = $scss->compile($content);
+								}
+								catch(Exception $e){
+									throw new SCSSCompileException("Compilation of $stylesheet failed: {$e->getMessage()}");
+								}
                             }
                             
                             $content = minifyCss($content);
