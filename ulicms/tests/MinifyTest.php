@@ -73,7 +73,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         CacheUtil::getAdapter(true)->clear();
         $style = array(
             "tests/fixtures/scss/style1.scss",
-            "tests/fixtures/scss/style1.scss",
+            "tests/fixtures/scss/style2.scss",
             "core.css"
         );
         $_GET["output_stylesheets"] = implode(";", $style);
