@@ -70,6 +70,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
 
     public function testMinifySCSS()
     {
+        CacheUtil::getAdapter(true)->clear();
         $style = array(
             "tests/fixtures/scss/style1.scss",
             "tests/fixtures/scss/style1.scss",
@@ -81,7 +82,6 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $expected = file_get_contents("tests/fixtures/scss/expected.css");
         
         $real = getCombinedStylesheets(true);
-        
         $this->assertEquals($real, $expected);
     }
 }
