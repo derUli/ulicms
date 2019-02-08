@@ -2,6 +2,8 @@
 use UliCMS\HTML\Style;
 use UliCMS\HTML\Script;
 
+// FIXME: don't modify $_SERVER use the Vars class as replacement
+
 // Javascript Minify Funktionen
 function resetScriptQueue()
 {
@@ -14,6 +16,21 @@ function enqueueScriptFile($path)
         $_SERVER["script_queue"] = array();
     }
     $_SERVER["script_queue"][] = $path;
+}
+
+function setSCSSImportPaths($importPaths = null)
+{
+    if ($importPaths == null) {
+        $importPaths = array(
+            Path::resolve("ULICMS_ROOT")
+        );
+    }
+    $_SERVER["css_include_paths"] = $importPaths;
+}
+
+function getSCSSImportPaths()
+{
+    return is_array($_SERVER["css_include_paths"]) ? $_SERVER["css_include_paths"] : null;
 }
 
 function getCombinedScripts()
@@ -138,7 +155,8 @@ function enqueueStylesheet($path)
     $_SERVER["stylesheet_queue"][] = $path;
 }
 
-function getCombinedStylesheets()
+// FIXME: Seperate getter and output methods
+function getCombinedStylesheets($doReturn = false)
 {
     $output = "";
     
@@ -151,20 +169,31 @@ function getCombinedStylesheets()
         if ($adapter->has($cacheId)) {
             $output = $adapter->get($cacheId);
         } else {
+            $scss = new scssc();
             foreach ($stylesheets as $stylesheet) {
                 $stylesheet = ltrim($stylesheet, "/");
                 if (is_file($stylesheet)) {
                     $ext = pathinfo($stylesheet, PATHINFO_EXTENSION);
-                    if ($ext == "css") {
+                    if ($ext == "css" || $ext == "scss") {
                         $content = @file_get_contents($stylesheet);
                         if ($content) {
                             $content = normalizeLN($content, "\n");
+                            if ($ext == "scss") {
+                                $importPaths = getSCSSImportPaths();
+                                if (is_array($importPaths)) {
+                                    $scss->setImportPaths($importPaths);
+                                } else {
+                                    $scss->setImportPaths(dirname($stylesheet));
+                                }
+                                $content = $scss->compile($content);
+                            }
+                            
                             $content = minifyCss($content);
                             $output .= $content;
                             $output .= "\r\n";
                             $output .= "\r\n";
-                            if (filemtime($script) > $lastmod) {
-                                $lastmod = filemtime($script);
+                            if (filemtime($stylesheet) > $lastmod) {
+                                $lastmod = filemtime($stylesheet);
                             }
                         }
                     }
@@ -191,14 +220,17 @@ function getCombinedStylesheets()
         '    '
     ), '', $output);
     
-    header("Content-Type: text/css");
-    $len = mb_strlen($output, 'binary');
-    header("Content-Length: " . $len);
-    
-    set_eTagHeaders($_GET["output_stylesheets"], $lastmod);
-    
-    echo $output;
-    exit();
+    if (! $doReturn) {
+        header("Content-Type: text/css");
+        $len = mb_strlen($output, 'binary');
+        header("Content-Length: " . $len);
+        
+        set_eTagHeaders($_GET["output_stylesheets"], $lastmod);
+        
+        echo $output;
+        exit();
+    }
+    return $output;
 }
 
 /**
@@ -292,7 +324,7 @@ function getCombinedStylesheetURL()
 {
     $lastmod = 0;
     foreach ($_SERVER["stylesheet_queue"] as $file) {
-        if (is_file($file) and endsWith($file, ".css", $needle) and filemtime($file) > $lastmod) {
+        if (is_file($file) and (endsWith($file, ".css", $needle) or endsWith($file, ".scss", $needle)) and filemtime($file) > $lastmod) {
             $lastmod = filemtime($file);
         }
     }

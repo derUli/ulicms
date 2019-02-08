@@ -1,7 +1,13 @@
 <?php
+include_once ULICMS_ROOT . "/api.php";
 
 class MinifyTest extends \PHPUnit\Framework\TestCase
 {
+
+    protected function setUp()
+    {
+        idefine("TESTS_RUNNING", true);
+    }
 
     public function testScriptQueue()
     {
@@ -60,5 +66,17 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         
         $this->assertEquals('<link rel="stylesheet" href="?output_stylesheets=core.css;admin/css/bootstrap.css;admin/css/bootstrap-theme.css;admin/css/modern.css&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml());
         $this->assertCount(0, $_SERVER["stylesheet_queue"]);
+    }
+
+    public function testMinifySCSS()
+    {
+        $_GET["output_stylesheets"] = "tests/fixtures/scss/style1.scss";
+        $_GET["time"] = time();
+        $_SERVER["REQUEST_URI"] = getCombinedStylesheetURL();
+        $expected = file_get_contents("tests/fixtures/scss/expected.css");
+        
+        $real = getCombinedStylesheets(true);
+        
+        $this->assertEquals($real, $expected);
     }
 }
