@@ -1,8 +1,8 @@
 <?php
 use UliCMS\HTML\Style;
 use UliCMS\HTML\Script;
-
 use UliCMS\Exceptions\SCSSCompileException;
+use Leafo\ScssPhp\Compiler;
 
 // FIXME: don't modify $_SERVER use the Vars class as replacement
 
@@ -171,7 +171,8 @@ function getCombinedStylesheets($doReturn = false)
         if ($adapter->has($cacheId)) {
             $output = $adapter->get($cacheId);
         } else {
-            $scss = new scssc();
+            $scss = new Compiler();
+            ;
             foreach ($stylesheets as $stylesheet) {
                 $stylesheet = ltrim($stylesheet, "/");
                 if (is_file($stylesheet)) {
@@ -187,12 +188,11 @@ function getCombinedStylesheets($doReturn = false)
                                 } else {
                                     $scss->setImportPaths(dirname($stylesheet));
                                 }
-								try{
-                                $content = $scss->compile($content);
-								}
-								catch(Exception $e){
-									throw new SCSSCompileException("Compilation of $stylesheet failed: {$e->getMessage()}");
-								}
+                                try {
+                                    $content = $scss->compile($content);
+                                } catch (Exception $e) {
+                                    throw new SCSSCompileException("Compilation of $stylesheet failed: {$e->getMessage()}");
+                                }
                             }
                             
                             $content = minifyCss($content);

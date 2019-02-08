@@ -29,7 +29,7 @@ class CacheUtil
             $driver = "sqlite";
         }
         
-        self::$adapter = new phpFastCache\Helper\Psr16Adapter($driver, $cacheConfig);
+        self::$adapter = new Psr16Adapter($driver, $cacheConfig);
         
         return self::$adapter;
     }
