@@ -422,10 +422,10 @@ class Page extends Content
     }
 
     // this returns an array of all comments of this content
-    public function getComments()
+    public function getComments($order_by = "date desc")
     {
-        return Comment::getAllByContentId($this->id);
-    }
+    return Comment::getAllByContentId($this->id, $order_by);
+}
 
     public function getUrl($suffix = null)
     {

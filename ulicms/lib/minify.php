@@ -35,6 +35,13 @@ function getSCSSImportPaths()
     return is_array($_SERVER["css_include_paths"]) ? $_SERVER["css_include_paths"] : null;
 }
 
+function unsetSCSSImportPaths()
+{
+    if (isset($_SERVER["css_include_paths"])) {
+        unset($_SERVER["css_include_paths"]);
+    }
+}
+
 function getCombinedScripts()
 {
     $lastmod = intval($_GET["time"]);

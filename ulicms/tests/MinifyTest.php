@@ -72,6 +72,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
 
     public function testMinifySCSSExpectCSS()
     {
+        unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
         $style = array(
             "tests/fixtures/scss/style1.scss",
@@ -89,6 +90,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
 
     public function testMinifySCSSThrowsException()
     {
+        unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
         $style = array(
             "tests/fixtures/scss/fail.scss"
@@ -102,5 +104,20 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         } catch (SCSSCompileException $e) {
             $this->assertEquals("Compilation of tests/fixtures/scss/fail.scss failed: parse error: failed at `wid012321:56z754654$$` (stdin) on line 5", $e->getMessage());
         }
+    }
+
+    public function testSetAndGetSCSSImportPaths()
+    {
+        $paths = array(
+            "folder1/foo/bar",
+            "folder2/another/folder"
+        );
+        $this->assertNull(getSCSSImportPaths());
+        setSCSSImportPaths($paths);
+        
+        $this->assertEquals($paths, getSCSSImportPaths());
+        unsetSCSSImportPaths();
+        
+        $this->assertNull(getSCSSImportPaths());
     }
 }

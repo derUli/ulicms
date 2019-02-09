@@ -411,8 +411,8 @@ class PageTest extends \PHPUnit\Framework\TestCase
         $comment->save();
         
         $this->assertCount(2, $page->getComments());
-        $this->assertEquals("Kommentar 1", $page->getComments()[0]->getText());
-        $this->assertEquals("Kommentar 2", $page->getComments()[1]->getText());
+        $this->assertEquals("Kommentar 1", $page->getComments("date asc")[0]->getText());
+        $this->assertEquals("Kommentar 2", $page->getComments("date asc")[1]->getText());
         
         $this->cleanUp();
     }

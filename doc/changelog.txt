@@ -1,7 +1,13 @@
 ===== Neues in UliCMS 2019.2 =====
 
+Neue Features:
 * Alle Features von UliCMS 2019.1.1 bis 2019.1.5
 * SCSS Compiler
+
+Neue API-Funktionen:
+* setSCSSImportPaths($importPaths = null)
+* getSCSSImportPaths()
+* unsetSCSSImportPaths()
 
 ===== Neues in UliCMS 2019.1.5 =====
 
