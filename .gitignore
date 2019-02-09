@@ -25,3 +25,4 @@ ulicms/content/modules/modstarter
 .modstarter
 ulicms/vendor/*
 .thumbs
+.phpunit.result.cache

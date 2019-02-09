@@ -307,7 +307,6 @@ class ApiTest extends \PHPUnit\Framework\TestCase
     public function testGetThemesList()
     {
         $themes = getThemesList();
-        $this->assertContains("2017", $themes);
         $this->assertContains("impro17", $themes);
     }
 }
