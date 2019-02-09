@@ -1,5 +1,4 @@
 <?php
-use UliCMS\Exceptions\NotImplementedException;
 use UliCMS\Data\Content\Comment;
 
 class PageTest extends \PHPUnit\Framework\TestCase

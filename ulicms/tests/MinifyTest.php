@@ -6,11 +6,6 @@ use UliCMS\Exceptions\SCSSCompileException;
 class MinifyTest extends \PHPUnit\Framework\TestCase
 {
 
-    protected function setUp()
-    {
-        idefine("TESTS_RUNNING", true);
-    }
-
     public function testScriptQueue()
     {
         $filemtime = 0;
