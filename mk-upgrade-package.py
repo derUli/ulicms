@@ -37,7 +37,7 @@ def main():
               "config.js", "comments", "*~", ".settings", ".project", ".buildpath",
               "tests", "run-tests.sh", "run-tests.bat",
               "run-tests.xampp.mac.sh", ".pydevproject", "CMSConfig.php", "log",
-              "configurations")
+              "configurations", ".phpunit.result.cache")
 
     IGNORE_PATTERNS = shutil.ignore_patterns(*ignore)
     if args.delete and os.path.exists(target):
