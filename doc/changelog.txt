@@ -9,6 +9,9 @@ Neue API-Funktionen:
 * getSCSSImportPaths()
 * unsetSCSSImportPaths()
 
+Bugfixes:
+* Der optionale Parameter $type bei der Funktionen Result() wurde nicht korrekt ausgegeben.
+
 ===== Neues in UliCMS 2019.1.5 =====
 
 Neue Features:
@@ -19,7 +22,6 @@ Neue Features:
 
 Bugfixes:
 * Unter bestimmten Bedingungen wurde eine falsche Version einer Seite aus dem Cache ausgegeben.
-* Der optionale Parameter $type bei den Funktionen Result() und ExceptionResult() wurde nicht korrekt ausgegeben.
 
 Verbesserungen:
 * Wende Bootstrap Styling auf Eingabeelemente von dataTables an
