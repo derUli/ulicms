@@ -26,3 +26,6 @@ ulicms/content/modules/modstarter
 ulicms/vendor/*
 .thumbs
 .phpunit.result.cache
+/nbproject/private/
+*.properties
+nbproject/project.xml

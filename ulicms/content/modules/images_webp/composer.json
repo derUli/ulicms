@@ -1,0 +1,5 @@
+{
+    "require": {
+        "rosell-dk/webp-convert": "^1.3"
+    }
+}

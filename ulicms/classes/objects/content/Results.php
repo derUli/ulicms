@@ -38,7 +38,7 @@ function Result($data, $status = 200, $type = null) {
 	Response::sendStatusHeader ( Response::getStatusCodeByNumber ( $status ) );
 	$size = getStringLengthInBytes ( $data );
 	if ($type) {
-		header ( 'Content-Type: $type' );
+		header ( "Content-Type: $type" );
 	}
 	header ( "Content-length: $size" );
 	echo $data;
