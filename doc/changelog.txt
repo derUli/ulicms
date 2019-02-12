@@ -19,6 +19,7 @@ Neue Features:
 
 Bugfixes:
 * Unter bestimmten Bedingungen wurde eine falsche Version einer Seite aus dem Cache ausgegeben.
+* Der optionale Parameter $type bei den Funktionen Result() und ExceptionResult() wurde nicht korrekt ausgegeben.
 
 Verbesserungen:
 * Wende Bootstrap Styling auf Eingabeelemente von dataTables an
