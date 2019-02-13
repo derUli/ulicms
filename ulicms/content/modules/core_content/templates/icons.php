@@ -3,7 +3,7 @@ use UliCMS\Security\PermissionChecker;
 
 $currentAction = BackendHelper::getAction();
 $icons = array(
-    "pages" => "fas fa-images",
+    "pages" => "fas fa-book",
     "comments_manage" => "fa fa-comment",
     "forms" => "fab fa-wpforms",
     "banner" => "fas fa-bullhorn",
