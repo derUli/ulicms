@@ -61,10 +61,6 @@ function ExceptionResult($message, $status = 500) {
 	
 	header ( $_SERVER ["SERVER_PROTOCOL"] . " " . getStatusCodeByNumber ( intval ( $status ) ) );
 	header ( "Content-Type: text/html; charset=UTF-8" );
-	
-	if ($type) {
-		header ( "Content-Type: $type" );
-	}
 	header ( "Content-length: $size" );
 	
 	echo $content;
