@@ -11,6 +11,7 @@ Neue API-Funktionen:
 
 Bugfixes:
 * Der optionale Parameter $type bei der Funktionen Result() wurde nicht korrekt ausgegeben.
+* Falsches Icon für "Seiten" in Icon Toolbar korrigiert
 
 ===== Neues in UliCMS 2019.1.5 =====
 
