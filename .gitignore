@@ -25,3 +25,4 @@ ulicms/content/modules/modstarter
 ulicms/vendor/*
 .thumbs
 nbproject
+node_modules

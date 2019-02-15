@@ -602,7 +602,8 @@ function openArticleImageSelectWindow(field) {
 		<?php do_event("before_custom_data_json");?>
 		<strong><?php translate("custom_data_json");?></strong>
 			<textarea name="custom_data" style="width: 100%; height: 200px;"
-				cols=80 rows=10><?php esc(CustomData::getDefaultJSON());?></textarea>
+				cols=80 rows=10
+				class="codemirror" data-mimetype="application/json"><?php esc(CustomData::getDefaultJSON());?></textarea>
 
 		</div>
 	</div>

@@ -3,6 +3,8 @@
 Neue Features:
 * Alle Features von UliCMS 2019.1.1 bis 2019.1.5
 * SCSS Compiler
+* CodeMirror auf Version 5.43.0 geupdated
+* Das Feld "Benutzerdefinierte Werte (JSON)" verwendet nun den CodeMirror Editor
 
 Neue API-Funktionen:
 * setSCSSImportPaths($importPaths = null)
