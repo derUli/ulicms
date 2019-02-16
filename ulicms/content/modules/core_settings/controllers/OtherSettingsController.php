@@ -32,12 +32,6 @@ class OtherSettingsController extends Controller
             Settings::delete("smtp_no_verify_certificate");
         }
         
-        if (isset($_POST["show_meta_generator"])) {
-            Settings::delete("hide_meta_generator");
-        } else {
-            Settings::set("hide_meta_generator", "hide");
-        }
-        
         if (! isset($_POST["twofactor_authentication"])) {
             Settings::delete("twofactor_authentication");
         } else {

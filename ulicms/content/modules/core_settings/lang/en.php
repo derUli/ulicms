@@ -1,12 +1,12 @@
 <?php
-define("TRANSLATION_YOUR_LOGO", "Your Logo");
-define("TRANSLATION_UPLOAD_NEW_LOGO", "Upload new logo");
-define("TRANSLATION_UPLOAD", "Upload");
-define("TRANSLATION_LOGO_INFOTEXT", "You can upload logo here.");
-define("TRANSLATION_UPLOADED_IMAGE_TOO_BIG", "Your uploaded image was to big.");
-define("TRANSLATION_CREATE_OPTION", "Create configuration variable");
-define("TRANSLATION_OPTION", "Variable");
-define("TRANSLATION_VALUE", "Value");
+add_translation("YOUR_LOGO", "Your Logo");
+add_translation("UPLOAD_NEW_LOGO", "Upload new logo");
+add_translation("UPLOAD", "Upload");
+add_translation("LOGO_INFOTEXT", "You can upload logo here.");
+add_translation("UPLOADED_IMAGE_TOO_BIG", "Your uploaded image was to big.");
+add_translation("CREATE_OPTION", "Create configuration variable");
+add_translation("OPTION", "Variable");
+add_translation("VALUE", "Value");
 
 // translations for smtp_encryption select field
 add_translation("smtp_encryption", "Encryption");
@@ -23,8 +23,6 @@ add_translation("privacy", "Privacy");
 add_translation("privacy_policy_checkbox_enable", "Enable GDPR Checkbox for forms");
 add_translation("privacy_policy_checkbox_text", "Text for  GDPR Checkbox");
 add_translation("dsgvo_checkbox", "GDPR Checkbox");
-
-add_translation("no_auto_cron_help", "Enable this option if you wan't to setup a real cronjob.\nIf this option is disabled cronjobs will be executed while page load. This may decrease the site performance.");
 
 add_translation("language_shortcode", "Shortcode");
 

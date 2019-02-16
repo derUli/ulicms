@@ -2,6 +2,11 @@
 
 Entfernte Features:
 * Alte Ansicht von "Pakete" entfernt
+* Folge Optionen wurden aus dem Einstellungen entfernt.
+  * Gebe "generator" Meta-Tag aus
+  Es ist geplant, ein optionales Modul zu veröffentlichen, welches die entfernten
+  Einstellungen wieder zum System hinzufügt.
+
 
 ===== Neues in UliCMS 2019.2 =====
 

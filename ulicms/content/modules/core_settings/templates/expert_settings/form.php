@@ -14,8 +14,8 @@ if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker-
 <?php echo ModuleHelper::buildMethodCallForm("ExpertSettingsController", "save");?>
 
 <p>
-	<a href="<?php echo ModuleHelper::buildActionURL("settings");?>"
-		class="btn btn-default btn-back"><?php translate("back")?></a>
+	<a href="<?php echo ModuleHelper::buildActionURL("other_settings");?>"
+		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
 <strong><?php translate("option");?></strong>
 <br />
@@ -29,7 +29,7 @@ if ($permissionChecker->hasPermission("expert_settings") and $permissionChecker-
 <textarea name="value" rows=15 cols=80><?php Template::escape($value);?></textarea>
 <br />
 <br />
-<button type="submit" class="btn btn-primary"><?php translate("create_option");?></button>
+<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> <?php translate("create_option");?></button>
 <?php echo ModuleHelper::endForm();?>
 
 <?php
