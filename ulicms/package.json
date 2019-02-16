@@ -2,7 +2,7 @@
 	"name": "ulicms",
 	"description": "Open Source Content Management System",
 	"dependencies": {
-		"codemirror": "*"
+		"codemirror-minified": "*"
 	},
 	"license": "BSD",
 	"private": true
