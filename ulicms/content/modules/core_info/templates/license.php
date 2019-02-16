@@ -1,5 +1,5 @@
 <a href="<?php echo ModuleHelper::buildActionURL("info");?>"
-	class="btn btn-info" role="button"><?php translate("back")?></a>
+	class="btn btn-info" role="button"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 <h2><?php translate("license");?></h2>
 Copyright (c) 2011 - 2019, Ulrich Schmidt
 <br>

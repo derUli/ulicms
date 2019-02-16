@@ -2,11 +2,13 @@
 $permissionChecker = new ACL();
 if ($permissionChecker->hasPermission("logo")) {
     ?>
+
 <p>
 	<a
-		href="<?php echo ModuleHelper::buildActionURL("settings_categories");?>"
+		href="<?php echo ModuleHelper::buildActionURL("design");?>"
 		class="btn btn-default btn-back"><i class="fa fa-arrow-left"></i> <?php translate("back")?></a>
 </p>
+<h1><?php translate("upload_new_logo");?></h1>
 <p>
 <?php translate("logo_infotext");?>
 </p>

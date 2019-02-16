@@ -254,6 +254,22 @@ div#google-fonts {
     echo real_htmlspecialchars(Settings::get("body-background-color"));
     ?>"></td>
 	</tr>
+               <?php
+    
+    if ($permissionChecker->hasPermission("logo")) {
+        ?>
+        <tr>
+            <td>
+                <strong><?php translate("logo");?></strong>
+            </td>
+            <td>
+
+	<a href="index.php?action=logo_upload" class="btn btn-default"><i
+		class="fas fa-tools"></i> <?php translate("upload_new_logo");?></a>
+            </td></tr>
+	<?php
+    }
+    ?>
 		<?php
     
     if ($permissionChecker->hasPermission("favicon")) {

@@ -92,15 +92,6 @@ if ($permissionChecker->hasPermission("settings_simple") or $permissionChecker->
     ?>
 <?php
     
-    if ($permissionChecker->hasPermission("logo")) {
-        ?>
-	<a href="index.php?action=logo_upload" class="btn btn-default"><i
-		class="fas fa-tools"></i> <?php translate("logo");?></a> <br /> <br />
-	<?php
-    }
-    ?>
-<?php
-    
     if ($permissionChecker->hasPermission("languages")) {
         ?>
 	<a href="index.php?action=languages" class="btn btn-default"><i

@@ -1,12 +1,17 @@
 ===== Neues in UliCMS 2019.2.1 =====
 
+Verbesserungen:
+* Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen
+
+Fehlerkorrekturen:
+* Fehlendes Icon zur "Lizenz" Backend-Seite hinzugefügt
+
 Entfernte Features:
 * Alte Ansicht von "Pakete" entfernt
 * Folge Optionen wurden aus dem Einstellungen entfernt.
   * Gebe "generator" Meta-Tag aus
-  Es ist geplant, ein optionales Modul zu veröffentlichen, welches die entfernten
-  Einstellungen wieder zum System hinzufügt.
-
+  * cron.php nicht automatisch ausführen
+  Es ist geplant, für die Anwender, die diese Einstellungen benötigen, ein optionales Modul zu veröffentlichen, welches die entfernten Optionen wieder zum System hinzufügt.
 
 ===== Neues in UliCMS 2019.2 =====
 

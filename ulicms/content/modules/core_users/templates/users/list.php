@@ -110,10 +110,6 @@ if ($permissionChecker->hasPermission("users")) {
 	</table>
 	<?php }?>
 </div>
-<?php
-    enqueueScriptFile(ModuleHelper::buildRessourcePath("core_settings", "js/users.js"));
-    combinedScriptHtml();
-    ?>
 <br />
 <br />
 <?php
