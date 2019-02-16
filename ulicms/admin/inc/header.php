@@ -35,12 +35,12 @@ $enq = array(
     "scripts/datetimepicker/jquery.datetimepicker.full.js",
     "scripts/jquery.form.min.js",
     "scripts/vallenato/vallenato.js",
-    "codemirror/lib/codemirror.js",
-    "codemirror/mode/php/php.js",
-    "codemirror/mode/xml/xml.js",
-    "codemirror/mode/javascript/javascript.js",
-    "codemirror/mode/clike/clike.js",
-    "codemirror/mode/css/css.js",
+    "../node_modules/codemirror-minified/lib/codemirror.js",
+    "../node_modules/codemirror-minified/mode/php/php.js",
+    "../node_modules/codemirror-minified/mode/xml/xml.js",
+    "../node_modules/codemirror-minified/mode/javascript/javascript.js",
+    "../node_modules/codemirror-minified/mode/clike/clike.js",
+    "../node_modules/codemirror-minified/mode/css/css.js",
     "scripts/url.min.js",
     "scripts/util.js",
     "scripts/users.js",
@@ -97,8 +97,8 @@ $(".menu li:has(ul)").doubleTapToGo();
 <?php include "inc/ulicms_touch_icons.php";?>
 <?php
 $styles[] = "css/bootstrap.min.css";
-$styles[] = "codemirror/lib/codemirror.css";
-$styles[] = "codemirror/lib/codemirror.css";
+$styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
+$styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
 $styles[] = "css/modern.css";
 $styles[] = "scripts/css/select2.min.css";
 $styles[] = "scripts/datetimepicker/jquery.datetimepicker.min.css";

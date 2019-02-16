@@ -147,6 +147,12 @@ function unbindEvents() {
 	$(".clear-field").off("click");
 }
 
+function refreshCodeMirrors(){
+	$('.CodeMirror').each(function(i, el){
+				el.CodeMirror.refresh();
+			});
+}
+
 AllTypes = {}
 
 $(document).ready(function() {
@@ -161,6 +167,11 @@ $(document).ready(function() {
 			showAndHideFieldsByTypeWithoutEffects();
 			$(".loadspinner").hide();
 			$(".pageform").show();
+			// Refresh CodeMirror
+			refreshCodeMirrors();
+			$('.accordion-header').click(function () {
+				refreshCodeMirrors();
+			});
 		}});
 
 		bindEvents();
