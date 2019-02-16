@@ -6,9 +6,7 @@ class ActionRegistry
     private static $assignedControllers = array();
 
     private static $defaultCoreActions = array(
-        "groups" => "inc/groups.php",
-        "modules" => "inc/modules.php",
-        "available_modules" => "inc/available_modules.php",
+        "groups" => "inc/groups.php",        "available_modules" => "inc/available_modules.php",
         "module_settings" => "inc/module_settings.php"
     );
 
