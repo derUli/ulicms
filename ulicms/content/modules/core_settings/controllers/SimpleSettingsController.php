@@ -22,7 +22,14 @@ class SimpleSettingsController extends Controller
         } else {
             Settings::delete("disable_password_reset");
         }
+        
+        
         do_event("after_safe_simple_settings");
+        
+        // if called by ajax return no content to improve performance
+        if(Request::isAjaxRequest()){
+            HTTPStatusCodeResult(HttpStatusCode::OK);
+        }
         Request::redirect(ModuleHelper::buildActionURL("settings_simple"));
     }
 

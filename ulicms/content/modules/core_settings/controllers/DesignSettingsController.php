@@ -1,34 +1,32 @@
 <?php
 
-class DesignSettingsController extends Controller
-{
+class DesignSettingsController extends Controller {
 
     private $moduleName = "core_settings";
 
-    public function savePost()
-    {
-        if (! isset($_REQUEST["disable_custom_layout_options"])) {
+    public function savePost() {
+        if (!isset($_REQUEST["disable_custom_layout_options"])) {
             Settings::set("disable_custom_layout_options", "disable");
         } else {
             Settings::delete("disable_custom_layout_options");
         }
-        
+
         if (isset($_REQUEST["no_mobile_design_on_tablet"])) {
             Settings::set("no_mobile_design_on_tablet", "no_mobile_design_on_tablet");
         } else {
             Settings::delete("no_mobile_design_on_tablet");
         }
-        
+
         if (isset($_REQUEST["video_width_100_percent"])) {
             Settings::set("video_width_100_percent", "width");
         } else {
             Settings::delete("video_width_100_percent");
         }
-        
+
         if ($_REQUEST["additional_menus"] !== $additional_menus) {
             Settings::set("additional_menus", $_REQUEST["additional_menus"]);
         }
-        
+
         // Wenn Formular abgesendet wurde, Wert Speichern
         if ($_REQUEST["theme"] !== $theme) { // if theme auf
             $themes = getThemesList();
@@ -37,7 +35,6 @@ class DesignSettingsController extends Controller
                 $theme = $_REQUEST["theme"];
             } // if faster_in_array theme zu
         } // if theme zu
-          
         // Wenn Formular abgesendet wurde, Wert Speichern
         if ($_REQUEST["mobile_theme"] !== $mobile_theme) { // if mobile_theme auf
             $themes = getThemesList();
@@ -48,46 +45,47 @@ class DesignSettingsController extends Controller
                 $mobile_theme = $_REQUEST["mobile_theme"];
             } // if faster_in_array mobile_theme zu
         } // if mobile_theme zu
-        
+
         if ($_REQUEST["default_font"] != Settings::get("default_font")) {
-            if (! empty($_REQUEST["custom-font"])) {
+            if (!empty($_REQUEST["custom-font"])) {
                 $font = $_REQUEST["custom-font"];
             } else {
                 $font = $_REQUEST["default_font"];
             }
-            
+
             $font = $font;
-            
+
             Settings::set("default_font", $font);
         }
-        
-        if (! empty($_REQUEST["google-font"])) {
+
+        if (!empty($_REQUEST["google-font"])) {
             $font = $_REQUEST["google-font"];
             $font = $font;
             Settings::set("google-font", $font);
         }
-        
+
         Settings::set("font-size", $_REQUEST["font-size"]);
         Settings::set("ckeditor_skin", $_REQUEST["ckeditor_skin"]);
-        
+
         if (Settings::get("header-background-color") != $_REQUEST["header-background-color"]) {
             Settings::set("header-background-color", $_REQUEST["header-background-color"]);
         }
-        
+
         if (Settings::get("body-text-color") != $_REQUEST["body-text-color"]) {
             Settings::set("body-text-color", $_REQUEST["body-text-color"]);
         }
-        
+
         if (Settings::get("title_format") != $_REQUEST["title_format"])
             Settings::set("title_format", $_REQUEST["title_format"]);
-        
+
         if (Settings::get("body-background-color") != $_REQUEST["body-background-color"]) {
             Settings::set("body-background-color", $_REQUEST["body-background-color"]);
         }
+
+        HTTPStatusCodeResult(HttpStatusCode::OK);
     }
 
-    public function getFontFamilys()
-    {
+    public function getFontFamilys() {
         global $fonts;
         $fonts = Array();
         $fonts["Times New Roman"] = "TimesNewRoman, 'Times New Roman', Times, Baskerville, Georgia, serif";
@@ -113,19 +111,18 @@ class DesignSettingsController extends Controller
         $fonts["Segoe"] = "'wf_SegoeUI', 'Segoe UI', 'Segoe','Segoe WP', 'Tahoma', 'Verdana', 'Arial', 'sans-serif'";
         $fonts["Google Fonts"] = "google";
         $fonts = apply_filter($fonts, "fonts_filter");
-        
+
         // Hier bei Bedarf weitere Fonts einfügen
         // $fonts["Meine Font 1"] = "myfont1";
         // $fonts["Meine Font 2"] = "myfont2";
         // $fonts["Meine Font 3"] = "myfont3";
         // Weitere Fonts Ende
         uksort($fonts, "strnatcasecmp");
-        
+
         return $fonts;
     }
 
-    public function getGoogleFonts()
-    {
+    public function getGoogleFonts() {
         $retval = array();
         $file = ModuleHelper::buildModuleRessourcePath($this->moduleName, "data/webFontNames.opml");
         $content = file_get_contents($file);
@@ -135,4 +132,5 @@ class DesignSettingsController extends Controller
         }
         return $retval;
     }
+
 }
