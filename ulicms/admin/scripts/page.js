@@ -147,11 +147,6 @@ function unbindEvents() {
 	$(".clear-field").off("click");
 }
 
-function refreshCodeMirrors(){
-	$('.CodeMirror').each(function(i, el){
-				el.CodeMirror.refresh();
-			});
-}
 
 AllTypes = {}
 

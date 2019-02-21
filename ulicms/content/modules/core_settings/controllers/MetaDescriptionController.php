@@ -16,6 +16,10 @@ class MetaDescriptionController extends Controller
                 }
             }
         }
+        // if called by ajax return no content to improve performance
+        if (Request::isAjaxRequest()) {
+            HTTPStatusCodeResult(HttpStatusCode::OK);
+        }
         Request::redirect(ModuleHelper::buildActionURL("meta_description"));
     }
 }

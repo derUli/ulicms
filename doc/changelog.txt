@@ -6,7 +6,10 @@ Verbesserungen:
 * minify_html ist nun per default eingeschalten.
 
 Fehlerkorrekturen:
-* Fehlendes Icon zur "Lizenz" Backend-Seite hinzugefügt
+* Auf der "Lizenz" Backend-Seite war ein Button nicht mit einem Icon versehen
+* Der CodeMirror HTML-Editor wurde fehlerhaft dargestellt, wenn man die Checkbox
+  "Aktiviere DSGVO Checkbox für Formulare" in den Datenschutz Einstellungen
+  anklickt.
 
 Entfernte Features:
 * Alte Ansicht von "Pakete" entfernt
