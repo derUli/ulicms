@@ -182,7 +182,7 @@ if ($permissionChecker->hasPermission("settings_simple")) {
 		
 		<td align="center">
 			<button type="submit" class="btn btn-primary">
-				<i class="fa fa-save"></i> <?php translate("OK")?></button>
+				<i class="fa fa-save"></i> <?php translate("save_changes")?></button>
 		</td>
 	</tr>
 </table>
