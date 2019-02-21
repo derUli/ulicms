@@ -1,6 +1,21 @@
 <?php
 use UliCMS\Security\PermissionChecker;
 
+function startsWith($haystack, $needle, $case = true)
+{
+    if ($case) {
+        return (strcmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
+    }
+    return (strcasecmp(substr($haystack, 0, strlen($needle)), $needle) === 0);
+}
+
+function endsWith($haystack, $needle, $case = true)
+{
+    if ($case) {
+        return (strcmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
+    }
+    return (strcasecmp(substr($haystack, strlen($haystack) - strlen($needle)), $needle) === 0);
+}
 function idefine($key, $value)
 {
     if (! defined($key)) {
@@ -169,7 +184,7 @@ function add_translation($key, $value)
 function register_translation($key, $value)
 {
     $key = strtoupper($key);
-    if (! startswith($key, "TRANSLATION_")) {
+    if (! startsWith($key, "TRANSLATION_")) {
         $key = "TRANSLATION_" . $key;
     }
     idefine($key, $value);
