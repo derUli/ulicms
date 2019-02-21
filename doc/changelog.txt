@@ -2,6 +2,7 @@
 
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen
+* Performance des Speicherns einer Seite verbessert
 
 Fehlerkorrekturen:
 * Fehlendes Icon zur "Lizenz" Backend-Seite hinzugefügt

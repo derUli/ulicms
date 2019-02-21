@@ -367,7 +367,12 @@ class PageController extends Controller
         
         do_event("after_edit_page");
         
-        Request::redirect(ModuleHelper::buildActionURL("pages"));
+        // if called by ajax return no content to improve performance
+        if(Request::isAjaxRequest()){
+            HTTPStatusCodeResult(HttpStatusCode::OK);
+        }
+        
+        Response::redirect(ModuleHelper::buildActionURL("pages"));
     }
 
     public function undeletePost()
