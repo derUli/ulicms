@@ -3,7 +3,7 @@
 class StringHelper extends Helper {
 
     public static function removeEmptyLinesFromString($input) {
-        return preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $input);
+        return normalizeLN(preg_replace("/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/", "\n", $input), "\n");
     }
 
     public static function isNullOrEmpty($variable) {

@@ -1,3 +1,15 @@
+$(document).ready(function () {
+    $.ajaxSetup({cache: false});
+    
+    // It seems like the autocomplete html attribute 
+    // is broken in some modern browsers (Chrome)
+    // This is an ugly workaround for that issue
+    $("form input[autocomplete], form[autocomplete]").not(":disabled").prop("disabled", true);
+    setTimeout(function () {
+        $("form input[autocomplete], form[autocomplete] input").prop("disabled", false);
+    }, 500);
+});
+
 $(function () {
     var language = $("html").data("select2-language");
 
@@ -64,8 +76,5 @@ $(function () {
             event.preventDefault();
         }
 
-    });
-    $(document).ready(function () {
-        $.ajaxSetup({cache: false});
     });
 });

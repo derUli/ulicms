@@ -12,6 +12,8 @@ Fehlerkorrekturen:
 * Der CodeMirror HTML-Editor wurde fehlerhaft dargestellt, wenn man die Checkbox
   "Aktiviere DSGVO Checkbox für Formulare" in den Datenschutz Einstellungen
   anklickt.
+* Die Deaktivierung der Auto-Vervollständigung für Formulare funktionierte
+  in einigen modernen Browsern (z.B. Google Chrome) nicht mehr.
 
 Entfernte Features:
 * Alte Ansicht von "Pakete" entfernt
