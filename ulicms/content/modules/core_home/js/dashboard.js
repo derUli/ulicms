@@ -1,6 +1,6 @@
 $(function () {
     $("#ulicms-newsfeed").click(function (event) {
-        if($(event.target).hasClass("loaded")){
+        if ($(event.target).hasClass("loaded")) {
             return;
         }
         var url = $("#ulicms-feed").data("url");
@@ -8,7 +8,7 @@ $(function () {
         $(event.target).addClass("loaded")
     });
     var url = $("#patch-notification").data("url");
-    $.get(url, function (data, status) {
+    $.get(url, function (data) {
         if (data.length > 0) {
             $("#patch-notification #patch-message").html(data);
             $("#patch-notification").slideDown();
