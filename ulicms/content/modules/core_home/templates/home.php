@@ -56,7 +56,7 @@ if ($permissionChecker->hasPermission("dashboard")) {
 	<?php
     if (! Settings::get("disable_ulicms_newsfeed")) {
         ?>
-	<h2 class="accordion-header">
+	<h2 class="accordion-header" id="ulicms-newsfeed">
 	<?php translate("ulicms_news");?></h2>
 	<div class="accordion-content" id="ulicms-feed"
 		data-url="<?php echo ModuleHelper::buildMethodCallUrl(HomeController::class, "newsfeed")?>">
