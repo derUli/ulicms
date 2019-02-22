@@ -9,8 +9,8 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
     public function testRemoveEmptyLineFromString() {
         $input = file_get_contents(dirname(__FILE__) .
                 "/fixtures/removeEmptyLinesFromString.input.txt");
-        $expected = file_get_contents(dirname(__FILE__) .
-                "/fixtures/removeEmptyLinesFromString.expected.txt");
+        $expected = normalizeLN(file_get_contents(dirname(__FILE__) .
+                "/fixtures/removeEmptyLinesFromString.expected.txt"), "\n");
 
         $this->assertEquals($expected,
                 StringHelper::removeEmptyLinesFromString($input));
