@@ -1,4 +1,5 @@
 <?php
+use UliCMS\Exceptions\NotImplementedException;
 
 class StringHelperTest extends \PHPUnit\Framework\TestCase
 {
@@ -6,6 +7,11 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase
     private function getTestFilePath()
     {
         return dirname(__FILE__) . "/fixtures/lines.txt";
+    }
+    
+    // TODO: Implement test
+    public function testRemoveEmptyLineFromString(){
+        throw new NotImplementedException();
     }
 
     public function testlinesFromFile()
