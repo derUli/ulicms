@@ -415,6 +415,8 @@ class PageController extends Controller
 
     public function getContentTypes()
     {
-        JSONResult(DefaultContentTypes::getAll());
+		$json = json_encode ( DefaultContentTypes::getAll(), JSON_UNESCAPED_SLASHES );
+
+        RawJSONResult($json);
     }
 }
