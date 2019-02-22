@@ -1,5 +1,8 @@
 <?php
 
+
+use zz\Html\HTMLMinify;
+
 class HomeController extends Controller
 {
 
@@ -36,6 +39,14 @@ class HomeController extends Controller
 
     public function newsfeed()
     {
-        HtmlResult(Template::executeModuleTemplate("core_home", "news.php"));
+
+		$html = Template::executeModuleTemplate("core_home", "news.php");
+		$options = array(
+            'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
+        );
+        $HTMLMinify = new HTMLMinify($html, $options);
+        $html = $HTMLMinify->process();
+		$html = StringHelper::removeEmptyLinesFromString($html);
+        HtmlResult($html);
     }
 }
