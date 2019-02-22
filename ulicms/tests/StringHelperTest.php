@@ -6,7 +6,6 @@ class StringHelperTest extends \PHPUnit\Framework\TestCase {
         return dirname(__FILE__) . "/fixtures/lines.txt";
     }
 
-    // TODO: Implement test
     public function testRemoveEmptyLineFromString() {
         $input = file_get_contents(dirname(__FILE__) .
                 "/fixtures/removeEmptyLinesFromString.input.txt");
