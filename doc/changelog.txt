@@ -1,9 +1,11 @@
 ===== Neues in UliCMS 2019.2.1 =====
+Neue Features:
+* Performance des Speicherns von Seiten und einigen Einstellungen verbessert
+* minify_html ist nun per default eingeschalten.
+* Das Feld "Menü als Grafik" wird nun ausgeblendet, wenn man "Nicht im Menü" auswählt.
 
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen
-* Performance des Speicherns von Seiten und einigen Einstellungen verbessert
-* minify_html ist nun per default eingeschalten.
 
 Fehlerkorrekturen:
 * Auf der "Lizenz" Backend-Seite war ein Button nicht mit einem Icon versehen
