@@ -42,7 +42,7 @@ class HomeController extends Controller
 
 		$html = Template::executeModuleTemplate("core_home", "news.php");
 		$options = array(
-            'optimizationLevel' => HTMLMinify::OPTIMIZATION_SIMPLE
+            'optimizationLevel' => HTMLMinify::OPTIMIZATION_ADVANCED
         );
         $HTMLMinify = new HTMLMinify($html, $options);
         $html = $HTMLMinify->process();
