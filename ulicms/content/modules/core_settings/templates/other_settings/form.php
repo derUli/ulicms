@@ -53,7 +53,8 @@ if (!$permissionChecker->hasPermission("other")) {
     ?>
     <?php
     echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", array(), "post", array(
-        "id" => "other_settings"
+        "id" => "other_settings",
+        autocomplete => "off"
     ));
     ?>
     <p>
@@ -77,9 +78,9 @@ if (!$permissionChecker->hasPermission("other")) {
             </p>
         </div>
         <h2 class="accordion-header">
-    <?php
-    translate("security");
-    ?>
+            <?php
+            translate("security");
+            ?>
         </h2>
 
         <div class="accordion-content">
@@ -87,7 +88,7 @@ if (!$permissionChecker->hasPermission("other")) {
             <div class="label">
                 <label for="force_password_change_every_x_days"><?php
         translate("FORCE_PASSWORD_CHANGE_EVERY_X_DAYS");
-        ?>
+            ?>
                 </label>
 
             </div>
@@ -96,15 +97,15 @@ if (!$permissionChecker->hasPermission("other")) {
                 <input type="number" name="force_password_change_every_x_days"
                        min="0" max="999"
                        value="<?php
-        echo $force_password_change_every_x_days;
-        ?>" />
+                echo $force_password_change_every_x_days;
+            ?>" />
             </div>
             <br />
 
             <div class="label">
                 <label for="max_failed_logins_items"><?php
-                       translate("max_failed_login_items");
-                       ?>
+                   translate("max_failed_login_items");
+            ?>
                 </label>
 
             </div>
@@ -112,35 +113,35 @@ if (!$permissionChecker->hasPermission("other")) {
             <div class="inputWrapper">
                 <input type="number" name="max_failed_logins_items" min="0" max="999"
                        value="<?php
-                    echo intval($max_failed_logins_items);
-                    ?>" />
+                echo intval($max_failed_logins_items);
+            ?>" />
             </div>
             <h2><?php translate("http_headers"); ?></h2>
             <div class="form-group">
 
                 <label for="x_frame_options"><?php translate("x_frame_options") ?></label>
-                       <?php echo UliCMS\HTML\Input::SingleSelect("x_frame_options", $x_frame_options, $xFrameOptionsItems); ?>
+                <?php echo UliCMS\HTML\Input::SingleSelect("x_frame_options", $x_frame_options, $xFrameOptionsItems); ?>
             </div>
             <div class="form-group">
 
                 <label for="x_frame_options"><?php translate("x_xss_protection") ?></label>
-    <?php echo UliCMS\HTML\Input::SingleSelect("x_xss_protection", $x_xss_protection, $xXssProtectionOptions); ?>
+                <?php echo UliCMS\HTML\Input::SingleSelect("x_xss_protection", $x_xss_protection, $xXssProtectionOptions); ?>
             </div>
             <h2><?php translate("google_authenticator"); ?></h2>
             <div class="label">
                 <label for="twofactor_authentication"><?php
-    translate("2_FACTOR_AUTHENTICATION_ENABLED");
-    ?>
+                translate("2_FACTOR_AUTHENTICATION_ENABLED");
+                ?>
                 </label>
             </div>
             <div class="inputWrapper">
                 <input type="checkbox" id="twofactor_authentication"
                        name="twofactor_authentication"
-    <?php
-    if ($twofactor_authentication) {
-        echo "checked ";
-    }
-    ?>>
+                       <?php
+                       if ($twofactor_authentication) {
+                           echo "checked ";
+                       }
+                       ?>>
             </div>
             <p>
                 <img src="<?php echo $qrCodeUrl; ?>"
@@ -151,25 +152,25 @@ if (!$permissionChecker->hasPermission("other")) {
                 <a href="https://support.google.com/accounts/answer/1066447"
                    target="_blank" class="btn btn-info"><i
                         class="fa fa-question-circle" aria-hidden="true"></i>
-                       <?php translate("help"); ?></a>
+                    <?php translate("help"); ?></a>
             </p>
 
-    <?php
-    if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
-        ?>
+            <?php
+            if ($permissionChecker->hasPermission("default_access_restrictions_edit")) {
+                ?>
                 <h2><?php translate("DEFAULT_ACCESS_RESTRICTIONS"); ?></h2>
                 <p>
                     <a
                         href="<?php echo ModuleHelper::buildActionURL("default_access_restrictions"); ?>"
                         class="btn btn-default"><i class="fas fa-tools"></i> <?php translate("view"); ?></a>
                 </p>
-        <?php
-    }
-    ?>
+                <?php
+            }
+            ?>
         </div>
 
         <h2 class="accordion-header">
-    <?php translate("EMAIL_DELIVERY"); ?>
+            <?php translate("EMAIL_DELIVERY"); ?>
         </h2>
 
 
@@ -178,17 +179,17 @@ if (!$permissionChecker->hasPermission("other")) {
             <div class="inputWrapper">
                 <select id='email_mode' name="email_mode" size="1">
                     <option value="internal"
-    <?php
-    if ($email_mode == EmailModes::INTERNAL) {
-        echo ' selected="selected"';
-    }
-    ?>>mail()</option>
+                    <?php
+                    if ($email_mode == EmailModes::INTERNAL) {
+                        echo ' selected="selected"';
+                    }
+                    ?>>mail()</option>
                     <option value="phpmailer"
-    <?php
-    if ($email_mode == EmailModes::PHPMAILER) {
-        echo ' selected="selected"';
-    }
-    ?>>SMTP</option>
+                    <?php
+                    if ($email_mode == EmailModes::PHPMAILER) {
+                        echo ' selected="selected"';
+                    }
+                    ?>>SMTP</option>
                 </select>
             </div>
             <div class="smtp_settings" id="smtp_settings" style="display: none">
@@ -206,15 +207,15 @@ if (!$permissionChecker->hasPermission("other")) {
 
 
                 <div class="label">
-    <?php
-    translate("port");
-    ?>
+                    <?php
+                    translate("port");
+                    ?>
                 </div>
                 <div class="inputWrapper">
                     <input type="text" name="smtp_port"
                            value="<?php
                 echo real_htmlspecialchars($smtp_port);
-                ?>">
+                    ?>">
 
                 </div>
 
@@ -225,11 +226,11 @@ if (!$permissionChecker->hasPermission("other")) {
                 <div class="inputWrapper">
                     <select name="smtp_encryption">
                         <option value=""
-                           <?php if (empty($smtp_encryption)) echo "selected" ?>><?php translate("unencrypted"); ?></option>
+                                <?php if (empty($smtp_encryption)) echo "selected" ?>><?php translate("unencrypted"); ?></option>
                         <option value="ssl"
-                           <?php if ($smtp_encryption == "ssl") echo "selected" ?>>SSL</option>
+                                <?php if ($smtp_encryption == "ssl") echo "selected" ?>>SSL</option>
                         <option value="tls"
-    <?php if ($smtp_encryption == "tls") echo "selected" ?>>TLS</option>
+                                <?php if ($smtp_encryption == "tls") echo "selected" ?>>TLS</option>
                     </select>
                 </div>
                 <div class="label">
@@ -240,11 +241,11 @@ if (!$permissionChecker->hasPermission("other")) {
                     <p>
                         <input type="checkbox" id="smtp_no_verify_certificate"
                                name="smtp_no_verify_certificate"
-                                <?php
-                                if ($smtp_no_verify_certificate) {
-                                    echo ' checked="checked"';
-                                }
-                                ?>
+                               <?php
+                               if ($smtp_no_verify_certificate) {
+                                   echo ' checked="checked"';
+                               }
+                               ?>
                                value="smtp_no_verify_certificate"> <br /> <small><?php translate("smtp_no_verify_certificate_warning"); ?></small>
                     </p>
                 </div>
@@ -255,34 +256,36 @@ if (!$permissionChecker->hasPermission("other")) {
                 </div>
                 <div class="inputWrapper">
                     <input type="checkbox" id="smtp_auth" name="smtp_auth"
-                               <?php
-                               if ($smtp_auth) {
-                                   echo ' checked="checked"';
-                               }
-                               ?>
+                    <?php
+                    if ($smtp_auth) {
+                        echo ' checked="checked"';
+                    }
+                    ?>
                            value="auth">
                 </div>
 
 
                 <div id="smtp_auth_div" style="display: none">
                     <div class="label">
-    <?php translate("user"); ?>
+                        <?php translate("user"); ?>
                     </div>
                     <div class="inputWrapper">
                         <input type="text" name="smtp_user"
                                value="<?php
-                    echo real_htmlspecialchars($smtp_user);
-                    ?>">
+                        echo real_htmlspecialchars($smtp_user);
+                        ?>"
+                               autocomplete="off">
                     </div>
 
                     <div class="label">
-    <?php translate("password"); ?>
+                        <?php translate("password"); ?>
                     </div>
                     <div class="inputWrapper">
                         <input type="password" name="smtp_password"
                                value="<?php
-    echo real_htmlspecialchars($smtp_password);
-    ?>">
+                        echo real_htmlspecialchars($smtp_password);
+                        ?>"
+                               autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -324,7 +327,7 @@ if (!$permissionChecker->hasPermission("other")) {
 
         </script>
         <h2 class="accordion-header">
-    <?php translate("expert_settings"); ?>
+            <?php translate("expert_settings"); ?>
         </h2>
 
         <div class="accordion-content">
@@ -337,7 +340,7 @@ if (!$permissionChecker->hasPermission("other")) {
 
     <button type="submit" name="submit" class="btn btn-primary voffset3">
         <i class="fa fa-save"></i> <?php translate("save_changes"); ?></button>
-    <?php echo ModuleHelper::endForm(); ?>
+        <?php echo ModuleHelper::endForm(); ?>
     <script type="text/javascript">
         $("#other_settings").ajaxForm({beforeSubmit: function (e) {
                 $("#message").html("");
