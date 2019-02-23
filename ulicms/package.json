@@ -4,7 +4,8 @@
     "dependencies": {
         "bootbox": "^4.4.0",
         "codemirror-minified": "*",
-        "jquery": "^1.x"
+        "jquery": "^1.x",
+        "jscolor-picker": "^2.0.4"
     },
     "license": "BSD",
     "private": true

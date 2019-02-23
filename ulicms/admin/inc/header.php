@@ -49,7 +49,8 @@ if (!file_exists($select2TranslationFile)) {
             "../node_modules/bootbox/bootbox.min.js",
             $select2TranslationFile,
             "scripts/datatables/datatables.min.js",
-            "../lib/js/global.js"
+            "../lib/js/global.js",
+            "../node_modules/jscolor-picker/jscolor.min.js"
         );
 
         if (is_logged_in()) {
@@ -69,7 +70,6 @@ if (!file_exists($select2TranslationFile)) {
         <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
         <?php combinedScriptHtml(); ?>
-        <script type="text/javascript" src="scripts/jscolor/jscolor.min.js"></script>
         <link rel="stylesheet" type="text/css"
               href="scripts/vallenato/vallenato.css" />
 
