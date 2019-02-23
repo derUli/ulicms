@@ -3,6 +3,8 @@ Neue Features:
 * Performance Verbesserungen im Backend durchgeführt
 * minify_html ist nun per default eingeschalten.
 * Das Feld "Menü als Grafik" wird nun ausgeblendet, wenn man "Nicht im Menü" auswählt.
+* Update von jQuery auf Version 3.3.1
+* Update von Bootstrap auf Version 3.4.1
 
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen
