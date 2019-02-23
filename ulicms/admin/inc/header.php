@@ -32,7 +32,7 @@ if (!file_exists($select2TranslationFile)) {
             "scripts/php.js/htmlspecialchars.js",
             "../node_modules/jquery/dist/jquery.min.js",
             "scripts/datetimepicker/jquery.datetimepicker.full.js",
-            "scripts/jquery.form.min.js",
+            "../node_modules/jquery-form/dist//jquery.form.min.js",
             "scripts/vallenato/vallenato.js",
             "../node_modules/codemirror-minified/lib/codemirror.js",
             "../node_modules/codemirror-minified/mode/php/php.js",

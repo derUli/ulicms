@@ -5,6 +5,7 @@
         "bootbox": "^4.4.0",
         "codemirror-minified": "*",
         "jquery": "^1.x",
+        "jquery-form": "^4.2.2",
         "jscolor-picker": "^2.0.4"
     },
     "license": "BSD",
