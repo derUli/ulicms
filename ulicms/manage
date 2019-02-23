@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 // wrapper for the tools in the "shell" subfolder
-if (! (php_sapi_name() === 'cli' or defined('STDIN'))) {
+if (!(php_sapi_name() === 'cli' or defined('STDIN'))) {
     header("HTTP/1.0 403 Forbidden");
     echo "This is a command line only script.";
     exit();
@@ -32,7 +32,7 @@ $script = $rootDir . "/shell/" . basename($command) . ".php";
 if (is_file($script)) {
     // if we are are not on windows and the executable bit for the script file is not set
     // we stop here with an error.
-    if (! defined('PHP_WINDOWS_VERSION_MAJOR') and ! is_executable($script)) {
+    if (!defined('PHP_WINDOWS_VERSION_MAJOR') and ! is_executable($script)) {
         echo "Error: " . basename($script) . " is not executable.\n\n";
         echo "Please run this command to make the file executable:\n";
         echo "chmod +x \"{$script}\"\n";
