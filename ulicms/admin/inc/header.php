@@ -32,7 +32,7 @@ if (!file_exists($select2TranslationFile)) {
             "scripts/php.js/htmlspecialchars.js",
             "../node_modules/jquery/dist/jquery.min.js",
             "scripts/datetimepicker/jquery.datetimepicker.full.js",
-            "../node_modules/jquery-form/dist//jquery.form.min.js",
+            "../node_modules/jquery-form/dist/jquery.form.min.js",
             "scripts/vallenato/vallenato.js",
             "../node_modules/codemirror-minified/lib/codemirror.js",
             "../node_modules/codemirror-minified/mode/php/php.js",
@@ -55,8 +55,6 @@ if (!file_exists($select2TranslationFile)) {
 
         if (is_logged_in()) {
             $enq[] = "scripts/cookie.js";
-            $enq[] = "scripts/jquery-shiftclick.js";
-            $enq[] = "scripts/shift_checkbox.js";
         }
         if (!is_mobile()) {
             $enq[] = "scripts/doubletaptogo/doubletaptogo.min.js";
