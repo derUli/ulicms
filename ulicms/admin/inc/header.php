@@ -30,7 +30,7 @@ if (!file_exists($select2TranslationFile)) {
         $enq = array(
             "scripts/php.js/strip_tags.js",
             "scripts/php.js/htmlspecialchars.js",
-            "scripts/jquery.min.js",
+            "../node_modules/jquery/dist/jquery.min.js",
             "scripts/datetimepicker/jquery.datetimepicker.full.js",
             "scripts/jquery.form.min.js",
             "scripts/vallenato/vallenato.js",
@@ -46,7 +46,7 @@ if (!file_exists($select2TranslationFile)) {
             "scripts/global.js",
             "scripts/bootstrap.min.js",
             "scripts/js/select2.min.js",
-            "scripts/bootbox.min.js",
+            "../node_modules/bootbox/bootbox.min.js",
             $select2TranslationFile,
             "scripts/datatables/datatables.min.js",
             "../lib/js/global.js"
@@ -76,7 +76,6 @@ if (!file_exists($select2TranslationFile)) {
         <?php include "inc/touch_icons.php"; ?>
         <?php
         $styles[] = "css/bootstrap.min.css";
-        $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
         $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
         $styles[] = "css/modern.scss";
         $styles[] = "scripts/css/select2.min.css";

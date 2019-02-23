@@ -24,17 +24,17 @@ class HTMLStyleTest extends \PHPUnit\Framework\TestCase
 
     public function testExternalCSS()
     {
-        $this->assertEquals("<link rel=\"stylesheet\" href=\"admin/css/modern.css\" type=\"text/css\"/>", Style::FromExternalFile("admin/css/modern.css"));
+        $this->assertEquals("<link rel=\"stylesheet\" href=\"admin/css/modern.scss\" type=\"text/css\"/>", Style::FromExternalFile("admin/css/modern.scss"));
     }
 
     public function testExternalCSSWithMedia()
     {
-        $this->assertEquals("<link rel=\"stylesheet\" href=\"admin/css/modern.css\" type=\"text/css\" media=\"all\"/>", Style::FromExternalFile("admin/css/modern.css", "all"));
+        $this->assertEquals("<link rel=\"stylesheet\" href=\"admin/css/modern.scss\" type=\"text/css\" media=\"all\"/>", Style::FromExternalFile("admin/css/modern.scss", "all"));
     }
 
     public function testExternalCSSWithMediaAndTwoFoos()
     {
-        $this->assertEquals("<link rel=\"stylesheet\" href=\"admin/css/modern.css\" type=\"text/css\" media=\"all\" foo1=\"hello\" foo2=\"world\"/>", Style::FromExternalFile("admin/css/modern.css", "all", array(
+        $this->assertEquals("<link rel=\"stylesheet\" href=\"admin/css/modern.scss\" type=\"text/css\" media=\"all\" foo1=\"hello\" foo2=\"world\"/>", Style::FromExternalFile("admin/css/modern.scss", "all", array(
             "foo1" => "hello",
             "foo2" => "world"
         )));

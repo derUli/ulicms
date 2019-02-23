@@ -1,16 +1,15 @@
 <?php
+
 include_once ULICMS_ROOT . "/api.php";
 
 use UliCMS\Exceptions\SCSSCompileException;
 
-class MinifyTest extends \PHPUnit\Framework\TestCase
-{
+class MinifyTest extends \PHPUnit\Framework\TestCase {
 
-    public function testScriptQueue()
-    {
+    public function testScriptQueue() {
         $filemtime = 0;
         $files = array(
-            "admin/scripts/jquery.min.js",
+            "node_modules/jquery/dist/jquery.js",
             "admin/scripts/global.js",
             "admin/scripts/url.min.js"
         );
@@ -21,28 +20,27 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
             }
         }
         $this->assertCount(3, $_SERVER["script_queue"]);
-        $this->assertEquals("admin/scripts/jquery.min.js", $_SERVER["script_queue"][0]);
+        $this->assertEquals("node_modules/jquery/dist/jquery.js", $_SERVER["script_queue"][0]);
         $this->assertEquals("admin/scripts/url.min.js", $_SERVER["script_queue"][2]);
-        
+
         resetScriptQueue();
         $this->assertCount(0, $_SERVER["script_queue"]);
-        
+
         foreach ($files as $file) {
             enqueueScriptFile($file);
         }
-        
-        $this->assertEquals('<script src="?output_scripts=admin/scripts/jquery.min.js;admin/scripts/global.js;admin/scripts/url.min.js&amp;time=' . $filemtime . '" type="text/javascript"></script>', getCombinedScriptHtml());
+
+        $this->assertEquals('<script src="?output_scripts=node_modules/jquery/dist/jquery.js;admin/scripts/global.js;admin/scripts/url.min.js&amp;time=' . $filemtime . '" type="text/javascript"></script>', getCombinedScriptHtml());
         $this->assertCount(0, $_SERVER["script_queue"]);
     }
 
-    public function testStylesheetQueue()
-    {
+    public function testStylesheetQueue() {
         $filemtime = 0;
         $files = array(
             "core.css",
             "admin/css/bootstrap.css",
             "admin/css/bootstrap-theme.css",
-            "admin/css/modern.css"
+            "admin/css/modern.scss"
         );
         foreach ($files as $file) {
             enqueueStylesheet($file);
@@ -52,21 +50,20 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         }
         $this->assertCount(4, $_SERVER["stylesheet_queue"]);
         $this->assertEquals("admin/css/bootstrap.css", $_SERVER["stylesheet_queue"][1]);
-        $this->assertEquals("admin/css/modern.css", $_SERVER["stylesheet_queue"][3]);
-        
+        $this->assertEquals("admin/css/modern.scss", $_SERVER["stylesheet_queue"][3]);
+
         resetStylesheetQueue();
         $this->assertCount(0, $_SERVER["stylesheet_queue"]);
-        
+
         foreach ($files as $file) {
             enqueueStylesheet($file);
         }
-        
-        $this->assertEquals('<link rel="stylesheet" href="?output_stylesheets=core.css;admin/css/bootstrap.css;admin/css/bootstrap-theme.css;admin/css/modern.css&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml());
+
+        $this->assertEquals('<link rel="stylesheet" href="?output_stylesheets=core.css;admin/css/bootstrap.css;admin/css/bootstrap-theme.css;admin/css/modern.scss&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml());
         $this->assertCount(0, $_SERVER["stylesheet_queue"]);
     }
 
-    public function testMinifySCSSExpectCSS()
-    {
+    public function testMinifySCSSExpectCSS() {
         unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
         $style = array(
@@ -78,13 +75,12 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         $_GET["time"] = time();
         $_SERVER["REQUEST_URI"] = getCombinedStylesheetURL();
         $expected = file_get_contents("tests/fixtures/scss/expected.css");
-        
+
         $real = getCombinedStylesheets(true);
         $this->assertEquals($real, $expected);
     }
 
-    public function testMinifySCSSThrowsException()
-    {
+    public function testMinifySCSSThrowsException() {
         unsetSCSSImportPaths();
         CacheUtil::getAdapter(true)->clear();
         $style = array(
@@ -101,18 +97,18 @@ class MinifyTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testSetAndGetSCSSImportPaths()
-    {
+    public function testSetAndGetSCSSImportPaths() {
         $paths = array(
             "folder1/foo/bar",
             "folder2/another/folder"
         );
         $this->assertNull(getSCSSImportPaths());
         setSCSSImportPaths($paths);
-        
+
         $this->assertEquals($paths, getSCSSImportPaths());
         unsetSCSSImportPaths();
-        
+
         $this->assertNull(getSCSSImportPaths());
     }
+
 }

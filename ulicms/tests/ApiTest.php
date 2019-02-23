@@ -1,23 +1,20 @@
 <?php
+
 include_once Path::Resolve("ULICMS_ROOT/templating.php");
 
-class ApiTest extends \PHPUnit\Framework\TestCase
-{
+class ApiTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp()
-    {
+    public function setUp() {
         $this->cleanUp();
         @session_start();
     }
 
-    public function tearDown()
-    {
+    public function tearDown() {
         $this->cleanUp();
         @session_destroy();
     }
 
-    public function cleanUp()
-    {
+    public function cleanUp() {
         unset($_REQUEST["action"]);
         Settings::set("maintenance_mode", "0");
         chdir(Path::resolve("ULICMS_ROOT"));
@@ -26,14 +23,12 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         unset($_REQUEST["csrf_token"]);
     }
 
-    public function testRemovePrefix()
-    {
+    public function testRemovePrefix() {
         $this->assertEquals("my_bar", remove_prefix("foo_my_bar", "foo_"));
         $this->assertEquals("my_foo_bar", remove_prefix("foo_my_foo_bar", "foo_"));
     }
 
-    public function testRemoveSuffix()
-    {
+    public function testRemoveSuffix() {
         $this->assertEquals("Hello", remove_suffix("Hello World!", " World!"));
         $this->assertEquals("Foo", remove_suffix("FooBar", "Bar"));
         $this->assertEquals("file", remove_suffix("file.txt", ".txt"));
@@ -42,10 +37,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Foo", remove_suffix("Foo", "Hello"));
     }
 
-    public function testIsCrawler()
-    {
+    public function testIsCrawler() {
         $pkg = new PackageManager();
-        if (! faster_in_array("CrawlerDetect", $pkg->getInstalledModules())) {
+        if (!faster_in_array("CrawlerDetect", $pkg->getInstalledModules())) {
             $this->assertNotNull("CrawlerDetect is not installed. Skip this test");
             return;
         }
@@ -62,16 +56,14 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         }
     }
 
-    public function testGetAllUsedLanguages()
-    {
+    public function testGetAllUsedLanguages() {
         $languages = getAllUsedLanguages();
         $this->assertGreaterThanOrEqual(2, count($languages));
         $this->assertTrue(in_array("de", $languages));
         $this->assertTrue(in_array("en", $languages));
     }
 
-    public function testAddTranslation()
-    {
+    public function testAddTranslation() {
         $key1 = uniqid();
         $key2 = "TRANSLATION_" . uniqid();
         $value1 = uniqid();
@@ -85,8 +77,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($value2, constant(strtoupper($key2)));
     }
 
-    public function testGetModuleMeta()
-    {
+    public function testGetModuleMeta() {
         $this->assertEquals("core", getModuleMeta("core_home", "source"));
         $meta = getModuleMeta("core_home");
         $this->assertEquals("models/HomeViewModel.php", $meta["objects"]["HomeViewModel"]);
@@ -96,28 +87,25 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertNull(getModuleMeta("core_home", "not_here"));
     }
 
-    public function testBool2YesNo()
-    {
+    public function testBool2YesNo() {
         $this->assertEquals(get_translation("yes"), bool2YesNo(1));
         $this->assertEquals(get_translation("no"), bool2YesNo(0));
         $this->assertEquals(get_translation("yes"), bool2YesNo(true));
         $this->assertEquals(get_translation("no"), bool2YesNo(false));
-        
+
         $this->assertEquals("cool", bool2YesNo(1, "cool", "doof"));
         $this->assertEquals("doof", bool2YesNo(0, "cool", "doof"));
         $this->assertEquals("cool", bool2YesNo(true, "cool", "doof"));
         $this->assertEquals("doof", bool2YesNo(false, "cool", "doof"));
     }
 
-    public function testGetMime()
-    {
+    public function testGetMime() {
         $this->assertEquals("text/plain", get_mime(Path::resolve("ULICMS_ROOT/.htaccess")));
         $this->assertEquals("image/gif", get_mime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.gif")));
         $this->assertEquals("image/png", get_mime(Path::resolve("ULICMS_ROOT/admin/gfx/edit.png")));
     }
 
-    public function testIsTrue()
-    {
+    public function testIsTrue() {
         $this->assertTrue(is_true(true));
         $this->assertTrue(is_true(1));
         $this->assertFalse(is_true($nothing));
@@ -125,8 +113,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_true(0));
     }
 
-    public function testIsFalse()
-    {
+    public function testIsFalse() {
         $this->assertFalse(is_false(true));
         $this->assertFalse(is_false(1));
         $this->assertTrue(is_false($nothing));
@@ -134,20 +121,17 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(is_false(0));
     }
 
-    public function testIsJsonTrue()
-    {
+    public function testIsJsonTrue() {
         $validJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "metadata.json"));
         $this->assertTrue(is_json($validJson));
     }
 
-    public function testIsJsonFalse()
-    {
+    public function testIsJsonFalse() {
         $invalidJson = File::read(ModuleHelper::buildModuleRessourcePath("core_content", "lang/de.php"));
         $this->assertFalse(is_json($invalidJson));
     }
 
-    public function testIsNumericArray()
-    {
+    public function testIsNumericArray() {
         $this->assertTrue(is_numeric_array(array(
             "42",
             1337,
@@ -168,8 +152,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse(is_numeric_array(9.1));
     }
 
-    public function testVarIsType()
-    {
+    public function testVarIsType() {
         $this->assertTrue(var_is_type(123, "numeric", true));
         $this->assertTrue(var_is_type(null, "numeric", false));
         $this->assertFalse(var_is_type(null, "numeric", true));
@@ -177,100 +160,85 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue(var_is_type("", "numeric", false));
     }
 
-    public function testStrContainsTrue()
-    {
+    public function testStrContainsTrue() {
         $this->assertTrue(str_contains("Ananas", "Ich esse gerne Ananas."));
     }
 
-    public function testStrContainsFalse()
-    {
+    public function testStrContainsFalse() {
         $this->assertFalse(str_contains("Tomaten", "Ich esse gerne Ananas."));
     }
 
-    public function testGetActionIsSet()
-    {
+    public function testGetActionIsSet() {
         $_REQUEST["action"] = "pages";
         $this->assertEquals("pages", get_action());
         unset($_REQUEST["action"]);
     }
 
-    public function testGetActionIsNotSet()
-    {
+    public function testGetActionIsNotSet() {
         $this->assertEquals("home", get_action());
     }
 
-    public function testIsMaintenanceModeOn()
-    {
+    public function testIsMaintenanceModeOn() {
         Settings::set("maintenance_mode", "1");
         $this->assertTrue(isMaintenanceMode());
     }
 
-    public function testIsMaintenanceModeOff()
-    {
+    public function testIsMaintenanceModeOff() {
         Settings::set("maintenance_mode", "0");
         $this->assertFalse(isMaintenanceMode());
     }
 
-    public function testGetStringLengthInBytes()
-    {
+    public function testGetStringLengthInBytes() {
         $this->assertEquals(39, getStringLengthInBytes("Das ist die Lösung für die Änderung."));
     }
 
-    public function testIsAdminDirTrue()
-    {
+    public function testIsAdminDirTrue() {
         chdir(Path::resolve("ULICMS_ROOT/admin"));
         $this->assertTrue(is_admin_dir());
     }
 
-    public function testIsAdminDirFalse()
-    {
+    public function testIsAdminDirFalse() {
         chdir(Path::resolve("ULICMS_ROOT"));
         $this->assertFalse(is_admin_dir());
     }
 
-    public function testSetFormat()
-    {
+    public function testSetFormat() {
         set_format("pdf");
         $this->assertEquals("pdf", $_GET["format"]);
-        
+
         set_format("txt");
         $this->assertEquals("txt", $_GET["format"]);
     }
 
-    public function testGetJqueryUrl()
-    {
-        $this->assertEquals("admin/scripts/jquery.min.js", get_jquery_url());
+    public function testGetJqueryUrl() {
+        $this->assertEquals("node_modules/jquery/dist/jquery.min.js", get_jquery_url());
     }
 
-    public function testCheckCsrfTokenNoToken()
-    {
+    public function testCheckCsrfTokenNoToken() {
         unset($_SESSION["csrf_token"]);
         $this->assertFalse(check_csrf_token());
     }
 
-    public function testCheckCsrfTokenValid()
-    {
+    public function testCheckCsrfTokenValid() {
         $token = get_csrf_token();
         $this->assertNotNull($token);
-        
+
         $_REQUEST["csrf_token"] = $token;
-        
+
         $this->assertTrue(check_csrf_token());
-        
+
         unset($_SESSION["csrf_token"]);
         unset($_REQUEST["csrf_token"]);
     }
 
-    public function testCheckCsrfTokenInvalid()
-    {
+    public function testCheckCsrfTokenInvalid() {
         $token = get_csrf_token();
         $_REQUEST["csrf_token"] = "thisisnotthetoken";
         $this->assertFalse(check_csrf_token());
         unset($_SESSION["csrf_token"]);
     }
 
-    public function testPreparePlainTextforHTMLOutput()
-    {
+    public function testPreparePlainTextforHTMLOutput() {
         $input = "This is\na\n<Textfile>.";
         $expected = "This is<br />\na<br />\n&lt;Textfile&gt;.";
         $this->assertEquals($expected, preparePlainTextforHTMLOutput($input));
@@ -278,13 +246,11 @@ class ApiTest extends \PHPUnit\Framework\TestCase
 
     // in the test environment this returns always true
     // since the tests are running at the command line
-    public function testIsCli()
-    {
+    public function testIsCli() {
         $this->assertTrue(isCLI());
     }
 
-    public function testRandStr()
-    {
+    public function testRandStr() {
         $password1 = rand_string(15);
         $password2 = rand_string(15);
         $password3 = rand_string(12);
@@ -294,8 +260,7 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertNotEquals($password2, $password1);
     }
 
-    public function testSplitAndTrim()
-    {
+    public function testSplitAndTrim() {
         $input = "Max; Muster; max@muster.de ; Musterstadt";
         $result = splitAndTrim($input);
         $this->assertEquals("Max", $result[0]);
@@ -304,9 +269,9 @@ class ApiTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals("Musterstadt", $result[3]);
     }
 
-    public function testGetThemesList()
-    {
+    public function testGetThemesList() {
         $themes = getThemesList();
         $this->assertContains("impro17", $themes);
     }
+
 }

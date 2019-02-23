@@ -1,9 +1,11 @@
 {
-	"name": "ulicms",
-	"description": "Open Source Content Management System",
-	"dependencies": {
-		"codemirror-minified": "*"
-	},
-	"license": "BSD",
-	"private": true
+    "name": "ulicms",
+    "description": "Open Source Content Management System",
+    "dependencies": {
+        "bootbox": "^4.4.0",
+        "codemirror-minified": "*",
+        "jquery": "^1.x"
+    },
+    "license": "BSD",
+    "private": true
 }

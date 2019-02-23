@@ -6,7 +6,7 @@
     <style>
     <?php 
     readfile(Path::resolve("ULICMS_ROOT/core.css "));
-    readfile(Path::resolve("ULICMS_ROOT/admin/css/modern.css "));
+    readfile(Path::resolve("ULICMS_ROOT/admin/css/modern.scss "));
     ?> body {
     	padding: 10px;
     }
