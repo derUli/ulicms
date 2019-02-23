@@ -38,8 +38,8 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $filemtime = 0;
         $files = array(
             "core.css",
-            "admin/css/bootstrap.css",
-            "admin/css/bootstrap-theme.css",
+            "node_modules/bootstrap/dist/css/bootstrap.css",
+            "node_modules/bootstrap/dist/css/bootstrap-theme.css",
             "admin/css/modern.scss"
         );
         foreach ($files as $file) {
@@ -49,8 +49,8 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             }
         }
         $this->assertCount(4, $_SERVER["stylesheet_queue"]);
-        $this->assertEquals("admin/css/bootstrap.css", $_SERVER["stylesheet_queue"][1]);
-        $this->assertEquals("admin/css/modern.scss", $_SERVER["stylesheet_queue"][3]);
+        $this->assertEquals("node_modules/bootstrap/dist/css/bootstrap.css", $_SERVER["stylesheet_queue"][1]);
+        $this->assertEquals("node_modules/bootstrap/dist/css/bootstrap-theme.css", $_SERVER["stylesheet_queue"][2]);
 
         resetStylesheetQueue();
         $this->assertCount(0, $_SERVER["stylesheet_queue"]);
@@ -59,7 +59,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             enqueueStylesheet($file);
         }
 
-        $this->assertEquals('<link rel="stylesheet" href="?output_stylesheets=core.css;admin/css/bootstrap.css;admin/css/bootstrap-theme.css;admin/css/modern.scss&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml());
+        $this->assertEquals('<link rel="stylesheet" href="?output_stylesheets=core.css;node_modules/bootstrap/dist/css/bootstrap.css;node_modules/bootstrap/dist/css/bootstrap-theme.css;admin/css/modern.scss&amp;time=' . $filemtime . '" type="text/css"/>', getCombinedStylesheetHtml());
         $this->assertCount(0, $_SERVER["stylesheet_queue"]);
     }
 

@@ -54,7 +54,7 @@ if (!$permissionChecker->hasPermission("other")) {
     <?php
     echo ModuleHelper::buildMethodCallForm("OtherSettingsController", "save", array(), "post", array(
         "id" => "other_settings",
-        autocomplete => "off"
+        "autocomplete" => "off"
     ));
     ?>
     <p>
@@ -73,8 +73,8 @@ if (!$permissionChecker->hasPermission("other")) {
 
             <p>
                 <textarea name="domain_to_language" rows="10" cols="40"><?php
-            echo real_htmlspecialchars(Settings::get("domain_to_language"));
-            ?></textarea>
+                    echo real_htmlspecialchars(Settings::get("domain_to_language"));
+                    ?></textarea>
             </p>
         </div>
         <h2 class="accordion-header">
@@ -87,8 +87,8 @@ if (!$permissionChecker->hasPermission("other")) {
             <h2><?php translate("passwords"); ?></h2>
             <div class="label">
                 <label for="force_password_change_every_x_days"><?php
-        translate("FORCE_PASSWORD_CHANGE_EVERY_X_DAYS");
-            ?>
+                    translate("FORCE_PASSWORD_CHANGE_EVERY_X_DAYS");
+                    ?>
                 </label>
 
             </div>
@@ -97,15 +97,15 @@ if (!$permissionChecker->hasPermission("other")) {
                 <input type="number" name="force_password_change_every_x_days"
                        min="0" max="999"
                        value="<?php
-                echo $force_password_change_every_x_days;
-            ?>" />
+                       echo $force_password_change_every_x_days;
+                       ?>" />
             </div>
             <br />
 
             <div class="label">
                 <label for="max_failed_logins_items"><?php
-                   translate("max_failed_login_items");
-            ?>
+                    translate("max_failed_login_items");
+                    ?>
                 </label>
 
             </div>
@@ -113,8 +113,8 @@ if (!$permissionChecker->hasPermission("other")) {
             <div class="inputWrapper">
                 <input type="number" name="max_failed_logins_items" min="0" max="999"
                        value="<?php
-                echo intval($max_failed_logins_items);
-            ?>" />
+                       echo intval($max_failed_logins_items);
+                       ?>" />
             </div>
             <h2><?php translate("http_headers"); ?></h2>
             <div class="form-group">
@@ -130,8 +130,8 @@ if (!$permissionChecker->hasPermission("other")) {
             <h2><?php translate("google_authenticator"); ?></h2>
             <div class="label">
                 <label for="twofactor_authentication"><?php
-                translate("2_FACTOR_AUTHENTICATION_ENABLED");
-                ?>
+                    translate("2_FACTOR_AUTHENTICATION_ENABLED");
+                    ?>
                 </label>
             </div>
             <div class="inputWrapper">
@@ -214,8 +214,8 @@ if (!$permissionChecker->hasPermission("other")) {
                 <div class="inputWrapper">
                     <input type="text" name="smtp_port"
                            value="<?php
-                echo real_htmlspecialchars($smtp_port);
-                    ?>">
+                           echo real_htmlspecialchars($smtp_port);
+                           ?>">
 
                 </div>
 
@@ -272,8 +272,8 @@ if (!$permissionChecker->hasPermission("other")) {
                     <div class="inputWrapper">
                         <input type="text" name="smtp_user"
                                value="<?php
-                        echo real_htmlspecialchars($smtp_user);
-                        ?>"
+                               echo real_htmlspecialchars($smtp_user);
+                               ?>"
                                autocomplete="off">
                     </div>
 
@@ -283,8 +283,8 @@ if (!$permissionChecker->hasPermission("other")) {
                     <div class="inputWrapper">
                         <input type="password" name="smtp_password"
                                value="<?php
-                        echo real_htmlspecialchars($smtp_password);
-                        ?>"
+                               echo real_htmlspecialchars($smtp_password);
+                               ?>"
                                autocomplete="off">
                     </div>
                 </div>

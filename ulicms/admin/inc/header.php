@@ -44,7 +44,7 @@ if (!file_exists($select2TranslationFile)) {
             "scripts/util.js",
             "scripts/users.js",
             "scripts/global.js",
-            "scripts/bootstrap.min.js",
+            "../node_modules/bootstrap/dist/js/bootstrap.min.js",
             "scripts/js/select2.min.js",
             "../node_modules/bootbox/bootbox.min.js",
             $select2TranslationFile,
@@ -73,7 +73,7 @@ if (!file_exists($select2TranslationFile)) {
 
         <?php include "inc/touch_icons.php"; ?>
         <?php
-        $styles[] = "css/bootstrap.min.css";
+        $styles[] = "../node_modules/bootstrap/dist/css/bootstrap.min.css";
         $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
         $styles[] = "css/modern.scss";
         $styles[] = "scripts/css/select2.min.css";
