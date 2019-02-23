@@ -70,42 +70,15 @@ if (!file_exists($select2TranslationFile)) {
 
         <?php combinedScriptHtml(); ?>
         <script type="text/javascript" src="scripts/jscolor/jscolor.min.js"></script>
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $.ajaxSetup({cache: false});
-                // It seems like the autocomplete html attribute 
-                // is broken in some modern browsers (Chrome)
-                // This is an ugly workaround for that issue
-                $("form input[autocomplete], form[autocomplete]").not(":disabled").prop("disabled", true);
-                setTimeout(function () {
-                    $("form input[autocomplete], form[autocomplete] input").prop("disabled", false);
-                }, 500);
-<?php
-if (!is_mobile()) {
-    ?>
-                    $(window).scroll(function () {
-                        if ($(this).scrollTop()) {
-                            $('a.scrollup:hidden').stop(true, true).fadeIn();
-                        } else {
-                            $('a.scrollup').stop(true, true).fadeOut();
-                        }
-                    });
-                    $(".menu li:has(ul)").doubleTapToGo();
-
-    <?php
-}
-?>
-            });
-        </script>
         <link rel="stylesheet" type="text/css"
               href="scripts/vallenato/vallenato.css" />
 
-        <?php include "inc/ulicms_touch_icons.php"; ?>
+        <?php include "inc/touch_icons.php"; ?>
         <?php
         $styles[] = "css/bootstrap.min.css";
         $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
         $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
-        $styles[] = "css/modern.css";
+        $styles[] = "css/modern.scss";
         $styles[] = "scripts/css/select2.min.css";
         $styles[] = "scripts/datetimepicker/jquery.datetimepicker.min.css";
 
@@ -124,9 +97,9 @@ if (!is_mobile()) {
         <link rel="stylesheet"
               href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
     </head>
-<?php
-do_event("before_backend_header");
-?>
+    <?php
+    do_event("before_backend_header");
+    ?>
     <?php
     $cssClasses = "";
     if (get_user_id()) {
@@ -143,15 +116,15 @@ do_event("before_backend_header");
 
     <body class="<?php esc($cssClasses); ?>"
           data-datatables-translation="<?php echo DataTablesHelper::getLanguageFileURL(getSystemLanguage()); ?>">
-<?php
-do_event("after_backend_header");
-?>
+              <?php
+              do_event("after_backend_header");
+              ?>
         <div
             class="container-fluid main <?php
-              if (get_action()) {
-                  echo 'action-' . Template::getEscape(get_action());
-              }
-              ?>">
+            if (get_action()) {
+                echo 'action-' . Template::getEscape(get_action());
+            }
+            ?>">
 
             <div class="row">
                 <div class="col-xs-8">
@@ -160,9 +133,9 @@ do_event("after_backend_header");
                             class="ulicms-logo"></a>
                 </div>
                 <div class="col-xs-4 menu-container">
-<?php
-if (is_logged_in()) {
-    ?>
+                    <?php
+                    if (is_logged_in()) {
+                        ?>
                         <div class="row pull-right top-right-icons">
                             <div class="col-xs-6">
                                 <a href="#" id="menu-clear-cache"
@@ -175,7 +148,7 @@ if (is_logged_in()) {
                                 <a id="menu-toggle"><i class="fa fa-bars"></i> </a>
                             </div>
                         </div>
-<?php } ?>
+                    <?php } ?>
                 </div>
             </div>
             <div class="row main-content">
