@@ -31,7 +31,7 @@ if (!file_exists($select2TranslationFile)) {
             "scripts/php.js/htmlspecialchars.js",
             "../node_modules/jquery/dist/jquery.min.js",
             "../node_modules/js-url/url.min.js",
-            "scripts/datetimepicker/jquery.datetimepicker.full.js",
+            "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.js",
             "../node_modules/jquery-form/dist/jquery.form.min.js",
             "scripts/vallenato/vallenato.js",
             "../node_modules/codemirror-minified/lib/codemirror.js",
@@ -55,9 +55,6 @@ if (!file_exists($select2TranslationFile)) {
         if (is_logged_in()) {
             $enq[] = "scripts/cookie.js";
         }
-        if (!is_mobile()) {
-            $enq[] = "scripts/doubletaptogo/doubletaptogo.min.js";
-        }
         ?>
         <?php
         foreach ($enq as $script) {
@@ -76,7 +73,7 @@ if (!file_exists($select2TranslationFile)) {
         $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
         $styles[] = "css/modern.scss";
         $styles[] = "../node_modules/select2/dist/css/select2.min.css";
-        $styles[] = "scripts/datetimepicker/jquery.datetimepicker.min.css";
+        $styles[] = "../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.min.css";
 
         foreach ($styles as $style) {
             enqueueStylesheet($style);
