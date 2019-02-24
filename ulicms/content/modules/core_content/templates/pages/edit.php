@@ -102,23 +102,23 @@ if ($permissionChecker->hasPermission("pages")) {
                             ?>"> <br /> <strong><?php translate("page_title"); ?>* </strong><br />
                         <input type="text" name="page_title"
                                value="<?php
-                echo htmlspecialchars($row->title);
-                            ?>"
+                               echo htmlspecialchars($row->title);
+                               ?>"
                                required>
                         <div class="typedep hide-on-snippet hide-on-non-regular">
                             <br /> <strong><?php
-                   translate("ALTERNATE_TITLE");
-                            ?> </strong><br /> <input type="text" name="alternate_title"
+                                translate("ALTERNATE_TITLE");
+                                ?> </strong><br /> <input type="text" name="alternate_title"
                                                    value="<?php
-                                echo htmlspecialchars($row->alternate_title);
-                                ?>"> <small><?php
-                                                   echo translate("ALTERNATE_TITLE_INFO");
-                                                   ?> </small> <br /> <br /> <strong><?php translate("show_headline"); ?></strong>
+                                                   echo htmlspecialchars($row->alternate_title);
+                                                   ?>"> <small><?php
+                                                       echo translate("ALTERNATE_TITLE_INFO");
+                                                       ?> </small> <br /> <br /> <strong><?php translate("show_headline"); ?></strong>
                             <br /> <select name="show_headline">
                                 <option value="1"
-                                                       <?php if ($row->show_headline == 1) echo "selected"; ?>><?php translate("yes"); ?></option>
+                                        <?php if ($row->show_headline == 1) echo "selected"; ?>><?php translate("yes"); ?></option>
                                 <option value="0"
-            <?php if ($row->show_headline == 0) echo "selected"; ?>><?php translate("no"); ?></option>
+                                        <?php if ($row->show_headline == 0) echo "selected"; ?>><?php translate("no"); ?></option>
                             </select>
                         </div>
                         <div class="typedep show-on-snippet">
@@ -131,12 +131,12 @@ if ($permissionChecker->hasPermission("pages")) {
                     <h2 class="accordion-header"><?php translate("type"); ?></h2>
 
                     <div class="accordion-content">
-            <?php foreach ($types as $type) { ?>
+                        <?php foreach ($types as $type) { ?>
                             <input type="radio" name="type" id="type_<?php echo $type; ?>"
                                    value="<?php echo $type; ?>"
-                            <?php if ($type == $row->type) echo "checked"; ?>> <label
+                                   <?php if ($type == $row->type) echo "checked"; ?>> <label
                                    for="type_<?php echo $type; ?>"><?php translate($type); ?></label> <br />
-            <?php } ?>
+                               <?php } ?>
 
                     </div>
                     <h2 class="accordion-header"><?php translate("menu_entry"); ?></h2>
@@ -144,30 +144,30 @@ if ($permissionChecker->hasPermission("pages")) {
                     <div class="accordion-content">
                         <strong><?php translate("language"); ?></strong> <br /> <select
                             name="language">
-            <?php
-            $languages = getAllLanguages(true);
+                                <?php
+                                $languages = getAllLanguages(true);
 
-            $page_language = $row->language;
+                                $page_language = $row->language;
 
-            for ($j = 0; $j < count($languages); $j ++) {
-                if ($languages[$j] === $page_language) {
-                    echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
-                } else {
-                    echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
-                }
-            }
+                                for ($j = 0; $j < count($languages); $j ++) {
+                                    if ($languages[$j] === $page_language) {
+                                        echo "<option value='" . $languages[$j] . "' selected>" . getLanguageNameByCode($languages[$j]) . "</option>";
+                                    } else {
+                                        echo "<option value='" . $languages[$j] . "'>" . getLanguageNameByCode($languages[$j]) . "</option>";
+                                    }
+                                }
 
-            $pages = getAllPages($page_language, "title", false);
-            ?>
+                                $pages = getAllPages($page_language, "title", false);
+                                ?>
                         </select> <br /> <br />
 
                         <div class="typedep menu-stuff">
                             <strong><?php translate("menu"); ?> </strong> <span
                                 style="cursor: help;" onclick="$('div#menu_help').slideToggle()">[?]</span><br />
                             <select name="menu" size=1>
-            <?php
-            foreach (getAllMenus() as $menu) {
-                ?>
+                                <?php
+                                foreach (getAllMenus() as $menu) {
+                                    ?>
                                     <option
                                     <?php
                                     if ($row->menu == $menu) {
@@ -175,13 +175,13 @@ if ($permissionChecker->hasPermission("pages")) {
                                     }
                                     ?>
                                         value="<?php echo $menu ?>">
-                                    <?php
-                                    translate($menu);
-                                    ?>
-                                    </option>
                                             <?php
-                                        }
-                                        ?>
+                                            translate($menu);
+                                            ?>
+                                    </option>
+                                    <?php
+                                }
+                                ?>
                             </select>
                             <div id="menu_help" class="help" style="display: none">
                                 <?php
@@ -197,9 +197,9 @@ if ($permissionChecker->hasPermission("pages")) {
                                 ?>">
 
                             <div id="position_help" class="help" style="display: none">
-            <?php
-            echo nl2br(get_translation("help_position"));
-            ?>
+                                <?php
+                                echo nl2br(get_translation("help_position"));
+                                ?>
                             </div>
 
                             <br />
@@ -208,54 +208,54 @@ if ($permissionChecker->hasPermission("pages")) {
                                     name="parent" size=1>
                                     <option value="NULL">
                                         [
-                                <?php translate("none"); ?>
+                                        <?php translate("none"); ?>
                                         ]
                                     </option>
-            <?php
-            foreach ($pages as $key => $page) {
-                ?>
+                                    <?php
+                                    foreach ($pages as $key => $page) {
+                                        ?>
                                         <option
                                             value="<?php
-                echo $page["id"];
-                ?>"
-                <?php
-                if ($page["id"] == $row->parent) {
-                    echo " selected='selected'";
-                }
-                ?>>
-                                        <?php
-                                        esc($page["title"]);
-                                        ?>
+                                            echo $page["id"];
+                                            ?>"
+                                            <?php
+                                            if ($page["id"] == $row->parent) {
+                                                echo " selected='selected'";
+                                            }
+                                            ?>>
+                                                <?php
+                                                esc($page["title"]);
+                                                ?>
                                             (ID:
                                             <?php
                                             echo $page["id"];
                                             ?>
                                             )
                                         </option>
-                                            <?php
-                                        }
-                                        ?>
+                                        <?php
+                                    }
+                                    ?>
                                 </select> <br /> <br />
                             </div>
                         </div>
                         <strong><?php translate("activated"); ?> </strong><br /> <select
                             name="activated" size=1
-                                        <?php if (!$can_active_this) echo "disabled"; ?>>
+                            <?php if (!$can_active_this) echo "disabled"; ?>>
                             <option value="1"
-                                        <?php
-                                        if ($row->active == 1) {
-                                            echo "selected";
-                                        }
-                                        ?>>
-                                    <?php translate("enabled"); ?>
+                            <?php
+                            if ($row->active == 1) {
+                                echo "selected";
+                            }
+                            ?>>
+                                        <?php translate("enabled"); ?>
                             </option>
                             <option value="0"
-            <?php
-            if ($row->active == 0) {
-                echo "selected";
-            }
-            ?>>
-                            <?php translate("disabled"); ?>
+                            <?php
+                            if ($row->active == 0) {
+                                echo "selected";
+                            }
+                            ?>>
+                                        <?php translate("disabled"); ?>
                             </option>
                         </select> <br /> <br />
 
@@ -263,40 +263,40 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("open_in"); ?></strong><br /> <select
                                 name="target" size=1>
                                 <option
-            <?php
-            if ($row->target == "_self") {
-                echo 'selected="selected" ';
-            }
-            ?>
+                                <?php
+                                if ($row->target == "_self") {
+                                    echo 'selected="selected" ';
+                                }
+                                ?>
                                     value="_self">
-                            <?php translate("target_self"); ?></option>
+                                    <?php translate("target_self"); ?></option>
                                 <option
-                                        <?php
-                                        if ($row->target == "_blank") {
-                                            echo 'selected="selected" ';
-                                        }
-                                        ?>
+                                <?php
+                                if ($row->target == "_blank") {
+                                    echo 'selected="selected" ';
+                                }
+                                ?>
                                     value="_blank">
-            <?php translate("target_blank"); ?></option>
+                                    <?php translate("target_blank"); ?></option>
                             </select> <br /> <br />
                         </div>
 
                         <div class="typedep" id="hidden-attrib">
                             <strong><?php translate("hidden"); ?>
                             </strong><br /> <select name="hidden" size="1"><option value="1"
-                                <?php if ($row->hidden == 1) echo "selected"; ?>>
-                                    <?php translate("yes"); ?>
+                                                                                   <?php if ($row->hidden == 1) echo "selected"; ?>>
+                                                                                       <?php translate("yes"); ?>
                                 </option>
                                 <option value="0" <?php if ($row->hidden == 0) echo "selected"; ?>>
-                                <?php translate("no"); ?>
+                                    <?php translate("no"); ?>
                                 </option>
                             </select> <br /> <br />
                         </div>
                         <strong><?php translate("category"); ?> </strong><br />
-                                <?php echo Categories::getHTMLSelect($row->category); ?>
-                        <br /> 
-                        <div id="menu_image_div">
-                            <br /> <strong><?php translate("menu_image"); ?> </strong><br />
+                        <?php echo Categories::getHTMLSelect($row->category); ?>
+
+                        <div id="menu_image_div" class="voffset3">
+                            <strong><?php translate("menu_image"); ?> </strong><br />
                             <script type="text/javascript">
                                 function openMenuImageSelectWindow(field) {
                                     window.KCFinder = {
@@ -314,8 +314,8 @@ if ($permissionChecker->hasPermission("pages")) {
                             <input type="text" id="menu_image" name="menu_image"
                                    readonly="readonly" onclick="openMenuImageSelectWindow(this)"
                                    value="<?php
-                    echo $row->menu_image;
-                    ?>"
+                                   echo $row->menu_image;
+                                   ?>"
                                    style="cursor: pointer" /> <a href="#"
                                    onclick="$('#menu_image').val('');return false;"
                                    class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?> </a>
@@ -328,8 +328,8 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("link_url"); ?></strong><br /> <input
                                 type="text" name="redirection"
                                 value="<?php
-                    echo $row->redirection;
-                    ?>">
+                                echo $row->redirection;
+                                ?>">
                         </div>
                     </div>
                     <div class="typedep" id="tab-language-link" style="display: none;">
@@ -338,18 +338,20 @@ if ($permissionChecker->hasPermission("pages")) {
                         <div class="accordion-content">
                             <strong><?php translate("language_link"); ?>
                             </strong><br />
-            <?php
-            $languages = Language::getAllLanguages();
-            ?>
+                            <?php
+                            $languages = Language::getAllLanguages();
+                            ?>
                             <select name="link_to_language">
                                 <option value=""
-            <?php if (is_null($row->link_to_language)) {
-                echo "selected";
-            } ?>>[<?php translate("none"); ?>]</option>
-                                <?php foreach ($languages as $language) { ?>
+                                <?php
+                                if (is_null($row->link_to_language)) {
+                                    echo "selected";
+                                }
+                                ?>>[<?php translate("none"); ?>]</option>
+                                        <?php foreach ($languages as $language) { ?>
                                     <option value="<?php Template::escape($language->getID()); ?>"
-                                    <?php if ($language->getID() == $row->link_to_language) echo " selected"; ?>><?php Template::escape($language->getName()); ?></option>
-                                <?php } ?>
+                                            <?php if ($language->getID() == $row->link_to_language) echo " selected"; ?>><?php Template::escape($language->getName()); ?></option>
+                                        <?php } ?>
                             </select>
                         </div>
                     </div>
@@ -361,13 +363,13 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("meta_description"); ?></strong><br /> <input
                                 type="text" name="meta_description"
                                 value="<?php
-                echo htmlspecialchars($row->meta_description);
-                ?>"
+                                echo htmlspecialchars($row->meta_description);
+                                ?>"
                                 maxlength="200"> <br /> <strong><?php translate("meta_keywords"); ?></strong><br />
                             <input type="text" name="meta_keywords"
                                    value="<?php
-                                        echo htmlspecialchars($row->meta_keywords);
-                                        ?>"
+                                   echo htmlspecialchars($row->meta_keywords);
+                                   ?>"
                                    maxlength="200">
                             <div class="typedep" id="article-metadata">
                                 <br /> <strong><?php translate("author_name"); ?></strong><br /> <input
@@ -386,10 +388,10 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <strong><?php translate("article_date"); ?></strong><br /> <input
                                     name="article_date" type="datetime-local"
                                     value="<?php
-                    if (StringHelper::isNotNullOrEmpty($row->article_date)) {
-                        echo date("Y-m-d\TH:i:s", strtotime($row->article_date));
-                    }
-                    ?>"
+                                    if (StringHelper::isNotNullOrEmpty($row->article_date)) {
+                                        echo date("Y-m-d\TH:i:s", strtotime($row->article_date));
+                                    }
+                                    ?>"
                                     step=any> <br /> <br /> <strong><?php translate("excerpt"); ?></strong>
                                 <textarea name="excerpt" id="excerpt" rows="5" cols="80"><?php echo real_htmlspecialchars($row->excerpt); ?></textarea>
                             </div>
@@ -401,16 +403,16 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <strong><?php translate("title"); ?>
                                 </strong><br /> <input type="text" name="og_title"
                                                        value="<?php
-                    echo htmlspecialchars($row->og_title);
-                    ?>"> <br /> <strong><?php translate("description"); ?>
+                                                       echo htmlspecialchars($row->og_title);
+                                                       ?>"> <br /> <strong><?php translate("description"); ?>
                                 </strong><br /> <input type="text" name="og_description"
                                                        value="<?php
-                                    echo htmlspecialchars($row->og_description);
-                                    ?>"> <br /> <strong><?php translate("type"); ?>
+                                                       echo htmlspecialchars($row->og_description);
+                                                       ?>"> <br /> <strong><?php translate("type"); ?>
                                 </strong><br /> <input type="text" name="og_type"
                                                        value="<?php
-                        echo htmlspecialchars($row->og_type);
-                        ?>"> <br /> <strong><?php translate("image"); ?></strong> <br />
+                                                       echo htmlspecialchars($row->og_type);
+                                                       ?>"> <br /> <strong><?php translate("image"); ?></strong> <br />
                                 <script type="text/javascript">
                                     function openMenuImageSelectWindow(field) {
                                         window.KCFinder = {
@@ -428,48 +430,48 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <input type="text" id="og_image" name="og_image"
                                        readonly="readonly" onclick="openMenuImageSelectWindow(this)"
                                        value="<?php
-                                                       echo htmlspecialchars($row->og_image);
-                                                       ?>"
+                                       echo htmlspecialchars($row->og_image);
+                                       ?>"
                                        style="cursor: pointer" /> <a href="#"
                                        onclick="$('#og_image').val('');
                                                return false;"
                                        class="btn btn-default voffset2"><i class="fa fa-eraser"></i> <?php translate("clear"); ?>
                                 </a>
-            <?php
-            if (!empty($row->og_image)) {
-                $og_url = get_protocol_and_domain() . $row->og_image;
-                ?>
+                                <?php
+                                if (!empty($row->og_image)) {
+                                    $og_url = get_protocol_and_domain() . $row->og_image;
+                                    ?>
                                     <div style="margin-top: 15px;">
                                         <img class="small-preview-image"
                                              src="<?php
-                echo htmlspecialchars($og_url);
-                ?>" />
+                                             echo htmlspecialchars($og_url);
+                                             ?>" />
                                     </div>
-            <?php } ?>
+                                <?php } ?>
                             </div>
                         </div>
 
                     </div>
 
                     <div class="typedep" id="custom_fields_container">
-                                <?php
-                                foreach (DefaultContentTypes::getAll() as $name => $type) {
-                                    $fields = $type->customFields;
-                                    if (count($fields) > 0) {
-                                        ?>
+                        <?php
+                        foreach (DefaultContentTypes::getAll() as $name => $type) {
+                            $fields = $type->customFields;
+                            if (count($fields) > 0) {
+                                ?>
                                 <div class="custom-field-tab" data-type="<?php echo $name; ?>">
                                     <h2 class="accordion-header"><?php translate($type->customFieldTabTitle ? $type->customFieldTabTitle : $name); ?></h2>
 
                                     <div class="accordion-content">
-                                                 <?php
-                                                 foreach ($fields as $field) {
-                                                     $field->name = "{$name}_{$field->name}";
-                                                     ?>
-                        <?php echo $field->render(CustomFields::get($field->name, $row->id, false)); ?>
-                    <?php } ?>
+                                        <?php
+                                        foreach ($fields as $field) {
+                                            $field->name = "{$name}_{$field->name}";
+                                            ?>
+                                            <?php echo $field->render(CustomFields::get($field->name, $row->id, false)); ?>
+                                        <?php } ?>
                                     </div>
                                 </div>
-                <?php } ?>
+                            <?php } ?>
 
                         <?php } ?>
                     </div>
@@ -478,7 +480,7 @@ if ($permissionChecker->hasPermission("pages")) {
 
                         <div class="accordion-content">
                             <strong><?php translate("type") ?></strong> <br />
-            <?php $types = get_available_post_types(); ?>
+                            <?php $types = get_available_post_types(); ?>
                             <select name="list_type">
                                 <option value="null"
                                 <?php
@@ -488,15 +490,15 @@ if ($permissionChecker->hasPermission("pages")) {
                                 ?>>
                                     [<?php translate("every") ?>]
                                 </option>
-                        <?php
-                        foreach ($types as $type) {
-                            if ($type == $list_data->type) {
-                                echo '<option value="' . $type . '" selected>' . get_translation($type) . "</option>";
-                            } else {
-                                echo '<option value="' . $type . '">' . get_translation($type) . "</option>";
-                            }
-                        }
-                        ?>
+                                <?php
+                                foreach ($types as $type) {
+                                    if ($type == $list_data->type) {
+                                        echo '<option value="' . $type . '" selected>' . get_translation($type) . "</option>";
+                                    } else {
+                                        echo '<option value="' . $type . '">' . get_translation($type) . "</option>";
+                                    }
+                                }
+                                ?>
                             </select> <br /> <br /> <strong><?php translate("language"); ?>
                             </strong> <br /> <select name="list_language">
                                 <option value=""
@@ -505,7 +507,7 @@ if ($permissionChecker->hasPermission("pages")) {
                                     echo "selected";
                                 }
                                 ?>>[<?php translate("every"); ?>]</option>
-                                <?php
+                                        <?php
                                         $languages = getAllLanguages();
 
                                         for ($j = 0; $j < count($languages); $j ++) {
@@ -520,41 +522,41 @@ if ($permissionChecker->hasPermission("pages")) {
                                 translate("category");
                                 ?>
                             </strong><br />
-            <?php
-            $lcat = $list_data->category_id;
-            if ($lcat === null)
-                $lcat = - 1;
-            ?>
-                                <?php echo Categories :: getHTMLSelect($lcat, true, "list_category") ?>
+                            <?php
+                            $lcat = $list_data->category_id;
+                            if ($lcat === null)
+                                $lcat = - 1;
+                            ?>
+                            <?php echo Categories :: getHTMLSelect($lcat, true, "list_category") ?>
                             <br /> <br /> <strong><?php
-                                        translate("menu");
-                                        ?>
+                                translate("menu");
+                                ?>
                             </strong><br /> <select name="list_menu" size=1>
                                 <option value="">[<?php translate("every"); ?>]</option>
-                                        <?php
-                                        foreach (getAllMenus() as $menu) {
-                                            ?>
+                                <?php
+                                foreach (getAllMenus() as $menu) {
+                                    ?>
                                     <option value="<?php echo $menu ?>"
                                             <?php if ($menu == $list_data->menu) echo "selected" ?>>
-                                            <?php
-                                            translate($menu);
-                                            ?></option>
-                                            <?php
-                                        }
-                                        ?>
+                                                <?php
+                                                translate($menu);
+                                                ?></option>
+                                    <?php
+                                }
+                                ?>
                             </select> <br /> <br /> <strong><?php translate("parent"); ?>
                             </strong><br /> <select name="list_parent" size=1>
                                 <option
-                            <?php
-                            if ($list_data->parent_id === null) {
-                                echo 'selected="selected"';
-                            }
-                            ?>
+                                <?php
+                                if ($list_data->parent_id === null) {
+                                    echo 'selected="selected"';
+                                }
+                                ?>
                                     value="NULL">
                                     [
-                                <?php
-                                translate("every");
-                                ?>
+                                    <?php
+                                    translate("every");
+                                    ?>
                                     ]
                                 </option>
                                 <?php
@@ -562,46 +564,46 @@ if ($permissionChecker->hasPermission("pages")) {
                                     ?>
                                     <option
                                         value="<?php
-                                            echo $page["id"];
-                                            ?>"
-                                                <?php
-                                                if ($list_data->parent_id === $page["id"]) {
-                                                    echo 'selected="selected"';
-                                                }
-                                                ?>>
-                                    <?php
-                                    esc($page["title"]);
-                                    ?>
+                                        echo $page["id"];
+                                        ?>"
+                                        <?php
+                                        if ($list_data->parent_id === $page["id"]) {
+                                            echo 'selected="selected"';
+                                        }
+                                        ?>>
+                                            <?php
+                                            esc($page["title"]);
+                                            ?>
                                         (ID:
-                                    <?php
-                                    echo $page["id"];
-                                    ?>
+                                        <?php
+                                        echo $page["id"];
+                                        ?>
                                         )
                                     </option>
                                     <?php
                                 }
                                 ?>
                             </select> <br /> <br /> <strong><?php
-                                    translate("order_by");
-                                    ?>
+                                translate("order_by");
+                                ?>
                             </strong> <br /> <select name="list_order_by">
-            <?php foreach ($cols as $col) { ?>
+                                <?php foreach ($cols as $col) { ?>
                                     <option value="<?php echo $col; ?>"
-                                    <?php if ($col == $list_data->order_by) echo 'selected'; ?>><?php echo $col; ?></option>
-                                <?php } ?>
+                                            <?php if ($col == $list_data->order_by) echo 'selected'; ?>><?php echo $col; ?></option>
+                                        <?php } ?>
                             </select> <br /> <br /> <strong><?php
                                 translate("order_direction");
                                 ?>
                             </strong> <select name="list_order_direction">
                                 <option value="asc"><?php translate("asc"); ?></option>
                                 <option value="desc"
-                                    <?php if ($list_data->order_direction === "desc") echo ' selected'; ?>><?php translate("desc"); ?></option>
+                                        <?php if ($list_data->order_direction === "desc") echo ' selected'; ?>><?php translate("desc"); ?></option>
                             </select> <br /> <br /> <strong><?php translate("limit"); ?></strong>
                             <input type="number" name="limit" min="0" step="1"
                                    value="<?php echo intval($list_data->limit); ?>"> <br /> <strong><?php translate("use_pagination"); ?></strong><br />
                             <select name="list_use_pagination">
                                 <option value="1"
-                                    <?php if ($list_data->use_pagination) echo "selected"; ?>><?php translate("yes") ?></option>
+                                        <?php if ($list_data->use_pagination) echo "selected"; ?>><?php translate("yes") ?></option>
                                 <option value="0"
                                         <?php if (!$list_data->use_pagination) echo "selected"; ?>><?php translate("no") ?></option>
                             </select>
@@ -614,11 +616,11 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("module"); ?></strong><br /> <select
                                 name="module">
                                 <option value="null"
-                                <?php if ($module == null or empty($module)) echo " selected"; ?>>[<?php translate("none"); ?>]</option>
-                                <?php foreach (ModuleHelper::getAllEmbedModules() as $module) { ?>
+                                        <?php if ($module == null or empty($module)) echo " selected"; ?>>[<?php translate("none"); ?>]</option>
+                                        <?php foreach (ModuleHelper::getAllEmbedModules() as $module) { ?>
                                     <option value="<?php echo $module; ?>"
-                                    <?php if ($module == $row->module) echo " selected"; ?>><?php echo $module; ?></option>
-                                <?php } ?>
+                                            <?php if ($module == $row->module) echo " selected"; ?>><?php echo $module; ?></option>
+                                        <?php } ?>
                             </select>
                         </div>
 
@@ -631,10 +633,10 @@ if ($permissionChecker->hasPermission("pages")) {
                                 name="video">
                                 <option value=""
                                         <?php if ($row->video == null or empty($row->video)) echo " selected"; ?>>[<?php translate("none"); ?>]</option>
-            <?php while ($row5 = Database::fetchObject($videos)) { ?>
+                                        <?php while ($row5 = Database::fetchObject($videos)) { ?>
                                     <option value="<?php echo $row5->id; ?>"
-                <?php if ($row5->id == $row->video) echo " selected"; ?>><?php Template::escape($row5->name); ?> (ID: <?php echo $row5->id; ?>)</option>
-            <?php } ?>
+                                            <?php if ($row5->id == $row->video) echo " selected"; ?>><?php Template::escape($row5->name); ?> (ID: <?php echo $row5->id; ?>)</option>
+                                        <?php } ?>
                             </select>
                         </div>
 
@@ -646,8 +648,8 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("audio"); ?></strong><br /> <select
                                 name="audio">
                                 <option value=""
-            <?php if ($row->audio == null or empty($row->audio)) echo " selected"; ?>>[<?php translate("none"); ?>]</option>
-            <?php while ($row5 = Database::fetchObject($audios)) { ?>
+                                        <?php if ($row->audio == null or empty($row->audio)) echo " selected"; ?>>[<?php translate("none"); ?>]</option>
+                                        <?php while ($row5 = Database::fetchObject($audios)) { ?>
                                     <option value="<?php echo $row5->id; ?>"
                                             <?php if ($row5->id == $row->audio) echo " selected"; ?>><?php Template::escape($row5->name); ?> (ID: <?php echo $row5->id; ?>)</option>
                                         <?php } ?>
@@ -675,17 +677,17 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("position_of_description"); ?>
                             </strong> <br /> <select name="text_position">
                                 <option value="before"
-            <?php
-            if ($row->text_position == "before") {
-                echo "selected";
-            }
-            ?>><?php translate("description_before_content") ?></option>
+                                <?php
+                                if ($row->text_position == "before") {
+                                    echo "selected";
+                                }
+                                ?>><?php translate("description_before_content") ?></option>
                                 <option value="after"
-                                        <?php
-                                        if ($row->text_position == "after") {
-                                            echo "selected";
-                                        }
-                                        ?>><?php translate("description_after_content") ?></option>
+                                <?php
+                                if ($row->text_position == "after") {
+                                    echo "selected";
+                                }
+                                ?>><?php translate("description_after_content") ?></option>
                             </select>
 
                         </div>
@@ -726,46 +728,46 @@ if ($permissionChecker->hasPermission("pages")) {
                         <div class="accordion-content">
                             <strong><?php translate("owner"); ?> <?php translate("user"); ?></strong>
                             <select name="autor"
-            <?php
-            if (!$pages_change_owner) {
-                echo "disabled";
-            }
-            ?>>
-            <?php
-            foreach ($users as $user) {
-                ?>
+                            <?php
+                            if (!$pages_change_owner) {
+                                echo "disabled";
+                            }
+                            ?>>
+                                        <?php
+                                        foreach ($users as $user) {
+                                            ?>
                                     <option value="<?php Template::escape($user->id); ?>"
-                <?php if ($user->id == $row->autor) echo "selected"; ?>><?php Template::escape($user->username); ?></option>
-            <?php } ?>
+                                            <?php if ($user->id == $row->autor) echo "selected"; ?>><?php Template::escape($user->username); ?></option>
+                                        <?php } ?>
                             </select> <br /> <br /> <strong><?php translate("owner"); ?> <?php translate("group"); ?></strong>
                             <select name="group_id"
-            <?php
-            if (!$pages_change_owner) {
-                echo "disabled";
-            }
-            ?>>
-            <?php
-            foreach ($groups as $group) {
-                ?>
+                            <?php
+                            if (!$pages_change_owner) {
+                                echo "disabled";
+                            }
+                            ?>>
+                                        <?php
+                                        foreach ($groups as $group) {
+                                            ?>
                                     <option value="<?php Template::escape($group->getId()); ?>"
-                <?php if ($group->getId() == $row->group_id) echo "selected"; ?>><?php Template::escape($group->getName()); ?></option>
-            <?php } ?>
+                                            <?php if ($group->getId() == $row->group_id) echo "selected"; ?>><?php Template::escape($group->getName()); ?></option>
+                                        <?php } ?>
                             </select> <br /> <br /> <strong><?php translate("restrict_edit_access"); ?></strong><br />
                             <input type="checkbox" name="only_admins_can_edit"
                                    id="only_admins_can_edit" value="1"
-            <?php if ($row->only_admins_can_edit) echo "checked"; ?>> <label
+                                   <?php if ($row->only_admins_can_edit) echo "checked"; ?>> <label
                                    for="only_admins_can_edit"><?php translate("admins"); ?></label> <br />
                             <input type="checkbox" name="only_group_can_edit"
                                    id="only_group_can_edit" value="1"
-            <?php if ($row->only_group_can_edit) echo "checked"; ?>> <label
+                                   <?php if ($row->only_group_can_edit) echo "checked"; ?>> <label
                                    for="only_group_can_edit"><?php translate("group"); ?></label> <br />
                             <input type="checkbox" name="only_owner_can_edit"
                                    id="only_owner_can_edit" value="1"
-                            <?php if ($row->only_owner_can_edit) echo "checked"; ?>> <label
+                                   <?php if ($row->only_owner_can_edit) echo "checked"; ?>> <label
                                    for="only_owner_can_edit"><?php translate("owner"); ?></label> <br />
                             <input type="checkbox" name="only_others_can_edit"
                                    id="only_others_can_edit" value="1"
-                                        <?php if ($row->only_others_can_edit) echo "checked"; ?>> <label
+                                   <?php if ($row->only_others_can_edit) echo "checked"; ?>> <label
                                    for="only_others_can_edit"><?php translate("others"); ?></label>
                         </div>
                     </div>
@@ -777,26 +779,26 @@ if ($permissionChecker->hasPermission("pages")) {
                                 <strong><?php translate("comments_enabled"); ?></strong> <br /> <select
                                     name="comments_enabled">
                                     <option value="null"
-                                        <?php echo $row->comments_enabled === null ? "selected" : ""; ?>>[<?php translate("standard"); ?>]</option>
+                                            <?php echo $row->comments_enabled === null ? "selected" : ""; ?>>[<?php translate("standard"); ?>]</option>
                                     <option value="1"
-                                        <?php echo $row->comments_enabled === "1" ? "selected" : ""; ?>><?php translate("yes"); ?></option>
+                                            <?php echo $row->comments_enabled === "1" ? "selected" : ""; ?>><?php translate("yes"); ?></option>
                                     <option value="0"
-                                        <?php echo $row->comments_enabled === "0" ? "selected" : ""; ?>>
+                                            <?php echo $row->comments_enabled === "0" ? "selected" : ""; ?>>
                                         <?php translate("no"); ?></option>
                                 </select>
                             </div>
-                                   <?php
-                                   $hasComments = count(Comment::getAllByContentId($row->id)) >= 1;
-                                   if ($hasComments and $permissionChecker->hasPermission("comments_manage")) {
-                                       ?>
+                            <?php
+                            $hasComments = count(Comment::getAllByContentId($row->id)) >= 1;
+                            if ($hasComments and $permissionChecker->hasPermission("comments_manage")) {
+                                ?>
                                 <p>
                                     <a
                                         href="<?php esc(ModuleHelper::buildMethodCallUrl(CommentsController::class, "filterComments", "content_id={$row->id}")); ?>"
                                         class="btn btn-default" target="_blank"><i class="fa fa-comments"></i> <?php translate("comments_manage"); ?></a>
                                 </p>
-                                       <?php
-                                   }
-                                   ?>
+                                <?php
+                            }
+                            ?>
                         </div>
 
                     </div>
@@ -808,23 +810,23 @@ if ($permissionChecker->hasPermission("pages")) {
                             <strong><?php translate("cache_control"); ?></strong> <br /> <select
                                 name="cache_control">
                                 <option value="auto"
-            <?php
-            if ($row->cache_control == "auto") {
-                echo "selected";
-            }
-            ?>><?php translate("auto"); ?></option>
+                                <?php
+                                if ($row->cache_control == "auto") {
+                                    echo "selected";
+                                }
+                                ?>><?php translate("auto"); ?></option>
                                 <option value="force"
-                                            <?php
-                                        if ($row->cache_control == "force") {
-                                            echo "selected";
-                                        }
-                                        ?>><?php translate("force"); ?></option>
+                                <?php
+                                if ($row->cache_control == "force") {
+                                    echo "selected";
+                                }
+                                ?>><?php translate("force"); ?></option>
                                 <option value="no_cache"
-                            <?php
-                            if ($row->cache_control == "no_cache") {
-                                echo "selected";
-                            }
-                            ?>><?php translate("no_cache"); ?></option>
+                                <?php
+                                if ($row->cache_control == "no_cache") {
+                                    echo "selected";
+                                }
+                                ?>><?php translate("no_cache"); ?></option>
                             </select> <br /> <br />
                         </div>
                         <div class="typedep" id="tab-menu-image">
@@ -832,20 +834,20 @@ if ($permissionChecker->hasPermission("pages")) {
                                 name="theme" size=1>
                                 <option value="">
                                     [
-            <?php translate("standard"); ?>
+                                    <?php translate("standard"); ?>
                                     ]
                                 </option>
-            <?php
-            foreach ($allThemes as $th) {
-                ?>
+                                <?php
+                                foreach ($allThemes as $th) {
+                                    ?>
                                     <option
                                         value="<?php
-                echo $th;
-                ?>"
-                                    <?php
-                                    if (!is_null($row->theme) and ! empty($row->theme) and $row->theme == $th)
-                                        echo "selected";
-                                    ?>>
+                                        echo $th;
+                                        ?>"
+                                        <?php
+                                        if (!is_null($row->theme) and ! empty($row->theme) and $row->theme == $th)
+                                            echo "selected";
+                                        ?>>
                                             <?php
                                             echo $th;
                                             ?>
@@ -856,23 +858,23 @@ if ($permissionChecker->hasPermission("pages")) {
                             </select>
                         </div>
                         <br /> <strong><?php translate("visible_for"); ?> </strong><br />
-                                <?php
-                                $access = explode(",", $row->access);
-                                ?>
+                        <?php
+                        $access = explode(",", $row->access);
+                        ?>
                         <select name="access[]" size=4 multiple>
                             <option value="all"
-            <?php
-            if (faster_in_array("all", $access)) {
-                echo " selected";
-            }
-            ?>>
-            <?php translate("everyone"); ?></option>
+                            <?php
+                            if (faster_in_array("all", $access)) {
+                                echo " selected";
+                            }
+                            ?>>
+                                <?php translate("everyone"); ?></option>
                             <option value="registered"
-                                    <?php
-                                    if (faster_in_array("registered", $access)) {
-                                        echo " selected";
-                                    }
-                                    ?>>
+                            <?php
+                            if (faster_in_array("registered", $access)) {
+                                echo " selected";
+                            }
+                            ?>>
                                 <?php translate("registered_users"); ?></option>
 
 
@@ -891,21 +893,21 @@ if ($permissionChecker->hasPermission("pages")) {
                                     ?>
                         </select> <br /> <br />
                         <div class="typedep" id="custom_data_json">
-                                <?php do_event("before_custom_data_json"); ?>
+                            <?php do_event("before_custom_data_json"); ?>
                             <strong><?php translate("custom_data_json"); ?></strong><br />
-                            <textarea name="custom_data" style="width: 100%; height: 200px;" 
+                            <textarea name="custom_data" style="width: 100%; height: 200px;"
                                       class="codemirror" data-mimetype="application/json"
                                       cols=80 rows=10><?php
-                        echo htmlspecialchars($row->custom_data);
-                        ?></textarea>
+                                          echo htmlspecialchars($row->custom_data);
+                                          ?></textarea>
 
                         </div>
                     </div>
                 </div>
                 <br /> <br />
-                            <?php
-                            do_event("page_option");
-                            ?>
+                <?php
+                do_event("page_option");
+                ?>
 
 
                 <div class="typedep" id="content-editor">
@@ -913,24 +915,24 @@ if ($permissionChecker->hasPermission("pages")) {
                         <textarea name="page_content" id="page_content" cols=60 rows=20><?php
                             echo htmlspecialchars($row->content);
                             ?></textarea>
-                            <?php
-                                    $editor = get_html_editor();
-                                    if ($editor === "ckeditor") {
-                                        ?>
+                        <?php
+                        $editor = get_html_editor();
+                        if ($editor === "ckeditor") {
+                            ?>
                             <script type="text/javascript">
                                 var editor = CKEDITOR.replace('page_content',
                                         {
                                             skin: '<?php
-                                        echo Settings::get("ckeditor_skin");
-                                        ?>'
+                echo Settings::get("ckeditor_skin");
+                ?>'
                                         });
 
 
                                 var editor2 = CKEDITOR.replace('excerpt',
                                         {
                                             skin: '<?php
-                                        echo Settings::get("ckeditor_skin");
-                                        ?>'
+                echo Settings::get("ckeditor_skin");
+                ?>'
                                         });
 
                                 editor.on("instanceReady", function ()
@@ -983,9 +985,9 @@ if ($permissionChecker->hasPermission("pages")) {
                                         return;
                                 }
                             </script>
-                <?php
-            } else if ($editor == "codemirror") {
-                ?>
+                            <?php
+                        } else if ($editor == "codemirror") {
+                            ?>
                             <script type="text/javascript">
                                 var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("page_content"),
                                         {lineNumbers: true,
@@ -1008,19 +1010,19 @@ if ($permissionChecker->hasPermission("pages")) {
                                             enterMode: "keep",
                                             tabMode: "shift"});
                             </script>
-            <?php } ?>
+                        <?php } ?>
 
                     </p>
-            <?php
-            $rev = vcs::getRevisionsByContentID($row->id);
-            if (count($rev) > 0) {
-                ?>
+                    <?php
+                    $rev = vcs::getRevisionsByContentID($row->id);
+                    if (count($rev) > 0) {
+                        ?>
                         <p>
                             <a
                                 href="index.php?action=restore_version&content_id=<?php echo $row->id; ?>"
                                 class="btn btn-warning"><i class="fas fa-undo"></i> <?php translate("restore_older_version"); ?></a>
                         </p>
-            <?php } ?>	</div>
+                    <?php } ?>	</div>
                 <div class="inPageMessage">
                     <div id="message_page_edit" class="inPageMessage"></div>
                     <img class="loading" src="gfx/loading.gif" alt="Wird gespeichert...">
@@ -1037,24 +1039,24 @@ if ($permissionChecker->hasPermission("pages")) {
                             <i class="fas fa-eye"></i> <?php translate("view"); ?></button>
                     </div>
                 </div>
-            <?php
-            $translation = new JSTranslation(array(), "PageTranslation");
-            $translation->addKey("confirm_exit_without_save");
-            $translation->render();
+                <?php
+                $translation = new JSTranslation(array(), "PageTranslation");
+                $translation->addKey("confirm_exit_without_save");
+                $translation->render();
 
-            $translation = new JSTranslation();
-            $translation->addKey("ask_for_delete");
-            $translation->render();
+                $translation = new JSTranslation();
+                $translation->addKey("ask_for_delete");
+                $translation->render();
 
-            enqueueScriptFile("scripts/page.js");
-            combinedScriptHtml();
-            echo ModuleHelper::endForm();
-            ?>
+                enqueueScriptFile("scripts/page.js");
+                combinedScriptHtml();
+                echo ModuleHelper::endForm();
+                ?>
             </div>
-                    <?php
-                    break;
-                }
-            }
-        } else {
-            noPerms();
+            <?php
+            break;
         }
+    }
+} else {
+    noPerms();
+}
