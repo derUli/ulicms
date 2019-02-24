@@ -1,18 +1,21 @@
 <?php
 
-class Response
-{
+class Response {
+
+    public static function sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK) {
+        if (Request::isAjaxRequest()) {
+            HTTPStatusCodeResult($status);
+        }
+    }
 
     // Weiterleitung per Location header;
-    public static function redirect($url = "http://www.ulicms.de", $status = 302)
-    {
+    public static function redirect($url = "http://www.ulicms.de", $status = 302) {
         Response::sendStatusHeader(self::getStatusCodeByNumber($status));
         header("Location: " . $url);
         exit();
     }
 
-    public static function javascriptRedirect($url = "http://www.ulicms.de")
-    {
+    public static function javascriptRedirect($url = "http://www.ulicms.de") {
         echo "<script type=\"text/javascript\">location.replace(\"$url\");</script>";
         echo "<noscript><p>" . get_translation("jsredirect_noscript", array(
             "%url%" => Template::getEscape($url)
@@ -20,8 +23,7 @@ class Response
         exit();
     }
 
-    public static function getSafeRedirectURL($url, $safeHosts = null)
-    {
+    public static function getSafeRedirectURL($url, $safeHosts = null) {
         $cfg = new CMSConfig();
         if (is_array($safeHosts) and count($safeHosts) >= 1) {
             $safeHosts = $safeHosts;
@@ -33,7 +35,7 @@ class Response
             );
         }
         $host = parse_url($url, PHP_URL_HOST);
-        if (! in_array($host, $safeHosts)) {
+        if (!in_array($host, $safeHosts)) {
             try {
                 $page = ContentFactory::getBySystemnameAndLanguage(Settings::getLang("frontpage", getCurrentLanguage()), getCurrentLanguage());
                 $url = ModuleHelper::getFullPageURLByID($page->id);
@@ -44,14 +46,12 @@ class Response
         return $url;
     }
 
-    public static function safeRedirect($url, $status = 302, $safeHosts = null)
-    {
+    public static function safeRedirect($url, $status = 302, $safeHosts = null) {
         $url = self::getSafeRedirectUrl($url, $safeHosts);
         Request::redirect($url, $status);
     }
 
-    public static function sendStatusHeader($nr)
-    {
+    public static function sendStatusHeader($nr) {
         if (headers_sent()) {
             return false;
         }
@@ -60,8 +60,7 @@ class Response
     }
 
     // Übersetzung HTTP Status Code => Name
-    public static function getStatusCodeByNumber($nr)
-    {
+    public static function getStatusCodeByNumber($nr) {
         $http_codes = array(
             100 => 'Continue',
             101 => 'Switching Protocols',
@@ -121,4 +120,5 @@ class Response
         );
         return $nr . " " . $http_codes[$nr];
     }
+
 }

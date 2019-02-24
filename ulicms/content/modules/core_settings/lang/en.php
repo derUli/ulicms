@@ -1,4 +1,5 @@
 <?php
+
 add_translation("YOUR_LOGO", "Your Logo");
 add_translation("UPLOAD_NEW_LOGO", "Upload new logo");
 add_translation("UPLOAD", "Upload");
@@ -39,12 +40,3 @@ add_translation("commentable_content_types", "Commentable Content Types");
 add_translation("keep_spam_ips", "Keep ip addresses of spam comments");
 
 add_translation("min_time_to_fill_form_help", "One word per line. Parts of a string are also detected.");
-
-add_translation("http_headers", "HTTP Headers");
-add_translation("x_frame_options", "Allow embedding this website in other sites");
-add_translation("deny", "Deny");
-add_translation("allow", "Allow");
-add_translation("sameorigin", "Only Same Domain");
-
-add_translation("x_xss_protection", "XSS Protection");
-add_translation("on_block", "On (Block Mode)");

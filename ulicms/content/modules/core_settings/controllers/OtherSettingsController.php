@@ -66,16 +66,6 @@ class OtherSettingsController extends Controller {
             Settings::set("smtp_password", $_POST["smtp_password"]);
         }
 
-        if (Request::getVar("x_frame_options", "", "str")) {
-            Settings::set("x_frame_options", Request::getVar("x_frame_options", "", "str"));
-        } else {
-            Settings::delete("x_frame_options");
-        }
-        if (Request::getVar("x_xss_protection", null, "str")) {
-            Settings::set("x_xss_protection", Request::getVar("x_xss_protection", null, "str"));
-        } else {
-            Settings::delete("x_xss_protection");
-        }
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult(HttpStatusCode::OK);
         }

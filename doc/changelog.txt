@@ -5,6 +5,10 @@ Neue Features:
 * Das Feld "Menü als Grafik" wird nun ausgeblendet, wenn man "Nicht im Menü" auswählt.
 * Update von jQuery auf Version 3.3.1
 * Update von Bootstrap auf Version 3.4.1
+* MOTD Formular nutzt jetzt AJAX zum Speichern
+
+Neue API-Methoden:
+* sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK)
 
 Verbesserungen:
 * Die Funktion "Neues Logo hochladen" befindet sich nun in den Design-Einstellungen
@@ -23,6 +27,8 @@ Entfernte Features:
 * Folge Optionen wurden aus dem Einstellungen entfernt.
   * Gebe "generator" Meta-Tag aus
   * cron.php nicht automatisch ausführen
+  * Erlauben diese Webseite in andere Sites einzubinden
+  * XSS-Schutz
   Es ist geplant, für die Anwender, die diese Einstellungen benötigen, ein optionales Modul zu veröffentlichen, welches die entfernten Optionen wieder zum System hinzufügt.
 
 ===== Neues in UliCMS 2019.2 =====
@@ -46,7 +52,7 @@ Bugfixes:
 
 Neue Features:
 * Sicherheitsoption "XSS-Schutz" hinzugefügt
-* Wenn ein User die admin_permission eines Moduls nicht besitzt, ist der Button mit dem Namen des Moduls deaktiviert und 
+* Wenn ein User die admin_permission eines Moduls nicht besitzt, ist der Button mit dem Namen des Moduls deaktiviert und
   ein Schloss-Icon wird angezeigt.
 * Weitere Seiten mit Icons versehen (core_media)
 
@@ -162,7 +168,7 @@ Neue API-Funktionen:
 * ActionResult($action, $model = null)
 
 Bugfixes:
-* Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertete die sekundären Gruppen nicht aus.  
+* Die Berechtigungsprüfung für die Bearbeiten-Rechte für Seiten wertete die sekundären Gruppen nicht aus.
 * Der Text "No Results Found" in den Select2 Dropdown-Boxen war nicht lokalisiert
 * Funktion Database::dropColumn($table, $column, $prefix = true) war nicht funktional
 
@@ -195,7 +201,7 @@ Neue Features:
 * Tablesorter durch DataTables ersetzen
 * Wrapper für Kommandozeilen-Scripts hinzugefügt "manage"
 * Neues CLI-Script "settings_list.php"
-* CLI-Befehl zum Anzeigen von Informationen über eine SimpleInstall v2 Paketdatei hinzugefügt 
+* CLI-Befehl zum Anzeigen von Informationen über eine SimpleInstall v2 Paketdatei hinzugefügt
     $ ./manage sinfo examine /path/to/package-1.0.sin
 * Pakete können nun eine bestimmte PHP-Version bei der Installation vorausetzen
 * Pakete können nun vorausetzen, dass bestimmte PHP-Erweiterungen installiert sein müssen
@@ -269,7 +275,7 @@ Neue API-Funktionen:
 * Javascript-Mechanismus um eine "Alle auswählen" Checkbox zu implementieren
 * do_event()
 * add_hook() ist nun deprecated
-* Der Konstruktur von JSTranslation nimmt nun ein Array als optionalen Parameter an 
+* Der Konstruktur von JSTranslation nimmt nun ein Array als optionalen Parameter an
 * Template::renderPartial($template, $theme = null)
 * CustomFields::getAll($id = null)
 
