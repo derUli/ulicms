@@ -62,7 +62,7 @@ $(function () {
 
     // scroll to the given anchor
     var jumpTo = url("?jumpto");
-    if (jumpTo !== null && jumpTo.length > 0) {
+    if (typeof jumpTo !== "undefined" && jumpTo.length > 0) {
         location.href = "#" + jumpTo;
     }
 });

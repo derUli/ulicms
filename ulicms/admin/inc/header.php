@@ -27,10 +27,10 @@ if (!file_exists($select2TranslationFile)) {
         $styles = array();
         ?>
         <?php
-        $enq = array(
-            "scripts/php.js/strip_tags.js",
+        $enq = array("scripts/php.js/strip_tags.js",
             "scripts/php.js/htmlspecialchars.js",
             "../node_modules/jquery/dist/jquery.min.js",
+            "../node_modules/js-url/url.min.js",
             "scripts/datetimepicker/jquery.datetimepicker.full.js",
             "../node_modules/jquery-form/dist/jquery.form.min.js",
             "scripts/vallenato/vallenato.js",
@@ -40,7 +40,6 @@ if (!file_exists($select2TranslationFile)) {
             "../node_modules/codemirror-minified/mode/javascript/javascript.js",
             "../node_modules/codemirror-minified/mode/clike/clike.js",
             "../node_modules/codemirror-minified/mode/css/css.js",
-            "scripts/url.min.js",
             "scripts/util.js",
             "scripts/users.js",
             "scripts/global.js",

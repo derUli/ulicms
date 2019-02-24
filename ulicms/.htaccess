@@ -33,6 +33,7 @@
 	AddOutputFilterByType DEFLATE text/xml
 </IfModule>
 
+
 # Deny access to CMSConfig.php file
 <files CMSConfig.php>
 	order allow,deny
@@ -50,3 +51,8 @@
 	order allow,deny
 	deny from all
 </files>
+
+
+<IfModule mod_mime.c>
+    AddType application/json .lang
+</IfModule>

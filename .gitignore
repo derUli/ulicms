@@ -26,3 +26,4 @@ ulicms/vendor/*
 .thumbs
 nbproject
 node_modules
+ulicms/content/configurations/*
