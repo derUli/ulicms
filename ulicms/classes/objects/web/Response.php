@@ -2,14 +2,17 @@
 
 class Response {
 
-    public static function sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK) {
+    public static function sendHttpStatusCodeResultIfAjax($status = HTTPStatusCode::OK, $redirect = null, $redirectStatus = HttpStatusCode::MOVED_TEMPORARILY) {
         if (Request::isAjaxRequest()) {
             HTTPStatusCodeResult($status);
+        }
+        if ($redirect) {
+            Response::redirect($url, $redirectStatus);
         }
     }
 
     // Weiterleitung per Location header;
-    public static function redirect($url = "http://www.ulicms.de", $status = 302) {
+    public static function redirect($url = "http://www.ulicms.de", $status = HttpStatusCode::MOVED_TEMPORARILY) {
         Response::sendStatusHeader(self::getStatusCodeByNumber($status));
         header("Location: " . $url);
         exit();
