@@ -7,7 +7,8 @@
         "codemirror-minified": "*",
         "jquery": "^3.3.1",
         "jquery-form": "4.x",
-        "jscolor-picker": "2.x"
+        "jscolor-picker": "2.x",
+        "select2": "^4.0.6-rc.1"
     },
     "license": "BSD",
     "private": true

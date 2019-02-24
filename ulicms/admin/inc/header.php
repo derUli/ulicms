@@ -5,10 +5,10 @@ if (!$admin_logo) {
 }
 
 // translation for select2 dropdown boxes
-$select2TranslationFile = "scripts/js/i18n/" . getSystemLanguage() . ".js";
+$select2TranslationFile = "../node_modules/select2/dist/js/i18n/" . getSystemLanguage() . ".js";
 $select2Language = getSystemLanguage();
 if (!file_exists($select2TranslationFile)) {
-    $select2TranslationFile = "scripts/js/i18n/en.js";
+    $select2TranslationFile = "../node_modules/select2/dist/js/i18n/en.js";
     $select2Language = "en";
 }
 ?>
@@ -45,7 +45,7 @@ if (!file_exists($select2TranslationFile)) {
             "scripts/users.js",
             "scripts/global.js",
             "../node_modules/bootstrap/dist/js/bootstrap.min.js",
-            "scripts/js/select2.min.js",
+            "../node_modules/select2/dist/js/select2.min.js",
             "../node_modules/bootbox/bootbox.min.js",
             $select2TranslationFile,
             "scripts/datatables/datatables.min.js",
@@ -76,7 +76,7 @@ if (!file_exists($select2TranslationFile)) {
         $styles[] = "../node_modules/bootstrap/dist/css/bootstrap.min.css";
         $styles[] = "../node_modules/codemirror-minified/lib/codemirror.css";
         $styles[] = "css/modern.scss";
-        $styles[] = "scripts/css/select2.min.css";
+        $styles[] = "../node_modules/select2/dist/css/select2.min.css";
         $styles[] = "scripts/datetimepicker/jquery.datetimepicker.min.css";
 
         foreach ($styles as $style) {
