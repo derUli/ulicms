@@ -11,7 +11,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         $files = array(
             "node_modules/jquery/dist/jquery.js",
             "admin/scripts/global.js",
-            "admin/scripts/url.min.js"
+            "node_modules/js-url/url.min.js"
         );
         foreach ($files as $file) {
             enqueueScriptFile($file);
@@ -21,7 +21,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
         }
         $this->assertCount(3, $_SERVER["script_queue"]);
         $this->assertEquals("node_modules/jquery/dist/jquery.js", $_SERVER["script_queue"][0]);
-        $this->assertEquals("admin/scripts/url.min.js", $_SERVER["script_queue"][2]);
+        $this->assertEquals("node_modules/js-url/url.min.js", $_SERVER["script_queue"][2]);
 
         resetScriptQueue();
         $this->assertCount(0, $_SERVER["script_queue"]);
@@ -30,7 +30,7 @@ class MinifyTest extends \PHPUnit\Framework\TestCase {
             enqueueScriptFile($file);
         }
 
-        $this->assertEquals('<script src="?output_scripts=node_modules/jquery/dist/jquery.js;admin/scripts/global.js;admin/scripts/url.min.js&amp;time=' . $filemtime . '" type="text/javascript"></script>', getCombinedScriptHtml());
+        $this->assertEquals('<script src="?output_scripts=node_modules/jquery/dist/jquery.js;admin/scripts/global.js;node_modules/js-url/url.min.js&amp;time=' . $filemtime . '" type="text/javascript"></script>', getCombinedScriptHtml());
         $this->assertCount(0, $_SERVER["script_queue"]);
     }
 
