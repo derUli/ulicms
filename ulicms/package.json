@@ -12,6 +12,6 @@
         "jscolor-picker": "2.x",
         "select2": "^4.0.6-rc.1"
     },
-    "license": "BSD",
+    "license": "The BSD License",
     "private": true
 }
