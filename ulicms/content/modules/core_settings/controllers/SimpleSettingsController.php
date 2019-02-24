@@ -32,7 +32,7 @@ class SimpleSettingsController extends Controller {
     }
 
     public function getTimezones() {
-        return DateTimeZone::listIdentifiers();
+        return DateTimeZone::listIdentifiers(DateTimeZone::ALL);
     }
 
 }
